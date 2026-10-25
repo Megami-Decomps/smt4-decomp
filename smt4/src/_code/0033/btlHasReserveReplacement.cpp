@@ -1,7 +1,8 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "shard/btlHasReserveReplacement.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
-#include "shard/btlHasReserveReplacement.h"
+#include "battle/btlMain.h"
 
 // The count lies beyond the existing party-slot prefix view.
 struct ReservePartyView {
@@ -16,11 +17,11 @@ BtlUnitLink* gameGetUnitRecord(s32 slot);
 ReservePartyView* gameGetSlotTable(void);
 
 // Check whether the selected combatant can be replaced by a different reserve unit.
-u32 btlHasReserveReplacement(const BtlUnitEntry* entry)
+u32 btlHasReserveReplacement(const BtlEntry* entry)
 {
     if (entry != NULL) {
         if (entry->flags & 2) {
-            BtlUnit* actor = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+            BtlUnit* actor = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
             if (actor->params != NULL && (*(u32*)actor->params & 2)) {
                 ReservePartyView* party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {
@@ -30,7 +31,7 @@ u32 btlHasReserveReplacement(const BtlUnitEntry* entry)
                 }
             }
         } else if (entry->flags & 8) {
-            s32 currentId = (s16)entry->groupId;
+            s32 currentId = (s16)entry->id;
             if (currentId == 0)
                 return 0;
             ReservePartyView* party = gameGetSlotTable();

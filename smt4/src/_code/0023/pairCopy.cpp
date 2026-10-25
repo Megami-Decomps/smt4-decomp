@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/pairCopy.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 
 extern "C" {
 

@@ -240,4 +240,34 @@ extern "C" {
 s32 FUN_001dd8f0(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002ae210(u32 kind);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_004ab718(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 engineCleanupIsDone(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

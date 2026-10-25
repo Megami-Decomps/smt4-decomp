@@ -1,4 +1,4 @@
-/* NON_MATCHING: only r0/r1 assignment in the two-ingredient recipe comparison differs. */
+/* NON_MATCHING: one cmpeq operand order (r0/r1) in the two-ingredient recipe comparison differs. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/FusionRecipe.h"
 #include "camp/Unite/FusionCandidates.h"
@@ -27,7 +27,7 @@ u8 FUN_003c8c2c(void *owner, u16 firstId, u16 secondId)
             }
             if (ingredients == 2 &&
                 ((recipe->ingredients[0] == first->id && recipe->ingredients[1] == second->id) ||
-                 (recipe->ingredients[1] == first->id && recipe->ingredients[0] == second->id)))
+                 (recipe->ingredients[1] == first->id && second->id == recipe->ingredients[0])))
                 return 5;
         }
     }

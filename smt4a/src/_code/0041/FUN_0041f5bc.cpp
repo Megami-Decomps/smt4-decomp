@@ -33,7 +33,7 @@ void FUN_0041f5bc(SaveLoadTransitionPrefixA *work)
     work->stateCounter = 0;
     FUN_00420a2c(work);
     if (sprites->additional[work->spriteCount - 1].animationFlags.completed) {
-        u8 nextState = work->pendingState;
+        s8 nextState = work->pendingState;
         work->previousState = work->currentState;
         work->currentState = nextState;
         work->stateCounter = 0;

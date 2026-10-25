@@ -9,10 +9,10 @@ u32 FUN_002dbaa8()
 {
     s32 threshold = scrGetArg(0);
     for (s32 index = 0; index < 109; ++index) {
-        BtlUnitEntry *unit = &btlGetMainStateExt()->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
         if ((unit->flags & 0x10) && (unit->flags & 1) &&
             !(unit->flags & 0x40) &&
-            unit->hp * 100 / unit->hpMax <= threshold) {
+            unit->hp * 100 / unit->maxHp <= threshold) {
             scrSetResult(1);
             return 1;
         }

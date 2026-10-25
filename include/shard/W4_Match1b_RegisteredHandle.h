@@ -15,4 +15,24 @@ extern "C" {
 u32 flagPairCondition(s32 a, s32 b);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_003a6f84(u32 kind);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+unsigned short buttonHelpGetEntryValue(unsigned int param_1);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

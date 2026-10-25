@@ -4,7 +4,7 @@
 #include "common.h"
 #include "result/WhisperEffect.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdTMTexTableLoadEntryAsync.h"
+#include "shard/W6_W6Match2_HelpResources.h"
 
 extern "C" {
 

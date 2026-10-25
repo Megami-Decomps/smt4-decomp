@@ -1,6 +1,5 @@
 #include "addon/aocMain.h"
 #include "addon/AocLookup.h"
-#include "shard/FUN_00471d00.h"
 extern "C" {
 void* libc_bsearch(const void*, const void*, u32, u32, s32 (*)(const void*, const void*));
 s32 FUN_00476dfc(const void*, const void*);

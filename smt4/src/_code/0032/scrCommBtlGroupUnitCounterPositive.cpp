@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern BtlUnitEntry *btlMainFindActiveEntry(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
@@ -20,23 +20,23 @@ u32 scrCommBtlGroupUnitCounterPositive(void)
     index = start;
     if (index < count + start) {
         do {
-            BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+            BtlEntry *unit = &btlGetMainState()->entries[index];
 
-            if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->counter > 0) {
+            if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->turn.counter > 0) {
                 scrSetResult(1);
                 return 1;
             }
             index++;
         } while (index < count + start);
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        BtlUnitEntry *active;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *active;
         s16 counter = 0;
 
-        reinterpret_cast<BtlState *>(btlGetMainState());
+        btlGetMainState();
         active = btlMainFindActiveEntry();
         if (active != NULL) {
-            counter = active->counter;
+            counter = active->turn.counter;
         }
         if (active != NULL && counter > 0) {
             scrSetResult(1);

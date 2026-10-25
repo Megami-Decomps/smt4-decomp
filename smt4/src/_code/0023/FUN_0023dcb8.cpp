@@ -1,6 +1,5 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
-#include "shard/FUN_0023dcb8.h"
 
 extern "C" {
 

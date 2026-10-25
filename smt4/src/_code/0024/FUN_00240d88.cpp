@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/FUN_002bd068.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 
 extern "C" {
 

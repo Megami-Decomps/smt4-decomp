@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail shares the final return after the value branch and keeps the candidate slot address unfolded (add #44; ldrsb [r0]). */
 #include "common.h"
 #include "shard/scrGetArg.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 

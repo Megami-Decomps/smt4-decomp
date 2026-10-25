@@ -1,5 +1,6 @@
 /* NON_MATCHING: candidate flags collapse to an OR test, loop branches and status-query scratch allocation differ. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
 struct PartyRescueEntryView {
@@ -42,7 +43,7 @@ void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)
     }
     if (!noCandidates && !noIncapacitated && count &&
         (randRange(99) < 15 || ((*owner)->editorControl.flags & 0x1000000))) {
-        BtlActionRecord *record = &(*owner)->actions.records[candidates[randRange(static_cast<u16>(count - 1))]];
+        BtlActionRecord *record = &(*owner)->actions[candidates[randRange(static_cast<u16>(count - 1))]];
         FUN_00246e24(parameter, action, record, 0x200, 1);
         BtlEntry *entry = btlMainFindEntryByListedId(*owner, record->memberId);
         PartyRescueEntryView *rescue = reinterpret_cast<PartyRescueEntryView *>(entry->unk1c8);

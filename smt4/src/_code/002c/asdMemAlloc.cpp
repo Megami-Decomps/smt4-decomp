@@ -1,6 +1,6 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "common.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 

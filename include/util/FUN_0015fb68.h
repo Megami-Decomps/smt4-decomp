@@ -13,4 +13,14 @@ u8 FUN_0015fb68(void);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 dataTable18Sub0GetCount(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

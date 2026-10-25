@@ -30,7 +30,6 @@ void FUN_0036be10(u32 actorIndex, u32 frames)
 {
     ApocalypseSpatialSoundView *system = (ApocalypseSpatialSoundView *)g_asdSoundSystem;
     SpatialSoundActorsView *spatial = &system->spatial;
-
     if (system->ready && actorIndex < 16 && asd3dSoundActorIsPlaying(actorIndex)) {
         if (spatial->handles[actorIndex] != 0) {
             asdSoundObjectStop(spatial->handles[actorIndex], frames);

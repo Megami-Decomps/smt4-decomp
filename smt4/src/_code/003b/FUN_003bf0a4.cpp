@@ -1,9 +1,10 @@
 /* NON_MATCHING: Exclusion tests merge into one mask and event-slot writes use predication instead of retail's shared branches. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include <stddef.h>
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 s32 randRange(u32 maximum);
 u32 FUN_002533f4(u32 first, u32 second, s32 mode);
 

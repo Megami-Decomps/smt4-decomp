@@ -1,7 +1,6 @@
 /* NON_MATCHING: the zero register is hoisted above the phase dispatch and the voice-stop block is duplicated per path where retail shares one copy (the other path jumps back into it). */
 #include "map/lmapMain.h"
 #include <string.h>
-#include "shard/sysPlayVoice.h"
 
 namespace {
 // Idle-voice fields follow the canonical scene prefix; do not enlarge the shared type.

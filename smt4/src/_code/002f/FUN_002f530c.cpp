@@ -1,6 +1,6 @@
 #include "common.h"
 #include "nn/Result.h"
-#include "shard/FUN_002f530c.h"
+#include "shard/W6_W6Match3_EmitterRecord.h"
 
 extern "C" {
 

@@ -1,8 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs 212 rows); retail loads the g_ifTouch address before the prologue and shares base-address adds differently */
 #include "common.h"
 #include <math.h>
-#include "shard/uiPointerHitsRect.h"
-#include "shard/FUN_002bffe0.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
+#include "util/CalleeContracts.h"
 
 // Hit rectangle of one touch item (x, y, width, height); stored 8 bytes apart.
 struct TouchRect {

@@ -19,7 +19,7 @@ void FUN_002e0274(s32 speed, f32 x, f32 y, f32 z)
     void *model = asdMdlManagerCreateLoaded("map/unit/u002.bam", 0x1C0);
     state = g_mapStateSlots;
     state->references.models[(s16)state->unk0A].model = model;
-    s32 index;
+    u32 index;
     for (index = 0; index < 32; ++index) {
         if (!state->slots[index].active)
             break;

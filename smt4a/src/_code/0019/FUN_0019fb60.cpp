@@ -2,9 +2,9 @@
 #include "common.h"
 
 struct BackwardCompressionFooter {
-    u8 compressedSize[3]; // 0x00: compressed span, including footer
+    s8 compressedSize[3]; // 0x00: compressed span, including footer
     u8 headerSize;        // 0x03: bytes skipped before the compressed stream
-    u8 expansionSize[4];  // 0x04: additional output bytes, little-endian
+    s8 expansionSize[4];  // 0x04: additional output bytes, little-endian
 };
 
 extern "C" void FUN_0019fb60(u8* buffer, u32 inputSize, u32 bufferCapacity)

@@ -31,7 +31,7 @@ u32 scrComm_Battle_PlayCommonEffect(void)
             ARM_common_memcpy4_9(name, effect < 0 ? DAT_00400428 : DAT_00400434);
             FUN_002454c4(DAT_00435d18, reinterpret_cast<u32>(name), 1, 0);
         }
-        u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+        u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
         BtlActionRecord *target = btlGetMainState()->actions;
         FUN_00245420(0, unit, target, value, effect, 0, -1);
         s32 member = target->memberId;

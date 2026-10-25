@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler places the shared zero-HP store in the demon branch rather than the player branch. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/Shard0031.h"
 #include "gamedata/PlayerDataBlock.h"
 

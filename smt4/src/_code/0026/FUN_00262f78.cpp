@@ -1,5 +1,5 @@
 #include "shard/GameDataBlocks.h"
-#include "shard/FUN_00262f78.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 

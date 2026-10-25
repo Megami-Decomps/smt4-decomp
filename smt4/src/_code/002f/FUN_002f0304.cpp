@@ -10,14 +10,14 @@ u32 FUN_002f0304(void)
     const u32 mask = 1u << scrGetArg(0);
 
     for (s32 entryIndex = 0; entryIndex < 109; ++entryIndex) {
-        const BtlUnitEntry* entry =
-            &btlGetMainStateExt()->units[entryIndex];
+        const BtlEntry* entry =
+            &btlGetMainState()->entries[entryIndex];
         const u32 flags = entry->flags;
 
         if ((flags & 0x10) != 0 &&
             (flags & 0x01) != 0 &&
             (flags & 0x40) == 0 &&
-            (entry->flagMask & mask) != 0) {
+            (entry->groupMask & mask) != 0) {
             scrSetResult(1);
             return 1;
         }

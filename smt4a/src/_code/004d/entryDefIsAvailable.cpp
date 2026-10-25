@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/entryDefIsAvailable.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 struct EntryDef4daf18 {
     /* 0x00 */ u16 id;

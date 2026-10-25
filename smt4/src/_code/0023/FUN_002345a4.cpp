@@ -4,14 +4,14 @@
 
 extern "C" {
 
-s32 FUN_0023a1f8(u32 provider);
+s32 queryFailureResultOrZero(u32 provider);
 u32 FUN_00353368(u32 provider, u32 record, u32 identifier);
 
 // Reads a record through the provider; a failed provider check is returned as is,
 // otherwise the read result is validated and returned.
 WindowStatusResult FUN_002345a4(u32 provider, u32 record, u32 identifier)
 {
-    s32 status = FUN_0023a1f8(provider);
+    s32 status = queryFailureResultOrZero(provider);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(status);
     }

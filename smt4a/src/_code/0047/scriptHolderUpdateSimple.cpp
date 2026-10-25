@@ -2,7 +2,6 @@
 /* Loads the quest script and system images, runs its entry, and finalizes the screen on completion. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
-#include "shard/FUN_004186e0.h"
 
 extern "C" {
 ScriptRunState *FUN_00275bc8(void *script, void *images);

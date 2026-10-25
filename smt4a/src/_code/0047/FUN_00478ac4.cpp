@@ -5,7 +5,7 @@
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
 #include "shard/JobWork.h"
-#include "shard/FUN_00473910.h"
+#include "addon/aocApplication.h"
 
 extern "C" {
 

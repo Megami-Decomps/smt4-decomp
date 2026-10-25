@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail retains removed debug filename/line setup and synchronization-hook NOPs. */
+#include "nn/Result.h"
 #include "common.h"
 
 // Apocalypse's startup prefix differs from the IV loader globals in AsdFile.h.
@@ -32,15 +33,15 @@ void FUN_00136df8()
         result = 0xe0a0183b;
     } else {
         result = FUN_0014a930(&handle, 0, 2);
-        if ((s32)result >= 0) {
+        if ((s32)!nnResultIsFailure(result)) {
             g_asdFile.semaphore = handle;
             result = 0;
         }
     }
-    if ((s32)result < 0)
+    if ((s32)nnResultIsFailure(result))
         FUN_002e3140(result);
     result = FUN_0019a364(&handle, g_asdFileMutex, 1);
-    if ((s32)result < 0)
+    if ((s32)nnResultIsFailure(result))
         FUN_002e3140(result);
     nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
     FUN_0014287c();

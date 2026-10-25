@@ -40,4 +40,44 @@ static __inline void unitHeapModuleInitialize(UnitHeapModuleState *heap, const v
     nn_fnd_UnitHeapBase_Initialize(heap, elementSize, buffer, bytes, 4, 0);
     nn_os_CriticalSection_Initialize(&heap->lock);
 }
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0022724c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int dataTable2bSub1GetRecord(u32 unused, u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void aocRecordLookup84(u16 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+const char *dataLookupDisplayName(s32 unused, s32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

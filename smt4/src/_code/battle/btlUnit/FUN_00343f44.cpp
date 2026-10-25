@@ -1,10 +1,12 @@
 /* NON_MATCHING: action-index addressing, successful phase-store predication and draw-default load order differ; the fourth alpha-fade argument is restored. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "shard/W6_W6Match3_ColorFade.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
+#include "battle/BtlMainAccess.h"
 
 namespace {
 struct BattleQueuedActionStep {
@@ -48,7 +50,6 @@ extern "C" {
 extern BattleVersionResources *DAT_00435d18;
 extern const BattleQueuedActionDrawDefaults DAT_00439a20;
 extern BtlUi *g_btlUiBlock;
-BtlMainState *btlGetMainState(void);
 void FUN_003c1248(s32 mode, s32 queue, s32 actor, s32 target);
 void FUN_0023f79c(BtlMainState *state, u32 flags);
 s32 FUN_003c0ab4(BtlActionRecord *action);
@@ -87,7 +88,7 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
         }
     }
     if (work->phase == 1) {
-        BtlActionRecord *action = &state->actions.records[work->actor];
+        BtlActionRecord *action = &state->actions[work->actor];
         if (FUN_003c0ab4(action) != 0) {
             action->flags &= ~8;
             action->presentationFlags |= 0x800;

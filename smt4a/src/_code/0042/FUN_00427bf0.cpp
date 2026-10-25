@@ -1,4 +1,4 @@
-/* NON_MATCHING: query argument move order and redundant zero-result branch differ; SDK failure test matches. */
+/* NON_MATCHING: retail moves the arguments r0 -> r2 first and omits the branch after the final conditional load of the service result code. */
 #include "nn/Result.h"
 extern "C" {
 s32 FUN_004268ec(u8 *value, u8 mode, u32 first, u32 second);

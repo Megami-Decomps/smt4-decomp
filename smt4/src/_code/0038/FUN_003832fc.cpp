@@ -1,6 +1,6 @@
 /* NON_MATCHING: duplicate-id scan: retail jumps from the inner loop straight to the outer loop's increment and does not unroll it; armcc unrolls this form */
 #include "common.h"
-#include "shard/FUN_0023ea64.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
 

@@ -1,11 +1,11 @@
-/* NON_MATCHING: -O2 candidate; UI-root/true registers swap, common flag-set block placement differs, and field/widget addresses are cached instead of recomputed. */
+/* NON_MATCHING: register-only with the s8 flag: retail reloads the flag at the end through a pool-literal 0x74b0 + register index and keeps the UI object in r6 and constants in r9,sl,fp,r8. */
 #include "battle/btlUI.h"
 #include "gamedata/Table04Record.h"
 
 struct Menu32;
 struct BattleTargetFlagView {
     u8 unk00[0x74b0];
-    u8 requiresTargetSelection;
+    s8 requiresTargetSelection;
 };
 struct CommandSkillRecord {
     u8 unk00[0x28];

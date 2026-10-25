@@ -10,14 +10,14 @@ extern int scrGetArg(u32 index);
 u32 FUN_002e3ec0(void)
 {
     int arg = scrGetArg(0);
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
-    s16 first = *(s16 *)(btl + 0x4968);
+    BtlMainState *btl = btlGetMainState();
+    s16 first = btl->menuCursor.x;
     int larger;
 
-    btl = reinterpret_cast<u8 *>(btlGetMainState());
+    btl = btlGetMainState();
     larger = first;
-    if (first < *(s16 *)(btl + 0x496a)) {
-        larger = *(s16 *)(btl + 0x496a);
+    if (first < btl->menuCursor.y) {
+        larger = btl->menuCursor.y;
     }
     scrSetResult(larger <= arg);
     return 1;

@@ -10,7 +10,7 @@ u32 FUN_002e4320(void)
 {
     u32 bit = scrGetArg(0);
 
-    btlGetMainStateExt()->flags49BC |= 1 << (bit & 0xff);
+    btlGetMainState()->flags49BC |= 1 << (bit & 0xff);
     return 1;
 }
 

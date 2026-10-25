@@ -1,6 +1,6 @@
 /* Tail call into the function that follows. */
 #include "common.h"
-#include "shard/FUN_0028e9d0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 

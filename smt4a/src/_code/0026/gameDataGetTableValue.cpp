@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/gameDataGetTableValue.h"
+#include "shard/Shard0035.h"
 
 extern "C" {
 

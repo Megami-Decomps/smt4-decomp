@@ -28,7 +28,7 @@ extern "C" u32 FUN_002cd680(void)
     u32 completion = queue->completion;
     if (completion != 0) {
         s32 index;
-        s32 result = FUN_002c40f8(&index, &completion, 1, 0, 0, 0);
+        u32 result = FUN_002c40f8(&index, &completion, 1, 0, 0, 0);
         if (result < 0) {
             FUN_002c526c((u32)result, 1);
         }

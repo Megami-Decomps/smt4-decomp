@@ -3,7 +3,7 @@
 #include "battle/btlReflect.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
-#include "shard/btlFindEntryValue.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 

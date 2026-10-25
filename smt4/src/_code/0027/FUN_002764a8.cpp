@@ -1,7 +1,7 @@
 /* NON_MATCHING: Binary-search argument scheduling and literal-pool order differ; control flow and record size match retail. */
 #include "addon/aocMain.h"
 #include "addon/AocLookup.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,

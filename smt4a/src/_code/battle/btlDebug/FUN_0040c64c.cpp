@@ -92,7 +92,7 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
         btlPopulateSelectedSlot(step->mode, step->slot, step->unit, step->secondUnit);
         if (step->mode != 0) {
             if (step->mode == 1) {
-                if ((state->flags & g_btlActionReflect.blocked) == 0) {
+                if ((g_btlActionReflect.blocked & state->flags) == 0) {
                     step->result = 0;
                     return;
                 }
@@ -103,7 +103,7 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
             }
         } else {
             FUN_003ed238(state, 0x200);
-            if ((state->flags & g_btlActionReflect.blocked) != 0) {
+            if ((g_btlActionReflect.blocked & state->flags) != 0) {
                 step->result = 0;
                 return;
             }
@@ -121,9 +121,9 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
                 return;
             }
             step->phase = 3;
-            s16 a = DAT_0057a634.left;
+            u16 a = DAT_0057a634.left;
             s16 b = DAT_0057a634.offset;
-            s16 c = DAT_0057a634.top;
+            u16 c = DAT_0057a634.top;
             FUN_004cae0c(state, unit, 0, 0);
             FUN_004fd204(b + a, step->id, unit, 0xff, c, 0);
             u32 style = 6;

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern BtlUnitEntry *btlMainFindActiveEntry(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern u32 btlScriptResolveGroupArg(void);
@@ -21,19 +21,19 @@ u32 scrCommBtlGroupUnitFlagOff(void)
     scrGetArg(1);
     FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < count + start; index++) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && (unit->flagMask & (1 << (flag & 0xFF))) == 0) {
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && (unit->groupMask & (1 << (flag & 0xFF))) == 0) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        BtlUnitEntry *active;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *active;
 
-        reinterpret_cast<BtlState *>(btlGetMainState());
+        btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && (active->flagMask & (1 << (flag & 0xFF))) == 0) {
+        if (active != NULL && (active->groupMask & (1 << (flag & 0xFF))) == 0) {
             scrSetResult(1);
             return 1;
         }

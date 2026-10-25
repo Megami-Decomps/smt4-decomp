@@ -1,4 +1,3 @@
-/* NON_MATCHING: native deleting destructor is the right size; owner/part/slot use r8/r6/r7 instead of retail r7/r8/r6. */
 #include "classes/Obj4209cc.h"
 
 
@@ -36,15 +35,14 @@ inline Obj4209cc::~Obj4209cc()
 
 Obj4209cc::Obj4209cc()
 {
-    unk04 = 0;
     handle = 0;
     buffer = NULL;
     unk28 = 0;
     unk2C = 0;
     scale = 1.0f;
-    unk34[0] = 0.0f;
-    unk34[1] = 0.0f;
-    unk34[2] = 0.0f;
+    for (int i = 0; i < 3; i++) {
+        unk34[i] = 0.0f;
+    }
     unk40 = 7;
     for (int i = 0; i < 3; i++) {
         rowA[i] = NULL;

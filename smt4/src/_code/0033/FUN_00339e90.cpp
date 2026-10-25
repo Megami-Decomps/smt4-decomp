@@ -13,7 +13,7 @@ extern void *DAT_00435d18;
 
 bool FUN_00339e90(void)
 {
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     s32 found = FUN_003db1f4(DAT_00435d18, unit->unk594);
 
     if (found != 0) {

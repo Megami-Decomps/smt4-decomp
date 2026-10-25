@@ -7,13 +7,16 @@ extern "C" {
  * (or from the smaller up when `invert` is set). */
 s32 FUN_0026e6a0(s32 a, s32 b, s32 period, s32 time, s32 invert)
 {
-    s32 high = a;
-    s32 low = b;
+    s32 high;
+    s32 low;
     s32 half;
     s32 range;
     s32 offset;
 
-    if (a < b) {
+    if (a > b) {
+        high = a;
+        low = b;
+    } else {
         high = b;
         low = a;
     }

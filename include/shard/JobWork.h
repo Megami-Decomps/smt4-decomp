@@ -45,11 +45,11 @@ typedef struct JobWork {
     /* 0x1044 */ u8 done;
     /* 0x1045 */ u8 pending;
     /* 0x1046 */ u8 unk1046[0x408];
-    /* 0x144E */ u8 fadeActive;
+    /* 0x144E */ s8 fadeActive;
     /* 0x144F */ u8 fadeCaptureResult;
-    /* 0x1450 */ u8 fadeEnabled;
-    /* 0x1451 */ u8 fadeCaptured;
-    /* 0x1452 */ u8 fadeCaptureSkipped; /* set while a state selector suppresses the capture */
+    /* 0x1450 */ s8 fadeEnabled;
+    /* 0x1451 */ s8 fadeCaptured;
+    /* 0x1452 */ s8 fadeCaptureSkipped; /* set while a state selector suppresses the capture */
     /* 0x1453 */ u8 unk1453[0x29];
     /* 0x147C */ u32 fadeColor;    /* RGBA, alpha in the low byte */
     /* 0x1480 */ u8 unk1480[0x4];

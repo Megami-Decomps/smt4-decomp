@@ -1,6 +1,6 @@
 /* NON_MATCHING: right portrait, duration and left slot occupy different saved registers. */
 #include "common.h"
-#include "shard/bustupConfigureSlotTransition.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 u32 scrGetArg(u32);

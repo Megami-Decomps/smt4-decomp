@@ -2,7 +2,6 @@
 #include "bible/bibleMain.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
-#include "shard/messageSetActiveMode.h"
 
 /* A compendium list entry: 0x20 bytes with the item id halfword at +4. */
 struct BibleItemEntry {

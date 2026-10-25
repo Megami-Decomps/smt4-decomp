@@ -1,4 +1,4 @@
-/* NON_MATCHING: switch is lowered to comparisons rather than the retail jump table; render-stack scheduling/registers differ, 104 vs 93 instructions. */
+/* NON_MATCHING: only saved-register numbers differ (retail zero r6, x r7, y reuses r5); the jump table and render-stack calls now match. */
 #include "ui/HowToScreen.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
@@ -21,21 +21,28 @@ u32 FUN_0049f488(HowToScreenWork *screen)
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
-    s32 x = vec2GetXInt(&screen->sprites[0]);
-    s32 y = vec2GetYInt(&screen->sprites[0]);
-    FUN_0049d244(screen, x, y, vec2GetSpeed(&screen->sprites[0]));
-    switch (screen->mode.state) {
+    HowToScreenWork *work = screen;
+    s32 x = vec2GetXInt(&work->sprites[0]);
+    s32 y = vec2GetYInt(&work->sprites[0]);
+    FUN_0049d244(work, x, y, vec2GetSpeed(&work->sprites[0]));
+    switch (work->mode.state) {
     case 5:
     case 6:
     case 8:
     case 9:
-        FUN_0049e3f8(screen);
+        FUN_0049e3f8(work);
+        break;
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 7:
         break;
     }
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
-    context = g_renderCtx;
-    renderStackSet(&context->stackB, packNibblesAndByte(6, 7, 0));
+    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     renderCtxResetColorScale(g_renderCtx);
     return 0;
 }

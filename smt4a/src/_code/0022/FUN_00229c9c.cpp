@@ -1,7 +1,7 @@
 /* NON_MATCHING: steps the lazily started event script task (start, wait for the script, branch to the next entry, finish); written from the decompilation, the state switch and its fall-through are not compared with retail */
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "shard/FUN_001386b4.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 #define LAZY_STATE_START 0
 #define LAZY_STATE_RUN_ENTRY 1

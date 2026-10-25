@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/messageSetActiveMode.h"
+#include "bible/bibleMain.h"
 
 extern "C" {
 

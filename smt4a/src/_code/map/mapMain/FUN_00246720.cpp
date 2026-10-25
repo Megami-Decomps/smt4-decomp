@@ -2,7 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/GameGlobals.h"
-#include "shard/asdMemoryAllocTracked.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The part of g_gameState the map start-up clears. */
 struct MapGameState {

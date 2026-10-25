@@ -1,6 +1,5 @@
 /* NON_MATCHING: message advance, slot refresh and display toggle restored; only the saved registers holding module globals and input flags are exchanged. */
 #include "ui/MessageMain.h"
-#include "shard/FUN_0015059c.h"
 
 namespace {
 struct MessageInputFlags {

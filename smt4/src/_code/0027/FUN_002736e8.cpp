@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail shares one state store between states 0 and 1 (case 0 branches to case 1's store); armcc merges case 1 into case 2's store. The process mode store uses the inlined scriptProcessSetMode. */
 #include "common.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 

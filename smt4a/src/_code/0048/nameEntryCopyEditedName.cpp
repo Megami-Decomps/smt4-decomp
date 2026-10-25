@@ -13,7 +13,7 @@ struct NameInputView {
         if (index < 0) {
             return (s16)0x8140;
         }
-        u16 high = (u8)text[index * 2];
+        s16 high = (u8)text[index * 2];
         high <<= 8;
         return (s16)(high + (u8)text[index * 2 + 1]);
     }

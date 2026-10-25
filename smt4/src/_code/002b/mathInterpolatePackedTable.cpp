@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/mathInterpolatePackedTable.h"
+#include "shard/W5_W5Match7_EntrySort.h"
 
 namespace {
 struct InterpolationEntry { f32 base; f32 unused; f32 step; f32 tail; };

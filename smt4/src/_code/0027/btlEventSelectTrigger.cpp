@@ -1,6 +1,8 @@
 /* NON_MATCHING: condition switch lowers to comparisons, initialization stores reorder and controller registers differ; -O2 candidate. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"
+#include "battle/BtlMainAccess.h"
 
 struct BattleEventTrigger {
     u8 type;
@@ -22,7 +24,6 @@ struct BattleEventController {
     u8 stopped; // 0x2c
 };
 extern "C" {
-BtlMainState *btlGetMainState();
 s32 tableGroupFindEntryIndex(void *, const char *);
 
 u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot, u32 queryOnly)
@@ -71,7 +72,7 @@ u32 btlEventSelectTrigger(BattleEventController *controller, u32 type, s32 slot,
             case 7:
             case 8:
             case 9:
-                ((BtlScript *)battle)->flags |= 0x100000;
+                ((BtlMainState *)battle)->battleFlags |= 0x100000;
                 break;
             }
         }

@@ -1,8 +1,9 @@
 /* NON_MATCHING: battle sprite selector source reloads and stripped-call NOPs differ. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match1_Table03Record.h"
 #include "gfx/PackedRenderState.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 void spriteDescriptorInitFromTemplate(PackedRenderState *sprite, s32 index,

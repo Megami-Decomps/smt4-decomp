@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_002b5c88.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 extern "C" {
 struct FlagWork { u8 unk00[0xC00]; struct { u8 unk00[0x1F4]; u32 state; f32 value; u8 active; } work; };
 FlagWork *gameFlagsGetBlock(void);

@@ -1,8 +1,8 @@
 /* NON_MATCHING: range predicate inlining folds the group shift and changes upper-bound comparisons and constant placement. */
 #include "common.h"
-#include "shard/FUN_002f530c.h"
+#include "shard/W6_W6Match3_EmitterRecord.h"
 
-static inline bool eventIsInRange(u32 event, s32 group, s32 first, s32 last)
+static inline bool eventIsInRange(u32 event, s32 group, s32 first, u32 last)
 {
     if ((s32)((event & 0x3FC00) >> 10) != group) {
         return false;

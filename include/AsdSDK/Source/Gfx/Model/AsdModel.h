@@ -6,6 +6,9 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "shard/S3SoundArchiveLoader.h"
+#include "gfx/PositionTransform.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 #define ASDMODEL_BANK_SIZE 8
 
@@ -205,5 +208,105 @@ s32 aocLoadTextureNode(u32 a, u32 b, u32 c, u32 d);
 extern "C" {
 void FUN_0014de4c(int *arg0, int *arg1, int arg2);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_00132da4(SoundArchiveLoader *loader, u32 item, u32 flags);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00145d6c(s32 mode);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00145e10(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002c5be8(u32 arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00364e28(u32 target, PositionProvider *provider);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void asdLightActivate(s32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void memCopy(void *src, void *dst, int size);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void settings5BClearFlags(u32 mask);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+AsdAllocator *asdMemoryGetAllocatorA(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int bitArrayCountSet1to500(const u8 *bits);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

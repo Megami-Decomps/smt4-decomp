@@ -3,7 +3,6 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "camp/PartyPanel/PartyPanel.h"
-#include "shard/FUN_00215bbc.h"
 
 extern "C" {
 

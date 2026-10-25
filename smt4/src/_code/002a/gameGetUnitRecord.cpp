@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler combines the record base offsets and allocates the index arithmetic differently. */
 #include "gamedata/UnitRecordAccess.h"
 
 namespace {
@@ -10,6 +9,7 @@ extern "C" {
 extern GameBlocks g_gameDataBlocks;
 void *gameGetUnitRecord(u32 index)
 {
-    return g_gameDataBlocks.data->slots[index].data;
+    GameData::Slot *slots = g_gameDataBlocks.data->slots;
+    return slots[index].data;
 }
 }

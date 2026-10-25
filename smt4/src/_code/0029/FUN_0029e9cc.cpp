@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses a separate saved-entry base adjustment and places the linked-entry loop tail after its success return. */
+/* NON_MATCHING: only the address register of the g_gameDataBlocks load differs (retail keeps the global in r0 and computes id*5 before loading saveBlock into r2). */
 #include "gamedata/DevilRecord.h"
 #include "shard/GameDataBlocks.h"
 
@@ -12,21 +12,24 @@ u16 FUN_0029e9cc(u32 id)
         return 0;
     }
     const DevilRecord *record = dataTable00FindById(id);
-    u16 available = record->links.linkFlags & 1;
-    if (available) {
-        GameSaveData *save = g_gameDataBlocks.saveBlock;
-        u32 index = save->items[id].registration.registrationFlags & 2;
-        if (index == 0) {
-            u32 linkedId;
-            while ((linkedId = record->requirements.linkedIds[index]) == 0
-                   || !(save->items[linkedId].registration.registrationFlags & 2)) {
-                if (++index >= 3) {
-                    return 0;
-                }
+    if ((record->links.linkFlags & 1) == 0) {
+        return 0;
+    }
+    GameSaveData *save = g_gameDataBlocks.saveBlock;
+    GameSavedItem *item = &save->items[id];
+    u32 index = item->registration.registrationFlags & 2;
+    if (index != 0) {
+        return 1;
+    }
+    for (; index < 3; ++index) {
+        u32 linkedId = record->requirements.linkedIds[index];
+        if (linkedId != 0) {
+            GameSavedItem *linked = &save->items[linkedId];
+            if (linked->registration.registrationFlags & 2) {
+                return 1;
             }
         }
-        available = 1;
     }
-    return available;
+    return 0;
 }
 }

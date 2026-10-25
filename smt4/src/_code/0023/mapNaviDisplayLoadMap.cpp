@@ -89,7 +89,7 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
         if (record->map == map) {
             display->iconPositions[record->category].x = record->originX + record->offsetX;
             display->iconPositions[record->category].y = record->originY + record->offsetY;
-            const s32 width = (record->maxX - record->minX) * 12;
+            const u32 width = (record->maxX - record->minX) * 12;
             const s32 height = (record->maxY - record->minY) * 12;
             display->centers[record->category].x = record->originX + width / 2;
             display->centers[record->category].y = record->originY + height / 2;

@@ -1,9 +1,9 @@
 /* NON_MATCHING: registers of the entries base and index*0x408 are swapped in the entry address computation (retail base in r1, product in r0); everything else matches. */
 #include "battle/BtlMainAccess.h"
+#include "util/CalleeContracts.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
-#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);

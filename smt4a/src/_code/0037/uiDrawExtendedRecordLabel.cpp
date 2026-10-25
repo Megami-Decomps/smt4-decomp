@@ -13,7 +13,7 @@ struct ExtendedRecordLabels {
 struct ExtendedLabelledRecord {
     u8 unk00[0x0e];
     char name[0x52]; // 0x0e
-    u16 message; // 0x60
+    s16 message; // 0x60
 };
 extern "C" {
 const char *FUN_00180118(u16 message);

@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH3_EFFECTCOLOR_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 
 struct EffectColor {
     /* 0x00 */ f32 red;
@@ -56,5 +57,15 @@ struct EffectColorQuadState {
 extern "C" {
 u32 FUN_00144eec(void);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void asdCameraInitializeDefaults(AsdCamera *camera, s32 enabled);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

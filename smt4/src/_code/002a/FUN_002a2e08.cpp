@@ -19,7 +19,7 @@ void FUN_002a2e08(FileQueue *queue)
     if (thread->handle != 0) {
         u32 handle = thread->handle;
         s32 index;
-        s32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
+        u32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
         if (nnResultIsFailure(result))
             FUN_002c526c(result);
         if (!nnResultDescriptionIsNot(result, 0x3fe))

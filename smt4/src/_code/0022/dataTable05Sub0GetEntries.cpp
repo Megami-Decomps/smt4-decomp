@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/dataTable05Sub0GetEntries.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 

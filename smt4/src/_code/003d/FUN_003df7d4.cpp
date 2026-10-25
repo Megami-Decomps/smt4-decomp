@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail predicates the empty-list case (movcs/strcs) and compares as `cmp start, count` / `cmp remaining, capacity`; built branches and swaps the compare operands */
 #include "classes/WindowStatus.h"
+#include "nn/Result.h"
 
 struct TextListEntry {
     u32 handleA;       // 0x00
@@ -28,7 +29,7 @@ WindowStatusResult FUN_003df7d4(TextListEntry **entry, u32 *outCount, s32 code, 
             capacity = remaining;
         }
         code = FUN_00352098(code, 1, list->handleA, list->handleB, list->items + start, capacity);
-        if (code >= 0) {
+        if (!nnResultIsFailure(code)) {
             code = 0;
             *outCount = capacity;
         }

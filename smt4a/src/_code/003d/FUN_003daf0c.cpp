@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
-#include "shard/FUN_002a21e8.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

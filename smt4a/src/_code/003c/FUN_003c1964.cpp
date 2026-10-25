@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: the third 64-bit mask test (excluded) allocates its AND/ORR registers differently (retail ands the low words into the mask pair); the rest matches with the `first + count` bound. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -35,7 +35,7 @@ u32 FUN_003c1964(void)
     s32 group = btlResolveEntryChoice(scrGetArg(2));
     s32 first, count;
     FUN_00301a08(group, &first, &count);
-    for (s32 index = first; index < count + first; ++index) {
+    for (s32 index = first; index < first + count; ++index) {
         BattleThresholdEntryView *entry = &((BattleThresholdEntryView *)btlGetMainState()->entries)[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&

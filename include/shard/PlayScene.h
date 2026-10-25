@@ -77,4 +77,14 @@ typedef char PlaySceneIntroAnimationOffsets[
     offsetof(PlayScene, intro.animation.unk20) == 0xCC &&
     sizeof(PlayScene) == 0x591C ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00206270(PlayScene *scene);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/btlItemComputeValues.h"
+#include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
 const void* dataTable8FindRecord(u32 id);

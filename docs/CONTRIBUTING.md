@@ -109,10 +109,10 @@ Every match must be one a programmer could have written for a reason.
   `g_scrIntVars`/`g_scrFloatVars` and `scrPopInt`/`scrPopFloat`. `script/ScriptArgs.h` declares
   `scrGetArg`, `scrSetResult`, `scrGetCommandOwner` and `scrCommMessageSetMode`; the frame counter
   is `util/ScrGetCommandFrame.h`. Do not declare local process/context views or these callees.
-  Battle commands of IV take the battle block from `battle/BtlMainAccess.h`
-  (`btlGetMainState()` / `btlGetMainStateExt()`); add fields to `BtlMainState`/`BtlMainStateExt`
-  with offset asserts instead of writing a per-function view. The shard
-  `W4_Match6_BtlEntry.h` still carries a second `BtlMainState` that its includers cannot mix with it.
+  Battle commands of IV take the battle block from `battle/BtlMainAccess.h` (`btlGetMainState()`);
+  `BtlMainState` (`battle/btlMain.h`, 0x4A58 bytes as allocated, entries are `BtlEntry` from
+  `shard/W4_Match6_BtlEntry.h`) is the only definition: add fields as views of its unions with
+  offset asserts instead of writing a per-function state or entry view.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in

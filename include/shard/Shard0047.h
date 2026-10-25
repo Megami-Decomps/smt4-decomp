@@ -35,4 +35,14 @@ typedef char ScriptHolderPhaseOffsetCheck[
     __INTADDR__(&((ScriptHolder *)0)->process) == 0x14 &&
     sizeof(ScriptHolder) == 0x18 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u16 FUN_004186e0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

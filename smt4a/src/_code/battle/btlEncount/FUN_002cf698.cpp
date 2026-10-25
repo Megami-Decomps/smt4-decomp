@@ -2,7 +2,7 @@
 #include "battle/btlEncount.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdMemoryAllocTracked.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;

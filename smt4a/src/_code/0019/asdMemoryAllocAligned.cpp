@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except the register allocation of the padded-size arithmetic (retail accumulates size + alignment + alignment in r1 and negates the alignment into r0; the build swaps r0/r1 for the first add). */
 #include "nn/svc.h"
 #include "nn/Result.h"
 
@@ -31,7 +30,7 @@ void *asdMemoryAllocAligned(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 ex
     void *block = asdMemoryAllocImpl(a, b, c, paddedSize, extra);
     void *memory = FUN_001844ac(block, paddedSize, alignment, 0);
     rt_memclr(memory, size);
-    s32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
+    u32 result = nn::svc::ReleaseMutex(*g_allocationAddressRanges.mutex);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         FUN_002e3140(result, failed);

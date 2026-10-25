@@ -228,4 +228,44 @@ struct FlagValueStorage {
 typedef char FlagValueRangeSizeCheck[sizeof(FlagValueRange) == 0x0C ? 1 : -1];
 typedef char FlagValueStorageSizeCheck[sizeof(FlagValueStorage) == 0xF3D ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_001654f0(void *a, void *b);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void *asdMemoryAlloc(u32 heap, u32 b, u32 c, u32 size, s32 extra);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void eventQueueAddUniqueIfValid(s32 event);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 gameFlagsTestThirdBank(s32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail evaluates the save-copy pointers straight into the call registers and rebuilds the per-unit masks with ldm pairs through shared bases; ours reloads pointers through scratch registers and walks the units separately (250 rows against 210). Copy layout, constants and logic follow retail. */
 #include "common.h"
-#include "shard/flagValueGetStorage.h"
+#include "shard/W6_W6Match8_LightUniforms.h"
 #include "gamedata/SaveSlotTable.h"
 
 #define BTL_SLOT_COUNT 4

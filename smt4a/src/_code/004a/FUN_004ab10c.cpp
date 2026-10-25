@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "romwright_types.h"
-#include "shard/btlFindEntryValue.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 

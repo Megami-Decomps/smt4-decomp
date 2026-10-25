@@ -2,7 +2,7 @@
 #include "classes/Obj42242c.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 class Obj42238c : public ObjBase3c2ef0 {
 public:

@@ -1,9 +1,9 @@
 /* NON_MATCHING: cached adjacent links become LDRD instead of retail's separate loads; list-search and unlink cold blocks have different placement. -O2 candidate. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
-#include "shard/asdMemoryAllocTracked.h"
 
 struct SoundSystemStatusViewA {
     u8 unk0000[0x12fc];

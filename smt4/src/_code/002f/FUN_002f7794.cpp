@@ -1,7 +1,9 @@
 /* NON_MATCHING: percentage command uses a different saved-register set and stack-argument stores. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlMainAccess.h"
 
 struct BattleActionView {
     u8 prefix[0x1E98];
@@ -9,7 +11,6 @@ struct BattleActionView {
 };
 extern "C" {
 s32 scrGetArg(u32);
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, s32, u32,
                  s32, s32, s32, s32, s32);
@@ -21,7 +22,7 @@ extern "C" u32 FUN_002f7794(void)
 {
     s32 targetId = scrGetArg(0);
     s32 percent = scrGetArg(1);
-    u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlEntry *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     s32 amount = target->maxHp * percent / 100;
     if (amount == 0) {

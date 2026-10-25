@@ -1,7 +1,7 @@
 #include "shard/PlayScene.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 #include "camp/RenderCtx.h"
-#include "shard/FUN_0025f300.h"
 
 struct SpriteInfo;
 // Keep the common sprite coordinate prefix without importing a conflicting render-context variant.

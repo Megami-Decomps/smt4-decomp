@@ -8,7 +8,7 @@ extern "C" void FUN_0023092c(void)
     struct SelectionHistoryView {
         u8 unk000[0x5BC];
         u16 selections[8];
-        u16 recent[8];
+        s16 recent[8];
     };
     SelectionHistoryView *history = reinterpret_cast<SelectionHistoryView *>(g_statusDown);
     for (s32 index = 0; index < 8; ++index) {

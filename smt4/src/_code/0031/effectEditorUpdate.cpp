@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: retail loads the state into r0 (so it reloads g_effectEditor.object for the free) and sums the offsets in r0; the build keeps state in r1 / the offset in r2. */
 #include "common.h"
-#include "shard/asdMemoryFreeLocked.h"
+#include "shard/W6_W6Match2_GeometryResources.h"
 
 extern "C" {
 

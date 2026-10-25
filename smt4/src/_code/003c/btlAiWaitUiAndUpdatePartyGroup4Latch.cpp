@@ -1,12 +1,14 @@
 /* NON_MATCHING: party-count register allocation, latch-test if-conversion and indexed script-byte store differ; O2 may recover retail lowering. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlScript.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlReflect.h"
 namespace {
 union PartyPhaseState {
     BtlMainState main;
-    BtlScript script;
+    BtlMainState script;
     struct {
         /* 0x0000 */ u8 unk0000[0x84];
         /* 0x0084 */ s32 scriptUnit;
@@ -29,10 +31,10 @@ s32 nodeListCountActiveById(ReflectContext*, s32);
 s32 FUN_003ae838(void*, s32);
 s32 btlUiAreEntriesIdle(void*);
 s32 btlNodeListAnyReady();
-void FUN_00229754(void*, BtlScriptUnit*);
+void FUN_00229754(void*, BattleActionUnit*);
 
 /* Wait for the UI, then latch the all-four group state before advancing the action. */
-u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BtlScriptUnit* action)
+u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BattleActionUnit* action)
 {
     PartyPhaseContext* context = static_cast<PartyPhaseContext*>(work);
     if (nodeListCountActiveById(g_btlActionReflect, reinterpret_cast<s32>(action)) > 0) {
@@ -61,10 +63,10 @@ u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BtlScriptUnit* action)
         }
     }
     if (count != 4) {
-        state->script.flags &= ~0x10000000u;
+        state->script.battleFlags &= ~0x10000000u;
     } else {
-        if (!(state->script.flags & 0x10000000)) {
-            state->script.flags |= 0x10000000;
+        if (!(state->script.battleFlags & 0x10000000)) {
+            state->script.battleFlags |= 0x10000000;
             static_cast<ScriptActorRecord*>(
                 g_btlAction.data)[context->state->phase.scriptUnit].state = 0x1F;
             return 1;

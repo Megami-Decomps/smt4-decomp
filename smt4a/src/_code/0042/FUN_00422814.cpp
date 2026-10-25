@@ -1,6 +1,6 @@
 /* NON_MATCHING: slot field-address hoisting and paired-counter zero initialization differ. */
 #include "gfx/LockedResourcePool.h"
-#include "shard/FUN_001af874.h"
+#include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" {
 extern LockedResourcePool DAT_005880d0;

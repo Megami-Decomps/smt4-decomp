@@ -1,4 +1,4 @@
-/* NON_MATCHING: category-grid base hoisting, clear-counter registers and signed extent scheduling differ; 60 built and retail rows. */
+/* NON_MATCHING: only the load/subtract scheduling of the four signed extent bytes differs. */
 #include "gamedata/MapNaviCategories.h"
 
 extern "C" {
@@ -9,15 +9,15 @@ const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext 
 void FUN_0037b150(void)
 {
     u16 firstCell = 0;
-    MapNaviCategoryGrid *grid = DAT_006172e4;
-    for (s32 remaining = 300; remaining; --remaining, ++grid) {
-        grid->firstCell = 0;
-        grid->width = 0;
-        grid->pitch = 0;
-        grid->height = 0;
+    s32 index;
+    for (index = 0; index < 300; ++index) {
+        DAT_006172e4[index].firstCell = 0;
+        DAT_006172e4[index].width = 0;
+        DAT_006172e4[index].pitch = 0;
+        DAT_006172e4[index].height = 0;
     }
     MapNaviTableContext table;
-    for (s32 index = 0; index < MapNaviTable_GetCategoryCount(&table); ++index) {
+    for (index = 0; index < MapNaviTable_GetCategoryCount(&table); ++index) {
         const MapNaviCategoryRecord *record = MapNaviTable_GetCategoryRecord(&table, index);
         if (record->id == -1) {
             return;

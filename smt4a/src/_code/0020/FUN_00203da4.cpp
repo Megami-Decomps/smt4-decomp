@@ -12,7 +12,7 @@ struct MessageOpenWork {
     u8 unk00[4];
     ObjectHandle handle;      // 0x04
     u8 state;                 // 0x08
-    u8 mode;                  // 0x09
+    s8 mode;                  // 0x09
     u8 voiceMode;             // 0x0A
     u8 unk0B;
     u32 flags;                // 0x0C

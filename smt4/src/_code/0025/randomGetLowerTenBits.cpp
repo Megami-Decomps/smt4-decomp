@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/randomGetLowerTenBits.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 extern "C" {
 void affinityResolveUnitSlot(u16 *output,u32 first,u32 second);
 /* Extract the low ten-bit identifier from the generated value. */

@@ -1,6 +1,6 @@
 /* NON_MATCHING: context registers and duplicate-action kind/options load scheduling differ. */
 #include "battle/btlReflect.h"
-#include "shard/battleGetEntryHalfword.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 

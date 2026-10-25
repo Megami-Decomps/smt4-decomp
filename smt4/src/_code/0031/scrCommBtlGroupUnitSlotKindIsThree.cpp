@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern BtlUnitEntry *btlMainFindActiveEntry(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern u32 btlScriptResolveGroupArg(void);
@@ -22,20 +22,20 @@ u32 scrCommBtlGroupUnitSlotKindIsThree(void)
     scrGetArg(2);
     FUN_002499fc(btlScriptResolveGroupArg(), &start, &count);
     for (index = start; index < start + count; index++) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id
             && unit->values[slot] >> 10 == 3) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        BtlUnitEntry *active;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *active;
 
-        reinterpret_cast<BtlState *>(btlGetMainState());
+        btlGetMainState();
         active = btlMainFindActiveEntry();
-        if (active != NULL && active->groupId == id && active->values[slot] >> 10 == 3) {
+        if (active != NULL && active->id == id && active->values[slot] >> 10 == 3) {
             scrSetResult(1);
             return 1;
         }

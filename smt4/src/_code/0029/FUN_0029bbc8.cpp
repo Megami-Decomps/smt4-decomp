@@ -21,7 +21,7 @@ u32 FUN_0029bbc8(u32 unitIndex)
             slots->active[2] = -1;
         for (s32 i = 0; i < 24; ++i) {
             s32 current = slots->stock[i];
-            if (current == unitIndex) {
+            if (unitIndex == current) {
                 slots->stock[i] = -1;
                 break;
             }

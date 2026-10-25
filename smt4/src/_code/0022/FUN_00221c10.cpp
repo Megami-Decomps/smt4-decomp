@@ -8,11 +8,12 @@ extern "C" void FUN_00221c10(void)
 {
     EffectColorOverride* color = DAT_00433a58;
     if (color != NULL) {
-        EffectRgb delta = { 0.5f - color->red, 0.5f - color->green, 0.5f - color->blue };
+        f32 red = 0.5f - color->red;
+        f32 green = 0.5f - color->green;
+        f32 blue = 0.5f - color->blue;
         color->enabled = 4;
-        delta.red *= 0.1f;
-        delta.green *= 0.1f;
-        delta.blue *= 0.1f;
-        color->transition.delta = delta;
+        color->transition.delta.red = red * 0.1f;
+        color->transition.delta.green = green * 0.1f;
+        color->transition.delta.blue = blue * 0.1f;
     }
 }

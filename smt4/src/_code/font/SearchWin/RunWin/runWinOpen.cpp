@@ -5,7 +5,7 @@
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: questId/record saved registers are swapped (retail r5/r6) and retail predicates `mov r0, questId` before the id >= 0x15e branch. */
 #include "map/mapDepart.h"
+#include "util/QuestGetRuntimeStatus.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 
 struct QuestAvailabilityRecord {
@@ -30,7 +31,6 @@ struct QuestRuntimeStatus {
 extern "C" {
 extern GameState g_gameState;
 u32 questRequirementsMet(u16 questId);
-const QuestRuntimeStatus *questGetRuntimeStatus(u16 questId);
 u32 questIsCompleted(s32 questId);
 s32 gameFlagIsSet(u32 flag);
 
@@ -46,7 +46,7 @@ bool questIsOfferable(u16 questId)
     if (record->excludedQuests[1] != 0 && questIsCompleted(record->excludedQuests[1]) != 0) {
         return false;
     }
-    u32 completed = questGetRuntimeStatus(questId)->completed();
+    u32 completed = reinterpret_cast<const QuestRuntimeStatus *>(questGetRuntimeStatus(questId))->completed();
     if (completed != 0 && (record->metadata.flags & 2) == 0) {
         return false;
     }

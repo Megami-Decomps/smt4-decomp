@@ -1,6 +1,6 @@
 /* NON_MATCHING: compiler emits separate header stores and selects different command-buffer registers. */
 #include "shard/W6_W6Match5_MatrixCommand.h"
-#include "shard/FUN_00187d90.h"
+#include "shard/W4_W4Match5_DataTable.h"
 
 extern "C" {
 u32 *asdGxGetCommandCursor(void);

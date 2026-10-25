@@ -1,14 +1,18 @@
-/* NON_MATCHING: armcc keeps the map pointer in r1 rather than retail's r0. */
 #include "shard/W5_W5Match2_MapCallbacks.h"
 
 extern "C" {
 
 extern MapMainCallbackWork *g_mapMain;
 
+static __inline void mapSetRequested(MapMainCallbackWork *map, u8 value)
+{
+    map->requested = value;
+}
+
 /* Set the main map's request flag. */
 void mapMainRequest(void)
 {
-    g_mapMain->requested = 1;
+    mapSetRequested(g_mapMain, 1);
 }
 
 }

@@ -136,4 +136,14 @@ public:
     virtual WindowStatusOperationResult vfunc0c(const void *);
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void gameDataFlagsClear(u32 mask);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

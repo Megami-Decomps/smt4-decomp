@@ -1,6 +1,6 @@
 /* NON_MATCHING: Retail ldr r4, [pc, #140] differs from recovered bne 98. */
 #include "common.h"
-#include "shard/asdSoundSetVolumeIfEnabled.h"
+#include "shard/W6_W6Match7_SoundInit.h"
 
 // Private record views for DAT_004c5634, not shared API types.
 struct SoundDuckSettingsView {

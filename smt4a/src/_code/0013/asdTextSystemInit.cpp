@@ -8,7 +8,7 @@ void FUN_0013f0f4(s32 count);
 s32 FUN_0014190c(const char *path);
 void FUN_00140e6c(s32 slot, s32 font);
 void FUN_0013f188(s32 slot, f32 offset);
-void FUN_00141850(s32 value);
+void workRangeSetLowerBound(s32 value);
 void FUN_00140708(s32 value);
 void FUN_001409d4(u8 *table);
 void FUN_00144554(u8 *table);
@@ -43,7 +43,7 @@ void asdTextSystemInit(void)
     FUN_0013f188(2, -3.0f);
     FUN_0013f188(3, -3.0f);
     FUN_0013f188(4, -3.0f);
-    FUN_00141850(3);
+    workRangeSetLowerBound(3);
     FUN_00140708(5);
     FUN_001409d4(&DAT_0057f598);
     FUN_00144554(&DAT_0057f5d8);

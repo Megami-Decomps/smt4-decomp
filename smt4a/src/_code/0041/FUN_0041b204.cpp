@@ -1,7 +1,7 @@
 /* NON_MATCHING: item detail sprites restored; common indicator coordinate loads and conditional branch placement differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/FUN_003ca87c.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 namespace {
 struct ItemDetailDrawView {

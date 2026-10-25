@@ -1,10 +1,10 @@
-/* NON_MATCHING: the four-way switch on the value tag lowers to a compare chain; retail uses a jump table. */
+/* NON_MATCHING: jump table matches (explicit return-address label); register assignment of the label-target loads differs. */
 #include "script/ScriptVm.h"
 
 // Advance for a nonzero value; otherwise jump to the label the current instruction names.
 extern "C" u32 FUN_0018b390(ScriptVmProcess *process)
 {
-    bool advance;
+    bool advance = false;
     switch (process->tags[process->depth - 1]) {
     case SCRIPT_VM_TAG_INT:
     case SCRIPT_VM_TAG_INT_VAR:
@@ -14,15 +14,15 @@ extern "C" u32 FUN_0018b390(ScriptVmProcess *process)
     case SCRIPT_VM_TAG_FLOAT_VAR:
         advance = scrPopFloat(process) != 0.0f;
         break;
-    default:
-        advance = false;
+    case SCRIPT_VM_TAG_RETURN_ADDRESS:
         break;
     }
 
     if (advance) {
         ++process->pc;
     } else {
-        process->pc = process->labels[process->code[process->pc].decoded.operand].target;
+        u32 operand = process->code[process->pc].decoded.operand;
+        process->pc = process->labels[operand].target;
     }
     return 1;
 }

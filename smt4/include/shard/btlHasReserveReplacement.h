@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 
-u32 btlHasReserveReplacement(const BtlUnitEntry* entry);
+u32 btlHasReserveReplacement(const BtlEntry* entry);
 
 #ifdef __cplusplus
 }

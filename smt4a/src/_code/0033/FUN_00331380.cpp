@@ -1,6 +1,6 @@
 /* NON_MATCHING: Retail ldr r1, [pc, #128] differs from recovered ldr r1, [pc, #112]. */
 #include "common.h"
-#include "shard/buttonHelpGetEntryValue.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
 
 struct PartyPanelLocalView {
     u8 unk00[0x1210]; // 0x0000

@@ -1,7 +1,7 @@
 /* NON_MATCHING: remaining native alpha argument and efctSetSpeed float arguments are absent from this draft; large render-stack and draw-expression differences remain. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/FUN_00288ddc.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

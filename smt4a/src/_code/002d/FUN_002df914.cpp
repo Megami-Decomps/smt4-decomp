@@ -1,6 +1,6 @@
 /* NON_MATCHING: named global fields compile to individual literal bases rather than retail's shared music-module base. */
 #include "common.h"
-#include "shard/bgmReleaseStopped.h"
+#include "mikado/mikadoMain.h"
 
 // This music gate lies beyond the shared map-main state prefix.
 struct MapBgmGate { u8 unk000[0x9e1]; s8 blocked; };

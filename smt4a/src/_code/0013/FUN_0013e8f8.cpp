@@ -1,4 +1,4 @@
-/* NON_MATCHING: addressing of the 0x14xx flag bytes: retail uses base+0x1400 loads and a pooled 0x1414 register offset for the clears; this source gets add/add pairs. */
+/* NON_MATCHING: the flag tests now match; retail clears the g_frameTex bytes through a pooled 0x1414 register offset, this source gets add/add pairs. */
 #include "common.h"
 #include "shard/JobWork.h"
 
@@ -11,9 +11,9 @@ struct FrameTexFade {
     /* 0x0014 */ s32 fadeOutFrames;
     /* 0x0018 */ s32 frame;
     /* 0x001c */ u8 unk001c[0x13f8];
-    /* 0x1414 */ u8 captured;
+    /* 0x1414 */ s8 captured;
     /* 0x1415 */ u8 unk1415[2];
-    /* 0x1417 */ u8 shown;
+    /* 0x1417 */ s8 shown;
     /* 0x1418 */ u8 unk1418;
     /* 0x1419 */ u8 unk1419;
     /* 0x141a */ u8 unk141a[0x32];
@@ -35,7 +35,13 @@ u8 FUN_0013e8f8(u32 job)
 {
     FrameTexFade *work = (FrameTexFade *)jobGetWork(job);
 
-    if (work->captured && work->shown && work->enabled) {
+    if (!work->captured) {
+        return 0;
+    }
+    if (!work->shown) {
+        return 0;
+    }
+    if (work->enabled) {
         FUN_00157558(g_renderCtx);
         if (work->fadeInFrames > 0 || work->fadeOutFrames > 0) {
             work->frame++;

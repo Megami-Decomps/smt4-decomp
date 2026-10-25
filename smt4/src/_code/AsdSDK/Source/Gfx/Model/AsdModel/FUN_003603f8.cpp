@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail inlines CloseHandle; the existing wrapper remains out of line and result branches fold differently. */
+/* NON_MATCHING: instructions match except the saved-register numbering (retail keeps the ready-flag address in r4 and the arguments in r5/r6); armcc here numbers them the other way round. */
 #include "nn/Result.h"
 
 extern "C" {
@@ -19,19 +19,22 @@ bool FUN_003603f8(u32 *handle, const char *name)
         asdFatalError();
     }
     s32 result = asdModelForwardChecked(handle, name, libc_strlen(name), 1);
-    if (nnResultIsFailure(result)) {
+    if ((s32)(result & 0x80000000) < 0) {
         if ((u32)result == 0xd0401834) {
             return false;
         }
-        asdFatalError();
+        if (nnResultIsFailure(result)) {
+            asdFatalError();
+        }
     }
-    if (nnResultIsSuccess(FUN_003608d8())) {
-        DAT_00471ba8 = 1;
-        return true;
+    s32 closeResult = FUN_003608d8();
+    if ((s32)(closeResult & 0x80000000) < 0) {
+        if (nnResultIsFailure(svcCloseHandle(*handle))) {
+            asdFatalError();
+        }
+        return false;
     }
-    if (nnResultIsFailure(svcCloseHandle(*handle))) {
-        asdFatalError();
-    }
-    return false;
+    DAT_00471ba8 = 1;
+    return true;
 }
 }

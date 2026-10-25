@@ -2,7 +2,7 @@
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
 #include "util/FUN_002b950c.h"
-#include "shard/bgmReleaseStopped.h"
+#include "mikado/mikadoMain.h"
 
 /* The game state (only the fields read here). */
 struct GameStateView {

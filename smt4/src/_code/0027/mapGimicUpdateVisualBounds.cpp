@@ -1,5 +1,5 @@
 #include "map/MapGimicVisualIV.h"
-#include "shard/mapGimicUpdateVisualBounds.h"
+#include "npc_room/NpcRoom.h"
 extern "C" {
 extern MapGimicVisualStateIV *g_mapGimic;
 void FUN_002671f4(s32 handle, f32 x, f32 y, f32 z, f32 w, f32 range, f32 height, f32 radius);

@@ -19,7 +19,7 @@ void FUN_004803e4(u32 itemId)
     EquipmentUpgradeState *upgrades = FUN_00239200();
     switch (type) {
     case 4: {
-        s32 index = itemId - 301;
+        u32 index = itemId - 301;
         if (index < 0 || static_cast<u32>(index) >= 120)
             return;
         EquipmentUpgradeEntry *entry = &upgrades->categories[0][index];

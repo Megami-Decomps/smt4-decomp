@@ -11,7 +11,7 @@ extern "C" void spriteDrawWithOrigin(SpriteDrawOwner *owner, s32 index, const Sp
         return;
     }
     SpriteDrawVector3 adjusted = *position;
-    adjusted.x += (f32)-owner->origin->x * scale;
+    adjusted.x += (f32)-scale * owner->origin->x;
     adjusted.y -= (-143.0f - (f32)owner->origin->top + (f32)owner->origin->bottom) * scale;
     adjusted.y += g_spriteDrawYOffset;
     SpriteDrawOptions drawOptions = {options.filter, 1, options.flipY};

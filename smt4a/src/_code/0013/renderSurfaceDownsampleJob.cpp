@@ -13,7 +13,7 @@ struct DownsampleWork {
     u8 done; // 0xfad
     u8 pending; // 0xfae
     u8 unkfaf[0x4dd];
-    s8 blocked; // 0x148c
+    u8 blocked; // 0x148c
     u8 unk148d[3];
     JobSurface *source; // 0x1490
     s8 separateBuffers; // 0x1494

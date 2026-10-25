@@ -1,8 +1,8 @@
 #include "camp/UnitComparison.h"
+#include "shard/campFillUnitComparison.h"
 #include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
 #include "gamedata/DevilRecordA.h"
-#include "shard/campFillUnitComparison.h"
 #include "gamedata/SaveSlotTable.h"
 
 struct PartyComparisonTable : PartyStatusSlots {

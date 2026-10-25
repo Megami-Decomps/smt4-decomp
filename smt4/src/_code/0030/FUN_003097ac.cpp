@@ -1,6 +1,5 @@
 /* NON_MATCHING: retail 64 vs built 55 rows; scissor stack addressing, clamp branches, and output registers differ. */
 #include "camp/RenderCtx.h"
-#include "shard/FUN_002ae210.h"
 
 extern "C" {
 s32 asdGxGetCurrentPresetKind(void);

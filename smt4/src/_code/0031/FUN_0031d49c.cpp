@@ -2,7 +2,7 @@
 /* Recomputes the map's remaining entry budget: the limit minus the entries in use (a third of the active, slot and map
  * object counts plus the deferred models), never below the minimum. */
 #include "common.h"
-#include "shard/mapCountActiveEntries.h"
+#include "shard/W6_W6Match3_MapSceneTransition.h"
 
 extern "C" {
 /* The map's budget limits. */

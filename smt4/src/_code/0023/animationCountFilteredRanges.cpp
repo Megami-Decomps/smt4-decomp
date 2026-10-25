@@ -5,7 +5,7 @@ extern "C" {
 s32 animationCountFilteredRanges(const AnimationFilterTable *table, u32 range, s32 category)
 {
     const AnimationFilterRange *selection = &table->ranges[range];
-    s32 first, last;
+    u32 first, last;
     switch (category) {
     case 4: case 6:
         first = selection->first + selection->count;

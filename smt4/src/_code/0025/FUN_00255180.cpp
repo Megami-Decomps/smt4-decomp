@@ -1,12 +1,8 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
-
-typedef struct BtlEntry {
-    /* 0x00 */ u8 unk00[0x72];
-    /* 0x72 */ u16 values[1];
-} BtlEntry;
 
 extern BtlEntry *btlMainFindEntryByListedId(void *battle, u32 id);
 
@@ -16,7 +12,7 @@ void FUN_00255180(u32 id, s32 index, s32 value)
     BtlEntry *entry = btlMainFindEntryByListedId(static_cast<void *>(btlGetMainState()), id);
 
     if (entry != NULL) {
-        entry->values[index] = value;
+        entry->stat[index] = value;
     }
 }
 

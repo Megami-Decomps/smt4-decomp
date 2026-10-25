@@ -1,5 +1,6 @@
 /* NON_MATCHING: the complete 24-instruction control flow matches, but flags, queue address and table-base registers are allocated differently. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 
 struct BattleQueueView {

@@ -1,6 +1,6 @@
 /* Adds `amount` to the saturating halfword counter (+0x1a) of the object gameDataBlocksGetStats returns, capped at 0xffff. */
 #include "common.h"
-#include "shard/FUN_0040a378.h"
+#include "shard/W6_W6Match3_FilterTexture.h"
 
 extern "C" {
 

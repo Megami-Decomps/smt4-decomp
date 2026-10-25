@@ -11,10 +11,10 @@ u32 scrCommBtlGroupHasUnitFlag(void)
     u32 group = scrGetArg(0);
     u32 flag = scrGetArg(1);
     for (s32 i = 0; i < 109; ++i) {
-        BtlUnitEntry *entry = &reinterpret_cast<BtlState *>(btlGetMainState())->units[i];
+        BtlEntry *entry = &btlGetMainState()->entries[i];
         u32 flags = entry->flags;
         if ((flags & 0x10) != 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
-            entry->groupId == group && (entry->flagMask & (1u << static_cast<u8>(flag))) != 0) {
+            entry->id == group && (entry->groupMask & (1u << static_cast<u8>(flag))) != 0) {
             scrSetResult(1);
             return 1;
         }

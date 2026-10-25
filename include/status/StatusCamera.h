@@ -44,4 +44,34 @@ extern "C" {
 void FUN_002a0cc8(u8 value);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00220d24(u8 value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_0029a924(u32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

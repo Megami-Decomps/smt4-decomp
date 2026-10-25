@@ -3,9 +3,9 @@
 #include "util/FUN_002ae8e4.h"
 #include "gamedata/Table00.h"
 #include "gamedata/DevilRecord.h"
+#include "shard/W6_W6Match2_HelpResources.h"
 #include "addon/aocMain.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "shard/asdTMTexTableLoadEntryAsync.h"
 
 extern "C" {
 Table00Record *dataTable00FindById(s32 id);

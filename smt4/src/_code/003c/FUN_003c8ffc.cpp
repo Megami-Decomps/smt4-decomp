@@ -20,7 +20,7 @@ u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
     if (first->id == second->id || pair == NULL)
         return 0;
 
-    s32 level = first->level + second->level;
+    u32 level = first->level + second->level;
     if (level % 2 != 0)
         ++level;
     u16 result = FUN_003c9948(owner, pair[2], table[0] + level / 2);

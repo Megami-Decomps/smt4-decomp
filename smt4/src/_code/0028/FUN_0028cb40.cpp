@@ -23,12 +23,6 @@ struct PlayerData {
     u16 value;              // 0x04
 };
 
-struct BattleMainState {
-    u8 unk0000[0x44a0];
-    u32 flags;              // 0x44a0
-    u32 flags2;             // 0x44a4
-    u32 flags3;             // 0x44a8
-};
 
 extern "C" {
 
@@ -43,7 +37,7 @@ PlayerData* gameGetPlayerData(void);
 void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
 {
     s32 index = 0;
-    if ((reinterpret_cast<BattleMainState *>(btlGetMainState())->flags & 0x200) != 0) {
+    if ((btlGetMainState()->battleFlags & 0x200) != 0) {
         *layout = 7;
         *cursor = 7;
         return;
@@ -80,7 +74,7 @@ void FUN_0028cb40(CommandMenu* menu, u16* layout, s16* cursor)
         break;
     case 3:
         *layout = 7;
-        if ((reinterpret_cast<BattleMainState *>(btlGetMainState())->flags3 & 0x1000) == 0) {
+        if ((btlGetMainState()->editorControl.flags & 0x1000) == 0) {
             s32 slotIds[6] = { 0, 1, 2, 3, 4, 5 };
             for (s32 i = 0; i < 6; i++) {
                 if (flagBitIsSet(i + 0x2e)) {

@@ -561,4 +561,34 @@ extern "C" {
 char *FUN_001b43f0(s32 category, s32 id);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_002319c0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+unsigned int FUN_00384cf4(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 dataTable2BType1Count(void *unused);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

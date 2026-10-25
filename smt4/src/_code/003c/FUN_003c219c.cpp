@@ -13,11 +13,11 @@ u32 FUN_003c219c(StatBlock *unit, u8 *weights)
     FUN_003eb068(updated);
     s16 strength = unit->summary.stats[0];
     updated[0] = strength;
-    s16 dexterity = unit->summary.stats[1];
+    u16 dexterity = unit->summary.stats[1];
     updated[1] = dexterity;
-    s16 magic = unit->summary.stats[2];
+    u16 magic = unit->summary.stats[2];
     updated[2] = magic;
-    s16 agility = unit->summary.stats[3];
+    u16 agility = unit->summary.stats[3];
     updated[3] = agility;
     s16 luck = unit->summary.stats[4];
     updated[4] = luck;

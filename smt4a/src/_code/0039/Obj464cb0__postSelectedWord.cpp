@@ -1,6 +1,6 @@
 /* NON_MATCHING: This is a global command callback, not an evidenced class member; packet-write register scheduling still differs from retail. */
 #include "romwright_types.h"
-#include "shard/asdModelCommandBlockRelease.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 

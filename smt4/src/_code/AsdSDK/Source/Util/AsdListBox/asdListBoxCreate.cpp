@@ -1,7 +1,7 @@
 /* NON_MATCHING: the process name is a .constdata literal in retail (DAT_00409d80) and a stripped debug call precedes the allocation. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 s32 FUN_001fe640(u32 handle);

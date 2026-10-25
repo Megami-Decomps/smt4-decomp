@@ -15,7 +15,7 @@ u8 FUN_00388968(void)
     struct MessageAnimationView {
         u8 unk0000[0x19f0];
         u8 active;
-        u8 pending;
+        s8 pending;
         u8 ready;
         u8 unk19f3;
         u32 value;

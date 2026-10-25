@@ -36,7 +36,7 @@ u32 FUN_0039a7ac(void)
         }
     }
 
-    s8 shown;
+    u8 shown;
     if (overlay->keepAlive != 0) {
         shown = 1;
     } else {

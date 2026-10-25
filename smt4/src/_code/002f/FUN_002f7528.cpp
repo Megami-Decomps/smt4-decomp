@@ -5,7 +5,7 @@
 
 extern "C" {
 u32 btlScriptResolveGroupArg(s32 group);
-BtlUnitEntry *btlMainFindActiveEntry(BtlMainState *battle);
+BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 static inline bool valueKindIsZeroOrTwo(u16 value)
 {
@@ -21,7 +21,7 @@ u32 FUN_002f7528(void)
     s32 count;
     FUN_002499fc(group, &start, &count);
     for (s32 index = start; index < start + count; ++index) {
-        BtlUnitEntry *entry = &btlGetMainStateExt()->units[index];
+        BtlEntry *entry = &btlGetMainState()->entries[index];
         u32 flags = entry->flags;
         if ((flags & 0x10) == 0 && (flags & 1) != 0 && (flags & 0x40) == 0 &&
             valueKindIsZeroOrTwo(entry->values[valueIndex])) {
@@ -29,8 +29,8 @@ u32 FUN_002f7528(void)
             return 1;
         }
     }
-    if (btlGetMainStateExt()->hasActiveEntry != 0) {
-        BtlUnitEntry *entry = btlMainFindActiveEntry(btlGetMainState());
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
         if (entry != NULL && valueKindIsZeroOrTwo(entry->values[valueIndex])) {
             scrSetResult(1);
             return 1;

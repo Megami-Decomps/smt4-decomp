@@ -25,7 +25,7 @@ extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
 extern "C" void FUN_003009fc(BtlUiObjC *object, u64 mask)
 {
     BtlUiColumnSelectionView *view = (BtlUiColumnSelectionView *)object;
-    for (s32 column = 0; column < view->count; ++column) {
+    for (u32 column = 0; column < view->count; ++column) {
         view->columns[column].selected = 0;
     }
     s32 matches = 0;

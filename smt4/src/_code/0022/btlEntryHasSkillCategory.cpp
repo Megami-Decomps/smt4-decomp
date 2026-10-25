@@ -1,9 +1,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "battle/BattleEntrySummary.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 void FUN_00247478(BattleEntrySummary *summary, BtlMainState *state, const BtlEntry *entry);
 const ActiveSkillRecord *dataTable40FindById(s32 skillId);
 void FUN_0022abe0(const BtlEntry *entry, u16 *skills);

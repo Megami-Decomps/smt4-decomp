@@ -1,6 +1,6 @@
 /* NON_MATCHING: recovered script-mode setter matches; state-store tail merging differs. */
 #include "common.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 struct QuestScriptProcess {
     u8 unk00[0x108];

@@ -6,7 +6,7 @@ extern "C" {
 u32 FUN_003e4b2c(u32 id, s32 targetLevel, s32 maximumIncrease);
 }
 
-static __inline PartySlotA *getPartySlot(u16 index)
+static __inline PartySlotA *getPartySlot(u32 index)
 {
     if (index >= 12)
         return NULL;

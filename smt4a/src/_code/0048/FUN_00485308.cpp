@@ -30,7 +30,7 @@ void FUN_00485308(StateSetterSpriteWork* work)
         s8 mode;
         u8 unk262[0xA];
         u32 script;
-        u8 scriptStarted;
+        s8 scriptStarted;
         u8 unk271[0x13B];
         UiAnimatedSprite sprite;
     };

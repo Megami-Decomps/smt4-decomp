@@ -5,7 +5,7 @@ extern "C" {
 
 /* Triangle-wave blend between two values: with period `period`, `time` sweeps from the larger value down to the smaller and back
  * (or from the smaller up when `invert` is set). */
-s32 FUN_001f3e80(s32 a, s32 b, s32 period, s32 time, s32 invert)
+s32 FUN_001f3e80(s32 a, s32 b, u32 period, s32 time, s32 invert)
 {
     s32 high = a;
     s32 low = b;

@@ -102,4 +102,24 @@ typedef char MikadoWorkLayoutCheck[sizeof(MikadoWork) == 0xC &&
 typedef char MikadoGlobalsLayoutCheck[sizeof(MikadoGlobals) == 0x10 &&
     offsetof(MikadoGlobals, work) == 4 && offsetof(MikadoGlobals, flags.active) == 0 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void mikadoLoadSceneResources(MikadoCamera *camera);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 bgmReleaseStopped(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

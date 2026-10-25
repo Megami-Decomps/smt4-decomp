@@ -1,7 +1,7 @@
 /* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
-#include "shard/FUN_00384d34.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 #define MAP_ICON_TYPE_OWNED -1
 #define MAP_ICON_TYPE_STORY -2

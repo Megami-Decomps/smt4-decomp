@@ -1,6 +1,5 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
-#include "shard/asdListBoxGetItemText.h"
 
 extern "C" {
 

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_004c8284.h"
+#include "battle/btlAction.h"
 
 extern "C" {
 

@@ -1,7 +1,7 @@
 /* NON_MATCHING: armcc keeps the constant 2 in a saved r5 (push r4-r6), loads the second resource
  * pair with ldm and stores step/stepTimer separately; retail rematerializes 2 and uses strd */
 #include "common.h"
-#include "shard/FUN_003bbaa8.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 #define UNK3BA2BC_FLAG_PENDING 0x10
 

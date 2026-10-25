@@ -1,7 +1,6 @@
 /* NON_MATCHING: map owner global is restored; branch layout and unreachable retail literal decoding differ. */
 #include "romwright_types.h"
 #include "npc_room/NpcRoom.h"
-#include "shard/mapGimicUpdateVisualBounds.h"
 
 extern "C" {
 

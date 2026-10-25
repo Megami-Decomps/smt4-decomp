@@ -2,8 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "shard/FUN_0028f694.h"
 #include "gfx/SpritePartDraw.h"
 
 extern "C" {

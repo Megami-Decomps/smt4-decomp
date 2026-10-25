@@ -97,3 +97,73 @@ u32 *asdListBoxGetItemValuePtr(void *listBox, u32 id);
 }
 
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00229a24(void);
+
+#ifdef __cplusplus
+}
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00229a3c(s32 actorId, u32 options, u32 value, u32 parameter, u32 checkDuplicates);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00229c5c(u32 unused, u32 first, u32 second);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void aocQueueType1f(u32 context, u32 arg, u32 second, u32 third);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 battleGetEntryHalfword(u32 id,u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+const u8 *dataTable05Sub0GetEntries(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 dataTable05Sub4GetCount(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

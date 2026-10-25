@@ -66,4 +66,14 @@ typedef char IfTouchGlobalsSizeCheck[sizeof(IfTouchGlobals) == 0x8 ? 1 : -1];
 typedef char IfTouchProcessOffsetCheck[offsetof(IfTouchState, process) == 0 ? 1 : -1];
 typedef char IfTouchUserCountOffsetCheck[offsetof(IfTouchGlobals, userCount) == 0 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_001c3688(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

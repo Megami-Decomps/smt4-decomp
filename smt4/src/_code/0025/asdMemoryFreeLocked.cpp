@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/asdMemoryFreeLocked.h"
+#include "shard/W6_W6Match2_GeometryResources.h"
 extern "C" {
 void asdMemFree(void *block);
 /* Forward memory release to the shared allocator. */

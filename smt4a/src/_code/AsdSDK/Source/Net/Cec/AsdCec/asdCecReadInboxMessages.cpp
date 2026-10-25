@@ -1,4 +1,5 @@
 /* NON_MATCHING: the stripped debug trace before the message buffer allocation is written; retail 388-byte frame (message/id/out-slot layout), the zero return through the read counter and the end clamp compare order still differ. */
+#include "nn/Result.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -54,7 +55,7 @@ s32 asdCecReadInboxMessages(u32 first, s32 count, u8 *out, s32 deleteRead)
         asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 1240);
         buffer = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
         result = nn_cec_CTR_MessageBox_ReadMessage_3579D4(box, &message, buffer, size, 0, &id);
-        if (result < 0) {
+        if (nnResultIsFailure(result)) {
             if (result == 0xc8810bea) {
                 failed = 1;
             } else if (result != 0xc8a10bf0) {

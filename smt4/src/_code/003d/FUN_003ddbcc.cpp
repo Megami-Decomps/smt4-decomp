@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of two adjacent stores differs (retail: strb kind, then strh second; ours emits the strh first). */
 #include "battle/btlReflect.h"
 
 extern "C" {
@@ -14,7 +13,7 @@ union FloatPair {
 };
 
 /* Queues a kind-12 action carrying two ids, a value and two floats. */
-void FUN_003ddbcc(u32 actor, u32 options, u32 value, u16 first, FloatPair pair, u16 second)
+void FUN_003ddbcc(u32 actor, u32 options, u32 value, s16 first, FloatPair pair, u16 second)
 {
     ReflectAction *node;
 

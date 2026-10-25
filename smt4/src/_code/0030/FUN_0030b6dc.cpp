@@ -15,7 +15,7 @@ s32 FUN_0030b6dc(void)
     s32 action = scrGetArg(0);
     s32 bit = scrGetArg(1);
     s32 announce = scrGetArg(2);
-    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     if (announce == 0) {
         FUN_00246d38(0, unit, &btlGetMainState()->actions[action], 1 << bit);

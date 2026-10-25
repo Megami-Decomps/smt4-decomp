@@ -77,4 +77,14 @@ typedef struct Block6 {
     /* 0x14 */ void *unk14;
 } Block6;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 gameDataGetTableValue(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

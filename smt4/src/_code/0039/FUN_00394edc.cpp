@@ -1,6 +1,6 @@
 /* Merges two inherited affinity sets, adding the adjustment of the winning state. */
 #include "gamedata/InheritedAffinities.h"
-#include "shard/FUN_00394edc.h"
+#include "shard/W6_W6Match3_MapMarkerModels.h"
 
 extern "C" {
 InheritedAffinityRecord *dataTable08Sub2GetRecord(u32 id);

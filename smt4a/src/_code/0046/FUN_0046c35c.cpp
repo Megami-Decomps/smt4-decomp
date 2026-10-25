@@ -1,5 +1,5 @@
 #include "gamedata/GroupedFileTables.h"
-#include "shard/FUN_0046c35c.h"
+#include "shard/W6_W6Match7_QuestInteraction.h"
 
 extern "C" {
 bool FUN_001b315c(FileTableGroup *group);

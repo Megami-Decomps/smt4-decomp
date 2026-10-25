@@ -1,6 +1,6 @@
 /* NON_MATCHING: selection-sort loop arithmetic/branch orientation and local register allocation differ; -O2 candidate. */
 #include "common.h"
-#include "shard/dataTable2bSub1GetCount.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 
 struct CategoryTable { u32 reserved; };
 struct CategoryRecord {
@@ -27,7 +27,7 @@ s32 saveTestFlagRow(u8, u8);
 
 void categoryListBuildUnique(CategoryList *list, s32 kind)
 {
-    s16 categories[32] = {0};
+    u16 categories[32] = {0};
     s32 count = 0;
     CategoryTable table;
     for (s32 i = 0; i < dataTable2bSub1GetCount(&table); ++i) {
@@ -52,7 +52,7 @@ void categoryListBuildUnique(CategoryList *list, s32 kind)
     }
     for (s32 i = 0; i < count - 1; ++i) {
         for (s32 j = i + 1; j < count; ++j) {
-            if (categories[i] < categories[j]) {
+            if (categories[j] > categories[i]) {
                 s16 category = categories[i];
                 categories[i] = categories[j];
                 categories[j] = category;

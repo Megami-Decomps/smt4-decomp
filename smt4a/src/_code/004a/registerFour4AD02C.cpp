@@ -1,5 +1,4 @@
 #include "shard/Shard004A.h"
-#include "shard/registerFour4AD02C.h"
 
 extern "C" {
 

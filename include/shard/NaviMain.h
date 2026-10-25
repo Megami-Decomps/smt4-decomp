@@ -102,4 +102,14 @@ typedef char NaviMainSizeCheck[sizeof(NaviMain) == 0x12338 &&
     offsetof(NaviMain, tasks.fadeTask) == 0x12330 ? 1 : -1];
 typedef char NaviMainASizeCheck[sizeof(NaviMainA) == 0x206C0 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_004930e4(s32 mode);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

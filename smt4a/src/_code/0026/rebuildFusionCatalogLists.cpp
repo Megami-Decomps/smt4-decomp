@@ -1,11 +1,11 @@
 /* NON_MATCHING: only scratch registers for the unique-race append value/address are exchanged; -O2 candidate. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 #include <stdlib.h>
 #include "event/2dEvent/2dEventTex.h"
 #include "util/FUN_004da77c.h"
-#include "shard/entryDefIsAvailable.h"
 
 struct FusionCatalogCriteria {
     u8 unk00[8];

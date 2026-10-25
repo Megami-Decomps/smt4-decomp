@@ -3,8 +3,8 @@
 #include "battle/btlMain.h"
 #include "gamedata/UnitStatInitialization.h"
 #include "util/CalleeContracts.h"
-#include "event/2dEvent/EventEffect.h"
 #include "shard/lcgRandomRange.h"
+#include "event/2dEvent/EventEffect.h"
 extern "C" {
 InitializedUnitStatsA *FUN_003e4d68(u32 slot);
 s32 FUN_00187168(InitializedUnitStatsA *unit);

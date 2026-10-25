@@ -1,7 +1,7 @@
 /* NON_MATCHING: typed input/touch results recovered; control-flow and register allocation differ. */
 #include "status/StatusCamera.h"
-#include "shard/S1ListPanel.h"
 #include "shard/buttonHelpHasEnabledEntryForId.h"
+#include "shard/S1ListPanel.h"
 extern "C" {
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, s32 mode);
@@ -25,7 +25,7 @@ u32 FUN_00220d58(void *base)
         u8 visible, unk25[0x53];
         u8 transition[0x98];
         u32 nextMode, unk114, heldFrames;
-        u8 unk11C[0xB], showControls;
+        s8 unk11C[0xB], showControls;
     };
     typedef char InputViewOffsetCheck[offsetof(InputView, nextMode) == 0x110 &&
         offsetof(InputView, showControls) == 0x127 ? 1 : -1];

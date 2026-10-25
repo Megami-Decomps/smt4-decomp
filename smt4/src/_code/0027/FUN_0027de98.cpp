@@ -11,7 +11,7 @@ struct BattleActionListState {
     /* 0x0000 */ u8 unk0000[0x88];
     /* 0x0088 */ s32 mode;
     /* 0x008C */ u8 unk008C[0x1F34];
-    /* 0x1FC0 */ BtlUnitEntry *units;
+    /* 0x1FC0 */ BtlEntry *units;
     /* 0x1FC4 */ u8 unk1FC4[0x34C];
     /* 0x2310 */ BattleListedAction *actions;
     /* 0x2314 */ s32 count;
@@ -29,7 +29,7 @@ u32 FUN_0027de98(BattleActionListState *state)
                 if (action->kind != 4) {
                     return 1;
                 }
-                if ((state->units[action->unitIndex].flagMask & 0x1C0) == 0) {
+                if ((state->units[action->unitIndex].groupMask & 0x1C0) == 0) {
                     return 1;
                 }
             } else if (action->kind == 5) {

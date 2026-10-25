@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); the frame/saved-register set differs (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: only the third (excluded) 64-bit mask test and the loop-bound reload differ: retail uses two ldr for the mask, the build uses add+ldm and ldrd. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -20,9 +20,9 @@ u32 btlScriptAnyCandidateMatches(void)
     s32 choice = scrGetArg(1);
     u32 first, count;
     FUN_00301a08(btlResolveEntryChoice(choice), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 i = first; i < (s32)(first + count); ++i) {
+    for (s32 i = first; i < (s32)(count + first); ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
             FUN_002b54a0(entry, kind)) {

@@ -2,7 +2,6 @@
 #include "battle/btlMain.h"
 #include "battle/btlEncount.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "shard/btlRosterGroupAllInactive.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;

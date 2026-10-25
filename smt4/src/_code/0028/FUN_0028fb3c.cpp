@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_0028fb3c.h"
+#include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
 

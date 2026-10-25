@@ -1,6 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "shard/appCostRecordFindById.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 
 /* A record of data table 0xB: 0x40 bytes, keyed by the halfword id at 0x20. */

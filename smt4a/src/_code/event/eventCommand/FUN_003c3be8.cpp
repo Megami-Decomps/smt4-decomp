@@ -2,7 +2,6 @@
 #include "event/EventTaskRequest.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/scrGetArg.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 kind, u32 bytes, u32 flags);

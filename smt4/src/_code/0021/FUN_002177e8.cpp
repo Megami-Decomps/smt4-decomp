@@ -1,10 +1,11 @@
 /* NON_MATCHING: damage-call stack arguments use STM/scalar stores instead of retail's STRD pairs, changing constant registers. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
 void FUN_00250720(BtlMainState *battle);
 void FUN_002551ac(s32 channel, ScriptUnit *unit, BtlActionRecord *record, s32 kind,
@@ -23,12 +24,12 @@ void FUN_003ddbcc(s32 channel, ScriptUnit *unit, s32 a3, s32 a4, s32 a5, s32 fra
 u32 FUN_002177e8(void)
 {
     s32 id = scrGetArg(0);
-    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     if (id < BTL_ENTRY_COUNT) {
-        BtlActionRecord *record = &btlGetMainState()->actions.records[id];
+        BtlActionRecord *record = &btlGetMainState()->actions[id];
         BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
         FUN_00250720(btlGetMainState());
-        FUN_002551ac(0, unit, record, 0, entry->maxHp, -1, -1, entry->value,
+        FUN_002551ac(0, unit, record, 0, entry->maxHp, -1, -1, entry->hp,
                       entry->maxHp, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1);
         FUN_00250680(0x19, unit, record, 0);
     } else {

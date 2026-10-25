@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: retail forms the block pointer in r2 first (`add r2, r0, #8192`) and stores the low and high mask words separately (`str r1, [r2, #8]!`, `asr r0, r1, #31`, `str r0, [r2, #4]`); built keeps the pointer in r0 and merges the stores into `stm`. */
 #include "battle/BtlMainAccess.h"
+#include "util/CalleeContracts.h"
 #include "battle/btlUnit.h"
-#include "shard/btlSelectCandidateEntries.h"
 
 extern "C" {
 

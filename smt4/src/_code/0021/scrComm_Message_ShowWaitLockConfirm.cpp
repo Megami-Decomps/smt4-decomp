@@ -2,8 +2,8 @@
 #include "ui/MessageMain.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 #include "shard/scrGetArg.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 s32 FUN_0028660c();

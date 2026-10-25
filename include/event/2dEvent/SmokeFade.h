@@ -31,4 +31,14 @@ extern "C" {
 u8 FUN_0026c3a0(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_002c7e3c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

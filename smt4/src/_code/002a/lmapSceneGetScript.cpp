@@ -1,5 +1,5 @@
 #include "map/lmapMain.h"
-#include "shard/lmapSceneGetScript.h"
+#include "shard/GameGlobals.h"
 
 extern "C" {
 

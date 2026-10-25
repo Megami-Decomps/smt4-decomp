@@ -5,7 +5,7 @@ struct StateView {
     u8 unk00[0x2a0]; // 0x000
     u32 unk2A0;      // 0x2a0
     s32 unk2A4;      // 0x2a4
-    s16 unk2A8;      // 0x2a8
+    u16 unk2A8;      // 0x2a8
     u16 unk2AA;      // 0x2aa
     u16 unk2AC;      // 0x2ac
     u16 unk2AE;      // 0x2ae
@@ -38,7 +38,7 @@ void FUN_002879dc(s32 identifier, s32 amount, s32 priority)
     if (identifier == 0) {
         identifier = -1;
     }
-    output->unk2A8 = (s16)identifier;
+    output->unk2A8 = identifier;
     state->unk2A4 = priority;
     u16 scaledAmount = (u16)((u32)amount * 10u);
     output->unk2AC = scaledAmount;

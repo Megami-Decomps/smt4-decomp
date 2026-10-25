@@ -26,4 +26,14 @@ struct StatGrowthParameters {
 
 extern "C" u32 unitComputeMaximumHpAtLevel(s32 level, const StatGrowthParameters *parameters);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 gameDataFlagTestBit(u32 bit);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only registers differ: retail keeps the list in r6 and the next task in r5 (swapped here). */
 #include "sys/Task.h"
 
 extern "C" {

@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail initialises the 18 slots in a one-per-iteration loop that reloads each halfword before storing 100; armcc unrolls the bitfield stores by two. */
 #include "common.h"
-#include "shard/affinityShouldReplaceState.h"
+#include "shard/W5_W5Match7_ScriptUnit.h"
 
 namespace {
 /* A demon's elemental response: the resistance id and its affinity state. */

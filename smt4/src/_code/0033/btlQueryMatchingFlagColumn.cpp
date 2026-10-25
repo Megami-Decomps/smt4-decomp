@@ -1,4 +1,5 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 struct BattleMatchFlag {
     u32 categories;

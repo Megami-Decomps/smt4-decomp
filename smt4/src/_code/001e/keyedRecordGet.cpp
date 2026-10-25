@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/keyedRecordGet.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 

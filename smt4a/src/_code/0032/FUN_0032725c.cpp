@@ -1,7 +1,6 @@
 /* NON_MATCHING: only the initial constant-table load, stack adjustment and level-register move are scheduled differently; 84 built and retail rows. */
 #include "shard/Shard0035.h"
 #include <string.h>
-#include "shard/gameDataGetTableValue.h"
 
 extern "C" {
 extern const char *const DAT_005321e8[10];

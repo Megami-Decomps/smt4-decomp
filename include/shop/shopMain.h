@@ -44,4 +44,44 @@ extern "C" {
 void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002328b4(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_00290e78(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0029a084(int which, u32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void cellListAppend(int param_1,unsigned short param_2,unsigned short param_3,short param_4,short param_5);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

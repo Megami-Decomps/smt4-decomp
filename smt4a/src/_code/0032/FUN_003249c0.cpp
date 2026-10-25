@@ -6,7 +6,7 @@
 extern "C" s32 FUN_003249c0(const BtlCombatantEntryA *entry, s32 id)
 {
     s32 count = 0;
-    if ((entry->flags & g_btlCandidateMasks.unavailable) ||
+    if ((g_btlCandidateMasks.unavailable & entry->flags) ||
         (entry->flags & g_btlCandidateMasks.singleAction)) {
         const BtlCombatantActionA *action = &entry->actionList.single;
         if ((action->kind == 2 || action->kind == 3) && action->id == id)

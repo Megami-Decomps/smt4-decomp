@@ -1,4 +1,4 @@
-/* NON_MATCHING: The argument descriptor and copied work pointer occupy different stack slots, changing register allocation and stack-argument stores. */
+/* NON_MATCHING: stack slots now match (argument declared first); retail stores the argument before the descriptor and orders the literal pool/stack-argument stores differently. */
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
 
@@ -17,12 +17,12 @@ u32 FUN_00473da0(ThreadLaunchWork *work)
     if (FUN_0043c2b4()) {
         return 0;
     }
+    ThreadLaunchWork *argument = work;
     ThreadArgumentDescriptor descriptor;
     descriptor.argumentSize = sizeof(work);
     descriptor.callbacks[0] = FUN_00514ab4;
     descriptor.callbacks[1] = FUN_00514b98;
     descriptor.callbacks[2] = FUN_00514b50;
-    ThreadLaunchWork *argument = work;
     s32 result = FUN_002fb0d4(work->thread, &descriptor, FUN_00473d54, &argument,
         work->stack->address + work->stack->size, 0x11, -2, 0);
     if ((static_cast<u32>(result) & 0x7E00000) != 0x600000 && nnResultIsFailure(result)) {

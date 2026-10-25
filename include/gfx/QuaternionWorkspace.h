@@ -5,6 +5,7 @@
 #include "shard/S1Mover.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include <stddef.h>
+#include "shard/W5_W5Match2_ShiftRandom.h"
 
 struct RotationQuaternion {
     f32 x, y, z, w;
@@ -32,5 +33,15 @@ struct QuaternionMatrixWorkspaceView {
 typedef char QuaternionMatrixWorkspaceLayoutCheck[
     offsetof(QuaternionMatrixWorkspaceView, matrix) == 0x140 &&
     sizeof(QuaternionMatrixWorkspaceView) == 0x180 ? 1 : -1];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 randomAdvanceShiftRegister(ShiftRandomState *state);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

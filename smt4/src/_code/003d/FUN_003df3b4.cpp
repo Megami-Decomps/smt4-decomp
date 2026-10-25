@@ -1,4 +1,5 @@
 /* NON_MATCHING: the key search loop allocates differently (retail keeps the table in sl and tests the result sign with lsrs); logic matches. */
+#include "nn/Result.h"
 #include "common.h"
 
 extern "C" {
@@ -28,7 +29,7 @@ s32 FUN_003df3b4(u32 *token, ResourceKey *out, const ResourceKey *keys, u32 coun
     u32 i;
     u32 j;
 
-    if (result < 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     for (i = 0; i < count; i++) {

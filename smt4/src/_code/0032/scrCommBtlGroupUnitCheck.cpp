@@ -3,12 +3,12 @@
 
 extern "C" {
 
-extern BtlUnitEntry *btlMainFindActiveEntry(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
-extern s32 btlEntryHasActionSkillCategory(BtlUnitEntry *unit, u32 arg);
+extern s32 btlEntryHasActionSkillCategory(BtlEntry *unit, u32 arg);
 
 /* Script command: pushes whether btlEntryHasActionSkillCategory accepts argument 0 for a present, non-excluded unit of the current group
  * or the active entry. */
@@ -21,17 +21,17 @@ u32 scrCommBtlGroupUnitCheck(void)
 
     FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &start, &count);
     for (index = start; index < start + count; index++) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && btlEntryHasActionSkillCategory(unit, arg) != 0) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        BtlUnitEntry *active;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *active;
 
-        reinterpret_cast<BtlState *>(btlGetMainState());
+        btlGetMainState();
         active = btlMainFindActiveEntry();
         if (active != NULL && btlEntryHasActionSkillCategory(active, arg) != 0) {
             scrSetResult(1);

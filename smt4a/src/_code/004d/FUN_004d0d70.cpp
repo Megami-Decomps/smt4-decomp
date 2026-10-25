@@ -20,7 +20,7 @@ u32 FUN_004d0d70(u32 slot)
     } else if ((u32)table->reserve[2] == slot) {
         table->reserve[2] = -1;
     }
-    for (s32 index = 0; index < 24; ++index) {
+    for (u32 index = 0; index < 24; ++index) {
         s32 entry = table->party[index];
         if ((u32)entry == slot) {
             table->party[index] = -1;

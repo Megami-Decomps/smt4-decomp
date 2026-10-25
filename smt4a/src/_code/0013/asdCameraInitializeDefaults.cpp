@@ -1,5 +1,5 @@
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
-#include "shard/asdCameraInitializeDefaults.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
 using nw::math::MTX34;
 using nw::math::MTX44;

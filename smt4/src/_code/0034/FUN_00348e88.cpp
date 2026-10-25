@@ -1,4 +1,4 @@
-/* NON_MATCHING: quest item comparisons and completion-count updates retain a different conditional sequence. */
+/* NON_MATCHING: retail loads the goal's required count into r0 after copying the item-count result to r9; the build loads it into r1 before the copy. */
 /* Marks active item-count quest goals and records whether this gain reaches their target. */
 #include "shard/SaveWork.h"
 
@@ -24,8 +24,16 @@ struct QuestItemFlagBanks {
     QuestItemFlags quests[400];
 };
 extern "C" {
-u32 FUN_0028fb40(u32 item);
 QuestItemFlagBanks *gameGetFlagBlock(void);
+static __inline QuestItemFlags *questGetFlags(u16 quest)
+{
+    return &gameGetFlagBlock()->quests[quest];
+}
+static __inline void questMarkChanged(u16 quest)
+{
+    gameGetFlagBlock()->quests[quest].changed |= 2;
+}
+u32 FUN_0028fb40(u32 item);
 QuestItemGoalRecord *dataTable1bOr1cGetRecord(u16 quest);
 SaveWork *gameGetMapBlock(void);
 
@@ -38,17 +46,17 @@ void FUN_00348e88(u32 item, u32 amount)
         s16 completedItem;
     };
     QuestNoticeView *notice = (QuestNoticeView *)gameGetMapBlock();
-    for (u32 i = 0; i < 400; ++i) {
-        if (gameGetFlagBlock()->quests[(u16)i].active & 2) {
+    for (s32 i = 0; i < 400; ++i) {
+        u32 isActive = (questGetFlags(i)->active & 2) >> 1;
+        if (isActive) {
             QuestItemGoalRecord *record = dataTable1bOr1cGetRecord((u16)i);
             if (record != NULL && record->disabled == 0) {
-                for (u32 j = 0; j < 6; ++j) {
-                    QuestItemGoal *goal = &record->goals[j];
-                    if (goal->kind == 1 && goal->item == item) {
+                for (s32 j = 0; j < 6; ++j) {
+                    if (record->goals[j].kind == 1 && record->goals[j].item == item) {
                         u32 current = FUN_0028fb40(item);
-                        if (current < goal->required) {
-                            gameGetFlagBlock()->quests[(u16)i].changed |= 2;
-                            if (current + amount >= goal->required) {
+                        if (record->goals[j].required > current) {
+                            questMarkChanged(i);
+                            if (record->goals[j].required <= amount + current) {
                                 notice->completedItem = (s16)item;
                             } else {
                                 notice->progressingItem = (s16)item;

@@ -45,4 +45,14 @@ extern "C" {
 void effCreateRegisteredPair(u32 param1, u32 param2);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int FUN_00262f78(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

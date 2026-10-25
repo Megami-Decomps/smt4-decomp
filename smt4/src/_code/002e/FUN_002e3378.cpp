@@ -1,7 +1,7 @@
 /* NON_MATCHING: only register allocation of the bit temporaries differs */
 #include "common.h"
 #include "status/StatusCamera.h"
-#include "shard/dataTable05Sub9GetCount.h"
+#include "util/CalleeContracts.h"
 
 struct IdRecord {
     u16 id;  // 0x00

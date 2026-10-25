@@ -1,8 +1,8 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "util/CalleeContracts.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
-#include "shard/FUN_0037eb64.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_003e4978(void);

@@ -20,11 +20,6 @@ struct BtlMenuPanel {
     /* 0x3C98 */ u32 clear[4];
 };
 
-struct BtlMenuMainState {
-    /* 0x0000 */ u8 unk0000[0x45A0];
-    /* 0x45A0 */ u32 flagsA;
-    /* 0x45A4 */ u32 flagsB;
-};
 
 extern "C" {
 extern u32 DAT_00573ba8;   /* battle flag mask tested against flagsA */
@@ -46,11 +41,11 @@ u32 FUN_002cc9e0(BtlMenuPanel *panel, u32 arg);
 /* Whether the current battle state blocks the menu (script flags, or either flag word masked). */
 static __inline bool btlMenuBlocked(void)
 {
-    reinterpret_cast<BtlMenuMainState *>(btlGetMainState());
+    btlGetMainState();
     if (btlScriptUnitHasFlags() != 0)
         return true;
-    BtlMenuMainState *state = reinterpret_cast<BtlMenuMainState *>(btlGetMainState());
-    return (state->flagsB & DAT_00573bac) != 0 || (DAT_00573ba8 & state->flagsA) != 0;
+    BtlMainStateA *state = btlGetMainState();
+    return (state->stateFlags.words[1] & DAT_00573bac) != 0 || (DAT_00573ba8 & state->stateFlags.words[0]) != 0;
 }
 
 /* Handles a request to the battle command menu: closes it, switches mode by the requested

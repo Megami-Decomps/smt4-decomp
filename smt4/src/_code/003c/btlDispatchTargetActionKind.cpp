@@ -6,11 +6,11 @@ u32 FUN_0022a5d8(u32 command, s32 target, u32 argument);
 
 u32 btlDispatchTargetActionKind(s32 target, s32 kind, u32 argument)
 {
-    BtlScript* battle = reinterpret_cast<BtlScript *>(btlGetMainState());
-    if ((battle->flags & 0x40) != 0) {
+    BtlMainState* battle = btlGetMainState();
+    if ((battle->battleFlags & 0x40) != 0) {
         return 0;
     }
-    if ((battle->flags & 0x100) != 0) {
+    if ((battle->battleFlags & 0x100) != 0) {
         return 0;
     }
     u32 command = 0;

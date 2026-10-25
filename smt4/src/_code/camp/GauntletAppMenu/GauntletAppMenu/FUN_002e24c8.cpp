@@ -6,7 +6,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 

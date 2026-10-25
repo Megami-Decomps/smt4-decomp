@@ -1,20 +1,7 @@
-#include "classes/Obj422318.h"
-/* NON_MATCHING: retail conditional instruction or constructor initialization ordering differs. */
-#include "common.h"
+#include "classes/Obj4222ac.h"
 
-struct CallbackState {
-    /* 0x00 */ const void *vtable;
-    /* 0x04 */ u8 unk04[0x54];
-    /* 0x58 */ s32 selection;
-};
-extern "C" {
-extern const u8 _ZTV9Obj4222ac[];
-/* Initializes the callback base and clears its selection. */
-CallbackState *_ZN9Obj4222acC1Ev(CallbackState *state)
+/* Constructs the Obj422318 base in mode 0 and sets the frame count to -1. */
+Obj4222ac::Obj4222ac() : Obj422318(0)
 {
-    state = (CallbackState *)(new (state) Obj422318(0));
-    state->vtable = _ZTV9Obj4222ac + 8;
-    state->selection = -1;
-    return state;
-}
+    frames = -1;
 }

@@ -1,11 +1,12 @@
 /* NON_MATCHING: range output stack slots and HP-percentage division operand scheduling differ. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-BtlMainState *btlGetMainState();
 u32 btlScriptResolveGroupArg(s32 group);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
@@ -22,14 +23,14 @@ u32 FUN_002dbc94()
         BtlEntry *entry = &state->entries[index];
         u32 flags = entry->flags;
         if (!(flags & BTL_ENTRY_FLAG_PRESENT) && (flags & BTL_ENTRY_FLAG_ACTIVE) &&
-            !(flags & BTL_ENTRY_FLAG_BLOCKED) && entry->value * 100 / entry->maxHp <= percentage) {
+            !(flags & BTL_ENTRY_FLAG_BLOCKED) && entry->hp * 100 / entry->maxHp <= percentage) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->hasActiveEntry) {
         BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->value * 100 / entry->maxHp <= percentage) {
+        if (entry != NULL && entry->hp * 100 / entry->maxHp <= percentage) {
             scrSetResult(1);
             return 1;
         }

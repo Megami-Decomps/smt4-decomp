@@ -1,4 +1,5 @@
 /* NON_MATCHING: register allocation and block layout differ (retail pushes r0-r3, keeps entries on the stack and does not merge the per-kind free/allocate blocks) */
+#include "nn/Result.h"
 #include "shard/CecMessageBox.h"
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -85,7 +86,7 @@ s32 FUN_0042d798(MessageBox *box, CecMessageIndexHeader *header, const void **en
                     flags->outboxOwned = 0;
                     nn_os_CriticalSection_Leave(&DAT_006426cc);
                 }
-                if (status < 0) {
+                if (nnResultIsFailure(status)) {
                     header->count = 0;
                     nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
                     return CEC_ERROR_NO_MEMORY;
@@ -117,7 +118,7 @@ s32 FUN_0042d798(MessageBox *box, CecMessageIndexHeader *header, const void **en
                     flags->inboxOwned = 0;
                     nn_os_CriticalSection_Leave(&DAT_006426cc);
                 }
-                if (status < 0) {
+                if (nnResultIsFailure(status)) {
                     header->count = 0;
                     nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
                     return CEC_ERROR_NO_MEMORY;
@@ -126,7 +127,7 @@ s32 FUN_0042d798(MessageBox *box, CecMessageIndexHeader *header, const void **en
                                                    &indexSize, box->id, 3, 18);
                 buffer = view->inboxBuffer;
             }
-            if (status >= 0 && indexSize != 0) {
+            if (nnResultIsSuccess(status) && indexSize != 0) {
                 if (indexSize < 32 || (rt_memcpy(header, reinterpret_cast<void *>(buffer), 32), header->size != indexSize) ||
                     indexSize < header->count * 0x70 + 32U) {
                     nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);

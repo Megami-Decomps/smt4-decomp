@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/memCopyWords.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 // Copy complete words, processing two words per iteration.

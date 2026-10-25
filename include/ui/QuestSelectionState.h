@@ -17,4 +17,14 @@ typedef char QuestSelectionStateOffsets[
     offsetof(QuestSelectionFlags, quest) == 0x1E &&
     offsetof(QuestSelectionFlags, selection) == 0x22 &&
     offsetof(QuestSelectionNotification, pending) == 0xAC ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00467df8();
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

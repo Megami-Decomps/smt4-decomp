@@ -26,7 +26,7 @@ typedef char BattleActionStateSlotOffsetCheck[
 extern "C" BattleActionState g_btlAction;
 
 // Resolve a script context's selected battle-unit slot.
-extern "C" BattleActionUnit *btlUnitGet(BtlState *const *reference)
+extern "C" BattleActionUnit *btlUnitGet(BtlMainState *const *reference)
 {
     const BattleScriptContext *context = reinterpret_cast<const BattleScriptContext *>(*reference);
     if (context == NULL)

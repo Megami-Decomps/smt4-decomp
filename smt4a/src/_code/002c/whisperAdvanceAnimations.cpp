@@ -1,7 +1,6 @@
 /* NON_MATCHING: animation-key iteration and layer/line interpolation use different VFP and loop registers. */
 #include "result/WhisperEffect.h"
 #include <stddef.h>
-#include "shard/FUN_0021c118.h"
 
 typedef char CheckWhisperParticleSize[sizeof(WhisperParticleAnimation) == 0x20 ? 1 : -1];
 typedef char CheckWhisperLineSize[sizeof(WhisperLineAnimation) == 0x34 ? 1 : -1];

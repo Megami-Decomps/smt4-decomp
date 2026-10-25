@@ -1,12 +1,17 @@
-/* NON_MATCHING: retail uses different vector-store grouping and address registers for transition initialization. */
+/* NON_MATCHING: only the register of the 1776-offset address/zero (retail r4/r3) differs; vector copy matches. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" BattleVector3 DAT_00493530;
 
+static __inline void battleVectorCopy(BattleVector3 *destination, const BattleVector3 *source)
+{
+    *destination = *source;
+}
+
 /* Starts the vector transition and resets its progress. */
 extern "C" void FUN_003d7244(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z)
 {
-    DAT_00493530 = state->current;
+    battleVectorCopy(&DAT_00493530, &state->current);
     state->alternateDestination.x = x;
     state->alternateDestination.y = y;
     state->alternateDestination.z = z;

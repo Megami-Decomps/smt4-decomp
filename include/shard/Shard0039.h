@@ -12,4 +12,14 @@ struct TextureRequestCache {
     /* 0x94 */ u32 states[1];
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void convertToBufferAndStore(u32 src, u16 *dst);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

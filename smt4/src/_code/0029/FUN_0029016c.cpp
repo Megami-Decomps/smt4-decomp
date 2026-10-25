@@ -18,7 +18,7 @@ typedef struct GameFlagBlock29016c {
 GameFlagBlock29016c *gameGetFlagBlock(void);
 void FUN_0023ddbc(u32 id, s32 value);
 
-static inline void gameFlagWrite(u32 id, s32 value)
+static inline void gameFlagWrite(u32 id, u32 value)
 {
     u8 *bits = gameGetFlagBlock()->bits;
     FUN_0023ddbc(id, value);

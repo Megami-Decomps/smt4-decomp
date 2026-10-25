@@ -1,8 +1,8 @@
 /* NON_MATCHING: transition resets reuse the cached zero instead of retail's fresh zero registers; common-return layout also differs. */
 #include "common.h"
 #include "util/CalleeContracts.h"
-#include "event/2dEvent/SmokeFade.h"
 #include "shard/FUN_002effbc.h"
+#include "event/2dEvent/SmokeFade.h"
 
 struct CleanupProcessState {
     /* 0x00 */ u8 unk00[8];

@@ -9,7 +9,7 @@ extern "C" {
 u32 FUN_002f78dc(void)
 {
     u32 bit = scrGetArg(0);
-    u64 flags = btlGetMainStateExt()->flags49D0;
+    u64 flags = btlGetMainState()->flags49D0;
     scrSetResult((flags & (s64)(1 << bit)) != 0);
     return 1;
 }

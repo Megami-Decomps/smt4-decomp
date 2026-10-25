@@ -1,7 +1,9 @@
 /* NON_MATCHING: result code three is not retained across skill validation, and shared return-zero/three blocks have different placement. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "gamedata/Table04Record.h"
 #include <stddef.h>
+#include "battle/BtlMainAccess.h"
 
 namespace {
 struct BattleActionDefinition {
@@ -23,7 +25,6 @@ typedef char BattleActionDefinitionOffsetsCheck[sizeof(BattleActionDefinition) =
 extern "C" {
 BattleActionDefinition *dataTable08Sub1GetRecord(u16 id);
 Table04Record *dataTable40FindById(u32 skillId);
-BtlMainState *btlGetMainState(void);
 s32 FUN_0033fe6c(s32 side, s32 mode, BattleActionDefinition *action, s32 enabled);
 s32 FUN_0023d9b8(s32 side, s32 mode, Table04Record *skill);
 

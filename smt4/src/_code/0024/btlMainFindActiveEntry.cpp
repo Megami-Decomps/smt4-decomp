@@ -1,4 +1,5 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 // Finds the first present entry with the active-selection flag.
 extern "C" BtlEntry* btlMainFindActiveEntry(BtlMainState* state)

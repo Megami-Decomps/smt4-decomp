@@ -32,7 +32,7 @@ struct BtlEntryLower {
 };
 
 /* A battle entry (observed fields). */
-struct BtlEntry {
+struct BtlStatusEntry {
     /* 0x000 */ u32 flags;
     /* 0x004 */ u8 unk004[0xFC];
     /* 0x100 */ BtlEntryLower lower;
@@ -56,7 +56,7 @@ struct BtlStateRecords {
 extern "C" {
 
 void btlTargetSetFlag10(BtlStateRecords *state, s32 id, s32 value);
-BtlEntry *btlMainFindEntryByListedId(BtlStateRecords *state, s32 id);
+BtlStatusEntry *btlMainFindEntryByListedId(BtlStateRecords *state, s32 id);
 BtlStatusRecord *gameGetUnitRecord(s32 index);
 u16 FUN_00245cc0(s32 kind);
 void FUN_0033b1ac(BtlStateRecords *state, s32 value);
@@ -66,7 +66,7 @@ void FUN_0033b1ac(BtlStateRecords *state, s32 value);
 void FUN_003bcdb0(s32 id, s32 set, u16 status)
 {
     BtlStateRecords *state = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
-    BtlEntry *entry = btlMainFindEntryByListedId(state, id);
+    BtlStatusEntry *entry = btlMainFindEntryByListedId(state, id);
 
     if (entry != NULL) {
         if ((entry->flags & ENTRY_FLAG_DOWN) == 0) {
@@ -108,7 +108,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 if ((status & STATUS_BIT_B) != 0) {
                     u16 value = FUN_00245cc0(22);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
-                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+                    BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
                         *(u16 *)((u8 *)target + 0x9E) = value;
@@ -117,7 +117,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 if ((status & STATUS_BIT_A) != 0) {
                     u16 value = FUN_00245cc0(23);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
-                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+                    BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
                         *(u16 *)((u8 *)target + 0xA0) = value;
@@ -126,7 +126,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 if ((status & STATUS_BIT_C) != 0) {
                     u16 value = FUN_00245cc0(24);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
-                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+                    BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
                         *(u16 *)((u8 *)target + 0xA2) = value;
@@ -135,7 +135,7 @@ void FUN_003bcdb0(s32 id, s32 set, u16 status)
                 if ((status & STATUS_BIT_D) != 0) {
                     u16 value = FUN_00245cc0(25);
                     BtlStateRecords *other = reinterpret_cast<BtlStateRecords *>(btlGetMainState());
-                    BtlEntry *target = btlMainFindEntryByListedId(other, id);
+                    BtlStatusEntry *target = btlMainFindEntryByListedId(other, id);
 
                     if (target != NULL) {
                         *(u16 *)((u8 *)target + 0xA4) = value;

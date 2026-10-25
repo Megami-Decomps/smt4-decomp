@@ -1,5 +1,5 @@
 #include "gamedata/DataTable25.h"
-#include "shard/FUN_002bcf4c.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 
 extern "C" {
 

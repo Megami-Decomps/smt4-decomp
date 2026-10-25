@@ -1,5 +1,5 @@
 #include "ui/SpriteTransition.h"
-#include "shard/bustupConfigureSlotTransition.h"
+#include "util/CalleeContracts.h"
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 SpriteTransitionWork *jobGetWork(u32 job);

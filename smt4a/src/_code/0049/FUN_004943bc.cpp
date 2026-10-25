@@ -1,7 +1,7 @@
 /* NON_MATCHING: Comparator locals use a different saved-register allocation and omit retail's extra right-entry pointer copy on a tie. */
 #include "common.h"
 #include "addon/AocEntryKind.h"
-#include "shard/contentGetUpgradedKindValue.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
 u16 FUN_0049c9a0(const u16 *entry);

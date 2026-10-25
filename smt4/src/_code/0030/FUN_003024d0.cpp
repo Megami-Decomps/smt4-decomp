@@ -2,7 +2,6 @@
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "gfx/QuaternionWorkspace.h"
 #include <math.h>
-#include "shard/randomAdvanceShiftRegister.h"
 
 extern "C" {
 extern QuaternionWorkspace DAT_004ea81c;

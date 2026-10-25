@@ -1,6 +1,5 @@
 /* NON_MATCHING: near (209 rows against 209): same flow, constants, render-target push/pop and float maths; retail reads `visible` through a pointer to a 0x300 sub-block of the save/load UI (add r0,r4,#768; ldrb [r0,#84]) and the entry-lock byte as (ui+index)+844, keeps the zero constant in r7 instead of r6, and loads the three globals in a different order, which a flat struct does not reproduce */
 #include "gamedata/DataTable.h"
-#include "shard/FUN_0029dfc0.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;

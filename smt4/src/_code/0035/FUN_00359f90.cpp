@@ -1,7 +1,6 @@
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
-#include "shard/FUN_002bbb2c.h"
 
 extern "C" {
 

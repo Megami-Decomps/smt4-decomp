@@ -89,7 +89,7 @@ u32 FUN_00190ab0(SkillMenuWork *work)
                 resetSprites(work);
             }
         } else {
-            if ((*(u32 *)(reinterpret_cast<s32>(btlGetMainState()) + 0x44A8) & 0x40) == 0) {
+            if ((btlGetMainState()->editorControl.flags & 0x40) == 0) {
                 if (FUN_00293988(reinterpret_cast<void *>(reinterpret_cast<s32>(btlGetMainState()))) == 0) {
                     return 0;
                 }

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "gamedata/PartyMoney.h"
 #include "status/StatusCamera.h"
-#include "shard/FUN_0029c1c8.h"
+#include "util/CalleeContracts.h"
 
 namespace {
 struct PurchaseEntry {

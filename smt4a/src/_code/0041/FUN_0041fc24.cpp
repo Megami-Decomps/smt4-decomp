@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected/applied slot comparison recovered; occupied-slot address and save-name copy scheduling still differ. */
+/* NON_MATCHING: occupied-slot flag address is selection + (work + 0x2ec) in retail (add r1,r4,#748; ldrb [r0,r1]); the build forms work + selection then adds the offset. */
 #include "common.h"
 #include <stddef.h>
 #include "util/CalleeContracts.h"
@@ -50,7 +50,7 @@ void FUN_0041fc24(void *context)
         s32 appliedSlot; // 0x64
         u8 unk068[4];
         Profile profiles[5]; // 0x6c
-        u8 slotFlags[12]; // 0x2ec
+        s8 slotFlags[12]; // 0x2ec
         s32 selectedSlot; // 0x2f8
     };
     struct SaveNameView { u8 unk00[0x54]; char playerName[0x16]; };
@@ -76,8 +76,7 @@ void FUN_0041fc24(void *context)
         player->experience = profile->experience;
         libc_strcpy(player->name, profile->name);
         player->id = profile->id;
-        SaveNameView *save = static_cast<SaveNameView *>(gameDataBlocksGetSaveData());
-        libc_strcpy(save->playerName, profile->name);
+        libc_strcpy(static_cast<SaveNameView *>(gameDataBlocksGetSaveData())->playerName, profile->name);
         gameGlobalsQueueValues(work->player, 0);
         FUN_0033440c(work->profiles[work->appliedSlot].category);
         profile = &work->profiles[work->appliedSlot];

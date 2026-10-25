@@ -1,4 +1,5 @@
 /* NON_MATCHING: reset-store scheduling, thread descriptor stack placement and saved-register allocation differ. */
+#include "nn/Result.h"
 #include "mobiclip_ctrl/MoviePlayerInitialization.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -75,7 +76,7 @@ u32 FUN_00351498(MoviePlayerInitialization *player, void *fileBackend, void *rea
     MoviePlayerInitialization *argument = player;
     s32 result = FUN_002bcc60(player->initialization.thread, &descriptor, FUN_0034fb94,
         &argument, DAT_0044d15c->info.address + DAT_0044d15c->info.size, 17, -2, 0);
-    if (result < 0)
+    if (nnResultIsFailure(result))
         FUN_002c526c(result);
     return 1;
 }

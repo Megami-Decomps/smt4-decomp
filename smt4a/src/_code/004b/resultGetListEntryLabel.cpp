@@ -1,6 +1,6 @@
 /* NON_MATCHING: mode-one/three label selection and shared override-tail layout differ from retail, changing switch targets and branch placement. */
 #include "common.h"
-#include "shard/dataTableHasMatchingEntry35.h"
+#include "shard/W5_W5Match7_SelectedRecord.h"
 
 struct ResultListEntry {
     u8 unk00[0x20];

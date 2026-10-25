@@ -30,7 +30,7 @@ struct EnemyTurnWork {
 };
 
 struct EnemyAiContext {
-    /* 0x00 */ BtlMainStateExt *battle;
+    /* 0x00 */ BtlMainState *battle;
 };
 
 struct SkillRecord40 {
@@ -56,7 +56,7 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
 {
     BattleActionInfo info;
     TargetCandidate scratch[0x85];
-    BtlMainStateExt *battle = btlGetMainStateExt();
+    BtlMainState *battle = btlGetMainState();
     FUN_00247478(&info, battle, work->unit);
     for (s32 i = 0; i < 0x85; i++) {
         out[i].id = -1;
@@ -85,13 +85,13 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
     else if (info.kind == 1)
         favourGuarding = true;
     s32 power = info.powerMax;
-    if (!(context->battle->flags44A0 & 0x40000) && info.powerMin < info.powerMax)
+    if (!(context->battle->battleFlags & 0x40000) && info.powerMin < info.powerMax)
         power = info.powerMin + randRange((u16)(info.powerMax - info.powerMin));
-    else if (!(context->battle->flags44A0 & 0x40000))
+    else if (!(context->battle->battleFlags & 0x40000))
         power = info.powerMin;
     for (s32 target = 0; target < 0x6D; target++) {
         if (work->allowed[target] &&
-            ((context->battle->units[target].flags & 0x40) || FUN_00229914(context, work, target)))
+            ((context->battle->entries[target].flags & 0x40) || FUN_00229914(context, work, target)))
             work->allowed[target] = 0;
     }
     if (pickOne) {
@@ -107,10 +107,10 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
             s32 pick = randRange((u16)(count - 1));
             out[0].id = scratch[pick].id;
             out[0].weight = 1;
-            if (context->battle->firstBonus < 0)
-                context->battle->firstBonus = (s8)power;
-            if (context->battle->secondBonus < 0)
-                context->battle->secondBonus = (s8)power;
+            if (context->battle->core.firstBonus < 0)
+                context->battle->core.firstBonus = (s8)power;
+            if (context->battle->core.secondBonus < 0)
+                context->battle->core.secondBonus = (s8)power;
         }
         return;
     }
@@ -121,17 +121,17 @@ void FUN_003cf4f8(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
         bool guarding = false;
         s32 slot = context->battle->actions[target].participant.combatantIndex;
         if (slot >= 0) {
-            BtlUnitEntry *unit = &context->battle->units[slot];
+            BtlEntry *unit = &context->battle->entries[slot];
             if (unit != NULL && (unit->flags & 0x100))
                 guarding = true;
         }
         out[count].id = (s16)target;
         out[count].weight = (s16)power;
         if (guarding && favourGuarding && !broadSkill) {
-            if (context->battle->firstBonus < 0)
-                context->battle->firstBonus = (s8)power * 3;
-            if (context->battle->secondBonus < 0)
-                context->battle->secondBonus = (s8)power * 3;
+            if (context->battle->core.firstBonus < 0)
+                context->battle->core.firstBonus = (s8)power * 3;
+            if (context->battle->core.secondBonus < 0)
+                context->battle->core.secondBonus = (s8)power * 3;
         }
         count++;
     }

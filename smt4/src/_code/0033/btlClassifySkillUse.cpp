@@ -1,10 +1,11 @@
 #include "common.h"
 #include "gamedata/Table04Record.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 Table04Record *dataTable40FindById(u32 skillId);
-BtlMainState *btlGetMainState();
 u32 FUN_0023d9b8(s32 unit, s32 mode, Table04Record *skill);
 
 // Classify an attempted skill use and report resource-related failures.

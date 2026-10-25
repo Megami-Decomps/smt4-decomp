@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the work pointer into r0 before storing the flag; compiler uses r1. */
 #include "common.h"
 
 extern "C" {
@@ -8,9 +7,14 @@ struct RequestWork {
 };
 extern RequestWork *g_lmapMainState;
 
+static __inline void requestWorkSetRequested(RequestWork *work, u8 requested)
+{
+    work->requested = requested;
+}
+
 /* Raises the pending request flag on the local map work. */
 void lmapRequest(void)
 {
-    g_lmapMainState->requested = 1;
+    requestWorkSetRequested(g_lmapMainState, 1);
 }
 }

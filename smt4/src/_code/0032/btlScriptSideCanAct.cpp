@@ -1,4 +1,6 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -6,7 +8,6 @@ s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 u32 btlScriptResolveGroupArg(s32 side);
 void FUN_002499fc(u32 group, s32 *first, s32 *count);
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 /* Script command: result 1 when some active, present and unblocked entry of side `arg0` (or the

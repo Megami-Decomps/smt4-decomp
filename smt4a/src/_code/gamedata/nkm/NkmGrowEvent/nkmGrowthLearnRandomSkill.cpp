@@ -1,10 +1,12 @@
-/* NON_MATCHING: exclusion initialization copies halfwords rather than four words and loop registers differ; -O2 candidate. */
+/* NON_MATCHING: only the register numbers of the final empty-slot search loop (i/temporary) differ. */
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
+// The demon's eight skill ids; copied as one 16-byte block.
+union GrowSkillSet { u16 ids[8]; u32 words[4]; };
 struct GrowDemon {
     u8 unk00[0x34];
-    u16 skills[8];
+    GrowSkillSet skills;
     u8 unk44[0x1e];
     u16 id;
 };
@@ -29,8 +31,8 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\nkm\\NkmGrowEvent.cpp", 598);
     u16 *candidates = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0x3ea, 1);
-    const GrowDefinition *definition = FUN_00184310(demon->id);
     s32 rank = 0;
+    const GrowDefinition *definition = FUN_00184310(demon->id);
     for (s32 i = 0; i < 8; ++i) {
         if (definition->skills[i]) {
             const CompactSortRecord *skill = findSkillMetadataById(definition->skills[i]);
@@ -39,17 +41,22 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
         }
     }
     s32 roll = randRange(99);
-    u16 excluded[16] = {
-        demon->skills[0], demon->skills[1], demon->skills[2], demon->skills[3],
-        demon->skills[4], demon->skills[5], demon->skills[6], demon->skills[7],
-        definition->learned[0].skill, definition->learned[1].skill,
-        definition->learned[2].skill, definition->learned[3].skill,
-        definition->learned[4].skill, definition->learned[5].skill,
-        definition->learned[6].skill, definition->learned[7].skill
-    };
     if (roll < 3)
         ++rank;
-    qsort(excluded, 16, sizeof(u16), uiCompareHalfwordKeysDescending);
+    struct {
+        GrowSkillSet demon;
+        u16 learned[8];
+    } excluded;
+    excluded.demon = demon->skills;
+    excluded.learned[0] = definition->learned[0].skill;
+    excluded.learned[1] = definition->learned[1].skill;
+    excluded.learned[2] = definition->learned[2].skill;
+    excluded.learned[3] = definition->learned[3].skill;
+    excluded.learned[4] = definition->learned[4].skill;
+    excluded.learned[5] = definition->learned[5].skill;
+    excluded.learned[6] = definition->learned[6].skill;
+    excluded.learned[7] = definition->learned[7].skill;
+    qsort(&excluded, 16, sizeof(u16), uiCompareHalfwordKeysDescending);
     s32 count = 0;
     do {
         for (u16 id = 1; id <= 500; ++id) {
@@ -58,22 +65,23 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
                 continue;
             bool known = false;
             for (s32 i = 0; i < 16; ++i) {
-                if (excluded[i] == id) {
+                if (excluded.demon.ids[i] == id) {
                     known = true;
                     break;
                 }
-                if (!excluded[i])
+                if (!excluded.demon.ids[i])
                     break;
             }
             if (!known)
                 candidates[count++] = id;
         }
-    } while (count < 1 && --rank >= 0);
+    } while (count <= 0 && --rank >= 0);
     u16 selected = 0;
+    s32 i;
     if (count > 0) {
         s32 index = randRange((count - 1) & 0xffff);
-        for (s32 i = 0; i < 8; ++i) {
-            if (!demon->skills[i]) {
+        for (i = 0; i < 8; ++i) {
+            if (!demon->skills.ids[i]) {
                 selected = candidates[index];
                 FUN_004bd6b0(demon, selected);
                 break;

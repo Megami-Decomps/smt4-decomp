@@ -1,6 +1,6 @@
 /* NON_MATCHING: work and its +0x1000 base trade r4/r5, the constant 2 is kept in r6, and the step/frame stores are not paired into strd. */
 #include "common.h"
-#include "shard/dataTable33IsLoaded.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 

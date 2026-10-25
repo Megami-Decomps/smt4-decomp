@@ -1,6 +1,6 @@
 /* NON_MATCHING: twin of smt4 FUN_002d508c; readable rewrite compiles (175 vs 165 rows); register allocation and stack frame differ */
 #include "common.h"
-#include "shard/FUN_0029202c.h"
+#include "shard/W6_W6Match2_TitleCommand.h"
 
 struct Vec3f {
     f32 x, y, z;

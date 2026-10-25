@@ -30,7 +30,7 @@ void FUN_0041e7c0(SdCardMenu *menu)
                 flaggedEntrySetValueA(&menu->list, 1);
             }
         } else if (value >= 1) {
-            const s32 lastVisibleIndex = span - 1;
+            const u32 lastVisibleIndex = span - 1;
             if (offset + lastVisibleIndex > total && menu->previousTotal > total) {
                 scrollOwnerSetValue(&menu->list, position + 1);
                 flaggedEntrySetValueA(&menu->list, 0);

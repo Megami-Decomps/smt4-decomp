@@ -63,4 +63,14 @@ typedef struct Unit3FC {
     /* 0x3FC */ u32 unit;
 } Unit3FC;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00376fb8(u8 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

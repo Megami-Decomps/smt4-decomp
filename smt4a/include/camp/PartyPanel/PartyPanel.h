@@ -7,4 +7,14 @@ extern "C" {
 void FUN_00215bd0(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00215bbc();
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail repeats an already-decided button-type test and duplicates offset drawing paths; the readable version shares those paths. */
 #include "common.h"
 #include "util/Vec2Fixed.h"
-#include "shard/TextureDrawCall.h"
 #include "shard/recordGetModeForId.h"
+#include "shard/TextureDrawCall.h"
 
 struct GridButtonSlide {
     u8 unk00[0xc];

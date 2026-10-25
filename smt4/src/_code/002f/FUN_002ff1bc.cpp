@@ -1,18 +1,10 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 namespace {
 
-struct BattleEntryView {
-    u32 flags;                  // 0x000
-    u8 unk04[0x1EE];            // 0x004
-    u16 unk1F2[75];             // 0x1F2
-};
-
-struct BattleMainStateView {
-    u8 unk00[0x1FC0];           // 0x0000
-    BattleEntryView* entries;   // 0x1FC0
-};
 
 }
 
@@ -26,11 +18,11 @@ u32 FUN_002ff1bc(void)
     const s32 fieldIndex = scrGetArg(0);
 
     for (s32 entryIndex = 0; entryIndex < 109; ++entryIndex) {
-        BattleEntryView* entry = &reinterpret_cast<BattleMainStateView *>(btlGetMainState())->entries[entryIndex];
+        BtlEntry* entry = &btlGetMainState()->entries[entryIndex];
 
         if ((entry->flags & 0x10) != 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 &&
-            (entry->unk1F2[fieldIndex] >> 10) == 4) {
+            (entry->values[fieldIndex] >> 10) == 4) {
             scrSetResult(1);
             return 1;
         }

@@ -4,15 +4,14 @@
 
 extern "C" {
 
-struct BattleState { u8 unk0000[0x45a0]; u32 mask[2]; };
 extern u32 DAT_00570dc8[2];
 void sysPlaySe(s32 sound);
 
 s32 FUN_0035f5a8(void)
 {
-    BattleState *state = reinterpret_cast<BattleState *>(btlGetMainState());
-    state->mask[0] |= DAT_00570dc8[0];
-    state->mask[1] |= DAT_00570dc8[1];
+    BtlMainStateA *state = btlGetMainState();
+    state->stateFlags.words[0] |= DAT_00570dc8[0];
+    state->stateFlags.words[1] |= DAT_00570dc8[1];
     sysPlaySe(223);
     return 1;
 }

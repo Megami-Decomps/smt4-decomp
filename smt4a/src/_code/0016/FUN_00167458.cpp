@@ -1,6 +1,6 @@
 /* NON_MATCHING: -O2 restores retail branch layout; displacement negation and final result-pointer allocation still differ. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "shard/FUN_00167458.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 void FUN_001807a0(SpritePlaybackView *sprite, f32 speed);

@@ -1,6 +1,8 @@
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 struct ReflectedMemberActions {
     u8 unk00[0xc];
@@ -8,7 +10,6 @@ struct ReflectedMemberActions {
 };
 extern "C" {
 
-BtlMainState *btlGetMainState();
 ReflectedMemberActions *FUN_0027da30(BtlMainState *battle, s32 member);
 s32 FUN_0027dab0(BtlMainState *battle, const BtlActionRecord *member);
 

@@ -1,10 +1,10 @@
 /* NON_MATCHING: cached stat registers and original attribute-block copy grouping differ; initial flag stores and packed skill-bitfield operations now match structurally. */
 #include "battle/btlUnit.h"
+#include "util/CalleeContracts.h"
 #include "shard/PadState.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/PackedSkillSlot.h"
 #include <string.h>
-#include "shard/playerAlignmentClass.h"
 
 extern "C" {
 void clearTwoWords(void *);

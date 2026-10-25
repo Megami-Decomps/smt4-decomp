@@ -21,3 +21,13 @@ f32 textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, 
 f32 textDrawString(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 
 } /* extern "C" */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void effectSetByteSpeed(u32 speed);
+
+#ifdef __cplusplus
+}
+#endif

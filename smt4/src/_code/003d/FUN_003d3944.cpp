@@ -45,7 +45,7 @@ struct BtlSetupEntry {
 };
 
 /* The battle state (observed fields). */
-struct BtlState {
+struct BtlMainState {
     /* 0x0000 */ u8 unk0000[0x84];
     /* 0x0084 */ u32 unk84;
     /* 0x0088 */ u8 unk88[0x58];
@@ -85,22 +85,22 @@ extern "C" {
 extern BtlMainFlags *g_btlMain;
 extern u32 DAT_00435d18;
 
-void FUN_002569ac(BtlState **battle, u32 value);
-void btlEntryValuesCopy(BtlState **battle, BtlSetupEntry *entry);
+void FUN_002569ac(BtlMainState **battle, u32 value);
+void btlEntryValuesCopy(BtlMainState **battle, BtlSetupEntry *entry);
 Table40Record *dataTable40FindById(s32 id);
 Table08Record *dataTable08Sub1GetRecord(s32 id);
-void entryInvalidateStateTable(BtlState *state);
+void entryInvalidateStateTable(BtlMainState *state);
 void entryTableInvalidate(u32 table);
 void FUN_003da890(u32 table);
 void FUN_003d9d74(u32 table);
-void FUN_003cee94(BtlState **battle, BtlSetupEntry *entry);
+void FUN_003cee94(BtlMainState **battle, BtlSetupEntry *entry);
 void FUN_003db378(u32 table);
-s32 btlFindNthActiveSpecialEntry(BtlState *state, s32 flag);
+s32 btlFindNthActiveSpecialEntry(BtlMainState *state, s32 flag);
 BtlSoundRecord *FUN_00227ecc(u32 table, s32 flag);
-void FUN_0023e52c(BtlState **battle, BtlSetupEntry *entry, u32 first, u32 second);
-void FUN_003cc944(BtlState **battle, BtlSetupEntry *entry, s32 flag);
+void FUN_0023e52c(BtlMainState **battle, BtlSetupEntry *entry, u32 first, u32 second);
+void FUN_003cc944(BtlMainState **battle, BtlSetupEntry *entry, s32 flag);
 void modelSetResetSlots(u32 table);
-void bgmSwitchCurrent(BtlState *state, u32 musicId);
+void bgmSwitchCurrent(BtlMainState *state, u32 musicId);
 
 /* Takes the music kind of the table-40 record `id` unless it is none or the default. */
 static inline void chooseMusicKind(BtlSetupEntry *entry, s32 id)
@@ -119,7 +119,7 @@ static inline void chooseMusicKind(BtlSetupEntry *entry, s32 id)
 }
 
 /* Resets a battle entry, picks the music kind of its unit and starts the entry's audio. */
-void FUN_003d3944(BtlState **battle, BtlSetupEntry *entry, u32 unused3, u32 unused4)
+void FUN_003d3944(BtlMainState **battle, BtlSetupEntry *entry, u32 unused3, u32 unused4)
 {
 
     entry->unk570 = 0;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation and the order of the duplicate scans differ (retail keeps the order counts and the output cursor in different registers and re-tests the side per record); same loops, lists and calls. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
-#include "shard/battleGetEntryHalfword.h"
+#include "battle/btlHelp.h"
 
 namespace {
 /* A party slot record: its id at +0x46. */
@@ -33,7 +33,7 @@ struct OrderPair {
 }
 
 extern "C" {
-BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 s32 btlFindNthActiveSpecialEntry(BtlMainState *state, s32 arg);
 s32 recordCompareFloatKey(const void *a, const void *b);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
@@ -61,7 +61,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
         order[1][i].key = -1;
         BtlActionRecord *unit = &btlGetMainState()->actions[i];
         if (unit != NULL) {
-            BtlUnitEntry *record = btlMainFindEntryByListedId(btlGetMainState(), unit->memberId);
+            BtlEntry *record = btlMainFindEntryByListedId(btlGetMainState(), unit->memberId);
             if (record != NULL && (record->flags & 0x10) != 0 && unit->placement.slot < 0) {
                 s32 side = sideOf(unit);
                 s32 known = 0;
@@ -92,7 +92,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
         if (unit == NULL) {
             continue;
         }
-        BtlUnitEntry *record = btlMainFindEntryByListedId(btlGetMainState(), unit->memberId);
+        BtlEntry *record = btlMainFindEntryByListedId(btlGetMainState(), unit->memberId);
         if (record == NULL || (record->flags & 1) == 0) {
             continue;
         }
@@ -103,7 +103,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
             row->side = 0;
             row->index = 0;
         } else if ((record->flags & 8) != 0) {
-            row->id = record->groupId;
+            row->id = record->id;
             row->isEnemy = 0;
             row->side = 0;
             for (s32 k = 1; k < 4; k++) {
@@ -127,7 +127,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
                 continue;
             }
             seen[seenCount] = record->selectionIndex;
-            row->id = record->groupId;
+            row->id = record->id;
             row->isEnemy = 1;
             seenCount++;
             if (unit->placement.slot >= 0) {
@@ -147,7 +147,7 @@ s32 FUN_003aeb64(u32 unused, RosterRow *rows)
                 }
             }
         }
-        row->level = record->rosterLevel;
+        row->level = record->groupMask;
         row->stat7 = battleGetEntryHalfword(unit->memberId, 7);
         row->stat10 = battleGetEntryHalfword(unit->memberId, 10);
         row->stat11 = battleGetEntryHalfword(unit->memberId, 0xb);

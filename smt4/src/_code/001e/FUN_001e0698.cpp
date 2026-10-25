@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_001e0698.h"
+#include "shard/W6_W6Match8_UiResourceParameters.h"
 
 extern "C" {
 

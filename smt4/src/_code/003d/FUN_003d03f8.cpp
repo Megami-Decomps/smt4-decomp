@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail spills its argument words (push r0-r3, args read via stack) and evaluates the skill kind/amount tests with different register use; logic equivalent. */
 #include "common.h"
-#include "shard/FUN_00227d18.h"
+#include "battle/BtlMainAccess.h"
 
 /* A battle unit (accessed fields). */
 struct BtlUnit {

@@ -14,7 +14,7 @@ struct BattleResourceLookupView { u8 unk00[0x28]; u32 attributes; };
 struct BattleItemResourceView { u8 unk00[0x62]; u16 resourceId; };
 extern "C" {
 extern BattleResourceOwner *DAT_00435d18;
-BattleActionDescription FUN_00247478(BtlMainState *, BtlUnitEntry *);
+BattleActionDescription FUN_00247478(BtlMainState *, BtlEntry *);
 BattleResourceLookupView *dataTable40FindById(u32);
 BattleItemResourceView *dataTable08Sub1GetRecord(u32);
 void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
@@ -27,10 +27,10 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
     s32 resourceId = selection->command->skill;
     if (kind == 1) {
         u32 enabled = 1;
-        if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x2A)
+        if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x2A)
             enabled = 0;
-        u16 id = FUN_00247478(*battle, reinterpret_cast<BtlUnitEntry *>(selection->entry)).id;
-        u8 category = FUN_00247478(*battle, reinterpret_cast<BtlUnitEntry *>(selection->entry)).category;
+        u16 id = FUN_00247478(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).id;
+        u8 category = FUN_00247478(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).category;
         aocEntryBlockStore(DAT_00435d18, category, enabled, 0, id);
         return;
     }
@@ -40,7 +40,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         u16 itemResource = dataTable08Sub1GetRecord(resourceId)->resourceId;
         if (!itemResource) {
             u32 enabled = 1;
-            if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x10)
+            if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
                 enabled = 0;
             FUN_003daf3c(DAT_00435d18, resourceId, enabled, 0);
             return;
@@ -52,9 +52,9 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
     if (category == 2 || category == 3 || category == 4)
         normal = false;
     u32 enabled = 1;
-    if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x2A)
+    if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x2A)
         enabled = !normal;
-    else if (reinterpret_cast<BtlUnitEntry *>(selection->entry)->flags & 0x10)
+    else if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
         enabled = normal;
     objectSetResultFromLookup(DAT_00435d18, resourceId, enabled, 0);
 }

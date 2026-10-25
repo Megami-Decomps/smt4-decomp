@@ -1,7 +1,7 @@
 /* NON_MATCHING: block layout: retail ends the top-entry path with the shared state store and return, and the no-healing path branches back to it; armcc places the store after both paths. */
 #include "common.h"
 #include "util/CalleeContracts.h"
-#include "shard/messageDismissNumericBanner.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 struct FountainMenu {
     /* 0x000 */ u8 unk000[0x10];

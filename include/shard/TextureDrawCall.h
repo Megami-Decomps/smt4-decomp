@@ -24,4 +24,34 @@ u32 FUN_002b6ad0(void);
 #endif
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_00200574(u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00288498(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002886b0(unsigned arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

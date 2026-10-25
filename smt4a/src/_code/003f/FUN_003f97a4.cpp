@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase switch uses comparisons instead of a jump table; reveal VFP registers/stores differ. */
+/* NON_MATCHING: only the VFP load/store grouping of the opening/secondary/reveal counters differs (the phase switch now builds the jump table). */
 #include "common.h"
 
 struct CyclingPanelEntryA {
@@ -88,5 +88,7 @@ extern "C" void FUN_003f97a4(CyclingPanelWorkA *work)
         }
         break;
     }
+    case 4:
+        break;
     }
 }

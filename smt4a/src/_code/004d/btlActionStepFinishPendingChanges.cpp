@@ -1,4 +1,3 @@
-/* NON_MATCHING: 64-bit mask loads/clears combine into LDM/LDRD/STRD differently from retail's word operations. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -42,7 +41,7 @@ u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *bat
         step->flags |= 1;
     }
     if (scrRunOpcodesStub(step->process) == 2) {
-        if ((g_btlEvent.pendingMask & battle->stateFlags64.bits) != 0) {
+        if ((battle->stateFlags64.bits & g_btlEvent.pendingMask) != 0) {
             FUN_003756c8(0);
             if ((battle->stateFlags64.bits & g_btlEvent.uiMask) != 0) {
                 FUN_004aa8b0(g_btlUiBlock, 0);

@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (253 vs 249 rows); retail keeps the handler table pointers in literal-pool loads and the file-line assertion strings inline, ordering of the stack argument struct differs */
+#include "nn/Result.h"
 #include "common.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "sys/ResultReport.h"
@@ -170,7 +171,7 @@ void FUN_00344348(u8 fromMenu)
         void (*third)(void);
     } handlers = { 4, FUN_00514a64, FUN_00514b84, FUN_00514b14 };
     u32 result = FUN_002fb0d4(&recv->result, &handlers, FUN_002a28c0, &recv, recv->list->size + recv->list->begin, 0x11, -2, 0);
-    if ((result & 0x7e00000) != 0x600000 && (s32)result < 0) {
+    if ((result & 0x7e00000) != 0x600000 && (s32)nnResultIsFailure(result)) {
         FUN_002e3140(result);
     }
 }

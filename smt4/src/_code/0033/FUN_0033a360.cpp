@@ -17,7 +17,7 @@ void battleCreateSecondaryModels(u32 table, u32 models);
 /* Resets the scene's target slots for the script unit and rebuilds its secondary models. */
 void FUN_0033a360(BattleSceneSlots *scene)
 {
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     s32 i;
 
     btlSelectActorCommandMotion(g_btlScriptUnit, unit, 1);

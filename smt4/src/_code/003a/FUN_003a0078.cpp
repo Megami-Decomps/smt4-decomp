@@ -11,7 +11,7 @@ int FUN_003a0078(u16 *a, u16 *b)
 {
     s32 diff;
     u16 idA = *a;
-    u16 idB = *b;
+    s16 idB = *b;
     s32 keyB = 0;
     s32 keyA = 0;
     s32 kind;

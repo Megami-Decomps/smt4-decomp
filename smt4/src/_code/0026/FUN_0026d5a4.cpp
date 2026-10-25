@@ -1,5 +1,5 @@
 #include "ui/PartyPanelState.h"
-#include "shard/FUN_0026d5a4.h"
+#include "bible/bibleMain.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;

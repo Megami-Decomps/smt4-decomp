@@ -1,8 +1,8 @@
 #include "common.h"
+#include "util/PlatformResultCheck.h"
 extern "C" {
 u32 FUN_002bbaf8(void);
 s32 nn_fs_ipc_FileSystem_IsSdmcDetected(u32 *session, s8 *detected);
-void FUN_002bbb2c(s32 result, u32 location, u32 failed);
 s32 asdFsIsSdCardDetected(void)
 {
     u32 session = FUN_002bbaf8();

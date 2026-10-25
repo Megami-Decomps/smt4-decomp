@@ -1,4 +1,5 @@
 /* NON_MATCHING: Descriptor format dispatch uses branches rather than a jump table; grouped stores differ. */
+#include "nn/Result.h"
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -17,7 +18,7 @@ s32 FUN_00427e68(u32 key, u32 value)
 {
     const ResourceDescriptorRecordPrefixA *record;
     const s32 status = tokenResolveAddress(FUN_0016ccfc(), &record, key);
-    if (status < 0)
+    if (nnResultIsFailure(status))
         return status;
 
     const u32 identifier = record->identifier;

@@ -38,7 +38,7 @@ u32 FUN_0015fea8(void *, SoundArchiveWrapper *archive, u32 userDataSize)
         size += alignSoundPoolBytes(counts.unk04 * 0x138);
     }
     if (userDataSize != 0)
-        size += ((userDataSize + 3) & ~3u) * (counts.thirdCount + counts.firstCount + counts.secondCount);
+        size += ((userDataSize + 3) & ~3u) * (counts.firstCount + counts.thirdCount + counts.secondCount);
     return size;
 }
 }

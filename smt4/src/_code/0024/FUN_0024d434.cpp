@@ -1,6 +1,7 @@
 /* NON_MATCHING: member lookup is not pair-unrolled, saved state/index/part roles differ and vector-return epilogues merge; arrangement kind 1 now has its explicit zero-height case. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
 
@@ -32,7 +33,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         u8 unk18[0x28];
         f32 scale;
     };
-    BtlActionRecord *action = &state->actions.records[index];
+    BtlActionRecord *action = &state->actions[index];
     BattleVector3 position;
     if (!(action->status & 0x10) || forceEnemy) {
         BtlEntry *entry = btlMainFindEntryByListedId(state, action->memberId);

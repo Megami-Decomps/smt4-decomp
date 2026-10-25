@@ -2,7 +2,7 @@
  * is a __switch$$ relocation in the build and raw words in retail. */
 #include "shard/S2Scene3a.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
-#include "shard/FUN_0029a084.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 

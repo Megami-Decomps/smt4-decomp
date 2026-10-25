@@ -1,7 +1,6 @@
 /* NON_MATCHING: active first-indicator branch remains inline instead of retail's out-of-line block and padding. */
 #include "status/StatusDown.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/FUN_00288498.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;

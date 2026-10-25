@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_0025921c.h"
+#include "shard/W6_W6Match3_ForwardEffect.h"
 
 extern "C" {
 

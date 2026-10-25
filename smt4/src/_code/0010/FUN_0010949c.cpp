@@ -1,4 +1,3 @@
-/* NON_MATCHING: flag loads now share the high-offset base (s8 flags); retail's fadeEnabled==0 exit returns the zero in r0 directly (beq pop), armcc here predicates the second test and branches to a shared mov r0,#0. */
 #include "ui/FrameTex.h"
 #include "shard/JobWork.h"
 extern "C" {
@@ -11,21 +10,22 @@ u8 FUN_0010949c(u32 job)
     if (work->fadeActive == 0) {
         return 0;
     }
-    if (work->fadeEnabled != 0) {
-        s32 elapsed = work->elapsed + 1;
-        work->elapsed = elapsed;
-        if (work->duration < elapsed) {
-            work->fadeActive = 0;
-        } else {
-            s32 alpha = 255 - elapsed * 255 / work->duration;
-            if (alpha > 255) {
-                alpha = 255;
-            } else if (alpha < 0) {
-                alpha = 0;
-            }
-            work->color = alpha | 0xFFFFFF00;
-            FUN_001132fc(1);
+    if (work->fadeEnabled == 0) {
+        return 0;
+    }
+    s32 elapsed = work->elapsed + 1;
+    work->elapsed = elapsed;
+    if (work->duration < elapsed) {
+        work->fadeActive = 0;
+    } else {
+        s32 alpha = 255 - elapsed * 255 / work->duration;
+        if (alpha > 255) {
+            alpha = 255;
+        } else if (alpha < 0) {
+            alpha = 0;
         }
+        work->color = alpha | 0xFFFFFF00;
+        FUN_001132fc(1);
     }
     return 0;
 }

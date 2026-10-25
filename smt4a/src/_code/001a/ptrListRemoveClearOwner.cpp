@@ -26,7 +26,7 @@ static void ptrVectorErase(PtrVector *vec, PtrListItem **it)
 
         if (next != vec->end) {
             s32 count = vec->end - next;
-            s32 i;
+            u32 i;
 
             for (i = 0; i < count; i++) {
                 it[i] = next[i];

@@ -1,5 +1,5 @@
 #include "shard/Shard004B.h"
-#include "shard/dataTable33IsLoaded.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 

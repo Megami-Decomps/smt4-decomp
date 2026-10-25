@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail dispatches the state switch through a jump table (cases 1-3); built uses a compare chain. */
 #include "common.h"
 
 extern "C" {
@@ -27,10 +26,14 @@ void asdProcessEnd(Process *process)
         child = next;
     }
     switch (process->state) {
+    case 0:
+        break;
     case 1:
     case 2:
     case 3:
         process->state = 4;
+        break;
+    case 4:
         break;
     default:
         break;

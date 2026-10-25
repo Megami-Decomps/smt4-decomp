@@ -4165,3 +4165,10 @@
 002bf4f8 asdTMTexTableEntryAt inferred [med] twin of smt4a FUN_001834a4
 002be5a4 textDrawString inferred [high] twin of smt4a FUN_00162790: forwards to the glyph layout routine with the string length and default scale, returns the advance
 00248620 dataTableFindRecordWord inferred [high] twin of smt4a dataTableFindRecordWord: add-on record lookup first (stubbed in this game), else entry of data table 5 section 9
+002e14b0 soundFreeBufferStub inferred nop wrapper tail-calling the real buffer free at 0x2e14b4
+002e14b4 objectFreeBuffer inferred frees g_asdSound buffer at +0x478 and clears it
+0010baf8 processDispatchFinishedNodes inferred [med] runs each registry node (state byte 3) callback, or the default handler when it has none
+00192990 scrOpLogicalNot inferred [high] twin of smt4a FUN_00212880
+002e44a8 btlTalkBustupMatchesDevil inferred [med] true when the devil record's bust-up id equals the current talk bust-up's devil id
+00298d98 gameGetSavedRecordOrFallback inferred [med] returns the game-data block record for index 0/1, otherwise the supplied fallback
+0023a1f8 queryFailureResultOrZero inferred [med] returns the failure result of queryResultFailureOnly, 0 on success

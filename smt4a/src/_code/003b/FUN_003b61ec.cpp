@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
-#include "shard/FUN_003b61ec.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 s32 jobIsValid(u32);

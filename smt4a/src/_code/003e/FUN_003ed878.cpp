@@ -1,8 +1,8 @@
 /* NON_MATCHING: partner-state branch folding and 64-bit mask load/store grouping differ. */
 #include "battle/btlMain.h"
+#include "util/CalleeContracts.h"
 #include "battle/btlPartnerAttack.h"
 #include "battle/btlUnit.h"
-#include "shard/FUN_004abba8.h"
 
 // The queued command lies beyond the published BtlMainStateA extent.
 struct BattleTransitionStateView {

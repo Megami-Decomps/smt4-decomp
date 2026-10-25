@@ -1,7 +1,8 @@
 /* NON_MATCHING: callable/argument stack placement and result-failure branch predication differ. */
+#include "nn/Result.h"
 #include "AsdSDK/Source/Net/Cec/AsdCecProcess.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/asdCecInboxGetMessageCount.h"
+#include "shard/W6_W6Match3_OnlineValueCompletion.h"
 
 struct CecProcess;
 typedef void (*CecThreadEntry)(CecProcess*);
@@ -67,7 +68,7 @@ void FUN_0035af44(CecProcess* process)
     CecProcess* argument = process;
     s32 result = FUN_002fb0d4(&worker->thread, &descriptor, FUN_0028196c, &argument,
                              worker->stack.base + worker->stack.size, 17, -2, 0);
-    if ((u32(result) & 0x07E00000) != 0x00600000 && result < 0) {
+    if ((u32(result) & 0x07E00000) != 0x00600000 && nnResultIsFailure(result)) {
         FUN_002e3140(result);
     }
 }

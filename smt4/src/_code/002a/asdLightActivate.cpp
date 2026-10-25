@@ -1,6 +1,6 @@
 /* Marks light slot `index` active and not dirty. */
 #include "shard/S1Light.h"
-#include "shard/asdLightActivate.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern LightCount g_asdLightCount[];

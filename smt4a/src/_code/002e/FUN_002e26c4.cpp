@@ -1,5 +1,5 @@
 #include "gamedata/X14_Table21.h"
-#include "shard/FUN_002e26c4.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 
 extern "C" {
 

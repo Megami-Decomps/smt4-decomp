@@ -1,11 +1,7 @@
 #include "common.h"
+#include "battle/btlMain.h"
 
 extern "C" {
-
-typedef struct BtlMainState {
-    /* 0x0000 */ u8 unk0000[0x44A8];
-    /* 0x44A8 */ u32 flags;
-} BtlMainState;
 
 typedef struct CounterBlock {
     /* 0x000 */ u8 unk000[0x9D4];
@@ -22,7 +18,7 @@ u32 FUN_0023c0d0(StateRef *ref, CounterBlock *block, s32 index, s32 delta)
 {
     s32 value;
 
-    if (ref->state->flags & 4) {
+    if (ref->state->editorControl.flags & 4) {
         return 0;
     }
     value = block->counters[index * 5] + delta;

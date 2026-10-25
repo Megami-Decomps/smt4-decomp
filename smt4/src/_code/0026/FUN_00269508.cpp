@@ -20,7 +20,7 @@ extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
         end = curve->end;
         progress = static_cast<f32>(frame) / total;
     } else if (curve->intermediateCount == 1) {
-        s32 split = static_cast<s32>(curve->firstFraction * total);
+        u32 split = static_cast<s32>(curve->firstFraction * total);
         if (frame < split) {
             start = curve->start;
             end = curve->firstValue;
@@ -32,12 +32,12 @@ extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
         }
     } else if (curve->intermediateCount == 2) {
         s32 first = static_cast<s32>(curve->firstFraction * total);
-        if (frame < first) {
+        if (first > frame) {
             start = curve->start;
             end = curve->firstValue;
             progress = static_cast<f32>(frame) / static_cast<f32>(first);
         } else {
-            s32 second = static_cast<s32>(curve->secondFraction * total);
+            u32 second = static_cast<s32>(curve->secondFraction * total);
             if (frame < second) {
                 start = curve->firstValue;
                 end = curve->secondValue;

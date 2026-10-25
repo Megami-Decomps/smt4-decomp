@@ -3,7 +3,6 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "shard/scrGetArg.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 s32 FUN_002c1d5c(void);

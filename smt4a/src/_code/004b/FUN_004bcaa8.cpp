@@ -17,7 +17,7 @@ EquipmentData *FUN_00184310(u16 id);
 
 /* Collects into `out` the skills of equipment `id` unlocked above `level` that are not already in
  * `known` (8 entries); returns how many were added, none when `skip` is set. */
-s32 FUN_004bcaa8(u16 id, u32 level, const u16 *known, u16 *out, s32 skip)
+s32 FUN_004bcaa8(u16 id, u32 level, const u16 *known, s16 *out, s32 skip)
 {
     if (skip != 0) {
         return 0;

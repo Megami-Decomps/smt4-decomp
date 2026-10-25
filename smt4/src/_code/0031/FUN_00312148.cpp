@@ -1,12 +1,13 @@
 /* NON_MATCHING: the range's two words are read as ldrd here (retail: count, then first, as separate loads) and the out-pointer arguments are set up in the other order. */
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 struct EntryRange { u32 first; u32 count; };
-extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(s32 group, u32 *first, u32 *count);

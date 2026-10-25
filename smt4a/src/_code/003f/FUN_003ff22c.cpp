@@ -1,6 +1,6 @@
 /* NON_MATCHING: near miss: retail inlines the per-property change test as branch chains jumping to a shared set-bit tail (no bool result); register assignment differs. */
 #include "common.h"
-#include "shard/btlFindEntryValue.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 struct BtlEntryRef {
     u8 unk00[8];

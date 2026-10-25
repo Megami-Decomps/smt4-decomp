@@ -13,11 +13,11 @@ extern s32 FUN_00246454(s32 a, u32 unit, s32 entry);
 u32 scrCommBtlSetFlag16AfterEntryLookup(void)
 {
     u32 id = scrGetArg(0);
-    BtlMainStateExt *main = btlGetMainStateExt();
-    u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlMainState *main = btlGetMainState();
+    u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     FUN_00246454(0, unit, btlMainFindEntryByListedId(main, id));
-    main->flags44A0 |= 0x10000;
+    main->battleFlags |= 0x10000;
     return 1;
 }
 

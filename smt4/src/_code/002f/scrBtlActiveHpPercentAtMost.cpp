@@ -1,10 +1,11 @@
 #include "battle/EntryStats.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 
 extern s32 scrGetArg(u32 index);
-extern BtlMainState *btlGetMainState(void);
 extern BtlActiveEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern void scrSetResult(s32 value);
 

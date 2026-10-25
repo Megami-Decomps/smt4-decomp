@@ -15,7 +15,7 @@ struct AnimatedPage {
     PageAnimationTrack tracks[10]; /* 0x00fc */
     u8 unk0674[0xa200];
     s16 track;             /* 0xa874 */
-    u8 alternate;          /* 0xa876 */
+    s8 alternate;          /* 0xa876 */
 };
 struct PageSelectionGlobals {
     u32 unk00;

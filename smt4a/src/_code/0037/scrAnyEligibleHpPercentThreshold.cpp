@@ -1,4 +1,3 @@
-/* NON_MATCHING: required-mask low/high scratch assignment prevents LDM pairing; range layout and HP arithmetic match. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -27,7 +26,7 @@ u32 scrAnyEligibleHpPercentThreshold(void)
     FUN_00301a08(kind, reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&first)), reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&count)));
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
-        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded) &&
             hpPercent(entry->hp, entry->maxHp) >= threshold) {
             scrSetResult(1);

@@ -1,6 +1,9 @@
 #ifndef SHARD_W5_W5MATCH7_SCRIPTUNIT_H
 #define SHARD_W5_W5MATCH7_SCRIPTUNIT_H
 #include "battle/BattleUnitSlot.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "shard/W4_Match1b_Node.h"
 struct ScriptEntryInfo {
     /* 0x000 */ u8 unk000[0x12c];
     /* 0x12C */ u16 id;
@@ -35,4 +38,74 @@ extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 }
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00295cec(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00298dc8(int index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 affinityShouldReplaceState(s32 current, s32 incoming);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y, RelativeDirectory *directory, u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 flagValueIsPositive(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void nodeTreeReleaseFollowingSiblings(ReleaseTreeNode *node);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00237da0(u32 a, u32 b, u32 c, u32 d, const void *data, u32 flags, u32 e, u32 h, u32 i, u32 j);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

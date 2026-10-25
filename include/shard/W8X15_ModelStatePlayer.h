@@ -1,6 +1,9 @@
 #ifndef SHARD_W8X15_MODELSTATEPLAYER_H
 #define SHARD_W8X15_MODELSTATEPLAYER_H
 #include "common.h"
+#include "shard/W5_W5Match7_ControllerPose.h"
+#include "shard/W5_W5Match2_PlainData.h"
+#include "addon/aocMain.h"
 
 #define MODEL_MOTION_NONE 0xffff
 
@@ -36,5 +39,75 @@ static inline void *modelStateOwnerGetModel(ModelStateOwner *owner, u32 index)
     }
     return FUN_0040619c(owner->models, index);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_003f217c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00420f08(ModelStatePlayer *player);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00421078(ModelStatePlayer *player);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void controllerSetDestination(ControllerPose *owner, const MapVector *position);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void controllerSetPosition(ControllerPose *owner, f32 x, f32 y, f32 z);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void gfxResourceTableReleaseTexturesAndBuffers(ResourceTableView *table);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void mwmofilterDeblockerRelease(int param_1);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

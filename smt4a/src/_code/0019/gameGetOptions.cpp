@@ -1,5 +1,5 @@
 #include "romwright_types.h"
-#include "shard/gameGetOptions.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

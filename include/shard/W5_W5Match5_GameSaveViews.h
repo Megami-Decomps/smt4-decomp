@@ -54,4 +54,44 @@ SlotRecord *gameGetSlotRecord(s32 slotIndex);
 SlotSortInfo *FUN_00184310(u16 entryId);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0016e800(u32 key, u32 address);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void* FUN_00178b04(u32 memoryType, u32 unusedFirst, u32 unusedSecond);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_00182054(u8 arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00184b90(u8 *owner, s32 direction);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

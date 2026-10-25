@@ -1,15 +1,25 @@
-/* NON_MATCHING: compiler folds record address formation and does not preserve retail's final pointer check. */
 #include "common.h"
 
 namespace { struct Record { u8 padding[0x28]; f32 value; }; struct Pool { Record *records; u32 count; }; }
 
 extern "C" {
-/* Reads or updates the requested object state. */
 extern Pool DAT_00464a70;
+
+/* The record at `index`, or NULL when the pool is empty or the index is out of range. */
+static __inline Record *poolGetRecord(Pool *pool, u32 index)
+{
+    if (pool->records != NULL && index < pool->count) {
+        return &pool->records[index];
+    }
+    return NULL;
+}
+
+/* Sets the value of the requested record. */
 void FUN_002c44dc(u32 index, f32 value)
 {
-    if (DAT_00464a70.records != NULL && index < DAT_00464a70.count) {
-        DAT_00464a70.records[index].value = value;
+    Record *record = poolGetRecord(&DAT_00464a70, index);
+    if (record != NULL) {
+        record->value = value;
     }
 }
 }

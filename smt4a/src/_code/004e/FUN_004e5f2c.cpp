@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail 59 vs built 61 rows; action-mask loads, protected-value branches, and saved registers differ. */
+/* NON_MATCHING: retail loads the 64-bit marker mask with ldrd (built ldm) and reaches the slot value without ldr/str writeback (built `ldr [r6,#2532]!`); slot stride, minimum clamp and result match. */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -22,22 +22,19 @@ u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
         u8 unk160[0xFC];
         s32 maximum;
     };
-    struct ValueSlot {
-        u32 unk00;
-        s32 value;
-        u32 unk08[2];
+    struct ValueSlotsView {
+        s32 words[1];
     };
     extern ActionValueMasksView g_btlAction;
     BtlMainStateA *state = *owner;
     if ((state->markerMasks.bits & g_btlAction.disabledState) != 0)
         return 0;
-    ValueSlot *slots = reinterpret_cast<ValueSlot *>(static_cast<u8 *>(values) + 0x9E0);
-    ValueSlot *slot = &slots[index];
-    s32 value = slot->value + change;
+    s32 *slotValue = &static_cast<ValueSlotsView *>(values)->words[index * 4 + 0x279];
+    s32 value = *slotValue + change;
     MinimumValueEntryView *entry = static_cast<MinimumValueEntryView *>(FUN_003f0e20(state, index));
     if (entry != NULL && entry->minimumPercent > 0) {
         s32 minimum = (entry->maximum * entry->minimumPercent) / 100;
-        if (minimum < 1)
+        if (minimum <= 0)
             minimum = 1;
         if (value < minimum)
             value = minimum;
@@ -45,7 +42,11 @@ u8 FUN_004e5f2c(BtlMainStateA **owner, void *values, s32 index, s32 change)
     if (gameFlagIsSet(0x591) && entry != NULL &&
         (entry->flags & g_btlAction.protectedUnit) == 0 && change < 0)
         return 0;
-    slot->value = value >= 0 ? value : 0;
-    return value < 0;
+    if (value >= 0) {
+        *slotValue = value;
+        return 0;
+    }
+    *slotValue = 0;
+    return 1;
 }
 }

@@ -2,9 +2,10 @@
 #include "battle/EntryStats.h"
 #include "script/ScriptArgs.h"
 
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 extern "C" {
 s32 scrGetArg(s32 index);
-BtlMainState *btlGetMainState(void);
 
 /* Script command: sets 1 when a present, active, unblocked entry with the id has at most the given MP percentage. */
 u32 FUN_002f04c4(void)

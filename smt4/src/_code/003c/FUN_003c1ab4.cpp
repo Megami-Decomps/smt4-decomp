@@ -10,7 +10,7 @@ struct GrowthParameters {
 };
 
 struct GrowthValues {
-    u16 first;  // 0x00
+    s16 first;  // 0x00
     u16 second; // 0x02
 };
 

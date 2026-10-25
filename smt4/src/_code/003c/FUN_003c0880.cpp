@@ -5,7 +5,7 @@
 
 struct BattleStepContext {
     u8 unk0000[0x1fc0];
-    BtlUnitEntry *actors;        // 0x1fc0
+    BtlEntry *actors;        // 0x1fc0
     u8 unk1fc4[0x298];
     s32 resultA;                 // 0x225c
     s32 resultB;                 // 0x2260
@@ -37,7 +37,7 @@ extern void *g_btlActionReflect;
 extern void *g_btlUiBlock;
 
 
-u32 FUN_00246454(s32 actor, u32 options, BtlUnitEntry *unit);
+u32 FUN_00246454(s32 actor, u32 options, BtlEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
 u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 ScriptRunState *FUN_00297060(void *file, u32 owner);
@@ -94,7 +94,7 @@ s32 FUN_003c0880(BattleEventStep *step)
         step->context->resultC = step->resultC;
         if (step->resultA == 2) {
             for (s32 slot = 4; slot < 0x36; slot++) {
-                BtlUnitEntry *actor = &step->context->actors[slot];
+                BtlEntry *actor = &step->context->actors[slot];
                 if ((actor->flags & 1) != 0 && (actor->flags & 0x40) == 0 && actor != NULL) {
                     FUN_00246454(0, 0, actor);
                 }

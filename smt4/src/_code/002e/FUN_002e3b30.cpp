@@ -25,7 +25,7 @@ s32 scrGetArg(u32 index);
 u32 FUN_002e3b30(void)
 {
     s32 arg = scrGetArg(0);
-    UnitSlot *slot = &reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->slot;
+    UnitSlot *slot = &reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data->slot;
 
     slot->mode = 2;
     slot->arg = arg;

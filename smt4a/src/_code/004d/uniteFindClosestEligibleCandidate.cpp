@@ -1,7 +1,7 @@
 /* NON_MATCHING: eligibility cold-block placement and field-load registers differ; the compact save record is placed at a different stack offset/frame size. */
 #include "shard/W6_W6Match8_FusionSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
-#include "shard/entryDefIsAvailable.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 struct FusionSavedDemon {
     u8 unk00[0x36];

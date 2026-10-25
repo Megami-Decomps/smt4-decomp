@@ -1,4 +1,5 @@
 /* NON_MATCHING: callback-bank clearing is unrolled and uses a different global base than retail. */
+#include "nn/Result.h"
 #include "shard/W9_W9Match7_SoundCallbacks.h"
 
 extern "C" {
@@ -18,12 +19,12 @@ s32 FUN_0011be58(void)
         return 0;
     }
     s32 result = FUN_002c1398(0);
-    if (result < 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     result = asdModelForwardChecked(&g_callbackState.openedResource, DAT_00407e40,
                                    libc_strlen(DAT_00407e40), 0);
-    if (result < 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     g_callbackState.resource = &g_callbackState.resourceWord;

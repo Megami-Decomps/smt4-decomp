@@ -3558,7 +3558,7 @@
 003332f4 engineIsResourceStateTwo
 0033e1ac mapRequestGameState
 003d2d7c uiComparePriorityAndKey
-003e55d4 controllerInitState
+003e55d4 _ZN13Obj557ae8SlotC1Ev
 003370ec uiCompareBytePriorityAndKey
 0034e75c engineFreeOptionalWork
 00369280 btlPartnerAttackJobCallback
@@ -6180,3 +6180,9 @@
 002c7b8c gameDataSetStatusFlag
 00162790 textDrawString
 00398464 naviMainEnterState6IfActive
+00380a24 scrFindUnitByRecordId
+00385444 mapRefreshResourcesForStory
+002376c0 scrOpNegate
+00212880 scrOpLogicalNot
+00141850 workRangeSetLowerBound
+00328200 naviQuestConfirmAvailable

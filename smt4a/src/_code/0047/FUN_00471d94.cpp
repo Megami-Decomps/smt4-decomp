@@ -2,7 +2,6 @@
 #include "addon/aocMain.h"
 #include "shard/W8X15_PackageList.h"
 #include "gamedata/TableEntryCache.h"
-#include "shard/aocCountPackageItemsOfType.h"
 
 struct AocPackageItemList : AocSystemA {
     u8 unk394[0xb4];

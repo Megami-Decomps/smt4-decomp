@@ -15,11 +15,6 @@ struct SkillTargetRecord {
     /* 0x38 */ u32 flags;
 };
 
-struct BtlScriptUnit {
-    /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ BtlUnitEntry *unit;
-};
-
 struct SlotTableCount {
     /* 0x0000 */ u8 unk0000[0x910B];
     /* 0x910B */ u8 partyCount;
@@ -29,7 +24,7 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 SkillTargetRecord *dataTable40FindById(u32 skillId);
 SlotTableCount *gameGetSlotTable(void);
-s32 FUN_0023d488(BtlUnitEntry *unit, SkillTargetRecord *skill, s32 mode);
+s32 FUN_0023d488(BtlEntry *unit, SkillTargetRecord *skill, s32 mode);
 s32 FUN_0023d9b8(s32 slot, s32 flag, SkillTargetRecord *skill);
 
 /* Checks a skill against everything it could target: 0 = unusable, 1 = no skill, 2 = not checked, 3 = usable. */
@@ -54,8 +49,8 @@ u32 FUN_0028d320(u32 skillId)
     case 10:
         return 0;
     }
-    BtlMainStateExt *state = btlGetMainStateExt();
-    if ((state->stateFlags & 0x2000000) != 0) {
+    BtlMainState *state = btlGetMainState();
+    if ((state->editorControl.flags & 0x2000000) != 0) {
         return 0;
     }
     u8 front = 0;
@@ -91,7 +86,7 @@ u32 FUN_0028d320(u32 skillId)
     }
     if (front) {
         for (; i < 4; i++) {
-            BtlUnitEntry *unit = &state->units[i];
+            BtlEntry *unit = &state->entries[i];
             if (((unit->flags & 2) != 0 || ((unit->flags & 1) != 0 && (unit->flags & 0x40) == 0)) &&
                 FUN_0023d488(unit, skill, 0) == 0) {
                 return 0;
@@ -100,15 +95,15 @@ u32 FUN_0028d320(u32 skillId)
     }
     if (back) {
         for (i = 4; i < 54; i++) {
-            BtlUnitEntry *unit = &state->units[i];
+            BtlEntry *unit = &state->entries[i];
             if ((unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 && FUN_0023d488(unit, skill, 0) == 0) {
                 return 0;
             }
         }
     }
     if (script) {
-        BtlScriptUnit *scriptUnit = reinterpret_cast<BtlScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
-        if (scriptUnit != NULL && scriptUnit->unit != NULL && FUN_0023d488(scriptUnit->unit, skill, 1) == 0) {
+        BattleActionUnit *scriptUnit = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
+        if (scriptUnit != NULL && scriptUnit->entry != NULL && FUN_0023d488(scriptUnit->entry, skill, 1) == 0) {
             return 0;
         }
     }

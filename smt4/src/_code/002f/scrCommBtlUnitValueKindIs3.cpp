@@ -21,7 +21,7 @@ u32 scrCommBtlUnitValueKindIs3(void)
 {
     s32 index = scrGetArg(0);
 
-    scrSetResult(reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->values[index] >> 10 == 3);
+    scrSetResult(reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data->values[index] >> 10 == 3);
     return 1;
 }
 

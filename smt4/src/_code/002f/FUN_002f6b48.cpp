@@ -21,14 +21,14 @@ u32 FUN_002f6b48(void)
         offsetof(PendingActionsView, second) == 0x1FD8 ? 1 : -1];
     u32 first = scrGetArg(0);
     u32 second = scrGetArg(1);
-    reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->unk14C = 12;
+    reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data->unk14C = 12;
     reinterpret_cast<PendingActionsView*>(btlGetMainState())->first = (s64)(s32)(first | 0x10000);
     reinterpret_cast<PendingActionsView*>(btlGetMainState())->second = (s64)(s32)(second | 0x10000);
     s8 found = 0;
     for (s32 i = 4; i < 54; ++i) {
-        u32 flags = reinterpret_cast<BtlState*>(btlGetMainState())->units[i].flags;
+        u32 flags = btlGetMainState()->entries[i].flags;
         if ((flags & 1) == 0 && (flags & 0x40) == 0) {
-            reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->targets[i] = i;
+            reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->targets[i] = i;
             if (++found >= 2) {
                 break;
             }

@@ -37,4 +37,14 @@ extern "C" {
 u8 campCecSettingIsDone(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *FUN_002bf520(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_0032530c.h"
+#include "shard/W6_W6Match3_MapSceneTransition.h"
 extern "C" {
 struct Entry {
     u8 active;

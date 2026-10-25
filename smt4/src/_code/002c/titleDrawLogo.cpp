@@ -29,7 +29,7 @@ s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void titleDrawLogo(TitleLogo *logo)
 {
     s32 frame = (s32)renderCtxCalculateStereoParallax(g_titleScene, TITLE_LOGO_STEREO_SCALE);
-    if ((btlGetMainStateExt()->flags44A0 & BATTLE_FLAG_HIDE_LOGO_FRAME) == 0)
+    if ((btlGetMainState()->battleFlags & BATTLE_FLAG_HIDE_LOGO_FRAME) == 0)
         effectRenderTransformedInstance(&logo->elements[3], (f32)frame);
 
     frame = (s32)renderCtxCalculateStereoParallax(g_titleScene, TITLE_LOGO_STEREO_SCALE);

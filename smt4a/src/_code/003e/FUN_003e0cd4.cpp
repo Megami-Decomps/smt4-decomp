@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (156 vs 176 rows); the masks are now fields of the g_btlEncount block (one base, as retail), but retail keeps the 64-bit masks in a 60-byte frame (spilled) while the build reloads them from the block. */
 #include "common.h"
-#include "shard/btlUiIsPanelHolderReady.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 // Per-combatant record of the battle sides list (0x408 bytes each).
 struct BattleSideEntry {

@@ -7,9 +7,9 @@ extern "C" {
 
 u32 FUN_0030b678(void)
 {
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
 
-    scrSetResult((int)*(s16 *)(btl + 0x225a));
+    scrSetResult((int)btl->playerCheck.checkId);
     return 1;
 }
 

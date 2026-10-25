@@ -3,7 +3,7 @@
 #include "battle/btlHelp.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/asdMemoryAllocTracked.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 /* An aligned view avoids rounding the shared byte-padding union ending at 0x872. */

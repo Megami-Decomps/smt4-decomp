@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the previous state with a pre-indexed `ldr r2,[r0,#1024]!` and stores state/previous together with `stm r0,{r1,r2}`; the build emits two separate stores and keeps the constants in the other registers. */
 #include "common.h"
 
 extern "C" {
@@ -13,16 +12,17 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown; /* 0x44e190 */
 
+static __inline void statusEnterState(StatusDown *status, u32 next)
+{
+    status->step = 0;
+    status->prevState = status->state;
+    status->state = next;
+}
+
 /* Switches the status screen to state 3, remembering the previous state and restarting the step counter. */
 void FUN_002d9680(void)
 {
-    StatusDown *status = g_statusDown;
-    u32 previous;
-
-    status->step = 0;
-    previous = status->state;
-    status->state = 3;
-    status->prevState = previous;
+    statusEnterState(g_statusDown, 3);
 }
 
 } /* extern "C" */

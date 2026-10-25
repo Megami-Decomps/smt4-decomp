@@ -58,7 +58,7 @@ void partyApplyNonlethalAilmentDamage(u32 group, u32 ailment, s32 percentage)
             if ((ailments & 2) == 0 && (ailments & 0x400) == 0
                 && (ailments & 4) == 0 && (ailments & mask) != 0) {
                 s16 maximum = unit->maximumHp;
-                s32 damage = maximum * percentage / 100;
+                s32 damage = percentage * maximum / 100;
                 if (damage <= 0)
                     damage = 1;
                 s32 hp = unit->currentHp - damage;

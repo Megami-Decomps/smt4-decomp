@@ -25,9 +25,9 @@ u32 scrCommBtlUnitStatAllSet(void)
     }
     found = 0;
     for (index = 0; index < 0x6D; index++) {
-        BtlUnitEntry *unit = &btlGetMainStateExt()->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id) {
+        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id) {
             found = 1;
             if (unit->stat[stat] > -1) {
                 scrSetResult(0);

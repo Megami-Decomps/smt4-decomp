@@ -1,7 +1,7 @@
 /* NON_MATCHING: the group argument and the section count exchange saved registers (r6/r5), and the hoisted devil->race load lands in r2 instead of overwriting the record pointer in r1. */
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "shard/randRange.h"
+#include "util/CalleeContracts.h"
 
 struct DevilEffectRecord {
     /* 0x00 */ u16 race;

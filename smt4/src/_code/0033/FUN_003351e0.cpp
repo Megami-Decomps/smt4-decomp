@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail saves the by-value scale in s16..s18 in x,y,z order (vmov.f64 d8,d0); built saves z,y,x. Stride and calls match. */
 #include "shard/W4_Match1b_Node.h"
 
 struct ScaleNode {
@@ -20,13 +19,18 @@ extern "C" {
 
 void FUN_0028c618(NodeOwner *owner, s32 unused, NodeVec3 scale);
 
+static void setScaleNode(ScaleNode *node, NodeVec3 scale)
+{
+    FUN_0028c618(node->owner, 0, scale);
+}
+
 // Apply the scale to the group's root node and to each of its three child nodes.
 void FUN_003351e0(ScaleGroup *group, NodeVec3 scale)
 {
-    FUN_0028c618(group->root->owner, 0, scale);
+    setScaleNode(group->root, scale);
     for (s32 i = 0; i < 3; i++) {
         if (group->children[i].node != NULL) {
-            FUN_0028c618(group->children[i].node->owner, 0, scale);
+            setScaleNode(group->children[i].node, scale);
         }
     }
 }

@@ -3,6 +3,7 @@
 
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include <stddef.h>
+#include "shard/W4_W4Match2_BtlUnits.h"
 
 struct CecCalendarDate {
     u32 words[3];
@@ -62,5 +63,15 @@ struct CecModuleFlags {
 };
 
 extern "C" s32 asdCecMessageBoxOpen(AsdCecMessageBox* box, u32 id, u32 expectedTag);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 btlSourceGetMaxHp(const BtlUnitSource *source);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

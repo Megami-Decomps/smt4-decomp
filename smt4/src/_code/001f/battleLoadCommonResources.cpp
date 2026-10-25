@@ -1,7 +1,6 @@
-#include "shard/W6_W6Match8_BattleCommonResources.h"
+#include "battle/BtlMainGlobals.h"
 
 extern "C" {
-extern BattleCommonResources g_btlMainState;
 void *asdLoadFileSyncDefault(const char *path);
 void btlStageFogTableLoad(void);
 void mapAccessoryLoadTable(void);

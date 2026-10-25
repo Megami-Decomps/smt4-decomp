@@ -19,7 +19,7 @@ static inline s32 fusionCompareRaceLevelIdIV(u16 firstId, u16 secondId)
     return result;
 }
 
-static inline s32 fusionComparePriorityIV(u16 firstId, u16 secondId)
+static inline s32 fusionComparePriorityIV(s16 firstId, u16 secondId)
 {
     const DevilSortRecord *first = devilGetRecord(firstId);
     const DevilSortRecord *second = devilGetRecord(secondId);

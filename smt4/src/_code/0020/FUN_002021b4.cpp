@@ -1,7 +1,7 @@
 /* NON_MATCHING: counter argument lifetimes and saturation stores use different registers. */
 #include "common.h"
 #include "event/2dEvent/Npc2d.h"
-#include "shard/FUN_00343a04.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);

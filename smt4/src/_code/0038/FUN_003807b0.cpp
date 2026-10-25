@@ -38,7 +38,7 @@ typedef struct {
     u8 unk448[0x450 - 0x448];
     CursorPair pair;         /* 0x450 */
     u8 unk458[0x45c - 0x458];
-    u8 state;                /* 0x45c */
+    s8 state;                /* 0x45c */
     u8 unk45d;
     u8 sent;                 /* 0x45e */
 } CursorTask;

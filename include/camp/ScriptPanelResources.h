@@ -54,4 +54,14 @@ typedef char CampScriptPanelTransitionOffsets[
     offsetof(CampScriptPanelResources, selectionMenu.menu) == 0x9C &&
     offsetof(CampScriptPanelResources, selected.entry) == 0x111C &&
     sizeof(CampScriptPanelResources) == 0x1244 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 inputIsQuestConfirmPressed(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

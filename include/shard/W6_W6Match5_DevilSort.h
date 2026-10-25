@@ -26,4 +26,34 @@ struct GameUnitSortRecord {
     /* 0x48 */ u8 rank;
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002b8660(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002b89a4(s32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void submitDefaultFloatParameters();
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

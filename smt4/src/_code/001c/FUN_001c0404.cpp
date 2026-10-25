@@ -2,8 +2,8 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 #include "shard/FUN_002c58c8.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 /* The loading task's work: its state word is at +8. */
 struct LoadTask {

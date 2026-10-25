@@ -26,7 +26,7 @@ extern "C" void battleUpdateRotatingObjects(RotatingBattleObjectState *state)
                 state->frames[index] = 0;
         }
     } else {
-        for (s32 visible = 0; visible < state->count && visible < 1; ++visible) {
+        for (u32 visible = 0; visible < state->count && visible < 1; ++visible) {
             s32 index = (state->start + visible) % state->count;
             ++state->frames[index];
             s32 frameCount = engineLookupObjectById((s16)state->ids[index]);

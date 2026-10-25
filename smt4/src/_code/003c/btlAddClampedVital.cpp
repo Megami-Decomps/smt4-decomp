@@ -1,5 +1,7 @@
 /* NON_MATCHING: id/kind registers are reversed and the compiler places the shared clamping and persistent-copy tails differently from retail. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 struct BattleLiveVitals {
     /* 0x00 */ u8 unk00[0xe8];
@@ -10,7 +12,6 @@ struct BattleLiveVitals {
 };
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BattleLiveVitals *FUN_0027da30(BtlMainState *, s32 id);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
 BtlEquip *gameGetUnitRecord(s32 id);

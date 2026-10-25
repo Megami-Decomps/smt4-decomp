@@ -1,7 +1,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
 u32 scrGetArg(s32);
 u32 btlScriptResolveGroupArg(u32);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail cmp r0, #5 differs from recovered cmp r0, #5. */
+/* NON_MATCHING: only the address of the local value differs: retail builds it in r3 (mov r3, sp; mov r0, r3) before the call; built uses r0 directly. */
 #include "common.h"
 
 struct TargetWordsView {
@@ -44,8 +44,9 @@ void FUN_00368d74(s32 entryIndex, const TargetValueView* source, u32 target,
                   u8 field09, u8 field0A, u8 field0B, u8 field0C,
                   u8 field0D, u8 field0E)
 {
+    TargetSelectView* select = g_btlTargetSelect;
     if (entryIndex < 5) {
-        TargetEntryView* entry = &g_btlTargetSelect->unk04->entries[entryIndex];
+        TargetEntryView* entry = &select->unk04->entries[entryIndex];
         entry->unk0F = 1;
         entry->unk08 = FUN_0026264c(target);
         entry->unk09 = field09;

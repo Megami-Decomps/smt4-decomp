@@ -37,7 +37,7 @@ u32 asdFileHashPackReadRequest(AsdFileHashPack *pack, AsdFileRequest *request)
         u32 transferred;
         s32 result = pack->stream->io->read(pack->stream, &transferred, request->buffer, storedSize);
         request->readResult = result;
-        if (!nnResultIsSuccess(result)) {
+        if (nnResultIsFailure(result)) {
             request->state = ASD_FILE_FAILED;
             request->size = 0;
             return 1;

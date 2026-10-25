@@ -1,4 +1,3 @@
-/* NON_MATCHING: global base is loaded into r0 instead of retail's r2 before the argument move. */
 #include "common.h"
 
 namespace {
@@ -13,6 +12,7 @@ extern Owner g_gameGlobals;
 void FUN_0024d94c(void *record, UnitRecord *unit);
 void FUN_0029a0cc(UnitRecord *unit)
 {
-    FUN_0024d94c(g_gameGlobals.state->record, unit);
+    GameState *state = g_gameGlobals.state;
+    FUN_0024d94c(state->record, unit);
 }
 }

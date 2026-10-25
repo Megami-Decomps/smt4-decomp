@@ -1,10 +1,10 @@
 /* NON_MATCHING: only register choice/scheduling of the 64-bit mask test and the 1.0f constant load differ. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
+#include "shard/FUN_00184310.h"
 
 extern "C" {
 
-s32 FUN_00184310(u16 id);
 void FUN_0015f490(u32 id, s32 a, s32 b, s32 c, f32 value);
 
 // Script command: play the effect of the unit's devil unless a blocking battle state is active.

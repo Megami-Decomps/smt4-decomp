@@ -1,6 +1,5 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match4_Table05Sub2Entry.h"
-#include "shard/dataTable05FindByPriorityAndKey.h"
 
 extern "C" {
 s32 FUN_00300b8c(const Table05Sub2Entry *left, const Table05Sub2Entry *right);

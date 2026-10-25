@@ -29,7 +29,7 @@ void FUN_00387240(CenterTarget *target, void *owner, u32 id)
     s16 *size = rect->size;
 
     if (size != NULL) {
-        s32 centerX = size[0] + rect->x / 2;
+        s32 centerX = rect->x + size[0] / 2;
         s32 centerY = rect->y + size[1] / 2;
         target->centerX = centerX;
         target->centerY = centerY;

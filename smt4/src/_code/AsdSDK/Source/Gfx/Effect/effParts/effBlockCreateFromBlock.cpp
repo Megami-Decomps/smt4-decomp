@@ -12,7 +12,7 @@ void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fro
 
 EffBlock *effBlockCreateFromBlock(EffBlock *src)
 {
-    u16 kind = src->kind;
+    s16 kind = src->kind;
     EffBlock *block;
 
     asdDebugTrace(g_effPartsSourcePath, 46);

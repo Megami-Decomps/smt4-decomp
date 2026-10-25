@@ -1,10 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
-struct BattleMode {
-    /* 0x00 */ u8 unk00[0x88];
-    /* 0x88 */ s32 mode;
-};
 
 extern "C" {
 
@@ -14,9 +10,9 @@ s32 scrGetArg(u32 index);
 u32 scrComm_Battle_SetModeFromArg(void)
 {
     if (scrGetArg(0) == 0) {
-        reinterpret_cast<BattleMode *>(btlGetMainState())->mode = 12;
+        btlGetMainState()->actionState.mode = 12;
     } else {
-        reinterpret_cast<BattleMode *>(btlGetMainState())->mode = 11;
+        btlGetMainState()->actionState.mode = 11;
     }
     return 1;
 }

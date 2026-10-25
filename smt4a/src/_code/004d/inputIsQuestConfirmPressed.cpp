@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/inputIsQuestConfirmPressed.h"
+#include "camp/ScriptPanelResources.h"
 extern "C" {
 s32 FUN_002e1a18(u32 button);
 s32 padButtonIsPressed(u32 button);

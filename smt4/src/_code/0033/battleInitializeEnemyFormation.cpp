@@ -1,7 +1,8 @@
 /* NON_MATCHING: the 64-bit flag loop uses different unroll indexing, zero registers and store grouping; a formation-ID reload is coalesced and the larger saved-register set changes the frame. */
 #include "shard/W4_W4Match2_BtlUnits.h"
-#include "shard/W6_W6Match8_BattleCommonResources.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainGlobals.h"
 
 struct DevilDefinition;
 struct BattleEnemyFormation {
@@ -33,33 +34,32 @@ struct BattleEnemyRuntimeView {
 };
 
 extern "C" {
-extern BattleCommonResources g_btlMainState;
-void FUN_0027dc24(BtlState *state, BattleEnemyFormation *formation, s32 mode);
+void FUN_0027dc24(BtlMainState *state, BattleEnemyFormation *formation, s32 mode);
 const DevilDefinition *dataTable00FindById(u16 id);
-void FUN_0023ebc8(BtlState *state, u8 *payload, const DevilDefinition *definition);
-void FUN_00255e38(BtlState *state, u8 *payload, s32 kind, s32 slot, s32 flags);
+void FUN_0023ebc8(BtlMainState *state, u8 *payload, const DevilDefinition *definition);
+void FUN_00255e38(BtlMainState *state, u8 *payload, s32 kind, s32 slot, s32 flags);
 void sequenceRequestDeferEx(u32 sequence, const void *parameters);
 }
 
-static __inline BattleEnemyFormation *battleEnemyFormation(BtlState *state)
+static __inline BattleEnemyFormation *battleEnemyFormation(BtlMainState *state)
 {
     return &reinterpret_cast<BattleEnemyFormationView *>(state)->formation;
 }
 
-static __inline u8 *battleUnitPayload(BtlUnitEntry *unit)
+static __inline u8 *battleUnitPayload(BtlEntry *unit)
 {
     return reinterpret_cast<BattleUnitPayloadView *>(unit)->data;
 }
 
-static __inline void battleUnitClearFlags(BtlUnitEntry *unit)
+static __inline void battleUnitClearFlags(BtlEntry *unit)
 {
     reinterpret_cast<BattleUnitFlagPrefix *>(unit)->flags = 0;
 }
 
-extern "C" void battleInitializeEnemyFormation(BtlState *state)
+extern "C" void battleInitializeEnemyFormation(BtlMainState *state)
 {
     for (s32 index = 0; index < 50; ++index) {
-        battleUnitClearFlags(&state->units[index + 4]);
+        battleUnitClearFlags(&state->entries[index + 4]);
     }
     BattleEnemyFormation *formation = battleEnemyFormation(state);
     memClear(formation, sizeof(*formation));
@@ -74,7 +74,7 @@ extern "C" void battleInitializeEnemyFormation(BtlState *state)
     FUN_0027dc24(state, battleEnemyFormation(state), 1);
     if (g_btlMainState.enemyOverride > 0) {
         const DevilDefinition *definition = dataTable00FindById(g_btlMainState.enemyOverride);
-        BtlUnitEntry temporary;
+        BtlEntry temporary;
         FUN_0023ebc8(state, battleUnitPayload(&temporary), definition);
         FUN_00255e38(state, battleUnitPayload(&temporary), 1, 4, 0);
     } else {
@@ -82,7 +82,7 @@ extern "C" void battleInitializeEnemyFormation(BtlState *state)
             if (battleEnemyFormation(state)->ids[index] != 0) {
                 const DevilDefinition *definition = dataTable00FindById(battleEnemyFormation(state)->ids[index]);
                 if (definition != NULL) {
-                    BtlUnitEntry temporary;
+                    BtlEntry temporary;
                     FUN_0023ebc8(state, battleUnitPayload(&temporary), definition);
                     FUN_00255e38(state, battleUnitPayload(&temporary), 1, index + 4, 0);
                 }

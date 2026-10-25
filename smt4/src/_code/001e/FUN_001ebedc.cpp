@@ -89,7 +89,7 @@ extern int FUN_002b89a4(unsigned int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: __aeabi_memset4. */
-extern int FUN_002e44a8(unsigned short);
+extern int btlTalkBustupMatchesDevil(unsigned short);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -137,7 +137,7 @@ unsigned int FUN_001ebedc(int param_1)
     if (temp_v7 != 2) {
       return temp_v18;
     }
-    temp_v7 = FUN_002e44a8(*(unsigned short *)(param_1 + 0x126));
+    temp_v7 = btlTalkBustupMatchesDevil(*(unsigned short *)(param_1 + 0x126));
     if (temp_v7 == 0) {
       return temp_v18;
     }
@@ -377,7 +377,7 @@ LAB_001ec4d0:
     break;
   case 5:
     temp_v1 = FUN_00262f78();
-    temp_v7 = FUN_002e44a8(temp_v1);
+    temp_v7 = btlTalkBustupMatchesDevil(temp_v1);
     if (temp_v7 != 0) {
       btlTalkBustUpSetUnk2F4(1);
       FUN_002a03d8(0,0x1e);

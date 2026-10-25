@@ -12,10 +12,6 @@ struct BattleMessageSource {
     u8 unk0000[0x1f54];
     BattleMessageTable *messages;
 };
-struct BattleEncounterView {
-    u8 unk000[0xf0];
-    u32 encounter;
-};
 struct BattlePendingUnit {
     ScriptUnit unit;
     u8 unk02c[0x1250 - sizeof(ScriptUnit)];
@@ -41,7 +37,7 @@ u8 scrCommBattleQueueActorMessage()
         return 0;
     }
     reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-    u32 encounter = ((BattleEncounterView *)btlGetMainState())->encounter;
+    u32 encounter = ((BtlMainStateA *)btlGetMainState())->activity.currentAction;
     if (encounter != 0x167 && encounter != 0x168) {
         if (actor != 0) {
             FUN_002980e4(actor, 0);

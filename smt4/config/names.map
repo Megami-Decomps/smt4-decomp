@@ -2312,7 +2312,7 @@
 0021963c dataTable08Sub1CompareRank
 0030f6cc dataTable23Section5CountWithExtras
 00256f88 entryListSetPhase
-002e14b0 objectFreeBuffer
+002e14b0 soundFreeBufferStub
 0028dc68 messageSlotSet
 00290eb0 messageWindowIsState1
 002d8214 gameObjectFlagIsSet
@@ -4619,3 +4619,9 @@
 002bf4f8 asdTMTexTableEntryAt
 002be5a4 textDrawString
 00248620 dataTableFindRecordWord
+002e14b4 objectFreeBuffer
+0010baf8 processDispatchFinishedNodes
+00192990 scrOpLogicalNot
+002e44a8 btlTalkBustupMatchesDevil
+00298d98 gameGetSavedRecordOrFallback
+0023a1f8 queryFailureResultOrZero

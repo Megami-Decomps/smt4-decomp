@@ -24,4 +24,14 @@ typedef char TouchRegionLayoutOffsetsCheck[
     offsetof(TouchRegionLayout, regions.entries) == 0x826 &&
     offsetof(TouchRegionLayout, regions.footer) == 0x936 &&
     offsetof(TouchRegionLayout, count) == 0x93E ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void touchLayoutRebuildRegions(TouchRegionLayout *layout);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

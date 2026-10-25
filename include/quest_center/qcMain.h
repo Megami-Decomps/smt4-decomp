@@ -74,4 +74,14 @@ extern "C" {
 u32 FUN_00169d8c(u32 kind);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00169db4(u32 kind);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

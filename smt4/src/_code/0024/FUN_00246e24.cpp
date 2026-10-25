@@ -8,7 +8,7 @@
 
 extern "C" {
 
-BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 
 u32 FUN_00246e24(s32 actor, u32 options, BtlActionRecord *target, u32 value, s32 clearStatus)
 {
@@ -27,8 +27,8 @@ u32 FUN_00246e24(s32 actor, u32 options, BtlActionRecord *target, u32 value, s32
     action->value = 1;
     action->parameter = value;
     if (clearStatus) {
-        BtlUnitEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
-        if ((entry->flagMask & 0x10) != 0) {
+        BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
+        if ((entry->groupMask & 0x10) != 0) {
             action = btlQueueReflectAction(g_btlActionReflect, linkedActor, 0, options);
             action->kind = 29;
             action->target = (u32)target;

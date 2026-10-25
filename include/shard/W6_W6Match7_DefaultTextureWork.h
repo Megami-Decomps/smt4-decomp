@@ -77,4 +77,14 @@ s32 gfxDefaultTexturesInitialize(DefaultTextureWork *work);
 s32 gfxDefaultTexturesInitialize(DefaultTextureWork *work);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_00126830(u32 handle, u32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

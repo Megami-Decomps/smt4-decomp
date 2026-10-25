@@ -2,6 +2,8 @@
 #define SHARD_W6_W6MATCH8_LIGHT_UNIFORMS_H
 
 #include "common.h"
+#include "shard/S2GrTexture.h"
+#include "shard/W6_W6Match6_ResourceId.h"
 
 struct ShaderLightMatrix {
     f32 rows[3][4];
@@ -71,5 +73,65 @@ static __inline void shaderLightEmitVector(u32 index, const f32 *vector)
     nw_gfx_internal_NWCopyVec4Reverse(cursor + 2, vector);
     g_commandBufferCursor += 6;
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 byteIsAtLeast100(u8 *value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *gameGetCounters(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 *texCommandListBuild(GrTexture *texture);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_001af874(u32 param_1, u32 param_2, u32 param_3);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *flagValueGetStorage(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 legacyResourceIdRemap(const PackedResourceId *resource);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: final widening-loop length and byte temporaries use different registers. */
 #include "common.h"
 
 extern "C" {
@@ -9,7 +8,7 @@ void rt_aeabi_memclr(void *memory, u32 size);
 void textFormatBuffer(char *output, const char *format, ...);
 
 // Prefix a path with its selected archive root and widen its bounded byte representation.
-u32 FUN_002e0e04(const char *input, u16 *output, s32 root)
+u32 FUN_002e0e04(const char *input, s16 *output, s32 root)
 {
     if (root != 3) {
         s32 length = libc_strlen(input);

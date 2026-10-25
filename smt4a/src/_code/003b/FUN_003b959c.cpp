@@ -1,6 +1,6 @@
 /* NON_MATCHING: same loads and arithmetic; armcc schedules the pool-constant loads (map/engine pointers, magic divisor) and the limit/result registers differently */
 #include "common.h"
-#include "shard/FUN_0032530c.h"
+#include "shard/W6_W6Match3_MapSceneTransition.h"
 
 extern "C" {
 

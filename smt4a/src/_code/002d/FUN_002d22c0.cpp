@@ -1,7 +1,6 @@
 /* NON_MATCHING: Retail mov r4, r0 differs from recovered mov r5, r0. */
 #include "common.h"
 #include "util/BannerShow.h"
-#include "shard/lmapSceneGetUnk0.h"
 
 extern "C" {
 extern s32 g_gameState;

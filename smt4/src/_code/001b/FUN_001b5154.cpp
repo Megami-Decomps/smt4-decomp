@@ -104,7 +104,7 @@ u32 FUN_001b5154(u32 job)
         return 0;
     }
     if (g_btlScriptUnit != 0) {
-        BtlPickUnit *unit = reinterpret_cast<BtlPickUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+        BtlPickUnit *unit = reinterpret_cast<BtlPickUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
         if (unit != NULL && unit->action != NULL &&
             (unit->action->kind == 7 || unit->action->kind == 9 || unit->action->kind == 13)) {

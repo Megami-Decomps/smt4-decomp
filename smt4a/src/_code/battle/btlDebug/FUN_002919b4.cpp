@@ -6,8 +6,8 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "util/CalleeContracts.h"
-#include "AsdSDK/AsdMemAlloc.h"
 #include "shard/jobSetText.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The debug mask lies beyond the shared three-word global prefix. */
 struct BattleDebugInitializationGlobalsView {

@@ -1,5 +1,7 @@
 /* NON_MATCHING: Saved float registers, zero-buffer/conversion scheduling and ailment-name block order differ. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 /* Ailment modifiers extend past the shared stat[12] prefix; this view avoids changing that boundary. */
 struct BattleAilmentChanceView {
@@ -9,7 +11,6 @@ struct BattleAilmentChanceView {
     s16 luck;
 };
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
 void textFormatBuffer(char *output, const char *format, ...);
 u32 randRange(u32 maximum);

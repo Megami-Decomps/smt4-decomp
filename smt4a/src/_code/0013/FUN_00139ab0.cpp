@@ -19,7 +19,7 @@ void FUN_00139ab0(void)
     asdFileWakeWorker();
     FUN_0014a878(0x402);
     g_asdGxPresets.unk1bc = 0;
-    s32 mode = g_asdGxPresets.pending;
+    u32 mode = g_asdGxPresets.pending;
     if (mode >= 0) {
         g_asdGxPresets.current = mode;
         g_asdGxPresets.pending = -1;

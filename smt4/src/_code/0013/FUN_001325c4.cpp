@@ -1,6 +1,6 @@
 /* NON_MATCHING: indexed slot update and cached member-pointer dispatch scheduling differ. */
 #include "gfx/InheritedValues.h"
-#include "shard/FUN_002c5be8.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" InheritedValueCollection::Appender DAT_0041064c[2];
 

@@ -52,4 +52,24 @@ void *jobFind(u32 handle);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0026d5a4(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 messageSetActiveMode(s32 enabled);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -31,7 +31,7 @@ static u16 readBigEndian16(const u8 *bytes)
 extern "C" s32 _ZN9Obj55c9c05parseEPKhj(PacketFields *packet, const u8 *data, u32 size)
 {
     const u8 *end = data + size;
-    s32 offset = -1;
+    u32 offset = -1;
 
     if (size != 0) {
         packet->type = data[0];

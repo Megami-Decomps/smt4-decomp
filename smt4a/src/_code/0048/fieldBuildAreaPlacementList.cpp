@@ -1,5 +1,4 @@
 #include "field/FieldPlacementList.h"
-#include "shard/fieldBuildAreaPlacementList.h"
 
 extern "C" {
 void rt_memclr(void *memory, u32 size);

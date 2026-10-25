@@ -7,6 +7,7 @@
 
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
 struct BibleAnalyzeListEntry {
     u8 unk00[4];
@@ -129,6 +130,26 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 void FUN_003343f0(u8 value);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00370794(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void registerFour4AD02C(u32 owner);
+
 #ifdef __cplusplus
 }
 #endif

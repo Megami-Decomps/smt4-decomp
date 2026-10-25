@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 class RegisteredHandle;
 
@@ -318,6 +319,66 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 u16 dataTableGetEntry0102Value(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0029c4ac(u8 value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0029eb5c(ScrollSelection* list, s32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 getUnlockedSlotCount(void *arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_0028f670(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00288844(u32 a, u32 b, u32 c);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_0029ac94(void);
+
 #ifdef __cplusplus
 }
 #endif

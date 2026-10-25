@@ -2,7 +2,6 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "bible/bibleMain.h"
-#include "shard/FUN_0026d5a4.h"
 
 extern "C" {
 

@@ -7,7 +7,7 @@ extern "C" void FUN_00231ad4(s32 region, s32 x, s32 y)
     /* The exploration masks lie beyond the recovered SaveWork prefix. */
     struct MapExplorationFlags {
         u8 prefix[0xD7C];
-        u8 regions[3][8];
+        s8 regions[3][8];
     };
     typedef char RegionOffsetCheck[offsetof(MapExplorationFlags, regions) == 0xD7C ? 1 : -1];
     MapExplorationFlags *flags = reinterpret_cast<MapExplorationFlags *>(gameGetMapBlock());

@@ -14,7 +14,7 @@ void FUN_0033b0ac(void)
     u32 unit;
 
     FUN_003ae06c(g_btlUiBlock);
-    unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     FUN_00282820(0, unit, 0, 0, 6, 4, 6, 0);
 }
 

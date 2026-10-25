@@ -1,10 +1,11 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 extern int btlSlotsHaveReadyUnit(BtlEntry *unit);
-extern BtlMainState *btlGetMainState(void);
 
 /* Script command: result 1 when any of the 0x6D units is active (0x10), present (1), not hidden (0x40) and accepted by btlSlotsHaveReadyUnit. */
 u32 scrCommHasAcceptedBattleUnit(void)

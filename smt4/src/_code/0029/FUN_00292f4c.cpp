@@ -21,10 +21,6 @@ typedef struct SkillMenuView {
     u16 ids[1];                      /* 0x3480: the plain list of ids */
 } SkillMenuView;
 
-typedef struct BattleHelpView {
-    u8 unk0000[0x44A8];
-    u32 flags;                       /* 0x40: show the effect help */
-} BattleHelpView;
 
 typedef struct PlayerView {
     u8 unk00[2];
@@ -91,10 +87,10 @@ void FUN_00292f4c(SkillMenuWork *work)
             }
             return;
         }
-        if ((reinterpret_cast<BattleHelpView *>(btlGetMainState())->flags & 0x40) != 0) {
-            index = listGetU16OrZero(reinterpret_cast<BattleHelpView *>(btlGetMainState()), index);
+        if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
+            index = listGetU16OrZero(btlGetMainState(), index);
         } else {
-            reinterpret_cast<BattleHelpView *>(btlGetMainState());
+            btlGetMainState();
             index = FUN_0028d24c();
         }
         if (index != 0) {
@@ -109,7 +105,7 @@ void FUN_00292f4c(SkillMenuWork *work)
             FUN_0029da34(*panel, 2, unit->id, partyMemberFindById(unit->id));
             return;
         }
-        if ((reinterpret_cast<BattleHelpView *>(btlGetMainState())->flags & 0x40) != 0) {
+        if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
             buttonHelpShowSkillDetails(index);
             return;
         }
@@ -138,7 +134,7 @@ void FUN_00292f4c(SkillMenuWork *work)
         } else {
             adjust = -1;
         }
-        if ((reinterpret_cast<BattleHelpView *>(btlGetMainState())->flags & 0x40) != 0) {
+        if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
             index = index + adjust + 1;
         } else {
             index = *(u16 *)((u8 *)work + work->page * 0x10 + (index + adjust) * 2 + 0x341C);

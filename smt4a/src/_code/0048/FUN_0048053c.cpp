@@ -53,11 +53,11 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
                     limits->hp = value > 0 ? value : 0;
                 }
                 if (bonuses[4] + 3 + extras.values[2] >= 99) {
-                    s32 value = 99 - (bonuses[4] + extras.values[2]);
+                    s32 value = 99 - (extras.values[2] + bonuses[4]);
                     limits->statA = value > 0 ? value : 0;
                 }
                 if (bonuses[6] + 3 + extras.extra >= 99) {
-                    s32 value = 99 - (bonuses[6] + extras.extra);
+                    s32 value = 99 - (extras.extra + bonuses[6]);
                     limits->statC = value > 0 ? value : 0;
                 }
             }
@@ -86,7 +86,7 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
                     limits->hp = value > 0 ? value : 0;
                 }
                 if (bonuses[5] + 6 + extras.values[3] >= 99) {
-                    s32 value = 99 - (bonuses[5] + extras.values[3]);
+                    s32 value = 99 - (extras.values[3] + bonuses[5]);
                     limits->statB = value > 0 ? value : 0;
                 }
             }

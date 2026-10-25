@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/questCurrentIsFlagged.h"
+#include "battle/btlAction.h"
 
 extern "C" {
 

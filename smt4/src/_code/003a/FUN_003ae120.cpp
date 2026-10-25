@@ -1,5 +1,4 @@
 #include "battle/btlUI.h"
-#include "shard/FUN_003ae120.h"
 
 extern "C" {
 

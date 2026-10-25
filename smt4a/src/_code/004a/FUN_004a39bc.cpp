@@ -1,6 +1,5 @@
 /* NON_MATCHING: choice initialization block placement, state/zero registers and selected-entry address/narrowing differ. */
 #include "shard/Shard004A.h"
-#include "shard/FUN_00370794.h"
 
 // A local aligned view avoids adding u16 list entries to Screen4A's odd-address opaque byte region.
 struct BibleSummonConfirmationView {

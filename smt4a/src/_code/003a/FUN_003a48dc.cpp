@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag setup (mov ip,#1; moveq ip,#0) now matches; retail ORs a<<4 into ip before masking d into r0, built masks d into r3 first. */
+/* NON_MATCHING: retail ORs a<<4 into ip before masking d into r0; built masks d into r3 first. */
 #include "common.h"
 
 extern "C" {

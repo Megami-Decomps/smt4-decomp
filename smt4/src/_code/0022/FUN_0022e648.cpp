@@ -1,4 +1,5 @@
 /* NON_MATCHING: selection-roll result stores are combined and category address registers differ. */
+#include "nn/Result.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
 struct SelectionRollGroup {
@@ -42,7 +43,7 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
         result = btlRollClamped(*entry, FUN_00230e04(entry));
     } else {
         result = FUN_0028fb3c(*entry);
-        if (result < 0) {
+        if (nnResultIsFailure(result)) {
             result = 0;
         } else if (result >= 100) {
             result = 99;

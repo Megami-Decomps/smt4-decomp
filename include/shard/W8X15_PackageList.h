@@ -3,6 +3,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
+#include "addon/aocMain.h"
 
 /* One table file reference in a loaded package. */
 struct PackageFileRef {
@@ -46,5 +47,25 @@ char (*FUN_002ac0f8(PackageEntry *entry))[0x40];
 u32 FUN_002ac0c4(PackageEntry *entry);
 void *dataTableFileGetTable(u32 fileId, u32 flags);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 aocCountPackageItemsOfType(AocSystemA *system, s32 type);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void pathStripScheme(void *owner, char *path, s32 size);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

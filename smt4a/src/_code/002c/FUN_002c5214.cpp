@@ -1,6 +1,6 @@
 /* NON_MATCHING: kind/amount registers swapped (r4/r5) and the first saturating add uses r2/r3 instead of r0/r2 */
 #include "common.h"
-#include "shard/FUN_0040a378.h"
+#include "shard/W6_W6Match3_FilterTexture.h"
 
 extern "C" {
 

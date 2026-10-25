@@ -1,7 +1,7 @@
 /* NON_MATCHING: store scheduling: retail stores the four halfwords in field order 0xcce8..0xccee; here the compiler hoists the arg store */
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
-#include "shard/lmapGetSpawnIndex.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

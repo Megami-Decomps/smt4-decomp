@@ -1,6 +1,6 @@
 /* Returns whether flag `bit` is set in the flag array. */
 #include "common.h"
-#include "shard/gameDataFlagTestBit.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
 

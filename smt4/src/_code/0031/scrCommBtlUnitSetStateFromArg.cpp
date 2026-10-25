@@ -40,7 +40,7 @@ s32 scrCommBtlUnitSetStateFromArg(void)
         kind = 0x10;
         break;
     }
-    FUN_0026beb4(0, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), kind, 0, 1);
+    FUN_0026beb4(0, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), kind, 0, 1);
     return 1;
 }
 

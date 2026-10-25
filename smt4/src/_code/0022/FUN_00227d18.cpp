@@ -1,6 +1,5 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "shard/FUN_00227d18.h"
 
 extern "C" {
 

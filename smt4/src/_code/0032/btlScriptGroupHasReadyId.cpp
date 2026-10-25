@@ -1,11 +1,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 u32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(u32 group, s32 *range, s32 *count);
-BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 s32 btlSlotsHaveReadyUnit(BtlEntry *entry);
 

@@ -2,11 +2,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
-struct BattleMain {
-    u8 unk0000[0x44a0];
-    u32 flags;          // 0x44a0, bit 18: skip the side multiplier
-};
-
 // Combatant record: only the fields the damage formula reads.
 struct BattleCombatant {
     u8 flags;           // 0x00, bit 2: boosted/charged side
@@ -31,11 +26,11 @@ struct AffinityRates {
 
 extern "C" {
 
-BattleCombatant* FUN_0027da30(BattleMain* main, s32 id);
-BattleListEntry* btlMainFindEntryByListedId(BattleMain* main, s32 id);
+BattleCombatant* FUN_0027da30(BtlMainState* main, s32 id);
+BattleListEntry* btlMainFindEntryByListedId(BtlMainState* main, s32 id);
 f32 FUN_0022a690(s32 kind, f32 value);
 f32 FUN_003be670(s32 attacker, s32 defender);
-AffinityRates FUN_00247478(BattleMain* main, BattleListEntry* entry);
+AffinityRates FUN_00247478(BtlMainState* main, BattleListEntry* entry);
 void selectionCopySupportedValue(u32 id, u32* out);
 u32* dataTable40FindById(s32 id);
 s32 playerGetSkillRank(s32 id);
@@ -49,7 +44,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
 {
     f32 adjust = 0.0f;
     f32 scale = 1.0f;
-    BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());
+    BtlMainState* main = btlGetMainState();
     BattleCombatant* attacker = FUN_0027da30(main, attackerId);
     BattleCombatant* defender = FUN_0027da30(main, defenderId);
     if (attacker->flags & 4) scale = 0.8f;
@@ -65,7 +60,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     selectionCopySupportedValue(rates.skillId, &supported);
 
     s32 rankBonus = 0;
-    if ((*(u32*)btlMainFindEntryByListedId(reinterpret_cast<BattleMain *>(btlGetMainState()), attackerId) & 2) != 0) {
+    if ((*(u32*)btlMainFindEntryByListedId(btlGetMainState(), attackerId) & 2) != 0) {
         u32* record = dataTable40FindById(partyId);
         if (record != NULL) rankBonus = FUN_00283ebc(record, playerGetSkillRank(partyId), 1);
     }
@@ -83,7 +78,7 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     }
     damage = damage + adjust + (f32)rankBonus;
 
-    if ((main->flags & 0x40000) == 0) {
+    if ((main->battleFlags & 0x40000) == 0) {
         if (attacker->flags & 4) {
             if (defender->flags & 4) {
                 adjust = FUN_0023ea94()[0];

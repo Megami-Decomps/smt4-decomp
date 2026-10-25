@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_0026a978.h"
+#include "shard/GameGlobals.h"
 
 // The ID buffer starts two bytes past a word boundary.
 __packed struct StatusIdBlock {

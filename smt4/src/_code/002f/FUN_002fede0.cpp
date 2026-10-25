@@ -13,10 +13,10 @@ u32 FUN_002fede0(void)
     int i;
 
     for (i = 0; i < 109; i++) {
-        BtlUnitEntry *unit = &btlGetMainStateExt()->units[i];
+        BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && unit->groupId == id && (unit->flagMask & (1 << bit)) != 0) {
+            && unit->id == id && (unit->groupMask & (1 << bit)) != 0) {
             scrSetResult(1);
             return 1;
         }

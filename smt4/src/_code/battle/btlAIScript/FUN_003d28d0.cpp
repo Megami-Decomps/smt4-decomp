@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W4_Match6_BtlScript.h"
+#include "shard/W4_W4Match2_BtlUnits.h"
 #include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
@@ -55,7 +56,7 @@ extern int *FUN_003cab9c(int *, unsigned int *);
 /* Supplied declaration required: FUN_003cae6c. */
 extern int *FUN_003cb244(int *, unsigned int *);
 /* Supplied declaration required: FUN_003cb3e4. */
-extern unsigned int btlAiWaitUiAndUpdatePartyGroup4Latch(void*, BtlScriptUnit*);
+extern unsigned int btlAiWaitUiAndUpdatePartyGroup4Latch(void*, BattleActionUnit*);
 /* Supplied declaration required: FUN_003cbce4. */
 /* Supplied declaration required: FUN_003cbf40. */
 /* Supplied declaration required: btlChooseAlternateSkillOrFallback. */
@@ -231,7 +232,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
     FUN_003cb3e4(param_1,puVar6);
     return param_1;
   case 0x1e:
-    piVar2 = (int *)btlAiWaitUiAndUpdatePartyGroup4Latch(param_1, reinterpret_cast<BtlScriptUnit*>(puVar6));
+    piVar2 = (int *)btlAiWaitUiAndUpdatePartyGroup4Latch(param_1, reinterpret_cast<BattleActionUnit*>(puVar6));
     return piVar2;
   case 0x1f:
     if (*(int *)(temp_v2 + 0xc) == 0) {

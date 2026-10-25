@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail retains separate read/write bases for the large texture flag; register allocation differs. */
 #include "shard/NaviMain.h"
 #include "event/bustupEvent/BustupTex.h"
 
@@ -9,7 +8,7 @@ struct NaviMapSelectionView {
     u8 unk0000D[0xB];
     u32 selection;
     u8 unk0001C[0x20629];
-    u8 specialTexturesLoaded; /* 0x20645 */
+    s8 specialTexturesLoaded; /* 0x20645 */
 };
 extern "C" {
 u32 FUN_004931c4(void);

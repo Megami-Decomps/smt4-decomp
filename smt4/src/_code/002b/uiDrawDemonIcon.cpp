@@ -1,10 +1,10 @@
 /* NON_MATCHING: atlas-region address hoisting, top-field reload elimination and coordinate-store scheduling differ by three rows; -O2 may preserve the retail shape. */
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "shard/categoryGetColor.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "shard/categoryGetColor.h"
 
 struct DemonIconRecord {
     DevilSortRecord key;

@@ -1,9 +1,12 @@
-/* NON_MATCHING: retail uses ldr r0, [r0, #524] where the compiled block uses mov r4, #0. */
 #include "common.h"
 
+struct TextRecordList {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u8 records[1];
+};
 struct TextTable {
-    /* 0x00 */ u8 unk00[0x70];
-    /* 0x70 */ u8 records[1];
+    /* 0x00 */ u8 unk00[0x6c];
+    /* 0x6c */ TextRecordList list;
 };
 struct TextStorage {
     /* 0x00 */ u8 unk00[0x30];
@@ -22,10 +25,12 @@ s32 libc_strlen(const char *text);
 s32 FUN_001a7a20(void *table, const char *text, u32 length);
 s32 FUN_001a79e8(TextOwner *owner, const char *text)
 {
-    TextStorage *storage = NULL;
-    if (owner->storage != NULL) {
-        storage = &owner->storage->data;
+    TextStorageBlock *block = owner->storage;
+    TextStorage *storage = (TextStorage *)block;
+    if (block != NULL) {
+        storage = &block->data;
     }
-    return FUN_001a7a20(storage->table->records, text, libc_strlen(text));
+    TextRecordList *list = &storage->table->list;
+    return FUN_001a7a20(list->records, text, libc_strlen(text));
 }
 }

@@ -1,12 +1,13 @@
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(s32 group, u32 *first, u32 *count);
-BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 // Report whether a matching combatant has a positive value for the selected statistic.

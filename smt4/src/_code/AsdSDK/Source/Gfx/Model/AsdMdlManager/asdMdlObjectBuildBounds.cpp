@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 struct AsdMdlVec3 { f32 v[3]; };
 struct AsdMdlMtx33 { f32 m[9]; };

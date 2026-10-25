@@ -1,6 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "shard/battleGetEntryHalfword.h"
+#include "battle/btlHelp.h"
 extern "C" {
 struct BattleEntryValues { u8 unk00[0x72]; s16 values[1]; };
 BattleEntryValues *btlMainFindEntryByListedId(void *battle,u32 id);

@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs 208 rows); retail keeps a constant-false flag and the mask table base in registers/stack slots that the source-level structure does not reproduce */
 #include "common.h"
+#include "battle/BtlMainAccess.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 // Battle masks kept in the action-reflect block (64-bit side masks).
 struct BtlActionMasks {
@@ -13,27 +15,10 @@ struct BtlActionMasks {
     u64 blockMaskC;             // 0x78
 };
 
-// A battle side (0x408 bytes): flags, id and state bits.
-struct BtlSide {
-    u64 flags;                  // 0x000
-    u8 unk008[0x6e - 8];
-    s16 id;                     // 0x06e
-    u8 unk070[0x274 - 0x70];
-    u16 state;                  // 0x274
-    u8 unk276[0x408 - 0x276];
-};
-
-struct BtlMainState {
-    u8 unk0000[0x1ffc];
-    BtlSide* sides;             // 0x1ffc
-    u8 unk2000[0x45a0 - 0x2000];
-    u64 pending;                // 0x45a0
-};
-
 // Battle unit: its side record at +0x20.
 struct BtlUnit {
     u8 unk00[0x20];
-    BtlSide* side;              // 0x20
+    BtlCombatantEntryA* side;              // 0x20
 };
 
 // Target info record returned by the action lookup (several message/id slots).
@@ -52,7 +37,7 @@ struct ActionStep {
     u8 unk00[2];
     u16 done;                   // 0x02
     u8 unk04[0x14];
-    BtlSide* actor;             // 0x18
+    BtlCombatantEntryA* actor;             // 0x18
     u8 unk1c[8];
     s16 phase;                  // 0x24
     u8 unk26[2];
@@ -64,7 +49,6 @@ extern "C" {
 extern BtlActionMasks g_btlActionReflect;
 extern s32 g_btlScriptUnit;
 
-BtlMainState* btlGetMainState(void);
 s32 btlAiBestTargetScore(s32 unit);
 BtlUnit* btlUnitGet(s32 unit);
 ActionTarget* FUN_002c7bf4(void* request);
@@ -81,8 +65,8 @@ s32 infoWinIsActive(void);
 // target record and sends the matching event, then advances the step or marks it done.
 void FUN_0040ca18(u32 unused, ActionStep* step)
 {
-    BtlMainState* main = btlGetMainState();
-    u64 blocked = ((g_btlActionReflect.blockMaskC | g_btlActionReflect.blockMaskA) & main->pending);
+    BtlMainStateA* main = btlGetMainState();
+    u64 blocked = ((g_btlActionReflect.blockMaskC | g_btlActionReflect.blockMaskA) & main->stateFlags64.bits);
     if (blocked != 0) {
         step->done = 0;
         return;
@@ -107,7 +91,7 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
         ActionTarget* record = FUN_002c7bf4(step->request);
         if (record == NULL) return;
         u32 flags = record->flags;
-        if ((flags & 0x20) != 0 && (unit->side->state & 0x10) == 0) return;
+        if ((flags & 0x20) != 0 && (unit->side->statusFlags & 0x10) == 0) return;
         if (score == 1) return;
         if (score == 2) {
             if (record->idTwo != 0) {
@@ -133,11 +117,11 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
         if ((flags & 8) != 0) {
             s32 g;
             for (g = 0; g < 4; g++) {
-                BtlSide* other = &main->sides[g];
-                if (step->actor->id != other->id) {
+                BtlCombatantEntryA* other = &main->entries[g];
+                if (step->actor->indexView.selectionIndex != other->indexView.selectionIndex) {
                     if ((other->flags & g_btlActionReflect.playerMask) == 0) break;
                     if ((other->flags & g_btlActionReflect.skipMask) != 0) break;
-                    if ((other->state & 0x10) == 0) break;
+                    if ((other->statusFlags & 0x10) == 0) break;
                 }
             }
             if (g == 4) {
@@ -148,10 +132,10 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
         bool toSide = false;
         if ((flags & 0x40) != 0) {
             s32 ready = FUN_004c86ec(step->request);
-            s32 index = FUN_004c600c(step->actor->id);
+            s32 index = FUN_004c600c(step->actor->indexView.selectionIndex);
             if (ready != 0 && index >= 0) {
                 id = 0x3e;
-                target = &main->sides[index];
+                target = &main->entries[index];
                 toSide = true;
             }
         }
@@ -161,7 +145,7 @@ void FUN_0040ca18(u32 unused, ActionStep* step)
     } else {
         id = 0x25;
         if (FUN_004ea5e8(g_btlScriptUnit) <= 1) pending = true;
-        FUN_004e699c(g_btlScriptUnit, unit->side->id, 5);
+        FUN_004e699c(g_btlScriptUnit, unit->side->indexView.selectionIndex, 5);
         FUN_004c8e30(id, arg, 1);
     }
     if (pending) return;

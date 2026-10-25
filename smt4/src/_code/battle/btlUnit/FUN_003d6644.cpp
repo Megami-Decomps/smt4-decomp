@@ -1,6 +1,7 @@
 /* NON_MATCHING: vector copies split into two-word plus scalar transfers rather than retail's three-word LDM/STM; selection/gate address materialization differs. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
@@ -9,13 +10,11 @@ extern BattleVector3 DAT_00493554;
 
 void FUN_003d6644(BattleVectorTransition *camera, BtlMainState *battle, s32 slot)
 {
-    // Local views name the selection words and encounter gate in existing opaque padding.
+    // Local view names the selection words in existing opaque padding.
     struct SlotSelection { s32 previous, current; };
-    struct EncounterGate { u32 flags; };
     // The sort record's published prefix ends before the packed body-size attributes.
     struct DevilBodyAttributes { u8 prefix[0x2C]; u32 flags; };
     SlotSelection *selection = reinterpret_cast<SlotSelection *>(camera->unk75c);
-    EncounterGate *gate = reinterpret_cast<EncounterGate *>(battle->encounter.unke4);
 
     camera->axis.current.z = 0.0f;
     camera->axis.current.y = 0.0f;
@@ -28,7 +27,7 @@ void FUN_003d6644(BattleVectorTransition *camera, BtlMainState *battle, s32 slot
         return;
     if (battle->battleFlags & 4)
         return;
-    if ((gate->flags & 0x10) || (battle->battleFlags & 0x200))
+    if ((battle->encounter.flagsE4 & 0x10) || (battle->battleFlags & 0x200))
         return;
     if (g_btlMain && (g_btlMain->flags & 0x2000000))
         return;

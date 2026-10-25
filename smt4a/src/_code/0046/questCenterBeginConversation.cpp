@@ -2,8 +2,8 @@
 #include "shard/W6_W6Match7_QuestInteraction.h"
 #include "gamedata/GameFlags.h"
 #include "shard/Shard0046.h"
-#include "util/FUN_003a7630.h"
 #include "shard/messageSetMode.h"
+#include "util/FUN_003a7630.h"
 
 extern "C" {
 void sysPlaySe(s32 id);

@@ -1,11 +1,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
 #include "gamedata/DevilRecord.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-BtlMainState *btlGetMainState();
 const ActiveSkillRecord *dataTable40FindById(u32 skill);
 
 u32 FUN_002fef38()

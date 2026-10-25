@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc keeps the room pointer in r1 rather than retail's r0. */
 #include "common.h"
 
 extern "C" {
@@ -9,10 +8,15 @@ struct RoomWork {
 };
 extern RoomWork *g_onesRoom;
 
+static __inline void roomSetEnabled(RoomWork *room, u8 enabled)
+{
+    room->enabled = enabled;
+}
+
 /* Enable the active room's flag. */
 void onesRoomSetEnabled(void)
 {
-    g_onesRoom->enabled = 1;
+    roomSetEnabled(g_onesRoom, 1);
 }
 
 }

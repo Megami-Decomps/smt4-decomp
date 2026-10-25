@@ -3,7 +3,6 @@
 #include "camp/CampCec/CampCecView.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
-#include "shard/FUN_00262f78.h"
 
 struct CecLoader {
     /* 0x000 */ u8 unk000[0xCEC];

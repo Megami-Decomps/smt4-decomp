@@ -2,7 +2,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
-#include "shard/dataTable33TypeCount.h"
 
 extern "C" {
 

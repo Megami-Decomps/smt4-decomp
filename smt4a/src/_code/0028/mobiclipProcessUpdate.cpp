@@ -92,7 +92,7 @@ s32 engineIsResourceStateTwo();
 
 static inline void checkMovieDirectoryResult(s32 result, u32 address)
 {
-    if (nnResultIsFailure(result))
+    if (!nnResultIsSuccess(result))
         FUN_0016e800(result, address);
 }
 

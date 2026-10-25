@@ -12,7 +12,7 @@ extern "C" void FUN_002c793c(ScalarEffectKeys *work, const ScalarEffectKeys *sou
         work->duration = source->keys[current + distance].frame - source->keys[current].frame;
         if (work->duration <= 0)
             continue;
-        ScalarEffectKey *next = &work->keys[current + distance];
+        ScalarEffectKey *next = &work->keys[distance + current];
         if (next->value != 0 && next->randomRange > 0) {
             s32 adjustment = static_cast<s32>(FUN_002039d0(2, next->randomRange, 1));
             work->keys[work->nextKey + distance].value -= adjustment;

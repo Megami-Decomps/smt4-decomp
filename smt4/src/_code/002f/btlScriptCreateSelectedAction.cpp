@@ -23,7 +23,7 @@ u32 btlScriptCreateSelectedAction(void)
     typedef char SelectionPointerOffset[
         offsetof(SelectionView, skill) == 0x1FC0 ? 1 : -1];
     u32 argument = scrGetArg(0);
-    BtlUnit* actor = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit* actor = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     FUN_00250720(btlGetMainState());
     s16 variant = reinterpret_cast<SelectionView*>(btlGetMainState())->skill->unk1B6;
     s16 selection = reinterpret_cast<SelectionView*>(btlGetMainState())->skill->unk1B4;

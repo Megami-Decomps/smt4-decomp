@@ -40,7 +40,7 @@ void FUN_00406a1c(Obj406a1c *obj)
         }
         void **first = list->begin;
         void **end = list->end;
-        if (first != end) {
+        if (end != first) {
             list->end = end - (end - first);
         }
     }

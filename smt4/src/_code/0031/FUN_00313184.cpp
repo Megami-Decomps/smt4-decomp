@@ -1,4 +1,4 @@
-/* NON_MATCHING: pair and category registers differ; the subtype comparison is compiled without retail signed halfword adjustment. */
+/* NON_MATCHING: operand pointer registers and the subs/subseq equality chain differ; the saved-register set and first-id argument now match. */
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
 
@@ -21,26 +21,29 @@ void FUN_00313184(const u16 *first, const u16 *second)
 {
     Table8Type5Record *firstRecord = table8Type5FindById(*first);
     Table8Type5Record *secondRecord = table8Type5FindById(*second);
-    CategoryOperand operands[2] = {{firstRecord->value, 0}, {secondRecord->value, 0}};
+    u32 firstId = firstRecord->value;
+    CategoryOperand operands[2] = {{firstId, 0}, {secondRecord->value, 0}};
+    CategoryOperand *firstOperand = &operands[0];
+    CategoryOperand *secondOperand = &operands[1];
     s32 firstCategory;
     u16 firstSubtype;
-    if (idIsAbove400(operands[0].id)) {
+    if (idIsAbove400(firstId)) {
         firstCategory = 99;
         firstSubtype = 0;
     } else {
-        firstCategory = FUN_0024c52c(operands[0].id);
-        firstSubtype = dataTable40FindById(operands[0].id)->subtype;
+        firstCategory = FUN_0024c52c(firstOperand->id);
+        firstSubtype = dataTable40FindById(firstOperand->id)->subtype;
     }
     s32 secondCategory;
     u16 secondSubtype;
-    if (idIsAbove400(operands[1].id)) {
+    if (idIsAbove400(secondOperand->id)) {
         secondCategory = 99;
         secondSubtype = 0;
     } else {
-        secondCategory = FUN_0024c52c(operands[1].id);
-        secondSubtype = dataTable40FindById(operands[1].id)->subtype;
+        secondCategory = FUN_0024c52c(secondOperand->id);
+        secondSubtype = dataTable40FindById(secondOperand->id)->subtype;
     }
     if (firstCategory == secondCategory && firstSubtype == secondSubtype)
-        FUN_002497f8(&operands[0], &operands[1]);
+        FUN_002497f8(firstOperand, secondOperand);
 }
 }

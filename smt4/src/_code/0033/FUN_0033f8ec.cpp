@@ -1,6 +1,6 @@
 /* NON_MATCHING: stat-condition chain compiles with swapped compare operands and a different argument-register allocation (retail: second in fp, third in sl; shared miss tail). */
 #include "common.h"
-#include "shard/battleGetEntryHalfword.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 extern u32 FUN_0023dcfc(u32 kind);

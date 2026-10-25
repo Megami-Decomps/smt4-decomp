@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail places the else computation out of line after the shared scrSetResult tail and does not fold the slot offset (0x3654) into one add */
 #include "common.h"
 #include "shard/scrGetArg.h"
-#include "shard/scrGetArg.h"
 
 struct ResultSlot {
     s8 unitId;        // 0x000

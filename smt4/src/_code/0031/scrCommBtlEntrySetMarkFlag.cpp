@@ -1,12 +1,9 @@
 /* NON_MATCHING: register allocation only: retail keeps the loaded flag word in r2, built in r1. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "shard/W4_Match6_BtlEntry.h"
 
 extern "C" {
-
-typedef struct BtlEntry {
-    /* 0x0 */ u32 flags;      /* bit 16: marked */
-} BtlEntry;
 
 extern s32 scrGetArg(s32 index);
 extern BtlEntry *btlMainFindEntryByListedId(void *main, u32 id);

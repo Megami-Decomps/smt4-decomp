@@ -62,7 +62,7 @@ void FUN_003e3a20(InheritancePreviewWork *work, const InheritanceTargetStats *ta
     for (s32 index = 0; index < 8; ++index)
         FUN_004bd6b0(&preview, 0, index);
     for (s32 index = 0; index < 8; ++index) {
-        u16 skill = choice.skills[index];
+        s16 skill = choice.skills[index];
         if (skill) {
             inherited[count] = skill;
             if (count < unlocked)

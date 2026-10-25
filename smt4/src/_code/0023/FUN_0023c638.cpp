@@ -16,7 +16,7 @@ extern "C" {
 // Clears every unit record matching the requested pair.
 void FUN_0023c638(BattleReference* reference, s32 first, s32 second)
 {
-    BattleRecordSet* unit = reinterpret_cast<BattleRecordSet *>(btlUnitGet(reinterpret_cast<BtlState *const *>(reference)));
+    BattleRecordSet* unit = reinterpret_cast<BattleRecordSet *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(reference)));
     for (s32 i = 0; i < 133; ++i) {
         if (unit->records[i].first == first && unit->records[i].second == second) {
             unit->records[i].first = -1;

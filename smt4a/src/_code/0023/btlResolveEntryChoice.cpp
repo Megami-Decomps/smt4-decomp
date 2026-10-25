@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "shard/btlResolveEntryChoice.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

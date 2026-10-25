@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "common.h"
-#include "shard/FUN_00282be4.h"
+#include "gamedata/DataTable.h"
 
 namespace {
 /* The battle start request: a short form (one word) or the 18-byte form carrying the camera/party setup. */

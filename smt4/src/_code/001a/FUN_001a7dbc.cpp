@@ -1,7 +1,7 @@
-/* NON_MATCHING: field copies corrected; slot-store scheduling and duplicated learned-bit store tail still differ. */
+/* NON_MATCHING: the two learned-bit set sequences (mode 0/3 and mode 1) are emitted in swapped forms (and/add/ldrb register assignment); slot is s8 (fixes the slot-store scheduling). */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "shard/gameDataSetItemFlag.h"
+#include "shard/GameDataBlocks.h"
 
 /* A unit record (0x604 bytes, accessed fields). */
 struct UnitRecord {
@@ -68,7 +68,7 @@ void unitRecalculateEffectiveStats(UnitRecord *unit);
 void FUN_0029bde4(UnitRecord *unit);
 
 /* Initialise a unit record for a devil: from the data record (mode 0/3) or from a saved copy (mode 1). */
-void FUN_001a7dbc(UnitRecord *unit, u8 slot, u32 id, s32 mode)
+void FUN_001a7dbc(UnitRecord *unit, s8 slot, u32 id, s32 mode)
 {
     memClear(unit, 0x604);
     unit->id = id;

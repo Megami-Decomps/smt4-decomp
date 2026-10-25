@@ -1,14 +1,15 @@
 /* NON_MATCHING: free-record signed load, null-check placement and cold initialization layout differ. */
 #include "shard/W4_Match6_BtlScript.h"
+#include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlEntry.h"
 
 /* Find or allocate a unit's script-status record and latch the requested status. */
-extern "C" void FUN_00337900(BtlScript *script, const BtlEntry *unit, s32 status)
+extern "C" void FUN_00337900(BtlMainState *script, const BtlEntry *unit, s32 status)
 {
     BtlScriptStatusRecord *record = NULL;
     u32 flags = unit->flags;
     for (s32 i = 0; i < 128; ++i) {
-        BtlScriptStatusRecord *candidate = &script->unitStatus[i];
+        BtlScriptStatusRecord *candidate = &script->unitStatus.records[i];
         if (flags & 2) {
             if (candidate->unitId == -1) {
                 record = candidate;
@@ -21,7 +22,7 @@ extern "C" void FUN_00337900(BtlScript *script, const BtlEntry *unit, s32 status
     }
     if (record == NULL) {
         for (s32 i = 0; i < 128; ++i) {
-            BtlScriptStatusRecord *candidate = &script->unitStatus[i];
+            BtlScriptStatusRecord *candidate = &script->unitStatus.records[i];
             if (candidate->unitId == 0 && candidate->flags == 0) {
                 record = candidate;
                 break;

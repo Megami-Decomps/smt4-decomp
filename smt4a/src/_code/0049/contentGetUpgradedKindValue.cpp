@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/contentGetUpgradedKindValue.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
 
 struct ContentUpgradeValueRecord {
     /* 0x00 */ u8 unk00[0x36];

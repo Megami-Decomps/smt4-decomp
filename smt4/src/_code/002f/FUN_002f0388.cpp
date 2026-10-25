@@ -8,9 +8,9 @@ u32 FUN_002f0388(void)
 {
     s32 threshold = scrGetArg(0);
     for (s32 index = 0; index < 109; ++index) {
-        BtlUnitEntry* unit = &btlGetMainStateExt()->units[index];
+        BtlEntry* unit = &btlGetMainState()->entries[index];
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
-            s32 percent = unit->hp * 100 / unit->hpMax;
+            s32 percent = unit->hp * 100 / unit->maxHp;
             if (percent >= threshold) {
                 scrSetResult(1);
                 return 1;

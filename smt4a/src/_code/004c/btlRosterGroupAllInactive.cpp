@@ -1,6 +1,6 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "shard/btlRosterGroupAllInactive.h"
+#include "battle/btlEncount.h"
 
 extern "C" {
 

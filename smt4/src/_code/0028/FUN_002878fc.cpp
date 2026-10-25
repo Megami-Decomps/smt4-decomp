@@ -12,7 +12,7 @@ void FUN_002878fc(s32 tag)
         return;
     for (s32 pool = 0; pool < 4; ++pool) {
         TaggedPoolRecord *record = DAT_00446fec.pools[pool];
-        for (s32 remaining = DAT_00446fec.counts[pool]; remaining > 0; --remaining, ++record)
+        for (u32 remaining = DAT_00446fec.counts[pool]; remaining > 0; --remaining, ++record)
             if (record->tag == tag)
                 record->enabled = 0;
     }

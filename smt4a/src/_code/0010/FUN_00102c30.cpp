@@ -8,7 +8,7 @@ extern "C" char* FUN_00102c30(char* text, char* pattern)
     for (;;) {
         char* textCursor = candidate;
         char* patternCursor = pattern;
-        u8 textByte;
+        s8 textByte;
         u8 patternByte;
 
         do {

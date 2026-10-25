@@ -2,7 +2,7 @@
 /* Applies every element of `elements` to the target and the owner's state, then records `result` and the follow-up
  * value in the owner's result slots. */
 #include "common.h"
-#include "shard/FUN_002c5be8.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 struct ResultSlots {

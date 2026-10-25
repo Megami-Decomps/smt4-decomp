@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_003bbaa8.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 

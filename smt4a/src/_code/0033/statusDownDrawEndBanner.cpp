@@ -10,7 +10,7 @@ const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 textFormatBuffer(u8 *destination, const char *format, ...);
 s32 fontMeasureLineAdvance(const u8 *text, u32 font);
 
-void statusDownDrawEndBanner(s32 x, s32 y, f32 alpha)
+void statusDownDrawEndBanner(u32 x, s32 y, f32 alpha)
 {
     efctSetSpeed(alpha);
     const SpriteInfo *anchor = asdTMTexTableEntryAt(0x12, 0x56e);

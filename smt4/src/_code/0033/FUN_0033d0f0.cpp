@@ -1,4 +1,4 @@
-/* NON_MATCHING: switch becomes comparisons rather than a jump table; opening-frame load grouping and saved registers differ, 110 vs 111 instructions. */
+/* NON_MATCHING: jump table matches (explicit case 4 label); opening-frame loads are not paired into vldmia and registers differ. */
 #include "ui/MaskedChoiceRows.h"
 
 extern "C" void FUN_0033d0f0(MaskedChoiceRows *choices)
@@ -65,6 +65,8 @@ extern "C" void FUN_0033d0f0(MaskedChoiceRows *choices)
             view->closingFrame = 4.0f;
             view->phase = 4;
         }
+        break;
+    case 4:
         break;
     }
 }

@@ -1,5 +1,4 @@
 #include "shard/Shard0050.h"
-#include "shard/fillThreeWordsWithByte.h"
 
 extern "C" {
 

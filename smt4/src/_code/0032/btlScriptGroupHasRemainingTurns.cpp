@@ -1,9 +1,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 // This query's signed counter is within the entry's still-unnamed status padding.
 struct GroupTurnEntryView { u8 unk000[0x96]; s16 remaining; };
 extern "C" {
-BtlMainState *btlGetMainState();
 u32 scrGetArg(u32 index);
 u32 btlScriptResolveGroupArg(u32 group);
 void FUN_002499fc(u32 group, s32 *range, s32 *count);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reads fadeActive/fadeEnabled off one work+0x1400 base and recomputes &fadeActive for the store; ours CSEs &fadeActive and loads fadeEnabled from a pool offset. */
 #include "common.h"
 #include "shard/JobWork.h"
 
@@ -12,7 +11,10 @@ s32 FUN_0013dc70(u32 job)
     JobWork *work = (JobWork *)jobGetWork(job);
     s32 alpha;
 
-    if (!work->fadeActive || !work->fadeEnabled) {
+    if (!work->fadeActive) {
+        return 0;
+    }
+    if (!work->fadeEnabled) {
         return 0;
     }
     work->fadeFrame++;

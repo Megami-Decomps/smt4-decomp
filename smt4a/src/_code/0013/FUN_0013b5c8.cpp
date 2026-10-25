@@ -1,4 +1,5 @@
 /* NON_MATCHING: connectivity initialization has different critical-section exit paths and register allocation. */
+#include "nn/Result.h"
 #include "common.h"
 
 struct ConnectivityInitState {
@@ -36,10 +37,10 @@ extern "C" s32 FUN_0013b5c8(void)
         return 0x00209FF9;
     }
     s32 result = FUN_0016f864();
-    if (result >= 0) {
+    if (!nnResultIsFailure(result)) {
         u32 length = libc_strlen(DAT_00536c61);
         result = FUN_0016f988(&DAT_005b4438, DAT_00536c61, length, 0);
-        if (result >= 0) {
+        if (!nnResultIsFailure(result)) {
             ++DAT_005891a4.references;
             FUN_0014668c(0x0B0101C8);
             nn_os_CriticalSection_Leave(&g_moduleCriticalSection4);

@@ -28,4 +28,14 @@ extern "C" {
 u32 dataTableChooseWeightedByteId(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 dataTable33TypeCount(u8 *unused, s32 type);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

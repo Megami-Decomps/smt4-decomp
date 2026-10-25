@@ -36,7 +36,7 @@ void FUN_002505c0(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 
 u32 FUN_003947cc(const char *effectName, s32 owner, u32 kind, f32 x)
 {
     BtlEffectEntry *entry = NULL;
-    BtlMainStateExt *state;
+    BtlMainState *state;
     s32 side;
     s32 i;
 
@@ -52,7 +52,7 @@ u32 FUN_003947cc(const char *effectName, s32 owner, u32 kind, f32 x)
             break;
         }
     }
-    state = btlGetMainStateExt();
+    state = btlGetMainState();
     switch (kind) {
     case 2:
     case 5:

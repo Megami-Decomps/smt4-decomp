@@ -1,6 +1,5 @@
 /* NON_MATCHING: readable rebuild of the menu frame effect draw; the remaining differences are the integer/float register split around the efct speed saves (retail keeps the speed in s16 and 1/256 alpha in s17 across the calls). */
 #include "common.h"
-#include "shard/effectSetByteSpeed.h"
 #include "text/TextDraw.h"
 
 /* A menu layout slot as asdTMTexTableEntryAt reports it: offsets of its parts. */

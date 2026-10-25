@@ -3,7 +3,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlUnitEntry* btlMainFindActiveEntry(BtlState* state);
+BtlEntry* btlMainFindActiveEntry(BtlMainState* state);
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(u32 group, s32* first, s32* count);
@@ -17,16 +17,16 @@ u32 btlScriptAnyLiveUnitHasFlag(void)
     u32 group = btlScriptResolveGroupArg(scrGetArg(1));
     FUN_002499fc(group, &first, &count);
     for (s32 index = first; index < count + first; ++index) {
-        BtlUnitEntry* unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry* unit = &btlGetMainState()->entries[index];
         if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) &&
-            (unit->flagMask & (1u << flag))) {
+            (unit->groupMask & (1u << flag))) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        BtlUnitEntry* active = btlMainFindActiveEntry(reinterpret_cast<BtlState *>(btlGetMainState()));
-        if (active != NULL && (active->flagMask & (1u << flag))) {
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry* active = btlMainFindActiveEntry(btlGetMainState());
+        if (active != NULL && (active->groupMask & (1u << flag))) {
             scrSetResult(1);
             return 1;
         }

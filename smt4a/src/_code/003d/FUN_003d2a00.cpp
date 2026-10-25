@@ -19,7 +19,7 @@ void FUN_003d2a00(const char *pattern)
         for (s32 resourceIndex = 0; resourceIndex < 3; ++resourceIndex) {
             MaterialNamedResource *resource = material->resources[resourceIndex];
             if (resource != NULL && FUN_00102c30(resource->name, pattern) != NULL) {
-                s32 match;
+                u32 match;
                 for (match = 0; match < selection->count; ++match) {
                     if (selection->matches[match].materialIndex == binding->materialIndex)
                         break;

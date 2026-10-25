@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail homes r0-r3 at entry (push {r0-r3,...}) and reloads the list pointer from its home slot before every call, and sign-extends the three region ids at the call; ours keeps the pointer in a saved register and passes the ids unextended */
 #include "common.h"
-#include "shard/FUN_001c3688.h"
+#include "ui/IfTouch.h"
 
 /* Two halfwords passed together in one register. */
 struct ScrollPoint {

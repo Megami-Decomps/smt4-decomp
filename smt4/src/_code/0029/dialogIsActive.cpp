@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/dialogIsActive.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc keeps the local map pointer in r1 rather than retail's r0. */
 #include "common.h"
 
 extern "C" {
@@ -9,10 +8,15 @@ struct LocalMapWork {
 };
 extern LocalMapWork *g_lmapMainState;
 
+static __inline void lmapSetRequested(LocalMapWork *map, u8 value)
+{
+    map->requested = value;
+}
+
 /* Set the local map's request flag. */
 void lmapMainRequest(void)
 {
-    g_lmapMainState->requested = 1;
+    lmapSetRequested(g_lmapMainState, 1);
 }
 
 }

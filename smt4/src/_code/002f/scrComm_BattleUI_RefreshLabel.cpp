@@ -4,10 +4,6 @@
 
 extern "C" {
 
-typedef struct BattleState {
-    /* 0x0000 */ u8 unk0000[0x44A0];
-    /* 0x44A0 */ u32 uiFlags;
-} BattleState;
 
 typedef struct GameOptions {
     /* 0x000 */ u8 unk000[0x604];
@@ -31,7 +27,7 @@ s32 FUN_003ae620(u32 block);
 /* Script command: refreshes the battle UI label from the options' selection and flags the battle UI for redraw. */
 u32 scrComm_BattleUI_RefreshLabel(void)
 {
-    BattleState *state = reinterpret_cast<BattleState *>(btlGetMainState());
+    BtlMainState *state = btlGetMainState();
     u16 labelB;
     Label *label;
 
@@ -39,7 +35,7 @@ u32 scrComm_BattleUI_RefreshLabel(void)
     labelB = gameGetSupportUnitData()->labelB;
     label = supportUnitGetEntry(gameGetSupportUnitData()->labelA, labelB);
     FUN_002942c4((s16)(label->number + 1), 0);
-    state->uiFlags |= 0x2000000;
+    state->battleFlags |= 0x2000000;
     FUN_003ae620(g_btlUiBlock);
     return 1;
 }

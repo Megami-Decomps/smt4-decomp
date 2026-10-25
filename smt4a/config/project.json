@@ -25614,12 +25614,12 @@
     },
     {
       "address": "0x141850",
-      "function": "FUN_00141850",
+      "function": "workRangeSetLowerBound",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_00141850.o",
+      "object": "build/obj/_code/0014/workRangeSetLowerBound.o",
       "size": 28,
-      "source": "src/_code/0014/FUN_00141850.cpp",
-      "target": "orig/target/_code/0014/FUN_00141850.o",
+      "source": "src/_code/0014/workRangeSetLowerBound.cpp",
+      "target": "orig/target/_code/0014/workRangeSetLowerBound.o",
       "thumb": false
     },
     {
@@ -55365,12 +55365,12 @@
     },
     {
       "address": "0x212880",
-      "function": "FUN_00212880",
+      "function": "scrOpLogicalNot",
       "module": "_code",
-      "object": "build/obj/_code/0021/FUN_00212880.o",
+      "object": "build/obj/_code/0021/scrOpLogicalNot.o",
       "size": 172,
-      "source": "src/_code/0021/FUN_00212880.cpp",
-      "target": "orig/target/_code/0021/FUN_00212880.o",
+      "source": "src/_code/0021/scrOpLogicalNot.cpp",
+      "target": "orig/target/_code/0021/scrOpLogicalNot.o",
       "thumb": false
     },
     {
@@ -57972,12 +57972,12 @@
     },
     {
       "address": "0x2376c0",
-      "function": "FUN_002376c0",
+      "function": "scrOpNegate",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_002376c0.o",
+      "object": "build/obj/_code/0023/scrOpNegate.o",
       "size": 156,
-      "source": "src/_code/0023/FUN_002376c0.cpp",
-      "target": "orig/target/_code/0023/FUN_002376c0.o",
+      "source": "src/_code/0023/scrOpNegate.cpp",
+      "target": "orig/target/_code/0023/scrOpNegate.o",
       "thumb": false
     },
     {
@@ -98022,12 +98022,12 @@
     },
     {
       "address": "0x328200",
-      "function": "FUN_00328200",
+      "function": "naviQuestConfirmAvailable",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_00328200.o",
+      "object": "build/obj/_code/0032/naviQuestConfirmAvailable.o",
       "size": 104,
-      "source": "src/_code/0032/FUN_00328200.cpp",
-      "target": "orig/target/_code/0032/FUN_00328200.o",
+      "source": "src/_code/0032/naviQuestConfirmAvailable.cpp",
+      "target": "orig/target/_code/0032/naviQuestConfirmAvailable.o",
       "thumb": false
     },
     {
@@ -112532,12 +112532,12 @@
     },
     {
       "address": "0x380a24",
-      "function": "FUN_00380a24",
+      "function": "scrFindUnitByRecordId",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00380a24.o",
+      "object": "build/obj/_code/0038/scrFindUnitByRecordId.o",
       "size": 220,
-      "source": "src/_code/0038/FUN_00380a24.cpp",
-      "target": "orig/target/_code/0038/FUN_00380a24.o",
+      "source": "src/_code/0038/scrFindUnitByRecordId.cpp",
+      "target": "orig/target/_code/0038/scrFindUnitByRecordId.o",
       "thumb": false
     },
     {
@@ -113153,12 +113153,12 @@
     },
     {
       "address": "0x385444",
-      "function": "FUN_00385444",
+      "function": "mapRefreshResourcesForStory",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00385444.o",
+      "object": "build/obj/_code/0038/mapRefreshResourcesForStory.o",
       "size": 292,
-      "source": "src/_code/0038/FUN_00385444.cpp",
-      "target": "orig/target/_code/0038/FUN_00385444.o",
+      "source": "src/_code/0038/mapRefreshResourcesForStory.cpp",
+      "target": "orig/target/_code/0038/mapRefreshResourcesForStory.o",
       "thumb": false
     },
     {
@@ -128617,12 +128617,12 @@
     },
     {
       "address": "0x3e55d4",
-      "function": "controllerInitState",
+      "function": "_ZN13Obj557ae8SlotC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/003e/controllerInitState.o",
+      "object": "build/obj/_code/003e/Obj557ae8Slot__Obj557ae8Slot.o",
       "size": 32,
-      "source": "src/_code/003e/controllerInitState.cpp",
-      "target": "orig/target/_code/003e/controllerInitState.o",
+      "source": "src/_code/003e/Obj557ae8Slot__Obj557ae8Slot.cpp",
+      "target": "orig/target/_code/003e/Obj557ae8Slot__Obj557ae8Slot.o",
       "thumb": false
     },
     {

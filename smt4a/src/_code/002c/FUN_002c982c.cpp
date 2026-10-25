@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail does not hoist the cursor/timer addresses out of the marker loop (they are recomputed where used) and conditionally materialises the constant 1 at loop entry; built hoists both and spills them */
 #include "common.h"
 #include "util/FUN_002c7e24.h"
-#include "shard/FUN_0037e09c.h"
 
 /* A unit status record as filled by unitInitializeFromTemplate. */
 struct StatusUnitRecord {

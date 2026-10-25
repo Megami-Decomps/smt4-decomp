@@ -23,7 +23,7 @@ struct ApocalypseSpatialSoundView {
     u8 unk000[0x854];
     SpatialSoundActorsView spatial; /* 0x854 */
     u8 unk12d8[4];
-    u8 ready; /* 0x12dc */
+    s8 ready; /* 0x12dc */
     u8 unk12dd[0x3b];
     SpatialSoundDeviceView *device; /* 0x1318 */
 };

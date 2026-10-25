@@ -1,7 +1,6 @@
 #include "addon/AocPackage.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
-#include "shard/aocFindQuestPayloadById.h"
 
 extern "C" {
 s32 FUN_002ac12c(AocPackage *package);

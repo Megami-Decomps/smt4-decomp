@@ -7,10 +7,10 @@ extern u32 scrGetArg(u32 index);
 
 u32 FUN_002dbfe8(void)
 {
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
     u32 value = scrGetArg(0);
 
-    *(u32 *)(btl + 0x49dc) = value;
+    btl->word49DC = value;
     return 1;
 }
 

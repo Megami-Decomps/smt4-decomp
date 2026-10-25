@@ -1,6 +1,6 @@
 /* NON_MATCHING: recovered texture table/index release arguments; reset zeros remain hoisted across calls. */
 #include "common.h"
-#include "shard/FUN_002a60cc.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 extern "C" {
 

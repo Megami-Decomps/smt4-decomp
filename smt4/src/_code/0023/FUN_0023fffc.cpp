@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (175 vs 168 rows); register allocation and frame size (12 vs 16 bytes) differ */
 #include "common.h"
-#include "shard/FUN_002896bc.h"
+#include "shard/W6_W6Match2_ScrollList.h"
 
 // Saved battle block: a header with a four-digit ASCII version and the payload.
 struct BattleSaveBlock {

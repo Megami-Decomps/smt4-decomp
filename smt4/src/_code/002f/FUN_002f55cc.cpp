@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild of the file open/read/close helper; the on-stack file object is initialised by retail with address constants (0x420B78, 0x420BF0) written as separate stores, and the media dispatch is a chain of compares that armcc here compiles from the switches. */
+#include "nn/Result.h"
 #include "common.h"
 
 /* A file object living on the caller's stack: a vtable pair and open state. */
@@ -66,7 +67,7 @@ u32 FUN_002f55cc(s32 media, s32 path, u32 buffer, u32 size)
         result = FUN_001ffaf0();
         break;
     }
-    if (isRetryable(result) || result < 0) {
+    if (isRetryable(result) || nnResultIsFailure(result)) {
         switch (media) {
         case 0:
             result = FUN_002cbe94(&file, path, size);
@@ -81,7 +82,7 @@ u32 FUN_002f55cc(s32 media, s32 path, u32 buffer, u32 size)
             result = FILE_INVALID_MEDIA;
             break;
         }
-        if (result < 0) {
+        if (nnResultIsFailure(result)) {
             if (path != 0) {
                 if (media == 0)
                     FUN_002cbf90();
@@ -108,7 +109,7 @@ u32 FUN_002f55cc(s32 media, s32 path, u32 buffer, u32 size)
             }
         }
     }
-    if (result >= 0) {
+    if (nnResultIsSuccess(result)) {
         FileResult readResult = FILE_INVALID_MEDIA;
         if (media == 0) {
             readResult = fileObjSeekRead(&file, 0, buffer, size);

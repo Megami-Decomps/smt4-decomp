@@ -8,7 +8,7 @@ extern "C" {
 u32 FUN_002f6d00(void)
 {
     s32 result;
-    if (btlGetMainStateExt()->flags44A0 & 2)
+    if (btlGetMainState()->battleFlags & 2)
         result = 0;
     else
         result = 1;

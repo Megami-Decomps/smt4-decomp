@@ -1,7 +1,6 @@
 /* NON_MATCHING: process setter call recovered; switch cases merge state stores into different tails. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
-#include "shard/FUN_004186e0.h"
 extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);

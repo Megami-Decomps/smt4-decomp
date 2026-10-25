@@ -2,6 +2,7 @@
 #define ADDON_AOC_PACKAGE_H
 #include "common.h"
 #include <stddef.h>
+#include "addon/aocMain.h"
 struct AocPackageFile {
     /* 0x00 */ void *data;
     union {
@@ -59,4 +60,14 @@ typedef char AocPackageFileLayoutCheck[offsetof(AocPackage, fileTable.files) == 
     sizeof(QuestRecord) == 0x40 ? 1 : -1];
 typedef char AocPackageFileDescriptionNameOffsetCheck[
     offsetof(AocPackageFileDescription, name) == 1 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void *aocFindQuestPayloadById(AocSystem *system, s32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

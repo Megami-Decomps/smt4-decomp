@@ -1,6 +1,5 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
-#include "shard/mathMatrixApplyScale.h"
 
 extern "C" {
 

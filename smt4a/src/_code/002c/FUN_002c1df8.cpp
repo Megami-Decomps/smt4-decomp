@@ -1,4 +1,4 @@
-/* NON_MATCHING: other-table word and entry ID now load in retail order, but their r0/r1 operands are exchanged. */
+/* NON_MATCHING: entry ID (ldrsh) loads before the other-table word instead of after it. */
 #include "common.h"
 
 extern "C" {
@@ -32,9 +32,7 @@ void FUN_002c1df8(void *file)
             continue;
         }
         for (j = 1; j < tableCount; j++) {
-            s32 otherId = *(s32 *)dataTableGetEntries(dataTableFileGetTable(file, j));
-            s32 entryId = entry->id;
-            if (otherId == entryId) {
+            if (*(s32 *)dataTableGetEntries(dataTableFileGetTable(file, j)) == entry->id) {
                 entry->fileIndex = j;
                 break;
             }

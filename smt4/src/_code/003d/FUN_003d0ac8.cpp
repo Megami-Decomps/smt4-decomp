@@ -1,7 +1,7 @@
 /* NON_MATCHING: action-record address hoisting and participant-index load scheduling differ. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
-#include "shard/questCurrentIsFlagged.h"
 
 extern "C" {
 u32 FUN_00229914(BtlMainState **, void *, s32);
@@ -22,14 +22,14 @@ u32 FUN_003d0ac8(BtlMainState **state, void *copies, s32 subject, s32 target)
     }
     u32 queued = 0;
     for (s32 i = 0; i < BTL_ENTRY_COUNT; ++i) {
-        u32 status = (*state)->actions.records[i].status;
+        u32 status = (*state)->actions[i].status;
         if ((status & 1) != 0 && (status & 0x80) != 0 && i != subject &&
             valueRangeSameSide(i, subject)) {
             BtlEntry *candidate = btlMainFindEntryByListedId(*state, i);
             if ((candidate->groupMask & 0x1C0) == 0) {
                 u16 skill = btlEntryRollPassiveSkill(i);
                 if (skill != 0) {
-                    BtlActionRecord *records = (*state)->actions.records;
+                    BtlActionRecord *records = (*state)->actions;
                     FUN_0023c154(*state, 4, records[i].participant.combatantIndex,
                         records[target].participant.combatantIndex, skill);
                     queued = 1;

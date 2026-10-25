@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly (170 vs ~168 rows); differs in the slot-scan loop (retail keeps a loop-invariant flag in r6) and compare operand order */
 #include "common.h"
-#include "shard/bitArrayCountSet1to500.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 // One requirement of a goal: a kind and its argument/threshold.
 struct GoalCondition {

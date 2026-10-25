@@ -9,7 +9,7 @@ u16 FUN_004dc154(FusionCandidateTables *tables, u32 race, u32 level);
 u16 uniteFindClosestEligibleCandidate(FusionCandidateTables *tables, u32 race, u32 level, u32 flags);
 
 // Apply a directional race rule to two demons and encode their resulting fusion pair.
-u32 FUN_004db2b8(FusionCandidateTables *tables, u16 firstId, u16 secondId, UnitePairEntryIV *pair)
+u32 FUN_004db2b8(FusionCandidateTables *tables, s16 firstId, u16 secondId, UnitePairEntryIV *pair)
 {
     u16 result = 0;
     DevilRecordA *first = FUN_00184310(firstId);

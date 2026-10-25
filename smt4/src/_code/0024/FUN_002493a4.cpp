@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail compiles the switch to a 10-entry jump table (cases 1,4,9 and 2; the rest return); armcc here emits a compare chain for the same cases. */
 #include "common.h"
 
 extern "C" {
@@ -33,7 +32,6 @@ void FUN_002493a4(GeometryOwner *owner, u32 id, u32 kind)
     case 6:
     case 7:
     case 8:
-    default:
         break;
     }
 }

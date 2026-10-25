@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "map/lmapMain.h"
 
 typedef struct GameData {
     /* 0x0000 */ u32 job;
@@ -86,5 +87,25 @@ typedef char GameGlobalsLayoutCheck[sizeof(GameGlobals) == 8 && sizeof(GameData)
 
 typedef char GameGlobalsOffsets[offsetof(GameGlobals, data) == 4 && offsetof(GameData, activeState) == 0x12DC && offsetof(GameData, statusCameraHeightOffset) == 0x1EA0 && offsetof(GameData, statusCameraHeightMode) == 0x1EA4 ? 1 : -1];
 typedef char GameDataTimerOffsets[offsetof(GameData, statusTimer) == 0x7EC && offsetof(GameData, restoreTabPending) == 0x12E8 ? 1 : -1];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0026a978(const u32 *ids, s32 count);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+LmapScript *lmapSceneGetScript(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

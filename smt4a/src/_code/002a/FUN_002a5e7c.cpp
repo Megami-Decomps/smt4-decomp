@@ -1,6 +1,6 @@
 /* NON_MATCHING: store order of the record update and the loop's scheduling differ from retail (150 rows against 147); the compendium percentage uses __aeabi_idivmod as retail does. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
-#include "shard/countersRaiseA.h"
+#include "shard/W6_W6Match1_BattleStageModel.h"
 
 /* A party demon record (300 bytes each) as the compendium registration reads it. */
 struct PartyDemon {

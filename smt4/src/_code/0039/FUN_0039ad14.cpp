@@ -1,7 +1,6 @@
 /* NON_MATCHING: compiler combines source-coordinate loads into VLDM and schedules interpolation arithmetic in different VFP registers. */
 #include "map/NavigationInterpolation.h"
 #include "map/mapDepart.h"
-#include "shard/FUN_002319c0.h"
 
 extern "C" {
 extern GameState g_gameState;

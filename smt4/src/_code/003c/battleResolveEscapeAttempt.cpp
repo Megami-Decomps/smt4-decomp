@@ -3,10 +3,10 @@
 #include "battle/btlEvent.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
-#include "shard/FUN_00229a3c.h"
+#include "battle/btlHelp.h"
 
 struct BattleAction;
-struct BattleRetreatOwner { BtlScript *script; };
+struct BattleRetreatOwner { BtlMainState *script; };
 struct BattleRetreatScriptFields {
     u8 unk0000[0x88];
     u32 result;
@@ -36,7 +36,7 @@ extern "C" {
 extern BtlMain *g_btlMain;
 extern BattleVersionResources *DAT_00435d18;
 extern BtlEvent *g_btlEvent;
-bool FUN_00256940(BtlMain *, const BtlScript *, s32);
+bool FUN_00256940(BtlMain *, const BtlMainState *, s32);
 void btlReflectQueueKind34(s16, u32);
 BattleAction *FUN_00256898(s32, u32);
 u32 FUN_0026beb4(u32, u32, u32, u32, u32);
@@ -50,9 +50,9 @@ void FUN_0027e38c(BtlEvent *);
 void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *action)
 {
     action->result = 0;
-    BtlScript *script = owner->script;
+    BtlMainState *script = owner->script;
     BattleRetreatScriptFields *fields = reinterpret_cast<BattleRetreatScriptFields *>(script);
-    if (!(script->flags & 0x40000) && (fields->initialFlags & 0x40000)) {
+    if (!(script->battleFlags & 0x40000) && (fields->initialFlags & 0x40000)) {
         FUN_00229a3c(0, reinterpret_cast<u32>(action), 0, 5, 0);
         return;
     }
@@ -75,7 +75,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     fields = reinterpret_cast<BattleRetreatScriptFields *>(script);
     if (fields->formation == 3)
         success = true;
-    if (script->flags & 0x40000)
+    if (script->battleFlags & 0x40000)
         success = true;
     if (fields->result == 4 || success) {
         gameCounterAddSaturating(4, 1);
@@ -89,7 +89,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     } else {
         gameCounterAddSaturating(5, 1);
         reinterpret_cast<BattleRetreatScriptFields *>(owner->script)->result = 0;
-        owner->script->flags |= 0x2000;
+        owner->script->battleFlags |= 0x2000;
     }
     FUN_00229a3c(0, reinterpret_cast<u32>(action), 0, 1, 0);
 }

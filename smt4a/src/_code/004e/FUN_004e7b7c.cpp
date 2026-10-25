@@ -1,4 +1,3 @@
-/* NON_MATCHING: Candidate filling becomes a pointer/countdown loop instead of retail's indexed loop, increasing the saved-register set. */
 #include "gamedata/RankedSelection.h"
 
 extern "C" {
@@ -11,15 +10,16 @@ s32 FUN_004e7b7c(void *owner, const SelectionScoreWork *work, SelectionResult *r
 {
     RankedSelection candidates[109];
     for (s32 i = 0; i < count; ++i) {
-        candidates[i].index = i;
-        candidates[i].score = work->scores[i].score;
+        RankedSelection *candidate = &candidates[i];
+        candidate->index = i;
+        candidate->score = work->scores[i].score;
     }
     s32 index;
-    if (rank <= count) {
+    if (count < rank) {
+        index = candidates[0].index;
+    } else {
         qsort(candidates, count, sizeof(RankedSelection), callbackCompareDescendingState);
         index = candidates[rank - 1].index;
-    } else {
-        index = candidates[0].index;
     }
     SelectionResult *result = &results[index];
     ++result->count;

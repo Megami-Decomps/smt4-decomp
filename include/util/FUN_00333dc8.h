@@ -13,4 +13,14 @@ void FUN_00333dc8(u8 value);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_003a7b74(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

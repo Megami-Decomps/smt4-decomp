@@ -42,7 +42,7 @@ u32 FUN_0047fc38(u32 itemId)
         break;
     }
     case 6: {
-        s32 index = itemId - 541;
+        u32 index = itemId - 541;
         if (index >= 0 && static_cast<u32>(index) <= 119) {
             const EquipmentUpgradeEntry *entry = &upgrades->categories[2][index];
             if (entry->power + power < 999 || entry->secondary + modifiers.values[3] < 99)

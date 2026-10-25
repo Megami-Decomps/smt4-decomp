@@ -251,4 +251,24 @@ void FUN_003e48dc(u32 id);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_001a1648(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0015059c(u8 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

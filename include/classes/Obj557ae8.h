@@ -16,11 +16,14 @@ public:
 /* One of the three entries: a model slot with its load state, resource kind, the object it owns
  * and the name of the resource it shows. */
 struct Obj557ae8Slot {
+    Obj557ae8Slot();
+
     /* 0x00 */ s32 state;
     /* 0x04 */ u16 kind;
     /* 0x06 */ u8 unk06[2];
     /* 0x08 */ Obj557ae8Child *child;
-    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x0C */ u8 unk0C[0xC];
+    /* 0x18 */ void *callback;
     /* 0x1C */ char name[0x40];
 };
 

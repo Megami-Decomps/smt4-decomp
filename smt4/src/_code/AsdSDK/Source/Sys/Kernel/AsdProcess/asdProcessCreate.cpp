@@ -3,7 +3,7 @@
 
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 extern const char g_asdProcessSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Sys\Kernel\AsdProcess.cpp": __FILE__ */

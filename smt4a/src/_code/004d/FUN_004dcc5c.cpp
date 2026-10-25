@@ -3,7 +3,7 @@
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "shard/FUN_004fbeac.h"
+#include "battle/btlDebug.h"
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 void FUN_004fdcd8(s32 delay, u32 group, s32 first, s32 last, s32 kind, s32 mode, s32 duration, s32 flags);

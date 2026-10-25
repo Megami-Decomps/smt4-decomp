@@ -114,3 +114,33 @@ void *asdOperatorNew(u32 size, ...);
 }
 
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002c2424(u32 first, u32 second);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_003ca87c(u32 a, u32 b, u32 c);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void efctSetSpeed(float speed);
+
+#ifdef __cplusplus
+}
+#endif

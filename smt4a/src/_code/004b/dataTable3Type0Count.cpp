@@ -1,5 +1,5 @@
 #include "shard/Shard004B.h"
-#include "shard/dataTable3Type0Count.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 

@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail preserves x/y in ip/r4 and saves r4/r5; compiled wrapper converts directly without saving registers. */
 #include "common.h"
-#include "shard/FUN_0025cc78.h"
+#include "text/TextDraw.h"
 
 extern "C" void FUN_00180998(const void* text, u32 start, s32 length,
                              f32 x, f32 y, f32 opacity, f32 scale);

@@ -12,4 +12,14 @@ struct DataTable25Record {
     /* 0x22 */ u8 unk22[0x2c - 0x22];
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+DataTable25Record *dataTable25FindById(u32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

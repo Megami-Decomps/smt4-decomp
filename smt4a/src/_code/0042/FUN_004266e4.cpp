@@ -1,5 +1,6 @@
-/* NON_MATCHING: the thread-pointer read and svc 0x32 now match through nn/svc.h; armcc pairs/orders the command-buffer stores (stm/strd, descriptor order) differently from retail. */
+/* NON_MATCHING: the byte parameters spill and read back through memcpy as in retail; the saved receive-buffer pair is copied through VFP d8 here while retail uses ldrd/strd in r6:r7, and the command stores are ordered differently. */
 #include "nn/svc.h"
+#include <string.h>
 
 extern "C" {
 extern u32 DAT_005b4438;
@@ -8,8 +9,8 @@ u32 FUN_004266e4(u32 inputAddress, u32 outputAddress, u8 firstFlag, u8 secondFla
 {
     nn::os::IpcCommandBuffer* command = nn::os::GetIpcCommandBuffer();
     command->header = 0x002d0082;
-    *reinterpret_cast<u8*>(&command->words[0]) = firstFlag;
-    *reinterpret_cast<u8*>(&command->words[1]) = secondFlag;
+    memcpy(&command->words[0], &firstFlag, sizeof firstFlag);
+    memcpy(&command->words[1], &secondFlag, sizeof secondFlag);
     command->words[3] = inputAddress;
     command->words[2] = 0x00800002;
 

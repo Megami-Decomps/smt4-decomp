@@ -39,40 +39,240 @@ typedef char BtlMainCameraTransitionOffsetsCheck[
     sizeof(BtlMain) == 0x638 ? 1 : -1];
 
 struct BtlActionRecord;
+struct BtlEntry;
+struct BattleActionHistoryEntry;
 
-/* The battle's state block, kept by a module global (Shin Megami Tensei IV layout). */
+struct BtlEncounterEntry {
+    s32 id;
+    s16 listedId;
+    s8 category;
+    u8 unk07[0x19];
+};
+typedef char BtlEncounterEntrySizeCheck[sizeof(BtlEncounterEntry) == 0x20 ? 1 : -1];
+
+/* One unit's status record in the battle state's table (BtlMainState.unitStatus). */
+typedef struct BtlScriptStatusRecord {
+    /* 0x00 */ u32 flags;
+    /* 0x04 */ s16 unitId;
+    /* 0x06 */ u8 statusA;
+    /* 0x07 */ u8 statusB;
+} BtlScriptStatusRecord;
+typedef char BtlScriptStatusRecordLayout[
+    sizeof(BtlScriptStatusRecord) == 8 &&
+    offsetof(BtlScriptStatusRecord, statusA) == 6 &&
+    offsetof(BtlScriptStatusRecord, statusB) == 7 ? 1 : -1];
+
+struct BtlLoadedActionResource {
+    u32 unk00;
+    s32 id; /* 0x04 */
+};
+
+/* The battle's state block, kept by a module global (Shin Megami Tensei IV layout). Its allocation is
+ * 0x4A58 bytes (FUN_001b0db4 allocates it with the size of this block). */
 typedef struct BtlMainState {
-    /* 0x0000 */ u32 job;         /* job that runs the battle */
     union {
-        /* 0x0004 */ u8 unk0004[0x28];
+        /* 0x0000 */ u8 unk0000[0x1E84];
+        /* 0x0000 */ u32 job;         /* job that runs the battle */
         struct {
-            u8 unk0004[0x18];
+            u8 prefix[0x1C];
             /* 0x001C */ u32 job;
         } targetSelect;
+        struct {
+            u8 prefix[0x2C];
+            /* 0x002C */ u32 jobB;        /* second job */
+            /* 0x0030 */ u8 unk0030[0x30];
+            /* 0x0060 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
+            /* 0x0061 */ u8 unk0061[3];
+            /* 0x0064 */ u32 mode;
+            /* 0x0068 */ u8 unk0068[0x18];
+            /* 0x0080 */ s8 firstBonus;
+            /* 0x0081 */ s8 secondBonus;
+            /* 0x0082 */ u8 unk0082[0x42];
+            /* 0x00C4 */ s32 selectionIndex;
+            /* 0x00C8 */ u8 unk00C8[0x90];
+            /* 0x0158 */ u32 selectedIds[1];
+        } core;
+        struct {
+            u8 prefix[0x58];
+            /* 0x58 */ u32 job;
+        } editor;
+        struct {
+            u8 unk000BeforeSprite[0xC0];
+            /* 0x0C0 */ s32 templateIndex;
+            /* 0x0C4 */ s32 fallbackIndex;
+            u8 unk0C8[0x7C];
+            /* 0x144 */ void *metadata;
+            /* 0x148 */ s32 metadataIndex;
+            u32 unk14C;
+            /* 0x150 */ s32 bank;
+            /* 0x154 */ s32 page;
+            /* 0x158 */ u32 coordinates[5];
+        } spriteSource;
+        struct {
+            u8 prefix[0x760];
+            /* 0x760 */ s32 unitIndex;
+        } talk;
+        struct {
+            u8 unk0000[8];
+            /* 0x008 */ u32 drawJob;
+            u8 unk0c[0xb4];
+            /* 0x0C0 */ s32 encounterId;
+            u8 unkc4[0x1c];
+            /* 0x0E0 */ u32 flags;
+            /* 0x0E4 */ u32 flagsE4;
+            u8 unke8[0x30C];
+            /* 0x3F4 */ BtlEncounterEntry records[50];
+        } encounter;
+        struct {
+            u8 unk0000[0x84];
+            /* 0x84 */ s32 index;
+            /* 0x88 */ s32 mode;
+        } actionState;
+        struct {
+            u8 prefix[0xF2];
+            /* 0x00F2 */ u16 devilId;
+        } devil;
     };
-    /* 0x002C */ u32 jobB;        /* second job */
-    /* 0x0030 */ u8 unk0030[0x30];
-    /* 0x0060 */ u8 freeOnEnd;    /* 0 = keep the block after the job ends */
-    /* 0x0061 */ u8 unk0061[0x1F];
-    /* 0x0080 */ s8 firstBonus;
-    /* 0x0081 */ s8 secondBonus;
-    /* 0x0082 */ u8 unk0082[0x42];
-    /* 0x00C4 */ s32 selectionIndex;
-    /* 0x00C8 */ u8 unk00C8[0x18];
-    /* 0x00E0 */ u32 flagsE0;
-    /* 0x00E4 */ u8 unk00E4[0x74];
-    /* 0x0158 */ u32 selectedIds[1];
-    /* 0x015C */ u8 unk015C[0x1D28];
     /* 0x1E84 */ s16 unitTotal;
-    /* 0x1E86 */ u8 unk1E86[0x12];
+    /* 0x1E86 */ u8 unk1E86[2];
+    struct {
+        /* 0x1E88 */ void *file;
+        /* 0x1E8C */ u8 unk1E8C[0xC];
+    } arrangement;
+    /* 0x1E98 */ struct BtlActionRecord *actions;
+    /* 0x1E9C */ u8 groupCount;
+    /* 0x1E9D */ u8 completedCount;
+    /* 0x1E9E */ u8 unk1E9E[0x11E];
+    /* 0x1FBC */ struct BattleActionHistoryEntry *history;
+    /* 0x1FC0 */ struct BtlEntry *entries;        /* BTL_ENTRY_COUNT entries */
     union {
-        /* 0x1E98 */ u32 unk1E98;
-        /* 0x1E98 */ BtlActionRecord* actions;
+        /* 0x1FC4 */ u8 unk1fc4[0xC];
+        /* 0x1FC4 */ s16 eventCount;
+        struct {
+            u8 unk1FC4[2];
+            /* 0x1FC6 */ s16 gate;
+        } emergencyAction;
+        struct {
+            u8 unk1FC4[4];
+            /* 0x1FC8 */ s16 kind;
+            /* 0x1FCA */ s16 second;
+        } resolution;
     };
+    /* 0x1FD0 */ s64 pendingAction;
+    union {
+        /* 0x1FD8 */ u8 unk1fd8[0x44A0 - 0x1FD8];
+        /* 0x1FD8 */ s64 secondaryPendingAction;
+        struct {
+            u8 unk1FD8[0x15C];
+            /* 0x2134 */ BtlLoadedActionResource *resources[42];
+            /* 0x21DC */ s16 retainedIds[42];
+            u8 unk2230[0x2224];
+            /* 0x4454 */ s32 selectedAction;
+            /* 0x4458 */ BtlLoadedActionResource *selectedResource;
+        } actionCleanup;
+        struct {
+            u8 prefix1FD8[0x258];
+            /* 0x2230 */ u32 messageHandle;    /* the unit/message the battle's pending request is aimed at */
+            /* 0x2234 */ u32 messageWindow;    /* the window the battle's choice is shown in */
+        } dialog;
+        struct {
+            u8 unk1FD8[0x282];
+            /* 0x225A */ s16 checkId;           /* listed id of the player's unit */
+        } playerCheck;
+        struct {
+            u8 unk1FD8[0xF2E];
+            /* 0x2F06 */ s16 order[12];
+        } turnOrder;
+    };
+    /* 0x44A0 */ u32 battleFlags;
+    union {
+        /* 0x44A4 */ u8 unk44a4[0x49BC - 0x44A4];
+        /* 0x44A4 */ u32 spriteFlags;
+        struct {
+            u8 unk44a4[4];
+            /* 0x44A8 */ u32 flags;
+            /* 0x44AC */ u32 flags44AC;
+        } editorControl;
+        struct {
+            u8 unk44a4[0x10];
+            /* 0x44B4 */ u8 busyA;
+            /* 0x44B5 */ u8 bonus;
+            /* 0x44B6 */ u8 difficulty;
+            /* 0x44B7 */ u8 blocked;
+        } encounterControl;
+        struct {
+            u8 unk44a4[0x414];
+            /* 0x48B8 */ u32 minimumPercentApplied;   /* set once an affinity query raised its percent to the minimum */
+        } affinity;
+        struct {
+            u8 unk44a4[0x14];
+            /* 0x44B8 */ BtlScriptStatusRecord records[128];
+        } unitStatus;
+        struct {
+            u8 unk44a4[0x4968 - 0x44A4];
+            /* 0x4968 */ s16 x;
+            /* 0x496A */ s16 y;
+            /* 0x496C */ u8 unk496C[4];
+            /* 0x4970 */ s16 targetX;
+            /* 0x4972 */ s16 targetY;
+        } menuCursor;
+        struct {
+            u8 unk44a4[0x4978 - 0x44A4];
+            /* 0x4978 */ s32 complete;
+        } completion;
+    };
+    /* 0x49BC */ u32 flags49BC;
+    /* 0x49C0 */ s32 selectedGroup;  /* 0xff when no group is selected */
+    /* 0x49C4 */ u8 unk49c4;
+    /* 0x49C5 */ s8 hasActiveEntry;
+    /* 0x49C6 */ u8 unk49C6[0xA];
+    /* 0x49D0 */ u64 flags49D0;
+    /* 0x49D8 */ u8 unk49D8[4];
+    /* 0x49DC */ u32 word49DC;
+    /* 0x49E0 */ u32 pending;
+    /* 0x49E4 */ u32 effectValue;       /* the battle effect value chosen by the effect starter */
+    /* 0x49E8 */ u8 unk49E8[0x70];
 } BtlMainState;
 typedef char BtlMainStateLayoutCheck[
-    sizeof(BtlMainState) == 0x1E9C && offsetof(BtlMainState, selectionIndex) == 0xC4 && offsetof(BtlMainState, flagsE0) == 0xE0 && offsetof(BtlMainState, firstBonus) == 0x80 && offsetof(BtlMainState, secondBonus) == 0x81 &&
-    offsetof(BtlMainState, selectedIds) == 0x158 && offsetof(BtlMainState, unitTotal) == 0x1E84 ? 1 : -1];
+    sizeof(BtlMainState) == 0x4A58 && offsetof(BtlMainState, core.selectionIndex) == 0xC4 &&
+    offsetof(BtlMainState, core.jobB) == 0x2C && offsetof(BtlMainState, core.freeOnEnd) == 0x60 &&
+    offsetof(BtlMainState, core.firstBonus) == 0x80 && offsetof(BtlMainState, core.secondBonus) == 0x81 &&
+    offsetof(BtlMainState, core.selectedIds) == 0x158 && offsetof(BtlMainState, targetSelect.job) == 0x1C &&
+    offsetof(BtlMainState, unitTotal) == 0x1E84 && offsetof(BtlMainState, arrangement.file) == 0x1E88 &&
+    offsetof(BtlMainState, actions) == 0x1E98 && offsetof(BtlMainState, groupCount) == 0x1E9C &&
+    offsetof(BtlMainState, completedCount) == 0x1E9D && offsetof(BtlMainState, history) == 0x1FBC &&
+    offsetof(BtlMainState, entries) == 0x1FC0 ? 1 : -1];
+typedef char BtlMainStateHeadOffsetCheck[
+    offsetof(BtlMainState, editor.job) == 0x58 && offsetof(BtlMainState, encounter.drawJob) == 8 &&
+    offsetof(BtlMainState, encounter.encounterId) == 0xC0 && offsetof(BtlMainState, encounter.flags) == 0xE0 &&
+    offsetof(BtlMainState, encounter.records) == 0x3F4 && offsetof(BtlMainState, talk.unitIndex) == 0x760 &&
+    offsetof(BtlMainState, actionState.index) == 0x84 && offsetof(BtlMainState, actionState.mode) == 0x88 &&
+    offsetof(BtlMainState, spriteSource.templateIndex) == 0xC0 && offsetof(BtlMainState, spriteSource.metadata) == 0x144 &&
+    offsetof(BtlMainState, spriteSource.coordinates) == 0x158 ? 1 : -1];
+typedef char BtlMainStateBodyOffsetCheck[
+    offsetof(BtlMainState, eventCount) == 0x1FC4 && offsetof(BtlMainState, emergencyAction.gate) == 0x1FC6 &&
+    offsetof(BtlMainState, resolution.kind) == 0x1FC8 && offsetof(BtlMainState, pendingAction) == 0x1FD0 &&
+    offsetof(BtlMainState, secondaryPendingAction) == 0x1FD8 && offsetof(BtlMainState, actionCleanup.resources) == 0x2134 &&
+    offsetof(BtlMainState, actionCleanup.retainedIds) == 0x21DC && offsetof(BtlMainState, dialog.messageHandle) == 0x2230 &&
+    offsetof(BtlMainState, playerCheck.checkId) == 0x225A && offsetof(BtlMainState, actionCleanup.selectedAction) == 0x4454 &&
+    offsetof(BtlMainState, actionCleanup.selectedResource) == 0x4458 ? 1 : -1];
+typedef char BtlMainStateTailOffsetCheck[
+    offsetof(BtlMainState, battleFlags) == 0x44A0 && offsetof(BtlMainState, spriteFlags) == 0x44A4 &&
+    offsetof(BtlMainState, editorControl.flags) == 0x44A8 && offsetof(BtlMainState, editorControl.flags44AC) == 0x44AC &&
+    offsetof(BtlMainState, encounterControl.blocked) == 0x44B7 && offsetof(BtlMainState, affinity.minimumPercentApplied) == 0x48B8 &&
+    offsetof(BtlMainState, flags49BC) == 0x49BC && offsetof(BtlMainState, selectedGroup) == 0x49C0 &&
+    offsetof(BtlMainState, hasActiveEntry) == 0x49C5 && offsetof(BtlMainState, flags49D0) == 0x49D0 &&
+    offsetof(BtlMainState, effectValue) == 0x49E4 ? 1 : -1];
+typedef char BtlMainStateViewOffsetCheck[
+    offsetof(BtlMainState, core.mode) == 0x64 && offsetof(BtlMainState, devil.devilId) == 0xF2 &&
+    offsetof(BtlMainState, encounter.flagsE4) == 0xE4 && offsetof(BtlMainState, dialog.messageWindow) == 0x2234 &&
+    offsetof(BtlMainState, turnOrder.order) == 0x2F06 && offsetof(BtlMainState, menuCursor.x) == 0x4968 &&
+    offsetof(BtlMainState, menuCursor.y) == 0x496A && offsetof(BtlMainState, menuCursor.targetX) == 0x4970 &&
+    offsetof(BtlMainState, menuCursor.targetY) == 0x4972 && offsetof(BtlMainState, encounterControl.busyA) == 0x44B4 &&
+    offsetof(BtlMainState, encounterControl.bonus) == 0x44B5 && offsetof(BtlMainState, encounterControl.difficulty) == 0x44B6 &&
+    offsetof(BtlMainState, unitStatus.records) == 0x44B8 && offsetof(BtlMainState, pending) == 0x49E0 &&
+    offsetof(BtlMainState, resolution.second) == 0x1FCA && offsetof(BtlMainState, word49DC) == 0x49DC &&
+    offsetof(BtlMainState, completion.complete) == 0x4978 ? 1 : -1];
 
 struct BtlCombatantEntryA;
 struct BattleRosterRecordA;

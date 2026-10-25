@@ -1,5 +1,5 @@
 #include "shard/Shard004B.h"
-#include "shard/dataTable33TypeCount.h"
+#include "gamedata/DataTableSections.h"
 
 extern "C" {
 

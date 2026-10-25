@@ -17,7 +17,7 @@ extern "C" void FUN_002a6acc(s32 *yearOut, s32 *monthOut, s32 *dayOut, s32 days)
     s32 dayOfQuadYear = dayOfCentury % 1461;
     s32 singleYear = dayOfQuadYear / 365;
     s32 dayOfYear = dayOfQuadYear % 365;
-    s32 month = (dayOfYear * 5 + 2) / 153;
+    u32 month = (dayOfYear * 5 + 2) / 153;
     s32 year = era * 400 + century * 100 + quadYear * 4 + singleYear + 2000;
     s32 day = dayOfYear - (month * 153 + 2) / 5 + 1;
     if (singleYear == 4 || century == 4) {

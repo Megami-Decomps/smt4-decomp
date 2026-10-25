@@ -1,10 +1,11 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/BtlFlagWord.h"
 #include "util/CalleeContracts.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-BtlMainState *btlGetMainState();
 extern void *g_btlUiBlock;
 
 /* Enables the battle feature and records its active flag. */

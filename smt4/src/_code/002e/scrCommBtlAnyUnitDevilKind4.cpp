@@ -17,10 +17,10 @@ u32 scrCommBtlAnyUnitDevilKind4(void)
     s32 index;
 
     for (index = 0; index < 0x6D; index++) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            if (devilGetRecord(unit->groupId)->kind == 4) {
+            if (devilGetRecord(unit->id)->kind == 4) {
                 scrSetResult(1);
                 return 1;
             }

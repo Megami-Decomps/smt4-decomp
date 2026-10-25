@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rebuild of the save/load prompt state machine (the draft's call arguments were kept as it read them); armcc here shares the state-store tail and the script-process pointer reload differently. */
 #include "common.h"
-#include "shard/FUN_00333574.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 /* The script process the prompt runs. */
 struct LazyScript {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail forms the entry offset as (index << 2) + 4 in registers (mov r0, #4; add r1, r0, r1, lsl #2) instead of folding the 4 into the load offsets. */
 #include "common.h"
 
 struct Obj50d3e0Table {
@@ -18,7 +17,8 @@ extern "C" u32 FUN_0050d3e0(Obj50d3e0 *obj, s32 index, u32 value)
     if (table == NULL) {
         return 0;
     }
-    u32 old = table->entries[index];
-    table->entries[index] = value;
+    u32 offset = 4 + index * 4;
+    u32 old = *(u32 *)((u8 *)table + offset);
+    *(u32 *)((u8 *)table + offset) = value;
     return old;
 }

@@ -6,7 +6,7 @@ s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
 u32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(u32 group, s32 *first, s32 *count);
-BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
+BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 // Test whether a matching group member or active unit has packed status kind four.
 u32 FUN_003123a4(void)
@@ -18,16 +18,16 @@ u32 FUN_003123a4(void)
     s32 count;
     FUN_002499fc(group, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
-        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id &&
+        BtlEntry *unit = &btlGetMainState()->entries[index];
+        if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id &&
             (unit->values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry) {
-        BtlUnitEntry *unit = btlMainFindActiveEntry(reinterpret_cast<BtlState *>(btlGetMainState()));
-        if (unit && unit->groupId == id && (unit->values[slot] >> 10) == 4) {
+    if (btlGetMainState()->hasActiveEntry) {
+        BtlEntry *unit = btlMainFindActiveEntry(btlGetMainState());
+        if (unit && unit->id == id && (unit->values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;
         }

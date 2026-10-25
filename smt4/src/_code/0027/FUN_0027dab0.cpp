@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler swaps the entry pointer and searched ID between R1/R2 and reverses comparison operands; loop structure, two-way unrolling, and calls otherwise match. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 struct ListedMember {
     u8 unk00[0x62]; // 0x00

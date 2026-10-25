@@ -12,7 +12,7 @@ u32 FUN_002f6fcc(void)
     s32 i;
 
     for (i = 0; i < 109; i++) {
-        BtlUnitEntry *unit = &btlGetMainStateExt()->units[i];
+        BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
             u16 state = unit->values[slot];

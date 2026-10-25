@@ -9,7 +9,7 @@ extern "C" {
 
 
 // Queue reflected records for a selected combatant, then its final state-change action.
-u32 FUN_00246454(s32 actor, u32 options, BtlUnitEntry *unit)
+u32 FUN_00246454(s32 actor, u32 options, BtlEntry *unit)
 {
     for (s32 index = 0; index < 109; ++index) {
         s16 selected = unit->selectionIndex;

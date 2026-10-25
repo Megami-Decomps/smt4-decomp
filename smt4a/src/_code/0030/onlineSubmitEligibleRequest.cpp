@@ -44,7 +44,7 @@ u32 onlineSubmitEligibleRequest(void*, const OnlineRequestState* state, OnlineCl
         u32 argument = state->argument;
         OnlineSubmitResult result;
         FUN_002f6740(&result, client, FUN_00123474, &argument, DAT_005949d8.kind);
-        if (!nnResultIsFailure(result.status)) {
+        if (nnResultIsSuccess(result.status)) {
             return 1;
         }
         FUN_002f674e(client);

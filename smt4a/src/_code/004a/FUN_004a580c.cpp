@@ -4,7 +4,6 @@
 #include "ui/ItemListSelection.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/FUN_0031f208.h"
 
 struct QuestListEntry {
     /* 0x00 */ u8 unk00[4];

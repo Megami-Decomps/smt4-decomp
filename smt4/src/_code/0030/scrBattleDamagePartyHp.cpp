@@ -17,23 +17,23 @@ u32 scrBattleDamagePartyHp()
 {
     s32 amount = scrGetArg(0);
     s32 mode = scrGetArg(1);
-    void *source = btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit));
+    void *source = btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
     for (s32 slot = 0; slot < 4; ++slot) {
-        BtlUnitEntry *target = &btlGetMainStateExt()->units[slot];
-        if ((target->flags & 1) && !(target->flags & 0x40) && target->mainIndex >= 0) {
+        BtlEntry *target = &btlGetMainState()->entries[slot];
+        if ((target->flags & 1) && !(target->flags & 0x40) && target->members.ids[0] >= 0) {
             s32 damage = 0;
             switch (mode) {
-            case 0: damage = target->hpMax * amount / 100; break;
+            case 0: damage = target->maxHp * amount / 100; break;
             case 1: damage = target->hp * amount / 100; break;
             case 2: damage = amount; break;
             }
             if (target->hp <= damage)
                 damage = target->hp - 1;
-            FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainStateExt()));
-            BtlActionRecord *unit = btlGetMainStateExt()->actions;
-            unit += target->mainIndex;
+            FUN_00250720(reinterpret_cast<SlotManager *>(btlGetMainState()));
+            BtlActionRecord *unit = btlGetMainState()->actions;
+            unit += target->members.ids[0];
             s32 slotMask = slot << 3;
-            FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->hp, target->hpMax,
+            FUN_002551ac(0, source, unit, 0, damage, -1, -1, target->hp, target->maxHp,
                           0, 0, 0, 0, 1, 0, slotMask, slotMask, slotMask, slotMask, 1, 0, 1, 1, 0, 1);
             FUN_002505c0(0, source, 0x1000185, 0, 0, 0, 0);
         }

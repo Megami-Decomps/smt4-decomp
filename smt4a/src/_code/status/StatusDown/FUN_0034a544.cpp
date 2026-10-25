@@ -1,11 +1,11 @@
 /* NON_MATCHING: the zeroed-field stores, the sprite setup scheduling and the pooled constants are laid out differently from retail (252 vs 249 rows); the screen setup is the same. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "shard/fillTwoWordsWithByte.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/fillTwoWordsWithByte.h"
 
 extern "C" {
 

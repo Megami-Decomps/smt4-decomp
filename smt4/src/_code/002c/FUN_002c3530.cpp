@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_002c3530.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 struct Vec3f {
     f32 x, y, z;

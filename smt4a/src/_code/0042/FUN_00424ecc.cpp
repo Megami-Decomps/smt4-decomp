@@ -29,7 +29,7 @@ void FUN_00424ecc(RecordLoader *table)
         return;
     if (table->kind2Count > 0) {
         bool loaded = true;
-        for (s32 i = 0; i < table->kind2Count; i++) {
+        for (u32 i = 0; i < table->kind2Count; i++) {
             if (table->payloads[i].body != NULL)
                 continue;
             u32 exists;
@@ -68,7 +68,7 @@ void FUN_00424ecc(RecordLoader *table)
             FUN_00514284(*table->file, table->kind2Source[i]);
             for (s32 j = 0; j < table->kind0Count; j++) {
                 RecordKind0 *kind0 = &table->kind0[j];
-                if (table->kind2[i].word == table->kind0Source[j] && kind0 != NULL && kind0->words[1] < 2 &&
+                if (table->kind0Source[j] == table->kind2[i].word && kind0 != NULL && kind0->words[1] < 2 &&
                     (table->payloads[i].header[1] & 1) != 0) {
                     table->state = 7;
                     table->errors |= 0x400;

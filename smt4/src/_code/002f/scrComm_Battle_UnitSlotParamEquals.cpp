@@ -25,7 +25,7 @@ s32 scrComm_Battle_UnitSlotParamEquals(void)
         index = 0xB;
     }
     value = scrGetArg(1);
-    unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     slotParams = unit->params + index;
     scrSetResult(slotParams[0x39] == value);
     return 1;

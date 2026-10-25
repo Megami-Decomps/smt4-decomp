@@ -1,4 +1,5 @@
 /* NON_MATCHING: readable rebuild of the shop item table builder from asm (the draft was unstructured); the FUN_004396bc call takes 16 stack words laid out as read from the retail prologue, and the entry word is composed by bit-field masks that armcc here orders differently (retail: bic/orr pairs over one register). */
+#include "nn/Result.h"
 #include "common.h"
 
 /* One column of a data row: a name and its value. */
@@ -81,7 +82,7 @@ s32 FUN_00428334(TableLoader *loader, TableEntry *entry, u16 id);
 s32 FUN_00426acc(TableLoader *loader, u32 argA, u32 argB, TableBuildConfig *config)
 {
     s32 result = FUN_00428428(loader, config->sourceA, config->sourceB);
-    if (result < 0)
+    if (nnResultIsFailure(result))
         return result;
     u8 *base = dataGetBlockBase(loader);
     u32 size = FUN_004283e0(loader);
@@ -100,9 +101,9 @@ s32 FUN_00426acc(TableLoader *loader, u32 argA, u32 argB, TableBuildConfig *conf
                           &DAT_00642980, DAT_005c0a8c, base, size, fifth, config->fifth != NULL, sixth,
                           config->sixth != NULL, config->seventh, config->eighth, (u32 *)&loader->rows,
                           loader->sizeA, loader->sizeB);
-    if (result >= 0)
+    if (nnResultIsSuccess(result))
         result = 0;
-    if (result < 0)
+    if (nnResultIsFailure(result))
         return result;
     for (u32 i = 0; loader->rows != NULL && i < loader->rows->count; i++) {
         DataRow *row = (loader->rows != NULL && i <= loader->rows->count) ? &loader->rows->rows[i] : NULL;
@@ -138,7 +139,7 @@ s32 FUN_00426acc(TableLoader *loader, u32 argA, u32 argB, TableBuildConfig *conf
         entry.id = id;
         entry.flags = category | ((word0 & 0xFF) << 8) | (premium << 16);
         result = FUN_00428334(loader, &entry, version);
-        if (result < 0)
+        if (nnResultIsFailure(result))
             return result;
     }
     if (loader->rows != NULL && loader->rows->unk08 != 0)

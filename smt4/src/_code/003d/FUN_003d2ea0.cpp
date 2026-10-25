@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail hoists the constants 1, 30 and 27 into r9/r7/sl, reads g_btlScriptUnit as the word after g_btlAction (r8 + 4), and shares the FUN_0022a5d8 call between the 0x80 and entry-flag branches while keeping the 0x100 branch's own call; this build gives each branch the same shape. */
 #include "common.h"
-#include "shard/battleGetEntryHalfword.h"
+#include "battle/btlHelp.h"
 
 /* The combatant record of an action: its id is at 0x62. */
 struct ActionRecord {

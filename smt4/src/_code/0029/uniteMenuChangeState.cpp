@@ -1,4 +1,4 @@
-/* NON_MATCHING: ARMCC clusters the switch instead of retail's dense 36-entry table and uses a smaller saved-register set. */
+/* NON_MATCHING: the dense 36-entry table now matches (explicit labels); retail keeps an extra zero in r9 and saves a larger register set. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "status/StatusCamera.h"
 
@@ -109,6 +109,31 @@ void uniteMenuChangeState(u32 state, s32 preservePrevious)
     case 0x22:
     case 0x23:
         buttonHelpSetPreset(0x58);
+        break;
+    case 0:
+    case 1:
+    case 2:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 12:
+    case 14:
+    case 16:
+    case 17:
+    case 18:
+    case 20:
+    case 22:
+    case 23:
+    case 24:
+    case 25:
+    case 29:
+    case 30:
+    case 31:
+    case 32:
         break;
     }
     if (preservePrevious != 0) {

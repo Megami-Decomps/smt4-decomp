@@ -41,11 +41,11 @@ u32 FUN_0028cfd8(u32 skillId)
         return 2;
     if (skill->amount != 0)
         return FUN_0028d320(skill->amount);
-    BtlMainStateExt *battle = btlGetMainStateExt();
-    if (battle->stateFlags & 0x2000000)
+    BtlMainState *battle = btlGetMainState();
+    if (battle->editorControl.flags & 0x2000000)
         return 0;
     for (s32 i = 0; i < 4; i++) {
-        BtlUnitEntry *member = &battle->units[i];
+        BtlEntry *member = &battle->entries[i];
         if (!(member->flags & 1) || (member->flags & 0x40))
             continue;
         u32 need = 0;
@@ -56,16 +56,16 @@ u32 FUN_0028cfd8(u32 skillId)
             need |= 2;
         if (skill->ailmentKind & 0x7F)
             need |= 4;
-        if ((need & 1) && !(member->flagMask & 2) && member->hp != member->hpMax)
+        if ((need & 1) && !(member->groupMask & 2) && member->hp != member->maxHp)
             have = 1;
-        if ((need & 2) && member->mp != member->mpMax)
+        if ((need & 2) && member->mp != member->maxMp)
             have |= 2;
         if ((need & 1) && (need & 2) && (have & 3))
             have |= 3;
         if (need & 4) {
             u16 mask = 0;
             FUN_0023dc38(&mask, skill->ailmentKind & 0x7F);
-            if (mask & member->flagMask)
+            if (mask & member->groupMask)
                 have |= 4;
         }
         if (need == have)

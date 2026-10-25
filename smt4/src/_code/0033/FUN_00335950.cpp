@@ -12,10 +12,6 @@ struct BattleTransitionSelector {
     /* 0x14 */ u32 secondFile;
     /* 0x18 */ u32 job;
 };
-struct BattleTransitionMain {
-    /* 0x0000 */ u8 unk0000[0x4978];
-    /* 0x4978 */ s32 complete;
-};
 struct BattleTransitionSave {
     /* 0x00000 */ u8 unk00000[0x24b29];
     /* 0x24B29 */ u8 count;
@@ -80,9 +76,9 @@ extern "C" s32 FUN_00335950(BattleTransitionSelector *selector)
         if (scrRunOpcodesStub(selector->scriptProcess) != 2) return 0;
         uiFadeRelease();
         buttonHelpRelease();
-        BattleTransitionMain *battle = reinterpret_cast<BattleTransitionMain *>(btlGetMainState());
-        if ((selector->flags & 1) || battle->complete == 1) {
-            battle->complete = 1;
+        BtlMainState *battle = btlGetMainState();
+        if ((selector->flags & 1) || battle->completion.complete == 1) {
+            battle->completion.complete = 1;
             selector->state = 9;
             return -1;
         }

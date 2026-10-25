@@ -36,7 +36,7 @@ void FUN_00342e5c(const RoutedConnectorState* state, const f32* start, const f32
             pixelOffset = 0.5f;
         }
     }
-    FUN_002d5900(color, color, start[0], start[1], bendX + pixelOffset, bendY,
+    FUN_002d5900(color, color, start[0], start[1], pixelOffset + bendX, bendY,
                   (256 - fade) * (1.0f / 256.0f), 1.0f);
     FUN_002d5900(color, color, bendX + pixelOffset, bendY, end[0], end[1],
                   (256 - fade) * (1.0f / 256.0f), 1.0f);

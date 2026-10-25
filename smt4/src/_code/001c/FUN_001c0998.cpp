@@ -1,6 +1,6 @@
 /* NON_MATCHING: group-root loads and the traversal-bank selection are scheduled differently. */
 #include "common.h"
-#include "shard/asdLightActivate.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct SceneNode;
 struct SceneTraverser;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -13,10 +14,6 @@ int spriteStartAnimationByIndex(void *block, int a);
 extern int FUN_00293230(void);
 extern int buttonHelpGetStatus(void);
 
-typedef struct BtlMain {
-    /* 0x0000 */ u8 unk0000[0x44A0];
-    /* 0x44A0 */ u32 flags;
-} BtlMain;
 
 typedef struct Scene {
     /* 0x0000 */ u8 unk0000[0x20];
@@ -55,7 +52,7 @@ void FUN_002cfed0(Scene *scene, u32 a, u8 b, u32 c)
         if (scene->unk3080 == 0) {
             btlGetMainState();
             result = FUN_00293230();
-            if ((result == 0) && (result = btlGetMainState(), (((BtlMain *)result)->flags & 0x200) == 0)) {
+            if ((result == 0) && (result = btlGetMainState(), (((BtlMainState *)result)->battleFlags & 0x200) == 0)) {
                 if (scene->state == 0x17) {
                     FUN_0028cf30(scene, scene->unk305C, c);
                     return;

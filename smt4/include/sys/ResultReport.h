@@ -11,4 +11,14 @@ void FUN_002c526c(u32 result);
 
 } /* extern "C" */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int FUN_00103c9c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

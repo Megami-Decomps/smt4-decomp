@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler folds the duplicated save-global loads and repeated counter address calculations. */
+/* NON_MATCHING: retail reads the counter through the save block pointer and writes it through a second, separately loaded save pointer offset by 0x8c (two global loads); the compiler folds the duplicated save-global loads and address calculations. */
 #include "common.h"
 extern "C" {
 struct SavedCounter { u8 unk00[0x9870]; u32 value; };

@@ -1,4 +1,3 @@
-/* NON_MATCHING: bsearch argument loads are scheduled differently (retail loads the comparator and g_aocSystem first) and the return paths are laid out differently (retail has a separate early-return epilogue for 0). */
 #include "addon/aocMain.h"
 #include "addon/AocLookup.h"
 
@@ -11,20 +10,26 @@ extern AocMain *g_aocMain;
 extern AocSystemA *g_aocSystem;
 
 /* Returns 0 when the add-on table of `system` has the record `id` and the SD card holds the add-on content; clears the availability flag when no card is detected. */
-u32 FUN_00471f64(AocSystemA *system, u16 id)
+static __inline AocTableSearchRecordA *searchAocRecords(const AocTableSearchRecordA *key, const AocTableSearchRecordA *records, u32 count, s32 (*compare)(const void *, const void *))
+{
+    return (AocTableSearchRecordA *)libc_bsearch(key, records, count, sizeof(AocTableSearchRecordA), compare);
+}
+
+u32 FUN_00471f64(AocSystemA *system, s16 id)
 {
     AocTableSearchRecordA key;
     key.id = id;
-    void *record = libc_bsearch(&key, system->table.records, g_aocSystem->table.count,
-                                sizeof(AocTableSearchRecordA), FUN_00476dfc);
-    if (record != NULL) {
-        if (asdFsIsSdCardDetected() != 0) {
-            if (objGetFlagBit16(g_aocMain) != 0) {
-                return 0;
-            }
-        } else {
-            g_aocMain->flags &= ~0x10000;
+    AocTableSearchRecordA *record = searchAocRecords(&key, system->table.records, g_aocSystem->table.count,
+                                         FUN_00476dfc);
+    if (record == NULL) {
+        return 1;
+    }
+    if (asdFsIsSdCardDetected() != 0) {
+        if (objGetFlagBit16(g_aocMain) != 0) {
+            return 0;
         }
+    } else {
+        g_aocMain->flags &= ~0x10000;
     }
     return 1;
 }

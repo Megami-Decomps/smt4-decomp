@@ -1,5 +1,5 @@
 #include "ui/MessageMain.h"
-#include "shard/messageDismissNumericBanner.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 extern "C" MessageGlobalsA g_messageMain;
 
 struct MessageNumericBanner {

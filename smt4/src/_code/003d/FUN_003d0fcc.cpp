@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail keeps context in caller-saved r3 across btlUnitGet (same-unit knowledge of the callee's register use), which a separate unit cannot reproduce; the rest is the resulting allocation. */
 #include "battle/BattleUnitSlot.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -9,18 +11,10 @@ extern "C" {
 #define BTL_MARK_UNIT_TARGETABLE 0x400
 
 /* A battle unit slot (0x288 bytes): only its flags are read here. */
-typedef struct BtlMarkUnit {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[0x284];
-} BtlMarkUnit;
 
-typedef struct BtlMarkState {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ BtlMarkUnit *units;
-} BtlMarkState;
 
 typedef struct BtlMarkContext {
-    /* 0x00 */ BtlMarkState *state;
+    /* 0x00 */ BtlMainState *state;
 } BtlMarkContext;
 
 /* The unit record whose per-slot marks this unit sets. */
@@ -34,12 +28,12 @@ typedef struct BtlMarkTarget {
  * targetable units (4..53) for side 1, otherwise every targetable visible unit. */
 void FUN_003d0fcc(BtlMarkContext *context, s32 side, s32 mode)
 {
-    BtlMarkTarget *target = reinterpret_cast<BtlMarkTarget *>(btlUnitGet(reinterpret_cast<BtlState *const *>(context)));
-    BtlMarkUnit *units;
+    BtlMarkTarget *target = reinterpret_cast<BtlMarkTarget *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(context)));
+    BtlEntry *units;
     s32 i;
 
     if (mode == 2) {
-        units = context->state->units;
+        units = context->state->entries;
         for (i = 0; i < 109; i++) {
             if ((units[i].flags & BTL_MARK_UNIT_PRESENT) && !(units[i].flags & BTL_MARK_UNIT_EXCLUDED)) {
                 target->marks[i] = 1;
@@ -47,7 +41,7 @@ void FUN_003d0fcc(BtlMarkContext *context, s32 side, s32 mode)
         }
         return;
     }
-    units = context->state->units;
+    units = context->state->entries;
     if (side == 1) {
         for (i = 4; i < 54; i++) {
             if (units[i].flags & BTL_MARK_UNIT_TARGETABLE) {

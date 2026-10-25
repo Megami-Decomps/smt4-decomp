@@ -1,7 +1,7 @@
 /* NON_MATCHING: draws the status icon of a quest list row (new, in progress, done, locked, selected) and returns the row text colour; written from the decompilation, the dataTable1bOr1cGetRecord argument is inferred and branch layout not compared with retail */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 #define QUEST_ICON_LAYER 2
 #define QUEST_ICON_TABLE 0x29

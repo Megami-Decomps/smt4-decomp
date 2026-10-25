@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the work pointer into r0 before storing the flag; compiler uses r1. */
 #include "common.h"
 
 extern "C" {
@@ -8,9 +7,14 @@ struct RequestWork {
 };
 extern RequestWork *g_requestWork;
 
+static __inline void requestSet(RequestWork *work, u32 requested)
+{
+    work->requested = requested;
+}
+
 /* Raises the pending request flag on the work. */
 void workRequest(void)
 {
-    g_requestWork->requested = 1;
+    requestSet(g_requestWork, 1);
 }
 }

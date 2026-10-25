@@ -2,7 +2,7 @@
 #include "map/mapDepart.h"
 #include <stddef.h>
 
-struct InteractionVariantFlags { u8 bits[8]; };
+struct InteractionVariantFlags { s8 bits[8]; };
 struct InteractionFlagBankView {
     u8 unk000[0x2F0];
     InteractionVariantFlags extended[320];

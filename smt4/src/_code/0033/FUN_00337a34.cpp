@@ -1,5 +1,6 @@
 /* NON_MATCHING: retained-ID scan unrolls; saved state/resource registers and combatant flag stores differ. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
 extern "C" {
@@ -29,12 +30,12 @@ void FUN_00337a34(BtlMainState *state)
             }
             state->actionCleanup.selectedResource = NULL;
         }
-        state->actions.records[state->actionCleanup.selectedAction].status = 0;
-        BtlEntry *entry = &state->entries[state->actions.records[state->actionCleanup.selectedAction].participant.combatantIndex];
+        state->actions[state->actionCleanup.selectedAction].status = 0;
+        BtlEntry *entry = &state->entries[state->actions[state->actionCleanup.selectedAction].participant.combatantIndex];
         // A 64-bit member would realign the shared byte union and shift the remaining entry fields.
         struct EntryFlagsView { u64 flags; };
         reinterpret_cast<EntryFlagsView *>(entry)->flags = 0;
-        state->actions.records[state->actionCleanup.selectedAction].participant.combatantIndex = -1;
+        state->actions[state->actionCleanup.selectedAction].participant.combatantIndex = -1;
         state->actionCleanup.selectedAction = -1;
     }
 }

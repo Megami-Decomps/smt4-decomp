@@ -2,7 +2,7 @@
 /* Starts the save/load thread's step for a request: marks the thread busy and, for a request in state 1, finishes the
  * pending query; the busy flag is cleared again unless the follow-up reports 1 or 2. */
 #include "common.h"
-#include "shard/FUN_001387c0.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 /* State of the save/load thread. */

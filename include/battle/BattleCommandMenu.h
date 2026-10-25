@@ -60,7 +60,7 @@ static __inline bool battleCommandIsAvailable(const BattleCommandEntry *command)
         return false;
     if (command->requiredFlagBit != 0 && flagBitIsSet(command->requiredFlagBit) == 0)
         return false;
-    if (command->hiddenInEvent != 0 && (btlGetMainStateExt()->flags44A0 & 0x40000) != 0)
+    if (command->hiddenInEvent != 0 && (btlGetMainState()->battleFlags & 0x40000) != 0)
         return false;
     return true;
 }

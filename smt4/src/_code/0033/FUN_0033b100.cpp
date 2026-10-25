@@ -1,6 +1,7 @@
 /* NON_MATCHING: pending-action resets use different saved registers (retail keeps 96, 204 and zero in r6-r8). */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 struct UnitActionView {
     u8 unk000[0x14c];
@@ -23,7 +24,7 @@ extern "C" void FUN_0033b100(BtlMainState *state, s32 mode)
     typedef char EntryUnitLayoutCheck[offsetof(EntryUnitView, unit) == 0xcc &&
         offsetof(UnitActionView, pending) == 0x14c ? 1 : -1];
     for (s32 action = 0; action < BTL_ENTRY_COUNT; ++action) {
-        s32 index = state->actions.records[action].participant.combatantIndex;
+        s32 index = state->actions[action].participant.combatantIndex;
         if (index >= 0) {
             u32 flags = state->entries[index].flags;
             if ((flags & BTL_ENTRY_FLAG_ACTIVE) != 0 && (flags & BTL_ENTRY_FLAG_BLOCKED) == 0) {

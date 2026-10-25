@@ -1,6 +1,6 @@
 /* NON_MATCHING: lock and archive-state saved registers differ and retail's removed-hook NOPs are absent. */
 #include "common.h"
-#include "shard/FUN_0010f548.h"
+#include "shard/W6_W6Match7_SoundInit.h"
 
 struct ArchiveReferenceState { u32 unk00; u32 references; };
 extern "C" {

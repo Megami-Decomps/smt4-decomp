@@ -1,5 +1,5 @@
 #include "gfx/PositionTransform.h"
-#include "shard/FUN_00364e28.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 void FUN_00364ebc(u32 target, PositionProvider *provider, const PositionTransform *transform);

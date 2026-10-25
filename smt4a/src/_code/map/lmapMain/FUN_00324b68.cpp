@@ -1,4 +1,3 @@
-/* NON_MATCHING: addressed vector parameters are spilled with VPUSH and reloaded for the additions instead of retail's separate local snapshots. */
 #include "shard/W5_W5Match8_CameraTransition.h"
 
 struct LocalCamera;
@@ -21,10 +20,12 @@ void FUN_0014f0dc(LocalCamera *, const W5Match8Vec3 *, const W5Match8Vec3 *,
 
 void FUN_00324b68(W5Match8Vec3 eye, W5Match8Vec3 target)
 {
+    W5Match8Vec3 destination = target;
+    W5Match8Vec3 position = eye;
     LocalCameraModel *model = DAT_005806a0.model;
-    target.x += model->translation.x;
-    target.y += model->translation.y;
-    target.z += model->translation.z;
-    FUN_0014f0dc(&g_localCamera, &eye, &target, &model->up);
+    destination.x += model->translation.x;
+    destination.y += model->translation.y;
+    destination.z += model->translation.z;
+    FUN_0014f0dc(&g_localCamera, &position, &destination, &model->up);
 }
 }

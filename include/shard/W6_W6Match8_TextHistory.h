@@ -21,4 +21,14 @@ static __inline void textHistoryWriteUnit(RenderChannelTable *table, u32 codepoi
     channel->text[static_cast<s16>(table->unk4E02)] = codepoint;
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_0019be8c(s32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

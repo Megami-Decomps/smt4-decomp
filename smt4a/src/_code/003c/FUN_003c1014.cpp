@@ -2,12 +2,12 @@
 
 extern "C" {
 
-extern void FUN_00385444(void);
+extern void mapRefreshResourcesForStory(void);
 
-/* Script command: runs FUN_00385444. */
+/* Script command: runs mapRefreshResourcesForStory. */
 u32 FUN_003c1014(void)
 {
-    FUN_00385444();
+    mapRefreshResourcesForStory();
     return 1;
 }
 

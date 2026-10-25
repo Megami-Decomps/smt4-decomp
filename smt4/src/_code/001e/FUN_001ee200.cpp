@@ -19,7 +19,7 @@ typedef struct {
     u8 unk254[0x2e4 - 0x254];
     s8 keyIndex;               /* 0x2e4 */
     u8 unk2e5[0x320 - 0x2e5];
-    s32 span;                  /* 0x320 */
+    u32 span;                  /* 0x320 */
 } KeyCurve;
 
 /* Advances the curve to the next key whose timing frame lies after the current one and sets up its slope. */
@@ -40,7 +40,7 @@ void FUN_001ee200(KeyCurve *curve, CurveKey *timing)
 
             curve->slope = (to->value - from->value) / (f32)(to->frame - from->frame);
             curve->target = to->value;
-            curve->keyIndex = cur + step;
+            curve->keyIndex = step + cur;
             return;
         }
     }

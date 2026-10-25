@@ -12,7 +12,7 @@ extern u32 g_btlScriptUnit;
 s32 scrComm_Battle_UnitSlotEntryOk(void)
 {
     s32 slot = scrGetArg(0);
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlUnitData *data = unit->data;
     u16 entry = ((u16 *)data + slot)[BTL_UNIT_SLOT_TABLE_IV];
 

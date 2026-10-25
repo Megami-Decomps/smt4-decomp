@@ -1,7 +1,6 @@
 /* NON_MATCHING: the compiler places the shared successful return after the model query instead of before it and schedules the model-query arguments differently. */
 #include "gamedata/DevilModel.h"
 #include "addon/aocMain.h"
-#include "shard/aocJobIsValid.h"
 
 struct AocModelStatus {
     /* 0x00 */ u8 unk00[0x0D];

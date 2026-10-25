@@ -11,7 +11,7 @@ Table04Record *dataTable40FindById(u32 skill);
 u32 FUN_00311fc4()
 {
     u32 category = scrGetArg(0);
-    BtlEntry *entry = reinterpret_cast<BtlEntry *>(reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->entryView.entry);
+    BtlEntry *entry = reinterpret_cast<BtlEntry *>(reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->entryView.entry);
     if (entry->equipA != NULL) {
         for (s32 index = 0; index < 8; ++index) {
             Table04Record *skill = dataTable40FindById(entry->equipA->items[index]);

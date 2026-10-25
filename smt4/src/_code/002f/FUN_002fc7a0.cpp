@@ -35,7 +35,7 @@ struct PartyPanelRefreshWork {
     u8 unk122;
     u8 kind;
     u8 unk124[2];
-    u8 refresh;
+    s8 refresh;
     u8 unk127;
     u8 active;
     u8 unk129[0xB];

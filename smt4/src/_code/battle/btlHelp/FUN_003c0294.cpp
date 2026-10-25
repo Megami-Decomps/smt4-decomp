@@ -1,6 +1,6 @@
 /* NON_MATCHING: Unlinking keeps the list owner in r0 and moves the entry into the free argument only after updating the links. */
 #include "common.h"
-#include "shard/dialogIsActive.h"
+#include "util/CalleeContracts.h"
 
 struct BtlHelpEntry {
     /* 0x000 */ u16 unk000;

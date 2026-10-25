@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "battle/btlMain.h"
 
 #define BTL_ENCOUNT_ACTIVE 4 /* BtlEncount.flags: encounters are being processed */
 
@@ -53,5 +54,15 @@ typedef char BtlEncounterGlobalsAWorkOffsetCheck[
 typedef char BtlEncounterGlobalsATransitionMaskOffsetCheck[
     offsetof(BtlEncounterGlobalsA, transition.mask) == 0x40 &&
     offsetof(BtlEncounterGlobalsA, transition.words) == 0x40 ? 1 : -1];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 btlRosterGroupAllInactive(BtlMainStateA *state, s32 group);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

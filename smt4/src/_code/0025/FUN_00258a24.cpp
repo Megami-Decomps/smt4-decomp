@@ -1,6 +1,5 @@
 /* NON_MATCHING: retail retains a separate primary-skill base and different saved registers; refresh behavior is reconstructed. */
 #include "shard/GameGlobals.h"
-#include "shard/FUN_0026a978.h"
 
 namespace {
 struct StatusRefreshMemberView { u8 prefix[0x4B]; u8 available; };

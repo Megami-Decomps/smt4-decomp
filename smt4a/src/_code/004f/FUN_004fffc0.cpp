@@ -1,4 +1,5 @@
 /* NON_MATCHING: status normalization folds and signed division calls __aeabi_ldivmod instead of ll_sdiv. */
+#include "nn/Result.h"
 #include "classes/WindowStatus.h"
 #include "shard/S3IpcRequest.h"
 
@@ -41,7 +42,7 @@ WindowStatusResult FUN_004fffc0(SizeQueryOwner *owner, u32 *blocks)
     u64 size;
     s32 status = FUN_00439be4(&size, &params.raw,
                              owner->record->buffer, owner->record->size);
-    if (status >= 0) {
+    if (!nnResultIsFailure(status)) {
         u64 rounded = (size + 0x1ffff) & 0xfffe0000ULL;
         *blocks = (u32)((s64)rounded / 0x20000);
         status = 0;

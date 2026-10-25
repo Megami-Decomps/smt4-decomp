@@ -18,7 +18,7 @@ u32 FUN_003003b0(void)
     u32 status = scrGetArg(0);
     s32 apply = scrGetArg(1);
     s32 checkImmunity = scrGetArg(2);
-    ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlMainState *battle = btlGetMainState();
     if (apply != 0) {
         if (checkImmunity != 0 &&

@@ -1,10 +1,11 @@
 /* NON_MATCHING: grouped stats offsets match; percentage base, numerator and constant registers differ. */
 #include "battle/EntryStats.h"
 #include "script/ScriptArgs.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-BtlMainState *btlGetMainState(void);
 
 // Script result: 1 when an active, unblocked entry with the given id is at or below the HP percentage.
 u32 FUN_002f041c(void)

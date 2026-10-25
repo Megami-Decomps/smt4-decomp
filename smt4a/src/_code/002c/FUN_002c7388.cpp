@@ -1,6 +1,6 @@
 /* NON_MATCHING: logic matches the retail range chain; retail compares the 10-bit id (lsl/lsr extraction) with signed branches (blt/bgt) and recomputes it per branch, the build folds the same ranges into unsigned compares and keeps the sign-bit test as TST. */
 #include "common.h"
-#include "shard/FUN_001386b4.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 u32 FUN_00280bc0(void);

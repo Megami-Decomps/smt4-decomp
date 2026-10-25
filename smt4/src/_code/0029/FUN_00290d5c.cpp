@@ -1,5 +1,5 @@
 #include "ui/ButtonHelp.h"
-#include "shard/FUN_00290d5c.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;

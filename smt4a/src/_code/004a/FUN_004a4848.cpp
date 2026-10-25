@@ -3,8 +3,8 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/Table00.h"
 #include "camp/UnitComparison.h"
-#include "ui/ItemListSelection.h"
 #include "shard/campFillUnitComparison.h"
+#include "ui/ItemListSelection.h"
 
 namespace {
 struct InventoryCursorState {
@@ -31,7 +31,7 @@ struct InventoryOwnerView {
     InventoryHelpList help;
     InventoryWidget *widget;
     u8 padding850[0x10];
-    u8 alternate;
+    s8 alternate;
     u8 padding861[3];
     InventoryListView list;
 };

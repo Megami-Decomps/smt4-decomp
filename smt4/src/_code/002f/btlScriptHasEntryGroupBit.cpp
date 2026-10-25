@@ -1,11 +1,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(s32 argument);
 void scrSetResult(s32 result);
 u32 btlScriptResolveGroupArg(u32 group);
 void FUN_002499fc(u32 group, s32 *first, s32 *count);
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 /* Test a requested entry ID's group bit, including the special active entry. */

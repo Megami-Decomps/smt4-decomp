@@ -1,6 +1,6 @@
 /* NON_MATCHING: first-frame and resumed-frame wait branches are laid out differently. */
 #include "common.h"
-#include "shard/FUN_002b89a4.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 extern "C" {
 u32 scrGetArg(u32);

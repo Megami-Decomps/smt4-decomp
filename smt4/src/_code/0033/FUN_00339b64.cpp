@@ -1,6 +1,7 @@
 /* NON_MATCHING: the middle word of the three-word script-handle copy uses r1 instead of retail r2; all instructions otherwise agree. */
 #include "common.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "battle/btlMain.h"
 
 /* The resident handles the main battle state offers; the loader copies them over one by one. */
 struct BtlMainStateHandles {

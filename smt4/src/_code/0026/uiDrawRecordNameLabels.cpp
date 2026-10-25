@@ -11,7 +11,7 @@ struct LabelledRecord {
     char name[0x12]; // 0x0e
     u8 flags; // 0x20
     u8 unk21[0x27];
-    u16 message; // 0x48
+    s16 message; // 0x48
 };
 extern "C" {
 void *FUN_002bd06c(u16 message);

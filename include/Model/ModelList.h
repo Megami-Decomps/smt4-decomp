@@ -12,4 +12,14 @@ struct ModelList {
 };
 typedef char ModelListLayoutCheck[sizeof(ModelList) == 0x20 &&
     offsetof(ModelList, resource) == 0x10 && offsetof(ModelList, scaleX) == 0x18 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_003857c8(u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

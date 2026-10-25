@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail builds the wait timeout and handle in one 16-byte frame whose first word is also the key buffer for FUN_00129684; armcc keeps a separate outgoing-argument area, and the registry walk is scheduled differently. */
+#include "nn/Result.h"
 #include "common.h"
 
 struct ModelRegistryLink {
@@ -43,7 +44,7 @@ __declspec(noreturn) void FUN_0011cd24(void)
             FUN_002c526c();
         }
         s32 result = FUN_00129684(&key);
-        if ((result & 0x80000000) == 0) {
+        if (nnResultIsSuccess(result)) {
             ModelRegistryEntry *entry = NULL;
             if (DAT_00471b98 != NULL) {
                 ModelRegistryEntry *end = modelRegistryGetEntry(DAT_00471b98->next);

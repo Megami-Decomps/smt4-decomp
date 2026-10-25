@@ -156,4 +156,24 @@ typedef char BtlActionGeometryOffsetsCheck[
     offsetof(BtlActionRecord, geometry.position) == 0xC &&
     offsetof(BtlActionRecord, geometry.scale) == 0x40 &&
     sizeof(BtlActionRecord) == 0x114 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 questCurrentIsFlagged(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_004c8284(u32 target, s32 channel, u32 a, u32 b);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

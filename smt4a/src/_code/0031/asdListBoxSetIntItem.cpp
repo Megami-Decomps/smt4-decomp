@@ -1,5 +1,5 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
-#include "shard/asdListBoxSetIntItem.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 

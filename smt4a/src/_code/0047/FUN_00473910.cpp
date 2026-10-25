@@ -1,5 +1,5 @@
 #include "shard/Shard0047.h"
-#include "shard/FUN_00473910.h"
+#include "addon/aocApplication.h"
 
 extern "C" {
 

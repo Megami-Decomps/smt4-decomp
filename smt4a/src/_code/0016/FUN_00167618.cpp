@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_00167618.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 extern u32 DAT_005b3ce8;

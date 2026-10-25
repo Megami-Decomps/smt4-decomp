@@ -31,7 +31,7 @@ f32 FUN_003bd1d8(u32 listedId, u32 request)
         offsetof(QueryStorageIV, category) == 4 &&
         offsetof(QueryStorageIV, remainingCapacity) == 6 ? 1 : -1];
 
-    BtlMainStateExt *mainState = btlGetMainStateExt();
+    BtlMainState *mainState = btlGetMainState();
     BattleEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), listedId);
     QueryStorageIV query;
     FUN_00247478(&query, btlGetMainState(), entry);
@@ -50,7 +50,7 @@ f32 FUN_003bd1d8(u32 listedId, u32 request)
     selectionCopySupportedValue(query.entryId, &attributes);
     if (btlEntryHasSkillCategory(entry, attributes & 0xFFu) != 0 && percent < 100) {
         percent = 100;
-        mainState->minimumPercentApplied = 1;
+        mainState->affinity.minimumPercentApplied = 1;
     }
 
     const f32 scale = static_cast<f32>(static_cast<s32>(percent)) * 0.01f;

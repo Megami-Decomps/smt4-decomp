@@ -7,10 +7,11 @@ extern "C" MapDiscoveryState *FUN_0023d2ec(void);
 extern "C" u8 MapNavi_SetDiscoveredCell(u32 cell, s32 discovered)
 {
     MapDiscoveryState *state = FUN_0023d2ec();
-    u8 *byte = &state->discovered[cell >> 3];
+    u8 *bits = state->discovered;
+    u8 *byte = &bits[cell >> 3];
     u8 previous = *byte;
     u8 mask = 1u << (cell & 7);
-    u8 updated = discovered != 0 ? mask | previous : previous & ~mask;
+    u32 updated = discovered != 0 ? mask | previous : previous & ~mask;
     *byte = updated;
-    return updated != previous;
+    return (u8)updated != previous;
 }

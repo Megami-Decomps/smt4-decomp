@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail packed state stores or parameter lifetime differs. */
 #include "common.h"
 
 struct FlagEntry { u8 flags; u8 value; u8 unk02[2]; };
@@ -11,6 +10,10 @@ extern "C" FlagBlock *gameGetFlagBlock();
 extern "C" void FUN_003490b8(u32 index)
 {
     FlagEntry *entry = &gameGetFlagBlock()->entries[index];
-    entry->value = entry->value ? entry->value + 1 : 2;
+    if (entry->value == 0) {
+        entry->value = 2;
+    } else {
+        entry->value++;
+    }
     entry->flags |= 0x40;
 }

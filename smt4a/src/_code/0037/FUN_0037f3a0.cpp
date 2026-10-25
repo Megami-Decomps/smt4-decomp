@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reads the `required` mask with one ldm r5, {r3, ip}; armcc emits two ldr with the halves in swapped registers. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -16,7 +15,7 @@ u32 FUN_0037f3a0(void)
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if ((entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
-            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            !(g_btlCandidateMasks.excluded & entry->flags) &&
             FUN_003248e4(entry)) {
             scrSetResult(1);
             return 1;

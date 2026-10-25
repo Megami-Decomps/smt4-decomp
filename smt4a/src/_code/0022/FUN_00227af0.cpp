@@ -1,4 +1,3 @@
-/* NON_MATCHING: message-tail pointer and byte tests use exchanged r0/r1 registers; count clamp now matches retail's movle. */
 #include "shard/Shard0033.h"
 #include "shard/PassiveSkill.h"
 #include "gamedata/Table04Record.h"
@@ -25,7 +24,7 @@ void FUN_00227af0(const char *text)
         u8 usePartySlot;
         u8 unk0B1[3];
         s32 count;
-        u8 hideCount;
+        s8 hideCount;
     };
     struct MessageView {
         u8 unk000[0x10];

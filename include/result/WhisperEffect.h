@@ -119,4 +119,14 @@ extern "C" {
 void bgmStopNoForce(u32 a, u32 b);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0021c118(int a, int b);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

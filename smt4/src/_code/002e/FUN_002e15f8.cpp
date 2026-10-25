@@ -1,8 +1,8 @@
 /* NON_MATCHING: render-state stack address is computed before the packed-state call, and push/pop scratch registers differ. */
 #include "camp/RenderCtx.h"
+#include "shard/packNibblesAndByte.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match8_TitleOverlay.h"
-#include "shard/packNibblesAndByte.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;

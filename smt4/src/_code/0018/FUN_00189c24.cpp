@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "shard/FUN_00298dc8.h"
+#include "shard/W5_W5Match7_ScriptUnit.h"
 
 extern "C" {
 
 int scrollOwnerSetValue(...);
-int FUN_00298d98(...);
+int gameGetSavedRecordOrFallback(...);
 int flaggedEntrySetValueA(...);
 int FUN_0029eb5c(...);
 int FUN_0029f848(...);
@@ -28,7 +28,7 @@ extern int dataTable1bOr1cCompareRecordKeys(...); /* 0x1e16ec */
 extern int g_uiQuest; /* 0x43dd50 */
 
 /* Supplied declaration required: scrollOwnerSetValue. */
-/* Supplied declaration required: FUN_00298d98. */
+/* Supplied declaration required: gameGetSavedRecordOrFallback. */
 extern int idIsAtLeast350(unsigned int);
 extern int FUN_00298e00(unsigned int);
 extern int questIsCompleted(unsigned int);
@@ -200,54 +200,54 @@ LAB_00189f2c:
   if (*(char *)(temp_v2 + 0x5f1) != '\0') {
     return;
   }
-  temp_v8 = FUN_00298d98(0);
+  temp_v8 = gameGetSavedRecordOrFallback(0);
   temp_v8 = *(int *)(temp_v8 + 4);
-  piVar7 = (int *)FUN_00298d98(0);
+  piVar7 = (int *)gameGetSavedRecordOrFallback(0);
   if (*(short *)(temp_v2 + (*piVar7 + temp_v8) * 2 + 0x6c4) != 0) {
-    temp_v8 = FUN_00298d98(0);
+    temp_v8 = gameGetSavedRecordOrFallback(0);
     temp_v6 = *(int *)(temp_v8 + 4);
     temp_v8 = FUN_0029d644(temp_v3);
     temp_v9 = FUN_0029ee54(temp_v3);
     if (temp_v9 < temp_v6 + temp_v8) {
-      temp_v8 = FUN_00298d98(0);
+      temp_v8 = gameGetSavedRecordOrFallback(0);
       *(unsigned int *)(temp_v8 + 4) = 0;
-      puVar8 = (unsigned int *)FUN_00298d98(0);
+      puVar8 = (unsigned int *)gameGetSavedRecordOrFallback(0);
       *puVar8 = 0;
     }
   }
   else {
-    temp_v8 = FUN_00298d98(0);
+    temp_v8 = gameGetSavedRecordOrFallback(0);
     *(unsigned int *)(temp_v8 + 4) = 0;
-    puVar8 = (unsigned int *)FUN_00298d98(0);
+    puVar8 = (unsigned int *)gameGetSavedRecordOrFallback(0);
     *puVar8 = 0;
   }
-  temp_v8 = FUN_00298d98(0);
+  temp_v8 = gameGetSavedRecordOrFallback(0);
   scrollOwnerSetValue(temp_v3,*(unsigned int *)(temp_v8 + 4));
-  puVar8 = (unsigned int *)FUN_00298d98(0);
+  puVar8 = (unsigned int *)gameGetSavedRecordOrFallback(0);
   flaggedEntrySetValueA(temp_v3,*puVar8);
-  temp_v8 = FUN_00298d98(1);
+  temp_v8 = gameGetSavedRecordOrFallback(1);
   temp_v8 = *(int *)(temp_v8 + 4);
-  piVar7 = (int *)FUN_00298d98(1);
+  piVar7 = (int *)gameGetSavedRecordOrFallback(1);
   if (*(short *)(temp_v2 + (*piVar7 + temp_v8) * 2 + 0x78a) != 0) {
-    temp_v8 = FUN_00298d98(1);
+    temp_v8 = gameGetSavedRecordOrFallback(1);
     temp_v3 = *(int *)(temp_v8 + 4);
     temp_v8 = FUN_0029d644(temp_v2 + 0x660);
     temp_v9 = FUN_0029ee54(temp_v2 + 0x660);
     if (temp_v3 + temp_v8 <= temp_v9) {
-      temp_v8 = FUN_00298d98(1);
+      temp_v8 = gameGetSavedRecordOrFallback(1);
       scrollOwnerSetValue(temp_v2 + 0x660,*(unsigned int *)(temp_v8 + 4));
-      puVar8 = (unsigned int *)FUN_00298d98(1);
+      puVar8 = (unsigned int *)gameGetSavedRecordOrFallback(1);
       flaggedEntrySetValueA(temp_v2 + 0x660,*puVar8);
       return;
     }
   }
-  temp_v8 = FUN_00298d98(1);
+  temp_v8 = gameGetSavedRecordOrFallback(1);
   *(unsigned int *)(temp_v8 + 4) = 0;
-  puVar8 = (unsigned int *)FUN_00298d98(1);
+  puVar8 = (unsigned int *)gameGetSavedRecordOrFallback(1);
   *puVar8 = 0;
-  temp_v8 = FUN_00298d98(1);
+  temp_v8 = gameGetSavedRecordOrFallback(1);
   scrollOwnerSetValue(temp_v2 + 0x660,*(unsigned int *)(temp_v8 + 4));
-  puVar8 = (unsigned int *)FUN_00298d98(1);
+  puVar8 = (unsigned int *)gameGetSavedRecordOrFallback(1);
   flaggedEntrySetValueA(temp_v2 + 0x660,*puVar8);
   return;
 }

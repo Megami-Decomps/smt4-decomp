@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-#include "shard/FUN_004fea10.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 

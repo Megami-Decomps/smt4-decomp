@@ -8,9 +8,9 @@ extern void buttonHelpSetPreset(s32 preset);
 /* Script command: sets battle flag 0x100000 and shows button help preset 0xDD; returns 1. */
 s32 FUN_002e407c(void)
 {
-    BtlMainStateExt *state = btlGetMainStateExt();
+    BtlMainState *state = btlGetMainState();
 
-    state->flags44A0 |= 0x100000;
+    state->battleFlags |= 0x100000;
     buttonHelpSetPreset(0xDD);
     return 1;
 }

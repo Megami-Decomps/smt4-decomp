@@ -1,5 +1,5 @@
 #include "addon/aocMain.h"
-#include "shard/FUN_0023e3a4.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 
 extern "C" {
 

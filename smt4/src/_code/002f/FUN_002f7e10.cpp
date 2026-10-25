@@ -22,7 +22,7 @@ u32 FUN_002f7e10(void)
     s32 target = scrGetArg(0);
     u16 bit = scrGetArg(1);
     s32 enabled = scrGetArg(2);
-    u32 actor = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    u32 actor = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     if (target < 109) {
         BtlActionRecord *record = &btlGetMainState()->actions[target];
         if (enabled != 0)

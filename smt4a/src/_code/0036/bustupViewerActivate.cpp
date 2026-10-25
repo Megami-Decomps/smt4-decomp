@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mov r1, #1` where armcc emits `ldr r1, [r0]`. */
 #include "common.h"
 
 extern "C" {
@@ -9,9 +8,14 @@ struct BustupViewer {
 };
 extern BustupViewer *g_bustupViewer;
 
+static __inline void bustupViewerSetState(BustupViewer *viewer, u8 state)
+{
+    viewer->state = state;
+}
+
 void bustupViewerActivate(void)
 {
-    g_bustupViewer->state = 1;
+    bustupViewerSetState(g_bustupViewer, 1);
 }
 
 } /* extern "C" */

@@ -1,12 +1,13 @@
-/* NON_MATCHING: retail uses ldr r1, [pc, #24] where the compiled block uses rsb r1, r0, r0, lsl #4. */
+/* NON_MATCHING: address arithmetic now matches; retail loads the global before scaling the slot index (rsb), the build scales first. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
 
 SlotRecord *gameGetSlotRecord(s32 slotIndex)
 {
-    GameSlotTable *table = reinterpret_cast<GameSlotTable  *>(g_gameDataBlocks.saveBlock);
-    return &table->slots[slotIndex].record;
+    GameSlotTable *table = reinterpret_cast<GameSlotTable *>(g_gameDataBlocks.saveBlock);
+    GameSlotEntry *slots = table->slots;
+    return &slots[slotIndex].record;
 }
 
 } /* extern "C" */

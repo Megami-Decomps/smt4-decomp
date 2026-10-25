@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail runs an empty counting loop over the slots that falls off the end without a return value when the flag byte is clear; the conditional/predicated shape and the return path differ here. */
+/* NON_MATCHING: loop shape matches; retail keeps the pool pointer in r0 and returns it unchanged (uninitialised counter) when the flag byte is clear, the build allocates the pool in r1. */
 #include "common.h"
 
 struct Pool {
@@ -16,10 +16,12 @@ struct Object {
 extern "C" s32 FUN_002f2a74(Object *object)
 {
     Pool *pool = (Pool *)(object->owner + 0xC0);
-    s32 i = 0;
+    s32 i;
 
     if (pool->flags & 0xFF000000) {
-        for (i = 0; i < pool->count; i++) {
+        i = 0;
+        while (i < pool->count) {
+            i++;
         }
     }
     return i;

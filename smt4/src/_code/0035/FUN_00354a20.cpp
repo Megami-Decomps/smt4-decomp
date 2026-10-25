@@ -18,7 +18,7 @@ extern char s_sys_ECardStatus_0044e4c8[16]; /* 0x44e4c8 */
 
 extern unsigned char libc_toupper(void);
 /* Supplied declaration required: recordValidatePair. */
-extern int FUN_0023a1f8(int);
+extern int queryFailureResultOrZero(int);
 extern int legacyResourceIdRemap(unsigned int *);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 extern int FUN_00354834(int);
@@ -37,7 +37,7 @@ void FUN_00354a20(unsigned int *param_1,int param_2,int param_3)
   unsigned int uStack_44;
   unsigned char temp_v4 [36];
   
-  temp_v1 = FUN_0023a1f8(param_2);
+  temp_v1 = queryFailureResultOrZero(param_2);
   if (-1 < temp_v1) {
     temp_v2 = 0;
     do {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: shader setup/path stack grouping and null-allocation register lifetimes differ. */
+/* NON_MATCHING: only the constant materialisation and store order of the shader setup block differ (all statement orders tried). */
 #include "classes/Obj557c48.h"
 #include "classes/Obj557c28.h"
 #include "classes/Obj557b28.h"
@@ -33,8 +33,8 @@ u32 *FUN_001582d0(u32 *value);
 // Load the default shader and allocate the command queues, tuning block and scratch cell.
 void FUN_001463b4(Obj557c48 *manager)
 {
+    ModelShaderResourceSetup setup;
     {
-        ModelShaderResourceSetup setup;
         char path[64];
         rt_aeabi_memclr(path, sizeof(path));
         textFormatBuffer(path, DAT_00526088);
@@ -46,9 +46,8 @@ void FUN_001463b4(Obj557c48 *manager)
         setup.isResource = 1;
         manager->setShader(FUN_001581dc(&setup));
     }
-    Obj557c28 *command = static_cast<Obj557c28 *>(FUN_00178b04(sizeof(Obj557c28), DAT_00526098, 0x5a));
-    if (command != NULL)
-        command = new (command) Obj557c28();
+    Obj557c28 *memory = static_cast<Obj557c28 *>(FUN_00178b04(sizeof(Obj557c28), DAT_00526098, 0x5a));
+    Obj557c28 *command = memory != NULL ? new (memory) Obj557c28() : NULL;
     moriModelCommandInitBuffers(command->command(), 0x100000, 0x200);
     manager->setCommands(command);
     Obj557b28 *tuning = static_cast<Obj557b28 *>(FUN_00178b04(sizeof(Obj557b28), DAT_00526098, 0x60));

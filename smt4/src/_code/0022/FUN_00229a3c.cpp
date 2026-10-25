@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-#include "shard/FUN_00229a3c.h"
+#include "battle/btlHelp.h"
 
 extern "C" void FUN_00229a3c(s32 actorId, u32 options, u32 value, u32 parameter, u32 checkDuplicates)
 {

@@ -1,7 +1,6 @@
 /* NON_MATCHING: state-transition stores, script-start call predication and saved registers differ. */
 #include "shop/ShopItemDescription.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "shard/messageGetChoiceResult.h"
 
 extern "C" {
 extern const char DAT_005332c4[];

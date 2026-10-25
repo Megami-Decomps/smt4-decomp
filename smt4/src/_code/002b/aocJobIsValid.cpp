@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/aocJobIsValid.h"
+#include "gamedata/DevilModel.h"
 
 extern "C" {
 

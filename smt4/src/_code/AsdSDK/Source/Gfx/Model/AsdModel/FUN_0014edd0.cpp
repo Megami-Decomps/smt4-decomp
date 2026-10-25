@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "shard/S3AsdModelAttr.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "shard/memCopy.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 

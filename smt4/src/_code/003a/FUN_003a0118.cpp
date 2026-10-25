@@ -1,7 +1,7 @@
 /* NON_MATCHING: register copy only: retail copies b to r6 before the first rank call */
 /* Compares two ids: by FUN_0028fb3c key (descending), then by their FUN_00230f44 rank. */
 #include "common.h"
-#include "shard/FUN_0028fb3c.h"
+#include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
 

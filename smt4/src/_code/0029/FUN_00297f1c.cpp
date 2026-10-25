@@ -30,7 +30,7 @@ void FUN_00297f1c(PlayScene *scene, u32 argument, s32 button, u32 other)
         return;
     }
     btlGetMainState();
-    if (FUN_00293230() != 0 || (btlGetMainStateExt()->flags44A0 & 0x200) != 0) {
+    if (FUN_00293230() != 0 || (btlGetMainState()->battleFlags & 0x200) != 0) {
         FUN_002cfed0(scene, argument, 1, other);
         return;
     }
@@ -43,7 +43,7 @@ void FUN_00297f1c(PlayScene *scene, u32 argument, s32 button, u32 other)
             }
             if (scene->state != 0x11) {
                 btlGetMainState();
-                if (FUN_00293230() == 0 && (btlGetMainStateExt()->flags44A0 & 0x200) == 0) {
+                if (FUN_00293230() == 0 && (btlGetMainState()->battleFlags & 0x200) == 0) {
                     FUN_002cfed0(scene, argument, 1, other);
                     return;
                 }

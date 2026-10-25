@@ -2992,12 +2992,12 @@
     },
     {
       "address": "0x10baf8",
-      "function": "FUN_0010baf8",
+      "function": "processDispatchFinishedNodes",
       "module": "_code",
-      "object": "build/obj/_code/0010/FUN_0010baf8.o",
+      "object": "build/obj/_code/0010/processDispatchFinishedNodes.o",
       "size": 136,
-      "source": "src/_code/0010/FUN_0010baf8.cpp",
-      "target": "orig/target/_code/0010/FUN_0010baf8.o",
+      "source": "src/_code/0010/processDispatchFinishedNodes.cpp",
+      "target": "orig/target/_code/0010/processDispatchFinishedNodes.o",
       "thumb": false
     },
     {
@@ -20472,12 +20472,12 @@
     },
     {
       "address": "0x192990",
-      "function": "FUN_00192990",
+      "function": "scrOpLogicalNot",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_00192990.o",
+      "object": "build/obj/_code/0019/scrOpLogicalNot.o",
       "size": 172,
-      "source": "src/_code/0019/FUN_00192990.cpp",
-      "target": "orig/target/_code/0019/FUN_00192990.o",
+      "source": "src/_code/0019/scrOpLogicalNot.cpp",
+      "target": "orig/target/_code/0019/scrOpLogicalNot.o",
       "thumb": false
     },
     {
@@ -36587,12 +36587,12 @@
     },
     {
       "address": "0x23a1f8",
-      "function": "FUN_0023a1f8",
+      "function": "queryFailureResultOrZero",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023a1f8.o",
+      "object": "build/obj/_code/0023/queryFailureResultOrZero.o",
       "size": 20,
-      "source": "src/_code/0023/FUN_0023a1f8.cpp",
-      "target": "orig/target/_code/0023/FUN_0023a1f8.o",
+      "source": "src/_code/0023/queryFailureResultOrZero.cpp",
+      "target": "orig/target/_code/0023/queryFailureResultOrZero.o",
       "thumb": false
     },
     {
@@ -50544,12 +50544,12 @@
     },
     {
       "address": "0x298d98",
-      "function": "FUN_00298d98",
+      "function": "gameGetSavedRecordOrFallback",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00298d98.o",
+      "object": "build/obj/_code/0029/gameGetSavedRecordOrFallback.o",
       "size": 44,
-      "source": "src/_code/0029/FUN_00298d98.cpp",
-      "target": "orig/target/_code/0029/FUN_00298d98.o",
+      "source": "src/_code/0029/gameGetSavedRecordOrFallback.cpp",
+      "target": "orig/target/_code/0029/gameGetSavedRecordOrFallback.o",
       "thumb": false
     },
     {
@@ -65813,10 +65813,20 @@
     },
     {
       "address": "0x2e14b0",
+      "function": "soundFreeBufferStub",
+      "module": "_code",
+      "object": "build/obj/_code/002e/soundFreeBufferStub.o",
+      "size": 4,
+      "source": "src/_code/002e/soundFreeBufferStub.cpp",
+      "target": "orig/target/_code/002e/soundFreeBufferStub.o",
+      "thumb": false
+    },
+    {
+      "address": "0x2e14b4",
       "function": "objectFreeBuffer",
       "module": "_code",
       "object": "build/obj/_code/002e/objectFreeBuffer.o",
-      "size": 48,
+      "size": 44,
       "source": "src/_code/002e/objectFreeBuffer.cpp",
       "target": "orig/target/_code/002e/objectFreeBuffer.o",
       "thumb": false
@@ -66748,12 +66758,12 @@
     },
     {
       "address": "0x2e44a8",
-      "function": "FUN_002e44a8",
+      "function": "btlTalkBustupMatchesDevil",
       "module": "_code",
-      "object": "build/obj/_code/002e/FUN_002e44a8.o",
+      "object": "build/obj/_code/002e/btlTalkBustupMatchesDevil.o",
       "size": 52,
-      "source": "src/_code/002e/FUN_002e44a8.cpp",
-      "target": "orig/target/_code/002e/FUN_002e44a8.o",
+      "source": "src/_code/002e/btlTalkBustupMatchesDevil.cpp",
+      "target": "orig/target/_code/002e/btlTalkBustupMatchesDevil.o",
       "thumb": false
     },
     {
@@ -80487,7 +80497,7 @@
       "module": "_code",
       "object": "build/obj/_code/0034/FUN_00340558.o",
       "size": 232,
-      "source": "src/_code/0034/FUN_00340558.cpp",
+      "source": "src/_code/0034/btlStageUpdateNodePositions.cpp",
       "target": "orig/target/_code/0034/FUN_00340558.o",
       "thumb": false
     },
@@ -95944,9 +95954,19 @@
       "function": "_ZN7AocMenu13drawSelectionEv",
       "module": "_code",
       "object": "build/obj/_code/0039/AocMenu__drawSelection.o",
-      "size": 592,
+      "size": 4,
       "source": "src/_code/0039/AocMenu__drawSelection.cpp",
       "target": "orig/target/_code/0039/AocMenu__drawSelection.o",
+      "thumb": false
+    },
+    {
+      "address": "0x3912a4",
+      "function": "FUN_003912a4",
+      "module": "_code",
+      "object": "build/obj/_code/0039/FUN_003912a4.o",
+      "size": 588,
+      "source": "src/_code/0039/FUN_003912a4.cpp",
+      "target": "orig/target/_code/0039/FUN_003912a4.o",
       "thumb": false
     },
     {
@@ -96469,7 +96489,10 @@
       "size": 32,
       "source": "src/_code/0039/Obj4222ac__Obj4222ac.cpp",
       "target": "orig/target/_code/0039/Obj4222ac__Obj4222ac.o",
-      "thumb": false
+      "thumb": false,
+      "multifile": [
+        "_ZN9Obj422318C1Ei"
+      ]
     },
     {
       "address": "0x39557c",

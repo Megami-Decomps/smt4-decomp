@@ -228,4 +228,14 @@ typedef char ButtonHelpTransitionPhaseOffsetCheck[
     __INTADDR__(&((ButtonHelpWork *)0)->transition.phase) == 0xC &&
     sizeof(ButtonHelpWork) == 0x564 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_0026b564(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

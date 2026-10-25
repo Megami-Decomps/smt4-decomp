@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-#include "shard/btlReflectInitKind9.h"
+#include "util/CalleeContracts.h"
 extern "C" {
 
 

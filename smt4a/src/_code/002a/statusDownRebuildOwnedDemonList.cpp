@@ -32,7 +32,7 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
     FUN_00203b40(controller, state->inventory.count, 9, 4, 1, 1);
     s32 count = state->inventory.count;
     if (count > 0 && count <= state->inventory.column + state->inventory.row * 4) {
-        s16 row = (count - 1) / 4;
+        u16 row = (count - 1) / 4;
         state->inventory.row = row;
         state->inventory.column = count - row * 4 - 1;
         FUN_002a4964(controller, row);

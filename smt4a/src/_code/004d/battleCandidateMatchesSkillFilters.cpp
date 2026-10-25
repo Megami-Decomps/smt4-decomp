@@ -1,4 +1,4 @@
-/* NON_MATCHING: one zero-skill branch targets the other zero-return label; signed byte flags now reproduce retail's cached-base loads. */
+/* NON_MATCHING: the category loop's zero-skill branch reuses the pop-only return (1bc) where retail targets the mov r0,#0 return (1b8); everything else matches. */
 #include "common.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
@@ -36,7 +36,7 @@ u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32
             u16 skill = filter->skills[i];
             if (!skill)
                 return 0;
-            if (findSkillMetadataById(skill)->category == filter->category)
+            if (filter->category == findSkillMetadataById(skill)->category)
                 break;
             if (++i >= 24)
                 return 0;
@@ -63,7 +63,7 @@ u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32
                 first = 0x1ad;
                 last = first;
             }
-            for (u32 i = 0; i < 24; ++i) {
+            for (s32 i = 0; i < 24; ++i) {
                 u16 skill = filter->skills[i];
                 if (!skill)
                     return 0;

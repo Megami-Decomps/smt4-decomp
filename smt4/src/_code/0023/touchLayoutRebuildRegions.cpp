@@ -1,5 +1,4 @@
 #include "ui/TouchRegionLayout.h"
-#include "shard/touchLayoutRebuildRegions.h"
 
 extern "C" {
 void __aeabi_memset4(void *destination, u32 bytes, s32 value);

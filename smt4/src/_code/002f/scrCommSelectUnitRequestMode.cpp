@@ -20,9 +20,9 @@ void FUN_00247478(UnitSummary *out, BtlMainState *state, const s16 *params);
 
 u32 scrCommSelectUnitRequestMode()
 {
-    UnitRequestView *request = (UnitRequestView *)reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data;
+    UnitRequestView *request = (UnitRequestView *)reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data;
     request->active = 1;
-    const s16 *params = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->params;
+    const s16 *params = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->params;
     BtlMainState *state = btlGetMainState();
     UnitSummary summary;
     FUN_00247478(&summary, state, params);

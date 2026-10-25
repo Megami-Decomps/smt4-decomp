@@ -9,4 +9,14 @@ struct DevilModelOverride {
     u8 unk8A[0x1E]; // 0x8A
 };
 typedef char DevilModelOverrideSizeCheck[sizeof(DevilModelOverride) == 0xA8 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 aocJobIsValid(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

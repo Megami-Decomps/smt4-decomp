@@ -441,4 +441,14 @@ typedef char CampCecOverlayLayoutCheck[sizeof(OverlayObj) == 0x1A8 ? 1 : -1];
 typedef char CampCecOverlayOffsets[offsetof(OverlayObj, scriptProcess) == 0xF4 && offsetof(OverlayObj, unk14C) == 0x14C ? 1 : -1];
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void gameDataBlocksSetWord(u32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

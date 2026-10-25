@@ -823,7 +823,7 @@ LAB_003cd944:
       FUN_002550d8(param_8,2,temp_v4,0);
       if (temp_v16 == 0) {
         temp_v11 = 3;
-        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));
         temp_v8 = 0;
         temp_v14 = 0x85;
         do {
@@ -836,7 +836,7 @@ LAB_003cd944:
           temp_v8 = temp_v8 + 1;
         } while (temp_v14 != 0);
         temp_v26 = 2;
-        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));
         temp_v8 = 0;
         do {
           temp_v14 = temp_v5 + temp_v8 * 8;
@@ -951,7 +951,7 @@ LAB_003cd944:
               }
               temp_v33 = 4;
               btlTargetSetFlag10(*param_1,param_7,0);
-              temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
+              temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));
               temp_v7 = 0;
               goto LAB_003ce3ec;
             }

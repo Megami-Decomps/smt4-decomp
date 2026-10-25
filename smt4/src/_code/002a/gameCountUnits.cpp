@@ -1,7 +1,7 @@
-/* NON_MATCHING: compiler converts the indexed unit loop into a pointer/countdown loop. */
 #include "common.h"
 
-namespace { struct Unit { s16 id; u8 padding[0x2fe]; }; struct Slots { u8 padding[0x90f0]; Unit units[24]; }; }
+namespace { /* units[i] is the entry index of the i-th party member, -1 when the position is empty. */
+struct Slots { u8 padding[0x90f0]; s8 units[24]; }; }
 
 extern "C" {
 Slots *gameGetSlotTable(void);
@@ -9,7 +9,12 @@ u32 gameCountUnits(void)
 {
     Slots *slots = gameGetSlotTable();
     u32 count = 0;
-    for (u32 i = 0; i < 24; i++) { if (slots->units[i].id != 0) { count++; } }
+    for (s32 i = 0; i < 24; i++) {
+        if (slots->units[i] < 0) {
+            break;
+        }
+        count++;
+    }
     return count;
 }
 }

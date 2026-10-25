@@ -243,4 +243,14 @@ typedef char PartyPanelStateAActiveGridOffsetCheck[
     offsetof(PartyPanelStateA, activeGrid.alternate) == 0x42 &&
     sizeof(PartyPanelStateA) == 0xA80 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u16 *FUN_0029acb0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

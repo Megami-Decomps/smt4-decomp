@@ -1,4 +1,3 @@
-/* NON_MATCHING: address formation only: retail forms work+0x1400 once (add r0, r0, #5120) and uses +78/+80/+79 from it, with a separate base for the pending store; the build adds each displacement separately and keeps extra saved registers. */
 #include "common.h"
 #include "shard/JobWork.h"
 
@@ -12,9 +11,9 @@ struct RenderTargetSize {
 /* The flag bytes at +0x1400 of a render job's work block. */
 struct RenderJobFlags {
     /* 0x00 */ u8 unk00[0x4E];
-    /* 0x4E */ u8 pending;
+    /* 0x4E */ s8 pending;
     /* 0x4F */ u8 result;
-    /* 0x50 */ u8 done;
+    /* 0x50 */ s8 done;
 };
 
 /* A render job's work block; only the fields this step uses are named. */

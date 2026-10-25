@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match7_FontResource.h"
 
 
-static __inline void nameFormSetCharacter(NameFormState *form, s8 index, s16 character)
+static __inline void nameFormSetCharacter(NameFormState *form, s8 index, u16 character)
 {
     FontGlyphLookup *font = reinterpret_cast<FontGlyphResourceOwner *>(recordTableGet(3))->font;
     font->vtable->hasGlyph(font, (u16)character);

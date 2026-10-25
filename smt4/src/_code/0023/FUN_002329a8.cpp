@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail shares a VFP zero across translation and rotation; this source uses an integer aggregate initialization. */
+/* NON_MATCHING: scheduling only: retail loads the first call's index constant (mov r1, #0) after the owner-flag update and uses r1 for it, built hoists it above and uses r0/r1 the other way round. */
 #include "shard/S1Mover.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
@@ -33,9 +33,10 @@ void FUN_002329a8(ModelCloneOwner *owner, u32 source)
     model->flags &= ~2u;
     ((CloneNode *)model->node)->render->enabled = 1;
     owner->flags |= 2;
-    Vec3f origin = {0.0f, 0.0f, 0.0f};
+    f32 zero = 0.0f;
+    Vec3f origin = {zero, zero, zero};
     nodeSetTranslation(owner->model->node, 0, &origin);
-    FUN_0028c618(owner->model->node, 0, 0.0f, 0.0f, 0.0f);
+    FUN_0028c618(owner->model->node, 0, zero, zero, zero);
     nodeSetScale(owner->model->node, 0, 1.0f, 1.0f, 1.0f);
 }
 }

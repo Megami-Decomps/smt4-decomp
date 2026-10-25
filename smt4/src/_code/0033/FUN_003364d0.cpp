@@ -1,5 +1,6 @@
 /* NON_MATCHING: same code size and shape as retail, but armcc lays out the group-insertion block and allocates r8/ip/r1 differently in the two grouping loops (retail puts the shared insertion block first and keeps the action table pointer in ip). */
-#include "battle/BattleActionHistory.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
 extern "C" {
@@ -28,7 +29,7 @@ static __inline bool sameGroup(BtlActionRecord *other, BtlActionRecord *action)
 
 // Groups the active actions of a battle (indices 4..53) by their key, sorts the groups and stores each action's group
 // number; with the 0x400 flag clear nothing is done.
-extern "C" void FUN_003364d0(BattleActionHistoryState *state, u32 flags)
+extern "C" void FUN_003364d0(BtlMainState *state, u32 flags)
 {
     ActionGroup groups[10];
     u32 groupCount = 0;

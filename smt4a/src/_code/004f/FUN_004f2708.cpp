@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial marker-mask loads use LDM instead of separate LDRs; early register and branch scheduling differ. */
+/* NON_MATCHING: marker-mask words load hi-before-lo (retail lo/mask-lo/hi/mask-hi) and the camera 0x2000000 test branches inverted at the end of the checkTransition arm. */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -22,7 +22,7 @@ s32 FUN_003eb1cc(BtlMainStateA *battle);
 /* Gate camera progression on battle masks, the script unit and camera flags. */
 u32 FUN_004f2708(u32 unused, BtlMainStateA *battle, s32 checkTransition)
 {
-    if (((battle->markerMasks.bits & g_btlCamera.requiredMarker) == 0 ||
+    if (((g_btlCamera.requiredMarker & battle->markerMasks.bits) == 0 ||
          (battle->stateFlags64.bits & g_btlCamera.requiredState) == 0) &&
         !(battle->stateFlags64.bits & g_btlCamera.blocked) &&
         !(battle->encounter.controlFlags & 0x10)) {

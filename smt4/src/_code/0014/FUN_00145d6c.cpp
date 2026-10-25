@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_00145d6c.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct GpuCommandPacket {
     /* 0x00 */ u32 words[8];

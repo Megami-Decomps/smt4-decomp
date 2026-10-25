@@ -9,9 +9,9 @@ extern int scrGetArg(u32 index);
 u32 FUN_002e3bf0(void)
 {
     int arg = scrGetArg(0);
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
 
-    scrSetResult(*(s16 *)(btl + 0x1fc6) <= arg);
+    scrSetResult(btl->emergencyAction.gate <= arg);
     return 1;
 }
 

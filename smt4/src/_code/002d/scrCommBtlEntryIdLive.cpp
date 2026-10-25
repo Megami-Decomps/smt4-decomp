@@ -13,9 +13,9 @@ u32 scrCommBtlEntryIdLive(void)
     s32 index;
 
     for (index = 0; index < 0x6D; index++) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->groupId == id) {
+        if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40) && unit->id == id) {
             scrSetResult(1);
             return 1;
         }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction scheduling only: retail keeps the statements in source order (the flags byte is loaded last), built hoists that load and the constants above the stores. */
 #include "common.h"
 
 extern "C" {
@@ -13,6 +12,11 @@ typedef struct Slot {
     /* 0x0B */ u8 valueB;
 } Slot;
 
+static __inline void slotSetFlag(Slot *slot, u8 flag)
+{
+    slot->flags |= flag;
+}
+
 /* Starts the slot (state 1) with `value` in both value bytes, unless it is already started. */
 void FUN_004cf978(Slot *slot, u8 value)
 {
@@ -21,7 +25,7 @@ void FUN_004cf978(Slot *slot, u8 value)
         slot->valueB = value;
         slot->state = 1;
         slot->counter = 0;
-        slot->flags |= 1;
+        slotSetFlag(slot, 1);
     }
 }
 

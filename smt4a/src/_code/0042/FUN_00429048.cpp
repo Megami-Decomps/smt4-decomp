@@ -1,7 +1,7 @@
 /* NON_MATCHING: result construction, staging and request calls are right (hidden-result WindowStatusResult returns); retail caches the resolved entry in r7 and shares one failure block with the token in r0, the scratch pair sits at sp+4 (armcc aligns it to sp+8), and the failure return is a bl rather than a tail call. */
 #include "classes/WindowStatus.h"
+#include "util/CalleeContracts.h"
 #include "nn/Result.h"
-#include "shard/FUN_00427e28.h"
 
 /* A registered request: a 0x44-byte payload at +0x54 and a "confirmed" flag at +0x98. */
 struct WindowRequestEntry {

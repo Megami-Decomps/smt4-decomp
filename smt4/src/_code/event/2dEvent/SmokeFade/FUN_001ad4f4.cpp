@@ -1,8 +1,8 @@
 /* NON_MATCHING: saved global/zero registers r6/r7 are exchanged; early inactive return now matches retail. */
 #include "event/2dEvent/SmokeFade.h"
 #include "camp/RenderCtx.h"
-#include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/packNibblesAndByte.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
 extern SmokeFadeState *DAT_0043df28;

@@ -2,7 +2,6 @@
 #include "camp/ScriptPanelResources.h"
 #include "shard/Shard004B.h"
 #include "shard/Shard004A.h"
-#include "shard/inputIsQuestConfirmPressed.h"
 
 /* The quest menu panel as FUN_004b7694 drives it: the focus animation and the selection tracker. */
 struct QuestPoint {

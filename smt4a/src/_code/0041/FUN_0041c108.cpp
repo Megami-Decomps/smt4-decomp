@@ -1,8 +1,8 @@
 /* NON_MATCHING: one instruction: the render-stack push computes the new slot address into ip before the load of the old top; retail does it after the load into r3. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/efctSetSpeed.h"
 #include "shard/FUN_00164b5c.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct SlotSprite {
     /* 0x00 */ u8 unk00[8];

@@ -31,4 +31,14 @@ extern TitleCommandState g_titleFlags;
 void asdGxCommandListEnd(u32 commandList, s32 submit);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_0029202c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

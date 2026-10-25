@@ -3,7 +3,6 @@
 #include "nw/math/MTX44.h"
 #include "shard/W6_W6Match7_CombinerState.h"
 #include "quest_center/qcMain.h"
-#include "shard/FUN_00169db4.h"
 
 using nw::math::MTX44;
 

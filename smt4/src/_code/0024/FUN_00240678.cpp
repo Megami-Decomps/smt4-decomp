@@ -1,5 +1,6 @@
 /* NON_MATCHING: combatant/action loops use immediate bounds, fewer saved registers and folded flag stores; 105 vs 104 instructions. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W5_W5Match2_CountPairs.h"
 #include "battle/btlAction.h"
 #include "battle/btlReflect.h"
@@ -40,7 +41,7 @@ u32 FUN_00240678(CompletionState *completion, BtlMainState *battle)
                 entry->flags |= 0x00800000;
         }
         for (s32 index = 4; index < 54; ++index) {
-            BtlActionRecord *action = &battle->actions.records[index];
+            BtlActionRecord *action = &battle->actions[index];
             u32 flags = action->status;
             if ((flags & 1) && !(flags & 0x80) && (flags & 0x400))
                 action->status = flags | 0x40000;

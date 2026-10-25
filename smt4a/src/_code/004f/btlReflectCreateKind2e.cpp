@@ -1,5 +1,5 @@
 #include "battle/btlReflect.h"
-#include "shard/btlReflectCreateKind2e.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 /* Creates reflection state 46 with two arguments. */

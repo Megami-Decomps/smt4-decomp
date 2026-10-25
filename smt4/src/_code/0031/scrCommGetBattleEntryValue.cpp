@@ -1,5 +1,4 @@
 #include "battle/BtlMainAccess.h"
-#include "battle/BattleEntries.h"
 
 extern "C" {
 
@@ -14,10 +13,10 @@ u32 scrCommGetBattleEntryValue(void)
     s32 i;
 
     for (i = 0; i < 109; i++) {
-        BattleEntry *entry = &reinterpret_cast<BattleEntryOwner *>(btlGetMainState())->entries[i];
+        BtlEntry *entry = &btlGetMainState()->entries[i];
 
-        if ((entry->flags & 0x10) && entry->key == key) {
-            result = entry->value;
+        if ((entry->flags & 0x10) && entry->id == key) {
+            result = entry->members.ids[0];
             break;
         }
     }

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_0024c52c.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
 

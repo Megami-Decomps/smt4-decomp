@@ -1,7 +1,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
-BtlMainState *btlGetMainState(void);
 
 /* Resolves a script's group argument: 1-4 name a group, 0 and -1 use the selected group (0 also marks an active entry); 1 when none. */
 s32 btlScriptResolveGroupArg(s32 group)

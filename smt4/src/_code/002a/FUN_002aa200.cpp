@@ -1,7 +1,7 @@
 /* NON_MATCHING: the force flag is now read through the 0x11E8 offset register (s8 field); retail still copies the texture size pair with ldm rather than ldrd and its flag store lands earlier. */
 #include "common.h"
 #include <stddef.h>
-#include "shard/FUN_00145d6c.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 

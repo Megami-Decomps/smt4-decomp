@@ -9,9 +9,9 @@ extern int scrGetArg(u32 index);
 u32 FUN_003124d4(void)
 {
     int arg = scrGetArg(0);
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
 
-    scrSetResult(*(s16 *)(btl + 0x1fca) <= arg);
+    scrSetResult(btl->resolution.second <= arg);
     return 1;
 }
 

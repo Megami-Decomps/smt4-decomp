@@ -1,7 +1,7 @@
 /* NON_MATCHING: sound/voice/lock registers differ and typed per-channel buffers enable strength reduction; -O2 candidate. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
-#include "shard/FUN_001af874.h"
+#include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" {
 extern CriticalSection DAT_0063f4f0;

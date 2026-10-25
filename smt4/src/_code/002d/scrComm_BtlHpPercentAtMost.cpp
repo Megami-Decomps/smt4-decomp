@@ -27,7 +27,7 @@ extern s32 scrGetArg(u32 index);
 u32 scrComm_BtlHpPercentAtMost(void)
 {
     s32 percent = scrGetArg(0);
-    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
+    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(percentOf(stats->hp, stats->maxHp) <= percent);
     return 1;

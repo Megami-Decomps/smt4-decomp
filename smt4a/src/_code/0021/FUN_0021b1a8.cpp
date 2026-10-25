@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only in the entry lookup loop (retail keeps the entry count in r5 and the id temp in ip; the build uses ip and r4). */
 #include "common.h"
 #include "util/FUN_002a4894.h"
 #include "shard/Shard0031.h"
@@ -32,7 +31,7 @@ void FUN_0021b1a8(HelpMenu *menu)
     int first = resourceRunOperationIfUnblocked(menu->list);
     int count = FUN_002a4894(reinterpret_cast<const Object *>(menu->list));
 
-    id = menu->ids[count + first];
+    id = menu->ids[first + count];
     if (id == 0x8B) {
         text = DAT_0052ccbc[1];
     } else if (id == 0x8C) {

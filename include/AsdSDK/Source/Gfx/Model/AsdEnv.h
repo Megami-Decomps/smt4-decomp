@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "nw/ut/RuntimeTypeInfo.h"
+#include "shard/W6_W6Match6_ResourceId.h"
 
 struct AsdEnvironmentCommands {
     /* 0x00 */ u8 unk00[0xC];
@@ -82,5 +83,25 @@ u8 asdFileRequestHasFailed(s32 *valueRef);
 extern "C" {
 u8 *gameFlagBlockGet(void);
 }
+
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 byteIsAtLeast100(u8 *valueRef);
+
+#ifdef __cplusplus
+}
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 legacyResourceIdRemap(const PackedResourceId *resource);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

@@ -1,29 +1,26 @@
 /* NON_MATCHING: retail addresses the id list as record + (8 + j * 2) through a register offset and keeps the loop counters in separate registers; ours differs in the inner-loop form. */
 #include "common.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
 /* A 0x288-byte slot record: a list of 50 ids (negative ends the list) at 8. */
-struct SlotRecord {
-    /* 0x000 */ u8 unk000[8];
-    /* 0x008 */ s16 ids[50];
-    /* 0x06C */ u8 unk06C[0x21C];
-};
 
 struct SlotManager {
     /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ SlotRecord *records;
+    /* 0x1FC0 */ BtlEntry *records;
 };
 
 /* Finds the slot whose id list contains `id`. */
-SlotRecord *btlMainFindEntryByListedId(SlotManager *manager, s32 id)
+BtlEntry *btlMainFindEntryByListedId(SlotManager *manager, s32 id)
 {
-    SlotRecord *records = manager->records;
+    BtlEntry *records = manager->records;
 
     for (s32 i = 0; i < 109; i++) {
-        SlotRecord *record = &records[i];
+        BtlEntry *record = &records[i];
         for (s32 j = 0; j < 50; j++) {
-            s32 entry = record->ids[j];
+            s32 entry = record->members.ids[j];
             if (entry < 0) {
                 break;
             }

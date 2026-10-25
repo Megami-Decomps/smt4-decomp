@@ -4,10 +4,10 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
-struct BtlUnitEntry;
+struct BtlEntry;
 extern "C" {
 
-BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 
 u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 value,
                  u32 parameter, s32 lookupId, s32 extraTarget)
@@ -18,7 +18,7 @@ u32 FUN_00245420(s32 actorId, u32 secondaryId, BtlActionRecord *target, u32 valu
     action->value = value;
     action->parameter = parameter;
     if (lookupId >= 0) {
-        BtlUnitEntry *unit = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
+        BtlEntry *unit = btlMainFindEntryByListedId(btlGetMainState(), target->memberId);
         if (unit && extraTarget >= 0) {
             action = btlQueueReflectAction(g_btlActionReflect, (s16)lookupId, 0, secondaryId);
             action->kind = 6;

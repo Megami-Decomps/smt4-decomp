@@ -1,6 +1,5 @@
 /* NON_MATCHING: retail duplicates the modulo/index/draw tail in both pulse arms and divides by a loaded 5.0 (vdiv); ours merges the arms and folds the division to a multiply by 0.2 (133 rows against 151). */
 #include "camp/RenderCtx.h"
-#include "shard/FUN_004ab718.h"
 
 /* A battle UI icon strip (observed fields). */
 struct BtlIconStrip {

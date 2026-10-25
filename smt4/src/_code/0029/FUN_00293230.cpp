@@ -8,7 +8,7 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 s32 FUN_00293230(void)
 {
-    Unit *unit = reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    Unit *unit = reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     if (unit != NULL && ((unit->flags & 0x80) != 0 || (unit->flags & 0x1000) != 0)) {
         return 1;
     }

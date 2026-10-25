@@ -3,7 +3,7 @@
 #include "map/mapDepart.h"
 
 struct MapPositionRecord {
-    s16 map;
+    u16 map;
     s16 object;
     s16 category;
     s16 x, y, z;

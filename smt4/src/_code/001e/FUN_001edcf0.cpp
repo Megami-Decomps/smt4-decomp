@@ -1,7 +1,6 @@
 /* NON_MATCHING: steps the save/load confirmation script task (start script by mode, run it, request the save, finish); written from the decompilation, switch layout and state write-back not compared with retail */
 #include "classes/WindowStatus.h"
 #include "sys/ResultReport.h"
-#include "shard/gameDataFlagsClear.h"
 
 #define SAVELOAD_STATE_START 0
 #define SAVELOAD_STATE_PROMPT 4

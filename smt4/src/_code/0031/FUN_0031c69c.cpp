@@ -1,13 +1,14 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/BtlScriptTargets.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 extern u32 g_btlScriptUnit;
 
 u32 scrGetArg(u32 index);
-BtlMainState *btlGetMainState(void);
 
 /* Script command: queues action kind 12 with the argument and targets the first usable enemy entry. */
 s32 FUN_0031c69c(void)
@@ -15,7 +16,7 @@ s32 FUN_0031c69c(void)
     s32 action = scrGetArg(0);
     s32 i;
 
-    BtlScriptActorData *data = reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data;
+    BtlScriptActorData *data = reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->data;
     data->actionKind = 12;
     btlGetMainState()->pendingAction = (s32)(action | 0x40000);
 
@@ -29,7 +30,7 @@ s32 FUN_0031c69c(void)
         if (flags & BTL_ENTRY_FLAG_BLOCKED) {
             continue;
         }
-        reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->targets[i] = i;
+        reinterpret_cast<BtlScriptActor *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->targets[i] = i;
         targetCount++;
         if (targetCount >= maxTargets) {
             break;

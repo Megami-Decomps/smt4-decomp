@@ -34,4 +34,54 @@ u32 FUN_001ffb70(PositionedStream* stream, u32 offset, void* buffer, u32 size);
 u32 FUN_002bf040(PositionedStream* stream, u32 offset, void* buffer, u32 size);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *FUN_00200c80(s32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002b5c88(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002cc228(u8 character, s32 alternate);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void scrCommMessageSetMode(s32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

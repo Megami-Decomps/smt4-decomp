@@ -1,6 +1,7 @@
 /* NON_MATCHING: stack layout (retail packs clock at sp+0, info, copy, date; built needs 136 bytes), failure tails merge differently (retail: inbox/outbox failures share a block with two NOPed hook calls), registers differ. */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;

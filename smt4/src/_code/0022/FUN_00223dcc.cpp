@@ -1,4 +1,4 @@
-/* NON_MATCHING: thread wait, portrait slots and buffer-return contracts fixed; stack-owner lifetime and color argument stores differ. */
+/* NON_MATCHING: only the saved-register choice of the stack-slot pointer/stack value (retail r6/r4) and the store scheduling at the stack release differ; thread-wait result is u32. */
 #include "common.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
@@ -62,7 +62,7 @@ static __inline void uniteWaitForThread(u32 thread)
 {
     s32 handle = thread;
     s32 signalled;
-    s32 result = FUN_002c40f8(&signalled, &handle, 1, 0, -1LL);
+    u32 result = FUN_002c40f8(&signalled, &handle, 1, 0, -1LL);
     if (nnResultIsFailure(result))
         FUN_002c526c(result);
 }

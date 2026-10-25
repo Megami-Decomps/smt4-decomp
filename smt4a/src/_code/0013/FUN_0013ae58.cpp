@@ -16,7 +16,7 @@ void FUN_0013ae58(void)
     struct VoiceStateView {
         u8 voices[0x1E0];
         void *panTable;
-        u8 flags;
+        s8 flags;
         u8 volume;
         u8 currentVoice;
         u8 unk1E7;

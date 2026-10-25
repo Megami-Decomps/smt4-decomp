@@ -1,7 +1,7 @@
 /* NON_MATCHING: ranking transitions and helper arguments are recovered; resource predicates, shared state commits, and switch branch placement differ. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/campCecSetObjectValue.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 
 struct RankingScriptProcess {
     /* 0x000 */ u8 unk000[0x108];

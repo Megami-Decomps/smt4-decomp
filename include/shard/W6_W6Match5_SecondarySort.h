@@ -31,4 +31,24 @@ typedef char SecondarySortRecordDescriptionOffsetCheck[
 
 extern "C" SecondarySortRecord *dataTable1bOr1cGetRecord(u16);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002b7148(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void memCopyWords(const u32 *source, u32 *destination, u32 byteCount);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

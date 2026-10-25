@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
+extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 scrGetArg(s32 index);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
@@ -23,14 +23,14 @@ s32 scrCommBtlLiveUnitCountWithin(void)
     live = 0;
     FUN_002499fc(group, &first, &count);
     for (i = first; i < first + count; i++) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[i];
+        BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
             live++;
         }
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        if (btlMainFindActiveEntry(reinterpret_cast<BtlState *>(btlGetMainState())) != NULL) {
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        if (btlMainFindActiveEntry(btlGetMainState()) != NULL) {
             live++;
         }
     }

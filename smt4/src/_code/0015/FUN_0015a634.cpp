@@ -6,7 +6,7 @@ extern "C" {
 /* Gathers packed halfword pairs from four blocks in reverse index order. */
 void FUN_0015a634(u32 *output, const u32 *input, u32 stride, const u32 *indices)
 {
-    for (s32 index = 4; index > 0; --index) {
+    for (u32 index = 4; index > 0; --index) {
         const u32 *block = input + indices[index];
         for (s32 pair = 0; pair < 2; ++pair) {
             const u32 *next = block + stride;

@@ -17,7 +17,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_00239fc4. */
 /* Supplied declaration required: recordValidatePair. */
-extern int FUN_0023a1f8(unsigned int);
+extern int queryFailureResultOrZero(unsigned int);
 /* Supplied declaration required: _ZN18WindowStatusResultC1Ej. */
 /* Supplied declaration required: FUN_00354450. */
 
@@ -32,7 +32,7 @@ void FUN_003540d8(unsigned int *param_1,unsigned int param_2,int param_3,unsigne
   
   temp_v0 = param_3;
   FUN_00239fc4(param_3,1);
-  if ((-1 < temp_v0) && (temp_v0 = FUN_0023a1f8(param_2), -1 < temp_v0)) {
+  if ((-1 < temp_v0) && (temp_v0 = queryFailureResultOrZero(param_2), -1 < temp_v0)) {
     FUN_00354450(&temp_v1,param_2,param_3,param_4,1);
     recordValidatePair(param_2,temp_v1,uStack_1c);
     *param_1 = temp_v1;

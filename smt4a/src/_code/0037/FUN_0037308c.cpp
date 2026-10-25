@@ -33,7 +33,7 @@ s32 FUN_0037308c(void)
     u32 expected = scrGetArg(2);
     BattleEntryQueryRangeA range;
     FUN_00301a08(choice, &range.first, &range.count);
-    for (s32 index = range.first; index < range.count + range.first; ++index) {
+    for (s32 index = range.first; index < range.first + range.count; ++index) {
         BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&

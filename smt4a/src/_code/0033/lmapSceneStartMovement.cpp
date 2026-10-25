@@ -27,7 +27,7 @@ struct MapMotionScene {
     u8 unk1e8[4];
     f32 targetStep;
     u8 unk1f0[0x24];
-    u8 mode;
+    s8 mode;
     u8 unk215[0xf];
     u8 active;
     u8 unk225[3];

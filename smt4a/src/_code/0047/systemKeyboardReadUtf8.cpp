@@ -1,6 +1,6 @@
 #include "nn/swkbd/SoftwareKeyboardConfig.h"
 #include "nn/Result.h"
-#include "shard/systemKeyboardReadUtf8.h"
+#include "shard/W6_W6Match7_QuestInteraction.h"
 
 extern "C" {
 void nn_swkbd_CTR_InitializeConfig(SoftwareKeyboardConfig *);

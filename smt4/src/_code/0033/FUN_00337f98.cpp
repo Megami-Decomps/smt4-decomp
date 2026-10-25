@@ -1,5 +1,4 @@
-/* NON_MATCHING: armcc turns the candidate loop into a pointer walk counting down from 50; retail
- * keeps the index, and zeroes the refill source before the count < 5 test. */
+/* NON_MATCHING: the candidate loop keeps its index (u32 i) but retail compares it signed (blt, bcc here) and the refill loop's two address temporaries use swapped scratch registers. */
 #include "common.h"
 
 /* The source of the ids: fifty candidates. */
@@ -20,7 +19,7 @@ extern "C" {
 void FUN_00337f98(IdPicks *picks, IdCandidates *candidates)
 {
     u8 count = 0;
-    for (s32 i = 0; i < 50; i++) {
+    for (u32 i = 0; i < 50; i++) {
         u32 id = candidates->ids[i];
         if (id != 0 && picks->ids[0] != id && picks->ids[1] != id && picks->ids[2] != id &&
             picks->ids[3] != id && picks->ids[4] != id) {
@@ -28,13 +27,15 @@ void FUN_00337f98(IdPicks *picks, IdCandidates *candidates)
             count++;
         }
     }
-    if (count != 0 && count < 5) {
+    if (count != 0) {
         u8 source = 0;
-        for (s32 slot = count; slot < 5; slot++) {
-            picks->ids[slot] = picks->ids[source];
-            source++;
-            if (source > count) {
-                source = 0;
+        if (count < 5) {
+            for (s32 slot = count; slot < 5; slot++) {
+                picks->ids[slot] = picks->ids[source];
+                source++;
+                if (source > count) {
+                    source = 0;
+                }
             }
         }
     }

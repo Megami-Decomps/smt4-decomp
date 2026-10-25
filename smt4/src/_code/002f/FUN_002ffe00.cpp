@@ -10,9 +10,9 @@ extern u32 scrGetArg(u32 index);
 u32 FUN_002ffe00(void)
 {
     u32 divisor = scrGetArg(0);
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
 
-    scrSetResult((btl[0x44b4] + 1) % (int)divisor);
+    scrSetResult((btl->encounterControl.busyA + 1) % (int)divisor);
     return 1;
 }
 

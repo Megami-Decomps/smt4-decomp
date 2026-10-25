@@ -9,9 +9,9 @@ extern int scrGetArg(u32 index);
 u32 scrArgWithinUnitCount(void)
 {
     int arg = scrGetArg(0);
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
 
-    scrSetResult(arg <= (int)(btl[0x44b4] + 1));
+    scrSetResult(arg <= (int)(btl->encounterControl.busyA + 1));
     return 1;
 }
 

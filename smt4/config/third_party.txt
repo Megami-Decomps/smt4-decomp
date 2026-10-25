@@ -1341,7 +1341,7 @@
 0x0023a170 FUN_0023a170 between
 0x0023a198 stringFormatUnbounded between
 0x0023a1c0 recordValidatePair between
-0x0023a1f8 FUN_0023a1f8 between
+0x0023a1f8 queryFailureResultOrZero between
 0x0023a20c FUN_0023a20c between
 0x0023a244 FUN_0023a244 between
 0x0023a2e0 FUN_0023a2e0 between

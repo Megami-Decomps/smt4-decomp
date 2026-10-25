@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/campCecDispatchMode.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 extern "C" {
 extern struct { u32 reserved; struct { u8 unk00[0x174]; s32 mode; } *work; } g_campCec;
 void uiDrawExtendedRecordLabel(s32 mode, u32 value);

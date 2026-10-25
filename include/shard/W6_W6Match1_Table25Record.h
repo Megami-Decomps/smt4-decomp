@@ -8,4 +8,14 @@ struct Table25Record {
     u8 unk01[0x1f];
 };
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+Table25Record* FUN_002cdecc(s32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

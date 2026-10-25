@@ -21,7 +21,7 @@ extern u32 g_btlScriptUnit;
 u32 FUN_002f0688(void)
 {
     u32 bit = scrGetArg(0);
-    UnitStats002f0688 *stats = reinterpret_cast<BtlUnit002f0688 *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
+    UnitStats002f0688 *stats = reinterpret_cast<BtlUnit002f0688 *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult((stats->flags & (1 << bit)) != 0);
     return 1;

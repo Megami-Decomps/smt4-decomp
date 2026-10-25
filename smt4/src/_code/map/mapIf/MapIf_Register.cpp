@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite of the map-interface registration (allocate and clear the state, create its four tasks, set up the three marker quads); retail also loads two debug arguments (a source-path string and a line number) that asdMemAlloc discards, and schedules the quad stores in a different order with the state fields interleaved. */
 #include "common.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 // A map-interface marker quad: four corners of (x, y, z).
 struct MapIfQuad {

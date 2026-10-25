@@ -6,7 +6,7 @@
 // Cache identities of active actions in the first unused roster-cache records.
 extern "C" void FUN_00338458(void *state)
 {
-    // This function uses an extended battle-state view not covered by BtlState.
+    // This function uses an extended battle-state view not covered by BtlMainState.
     struct RosterStateView {
         u8 prefix[0x1E98];
         BtlActionRecord *actions;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: event-script state machine; draft shape, fall-through between cases 0/3/6 and the shared tail is written as in the compiler's switch, register allocation not compared */
+#include "nn/Result.h"
 #include "common.h"
 #include "sys/ResultReport.h"
-#include "shard/FUN_00103c9c.h"
 
 /* The event being played: its resources, state and script process. */
 struct EventRequest {
@@ -96,7 +96,7 @@ u32 FUN_001a1d08(void)
             u32 result;
             s32 id = request->fadeId;
             FUN_002c40f8(&result, &id, 1, 0, 0, 0);
-            if ((s32)result < 0)
+            if ((s32)nnResultIsFailure(result))
                 FUN_002c526c(result);
             if ((result & 0x3FF) == 0x3FE) {
                 request->frames++;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: Retail mov r6, r3 differs from recovered mov r6, r3. */
+#include "nn/Result.h"
 #include "sys/ProcessResult.h"
 #include "common.h"
 
@@ -31,7 +32,7 @@ s32 FUN_002d5f90(FileView* file, u32 offset, void* buffer, u32 size)
     s32 result = file->vtable->unk34(file, &transferred, buffer, size, 1);
     FUN_002c3510(result);
 
-    if ((result & 0x80000000U) != 0) {
+    if (nnResultIsFailure(result)) {
         if ((file->unk08 & ~1U) != 0) {
             if ((file->unk08 & 1U) != 0) {
                 asdFatalError();

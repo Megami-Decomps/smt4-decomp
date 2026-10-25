@@ -1,7 +1,7 @@
 /* Logs one of two events (0x5b if the context lacks both properties 10 and 2, otherwise 0x5a when the target is valid). */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/FUN_002580d4.h"
+#include "shard/W6_W6Match3_RotationY.h"
 
 extern "C" {
 

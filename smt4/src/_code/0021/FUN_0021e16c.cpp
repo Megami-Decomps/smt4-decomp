@@ -9,10 +9,15 @@ typedef struct VqVec3 {
     f32 z;
 } VqVec3;
 
+/* A point stored as an array of floats. */
+typedef struct VqPoint {
+    f32 v[3];
+} VqPoint;
+
 /* A vector source (0x284 bytes): its start point and direction. */
 typedef struct VqSource {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ VqVec3 origin;
+    /* 0x04 */ VqPoint origin;
     /* 0x10 */ u8 unk10[0x1C];
     /* 0x2C */ VqVec3 direction;
     /* 0x38 */ u8 unk38[0x24C];
@@ -24,7 +29,7 @@ typedef struct VqRequest {
     /* 0x01 */ u8 done;
     /* 0x04 */ s32 source;
     /* 0x08 */ u32 unk08;
-    /* 0x0C */ VqVec3 origin;
+    /* 0x0C */ VqPoint origin;
     /* 0x18 */ VqVec3 direction;
     /* 0x24 */ f32 length;
     /* 0x28 */ f32 progress;

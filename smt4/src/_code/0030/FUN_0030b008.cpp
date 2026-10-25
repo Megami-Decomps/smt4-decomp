@@ -1,20 +1,12 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
-typedef struct BattleUnit {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[0xCA];
-    /* 0x0CE */ u16 id;
-    /* 0x0D0 */ u8 unk0D0[0x1B8];
-} BattleUnit;
 
-typedef struct BattleState {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ BattleUnit *units;
-} BattleState;
 
 typedef struct DevilRecord {
     /* 0x0 */ u8 unk0[5];
@@ -29,7 +21,7 @@ u32 FUN_0030b008(void)
     s32 i = 0;
 
     do {
-        BattleUnit *unit = &reinterpret_cast<BattleState *>(btlGetMainState())->units[i];
+        BtlEntry *unit = &reinterpret_cast<BtlMainState *>(btlGetMainState())->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0) {
             if (devilGetRecord(unit->id)->kind == 1) {

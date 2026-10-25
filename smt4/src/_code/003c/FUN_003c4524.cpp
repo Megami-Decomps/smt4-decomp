@@ -1,7 +1,7 @@
 /* NON_MATCHING: debug menu values and toggles recovered; one extra saved pointer and flag-result register allocation differ. */
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
-#include "shard/listBoxItemHasOwner.h"
+#include "util/CalleeContracts.h"
 
 struct BattleDebugList {
     /* 0x00 */ u8 unk00[0x10];

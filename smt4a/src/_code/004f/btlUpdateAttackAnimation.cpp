@@ -57,7 +57,7 @@ void btlUpdateAttackAnimation(BtlAuxA *battle)
     if (state2CIs4(step->animation)) {
         s16 current = (s16)(s32)animationGetModeChannelValue(step->animation);
         s16 previous = step->previousFrame;
-        if (current < previous) {
+        if (previous > current) {
             ++step->loopCount;
             step->loopLength = previous;
             step->previousFrame = 0;

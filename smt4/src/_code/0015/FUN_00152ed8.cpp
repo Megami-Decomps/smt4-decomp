@@ -2,7 +2,6 @@
 #include <algorithm>
 #include "shard/S1GfxModel.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "shard/settings5BClearFlags.h"
 
 extern "C" {
 

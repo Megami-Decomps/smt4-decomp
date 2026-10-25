@@ -1,5 +1,5 @@
 #include "shard/GameGlobals.h"
-#include "shard/FUN_0029acb0.h"
+#include "ui/PartyPanelState.h"
 
 extern "C" {
 

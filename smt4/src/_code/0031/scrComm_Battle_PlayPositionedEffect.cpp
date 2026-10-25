@@ -74,7 +74,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
     FUN_002454c4(DAT_00435d18, &request, 1, 0);
 
     BattleMain* main = reinterpret_cast<BattleMain *>(btlGetMainState());
-    u32 user = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    u32 user = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     s32 placed = 0;
     u8* effectSlots = DAT_00435d18->effectSlots;
     BattleMain* mainForEntries = main;

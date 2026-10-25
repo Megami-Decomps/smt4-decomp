@@ -3,6 +3,8 @@
 #include "shard/W6_W6Match3_ColorFade.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 namespace {
 struct ActionBinding {
@@ -36,7 +38,6 @@ struct BattleBindingIdentity {
 
 extern "C" {
 u8 objIsStateNotOne(void* animation);
-BtlMainState* btlGetMainState();
 BtlEntry* btlMainFindEntryByListedId(BtlMainState*, s32 id);
 void FUN_0034d430(void* animation, const BattleSpritePlacement*, f32 scale);
 void FUN_0034c7a8(void* animation, const BattleVector3* translation);

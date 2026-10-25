@@ -60,9 +60,9 @@ u32 FUN_0038c888(void)
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(1)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+        if ((g_btlCandidateMasks.unavailable & entry->flags) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->id == id &&
             unitHasCategoryThreeSkill(entry)) {
             scrSetResult(1);
             return 1;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the two power accumulators take swapped r4/r5 registers. */
 #include "gamedata/EquipmentSortPower.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 extern "C" {
@@ -31,8 +30,7 @@ static inline u16 equipmentSortPower(u16 id)
 extern "C" s32 FUN_003a0164(const u16 *left, const u16 *right)
 {
     u16 leftPower = equipmentSortPower(*left);
-    u16 rightPower = equipmentSortPower(*right);
-    s32 result = rightPower - leftPower;
+    s32 result = equipmentSortPower(*right) - leftPower;
     if (result == 0)
         result = FUN_00230f44(left) - FUN_00230f44(right);
     return result;

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W5_W5Match2_UniteWork.h"
-#include "shard/dataTable05Sub0GetEntries.h"
+#include "battle/btlHelp.h"
 
 /* The per-race level lists: the table of level bounds at 0x104 and the race index at 0x33. */
 struct LevelLists {

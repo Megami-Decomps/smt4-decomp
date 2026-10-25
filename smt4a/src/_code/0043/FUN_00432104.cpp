@@ -23,7 +23,7 @@ s32 FUN_00432104(void)
     }
     if (DAT_005c0ac4 == 1) {
         s32 result = nn::svc::CloseHandle(g_ipcServiceSessionHandle);
-        if (nnResultIsFailure(result)) {
+        if (!nnResultIsSuccess(result)) {
             return result;
         }
         g_ipcServiceSessionHandle = 0;

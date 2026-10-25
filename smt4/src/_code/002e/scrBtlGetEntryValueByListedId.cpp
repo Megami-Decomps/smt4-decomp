@@ -1,9 +1,10 @@
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(s32 value);
@@ -16,7 +17,7 @@ u32 scrBtlGetEntryValueByListedId(void)
     BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 
     if (entry != NULL) {
-        result = entry->value;
+        result = entry->hp;
     }
     scrSetResult(result);
     return 1;

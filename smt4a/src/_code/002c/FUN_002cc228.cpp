@@ -1,6 +1,6 @@
 /* Formats a message into a local 100-byte buffer from a lookup chosen by the flag; the first byte of the buffer is the given character. */
 #include "common.h"
-#include "shard/FUN_002cc228.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 

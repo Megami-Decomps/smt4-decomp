@@ -3,9 +3,9 @@
 #include "title/titleConfig.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0031.h"
+#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/campIsState85.h"
 
 extern "C" {
 

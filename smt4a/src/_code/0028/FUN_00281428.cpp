@@ -1,7 +1,6 @@
 /* NON_MATCHING: VFP register assignment and the packing of the vertex colour differ (retail loads the half-size with one vldmia into s17/s18 and keeps the shift in s19/s16); same loads, conversions and the two FUN_0019e3d0 quads. */
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/engineCleanupIsDone.h"
 
 namespace {
 /* A loaded texture object: only its pixel size is read. */

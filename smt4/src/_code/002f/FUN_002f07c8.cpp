@@ -1,13 +1,26 @@
-/* NON_MATCHING: loop range reloads use separate loads; successful query exits do not share the retail epilogue. */
+/* NON_MATCHING: retail's loop-hit exit is `bl scrSetResult; nop; nop; b epilogue` (shared `mov r0,r7` return with r7 = 1) and builds the active-entry result with movne/mov before one shared scrSetResult; the build duplicates the epilogue and keeps the result in r7. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-BtlMainState *btlGetMainState(void);
 s32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(s32 group, u32 *first, u32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
+
+// Whether the special active battle entry belongs to the group bit `flag`.
+static __inline s32 activeEntryHasGroupBit(s32 flag)
+{
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
+        if (entry != NULL && (entry->groupMask & (1 << flag)) != 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 // Test whether an eligible member of the selected group has the requested flag.
 u32 FUN_002f07c8(void)
@@ -17,7 +30,7 @@ u32 FUN_002f07c8(void)
     u32 first;
     u32 count;
     FUN_002499fc(group, &first, &count);
-    for (s32 index = first; index < (s32)(first + count); ++index) {
+    for (s32 index = first; index < (s32)(count + first); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 && (entry->groupMask & (1 << flag)) != 0) {
@@ -25,14 +38,7 @@ u32 FUN_002f07c8(void)
             return 1;
         }
     }
-    s32 result = 0;
-    if (btlGetMainState()->hasActiveEntry != 0) {
-        BtlEntry *entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && (entry->groupMask & (1 << flag)) != 0) {
-            result = 1;
-        }
-    }
-    scrSetResult(result);
+    scrSetResult(activeEntryHasGroupBit(flag));
     return 1;
 }
 }

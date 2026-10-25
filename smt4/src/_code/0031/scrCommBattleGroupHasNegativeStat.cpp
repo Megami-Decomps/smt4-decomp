@@ -1,11 +1,12 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 s32 btlScriptResolveGroupArg(s32 kind);
 void FUN_002499fc(s32 kind, u32 *first, u32 *count);
-BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 u32 scrCommBattleGroupHasNegativeStat()

@@ -2,7 +2,6 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/NaviMain.h"
-#include "shard/FUN_004930e4.h"
 
 extern "C" {
 extern NaviMainA *g_naviMain;

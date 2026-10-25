@@ -1,6 +1,6 @@
 /* NON_MATCHING: switch table becomes a comparison chain, packed descriptor stores combine, and result-test registers differ; -O2 may preserve the retail SDK control flow. */
 #include "common.h"
-#include "shard/FUN_004269b0.h"
+#include "shard/W6_W6Match7_ArchiveIcon.h"
 
 struct SdkResourceOptions {
     u32 id;

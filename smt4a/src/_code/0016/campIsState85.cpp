@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/campIsState85.h"
+#include "util/CalleeContracts.h"
 
 struct Camp {
     u8 unk00[0x1C]; // 0x00

@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rebuild of the name-entry state setter's constructor (handler table of function/adjust pairs, the name source by mode, the sprite and param packet setup); armcc here orders the handler-table stores and the unaligned 18-byte name copies differently. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
-#include "shard/stateSetterConstruct.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 #include "event/bustupEvent/BustupTex.h"
 
 /* A name (18 bytes). */

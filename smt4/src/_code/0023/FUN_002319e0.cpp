@@ -3,7 +3,7 @@
 
 
 /* Test one cell of the selected five-by-seven exploration grid. */
-extern "C" bool FUN_002319e0(s32 region, s32 x, s32 y)
+extern "C" bool FUN_002319e0(s32 region, s32 x, u32 y)
 {
     /* The exploration masks lie beyond the recovered SaveWork prefix. */
     struct MapExplorationFlags {

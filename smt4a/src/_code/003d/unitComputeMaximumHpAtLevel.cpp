@@ -24,8 +24,8 @@ u32 unitComputeMaximumHpAtLevel(s32 level, const StatGrowthParameters *parameter
     LevelEntry *entries = (LevelEntry *)asdOperatorNewD((matching + 1) * sizeof(LevelEntry));
     rt_memclr(entries, matching * sizeof(LevelEntry));
     aocCollectLevelEntries(entries, &count, kind, level);
-    u16 growth = 0;
-    u32 remaining = (u32)count;
+    s16 growth = 0;
+    s32 remaining = (u32)count;
     for (const LevelEntry *entry = entries; remaining != 0; --remaining, ++entry) {
         u16 levels = 0;
         if (entry->id < level) {

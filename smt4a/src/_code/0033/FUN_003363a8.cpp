@@ -19,7 +19,7 @@ void FUN_0020ad6c(BtlUiObjCA *panel, s32 state, s32 enabled);
 void FUN_0021a9e8(BtlUiObjCA *panel);
 
 // Reset command icons and select the normal, disabled or special battle-panel transition.
-void FUN_003363a8(BtlUiObjCA *panel, u32 selection, u8 first, u32 second)
+void FUN_003363a8(BtlUiObjCA *panel, u32 selection, s8 first, u32 second)
 {
     // These selection controls extend beyond the currently recovered widget prefix.
     struct CommandPanelView {
@@ -37,7 +37,7 @@ void FUN_003363a8(BtlUiObjCA *panel, u32 selection, u8 first, u32 second)
         u32 selection;
         u8 padding3894[0x1D];
         u8 first;
-        u8 second;
+        s8 second;
         u8 padding38B3;
         s8 disabled;
     };

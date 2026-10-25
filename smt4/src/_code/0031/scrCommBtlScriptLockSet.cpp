@@ -10,7 +10,7 @@ extern "C" {
 u32 scrCommBtlScriptLockSet(void)
 {
     s32 enable = scrGetArg(0);
-    u32 *flags = &btlGetMainStateExt()->flags44A0;
+    u32 *flags = &btlGetMainState()->battleFlags;
 
     if (enable > 0) {
         *flags |= BTL_FLAG_SCRIPT_LOCK;

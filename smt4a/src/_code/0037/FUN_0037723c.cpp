@@ -1,4 +1,3 @@
-/* NON_MATCHING: Area timer setup and flag normalization are complete; area/flag use swapped r5/r6 and the signed bit-index calculation uses different scratch registers. */
 #include "shard/Shard0033.h"
 #include "util/FUN_003799d0.h"
 
@@ -34,7 +33,7 @@ extern CurrentAreaState g_gameState;
 }
 
 /* Related flag variants share the same persistent completion bit. */
-static inline s32 canonicalAreaFlag(s32 flag)
+static inline s32 canonicalAreaFlag(u32 flag)
 {
     if (flag == 23 || flag == 24) return 14;
     if (flag == 25 || flag == 26) return 18;
@@ -69,7 +68,9 @@ extern "C" void FUN_0037723c(s32 immediate)
                 s32 flag = record->flag;
                 Flags0C0C *flags = gameFlagsGetBlock();
                 flag = canonicalAreaFlag(flag);
-                flags->bits[flag / 32] |= 1u << (flag % 32);
+                s32 word = flag / 32;
+                s32 bit = flag % 32;
+                flags->bits[word] |= 1u << bit;
             }
         }
         for (s32 j = 0; j < 21; ++j) {

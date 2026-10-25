@@ -1,9 +1,9 @@
-/* NON_MATCHING: selection range setup corrected; combatant flag alignment and mask-chain scheduling still differ. */
+/* NON_MATCHING: only the operand order inside the second 64-bit mask test's two ANDs differs (retail flags-first with an ldm mask load; the build mask-first). */
 #include "battle/BtlMainAccess.h"
+#include "util/CalleeContracts.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
-#include "shard/btlResolveEntryChoice.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -32,7 +32,7 @@ u32 FUN_003a8928()
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         const PropertyView *properties = reinterpret_cast<const PropertyView *>(entry);
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 && properties->values[property] >= 1) {
             scrSetResult(1);
             return 1;

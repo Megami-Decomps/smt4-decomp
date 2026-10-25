@@ -1,12 +1,13 @@
 /* NON_MATCHING: retail keeps separate early-result call and common epilogue; compiler merges the matching-result branches. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(s32 argument);
 s32 scrSetResult(s32 result);
 u32 btlScriptResolveGroupArg(u32 group);
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 /* Test a requested entry ID's group bit, including the special active entry. */

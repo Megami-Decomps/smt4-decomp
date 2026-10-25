@@ -212,7 +212,7 @@ LAB_0033ab28:
     }
   }
   else {
-    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     temp_v3 = *(int *)(temp_v3 + 0x24);
     if (temp_v3 == 0) {
       return 0;

@@ -1,5 +1,5 @@
 #include "romwright_types.h"
-#include "shard/FUN_0024c3c8.h"
+#include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {
 

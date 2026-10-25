@@ -20,4 +20,14 @@ struct BattleStageModelA {
 
 extern "C" void btlStageUpdateNodePositions(BattleStageModelA* stage, NodeVec3 position);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00343c58(u32 a, u32 index, u32 dir, u32 d);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

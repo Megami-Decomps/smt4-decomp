@@ -1,6 +1,7 @@
 /* NON_MATCHING: member search is not pair-unrolled; vector-return epilogues and height-kind branches merge. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
 
@@ -25,7 +26,7 @@ Table00Record *dataTable00FindById(u32);
 
 BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
 {
-    BtlActionRecord *action = &state->actions.records[index];
+    BtlActionRecord *action = &state->actions[index];
     BattleVector3 position;
     if (!(action->status & 0x10) || forceEnemy) {
         BtlEntry *entry = btlMainFindEntryByListedId(state, action->memberId);

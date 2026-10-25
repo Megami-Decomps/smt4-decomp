@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/sysPlayVoice.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 

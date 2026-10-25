@@ -6,7 +6,7 @@ extern "C" {
 void rt_aeabi_memclr(void *destination, u32 bytes);
 }
 
-static __inline SavedRecord100 *getSavedRecord(u32 index)
+static __inline SavedRecord100 *getSavedRecord(s32 index)
 {
     if (index >= 32) {
         return NULL;

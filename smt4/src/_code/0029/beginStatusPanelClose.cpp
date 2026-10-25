@@ -2,7 +2,6 @@
 #include "shard/GameGlobals.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "status/StatusCamera.h"
-#include "shard/lmapSceneGetScript.h"
 
 class StatusScreenModel {
 public:

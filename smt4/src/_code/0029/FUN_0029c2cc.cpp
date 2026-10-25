@@ -3,7 +3,6 @@
 #include "shard/S1GfxModel.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "shard/settings5BClearFlags.h"
 
 extern "C" {
 void FUN_00152fac(s32 slotIndex);
@@ -15,7 +14,7 @@ void FUN_0029c2cc(ModelRemovalRequestPrefixIV *request, s32 slotIndex)
     ModelSlot **newEnd = std::remove(list->slots.begin, list->slots.end, target);
     ModelSlot **oldEnd = list->slots.end;
     list->slots.end = newEnd;
-    if (oldEnd != newEnd)
+    if (newEnd != oldEnd)
         target->attached = 0;
 
     if (slotIndex == 0)

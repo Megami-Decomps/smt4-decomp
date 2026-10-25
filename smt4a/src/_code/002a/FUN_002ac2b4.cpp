@@ -29,7 +29,7 @@ u32 FUN_002ac2b4(s32 selection, s32 chain)
         }
     } else {
         for (s32 component = 0; component < 2; ++component) {
-            u32 packed = work->pairList.pairs[selection].packedIds;
+            s32 packed = work->pairList.pairs[selection].packedIds;
             u32 id = component == 0 ? packed & 0x7fff : (packed >> 15) & 0x7fff;
             if (id != 0) {
                 BitsAt60 *record = slotRecordFindById(id);

@@ -2,9 +2,9 @@
 #include "common.h"
 #include "addon/AocEntryKind.h"
 #include "shop/shopMain.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {
-s32 contentGetUpgradedKindValue(u16 id);
 
 /* Sorts selected content kinds by ascending kind value, then by the entry's secondary key. */
 s32 FUN_00493d88(const u16 *left, const u16 *right)

@@ -1,8 +1,8 @@
 /* NON_MATCHING: O3 retains validate/record values in registers instead of retail's argument homes and record-pointer spill; eligibility and acceptance blocks are placed differently. O2 may recover the spill strategy. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
-#include "shard/gameFlagIsSet.h"
 #include "shard/gameRecordCopy.h"
+#include "shard/gameFlagIsSet.h"
 
 struct DemonLevelEntry {
     u16 id, level;

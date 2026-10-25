@@ -1,7 +1,6 @@
 /* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
 #include "common.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
-#include "shard/FUN_0029022c.h"
 
 extern "C" {
 

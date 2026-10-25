@@ -27,7 +27,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
         FUN_002b6c34(id, iconPos->x + base->x + x, base->y + iconPos->y + y, 0xb5, 0, 0);
         const SpriteInfo *numberPos = asdTMTexTableEntryAt(0x1a, 0x521);
         textFormatBuffer(text, "%d", FUN_0028d1f4(id));
-        FUN_002bdf94(0, numberPos->x + base->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
+        FUN_002bdf94(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
         return;
     }
     const SpriteInfo *namePos = asdTMTexTableEntryAt(0x1a, 0x40f);
@@ -35,7 +35,7 @@ void FUN_00204ed0(s32 x, s32 y, s32 id, u32 frame, u32 color)
     textDrawString(2, 0x5a5a5aff, text, namePos->x + base->x + x, base->y + namePos->y + y, 0.29296875f, 0.0f, 1.0f);
     const SpriteInfo *numberPos = asdTMTexTableEntryAt(0x1a, 0x521);
     textFormatBuffer(text, "---");
-    FUN_002bdf94(0, numberPos->x + base->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
+    FUN_002bdf94(0, base->x + numberPos->x + x, base->y + numberPos->y + y, 1, 8, 0xb5, text);
 }
 
 }

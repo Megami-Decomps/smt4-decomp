@@ -10,7 +10,7 @@ extern u32 g_btlScriptUnit;
 /* Script command: stores 0xB in the unit's data and sets unit parameter 0xF to 0. */
 s32 scrComm_Battle_SetUnitStateB(void)
 {
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlUnitData *data = unit->data;
 
     data->unk14C = 0xB;

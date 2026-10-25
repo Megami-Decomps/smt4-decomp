@@ -13,12 +13,12 @@ struct BattleGuardState {
 extern "C" {
 extern BtlMain *g_btlMain;
 
-bool FUN_00256940(BtlMain *context, const BtlScript *script, s32 checkMain)
+bool FUN_00256940(BtlMain *context, const BtlMainState *script, s32 checkMain)
 {
     const BattleGuardState *state = (const BattleGuardState *)script;
-    if (((state->extraFlags & 0x40000000) == 0 || (script->flags & 0x04000000) == 0) &&
-        (script->flags & 4) == 0 && (state->statusFlags & 0x10) == 0 &&
-        (script->flags & 0x200) == 0 &&
+    if (((state->extraFlags & 0x40000000) == 0 || (script->battleFlags & 0x04000000) == 0) &&
+        (script->battleFlags & 4) == 0 && (state->statusFlags & 0x10) == 0 &&
+        (script->battleFlags & 0x200) == 0 &&
         (checkMain == 0 || g_btlMain == NULL || (g_btlMain->flags & 0x02000000) == 0)) {
         return true;
     }

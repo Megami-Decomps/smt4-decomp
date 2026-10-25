@@ -20,7 +20,7 @@ int btlReflectCreateKind2d(s32 a, u32 caster, Unit *target, s32 b);
 u32 FUN_002f7884(void)
 {
     s32 index = scrGetArg(0);
-    u32 caster = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    u32 caster = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     btlReflectCreateKind2d(0, caster, &reinterpret_cast<MainState *>(btlGetMainState())->units[index], 0);
     return 1;

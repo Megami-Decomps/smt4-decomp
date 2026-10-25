@@ -75,4 +75,14 @@ extern "C" {
 void mapCollisionRelease(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void mapGimicUpdateVisualBounds(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

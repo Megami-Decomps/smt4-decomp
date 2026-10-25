@@ -3,7 +3,7 @@
 
 extern "C" {
 // Convert top-left viewport bounds into the renderer's mirrored coordinate system.
-void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 bottomScreen)
+void FUN_0035ae58(s32 x, s32 y, s32 width, u32 height, s32 bottomScreen)
 {
     // Both viewport stacks lie beyond the shared draw-context view.
     struct ViewportContextView {

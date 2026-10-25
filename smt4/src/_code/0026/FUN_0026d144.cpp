@@ -41,7 +41,7 @@ void FUN_0026d144(void *selection, s32 stockOnly)
 
     bool scripted = false;
     if (panel->previewItem == 0x7d && static_cast<void *>(btlGetMainState()) != NULL && g_btlScriptUnit != 0) {
-        BtlUnitExtra *extra = reinterpret_cast<BtlUnitView *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->extra;
+        BtlUnitExtra *extra = reinterpret_cast<BtlUnitView *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->extra;
         scripted = extra != NULL && extra->kind == 8;
     }
     if (!scripted) {

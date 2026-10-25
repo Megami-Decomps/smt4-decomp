@@ -1,4 +1,4 @@
-/* NON_MATCHING: color constant hoisting, VFP conversion registers, and background setup scheduling differ. */
+/* NON_MATCHING: only the load order of the 320.0f/240.0f background arguments differs (retail loads them after the integer colour moves). */
 #include "common.h"
 #include <stddef.h>
 #include "text/TextDraw.h"
@@ -39,18 +39,19 @@ void FUN_0046a108(MessageDebugOverlayView *overlay)
         return;
     FUN_0016c4b8(g_renderCtx, 0);
     FUN_0014e314(128, 128, 128, 128, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
+    u32 color = 0xFFFFFFFF;
     s32 count = overlay->count;
     if (count > overlay->capacity)
         count = overlay->capacity;
     if (count == 0) {
-        textDrawString(2, 0xFFFFFFFF, DAT_00533528, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
+        textDrawString(2, color, DAT_00533528, 8.0f, 8.0f, 0.0f, 1.0f, 1.0f);
         return;
     }
     for (s32 index = 0; index < count; ++index) {
         const char *text = FUN_00156850(overlay->messages()[index].message, 0);
-        textDrawString(2, 0xFFFFFFFF, text, 24.0f, (f32)(index * 14 + 8), 0.0f, 1.0f, 1.0f);
+        textDrawString(2, color, text, 24.0f, (f32)(index * 14 + 8), 0.0f, 1.0f, 1.0f);
     }
     s32 nextLine = FUN_0031d174(&overlay->queueType);
-    textDrawString(2, 0xFFFFFFFF, DAT_00533560, 8.0f, (f32)(nextLine * 14 + 8), 0.0f, 1.0f, 1.0f);
+    textDrawString(2, color, DAT_00533560, 8.0f, (f32)(nextLine * 14 + 8), 0.0f, 1.0f, 1.0f);
 }
 }

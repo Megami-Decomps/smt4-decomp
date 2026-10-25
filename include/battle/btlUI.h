@@ -300,4 +300,24 @@ typedef char BtlUiPositionRequestOffsetsCheck[
     offsetof(BtlUiPositionRequest, active) == 0xc &&
     sizeof(BtlUiPositionRequestRow) == 0x280 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_004a9a50(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_003ae120(BtlUi *arg0, s8 arg1, s8 arg2);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

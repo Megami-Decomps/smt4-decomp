@@ -626,7 +626,7 @@ extern int FUN_002dfa18(void);
 /* Supplied declaration required: FUN_00314b7c. */
 extern int FUN_00324c68(unsigned int);
 /* Supplied declaration required: popupClearPendingEntries. */
-extern int FUN_00328200(void);
+extern int naviQuestConfirmAvailable(void);
 extern int popupGetStateValue(void);
 /* Supplied declaration required: applyIfIdValid. */
 /* Supplied declaration required: mapIfUnregisterOwnedResources. */
@@ -1803,7 +1803,7 @@ LAB_00278b38:
                                   else {
                                     sysPlaySe(0xd2);
                                   }
-                                  temp_v8 = FUN_00328200();
+                                  temp_v8 = naviQuestConfirmAvailable();
                                   if (temp_v8 != 0) {
                                     DAT_005f1614 = 1;
                                     puVar2[3] = 0xe;

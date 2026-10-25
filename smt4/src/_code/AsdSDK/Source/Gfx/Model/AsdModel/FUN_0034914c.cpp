@@ -39,7 +39,7 @@ void FUN_0034914c(const ModelDrawSelection *selection, ModelMaterialContext *con
             u32 sign = encoding.bits & 0x80000000 ? 0x800000 : 0;
             DAT_004720f0 = sign;
             u32 magnitude = encoding.bits & 0x7fffffff;
-            s32 exponent = 0;
+            u32 exponent = 0;
             if (magnitude) {
                 exponent = (magnitude >> 23) - 64;
                 if (exponent < 0) {

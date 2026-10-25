@@ -1,11 +1,12 @@
 #include "shard/S1Mover.h"
-#include "shard/mapProbePositionDownward.h"
+#include "map/mapDepart.h"
 
 extern "C" s32 FUN_0025ef68(Vec3f *position, const Vec3f *previous, u32 flags);
 
 // Probe slightly above the position, then step downward until a surface is found.
-extern "C" void mapProbePositionDownward(Vec3f *position)
+extern "C" void mapProbePositionDownward(void *positionArg)
 {
+    Vec3f *position = (Vec3f *)positionArg;
     Vec3f candidate = *position;
     Vec3f previous = *position;
     for (s32 attempt = 0; attempt < 6; ++attempt) {

@@ -318,7 +318,7 @@ LAB_00344fc0:
     }
     else {
       *(unsigned int *)(DAT_00435d18 + 0x3028) = temp_v7 | 2;
-      temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+      temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
       if (*(char *)(temp_v5 + 0x59c) != '\0') {
         FUN_00394bbc(*(unsigned int *)(temp_v5 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
       }
@@ -582,7 +582,7 @@ LAB_00345938:
         temp_v5 = g_btlScriptUnit;
         FUN_003d1388();
         temp_v11 = temp_v5 < 2;
-        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
         FUN_0023c638(g_btlScriptUnit,(int)*(short *)(*(int *)(temp_v5 + 0x20) + 0x6e));
         FUN_0027dbc8(temp_v4,1);
       }
@@ -680,7 +680,7 @@ LAB_00345938:
     break;
   case '\x16':
     temp_v5 = btlGetMainState();
-    puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     unaff_r5 = (unsigned int *)(int)(short)*(unsigned int *)(psVar2 + 0x14);
     if (psVar2[0x13] != 0) {
       unaff_r5 = (unsigned int *)0x1;
@@ -1057,7 +1057,7 @@ LAB_00346258:
     break;
   case '.':
     unaff_r5 = (unsigned int *)btlGetMainState();
-    temp_v4 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    temp_v4 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     if (*(int *)(psVar2 + 0x14) == 0) {
       temp_v5 = 0;
       puVar9 = unaff_r5 + 0x7a6;

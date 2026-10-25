@@ -17,10 +17,10 @@ u8 *FUN_002cf5bc(void)
     if (entry == NULL) {
         return NULL;
     }
-    if (!(entry->flags & g_btlMain.combatantMasks.required)) {
+    if (!(g_btlMain.combatantMasks.required & entry->flags)) {
         return NULL;
     }
-    if (entry->flags & g_btlMain.exclusionMask) {
+    if (g_btlMain.exclusionMask & entry->flags) {
         return NULL;
     }
     for (s32 i = 0; i < 21; i++) {

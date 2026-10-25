@@ -10,9 +10,9 @@ u32 FUN_00311ecc()
     s32 group = scrGetArg(0);
     s32 slot = scrGetArg(1);
     for (s32 index = 0; index < 109; ++index) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
         if ((unit->flags & 0x10) && (unit->flags & 1) &&
-            !(unit->flags & 0x40) && unit->groupId == group &&
+            !(unit->flags & 0x40) && unit->id == group &&
             (unit->values[slot] >> 10) == 4) {
             scrSetResult(1);
             return 1;

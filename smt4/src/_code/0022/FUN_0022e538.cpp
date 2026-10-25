@@ -22,7 +22,7 @@ void FUN_0022e538(void *object)
         u16 x;
         u16 y;
     };
-    struct TouchBounds { s32 x, y, width, height; };
+    struct TouchBounds { u32 x, y, width, height; };
     PageView *page = (PageView *)object;
     const FrameRect *rect = (const FrameRect *)asdTMTexTableEntryAt(43, page->page + 79);
     s32 x = rect->x;

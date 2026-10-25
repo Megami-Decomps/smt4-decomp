@@ -1,5 +1,5 @@
 #include "gamedata/DataTableSlots.h"
-#include "shard/loadSlotIsLoaded.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 

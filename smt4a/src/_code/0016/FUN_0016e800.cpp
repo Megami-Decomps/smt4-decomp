@@ -1,6 +1,6 @@
 /* Records a failed check (a key and the address it was detected at) in the global fault record, then runs the fault handler. */
 #include "common.h"
-#include "shard/FUN_0016e800.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
 struct FaultRecord {

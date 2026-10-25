@@ -4,7 +4,6 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BtlMainAccess.h"
 #include "mapnavi/naviMain.h"
-#include "shard/btlFindEntryValue.h"
 extern "C" {
 extern BtlHelpGlobalsA g_btlHelp;
 u32 FUN_004c9160(u32 message, BtlCombatantEntryA *entry, s32 mode, u32 argument);

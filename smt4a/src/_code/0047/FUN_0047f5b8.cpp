@@ -19,7 +19,7 @@ extern IdValuePair DAT_0057a46c[11];
 
 PartySlot *FUN_003e4d68(u16 index);
 s32 FUN_003e4d98(PartySlot *slot);
-u32 lcgRandomRange(s32 limit);
+u32 lcgRandomRange(u16 limit);
 
 /* Picks a random id among the 12 slots that FUN_003e4d98 accepts and returns the value the table
  * maps it to (0 when no slot qualifies or the id is not listed). */

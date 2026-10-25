@@ -1,9 +1,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
-BtlMainState *btlGetMainState();
 
 /* Script command: whether a present, active entry with the given id has a negative stat of the given kind. */
 u32 scrCommBattleEntryHasNegativeStat()

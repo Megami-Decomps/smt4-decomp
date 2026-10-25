@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_002a60cc.h"
+#include "shard/W6_W6Match3_WaveArchiveReader.h"
 
 namespace { struct Record { u8 padding[13]; u8 enabled; }; }
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail tests the fade flags off one work+0x1400 base and stores skipped/captured through recomputed addresses (same pattern as FUN_0013dc70) */
 #include "shard/JobWork.h"
 
 extern "C" {

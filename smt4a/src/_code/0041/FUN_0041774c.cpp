@@ -1,7 +1,7 @@
 /* NON_MATCHING: state machine matches except armcc cross-jumps the shared "close prompt" tail differently (retail: case 4 branches back into case 3 tail; one row more) and orders the hoisted constants r0/r6 differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "shard/FUN_00180114.h"
+#include "util/CalleeContracts.h"
 
 namespace {
 // A record of the player's party: skill ids at 0x34, a validity byte per skill at 0x44.

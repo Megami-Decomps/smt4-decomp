@@ -1,15 +1,16 @@
 /* NON_MATCHING: -O2 candidate; only initial flags/global/constant register scheduling and literal-pool order differ. */
 #include "shard/W4_Match6_BtlScript.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainGlobals.h"
 
 extern "C" {
-extern BtlScript *g_btlMainState;
 u8 flagBitIsSet(u32 bit);
 bool gameFlagIsSet(u32 bit);
 void buttonHelpSetPreset(u32 preset);
 
 void battleSelectButtonHelpPreset(s32 selectionEnabled)
 {
-    if (g_btlMainState->flags & 0x1004) {
+    if (g_btlMainState.state->battleFlags & 0x1004) {
         if (gameFlagIsSet(0x525)) {
             return buttonHelpSetPreset(0xe4);
         }

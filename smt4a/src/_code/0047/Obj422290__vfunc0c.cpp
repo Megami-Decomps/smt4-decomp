@@ -38,7 +38,7 @@ WindowStatusOperationResult Obj422290::vfunc0c(const void *)
         request.type = 0x11;
         request.flags = -2;
         Obj422290 *owner = this;
-        u32 status = FUN_002fb0d4(manager->queue, &request.size, FUN_004767a8, &owner);
+        s32 status = FUN_002fb0d4(manager->queue, &request.size, FUN_004767a8, &owner);
         if ((status & 0x7e00000) != 0x600000) {
             if (nnResultIsFailure(status)) {
                 FUN_002e3140(status);

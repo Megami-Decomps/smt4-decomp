@@ -45,4 +45,14 @@ typedef char ShopItemVoiceOffsetsCheck[
     offsetof(ShopDescriptionEntry, voice.sound) == 6 &&
     offsetof(ShopItemDescription, initialVoice.sound) == 0x26 &&
     sizeof(ShopItemDescription) == 0x50 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 messageGetChoiceResult(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

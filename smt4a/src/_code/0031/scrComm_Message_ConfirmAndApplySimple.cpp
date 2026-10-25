@@ -1,7 +1,7 @@
 /* NON_MATCHING: early completion return layout and frame-counter temporaries differ from retail's shared return block. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-#include "shard/FUN_004186e0.h"
+#include "shard/Shard0047.h"
 
 extern "C" {
 s32 scrGetCommandFrame();

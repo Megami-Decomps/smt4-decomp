@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail tests results as nn::Result bit 31 (`lsrs`/`ands #0x80000000`), spills all four arguments (bufferLength is taken by reference for the min) and returns the second result through r6; structure only roughly recovered. */
+#include "nn/Result.h"
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
@@ -22,12 +23,12 @@ extern "C" s32 FUN_002344d8(void *owner, u16 *buffer, u32 bufferLength, u32 key)
     s32 result = FUN_0035a418(NULL, &length, key, &option);
     u16 *text;
 
-    if (result < 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     text = (u16 *)asdOperatorNewB(length * 2 + 2, buffer);
     result = FUN_0035a418(text, &length, key, &option);
-    if (result >= 0) {
+    if (nnResultIsSuccess(result)) {
         u32 count;
 
         text[length] = 0;

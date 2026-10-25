@@ -2,8 +2,8 @@
 #include "common.h"
 #include "map/lmapMain.h"
 #include "gamedata/Table1bOr1c.h"
+#include "mikado/mikadoMain.h"
 #include <stddef.h>
-#include "shard/bgmReleaseStopped.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;

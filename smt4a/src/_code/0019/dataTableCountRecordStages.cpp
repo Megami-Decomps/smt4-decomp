@@ -1,6 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table04Record.h"
-#include "shard/dataTableCountRecordStages.h"
+#include "shard/W6_W6Match2_HelpResources.h"
 
 struct AocSystemA;
 extern "C" {

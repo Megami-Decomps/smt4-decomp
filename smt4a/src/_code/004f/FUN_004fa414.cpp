@@ -2,7 +2,7 @@
 #include "gfx/RangeAnimationSelection.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "shard/FUN_004fea10.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u8 animationVisualIsComplete(const AnimationVisualState *visual);

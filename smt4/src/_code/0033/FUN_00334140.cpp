@@ -1,6 +1,7 @@
 /* NON_MATCHING: arrangement entry indexing uses different registers and loaded-file handling is outlined differently. */
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "gamedata/Table00.h"
 #include "AsdSDK/AsdMemUtil.h"
 

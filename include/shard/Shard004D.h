@@ -52,4 +52,14 @@ typedef struct Tree {
     /* 0x20 */ void (*freeNode)(struct Tree *tree, TreeNode *node);
 } Tree;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 isEntryUsable(s32 *obj);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

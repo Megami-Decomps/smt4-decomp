@@ -1,5 +1,6 @@
-/* NON_MATCHING: result module/description extraction and signed status tests lower differently. */
+/* NON_MATCHING: description bitfield extraction now matches; retail computes the module mask into r1 before copying the status to r4, the build reuses r0. */
 #include "common.h"
+#include "nn/Result.h"
 
 struct SaveDataArchivePath {
     /* 0x00 */ u8 mediaType;
@@ -17,6 +18,13 @@ struct SaveDataArchive {
     /* 0x00 */ SaveDataArchiveVtable *vtable;
 };
 
+static __inline s32 resultDescription(s32 status)
+{
+    nnResultFields fields;
+    fields.value = status;
+    return fields.fields.description;
+}
+
 extern "C" {
 void FUN_0016cdc0(SaveDataArchivePath *path, u8 mediaType, u64 titleId);
 s32 FUN_0042b3b8(SaveDataArchive **archive, const SaveDataArchivePath *path, u32 flags);
@@ -28,14 +36,13 @@ s32 FUN_00429fcc(const char *name, u64 titleId)
     FUN_0016cdc0(&path, 1, titleId);
     SaveDataArchive *archive;
     s32 status = FUN_0042b3b8(&archive, &path, 0);
-    u32 module = ((u32)status >> 10) & 0xff;
-    s32 description = (u32)status & 0x3ff;
-    if (module == 17 && description >= 220 && description <= 229) {
+    u32 module = nnResultModule(status);
+    if (module == 17 && resultDescription(status) >= 220 && resultDescription(status) <= 229) {
         status = (s32)0xc8804482;
     }
-    if (status >= 0) {
+    if (nnResultIsSuccess(status)) {
         status = FUN_001aeefc(name, archive, 0, 0);
-        if (status < 0) {
+        if ((s32)(status & 0x80000000) < 0) {
             archive->vtable->close(archive);
         }
     }

@@ -1,5 +1,6 @@
 #include "battle/btlUI.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ void FUN_003ae34c(u32 unused, BtlUiUnitRecord *record)
     BtlUi *ui = g_btlUi.ui;
 
     for (s32 i = 0; i < 4; i++) {
-        BtlUnitEntry *unit = &((BtlState *)ui->owner)->units[i];
+        BtlEntry *unit = &((BtlMainState *)ui->owner)->entries[i];
 
         if (unit != NULL && unit->link != NULL && unit->link->id == record->unitId) {
             __aeabi_memcpy4(&ui->objC.unitRecords.records[i], record, sizeof(BtlUiUnitRecord));

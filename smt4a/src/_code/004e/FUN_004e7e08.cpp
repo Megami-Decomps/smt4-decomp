@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of a battle action's reflect-skill step machine (draft: the returned value of FUN_004f6d34 and the two effect names restored from the code pool); armcc here shares the property comparison and the state-store tail differently. */
 #include "common.h"
-#include "shard/FUN_004c8284.h"
+#include "battle/btlAction.h"
 
 /* A script unit slot (0x1254 bytes each); byte +9 is its phase. */
 struct ScriptUnit {

@@ -1,11 +1,11 @@
 /* NON_MATCHING: compiler combines independent battle flag tests and allocates different saved/argument registers. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlHelp.h"
-#include "shard/battleGetEntryHalfword.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 FUN_0022a5d8(u32 message, BtlEntry *entry, u32 context);
-BtlMainState *btlGetMainState();
 s32 playerPadTestBit(u32 bit);
 
 u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u32 context)

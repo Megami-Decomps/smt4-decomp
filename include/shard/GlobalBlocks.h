@@ -156,4 +156,14 @@ struct AccelerometerFullState {
 typedef char AccelerometerReaderStateSizeCheck[sizeof(AccelerometerReaderState) == 0x58 ? 1 : -1];
 typedef char AccelerometerLiveStateSizeCheck[sizeof(AccelerometerLiveState) == 0x5C ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00142b04(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

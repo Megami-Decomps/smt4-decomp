@@ -1,20 +1,17 @@
 /* NON_MATCHING: only the apply-path target calculation uses r1/r0/r5 instead of retail r0/r1/ip (112/112 rows). */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BtlMainAccess.h"
 
 struct BtlUnit;
 
 // The legacy entry-state header does not expose the action table's earlier slot.
-struct BattleActionTableView {
-    /* 0x0000 */ u8 unk0000[0x1e98];
-    /* 0x1e98 */ BtlActionRecord* actions;
-};
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
-BtlMainState* btlGetMainState();
 u32 FUN_002463e8(u32 status);
 u32 FUN_00246134(s32 entryId, u32 resistance, s32 mode, s32 option);
 u32 FUN_00246080(s16 priority, s16 mode, BtlUnit* source,
@@ -31,9 +28,9 @@ u32 btlScriptSetPartyStatus()
     u32 status = scrGetArg(0);
     s32 apply = scrGetArg(1);
     s32 checkResistance = scrGetArg(2);
-    BtlUnit* source = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit* source = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     BtlMainState* state = btlGetMainState();
-    BattleActionTableView* table = reinterpret_cast<BattleActionTableView*>(state);
+    BtlMainState* table = reinterpret_cast<BtlMainState*>(state);
     u32 mask = 1u << status;
 
     for (s32 slot = 0; slot < 4; ++slot) {

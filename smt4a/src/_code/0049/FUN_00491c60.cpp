@@ -1,6 +1,6 @@
 /* NON_MATCHING: only difference is the entry->type compare chain using r0 instead of retail's r1 (4 compares in loop 1, 2 in loop 2) */
 #include "map/mapDepart.h"
-#include "shard/FUN_00384d34.h"
+#include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 /* One selectable entry of the map's destination lists. */
 struct LmapListEntry {

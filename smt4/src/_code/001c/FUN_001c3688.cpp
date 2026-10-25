@@ -1,5 +1,4 @@
 #include "ui/IfTouch.h"
-#include "shard/FUN_001c3688.h"
 
 extern "C" {
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: mask loads are reordered and the unit flags use LDM instead of LDRD. */
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "script/ScriptArgs.h"
@@ -10,7 +9,7 @@ extern "C" u32 FUN_0035efe0(void)
     ScriptUnitEntry *entry = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->entryView.entry;
     u32 value = entry->values[index];
     ScriptUnitData *data = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->data;
-    if ((g_btlCandidateMasks.unavailable & entry->flags) != 0 && data->id == 0x3b7) {
+    if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 && data->id == 0x3b7) {
         scrSetResult(0);
         return 1;
     }

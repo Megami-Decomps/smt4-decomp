@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail preserves an incoming value in r1 and computes the buffer slot across the free call; this version folds the slot address. */
 #include "common.h"
 
 extern "C" {
@@ -15,11 +14,10 @@ void asdMemFree(void *block);
 /* Releases the object's buffer. */
 void objectFreeBuffer(void)
 {
-    void **slot = &g_asdSound.buffer;
-
-    if (*slot != NULL) {
-        asdMemFree(*slot);
-        *slot = NULL;
+    Object002e14b8 *object = &g_asdSound;
+    if (object->buffer != NULL) {
+        asdMemFree(object->buffer);
+        object->buffer = NULL;
     }
 }
 

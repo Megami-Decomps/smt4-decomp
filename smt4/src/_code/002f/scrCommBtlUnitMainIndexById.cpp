@@ -16,11 +16,11 @@ u32 scrCommBtlUnitMainIndexById(void)
     s32 index = 0;
 
     for (;;) {
-        BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
-        if ((unit->flags & 1) && !(unit->flags & 0x40) && (unit->flags & 8) && unit->mainIndex >= 0
+        if ((unit->flags & 1) && !(unit->flags & 0x40) && (unit->flags & 8) && unit->members.ids[0] >= 0
             && unit->link != NULL && unit->link->id == id) {
-            result = unit->mainIndex;
+            result = unit->members.ids[0];
             break;
         }
         index++;

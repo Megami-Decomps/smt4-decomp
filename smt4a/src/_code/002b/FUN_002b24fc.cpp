@@ -1,6 +1,6 @@
 /* NON_MATCHING: Retail b 88 differs from recovered pop {r4, pc}. */
 #include "common.h"
-#include "shard/FUN_002e2b38.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 
 // Private view of the battle state fields used by this function.
 struct BattleMainView {

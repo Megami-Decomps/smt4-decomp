@@ -30,7 +30,7 @@ u32 scrBattleIsUnitStatPositive(void)
     } else if (which == 2) {
         slot = 11;
     }
-    stats = reinterpret_cast<Character *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
+    stats = reinterpret_cast<Character *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
     scrSetResult(stats->values[slot] >= 1);
     return 1;
 }

@@ -3,8 +3,6 @@
 #include "util/CalleeContracts.h"
 #include "mapnavi/naviMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "shard/gameGetOptions.h"
-#include "shard/FUN_0022fcb8.h"
 #include "gamedata/UnitStatInitialization.h"
 
 extern "C" {

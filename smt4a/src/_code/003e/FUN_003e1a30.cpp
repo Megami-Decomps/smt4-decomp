@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase reload is eliminated; camera fallback block placement and 64-bit mask load/OR scheduling differ. */
+/* NON_MATCHING: phase test, reload and the outlined 120-frame camera fallback now match; retail ands the phase word and loads the 64-bit masks word-wise/ldrd differently, and orders the final zero stores differently. */
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 
@@ -34,21 +34,17 @@ void FUN_003e0cd4(BtlStep *step, BtlMainStateA *battle);
 
 void FUN_003e1a30(BtlStep *step, BtlMainStateA *battle)
 {
-    u32 phase;
-    if (step->counters.unk0C != 0) {
-        phase = step->counters.unk0C;
-    } else {
+    if (step->counters.unk0C == 0) {
         FUN_004f7b84(g_btlAux, DAT_00528558);
         g_btlCamera->flags |= 0x4000;
-        phase = step->counters.unk0C | 2;
-        step->counters.unk0C = phase;
+        step->counters.unk0C |= 2;
     }
-    if ((phase & 2) != 0 && FUN_004f6d34(g_btlAux) != 0) {
+    if ((step->counters.unk0C & 2) != 0 && FUN_004f6d34(g_btlAux) != 0) {
         FUN_003e2840(step, battle, 3);
-        if (g_btlCamera->movement.duration != 0)
-            FUN_004f1c5c(g_btlCamera, g_btlCamera->movement.duration);
-        else
+        if (g_btlCamera->movement.duration == 0)
             FUN_004f1c5c(g_btlCamera, 120);
+        else
+            FUN_004f1c5c(g_btlCamera, g_btlCamera->movement.duration);
         if ((battle->stateFlags64.bits & g_btlEncount.initial) == 0) {
             FUN_003ed6e8(battle);
             FUN_003f26d4(battle);

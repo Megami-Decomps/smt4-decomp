@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "ui/UiSpriteKeyframes.h"
 
 struct DevilRecordA {
     u16 id;
@@ -42,5 +43,15 @@ typedef char DevilRecordAInitializationOffsetCheck[
     sizeof(DevilRecordA) == 0x40 ? 1 : -1];
 
 extern "C" DevilRecordA *FUN_00184310(u32 id);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void uiSpriteSetKeyframe(UiSpriteKeyframeState *sprite, u32 frame, u32 alternate);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

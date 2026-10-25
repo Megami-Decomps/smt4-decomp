@@ -16,9 +16,9 @@ extern u32 g_btlScriptUnit;
 /* Script command: calls FUN_002551ac, FUN_002505c0 and FUN_00250680 for the unit with the first skill entry's values. */
 s32 scrComm_Battle_StartUnitAction(void)
 {
-    u32 target = btlGetMainState()->unk1E98;
+    u32 target = reinterpret_cast<u32>(btlGetMainState()->actions);
     BtlSkill *skill = btlMainFindEntryByListedId(btlGetMainState(), 0);
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     btlGetMainState();
     FUN_00250720();

@@ -1,5 +1,4 @@
 #include "battle/BtlMainAccess.h"
-#include "battle/ListedEntry.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {
@@ -10,9 +9,9 @@ u32 FUN_0031ccec(void)
 {
     s32 result = -1;
     for (s32 i = 0; i < 109; i++) {
-        ListedEntry *entry = &reinterpret_cast<ListedState *>(btlGetMainState())->entries[i];
-        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->id >= 0 && (entry->flags & 0x10) != 0) {
-            result = entry->id;
+        BtlEntry *entry = &btlGetMainState()->entries[i];
+        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->members.ids[0] >= 0 && (entry->flags & 0x10) != 0) {
+            result = entry->members.ids[0];
             break;
         }
     }

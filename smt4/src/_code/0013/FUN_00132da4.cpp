@@ -1,6 +1,6 @@
 #include "common.h"
 #include "shard/S3SoundArchiveLoader.h"
-#include "shard/FUN_00132da4.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 

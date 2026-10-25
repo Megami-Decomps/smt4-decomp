@@ -76,7 +76,7 @@ extern "C" void partyApplyStatusMask(s32 group, s32 bit, s32 probability)
             continue;
         StatusUnit *unit = gameGetUnitRecord(slot);
         u16 flags = unit->flags;
-        if ((flags & 2) || (flags & 0x400) || (flags & 4) || (flags & mask))
+        if ((flags & 2) || (flags & 0x400) || (flags & 4) || (mask & flags))
             continue;
         if (randNextInRange(99) >= probability)
             continue;

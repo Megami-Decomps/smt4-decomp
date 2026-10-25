@@ -15,4 +15,34 @@ ResourceEmitter *effPolygonTrackCreateFromResource(const EmitterResourceRecord *
 ResourceEmitter *effPolygonTrackCreateFromResource(const EmitterResourceRecord *record);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_002f530c(s32 kind, s32 arg);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void dataTable5Sub3Lookup(u8 kind, u16 value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void sequenceRequestDeferEx(u32 id, const u32* parameters);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

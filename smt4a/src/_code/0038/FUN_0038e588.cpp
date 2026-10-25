@@ -6,7 +6,7 @@ extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
 // Mark buffered entries selected by the target mask and record whether multiple entries match.
 extern "C" void FUN_0038e588(BufferedValueState *state, u32, u64 targets)
 {
-    for (s32 index = 0; index < state->count; ++index)
+    for (u32 index = 0; index < state->count; ++index)
         state->entries[index].ready = 0;
     s32 selected = 0;
     for (s32 target = 0; target < state->count; ++target) {

@@ -2,7 +2,6 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
-#include "shard/FUN_00220d24.h"
 
 extern "C" {
 

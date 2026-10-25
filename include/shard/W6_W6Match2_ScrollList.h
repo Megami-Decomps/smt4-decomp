@@ -23,4 +23,34 @@ struct ScrollSelectionOwner {
 
 extern "C" u32 scrollListSetSelection(ScrollList* list, s32 index);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_002896bc(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00289de4(u32 a, u32 b, u32 c);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 FUN_002881a0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

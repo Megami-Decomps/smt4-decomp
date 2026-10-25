@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the work pointer into r0 before storing the flag; compiler uses r1. */
 #include "common.h"
 
 extern "C" {
@@ -11,9 +10,14 @@ extern struct {
     /* 0x04 */ RequestWork *work;
 } g_jyoucyu;
 
+static __inline void requestSet(RequestWork *work, u32 requested)
+{
+    work->requested = requested;
+}
+
 /* Raises the pending request flag on the resident work. */
 void jyoucyuRequest(void)
 {
-    g_jyoucyu.work->requested = 1;
+    requestSet(g_jyoucyu.work, 1);
 }
 }

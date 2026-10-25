@@ -1,6 +1,6 @@
 /* NON_MATCHING: explicit script-argument index and busy-result forwarding now match; retail predicates the early busy return while source shares a later return-one block. */
 #include "common.h"
-#include "shard/gameFlagSlotAdvanceCounter.h"
+#include "shard/W6_W6Match2_GeometryResources.h"
 
 extern "C" {
 

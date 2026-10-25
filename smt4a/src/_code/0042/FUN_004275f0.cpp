@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail walks the entry list with a re-checked list pointer each pass and orders the packed-record bit tests differently; the catalogue query logic is the same (161 vs 184 rows). */
+#include "nn/Result.h"
 #include "common.h"
 
 extern "C" {
@@ -74,7 +75,7 @@ s32 FUN_004275f0(Catalog *catalog, u32 id, u32 option, CatalogRequest *request)
 {
     s32 result = FUN_00428428(catalog, request->key0, request->key1);
 
-    if (result < 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     void *block = dataGetBlockBase(catalog);
@@ -96,10 +97,10 @@ s32 FUN_004275f0(Catalog *catalog, u32 id, u32 option, CatalogRequest *request)
                           request->thirdCount, DAT_00642b80, DAT_005c0a90, block, blockSize, sixth,
                           request->sixth != NULL, request->seventh, request->seventhSize, (u32 *)&catalog->list,
                           (void *)catalog->extraBuffer, catalog->extraSize);
-    if (result >= 0) {
+    if (!nnResultIsFailure(result)) {
         result = 0;
     }
-    if (result < 0) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     for (u32 i = 0; catalog->list != NULL && i < catalog->list->count; i++) {
@@ -140,7 +141,7 @@ s32 FUN_004275f0(Catalog *catalog, u32 id, u32 option, CatalogRequest *request)
         record[0] = itemId;
         record[1] = (typeFlag << 16) | ((low & 0xFF) << 8) | kind;
         result = FUN_00428334(catalog, record, version);
-        if (result < 0) {
+        if (nnResultIsFailure(result)) {
             return result;
         }
     }

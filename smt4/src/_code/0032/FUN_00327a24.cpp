@@ -1,11 +1,12 @@
 /* NON_MATCHING: the loop reloads adjacent group-range outputs with ldrd instead of retail's first-then-count scalar loads. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
+#include "battle/BtlMainAccess.h"
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
 void FUN_002499fc(s32 group, u32 *range, u32 *count);
-BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 // Test whether a selected combatant has either alternate pending effect.

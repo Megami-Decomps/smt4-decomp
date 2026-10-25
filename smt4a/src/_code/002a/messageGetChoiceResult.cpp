@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/messageGetChoiceResult.h"
+#include "shop/ShopItemDescription.h"
 
 extern "C" {
 

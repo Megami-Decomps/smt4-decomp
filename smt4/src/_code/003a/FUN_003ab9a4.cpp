@@ -35,7 +35,7 @@ void FUN_003ab9a4(void *context)
             u8 unk5a8[0xa008];
             SummonEntry entries[1]; // 0x5a8
         };
-        u8 error; // 0xa5b0
+        s8 error; // 0xa5b0
     };
     typedef char LayoutCheck[sizeof(SummonEntry) == 0x20 &&
         offsetof(SummonConfirmationView, script) == 0x5a0 &&

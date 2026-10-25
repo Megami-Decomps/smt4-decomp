@@ -1,9 +1,9 @@
 /* NON_MATCHING: native animation-alpha getters restored; frame-glyph lifetime and base-coordinate saved registers still differ. */
 #include "ui/AnimatedDigitPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "camp/RenderCtx.h"
 #include "shard/renderCtxCalculateStereoParallax.h"
-#include "shard/FUN_003f5b14.h"
+#include "util/CalleeContracts.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;

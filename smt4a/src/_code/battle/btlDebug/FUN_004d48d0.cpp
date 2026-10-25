@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-#include "shard/dataTable3Type0Count.h"
+#include "battle/btlDebug.h"
 
 /* The debug menu's settings block at 0x5715f8; only the parts this panel reads are named. */
 struct BtlDebugMenuSettings {

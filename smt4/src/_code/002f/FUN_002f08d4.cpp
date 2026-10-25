@@ -5,21 +5,8 @@
 
 extern "C" {
 
-typedef struct Unit {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[0x6E];
-    /* 0x072 */ s16 stats[1];
-    /* 0x074 */ u8 unk074[0x214];
-} Unit; /* 0x288 */
 
-typedef struct UnitManager {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ Unit *units;
-    /* 0x1FC4 */ u8 unk1FC4[0x2A01];
-    /* 0x49C5 */ s8 hasFallback;
-} UnitManager;
-
-extern Unit *btlMainFindActiveEntry(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
 extern s32 scrGetArg(s32 index);
@@ -47,20 +34,20 @@ u32 FUN_002f08d4(void)
     value = scrGetArg(2);
     FUN_002499fc(owner, &first, &count);
     for (i = first; i < first + count; i++) {
-        Unit *unit = &reinterpret_cast<UnitManager *>(btlGetMainState())->units[i];
+        BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) == 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && unit->stats[slot] == value) {
+            && unit->stat[slot] == value) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (reinterpret_cast<UnitManager *>(btlGetMainState())->hasFallback != 0) {
-        Unit *unit;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *unit;
 
-        reinterpret_cast<UnitManager *>(btlGetMainState());
+        btlGetMainState();
         unit = btlMainFindActiveEntry();
-        if (unit != NULL && unit->stats[slot] == value) {
+        if (unit != NULL && unit->stat[slot] == value) {
             scrSetResult(1);
             return 1;
         }

@@ -42,3 +42,13 @@ static __inline BtlMainStateExtA *btlGetMainStateExt(void)
 {
     return static_cast<BtlMainStateExtA *>(btlGetMainState());
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_004fea10(s32 id, s32 options, s32 argument);
+
+#ifdef __cplusplus
+}
+#endif

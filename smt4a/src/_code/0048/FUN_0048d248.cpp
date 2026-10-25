@@ -32,7 +32,7 @@ void FUN_0048d248(Block66Owner *owner, u32 category)
     s32 section = FUN_00492c70(work->selection);
     MapNaviMarkerIcon *marker = dataTable2BFindType1Entry(owner, map, category);
     if (marker != NULL) {
-        s8 state = (s8)marker->icon;
+        u8 state = (s8)marker->icon;
         work->categoryState = state;
         work->categoryStateWide = state;
         work->refreshCategory = 1;

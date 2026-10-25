@@ -1,8 +1,8 @@
 /* NON_MATCHING: final render-state pop becomes a tail call; retail keeps a shared VFP/register epilogue after BL. */
 #include "common.h"
 #include "camp/RenderCtx.h"
-#include "shard/W6_W6Match8_TitleOverlay.h"
 #include "shard/packNibblesAndByte.h"
+#include "shard/W6_W6Match8_TitleOverlay.h"
 
 
 extern "C" {

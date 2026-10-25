@@ -1,6 +1,6 @@
 /* NON_MATCHING: render-target selection and framebuffer dimension scheduling differ. */
 #include "gfx/RenderTargetState.h"
-#include "shard/asdGfxSetMode.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern RenderTargetSystemView g_asdGxPresets;

@@ -1,7 +1,6 @@
 /* NON_MATCHING: duplicate retail trigonometric evaluations are absent; VFP scheduling and marker addressing differ. */
 #include "map/mapRndMaze.h"
 #include "Model/ModelList.h"
-#include "shard/FUN_003857c8.h"
 
 extern "C" {
 extern MapRndMazeA g_mapRndMaze;

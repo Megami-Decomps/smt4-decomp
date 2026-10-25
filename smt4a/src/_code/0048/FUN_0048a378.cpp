@@ -1,6 +1,5 @@
 /* NON_MATCHING: Background-reset and alternate-feedback cold blocks are placed differently from retail. */
 #include "map/mapDepart.h"
-#include "shard/FUN_00384cf4.h"
 
 struct NavigationFeedbackRequest {
     u8 unk00[0xC];

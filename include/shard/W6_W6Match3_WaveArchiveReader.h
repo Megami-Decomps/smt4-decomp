@@ -34,4 +34,24 @@ const u8* FUN_002a7a3c(const WaveArchiveReader* reader, u32 index);
 const u8* FUN_001a8d40(const WaveArchiveReader* reader, u32 index);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002a60cc(u32 owner, u32 group, u32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 itemGetFlagBit1(u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

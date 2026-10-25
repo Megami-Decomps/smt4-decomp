@@ -1,4 +1,3 @@
-/* NON_MATCHING: grouped record displacement folds into LDRH, and the default-value branch is placed before the epilogue. */
 #include "battle/Talk/TalkValueRecord.h"
 #include "gamedata/DataTable.h"
 
@@ -18,10 +17,12 @@ u32 FUN_00318ab0(void)
     dataTableGetCount(table);
     TalkValueRecord *records = static_cast<TalkValueRecord *>(dataTableGetEntries(table));
     u16 value;
-    if (group != 0)
-        value = records[row].groups[group - 1][index];
-    else
+    if (group == 0) {
         value = records[row].values[index];
+    } else {
+        u16 *groupValues = records[row].groups[group - 1];
+        value = groupValues[index];
+    }
     scrSetResult(value);
     return 1;
 }

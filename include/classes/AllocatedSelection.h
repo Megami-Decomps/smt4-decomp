@@ -22,9 +22,9 @@ class Obj55c954 : public AllocatedSelectionState {
 public:
     Obj55c954(SelectionObjectAllocator *allocator, u32 value)
     {
+        owner = allocator;
         active = 2;
         kind = 6;
-        owner = allocator;
         parameter = value;
     }
     virtual ~Obj55c954();
@@ -40,9 +40,9 @@ class Obj55c978 : public AllocatedSelectionState {
 public:
     Obj55c978(SelectionObjectAllocator *allocator, u32 value)
     {
+        owner = allocator;
         active = 1;
         kind = 12;
-        owner = allocator;
         parameter = value;
     }
     virtual ~Obj55c978();

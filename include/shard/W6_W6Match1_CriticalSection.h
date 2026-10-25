@@ -1,6 +1,8 @@
 #ifndef SHARD_W6_W6MATCH1_CRITICALSECTION_H
 #define SHARD_W6_W6MATCH1_CRITICALSECTION_H
 
+#include "common.h"
+
 struct CriticalSection;
 
 extern "C" {
@@ -33,5 +35,25 @@ public:
         nn_os_CriticalSection_Leave(section);
     }
 };
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002bbb2c(u32 key, u32 address);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002c3530(s32 preset, u32 arg, u32 unused, s32 index);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

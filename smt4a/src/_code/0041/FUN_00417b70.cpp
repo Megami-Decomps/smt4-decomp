@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result before copying it to r4, and hoists the constant 1 into r6; built differs in those three places and addresses the bitmap byte with `ldrb r0, [r5, r4, lsr #3]`. */
+/* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result with `cmp r0,#0` before copying it to r4 (hook nop between cmp and branch), and hoists the constant 1 into r6. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "util/CalleeContracts.h"
@@ -33,7 +33,7 @@ void FUN_00417b70(s32 id)
 {
     FlagEntry *entry = &reinterpret_cast<FlagBlock *>(gameFlagBlockGet())->entries[id];
     s32 kind;
-    u32 linked;
+
 
     entry->unk1 = 0;
     entry->seen = 1;
@@ -45,12 +45,15 @@ void FUN_00417b70(s32 id)
     if (kind != 6 && kind != 9 && kind != 0xB && kind != 0xC && itemDataIsFlagClear(id) != 0) {
         FUN_00417e08(id);
     }
-    linked = itemDataGetValue(id);
+    u32 linked = itemDataGetValue(id);
     if (linked != 0) {
         FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
 
         FUN_004bb6d8(linked, 1);
-        block->bitmap[linked >> 3] |= 1 << (linked & 7);
+        u32 byteIndex = linked >> 3;
+        u32 bit = linked & 7;
+        u8 bits = block->bitmap[byteIndex];
+        block->bitmap[byteIndex] = bits | (1 << bit);
     }
 }
 

@@ -1,16 +1,18 @@
-/* NON_MATCHING: retail preserves the unit constant across strlen and saves d8-d9; compiler packs x/y into d8 and materializes the constant afterward. */
 #include "shard/W6_W6Match2_TextDrawState.h"
 
 extern "C" {
 extern TextDrawState DAT_00464a70;
 u32 libc_strlen(const char* text);
 void FUN_002b2b88(TextRenderer* renderer, TextFont* font, const char* text, u32 length,
-                  f32 x, f32 y, f32 scaleX, f32 scaleY, f32 red, f32 green, f32 blue, f32 alpha);
+                  f32 x, f32 y, f32 z, f32 scale, f32 offsetX, f32 offsetY, f32 width, f32 height);
 
-// Draw the complete string with the current font, unit scaling and opaque white color.
+// Draw the complete string with the current font at unit scale, depth 0 and a final factor of 1.
 void textDrawDefaultString(const char* text, f32 x, f32 y)
 {
-    FUN_002b2b88(DAT_00464a70.renderer, DAT_00464a70.font, text, libc_strlen(text),
-                  x, y, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f, 1.0f);
+    f32 zero = 0.0f;
+    u32 length = libc_strlen(text);
+    TextDrawState *state = &DAT_00464a70;
+    FUN_002b2b88(state->renderer, state->font, text, length,
+                  x, y, zero, 1.0f, zero, zero, zero, 1.0f);
 }
 }

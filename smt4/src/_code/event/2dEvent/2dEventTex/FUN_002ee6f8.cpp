@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdMemAlloc.h"
+#include "bible/bibleAnalyze.h"
 
 // Manager of the 2D event texture layer: the update process plus the jobs it owns.
 struct EventTexManager {

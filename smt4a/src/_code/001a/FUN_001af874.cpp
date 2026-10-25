@@ -1,5 +1,5 @@
 #include "romwright_types.h"
-#include "shard/FUN_001af874.h"
+#include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" {
 

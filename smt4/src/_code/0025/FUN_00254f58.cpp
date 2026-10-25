@@ -1,16 +1,17 @@
 /* NON_MATCHING: order-reset loop registers, flag-address lifetime, and selected-index tail sharing differ. */
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 s16 FUN_00255de0(s32 minimum, s32 maximum);
-void battleSortTurnOrder(TurnOrderState *, s32);
+void battleSortTurnOrder(BtlMainState *, s32);
 
-void FUN_00254f58(TurnOrderState *owner)
+void FUN_00254f58(BtlMainState *owner)
 {
-    /* This view includes fields past TurnOrderState's published prefix. */
+    /* This view includes fields past BtlMainState's published prefix. */
     struct OrderWorkView {
         u8 unk0000[0x1FC0];
-        BtlUnitEntry *units;
+        BtlEntry *units;
         u8 unk1FC4[4];
         s16 selected;
         u8 unk1FCA[0xF3C];
@@ -45,12 +46,12 @@ void FUN_00254f58(TurnOrderState *owner)
     for (s32 i = first; i < end; ++i) {
         if ((work->units[i].flags & 1) && !(work->units[i].flags & 0x40)) {
             work->order[entries] = work->units[i].selectionIndex;
-            ((TurnOrderUnit *)&work->units[i])->speedBonus = 0;
+            ((BtlEntry *)&work->units[i])->speedBonus = 0;
             if (work->units[i].flags & 2)
-                ((TurnOrderUnit *)&work->units[i])->speedBonus = 5;
+                ((BtlEntry *)&work->units[i])->speedBonus = 5;
             if (!(work->flags & 0x40000)) {
                 s16 variation = FUN_00255de0(-3, 3);
-                ((TurnOrderUnit *)&work->units[i])->speedBonus += variation;
+                ((BtlEntry *)&work->units[i])->speedBonus += variation;
             }
             ++entries;
         }

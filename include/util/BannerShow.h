@@ -13,4 +13,14 @@ u32 bannerShow(void);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 lmapSceneGetUnk0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

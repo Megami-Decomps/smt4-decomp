@@ -21,7 +21,7 @@ extern u32 g_btlScriptUnit;
 s32 scrCommBtlUnitHpPercentWithin(void)
 {
     s32 limit = scrGetArg(0);
-    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
+    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(stats->hp * 100 / stats->maxHp <= limit);
     return 1;

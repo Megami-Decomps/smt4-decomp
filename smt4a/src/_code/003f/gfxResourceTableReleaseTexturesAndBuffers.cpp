@@ -1,7 +1,7 @@
 #include "shard/W5_W5Match2_PlainData.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "addon/aocMain.h"
-#include "shard/gfxResourceTableReleaseTexturesAndBuffers.h"
+#include "shard/W8X15_ModelStatePlayer.h"
 
 extern "C" {
 extern AocSystemA *g_aocSystem;

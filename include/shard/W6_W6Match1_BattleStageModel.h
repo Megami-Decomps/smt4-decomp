@@ -49,4 +49,14 @@ typedef char BattleStageModelLayoutCheck[
 
 extern "C" void btlStageUpdateNodePositions(BattleStageModel* stage, NodeVec3 position);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void countersRaiseA(s32 index, u32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

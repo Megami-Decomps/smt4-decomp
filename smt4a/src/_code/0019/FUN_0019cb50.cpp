@@ -16,7 +16,7 @@ extern "C" void FUN_0019cb50(W5Match8Vec3 *output, const RotationMatrix34 *matri
              + matrix->elements[0][2] * vector.z;
     result.y = matrix->elements[1][0] * vector.x
              + matrix->elements[1][1] * vector.y
-             + matrix->elements[1][2] * vector.z;
+             + vector.z * matrix->elements[1][2];
     result.z = matrix->elements[2][0] * vector.x
              + matrix->elements[2][1] * vector.y
              + matrix->elements[2][2] * vector.z;

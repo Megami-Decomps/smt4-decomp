@@ -1,5 +1,5 @@
 #include "shard/S1AsdTexTable.h"
-#include "shard/asdTMTexTableLoadEntryAsync.h"
+#include "shard/W6_W6Match2_HelpResources.h"
 
 extern "C" {
 TexTableEntry *asdTMTexTableCallFileB(s32 table, s32 index);

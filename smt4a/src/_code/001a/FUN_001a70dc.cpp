@@ -1,7 +1,7 @@
 /* NON_MATCHING: Retail unrolls uppercase conversion by two; hash accumulation registers and bucket/entry loads differ. */
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "AsdSDK/AsdMemCopy.h"
-#include "shard/pathStripScheme.h"
+#include "shard/W8X15_PackageList.h"
 
 extern "C" {
 void rt_aeabi_memclr(void *memory, u32 size);

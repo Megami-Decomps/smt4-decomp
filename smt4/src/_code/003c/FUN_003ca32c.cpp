@@ -1,7 +1,8 @@
 /* NON_MATCHING: retail spills percentage constants; compiler uses SMULBB and different call-argument registers. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
-#include "shard/FUN_00229a3c.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, u32, s32, s32, s32, s32, s32, s32);
@@ -27,7 +28,7 @@ void FUN_003ca32c(BtlMainState **main, u32 job)
                 mp = 1;
             s32 delay = queued * 5;
             FUN_00282820(delay, job, unitIndex, unitIndex, 9, 0, 5, 0);
-            FUN_0027df30(5, job, &(*main)->actions.records[entry->members.ids[0]], 0, hp, mp,
+            FUN_0027df30(5, job, &(*main)->actions[entry->members.ids[0]], 0, hp, mp,
                          0xFFFFFFFF, 0, delay, delay, 9, 1, 0);
             ++queued;
         }

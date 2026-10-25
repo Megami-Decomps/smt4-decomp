@@ -33,7 +33,15 @@ public:
 
 /* An object holding two rows of three parts, a model-manager handle and a block (vtable at
  * 0x4209cc, named after it until its real name is known). */
-class Obj4209cc {
+/* The word right after the vtable pointer, cleared before the vtable is set. */
+class Obj4209ccBase {
+public:
+    Obj4209ccBase() : unk04(0) {}
+
+    /* 0x04 */ u32 unk04;
+};
+
+class Obj4209cc : public Obj4209ccBase {
 public:
     Obj4209cc();
     virtual ~Obj4209cc();
@@ -48,7 +56,6 @@ public:
 
 /* Public resource fields shared by construction and resource teardown. */
     /* 0x00: vtable pointer */
-    /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 handle;
     /* 0x0C */ Obj4209ccPart *rowA[3];
     /* 0x18 */ Obj4209ccPart *rowB[3];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the load of work->entry is scheduled above the store of done here; retail stores first and loads afterwards */
+/* NON_MATCHING: retail hoists the constants 0 (r6) and 1 (r1) to the top of the function and stores done before loading entry; built materializes them at the use. */
 /* Polls the quest center's shutdown: while its task is running or hasn't finished returns the
  * current result byte; otherwise releases the active entry, frees the work area and returns -1. */
 #include "common.h"
@@ -8,29 +8,29 @@
 
 extern "C" {
 
-int scriptPanelRelease(void);
+int scriptPanelRelease(QuestEntry *entry);
 int jobFind(u32 task);                /* nonzero while the task exists */
 
-extern QcGlobalsA DAT_00588c30;
+extern QcGlobalsA g_qcMain;
 
 s32 FUN_002de9d8(void)
 {
-    QcWork *work = DAT_00588c30.work;
+    QcWork *work = g_qcMain.work;
 
     if (work != NULL) {
         if (jobFind(work->task) != 0 || work->done == 0) {
-            return DAT_00588c30.result;
+            return (s8)g_qcMain.entryId;
         }
-        work = DAT_00588c30.work;
+        work = g_qcMain.work;
         if (work != NULL) {
             work->done = 1;
             if (work->entry != 0) {
-                scriptPanelRelease();
+                scriptPanelRelease(work->entry);
                 asdOperatorDelete(work->entry);
                 work->entry = 0;
             }
-            asdMemFree(DAT_00588c30.work);
-            DAT_00588c30.work = NULL;
+            asdMemFree(g_qcMain.work);
+            g_qcMain.work = NULL;
         }
     }
     return -1;

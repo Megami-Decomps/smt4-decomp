@@ -1,5 +1,5 @@
 #include "romwright_types.h"
-#include "shard/FUN_00384cf4.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 

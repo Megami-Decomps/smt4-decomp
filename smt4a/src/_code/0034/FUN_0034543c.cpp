@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses `bhi 28` where armcc emits `bhi 24`. */
+/* NON_MATCHING: only the zero constant's register/placement differs (retail loads `mov r1,#0` after the table pointer into r2; the build loads it into r2 first). */
 #include "common.h"
 
 extern "C" {
@@ -10,9 +10,12 @@ extern GameBlocks g_gameDataBlocks;
 
 void FUN_0034543c(u32 index)
 {
-    if (index <= 1280) {
-        g_gameDataBlocks.work->records[index].value = 0;
+    if (index > 1280) {
+        return;
     }
+    SaveWork *work = g_gameDataBlocks.work;
+    SaveRecord *record = &work->records[index];
+    record->value = 0;
 }
 
 } /* extern "C" */

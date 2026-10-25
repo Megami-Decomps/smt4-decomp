@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail groups the state/elapsed stores with stm; armcc emits separate stores and loads listKind earlier. */
 #include "common.h"
 
 struct CellListController {
@@ -16,12 +15,17 @@ extern "C" void FUN_00499d14(CellListController *controller);
 extern "C" void FUN_004964e0(CellListController *controller, s32 refresh);
 extern "C" void FUN_00496a0c(CellListController *controller, s32 refresh);
 
+static __inline void cellListEnterState(CellListController *controller, s32 next)
+{
+    controller->elapsed = 0;
+    controller->previousState = controller->state;
+    controller->state = next;
+}
+
 // Enter list state sixteen and dispatch the requested list refresh.
 extern "C" void FUN_004969a8(CellListController *controller)
 {
-    controller->previousState = controller->state;
-    controller->state = 16;
-    controller->elapsed = 0;
+    cellListEnterState(controller, 16);
     if (controller->listKind != 8) {
         if (controller->mode == 1)
             controller->listKind = 7;

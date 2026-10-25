@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps the arguments in single registers (s19/s16) and the quad size loaded together up front; ours copies the float pair as a double and schedules the corner math after the texture bind (161 rows against 151). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/FUN_002b8660.h"
+#include "shard/W6_W6Match5_DevilSort.h"
 
 /* A loaded texture the title scene can bind (handle at +8). */
 struct TitleTexture {

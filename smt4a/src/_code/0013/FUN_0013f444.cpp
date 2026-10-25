@@ -5,7 +5,7 @@ extern "C" {
 extern SentinelLookupEntry g_sentinelLookupEntries[];
 
 // Append a new key/value pair, keeping the following terminator initialized.
-void FUN_0013f444(u32 key, u32 value, u8 flags)
+void FUN_0013f444(u32 key, u32 value, s8 flags)
 {
     for (s32 index = 0; ; ++index) {
         SentinelLookupEntry *entry = &g_sentinelLookupEntries[index];

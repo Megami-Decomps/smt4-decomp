@@ -1,5 +1,5 @@
 #include "battle/btlUI.h"
-#include "shard/FUN_004ab7f4.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 

@@ -2,7 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/renderCtxCalculateStereoParallax.h"
-#include "shard/FUN_003f5b14.h"
+#include "util/CalleeContracts.h"
 
 struct MenuLayerTrack {
     u8 unk00[0x20];

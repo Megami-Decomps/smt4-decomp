@@ -13,7 +13,7 @@ extern u32 g_btlScriptUnit;
 s32 scrComm_Battle_UnitParamCheckA(void)
 {
     u32 value = scrGetArg(0);
-    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
 
     if (btlEntryHasActionSkillCategory(unit->params, value) != 0) {
         scrSetResult(1);

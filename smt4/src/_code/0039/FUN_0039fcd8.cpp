@@ -1,7 +1,5 @@
-/* NON_MATCHING: retail copies the second entry pointer to r6 (mov r6, r4) before the first FUN_00230f44 call; the build keeps it in r4 (one instruction fewer). */
 #include "common.h"
 #include "gamedata/EquipmentSortPower.h"
-#include "shard/FUN_0028fb3c.h"
 
 extern "C" {
 
@@ -20,8 +18,10 @@ int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
     if (diff != 0) {
         return diff;
     }
-    u16 orderA = FUN_00230f44(reinterpret_cast<const u16 *>(a));
-    u16 orderB = FUN_00230f44(reinterpret_cast<const u16 *>(b));
+    const u16 *keyA = reinterpret_cast<const u16 *>(a);
+    const u16 *keyB = reinterpret_cast<const u16 *>(b);
+    u16 orderA = FUN_00230f44(keyA);
+    u16 orderB = FUN_00230f44(keyB);
     return orderA - orderB;
 }
 

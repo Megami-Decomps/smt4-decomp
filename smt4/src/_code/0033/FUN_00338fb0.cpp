@@ -40,8 +40,8 @@ extern "C" void FUN_00338fb0(void *context)
     for (s32 slot = 0; slot < 42; ++slot) {
         for (s32 pending = 0; pending < 50; ++pending) {
             CachedModel *model = cache->models[slot];
-            if (model != NULL && model->id == cache->pending[pending].id) {
-                s32 retained;
+            if (model != NULL && cache->pending[pending].id == model->id) {
+                u32 retained;
                 for (retained = 0; retained < 42; retained += 2) {
                     if (cache->retainedIds[retained] == static_cast<s16>(model->id) ||
                         cache->retainedIds[retained + 1] == static_cast<s16>(model->id))

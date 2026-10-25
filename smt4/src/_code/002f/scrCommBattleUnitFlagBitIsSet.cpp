@@ -23,7 +23,7 @@ s32 scrCommBattleUnitFlagBitIsSet(void)
     u32 bit = (u16)scrGetArg(1);
     s32 set;
 
-    btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit));
+    btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit));
     if (id < 0x6d) {
         MainEntry002f7cc4 *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
 

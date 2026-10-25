@@ -21,7 +21,7 @@ u32 FUN_002f077c(void)
 {
     s32 index = scrGetArg(0);
 
-    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
+    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(stats->skills[index] >> 10 == 2);
     return 1;

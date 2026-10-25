@@ -1,5 +1,5 @@
 #include "shard/Shard0033.h"
-#include "shard/FUN_002c7e3c.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 

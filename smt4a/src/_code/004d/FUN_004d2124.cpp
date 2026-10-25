@@ -5,7 +5,7 @@
 #include "shard/X14_BtlUiClose.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-#include "shard/asdListBoxSetIntItem.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 extern BtlUiCloseState DAT_005715f8;

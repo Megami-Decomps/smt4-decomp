@@ -11,4 +11,14 @@ s32 table1bOr1cGetRecordValue(u32 id);
 
 } /* extern "C" */
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0027db24(u8 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

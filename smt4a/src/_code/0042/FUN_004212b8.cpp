@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable state guard is shrink-wrapped before the push, and the zero index argument is loaded later than retail. */
+/* NON_MATCHING: retail loads the zero index argument (mov r1, #0) before the container null test; the build loads it just before the FUN_0040619c call. */
 #include "common.h"
 
 struct MoriScene;
@@ -22,21 +22,21 @@ u32 animationIsClipComplete(MoriSceneModel *model);
 // In state three, require both completion predicates when a scene model exists.
 bool FUN_004212b8(SceneCompletionOwner *owner)
 {
-    if (owner->state != 3) {
-        return false;
-    }
-    bool complete = true;
-    if (owner->container != NULL) {
-        MoriSceneModel *model = FUN_0040619c(owner->container->scene, 0);
-        if (model != NULL) {
-            if (FUN_004ffa14(model) == 0) {
-                complete = false;
-            }
-            if (animationIsClipComplete(model) == 0) {
-                complete = false;
+    if (owner->state == 3) {
+        bool complete = true;
+        if (owner->container != NULL) {
+            MoriSceneModel *model = FUN_0040619c(owner->container->scene, 0);
+            if (model != NULL) {
+                if (FUN_004ffa14(model) == 0) {
+                    complete = false;
+                }
+                if (animationIsClipComplete(model) == 0) {
+                    complete = false;
+                }
             }
         }
+        return complete;
     }
-    return complete;
+    return false;
 }
 }

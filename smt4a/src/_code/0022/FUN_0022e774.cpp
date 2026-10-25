@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail shares the final `if (model) statusCameraDestroy()` tail between the script and non-script paths (b to the common test), stores y/z of the lifted position with one vstmia, and keeps the game pointer in r5 with the state base in r7; armcc here duplicates the tail and copies z through an integer register. */
 #include "shard/Shard0033.h"
 #include "status/StatusCamera.h"
-#include "ui/UiSpriteState.h"
 #include "shard/FUN_003857b4.h"
+#include "ui/UiSpriteState.h"
 
 class StatusScreenModel {
 public:

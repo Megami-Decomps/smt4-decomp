@@ -1,6 +1,6 @@
 #include "common.h"
 #include "shard/GameDataBlocks.h"
-#include "shard/gameDataFlagsClear.h"
+#include "classes/WindowStatus.h"
 
 extern "C" {
 

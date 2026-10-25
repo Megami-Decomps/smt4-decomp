@@ -105,4 +105,24 @@ u8 *gameDataBlocksGetStats(void);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *FUN_00239200(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00333574(u32 bits);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

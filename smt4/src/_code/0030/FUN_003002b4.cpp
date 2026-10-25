@@ -1,8 +1,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
-BtlMainState* btlGetMainState(void);
 BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, u32 id);
 
 u32 FUN_003002b4(void)

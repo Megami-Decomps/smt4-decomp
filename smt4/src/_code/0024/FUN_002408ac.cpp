@@ -2,6 +2,7 @@
 /* Counts outstanding battle actions before advancing the cleanup state machine. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "util/FUN_0023fae0.h"
 
 extern "C" {
@@ -20,9 +21,9 @@ void FUN_002408ac(u32 *phase, BtlMainState *state)
     if (FUN_0023fae0(state, 1)) {
         FUN_0023f79c(state, 0x400);
         for (s32 i = 4; i < 0x36; ++i) {
-            u32 status = state->actions.records[i].status;
+            u32 status = state->actions[i].status;
             if ((status & 1) && (status & 0x80) && (status & 0x400)) {
-                ++state->actions.completedCount;
+                ++state->completedCount;
             }
         }
         *phase = 10;

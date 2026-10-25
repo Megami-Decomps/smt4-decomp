@@ -1,6 +1,8 @@
 /* NON_MATCHING: loop entry: retail loads the span's count into r0 and first into r6 (ldr, ldr, add); here first is loaded, copied to r6, then added to count. */
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
@@ -23,7 +25,6 @@ typedef struct EntrySpan {
 
 #define ITEM_KIND_3 3
 
-extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(s32 kind, u32 *first, u32 *count);

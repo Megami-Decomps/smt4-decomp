@@ -1,4 +1,3 @@
-/* NON_MATCHING: constant-return load placement and 64-bit sharing-mask register allocation differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -17,9 +16,10 @@ extern BattleValueShareMasks DAT_005713f0;
 /* Propagate each nonzero source slot when the target's sharing mask is enabled. */
 extern "C" f32 FUN_004c3bc0(u32 sourceId, u32 targetId)
 {
+    f32 result = 1.0f;
     BtlCombatantEntryA *source = FUN_003f0e20(btlGetMainState(), sourceId);
     if (source == NULL) {
-        return 1.0f;
+        return result;
     }
     BtlCombatantEntryA *target = FUN_003f0e20(btlGetMainState(), targetId);
     if (target != NULL && (target->flags & DAT_005713f0.enabled) != 0) {
@@ -31,5 +31,5 @@ extern "C" f32 FUN_004c3bc0(u32 sourceId, u32 targetId)
             }
         }
     }
-    return 1.0f;
+    return result;
 }

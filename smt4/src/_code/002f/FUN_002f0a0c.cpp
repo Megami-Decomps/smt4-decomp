@@ -2,11 +2,12 @@
 #include "battle/EntryStats.h"
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
+#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
-BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 // Test group entries at or above an HP threshold, and the active entry at or below it.

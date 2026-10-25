@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match2_RecordValue.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "shard/dataTable05Sub4GetCount.h"
+#include "battle/btlHelp.h"
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 const FusionRecipe *dataTable54FindById(u32 index);

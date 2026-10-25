@@ -125,4 +125,24 @@ typedef char GameSaveDataPartyOffsets[
 typedef char GameSaveDataPartyStockCountOffsetCheck[
     offsetof(GameSaveData, party.stockCount) == 0x9197 && sizeof(GameSaveData) == 0x24BC4 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void gameDataBlocksAddFlags(u32 flags);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 gameDataSetItemFlag(u16 index, s32 value);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

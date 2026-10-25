@@ -1,5 +1,4 @@
 #include "shard/Shard004E.h"
-#include "shard/hasFlag80Or1000.h"
 
 extern "C" {
 

@@ -1,6 +1,6 @@
 /* Tail call into the function that follows. */
 #include "common.h"
-#include "shard/FUN_0023ea64.h"
+#include "shard/W6_W6Match1_BattleVersionResources.h"
 
 extern "C" {
 

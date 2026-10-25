@@ -1,5 +1,5 @@
 #include "battle/btlMain.h"
-#include "shard/btlMainGetUnk14.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 

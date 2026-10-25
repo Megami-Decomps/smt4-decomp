@@ -3,6 +3,7 @@
 
 #include "common.h"
 #include "name/NameFormText.h"
+#include "gamedata/Table00.h"
 
 // Known prefix of the name-entry form; its initializer installs twelve member callbacks.
 struct NameFormState {
@@ -31,6 +32,66 @@ extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
 void *recordTableGet(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002af390(u32 a, u32 b);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void *appCostRecordFindById(u16 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+Table00Record *dataTable00FindById(u16 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int dataTableGetEntry0e(u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *gameGetFlagBlock(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void stateSetterConstruct(u8 *setter, u8 source);
+
 #ifdef __cplusplus
 }
 #endif

@@ -21,9 +21,9 @@ u32 FUN_0033fc50(void)
     typedef char CapacityOffsetCheck[offsetof(StockCapacityView, capacity) == 0x910B ? 1 : -1];
     StockCapacityView *stock = (StockCapacityView *)gameGetSlotTable();
     u8 count = 0;
-    s8 slots[24];
+    u8 slots[24];
     memset(slots, -1, sizeof(slots));
-    u32 remaining = stock->capacity;
+    s32 remaining = stock->capacity;
     if (remaining != 0) {
         s8 *slot = stock->slots.stock;
         do {

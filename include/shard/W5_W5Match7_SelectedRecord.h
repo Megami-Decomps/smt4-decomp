@@ -27,4 +27,34 @@ extern "C" {
 extern SelectionOwner *g_callbackWork;
 SelectedRecord *FUN_002613f0(s32 index);
 }
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_002618c8(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 dataTableHasMatchingEntry35(u32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 ifTouchRegionAdd(u16 x, u16 y, u16 width, u16 height);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

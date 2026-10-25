@@ -1,6 +1,6 @@
 /* NON_MATCHING: restored s32(u32 handle) task callback and forwarded jobGetWork handle; icon rectangle argument scheduling and frameB modulo scratch register differ (204 rows each). */
 #include "common.h"
-#include "shard/FUN_002896bc.h"
+#include "shard/W6_W6Match2_ScrollList.h"
 
 #define INTRO_STATE_APPEAR 0
 #define INTRO_STATE_WAIT_TOUCH 1

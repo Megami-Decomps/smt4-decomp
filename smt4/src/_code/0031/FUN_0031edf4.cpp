@@ -1,32 +1,20 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "script/ScriptArgs.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 extern "C" {
-
-typedef struct BattleUnit {
-    /* 0x000 */ u32 flags;
-    /* 0x004 */ u8 unk004[0x8A];
-    /* 0x08E */ s16 primaryValue;
-    /* 0x090 */ u8 unk090[2];
-    /* 0x092 */ s16 secondaryValue;
-    /* 0x094 */ u8 unk094[0x1F4];
-} BattleUnit;
-
-typedef struct BattleState {
-    /* 0x0000 */ u8 unk0000[0x1FC0];
-    /* 0x1FC0 */ BattleUnit *units;
-} BattleState;
 
 
 /* Script command: sets the result to 1 when some live, non-excluded unit has a positive primary or secondary value. */
 u32 FUN_0031edf4(void)
 {
     for (s32 i = 0; i < 109; i++) {
-        BattleUnit *unit = &reinterpret_cast<BattleState *>(btlGetMainState())->units[i];
+        BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0 &&
-            (unit->primaryValue > 0 || unit->secondaryValue > 0)) {
+            (unit->effects.primary > 0 || unit->effects.secondary > 0)) {
             scrSetResult(1);
             return 1;
         }

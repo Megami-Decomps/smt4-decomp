@@ -4,7 +4,6 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
-#include "shard/btlFindEntryValue.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);

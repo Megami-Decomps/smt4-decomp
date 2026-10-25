@@ -2,6 +2,7 @@
 #include "battle/btlAction.h"
 #include "battle/ActionStateChannels.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 extern BtlActionGlobals g_btlAction;
@@ -27,7 +28,7 @@ void FUN_001f7d50(ActionStateChannelOwner *owner, s32 mode, s32 index, s32 argum
     BtlEntry *entry = &battle->entries[index];
     channel->action.entry = entry;
     if ((entry->flags & 0x80) == 0)
-        channel->action.record = &battle->actions.records[entry->members.ids[0]];
+        channel->action.record = &battle->actions[entry->members.ids[0]];
     channel->action.parameters = reinterpret_cast<u8 *>(entry) + 0xCC;
     channel->action.index = index;
     channel->action.phase = 0;
@@ -43,7 +44,7 @@ void FUN_001f7d50(ActionStateChannelOwner *owner, s32 mode, s32 index, s32 argum
         channel->flags = 0x1000;
     FUN_002569ac(channels, channels->entries[0].owner->current);
     u32 task = taskCreateDraw("btlAction Calc", 1, 0, 0, FUN_001e48d0,
-                             jobWorkStopCurrentJob, owner, battle->encounter.ownerJob);
+                             jobWorkStopCurrentJob, owner, battle->job);
     owner->jobs[owner->current] = task;
 }
 }

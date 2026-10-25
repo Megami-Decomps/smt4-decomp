@@ -1,6 +1,6 @@
-/* NON_MATCHING: register swap only: retail loads the group count into r1 and the zero bestId into r0 (ours r0/r1) in the prologue and first-level clamp. */
+/* NON_MATCHING: bestDiff kept in sl is stored with sxth (s16) where retail stores uxth; everything else matches. */
 #include "common.h"
-#include "shard/entryDefIsAvailable.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
 
@@ -21,7 +21,7 @@ typedef struct LevelTableSet {
  * group's first level), or 0 when there is none. */
 u16 FUN_004dc154(LevelTableSet *set, s32 group, u32 level)
 {
-    u16 bestDiff = 999;
+    s16 bestDiff = 999;
     u16 bestId = 0;
     s32 i;
 
@@ -34,7 +34,7 @@ u16 FUN_004dc154(LevelTableSet *set, s32 group, u32 level)
                 && (s32)(set->tables[group][i].level - level) < bestDiff
                 && entryDefIsAvailable(set, set->tables[group][i].id)) {
                 bestId = set->tables[group][i].id;
-                bestDiff = set->tables[group][i].level - level;
+                bestDiff = (u16)(set->tables[group][i].level - level);
             }
         }
     }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (211 vs 213 rows); register allocation of the action context and flag constants differs */
 #include "common.h"
-#include "shard/FUN_00227d18.h"
+#include "battle/BtlMainAccess.h"
 
 struct ActionTarget {
     u8 unk00[0x50];

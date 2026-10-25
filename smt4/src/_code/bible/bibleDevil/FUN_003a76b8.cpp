@@ -2,7 +2,7 @@
 #include "classes/Obj42247c.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/UnitStats.h"
-#include "shard/flaggedValueHolderGetTotal.h"
+#include "shard/Shard004A.h"
 
 struct CompendiumPreviewHandle { u8 prefix[0x108]; s32 mode; };
 extern "C" {

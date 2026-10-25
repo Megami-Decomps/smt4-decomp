@@ -1,5 +1,5 @@
 #include "map/lmapMain.h"
-#include "shard/lmapSceneGetUnk0.h"
+#include "util/BannerShow.h"
 
 extern "C" {
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the 7/20 constants stay in saved registers across jobGetWork as retail, but retail holds the job in r4 and the mode in r6 where the build swaps them. */
 #include "shard/W6_W6Match2_JobBlend.h"
 #include "script/ScriptArgs.h"
 
@@ -12,7 +11,7 @@ extern "C" {
 u32 scrGetCommandFrame(void);
 void FUN_002a880c(JobBlendWork* work, u32 mode, s32 frames);
 
-static inline void startJobBlend(u32 job, u32 mode, s32 frames)
+static inline void startJobBlend(s32 job, u32 mode, s32 frames)
 {
     FUN_002a880c((JobBlendWork *)jobGetWork(job), mode, frames);
 }

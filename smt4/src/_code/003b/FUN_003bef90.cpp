@@ -22,7 +22,7 @@ s32 randRange(u32 maximum);
 // Choose at most one eligible reserve unit using its encounter probability tier.
 u32 FUN_003bef90(void)
 {
-    if (btlGetMainState()->selectionIndex < 0) {
+    if (btlGetMainState()->core.selectionIndex < 0) {
         s32 selected = 0;
         ReserveSlotSelectionView *slots = gameGetSlotTable();
         for (s32 index = 0; index < slots->count; ++index) {
@@ -38,17 +38,17 @@ u32 FUN_003bef90(void)
                     case 3: chance = 90; break;
                     default: chance = 99; break;
                     }
-                    if (btlGetMainStateExt()->stateFlags & 0x10000)
+                    if (btlGetMainState()->editorControl.flags & 0x10000)
                         chance = 100;
                     if (randRange(99) < chance && selected < 1) {
-                        btlGetMainState()->selectedIds[selected] = unit->id;
+                        btlGetMainState()->core.selectedIds[selected] = unit->id;
                         ++selected;
                     }
                 }
             }
         }
         if (selected > 0) {
-            btlGetMainStateExt()->flags44A0 |= 0x200;
+            btlGetMainState()->battleFlags |= 0x200;
             return 1;
         }
     }

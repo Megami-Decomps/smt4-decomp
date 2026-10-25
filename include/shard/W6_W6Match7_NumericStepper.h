@@ -2,6 +2,8 @@
 #define SHARD_W6_W6MATCH7_NUMERIC_STEPPER_H
 
 #include "common.h"
+#include "shard/NaviMain.h"
+#include "shard/W5_W5Match2_TouchRegions.h"
 
 struct NumericStepper {
     /* 0x00 */ s32 value;
@@ -27,5 +29,75 @@ u32 FUN_003c2a84(int alt);
 extern "C" {
 u32 getMaskB6(s32 includeExtra);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_0048e40c(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 naviGetActiveStateValue();
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void naviMainSetValuePair(u32 unused, const NaviValuePair *value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+unsigned int FUN_003d98a0(unsigned int param_1,int param_2);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 contentGetUpgradedKindValue(u32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+const char *dataLookupDisplayName(s32 unused, s32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void touchRegisterFirstRegion(TouchRegions *regions,s32 x,s32 y,s32 width,s32 height);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

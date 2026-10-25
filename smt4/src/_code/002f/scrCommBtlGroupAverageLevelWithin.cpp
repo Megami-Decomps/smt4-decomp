@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern BtlUnitEntry *btlMainFindActiveEntry(void);
+extern BtlEntry *btlMainFindActiveEntry(void);
 extern s32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
@@ -28,7 +28,7 @@ u32 scrCommBtlGroupAverageLevelWithin(void)
     index = start;
     if (index < count + start) {
         do {
-            BtlUnitEntry *unit = &reinterpret_cast<BtlState *>(btlGetMainState())->units[index];
+            BtlEntry *unit = &btlGetMainState()->entries[index];
 
             if (!(unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
                 units++;
@@ -37,10 +37,10 @@ u32 scrCommBtlGroupAverageLevelWithin(void)
             index++;
         } while (index < start + count);
     }
-    if (reinterpret_cast<BtlState *>(btlGetMainState())->hasActiveEntry != 0) {
-        BtlUnitEntry *active;
+    if (btlGetMainState()->hasActiveEntry != 0) {
+        BtlEntry *active;
 
-        reinterpret_cast<BtlState *>(btlGetMainState());
+        btlGetMainState();
         active = btlMainFindActiveEntry();
         if (active != NULL) {
             units++;

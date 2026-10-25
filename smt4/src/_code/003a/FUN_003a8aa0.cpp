@@ -21,7 +21,7 @@ struct CompendiumPopulationViewIV {
     u8 unk002c[0x68];
     u8 completion;
     u8 unk0095[0x50f];
-    u8 mode;
+    s8 mode;
     u8 unk05a5[3];
     CompendiumEntryListIV list;
     u16 unkA5ac;

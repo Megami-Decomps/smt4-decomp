@@ -1,7 +1,7 @@
 /* NON_MATCHING: armcc hoists the mode/entry base differently (retail reads the mode through the menu once, then through a +0x800 base kept in r5) and orders the shared tail call differently */
 #include "common.h"
 #include "shard/Shard004A.h"
-#include "shard/sceneTexturesAreLoaded.h"
+#include "bible/bibleAnalyze.h"
 
 struct SelectEntry {
     /* 0x00 */ u8 unk00[4];

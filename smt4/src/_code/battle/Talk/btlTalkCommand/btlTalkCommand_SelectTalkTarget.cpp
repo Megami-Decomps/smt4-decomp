@@ -29,7 +29,7 @@ void asdMemFree(void *memory);
 u32 btlTalkCommand_SelectTalkTarget()
 {
     TalkDevilRecord *source = dataTable00FindById((u16)scrGetArg(0));
-    u16 target = source->targetId;
+    s16 target = source->targetId;
     TalkDevilRecord *record = dataTable00FindById(target);
     devilGetRecord(target);
     if (target && record && (record->flags & 0x400) &&

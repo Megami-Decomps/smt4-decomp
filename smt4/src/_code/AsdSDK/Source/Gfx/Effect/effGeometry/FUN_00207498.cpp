@@ -10,7 +10,7 @@ void matrix44SetIdentity(f32 *matrix);
 
 // Build a geometry of `count` points, each with a four-float vertex set to one, over a
 // rows x columns element layout.
-EffGeomPointHandle *FUN_00207498(s32 count, u16 rows, u16 columns, u16 flags)
+EffGeomPointHandle *FUN_00207498(s32 count, u16 rows, s16 columns, s16 flags)
 {
     asdDebugTrace(DAT_00414954, 506);
     EffGeomPointHandle *handle = (EffGeomPointHandle *)memAlloc(0x10000, 0x100, 0, 0x5c, 0x10, 1);

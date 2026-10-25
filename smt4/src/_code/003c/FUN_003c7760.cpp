@@ -11,10 +11,10 @@ typedef struct BtlMain {
 } BtlMain;
 
 /* The battle's state block; flags at 0x44A0. */
-typedef struct BtlState {
+typedef struct BtlMainState {
     /* 0x0000 */ u8 unk0000[0x44A0];
     /* 0x44A0 */ u32 flags;
-} BtlState;
+} BtlMainState;
 
 typedef struct BtlTask {
     /* 0x00 */ u32 state;
@@ -33,7 +33,7 @@ extern void *g_btlUiBlock;
 extern u32 DAT_00435d18;
 
 extern s32 scrRunOpcodesStub(u32 job);
-extern s32 FUN_00256940(BtlMain *main, BtlState *state, s32 arg);
+extern s32 FUN_00256940(BtlMain *main, BtlMainState *state, s32 arg);
 extern void btlReflectQueueKind34(s32 a, s32 b);
 extern void battleSelectButtonHelpPreset(s32 a);
 
@@ -41,7 +41,7 @@ extern void battleResetCounterAndFlag(u32 arg);
 
 /* Per-frame update of a battle task: announces itself once, and when its job reports state 2 shuts
  * the battle flags down. Counts its frames up to 0xFFFF. Always returns 0. */
-s32 FUN_003c7760(BtlTask *task, BtlState *state)
+s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
 {
     if ((state->flags & BTL_FLAG_ACTIVE) != 0 && (task->flags & 1) == 0) {
         if (g_btlMain->unk760 >= 0 && FUN_00256940(g_btlMain, state, 1) != 0) {

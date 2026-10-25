@@ -34,7 +34,7 @@ u32 scrComm_Battle_PlayCommonEffectExt(void)
         const char *effectName = amount < 0 ? DAT_00400428 : DAT_00400434;
         memcpy(name, effectName, 9);
         FUN_002454c4(DAT_00435d18, name, 0, 0);
-        u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+        u32 unit = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
         FUN_00245420(0, unit, &btlGetMainState()->actions[target], value, amount, 0, -1);
         FUN_001b1a48(amount, unit, DAT_00435d18->slots, 0, target, target);
     }

@@ -1,7 +1,7 @@
 /* NON_MATCHING: signed-byte argument packing and 64-bit flag scheduling differ; -O2 candidate. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-#include "shard/FUN_004186e0.h"
+#include "shard/Shard0047.h"
 
 struct PreparedBattleAction {
     u32 values[5]; // 0x00

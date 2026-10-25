@@ -1,5 +1,6 @@
-/* NON_MATCHING: built hoists the common seek argument setup above the branch and predicates the error report; retail sets the arguments up separately in each branch (the origin of any other value is left uninitialised, as in retail) */
+/* NON_MATCHING: armcc hoists the argument set-up of both seek calls above the tracking test; retail sets it up after the test (only the sign extension is shared). */
 #include "common.h"
+#include "util/PlatformResultCheck.h"
 
 struct SeekableFile {
     u8 unk00[4];       // 0x00
@@ -11,7 +12,11 @@ struct SeekableFile {
 extern "C" {
 
 u32 nn_fs_detail_FileBase_TrySeek(void *file, s64 offset, s32 origin);
-void FUN_0016e800(u32 result, u32 address);
+
+static __inline u32 seekFile(SeekableFile *file, s32 offset, s32 mode)
+{
+    return nn_fs_detail_FileBase_TrySeek(file->base, offset, mode);
+}
 
 /* Seeks the file by `offset` from the origin (0 begin, 1 current, 2 end); records the new position when tracked, else reports failures. */
 s32 FUN_00174a64(SeekableFile *file, s32 offset, s32 origin)
@@ -26,16 +31,14 @@ s32 FUN_00174a64(SeekableFile *file, s32 offset, s32 origin)
         mode = 2;
     }
     if (file->trackPosition != 0) {
-        u32 result = nn_fs_detail_FileBase_TrySeek(file->base, offset, mode);
+        u32 result = seekFile(file, offset, mode);
 
         file->position = result;
         return ((s32)result >> 31) + 1;
     }
-    u32 result = nn_fs_detail_FileBase_TrySeek(file->base, offset, mode);
+    u32 result = seekFile(file, offset, mode);
 
-    if ((s32)result < 0) {
-        FUN_0016e800(result, __current_pc());
-    }
+    checkPlatformResult(result, __current_pc());
     return 1;
 }
 

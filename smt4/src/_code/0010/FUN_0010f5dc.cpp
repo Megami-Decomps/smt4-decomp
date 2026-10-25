@@ -1,6 +1,6 @@
 /* NON_MATCHING: close: retail forms the self-pointer slot as a separate address (add r1, r0, #8; str r0, [r1]; add r0, r1, #0), hoists the zero priority into r4 and ends with a pop/branch tail call instead of a conditional tail call; the build folds the slot address and uses blne. */
 #include "common.h"
-#include "shard/FUN_002bbb2c.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 /* The user file system mount: its handle and the pointer to itself handed to the file layer. */
 struct FsMount {

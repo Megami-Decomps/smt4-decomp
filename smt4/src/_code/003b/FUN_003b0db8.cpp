@@ -14,7 +14,7 @@ struct ModelSequenceHeaderWork {
     u8 modified;
     u8 active;
     u8 type;
-    u8 hasSequence;
+    s8 hasSequence;
 };
 typedef char ModelSequenceHeaderWorkOffsetsCheck[
     offsetof(ModelSequenceHeaderWork, frame) == 0x1478 &&

@@ -1,5 +1,5 @@
 #include "shard/GameDataBlocks.h"
-#include "shard/FUN_00282be4.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 

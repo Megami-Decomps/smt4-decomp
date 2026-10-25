@@ -37,7 +37,7 @@ u32 FUN_0040b11c(u32 unused, s32 kind, s32 area, s32 point, u32 current)
             break;
         }
     }
-    u16 sourceId = source->point + source->area * 1000;
+    s16 sourceId = source->point + source->area * 1000;
     if (connection != NULL) {
         for (s32 index = 0; index < connection->count; ++index) {
             if (connection->sources[index] == sourceId) {

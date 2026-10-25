@@ -26,7 +26,7 @@ struct ElementPool {
 /* Copies `source` into the element `columns * rows` slots further on (scaled by its index), clearing the copy's fifth value to -1. */
 void FUN_0024b5f0(ElementPool *pool, PoolElement *source)
 {
-    s32 stride = pool->dimensions->columns * pool->dimensions->rows;
+    s32 stride = pool->dimensions->rows * pool->dimensions->columns;
     PoolElement *target;
 
     if (stride == 0) {

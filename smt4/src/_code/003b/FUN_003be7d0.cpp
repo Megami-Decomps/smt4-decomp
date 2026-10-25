@@ -1,5 +1,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include <stddef.h>
+#include "battle/BtlMainAccess.h"
 
 struct BattleDrop {
     u16 item;
@@ -34,7 +36,6 @@ typedef char BattleRewardLayoutCheck[
     offsetof(BattleRewardView, rewards) == 0x174 &&
     offsetof(BattleRewardView, bonusDrops) == 0x44b7 ? 1 : -1];
 extern "C" {
-BtlMainState *btlGetMainState(void);
 BattleRewardRecord *dataTable00FindById(u32);
 s32 randRange(u32);
 }

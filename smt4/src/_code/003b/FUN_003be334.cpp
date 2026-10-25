@@ -63,7 +63,7 @@ s32 randRange(u32 limit);
  * or a fixed number) for the record. Returns -1 when nothing applies. */
 s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 multiplier, s32 attacker, s32 target)
 {
-    BtlMainStateExt *battle = btlGetMainStateExt();
+    BtlMainState *battle = btlGetMainState();
     SkillRecord *skill = dataTable40FindById(skillId);
     ValueRecord *record = dataTable08Sub1GetRecord(recordId);
     BattleEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);
@@ -96,8 +96,8 @@ s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 mult
                     damage += damage * 25 / 100;
             }
         }
-        if (!(battle->flags44A0 & 0x40000) && scaled && damage > 0 && !(battle->flags44AC & 0x40) &&
-            !(battle->flagsE0 & 0x20000000))
+        if (!(battle->battleFlags & 0x40000) && scaled && damage > 0 && !(battle->editorControl.flags44AC & 0x40) &&
+            !(battle->encounter.flags & 0x20000000))
             damage += randRange(15);
         if (wantDamage == 0)
             return value;

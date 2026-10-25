@@ -8,7 +8,7 @@ u32 FUN_003d98a0(void *table, const char *name);
 s32 libc_strcmp(const char *first, const char *second);
 
 __softfp ReflectAction *FUN_00282820(s32 actor, u32 options, u16 first, s32 target,
-    u16 third, u16 fourth, f32 value, const char *name)
+    s16 third, s16 fourth, f32 value, const char *name)
 {
     if (FUN_003d98a0(DAT_00435d18, name)) {
         ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);

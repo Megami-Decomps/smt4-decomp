@@ -3,7 +3,6 @@
 #include "gamedata/GameFlags.h"
 #include "camp/CampCec/CampCecSetting.h"
 #include "script/scrScriptProcess.h"
-#include "shard/FUN_002bf520.h"
 
 extern "C" {
 

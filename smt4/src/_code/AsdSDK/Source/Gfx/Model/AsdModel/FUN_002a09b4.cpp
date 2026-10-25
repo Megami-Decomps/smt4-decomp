@@ -25,7 +25,6 @@ extern ModelFileSource *DAT_00464aa4[2];
 ModelSlotList *asdModelGetSlotArray1(s32 slot);
 ModelSlotList *asdModelGetSlotArray2(u32);
 void *asdLoadFileSync(const char *, u32, u32, u32);
-void *asdOperatorNew(u32, const char *);
 void FUN_0021f6e4(ModelFileSource *, u32);
 
 /* Reset one bank and its attached slot lists, then load and register its new file. */

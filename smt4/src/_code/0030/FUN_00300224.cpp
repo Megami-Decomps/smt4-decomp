@@ -3,7 +3,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
 void FUN_00255180(u32 id, s32 kind, s32 value);
 
 /* Selects one of the actor's two special battle modes and queues its corresponding update. */
@@ -11,7 +11,7 @@ u32 FUN_00300224(void)
 {
     u32 id = scrGetArg(0);
     s32 mode = scrGetArg(1);
-    BtlUnitEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
+    BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);
     if (entry != NULL) {
         switch (mode) {
         case 1:

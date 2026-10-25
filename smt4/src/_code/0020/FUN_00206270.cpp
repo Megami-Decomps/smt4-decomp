@@ -1,6 +1,5 @@
 #include "shard/PlayScene.h"
 #include "status/StatusCamera.h"
-#include "shard/FUN_00206270.h"
 
 extern "C" {
 

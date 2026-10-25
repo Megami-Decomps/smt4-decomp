@@ -2,7 +2,6 @@
 #include "common.h"
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
-#include "shard/FUN_00492c84.h"
 
 // Map selection screen: only the members this update touches.
 struct MapScreen {

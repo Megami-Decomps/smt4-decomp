@@ -190,7 +190,7 @@ LAB_00308fb8:
                 temp_v2 = 1;
                 if ((temp_v4 != 0) ||
                    ((temp_v4 = FUN_00245c78(), temp_v4 == 0 && (temp_v4 = questCurrentGetValue(), temp_v4 != 0)))) {
-                  puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+                  puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
                   if ((puVar9 == (unsigned int *)0x0) ||
                      (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))) {
                     temp_v2 = 0;
@@ -199,11 +199,11 @@ LAB_00308fb8:
                 }
                 temp_v4 = FUN_00245c78();
                 if ((((temp_v4 != 0) &&
-                     (((puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), puVar9 == (unsigned int *)0x0 ||
+                     (((puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), puVar9 == (unsigned int *)0x0 ||
                        (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))) &&
                       (temp_v4 = jyoucyuGetTableEntry(1), temp_v4 == 0)))) &&
                     (temp_v4 = FUN_00245c78(), temp_v4 != 0)) &&
-                   ((puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), puVar9 == (unsigned int *)0x0 ||
+                   ((puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit))), puVar9 == (unsigned int *)0x0 ||
                     (((*puVar9 & 0x80) == 0 && ((*puVar9 & 0x1000) == 0)))))) {
                   temp_v4 = 0;
                   do {

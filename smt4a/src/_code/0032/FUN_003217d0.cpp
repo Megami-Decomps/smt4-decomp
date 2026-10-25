@@ -68,7 +68,7 @@ void FUN_003217d0(ResultPanel* panel)
         return;
     }
     s32 shift = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
-    u64 mask = *reinterpret_cast<u64*>(reinterpret_cast<u8*>(btlGetMainState()) + 0x45a0);
+    u64 mask = btlGetMainState()->stateFlags64.bits;
     if ((mask & DAT_0057a9b0) == 0) FUN_001634b4(&panel->mask, (f32)shift);
 
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);

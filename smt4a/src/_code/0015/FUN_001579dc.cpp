@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail copies the command cursor to r5 and passes r5 (mov r1, r5); built passes r0 directly */
 #include "shard/W6_W6Match5_ShaderBinding.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "shard/asdModelCommitCommandRange.h"
 
 extern "C" {
 

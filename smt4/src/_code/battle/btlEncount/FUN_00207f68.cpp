@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the final battle-flag load/OR/store uses r0 instead of retail r1. */
 #include "battle/btlEncount.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -24,7 +25,7 @@ void frameTexApplyMode(s32);
 void FUN_00207f68(BtlMainState *battle)
 {
     battle->encounter.drawJob = taskCreateDraw("btlEncount Calc", 2, 0, 0, battleQueryEncounter,
-                                              btlEncountDestroy, battle, battle->encounter.ownerJob);
+                                              btlEncountDestroy, battle, battle->job);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEncount.cpp", 1308);
     BattleEncounterAllocation *allocation = static_cast<BattleEncounterAllocation *>(asdMemAlloc(0x100, 0x100, 0, sizeof(BattleEncounterAllocation), 1));
     BtlEncount *encounter = &allocation->encounter;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail dispatches on the kind through a 10-entry jump table; the compiler emits a compare chain for the same cases */
 #include "common.h"
 
 struct GeometryOwner {
@@ -25,6 +24,13 @@ void FUN_0035105c(GeometryOwner *owner, u32 id, u32 kind)
         break;
     case 2:
         owner->geometry = FUN_00350cf4((u16)id, 0x200000A7);
+        break;
+    case 0:
+    case 3:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
         break;
     }
 }

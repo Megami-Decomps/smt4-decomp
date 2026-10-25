@@ -1,14 +1,8 @@
 #include "common.h"
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-typedef struct BtlMainState {
-    /* 0x000 */ u8 unk000[0xEC];
-    /* 0x0EC */ s32 first;
-    /* 0x0F0 */ s32 second;
-} BtlMainState;
-
-extern BtlMainState *btlGetMainState(void);
 extern s32 scrGetArg(u32 index);
 extern void scrSetResult(s32 value);
 
@@ -17,14 +11,14 @@ u32 scrCommBattleCheckFieldEquals(void)
 {
     s32 which = scrGetArg(0);
     s32 value = scrGetArg(1);
-    BtlMainState *state = btlGetMainState();
+    BtlMainStateA *state = btlGetMainState();
 
     if (which == 0) {
-        if (state->second == value) {
+        if (state->activity.currentAction == value) {
             scrSetResult(1);
             return 1;
         }
-    } else if (state->first == value) {
+    } else if (state->activity.first == value) {
         scrSetResult(1);
         return 1;
     }

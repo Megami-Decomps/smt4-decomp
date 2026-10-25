@@ -14,10 +14,10 @@ s32 scrCommBtlGroupFlagOffCheck(void)
     s32 i;
 
     for (i = 0; i < 0x6D; i++) {
-        BtlUnitEntry *unit = &btlGetMainStateExt()->units[i];
+        BtlEntry *unit = &btlGetMainState()->entries[i];
 
         if ((unit->flags & 0x10) != 0 && (unit->flags & 1) != 0 && (unit->flags & 0x40) == 0
-            && unit->groupId == group && (unit->flagMask & (1 << bit)) == 0) {
+            && unit->id == group && (unit->groupMask & (1 << bit)) == 0) {
             scrSetResult(0);
             return 1;
         }

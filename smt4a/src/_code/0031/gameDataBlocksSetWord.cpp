@@ -1,5 +1,4 @@
 #include "shard/Shard0031.h"
-#include "shard/gameDataBlocksSetWord.h"
 
 extern "C" {
 

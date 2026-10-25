@@ -4,6 +4,8 @@
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 #include <stddef.h>
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "map/mapIf.h"
 
 struct OwnedBufferPair {
     u8 unk00[0x48];
@@ -26,5 +28,65 @@ typedef char GeometryResourcesLayoutCheck[sizeof(GeometryResources) == 0x10 &&
 
 extern "C" void bufferReleaseOwnedPair(OwnedBufferPair* buffers);
 extern "C" OwnedBufferPair* bufferDestroyOwnedPair(OwnedBufferPair* buffers);
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+AsdListBoxItem* asdListBoxFindItem(u32 job, u32 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void gameFlagSlotAdvanceCounter(u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void asdMemoryFreeLocked(void *block);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void aocRecordLookup83(u16 id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void effectSpawnPositionDefault(f32 x, f32 y, f32 z);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

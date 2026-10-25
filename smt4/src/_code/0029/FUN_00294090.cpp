@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps the cache base in r4 from the prologue and builds the entry through the allocation result (r0) in a placement-new style constructor, then copies it to r6; the build allocates r4/r8/r9 differently and lays out the NPC/devil branches in a different order. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
-#include "shard/FUN_0023e3a4.h"
+#include "shard/W6_W6Match3_BattleQueue.h"
 struct AocSystem;
 
 // A cached texture/model resource (0x48 bytes, vtable _ZTV9Obj4206f8): which file it comes from, the file buffer being

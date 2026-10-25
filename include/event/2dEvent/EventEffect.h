@@ -70,4 +70,14 @@ extern "C" {
 s32 FUN_003b6fc4(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_003b61ec(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

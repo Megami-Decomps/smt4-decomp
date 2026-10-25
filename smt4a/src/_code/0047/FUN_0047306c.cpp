@@ -2,7 +2,6 @@
 #include "shard/W4_Match3_AocMainA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "text/TextDraw.h"
-#include "shard/FUN_0047306c.h"
 
 extern "C" {
 u32 spriteHandleCreate(u32 kind);

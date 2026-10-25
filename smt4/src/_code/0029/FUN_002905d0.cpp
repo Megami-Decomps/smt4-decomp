@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail loads g_uiQuest a second time for the first page test (ldr r0,[r0]); built reuses the first load. */
 #include "shard/W4_W4Match2_UiQuest.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 extern "C" {
 

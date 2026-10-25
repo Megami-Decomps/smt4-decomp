@@ -1,6 +1,5 @@
 /* NON_MATCHING: global loads move later and signed halfword loads fold to unsigned before narrowing. */
 #include "battle/btlUI.h"
-#include "shard/FUN_003ae120.h"
 
 struct BattleUiChangeOwner {
     /* 0x0000 */ u8 unk0000[0x4968];

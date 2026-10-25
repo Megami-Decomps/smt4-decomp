@@ -1,6 +1,6 @@
 /* NON_MATCHING: REV-based color extraction and scalar VFP output stores still differ from retail. */
 #include "AsdSDK/AsdDebug.h"
-#include "shard/randomAdvanceShiftRegister.h"
+#include "gfx/QuaternionWorkspace.h"
 
 struct ScatterParams {
     /* 0x00 */ s32 count;

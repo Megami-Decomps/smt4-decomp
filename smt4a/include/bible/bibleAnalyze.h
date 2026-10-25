@@ -10,3 +10,13 @@ u32 FUN_004c3a10(u32 id);
 void FUN_004aa8b0(void *ui, s32 visible);
 
 } /* extern "C" */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 sceneTexturesAreLoaded(void);
+
+#ifdef __cplusplus
+}
+#endif

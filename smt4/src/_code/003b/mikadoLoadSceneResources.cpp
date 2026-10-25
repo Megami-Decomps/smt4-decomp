@@ -1,6 +1,5 @@
 #include "mikado/mikadoMain.h"
 #include "script/scrScriptProcess.h"
-#include "shard/mikadoLoadSceneResources.h"
 
 extern "C" {
 extern const char DAT_00404dec[];

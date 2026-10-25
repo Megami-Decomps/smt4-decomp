@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the 0.0f/1.0f constants before the color packing and stores them with
+/* NON_MATCHING: retail loads the 1.0f/0.0f constants (s1, s0) before the color packing and stores them with
  * two vstr; this build loads them late and pairs them in one vstmia. */
 #include "common.h"
 
@@ -49,8 +49,8 @@ void FUN_00235bfc(s32 mode, ColorRgbm color, f32 red, f32 green, f32 blue, f32 x
     RegistryScene *scene = g_handleRegistry->scene;
     scene->x = x;
     scene->y = y;
-    scene->unk184 = 0.0f;
-    scene->unk188 = 1.0f;
+    scene->unk184 = 1.0f;
+    scene->unk188 = 0.0f;
     scene->z = z;
     scene->color = color;
 }

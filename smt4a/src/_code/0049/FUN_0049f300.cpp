@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push address scheduling and icon cold-branch placement differ. */
+/* NON_MATCHING: only two temporaries (r1/r2) of the final stack-set sequence differ; the icon arm layout now matches. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
@@ -23,19 +23,18 @@ u32 FUN_0049f300(PanelFrameDrawWork *work)
         return 0;
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     if (work->state != 7) {
-        if (work->state != 8 && work->state != 9)
+        if (work->state == 8 || work->state == 9) {
+            if (work->showIcon)
+                FUN_001835b4(2, 0x33, 0x7E, 0, 0, 0xC9);
+        } else {
             FUN_0049d594(work);
-        else if (work->showIcon)
-            FUN_001835b4(2, 0x33, 0x7E, 0, 0, 0xC9);
+        }
     }
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
-    context = g_renderCtx;
-    state = packNibblesAndByte(6, 7, 0);
-    renderStackSet(&context->stackB, state);
+    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     renderCtxResetColorScale(g_renderCtx);
     return 0;
 }

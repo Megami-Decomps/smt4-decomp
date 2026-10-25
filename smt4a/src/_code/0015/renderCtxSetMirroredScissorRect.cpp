@@ -2,7 +2,6 @@
 #include "shard/S1ListPanel.h"
 #include <stddef.h>
 #include "quest_center/qcMain.h"
-#include "shard/FUN_00169db4.h"
 
 typedef char CheckCachedStateSize[sizeof(RenderStateStack) == 0x20 ? 1 : -1];
 typedef char CheckScissorMinimumOffset[offsetof(RenderCtxScissorA, scissorMinimum) == 0x1338 ? 1 : -1];

@@ -1,6 +1,6 @@
 /* NON_MATCHING: captured position vector restores paired y/z conversion; loop-index/record registers and x-conversion scheduling differ. */
 #include "common.h"
-#include "shard/FUN_0033aa6c.h"
+#include "shard/W5_W5Match7_EntrySort.h"
 
 /* The engine record list as this function reads it: its 0x58-byte effect records with their kind word and
  * the navigation slot assigned to them. */

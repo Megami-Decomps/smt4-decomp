@@ -52,4 +52,14 @@ typedef char ShaderBindSymbolUniformOffsetsCheck[
 extern "C" void nn_gr_CTR_Shader_SearchBindSymbol(NativeShaderPrefix *,
                                                   ShaderBindSymbol *, const char *);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void asdModelCommitCommandRange(u32 a, u32 b);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

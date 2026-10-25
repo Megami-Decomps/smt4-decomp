@@ -1,4 +1,5 @@
-#include "battle/BattleActionHistory.h"
+#include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
 struct BattleActionEditorSelection {
@@ -8,11 +9,11 @@ struct BattleActionEditorSelection {
 };
 extern "C" {
 s32 padIsButtonRepeat(u32 button);
-s32 FUN_00336dec(BattleActionHistoryState* battle, s32 group);
-void FUN_003d8a18(BattleActionEditorSelection* selection, BattleActionHistoryState* battle);
+s32 FUN_00336dec(BtlMainState* battle, s32 group);
+void FUN_003d8a18(BattleActionEditorSelection* selection, BtlMainState* battle);
 
 // Navigate action groups/members and restore each action's editable value.
-void btlDebugNavigateActionEditor(BattleActionEditorSelection* selection, BattleActionHistoryState* battle)
+void btlDebugNavigateActionEditor(BattleActionEditorSelection* selection, BtlMainState* battle)
 {
     bool changed = true;
     if (padIsButtonRepeat(5)) {

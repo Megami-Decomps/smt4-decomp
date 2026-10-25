@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses mov r1, #2 where the compiled block uses ldr r1, [r0]. */
 #include "common.h"
 
 struct MapInterface {
@@ -6,11 +5,16 @@ struct MapInterface {
     u32 state;      // 0x3C
 };
 
+static __inline void mapInterfaceSetState(MapInterface *map, u32 state)
+{
+    map->state = state;
+}
+
 extern "C" {
 extern MapInterface* g_mapIf;
 
 void FUN_002342b8(void)
 {
-    g_mapIf->state = 2;
+    mapInterfaceSetState(g_mapIf, 2);
 }
 }

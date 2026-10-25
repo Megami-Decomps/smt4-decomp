@@ -24,7 +24,7 @@ int FUN_0022810c(Owner *owner, int strict)
     }
     btlGetMainState();
     if (FUN_00293230() != 0) {
-        u32 masked = btlGetMainStateExt()->flags44AC & 2;
+        u32 masked = btlGetMainState()->editorControl.flags44AC & 2;
 
         if (masked != 0) {
             return 0;

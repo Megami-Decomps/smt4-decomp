@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_004930e4.h"
+#include "shard/NaviMain.h"
 
 extern "C" {
 

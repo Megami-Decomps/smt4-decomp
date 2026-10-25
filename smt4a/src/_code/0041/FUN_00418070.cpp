@@ -1,4 +1,3 @@
-/* NON_MATCHING: flag clear now matches retail (byte index + int keep-mask locals); retail keeps the constant 0 passed to the inlined writer in a callee-saved register (r6/r7 pair, push {r4-r8}) where armcc propagates the immediate. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
@@ -18,7 +17,7 @@ typedef struct GameFlagBlock418070 {
 
 void FUN_004bb6d8(u32 id, s32 value);
 
-static inline void gameFlagWrite(u32 id, s32 value)
+static inline void gameFlagWrite(u32 id, u32 value)
 {
     u8 *bits = reinterpret_cast<GameFlagBlock418070 *>(gameFlagBlockGet())->bits;
     FUN_004bb6d8(id, value);

@@ -336,3 +336,23 @@ void FUN_00492ac8(u32 unused, u32 value);
 }
 
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00492c84(void *arg0);
+
+#ifdef __cplusplus
+}
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 sysPlayVoice(u32 param_1);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

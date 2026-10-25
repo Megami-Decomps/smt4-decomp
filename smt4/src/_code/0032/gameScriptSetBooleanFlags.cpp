@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses different loop scheduling, comparison branching or packed parameter grouping. */
 #include "common.h"
 
 struct GameFlags {
@@ -12,8 +11,16 @@ s32 scrGetArg(u32 index);
 /* Stores the two script-controlled boolean flags. */
 s32 gameScriptSetBooleanFlags()
 {
-    g_gameState.first = scrGetArg(0) != 0;
-    g_gameState.second = scrGetArg(1) != 0;
+    if (scrGetArg(0) == 0) {
+        g_gameState.first = 0;
+    } else {
+        g_gameState.first = 1;
+    }
+    if (scrGetArg(1) == 0) {
+        g_gameState.second = 0;
+    } else {
+        g_gameState.second = 1;
+    }
     return 1;
 }
 }

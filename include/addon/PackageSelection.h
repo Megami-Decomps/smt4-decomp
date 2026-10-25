@@ -30,4 +30,14 @@ typedef char PackageSelectableRecordProgressOffsetCheck[
     offsetof(PackageSelectableRecord, progress.completionFlag) == 0x5A &&
     offsetof(PackageSelectableRecord, progress.unlockFlag) == 0x5C &&
     sizeof(PackageSelectableRecord) == 0x7C ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+PackageIndexedRecord *FUN_00379958(u32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

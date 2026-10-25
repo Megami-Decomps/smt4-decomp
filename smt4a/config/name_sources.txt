@@ -6592,3 +6592,10 @@
 002c7b8c gameDataSetStatusFlag inferred [med] writes byte `index` of the game-data status block (0x27FB8)
 00162790 textDrawString inferred [high] draws a string on a layer with colour, position, depth, spacing and opacity and returns the drawn advance (twin of smt4 FUN_002be5a4)
 00398464 naviMainEnterState6IfActive inferred [high] switches the navigation menu to state 6 when g_naviMain exists
+003e55d4 _ZN13Obj557ae8SlotC1Ev evidence default constructor of the 0x5c-byte Obj557ae8Slot: the Obj557ae8 constructor runs it over three array members via __aeabi_vec_ctor_nocookie_nodtor
+00380a24 scrFindUnitByRecordId inferred [high] script command: finds the battle unit (or party slot +109) whose roster record id equals arg0 and sets it as the result
+00385444 mapRefreshResourcesForStory inferred [med] reloads map-dependent resources, using the special override map/area variants for story-progress map states
+002376c0 scrOpNegate inferred [high] script opcode: negates the top stack value (or its variable)
+00212880 scrOpLogicalNot inferred [high] script opcode: pops a number and pushes 1 if zero else 0
+00141850 workRangeSetLowerBound inferred [med] sets the lower bound when value is below the limit, returns whether it did
+00328200 naviQuestConfirmAvailable inferred [med] navigation screen up, flags set and quest-confirm input pressed

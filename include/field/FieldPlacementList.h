@@ -30,4 +30,14 @@ typedef char FieldPlacementListLayoutCheck[
     offsetof(FieldPlacementList, pending) == 0x8A2 &&
     sizeof(FieldPlacementList) == 0x8E4 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void fieldBuildAreaPlacementList(FieldPlacementList *list);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

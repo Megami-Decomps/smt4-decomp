@@ -1,6 +1,5 @@
 #include "battle/btlReflect.h"
 #include "common.h"
-#include "shard/btlReflectCreateKind2d.h"
 extern "C" {
 /* Stores both parameters in the selected reflection mode. */
 ReflectAction *btlReflectCreateKind2d(s32 slot, u32 extra, u32 first, u32 second)

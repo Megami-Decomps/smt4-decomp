@@ -4,6 +4,8 @@
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "shard/W6_W6Match8_EffectSelection.h"
 #include "shard/W6_W6Match4_EffectEditorSnapshot.h"
+#include "shard/PlayScene.h"
+#include "ui/MessageMain.h"
 
 struct EffectNode;
 
@@ -95,5 +97,45 @@ extern "C" {
 extern EffectEditorMenuState g_effectEditor;
 EffMenuNode* effMenuNodeCreate(const char* name);
 }
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+unsigned int FUN_0024c3c8(int param_1);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_0024c52c(void *id);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0025f300(PlayScene* work);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 messageDismissNumericBanner(s32 close);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

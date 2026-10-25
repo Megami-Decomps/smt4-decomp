@@ -33,4 +33,74 @@ extern "C" {
 void FUN_00220ffc(void);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00309fcc(u32 a, u32 b);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *libcLocaleGetTables(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void nn_math_ARMv6_MTX34CopyAsm(unsigned int *param_1,unsigned int *param_2);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_001386b4(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+bool FUN_001387c0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00221b70(int index);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void efctSetSpeed(float speed);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

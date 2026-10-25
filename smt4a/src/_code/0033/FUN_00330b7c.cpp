@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mov r0, #0` where armcc emits `push {r4}`. */
 #include "common.h"
 
 extern "C" {
@@ -10,9 +9,11 @@ extern GameBlocks g_gameDataBlocks;
 
 void FUN_00330b7c(void)
 {
+    s32 i;
     SaveWork *work = g_gameDataBlocks.work;
-    for (s32 i = 0; i < 1280; i++) {
-        work->records[i].value = 0;
+    for (i = 0; i < 1280; i++) {
+        SaveRecord *record = &work->records[i];
+        record->value = 0;
     }
 }
 

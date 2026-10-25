@@ -1,4 +1,3 @@
-/* NON_MATCHING: native construction uses different state-constant registers and initialization store grouping. */
 #include "classes/AllocatedSelection.h"
 
 /* Allocates a kind-twelve object from its owner's allocator. */

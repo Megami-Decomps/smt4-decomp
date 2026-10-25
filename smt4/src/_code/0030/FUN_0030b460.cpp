@@ -7,9 +7,9 @@ extern "C" {
 
 u32 FUN_0030b460(void)
 {
-    u8 *btl = reinterpret_cast<u8 *>(btlGetMainState());
+    BtlMainState *btl = btlGetMainState();
 
-    scrSetResult((int)*(s16 *)(btl + 0x1fca));
+    scrSetResult((int)btl->resolution.second);
     return 1;
 }
 

@@ -26,7 +26,7 @@ u32 FUN_003daaf8(s32 level, const StatGrowthParameters *parameters)
     rt_memclr(entries, matching * sizeof(LevelEntry));
     aocCollectLevelEntries(entries, &count, kind, level);
     u16 growth = 0;
-    u32 remaining = (u32)count;
+    s32 remaining = (u32)count;
     for (const LevelEntry *entry = entries; remaining != 0; --remaining, ++entry) {
         u16 levels = 0;
         if (entry->id < level) {

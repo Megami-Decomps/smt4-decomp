@@ -1,7 +1,7 @@
 /* NON_MATCHING: special-page reference uses a 0x944 base rather than grouped 0x900 byte loads; callback predication and page-selection success layout differ (105/107). */
 #include "shard/W5_W5Match7_DataRecord.h"
 #include "shard/W5_W5Match7_UiQuest.h"
-#include "shard/FUN_002f7730.h"
+#include "util/CalleeContracts.h"
 
 struct QuestPageMetadata {
     u8 unk00[6];

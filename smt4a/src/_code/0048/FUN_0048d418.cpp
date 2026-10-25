@@ -1,6 +1,5 @@
 /* NON_MATCHING: for-loop counter lifetimes match; mode predicate grouping and sort/output scratch registers differ. */
 #include "map/mapDepart.h"
-#include "shard/dataTable2BType1Count.h"
 
 /* The destination list this function fills: entries of {active, id} followed by the entry count. */
 struct SelectableEntry {

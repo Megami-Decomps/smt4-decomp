@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail keeps 0/1 results in r6 with one shared return, reloads the battle block per access and orders the switch's per-case stores differently; the logic and calls are the same. */
 #include "common.h"
-#include "shard/FUN_00229c5c.h"
+#include "battle/btlHelp.h"
 
 namespace {
 /* The battle state block: its flags and the index of the acting unit. */

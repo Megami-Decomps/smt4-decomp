@@ -1,4 +1,3 @@
-/* NON_MATCHING: snapshot memset uses r0 for zero and r1 for its address instead of retail's r1/r0; filtering loops match. */
 #include "common.h"
 #include <string.h>
 
@@ -47,7 +46,7 @@ void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
             if (record != NULL) {
                 count = 0;
                 for (s32 index = 0; index < 8; ++index) {
-                    u16 id = record->skills[index];
+                    u32 id = record->skills[index];
                     SkillSnapshotInfo *info = dataTable40FindById(id);
                     if (info != NULL && info->excluded == 0 && !idIsAbove400(id)) {
                         screen->snapshot.skills[member + 1][count++] = id;

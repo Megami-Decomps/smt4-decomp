@@ -29,7 +29,7 @@ extern "C" u32 FUN_004dc3b4(u32 context, u32 first, u32 second, UnitePairEntryIV
             const DevilRecordA *firstRecord = FUN_00184310(first);
             const DevilRecordA *secondRecord = FUN_00184310(second);
             const RaceFusionRecipe *recipe = dataTable05FindByPriorityAndKey(firstRecord->race, secondRecord->race);
-            if (first != second && recipe != NULL) {
+            if (second != first && recipe != NULL) {
                 pair->firstId = first;
                 pair->secondId = second;
                 pair->resultId = recipe->result;

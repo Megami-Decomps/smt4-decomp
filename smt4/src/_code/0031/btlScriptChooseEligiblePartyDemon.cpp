@@ -1,6 +1,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
+#include "battle/BtlMainAccess.h"
 extern "C" {
 u32 scrGetArg(u32 argument);
 PartyDamageSlotsIV *gameGetSlotTable();
@@ -8,7 +10,6 @@ StatBlock *gameGetUnitRecord(s32 index);
 s32 flagWordTestBit(const StatBlock *unit, u32 bit);
 s32 FUN_00295d7c(const StatBlock *unit);
 u32 randNextInRange(u32 maximum);
-BtlMainState *btlGetMainState();
 void scrSetResult(s32 result);
 
 // Choose an eligible reserve demon, falling back to an eligible active combatant.

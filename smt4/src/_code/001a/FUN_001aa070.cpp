@@ -1,4 +1,3 @@
-/* NON_MATCHING: the four-case switch compiles to a compare chain here; retail uses a jump table. */
 #include "script/ScriptVm.h"
 
 extern "C" {
@@ -18,6 +17,8 @@ u32 FUN_001aa070(ScriptVmProcess *process)
         break;
     case SCRIPT_VM_TAG_FLOAT_VAR:
         g_scrFloatVars[process->values[process->depth - 1].u] = -g_scrFloatVars[process->values[process->depth - 1].u];
+        break;
+    case SCRIPT_VM_TAG_RETURN_ADDRESS:
         break;
     }
     process->pc++;

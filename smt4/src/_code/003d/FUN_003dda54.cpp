@@ -4,7 +4,7 @@
 
 extern "C" {
 
-BtlUnitEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
+BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 listedId);
 
 /* Queues the target action and, when requested, a follow-up action for its listed battle unit. */
 u32 FUN_003dda54(u32 actorId, u32 options, u32 value, ReflectTarget *target, s32 followupActor, s32 followupValue)
@@ -14,7 +14,7 @@ u32 FUN_003dda54(u32 actorId, u32 options, u32 value, ReflectTarget *target, s32
     request->target = reinterpret_cast<u32>(target);
     request->value = value;
     if (followupActor >= 0) {
-        BtlUnitEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), target->entryIndex);
+        BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), target->entryIndex);
         if (entry != NULL && followupValue >= 0) {
             request = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(followupActor), 0, options);
             request->kind = 6;

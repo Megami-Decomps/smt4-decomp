@@ -40,4 +40,14 @@ typedef char LinkedItemReferenceLayout[
     offsetof(LinkedItem, reference.source) == 0x94 &&
     offsetof(LinkedItem, reference.flags) == 0x98 &&
     sizeof(LinkedItem) == 0xb4 && sizeof(LinkedItems) == 0x90 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_003ca0ec(LinkedItems *items, LinkedItem *item);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

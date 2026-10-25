@@ -1,5 +1,5 @@
 #include "battle/btlUI.h"
-#include "shard/FUN_004ab718.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 

@@ -63,4 +63,14 @@ extern "C" {
 u32 FUN_00167c14(u32 *x, u32 *y, s32 mode);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 asdTMTexTableGetHeaderValue(u32 table, u32 node);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

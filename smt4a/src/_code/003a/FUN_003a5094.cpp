@@ -24,7 +24,7 @@ u32 FUN_003a5094(void)
                current->values[3] != saved.values[3] ||
                current->values[4] != saved.values[4] ||
                current->values[5] != saved.values[5] ||
-               current->values[6] != saved.values[6];
+               saved.values[6] != current->values[6];
     }
     return 0;
 }

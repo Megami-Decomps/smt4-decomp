@@ -2,7 +2,7 @@
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 #include "gamedata/DataTable.h"
-#include "shard/FUN_002903f0.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 namespace {
 struct QuestStatusLabel {

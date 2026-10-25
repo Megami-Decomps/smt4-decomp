@@ -12,7 +12,7 @@ void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
                                 f32 x, f32 y, f32 opacity,
                                 f32 extraZero, f32 scale);
 
-void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, u16 textId,
+void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, s16 textId,
                   s32 entryIndex, s32 alternateStyle, s32 fade, f32 scale)
 {
     const f32 opacity = static_cast<f32>(256 - fade) * (1.0f / 256.0f);

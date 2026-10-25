@@ -33,7 +33,7 @@ u32 scrComm_Battle_IsScriptUnitStatNegative(void)
     Unit *unit;
     s32 value;
 
-    ref = reinterpret_cast<UnitRef *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    ref = reinterpret_cast<UnitRef *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     unit = ref->unit;
     value = unit->stats[slot];
     scrSetResult(value <= -1);

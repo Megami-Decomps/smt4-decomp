@@ -1,5 +1,6 @@
 /* NON_MATCHING: cache-array addressing and source position copy grouping differ, with different action/state register roles. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "shard/BtlScriptTargets.h"
 #include "battle/btlAction.h"
 #include "battle/BattleRosterCache.h"
@@ -34,7 +35,7 @@ void FUN_003cc944(BtlMainState **battle, const BtlScriptActor *actor, s32 allAct
 {
     for (s32 i = 0; i < 133; ++i) {
         BtlMainState *state = *battle;
-        const BtlActionRecord *action = &state->actions.records[i];
+        const BtlActionRecord *action = &state->actions[i];
         if (action->participant.combatantIndex < 0 ||
             (!allActors && !actor->targets[action->participant.combatantIndex]) ||
             !(action->status & 1) || !(action->status & 0x80))

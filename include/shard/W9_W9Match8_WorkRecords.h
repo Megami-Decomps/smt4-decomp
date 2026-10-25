@@ -1377,4 +1377,14 @@ typedef char PickObjectEndPrefixALayoutCheck[
 
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00299bc4(const void *unit, s32 mode);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -26,7 +26,7 @@ void asdMemFree(void *);
 u32 scrTalkChooseReplacementDemon()
 {
     const TalkReplacementDefinition *source = dataTable00FindById((u16)scrGetArg(0));
-    u16 successorId = source->successor;
+    s16 successorId = source->successor;
     const TalkReplacementDefinition *successor = dataTable00FindById(successorId);
     FUN_00184310(successorId);
     if (!successorId || !successor || !(successor->flags & 0x80) ||

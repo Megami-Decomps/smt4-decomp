@@ -25,7 +25,7 @@ void FUN_0037c7a8(s32 id)
         return;
     for (s32 table = 0; table < 4; ++table) {
         CollisionMarkRecord *record = g_mapCollision.records[table];
-        for (s32 remaining = g_mapCollision.counts[table]; remaining > 0; --remaining, ++record) {
+        for (u32 remaining = g_mapCollision.counts[table]; remaining > 0; --remaining, ++record) {
             if (record->id == id)
                 record->marked = 1;
         }

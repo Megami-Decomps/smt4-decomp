@@ -36,11 +36,11 @@ void FUN_0027e5e4(BattleUnitStateWork* work)
         work->timer = 0;
         work->step = 0;
         if (work->actor >= 0) {
-            reinterpret_cast<BtlState*>(btlGetMainState())->units[work->actor].flags &= ~0x80000;
+            btlGetMainState()->entries[work->actor].flags &= ~0x80000;
         }
     }
     if (work->actor >= 0) {
-        BtlUnitEntry* entry = &reinterpret_cast<BtlState*>(btlGetMainState())->units[work->actor];
+        BtlEntry* entry = &btlGetMainState()->entries[work->actor];
         if (entry != NULL) {
             if (data->unk0FA & 0x3E8) {
                 entry->flags |= 0x80000;

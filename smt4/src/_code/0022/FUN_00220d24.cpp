@@ -1,5 +1,5 @@
 #include "ui/ButtonHelp.h"
-#include "shard/FUN_00220d24.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;

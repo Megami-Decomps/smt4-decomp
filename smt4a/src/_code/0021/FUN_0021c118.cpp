@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_0021c118.h"
+#include "result/WhisperEffect.h"
 
 extern "C" {
 

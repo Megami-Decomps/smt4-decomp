@@ -1,7 +1,6 @@
 /* NON_MATCHING: shared phase helpers outline differently, state-null checks merge, and round-reset/effect aggregate scheduling differs from retail. */
 #include "battle/BattleUnitSlot.h"
 #include <stddef.h>
-#include "shard/FUN_002080e8.h"
 
 struct BattleTaskActor {
     u8 unk00[0x50];
@@ -304,7 +303,7 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
     FUN_00338cfc(work, 1);
     if (!(work->parameters.mode.flags & 8))
         FUN_0027dbc8(3, 1);
-    BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+    BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
     if (unit && unit->stats) {
         unit->stats->first = 0;
         unit->stats->second = 0;
@@ -553,15 +552,15 @@ extern "C" s32 battleMainProcessUpdate()
             break;
         }
         {
-            u8 mode = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->mode;
+            u8 mode = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)))->mode;
             if (mode > 0x21)
                 setBattleTaskState(15);
             if (mode == 1) {
-                BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+                BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
                 if (!unit || !(unit->flags & 0x1080))
                     break;
             }
-            BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
+            BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
             if (unit && (unit->flags & 0x1080))
                 break;
             if (mode == 2)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: native construction uses different state-constant registers and initialization store grouping. */
+/* NON_MATCHING: register-only: retail keeps the minus-one state in r1 (built r2); stores and stm grouping match. */
 #include "classes/AllocatedSelection.h"
 
 /* Allocates a kind-six operation from its owner's allocator. */

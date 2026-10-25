@@ -62,4 +62,14 @@ typedef char InheritedValueLayoutCheck[
     offsetof(InheritedValueCollection, firstCount) == 0xa0 &&
     sizeof(InheritedValueCollection) == 0xa8 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 FUN_00183468(u32 arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

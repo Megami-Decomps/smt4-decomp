@@ -1,6 +1,5 @@
 /* NON_MATCHING: indexed slot update and cached member-pointer dispatch scheduling differ. */
 #include "gfx/InheritedValues.h"
-#include "shard/FUN_00183468.h"
 
 extern "C" InheritedValueCollection::Appender DAT_00544d14[2];
 

@@ -1,20 +1,11 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 175 rows); retail spills r0-r3 and reloads the second argument from the stack and lays the per-kind cases out as shared tails */
 #include "battle/btlReflect.h"
 #include "common.h"
-
-// Battle main state: the cursor extents and the flag word are the only fields read here.
-struct BtlMainState {
-    u8 unk0000[0x44a0];
-    u32 flags;              // 0x44a0: 0x400 = wide cursor, 0x1000 = input locked
-    u8 unk44a4[0x4968 - 0x44a4];
-    s16 cursor;             // 0x4968
-    s16 limit;              // 0x496a
-};
+#include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 
-BtlMainState* btlGetMainState(void);
 s32 FUN_00293230(BtlMainState* state);
 
 void FUN_002505c0(u32 a, u32 b, u32 event, s32 c, s32 d, s32 e, s32 f);
@@ -26,10 +17,10 @@ u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
 {
     s32 moveX = 0;
     s32 moveY = 0;
-    bool wide = (btlGetMainState()->flags & 0x400) != 0;
+    bool wide = (btlGetMainState()->battleFlags & 0x400) != 0;
     BtlMainState* state = btlGetMainState();
-    s32 cursor = state->cursor;
-    s32 limit = state->limit;
+    s32 cursor = state->menuCursor.x;
+    s32 limit = state->menuCursor.y;
     bool atStart = cursor == 0;
     bool canAdvance = cursor < limit;
     bool check = false;
@@ -101,12 +92,12 @@ u32 FUN_0026beb4(u32 id, u32 arg, u32 kind, u32 unused, f32 speed)
         break;
     }
 
-    if (check && FUN_00293230(state) == 0 && (*reinterpret_cast<u32*>(reinterpret_cast<u8*>(state) + 0x44a0) & 0x1000) == 0) {
+    if (check && FUN_00293230(state) == 0 && (state->battleFlags & 0x1000) == 0) {
         FUN_002505c0(id, arg, 0x01000175, 0, 0, 0, 0);
     }
 
-    if (state->cursor + moveX > 9) moveX = 9 - state->cursor;
-    if (state->limit + moveY > 9) moveY = 9 - state->limit;
+    if (state->menuCursor.x + moveX > 9) moveX = 9 - state->menuCursor.x;
+    if (state->menuCursor.y + moveY > 9) moveY = 9 - state->menuCursor.y;
     f32 stepX = (f32)moveX;
     f32 stepY = (f32)moveY;
     ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, arg);

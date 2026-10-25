@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/naviGetActiveStateValue.h"
+#include "shard/W6_W6Match7_NumericStepper.h"
 struct GameState { u8 unk000[1120]; u8 alternate; };
 struct Navigation { u8 unk00[12]; u32 first; u8 gap[44]; u32 second; };
 extern "C" {

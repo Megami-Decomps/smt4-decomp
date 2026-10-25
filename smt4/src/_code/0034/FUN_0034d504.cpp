@@ -1,4 +1,4 @@
-/* NON_MATCHING: Visual-part enable stores use different Boolean and register scheduling. */
+/* NON_MATCHING: retail computes the last part's boolean before loading its part pointer; the build loads the pointer chain first. */
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
 // Selects one of three visual parts according to the animation state.

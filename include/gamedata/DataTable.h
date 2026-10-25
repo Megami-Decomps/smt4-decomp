@@ -40,4 +40,34 @@ typedef char DataTableViewCountOffsetCheck[offsetof(DataTableView<u32>, count) =
 #endif
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u8 *FUN_00282be4(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0029dfc0(int value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u32 btlMainGetUnk14(void);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

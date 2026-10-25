@@ -38,4 +38,54 @@ extern "C" {
 void bgmStop(s32 id, u32 fadeFrames, s32 force);
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+u16 FUN_002903f0(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_00290d5c(u8 value);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void nodeTreeReleaseItem(u8 *item);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_0021b390(u32 context, s32 category, s32 id, char *destination);
+
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int FUN_0028e9d0(unsigned arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

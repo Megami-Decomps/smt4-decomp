@@ -3,7 +3,7 @@
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
-#include "shard/loadSlotIsLoaded.h"
+#include "battle/btlDebug.h"
 
 struct HowToWork {
     u32 job;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: store scheduling differs: retail writes mode before mask/format; compiler writes mask/format first. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -10,9 +9,9 @@ s32 FUN_00281024(RenderInitialState *state)
 {
     sysMemClear(state, sizeof(RenderInitialState));
     state->next = 0;
+    state->format = 0xDE1;
     state->mode = 2;
     state->flags = 0x10000;
-    state->format = 0xDE1;
     state->count = 0;
     return 0;
 }

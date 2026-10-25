@@ -1,5 +1,5 @@
 #include "shard/GlobalBlocks.h"
-#include "shard/FUN_00183468.h"
+#include "gfx/InheritedValues.h"
 
 extern "C" {
 

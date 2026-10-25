@@ -26,7 +26,7 @@ extern u8 LAB_00123c98;
 extern u8 LAB_00123cb0;
 
 extern s32 FUN_0011cec8(u32 **out);
-extern s32 FUN_002bcc60(u32 *dst, CallbackList *callbacks, void *main, void **context, RegisterInfo info);
+extern u32 FUN_002bcc60(u32 *dst, CallbackList *callbacks, void *main, void **context, RegisterInfo info);
 extern void FUN_002c526c(void);
 extern void FUN_0011cd24(void);
 

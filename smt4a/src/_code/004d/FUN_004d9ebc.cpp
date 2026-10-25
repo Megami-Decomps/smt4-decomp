@@ -1,4 +1,3 @@
-/* NON_MATCHING: statistic values use different registers; instruction sequence otherwise matches. */
 #include "gamedata/UnitStatInitialization.h"
 #include "shard/Shard0032.h"
 
@@ -27,17 +26,17 @@ void FUN_004d9ebc(u32 categoryId)
     unit->sortKey = entry->sortKey;
     u16 health = entry->stats[0];
     unit->base[0] = health;
-    u16 mana = entry->stats[1];
+    s16 mana = entry->stats[1];
     unit->base[1] = mana;
     u16 stat2 = entry->stats[2];
     unit->base[2] = stat2;
-    u16 stat4 = entry->stats[4];
+    s16 stat4 = entry->stats[4];
     unit->base[4] = stat4;
     u16 stat5 = entry->stats[5];
     unit->base[5] = stat5;
     u16 stat6 = entry->stats[6];
     unit->base[6] = stat6;
-    u16 stat3 = entry->stats[3];
+    s16 stat3 = entry->stats[3];
     unit->base[3] = stat3;
     unit->maximum[0] = health;
     unit->current[0] = health;

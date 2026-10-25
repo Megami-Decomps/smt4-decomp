@@ -1,5 +1,4 @@
 #include "shard/W5_W5Match7_FlagBanks.h"
-#include "shard/gameFlagsTestThirdBank.h"
 
 extern "C" {
 

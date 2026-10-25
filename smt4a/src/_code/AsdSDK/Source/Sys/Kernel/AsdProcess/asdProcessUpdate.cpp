@@ -1,6 +1,6 @@
 /* NON_MATCHING: control flow of the three passes differs from retail (shared tails, gotos). */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/FUN_001696f4.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 extern AsdProcessState g_asdProcess;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail argument/return register scheduling differs from the typed helper. */
 #include "common.h"
 
 struct CountdownState {
@@ -11,9 +10,14 @@ struct CountdownGlobals {
 };
 extern "C" {
 extern CountdownGlobals g_countdown;
+static __inline void countdownSetMode(CountdownState *state, u8 mode)
+{
+    state->mode = mode;
+}
+
 /* Switches the countdown mode. */
 void FUN_003aacd0()
 {
-    g_countdown.state->mode = 4;
+    countdownSetMode(g_countdown.state, 4);
 }
 }

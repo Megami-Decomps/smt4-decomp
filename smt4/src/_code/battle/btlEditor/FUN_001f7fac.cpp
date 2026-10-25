@@ -1,5 +1,6 @@
 /* NON_MATCHING: editor flag address register and literal-pool order differ from retail. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "battle/EnemyEditor.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -36,14 +37,14 @@ void btlReflectQueueKind34(s32 mode, s32 index);
 
 void FUN_001f7fac(BtlMainState *battle)
 {
-    u32 editorJob = taskCreateDraw("btlEditor Calc", 2, 0, 0, jobDispatchOptionalOwner, FUN_002c9edc, battle, battle->encounter.ownerJob);
+    u32 editorJob = taskCreateDraw("btlEditor Calc", 2, 0, 0, jobDispatchOptionalOwner, FUN_002c9edc, battle, battle->job);
     battle->editor.job = editorJob;
     taskCreateDraw("btlEditor DrawUp", 0x73, 0, 0, battleEditorRunForJob, 0, battle, editorJob);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlEditor.cpp", 972);
     EditorSessionState *session = static_cast<EditorSessionState *>(asdMemAlloc(0x100, 0x100, 0, sizeof(EditorSessionState), 1));
     DAT_00435ce8 = session;
     session->initial.mode = 0;
-    session->initial.actor = battle->actions.completedCount;
+    session->initial.actor = battle->completedCount;
     session->editor.selection = -1;
     session->initial.leftSelection = -1;
     session->initial.rightSelection = -1;

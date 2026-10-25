@@ -3,7 +3,6 @@
 #include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
 #include "script/scrScriptProcess.h"
-#include "shard/FUN_0027db24.h"
 
 struct ScriptFile;
 struct ScriptProcessWork;

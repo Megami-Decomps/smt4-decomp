@@ -32,4 +32,14 @@ struct BattleVersionResources {
 
 extern "C" void FUN_00240614(BattleVersionResources* resources);
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+s32 FUN_0023ea64(u8 *arg0);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

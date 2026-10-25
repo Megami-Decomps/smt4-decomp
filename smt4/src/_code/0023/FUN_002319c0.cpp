@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/FUN_002319c0.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 

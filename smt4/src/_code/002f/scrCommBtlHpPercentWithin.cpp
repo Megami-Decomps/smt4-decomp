@@ -15,10 +15,10 @@ u32 scrCommBtlHpPercentWithin(void)
     s32 index;
 
     for (index = 0; index < 0x6D; index++) {
-        BtlUnitEntry *unit = &btlGetMainStateExt()->units[index];
+        BtlEntry *unit = &btlGetMainState()->entries[index];
 
         if ((unit->flags & 0x10) && (unit->flags & 1) && !(unit->flags & 0x40)) {
-            maxSum += unit->hpMax;
+            maxSum += unit->maxHp;
             curSum += unit->hp;
         }
     }

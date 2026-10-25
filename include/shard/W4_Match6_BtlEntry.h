@@ -4,8 +4,6 @@
 
 #include "common.h"
 
-struct BtlActionRecord;
-
 #define BTL_ENTRY_COUNT 0x6D
 
 #define BTL_ENTRY_FLAG_ACTIVE   0x01
@@ -40,15 +38,36 @@ struct BtlEntryActionIV {
 };
 typedef char BtlEntryActionIVSizeCheck[sizeof(BtlEntryActionIV) == 8 ? 1 : -1];
 
+/* A unit's detail record: bit 9 of the halfword at 0x16 marks an eligible unit. */
+struct BtlUnitDetail {
+    /* 0x00 */ u8 unk00[0x16];
+    /* 0x16 */ u16 flags;
+};
+
+/* The object a unit is linked to; its id at +0x46 is what a script refers to the unit by. */
+typedef struct BtlUnitLink {
+    /* 0x00 */ u8 unk00[0xE];
+    /* 0x0E */ s16 maxHp;
+    /* 0x10 */ u8 unk10[0x36];
+    /* 0x46 */ u16 id;
+} BtlUnitLink;
+
+struct BtlUnitSource {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ s16 maxHp;
+};
+
 typedef struct BtlEntry {
     /* 0x000 */ u32 flags;
     union {
-        /* 0x004 */ u8 unk004[0x6E];
+        /* 0x004 */ u8 unk004[0x6A];
         struct {
             /* 0x004 */ u8 unk004[4];
             /* 0x008 */ s16 ids[50];
         } members;
     };
+    /* 0x06E */ s16 selectionIndex;
+    /* 0x070 */ u8 unk070[2];
     /* 0x072 */ s16 stat[12];       /* indexed by the script's kind (7, 10 and 11 are used) */
     union {
         /* 0x08A */ u8 unk08a[0xCE - 0x8A];
@@ -57,8 +76,10 @@ typedef struct BtlEntry {
             u16 values[9];       /* 0x0AE */
         } modifiers;
         struct {
-            u8 unk08a[0xE];
-            s16 unk098;          /* 0x098: positive while the entry can still act */
+            u8 unk08a[0xC];
+            /* 0x096 */ s16 value96;
+            /* 0x098 */ s16 unk098;          /* positive while the entry can still act */
+            /* 0x09A */ s16 counter;         /* positive while the entry has a pending effect */
         } turn;
         struct {
             s16 unk08a;            /* 0x08A */
@@ -70,28 +91,47 @@ typedef struct BtlEntry {
         } effects;
     };
     /* 0x0CE */ u16 id;             /* the id scripts refer to the entry by */
-    /* 0x0D0 */ u8 unk0d0[0x1B4 - 0xD0];
-    /* 0x1B4 */ s16 value;          /* returned by the script command that looks an entry up by listed id */
+    /* 0x0D0 */ u8 unk0d0[4];
+    /* 0x0D4 */ s16 unk0D4;
+    /* 0x0D6 */ u8 unk0d6[2];
+    /* 0x0D8 */ u32 identity;       /* the unit's identity key, matched against the action history */
+    /* 0x0DC */ u8 unk0dc[0x1B4 - 0xDC];
+    /* 0x1B4 */ s16 hp;
     /* 0x1B6 */ s16 maxHp;
     /* 0x1B8 */ s16 mp;
     /* 0x1BA */ s16 maxMp;
-    /* 0x1BC */ u8 unk1bc[0xa];
+    /* 0x1BC */ u8 unk1bc[6];
+    /* 0x1C2 */ s16 speed;
+    /* 0x1C4 */ s16 luck;
     /* 0x1C6 */ u16 groupMask;      /* one bit per script group */
+    /* 0x1C8 */ u8 unk1c8[4];
+    /* 0x1CC */ u16 level;
+    /* 0x1CE */ u8 unk1CE[0x24];
+    /* 0x1F2 */ u16 values[0x12];   /* bits 10 and up hold the entry's kind */
+    /* 0x216 */ u8 unk216[0xA];
+    struct {
+        /* 0x220 */ BtlEntryActionIV selected;
+        /* 0x228 */ BtlEntryActionIV available[5];
+    } actionList;
+    /* 0x250 */ u8 unk250[4];
+    /* 0x254 */ s16 speedBonus;
+    /* 0x256 */ u8 unk256[0x22];
     union {
-        /* 0x1C8 */ u8 unk1c8[0x278 - 0x1C8];
-        struct {
-            u8 unk1C8[0x58];
-            /* 0x220 */ BtlEntryActionIV selected;
-            /* 0x228 */ BtlEntryActionIV available[5];
-        } actionList;
+        /* 0x278 */ BtlEquip *equipA;
+        /* 0x278 */ BtlUnitSource *source;
     };
-    /* 0x278 */ BtlEquip *equipA;
-    /* 0x27C */ BtlEquip *equipB;
+    union {
+        /* 0x27C */ BtlEquip *equipB;
+        /* 0x27C */ BtlUnitLink *link;
+    };
     union {
         /* 0x280 */ u32 unk280;
         /* 0x280 */ BtlEquip *reserve;
     };
-    /* 0x284 */ void *devil;        /* non-NULL when the entry is a demon */
+    union {
+        /* 0x284 */ void *devil;        /* non-NULL when the entry is a demon */
+        /* 0x284 */ BtlUnitDetail *detail;
+    };
 } BtlEntry; /* 0x288 bytes */
 
 typedef char BtlEntryMaxHpOffsetCheck[__INTADDR__(&((BtlEntry *)0)->maxHp) == 0x1B6 ? 1 : -1];
@@ -106,174 +146,37 @@ typedef char BtlEntryActionOffsetsCheck[
     __INTADDR__(&((BtlEntry *)0)->actionList.available) == 0x228 &&
     __INTADDR__(&((BtlEquip *)0)->weapon.id) == 4 &&
     sizeof(BtlEntry) == 0x288 && sizeof(BtlEquip) == 0x44 ? 1 : -1];
+typedef char BtlEntryUnitViewOffsets[
+    __INTADDR__(&((BtlEntry *)0)->members.ids) == 8 &&
+    __INTADDR__(&((BtlEntry *)0)->selectionIndex) == 0x6E &&
+    __INTADDR__(&((BtlEntry *)0)->turn.value96) == 0x96 &&
+    __INTADDR__(&((BtlEntry *)0)->turn.unk098) == 0x98 &&
+    __INTADDR__(&((BtlEntry *)0)->turn.counter) == 0x9A &&
+    __INTADDR__(&((BtlEntry *)0)->level) == 0x1CC &&
+    __INTADDR__(&((BtlEntry *)0)->values) == 0x1F2 &&
+    __INTADDR__(&((BtlEntry *)0)->equipA) == 0x278 &&
+    sizeof(BtlEntry) == 0x288 ? 1 : -1];
+typedef char BtlEntryUnitLinkOffsets[
+    __INTADDR__(&((BtlEntry *)0)->unk0D4) == 0xD4 &&
+    __INTADDR__(&((BtlEntry *)0)->hp) == 0x1B4 &&
+    __INTADDR__(&((BtlEntry *)0)->source) == 0x278 &&
+    __INTADDR__(&((BtlEntry *)0)->link) == 0x27C &&
+    __INTADDR__(&((BtlEntry *)0)->detail) == 0x284 &&
+    __INTADDR__(&((BtlUnitDetail *)0)->flags) == 0x16 &&
+    __INTADDR__(&((BtlUnitSource *)0)->maxHp) == 0x1C &&
+    __INTADDR__(&((BtlUnitLink *)0)->id) == 0x46 &&
+    sizeof(BtlUnitLink) == 0x48 ? 1 : -1];
+typedef char BtlEntrySpeedOffsets[
+    __INTADDR__(&((BtlEntry *)0)->speed) == 0x1C2 &&
+    __INTADDR__(&((BtlEntry *)0)->speedBonus) == 0x254 &&
+    sizeof(BtlEntry) == 0x288 ? 1 : -1];
 
-struct BtlEncounterEntry {
-    s32 id;
-    s16 listedId;
-    s8 category;
-    u8 unk07[0x19];
-};
-typedef char BtlEncounterEntrySizeCheck[sizeof(BtlEncounterEntry) == 0x20 ? 1 : -1];
-
-struct BtlLoadedActionResource {
-    u32 unk00;
-    s32 id; /* 0x04 */
-};
-
-typedef struct BtlMainState {
-    union {
-        /* 0x0000 */ u8 unk0000[0x1FC0];
-        struct {
-            u8 prefix[0x58];
-            /* 0x58 */ u32 job;
-        } editor;
-        struct {
-            u8 unk000BeforeSprite[0xC0];
-            /* 0x0C0 */ s32 templateIndex;
-            /* 0x0C4 */ s32 fallbackIndex;
-            u8 unk0C8[0x7C];
-            /* 0x144 */ void *metadata;
-            /* 0x148 */ s32 metadataIndex;
-            u32 unk14C;
-            /* 0x150 */ s32 bank;
-            /* 0x154 */ s32 page;
-            /* 0x158 */ u32 coordinates[5];
-        } spriteSource;
-        struct {
-            u8 prefix[0x760];
-            /* 0x760 */ s32 unitIndex;
-        } talk;
-        struct {
-            u8 prefix[0x1E88];
-            /* 0x1E88 */ void *file;
-        } arrangement;
-        struct {
-            u8 unk0000[0x1E98];
-            /* 0x1E98 */ struct BtlActionRecord *records;
-            /* 0x1E9C */ u8 padding1E9C;
-            /* 0x1E9D */ u8 completedCount;
-        } actions;
-        struct {
-            u32 ownerJob;
-            u32 unk04;
-            u32 drawJob;
-            u8 unk0c[0xb4];
-            s32 encounterId; /* 0xc0 */
-            u8 unkc4[0x1c];
-            u32 flags; /* 0xe0 */
-            u8 unke4[0x310];
-            BtlEncounterEntry records[50]; /* 0x3f4 */
-        } encounter;
-        struct {
-            u8 unk0000[0x84];
-            s32 index; /* 0x84 */
-            s32 mode; /* 0x88 */
-        } actionState;
-    };
-    /* 0x1FC0 */ BtlEntry *entries; /* BTL_ENTRY_COUNT entries */
-    union {
-        /* 0x1FC4 */ u8 unk1fc4[0xC];
-        s16 eventCount; /* 0x1fc4 */
-        struct {
-            u8 unk1FC4[2];
-            /* 0x1FC6 */ s16 gate;
-        } emergencyAction;
-        struct {
-            u8 unk1FC4[4];
-            /* 0x1FC8 */ s16 kind;
-        } resolution;
-    };
-    /* 0x1FD0 */ s64 pendingAction;
-    union {
-        /* 0x1FD8 */ u8 unk1fd8[0x44A0 - 0x1FD8];
-        /* 0x1FD8 */ s64 secondaryPendingAction;
-        struct {
-            u8 unk1FD8[0x15C];
-            /* 0x2134 */ BtlLoadedActionResource *resources[42];
-            /* 0x21DC */ s16 retainedIds[42];
-            u8 unk2230[0x2224];
-            /* 0x4454 */ s32 selectedAction;
-            /* 0x4458 */ BtlLoadedActionResource *selectedResource;
-        } actionCleanup;
-        struct {
-            u8 prefix1FD8[0x258];
-            u32 messageHandle;
-        } dialog;
-    };
-    /* 0x44A0 */ u32 battleFlags;
-    union {
-        /* 0x44A4 */ u8 unk44a4[0x49C0 - 0x44A4];
-        /* 0x44A4 */ u32 spriteFlags;
-        struct {
-            u8 unk44a4[4];
-            /* 0x44A8 */ u32 flags;
-        } editorControl;
-        struct {
-            u8 unk44a4[0x13];
-            u8 blocked; /* 0x44b7 */
-        } encounterControl;
-    };
-    /* 0x49C0 */ s32 selectedGroup;  /* 0xff when no group is selected */
-    /* 0x49C4 */ u8 unk49c4;
-    /* 0x49C5 */ s8 hasActiveEntry;
-} BtlMainState;
-
-typedef char BtlMainStatePendingActionOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->pendingAction) == 0x1FD0 ? 1 : -1];
-typedef char BtlMainStateHasActiveEntryOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->hasActiveEntry) == 0x49C5 ? 1 : -1];
-typedef char BtlMainStateBattleFlagsOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->battleFlags) == 0x44A0 ? 1 : -1];
-typedef char BtlMainStateSelectedGroupOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->selectedGroup) == 0x49C0 ? 1 : -1];
-typedef char BtlMainStateActionCleanupOffsets[
-    __INTADDR__(&((BtlMainState *)0)->actionCleanup.resources) == 0x2134 &&
-    __INTADDR__(&((BtlMainState *)0)->actionCleanup.retainedIds) == 0x21DC &&
-    __INTADDR__(&((BtlMainState *)0)->actionCleanup.selectedAction) == 0x4454 &&
-    __INTADDR__(&((BtlMainState *)0)->actionCleanup.selectedResource) == 0x4458 &&
-    sizeof(BtlMainState) == 0x49C8 ? 1 : -1];
-typedef char BtlMainStateSecondaryPendingActionOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->secondaryPendingAction) == 0x1FD8 &&
-    sizeof(BtlMainState) == 0x49C8 ? 1 : -1];
 typedef char BtlEquipmentSkillIdsOffsetCheck[
     __INTADDR__(&((BtlEquip *)0)->skillIds) == 0x34 && sizeof(BtlEquip) == 0x44 ? 1 : -1];
-typedef char BtlMainStateDialogOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->dialog.messageHandle) == 0x2230 &&
-    sizeof(BtlMainState) == 0x49C8 ? 1 : -1];
-typedef char BtlMainStateEmergencyActionGateOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->emergencyAction.gate) == 0x1FC6 &&
-    sizeof(BtlMainState) == 0x49C8 ? 1 : -1];
-typedef char BtlMainStateActionRecordsOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->actions.records) == 0x1E98 ? 1 : -1];
-typedef char BtlMainStateArrangementFileOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->arrangement.file) == 0x1E88 ? 1 : -1];
-typedef char BtlMainStateTalkUnitOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->talk.unitIndex) == 0x760 ? 1 : -1];
-typedef char BtlMainStateCompletedCountOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->actions.completedCount) == 0x1E9D ? 1 : -1];
-typedef char BtlMainStateEditorOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->editor.job) == 0x58 &&
-    __INTADDR__(&((BtlMainState *)0)->editorControl.flags) == 0x44A8 ? 1 : -1];
-typedef char BtlMainEncounterOffsetsCheck[
-    __INTADDR__(&((BtlMainState *)0)->encounter.drawJob) == 8 &&
-    __INTADDR__(&((BtlMainState *)0)->encounter.encounterId) == 0xc0 &&
-    __INTADDR__(&((BtlMainState *)0)->encounter.flags) == 0xe0 &&
-    __INTADDR__(&((BtlMainState *)0)->encounter.records) == 0x3f4 &&
-    __INTADDR__(&((BtlMainState *)0)->encounterControl.blocked) == 0x44b7 &&
-    sizeof(BtlMainState) == 0x49c8 ? 1 : -1];
-typedef char BtlMainActionStateOffsetsCheck[
-    __INTADDR__(&((BtlMainState *)0)->actionState.index) == 0x84 &&
-    __INTADDR__(&((BtlMainState *)0)->actionState.mode) == 0x88 &&
-    __INTADDR__(&((BtlMainState *)0)->eventCount) == 0x1fc4 &&
-    sizeof(BtlMainState) == 0x49c8 ? 1 : -1];
-typedef char BtlMainSpriteSourceOffsetsCheck[
-    __INTADDR__(&((BtlMainState *)0)->spriteSource.templateIndex) == 0xC0 &&
-    __INTADDR__(&((BtlMainState *)0)->spriteSource.metadata) == 0x144 &&
-    __INTADDR__(&((BtlMainState *)0)->spriteSource.coordinates) == 0x158 &&
-    __INTADDR__(&((BtlMainState *)0)->spriteFlags) == 0x44A4 &&
-    sizeof(BtlMainState) == 0x49C8 ? 1 : -1];
-typedef char BtlMainResolutionKindOffsetCheck[
-    __INTADDR__(&((BtlMainState *)0)->resolution.kind) == 0x1fc8 &&
-    sizeof(BtlMainState) == 0x49c8 ? 1 : -1];
+
+typedef char BtlEntryIdentityLuckOffsets[
+    __INTADDR__(&((BtlEntry *)0)->identity) == 0xD8 &&
+    __INTADDR__(&((BtlEntry *)0)->luck) == 0x1C4 &&
+    sizeof(BtlEntry) == 0x288 ? 1 : -1];
 
 #endif

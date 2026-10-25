@@ -1,7 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a5200` (_code @ 0x3a5200, 0xe58 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-#include "shard/FUN_002bf520.h"
+#include "camp/CampCec/CampCecSetting.h"
 
 extern "C" {
 

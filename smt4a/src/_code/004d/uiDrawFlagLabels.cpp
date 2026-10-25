@@ -27,7 +27,7 @@ extern "C" void uiDrawFlagLabels(void *, const FlagLabelRecord *record)
     u32 lineHeight = entryTableCallSlot3(3);
     char label[12] = {};
     const char *description = NULL;
-    if (record->flags & DAT_005715f8[2]) {
+    if (DAT_005715f8[2] & record->flags) {
         textFormatBuffer(label, DAT_00528128);
         description = gameGetPlayerName();
     } else if (record->flags & DAT_005715f8[3]) {

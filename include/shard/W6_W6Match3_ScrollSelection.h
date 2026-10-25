@@ -25,4 +25,14 @@ struct StatusDownListIV {
 
 typedef char StatusDownListIVSizeCheck[sizeof(StatusDownListIV) == 0x54c ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+void FUN_002a4964(ScrollSelection* list, s32 index);
+
+#ifdef __cplusplus
+}
+#endif
+
 #endif

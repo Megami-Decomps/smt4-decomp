@@ -1,4 +1,3 @@
-/* NON_MATCHING: intrinsic-dimension cases are merged differently and resource constants occupy different literal-pool positions. */
 /* Draws an indexed resource record, using its intrinsic dimensions when requested. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -63,7 +62,8 @@ void FUN_003933d4(void *object, u32 flags, u32 bank, u32 id, s32 index, u32 firs
             parameters.flags |= 0x8000;
             parameters.width = dimensions->width;
             parameters.height = dimensions->height;
-        } else if (dimensions->kind == 1) {
+        }
+        if (dimensions->kind == 1) {
             parameters.width = dimensions->width;
             parameters.height = dimensions->height;
         }

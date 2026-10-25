@@ -1,6 +1,7 @@
 /* NON_MATCHING: two setup loads are scheduled differently and the final control call is not tail-called. */
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/btlMain.h"
 #include "gamedata/DevilRecord.h"
 
 extern "C" {

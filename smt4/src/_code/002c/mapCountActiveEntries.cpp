@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/mapCountActiveEntries.h"
+#include "shard/W6_W6Match3_MapSceneTransition.h"
 
 namespace { struct Entry { u8 active; u8 padding[0x3b]; }; struct Map { u8 padding[0x24]; Entry entries[16]; }; }
 

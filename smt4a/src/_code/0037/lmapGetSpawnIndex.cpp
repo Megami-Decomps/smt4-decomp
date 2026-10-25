@@ -1,5 +1,5 @@
 #include "shard/Shard0037.h"
-#include "shard/lmapGetSpawnIndex.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
