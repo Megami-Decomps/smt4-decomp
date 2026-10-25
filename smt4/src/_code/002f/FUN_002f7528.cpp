@@ -1,10 +1,10 @@
 /* NON_MATCHING: the group value-kind test is outlined after the epilogue; entry/flag registers differ. */
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
 u32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(u32 group, s32 *start, s32 *count);
 BtlState *btlGetMainState(void);
 BtlUnitEntry *btlMainFindActiveEntry(BtlState *battle);
 void scrSetResult(s32 result);

@@ -3,6 +3,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match1_Table03Record.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 struct AocSystem;
 
@@ -103,7 +104,6 @@ struct SpriteDescriptor {
 extern "C" {
 extern AocSystem *g_aocSystem;
 Table03Record *aocFindTable03RecordByKey(AocSystem *system, u32 index);
-void memClear(void *destination, s32 size);
 s32 libc_strcmp(const char *a, const char *b);
 
 /* Initialize sprite descriptor `sprite` from record `index` of table 03; the bank and page

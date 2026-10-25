@@ -61,4 +61,12 @@ typedef char AsdGxDrawCommandOffsetsCheck[
     offsetof(AsdGxDrawCommand, second) == 0x1C &&
     offsetof(AsdGxDrawCommand, values) == 0x20 ? 1 : -1];
 
+extern "C" {
+s32 textureGetIndexedResource(u32 index);
+}
+
+extern "C" {
+void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
+}
+
 #endif

@@ -1,75 +1,61 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0012113c` (_code @ 0x12113c, 0xf4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: written from the romwright stub; parameter registers now match, remaining diffs are heapBase/buffer swapped (retail r7/r6), the frame (retail keeps two unshared 28-byte StreamInfo slots, 60 bytes; the inline helper shares one slot) and an unfolded `lsl #13` before the size compare. */
+#include "common.h"
+
+/* What FUN_0014204c reports about a sound id; only the word at 0x10 is used here. */
+struct StreamInfo {
+    u32 unk00[4];
+    u32 value; /* 0x10 */
+    u32 unk14[2];
+};
 
 extern "C" {
+s32 FUN_0012f59c(void);
+s32 FUN_0012fa30(void *pool, u32 id, u32 first, u32 second);
+s32 FUN_0014204c(u32 id, StreamInfo *info);
+u32 FUN_002c3984(void);
+u32 nnosGetHeapBase(void);
+s32 nw_snd_internal_driver_StreamBufferPool_Initialize(void *pool, u32 buffer, u32 size, u32 value);
 
-int FUN_0012fa30(int, unsigned int, unsigned int, unsigned int);
-int nw_snd_internal_driver_StreamBufferPool_Initialize(int, unsigned int, unsigned int, unsigned int);
-
-/* stack frame of param_7: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp50; /* 0x50: local_50 */
-} param_7_stack;
-
-extern int FUN_0012f59c(void);
-/* Supplied declaration required: FUN_0012fa30. */
-extern int FUN_0014204c(unsigned int, unsigned char *);
-extern int FUN_002c3984(void);
-extern unsigned int nnosGetHeapBase(void);
-/* Supplied declaration required: nw_snd_internal_driver_StreamBufferPool_Initialize. */
-
-
-unsigned int
-FUN_0012113c(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,unsigned int param_5
-            ,unsigned int param_6,unsigned int param_7)
-
+/* The word at 0x10 of a sound's stream info, or 0 when the id has none. */
+static __inline u32 streamInfoValue(u32 id)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned char temp_v4 [16];
-  unsigned int temp_v5;
-  unsigned char temp_v6 [16];
-  int temp_v7;
-  
-  temp_v0 = FUN_0012f59c();
-  if (temp_v0 != 0) {
-    if (param_7 != 0) {
-      temp_v1 = nnosGetHeapBase();
-      temp_v0 = FUN_002c3984();
-      if (param_6 < temp_v1) {
-        return 0;
-      }
-      if (temp_v0 + temp_v1 < param_6 + param_7) {
-        return 0;
-      }
+    StreamInfo info;
+    u32 value = 0;
+    if (FUN_0014204c(id, &info)) {
+        value = info.value;
     }
-    temp_v0 = param_1;
-    FUN_0012fa30(param_1,param_2,param_4,param_5);
-    if (temp_v0 != 0) {
-      temp_v2 = FUN_0014204c(param_2,temp_v6);
-      temp_v0 = 0;
-      if (temp_v2 != 0) {
-        temp_v0 = temp_v7;
-      }
-      if ((unsigned int)(temp_v0 * 0xa000) < param_7 || temp_v0 * 0xa000 - param_7 == 0) {
-        temp_v0 = FUN_0014204c(param_2,temp_v4);
-        temp_v3 = 0;
-        if (temp_v0 != 0) {
-          temp_v3 = temp_v5;
-        }
-        nw_snd_internal_driver_StreamBufferPool_Initialize(param_1 + 0x88,param_6,param_7,temp_v3);
-        *(int *)(param_1 + 0xa0) = param_1 + 0xa4;
-        *(unsigned int *)(param_1 + 0xbc) = param_3;
-        return 1;
-      }
-    }
-  }
-  return 0;
+    return value;
 }
 
-} /* extern "C" */
+
+/* Sets up a sound stream pool: checks that the buffer lies inside the heap and is large enough
+ * for the sound's streams, then initializes the stream buffer pool and links the pool's tail. */
+u32 FUN_0012113c(u8 *pool, u32 id, u32 userValue, u32 first, u32 second, u32 buffer, u32 size)
+{
+    if (!FUN_0012f59c()) {
+        return 0;
+    }
+    if (size != 0) {
+        u32 heapBase = nnosGetHeapBase();
+        u32 heapSize = FUN_002c3984();
+        if (buffer < heapBase) {
+            return 0;
+        }
+        if (heapBase + heapSize < buffer + size) {
+            return 0;
+        }
+    }
+    if (!FUN_0012fa30(pool, id, first, second)) {
+        return 0;
+    }
+    u32 count = streamInfoValue(id);
+    if (size < count * 0xa000) {
+        return 0;
+    }
+    u32 value = streamInfoValue(id);
+    nw_snd_internal_driver_StreamBufferPool_Initialize(pool + 0x88, buffer, size, value);
+    *reinterpret_cast<u8 **>(pool + 0xa0) = pool + 0xa4;
+    *reinterpret_cast<u32 *>(pool + 0xbc) = userValue;
+    return 1;
+}
+}

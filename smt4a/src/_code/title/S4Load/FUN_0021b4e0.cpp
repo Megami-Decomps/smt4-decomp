@@ -3,6 +3,7 @@
 #include "saveLoadUI/saveLoadUI.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct LoadProfileLabels { const char *text[4]; };
 extern "C" {
@@ -11,7 +12,6 @@ extern const LoadProfileLabels DAT_00536bdc;
 void asdTextDrawDirectoryEntry(AsdText *text, u32 font, s32 mode, s32 x, s32 y,
     RelativeDirectory *directory, u32 entry);
 void FUN_002e59f8(const char *source, char *destination, u32 size);
-void FUN_003180c4(s32 slot, const char *text);
 void FUN_00359974(s32 slot, u32 value, s32 digits, s32 leadingZero);
 
 void FUN_0021b4e0(s32 selected)

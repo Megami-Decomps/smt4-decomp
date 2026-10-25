@@ -1,5 +1,6 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 extern "C" {
 
@@ -11,7 +12,7 @@ s32 FUN_001bd5bc(u32 *out)
 {
     nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
 
-    cmd->header = 0x001D0000;
+    nn::os::SetIpcWord(cmd, 0, 0x001D0000);
     s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
     if (nnResultIsSuccess(result)) {
         *out = cmd->words[1];

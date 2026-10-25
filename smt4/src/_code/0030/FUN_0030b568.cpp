@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct BtlMainStateView {
     /* 0x00 */ u8 unk00[0xE0];
@@ -7,7 +8,6 @@ struct BtlMainStateView {
 
 extern "C" {
 BtlMainStateView *btlGetMainState(void);
-void scrSetResult(s32 result);
 }
 
 extern "C" s32 FUN_0030b568(void)

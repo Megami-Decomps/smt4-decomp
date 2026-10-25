@@ -1,18 +1,23 @@
-/* NON_MATCHING: retail uses `add r0, r0, #19200` where armcc emits `ldrb r1, [r1, r0]`. */
 #include "common.h"
 
 extern "C" {
 
+struct ScenePanel {
+    /* 0x00 */ u8 unk00[0xf];
+    /* 0x0f */ u8 active;
+    /* 0x10 */ u8 unk10[0xc];
+    /* 0x1c */ s8 state;
+};
+
 struct SceneState {
-    /* 0x0000 */ u8 unk0000[0x4b0f];
-    /* 0x4b0f */ u8 active;
-    /* 0x4b10 */ u8 unk4b10[0xc];
-    /* 0x4b1c */ s8 state;
+    /* 0x0000 */ u8 unk0000[0x4b00];
+    /* 0x4b00 */ ScenePanel panel;
 };
 
 s32 uiSceneGetActiveState(const SceneState *scene)
 {
-    return scene->active != 0 ? scene->state : 1;
+    const ScenePanel *panel = &scene->panel;
+    return panel->active != 0 ? panel->state : 1;
 }
 
 } /* extern "C" */

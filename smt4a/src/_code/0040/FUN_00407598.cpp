@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of a camera's look-at update from its position and Euler angles (the draft's inlined sin/cos lookups are the shared Euler phase rotation); retail also copies nw::math::MTX34::Identity (a guarded function-local static) into the matrix first, which the full rotation fill here makes unnecessary, and keeps the three phase reductions batched. */
 #include "gfx/EulerPhaseRotation.h"
+#include "util/CalleeContracts.h"
 
 /* A camera (only the fields the update reads and writes). */
 struct LookAtCamera {
@@ -21,7 +22,6 @@ extern "C" {
 extern const PhaseTrigEntry DAT_00536d14[];
 
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 *matrix);
-u32 FUN_00152f54(void);
 void FUN_0014f0dc(u32 handle, f32 *eye, f32 *target, f32 *up);
 void FUN_001523b8(u32 handle, s32 flag);
 

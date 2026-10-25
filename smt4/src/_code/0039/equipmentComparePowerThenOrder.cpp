@@ -12,7 +12,6 @@ extern "C" {
 const EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32);
 const EquipmentSortPowerSecondary *dataTable08Sub1GetRecord(u32);
 const EquipmentSortPowerTertiaryView *dataTable08Sub2GetRecord(u32);
-s32 FUN_00230f44(const u16 *);
 u32 contentGetEntryKind(u32);
 
 // Compare equipment by subtype-specific power, then by its secondary ordering key.

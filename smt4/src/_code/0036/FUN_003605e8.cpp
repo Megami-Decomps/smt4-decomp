@@ -1,5 +1,6 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 #include <string.h>
 
 extern "C" u32 DAT_00471bac;
@@ -8,7 +9,7 @@ extern "C" u32 DAT_00471bac;
 extern "C" s32 FUN_003605e8(u8 value)
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
-    command->header = 0x50040;
+    nn::os::SetIpcWord(command, 0, 0x50040);
     memcpy(&command->words[0], &value, sizeof(value));
     s32 result = nn::svc::SendSyncRequest(DAT_00471bac);
     if (nnResultIsSuccess(result)) {

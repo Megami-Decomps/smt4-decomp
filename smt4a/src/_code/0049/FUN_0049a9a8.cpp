@@ -20,7 +20,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned long long FUN_00145f04(unsigned char, unsigned int, unsigned int);
-extern unsigned long long FUN_00192718(short);
+extern unsigned long long aocEntryGetKindForward(short);
 /* Supplied declaration required: gameTestIndexedAuxiliaryFlag. */
 /* Supplied declaration required: cellListAppend. */
 extern unsigned long long questEvaluateUnlockConditions(void);
@@ -106,7 +106,7 @@ void FUN_0049a9a8(int param_1)
         if (((int)temp_v13 == 2) && (temp_v2 = gameTestIndexedAuxiliaryFlag(temp_v1), temp_v2 == 0)) {
           temp_v11 = 1;
         }
-        temp_v13 = FUN_00192718(temp_v1);
+        temp_v13 = aocEntryGetKindForward(temp_v1);
         temp_v7 = (unsigned int)((unsigned long long)temp_v13 >> 0x20);
         switch((int)temp_v13) {
         default:

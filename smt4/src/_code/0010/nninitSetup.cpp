@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail bl 0  [R_ARM_CALL FUN_0010fcf4]; compiler pop {r4, lr}. */
 #include "common.h"
 
 extern "C" {

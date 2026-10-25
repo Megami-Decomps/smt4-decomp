@@ -1,10 +1,10 @@
 /* NON_MATCHING: Retail unrolls uppercase conversion by two; hash accumulation registers and bucket/entry loads differ. */
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 void rt_aeabi_memclr(void *memory, u32 size);
 u32 libc_strlen(const char *text);
-void FUN_002e59f8(const char *path, char *output, u32 length);
 void pathStripScheme(AsdFileHashPack *index, char *path, u32 length);
 s32 libc_toupper(s32 character);
 s32 libc_strncmp(const char *first, const char *second, u32 length);

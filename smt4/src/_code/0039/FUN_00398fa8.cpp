@@ -63,7 +63,7 @@ s32 FUN_0029efa8(PickList *list);
 s32 FUN_0029efc0(PickList *list);
 void FUN_0029eb5c(PickList *list, s32 position);
 PickSliderInfo *FUN_002bf4f8(u32 group, u32 id);
-s16 FUN_001c36a0(void);
+s32 FUN_001c36a0(void);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 void FUN_00398fa8(PickScreen *screen)

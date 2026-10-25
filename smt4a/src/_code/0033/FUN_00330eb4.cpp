@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses every field from one pool anchor DAT_005f19fc (struct base + 0x400, with `sub ip, r0, #1024` for the far fields); the struct's real start has no symbol, so built anchors on DAT_005f18c4 */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ struct EventCameraState {
 
 extern EventCameraState DAT_005f18c4;
 
-s32 scrGetArg(u32 index);
 void FUN_0035846c(void);
 
 /* Script command 0x164f: resets the event camera to its fixed preset and activates it. */

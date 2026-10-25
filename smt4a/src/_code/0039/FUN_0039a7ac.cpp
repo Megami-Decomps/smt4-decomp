@@ -1,11 +1,12 @@
 /* NON_MATCHING: logic and call chain match; armcc allocates the shared zero/one registers (retail r5=0, r6=1, the 0.1f step hoisted into s2 and the fade-mode tests ordered 1 then 2 via a branch pair) differently */
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "addon/aocMain.h"
+#include "map/mapRndMaze.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 aocJobIsValid(void);
 s32 engineCleanupIsDone(void);
-s32 FUN_002ef9f0(void);
 s32 campIsState85(void);
 s32 sub68OwnerCall2(void);
 s32 namePollShutdown(void);
@@ -14,7 +15,6 @@ s32 FUN_00284d94(void);
 s32 QuestCenterMode_IsBusy(void);
 s32 shopPollShutdown(void);
 s32 onesRoomIsRunning(void);
-s32 FUN_00270a70(void);
 
 /* Steps the common background overlay's fade and decides from the game state whether it should be shown. */
 u32 FUN_0039a7ac(void)

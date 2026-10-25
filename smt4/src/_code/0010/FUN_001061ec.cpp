@@ -1,10 +1,10 @@
 /* NON_MATCHING: packed-color initialization and overlay-alpha VFP scheduling differ. */
 #include "shard/W6_W6Match2_TitleCommand.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 extern void *g_titleScene;
-s32 FUN_0010ec60();
-u32 FUN_002c1c0c(u32 group, u32 resource);
+u32 asdTMTexTableGetNodeTexture(u32 group, u32 resource);
 void FUN_002c1b64(void *context, u32 resource);
 void FUN_002c1ac8(const f32 *first, const f32 *second, const f32 *third, const f32 *fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 firstDepth, f32 secondDepth,
@@ -31,7 +31,7 @@ u32 FUN_001061ec()
             color[3] = (f32)(g_titleFlags.overlay.frame - 2) * 0.05f;
         }
         if (color[3] > 0.0f) {
-            u32 resource = FUN_002c1c0c(0x2c, 0);
+            u32 resource = asdTMTexTableGetNodeTexture(0x2c, 0);
             FUN_002c1b64(g_titleScene, resource);
             FUN_002c1ac8(color, color, color, color, 128.0f, 88.0f, 64.0f, 64.0f,
                           0.0f, 0.0f, 1.0f, 1.0f, 0.0f);

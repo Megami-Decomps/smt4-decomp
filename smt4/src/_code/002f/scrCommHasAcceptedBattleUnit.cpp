@@ -1,8 +1,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 extern int btlSlotsHaveReadyUnit(BtlEntry *unit);
 extern BtlMainState *btlGetMainState(void);
 

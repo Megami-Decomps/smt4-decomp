@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rebuild; retail keeps no VFP register live across the calls (the colour constants are reloaded per call) and zeroes the 12-entry candidate array as six stack words in a fixed order, which armcc here schedules differently. */
 #include "common.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
+#include "event/2dEvent/EventEffect.h"
 
 /* A party slot as the picker reads it. */
 struct PartySlot {
@@ -48,10 +50,8 @@ s32 FUN_00187168(PartySlot *slot);
 PartySlot *saveSlotFindSelected(void);
 s32 lcgRandomRange(s32 limit);
 BattleStateView *btlGetMainState(void);
-u32 FUN_0019acdc(u16 id, s32 flag);
 void FUN_003f1b3c(BattleStateView *battle, u32 voice, s32 kind, u32 *text, u32 *colorSet);
 void FUN_0047f4cc(u32 handle, f32 red, f32 green, f32 blue);
-void infoWinSetText(u32 window, u32 text);
 void uiNavigatorStart(s32 id, s32 a, s32 b, s32 c, s32 d);
 void infoWinSetTimer(s32 frames);
 void FUN_004fbdd4(s32 a, s32 b, s32 c, f32 red, f32 green, f32 blue);
@@ -102,7 +102,7 @@ void FUN_004116a0(ScriptOwner *owner)
     u32 colorSet;
     FUN_003f1b3c(battle, voice, 2, &text, &colorSet);
     FUN_0047f4cc(colorSet, 1.0f, 0.70710677f, 0.70710677f);
-    infoWinSetText(battle->infoWindow, (u16)text);
+    infoWinSetText(reinterpret_cast<const char *>(battle->infoWindow), (u16)text);
     uiNavigatorStart(pick, 1, 1, 0, 0);
     infoWinSetTimer(0x708);
     FUN_004fbdd4(0, 0, 5, 0.4f, 0.4f, 0.4f);

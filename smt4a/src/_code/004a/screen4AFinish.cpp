@@ -4,7 +4,6 @@ extern "C" {
 
 extern s32 scrRunOpcodesStub(u32 job);
 extern void messageMainSetTargetFlags(s32 a);
-extern void FUN_003343f0(s32 a);
 extern u16 buttonHelpGetValue(void);
 extern void sysPlaySe(u32 id);
 

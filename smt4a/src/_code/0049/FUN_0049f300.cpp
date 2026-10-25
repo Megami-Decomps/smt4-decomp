@@ -1,6 +1,7 @@
 /* NON_MATCHING: render-stack push address scheduling and icon cold-branch placement differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 struct PanelFrameDrawWork {
     u32 job;
     u8 state;
@@ -14,7 +15,6 @@ void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(u32 mode, u32 flags);
 void FUN_0049d594(PanelFrameDrawWork *work);
 void efctSetSpeed(f32 speed);
-s32 packNibblesAndByte(u32 low, u32 high, u32 byte);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 u32 FUN_0049f300(PanelFrameDrawWork *work)

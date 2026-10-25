@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c3fd4` (_code @ 0x1c3fd4, 0x48d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/SaveLoadProcess.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -18,7 +21,6 @@ int unitRecalculateEffectiveStats(...);
 int useCounterRelease(void);
 int eventQueueAddUnique(...);
 int spriteStartAnimationByIndex(...);
-int memClear(...);
 int FUN_002e3378(...);
 int FUN_003ae34c(...);
 
@@ -47,7 +49,6 @@ int FUN_0026c654(...);
 int FUN_0026c710(...);
 int communicationBeginTransition(...);
 int communicationSetResultPointer(void);
-void comWinSetText(const unsigned char* text);
 int btlUiPanelFadeInWhenReady(...);
 int FUN_0026c868(void);
 int FUN_0026c9c0(void);
@@ -97,7 +98,6 @@ int FUN_002937e0(void);
 int messageMainFinishWindow(void);
 int FUN_00297060(unsigned int, unsigned int);
 int FUN_0029acb0(void);
-int FUN_002a0cc8(...);
 int gameGetSlotTable(...);
 int ifTouchRegionRemove(void);
 int FUN_002b8ee0(...);
@@ -211,7 +211,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029e890. */
 /* Supplied declaration required: scrollOwnerSelectIndex. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
-extern int FUN_0029ea68(unsigned short);
+extern int itemGetFlagBit1(unsigned short);
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029ee6c. */
 extern int FUN_0029efa8(int);
@@ -1372,7 +1372,7 @@ LAB_001c6598:
                       }
                       else {
                         btlUiPanelFadeInWhenReady(g_btlUiBlock);
-                        comWinSetText(&LAB_001c6014);
+                        comWinSetText(reinterpret_cast<const u8*>(&LAB_001c6014));
                         communicationSetResultPointer();
                         communicationBeginTransition(0);
                         messageMainFinishWindow();
@@ -1546,7 +1546,7 @@ LAB_001c653c:
                       }
                       else {
                         btlUiPanelFadeInWhenReady(g_btlUiBlock);
-                        comWinSetText(&LAB_001c6014);
+                        comWinSetText(reinterpret_cast<const u8*>(&LAB_001c6014));
                         communicationSetResultPointer();
                         communicationBeginTransition(0);
                         messageMainFinishWindow();
@@ -2233,8 +2233,8 @@ LAB_001c7944:
     else {
       if (*(int *)(temp_v1 + 0x670) < 1) {
         partyPanelSortEntries();
-        memClear(temp_v1 + 0x7fc,0x70);
-        memClear(temp_v1 + 0x86c,0x70);
+        reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v1 + 0x7fc), 0x70));
+        reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v1 + 0x86c), 0x70));
         break;
       }
       temp_v6 = 0;
@@ -2264,8 +2264,8 @@ LAB_001c7990:
         *(unsigned char *)(*(int *)(temp_v1 + temp_v6 * 4 + 0x6c8) + 0x27) = 1;
       }
     }
-    memClear(temp_v1 + 0x7fc,0x70);
-    memClear(temp_v1 + 0x86c,0x70);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v1 + 0x7fc), 0x70));
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v1 + 0x86c), 0x70));
     break;
   case 0x11:
     temp_v6 = messageMainTargetIsClear();
@@ -2666,7 +2666,7 @@ LAB_001c7c50:
           partyFindActiveSlotById(*(unsigned short *)(temp_v24 + 0x46));
           FUN_0029bbc8();
           temp_v7 = partyFindFreeStockSlot();
-          temp_v6 = FUN_0029ea68(*(unsigned short *)(temp_v1 + 0xb96));
+          temp_v6 = itemGetFlagBit1(*(unsigned short *)(temp_v1 + 0xb96));
           FUN_0029c1c8(temp_v7,*(unsigned short *)(temp_v1 + 0xb96),0);
           temp_v4 = gameGetUnitRecord(temp_v7);
           temp_v7 = *(unsigned int *)(temp_v1 + 0xb88);

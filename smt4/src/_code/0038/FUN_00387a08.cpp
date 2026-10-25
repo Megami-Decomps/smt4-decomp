@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail keeps the constant kind 12 in r7 across the memClear call (one more saved register and 4 more bytes of frame). */
 #include "common.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 
 struct FileQueue;
-extern void *memClear(void *buffer, u32 size);
 extern u8 *FUN_002a6e7c(AocSystem *system, s32 kind, s32 key, char *path);
 extern u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath,
                       u32 *transferredBytes, u32 mode, u32 bytes, void *context);

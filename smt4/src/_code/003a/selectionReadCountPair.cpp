@@ -1,4 +1,4 @@
-/* NON_MATCHING: byte-stream header checks fold source advances differently from retail. */
+/* NON_MATCHING: the count word decode (rev/bic/orr) now matches; retail advances the source with separate `add` instructions (p+1 kept in ip, p+2 later) where armcc folds the advance into a writeback load and compares size directly. */
 #include "classes/SelectionState.h"
 
 /* Decode the selector and a packed 24-bit count/8-bit count pair. */
@@ -13,7 +13,7 @@ extern "C" s32 selectionReadCountPair(SelectionCommand *command, const u8 *sourc
     if (size - 2 < 4)
         return -1;
     source += 2;
-    u32 counts = (source[0] << 24) | (source[1] << 16) | (source[2] << 8) | source[3];
+    u32 counts = (__rev(*reinterpret_cast<const u32 *>(source)) & ~0xffu) | source[3];
     command->first = (counts >> 8) + 1;
     command->second = (counts & 0xff) + 1;
     return 6;

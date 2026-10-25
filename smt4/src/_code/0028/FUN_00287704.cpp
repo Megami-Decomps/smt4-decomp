@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 

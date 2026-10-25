@@ -1,9 +1,9 @@
 /* NON_MATCHING: native's dead min/max comparisons and constant-index stores are omitted. */
 #include "common.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 void* sysMemClear(void* destination, u32 size);
-u32 flagValueIsPositive(u32 flag);
 u32 FUN_00184964(u32 first, u32 last);
 const void* aocRecordLookup83(u16 id);
 

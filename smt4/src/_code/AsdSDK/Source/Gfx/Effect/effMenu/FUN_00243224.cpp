@@ -1,5 +1,7 @@
+#include "util/EffMenuListAppend.h"
 /* NON_MATCHING: the payload copy destination uses r5 where retail uses lr. */
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "util/EffMenuListAppend.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -16,7 +18,6 @@ struct MenuVectorPayload {
 extern "C" {
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 boundary, u32 track);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-void effMenuListAppend(EffMenuNode *node, u32 list);
 
 // Queue the same vector effect for both menu display lists.
 void FUN_00243224(const EffMenuPosition *first, const EffMenuPosition *second, u32 firstArgument, u32 secondArgument)

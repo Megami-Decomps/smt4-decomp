@@ -21,8 +21,8 @@ struct EntrySequencePacket {
 };
 
 extern "C" {
-char* libc_strcpy(char* destination, const char* source);
-void asdSequenceRequest(s32 kind, const EntrySequencePacket* packet, u32 size);
+void libc_strcpy(unsigned int *param_1,unsigned int *param_2);
+void asdSequenceRequest(s32 state, const void *arg, u32 size);
 }
 
 #endif

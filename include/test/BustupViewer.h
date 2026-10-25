@@ -9,4 +9,8 @@ typedef struct BustupViewerWork {
     /* 0x04 */ u8 done;    /* the task has finished; the work area may be freed */
 } BustupViewerWork;
 
+extern "C" {
+u8 FUN_002e19f8(void);
+}
+
 #endif

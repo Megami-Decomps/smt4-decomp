@@ -11,7 +11,7 @@ int FUN_002ba1e0(...);
 int mtx44Copy(unsigned char [108], unsigned int *);
 int FUN_002c198c(int);
 int FUN_002c1b64(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -58,8 +58,8 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
-extern int FUN_002c1c0c(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c39a4. */
+extern int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -202,7 +202,7 @@ void FUN_001137fc(int param_1)
     (**(romwright_code **)(temp_v3 + 0x12c8))();
     *(unsigned char *)(temp_v3 + 0x12c4) = 0;
   }
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v3 = g_frameTex;
   temp_v7 = 0x3f800000;
   FUN_002b99b8();
@@ -228,7 +228,7 @@ void FUN_001137fc(int param_1)
     *(unsigned char *)(temp_v3 + 0x12c4) = 0;
   }
   temp_v4 = DAT_0043e284 | 0xffffff00;
-  temp_v3 = FUN_002c1c0c(5,2);
+  temp_v3 = asdTMTexTableGetNodeTexture(5,2);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_002c1b64(g_titleScene,temp_v3);
   FUN_002ba1e0(temp_v4);
@@ -252,7 +252,7 @@ void FUN_001137fc(int param_1)
   }
   mtx44Copy(temp_v8,&_ZZN2nw4math5MTX448IdentityEvE8identity);
   cameraSetViewMatrix(g_titleScene,temp_v8);
-  temp_v3 = FUN_002c1c0c(5,3);
+  temp_v3 = asdTMTexTableGetNodeTexture(5,3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
   FUN_002c1b64(g_titleScene,temp_v3);
   temp_v4 = DAT_0043e28c | 0xffffff00;

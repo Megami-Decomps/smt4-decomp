@@ -1,8 +1,8 @@
 /* NON_MATCHING: the constant-one lifetime and mode-result register allocation differ. */
 #include "ui/MessageMain.h"
+#include "camp/ButtonHelp/ButtonHelp.h"
 
 extern "C" {
-void scrCommMessageSetMode(u32 mode);
 s32 scrGetCommandFrame();
 u32 scrGetArg(u32 index);
 s32 FUN_0028660c();

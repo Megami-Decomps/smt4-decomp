@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include <string.h>
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The sort menu's image, scale, and animation parameter tables are compiled together. */
 struct SortMenuParameterData { u32 first[6], second[9], third[42]; };
@@ -23,8 +24,6 @@ extern "C" const SortMenuParameterData DAT_00402d1c = {
 
 extern "C" {
 extern SortMenuSingleton g_useCounter;
-void memClear(void *, u32);
-u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 s32 FUN_001a1f8c(u32);
 s32 FUN_001a26dc(u32);
@@ -44,7 +43,7 @@ void sortMenuCreate(u32 owner, u8 option)
         }
         SortMenuWork *work = g_useCounter.work;
         memClear(work, sizeof(SortMenuWork));
-        work->calculate = asdProcessCreateSimple("SORT CALC", 2, 0, 0, FUN_001a1f8c, NULL, 0);
+        work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SORT CALC"), 2, 0, 0, FUN_001a1f8c, NULL, 0);
         work->draw = taskCreateDraw("SORT DDRAW", 231, 0, 0, FUN_001a26dc, NULL, 0, work->calculate);
         SortMenuWork *current = g_useCounter.work;
         drawParameterBlockClear(&current->parameters);

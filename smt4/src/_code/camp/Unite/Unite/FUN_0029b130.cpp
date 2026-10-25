@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029b130` (_code @ 0x29b130, 0x688 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int dataTable40FindById(...);
 int FUN_002b7bca(...);
 int devilGetRecord(...);
 int asdMemFree(...);
-int memClear(...);
 int asdMemoryAlloc(...);
 int rt_memcpy(...);
 
@@ -107,7 +107,7 @@ void FUN_0029b130(int param_1,int param_2,int param_3,unsigned short *param_4)
   temp_v19 = 0;
   temp_v20 = 0;
   temp_v21 = '\0';
-  memClear(aiStack_80,0x58);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(aiStack_80), 0x58));
   temp_v7 = 0;
   if (param_3 != 0) {
     temp_v7 = (*(unsigned int *)(param_3 + 4) & 0x1ffff) >> 2;

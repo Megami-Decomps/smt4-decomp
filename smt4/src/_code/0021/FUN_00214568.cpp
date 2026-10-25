@@ -56,7 +56,7 @@ extern ResultData* g_result;
 
 SlotTable* gameGetSlotTable(void);
 PlayerData* gameGetPlayerData(void);
-u32 dataTable09Sub3GetRecord(u32 growthType, u32 level);
+u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 s32 playerPadTestBit(s32 bit);
 UnitRecord* gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(UnitRecord* unit, u32 bit);

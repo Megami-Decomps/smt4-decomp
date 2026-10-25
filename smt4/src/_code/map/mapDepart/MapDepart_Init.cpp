@@ -3,6 +3,7 @@
 #include "shard/SaveWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "util/MapDepart_InitState.h"
 
 // The allocated departure work extends the public prefix.  SaveWork's word at
 // 0x24 lies inside two-byte-aligned padding, so neither shared layout is enlarged.
@@ -32,17 +33,13 @@ typedef char MapDepartureInitLayout[sizeof(MapDepartureInitView) == 0x80 &&
 extern "C" {
 extern MapDepart *g_mapDepart;
 extern GameState g_gameState;
-SaveWork *gameGetMapBlock(void);
 void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
-void MapDepart_InitState(MapDepart *work, s32 enabled);
 s32 FUN_001e553c(u32 process);
 void mapDepartEnable(u32 process);
 s32 scrCommWaitStateAction(u32 process);
 void FUN_002f4b30(u32 process);
 s32 FUN_002ca09c(u32 process);
 void FUN_002f4b2c(u32 process);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 firstDelay, u16 lastDelay,
-    AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 firstDelay, u16 lastDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
@@ -93,8 +90,7 @@ void MapDepart_Init(const MapDepartureRequest *request)
         MapDepart_InitState(&work->prefix, 1);
     }
     work->prefix.freeOnEnd = 0;
-    work->prefix.job = asdProcessCreateSimple((const s8 *)"DEPART C", 2, 0, 0,
-        FUN_001e553c, mapDepartEnable, NULL);
+    work->prefix.job = asdProcessCreateSimple((const s8 *)"DEPART C", 2, 0, 0, FUN_001e553c, mapDepartEnable, NULL);
     taskCreateDraw((const s8 *)"SEARCH3D", 111, 0, 0, scrCommWaitStateAction, FUN_002f4b30, NULL, work->prefix.job);
     taskCreateDraw((const s8 *)"SEARCH2D", 115, 0, 0, FUN_002ca09c, FUN_002f4b2c, NULL, work->prefix.job);
 }

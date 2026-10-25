@@ -1,10 +1,10 @@
 /* NON_MATCHING: register allocation only: retail keeps the byte pointer in r2 and the loaded byte in r0 (build: pointer r0, byte r2). */
 #include "common.h"
+#include "gamedata/DataTableSections.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
-u32 dataTable5Type9Count(void);
-u8 *FUN_0026140c(void);
 u16 *dataTableFindRecordWord(u32 index);
 
 /* Marks table 5 type 9 entry `id` in the save data's bit array at +0x39. */

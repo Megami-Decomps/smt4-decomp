@@ -1,12 +1,12 @@
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 extern const char g_effPartsSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void memClear(void *block, s32 size);
 void FUN_002a3d58(EffPart *part);
 
 /* Creates a part object: a zeroed 0x90-byte block with unk80/unk84 cleared, then initialized. */

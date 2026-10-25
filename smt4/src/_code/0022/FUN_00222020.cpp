@@ -1,11 +1,11 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 int FUN_00252190(int obj, int arg1, int arg2);
 int eventTexRegisterAndSortTask(int obj);
 int eventTexSetJobParam(void);
-int scrSetResult(int obj);
 int scrGetArg(int index);
 
 /* Script command: takes two script arguments, runs FUN_00252190 on the first, then finishes the resulting object. */

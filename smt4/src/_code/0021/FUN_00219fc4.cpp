@@ -1,6 +1,7 @@
 /* NON_MATCHING: signed index loop matches zero-count branch; copy-loop source/destination scratch registers differ. */
 #include "gfx/TiledIndexMesh.h"
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
 
 struct EffectGeometryCloneView {
     TiledIndexStorage *storage;
@@ -15,7 +16,6 @@ struct EffectGeometryCloneView {
 };
 extern "C" {
 EffectGeometryCloneView *FUN_00207498(s32, s32, s32, u16);
-void refCountIncrement(s32 *);
 
 EffectGeometryCloneView *FUN_00219fc4(EffectGeometryCloneView *source)
 {
@@ -23,7 +23,7 @@ EffectGeometryCloneView *FUN_00219fc4(EffectGeometryCloneView *source)
                                                source->trianglesPerItem, source->flags);
     if (source->referenceCount) {
         copy->referenceCount = source->referenceCount;
-        refCountIncrement(copy->referenceCount);
+        refCountIncrement(reinterpret_cast<int *>(copy->referenceCount));
     }
     for (s32 i = 0; i < source->storage->counts.indexCount; ++i)
         copy->storage->indices[i] = source->storage->indices[i];

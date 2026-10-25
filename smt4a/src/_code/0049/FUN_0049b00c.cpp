@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
+#include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 
@@ -55,7 +56,7 @@ extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
-extern unsigned int FUN_00192718(unsigned short);
+extern unsigned int aocEntryGetKindForward(unsigned short);
 extern unsigned int FUN_001ba3d0(unsigned short);
 /* Supplied declaration required: scrRunOpcodesStub. */
 extern int gameRecordExists(void);
@@ -68,7 +69,6 @@ extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: panelSetMode3. */
 extern int FUN_0031d174(unsigned int *);
-extern int objBStateAllowsAction(void);
 /* Supplied declaration required: screenShowMessage. */
 /* Supplied declaration required: obj04Finish. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -82,7 +82,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: messageMainSetTargetFlags. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df7c4. */
-extern int FUN_00481100(unsigned short);
+extern int flagValueIsPositiveForward(unsigned short);
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_00493a7c. */
@@ -413,7 +413,7 @@ joined_r0x0049bb38:
       }
       FUN_0049cd18(puVar5,temp_v6,1);
       param_1[2] = 9;
-      if ((param_1[0x2d0] == 8) && (temp_v5 = FUN_00481100(*puVar5), temp_v5 == 0)) {
+      if ((param_1[0x2d0] == 8) && (temp_v5 = flagValueIsPositiveForward(*puVar5), temp_v5 == 0)) {
         temp_v6 = param_1[0x2d0];
         puVar9 = param_1 + temp_v6 * 0x1d + 0x2d8;
         temp_v3 = FUN_0031d174(puVar9);
@@ -462,7 +462,7 @@ joined_r0x0049bb38:
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       temp_v0 = *(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       puVar5 = (unsigned short *)gameGetPlayerData();
-      temp_v4 = FUN_00192718(temp_v0);
+      temp_v4 = aocEntryGetKindForward(temp_v0);
       switch(temp_v4) {
       case 2:
         *puVar5 = temp_v0;

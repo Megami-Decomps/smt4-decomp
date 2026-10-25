@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ extern int *g_unite; /* 0x43dd68 */
 extern int partyClassifyRequestedSources(int, unsigned short, unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: FUN_0029fa0c. */
-extern int FUN_002a0d0c(void);
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: libc_strcpy. */
@@ -231,7 +231,7 @@ unsigned int FUN_003116c8(void)
         temp_v5 = *piVar3;
         devilIsUnlocked(temp_v5,*puVar5);
         if (temp_v5 != 0) {
-          temp_v5 = FUN_002a0d0c();
+          temp_v5 = reinterpret_cast<int>(FUN_002a0d0c());
           pbVar6 = (unsigned char *)(temp_v5 + ((int)(temp_v7 + ((unsigned int)((int)temp_v7 >> 0x1f) >> 0x1d)) >> 3) +
                            0x35);
           temp_v1 = *pbVar6;

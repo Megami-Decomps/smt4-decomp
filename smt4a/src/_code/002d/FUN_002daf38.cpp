@@ -1,5 +1,6 @@
 /* NON_MATCHING: scene actor teardown register allocation has not matched retail. */
 #include "map/lmapMain.h"
+#include "util/PtrListRemoveClearOwner.h"
 
 namespace {
 /* The full cleanup state extends past the shared LmapSceneA prefix. */
@@ -19,13 +20,12 @@ extern void *g_handleRegistry;
 void FUN_003e55f4(LmapScript *script);
 void lmapClearExtraFlag(void);
 void FUN_003d2158(u32 controller, s32 mode);
-void ptrListRemoveClearOwner(void *registry, u32 controller);
 }
 
 static __inline void releaseSceneController(LmapActorA *actor)
 {
     if (actor != NULL && actor->controller != 0)
-        ptrListRemoveClearOwner(g_handleRegistry, actor->controller);
+        ptrListRemoveClearOwner(g_handleRegistry, reinterpret_cast<void *>(actor->controller));
 }
 
 /* Release the script's controllers and the scene's registered actor controllers. */

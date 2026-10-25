@@ -13,17 +13,17 @@ static __inline s32 recordCategoryPriority(u8 category)
 }
 
 extern "C" {
-ItemSortRecord *FUN_002ae584(u32);
+ItemSortRecord *appCostRecordFindById(u32);
 
 // Order table records by descending category priority and secondary sort value.
 s32 itemCompareCategoryPriorityDescending(const u32 *left, const u32 *right)
 {
-    const ItemSortRecord *leftRecord = FUN_002ae584(*left);
-    const ItemSortRecord *rightRecord = FUN_002ae584(*right);
+    const ItemSortRecord *leftRecord = appCostRecordFindById(*left);
+    const ItemSortRecord *rightRecord = appCostRecordFindById(*right);
     s32 difference = recordCategoryPriority(rightRecord->sort.category) - recordCategoryPriority(leftRecord->sort.category);
     if (difference == 0) {
-        leftRecord = FUN_002ae584(*left);
-        rightRecord = FUN_002ae584(*right);
+        leftRecord = appCostRecordFindById(*left);
+        rightRecord = appCostRecordFindById(*right);
         difference = rightRecord->sort.value - leftRecord->sort.value;
     }
     return difference;

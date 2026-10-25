@@ -11,4 +11,13 @@ struct EquipmentSortPowerSecondary {
     u32 powerFlags;
 };
 typedef char EquipmentSortPowerOffsets[offsetof(EquipmentSortPowerPrimary, power) == 0x55 && offsetof(EquipmentSortPowerSecondary, powerFlags) == 0x70 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u16 FUN_00230f44(const u16 *entry);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

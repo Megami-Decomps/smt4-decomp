@@ -1,7 +1,7 @@
 /* NON_MATCHING: the bank load is not predicated before the null branch, and halfword/bit-clear pointer registers differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
+#include "shard/ItemStackLimit.h"
 
-extern "C" const FlagValueRange *FUN_0019c06c(u32 id);
 extern "C" FlagValueStorage *flagValueGetStorage(void);
 
 /* Clear a bit flag or subtract from a halfword flag without underflowing it. */
@@ -10,7 +10,7 @@ extern "C" void flagValueSub(s32 id, u32 amount)
     if (amount == 0) {
         return;
     }
-    const FlagValueRange *range = FUN_0019c06c(id);
+    const FlagValueRange *range = reinterpret_cast<const FlagValueRange *>(itemCategoryFindByItemId(id));
     if (range != NULL) {
         u8 bankId = range->bank;
         FlagValueStorage *storage = flagValueGetStorage();

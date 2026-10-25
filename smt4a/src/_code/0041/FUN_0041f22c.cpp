@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists screen+0x300 and screen+0x2EC into registers (extra saved regs) and shares the open-request tail; the build addresses fields directly and allocates registers differently. */
 #include "common.h"
+#include "network/DataStore/DataStoreMain.h"
 
 /* The selection screen work (accessed fields). */
 struct SelectScreen {
@@ -44,7 +45,6 @@ struct SelectScreen {
 };
 
 extern "C" {
-s32 objBStateAllowsAction(void);
 s32 padButtonIsPressed(s32 button);
 void eventQueueAddUnique(u32 event);
 void FUN_0019de98(s32 a, u32 color);

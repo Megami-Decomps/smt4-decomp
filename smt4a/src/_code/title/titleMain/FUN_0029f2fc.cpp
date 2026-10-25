@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "map/mapRndMaze.h"
 
 extern "C" {
 
@@ -119,7 +120,6 @@ extern int FUN_002e07f4(void);
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: commonBgBeginExit. */
 extern int configGetValueBC(void);
-extern int FUN_002ef9f0(void);
 /* Supplied declaration required: gameApplyFlagTriggers. */
 /* Supplied declaration required: campCommonBgAcquire. */
 /* Supplied declaration required: FUN_00324c94. */

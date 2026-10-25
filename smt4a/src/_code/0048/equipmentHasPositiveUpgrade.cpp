@@ -1,6 +1,6 @@
 #include "shard/W5_W5Match7_EntrySort.h"
 
-extern "C" EquipmentUpgradeRecord *FUN_0019c06c(u32 item);
+extern "C" EquipmentUpgradeRecord *itemCategoryFindByItemId(u32 item);
 
 /* Test the positive upgrade bonuses relevant to this equipment category. */
 extern "C" bool equipmentHasPositiveUpgrade(u32 item)
@@ -10,7 +10,7 @@ extern "C" bool equipmentHasPositiveUpgrade(u32 item)
     }
     EquipmentUpgradeBonuses bonuses;
     equipmentGetCappedUpgradeBonuses(item, bonuses.values);
-    const EquipmentUpgradeRecord *record = FUN_0019c06c(item);
+    const EquipmentUpgradeRecord *record = itemCategoryFindByItemId(item);
     if (record == NULL) {
         return 0;
     }

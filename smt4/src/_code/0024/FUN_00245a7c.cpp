@@ -1,6 +1,7 @@
 /* NON_MATCHING: lookup exit control flow and persistent zero register differ; native stereo gains and six-choice compaction are restored. */
 #include "shard/GameOptions.h"
 #include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
 struct SupportVoiceRecord {
@@ -11,7 +12,6 @@ struct SupportVoiceRecord {
 }
 extern "C" {
 GameOptions *gameGetSupportUnitData();
-s32 gameGetOptionProgressStatus();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 u32 randRange(u32 maximum);
 u8 FUN_002bfdc4();

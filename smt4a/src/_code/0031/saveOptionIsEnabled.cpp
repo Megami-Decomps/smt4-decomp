@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/2dEvent/2dEventTex.h"
 
 namespace {
 struct SaveOptionFlags {
@@ -18,12 +19,11 @@ struct SaveOptionBlock {
 
 extern "C" {
 
-SaveOptionBlock *FUN_0026140c(void);
 
 /* Whether the saved option with the given index is on. */
 s32 saveOptionIsEnabled(s32 option)
 {
-    SaveOptionFlags *flags = &FUN_0026140c()->flags;
+    SaveOptionFlags *flags = &reinterpret_cast<SaveOptionBlock *>(FUN_0026140c())->flags;
     switch (option) {
     case 0:
     case 1:

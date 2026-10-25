@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/GameGetPlayerName.h"
 
 extern "C" {
 

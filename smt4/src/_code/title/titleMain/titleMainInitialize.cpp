@@ -6,8 +6,6 @@
 extern "C" {
 extern TitleMain *g_titleMain;
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                          AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 s32 FUN_001e9990(u32 handle);

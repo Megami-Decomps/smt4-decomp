@@ -15,7 +15,7 @@ struct MapTargetPoint {
 };
 extern "C" {
 extern MapObjectRequest *g_mapObj;
-u32 dataTableGetRecordFortyFive();
+s32 dataTableGetRecordFortyFive(void);
 Entry *mapObjGetCombinedEntry(u32 index);
 f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 

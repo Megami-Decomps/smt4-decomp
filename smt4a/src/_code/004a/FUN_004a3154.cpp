@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/PartyMoney.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ s32 flaggedValueHolderGetTotal(void *holder);
 s32 FUN_004d0cd4(void);
 void dispatchIfFound(s32 target, u32 id, s32 alternate);
 s32 FUN_004a8750(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
-void FUN_004a0ef4(s32 amount);
 void FUN_00408184(s32 kind, s32 amount);
 void FUN_003343f0(s32 arg);
 u16 shopListItemGetId(const PanelListItem *item);
@@ -61,7 +61,7 @@ void FUN_004a3154(PurchasePanel *panel)
         dispatchIfFound(target, itemId, panel->isAlternate());
     }
     price = FUN_004a8750(id, panel->alternate, 0, panel->level >= 100, 0);
-    FUN_004a0ef4(-price);
+    partyAddMoneyClampedForward(-price);
     FUN_00408184(40, price);
     FUN_003343f0(0);
     panel->state = 2;

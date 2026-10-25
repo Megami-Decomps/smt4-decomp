@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_00164034.h"
 
 extern "C" {
 extern u32 DAT_005b3ce8;

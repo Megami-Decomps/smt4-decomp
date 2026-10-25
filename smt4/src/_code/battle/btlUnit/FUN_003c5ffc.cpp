@@ -1,5 +1,6 @@
 /* NON_MATCHING: battle debug list box item-changed handler (copies the edited item into the matching debug setting); written from the decompilation, switch lowering not compared with retail */
 #include "common.h"
+#include "battle/btlHelp.h"
 
 struct BtlDebugMenu {
     /* 0x00 */ u8 unk00[0x10];
@@ -54,7 +55,6 @@ extern u32 DAT_0049355c;
 
 u32 *asdListBoxGetItemText(u32 box);
 s32 listBoxItemHasOwner(u32 box);
-u32 *asdListBoxGetItemValuePtr(u32 box, u32 item);
 
 static __inline void listBoxStoreText(u32 box, u32 *destination)
 {
@@ -63,7 +63,7 @@ static __inline void listBoxStoreText(u32 box, u32 *destination)
 
 static __inline void listBoxStoreValue(u32 box, u32 item, u32 *destination)
 {
-    *destination = *asdListBoxGetItemValuePtr(box, item);
+    *destination = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(box), item);
 }
 
 void FUN_003c5ffc(BtlDebugMenu *menu, BtlUnitDebugFlags *unit, u32 index)

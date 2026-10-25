@@ -1,15 +1,12 @@
 /* NON_MATCHING: first text-count load uses cached text-member address rather than window base. */
 #include "ui/DirectoryEntryWindow.h"
+#include "gamedata/FlagsB.h"
 extern "C" {
 void *fileSectionGetData(void *file, u32 id, s32 section);
 s32 FUN_001688c4(void *text);
 void FUN_00203b40(void *control, s32 count, s32 mode, s32 enabled, s32 initial, s32 step);
 int asdTextDrawDirectoryEntry(void *text, s32 kind, u32 color, s32 alignment, s32 mode, void *file, u32 id);
 void flagsSetOrClearBit(void *control, s32 value);
-s32 flagsBGetBit1(u16 id);
-s32 flagsBGetBit2(u16 id);
-void gameFlagsSetAlternateMode(u32 id, s32 value);
-void FUN_003ff20c(u32 id, s32 value);
 
 // Populate a directory entry and consume its pending alternate-mode flag.
 void FUN_003f6abc(DirectoryEntryWindow *window)
@@ -25,7 +22,7 @@ void FUN_003f6abc(DirectoryEntryWindow *window)
     flagsSetOrClearBit(window->textControl, 0);
     window->scroll = 0;
     if (!flagsBGetBit2(id))
-        FUN_003ff20c(id, 1);
+        flagsBSetBit2(id, 1);
     window->alternateId = 0;
     if (flagsBGetBit1(id)) {
         gameFlagsSetAlternateMode(id, 0);

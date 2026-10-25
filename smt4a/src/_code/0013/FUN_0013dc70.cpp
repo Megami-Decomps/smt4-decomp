@@ -9,7 +9,7 @@ void FUN_0014a960(s32 enable);
 /* Advances the job's white fade-in by one frame, ending it after fadeFrames frames. */
 s32 FUN_0013dc70(u32 job)
 {
-    JobWork *work = jobGetWork(job);
+    JobWork *work = reinterpret_cast<JobWork *>(jobGetWork(job));
     s32 alpha;
 
     if (!work->fadeActive || !work->fadeEnabled) {

@@ -32,8 +32,6 @@ s32 FUN_0018c0ec(u32 process);
 void scrResultDestroy(u32 process);
 s32 FUN_001a16c0(u32 process);
 s32 FUN_001c8974(u32 process);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, void *parent);
 void FUN_003b7b58(ResultProcessWorkIV *work);
@@ -47,8 +45,7 @@ void resultCreate(u8 kind)
         asdDebugTrace(DAT_00405dfc, 4708);
         ResultProcessWorkIV *work = (ResultProcessWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(*work), 1);
         g_result = work;
-        work->calculate = asdProcessCreateSimple(DAT_00405df0, 2, 0, 0,
-                                                FUN_0018c0ec, scrResultDestroy, 0);
+        work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00405df0), 2, 0, 0, FUN_0018c0ec, scrResultDestroy, 0);
         taskCreateDraw(DAT_00405ddc, 0x80, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));
         taskCreateDraw(DAT_00405dc8, 0xDE, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));
         work->drawDown = taskCreateDraw(DAT_00405db8, 0xE6, 0, 0, FUN_001c8974, NULL, 0, reinterpret_cast<void *>(work->calculate));

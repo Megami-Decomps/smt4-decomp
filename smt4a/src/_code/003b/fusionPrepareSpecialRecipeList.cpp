@@ -3,6 +3,7 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "map/lmapMain.h"
+#include "event/2dEvent/2dEventTex.h"
 struct LinkHolder;
 
 struct FusionSavedSelection {
@@ -35,7 +36,6 @@ struct FusionRecipeWorkView {
 
 extern "C" {
 extern UniteWork *g_unite;
-FusionSavedPreferences *FUN_0026140c();
 void soundChannelRequestIfEnabled(u32 channel, u32 mode, u32 duration);
 u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes);
 void FUN_00203b40(ScrollSelection *list, s32 count, s32 visible, s32 columns,
@@ -55,7 +55,7 @@ void fusionPrepareSpecialRecipeList()
 {
     UniteWork *work = g_unite;
     FusionRecipeWorkView *recipes = reinterpret_cast<FusionRecipeWorkView *>(work);
-    FusionSavedSelection *selection = &FUN_0026140c()->selection;
+    FusionSavedSelection *selection = &reinterpret_cast<FusionSavedPreferences *>(FUN_0026140c())->selection;
     soundChannelRequestIfEnabled(recipes->soundChannel, 0, 60);
     if (selection->slots[0] >= 0) {
         const SlotRecord *slot = gameGetSlotRecord(selection->slots[0]);

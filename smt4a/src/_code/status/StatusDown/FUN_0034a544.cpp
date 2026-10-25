@@ -3,6 +3,8 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -53,7 +55,6 @@ extern u8 DAT_005369cc[];
 
 void *asdMemoryAllocTracked(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 void sysMemClear(void *block, u32 size);
-void *asdProcessCreateSimple(const char *name, u32 priority, u32 a, u32 b, void (*update)(void *), u32 c, u32 d);
 void *taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);
 void paramsClearPacket(void *packet);
 
@@ -67,7 +68,6 @@ void positionStateSet(u32 handle, u32 a, u32 color, f32 value);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 void fillTwoWordsWithByte(u32 *words, s32 value);
 void FUN_003e4140(void *state);
-void asdLoadFileAsyncSimple(const char *path, u32 *out, s32 arg);
 void FUN_00268770(void *process);
 void FUN_0026b0e4(void *process);
 
@@ -83,7 +83,7 @@ void FUN_0034a544(void)
     StatusDown *down = g_statusDown;
 
     sysMemClear(down, 0x259C);
-    void *process = asdProcessCreateSimple("TMD CALC", 4, 0, 0, FUN_00268770, 0, 0);
+    void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00268770), 0, 0));
 
     down->process = process;
     down->drawTask = taskCreateDraw("TMD DDRAW", 0xEB, 0, 0, FUN_0026b0e4, 0, 0, process);

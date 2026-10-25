@@ -1,4 +1,5 @@
 #include "shard/Shard0035.h"
+#include "util/ClearByte.h"
 
 extern "C" {
 

@@ -1,11 +1,14 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021d13c` (_code @ 0x21d13c, 0x45e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "mapnavi/naviMain.h"
+#include "gamedata/FlagValueIsPositive.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
 int FUN_0015f490(...);
-int infoWinSetText(...);
 int uiNavigatorStart(...);
 int FUN_00370ecc(...);
 int FUN_003f1b3c(...);
@@ -153,7 +156,6 @@ extern short vec2GetYInt(int *);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable8FindRecord. */
-extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: gameGetSlotRecord. */
@@ -213,7 +215,6 @@ extern int stateHolderIsMissingOrState0(void);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003df57c. */
 extern int FUN_003e0024(void);
-extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: gameDataFlagTestBit. */
 extern unsigned int FUN_003e53ec(void);
 extern int btlScriptUnitHasFlags(int);
@@ -230,7 +231,6 @@ extern unsigned int halfTableGet(unsigned int, int);
 /* Supplied declaration required: FUN_0047f4cc. */
 extern int FUN_0047fbb4(unsigned int);
 /* Supplied declaration required: btlItemComputeValues. */
-extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_004bcbb4. */
 /* Supplied declaration required: bitsAt60Test. */
 extern int btlFindEntryValue(int, unsigned int);
@@ -2576,11 +2576,11 @@ LAB_0022129c:
               temp_v4 = saveSlotFindSelected();
               temp_v1 = *(unsigned short *)(temp_v4 + 300);
               FUN_00370ecc(temp_v1);
-              temp_v10 = FUN_0019acdc(temp_v1,1);
+              temp_v10 = FUN_0019acdc(temp_v1, 1);
               temp_v25 = &temp_v32;
               FUN_003f1b3c(*temp_v37,temp_v10,9,&temp_v29);
               FUN_0047f4cc(temp_v32);
-              infoWinSetText(*(unsigned int *)(*temp_v37 + 0x4d64),temp_v29 & 0xffff);
+              infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(*temp_v37 + 0x4d64)), temp_v29 & 0xffff);
               temp_v25 = (short **)0x0;
               uiNavigatorStart(temp_v1,1,1,0);
             }

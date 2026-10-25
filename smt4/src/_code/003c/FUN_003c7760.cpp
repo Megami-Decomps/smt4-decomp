@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: when clearing the UI and active flags retail loads the flags word into r1 (and hoists the pool load of DAT_00435d18 between), built uses r0 */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -35,7 +36,7 @@ extern s32 FUN_00256940(BtlMain *main, BtlState *state, s32 arg);
 extern void btlReflectQueueKind34(s32 a, s32 b);
 extern void FUN_00256898(s32 a, s32 b);
 extern void battleSelectButtonHelpPreset(s32 a);
-extern void FUN_00242914(void *block, s32 arg);
+
 extern void battleResetCounterAndFlag(u32 arg);
 
 /* Per-frame update of a battle task: announces itself once, and when its job reports state 2 shuts

@@ -2,6 +2,7 @@
 #define SHARD_W6_W6MATCH2_JOB_BLEND_H
 
 #include "common.h"
+#include "shard/JobWork.h"
 
 struct JobBlendWork {
     u32 kind;       // 0x00
@@ -10,7 +11,5 @@ struct JobBlendWork {
     u8 unk0c[0x14]; // 0x0C
     f32 factor;     // 0x20
 };
-
-extern "C" JobBlendWork* jobGetWork(u32 job);
 
 #endif

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00230038` (_code @ 0x230038, 0x498 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-extern int FUN_00152f54(void);
 extern int btlMainIsRunning(void);
 /* Supplied declaration required: FUN_001bbde0. */
 /* Supplied declaration required: FUN_0050dda4. */

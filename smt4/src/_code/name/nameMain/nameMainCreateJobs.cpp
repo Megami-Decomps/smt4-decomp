@@ -1,6 +1,7 @@
 /* NON_MATCHING: null-mode initialization and alternate-priority draw branches have different cold-block placement. */
 #include "shard/W5_W5Match2_MapCallbacks.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct NameCreateWork {
     /* 0x00 */ u32 process;
@@ -17,8 +18,6 @@ extern const char DAT_004056ac[];
 extern const char DAT_004056bc[];
 extern const char DAT_004056c8[];
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 first, s32 second,
-                           s32 (*update)(void *), void (*end)(void *), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
                     s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
 s32 nameEntryUpdateTask(void *process);
@@ -39,8 +38,7 @@ extern "C" void nameMainCreateJobs(const s32 *mode)
         FUN_003984a4(work->drawing);
     else
         FUN_003984ac(work->drawing, (s8)*mode);
-    work->process = asdProcessCreateSimple(DAT_004056ac, 2, 0, 0, nameEntryUpdateTask,
-                                           nameWorkMarkDone, g_name.work);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004056ac), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(nameEntryUpdateTask), reinterpret_cast<AsdProcFunc>(nameWorkMarkDone), reinterpret_cast<u32>(g_name.work));
     if (*mode != 1) {
         taskCreateDraw(DAT_004056bc, 0x7a, 1, 0, nameDrawIfVisible, NULL, g_name.work, work->process);
         taskCreateDraw(DAT_004056bc, 0xd8, 1, 0, nameDrawIfVisible, NULL, g_name.work, work->process);

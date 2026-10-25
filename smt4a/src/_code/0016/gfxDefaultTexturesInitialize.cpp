@@ -2,13 +2,13 @@
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "util/GfxTexture2DCreate.h"
 
 extern "C" {
 extern DriverTextureAllocate *g_gfxAllocateCallback;
 extern DriverTextureRelease *g_gfxReleaseCallback;
 extern DefaultTextureGlobals g_textureBindingCache;
 
-DefaultTexture2D *gfxTexture2DCreate(u32 mode);
 DefaultTextureCube *gfxCubeTextureCreate(u32 mode);
 void gfxTextureStorageUnbind(DefaultTextureStorage *storage);
 void gfxTextureStorageRelease(u32 format, DefaultTextureStorage *storage);
@@ -32,7 +32,7 @@ s32 gfxDefaultTexturesInitialize(DefaultTextureWork *work)
     s32 result = -1;
     g_textureBindingCache.work = work;
     sysMemClear(work, sizeof(*work));
-    g_textureBindingCache.work->texture2D = gfxTexture2DCreate(0);
+    g_textureBindingCache.work->texture2D = reinterpret_cast<DefaultTexture2D *>(gfxTexture2DCreate(0));
     g_textureBindingCache.work->cube = gfxCubeTextureCreate(0);
     DefaultTextureScratch *scratch = createDefaultTextureScratch();
     g_textureBindingCache.work->scratch = scratch;

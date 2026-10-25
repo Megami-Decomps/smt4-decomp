@@ -29,7 +29,6 @@ void effectQcFinish(u32 handle);
 s32 qcMainEndBackgroundPass(u32 handle);
 s32 qcMainJobUpdateEntry(u32 handle);
 s32 FUN_001fe19c(u32 handle);
-u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 
 void QcMain_Register(const s32 *parameters, s32 mode)
@@ -63,8 +62,7 @@ void QcMain_Register(const s32 *parameters, s32 mode)
         gameFlagSetValue(0x143, 1, 1);
         gameFlagSetValue(0x157, 1, 1);
     }
-    work->process = asdProcessCreateSimple("QuestCenterMainProc", 2, 0, 0,
-        QuestCenterMainProcUpdate, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"), 2, 0, 0, QuestCenterMainProcUpdate, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));
     work->backgroundDraw = taskCreateDraw("QuestCenterDrawUp L", 0x6F, 1, 0,
         qcMainEndBackgroundPass, NULL, reinterpret_cast<u32>(g_qcMain.work), work->process);
     taskCreateDraw("QuestCenterDrawUp L", 0x7D, 1, 0,

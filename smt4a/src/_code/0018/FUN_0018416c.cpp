@@ -4,7 +4,7 @@
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
 s32 gameFlagIsSet(u32);
-u16 FUN_0019e52c(u16);
+u16 FUN_0019e52c(u32 key);
 
 // Check whether the unit is in the unlocked portion of either saved availability list.
 u32 FUN_0018416c(u32 unitId)

@@ -1,9 +1,9 @@
 /* NON_MATCHING: ARMCC keeps x in r6 from entry instead of copying r4 to r6, and omits retail's nop before the member-speed call. */
 #include "ui/PartyPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "result/WhisperEffect.h"
 
 extern "C" {
-u32 partyPanelGetFlag(void);
 PartyMember* partyPanelGetMember(s32 index);
 void efctSetSpeed(f32 speed);
 }

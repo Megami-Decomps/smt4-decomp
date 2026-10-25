@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 99 vs built 93 rows, 71 diff lines. */
+/* NON_MATCHING: the debug trace (file/line) now matches; retail zeroes each identity-quaternion component with an integer store and then rewrites w with 1.0f (armcc folds the dead zero stores into a VSTM pair here). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonTex.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -16,12 +17,14 @@ void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
 extern u8 DAT_005c1f82;
+extern const char DAT_00544be4[];
 
 /* Creates a textured polygon object from an effect description: zeroed object, one-segment
  * geometry, the effect's parameters copied in, and the description's resource attached
  * according to its type. */
 PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
 {
+    asdDebugTrace(DAT_00544be4, 36);
     PolyTexObject *obj = (PolyTexObject *)memAlloc(0x10000, 0x100, 0, 212, 0x10, 1);
     u32 *resource;
 

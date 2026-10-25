@@ -13,7 +13,7 @@ extern LmapExtraGlobalsA DAT_005806a0;
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 s32 settings5BGetValue();
-void settings5BSetValue(s32 value);
+void settings5BSetValue(s8 value);
 
 // Restore the previous static pose, load the requested camera clip, then sample its first frame.
 void FUN_0035243c(s32 mapId, s32 variant)

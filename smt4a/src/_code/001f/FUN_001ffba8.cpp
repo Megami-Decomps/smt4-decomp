@@ -1,6 +1,7 @@
 /* NON_MATCHING: twin of smt4 FUN_0018a104; readable rewrite; the axis is derived from the global matrix at DAT_00407ed0 in retail but is folded to the draft's constants here, and the scheduling of the float math differs. */
 #include "common.h"
 #include <math.h>
+#include "title/titleMain.h"
 
 struct Vec3f {
     f32 x, y, z;
@@ -24,7 +25,6 @@ void FUN_0018a924(f32* sine, f32* cosine);
 void uiSetFloatPair(void* camera);
 void FUN_0014f0dc(void* camera, Vec3f* position, Vec3f* target, s32* result);
 void FUN_001523b8(void* camera, s32 flag);
-void FUN_0036b824(void* camera);
 
 // Places the screen's camera at its default position and aims it by rotating the
 // default view direction around the screen axis.
@@ -68,7 +68,7 @@ void FUN_001ffba8(OrbitScreen* screen)
     uiSetFloatPair(screen->camera);
     FUN_0014f0dc(screen->camera, &screen->position, &target, &result);
     FUN_001523b8(screen->camera, 1);
-    FUN_0036b824(screen->camera);
+    FUN_0036b824(reinterpret_cast<u32>(screen->camera));
 }
 
 } /* extern "C" */

@@ -1,8 +1,8 @@
 /* NON_MATCHING: growth-stat operands and individual packed-skill stores are scheduled differently. */
 #include "gamedata/UnitSummary.h"
+#include "bible/bibleLegionDraw.h"
 
 extern "C" {
-const StatBlock *FUN_003ad6e0(u32);
 s32 gameRecordCopy(u32, StoredUnitSummary *);
 void gameDataStoreRecord(u32, const StoredUnitSummary *);
 
@@ -20,7 +20,7 @@ void FUN_003a7fec(u32 unused, u32 unitId)
     typedef char GrowthViewOffsets[
         offsetof(GrowthView, stats) == 0x590 &&
         offsetof(GrowthView, bonus) == 0x601 ? 1 : -1];
-    const StatBlock *unit = FUN_003ad6e0(unitId);
+    const StatBlock *unit = reinterpret_cast<const StatBlock *>(FUN_003ad6e0(unitId));
     const GrowthView *growth = (const GrowthView *)unit;
     StoredUnitSummary summary;
     if (gameRecordCopy(unitId, &summary)) {

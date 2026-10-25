@@ -1,5 +1,6 @@
 /* NON_MATCHING: Area timer setup and flag normalization are complete; area/flag use swapped r5/r6 and the signed bit-index calculation uses different scratch registers. */
 #include "shard/Shard0033.h"
+#include "util/FUN_003799d0.h"
 
 struct AreaTimerRecord {
     /* 0x00 */ u8 unk00[0x20];
@@ -26,7 +27,6 @@ Flags0C0C *gameFlagsGetBlock();
 s32 dataTable2ECount();
 AreaTimerRecord *dataTable2EGetEntry(s32 index);
 s32 dataTableGetRecordFortyEight();
-AreaFlagRecord *FUN_003799d0(s32 index);
 void FUN_003b9720(s32 area, s32 index);
 void gameClearMapGroupFlags(s32 area);
 void FUN_002ba544(s32 area);
@@ -64,7 +64,7 @@ extern "C" void FUN_0037723c(s32 immediate)
         }
         timers->timers[entry->timerIndex] = entry->duration * 1800;
         for (s32 j = 0; j < dataTableGetRecordFortyEight(); ++j) {
-            const AreaFlagRecord *record = FUN_003799d0(j);
+            const AreaFlagRecord *record = reinterpret_cast<AreaFlagRecord *>(FUN_003799d0(j));
             if (record->id != -1 && record->area == area) {
                 s32 flag = record->flag;
                 Flags0C0C *flags = gameFlagsGetBlock();

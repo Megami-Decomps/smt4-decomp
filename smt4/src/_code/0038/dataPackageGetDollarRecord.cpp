@@ -16,7 +16,7 @@ u8 *dataPackageGetDollarRecord(PackageList *list, s32 index)
                     void *table = dataTableFileGetTable(entry->files[j].fileId, 0);
                     s32 end = dataTableGetCount(table) + total;
                     if (end >= index) {
-                        return dataTableGetEntries(table) + (index - total) * 0x34;
+                        return reinterpret_cast<u8 *>(dataTableGetEntries(table)) + (index - total) * 0x34;
                     }
                     total += end;
                 }

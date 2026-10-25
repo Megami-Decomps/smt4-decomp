@@ -1,10 +1,10 @@
 /* NON_MATCHING: highlighted help segment register allocation and byte-count reloads differ. */
 #include "ui/ButtonHelp.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 void *rt_memcpy(void *destination, const void *source, u32 bytes);
-s32 fontMeasureLineAdvance(const char *text, u32 style);
 void FUN_002be5a4(u32 style, u32 color, const char *text,
                   f32 x, f32 y, f32 scale, f32 depth, f32 opacity);
 

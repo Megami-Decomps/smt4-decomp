@@ -1,5 +1,6 @@
 /* NON_MATCHING: script-mode setter and phase switch match; state-7 tail merging and result-state store scheduling differ. */
 #include "battle/btlGameOver.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 extern void *g_btlAux;
@@ -8,7 +9,6 @@ extern const char DAT_005285fc[]; /* battle/gameover/gameover.bf */
 extern const char DAT_005285dc[]; /* battle/gameover/gameover.mbm */
 void FUN_004f7b84(void *aux, const char *name);
 s32 FUN_004f6d34(void *aux);
-void asdLoadFileAsyncSimple(const char *path, void **out, u32 flags);
 void *gameDataBlocksGetSaveData(void);
 void *FUN_00275bc8(void *process, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
@@ -74,8 +74,8 @@ s32 FUN_003e6f50(BtlGameOverA *work)
     case GAMEOVER_STATE_LOAD: {
         SaveCounterView *save;
 
-        asdLoadFileAsyncSimple(DAT_005285fc, &work->dataA, 0);
-        asdLoadFileAsyncSimple(DAT_005285dc, &work->dataB, 0);
+        asdLoadFileAsyncSimple(DAT_005285fc, reinterpret_cast<u32 *>(&work->dataA), 0);
+        asdLoadFileAsyncSimple(DAT_005285dc, reinterpret_cast<u32 *>(&work->dataB), 0);
         save = (SaveCounterView *)gameDataBlocksGetSaveData();
         if (save->gameOvers < 255) {
             save->gameOvers++;

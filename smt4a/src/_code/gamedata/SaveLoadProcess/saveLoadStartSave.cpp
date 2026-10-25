@@ -35,8 +35,6 @@ u8* gameDataBlocksGetSaveData(void);
 void gameDataAddHomeButtonHold(u32 bits);
 void gameDataBlocksAddFlags(u32 bits);
 void FUN_00333574(u32 bits);
-u32 asdProcessCreateSimple(const s8* name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void* owner);
 s32 FUN_00371750(u32 process);
@@ -75,9 +73,7 @@ extern "C" u32 saveLoadStartSave(s32 slot, u8 option)
         work->directSlot = 1;
     }
     work->started = 0;
-    work->process = asdProcessCreateSimple(
-        reinterpret_cast<const s8*>("Save"), 4, 0, 0, FUN_00371750, work8BufDestroy,
-        reinterpret_cast<u32>(work));
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8*>("Save"), 4, 0, 0, FUN_00371750, work8BufDestroy, reinterpret_cast<u32>(work));
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     work->phase = 0;
     work->option = option;

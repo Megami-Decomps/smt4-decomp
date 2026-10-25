@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler uses a 3988-byte stack reservation and different argument/enabled store ordering. */
+/* NON_MATCHING: store order now matches; retail pushes {r4-r6} and reserves 3984 bytes where armcc pushes {r4,r5} and reserves 3988 (two subs). */
 #include "common.h"
 
 struct OperationState {
@@ -26,8 +26,8 @@ void FUN_003e4070(u32, u32 argument)
     FUN_00161a10();
     OperationState state;
     FUN_0018c740(&state);
-    state.enabled = 0;
     state.argument = argument;
+    state.enabled = 0;
     FUN_001a1f5c();
     FUN_0018c840();
     FUN_0018c870();

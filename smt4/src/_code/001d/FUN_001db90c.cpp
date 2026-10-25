@@ -3,7 +3,6 @@
 
 extern "C" {
 void FUN_002ad66c(SaveCalendarTime *output, const u64 *time);
-void memCopy(const void *source, void *destination, u32 bytes);
 void rt_aeabi_memclr(void *destination, u32 bytes);
 void FUN_002c567c(u64 *output);
 

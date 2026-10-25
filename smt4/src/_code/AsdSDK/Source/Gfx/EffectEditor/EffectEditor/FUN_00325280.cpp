@@ -4,12 +4,12 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_0019dad8(float *);
+int matrixGetTranslation(float *);
 int FUN_00217634(void);
 int FUN_00245ed0(void);
 int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(int);
-int FUN_0024b830(int);
+int shiftRandomNextFraction(int);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(int, int);
@@ -82,12 +82,12 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0019dad8. */
+/* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_00217634. */
 /* Supplied declaration required: FUN_00245ed0. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -169,7 +169,7 @@ void FUN_00325280(int param_1)
   if ((*(int *)(param_1 + 0x28) <= *(int *)(temp_v5 + 0x34)) || (*(int *)(temp_v5 + 0x34) == 0)) {
     temp_v51 = *(int *)(temp_v5 + 0x40);
     temp_v37 = *(int *)(temp_v5 + 0x38);
-    FUN_0019dad8(&temp_v32);
+    matrixGetTranslation(&temp_v32);
     DAT_004ea93c = g_polyDefaultColor;
     DAT_004ea940 = DAT_00472524;
     DAT_004ea944 = DAT_00472528;
@@ -250,7 +250,7 @@ void FUN_00325280(int param_1)
             temp_v3 = DAT_004ea924;
             temp_v42 = DAT_004ea91c;
             temp_v43 = DAT_004ea920;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v10 = temp_v10 * 6.2831855f;
             temp_v24 = temp_v10 * 40.743664f;
             temp_v23 = temp_v10 - 6.2831855f;
@@ -461,7 +461,7 @@ void FUN_00325280(int param_1)
                 if ((int)temp_v23 >= 0x40490fdc) {
                   temp_v14 = 3.1415927f;
                   temp_v23 = temp_v23 - 3.1415927f;
-                  FUN_0024b830(0);
+                  shiftRandomNextFraction(0);
                   temp_v46 = temp_v45 * (1.0f - temp_v14 * 0.95f);
                 }
                 temp_v14 = temp_v10 * 40.743664f;
@@ -481,7 +481,7 @@ void FUN_00325280(int param_1)
                 DAT_004ea920 = temp_v52;
                 DAT_004ea924 = temp_v36;
                 DAT_004ea928 = temp_v14;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 matrixCopySelectedToGlobal(&temp_v32);
                 DAT_004ea91c = temp_v54;
                 DAT_004ea920 = temp_v52;

@@ -1,6 +1,8 @@
+#include "util/FUN_003ee0c0.h"
 /* NON_MATCHING: scripted effect argument scheduling has not matched retail. */
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
@@ -8,7 +10,6 @@ u32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 index);
 BtlMainStateA *btlGetMainState(void);
 BtlSkillA *FUN_003f0e20(BtlMainStateA *battle, u32 skill);
-void FUN_003ee0c0(BtlMainStateA *battle);
 void FUN_004fc094(s32, BtlUnitA *, s32, BattleRosterRecordA *,
                   u32, u32, u32, u32, u32, u32, u32, u32, u32,
                   u32, u32, u32, u32, u32, u32, u32, u32, u32,

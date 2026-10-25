@@ -1,4 +1,5 @@
 #include "ui/PartyPanelState.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ extern s32 FUN_00291f5c(const void *left, const void *right); /* 0x291f5c */
 extern s32 comparePartyUnitsByRankRaceAndId(const void *left, const void *right); /* 0x291fc8 */
 extern PartyPanelState *g_partyPanel;
 
-extern unsigned char *FUN_002a0d0c(void);
 
 void partyPanelSortEntries(void)
 
@@ -29,7 +29,7 @@ void partyPanelSortEntries(void)
   u8 ascending;
   
   panel = g_partyPanel;
-  sortMode = FUN_002a0d0c();
+  sortMode = reinterpret_cast<unsigned char *>(FUN_002a0d0c());
   ascending = ~(*sortMode >> 7) & 1;
   if ((*sortMode & 0x7f) == 2) {
     if (ascending != 0) {

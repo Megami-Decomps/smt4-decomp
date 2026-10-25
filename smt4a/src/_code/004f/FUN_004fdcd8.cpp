@@ -1,10 +1,10 @@
 /* NON_MATCHING: actor/options saved registers are reversed; the null-name return joins a different epilogue. */
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 extern BtlAuxA* g_btlAux;
-u32 btlEffectNameHasPrefix(BtlAuxA* auxiliary, const char* name);
 
 s32 libc_strcmp(const char* first, const char* second);
 
@@ -17,7 +17,7 @@ ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
         f32 first;
         f32 second;
     };
-    if (btlEffectNameHasPrefix(g_btlAux, name)) {
+    if (btlEffectNameHasPrefix(reinterpret_cast<u32>(g_btlAux), reinterpret_cast<u32>(name))) {
         ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
         action->kind = 4;
         return action;

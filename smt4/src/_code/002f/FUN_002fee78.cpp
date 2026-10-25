@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct BtlMainState {
 } BtlMainState;
 
 extern s32 scrGetArg(s32 index);
-extern void scrSetResult(s32 value);
 extern BtlMainState *btlGetMainState(void);
 
 /* Script command: result is 1 when a live entry with the given id has the compared parameter

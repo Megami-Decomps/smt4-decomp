@@ -1,12 +1,12 @@
 #include "shard/Shard0049.h"
+#include "addon/AocEntryKind.h"
 
 extern "C" {
 
-extern u8 aocEntryGetKind(void);
-
-u8 FUN_0049cab8(void)
+/* Whether content entry `id` is of kind 10. */
+u8 FUN_0049cab8(u32 id)
 {
-    return aocEntryGetKind() == 10;
+    return aocEntryGetKind(id) == 10;
 }
 
 } /* extern "C" */

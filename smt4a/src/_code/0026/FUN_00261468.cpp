@@ -1,5 +1,6 @@
 /* NON_MATCHING: restored adjacent player-name getter tail call and delayed search-key initialization; id comparison register and comparator-address scheduling still differ. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 #define RANK_LABEL_SAVE_BLOCK 0x3E
 #define RANK_LABEL_LAST_ID 0x69
@@ -17,9 +18,7 @@ u8 *gameDataGetPlayerName(void);
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 arrayCompareSignedHalfword(const void *a, const void *b);
-u32 dataTableGet(u32 table, u32 index);
-u32 dataTableGetCount(u32 table);
-void *dataTableGetEntries(u32 table);
+
 
 u16 *FUN_00261468(u32 id)
 {
@@ -69,7 +68,7 @@ u16 *FUN_00261468(u32 id)
             return (u16 *)"\201\100\201\100\201\100\201\100\201\100\201\100\201\100\201\100\202\122\202\222\202\204\201\100\201\151\202\146\201\152";   /* 　　　　　　　　３ｒｄ　（Ｇ） */
         else {
             RankLabelRecord key;
-            u32 table = dataTableGet(RANK_LABEL_TABLE, 0);
+            void *table = dataTableGet(RANK_LABEL_TABLE, 0);
             void *entries = dataTableGetEntries(table);
             u32 count = dataTableGetCount(table);
             key.id = id;

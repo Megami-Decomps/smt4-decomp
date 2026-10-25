@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct TitleState0013705c {
 } TitleState0013705c;
 
 s32 FUN_001696f4(void);
-s32 FUN_00152f54(void);
 void FUN_00145e24(u32 scene, s32 arg);
 void FUN_00167eb0(u32 arg);
 

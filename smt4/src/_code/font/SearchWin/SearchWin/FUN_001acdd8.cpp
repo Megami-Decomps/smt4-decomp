@@ -1,6 +1,11 @@
+#include "gfx/SpritePartDraw.h"
 /* NON_MATCHING: label-draw argument setup/literal ordering, frame /5 multiply operands, and final zero-return scheduling differ; loading-dot loop instructions agree. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/SpritePartDraw.h"
+#include "text/TextDraw.h"
+#include "util/Vec2Fixed.h"
+#include "gfx/StereoParallax.h"
 
 /* The title scene (its state stacks live at 0x124C and 0x12AC). */
 struct TitleScene {
@@ -58,14 +63,10 @@ extern "C" {
 extern RunWin *DAT_0043e170;
 extern TitleScene *g_titleScene;
 
-void FUN_002c39a4(TitleScene *scene);
-void FUN_002bf380(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void renderCtxSelectStereoLayout(TitleScene *scene);
 LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
-void FUN_002be5a4(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
 void FUN_002bed3c(void);
-s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
-f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 u32 FUN_002c5d80(s32 a, s32 b);
@@ -76,7 +77,7 @@ u8 FUN_001acdd8(void)
 {
     RunWin *win = DAT_0043e170;
     if (win->active != 0 && win->visible != 0) {
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         TitleScene *first = g_titleScene;
         titleScenePushFirst(first, FUN_002c5d80(1, 0));
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
@@ -88,7 +89,7 @@ u8 FUN_001acdd8(void)
         FUN_002bf380(2, 14, 0x15, x, y, 102);
         titleScenePopSecond(g_titleScene);
         LayoutPoint *labelPoint = FUN_002bf4f8(14, 0x16F);
-        FUN_002be5a4(4, 0xF49800FF, win->label, (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
+        FUN_002be5a4(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
         s32 lit = step % 8;

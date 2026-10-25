@@ -1,17 +1,17 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-extern int FUN_002973ec(void);
+struct Record0x24 {
+    u8 data[0x24];
+};
 
+extern Record0x24 DAT_00439ae8[];
+s32 FUN_002973ec(void);
 
-int FUN_0023ea94(void)
-
+Record0x24 *FUN_0023ea94(void)
 {
-  int temp_v0;
-  
-  temp_v0 = FUN_002973ec();
-  return temp_v0 * 0x24 + 0x439ae8;
+    return &DAT_00439ae8[FUN_002973ec()];
 }
 
 } /* extern "C" */

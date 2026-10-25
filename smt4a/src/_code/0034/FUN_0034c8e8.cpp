@@ -1,5 +1,6 @@
 #include "common.h"
 #include <stddef.h>
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -27,12 +28,11 @@ typedef struct Member {
 typedef char MemberResetLayoutCheck[offsetof(Member, unk37) == 0x37 &&
     offsetof(Member, id2) == 0x2E && sizeof(Member) == 0x44 ? 1 : -1];
 
-Member *FUN_0026140c(void);
 
 /* Resets the member's ids to -1 and its counters and flags to 0. */
 void FUN_0034c8e8(void)
 {
-    Member *member = FUN_0026140c();
+    Member *member = reinterpret_cast<Member *>(FUN_0026140c());
 
     member->id0 = -1;
     member->id1 = -1;

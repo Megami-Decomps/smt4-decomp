@@ -43,4 +43,13 @@ typedef char LightRegistryLayoutCheck[sizeof(LightRegistry) == 0x20 &&
     sizeof(LightRegistration) == 0x10 && offsetof(LightRegistration, registry) == 0x0C ? 1 : -1];
 typedef char LightRegistryChildListOffsetCheck[
     offsetof(LightRegistry, children.childListPrefix) == 0x10 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void sceneTraverserVisit(void *owner, void *visitor);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

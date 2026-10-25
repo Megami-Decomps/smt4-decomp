@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail lays the three 12-byte vectors out in a 48-byte block below the two candidate lists and keeps the player position in different registers; the control flow and the range tests (900 < d < 2976 or 300 < d < 4000) follow the retail code (about 175 diff lines). */
 #include "classes/Obj422318.h"
 #include "shard/W5_W5Match7_SceneState.h"
+#include "gamedata/SpriteTemplatePreferredDevil.h"
 
 /* The effect object pool of the map spawner, with the table of candidate spawn points that follows its slots. */
 struct SpawnerPool {
@@ -47,7 +48,6 @@ void FUN_002329a8(SpawnedObject *object, u32 model);
 void recordSetOrigin(SpawnedObject *object, const f32 *position);
 void recordSetDirection(SpawnedObject *object, const f32 *direction);
 void recordSetPosition(SpawnedObject *object, const f32 *position);
-u8 FUN_001e2954(s32 kind);
 u8 dataTable00RankOfPicked(s32 kind);
 bool gameFlagIsSet(u32 index);
 
@@ -113,7 +113,7 @@ void FUN_00396b08(SpawnerPool *spawner, s32 mode)
     recordSetPosition(object, position);
     object->itemKind = kind;
     object->spawnPoint = spawnPoint;
-    object->devilId = FUN_001e2954(kind);
+    object->devilId = spriteTemplateGetDevilTableByte(kind);
     object->rank = dataTable00RankOfPicked(kind);
     if (gameFlagIsSet(0x529) && mode == 1) {
         ((void (*)(SpawnedObject *))object->vtable[5])(object);

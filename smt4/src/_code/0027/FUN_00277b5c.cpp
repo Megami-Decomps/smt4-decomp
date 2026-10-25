@@ -18,7 +18,7 @@ typedef struct Globals {
 extern Globals *g_mapIf;
 
 int gameMapBlockGetValue(int id);
-int FUN_00285574(void);
+u8 FUN_00285574(void);
 
 /* Queues command `id` with `arg`, unless it is suppressed by the current state (id 0x24, or a blocking condition on id / 0x29). */
 void FUN_00277b5c(int id, u16 arg)

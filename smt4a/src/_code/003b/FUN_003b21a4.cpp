@@ -1,6 +1,8 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (206 vs 184 rows); retail keeps the panel base and parallax values in more callee-saved registers and shares the draw-state ring updates differently */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 struct DrawRing {
     s32 index;              // 0x00
@@ -39,9 +41,7 @@ extern "C" {
 
 extern RenderCtx* g_renderCtx;
 
-f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void efctSetSpeed(f32 speed);
-s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 FUN_001a1ee0(f32 angle);
 void pairSetHalves(void* sprite, s16 first, s16 second);
 void FUN_001634b4(void* sprite, f32 offset);

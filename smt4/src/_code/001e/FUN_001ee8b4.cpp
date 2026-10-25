@@ -1,10 +1,10 @@
 /* NON_MATCHING: count-increment load scheduling, navigation pointer lifetime and cursor-clamp arithmetic registers differ; 96 instructions each. */
 #include "status/StatusDown.h"
 #include "gamedata/DevilRecord.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;
-void memClear(void *memory, u32 bytes);
 void FUN_0029f848(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
 void FUN_0029eb5c(GridNavigation *navigation, s32 row);
 void scrollOwnerSelectIndex(GridNavigation *navigation, s32 column);

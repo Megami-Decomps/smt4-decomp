@@ -2,11 +2,11 @@
 /* Selects a random nonempty demon id from a record's choices and the battle's extra table. */
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlTables.h"
 #include "gamedata/Table00.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
-void *btlGetTable(BtlMainStateA *state, u32 section);
 Table00Record *dataTable00FindById(u32 id);
 u32 scrGetArg(u32 index);
 void scrSetResult(u32 result);

@@ -1,6 +1,8 @@
 /* NON_MATCHING: register choice only: retail uses r1/r2 (not r0/r1) for the start-position copies and the stacked callback arguments. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 typedef void (*MikadoProcFunc)(void);
 
@@ -24,9 +26,6 @@ extern "C" {
 extern MikadoModule g_mikado;
 
 void *jyoucyuGetTableEntry(u32 index);
-MikadoWork *asdMemoryAllocTracked(s32 heap, s32 align, s32 arg2, s32 size, s32 fromFront);
-u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay, MikadoProcFunc onUpdate,
-                           MikadoProcFunc onEnd, MikadoWork *work);
 u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, MikadoProcFunc onUpdate,
                    MikadoProcFunc onEnd, MikadoWork *work, u32 owner);
 void FUN_002bd1f4(void);
@@ -40,7 +39,7 @@ void FUN_002ba5c0(const s16 *args, s32 argSize)
 
     jyoucyuGetTableEntry(0);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\mikado\\mikadoMain.cpp", 125);
-    work = asdMemoryAllocTracked(0x100, 0x100, 0, 12, 1);
+    work = reinterpret_cast<MikadoWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, 12, 1));
     g_mikado.work = work;
     work->unk04 = 0;
     work->unk08 = 0;
@@ -50,7 +49,7 @@ void FUN_002ba5c0(const s16 *args, s32 argSize)
         g_mikado.startX = args[0];
         g_mikado.startY = args[1];
     }
-    work->process = asdProcessCreateSimple("MikadoMainProc", 4, 0, 0, FUN_002bd1f4, FUN_003409bc, work);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MikadoMainProc"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002bd1f4), reinterpret_cast<AsdProcFunc>(FUN_003409bc), reinterpret_cast<u32>(work));
     taskCreateDraw("MikadoDrawDown", 235, 1, 0, childOwnerUpdateKind123, NULL, g_mikado.work, work->process);
 }
 

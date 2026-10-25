@@ -12,7 +12,7 @@ int FUN_0027df30(...);
 int gameMoneyAdd(...);
 int FUN_0029c43c(...);
 int FUN_0029cc44(...);
-int FUN_0029e648(...);
+int messageBannerInitSelection(...);
 int btlScriptQueueRequestIfIdle(...);
 int FUN_003bf5a8(...);
 int channelRunMagnitudeQueries(...);
@@ -55,7 +55,7 @@ int FUN_003ae574(...);
 int FUN_003bcdb0(...);
 int btlAddClampedVital(...);
 unsigned int btlDispatchTargetActionKind(int target, int kind, unsigned int argument);
-int FUN_003c1414(...);
+int driftObjectStart(...);
 int FUN_003c1a2c(...);
 int FUN_003d6420(...);
 int FUN_003d6644(...);
@@ -149,7 +149,7 @@ extern int FUN_00256940(int, int, unsigned int);
 extern int messageMainTargetIsClear(void);
 /* Supplied declaration required: FUN_0029c43c. */
 /* Supplied declaration required: FUN_0029cc44. */
-/* Supplied declaration required: FUN_0029e648. */
+/* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: buttonHelpGetMode. */
 /* Supplied declaration required: FUN_002b6b00. */
 /* Supplied declaration required: buttonHelpSetPreset. */
@@ -180,7 +180,7 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: FUN_003c0390. */
 /* Supplied declaration required: btlMessageStartUnlessFlagged. */
 /* Supplied declaration required: FUN_003c0d70. */
-/* Supplied declaration required: FUN_003c1414. */
+/* Supplied declaration required: driftObjectStart. */
 /* Supplied declaration required: FUN_003c149c. */
 /* Supplied declaration required: FUN_003c1a2c. */
 extern int btlSlotsGetMaxValue(int);
@@ -636,7 +636,7 @@ LAB_00345938:
       if ((*puVar9 & 0x10) != 0) {
         temp_v5 = FUN_00293230(puVar5);
         if (temp_v5 != 0) {
-          FUN_003c1414();
+          driftObjectStart();
         }
         else {
           FUN_003c1a2c(*(unsigned int *)(psVar2 + 10),*(unsigned int *)(psVar2 + 0x26));
@@ -1099,7 +1099,7 @@ LAB_00346854:
     if (temp_v5 == 0) {
       temp_v5 = FUN_002485b8();
       if (temp_v5 == 0) {
-        FUN_0029e648(0);
+        messageBannerInitSelection(0);
       }
       *(int *)(psVar2 + 0x26) = *(int *)(psVar2 + 0x26) + 1;
       temp_v1 = 1;

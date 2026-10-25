@@ -1,11 +1,11 @@
 /* NON_MATCHING: initial flag/name addressing and retained path pointer allocation differ. */
 #include "shard/Shard004F.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);
 void asdMemFree(void *);
-void asdLoadFileAsyncSimple(const char *path, void **output, s32 mode);
 char *libc_strcpy(char *output, const char *input);
 void sysMemClear(void *memory, u32 size);
 char *FUN_00100d60(const char *text, s32 character);
@@ -48,7 +48,7 @@ u32 FUN_004f7b84(void *context, const char *name)
     libc_strcpy(path, formattedPath);
     libc_strcpy(state->fileName, FUN_00100d60(path, '/') + 1);
     if (findRecordByKey(state->fileName) == 0xff) {
-        asdLoadFileAsyncSimple(path, &state->file, 1);
+        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&state->file), 1);
         state->flags |= 1;
     }
     return 1;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003f5a80` (_code @ 0x3f5a88, 0x110 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(int, unsigned int);
 
 typedef int romwright_code(...);
 extern romwright_code *DAT_0044e930; /* 0x44e930 */
@@ -33,7 +33,7 @@ unsigned int FUN_003f5a80(romwright_code *param_1,int param_2,unsigned int param
     temp_v0 = (*DAT_0044e930)(param_3 * 0x1d0);
     *piVar2 = temp_v0;
     if (temp_v0 != 0) {
-      memClear(temp_v0,param_3 * 0x1d0);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v0), param_3 * 0x1d0));
       if (0 < (int)param_3) {
         temp_v1 = param_3 & 1;
         temp_v0 = param_3 << 1;

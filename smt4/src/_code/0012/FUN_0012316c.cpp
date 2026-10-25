@@ -3,13 +3,13 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern AsdGfxContext g_asdGfxContext;
 extern DriverMemoryCallbacks g_gfxAllocateCallback;
 extern u8 *g_commandBufferCursor;
 extern u8 *g_commandBufferEnd;
-void memClear(void *block, s32 size);
 
 void FUN_0012316c(s32 bytes, s32 records)
 {

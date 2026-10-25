@@ -1,9 +1,9 @@
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-void scrSetResult(s32 result);
 s32 scrGetArg(s32 arg);
 
 extern u32 g_btlScriptUnit;

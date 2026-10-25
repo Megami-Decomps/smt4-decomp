@@ -3,11 +3,10 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(s32 enabled, s32 mode);
 void FUN_00164b5c(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second,

@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 

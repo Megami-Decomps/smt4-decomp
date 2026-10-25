@@ -1,6 +1,8 @@
 /* NON_MATCHING: logic and call sequence match; retail turns the final call of every path into a tail call (b after popping lr, `FUN_004d0680`, `uniteCreatePreviewModel`, `FUN_0032d0c8`, `sendEvent100020E`) and keeps the shared zero in r9, while the build keeps plain bl + pop {pc}. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/Shard004A.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* One row of the quest list: the quest id sits at +4. */
 struct QuestListRow {
@@ -42,11 +44,9 @@ s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetMode(void);
 void FUN_004d0680(QuestMenu *menu);
-u32 flaggedValueHolderGetTotal(const void *holder);
 const char *FUN_00180118(u32 id);
 const char *FUN_0014bf3c(u32 id, u32 option);
 char *libc_strcpy(char *destination, const char *source);
-void FUN_003180c4(u32 index, const char *text);
 void scrScriptProcessStartEntry(u32 job, u32 entry);
 void sendEvent100020E(void);
 void screen4AEnter(QuestMenu *menu);
@@ -79,7 +79,7 @@ void FUN_004a16bc(QuestMenu *menu)
     }
     QuestListRow *rows = (QuestListRow *)&menu->rowCount;
     if (selected != 0) {
-        u32 id = rows[flaggedValueHolderGetTotal(menu->holder)].id;
+        u32 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].id;
         libc_strcpy(text, FUN_00180118(id));
         FUN_003180c4(8, text);
         libc_strcpy(text, FUN_0014bf3c(id, 0));
@@ -105,7 +105,7 @@ void FUN_004a16bc(QuestMenu *menu)
         sendEvent100020E();
         menu->pageChanged = 1;
         sysPlaySe(menu->page == 1 ? 78 : 79);
-        s16 id = rows[flaggedValueHolderGetTotal(menu->holder)].id;
+        s16 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].id;
         if (menu->page == 1) {
             FUN_0032d0c8(0, 1, (u16)id, slotRecordFindById((u16)id));
             return;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: typed branch payloads restore frame and literal name copy; zero-pair stores and saved constant registers differ. */
 #include "common.h"
+#include "gamedata/Table1bOr1c.h"
 #include <string.h>
 
 extern "C" {
@@ -64,7 +65,6 @@ char *libc_strcpy(char *destination, const char *source);
 void bgmReleaseStopped(void);
 void soundChannelStopAll(s32 channel);
 void *FUN_002903f0(void);
-s32 FUN_00287894(void);
 SceneRecord *FUN_0022b8c0(void *sprites);
 void gameSynchronizeMapState(SceneWork *work);
 u8 *dataTable1bOr1cGetRecord(void *entry);
@@ -124,7 +124,7 @@ void FUN_003b92b4(SceneWork *work)
     } else if (work->returnToMap != 0) {
         void *entry = FUN_002903f0();
 
-        if (entry != NULL && FUN_00287894() == 6) {
+        if (entry != NULL && table1bOr1cGetRecordValue(reinterpret_cast<u32>(entry)) == 6) {
             work->record = FUN_0022b8c0(work->sprites);
             gameSynchronizeMapState(work);
             FUN_0026f960(*(u16 *)(dataTable1bOr1cGetRecord(entry) + 0x148));

@@ -16,7 +16,7 @@ extern "C" {
 s32 FUN_002a482c(void *list);
 s32 rangeGetMinimumLimit(void *list);
 StatRecord *FUN_00184310(u32 id);
-SpriteOffset *FUN_0018349c(void *sprites, s32 index);
+SpriteOffset *layoutFindTableEntry(void *sprites, s32 index);
 u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
 int textFormatBuffer(char *buffer, const char *format, u32 value);
 extern s32 g_animatedPageSelection[];
@@ -96,7 +96,7 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
         DAT_005e1ca8[i] = value;
         DAT_005e1ca8[10 + i] = color;
         bool flag = menu->mode != 0;
-        SpriteOffset *offset = FUN_0018349c(menu->sprites, i + 0x42F);
+        SpriteOffset *offset = layoutFindTableEntry(menu->sprites, i + 0x42F);
         s16 x = offset->x;
         s16 y = offset->y;
         u32 shown = FUN_004a8750((u16)id, menu->kind, flag, menu->level >= 100, 0);
@@ -108,7 +108,7 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
             if (shown > other)
                 shownColor = 0x72E027FF;
         }
-        offset = FUN_0018349c(menu->sprites, 0x4C6);
+        offset = layoutFindTableEntry(menu->sprites, 0x4C6);
         DAT_005e1cf8[i] = offset->x + x;
         DAT_005e1cf8[10 + i] = offset->y + y;
         textFormatBuffer((char *)&DAT_005e1cf8[20] + i * 0x20, "%8u", shown);

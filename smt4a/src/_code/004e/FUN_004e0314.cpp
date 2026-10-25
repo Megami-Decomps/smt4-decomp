@@ -4,6 +4,7 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 /* The party member a combatant entry represents: its unit id is at 0x12C. */
 struct EntryUnitInfo {
@@ -66,7 +67,6 @@ void FUN_004c9d04(s32 index, s32 a, s32 b);
 u8 *gameGetSlotTable(void);
 SlotRecord *gameGetSlotRecord(s32 slotIndex);
 void FUN_004fcf0c(s32 row, CommandMenu *menu, s32 first, s32 slot, s32 member, s32 last);
-s32 FUN_0019acdc(s32 id, s32 flag);
 void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 *sound);
 void FUN_0047f7ac(u32 index, u32 value);
 void btlReflectCreateKind44(s32 row, CommandMenu *menu, u32 unitId, u32 effect);

@@ -51,10 +51,10 @@ void FUN_00233240(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);
 u16 shopListItemGetId(const BibleDevilRow *);
 s32 FUN_0029ce60(u32, s32, s32, s32, s32);
-void FUN_0029e648(s32, s32);
+void messageBannerInitSelection(s32, s32);
 void messageTargetSetValue(s32, s32);
 s32 FUN_0029e924(void *);
-s32 FUN_00240d5c(void *);
+u32 flaggedEntryGetValueByState(void *);
 s32 FUN_00293b8c(void);
 s32 inputIsQuestConfirmPressed(void);
 void FUN_002328b4(void);
@@ -89,7 +89,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
             BibleDevilRow *rows = screen->rows;
             s16 id = shopListItemGetId(&rows[flaggedValueHolderGetTotal(screen->cursor)]);
             s32 delta = FUN_0029ce60(static_cast<u16>(id), static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
-            FUN_0029e648(1, 0);
+            messageBannerInitSelection(1, 0);
             messageTargetSetValue(-delta, 0);
         }
         return;
@@ -103,7 +103,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
     }
 
     s32 selection = FUN_0029e924(screen->cursor);
-    s32 scroll = FUN_00240d5c(screen->cursor);
+    s32 scroll = flaggedEntryGetValueByState(screen->cursor);
     if (FUN_00293b8c() == 1) {
         FUN_003c2b74(screen->cursor);
     } else if (FUN_00293b8c() == -1) {
@@ -128,7 +128,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
             FUN_002b8454(2, 4, 0x41, 1);
         }
     }
-    if (FUN_0029e924(screen->cursor) == selection && FUN_00240d5c(screen->cursor) == scroll) {
+    if (FUN_0029e924(screen->cursor) == selection && flaggedEntryGetValueByState(screen->cursor) == scroll) {
         return;
     }
     FUN_00233404();

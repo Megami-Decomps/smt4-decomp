@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 void FUN_0010e5a4(f32 duration);
@@ -7,7 +8,6 @@ void FUN_0010edbc(f32 duration);
 void FUN_0011a324(u32 volume);
 void asdSndEnsureCurrentSlotData(u32 resource);
 void asdSoundSelectSlotB(u32 slot);
-void memClear(void *buffer, u32 size);
 void *jyoucyuGetTableEntry(u32 index);
 
 extern SoundVolumeState g_soundVolumeSetting;

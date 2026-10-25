@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and stack layout: retail keeps the maximum in r5 and the current value in r6 and places the range start at sp+4 (a larger out block); built swaps the accumulators. */
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ extern BtlUnitEntry *btlMainFindActiveEntry(void);
 extern s32 scrGetArg(u32 index);
 extern s32 scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern s32 FUN_002499fc(u32 group, s32 *start, s32 *count);
 
 /* Script command: pushes whether the HP percentage of the present, non-excluded units of the current group (and the
  * active entry) is at most argument 0. */

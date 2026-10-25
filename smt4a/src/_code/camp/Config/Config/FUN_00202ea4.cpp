@@ -1,11 +1,13 @@
+#include "util/FUN_002a4894.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00202ea4` (_code @ 0x202ea4, 0xaa0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/Shard0031.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_003180c4(...);
 int obj04Finish(void);
 
 int FUN_0014e188(...);
@@ -63,7 +65,6 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: ifTouchRegionAdd. */
-extern int FUN_002a4894(int);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: FUN_003180c4. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -201,7 +202,7 @@ void FUN_00202ea4(void)
        (temp_v6 = temp_v7,
        FUN_003450d4(temp_v7,0,temp_v7 + 0x6e,0xffffffff,0xffffffff,0xffffffff,temp_v12,0,1), temp_v6 != 0)
        ) {
-      temp_v6 = FUN_002a4894(temp_v7);
+      temp_v6 = FUN_002a4894(reinterpret_cast<const Object *>(temp_v7));
       *(int *)(temp_v7 + 0x88) = temp_v6;
       temp_v10 = *(unsigned int *)(temp_v7 + temp_v6 * 8 + 0x98);
       temp_v4 = dataTableGet(0x36,1);
@@ -368,7 +369,7 @@ void FUN_00202ea4(void)
         temp_v11 = dataTableGetEntries();
         pcVar12 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
       }
-      FUN_003180c4(0,pcVar12);
+      FUN_003180c4(0, pcVar12);
       scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),5);
       temp_v4 = 4;
       *(unsigned int *)(temp_v6 + 0x68) = temp_v4;
@@ -435,7 +436,7 @@ LAB_00203688:
           temp_v11 = dataTableGetEntries();
           pcVar10 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
         }
-        FUN_003180c4(0,pcVar10);
+        FUN_003180c4(0, pcVar10);
         temp_v11 = *(int *)(temp_v6 + *(int *)(temp_v6 + 0x88) * 8 + 0x94);
         temp_v7 = loadSlotIsLoaded(0x36);
         if ((temp_v7 != 0) && (pcVar12 = pcVar13, temp_v11 < 5)) {
@@ -462,7 +463,7 @@ LAB_00203688:
           temp_v11 = dataTableGetEntries();
           pcVar12 = (char *)(temp_v11 + temp_v7 * 0xc + 0x1e);
         }
-        FUN_003180c4(1,pcVar12);
+        FUN_003180c4(1, pcVar12);
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x84),3);
         *(unsigned int *)(temp_v6 + 0x68) = 1;
         return;

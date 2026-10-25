@@ -11,7 +11,7 @@ void textFormatBuffer(char *output, const char *format, ...);
 u32 asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
 void asdTextDrawFormatted(u32 text, s32 font, s32 mode, s32 x, s32 y, const char *format, ...);
-s32 FUN_00241c40(s32 quest);
+u8 FUN_00241c40(int index);
 s32 FUN_003336dc(s32 quest, u32 state);
 u8 *FUN_002bcfc0(const u8 *source, u8 *output);
 void uiQuestCountDetailPages(s32 quest);

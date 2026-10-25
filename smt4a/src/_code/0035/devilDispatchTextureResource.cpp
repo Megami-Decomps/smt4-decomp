@@ -1,11 +1,12 @@
 #include "common.h"
 #include <stddef.h>
+#include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 const void *FUN_00184310(u32);
 const void *dataTable00FindById(u32);
 s32 gameFlagIsSet(u32);
-s32 devilIsTextureLoaded(u32, s32);
 struct AocSystem;
 extern AocSystem *g_aocSystem;
 s32 recordPrepareLinkedOwner(AocSystem *, u32, s32);

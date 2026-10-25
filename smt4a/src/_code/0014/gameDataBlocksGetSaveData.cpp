@@ -1,4 +1,5 @@
 #include "common.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 

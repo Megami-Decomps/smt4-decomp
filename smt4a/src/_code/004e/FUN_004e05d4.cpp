@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/btlMain.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571148; /* 0x571148 */
 extern unsigned int DAT_0057114c; /* 0x57114c */
 extern unsigned int DAT_00571150; /* 0x571150 */
@@ -65,13 +65,11 @@ extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int lcgRandomRange(unsigned int);
-extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 extern int dialogIsActive(void);
 /* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: uiNavigatorStart. */
 /* Supplied declaration required: stateFinishIfPresent. */
 extern int FUN_003eb1cc(int);
-extern int btlFindMarkedReserveRecord(int);
 extern unsigned int contentGetFirstFlaggedValue(void);
 /* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f0e20. */
@@ -151,7 +149,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
       }
       if (*(int *)(param_2[8] + 0x400) != 0) {
         temp_v0 = *(unsigned short *)(*(int *)(param_2[8] + 0x400) + 300);
-        temp_v5 = FUN_0019acdc(temp_v0,1);
+        temp_v5 = FUN_0019acdc(temp_v0, 1);
         temp_v2 = *param_1;
         if ((*(unsigned int *)(temp_v2 + 0x45a4) & DAT_005712a4) == 0 &&
             (*(unsigned int *)(temp_v2 + 0x45a0) & DAT_005712a0) == 0) {
@@ -226,7 +224,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     *puVar7 = *puVar7 & ~DAT_00571158;
     puVar7[1] = puVar7[1] & temp_v4;
   }
-  temp_v2 = btlFindMarkedReserveRecord(*param_1);
+  temp_v2 = reinterpret_cast<int>(btlFindMarkedReserveRecord(reinterpret_cast<BtlMainStateA *>(*param_1)));
   if (temp_v2 != 0) {
     *(unsigned int *)(temp_v2 + 0x50) = *(unsigned int *)(temp_v2 + 0x50) & 0xff7fffff;
   }

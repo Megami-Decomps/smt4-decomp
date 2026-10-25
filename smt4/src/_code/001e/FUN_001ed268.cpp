@@ -1,8 +1,8 @@
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 PositionedLayoutTaskWork *taskCreate(void (*update)(void *), u32, u32, u32, u32, u32 size, u32 list, u32, u32);
-void memClear(void *work, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 void FUN_00291340(void *layout, f32 *firstPair, f32 *secondPair, f32 *origin, f32 *dimensions);
 void FUN_001c2c70(void *work);

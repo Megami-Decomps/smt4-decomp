@@ -1,6 +1,7 @@
 /* NON_MATCHING: the four loop-invariant VFP constants receive a different saved-register permutation. */
 #include "map/mapObj.h"
 #include "shard/S1Mover.h"
+#include "util/SaveSlotInfoSet.h"
 
 extern "C" {
 extern MapObjectState *g_mapObj;
@@ -10,7 +11,6 @@ s32 sceneRegisterBoxEffect(u32 id, u32 value, const char *name, u32 resource,
     u8 option3, u8 option4, u8 option5, u8 flag0, u8 flag1, u8 option,
     u32 data0, u32 data1, u32 data2, u32 priority,
     f32 x, f32 y, f32 z, f32 extent0, f32 extent1, f32 extent2, f32 yaw);
-void saveSlotInfoSet(u32 effect, u32 duration, u8 *state);
 
 /* Spawn the named box effect in front of active supported map objects. */
 void FUN_00313440(void)
@@ -29,7 +29,7 @@ void FUN_00313440(void)
                 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,
                 position.x, position.y, position.z, 200.0f, 200.0f, 100.0f, slot->unk1c);
             if (slot->unk2c != 0)
-                saveSlotInfoSet(effect, 1000, &slot->unk2c);
+                saveSlotInfoSet(effect, 1000, reinterpret_cast<const char *>(&slot->unk2c));
         }
     }
 }

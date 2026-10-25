@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct TitleConfigWordPair { u32 first, second; };
 union TitleConfigAudioSettings {
@@ -36,8 +37,6 @@ extern TitleConfigCreateWork *g_titleConfig;
 extern const u8 DAT_00407dd6[];
 extern TitleConfigAudioSettings g_titleConfigValues;
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 first, s32 second,
-                           s32 (*update)(void), void (*end)(void), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
                     s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
 s32 titleConfigUpdate(void);
@@ -65,8 +64,7 @@ extern "C" void titleConfigCreate(void)
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\title\\titleConfig.cpp", 829);
     TitleConfigCreateWork *work = (TitleConfigCreateWork *)asdMemAlloc(0x100, 0x100, 0, 0x158, 1);
     g_titleConfig = work;
-    work->process = asdProcessCreateSimple("TITLE_CONFIG_MAIN", 2, 0, 0, titleConfigUpdate,
-                                           titleConfigDestroy, work);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE_CONFIG_MAIN"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(titleConfigUpdate), reinterpret_cast<AsdProcFunc>(titleConfigDestroy), reinterpret_cast<u32>(work));
     taskCreateDraw("TITLE_CONFIG D", 0xe6, 0, 0, FUN_002cb054, NULL, NULL, work->process);
     drawParameterBlockClear(&work->resources);
     paramsInit(&work->resources, DAT_00407dd6, 0x18, NULL, 0, NULL, 0, NULL, 0, NULL, 0);

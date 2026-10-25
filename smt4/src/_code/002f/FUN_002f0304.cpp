@@ -1,9 +1,8 @@
 /* NON_MATCHING: Retail mov r6, #1 differs from recovered mov r1, #1. */
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
-s32 scrSetResult(s32 result);
 
 // Reports whether any eligible battle entry has the script-selected bit set.
 u32 FUN_002f0304(void)

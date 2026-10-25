@@ -1,9 +1,9 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
-u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 SpriteInfo *FUN_001834a4(u32 group, u32 image);
 void FUN_0018152c(u32 value, s32 x, s32 y, s32 priority, s32 flags);
 

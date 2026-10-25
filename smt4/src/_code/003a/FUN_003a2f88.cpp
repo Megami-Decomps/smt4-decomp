@@ -17,7 +17,7 @@ struct ArrowSpritePositions { u32 ids[2]; };
 extern "C" {
 extern RenderCtx *g_titleScene;
 extern const ArrowSpritePositions DAT_00407540;
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 s32 FUN_002c5d80(u32 mode, u32 flags);
 void FUN_003a37dc(SceneArrowDrawWork *work);
@@ -31,7 +31,7 @@ void FUN_002c18e4(RenderCtx *context);
 
 void FUN_003a2f88(SceneArrowDrawWork *work)
 {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002bed3c();
     RenderCtx *context = g_titleScene;
     s32 state = FUN_002c5d80(1, 0);

@@ -3,6 +3,7 @@
 #include "classes/WindowStatus.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "nn/Result.h"
+#include "util/FUN_004ffd4c.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
@@ -31,7 +32,6 @@ struct AocListJob {
 
 WindowStatusResult sdkCreateEncodedResourceDescriptor(void *parameters, void *source);
 void table30GetEntryB(AocListEntry **entry, void *table, u32 index);
-u32 FUN_004ffd4c(AocListEntry **entry);
 void *asdOperatorNewE(u32 size, ...);
 WindowStatusResult FUN_004ffee0(AocListEntry **entry, u8 *extra, AocListItem *item, s32 flag, u32 index);
 WindowStatusResult FUN_005003b4(void *handle, void *buffer, u32 count);

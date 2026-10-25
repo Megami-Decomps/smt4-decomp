@@ -9,7 +9,7 @@ int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
 int gameGetPlayerData(...);
-int FUN_0018349c(...);
+int layoutFindTableEntry(...);
 int FUN_0047fc38(void);
 int FUN_0049339c(...);
 int drawTextAtRelativePosition(...);
@@ -41,7 +41,7 @@ extern unsigned char LAB_0049627c; /* 0x49627c */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: gameGetPlayerData. */
-/* Supplied declaration required: FUN_0018349c. */
+/* Supplied declaration required: layoutFindTableEntry. */
 extern unsigned int FUN_001ba3d0(unsigned int);
 /* Supplied declaration required: FUN_0047fc38. */
 extern int equipmentHasPositiveUpgrade(unsigned int);
@@ -96,10 +96,10 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
   }
   VectorSignedToFloat(0x100 - temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
   if (param_3 == 0) {
-    temp_v7 = FUN_0018349c(param_1 + 0x3a4,param_2 + 0x27);
+    temp_v7 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x27);
   }
   else {
-    temp_v7 = FUN_0018349c(param_1 + 0x3a4,param_2 + 0x4f);
+    temp_v7 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x4f);
   }
   temp_v16 = (int)*(short *)(temp_v7 + 8);
   temp_v7 = (int)*(short *)(temp_v7 + 10);
@@ -126,10 +126,10 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
       FUN_004934ac(param_1 + 0x3a4,0x105,temp_v16,temp_v7,temp_v14);
       efctSetSpeed();
     }
-    temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xac);
+    temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xac);
   }
   else {
-    temp_v8 = FUN_0018349c(param_1 + 0x3a4,0x99);
+    temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0x99);
   }
   temp_v2 = *(short *)(temp_v8 + 10);
   temp_v8 = *(short *)(temp_v8 + 8) + temp_v16;
@@ -140,20 +140,20 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
   if (param_2 != 0) {
     if ((param_4[1] & 1) != 0) {
       if (param_3 != 0) {
-        temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xab);
+        temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xab);
       }
       else {
-        temp_v8 = FUN_0018349c(param_1 + 0x3a4,0x98);
+        temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0x98);
       }
       FUN_0049339c(param_1 + 0x3a4,5,*(short *)(temp_v8 + 8) + temp_v16,*(short *)(temp_v8 + 10) + temp_v7,
                    temp_v14);
     }
     if ((param_4[1] & 2) != 0) {
       if (param_3 != 0) {
-        temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xb2);
+        temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xb2);
       }
       else {
-        temp_v8 = FUN_0018349c(param_1 + 0x3a4,0x9f);
+        temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0x9f);
       }
       FUN_0049339c(param_1 + 0x3a4,6,*(short *)(temp_v8 + 8) + temp_v16,*(short *)(temp_v8 + 10) + temp_v7,
                    temp_v14);
@@ -220,7 +220,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
   }
 LAB_00495f20:
-  temp_v8 = FUN_0018349c(param_1 + 0x3a4,temp_v21);
+  temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,temp_v21);
   VectorSignedToFloat(*(short *)(temp_v8 + 10) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v8 + 8) + temp_v16,(unsigned char)(in_fpscr >> 0x16) & 3);
   drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v9,temp_v15,temp_v10);
@@ -257,7 +257,7 @@ LAB_00495f20:
   }
   temp_v15 = contentGetUpgradedKindValue(temp_v5);
   if (param_3 != 0) {
-    temp_v20 = FUN_0018349c(param_1 + 0x3a4,0xb1);
+    temp_v20 = layoutFindTableEntry(param_1 + 0x3a4,0xb1);
     temp_v13 = (int)temp_v20;
     temp_v18 = param_2 == 0;
     temp_v0 = 0;
@@ -279,7 +279,7 @@ LAB_00495f20:
     }
   }
   else {
-    temp_v20 = FUN_0018349c(param_1 + 0x3a4,0x9e);
+    temp_v20 = layoutFindTableEntry(param_1 + 0x3a4,0x9e);
     temp_v13 = (int)temp_v20;
     temp_v18 = param_2 == 0;
     temp_v0 = 0;
@@ -307,11 +307,11 @@ LAB_00495f20:
   if (param_2 != 0) {
     temp_v9 = shopGetEntryPrice(param_4);
     if (param_3 != 0) {
-      temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xba);
+      temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xba);
       temp_v10 = 0xffffffff;
     }
     else {
-      temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xa7);
+      temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xa7);
       temp_v10 = 0x9b9b9bff;
     }
     temp_v2 = *(short *)(temp_v8 + 8);
@@ -321,11 +321,11 @@ LAB_00495f20:
   }
   temp_v9 = FUN_001ba3d0(temp_v6);
   if (param_3 != 0) {
-    temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xbc);
+    temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xbc);
     temp_v10 = 0x57d8ffff;
   }
   else {
-    temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xa9);
+    temp_v8 = layoutFindTableEntry(param_1 + 0x3a4,0xa9);
     if (param_2 == 0) {
       temp_v10 = 0xffffffff;
     }

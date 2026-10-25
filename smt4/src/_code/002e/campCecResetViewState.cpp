@@ -1,4 +1,5 @@
 #include "common.h"
+extern "C" void FUN_0020ffe8(u32, s32, f32, f32);
 
 struct CampCecViewState {
     f32 unk00;    // 0x00
@@ -16,7 +17,6 @@ struct CampCecViewState {
 
 extern "C" {
 void statusCameraSelectPreset(s32);
-void FUN_0020ffe8(u32, s32, f32, f32);
 void FUN_002d9208();
 
 // Restore the camp-CEC presentation defaults and clear its pending transform.

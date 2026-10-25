@@ -1,4 +1,5 @@
 #include "shard/GameOptions.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 GameOptions* gameGetSupportUnitData(void);

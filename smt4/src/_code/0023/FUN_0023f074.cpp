@@ -11,7 +11,6 @@ void buttonHelpSetPreset(s32 preset);
 ScriptRunState *FUN_00297060(void *data, void *context);
 void scrScriptProcessStartEntry(ScriptRunState *runner, s32 entry);
 void scriptProcessSetMode(ScriptRunState *runner, s32 mode);
-s32 scrRunOpcodesStub(ScriptRunState *runner);
 void uiFadeRelease(void);
 void buttonHelpRelease(void);
 BtlMainState *btlGetMainState(void);

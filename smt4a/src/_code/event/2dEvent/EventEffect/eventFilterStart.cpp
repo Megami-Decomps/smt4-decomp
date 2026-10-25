@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct EventFilterWork {
     u32 job;
@@ -20,8 +21,6 @@ extern EventEffectGlobalsA g_eventEffect;
 extern EventFilterTexture DAT_0057f3e8[6];
 u32 FUN_002a41a0(void *job);
 u32 FUN_002a3f54(void *job);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
-    u32 (*step)(void *), void (*destroy)(void *), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
 void *textureGetIndexedResource(u32 index);
@@ -39,7 +38,7 @@ void eventFilterStart(u32 kind)
     for (u32 word = 0; word < sizeof(EventFilterWork) / sizeof(u32); ++word) {
         reinterpret_cast<u32 *>(work)[word] = 0;
     }
-    work->job = asdProcessCreateSimple("EvtFilter Calc", 3, 0, 0, FUN_002a41a0, NULL, NULL);
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtFilter Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a41a0), NULL, NULL);
     taskCreateDraw("EvtFilter DrawUpLeft", 0x85, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
     taskCreateDraw("EvtFilter DrawUpRight", 0xe1, 0, 0, FUN_002a3f54, NULL, NULL, work->job);
     work->kind = kind;

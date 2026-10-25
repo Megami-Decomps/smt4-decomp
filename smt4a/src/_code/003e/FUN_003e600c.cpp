@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "script/scrScriptProcess.h"
 #include "util/CalleeContracts.h"
+#include "util/ScreenStartOrClear.h"
 
 struct ItemExchangeOffer {
     u32 key;
@@ -24,7 +25,6 @@ extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
 ScriptRunState *FUN_00275bc8(void *resource, void *screen);
 u32 FUN_001ba3d4(u32 item);
-void screenStartOrClear(void *screen, s32 entry);
 
 /* Starts the loaded exchange script, collects up to three offers and publishes the three held-item counts. */
 void FUN_003e600c(ItemExchangeWork *work)
@@ -60,7 +60,7 @@ void FUN_003e600c(ItemExchangeWork *work)
         FUN_00359974(0x18, first, 0xFFFFFFFF, 0);
         FUN_00359974(0x19, second, 0xFFFFFFFF, 0);
         FUN_00359974(0x1A, third, 0xFFFFFFFF, 0);
-        screenStartOrClear(work->screen, 0x15);
+        screenStartOrClear(reinterpret_cast<s32>(work->screen), 0x15);
         work->previousState = work->state;
         work->state = 3;
         work->timer = 0;

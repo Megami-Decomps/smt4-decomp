@@ -1,14 +1,14 @@
 /* NON_MATCHING: default float lifetimes and vector-store grouping differ, eliminating the retail saved VFP registers. */
 #include "status/StatusCamera.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 extern StatusCameraWork *g_statusCamera;
-void memClear(void *destination, u32 size);
 void FUN_002bc644(s32 x, s32 y, s32 width, s32 height);
 void FUN_002c2044(StatusCameraWork *camera, s32 enabled);
 void FUN_002c1edc(StatusCameraWork *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_002c1e30(StatusCameraWork *camera, s32 enabled, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
-void FUN_00298d50(StatusCameraWork *camera);
 void FUN_002c159c(StatusCameraWork *camera, f32 first, f32 second);
 
 void FUN_002d9208(void)
@@ -42,7 +42,7 @@ void FUN_002d9208(void)
         FUN_002c2044(camera, 1);
         FUN_002c1edc(camera, &camera->eye, &target, &up);
         FUN_002c1e30(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
-        FUN_00298d50(camera);
+        FUN_00298d50(reinterpret_cast<u32>(camera));
         FUN_002c159c(camera, 2.8f, 1.0f);
     }
 }

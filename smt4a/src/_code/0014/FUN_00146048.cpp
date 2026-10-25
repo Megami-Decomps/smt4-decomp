@@ -1,5 +1,8 @@
 /* NON_MATCHING: first scene-update saved registers and animation/model argument evaluation order differ; the recovered reference argument, stereo setter and pending-list snapshot now match retail. */
 #include "camp/RenderCtx.h"
+#include "util/FUN_00145e24.h"
+#include "util/FUN_00145e24.h"
+#include "util/CalleeContracts.h"
 
 struct SlotOwner {
     /* 0x00 */ u8 unk00[0x10];
@@ -83,8 +86,6 @@ void FUN_0017dd80(void);
 void FUN_001575cc(RenderCtxA *context);
 void FUN_00157558(RenderCtxA *context);
 s32 FUN_00157e98(ModelSlot *model, ModelAnimationSet *animations);
-u32 FUN_00152f54(void);
-void FUN_00145e24(RenderCtxA *context, u32 value);
 void renderCtxSetStereoMode(RenderCtxA *context, s32 mode);
 void holderFlushPending(u32 handle);
 
@@ -151,7 +152,7 @@ u32 FUN_00146048(void)
     } else {
         FUN_001575cc(g_renderCtx);
     }
-    FUN_00145e24(g_renderCtx, FUN_00152f54());
+    FUN_00145e24(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
     u32 *pendingEnd = g_handleRegistry->pendingEnd;
     for (u32 *pending = g_handleRegistry->pendingBegin; pending != pendingEnd; pending++) {
         holderFlushPending(*pending);

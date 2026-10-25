@@ -2,10 +2,9 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
-void scrSetResult(u32 value);
 BtlMainStateA* btlGetMainState(void);
 
 // Report whether any eligible combatant's selected signed parameter exceeds the threshold.

@@ -65,4 +65,5 @@ s32 FUN_00345098(s32 left, s32 right);
 extern SortDefaults DAT_0052b8ac[2];
 }
 
+
 #endif

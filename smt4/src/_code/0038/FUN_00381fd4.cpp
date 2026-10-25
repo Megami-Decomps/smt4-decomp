@@ -3,10 +3,10 @@
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 extern const u8 DAT_00405878[23];
-TextureTableEntryIV *FUN_002bf4f8(u32 table, s32 index);
 ScriptRunState *FUN_00297060(void *buffer, void *arguments);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void FUN_002a03d8(s32 index, s32 mode);
@@ -16,7 +16,7 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
     if (work->firstBuffer && work->firstArguments &&
         work->secondBuffer && work->secondArguments && asdTMTexTableNodeIsLoaded(0x31, 0)) {
         for (u32 index = 0; index < 23; ++index) {
-            TextureTableEntryIV *entry = FUN_002bf4f8(0x31, DAT_00405878[index]);
+            TextureTableEntryIV *entry = reinterpret_cast<TextureTableEntryIV *>(FUN_002bf4f8(0x31, DAT_00405878[index]));
             const TextLayoutEntryPrefixIV *layout = (const TextLayoutEntryPrefixIV *)entry;
             work->current[index].x = work->rest[index].x = (f32)layout->x;
             work->current[index].y = work->rest[index].y = (f32)layout->y;

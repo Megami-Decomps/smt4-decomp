@@ -6,7 +6,6 @@ extern SearchWinWork* DAT_0057f584;
 u32 FUN_00162ea4(void);
 void jobStop(u32 job, u32 flags);
 void asdMemFree(void* memory);
-void uiSpriteSelectAnim(UiSpriteState* sprite, s32 animation);
 void sysPlayVoice(u32 id);
 
 // Start the close animation, or release a completed/cancelled search window.

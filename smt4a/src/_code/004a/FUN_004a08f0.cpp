@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail unrolls the 8-element skill copy, keeps the zero constant in sl and the base percentage/skill pointer in extra callee-saved registers; build keeps the copy loop rolled. */
 #include "common.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct StepPlayerData {
     /* 0x00 */ u8 unk00[0x0C];
@@ -35,7 +36,6 @@ struct StepSlotTable {
 
 extern "C" {
 s32 gameDataFlagTestBit(u32 bit);
-StepPlayerData *gameGetPlayerData(void);
 StepSlotTable *gameGetSlotTable(void);
 StepUnitRecord *gameGetSlotRecord(s32 slot);
 
@@ -110,21 +110,21 @@ static __inline void healRegenSkillUnitsMp(s32 percent, s32 count)
 void FUN_004a08f0(void)
 {
     s32 percent = 0;
-    if (!(gameGetPlayerData()->flags & 2)) {
+    if (!(reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->flags & 2)) {
         if (gameDataFlagTestBit(0x67) || gameDataFlagTestBit(0x65))
             percent = 5;
         else if (gameDataFlagTestBit(0x64))
             percent = 2;
         s32 total = percent;
-        if (gameGetPlayerData()->id == 0x2AB)
+        if (reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->id == 0x2AB)
             total += 2;
         if (total > 0) {
-            s32 max = gameGetPlayerData()->maxMp;
-            s32 mp = gameGetPlayerData()->mp + percentOfMax(max, total);
+            s32 max = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->maxMp;
+            s32 mp = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->mp + percentOfMax(max, total);
             if (mp > max)
                 mp = max;
             s16 value = mp;
-            StepPlayerData *player = gameGetPlayerData();
+            StepPlayerData *player = reinterpret_cast<StepPlayerData *>(gameGetPlayerData());
             s32 limit = player->maxMp;
             if (value > limit)
                 value = limit;

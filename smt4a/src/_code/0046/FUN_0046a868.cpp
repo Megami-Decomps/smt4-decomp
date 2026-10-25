@@ -1,6 +1,7 @@
 /* NON_MATCHING: the effect-speed constant and the pushed-state bookkeeping are scheduled differently (retail holds 1.0f in s16 across the pops and spreads the float arguments of the overlay call over s0-s4). */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
@@ -13,9 +14,7 @@ typedef struct TitleOverlayA {
     /* 0x200 */ f32 fade;
 } TitleOverlayA;
 
-extern RenderCtxA *g_renderCtx;
 
-void FUN_00157558(RenderCtxA *ctx);
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 kind, u32 arg);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d2140` (_code @ 0x3d2140, 0x76c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 struct BattleActionHistoryState;
 
 extern "C" {
@@ -31,7 +32,6 @@ int btlEventSelectTrigger(...);
 void battleSelectButtonHelpPreset(int);
 int gameGetSlotTable(void);
 int buttonHelpSetPreset(...);
-int memClear(int, int);
 void FUN_0033a780(BattleActionHistoryState *state);
 int btlUiRouteSelectedAction(int *);
 int FUN_003ca32c(...);
@@ -149,7 +149,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     break;
   case 2:
     btlAiScriptCall(puVar8);
-    memClear(temp_v2 + 0x3c,0x85);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
     FUN_00229098(param_1);
     temp_v2 = buttonHelpGetStatus();
     piVar2 = (int *)FUN_00293230(*param_1);
@@ -168,7 +168,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     break;
   case 3:
   case 0x11:
-    memClear(temp_v2 + 0x3c,0x85);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
     FUN_00229098(param_1);
     return param_1;
   case 5:
@@ -176,7 +176,7 @@ int * FUN_003d2140(int *param_1,unsigned int param_2)
     return param_1;
   case 7:
     btlUiRouteSelectedAction(g_btlUiBlock);
-    memClear(temp_v2 + 0x3c,0x85);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
     piVar2 = (int *)gameGetSlotTable();
     return piVar2;
   case 8:

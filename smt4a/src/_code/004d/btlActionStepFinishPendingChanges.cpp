@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match6_BattleCamera.h"
+#include "bible/bibleAnalyze.h"
 
 struct BattleActionStep {
     u32 state;        /* 0x00 */
@@ -28,8 +29,7 @@ void btlQueueDuplicateSuppressedAction(s32, s32, s32);
 void FUN_004feecc(s32, s32);
 s32 scrRunOpcodesStub(u32 process);
 void FUN_003756c8(s32 mode);
-void FUN_004aa8b0(void *ui, s32 visible);
-void FUN_004f8f08(void *context);
+void btlStageResetAndClearCameraFlag(void *context);
 
 // Apply pending action camera/UI changes once, then clear their masks when the process ends.
 u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *battle)
@@ -51,7 +51,7 @@ u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BtlMainStateA *bat
         }
         step->state = 0;
         battle->stateFlags64.bits &= ~g_btlEvent.pendingMask;
-        FUN_004f8f08(g_btlAux);
+        btlStageResetAndClearCameraFlag(g_btlAux);
     }
     if (step->ticks < 0xffff) {
         ++step->ticks;

@@ -1,8 +1,8 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-void memClear(void *block, s32 size);
 
 extern u8 *g_commandBufferCursor;
 extern u8 *g_commandBufferEnd;

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -67,7 +68,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00167860. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -226,7 +226,7 @@ void FUN_003743a4(int param_1)
           if (*(char *)(temp_v3 + 0x4894) != '\0') {
             efctSetSpeed();
             temp_v8 = g_renderCtx;
-            temp_v7 = packNibblesAndByte(6,1,0);
+            temp_v7 = packNibblesAndByte(6, 1, 0);
             piVar15 = (int *)(temp_v8 + 0x12b8);
             temp_v11 = piVar15[*piVar15 + 2];
             piVar15[*piVar15 + 2] = temp_v7;
@@ -238,7 +238,7 @@ void FUN_003743a4(int param_1)
             temp_v16[1] = 0xce;
             FUN_001835b4(2,0xd,0x19d,*(short *)(temp_v6 + 8) + temp_v4);
             temp_v6 = g_renderCtx;
-            temp_v8 = packNibblesAndByte(6,7,0);
+            temp_v8 = packNibblesAndByte(6, 7, 0);
             piVar15 = (int *)(temp_v6 + 0x12b8);
             temp_v7 = piVar15[*piVar15 + 2];
             piVar15[*piVar15 + 2] = temp_v8;
@@ -275,7 +275,7 @@ void FUN_003743a4(int param_1)
             if (*(char *)(temp_v3 + 0x4894) != '\0') {
               efctSetSpeed();
               temp_v7 = g_renderCtx;
-              temp_v11 = packNibblesAndByte(6,1,0);
+              temp_v11 = packNibblesAndByte(6, 1, 0);
               piVar15 = (int *)(temp_v7 + 0x12b8);
               temp_v10 = piVar15[*piVar15 + 2];
               piVar15[*piVar15 + 2] = temp_v11;
@@ -287,7 +287,7 @@ void FUN_003743a4(int param_1)
               temp_v16[0] = *(short *)(temp_v8 + 10) + temp_v2;
               FUN_001835b4(2,0xd,0x124,*(short *)(temp_v8 + 8) + temp_v4);
               temp_v8 = g_renderCtx;
-              temp_v7 = packNibblesAndByte(6,7,0);
+              temp_v7 = packNibblesAndByte(6, 7, 0);
               piVar15 = (int *)(temp_v8 + 0x12b8);
               temp_v11 = piVar15[*piVar15 + 2];
               piVar15[*piVar15 + 2] = temp_v7;
@@ -309,7 +309,7 @@ void FUN_003743a4(int param_1)
             efctSetSpeed();
             temp_v6 = FUN_001834a4(0xd,*(unsigned int *)(temp_v3 + 0x488c));
             temp_v3 = g_renderCtx;
-            temp_v8 = packNibblesAndByte(6,1,0);
+            temp_v8 = packNibblesAndByte(6, 1, 0);
             piVar15 = (int *)(temp_v3 + 0x12b8);
             temp_v7 = piVar15[*piVar15 + 2];
             piVar15[*piVar15 + 2] = temp_v8;
@@ -321,7 +321,7 @@ void FUN_003743a4(int param_1)
             temp_v16[1] = 0xce;
             FUN_001835b4(2,0xd,0x124,*(short *)(temp_v6 + 8) + temp_v4);
             temp_v3 = g_renderCtx;
-            temp_v6 = packNibblesAndByte(6,7,0);
+            temp_v6 = packNibblesAndByte(6, 7, 0);
             piVar15 = (int *)(temp_v3 + 0x12b8);
             temp_v8 = piVar15[*piVar15 + 2];
             piVar15[*piVar15 + 2] = temp_v6;

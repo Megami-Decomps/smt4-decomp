@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (214 vs 144 rows); retail expands each stat case with its own copies of the clamp/add code and keeps the player/unit pointers in callee-saved registers */
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct ItemEffect {
     u8 unk00[0x60];
@@ -10,7 +11,6 @@ extern "C" {
 
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(void* unit, u32 bit);
-void* gameGetUnitRecord(void);
 void* gameGetPlayerData(void);
 void FUN_00299370(s32 arg);
 void unitRecalculateEffectiveStats(void* unit);
@@ -63,7 +63,7 @@ u8 FUN_0031c344(s32 member, ItemEffect* item, s32 dryRun)
         player = gameGetPlayerData();
         blocked = playerPadTestBit(1);
     } else {
-        unit = gameGetUnitRecord();
+        unit = gameGetUnitRecord(member);
         if (unit == NULL) return 1;
         blocked = flagWordTestBit(unit, 1);
     }

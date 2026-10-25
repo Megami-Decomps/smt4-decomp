@@ -5,7 +5,6 @@
 extern "C" {
 extern GameStateA g_gameState;
 extern MapMainA *g_mapMain;
-void mapProbePositionDownward(MapVector *position);
 
 void FUN_0036ae68()
 {

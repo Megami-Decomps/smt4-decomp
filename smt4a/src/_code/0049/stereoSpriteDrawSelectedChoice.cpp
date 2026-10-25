@@ -1,12 +1,13 @@
 #include "gfx/StereoSpriteSelection.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
+#include "gfx/StereoParallax.h"
 #include "shard/S1ListPanel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
 SpriteInfo* FUN_001834a4(s32 group, s32 id);
-f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void efctSetSpeed(f32 speed);
 
 static __inline s32 stereoSpriteGroupIsReady(s32 group)

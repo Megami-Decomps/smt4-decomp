@@ -1,5 +1,6 @@
 /* NON_MATCHING: allocation-tracker registers and header halfword-store scheduling differ. */
 #include "sys/AllocationTracking.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
 extern AllocationTracking DAT_00465120;

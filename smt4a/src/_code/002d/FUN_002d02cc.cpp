@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc loads the view pointer before the flag check; retail loads it after (ldrne). Everything else matches. */
 #include "battle/btlView.h"
+extern "C" float mathPositionHeadingDegrees(BattleViewVec3 from, BattleViewVec3 to);
 
 extern "C" {
 extern BattleViewState g_battleViewState;
@@ -7,7 +8,6 @@ extern BattleViewState g_battleViewState;
 s32 gameFlagIsSet(u32 flag);
 f32 FUN_001bc124(f32 radians);
 f32 FUN_001bbf0c(f32 radians);
-f32 mathPositionHeadingDegrees(BattleViewVec3 from, BattleViewVec3 to);
 
 /* Places the battle view 150 units out from `target` along `heading` (+30 degrees) and turns it to face the target. */
 void FUN_002d02cc(BattleViewVec3 target, f32 heading)

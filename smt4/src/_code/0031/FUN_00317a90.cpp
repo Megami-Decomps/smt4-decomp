@@ -1,11 +1,11 @@
 /* NON_MATCHING: the table-address load is scheduled three instructions later than retail. */
 #include "battle/BattleEffectTextureCache.h"
+#include "AsdSDK/FileLoadSync.h"
 
 extern "C" {
 extern BattleEffectTextureSlot g_pendingTextures[26];
 AsdTexture* asdTextureCreate(u32 flags);
 s32 FUN_002522f8(char* buffer, u32 size, const char* format, ...);
-void* fileLoadSync(const char* path, u32* size, u32 flags);
 void asdTexTgaLoadNw4c(AsdTexture* texture, const void* data, u32 size, u32 flags);
 void asdMemFree(void* memory);
 

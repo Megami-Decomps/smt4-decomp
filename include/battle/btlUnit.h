@@ -86,4 +86,8 @@ typedef char BtlSkillAEffectRosterIndexOffsetCheck[
     offsetof(BtlSkillA, effect.rosterIndex) == 8 &&
     sizeof(BtlSkillA) == 0x260 ? 1 : -1];
 
+extern "C" {
+void btlReflectCreateKind21(s32 id, u32 flags, u32 target, u32 parameter, u32 value, s32 enabled);
+}
+
 #endif

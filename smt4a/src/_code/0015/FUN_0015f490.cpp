@@ -1,5 +1,6 @@
 /* NON_MATCHING: plays a demon's voice/motion line: picks the name slot of the 0x7c-byte record for the requested kind (with the random variants), copies the 10-character name, patches its trailing digits / suffix letter from the kind-specific override table, and starts it; written from the decompilation, the argument of FUN_00184310, the field read from its result and the base offset of the name slots inside the record are recovered from lost arguments, and the float scale arrives in s0 (VFP argument) */
 #include "common.h"
+#include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
 
 #define LINE_TABLE 0x3E
@@ -35,9 +36,6 @@ struct LineOverride {
 };
 
 extern "C" {
-void dataTableGet(s32 table, s32 sub);
-s32 dataTableGetCount(void);
-void *dataTableGetEntries(void);
 u8 *FUN_00184310(u32 id);
 s32 lcgRandomRange(s32 max);
 void rt_memcpy(void *destination, const void *source, s32 size);
@@ -83,17 +81,16 @@ static __inline bool lineIsDigit(char c)
 
 void FUN_0015f490(u32 id, s32 kind, u32 argument, u32 variant, f32 scale)
 {
-    dataTableGet(LINE_TABLE, 0);
-    LineRecord *records = static_cast<LineRecord *>(dataTableGetEntries());
+    void *section = dataTableGet(LINE_TABLE, 0);
+    LineRecord *records = static_cast<LineRecord *>(dataTableGetEntries(section));
     if (kind >= LINE_KIND_COUNT)
         return;
-    dataTableGet(LINE_TABLE, 0);
-    s32 recordCount = dataTableGetCount();
-    u32 owner = id & 0xFFFF;
-    u8 *source = FUN_00184310(owner);
-    if (owner == 0)
+    section = dataTableGet(LINE_TABLE, 0);
+    s32 recordCount = dataTableGetCount(section);
+    u8 *source = FUN_00184310(id & 0xFFFF);
+    if (source == NULL)
         return;
-    u32 key = owner;
+    u32 key;
     if (recordCount > 0)
         key = source[LINE_OWNER_KEY_OFFSET];
 
@@ -117,10 +114,10 @@ void FUN_0015f490(u32 id, s32 kind, u32 argument, u32 variant, f32 scale)
     }
 
     if ((kind == LINE_KIND_SLOT_A || kind == LINE_KIND_SLOT_B) && variant != 0) {
-        dataTableGet(LINE_TABLE, LINE_TABLE_OVERRIDES);
-        LineOverride *overrides = static_cast<LineOverride *>(dataTableGetEntries());
-        dataTableGet(LINE_TABLE, LINE_TABLE_OVERRIDES);
-        s32 count = dataTableGetCount();
+        section = dataTableGet(LINE_TABLE, LINE_TABLE_OVERRIDES);
+        LineOverride *overrides = static_cast<LineOverride *>(dataTableGetEntries(section));
+        section = dataTableGet(LINE_TABLE, LINE_TABLE_OVERRIDES);
+        s32 count = dataTableGetCount(section);
         for (s32 i = 0; i < count; i++) {
             LineOverride *entry = &overrides[i];
             if (entry->owner != id || entry->index != variant)

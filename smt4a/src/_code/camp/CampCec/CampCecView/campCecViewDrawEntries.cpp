@@ -2,6 +2,7 @@
 #include "camp/CampCec/CampCecView.h"
 #include "camp/RenderCtx.h"
 #include "shard/Shard0032.h"
+#include "Model/MoriModelShadowMap.h"
 
 struct CecViewRow { u32 data[5]; };
 struct CecViewDrawState {
@@ -31,8 +32,6 @@ struct CecViewMarkEntry {
 struct CecViewPosition { u8 unk00[8]; s16 x, y; };
 extern "C" {
 extern CampCecViewA *g_campCecView;
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *);
 s32 FUN_001692ac(u32, u32);
 u32 gameDataBlocksGetWord27E90();
 void uiDrawNumberFrame(u32 *, s32, s32, u32, u32);

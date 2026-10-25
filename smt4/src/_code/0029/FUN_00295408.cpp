@@ -1,4 +1,5 @@
 #include "status/StatusDown.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e9990` (_code @ 0x1e9990, 0xf4c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -35,7 +36,6 @@ int commonBgReset(void);
 int FUN_002898e4(void);
 int buttonHelpCreate(void);
 int fileSlotLoad(int);
-int FUN_00298d50(...);
 int FUN_0029bb14(void);
 int asdMdlManagerCreateLoaded(...);
 int FUN_0029ee6c(...);
@@ -100,7 +100,7 @@ extern int FUN_00215a14(void);
 extern int effIsFinished(unsigned int);
 extern int frameTexPollTransitionComplete(void);
 /* Supplied declaration required: commonBgReset. */
-extern unsigned int FUN_00263c1c(unsigned char *);
+extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_0026f824. */
@@ -263,7 +263,7 @@ int FUN_001e9990(unsigned int handle)
     *(unsigned short *)(puVar13 + 0x1e) = temp_v1;
     temp_v1 = FUN_002b8584(0x11,0x19);
     *(unsigned short *)((int)puVar13 + 0x7a) = temp_v1;
-    temp_v6 = FUN_00263c1c(&LAB_001e9fbc);
+    temp_v6 = asdCameraLoadFromFile(&LAB_001e9fbc);
     puVar13[0x22] = temp_v6;
     puVar5 = &LAB_001e9fd4;
     asdMdlManagerCreateLoaded(&LAB_001e9fd4,7);

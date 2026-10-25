@@ -2,6 +2,7 @@
 #include "battle/btlTalk.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "battle/BtlUiFade.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ extern u32 g_btlUiBlock;
 s32 jobIsValid(u32 job);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, s32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
 void *__aeabi_memset4(void *destination, u32 size, s32 value);
-void btlUiPlaySceneFadeOutWhenReady(u32 ui);
 s32 btlTalkJobUpdate(u32 job);
 void btlTalkDestroy(u32 job);
 

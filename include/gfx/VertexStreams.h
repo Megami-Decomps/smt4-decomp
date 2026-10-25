@@ -21,4 +21,13 @@ typedef char VertexStreamSourceOffsets[offsetof(VertexStreamSource, flags) == 4 
 typedef char VertexStreamVertexCountOffsetCheck[
     offsetof(VertexStreamSource, geometry.vertexCount) == 0xC &&
     sizeof(VertexStreamSource) == 0x40 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 asdGxGetPhysicalAddress(u32 address);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

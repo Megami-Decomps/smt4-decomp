@@ -1,14 +1,14 @@
 /* NON_MATCHING: original/clip position registers and crop/add-on argument store grouping differ. */
 #include "gamedata/DevilRecordA.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
+#include "util/CalleeContracts.h"
 
 struct DemonPortraitCropA { s32 top, bottom, left, right; };
 extern "C" {
 extern u32 g_aocSystem;
-const Table00Record *dataTable00FindById(u32 id);
 bool gameFlagIsSet(u32 flag);
-bool devilIsTextureLoaded(s32 id, s32 resolve);
 s32 recordPrepareLinkedOwner(u32 package, u32 table, s32 image);
 u16 *FUN_001834a4(u32 table, s32 image);
 void FUN_001849bc(u32 flags, u32 table, s32 image, PositionedLayoutPosition position, const void *crop);

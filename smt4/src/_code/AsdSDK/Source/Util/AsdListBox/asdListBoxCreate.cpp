@@ -7,7 +7,6 @@ s32 FUN_001fe640(u32 handle);
 void asdListBoxDestroy(u32 handle);
 
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, void *owner);
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
 void rowWidgetInit(void *widget, s32 rows, s32 unk);
@@ -24,7 +23,7 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
         return 0;
     }
 
-    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_001fe640, asdListBoxDestroy, box);
+    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_001fe640, asdListBoxDestroy, reinterpret_cast<u32>(box));
     if (jobIsValid(parent) != 0) {
         jobSetParent(parent, handle);
     }

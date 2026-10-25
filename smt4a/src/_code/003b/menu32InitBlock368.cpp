@@ -1,8 +1,8 @@
 #include "shard/Shard003B.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 
-extern void uiSpriteSelectAnim(u8 *block, s32 value);
 
 void menu32InitBlock368(Menu32 *menu)
 {

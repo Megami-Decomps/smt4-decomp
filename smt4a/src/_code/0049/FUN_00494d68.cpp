@@ -8,7 +8,7 @@ extern "C" {
 int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
-int FUN_0018349c(...);
+int layoutFindTableEntry(...);
 int FUN_001ba3d0(...);
 int FUN_0047fc38(void);
 int FUN_0049339c(...);
@@ -39,7 +39,7 @@ extern unsigned char LAB_004954e0; /* 0x4954e0 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0018349c. */
+/* Supplied declaration required: layoutFindTableEntry. */
 /* Supplied declaration required: FUN_001ba3d0. */
 /* Supplied declaration required: FUN_0047fc38. */
 extern int FUN_0047fe44(unsigned int);
@@ -96,10 +96,10 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
   iStack_2c = param_3;
   puStack_28 = param_4;
   if (param_3 == 0) {
-    temp_v3 = FUN_0018349c(param_1 + 0x3a4,param_2 + 0x27);
+    temp_v3 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x27);
   }
   else {
-    temp_v3 = FUN_0018349c(param_1 + 0x3a4,param_2 + 0x4f);
+    temp_v3 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x4f);
   }
   temp_v11 = (int)*(short *)(temp_v3 + 8);
   temp_v3 = (int)*(short *)(temp_v3 + 10);
@@ -126,10 +126,10 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
       FUN_004934ac(param_1 + 0x3a4,0x105,temp_v11,temp_v3,temp_v9);
       efctSetSpeed();
     }
-    temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xac);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xac);
   }
   else {
-    temp_v4 = FUN_0018349c(param_1 + 0x3a4,0x99);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x99);
   }
   temp_v1 = *(short *)(temp_v4 + 10);
   temp_v4 = *(short *)(temp_v4 + 8) + temp_v11;
@@ -140,20 +140,20 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
   if (temp_v16 != 0) {
     if ((param_4[1] & 1) != 0) {
       if (param_3 != 0) {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xab);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xab);
       }
       else {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0x98);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x98);
       }
       FUN_0049339c(param_1 + 0x3a4,5,*(short *)(temp_v4 + 8) + temp_v11,*(short *)(temp_v4 + 10) + temp_v3,
                    temp_v9);
     }
     if ((param_4[1] & 2) != 0) {
       if (param_3 != 0) {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xb2);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xb2);
       }
       else {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0x9f);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0x9f);
       }
       temp_v8 = *(short *)(temp_v4 + 8) + temp_v11;
       temp_v4 = *(short *)(temp_v4 + 10) + temp_v3;
@@ -263,7 +263,7 @@ LAB_00495274:
       }
     }
   }
-  temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v15);
+  temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,temp_v15);
   VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
   drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v5,temp_v10,temp_v14);
@@ -275,11 +275,11 @@ LAB_00495274:
       temp_v5 = aocItemGetPrice(param_4);
     }
     if (param_3 != 0) {
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xba);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xba);
       temp_v6 = 0xffffffff;
     }
     else {
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xa7);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xa7);
       temp_v6 = 0x9b9b9bff;
     }
     temp_v1 = *(short *)(temp_v4 + 8);
@@ -295,11 +295,11 @@ LAB_00495274:
   }
   temp_v5 = FUN_001ba3d0(temp_v12);
   if (param_3 != 0) {
-    temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xbc);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xbc);
     temp_v6 = 0x57d8ffff;
   }
   else {
-    temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xa9);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xa9);
     temp_v6 = 0x9fddddff;
   }
   temp_v1 = *(short *)(temp_v4 + 8);

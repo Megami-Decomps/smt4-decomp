@@ -5,7 +5,7 @@ extern "C" {
 void FUN_002bdb44(void);
 void FUN_002c3530(s32 a, s32 b);
 void FUN_002c35b0(s32 arg);
-void FUN_002c39a4(TitleScene *scene);
+void renderCtxSelectStereoLayout(TitleScene *scene);
 void FUN_002c3a14(TitleScene *scene);
 s32 FUN_002c5210(void);
 
@@ -26,7 +26,7 @@ u32 renderCtxBeginPass(void)
         FUN_002bdb44();
         FUN_002c3530(1, 0);
         FUN_002c3a14(g_titleScene);
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
     }
     return 0;
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: bitfield byte-load scheduling and final enabled-flag store placement differ from retail. */
 #include "common.h"
+#include "event/2dEvent/2dEventTex.h"
 
 struct UiPriorityEntry {
     u8 value : 7;
@@ -8,7 +9,6 @@ struct UiPriorityEntry {
 typedef char UiPriorityEntrySizeCheck[sizeof(UiPriorityEntry) == 1 ? 1 : -1];
 
 extern "C" {
-u8 *FUN_0026140c(void);
 
 // Install default low-seven-bit priorities while preserving each entry's enabled flag.
 void FUN_003339ec(void)

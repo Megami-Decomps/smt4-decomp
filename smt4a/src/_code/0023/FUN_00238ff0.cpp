@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies position -> previous with ldm/stm (add r2,r4,#16; ldm {r2,ip}) and stores target as one 3-word stm; this build uses ldrd/strd and a separate store. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -24,12 +25,11 @@ typedef struct Window {
 } Window;
 
 extern s32 scrGetArg(s32 index);
-extern Window *jobGetWork(u32 job);
 
 /* Script command: gives the job's window a new target position (arguments 1 and 2, offset to its corner); when argument 3 is 0 it moves there at once. Returns 1. */
 u32 FUN_00238ff0(void)
 {
-    Window *window = jobGetWork(scrGetArg(0));
+    Window *window = reinterpret_cast<Window *>(jobGetWork(scrGetArg(0)));
     if (window != NULL) {
         s32 x = scrGetArg(1);
         s32 y = scrGetArg(2);

@@ -1,5 +1,7 @@
 /* NON_MATCHING: the boolean input flags and the shared tail stores are scheduled differently, and the 0x610-byte unit buffer sits at another frame offset; the screen state transitions are the same. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -45,11 +47,9 @@ void ifTouchRegionClearAll(u32 regions);
 void FUN_00233818(void *panel);
 s32 flaggedValueHolderGetTotal(void *cursor);
 u32 FUN_002bd06c(u32 id);
-char *libc_strcpy(void *destination, u32 source);
 void textEncodeFontSlot(s32 slot, void *buffer);
 u32 demonGetRaceLabel(u32 id, u32 arg);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
-void FUN_002a0cc8(s32 arg);
 void FUN_002328b4(void);
 void FUN_0029ee6c(s32 a, u32 color);
 void beginStatusPanelClose(void);
@@ -94,9 +94,9 @@ void FUN_003a6f80(DevilListInput *work)
     if (select != 0) {
         u32 id = work->rows[flaggedValueHolderGetTotal(work->cursor)].id;
 
-        libc_strcpy(record, FUN_002bd06c(id));
+        libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>(FUN_002bd06c(id)));
         textEncodeFontSlot(8, record);
-        libc_strcpy(record, demonGetRaceLabel(id, 1));
+        libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>(demonGetRaceLabel(id, 1)));
         textEncodeFontSlot(0x10, record);
         scrScriptProcessStartEntry(work->script, 6);
         FUN_002a0cc8(1);

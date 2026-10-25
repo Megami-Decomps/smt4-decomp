@@ -1,4 +1,3 @@
-/* NON_MATCHING: the compiler predicates the key loads and subtraction instead of branching around them after the null checks. */
 #include "common.h"
 
 struct WordRecord {
@@ -15,7 +14,10 @@ s32 dataTable1bOr1cCompareRecordKeys(const u16 *left, const u16 *right)
 {
     WordRecord *a = FUN_001ad9b4(*left);
     WordRecord *b = FUN_001ad9b4(*right);
-    if (a == NULL || b == NULL) {
+    if (a == NULL) {
+        return 0;
+    }
+    if (b == NULL) {
         return 0;
     }
     return a->key - b->key;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map/mapRndMaze.h"
 
 extern "C" {
 

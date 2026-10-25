@@ -8,7 +8,6 @@ UnitRecord *gameGetPlayerData(void);
 u32 randRange(u32 maximum);
 s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *data, u32 size);
-const CategoryUnitStatsA *dataTableGetCategoryEntry(u32 categoryId, s32 variant);
 
 // Pick a nonzero party category at random, reset the selected unit and initialize its statistics.
 void FUN_004da144(void)
@@ -40,7 +39,7 @@ void FUN_004da144(void)
         }
     }
     sysMemClear(unit, 300);
-    const CategoryUnitStatsA *entry = dataTableGetCategoryEntry(category, variant);
+    const CategoryUnitStatsA *entry = reinterpret_cast<const CategoryUnitStatsA *>(dataTableGetCategoryEntry(category, variant));
     unit->categoryId = category;
     unit->variant = variant;
     unit->id = 1201;

@@ -2,6 +2,8 @@
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 struct AocSystemA;
 extern "C" {
 extern AocSystemA *g_aocSystem;
@@ -13,12 +15,9 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tr
 void sysMemClear(void *memory, u32 size);
 s32 FUN_00162ea4();
 s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
-void aocLoadTextureNode(AocSystemA *system, u32 table, u32 file, u32 flags);
 void asdTMTexLoadMainHeap(u32 table, u32 file);
 void FUN_002897cc(JobWork *job);
 void FUN_0034da3c(JobWork *job);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 first, s32 second,
-    void (*update)(JobWork *), void (*finish)(JobWork *), void *data);
 
 void FUN_003b6820(u32 id, s32 placement, u32 variant)
 {
@@ -77,11 +76,11 @@ void FUN_003b6820(u32 id, s32 placement, u32 variant)
     } else {
         work->base.deferred = 0;
         if (aocRunByName(g_aocSystem, work->create.table, work->create.file, 1))
-            aocLoadTextureNode(g_aocSystem, work->create.table, work->create.file, 0x10000);
+            aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->create.table, work->create.file, 0x10000);
         else
             asdTMTexLoadMainHeap(work->create.table, work->create.file);
     }
     work->base.speed = 0.26f;
-    asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f4f0), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002897cc), reinterpret_cast<AsdProcFunc>(FUN_0034da3c), reinterpret_cast<u32>(work));
 }
 }

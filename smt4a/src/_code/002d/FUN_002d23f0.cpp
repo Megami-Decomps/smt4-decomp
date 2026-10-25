@@ -1,4 +1,3 @@
-/* NON_MATCHING: canonical game-flag calls match, but final seen-bit update folds its shift into ORR and uses different quotient/remainder registers. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 
@@ -98,7 +97,9 @@ void FUN_002d23f0(s32 index)
         }
     }
     if (index >= 0) {
-        block->words[index / 32] |= 1 << (index % 32);
+        s32 word = index / 32;
+        s32 bit = index % 32;
+        block->words[word] |= 1 << bit;
     }
 }
 

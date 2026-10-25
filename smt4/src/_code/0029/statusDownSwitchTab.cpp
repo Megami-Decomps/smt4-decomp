@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation (status/current pointers swap r5/r6) and the final FUN_0029ee6c constant is hoisted before the tab chain; retail loads it in the shared tail. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct StatusDown {
 
 extern StatusDown *g_statusDown;
 
-extern s32 gameGetFlagByte12e8(void);
 extern void timerStart(void *timer, s32 id, s32 arg);
 extern void ifTouchRegionRemove(void);
 extern void *__aeabi_memset4(void *dest, s32 size, s32 value);

@@ -20,7 +20,7 @@ int textFormatBuffer(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int tmnlGetEntryText(...);
 int VectorSignedToFloat(...);
 
@@ -69,7 +69,7 @@ extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int terminalGetCharacterDisplayName(unsigned int);
 /* Supplied declaration required: tmnlGetEntryText. */
@@ -103,7 +103,7 @@ unsigned int FUN_001a26dc(void)
   if (*(int *)(DAT_0043dd24 + 0x744) == 0) {
     return 0;
   }
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v4 = g_titleScene;
   temp_v3 = FUN_002c5d80(1,0);
   piVar13 = (int *)(temp_v4 + 0x124c);

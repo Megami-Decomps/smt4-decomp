@@ -1,6 +1,7 @@
 /* NON_MATCHING: allocation, slot setup and the unrolled copy loop match in shape; retail keeps `i * stride` as an in-loop mla and addresses the copy as `(n * i) * 3` after hoisting n = (indices + 2) / 3 behind the count guard, and chooses different registers. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "util/SlotInit.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct GeomObject {
 void *memAlloc(int, int, int, int size, int align, int);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 GeomSlot *slotReset(void *memory);
-void slotInit(GeomSlot *slot, u32 kind, u32 indexCount, u32 vertexCount);
 
 /* Creates a geometry object holding `count` copies of an index list; copy i is offset by i * vertexStride. */
 GeomObject *FUN_002b3b58(s32 count, s32 triangles, s32 vertexStride, const u16 *source, u16 kind)

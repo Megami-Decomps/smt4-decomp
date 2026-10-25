@@ -1,6 +1,7 @@
 /* NON_MATCHING: root/loop register roles and shared-counter initialization differ; lower optimization may change allocation. */
 #include "shard/Shard0034.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/PlayerDataBlock.h"
 
 namespace {
 union SkillIds {
@@ -56,7 +57,6 @@ inline void copySkills(PlayerData* target, const StagedSkill* staged)
 extern "C" {
 s32 scrRunOpcodesStub(u32);
 s32 messageMainGetValue(void);
-PlayerData* gameGetPlayerData(void);
 s32 countUnlockedSlots(void);
 s32 getUnlockedSlotCount(const PlayerData*);
 void statusReplaceSkills(const u16*, u8);
@@ -74,7 +74,7 @@ void statusSkillsCommitOnDialogResult(void* object)
         return;
     }
     if (menu->selectedDemon < 0) {
-        PlayerData* player = gameGetPlayerData();
+        PlayerData* player = reinterpret_cast<PlayerData*>(gameGetPlayerData());
         copySkills(player, work->staged);
         SkillDataView* data = reinterpret_cast<SkillDataView*>(player);
         statusReplaceSkills(data->skills.ids, static_cast<u8>(countUnlockedSlots()));

@@ -2,11 +2,11 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 extern CampHelpPrefixIV *g_camp;
 s32 buttonHelpSetPreset(s32 preset);
-s32 partyPanelIsActive(void);
 s32 FUN_002579bc(s32 enabled);
 s32 FUN_00257a50(void *output, s32 selection, s32 category);
 s32 FUN_0029da34(s32 channel, s32 enabled, u32 value, void *data);

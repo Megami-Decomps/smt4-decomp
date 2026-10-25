@@ -34,7 +34,7 @@ extern SelectionScreenHolder g_engineCleanupOwner;
 s32 scrGetArg(u32 index);
 void scrSetResult(u32 value);
 SlotRecordStats *gameGetSlotRecord(s32 slot);
-s32 flagAt4IsClearOrMissing(void);
+u8 flagAt4IsClearOrMissing(void);
 u32 uiSelectedRecordGetSecond(void);
 u32 uiSelectedRecordGetThird(void);
 

@@ -16,7 +16,7 @@ int FUN_003e0174(void);
 int FUN_003e49e8(void);
 int FUN_003e4e4c(void);
 int partyRefreshOrInsertSlot(void);
-int FUN_003e5354(int);
+int partyAdjustCounterIfEnoughActive(int);
 int flagValueAdd(int);
 int dispatchIfFound(int, int, int);
 
@@ -70,7 +70,7 @@ extern unsigned int flagValueGetStorage(void);
 /* Supplied declaration required: FUN_003e49e8. */
 /* Supplied declaration required: FUN_003e4e4c. */
 /* Supplied declaration required: partyRefreshOrInsertSlot. */
-/* Supplied declaration required: FUN_003e5354. */
+/* Supplied declaration required: partyAdjustCounterIfEnoughActive. */
 /* Supplied declaration required: flagValueAdd. */
 extern unsigned char partySlotFindIndex(void);
 /* Supplied declaration required: dispatchIfFound. */
@@ -231,7 +231,7 @@ void FUN_003f1d74(fn_003f1d74_arg0 *param_1,unsigned int param_2)
         FUN_00187168();
       }
       FUN_003e49e8();
-      FUN_003e5354(puVar10[0x40]);
+      partyAdjustCounterIfEnoughActive(puVar10[0x40]);
       param_1->field_0x4d70 = (unsigned int)(unsigned char)puVar10[0x41];
       param_1->field_0x4e44 = *(unsigned char *)((int)puVar10 + 0x83);
     }

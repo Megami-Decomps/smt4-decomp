@@ -1,4 +1,5 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ s8 uiSpriteGetCompletionState(const Cursor *cursor);
 int buttonHelpIsNotActive(void);
 int pointConvertToFloat(void *layout, u32 a, u32 b);
 int FUN_0029d960(Menu *menu);
-int FUN_002a0cc8(int arg);
 int FUN_002b8ee0(Cursor *cursor, int arg);
 u32 vec2GetYInt(Cursor *cursor);
 u32 vec2GetXInt(Cursor *cursor);

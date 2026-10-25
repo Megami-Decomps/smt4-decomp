@@ -1,5 +1,6 @@
 /* NON_MATCHING: group/selector address calculations use opposite r1/r2 registers and schedule the selector argument after the message-bank base. */
 #include "common.h"
+#include "shard/Shard004A.h"
 
 struct MessageChoiceSelector {
     u32 unk00;
@@ -24,7 +25,6 @@ struct MessageChoiceOwner {
 };
 
 extern "C" {
-s32 flaggedValueHolderGetTotal(MessageChoiceSelector *selector);
 void screenShowMessage(u32 message);
 void FUN_0019de98(s32 mode, u32 color);
 
@@ -34,7 +34,7 @@ void messageChoiceShowCurrent(MessageChoiceOwner *owner)
     s32 group = owner->group;
     if (owner->choices[group].count > 0) {
         MessageChoiceBank *messages = &owner->messages[group];
-        s32 selected = flaggedValueHolderGetTotal(&owner->choices[group]);
+        s32 selected = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&owner->choices[group]));
         screenShowMessage(messages->entries[selected].message);
         return;
     }

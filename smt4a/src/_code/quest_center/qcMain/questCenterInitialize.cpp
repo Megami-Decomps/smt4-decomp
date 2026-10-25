@@ -15,8 +15,6 @@ void effectQcFinish(u32 handle);
 s32 qcMainEndPass(u32 handle);
 s32 qcMainRunEntryIfLoaded(u32 handle);
 s32 FUN_002bd3a4(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 
@@ -46,8 +44,7 @@ void questCenterInitialize(const s32 *arguments, u32 argumentBytes)
         }
         statsSetAdditionalFlag(g_qcMain.entryId, 1);
     }
-    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"),
-        4, 0, 0, FUN_00236110, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("QuestCenterMainProc"), 4, 0, 0, FUN_00236110, effectQcFinish, reinterpret_cast<u32>(g_qcMain.work));
     work->draws.upper = taskCreateDraw(reinterpret_cast<const s8 *>("QuestCenterDrawUp L"),
         0x71, 1, 0, qcMainEndPass, NULL, reinterpret_cast<u32>(g_qcMain.work), reinterpret_cast<void *>(work->task));
     taskCreateDraw(reinterpret_cast<const s8 *>("QuestCenterDrawUp L"),

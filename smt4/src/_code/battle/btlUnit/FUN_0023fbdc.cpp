@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
 /* One battle unit (0x114 bytes); only the fields this state reads. */
 struct ReflectUnit {
@@ -70,7 +71,6 @@ void FUN_0019d7d4(void);
 const u16 *FUN_0027da30(ReflectBattle *battle, s32 slot);
 s32 pairedEntryTableContains(ReflectBattle *battle, u16 id);
 void FUN_0024057c(ReflectBattle *battle, ReflectUnit *unit, s32 a, s32 b, s32 style);
-void FUN_002451c4(s32 x, ReflectTask *task, ReflectUnit *unit, s32 alpha, s32 style, s32 z);
 void btlReflectInitKind9(s32 x, ReflectTask *task, ReflectUnit *unit, s32 kind, s32 count);
 void FUN_002505c0(s32 x, ReflectTask *task, u32 id, s32 a, s32 b, s32 c, s32 d);
 
@@ -131,7 +131,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
                     s16 style = (s16)layout->style;
                     s16 offsetX = (s16)DAT_00439a20.offsetX;
                     FUN_0024057c(battle, unit, 0, 0, style);
-                    FUN_002451c4(started * spacing + offsetY + offsetX, task, unit, 0xff, style, 0);
+                    FUN_002451c4(started * spacing + offsetY + offsetX, reinterpret_cast<u32>(task), reinterpret_cast<u32>(unit), 0xff, style, 0);
                     btlReflectInitKind9(started * spacing + offsetX, task, unit, (unit->flags & 0x10) != 0 ? 7 : 6, 13);
                     if (firstStarted == 0) {
                         FUN_002505c0(started * spacing, task, 0x10001d4, 0, 0, 0, 0);

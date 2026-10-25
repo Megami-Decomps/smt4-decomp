@@ -36,7 +36,7 @@ extern "C" {
 extern const char g_effBlurFilterSourcePath[];
 void* memAlloc(u32, u32, u32, u32, u32, u32);
 u32 randomAdvanceShiftRegister(s32);
-f32 FUN_00514540(s32);
+f32 shiftRandomNextFraction(s32);
 
 /* Allocate the scatter samples and seed their frame, color and square bounds. */
 ScatterSample* FUN_003aa3ac(ScatterParams* params)
@@ -62,9 +62,9 @@ ScatterSample* FUN_003aa3ac(ScatterParams* params)
 
         const f32 spread = params->spread;
         const f32 halfSize = static_cast<f32>(params->size) * 0.5f;
-        const f32 randomX = (FUN_00514540(0) - 0.5f) * 2.0f;
+        const f32 randomX = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
         const f32 x = params->centerX + spread * randomX;
-        const f32 randomY = (FUN_00514540(0) - 0.5f) * 2.0f;
+        const f32 randomY = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
         const f32 y = params->centerY + spread * randomY;
         quad.centerX = x;
         quad.centerY = y;

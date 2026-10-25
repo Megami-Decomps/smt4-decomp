@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc merges the clear/set stores and uses a writeback load, unlike retail's separate clear and conditional-set address forms. */
 #include "shard/SaveWork.h"
 
 struct MapFlagWords {
@@ -11,11 +10,11 @@ extern "C" SaveWork* gameGetMapBlock(void);
 extern "C" void FUN_00316de4(s32 index, s32 enabled)
 {
     MapFlagWords* flags = (MapFlagWords*)gameGetMapBlock();
-    u32* word = &flags->words[index / 32];
-    u32 mask = 1u << (index % 32);
+    s32 word = index / 32;
+    s32 bit = index % 32;
     if (enabled == 0) {
-        *word &= ~mask;
-    } else if ((*word & mask) == 0) {
-        *word |= mask;
+        flags->words[word] &= ~(1 << bit);
+    } else if ((flags->words[word] & (1 << bit)) == 0) {
+        flags->words[word] |= 1 << bit;
     }
 }

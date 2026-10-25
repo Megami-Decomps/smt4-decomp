@@ -1,6 +1,7 @@
 /* NON_MATCHING: BGM-state dispatch order and local-tail/global-anchor addressing differ. */
 #include "common.h"
 #include "map/lmapMain.h"
+#include "gamedata/Table1bOr1c.h"
 #include <stddef.h>
 
 extern "C" {
@@ -12,8 +13,7 @@ extern s8 DAT_0049fa61;
 s32 bgmReleaseStopped(void);
 s32 bgmGetStateById(u32 id);
 s32 FUN_00287328(u32 id);
-s32 FUN_00287894(void);
-s32 FUN_002903f0(void);
+u16 FUN_002903f0(void);
 
 void FUN_00266a2c(void)
 {
@@ -50,8 +50,9 @@ void FUN_00266a2c(void)
         DAT_0049f944 = 0x01000053;
     }
 
-    if (tail->mode != 1 && tail->mode != 2 && FUN_002903f0() != 0) {
-        const s32 overrideState = FUN_00287894();
+    u32 id;
+    if (tail->mode != 1 && tail->mode != 2 && (id = FUN_002903f0()) != 0) {
+        const s32 overrideState = table1bOr1cGetRecordValue(id);
         if (overrideState == 1) {
             DAT_0049f944 = 0x01000037;
         } else if (overrideState == 0) {

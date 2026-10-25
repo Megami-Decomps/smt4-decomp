@@ -1,6 +1,7 @@
 /* NON_MATCHING: final menu state and script-phase reset use exchanged r0/r1 registers. */
 #include "camp/CecMenu.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "event/2dEvent/Npc2d.h"
 
 extern "C" {
 u32 FUN_00297060(u32 resource, u32 screen);
@@ -9,7 +10,6 @@ void buttonHelpSetPreset(s32 preset);
 void cecProcessStart(void);
 void FUN_0025461c(void);
 void cecProcessDestroy(void);
-void FUN_00254600(s32 mode);
 s32 scrRunOpcodesStub(u32 process);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 void *gameGetUnitRecord(s32 slot);

@@ -1,3 +1,4 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: initial argument loads and screen-offset addition use different registers. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
@@ -5,7 +6,6 @@
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 }
 
 extern "C" void FUN_003f707c(u32, s32 x, s32 y, u32 color, s32 first,

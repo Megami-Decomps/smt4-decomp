@@ -16,7 +16,7 @@ u8 *FUN_00389a1c(PackageList *list, s32 index)
                     void *table = dataTableFileGetTable(entry->files[j].fileId, 4);
                     s32 end = dataTableGetCount(table) + total;
                     if (end >= index) {
-                        return dataTableGetEntries(table) + (index - total) * 0x2c;
+                        return reinterpret_cast<u8 *>(dataTableGetEntries(table)) + (index - total) * 0x2c;
                     }
                     total += end;
                 }

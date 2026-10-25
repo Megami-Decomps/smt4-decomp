@@ -5,7 +5,7 @@
 extern "C" {
 extern AocSystem* g_aocSystem;
 s32 gameFlagIsSet(s32 flag);
-s32 FUN_00298dc8(u32 id);
+u32 FUN_00298dc8(s32 index);
 
 // Find the first base or add-on availability rule satisfied by the current flags and party.
 Table23AvailabilityRecord* FUN_00328b1c(s32 id)

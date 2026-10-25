@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ typedef struct EventEffectState {
 extern EventEffectState g_eventEffect;
 
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void *textureGetIndexedResource(u32 table);
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *ptr);
 

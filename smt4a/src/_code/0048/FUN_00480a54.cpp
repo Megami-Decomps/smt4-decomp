@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the tail differs: retail folds the found-record return into ldrbne/bne onto the shared `return 0` epilogue; ours emits a separate epilogue. */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "shard/ItemStackLimit.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ typedef struct AocSystem {
 
 extern AocSystem *g_aocSystem;
 
-ItemInfo *FUN_0019c06c(u32 id);
 Table8Sub3Record *FUN_001762d4(AocSystem *aoc, u32 id);
 s32 compareRecordKey(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
@@ -52,7 +52,7 @@ u8 FUN_00480a54(u32 id)
     if (id == 0) {
         return 0;
     }
-    info = FUN_0019c06c(id);
+    info = reinterpret_cast<ItemInfo *>(itemCategoryFindByItemId(id));
     if (info == NULL || info->kind != 9) {
         return 0;
     }

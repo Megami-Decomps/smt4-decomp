@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" void *asdOperatorNew(u32 bytes);
+extern "C" int asdMemFreeNonNull(void *block);
 
 /* A three-component vector (position / velocity / axis). */
 struct Obj4208f8Vec3 {
@@ -32,6 +33,7 @@ public:
     Obj4208f8(AsdMdlObject *model);
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     virtual ~Obj4208f8();
+    static void operator delete(void *block) { asdMemFreeNonNull(block); }
 
     /* 0x04 */ AsdMdlObject *model;
     /* 0x08 */ u32 unk08;

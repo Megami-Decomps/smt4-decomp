@@ -1,9 +1,9 @@
 #include "shard/Shard003B.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 
 extern MessageGlobalsA g_messageMain;
-extern void uiSpriteSelectAnim(u8 *block, s32 value);
 
 /* Script command: arms the panel (state 3) and initializes its block at +0x1820. */
 u32 scrCommArmPanel3(void)

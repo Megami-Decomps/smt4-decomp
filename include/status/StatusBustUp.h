@@ -12,4 +12,8 @@ struct StatusBustUpResources {
 };
 typedef char StatusBustUpResourcesLayout[sizeof(StatusBustUpResources) == 12 &&
     offsetof(StatusBustUpResources, workA) == 4 && offsetof(StatusBustUpResources, workB) == 8 ? 1 : -1];
+extern "C" {
+void playerModelLoadPart(u32 model, s32 part, u32 d);
+}
+
 #endif

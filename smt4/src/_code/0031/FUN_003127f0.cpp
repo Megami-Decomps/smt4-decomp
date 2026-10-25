@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ struct BattleRecord {
 };
 
 s32 scrGetArg(s32 index);
-void scrSetResult(u32 value);
 void *btlGetMainState(void);
 BattleRecord *FUN_00338278(void *state, u16 id);
 

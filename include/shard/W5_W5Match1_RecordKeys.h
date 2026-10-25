@@ -290,7 +290,7 @@ struct TextDrawDefaults {
 struct ImaAdpcmContext {
     /* 0x00 */ u8 stepIndex;
     /* 0x01 */ u8 reserved;
-    /* 0x02 */ s16 predictor;
+    /* 0x02 */ u16 predictor;
 };
 
 struct ImaAdpcmState {

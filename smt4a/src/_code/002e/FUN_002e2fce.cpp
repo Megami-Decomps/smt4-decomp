@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail movs r6, r0 differs from recovered mov r4, r1. */
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
 
 // Private view of the record returned by FUN_002e2ec0.
 struct RecordView002e2fce {
@@ -15,7 +16,6 @@ extern u8 DAT_00567078;
 
 u32 FUN_00197c2c(u8* data, u32 value);
 u32 FUN_001bc5ac(u8* data, u32 value);
-RecordView002e2fce* FUN_002e2ec0(void);
 void FUN_002e2ecc(u32 identifier, u32 flags);
 
 // Populate the selected record fields, then forward the identifier and flags.
@@ -26,7 +26,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (result == 0) {
             return;
         }
-        FUN_002e2ec0()->unk04 = result + 1;
+        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk04 = result + 1;
     }
 
     if (flags & 1) {
@@ -34,7 +34,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (data == 0) {
             return;
         }
-        FUN_002e2ec0()->unk00 = data;
+        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk00 = data;
     }
 
     if (flags & 4) {
@@ -42,7 +42,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (data == 0) {
             return;
         }
-        FUN_002e2ec0()->unk08 = data;
+        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk08 = data;
     }
 
     if (flags & 8) {
@@ -50,7 +50,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (result == 0) {
             return;
         }
-        FUN_002e2ec0()->unk0C = result;
+        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk0C = result;
     }
 
     if (flags & 16) {
@@ -58,7 +58,7 @@ void FUN_002e2fce(u32 identifier, u32 flags, u32 value)
         if (data == 0) {
             return;
         }
-        FUN_002e2ec0()->unk10 = data;
+        reinterpret_cast<RecordView002e2fce*>(FUN_002e2ec0())->unk10 = data;
     }
 
     FUN_002e2ecc(identifier, flags);

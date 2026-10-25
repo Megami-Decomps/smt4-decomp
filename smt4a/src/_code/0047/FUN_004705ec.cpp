@@ -1,4 +1,5 @@
 #include "shard/W4_Match3_AocMainA.h"
+#include "quest_center/qcCtrl.h"
 
 extern "C" {
 

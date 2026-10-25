@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail reads the offer's reward/payment/cost as packed word pairs (ldm + shifts) and reloads the row for the exchange, keeps the step constants in r5/r6/r9 and merges the step-99 tail with the entry-start inline; this build reads halfwords and allocates registers differently. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct ScriptProcess;
 
@@ -29,7 +30,6 @@ struct NpcShopExchangeWork {
 
 extern "C" {
 const char *FUN_0015f858(u32 id, s32 mode);
-void FUN_003180c4(u32 index, const char *name);
 void FUN_003c1060();
 void FUN_003c3e14();
 void FUN_00359974(s32 slot, s32 value, s32 arg, s32 flag);

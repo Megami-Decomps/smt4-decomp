@@ -14,7 +14,6 @@ void FUN_0014f0dc(ManagedCamera *, const CameraDefaultVector *, const CameraDefa
 void FUN_001523b8(ManagedCamera *, s32, f32, f32, f32, f32);
 void asdCameraFreeWork(u32 process);
 s32 asdCameraTableRelease(u32 process);
-u32 asdProcessCreateSimple(const char *, s32, u32, AsdProcFunc, AsdProcUpdateFunc, AsdProcFunc, void *);
 
 /* Initialize the top and bottom screen cameras and start their manager process. */
 void FUN_0013a48c(u32 priority)
@@ -31,7 +30,6 @@ void FUN_0013a48c(u32 priority)
     FUN_001523b8(&work->cameras[1], 1, 30.0f, 20.0f, 25600.0f, 320.0f / 240.0f);
     work->active[0] = &work->cameras[0];
     work->active[1] = &work->cameras[1];
-    g_asdCamera.job = asdProcessCreateSimple("CamManagerProc", priority, 0, 0,
-        asdCameraTableRelease, asdCameraFreeWork, g_asdCamera.work);
+    g_asdCamera.job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CamManagerProc"), priority, 0, 0, asdCameraTableRelease, asdCameraFreeWork, reinterpret_cast<u32>(g_asdCamera.work));
 }
 }

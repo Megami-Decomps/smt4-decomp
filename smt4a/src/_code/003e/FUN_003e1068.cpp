@@ -1,5 +1,6 @@
 /* NON_MATCHING: store scheduling in the final request setup only: retail interleaves `str r6,[r4,#16]; mov r2,#20; str r6,[r4,#12]; mov r0,r4; mov r1,r5; str r2,[r4]`, the build stores the state first. */
 #include "common.h"
+#include "battle/btlMain.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ typedef struct StateRequest {
     /* 0x10 */ u32 arg1;
 } StateRequest;
 
-extern SkillInfo *btlFindMarkedReserveRecord(BtlObject *obj);
 extern SkillSlot *FUN_003f0e20(BtlObject *obj, int skillId);
 extern SkillInfo *FUN_003eca48(BtlObject *obj, u16 infoId);
 extern int FUN_003e9b74(BtlObject *obj);
@@ -38,7 +38,7 @@ extern int FUN_003e1454(StateRequest *request, BtlObject *obj);
 /* Chooses the next state: state 0x10 when the object's skill has flag 2 set and the follow-up check passes, else state 0x14 and a restart. */
 void FUN_003e1068(StateRequest *request, BtlObject *obj)
 {
-    SkillInfo *info = btlFindMarkedReserveRecord(obj);
+    SkillInfo *info = reinterpret_cast<SkillInfo *>(btlFindMarkedReserveRecord(reinterpret_cast<BtlMainStateA *>(obj)));
     SkillSlot *slot;
 
     if (info != NULL) {

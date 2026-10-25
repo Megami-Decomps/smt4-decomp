@@ -14,7 +14,7 @@ typedef struct JobWork {
 } JobWork;
 
 extern u32 eventTexGetCurrent(void);
-extern s32 jobIsValid(void);
+extern s32 jobIsValid(u32 job);
 extern JobWork *jobGetWork(u32 job);
 extern s32 scrGetCommandFrame(void);
 extern void eventTexRemoveHandle(u32 job);
@@ -26,7 +26,7 @@ s32 scrCommEventTextureMoveBackward(void)
 {
     u32 job = eventTexGetCurrent();
 
-    if (jobIsValid() != 0) {
+    if (jobIsValid(job) != 0) {
         JobWork *work = jobGetWork(job);
 
         if (work->state == 1) {

@@ -8,7 +8,6 @@ extern KeyedRecord g_keyedRecords[];
 extern KeyedVectorPreset g_elementPresetTable[];
 extern KeyedVectorTransition *DAT_00433a58;
 KeyedRecord *keyedRecordGet(s32 index);
-const VectorKey *FUN_001ab9b0(u32 index);
 void vectorKeyPrepareNextStep(VectorKey *keys, s32 *index, s32 *duration, KeyVector *step, KeyVector *target);
 
 // Select a keyed vector sequence, retaining the current vector when interrupting playback.
@@ -21,7 +20,7 @@ void FUN_001c2b48(s32 index)
         return;
     }
     s32 duration = reinterpret_cast<const VectorKey *>(g_keyedRecords[index].payload)[3].frame;
-    const VectorKey *keys = FUN_001ab9b0(index);
+    const VectorKey *keys = reinterpret_cast<const VectorKey *>(FUN_001ab9b0(index));
     memcpy(transition->keys, keys, sizeof(transition->keys));
     if (DAT_00433a58 != NULL && DAT_00433a58->mode != 0) {
         transition->segmentElapsed = 0;

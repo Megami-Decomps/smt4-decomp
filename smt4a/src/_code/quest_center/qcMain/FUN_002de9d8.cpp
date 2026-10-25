@@ -3,13 +3,13 @@
  * current result byte; otherwise releases the active entry, frees the work area and returns -1. */
 #include "common.h"
 #include "quest_center/qcMain.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int scriptPanelRelease(void);
-int asdMemFree(void *ptr);               /* heap free */
 int jobFind(u32 task);                /* nonzero while the task exists */
-int asdOperatorDelete(void *entry);
 
 extern QcGlobalsA DAT_00588c30;
 

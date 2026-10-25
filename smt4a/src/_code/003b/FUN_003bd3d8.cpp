@@ -8,7 +8,7 @@ int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(void);
-int FUN_00514540(int);
+int shiftRandomNextFraction(int);
 int VectorSignedToFloat(...);
 int __aeabi_idivmod(double, int);
 int __aeabi_uidivmod(void);
@@ -102,7 +102,7 @@ extern unsigned int effGetFrameStep(void);
 extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: __aeabi_idivmod. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -367,10 +367,10 @@ void FUN_003bd3d8(fn_003bd3d8_arg0 *param_1)
             }
             else if (temp_v43 != 0) {
               temp_v21 = temp_v37;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v24 = temp_v24 * 6.2831855f;
               pfVar24[2] = temp_v24;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v17 = 0;
               pfVar24[1] = ((temp_v40 - pfVar26->field_0x78) + temp_v24 * pfVar26->field_0x78) *
                            pfVar26->field_0x74;
@@ -381,12 +381,12 @@ void FUN_003bd3d8(fn_003bd3d8_arg0 *param_1)
               }
               pfVar24[3] = temp_v21;
               temp_v37 = temp_v21;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v29 = (float)VectorSignedToFloat(temp_v25,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v21 = ((temp_v24 - pfVar26->field_0x6c) + temp_v21 * pfVar26->field_0x6c) *
                        pfVar26->field_0x68;
               pfVar24[4] = temp_v21 / temp_v29;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v24 = pfVar26->field_0x60 *
                        ((temp_v24 - pfVar26->field_0x64) + temp_v21 * pfVar26->field_0x64);
               pfVar24[5] = temp_v24;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: the section handle and entries pointer use r4/r5 in the opposite order in five repeated sorts. */
 #include "gamedata/DataTable.h"
 #include <stdlib.h>
+#include "quest_center/qcMain.h"
 
 extern "C" {
 s32 uiCompareBytePriorityAndKey(const void *, const void *);
@@ -11,7 +12,6 @@ s32 tableCompareWordByteKeys(const void *, const void *);
 s32 uiCompareHalfwordValues(const void *, const void *);
 s32 uiCompareHalfwordKeys(const void *, const void *);
 s32 intKeyCompare(const void *, const void *);
-u32 *dataTableValueOrZero(u32 table);
 void arraySortQsort(void *entries, u32 count, u32 stride, s32 (*compare)(const void *, const void *));
 }
 
@@ -35,6 +35,6 @@ extern "C" void FUN_003b078c(void)
     sortTableSection<u32>(5, 7, tableCompareWordByteKeys);
     sortTableSection<u32[5]>(5, 8, uiCompareHalfwordValues);
     sortTableSection<u32>(6, 1, uiCompareHalfwordKeys);
-    u32 *table = dataTableValueOrZero(0x1f);
+    u32 *table = reinterpret_cast<u32 *>(dataTableValueOrZero(0x1f));
     arraySortQsort(table + 1, (table[0] - 4) >> 3, 8, intKeyCompare);
 }

@@ -1,4 +1,5 @@
 /* NON_MATCHING: switch range/table placement and shared text-record header-byte adjustment differ. */
+#include "gamedata/DataTable.h"
 #include "ui/PartyPanelState.h"
 
 extern "C" {
@@ -6,9 +7,7 @@ extern PartyPanelState *g_partyPanel;
 void buttonHelpShowSkillDetails(u16 skill);
 void FUN_0029212c(u16 item);
 void FUN_001b0558();
-const void *dataTableGet(u32 table, u32 entry);
-const char *dataTableGetEntries(const void *table);
-u32 dataTableGetCount(const void *table);
+
 void FUN_0029ee6c(const char *text, u32 color);
 
 void FUN_0026c868()
@@ -31,22 +30,22 @@ void FUN_0026c868()
         return;
     case 10:
         if (panel->detailSelection.mode == 0) {
-            const void *table = dataTableGet(0x39, 0);
-            const char *entries = dataTableGetEntries(table);
+            void *table = dataTableGet(0x39, 0);
+            const char *entries = static_cast<const char *>(dataTableGetEntries(table));
             if (dataTableGetCount(table) > 3) {
                 text = entries + 0xfd;
             }
         } else if (panel->detailSelection.mode == 1) {
-            const void *table = dataTableGet(0x39, 0);
-            const char *entries = dataTableGetEntries(table);
+            void *table = dataTableGet(0x39, 0);
+            const char *entries = static_cast<const char *>(dataTableGetEntries(table));
             if (dataTableGetCount(table) > 4) {
                 text = entries + 0x151;
             }
         }
         break;
     case 11: {
-        const void *table = dataTableGet(0x39, 0);
-        const char *entries = dataTableGetEntries(table);
+        void *table = dataTableGet(0x39, 0);
+        const char *entries = static_cast<const char *>(dataTableGetEntries(table));
         if (dataTableGetCount(table) > 5) {
             text = entries + 0x1a5;
         }

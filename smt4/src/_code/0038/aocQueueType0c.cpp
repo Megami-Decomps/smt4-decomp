@@ -1,11 +1,11 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 extern AocDisplay *g_aocDisplay;
 
-void memClear(void *block, s32 size);
 AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 kind, s32 id, char *path);
 void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *destination,
     u32 *output, u32 mode, u32 bytes, void *context);

@@ -5,8 +5,6 @@
 
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 s32 commonBackgroundUpdateFade(u32 handle);
@@ -28,8 +26,7 @@ extern "C" void campCommonBgAcquire()
         }
         CommonBackgroundState *background = g_commonBg.background;
         memset(background, 0, sizeof(*background));
-        background->counters.unk00 = asdProcessCreateSimple((const s8 *)"COMBG CALC", 4, 0, 0,
-                                                          commonBackgroundUpdateFade, FUN_002a35fc, 0);
+        background->counters.unk00 = asdProcessCreateSimple((const s8 *)"COMBG CALC", 4, 0, 0, commonBackgroundUpdateFade, FUN_002a35fc, 0);
         taskCreateDraw((const s8 *)"COMBG DDRAW", 0xe8, 0, 0, FUN_002a3600, NULL, 0,
                        (void *)background->counters.unk00);
         taskCreateDraw((const s8 *)"COMBG DDRAW FADE", 0x15f, 0, 0, commonBackgroundDraw, NULL, 0,

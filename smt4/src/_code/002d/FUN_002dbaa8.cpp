@@ -1,10 +1,9 @@
 /* NON_MATCHING: canonical unit indexing and HP-field base decomposition use different address registers. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(u32 index);
-void scrSetResult(s32 value);
 
 u32 FUN_002dbaa8()
 {

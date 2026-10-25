@@ -1,7 +1,10 @@
-/* NON_MATCHING: allocation debug-source hook is absent; resource packing and saved registers differ. */
+/* NON_MATCHING: allocation debug trace now matches; the state pointer/saved registers (r9 in the build) and the resource packing still differ. */
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 struct LegionDrawState {
@@ -38,9 +41,7 @@ extern const u8 DAT_004023c4[];
 extern const u8 DAT_004023e8[];
 extern const u8 DAT_00402400[];
 s16 randNextInRange(u32 maximum);
-void memClear(void *memory, u32 size);
 u32 FUN_003ac480();
-u32 asdProcessCreateSimple(const char *, s32, u32, u32, u32 (*)(), u32 (*)(), void *);
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
 void FUN_002bd954(UiSpriteState *, u32, u32, UiSpriteSource *, u16, f32);
@@ -50,6 +51,7 @@ void FUN_003ad0e0()
 {
     if (g_countdown.count <= 0) {
         if (g_countdown.state == NULL) {
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleLegionDraw.cpp", 825);
             LegionDrawState *state = static_cast<LegionDrawState *>(asdMemAlloc(0x100, 0x100, 0,
                 sizeof(LegionDrawState), 1));
             g_countdown.state = state;
@@ -79,7 +81,7 @@ void FUN_003ad0e0()
             memClear(state->particles, sizeof(state->particles));
         }
         LegionDrawState *state = g_countdown.state;
-        state->process = asdProcessCreateSimple("LegionDrawUp CALC", 2, 0, 0, FUN_003ac480, NULL, NULL);
+        state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("LegionDrawUp CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003ac480), NULL, NULL);
         drawParameterBlockClear(&state->parameters);
         paramsInit(&state->parameters, DAT_004023c4, 0x24, DAT_004023e8, 0x18,
             NULL, 0, NULL, 0, DAT_00402400, 0x70);

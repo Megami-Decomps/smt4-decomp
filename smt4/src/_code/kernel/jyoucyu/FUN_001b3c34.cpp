@@ -1,6 +1,7 @@
 /* NON_MATCHING: Retail add r0, pc, #140 differs from recovered add r0, pc, #144. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 // Private view of the initialized prefix of the resident allocation.
 struct JyoucyuStateView {
@@ -19,9 +20,6 @@ u32 FUN_001e981c();
 
 void* asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 category,
                      u32 heap);
-u32 asdProcessCreateSimple(const char* name, u32 priority, u32 unk08,
-                          u32 unk0C, const void* unk10,
-                          void (*request)(), u32 unk18);
 void taskCreateDraw(const char* name, u32 priority, u32 unk08, u32 unk0C,
                     u32 (*callback)(), u32 unk14, u32 unk18,
                     u32 process);
@@ -37,8 +35,7 @@ void FUN_001b3c34(void)
     state->unk04 = 0;
     state->unk08 = 0;
 
-    u32 process = asdProcessCreateSimple(
-        "JYOUCYU C", 2, 0, 0, &LAB_001c0400, jyoucyuRequest, 0);
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("JYOUCYU C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_001c0400), reinterpret_cast<AsdProcFunc>(jyoucyuRequest), 0);
     state->process = process;
     taskCreateDraw("JYOUCYU D", 0x84, 0, 0, FUN_001e981c,
                    0, 0, process);

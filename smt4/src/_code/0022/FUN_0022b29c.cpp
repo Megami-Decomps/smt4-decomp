@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail inlines the entry check twice (once per source) sharing one stack buffer for the script name and the iteration state (frame 300 vs 340 here) and orders the header-search/state selection blocks differently; the calls and stores are the same. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 /* A selectable entry (0xd0 bytes): the bucket it belongs to, its availability script and the flags gating it. */
@@ -75,7 +76,6 @@ MenuEntry *dataTable33GroupGetRecord(TableView *view, u32 group, u32 index);
 s32 dataTable33GroupGetCount(TableView *view, u32 group);
 void entryListReset(void *list);
 void entryListAppend(void *list, MenuEntry *entry);
-void memClear(void *data, u32 size);
 void textFormatBuffer(char *buffer, const char *format, ...);
 u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);

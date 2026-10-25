@@ -23,7 +23,7 @@ extern RenderCtx *g_titleScene;
 DebugListWork *jobGetWork(void);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 option);
 void FUN_002c1b64(RenderCtx *context, s32 mode);
 void FUN_0032accc(void);
@@ -40,7 +40,7 @@ u32 FUN_00201830(void)
 
     if (work->listMode != 1) {
         FUN_002c198c(g_titleScene);
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         FUN_0032accc();
         if (work->fade != 0.0f) {
             EffectColor color;
@@ -49,7 +49,7 @@ u32 FUN_00201830(void)
             color.green = 1.0f;
             color.blue = 1.0f;
             color.alpha = 1.0f;
-            FUN_002c39a4(g_titleScene);
+            renderCtxSelectStereoLayout(g_titleScene);
             renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
             color.red = 1.0f;
             color.green = 1.0f;

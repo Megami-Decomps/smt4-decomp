@@ -61,7 +61,7 @@ int FUN_004d7fe4(...);
 int FUN_004d88fc(...);
 int state4DStop(...);
 int state4DStart(...);
-int FUN_004f8f08(...);
+int btlStageResetAndClearCameraFlag(...);
 int btlQueueDuplicateSuppressedAction(...);
 int FUN_004fdb18(...);
 int FUN_004feecc(...);
@@ -263,7 +263,7 @@ extern int isEntryUsable(int);
 extern unsigned int *btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004f5e6c. */
 /* Supplied declaration required: state339CFinish. */
-/* Supplied declaration required: FUN_004f8f08. */
+/* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fdb18. */
@@ -810,7 +810,7 @@ LAB_002bb21c:
     FUN_004abba8(g_btlUiBlock,0);
     break;
   case 0x11:
-    FUN_004f8f08(g_btlAux);
+    btlStageResetAndClearCameraFlag(g_btlAux);
     temp_v6 = temp_v7;
     FUN_003eaf20();
     temp_v11 = saveSlotFindSelected();
@@ -826,7 +826,7 @@ LAB_002bb21c:
       state339CFinish();
     }
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
-    FUN_004f8f08(g_btlAux);
+    btlStageResetAndClearCameraFlag(g_btlAux);
     *(unsigned int *)(g_btlPartnerAttack + 8) = 8;
     *(unsigned char *)(temp_v7 + 0x4e4c) = 1;
     *(unsigned int *)(temp_v7 + 0x4d60) = 0;
@@ -976,7 +976,7 @@ LAB_002bbdec:
           state339CFinish();
         }
         *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;
-        FUN_004f8f08(g_btlAux);
+        btlStageResetAndClearCameraFlag(g_btlAux);
         temp_v7 = NaviMain_GetPosX();
         if (temp_v7 < 0) {
           dialogClose(1);

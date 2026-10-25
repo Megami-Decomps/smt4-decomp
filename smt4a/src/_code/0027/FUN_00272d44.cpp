@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses g_gameState through `add r0, r5, #0`, keeps the flag in r4/record in r5, and shares one `return 0` tail; register allocation and block order differ. */
 #include "map/mapDepart.h"
+#include "gamedata/FlagBitTests.h"
 
 struct AreaEventRecord {
     /* 0x00 */ u8 unk00[8];
@@ -11,7 +12,6 @@ extern "C" {
 extern GameStateA g_gameState;
 
 s32 gameFlagsTestThirdBank(void);
-s32 flagsBit7Get(s32 mode, s32 submode);
 AreaEventRecord *FUN_0015fa74(s32 mode, s32 submode);
 f32 partyGetAverageLevel(s32 kind);
 void gameFlagsWriteBit(s32 flag, s32 value);

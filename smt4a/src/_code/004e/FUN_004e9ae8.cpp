@@ -4,7 +4,6 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 extern "C" {
-s32 btlFindEntryNonzeroRecordValue(s32 unitIndex);
 s32 lcgRandomRange(u32 maximum);
 
 s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *indices, s32 count, s32 force)

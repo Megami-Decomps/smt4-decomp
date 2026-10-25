@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00287790` (_code @ 0x287790, 0x904 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int recordGetScaledMaximum(...);
 int FUN_002b4dcc(void);
 int FUN_002b4e7c(void);
 int playerSyncPair2A(void);
-int playerHasFlagBit(...);
 int playerClearFlagMask(...);
 int FUN_004bcb54(int);
 int bitsAt60Test(...);

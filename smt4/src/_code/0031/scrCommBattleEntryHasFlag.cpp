@@ -1,8 +1,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 BtlMainState* btlGetMainState(void);
 BtlEntry* btlMainFindEntryByListedId(BtlMainState* state, s32 id);
 

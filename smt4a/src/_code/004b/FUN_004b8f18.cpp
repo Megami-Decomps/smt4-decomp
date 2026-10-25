@@ -3,6 +3,7 @@
 #include "shard/W4_Match3_AocMainA.h"
 #include "map/mapDepart.h"
 #include "map/MapSelection.h"
+#include "util/FUN_00341fa4.h"
 
 /* The shared padding at +0x24 ends unaligned; a local view avoids enlarging its union. */
 struct MapReturnStateViewA {
@@ -33,7 +34,6 @@ typedef char MapReturnSaveValuesSizeCheck[sizeof(MapReturnSaveValuesA) == 24 ? 1
 extern "C" {
 extern GameStateA g_gameState;
 void infoWinSetValue(s32);
-void FUN_00341fa4(AocMainAObjC *, s32);
 s32 FUN_0047e150(AocMainAObjC *);
 void helpResourcesRelease(AocMainAObjC *);
 void gameDataSaveSetValues(const MapReturnSaveValuesA *);

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -73,7 +74,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
@@ -289,7 +289,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           }
           temp_v10 = g_renderCtx;
           if (param_1->field_0x48 != 0) {
-            temp_v6 = packNibblesAndByte(6,1,0);
+            temp_v6 = packNibblesAndByte(6, 1, 0);
             piVar7 = (int *)(temp_v10 + 0x12b8);
             temp_v5 = piVar7[*piVar7 + 2];
             piVar7[*piVar7 + 2] = temp_v6;
@@ -303,7 +303,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
             FUN_001835b4(2,0x11,0x7d1,param_2,param_3,0x79);
             FUN_00183bb0();
             temp_v10 = g_renderCtx;
-            temp_v6 = packNibblesAndByte(6,7,0);
+            temp_v6 = packNibblesAndByte(6, 7, 0);
             piVar7 = (int *)(temp_v10 + 0x12b8);
             temp_v5 = piVar7[*piVar7 + 2];
             piVar7[*piVar7 + 2] = temp_v6;
@@ -391,7 +391,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
         }
         temp_v10 = g_renderCtx;
         if (param_1->field_0x48 != 0) {
-          temp_v6 = packNibblesAndByte(6,1,0);
+          temp_v6 = packNibblesAndByte(6, 1, 0);
           piVar7 = (int *)(temp_v10 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v6;
@@ -405,7 +405,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
           FUN_001835b4(2,0x11,2000,param_2,param_3,0x79);
           FUN_00183bb0();
           temp_v10 = g_renderCtx;
-          temp_v6 = packNibblesAndByte(6,7,0);
+          temp_v6 = packNibblesAndByte(6, 7, 0);
           piVar7 = (int *)(temp_v10 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v6;

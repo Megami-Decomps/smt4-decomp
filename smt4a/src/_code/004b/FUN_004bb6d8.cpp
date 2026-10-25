@@ -2,11 +2,11 @@
 #include "gamedata/ItemFlagState.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/GameDataEntries.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32);
 
-ItemFlagCacheState *gameDataGetTableEntry(u8, u8);
 const ItemFlagVariant *FUN_0015fa74(u8, u8);
 void FUN_00148d68(u8, u8, s32);
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022899c` (_code @ 0x22899c, 0x6e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int passiveSkillLookupRecord(void);
 int btlGetMainState(void);
 int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
-int memClear(...);
 int SBORROW4(...);
 int VectorSignedToFloat(...);
 
@@ -224,8 +224,8 @@ FUN_0022899c(int param_1,unsigned int param_2,fn_0022899c_arg2 *param_3,unsigned
     temp_v0 = *(unsigned char *)(param_1 + 0x23);
     if (temp_v0 >= 2) {
       if (temp_v0 == 2) {
-        memClear(&temp_v16,0x48);
-        memClear(temp_v25,0x48);
+        reinterpret_cast<int>(memClear(reinterpret_cast<void*>(&temp_v16), 0x48));
+        reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v25), 0x48));
         temp_v1 = *(char *)(param_1 + 0x2f);
         if (temp_v1 == '\x01') {
           temp_v16 = temp_v9;

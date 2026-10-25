@@ -1,5 +1,6 @@
 /* NON_MATCHING: the degree conversion's two float constants come out in swapped VFP registers (s2/s1) and the first-call stores schedule differently; folding the two multiplies into one is what armcc does for a single expression. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -43,12 +44,11 @@ typedef struct CameraView {
 } CameraView;
 
 void FUN_002a09b4(const char *path, s32 flags);
-TitleIntroCamera *FUN_00263c1c(const char *path);
+TitleIntroCamera *asdCameraLoadFromFile(const char *path);
 void modelSlotAttachChild(TitleIntroCamera *camera, s32 index);
 void *FUN_002c501c(void);
 void FUN_002a8638(void *node, f32 *a, f32 *b, f32 *c, f32 *d);
 void FUN_002c1e30(void *camera, s32 flag, CameraView view);
-void FUN_00298d50(void *camera);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
 void FUN_002a0428(AsdMdlObject *model, u32 enabled);
@@ -77,7 +77,7 @@ void FUN_003bc9d0(TitleIntro *intro)
     if (intro->step == 0) {
         asdWorkAreaReset();
         FUN_002a09b4(DAT_00407dc4, 0);
-        intro->camera = FUN_00263c1c(DAT_00407db0);
+        intro->camera = asdCameraLoadFromFile(DAT_00407db0);
         modelSlotAttachChild(intro->camera, 0);
         void *camera = FUN_002c501c();
         CameraView view;
@@ -85,7 +85,7 @@ void FUN_003bc9d0(TitleIntro *intro)
         f32 degrees = view.fov * 180.0f;
         view.fov = degrees * 0.31830987f;
         FUN_002c1e30(camera, 1, view);
-        FUN_00298d50(camera);
+        FUN_00298d50(reinterpret_cast<u32>(camera));
         intro->model = asdMdlManagerCreateLoaded(DAT_00407d9c, 0x38);
         if (modelHasLoadedAttachment(intro->model) != 0) {
             FUN_002a0428(intro->model, 1);

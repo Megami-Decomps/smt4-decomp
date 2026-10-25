@@ -1,5 +1,6 @@
 #include "shard/GameGlobals.h"
 #include "util/CalleeContracts.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 

@@ -3,12 +3,12 @@
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
 
 extern "C" {
 extern f32 DAT_0044eb1c[2];
 extern const u8 DAT_00400001;
 extern const u8 DAT_00400003;
-void *memCopy(void *destination, const void *source, u32 size);
 EffectEditorOptions *FUN_0024dd90(EffectEditorOptions *options);
 void effEditorNodeChainApply(EffectEditorOptions *options);
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 clear);

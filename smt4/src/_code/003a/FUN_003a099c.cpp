@@ -1,12 +1,12 @@
 /* NON_MATCHING: Cursor-animation address/accessor inlining and the two shop-script case tails do not merge as in retail. */
 #include "shard/S2Scene3a.h"
 #include "ui/UiSpriteState.h"
+#include "util/FUN_00230df0.h"
 
 struct ScriptRunState;
 struct ModelBoneAttachmentRoot;
 
 extern "C" {
-void FUN_00230df0(s32 enabled);
 void FUN_00233240(void *animation, s32 value);
 void FUN_002b8ee0(UiSpriteState *animation, s32 value);
 s32 vec2GetYInt(const UiSpriteState *animation);

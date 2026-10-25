@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: retail hoists the 0x900 and 0xf88 sub-struct bases into registers (r9/sl, 8-byte frame); member layout of the menu object is not recovered. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -25,7 +26,6 @@ struct SlotMenu {
 }
 
 extern "C" {
-extern int vec2GetXInt(void *);
 extern int vec2GetYInt(void *);
 extern void efctSetSpeed(f32);
 extern f32 vec2GetSpeed(const void *animation);

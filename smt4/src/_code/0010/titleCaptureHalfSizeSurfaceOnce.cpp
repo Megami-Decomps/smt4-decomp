@@ -31,7 +31,7 @@ extern u32 g_titleScene;
 
 extern TitleWork *jobGetWork(void);
 extern s32 FUN_002bff10(s32 arg);
-extern void FUN_002c39a4(u32 scene);
+extern void renderCtxSelectStereoLayout(u32 scene);
 extern u8 FUN_002bfadc(s32 arg, Surface *surface);
 extern void surfaceCopy(Surface *dst, Surface *src);
 
@@ -46,7 +46,7 @@ s32 titleCaptureHalfSizeSurfaceOnce(void)
         TitleState *state = &work->state;
 
         if (work->state.active != 0 && state->captured == 0 && state->unk65 == 0 && state->unk99 == 0) {
-            FUN_002c39a4(g_titleScene);
+            renderCtxSelectStereoLayout(g_titleScene);
             work->surface->width = 0x200;
             work->surface->height = 0x200;
             work->state.unk62 = FUN_002bfadc(0, work->surface);

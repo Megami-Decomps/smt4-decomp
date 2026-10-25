@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the list cursor in r1 and zero in r3; the natural next-pointer loop uses r3 and r2. */
 #include "common.h"
 
 struct ListNode {
@@ -16,10 +15,10 @@ extern "C" void listDetachAllNodes(NodeList *list)
     ListNode *node = list->head;
     if (node != NULL) {
         do {
-            ListNode *next = node->next;
-            node->next = NULL;
-            node->previous = NULL;
-            node = next;
+            ListNode *detached = node;
+            node = detached->next;
+            detached->next = NULL;
+            detached->previous = NULL;
         } while (node != NULL);
         list->head = NULL;
     }

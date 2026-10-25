@@ -7,7 +7,6 @@ s32 vec2GetXInt(const void *selection);
 s32 vec2GetYInt(const void *selection);
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
 s32 buttonHelpIsNotActive(void);
-void FUN_003343f0(s32 value);
 void FUN_0032cfe0(Screen4A *screen);
 s8 uiSpriteGetCompletionState(const void *record);
 

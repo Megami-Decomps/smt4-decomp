@@ -1,6 +1,7 @@
 /* NON_MATCHING: The enemy-filter owner address is loaded after the table count instead of before the initial lookup. */
 #include "map/EnemyTableFilter.h"
 #include "map/mapDepart.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern EnemyTableFilterState g_mapEnemy;
@@ -8,7 +9,6 @@ extern GameState g_gameState;
 extern u32 DAT_004a0be4[256];
 EnemyTableLocation *dataTable29Sub0GetEntryWithAoc(s32 index);
 s32 dataTableGetRecordFortyOne(void);
-void memClear(void *memory, u32 size);
 
 /* Rebuilds the field-enemy entry index for the current map and area. */
 void FUN_0021be00(void)

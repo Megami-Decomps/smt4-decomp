@@ -1,10 +1,10 @@
 /* NON_MATCHING: profile comparisons load halfwords individually instead of retail's packed-word snapshot. */
 #include "camp/CampCec/CecProfile.h"
 #include "camp/CampCec/CampCecEdit.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
 extern CampCecEdit *g_campCecEdit;
-const CecProfile *gameGetPlayerData(void);
 
 // Detect player identity changes since the StreetPass edit screen was opened.
 u32 FUN_003a5094(void)
@@ -16,7 +16,7 @@ u32 FUN_003a5094(void)
     };
     EditProfileView *edit = (EditProfileView *)g_campCecEdit;
     if (edit != NULL) {
-        const CecProfile *current = gameGetPlayerData();
+        const CecProfile *current = reinterpret_cast<const CecProfile *>(gameGetPlayerData());
         CecProfile saved = edit->saved;
         return current->values[0] != saved.values[0] ||
                current->values[1] != saved.values[1] ||

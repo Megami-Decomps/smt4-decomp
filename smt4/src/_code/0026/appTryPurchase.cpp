@@ -1,6 +1,7 @@
 /* NON_MATCHING: -O2 candidate; signed indexing folds into ADD, bitset stores reschedule, and lookup/default-value registers and branches differ. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/DataTable.h"
 
 struct UnlockRecord {
     /* 0x00 */ UnsignedRecordKey32 identity;
@@ -26,7 +27,6 @@ u8* gameDataGetFlagBits(void);
 u8 appCheckPurchaseRequirements(u32 id);
 void FUN_00334ff8(void);
 void* dataTableGet(s32 tableId, s32 slot);
-const UnlockRecord* dataTableGetEntries(void* table);
 u32 dataTableGetCount(void* table);
 const UnlockRecord* libc_bsearch(const UnlockRecord* key, const UnlockRecord* entries,
                                 u32 count, u32 stride, UnlockKeyComparator* compare);
@@ -42,7 +42,7 @@ inline const UnlockRecord* findUnlockRecord(u16 id)
     if (table == NULL) {
         return NULL;
     }
-    const UnlockRecord* entries = dataTableGetEntries(table);
+    const UnlockRecord* entries = reinterpret_cast<const UnlockRecord*>(dataTableGetEntries(table));
     const u32 count = dataTableGetCount(table);
     UnlockRecord key;
     key.identity.key = id;

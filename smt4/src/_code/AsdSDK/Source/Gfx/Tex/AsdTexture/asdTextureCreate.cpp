@@ -1,13 +1,13 @@
 /* NON_MATCHING: the debug traces now match; the field stores after memClear are scheduled differently (retail stores unk08/target/unk38.. first and increments refCount last as a separate load/add/store; built merges them into one stm). */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 extern const char DAT_00409594[];
 
 void *asdMemoryAlloc(int, int, int, s32 size, int flag);
-void memClear(void *block, s32 size);
 
 /* Creates a 2D texture object with one reference. The allocation flag is cleared when `shared` is set. */
 AsdTexture *asdTextureCreate(s32 shared)

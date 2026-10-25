@@ -2,6 +2,7 @@
 #include "battle/btlGameOver.h"
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct GameOverEyeTimeline;
 extern "C" {
@@ -15,7 +16,6 @@ void btlUiPanelStart(BtlUiA *);
 u32 btlReflectQueuePairedParameters(s32, u32, u32, u32, u32, u32, u32, u32, u32);
 void slotSetRequest(u32, u32, u32);
 BtlMainStateA *btlGetMainState();
-void asdLoadFileAsyncSimple(const char *, void **, u32);
 void *gameDataBlocksGetSaveData();
 u32 talkEventStartScript(BtlGameOverA *);
 u32 FUN_003e71a8(BtlGameOverA *);
@@ -60,8 +60,8 @@ u32 FUN_003e6c14(BtlGameOverA *work)
         return FUN_003e71a8(work);
     }
     work->state = 3;
-    asdLoadFileAsyncSimple(DAT_005285fc, &work->dataA, 0);
-    asdLoadFileAsyncSimple(DAT_005285dc, &work->dataB, 0);
+    asdLoadFileAsyncSimple(DAT_005285fc, reinterpret_cast<u32 *>(&work->dataA), 0);
+    asdLoadFileAsyncSimple(DAT_005285dc, reinterpret_cast<u32 *>(&work->dataB), 0);
     SaveCounterView *save = (SaveCounterView *)gameDataBlocksGetSaveData();
     if (save->gameOvers < 255)
         ++save->gameOvers;

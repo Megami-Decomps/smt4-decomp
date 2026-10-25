@@ -10,7 +10,7 @@ const PackedRenderParameters *dataTable02GetEntryByIndex(s32 index);
 void FUN_003bbfdc(PackedRenderState *sprite, const PackedRenderParameters *parameters);
 Table03Record *aocGetTableRecordOrFallback(s32 index);
 void FUN_003bc248(PackedRenderState *sprite, s32 index, s32 bank, s32 page);
-s32 FUN_0029022c(void);
+u8 FUN_0029022c(void);
 u32 FUN_002903f0(void);
 s32 idIsAtLeast350(u32 id);
 

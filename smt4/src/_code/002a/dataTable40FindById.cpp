@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -16,9 +17,7 @@ extern AocSystem *g_aocSystem;
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 dataCompareUnsignedRecordKeys(const void *a, const void *b);
 DataTable40Record *FUN_0014ca60(AocSystem *system, u32 id);
-u32 dataTableGet(u32 table, u32 index);
-u32 dataTableGetCount(u32 table);
-void *dataTableGetEntries(u32 table);
+
 
 /* Finds the record with `id`: the add-on content's override first, else a search of data table 4/0. */
 DataTable40Record *dataTable40FindById(u32 id)
@@ -28,7 +27,7 @@ DataTable40Record *dataTable40FindById(u32 id)
     if (record != NULL) {
         return record;
     }
-    u32 table = dataTableGet(4, 0);
+    void *table = dataTableGet(4, 0);
     void *entries = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     DataTable40Record key;

@@ -1,4 +1,5 @@
 #include "font/FontStringReader.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 extern "C" {
 FontRegisteredRecord *recordTableGet(u32 index);
 void FUN_002aea44(NwFontGlyph *glyph);

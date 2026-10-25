@@ -2,6 +2,7 @@
 #include "classes/Obj4223f8.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "status/StatusCamera.h"
 
 /* The view's layout past the shared base, as its state handlers see it (Shin Megami Tensei IV). */
 struct Obj4223f8HandlerView {
@@ -47,7 +48,6 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_0029ee6c(const char *text, u32 color);
 u32 flaggedValueHolderGetTotal(const void *holder);
 void FUN_0029da34(s32 a, s32 b, u32 id);
-void FUN_002a0cc8(s32 arg);
 void FUN_00233670(void *selection, s32 a, s32 b, s32 count);
 }
 

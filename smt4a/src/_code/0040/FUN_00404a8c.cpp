@@ -1,3 +1,4 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: register allocation and stack layout differ (retail spills the loop-invariant x+shift to the stack, keeps a panel+0x100 base in fp and builds the icon pairs with STM into a larger frame). */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -24,7 +25,6 @@ struct FramePanel {
 extern "C" {
 extern RenderCtx *g_renderCtx;
 void efctSetSpeed(f32 speed);
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 SpritePlacement *FUN_001834a4(s32 sheet, s32 part);
 
 /* Draws the panel's frame sprites at (x, y), shifted for the stereo depth; the effect speed comes from the caller. */

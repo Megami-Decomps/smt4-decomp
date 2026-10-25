@@ -10,7 +10,7 @@ int FUN_001523b8(...);
 int FUN_00156fd8(...);
 int FUN_001579dc(...);
 int FUN_0015a050(...);
-int FUN_001642e4(...);
+int asdLoadFileSyncNoContext(...);
 int FUN_00178b04(...);
 int mathCopyIdentityMatrix(...);
 int VectorUnsignedToFloat(...);
@@ -37,7 +37,7 @@ extern unsigned int FUN_00154c94(unsigned int);
 /* Supplied declaration required: FUN_001579dc. */
 extern unsigned int FUN_00157acc(void);
 /* Supplied declaration required: FUN_0015a050. */
-/* Supplied declaration required: FUN_001642e4. */
+/* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_00178b04. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
@@ -90,7 +90,7 @@ void FUN_00145adc(int param_1)
   }
   *(unsigned int *)(param_1 + 0x530) = temp_v0;
   pcVar2 = "DefaultTextureVS.shbin";
-  FUN_001642e4("DefaultTextureVS.shbin",&temp_v6,1,0x80);
+  asdLoadFileSyncNoContext("DefaultTextureVS.shbin",&temp_v6,1,0x80);
   FUN_001579dc(*(unsigned int *)(param_1 + 0x530),pcVar2,temp_v6,0);
   temp_v0 = asdGxPresetsGetHeightByKind(0);
   VectorUnsignedToFloat(temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

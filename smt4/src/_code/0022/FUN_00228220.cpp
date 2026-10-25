@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00228220` (_code @ 0x228220, 0x5e4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int FUN_00247478(unsigned char [2], unsigned int, unsigned int *);
 int btlMainFindEntryByListedId(unsigned int *, unsigned int);
 int btlGetMainState(void);
 int dataTable40FindById(void);
-int memClear(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_8: 13 slot(s), 46 byte(s) */
@@ -202,8 +202,8 @@ void FUN_00228220(int param_1,unsigned int param_2,int param_3,unsigned int para
       }
       if (temp_v3 != 0) {
         if (*(char *)(temp_v3 + 0x23) == '\x02') {
-          memClear(temp_v10,0x48);
-          memClear(temp_v13,0x48);
+          reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v10), 0x48));
+          reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v13), 0x48));
           temp_v0 = *(char *)(temp_v3 + 0x2f);
           if (temp_v0 != '\x01') {
             if (!(temp_v0 == '\x13' || temp_v0 == '\x14')) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: blocked early-exit zeroing and one height-copy register pair differ; signed state bytes now match all folded flag loads. */
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 struct DownsampleWork {
     u8 unk0000[0xfa4];
@@ -26,8 +27,6 @@ typedef char DownsampleWorkLayoutCheck[
     offsetof(DownsampleWork, separateBuffers) == 0x1494 &&
     sizeof(DownsampleWork) == 0x14A0 ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *);
 u8 FUN_00154edc(u32, JobSurface *);
 s32 stateValuesGetBySelector(u32);
 void surfaceCopy(JobSurface *, JobSurface *);

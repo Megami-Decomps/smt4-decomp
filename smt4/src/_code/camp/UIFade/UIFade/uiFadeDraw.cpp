@@ -8,7 +8,6 @@ extern "C" {
 
 int efctSetSpeed(f32 alpha);
 int FUN_002c18e4(RenderCtx *ctx);
-int FUN_002c39a4(RenderCtx *ctx);
 int FUN_002c5d80(u32 a, u32 b);
 
 extern UIFadeGlobals g_uiFade;
@@ -23,7 +22,7 @@ void uiFadeDraw(u32 arg)
     if (fade->alpha <= 0.0f) {
         return;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     ctx = g_titleScene;
     state = FUN_002c5d80(1, 0);
     renderStackPush(&ctx->stackA, state);

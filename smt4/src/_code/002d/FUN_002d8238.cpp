@@ -1,5 +1,6 @@
 /* NON_MATCHING: taskCreate takes the priority float on the stack in retail (vstr s0,[sp] before the integer arguments); a plain f32 parameter goes in s0, which shifts every following stack argument; the rest of the setup matches in shape. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -57,7 +58,6 @@ void FUN_001aad64(QuadEffectTask *task);
 void FUN_001aa6a4(QuadEffectTask *task);
 QuadEffectTask *taskCreate(void (*update)(QuadEffectTask *), void (*a)(QuadEffectTask *), void (*b)(QuadEffectTask *),
                            void (*c)(QuadEffectTask *), f32 priority, u32 size, u32 list, u32 e, u32 f);
-void memClear(void *block, s32 size);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_00193c70(QuadEffectTask *task);
 

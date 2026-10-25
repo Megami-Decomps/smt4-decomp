@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail places the vector before the matrix and retains its address in a saved register. */
 #include "shard/W5_W5Match2_PlainData.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
 struct ModelTransformVector { f32 x, y, z; };
 struct ModelTransformTarget {
@@ -10,7 +11,6 @@ struct ModelTransformTarget {
 extern "C" {
 void FUN_002b4c30(Matrix44 *matrix, const f32 *rotation);
 void matrix44SetIdentity(Matrix44 *matrix);
-void mathMatrixApplyScale(Matrix44 *matrix, const ModelTransformVector *scale, u32 order);
 void FUN_002a2048(Matrix44 *matrix, const ModelTransformVector *translation, u32 order);
 void FUN_002a1fb4(Matrix44 *target, const Matrix44 *matrix, u32 flags);
 
@@ -28,7 +28,7 @@ void FUN_003626bc(ModelTransformTarget *target, const ModelTransformVector *tran
         vector.x = scale;
         vector.y = scale;
         vector.z = scale;
-        mathMatrixApplyScale(&matrix, &vector, 2);
+        mathMatrixApplyScale(reinterpret_cast<f32 *>(&matrix), reinterpret_cast<const f32 *>(&vector), 2);
     }
     if (translation != NULL) {
         vector.x = translation->x;

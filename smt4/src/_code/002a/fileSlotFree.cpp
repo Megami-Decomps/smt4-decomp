@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FileSlotFree.h"
 
 struct FileSlot {
     u32 unk00;

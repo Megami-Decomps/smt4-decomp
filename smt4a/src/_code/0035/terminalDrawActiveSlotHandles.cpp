@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 /* The terminal screen: its page and four slots (0xC bytes each). */
 struct LocalTermScreenSlot {
@@ -21,7 +22,6 @@ extern LocalTermScreen *g_localTmnl;
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32 mode, f32 alpha);
 s32 FUN_001692ac(u32 kind, u32 enabled);
-s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_00182540(u32 handle);
 
 /* Draws the terminal's slot handles with three render states pushed, for pages 1..14. */

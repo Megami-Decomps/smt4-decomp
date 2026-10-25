@@ -1,5 +1,5 @@
 /* NON_MATCHING: required-mask AND reuses its loaded registers rather than retail's extra r9/IP pair, changing saved registers and stack size. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -8,7 +8,6 @@ extern "C" {
 s32 scrGetArg(s32);
 void scrSetResult(s32);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
-BtlMainStateA *btlGetMainState(void);
 s32 btlResolveEntryChoice(s32);
 
 // Test the selected eligible combatants and active combatant for a status flag.

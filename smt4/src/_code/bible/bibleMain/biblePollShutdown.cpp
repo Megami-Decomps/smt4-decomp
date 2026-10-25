@@ -6,7 +6,6 @@
 extern "C" {
 
 int asdMemFree(void *ptr);               /* heap free */
-int jobFind(u32 task);                /* nonzero while the task exists */
 
 extern BibleGlobals g_bible;
 

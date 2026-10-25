@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the sequence before clearing pending and uses STRD for the argument header; armcc reorders and uses separate stores. */
+/* NON_MATCHING: STRD for the argument header now matches; retail clears `pending` (strb) before the strd and materialises the zero before the ~0, ours stores in the opposite order. */
 #include "common.h"
 
 __packed struct SequenceRequestState {
@@ -28,9 +28,9 @@ s32 FUN_0047dc50(SequenceRequestState *request)
     if (!request->pending)
         return 0;
     SequenceArguments arguments;
-    request->pending = 0;
     arguments.sequence = request->sequence;
     arguments.flags = ~0u;
+    request->pending = 0;
     for (u32 index = 0; index < 6; ++index)
         arguments.values[index] = request->arguments[index];
     sysClearCachedFlag();

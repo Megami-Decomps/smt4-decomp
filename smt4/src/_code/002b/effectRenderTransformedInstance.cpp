@@ -1,3 +1,4 @@
+#include "gfx/SpritePartDraw.h"
 /* NON_MATCHING: identity and transform construction groups VFP stores differently and changes saved-register allocation. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -53,9 +54,6 @@ void FUN_002b2144(Matrix44* destination, float x, float y, float z);
 void efctSetSpeed(float speed);
 void cameraSetViewMatrix(TitleScene* scene, const Matrix44* matrix);
 
-void FUN_002bf380(
-    u32 flags, u32 resource, s32 index,
-    s32 argument3, s32 argument4, s32 parameter);
 
 void quadSetOrderedVectors(
     const Vector4 &first, const Vector4 &second,

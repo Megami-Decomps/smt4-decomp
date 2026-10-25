@@ -31,7 +31,7 @@ ResultMapBlock *gameGetMapBlock(void);
 SpecialRecord *dataTable2fSub1GetRecord(s32 id);
 void FUN_00295a18(s32 value, s32 mode);
 s32 FUN_00298dc8(u16 quest);
-s32 FUN_00287894(u16 quest);
+s32 table1bOr1cGetRecordValue(u16 quest);
 s32 FUN_00287874(u16 quest);
 s32 questPassesAvailabilityConditions(u16 quest);
 s32 FUN_00298e40(u16 quest, s32 index, QuestRewardEntry *entry);
@@ -59,7 +59,7 @@ s32 FUN_001a9104(void)
         if (FUN_00298dc8(quest) == 0) {
             continue;
         }
-        s32 kind = FUN_00287894(quest);
+        s32 kind = table1bOr1cGetRecordValue(quest);
         if (kind == 1) {
             u32 matched = 0;
             s32 lines = 0;

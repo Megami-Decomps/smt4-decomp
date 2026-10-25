@@ -1,10 +1,10 @@
 /* NON_MATCHING: destination selection is correct; global-base reuse and shared tail-call layout differ. */
 #include "map/mapDepart.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern GameState g_gameState;
 extern s32 DAT_0049fd14;
-void asdSequenceRequest(s32 sequence, const void* argument, u32 size);
 
 // Select the destination sequence, preserving map return data when needed.
 void FUN_002faf88(void)

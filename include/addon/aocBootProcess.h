@@ -23,4 +23,13 @@ typedef struct AocBootGlobals {
     /* 0x04 */ s32 finished;
 } AocBootGlobals;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_0027e9c0(void *obj);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

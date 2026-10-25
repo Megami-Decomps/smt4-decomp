@@ -1,8 +1,8 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
-extern u8 *FUN_002a0d0c(void);
 
 /* Sets bit `bit` of the bitset at +0x51. */
 void gameSetAuxiliaryProgressFlag(u32 bit)

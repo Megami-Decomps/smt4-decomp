@@ -1,8 +1,8 @@
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(unsigned short *, int);
 
 typedef struct fn_003c8428_arg0 fn_003c8428_arg0;
 struct fn_003c8428_arg0 {
@@ -69,7 +69,7 @@ void FUN_003c8428(fn_003c8428_arg0 *param_1)
     }
     temp_v7 = temp_v7 + 1;
   } while (temp_v7 < 3);
-  memClear(puVar8,0x604);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar8), 0x604));
   temp_v7 = supportUnitGetEntry(param_1,temp_v8);
   puVar8[0x302] = (short)(int)param_1;
   puVar8[0x303] = (short)temp_v8;

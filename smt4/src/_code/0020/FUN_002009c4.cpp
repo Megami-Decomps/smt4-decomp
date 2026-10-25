@@ -1,4 +1,5 @@
 #include "ui/CommandWindow.h"
+#include "util/FUN_002009c4.h"
 
 extern "C" {
 

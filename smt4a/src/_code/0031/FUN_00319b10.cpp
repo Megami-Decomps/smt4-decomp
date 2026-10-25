@@ -1,4 +1,5 @@
 #include "camp/CampTalkWork.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern CampTalkWork *g_callbackWork;
@@ -9,7 +10,6 @@ void *asdOperatorNew(u32);
 u32 callbackWorkForward(void);
 void FUN_0032fab8(void);
 void FUN_0032fab0(void);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, u32 (*)(void), void (*)(void), void *);
 void taskCreateDraw(const char *, s32, s32, s32, void (*)(void), s32, void *, u32);
 void loadSlotRequestAsync(u32, s32);
 void asdLoadFileAsyncSimple(const char *, void **, s32);
@@ -19,7 +19,7 @@ void FUN_00319b10(void)
 {
     CampTalkWork *work = (CampTalkWork *)asdOperatorNew(sizeof(CampTalkWork));
     g_callbackWork = work;
-    work->job = asdProcessCreateSimple("CAMPTALK PROC", 4, 0, 0, callbackWorkForward, NULL, NULL);
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CAMPTALK PROC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(callbackWorkForward), NULL, NULL);
     taskCreateDraw("CAMPTALK UL", 0x81, 0, 0, FUN_0032fab8, 0, NULL, work->job);
     taskCreateDraw("CAMPTALK UR", 0xDD, 0, 0, FUN_0032fab8, 0, NULL, work->job);
     taskCreateDraw("CAMPTALK DD", 0xEB, 0, 0, FUN_0032fab0, 0, NULL, work->job);

@@ -1,9 +1,9 @@
 #include "shard/W6_W6Match2_LightPair.h"
+#include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 
 extern "C" {
 extern LightObjectPair DAT_005b3c90;
 extern LightObjectPair DAT_005b3c98;
-void asdLightActivate(u32 light);
 
 // Select the requested object pair, activating its light when required.
 u32 asdLightSelectActive(s32 kind)

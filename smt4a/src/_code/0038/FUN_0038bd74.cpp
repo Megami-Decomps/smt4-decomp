@@ -4,10 +4,10 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/BattleUnitSkills.h"
 #include "gamedata/Table00.h"
+#include "gamedata/Table00Lookup.h"
 #include "gamedata/Table04Record.h"
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
-Table00Record *dataTable00FindById(u32 id);
 Table04Record *dataTable04FindById(u32 id);
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);

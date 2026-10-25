@@ -1,9 +1,9 @@
 /* NON_MATCHING: close: retail reloads the flag byte and clears bit 7 and the low bits of the second byte in a separate read-modify-write after the bit-6 update; built folds them into the same register. Also the literal pool order of 0x15E and the roster slot address computation differ */
 #include "gamedata/RosterView.h"
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 extern "C" {
 
-RosterView *gameFlagBlockGet(void);
 s32 FUN_001bd100(u32 id);
 s32 FUN_001bd118(u32 id);
 s32 FUN_001ada74(u32 id);
@@ -16,8 +16,8 @@ void clearThreeWords(void *words);
  * first free stock slot, and clears the 0x500..0x51F flag range. Returns 0 when the id cannot be added. */
 u32 FUN_00417e08(u16 id)
 {
-    RosterFlags *entry = &gameFlagBlockGet()->flags[id];
-    RosterView *roster = gameFlagBlockGet();
+    RosterFlags *entry = &reinterpret_cast<RosterView *>(gameFlagBlockGet())->flags[id];
+    RosterView *roster = reinterpret_cast<RosterView *>(gameFlagBlockGet());
     s32 kind;
     s32 i;
 
@@ -72,7 +72,7 @@ u32 FUN_00417e08(u16 id)
             }
         }
         for (u32 flag = 0x500; flag < 0x520; flag++) {
-            u8 *bits = (u8 *)gameFlagBlockGet();
+            u8 *bits = (u8 *)reinterpret_cast<RosterView *>(gameFlagBlockGet());
 
             FUN_004bb6d8(flag, 0);
             bits[flag >> 3] &= ~(1u << (flag & 7));

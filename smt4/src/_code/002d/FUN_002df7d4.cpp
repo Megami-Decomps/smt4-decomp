@@ -1,4 +1,3 @@
-/* NON_MATCHING: the shift base 1 is materialised before the divisions (mov r2, #1); retail makes it after the word load (mov r1, #1) and uses r2 for the shift count. */
 #include "common.h"
 
 extern "C" {
@@ -14,9 +13,11 @@ extern MapBlock *gameGetMapBlock(void);
 u8 FUN_002df7d4(s32 index)
 {
     MapBlock *map = gameGetMapBlock();
+    s32 word = index / 32;
     s32 bit = index % 32;
+    u32 bits = map->flags[word];
 
-    return (map->flags[index / 32] & (1 << bit)) != 0;
+    return (bits & (1 << bit)) != 0;
 }
 
 }

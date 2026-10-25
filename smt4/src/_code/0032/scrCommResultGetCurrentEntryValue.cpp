@@ -1,5 +1,6 @@
 #include "common.h"
 #include <stddef.h>
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef char ResultValueOffsetsCheck[
     offsetof(Game003284d0, current) == 0xCF78 &&
     sizeof(Entry003284d0) == 0x620 ? 1 : -1];
 
-void scrSetResult(s32 value);
 
 /* Script command: reports the value of the current entry (when there is a game). Returns 1. */
 u32 scrCommResultGetCurrentEntryValue(void)

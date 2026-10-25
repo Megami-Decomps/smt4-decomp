@@ -1,5 +1,6 @@
 /* NON_MATCHING: steps the save/load confirmation script task (start script by mode, run it, request the save, finish); written from the decompilation, switch layout and state write-back not compared with retail */
 #include "classes/WindowStatus.h"
+#include "sys/ResultReport.h"
 
 #define SAVELOAD_STATE_START 0
 #define SAVELOAD_STATE_PROMPT 4
@@ -35,7 +36,7 @@ s32 FUN_002103dc(u32 id, u32 flag);
 void FUN_00223898(SaveLoadTask *task, s32 flag);
 void gameDataFlagsSet(s32 mask);
 void gameDataFlagsSetBits(s32 mask);
-void gameDataBlocksAddFlags(s32 mask);
+void gameDataBlocksAddFlags(u32 flags);
 void gameDataFlagsClear(s32 mask);
 void gameDataFlagsClearAndRefresh(s32 mask);
 void gameDataRemoveHomeButtonHold(s32 mask);
@@ -45,7 +46,6 @@ void messageMainFinishWindow(void);
 s32 messageMainIsWindowActive(void);
 void buttonHelpSetPreset(s32 preset);
 WindowStatusResult FUN_002c40f8(s32 *request, s32 a, s32 b, s32 c, s32 d);
-void FUN_002c526c(void);
 void FUN_002e2f14(SaveLoadTask *task);
 
 /* Releases the home-button hold and clears the transient game data flags. */
@@ -123,7 +123,7 @@ u32 FUN_001edcf0(u32 unused, s32 enabled)
             s32 request = task->request;
             WindowStatusResult result = FUN_002c40f8(&request, 1, 0, 0, 0);
             if ((s32)result.code < 0)
-                FUN_002c526c();
+                FUN_002c526c(result.code);
             if ((result.code & 0x3FF) == 0x3FE)
                 return 0;
         }

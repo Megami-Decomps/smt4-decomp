@@ -3,12 +3,12 @@
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "util/SlotRangeSelect.h"
 
 
 extern "C" {
 u32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 group, u32 *first, u32 *count);
 void scrSetResult(s32 result);
 BtlCombatantEntryA *FUN_003eaf20(BattleMaskState *battle);
 
@@ -20,7 +20,7 @@ u32 btlScriptGetEncodedCombatantStat()
     s32 choice = scrGetArg(2);
     u32 first;
     u32 count;
-    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
+    FUN_00301a08(btlResolveEntryChoice(choice), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < static_cast<s32>(first + count); ++index) {
         BattleMaskState *battle = btlGetMainState();
         BtlCombatantEntryA *entry = &reinterpret_cast<BtlCombatantEntryA *>(battle->entryMaskView.mask)[index];

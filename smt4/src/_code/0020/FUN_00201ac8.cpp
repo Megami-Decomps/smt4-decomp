@@ -1,10 +1,11 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 
 int fileSlotLoad(int id);
 int asdTMTexTableLoadEntryAsync(int table, int index);
-int asdTMTexTableLoadSprites(int table);
 
 void FUN_00201ac8(void)
 {

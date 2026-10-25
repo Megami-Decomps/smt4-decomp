@@ -12,7 +12,7 @@ int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int uiDrawRotatingLoadingGrid(...);
 int SBORROW4(int, int);
 
@@ -35,7 +35,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: uiDrawRotatingLoadingGrid. */
@@ -61,7 +61,7 @@ unsigned int FUN_00330ac8(void)
   if (*(int *)(g_screenStateWork + 4) == 0) {
     return 0;
   }
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v7 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar8 = (int *)(temp_v7 + 0x124c);

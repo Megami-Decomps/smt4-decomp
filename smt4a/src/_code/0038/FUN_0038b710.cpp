@@ -1,12 +1,12 @@
 /* NON_MATCHING: The enabled constant stays live in r6, enlarging the save set; final menu-state stores are scheduled differently. */
 #include "shard/W5_W5Match7_UiQuest.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void uiSpriteSetKeyframe(void *sprite, u32 keyframe, u32 flags);
 void uiSpriteSetImageKeyframe(void *sprite, u32 image, u32 keyframe);
 void FUN_003d498c(u32 questId, u32 mode);
 void uiQuestSpritesCreate(void);
-u8 FUN_001bd100(u32 questId);
 
 /* Selects a quest, creates its sprites and enters the quest-detail transition. */
 void FUN_0038b710(u32 questId)

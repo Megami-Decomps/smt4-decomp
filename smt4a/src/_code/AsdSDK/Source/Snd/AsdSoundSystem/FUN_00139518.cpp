@@ -33,7 +33,7 @@ void FUN_00152bf8(AsdSndObject *object);
 void asdMemFree(void *memory);
 void sndSystemFinalize(void);
 void sndSystemShutdown(void);
-void dspUnloadIdleComponent(void);
+u32 dspUnloadIdleComponent(void);
 void dspCallbackShutdown(void);
 }
 

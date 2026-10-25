@@ -1,9 +1,9 @@
 /* NON_MATCHING: counter argument lifetimes and saturation stores use different registers. */
 #include "common.h"
+#include "event/2dEvent/Npc2d.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
-u32 *gameGetCounters();
 void FUN_00343a74(u32 amount);
 void questCenterAddPoints(u32 amount);
 void FUN_00343a04(u32 amount);
@@ -14,7 +14,7 @@ u32 FUN_002021b4()
     u32 counterId = scrGetArg(0);
     u32 amount = scrGetArg(1);
     counterId &= 0xff;
-    u32 *counter = &gameGetCounters()[counterId];
+    u32 *counter = &reinterpret_cast<u32 *>(gameGetCounters())[counterId];
     if (~*counter > amount) {
         *counter += amount;
     } else {

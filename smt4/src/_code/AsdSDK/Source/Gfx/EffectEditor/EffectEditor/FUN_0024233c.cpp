@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024233c` (_code @ 0x24233c, 0x4b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gfx/EffectEditorStorage.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 extern "C" {
 
 int effBlockCreate(void);
@@ -17,7 +18,6 @@ int resourceQueueDeferredDestroy(...);
 int registrationEntryInsert(...);
 int FUN_002a3d58(...);
 int textFormatBuffer(int, unsigned char *, unsigned int);
-int libc_strcpy(int, unsigned int);
 int padIsButtonPressed(...);
 int memAlloc(int, int, int, unsigned int, int, int);
 int asdMemFree(...);
@@ -211,7 +211,7 @@ LAB_002424b8:
     DAT_0044eae8 = 0;
     temp_v6 = effPartAppend(DAT_0044ea94,temp_v1);
     DAT_0044eaa4 = temp_v6;
-    libc_strcpy(temp_v6 + 0x9c,*(unsigned int *)*piVar3);
+    libc_strcpy(reinterpret_cast<unsigned int *>(temp_v6 + 0x9c), reinterpret_cast<unsigned int *>(*(unsigned int *)*piVar3));
     *(int *)(temp_v6 + 0x40) = piVar3[3];
     *(int *)(temp_v6 + 0x44) = piVar3[4];
     *(int *)(temp_v6 + 0x48) = piVar3[5];

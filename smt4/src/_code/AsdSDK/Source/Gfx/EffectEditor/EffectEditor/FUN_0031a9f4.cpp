@@ -4,12 +4,12 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_0019dad8(float *);
+int matrixGetTranslation(float *);
 int FUN_00245ed0(void);
 int FUN_00245f48(void);
 int matrixCopySelectedToGlobal(float *);
 int randomAdvanceShiftRegister(...);
-int FUN_0024b830(int);
+int shiftRandomNextFraction(int);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
@@ -89,12 +89,12 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_0019dad8. */
+/* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_00245ed0. */
 /* Supplied declaration required: FUN_00245f48. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
@@ -183,7 +183,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
     temp_v0 = (unsigned char)(temp_v2 >> 0x18);
     temp_v37 = (temp_v6 * 3.1415927f) / temp_v5;
     if ((unsigned char)((temp_v0 >> 5) & 1) && !(unsigned char)(temp_v0 >> 6)) {
-      FUN_0019dad8(&temp_v27);
+      matrixGetTranslation(&temp_v27);
       DAT_004ea91c = param_1->field_0x10;
       DAT_004ea920 = param_1->field_0x14;
       DAT_004ea924 = param_1->field_0x18;
@@ -212,7 +212,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
         temp_v32[0] = temp_v24;
         do {
           if (temp_v28[1] != -1) {
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v26 = (float)temp_v28[3];
             temp_v2 = 0;
             temp_v8 = (temp_v7 + temp_v8 * temp_v33) * temp_v31;
@@ -232,9 +232,9 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                 temp_v8 = -temp_v10;
                 temp_v10 = temp_v8;
               }
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v14 = temp_v8 * 3.1415927f;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v22 = (temp_v8 * 0.9f + 0.100000024f) * temp_v10;
               temp_v8 = temp_v14 * temp_v21;
               FUN_002b70cc();
@@ -335,7 +335,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                   temp_v12 = (float)temp_v18;
                   temp_v41 = (float)((unsigned long long)temp_v16 >> 0x20);
                   pfVar7 = pfVar7 + 0xf;
-                  FUN_0024b830(0);
+                  shiftRandomNextFraction(0);
                   temp_v2 = 0;
                   temp_v19 = CONCAT44(temp_v14,(temp_v8 * 0.75f + 0.25f) * temp_v20);
                   randomAdvanceShiftRegister();
@@ -348,7 +348,7 @@ void FUN_0031a9f4(fn_0031a9f4_arg0 *param_1)
                     temp_v8 = 3.1415927f;
                     temp_v15 = CONCAT44(temp_v41 - 3.1415927f,temp_v10);
                     temp_v10 = -temp_v10;
-                    FUN_0024b830(0);
+                    shiftRandomNextFraction(0);
                     temp_v22 = -((float)temp_v15 * (temp_v8 * 0.9f + 0.100000024f));
                   }
                   temp_v41 = (float)((unsigned long long)temp_v15 >> 0x20);

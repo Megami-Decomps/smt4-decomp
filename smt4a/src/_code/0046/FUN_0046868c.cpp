@@ -1,8 +1,10 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: world-vector copy formation, projected-coordinate VFP scheduling and stack slots differ. */
 #include "map/NpcDummyBindings.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
+#include "util/CalleeContracts.h"
 
 namespace {
 struct ProjectedNpcMarker {
@@ -24,8 +26,6 @@ struct RenderCtxA;
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 SpriteInfo *FUN_001834a4(u32 group, s32 sprite);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 depth);
-const ProjectionMatrices *FUN_00152f54();
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
 f32 messageGetActiveValue(u32 channel);
 void efctSetSpeed(f32 opacity);
@@ -53,7 +53,7 @@ void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
                     world.x += (f32)marker.offsetX;
                     world.y += (f32)marker.offsetY;
                     f32 screen[3];
-                    FUN_002a1850(screen, 0, FUN_00152f54(), &world.x);
+                    FUN_002a1850(screen, 0, reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54()), &world.x);
                     s32 x = (s32)((screen[0] - (f32)width) + (f32)(width / 2) + (f32)parallax);
                     s32 y = (s32)(screen[1] - (f32)height);
                     FUN_001835b4(2, 8, 0x18D, x, y, 2);

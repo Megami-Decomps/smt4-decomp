@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct Runner002681b0 {
 } Runner002681b0;
 
 void jobStop(u32 job, s32 flags);
-void asdOperatorDelete(void);
 void ownerUpdateChild(Runner002681b0 *runner);
 
 extern Runner002681b0 *DAT_00588e2c; /* 0x588e2c */
@@ -49,7 +49,7 @@ u32 runnerShutdown(void)
             current->running = 1;
             jobStop(current->job, 0);
             if (DAT_00588e2c != NULL) {
-                asdOperatorDelete();
+                asdOperatorDelete(DAT_00588e2c);
                 DAT_00588e2c = NULL;
             }
         }

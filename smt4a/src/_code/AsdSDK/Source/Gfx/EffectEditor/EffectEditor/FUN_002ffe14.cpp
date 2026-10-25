@@ -6,7 +6,7 @@ extern "C" {
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void effMenuListAppend(void *entry, s32 list);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
-s32 displayIsStereoActive();
+u32 displayIsStereoActive(void);
 extern const char DAT_0053d0d8[];
 extern const EffMenuMatrix DAT_005c13f0;
 

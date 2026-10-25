@@ -13,7 +13,7 @@ typedef struct MapGlobals002df598 {
 } MapGlobals002df598;
 
 void textFormatBuffer(u8 *buffer, const char *format, u32 map, u32 map2, u32 index);
-u32 FUN_00263c1c(u8 *path);
+u32 asdCameraLoadFromFile(u8 *path);
 
 
 extern MapGlobals002df598 DAT_004474f0; /* 0x4474f0 */
@@ -24,7 +24,7 @@ void mapCameraLoad(u32 map, u32 index)
     u8 path[64];
 
     textFormatBuffer(path, "map/m%03d/cam%03d_%02d.bccam", map, map, index);
-    DAT_004474f0.state->camera = FUN_00263c1c(path);
+    DAT_004474f0.state->camera = asdCameraLoadFromFile(path);
 }
 
 } /* extern "C" */

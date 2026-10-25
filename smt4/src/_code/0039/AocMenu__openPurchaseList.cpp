@@ -3,6 +3,10 @@
 #include "addon/aocMain.h"
 #include "classes/WindowOperation.h"
 #include "script/scrScriptProcess.h"
+#include "AsdSDK/FileLoadSync.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 namespace {
 struct AocPurchaseMenu {
@@ -43,12 +47,9 @@ void FUN_0036196c(void);
 WindowOperationResult _ZN9AocSystem17getPendingRequestEv(AocSystem *system);
 void FUN_00126fb8(u32 *result);
 void aocMenuInitializePanelSprites(void *context);
-void asdTMTexTableLoadSprites(u32 group);
 void FUN_002c58c8(u32 group, s32 image);
-void *fileLoadSync(const char *path, u32 *size, u32 flags);
 void *fileSlotGetBuffer(u32 slot);
 ScriptRunState *FUN_00297060(void *file, void *buffer);
-void memClear(void *data, u32 size);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
 
 void AocMenu::openPurchaseList()

@@ -20,4 +20,8 @@ typedef struct S4Player {
 /* Objects whose layout has not been recovered yet. */
 typedef struct S4FsReader S4FsReader;
 
+extern "C" {
+u8 *configGetSettings(void);
+}
+
 #endif

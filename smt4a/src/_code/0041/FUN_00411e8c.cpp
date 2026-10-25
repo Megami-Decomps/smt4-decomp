@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP register allocation and the grouping of the multiply-accumulate chains of the rotated offsets differ from retail; the algorithm is the same. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ typedef struct OrbitCamera {
 
 extern const f32 DAT_00536d14[]; /* sine/cosine table: per entry base sine, base cosine, sine slope, cosine slope */
 
-LookAtCamera *FUN_00152f54(void);
 f32 FUN_001bbde0(f32 value);
 f32 FUN_0050dda4(f32 value);
 extern f32 __sqrtf(f32);
@@ -38,7 +38,7 @@ extern f32 __sqrtf(f32);
  * sets the zoom from the field of view. */
 void FUN_00411e8c(void *unused, OrbitCamera *out)
 {
-    LookAtCamera *look = FUN_00152f54();
+    LookAtCamera *look = reinterpret_cast<LookAtCamera *>(FUN_00152f54());
     f32 dx = look->toX - look->fromX;
     f32 dy = 0.0f;
     f32 dz = look->toZ - look->fromZ;

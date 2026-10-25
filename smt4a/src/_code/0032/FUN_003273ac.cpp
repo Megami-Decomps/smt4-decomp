@@ -1,5 +1,6 @@
 /* NON_MATCHING: cached cell/marker-metadata pointers and saved-register allocation differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
+#include "util/DataTable4CGetEntry.h"
 
 struct GridMapDefinition {
     u8 unk00[4];
@@ -23,13 +24,12 @@ typedef char GridPresetOffsets[sizeof(GridPreset) == 0x10 &&
 extern "C" {
 extern const GridPreset DAT_005813a4[];
 FlagWorkBanks *gameFlagsGetBlock();
-const GridMapDefinition *dataTable4CGetEntry(u32 id);
 void FUN_002296b0(s32 enabled);
 
 void FUN_003273ac(u32 id)
 {
     FlagWorkBanks *work = gameFlagsGetBlock();
-    const GridMapDefinition *definition = dataTable4CGetEntry(id);
+    const GridMapDefinition *definition = reinterpret_cast<const GridMapDefinition *>(dataTable4CGetEntry(id));
     const GridPreset *preset = &DAT_005813a4[definition->preset];
     const u8 *cells = preset->cells;
     work->gridSize.width = preset->width;

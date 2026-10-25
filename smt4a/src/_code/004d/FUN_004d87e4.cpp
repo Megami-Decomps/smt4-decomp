@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/btlMain.h"
 extern "C" {
 u32 FUN_0040ab8c(void *object);
 /* Tests whether the held object is ready. */

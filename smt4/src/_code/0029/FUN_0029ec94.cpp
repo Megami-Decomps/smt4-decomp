@@ -3,7 +3,6 @@
 
 extern "C" {
 extern UniteWork *g_unite;
-s32 FUN_0029e93c(const u8 *cursor);
 s32 FUN_00293f10(s32 id, s32 byDevilId);
 void FUN_002958f8(s32 id, s32 byDevilId);
 void FUN_002942c4(s32 id, s32 byDevilId);

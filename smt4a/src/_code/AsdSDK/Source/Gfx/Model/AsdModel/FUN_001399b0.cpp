@@ -1,6 +1,7 @@
 /* NON_MATCHING: the light-array base is not cached separately and the final attachment becomes a tail call. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/S1GfxModel.h"
+#include "util/FUN_001767a4.h"
 
 extern "C" {
 struct Triple;
@@ -14,7 +15,6 @@ void tripleClear(Triple* object);
 AsdAllocator* asdMemoryGetDefaultAllocator(void);
 u32* FUN_0014850c(AsdAllocator* allocator, const u32* description);
 void FUN_0013d42c(const u32* settings, u32 options);
-void FUN_001767a4(u32* light, u32 builder);
 void FUN_00176538(u32* light);
 void FUN_001445d4(void);
 void FUN_00141724(void);
@@ -50,7 +50,7 @@ void FUN_001399b0(const u32* settings, u32 options)
     state->lights[1] = FUN_0014850c(asdMemoryGetDefaultAllocator(), DAT_00636e6c);
     FUN_0013d42c(settings, options);
     for (s32 i = 0; i < 2; ++i) {
-        FUN_001767a4(state->lights[i], state->builders[i]);
+        FUN_001767a4(state->lights[i], reinterpret_cast<void *>(state->builders[i]));
         FUN_00176538(state->lights[i]);
     }
     FUN_001445d4();

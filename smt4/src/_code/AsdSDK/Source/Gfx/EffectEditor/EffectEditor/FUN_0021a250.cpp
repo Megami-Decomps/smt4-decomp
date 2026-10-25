@@ -1,11 +1,12 @@
+#include "util/EffMenuListAppend.h"
 /* NON_MATCHING: rectangle copy register allocation adds one store; matrix load scheduling differs. */
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 
 extern "C" {
 void *memAlloc(u32, u32, u32, u32, u32, u32);
-void effMenuListAppend(void *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
 extern const char DAT_0040930c[];
 extern const EffMenuMatrix DAT_004728f0;
@@ -25,10 +26,10 @@ void FUN_0021a250(const EffMenuPosition *position, u32 color,
     entry->kind = 7;
     entry->color = color;
     entry->resource = resource;
-    effMenuListAppend(entry, 1);
+    effMenuListAppend(reinterpret_cast<EffMenuNode *>(entry), 1);
     asdDebugTrace(DAT_0040930c, 698);
     EffMenuMatrixNode *second = static_cast<EffMenuMatrixNode *>(memAlloc(0x10000, 0x100, 0, 0x68, 16, 1));
     __aeabi_memcpy4(second, entry, sizeof(*entry));
-    effMenuListAppend(second, 2);
+    effMenuListAppend(reinterpret_cast<EffMenuNode *>(second), 2);
 }
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: close: all five stat arms and calls match; built hoists the isUnit|variant OR above the early checks (retail tests isUnit and variant separately, then ORs in place after the record check) */
 #include "gamedata/PlayerInitialization.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 /* A copy of a battle-unit record kept by the panel (0x604 bytes); only the two stat arrays are named. */
 struct UnitPreview {
@@ -38,7 +39,6 @@ ItemRecord *dataTable08Sub1GetRecord(u32 id);
 void *gameGetUnitRecord(s32 id);
 void *gameGetPlayerData(void);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-void FUN_0029c4c8(s32 value);
 void FUN_0029c4e4(UnitPreview *unit, s32 arg);
 void FUN_0029a0cc(PlayerInitialRecordIV *player);
 

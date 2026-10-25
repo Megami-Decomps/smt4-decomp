@@ -2,6 +2,7 @@
 #include "event/2dEvent/SnowNoise.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
@@ -9,8 +10,6 @@ extern EventFilterTexture DAT_0057f430;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 FUN_002a4488();
 u32 FUN_002a4334();
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
-                            u32 (*update)(), u32 destroy, void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
                    u32 (*draw)(), u32 destroy, void *work, u32 parent);
 void *textureGetIndexedResource(u32 texture);
@@ -27,7 +26,7 @@ void FUN_0036fad8(u8 style)
     EventSnowNoiseWork *work = static_cast<EventSnowNoiseWork *>(g_eventEffect.unk08);
     for (u32 word = 0; word < sizeof(*work) / sizeof(u32); ++word)
         reinterpret_cast<u32 *>(work)[word] = 0;
-    u32 process = asdProcessCreateSimple("EvtSnowNoise Calc", 3, 0, 0, FUN_002a4488, 0, NULL);
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtSnowNoise Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a4488), 0, NULL);
     work->job = process;
     taskCreateDraw("EvtSnowNoise DrawUpLeft", 0x85, 0, 0, FUN_002a4334, 0, NULL, process);
     taskCreateDraw("EvtSnowNoise DrawUpRight", 0xE1, 0, 0, FUN_002a4334, 0, NULL, work->job);

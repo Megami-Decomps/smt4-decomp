@@ -1,8 +1,8 @@
 #include "shard/Shard0033.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
-void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 keyframe, s32 alternate);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 alternate);
 void gameStateChange(s32 state);

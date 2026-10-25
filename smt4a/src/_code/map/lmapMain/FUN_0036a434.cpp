@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0036a434` (_code @ 0x36a434, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "title/titleMain.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int residentApplyFallbackValues(void);
 int FUN_003250ac(unsigned char [4]);
-int FUN_0036b824(unsigned char *);
 int FUN_003881f8(int, float *, float *);
 int FUN_0050d8e4(void);
 
@@ -236,7 +236,7 @@ void FUN_0036a434(int param_1)
            *(float *)(param_1 + 0x80) + (temp_v15 - *(float *)(param_1 + 0x80)) * 0.33333334f;
     }
   }
-  FUN_0036b824(&g_localCamera);
+  FUN_0036b824(reinterpret_cast<u32>(&g_localCamera));
   uiSetFloatPair(&g_localCamera);
   FUN_001523b8(&g_localCamera,1);
   FUN_0014f0dc(&g_localCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);

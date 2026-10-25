@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gfx/CameraAnimationApply.h"
+#include "title/titleMain.h"
 
 extern "C" {
 
@@ -39,7 +40,7 @@ int VectorFloatToUnsigned(double, int);
 int textFormatBuffer(...);
 int FUN_0013cab8(...);
 int FUN_001517b4(...);
-int FUN_001642e4(...);
+int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);
 int resOwnerRunNodeHandlers(...);
 int FUN_001abbc4(void);
@@ -52,7 +53,6 @@ int scrScriptProcessStartEntry(...);
 int campCommonBgAcquire(void);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
-int FUN_0036b824(...);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
 int controllerGetSourceValue(...);
@@ -133,7 +133,7 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_001523b8. */
 /* Supplied declaration required: asdOperatorNew. */
-/* Supplied declaration required: FUN_001642e4. */
+/* Supplied declaration required: asdLoadFileSyncNoContext. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: FUN_00178b04. */
@@ -379,16 +379,16 @@ unsigned int FUN_00328838(void)
     campCommonBgAcquire();
     campButtonHelpAcquire();
     puVar5 = &LAB_0032904c;
-    FUN_001642e4(&LAB_0032904c,temp_v15,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_0032904c,temp_v15,1,0x80);
     *(unsigned char **)(temp_v4 + 0x564) = puVar5;
     puVar5 = &LAB_00329068;
-    FUN_001642e4(&LAB_00329068,temp_v15,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_00329068,temp_v15,1,0x80);
     *(unsigned char **)(temp_v4 + 0x570) = puVar5;
     puVar5 = &LAB_00329084;
-    FUN_001642e4(&LAB_00329084,temp_v15,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_00329084,temp_v15,1,0x80);
     *(unsigned char **)(temp_v4 + 0x57c) = puVar5;
     puVar5 = &LAB_003290a0;
-    FUN_001642e4(&LAB_003290a0,temp_v15,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_003290a0,temp_v15,1,0x80);
     *(unsigned char **)(temp_v4 + 0x588) = puVar5;
     temp_v6 = 0;
     temp_v13 = 0;

@@ -1,5 +1,6 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
+#include "util/MathPositionHeadingDegrees.h"
 
 extern "C" {
 float FUN_0050d8e4(float x, float z);

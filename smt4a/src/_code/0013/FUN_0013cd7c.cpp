@@ -2,6 +2,7 @@
 #include "gfx/FrameTextureWork.h"
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 /* The two intermediate surfaces lie beyond the shared work prefix. */
 struct SurfaceReductionWork {
     FrameTextureWork frame;
@@ -10,9 +11,7 @@ struct SurfaceReductionWork {
 };
 typedef char SurfaceReductionOffsets[(offsetof(SurfaceReductionWork, halfSurface) == 0x1498 && offsetof(SurfaceReductionWork, quarterSurface) == 0x149C) ? 1 : -1];
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 s32 stateValuesGetBySelector(u32 selector);
-void FUN_00157558(RenderCtxA *context);
 u8 FUN_00154edc(u32 target, JobSurface *surface);
 void surfaceCopy(JobSurface *source, JobSurface *destination);
 }

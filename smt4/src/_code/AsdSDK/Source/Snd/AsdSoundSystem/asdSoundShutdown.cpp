@@ -10,7 +10,6 @@ void FUN_0010c350(void);
 void FUN_0010bf78(void);
 void sndSystemFinalize(void);
 void sndSystemShutdown(void);
-void dspComponentUnload(void);
 void FUN_0010fc90(void);
 void asdMemFree(void *block);
 

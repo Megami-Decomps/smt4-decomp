@@ -1,6 +1,7 @@
 /* NON_MATCHING: saved registers, local buffer placement, flag preloads and position conversion order differ. */
 #include "map/mapEpl.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 struct MapEplPlacementRecord {
     s8 map, area;
     s16 x, y, z;
@@ -16,7 +17,6 @@ s32 FUN_0038589c(void);
 const MapEplPlacementRecord *aocDataTable2dGetEntryKind3(u32 index);
 s32 gameFlagIsSet(s32 flag);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void *FUN_001642e4(const char *path, u32 *size, s32 heap, u32 flags);
 void *FUN_001abbc4(void *data);
 void FUN_001b4eb8(void *object, const f32 *position);
 }
@@ -27,7 +27,7 @@ static inline s32 loadMapEffect(const char *path)
         MapEplEntry *entry = &pool->entries[slot];
         if (!entry->object) {
             u32 size;
-            entry->data = FUN_001642e4(path, &size, 1, 0x80);
+            entry->data = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
             entry->object = FUN_001abbc4(entry->data);
             return slot;
         }

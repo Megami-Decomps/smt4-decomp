@@ -1,9 +1,9 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 
 extern "C" {
 /* Reads or updates the requested state. */
-void asdSequenceRequest(u32 state, const void *argument, u32 size);
 u32 FUN_002cd90c(void)
 {
     u32 argument = 0;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct KeyedRecordBuffers {
 } KeyedRecordBuffers;
 
 void asdMemFree(void *block);
-void memClear(void *destination, s32 size);
 
 extern s32 g_keyedRecordCount; /* 0x433278 */
 extern KeyedRecordBuffers g_keyedRecords[]; /* 0x478000 */

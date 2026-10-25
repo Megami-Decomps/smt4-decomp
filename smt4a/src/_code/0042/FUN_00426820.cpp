@@ -3,6 +3,7 @@
  * (header 0x10040102, a size-encoded static-buffer descriptor); returns the reply word on success. */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 #include <string.h>
 
 extern "C" {
@@ -11,12 +12,12 @@ extern u32 DAT_005b4438;
 s32 FUN_00426820(u8 mode, u64 handle, void *buffer, u32 size)
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
-    command->header = 0x10040102;
+    nn::os::SetIpcWord(command, 0, 0x10040102);
     memcpy(&command->words[0], &mode, sizeof(mode));
-    command->words[3] = size;
+    nn::os::SetIpcWord(command, 4, size);
     memcpy(&command->words[1], &handle, sizeof(handle));
-    command->words[5] = (u32)buffer;
-    command->words[4] = (size << 5) | 10;
+    nn::os::SetIpcWord(command, 6, (u32)buffer);
+    nn::os::SetIpcWord(command, 5, (size << 5) | 10);
     s32 result = nn::svc::SendSyncRequest(DAT_005b4438);
     if (nnResultIsSuccess(result)) {
         result = command->words[0];

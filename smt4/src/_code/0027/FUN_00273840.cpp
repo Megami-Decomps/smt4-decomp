@@ -1,4 +1,4 @@
-/* NON_MATCHING: background flag load uses unsigned direct access; game-mode preset branch layout differs. */
+/* NON_MATCHING: the signed background-pending load now matches (field is s8); the game-mode preset branches are laid out differently (retail outlines the below-100 arm after the default preset). */
 #include "map/mapDepart.h"
 extern "C" {
 extern GameState g_gameState;

@@ -166,4 +166,40 @@ typedef char AsdGfxPresentationOffsetCheck[
     sizeof(AsdGfxContext) == 0x128 ? 1 : -1];
 
 
+extern "C" {
+u32 gameGetOptionProgressStatus();
+}
+
+extern "C" {
+s32 fontMeasureLineAdvance(const void *text, s32 fontIndex);
+}
+
+extern "C" {
+u8 FUN_002c15fc(u32 index);
+}
+
+extern "C" {
+void FUN_00191ea8(u32 id, u32 variant, u32 a, u32 b, u32 value);
+}
+
+extern "C" {
+u32 asdModelGetSlotArray0(s32 slot);
+}
+
+extern "C" {
+u32 FUN_0014143c(u32 slot, u32 arg);
+}
+
+extern "C" {
+u32 *FUN_001af0d0(u32 *command, s32 alt);
+}
+
+extern "C" {
+void FUN_003180c4(u32 index, const char *value);
+}
+
+extern "C" {
+s32 aocLoadTextureNode(u32 a, u32 b, u32 c, u32 d);
+}
+
 #endif

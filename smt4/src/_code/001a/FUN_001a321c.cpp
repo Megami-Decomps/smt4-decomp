@@ -37,7 +37,7 @@ int FUN_002bf288(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int FUN_0033d3f8(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -152,7 +152,7 @@ extern int vec2GetXInt(int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: requestForward. */
@@ -222,7 +222,7 @@ unsigned char FUN_001a321c(void)
   if (*(char *)(DAT_0044e144 + 0x1e61) == '\0') {
     return 0;
   }
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v7 = g_titleScene;
   temp_v6 = FUN_002c5d80(1,0);
   piVar17 = (int *)(temp_v7 + 0x124c);

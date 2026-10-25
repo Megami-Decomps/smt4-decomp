@@ -1,5 +1,7 @@
 /* NON_MATCHING: first entry store registers, reverse-flag tests and cold sort branches differ; -O2 candidate. */
 #include "common.h"
+#include "status/StatusCamera.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct FlaggedDemonDefinition {
     u16 id;
@@ -22,9 +24,7 @@ struct FlaggedDemonSortOptions { u8 unk00[0x15]; FlaggedDemonSortFlags sort; };
 extern "C" {
 extern FlaggedDemonList *g_statusDown;
 const FlaggedDemonDefinition *devilGetRecord(u32);
-void memClear(void *, u32);
 void FUN_0029f848(void *, s32, s32, s32, s32, s32);
-const FlaggedDemonSortOptions *FUN_002a0d0c();
 void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 devilIdCompareRankOrderId(const void *, const void *);
 s32 FUN_00206d4c(const void *, const void *);
@@ -53,7 +53,7 @@ void statusBuildFlaggedDemonList(const u8 *flags)
     }
     FUN_0029f848(list->controller, list->count, 11, 1, 0, 1);
     FlaggedDemonList *sorting = g_statusDown;
-    const FlaggedDemonSortFlags *options = &FUN_002a0d0c()->sort;
+    const FlaggedDemonSortFlags *options = &reinterpret_cast<const FlaggedDemonSortOptions *>(FUN_002a0d0c())->sort;
     if (options->mode == 1) {
         if (options->reverse)
             FUN_002b7bca(sorting->entries, sorting->count, 4, devilIdCompareRankOrderId);

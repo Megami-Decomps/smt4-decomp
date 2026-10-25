@@ -1,11 +1,11 @@
 /* NON_MATCHING: Record-flag writeback addressing and saved-register allocation differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/FUN_00267144.h"
 
 extern "C" {
 u8 *gameGetMapBlock(void);
 s32 dataTableGetRecordFifty(void);
-MapAvailabilityRecordPrefixIV *FUN_00267144(s32 recordIndex);
 s32 FUN_0027d968(void);
 s32 gameFlagIsSet(s32 flagId);
 
@@ -17,7 +17,7 @@ void FUN_00273c54(void)
 
     if (dataTableGetRecordFifty() > 0) {
         do {
-            MapAvailabilityRecordPrefixIV *record = FUN_00267144(recordIndex);
+            MapAvailabilityRecordPrefixIV *record = reinterpret_cast<MapAvailabilityRecordPrefixIV *>(FUN_00267144(recordIndex));
             if (record->status != -1 && record->mapId != 0 &&
                 FUN_0027d968() == record->mapId) {
                 // Only this byte column and its stride are recovered.

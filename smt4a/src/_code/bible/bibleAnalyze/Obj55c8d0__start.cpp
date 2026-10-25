@@ -1,10 +1,10 @@
 /* NON_MATCHING: Process/task creation still contains decompiled callback prototypes and loses retail register lifetimes and inline debug-hook arguments. */
 #include "romwright_types.h"
 #include "classes/Obj55c8d0.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_002c8550(int);
@@ -91,7 +91,7 @@ void Obj55c8d0::start()
   DAT_0057f0a0 = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_004a5224;
-  asdProcessCreateSimple(&LAB_004a5224,4,0,0,&LAB_004a6f14,&LAB_004a6f3c,piVar1);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_004a5224), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_004a6f14), reinterpret_cast<AsdProcFunc>(&LAB_004a6f3c), reinterpret_cast<u32>(piVar1));
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_004a523c;
   taskCreateDraw(&LAB_004a523c,0x71,1,0,&LAB_004a7238,0,DAT_0057f0a0,puVar2);

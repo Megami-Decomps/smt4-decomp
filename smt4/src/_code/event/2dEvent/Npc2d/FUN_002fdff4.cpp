@@ -2,6 +2,8 @@
 #include "event/NpcTextureWork.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
+#include "util/FUN_002ae8e4.h"
+#include "util/FUN_002ae8e4.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -12,11 +14,9 @@ extern const char DAT_00403570[];
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
-void FUN_002ae8e4(AocSystem *system, s32 table, s32 node, u32 heap);
 void FUN_002c58c8(s32 table, s32 node);
 s32 FUN_001dfc64(u32 handle);
 void FUN_002db92c(u32 handle);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 
 /* Create the 2D NPC texture process using its table-selected image. */
 void FUN_002fdff4(s32 npc)
@@ -39,11 +39,11 @@ void FUN_002fdff4(s32 npc)
     } else {
         work->deferred = 0;
         if (aocRunByName(g_aocSystem, work->textureTable, work->textureNode, 1))
-            FUN_002ae8e4(g_aocSystem, work->textureTable, work->textureNode, 0x10000);
+            FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->textureTable, work->textureNode, 0x10000);
         else
             FUN_002c58c8(work->textureTable, work->textureNode);
     }
     work->speed = 0.33f;
-    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
 }
 }

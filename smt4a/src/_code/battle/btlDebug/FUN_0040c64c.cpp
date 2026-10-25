@@ -1,5 +1,6 @@
 /* NON_MATCHING: same phase logic and code layout as retail; the build schedules the 64-bit mask test, the sl/fp constants and the marker-layout loads differently (retail also folds the slot-pair offset into an ldrd with #8 and keeps the aux flag offset in a pool constant). */
 #include "common.h"
+#include "battle/BtlUiObjCQuery.h"
 
 // A battle unit record (the fields this step touches).
 struct UnitRecordView {
@@ -74,7 +75,6 @@ void FUN_003e7ef0(BattleStateView *state);
 void FUN_003ed238(BattleStateView *state, u32 flags);
 s32 FUN_003f1534(BattleStateView *state, UnitRecordView *unit, u32 first, u32 second);
 void FUN_003f24e0(BattleStateView *state, s32 unit);
-s32 FUN_004aa750(u32 block);
 s32 FUN_004c9b38(UnitRecordView *unit);
 void btlPopulateSelectedSlot(s32 mode, s32 slot, s32 unit, s32 secondUnit);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);

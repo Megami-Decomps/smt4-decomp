@@ -1,5 +1,6 @@
 /* NON_MATCHING: the two item-scan loops and the shared script-start tail are merged differently by armcc than retail, which keeps each copy; the shop step logic is the same. */
 #include "common.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
@@ -35,18 +36,17 @@ u32 FUN_0049a9a8(void);
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_001ba3d4(u32 id);
 u32 tableGroupFindEntryIndex(u32 table, const char *name);
-s32 FUN_00481100(u32 id);
 
 /* Whether any shop entry in the two id ranges is available. */
 static bool shopHasEntries(void)
 {
     for (u32 id = 0x3B7; id < 0x47F; id++) {
-        if (FUN_00481100(id) != 0) {
+        if (flagValueIsPositiveForward(id) != 0) {
             return true;
         }
     }
     for (u32 id = 0x47F; id < 0x79F; id++) {
-        if (FUN_00481100(id) != 0) {
+        if (flagValueIsPositiveForward(id) != 0) {
             return true;
         }
     }

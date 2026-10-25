@@ -25,7 +25,7 @@ inline Obj4209cc::~Obj4209cc()
         rowA[i] = NULL;
     }
     if (handle != 0) {
-        asdMdlManagerDestroy(handle);
+        asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
         handle = 0;
     }
     if (buffer != NULL) {

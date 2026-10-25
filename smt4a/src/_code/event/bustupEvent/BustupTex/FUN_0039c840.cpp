@@ -2,6 +2,8 @@
 #include "event/bustupEvent/BustupTextureWork.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
 struct BustupTextureDefinition {
@@ -21,11 +23,9 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignment, u32 flags, u32 bytes, s32 f
 void sysMemClear(void *memory, u32 bytes);
 s32 FUN_00162ea4();
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 mode);
-u32 aocLoadTextureNode(AocSystemA *system, s32 table, s32 node, u32 heap);
 u32 FUN_0014afd0(s32 table, s32 node);
 void FUN_0026c568(void *work);
 void asdMTeXReleaseJobContext(void *work);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 mode, s32 flags, void (*update)(void *), void (*destroy)(void *), void *work);
 
 // Start a bustup texture job, honoring the add-on availability gate and deferred-load mode.
 void FUN_0039c840(u32 id, s32 useDefinition)
@@ -54,7 +54,7 @@ void FUN_0039c840(u32 id, s32 useDefinition)
     } else {
         if (work->node != -1) {
             if (aocRunByName(g_aocSystem, work->table, work->node, 1))
-                work->texture = aocLoadTextureNode(g_aocSystem, work->table, work->node, 0x10000);
+                work->texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
             else
                 work->texture = FUN_0014afd0(work->table, work->node);
         }
@@ -66,6 +66,6 @@ void FUN_0039c840(u32 id, s32 useDefinition)
     work->frame = 0.0f;
     for (s32 index = 0; index < 6; ++index)
         allocation->transition[index] = 0.0f;
-    asdProcessCreateSimple(DAT_0052f76c, 4, 0, 0, FUN_0026c568, asdMTeXReleaseJobContext, allocation);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(allocation));
 }
 }

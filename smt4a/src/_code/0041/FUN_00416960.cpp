@@ -4,6 +4,7 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "util/CalleeContracts.h"
 
 struct PartnerMessageOwnerView {
     AnimatedMessageSlot slots[12];
@@ -27,7 +28,6 @@ void FUN_0014e188(UiSpriteState *sprite, u32 kind, u32 color, const UiSpriteSour
 void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
 void FUN_0019e330(UiSpriteState *sprite, s32 mode, s32 state);
-const ProjectionMatrices *FUN_00152f54(void);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 PartnerMessageOffset FUN_00416388(PartnerMessageOwnerView *owner, s32 index, UiSpriteState *sprite);
 void pairSetHalves(UiSpriteState *sprite, s32 x, s32 y);
@@ -62,7 +62,7 @@ void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector
     pairSetFirstResetSecond(&slot->sprite, 139);
     uiSpriteSetImageKeyframe(&slot->sprite, 4, 0);
     FUN_0019e330(&slot->sprite, 6, 0);
-    FUN_002a1850(&slot->position.x, 0, FUN_00152f54(), &world.x);
+    FUN_002a1850(&slot->position.x, 0, reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54()), &world.x);
     PartnerMessageOffset offset = FUN_00416388(owner, index, &slot->sprite);
     slot->position.x += offset.x;
     slot->position.y += offset.y;

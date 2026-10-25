@@ -1,13 +1,14 @@
+#include "util/FUN_003ee0c0.h"
 /* NON_MATCHING: mode/actor spill allocation, division constant hoisting and event-argument stores differ from retail. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/btlMain.h"
 
 struct BtlUnitA;
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
 BtlUnitA *btlUnitGet(u32 index);
-void FUN_003ee0c0(BattleMaskState *state);
 u32 FUN_004fc094(s32 mode, BtlUnitA *actor, s32 option, BattleRosterRecordA *target,
                  s32 value5, s32 damage, s32 value7, u32 value8,
                  u32 hp, u32 maxHp, s32 value11, u32 value12,

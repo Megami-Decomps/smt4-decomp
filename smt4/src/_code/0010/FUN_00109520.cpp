@@ -19,10 +19,10 @@ extern TitleScene *g_titleScene;
 
 int FUN_001132fc(int arg);
 int FUN_002bff10(int arg);
-int FUN_002c39a4(TitleScene *arg);
+int renderCtxSelectStereoLayout(TitleScene *arg);
 Context *jobGetWork(void);
 
-/* Script command: if the panel is shown and enabled and FUN_002bff10 reports nothing pending, runs FUN_002c39a4/FUN_001132fc. Always returns 0. */
+/* Script command: if the panel is shown and enabled and FUN_002bff10 reports nothing pending, runs renderCtxSelectStereoLayout/FUN_001132fc. Always returns 0. */
 u8 FUN_00109520(void)
 {
     Panel *panel = &jobGetWork()->panel;
@@ -36,7 +36,7 @@ u8 FUN_00109520(void)
     if (FUN_002bff10(0) != 0) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_001132fc(0);
     return 0;
 }

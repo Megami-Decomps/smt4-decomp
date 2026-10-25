@@ -2,12 +2,12 @@
 #include "shard/W6_W6Match8_CampInventory.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern CampInventoryLists *g_camp;
 PartyDamageSlotsIV *gameGetSlotTable();
 StatBlock *gameGetUnitRecord(s32);
-void memClear(void *, u32);
 void FUN_00283f30(UnitSummarySkills *, s32);
 void FUN_0029f848(CampInventoryController *, u32, s32, s32, s32, s32);
 void FUN_00282f80(s32);

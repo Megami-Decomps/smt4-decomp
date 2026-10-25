@@ -1,13 +1,13 @@
 /* NON_MATCHING: candidate-loop base registers differ and repeated stat groups become block copies rather than retained scalar halfwords. */
 #include "shard/GameOptions.h"
 #include "gamedata/SupportUnitRecord.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 GameOptions *gameGetSupportUnitData(void);
 void *gameGetPlayerData(void);
 s32 randNextInRange(u16);
 u32 tableEntryIndexByKey(s32, u8);
-void memClear(void *, u32);
 SupportUnitRecord *supportUnitGetEntry(s32, u32);
 
 void FUN_003c86bc(void)

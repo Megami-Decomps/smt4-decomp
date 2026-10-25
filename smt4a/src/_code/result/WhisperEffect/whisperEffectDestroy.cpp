@@ -4,19 +4,19 @@
 #include "result/WhisperEffect.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-int jobGetWork(void);
 int asdTMTexTableReleaseNode(int type, int index);
 
 extern WhisperEffect *g_whisperEffect;
 
-void whisperEffectDestroy(void)
+void whisperEffectDestroy(u32 job)
 {
     int i;
 
-    jobGetWork();
+    jobGetWork(job);
     for (i = 0; i < 5; i++) {
         asdTMTexTableReleaseNode(0x2c, i);
     }

@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct EffPartNode;
 
@@ -48,7 +49,6 @@ extern "C" {
 extern const char g_effPartsSourcePath[];
 extern EffBlockHandler g_handlerTable[];
 void *memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 category, u32 track);
-void memClear(void *block, s32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_002a3d58(void *part);
 void FUN_002a3ab0(EffPartList *part, const EffOrientation *orientation);

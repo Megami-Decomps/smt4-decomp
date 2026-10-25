@@ -29,4 +29,13 @@ typedef struct BtlEventOwnerA {
     /* 0x74 */ u32 job;         /* job stopped when the block is destroyed */
 } BtlEventOwnerA;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 scrRunOpcodesStub(void *state);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

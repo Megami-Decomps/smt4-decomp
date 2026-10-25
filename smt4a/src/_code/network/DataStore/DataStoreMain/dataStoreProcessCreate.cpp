@@ -2,6 +2,7 @@
 #include "network/DataStore/DataStoreMain.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 typedef void (*DataStoreCallback)(void *);
 extern "C" {
@@ -13,7 +14,6 @@ void FUN_00227ee8(void *);
 void FUN_002e50d0(void *);
 void FUN_002a38f4(void *);
 void FUN_002a38c0(void *);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, DataStoreCallback, DataStoreCallback, void *);
 void taskCreateDraw(const char *, s32, s32, s32, DataStoreCallback, void *, void *, u32);
 
 // Lazily create the datastore controller, client work, and send/receive tasks.
@@ -42,7 +42,7 @@ u32 dataStoreProcessCreate(void)
             work->unk50 = 0;
         }
         g_dataStore->work = work;
-        g_dataStore->task = asdProcessCreateSimple("DataStoreCalc", 2, 0, 0, FUN_00227ee8, FUN_002e50d0, g_dataStore);
+        g_dataStore->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("DataStoreCalc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00227ee8), reinterpret_cast<AsdProcFunc>(FUN_002e50d0), reinterpret_cast<u32>(g_dataStore));
         taskCreateDraw("DataStoreSendCalc", 3, 0, 0, FUN_002a38f4, NULL, g_dataStore, g_dataStore->task);
         taskCreateDraw("DataStoreRecvCalc", 5, 0, 0, FUN_002a38c0, NULL, g_dataStore, g_dataStore->task);
     }

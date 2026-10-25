@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b990c` (_code @ 0x4b990c, 0x6c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int asdOperatorNew(void);
 int eventQueueAddUnique(...);
 int dialogOpen(...);
 int placeWinStartText(...);
-int infoWinSetText(...);
 int FUN_002e5924(...);
 int frameTexInitActive(void);
 int moveCameraCtrlCreateEntry(...);
@@ -357,8 +357,7 @@ void FUN_004b990c(int param_1)
     }
     if (*(char *)(param_1 + 0x1168) == '\0') {
       dialogOpen(0);
-      infoWinSetText(*(unsigned int *)(param_1 + 0x113c),
-                   *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
+      infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       placeWinStartText(*(int *)(param_1 + 0x1118) + 2);
       placeWinSetValue(1);
       infoWinSetValue(1);

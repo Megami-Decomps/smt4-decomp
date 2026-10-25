@@ -1,6 +1,8 @@
 /* NON_MATCHING: initialization saves the new pointer earlier than retail's constructor sequence, and the sprite handle reload gets a separate base register. */
 #include "shard/W5_W5Match7_ResourceHandles.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct HighwayInfo {
     /* 0x000 */ u32 process;
@@ -32,9 +34,7 @@ extern const char DAT_0052d418[], DAT_0052d3f0[];
 void *asdOperatorNew(u32 size);
 void FUN_0035d080(void *);
 void engineResourceSetSecondaryValue(void *);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, HighwayCallback, HighwayCallback, void *);
 void taskCreateDraw(const char *, s32, s32, s32, HighwayCallback, void *, void *, u32);
-void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
 void asdTMTexLoadMainHeap(s32 table, s32 index);
 u32 spriteHandleCreate(u32 flags);
@@ -63,12 +63,12 @@ void newHighwayInfoCreate(u32 owner)
 {
     HighwayInfo *info = new HighwayInfo;
     g_engineResourceHandles.secondary = info;
-    info->process = asdProcessCreateSimple(DAT_0052d468, 4, 0, 0, FUN_0035d080, NULL, NULL);
+    info->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052d468), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0035d080), NULL, NULL);
     taskCreateDraw(DAT_0052d454, 0x81, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, info->process);
     taskCreateDraw(DAT_0052d440, 0xdd, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, info->process);
     info->owner = owner;
-    asdLoadFileAsyncSimple(DAT_0052d418, &info->table, 0);
-    asdLoadFileAsyncSimple(DAT_0052d3f0, &info->messages, 0);
+    asdLoadFileAsyncSimple(DAT_0052d418, reinterpret_cast<u32 *>(&info->table), 0);
+    asdLoadFileAsyncSimple(DAT_0052d3f0, reinterpret_cast<u32 *>(&info->messages), 0);
     asdTMTexTableLoadTmx(0x31, 0);
     for (s32 i = 0; i < 2; ++i)
         asdTMTexLoadMainHeap(0x31, i);

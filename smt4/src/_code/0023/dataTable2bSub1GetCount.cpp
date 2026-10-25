@@ -2,13 +2,13 @@
 
 extern "C" {
 
-int dataTableGetCount(void);
-int dataTableGet(int id, int index);
+u32 dataTableGetCount(void *table);
+void *dataTableGet(int id, int index);
 
-void dataTable2bSub1GetCount(void)
+/* Number of entries in data table 0x2B/1; callers pass a view that is not read. */
+s32 dataTable2bSub1GetCount(void *unused)
 {
-    dataTableGet(0x2b, 1);
-    dataTableGetCount();
+    return dataTableGetCount(dataTableGet(0x2b, 1));
 }
 
 } /* extern "C" */

@@ -1,13 +1,14 @@
 #include "common.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
-__declspec(noreturn) __weak void FUN_002ad1e0_hook(void);
+s32 nn_os_LightEvent_TryWait(void *event);
 
-/* Calls the engine's (removed) noreturn hook; armlink turned the tail branch into a nop. */
-void FUN_002ad1e0(void)
+/* Tests an event without waiting; the tail call to the next function is linked as a nop. */
+s32 FUN_002ad1e0(void *event)
 {
-    FUN_002ad1e0_hook();
+    return nn_os_LightEvent_TryWait(event);
 }
 
 } /* extern "C" */

@@ -20,4 +20,5 @@ extern "C" void paramsInit(UiResourceParameters *parameters,
     const void *third, u16 thirdBytes, const void *fourth, u16 fourthBytes,
     const void *fifth, u16 fifthBytes);
 
+
 #endif

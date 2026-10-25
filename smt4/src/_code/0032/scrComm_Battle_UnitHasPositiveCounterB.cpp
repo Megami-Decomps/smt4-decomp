@@ -1,8 +1,8 @@
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 
 extern u32 g_btlScriptUnit;
 u32 scrComm_Battle_UnitHasPositiveCounterB(void)

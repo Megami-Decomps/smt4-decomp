@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the cache base in r4 from the prologue and builds the entry through the allocation result (r0) in a placement-new style constructor, then copies it to r6; the build allocates r4/r8/r9 differently and lays out the NPC/devil branches in a different order. */
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 struct AocSystem;
 
 // A cached texture/model resource (0x48 bytes, vtable _ZTV9Obj4206f8): which file it comes from, the file buffer being
@@ -38,7 +39,6 @@ void *asdOperatorNew(u32 size, u32 heap);
 s32 asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 void FUN_0033e7c4(ResourceContent *content, s32 id);
 void FUN_0033f2b8(ResourceContent *content);
-s32 FUN_0023e330(u32 system, s32 id, u32 flag);
 s32 FUN_0023e3a4(u32 system, s32 id, u32 flag);
 void aocQueueType0c(AocSystem *system, s32 id, void **output, const char *name);
 void aocDisplayQueueFormattedEntry(u32 system, s32 id, void **output, const char *name);

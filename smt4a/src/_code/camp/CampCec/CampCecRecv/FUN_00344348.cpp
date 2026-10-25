@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (253 vs 249 rows); retail keeps the handler table pointers in literal-pool loads and the file-line assertion strings inline, ordering of the stack argument struct differs */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "sys/ResultReport.h"
 
 typedef void (*CecHandler)(void);
 
@@ -53,7 +55,6 @@ extern CampCecRecv* g_campCecRecv;
 
 CampCecRecv* asdMemoryAllocTracked(u32 size, u32 alignment, u32 heap, u32 trackedSize, u32 flag);
 void sysMemClear(void* data, u32 size);
-u32 asdProcessCreateSimple(const char* name, s32 priority, s32 a, s32 b, void (*run)(void), s32 c, s32 d);
 void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, void (*draw)(void), s32 c, s32 d, u32 parent);
 void FUN_0035a840(void);
 void FUN_003a5200(void);
@@ -87,7 +88,6 @@ void* memAlloc(u32 size, u32 alignment, u32 heap, u32 trackedSize, u32 usable, u
 void* asdOperatorNew(u32 size, u8* allocator);
 void resultReportIfFailed(void* list, void* buffer, u32 size);
 u32 FUN_002fb0d4(u32* result, void* handlers, void (*callback)(void), CampCecRecv** context, u32 end, u32 a, s32 b, s32 c);
-void FUN_002e3140(void);
 
 // Creates the CEC receive screen: allocates its state, starts the calc/draw tasks, works out
 // whether the feature is available (restriction code in `restriction`) and either loads the
@@ -99,7 +99,7 @@ void FUN_00344348(u8 fromMenu)
     }
     CampCecRecv* recv = g_campCecRecv;
     sysMemClear(recv, 0x808);
-    recv->process = asdProcessCreateSimple("CampCecRecv Calc", 3, 0, 0, stateMachineRun, 0, 0);
+    recv->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCecRecv Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(stateMachineRun), 0, 0);
     taskCreateDraw("CampCecRecv Draw", 0x86, 0, 0, FUN_0025d578, 0, 0, recv->process);
     taskCreateDraw("CampCecRecv DrawR", 0xe2, 0, 0, FUN_0025d578, 0, 0, recv->process);
     recv->fromMenu = fromMenu;
@@ -171,7 +171,7 @@ void FUN_00344348(u8 fromMenu)
     } handlers = { 4, FUN_00514a64, FUN_00514b84, FUN_00514b14 };
     u32 result = FUN_002fb0d4(&recv->result, &handlers, FUN_002a28c0, &recv, recv->list->size + recv->list->begin, 0x11, -2, 0);
     if ((result & 0x7e00000) != 0x600000 && (s32)result < 0) {
-        FUN_002e3140();
+        FUN_002e3140(result);
     }
 }
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct DevilRecord {
     /* 0x5 */ s8 kind;
 } DevilRecord;
 
-s32 scrSetResult(s32 value);
 BattleState *btlGetMainState(void);
 DevilRecord *devilGetRecord(u32 id);
 

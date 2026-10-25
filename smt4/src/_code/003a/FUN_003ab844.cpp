@@ -1,4 +1,7 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "status/StatusCamera.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 
@@ -17,13 +20,11 @@ s32 campButtonHelpIsActive(void);
 int buttonHelpAcquireResources(void);
 int buttonHelpCreate(void);
 s32 *asdTMTexTableGetEntry(u32 id);
-int asdTMTexTableLoadSprites(u32 id);
 int FUN_002c58c8(u32 id, s32 index);
 int FUN_0028c040(void);
 int gameGlobalsSetSelected(s32 arg);
 int FUN_0029e874(s32 arg);
 int FUN_0029e788(void);
-int FUN_002a0cc8(s32 arg);
 int asdLoadFileAsyncSimple(const char *path, void **slot, s32 arg);
 
 /* Prepares the bible screen: button help, the two sprite tables and the bible.bf / bible.mbm files. */

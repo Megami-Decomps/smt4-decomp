@@ -1,6 +1,7 @@
 /* NON_MATCHING: wrapped-selection helper changes search branch layout and quotient/remainder scheduling. */
 #include "shard/Shard0037.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 static inline s32 findNextEnabledUnit(const Obj25C *menu, s32 start)
 {
@@ -17,7 +18,6 @@ static inline s32 findNextEnabledUnit(const Obj25C *menu, s32 start)
 
 extern "C" {
 void flagValueSub(u32 flag, s32 amount);
-s32 flagValueIsPositive(u32 flag);
 UnitCategoryRecord *FUN_003e4d68(u32 id);
 s32 itemApplyPercentageHpHeal(UnitCategoryRecord *unit, u32 flag, s32 apply);
 void scrollOwnerSelectIndex(void *cursor, s32 column);

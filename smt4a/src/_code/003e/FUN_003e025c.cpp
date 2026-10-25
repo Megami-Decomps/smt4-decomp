@@ -31,7 +31,6 @@ extern "C" {
 extern BtlAuxA *g_btlAux;
 extern BtlCameraA *g_btlCamera;
 extern const char DAT_00528568[];
-BattleRosterRecordA *btlFindMarkedReserveRecord(BtlMainStateA *battle);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 parameterIndex);
 BattleCameraDefinition *FUN_003eca48(BtlMainStateA *battle, u16 id);
 void textFormatBuffer(char *output, const char *format, ...);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack allocation precedes the initialized-byte load; all other instructions match. */
 #include "ui/DummyAttachmentWork.h"
+#include "script/scrScriptProcess.h"
 
 /* The renderer fields lie beyond the shared AsdMdlNode prefix. */
 struct AttachmentRenderer {
@@ -13,7 +14,6 @@ struct AttachmentNodeView {
 
 extern "C" {
 void nodeSetTranslation(AsdMdlNode *, s32, const f32 *);
-void FUN_00298d50(u32);
 void FUN_002adde8(AsdMdlNode *, const char *, f32 *);
 void textFormatBuffer(char *, const char *, ...);
 void FUN_002c159c(void *camera, f32 first, f32 second);

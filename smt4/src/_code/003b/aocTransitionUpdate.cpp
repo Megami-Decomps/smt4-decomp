@@ -2,6 +2,7 @@
 #include "addon/aocMain.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
+#include "battle/btlHelp.h"
 
 struct JumpDestination { s32 map; u32 area, place; };
 struct NavigationPosition {
@@ -12,7 +13,6 @@ extern "C" {
 extern AocMain *g_aocMain;
 extern GameState g_gameState;
 extern JumpDestination DAT_0049fd14;
-void FUN_0022af9c(u32);
 void FUN_0028d664(AocObjC *, u32);
 s32 FUN_0027398c(AocObjC *);
 void helpResourcesRelease(AocObjC *);

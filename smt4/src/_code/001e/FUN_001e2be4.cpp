@@ -10,7 +10,6 @@ u32 FUN_002bfdd4(void);
 s32 gameFlagIsSet(u32 flag);
 s32 gameCountUnits(void);
 u32 gameCountersGetWord(s32 index);
-u32 clockGetSecondsSinceStart(void);
 s32 FUN_00334038(void);
 s32 FUN_0028d310(void);
 u32 FUN_002bfdc4(void);

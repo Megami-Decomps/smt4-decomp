@@ -1,5 +1,6 @@
 /* NON_MATCHING: zero lifetime/save set, upgrade-bank address splitting and first clamp scratch registers differ. */
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "util/DataTable08Sub2GetRecord.h"
 #include "gamedata/EquipmentUpgradeState.h"
 #include "shard/ItemStackLimit.h"
 
@@ -9,12 +10,11 @@ static inline s32 capUpgradeBonus(s32 value, s32 maximum)
 }
 
 extern "C" {
-const ItemCategoryEntry *FUN_0019c06c(u32 id);
 EquipmentUpgradeState *FUN_00239200();
 
 void equipmentGetCappedUpgradeBonuses(u32 id, s16 *values)
 {
-    const ItemCategoryEntry *range = FUN_0019c06c(id);
+    const ItemCategoryEntry *range = itemCategoryFindByItemId(id);
     u8 kind = range != NULL ? range->type : 0;
     EquipmentUpgradeState *storage = FUN_00239200();
     values[0] = 0;

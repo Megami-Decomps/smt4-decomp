@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "map/mapHakai.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

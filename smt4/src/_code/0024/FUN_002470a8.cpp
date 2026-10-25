@@ -1,5 +1,6 @@
 /* NON_MATCHING: block/table saved registers and default-table block placement differ; final variant selection is shared later. */
 #include "gamedata/NamedVariantTable.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 extern NamedVariantTableKey DAT_00439d20[455];
@@ -9,7 +10,6 @@ u32 binFileGetValue(const void *file);
 void *FUN_0024ba44(void *file, u32 block);
 u32 tbcrBlockGetPayload(const void *block);
 void *dataTableFileGetTable(void *block, u32 table);
-NamedVariantTableEntry *dataTableGetEntries(void *table);
 }
 
 static __inline const NamedVariantTableKey *findVariantKey(const char *name)
@@ -39,13 +39,13 @@ extern "C" NamedVariantTableEntry *FUN_002470a8(s32 alternate, const char *name,
         if (tbcrBlockGetPayload(block) <= tableIndex) {
             tableIndex = 0;
         }
-        entries = dataTableGetEntries(dataTableFileGetTable(block, tableIndex));
+        entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, tableIndex)));
     } else {
         void *file = fileSlotGetBuffer(7);
         binFileGetValue(file);
         void *block = FUN_0024ba44(file, 0);
         tbcrBlockGetPayload(block);
-        entries = dataTableGetEntries(dataTableFileGetTable(block, 0));
+        entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, 0)));
     }
     u32 variant = alternate != 0;
     if (invert != 0) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: event-script state machine; draft shape, fall-through between cases 0/3/6 and the shared tail is written as in the compiler's switch, register allocation not compared */
 #include "common.h"
+#include "sys/ResultReport.h"
 
 /* The event being played: its resources, state and script process. */
 struct EventRequest {
@@ -52,7 +53,6 @@ ScriptProcessState *FUN_00297060(void);
 void scrScriptProcessDestroy(void *process);
 void FUN_002c40f8(u32 *result, s32 *request, s32 a, s32 b, s32 c, s32 d);
 void asdMemFree(void *block);
-void FUN_002c526c(void);
 void gameDataFlagsClear(s32 flag);
 void gameDataFlagsClearAndRefresh(s32 flag);
 void gameDataRemoveHomeButtonHold(s32 flag);
@@ -97,7 +97,7 @@ u32 FUN_001a1d08(void)
             s32 id = request->fadeId;
             FUN_002c40f8(&result, &id, 1, 0, 0, 0);
             if ((s32)result < 0)
-                FUN_002c526c();
+                FUN_002c526c(result);
             if ((result & 0x3FF) == 0x3FE) {
                 request->frames++;
                 return 0;

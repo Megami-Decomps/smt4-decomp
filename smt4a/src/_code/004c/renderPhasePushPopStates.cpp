@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 struct RenderPhase {
     u8 unk00[0xc];
@@ -8,7 +9,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32, f32);
 s32 FUN_001692ac(u32, u32);
-s32 packNibblesAndByte(u32, u32, u32);
 
 u32 renderPhasePushPopStates(RenderPhase *owner)
 {

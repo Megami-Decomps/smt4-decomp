@@ -1,16 +1,16 @@
 /* NON_MATCHING: global load precedes push; count/value/loop scratch registers differ. */
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-u8 *FUN_002a0d0c(void);
 void FUN_0029eb5c(void *);
 s32 FUN_0028d594(void);
 s32 buttonHelpGetSecondaryState(void);
 const char *buttonHelpGetLayoutEntry(u32);
 void textFormatBuffer(char *, const char *, ...);
-void FUN_00295214(s32);
+void FUN_00295214(u8 value);
 void buttonHelpSetPreset(s32);
 extern Obj7ECRef g_useCounter;
 

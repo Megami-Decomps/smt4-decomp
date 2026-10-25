@@ -1,11 +1,13 @@
 /* NON_MATCHING: close transition and label arrival match; textRight scroll uses swapped width/position registers. */
 #include "shard/W4_Match3_InfoWindow.h"
+#include "shard/TextureDrawCall.h"
+#include "util/Vec2Fixed.h"
+#include "util/Vec2Fixed.h"
 
 extern "C" {
 
 s32 FUN_00163aa4(void *sprite, f32 step);
 void FUN_00167458(void *sprite, s32 arg);
-s32 vec2GetXInt(const void *position);
 void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
 

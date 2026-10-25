@@ -1,6 +1,8 @@
 /* NON_MATCHING: initial scissor-stack addressing/flush registers and blend-address scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "util/Vec2Fixed.h"
+#include "util/Vec2Fixed.h"
 #include "util/PackNibbles.h"
 
 namespace {
@@ -16,7 +18,6 @@ extern "C" {
 extern RenderCtxScissorA *g_renderCtx;
 SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
-s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 void renderPopStateStacks();
 

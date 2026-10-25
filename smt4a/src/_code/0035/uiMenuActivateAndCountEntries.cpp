@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail uses `mov r3, #1` where armcc emits `mov r1, #1`. */
 #include "common.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ struct MenuState {
     /* 0x38b4 */ u8 unk38b4[8];
     /* 0x38bc */ MenuItem items[1];
 };
-s32 FUN_002a21c8(MenuState *menu);
 s32 FUN_002a4878(MenuItem *item);
 void FUN_003756c8(s32 enabled);
 void FUN_0020ad6c(MenuState *menu, s32 kind, s32 enabled);
@@ -29,7 +29,7 @@ void uiMenuActivateAndCountEntries(MenuState *menu)
             menu->count++;
         }
     }
-    if (FUN_002a21c8(menu) == 0) {
+    if (FUN_002a21c8() == 0) {
         FUN_003756c8(FUN_002a4878(&menu->items[menu->selectedIndex]) == 0);
     }
     FUN_0020ad6c(menu, 14, 1);

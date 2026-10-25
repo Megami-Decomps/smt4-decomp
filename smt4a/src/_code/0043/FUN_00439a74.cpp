@@ -1,6 +1,7 @@
 /* NON_MATCHING: the mrc and svc 0x32 now match through nn/svc.h; retail spills r0-r3 with one push {r0-r3, r4-fp, ip, lr} and reads every argument back from the stack (no VFP register copies), which armcc does not do for this by-value argument block. */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 /* The arguments of the request, passed by value (twenty words). */
 struct Request9 {
@@ -38,34 +39,34 @@ s32 FUN_00439a74(Request9 request)
 {
     nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
 
-    cmd->header = 0x000902D0;
-    cmd->words[0] = request.arg0;
-    cmd->words[1] = request.arg1;
-    cmd->words[2] = request.countB;
-    cmd->words[3] = request.countA;
-    cmd->words[4] = request.readCountA;
-    cmd->words[5] = request.readCountB;
-    cmd->words[6] = request.countC;
-    cmd->words[7] = request.readCountC;
-    cmd->words[8] = request.writeSizeA;
-    cmd->words[9] = request.arg2;
-    cmd->words[10] = request.writeSizeB;
-    cmd->words[11] = (request.countB << 20) | 0x402;
-    cmd->words[12] = (u32)request.staticB;
-    cmd->words[13] = (request.countA << 20) | 2;
-    cmd->words[14] = (u32)request.staticA;
-    cmd->words[15] = (request.countC << 17) | 0x802;
-    cmd->words[16] = (u32)request.staticC;
-    cmd->words[17] = (request.readCountA * 0x1400) | 10;
-    cmd->words[18] = (u32)request.readA;
-    cmd->words[19] = (request.readCountB * 0x1400) | 10;
-    cmd->words[20] = (u32)request.readB;
-    cmd->words[21] = (request.readCountC * 0xc00) | 10;
-    cmd->words[22] = (u32)request.readC;
-    cmd->words[23] = (request.writeSizeA << 4) | 0xc;
-    cmd->words[24] = (u32)request.writeA;
-    cmd->words[25] = (request.writeSizeB << 4) | 0xc;
-    cmd->words[26] = (u32)request.writeB;
+    nn::os::SetIpcWord(cmd, 0, 0x000902D0);
+    nn::os::SetIpcWord(cmd, 1, request.arg0);
+    nn::os::SetIpcWord(cmd, 2, request.arg1);
+    nn::os::SetIpcWord(cmd, 3, request.countB);
+    nn::os::SetIpcWord(cmd, 4, request.countA);
+    nn::os::SetIpcWord(cmd, 5, request.readCountA);
+    nn::os::SetIpcWord(cmd, 6, request.readCountB);
+    nn::os::SetIpcWord(cmd, 7, request.countC);
+    nn::os::SetIpcWord(cmd, 8, request.readCountC);
+    nn::os::SetIpcWord(cmd, 9, request.writeSizeA);
+    nn::os::SetIpcWord(cmd, 10, request.arg2);
+    nn::os::SetIpcWord(cmd, 11, request.writeSizeB);
+    nn::os::SetIpcWord(cmd, 12, (request.countB << 20) | 0x402);
+    nn::os::SetIpcWord(cmd, 13, (u32)request.staticB);
+    nn::os::SetIpcWord(cmd, 14, (request.countA << 20) | 2);
+    nn::os::SetIpcWord(cmd, 15, (u32)request.staticA);
+    nn::os::SetIpcWord(cmd, 16, (request.countC << 17) | 0x802);
+    nn::os::SetIpcWord(cmd, 17, (u32)request.staticC);
+    nn::os::SetIpcWord(cmd, 18, (request.readCountA * 0x1400) | 10);
+    nn::os::SetIpcWord(cmd, 19, (u32)request.readA);
+    nn::os::SetIpcWord(cmd, 20, (request.readCountB * 0x1400) | 10);
+    nn::os::SetIpcWord(cmd, 21, (u32)request.readB);
+    nn::os::SetIpcWord(cmd, 22, (request.readCountC * 0xc00) | 10);
+    nn::os::SetIpcWord(cmd, 23, (u32)request.readC);
+    nn::os::SetIpcWord(cmd, 24, (request.writeSizeA << 4) | 0xc);
+    nn::os::SetIpcWord(cmd, 25, (u32)request.writeA);
+    nn::os::SetIpcWord(cmd, 26, (request.writeSizeB << 4) | 0xc);
+    nn::os::SetIpcWord(cmd, 27, (u32)request.writeB);
     s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
     if (nnResultIsSuccess(result)) {
         *request.out = cmd->words[1];

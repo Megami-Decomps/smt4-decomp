@@ -1,5 +1,6 @@
 /* NON_MATCHING: packed counter-base formation adds an extra 0x72; retail retains the aligned save-section base. */
 #include "common.h"
+#include "util/GameDataBlocksGetSaveData.h"
 __packed struct SaveCounters {
     u32 first;
     u32 second;
@@ -12,11 +13,10 @@ __packed struct SaveState {
     /* 0x1f872 */ SaveCounters counters;
 };
 extern "C" {
-SaveState *gameDataBlocksGetSaveData();
 /* Clears the packed save counters. */
 void FUN_0033f7f4()
 {
-    SaveCounters *counters = &gameDataBlocksGetSaveData()->counters;
+    SaveCounters *counters = &reinterpret_cast<SaveState *>(gameDataBlocksGetSaveData())->counters;
     counters->first = 0;
     counters->second = 0;
     counters->third = 0;

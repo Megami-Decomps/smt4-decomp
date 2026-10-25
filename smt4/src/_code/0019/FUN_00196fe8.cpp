@@ -1,5 +1,6 @@
 /* NON_MATCHING: prologue scheduling, floating constants and centered-label arithmetic/conversion registers differ; 91 instructions each. */
 #include "shard/S1ListPanel.h"
+#include "text/TextDraw.h"
 
 namespace {
 struct ConfigurationChoices {
@@ -13,7 +14,6 @@ const SpriteInfo *FUN_002bf4f8(u32 archive, s32 index);
 void FUN_002bf380(s32 layer, u32 archive, u32 image, s32 x, s32 y, s32 priority);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
-void FUN_002be5a4(s32 font, u32 color, const char *text, f32 x, f32 y, f32, f32, f32);
 
 // Draw configuration choices with the selected background and horizontally centered labels.
 void FUN_00196fe8(s32 count, s32 x, s32 y, s32 selected, const ConfigurationChoices *choices)

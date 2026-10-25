@@ -16,8 +16,6 @@ extern "C" {
 extern FreeCameraWork* g_freeCamera;
 s32 freeCameraProcessUpdate(u32 handle);
 void* asdOperatorNew(u32 size);
-u32 asdProcessCreateSimple(const s8* name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
-                           AsdProcFunc onEnd, u32 work);
 
 void FUN_00348c50(u32 mode)
 {

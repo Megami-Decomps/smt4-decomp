@@ -1,5 +1,6 @@
 /* NON_MATCHING: upper-level bound compares record level against maximum in the opposite operand order. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
 /* A demon record: only the fields the filter reads. */
@@ -40,7 +41,6 @@ void sysMemClear(void *data, u32 size);
 const char *FUN_00180118(u32 id);
 const char *FUN_0014bf3c(u32 id, s32 kind);
 char *libc_strcpy(char *destination, const char *source);
-void FUN_003180c4(u32 slot, const char *text);
 u32 dataTableValueOrZero(u32 slot);
 void messageMainSetMode(s32 arg);
 s32 messageForwardDefaultMode(u32 buffer, s32 message, s32 frame, s32 mode, s32 arg);

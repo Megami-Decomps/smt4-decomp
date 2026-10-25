@@ -1,6 +1,8 @@
 /* NON_MATCHING: compiler merges the two selected-item drawing cases unlike retail. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/JobWork.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 struct BattleDebugMenu {
     s32 state;
@@ -19,7 +21,6 @@ struct BattleDebugDrawWork {
     u32 font;
 };
 extern "C" {
-BattleDebugDrawWork *jobGetWork(void);
 void textDrawDefaultString(f32, f32);
 u32 asdListBoxGetSelectedItemId(u32);
 u32 FUN_003e83b4(BattleDebugDrawWork *, s32, s32);
@@ -28,9 +29,9 @@ void uiDrawFlagLabels(BattleDebugMenu *, u32);
 extern BattleDebugMenuGlobals DAT_005715f8;
 }
 
-extern "C" u32 FUN_002ba870(void)
+extern "C" u32 FUN_002ba870(u32 job)
 {
-    BattleDebugDrawWork *work = jobGetWork();
+    BattleDebugDrawWork *work = reinterpret_cast<BattleDebugDrawWork *>(jobGetWork(job));
     BattleDebugMenu *menu = DAT_005715f8.menu;
     if (menu != NULL) {
         switch (menu->state) {

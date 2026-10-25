@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 struct HunterDatabaseDrawView {
     u32 unk00;
@@ -10,7 +11,6 @@ void efctSetSpeed(f32);
 void renderCtxResetColorScale(RenderCtxA *);
 void FUN_004058b0(HunterDatabaseDrawView *);
 extern RenderCtxA *g_renderCtx;
-u32 packNibblesAndByte(u32, u32, u32);
 u32 FUN_001692ac(u32, u32);
 
 // Draw the database with a temporary draw state, then restore blending and color.

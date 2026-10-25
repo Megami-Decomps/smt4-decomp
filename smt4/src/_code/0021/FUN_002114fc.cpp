@@ -1,8 +1,8 @@
 /* NON_MATCHING: state stores are reordered and the dialog-open path duplicates the shared return epilogue. */
 #include "camp/CecMenu.h"
+#include "camp/CampCec/CampCecSetting.h"
 
 extern "C" {
-s32 campCecSettingExists(void);
 s32 campCecSettingIsDone(void);
 void campCecSettingOpen(void);
 void campCecSettingDestroy(void);

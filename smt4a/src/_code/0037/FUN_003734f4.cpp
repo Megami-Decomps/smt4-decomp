@@ -1,5 +1,4 @@
-/* NON_MATCHING: the entries-pointer chain in the scan loop allocates r0/r1 the other way round; range, masks and percentage match. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -8,7 +7,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 u32 btlResolveEntryChoice(s32 choice);
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
 static __inline s32 entryMpPercentage(const BtlCombatantEntryA *entry)
@@ -27,7 +25,8 @@ u32 FUN_003734f4()
     s32 first, count;
     FUN_00301a08(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[index];
         if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
             (g_btlCandidateMasks.required & entry->flags) &&
             !(entry->flags & g_btlCandidateMasks.excluded) && entry->id == id &&

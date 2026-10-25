@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the zero Y component as a literal-pool constant in the length (vmla with a pooled 0.0f) and loads s3 for unk04; recovered code materializes zero with mov/vmov. */
 #include "common.h"
 #include <math.h>
+#include "util/CalleeContracts.h"
 
 struct DirectionSourceView {
     u8 unk00[0x04];
@@ -31,14 +32,13 @@ struct DirectionVector {
 extern "C" {
 extern GameStateView g_gameState;
 extern NaviMainView* g_naviMain;
-DirectionSourceView* FUN_00152f54(void);
 f32 FUN_001b640c(f32 directionX, f32 directionZ);
 }
 
 // Normalize the horizontal direction and compute its angle, allowing the navigation override.
 extern "C" f32 FUN_00492adc(void)
 {
-    const DirectionSourceView* source = FUN_00152f54();
+    const DirectionSourceView* source = reinterpret_cast<DirectionSourceView*>(FUN_00152f54());
     DirectionVector direction = {
         source->unk10 - source->unk04,
         0.0f,

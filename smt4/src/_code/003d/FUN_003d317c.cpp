@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d317c` (_code @ 0x3d317c, 0x7a8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int FUN_00255180(...);
 int btlReflectQueueKind34(int, unsigned int *);
 int FUN_002569ac(...);
 int FUN_0026beb4(int, unsigned int *, int, unsigned int, int);
-int memClear(unsigned int *, int);
 int FUN_003c0484(...);
 int FUN_003cf884(int *, unsigned int *, unsigned int);
 int memClearTwo200(unsigned int);
@@ -152,7 +152,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
       *(unsigned short *)(param_2[10] + 0x14c) = 7;
       *(unsigned short *)(param_2[10] + 0x14e) = 8;
       param_2[0x168] = 0;
-      memClear(param_2 + 0xe,0x85);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
       FUN_003cf884(param_1,param_2,param_2[0xd]);
       *(unsigned short *)(*param_1 + 0x225a) =
            *(unsigned short *)(*(int *)(*param_1 + 0x1fc0) + param_2[0xd] * 0x288 + 8);
@@ -173,7 +173,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
       else {
         *(unsigned short *)(param_2[10] + 0x14e) = 0;
       }
-      memClear(param_2 + 0xe,0x85);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
       piVar4 = param_1;
       FUN_003cf884(param_1,param_2,param_2[0xd]);
       if (piVar4 != (int *)0x0) {

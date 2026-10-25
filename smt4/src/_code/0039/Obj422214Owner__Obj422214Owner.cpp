@@ -1,7 +1,7 @@
 #include "classes/Obj422214Owner.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void *buffer, u32 size);
 }
 
 /* Empty save-data buffers start at the epoch used by the archive reader. */

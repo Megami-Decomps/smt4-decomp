@@ -1,14 +1,14 @@
 #include "gfx/NamedTextureCache.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(void *ptr, int size);
 
 extern NamedTextureCache g_textureCache;
 
 void textureCacheReset(void)
 {
-    memClear(&g_textureCache, sizeof(g_textureCache));
+    reinterpret_cast<int>(memClear(&g_textureCache, sizeof(g_textureCache)));
 }
 
 } /* extern "C" */

@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -18,7 +20,6 @@ int FUN_00269bc4(...);
 int gameRecordCopy(int, unsigned short [14]);
 int partyMemberFindById(...);
 int threadSleepDuration(...);
-int memClear(int *, int);
 int asdMemoryAlloc(...);
 int FUN_003c8bb8(int, int);
 int FUN_003c8da0(...);
@@ -83,10 +84,9 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029defc. */
-extern int FUN_0029ea68(unsigned short);
+extern int itemGetFlagBit1(unsigned short);
 extern int flagWordTestBit(int, unsigned int);
 /* Supplied declaration required: FUN_0029f848. */
-extern int FUN_002a0d0c(void);
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
 extern int gameCountUnits(void);
@@ -179,7 +179,7 @@ void FUN_001de340(int *param_1)
     if ((char)temp_v32[0x38] != '\0') {
       return;
     }
-    temp_v2 = FUN_002a0d0c();
+    temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
     temp_v3 = param_1[0x100];
     temp_v26 = (short *)(temp_v2 + 0x1c);
     if (((temp_v3 == 5) || (temp_v3 == 6 || temp_v3 == 2)) && ((char)temp_v30[0x14] != '\0')) {
@@ -252,7 +252,7 @@ void FUN_001de340(int *param_1)
       }
       param_1[0x16d] = 0;
       *temp_v28 = 0;
-      memClear(temp_v19,16000);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v19), 16000));
       param_1[0x16e] = 0;
       temp_v16 = *(char *)((int)temp_v26 + 0x13) == '\0';
       temp_v2 = 0;
@@ -281,7 +281,7 @@ void FUN_001de340(int *param_1)
             if (temp_v5 == 0) {
               do {
                 if ((unsigned int)param_1[0x16c] <= (unsigned int)param_1[0x16d]) break;
-                temp_v5 = FUN_0029ea68(temp_v1);
+                temp_v5 = itemGetFlagBit1(temp_v1);
                 if (temp_v5 != 0) {
                   FUN_00269bc4(*param_1);
                   halfwordListAppendGroup(*param_1,0,temp_v4 + 0x34);
@@ -334,7 +334,7 @@ LAB_001dea48:
             param_1[0x16c] = 2000;
           }
           piVar9 = g_unite;
-          temp_v2 = FUN_002a0d0c();
+          temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
           temp_v17 = 1;
           temp_v13 = 0x100;
           asdMemoryAlloc(0x100,0x100,0,0xa00);
@@ -705,11 +705,11 @@ LAB_001df3cc:
           }
           piVar9 = g_unite;
           if ((char)g_unite[0x108] != '\x01') {
-            temp_v2 = FUN_002a0d0c();
+            temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
             pbVar20 = (unsigned char *)(temp_v2 + 0x11);
           }
           else {
-            temp_v2 = FUN_002a0d0c();
+            temp_v2 = reinterpret_cast<int>(FUN_002a0d0c());
             pbVar20 = (unsigned char *)(temp_v2 + 0x12);
           }
           temp_v15 = ~(*pbVar20 >> 7) & 1;

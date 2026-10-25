@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W6_W6Match8_GpuDepth.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: FUN_0016c4b8. */
@@ -171,7 +171,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
   block530OwnerReset(g_renderCtx,&temp_v17,0);
   temp_v0 = g_renderCtx;
   temp_v8 = (float)temp_v13;
-  temp_v1 = packNibblesAndByte(6,7,0);
+  temp_v1 = packNibblesAndByte(6, 7, 0);
   piVar5 = (int *)(temp_v0 + 0x12b8);
   temp_v2 = *piVar5;
   temp_v3 = piVar5[temp_v2 + 2];

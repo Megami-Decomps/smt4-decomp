@@ -19,7 +19,6 @@ void paramsClearPacket(UiResourceParameters *);
 void FUN_0014e188(UiSpriteState *, u32, s32, UiResourceParameters *, u32, f32);
 void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 
 /* Load the shared animation packet and initialize this panel's individual sprite states. */
 void FUN_003f84e8(void *work)

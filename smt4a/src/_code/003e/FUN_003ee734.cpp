@@ -1,5 +1,8 @@
 /* NON_MATCHING: percentage/constant VFP allocation and shared player/party skill-loop grouping differ; compiler-version changes are not a remedy. */
 #include "common.h"
+#include "gamedata/PlayerDataBlock.h"
+#include "mapnavi/naviMain.h"
+#include "util/FUN_003e0024.h"
 
 /* A skill record's flag word: the low bits hold the skill's recovery kind. */
 struct RegenSkill {
@@ -38,16 +41,13 @@ struct RegenSlotTable {
 };
 
 extern "C" {
-RegenPlayer *gameGetPlayerData(void);
 RegenUnit *gameGetSlotRecord(s32 slot);
 RegenSlotTable *gameGetSlotTable(void);
 RegenSkill *dataTable41FindById(u16 id);
 void playerGetWords(u16 words[10], s32 index);
-s32 playerHasFlagBit(u32 bit);
 void playerClearFlagMask(u32 mask);
 void halves34Copy(RegenUnit *unit, u16 *words);
 s32 bitsAt60Test(RegenUnit *unit, u32 bit);
-s16 FUN_003e0024(void);
 s16 FUN_003e0034(void);
 s32 playerSetClampedStat(s32 value);
 u32 FUN_003e0154(void);
@@ -114,13 +114,13 @@ void FUN_003ee734(RegenTurn *turn)
             s32 value = (s16)((s32)((f32)(s32)FUN_003e0154() * hp * 0.01f) + current);
             playerSetClampedStat(value);
             if (value == 0) {
-                gameGetPlayerData()->currentHp = 0;
+                reinterpret_cast<RegenPlayer *>(gameGetPlayerData())->currentHp = 0;
             }
             current = FUN_003e0034();
             value = (s16)((s32)((f32)(s32)FUN_003e0164() * mp * 0.01f) + current);
             playerSetClampedValue(value);
             if (value == 0) {
-                gameGetPlayerData()->currentMp = 0;
+                reinterpret_cast<RegenPlayer *>(gameGetPlayerData())->currentMp = 0;
             }
         }
         u8 count = gameGetSlotTable()->count;

@@ -96,4 +96,13 @@ typedef char GameSavedItemALayoutCheck[sizeof(GameSavedItemA) == 0x50 && sizeof(
 
 typedef char GameSavedDataAOffsets[offsetof(GameDataBlock, inventory.items) == 0x5F0C && offsetof(GameDataBlock, pairs.entries) == 0x2714C && offsetof(GameDataBlock, records.record.unk0C) == 0x27E94 && offsetof(GameDataBlock, save.sub.runtime.unk21D8C) == 0x21E14 && offsetof(GameDataBlock, save.sub.block28390) == 0x28418 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u8 *gameDataBlocksGetStats(void);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

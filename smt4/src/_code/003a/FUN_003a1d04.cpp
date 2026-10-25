@@ -9,7 +9,7 @@ void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, 
 void FUN_003a07a0(Scene3a *scene, s32 category);
 s32 FUN_0029e924(const FlaggedValueHolder *holder);
 s32 rangeLimitMin(const FlaggedValueHolder *holder);
-s32 FUN_00240d5c(const FlaggedValueHolder *holder);
+s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 void FUN_0022f1d0(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
 void FUN_002332e8(void *scrollbar, u32 offset, u32 selected);
@@ -54,16 +54,16 @@ void FUN_003a1d04(Scene3a *scene, u32 image)
     s32 offset = FUN_0029e924(holder);
     s32 visible = rangeLimitMin(holder);
     for (s32 row = 0; row < visible; ++row) {
-        if (!selectedOverlay || FUN_00240d5c(holder) != row)
+        if (!selectedOverlay || flaggedEntryGetValueByState(holder) != row)
             FUN_0022f1d0(scene, row + 1, 0, &entries[offset + row]);
     }
     struct CountsView { u32 prefix[2]; s32 count; };
     if (selectedOverlay && reinterpret_cast<const CountsView *>(holder)->count > 0) {
         u32 held = flaggedValueHolderGetTotal(holder);
-        s32 row = FUN_00240d5c(holder);
+        s32 row = flaggedEntryGetValueByState(holder);
         FUN_0022f1d0(scene, row + 1, 1, &entries[held]);
     }
-    s32 selected = FUN_00240d5c(holder);
+    s32 selected = flaggedEntryGetValueByState(holder);
     s32 first = FUN_0029e924(holder);
     FUN_002332e8(view->scrollbar, first, selected);
     view->scrollbar->vtable->draw(view->scrollbar, color);

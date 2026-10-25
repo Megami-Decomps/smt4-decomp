@@ -1,6 +1,9 @@
 /* NON_MATCHING: party-entry base is not hoisted and summary arithmetic/register scheduling differs; -O2 candidate. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "quest_center/qcMain.h"
+#include "bible/bibleLegionDraw.h"
+#include "status/StatusCamera.h"
 
 struct RefreshSkills { u16 ids[8]; };
 struct RefreshSummary {
@@ -49,12 +52,10 @@ struct PartyRefresh {
 extern "C" {
 s32 scrRunOpcodesStub(u32);
 s32 messageMainGetChoiceResult();
-const RefreshDemon *FUN_003ad6e0(u16);
 s32 gameRecordCopy(u16, RefreshSummary *);
 void gameDataStoreRecord(u16, const RefreshSummary *);
 void FUN_0022d434(PartyRefresh *);
 s32 buttonHelpGetMode();
-void buttonHelpSetPreset(s32);
 void FUN_0029cc44(s32);
 void FUN_0029ee6c(s32, u32);
 void beginStatusPanelClose();
@@ -69,7 +70,7 @@ void partyRefreshCompleteAndUpdateSummaries(PartyRefresh *work)
     if (!messageMainGetChoiceResult()) {
         for (s32 i = 0; i < work->count; ++i) {
             u16 id = work->entries[i].id;
-            const RefreshDemon *unit = FUN_003ad6e0(id);
+            const RefreshDemon *unit = reinterpret_cast<const RefreshDemon *>(FUN_003ad6e0(id));
             RefreshSummary summary;
             if (gameRecordCopy(id, &summary)) {
                 summary.level = unit->level;

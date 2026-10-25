@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca6c4` (_code @ 0x3ca6c4, 0x4cc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int dataTable40FindById(void);
 int dataTable08Sub1GetRecord(void);
 int rt_memclr(int, int);
 int __aeabi_memset4(unsigned int *, int, unsigned int);
-int memClear(unsigned int *, int);
 int FUN_003ae850(unsigned int, int, int);
 int FUN_003aeaa4(unsigned int, int, int, int, int, int);
 
@@ -157,7 +157,7 @@ LAB_003ca908:
         temp_v5 = temp_v7;
       } while (temp_v10 < 0x85);
       FUN_003ae850(g_btlUiBlock,*param_1 + 0x1e8c,5);
-      memClear(param_2 + 0xe,0x85);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
       rt_memclr((int)param_2 + 0xbd,0x85);
       g_btlAction = 0xffffffff;
       temp_v5 = 0;

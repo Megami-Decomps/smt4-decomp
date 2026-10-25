@@ -20,14 +20,14 @@ struct SoundChannelVoice {
 
 extern "C" {
 extern u8 g_dspsndState;
-SoundWaveInfo* FUN_00129010(u32 wave);
+SoundWaveInfo* soundBlockGetPayloadEnd(u32 wave);
 void* FUN_0013ac6c(u32 wave, u32 index);
 u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(void* state, u8 channel, const void* parameters);
 
 // Prepare the channel's format, length and optional ADPCM decoder parameters.
 u32 FUN_001294e0(SoundChannelVoice* voice, u32 wave, u32 unusedA, u32 unusedB, u32 index)
 {
-    SoundWaveInfo* info = FUN_00129010(wave);
+    SoundWaveInfo* info = soundBlockGetPayloadEnd(wave);
     if (info->format == 2) {
         void* adpcm = FUN_0013ac6c(wave, index);
         if (adpcm != NULL) {

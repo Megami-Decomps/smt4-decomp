@@ -1,13 +1,14 @@
-/* NON_MATCHING: register allocation and the scissor helpers' code shape */
+/* NON_MATCHING: scissor helpers address the stack through ctx+0x120 (one shared base register) and x offset register order differs */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
+#include "gfx/StereoParallax.h"
 
 extern "C" {
 
 extern RenderCtxScissorA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 scale);
 SpriteInfo *FUN_001834a4(s32 group, s32 id);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void renderPopStateStacks(void);
@@ -30,7 +31,7 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     SpriteInfo *track = FUN_001834a4(0x33, 0x13);
     s32 thumbHeight;
 
-    if (uiSearchPrimary(scrollBar) >= objectApplyIfUnblocked(scrollBar)) {
+    if (objectApplyIfUnblocked(scrollBar) <= uiSearchPrimary(scrollBar)) {
         thumbHeight = track->size[1];
     } else {
         f32 pixelsPerEntry = (f32)track->size[1] / (f32)objectApplyIfUnblocked(scrollBar);
@@ -54,7 +55,7 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
         renderCtxResumeScissor(g_renderCtx);
     }
     renderPopStateStacks();
-    efctSetSpeed(speed);
+    efctSetSpeed(1.0f);
 }
 
 } /* extern "C" */

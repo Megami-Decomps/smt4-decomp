@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameDataEntries.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct ItemDef {
 extern u32 dataTableGet(u32 table, u32 index);
 extern LimitEntry *dataTableGetEntries(void);
 extern s32 dataTableGetCount(u32 index);
-extern ItemState *gameDataGetTableEntry(u8 groupId, u8 itemId);
 extern ItemDef *FUN_0015fa74(u8 groupId, u8 itemId);
 extern void FUN_00148d68(u8 groupId, u8 itemId, s32 arg);
 
@@ -42,7 +42,7 @@ void itemResetOverLimitStates(u32 level)
         if (entry->limit != 0 && entry->limit <= level) {
             u8 itemId = entry->itemId;
             u8 groupId = entries[i].groupId;
-            ItemState *state = gameDataGetTableEntry(groupId, itemId);
+            ItemState *state = reinterpret_cast<ItemState *>(gameDataGetTableEntry(groupId, itemId));
 
             u16 baseValue = FUN_0015fa74(groupId, itemId)->baseValue;
 

@@ -1,14 +1,13 @@
 /* NON_MATCHING: armcc lowers the three active states to comparisons rather than retail's five-entry jump table and allocates the menu/state base registers oppositely. */
 #include "shard/Shard0049.h"
+#include "addon/AocEntryKind.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
-s32 FUN_0023b3d0(void);
 void FUN_0031f718(s32 item, u32 mode);
 void statusPanelSetOpen(u32 mode);
 s32 FUN_004cfe4c(EquipmentMenuCursor *cursor);
-s32 FUN_00192718(s32 item);
 void FUN_0034aa94(u32 slot, s32 item);
-s32 FUN_0026c3a0(void);
 void FUN_002c85b0(void);
 void FUN_00333f6c(void);
 void FUN_0022e774(void);
@@ -30,13 +29,13 @@ extern "C" void FUN_0049ae34(EquipmentMenuState *menu)
             s32 index = FUN_004cfe4c(&menu->cursors[page]);
             s16 item = menu->pages[page].items[index].id;
             if (item != 0) {
-                if (FUN_00192718(item) == 4) {
+                if (aocEntryGetKindForward(item) == 4) {
                     FUN_0034aa94(0, item);
                 }
-                if (FUN_00192718(item) == 5) {
+                if (aocEntryGetKindForward(item) == 5) {
                     FUN_0034aa94(1, item);
                 }
-                if (FUN_00192718(item) == 6) {
+                if (aocEntryGetKindForward(item) == 6) {
                     FUN_0034aa94(2, item);
                 }
             }

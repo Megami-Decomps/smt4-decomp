@@ -21,7 +21,7 @@ s32 messageMainGetChoiceResult(void);
 s32 messageMainTargetIsClear(void);
 const s32 *gameGetSlotTable(void);
 s32 FUN_0029cc44(s32 value);
-void FUN_00295c04(s32 amount);
+void partyMoneyAddForward(s32 amount);
 s32 questCenterGetHealingFee(void);
 }
 
@@ -63,7 +63,7 @@ extern "C" void FUN_00381e04(HealingScene199 *scene)
         if (FUN_0029cc44(0) == 1) {
             scene->substate++;
             scene->unk0C = 0;
-            FUN_00295c04(-questCenterGetHealingFee());
+            partyMoneyAddForward(-questCenterGetHealingFee());
         }
         break;
     case 4:

@@ -1,7 +1,10 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: indexed first-stack push and three-byte label restored; set/pop state registers, glyph coordinates and blink remainder allocation still differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -32,16 +35,12 @@ typedef struct SlotPicker {
     /* 0x3AC */ SlotFade fade;
 } SlotPicker;
 
-extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
-void FUN_00157558(RenderCtxA *context);
 void FUN_00183bb0(void);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_0016c4b8(RenderCtxA *context, s32 arg);
-u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 SlotLayout *FUN_001834a4(u32 group, u32 id);
 void FUN_00162790(u32 first, u32 second, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
 void skinObjectUpdateMatrices(RenderCtxA *context);

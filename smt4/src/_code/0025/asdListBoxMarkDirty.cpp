@@ -21,17 +21,17 @@ struct ListBoxMetrics {
 
 extern "C" {
 
-ListBoxMetrics *jobGetWork(void);
+ListBoxMetrics *jobGetWork(u32 job);
 s32 libc_strlen(const char *text);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void ARM_common_memcpy4_7(char *destination, const char *source);
 
 /* Recomputes the size of the list box from its title and items: the widest item (with its value
  * text) gives the width, the number of visible rows the height. */
-void asdListBoxMarkDirty(void)
+void asdListBoxMarkDirty(u32 job)
 {
     char text[256];
-    ListBoxMetrics *box = jobGetWork();
+    ListBoxMetrics *box = jobGetWork(job);
     f32 width = (f32)(libc_strlen(box->title) * box->charWidth);
 
     for (AsdListNode *node = box->items.first; node != NULL; node = node->next) {

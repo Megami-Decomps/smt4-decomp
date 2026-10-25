@@ -1,6 +1,6 @@
 #include "gamedata/DataTable.h"
+#include "util/Random.h"
 
-extern "C" u32 randNextInRange(u32 maximum);
 
 struct PackedWeightedId {
     u32 id : 8;

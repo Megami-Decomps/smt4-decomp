@@ -60,4 +60,37 @@ typedef struct AsdMdlObject {
 
 typedef char AsdMdlRecordLayoutCheck[sizeof(AsdMdlRecord) == 0x1C && offsetof(AsdMdlRecord, height) == 0x18 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Destroys a model object: releases its node data and records, removes it from the model list and frees it. */
+void asdMdlManagerDestroy(AsdMdlObject *obj);
+#ifdef __cplusplus
+}
+#endif
+
+extern "C" {
+void FUN_0029c4c8(u8 value);
+}
+
+extern "C" {
+s32 arrayContainsU16(const u16 *values, s32 count, u32 value);
+}
+
+extern "C" {
+void gameCounterAddSaturating(int index, u32 amount);
+}
+
+extern "C" {
+s8 gameGetFlagByte12e8(void);
+}
+
+extern "C" {
+u8 FUN_0029e0f8(void);
+}
+
+extern "C" {
+AsdMdlObject *asdMdlManagerCreateSecondList(void *source, u32 param);
+}
+
 #endif

@@ -6,11 +6,11 @@ extern "C" {
 int CONCAT44(double, double);
 int FUN_001a1ee0(void);
 int FUN_001bc460(void);
-int FUN_00221ee0(float *);
+int matrixGetTranslation(float *);
 int FUN_002f8b30(void);
 int FUN_0037ee54(void);
 int randomAdvanceShiftRegister(int);
-int FUN_00514540(int);
+int shiftRandomNextFraction(int);
 int matrixCopySelectedToGlobal(float *);
 int VectorSignedToFloat(int, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -85,11 +85,11 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001a1ee0. */
 extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001bc460. */
-/* Supplied declaration required: FUN_00221ee0. */
+/* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_002f8b30. */
 /* Supplied declaration required: FUN_0037ee54. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
@@ -169,7 +169,7 @@ void FUN_003c694c(int param_1)
   if ((*(int *)(param_1 + 0x28) <= *(int *)(temp_v5 + 0x34)) || (*(int *)(temp_v5 + 0x34) == 0)) {
     temp_v51 = *(int *)(temp_v5 + 0x40);
     temp_v37 = *(int *)(temp_v5 + 0x38);
-    FUN_00221ee0(&temp_v32);
+    matrixGetTranslation(&temp_v32);
     DAT_006472fc = g_polyDefaultColor;
     DAT_00647300 = DAT_005c1104;
     DAT_00647304 = DAT_005c1108;
@@ -250,7 +250,7 @@ void FUN_003c694c(int param_1)
             temp_v3 = DAT_006472e4;
             temp_v42 = DAT_006472dc;
             temp_v43 = DAT_006472e0;
-            FUN_00514540(0);
+            shiftRandomNextFraction(0);
             temp_v10 = temp_v10 * 6.2831855f;
             temp_v24 = temp_v10 * 40.743664f;
             temp_v23 = temp_v10 - 6.2831855f;
@@ -461,7 +461,7 @@ void FUN_003c694c(int param_1)
                 if ((int)temp_v23 >= 0x40490fdc) {
                   temp_v14 = 3.1415927f;
                   temp_v23 = temp_v23 - 3.1415927f;
-                  FUN_00514540(0);
+                  shiftRandomNextFraction(0);
                   temp_v46 = temp_v45 * (1.0f - temp_v14 * 0.95f);
                 }
                 temp_v14 = temp_v10 * 40.743664f;
@@ -481,7 +481,7 @@ void FUN_003c694c(int param_1)
                 DAT_006472e0 = temp_v52;
                 DAT_006472e4 = temp_v36;
                 DAT_006472e8 = temp_v14;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 matrixCopySelectedToGlobal(&temp_v32);
                 DAT_006472dc = temp_v54;
                 DAT_006472e0 = temp_v52;

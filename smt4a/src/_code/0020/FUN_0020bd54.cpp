@@ -1,7 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020bd54` (_code @ 0x20bd54, 0xd8c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -55,9 +57,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: quadSetOrderedVectors. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
@@ -135,7 +135,7 @@ void FUN_0020bd54(void)
     if ((*(char *)(temp_v9 + 0x5ac) != '\0') &&
        (temp_v8 = temp_v5 + temp_v7 * 0x8c, *(char *)(temp_v8 + 0xb9) != '\0')) {
       acStack_a0[temp_v7] = '\x01';
-      temp_v2 = vec2GetXInt(temp_v8 + 0x34);
+      temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(temp_v8 + 0x34));
       aiStack_d0[temp_v7] = temp_v2 + *(short *)(temp_v8 + 0x4c);
       temp_v2 = vec2GetYInt(temp_v8 + 0x34);
       aiStack_b8[temp_v7] = temp_v2 + *(short *)(temp_v8 + 0x4e);
@@ -250,7 +250,7 @@ void FUN_0020bd54(void)
       temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
-    temp_v7 = packNibblesAndByte(6,7,0);
+    temp_v7 = packNibblesAndByte(6, 7, 0);
     piVar9 = (int *)(temp_v10 + 0x12b8);
     temp_v9 = piVar9[*piVar9 + 2];
     piVar9[*piVar9 + 2] = temp_v7;
@@ -542,7 +542,7 @@ LAB_0020c98c:
       temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
-    temp_v7 = packNibblesAndByte(6,1,0);
+    temp_v7 = packNibblesAndByte(6, 1, 0);
     piVar9 = (int *)(temp_v10 + 0x12b8);
     temp_v9 = piVar9[*piVar9 + 2];
     piVar9[*piVar9 + 2] = temp_v7;
@@ -580,7 +580,7 @@ LAB_0020c98c:
       temp_v10 = g_renderCtx;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 6);
-    temp_v5 = packNibblesAndByte(6,7,0);
+    temp_v5 = packNibblesAndByte(6, 7, 0);
     piVar9 = (int *)(temp_v10 + 0x12b8);
     temp_v7 = piVar9[*piVar9 + 2];
     piVar9[*piVar9 + 2] = temp_v5;

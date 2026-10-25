@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 

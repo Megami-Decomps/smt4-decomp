@@ -61,7 +61,7 @@ extern unsigned char DAT_00403140; /* 0x403140 */
 extern unsigned char DAT_0040317c; /* 0x40317c */
 extern int *g_unite; /* 0x43dd68 */
 
-extern int FUN_00263c1c(unsigned char *);
+extern int asdCameraLoadFromFile(unsigned char *);
 extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: statusCameraSelectPreset. */
@@ -241,7 +241,7 @@ void FUN_001f3044(void)
     temp_v4 = 0;
     FUN_00294834(0,0,0,0,0,0,0xff,0,0,0xff);
   }
-  temp_v0 = FUN_00263c1c(&LAB_001f3694);
+  temp_v0 = asdCameraLoadFromFile(&LAB_001f3694);
   piVar1[0x2574] = temp_v0;
   statusCameraSelectPreset(1);
   temp_v0 = asdMdlManagerCreateSecondList(&LAB_001f36b0,7);

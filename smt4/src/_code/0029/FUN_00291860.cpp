@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "status/StatusCamera.h"
 
 /* A screen object that owns a script process, two heap blocks and a few resource flags. */
 struct ScreenResources {
@@ -18,7 +19,6 @@ extern "C" {
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *block);
 void gameGlobalsSetSelected(s32 selected);
-void FUN_002a0cc8(s32 value);
 void gameReleaseDataReference(void);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void buttonHelpRelease(void);

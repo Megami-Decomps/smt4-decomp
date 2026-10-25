@@ -16,15 +16,15 @@ struct TextureOwnerWork {
     /* 0x64 */ u8 hasDefault;
 };
 
-TextureOwnerWork *jobGetWork(void);
+TextureOwnerWork *jobGetWork(u32 job);
 void FUN_00294f64(void *resource);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void asdMemFree(void *block);
 
 /* Releases the work area's textures and frees it. */
-void FUN_002db92c(void)
+void FUN_002db92c(u32 job)
 {
-    TextureOwnerWork *work = jobGetWork();
+    TextureOwnerWork *work = jobGetWork(job);
 
     if (work->resource == NULL) {
         if (work->mode != 1) {

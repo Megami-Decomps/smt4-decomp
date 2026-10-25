@@ -2,7 +2,7 @@
 #include "classes/Obj4727e8.h"
 
 extern "C" {
-f32 FUN_0024b830(s32 range);
+f32 shiftRandomNextFraction(s32 range);
 s32 randomAdvanceShiftRegister(s32 range);
 }
 
@@ -15,7 +15,7 @@ void Obj4727e8::initEntries()
     Obj4727e8Counter *counter = r->counter;
     Obj4727e8Entry *entry = table->entries;
     s32 span = counter->span;
-    f32 start = ((1.0f - counter->baseBlend) + FUN_0024b830(0) * counter->baseBlend) * counter->baseScale;
+    f32 start = ((1.0f - counter->baseBlend) + shiftRandomNextFraction(0) * counter->baseBlend) * counter->baseScale;
     u32 count;
     u32 i;
 
@@ -23,7 +23,7 @@ void Obj4727e8::initEntries()
         table->base = start;
         table->step = 0.0f;
     } else {
-        f32 end = ((1.0f - counter->endBlend) + FUN_0024b830(0) * counter->endBlend) * counter->endScale;
+        f32 end = ((1.0f - counter->endBlend) + shiftRandomNextFraction(0) * counter->endBlend) * counter->endScale;
 
         table->base = start;
         table->step = (end - start) / (f32)span;

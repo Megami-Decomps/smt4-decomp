@@ -5,7 +5,7 @@ extern "C" {
 
 extern BibleScript *FUN_00297060(BibleFiles files);
 extern int messageTargetSetValue(int, int);
-extern int FUN_0029e648(int, int);
+extern int messageBannerInitSelection(int, int);
 extern int buttonHelpSetPreset(int);
 extern int FUN_003aacd0(void);
 extern int flaggedValueHolderGetTotal(u8 *cursor);
@@ -23,7 +23,7 @@ void bibleScreenStartScript(BibleScreen *screen)
         FUN_003aacd0();
         buttonHelpSetPreset(0x3E);
         scroll = screen->page[flaggedValueHolderGetTotal(screen->cursor)].scroll;
-        FUN_0029e648(1, 0);
+        messageBannerInitSelection(1, 0);
         messageTargetSetValue(-scroll, 0);
         screen->state = 2;
         screen->stateArg = 0;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 

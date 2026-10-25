@@ -11,9 +11,10 @@ void listAppendNode(Obj421aa4Manager *, Obj421aa4Node *);
 /* Bind caller-owned file slots to the archive, then queue the data-manager setup. */
 u32 FUN_00121030(AsdSndDataManagerView *manager, void *archive, void *buffer, u32 bufferSize)
 {
+    u32 bufferEnd = reinterpret_cast<u32>(buffer) + bufferSize;
     u32 required = sizeof(u32) + FUN_00141fb4(archive) * sizeof(void *);
     u32 alignedEnd = (reinterpret_cast<u32>(buffer) + required + 3) & ~3u;
-    if (static_cast<s32>(alignedEnd - (reinterpret_cast<u32>(buffer) + bufferSize)) > 0)
+    if (static_cast<s32>(alignedEnd - bufferEnd) > 0)
         return 0;
 
     manager->tableState.fileTable = static_cast<SoundDataFileTable *>(buffer);

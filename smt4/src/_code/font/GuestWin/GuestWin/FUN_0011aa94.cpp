@@ -14,7 +14,7 @@ int textFormatBuffer(...);
 int FUN_002be90c(...);
 int FUN_002bed3c(void);
 int efctSetSpeed(void);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -35,7 +35,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b6940. */
 extern int supportUnitGetEntry(int, unsigned short);
-extern int FUN_002b6ad0(void);
 extern int FUN_002b6b04(void);
 extern int gameGetSupportUnitData(void);
 extern int gameGetOptionProgressStatus(void);
@@ -50,7 +49,7 @@ extern int vec2GetYInt(int);
 extern int vec2GetXInt(int);
 extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -76,7 +75,7 @@ unsigned int FUN_0011aa94(void)
   temp_v4 = g_guestWin;
   if ((((*(int *)(g_guestWin + 8) != 0) && (temp_v1 = gameGetOptionProgressStatus(), temp_v1 != 0)) && (temp_v1 != 1))
      && (temp_v1 = gameGetSupportUnitData(), *(short *)(temp_v1 + 0x46) != 0)) {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     temp_v3 = g_titleScene;
     temp_v2 = FUN_002c5d80(1,0);
     piVar10 = (int *)(temp_v3 + 0x124c);

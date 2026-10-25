@@ -1,4 +1,5 @@
 #include "ui/ButtonHelp.h"
+#include "gamedata/SavedUnitSelection.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;

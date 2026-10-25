@@ -1,10 +1,12 @@
+#include "util/FUN_002a4894.h"
 /* NON_MATCHING: cursor/definition pointer lifetimes differ, and the final state update uses strd rather than separate writeback stores; 80 instructions each. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "quest_center/QuestRequirement.h"
+#include "shard/Shard0031.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(void *cursor);
-s32 FUN_002a4894(void *cursor);
 void FUN_00417e08(u32 questId);
 void gameOptionsClassifyMode();
 void optionsSetFlag1();
@@ -15,7 +17,6 @@ QuestRequirementDefinition *FUN_001ad9b4(u32 questId);
 s32 scrScriptProcessStartEntry(u32 script, u32 entry);
 const char *FUN_0015f858(u32 textId, s32 mode);
 char *libc_strcpy(char *destination, const char *source);
-void FUN_003180c4(s32 slot, const char *text);
 void FUN_00359974(s32 type, u32 message, s32 argument, s32 flags);
 void sysPlaySe(s32 sound);
 void FUN_003d474c();
@@ -33,7 +34,7 @@ void FUN_0021a4b0()
     UiQuestApoc *quest = g_uiQuest;
     quest->state = 1;
     s32 page = resourceRunOperationIfUnblocked(quest->cursor);
-    s32 selection = FUN_002a4894(quest->cursor);
+    s32 selection = FUN_002a4894(reinterpret_cast<const Object *>(quest->cursor));
     u32 questId = quest->list[selection + page];
     FUN_00417e08(questId);
     gameOptionsClassifyMode();

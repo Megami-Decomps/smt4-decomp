@@ -1,10 +1,10 @@
 /* NON_MATCHING: The embedded-entry pointer is retained rather than recomputed; getter/setter registers differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
 s32 FUN_0029efc0(FlaggedEntry *entry);
-s32 FUN_0029e93c(FlaggedEntry *entry);
 s32 flaggedEntryGetValueA(FlaggedEntry *entry);
 s32 flaggedEntryGetValueB(FlaggedEntry *entry);
 s32 scrollOwnerSetValue(FlaggedEntry *entry, s32 value);

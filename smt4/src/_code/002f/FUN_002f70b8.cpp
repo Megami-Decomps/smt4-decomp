@@ -1,9 +1,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 extern int btlSlotsHaveReadyUnit(BtlEntry *unit);
 
 extern u32 g_btlScriptUnit;

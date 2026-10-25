@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the inner loop test differs: retail compares k against the count (cmp k, count; blt), built the reverse */
 #include "shard/W8X15_PackageList.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 

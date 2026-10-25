@@ -1,9 +1,9 @@
 #include "battle/ListedEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 ListedState *btlGetMainState(void);
-void scrSetResult(s32 value);
 
 // Script command: result 1 when a used, listed, non-excluded entry has a positive value.
 u32 FUN_00324d00(void)

@@ -1,6 +1,7 @@
 /* NON_MATCHING: default flags unroll the byte-pair scan by two; IV twin also differs with O2/Ospace in key-load predication/register allocation. */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match2_GameDataEntryKeys.h"
+#include "gamedata/GameDataEntries.h"
 
 // Map the group/item byte pair to its table index, with zero as the default.
 extern "C" s32 gameDataFindEntryIndex(u32 groupId, u32 itemId)

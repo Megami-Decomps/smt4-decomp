@@ -7,7 +7,6 @@ s32 FUN_00162ea4();
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 s32 FUN_002ac078(u32 job);
 void jobFreeWork(u32 job);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 
 // Start a uniform-amplitude shake, fading during its final ten frames when timed.
 u32 FUN_0036c580(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration)
@@ -32,7 +31,6 @@ u32 FUN_0036c580(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration)
     work->fadeStart = fadeStart;
     work->amplitudeX = amplitude;
     work->amplitudeY = amplitude;
-    return asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_BustupShake"), 4, 0, 0,
-                                  FUN_002ac078, jobFreeWork, reinterpret_cast<u32>(work));
+    return asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_BustupShake"), 4, 0, 0, FUN_002ac078, jobFreeWork, reinterpret_cast<u32>(work));
 }
 }

@@ -14,7 +14,7 @@ typedef struct UnlockRecord {
 
 UnlockRecord *FUN_001ad9b4(u32 id);
 s32 gameFlagIsSet(u32 flag);
-s32 partyEntryFlagsBit3(u32 member);
+u32 partyEntryFlagsBit3(s32 member);
 
 /* Return 1 when the record's required game flag and party members are all satisfied. */
 s32 FUN_003df390(u32 id)

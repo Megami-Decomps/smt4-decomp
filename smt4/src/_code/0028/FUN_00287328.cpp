@@ -1,10 +1,10 @@
 /* NON_MATCHING: channel-base retention and fade-transition register lifetimes differ. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 extern BgmRequestChannel DAT_004c53c4[2];
 extern BgmChannelSelection g_titleConfigModeFlag;
-const void *jyoucyuGetTableEntry(u32);
 void soundChannelRequest(u32, s32, s32);
 }
 

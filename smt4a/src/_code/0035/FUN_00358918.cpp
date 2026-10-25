@@ -2,13 +2,12 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
-void FUN_00157558(RenderCtxA *context);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0();
 s32 FUN_001692ac(u32 kind, u32 flags);
-extern RenderCtxA *g_renderCtx;
 extern StaffRollWork *g_staffRoll;
 
 // Draw all twelve staff-roll markers under a temporary render state.

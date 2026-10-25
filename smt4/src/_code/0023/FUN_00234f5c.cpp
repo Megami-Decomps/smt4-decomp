@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (189 vs 210 rows); retail keeps the address of the 0x80-byte block at +0x56c in a register and schedules the field clears differently */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct Vec3 {
     u32 x, y, z;    // raw words, copied verbatim
@@ -36,7 +37,6 @@ struct MikadoScene {
 
 extern "C" {
 
-void memClear(void* block, s32 size);
 void textFormatBuffer(char* out, const char* format, ...);
 u32 asdMdlManagerCreateLoaded(const char* name, s32 mode);
 void FUN_002a0428(u32 model, s32 arg);

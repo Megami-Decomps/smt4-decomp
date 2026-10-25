@@ -1,11 +1,11 @@
 /* NON_MATCHING: suspended transition matches; idle transition's frame/state/previousState stores remain reordered. */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "gamedata/DataTable.h"
+#include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 extern void* g_handleRegistry;
 extern SaveLoadUIBaseA g_saveLoadUIBase;
-s32 objBStateAllowsAction(void);
 void FUN_002f0384(s32 enabled);
 void FUN_0041de6c(SaveLoadControllerA* controller);
 void ptrListRemoveClearOwner(void* registry, u32 handle);

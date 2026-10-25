@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -48,7 +49,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: mathInterpolateTimed. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -205,7 +205,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
     if (temp_v15 != 0) {
       FUN_00164b5c(2,0x2f,0xd,temp_v9,temp_v8,0x81);
       temp_v5 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,1,0);
+      temp_v4 = packNibblesAndByte(6, 1, 0);
       piVar11 = (int *)(temp_v5 + 0x12b8);
       temp_v6 = *piVar11;
       temp_v7 = piVar11[temp_v6 + 2];

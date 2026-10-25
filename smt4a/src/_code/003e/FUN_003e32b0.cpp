@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the NPC shop select script driver (step 0 lists up to three entries and starts the script entry for the count, steps 1-3 wait on the script); the stack frame matches retail (84 bytes) but armcc keeps the constants 0/1 in different registers (sl instead of r9) and orders the branch tests differently; the entry index passed in the unknown-selection case is assumed to be the found index. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* Record of one shop entry candidate (an id's table record). */
 struct ShopEntryRecord {
@@ -42,7 +43,6 @@ void FUN_003c1060(void);
 void fillThreeWordsWithByte(s32 *words, u32 value);
 ShopEntryRecord *FUN_00184310(u32 id);
 u32 FUN_00180118(u32 id);
-void FUN_003180c4(s32 index, u32 value);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataCopySaveEntry(u16 id, u8 *out);
 
@@ -71,7 +71,7 @@ void FUN_003e32b0(NpcShopSelect *scene)
                 if (found == 0 || (*(u16 *)(save + 0x36) & 0xFC) == 0)
                     continue;
             }
-            FUN_003180c4(count, FUN_00180118(slots[i].id));
+            FUN_003180c4(count, reinterpret_cast<const char *>(FUN_00180118(slots[i].id)));
             scene->choices[count] = i;
             count++;
         }

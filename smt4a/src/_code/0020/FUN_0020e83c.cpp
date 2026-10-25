@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses mov r2, r0 where the compiled block uses ldr r0, [r0]. */
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {

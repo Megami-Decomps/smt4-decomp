@@ -15,9 +15,6 @@ extern "C" {
 s32 cycleWorkStep(u32 job);
 s32 FUN_00478ac4(u32 job);
 
-u32 asdProcessCreateSimple(const s8* name, s32 group, u16 startDelay,
-                           u16 endDelay, AsdProcUpdateFunc callback,
-                           AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8* name, s32 group, u16 startDelay,
                    u16 endDelay, AsdProcUpdateFunc callback,
                    AsdProcFunc onEnd, u32 work, void* owner);
@@ -28,9 +25,7 @@ void FUN_0047bcdc(LoadingWorkView* work, u32 requestValue)
     work->unk179C = requestValue;
     if ((work->unk00 & 0x100) == 0) {
         work->unk00 |= 0x100;
-        u32 process = asdProcessCreateSimple(
-            reinterpret_cast<const s8*>("Aoc loading CALC"), 4, 0, 0,
-            cycleWorkStep, NULL, reinterpret_cast<u32>(work));
+        u32 process = asdProcessCreateSimple(reinterpret_cast<const s8*>("Aoc loading CALC"), 4, 0, 0, cycleWorkStep, NULL, reinterpret_cast<u32>(work));
         work->unk1794 = process;
         taskCreateDraw(reinterpret_cast<const s8*>("Aoc loading DOWN"), 0xEC, 1, 0,
                        FUN_00478ac4, NULL, reinterpret_cast<u32>(work),

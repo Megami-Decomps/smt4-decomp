@@ -21,7 +21,7 @@ typedef struct ItemMenu {
 
 extern int messageMainSetTargetFlags(int arg);
 extern int playerSkillInsertFirstFree(u16 itemId);
-extern int FUN_00295c04(int amount);
+extern int partyMoneyAddForward(int amount);
 extern int gameCounterAddSaturating(int kind, int amount);
 extern int flaggedValueHolderGetTotal(void *selector);
 extern int messageMainTargetIsClear(void);
@@ -38,7 +38,7 @@ void itemMenuTakeSelected(ItemMenu *menu)
         entries = menu->entries;
         playerSkillInsertFirstFree(entries[flaggedValueHolderGetTotal(menu->selector)].itemId);
         amount = menu->entries[flaggedValueHolderGetTotal(menu->selector)].amount;
-        FUN_00295c04(-amount);
+        partyMoneyAddForward(-amount);
         gameCounterAddSaturating(1, amount);
         menu->state = 3;
         menu->step = 0;

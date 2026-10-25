@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match5_DataTable.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 

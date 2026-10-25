@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 

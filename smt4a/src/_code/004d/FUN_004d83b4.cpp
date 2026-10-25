@@ -7,7 +7,7 @@ extern const char DAT_005285a0[];
 extern const char DAT_00528588[];
 void sysMemClear(void *buffer, u32 size);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-s32 FUN_0046c4b4(void *system, u32 archiveId);
+u32 FUN_0046c4b4(void *system, u32 archiveId);
 void aocQueueType20(void *system, u32 archiveId, void **output, const char *path);
 void aocQueueType1f(void *system, u32 archiveId, void **output, const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);

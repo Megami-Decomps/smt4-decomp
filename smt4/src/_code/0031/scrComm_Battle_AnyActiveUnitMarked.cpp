@@ -1,8 +1,8 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 extern u8 *btlGetMainState(void);
 
 /* Script command: result 1 when any of the 0x6D battle units is active, present, visible and flagged 0x100. */

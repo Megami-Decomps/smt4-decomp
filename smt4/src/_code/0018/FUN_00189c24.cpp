@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00189c24` (_code @ 0x189c24, 0x4d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_0029f848(...);
 int dataTable1bOr1cGetRecord(...);
 int FUN_002b7bca(...);
 int rt_memclr(...);
-int memClear(...);
 int uiQuestSortListByEntryKind(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -72,7 +72,7 @@ void FUN_00189c24(void)
   temp_v9 = 0;
   temp_v8 = 0;
   temp_v12 = g_uiQuest + 0x6c4;
-  memClear(temp_v12,0xc6);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v12), 0xc6));
   rt_memclr(temp_v2 + 0x78a,500);
   temp_v7 = 0;
   do {

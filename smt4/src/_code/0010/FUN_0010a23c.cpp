@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r5, [pc, #148] differs from recovered ldr r5, [pc, #112]. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 struct PadReaderView {
@@ -38,7 +39,6 @@ int __cxa_guard_acquire(u32* guard);
 u32 FUN_0011c6c0(void);
 void nn_hid_CTR_PadReader_PadReader_sub_object(PadReaderView* reader, u32 argument);
 void nn_hid_CTR_AnalogStickClamper_SetClampParam(PadReaderView* reader, int minimum, int maximum);
-void memClear(void* destination, u32 size);
 
 // Initialize the shared pad reader and reset its clamp parameters and input state.
 void FUN_0010a23c(void)

@@ -15,7 +15,6 @@ s32 FUN_0027dda4(u32 process);
 void shopProcessMarkFinished(u32 process);
 s32 shopMainUpdateChild(u32 process);
 s32 ownerChildNotifyEarlyState(u32 process);
-u32 asdProcessCreateSimple(const char *name, s32 group, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc destroy, void *work);
 u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc draw, AsdProcFunc destroy, void *work, u32 parent);
 }
 
@@ -40,7 +39,7 @@ extern "C" void shopCreateProcessAndDrawTasks(const u32 *arguments, s32 bytes)
     } else {
         work->mode = 1;
     }
-    work->task = asdProcessCreateSimple(DAT_005361d4, 4, 0, NULL, FUN_0027dda4, shopProcessMarkFinished, work);
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005361d4), 4, 0, NULL, FUN_0027dda4, shopProcessMarkFinished, reinterpret_cast<u32>(work));
     taskCreateDraw(DAT_005361c4, 101, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361c4, 204, 1, 0, shopMainUpdateChild, NULL, g_shop, work->task);
     taskCreateDraw(DAT_005361b0, 235, 1, 0, ownerChildNotifyEarlyState, NULL, g_shop, work->task);

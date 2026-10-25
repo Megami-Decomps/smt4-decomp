@@ -2,6 +2,7 @@
 #include "classes/Obj4221fc.h"
 #include "gamedata/TableEntryRef.h"
 #include "nn/Result.h"
+#include "util/FUN_00234624.h"
 
 struct Obj4221fcManager {
     u8 unk00[0x18];
@@ -13,7 +14,6 @@ struct Obj4221fcManager {
 extern "C" {
 extern Obj4221fcManager *g_aocMain;
 void FUN_00123934();
-void FUN_00234624(ItemPropertyResource **out, u32 table, u32 index);
 ItemCodeInfo FUN_003df244(ItemPropertyResource **resource);
 WindowStatusResult FUN_003540d8(void *owner, void *request, void *parameters);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
@@ -25,7 +25,7 @@ WindowStatusOperationResult Obj4221fc::vfunc0c(const void *)
     Obj4221fcManager *manager = g_aocMain;
     FUN_00123934();
     TableEntryRef ref;
-    FUN_00234624(&ref.entry, manager->resourceId, state);
+    FUN_00234624(reinterpret_cast<int *>(&ref.entry), reinterpret_cast<void *>(manager->resourceId), state);
     ItemCodeInfo request = FUN_003df244(&ref.entry);
     output.result = FUN_003540d8(manager->service7c, manager->service18, &request);
     if (!nnResultIsFailure(legacyResourceIdRemap(&output.result))) {

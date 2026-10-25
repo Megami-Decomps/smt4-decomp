@@ -17,7 +17,7 @@ NavigationPoint *sub68OwnerGetBlock60(void);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);
 void FUN_002d22c0(s32 value);
 void lmapEnableSceneState(void);
-void dialogClose(s32 value);
+void dialogClose(s32 immediate);
 
 // Navigation fade step: the first call plays the feedback sound; the second fades the sprites in
 // and, when the last one finished, resets the cursor and moves on.

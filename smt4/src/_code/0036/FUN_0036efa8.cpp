@@ -1,8 +1,8 @@
 /* NON_MATCHING: tree walk and teardown order match; retail keeps a zero in sl from function entry and uses it for the null results of every offset lookup, where armcc loads immediate #0 there and hoists the zero later. */
 #include "gfx/ResourceReleaseTree.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void *block, u32 size);
 extern void (*g_gfxReleaseCallback)(u32 block, u32 operation, u32 data, u32 size);
 
 /* Releases every group of the owner's resource tree: unregisters each entry, hands its data block

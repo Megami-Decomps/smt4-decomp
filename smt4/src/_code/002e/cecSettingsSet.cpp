@@ -1,5 +1,6 @@
 /* Sets the current object's four setting bytes from the raw values (mode, level, id, extra). */
 #include "common.h"
+#include "util/CecSettingsSet.h"
 
 extern "C" {
 

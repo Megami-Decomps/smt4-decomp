@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern SmokeFadeState *g_smokeFadeState;
@@ -9,7 +10,6 @@ extern SmokeFadeImage g_smokeFadeImages[2];
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 s32 FUN_0023af68(u32);
 void smokeFadeDrawCallback(u32);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, s32 (*)(u32), void *, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void *textureGetIndexedResource(u32);
 void asdTMTexTableLoadTmx(u32, s32);
@@ -25,7 +25,7 @@ void smokeFadeInitialize(u32 first, u32 second)
     }
     SmokeFadeState *state = g_smokeFadeState;
     memset(state, 0, sizeof(*state));
-    state->job = asdProcessCreateSimple("SmokeFade Calc", 3, 0, 0, FUN_0023af68, NULL, NULL);
+    state->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SmokeFade Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0023af68), NULL, NULL);
     taskCreateDraw("SmokeFade DrawUpLeft", 134, 0, 0, smokeFadeDrawCallback, NULL, NULL, state->job);
     taskCreateDraw("SmokeFade DrawUpRight", 226, 0, 0, smokeFadeDrawCallback, NULL, NULL, state->job);
     state->frame = 0;

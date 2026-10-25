@@ -1,4 +1,4 @@
-/* NON_MATCHING: completion return block and white-fade initialization are laid out differently, adding two branches. */
+/* NON_MATCHING: block layout: retail places the shared `return 1` and the command-frame-zero arm between the two frameTextureGetState arms of the other branch; swapping the if/else order does not reproduce it. */
 #include "common.h"
 extern "C" {
 s32 scrGetArg(s32 index);
@@ -12,7 +12,7 @@ void FUN_0022677c(u32 screen, u32 color);
 
 u32 FUN_00314d18(void)
 {
-    s32 duration = scrGetArg(0);
+    s32 duration = scrGetArg(1);
     if (scrGetCommandFrame() == 0) {
         if (FUN_00203d74() && duration > 4)
             duration = 4;

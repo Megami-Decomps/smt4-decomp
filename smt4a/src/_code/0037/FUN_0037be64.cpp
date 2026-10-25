@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ extern int randRange(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-extern unsigned int FUN_0019acdc(short, unsigned int);
 /* Supplied declaration required: slotRecordFindById. */
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: gameDataCopySaveEntry. */
@@ -146,10 +146,10 @@ LAB_0037c020:;
       temp_v1 = psVar13[1];
       temp_v2 = *psVar13;
       if (temp_v1 != 0 && temp_v2 != 0) {
-        temp_v11 = FUN_0019acdc(temp_v2,0);
+        temp_v11 = FUN_0019acdc(temp_v2, 0);
         temp_v4 = FUN_0036fcd0(temp_v11,0);
         if (temp_v4 != temp_v2) {
-          temp_v11 = FUN_0019acdc(temp_v2,0);
+          temp_v11 = FUN_0019acdc(temp_v2, 0);
           temp_v5 = FUN_0036fcd0(temp_v11,0);
           temp_v11 = FUN_0019e52c(temp_v5);
           gameDataCopySaveEntry(temp_v1,temp_v20);
@@ -167,10 +167,10 @@ LAB_0037c020:;
       temp_v1 = psVar13[1];
       temp_v2 = *psVar13;
       if (temp_v1 != 0 && temp_v2 != 0) {
-        temp_v11 = FUN_0019acdc(temp_v2,0);
+        temp_v11 = FUN_0019acdc(temp_v2, 0);
         temp_v4 = FUN_0036fcd0(temp_v11,0);
         if (temp_v4 == temp_v2) {
-          temp_v17 = FUN_0019acdc(temp_v2,0);
+          temp_v17 = FUN_0019acdc(temp_v2, 0);
           temp_v17 = temp_v17 & 0xffff;
           gameDataCopySaveEntry(temp_v1,temp_v20);
           temp_v13 = 0;

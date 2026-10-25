@@ -1,6 +1,7 @@
 /* NON_MATCHING: corrected master growth offset0xA0, preserved unboosted HP, widened IDs and restored switch; affinity array base/zero register lifetime still differ. */
 #include "common.h"
 #include "gamedata/DevilRecordA.h"
+#include "font/SWin/SWin.h"
 
 // Demon record in the party/compendium format (0x12c bytes).
 struct DemonRecord {
@@ -65,7 +66,6 @@ extern "C" {
 void sysMemClear(void* data, u32 size);
 s8* gameGetSlotTable(void);
 void gameItemSetFlag(u32 id, s32 value);
-void FUN_002854d8(u32 id, s32 value);
 void gameDataCopySaveEntry(u32 id, SaveEntry* out);
 void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };

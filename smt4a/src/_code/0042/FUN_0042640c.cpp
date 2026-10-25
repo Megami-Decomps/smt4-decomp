@@ -1,4 +1,5 @@
 #include "common.h"
+#include "mobiclip_ctrl/helper_S4Player.h"
 
 extern "C" {
 

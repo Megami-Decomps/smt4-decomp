@@ -1,4 +1,5 @@
 #include "addon/SceneResource.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 SceneResource *_ZN7AocMenuD1Ev(SceneResource *resource);

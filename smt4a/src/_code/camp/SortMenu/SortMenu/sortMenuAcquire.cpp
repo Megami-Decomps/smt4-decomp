@@ -29,7 +29,6 @@ extern "C" {
 extern SortMenuSingleton g_useCounter;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void *sysMemClear(void *, u32);
-u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 s32 FUN_0022a0a0(u32);
 s32 FUN_0022a5d8(u32);
@@ -48,7 +47,7 @@ void sortMenuAcquire(u32 owner, u8 option)
         }
         SortMenuWork *work = g_useCounter.work;
         sysMemClear(work, sizeof(SortMenuWork));
-        work->calculate = asdProcessCreateSimple("SORT CALC", 4, 0, 0, FUN_0022a0a0, NULL, 0);
+        work->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>("SORT CALC"), 4, 0, 0, FUN_0022a0a0, NULL, 0);
         work->draw = taskCreateDraw("SORT DDRAW", 235, 0, 0, FUN_0022a5d8, NULL, 0, work->calculate);
         SortMenuWork *current = g_useCounter.work;
         paramsClearPacket(&current->parameters);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c9a8c` (_code @ 0x2c9a8c, 0xc80 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ int FUN_00228b04(...);
 int scrScriptProcessStartEntry(...);
 int ifTouchRegionAdd(int, int, int, int);
 int FUN_002a4894(...);
-int infoWinSetText(...);
 int infoWinSetTimer(...);
 int flaggedEntrySetValueA(...);
 int FUN_003450d4(...);
@@ -165,7 +165,7 @@ void FUN_002c9a8c(int param_1)
     if (temp_v20 != 0) {
       temp_v20 = FUN_0022e750();
       if ((temp_v20 != 0) && (*(char *)(temp_v19 + 0x8a) != '\0')) {
-        infoWinSetText(*(unsigned int *)(param_1 + 0x43a4),0xcc);
+        infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x43a4)), 0xcc);
         dialogOpen(1);
         infoWinSetTimer(0x3c);
         *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
@@ -486,7 +486,7 @@ LAB_002ca524:
   case 6:
     temp_v19 = scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x43a0));
     if (temp_v19 != 2) break;
-    infoWinSetText(*(unsigned int *)(param_1 + 0x43a4),0xcc);
+    infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x43a4)), 0xcc);
     dialogOpen(1);
     infoWinSetTimer(0x3c);
     temp_v19 = 2;

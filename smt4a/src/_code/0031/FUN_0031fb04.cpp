@@ -4,6 +4,7 @@
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include <stddef.h>
+#include "camp/Config/Config.h"
 
 /* The memory mapped for the loader thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -73,7 +74,6 @@ void FUN_002e3140(s32 result, bool failed);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
-s32 FUN_002e50d4(void);
 void FUN_00408184(s32 id, s32 value);
 void resourceOwnerReleaseAndReset(u32 registry);
 void uniteCameraDestroy(void);

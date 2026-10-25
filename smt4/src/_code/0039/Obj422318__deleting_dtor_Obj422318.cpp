@@ -28,7 +28,7 @@ void _ZN9Obj422318D0Ev(Obj422318 *self)
     }
     if (self->handle != 0) {
         asdMdlManagerMarkDestroy(self->handle);
-        asdMdlManagerDestroy(self->handle);
+        asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(self->handle));
         self->handle = 0;
     }
     asdMemFreeNonNull(self);

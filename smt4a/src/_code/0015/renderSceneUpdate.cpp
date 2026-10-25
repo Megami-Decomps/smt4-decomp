@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail uses a separate model-slot address point and retains a fixed-zero debug-dispatch test whose original hook is unknown. */
 #include "common.h"
+#include "util/SceneTraverserVisit.h"
 
 struct RenderSceneOwner {
     /* 0x00 */ u32 unk00;
@@ -42,7 +43,6 @@ extern RenderSceneLightState g_asdLightCount;
 extern void *g_renderCtx;
 void FUN_0017712c(RenderSceneOwner *owner, void *traverser, u32 mask, s32 enabled);
 void FUN_00197eb0(void *builderState, void *tree);
-void sceneTraverserVisit(void *traverser, void *builder);
 void FUN_00176800(RenderSceneOwner *owner, void *traverser, s32 enabled);
 void FUN_0018e9d8(void *builder, void *tree);
 void FUN_00176e84(RenderSceneOwner *owner, u32 mask, s32 mode, s32 flags);

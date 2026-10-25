@@ -1,10 +1,10 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 extern u32 g_aocDisplay;
 
-extern void memClear(void *buffer, s32 size);
 extern s32 FUN_002a6e7c(u32 a, s32 kind, u32 b, u8 *buffer);
 extern void aocDisplayQueueRecord(u32 display, u8 *buffer, u32 d, u32 c, s32 e, s32 size, s32 length);
 

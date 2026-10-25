@@ -1,5 +1,6 @@
 /* NON_MATCHING: 171 vs 177 rows: retail calls __aeabi_idivmod for `% count` (unit built -Ospace-style; needs a cflags trial from Main) and keeps the loop counters in different registers */
 #include "common.h"
+#include "gamedata/PlayerDataBlock.h"
 
 // Draw-state stack embedded in the title scene.
 struct DrawRing {
@@ -52,7 +53,6 @@ extern TitleScene* g_titleScene;
 
 LayoutEntry* FUN_002bf4f8(u32 group, u32 index);
 UnitStatus* gameGetUnitRecord(s32 unit);
-PlayerStatus* gameGetPlayerData(void);
 void messageKindForward(s32 icon, s32 x, s32 y, s32 kind);
 void FUN_0029a17c(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
@@ -79,7 +79,7 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
     s16 following = 0;
     u32 ailments;
     if (strip->member < 0) {
-        ailments = gameGetPlayerData()->ailments;
+        ailments = reinterpret_cast<PlayerStatus*>(gameGetPlayerData())->ailments;
     } else {
         ailments = gameGetUnitRecord(strip->member)->ailments;
     }

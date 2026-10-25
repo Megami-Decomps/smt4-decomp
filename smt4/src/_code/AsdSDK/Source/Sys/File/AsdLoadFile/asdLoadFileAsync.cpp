@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation only: retail keeps the path in r4 and the path-buffer pointer in r9, the built code swaps them */
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern const char DAT_00409814[]; /* __FILE__ */
@@ -8,7 +9,6 @@ extern const char DAT_00409800[]; /* "patch:/%s" */
 extern const char DAT_0040980c[]; /* "rom:/%s" */
 extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
-void memClear(void *buf, u32 size);
 s32 asdLoadFileHasDevice(const char *path);
 s32 asdLoadFileIsPatched(const char *path);
 s32 textFormatBuffer(char *dst, const char *format, ...);

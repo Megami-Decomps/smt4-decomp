@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fdde8` (_code @ 0x1fdde8, 0x1170 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "network/DataStore/DataStoreMain.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 
@@ -42,7 +44,6 @@ int statusPanelSetOpen(int);
 int FUN_002c85b0(...);
 int FUN_002f0384(...);
 int campPreviewSelectedEquipment(...);
-int objBStateAllowsAction(void);
 int FUN_003343d8(...);
 int FUN_0033449c(...);
 int objBSetWordByIndex(...);
@@ -88,7 +89,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0022e714(void);
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: campSelectorRebuildList. */
 extern int recordGetModeForId(int);
 /* Supplied declaration required: campShowSelectedEntryHelp. */

@@ -1,4 +1,5 @@
 #include "shard/Shard0037.h"
+#include "util/SysGetTableWord.h"
 
 extern "C" {
 

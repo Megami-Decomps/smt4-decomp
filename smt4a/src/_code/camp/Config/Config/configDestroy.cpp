@@ -4,10 +4,10 @@
 #include "camp/Config/Config.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-int asdMemFree(void *ptr);               /* heap free */
 int asdTMTexTableReleaseNode(int type, u32 node);
 int scrScriptProcessDestroy(u32 resource);
 int ifTouchRegionRemove(void);

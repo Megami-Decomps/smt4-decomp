@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail rebases the flag bank by +12 before the indexed byte access; armcc folds +12 into the final load/store instead. */
+/* NON_MATCHING: retail issues `cmp enabled, #0` right after the bit-index `and`; armcc schedules it after the flag-byte load. */
 #include "common.h"
 #include "quest_center/qcMain.h"
 
@@ -11,8 +11,10 @@ extern "C" void QcMain_SetFlag(u32 bit, s32 enabled)
         return;
     QcFlagBlock *block = gameGetQuestCenterBlock();
     u8 mask = 1 << (bit & 7);
+    u8 *flags = block->questFlags;
+    u8 *flag = &flags[bit >> 3];
     if (enabled)
-        block->questFlags[bit >> 3] |= mask;
+        *flag |= mask;
     else
-        block->questFlags[bit >> 3] &= ~mask;
+        *flag &= ~mask;
 }

@@ -26,8 +26,6 @@ s32 FUN_00162ea4();
 void *FUN_0014afd0(s32 table, s32 node);
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 extern const char DAT_0052f4fc[];
 extern const u8 DAT_0052f4ec[3]; // texture slot index of each anchor
 extern const s8 DAT_0052f4f0[];  // "EVE_2dTex"
@@ -82,7 +80,6 @@ u32 FUN_003c8fd4(u32 id)
         work->resourceState = 1;
     }
     work->speed = 0.26f;
-    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0,
-                                  FUN_002897cc, FUN_0034da3c, (u32)work);
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, (u32)work);
 }
 }

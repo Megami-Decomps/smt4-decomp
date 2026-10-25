@@ -1,10 +1,10 @@
 /* NON_MATCHING: inline collision-chain helper retains an extra candidate register and output pointer; registry base reload differs. */
 #include "gfx/CommandBufferHandles.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern AsdGfxContext g_asdGfxContext;
 extern CommandBufferHandleAllocator g_gfxAllocateCallback;
-void memClear(void *memory, u32 size);
 
 // Allocate command-buffer handles and insert them into the sorted hash registry.
 void FUN_001233d4(s32 count, u32 *handles)

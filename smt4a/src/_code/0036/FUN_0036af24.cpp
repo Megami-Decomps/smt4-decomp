@@ -13,7 +13,6 @@ extern MapMainA* g_mapMain;
 extern LmapSceneA* g_lmapScene;
 extern LmapTransitionView* g_lmapView;
 extern GameStateA g_gameState;
-void mapProbePositionDownward(MapVector* position);
 
 // Snapshot the current map and the requested destination for a transition.
 void FUN_0036af24(void)

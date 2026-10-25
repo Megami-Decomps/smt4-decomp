@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "Terminal/tmnlMain.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ s32 gameFlagIsSet(u32 flag);
 void messageStatesSetFirst(u32 state);
 void gameCounterAddSaturating(u32 counter, u32 amount);
 void FUN_00282bfc(u32 first, u32 second);
-u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay, void *onUpdate, void *onEnd, u32 work);
 u32 taskCreateDraw(const char *name, u16 priority, u32 workSize, void *update, void *draw, void *destroy, void *work, u32 value);
 void FUN_001d99c0(void);
 void tmnlOnComplete(void);
@@ -73,7 +73,7 @@ void FUN_001db0b8(const u32 *entry)
         work->unk10 = 1;
         FUN_00282bfc(0, 255);
     }
-    work->task = asdProcessCreateSimple("TMNL C", 2, 0, 0, (void *)FUN_001d99c0, (void *)tmnlOnComplete, 0);
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMNL C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_001d99c0), reinterpret_cast<AsdProcFunc>((void *)tmnlOnComplete), 0);
     taskCreateDraw("TMNL UD", 117, 0, 0, (void *)FUN_001fe23c, 0, 0, work->task);
     taskCreateDraw("TMNL UD", 211, 0, 0, (void *)FUN_002e0948, 0, 0, work->task);
     taskCreateDraw("TMNL DD", 231, 0, 0, (void *)FUN_0021f354, 0, 0, work->task);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/2dEvent/SmokeFade.h"
 
 struct SpriteTransitionWork {
     u32 unk000;
@@ -28,7 +29,6 @@ s32 vec2GetYInt(const void *motion);
 s32 vec2GetXInt(const void *motion);
 s32 uiSpriteGetCompletionState(const ObjectFlagState *state);
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
-s32 FUN_0023b3d0();
 
 // Start the panel sprite, track its motion and advance to the page's completion state.
 void panelUpdatePageExitTransition(SpriteTransitionWork *work)

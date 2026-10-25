@@ -3,12 +3,12 @@
 extern "C" {
 
 extern TitleScene *g_titleScene;
-extern void FUN_002c39a4(TitleScene *scene);
+extern void renderCtxSelectStereoLayout(TitleScene *scene);
 
 /* Updates the title scene and reports success. */
 s32 titleUpdateScene(void)
 {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     return 0;
 }
 

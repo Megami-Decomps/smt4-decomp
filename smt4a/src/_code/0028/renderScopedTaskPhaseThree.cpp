@@ -1,11 +1,11 @@
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32, f32);
 s32 FUN_001692ac(u32, u32);
-s32 packNibblesAndByte(u32, u32, u32);
 void taskRunPhase(u32);
 void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);

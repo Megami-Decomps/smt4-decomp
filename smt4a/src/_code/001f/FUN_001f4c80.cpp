@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail schedules the far/near vldr after `mov r1, #1`; ours emits them before it. */
 #include "common.h"
 #include "map/mapDepart.h"
+#include "task/TaskPasses.h"
 
 
 extern "C" {
@@ -17,7 +18,6 @@ u32 jobGetWork(u32 handle);
 void FUN_0036f0a0(void);
 void FUN_0014f0dc(JobCameraWork *camera, const MapVector *eye, const MapVector *target, const MapVector *up);
 void FUN_001523b8(JobCameraWork *camera, u32 pivot, f32 fovy, f32 nearZ, f32 farZ, f32 aspect);
-void taskUpdateOrderedPasses(u32 pass);
 
 /* Sets the work area camera to look from its eye at its target with a fixed perspective. */
 s32 FUN_001f4c80(u32 job)

@@ -7,7 +7,6 @@ extern "C" {
 extern MapMainA *g_mapMain;
 extern LmapSceneA *g_lmapScene;
 extern GameStateA g_gameState;
-void mapProbePositionDownward(MapVector *);
 
 void FUN_0036b004(void)
 {

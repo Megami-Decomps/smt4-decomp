@@ -2,6 +2,9 @@
 #include "classes/SelectionState.h"
 #include "classes/Obj55ca08.h"
 #include "classes/Obj4223ac.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "util/FUN_002c58c8.h"
 
 inline void *operator new(unsigned int, void *place) { return place; }
 
@@ -52,13 +55,11 @@ void FUN_003a45fc(void);
 void FUN_002637c8(void);
 void FUN_00282bfc(s32 channel, s32 value);
 void FUN_002a03d8(s32 a, s32 b);
-void FUN_002c58c8(s32 a, s32 b);
 s16 *FUN_002c0a2c(u8 kind, u32 sub);
 void uiInitializeEightTimerSet(void *timers);
 void rectangleInitializeSelection(SelectionRectangle *rectangle, s32 width, s32 a, s32 b);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
-void asdTMTexTableLoadSprites(s32 table);
 void questCenterSetFlag(s32 index, s32 value);
 void qcSetPersistentStateFlag(s32 index, s32 value);
 s32 bgmGetStateById(u32 id);

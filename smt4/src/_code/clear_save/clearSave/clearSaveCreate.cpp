@@ -1,11 +1,12 @@
 #include "clear_save/clearSave.h"
 #include "shard/W4_Match6_BibleScreen.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern ClearSaveWork *g_clearSave;
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
-void memClear(void *memory, u32 size);
 void fileSlotLoad(u32 slot);
 void FUN_002898e4();
 void buttonHelpCreate();
@@ -17,8 +18,6 @@ void FUN_00282bfc(s32 screen, s32 alpha);
 u32 FUN_001b10e4();
 u32 FUN_001e1418();
 void clearSaveDestroy();
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
-                            u32 (*update)(), void (*destroy)(), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
                    u32 (*draw)(), u32 destroy, void *work, u32 parent);
 
@@ -46,7 +45,7 @@ void clearSaveCreate(s32 mode)
         FUN_00282bfc(0, 0xFF);
         FUN_00282bfc(1, 0xFF);
     }
-    u32 process = asdProcessCreateSimple("clearSave C", 2, 0, 0, FUN_001b10e4, clearSaveDestroy, g_clearSave);
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("clearSave C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001b10e4), reinterpret_cast<AsdProcFunc>(clearSaveDestroy), reinterpret_cast<u32>(g_clearSave));
     work = g_clearSave;
     work->process = process;
     taskCreateDraw("clearSave L", 0x65, 0, 0, FUN_001e1418, 0, work, process);

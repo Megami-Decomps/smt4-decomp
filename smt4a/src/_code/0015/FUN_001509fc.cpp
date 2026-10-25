@@ -39,7 +39,7 @@ extern "C" {
 extern FrameTex *g_frameTex;
 extern RenderCtxA *g_renderCtx;
 
-s32 stateValuesGetBySelector(s32 selector);
+s32 stateValuesGetBySelector(u32 selector);
 s32 FUN_001692ac(u32 a, u32 b);
 f32 FUN_001a9698(f32 base, f32 exponent);
 void FUN_0016c4b8(RenderCtxA *context, FrameSurface *surface);

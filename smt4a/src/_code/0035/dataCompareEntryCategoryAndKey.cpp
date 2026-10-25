@@ -1,3 +1,4 @@
+#include "util/DataTable08Sub2GetRecord.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 
 // Sort categories ascending, then order each category by descending tie key.

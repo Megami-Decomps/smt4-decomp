@@ -1,10 +1,10 @@
 /* NON_MATCHING: message/process pointers exchange r6/r7 and script creation introduces one additional MOV. */
 #include "event/EventScriptScene.h"
+#include "battle/btlEvent.h"
 
 extern "C" {
 extern EventScriptGlobals DAT_0049fa1c;
 void FUN_0022b778();
-s32 scrRunOpcodesStub(ScriptRunState *process);
 void scrScriptProcessDestroy(ScriptRunState *process);
 void asdMemFree(void *allocation);
 void FUN_002bff50();

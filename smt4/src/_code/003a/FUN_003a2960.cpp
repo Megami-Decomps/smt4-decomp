@@ -19,7 +19,7 @@ struct ListPanel {
 extern "C" {
 u16 *gameGetPlayerData(void);
 s32 FUN_0029e924(void *list);
-s32 FUN_00240d5c(void *list);
+s32 flaggedEntryGetValueByState(void *list);
 void uiRectDrawAtBottomRight(void *rect, u32 style, s32 a, s32 b, u32 context);
 void FUN_00231bcc(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);
 void FUN_003a07a0(void *panel, u32 tab);
@@ -97,7 +97,7 @@ extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
     s32 top = FUN_0029e924(list);
     s32 rows = rangeLimitMin(list);
     for (s32 row = 0; row < rows; row++) {
-        if (!hasSlot || FUN_00240d5c(list) != row)
+        if (!hasSlot || flaggedEntryGetValueByState(list) != row)
             FUN_0022ea70(panel, row + 2, 0, values + (top + row) * 4);
     }
     s32 pending = 0;
@@ -105,9 +105,9 @@ extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
         pending = *reinterpret_cast<s32 *>(tabState + 0x888);
     if (hasSlot && pending != 0 && pending >= 0) {
         s32 total = flaggedValueHolderGetTotal(list);
-        FUN_0022ea70(panel, FUN_00240d5c(list) + 2, 1, values + total * 4);
+        FUN_0022ea70(panel, flaggedEntryGetValueByState(list) + 2, 1, values + total * 4);
     }
-    s32 last = FUN_00240d5c(list);
+    s32 last = flaggedEntryGetValueByState(list);
     s32 first = FUN_0029e924(list);
     PanelWidget *widget = *reinterpret_cast<PanelWidget **>(PANEL_AT(panel, 0x85C));
     FUN_002332e8(widget, first, last);

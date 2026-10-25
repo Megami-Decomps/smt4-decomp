@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d56dc` (_code @ 0x3d56dc, 0x34dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/mapRndMaze.h"
+#include "gamedata/FlagValueIsPositive.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 
@@ -261,7 +264,6 @@ extern unsigned long long runtimeShiftLeftWide(unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_002e738c. */
 extern int FUN_002ebce4(void);
 extern int recordValueIsZero(void);
-extern int FUN_002ef9f0(void);
 extern int FUN_002f153c(void);
 extern int uniteIsReady(void);
 /* Supplied declaration required: FUN_002f3bc4. */
@@ -293,7 +295,6 @@ extern int uiQuestGetActive(void);
 extern char uiQuestGetState(void);
 extern int uiQuestGetMode(void);
 /* Supplied declaration required: FUN_003423e8. */
-extern int overlayIsNotBusy(void);
 extern int FUN_0034919c(void);
 /* Supplied declaration required: FUN_003492dc. */
 extern int partyPanelIsActive(void);
@@ -363,7 +364,6 @@ extern unsigned char FUN_003e42f0(void);
 extern int loadSlotIsLoaded(unsigned int);
 extern int flagSetAllCoveredBy(unsigned int);
 /* Supplied declaration required: flag0CSet. */
-extern int flagValueIsPositive(unsigned int);
 extern int mapMainIsBusy(void);
 
 

@@ -23,7 +23,7 @@ void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
 void FUN_002c7e24(void);
 s32 FUN_002cad18(void);
 s32 partyPanelGetSelectedDemonId(void);
-s32 FUN_0022e714(void);
+s8 FUN_0022e714(void);
 s32 campCecHasObject(void);
 s32 FUN_002f1964(void);
 s32 gameFlagIsSet(u32 flag);

@@ -8,7 +8,7 @@ extern "C" {
 int textFormatBuffer(...);
 int drawTextAtSnappedRectangle(...);
 int efctSetSpeed(void);
-int FUN_0018349c(...);
+int layoutFindTableEntry(...);
 int drawTextAtRelativePosition(...);
 int FUN_004934ac(...);
 int FUN_0049368c(...);
@@ -40,7 +40,7 @@ extern unsigned char LAB_004983a0; /* 0x4983a0 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: drawTextAtSnappedRectangle. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0018349c. */
+/* Supplied declaration required: layoutFindTableEntry. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: FUN_004934ac. */
 /* Supplied declaration required: FUN_0049368c. */
@@ -80,10 +80,10 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     }
     VectorSignedToFloat(0x100 - temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     if (param_3 == 0) {
-      temp_v3 = FUN_0018349c(param_1 + 0x3a4,param_2 + 0x27);
+      temp_v3 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x27);
     }
     else {
-      temp_v3 = FUN_0018349c(param_1 + 0x3a4,param_2 + 0x4f);
+      temp_v3 = layoutFindTableEntry(param_1 + 0x3a4,param_2 + 0x4f);
     }
     temp_v7 = (int)*(short *)(temp_v3 + 8);
     temp_v3 = (int)*(short *)(temp_v3 + 10);
@@ -117,10 +117,10 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       temp_v8 = temp_v0;
     }
     if (param_3 != 0) {
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xe6);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xe6);
     }
     else {
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xd2);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xd2);
     }
     temp_v5 = *(short *)(temp_v4 + 8) + temp_v7;
     temp_v4 = *(short *)(temp_v4 + 10) + temp_v3;
@@ -148,7 +148,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       temp_v9 = 0xffffffff;
       temp_v10 = 0xd3;
     }
-    temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v10);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,temp_v10);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
     drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v11,temp_v9,temp_v6);
@@ -164,11 +164,11 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       }
       FUN_0049368c(param_1 + 0x3a4,temp_v9,temp_v7,temp_v3,temp_v2,1);
       if (param_3 != 0) {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xf1);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xf1);
         temp_v9 = 0xffffffff;
       }
       else {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xdd);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xdd);
         temp_v9 = 0x9b9b9bff;
       }
       temp_v0 = *(short *)(temp_v4 + 8);
@@ -178,10 +178,10 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     }
     else {
       if (param_3 != 0) {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xe8);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xe8);
       }
       else {
-        temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xd4);
+        temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xd4);
       }
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v4 = *(short *)(temp_v4 + 10) + temp_v3;
@@ -198,17 +198,17 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
         temp_v10 = 0xd5;
         temp_v9 = 0xffffffff;
       }
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v10);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,temp_v10);
       VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
       drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v11,temp_v9,temp_v6);
     }
     if (param_3 != 0) {
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xf4);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xf4);
       temp_v6 = 0x57d8ffff;
     }
     else {
-      temp_v4 = FUN_0018349c(param_1 + 0x3a4,0xe0);
+      temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,0xe0);
       temp_v6 = 0x9fddddff;
     }
     temp_v0 = *(short *)(temp_v4 + 8);
@@ -221,7 +221,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     else {
       temp_v9 = 0x101;
     }
-    temp_v4 = FUN_0018349c(param_1 + 0x3a4,temp_v9);
+    temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,temp_v9);
     drawTextAtRelativePosition(param_1 + 0x3a4,0,*(short *)(temp_v4 + 8) + temp_v7,*(short *)(temp_v4 + 10) + temp_v3,0,7,
                  temp_v6,temp_v2,&LAB_004983a0);
     if ((*(char *)(param_1 + 0x20) != '\0') && (temp_v4 = FUN_0049cab8(temp_v1), temp_v4 != 0)) {

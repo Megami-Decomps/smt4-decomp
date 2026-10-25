@@ -242,4 +242,13 @@ typedef char MessagePanelARemovalOffsetsCheck[
 typedef char MessageGlobalsSizeCheck[sizeof(MessageGlobals) == 0x10 ? 1 : -1];
 typedef char MessageGlobalsASizeCheck[sizeof(MessageGlobalsA) == 0xC ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_003e48dc(u32 id);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

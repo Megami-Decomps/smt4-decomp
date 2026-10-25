@@ -1,8 +1,9 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 
-int asdTMTexTableLoadSprites(int table);
 int FUN_002c58c8(int table, int index);
 
 extern struct {

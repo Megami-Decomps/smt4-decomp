@@ -12,7 +12,6 @@ void asdListBoxSetByteValue(u32 list, s32 value);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetIntItem(u32 list, s32 index, s32 value, s32 min, s32 max, s32 flags);
 void asdListBoxSetFloatItem(u32 list, s32 index, s32 min, s32 max, f32 value);
-ReserveEditorRecord *btlFindMarkedReserveRecord(BtlMainStateA *battle);
 s32 FUN_004d8688(u32 kind);
 
 extern const AsdListBoxEntry DAT_00572f60[];
@@ -32,7 +31,7 @@ void btlReserveEditorOpenList(ReserveEditorWork *work, BtlMainStateA *battle)
     asdListBoxAddItems(work->listBox, DAT_00572f60, 10);
     asdListBoxSetByteValue(work->listBox, 1);
     jobSetText(work->listBox, "btl EnemyModel Menu");
-    ReserveEditorRecord *record = btlFindMarkedReserveRecord(battle);
+    ReserveEditorRecord *record = reinterpret_cast<ReserveEditorRecord *>(btlFindMarkedReserveRecord(battle));
     if (record != NULL) {
         asdListBoxSetFloatItem(work->listBox, 2, -999, 999, record->position[0]);
         asdListBoxSetFloatItem(work->listBox, 3, -999, 999, record->position[1]);

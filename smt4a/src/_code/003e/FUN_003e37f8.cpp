@@ -1,5 +1,6 @@
 /* NON_MATCHING: shared script-entry symbol and cost/funds comparison now match; compiler places the shared substep-three store after the choice test instead of before it. */
 #include "common.h"
+#include "shard/Shard004A.h"
 
 /* The shop scene: its mode, substep, the script and the item list. */
 struct ShopScene {
@@ -33,7 +34,6 @@ void statusDownRestartTransition(void);
 void FUN_002c8538(s32 arg);
 void FUN_002c85b0(s32 arg);
 void FUN_00333dc8(s32 arg);
-void FUN_003343f0(s32 arg);
 void FUN_003e3a20(ShopScene *scene, void *item);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
 s32 padButtonIsPressed(u32 pad);

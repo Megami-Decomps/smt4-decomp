@@ -1,5 +1,7 @@
+#include "util/FUN_00233fcc.h"
 /* NON_MATCHING: retail's states return through the shared epilogue with different register assignment (process in r4, g_aocMain in r6), copies the polled five-word result through ldm/stm pairs and tests the 0x66/0x67 kinds with the removed-inline gotos of the original; this build lays the cases out differently. */
 #include "classes/AocMenu.h"
+#include "util/FUN_00233fcc.h"
 #include "common.h"
 
 struct AocMenuObject;
@@ -50,7 +52,6 @@ extern AocGlobals *g_aocMain;
 
 void timeInitializeActiveState(u32 *state);
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
-void *FUN_00233fcc(AocMenuObject *object, s32 kind);
 void FUN_00234124(AocMenuProcess *process, const AocResult *request);
 AocResult FUN_002341d4(AocGlobals *aoc);
 s32 strIsEmpty(u32 *record);

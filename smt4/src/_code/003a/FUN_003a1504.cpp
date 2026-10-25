@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation (retail keeps the state pointer in r5 and the scene in r4, and zero-extends the id with uxth before FUN_0029a084); the jump table
  * is a __switch$$ relocation in the build and raw words in retail. */
 #include "shard/S2Scene3a.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ extern void statusPanelSetOpen(s32 a);
 extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
 extern s32 contentGetEntryKind(u32 id);
 extern void FUN_0029a084(s32 kind, u16 id);
-extern s32 FUN_00295618(void);
 extern void gameGlobalsSetSelected(s32 a);
 extern void gameReleaseDataReference(void);
 extern void FUN_002305e8(s32 a);

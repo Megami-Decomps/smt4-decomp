@@ -18,8 +18,6 @@ extern "C" {
 
 extern SoundTestWork *g_requestWork;
 
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, u32 owner);
 s32 soundTestActionMenuUpdate(u32 handle);
@@ -39,8 +37,7 @@ void FUN_002a0a38(void)
     work->frame = 0;
     work->selection = 0;
     work->requested = 0;
-    work->job = asdProcessCreateSimple((const s8 *)"ST C", 4, 0, 0, soundTestActionMenuUpdate,
-                                       workRequest, 0);
+    work->job = asdProcessCreateSimple((const s8 *)"ST C", 4, 0, 0, soundTestActionMenuUpdate, workRequest, 0);
     taskCreateDraw((const s8 *)"ST D", 0xEA, 0, 0, FUN_0032affc, FUN_0037a114, 0, work->job);
 }
 

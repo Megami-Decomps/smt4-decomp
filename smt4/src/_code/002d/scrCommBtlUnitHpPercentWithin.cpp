@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail loads the constant 100 into r0 after the two halfword loads (smulbb r0,r2,r0); built keeps it in r2 beforehand. */
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct BtlUnit {
 extern u32 g_btlScriptUnit;
 
 extern s32 scrGetArg(s32 index);
-extern void scrSetResult(s32 value);
 
 /* Script command: pushes whether the script unit's HP percentage is at most argument 0; returns 1. */
 s32 scrCommBtlUnitHpPercentWithin(void)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: ARMCC clusters the switch instead of retail's dense 36-entry table and uses a smaller saved-register set. */
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 extern UniteWork *g_unite;
@@ -17,7 +18,6 @@ void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_002b8454(s32 first, s32 second, s32 third, s32 enabled);
-void FUN_002a0cc8(s32 enabled);
 void FUN_0029c424(s32 enabled);
 void timerStart(void *timer, s32 period, s32 value);
 

@@ -11,7 +11,7 @@ int forwardRecoveredCallback(void);
 int FUN_002be5a4(int, unsigned int, unsigned char [144]);
 int FUN_002c0944(unsigned int);
 int FUN_002c1b64(int, int);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int findKeyedRecord(int, int);
 int VectorSignedToFloat(int, int);
 
@@ -33,7 +33,7 @@ extern int dataTable2eSub2GetRecord(int);
 extern unsigned long long FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: findKeyedRecord. */
 
@@ -71,7 +71,7 @@ unsigned int FUN_0021ef10(void)
       (**(romwright_code **)(temp_v4 + 0x1268))(temp_v1);
       *(unsigned char *)(temp_v4 + 0x1264) = 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002c1b64(g_titleScene,0);
     FUN_002c0944(temp_v6);
     forwardRecoveredCallback();

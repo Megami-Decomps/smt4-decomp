@@ -19,7 +19,6 @@ extern const char DAT_0052c7d8[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 s32 FUN_0039a7ac(u32 process);
 s32 FUN_003bab24(u32 process);
-u32 asdProcessCreateSimple(const char *name, s32 group, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 
 // Acquire the phone background, creating its calculation and draw processes on the first reference.
@@ -32,7 +31,7 @@ void campCommonBgCreateCrazingSumaho()
         }
         CrazingBackgroundWork *work = g_commonBg.work;
         *work = CrazingBackgroundWork();
-        work->process = asdProcessCreateSimple(DAT_0052c828, 4, 0, NULL, FUN_0039a7ac, NULL, NULL);
+        work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052c828), 4, 0, NULL, FUN_0039a7ac, NULL, NULL);
         taskCreateDraw(DAT_0052c810, 238, 0, NULL, FUN_003bab24, NULL, NULL, work->process);
         work->x = 0.0f;
         work->y = 0.0f;

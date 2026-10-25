@@ -13,7 +13,7 @@ void menuSetModeAndResetTransitions(s32 mode);
 void FUN_0029e890(s32 first, s32 second);
 u32 FUN_002d96a4();
 void statusPanelSetOpen(s32 enabled);
-void FUN_0029e648(s32 first, s32 second);
+void messageBannerInitSelection(s32 first, s32 second);
 void messageTargetSetValue(s32 value, s32 mode);
 void FUN_0029ee6c(const char *text, u32 color);
 void uniteMenuChangeState(u32 state, s32 preservePrevious);
@@ -52,7 +52,7 @@ void FUN_002dabac(s32 index)
     FUN_0029e890(0, 0);
     statusPanelSetOpen(FUN_002d96a4() != static_cast<u16>(work->resultSelectionIV.selected.id));
     if (work->fusionPriceIV.cost > 0) {
-        FUN_0029e648(1, 0);
+        messageBannerInitSelection(1, 0);
         messageTargetSetValue(-work->fusionPriceIV.cost, 0);
     }
     FUN_0029ee6c(NULL, 0x323232ff);

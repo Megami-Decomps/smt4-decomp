@@ -2,6 +2,7 @@
 #include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
 #include "shard/Shard004B.h"
+#include "gamedata/PlayerDataBlock.h"
 
 static __inline bool recoveryUnitHasSkill(const UnitRecord *unit, u16 skill)
 {
@@ -14,7 +15,6 @@ static __inline bool recoveryUnitHasSkill(const UnitRecord *unit, u16 skill)
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-UnitRecord *gameGetPlayerData();
 s32 FUN_003df57c(u32 skill, u32 mode);
 s32 gameSlotTableFindFree();
 SlotTable *gameGetSlotTable();
@@ -26,9 +26,9 @@ u32 FUN_004a0404()
 {
     if (!gameFlagIsSet(0x401))
         return 0;
-    UnitRecord *player = gameGetPlayerData();
+    UnitRecord *player = reinterpret_cast<UnitRecord *>(gameGetPlayerData());
     if (recoveryUnitHasSkill(player, 0x8c)) {
-        player = gameGetPlayerData();
+        player = reinterpret_cast<UnitRecord *>(gameGetPlayerData());
         if (FUN_003df57c(0x8c, 1) < static_cast<s16>(player->unk2C))
             return 1;
     }

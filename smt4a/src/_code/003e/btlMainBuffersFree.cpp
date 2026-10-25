@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -17,8 +18,6 @@ typedef struct BtlMainState003ec580 {
     /* 0x4e48 */ void *buffer;
 } BtlMainState003ec580;
 
-void asdMemFree(void);
-
 extern BtlMainBuffers003ec580 g_btlMain; /* 0x573920 */
 
 /* Frees the battle's buffers: the shared ones too when releaseShared is set, then those of the battle state. */
@@ -26,28 +25,28 @@ void btlMainBuffersFree(BtlMainState003ec580 *state, s32 releaseShared)
 {
     if (releaseShared != 0) {
         if (g_btlMain.shared0 != NULL) {
-            asdMemFree();
+            asdMemFree(g_btlMain.shared0);
             g_btlMain.shared0 = NULL;
         }
         if (g_btlMain.shared1 != NULL) {
-            asdMemFree();
+            asdMemFree(g_btlMain.shared1);
             g_btlMain.shared1 = NULL;
         }
         if (g_btlMain.shared2 != NULL) {
-            asdMemFree();
+            asdMemFree(g_btlMain.shared2);
             g_btlMain.shared2 = NULL;
         }
     }
     if (g_btlMain.buffer18 != NULL) {
-        asdMemFree();
+        asdMemFree(g_btlMain.buffer18);
         g_btlMain.buffer18 = NULL;
     }
     if (g_btlMain.buffer1c != NULL) {
-        asdMemFree();
+        asdMemFree(g_btlMain.buffer1c);
         g_btlMain.buffer1c = NULL;
     }
     if (state->buffer != NULL) {
-        asdMemFree();
+        asdMemFree(state->buffer);
         state->buffer = NULL;
     }
 }

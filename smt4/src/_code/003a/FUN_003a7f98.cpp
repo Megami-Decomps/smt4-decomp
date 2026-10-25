@@ -1,10 +1,10 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
 int messageMainSetTargetFlags(int a);
 int buttonHelpGetMode(void);
-int FUN_002a0cc8(int a);
 int buttonHelpSetPreset(void);
 extern int scrRunOpcodesStub(u32 value);
 

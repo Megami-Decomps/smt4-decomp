@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b7430` (_code @ 0x3b7430, 0x524 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_004bcd90(short *);
 extern int gameGetPlayerData(void);
 extern short *gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003df7c4. */
-extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_004bcd90. */
 extern int bitsAt60Test(short *, unsigned int);
 

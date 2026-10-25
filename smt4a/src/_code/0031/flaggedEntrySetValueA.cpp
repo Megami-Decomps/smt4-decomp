@@ -1,4 +1,5 @@
 #include "shard/Shard0031.h"
+#include "gfx/TrackedRecord.h"
 
 extern "C" {
 

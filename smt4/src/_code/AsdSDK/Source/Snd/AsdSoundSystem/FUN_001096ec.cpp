@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001096ec` (_code @ 0x1096ec, 0x398 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_001216cc(unsigned char *, unsigned int, unsigned int);
 int FUN_00121824(unsigned char *, unsigned char *);
 int FUN_0012201c(unsigned char *, unsigned char *);
 int asdMemoryAllocAligned(...);
-int libc_strcpy(unsigned char *, unsigned int);
 int asdMemoryAlloc(...);
 int nw_snd_Sound3DActor_Initialize(...);
 int nw_snd_Sound3DActor_SetPosition(...);
@@ -103,7 +103,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   unsigned int temp_v6;
   unsigned char *temp_v7;
   
-  libc_strcpy(&DAT_004e23e4,param_1);
+  libc_strcpy(reinterpret_cast<unsigned int *>(&DAT_004e23e4), reinterpret_cast<unsigned int *>(param_1));
   temp_v0 = rt_memcmp(&DAT_004e23e4,&LAB_00109a88,4);
   if (temp_v0 != 0) {
     DAT_004e3184 = 1;

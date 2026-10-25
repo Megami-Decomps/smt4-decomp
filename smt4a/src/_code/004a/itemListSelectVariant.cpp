@@ -1,8 +1,8 @@
 #include "gamedata/SelectionValueRecord.h"
 #include "ui/ItemListSelection.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
-SelectionValueRecord *FUN_0026140c(void);
 void FUN_004a84e8(ItemListSelectionEntry *entry, s32 selection);
 
 // Select the item-list presentation variant, retaining its alternate-state bit.
@@ -11,7 +11,7 @@ void itemListSelectVariant(ItemListSelectionOwner *owner, s32 useAlternate, s32 
     if (owner->selection.value == 0) {
         return;
     }
-    u8 &variant = FUN_0026140c()->variant.flags;
+    u8 &variant = reinterpret_cast<SelectionValueRecord *>(FUN_0026140c())->variant.flags;
     s8 selection;
     switch (variant & 0x7F) {
     case 2:

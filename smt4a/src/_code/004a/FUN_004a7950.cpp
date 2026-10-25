@@ -2,7 +2,7 @@
  * stores the stacked arguments first (same instructions, different order). */
 #include "common.h"
 
-/* A layout part FUN_0018349c finds by id. */
+/* A layout part layoutFindTableEntry finds by id. */
 struct LayoutPart {
     /* 0x00 */ u8 unk00[8];
     /* 0x08 */ s16 x;
@@ -19,7 +19,7 @@ struct PercentWindow {
 
 extern "C" {
 s32 textFormatBuffer(char *output, const char *format, ...);
-LayoutPart *FUN_0018349c(void *layout, u32 partId);
+LayoutPart *layoutFindTableEntry(void *layout, u32 partId);
 void drawTextAtRelativePosition(void *layout, u32 drawContext, s32 x, s32 y, u32 option0, u32 option1,
                   u32 color, u32 alpha, const char *text);
 void FUN_004934ac(void *layout, u32 partId, u32 option0, u32 option1, u32 alpha);
@@ -36,9 +36,9 @@ void FUN_004a7950(PercentWindow *window, s32 value, u32 alpha)
     if (window->style == 'd') {
         color = 0x72e027ff;
     }
-    part = FUN_0018349c(window->layout, 0x40b);
+    part = layoutFindTableEntry(window->layout, 0x40b);
     drawTextAtRelativePosition(window->layout, 0, part->x, part->y, 0, 7, color, alpha, text);
-    part = FUN_0018349c(window->layout, 0x408);
+    part = layoutFindTableEntry(window->layout, 0x408);
     drawTextAtRelativePosition(window->layout, 0, part->x, part->y, 0, 0, color, alpha, "%");
 }
 }

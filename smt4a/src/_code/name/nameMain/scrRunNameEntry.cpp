@@ -1,4 +1,5 @@
 #include "name/nameMain.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern NameGlobals g_name;
@@ -10,7 +11,6 @@ void *jobFind(u32 job);
 void asdMemFree(void *memory);
 const u16 *gameDataGetPlayerName(void);
 const u16 *gameBlockGetArea221AA(void);
-void FUN_003180c4(u32 slot, const u16 *text);
 void sysPlaySe(u32 sound);
 
 // Start name entry once, wait for completion and return its chosen name to the script.
@@ -46,10 +46,10 @@ u32 scrRunNameEntry(void)
     }
     switch (mode) {
     case 1:
-        FUN_003180c4(0x33, gameDataGetPlayerName());
+        FUN_003180c4(0x33, reinterpret_cast<const char *>(gameDataGetPlayerName()));
         break;
     case 2:
-        FUN_003180c4(0x33, gameBlockGetArea221AA());
+        FUN_003180c4(0x33, reinterpret_cast<const char *>(gameBlockGetArea221AA()));
         break;
     }
     g_name.status.active = 0;

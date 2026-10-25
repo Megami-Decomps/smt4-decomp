@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail push {r4, r5, r6, r7, r8, lr} differs from recovered push {r4, r5, r6, r7, lr}. */
 #include "common.h"
+#include "util/MsgBoxFlagsSetBit7.h"
 
 // Private views of the message state used by this function.
 namespace {
@@ -31,7 +32,6 @@ u32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 u32 FUN_002866b4(u32 message, u32 argument, s32 frame,
                  s32 mode, s32 option0, s32 option1);
-void msgBoxFlagsSetBit7(u32 messageBox);
 
 // Show the confirmation message and clear the saved message state on its first frame.
 u32 scrComm_Message_ShowConfirmAndClear(void)
@@ -52,7 +52,7 @@ u32 scrComm_Message_ShowConfirmAndClear(void)
     u32 result = FUN_002866b4(message, argument, frame, 6, 0, 0);
 
     if (scrGetCommandFrame() == 0) {
-        msgBoxFlagsSetBit7(savedState->unk04);
+        msgBoxFlagsSetBit7(reinterpret_cast<void *>(savedState->unk04));
         savedState->unkA10 = 0;
         savedState->unk0C |= 0x20;
     }

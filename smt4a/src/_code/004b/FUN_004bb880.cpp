@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail clears the second byte of each entry with a read-modify-write (`ldrb; bic r1, r1, #255; strb`, a bitfield-style store) and forms the second offset with `orr`; armcc emits two plain byte stores. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 #include <stddef.h>
 
 extern "C" {
@@ -18,16 +19,14 @@ typedef struct SaveData {
 } SaveData;
 
 extern SaveData *gameDataBlocksGetSaveData(void);
-extern u32 dataTableGet(u32 table, u32 index);
-extern s32 dataTableGetCount(u32 table);
-extern u8 *dataTableGetEntries(void *table);
+
 extern s32 FUN_00148d68(u32 a, u32 b, s32 c);
 
 /* Clears the first and second byte of every save entry of the table and applies each (a, b) pair. */
 void FUN_004bb880(void)
 {
-    u32 table = dataTableGet(2, 3);
-    u8 *pairs = dataTableGetEntries(reinterpret_cast<void *>(table));
+    void *table = dataTableGet(2, 3);
+    u8 *pairs = static_cast<u8 *>(dataTableGetEntries(table));
     s32 count = dataTableGetCount(table);
     SaveData *save = gameDataBlocksGetSaveData();
     s32 i;

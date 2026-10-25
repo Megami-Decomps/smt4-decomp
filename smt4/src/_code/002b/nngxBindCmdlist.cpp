@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nngxBindCmdlist` (_code @ 0x2bef70, 0x158 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(unsigned int *, int);
 
 typedef int romwright_code(...);
 extern romwright_code *g_gfxAllocateCallback; /* 0x44e330 */
@@ -40,7 +40,7 @@ void nngxBindCmdlist(unsigned int param_1,unsigned int param_2,unsigned int para
       param_3 = 0;
       puVar4 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x44);
     }
-    memClear(puVar4,0x44);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar4), 0x44));
     puVar4[0xb] = 0x300;
     *puVar4 = param_1;
     puVar3 = *(unsigned int **)(temp_v0 + 0x4c62ac);

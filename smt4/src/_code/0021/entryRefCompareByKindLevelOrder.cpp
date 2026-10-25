@@ -8,14 +8,14 @@ typedef struct SortEntry {
     /* 0x26 */ u16 level;
 } SortEntry;
 
-extern SortEntry *FUN_002ae584(u32 id);
+extern SortEntry *appCostRecordFindById(u32 id);
 extern s32 appCheckPurchaseRequirements(u32 id);
 
 /* Comparator: entries of kind 2 sort first; then by level and by order, both descending. */
 s32 entryRefCompareByKindLevelOrder(u32 *a, u32 *b)
 {
-    SortEntry *entryA = FUN_002ae584(*a);
-    SortEntry *entryB = FUN_002ae584(*b);
+    SortEntry *entryA = appCostRecordFindById(*a);
+    SortEntry *entryB = appCostRecordFindById(*b);
     s32 kindA = appCheckPurchaseRequirements(*a);
     s32 kindB = appCheckPurchaseRequirements(*b);
     s32 diff;
@@ -29,8 +29,8 @@ s32 entryRefCompareByKindLevelOrder(u32 *a, u32 *b)
     }
     diff = entryB->level - entryA->level;
     if (diff == 0) {
-        entryA = FUN_002ae584(*a);
-        entryB = FUN_002ae584(*b);
+        entryA = appCostRecordFindById(*a);
+        entryB = appCostRecordFindById(*b);
         diff = entryB->order - entryA->order;
     }
     return diff;

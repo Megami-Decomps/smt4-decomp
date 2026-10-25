@@ -1,5 +1,6 @@
-/* NON_MATCHING: only the compiler's handling of the two record-selection tails differs: retail copies the `wide` flag into a fresh register per path before the lookup, returns from `(id < count) ? ... : records` with conditional moves and pops directly; the build shares a branch tail. */
+/* NON_MATCHING: the two inlined record lookups now match retail; armcc numbers the entry id/wide copies r5/r6 where retail uses r4/r6 (wide copied before the id byte load). */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -12,48 +13,37 @@ extern u32 g_aocSystem; /* 0x570280 */
 
 extern AocEntry *FUN_00184310(void);
 extern u8 *FUN_0017607c(u32 system, u32 id);
-extern u32 dataTableGet(u32 table, u32 index);
-extern u8 *dataTableGetEntries(void);
-extern u32 dataTableGetCount(u32 table);
+
+/* The add-on record data + 2 when the system has some for `id`, else the table record for `id`; `wide` selects its second half (+0x10). */
+static __inline u8 *aocRecordData(u32 id, int wide)
+{
+    u8 *result = FUN_0017607c(g_aocSystem, id);
+
+    if (result == NULL) {
+        void *table = dataTableGet(1, 0);
+        u8 *records = (u8 *)dataTableGetEntries(table);
+        u32 count = dataTableGetCount(table);
+
+        if (id < count) {
+            records = records + id * 0x30;
+            if (wide != 0) {
+                return records + 0x10;
+            }
+        }
+        return records;
+    }
+    return result + 2;
+}
 
 /* Returns the add-on entry's table record, or the system's own data + 2 when it has some; `wide` selects the record's second half (+0x10). */
 u8 *FUN_0014bf3c(int unused, int wide)
 {
     AocEntry *entry = FUN_00184310();
-    u8 *result;
-    u32 id;
-    u32 table;
-    u8 *records;
-    u32 count;
 
     if (entry != NULL) {
-        id = entry->id;
-        result = FUN_0017607c(g_aocSystem, id);
-        if (result == NULL) {
-            table = dataTableGet(1, 0);
-            records = dataTableGetEntries();
-            count = dataTableGetCount(table);
-            if (id < count) {
-                records = records + id * 0x30;
-                if (wide != 0) {
-                    return records + 0x10;
-                }
-            }
-            return records;
-        }
-    } else {
-        result = FUN_0017607c(g_aocSystem, 0);
-        if (result == NULL) {
-            table = dataTableGet(1, 0);
-            records = dataTableGetEntries();
-            count = dataTableGetCount(table);
-            if (count != 0 && wide != 0) {
-                return records + 0x10;
-            }
-            return records;
-        }
+        return aocRecordData(entry->id, wide);
     }
-    return result + 2;
+    return aocRecordData(0, wide);
 }
 
 } /* extern "C" */

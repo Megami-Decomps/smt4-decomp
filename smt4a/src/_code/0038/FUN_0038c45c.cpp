@@ -3,11 +3,11 @@
 #include "gamedata/BattleUnitSkills.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "util/RecordGetScaledMaximum.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
-s32 recordGetScaledMaximum(BtlUnitRecordA *record);
 void scrSetResult(s32 value);
 
 /* Report an eligible combatant whose maximum HP does not exceed its source maximum. */

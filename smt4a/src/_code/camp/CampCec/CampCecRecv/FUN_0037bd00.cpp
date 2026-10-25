@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail hoists the NULL stored into g_campCecRecv into r6 at entry (`mov r6, #0`); otherwise identical. */
 #include "camp/CampCec/CampCecRecv.h"
+#include "gamedata/DataTableSections.h"
 
 extern "C" {
 
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(void *process);
-void dataTableFree(s32 table);
 void btlTalkBustUpDestroy(void);
 void runWinDestroy(void);
 void handleArray10Free(void *handles);

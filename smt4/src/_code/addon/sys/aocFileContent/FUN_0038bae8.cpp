@@ -17,7 +17,6 @@ void asdMemFree(void *buffer);
 u32 FUN_003550f4(u32 *size, u32 kind, u32 id, s32 first, s32 second, s32 flags);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 void *jyoucyuGetTableEntry(s32 index);
-s32 FUN_002ad1e0(AocObjB *object);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 mode);
 void rt_memclr(void *buffer, u32 size);
 void textFormatBuffer(char *output, const char *format, ...);

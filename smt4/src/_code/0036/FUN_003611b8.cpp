@@ -1,12 +1,12 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(u32 ptr, int size);
 
 void FUN_003611b8(u32 block)
 {
-    memClear(block, 0xb2c8);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(block), 0xb2c8));
 }
 
 } /* extern "C" */

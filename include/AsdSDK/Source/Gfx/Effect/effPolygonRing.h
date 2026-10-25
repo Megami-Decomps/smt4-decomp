@@ -24,4 +24,13 @@ typedef struct PolyRingWork {
     /* 0x3C */ u8 flag;           /* sets bit 0x100 of the geometry's draw flags */
 } PolyRingWork;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 effGetFrameCounter(void);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

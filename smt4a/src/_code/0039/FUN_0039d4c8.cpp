@@ -1,11 +1,11 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(u32);
 u32 btlResolveEntryChoice(s32);
-void FUN_00301a08(u32, s32 *, s32 *);
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 void scrSetResult(s32);

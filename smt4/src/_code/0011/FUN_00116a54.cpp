@@ -22,7 +22,7 @@ int FUN_002bf288(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
 int FUN_002c1b64(...);
-int FUN_002c39a4(unsigned int);
+int renderCtxSelectStereoLayout(unsigned int);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
@@ -63,7 +63,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -112,7 +112,7 @@ char FUN_00116a54(void)
   }
   temp_v5 = asdTMTexTableCallFileB(0xe,0);
   FUN_002c1b64(g_titleScene,*(unsigned int *)(temp_v5 + 8));
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   switch(*(unsigned char *)(temp_v4 + 9)) {
   case 0:
   case 1:

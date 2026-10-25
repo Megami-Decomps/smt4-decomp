@@ -3,6 +3,7 @@
 #include "font/SearchWin/SearchWin.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern SearchWinWork *DAT_0057f584;
@@ -20,8 +21,6 @@ u32 FUN_0023a9a0(void *work);
 u32 FUN_0023a5f8(void *work);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
 void sysMemClear(void *memory, u32 bytes);
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, void *work,
-    u32 (*callback)(void *), u32 argument, u32 parent);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, void *work,
     u32 (*callback)(void *), u32 argument, u32 target, u32 parent);
 void paramsClearPacket(void *packet);
@@ -44,7 +43,7 @@ void FUN_00333318(void)
     }
     SearchWinWork *window = DAT_0057f584;
     sysMemClear(window, sizeof(*window));
-    window->job = asdProcessCreateSimple(DAT_0052fdd8, 3, 0, NULL, FUN_0023a9a0, 0, 0);
+    window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052fdd8), 3, 0, NULL, reinterpret_cast<AsdProcUpdateFunc>(FUN_0023a9a0), 0, 0);
     taskCreateDraw(DAT_0052fdc0, 0x86, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
     taskCreateDraw(DAT_0052fda8, 0xE2, 0, NULL, FUN_0023a5f8, 0, 0, window->job);
     SearchWindowRenderView *render = reinterpret_cast<SearchWindowRenderView *>(window);

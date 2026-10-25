@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail hoists the constant 1 into a register (so 0x105 becomes `add sl, r8, #260`) and keeps the zeroing of the file words interleaved with the call setup; stream class and VTT construction match. Needs _ZTT9Obj420c60 rename applied. */
 #include "classes/Obj420c60.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct MbState {
     u32 a, b;
 };
 
 extern "C" {
-void memClear(void *block, u32 bytes);
 s32 asdLoadFileIsPatched(const char *name);
 s32 textFormatBuffer(char *output, const char *format, ...);
 u32 refIsNullOrZero(s32 *object);

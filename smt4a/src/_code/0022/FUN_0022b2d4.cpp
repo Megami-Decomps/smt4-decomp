@@ -3,6 +3,9 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "util/PackNibbles.h"
+#include "map/mapRndMaze.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 
@@ -20,7 +23,6 @@ int FUN_00180310(...);
 int FUN_00183788(...);
 int FUN_00185e84(...);
 int renderCtxCalculateStereoParallax(...);
-int FUN_0019acdc(...);
 int jobGetScalarValue(void);
 int FUN_0022e9c8(void);
 int compareWithFeedbackColor(...);
@@ -119,7 +121,6 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -145,7 +146,6 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_0026264c(unsigned short);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: devilDrawResolvedTexture. */
-extern int FUN_002ef9f0(void);
 extern int valueAtMostFifthOfTotal(unsigned char *, unsigned char *);
 extern unsigned int heldAmountLessThan(int, int);
 extern int FUN_0031e6d4(void);
@@ -590,7 +590,7 @@ LAB_0022b9b8:
             temp_v3 = FUN_003e4d68(temp_v14 & 0xffff);
             temp_v10 = (unsigned int)((unsigned long long)temp_v22 >> 0x20);
             if (((*(unsigned int *)(temp_v3 + 0x130) & 1) != 0) && (*(short *)(temp_v3 + 0x62) == temp_v1)) {
-              FUN_0019acdc(*(unsigned short *)(temp_v3 + 300),0);
+              FUN_0019acdc(*(unsigned short *)(temp_v3 + 300), 0);
               temp_v3 = FUN_003453b0();
               if (temp_v3 != 0) {
                 temp_v24 = 3.09687e-43f;
@@ -1526,7 +1526,7 @@ LAB_0022e46c:
     if (temp_v21 < *(float *)(temp_v28 + 0x294)) {
       efctSetSpeed();
       temp_v2 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,1,0);
+      temp_v4 = packNibblesAndByte(6, 1, 0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1537,7 +1537,7 @@ LAB_0022e46c:
       temp_v24 = 3.09687e-43f;
       FUN_001835b4(2,0x12,0xc6,temp_v27[5],0);
       temp_v2 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,7,0);
+      temp_v4 = packNibblesAndByte(6, 7, 0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1550,7 +1550,7 @@ LAB_0022e46c:
     if (temp_v21 < *(float *)(temp_v28 + 800)) {
       efctSetSpeed();
       temp_v2 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,1,0);
+      temp_v4 = packNibblesAndByte(6, 1, 0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1561,7 +1561,7 @@ LAB_0022e46c:
       temp_v24 = 3.09687e-43f;
       FUN_001835b4(2,0x12,0xc6,temp_v27[5],0);
       temp_v2 = g_renderCtx;
-      temp_v4 = packNibblesAndByte(6,7,0);
+      temp_v4 = packNibblesAndByte(6, 7, 0);
       piVar19 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar19[*piVar19 + 2];
       piVar19[*piVar19 + 2] = temp_v4;
@@ -1583,7 +1583,7 @@ LAB_0022e46c:
     *(unsigned char *)(temp_v2 + 0x1270) = 0;
   }
   temp_v2 = g_renderCtx;
-  temp_v4 = packNibblesAndByte(6,7,0);
+  temp_v4 = packNibblesAndByte(6, 7, 0);
   piVar19 = (int *)(temp_v2 + 0x12b8);
   temp_v3 = piVar19[*piVar19 + 2];
   piVar19[*piVar19 + 2] = temp_v4;

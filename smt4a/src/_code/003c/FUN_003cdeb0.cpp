@@ -1,6 +1,7 @@
 /* NON_MATCHING: live entry-ID reloads restore retail stat/helper argument handling; cursor/row spills occupy a larger frame and empty-slot coordinate/pool scheduling still differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 /* Position record of an icon in the icon table (only the screen position). */
 struct SlotIconPosition {
@@ -31,7 +32,6 @@ void efctSetSpeed(f32 speed);
 void largeGridDrawButtonStrip(SlotListScreen *screen, s32 x, s32 y, s32 row, f32 scale);
 s32 recordGetModeForId(s32 id);
 s32 arrayContainsU16(const u16 *array, s32 count, u16 value);
-u32 FUN_0014bd84(u16 id);
 void textFormatBuffer(char *output, const char *format, ...);
 void FUN_00162790(s32 mode, u32 color, const char *text, f32 x, f32 y, f32 z, f32 w, f32 scale);
 void FUN_00185e84(s32 id, s32 x, s32 y, s32 style, s32 a, s32 b);

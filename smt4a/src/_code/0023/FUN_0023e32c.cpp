@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/DataTable.h"
 #include "shard/Shard0032.h"
+#include "map/lmapMain.h"
 
 namespace {
 struct PartySlotIndexView { u8 prefix[0x1C88]; s8 slots[24]; };
@@ -15,7 +16,6 @@ static inline u16 saveRequirementFlags(const SavedUnitRecordA &saved)
 }
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
-u32 gameDataCopySaveEntry(u32 id, SavedUnitRecordA *destination);
 PartySlotIndexView *gameGetSlotTable();
 BattleSlotSourceRecordA *gameGetSlotRecord(s32 index);
 u32 randRange(u32 maximum);

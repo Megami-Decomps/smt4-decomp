@@ -24,4 +24,13 @@ typedef struct CampCecSetting {
     /* 0x41 */ u8 unk41[3];
 } CampCecSetting;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u8 campCecSettingExists(void);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

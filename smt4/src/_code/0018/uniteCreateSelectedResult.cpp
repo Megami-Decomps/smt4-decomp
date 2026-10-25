@@ -72,7 +72,7 @@ int FUN_003c92b8(void* context, u32 firstId,
 int partyFindActiveSlotById(u32 id);
 void FUN_0029bbc8(int slot);
 void* partyFindFreeStockSlot();
-int FUN_0029ea68(u32 id);
+int itemGetFlagBit1(u32 id);
 void FUN_0029c1c8(void* object, u32 id, int mode);
 void uniteMergeInheritedSkillsAndStats(void* context, PartyMemberView* first,
                  PartyMemberView* second, int mode, PartyMemberView* result);
@@ -136,7 +136,7 @@ extern "C" int uniteCreateSelectedResult(u32 selectionIndex)
         FUN_0029bbc8(partyFindActiveSlotById(second.id));
 
     void* object = partyFindFreeStockSlot();
-    const bool needsNotification = FUN_0029ea68(selection->resultId) == 0;
+    const bool needsNotification = itemGetFlagBit1(selection->resultId) == 0;
     FUN_0029c1c8(object, selection->resultId, 0);
 
     PartyMemberView* member;

@@ -1,9 +1,12 @@
 /* NON_MATCHING: -O2 preserves argument registers but omits retail's native NOP at0x3c; default rematerializes command9, changes the save set and leaves two NOPs. */
 #include "common.h"
+#include "script/ScriptArgs.h"
+#include "util/ScrGetCommandFrame.h"
+#include "util/ScrGetCommandFrame.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-s32 scrGetCommandFrame(void);
 u32 jobGetWork(u32 job);
 void FUN_002a880c(u32 work, u32 command, s32 frames);
 

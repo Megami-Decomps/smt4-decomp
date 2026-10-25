@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/AsdFileRequestHasFailed.h"
 
 extern "C" {
 

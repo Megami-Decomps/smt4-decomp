@@ -1,14 +1,14 @@
 #include "gamedata/SelectionValueRecord.h"
 #include "shard/Shard0034.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
-SelectionValueRecord *FUN_0026140c(void);
 PlayerData *gameGetSlotRecord(s32 slot);
 
 // Select a valid stored value, resolving slot-backed values through the party record.
 s32 selectionGetValidatedField(u32 selector)
 {
-    SelectionValuePayload *values = &FUN_0026140c()->values;
+    SelectionValuePayload *values = &reinterpret_cast<SelectionValueRecord *>(FUN_0026140c())->values;
     switch (selector) {
     case 0:
         if (values->slot >= 0) {

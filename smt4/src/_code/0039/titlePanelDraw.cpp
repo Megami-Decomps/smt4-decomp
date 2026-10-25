@@ -26,7 +26,7 @@ extern "C" {
 
 extern RenderCtx *g_titleScene;
 
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *vector);
@@ -41,7 +41,7 @@ void FUN_002c18e4(RenderCtx *context);
 // Draws the panel: its frame and its one or two elements, then the animated body at the panel's frame.
 void titlePanelDraw(TitlePanel *panel)
 {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002bed3c();
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
     FUN_002c1b64(g_titleScene, 0);

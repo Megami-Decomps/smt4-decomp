@@ -57,7 +57,7 @@ struct PassiveSkill {
 
 extern ResultTotals *g_result;      /* 0x44dc20 */
 
-s32 dataTable09Sub3GetRecord(u8 table, s32 level);
+u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 PassiveSkill *passiveSkillLookupRecord(u32 skill);
 s32 playerPadTestBit(u32 bit);
 s32 flagWordTestBit(UnitRecord *record, u32 bit);

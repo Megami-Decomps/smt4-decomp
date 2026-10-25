@@ -1,6 +1,8 @@
 /* NON_MATCHING: Refresh-result registers, count-store scheduling and retail's unused panel-call arguments differ. */
 #include "common.h"
 #include <stddef.h>
+#include "camp/CommonBg/CommonBg.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct PartyPanelRecord {
     u8 unk00[0x38];
@@ -47,7 +49,6 @@ typedef char PartyPanelRefreshLayoutCheck[
     offsetof(PartyPanelRefreshWork, refresh) == 0x126 &&
     offsetof(PartyPanelRefreshWork, extraIndex) == 0x148 ? 1 : -1];
 extern "C" {
-void memClear(void *data, u32 size);
 PartyPanelRecord *FUN_002bd2b4(PartyPanelRecord *record, s32 unit, u8 kind, s32 index);
 void FUN_002597c0(void);
 void cecProcessForward(PartyPanelRecord *record);
@@ -57,7 +58,6 @@ void uiDrawRecordNameLabels(void *labels, PartyPanelRecord *record);
 void FUN_002595e0(PartyPanelRecord *record);
 void linkHolderApplyFlag(void *link, s32 flag);
 s32 partyPanelExists(void);
-s32 FUN_0028a318(void);
 
 /* Rebuilds the displayed party record, resets its animations and requests another refresh if selection changed. */
 u32 FUN_002fc7a0(PartyPanelRefreshWork *work)

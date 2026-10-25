@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b7e20` (_code @ 0x4b7e20, 0x3dc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
-int infoWinSetText(...);
 int FUN_004b726c(...);
 
 int textFormatBuffer(unsigned char [32], unsigned char *, int);
@@ -198,8 +198,7 @@ void FUN_004b7e20(int param_1)
       DAT_0058800c = 0;
       FUN_002bf4f4(1);
       dialogOpen(0);
-      infoWinSetText(*(unsigned int *)(param_1 + 0x113c),
-                   *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
+      infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f));
       return;
     }
     if (temp_v2 == 0x1f) {
@@ -229,7 +228,7 @@ void FUN_004b7e20(int param_1)
   *(unsigned int *)(param_1 + 0x2c) = 0;
   *(unsigned int *)(param_1 + 0x28) = 5;
   dialogOpen(0);
-  infoWinSetText(*(unsigned int *)(param_1 + 0x113c),*(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
+  infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x113c)), *(unsigned char *)(*(int *)(param_1 + 0x1118) + 0x3f))
   ;
   DAT_0058800c = 0;
   *(unsigned char *)(param_1 + 0xa8a) = 0;

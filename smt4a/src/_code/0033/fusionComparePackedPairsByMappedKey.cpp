@@ -4,7 +4,6 @@
 
 extern "C" {
 extern UniteWork *g_unite;
-s32 dataTableGetEntry0102Value(u16 id);
 }
 
 static inline s32 compareFusionPairMember(u16 first, u16 second)

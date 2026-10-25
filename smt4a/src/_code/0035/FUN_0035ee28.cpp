@@ -1,11 +1,11 @@
 /* NON_MATCHING: first group-output stack slot and excluded-mask load pairing differ. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(s32);
 s32 btlResolveEntryChoice(s32);
-void FUN_00301a08(s32, u32 *, u32 *);
 void scrSetResult(s32);
 s32 FUN_003eaf20(BattleMaskState *);
 
@@ -16,7 +16,7 @@ u32 FUN_0035ee28(void)
     s32 group = btlResolveEntryChoice(scrGetArg(1));
     u32 first, count;
     s32 eligible = 0;
-    FUN_00301a08(group, &first, &count);
+    FUN_00301a08(group, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < (s32)(first + count); ++index) {
         u64 mask = btlGetMainState()->entryView.entries[index].mask;
         if (!(mask & g_btlCandidateMasks.unavailable) &&

@@ -1,5 +1,6 @@
 /* NON_MATCHING: coupled touch handles now share a pair base and the native touch count gets its own pointer; count stores, selected-halfword addressing and argument scheduling still differ. */
 #include "ui/ButtonHelp.h"
+#include "ui/UiSpriteState.h"
 
 union HelpRegistrationViewA {
     ButtonHelpWorkA base;
@@ -14,7 +15,6 @@ union HelpRegistrationViewA {
 };
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;
-void uiSpriteSelectAnim(ButtonHelpUnit *unit, s32 animation);
 u16 FUN_0019d890(u32 group, s32 sprite);
 void FUN_001a90e0(void *pair);
 }

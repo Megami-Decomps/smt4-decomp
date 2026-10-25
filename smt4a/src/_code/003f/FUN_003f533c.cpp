@@ -1,10 +1,10 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: digit/coordinate saved registers and formatted-text stack argument scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
 SpriteInfo* FUN_001834a4(u32 table, u32 id);

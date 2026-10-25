@@ -77,7 +77,7 @@ extern int randBetween(unsigned int, int);
 /* Supplied declaration required: unitRecalculateEffectiveStats. */
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: dataTable06Sub1GetRecord. */
-extern int FUN_0029ea68(unsigned short);
+extern int itemGetFlagBit1(unsigned short);
 /* Supplied declaration required: FUN_002a03d8. */
 extern int gameGetUnitRecord(int);
 extern int gameGetSlotTable(void);
@@ -199,7 +199,7 @@ unsigned int FUN_001ebedc(int param_1)
       FUN_0029bbc8(*(short *)(param_1 + 0x126));
       temp_v2 = (int)*(char *)(temp_v7 + temp_v9 + 0x90f0);
       *(unsigned char *)(temp_v7 + temp_v9 + 0x90f0) = 0xff;
-      temp_v7 = FUN_0029ea68(temp_v1);
+      temp_v7 = itemGetFlagBit1(temp_v1);
       temp_v19 = (unsigned int)(temp_v7 == 0);
       FUN_0029c1c8(temp_v2,temp_v1,0);
       temp_v7 = gameGetUnitRecord(temp_v2);

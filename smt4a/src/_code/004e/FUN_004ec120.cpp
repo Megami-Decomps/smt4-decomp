@@ -22,7 +22,7 @@ int FUN_004eb838(...);
 int FUN_004ec950(int *, unsigned int *, int, unsigned int);
 int FUN_004ed14c(int *, unsigned int *, int, unsigned int);
 int FUN_004ed5b4(int *, unsigned int *, int, unsigned int);
-int FUN_004f8f08(...);
+int btlStageResetAndClearCameraFlag(...);
 int FUN_004f94b8(...);
 int stateSnapshotIsReady(void);
 int FUN_004fd508(...);
@@ -79,7 +79,7 @@ extern int *battleActionSnapshotCommand(int *, unsigned int *, int, unsigned int
 /* Supplied declaration required: FUN_004ec950. */
 /* Supplied declaration required: FUN_004ed14c. */
 /* Supplied declaration required: FUN_004ed5b4. */
-/* Supplied declaration required: FUN_004f8f08. */
+/* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: FUN_004f94b8. */
 /* Supplied declaration required: stateSnapshotIsReady. */
 extern int FUN_004fa0c4(int);
@@ -129,7 +129,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
     if (temp_v4 == 0) {
       return (int *)0x0;
     }
-    FUN_004f8f08(g_btlAux);
+    btlStageResetAndClearCameraFlag(g_btlAux);
     FUN_004eb838(param_1,puVar9);
     break;
   case 5:
@@ -219,7 +219,7 @@ int * FUN_004ec120(int *param_1,unsigned int param_2,unsigned int param_3,unsign
         return (int *)0x0;
       }
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0xa4) * 0x1254 + 9) = 1;
-      FUN_004f8f08(g_btlAux);
+      btlStageResetAndClearCameraFlag(g_btlAux);
       *puVar9 = *puVar9 & 0xffdfffff;
       *(unsigned short *)(*(int *)(temp_v4 + 0x2c) + 0x1be) = 0;
       return (int *)0x1;

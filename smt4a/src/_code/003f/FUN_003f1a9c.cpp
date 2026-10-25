@@ -1,5 +1,6 @@
 /* NON_MATCHING: initial global mask uses add+ldm instead of retail's two immediate-offset ldrs; named flags now match the object load and return paths. */
 #include "common.h"
+#include "bible/bibleAnalyze.h"
 
 namespace {
 
@@ -23,7 +24,6 @@ struct BattleEntryView {
 extern "C" {
 extern BattleMaskView g_btlMain;
 BattleEntryView* FUN_003eaf20(BattleObjectView* object);
-s32 btlSelectSourceTriggeredSkill(s32 entryId, s32 mode);
 void* dataTable04FindById(s32 id);
 
 // Resolve a valid table ID and optionally test and set the object's battle mask.

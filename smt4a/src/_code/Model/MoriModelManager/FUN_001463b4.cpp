@@ -23,7 +23,7 @@ extern const char DAT_00526088[];
 extern const char DAT_00526098[];
 void rt_aeabi_memclr(void *buffer, u32 bytes);
 s32 textFormatBuffer(char *destination, const char *format, ...);
-u32 FUN_001642e4(const char *path, u32 *size, u32 mode, u32 flags);
+u32 asdLoadFileSyncNoContext(const char *path, u32 *size, u32 mode, u32 flags);
 Obj557d00 *FUN_001581dc(void *setup);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 void moriModelCommandInitBuffers(MoriModelCommand *command, u32 bytes, s32 capacity);
@@ -38,7 +38,7 @@ void FUN_001463b4(Obj557c48 *manager)
         char path[64];
         rt_aeabi_memclr(path, sizeof(path));
         textFormatBuffer(path, DAT_00526088);
-        setup.handle = FUN_001642e4(path, NULL, 1, 0x80);
+        setup.handle = asdLoadFileSyncNoContext(path, NULL, 1, 0x80);
         setup.mode = 0;
         setup.second = 0x10000;
         setup.first = 0x30000;

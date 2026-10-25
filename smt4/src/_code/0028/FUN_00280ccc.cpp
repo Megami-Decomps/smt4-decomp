@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00280ccc` (_code @ 0x280ccc, 0xab8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_001f7c78(void);
 int mapIfActivateRecord(int, unsigned int);
 int FUN_00281e34(void);
 int mathPositionHeadingDegrees(void);
-int libc_strcpy(unsigned int *, int);
 int VectorSignedToFloat(unsigned int, int);
 
 /* stack frame of void: 5 slot(s), 20 byte(s) */
@@ -294,7 +294,7 @@ void FUN_00280ccc(void)
                   }
                   else {
                     DAT_0049f974 = 0xffffffff;
-                    libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
+                    libc_strcpy(&DAT_0049f978, reinterpret_cast<unsigned int *>(temp_v0 + 0x4a139c));
                   }
                   temp_v23 = mapIfActivateRecord(1,DAT_0049f99c);
                 }
@@ -405,7 +405,7 @@ void FUN_00280ccc(void)
               }
               else {
                 DAT_0049f974 = 0xffffffff;
-                libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
+                libc_strcpy(&DAT_0049f978, reinterpret_cast<unsigned int *>(temp_v0 + 0x4a139c));
               }
             }
           }
@@ -463,7 +463,7 @@ void FUN_00280ccc(void)
             }
             else {
               DAT_0049f974 = 0xffffffff;
-              libc_strcpy(&DAT_0049f978,temp_v0 + 0x4a139c);
+              libc_strcpy(&DAT_0049f978, reinterpret_cast<unsigned int *>(temp_v0 + 0x4a139c));
             }
           }
         }

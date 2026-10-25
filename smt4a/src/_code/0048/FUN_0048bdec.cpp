@@ -1,6 +1,7 @@
 /* NON_MATCHING: native animation-rate arguments and shared navigation flags are recovered; sprite/selection subobject base registers and phase block layout still differ. */
 #include "common.h"
 #include "map/mapDepart.h"
+#include "map/lmapMain.h"
 
 // Map selection screen: only the members this update touches.
 struct MapScreen {
@@ -32,7 +33,6 @@ void FUN_0048821c(MapScreen* screen, s32 mapIndex);
 void FUN_0048a378(MapScreen* screen);
 void FUN_0048d248(MapScreen* screen, u32 value);
 void naviMainSetCurrentMap(void* cursor, s32 mapIndex);
-void FUN_00492ac8(void* cursor, s32 arg);
 u32 FUN_00492c84(void* cursor);
 u32 vec2GetXInt(void* sprite);
 u32 vec2GetYInt(void* sprite);
@@ -66,7 +66,7 @@ void FUN_0048bdec(MapScreen* screen)
     } else if (phase == 1) {
         void* cursor = SCREEN_PTR(screen, 0x4cc);
         naviMainSetCurrentMap(cursor, screen->mapIndex);
-        FUN_00492ac8(cursor, 0);
+        FUN_00492ac8(reinterpret_cast<u32>(cursor), 0);
         FUN_0048821c(screen, screen->mapIndex);
         uiSpriteSetImageKeyframe(titleSprite, 2, 0);
         if (g_gameState.navigation.naviMapPending != 0) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: mechanical transcription of the decompile (temporaries and raw offsets not yet restructured); the code was not matched */
 #include "shard/S1Effect.h"
+#include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int gfxResolveTimedTextureFrame(...);
 int FUN_00256dbc(...);
 int entryListSetPhase(...);
 int mtx44TransformPosition(...);
-int refCountIncrement(...);
 int FUN_00269508(...);
 int FUN_00269694(unsigned int, int, int, int);
 int FUN_002ad314(...);
@@ -296,7 +296,7 @@ void FUN_001f7380(EffectEmitter *emitter)
     temp_v69 = (temp_v1 << 0x10) | (temp_v3 & 0xffff);
     temp_v67 = (temp_v2 & 0xffff) | (temp_v1 << 0x10);
     temp_v75 = (temp_v3 & 0xffff) | (temp_v4 << 0x10);
-    refCountIncrement(temp_v39);
+    refCountIncrement(reinterpret_cast<int *>(temp_v39));
   }
   else {
     temp_v36 = temp_v7;
@@ -319,7 +319,7 @@ void FUN_001f7380(EffectEmitter *emitter)
       temp_v8 = temp_v8 * temp_v11;
       temp_v11 = temp_v7 * temp_v11;
       temp_v7 = temp_v36;
-      refCountIncrement(temp_v79);
+      refCountIncrement(reinterpret_cast<int *>(temp_v79));
     }
     else {
       FUN_002f81b0(puVar8,&temp_v72);

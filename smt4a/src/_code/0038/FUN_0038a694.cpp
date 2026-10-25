@@ -19,7 +19,6 @@ struct HunterDatabaseAllocation : HunterDatabaseWork {
 typedef char HunterDatabaseAllocationSize[sizeof(HunterDatabaseAllocation) == 0x6B8 ? 1 : -1];
 
 extern "C" {
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 FUN_0037d4b0(u32 process);
 s32 FUN_0039b960(u32 process);

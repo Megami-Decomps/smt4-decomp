@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 selection, u32 *first, u32 *count);
 void scrSetResult(s32 value);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
@@ -16,7 +16,7 @@ u32 FUN_003bbe24()
 {
     struct Selection { u32 count; u32 first; } selection;
     s32 choice = btlResolveEntryChoice(scrGetArg(0));
-    FUN_00301a08(choice, &selection.first, &selection.count);
+    FUN_00301a08(choice, reinterpret_cast<s32 *>(&selection.first), reinterpret_cast<s32 *>(&selection.count));
     // These words cannot be added to the shared union at unaligned +0x0a without moving its fields.
     struct PropertyView { u8 prefix[0xac]; s32 first; u32 unkB0; s32 second; };
     for (s32 index = selection.first; index < (s32)(selection.first + selection.count); ++index) {

@@ -1,8 +1,10 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003db56c` (_code @ 0x3db56c, 0xb10 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "gamedata/KeyedCatalog.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -43,11 +45,9 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168470. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -85,7 +85,7 @@ void FUN_003db56c(int param_1)
   unsigned int temp_v11;
   unsigned char temp_v12 [84];
   
-  temp_v0 = vec2GetXInt(param_1 + 0x2d8);
+  temp_v0 = vec2GetXInt(reinterpret_cast<const void *>(param_1 + 0x2d8));
   temp_v1 = vec2GetYInt(param_1 + 0x2d8);
   temp_v6 = 0;
   temp_v11 = 0;
@@ -270,7 +270,7 @@ void FUN_003db56c(int param_1)
                (int)*(short *)(param_1 + 0x520),0x97,0);
   temp_v0 = g_renderCtx;
   if (*(int *)(param_1 + 8) == 5) {
-    temp_v1 = packNibblesAndByte(6,1,0);
+    temp_v1 = packNibblesAndByte(6, 1, 0);
     piVar6 = (int *)(temp_v0 + 0x12b8);
     temp_v2 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v1;
@@ -280,7 +280,7 @@ void FUN_003db56c(int param_1)
     }
     fadeObjectResetIfActive(param_1 + 0x47c);
     temp_v0 = g_renderCtx;
-    temp_v1 = packNibblesAndByte(6,7,0);
+    temp_v1 = packNibblesAndByte(6, 7, 0);
     piVar6 = (int *)(temp_v0 + 0x12b8);
     temp_v2 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v1;

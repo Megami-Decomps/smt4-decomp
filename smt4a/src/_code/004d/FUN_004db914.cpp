@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (212 vs ~206 rows); goto-based early exits and register allocation differ from retail's single result slot */
 #include "common.h"
+#include "gamedata/DataTableSections.h"
 
 // Fusion result descriptor (parents, product, cost), as written by the fusion preview.
 struct FusionResult {
@@ -42,7 +43,6 @@ struct DataTable5 {
 
 extern "C" {
 
-DataTable5* dataTable5GetEntries(void);
 s32 FUN_004dc3b4(UniteContext* ctx, u16* first, u16* second, FusionResult* result);
 DevilInfo* FUN_00184310(u32 id);
 s32 dataTableChooseWeightedByteId(void);
@@ -60,7 +60,7 @@ SlotRecord* gameGetSlotRecord(s32 slot);
 u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* result)
 {
     u32 found = 0;
-    DataTable5* levels = dataTable5GetEntries();
+    DataTable5* levels = (DataTable5 *)dataTable5GetEntries();
     if (FUN_004dc3b4(ctx, first, second, result) == 0) return 0;
 
     DevilInfo* info = FUN_00184310(result->product);

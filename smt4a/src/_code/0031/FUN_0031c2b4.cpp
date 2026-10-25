@@ -1,8 +1,7 @@
 /* NON_MATCHING: The three-float amplitude copy is split into scalar and two-word copies. */
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "script/ScriptArgs.h"
 extern "C" {
-s32 scrGetArg(s32);
-void scrSetResult(u32);
 void jobSetParent(u32, u32);
 u32 FUN_0036c580(f32*, f32*, f32, f32);
 s32 jobIsValid(u32);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: mode-panel base is formed after initialization rather than retained across it; selected-ID and owner registers differ. */
 #include "classes/Obj4223c4.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 s32 utilityReturnSuccess(const void *state);
@@ -8,7 +9,6 @@ s32 stageAssetsLoaded();
 void FUN_00233240(void *panel, s32 mode);
 void buttonHelpSetPreset(u32 preset);
 s32 flaggedValueHolderGetTotal(const SelectionFlags *selection);
-s32 FUN_0029e0f8();
 void FUN_0029defc(s32 id, s32 mode);
 void statusPanelSetOpen(s32 open);
 void FUN_0029dfc0(s32 mode);

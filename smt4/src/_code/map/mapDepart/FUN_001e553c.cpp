@@ -27,7 +27,7 @@ int buttonHelpSetPresetDefault(void);
 int asdMemFree(...);
 int jyoucyuGetTableEntry(int);
 int FUN_002c58c8(int, int);
-int FUN_002dfe08(unsigned int);
+int mapIfRequestRecordById(unsigned int);
 int FUN_002f364c(...);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
@@ -86,12 +86,12 @@ extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 /* Supplied declaration required: buttonHelpSetPresetDefault. */
 extern int gameFlagIsSet(unsigned int);
-extern int FUN_002c1c0c(unsigned int, unsigned int);
+extern int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_002c58c8. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
-/* Supplied declaration required: FUN_002dfe08. */
+/* Supplied declaration required: mapIfRequestRecordById. */
 /* Supplied declaration required: FUN_002f364c. */
 
 
@@ -122,7 +122,7 @@ unsigned int FUN_001e553c(void)
   switch(*(unsigned int *)(g_mapDepart + 0x18)) {
   case 0:
     FUN_002c58c8(10,4);
-    temp_v4 = FUN_002c1c0c(10,4);
+    temp_v4 = asdTMTexTableGetNodeTexture(10,4);
     *(int *)(temp_v2 + 0x7c) = temp_v4;
     *(unsigned int *)(temp_v4 + 0x3c) = 1;
     *(unsigned int *)(*(int *)(temp_v2 + 0x7c) + 0x40) = 1;
@@ -370,7 +370,7 @@ LAB_001e5a1c:
       *(unsigned char *)(temp_v2 + 0x2d) = 0;
       *(unsigned char *)(temp_v2 + 0x3c) = 0;
       if (*(int *)(temp_v2 + 0xc) == 0) {
-        FUN_002dfe08(*(unsigned int *)(temp_v2 + 0x10));
+        mapIfRequestRecordById(*(unsigned int *)(temp_v2 + 0x10));
         entrySetParams(*(unsigned int *)(temp_v2 + 0x10),5,0);
         gameCounterAddSaturating(0x13,1);
       }

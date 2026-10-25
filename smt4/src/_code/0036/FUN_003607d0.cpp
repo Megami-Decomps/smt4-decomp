@@ -1,11 +1,12 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 extern "C" u32 DAT_00471bac;
 /* Sends the parameterless service request and returns its service result. */
 extern "C" s32 FUN_003607d0()
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
-    command->header = 0x2c0000;
+    nn::os::SetIpcWord(command, 0, 0x2c0000);
     s32 result = nn::svc::SendSyncRequest(DAT_00471bac);
     if (nnResultIsSuccess(result)) {
         result = command->words[0];

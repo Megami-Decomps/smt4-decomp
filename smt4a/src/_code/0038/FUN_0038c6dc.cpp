@@ -1,5 +1,5 @@
 /* NON_MATCHING: excluded-mask AND/OR scratch registers differ; split first/count locals reproduce retail range loads. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -8,7 +8,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 value);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 }
 
@@ -41,7 +40,8 @@ extern "C" u32 FUN_0038c6dc(void)
     s32 count;
     FUN_00301a08(choice, &first, &count);
     for (s32 index = first; index < first + count; ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&

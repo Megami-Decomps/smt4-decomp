@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"
 #include "romwright_types.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ typedef struct {
 extern int g_aocMain; /* 0x570260 */
 
 extern int byteIsAtLeast100(unsigned int *);
-extern int FUN_002e19f8(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: windowCreateStatusOperation. */
 /* Supplied declaration required: FUN_00476e58. */

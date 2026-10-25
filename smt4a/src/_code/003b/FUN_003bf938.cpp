@@ -7,7 +7,6 @@ extern MessageGlobalsA g_messageMain;
 s32 scrGetCommandFrame(void);
 void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_004bd410(u16 id);
-void FUN_003e48dc(u16 id);
 PartySlotA *saveSlotFindSelected(void);
 PartySlotA *FUN_003e4d68(u16 index);
 s32 FUN_00187168(PartySlotA *unit);

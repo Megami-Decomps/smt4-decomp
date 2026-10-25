@@ -1,6 +1,7 @@
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SourceMetadata.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 BtlCombatantEntryA *FUN_003f0e20(BattleMaskState *, u32);

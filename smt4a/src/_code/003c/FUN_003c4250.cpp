@@ -1,6 +1,7 @@
 /* NON_MATCHING: the gauge width helper is inlined with different register allocation and the stack argument stores differ from retail (238 vs 231 rows); the gauge drawing is the same. */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 GaugeLayout *FUN_001834a4(u32 group, u32 id);
 void FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag);
-u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 s32 __aeabi_idivmod(s32 a, s32 b);
 
 /* The width of the gauge part `id` for `value` out of 200 (at least 1 for a positive value),

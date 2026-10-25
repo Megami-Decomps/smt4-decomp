@@ -1,6 +1,8 @@
 /* NON_MATCHING: only the prologue differs: retail loads g_btlUi and the work pointer before materialising the constants 1, 40 and 0 and loads the stack arguments after them, this build hoists the constants first. */
 #include "common.h"
+#include "gamedata/SaveLoadProcess.h"
 
+#include "util/FUN_002009c4.h"
 /* The battle command window's state, reached through g_btlUi. */
 struct BtlCommandWindowWork {
     /* 0x0000 */ u8 unk0000[0x5678];
@@ -47,11 +49,9 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 u32 aocIndexValueOrDefault(u32 index);
 void FUN_00211868(s16 value, u8 flag);
 u32 FUN_002be650(u32 value, s32 mode);
-void FUN_002009c4(s16 value);
 void FUN_002cd750(s16 value);
 void communicationSetResultPointer(void);
 void communicationBeginTransition(s32 mode);
-void comWinSetText(const u8 *text);
 
 /* Opens the battle command window for command `kind`, formatting its label text. */
 void FUN_00227334(u32 unused, u32 kind, s32 value, s32 isSupport, s32 devilId, s32 isSummon)

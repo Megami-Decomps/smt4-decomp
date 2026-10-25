@@ -2,6 +2,7 @@
 #include "classes/Obj422448.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include <stddef.h>
+#include "status/StatusCamera.h"
 
 /* One unlocked list entry as the list collects it (0x20 bytes). */
 struct Obj422448Entry {
@@ -61,10 +62,9 @@ struct Obj422448Mode {
 extern "C" {
 void entryTableClear(void *list);
 u32 unlockFlagTest(u32 id);
-Obj422448Source *FUN_002498ec(u32 id);
+Obj422448Source *table8Type5FindById(u32 id);
 u32 aocIndexValueOrDefault(u32 index);
 void recordAppendFloatEntry(void *list, Obj422448Entry *entry);
-Obj422448Mode *FUN_002a0d0c(void);
 void FUN_0022e0fc(void *list, s32 line);
 void FUN_00233730(void *holder, s32 a, s32 count, s32 b, s32 c, s32 d);
 u8 gaugePercent(void *list);
@@ -85,7 +85,7 @@ void Obj422448::buildList()
     do {
         scanned++;
         if (unlockFlagTest(id) != 0) {
-            Obj422448Source *source = FUN_002498ec(id);
+            Obj422448Source *source = table8Type5FindById(id);
             if (source->nameId != 0) {
                 Obj422448Entry entry;
                 entry.id = source->id;
@@ -99,7 +99,7 @@ void Obj422448::buildList()
     } while (id <= 0x802);
     self->scanned = scanned;
     if (self->listCount != 0) {
-        u8 *kind = &FUN_002a0d0c()->kind;
+        u8 *kind = &reinterpret_cast<Obj422448Mode *>(FUN_002a0d0c())->kind;
         s8 line;
         switch (*kind & 0x7F) {
         case 11:

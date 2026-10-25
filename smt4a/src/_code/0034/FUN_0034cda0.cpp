@@ -1,5 +1,6 @@
 /* NON_MATCHING: the help-value comparison chains are grouped differently by armcc (retail groups them 1,2,3 per chain; here pairs). */
 #include "common.h"
+#include "util/FUN_002a7410.h"
 
 /* The party panel: the selected demon and slot, and the panel mode at +0x9B4. */
 struct PartyPanelView {
@@ -15,7 +16,6 @@ struct PartyPanelView {
 
 extern "C" {
 extern PartyPanelView *g_partyPanel;
-s32 FUN_002a7410(void);
 void FUN_002c7e24(void);
 u16 ifTouchGetButtonHelpValue(void);
 s32 FUN_002cad18(void);

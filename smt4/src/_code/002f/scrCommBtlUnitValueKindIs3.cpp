@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail adds the 0x126 element offset after the scaled index (add #256 then ldrh #38); built loads 0x126 from the literal pool and uses a register offset. */
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct BtlUnit {
 
 extern u32 g_btlScriptUnit;
 extern s32 scrGetArg(s32 index);
-extern s32 scrSetResult(s32 value);
 
 /* Script command: pushes whether value `arg` of the script unit has kind 3. */
 u32 scrCommBtlUnitValueKindIs3(void)

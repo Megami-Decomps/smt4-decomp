@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (210 vs 228 rows); retail's load-stage fallthrough and mask tests are laid out differently */
 #include "common.h"
+#include "bible/bibleAnalyze.h"
 
 // Talk-window tuning data shared by the battle talk code: three 64-bit side masks.
 struct BtlTalkData {
@@ -81,7 +82,6 @@ s32 scrRunOpcodesStub(u32 process);
 void FUN_003756c8(s32 arg);
 void FUN_004fcde0(s32 a, s32 b);
 s32 chainCountIdUnflagged(u32 chain, s32 arg);
-void FUN_004aa8b0(u32 ui, s32 arg);
 
 // Per-frame state machine of the battle talk window: loads the tone resources, starts the
 // talk script, applies its result and finally clears the pending mask. Returns -1 when done.
@@ -147,7 +147,7 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
     case 4:
         if (chainCountIdUnflagged(g_btlActionReflect, 0) > 0) return 0;
         if ((g_btlTalk.pendingMask & window->battle->pending) != 0) {
-            FUN_004aa8b0(g_btlUiBlock, 0);
+            FUN_004aa8b0(reinterpret_cast<void *>(g_btlUiBlock), 0);
             window->battle->pending &= ~g_btlTalk.pendingMask;
         }
         window->state = 5;

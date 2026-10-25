@@ -7,7 +7,7 @@ u32 questReadRuntimeFlag(u32 questId, u32 selector);
 const QuestRuntimeDefinition *dataTable1bOr1cGetRecord(u32 questId);
 s32 questRequirementsMet(u32 questId);
 QuestRuntimeFlagBlock *gameGetFlagBlock(void);
-s32 FUN_00287894(u32 questId);
+s32 table1bOr1cGetRecordValue(u32 questId);
 void FUN_0028eeb8(u32 questId);
 
 /* Activate newly eligible category-six quests and snapshot their progress bookkeeping. */
@@ -27,7 +27,7 @@ u32 questActivateEligibleCategorySix(void)
                 status->stateFlags &= ~1;
                 status->flags &= ~0xC0;
                 status->flags |= 0x21;
-                if (!FUN_00287894(questId)) {
+                if (!table1bOr1cGetRecordValue(questId)) {
                     FUN_0028eeb8(questId);
                 }
                 changed = 1;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: initialization constants change registers and move into the valid-input branch, the first count reload is coalesced, and offset-bound comparison/result scheduling differ; candidate -O2. */
 #include "shard/Shard0031.h"
+#include "util/EventQueueAddUnique.h"
 
 struct MenuSelectionScan {
     u32 unk00;
@@ -32,7 +33,6 @@ void scrollOwnerSetValue(FlaggedEntry *entry, u32 value);
 void recordTrackDirtyValue(FlaggedEntry *entry, u32 value);
 void flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 void flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
-void eventQueueAddUnique(u32 event);
 
 void menuSynchronizeFlaggedSelection(MenuSelectionScan *scan, FlaggedMenuList *list)
 {

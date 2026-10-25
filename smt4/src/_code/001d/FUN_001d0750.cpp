@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d0750` (_code @ 0x1d0754, 0xc54 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "bible/bibleMain.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ extern int g_camp; /* 0x43da90 */
 /* Supplied declaration required: FUN_00223cf0. */
 /* Supplied declaration required: campCecSetSubstate. */
 /* Supplied declaration required: campUiResetSlots. */
-extern int FUN_00269d4c(void);
 /* Supplied declaration required: uniteSetMode. */
 /* Supplied declaration required: FUN_00269dc8. */
 /* Supplied declaration required: scrEffectRunIfActive. */

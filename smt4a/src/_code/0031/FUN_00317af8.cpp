@@ -1,11 +1,11 @@
-/* NON_MATCHING: calibration sign extensions, combined flag test, coordinate VFP scheduling and return-block placement differ. */
+/* NON_MATCHING: flag test and axis conversion order now match; remaining: retail sign-extends the calibration min/max (sxth), keeps state in r6 / outputs in r4,r5, and returns 0 inline after the dead-zone test (build shares one return-0 block). */
 #include "input/PadAnalog.h"
 #include "shard/GlobalBlocks.h"
 
 extern "C" {
 extern PadAnalogSample DAT_0063ffd0[2];
 extern PadAnalogSample DAT_0063fff0;
-void inputApplyDeadZone(f32 *value, f32 deadZone);
+f32 inputApplyDeadZone(f32 *value, f32 threshold);
 
 // Read normalized analog axes, applying the configured dead zone when enabled.
 u32 FUN_00317af8(f32 *outX, f32 *outY, u32 index)
@@ -38,13 +38,16 @@ u32 FUN_00317af8(f32 *outX, f32 *outY, u32 index)
     f32 range = (f32)(maximum - minimum);
     if (index < 2 && index <= state->count) {
         PadAnalogSample *sample;
-        if ((state->flags & 1) || (state->flags & 2))
+        bool locked = (state->flags & 1) != 0;
+        if (locked || (state->flags & 2) != 0)
             sample = &DAT_0063fff0;
         else
             sample = &DAT_0063ffd0[index];
         if (sample) {
-            f32 x = (f32)sample->x / range;
-            f32 y = (f32)sample->y / range;
+            f32 rawX = (f32)sample->x;
+            f32 rawY = (f32)sample->y;
+            f32 x = rawX / range;
+            f32 y = rawY / range;
             if (state->deadZone != 0.0f) {
                 inputApplyDeadZone(&x, state->deadZone);
                 inputApplyDeadZone(&y, state->deadZone);

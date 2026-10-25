@@ -2,6 +2,7 @@
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "shard/JobWork.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct EventJobRequestPrefix { u32 id; s32 entry; char path[1]; };
 extern "C" {
@@ -21,8 +22,6 @@ void resourceDefaultFalseCallback(JobWork *job);
 void resourceEmptyCallback(JobWork *job);
 void FUN_0032878c(JobWork *job);
 void FUN_00379d54(JobWork *job);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 first, s32 second,
-    void (*update)(JobWork *), void (*finish)(JobWork *), void *data);
 u32 taskCreateDraw(const char *name, s32 priority, s32 first, s32 second,
     void (*update)(JobWork *), void (*finish)(JobWork *), void *data, u32 parent);
 
@@ -69,8 +68,7 @@ void FUN_00291728(const RequestParameters *parameters)
             dataTableReload(0x1C);
             dataTableResolveEntryVariants();
         }
-        work->prefix.id = asdProcessCreateSimple("EVENT VIEW CALC", 4, 0, 0,
-            FUN_00298978, aocJobRequest, NULL);
+        work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT VIEW CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00298978), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
         taskCreateDraw("EVENT VIEW UDRAW", 0x75, 0, 0,
             resourceDefaultFalseCallback, resourceEmptyCallback, NULL, work->prefix.id);
         taskCreateDraw("EVENT VIEW DDRAW", 0xEA, 0, 0,
@@ -83,7 +81,6 @@ void FUN_00291728(const RequestParameters *parameters)
         DAT_005e1f70.path[0] = 0;
     else
         libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->word(2)));
-    work->prefix.id = asdProcessCreateSimple("EVENT CALC", 4, 0, 0,
-        FUN_00225ddc, aocJobRequest, NULL);
+    work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00225ddc), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
 }
 }

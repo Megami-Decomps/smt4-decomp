@@ -1,11 +1,10 @@
 /* NON_MATCHING: register allocation only: retail keeps the stat selector in r6 and the found flag in r5; built swaps them. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern u32 scrGetArg(u32 index);
-extern s32 scrSetResult(s32 value);
 
 /* Script command: pushes 0 when a live, non-excluded unit with the group id in argument 0 has the selected stat
  * (argument 1: 0, 1, 2 select stat 7, 10, 11) set, else whether any such unit exists. */

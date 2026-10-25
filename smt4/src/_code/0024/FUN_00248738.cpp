@@ -28,7 +28,7 @@ void gauntletAppSortMenuEntries(void);
 s32 appCheckPurchaseRequirements(u32 app);
 void FUN_00295eb0(void* sprite, s32 a, s32 b);
 void FUN_0029f848(void* list, s32 count, s32 a, s32 b, s32 c, s32 d);
-s32 FUN_002ae584(u32 app);
+s32 appCostRecordFindById(u32 app);
 void ifTouchRegionRemove(s32 index);
 void timerStart(void* timer, s32 a, s32 b);
 void spriteStartAnimationByIndex(void* sprite, s32 index);
@@ -60,7 +60,7 @@ u32 FUN_00248738(AppMenu* menu, u32 newState)
             menu->entryCount = 1;
         } else {
             for (u32 app = 1; app < 0x8d; app++) {
-                if (FUN_002ae584(app) != 0 && (flagBitIsSet(app) != 0 || appCheckPurchaseRequirements(app) != 2)) addEntry(menu, app);
+                if (appCostRecordFindById(app) != 0 && (flagBitIsSet(app) != 0 || appCheckPurchaseRequirements(app) != 2)) addEntry(menu, app);
             }
         }
         FUN_0029f848(menu->list, menu->entryCount, 10, 1, 1, 1);

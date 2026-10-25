@@ -1,9 +1,9 @@
 /* NON_MATCHING: map owner global is restored; branch layout and unreachable retail literal decoding differ. */
 #include "romwright_types.h"
+#include "npc_room/NpcRoom.h"
 
 extern "C" {
 
-int mapCollisionRelease(void);
 int FUN_00277d2c(unsigned int, unsigned int);
 int mapGimicUpdateVisualBounds(void);
 int FUN_0027ae90(void);
@@ -16,7 +16,6 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: mapCollisionRelease. */
 /* Supplied declaration required: FUN_00277d2c. */
 /* Supplied declaration required: mapGimicUpdateVisualBounds. */
 /* Supplied declaration required: FUN_0027ae90. */

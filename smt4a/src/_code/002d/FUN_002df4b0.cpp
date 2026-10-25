@@ -1,11 +1,10 @@
 /* NON_MATCHING: repeated color argument moves and literal-pool ordering differ. */
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern void *g_btlMain;
 s32 FUN_001692ac(u32 kind, u32 flags);
-void FUN_00157558(RenderCtxA *context);
 void FUN_0016c4b8(RenderCtxA *context, u32 mode);
 void FUN_0014e314(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 left, f32 top, f32 right, f32 bottom, f32 depth);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail re-reads g_gameGlobals.transition (a second literal-pool load of the global address) for the phase accesses and keeps the first object pointer for the other fields; the build merges the two loads, shifting registers throughout. */
 #include "common.h"
+#include "util/StatusDownSwitchTab.h"
 
 /* The transition object behind g_gameGlobals (accessed fields). */
 struct TransitionState {
@@ -25,7 +26,6 @@ struct GameGlobals {
 
 extern "C" {
 extern GameGlobals g_gameGlobals;
-void statusDownSwitchTab(s32 step);
 
 /* Drive the transition object one step: start the phases of the requested transition kind. */
 void FUN_0021af2c(void)

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct SoundTestWork {
     u32 process; // 0x00
@@ -13,7 +14,6 @@ struct SoundTestWork {
 };
 extern "C" {
 extern SoundTestWork *DAT_0044e110;
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument);
 u32 taskCreateDraw(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument, u32 parent);
 void FUN_001e960c();
 void FUN_002ca6e0();
@@ -30,7 +30,7 @@ void FUN_001ea8fc()
     work->selectedBank = 0;
     work->playingSound = 0;
     work->active = 0;
-    work->process = asdProcessCreateSimple("ST Cont", 2, 0, 0, FUN_001e960c, FUN_002ca6e0, 0);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ST Cont"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001e960c), reinterpret_cast<AsdProcFunc>(FUN_002ca6e0), 0);
     taskCreateDraw("ST Draw", 230, 0, 0, FUN_002ca6f8, FUN_002f4b34, 0, work->process);
 }
 }

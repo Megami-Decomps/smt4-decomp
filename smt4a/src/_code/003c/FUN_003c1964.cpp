@@ -1,5 +1,5 @@
 /* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
 
@@ -15,7 +15,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-BtlMainStateA *btlGetMainState(void);
 BattleThresholdEntryView *FUN_003eaf20(BtlMainStateA *state);
 
 /* Tests whether an eligible member of the selected group, or the enabled special member, exceeds a threshold. */

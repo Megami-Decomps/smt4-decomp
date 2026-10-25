@@ -1,5 +1,7 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: native depth getter and grouped snapshots now agree; owner/index saved registers and header destination base still differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/TextureDrawCall.h"
 
 struct SpritePositionView { u8 unk00[0x20]; f32 depth; u8 unk24[0x68]; };
 struct PositionSnapshot { s32 x, y; f32 depth; };
@@ -7,7 +9,6 @@ struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
 
 extern "C" {
 void FUN_00163aa4(void *sprite, f32 delta);
-s32 vec2GetXInt(const void *sprite);
 s32 vec2GetYInt(const void *sprite);
 f32 vec2GetSpeed(const void *sprite);
 

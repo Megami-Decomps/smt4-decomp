@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00331714` (_code @ 0x331714, 0x524 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 extern int FUN_003ddfd8(void);
-extern int playerHasFlagBit(unsigned int);
 extern int actorIsActive(void);
 extern int partySlotMatchesSelected(unsigned int);
 /* Supplied declaration required: FUN_003e503c. */

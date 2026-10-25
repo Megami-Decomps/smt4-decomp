@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail uses r3 for the reloaded block pointer, r1 for the constant 1 and ip for the callback; the build uses r1, r0 and r3 */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct Holder001230b8 {
 
 typedef void ErrorCallback001230b8(s32 a, s32 b, s32 c);
 
-void memClear(Block001230b8 *block, s32 size);
 s32 FUN_00137c14(void);
 
 extern ErrorCallback001230b8 *g_gfxReleaseCallback; /* 0x44e334 */
@@ -28,7 +28,7 @@ s32 blockOpen(Block001230b8 *block)
     s32 handle;
 
     DAT_004655f0.block = block;
-    memClear(block, 0x854);
+    memClear(reinterpret_cast<void*>(block), 0x854);
     handle = FUN_00137c14();
     DAT_004655f0.block->handle = handle;
     if (handle != 0) {

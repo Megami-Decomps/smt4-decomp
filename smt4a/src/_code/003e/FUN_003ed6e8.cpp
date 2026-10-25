@@ -7,7 +7,7 @@ extern BtlMain g_btlMain;
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 DevilRecordA *FUN_00184310(u32 id);
 s32 gameFlagIsSet(u32 flag);
-s32 lcgRandomRange(u32 limit);
+u32 lcgRandomRange(s32 limit);
 
 u32 FUN_003ed6e8(BtlMainStateA *state)
 {

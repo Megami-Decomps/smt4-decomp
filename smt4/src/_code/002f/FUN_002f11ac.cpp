@@ -1,8 +1,8 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 
 typedef struct Scene {
     /* 0x0000 */ u8 unk0000[0x3040];

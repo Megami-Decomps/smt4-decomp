@@ -1,5 +1,6 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gfx/RenderTargetState.h"
 
 extern "C" {
 u32 nnosConvertVirtToPhysImpl(u32 address);

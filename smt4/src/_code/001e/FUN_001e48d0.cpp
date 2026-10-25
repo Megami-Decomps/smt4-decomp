@@ -3,15 +3,15 @@
 #include "battle/ActionStateChannels.h"
 extern "C" {
 extern BtlActionGlobals g_btlAction;
-ActionStateChannelOwner *jobGetWork(void);
+ActionStateChannelOwner *jobGetWork(u32 job);
 s32 jobIsValid(u32 job);
 void FUN_003d2140(ActionStateChannels *channels);
 s32 FUN_003d28d0(ActionStateChannels *channels, s32 state);
 
 /* Commit a pending action state or start its transition, respecting the previous channel. */
-u32 FUN_001e48d0(void)
+u32 FUN_001e48d0(u32 job)
 {
-    s32 index = jobGetWork()->current;
+    s32 index = jobGetWork(job)->current;
     ActionStateChannels *channels = static_cast<ActionStateChannels *>(g_btlAction.data);
     ActionStateTransition *channel = reinterpret_cast<ActionStateTransition *>(&channels->entries[index].flags);
     s32 previous = channels->entries[0].owner->current - 1;

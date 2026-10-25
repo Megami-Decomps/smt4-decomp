@@ -1,12 +1,12 @@
 /* NON_MATCHING: register allocation (retail keeps the screen in r4 and the slot table in r5) and the build merges the identical mode/substep store tails of the variant and category branches, which retail keeps separate. */
 #include "shop/ShopScreen.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
 s32 useCounterGetValue(void);
-void FUN_002a0cc8(s32 value);
 void buttonHelpSelectMenuPreset(ShopScreen *screen);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 void FUN_0027f3dc(ShopSlot *slots, u32 count, u32 size, s32 (*compare)(const void *, const void *));

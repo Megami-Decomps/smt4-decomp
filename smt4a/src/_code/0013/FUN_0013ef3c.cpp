@@ -2,12 +2,11 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 SurfaceCaptureWorkPrefixA *jobGetWork(u32 process);
 s32 stateValuesGetBySelector(u32 selector);
-s32 FUN_00157558(RenderCtxA *context);
 s32 FUN_00154edc(s32 mode, CaptureSurfacePrefixA *surface);
 s32 surfaceCopy(CaptureSurfacePrefixA *destination, CaptureSurfacePrefixA *source);
 

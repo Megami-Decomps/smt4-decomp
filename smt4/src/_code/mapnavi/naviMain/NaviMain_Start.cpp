@@ -21,8 +21,6 @@ void naviRequestClose(u32 handle);
 s32 NAVI_PROC(u32 handle);
 s32 NAVI_DOWN(u32 handle);
 s32 naviMainDrawFade(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 void NaviMain_ResetFlags(void *settings, u8 value);

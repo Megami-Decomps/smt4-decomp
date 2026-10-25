@@ -2,11 +2,11 @@
 #include "battle/BattleChoiceWeights.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlTables.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-void* btlGetTable(void* battle, s32 table);
 void wordPairCopy(BattleChoiceRow* destination, const BattleChoiceRow* source);
 s32 randRange(u16 maximum);
 

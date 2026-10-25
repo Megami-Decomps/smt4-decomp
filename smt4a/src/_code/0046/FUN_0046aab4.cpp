@@ -1,10 +1,10 @@
 /* NON_MATCHING: model flag clear uses r1 instead of retail r2; all other instructions agree. */
 #include "map/NpcDummyBindings.h"
+#include "util/CalleeContracts.h"
+#include "title/titleMain.h"
 
 extern "C" {
-void *FUN_00152f54(void);
 void uiSetFloatPair(void *owner, f32 first, f32 second);
-void FUN_0036b824(void *owner);
 void textFormatBuffer(char *destination, const char *format, ...);
 u8 lookupNameEntry(NpcDummyModel *model, const char *name, MapVector *position);
 void controllerSetDestination(ControllerPose *owner, const MapVector *position);
@@ -16,9 +16,9 @@ void FUN_0046aab4(NpcDummyBindings *bindings)
     MapVector position;
     if (!bindings->initialized) {
         if (bindings->mode == 1) {
-            void *owner = FUN_00152f54();
+            void *owner = reinterpret_cast<void *>(FUN_00152f54());
             uiSetFloatPair(owner, 0.25f, 0.3f);
-            FUN_0036b824(owner);
+            FUN_0036b824(reinterpret_cast<u32>(owner));
         }
         bindings->initialized = 1;
         for (s32 index = 0; index < bindings->count; ++index) {

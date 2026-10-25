@@ -16,7 +16,7 @@ struct CampCecView {
 extern "C" {
 extern CampCecView* g_campCecView;
 u32 requestImageDraw(u32 effectHandle, EffectParameters* parameters);
-void efctSetSpeed(u32 effectHandle, f32 speed);
+void efctSetSpeed(f32 speed);
 
 u32 FUN_002a2c78(void)
 {
@@ -27,7 +27,7 @@ u32 FUN_002a2c78(void)
 
     u32 effectHandle = requestImageDraw(view->effectHandle,
                                   &view->effectParameters);
-    efctSetSpeed(effectHandle, 1.0f);
+    efctSetSpeed(1.0f);
     return 0;
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: polynomial constant multiplication, base-table branch outlining and saved registers differ from retail. */
+/* NON_MATCHING: the polynomial now matches (level * 0x6DB * 2 + level * 2); retail outlines the table-lookup arm after the return and numbers the saved registers differently. */
 #include "gamedata/DataTable.h"
 
 struct UnitGrowthCostRecord {
@@ -18,7 +18,7 @@ static inline u32 unitBaseGrowthCost(s32 level)
     }
     if (level >= 99) {
         u32 cost = level * level * 3 + static_cast<u32>(level * level * level) / 100 +
-            level * 0xDB8 + 0x184C6;
+            level * 0x6DB * 2 + level * 2 + 0x184C6;
         return cost > 999999 ? 999999 : cost;
     }
     return costs[level - 1];

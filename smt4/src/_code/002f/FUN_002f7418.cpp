@@ -1,11 +1,11 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 extern BtlState *btlGetMainState(void);
 extern BtlUnitEntry *btlMainFindActiveEntry(BtlState *state);
 extern s32 scrGetArg(s32 index);
-extern void scrSetResult(s32 value);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(u32 group, s32 *first, s32 *count);
 

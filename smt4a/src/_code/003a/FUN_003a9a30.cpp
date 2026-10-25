@@ -1,28 +1,25 @@
-/* NON_MATCHING: the clamp compiles to cmp/movlt and a folded [r0, #-2] load; retail uses cmp/movge and an explicit sub of 1 before indexing. */
-#include "common.h"
+#include "battle/BtlMainAccess.h"
+#include "gamedata/DataTable.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int value);
-u32 btlGetTable(u32 obj, u32 arg);
-u32 btlGetMainState(void);
-int scrGetArg(u32 index);
-int dataTableGetCount(u32 arg);
-u16 *dataTableGetEntries(void);
+void *btlGetTable(BtlMainStateA *state, u32 table);
 
 /* Script command: passes entry (script argument 0, clamped to 1..count) of the u16 table, counted by dataTableGetCount, to scrSetResult. */
 u32 FUN_003a9a30(void)
 {
-    int requested = scrGetArg(0);
-    u32 field = btlGetTable(btlGetMainState(), 0xd);
-    u16 *table = dataTableGetEntries();
-    int count = dataTableGetCount(field);
+    s32 requested = scrGetArg(0);
+    void *field = btlGetTable(btlGetMainState(), 0xd);
+    u16 *table = static_cast<u16 *>(dataTableGetEntries(field));
+    s32 count = dataTableGetCount(field);
     if (requested < 1) {
         count = 1;
-    } else if (count > requested) {
-        count = requested;
+    } else {
+        count = count < requested ? count : requested;
     }
-    scrSetResult(table[count - 1]);
+    s32 index = count - 1;
+    scrSetResult(table[index]);
     return 1;
 }
 

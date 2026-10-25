@@ -1,6 +1,8 @@
 /* NON_MATCHING: register allocation and spill: retail keeps x/y in fp/r5, spills the offset x to [sp+8] and has a 0x24-byte frame (icon id slots at sp+12/sp+20); here x/y live in sl/r6 with no spill. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "util/Vec2Fixed.h"
+#include "util/Vec2Fixed.h"
 #include "util/PackNibbles.h"
 
 /* A status icon panel's position vector (0x24 bytes); the scale sits at 0x20. */
@@ -20,7 +22,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 void gfxSelectStatusIconPair(u32 kind, u32 *foreground, u32 *background, s32 alternate);
 void efctSetSpeed(f32 speed);
-s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 
 // Draw a status icon (frame, glow and the two icon sprites) in the plain or the alternate style.

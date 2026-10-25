@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(...);
 int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(...);
-int FUN_0024b830(...);
+int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(...);
@@ -86,7 +86,7 @@ extern float DAT_004ea948; /* 0x4ea948 */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 /* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -373,34 +373,34 @@ void FUN_00320458(fn_00320458_arg0 *param_1)
             }
             else if (temp_v53 != 0) {
               temp_v19 = temp_v31;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v16 = temp_v16 * temp_v42;
               temp_v44[2] = (int)temp_v16;
               temp_v31 = *(float *)((int)pvVar12 + 0x6c);
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v16 = ((temp_v19 - temp_v31) + temp_v16 * temp_v31) * *(float *)((int)pvVar12 + 0x68);
               temp_v44[3] = (int)temp_v16;
               temp_v31 = temp_v19;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v32 = ((temp_v19 - *(float *)((int)pvVar12 + 0x74)) +
                        temp_v16 * *(float *)((int)pvVar12 + 0x74)) * *(float *)((int)pvVar12 + 0x70);
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v17 = *(float *)((int)pvVar12 + 0x7c);
               temp_v20 = *(float *)((int)pvVar12 + 0x78);
               temp_v18 = (float)VectorSignedToFloat(temp_v14,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v44[4] = (int)temp_v32;
               temp_v32 = ((temp_v19 - temp_v17) + temp_v16 * temp_v17) * temp_v20 - temp_v32;
               temp_v44[5] = (int)(temp_v32 / temp_v18);
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v16 = ((temp_v19 - *(float *)((int)pvVar12 + 0x8c)) +
                        temp_v32 * *(float *)((int)pvVar12 + 0x8c)) * *(float *)((int)pvVar12 + 0x88);
               temp_v44[1] = (int)temp_v16;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v16 = *(float *)((int)pvVar12 + 0x60) *
                        ((temp_v19 - *(float *)((int)pvVar12 + 100)) +
                        temp_v16 * *(float *)((int)pvVar12 + 100));
               temp_v44[7] = (int)temp_v16;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v16 = ((temp_v19 - *(float *)((int)pvVar12 + 0x84)) +
                        temp_v16 * *(float *)((int)pvVar12 + 0x84)) * *(float *)((int)pvVar12 + 0x80);
               temp_v44[6] = (int)temp_v16;

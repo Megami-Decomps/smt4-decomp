@@ -31,13 +31,13 @@ struct CameraMoveWork {
 
 extern "C" {
 
-CameraMoveWork *jobGetWork(void);
+CameraMoveWork *jobGetWork(u32 job);
 void FUN_002a880c(CameraMoveWork *work, s32 arg1, s32 arg2);
 
 /* Start a move towards target over frames (or stop it when target is 0), raising the start height by to - from. */
-void FUN_00138954(u32 unused, s32 target, s32 frames, f32 from, f32 to)
+void FUN_00138954(u32 job, s32 target, s32 frames, f32 from, f32 to)
 {
-    CameraMoveWork *work = jobGetWork();
+    CameraMoveWork *work = jobGetWork(job);
     if (target == 0) {
         FUN_002a880c(work, 1, 0);
         work->state = 2;

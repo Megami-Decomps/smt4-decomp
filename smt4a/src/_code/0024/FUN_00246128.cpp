@@ -2,6 +2,7 @@
 /* Starts the party-gift popup when the player's money has reached its level threshold: a table entry of kind 0x12 for the selected slot whose two flags allow it. */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct PopupState {
     u32 state;
@@ -30,7 +31,6 @@ extern GameStatePopupView g_gameState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
 void *saveSlotFindSelected(void);
-void *gameGetPlayerData(void);
 s32 FUN_00480c28(void);
 u32 FUN_002d8b58(u32 kind);
 
@@ -63,7 +63,7 @@ void FUN_00246128(void)
     if (g_popupState->state != 0) {
         return;
     }
-    s32 level = static_cast<PlayerLevelView *>(gameGetPlayerData())->level;
+    s32 level = static_cast<PlayerLevelView *>(reinterpret_cast<void *>(gameGetPlayerData()))->level;
     s32 money = FUN_00480c28();
     if (level <= 20) {
         if (money < 5000) {

@@ -7,7 +7,7 @@ extern BlinkFadeWork *g_eventEffect;
 extern BlinkFadeTexture DAT_0043df00[2];
 extern RenderCtx *g_titleScene;
 void FUN_002bed3c();
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 u32 FUN_002c5d80(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
@@ -22,7 +22,7 @@ u8 FUN_002222e8(u32)
         return 0;
     }
     FUN_002bed3c();
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, false));
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
     renderCtxCalculateStereoParallax(g_titleScene, 0.25f);

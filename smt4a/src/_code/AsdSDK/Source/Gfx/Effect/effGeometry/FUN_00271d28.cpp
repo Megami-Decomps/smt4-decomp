@@ -1,6 +1,7 @@
-/* NON_MATCHING: allocation debug hooks are absent; color copy, reference reloads and saved registers differ. */
+/* NON_MATCHING: the two file/line debug traces now match; the engine color copy (retail ldm/stm of four words), reference reloads, saved registers and the hint-nop hooks after the null checks still differ. */
 #include "shard/W6_W6Match2_GeometryResources.h"
 #include <string.h>
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern const char DAT_0054baf8[];
@@ -38,6 +39,7 @@ GeometryResources *FUN_00271d28(const GeometryResources *source)
         const EngineView *original = static_cast<const EngineView *>(source->special);
         u32 engineFlags = original->flags;
         u16 count = original->count;
+        asdDebugTrace(DAT_0054baf8, 221);
         copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
         copy->base.flags = 0x300;
         copy->base.vertexCount = 0;
@@ -55,6 +57,7 @@ GeometryResources *FUN_00271d28(const GeometryResources *source)
         const BufferView *original = reinterpret_cast<const BufferView *>(source->buffers);
         u32 format = original->format;
         u32 count = original->count;
+        asdDebugTrace(DAT_0054baf8, 113);
         copy = static_cast<GeometryView *>(memAlloc(0x10000, 0x100, 0, sizeof(GeometryView), 0x10, 1));
         OwnedBufferPair *buffers = static_cast<OwnedBufferPair *>(FUN_00178b04(sizeof(OwnedBufferPair), DAT_0054baf8, 0x73));
         if (buffers != NULL)

@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 extern const char g_asdProcessSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Sys\Kernel\AsdProcess.cpp": __FILE__ */
@@ -9,7 +10,6 @@ extern const char g_asdProcessSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSD
 extern AsdProcessState g_asdProcess;
 
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-u32 asdGxCommandListCreate(void);
 void jobSetParent(void *owner, u32 handle);
 
 /* Creates a process named `name` in `group`, linked at the end of the group's list. It starts
@@ -61,7 +61,7 @@ retry:
     proc->onUpdate = onUpdate;
     proc->onEnd = onEnd;
     proc->unk48 = unk48;
-    proc->cmdList = asdGxCommandListCreate();
+    proc->cmdList = reinterpret_cast<u32>(asdGxCommandListCreate());
     proc->startTimer.active = 1;
     proc->timer74.active = 1;
     proc->endTimer.active = 1;

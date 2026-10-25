@@ -1,4 +1,3 @@
-/* NON_MATCHING: the singleton address is weak (retail keeps the null guard) and now matches; the per-handle fader call is built as a branch around mov+bl where retail predicates it (blne) after hoisting the volume copy. */
 #include "common.h"
 #include <stddef.h>
 struct Fader;

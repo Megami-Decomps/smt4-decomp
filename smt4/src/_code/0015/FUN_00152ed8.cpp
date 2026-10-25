@@ -1,17 +1,17 @@
 /* NON_MATCHING: register allocation (retail keeps the slot in r2 and the list end in r3) and the removed-flag is materialized in a register */
 #include <algorithm>
 #include "shard/S1GfxModel.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
-ModelSlotList *asdModelGetSlotArray0(s32 slot);
 void settings5BClearFlags(s32 flags);
 void FUN_00152fac(s32 which);
 
 /* Drop the selected slot from the registered list and re-show the scene. */
 void FUN_00152ed8(ModelSelector *selector)
 {
-    ModelSlotList *list = asdModelGetSlotArray0(0);
+    ModelSlotList *list = reinterpret_cast<ModelSlotList *>(asdModelGetSlotArray0(0));
     ModelSlot *slot = selector->slots[selector->index];
     ModelSlot **newEnd = std::remove(list->slots.begin, list->slots.end, slot);
     ModelSlot **oldEnd = list->slots.end;

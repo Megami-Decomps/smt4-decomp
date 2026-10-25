@@ -20,7 +20,6 @@ void effectProcessDestroy(u32 job);
 s32 renderScopedTaskPhaseOne(u32 job);
 s32 FUN_001aa4a8(u32 job);
 s32 effectProcessDrawPhase3(u32 job);
-u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, EffectProcess *);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, EffectProcess *, u32);
 
 // Create the battle effect scene, its camera and the appropriate 2D/3D drawing tasks.
@@ -53,7 +52,7 @@ u32 effectProcessCreate(u8 keepScene)
     FUN_002c159c(work, 5.0f, 1.0f);
     FUN_002c1edc(work, eye, target, up);
     FUN_002c1e30(work, 1, work->scene.fieldOfView, 0.1f, 25600.0f, 1.66666662693f);
-    work->scene.process = asdProcessCreateSimple("EffectProc", 2, 0, 0, FUN_0017fbe4, effectProcessDestroy, work);
+    work->scene.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EffectProc"), 2, 0, 0, FUN_0017fbe4, effectProcessDestroy, reinterpret_cast<u32>(work));
     if (work->keepScene) {
         work->jobB = taskCreateDraw("EffectDrawDown2D", 0x84, 0, 0, renderScopedTaskPhaseOne, NULL, work, work->scene.process);
     } else {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: same dataflow, but retail copies the 4-float vectors with vldmia/vstmia (and a vstmia+str pair for the 3-float copy) where built uses ldm/stm and per-word copies; the vector class that causes this is not recovered */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ struct CameraState {
 extern CameraState DAT_006471dc;
 extern Vec4 DAT_005c1120;
 
-f32 FUN_00152f54(void);
 void FUN_002a1850(Vec4 *out, s32 mode, f32 amount, const Vec3 *in);
 
 /* Saves the camera target, advances it by the current step and returns the resulting z. */

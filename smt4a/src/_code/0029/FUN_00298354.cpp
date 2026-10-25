@@ -2,10 +2,10 @@
 #include "battle/btlAction.h"
 #include "battle/BattleUnitRecordState.h"
 #include "shard/Shard0032.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 extern BtlActionGlobals g_btlAction;
-JobPool *jobGetWork(void);
 s32 jobIsValid(u32 job);
 void FUN_004eb928(BattleUnitRecordState *work, s32 state);
 s32 FUN_004ec120(BattleUnitRecordState *work, s32 state);
@@ -29,9 +29,9 @@ static inline SlotProgressView *slotProgress(BattleUnitSlotState *slot)
 }
 
 // Advance one unit's action state after the preceding job has reached a safe state.
-extern "C" s32 FUN_00298354(void)
+extern "C" s32 FUN_00298354(u32 handle)
 {
-    JobPool *job = jobGetWork();
+    JobPool *job = reinterpret_cast<JobPool *>(jobGetWork(handle));
     BattleUnitRecordState *work = (BattleUnitRecordState *)g_btlAction.data;
     SlotProgressView *slot = slotProgress(&work->slots[job->current]);
     bool canAdvance = true;

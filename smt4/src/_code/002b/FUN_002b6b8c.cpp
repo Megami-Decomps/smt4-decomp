@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002ae584(void);
+int appCostRecordFindById(void);
 int FUN_002ae9ec(int, int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_002ae584. */
+/* Supplied declaration required: appCostRecordFindById. */
 /* Supplied declaration required: FUN_002ae9ec. */
 
 
@@ -23,7 +23,7 @@ void FUN_002b6b8c(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   unsigned int temp_v0;
   
   temp_v0 = 0;
-  FUN_002ae584();
+  appCostRecordFindById();
   switch(*(unsigned char *)(param_1 + 0x23)) {
   case 0:
     temp_v0 = 0x411;

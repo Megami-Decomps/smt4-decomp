@@ -45,7 +45,7 @@ s32 gameGetNavigationState(void);
 s32 FUN_00293aac(void);
 s32 FUN_00293b8c(void);
 s32 FUN_0029e924(void *list);
-s32 FUN_00240d5c(void *list);
+s32 flaggedEntryGetValueByState(void *list);
 void FUN_003c2c6c(void *list);
 void FUN_003c2b74(void *list);
 void FUN_00233404(void);
@@ -76,14 +76,14 @@ void FUN_003aa510(BibleListUi *ui)
         if (gameGetNavigationState() == 0 || FUN_00293aac() != 0) {
             if (gameGetNavigationState() == 0 && ui->count > 0) {
                 s32 firstBefore = FUN_0029e924(ui->list);
-                s32 cursorBefore = FUN_00240d5c(ui->list);
+                s32 cursorBefore = flaggedEntryGetValueByState(ui->list);
                 if (FUN_00293b8c() != 1) {
                     if (FUN_00293b8c() == -1)
                         FUN_003c2c6c(ui->list);
                 } else {
                     FUN_003c2b74(ui->list);
                 }
-                if (FUN_0029e924(ui->list) != firstBefore || FUN_00240d5c(ui->list) != cursorBefore)
+                if (FUN_0029e924(ui->list) != firstBefore || flaggedEntryGetValueByState(ui->list) != cursorBefore)
                     FUN_00233404();
             }
         } else {

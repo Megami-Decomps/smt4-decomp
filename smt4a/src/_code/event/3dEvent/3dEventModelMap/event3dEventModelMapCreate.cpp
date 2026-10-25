@@ -31,8 +31,6 @@ s32 FUN_00162ea4(void);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void asdEnvResetModelBank(char *path, s32 mode);
 u32 asdMdlManagerCreateSecondList(char *path, u32 count);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 s32 FUN_0031bd24(u32 handle);
 void modelWorkDestroy(u32 handle);
 

@@ -29,4 +29,8 @@ typedef struct EventTexA {
     /* 0x8C */ u8 flag;
 } EventTexA;
 
+extern "C" {
+u8 *FUN_0026140c(void);
+}
+
 #endif

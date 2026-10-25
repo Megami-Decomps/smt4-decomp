@@ -1,3 +1,4 @@
+#include "util/EffMenuListAppend.h"
 #define EFFECT_EDITOR_STORAGE_DEFINITIONS
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W6_W6Match6_EffectRender.h"
@@ -7,6 +8,8 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include <math.h>
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 
 extern "C" {
@@ -24,7 +27,6 @@ extern EffectEditorDefaultSlot DAT_0044f858;
 extern EffectSelectionCatalogEntry *DAT_0044f4d4[13];
 extern EffectRenderGlobals DAT_004ea81c;
 void __aeabi_memcpy4(void *, const void *, u32);
-char *libc_strcpy(char *, const char *);
 void randomStateSeed(u32, u32);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
 void *rt_memcpy(void *, const void *, u32);
@@ -106,7 +108,7 @@ extern "C" u32 effectPollResourceFileDialog(void)
         if (g_effectEditor.selection.list != NULL) {
             registrationEntryInsert((u32)g_effectEditor.selection.list, 3);
         }
-        libc_strcpy(g_effectEditorResourceName, dialog.name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(g_effectEditorResourceName), reinterpret_cast<unsigned int *>(dialog.name));
         void* data = FUN_001e1a70(dialog.path);
         g_effectEditor.selection.list = data;
         __aeabi_memcpy4(&g_effectEditorWorkingSnapshot, data, 0x80);
@@ -254,7 +256,6 @@ void FUN_0021a250(const EffMenuPosition *position, u32 color,
 void FUN_00243224(const EffMenuPosition *first, const EffMenuPosition *second,
     u32 color, u32 resource);
 void *memAlloc(u32 heap, u32 category, u32 flags, u32 size, u32 alignment, u32 clear);
-void effMenuListAppend(EffMenuNode *node, u32 list);
 
 /* NON_MATCHING: aggregate copy shapes and vector temporary allocation differ. */
 // Edit the position vector, then draw its height, ground radius and transformed endpoint.

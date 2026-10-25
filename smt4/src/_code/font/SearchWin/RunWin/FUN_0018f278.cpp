@@ -1,6 +1,11 @@
 /* NON_MATCHING: readable rebuild from asm of the run window's loading-dots draw; armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/SpritePartDraw.h"
+#include "gfx/SpritePartDraw.h"
+#include "text/TextDraw.h"
+#include "util/Vec2Fixed.h"
+#include "gfx/StereoParallax.h"
 
 /* The title scene (its second state stack lives at 0x12AC). */
 struct TitleScene {
@@ -32,14 +37,10 @@ extern "C" {
 extern RunWin *g_runWin;
 extern TitleScene *g_titleScene;
 
-void FUN_002c39a4(TitleScene *scene);
-void FUN_002bf380(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
+void renderCtxSelectStereoLayout(TitleScene *scene);
 LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
-void FUN_002be5a4(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
 void FUN_002bed3c(void);
-s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
-f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 
@@ -49,7 +50,7 @@ u8 FUN_0018f278(void)
 {
     RunWin *win = g_runWin;
     if (win->active != 0 && win->visible != 0) {
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         FUN_002bf288(2, 14, 0x14F, 0, 0, 109);
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
         s32 y = vec2GetYInt(win->anchor);
@@ -62,7 +63,7 @@ u8 FUN_0018f278(void)
         FUN_002bf288(2, 14, 0x151, x, 0, 111);
         renderStackPop(&g_titleScene->secondStack);
         LayoutPoint *labelPoint = FUN_002bf4f8(14, 0x153);
-        FUN_002be5a4(4, 0xF49800FF, win->label, (f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
+        FUN_002be5a4(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
         s32 lit = step % 8;

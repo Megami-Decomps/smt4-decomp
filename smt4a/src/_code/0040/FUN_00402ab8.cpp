@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 194 rows); retail interleaves the float conversions with the rect loads, repeats the parallax call per cell and unrolls the row/mark scans differently */
 #include "common.h"
+#include "gfx/StereoParallax.h"
 #include "shard/TextureDrawCall.h"
 
 // Placement record of a sprite part: position and a pointer to its extra metrics.
@@ -39,7 +40,6 @@ extern "C" {
 extern u8* g_renderCtx;
 extern const char DAT_0052d134[];
 
-f32 renderCtxCalculateStereoParallax(u8* ctx, f32 amount);
 void efctSetSpeed(f32 speed);
 s32 libc_strcmp(const char* a, const char* b);
 void gameGetPlayerData(void);

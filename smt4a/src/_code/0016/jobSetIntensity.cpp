@@ -3,7 +3,7 @@
 // Dim ordinary jobs, but keep the three special kinds at full intensity.
 extern "C" void jobSetIntensity(u32 job, s32 fullIntensity)
 {
-    JobBlendWork* work = jobGetWork(job);
+    JobBlendWork* work = reinterpret_cast<JobBlendWork *>(jobGetWork(job));
     if (fullIntensity != 0)
         work->factor = 1.0f;
     else

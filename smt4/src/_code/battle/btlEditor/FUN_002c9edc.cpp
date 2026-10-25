@@ -1,13 +1,13 @@
 /* NON_MATCHING: explicit job forwarding and independent restore guards recovered; null-branch folding and editor flag registers differ. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "map/mapDepart.h"
 
 struct BtlUi;
 extern "C" {
 extern void* DAT_00435ce8;
 extern BtlUi* g_btlUiBlock;
 BtlMainState* jobGetWork(u32 job);
-void FUN_0025c2d0(BtlUi* ui, u32 enabled);
 void asdMemFree(void* memory);
 void jobStop(u32 job, u32 flags);
 
@@ -16,7 +16,7 @@ void FUN_002c9edc(u32 job)
 {
     BtlMainState* battle = jobGetWork(job);
     if (g_btlUiBlock != NULL) {
-        FUN_0025c2d0(g_btlUiBlock, 0);
+        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 0);
     }
     if (DAT_00435ce8 != NULL) {
         if (battle != NULL && battle->actions.records != NULL) {

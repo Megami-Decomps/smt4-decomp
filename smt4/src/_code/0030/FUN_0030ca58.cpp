@@ -10,7 +10,7 @@ int FUN_0024b5f0(...);
 int FUN_0024b660(...);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
-int FUN_0024b830(...);
+int shiftRandomNextFraction(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
@@ -69,7 +69,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0024b660. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: phaseCosInterpolate. */
@@ -157,7 +157,7 @@ void FUN_0030ca58(int param_1)
           temp_v24 = in_s0;
         }
         else {
-          FUN_0024b830(0);
+          shiftRandomNextFraction(0);
           temp_v2 = (float)VectorUnsignedToFloat
                                    (*(unsigned int *)(param_1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
           in_s0 = (float)(int)(temp_v17 * (temp_v22 - (float)puVar9[10]) * temp_v2);
@@ -173,7 +173,7 @@ void FUN_0030ca58(int param_1)
         temp_v0 = (unsigned char)(temp_v6 >> 0x18);
         if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
           temp_v11 = temp_v17;
-          FUN_0024b830();
+          shiftRandomNextFraction();
           temp_v2 = (float)VectorUnsignedToFloat(puVar9[9],(unsigned char)(in_fpscr >> 0x16) & 3);
           in_s0 = *(float *)(param_1 + 0x14) + temp_v2 * temp_v17 * (temp_v22 - (float)puVar9[10]);
           *(float *)(param_1 + 0x14) = in_s0;
@@ -270,7 +270,7 @@ void FUN_0030ca58(int param_1)
             pfVar6[4] = (float)(temp_v4 + (int)temp_v2);
           }
           else if (temp_v24 != 0.0f) {
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v2 = (float)((unsigned long long)temp_v23 >> 0x20);
             temp_v21 = CONCAT44(temp_v10,temp_v2);
             temp_v2 = (in_s0 * (float)temp_v23 * (float)puVar9[0x38] +
@@ -284,17 +284,17 @@ void FUN_0030ca58(int param_1)
             temp_v17 = temp_v9 * temp_v2 - temp_v17 * temp_v2;
             pfVar7[1] = temp_v17 / temp_v10;
             if (((unsigned int)*(unsigned char *)(puVar9 + 0x39) & ((temp_v6 & 1) - 1)) != 0) {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v2 = -((float)puVar9[0x34] *
                        (((float)temp_v21 - (float)puVar9[0x35]) + temp_v17 * (float)puVar9[0x35]));
             }
             else {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v2 = (((float)temp_v21 - (float)puVar9[0x35]) + temp_v17 * (float)puVar9[0x35]) *
                       (float)puVar9[0x34];
             }
             pfVar7[2] = temp_v2;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v17 = (float)temp_v15;
             pfVar7[3] = temp_v2 * temp_v22;
             temp_v2 = (float)((unsigned long long)temp_v15 >> 0x20);
@@ -338,10 +338,10 @@ void FUN_0030ca58(int param_1)
             *pfVar6 = temp_v2;
             pfVar6[1] = temp_v9;
             pfVar6[2] = temp_v12;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             pfVar7[6] = ((float)temp_v21 - (float)puVar9[0x1b]) + temp_v10 * (float)puVar9[0x1b];
             if (temp_v28 != 2) {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v2 = temp_v10 * (float)puVar9[0x26];
               if (temp_v28 != 1) {
                 temp_v10 = 0.0f;
@@ -351,7 +351,7 @@ void FUN_0030ca58(int param_1)
                 pfVar7[7] = temp_v10;
               }
               else {
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v3 = 0;
                 pfVar7[7] = temp_v10 * temp_v22;
                 randomAdvanceShiftRegister();

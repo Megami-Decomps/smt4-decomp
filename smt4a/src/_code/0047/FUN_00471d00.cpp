@@ -1,4 +1,3 @@
-/* NON_MATCHING: AOC table loads, comparator literals and return paths are scheduled differently. */
 #include "addon/aocMain.h"
 #include "addon/AocLookup.h"
 extern "C" {
@@ -13,17 +12,23 @@ extern AocSystemA* g_aocSystem;
 // Checks the current add-on record against the owner's table and add-on availability flag.
 u32 FUN_00471d00(AocSystemA* system)
 {
-    if (FUN_004186a4() != 0) {
-        u16 id = FUN_004186e0();
-        if (id >= 0x15E) {
-            AocTableSearchRecordA key;
-            key.id = id;
-            void* record = libc_bsearch(&key, system->table.records, g_aocSystem->table.count,
-                                        sizeof(AocTableSearchRecordA), FUN_00476dfc);
-            if (record == NULL || objGetFlagBit16(g_aocMain) == 0) {
-                return 1;
-            }
-        }
+    if (FUN_004186a4() == 0) {
+        return 0;
+    }
+    u16 id = FUN_004186e0();
+    if (id < 0x15E) {
+        return 0;
+    }
+    AocTableSearchRecordA key;
+    key.id = id;
+    const void* records = system->table.records;
+    u32 count = g_aocSystem->table.count;
+    void* record = libc_bsearch(&key, records, count, sizeof(AocTableSearchRecordA), FUN_00476dfc);
+    if (record == NULL) {
+        return 1;
+    }
+    if (objGetFlagBit16(g_aocMain) == 0) {
+        return 1;
     }
     return 0;
 }

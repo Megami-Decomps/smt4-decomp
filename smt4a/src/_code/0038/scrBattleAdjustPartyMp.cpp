@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_003ee0c0.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -15,7 +16,6 @@ extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32);
 BtlMainStateA *btlGetMainState();
 void *btlUnitGet(u32);
-void FUN_003ee0c0(BtlMainStateA *);
 void FUN_004fb43c(s32, void *, u32, s32, s32, s32, s32);
 void FUN_004fc094(s32, void *, s32, ResourceUnit *, s32, s32, s32, s32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);

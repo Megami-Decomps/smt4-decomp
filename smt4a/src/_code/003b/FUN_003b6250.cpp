@@ -6,7 +6,7 @@
 extern "C" {
 UniteWork *uniteGetWork();
 void efctSetSpeed(f32 speed);
-s32 recordGetModeForId(s32 recordId);
+u8 recordGetModeForId(s32 recordId);
 const UniteSelectionLayoutPrefixA *FUN_001834a4(u32 group, u32 entry);
 void largeGridDrawButtonStrip(UniteWork *work, s32 x, s32 y,
                               s32 selectedIndex, f32 speed);

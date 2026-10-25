@@ -6,7 +6,7 @@ extern StatusFields g_gameState;
 void *gameGetMapBlock();
 s32 FUN_00287800();
 s32 FUN_00287874(u16 quest);
-s32 FUN_00287894(u16 quest);
+s32 table1bOr1cGetRecordValue(u16 quest);
 s32 questPassesAvailabilityConditions(u16 quest);
 s32 FUN_00298dc8(u16 quest);
 s32 FUN_00298e40(u16 quest, s32 requirement, QuestRequirementProgress *progress);
@@ -22,7 +22,7 @@ extern "C" s32 questClassifyCompletionNotification()
         return 4;
     for (u16 quest = 100; quest < 400; ++quest) {
         if (FUN_00298dc8(quest)) {
-            s32 kind = FUN_00287894(quest);
+            s32 kind = table1bOr1cGetRecordValue(quest);
             if (kind == 1) {
                 if (FUN_00287874(quest)) {
                     s32 remaining = 0;

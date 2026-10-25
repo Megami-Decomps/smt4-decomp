@@ -1,6 +1,7 @@
 /* NON_MATCHING: Retail vldr s0, [pc, #116] differs from recovered vldr s0, [pc, #120]. */
 #include "common.h"
 #include <string.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 struct Float4LocalView {
     f32 unk00; // 0x00
@@ -25,7 +26,6 @@ struct PolyDefaultsLocalView {
 };
 
 extern "C" {
-void memClear(void *destination, u32 size);
 extern Float4LocalView g_polyDefaultColor;
 
 // Clear the record and install its default vectors, color, and scalar values.

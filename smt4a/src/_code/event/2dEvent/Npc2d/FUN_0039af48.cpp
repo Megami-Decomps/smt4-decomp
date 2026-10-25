@@ -11,7 +11,6 @@ s32 FUN_00162ea4(void);
 NpcPortraitResource *FUN_00409fe8(s32, s32, s32);
 s32 FUN_002897cc(u32);
 void FUN_0034da3c(u32);
-u32 asdProcessCreateSimple(const s8 *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 extern const s8 DAT_0052f4f0[];
 
 // Create an NPC's two-dimensional portrait, choosing the draw region from its x coordinate.
@@ -57,7 +56,6 @@ u32 FUN_0039af48(u32 npcId, u32 option, s32 x, s32 y, f32 alpha)
     else
         work->screenRegion = 5;
     work->speed = 0.33f;
-    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0,
-                                 FUN_002897cc, FUN_0034da3c, reinterpret_cast<u32>(work));
+    return asdProcessCreateSimple(DAT_0052f4f0, 4, 0, 0, FUN_002897cc, FUN_0034da3c, reinterpret_cast<u32>(work));
 }
 }

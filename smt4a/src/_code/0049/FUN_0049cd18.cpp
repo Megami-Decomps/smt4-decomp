@@ -1,6 +1,7 @@
 /* NON_MATCHING: corrected unsupported buy-kind11 and recovered percentage bitfield; sale missing-price block sharing and percentage multiply/divide registers still differ. */
 #include "common.h"
 #include <stddef.h>
+#include "gamedata/PartyMoney.h"
 
 /* An item stack: its id and flags (bit 1: priced by a percentage in bits 2..9). */
 struct ItemStack {
@@ -40,7 +41,6 @@ u32 aocEntryGetKind(u32 id);
 s32 gameDataBlocksGetTableFlag(void);
 void flagValueAdd(u32 id, s32 count);
 void flagValueSub(u32 id, s32 count);
-void FUN_004a0ef4(s32 amount);
 void FUN_00408184(s32 kind, s32 amount);
 
 #define PRICE_MISSING 99999999
@@ -120,7 +120,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
             price *= 3;
         total = -price * count;
     }
-    FUN_004a0ef4(total);
+    partyAddMoneyClampedForward(total);
     if (total < 0)
         FUN_00408184(30, -total);
     else

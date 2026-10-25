@@ -14,8 +14,6 @@ BustupEffectLineObject *FUN_00246644(u32 effect, u32 layer, u32 mode);
 s32 effLineJobUpdate(u32 job);
 void jobWorkFreeWork(u32 job);
 s32 effectLineUpdateCallback(u32 job);
-u32 asdProcessCreateSimple(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
                     AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, u32 parent);
 void bustupCutAnimSetJobParam(u32 job);
@@ -31,8 +29,7 @@ s32 EVE_EffectLineStart(void)
         work->object = FUN_00246644(10, 7, 0);
         work->elapsed = 0.0f;
         work->duration = duration;
-        u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403748), 2, 0, 0,
-                                         effLineJobUpdate, jobWorkFreeWork, reinterpret_cast<u32>(work));
+        u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403748), 2, 0, 0, effLineJobUpdate, jobWorkFreeWork, reinterpret_cast<u32>(work));
         taskCreateDraw(reinterpret_cast<const s8 *>(DAT_00403738), 0x71, 0, 0,
                        effectLineUpdateCallback, NULL, reinterpret_cast<u32>(work), job);
         bustupCutAnimSetJobParam(job);

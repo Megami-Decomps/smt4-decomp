@@ -1,9 +1,9 @@
 /* NON_MATCHING: instruction scheduling and register allocation differ; retail 45 vs built 45 rows, 27 diff lines. */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-void FUN_002c39a4(void);
 void effectRestoreSavedRenderPairs(EffRenderState *ctx, u32 value);
 void layoutApplyForState(EffRenderState *ctx);
 
@@ -23,7 +23,7 @@ void effMiscUpdateAndDraw(EffMiscObject *obj)
         return;
     }
     saved = g_titleScene->unk6f8;
-    FUN_002c39a4();
+    renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
     g_effMiscKinds[obj->kind].lateUpdate(obj);
     if (mode == 3 || mode == 4) {
         layoutApplyForState(g_titleScene);

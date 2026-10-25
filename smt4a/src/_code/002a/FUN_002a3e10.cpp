@@ -12,7 +12,6 @@ extern "C" {
 extern MovieEventGlobals g_eventCommand;
 s32 scrGetArg(u32 index);
 s32 querySlotHasHandle(void);
-void FUN_00342334(s32 enabled);
 void commonBgStopAndResetFade(void);
 u32 gameFlagIsSet(s32 flag);
 u32 mobiclipProcessCreate(s32 movie, u32 alreadySeen);

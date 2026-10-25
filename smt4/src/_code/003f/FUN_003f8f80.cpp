@@ -1,4 +1,4 @@
-/* NON_MATCHING: same search; armcc keeps the table pointer in r0 and compares with unsigned branches, retail copies it to r1 and uses signed ones. */
+/* NON_MATCHING: the lookup is now an inlined helper (the writeback table-pointer walk matches); retail copies the key into a second VFP register and its float compares use the signed bgt/bls forms where armcc emits bhi/ble. */
 #include "common.h"
 
 struct CurvePoint {
@@ -18,14 +18,14 @@ extern "C" {
 
 /* Looks up the value of the curve at the key: the point at or just below it (clamped to the ends),
  * starting from a guess of where the key falls and walking to it. */
-f32 FUN_003f8f80(const CurveTable *table, f32 key)
+static __inline f32 curveLookup(const CurveTable *curve, f32 key)
 {
-    const CurvePoint *point = table->points;
+    const CurvePoint *point = curve->points;
 
     if (point->key <= key) {
-        point = &table->points[table->count - 1];
+        point = &curve->points[curve->count - 1];
         if (point->key > key) {
-            point = &table->points[(u32)(table->scale * ((f32)(table->count - 1) * key))];
+            point = &curve->points[(u32)(curve->scale * ((f32)(curve->count - 1) * key))];
             if (point->key > key) {
                 do {
                     point--;
@@ -39,6 +39,11 @@ f32 FUN_003f8f80(const CurveTable *table, f32 key)
         }
     }
     return point->value;
+}
+
+f32 FUN_003f8f80(const CurveTable *table, f32 key)
+{
+    return curveLookup(table, key);
 }
 
 } /* extern "C" */

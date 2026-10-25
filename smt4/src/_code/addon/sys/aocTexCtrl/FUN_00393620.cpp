@@ -2,6 +2,7 @@
 #include "addon/sys/aocTexCtrl.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 struct AocTextureListHeader {
@@ -32,7 +33,6 @@ typedef char AocTextureListLayouts[sizeof(AocTextureListHeader) == 0x40 &&
 }
 extern "C" {
 extern const char DAT_003ff788[];
-void *asdMemAlloc(u32 alignment, u32 granularity, s32 heap, u32 bytes, s32 clear);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void FUN_00393620(AocTexCtrl *control, const AocTextureFile *file)

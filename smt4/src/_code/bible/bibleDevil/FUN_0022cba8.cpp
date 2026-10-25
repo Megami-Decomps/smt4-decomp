@@ -14,7 +14,7 @@ int FUN_0022dcac(...);
 int uiRectDrawAtBottomRight(int, int, int);
 int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int);
-int FUN_00240d5c(...);
+int flaggedEntryGetValueByState(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002bed3c(void);
 int uiMenuAnchorGetOffset(int, float [3]);
@@ -41,7 +41,7 @@ extern unsigned int DAT_0049375c; /* 0x49375c */
 /* Supplied declaration required: FUN_00231bcc. */
 extern int flaggedValueHolderGetTotal(int);
 extern unsigned long long rangeLimitMin(int);
-/* Supplied declaration required: FUN_00240d5c. */
+/* Supplied declaration required: flaggedEntryGetValueByState. */
 extern int FUN_0029e924(int);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
@@ -114,7 +114,7 @@ void FUN_0022cba8(int param_1)
         if (temp_v11 < temp_v1) {
           do {
             if (*(int *)(param_1 + 0x14) == 2) {
-              temp_v15 = FUN_00240d5c(param_1 + 0x20);
+              temp_v15 = flaggedEntryGetValueByState(param_1 + 0x20);
               temp_v2 = (int)((unsigned long long)temp_v15 >> 0x20);
               if ((int)temp_v15 != temp_v11) goto LAB_0022cd30;
             }
@@ -169,7 +169,7 @@ LAB_0022cd30:
           if (temp_v0 < temp_v1) {
             do {
               if ((*(int *)(param_1 + 0x14) == 2) &&
-                 (temp_v2 = FUN_00240d5c(param_1 + 0x20,temp_v2), temp_v2 == temp_v0)) {
+                 (temp_v2 = flaggedEntryGetValueByState(param_1 + 0x20,temp_v2), temp_v2 == temp_v0)) {
                 if (temp_v0 != 0) {
                   temp_v2 = *(int *)(temp_v0 * 4 + 0x493758);
                   if (temp_v2 != (&DAT_0049375c)[temp_v0]) {
@@ -206,7 +206,7 @@ LAB_0022cd30:
              (temp_v2 == 5 || temp_v2 == 8)) {
             temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
             temp_v0 = (int)*(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
-            temp_v2 = FUN_00240d5c(param_1 + 0x20);
+            temp_v2 = flaggedEntryGetValueByState(param_1 + 0x20);
             temp_v12 = (float)(*(int *)(param_1 + 0x594) + 1);
             uiDrawScrollingSelectionEntry(param_1,temp_v2,temp_v12,(int)*(char *)(param_1 + 0x56d));
             temp_v16 = 1.4013e-45f;

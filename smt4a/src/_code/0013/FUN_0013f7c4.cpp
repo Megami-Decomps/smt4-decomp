@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013f7c4` (_code @ 0x13f7c4, 0x868 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -51,7 +52,6 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164490. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001678a8. */
@@ -115,7 +115,7 @@ unsigned int FUN_0013f7c4(void)
     FUN_00164490(0);
   }
   if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8f) != '\0') {
-    temp_v1 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
+    temp_v1 = vec2GetXInt(reinterpret_cast<const void *>((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00));
     temp_v2 = vec2GetYInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xb00);
     temp_v3 = FUN_001692ac(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
@@ -151,7 +151,7 @@ unsigned int FUN_0013f7c4(void)
   }
   temp_v1 = (*(int *)((unsigned char *)&g_messageMain + 0x8));
   if (*(int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x158) != 0) {
-    temp_v2 = vec2GetXInt((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xd30);
+    temp_v2 = vec2GetXInt(reinterpret_cast<const void *>((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0xd30));
     temp_v4 = vec2GetYInt(temp_v1 + 0xd30);
     temp_v3 = FUN_001692ac(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v3);

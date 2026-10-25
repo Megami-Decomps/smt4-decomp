@@ -1,8 +1,8 @@
 /* NON_MATCHING: zero/one setup order, predicated owned-child keepAlive test, and literal-pool order differ; saved global/zero registers now match. */
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "map/mapRndMaze.h"
 
 extern "C" {
-bool FUN_002ef9f0();
 s32 gameFlagIsSet(u32 flag);
 void jobStop(u32 job, s32 reason);
 void asdMemFree(void *memory);

@@ -1,6 +1,8 @@
 /* NON_MATCHING: 178 vs 173 rows; same instruction sequence except callee-saved register numbering (retail keeps the constant 1 in r5 and the global's address in r6) and the job-ordering loops. Twin of the other game's 2dEventTex creator. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 // Manager of the 2D event texture layer: the update process plus the jobs it owns.
 struct EventTexManager {
@@ -19,16 +21,13 @@ extern EventTexManager* g_eventTex;
 extern u32 g_eventTexHandles[4];
 
 void* asdMemAlloc(u32 size, u32 alignment, u32 arg, u32 memoryType, u32 flag);
-void memClear(void* block, u32 size);
-u32 asdProcessCreateSimple(const char* name, s32 priority, s32 a, s32 b, void (*update)(void*),
-                           void (*release)(void*), void* owner);
 void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, s32 (*draw)(u32), s32 c,
                     void* owner, u32 parent);
 void eventTexUpdateScreenShake(void* owner);
 void eventTextureRelease(void* owner);
 s32 FUN_001f42d4(u32 job);
 s32 jobIsValid(u32 job);
-void FUN_0026e68c(u32 job, s32 arg);
+void FUN_0026e68c(u32 job, u8 value);
 void jobSetParent(u32 parent, u32 job);
 s32 jobGetStatus(u32 job);
 
@@ -41,8 +40,7 @@ u32 FUN_002ee6f8(void)
         memClear(manager, 0x68);
         g_eventTex = manager;
         manager->active = 1;
-        manager->process = asdProcessCreateSimple("EVE_2dTex", 2, 0, 0, eventTexUpdateScreenShake,
-                                                  eventTextureRelease, manager);
+        manager->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_2dTex"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventTexUpdateScreenShake), reinterpret_cast<AsdProcFunc>(eventTextureRelease), reinterpret_cast<u32>(manager));
         taskCreateDraw("EVE_2dTexDraw", 0x7d, 0, 0, FUN_001f42d4, 0, manager, manager->process);
         taskCreateDraw("EVE_2dTexDraw", 0xdb, 0, 0, FUN_001f42d4, 0, manager, manager->process);
 

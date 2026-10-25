@@ -36,7 +36,7 @@ extern u32 g_titleScene; /* 0x44ea00 */
 extern TitleWork *jobGetWork(void);
 extern int surfaceCopy(Surface *dst, Surface *src);
 extern int FUN_002bfadc(int arg, Surface *surface);
-extern int FUN_002c39a4(u32 scene);
+extern int renderCtxSelectStereoLayout(u32 scene);
 
 /* Renders the title scene into the backdrop surface once, then halves the surface size to mark it copied. */
 u32 titleBackdropRender(void)
@@ -46,7 +46,7 @@ u32 titleBackdropRender(void)
     if (!titleBackdropPending(&work->backdrop)) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     work->surface->width = 0x200;
     work->surface->height = 0x200;
     work->backdrop.fresh = FUN_002bfadc(0, work->surface);

@@ -4,7 +4,7 @@
 #include <math.h>
 
 extern "C" {
-f32 FUN_00514540(ShiftRandomState *state);
+f32 shiftRandomNextFraction(ShiftRandomState *state);
 
 // Compute burst or continuous emission count, retaining the fractional count between frames.
 void FUN_00375c74(ParticleEmissionState *state, const ParticleEmissionDefinition *definition,
@@ -17,7 +17,7 @@ void FUN_00375c74(ParticleEmissionState *state, const ParticleEmissionDefinition
     } else if (state->frame == 0 && definition->burstOnFirstFrame != 0) {
         *burst = 1;
         if (definition->randomness > 0.0f) {
-            f32 random = FUN_00514540(NULL);
+            f32 random = shiftRandomNextFraction(NULL);
             *count = static_cast<s32>(random * (1.1f - definition->randomness) * static_cast<f32>(state->initialCount));
         } else {
             *count = state->initialCount;
@@ -26,7 +26,7 @@ void FUN_00375c74(ParticleEmissionState *state, const ParticleEmissionDefinition
     } else {
         *burst = 0;
         if (definition->randomness > 0.0f) {
-            f32 random = FUN_00514540(NULL);
+            f32 random = shiftRandomNextFraction(NULL);
             state->remainder += random * (1.1f - definition->randomness) *
                           static_cast<f32>(definition->rate) * timeStep;
         } else {

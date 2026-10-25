@@ -30,7 +30,6 @@ extern PlayLogWorkA *g_playLog;
 extern const PlayLogDrawDefaultsA DAT_0052dd98;
 void sysMemClear(void *memory, u32 size);
 void asdTMTexTableLoadSprites(u32 table);
-void asdTMTexLoadMainHeap(u32 table, s32 node);
 void loadSlotEnsureLoaded(u32 slot);
 void paramsClearPacket(UiResourceParameters *parameters);
 

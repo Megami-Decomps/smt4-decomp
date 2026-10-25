@@ -3,12 +3,12 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 kind);
-void FUN_00301a08(s32 kind, u32 *first, u32 *count);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
 u32 scrCommBattleGroupHpPercentAtMost()
@@ -18,7 +18,7 @@ u32 scrCommBattleGroupHpPercentAtMost()
     s32 totalHp = 0;
     s32 totalMaxHp = 0;
     u32 first, count;
-    FUN_00301a08(kind, &first, &count);
+    FUN_00301a08(kind, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < (s32)(first + count); ++index) {
         const BtlCombatantEntryA *entries = btlGetMainState()->entries;
         const BtlCombatantEntryA *entry = &entries[index];

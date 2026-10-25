@@ -14,7 +14,7 @@ typedef struct AppCostRecord {
 } AppCostRecord;
 
 AppSlotOwner *dataTable40FindById(u32 id);
-AppCostRecord *FUN_002ae584(u32 id);
+AppCostRecord *appCostRecordFindById(u16 id);
 s32 flagBitIsSet(u32 bit);
 
 /* Returns the capacity of `id` left after the costs of the installed apps 12-15 (at least 1), or 0
@@ -26,16 +26,16 @@ s32 FUN_0029a924(u32 id)
         s32 capacity = owner->capacity;
         s32 used = 0;
         if (flagBitIsSet(12)) {
-            used += FUN_002ae584(12)->cost;
+            used += appCostRecordFindById(12)->cost;
         }
         if (flagBitIsSet(13)) {
-            used += FUN_002ae584(13)->cost;
+            used += appCostRecordFindById(13)->cost;
         }
         if (flagBitIsSet(14)) {
-            used += FUN_002ae584(14)->cost;
+            used += appCostRecordFindById(14)->cost;
         }
         if (flagBitIsSet(15)) {
-            used += FUN_002ae584(15)->cost;
+            used += appCostRecordFindById(15)->cost;
         }
         s32 remaining = capacity - used;
         if (remaining <= 0) {

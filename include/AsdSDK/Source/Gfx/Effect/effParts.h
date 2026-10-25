@@ -16,4 +16,8 @@ typedef struct EffPart {
     /* 0x90 */ u8 unk90[0x30];
 } EffPart;
 
+extern "C" {
+void asdModelSlotSetTranslation(s32 slot,u32 bank,f32 x,f32 y,f32 z);
+}
+
 #endif

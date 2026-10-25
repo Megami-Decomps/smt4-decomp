@@ -1,16 +1,16 @@
 /* NON_MATCHING: look-at arithmetic is fused; input VFP packing, saved eye pointer and up-vector construction differ. */
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 extern StatusCameraWork *g_statusCamera;
 void *asdMemAlloc(u32, u32, u32, u32, u32);
-void memClear(void *, u32);
 void FUN_002bc644(s32, s32, s32, s32);
 void FUN_002c2044(StatusCameraWork *, u32);
 void FUN_002c1edc(StatusCameraWork *, const Vec3 *, const Vec3 *, const Vec3 *);
 void FUN_002c1e30(StatusCameraWork *, u32, f32, f32, f32, f32);
-void FUN_00298d50(StatusCameraWork *);
 void asdCameraRegister(StatusCameraWork *);
 void FUN_002c159c(StatusCameraWork *, f32, f32);
 
@@ -40,7 +40,7 @@ void FUN_00258c04(const Vec3 *eye, const Vec3 *direction, const Vec3 *reference,
     FUN_002c2044(work, 1);
     FUN_002c1edc(work, &work->eye, &target, &up);
     FUN_002c1e30(work, 1, work->lens.fov, work->lens.nearClip, work->lens.farClip, 1.6666666f);
-    FUN_00298d50(work);
+    FUN_00298d50(reinterpret_cast<u32>(work));
     asdCameraRegister(work);
     FUN_002c159c(work, scale, 1.0f);
 }

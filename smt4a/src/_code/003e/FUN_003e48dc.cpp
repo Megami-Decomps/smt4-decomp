@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "ui/MessageMain.h"
 
 extern "C" {
 PartySlotTableA* gameGetSlotTable(void);

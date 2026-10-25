@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014f3f4` (_code @ 0x14f3f4, 0x11a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -73,7 +74,6 @@ extern int ifTouchIsActive(void);
 extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
 extern int gameGetIndexedSlotMember(unsigned int);
-extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: renderCtxPopState. */
@@ -313,7 +313,7 @@ char FUN_0014f3f4(void)
                 temp_v21 = 0x13;
                 temp_v20 = 0;
                 FUN_001835b4(2,8,0x116,temp_v6);
-                temp_v7 = packNibblesAndByte(6,1,0);
+                temp_v7 = packNibblesAndByte(6, 1, 0);
                 renderStackPushIndexed(g_renderCtx,6,temp_v7);
                 efctSetSpeed();
                 temp_v21 = 0x15;
@@ -358,7 +358,7 @@ char FUN_0014f3f4(void)
         temp_v20 = 0;
         temp_v21 = 0x1a;
         FUN_001835b4(2,8,0x182,temp_v6);
-        temp_v7 = packNibblesAndByte(6,1,0);
+        temp_v7 = packNibblesAndByte(6, 1, 0);
         renderStackPushIndexed(g_renderCtx,6,temp_v7);
         efctSetSpeed();
         temp_v20 = 0;

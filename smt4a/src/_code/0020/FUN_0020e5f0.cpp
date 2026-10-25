@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, lr}. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct HolderView;
 
@@ -25,9 +26,6 @@ struct BootStateView {
 
 extern "C" {
 void* asdOperatorNew(u32 size);
-void* asdProcessCreateSimple(const char* name, s32 priority, u32 unk08,
-                             u32 unk0C, void (*shutdown)(),
-                             void (*entry)(), void* context);
 void runnerShutdown();
 void FUN_002ef9ec();
 HolderView* vtblHolderInit557bbc(HolderView* self);
@@ -43,8 +41,7 @@ void FUN_0020e5f0(void)
     }
 
     DAT_00588e2c = state;
-    state->process = asdProcessCreateSimple("BOOT C", 4, 0, 0,
-                                            runnerShutdown, FUN_002ef9ec, 0);
+    state->process = reinterpret_cast<void*>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("BOOT C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(runnerShutdown), reinterpret_cast<AsdProcFunc>(FUN_002ef9ec), 0));
 
     HolderView* holder = static_cast<HolderView*>(asdOperatorNew(12));
     if (holder != 0) {

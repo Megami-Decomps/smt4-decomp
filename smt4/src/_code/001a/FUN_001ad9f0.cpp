@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (221 vs ~221 rows); frame size and register assignment of the helper-inlined ring operations differ */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 // Render-state stack: the current entry is slots[index]; the flush callback runs when the
 // value changed (or a flush is already pending).
@@ -37,7 +38,7 @@ extern "C" {
 extern TitleScene* g_titleScene;
 extern QuestUi* g_uiQuest;
 
-void FUN_002c39a4(TitleScene* scene);
+void renderCtxSelectStereoLayout(TitleScene* scene);
 u32 FUN_002c5d80(u32 a, u32 b);
 void FUN_00197e34(void);
 void FUN_00186a48(void);
@@ -49,7 +50,6 @@ void* FUN_002bf4f8(u32 group, u32 index);
 void drawSkillCategoryLabel(u16 id, s32 x, s32 y, u32 arg);
 u32 FUN_002bcddc(u16 id, u32 arg);
 void textFormatBuffer(char* out, const char* format, ...);
-void FUN_002be5a4(s32 a, s32 b, const char* text, f32 x, f32 y, f32 scale, f32 rotation, f32 alpha);
 void effectRenderTransformedInstance(void* vec, f32 amount);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void FUN_002c198c(TitleScene* scene);
@@ -99,7 +99,7 @@ static void ringReplace(DrawStateRing* ring, u32 value)
 u32 FUN_001ad9f0(void)
 {
     QuestUi* quest = g_uiQuest;
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     ringPush(&g_titleScene->stateRing, FUN_002c5d80(1, 0));
     switch (quest->state) {
     case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10:

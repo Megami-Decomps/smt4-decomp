@@ -1,5 +1,6 @@
 /* NON_MATCHING: layout and instruction sequence match; only register numbering differs: retail keeps &g_effectEditor in r7, the dir literal in r6 and the locals' base in r5 (loading &g_effectEditor and the result before allocating the frame) and reads the node state through r0, so it reloads the label before the inlined `mov r0, #0` stub; this build uses r6/r5/r7 and r1 and omits that reload. */
 #include "gfx/EffectEditorStorage.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern const u8 DAT_00400001;
@@ -8,7 +9,6 @@ void asdMemoryFreeLocked(void* memory);
 void FUN_002f2aa8(EffMenuNode* node);
 void namedObjectFormatFullName(EffMenuNode* node, char* dest);
 void namedObjectFormatName(EffMenuNode* node, char* dest);
-char* libc_strcpy(char* dest, const char* src);
 void textFormatBuffer(char* dest, const char* format, ...);
 __weak void FUN_002e6fa8_hook(void* list, const char* path);
 s32 FUN_002c9df8(EffMenuNode* node, const char* dir); // platform stub: `mov r0, #0; bx lr`
@@ -50,7 +50,7 @@ u32 FUN_002e6fa8(void)
     if (input.state == 2) {
         result = 0x400000;
     } else if (input.state == 1 && g_effectEditor.selection.list != NULL) {
-        libc_strcpy(g_effectEditorResourceName, input.name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(g_effectEditorResourceName), reinterpret_cast<unsigned int *>(input.name));
         textFormatBuffer(path, "%s%s", "effect_editor/", input.fullName);
         FUN_002e6fa8_hook(g_effectEditor.selection.list, path);
         result = (u32)&DAT_00400002;

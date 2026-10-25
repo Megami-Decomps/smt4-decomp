@@ -1,6 +1,7 @@
 /* NON_MATCHING: the build hoists the constant 1 and orders the state stores differently from retail (retail shares one `str r0,[r4,#8]` between states 1 and 3). */
 #include "common.h"
 #include <stddef.h>
+#include "shard/JobWork.h"
 
 /* One sprite object of the job's work block (0x8C bytes). */
 struct JobSprite {
@@ -32,7 +33,6 @@ typedef char SpriteJobWorkOffsets[
     sizeof(JobSprite) == 0x8C ? 1 : -1];
 
 extern "C" {
-SpriteJobWork *jobGetWork(u32 job);
 void FUN_0014e188(JobSprite *sprite, s32 mode, u32 id, void *shared, s32 priority, f32 scale);
 void FUN_00163aa4(JobSprite *sprite, f32 delta);
 void pairSetSecondResetFirst(JobSprite *sprite, u32 second);
@@ -45,7 +45,7 @@ void spriteSetVisible(JobSprite *sprite, u8 visible);
 /* Advances the three-sprite banner: builds the sprites, plays them until the first one finishes, then ends. */
 s32 FUN_00472568(u32 job)
 {
-    SpriteJobWork *work = jobGetWork(job);
+    SpriteJobWork *work = reinterpret_cast<SpriteJobWork *>(jobGetWork(job));
     work->frame = (work->frame + 1) % 40;
     switch (work->state) {
     case 0:

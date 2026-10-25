@@ -1,16 +1,15 @@
+#include "gamedata/GameDataEntries.h"
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 
-extern s32 gameDataFindEntryIndex(void);
-
-/* Address of the entry of the game data table selected by gameDataFindEntryIndex. */
-u32 *gameDataGetTableEntry(void)
+/* Address of the state entry of the key pair (`groupId`, `itemId`). */
+ItemFlagCacheState *gameDataGetTableEntry(u32 groupId, u32 itemId)
 {
-    s32 index = gameDataFindEntryIndex();
+    s32 index = gameDataFindEntryIndex(groupId, itemId);
     GameDataSub *sub = &g_gameDataBlocks.saveBlock->save.sub;
 
-    return &sub->table[index];
+    return reinterpret_cast<ItemFlagCacheState *>(&sub->table[index]);
 }
 
 }

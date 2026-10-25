@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct Globals {
 
 extern Globals g_gameState;
 
-int libc_strcpy(void *dst, u32 arg);
 u32 scrGetArgString(u32 index);
 u32 scrGetArg(int index);
 
@@ -22,7 +22,7 @@ u32 gameStateSetFromScript(void)
     u32 arg = scrGetArgString(1);
 
     g_gameState.value = value;
-    libc_strcpy(g_gameState.text, arg);
+    libc_strcpy(reinterpret_cast<unsigned int *>(g_gameState.text), reinterpret_cast<unsigned int *>(arg));
     return 1;
 }
 

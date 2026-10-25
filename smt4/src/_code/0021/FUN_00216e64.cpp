@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00216e64` (_code @ 0x216e64, 0x7a8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ int FUN_002b7bca(int, int, int, unsigned char *);
 int devilGetRecord(...);
 int FUN_002bd06c(unsigned int);
 int textFormatBuffer(...);
-int libc_strcpy(unsigned char [32], unsigned int);
 int FUN_002bf818(int);
 int asdMemFree(unsigned int);
 int FUN_0033bb94(int, unsigned int);
@@ -80,7 +80,7 @@ extern int messageMainGetChoiceResult(void);
 extern int flagCountUnlockedSlots(int);
 /* Supplied declaration required: beginStatusPanelClose. */
 /* Supplied declaration required: FUN_0029d8f4. */
-extern int FUN_0029ea68(void);
+extern int itemGetFlagBit1(void);
 extern int sys43e188GetState(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int gameGetUnitRecord(int);
@@ -155,7 +155,7 @@ void FUN_00216e64(int param_1)
       *(unsigned char *)(temp_v11 + 0x3c71) = 0;
       *(unsigned char *)(temp_v11 + 0x3c72) = 0;
       temp_v4 = FUN_0033c0c0(temp_v2);
-      temp_v3 = FUN_0029ea68();
+      temp_v3 = itemGetFlagBit1();
       *(unsigned char *)(param_1 + 0xd640) = temp_v3 == 0;
       temp_v13 = temp_v11 + 0x3c5c;
       temp_v3 = temp_v2;
@@ -244,10 +244,10 @@ void FUN_00216e64(int param_1)
       FUN_001ddbbc();
       temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x46);
       FUN_002bd06c(temp_v6);
-      libc_strcpy(temp_v16,temp_v6);
+      libc_strcpy(reinterpret_cast<unsigned int *>(temp_v16), reinterpret_cast<unsigned int *>(temp_v6));
       textEncodeFontSlot(8,temp_v16);
       temp_v4 = demonGetRaceLabel(*(unsigned short *)(temp_v2 + 0x46),1);
-      libc_strcpy(temp_v16,temp_v4);
+      libc_strcpy(reinterpret_cast<unsigned int *>(temp_v16), reinterpret_cast<unsigned int *>(temp_v4));
       textEncodeFontSlot(0x10,temp_v16);
       scrScriptProcessDestroy(*puVar16);
       asdMemFree(*(unsigned int *)(param_1 + 0x3578));

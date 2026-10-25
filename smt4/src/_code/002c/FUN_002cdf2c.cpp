@@ -1,5 +1,7 @@
 /* NON_MATCHING: the item merge loops and the passive-bonus loop are unrolled/scheduled differently from retail (207 vs 232 rows); the spoils application is the same. */
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -57,10 +59,8 @@ void FUN_0027581c(void);
 s32 FUN_0033361c(void);
 void bgmRequestSelectedChannelFade(u32 frames);
 void soundChannelRequestIfEnabled(u32 id, s32 arg);
-s32 FUN_00298f88(u16 battleId);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 playerPadTestBit(u32 bit);
-SpoilsUnit *gameGetUnitRecord(void);
 s32 flagWordTestBit(SpoilsUnit *unit, u32 bit);
 PassiveRecord *passiveSkillLookupRecord(u32 skill);
 
@@ -122,7 +122,7 @@ void FUN_002cdf2c(BattleSpoils *spoils)
         if (slots->unitIndex[i] < 0) {
             continue;
         }
-        SpoilsUnit *unit = gameGetUnitRecord();
+        SpoilsUnit *unit = static_cast<SpoilsUnit *>(gameGetUnitRecord(slots->unitIndex[i]));
 
         if (flagWordTestBit(unit, 1) != 0 || flagWordTestBit(unit, 10) != 0 || flagWordTestBit(unit, 2) != 0) {
             continue;

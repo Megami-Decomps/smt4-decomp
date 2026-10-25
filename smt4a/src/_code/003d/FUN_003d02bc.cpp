@@ -2,6 +2,9 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "gamedata/DataTable.h"
+#include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
+#include "gfx/StereoParallax.h"
 
 extern "C" {
 
@@ -44,7 +47,6 @@ void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (
 s32 FUN_002321f8(const void *a, const void *b);
 TextureLayout *FUN_001834a4(u32 group, u32 id);
 s32 FUN_001692ac(s32 a, s32 b);
-f32 renderCtxCalculateStereoParallax(u8 *context, f32 depth);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *motion);
 s32 FUN_0028520c(s16 item);

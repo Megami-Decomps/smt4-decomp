@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail also stores zeros into the unit's 0x1C/0x1E words and copies words 0xE/0x10 to 0x2A/0x2C after the recalculation (dead stores that are left out here), and schedules the field copies and comparisons differently (about 130 diff lines). */
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The record a demon id expands to (gameRecordCopy): the base values a fresh unit starts from. */
 struct DemonBaseRecord {
@@ -68,7 +69,6 @@ typedef char SavedUnitOffsets[offsetof(SavedUnit, statBonus) == 0x590 ? 1 : -1];
 extern "C" {
 bool gameRecordCopy(u32 id, void *destination);
 DevilBitSource *devilGetRecord(u16 id);
-void *memClear(void *destination, u32 size);
 void bitsetSetBit(void *owner, u32 bit);
 void unitRecalculateEffectiveStats(FreshUnit *unit);
 s32 flagCountUnlockedSlots(SavedUnit *unit);

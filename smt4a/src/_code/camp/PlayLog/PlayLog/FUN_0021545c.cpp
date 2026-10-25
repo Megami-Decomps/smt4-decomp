@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021545c` (_code @ 0x21545c, 0x4a4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "camp/Config/Config.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ extern int dataTableGetEntries(void);
 extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
 extern int objectApplyIfUnblocked(int);
-extern int FUN_002e50d4(void);
 /* Supplied declaration required: FUN_003450d4. */
 extern int countersGetB(unsigned int);
 

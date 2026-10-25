@@ -1,9 +1,9 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 u16 gameDataBlocksGetCounter(void);
-int scrSetResult(u32 result);
 
 u32 scrSetCounterResult(void)
 {

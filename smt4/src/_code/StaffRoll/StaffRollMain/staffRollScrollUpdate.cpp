@@ -3,13 +3,13 @@
  * end or the player skips it. */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
 extern StaffRollWork *g_staffRoll;
 
 extern int gameFlagIsSet(u32 flag);
-extern int FUN_002c15fc(u32 button);
 
 void staffRollScrollUpdate(void)
 {

@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail zeroes the loop index before calling btlGetMainState (only an index declared ahead of the call reproduces it). */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
 extern "C" {
 
-void FUN_002451c4(s32 a, s32 b, BtlActionRecord *action, s32 alpha, s32 frames, s32 c);
 BtlMainState *btlGetMainState(void);
 s32 scrGetArg(u32 index);
 
@@ -20,9 +20,9 @@ u32 FUN_00312730(void)
         if ((action->status & 0x1) && (action->status & 0x80) && (action->status & 0x400) &&
             (!(action->status & 0x10) || !(action->stateFlags & 2))) {
             if (!show) {
-                FUN_002451c4(0, 0, action, 0, 20, 0);
+                FUN_002451c4(0, 0, reinterpret_cast<u32>(action), 0, 20, 0);
             } else {
-                FUN_002451c4(0, 0, action, 0xff, 20, 0);
+                FUN_002451c4(0, 0, reinterpret_cast<u32>(action), 0xff, 20, 0);
             }
         }
     }

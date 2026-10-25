@@ -2,7 +2,6 @@
 
 extern "C" {
 
-s32 effGetFrameCounter(void);
 
 extern PolyRingKind g_polyRingKinds[];
 

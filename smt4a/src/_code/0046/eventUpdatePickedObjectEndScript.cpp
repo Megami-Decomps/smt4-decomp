@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 s32 FUN_001517b4(s32, s32);
@@ -12,7 +13,6 @@ s32 pickObjStart(PickObjectEndPrefixA *, const char *);
 s32 scrRunOpcodesStub(u32);
 s32 messageMainIsWindowActive(void);
 s32 screenFadeIsBusy(void);
-s32 FUN_002e19f8(void);
 }
 
 extern "C" void eventUpdatePickedObjectEndScript(PickObjectEndPrefixA *object)

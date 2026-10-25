@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/S1GfxModel.h"
 #include "gfx/ModelFileSource.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 static inline void detachModelSlots(ModelSlotList *list)
 {
@@ -21,8 +22,7 @@ extern AsdModelBank DAT_004da798[2];
 extern AsdModelIdList g_asdModelIdLists[2];
 extern void *DAT_00464a9c[2];
 extern ModelFileSource *DAT_00464aa4[2];
-void memClear(void *, u32);
-ModelSlotList *asdModelGetSlotArray1(u32);
+ModelSlotList *asdModelGetSlotArray1(s32 slot);
 ModelSlotList *asdModelGetSlotArray2(u32);
 void *asdLoadFileSync(const char *, u32, u32, u32);
 void *asdOperatorNew(u32, const char *);

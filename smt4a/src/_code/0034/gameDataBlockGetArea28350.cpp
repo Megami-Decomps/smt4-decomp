@@ -1,4 +1,5 @@
 #include "shard/Shard0034.h"
+#include "result/WhisperEffect.h"
 
 extern "C" {
 

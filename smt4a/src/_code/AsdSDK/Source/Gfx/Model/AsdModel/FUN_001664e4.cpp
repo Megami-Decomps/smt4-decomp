@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gfx/CameraMatrixCache.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
-u32 FUN_00152f54(void);
 int FUN_00176538(unsigned int);
 int FUN_001767a4(unsigned int, unsigned int);
 int FUN_00191bec(int, int);

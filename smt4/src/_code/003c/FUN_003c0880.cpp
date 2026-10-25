@@ -1,5 +1,6 @@
 /* NON_MATCHING: state publication hoists constant 2 and duplicates the return-zero epilogue instead of retail's shared state-store exit; result-copy and flag-clear scratch allocation also differs. */
 #include "script/scrScriptProcess.h"
+#include "util/CalleeContracts.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 struct BattleStepContext {
@@ -35,7 +36,7 @@ extern void *DAT_00435d18;
 extern void *g_btlActionReflect;
 extern void *g_btlUiBlock;
 
-void FUN_00242914(void *block, s32 flag);
+
 u32 FUN_00246454(s32 actor, u32 options, BtlUnitEntry *unit);
 void battleSelectButtonHelpPreset(s32 preset);
 u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);

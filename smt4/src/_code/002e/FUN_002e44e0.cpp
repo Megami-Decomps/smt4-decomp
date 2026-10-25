@@ -1,12 +1,8 @@
 /* NON_MATCHING: only the comparator's tail differs: retail keeps the second key's order in r1 and the difference in r0 (built swaps them) */
 #include "common.h"
+#include "gamedata/Table8Type5Lookup.h"
 
 extern "C" {
-
-typedef struct UnitData {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ u16 id;
-} UnitData;
 
 typedef struct ItemData {
     /* 0x00 */ u8 unk00[0x2c];
@@ -19,7 +15,6 @@ typedef struct SortKey {
     /* 0x04 */ u32 unk04;
 } SortKey;
 
-UnitData *FUN_002498ec(u16 index);
 s32 idIsAbove400(u32 id);
 s32 FUN_0024c52c(u32 id);
 ItemData *dataTable40FindById(u32 id);
@@ -66,14 +61,14 @@ static void sortKeyResolveTie(SortKey *a, SortKey *b)
 /* Builds the two units' sort keys and resolves a tie between them. */
 void FUN_002e44e0(u16 *indexA, u16 *indexB)
 {
-    UnitData *unitA = FUN_002498ec(*indexA);
-    UnitData *unitB = FUN_002498ec(*indexB);
+    Table8Type5Record *unitA = table8Type5FindById(*indexA);
+    Table8Type5Record *unitB = table8Type5FindById(*indexB);
     SortKey a;
     SortKey b;
 
-    a.id = unitA->id;
+    a.id = unitA->value;
     a.unk04 = 0;
-    b.id = unitB->id;
+    b.id = unitB->value;
     b.unk04 = 0;
     sortKeyResolveTie(&a, &b);
 }

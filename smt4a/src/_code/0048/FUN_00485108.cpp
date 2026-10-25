@@ -2,12 +2,12 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match3_NameFormStateA.h"
 #include "ui/UiSpriteState.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
 // Draw layered form decorations, fading the foreground separately and restoring effect speed.
 void FUN_00485108(NameFormStateA *form, s32 x, s32 y, f32 speed)

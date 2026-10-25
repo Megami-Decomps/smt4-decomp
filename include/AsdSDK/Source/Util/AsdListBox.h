@@ -84,4 +84,8 @@ typedef struct AsdListBox {
     /* 0x06c */ u8 unk6c[0x120];
 } AsdListBox;
 
+extern "C" {
+u8 FUN_002a21c8(void);
+}
+
 #endif

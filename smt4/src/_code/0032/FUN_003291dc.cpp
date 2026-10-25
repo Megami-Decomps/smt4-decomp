@@ -14,7 +14,7 @@ int useCounterStart(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
 int FUN_0029ede8(...);
-int FUN_002ae584(void);
+int appCostRecordFindById(void);
 int FUN_002dfefc(...);
 
 int dataTable0BFindById(...);
@@ -73,7 +73,7 @@ extern int FUN_0029efa8(int);
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
 /* Supplied declaration required: FUN_0029f848. */
 extern int sys43e188GetState(void);
-/* Supplied declaration required: FUN_002ae584. */
+/* Supplied declaration required: appCostRecordFindById. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: buttonHelpSetPreset. */
 extern int padIsButtonRepeat(unsigned int);
@@ -405,7 +405,7 @@ unsigned int FUN_003291dc(int *param_1)
           temp_v8 = 1;
           do {
             temp_v5 = temp_v8;
-            FUN_002ae584();
+            appCostRecordFindById();
             if ((temp_v5 != 0) &&
                ((temp_v6 = flagBitIsSet(temp_v8), temp_v6 != 0 ||
                 (temp_v5 = temp_v8, appCheckPurchaseRequirements(), temp_v5 != 2)))) {

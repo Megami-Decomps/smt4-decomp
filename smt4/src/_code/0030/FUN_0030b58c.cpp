@@ -1,8 +1,8 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 extern int FUN_0027d98c(void);
 
 u32 FUN_0030b58c(void)

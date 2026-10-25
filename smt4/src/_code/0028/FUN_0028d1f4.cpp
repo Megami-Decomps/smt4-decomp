@@ -1,5 +1,6 @@
 /* Returns the entry's explicit value (+0x50), or, when it has a percentage (+0x54), that percentage of the gameGetSlotTable base; 0 for a NULL entry. */
 #include "common.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
 

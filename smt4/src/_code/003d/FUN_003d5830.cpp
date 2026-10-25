@@ -1,5 +1,6 @@
 /* NON_MATCHING: 174 vs 136 rows: retail addresses the fields through grouped sub-structures (vectors, timers) that this flat word view does not model. */
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 // One 32-bit slot of the event camera object, read as an integer or a float.
 union CameraWord {
@@ -33,7 +34,6 @@ void FUN_003d84d8(EventCamera* camera, s32 mode, s32 arg);
 void FUN_002c2044(void* node, s32 flag);
 void FUN_002c1edc(void* node, void* position, f32* target, s32* result);
 void FUN_002c1e30(void* node, s32 flag);
-void FUN_00298d50(void* node);
 void asdCameraRegister(void* node);
 s32 shakeEffectAlloc(void);
 void eventCommandSetPendingCleanup(void);
@@ -71,7 +71,7 @@ void FUN_003d5830(EventCamera* camera)
     FUN_002c2044(&w[0x16], 1);
     FUN_002c1edc(&w[0x16], &w[CAM_POSITION], target, &result);
     FUN_002c1e30(&w[0x16], 1);
-    FUN_00298d50(&w[0x16]);
+    FUN_00298d50(reinterpret_cast<u32>(&w[0x16]));
     asdCameraRegister(&w[0x16]);
 
     w[0x192].f = 0.0f;

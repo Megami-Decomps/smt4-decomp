@@ -7,7 +7,7 @@ int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(...);
-int FUN_00514540(...);
+int shiftRandomNextFraction(...);
 int SUB41(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
@@ -67,7 +67,7 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -337,23 +337,23 @@ void FUN_003b32fc(int param_1)
               }
             }
             else if (temp_v45 != 0) {
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v16 = temp_v16 * temp_v38;
               pfVar17[2] = temp_v16;
               temp_v13 = *(float *)(temp_v14 + 0x6c);
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v13 = ((temp_v27 - temp_v13) + temp_v16 * temp_v13) * *(float *)(temp_v14 + 0x68);
               pfVar17[3] = temp_v13;
               temp_v19 = *(float *)(temp_v14 + 0x74);
               temp_v16 = temp_v27;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v13 = ((temp_v16 - temp_v19) + temp_v13 * temp_v19) * *(float *)(temp_v14 + 0x70);
               pfVar17[4] = temp_v13;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v13 = ((temp_v16 - *(float *)(temp_v14 + 0x7c)) + temp_v13 * *(float *)(temp_v14 + 0x7c)) *
                        *(float *)(temp_v14 + 0x78);
               pfVar17[1] = temp_v13;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v16 = *(float *)(temp_v14 + 0x60) *
                        ((temp_v16 - *(float *)(temp_v14 + 100)) + temp_v13 * *(float *)(temp_v14 + 100));
               pfVar17[5] = temp_v16;

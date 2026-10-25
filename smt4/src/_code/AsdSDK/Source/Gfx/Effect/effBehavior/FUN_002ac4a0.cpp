@@ -19,7 +19,7 @@ public:
 extern "C" {
 s32 soundArchiveReadWaveArchiveInfo(void *, u32, WaveArchiveLoadInfo *);
 void FUN_002a7ac4(WaveArchiveReader *, const void *, s32);
-s32 asdWaveArchiveHasExpectedBlock(const WaveArchiveReader *);
+bool asdWaveArchiveHasExpectedBlock(const WaveArchiveReader *);
 u32 nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(const void *);
 void *rt_memcpy(void *, const void *, u32);
 void FUN_00150f34(WaveArchiveReader *);

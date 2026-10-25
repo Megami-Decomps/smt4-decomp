@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite of the name-entry confirm step; retail tail-calls sysPlaySe/stateSetterEnterState with a 20-byte frame, reads the target through a +0x200 base register and uses sxtb/uxtab for the signed character index, while the build uses a 24-byte frame, plain calls and a pointer-induction loop. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct NameEntryMenu;
 struct NameBuffer {
@@ -51,7 +52,6 @@ void sysPlaySe(s32 id);
 void FUN_00183e58(void);
 void uiSpriteSetImageKeyframe(u8 *sprite, s32 frame, s32 flag);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
-void FUN_003180c4(s32 id, NameBuffer *name);
 s32 *logFormatBuffer(NameBuffer *name, s8 *destination, s32 mode);
 void nameEntryCopyEditedName(NameEntryMenu *menu, NameBuffer *name);
 void stateSetterEnterState(NameEntryMenu *menu, s32 state);
@@ -70,7 +70,7 @@ void FUN_00484378(NameInputView *menu)
     if (menu->confirming == 0) {
         if (messageMainIsIdle() != 0) {
             nameEntryCopyEditedName(reinterpret_cast<NameEntryMenu *>(menu), name);
-            FUN_003180c4(0x32, name);
+            FUN_003180c4(0x32, reinterpret_cast<const char *>(name));
             scrScriptProcessStartEntry(menu->script, 1);
             menu->confirming = 1;
             sysPlaySe(0x9c);

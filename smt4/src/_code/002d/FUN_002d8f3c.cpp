@@ -16,7 +16,7 @@ void textFormatBuffer(char *, const char *, ...);
 void FUN_001db90c(AsdSaveHeader *, u32, u32, u32, u32, u32, u32);
 s32 asdSaveWriteBlock(u32, const char *, const AsdSaveHeader *, const void *, u32);
 s32 FUN_00214950(u32, const char *);
-void FUN_002cbe70(u32);
+u32 FUN_002cbe70(s32 mode);
 }
 
 /* Write a queued save block and update the first-file completion result. */

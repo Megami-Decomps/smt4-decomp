@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct DebugBackgroundWork {
     u32 process; // 0x00
@@ -19,8 +20,6 @@ void textFormatBuffer(char *output, const char *format, ...);
 void titleDbgBgDestroy();
 void FUN_001251d8();
 void FUN_00125e64();
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 priority, s32 flags,
-                          void (*update)(), void (*destroy)(), void *data);
 u32 taskCreateDraw(const char *name, s32 group, s32 priority, s32 flags,
                    void (*draw)(), void (*destroy)(), void *data, u32 parent);
 }
@@ -35,6 +34,6 @@ extern "C" void FUN_0011817c()
     work->frame = 0;
     textFormatBuffer(work->buildLabel, "%s %s", DAT_00407dfa - 12, DAT_00407dfa);
     work->visible = 0;
-    work->process = asdProcessCreateSimple("TBG C", 2, 0, 0, FUN_001251d8, titleDbgBgDestroy, NULL);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TBG C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001251d8), reinterpret_cast<AsdProcFunc>(titleDbgBgDestroy), NULL);
     taskCreateDraw("TBG U", 0x73, 0, 0, FUN_00125e64, NULL, NULL, work->process);
 }

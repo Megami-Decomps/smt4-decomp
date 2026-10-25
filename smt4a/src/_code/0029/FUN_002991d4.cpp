@@ -53,7 +53,7 @@ int FUN_00295108(...);
 int FUN_002b5e08(int, int *, unsigned char *, unsigned int *);
 int blockResetAxis(...);
 int mapSetSceneState(...);
-int FUN_0033ab1c(int, int);
+int gameFlagsWriteBlockBit(int, int);
 int FUN_003774e8(int, unsigned char *, unsigned char *, unsigned int *);
 int FUN_003799d0(void);
 int FUN_0037c8e4(...);
@@ -153,7 +153,7 @@ extern int __aeabi_uldivmod(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: mapSetSceneState. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: mapPlaceSet. */
-/* Supplied declaration required: FUN_0033ab1c. */
+/* Supplied declaration required: gameFlagsWriteBlockBit. */
 /* Supplied declaration required: messageBannerRestartOrClear. */
 /* Supplied declaration required: mapIfRequestById. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
@@ -276,7 +276,7 @@ unsigned int FUN_002991d4(void)
     }
     else {
       asdTMTexLoadMainHeap(0x1d,0);
-      FUN_0033ab1c((int)(short)*(unsigned int *)(temp_v4 + 0xb4),1);
+      gameFlagsWriteBlockBit((int)(short)*(unsigned int *)(temp_v4 + 0xb4),1);
       temp_v12 = 9;
     }
     *(unsigned int *)(temp_v4 + 0x48) = temp_v12;

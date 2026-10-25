@@ -1,12 +1,12 @@
 #include "common.h"
+#include "event/2dEvent/Npc2d.h"
 
 extern "C" {
 
-extern u32 *gameGetCounters(void);
 
 u32 gameCountersGetWord(int index)
 {
-    u32 *table = gameGetCounters();
+    u32 *table = reinterpret_cast<u32 *>(gameGetCounters());
 
     return table[index];
 }

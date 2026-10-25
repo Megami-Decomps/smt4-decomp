@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "util/GameDataGetSmallBlock.h"
 
 extern "C" {
 

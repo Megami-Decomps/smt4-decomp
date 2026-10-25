@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/SaveSlotInfoSet.h"
 
 extern "C" {
 

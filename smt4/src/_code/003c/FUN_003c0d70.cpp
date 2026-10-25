@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0d70` (_code @ 0x3c0d70, 0x4c8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_002505c0(int, int, int, int, int, int, int);
 int objectFlagsClear(...);
 int rt_memclr(...);
 int __aeabi_memset4(...);
-int memClear(...);
 int FUN_003369e0(int, unsigned int, int);
 int objectTotalAdd(int);
 int FUN_00337a34(int);
@@ -228,7 +228,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
     if (temp_v0 == 0 && temp_v4 == 0) {
       __aeabi_memset4(puVar6 + 2,100,0xffffffff);
       *(unsigned short *)(puVar6 + 2) = 0;
-      memClear(puVar6 + 0x33,0x18c);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar6 + 0x33), 0x18c));
     }
     *(unsigned short *)(puVar6 + 0x1b) = 0xffff;
     rt_memclr((int)puVar6 + 0x72,0x3c);

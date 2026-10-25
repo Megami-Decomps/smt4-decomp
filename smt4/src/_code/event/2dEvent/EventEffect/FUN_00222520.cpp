@@ -24,7 +24,6 @@ extern EventEffectGlobals g_eventEffect;
 s32 lerpIntSplitClamped(s32 start, s32 end, s32 duration, s32 frame);
 f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
 s32 FUN_002c1d5c(void);
-void FUN_00287728(s32 mode);
 
 /* Update the blink-fade event effect: waits for its textures, then slides and fades for 300 frames. */
 s32 FUN_00222520(void)

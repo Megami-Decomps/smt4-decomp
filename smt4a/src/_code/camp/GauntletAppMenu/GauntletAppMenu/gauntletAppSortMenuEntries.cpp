@@ -1,8 +1,8 @@
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 extern GauntletAppMenuWork *g_gauntletAppMenu;
-const void *FUN_0026140c();
 u32 objectApplyIfUnblocked(const void *controller);
 void qsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 void arraySortQsort(void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
@@ -19,7 +19,7 @@ void gauntletAppSortMenuEntries()
 {
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
     struct SortSettings { u8 prefix[13]; u8 mode; };
-    const u8 &sortMode = static_cast<const SortSettings *>(FUN_0026140c())->mode;
+    const u8 &sortMode = static_cast<const SortSettings *>(reinterpret_cast<const void *>(FUN_0026140c()))->mode;
     u8 ascending = (sortMode & 0x80) == 0;
     if ((sortMode & 0x7f) == 0x21) {
         if (ascending != 0) {

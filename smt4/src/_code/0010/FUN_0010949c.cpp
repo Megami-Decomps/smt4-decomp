@@ -1,13 +1,13 @@
 /* NON_MATCHING: Adjacent flag loads do not share the retail high-offset base register. */
 #include "ui/FrameTex.h"
 extern "C" {
-FrameWork* jobGetWork(void);
+FrameWork* jobGetWork(u32 job);
 void FUN_001132fc(s32);
 
 // Advances the active white overlay toward transparent.
-u8 FUN_0010949c(void)
+u8 FUN_0010949c(u32 job)
 {
-    FrameWork* work = jobGetWork();
+    FrameWork* work = jobGetWork(job);
     if (work->fadeActive == 0) {
         return 0;
     }

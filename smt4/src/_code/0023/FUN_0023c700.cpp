@@ -1,4 +1,6 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 /* A named record: an id byte and a 0x84-byte name. */
 struct NamedRecord {
@@ -31,8 +33,6 @@ struct NamedRecordOwner {
 };
 
 extern "C" {
-void *memClear(void *destination, u32 size);
-char *libc_strcpy(char *destination, const char *source);
 u32 FUN_003d98e0(NamedRecordOwner *owner, u32 effect, u32 arg, s32 index, u32 indexArg, s32 kind, char *target, Vec2 origin);
 
 /* Starts the effect of the named record `slot` of list `list`, naming it after the record. */
@@ -50,70 +50,70 @@ u32 FUN_0023c700(NamedRecordOwner *owner, u32 arg, s32 index, s32 list, s32 slot
             return 0;
         }
         id = owner->kind0[slot].id;
-        libc_strcpy(name, owner->kind0[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind0[slot].name));
         break;
     case 1:
         if (slot >= 4) {
             return 0;
         }
         id = owner->kind1[slot].id;
-        libc_strcpy(name, owner->kind1[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind1[slot].name));
         break;
     case 2:
         if (slot >= 4) {
             return 0;
         }
         id = owner->kind2[slot].id;
-        libc_strcpy(name, owner->kind2[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind2[slot].name));
         break;
     case 3:
         if (slot >= 4) {
             return 0;
         }
         id = owner->kind3[slot].id;
-        libc_strcpy(name, owner->kind3[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind3[slot].name));
         break;
     case 4:
         if (slot >= 11) {
             return 0;
         }
         id = owner->kind4[slot].id;
-        libc_strcpy(name, owner->kind4[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind4[slot].name));
         break;
     case 5:
         if (slot >= 2) {
             return 0;
         }
         id = owner->kind5[slot].id;
-        libc_strcpy(name, owner->kind5[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind5[slot].name));
         break;
     case 6:
         if (slot >= 5) {
             return 0;
         }
         id = owner->kind6[slot].id;
-        libc_strcpy(name, owner->kind6[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind6[slot].name));
         break;
     case 7:
         if (slot >= 3) {
             return 0;
         }
         id = owner->kind7[slot].id;
-        libc_strcpy(name, owner->kind7[slot].name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind7[slot].name));
         break;
     case 8:
         if (slot != 0) {
             return 0;
         }
         id = owner->kind8.id;
-        libc_strcpy(name, owner->kind8.name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind8.name));
         break;
     case 9:
         if (slot != 0) {
             return 0;
         }
         id = owner->kind9.id;
-        libc_strcpy(name, owner->kind9.name);
+        libc_strcpy(reinterpret_cast<unsigned int *>(name), reinterpret_cast<unsigned int *>(owner->kind9.name));
         break;
     }
     return FUN_003d98e0(owner, id, arg, index, list, kind, name, origin);

@@ -1,12 +1,12 @@
 /* NON_MATCHING: widget clearing hoists zero and reschedules loop updates; -O2 candidate. */
 #include "ui/PartyPanelState.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;
 void FUN_00292be4(PartyPanelWidget *, s32, s32);
 void FUN_00292bcc(PartyPanelWidget *, u32);
 void FUN_00298d28(s32, s32);
-void FUN_002a0cc8(s32);
 
 static __inline void resetPartyWidgets(PartyPanelState *panel)
 {

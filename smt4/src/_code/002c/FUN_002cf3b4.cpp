@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail retains an extra clear/set of the last preference before its final store, changing byte-load scheduling and saved registers. */
 #include "shard/GameModeFlags.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
-GameModeFlags *FUN_002a0d0c(void);
 
 void FUN_002cf3b4(void)
 {
-    GameModeFlags *settings = FUN_002a0d0c();
+    GameModeFlags *settings = reinterpret_cast<GameModeFlags *>(FUN_002a0d0c());
     settings->sortModes[20].order = 0;
     settings->sortModes[23].order = 0;
     settings->sortModes[0].order = 2;

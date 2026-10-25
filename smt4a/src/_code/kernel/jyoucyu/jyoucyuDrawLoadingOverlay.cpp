@@ -2,6 +2,7 @@
 #include "kernel/jyoucyu.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 struct JyoucyuLoadingView {
     JyoucyuWork work;
@@ -9,8 +10,6 @@ struct JyoucyuLoadingView {
 };
 extern "C" {
 extern JyoucyuGlobals g_jyoucyu;
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0();

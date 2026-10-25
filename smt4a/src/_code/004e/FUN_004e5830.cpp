@@ -49,7 +49,7 @@ extern BattleActionMasks g_btlAction;
 
 void *asdOperatorNewD(u32 bytes);
 void asdOperatorDeleteC(void *block);
-s32 lcgRandomRange(s32 limit);
+u32 lcgRandomRange(s32 limit);
 u32 FUN_004c8340(u32 a, s32 id, u32 b, u32 c, u32 d);
 u32 FUN_004c60c0(s32 id, u32 b);
 void FUN_004fdb18(u32 arg0, u32 arg1, ReactionRoster *record, u32 mask, u32 flag);

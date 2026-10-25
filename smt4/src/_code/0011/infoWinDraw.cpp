@@ -23,7 +23,7 @@ extern "C" {
 extern InfoWindowDrawState *g_infoWin;
 extern RenderCtx *g_titleScene;
 
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(u32 preset, u32 index);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
@@ -50,7 +50,7 @@ s32 infoWinDraw(u32 job)
     if (window->open == 0) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
     s32 x = vec2GetXInt(&window->transition) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
     s32 y = vec2GetYInt(&window->transition);

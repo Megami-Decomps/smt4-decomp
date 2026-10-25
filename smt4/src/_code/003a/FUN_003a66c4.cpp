@@ -1,6 +1,7 @@
 /* NON_MATCHING: only register allocation differs (retail keeps the base percentage and a zero constant in extra callee-saved registers, and the first side-unit clamp stores the limit register). */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct StepPlayerData {
     /* 0x00 */ u8 unk00[0x0C];
@@ -34,7 +35,6 @@ struct StepSlotTable {
 };
 
 extern "C" {
-StepPlayerData *gameGetPlayerData(void);
 StepSlotTable *gameGetSlotTable(void);
 StepUnitRecord *gameGetUnitRecord(s32 slot);
 
@@ -109,21 +109,21 @@ static __inline void healRegenSkillUnits(s32 percent, s32 count)
 void FUN_003a66c4(void)
 {
     s32 percent = 0;
-    if (!(gameGetPlayerData()->flags & 2)) {
+    if (!(reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->flags & 2)) {
         if (flagBitIsSet(0x6B) || flagBitIsSet(0x69))
             percent = 5;
         else if (flagBitIsSet(0x68))
             percent = 2;
         s32 total = percent;
-        if (gameGetPlayerData()->id == 0x2A6)
+        if (reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->id == 0x2A6)
             total += 2;
         if (total > 0) {
-            s32 max = gameGetPlayerData()->maxHp;
-            s32 hp = gameGetPlayerData()->hp + percentOfMax(max, total);
+            s32 max = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->maxHp;
+            s32 hp = reinterpret_cast<StepPlayerData *>(gameGetPlayerData())->hp + percentOfMax(max, total);
             if (hp > max)
                 hp = max;
             s16 value = hp;
-            StepPlayerData *player = gameGetPlayerData();
+            StepPlayerData *player = reinterpret_cast<StepPlayerData *>(gameGetPlayerData());
             s32 limit = player->maxHp;
             if (value > limit)
                 value = limit;

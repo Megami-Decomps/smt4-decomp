@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc hoists the address of context->stereoMode into a callee-saved register (retail reloads [r4,#0x52c] twice), which pushes `mode` and `fade` onto the stack */
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ void FUN_0016c4b8(RenderCtxA *context, void *preset);
 u32 FUN_001692ac(u32 value, bool enabled);
 u32 FUN_00387580(u32 kind, f32 value);
 u32 flagsPackFourBooleans(s32 first, s32 second, s32 third, s32 fourth);
-u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
 u32 FUN_003a48dc(s32 a, s32 b, s32 c, u32 d);
 u32 packThreeFields(u32 a, s32 b, s32 c);
 void FUN_00164034(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2,

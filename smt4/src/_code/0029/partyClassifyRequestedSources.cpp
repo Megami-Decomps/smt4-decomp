@@ -8,7 +8,7 @@ const ContentWordList *dataTable54FindById(u32 id);
 s32 gameCountUnits(void);
 StatBlock *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(const StatBlock *unit, u32 bit);
-s32 FUN_0029ea68(u16 id);
+s32 itemGetFlagBit1(u16 id);
 u32 arrayContainsU16(u16 *sources, s32 count, u32 mode);
 }
 
@@ -37,7 +37,7 @@ extern "C" u32 partyClassifyRequestedSources(u32, u32 listId, u16 *sources)
                     }
                 }
             }
-            if (sources[index] == 0 && FUN_0029ea68(list->ids[index])) {
+            if (sources[index] == 0 && itemGetFlagBit1(list->ids[index])) {
                 sources[index] = 2;
             }
             ++count;

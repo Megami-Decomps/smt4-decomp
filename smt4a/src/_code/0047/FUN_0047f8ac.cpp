@@ -1,4 +1,5 @@
 #include "gamedata/DataTable.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ extern u32 DAT_00573cd8[];
 
 struct Slot *saveSlotFindById(u32 id);
 u32 FUN_00187168(const struct Slot *slot);
-s32 FUN_0019acdc(u32 id, s32 arg);
 void FUN_0047f7c0(s32 index);
 
 /* Triggers the two hooks for the slot with this id: hook 0 when its table 10 links point at target. */

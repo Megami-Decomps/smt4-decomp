@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -134,7 +134,7 @@ void FUN_0040c190(int param_1)
   fStack_34 = temp_v8;
   block530OwnerReset(g_renderCtx,&temp_v12,0);
   temp_v0 = g_renderCtx;
-  temp_v2 = packNibblesAndByte(6,7,0);
+  temp_v2 = packNibblesAndByte(6, 7, 0);
   piVar6 = (int *)(temp_v0 + 0x12b8);
   temp_v3 = *piVar6;
   temp_v4 = piVar6[temp_v3 + 2];

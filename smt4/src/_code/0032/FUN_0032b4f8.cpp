@@ -68,7 +68,7 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int, 
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002c1ac8. */
 /* Supplied declaration required: FUN_002c1b64. */
-extern unsigned int FUN_002c1c0c(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x0032b83c) */
@@ -171,7 +171,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
   temp_v20 = 0.003921569f;
   temp_v24 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v24 = temp_v24 * 0.003921569f;
-  temp_v2 = FUN_002c1c0c(0x14,3);
+  temp_v2 = asdTMTexTableGetNodeTexture(0x14,3);
   FUN_002c1b64(g_titleScene,temp_v2);
   VectorSignedToFloat(0x100 - param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v13 = temp_v25[2];
@@ -181,7 +181,7 @@ void FUN_0032b4f8(int param_1,int param_2,int param_3)
   temp_v21 = temp_v19;
   temp_v22 = temp_v19;
   temp_v23 = temp_v19;
-  temp_v1 = FUN_002c1c0c(0x14,2);
+  temp_v1 = asdTMTexTableGetNodeTexture(0x14,2);
   FUN_002c1b64(g_titleScene,temp_v1);
   temp_v25[0] = -42.0f;
   temp_v25[1] = -42.0f;

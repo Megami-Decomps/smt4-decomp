@@ -52,7 +52,6 @@ s32 vec2GetYInt(const f32 *point);
 s32 vec2GetXInt(const f32 *point);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 void sysPlaySe(u32 sound);
-s32 flaggedValueHolderGetTotal(FlaggedValueHolder *holder);
 const char *dataLookupDisplayName(u32 *key, u32 id);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_0019de98(const char *text, u32 color);

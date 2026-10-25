@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail recomputes the panel address (add r0,r4,#9216; add r0,r0,#188) for the second call instead of keeping it in a register */
 #include "common.h"
+#include "util/Menu32ModeIsNot5.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct BtlUi004ab854 {
     /* 0x10 */ BtlUiWorkspace004ab854 *workspace;
 } BtlUi004ab854;
 
-s32 menu32ModeIsNot5(BtlUiMenu004ab854 *menu);
 s32 FUN_00280030(BtlUiPanel004ab854 *panel);
 void uiWorkEndState1(BtlUiMenu004ab854 *menu);
 void owner2DCInitSub(BtlUiPanel004ab854 *panel);

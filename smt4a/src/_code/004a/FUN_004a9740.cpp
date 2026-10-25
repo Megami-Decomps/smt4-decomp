@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail spills r0-r3 and the position vector at different frame offsets and merges the slot-field addressing into shared base registers; the logic is the same. */
 #include "common.h"
 #include "shard/S1Mover.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -42,7 +43,6 @@ typedef struct BtlUiSprite {
 
 extern BtlUiGlobals g_btlUi;
 
-u32 FUN_00152f54(void);
 void FUN_002a1850(Vec3f *position, s32 arg, u32 value);
 BtlUiSprite *FUN_001834a4(u32 kind, u32 index);
 u32 FUN_004aaff0(u32 handle, s32 slot);

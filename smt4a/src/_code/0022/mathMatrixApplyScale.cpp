@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
 extern "C" {
 

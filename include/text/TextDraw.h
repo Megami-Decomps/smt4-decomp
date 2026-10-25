@@ -13,4 +13,8 @@ void FUN_0025cc78(const void *text, s32 x, s32 y, s32 fade, f32 scale);
 /* Sets the colour word of a text or sprite object (the low byte is cleared). */
 void FUN_001527d8(u32 handle, u32 color);
 
+/* Draws `text` on `layer` with a colour word at (x, y, z) with default scale 1.0 and zero offsets; width and
+ * height are the two trailing float arguments. Returns the drawn extent (smt4). */
+f32 FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
+
 } /* extern "C" */

@@ -9,7 +9,6 @@ typedef struct Entry {
     /* 0x0E */ u8 unk0E[2];
 } Entry; /* 0x10 */
 
-extern Entry *dataTableGetEntries(void *table);
 
 Entry *FUN_003c316c(s32 id)
 {
@@ -18,7 +17,7 @@ Entry *FUN_003c316c(s32 id)
 
     for (; i < count; i++) {
         void *table = dataTableGet(41, 6);
-        Entry *entries = dataTableGetEntries(table);
+        Entry *entries = reinterpret_cast<Entry *>(dataTableGetEntries(table));
         u32 entryCount = dataTableGetCount(table);
 
         if (i < entryCount) {

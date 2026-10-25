@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (219 vs 211 rows); retail hoists the loop-invariant model/animation pointers into callee-saved registers and the relative-offset resolves differ; unnamed scene-builder types are file-local */
 #include "common.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -84,7 +85,6 @@ void FUN_002c2044(void* camera, s32 arg);
 void FUN_002c159c(void* camera);
 void FUN_002c1edc(void* camera, f32* position, f32* target, f32* up);
 void FUN_002c1e30(void* camera, s32 arg, f32 a, f32 b, f32 c, f32 d);
-void FUN_00298d50(void* camera);
 void modelSelectionActivate(ModelSet* set, s32 a, s32 b);
 
 // Resolves a self-relative offset stored at `field` (0 means none).
@@ -185,7 +185,7 @@ void FUN_00341340(ModelSet* set, void* path)
     FUN_002c159c(set->camera);
     FUN_002c1edc(set->camera, set->position, set->target, set->up);
     FUN_002c1e30(set->camera, 1, set->nearClip, set->aspect, set->farClip, 1.6666666f);
-    FUN_00298d50(set->camera);
+    FUN_00298d50(reinterpret_cast<u32>(set->camera));
     modelSelectionActivate(set, 0, -1);
 }
 

@@ -2,6 +2,7 @@
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern SaveByteSettings g_saveLoadProcess;
@@ -13,8 +14,6 @@ GameSaveData *gameDataBlocksGetSaveData(void);
 s32 FUN_0037116c(void *work);
 void work8BufDestroy(void *work);
 void FUN_003a7938(void *work);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 priority, u32 size,
-                           s32 (*update)(void *), void (*destroy)(void *), void *work);
 void asdProcessClearSelectedFlags(u32 process, u32 flags, s32 group);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 size,
                    void (*draw)(void *), void *work, void (*destroy)(void *), u32 process);
@@ -47,7 +46,7 @@ u32 saveLoadCreateBootProcess(void)
     g_saveLoadProcess.selected = 0;
     g_saveLoadProcess.first = 0;
     g_saveLoadProcess.second = 0;
-    work->process = asdProcessCreateSimple("Boot", 4, 0, 0, FUN_0037116c, work8BufDestroy, work);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("Boot"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0037116c), reinterpret_cast<AsdProcFunc>(work8BufDestroy), reinterpret_cast<u32>(work));
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     taskCreateDraw("Boot UpDraw", 0x86, 0, 0, FUN_003a7938, NULL, NULL, work->process);
     taskCreateDraw("Boot UpDraw_R", 0xE2, 0, 0, FUN_003a7938, NULL, NULL, work->process);

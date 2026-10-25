@@ -23,4 +23,12 @@ struct SmokeFadeImage {
 };
 typedef char SmokeFadeStateLayoutCheck[sizeof(SmokeFadeState) == 0x28 && offsetof(SmokeFadeState, active) == 0x24 ? 1 : -1];
 typedef char SmokeFadeImageSizeCheck[sizeof(SmokeFadeImage) == 0xC ? 1 : -1];
+extern "C" {
+u8 FUN_0023b3d0(void);
+}
+
+extern "C" {
+u8 FUN_0026c3a0(void);
+}
+
 #endif

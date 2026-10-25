@@ -1,7 +1,7 @@
 /* NON_MATCHING: the unk18[0] store is scheduled before the face loop setup instead of after it. */
 #include "gfx/CubeTexture.h"
+#include "AsdSDK/AsdMemUtil.h"
 extern "C" {
-void memClear(void*, u32);
 extern void* (*g_gfxAllocateCallback)(u32, u32, u32, u32);
 
 // Allocates a cube texture with nearest filtering, repeated coordinates, and every face set to `parameter`.

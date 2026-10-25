@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -14,7 +15,7 @@ extern struct {
     Obj *obj;
 } g_scrContext;
 
-void scrSetResult(u32 result)
+void scrSetResult(s32 result)
 {
     Obj *obj = g_scrContext.obj;
 

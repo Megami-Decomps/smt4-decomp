@@ -30,7 +30,7 @@ struct CecViewSavedRecord {
 extern "C" {
 extern CampCecView *g_campCecView;
 extern RenderCtx *g_titleScene;
-void FUN_002c39a4(RenderCtx *);
+void renderCtxSelectStereoLayout(RenderCtx *);
 s32 FUN_002c5d80(u32, u32);
 void FUN_002c198c(RenderCtx *);
 u32 FUN_0025981c();
@@ -46,7 +46,7 @@ u32 campCecViewDrawCallback()
 {
     CampCecView *view = g_campCecView;
     CecViewDrawFields *fields = reinterpret_cast<CecViewDrawFields *>(view);
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 0));
     u32 headerValue = FUN_0025981c();

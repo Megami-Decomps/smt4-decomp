@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -116,7 +117,6 @@ extern int uiSearchPrimary(unsigned int);
 /* Supplied declaration required: playerSecondaryGetKindValue. */
 /* Supplied declaration required: playerPrimaryGetKindValue. */
 extern unsigned int FUN_003df57c(int, unsigned int);
-extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: gameDataFlagTestBit. */
 /* Supplied declaration required: halfTableGet. */
 /* Supplied declaration required: FUN_0040082c. */

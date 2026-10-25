@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct SceneState {
 extern SceneState g_engineCleanupOwner; /* 0x588c40 */
 
 extern int jobStop(u32 job, int arg);
-extern int asdOperatorDelete(void);
 extern int sceneObjDestroy(SceneObj *object);
 
 /* Destroys the scene object: stops its job and frees it. */
@@ -26,7 +26,7 @@ void sceneDestroyOwnedJobObject(void)
         sceneObjDestroy(object);
         jobStop(object->job, 0);
         if (g_engineCleanupOwner.object != NULL) {
-            asdOperatorDelete();
+            asdOperatorDelete(g_engineCleanupOwner.object);
             g_engineCleanupOwner.object = NULL;
         }
     }

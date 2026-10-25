@@ -1,5 +1,6 @@
 /* NON_MATCHING: near (197 rows against 205): same control flow and calls; retail keeps the price in r7/menu flag in fp and tests the signed window/holder flag bytes with ldrsb, ours picks r8/sl and ldrb; retail also emits armcc nops around the calls */
 #include "common.h"
+#include "util/FUN_0020349c.h"
 
 extern "C" {
 
@@ -74,7 +75,6 @@ int FUN_0029e0f8(void);
 int FUN_0029dfa8(void);
 SkillRecord *dataTable00FindById(s32 id);
 int FUN_0029defc(...);
-int FUN_0020349c(...);
 int statusPanelSetOpen(s32 open);
 
 /* Per-frame update of the skill list screen: reacts to the menu/cancel/confirm buttons, charges or

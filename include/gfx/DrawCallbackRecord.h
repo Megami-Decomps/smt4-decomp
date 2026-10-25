@@ -41,4 +41,13 @@ struct DrawCallbackRecord {
 
 typedef char DrawCallbackRecordSize[sizeof(DrawCallbackRecord) == 0x10 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_00167eb0(void *request);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

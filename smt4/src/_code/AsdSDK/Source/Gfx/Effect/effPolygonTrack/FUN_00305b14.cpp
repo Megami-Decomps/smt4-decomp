@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_RotationY.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -9,10 +10,9 @@ int CONCAT44(...);
 int FUN_002482d4(void);
 int FUN_002484e0(void);
 int randomAdvanceShiftRegister(void);
-int FUN_0024b830(...);
+int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
-int memClear(float *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -91,7 +91,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_002482d4. */
 /* Supplied declaration required: FUN_002484e0. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: memClear. */
@@ -180,7 +180,7 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
                   *temp_v29 = -1;
                 }
                 else {
-                  memClear(pfVar12,temp_v4 * 0xc);
+                  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(pfVar12), temp_v4 * 0xc));
                   *temp_v29 = -2;
                 }
                 temp_v13 = (float)VectorUnsignedToFloat
@@ -327,44 +327,44 @@ void FUN_00305b14(fn_00305b14_arg0 *param_1)
               }
             }
             else {
-              memClear(pfVar12,temp_v4 * 0xc);
+              reinterpret_cast<int>(memClear(reinterpret_cast<void*>(pfVar12), temp_v4 * 0xc));
               if (temp_v31 != 0) {
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v28 = 1.0f;
                 temp_v10 = ((1.0f - *(float *)((int)pvVar8 + 0xc0)) +
                          temp_v13 * *(float *)((int)pvVar8 + 0xc0)) * *(float *)((int)pvVar8 + 0xbc);
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v14 = (float)VectorUnsignedToFloat(temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v13 = ((temp_v28 - *(float *)((int)pvVar8 + 200)) +
                          temp_v13 * *(float *)((int)pvVar8 + 200)) * *(float *)((int)pvVar8 + 0xc4) -
                          temp_v10;
                 temp_v29[5] = (int)(temp_v13 / temp_v14);
                 temp_v29[4] = (int)temp_v10;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v10 = 0.5f;
                 temp_v20 = 2.0f;
                 temp_v14 = 3.1415927f;
                 temp_v13 = (temp_v13 - 0.5f) * 2.0f * 3.1415927f;
                 temp_v29[2] = (int)temp_v13;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v14 = (temp_v13 - temp_v10) * temp_v20 * temp_v14;
                 temp_v29[3] = (int)temp_v14;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v14 = temp_v14 * 6.2831855f;
                 temp_v29[7] = (int)temp_v14;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v13 = ((temp_v28 - *(float *)((int)pvVar8 + 0xd0)) +
                          temp_v14 * *(float *)((int)pvVar8 + 0xd0)) * *(float *)((int)pvVar8 + 0xcc);
                 temp_v29[6] = (int)temp_v13;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v13 = ((temp_v28 - *(float *)((int)pvVar8 + 0xb4)) +
                          temp_v13 * *(float *)((int)pvVar8 + 0xb4)) * *(float *)((int)pvVar8 + 0xb0);
                 temp_v29[8] = (int)temp_v13;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v13 = ((temp_v28 - *(float *)((int)pvVar8 + 0xac)) +
                          temp_v13 * *(float *)((int)pvVar8 + 0xac)) * *(float *)((int)pvVar8 + 0xa8);
                 temp_v29[9] = (int)temp_v13;
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v13 = ((temp_v28 - *(float *)((int)pvVar8 + 0x9c)) +
                          temp_v13 * *(float *)((int)pvVar8 + 0x9c)) * *(float *)((int)pvVar8 + 0x98);
                 temp_v29[10] = (int)temp_v13;

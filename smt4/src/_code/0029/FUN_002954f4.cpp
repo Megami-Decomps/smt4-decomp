@@ -1,5 +1,6 @@
 /* NON_MATCHING: The canonical u16 record lookup introduces UXTH; portrait-load branch placement also differs. */
 #include "common.h"
+#include "util/FUN_002ae8e4.h"
 #include "gamedata/Table00.h"
 #include "gamedata/DevilRecord.h"
 #include "addon/aocMain.h"
@@ -7,9 +8,7 @@
 
 extern "C" {
 Table00Record *dataTable00FindById(s32 id);
-s32 aocRunByName(AocSystem *system, u32 table, u32 entry, u32 mode);
 s32 FUN_002a5ee4(AocSystem *system, s32 table, u32 entry, s32 flags);
-s32 FUN_002ae8e4(AocSystem *system, s32 table, u32 entry, s32 flags);
 s32 asdTMTexTableLoadEntryAsync(s32 table, u32 entry);
 s32 FUN_002c58c8(s32 table, u32 entry);
 s32 FUN_0032c3fc(BattleTalkBustUpPrefixIV *bustUp);
@@ -29,8 +28,8 @@ void FUN_002954f4(s32 devilId, s32 asynchronous)
     bustUp->devilId = devilId;
 
     if (asynchronous == 0) {
-        if (aocRunByName(g_aocSystem, 0x18, bustUp->textureEntry, 1) != 0)
-            FUN_002ae8e4(g_aocSystem, 0x18, bustUp->textureEntry, 0x10000);
+        if (aocRunByName(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureEntry, 1) != 0)
+            FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureEntry, 0x10000);
         else
             FUN_002c58c8(0x18, bustUp->textureEntry);
 
@@ -39,7 +38,7 @@ void FUN_002954f4(s32 devilId, s32 asynchronous)
         bustUp->state = 2;
         bustUp->stateCounter = 0;
     } else {
-        if (aocRunByName(g_aocSystem, 0x18, bustUp->textureEntry, 1) != 0)
+        if (aocRunByName(reinterpret_cast<u32>(g_aocSystem), 0x18, bustUp->textureEntry, 1) != 0)
             FUN_002a5ee4(g_aocSystem, 0x18, bustUp->textureEntry, 0x10000);
         else
             asdTMTexTableLoadEntryAsync(0x18, bustUp->textureEntry);

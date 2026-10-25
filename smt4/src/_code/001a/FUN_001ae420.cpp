@@ -1,9 +1,9 @@
 /* NON_MATCHING: stack-argument load merging, lookup-table base selection and state-allocation failure exit differ. */
 #include "mobiclip_ctrl/VxDecoder.h"
+#include "mobiclip/MobiclipAllocator.h"
 
 extern "C" {
 extern const u8 DAT_0040bc5c[3][0x2100];
-void *callGlobalHook(u32 bytes);
 void rt_memclr(void *memory, u32 bytes);
 
 // Allocate a VX decoder and its YUV frame buffers for the supported output mode.

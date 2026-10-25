@@ -1,6 +1,7 @@
 /* NON_MATCHING: restored engine/nothrow allocation, owned-controller stores, and cursor initialization argument; saved screen/table registers, record-loop scheduling, and virtual-call branch layout differ. */
 #include "classes/Obj42242c.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 class Obj42238c : public ObjBase3c2ef0 {
 public:
@@ -90,8 +91,6 @@ void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_00240cec(s32 arg);
 void *asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 first, u32 second,
-                           void *update, void *end, void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, void *work, u32 parent);
 void FUN_00233670(void *list, s32 a, s32 b, s32 count);
@@ -124,7 +123,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
     u32 **work = static_cast<u32 **>(asdMemAlloc(0x100, 0x100, 0, 4, 1));
     DAT_0043d990 = reinterpret_cast<u32 *>(work);
     *work = reinterpret_cast<u32 *>(screen);
-    screen->job = asdProcessCreateSimple("BIBLE ANALYZE CALC", 2, 0, 0, (void *)FUN_003ac6e8, (void *)FUN_003ac710, work);
+    screen->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BIBLE ANALYZE CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_003ac6e8), reinterpret_cast<AsdProcFunc>((void *)FUN_003ac710), reinterpret_cast<u32>(work));
     screen->drawTask = taskCreateDraw("BIBLE ANALYZE UP", 0x6F, 1, 0, (void *)btlDevilListDrawCallback, NULL, DAT_0043d990, screen->job);
     screen->fadeTask = taskCreateDraw("BIBLE ANALYZE DOWN", 0xE6, 1, 0, (void *)FUN_003acdec, NULL, DAT_0043d990, screen->job);
 

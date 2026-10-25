@@ -1,12 +1,11 @@
-/* NON_MATCHING: Search-setup register scheduling differs; retail also lacks a symbol for the comparison callback at 0x165390. */
+/* NON_MATCHING: bsearch argument setup scheduling: retail loads the comparator literal after the entries pointer and sets the stride last; ours loads the literal first. */
 #include "addon/aocMain.h"
 #include "addon/LookupRecord.h"
 #include "gamedata/DataTable.h"
 
 extern "C" {
 extern AocSystemA *g_aocSystem;
-extern u8 LAB_00165390;
-typedef s32 (*LookupComparator)(const void *, const void *);
+s32 lookupRecordCompareIds(const void *first, const void *second);
 void *libc_bsearch(const void *key, u32 count, const void *entries, u32 stride,
                    s32 (*compare)(const void *, const void *));
 
@@ -18,7 +17,7 @@ Table01Record *FUN_00180118(u16 id)
         key.id = id;
         AocLookupRecord *entry = static_cast<AocLookupRecord *>(
             libc_bsearch(&key, g_aocSystem->lookup.count, g_aocSystem->lookup.entries,
-                         sizeof(AocLookupRecord), reinterpret_cast<LookupComparator>(&LAB_00165390)));
+                         sizeof(AocLookupRecord), lookupRecordCompareIds));
         if (entry != NULL)
             return &entry->record;
     }

@@ -1,6 +1,8 @@
 /* NON_MATCHING: block layout and stack frame differ (retail places the effect-12 halving block after the effect-11 scan and keeps the scan's unprotected flag in a stack slot) */
 #include "common.h"
+#include "mapnavi/naviMain.h"
 
+#include "util/FUN_002e5c2c.h"
 /* The player's record (only the fields used here). */
 struct EffectPlayer {
     /* 0x00 */ u8 unk00[0x2c];
@@ -52,14 +54,12 @@ EffectUnit *gameGetSlotRecord(s32 slot);
 u32 randRange(u32 range);
 EffectSkill *dataTable41FindById(u16 id);
 void playerGetWords(u16 *words, s32 index);
-s32 playerHasFlagBit(u32 bit);
 void playerMaskSetBit(u32 bit);
 void halves34Copy(EffectUnit *unit, u16 *words);
 s32 bitsAt60Test(EffectUnit *unit, u32 bit);
 void bitsAt60Set(EffectUnit *unit, u32 bit);
 u32 FUN_004ccbf0(u16 level);
 u32 FUN_004cc8d8(u16 level, u16 race);
-s32 FUN_002e5c2c(void);
 void gameDataAddCappedPoints(u16 points);
 s32 FUN_003df4a4(void);
 void FUN_004bd17c(EffectUnit *unit);

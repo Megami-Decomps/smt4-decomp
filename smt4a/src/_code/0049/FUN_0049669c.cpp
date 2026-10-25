@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail zeroes the three locals up front in a different order and addresses the stock style through a shared base (shop + 0x16000); ours uses r6-r8 for the locals and sl for the constant 1 (144 rows against 150). */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 #define SHOP_KIND_WEAPONS 0
 #define SHOP_KIND_ITEMS 1
@@ -38,7 +39,6 @@ void campCommonBgAcquire(void);
 void FUN_003b61ec(void);
 void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
-void asdLoadFileAsyncSimple(const char *path, u32 *handle, s32 flags);
 void asdTMTexTableLoadSprites(s32 table);
 void FUN_0014afd0(s32 table, s32 value);
 u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);

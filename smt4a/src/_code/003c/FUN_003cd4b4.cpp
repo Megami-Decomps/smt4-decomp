@@ -2,11 +2,11 @@
 #include "gamedata/Table23Availability.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 extern AocSystemA* g_aocSystem;
 s32 gameFlagIsSet(s32 flag);
-s32 partyEntryFlagsBit1(u32 id);
 
 struct AvailabilityExtension {
     u8 unk000[0x414];

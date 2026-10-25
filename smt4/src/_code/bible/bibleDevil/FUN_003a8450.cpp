@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rebuild of the devil compendium list's per-frame input handling (draft calls kept as read); retail keeps the selected entry pointer in the 0x84-byte text buffer's first word and shares the result tail by jumps, which armcc here builds from separate returns. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
+#include "status/StatusCamera.h"
 
 /* One list entry (0x20 bytes at +0x5A8 of the view, indexed by the cursor). */
 struct DevilEntry {
@@ -51,16 +53,14 @@ void FUN_00233818(SelectedRow *row);
 void FUN_0029ede8(s32 a, u32 b, u32 c, s32 d);
 s32 demonPurchaseValidate(DevilView *view, u32 devil);
 void FUN_002bd06c(u32 devil);
-void libc_strcpy(char *dest, u32 source);
 void textEncodeFontSlot(s32 slot, char *text);
 u32 demonGetRaceLabel(u16 devil, u32 flag);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 void buttonHelpSetPreset(s32 preset);
 void messageMainSetTargetFlags(s32 flags);
-void FUN_002a0cc8(s32 flag);
 void FUN_002328b4(void);
 void sortMenuCreate(s32 a, s32 b);
-void FUN_0029e328(s32 a);
+void FUN_0029e328(u8 value);
 void useCounterStart(void);
 void FUN_0029ee6c(s32 a, u32 color);
 void beginStatusPanelClose(void);
@@ -102,9 +102,9 @@ void FUN_003a8450(DevilView *view)
         if (demonPurchaseValidate(view, shown) != 0) {
             char text[0x84];
             FUN_002bd06c(shown);
-            libc_strcpy(text, shown);
+            libc_strcpy(reinterpret_cast<unsigned int *>(text), reinterpret_cast<unsigned int *>(shown));
             textEncodeFontSlot(8, text);
-            libc_strcpy(text, demonGetRaceLabel(shown, 1));
+            libc_strcpy(reinterpret_cast<unsigned int *>(text), reinterpret_cast<unsigned int *>(demonGetRaceLabel(shown, 1)));
             textEncodeFontSlot(0x10, text);
             scrScriptProcessStartEntry(view->script, 0);
             view->state = 3;

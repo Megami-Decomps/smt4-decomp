@@ -11,7 +11,6 @@ struct BattleTargetSelectionView {
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 s32 lcgRandomRange(u16 limit);
-s32 btlFindEntryNonzeroRecordValue(s32 unitIndex);
 void FUN_004e5b5c(BattleTargetSelectionView *context);
 void FUN_004e6ed8(BattleTargetSelectionView *context, s32 mode);
 void FUN_004e7d20(BattleTargetSelectionView *context, s32 count);

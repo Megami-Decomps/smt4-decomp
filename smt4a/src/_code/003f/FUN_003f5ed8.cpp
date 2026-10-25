@@ -1,5 +1,9 @@
 /* NON_MATCHING: the visible-window loop remains partially unrolled rather than retail's straight-line stores, changing saved registers and the dialog call frame. */
 #include "common.h"
+#include "shard/Shard0031.h"
+#include "util/FUN_002a4894.h"
+#include "util/FUN_002a4894.h"
+#include "gamedata/FlagsB.h"
 
 extern "C" {
 
@@ -38,7 +42,6 @@ typedef struct DialogWorkView {
 void FUN_00163aa4(void *state, f32 scale);
 void FUN_00228b04(void *list, s32 arg);
 s32 resourceRunOperationIfUnblocked(void *list);
-s32 FUN_002a4894(void *list);
 s32 ifTouchGetSelectionMode(void);
 u32 FUN_001834a4(u32 kind, u32 index);
 s32 FUN_003450d4(void *list, u32 layout, void *panel, s32 a, s32 b, s32 c, u8 *flag, s32 d, s32 e);
@@ -47,8 +50,6 @@ void eventQueueAddUniqueIfValid(u32 event);
 void FUN_003f6abc(DialogWork *work);
 void uiSpriteSetKeyframe(void *sprite, s32 a, s32 b);
 void uiSpriteSetImageKeyframe(void *sprite, s32 a, ...);
-s32 flagsBGetBit1(u32 id);
-void gameFlagsSetAlternateMode(u32 id, s32 mode);
 void dialogEnterState(DialogWork *work, s32 state, s32 arg);
 
 /* Updates the selection dialog: pulses its three highlights, blinks, refreshes the visible window
@@ -71,7 +72,7 @@ void FUN_003f5ed8(DialogWork *work)
     }
     FUN_00228b04(work->list, 1);
     work->offset = resourceRunOperationIfUnblocked(work->list);
-    work->first = FUN_002a4894(work->list);
+    work->first = FUN_002a4894(reinterpret_cast<const Object *>(work->list));
     u32 id = work->ids[work->first + work->offset];
 
     if (work->selectedId != id) {

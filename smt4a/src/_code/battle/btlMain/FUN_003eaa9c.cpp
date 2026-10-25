@@ -26,7 +26,6 @@ struct EnvironmentScaleRecord {
 };
 }
 extern "C" {
-s32 FUN_004d87e4(u32 *owner);
 void FUN_004d854c(u32 *owner);
 void *FUN_00178b04(u32 bytes, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
@@ -43,7 +42,7 @@ void callOnHandleField4D(u32 *owner, f32 x, f32 y, f32 z);
 void FUN_003eaa9c(BtlMainStateA *state)
 {
     EnvironmentCopyView *environment = reinterpret_cast<EnvironmentCopyView *>(state);
-    if (!FUN_004d87e4(environment->owners[0]))
+    if (!FUN_004d87e4(reinterpret_cast<void **>(environment->owners[0])))
         return;
     FUN_004d854c(environment->owners[0]);
     for (s32 i = 1; i < 4; ++i) {

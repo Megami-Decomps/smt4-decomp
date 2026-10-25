@@ -5,8 +5,6 @@
 extern "C" {
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 kind);
 void memClear(void *buffer, u32 size);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, u32 parent);
 s32 FUN_00107d28(u32 process);
 void FUN_0010a2f4(u32 process);
 
@@ -21,8 +19,7 @@ void ifTouchAcquire(void)
         }
         IfTouchState *state = g_ifTouch.state;
         memClear(state, sizeof(IfTouchState));
-        state->process = asdProcessCreateSimple("TOUCH CALC", 1, 0, 0,
-                                               FUN_00107d28, FUN_0010a2f4, 0);
+        state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TOUCH CALC"), 1, 0, 0, FUN_00107d28, FUN_0010a2f4, 0);
         state->selectedRegion = -1;
         state->regionCount = 10;
         state->timer = 0;

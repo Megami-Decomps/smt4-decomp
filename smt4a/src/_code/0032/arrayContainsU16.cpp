@@ -1,5 +1,6 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "util/ArrayContainsU16.h"
 
 extern "C" {
 

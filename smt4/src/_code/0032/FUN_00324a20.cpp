@@ -1,11 +1,11 @@
 /* NON_MATCHING: the global texture-slot base load is scheduled three instructions later than retail. */
 #include "battle/BattleEffectTextureCache.h"
+#include "AsdSDK/FileLoadSync.h"
 
 extern "C" {
 extern BattleEffectTextureSlot g_pendingTextures[26];
 AsdTexture *asdTextureCreate(u32 flags);
 void FUN_002522f8(char *output, u32 capacity, const char *format, const char *directory, const char *name);
-void *fileLoadSync(const char *path, u32 *size, u32 flags);
 void asdTexTgaLoadNw4c(AsdTexture *texture, void *file, u32 size, u32 flags);
 void asdMemFree(void *memory);
 

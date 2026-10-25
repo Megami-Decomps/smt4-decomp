@@ -58,4 +58,20 @@ typedef char QcWorkSizeCheck[sizeof(QcWork) == 0x20 ? 1 : -1];
 typedef char QcGlobalsSizeCheck[sizeof(QcGlobals) == 0x8 ? 1 : -1];
 typedef char QcGlobalsASizeCheck[sizeof(QcGlobalsA) == 0x14 ? 1 : -1];
 
+extern "C" {
+void buttonHelpSetPreset(u32 preset);
+}
+
+extern "C" {
+u32 padButtonRepeat(u32 button);
+}
+
+extern "C" {
+u32 dataTableValueOrZero(u32 index);
+}
+
+extern "C" {
+u32 FUN_00169d8c(u32 kind);
+}
+
 #endif

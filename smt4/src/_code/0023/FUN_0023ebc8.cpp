@@ -1,6 +1,7 @@
 /* NON_MATCHING: enemy stat copies and reset loops fold differently; local view extends shared payload prefix. */
 #include "battle/btlUnit.h"
 #include "gamedata/DevilRecord.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 struct EnemyBattleDefinitionView {
@@ -39,7 +40,6 @@ typedef char EnemyBattlePayloadOffsets[offsetof(EnemyBattlePayloadView, special)
     sizeof(EnemyBattlePayloadView) == 0x188 ? 1 : -1];
 }
 extern "C" {
-void memClear(void *memory, u32 bytes);
 
 void FUN_0023ebc8(BtlMainState *battle, BtlUnitData *data, const EnemyBattleDefinitionView *definition)
 {

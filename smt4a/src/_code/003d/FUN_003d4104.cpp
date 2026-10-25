@@ -1,6 +1,7 @@
 /* NON_MATCHING: descending tests use TST instead of a flag-setting shift, and ascending sort blocks remain inline rather than outlined. */
 #include "status/StatusDown.h"
 #include <stdlib.h>
+#include "event/2dEvent/2dEventTex.h"
 
 namespace {
 struct InventorySortMode {
@@ -12,7 +13,6 @@ typedef char InventorySortModeSizeCheck[sizeof(InventorySortMode) == 1 ? 1 : -1]
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
-u8 *FUN_0026140c(void);
 void arraySortQsort(void *entries, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
 int FUN_0035fe34(const void *, const void *);
 int devilSlotCompareRaceThenLevel(const void *, const void *);

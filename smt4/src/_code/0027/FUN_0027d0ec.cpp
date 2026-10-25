@@ -33,7 +33,7 @@ extern int gameMapBlockGetValue(void);
 extern int FUN_00285574(void);
 /* Supplied declaration required: FUN_00287328. */
 /* Supplied declaration required: bgmGetStateById. */
-extern int FUN_00287894(void);
+extern int table1bOr1cGetRecordValue(void);
 extern int FUN_002903f0(void);
 /* Supplied declaration required: gameFlagIsSet. */
 extern int FUN_00328168(unsigned int, unsigned int);
@@ -129,7 +129,7 @@ LAB_0027d324:
         temp_v4 = temp_v2 == 0x168;
       }
       if (!temp_v4) {
-        temp_v2 = FUN_00287894();
+        temp_v2 = table1bOr1cGetRecordValue();
         if (temp_v2 == 1) {
           DAT_0049f944 = 0x1000037;
         }

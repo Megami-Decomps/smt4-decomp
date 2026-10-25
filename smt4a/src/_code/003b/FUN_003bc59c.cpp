@@ -1,8 +1,9 @@
 /* NON_MATCHING: canonical main-state view and explicit choice forwarding recovered; mask loads, attribute shifts and range reloads differ. */
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "util/DataTable08Sub2GetRecord.h"
 #include "util/SlotRangeSelect.h"
 
 namespace {
@@ -50,7 +51,6 @@ struct BattleChoiceSpan {
 extern "C" {
 BattleActionSkill *dataTable04FindById(u32 id);
 BattleActionItem *dataTable8FindRecord(s32 id);
-BtlMainStateA *btlGetMainState(void);
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
 u32 btlResolveEntryChoice(s32 choice);

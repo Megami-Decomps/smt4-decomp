@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps a separate pointer to slot->shown (add #0x85) and computes &models before the branch; ours addresses both fields off one slot base. */
 #include "common.h"
+#include "classes/Obj4209cc.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct LmapModelState {
 
 extern LmapModelState *g_lmapMainState;
 
-LmapModelNode *FUN_0040619c(void *group, s32 index);
 
 /* Shows or hides map model `index`, updating its node once the model is loaded. */
 void FUN_003b5c54(s32 index, s32 show)
@@ -53,7 +53,7 @@ void FUN_003b5c54(s32 index, s32 show)
         if (!slot->loaded) {
             return;
         }
-        FUN_0040619c(g_lmapMainState->models->group, index)->flags &= ~LMAP_MODEL_NODE_HIDDEN;
+        reinterpret_cast<LmapModelNode *>(FUN_0040619c(g_lmapMainState->models->group, index))->flags &= ~LMAP_MODEL_NODE_HIDDEN;
     } else {
         if (!slot->shown) {
             return;
@@ -62,7 +62,7 @@ void FUN_003b5c54(s32 index, s32 show)
         if (!slot->loaded) {
             return;
         }
-        FUN_0040619c(g_lmapMainState->models->group, index)->flags |= LMAP_MODEL_NODE_HIDDEN;
+        reinterpret_cast<LmapModelNode *>(FUN_0040619c(g_lmapMainState->models->group, index))->flags |= LMAP_MODEL_NODE_HIDDEN;
     }
 }
 

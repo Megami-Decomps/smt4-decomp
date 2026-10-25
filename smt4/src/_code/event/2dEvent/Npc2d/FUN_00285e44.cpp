@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct NpcPortraitSourceView {
     u8 unk00[0x22];
@@ -12,13 +13,11 @@ struct NpcPortraitSourceView {
 extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-void memClear(void *, u32);
 NpcPortraitSourceView *dataTable25FindById(s32);
 s32 FUN_002c1d5c();
 u32 FUN_00294090(s32 portraitId, u32 enabled);
 s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, AsdProcUpdateFunc, AsdProcFunc, void *);
 
 /* Create a portrait process and choose its screen region from the horizontal position. */
 void FUN_00285e44(s32 npcId, u32 style, s32 x)
@@ -54,6 +53,6 @@ void FUN_00285e44(s32 npcId, u32 style, s32 x)
     else
         work->display.screenRegion = 5;
     work->speed = 0.33f;
-    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
 }
 }

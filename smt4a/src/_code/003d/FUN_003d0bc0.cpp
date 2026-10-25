@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d0bc0` (_code @ 0x3d0bc0, 0xc4c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -65,7 +66,6 @@ extern int contentEntryCompareCategoriesDesc(...); /* 0x3aa180 */
 extern int g_camp; /* 0x57f108 */
 
 /* Supplied declaration required: qsort. */
-extern int FUN_0026140c(void);
 extern unsigned int objectApplyIfUnblocked(int);
 /* Supplied declaration required: arraySortQsort. */
 
@@ -83,7 +83,7 @@ void FUN_003d0bc0(int param_1)
   int temp_v5;
   
   temp_v3 = g_camp;
-  temp_v1 = FUN_0026140c();
+  temp_v1 = reinterpret_cast<int>(FUN_0026140c());
   pbVar5 = (unsigned char *)0x0;
   temp_v4 = 0;
   temp_v5 = 0;

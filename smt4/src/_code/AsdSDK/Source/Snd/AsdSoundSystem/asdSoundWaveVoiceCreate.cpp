@@ -11,7 +11,7 @@ void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdMemoryAllocAligned(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront);
-u32 FUN_00129010(const void *data);
+u32 soundBlockGetPayloadEnd(const void *data);
 void FUN_00129020(const void *data);
 u8 *FUN_00129034(const void *data, s32 unk);
 void memCopy(const void *src, void *dst, u32 size);
@@ -37,7 +37,7 @@ AsdSndWaveVoice *asdSoundWaveVoiceCreate(const u8 *data, u32 size, u32 unk8c)
     sound->unk7c = -1;
     sound->unk8c = unk8c;
     sound->unk90 = 1;
-    sound->format = FUN_00129010(data);
+    sound->format = soundBlockGetPayloadEnd(data);
     FUN_00129020(data);
     u32 headerSize = FUN_00129034(data, 0) - data;
     sound->sampleBytes = size - headerSize;

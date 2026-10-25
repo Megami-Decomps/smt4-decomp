@@ -1,6 +1,7 @@
 /* NON_MATCHING: loop bound uses one LDRD instead of retail's two scalar loads; remaining instruction sequence matches. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "util/CalleeContracts.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 void scrSetResult(s32);
@@ -14,7 +15,7 @@ u32 FUN_0031eff4(void)
 {
     u32 first, count;
     u32 group = btlScriptResolveGroupArg(scrGetArg(0));
-    FUN_002499fc(group, &first, &count);
+    FUN_002499fc(group, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < static_cast<s32>(count + first); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&

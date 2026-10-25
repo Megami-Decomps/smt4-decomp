@@ -4,6 +4,8 @@
 #include "shard/S1Mover.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/DataTable.h"
+#include "util/Random.h"
 
 namespace {
 /* The shared entry's byte-aligned padding cannot be replaced with aligned vector fields. */
@@ -67,7 +69,6 @@ u32 taskCreateDraw(const char *name, u16 priority, u8 list, u32 bytes,
                    TaskFunc update, TaskFunc destroy, void *work, u32 parent);
 s32 FUN_001d9294();
 void mapEnemyFreeWork();
-s32 randNextInRange(u32 limit);
 
 void MapEnemy_Register(u32 parent)
 {

@@ -1,6 +1,7 @@
 #include "addon/aocBootProcess.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern AocBootGlobals g_aocBoot;
@@ -9,8 +10,6 @@ void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 ali
 void FUN_0015f258(void *dialog);
 void FUN_0024b280(void);
 void aocBootRelease(void);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 argument, u32 owner,
-                          void (*update)(void), void (*release)(void), u32 flags);
 
 /* Allocate the boot dialog if necessary and start its calculation process. */
 u32 FUN_00320c64(void)
@@ -25,7 +24,7 @@ u32 FUN_00320c64(void)
     boot->dialogOpen = 0;
     FUN_0015f258(boot->dialog);
     boot->frames = 0;
-    u32 job = asdProcessCreateSimple("aocBoot CALC", 4, 0, 0, FUN_0024b280, aocBootRelease, 0);
+    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("aocBoot CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0024b280), reinterpret_cast<AsdProcFunc>(aocBootRelease), 0);
     boot = g_aocBoot.boot;
     boot->job = job;
     g_aocMain->flags &= ~0x70;

@@ -1,9 +1,10 @@
 /* NON_MATCHING: first-frame color branches and the shared completion return are laid out differently. */
 #include "common.h"
 #include "script/ScriptArgs.h"
+#include "util/ScrGetCommandFrame.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
-s32 scrGetCommandFrame(void);
 s32 frameTextureGetState(void);
 void slotSetRequest(u32 slot, u32 duration, u32 color);
 u32 FUN_002b89a4(s32 slot);
@@ -13,7 +14,7 @@ void FUN_00282bfc(s32 slot, u32 color);
 // Start the requested black/white fade on the active screens, then wait or finish it immediately.
 u32 FUN_0021ea68(void)
 {
-    u32 duration = scrGetArg(0);
+    u32 duration = scrGetArg(1);
     if (scrGetCommandFrame() == 0) {
         s32 mode = scrGetArg(0);
         if (mode == 0) {

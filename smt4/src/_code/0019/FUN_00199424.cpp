@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail counts the page's entries with a three-iteration unrolled pairs loop and addresses the page row through pool-loaded offsets, and keeps the battle-state word in r0 across the capture test; the same lists, counts and calls. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 /* A list box widget: only used through its address. */
@@ -54,7 +55,6 @@ s32 gameFlagIsSet(u32 flag);
 PlayerData *gameGetPlayerData(void);
 void FUN_0029f848(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
 void FUN_0029eb5c(ListBox *box, s32 value);
-void memClear(void *data, u32 size);
 s32 flagValueIsPositive(u32 id);
 s32 FUN_0028e9a0(u32 id);
 u8 *gameGetSlotTable(void);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail package-count switch uses a different dispatch layout. */
 #include "shard/W8X15_PackageList.h"
+#include "gamedata/DataTable.h"
 
 /* Count records in a section of all loaded type-six package files. */
 extern "C" s32 FUN_00387f88(PackageList *packages, u32 section)

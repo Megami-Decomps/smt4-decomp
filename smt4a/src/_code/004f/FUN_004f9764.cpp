@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps every `name != NULL` test and the name/path/work pointers share registers (mov r6,sp / mov r6,r8); armcc here threads the redundant null tests and keeps separate registers */
 #include "common.h"
 #include "battle/btlEffect.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 /* The effect names of one battle, 0x16 bytes each, after a 0x108 byte header. */
 struct BtlEffectNameTable {
@@ -47,7 +48,6 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void sysMemClear(void *buffer, u32 bytes);
 char *FUN_00100d60(const char *text, s32 character);
 s32 findRecordByKey(const char *key);
-void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
 void btlCameraFinishTransition(BtlEffectWork *work);
 u32 FUN_002282c8(u32 effect, u32 a, u32 b);
 
@@ -99,7 +99,7 @@ u32 FUN_004f9764(BtlEffectWork *work)
 
                     libc_strcpy(load->name, FUN_00100d60(path, '/') + 1);
                     if (findRecordByKey(load->name) == 0xff) {
-                        asdLoadFileAsyncSimple(path, &load->file, 1);
+                        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&load->file), 1);
                         load->flags |= 1;
                     }
                 }

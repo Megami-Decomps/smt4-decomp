@@ -1,4 +1,5 @@
 #include "shard/Shard0038.h"
+#include "util/AocDataBlockHasEntries.h"
 
 extern "C" {
 

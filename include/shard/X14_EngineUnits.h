@@ -57,4 +57,5 @@ typedef char EngineUnitsPartyMarkerOffsetsCheck[
     offsetof(EngineUnits, partyMarkers.pending) == 0x7557 &&
     sizeof(EngineUnits) == 0x7F34 ? 1 : -1];
 
+
 #endif

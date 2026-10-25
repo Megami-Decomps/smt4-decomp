@@ -1,4 +1,6 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 /* A loaded file handle with the buffer it was loaded into. */
 struct LoadedFile {
@@ -21,7 +23,6 @@ void FUN_00287c34(s32 value);
 void mapFilterLoad(void);
 void mapIfLoadWidgets(void);
 void FUN_002f58e0(void);
-void asdTMTexTableLoadSprites(s32 table);
 void FUN_002c58c8(s32 a, s32 b);
 void *asdLoadFileSyncDefault(const char *path);
 void *asdLoadFileSync(const char *path, u32 *buffer, s32 a, s32 size);

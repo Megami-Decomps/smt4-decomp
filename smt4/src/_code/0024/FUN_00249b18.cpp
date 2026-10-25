@@ -1,11 +1,11 @@
 /* NON_MATCHING: only the ailment-clear store moves after the maximum-HP/MP loads in the unit restore block. */
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/Shard0034.h"
+#include "gamedata/PlayerDataBlock.h"
 extern "C" {
 PartyDamageUnitIV *gameGetUnitRecord(u32 slot);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 gameCountUnits(void);
-PlayerData *gameGetPlayerData(void);
 
 /* Restore eligible party members and clear their ailments. */
 void FUN_00249b18(u32 group, s32 revive)

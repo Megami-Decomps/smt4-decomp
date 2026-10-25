@@ -26,4 +26,13 @@ struct AsdSaveHeader {
 
 typedef char AsdSaveHeaderSizeCheck[sizeof(AsdSaveHeader) == ASD_SAVE_HEADER_SIZE ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void memCopy(const void *src, const void *dst, int size);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

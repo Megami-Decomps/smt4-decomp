@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "event/2dEvent/2dEventTex.h"
 
 /* The pair of party slots remembered for fusion, with the demon IDs they held. */
 struct UniteRememberedSlots {
@@ -19,7 +20,6 @@ struct UniteSlotRecord {
 extern "C" {
 
 extern UniteWork *g_unite;
-UniteRememberedPair *FUN_0026140c(void);
 void soundChannelStopAll(s32 arg);
 void soundChannelRequestIfEnabled(u32 channel, s32 arg, s32 fade);
 UniteSlotRecord *gameGetSlotRecord(s32 slot);
@@ -35,7 +35,7 @@ void linkHolderClearFlag(void *holder);
 void FUN_0039c744(void)
 {
     UniteWork *unite = g_unite;
-    UniteRememberedSlots *remembered = &FUN_0026140c()->remembered;
+    UniteRememberedSlots *remembered = &reinterpret_cast<UniteRememberedPair *>(FUN_0026140c())->remembered;
     soundChannelStopAll(0);
     soundChannelRequestIfEnabled(unite->returnState.soundChannel, 0, 60);
     if (remembered->slots[0] >= 0) {

@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int textEncodeFontSlot(...);
 int textFormatBuffer(...);
-int memClear(...);
 
 int FUN_00233404(void);
 int FUN_00233410(unsigned int *);
@@ -57,7 +57,7 @@ extern unsigned int FUN_002333f0(unsigned int *);
 /* Supplied declaration required: FUN_0023478c. */
 /* Supplied declaration required: recordClearWideHandle. */
 /* Supplied declaration required: archiveFileReplaceHandle. */
-extern int FUN_00240d5c(unsigned int *);
+extern int flaggedEntryGetValueByState(unsigned int *);
 extern int buttonHelpHasEnabledEntryForId(unsigned int);
 /* Supplied declaration required: FUN_002869e8. */
 /* Supplied declaration required: FUN_00287328. */
@@ -165,7 +165,7 @@ void AocMenu::runMainProcess()
     }
     if ((temp_v5 && temp_v6) && temp_v3 != 0xffffffff) {
       recordResetIndex(puVar3);
-      temp_v2 = FUN_00240d5c(temp_v8);
+      temp_v2 = flaggedEntryGetValueByState(temp_v8);
       temp_v4 = 0;
       if (temp_v4 < (int)param_1[0xb0]) {
         do {
@@ -320,7 +320,7 @@ LAB_003906d4:
   case 6:
     temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
     temp_v3 = puVar1[0x19e];
-    memClear(&temp_v7,0x80);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(&temp_v7), 0x80));
     textFormatBuffer(&temp_v7,&LAB_0039096c,temp_v3 + temp_v2 * 0x9c8);
     textEncodeFontSlot(0,&temp_v7);
     FUN_002b8244(1);

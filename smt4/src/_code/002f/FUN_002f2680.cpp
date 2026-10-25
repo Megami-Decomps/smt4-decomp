@@ -25,7 +25,7 @@ extern "C" {
 
 s32 idIsAbove400(s32 id);
 PassiveSkillSortRecord *passiveSkillLookupRecord(s32 id);
-SkillSortRecord *dataTable40FindById(s32 id);
+SkillSortRecord *dataTable40FindById(u32 id);
 UnitSortRecord *gameGetUnitRecord(s32 id);
 s32 FUN_002497f8(SkillSortItem *a, SkillSortItem *b);
 

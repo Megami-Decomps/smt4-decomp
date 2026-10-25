@@ -2,6 +2,7 @@
 #include "shard/S1ListPanel.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "ui/UiSpriteState.h"
+#include "text/TextDraw.h"
 struct TitleBannerView {
     u8 prefix[0x164];
     Point2 origin;
@@ -29,7 +30,6 @@ void FUN_002bf380(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
 SpriteInfo *FUN_002bf4f8(u32 group, u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
-void FUN_002be5a4(u32 layer, u32 color, const u8 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);
 void FUN_002bf818(UiSpriteState *sprite);
 
 void FUN_0039ba2c(TitleBannerView *banner)
@@ -47,7 +47,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     f32 inset = (f32)((info->size[0] - (s32)width) / 2);
     f32 x = (f32)(vec2GetXInt((&banner->sprite)) + info->x) + inset + origin.x;
     f32 y = (f32)info->y + origin.y;
-    FUN_002be5a4(2, DAT_0044cdc8.color, text, x, y, 0.0f, 0.0f, 1.0f);
+    FUN_002be5a4(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, y, 0.0f, 0.0f, 1.0f);
     FUN_002bedb0(g_titleScene, 3);
     efctSetSpeed(1.0f);
     FUN_002bf818((&banner->sprite));

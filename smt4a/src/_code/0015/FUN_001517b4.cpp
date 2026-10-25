@@ -1,8 +1,8 @@
 /* NON_MATCHING: only one block differs: retail lays the key-3 alias dispatch out between the mode-2 and mode-1 tail calls (after the stick-direction code) and zeroes r0 inside both the key-4 and key-3 blocks, while this build keeps all four alias blocks together; every test, call sequence and the tail-call order (cases written 2, 1, 0) otherwise match. */
 #include "common.h"
+#include "quest_center/qcMain.h"
 
 extern "C" {
-s32 padButtonRepeat(s32 key);
 s32 padButtonIsPressed(s32 key);
 s32 slotIsActive(s32 key);
 s32 FUN_00164cf4(s32 direction);

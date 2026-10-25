@@ -19,9 +19,9 @@ typedef struct UnitRecord {
 } UnitRecord;
 
 s32 idIsAbove400(s32 id);
-s32 FUN_0024c5a0(s32 id);
+u32 FUN_0024c5a0(u32 id);
 s32 recordKindRank(s32 id);
-UnitSortRecord *dataTable40FindById(s32 id);
+UnitSortRecord *dataTable40FindById(u32 id);
 UnitRecord *gameGetUnitRecord(s32 unit);
 
 static __inline s32 unitSortLevel(const UnitSortEntry *entry)

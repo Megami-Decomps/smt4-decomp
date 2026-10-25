@@ -4134,3 +4134,29 @@
 001ad484 keyedRecordSetVectorPair1 inferred [high] copies vector pair into keyed record pairs[1]
 0030b1dc scrCommBtlActiveEntryRatioAtLeast inferred [high] pushes whether the active entry current*100/maximum reaches arg0
 0022e2fc entryTableClear inferred [med] clears every 0x20-byte entry of the 0x500-entry table, head, count and sentinel
+003bbf08 _ZN9Obj420a1cD0Ev evidence size:0x30 deleting destructor: stores _ZTV9Obj420a1c+8 (reloc in pool), asdMemFree x2, asdCecShutdown, tail asdMemFreeNonNull(this); class has ctor _ZN9Obj420a1cC1Ev at 0x3bbe6c
+0034b0e4 _ZN9Obj4208f8D0Ev evidence size:0x5c deleting destructor of Obj4208f8: pool word _ZTV9Obj4208f8+8, then nodeSetTranslation/FUN_0028c618/modelSetPosition on model node, tail asdMemFreeNonNull(this)
+00263c1c asdCameraLoadFromFile inferred [high] loads a camera file and creates the camera for it (resource kept at 0x14)
+00129010 soundBlockGetPayloadEnd inferred [med] address just past the 8-byte block header and `size` payload bytes
+002ae584 appCostRecordFindById inferred [med] bsearch of data table 0xB for the 0x40-byte cost record keyed by id at 0x20
+00240d5c flaggedEntryGetValueByState inferred [med] dispatches to flaggedEntryGetValueA/B on the part state
+002498ec table8Type5FindById inferred [high] add-on lookup answer, else bsearch of data table 8 section 5 by Table8Type5Record::id; returns the record or NULL
+001e2954 spriteTemplateGetDevilTableByte inferred [med] DAT_00447620[spriteTemplateGetPreferredDevilId(kind)]
+00287894 table1bOr1cGetRecordValue inferred [med] byte at +6 of dataTable1bOr1cGetRecord(id), 0 when absent
+002c1c0c asdTMTexTableGetNodeTexture inferred [high] asdTMTexTableCallFileB(table,node)->loaded.texture
+002c39a4 renderCtxSelectStereoLayout inferred [med] switches the draw context (RenderCtx) to the layout of its stereo phase (+0x528) when the loaded mode (+0x5f4) differs
+00295c04 partyMoneyAddForward inferred [med] wrapper whose tail call to gameMoneyAdd (next function) was NOPed
+0019dad8 matrixGetTranslation inferred [high] copies the translation column (x,y,z) of the matrix FUN_0028c92c builds and zeroes w
+003c1414 driftObjectStart inferred [med] starts the drift object with a speed chosen by type and a random direction
+0015bd68 gfxCommandTemplateAppend inferred [med] sets the template mode (2 when enabled) and appends the 0x138-byte command template to the command buffer
+002f4bc0 staffRollDrawSecondaryColumn inferred [med] twin of smt4a FUN_0037a1a0
+0024b830 shiftRandomNextFraction inferred [high] twin of smt4a FUN_00514540
+00381d78 screenFadeStartNextState inferred [med] when fade idle sets state 4/5 by variant byte and clears step; twin of Obj5333c0::chooseNextState
+00312b9c scrCommBattleSetFlag44a4Bit0 inferred [med] sets bit 0 of battle word 0x44a4 and returns script success
+003251e0 scrCommBattleEnableFeature inferred [med] calls FUN_00242914(g_btlUiBlock,1), sets battleFlags bit 0x20000000, returns 1
+0029ea68 itemGetFlagBit1 inferred [med] item index <= 0x500 -> flag bit 1 of the item record at +0x2e
+002f3614 mapFlagTest inferred [med] tests bit of the map block flag array at 0xc98
+00322d18 saveLoadStartSave inferred [med] allocates save work, resets save settings, creates the Save process
+0029e648 messageBannerInitSelection inferred [med] initialises the banner selected value from current value or slot table and default widget settings
+00324540 scrCommResultGetDemonId inferred [med] script command: demon id of the current result entry, from override id or its unit record
+002dfe08 mapIfRequestRecordById inferred [med] sets pending request on the first active mapIf record with the given id

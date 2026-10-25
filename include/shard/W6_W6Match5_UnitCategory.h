@@ -18,7 +18,7 @@ struct ScriptCategoryUnit {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 FUN_0019acdc(u16, u32);
+s32 FUN_0019acdc(s32 id, s32 flag);
 }
 
 #endif

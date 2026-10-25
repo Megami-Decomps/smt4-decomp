@@ -1,5 +1,7 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/DataTable.h"
+#include "util/Random.h"
 
 extern "C" {
 

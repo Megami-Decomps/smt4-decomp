@@ -1,7 +1,9 @@
+#include "util/FUN_002ae8e4.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033dcec` (_code @ 0x33dcec, 0x398 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "addon/aocMain.h"
 
 extern "C" {
 
@@ -48,7 +50,6 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 
 /* Unsupported intrinsic, declaration required: builtin_strncpy (CALLOTHER). */
 /* Supplied declaration required: FUN_0017fa3c. */
-extern int FUN_002ae8e4(unsigned int, void *, unsigned int, unsigned int);
 extern int aocRunByName(unsigned int, void *, unsigned int, unsigned int);
 extern int FUN_002b90c8(unsigned char *, unsigned int, unsigned int *);
 /* Supplied declaration required: refIsNullOrZero. */
@@ -104,7 +105,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     if ((param_2 & 8) != 0) {
       temp_v4 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x20000);
+        temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x20000);
       }
       else {
         temp_v4 = FUN_002e151c(param_1->field_0x8,param_1->field_0xc);
@@ -113,7 +114,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     else if ((param_2 & 0x40) != 0) {
       temp_v4 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x30000);
+        temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x30000);
       }
       else {
         temp_v4 = asdTMTexTableActivateImage(param_1->field_0x8,param_1->field_0xc);
@@ -122,7 +123,7 @@ void FUN_0033dcec(fn_0033dcec_arg0 *param_1,unsigned int param_2,int param_3)
     else if ((param_2 & 1) != 0) {
       temp_v4 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v4 != 0) {
-        temp_v4 = FUN_002ae8e4(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x10000);
+        temp_v4 = FUN_002ae8e4(g_aocSystem,reinterpret_cast<u32>(param_1->field_0x8),param_1->field_0xc,0x10000);
       }
       else {
         temp_v4 = FUN_002c58c8(param_1->field_0x8,param_1->field_0xc);

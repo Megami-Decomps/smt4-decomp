@@ -2,18 +2,17 @@
 #include "font/GuestWin/GuestWin.h"
 #include "ui/UiSpriteState.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
-u32 asdProcessCreateSimple(const char *, u32, u32, u32, void (*)(), u32, u32);
 void taskCreateDraw(const char *, u32, u32, u32, void (*)(), u32, u32, u32);
 void guestWinUpdate(void);
 void FUN_00155840(void);
 void paramsClearPacket(void *);
 
 void FUN_0014e188(UiSpriteState *, u32, u32, void *, u32, f32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 static const u32 guestWindowTextureParameters[] = { 0, 0, 0, 0x140, 0, 8 };
 static const u32 guestWindowTransformParameters[] = { 0x3f800000, 0x3f800000, 0, 0x3f800000, 0, 4 };
 static const s32 guestWindowAnimationParameters[] = {
@@ -40,7 +39,7 @@ void FUN_001409e4(void)
     }
     GuestWindowView *work = reinterpret_cast<GuestWindowView *>(g_guestWin);
     sysMemClear(work, sizeof(*work));
-    u32 process = asdProcessCreateSimple("GuestWin Calc", 3, 0, 0, guestWinUpdate, 0, 0);
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GuestWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(guestWinUpdate), 0, 0);
     work->process = process;
     taskCreateDraw("GuestWin DrawUpLeft", 0x86, 0, 0, FUN_00155840, 0, 0, process);
     taskCreateDraw("GuestWin DrawUpRight", 0xe2, 0, 0, FUN_00155840, 0, 0, work->process);

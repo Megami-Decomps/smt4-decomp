@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match3_PointDifference.h"
 #include "shard/W6_W6Match7_TextureTransform.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 struct BattleUiAnchorPair {
@@ -29,7 +30,6 @@ typedef char BattleUiLayoutOffsetsCheck[offsetof(BattleUiLayoutWork, pairedAncho
 
 extern "C" {
 const PointLookupRecord *FUN_002bf4f8(s32 group, s32 index);
-void memClear(void *memory, u32 size);
 
 void FUN_0033cf30(BattleUiLayoutWork *work)
 {

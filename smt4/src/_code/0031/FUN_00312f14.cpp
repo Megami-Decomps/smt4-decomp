@@ -2,13 +2,13 @@
 #include "battle/BattleChoiceWeights.h"
 #include "gamedata/DataTable.h"
 #include "battle/BtlMainAccess.h"
+#include "battle/BtlTables.h"
+#include "util/Random.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
-void* btlMainGetDataTable(void* battle, s32 table);
 void FUN_002ad8b4(BattleChoiceRow* destination, const BattleChoiceRow* source);
-s32 randNextInRange(u16 maximum);
 
 s32 FUN_00312f14(void)
 {

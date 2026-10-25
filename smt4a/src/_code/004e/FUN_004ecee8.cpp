@@ -1,6 +1,7 @@
 /* NON_MATCHING: near: retail keeps the constants 1 and 5 in r8/r7 and r9 for a mask half, uses a 12-byte frame and a shared tail for kinds 6/15 and 0x14; ours uses a 16-byte frame and places the kind-6 call out of line (152 rows against 151). */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 
@@ -61,7 +62,6 @@ void FUN_004fbeac(s32 delay, BtlCommand *command, s32 mode, s32 kind, s32 flag);
 void FUN_004c9160(s32 effect, BtlUnit *unit, s32 a, s32 b);
 s32 FUN_003e7adc(BtlUnit *unit);
 BtlModelOwner *FUN_003eaf20(BtlUnit *unit);
-u32 FUN_0019acdc(u16 id, s32 flag);
 void FUN_003f1b3c(BtlUnit *unit, u32 id, s32 slot, u32 *outA, u32 *outB);
 void FUN_0047f4cc(u32 value, f32 x, f32 y, f32 z);
 

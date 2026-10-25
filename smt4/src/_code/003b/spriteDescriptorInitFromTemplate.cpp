@@ -1,6 +1,7 @@
 /* NON_MATCHING: template register allocation, packed field updates and output store scheduling differ; -O2 candidate. */
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct SpriteMetadata {
     u16 id;
@@ -39,7 +40,6 @@ struct SpriteDescriptor {
 struct Table02Sub2Entry;
 extern "C" {
 extern AocSystem *g_aocSystem;
-void memClear(void *, u32);
 SpriteMetadata *aocEntryFind(void *, u32);
 Table02Sub2Entry *aocFindSpriteTemplateByKey(AocSystem *, u32);
 

@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "camp/Config/Config.h"
 
 extern "C" {
 

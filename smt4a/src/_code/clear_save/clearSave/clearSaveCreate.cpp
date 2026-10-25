@@ -1,6 +1,7 @@
 #include "clear_save/clearSave.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern ClearSaveWorkA *g_clearSave;
@@ -17,8 +18,6 @@ void FUN_0022677c(s32 screen, s32 alpha);
 u32 FUN_00241058();
 u32 FUN_00290688();
 void clearSaveDestroy();
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
-                            u32 (*update)(), void (*destroy)(), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
                    u32 (*draw)(), u32 destroy, void *work, u32 parent);
 
@@ -46,7 +45,7 @@ void clearSaveCreate(s32 mode)
         FUN_0022677c(0, 0xFF);
         FUN_0022677c(1, 0xFF);
     }
-    u32 process = asdProcessCreateSimple("clearSave C", 4, 0, 0, FUN_00241058, clearSaveDestroy, g_clearSave);
+    u32 process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("clearSave C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00241058), reinterpret_cast<AsdProcFunc>(clearSaveDestroy), reinterpret_cast<u32>(g_clearSave));
     work = g_clearSave;
     work->initialization.process = process;
     taskCreateDraw("clearSave L", 0x65, 0, 0, FUN_00290688, 0, work, process);

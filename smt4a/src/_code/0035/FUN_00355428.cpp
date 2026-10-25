@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -56,7 +57,6 @@ extern short DAT_005f1e1a; /* 0x5f1e1a */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: FUN_003799d0. */
@@ -204,7 +204,7 @@ void FUN_00355428(void)
                        (int)*(short *)(temp_v26 + 8) + (int)*(short *)(temp_v14 + 8) + temp_v7,
                        (int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v26 + 10),0xb);
           temp_v9 = g_renderCtx;
-          temp_v5 = packNibblesAndByte(6,1,0);
+          temp_v5 = packNibblesAndByte(6, 1, 0);
           piVar10 = (int *)(temp_v9 + 0x12b8);
           temp_v6 = piVar10[*piVar10 + 2];
           piVar10[*piVar10 + 2] = temp_v5;
@@ -219,7 +219,7 @@ void FUN_00355428(void)
           FUN_001634b4(temp_v9 + 0x148);
           efctSetSpeed();
           temp_v9 = g_renderCtx;
-          temp_v5 = packNibblesAndByte(6,7,0);
+          temp_v5 = packNibblesAndByte(6, 7, 0);
           piVar10 = (int *)(temp_v9 + 0x12b8);
           temp_v6 = piVar10[*piVar10 + 2];
           piVar10[*piVar10 + 2] = temp_v5;

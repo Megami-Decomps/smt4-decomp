@@ -1,4 +1,5 @@
 #include "shard/Shard0041.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 

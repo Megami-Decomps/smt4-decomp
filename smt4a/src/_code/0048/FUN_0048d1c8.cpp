@@ -12,7 +12,7 @@ struct ButtonHelpTask {
 extern "C" {
 
 void FUN_0048a378(ButtonHelpTask *task);
-s32 buttonHelpIsNotActive(void);
+u8 buttonHelpIsNotActive(void);
 
 // Task state machine: open the help (0), wait until it has closed (1), then clear the display flag and finish (2).
 void FUN_0048d1c8(ButtonHelpTask *task)

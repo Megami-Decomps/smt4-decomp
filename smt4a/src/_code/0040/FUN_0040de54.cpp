@@ -11,7 +11,7 @@ extern "C" {
 int panelSetMode3(...);
 int FUN_0037c8e4(...);
 int messageDismissNumericBanner(...);
-int FUN_003e5354(...);
+int partyAdjustCounterIfEnoughActive(...);
 int FUN_003edfd4(...);
 int FUN_003f2498(...);
 int btlApplyDirectionBucket(...);
@@ -70,7 +70,7 @@ int FUN_004c9538(...);
 int FUN_004cab9c(...);
 int FUN_004cad84(void);
 void FUN_004cb8a0(TransitionView *state);
-int FUN_004cbab0(...);
+int driftObjectStart(...);
 int uiStartRangeAnimationFromTable(...);
 void btlCameraSetFormationSlot(BattleActionCamera *, BattleMaskState *, int);
 int flags64CSetTarget(...);
@@ -188,7 +188,7 @@ extern int panelStateIs0(void);
 /* Supplied declaration required: messageDismissNumericBanner. */
 extern unsigned int FUN_003d214c(unsigned int);
 extern int FUN_003e48bc(void);
-/* Supplied declaration required: FUN_003e5354. */
+/* Supplied declaration required: partyAdjustCounterIfEnoughActive. */
 extern unsigned int FUN_003e53ec(void);
 /* Supplied declaration required: FUN_003e77cc. */
 /* Supplied declaration required: FUN_003e7840. */
@@ -248,7 +248,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004cae0c. */
 /* Supplied declaration required: FUN_004cb348. */
 /* Supplied declaration required: FUN_004cb8a0. */
-/* Supplied declaration required: FUN_004cbab0. */
+/* Supplied declaration required: driftObjectStart. */
 extern int holderObjectCall(unsigned int);
 /* Supplied declaration required: asdModelStartReferencedAnimation. */
 extern int animationIsReferencedClipComplete(unsigned int);
@@ -858,7 +858,7 @@ joined_r0x0040ec14:
           FUN_004cad84();
         }
         else {
-          FUN_004cbab0(*(unsigned int *)(psVar2 + 10),*(unsigned int *)(psVar2 + 0x26));
+          driftObjectStart(*(unsigned int *)(psVar2 + 10),*(unsigned int *)(psVar2 + 0x26));
         }
       }
       else {
@@ -1396,7 +1396,7 @@ LAB_0040fb78:
     temp_v3 = FUN_003ec77c(*param_1);
     if (temp_v3 == 0) {
       temp_v5 = FUN_003e53ec();
-      FUN_003e5354(*(unsigned int *)(psVar2 + 0x14));
+      partyAdjustCounterIfEnoughActive(*(unsigned int *)(psVar2 + 0x14));
       temp_v7 = FUN_003e53ec();
       if ((temp_v5 < temp_v7) && (temp_v3 = FUN_003e48bc(), temp_v3 != 0)) {
         temp_v3 = *param_1;

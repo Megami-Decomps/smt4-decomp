@@ -1,5 +1,7 @@
 /* NON_MATCHING: register allocation only in the entry lookup loop (retail keeps the entry count in r5 and the id temp in ip; the build uses ip and r4). */
 #include "common.h"
+#include "util/FUN_002a4894.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
@@ -19,7 +21,6 @@ typedef struct HelpMenu {
 extern const char *DAT_0052ccbc[]; /* help texts for the fixed ids (odd slots are used here) */
 
 extern int resourceRunOperationIfUnblocked(void *list);
-extern int FUN_002a4894(void *list);
 extern int FUN_0019de98(const char *text, u32 color);
 
 /* Shows the help text of the selected item: fixed texts for ids 0x8B, 0x8C, 0x81 and 0x80, else the entry with the matching id. */
@@ -29,7 +30,7 @@ void FUN_0021b1a8(HelpMenu *menu)
     u32 id;
     u32 i;
     int first = resourceRunOperationIfUnblocked(menu->list);
-    int count = FUN_002a4894(menu->list);
+    int count = FUN_002a4894(reinterpret_cast<const Object *>(menu->list));
 
     id = menu->ids[count + first];
     if (id == 0x8B) {

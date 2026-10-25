@@ -1,4 +1,5 @@
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 namespace {
 inline void pushRasterState(RenderCtxA *context, s32 state)
 {
@@ -13,7 +14,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32 mode, f32 parameter);
 s32 FUN_001692ac(u32 first, u32 second);
-u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 void eplUpdateActiveNodes();
 
 // Draw the effect pass with temporary raster, blend and depth-state overrides.

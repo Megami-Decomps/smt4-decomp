@@ -1,5 +1,5 @@
 /* NON_MATCHING: explicit choice argument and shared HP-percentage operation restore range/HP load grouping; required candidate mask still uses two loads instead of LDM. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -8,7 +8,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 u32 btlResolveEntryChoice(s32 choice);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 
 static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
@@ -26,7 +25,8 @@ u32 btlScriptAnyEntryHpAtMost(void)
     s32 first, count;
     FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[i];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&

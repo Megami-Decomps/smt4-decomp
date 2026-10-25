@@ -623,7 +623,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: FUN_00285574. */
 /* Supplied declaration required: gameRestoreWorkSave. */
 extern int FUN_00287800(void);
-extern int FUN_00287894(void);
+extern int table1bOr1cGetRecordValue(void);
 extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_002878e4. */
 /* Supplied declaration required: FUN_00287c34. */
@@ -834,7 +834,7 @@ unsigned int FUN_001b7f78(void)
       case 0:
       case 3:
         temp_v10 = FUN_002903f0();
-        if ((temp_v10 != 0) && (temp_v10 = FUN_00287894(), temp_v10 == 6)) {
+        if ((temp_v10 != 0) && (temp_v10 = table1bOr1cGetRecordValue(), temp_v10 == 6)) {
           puVar14[0x10] = 1;
         }
         if (*(short *)(temp_v9 + 0x22) != 0) {
@@ -5725,7 +5725,7 @@ joined_r0x001bfcb4:
     }
     if (*(char *)((int)puVar14 + 0xd) != '\0') {
       temp_v10 = FUN_002903f0();
-      if ((temp_v10 != 0) && (temp_v12 = FUN_00287894(), temp_v12 == 6)) {
+      if ((temp_v10 != 0) && (temp_v12 = table1bOr1cGetRecordValue(), temp_v12 == 6)) {
         dataTable1bOr1cGetRecord();
         FUN_0026f960(*(unsigned short *)(temp_v10 + 0x148));
         return 0xffffffff;

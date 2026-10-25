@@ -1,6 +1,7 @@
 /* NON_MATCHING: player skill search uses one induction variable rather than retail's separate slot/count pair; final state stores merge differently. */
 #include "result/ResultInput.h"
 #include "shard/W5_W5Match2_PairedIds.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
 s32 loadSlotIsLoaded(u32 slot);
@@ -8,14 +9,13 @@ void FUN_00416d30(ResultInputWork *work);
 u32 FUN_00275bc8(const void *script, const void *messages);
 u32 FUN_003df4a4(u32 skill);
 s32 playerStockHasFreeSlot(void);
-PairedIdList *gameGetPlayerData(void);
 s32 countUnlockedSlots(void);
 }
 
 namespace {
 inline s32 findPlayerSkillSlot(ResultInputWork *work)
 {
-    PairedIdList *player = gameGetPlayerData();
+    PairedIdList *player = reinterpret_cast<PairedIdList *>(gameGetPlayerData());
     const s32 count = countUnlockedSlots();
     s32 slot = 0;
     for (; slot < count; ++slot) {

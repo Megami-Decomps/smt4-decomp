@@ -1,5 +1,6 @@
 /* NON_MATCHING: 64-bit mask loads are ldm here but ldrd in retail, the unit-slot address folding differs, and retail keeps 12 more bytes of locals between the extra-target word and the confirm flag (the extra-target query result is larger than the u64 used here) */
 #include "common.h"
+#include "mapnavi/naviMain.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -81,7 +82,6 @@ extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
 Table04Row *dataTable04FindById(s32 id);
 Table8Row *dataTable8FindRecord(s32 id);
-s32 playerHasFlagBit(u32 bit);
 s32 FUN_003f0e94(BtlActingState *battle, s32 index);
 void FUN_003e8bb0(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
 s32 FUN_004aba9c(u32 ui);

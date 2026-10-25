@@ -1,5 +1,6 @@
 /* NON_MATCHING: pending-slot accessor matches; state/counter stores remain reversed in steps 4 and 5. */
 #include "common.h"
+#include "util/LoadSlotRequestAsync.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ s32 valueAtF0IsReady(LoadStepOwner *owner);
 void FUN_003f1334(LoadStepOwner *owner);
 s32 loadSlotMainIsLoaded(LoadStepOwner *owner);
 s32 loadSlotIsLoaded(u32 slot);
-void loadSlotRequestAsync(u32 slot, s32 priority);
 u32 FUN_003e1114(LoadStepMachine *machine, LoadStepOwner *owner);
 u32 FUN_003e2470(LoadStepMachine *machine, LoadStepOwner *owner);
 s32 loadStepGetPendingSlots(LoadStepOwner *owner);

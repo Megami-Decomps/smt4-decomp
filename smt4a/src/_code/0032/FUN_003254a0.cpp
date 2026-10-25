@@ -56,7 +56,7 @@ extern int dataTable23FindIndexByValue(unsigned int);
 extern int gameFlagIsSetByBlockAt14f8(int);
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int linkHolderCallFirst(unsigned int);
-extern int FUN_004bc944(int, int);
+extern int gameDataEntryGetBit6(int, int);
 
 
 void FUN_003254a0(void)
@@ -97,7 +97,7 @@ void FUN_003254a0(void)
       }
       temp_v4 = gameFlagIsSet(0xc);
       if (((temp_v4 == 0) || (temp_v4 = gameFlagIsSet(0x10), temp_v4 != 0)) && (temp_v9)) {
-        temp_v4 = FUN_004bc944(DAT_005f1860,DAT_005f1864);
+        temp_v4 = gameDataEntryGetBit6(DAT_005f1860,DAT_005f1864);
         if (temp_v4 != 0) {
           temp_v4 = DAT_005f1860;
           if (g_gameState >= 100) {

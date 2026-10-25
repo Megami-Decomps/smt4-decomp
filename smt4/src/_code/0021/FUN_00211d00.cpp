@@ -1,9 +1,10 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 
 int FUN_002c58c8(int table, int index);
-int asdTMTexTableLoadSprites(int table);
 
 extern s8 DAT_0043dc70;
 

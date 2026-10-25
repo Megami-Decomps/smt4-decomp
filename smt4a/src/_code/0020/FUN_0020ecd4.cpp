@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
+#include "mapnavi/naviMain.h"
 
 struct StatusEventRecord {
     u32 id;
@@ -35,7 +36,6 @@ struct GameStateView {
 extern "C" {
 extern GameStateView g_gameState;
 extern StatusPopupState *g_popupState;
-s32 playerHasFlagBit(u32 bit);
 s32 saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);

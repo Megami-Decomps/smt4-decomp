@@ -39,7 +39,6 @@ extern void *DAT_00464b7c[2];
 extern LightCount g_asdLightCount[2];
 void asdLightActivate(s32 index);
 void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
-void sceneTraverserVisit(void *traverser, void *root);
 
 /* Removes every light of the batch from its registry, then leaves the scene group it was in. */
 void FUN_00152c00(LightBatch *batch)

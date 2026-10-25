@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc folds the zero percentage into the comparisons and needs three saved registers fewer; retail keeps percent, count, total and the index in r4-r7. */
+/* NON_MATCHING: the register set (percent/count/total/index in r4-r8) now matches; retail tests total != 0 and the 70% threshold in a nested form with the rating block placed after the shared return 5, and holds the record pointer in r0 while ours uses r1. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
@@ -28,14 +28,14 @@ u32 FUN_0027099c(void)
             }
             if (total != 0) {
                 percent = count * 100 / total;
-                if (percent >= 70) {
-                    return 5;
-                }
             }
-            if (percent < 40) {
-                return 3;
+            if (percent >= 70) {
+                return 5;
             }
-            return 4;
+            if (percent > 39) {
+                return 4;
+            }
+            return 3;
         }
     }
     return 5;

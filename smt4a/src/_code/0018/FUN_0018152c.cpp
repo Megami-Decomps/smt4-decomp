@@ -1,5 +1,6 @@
 /* NON_MATCHING: the placeholder rectangle is stored with one stm (retail: four separate mov/str) and the constant/global registers are assigned differently (x in r9 vs sl). */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* The icon sheet cell to draw: source x range, then y range. */
 struct IconRect {
@@ -35,7 +36,6 @@ SlotRecord *slotRecordFindById(u16 id);
 u32 markerKindGetColor(s32 kind);
 void drawSetColorFromRGBA8(u32 color);
 s32 FUN_00191f18(u32 package, s32 icon);
-void FUN_00191ea8(u32 package, s32 icon, s32 x, s32 y, s32 z);
 void FUN_00183bb0(void);
 
 // Draw an item or status icon (id < 0: the placeholder), optionally tinted when the unit's slot is marked.

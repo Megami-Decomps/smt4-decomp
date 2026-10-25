@@ -1,10 +1,10 @@
 #include "ui/MenuState.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 
 extern MenuState *g_menuState;
 
-int uiSpriteSelectAnim(u8 *panel, int arg);
 
 /* Sets the menu to its confirm mode (4, or 6 when type is 6) and starts the panel animations. */
 void menuStateStartConfirm(void)

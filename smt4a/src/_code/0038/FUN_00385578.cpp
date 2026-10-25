@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase-zero guard is folded into dispatch, the zero register is hoisted, and voice-stop blocks share a different epilogue. */
+/* NON_MATCHING: the zero register is hoisted above the phase dispatch and the voice-stop block is duplicated per path where retail shares one copy (the other path jumps back into it). */
 #include "map/lmapMain.h"
 #include <string.h>
 
@@ -41,6 +41,8 @@ void FUN_00385578(void)
     memcpy(durations, DAT_00532018.durations, sizeof(durations));
     LmapIdleVoiceScene *scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
     switch (scene->phase) {
+    case 0:
+        break;
     case 1: {
         s32 delay = delays[FUN_00184964(0, 5)];
         scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);

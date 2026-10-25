@@ -1,5 +1,6 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the stream allocation; the stream constructor is inlined there. */
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
+#include "util/AsdLoadFileHasDevice.h"
 
 extern "C" {
 void asdMemFree(void *block);
@@ -7,7 +8,6 @@ void sysFatalBreak(void);
 void vcallSlot12IfValid(u32 handle);
 AsdHashPackHeader *asdLoadFileSync(s32 *result, u32 zero, const char *path, u32 *size, u32 arg, u32 priority);
 void *FUN_00178b04(u32 size, const char *file, int line);
-s32 asdLoadFileHasDevice(const char *path);
 void rt_aeabi_memclr(char *buf, u32 size);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00158900(void *stream, const char *path, s32 mode);

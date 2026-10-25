@@ -1,5 +1,8 @@
 /* NON_MATCHING: corrected integral x/y/tag contract and removed softfp workaround; y/tag spill-register order still differs. */
 #include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/AsdTMTexTableCallFileC.h"
+#include "util/AsdTMTexTableCallFileC.h"
 
 extern "C" {
 
@@ -30,7 +33,6 @@ typedef struct TexDrawParams {
     /* 0x30 */ u8 unk30[0x10];
 } TexDrawParams;
 
-TexDrawFile *asdTMTexTableCallFileC(u32 table, s32 texture);
 u32 FUN_00184efc(TexDrawFile *file, TexDrawItem *item, TexDrawParams *params);
 
 /* Draws texture `texture` of `table` at (x, y) with the given size; does nothing for an empty size. */
@@ -41,7 +43,7 @@ u32 FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 he
     if (width == 0 || height == 0) {
         return 0;
     }
-    TexDrawFile *file = asdTMTexTableCallFileC(table, texture);
+    TexDrawFile *file = reinterpret_cast<TexDrawFile *>(asdTMTexTableCallFileC(table, texture));
     TexDrawItem *item = &file->list->items[texture % 1000];
     params.id = id | 0x8000;
     params.x = x;

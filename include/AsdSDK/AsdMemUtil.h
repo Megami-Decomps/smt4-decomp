@@ -7,7 +7,7 @@ extern "C" {
 void *sysMemClear(void *destination, u32 size);
 
 /* Clears an aligned range; returns the address just after it (smt4). */
-void *memClear(void *destination, u32 size);
+void* memClear(void* destination, u32 size);
 
 /* operator delete: frees `memory` if it is not NULL. */
 void asdOperatorDelete(void *memory);

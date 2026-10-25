@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
-int FUN_0024b830(...);
+int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(double, int);
@@ -101,7 +101,7 @@ extern float DAT_004ea948; /* 0x4ea948 */
 extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -367,10 +367,10 @@ void FUN_00313a48(fn_00313a48_arg0 *param_1)
               }
             }
             else if (temp_v38 != 0) {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v28 = temp_v28 * 6.2831855f;
               piVar23[2] = (int)temp_v28;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v22 = 1.0f;
               temp_v14 = 0;
               temp_v28 = ((1.0f - pfVar26->field_0x78) + temp_v28 * pfVar26->field_0x78) *
@@ -381,11 +381,11 @@ void FUN_00313a48(fn_00313a48_arg0 *param_1)
                 temp_v28 = -(float)piVar23[1];
                 piVar23[1] = (int)temp_v28;
               }
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v28 = ((temp_v22 - pfVar26->field_0x70) + temp_v28 * pfVar26->field_0x70) *
                        pfVar26->field_0x6c;
               piVar23[3] = (int)temp_v28;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v28 = (temp_v22 - pfVar26->field_0x68) + temp_v28 * pfVar26->field_0x68;
               piVar23[4] = (int)(pfVar26->field_0x60 * temp_v28);
               temp_v28 = pfVar26->field_0x64 * temp_v28;

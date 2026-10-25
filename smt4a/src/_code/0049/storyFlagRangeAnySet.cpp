@@ -1,8 +1,8 @@
 #include "shard/Shard0049.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
-extern s32 flagValueIsPositive(u32 index);
 
 /* True when flagValueIsPositive holds for any index in 0x3B7..0x79E. */
 u32 storyFlagRangeAnySet(void)

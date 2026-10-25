@@ -1,4 +1,5 @@
 #include "ui/ButtonHelp.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;

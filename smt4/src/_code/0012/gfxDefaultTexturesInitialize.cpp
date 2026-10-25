@@ -1,13 +1,13 @@
 /* NON_MATCHING: saved status/work/release-hook/cube-loop registers and null-move selection differ (107/107). */
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern DriverTextureAllocate *g_gfxAllocateCallback;
 extern DriverTextureRelease *g_gfxReleaseCallback;
 extern DefaultTextureGlobals g_textureBindingCache;
 
-void memClear(void *block, s32 size);
 DefaultTexture2D *gfxTexture2DCreate(u32 mode);
 DefaultTextureCube *gfxCubeTextureCreate(u32 mode);
 void gfxTextureStorageUnbind(DefaultTextureStorage *storage);

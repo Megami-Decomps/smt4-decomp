@@ -1,5 +1,7 @@
 /* NON_MATCHING: ternary now gives retail's predicated mvneq; remaining difference is one compiler nop hint before the final scrSetResult call (and the pool offset it shifts) */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -37,9 +39,7 @@ typedef struct {
 GameState *btlGetMainState(void);
 Entity *btlMainFindEntryByListedId(GameState *state, int index);
 int partyHasStoredDemon(u16 type);
-int scrSetResult(int id);
 int randNextInRange(u32 range);
-int memClear(Entity **buffer, int size);
 
 /* Collects the eligible other-group entities no stronger than the player's and reports the id of a random one (-1 if none). */
 u32 FUN_0031f400(void)
@@ -51,7 +51,7 @@ u32 FUN_0031f400(void)
     int id;
 
     player = btlMainFindEntryByListedId(btlGetMainState(), btlGetMainState()->playerIndex);
-    memClear(candidates, sizeof(candidates));
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(candidates), sizeof(candidates)));
     count = 0;
     i = 0;
     do {

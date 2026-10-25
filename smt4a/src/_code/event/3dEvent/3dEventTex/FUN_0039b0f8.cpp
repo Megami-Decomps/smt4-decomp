@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail allocation includes source-file/line metadata and a diagnostic NOP. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct BattleEventTextureWorkA {
     u32 texture;
@@ -31,8 +32,6 @@ void sysMemClear(void *memory, u32 size);
 const BattleTextureRecordViewA *FUN_00283498(u32 texture);
 s32 FUN_00162ea4(void);
 u32 FUN_00409fe8(s32 offset, s32 first, s32 second);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 stack, u32 options,
-                           u32 (*callback)(u32 job), void (*destroy)(void *), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 stack, u32 options,
                    u32 (*callback)(void), void (*destroy)(void *), void *work, u32 parent);
 
@@ -71,7 +70,7 @@ u32 FUN_0039b0f8(u32 texture, f32 value, f32 duration)
     work->duration = duration;
     work->active = 1;
     work->flag15 = 0;
-    u32 job = asdProcessCreateSimple(DAT_0052f6a8, 4, 0, 0, eventUpdateTextureFadeJob, jobWorkDestroy34, work);
+    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f6a8), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventUpdateTextureFadeJob), reinterpret_cast<AsdProcFunc>(jobWorkDestroy34), reinterpret_cast<u32>(work));
     taskCreateDraw(DAT_0052f698, 0x71, 0, 0, FUN_00289f10, NULL, work, job);
     return job;
 }

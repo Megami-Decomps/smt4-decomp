@@ -1,8 +1,8 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
-extern u8 *FUN_002a0d0c(void);
 
 /* 1 when bit `index` of the bitset at +0x51 of FUN_002a0d0c's block is clear. */
 u8 FUN_00200574(u32 index)

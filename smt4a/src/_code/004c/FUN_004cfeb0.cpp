@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the two zero arguments in saved registers (r5/r6) and stores
  * visible/total with one strd; armcc here rematerializes 0 and stores them separately */
 #include "common.h"
+#include "gfx/TrackedRecord.h"
 
 #define UNK4CFEB0_HORIZONTAL 0
 #define UNK4CFEB0_VERTICAL 1
@@ -20,7 +21,6 @@ extern "C" {
 
 void FUN_00203b40(void *list, s32 total, s32 columns, s32 rows, s32 a, s32 b);
 void scrollOwnerSetValue(void *list, s32 value);
-void flaggedEntrySetValueA(void *list, s32 value);
 void recordTrackDirtyValue(void *list, s32 value);
 void flaggedEntrySetValueB(void *list, s32 value);
 
@@ -39,7 +39,7 @@ void FUN_004cfeb0(Unk4cfeb0Scroller *scroller, s32 visible, s32 total, s32 direc
     scroller->direction = direction;
     if (scroller->direction == UNK4CFEB0_HORIZONTAL) {
         scrollOwnerSetValue(scroller->list, 0);
-        flaggedEntrySetValueA(scroller->list, 0);
+        flaggedEntrySetValueA(reinterpret_cast<FlaggedEntry *>(scroller->list), 0);
     }
     if (scroller->direction == UNK4CFEB0_VERTICAL) {
         recordTrackDirtyValue(scroller->list, 0);

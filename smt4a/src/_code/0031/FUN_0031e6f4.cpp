@@ -1,5 +1,6 @@
 /* NON_MATCHING: adds a battle's rewards to the result tally (money, item drops by id, experience for the party and for each demon slot with the reduced share for non-participants); written from the decompilation, the float/int share arithmetic and slot lookups are approximated and not compared with retail */
 #include "common.h"
+#include "mapnavi/naviMain.h"
 
 #define REWARD_ITEM_SLOTS 6
 #define REWARD_DEMON_SLOTS 0x18
@@ -53,7 +54,6 @@ extern u8 g_engineCleanupOwner[];
 SlotTable *gameGetSlotTable(void);
 void gameGetPlayerData(void);
 DemonRecord *gameGetSlotRecord(void);
-s32 playerHasFlagBit(u32 bit);
 s32 FUN_0022fd80(s32 experience, u32 flag);
 SkillRecord *dataTable41FindById(u32 id);
 s32 bitsAt60Test(DemonRecord *record, u32 bit);

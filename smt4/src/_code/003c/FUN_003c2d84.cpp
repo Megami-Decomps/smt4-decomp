@@ -1,12 +1,11 @@
 /* NON_MATCHING: named mode snapshot and record pointer restore the post-indexed mode load; only the two saved-argument moves are reversed. */
 #include "gfx/TrackedRecord.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {
 void recordTrackDirtyValue(FlaggedEntry *record, u32 value);
 void scrollOwnerSetValue(FlaggedEntry *record, u32 value);
 void flaggedEntrySetValueB(FlaggedEntry *record, u32 value);
-void flaggedEntrySetValueA(FlaggedEntry *record, u32 value);
-u32 FUN_0029e93c(FlaggedEntry *record);
 u32 FUN_0029efc0(FlaggedEntry *record);
 
 /* Selects the mode-specific dirty tracker and updates the record's cached value. */

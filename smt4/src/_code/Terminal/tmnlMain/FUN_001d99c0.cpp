@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "font/PlaceWin.h"
+extern "C" int FUN_0020ffe8(...);
 
 extern "C" {
 
@@ -42,7 +43,6 @@ int useCounterSelectMode2(void);
 
 int scrRunOpcodesStub(...);
 int FUN_001d04a4(...);
-int FUN_0020ffe8(...);
 int FUN_0027f94c(...);
 int FUN_00282bfc(...);
 int FUN_00287030(...);
@@ -139,7 +139,7 @@ extern int effectAreAllCompletionChecksReady(unsigned int);
 extern int effTimelineIsDone(unsigned int);
 /* Supplied declaration required: FUN_002637c8. */
 /* Supplied declaration required: FUN_00263988. */
-extern unsigned int FUN_00263c1c(unsigned char *);
+extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: mapDepartSetTarget. */
 /* Supplied declaration required: FUN_0027f94c. */
@@ -327,11 +327,11 @@ unsigned int FUN_001d99c0(void)
           *puVar9 = *puVar9 & 0xfffffffd;
           *(unsigned char *)(*(int *)(puVar9[2] + 0x2c) + 0x1f6) = 1;
         }
-        temp_v3 = FUN_00263c1c(&LAB_001d9da4);
+        temp_v3 = asdCameraLoadFromFile(&LAB_001d9da4);
         puVar7[0xf] = temp_v3;
-        temp_v3 = FUN_00263c1c(&LAB_001d9dbc);
+        temp_v3 = asdCameraLoadFromFile(&LAB_001d9dbc);
         puVar7[0x10] = temp_v3;
-        temp_v3 = FUN_00263c1c(&LAB_001d9dd8);
+        temp_v3 = asdCameraLoadFromFile(&LAB_001d9dd8);
         puVar7[0x154] = 0xffffffff;
         puVar7[0x11] = temp_v3;
         FUN_002a09b4(&LAB_001d9df4,0);

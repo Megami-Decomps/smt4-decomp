@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail branches around the policy stores (strb before str, constant loaded inside the arm); the build predicates them and hoists the constant (policy symbol FUN_00155650 now correct) */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct Owner002a043c {
 u32 asdModelGetSlotArray0(s32 index);
 void FUN_002cbaf8(u32 node, s32 index);
 void nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
-void sysFlagsSetBits(s32 bits);
 void FUN_00244d98(s32 index);
 
 extern PlayPolicy002a043c FUN_00155650;

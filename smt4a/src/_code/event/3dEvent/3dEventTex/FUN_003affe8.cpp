@@ -1,7 +1,7 @@
-/* NON_MATCHING: allocation debug-source hook and its literals are absent; prologue scheduling differs. */
 #include "event/3dEvent/EventTextureJob.h"
 #include "gamedata/Table00.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
@@ -14,14 +14,13 @@ u32 FUN_00409fe8(s32 id, u32 first, u32 second);
 u32 eventUpdateTextureFadeJob(u32 job);
 s32 FUN_00289f10(u32 job);
 void jobWorkDestroy34(u32 job);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    u32 (*update)(u32), AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 
 // Create a positioned battle portrait and select its placement-dependent animation.
 u32 FUN_003affe8(u32 id, EventTexturePosition position)
 {
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\event\\3dEvent\\3dEventTex.cpp", 450);
     EventTextureJobWork *work = static_cast<EventTextureJobWork *>(
         asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EventTextureJobWork), 1));
     sysMemClear(work, sizeof(EventTextureJobWork));
@@ -55,8 +54,7 @@ u32 FUN_003affe8(u32 id, EventTexturePosition position)
     work->position.y = position.y;
     work->visible = 1;
     work->initialized = 0;
-    u32 job = asdProcessCreateSimple(DAT_0052f6a8, 4, 0, 0, eventUpdateTextureFadeJob,
-        jobWorkDestroy34, reinterpret_cast<u32>(work));
+    u32 job = asdProcessCreateSimple(DAT_0052f6a8, 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(eventUpdateTextureFadeJob), jobWorkDestroy34, reinterpret_cast<u32>(work));
     taskCreateDraw(DAT_0052f698, 0x71, 0, 0, FUN_00289f10, NULL,
         reinterpret_cast<u32>(work), reinterpret_cast<void *>(job));
     return job;

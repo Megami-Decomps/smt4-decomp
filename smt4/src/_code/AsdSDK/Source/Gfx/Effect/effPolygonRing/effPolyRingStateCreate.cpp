@@ -6,7 +6,7 @@ extern "C" {
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00247334(u32 segments, int w, int h, u8 *table, int tableSize);
 PolyObject *effPolyRingCreate(u32 kind, void *params);
-f32 FUN_0024b830(int arg);
+f32 shiftRandomNextFraction(int arg);
 void __aeabi_memcpy4(void *dst, const void *src, int size);
 
 extern u8 DAT_0047375c;
@@ -59,7 +59,7 @@ PolyRingState *effPolyRingStateCreate(PolyParams *params)
         colors[14] = colorA >> 16;
         colors[15] = colorA >> 24;
         colors += 16;
-        *values++ = ((1.0f - params->randomness) + FUN_0024b830(0) * params->randomness) * params->scale;
+        *values++ = ((1.0f - params->randomness) + shiftRandomNextFraction(0) * params->randomness) * params->scale;
     }
     return state;
 }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
 #include "common.h"
+#include "gamedata/FlagBitTests.h"
 
 #define MAP_ICON_TYPE_OWNED -1
 #define MAP_ICON_TYPE_STORY -2
@@ -64,7 +65,6 @@ void words2Copy(void *source, f32 *out);
 s32 naviMainGetRequestedMap(void *scene);
 s32 FUN_004083a8(u8 kind, s8 type);
 s32 gameFlagIsSet(s32 flag);
-s32 gameFlagsBitTest(s32 flag);
 s32 FUN_00384d34(s32 id);
 s32 gameOwnedBitTest2(s32 id);
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the add-on treasure roll (a table-22 record's item count and per-slot chances, then random picks from the matching table-83 records); armcc here keeps the candidate buffer and the table lookups in different stack slots, and the second record lookup is dereferenced unchecked, as in retail. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 /* The count/chance record of one treasure (table 22 or its table-33 fallback, 28 bytes). */
 struct TreasureRecord {
@@ -38,9 +39,7 @@ extern void *g_aocSystem;
 
 TreasureRecord *aocFindTable22Record(void *system, s32 index);
 ItemRecord *aocRecordLookup83(u32 id);
-void *dataTableGet(s32 table, s32 section);
-TreasureRecord *dataTableGetEntries(void *section);
-u32 dataTableGetCount(void *section);
+
 void flagValueAdd(s32 id, s32 count);
 s32 gamePackedFlagTest(s32 id);
 s32 randRange(u32 limit);
@@ -54,7 +53,7 @@ static TreasureRecord *findTreasureRecord(s32 index)
     if (record != NULL)
         return record;
     void *section = dataTableGet(33, 0);
-    TreasureRecord *entries = dataTableGetEntries(section);
+    TreasureRecord *entries = static_cast<TreasureRecord *>(dataTableGetEntries(section));
     if ((u32)index < dataTableGetCount(section))
         return entries + index;
     return NULL;

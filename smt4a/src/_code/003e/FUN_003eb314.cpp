@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the hit/magic points through VFP registers (vldr/vstmia) and keeps the unit vitals in other registers; this build uses core registers */
 #include "battle/BattleUnitInit.h"
+#include "util/GameProgressIsAdvanced.h"
 
 /* An enemy record as the battle reads it when it builds a unit (halfword indexed in the original
    data; only the fields this initializer copies are named). */
@@ -36,7 +37,6 @@ void sysMemClear(void *memory, u32 size);
 void clearTwoWords(void *words);
 void rt_memclr(void *memory, u32 size);
 DemonModelInfo *FUN_00184310(u32 id);
-s32 gameProgressIsAdvanced(void);
 u32 gameDataGetTableValue(void);
 s32 FUN_001f4da0(s32 sourceId);
 

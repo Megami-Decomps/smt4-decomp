@@ -3,6 +3,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct TitleDebugBackground {
     /* 0x00 */ u32 job;
@@ -23,8 +24,6 @@ void textFormatBuffer(char *destination, const char *format, ...);
 void taskRunInitializationState();
 void titleDbgBgFree();
 u32 titleDbgBgDraw();
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 arg2, u32 arg3,
-                           void (*start)(), void (*finish)(), u32 arg6);
 u32 taskCreateDraw(const char *name, u32 priority, u32 arg2, u32 arg3,
                     u32 (*draw)(), u32 arg5, u32 arg6, u32 owner);
 }
@@ -42,7 +41,6 @@ extern "C" void FUN_00151118()
         DAT_00536c58 - offsetof(BuildStamp, time));
     textFormatBuffer(background->display, "%s %s", stamp->date, stamp->time);
     background->freeOnEnd = 0;
-    background->job = asdProcessCreateSimple("TBG C", 4, 0, 0,
-                                            taskRunInitializationState, titleDbgBgFree, 0);
+    background->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TBG C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(taskRunInitializationState), reinterpret_cast<AsdProcFunc>(titleDbgBgFree), 0);
     taskCreateDraw("TBG U", 0x75, 0, 0, titleDbgBgDraw, 0, 0, background->job);
 }

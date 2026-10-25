@@ -1,12 +1,11 @@
 /* NON_MATCHING: retail addresses captureRequested via a 0xf00 base and returns the zero flag/pointer it tested instead of a separate mov r0, #0. */
 #include "shard/JobWork.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
-void FUN_00157558(u32 renderCtx);
 u8 FUN_00154edc(u32 mode, JobSurface *surface);
 
-extern u32 g_renderCtx;
 
 /* Starts a 512x512 capture into the job's surface once one is requested and nothing blocks it. */
 s32 FUN_0013cf80(u32 job)

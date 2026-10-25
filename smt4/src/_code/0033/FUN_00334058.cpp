@@ -1,9 +1,9 @@
 /* NON_MATCHING: capacity helper restores saved-register allocation; post-clamp zero comparison is predicated LE instead of unconditional. */
 #include "shard/PadState.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
-PadState *gameGetPlayerData(void);
 s32 FUN_001386f8(u32);
 
 static __inline s32 inventoryGetCapacity(void)
@@ -21,7 +21,7 @@ static __inline s32 inventoryGetCapacity(void)
 // Add one item to the unlocked inventory slots without exceeding its stack limit.
 void FUN_00334058(u32 id)
 {
-    PadState *player = gameGetPlayerData();
+    PadState *player = reinterpret_cast<PadState *>(gameGetPlayerData());
     s32 capacity = inventoryGetCapacity();
     for (s32 index = 0; index < capacity; ++index) {
         if (padStateInventoryIds(player)[index] == id) {

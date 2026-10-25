@@ -109,4 +109,13 @@ typedef char MapEnemyInitializationOffsetCheck[
     offsetof(MapEnemy, render.unk3040) == 0x3040 &&
     sizeof(MapEnemy) == 0x30F4 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *contentEntryGetD(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

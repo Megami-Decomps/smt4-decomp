@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_ScriptUnit.h"
+#include "util/BtlScriptUnitHasFlags.h"
 
 extern "C" {
 

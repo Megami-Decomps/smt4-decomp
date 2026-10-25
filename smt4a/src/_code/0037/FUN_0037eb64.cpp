@@ -1,9 +1,10 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
+#include "gfx/StereoParallax.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_003e4978(void);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 s32 FUN_003e53ec(void);

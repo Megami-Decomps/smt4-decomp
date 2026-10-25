@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct BtlMainState {
 } BtlMainState;
 
 extern s32 scrGetArg(s32 index);
-extern void scrSetResult(s32 value);
 extern BtlMainState *btlGetMainState(void);
 extern BtlEntry *btlMainFindActiveEntry(void);
 extern u32 btlScriptResolveGroupArg(void);

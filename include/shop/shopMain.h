@@ -36,4 +36,12 @@ typedef struct ShopGlobals {
     /* 0x00 */ ShopWork *work;
 } ShopGlobals;
 
+extern "C" {
+u16 FUN_0049c9a0(const u16 *idPtr);
+}
+
+extern "C" {
+void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3);
+}
+
 #endif

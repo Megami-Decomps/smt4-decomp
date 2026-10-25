@@ -1,5 +1,6 @@
 /* NON_MATCHING: only register allocation of the bit temporaries differs */
 #include "common.h"
+#include "status/StatusCamera.h"
 
 struct IdRecord {
     u16 id;  // 0x00
@@ -14,7 +15,6 @@ extern "C" {
 
 u32 dataTable05Sub9GetCount(void);
 IdRecord *FUN_00248620(u16 index);
-BitFlags *FUN_002a0d0c(void);
 
 /* Sets the flag bit of the entry whose record id is `id`. */
 void FUN_002e3378(u16 id)
@@ -25,7 +25,7 @@ void FUN_002e3378(u16 id)
         IdRecord *record = FUN_00248620(i);
 
         if (record != NULL && record->id == id) {
-            u8 *byte = &FUN_002a0d0c()->bits[i / 8];
+            u8 *byte = &reinterpret_cast<BitFlags *>(FUN_002a0d0c())->bits[i / 8];
             s32 current = *byte;
             s32 mask = 1 << (i % 8);
 

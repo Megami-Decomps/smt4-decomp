@@ -1,5 +1,6 @@
 /* NON_MATCHING: decides whether a battle enemy can be recruited (state flags, hp ratio, chance from slot space and level); written from the decompilation, the 64-bit mask tests and branch layout not compared with retail */
 #include "common.h"
+#include "mapnavi/naviMain.h"
 
 struct BtlMask {
     u32 low;
@@ -58,7 +59,6 @@ extern BtlMask DAT_005739c0;   /* flags set when the roll starts */
 extern BtlMask DAT_00573a50;
 extern BtlMask DAT_00573b40;
 
-s32 playerHasFlagBit(s32 bit);
 SaveDataView *gameDataBlocksGetSaveData(void);
 s32 gameFlagIsSet(s32 flag);
 s32 lcgRandomRange(u32 maximum);

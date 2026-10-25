@@ -1,15 +1,16 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: dispatch guard peeling, sprite visibility getter, and mask/register loads differ. */
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
 #include "ui/UiSpriteState.h"
 #include "camp/RenderCtx.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern const u32 DAT_00573c70[2];
 extern RenderCtxA* g_renderCtx;
 BtlMainStateA* btlGetMainState(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
-s32 vec2GetXInt(const UiSpriteState* sprite);
 void FUN_001634b4(UiSpriteState* sprite, f32 horizontalOffset);
 
 // Draw the active panel frame and its four entry sprites at the current eye's parallax.

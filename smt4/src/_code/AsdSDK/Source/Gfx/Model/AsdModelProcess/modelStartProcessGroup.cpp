@@ -7,8 +7,6 @@ extern const char DAT_00409440[];
 extern u32 g_asdModelProcess;
 void* asdMemAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 fromFront);
 void asdMemFree(void* memory);
-u32 asdProcessCreateSimple(const char* name, u32 priority, u32 flags, u32 group,
-                          AsdProcUpdateFunc update, AsdProcFunc end, void* work);
 void asdProcessSetAuxiliaryCallback(u32 process, AsdProcFunc callback);
 u32 asdMdlManagerStart(u32 priority);
 s32 FUN_0010af48(u32 process);
@@ -25,18 +23,14 @@ u32 modelStartProcessGroup(u32 calcPriority, u32 drawUpPriority, u32 drawDownPri
     if (!work) {
         return 0;
     }
-    g_asdModelProcess = asdProcessCreateSimple(
-        "AsdModelCalcProc", calcPriority, 0, 0,
-        FUN_0010af48, asdModelProcessShutdown, work);
+    g_asdModelProcess = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AsdModelCalcProc"), calcPriority, 0, 0, FUN_0010af48, asdModelProcessShutdown, reinterpret_cast<u32>(work));
     if (!g_asdModelProcess) {
         asdMemFree(work);
         return 0;
     }
-    work->handle[0] = asdProcessCreateSimple(
-        "AsdModelDrawUpProc", drawUpPriority, 0, 0, FUN_0010b854, 0, work);
+    work->handle[0] = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AsdModelDrawUpProc"), drawUpPriority, 0, 0, FUN_0010b854, 0, reinterpret_cast<u32>(work));
     asdProcessSetAuxiliaryCallback(work->handle[0], FUN_0010d2ac);
-    work->handle[2] = asdProcessCreateSimple(
-        "AsdModelDrawDwProc", drawDownPriority, 0, 0, FUN_0010b844, 0, work);
+    work->handle[2] = asdProcessCreateSimple(reinterpret_cast<const s8 *>("AsdModelDrawDwProc"), drawDownPriority, 0, 0, FUN_0010b844, 0, reinterpret_cast<u32>(work));
     return asdMdlManagerStart(calcPriority) ? g_asdModelProcess : 0;
 }
 }

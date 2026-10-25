@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
+#include "util/AsdListBoxViewRefresh.h"
 
 extern "C" {
 extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */
@@ -9,7 +10,6 @@ extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(AsdListBox *listBox);
-void asdListBoxViewRefresh(void *view);
 s32 asdListBoxGetCursor(void *view);
 void asdListBoxFreeItem(void *item);
 char *strncpy(char *dst, const char *src, u32 n);

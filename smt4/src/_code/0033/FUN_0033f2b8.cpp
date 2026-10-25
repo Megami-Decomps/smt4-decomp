@@ -1,12 +1,12 @@
 /* NON_MATCHING: named magic operand restores comparison registers; loaded-flag constant uses r2 instead of retail r3. */
 #include "gamedata/NpcPackage.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 extern const char DAT_003ff7c8[];
 extern AocSystem* g_aocSystem;
 s32 textFormatBuffer(char* buffer, const char* format, ...);
-u32 FUN_0023e330(AocSystem* system, s32 id, u32 kind);
 void* FUN_00387a08(AocSystem* system, s32 id, const char* path);
 void* asdLoadFileSyncDefault(const char* path);
 
@@ -18,7 +18,7 @@ void FUN_0033f2b8(NpcPackageWork* work, s32 id)
     work->kind = 4;
     work->sourceId = id;
     NpcPackageHeader* file;
-    if (FUN_0023e330(g_aocSystem, id, 1)) {
+    if (FUN_0023e330(reinterpret_cast<u32>(g_aocSystem), id, 1)) {
         file = static_cast<NpcPackageHeader*>(FUN_00387a08(g_aocSystem, id, path));
     } else {
         file = static_cast<NpcPackageHeader*>(asdLoadFileSyncDefault(path));

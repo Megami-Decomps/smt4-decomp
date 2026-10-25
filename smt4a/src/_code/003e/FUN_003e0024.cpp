@@ -1,4 +1,5 @@
 #include "shard/Shard003E.h"
+#include "util/FUN_003e0024.h"
 
 extern "C" {
 

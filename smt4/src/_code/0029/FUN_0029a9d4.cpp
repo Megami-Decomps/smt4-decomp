@@ -25,7 +25,7 @@ extern "C" {
 Table04Record *dataTable40FindById(u32 skillId);
 s32 FUN_00283ebc(Table04Record *skill, s32 rank, u32 modifier);
 s32 flagBitIsSet(u32 flag);
-SkillCostDiscountView *FUN_002ae584(u16 id);
+SkillCostDiscountView *appCostRecordFindById(u16 id);
 ItemRankRecord *gameGetPlayerData(void);
 
 // Apply learned-rank or global cost discounts, keeping a nonzero skill's cost at least one.
@@ -41,16 +41,16 @@ s32 FUN_0029a9d4(u32 skillId, s32 useLearnedRank)
         discount += FUN_00283ebc(skill, findLearnedSkillRank(gameGetPlayerData(), skillId), 4);
     } else {
         if (flagBitIsSet(12) != 0) {
-            discount = FUN_002ae584(12)->discount;
+            discount = appCostRecordFindById(12)->discount;
         }
         if (flagBitIsSet(13) != 0) {
-            discount += FUN_002ae584(13)->discount;
+            discount += appCostRecordFindById(13)->discount;
         }
         if (flagBitIsSet(14) != 0) {
-            discount += FUN_002ae584(14)->discount;
+            discount += appCostRecordFindById(14)->discount;
         }
         if (flagBitIsSet(15) != 0) {
-            discount += FUN_002ae584(15)->discount;
+            discount += appCostRecordFindById(15)->discount;
         }
     }
     s32 cost = baseCost - discount;

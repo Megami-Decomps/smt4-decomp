@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct Record {
     /* 0x46 */ u16 slot;
 } Record;
 
-extern Record *gameGetUnitRecord(void);
 extern int FUN_00257568(Entry *a, Entry *b);
 
 /* If both entries have the same slot (0 for a negative handle), forwards them to FUN_00257568. */
@@ -25,12 +25,12 @@ void FUN_00219208(Entry *a, Entry *b)
     if (a->handle < 0) {
         slotA = 0;
     } else {
-        slotA = gameGetUnitRecord()->slot;
+        slotA = static_cast<Record *>(gameGetUnitRecord(a->handle))->slot;
     }
     if (b->handle < 0) {
         slotB = 0;
     } else {
-        slotB = gameGetUnitRecord()->slot;
+        slotB = static_cast<Record *>(gameGetUnitRecord(b->handle))->slot;
     }
     diff = slotA - slotB;
     if (diff == 0) {

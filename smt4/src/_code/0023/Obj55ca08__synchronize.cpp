@@ -1,5 +1,6 @@
 /* NON_MATCHING: recovered touch-selection flow still differs in predicate and helper-call scheduling. */
 #include "classes/Obj55ca08.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
 struct Obj55ca08Selection {
     u8 type;
@@ -11,7 +12,6 @@ struct Obj55ca08Selection {
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 region);
 s32 FUN_0029efc0(void);
-s32 FUN_0029e93c(const u8 *state);
 s32 flaggedEntryGetValueA(void);
 s32 flaggedEntryGetValueB(const u8 *state);
 void eventQueueAddUnique(u32 event);

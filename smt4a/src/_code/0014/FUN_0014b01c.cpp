@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014b01c` (_code @ 0x14b01c, 0x63c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -54,7 +55,6 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: asdTMTexTableGetHeaderValue. */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_0016242c. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -193,7 +193,7 @@ void FUN_0014b01c(int param_1)
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
   temp_v3 = g_renderCtx;
-  temp_v0 = packNibblesAndByte(6,7,0);
+  temp_v0 = packNibblesAndByte(6, 7, 0);
   piVar5 = (int *)(temp_v3 + 0x12b8);
   temp_v1 = *piVar5;
   temp_v2 = piVar5[temp_v1 + 2];
@@ -220,7 +220,7 @@ void FUN_0014b01c(int param_1)
   FUN_0016c4b8(g_renderCtx);
   FUN_0019e3d0(temp_v4 | 0xffffff00);
   temp_v3 = g_renderCtx;
-  temp_v0 = packNibblesAndByte(6,1,0);
+  temp_v0 = packNibblesAndByte(6, 1, 0);
   piVar5 = (int *)(temp_v3 + 0x12b8);
   temp_v1 = piVar5[*piVar5 + 2];
   piVar5[*piVar5 + 2] = temp_v0;

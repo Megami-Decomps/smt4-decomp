@@ -14,7 +14,7 @@ int FUN_00263cb8(...);
 int FUN_00298dc8(int);
 int libc_strcpy(...);
 int gameFlagIsSet(void);
-int FUN_002dfe08(...);
+int mapIfRequestRecordById(...);
 int cameraGetDistancePreset(int, unsigned char [20]);
 int contentEntryGet(...);
 int dataTable2fSub1GetCount(void);
@@ -79,12 +79,12 @@ extern unsigned int *dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: gameFlagIsSet. */
 extern unsigned int FUN_002df80c(int);
-/* Supplied declaration required: FUN_002dfe08. */
+/* Supplied declaration required: mapIfRequestRecordById. */
 extern unsigned int FUN_002e0164(int);
 extern unsigned int gameStateGetMenuType(int);
 /* Supplied declaration required: cameraGetDistancePreset. */
 extern int categoryReturnsZero(void);
-extern int FUN_002f3614(int);
+extern int mapFlagTest(int);
 /* Supplied declaration required: contentEntryGet. */
 extern int dataTable23Section5CountWithExtras(void);
 extern unsigned int *dataTable2fSub2GetRecord(int);
@@ -367,7 +367,7 @@ LAB_0027bbcc:
                   FUN_0025b670();
                   if ((*(unsigned int *)(temp_v1 + 0x20) != 0xffffffff) && (*(unsigned int *)(temp_v1 + 0x20) == temp_v4))
                   {
-                    temp_v1 = FUN_002f3614((int)*(short *)(temp_v1 + 0x24));
+                    temp_v1 = mapFlagTest((int)*(short *)(temp_v1 + 0x24));
                     if (temp_v1 == 0) goto LAB_0027bc38;
                     temp_v33 = temp_v10;
                     if (temp_v10 != -1) {
@@ -625,7 +625,7 @@ LAB_0027bef0:
             } while (temp_v1 < DAT_00447a2c);
           }
           if (temp_v29 == 5) {
-            FUN_002dfe08(temp_v12);
+            mapIfRequestRecordById(temp_v12);
           }
         }
         if ((temp_v31 != 0) && (temp_v1 = 0, 0 < DAT_00447a2c)) {

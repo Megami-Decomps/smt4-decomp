@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-push address scheduling, commutative X addition, text-call argument loads and zero-return epilogue ordering differ. */
 #include "camp/RenderCtx.h"
+#include "text/TextDraw.h"
 
 struct PlaceWindowPosition {
     u8 unk00[0xc];
@@ -25,14 +26,13 @@ struct PlaceWindowFrame {
 extern "C" {
 extern PlaceWindowWork *g_placeWin;
 extern RenderCtx *g_titleScene;
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 u32 FUN_002c5d80(u32 slot, u32 flags);
 s32 vec2GetXInt(const PlaceWindowPosition *position);
 s32 vec2GetYInt(const PlaceWindowPosition *position);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 scale);
 void FUN_002bf380(s32 layer, u32 group, u32 frame, s32 x, s32 y, s32 flags);
 PlaceWindowFrame *FUN_002bf4f8(u32 group, u32 frame);
-void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 offset, f32 opacity);
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
 
@@ -42,7 +42,7 @@ u32 placeWindowDrawLabel(void)
     if (!window->ready || !window->visible) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
     u32 state = FUN_002c5d80(1, 0);
     renderCtxPushA(context, state);

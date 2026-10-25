@@ -69,4 +69,17 @@ typedef struct AsdFileGlobals {
     /* 0x28 */ u8 event[4];            /* nn::os::LightEvent that wakes the worker (longer than shown) */
 } AsdFileGlobals;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+s32 resourceCallDefaultOptions(u32 first, u32 second, u32 third);
+#ifdef __cplusplus
+}
+#endif
+
+extern "C" {
+void FUN_001175d4(u8 value);
+}
+
 #endif

@@ -1,8 +1,10 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 71 vs built 65 rows, 65 diff lines. */
+/* NON_MATCHING: debug trace (DAT_00410408, 1197), the size/trace order and the unk70 clamp now match; retail reads obj->state/work with a writeback load (ldr r6, [r0, #60]!) and keeps the allocation result in r5 across the unk70 store. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
+extern const char DAT_00410408[]; /* effPolygonFlash.cpp: __FILE__ */
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00268fc4(PolyGeom *src);
 
@@ -11,12 +13,16 @@ PolyGeomBlock *effPolyFlashGeomClone2(PolyObject *obj)
 {
     PolyGeomBlock *srcBlock = (PolyGeomBlock *)obj->state;
     PolyParams *params = (PolyParams *)obj->work;
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x18 + 0x10, 0x10, 1);
+    u32 payloadSize = params->segments * 0x18;
+    PolyGeomBlock *block;
     PolyGeom *geom;
+
+    asdDebugTrace(DAT_00410408, 1197);
+    block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadSize + 0x10, 0x10, 1);
 
     block->data = block->payload;
     block->self = block;
-    params->unk70 = (params->unk70 < 2) ? 1 : params->unk70;
+    params->unk70 = (params->unk70 <= 1) ? 1 : params->unk70;
     geom = FUN_00268fc4(srcBlock->geom);
     block->geom = geom;
     if (params->segments != 0) {

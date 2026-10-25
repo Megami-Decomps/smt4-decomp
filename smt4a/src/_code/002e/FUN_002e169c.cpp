@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~205 rows); retail loads the render-context pointer before the ring-push value call and spills differently */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -68,7 +69,6 @@ void FUN_00157558(RenderCtx* ctx);
 u32 FUN_001692ac(u32 a, u32 b);
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
-s32 vec2GetXInt(void* vec);
 s32 vec2GetYInt(void* vec);
 SpriteRect* FUN_001834a4(s32 group, s32 index);
 void FUN_00164168(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);

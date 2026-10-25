@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 

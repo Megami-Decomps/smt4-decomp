@@ -3,12 +3,12 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "battle/BattleEditorState.h"
 #include "shard/JobWork.h"
+#include "shard/X14_BtlUiClose.h"
 
 struct EditorRosterColor { u8 unk000[0x6c]; u32 current, saved; };
 extern "C" {
 extern void *g_btlUiBlock;
 extern BattleEditorGlobalsA g_btlEditor;
-void FUN_004aa780(void *ui, s32 mode);
 void asdMemFree(void *memory);
 void jobStop(u32 job, s32 mode);
 
@@ -40,7 +40,7 @@ void FUN_003285dc(void *job)
 {
     BtlMainStateA *work = reinterpret_cast<BtlMainStateA *>(jobGetWork((u32)job));
     if (g_btlUiBlock)
-        FUN_004aa780(g_btlUiBlock, 0);
+        FUN_004aa780(reinterpret_cast<u32>(g_btlUiBlock), 0);
     if (g_btlEditor.state) {
         battleEditorRestoreRosterFlags(work);
         battleEditorRestoreRosterColors(work);

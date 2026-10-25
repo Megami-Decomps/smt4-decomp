@@ -1,6 +1,7 @@
 /* NON_MATCHING: twin of smt4 FUN_00107d28; compiles (211 vs 212 rows); retail loads the g_ifTouch address before the prologue and shares base-address adds differently */
 #include "common.h"
 #include <math.h>
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 // Hit rectangle of one touch item (x, y, width, height); stored 8 bytes apart.
 struct TouchRect {
@@ -44,8 +45,7 @@ extern "C" {
 
 extern TouchOwner g_ifTouch;
 
-s32 uiPointerHitsRect(s32 x, s32 y, s32 w, s32 h, s32 arg);
-s32 FUN_00167c14(s32* x, s32* y, s32 mode);
+s32 uiPointerHitsRect(s32 x, s32 y, s32 width, s32 height, u32 pointer);
 
 static inline TouchRect* itemRect(TouchWidget* t, s32 index)
 {
@@ -58,7 +58,7 @@ u32 FUN_0013c2c8(void)
     TouchWidget* t = g_ifTouch.widget;
     switch (t->state) {
     case 0:
-        if (FUN_00167c14(&t->startX, &t->startY, 1) != 0) {
+        if (FUN_00167c14(reinterpret_cast<u32 *>(&t->startX), reinterpret_cast<u32 *>(&t->startY), 1) != 0) {
             for (s16 i = 0; i < t->itemCount; i++) {
                 if (i >= 10 || i < t->hitLimit) {
                     TouchRect* r = itemRect(t, i);
@@ -81,7 +81,7 @@ u32 FUN_0013c2c8(void)
         t->holdTime = t->holdTime + 1;
         if (t->holdTime >= 10) {
             t->state = 2;
-        } else if (FUN_00167c14(&t->curX, &t->curY, 0) != 0) {
+        } else if (FUN_00167c14(reinterpret_cast<u32 *>(&t->curX), reinterpret_cast<u32 *>(&t->curY), 0) != 0) {
             s32 dx = t->curX - t->startX;
             s32 dy = t->curY - t->startY;
             if ((u32)sqrt((double)(dx * dx + dy * dy)) > 8) {
@@ -95,7 +95,7 @@ u32 FUN_0013c2c8(void)
         break;
     case 2:
         t->holdTime = t->holdTime + 1;
-        if (FUN_00167c14(&t->curX, &t->curY, 0) == 0) {
+        if (FUN_00167c14(reinterpret_cast<u32 *>(&t->curX), reinterpret_cast<u32 *>(&t->curY), 0) == 0) {
             t->state = 0;
             t->holdTime = 0;
         } else {

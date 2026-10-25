@@ -1,8 +1,8 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 BtlState *btlGetMainState(void);
 
 /* Tests whether an eligible group unit has the requested status-entry kind. */

@@ -28,4 +28,5 @@ typedef char VoiceLoadQueueOffsets[
     offsetof(VoiceLoadRequest, gains) == 0x58 && offsetof(VoiceLoadRequest, counter) == 0x68 &&
     offsetof(VoiceLoadRequest, flags) == 0x74 && offsetof(VoiceLoadRequest, kind) == 0x75 &&
     offsetof(VoiceLoadRequest, priority) == 0x77 && offsetof(VoiceLoadQueue, disabled) == 0x1E6 ? 1 : -1];
+
 #endif

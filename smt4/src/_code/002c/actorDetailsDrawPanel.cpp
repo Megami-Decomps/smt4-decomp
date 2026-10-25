@@ -9,7 +9,7 @@ extern RenderCtx *g_titleScene;
 extern const s32 g_actorDetailsStyleImages[2];
 void *FUN_00293f10(s32 portrait, u32 mode);
 void FUN_002bed3c(void);
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
@@ -37,7 +37,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
     }
     s32 images[2] = { g_actorDetailsStyleImages[0], g_actorDetailsStyleImages[1] };
     FUN_002bed3c();
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
     renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
     efctSetSpeed(transform->alpha);

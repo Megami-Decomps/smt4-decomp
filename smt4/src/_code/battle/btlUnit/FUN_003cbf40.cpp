@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cbf40` (_code @ 0x3cbf40, 0x9dc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int btlMainFindEntryByListedId(int, int);
 int gameCounterAddSaturating(...);
 int dataTable40FindById(void);
 int FUN_002bf80c(...);
-int memClear(int *, int);
 int FUN_003af06c(unsigned int, unsigned int *, unsigned int, unsigned int);
 int FUN_003d06e4(int *, unsigned int *);
 int FUN_003d0fcc(int *, int);
@@ -202,7 +202,7 @@ int FUN_003cbf40(int *param_1,unsigned int *param_2)
       }
     }
     else {
-      memClear(&temp_v11,0x88);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(&temp_v11), 0x88));
       temp_v0 = 0;
       temp_v3 = 0;
       temp_v1 = 0;

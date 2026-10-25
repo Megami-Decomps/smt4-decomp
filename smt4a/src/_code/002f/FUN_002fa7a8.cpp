@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fa7a8` (_code @ 0x2fa7a8, 0x7a4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ extern int FUN_002a4878(int);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_002ccde8. */
 /* Supplied declaration required: flaggedEntrySetValueB. */
-extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: FUN_004000a8. */
 /* Supplied declaration required: FUN_00400164. */
 /* Supplied declaration required: btlItemComputeValues. */

@@ -1,9 +1,9 @@
+#include "gfx/StereoParallax.h"
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 const SpriteInfo *FUN_001834a4(u32 group, u32 image);
 void efctSetSpeed(f32 speed);
 

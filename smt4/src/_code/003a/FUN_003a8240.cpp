@@ -1,6 +1,8 @@
 /* NON_MATCHING: item id now goes through the inlined shopListItemGetId (ldrh, sxth, uxth match); retail schedules `mov r2, #0` before the getter, the build leaves a `nop {0}` there and moves the mov after it (the caller would need the getter's clobber set). */
 #include "common.h"
+#include "status/StatusCamera.h"
 
+#include "util/FUN_0029c43c.h"
 /* One item on sale (0x20 bytes). */
 struct ShopListItem {
     /* 0x00 */ u8 unk00[4];
@@ -28,12 +30,10 @@ extern "C" {
 s32 scrRunOpcodesStub(u32 script);
 s32 messageMainGetChoiceResult(void);
 void messageMainSetTargetFlags(u32 flags);
-void FUN_002a0cc8(s32 mode);
 void buttonHelpSetPreset(s32 preset);
 s32 flaggedValueHolderGetTotal(u8 *cursor);
 u16 shopListItemGetId(const ShopListItem *item);
 s32 FUN_0029ce60(u16 itemId, u8 quantity, s32 mode, s32 discounted, s32 extra);
-void FUN_0029c43c(s32 amount, s32 mode);
 void FUN_002e3150(void);
 
 /* Waits for the confirmation script; on "yes" pays for the selected item and moves to state 4,

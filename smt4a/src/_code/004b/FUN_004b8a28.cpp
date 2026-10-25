@@ -1,4 +1,5 @@
 #include "shard/W4_Match3_AocMainA.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ int dialogOpen(int arg0, int arg1);
 int placeWinStartText(u8 *name);
 int FUN_00215978(int arg);
 int placeWinSetValue(int arg);
-int infoWinSetText(u32 owner, int kind);
 int scriptHolderReset(void *queue);
 int scriptHolderFree3(void *queue);
 int scriptHolderUpdateSimple(void *queue);
@@ -47,7 +47,7 @@ void FUN_004b8a28(Menu *menu)
         FUN_004b7d88(menu);
         FUN_00215978(0);
         dialogOpen(0, 0);
-        infoWinSetText(menu->owner, menu->entry->kind);
+        infoWinSetText(reinterpret_cast<const char *>(menu->owner), menu->entry->kind);
         menu->phase = 0;
         menu->state = 5;
         menu->busy = 0;

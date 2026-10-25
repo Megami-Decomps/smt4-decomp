@@ -1,11 +1,10 @@
-#include "common.h"
+#include "AsdSDK/FileLoadSync.h"
 
 extern "C" {
-void asdLoadFileSync(const char *path, void *output, u32 flags, u32 mode);
 
-/* Loads a file synchronously using mode 4. */
-void fileLoadSync(const char *path, void *output, u32 flags)
+void *fileLoadSync(const char *path, u32 *size, u32 flags)
 {
-    asdLoadFileSync(path, output, flags, 4);
+    return asdLoadFileSync(path, size, flags, 4);
 }
+
 }

@@ -67,4 +67,20 @@ public:
     /* 0x54 */ AsdEnvLeafData *data;
 };
 
+extern "C" {
+void asdListBoxSetByteValue(u32 listBox, u8 value);
+}
+
+extern "C" {
+u32 *gameFlagBlockGetEntry(s32 index);
+}
+
+extern "C" {
+u8 asdFileRequestHasFailed(s32 *valueRef);
+}
+
+extern "C" {
+u8 *gameFlagBlockGet(void);
+}
+
 #endif

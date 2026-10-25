@@ -1,9 +1,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 BtlMainState* btlGetMainState(void);
 s32 btlFindNthActiveSpecialEntry(BtlMainState* state, s32 kind);
-void scrSetResult(s32 result);
 
 // Return the listed id of the selected kind-1 combatant, or zero if absent.
 u32 scrCommGetSelectedCombatantId(void)

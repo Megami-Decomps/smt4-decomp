@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern int FUN_00287894(void *id);
+extern int table1bOr1cGetRecordValue(void *id);
 extern int FUN_00298f88(void *id);
 extern u8 *gameGetFlagBlock(void);
 
@@ -25,7 +25,7 @@ int FUN_00348b7c(void *id)
             return (int)(table + 0x86c);
         }
     } else {
-        if (FUN_00287894(id) == 1) {
+        if (table1bOr1cGetRecordValue(id) == 1) {
             return (int)(table + 0x87a);
         }
     }

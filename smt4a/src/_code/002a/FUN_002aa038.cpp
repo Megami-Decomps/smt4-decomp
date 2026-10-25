@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002aa038` (_code @ 0x2aa038, 0x528 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -23,7 +24,6 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00162790. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -156,12 +156,12 @@ void FUN_002aa038(int param_1,int param_2)
   efctSetSpeed();
   if (!((temp_v1 == 1 || temp_v1 == 2) || temp_v1 == 6)) {
     temp_v5 = vec2GetYInt(temp_v0 + 0xb0);
-    temp_v7 = vec2GetXInt(temp_v0 + 0xb0);
+    temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xb0));
     FUN_001835b4(2,0x1a,0xc4,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   else {
     temp_v5 = vec2GetYInt(temp_v0 + 0xb0);
-    temp_v7 = vec2GetXInt(temp_v0 + 0xb0);
+    temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0 + 0xb0));
     FUN_001835b4(2,0x1a,0x286,temp_v7 + temp_v11,temp_v5 + param_2,0xbf);
   }
   efctSetSpeed();

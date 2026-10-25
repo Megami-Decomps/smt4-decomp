@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail builds the three attribute descriptors with separate stores and does not reload r1 around the trace call; built copies them from a constant and reloads (230 rows vs 231); the buffer layout is the same. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "gfx/RenderTargetState.h"
 
 extern "C" {
 
@@ -41,7 +42,6 @@ extern const char DAT_004094c8[];    /* source path used by the trace calls */
 u32 FUN_0034711c(PrimRenderData *prim, s32 line);
 void *memAlloc(u32 size, u32 alignment, u32 a, u32 name, u32 b, u32 c);
 void *asdMemoryAllocAligned(u32 size, u32 alignment, u32 a, u32 count, u32 b, u32 c);
-u32 osVirtToPhysAddress(void *address);
 void FUN_0023b9d0(void *commands, AttrDesc *attribute, u32 physAddress, s32 id);
 
 /* Allocates the primitive's shared vertex buffer and fills in its attribute arrays (positions,
@@ -67,7 +67,7 @@ void FUN_00346b84(PrimRenderData *prim)
         offset = prim->vertexCount * 12;
         if ((prim->flags & 0x100) != 0) {
             positionDesc.kind = 0;
-            FUN_0023b9d0(prim->commands, &positionDesc, osVirtToPhysAddress(prim->positions), 11);
+            FUN_0023b9d0(prim->commands, &positionDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->positions)), 11);
         }
     }
     if ((prim->flags & 2) != 0) {
@@ -78,7 +78,7 @@ void FUN_00346b84(PrimRenderData *prim)
         }
         if ((prim->flags & 0x100) != 0) {
             colorDesc.kind = 1;
-            FUN_0023b9d0(prim->commands, &colorDesc, osVirtToPhysAddress(prim->colors), 15);
+            FUN_0023b9d0(prim->commands, &colorDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->colors)), 15);
         }
     }
     if ((prim->flags & 0x20) != 0) {
@@ -89,14 +89,14 @@ void FUN_00346b84(PrimRenderData *prim)
         }
         if ((prim->flags & 0x100) != 0) {
             colorDesc.kind = 1;
-            FUN_0023b9d0(prim->commands, &colorDesc, osVirtToPhysAddress(prim->byteColors), 13);
+            FUN_0023b9d0(prim->commands, &colorDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->byteColors)), 13);
         }
     }
     if ((prim->flags & 4) != 0) {
         prim->texCoords = prim->buffer + offset;
         if ((prim->flags & 0x100) != 0) {
             texCoordDesc.kind = 2;
-            FUN_0023b9d0(prim->commands, &texCoordDesc, osVirtToPhysAddress(prim->texCoords), 7);
+            FUN_0023b9d0(prim->commands, &texCoordDesc, osVirtToPhysAddress(reinterpret_cast<u32>(prim->texCoords)), 7);
         }
     }
     if ((prim->flags & 0x100) != 0) {
@@ -110,7 +110,7 @@ void FUN_00346b84(PrimRenderData *prim)
         prim->indices[i] = 0;
     }
     if ((prim->flags & 0x100) != 0) {
-        prim->indexPhysAddress = osVirtToPhysAddress(prim->indices);
+        prim->indexPhysAddress = osVirtToPhysAddress(reinterpret_cast<u32>(prim->indices));
         prim->indexPhysCount = prim->indexCount;
         prim->indexPhysFlag = 0;
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: only instruction order differs: retail loads work->listBox (r0) before selectedId/category (r2) for the two arm-local ItemMode3/ItemMode2 calls */
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -22,9 +23,6 @@ void asdListBoxSetItemMode3(u32 listBox, u32 index, u32 value, u32 minimum, u32 
 void asdListBoxSetItemMode2(u32 listBox, u32 index, u32 value);
 s32 dataTable03Sub0GetCount(void);
 s32 dataTable22GetCount(void);
-u32 dataTableGet(u32 table, u32 index);
-void dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 
 // Build the battle debug menu from the current category, ids and debug flags.
 void FUN_003c5150(BattleDebugWork *work, const BattleDebugFlagsView *owner)
@@ -52,9 +50,9 @@ void FUN_003c5150(BattleDebugWork *work, const BattleDebugFlagsView *owner)
     asdListBoxSetItemMode2(work->listBox, 12, (owner->flags & 0x2000000000ULL) != 0);
     asdListBoxSetItemMode2(work->listBox, 13, ((u32)owner->flags & 0x100000) >> 20);
     asdListBoxSetItemMode2(work->listBox, 14, (u32)owner->flags >> 31);
-    u32 table = dataTableGet(0x1c, 2);
-    dataTableGetEntries();
-    asdListBoxSetItemMode3(work->listBox, 10, 0, 0, dataTableGetCount(table), 0);
+    void *section = dataTableGet(0x1c, 2);
+    dataTableGetEntries(section);
+    asdListBoxSetItemMode3(work->listBox, 10, 0, 0, dataTableGetCount(section), 0);
 }
 
 } /* extern "C" */

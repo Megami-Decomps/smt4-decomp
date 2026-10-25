@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the initial mode compare is scheduled after `mov r9, r0` and the first literal load (retail compares r0 first; 4 diff lines); the switch already gives retail's r8/r9 allocation. */
 #include "common.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 struct CampFlagMenu {
     u8 storage[0x64];
@@ -18,7 +19,6 @@ struct CampFlagLists {
 
 extern "C" {
 extern CampFlagLists *g_camp;
-s32 flagValueIsPositive(u32 flag);
 void FUN_00203b40(CampFlagMenu *, s32 count, s32 kind, s32 a, s32 b, s32 c);
 void FUN_003d0bc0(s32 mode);
 

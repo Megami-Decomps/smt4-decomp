@@ -12,7 +12,7 @@ typedef struct JobState {
 } JobState;
 
 u32 scrGetArg(u32 index);
-s32 jobIsValid(void);
+s32 jobIsValid(u32 job);
 JobState *jobGetWork(u32 job);
 void jobStop(u32 job, s32 arg);
 
@@ -21,7 +21,7 @@ u32 scrCommJobStopOrSetOffset(void)
 {
     u32 job = scrGetArg(0);
 
-    if (jobIsValid() != 0) {
+    if (jobIsValid(job) != 0) {
         JobState *work = jobGetWork(job);
 
         if (work->state == 1) {

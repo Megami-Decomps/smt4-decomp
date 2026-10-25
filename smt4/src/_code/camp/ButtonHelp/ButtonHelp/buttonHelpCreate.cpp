@@ -3,15 +3,13 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "ui/ButtonHelp.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 extern const u8 DAT_00402550;
 
 void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
-void memClear(void *block, s32 size);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *resources);
@@ -41,8 +39,7 @@ void buttonHelpCreate(void)
         }
         ButtonHelpWork *work = globals->work;
         memClear(work, sizeof(ButtonHelpWork));
-        work->jobs.process = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0,
-                                                    FUN_001c0c38, buttonHelpNotifyNoop, 0);
+        work->jobs.process = asdProcessCreateSimple((const s8 *)"ButtonHelp CALC", 1, 0, 0, FUN_001c0c38, buttonHelpNotifyNoop, 0);
         work->jobs.drawTask = taskCreateDraw((const s8 *)"ButtonHelp DRAW", 0xE6, 0, 0, FUN_002109cc,
                                              NULL, 0, work->jobs.process);
 

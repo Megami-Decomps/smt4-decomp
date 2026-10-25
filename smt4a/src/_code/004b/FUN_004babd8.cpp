@@ -1,25 +1,25 @@
 /* NON_MATCHING: counter-bound branches and selected-flag loads differ; retail retains a separate +0x900 base and signed completion accessor. */
 #include "shard/Shard004B.h"
+#include "shard/Shard004A.h"
+#include "util/FUN_004d0058.h"
 
 extern "C" {
-s32 flaggedValueHolderGetTotal(Menu4C *menu);
 void menuSynchronizeFlaggedSelection(void *selection, Menu4C *menu);
 void sub10OwnerStart(Menu4C *menu);
 void *asdTMTexLoadMainHeap(u32 table, u32 index);
 u32 selectOwnerGetSelected(void *selection);
-s32 FUN_004d0058(Menu4C *menu, u32 selected);
 s32 FUN_004d0584();
 
 // Preload the selected entry's image after the selection has remained stable.
 u32 FUN_004babd8(Menu4C *menu)
 {
     u32 changed = 0;
-    s32 oldSelection = flaggedValueHolderGetTotal(menu);
+    s32 oldSelection = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu));
     if (!menu->unk9EE) {
         menuSynchronizeFlaggedSelection(menu->block74, menu);
         sub10OwnerStart(menu);
     }
-    if (flaggedValueHolderGetTotal(menu) != oldSelection) {
+    if (flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu)) != oldSelection) {
         menu->unk1074 = 0;
     } else {
         // The legacy bound checks each advance this counter before testing it.
@@ -35,7 +35,7 @@ u32 FUN_004babd8(Menu4C *menu)
         }
         menu->unk1074 = timer;
         if (timer >= 16) {
-            s32 selection = flaggedValueHolderGetTotal(menu);
+            s32 selection = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu));
             u32 keyframe = menu->list[selection]->unk5A + 1;
             if (!menu->flags1034[keyframe]) {
                 menu->preload.node = keyframe + 1;

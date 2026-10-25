@@ -1,12 +1,12 @@
 #include "shard/Shard004B.h"
+#include "shard/Shard004A.h"
 
 extern "C" {
 
-extern s32 flaggedValueHolderGetTotal(Menu4C *obj);
 
 ListEntry20 *menu4CGetCurrentEntry(Menu4C *obj)
 {
-    s32 index = flaggedValueHolderGetTotal(obj);
+    s32 index = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(obj));
 
     return obj->list[index];
 }

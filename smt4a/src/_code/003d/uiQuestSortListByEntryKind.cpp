@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ typedef struct QuestEntry {
 
 extern QuestMenu *g_uiQuest;
 
-extern QuestEntry *FUN_0026140c(void);
 extern u32 objectApplyIfUnblocked(QuestCursor *cursor);
 extern void qsort(void *list, u32 count, u32 size, SortCompare compare);
 extern void arraySortQsort(void *list, u32 count, u32 size, SortCompare compare);
@@ -44,7 +44,7 @@ void uiQuestSortListByEntryKind(s32 mode)
     QuestMenu *menu = g_uiQuest;
 
     if (mode == 0) {
-        QuestEntry *entry = FUN_0026140c();
+        QuestEntry *entry = reinterpret_cast<QuestEntry *>(FUN_0026140c());
         u8 *info = &entry->kindAndAlternate;
         QuestCursor *cursor = &menu->cursor;
         u8 *list = menu->list;

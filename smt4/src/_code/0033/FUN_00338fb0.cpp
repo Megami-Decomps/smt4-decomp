@@ -1,10 +1,10 @@
 /* NON_MATCHING: retained-id scan unrolling, owner register allocation, and final mask stores differ. */
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" void FUN_00294f64(void *model);
 extern "C" void asdMemFree(void *memory);
-extern "C" void memClear(void *memory, u32 size);
 
 // Release unreferenced cached models and clear their transient battle records.
 extern "C" void FUN_00338fb0(void *context)

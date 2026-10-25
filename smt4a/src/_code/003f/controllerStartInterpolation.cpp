@@ -1,17 +1,22 @@
-/* NON_MATCHING: retail uses `vstr s2, [r1, #16]` where armcc emits `vstr s1, [r1, #16]`. */
+/* NON_MATCHING: instructions equal retail (vstmia of the 4.0/8.0 pair); only the literal-pool order differs (retail 4.0, 8.0, 0.0). */
 #include "common.h"
 
 extern "C" {
 
-struct Controller { u8 unk000[0x40c]; u32 mode; f32 values[4]; };
+struct FloatPair { f32 values[2]; };
+struct Controller { u8 unk000[0x40c]; u32 mode; f32 start; f32 first; FloatPair range; };
 
 void controllerStartInterpolation(Controller *controller)
 {
+    FloatPair range;
+
+    range.values[0] = 4.0f;
+    range.values[1] = 8.0f;
+
     controller->mode = 3;
-    controller->values[1] = 4.0f;
-    controller->values[0] = 0.0f;
-    controller->values[2] = 4.0f;
-    controller->values[3] = 8.0f;
+    controller->first = 4.0f;
+    controller->range = range;
+    controller->start = 0.0f;
 }
 
 } /* extern "C" */

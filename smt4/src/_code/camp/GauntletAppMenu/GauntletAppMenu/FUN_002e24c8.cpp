@@ -2,15 +2,15 @@
 /* Creates the Gauntlet app menu: work area, processes, sprites and its resource files. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "util/AsdLoadFileSyncDefault.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
 void *asdMemAlloc(s32 heap, s32 alignment, s32 option, u32 size, s32 fromFront);
 void memClear(void *memory, u32 size);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(),
-                           void (*onEnd)(), u32 work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 argument, void (*update)(), void (*draw)(),
                    void *work, u32 parent);
 s32 gameFlagIsSet(u32 flag);
@@ -25,7 +25,6 @@ void FUN_002bd954(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 sca
 void timerStart(GauntletSprite *sprite, s32 animation, s32 flags);
 void spriteStartAnimationByIndex(GauntletSprite *sprite, s32 mode);
 void spriteSetLayer(GauntletSprite *sprite, u16 mode);
-u32 asdLoadFileSyncDefault(const char *path);
 u32 FUN_00297060(u32 data, u32 archive);
 u32 FUN_003291dc();
 void gauntletAppMenuDestroy(void);
@@ -50,7 +49,7 @@ u32 FUN_002e24c8(void)
     }
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
     memClear(menu, 0x534);
-    menu->task = asdProcessCreateSimple("GauntletApp CALC", 1, 0, 0, FUN_003291dc, gauntletAppMenuDestroy, 0);
+    menu->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GauntletApp CALC"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003291dc), reinterpret_cast<AsdProcFunc>(gauntletAppMenuDestroy), 0);
     menu->list.drawTask = taskCreateDraw("GauntletApp DDRAW", 230, 0, 0, gauntletAppMenuExit, NULL, NULL, menu->task);
     if (gameFlagIsSet(0x520)) {
         menu->list.forceFirst = 1;

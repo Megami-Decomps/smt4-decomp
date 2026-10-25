@@ -5,7 +5,7 @@
 #include "shard/SaveWork.h"
 
 extern "C" {
-s32 FUN_00287894(u32 quest);
+s32 table1bOr1cGetRecordValue(u32 quest);
 QuestRuntimeFlagBlock *gameGetFlagBlock(void);
 SaveWork *gameGetMapBlock(void);
 
@@ -27,7 +27,7 @@ void FUN_00348c10(u16 itemId, s32 change)
     QuestProgressView *flags = reinterpret_cast<QuestProgressView *>(gameGetFlagBlock());
     u16 selected = reinterpret_cast<QuestProgressView *>(gameGetFlagBlock())->selected;
     if (selected != 0) {
-        if (FUN_00287894(selected) != 1)
+        if (table1bOr1cGetRecordValue(selected) != 1)
             return;
         const QuestRequirementDefinition *quest = reinterpret_cast<const QuestRequirementDefinition *>(
             dataTable1bOr1cGetRecord(selected));

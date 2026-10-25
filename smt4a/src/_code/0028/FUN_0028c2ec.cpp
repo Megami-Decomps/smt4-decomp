@@ -1,4 +1,5 @@
 /* NON_MATCHING: near-structure (172 rows against 203): same skip test, special-row cases, member/row loops and index maths from the asm; retail has extra armcc nops around calls (inlined stubs) and re-tests `target < 0` before the second special case, with the row pointer reloaded (ldr/rsb/str order) after each FUN_004bcbb4, which ours schedules differently */
+#include "network/DataStore/DataStoreMain.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -56,7 +57,6 @@ u32 btlMainGetUnk14(void);
 s32 FUN_002a4878(u32 id);
 s32 FUN_002a4894(u32 id);
 s32 FUN_002c7bb0(s32 target, s32 slot, u32 skillId, u32 *out);
-s32 FUN_003344b4(u32 value, s32 amount);
 
 /* Refreshes the skill-cost preview of the party panel rows for the current skill/target and the
  * entry of list position `id` (`direct` selects the unpaged layout). */

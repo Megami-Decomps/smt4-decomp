@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026cbb8` (_code @ 0x26cbb8, 0x1c88 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_00203b40(...);
 int FUN_0020b490(...);
 int FUN_00228b04(...);
 int FUN_002685cc(void);
-int infoWinSetText(...);
 int btlTalkBustUpSetDemonTexture(...);
 int FUN_003450d4(...);
 int obj04Finish(void);
@@ -762,7 +762,7 @@ LAB_0026e1e4:
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < (int)*puVar27);
     *(unsigned int *)(param_1 + 0x436c) = 10;
-    infoWinSetText(*(unsigned int *)(param_1 + 0x43a4),0xca);
+    infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(param_1 + 0x43a4)), 0xca);
     dialogOpen(1);
   default:
 LAB_0026e038:

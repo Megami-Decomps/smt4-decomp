@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite with packed ten/six-bit slots compiles (171 vs 173 rows); register allocation of the loop-carried pointers differs */
 #include "common.h"
+#include "Model/MoriModelResource.h"
 
 // A ten-bit value with a six-bit companion packed into one halfword.
 struct TenSix {
@@ -69,7 +70,6 @@ struct DevilInfo {
 
 extern "C" {
 
-s32 FUN_00177654(void);
 u32 FUN_004da024(u32 index);
 u32 FUN_004da0b4(u32 index);
 u32 randomGetLowerTenBits(MemberSource* member, u32 index);

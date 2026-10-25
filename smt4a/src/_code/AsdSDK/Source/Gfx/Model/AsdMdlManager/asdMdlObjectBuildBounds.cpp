@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct AsdMdlVec3 { f32 v[3]; };
 struct AsdMdlMtx33 { f32 m[9]; };
@@ -21,7 +22,6 @@ struct AsdMdlPartHandle {
 
 extern "C" {
 
-void *asdMemoryAllocTracked(int, int, int, s32 size, int align);
 AsdMdlPartHandle *resourceGetRelativeElement(const RelativeResourceOwner *owner, s32 recordIndex, s32 elementIndex);
 void nn_math_ARMv6_VEC3TransformAsm_2A87B4(AsdMdlVec3 *result, const AsdMdlMtx33 *rotation, const AsdMdlVec3 *vector);
 

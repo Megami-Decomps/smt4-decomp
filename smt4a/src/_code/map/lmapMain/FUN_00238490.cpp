@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00238490` (_code @ 0x238490, 0x990 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -101,7 +102,6 @@ extern float DAT_0064c07c; /* 0x64c07c */
 extern float DAT_0064c080; /* 0x64c080 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
@@ -218,7 +218,7 @@ void FUN_00238490(int param_1)
     if (temp_v11 != 1) {
       if (temp_v11 != 2) {
         if (temp_v11 == 3) {
-          temp_v1 = packNibblesAndByte(5,0,1);
+          temp_v1 = packNibblesAndByte(5, 0, 1);
           piVar8 = (int *)(temp_v2 + 0x12b8);
           temp_v3 = piVar8[*piVar8 + 2];
           piVar8[*piVar8 + 2] = temp_v1;
@@ -229,7 +229,7 @@ void FUN_00238490(int param_1)
         }
       }
       else {
-        temp_v1 = packNibblesAndByte(6,1,2);
+        temp_v1 = packNibblesAndByte(6, 1, 2);
         piVar8 = (int *)(temp_v2 + 0x12b8);
         temp_v3 = piVar8[*piVar8 + 2];
         piVar8[*piVar8 + 2] = temp_v1;
@@ -240,7 +240,7 @@ void FUN_00238490(int param_1)
       }
     }
     else {
-      temp_v1 = packNibblesAndByte(6,1,0);
+      temp_v1 = packNibblesAndByte(6, 1, 0);
       piVar8 = (int *)(temp_v2 + 0x12b8);
       temp_v3 = piVar8[*piVar8 + 2];
       piVar8[*piVar8 + 2] = temp_v1;
@@ -251,7 +251,7 @@ void FUN_00238490(int param_1)
     }
   }
   else {
-    temp_v1 = packNibblesAndByte(6,7,0);
+    temp_v1 = packNibblesAndByte(6, 7, 0);
     piVar8 = (int *)(temp_v2 + 0x12b8);
     temp_v3 = piVar8[*piVar8 + 2];
     piVar8[*piVar8 + 2] = temp_v1;

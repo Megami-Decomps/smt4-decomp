@@ -1,3 +1,4 @@
+#include "gamedata/DataTableSections.h"
 #include "gamedata/DataTableSlots.h"
 
 extern "C" {

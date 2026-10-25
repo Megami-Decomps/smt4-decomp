@@ -1,11 +1,11 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int bitsetSetBit(void *bits, int bit);
 int dataTable00FindById(int id);
 int devilGetRecord(int id);
-int memClear(void *ptr, int size);
 int __aeabi_memcpy4(void *dst, void *src, int size);
 
 typedef struct SourceA {
@@ -70,7 +70,7 @@ void FUN_0026a858(int id, Record *record)
 {
     SourceA *a = (SourceA *)dataTable00FindById(id);
 
-    memClear(record, 0x604);
+    reinterpret_cast<int>(memClear(record, 0x604));
     record->id = (s16)id;
     record->unk48 = a->unk02;
     record->unk00 = (s16)a->unk04;

@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 

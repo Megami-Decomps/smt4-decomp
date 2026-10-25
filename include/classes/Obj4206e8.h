@@ -2,9 +2,9 @@
 #define CLASSES_OBJ4206E8_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-int asdMdlManagerDestroy(u32 handle);
 int asdMemFree(void *block);
 }
 
@@ -17,7 +17,7 @@ public:
     void release()
     {
         if (handle != 0) {
-            asdMdlManagerDestroy(handle);
+            asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
             handle = 0;
         }
         if (buffer != NULL) {

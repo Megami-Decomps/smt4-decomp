@@ -7,10 +7,10 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <new>
 #include <stddef.h>
+#include "util/CalleeContracts.h"
 
 extern "C" {
 ManagedCamera *FUN_0019e31c();
-ManagedCamera *FUN_00152f54();
 u32 FUN_001696f4();
 f32 workScalarGet(const WorkScalar *);
 void nn_math_ARMv6_MTX34CopyAsm(void *, const void *);
@@ -60,7 +60,7 @@ extern "C" void FUN_00191bec(MovedPart *model, s32 cameraIndex)
         offsetof(ModelCameraFields, scalar) == 0x294 &&
         offsetof(ViewMethods, getResource) == 0x10 &&
         offsetof(CameraTransform, matrix) == 0x4C ? 1 : -1];
-    ManagedCamera *camera = cameraIndex != 0 ? FUN_0019e31c() : FUN_00152f54();
+    ManagedCamera *camera = cameraIndex != 0 ? FUN_0019e31c() : reinterpret_cast<ManagedCamera *>(FUN_00152f54());
     const CameraDescription *description = reinterpret_cast<const CameraDescription *>(camera);
     /* Camera-specific fields and the view virtual slots exceed the shared prefixes. */
     ModelCameraFields *fields = reinterpret_cast<ModelCameraFields *>(model);

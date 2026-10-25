@@ -2,6 +2,9 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/DataTable.h"
+#include "util/Random.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 #define COMMON_BG_DRIFT_COUNT 5
 #define COMMON_BG_RISE_COUNT 5
@@ -48,13 +51,9 @@ typedef char CommonBgModuleWorkOffsetCheck[
 extern "C" {
 extern CommonBgModule g_commonBg;
 
-void memClear(void *block, s32 size);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 void uiFadeOpen(void);
-u32 randNextInRange(u32 maximum);
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_001a0a1c(u32 handle);
 void campNotifyNoop(u32 handle);

@@ -1,5 +1,8 @@
 /* NON_MATCHING: fixed missing sequence-request size argument; retail hoists constant 1 before work load and has one extra word before the literal pool. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 /* The loading task's work: its state word is at +8. */
 struct LoadTask {
@@ -25,9 +28,7 @@ void FUN_00211d00(void);
 void statusBustUpAcquire(void);
 void FUN_0026f824(s32 value);
 void buttonHelpAcquireResources(void);
-void asdTMTexTableLoadSprites(s32 table);
 void FUN_002c5620(void);
-void asdSequenceRequest(u32 sequence, const void *argument, u32 size);
 void FUN_002c58c8(s32 a, s32 b);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
 void FUN_002fc1a8(void);

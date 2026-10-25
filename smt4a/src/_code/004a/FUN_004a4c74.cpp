@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc hoists the mode/entry base differently (retail reads the mode through the menu once, then through a +0x800 base kept in r5) and orders the shared tail call differently */
 #include "common.h"
+#include "shard/Shard004A.h"
 
 struct SelectEntry {
     /* 0x00 */ u8 unk00[4];
@@ -45,7 +46,6 @@ s32 utilityReturnSuccess(void *flags);
 s32 sceneTexturesAreLoaded(void);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_00202400(void);
-s32 flaggedValueHolderGetTotal(void *holder);
 ItemRecord *FUN_00184310(u32 itemId);
 void sysPlaySe(u32 id);
 void FUN_004a5d5c(SelectMenu *menu);
@@ -66,7 +66,7 @@ void FUN_004a4c74(SelectMenu *menu)
     if (menu->state.mode == 0) {
         FUN_00202400();
         if (menu->state.mode == 0) {
-            s32 total = flaggedValueHolderGetTotal(menu->totalHolder);
+            s32 total = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->totalHolder));
             ItemRecord *item = FUN_00184310(menu->state.entries[total].itemId);
             sysPlaySe((item->flags & 2) != 0 ? 0x121 : 0x30);
             FUN_004a5d5c(menu);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002cc36c` (_code @ 0x2cc36c, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: btlGetMainState. */
-extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */

@@ -8,7 +8,7 @@ extern void FUN_002c35b0(s32 mode);
 extern void FUN_002bdb44(void);
 extern void FUN_002c3530(s32 a, s32 b);
 extern void FUN_002c3a14(TitleScene *scene);
-extern void FUN_002c39a4(TitleScene *scene);
+extern void renderCtxSelectStereoLayout(TitleScene *scene);
 
 /* Resets the title scene: clears its state word and restarts the scene's subsystems; returns 0. */
 u32 titleSceneReset(void)
@@ -21,7 +21,7 @@ u32 titleSceneReset(void)
     FUN_002bdb44();
     FUN_002c3530(0, 0);
     FUN_002c3a14(g_titleScene);
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     return 0;
 }
 

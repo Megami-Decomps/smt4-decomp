@@ -17,7 +17,7 @@ int FUN_002bf380(...);
 int efctSetSpeed(void);
 int mtx44Copy(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44MultAsm(unsigned char [84], unsigned char [84], int *);
 
@@ -78,7 +78,7 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
@@ -120,7 +120,7 @@ unsigned int FUN_0011a434(void)
   
   temp_v0 = g_comWin;
   if (*(int *)(g_comWin + 8) != 0) {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     temp_v2 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar6 = (int *)(temp_v2 + 0x124c);

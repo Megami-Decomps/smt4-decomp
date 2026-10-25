@@ -2,11 +2,11 @@
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
 #include "battle/btlAction.h"
+#include "script/ScriptArgs.h"
 
 struct SlotManager;
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 scrGetArg(u32 index);
 void FUN_00250720(SlotManager *manager);
 void FUN_002505c0(s32, void *, u32, s32, s32, s32, s32);
 void FUN_002551ac(s32, void *, BtlActionRecord *, s32, s32, s32, s32, s32, s32,

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail copies the command cursor to r5 and passes r5 (mov r1, r5); built passes r0 directly */
 #include "shard/W6_W6Match5_ShaderBinding.h"
 
 extern "C" {
@@ -42,8 +41,9 @@ s32 FUN_0011b498(ModelShader *owner, const void *binary, u32 unused, s32 size)
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aTexCoord, "aTexCoord");
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMatrix, DAT_00410688);
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMaterialColor, DAT_00410678);
-    begin = FUN_002b7148();
-    end = FUN_002b5cf0(&owner->shader, reinterpret_cast<u32 *>(begin));
+    u32 *cursor = reinterpret_cast<u32 *>(FUN_002b7148());
+    begin = reinterpret_cast<u32>(cursor);
+    end = FUN_002b5cf0(&owner->shader, cursor);
     FUN_002af390(begin, reinterpret_cast<u32>(end));
     FUN_00126d14(owner);
     return 1;

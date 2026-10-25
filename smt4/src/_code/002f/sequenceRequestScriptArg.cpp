@@ -1,10 +1,10 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 
 extern "C" {
 /* Reads or updates the requested object state. */
 u32 scrGetArg(u32 index);
-void asdSequenceRequest(u32 state, const void *argument, u32 size);
 u32 sequenceRequestScriptArg(void)
 {
     u32 argument = scrGetArg(0);

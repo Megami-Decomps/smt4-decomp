@@ -15,7 +15,7 @@ int FUN_002b011c(void);
 int FUN_002b7d30(void);
 int FUN_002c1b64(...);
 int memAlloc(int, int, int, int);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int asdMemFree(void);
 int effectRestoreSavedRenderPairs(int, unsigned int);
 int FUN_002c733c(...);
@@ -58,7 +58,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: FUN_002b7d30. */
 /* Supplied declaration required: FUN_002c1b64. */
 /* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: effectRestoreSavedRenderPairs. */
 extern unsigned int FUN_002c501c(void);
@@ -243,7 +243,7 @@ joined_r0x0030e620:
       FUN_002630e0(&temp_v15,0,temp_v4);
       FUN_002630e0(&temp_v18,0,temp_v4,&temp_v18);
       FUN_002c1b64(g_titleScene,0);
-      FUN_002c39a4(g_titleScene);
+      renderCtxSelectStereoLayout(g_titleScene);
       FUN_00263028((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
       temp_v7 = asdCameraValueGet(temp_v7);

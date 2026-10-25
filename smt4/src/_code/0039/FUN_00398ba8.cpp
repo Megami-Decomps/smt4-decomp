@@ -37,7 +37,7 @@ extern RenderCtx *g_renderCtx;
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 s32 FUN_002c5d80(s32 a, s32 b);
 void FUN_002c1b64(RenderCtx *context, s32 arg);
@@ -56,7 +56,7 @@ void FUN_00398ba8(SlotPicker *picker)
     efctSetSpeed(scale);
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
 
-    FUN_002c39a4(g_renderCtx);
+    renderCtxSelectStereoLayout(g_renderCtx);
     FUN_002bed3c();
     RenderCtx *context = g_renderCtx;
     s32 state = FUN_002c5d80(1, 0);

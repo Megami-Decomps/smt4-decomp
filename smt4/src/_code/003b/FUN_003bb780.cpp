@@ -13,7 +13,7 @@ void efctSetSpeed(f32 alpha);
 f32 vec2GetSpeed(const void *animation);
 s32 FUN_0029e924(ListMenu *menu);
 s32 rangeLimitMin(ListMenu *menu);
-s32 FUN_00240d5c(ListMenu *menu);
+u32 flaggedEntryGetValueByState(ListMenu *menu);
 u32 flaggedValueHolderGetTotal(ListMenu *menu);
 void FUN_0022ade4(ListMenu *menu, s32 index, s32 value, s32 marked, s32 size);
 void FUN_0029ee6c(u8 *highlight, u32 color);
@@ -51,7 +51,7 @@ void FUN_003bb780(ListMenu *menu)
     s32 count = rangeLimitMin(menu);
 
     for (s32 i = 0; i < count; i++) {
-        if (FUN_00240d5c(menu) != i) {
+        if (flaggedEntryGetValueByState(menu) != i) {
             FUN_0022ade4(menu, i, first + i, 0, 36);
         }
     }
@@ -62,12 +62,12 @@ void FUN_003bb780(ListMenu *menu)
         s32 marked = menu->cursorMarked == 0 ? 1 : 2;
         u32 value = flaggedValueHolderGetTotal(menu);
 
-        FUN_0022ade4(menu, FUN_00240d5c(menu), value, marked, 37);
+        FUN_0022ade4(menu, flaggedEntryGetValueByState(menu), value, marked, 37);
         highlight = &menu->entries[flaggedValueHolderGetTotal(menu)]->highlight;
     } else {
         u32 value = flaggedValueHolderGetTotal(menu);
 
-        FUN_0022ade4(menu, FUN_00240d5c(menu), value, 0, 36);
+        FUN_0022ade4(menu, flaggedEntryGetValueByState(menu), value, 0, 36);
         highlight = NULL;
     }
     FUN_0029ee6c(highlight, 0x323232FF);

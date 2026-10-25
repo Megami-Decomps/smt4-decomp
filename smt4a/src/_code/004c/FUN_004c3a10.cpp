@@ -1,4 +1,5 @@
 #include "common.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: slot traversal uses zero-based cached counts; retail retains one-based count-plus-one iterator arithmetic and different registers. */
+/* NON_MATCHING: slot loop is now one-based like retail (count+1 guard); retail keeps the constant 1 and the zero in r5/r7 (push of r3/r7) and loads begin/end with ldm {r0,r2} where ours uses ldrd. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -26,7 +26,7 @@ extern u32 *DAT_005b3be0[];
 void sysMemClear(void *memory, u32 bytes);
 EnvironmentSlotArray *asdModelGetSlotArray1(u32 bank);
 EnvironmentSlotArray *asdModelGetSlotArray2(u32 bank);
-u32 FUN_001642e4(u32 resource, s32 mode, s32 flags, u32 size);
+u32 asdLoadFileSyncNoContext(u32 resource, s32 mode, s32 flags, u32 size);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 void FUN_003168b8(u32 *handle, u32 bank);
 }
@@ -35,7 +35,7 @@ static __inline void resetEnvironmentSlots(EnvironmentSlotArray *slots)
 {
     EnvironmentSlot **slot = slots->begin;
     s32 count = slots->end - slot;
-    for (s32 index = 0; index < count; ++index, ++slot) {
+    for (s32 index = 1; index <= count; ++index, ++slot) {
         if (*slot != NULL) {
             (*slot)->state = 0;
         }
@@ -58,7 +58,7 @@ extern "C" void asdEnvResetModelBank(u32 resource, u32 bank)
     state->unk10 = 0;
     resetEnvironmentSlots(asdModelGetSlotArray1(bank));
     resetEnvironmentSlots(asdModelGetSlotArray2(bank));
-    DAT_005b3bd8[bank] = FUN_001642e4(resource, 0, 1, 0x80);
+    DAT_005b3bd8[bank] = asdLoadFileSyncNoContext(resource, 0, 1, 0x80);
     u32 *handle = static_cast<u32 *>(FUN_00178b04(sizeof(u32),
         "c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdEnv.cpp", 0x48b));
     if (handle != NULL) {

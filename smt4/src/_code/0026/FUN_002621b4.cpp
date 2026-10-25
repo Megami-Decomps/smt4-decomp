@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_002621b4.h"
 
 extern "C" {
 void *dataTable40FindById(u32 id);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/qcMain.h"
 
 extern "C" {
 

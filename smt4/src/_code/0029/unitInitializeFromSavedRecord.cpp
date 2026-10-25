@@ -1,10 +1,10 @@
 #include "gamedata/SavedUnitInitialization.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/DevilRecord.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 bool gameRecordCopy(u32 id, RecordValue *record);
-void memClear(void *destination, u32 size);
 void bitsetSetBit(StatBlock *unit, u32 flag);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 

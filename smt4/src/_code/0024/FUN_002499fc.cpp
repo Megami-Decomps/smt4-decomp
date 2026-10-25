@@ -1,8 +1,8 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "util/SlotRangeSelect.h"
 
 // Selects a four-entry range beginning at 0, 55, 59, or 63.
-extern "C" void FUN_002499fc(s32 kind, u32* first, u32* count)
+extern "C" void FUN_002499fc(s32 kind, s32 *first, s32 *count)
 {
     switch (kind) {
     case 1:

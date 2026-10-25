@@ -1,9 +1,8 @@
 /* NON_MATCHING: The flattened HP members use a different addressing base and multiply-result register. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 extern "C" {
-s32 scrGetArg(u32);
-void scrSetResult(s32);
 
 u32 FUN_002f0388(void)
 {

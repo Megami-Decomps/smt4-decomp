@@ -1,13 +1,13 @@
 /* NON_MATCHING: close: relocation loops, string literals and debug traces match; built keeps the flags argument in r9 (retail r5, then spilled to [sp]) and combines the file-flag computation differently */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
 void *FUN_002b73a8(u32 size, u32 flags);
 void *fileLoadSync(char *path, u8 *size, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);
-void libc_strcpy(char *dst, const char *src);
 void textFormatBuffer(char *dst, const char *format, ...);
 
 extern const char DAT_00409270[];
@@ -34,7 +34,7 @@ static __inline void pathUseSlashes(char *path)
     char buffer[0x80];
     char *p;
 
-    libc_strcpy(buffer, path);
+    libc_strcpy(reinterpret_cast<unsigned int *>(buffer), reinterpret_cast<unsigned int *>(path));
     for (p = buffer; *p != '\0'; p++) {
         char *slash = FUN_0010024c(p, 0x5C);
 
@@ -42,7 +42,7 @@ static __inline void pathUseSlashes(char *path)
             *slash = '/';
         }
     }
-    libc_strcpy(path, buffer);
+    libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(buffer));
 }
 
 /* Loads the TMX container of table entry `index` (once), relocates its offsets into pointers and builds the node

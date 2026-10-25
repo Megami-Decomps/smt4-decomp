@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "test/BustupViewer.h"
 
 struct EnemyPopup {
     /* 0x000 */ u8 unk000[8];
@@ -16,7 +17,6 @@ extern "C" {
 extern GameStateA g_gameState;
 
 s32 FUN_00163aa4(u8 *sprite, f32 speed);
-s32 FUN_002e19f8(void);
 s32 vec2GetXInt(u8 *sprite);
 s32 vec2GetYInt(u8 *sprite);
 void pointConvertToFloat(u8 *point, s32 x, s32 y);

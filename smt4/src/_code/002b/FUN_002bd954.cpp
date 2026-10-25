@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail push {r4, r5, r6, r7, r8, r9, sl, lr} differs from recovered push {r4, r5, r6, r7, r8, lr}. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 // Private views of the records accessed by this initializer.
 struct InitSourceView {
@@ -42,14 +43,13 @@ struct InitRecordView {
     u8 unk8B;                  // 0x8b
 };
 
-extern "C" int memClear(u32* destination, int byteCount);
 
 // Clear the record, install its initial values, and copy fields from the source.
 extern "C" void FUN_002bd954(InitRecordView* record, u32 value0,
                               u32 value4, const InitSourceView* source,
                               u16 value38, f32 value20)
 {
-    memClear(reinterpret_cast<u32*>(record), 0x8c);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(reinterpret_cast<u32*>(record)), 0x8c));
     record->unk00 = value0;
     record->unk04 = value4;
     record->unk08 = -1;

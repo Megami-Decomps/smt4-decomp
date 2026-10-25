@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct DevilRecord {
 
 extern BtlState *btlGetMainState(void);
 extern DevilRecord *devilGetRecord(u32 id);
-extern s32 scrSetResult(s32 value);
 
 /* Script command: pushes whether any live, non-excluded battle unit is a devil of kind 4. */
 u32 scrCommBtlAnyUnitDevilKind4(void)

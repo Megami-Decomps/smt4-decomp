@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-void asdOperatorDelete(void);
 s32 jobStop(u32 job, s32 flag);
 
 typedef struct Object Object;
@@ -41,7 +41,7 @@ void taskShutdownGlobal(void)
         task->stopped = 1;
         jobStop(task->job, 0);
         if (DAT_00588e2c != NULL) {
-            asdOperatorDelete();
+            asdOperatorDelete(DAT_00588e2c);
             DAT_00588e2c = NULL;
         }
     }

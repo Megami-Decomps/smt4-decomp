@@ -11,8 +11,6 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 option, u32 bytes, s32 
 void asdTMTexTableLoadTmx(s32 type, s32 index);
 void FUN_0014afd0(s32 type, s32 index);
 void FUN_002e1208(s32 type, s32 index, s32 *outWidth, s32 *outHeight);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, u32 parent);
 
@@ -26,7 +24,7 @@ void staffRollAdvanceState(void);
 void staffRollSetComplete(void);
 void staffRollTickExitTimer(void);
 s32 FUN_00358918(u32 handle);
-s32 FUN_0037a1a0(u32 handle);
+s32 staffRollDrawSecondaryColumn(u32 handle);
 
 /* Builds the staff roll: loads the credit images, lays out the two columns of lines and starts
  * the calc process and the three draw tasks. */
@@ -80,7 +78,7 @@ void FUN_0032b688(s32 skipFade)
     work->task = asdProcessCreateSimple((const s8 *)"STAFFROLL C", 4, 0, 0, machineStep, staffRollClose, 0);
     taskCreateDraw((const s8 *)"STAFFROLL U", 0x7E, 0, 0, FUN_00358918, NULL, 0, work->task);
     taskCreateDraw((const s8 *)"STAFFROLL UR", 0xDA, 0, 0, FUN_00358918, NULL, 0, work->task);
-    taskCreateDraw((const s8 *)"STAFFROLL DD", 0xEC, 0, 0, FUN_0037a1a0, NULL, 0, work->task);
+    taskCreateDraw((const s8 *)"STAFFROLL DD", 0xEC, 0, 0, staffRollDrawSecondaryColumn, NULL, 0, work->task);
 }
 
 } /* extern "C" */

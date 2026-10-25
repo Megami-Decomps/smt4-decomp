@@ -27,7 +27,7 @@ int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 3 slot(s), 12 byte(s) */
@@ -76,7 +76,7 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -130,7 +130,7 @@ unsigned int FUN_00212538(void)
      (*(char *)(g_partyPanel + 0x322) != '\0')) {
     return 0;
   }
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v2 = g_titleScene;
   temp_v3 = FUN_002c5d80(1,0);
   piVar10 = (int *)(temp_v2 + 0x124c);

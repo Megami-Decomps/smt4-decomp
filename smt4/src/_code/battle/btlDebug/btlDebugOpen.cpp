@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
@@ -17,7 +18,6 @@ void asdListBoxAddItems(AsdListBox *list, const AsdListBoxEntry *entries, s32 co
 void asdListBoxSetByteValue(u32 list, s32 enabled);
 void jobSetText(u32 job, const char *text);
 void FUN_003c5150(BattleDebugWork *work, BtlMainState *state);
-void FUN_0025c2d0(void *block, s32 enabled);
 extern void *g_btlUiBlock;
 extern const AsdListBoxEntry btlDebugMenuEntries[11];
 extern const char btlDebugMenuTitle[]; // "btl Debug Menu"
@@ -48,7 +48,7 @@ void btlDebugOpen(BtlMainState *state, s32 menuMode)
         FUN_003c5150(work, state);
     }
     if (g_btlUiBlock != NULL) {
-        FUN_0025c2d0(g_btlUiBlock, 1);
+        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 1);
     }
 }
 }

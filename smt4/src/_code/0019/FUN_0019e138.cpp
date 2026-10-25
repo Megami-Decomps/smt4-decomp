@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/CommonBg/CommonBg.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -22,7 +24,6 @@ int FUN_0028a22c(void);
 int playSceneTimerSubStart(...);
 int uiFadeRelease(void);
 int gameReleaseDataReference(void);
-int FUN_002a0cc8(...);
 int asdTMTexTableLoadEntryAsync(...);
 int asdTMTexTableReleaseNode(...);
 int uiSpriteSetImageKeyframe(...);
@@ -113,7 +114,6 @@ extern int battleTalkGetBustState(void);
 /* Supplied declaration required: FUN_00289fa8. */
 /* Supplied declaration required: FUN_0028a0d0. */
 /* Supplied declaration required: FUN_0028a22c. */
-extern int FUN_0028a318(void);
 /* Supplied declaration required: FUN_0028a368. */
 /* Supplied declaration required: FUN_0028a924. */
 /* Supplied declaration required: FUN_0028b7f8. */

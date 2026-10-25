@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_002332e8(void *target, u32 a, u32 b);
-extern u32 FUN_00240d5c(void *block);
+extern u32 flaggedEntryGetValueByState(void *block);
 extern u32 FUN_0029e924(void *block);
 
 struct Target;
@@ -24,7 +24,7 @@ typedef struct Obj {
 
 void FUN_0022d7b0(Obj *obj, u32 arg)
 {
-    u32 a = FUN_00240d5c(obj->block);
+    u32 a = flaggedEntryGetValueByState(obj->block);
     u32 b = FUN_0029e924(obj->block);
 
     FUN_002332e8(obj->target, b, a);

@@ -9,7 +9,7 @@ int FUN_00231dec(...);
 int FUN_002bed3c(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(...);
+int renderCtxSelectStereoLayout(...);
 int FUN_003996c8(void);
 int FUN_00399d0c(...);
 int FUN_0039ba2c(...);
@@ -56,7 +56,7 @@ extern int FUN_002b8694(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 /* Supplied declaration required: FUN_003996c8. */
 /* Supplied declaration required: FUN_00399d0c. */
 /* Supplied declaration required: FUN_0039ba2c. */
@@ -305,7 +305,7 @@ LAB_0039f450:
     }
     if ((temp_v6 != 0 && temp_v4 != 0) &&
        (pairCopy(param_1 + 0x164,temp_v22), (unsigned int)temp_v22[0] < 0xc39f8001)) {
-      FUN_002c39a4(g_titleScene);
+      renderCtxSelectStereoLayout(g_titleScene);
       FUN_002bed3c();
       if ((g_gameState != 0x13) ||
          ((DAT_0049f920 != 6 && (!(DAT_0049f920 == 7 || DAT_0049f920 == 8))))) {

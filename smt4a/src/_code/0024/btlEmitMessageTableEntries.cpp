@@ -1,6 +1,7 @@
 /* NON_MATCHING: flag-pair load selection and loop register allocation differ from retail. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "util/BtlUnitGetSkillValue.h"
 
 struct BattleMessageEntry {
     char text[0x10]; /* 0x00 */
@@ -28,7 +29,6 @@ extern BattleMessageMask g_btlMessageFlagMasks;
 s32 libc_strlen(const char *);
 s32 libc_strcmp(const char *, const char *);
 BattleMessageFlags *FUN_003f0e20(void *battle, s32 target);
-s32 btlUnitGetSkillValue(void *unit);
 void FUN_004fdcd8(s32 value, s32, u32, s32, s32, u32, u16, const char *);
 
 // Emit the supported entries, filtering type 12 against the target's battle flags.

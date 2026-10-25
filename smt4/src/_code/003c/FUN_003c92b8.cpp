@@ -20,7 +20,7 @@ extern "C" {
 u32 uniteChooseAvailableDevilAtLevel(u32 first, u32 second, u32 result, u32 level);
 const u8 *dataTable05Sub0GetEntries(void);
 u32 demonFindClosestEligibleLevel(LevelLists *lists, s32 race, u32 level, s32 arg);
-s32 FUN_0029ea68(u16 id);
+s32 itemGetFlagBit1(u16 id);
 struct UnitRecordView {
     u8 unk00[0x46];
     u16 id;
@@ -63,7 +63,7 @@ u32 FUN_003c92b8(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *ent
     u32 chance = 25;
 
     for (u32 id = 0; id < 0x4B1; id++) {
-        if (devilGetRecord((u16)id)->race == 0x33 && FUN_0029ea68((u16)id) != 0) {
+        if (devilGetRecord((u16)id)->race == 0x33 && itemGetFlagBit1((u16)id) != 0) {
             chance = 10;
             break;
         }

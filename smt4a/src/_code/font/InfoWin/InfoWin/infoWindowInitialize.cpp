@@ -1,6 +1,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W4_Match3_InfoWindow.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct InfoWindowParameterDefaults {
     u32 primary[18];
@@ -21,7 +22,6 @@ void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void* memory, u32 size);
 void FUN_00156478(void);
 void FUN_00155ca8(void);
-u32 asdProcessCreateSimple(const char*, u32, u32, u32, void (*)(void), void (*)(void), u32);
 u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
 void paramsClearPacket(UiResourceParameters* parameters);
 
@@ -40,7 +40,7 @@ void infoWindowInitialize(void)
     }
     InfoWindow* window = g_infoWin;
     sysMemClear(window, sizeof(InfoWindow));
-    window->task = asdProcessCreateSimple("InfoWin Calc", 3, 0, 0, FUN_00156478, NULL, 0);
+    window->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("InfoWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00156478), NULL, 0);
     taskCreateDraw("InfoWin DrawUpLeft", 0x86, 0, 0, FUN_00155ca8, 0, 0, window->task);
     taskCreateDraw("InfoWin DrawUpRight", 0xE2, 0, 0, FUN_00155ca8, 0, 0, window->task);
     window = g_infoWin;

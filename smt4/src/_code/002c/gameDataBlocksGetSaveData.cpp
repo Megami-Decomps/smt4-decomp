@@ -1,4 +1,5 @@
 #include "shard/GameDataBlocks.h"
+#include "util/GameDataBlocksGetSaveData.h"
 
 extern "C" {
 

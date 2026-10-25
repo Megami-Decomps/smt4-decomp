@@ -4,10 +4,10 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 extern Point2 DAT_0059dc7c;
-void FUN_002e59f8(void* destination, const void* source, u32 size);
 EffectEditorOptions *FUN_00200bcc(EffectEditorOptions* options);
 void effEditorNodeChainApply(EffectEditorOptions* options);
 void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);

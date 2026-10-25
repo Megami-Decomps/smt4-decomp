@@ -19,7 +19,7 @@ typedef struct TitleOverlay {
 
 extern RenderCtx *g_titleScene;
 
-void FUN_002c39a4(RenderCtx *ctx);
+void renderCtxSelectStereoLayout(RenderCtx *ctx);
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
 s32 FUN_002c5d80(u32 kind, u32 arg);
@@ -39,7 +39,7 @@ void FUN_003844a0(TitleOverlay *overlay)
     if (overlay->state <= 2) {
         return;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002bed3c();
     efctSetSpeed(1.0f);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));

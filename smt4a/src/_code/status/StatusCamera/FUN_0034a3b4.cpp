@@ -1,6 +1,7 @@
 /* NON_MATCHING: defaults are not held in VFP registers across the clear; vector assignment and multiply-add lowering differ. */
 #include "status/StatusCamera.h"
 #include <stddef.h>
+#include "title/titleMain.h"
 
 extern "C" {
 extern StatusCameraWorkA *g_statusCamera;
@@ -10,7 +11,6 @@ void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
 void asdCameraInitializeDefaults(StatusCameraWorkA *camera, s32 mode);
 void FUN_0014f0dc(StatusCameraWorkA *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_001523b8(StatusCameraWorkA *camera, s32 mode, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
-void FUN_0036b824(StatusCameraWorkA *camera);
 void uiSetFloatPair(StatusCameraWorkA *camera, f32 first, f32 second);
 
 // Reset the status-screen camera, construct its view/lens and register it for rendering.
@@ -41,7 +41,7 @@ void FUN_0034a3b4(void)
         asdCameraInitializeDefaults(camera, 1);
         FUN_0014f0dc(camera, &camera->eye, &target, &up);
         FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
-        FUN_0036b824(camera);
+        FUN_0036b824(reinterpret_cast<u32>(camera));
         struct CameraRegistryView { u8 unk00[0xC]; StatusCameraWorkA *camera; };
         typedef char CameraRegistryOffsetCheck[offsetof(CameraRegistryView, camera) == 0xC ? 1 : -1];
         ((CameraRegistryView *)g_handleRegistry)->camera = camera;

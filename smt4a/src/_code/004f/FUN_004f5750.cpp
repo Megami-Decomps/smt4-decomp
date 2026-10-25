@@ -1,5 +1,6 @@
 /* NON_MATCHING: near: same shape, 156 rows against 152; register assignment differs (retail keeps the effect id in sl and the free-slot pointer in r9 and ends both loops at one shared `mov r0,#0`). */
 #include "common.h"
+#include "util/EntryIsValid.h"
 
 #define EFFECT_LIST_SIZE 50
 #define EFFECT_LIST_ENTRY_READY 4
@@ -48,7 +49,6 @@ s32 FUN_00320b44(f32 *scale, s32 index, u32 value);
 Vector3 FUN_004fad68(BtlEffectManager *manager, s32 mode, u32 param, s32 index);
 void FUN_0047ed10(u32 value, s32 a, s32 mode, f32 x, f32 y, f32 z);
 s32 FUN_0031ba34(s32 effect, s32 *slot, s32 a, s32 b, f32 x, f32 y, f32 z, f32 scale);
-s32 entryIsValid(s32 entry);
 void FUN_00260030(s32 entry);
 
 /* Starts effect `effect` for the manager: finds a free slot, plays the effect (scaled by its mode) at

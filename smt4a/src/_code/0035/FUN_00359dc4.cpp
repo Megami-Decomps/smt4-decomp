@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail emits two nop {0} hints after most calls, tail-calls nothing (returns 0 through r7) and splits the timer loop float arguments into hoisted s16/s17; built tail-calls overlayIsNotBusy/linkHolderApplyFlag and lacks the hints */
 #include "common.h"
+#include "util/CalleeContracts.h"
+#include "camp/CampCec/CampCecView.h"
 
 struct StatusScene {
     /* 0x00 */ u8 unk00[0x1C];
@@ -69,11 +71,9 @@ void outfitPreviewConfigureEquipment(struct OutfitPreview *preview, const struct
 StatusScene *overlayGetStatusScene(void);
 u32 overlayGetBuffer1(void);
 s32 buttonHelpGetPanelMode(void);
-void overlayIsNotBusy(void);
 void controllerApplyPreset(LinkHolder *links, s32 preset);
 void screenStartOrClear(u32 buffer, s32 frames);
 void characterInfoPanelPopulate(StatusDevil *devil, StatusCharacter *character, u32 extra);
-s32 devilIsTextureLoaded(s32 modelId, s32 arg);
 void resourceEntryMarkReleased(u32 resources, s32 index);
 void modelApplyNonzeroGroupRotation(u32 handle, void *controller);
 u32 gameGetPlayerData(void);

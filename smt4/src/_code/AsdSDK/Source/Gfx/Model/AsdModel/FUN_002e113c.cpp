@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists both group-table loads before the attach, emits two nop hints after the attach call and saves r8; branch layout differs. */
 #include "common.h"
+#include "gfx/LightRegistry.h"
 
 /* A scene group root: the scene node header, then its child list. */
 struct AsdSceneGroup {
@@ -21,7 +22,6 @@ extern void *g_asdModelTransformBuilder[2];    /* transform builder per group */
 
 void nw_gfx_SceneNode_AttachChild(AsdSceneGroup *parent, void *child);
 u8 FUN_002abbe8(u8 *children, void *child);
-void sceneTraverserVisit(void *traverser, void *builder);
 
 /* Moves a model node into scene group 0 or 1 (or detaches it with -1) and re-traverses every group
  * it left or joined. */

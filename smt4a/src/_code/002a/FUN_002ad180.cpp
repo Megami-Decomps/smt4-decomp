@@ -1,6 +1,8 @@
 /* NON_MATCHING: callback handle and shared draw coordinates recovered; push expression order and job-loop address sharing differ. */
 #include "camp/RenderCtx.h"
 #include "util/CalleeContracts.h"
+#include "shard/JobWork.h"
+#include "util/PackNibbles.h"
 
 namespace {
 /* The event job's work area: the list of jobs to draw and the position they are drawn at. */
@@ -22,11 +24,9 @@ struct EventTex {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern EventTex *g_eventTex;
-EventDrawWork *jobGetWork(u32 job);
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
 s32 FUN_001692ac(u32 a, u32 b);
-s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void FUN_002609d8(u32 job, s32 x, s32 y);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -34,7 +34,7 @@ void renderCtxResetColorScale(RenderCtxA *context);
 /* Draws the event's jobs under temporary render-state presets. */
 s32 FUN_002ad180(u32 job)
 {
-    EventDrawWork *work = jobGetWork(job);
+    EventDrawWork *work = reinterpret_cast<EventDrawWork *>(jobGetWork(job));
     RenderCtxA *context = g_renderCtx;
     s32 state = FUN_001692ac(1, 0);
     renderStackPush(&context->stackA, state);

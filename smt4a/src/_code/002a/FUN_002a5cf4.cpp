@@ -1,4 +1,5 @@
 #include "ui/PartyPanelState.h"
+#include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;
@@ -6,7 +7,6 @@ extern PartyPanelStateA *g_partyPanel;
 extern void FUN_0020b718(s32 a, s32 b);
 extern void FUN_0022e774(void);
 extern void FUN_00230ac0(s32 a, s32 b, s32 c, s32 d);
-extern void FUN_003344b4(s32 a, s32 b);
 extern void FUN_0038b548(s32 a);
 
 void FUN_002a5cf4(void)

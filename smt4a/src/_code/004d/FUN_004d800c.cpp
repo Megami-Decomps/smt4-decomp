@@ -32,7 +32,7 @@ extern const char DAT_005285b8[];
 extern const char DAT_00528588[];
 void sysMemClear(void *data, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
-s32 FUN_0046c4b4(void *system, u32 aocId);
+u32 FUN_0046c4b4(void *system, u32 aocId);
 void aocQueueType1e(void *system, u32 aocId, void **file, const char *path);
 void aocQueueType1f(void *system, u32 aocId, void **file, const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);

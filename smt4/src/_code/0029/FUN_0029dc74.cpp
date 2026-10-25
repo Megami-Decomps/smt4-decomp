@@ -1,4 +1,5 @@
 #include "gamedata/UnitStats.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ typedef struct DevilRecord {
 
 
 extern DevilRecord *devilGetRecord(u32 id);
-extern void memClear(void *buffer, s32 size);
 extern void bitsetSetBit(void *bits, u32 bit);
 extern void unitRecalculateEffectiveStats(StatBlock *block);
 

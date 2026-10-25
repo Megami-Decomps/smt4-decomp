@@ -1,4 +1,5 @@
 #include "gamedata/DataTable.h"
+#include "gamedata/SpriteTemplatePreferredDevil.h"
 
 struct AocSystem;
 

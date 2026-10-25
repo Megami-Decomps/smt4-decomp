@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail 61 vs built 58 rows; conditional table scanning and candidate-pointer register allocation differ. */
 #include "gamedata/DataTable.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct ConditionalMapRecordA {
     u8 map;
@@ -19,7 +20,6 @@ struct PlayerLevelView {
 extern "C" {
 extern void *g_aocSystem;
 ConditionalMapRecordA *FUN_00176124(void *, u32, u32);
-PlayerLevelView *gameGetPlayerData(void);
 s32 gameFlagIsSet(u32);
 
 // Prefer an add-on map record, otherwise search the base table's eligible records.
@@ -36,7 +36,7 @@ ConditionalMapRecordA *FUN_0015fa74(u32 map, u32 area)
         if (record->map == map && record->area == area &&
             (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
             (record->blockedFlag == 0 || !gameFlagIsSet(record->blockedFlag))) {
-            PlayerLevelView *player = gameGetPlayerData();
+            PlayerLevelView *player = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData());
             if (record->minimumLevel == 0 || record->minimumLevel <= player->level)
                 return record;
         }

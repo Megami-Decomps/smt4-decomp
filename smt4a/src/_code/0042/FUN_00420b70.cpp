@@ -2,6 +2,7 @@
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/DataTableSections.h"
 
 /* The shared controller's padding starts at 0x13; pointer members there would change its alignment. */
 struct SaveLoadCleanupBuffersView {
@@ -29,7 +30,6 @@ void asdMemFree(void *memory);
 void scrScriptProcessDestroy(ScriptResource *script);
 void asdTMTexTableReleaseNode(s32 table, s32 entry);
 void FUN_002c1648(void);
-void dataTableFree(s32 table);
 void msgWindowReset(void);
 void ptrListRemoveClearOwner(HandleRegistry *registry, u32 handle);
 void ifTouchRegionRemove(void);

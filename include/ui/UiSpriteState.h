@@ -196,4 +196,13 @@ typedef char UiSpriteFrameTrackOffsetsCheck[
     offsetof(UiSpriteFrameSequenceStep, key) == 8 &&
     sizeof(UiSpriteSource) == 0x20 && sizeof(UiSpriteState) == 0x8C ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void uiSpriteSelectAnim(void *sprite, s32 group);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

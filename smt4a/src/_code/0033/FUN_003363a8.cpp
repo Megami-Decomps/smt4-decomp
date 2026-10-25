@@ -12,7 +12,6 @@ BtlMainStateA *btlGetMainState();
 s32 btlScriptUnitHasFlags(BtlMainStateA *state);
 s32 ifTouchGetButtonHelpValue();
 void sysPlaySe(u32 sound);
-void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
 void FUN_0019de98(s32 layer, u32 color);
 void FUN_0020acd8(BtlUiObjCA *panel, u32 selection, u32 mode);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail recomputes the work + 0x2000 base after asdMemFreeSlot; here it is reused. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ typedef struct SharedResource {
 extern SharedResource g_gameGlobals;
 
 void asdMemFree(void *block);
-void asdMemFreeSlot(u32 slot);
 void FUN_0038b3f8(s32 effectId, s32 arg);
 void FUN_0040a244(void *model);
 void jobStop(u32 job, s32 arg);
@@ -43,7 +43,7 @@ static __inline void sharedResourceFreeBuffers(SharedResourceWork *work)
         asdMemFree(work->bufferBC);
         work->bufferBC = NULL;
     }
-    asdMemFreeSlot(work->slot);
+    asdMemFreeSlot(reinterpret_cast<void **>(work->slot));
 }
 
 /* Drops a reference to the shared resources and frees them with the last one. */

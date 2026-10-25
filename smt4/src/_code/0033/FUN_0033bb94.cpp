@@ -24,7 +24,7 @@ void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
 UnitRecord* gameGetUnitRecord(u32 id);
 void FUN_0029bbc8(u8 id);
-void FUN_0029c1c8(u32 id, u32 arg, s32 mode);
+void FUN_0029c1c8(u32 id, u32 a, u32 b);
 void FUN_0029bde4(UnitRecord* record);
 s32 recordContainsPairedId(UnitRecord* record);
 void FUN_002b7bca(void* base, s32 count, s32 size, s32 (*compare)(const void*, const void*));

@@ -1,15 +1,13 @@
-#include "romwright_types.h"
+#include "gamedata/FlagsB.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
-int flagsBGetPtr(int param_1)
-
+u8 *flagsBGetPtr(s32 index)
 {
-  int base = *(int *)((unsigned char *)&g_gameDataBlocks + 0x4);
-  return base + param_1 + 0x28060;
+    u8 *base = reinterpret_cast<u8 *>(g_gameDataBlocks.saveBlock);
+
+    return base + index + 0x28060;
 }
 
 } /* extern "C" */

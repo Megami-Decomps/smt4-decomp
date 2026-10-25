@@ -4,18 +4,16 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-void memClear(void *memory, u32 size);
 Table00Record *dataTable00FindById(u16 id);
 u32 FUN_00294090(s32 portraitId, u32 mode);
 s32 FUN_002c1d5c();
 s32 FUN_001dfc64(u32 handle);
 void FUN_002db92c(u32 handle);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 // Start an NPC portrait animation in the region determined by its horizontal position.
 void FUN_00252190(u32 npcId, u32 mode, s32 x)
 {
@@ -54,6 +52,6 @@ void FUN_00252190(u32 npcId, u32 mode, s32 x)
     }
     work->display.screenRegion = region;
     work->speed = 0.33f;
-    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
 }
 }

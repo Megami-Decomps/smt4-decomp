@@ -1,3 +1,4 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: native text-scale calculation folds to a constant; saved-register and outgoing argument scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
@@ -11,7 +12,6 @@ struct MenuCaptionView {
 typedef char MenuCaptionOffset[offsetof(MenuCaptionView, caption) == 0x84 ? 1 : -1];
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
 SpriteInfo *FUN_001834a4(u32 group, u32 id);
 void FUN_00162790(u32 layer, u32 color, const u16 *text, f32 x, f32 y, f32 scale, f32 angle, f32 alpha);

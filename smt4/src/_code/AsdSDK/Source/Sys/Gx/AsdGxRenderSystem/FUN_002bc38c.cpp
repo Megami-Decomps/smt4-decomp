@@ -14,7 +14,6 @@ typedef char AsdGxSurfaceDescriptionSize[sizeof(AsdGxSurfaceDescription) == 0x18
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
-u32 osVirtToPhysAddress(const void *);
 extern const char DAT_00409a68[];
 
 void FUN_002bc38c(RenderTargetFramebuffer *framebuffer,
@@ -92,7 +91,7 @@ void FUN_002bc38c(RenderTargetFramebuffer *framebuffer,
                 break;
             }
             surface->data = data;
-            surface->physicalAddress = osVirtToPhysAddress(data);
+            surface->physicalAddress = osVirtToPhysAddress(reinterpret_cast<u32>(data));
         }
         storage->width = source->width;
         storage->height = source->height;

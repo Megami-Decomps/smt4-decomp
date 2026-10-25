@@ -1,4 +1,5 @@
 #include "map/mapDepart.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct TransitionLocation {
     s16 mapId;
@@ -9,7 +10,6 @@ extern "C" {
 extern GameState g_gameState;
 void *jyoucyuGetTableEntry(s32);
 s32 gameStateIsFlagSetAndLarge(void);
-void asdSequenceRequest(s32, const void *, u32);
 
 // Request the map transition associated with the current game-state location.
 u32 mapRequestSavedLocationTransition(void)

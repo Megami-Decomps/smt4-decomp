@@ -1,4 +1,3 @@
-/* NON_MATCHING: render-stack push registers and text-position VFP conversion scheduling differ. */
 #include "StaffRoll/StaffRollMain.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -9,11 +8,16 @@ struct StaffRollDrawView {
     struct { f32 x, y; } lines[12];
 };
 
+/* Pushes the evaluated state on the scene's first stack (the stack is located after the state is evaluated). */
+static __inline void titleScenePushA(RenderCtx *scene, int state)
+{
+    renderStackPushCounted(&scene->stackA, state);
+}
+
 extern "C" {
 extern StaffRollWork *g_staffRoll;
 extern RenderCtx *g_titleScene;
 void FUN_002bed3c(void);
-void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 type, u32 flags);
 void efctSetSpeed(f32 speed);
 
@@ -22,11 +26,14 @@ u32 FUN_002e0820(void)
 {
     StaffRollDrawView *credits = (StaffRollDrawView *)g_staffRoll;
     FUN_002bed3c();
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     RenderCtx *context = g_titleScene;
-    renderCtxPushA(context, FUN_002c5d80(1, 0));
-    for (u32 i = 0; i < 12; ++i)
-        FUN_002bf288(2, 0x34, i * 1000, (s32)credits->lines[i].x, (s32)credits->lines[i].y, 2);
+    titleScenePushA(context, FUN_002c5d80(1, 0));
+    for (u32 i = 0; i < 12; ++i) {
+        s32 x = (s32)credits->lines[i].x;
+        s32 y = (s32)credits->lines[i].y;
+        FUN_002bf288(2, 0x34, i * 1000, x, y, 2);
+    }
     FUN_002bed3c();
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);

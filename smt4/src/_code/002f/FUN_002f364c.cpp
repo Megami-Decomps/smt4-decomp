@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail tests enabled before calculating the word and mask; compiler schedules it afterward. */
 #include "common.h"
 
 struct MapToggleFlags {
@@ -12,12 +11,10 @@ extern "C" MapToggleFlags* gameGetMapBlock();
 extern "C" void FUN_002f364c(s32 flagIndex, s32 enabled)
 {
     MapToggleFlags* map = gameGetMapBlock();
-    u32 bits = map->flags[flagIndex / 32];
-    u32 mask = 1u << (flagIndex % 32);
+    s32 word = flagIndex / 32;
     if (enabled != 0) {
-        bits |= mask;
+        map->flags[word] |= 1 << (flagIndex % 32);
     } else {
-        bits &= ~mask;
+        map->flags[word] &= ~(1 << (flagIndex % 32));
     }
-    map->flags[flagIndex / 32] = bits;
 }

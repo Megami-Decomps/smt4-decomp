@@ -234,7 +234,7 @@ void FUN_00331ecc(void)
         FUN_00262d40();
         iVar7 = FUN_002485b8();
         if (iVar7 == 0) {
-          FUN_0029e648(1,0);
+          messageBannerInitSelection(1,0);
           messageInitializeSavedBanner();
         }
         iVar7 = FUN_00241a14();
@@ -569,7 +569,7 @@ LAB_003323f0:
                   FUN_00262d40();
                   iVar10 = FUN_002485b8();
                   if (iVar10 == 0) {
-                    FUN_0029e648(1,0);
+                    messageBannerInitSelection(1,0);
                     messageInitializeSavedBanner();
                   }
                   iVar10 = FUN_00241a14();

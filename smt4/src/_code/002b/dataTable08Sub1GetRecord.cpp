@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ extern AocSystem *g_aocSystem;
 
 extern Record *FUN_0014148c(AocSystem *system, u32 id);
 extern void *dataTableGet(s32 table, s32 section);
-extern Record *dataTableGetEntries(void *section);
 extern u32 dataTableGetCount(void *section);
 extern Record *libc_bsearch(Record *key, Record *entries, u32 count, s32 size, u8 *compare);
 
@@ -38,7 +38,7 @@ Record *dataTable08Sub1GetRecord(u16 id)
     }
     section = dataTableGet(8, 1);
     if (section != NULL) {
-        Record *entries = dataTableGetEntries(section);
+        Record *entries = reinterpret_cast<Record *>(dataTableGetEntries(section));
         u32 count = dataTableGetCount(section);
 
         return libc_bsearch(&key, entries, count, sizeof(Record), (u8 *)0x001385bc); /* comparator in the code */

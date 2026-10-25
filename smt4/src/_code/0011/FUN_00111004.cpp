@@ -8,7 +8,6 @@ extern AocMain *g_aocMain;
 extern AocSystem *g_aocSystem;
 AocJobWork *jobGetWork(u32 handle);
 s32 FUN_00121e50(AocSystem *system);
-s32 FUN_002ad1e0(AocObjB *event);
 void aocReleasePackageOwner(AocSystem *system);
 void FUN_002ba8f4(u32 *waitHandle);
 s32 FUN_002c40f8(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);

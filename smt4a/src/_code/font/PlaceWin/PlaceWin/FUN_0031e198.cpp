@@ -3,6 +3,7 @@
 #include "font/PlaceWin.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct PlaceWindowResourceTable {
     u8 first[0x18];
@@ -16,8 +17,6 @@ void *asdMemoryAllocTracked(u32 pool, u32 alignment, u32 flags, u32 bytes, u32 c
 void sysMemClear(void *destination, u32 bytes);
 u32 placeWindowUpdateAnimation(u32 job);
 u32 placeWinDraw(u32 job);
-u32 asdProcessCreateSimple(const char *name, u32 group, u32, u32,
-                           u32 (*update)(u32), u32, u32);
 u32 taskCreateDraw(const char *name, u32 group, u32, u32,
                    u32 (*draw)(u32), u32, u32, u32 parent);
 void paramsClearPacket(void *packet);
@@ -34,7 +33,7 @@ void FUN_0031e198(void)
     }
     PlaceWindow *window = g_placeWin;
     sysMemClear(window, sizeof(PlaceWindow));
-    u32 job = asdProcessCreateSimple("PlaceWin Calc", 3, 0, 0, placeWindowUpdateAnimation, 0, 0);
+    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("PlaceWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(placeWindowUpdateAnimation), 0, 0);
     window->job = job;
     taskCreateDraw("PlaceWin DrawUpLeft", 0x86, 0, 0, placeWinDraw, 0, 0, job);
     taskCreateDraw("PlaceWin DrawUpRight", 0xE2, 0, 0, placeWinDraw, 0, 0, window->job);

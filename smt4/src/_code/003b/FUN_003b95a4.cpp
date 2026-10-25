@@ -2,6 +2,7 @@
 #include "font/PlaceWin.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/DataTable33.h"
 
 /* The record the info panel shows (observed prefix). */
 struct PanelRecord {
@@ -55,8 +56,6 @@ void FUN_00234f5c(NodeEnableOwner *owner, const char *first, const char *second)
 PanelSelection *FUN_0022b8c0(void *selection);
 void FUN_0022afc4(NodeEnableOwner *owner, s32 a, s32 b);
 void FUN_00234cd8(NodeEnableOwner *owner, s32 kind, s32 flag);
-const char *dataTable33GetEntries(s32 *count);
-s32 FUN_0022afb0(s32 *count, s32 modelSet);
 u32 fileLoadSync(const char *path, u32 *size, u32 flags);
 void objModelCreateFromSource(NodeEnableOwner *owner, u32 file, u32 size);
 void modelSetVisible(NodeEnableOwner *owner, s32 visible);
@@ -91,7 +90,7 @@ void FUN_003b95a4(PanelWork *work)
         FUN_00234cd8(work->modelOwner, selection->kind, 1);
         if (work->record->modelSet >= 0) {
             s32 count;
-            const char *entries = dataTable33GetEntries(&count);
+            const char *entries = static_cast<const char *>(dataTable33GetEntries(&count, work->record->modelSet));
 
             if (entries != NULL) {
                 s32 i;

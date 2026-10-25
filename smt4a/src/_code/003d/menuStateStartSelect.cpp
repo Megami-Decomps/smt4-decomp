@@ -1,10 +1,10 @@
 #include "ui/MenuState.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 
 extern MenuState *g_menuState;
 
-int uiSpriteSelectAnim(u8 *panel, int arg);
 
 /* Stores the selection byte and starts the menu's panel animations (mode 1, or 5 for the two-panel layout). */
 void menuStateStartSelect(u8 selection)

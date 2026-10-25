@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 200 rows); retail hoists the 0x424 literal and keeps the per-row loops as separate counters */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 // One animated row widget (0x8c bytes each).
 struct RowWidget {
@@ -23,9 +24,6 @@ s32 FUN_0029ee54(void* list);
 s32 FUN_0029efc0(void* list);
 s32 FUN_0029efa8(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
-u32 dataTableGet(u32 table, u32 index);
-TableRecord* dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 u32 FUN_002907a8(void);
 u32 FUN_002bf4f8(u32 group, u32 index);
 s32 uiScrollHandleActionsOrTouch(void* list, u32 a, s32 b, s32 c, s32 d, s32 e, u8* flags, s32 f, s32 g);
@@ -60,8 +58,8 @@ void FUN_0019514c(u8** screenRef)
         s32 count = FUN_0029ee54(list);
         for (s32 i = 0; i < count; i = i + 1, count = FUN_0029ee54(list)) {
             u32 id = reinterpret_cast<s16*>(screen + 0x424)[i];
-            u32 table = dataTableGet(0x37, 0);
-            TableRecord* entries = dataTableGetEntries();
+            void *table = dataTableGet(0x37, 0);
+            TableRecord* entries = static_cast<TableRecord*>(dataTableGetEntries(table));
             if (id < dataTableGetCount(table) && &entries[id] != NULL && entries[id].id < 0) {
                 reinterpret_cast<u32*>(screen + 0x35c)[i] = FUN_002907a8();
             }

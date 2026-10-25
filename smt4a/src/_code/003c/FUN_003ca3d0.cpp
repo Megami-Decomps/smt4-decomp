@@ -1,5 +1,6 @@
 /* NON_MATCHING: allocation initialization uses a branch instead of predication; terminal-state tests and constant-one lifetime differ. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct SaintGermainScriptWork {
     u32 job;
@@ -23,9 +24,7 @@ u32 scrGetArg(u32);
 void *asdOperatorNew(u32);
 s32 FUN_00349b14(u32);
 s32 FUN_003710f8(u32);
-u32 asdProcessCreateSimple(const s8 *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const s8 *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
-void asdLoadFileAsyncSimple(const char *, void **, s32);
 s32 loadSlotIsLoaded(u32);
 void loadSlotRequestAsync(u32, u32);
 void campButtonHelpAcquire();
@@ -51,8 +50,8 @@ u32 FUN_003ca3d0()
         work->job = asdProcessCreateSimple(DAT_00533364, 4, 0, 0, FUN_00349b14, NULL, 0);
         taskCreateDraw(DAT_00533350, 0xEB, 0, 0, FUN_003710f8, NULL, 0, reinterpret_cast<void *>(work->job));
         work->argument = argument;
-        asdLoadFileAsyncSimple(DAT_0053328c, &work->messages, 0);
-        asdLoadFileAsyncSimple(DAT_00533264, &work->scriptData, 0);
+        asdLoadFileAsyncSimple(DAT_0053328c, reinterpret_cast<u32 *>(&work->messages), 0);
+        asdLoadFileAsyncSimple(DAT_00533264, reinterpret_cast<u32 *>(&work->scriptData), 0);
         work->ownsSlot = 0;
         if (!loadSlotIsLoaded(0x4F)) {
             loadSlotRequestAsync(0x4F, 0);

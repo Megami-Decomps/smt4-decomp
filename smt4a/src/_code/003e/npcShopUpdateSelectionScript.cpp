@@ -1,5 +1,6 @@
 /* NON_MATCHING: the cancel/special-selection state blocks are placed before initialization instead of at the function tail; all other instructions match. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct ScriptProcess;
 struct NpcShopNameEntry {
@@ -27,13 +28,12 @@ extern const char g_npcShopSelectSpecialEntryName[]; // "npcShop_Select_01"
 extern const char g_npcShopSelectState5EntryName[]; // "npcShop_Select_03"
 extern const char g_npcShopSelectDefaultEntryName[]; // "npcShop_Select_00"
 const char *FUN_0015f858(u32 id, s32 mode);
-void FUN_003180c4(u32 index, const char *name);
 void FUN_003c1060();
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(ScriptProcess *script, s32 entry);
 s32 scrRunOpcodesStub(ScriptProcess *script);
 bool panelIsMissingOrFlagClear();
-s32 messageGetChoiceResult();
+u32 messageGetChoiceResult();
 void FUN_003c3e14();
 void obj04Finish();
 }

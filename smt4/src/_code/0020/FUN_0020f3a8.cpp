@@ -13,7 +13,6 @@ extern "C" {
 extern BattleOverlayView *g_btlMainState;
 extern RenderCtx *g_titleScene;
 s32 FUN_002c5d80(u32 mode, u32 flags);
-void FUN_002c39a4(RenderCtx *context);
 void FUN_002c1b64(RenderCtx *context, s32 mode);
 void FUN_002c0944(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -24,7 +23,7 @@ u32 FUN_0020f3a8(void)
 {
     u32 color = g_btlMainState->overlayColor;
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002c1b64(g_titleScene, 0);
     FUN_002c0944(color, color, color, color, 0.0f, 0.0f, 320.0f, 240.0f, 0.0f);
     forwardRecoveredCallback();

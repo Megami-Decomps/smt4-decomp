@@ -9,7 +9,6 @@ s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void FUN_003592dc(u32 job);
-void FUN_004aa780(void *block, s32 arg);
 
 extern void *g_btlUiBlock;
 extern BtlUiCloseState DAT_005715f8;
@@ -22,7 +21,7 @@ void FUN_00314ef8(void)
     BtlUiHelper *helper;
 
     if (g_btlUiBlock != NULL) {
-        FUN_004aa780(g_btlUiBlock, 0);
+        FUN_004aa780(reinterpret_cast<u32>(g_btlUiBlock), 0);
     }
     helper = DAT_005715f8.helper;
     if (helper != NULL) {

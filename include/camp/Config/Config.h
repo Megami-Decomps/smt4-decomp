@@ -55,4 +55,8 @@ typedef char ConfigWorkALayoutCheck[
     offsetof(ConfigWorkA, hasType24A) == 0x4C0 &&
     offsetof(ConfigWorkA, hasType24B) == 0x4C1 ? 1 : -1];
 
+extern "C" {
+u32 FUN_002e50d4(void);
+}
+
 #endif

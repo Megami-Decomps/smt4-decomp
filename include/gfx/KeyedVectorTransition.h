@@ -29,4 +29,13 @@ struct KeyedVectorTransition {
 typedef char KeyedVectorPresetSizeCheck[sizeof(KeyedVectorPreset) == 0x30 ? 1 : -1];
 typedef char KeyedVectorTransitionSizeCheck[sizeof(KeyedVectorTransition) == 0x70 ? 1 : -1];
 typedef char KeyedVectorTransitionOffsets[offsetof(KeyedVectorTransition, keys) == 0xc && offsetof(KeyedVectorTransition, current) == 0x2c && offsetof(KeyedVectorTransition, keyIndex) == 0x5c && offsetof(KeyedVectorTransition, recordIndex) == 0x6d ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *FUN_001ab9b0(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

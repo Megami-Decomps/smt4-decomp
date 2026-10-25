@@ -1,6 +1,8 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/MenuState.h"
 #include "AsdSDK/AsdDebug.h"
+#include "ui/UiSpriteState.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct ComWinScaleKey {
     f32 x, y;
@@ -34,14 +36,11 @@ u32 FUN_00156230();
 u32 FUN_0015519c();
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *memory, u32 size);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 mode,
-    u32 (*update)(), u32 (*destroy)(), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 mode,
     u32 (*draw)(), u32 (*destroy)(), void *work, u32 parent);
 void paramsClearPacket(UiResourceParameters *parameters);
 
 void uiSpriteInitializeState(UiSpriteState *, u32, u32, u32, UiSpriteSource *, u16, f32);
-void uiSpriteSelectAnim(UiSpriteState *, s32 animation);
 
 void comWinInitialize()
 {
@@ -51,7 +50,7 @@ void comWinInitialize()
     }
     MenuState *menu = g_menuState;
     sysMemClear(menu, sizeof(MenuState));
-    menu->process = asdProcessCreateSimple("ComWin Calc", 3, 0, 0, FUN_00156230, NULL, NULL);
+    menu->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ComWin Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00156230), NULL, NULL);
     taskCreateDraw("ComWin DrawUpLeft", 0x86, 0, 0, FUN_0015519c, NULL, NULL, menu->process);
     taskCreateDraw("ComWin DrawUpRight", 0xE2, 0, 0, FUN_0015519c, NULL, NULL, menu->process);
     menu = g_menuState;

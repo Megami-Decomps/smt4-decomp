@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "gfx/LightRegistry.h"
 #include "shard/S1Light.h"
+#include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 
 /* A batch of registered lights attached to one scene group. */
 struct LightBatchOwner {
@@ -37,7 +38,6 @@ extern LightRegistry *DAT_005b3c98[2];
 extern void *g_asdModelTransformBuilder[2];
 extern void *g_effAsdLightHandle[2];
 extern LightCount g_asdLightCount[2];
-void asdLightActivate(s32 index);
 void FUN_0018e9d8(void *parent, LightRegistry *child);
 void sceneTraverserVisit(void *traverser, void *root);
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: visibility and registration behavior are recovered; the flattened-grid loop, handle-list reloads, and loop entry layout differ. */
 #include "common.h"
+#include "classes/Obj4209cc.h"
 
 struct AreaHandleList {
     /* 0x00 */ u8 unk00[0x10];
@@ -27,7 +28,6 @@ extern "C" {
 extern AreaHandleVisibilityState *g_lmapMainState;
 extern s8 DAT_005f0c04[];
 extern void *g_handleRegistry;
-void *FUN_0040619c(AreaHandleList *list, u32 index);
 void ptrListRemoveClearOwner(void *registry, void *object);
 void handleRegistryRegisterObject(void *registry, void *object);
 void FUN_00399290(u32 index, s32 visible);

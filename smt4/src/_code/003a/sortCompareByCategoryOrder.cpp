@@ -12,15 +12,15 @@ typedef struct CategoryRow {
     /* 0x2C */ u16 order;
 } CategoryRow;
 
-extern SortRecord *FUN_002498ec(u16 id);
+extern SortRecord *table8Type5FindById(u16 id);
 extern int FUN_0024c52c(u16 category);
 extern CategoryRow *dataTable40FindById(u16 category);
 
 /* Compare function for sorting ids: by category rank, then by the category row's order (descending), then by id. */
 int sortCompareByCategoryOrder(const u16 *a, const u16 *b)
 {
-    SortRecord *recordA = FUN_002498ec(*a);
-    SortRecord *recordB = FUN_002498ec(*b);
+    SortRecord *recordA = table8Type5FindById(*a);
+    SortRecord *recordB = table8Type5FindById(*b);
     int diff = FUN_0024c52c(recordA->category) - FUN_0024c52c(recordB->category);
 
     if (diff == 0) {

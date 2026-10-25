@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail clears ids with __aeabi_memset4 (4-aligned) and stores group/firstItem/itemCount with one stmib before the other fields. */
+/* NON_MATCHING: retail clears ids with __aeabi_memset4 (4-aligned) and stores group/firstItem/itemCount with one stmib before the other fields (built: memset, strd+str after the others). */
 #include "shard/MessageIdList.h"
 #include <string.h>
 
@@ -23,7 +23,7 @@ void FUN_00233670(MessageIdList *list, u32 group, s32 firstItem, s32 itemCount)
             ifTouchRegionRemove();
         }
         list->idCount = 0;
-        memset(list->ids, 0xff, sizeof(list->ids));
+        memset(list->ids, -1, sizeof(list->ids));
     }
     s32 item;
     for (item = 0; item < itemCount; item++) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail hoists the result flag into r9 before the record check, keeps the requirement base as record + 0x100 with the 0x6C field offset folded into the loads and shares one exit; the control flow is the same (about 185 diff lines). */
 #include "common.h"
 #include <stddef.h>
+#include "map/mapDepart.h"
 
 /* One requirement of a quest record. */
 struct QuestRequirement {
@@ -34,7 +35,6 @@ extern "C" {
 QuestRecord *dataTable1bOr1cGetRecord(u32 id);
 s32 gameGetOptionProgressStatus(void);
 s32 FUN_00287800(void);
-s32 FUN_0027d98c(void);
 s32 gameCountUnits(void);
 SlotTable *gameGetSlotTable(void);
 UnitRecord *gameGetUnitRecord(s32 slot);

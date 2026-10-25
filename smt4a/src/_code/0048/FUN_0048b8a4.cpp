@@ -2,6 +2,7 @@
 #include "ui/NaviCategorySelection.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 s32 FUN_00163aa4(UiSpriteState *, f32);
@@ -14,7 +15,6 @@ void pointConvertToFloat(FloatPoint *, s32, s32);
 u32 NaviMain_GetCurrentMap();
 u32 naviGetActiveStateValue(void *);
 void naviMainSetCurrentMap(void *, u32);
-void FUN_00492ac8(void *, u32);
 
 void FUN_0048b8a4(NaviCategorySelectionWork *owner)
 {
@@ -52,7 +52,7 @@ void FUN_0048b8a4(NaviCategorySelectionWork *owner)
         if (map != naviGetActiveStateValue(&work->scene)) {
             map = naviGetActiveStateValue(&work->scene);
             naviMainSetCurrentMap(&work->scene, map);
-            FUN_00492ac8(&work->scene, 0);
+            FUN_00492ac8(reinterpret_cast<u32>(&work->scene), 0);
             FUN_0048821c(owner, map);
         }
         return;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the early `return 1` is built as `moveq r0, #1; beq` to its own epilogue; retail branches straight to the shared `mov r0, #1; pop` at the end. */
 #include "common.h"
+#include "camp/ButtonHelp/ButtonHelp.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_002bff50(void);
 s32 messageForwardDefaultMode(void *buffer, s32 arg1, s32 step, s32 arg3, s32 arg4);
 int FUN_0029016c(void *object, s32 arg);
 int FUN_00290248(void *object);
-int FUN_002900d0(void);
 
 /* Script command: applies the confirmed message step by step through scrWork 1; finishes (returns 1) when done. */
 u32 scrComm_Message_ConfirmAndApplySimple(void)

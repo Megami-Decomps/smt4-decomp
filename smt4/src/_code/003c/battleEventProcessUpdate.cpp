@@ -1,5 +1,7 @@
 /* NON_MATCHING: script-load transition registers and shared continuation/cold-block layout differ from retail. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/DataTable.h"
 
 struct BattleEventWork {
     /* 0x00 */ u32 state;
@@ -29,14 +31,12 @@ extern void *g_aocSystem;
 extern void *DAT_00435d18;
 extern const char DAT_00400968[];
 extern const char DAT_00400938[];
-void memClear(void *destination, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
 s32 FUN_0022a2c4(void *system, u32 id);
 void aocQueueType1e(void *system, u32 id, void **output, const char *name);
 void aocQueueType1f(void *system, u32 id, void **output, const char *name);
 void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 void *dataTableFileGetTable(void *file, u32 index);
-void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 u32 FUN_0022a190(BattleEventWork *work, BattleEventContext *context);
 u32 FUN_0022a07c(BattleEventWork *work, BattleEventContext *context);

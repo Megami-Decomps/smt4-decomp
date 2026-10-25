@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ s32 FUN_00163aa4(void *sprite, f32 rate);
 s32 vec2GetXInt(void *sprite);
 s32 vec2GetYInt(void *sprite);
 void pointConvertToFloat(void *point, s32 x, s32 y);
-s32 FUN_002e19f8(void);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void FUN_00168980(s32 sound);
 

@@ -1,5 +1,6 @@
-/* NON_MATCHING: near: retail does not hoist the constants 5/6 into registers (uses mov r0 each time, and stores mode+step with one stm), ours keeps 5/6/7 in r7/r8/r9 and pushes more saved registers (147 rows against 150). */
+/* NON_MATCHING: near (148 rows against 150): the hoisted constants and stm of mode+step now match; retail materialises the nextStep zero with its own `mov r1,#0` (two sites) where ours reuses the hoisted zero, and orders the hoisted zero first in the prologue. */
 #include "common.h"
+#include "util/FUN_00333dc8.h"
 
 /* The status-down (cure) menu task (observed fields). */
 struct StatusDownTask {
@@ -20,9 +21,8 @@ extern "C" {
 void sysPlaySe(u32 id);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
-void FUN_00333dc8(s32 value);
 void obj04Finish(void);
-void FUN_0037e078(void);
+void statusDownEnterState3(void);
 void stateHolderEnterState7(void);
 void statusDownEnterStateSeven(void);
 s32 FUN_003a7b74(void);
@@ -34,6 +34,14 @@ s32 stateHolderStateIs8Or10(void);
 u16 stateHolderGetCurrentEntry(void);
 s32 stateHolderStateIs0xD(void);
 s32 statusDownIsStateEleven(void);
+
+/* Hands control to the next menu `mode` and rewinds this task's step. */
+static __inline void statusDownLeave(StatusDownTask *task, u32 mode)
+{
+    task->nextStep = 0;
+    task->nextMode = mode;
+    task->step = 0;
+}
 
 /* Runs one frame of the status-down menu: pick the target, confirm with a choice, then either apply
  * the cure or fall back to the previous menu. Always returns 0. */
@@ -91,12 +99,10 @@ u32 FUN_00417234(StatusDownTask *task)
         if (stateHolderStateIs0xD() == 0) {
             break;
         }
-        FUN_0037e078();
+        statusDownEnterState3();
         task->step = 6;
     case 6:
-        task->nextStep = 0;
-        task->nextMode = 5;
-        task->step = 0;
+        statusDownLeave(task, 5);
         if (task->useAltSe == 0) {
             sysPlaySe(0x67);
         } else {
@@ -116,9 +122,7 @@ u32 FUN_00417234(StatusDownTask *task)
         }
         FUN_00333dc8(0);
         if (messageGetChoiceResult() == 0) {
-            task->nextStep = 0;
-            task->nextMode = 6;
-            task->step = 0;
+            statusDownLeave(task, 6);
         } else {
             stateHolderEnterState7();
             task->step = 1;

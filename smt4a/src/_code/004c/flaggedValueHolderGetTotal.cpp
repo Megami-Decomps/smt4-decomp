@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "shard/Shard004A.h"
 
 extern "C" {
 u32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);

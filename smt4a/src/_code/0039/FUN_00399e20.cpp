@@ -1,6 +1,7 @@
 /* NON_MATCHING: recovered 128-byte text/8-byte scoped range buffers and formatter contract; initial button-help global load is scheduled after argument saves. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* A skill record as the panel reads it. */
 struct PanelSkill {
@@ -39,7 +40,6 @@ PanelPlayerData *gameGetPlayerData(void);
 PanelSkill *dataTable08Sub2GetRecord(u32 id);
 void FUN_002c0940(char *out, s32 value);
 void textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_003180c4(s32 slot, const char *text);
 void battleAttributeFormatName(char *buffer, u32 attribute);
 void skillFormatTargetLabel(char *buffer, u32 target);
 void asdTextDrawDirectoryEntry(u32 directory, s32 a, s32 b, s32 c, s32 d, s32 e, u32 f);

@@ -1,10 +1,10 @@
 /* NON_MATCHING: Paired default-state addresses and reset stores are formed differently. */
 #include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/EffectEditorDefaults.h"
+#include "util/EffPartCreate.h"
 extern "C" {
 void registrationEntryInsert(u32, s32);
 void resourceQueueDeferredDestroy(void*, s32);
-void* effPartCreate(void);
 extern EffectEditorDefaultSlot DAT_0044f858;
 
 

@@ -2,12 +2,12 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 s32 rt_memcmp(const void *a, const void *b, u32 size);
 void memCopy(const void *src, void *dst, s32 size);
-void *asdMemAlloc(u32 size, u32 align, u32 arg2, u32 arg3, u32 arg4);
 void *FUN_002a4e98(AsdEplTail *tail);
 
 extern const char DAT_00409428[];  /* "ATBC" */

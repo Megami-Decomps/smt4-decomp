@@ -1,5 +1,6 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 

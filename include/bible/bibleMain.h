@@ -39,4 +39,17 @@ typedef struct BibleGlobals {
     /* 0x04 */ s32 mode;                   /* which bible page to open */
 } BibleGlobals;
 
+extern "C" {
+u32 FUN_00269d4c(void);
+}
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *jobFind(u32 handle);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

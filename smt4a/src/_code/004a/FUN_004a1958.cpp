@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA and lays the party branch out first; built differs in frame size (28 vs 52 bytes) and branch order (236 vs 235 rows); the list rebuild is the same. */
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -76,7 +77,6 @@ s32 FUN_002a4b28(u16 id);
 void campFillUnitComparison(u8 *out, u16 id, s32 flag);
 u32 FUN_004a8750(u16 id, u8 category, s32 flag, s32 full, s32 extra);
 void inventoryListAppend(EntryList *list, u8 *entry);
-u8 *FUN_0026140c(void);
 void FUN_004a84e8(EntryList *list, s32 mode);
 void FUN_004cfeb0(void *layout, s32 columns, s32 count, s32 a, s32 b, s32 c);
 u8 gaugePercent(EntryList *list, s32 arg);

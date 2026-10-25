@@ -1,5 +1,7 @@
 #include "gamedata/DevilRecord.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlTables.h"
+#include "util/Random.h"
 
 struct BtlMainState;
 extern "C" {
@@ -8,8 +10,6 @@ void scrSetResult(u32 value);
 DevilRecord* dataTable00FindById(u16 id);
 void memClear(void* memory, u32 size);
 BtlMainState* btlGetMainState(void);
-void* btlMainGetDataTable(BtlMainState* battle, u32 index);
-u32 randNextInRange(u32 maximum);
 
 // Choose one nonzero record choice or battle-table candidate with equal probability.
 u32 btlChooseRandomRecordCandidate(void)

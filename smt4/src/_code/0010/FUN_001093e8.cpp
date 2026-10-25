@@ -32,7 +32,7 @@ int surfaceCopy(Unit *a, Unit *b);
 u8 FUN_002bfadc(int arg, Unit *unit);
 int FUN_002bff10(int arg);
 Context *jobGetWork(void);
-int FUN_002c39a4(TitleScene *arg);
+int renderCtxSelectStereoLayout(TitleScene *arg);
 
 /* Script command: if FUN_002bff10 reports work, marks the overlay pending; otherwise, when the overlay is shown, not applied and not pending, resizes the unit (halving it) and marks it applied. Returns 0. */
 u32 FUN_001093e8(void)
@@ -46,7 +46,7 @@ u32 FUN_001093e8(void)
         overlay = &context->overlay;
         if (context->overlay.shown != 0) {
             if (overlay->applied == 0 && overlay->pending == 0) {
-                FUN_002c39a4(g_titleScene);
+                renderCtxSelectStereoLayout(g_titleScene);
                 context->unit->width = 0x200;
                 context->unit->height = 0x200;
                 context->overlay.flag = FUN_002bfadc(0, context->unit);

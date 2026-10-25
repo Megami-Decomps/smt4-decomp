@@ -1,10 +1,10 @@
 #include "ui/IfTouch.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 track);
 void sysMemClear(void *memory, u32 size);
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), u32 argument);
 void FUN_0013c2c8();
 void FUN_0013ed24();
 
@@ -18,7 +18,7 @@ void ifTouchAcquireUser()
         }
         IfTouchState *state = g_ifTouch.state;
         sysMemClear(state, sizeof(IfTouchState));
-        state->process = asdProcessCreateSimple("TOUCH CALC", 3, 0, 0, FUN_0013c2c8, FUN_0013ed24, 0);
+        state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TOUCH CALC"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0013c2c8), reinterpret_cast<AsdProcFunc>(FUN_0013ed24), 0);
         state->selectedRegion = -1;
         state->regionCount = 10;
         state->timer = 0;

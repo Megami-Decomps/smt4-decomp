@@ -1,5 +1,6 @@
 /* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
 #include "battle/btlTargetSelect.h"
+#include "util/FUN_0027db08.h"
 
 struct TargetInfoPosition { f32 x, y, z; };
 struct TargetInfoProjection { f32 x, y; };
@@ -42,7 +43,6 @@ const char *FUN_002bd06c(u32);
 const char *demonGetRaceLabel(u32, u32);
 u8 FUN_0029e9cc(u32);
 void textFormatBuffer(char *, const char *, ...);
-u32 FUN_0027db08(u32);
 void FUN_002630e0(TargetInfoProjection *, u32, u32, const TargetInfoPosition *);
 
 void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32 option0, u32 option1,

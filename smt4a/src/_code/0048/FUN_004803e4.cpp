@@ -4,14 +4,13 @@
 
 extern "C" {
 u32 FUN_0047fc38(u32);
-const ItemCategoryEntry *FUN_0019c06c(u32);
 EquipmentUpgradeState *FUN_00239200();
 
 void FUN_004803e4(u32 itemId)
 {
     if (FUN_0047fc38(itemId))
         return;
-    const ItemCategoryEntry *category = FUN_0019c06c(itemId);
+    const ItemCategoryEntry *category = itemCategoryFindByItemId(itemId);
     if (!category) {
         FUN_00239200();
         return;

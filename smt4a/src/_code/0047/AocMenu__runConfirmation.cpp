@@ -2,6 +2,7 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
+#include "test/BustupViewer.h"
 
 /* An object the menu owns and releases through its deleting destructor. */
 class AocConfirmHandler {
@@ -64,7 +65,6 @@ void msgWindowReset(void);
 void messageBannerRestartOrClear(void);
 void messageClearActiveFlags(void);
 void ifTouchRegionRemove(void);
-s32 FUN_002e19f8(void);
 
 /* Per-frame update of the "is connected" confirmation: opens the script, waits for its choice, then closes. */
 void AocMenu::runConfirmation()

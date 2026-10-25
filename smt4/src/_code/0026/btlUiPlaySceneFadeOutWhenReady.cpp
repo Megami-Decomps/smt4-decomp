@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "battle/BtlUiFade.h"
 
 extern "C" {
 
@@ -11,7 +12,7 @@ extern void playSceneTimerSubStartReverse(BtlUiObjB *timer);
 
 /* When the battle UI scene has finished fading in and the timer reports ready, fades the scene out
  * and runs the timer in reverse. */
-void btlUiPlaySceneFadeOutWhenReady(void)
+void btlUiPlaySceneFadeOutWhenReady(u32 uiBlock)
 {
     BtlUi *ui = g_btlUi.ui;
 

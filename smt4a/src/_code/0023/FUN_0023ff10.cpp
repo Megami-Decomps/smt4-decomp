@@ -1,5 +1,8 @@
 /* NON_MATCHING: the list sub-object comes from the one-instruction accessor questUiGetList (inlined by armlink, config/inlined.txt) and is passed to resourceRunOperationIfUnblocked; the remaining differences are armcc keeping the list in r7 and the offset in r6 (retail the reverse) plus a nop armcc emits before that call (151 rows against 150). */
 #include "common.h"
+#include "shard/Shard0031.h"
+#include "util/FUN_002a4894.h"
+#include "util/FUN_002a4894.h"
 
 /* The quest screen's state (observed fields). */
 struct QuestUiLower {
@@ -53,7 +56,6 @@ void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
 EntryKindRecord *FUN_001ad9b4(u32 id);
 s32 resourceRunOperationIfUnblocked(void *list);
 void *questUiGetList(QuestUiLower *lower);
-s32 FUN_002a4894(void *list);
 s32 partyEntryFlagsBit3(u32 id);
 u32 FUN_004186e0(void);
 
@@ -132,7 +134,7 @@ void FUN_0023ff10(void)
     void *list = questUiGetList(&ui->lower);
 
     pageOffset = resourceRunOperationIfUnblocked(list);
-    row = FUN_002a4894(list);
+    row = FUN_002a4894(reinterpret_cast<const Object *>(list));
     id = ui->ids[pageOffset + row];
     record = FUN_001ad9b4(id);
     if (flags->locked != 0) {

@@ -28,12 +28,12 @@ typedef struct SizeTableOwner {
     /* 0x04 */ SizeTable *table;
 } SizeTableOwner;
 
-SizeTableOwner *asdTMTexTableCallFileA(void);
+SizeTableOwner *asdTMTexTableCallFileA(s32 group, s32 index);
 
 /* Looks up the width/height of entry `index % 1000`, preferring its override when enabled; either output may be NULL. */
-void uiGetEntrySize(u32 unused, int index, u32 *outWidth, u32 *outHeight)
+void uiGetEntrySize(u32 group, int index, u32 *outWidth, u32 *outHeight)
 {
-    SizeTableOwner *owner = asdTMTexTableCallFileA();
+    SizeTableOwner *owner = asdTMTexTableCallFileA(group, index);
     SizeEntry *entry = owner->table->entries + index % 1000;
     SizeOverride *override = entry->override;
     u32 width = entry->width & 0xffff7fff;

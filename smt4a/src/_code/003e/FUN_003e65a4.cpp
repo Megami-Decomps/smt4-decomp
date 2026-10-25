@@ -1,10 +1,10 @@
 /* NON_MATCHING: state-transition stores, script-start call predication and saved registers differ. */
 #include "shop/ShopItemDescription.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern const char DAT_005332c4[];
 u32 FUN_0015f858(u32 sound, u32 mode);
-void FUN_003180c4(s32 slot, u32 handle);
 s32 scrRunOpcodesStub(u32 script);
 u32 scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 messageGetChoiceResult();
@@ -19,11 +19,11 @@ void FUN_003e65a4(ShopItemDescription *work)
     switch (work->state) {
     case 0:
         if (work->initialVoice.sound != 0)
-            FUN_003180c4(0, FUN_0015f858(work->initialVoice.sound, 0));
+            FUN_003180c4(0, reinterpret_cast<const char *>(FUN_0015f858(work->initialVoice.sound, 0)));
         if (work->entries[0].voice.sound != 0)
-            FUN_003180c4(1, FUN_0015f858(work->entries[0].voice.sound, 0));
+            FUN_003180c4(1, reinterpret_cast<const char *>(FUN_0015f858(work->entries[0].voice.sound, 0)));
         if (work->entries[1].voice.sound != 0)
-            FUN_003180c4(2, FUN_0015f858(work->entries[1].voice.sound, 0));
+            FUN_003180c4(2, reinterpret_cast<const char *>(FUN_0015f858(work->entries[1].voice.sound, 0)));
         // Fall through: the initial voices and subsequent descriptions use the same selection entry.
     case 1: {
         FUN_003c1060();

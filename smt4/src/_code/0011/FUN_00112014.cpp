@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include "shard/W6_W6Match7_TextureBinding.h"
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 #define TEXTURE_CACHE_BUCKETS 512
 #define TEXTURE_FACE_COUNT 6
@@ -47,7 +48,6 @@ extern TextureCache *g_textureBindingCache;
 
 void gfxTextureStorageUnbind(DefaultTextureStorage *face);
 void gfxTextureStorageRelease(u32 storage, DefaultTextureStorage *face);
-void memClear(void *memory, u32 size);
 
 /* Releases every block through the graphics release callback, if one is installed. */
 #define GFX_RELEASE(block) \

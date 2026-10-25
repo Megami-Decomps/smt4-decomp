@@ -2351,6 +2351,7 @@
 0x00158e7c nn_cfg_CTR_IsDebugMode name
 0x00158ef4 FUN_00158ef4 between
 0x001590c0 FUN_001590c0 between
+0x00159140 FUN_00159140 between
 0x001593ac FUN_001593ac between
 0x00159468 FUN_00159468 between
 0x00159590 FUN_00159590 between
@@ -3669,7 +3670,7 @@
 0x001caea8 FUN_001caea8 between
 0x001cb08c FUN_001cb08c between
 0x001cb1e8 FUN_001cb1e8 between
-0x001cb490 FUN_001cb490 between
+0x001cb490 gfxCommandTemplateAppend between
 0x001cb4c8 FUN_001cb4c8 between
 0x001cb6d0 nw_gfx_AnimGroup_GetMemorySizeForInitialize name
 0x001cb774 FUN_001cb774 between

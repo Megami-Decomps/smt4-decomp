@@ -1,4 +1,5 @@
 #include "shard/Sys464af0.h"
+#include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 
 extern "C" {
 

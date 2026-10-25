@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "nn/Result.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 namespace {
 // Apocalypse stores a context/result pair where the shared IV request prefix has list links,
@@ -45,7 +46,6 @@ void pathSetWithRomPrefix(AsdSyncFileRecordA *record, const char *path);
 void asdLoadConfigureModeFlags(AsdSyncFileRecordA *record, u32 flags);
 AsdFileEntry *asdFileAddEntry(const void *record);
 void asdFileWait(AsdSyncFileRecordA *request);
-s32 asdFileRequestHasFailed(AsdSyncFileRecordA *request);
 void asdFileRequestRelease(AsdSyncFileRecordA *request);
 
 // Queue a copied request, wait for completion, and transfer successful buffer ownership to the caller.
@@ -86,7 +86,7 @@ void *asdLoadFileSync(s32 *result, void *context, const char *path, u32 *size, u
     asdFileWait(request);
     if (result != NULL)
         *result = request->result;
-    if (asdFileRequestHasFailed(request) != 0) {
+    if (asdFileRequestHasFailed(reinterpret_cast<s32 *>(request)) != 0) {
         if (size != NULL)
             *size = 0;
         asdFileRequestRelease(request);

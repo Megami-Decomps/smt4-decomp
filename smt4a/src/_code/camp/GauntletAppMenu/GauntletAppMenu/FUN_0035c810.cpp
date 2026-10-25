@@ -4,6 +4,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 typedef void (*GauntletTaskFunc)(void);
 
@@ -17,8 +18,6 @@ extern GauntletAppMenuWork *g_gauntletAppMenu;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 mode, u32 size, u32 tracked);
 void sysMemClear(void *buffer, u32 bytes);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 a, u32 b, GauntletTaskFunc update,
-                           GauntletTaskFunc destroy, void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, GauntletTaskFunc draw, GauntletTaskFunc destroy,
                    void *work, u32 parent);
 s32 gameFlagIsSet(u32 flag);
@@ -50,7 +49,7 @@ u32 FUN_0035c810(void)
     }
     menu = g_gauntletAppMenu;
     sysMemClear(menu, 0x538);
-    menu->task = asdProcessCreateSimple("GauntletApp CALC", 3, 0, 0, FUN_003ce598, gauntletAppMenuDestroy, NULL);
+    menu->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GauntletApp CALC"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003ce598), reinterpret_cast<AsdProcFunc>(gauntletAppMenuDestroy), NULL);
     menu->list.drawTask = taskCreateDraw("GauntletApp DDRAW", 234, 0, 0, gauntletAppMenuExit, NULL, NULL, menu->task);
     if (gameFlagIsSet(0x520)) {
         menu->list.forceFirst = 1;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: stack-buffer address caching and effect-name pointer scheduling differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct AuxiliaryResourceView {
     u8 unk0000[0x2E20];
@@ -16,7 +17,6 @@ s32 textFormatBuffer(char* destination, const char* format, ...);
 char* libc_strcpy(char* destination, const char* source);
 char* FUN_00100d60(char* text, s32 character);
 u32 findRecordByKey(const char* name);
-u32 asdLoadFileAsyncSimple(const char* path, u8** data, u32 flags);
 
 // Reset the auxiliary effect slots and enqueue uncached files from the fixed effect-name table.
 u32 FUN_004f741c(BtlAuxA* auxiliary)
@@ -39,7 +39,7 @@ u32 FUN_004f741c(BtlAuxA* auxiliary)
         libc_strcpy(path, formatted);
         libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
         if (findRecordByKey(slot->name) == 0xFF) {
-            asdLoadFileAsyncSimple(path, &slot->data, 1);
+            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 1);
             slot->readiness.flags |= 1;
         }
     }

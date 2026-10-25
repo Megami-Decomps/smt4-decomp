@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern Dialog *g_infoWin;
 int asdTextDrawFormatted(u32 handle, int arg1, u32 arg2, int arg3, int arg4, void *text);
 int timerStart(void *window, int arg1, int arg2);
 int vec2GetXInt(void *window);
-int memClear(void *buffer, int size);
 void *rt_memcpy(void *dst, const void *src, u32 size);
 
 /* Sets the dialog text (NUL-terminated, at most 0x5a bytes): copies it, sizes the window around it and starts the message. */
@@ -40,7 +40,7 @@ void dialogSetText(const char *text)
     if (text == NULL) {
         return;
     }
-    memClear(dialog->text, TEXT_CAPACITY);
+    reinterpret_cast<int>(memClear(dialog->text, TEXT_CAPACITY));
     length = 0;
     do {
         if (text[length] == '\0') {

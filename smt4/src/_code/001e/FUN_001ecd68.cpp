@@ -10,7 +10,7 @@ int FUN_002bf380(...);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 
 typedef int romwright_code(...);
 /* stack frame of void: 34 slot(s), 136 byte(s) */
@@ -59,7 +59,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -115,7 +115,7 @@ int FUN_001ecd68(void)
     temp_v0 = *(int *)(DAT_0043dc24 + 8);
   }
   if (DAT_0043dc24 != 0 && temp_v0 != 0) {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     temp_v0 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar6 = (int *)(temp_v0 + 0x124c);

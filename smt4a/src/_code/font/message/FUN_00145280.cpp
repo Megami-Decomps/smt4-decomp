@@ -3,6 +3,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -47,7 +48,6 @@ void FUN_001692d4(void);
 u32 spriteHandleCreate(u32 kind);
 void asdTextSetValueFlagsAndScalar(u32 sprite, u32 flags, u32 value, f32 scalar);
 void positionStateSet(u32 sprite, s32 a, s32 b, f32 value);
-void *asdProcessCreateSimple(const char *name, s32 group, s32 delay, s32 end, void (*update)(void *), void (*onEnd)(void *), void *work);
 void *taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void *), s32 c, void *work, void *owner);
 void FUN_0014c01c(void *work);
 void FUN_0014f3f4(void *work);
@@ -96,7 +96,7 @@ MessageWindow *FUN_00145280(void)
     raw[0x1A10] = 0;
     *(u32 *)(raw + 0x1A11) = 0;
     *(u32 *)(raw + 0x1A18) = 0;
-    window->process = asdProcessCreateSimple("MESS_C", 4, 0, 0, FUN_0014c01c, 0, window);
+    window->process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("MESS_C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0014c01c), 0, reinterpret_cast<u32>(window)));
     taskCreateDraw("MESS_U LEFT", 0x86, 0, 0, FUN_0014f3f4, 0, window, window->process);
     taskCreateDraw("MESS_U RIGHT", 0xE2, 0, 0, FUN_0014f3f4, 0, window, window->process);
     paramsClearPacket(raw + 0x194);

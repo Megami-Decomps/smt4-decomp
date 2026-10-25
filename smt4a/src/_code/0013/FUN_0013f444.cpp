@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed record stores are rescheduled; retail writes key/value/flags before name and the following terminator. */
+/* NON_MATCHING: store order now matches retail (terminator through a pointer); register assignment differs (retail keeps the index in ip and 0xf890 in r4, ours index in r6, 0xf890 in ip). */
 #include "shard/W6_W6Match5_SentinelLookup.h"
 
 extern "C" {
@@ -14,10 +14,11 @@ void FUN_0013f444(u32 key, u32 value, u8 flags)
             entry->value = value;
             entry->flags = flags;
             entry->name = NULL;
-            entry[1].key = 0xf890;
-            entry[1].value = 0;
-            entry[1].flags = 0;
-            entry[1].name = NULL;
+            SentinelLookupEntry *terminator = entry + 1;
+            terminator->key = 0xf890;
+            terminator->value = 0;
+            terminator->flags = 0;
+            terminator->name = NULL;
             return;
         }
         if (entry->key == key)

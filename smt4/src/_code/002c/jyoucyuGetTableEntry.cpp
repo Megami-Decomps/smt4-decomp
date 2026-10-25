@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 

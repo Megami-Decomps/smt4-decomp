@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_StatusQuery.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 extern "C" {
 extern TextureStateTable g_texTable;
 /* Test whether the selected texture entry is assigned. */

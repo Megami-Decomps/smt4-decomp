@@ -21,8 +21,6 @@ void sysMemClear(void *work, u32 bytes);
 void asdTMTexTableLoadTmx(s32 table, s32 entry);
 s32 FUN_003d0958(u32 process);
 s32 FUN_003d02bc(u32 process);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 void paramsClearPacket(UiResourceParameters *packet);

@@ -1,5 +1,7 @@
 /* NON_MATCHING: payload destination uses r5 instead of lr and optional-argument comparison is scheduled earlier. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/AsdTMTexTableCallFileC.h"
+#include "util/AsdTMTexTableCallFileC.h"
 
 /* Local views: the Apocalypse placement flags are a halfword, and the optional
  * request vector lies beyond the recovered IV request prefix. */
@@ -21,14 +23,13 @@ typedef char TextureDrawRequestViewAOffsetsCheck[
     offsetof(TextureDrawRequestViewA, extra) == 0x30 && sizeof(TextureDrawRequestViewA) == 0x3C ? 1 : -1];
 
 extern "C" {
-TextureTableFilePrefixIV *asdTMTexTableCallFileC(u32 table, s32 id);
 void FUN_00184efc(TextureTableFilePrefixIV *, TextureTableEntryIV *, TextureDrawRequestViewA *, u32);
 
 // Draw a table texture with its stored origin and an optional three-word draw override.
 void FUN_0032cdc8(u32 flags, u32 table, s32 id, u32 argument,
                  TextureDrawPayloadIV payload, const TextureDrawExtra *extra)
 {
-    TextureTableFilePrefixIV *file = asdTMTexTableCallFileC(table, id);
+    TextureTableFilePrefixIV *file = reinterpret_cast<TextureTableFilePrefixIV *>(asdTMTexTableCallFileC(table, id));
     TextureTableEntryIV *entry = &(*file->entries)[id % 1000];
     TexturePlacementViewA *placement = (TexturePlacementViewA *)entry->placement;
     TextureDrawRequestViewA request;

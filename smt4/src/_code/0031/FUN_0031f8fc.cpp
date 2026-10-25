@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(double, double);
 int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(void);
-int FUN_0024b830(int);
+int shiftRandomNextFraction(int);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(...);
@@ -101,7 +101,7 @@ extern float DAT_004ea948; /* 0x4ea948 */
 extern unsigned int FUN_00246c28(void);
 /* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_idivmod. */
@@ -363,10 +363,10 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
               }
             }
             else if (temp_v41 != 0) {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v33 = temp_v33 * temp_v40;
               piVar23[2] = (int)temp_v33;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v15 = 0;
               piVar23[1] = (int)(((temp_v37 - pfVar25->field_0x78) + temp_v33 * pfVar25->field_0x78) *
                                 pfVar25->field_0x74);
@@ -377,12 +377,12 @@ void FUN_0031f8fc(fn_0031f8fc_arg0 *param_1)
               }
               temp_v33 = (float)((unsigned long long)temp_v36 >> 0x20);
               piVar23[3] = (int)temp_v33;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v26 = (float)VectorSignedToFloat(temp_v23,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v33 = ((temp_v37 - pfVar25->field_0x6c) + temp_v33 * pfVar25->field_0x6c) *
                        pfVar25->field_0x68;
               piVar23[4] = (int)(temp_v33 / temp_v26);
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v33 = pfVar25->field_0x60 *
                        ((temp_v37 - pfVar25->field_0x64) + temp_v33 * pfVar25->field_0x64);
               piVar23[5] = (int)temp_v33;

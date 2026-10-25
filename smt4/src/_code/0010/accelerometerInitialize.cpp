@@ -1,7 +1,7 @@
 #include "shard/GlobalBlocks.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" SubsystemDefaults g_accelerometerState;
-extern "C" void memClear(void *memory, u32 size);
 
 /* Restore the shared subsystem defaults. */
 extern "C" bool accelerometerInitialize(void)

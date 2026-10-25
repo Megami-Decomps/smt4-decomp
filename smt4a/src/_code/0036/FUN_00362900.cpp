@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00362900` (_code @ 0x362900, 0x93c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
 extern "C" {
 
 int CONCAT44(...);
 int FUN_001bc460(...);
-int mathMatrixApplyScale(...);
 int FUN_00237354(...);
 int matrix43Multiply(...);
 int FUN_002a2048(...);
@@ -405,7 +405,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v28 = DAT_005c1138 * temp_v28;
                 temp_v29 = DAT_005c113c * pfVar8[6];
               }
-              mathMatrixApplyScale(&temp_v30,&temp_v27,2);
+              reinterpret_cast<int>(mathMatrixApplyScale(reinterpret_cast<f32 *>(&temp_v30), &temp_v27, 2));
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x7c) = temp_v27;
               *(float *)(temp_v2 + 0x80) = temp_v28;
@@ -512,7 +512,7 @@ void FUN_00362900(fn_00362900_arg0 *param_1)
                 temp_v28 = DAT_005c1138 * temp_v28;
                 temp_v29 = DAT_005c113c * pfVar8[6];
               }
-              mathMatrixApplyScale(&temp_v30,&temp_v27,2);
+              reinterpret_cast<int>(mathMatrixApplyScale(reinterpret_cast<f32 *>(&temp_v30), &temp_v27, 2));
               temp_v2 = pfVar9->field_0x0;
               *(float *)(temp_v2 + 0x7c) = temp_v27;
               *(float *)(temp_v2 + 0x80) = temp_v28;

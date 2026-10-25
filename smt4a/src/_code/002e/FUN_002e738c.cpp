@@ -16,7 +16,6 @@ struct PartnerWork {
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
 };
 
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 callbackDispatchToPresentOwner(u32 process);
 s32 FUN_0031d85c(u32 process);

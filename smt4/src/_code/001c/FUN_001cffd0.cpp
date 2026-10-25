@@ -23,7 +23,7 @@ struct SkillRecord06 {
 
 extern "C" {
 s32 idMapLookup(u32 id);
-SkillRecord06 *dataTable06Sub1GetRecord(u32 id);
+SkillRecord06 *dataTable06Sub1GetRecord(u16 id);
 void *dataTable40FindById(u32 id);
 void *passiveSkillLookupRecord(u32 id);
 s32 FUN_0026a604(void *passive, void *skill);

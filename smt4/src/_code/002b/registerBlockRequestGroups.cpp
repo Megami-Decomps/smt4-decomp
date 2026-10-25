@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(void *ptr, int size);
 
 typedef struct GpuState {
     /* 0x000 */ u32 dirty;      /* registers to rewrite */
@@ -41,8 +41,8 @@ void registerBlockRequestGroups(u32 groups)
     }
     if ((groups & 0x40) != 0) {
         gpu->dirty = gpu->dirty | 0x2004038;
-        memClear(gpu->blockA, 0x84);
-        memClear(gpu->blockB, 0x84);
+        reinterpret_cast<int>(memClear(gpu->blockA, 0x84));
+        reinterpret_cast<int>(memClear(gpu->blockB, 0x84));
     }
     if ((groups & 0x80) != 0) {
         gpu->dirty = gpu->dirty | 0x1c00;

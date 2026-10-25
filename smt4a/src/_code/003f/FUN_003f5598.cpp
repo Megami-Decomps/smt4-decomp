@@ -1,6 +1,7 @@
 /* NON_MATCHING: file-load argument scheduling and sprite-handle address reuse differ. */
 #include "common.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct PartnerTopicDialog {
     u8 unk00[0x28];
@@ -28,7 +29,6 @@ struct PartnerTopicDialog {
 extern "C" {
 void rt_memclr(void *, u32);
 void __aeabi_memset4(void *, u32, s32);
-void asdLoadFileAsyncSimple(const char *, void **, u32);
 void asdTMTexTableLoadTmx(u32, u32);
 void asdTMTexLoadMainHeap(u32, s32);
 u32 spriteHandleCreate(u32);
@@ -51,9 +51,9 @@ extern "C" void FUN_003f5598(PartnerTopicDialog *dialog)
     dialog->frame = 0;
     dialog->active = 0;
     dialog->pending = 0;
-    asdLoadFileAsyncSimple(DAT_0052d3c4, &dialog->message, 0);
-    asdLoadFileAsyncSimple(DAT_0052d398, &dialog->commonMessage, 0);
-    asdLoadFileAsyncSimple(DAT_0052d36c, &dialog->script, 0);
+    asdLoadFileAsyncSimple(DAT_0052d3c4, reinterpret_cast<u32 *>(&dialog->message), 0);
+    asdLoadFileAsyncSimple(DAT_0052d398, reinterpret_cast<u32 *>(&dialog->commonMessage), 0);
+    asdLoadFileAsyncSimple(DAT_0052d36c, reinterpret_cast<u32 *>(&dialog->script), 0);
     __aeabi_memset4(dialog->slots, sizeof(dialog->slots), -1);
     __aeabi_memset4(dialog->handles, sizeof(dialog->handles), -1);
     asdTMTexTableLoadTmx(49, 0);

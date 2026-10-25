@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include <string.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 /* An entry the party setup wrote: a flag word and the demon id. */
 struct PartyEntry {
@@ -45,7 +46,6 @@ typedef char PartyWorldLayout[offsetof(PartyWorld, flags) == 0x44A8 && offsetof(
 extern "C" {
 
 DemonRecord *dataTable00FindById(u32 id);
-void memClear(void *dest, s32 size);
 PartyRecord *saveGetIndexedMapValue(s32 index);
 PartyObject *FUN_00294090(s32 id, s32 arg);
 

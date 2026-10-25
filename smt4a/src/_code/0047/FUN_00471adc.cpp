@@ -4,7 +4,7 @@
 extern "C" {
 void *asdOperatorNewE(u32 bytes);
 WindowOperationResult FUN_0047402c(WindowOperationState *state, const WindowOperationRequest *request);
-s32 byteIsAtLeast100(const WindowOperationResult *result);
+u8 byteIsAtLeast100(const WindowOperationResult *result);
 }
 
 inline void *Obj4221d4::operator new[](u32 bytes) throw()

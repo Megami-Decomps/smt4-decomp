@@ -8,7 +8,6 @@ const char *scrGetArgString(u32 index);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 u32 *battleModelOwnerInitialize(u32 *owner);
-s32 FUN_004d87e4(u32 *owner);
 void FUN_004d854c(u32 *owner);
 void callOnHandleField4D(u32 *owner, f32 x, f32 y, f32 z);
 void modelOwnerLoadNamed(u32 *owner, const char *name);
@@ -23,7 +22,7 @@ u32 FUN_003a9540(void)
 {
     BtlMainStateA *state = btlGetMainState();
     if (scrGetCommandFrame() != 0) {
-        u32 ready = FUN_004d87e4(state->eventModel.owner);
+        u32 ready = FUN_004d87e4(reinterpret_cast<void **>(state->eventModel.owner));
         if (ready != 0) {
             FUN_004d854c(state->eventModel.owner);
             battleModelSetUniformScale(state->eventModel.owner, 0.01f);

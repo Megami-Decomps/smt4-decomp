@@ -1,4 +1,5 @@
 #include "shard/Shard004C.h"
+#include "util/GetMaskB5.h"
 
 extern "C" {
 

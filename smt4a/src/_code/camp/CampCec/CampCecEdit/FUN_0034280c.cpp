@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034280c` (_code @ 0x34280c, 0x610 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int positionStateSet(...);
 int taskCreateDraw(...);
 int FUN_001527d8(...);
@@ -101,7 +101,7 @@ void FUN_0034280c(unsigned char param_1)
   puVar3 = g_campCecEdit;
   sysMemClear();
   puVar4 = &LAB_00342c14;
-  asdProcessCreateSimple(&LAB_00342c14,3,0,0,&LAB_0025d4a0,0,0);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_00342c14), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_0025d4a0), 0, 0);
   *puVar3 = (unsigned int)puVar4;
   taskCreateDraw(&LAB_00342c2c,0x65,0,0,&LAB_002a27e4,0,0,puVar4);
   taskCreateDraw(&LAB_00342c48,0xcc,0,0,&LAB_002a27e4,0,0,*puVar3);

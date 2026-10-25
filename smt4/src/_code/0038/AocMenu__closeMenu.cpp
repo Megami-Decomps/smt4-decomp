@@ -17,7 +17,6 @@ void jobStopAndClearFlags(AocMenu *menu);
 void aocClearDisplayFlag(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 void aocResetOperationState(AocSystem *system);
-s32 FUN_002ad1e0(AocObjB *event);
 u8 FUN_0026b564(void);
 u8 strIsEmpty(const void *value);
 u8 byteIsAtLeast100(const void *value);

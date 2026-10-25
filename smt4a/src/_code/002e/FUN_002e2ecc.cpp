@@ -1,8 +1,8 @@
 /* NON_MATCHING: The composite hex loop is pair-unrolled; the default locale name uses a literal relocation instead of retail's ADR. */
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
-u8 *FUN_002e2ec0(void);
 extern u8 LAB_002e3064;
 
 /* Returns a category name, or formats all five encoded references for a composite request. */

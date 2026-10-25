@@ -10,7 +10,6 @@ extern MapCameraGlobals DAT_004474f0;
 extern GameState g_gameState;
 extern LmapScene *g_lmapScene;
 u8 mapCollisionGetStoredVectors(CollisionVector *, CollisionVector *, CollisionVector *, CollisionVector *);
-SaveWork *gameGetMapBlock(void);
 f32 FUN_001e27f8(const f32 *, const f32 *, const f32 *, f32, f32);
 
 void FUN_0021b0f0(void)

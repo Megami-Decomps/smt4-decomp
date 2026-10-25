@@ -1,6 +1,7 @@
 /* NON_MATCHING: argument setup order only: retail computes `slot->sub` (add r0) before loading the constant 1 into r1; built loads r1 first */
 /* Releases every in-use slot of the manager and clears its active flag. */
 #include "common.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct SlotManager {
 
 extern SlotManager *g_btlTalkBustUp;
 
-extern void uiSpriteSelectAnim(void *sub, s32 arg);
 
 void btlTalkBustUpReleaseAllSlots(void)
 {

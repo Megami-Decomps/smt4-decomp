@@ -1,9 +1,9 @@
 #include "font/PlaceWin.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int spriteStartAnimationByIndex(void *block, int arg);
-int memClear(void *ptr, int size);
 int rt_memcpy(void *dst, const u8 *src, int size);
 
 extern PlaceWindow *g_placeWin;
@@ -17,7 +17,7 @@ void placeWinStartText(const u8 *text)
     obj->state = 1;
     obj->visible = 1;
     spriteStartAnimationByIndex(obj->animation, 0);
-    memClear(obj->text, 0x80);
+    reinterpret_cast<int>(memClear(obj->text, 0x80));
     length = 0;
     do {
         if (text[length] == 0) break;

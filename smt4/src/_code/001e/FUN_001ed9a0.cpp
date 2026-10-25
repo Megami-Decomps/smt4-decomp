@@ -1,4 +1,5 @@
 /* NON_MATCHING: near (209 rows against 209): same flow, constants, render-target push/pop and float maths; retail reads `visible` through a pointer to a 0x300 sub-block of the save/load UI (add r0,r4,#768; ldrb [r0,#84]) and the entry-lock byte as (ui+index)+844, keeps the zero constant in r7 instead of r6, and loads the three globals in a different order, which a flat struct does not reproduce */
+#include "gamedata/DataTable.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -71,8 +72,6 @@ void efctSetSpeed(f32 speed);
 TitleCaption *FUN_002bf4f8(s32 a, s32 b);
 f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 scale);
 s32 FUN_002bf380(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
-s32 dataTableGet(s32 table, s32 index);
-u8 *dataTableGetEntries(void);
 s32 libc_strlen(const u8 *text);
 s32 FUN_002be5a4(s32 a, s32 b, const u8 *text, f32 x, f32 y, f32 z, f32 w, f32 speed);
 s32 FUN_002ae038(f32 *color);
@@ -126,8 +125,8 @@ u8 FUN_001ed9a0(void)
                 s32 entry = cursorUi->hasCursor;
                 s32 width = caption->size[0];
                 s32 height = caption->size[1];
-                dataTableGet(0x3D, 0);
-                const u8 *text = dataTableGetEntries() + entry * 0x54;
+                void *section = dataTableGet(0x3D, 0);
+                const u8 *text = static_cast<const u8 *>(dataTableGetEntries(section)) + entry * 0x54;
                 s32 length = libc_strlen(text);
                 s32 half = (s32)((f32)(length * height) * 0.5f);
                 f32 x = (f32)caption->x + (f32)(width - half) * 0.5f + (f32)parallax;

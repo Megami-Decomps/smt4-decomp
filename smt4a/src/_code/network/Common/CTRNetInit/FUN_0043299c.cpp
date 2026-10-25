@@ -1,6 +1,7 @@
 /* NON_MATCHING: register choice of the failure test (retail tests the call result in r0) and the hoisted constant 1 for the FUN_0017fd20 call */
 #include "AsdSDK/AsdDebug.h"
 #include "nn/Result.h"
+#include "mobiclip_ctrl/helper_S4Player.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ u32 entry3F94Address(u32 offset, u32 size);
 s32 socketInitializeWithWorkBuffer(u32 buffer, u32 address, u32 size, u32 align);
 s32 FUN_0017fd20(u32 *handle, s32 count);
 void FUN_002e3140(s32 result);
-s32 FUN_0042640c(u32 *handle);
 void sysFatalBreak(void);
 
 /* Initialize the network module: allocate and register its work buffer, open the session and set
@@ -43,7 +43,7 @@ u32 FUN_0043299c(s32 *result)
         if (nnResultIsFailure(open)) {
             FUN_002e3140(open);
         }
-        s32 setup = FUN_0042640c(&DAT_00588118);
+        s32 setup = FUN_0042640c(reinterpret_cast<void **>(&DAT_00588118));
         *result = setup;
         if ((s32)(setup & 0x80000000) >= 0) {
             return 1;

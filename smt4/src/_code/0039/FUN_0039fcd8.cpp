@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the second entry pointer to r6 (mov r6, r4) before the first FUN_00230f44 call; the build keeps it in r4 (one instruction fewer). */
 #include "common.h"
+#include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct SortEntry {
 } SortEntry;
 
 extern u16 FUN_0028fb3c(s32 id);
-extern u16 FUN_00230f44(const SortEntry *entry);
 
 /* Compare function for sorting entries: by the rank of their id, then by their secondary key. */
 int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
@@ -20,8 +20,8 @@ int FUN_0039fcd8(const SortEntry *a, const SortEntry *b)
     if (diff != 0) {
         return diff;
     }
-    u16 orderA = FUN_00230f44(a);
-    u16 orderB = FUN_00230f44(b);
+    u16 orderA = FUN_00230f44(reinterpret_cast<const u16 *>(a));
+    u16 orderB = FUN_00230f44(reinterpret_cast<const u16 *>(b));
     return orderA - orderB;
 }
 

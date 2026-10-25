@@ -1,4 +1,5 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ u8 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
 void buttonHelpSetPreset(u32 preset);
-void FUN_002a0cc8(s32 arg);
 void motionPlayForMode(MotionOwner *owner, s32 allowAlternate, s32 unused);
 
 /* Finishes the use counter and moves to state 2 once it has finished; otherwise keeps the current motion going unless the counter is at 75. */

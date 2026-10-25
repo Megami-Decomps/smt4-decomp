@@ -2,6 +2,7 @@
 #include "common.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 struct CharacterInfoPanelA {
     void *title, *name;
@@ -57,7 +58,6 @@ f32 FUN_00168594(const char *text, u32 font, f32 spacing);
 s32 devilIsTextureLoaded(s32 id, u32 kind);
 void FUN_0038b3f8(s32 id, u32 kind);
 void FUN_00371c3c(s32 id, u32 kind);
-void *FUN_0019acdc(u32 item, u32 flags);
 u16 FUN_0036fcd0(void *item, u32 flags);
 u32 FUN_0019e52c(u16 id);
 u32 requestIdToCode(u32 id);
@@ -151,7 +151,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         clearCharacterPreviewA(panel);
     }
     if (record->specialItem) {
-        void *item = FUN_0019acdc(record->specialItem, 0);
+        void *item = reinterpret_cast<void *>(FUN_0019acdc(record->specialItem, 0));
         u16 id = FUN_0036fcd0(item, 0);
         FUN_001654f8(FUN_00180118(FUN_0019e52c(id)), buffer, 0);
         asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);

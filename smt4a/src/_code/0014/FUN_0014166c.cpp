@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail bne 70 differs from recovered bne 7c. */
 #include "common.h"
+#include "gfx/DrawCallbackRecord.h"
 
 struct ProcessNodeView {
     u8 unk00[0x28];               // 0x00
@@ -26,7 +27,6 @@ struct ProcessRegistryView {
 extern "C" {
 extern ProcessRegistryView g_asdProcess;
 s32 FUN_001696f4(void);
-s32 FUN_00167eb0(u32);
 
 // Dispatch callbacks or the default handler for nodes whose state byte is three.
 void FUN_0014166c(void)
@@ -39,7 +39,7 @@ void FUN_0014166c(void)
                     if (node->callback != 0) {
                         node->callback(node->unk28);
                     } else {
-                        FUN_00167eb0(node->unk60);
+                        FUN_00167eb0(reinterpret_cast<void *>(node->unk60));
                     }
                 }
             }

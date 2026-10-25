@@ -42,7 +42,7 @@ extern "C" {
 extern const char DAT_00410244[];
 void *memAlloc(s32 heap, s32 category, s32 flags, s32 bytes, s32 alignment, s32 clear);
 u32 randomAdvanceShiftRegister(u32 stream);
-f32 FUN_0024b830(u32 stream);
+f32 shiftRandomNextFraction(u32 stream);
 
 BlurSample *effBlurFilterCreateRandomSamples(const BlurScatterParameters *parameters)
 {
@@ -64,9 +64,9 @@ BlurSample *effBlurFilterCreateRandomSamples(const BlurScatterParameters *parame
         quad->color[3] = (u8)(color >> 24);
         f32 spread = parameters->spread;
         f32 halfSize = (f32)parameters->size * 0.5f;
-        f32 randomX = (FUN_0024b830(0) - 0.5f) * 2.0f;
+        f32 randomX = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
         f32 x = parameters->centerX + spread * randomX;
-        f32 randomY = (FUN_0024b830(0) - 0.5f) * 2.0f;
+        f32 randomY = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
         f32 y = parameters->centerY + spread * randomY;
         quad->x = x;
         quad->y = y;

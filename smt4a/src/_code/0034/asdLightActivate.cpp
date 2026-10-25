@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 
 extern "C" {
 

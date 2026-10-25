@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the shift constant 1 in r1 (materialised after the word load, shifted by r2) and the index temporaries in r1/r2; the build allocates the constant first. */
 #include "common.h"
 
 extern "C" {
@@ -15,7 +14,11 @@ u8 FUN_00384d34(int bit)
 {
     FlagArea *area = gameFlagsGetBlock();
 
-    return (area->bits[bit / 32] & (1 << (bit % 32))) != 0;
+    s32 word = bit / 32;
+    s32 shift = bit % 32;
+    u32 bits = area->bits[word];
+
+    return (bits & (1 << shift)) != 0;
 }
 
 } /* extern "C" */

@@ -35,7 +35,7 @@ extern int FUN_004aa768(u32, int);
 extern int btlUiIsIdleB(u32);
 extern int FUN_004ab784(u32);
 extern int FUN_004abb08(u32);
-extern void FUN_004f8f08(u32);
+extern void btlStageResetAndClearCameraFlag(u32);
 extern void FUN_004f950c(u32, int);
 extern int resourceTestPendingRecordsReady(u32, int);
 extern int FUN_004fa0d8(u32);
@@ -97,7 +97,7 @@ void FUN_00412248(BtlIntroTask *task)
         break;
     case 7:
         g_btlCamera->flags &= ~0x4000;
-        FUN_004f8f08(g_btlAux);
+        btlStageResetAndClearCameraFlag(g_btlAux);
         btlIntroSetNextState(task, 0);
         break;
     case 8:

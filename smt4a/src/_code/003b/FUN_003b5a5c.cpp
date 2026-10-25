@@ -15,7 +15,6 @@ MessageIconUnit *saveSlotFindById(u32);
 u32 FUN_00187168(const MessageIconUnit *);
 s32 scrGetCommandFrame();
 void FUN_0014e188(UiSpriteState *, s32, s32, void *, s32, f32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
 void sysPlayVoice(u32);
 

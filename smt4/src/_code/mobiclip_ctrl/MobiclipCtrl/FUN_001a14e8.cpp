@@ -13,7 +13,6 @@ extern u8 DAT_004c3af8[];
 extern MobiclipStartClock g_mobiclipCtrl;
 void FUN_00350bd0(MobiclipStartTable *table, u32 first, u32 second);
 void FUN_00350ac4(MobiclipStartTable *table, u32 index);
-u32 FUN_00350ab8(MobiclipStartTable *table, u32 index);
 const MobiclipStartRecord *movieRecordTableGetEntry(MobiclipStartTable *table, u32 index);
 const void *tableRecordGetChecked(MobiclipStartTable *table, s32 index);
 u32 FUN_0034f488(void *audio, u32 *context, const void *record, u32 depth, u32 mode);

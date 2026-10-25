@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d67fc` (_code @ 0x2d67fc, 0x548 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int rt_aeabi_memclr(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int campCecDrawSetCreate(void);
 int campCecDrawPageCreate(void);
 
@@ -96,7 +96,7 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1 = g_campCecEdit;
   memClear();
   puVar2 = &LAB_002d6c0c;
-  asdProcessCreateSimple(&LAB_002d6c0c,1,0,0,&LAB_001c0efc,0,0);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_002d6c0c), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_001c0efc), 0, 0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_002d6c24,0x65,0,0,&LAB_001ebdb8,0,0,puVar2);
   taskCreateDraw(&LAB_002d6c40,0xcc,0,0,&LAB_001ebdb8,0,0,*puVar1);

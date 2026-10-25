@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bfc24` (_code @ 0x2bfc24, 0x178 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_00126468(void);
 int FUN_002b6480(unsigned char [64], int, int, unsigned char *, unsigned char *);
 int libc_strcat(unsigned char [64], unsigned char [72]);
 int textFormatBuffer(...);
-int libc_strcpy(int, unsigned char [64]);
 int rt_aeabi_memclr(...);
 
 /* stack frame of param_4: 1 slot(s), 4 byte(s) */
@@ -83,7 +83,7 @@ unsigned int FUN_002bfc24(unsigned int param_1,unsigned int param_2,int param_3,
         *(int *)(temp_v0 + 0x4c568c) = (int)in_d0;
         *(int *)(temp_v0 + 0x4c5690) = (int)((unsigned long long)in_d0 >> 0x20);
         *(char *)(temp_v0 + 0x4c56a9) = (char)param_3;
-        libc_strcpy(temp_v0 + 0x4c5635,temp_v2);
+        libc_strcpy(reinterpret_cast<unsigned int *>(temp_v0 + 0x4c5635), reinterpret_cast<unsigned int *>(temp_v2));
         FUN_002b6480(temp_v2,0,3,&LAB_00126484,puVar3);
         return temp_v1;
       }

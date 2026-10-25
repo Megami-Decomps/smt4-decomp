@@ -1,11 +1,11 @@
 /* NON_MATCHING: compiler merges lifecycle and resource owner pointers, changing saved-register allocation. */
+#include "AsdSDK/AsdMemUtil.h"
 #include "ui/HunterDatabaseWork.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 extern HunterDatabaseWork *DAT_0057f244;
 extern void *g_aocSystem;
 void ifTouchRegionRemove(void);
-void asdMemFreeSlot(u32 slot);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
 void asdMemFree(void *memory);
 void loadedRecordTableClear(void *system);
@@ -19,7 +19,7 @@ void FUN_003b01e8(void)
     for (s32 index = 0; index < work->touch.touchRegionCount; ++index)
         ifTouchRegionRemove();
     for (s32 index = 0; index < 6; ++index) {
-        asdMemFreeSlot(work->sprites[index]);
+        asdMemFreeSlot(reinterpret_cast<void **>(work->sprites[index]));
         work->sprites[index] = 0;
     }
     for (s32 index = 0; index < 2; ++index) {

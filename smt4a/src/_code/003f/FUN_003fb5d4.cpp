@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 struct TexNode;
 
 extern "C" {
@@ -55,7 +56,6 @@ extern int FUN_00100836(unsigned char *, unsigned int, unsigned int *);
 extern int FUN_0014afd0(void *, unsigned int);
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
-extern int aocLoadTextureNode(unsigned int, void *, unsigned int, unsigned int);
 /* Supplied declaration required: sysFatalBreak. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: asdTextureCreate. */
@@ -104,7 +104,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
     if ((param_2 & 8) != 0) {
       temp_v3 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
-        temp_v3 = aocLoadTextureNode(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x20000);
+        temp_v3 = aocLoadTextureNode(g_aocSystem, reinterpret_cast<u32>(param_1->field_0x8), param_1->field_0xc, 0x20000);
       }
       else {
         temp_v3 = FUN_003598c4(param_1->field_0x8,param_1->field_0xc);
@@ -113,7 +113,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
     else if ((param_2 & 0x40) != 0) {
       temp_v3 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
-        temp_v3 = aocLoadTextureNode(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x30000);
+        temp_v3 = aocLoadTextureNode(g_aocSystem, reinterpret_cast<u32>(param_1->field_0x8), param_1->field_0xc, 0x30000);
       }
       else {
         temp_v3 = (int)asdTMTexTableActivateImage((int)param_1->field_0x8,(int)param_1->field_0xc);
@@ -122,7 +122,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
     else if ((param_2 & 1) != 0) {
       temp_v3 = aocRunByName(g_aocSystem,param_1->field_0x8,param_1->field_0xc,1);
       if (temp_v3 != 0) {
-        temp_v3 = aocLoadTextureNode(g_aocSystem,param_1->field_0x8,param_1->field_0xc,0x10000);
+        temp_v3 = aocLoadTextureNode(g_aocSystem, reinterpret_cast<u32>(param_1->field_0x8), param_1->field_0xc, 0x10000);
       }
       else {
         temp_v3 = FUN_0014afd0(param_1->field_0x8,param_1->field_0xc);

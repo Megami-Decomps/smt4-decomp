@@ -3,14 +3,12 @@
 #include "ui/UiSpriteState.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
-void memClear(void *memory, u32 bytes);
 s32 infoWindowUpdate(u32 job);
 s32 infoWinDraw(u32 job);
-u32 asdProcessCreateSimple(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *parameters);

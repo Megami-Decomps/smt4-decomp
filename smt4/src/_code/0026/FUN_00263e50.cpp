@@ -33,7 +33,6 @@ struct LightResourceSet {
 extern "C" {
 extern GfxModelState g_gfxSettings;
 
-void sceneTraverserVisit(u32 traverser, u32 root);
 void nw_gfx_res_ResGraphicsFile_Cleanup(s32 *file);
 
 /* Destroys an object in an owned-object array and clears its slot. */
@@ -91,7 +90,7 @@ void FUN_00263e50(LightResourceSet *set)
     asdMemFreeNonNull(set->resource);
     asdMemFree(set->extra);
     asdMemFree(set);
-    sceneTraverserVisit(g_gfxSettings.attachInfo[0], g_gfxSettings.transformBuilder[0]);
+    sceneTraverserVisit(reinterpret_cast<void *>(g_gfxSettings.attachInfo[0]), reinterpret_cast<void *>(g_gfxSettings.transformBuilder[0]));
 }
 
 } /* extern "C" */

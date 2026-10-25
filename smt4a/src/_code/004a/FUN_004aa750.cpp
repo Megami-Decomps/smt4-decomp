@@ -1,14 +1,12 @@
-#include "battle/btlUI.h"
+#include "battle/BtlUiObjCQuery.h"
 
 extern "C" {
 
-void FUN_002f934c(BtlUiObjCA *obj);
-
 extern BtlUiGlobalsA g_btlUi;
 
-void FUN_004aa750(void)
+u32 FUN_004aa750(u32 block)
 {
-    FUN_002f934c(&g_btlUi.ui->objC);
+    return FUN_002f934c(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

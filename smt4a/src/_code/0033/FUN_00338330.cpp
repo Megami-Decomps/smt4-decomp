@@ -1,12 +1,12 @@
 /* NON_MATCHING: aggregate vector copies and matrix temporary stack allocation differ from retail. */
 #include "shard/X14_ModelTransform.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
 struct TransformOwnerA {
     u8 unk00[0x10];
     u8 transform[1]; // 0x10, Apocalypse's transform prefix differs from IV's
 };
 extern "C" {
-void mathMatrixApplyScale(TransformMtx44 *matrix, const TransformVec3 *scale, u32 mode);
 void matrix44SetIdentity(TransformMtx44 *matrix);
 void FUN_002b4c30(TransformRotation *rotation, const void *source);
 void matrix43Multiply(TransformMtx44 *result, const TransformMtx44 *left, const TransformRotation *right);
@@ -22,7 +22,7 @@ void FUN_00338330(TransformOwnerA *owner, const TransformVec3 *translation, cons
     TransformRotation rotation;
     if (scale) {
         TransformVec3 value = *scale;
-        mathMatrixApplyScale(&scaleMatrix, &value, 0);
+        mathMatrixApplyScale(reinterpret_cast<f32 *>(&scaleMatrix), reinterpret_cast<const f32 *>(&value), 0);
     } else {
         matrix44SetIdentity(&scaleMatrix);
     }

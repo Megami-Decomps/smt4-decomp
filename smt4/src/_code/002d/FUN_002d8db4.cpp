@@ -1,5 +1,6 @@
 /* Request sequence state 8 when the game-state flag is set or the shared selector is present. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ struct SequenceConditionStateView {
 extern s32 DAT_0049fd14;
 extern SequenceConditionStateView g_gameState;
 
-void asdSequenceRequest(s32 state, const void *arg, u32 size);
 
 u32 FUN_002d8db4(void)
 {

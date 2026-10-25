@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RenderChannelState g_inputResetState;
-s32 FUN_0019be8c(u32 codepoint);
+u8 FUN_0019be8c(u32 codepoint);
 
 // Append text-history characters or capture byte-swapped text between the capture control codes.
 void textHistoryAppendCodepoint(u32 codepoint)

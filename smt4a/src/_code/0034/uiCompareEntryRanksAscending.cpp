@@ -1,5 +1,7 @@
+#include "util/DataTable08Sub2GetRecord.h"
 /* NON_MATCHING: saved-register assignment differs (retail keeps leftData/rightData in r8/r9 and the scores in r6/r5) and the rank load targets r0 instead of r1. */
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "util/DataTable08Sub2GetRecord.h"
 
 extern "C" {
 

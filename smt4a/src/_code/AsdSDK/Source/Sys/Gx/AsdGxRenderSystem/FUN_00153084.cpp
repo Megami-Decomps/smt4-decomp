@@ -1,6 +1,7 @@
 /* NON_MATCHING: classification registers, paired dimension loads and format-case placement differ. */
 #include "gfx/RenderTargetState.h"
 #include "AsdSDK/AsdDebug.h"
+#include "gfx/VertexStreams.h"
 
 struct AsdGxSurfaceDescription {
     s32 format;
@@ -14,7 +15,6 @@ typedef char AsdGxSurfaceDescriptionSize[sizeof(AsdGxSurfaceDescription) == 0x18
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void *asdMemoryAllocAligned(u32, u32, u32, u32, u32, u32);
-u32 asdGxGetPhysicalAddress(const void *);
 extern const char DAT_0053d704[];
 
 /* Describe both framebuffer surfaces and optionally allocate their backing storage. */
@@ -93,7 +93,7 @@ void FUN_00153084(RenderTargetFramebuffer *framebuffer, const AsdGxSurfaceDescri
                 break;
             }
             surface->data = data;
-            surface->physicalAddress = asdGxGetPhysicalAddress(data);
+            surface->physicalAddress = asdGxGetPhysicalAddress(reinterpret_cast<u32>(data));
         }
         storage->width = source->width;
         storage->height = source->height;

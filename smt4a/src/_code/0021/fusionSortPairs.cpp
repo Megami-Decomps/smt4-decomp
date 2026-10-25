@@ -1,5 +1,6 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stdlib.h>
+#include "event/2dEvent/2dEventTex.h"
 
 // A fusion pair record read as one 64-bit value: the same layout as UnitePairEntryIV.
 union FusionPairBits {
@@ -21,7 +22,6 @@ struct FusionSortPreferences {
 
 extern "C" {
 extern UniteWork *g_unite;
-FusionSortPreferences *FUN_0026140c(void);
 s32 FUN_002b27d4(const void *a, const void *b);
 s32 FUN_0034f0b4(const void *a, const void *b);
 s32 uniteComparePairsAscending(const void *a, const void *b);
@@ -37,7 +37,7 @@ void arraySortQsort(void *base, u32 count, u32 size, s32 (*compare)(const void *
 void fusionSortPairs(void)
 {
     UniteWork *work = g_unite;
-    const u8 *setting = &FUN_0026140c()->setting;
+    const u8 *setting = &reinterpret_cast<FusionSortPreferences *>(FUN_0026140c())->setting;
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {
         if (ascending) {

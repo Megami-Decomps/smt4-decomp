@@ -1,7 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0032ba8c` (_code @ 0x32ba8c, 0x71c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -50,10 +52,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: dataTableGet. */
 extern int dataTableGetEntries(void);
@@ -103,7 +103,7 @@ unsigned int FUN_0032ba8c(void)
   int temp_v30;
   
   temp_v1 = g_titleConfig;
-  temp_v2 = vec2GetXInt(g_titleConfig + 0x5c);
+  temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(g_titleConfig + 0x5c));
   temp_v3 = vec2GetYInt(temp_v1 + 0x5c);
   temp_v26 = (unsigned int)(*(int *)(temp_v1 + 8) == 1);
   temp_v10 = 0;
@@ -166,7 +166,7 @@ unsigned int FUN_0032ba8c(void)
       FUN_00164b5c(2,0x24,1,temp_v27,temp_v9,0x10);
       temp_v6 = g_renderCtx;
       if (temp_v0) {
-        temp_v5 = packNibblesAndByte(6,1,0);
+        temp_v5 = packNibblesAndByte(6, 1, 0);
         piVar11 = (int *)(temp_v6 + 0x12b8);
         temp_v7 = piVar11[*piVar11 + 2];
         piVar11[*piVar11 + 2] = temp_v5;
@@ -179,7 +179,7 @@ unsigned int FUN_0032ba8c(void)
         FUN_00164b5c(2,0x24,2,temp_v27,temp_v9,0x15);
         efctSetSpeed();
         temp_v9 = g_renderCtx;
-        temp_v6 = packNibblesAndByte(6,7,0);
+        temp_v6 = packNibblesAndByte(6, 7, 0);
         piVar11 = (int *)(temp_v9 + 0x12b8);
         temp_v5 = piVar11[*piVar11 + 2];
         piVar11[*piVar11 + 2] = temp_v6;
@@ -205,7 +205,7 @@ unsigned int FUN_0032ba8c(void)
         temp_v6 = recordGetModeForId((int)*(short *)(temp_v1 + 0x1c));
         temp_v9 = g_renderCtx;
         if ((temp_v6 == 1 || temp_v6 == 2) || temp_v6 == 6) {
-          temp_v6 = packNibblesAndByte(6,1,0);
+          temp_v6 = packNibblesAndByte(6, 1, 0);
           piVar11 = (int *)(temp_v9 + 0x12b8);
           temp_v5 = piVar11[*piVar11 + 2];
           piVar11[*piVar11 + 2] = temp_v6;
@@ -216,7 +216,7 @@ unsigned int FUN_0032ba8c(void)
           FUN_001835b4(2,0x24,0x1d,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0x1f
                       );
           temp_v9 = g_renderCtx;
-          temp_v6 = packNibblesAndByte(6,7,0);
+          temp_v6 = packNibblesAndByte(6, 7, 0);
           piVar11 = (int *)(temp_v9 + 0x12b8);
           temp_v5 = piVar11[*piVar11 + 2];
           piVar11[*piVar11 + 2] = temp_v6;

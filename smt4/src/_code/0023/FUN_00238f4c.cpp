@@ -1,6 +1,7 @@
 /* NON_MATCHING: critical-section/global pointer caching, temporary stack placement and message-header clear ordering differ. */
 #include "shard/CecMessageBox.h"
 #include "shard/W6_W6Match6_CecMessageBox.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
@@ -9,7 +10,6 @@ void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 u32 nn_cec_CTR_MessageBox_WriteBoxInfo(MessageBox *box, s32 kind, const void *header, const void *data);
 u32 nn_cec_CTR_MessageBox_WriteMessageBoxInfo(MessageBox *box);
-void memClear(void *data, u32 size);
 void FUN_002399ec(u32 handle);
 void FUN_0024ee68(s32 mode);
 

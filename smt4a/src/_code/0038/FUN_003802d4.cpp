@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail unrolls the three candidates and stores zero entries before excluding them from the count. */
+/* NON_MATCHING: unrolled predicated structure now matches retail; only the constant/value register pair (r3/r2) is swapped. */
 #include "gamedata/Table00.h"
 extern "C" {
 u32 scrGetArg(u32);
@@ -11,10 +11,13 @@ u32 FUN_003802d4(void)
     Table00Record* record = dataTable00FindById((u16)scrGetArg(0));
     u32 candidates[3];
     s32 count = 0;
-    for (u32 index = 0; index < 3; ++index) {
-        u16 value = record->choices[index].value;
-        if (value != 0x7B6 && value != 0) {
-            candidates[count++] = value;
+    for (s32 index = 0; index < 3; ++index) {
+        s32 value = record->choices[index].value;
+        if (value != 0x7B6) {
+            candidates[count] = value;
+        }
+        if (value != 0x7B6 && value > 0) {
+            count++;
         }
     }
     s32 result = -1;

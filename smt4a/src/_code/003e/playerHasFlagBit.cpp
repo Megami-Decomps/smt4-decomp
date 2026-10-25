@@ -1,4 +1,5 @@
 #include "shard/Shard003E.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 

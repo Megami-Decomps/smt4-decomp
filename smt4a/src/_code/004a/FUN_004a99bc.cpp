@@ -20,7 +20,7 @@ extern BtlUiGlobalsA g_btlUi;
 s32 textFormatBuffer(char *output, const char *format, ...);
 void menuStateBeginSelect(s16 id);
 void FUN_00227af0(const char *text);
-void menuStateStartSelect(s32 mode);
+void menuStateStartSelect(u8 selection);
 
 /* Opens the battle selection menu for `id`, titled with its name. */
 void FUN_004a99bc(BtlUiA *unused, u16 id, s32 owner)

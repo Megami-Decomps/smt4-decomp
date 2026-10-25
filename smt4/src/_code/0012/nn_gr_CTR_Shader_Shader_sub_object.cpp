@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(void *ptr, int size);
 
 typedef struct Shader {
     /* 0x00000 */ u32 unk00000;
@@ -33,7 +33,7 @@ Shader *nn_gr_CTR_Shader_Shader_sub_object(Shader *shader)
     shader->unk0029C = 0;
     shader->unk002A0 = 0;
     shader->unk00364 = 0;
-    memClear(shader->unk12868, 0x80);
+    reinterpret_cast<int>(memClear(shader->unk12868, 0x80));
     return shader;
 }
 

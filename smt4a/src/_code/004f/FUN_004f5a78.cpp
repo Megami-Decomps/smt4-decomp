@@ -1,6 +1,7 @@
 /* NON_MATCHING: work/global pointers and path buffers use different saved registers; return branches differ. */
 #include "battle/BattleMovementEffects.h"
 #include "battle/btlEffect.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
@@ -12,7 +13,6 @@ void textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
 char *FUN_00100d60(char *, s32);
 u32 findRecordByKey(const char *);
-void asdLoadFileAsyncSimple(const char *, char **, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const void *);
@@ -41,7 +41,7 @@ u32 FUN_004f5a78(BattleMovementEffects *work)
             libc_strcpy(path, formatted);
             libc_strcpy(resource->key, FUN_00100d60(path, '/') + 1);
             if (findRecordByKey(resource->key) == 0xFF) {
-                asdLoadFileAsyncSimple(path, &resource->file, 1);
+                asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&resource->file), 1);
                 resource->flags |= 1;
             }
         }

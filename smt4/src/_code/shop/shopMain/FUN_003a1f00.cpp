@@ -14,7 +14,7 @@ void FUN_00231bcc(void *header, u32 id, s32 dx, s32 dy, u32 color, u32 flags);
 void FUN_0022f1d0(ShopScreen *screen, s32 index, s32 flag, ShopSlot *slot);
 void FUN_002332e8(ShopPanel *panel, s32 first, s32 second);
 s32 FUN_0029e924(ShopCategoryList *list);
-s32 FUN_00240d5c(ShopCategoryList *list);
+s32 flaggedEntryGetValueByState(ShopCategoryList *list);
 s32 rangeLimitMin(ShopCategoryList *list);
 s32 flaggedValueHolderGetTotal(ShopCategoryList *list);
 
@@ -65,12 +65,12 @@ void FUN_003a1f00(ShopScreen *screen, u32 sprite)
     s32 first = FUN_0029e924(list);
     s32 count = rangeLimitMin(list);
     for (s32 i = 0; i < count; ++i) {
-        if (!compact || FUN_00240d5c(list) != i)
+        if (!compact || flaggedEntryGetValueByState(list) != i)
             FUN_0022f1d0(screen, i + 1, 0, &slots[first + i]);
     }
     if (compact && list->limit > 0)
-        FUN_0022f1d0(screen, FUN_00240d5c(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
-    FUN_002332e8(screen->panel, FUN_0029e924(list), FUN_00240d5c(list));
+        FUN_0022f1d0(screen, flaggedEntryGetValueByState(list) + 1, 1, &slots[flaggedValueHolderGetTotal(list)]);
+    FUN_002332e8(screen->panel, FUN_0029e924(list), flaggedEntryGetValueByState(list));
     screen->panel->refresh(color);
 }
 

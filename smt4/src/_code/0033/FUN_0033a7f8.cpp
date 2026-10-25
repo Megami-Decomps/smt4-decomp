@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int CONCAT44(...);
 int FUN_0027da30(int, int);
 int FUN_002b7bca(int *, unsigned int, int, unsigned char *);
-int memClear(int *, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -113,7 +113,7 @@ LAB_0033a884:
   temp_v18 = CONCAT44(temp_v17,temp_v6 * temp_v8);
   temp_v14 = CONCAT44(temp_v10 * temp_v6 + temp_v6 * 2.5f,temp_v16);
   temp_v6 = (temp_v9 - temp_v8) * temp_v6;
-  memClear(aiStack_104 + 1,200);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(aiStack_104 + 1), 200));
   temp_v2 = 0;
   temp_v3 = 0;
   do {

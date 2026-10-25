@@ -8,7 +8,7 @@ extern const char DAT_00531a18[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void tripleClear(void *triple);
 void textFormatBuffer(char *destination, const char *format, ...);
-void *FUN_001642e4(const char *path, u32 *sizes, u32 mode, u32 alignment);
+void *asdLoadFileSyncNoContext(const char *path, u32 *sizes, u32 mode, u32 alignment);
 void *FUN_001abbc4(void *buffer);
 
 void FUN_002b75b0(void)
@@ -35,7 +35,7 @@ void FUN_002b75b0(void)
         textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
-            slot->buffer = FUN_001642e4(path, &size, 1, 0x80);
+            slot->buffer = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
             slot->list = FUN_001abbc4(slot->buffer);
         }
     }
@@ -43,13 +43,13 @@ void FUN_002b75b0(void)
         textFormatBuffer(path, "effect_editor/SIBUKI.EPL");
         EplSlot *slot = &g_eplSlots->slots[0];
         if (slot->list == NULL) {
-            slot->buffer = FUN_001642e4(path, &size, 1, 0x80);
+            slot->buffer = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
             slot->list = FUN_001abbc4(slot->buffer);
         }
     }
     EplSlot *slot = &g_eplSlots->slots[3];
     if (slot->list == NULL) {
-        slot->buffer = FUN_001642e4("effect_editor/NB_003.EPL", &size, 1, 0x80);
+        slot->buffer = asdLoadFileSyncNoContext("effect_editor/NB_003.EPL", &size, 1, 0x80);
         slot->list = FUN_001abbc4(slot->buffer);
     }
 }

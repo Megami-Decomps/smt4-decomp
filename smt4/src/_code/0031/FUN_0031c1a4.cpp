@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct GameStateView {
     /* 0x00 */ u8 unk00[0x74];
@@ -7,7 +8,6 @@ struct GameStateView {
 
 extern "C" {
 extern GameStateView g_gameState;
-void scrSetResult(s32 result);
 void FUN_0021e450(void);
 }
 

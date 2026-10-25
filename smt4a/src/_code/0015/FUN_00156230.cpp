@@ -6,7 +6,6 @@
 extern "C" {
 extern MenuState *g_menuState;
 s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
-void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 
 // Advance the opening, closing and delayed multi-panel animation phases.
 u32 FUN_00156230(void)

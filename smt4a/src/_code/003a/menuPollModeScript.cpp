@@ -22,7 +22,7 @@ void *FUN_00275bc8(void *script, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(s32 id);
 void cecProcessCall4(void);
-s32 scrRunOpcodesStub(void *process);
+u32 scrRunOpcodesStub(void *process);
 
 // Start the mode-specific menu script, then advance when it reports completion.
 u32 menuPollModeScript(MenuScriptState *menu)

@@ -10,8 +10,8 @@ u32 btlReflectSetValuePair(s32 actor, u32 flags, u32 value, s32 first, u32 secon
     if (first != 0) {
         action->flagView.flags |= 4;
     }
-    action->kind = 22;
     action->value = value;
+    action->kind = 22;
     action->first = first;
     action->second = second;
     return 1;

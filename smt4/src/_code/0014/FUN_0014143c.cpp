@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 

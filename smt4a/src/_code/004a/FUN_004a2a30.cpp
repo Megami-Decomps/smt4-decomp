@@ -1,5 +1,6 @@
 /* NON_MATCHING: layered panel opacity, draw arguments and caption table addressing differ. */
 #include "common.h"
+#include "util/DrawTextAtRelativePosition.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 namespace {
@@ -27,8 +28,6 @@ void FUN_004a7ba0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 altern
 void FUN_004a7814(ProfileEntryDrawView *panel, u32 first, s32 entry, s32 alternate, s32 fade, u32 second);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_002e7284(TextLayoutContextA *context, s32 x, s32 y, s32 fade, const char *text);
-void drawTextAtRelativePosition(TextLayoutContextA *context, u32 style, s32 x, s32 y,
-    s32 first, s32 second, u32 color, s32 fade, const char *text);
 void FUN_00183bb0(void);
 
 void FUN_004a2a30(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 textId, f32 scale)

@@ -3,7 +3,7 @@
 
 extern "C" {
 u32 FUN_0029dde0();
-s32 FUN_0029ea68(u16);
+s32 itemGetFlagBit1(u16);
 s32 partyMemberFindById(u16);
 GameUnitSortRecord *gameGetUnitRecord(s32);
 
@@ -21,7 +21,7 @@ u16 fusionCandidateMatchesParentFilter(const FusionCandidateFilter *filter, u16 
     }
     if (filter->availableOnly && result->header.level > FUN_0029dde0())
         return 0;
-    if (filter->excludeMarked && FUN_0029ea68(result->header.id))
+    if (filter->excludeMarked && itemGetFlagBit1(result->header.id))
         return 0;
     if (filter->availableOnly && partyMemberFindById(result->header.id))
         return 0;

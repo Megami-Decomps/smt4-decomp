@@ -1,5 +1,8 @@
 #include "common.h"
 #include "shard/W4_Match6_BibleScreen.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "status/StatusCamera.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 
@@ -11,8 +14,6 @@ extern int asdLoadFileAsyncSimple(const char *path, void **buffer, int flags);
 extern int gameGlobalsSetSelected(int);
 extern int FUN_0029e788(void);
 extern int FUN_0029e874(int);
-extern int FUN_002a0cc8(int);
-extern int asdTMTexTableLoadSprites(int);
 extern int FUN_002c58c8(int, int);
 extern int *asdTMTexTableGetEntry(u32);
 extern int campButtonHelpIsActive(void);

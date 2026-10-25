@@ -2,6 +2,7 @@
 /* Starts a ready character-panel script and advances the panel's slide/fade transition. */
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
+#include "util/FUN_0026f188.h"
 
 extern "C" {
 u32 FUN_0026f784(void *link);
@@ -11,7 +12,6 @@ void linkHolderApplyFlag(void *link, u32 flag);
 void characterInfoPanelPopulate(void *panel, u32 selection, const void *record);
 u32 FUN_0028d594(void);
 u32 FUN_0026f1f0(void);
-void FUN_0026f188(u32 directory, u32 entry);
 void buttonHelpSetPreset(u32 preset);
 void uiAnimateStaggeredSlidesAndFades(void *panel, u32 mode);
 

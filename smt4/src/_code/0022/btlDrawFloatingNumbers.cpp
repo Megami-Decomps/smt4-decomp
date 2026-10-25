@@ -1,5 +1,6 @@
 /* NON_MATCHING: number/label bases are hoisted and member address generation differs; -O2 candidate. */
 #include "common.h"
+#include "camp/RenderCtx.h"
 
 struct NumberSprite { u8 data[0x8c]; };
 struct FloatingNumber {
@@ -33,7 +34,6 @@ struct NumberDrawOrder {
 extern "C" {
 extern void *g_titleScene;
 extern f32 DAT_00435e20;
-void FUN_002c39a4(void *);
 f32 renderCtxCalculateStereoParallax(void *, f32);
 void effectRenderTransformedInstance(NumberSprite *, f32);
 s32 FUN_0019d734(const void *, const void *);
@@ -42,7 +42,7 @@ void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
 void btlDrawFloatingNumbers(FloatingNumberScene *scene, s32 pass)
 {
     NumberDrawOrder order[16];
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
     s32 parallax = 0;
     if (pass)
         parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, DAT_00435e20);

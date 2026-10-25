@@ -1,7 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b1a00` (_code @ 0x4b1a00, 0x144c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -63,10 +65,8 @@ extern unsigned int FUN_0014bd84(unsigned short);
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -236,7 +236,7 @@ LAB_004b1d78:
           temp_v3 = temp_v28;
         }
         else {
-          temp_v8 = vec2GetXInt(temp_v30);
+          temp_v8 = vec2GetXInt(reinterpret_cast<const void *>(temp_v30));
           temp_v8 = param_2 + temp_v8;
           temp_v5 = vec2GetYInt(temp_v30);
           temp_v5 = param_3 + temp_v5;
@@ -305,7 +305,7 @@ LAB_004b1d78:
         }
         if ((temp_v31 != 0) && (*(short *)(param_1 + temp_v1 * 0x8c + 0x93c) != 0)) {
           temp_v3 = g_renderCtx;
-          temp_v6 = packNibblesAndByte(6,1,0);
+          temp_v6 = packNibblesAndByte(6, 1, 0);
           piVar7 = (int *)(temp_v3 + 0x12b8);
           temp_v7 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v6;
@@ -318,7 +318,7 @@ LAB_004b1d78:
                        ,0x97);
           efctSetSpeed();
           temp_v3 = g_renderCtx;
-          temp_v8 = packNibblesAndByte(6,7,0);
+          temp_v8 = packNibblesAndByte(6, 7, 0);
           piVar7 = (int *)(temp_v3 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v8;
@@ -460,7 +460,7 @@ LAB_004b1d78:
         }
         if ((temp_v23 != 0) && (*(short *)(param_1 + temp_v1 * 0x8c + 0xd9c) != 0)) {
           temp_v8 = g_renderCtx;
-          temp_v5 = packNibblesAndByte(6,1,0);
+          temp_v5 = packNibblesAndByte(6, 1, 0);
           piVar7 = (int *)(temp_v8 + 0x12b8);
           temp_v4 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v5;
@@ -473,7 +473,7 @@ LAB_004b1d78:
                        *(short *)(temp_v3 + 10) + param_3,0xab);
           efctSetSpeed();
           temp_v3 = g_renderCtx;
-          temp_v8 = packNibblesAndByte(6,7,0);
+          temp_v8 = packNibblesAndByte(6, 7, 0);
           piVar7 = (int *)(temp_v3 + 0x12b8);
           temp_v5 = piVar7[*piVar7 + 2];
           piVar7[*piVar7 + 2] = temp_v8;

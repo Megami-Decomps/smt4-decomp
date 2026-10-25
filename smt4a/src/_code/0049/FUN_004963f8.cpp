@@ -1,10 +1,10 @@
 /* NON_MATCHING: packed-entry option clearing uses AND rather than retail's halfword shift pair. */
 #include "shard/S2Scene3a.h"
+#include "addon/AocEntryKind.h"
+#include "gamedata/PartyMoney.h"
 
 extern "C" {
-void FUN_004a0ef4(u32 amount);
 void FUN_00408184(u32 kind, u32 amount);
-s32 FUN_00192718(u16 id);
 u32 aocGetContentFlags(u16 id);
 void gameDataAddCappedPoints(u32 points);
 void FUN_0049cd18(const Scene3aEntry *entry, s32 quantity, u32 flags);
@@ -23,7 +23,7 @@ void FUN_004963f8(Scene3a *scene)
         offsetof(TransactionSceneView, count) == 0x15ffc &&
         offsetof(TransactionSceneView, totalAmount) == 0x16000 ? 1 : -1];
     TransactionSceneView *work = (TransactionSceneView *)scene;
-    FUN_004a0ef4(work->totalAmount);
+    partyAddMoneyClampedForward(work->totalAmount);
     FUN_00408184(0x1f, work->totalAmount);
     for (s32 index = 0; index < work->count; ++index) {
         u16 id = work->records[index].id;
@@ -32,7 +32,7 @@ void FUN_004963f8(Scene3a *scene)
             return;
         }
         Scene3aEntry entry;
-        if (FUN_00192718(id) == 10) {
+        if (aocEntryGetKindForward(id) == 10) {
             gameDataAddCappedPoints(aocGetContentFlags(id) * quantity);
             entry.id = id;
             entry.attributes.options = 0;

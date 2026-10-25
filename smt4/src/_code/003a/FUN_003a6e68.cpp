@@ -5,6 +5,7 @@
 #include "shard/W5_W5Match2_ScalarArguments.h"
 #include "ui/PartyPanelState.h"
 #include <stddef.h>
+#include "status/StatusCamera.h"
 
 extern "C" {
 s32 uiAnimationAdvanceChannel(void *, s32);
@@ -13,7 +14,6 @@ s32 vec2GetXInt(const TimerSlot *);
 void pointConvertToFloat(FloatPoint *, s32, s32);
 void buttonHelpSetPreset(s32);
 void FUN_0029d960(void *);
-void FUN_002a0cc8(u8);
 void FUN_00233670(MessageIdList *, u32, s32, s32);
 }
 

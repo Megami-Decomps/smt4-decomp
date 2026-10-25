@@ -1,9 +1,9 @@
 /* NON_MATCHING: party-slot addressing, short-circuit compare scheduling and final zero-result register differ. */
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/Shard0031.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
-PartySlotA *gameGetPlayerData();
 s32 FUN_003e0024();
 s32 FUN_003e0154();
 s32 FUN_003e0034();
@@ -19,7 +19,7 @@ s32 FUN_00187168(PartySlotA *unit);
 u32 FUN_004ced50()
 {
     struct PlayerStatusView { u8 prefix[0x5E]; u16 status; };
-    PartySlotA *player = gameGetPlayerData();
+    PartySlotA *player = reinterpret_cast<PartySlotA *>(gameGetPlayerData());
     s32 hp = FUN_003e0024();
     s32 maxHp = FUN_003e0154();
     s32 mp = FUN_003e0034();

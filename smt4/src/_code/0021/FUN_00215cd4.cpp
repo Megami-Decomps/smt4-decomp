@@ -17,7 +17,7 @@ static __inline void uiQuestChangeState(UiQuest *quest, s32 state)
 extern "C" {
 void uiQuestLoadResources(void);
 void FUN_0028fe0c(u32 questId, s32 enabled);
-u8 FUN_00298f88(u32 questId);
+u32 FUN_00298f88(u32 questId);
 QuestFlagsRecord *dataTable1bOr1cGetRecord(u32 questId);
 void timerStart(void *sprite, s32 animation, s32 frame);
 

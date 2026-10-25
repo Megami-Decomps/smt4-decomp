@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -9,7 +11,6 @@ int FUN_0026c868(void);
 int FUN_00292bcc(...);
 int FUN_0029378c(...);
 int FUN_00298d28(...);
-int FUN_002a0cc8(...);
 
 int FUN_001a7d48(...);
 int FUN_00262d40(void);
@@ -35,7 +36,6 @@ int __aeabi_memset4(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, int, int);
 int FUN_002d666c(...);
 int words3Clear(unsigned char *);
 int drawParameterBlockClear(void);
@@ -137,7 +137,7 @@ void FUN_0028a420(void)
   words3Clear(&g_campState);
   FUN_002898e4();
   puVar2 = &LAB_0028a7d8;
-  asdProcessCreateSimple(&LAB_0028a7d8,2,0,0,&LAB_0032c8d4,0,0);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_0028a7d8), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_0032c8d4), 0, 0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_0028a7e8,0x7a,0,0,FUN_0018b2a4,0,0,puVar2);
   taskCreateDraw(&LAB_0028a7f8,0xd8,0,0,FUN_0018b2a4,0,0,*puVar1);

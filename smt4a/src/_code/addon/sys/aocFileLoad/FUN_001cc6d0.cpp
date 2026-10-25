@@ -11,7 +11,7 @@ int FUN_001d10c0(void);
 int FUN_001d1108(void);
 
 int refIsNullOrZero(int *);
-int FUN_001642e4(int, int, unsigned int, unsigned int);
+int asdLoadFileSyncNoContext(int, int, unsigned int, unsigned int);
 int jyoucyuGetTableEntry(...);
 int FUN_001883b0(unsigned int *, int *, unsigned int);
 int vcallSlot12IfValid(...);
@@ -61,7 +61,7 @@ extern unsigned int g_aocSystem; /* 0x570280 */
 #endif
 /* Supplied declaration required: refIsNullOrZero. */
 extern int FUN_00100836(int, unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_001642e4. */
+/* Supplied declaration required: asdLoadFileSyncNoContext. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
 /* Supplied declaration required: FUN_001883b0. */
 /* Supplied declaration required: vcallSlot12IfValid. */
@@ -188,7 +188,7 @@ void FUN_001cc6d0(int param_1,int param_2)
         return;
       }
       temp_v3 = param_2 + 0x70;
-      FUN_001642e4(temp_v3,param_2 + 0x24,*(unsigned int *)(param_2 + 0x28),
+      asdLoadFileSyncNoContext(temp_v3,param_2 + 0x24,*(unsigned int *)(param_2 + 0x28),
                    *(unsigned int *)(param_2 + 0x2c));
       *(int *)(param_2 + 0x14) = temp_v3;
       *(unsigned char *)(param_2 + 8) = 3;

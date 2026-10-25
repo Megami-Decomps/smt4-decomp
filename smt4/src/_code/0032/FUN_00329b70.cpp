@@ -82,7 +82,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00258618. */
 /* Supplied declaration required: gfxObjectDestroy. */
 extern int effectAreAllCompletionChecksReady(unsigned int);
-extern unsigned int FUN_00263c1c(unsigned char *);
+extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: statusCameraDestroy. */
 /* Supplied declaration required: FUN_0028bf2c. */
@@ -271,14 +271,14 @@ unsigned int FUN_00329b70(void)
           puVar7 = &LAB_0032a054;
           asdMdlManagerCreateLoaded(&LAB_0032a054,7);
           *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-          temp_v6 = FUN_00263c1c(&LAB_0032a074);
+          temp_v6 = asdCameraLoadFromFile(&LAB_0032a074);
           *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
         }
         else {
           puVar7 = &LAB_0032a098;
           asdMdlManagerCreateLoaded(&LAB_0032a098,7);
           *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-          temp_v6 = FUN_00263c1c(&LAB_0032a0b4);
+          temp_v6 = asdCameraLoadFromFile(&LAB_0032a0b4);
           *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
         }
       }
@@ -286,14 +286,14 @@ unsigned int FUN_00329b70(void)
         puVar7 = &LAB_0032a0d4;
         asdMdlManagerCreateLoaded(&LAB_0032a0d4,7);
         *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-        temp_v6 = FUN_00263c1c(&LAB_0032a0f0);
+        temp_v6 = asdCameraLoadFromFile(&LAB_0032a0f0);
         *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
       if (*(short *)(temp_v2 + 0x1e) == 4) {
         puVar7 = &LAB_0032a110;
         asdMdlManagerCreateLoaded(&LAB_0032a110,7);
         *(unsigned char **)(temp_v2 + 0x88) = puVar7;
-        temp_v6 = FUN_00263c1c(&LAB_0032a12c);
+        temp_v6 = asdCameraLoadFromFile(&LAB_0032a12c);
         *(unsigned int *)(temp_v2 + 0x90) = temp_v6;
       }
       FUN_0029c2cc(*(unsigned int *)(temp_v2 + 0x8c),0);

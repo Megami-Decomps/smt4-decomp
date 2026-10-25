@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W4_Match6_BtlScript.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int battleSetActionKind(int *);
 int FUN_00229b10(int *, unsigned int *);
 int btlUnitSetParam(int *, int, int);
 int dataTable40FindById(void);
-int memClear(int, int);
 int btlUiClearRowStatuses(unsigned int);
 int FUN_003cae6c(int *, unsigned int *);
 int FUN_003cb3e4(int *, unsigned int *);
@@ -105,7 +105,7 @@ int * FUN_003d28d0(int *param_1,unsigned int param_2)
        (*(short *)(temp_v3 + 0x496e) == 0)) {
       *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 0x10;
       *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14e) = 0;
-      memClear(temp_v2 + 0x3c,0x85);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
     }
     FUN_00229b10(param_1,puVar6);
     return (int *)0x1;

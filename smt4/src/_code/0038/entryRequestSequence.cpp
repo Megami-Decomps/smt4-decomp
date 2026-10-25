@@ -9,7 +9,7 @@ extern "C" u32 entryRequestSequence(const EntrySequenceSource* source)
     EntrySequencePacket packet;
     packet.id = source->description->id;
     packet.argument = -1;
-    libc_strcpy(packet.name, source->description->name);
+    libc_strcpy(reinterpret_cast<unsigned int *>(packet.name), reinterpret_cast<unsigned int *>(source->description->name));
     asdSequenceRequest(4, &packet, sizeof(packet));
     return 1;
 }

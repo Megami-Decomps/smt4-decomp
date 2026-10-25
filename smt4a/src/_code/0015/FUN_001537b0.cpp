@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001537b0` (_code @ 0x1537b0, 0x4a0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int stateValuesGetBySelector(unsigned int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -85,7 +85,7 @@ void FUN_001537b0(void)
     temp_v1 = g_renderCtx;
     temp_v7 = temp_v7 / temp_v10;
     temp_v10 = temp_v11;
-    temp_v5 = packNibblesAndByte(6,1,0);
+    temp_v5 = packNibblesAndByte(6, 1, 0);
     piVar6 = (int *)(temp_v1 + 0x12b8);
     temp_v2 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v5;
@@ -106,7 +106,7 @@ void FUN_001537b0(void)
     temp_v7 = temp_v8 / temp_v7;
     FUN_0016c4b8(g_renderCtx);
     temp_v6 = g_renderCtx;
-    temp_v1 = packNibblesAndByte(6,7,0);
+    temp_v1 = packNibblesAndByte(6, 7, 0);
     piVar6 = (int *)(temp_v6 + 0x12b8);
     temp_v5 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v1;
@@ -119,7 +119,7 @@ void FUN_001537b0(void)
   }
   temp_v6 = g_renderCtx;
   if ((*(unsigned int *)(temp_v0 + 0xff0) & 0xff) != 0) {
-    temp_v1 = packNibblesAndByte(6,1,0);
+    temp_v1 = packNibblesAndByte(6, 1, 0);
     piVar6 = (int *)(temp_v6 + 0x12b8);
     temp_v5 = piVar6[*piVar6 + 2];
     piVar6[*piVar6 + 2] = temp_v1;
@@ -139,7 +139,7 @@ void FUN_001537b0(void)
     FUN_0019e3d0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v9,temp_v9,temp_v9,temp_v7);
   }
   temp_v0 = g_renderCtx;
-  temp_v6 = packNibblesAndByte(6,7,0);
+  temp_v6 = packNibblesAndByte(6, 7, 0);
   piVar6 = (int *)(temp_v0 + 0x12b8);
   temp_v1 = piVar6[*piVar6 + 2];
   piVar6[*piVar6 + 2] = temp_v6;

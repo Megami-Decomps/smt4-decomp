@@ -108,4 +108,13 @@ static __inline void renderStackSetCounted(RenderStateStack *st, int state)
     }
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void rectRecRead(u32 unused, u32 index, s32 *a, s32 *b, u32 *c, u32 *d);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

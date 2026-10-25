@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "shard/W4_Match3_InfoWindow.h"
 #include <stddef.h>
+#include "event/2dEvent/EventEffect.h"
 
 struct MapMenuReturnRecord { u8 unk00[0x3f]; u8 textId; };
 struct MapMenuCompletionWork {
@@ -42,7 +43,6 @@ void FUN_004b7d88(MapMenuCompletionWork *);
 u16 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 void sysPlaySe(u32);
 void dialogOpen(u32);
-void infoWinSetText(InfoWindow *, u32);
 void *asdLoadFileSyncDefault(const char *);
 ScriptRunState *FUN_00275bc8(void *, void *);
 u32 tableGroupFindEntryIndex(void *, const char *);
@@ -87,7 +87,7 @@ void FUN_004b7b74(MapMenuCompletionWork *work)
         break;
     default:
         dialogOpen(0);
-        infoWinSetText(work->info, work->record->textId);
+        infoWinSetText(reinterpret_cast<const char *>(work->info), work->record->textId);
         work->mode = 5;
         work->frame = 0;
         if (choice != 4)

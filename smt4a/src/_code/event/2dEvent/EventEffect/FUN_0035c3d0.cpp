@@ -41,8 +41,6 @@ extern EventTextureNode DAT_0057f43c[4];
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 bytes, u32 option);
 void textFormatBuffer(char *buffer, const char *format, ...);
-u32 asdProcessCreateSimple(const char *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
-                           AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
                    AsdProcFunc onEnd, u32 work, void *owner);
 s32 eventColorTransitionUpdate(u32 handle);
@@ -78,7 +76,7 @@ u32 FUN_0035c3d0(u32 kind, u32 side, u32 argument0, u32 argument1)
         effect->argument1 = 0;
         char name[68];
         textFormatBuffer(name, "EvtEftSlash Calc%d", slot);
-        effect->process = asdProcessCreateSimple(name, 3, 0, 0, eventColorTransitionUpdate, NULL, (u32)effect);
+        effect->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(name), 3, 0, 0, eventColorTransitionUpdate, NULL, (u32)effect);
         textFormatBuffer(name, "EvtEftSlash DrawUpLeft%d", slot);
         taskCreateDraw(name, 133, 0, 0, FUN_002835f4, NULL, (u32)effect, (void *)effect->process);
         textFormatBuffer(name, "EvtEftSlash DrawUpRight%d", slot);

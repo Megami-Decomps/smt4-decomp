@@ -1,3 +1,4 @@
+#include "util/FUN_002a4894.h"
 /* NON_MATCHING: constant-zero return and input/work register lifetimes save one fewer register; packed result ID uses two loads instead of retail LDM. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/Shard0031.h"
@@ -42,7 +43,6 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle, co
     u32 firstKey, u32 secondKey, u32 thirdKey, bool *blockedMode, s32 secondary, s32 notify);
 s32 FUN_00228b04(FlaggedEntry *entry, s32 mode);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
-s32 FUN_002a4894(const FlaggedEntry *entry);
 void skillHelpUpdateAttributeAndTarget(u32 id);
 void FUN_0019de98(u32 mode, u32 color);
 u32 FUN_001517b4(u32 button, u32 mode);
@@ -55,7 +55,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
     FusionInheritanceInputView *input = reinterpret_cast<FusionInheritanceInputView *>(work);
     if (FUN_003450d4(&input->primary, NULL, input->modeKeys, -1, -1, -1,
             reinterpret_cast<bool *>(&blocked), 0, 1) != 0 || FUN_00228b04(&input->primary, 1) != 0) {
-        const s32 index = resourceRunOperationIfUnblocked(&input->primary) + FUN_002a4894(&input->primary);
+        const s32 index = resourceRunOperationIfUnblocked(&input->primary) + FUN_002a4894(reinterpret_cast<const Object *>(&input->primary));
         const u16 id = input->primaryIds[index];
         if (id != 0) {
             skillHelpUpdateAttributeAndTarget(id);
@@ -67,7 +67,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         if (work->history.previous == 30) {
             *selected = 0;
         } else {
-            const s32 index = resourceRunOperationIfUnblocked(&input->candidates) + FUN_002a4894(&input->candidates);
+            const s32 index = resourceRunOperationIfUnblocked(&input->candidates) + FUN_002a4894(reinterpret_cast<const Object *>(&input->candidates));
             *selected = input->candidateIndices[index];
         }
         const FusionPairSelectionBitsA *pair = reinterpret_cast<const FusionPairSelectionBitsA *>(
@@ -79,7 +79,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
     } else if (FUN_001517b4(1, 1) != 0) {
         eventQueueAddUniqueIfValid(0x100020F);
         input->accepted = 1;
-        const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + FUN_002a4894(&input->secondary);
+        const s32 index = resourceRunOperationIfUnblocked(&input->secondary) + FUN_002a4894(reinterpret_cast<const Object *>(&input->secondary));
         skillHelpUpdateAttributeAndTarget(input->secondaryIds[index]);
     }
     return 0;

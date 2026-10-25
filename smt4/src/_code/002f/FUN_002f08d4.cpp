@@ -1,5 +1,6 @@
 /* Checks whether any usable unit (or the fallback unit) has `value` in the stat slot selected by scrGetArg(1); always returns 1 and reports the result through scrSetResult. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ extern UnitManager *btlGetMainState(void);
 extern Unit *btlMainFindActiveEntry(void);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern void FUN_002499fc(u32 owner, s32 *first, s32 *count);
-extern void scrSetResult(s32 found);
 extern s32 scrGetArg(s32 index);
 
 u32 FUN_002f08d4(void)

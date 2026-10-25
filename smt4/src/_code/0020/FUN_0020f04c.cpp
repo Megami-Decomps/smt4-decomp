@@ -25,7 +25,7 @@ extern s32 DAT_00435d98;
 extern s32 g_btlUiBlock;
 
 void btlActionFreeData(void);
-void FUN_0026a958(s32 arg);
+void FUN_0026a958(u8 value);
 void FUN_001e1874(BattleMainState* state);
 void scrResultStopJobAndReleaseUi(void);
 u32 FUN_002c40f8(s32* signalled, s32* handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);

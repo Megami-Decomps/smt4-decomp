@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 

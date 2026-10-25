@@ -1,6 +1,7 @@
 /* NON_MATCHING: capture flag-address formation and predicated byte checks differ. */
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 // Apocalypse's capture controls are not at the offsets used by the shared IV work prefix.
 struct CaptureWorkViewA {
@@ -24,9 +25,7 @@ typedef char CaptureWorkViewOffsetsCheck[offsetof(CaptureWorkViewA, surface) == 
     offsetof(CaptureWorkViewA, available) == 0x144d ? 1 : -1];
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 void *stateValuesGetBySelector(u32 selector);
-void FUN_00157558(RenderCtxA *context);
 u8 FUN_00154edc(u32 selector, JobSurface *surface);
 void surfaceCopy(JobSurface *destination, JobSurface *source);
 

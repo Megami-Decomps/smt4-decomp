@@ -1,14 +1,11 @@
-#include "common.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DataTable33.h"
 
 extern "C" {
 
-int dataTableGetEntries(void);
-int dataTableGet(int id);
-
-void dataTable33GetEntries(void)
+void *dataTable33GetEntries(void *unused, s32 section)
 {
-    dataTableGet(0x33);
-    dataTableGetEntries();
+    return dataTableGetEntries(dataTableGet(0x33, section));
 }
 
 } /* extern "C" */

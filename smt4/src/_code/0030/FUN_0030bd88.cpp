@@ -1,14 +1,9 @@
 /* NON_MATCHING: skill-list temporary construction and the two saved stack-address registers differ from retail. */
 #include "shard/PassiveSkill.h"
 #include "gamedata/UnitStats.h"
-
-struct ListedSkillSource {
-    u8 prefix[0x26];
-    u16 skillId;
-};
+#include "gamedata/Table8Type5Lookup.h"
 
 extern "C" {
-const ListedSkillSource *FUN_002498ec(u32 id);
 const ActiveSkillRecord *dataTable40FindById(u32 skillId);
 const StatBlock *gameGetUnitRecord(s32 unit);
 s32 idIsAbove400(u32 id);
@@ -35,9 +30,9 @@ static inline s32 skillComparePriorityAndHolder(const SkillListEntry *left, cons
 
 extern "C" s32 FUN_0030bd88(const u16 *first, const u16 *second)
 {
-    const ListedSkillSource *firstSource = FUN_002498ec(*first);
-    const ListedSkillSource *secondSource = FUN_002498ec(*second);
-    SkillListEntry left = {firstSource->skillId, 0};
-    SkillListEntry right = {secondSource->skillId, 0};
+    const Table8Type5Record *firstSource = table8Type5FindById(*first);
+    const Table8Type5Record *secondSource = table8Type5FindById(*second);
+    SkillListEntry left = {firstSource->value, 0};
+    SkillListEntry right = {secondSource->value, 0};
     return skillComparePriorityAndHolder(&left, &right);
 }

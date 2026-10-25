@@ -1,8 +1,8 @@
 /* NON_MATCHING: the bounded record accessor and nested persistent-data address form use different registers and one fewer address-add instruction. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
-void FUN_002e59f8(const void *source, void *destination, u32 bytes);
 void rt_aeabi_memclr(void *destination, u32 bytes);
 }
 

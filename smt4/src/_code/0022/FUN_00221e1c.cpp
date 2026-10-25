@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the null-model readiness branch differs: compiler skips the redundant second null check that retail preserves. */
 #include "battle/BattleStageLoadWork.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct OrbitScreen;
 
@@ -9,7 +10,6 @@ void FUN_0018a104(OrbitScreen *screen);
 s32 FUN_002c1d5c(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002a09b4(const char *file, s32 bank);
-AsdMdlObject *asdMdlManagerCreateSecondList(const char *file, u32 flags);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
 void FUN_002a0428(AsdMdlObject *model, s32 enabled);
 void nodeSetTranslation3f(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);

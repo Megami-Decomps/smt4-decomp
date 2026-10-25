@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "ui/ItemListSelection.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct QuestListEntry {
     /* 0x00 */ u8 unk00[4];
@@ -56,7 +57,6 @@ void uiOpenStartAnimations(QuestMenu *menu);
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extra);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
-QuestSpriteFrame *FUN_0018349c(void *layout, s32 sprite);
 s32 FUN_004d03d8(s32 x, s32 y, s32 w, s32 h);
 s32 FUN_004d0420(s32 x, s32 y, s32 w, s32 h);
 void FUN_004a4848(QuestMenu *menu);
@@ -95,7 +95,7 @@ void FUN_004a580c(QuestMenu *menu)
 
     if (menu->categoryCount > 0 && menu->tabsActive == 1) {
         for (s32 i = 0; i < 2; i++) {
-            QuestSpriteFrame *tab = FUN_0018349c((u8 *)menu + 200, i + 0x1023);
+            QuestSpriteFrame *tab = reinterpret_cast<QuestSpriteFrame *>(layoutFindTableEntry((u8 *)menu + 200, i + 0x1023));
             s32 x = tab->x;
             s16 y = tab->y;
             s32 w = tab->size[0];

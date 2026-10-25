@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail derives the stack object's base from array-constructor return values; explicit work initialization uses SP and different vector stores. */
 #include "common.h"
+#include "gfx/VertexStreams.h"
 
 struct PrimitiveBatch {
     /* 0x00 */ u8 storage[0x70];
@@ -47,7 +48,6 @@ void FUN_00412b3c(PrimitiveSource *, PrimitiveBatchWork *);
 void FUN_00412c54(PrimitiveSource *, PrimitiveBatchWork *);
 void *asdPrimAlloc(u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
-u32 asdGxGetPhysicalAddress(const void *address);
 void FUN_00412678(PrimitiveSource *, PrimitiveBatchWork *, PrimitiveIndices *);
 
 // Build a temporary primitive batch, copying indices when the source is not directly usable.
@@ -71,14 +71,14 @@ void primitiveSourceBuildBatch(PrimitiveSource *source)
         PrimitiveIndices indices = {0, 0, 0};
         if (source->flags & 0x100) {
             FUN_00412b3c(source, &work);
-            indices.address = asdGxGetPhysicalAddress(source->indices);
+            indices.address = asdGxGetPhysicalAddress(reinterpret_cast<u32>(source->indices));
             indices.count = source->indexCount;
         } else {
             FUN_00412c54(source, &work);
             u32 count = source->indexCount;
             void *copy = asdPrimAlloc(count * sizeof(u16));
             rt_memcpy(copy, source->indices, count * sizeof(u16));
-            indices.address = asdGxGetPhysicalAddress(copy);
+            indices.address = asdGxGetPhysicalAddress(reinterpret_cast<u32>(copy));
             indices.count = count;
         }
         indices.owned = 0;

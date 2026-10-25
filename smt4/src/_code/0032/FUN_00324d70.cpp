@@ -1,9 +1,9 @@
 /* NON_MATCHING: stat-index and found-flag saved registers are exchanged. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 BtlMainState *btlGetMainState();
 
 u32 FUN_00324d70()

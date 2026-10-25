@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/Vec2Fixed.h"
+#include "util/Vec2Fixed.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -37,7 +39,6 @@ extern int g_campCecRanking; /* 0x57f11c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_001527d8. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00169a1c. */
@@ -91,7 +92,7 @@ int FUN_00343e5c(void)
       temp_v4 = asdTMTexTableNodeIsLoaded(0x2e,1);
       temp_v5 = 0;
       if (temp_v4 != 0) {
-        temp_v5 = vec2GetXInt(temp_v2 + 0xc);
+        temp_v5 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0xc));
         temp_v4 = vec2GetYInt(temp_v2 + 0xc);
         efctSetSpeed();
         FUN_00164b5c(2,0x2e,0x1f,temp_v5,temp_v4,0x65);

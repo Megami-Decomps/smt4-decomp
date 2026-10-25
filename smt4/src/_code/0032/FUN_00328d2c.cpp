@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r6, [pc, #144] differs from recovered ldr r6, [pc, #136]. */
 #include "common.h"
+#include "AsdSDK/FileLoadSync.h"
 
 struct AsdTexture;
 
@@ -18,7 +19,6 @@ extern EffectTextureEntryView g_pendingTextures[26];
 
 AsdTexture* asdTextureCreate(u32 flags);
 s32 FUN_002522f8(char* destination, u32 capacity, const char* format, ...);
-void* fileLoadSync(const char* path, u32* size, u32 flags);
 s32 asdTexTgaLoadNw4c(AsdTexture* texture, const void* data, u32 size, u32 flags);
 
 // Load TGA data for each eligible effect entry whose texture has not been created.

@@ -27,7 +27,6 @@ extern const char DAT_00533f70[]; /* "SAVELOAD_UI UD" */
 extern const char DAT_00533f60[]; /* "SAVELOAD_UI UDD" */
 extern const char DAT_00533f50[]; /* "SAVELOAD_UI D" */
 
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
 s32 runnerShutdown(u32 handle);
 void FUN_002ef9ec(u32 handle);

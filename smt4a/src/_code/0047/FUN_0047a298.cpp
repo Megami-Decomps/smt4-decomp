@@ -2,6 +2,7 @@
 #include "shard/S1ListPanel.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include <stddef.h>
+#include "Model/MoriModelShadowMap.h"
 
 struct AocDrawPosition { f32 x, y; };
 struct AocDrawWork {
@@ -22,8 +23,6 @@ extern "C" {
 AocDrawWork *jobGetWork(u32 job);
 s32 vec2GetXInt(const AocDrawPosition *position);
 s32 vec2GetYInt(const AocDrawPosition *position);
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 u32 FUN_001692ac(s32 mode, s32 option);
 void FUN_00164b5c(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
 s32 FUN_00473910(AocMainA *main, s32 id);

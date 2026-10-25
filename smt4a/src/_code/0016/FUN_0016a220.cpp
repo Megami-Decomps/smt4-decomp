@@ -44,7 +44,7 @@ typedef char CrossfadeLayoutCheck[
 
 extern "C" {
 s32 trackAdvance(CrossfadeTrack *track, f32 deltaTime);
-void FUN_001882fc(void);
+void FUN_001882fc(u32 owner);
 void FUN_00193c08(u32 channel, u32 owner);
 void FUN_00198144(CrossfadeMix *mix, u32 owner);
 void FUN_001981d8(u32 handle, u32 owner, const u8 *params, f32 volume);
@@ -88,12 +88,12 @@ void FUN_0016a220(Crossfade *fade, f32 deltaTime)
     if (mixer->fading) {
         mixer->elapsed += deltaTime;
         if (trackAdvance(&fade->tracks[mixer->current], deltaTime) && fade->onFinished)
-            FUN_001882fc();
+            FUN_001882fc(fade->onFinished);
         trackAdvance(&fade->tracks[mixer->current ^ 1], deltaTime);
         return;
     }
     if (trackAdvance(&fade->tracks[mixer->current], deltaTime) && fade->onFinished)
-        FUN_001882fc();
+        FUN_001882fc(fade->onFinished);
 }
 
 } /* extern "C" */

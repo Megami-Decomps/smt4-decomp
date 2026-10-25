@@ -9,8 +9,6 @@ extern EventCommandGlobals g_eventCommand;
 s32 FUN_0035c0c8(u32 handle);
 s32 uiFadeQuadDrawJob(u32 handle);
 void eventCommandFreeWork(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 
@@ -24,8 +22,7 @@ void eventSetUnderMessageFade(u32 color, s32 duration, s32 fadeIn, f32 alpha)
         command->fade.alpha = 0.0f;
         command->duration = 0;
         command->elapsed = 0;
-        command->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EventMessUnderFade_Proc"),
-            4, 0, 0, FUN_0035c0c8, eventCommandFreeWork, reinterpret_cast<u32>(command));
+        command->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EventMessUnderFade_Proc"), 4, 0, 0, FUN_0035c0c8, eventCommandFreeWork, reinterpret_cast<u32>(command));
         taskCreateDraw(reinterpret_cast<const s8 *>("EventMessUnderFade_Draw"),
             0x85, 0, 0, uiFadeQuadDrawJob, NULL, reinterpret_cast<u32>(command), reinterpret_cast<void *>(command->job));
         taskCreateDraw(reinterpret_cast<const s8 *>("EventMessUnderFade_Draw"),

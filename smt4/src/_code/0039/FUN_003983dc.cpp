@@ -2,11 +2,10 @@
 #include "shard/W6_W6Match3_NameFormState.h"
 #include "shard/W6_W6Match7_FontResource.h"
 
-extern "C" FontGlyphResourceOwner *recordTableGet(u32 index);
 
 static __inline void nameFormSetCharacter(NameFormState *form, s8 index, s16 character)
 {
-    FontGlyphLookup *font = recordTableGet(3)->font;
+    FontGlyphLookup *font = reinterpret_cast<FontGlyphResourceOwner *>(recordTableGet(3))->font;
     font->vtable->hasGlyph(font, (u16)character);
     form->text.characters[index].high = (s8)((u16)character >> 8);
     form->text.characters[index].low = (s8)character;

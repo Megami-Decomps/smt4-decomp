@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match2_KeyedValueTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 void FUN_0022708c(MaterialMergeOwner *);
@@ -13,7 +14,6 @@ void FUN_00241d58(BattleSpritePlacement *);
 void asdMdlManagerMarkDestroy(AsdMdlObject *);
 void asdMdlManagerDestroy(AsdMdlObject *);
 void asdMemFree(void *);
-void memClear(void *, u32);
 }
 
 extern "C" void FUN_003d971c(MaterialMergeOwner *owner)

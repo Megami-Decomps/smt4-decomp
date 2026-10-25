@@ -5,7 +5,7 @@ extern "C" {
 
 int asdSetNormalizedColorRgba(unsigned int);
 int randomAdvanceShiftRegister(...);
-int FUN_0024b830(...);
+int shiftRandomNextFraction(...);
 int phaseCosInterpolate(void);
 int FUN_002b70cc(void);
 int SUB41(...);
@@ -65,7 +65,7 @@ extern float DAT_004ea948; /* 0x4ea948 */
 /* Unsupported intrinsic, declaration required: SUB41 (SUBPIECE). */
 /* Supplied declaration required: asdSetNormalizedColorRgba. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -335,23 +335,23 @@ void FUN_00319a70(int param_1)
               }
             }
             else if (temp_v45 != 0) {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v17 = temp_v17 * temp_v38;
               pfVar17[2] = temp_v17;
               temp_v13 = *(float *)(temp_v14 + 0x6c);
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v13 = ((temp_v27 - temp_v13) + temp_v17 * temp_v13) * *(float *)(temp_v14 + 0x68);
               pfVar17[3] = temp_v13;
               temp_v19 = *(float *)(temp_v14 + 0x74);
               temp_v17 = temp_v27;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v13 = ((temp_v17 - temp_v19) + temp_v13 * temp_v19) * *(float *)(temp_v14 + 0x70);
               pfVar17[4] = temp_v13;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v13 = ((temp_v17 - *(float *)(temp_v14 + 0x7c)) + temp_v13 * *(float *)(temp_v14 + 0x7c)) *
                        *(float *)(temp_v14 + 0x78);
               pfVar17[1] = temp_v13;
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               temp_v17 = *(float *)(temp_v14 + 0x60) *
                        ((temp_v17 - *(float *)(temp_v14 + 100)) + temp_v13 * *(float *)(temp_v14 + 100));
               pfVar17[5] = temp_v17;

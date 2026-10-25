@@ -1,11 +1,11 @@
 /* NON_MATCHING: selected preview and sound behavior restored; owner subobject bases, register allocation and clear-panel tail placement differ. */
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 void sysPlaySe(u32 sound);
 s32 FUN_0023b3b8();
-s32 FUN_0023b3d0();
 void FUN_0023b45c(s32 value);
 void statusPanelSetOpen(s32 open);
 s32 statusDownGetFlag();

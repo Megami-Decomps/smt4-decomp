@@ -1,6 +1,7 @@
 #include "Terminal/LocaltmnlMain.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern LocalTmnlWork *g_localTmnl;
@@ -11,8 +12,6 @@ void localTmnlOnComplete(u32 job);
 s32 terminalDrawActiveSlotHandles(u32 job);
 s32 localTerminalDrawOverlays(u32 job);
 s32 FUN_0037a068(u32 job);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 workSize,
-    s32 (*run)(u32), void (*destroy)(u32), u32 parent);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 workSize,
     s32 (*run)(u32), void (*destroy)(u32), void *work, u32 parent);
 
@@ -62,7 +61,7 @@ void FUN_0031d280(const u32 *options)
         state->phase = 0;
         state->result = 0;
     }
-    state->prefix.task = asdProcessCreateSimple("TMNL LO C", 4, 0, 0, FUN_00328838, localTmnlOnComplete, 0);
+    state->prefix.task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMNL LO C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00328838), reinterpret_cast<AsdProcFunc>(localTmnlOnComplete), 0);
     taskCreateDraw("TMNL LO UD", 0x77, 0, 0, terminalDrawActiveSlotHandles, NULL, NULL, state->prefix.task);
     taskCreateDraw("TMNL LO UD", 0xd3, 0, 0, localTerminalDrawOverlays, NULL, NULL, state->prefix.task);
     taskCreateDraw("TMNL LO DD", 0xeb, 0, 0, FUN_0037a068, NULL, NULL, state->prefix.task);

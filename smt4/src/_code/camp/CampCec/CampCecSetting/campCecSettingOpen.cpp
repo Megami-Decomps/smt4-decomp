@@ -3,6 +3,7 @@
  * sets up the menu entries. */
 #include "common.h"
 #include "camp/CampCec/CampCecSetting.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int buttonHelpSetPreset(int id);
 int memClear(void *ptr, int size);                  /* zero a block */
 void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-u32 asdProcessCreateSimple(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6);
 void LAB_002000ac(void);
 void LAB_002000c8(void);
 void LAB_002f5d84(void);
@@ -33,7 +33,7 @@ void campCecSettingOpen(void)
     }
     setting = g_campCecSetting;
     memClear(setting, 0x44);
-    setting->task = asdProcessCreateSimple(LAB_002f5d84, 1, 0, 0, LAB_002000c8, 0, 0);
+    setting->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_002f5d84), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(LAB_002000c8), 0, 0);
     taskCreateDraw(LAB_002f5d9c, 0x81, 0, 0, LAB_002000ac, 0, 0, setting->task);
     taskCreateDraw(LAB_002f5db8, 0xdf, 0, 0, LAB_002000ac, 0, 0, setting->task);
     asdLoadFileAsyncSimple(LAB_002f5dd4, &setting->heapA, 0);

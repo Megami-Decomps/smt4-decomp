@@ -1,10 +1,9 @@
 #include "classes/Obj557ed0.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern Obj557ed0 *DAT_0057f658;
 
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, u32 argument, void (*update)(), void (*teardown)(),
-                           void *work);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 argument, void (*draw)(), void *unused,
                    void *work, u32 parent);
 void FUN_0022677c(u32 index, u32 value);
@@ -32,7 +31,7 @@ void fountainStart(const u32 *params)
         FUN_0022677c(0, 0xFF);
         FUN_0022677c(1, 0xFF);
     }
-    fountain->task = asdProcessCreateSimple("FOUNTAIN PROC", 4, 0, 0, FUN_002e5900, 0, 0);
+    fountain->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("FOUNTAIN PROC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002e5900), 0, 0);
     taskCreateDraw("FOUNTAIN UD", 0x75, 0, 0, FUN_00330934, 0, 0, fountain->task);
     taskCreateDraw("FOUNTAIN UD", 0x77, 0, 0, FUN_00330954, 0, 0, fountain->task);
     taskCreateDraw("FOUNTAIN UD", 0xD3, 0, 0, FUN_00330978, 0, 0, fountain->task);

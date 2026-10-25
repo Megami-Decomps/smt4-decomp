@@ -1,5 +1,7 @@
 /* NON_MATCHING: the string-test chain compiles with different null-check placement and the "VER" prefix test and slot addressing use other registers; the lookup logic is the same. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -26,9 +28,7 @@ extern const char DAT_004008c4[];           /* "battle/effect/%s.eft" */
 u32 libc_strlen(const char *s);
 s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strncmp(const char *a, const char *b, u32 n);
-char *libc_strcpy(char *destination, const char *source);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void memClear(void *block, s32 size);
 u32 keyedRecordRegisterName(void *record);
 u32 FUN_00249e54(u32 id, const char *name);
 
@@ -70,7 +70,7 @@ void FUN_003dbc1c(EffectWork *work)
         memClear(path, 0x80);
         memClear(formatted, 0x80);
         textFormatBuffer(formatted, DAT_004008c4, name);
-        libc_strcpy(path, formatted);
+        libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(formatted));
         if (libc_strlen(path) == 0) {
             continue;
         }

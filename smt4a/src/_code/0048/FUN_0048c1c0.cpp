@@ -2,6 +2,7 @@
 #include "ui/NaviCategorySelection.h"
 #include "ui/ButtonHelp.h"
 #include "map/mapDepart.h"
+#include "test/BustupViewer.h"
 
 struct NaviCategoryTransitionView {
     u8 unk0000[8];
@@ -31,7 +32,6 @@ extern GameStateA g_gameState;
 void uiSpriteBankApplyPreset(ButtonHelpDisplayUnit *unit, u32 preset);
 void FUN_00168980(u32 sound);
 s32 FUN_00163aa4(ButtonHelpDisplayUnit *unit, f32 step);
-s32 FUN_002e19f8(void);
 void msgWindowReset(void);
 void sub68OwnerDestroy(void);
 s32 vec2GetYInt(const void *point);

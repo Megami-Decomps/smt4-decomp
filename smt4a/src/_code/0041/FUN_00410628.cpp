@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00410628` (_code @ 0x410628, 0x700 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 struct BtlCameraA;
 
@@ -84,7 +85,6 @@ extern int padButtonIsPressed(unsigned int);
 extern int FUN_00187168(void);
 extern unsigned int dataTableGetEntries(void);
 /* Supplied declaration required: asdMemFree. */
-extern unsigned int FUN_0019acdc(unsigned short, unsigned int);
 /* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: slotSetRequest. */
@@ -185,7 +185,7 @@ void FUN_00410628(int param_1)
       FUN_003e503c();
       temp_v3 = FUN_00187168();
       if (temp_v3 != 0) {
-        temp_v2 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300),1);
+        temp_v2 = FUN_0019acdc(*(unsigned short *)(temp_v0 + 300), 1);
         temp_v12 = (unsigned int ***)&temp_v14;
         FUN_003f1b3c(temp_v16,temp_v2,5,&temp_v13);
         btlReflectCreateKind42(temp_v6 * 5,0,temp_v6,temp_v13);

@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match2_RankedTableRecord.h"
+#include "gamedata/EquipmentSortPower.h"
 
 struct PrimaryEntryOrder {
     /* 0x00 */ u8 unk00[0x6F];

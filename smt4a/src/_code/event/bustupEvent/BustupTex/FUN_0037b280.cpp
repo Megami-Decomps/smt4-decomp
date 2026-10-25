@@ -5,6 +5,8 @@
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 // The animation vectors follow the established texture-work prefix.
 struct BustupTextureCreateWorkA {
@@ -19,12 +21,9 @@ extern AocSystemA* g_aocSystem;
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 s32 FUN_00162ea4(void);
 s32 aocRunByName(AocSystemA* system, s32 table, s32 node, u32 option);
-u32 aocLoadTextureNode(AocSystemA* system, s32 table, s32 node, u32 heap);
 u32 FUN_0014afd0(s32 table, s32 node);
 void FUN_0026c568(void* work);
 void asdMTeXReleaseJobContext(void* work);
-u32 asdProcessCreateSimple(const char* name, u32 priority, u32 size, u32 flags,
-    TaskFunc update, TaskFunc destroy, void* data);
 
 void FUN_0037b280(s32 portrait)
 {
@@ -48,8 +47,7 @@ void FUN_0037b280(s32 portrait)
     } else {
         if (work->texture.node != -1) {
             if (aocRunByName(g_aocSystem, work->texture.table, work->texture.node, 1)) {
-                work->texture.texture = aocLoadTextureNode(g_aocSystem,
-                    work->texture.table, work->texture.node, 0x10000);
+                work->texture.texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->texture.table, work->texture.node, 0x10000);
             } else {
                 work->texture.texture = FUN_0014afd0(work->texture.table, work->texture.node);
             }
@@ -66,7 +64,6 @@ void FUN_0037b280(s32 portrait)
     work->rotation[0] = 0.0f;
     work->rotation[1] = 0.0f;
     work->rotation[2] = 0.0f;
-    asdProcessCreateSimple(DAT_0052f76c, 4, 0, 0, FUN_0026c568,
-        asdMTeXReleaseJobContext, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(work));
 }
 }

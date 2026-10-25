@@ -1,6 +1,7 @@
 /* NON_MATCHING: recovered touch-query results and four-argument help update; owner-field addressing and remaining typed layout still differ. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int useCounterStart(void);
 int FUN_0029e328(int);
 int sortMenuCreate(int, int);
 int FUN_0029ee6c(int, int);
-int FUN_002a0cc8(...);
 int FUN_003a8aa0(int);
 int FUN_003c2e1c(int, int, int, int);
 int FUN_003c2e30(int, int, int, int);

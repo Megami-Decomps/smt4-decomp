@@ -32,4 +32,13 @@ typedef char InitializedUnitStatsALayoutCheck[
     offsetof(InitializedUnitStatsA, categoryId) == 0x12C &&
     offsetof(InitializedUnitStatsA, partyCategories) == 0x132 &&
     sizeof(InitializedUnitStatsA) == 0x138 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *dataTableGetCategoryEntry(s32 category, u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

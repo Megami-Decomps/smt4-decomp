@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 
 static inline void linkedItemsInsertAfter(LinkedItems *owner, LinkedItem *source, LinkedItem *record)
@@ -19,7 +20,6 @@ static inline void linkedItemsInsertAfter(LinkedItems *owner, LinkedItem *source
 extern "C" {
 EffPart *FUN_0025c870(void);
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
-void memClear(void* destination, u32 size);
 void FUN_002a3d58(EffPart *record);
 
 // Allocate and initialize a copy, insert it after the source, and update the owner's count.

@@ -1,10 +1,10 @@
 /* NON_MATCHING: takes no parameter (scrGetArg(1)); retail predicates `value > 4` (cmpne r4, #4; movgt) and shares the `return 1` block between the branches, the build branches. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 u32 scrGetCommandFrame(void);
-s32 FUN_00203d74(void);
 s32 FUN_00162ea4(void);
 u32 FUN_00163e84(s32 slot);
 void FUN_003d54f8(u32 slot, u32 value);

@@ -10,7 +10,6 @@ void FUN_002bdf94(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, con
 void FUN_002b6c34(s16 id, s32 x, s32 y, s32 size, s32 a, s32 b);
 void textFormatBuffer(char *buffer, const char *format, ...);
 const char *aocIndexValueOrDefault(s32 index);
-u32 FUN_0028d1f4(s32 id);
 
 /* Draws one registration entry: its frame, name, icon and number, or the empty-entry labels when
  * `id` is 0. */

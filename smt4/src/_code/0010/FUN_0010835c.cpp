@@ -2,9 +2,9 @@
 #include "ui/FrameTex.h"
 #include "shard/JobWork.h"
 #include "shard/S1ListPanel.h"
+#include "camp/RenderCtx.h"
 extern "C" {
 extern RenderCtx *g_titleScene;
-void FUN_002c39a4(RenderCtx *context);
 u8 FUN_002bfadc(u32 screen, JobSurface *surface);
 s32 FUN_002bff10(u32 screen);
 void surfaceCopy(JobSurface *source, JobSurface *destination);
@@ -26,7 +26,7 @@ s32 FUN_0010835c(u32 job)
     work->frame.unkE95 = 0;
     if (!work->frame.unkE8C || !work->frame.quadActive || !work->source || work->frame.unkFD8)
         return 0;
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     work->source->width = 512;
     work->source->height = 512;
     work->frame.unkE94 = FUN_002bfadc(0, work->source);

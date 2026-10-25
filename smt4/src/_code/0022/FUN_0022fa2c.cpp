@@ -1,4 +1,5 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -6,7 +7,6 @@ int useCounterStart(void);
 int FUN_0029e328(int id);
 int sortMenuCreate(int a, int b);
 int FUN_0029ee6c(int a, int color);
-int FUN_002a0cc8(int arg);
 int buttonHelpSetPreset(int arg);
 
 typedef struct Scene {

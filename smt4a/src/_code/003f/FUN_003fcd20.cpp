@@ -1,12 +1,12 @@
 /* NON_MATCHING: loaded-flag store scheduling and magic-comparison registers differ from retail. */
 #include "gamedata/NpcPackage.h"
 #include "addon/aocMain.h"
+#include "quest_center/qcCtrl.h"
 
 extern "C" {
 extern const char DAT_00527250[];
 extern AocSystemA* g_aocSystem;
 s32 textFormatBuffer(char* buffer, const char* format, ...);
-u32 FUN_004705ec(AocSystemA* system, s32 id, u32 kind);
 void* FUN_0046e150(AocSystemA* system, s32 id, const char* path);
 void* asdLoadFileSyncDefault(const char* path);
 
@@ -18,7 +18,7 @@ void FUN_003fcd20(NpcPackageWork* work, s32 id)
     work->kind = 2;
     work->sourceId = id;
     NpcPackageHeader* file;
-    if (FUN_004705ec(g_aocSystem, id, 1)) {
+    if (FUN_004705ec(reinterpret_cast<u32>(g_aocSystem), id, 1)) {
         file = static_cast<NpcPackageHeader*>(FUN_0046e150(g_aocSystem, id, path));
     } else {
         file = static_cast<NpcPackageHeader*>(asdLoadFileSyncDefault(path));

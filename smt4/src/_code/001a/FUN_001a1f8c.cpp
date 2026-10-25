@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001a1f8c` (_code @ 0x1a1f8c, 0x73c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
-extern int FUN_002a0d0c(void);
 /* Supplied declaration required: libc_bsearch. */
 /* Supplied declaration required: FUN_002b8584. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -226,7 +226,7 @@ LAB_001a2150:
           *(unsigned char *)(temp_v0 + 0x74c) = 1;
           *(unsigned int *)(temp_v0 + 0x744) = 3;
           if (-1 < *(int *)(temp_v0 + 0x750)) {
-            temp_v10 = FUN_002a0d0c();
+            temp_v10 = reinterpret_cast<int>(FUN_002a0d0c());
             pbVar12 = (unsigned char *)(temp_v10 + *(int *)(temp_v0 + 0x750));
             temp_v10 = FUN_0029efc0(temp_v9);
             temp_v9 = FUN_0029efa8(temp_v9);

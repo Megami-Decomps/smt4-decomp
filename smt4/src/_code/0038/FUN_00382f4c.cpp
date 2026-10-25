@@ -29,7 +29,7 @@ void FUN_0029ee6c(u32 record, u32 color);
 s32 FUN_002d8e10(void);
 s32 FUN_002485b8(void);
 void FUN_0029cc44(s32 flag);
-void FUN_0029e648(s32 a, s32 b);
+void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(u32 value, s32 flag);
 void messageMainSetTargetFlags(s32 flags);
 s32 FUN_002c1658(s32 a, s32 b);
@@ -58,7 +58,7 @@ void FUN_00382f4c(ChoiceMenu *menu)
                         if (FUN_002d8e10() != 0)
                             FUN_0029cc44(0);
                     } else if (FUN_002485b8() == 0) {
-                        FUN_0029e648(1, 0);
+                        messageBannerInitSelection(1, 0);
                         messageTargetSetValue(0xFFFFFF9C, 0);
                         messageMainSetTargetFlags(1);
                     }

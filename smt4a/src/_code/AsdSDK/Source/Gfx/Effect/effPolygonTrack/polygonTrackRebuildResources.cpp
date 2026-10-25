@@ -1,5 +1,6 @@
-/* NON_MATCHING: native retains disabled allocation-trace filename/line setup; no dead-code imitation. */
+/* NON_MATCHING: trace and colour-write shape now match; only the byte-count constant register (r0 vs r1) and the order of the final `mov r0, r4` / `add r1, r7, #8` before the tail call differ. */
 #include "shard/W6_W6Match2_EmitterResources.h"
+#include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0035.h"
 
 struct PolygonTrackArguments {
@@ -36,9 +37,12 @@ void FUN_003932d0(PolygonTrackResources *resources, const u32 *settings);
 
 static inline void polygonTrackSetColor(Block6 *block, u16 index)
 {
+    const u8 *rgba = DAT_005c1130;
     PolygonTrackColor *color = &static_cast<PolygonTrackColor *>(block->buffer)[index];
-    for (s32 channel = 0; channel < 4; ++channel)
-        color->channels[channel] = (f32)(u32)DAT_005c1130[channel] * 0.003921569f * 0.003921569f;
+    color->channels[0] = (f32)(u32)rgba[0] * 0.003921569f * 0.003921569f;
+    color->channels[1] = (f32)(u32)rgba[1] * 0.003921569f * 0.003921569f;
+    color->channels[2] = (f32)(u32)rgba[2] * 0.003921569f * 0.003921569f;
+    color->channels[3] = (f32)(u32)rgba[3] * 0.003921569f * 0.003921569f;
 }
 
 extern "C" void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments)
@@ -57,6 +61,7 @@ extern "C" void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, c
     u16 count = (u16)emitter->key;
     u16 format = (u16)parameters->format;
     u32 bytes = sizeof(PolygonTrackResources) + count * sizeof(u16);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonTrack.cpp", 533);
     resources = static_cast<PolygonTrackResources *>(memAlloc(0x10000, 0x100, 0, bytes, 16, 1));
     sysMemClear(resources, bytes);
     resources->indices = reinterpret_cast<u16 *>(resources + 1);

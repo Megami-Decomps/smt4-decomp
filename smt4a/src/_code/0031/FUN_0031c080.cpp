@@ -1,6 +1,7 @@
 /* NON_MATCHING: branch layout: retail runs the steps != 0 case inline and moves the zero case after the return; built predicates the zero case */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/JobWork.h"
 
 struct FadeWork {
     u8 unk00[0x0C];  // 0x00
@@ -11,7 +12,6 @@ struct FadeWork {
 extern "C" {
 
 s32 scrGetArg(u32 index);
-FadeWork *jobGetWork(u32 job);
 
 /* Script command: sets the job's fade to run over `steps` steps (at most 4 when the check passes), or clears it for 0. */
 s32 FUN_0031c080(void)
@@ -22,7 +22,7 @@ s32 FUN_0031c080(void)
     if (FUN_00203d74() != 0 && steps > 4) {
         steps = 4;
     }
-    FadeWork *work = jobGetWork(job);
+    FadeWork *work = reinterpret_cast<FadeWork *>(jobGetWork(job));
     if (work != NULL) {
         if (steps == 0) {
             work->alpha = 0.0f;

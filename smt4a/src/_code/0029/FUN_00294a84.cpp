@@ -1,5 +1,6 @@
 /* NON_MATCHING: Popup-event selection is reconstructed; state guard lowering and table traversal preserve a different register set. */
 #include "gamedata/DataTable.h"
+#include "util/CalleeContracts.h"
 
 struct PopupState {
     /* 0x00 */ s32 state;
@@ -23,7 +24,6 @@ struct PopupEventRecord {
 
 extern "C" {
 extern PopupState *g_popupState;
-void FUN_00152f44(s32 mode);
 PopupSaveSlot *saveSlotFindSelected();
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
@@ -33,7 +33,7 @@ u32 FUN_002d8b58(s32 type);
 /* Queue a selected-slot popup, subject to its flags and probability table. */
 extern "C" void FUN_00294a84(s32 immediate)
 {
-    FUN_00152f44(immediate);
+    FUN_00152f44();
     if (g_popupState->state == 3)
         return;
     if (g_popupState->state != 0)

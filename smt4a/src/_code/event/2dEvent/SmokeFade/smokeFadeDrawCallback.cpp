@@ -1,3 +1,4 @@
+#include "gfx/StereoParallax.h"
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 
@@ -24,7 +25,6 @@ void FUN_00157558(RenderCtxA *);
 s32 FUN_001692ac(u32, u32);
 s32 packNibblesAndByte(u32, u32, u32);
 void efctSetSpeed(f32);
-void renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 
 u8 smokeFadeDrawCallback()
 {

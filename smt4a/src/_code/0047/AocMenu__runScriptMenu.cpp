@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail returns directly from every state (no shared epilogue), keeps the process in r4 with g_aocMain in r6 and copies the result through two stack records with ldm/stm; this build merges exits and reuses fewer registers. */
 #include "classes/AocMenu.h"
 #include "common.h"
+#include "test/BustupViewer.h"
 
 struct AocMenuObject;
 
@@ -60,7 +61,6 @@ u8 byteIsAtLeast100(u32 *record);
 void jobFlagsWorkStop(AocMenuProcess *process);
 void obj04Finish(void);
 u32 flaggedValueHolderGetTotal(void *holder);
-u8 FUN_002e19f8(void);
 u8 messageMainIsIdle(void);
 u8 panelIsMissingOrFlagClear(void);
 u32 FUN_002e1a18(u32 id);

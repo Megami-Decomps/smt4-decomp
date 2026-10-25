@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002c4b48` (_code @ 0x2c4b48, 0x6cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ int messageSlotSet(int);
 int scrCommMessageSetMode(...);
 int libc_strcpy(unsigned int [32], unsigned int);
 int sysMemClear(unsigned int [32], int);
-int FUN_003180c4(int, unsigned int [32]);
 int FUN_00359974(int, unsigned int, unsigned int, int);
 int messageDismissNumericBannerForced(void);
 int gameFlagSlotSetEnableBit(...);
@@ -126,7 +126,7 @@ unsigned int FUN_002c4b48(void)
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x102);
           FUN_00180118(temp_v5);
           libc_strcpy(temp_v12,temp_v5);
-          FUN_003180c4(8,temp_v12);
+          FUN_003180c4(8, reinterpret_cast<const char *>(temp_v12));
           FUN_00359974(0x18,*(unsigned int *)(temp_v9 + 0x104),0xffffffff,0);
           temp_v6 = gameGetSlotTable();
           temp_v10 = 0;
@@ -154,7 +154,7 @@ unsigned int FUN_002c4b48(void)
         temp_v5 = temp_v14;
         FUN_0015f858(temp_v14,1);
         libc_strcpy(temp_v12,temp_v5);
-        FUN_003180c4(0,temp_v12);
+        FUN_003180c4(0, reinterpret_cast<const char *>(temp_v12));
         FUN_00359974(0x18,temp_v8,0xffffffff,0);
       }
     }

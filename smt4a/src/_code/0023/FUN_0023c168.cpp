@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail derives the three table pointers as a running chain (+0x2100 each) from the first table; armcc computes the third from the base (+0x4200) and orders the stride stores differently. */
 #include "common.h"
+#include "mobiclip/MobiclipAllocator.h"
 
 /* The codec's decoder state (allocated as 0x670 bytes); only the fields set up here are named. */
 struct MobiclipDecoderState {
@@ -33,7 +34,6 @@ struct MobiclipTables {
 extern "C" {
 extern MobiclipTables DAT_0053faa0;
 
-void *callGlobalHook(u32 size);
 void rt_memclr(void *destination, u32 size);
 
 /* Creates the decoder state and frame buffers for the given size; returns 1 on success. */

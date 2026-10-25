@@ -2,6 +2,8 @@
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "gfx/LightRegistry.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct AsdAmbientLight;
 struct AsdModelGroupLink;
@@ -11,12 +13,10 @@ extern const char DAT_004101c0[];
 extern void* DAT_00464b7c[2];
 extern void* g_asdModelTransformBuilder[2];
 void* memAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 alignment, u32 fromFront);
-int memClear(void* memory, int size);
 void* rt_memcpy(void* destination, const void* source, u32 size);
 const void* resourceResolveHeaderPointer(const void* resource);
 AsdAmbientLight* FUN_002cb80c(void);
 void FUN_002e113c(AsdModelGroupLink* light, s32 group);
-void sceneTraverserVisit(void* traverser, void* builder);
 
 EffAsdLight* FUN_002dcfe0(const EffAsdLightDesc* resource)
 {
@@ -42,7 +42,7 @@ EffAsdLight* FUN_002dcfe0(const EffAsdLightDesc* resource)
     asdDebugTrace(DAT_004101c0, 34);
     LightWork* light = static_cast<LightWork*>(
         memAlloc(0x10000, 0x100, 0, sizeof(LightWork), 0x10, 1));
-    memClear(light, sizeof(LightWork));
+    reinterpret_cast<int>(memClear(light, sizeof(LightWork)));
     memset(&light->rotation0, 0, sizeof(light->rotation0));
     light->rotation0.w = 1.0f;
     memset(&light->rotation1, 0, sizeof(light->rotation1));

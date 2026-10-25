@@ -1,5 +1,6 @@
 /* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result before copying it to r4, and hoists the constant 1 into r6; built differs in those three places and addresses the bitmap byte with `ldrb r0, [r5, r4, lsr #3]`. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct FlagBlock {
     /* 0x2A0 */ FlagEntry entries[1];
 } FlagBlock;
 
-FlagBlock *gameFlagBlockGet(void);
 s32 FUN_001bd118(s32 id);
 s32 itemDataIsFlagClear(s32 id);
 u32 itemDataGetValue(s32 id);
@@ -31,7 +31,7 @@ s32 FUN_004bb6d8(u32 id, s32 arg);
 /* Marks entry `id` as seen and active, runs FUN_00417e08 for ids that qualify, and sets the linked id's bit in the bitmap. */
 void FUN_00417b70(s32 id)
 {
-    FlagEntry *entry = &gameFlagBlockGet()->entries[id];
+    FlagEntry *entry = &reinterpret_cast<FlagBlock *>(gameFlagBlockGet())->entries[id];
     s32 kind;
     u32 linked;
 
@@ -47,7 +47,7 @@ void FUN_00417b70(s32 id)
     }
     linked = itemDataGetValue(id);
     if (linked != 0) {
-        FlagBlock *block = gameFlagBlockGet();
+        FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
 
         FUN_004bb6d8(linked, 1);
         block->bitmap[linked >> 3] |= 1 << (linked & 7);

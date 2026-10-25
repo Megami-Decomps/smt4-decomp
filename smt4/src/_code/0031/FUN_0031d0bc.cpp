@@ -1,9 +1,9 @@
 /* NON_MATCHING: dimension load/store addresses use r1 instead of retail's r2. */
 #include "shard/W6_W6Match5_TextureAttachment.h"
+#include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
 
 extern "C" {
 AsdTexture *FUN_0024c3c8(u16);
-void refCountIncrement(AsdTexture *);
 
 // Attach a texture and derive its half-size in sixteenth-unit coordinates.
 void FUN_0031d0bc(TextureAttachment *attachment, u32 textureId)
@@ -14,6 +14,6 @@ void FUN_0031d0bc(TextureAttachment *attachment, u32 textureId)
     attachment->halfWidth = width * 0.5f * 0.0625f;
     attachment->halfHeight = height * 0.5f * 0.0625f;
     attachment->content->model->texture = texture;
-    refCountIncrement(texture);
+    refCountIncrement(reinterpret_cast<int *>(texture));
 }
 }

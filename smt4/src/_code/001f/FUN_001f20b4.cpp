@@ -44,7 +44,7 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: FUN_0029a17c. */
 extern int ifTouchGetSelectionModeForRegion(unsigned int);
 extern unsigned int FUN_0029dde0(void);
-extern int FUN_0029ea68(unsigned short);
+extern int itemGetFlagBit1(unsigned short);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
 extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
@@ -193,7 +193,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                            (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,1,2,
                            0xce,&LAB_001f25bc,*(unsigned char *)((int)temp_v10 + 3));
               FUN_002bed3c();
-              temp_v6 = FUN_0029ea68(*temp_v10);
+              temp_v6 = itemGetFlagBit1(*temp_v10);
               if (temp_v6 == 0) {
                 temp_v6 = FUN_002bf4f8(0x24,0x6d);
                 FUN_002bf380(2,0x24,8,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) +
@@ -315,7 +315,7 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                        (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,2,0xce,
                        &LAB_001f3028,*(unsigned char *)((int)puVar5 + 3));
-          temp_v1 = FUN_0029ea68(*puVar5);
+          temp_v1 = itemGetFlagBit1(*puVar5);
           if (temp_v1 == 0) {
             temp_v2 = FUN_002bf4f8(0x24,0x82);
             FUN_002bf380(2,0x24,8,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,

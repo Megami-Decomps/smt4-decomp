@@ -8,7 +8,7 @@
 struct BattleEntry;
 
 extern "C" {
-BattleEntry *btlMainFindEntryByListedId(BtlMainState *, u32);
+BattleEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 void FUN_00247478(void *, BtlMainState *, BattleEntry *);
 u32 FUN_00246134(u32, u32, s32, u32);
 void selectionCopySupportedValue(u32, u32 *);

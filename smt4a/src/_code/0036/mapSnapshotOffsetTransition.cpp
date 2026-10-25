@@ -6,7 +6,6 @@ extern "C" {
 extern MapMainA *g_mapMain;
 extern LmapSceneA *g_lmapScene;
 extern GameStateA g_gameState;
-void mapProbePositionDownward(MapVector *);
 f32 FUN_001bc124(f32 angle);
 f32 FUN_001bbf0c(f32 angle);
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: instruction scheduling and register allocation differ - retail forms the unit record's priority address as record+0x200 (+122) and keeps the u64 masks in ldm pairs on different registers; the logic is otherwise identical. */
 #include "common.h"
+#include "util/BtlUnitClearRecordFields.h"
 
 namespace {
 /* One actor's record from the unit table. */
@@ -81,7 +82,6 @@ struct BtlActionMasks {
 extern "C" {
 extern BtlActionMasks g_btlAction;
 BtlUnitRecord *FUN_003f0e20(BtlBattleData *data, s32 index);
-void btlUnitClearRecordFields(BtlUnitHandle *handle, s32 unitIndex);
 void FUN_004fcde0(s32 arg, BtlAiAction *action, BtlUnitRecord *record);
 void FUN_004fd508(s32 arg, BtlAiAction *action, u32 kind, u32 uiIndex, s32 flag);
 

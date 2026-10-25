@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014aa9c` (_code @ 0x14aa9c, 0x4e8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int mapMainIsIdle(void);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 extern int FUN_001834a4(unsigned int, int);
@@ -73,7 +73,7 @@ void FUN_0014aa9c(unsigned int param_1)
       *(unsigned char *)(temp_v6 + 0x1270) = 0;
     }
     temp_v6 = g_renderCtx;
-    temp_v4 = packNibblesAndByte(6,7,0);
+    temp_v4 = packNibblesAndByte(6, 7, 0);
     piVar9 = (int *)(temp_v6 + 0x12b8);
     temp_v5 = *piVar9;
     temp_v7 = piVar9[temp_v5 + 2];
@@ -140,7 +140,7 @@ void FUN_0014aa9c(unsigned int param_1)
     } while (temp_v5 < 0x18);
     efctSetSpeed();
     temp_v2 = g_renderCtx;
-    temp_v6 = packNibblesAndByte(6,1,0);
+    temp_v6 = packNibblesAndByte(6, 1, 0);
     piVar9 = (int *)(temp_v2 + 0x12b8);
     temp_v4 = *piVar9;
     temp_v5 = piVar9[temp_v4 + 2];

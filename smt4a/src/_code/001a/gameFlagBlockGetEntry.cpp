@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 
 extern "C" {
 
@@ -7,12 +8,11 @@ typedef struct Table {
     /* 0x2A0 */ u32 entries[1];
 } Table;
 
-Table *gameFlagBlockGet(void);
 
 /* Returns the address of entry `index` of the table at 0x2A0 of the gameFlagBlockGet table. */
 u32 *gameFlagBlockGetEntry(s32 index)
 {
-    Table *table = gameFlagBlockGet();
+    Table *table = reinterpret_cast<Table *>(gameFlagBlockGet());
     return &table->entries[index];
 }
 

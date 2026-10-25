@@ -4,6 +4,7 @@
 #include "map/MapActionMarker.h"
 #include "util/TrigF32.h"
 #include "shard/W6_W6Match3_ForwardEffect.h"
+extern "C" int FUN_0020ffe8(...);
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
 int FUN_001a9008(void);
 int FUN_001f87d4(void);
 int FUN_00208504(void);
-int FUN_0020ffe8(...);
 int FUN_0021b2ec(void);
 int FUN_0021df18(void);
 int mapDestroyOverlayModel(...);

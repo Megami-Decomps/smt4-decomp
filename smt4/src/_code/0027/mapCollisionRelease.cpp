@@ -1,4 +1,5 @@
 #include "common.h"
+#include "npc_room/NpcRoom.h"
 
 extern "C" {
 

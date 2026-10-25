@@ -12,7 +12,7 @@ int FUN_002bf288(int, int, int, int, int, int, int, double);
 int FUN_002bf380(int, int, int, int, unsigned int, int);
 int efctSetSpeed(void);
 int FUN_002c1b64(int);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -38,7 +38,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -89,7 +89,7 @@ void FUN_0011340c(unsigned int param_1)
       (**(romwright_code **)(temp_v5 + 0x12c8))();
       *(unsigned char *)(temp_v5 + 0x12c4) = 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     temp_v6 = *(float *)(temp_v0 + 0x28);
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v5 = g_frameTex;

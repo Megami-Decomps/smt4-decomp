@@ -11,7 +11,6 @@ u32 FUN_002347b8(u32, u32, void *);
 s32 FUN_0038a1e0(u32);
 s32 FUN_0038a478(u32);
 s32 aocBoardDrawParameterOverlay(u32);
-u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
 
 void aocBoardCreateDrawJobs(DrawParameterOwner *state, u32 resource, u8 enabled, u32 parameter)
@@ -24,8 +23,7 @@ void aocBoardCreateDrawJobs(DrawParameterOwner *state, u32 resource, u8 enabled,
     if ((state->control.flags & 0x10) == 0) {
         state->control.flags |= 0x10;
         state->unk418 = 0;
-        state->control.process = asdProcessCreateSimple(DAT_003ff778, 2, 0, 0,
-                                                       FUN_0038a1e0, NULL, reinterpret_cast<u32>(state));
+        state->control.process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_003ff778), 2, 0, 0, FUN_0038a1e0, NULL, reinterpret_cast<u32>(state));
         taskCreateDraw(DAT_003ff768, 0x82, 1, 0, FUN_0038a478, NULL,
                        reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
         taskCreateDraw(DAT_003ff758, 0xE0, 1, 0, FUN_0038a478, NULL,

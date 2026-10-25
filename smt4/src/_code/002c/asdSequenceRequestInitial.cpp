@@ -1,7 +1,7 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
-void asdSequenceRequest(s32 state, const void *arg, u32 size);
 
 /* Requests the initial sequence without an argument. */
 void asdSequenceRequestInitial(void)

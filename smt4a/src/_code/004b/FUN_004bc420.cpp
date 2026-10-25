@@ -1,16 +1,15 @@
 /* NON_MATCHING: default-result stack slot, table selection and weighted-loop saved registers differ. */
 #include "battle/WeightedEncounter.h"
+#include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
+#include "gamedata/GameDataEntries.h"
 
-struct DataTable;
+
 struct AocSystem;
 extern "C" {
 extern AocSystem *g_aocSystem;
-const u16 *gameDataGetTableEntry(u32, u32);
 void FUN_00148d68(u32, u32, s32);
-DataTable *dataTableGet(u32, u32);
-WeightedEncounterTable *dataTableGetEntries(DataTable *);
-u32 dataTableGetCount(DataTable *);
+
 WeightedEncounterTable *resourceFindType27Record(AocSystem *, u32);
 const WeightedEncounterGroup *FUN_004bb80c(s32);
 const Table00Record *dataTable00FindById(u16);
@@ -32,13 +31,13 @@ static bool groupHasPortrait(u16 id)
 
 extern "C" u16 FUN_004bc420(u32 first, u32 second, s32 excludePortraitGroups)
 {
-    s32 index = *gameDataGetTableEntry(first, second);
+    s32 index = gameDataGetTableEntry(first, second)->value;
     if (!index) {
         FUN_00148d68(first, second, 1);
-        index = *gameDataGetTableEntry(first, second);
+        index = gameDataGetTableEntry(first, second)->value;
     }
-    DataTable *section = dataTableGet(2, 1);
-    WeightedEncounterTable *table = dataTableGetEntries(section);
+    void *section = dataTableGet(2, 1);
+    WeightedEncounterTable *table = static_cast<WeightedEncounterTable *>(dataTableGetEntries(section));
     if (index >= 0 && static_cast<u32>(index) < dataTableGetCount(section)) {
         WeightedEncounterTable *overrideTable = resourceFindType27Record(g_aocSystem, index);
         table = overrideTable ? overrideTable : &table[index];

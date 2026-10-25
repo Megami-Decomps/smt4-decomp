@@ -1,9 +1,9 @@
 /* NON_MATCHING: ailment tests combine into a mask and HP-clamp register allocation differs from retail. */
 #include "shard/PadState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
-PadState *gameGetPlayerData(void);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 PartyDamageUnitIV *gameGetUnitRecord(s32 slot);
 s32 gameCountUnits(void);
@@ -15,11 +15,11 @@ void partyApplyNonlethalAilmentDamage(u32 group, u32 ailment, s32 percentage)
         return;
     u32 mask = 1 << ailment;
     if ((group == 0 || group == 2 || group == 3)
-        && (gameGetPlayerData()->unk72 & 2) == 0
-        && (gameGetPlayerData()->unk72 & 0x400) == 0
-        && (gameGetPlayerData()->unk72 & mask) != 0) {
-        s32 damage = gameGetPlayerData()->unk1C * percentage;
-        s32 hp = gameGetPlayerData()->unk2A;
+        && (reinterpret_cast<PadState *>(gameGetPlayerData())->unk72 & 2) == 0
+        && (reinterpret_cast<PadState *>(gameGetPlayerData())->unk72 & 0x400) == 0
+        && (reinterpret_cast<PadState *>(gameGetPlayerData())->unk72 & mask) != 0) {
+        s32 damage = reinterpret_cast<PadState *>(gameGetPlayerData())->unk1C * percentage;
+        s32 hp = reinterpret_cast<PadState *>(gameGetPlayerData())->unk2A;
         damage /= 100;
         if (damage <= 0)
             damage = 1;
@@ -27,7 +27,7 @@ void partyApplyNonlethalAilmentDamage(u32 group, u32 ailment, s32 percentage)
         if (hp <= 0)
             hp = 1;
         s16 remaining = hp;
-        PadState *player = gameGetPlayerData();
+        PadState *player = reinterpret_cast<PadState *>(gameGetPlayerData());
         if (remaining > player->unk1C)
             remaining = player->unk1C;
         else if (remaining < 1)

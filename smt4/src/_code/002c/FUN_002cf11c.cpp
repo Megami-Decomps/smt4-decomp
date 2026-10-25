@@ -2,11 +2,12 @@
 
 extern "C" {
 
-int fileSlotGetBuffer(int id);
+void *fileSlotGetBuffer(u32 id);
 
-void FUN_002cf11c(void)
+/* The buffer of file slot 0x13. */
+void *FUN_002cf11c(void)
 {
-    fileSlotGetBuffer(0x13);
+    return fileSlotGetBuffer(0x13);
 }
 
 } /* extern "C" */

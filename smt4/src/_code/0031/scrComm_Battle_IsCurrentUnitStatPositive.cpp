@@ -1,8 +1,8 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 int btlGetMainState(void);
 extern u8 *btlMainFindActiveEntry(void);
 extern int scrGetArg(int index);

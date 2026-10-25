@@ -6,6 +6,7 @@
 #include "sys/Task.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct PlaceWindowTemplateResources {
     u8 first[0x18];
@@ -16,10 +17,8 @@ struct PlaceWindowTemplateResources {
 extern "C" {
 extern PlaceWindow *g_placeWin;
 extern const u8 DAT_00403a58[];
-void memClear(void *, u32);
 s32 FUN_0032a9fc(u32);
 void placeWindowDrawLabel(void *);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, AsdProcUpdateFunc, AsdProcFunc, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 void drawParameterBlockClear(void *);
 
@@ -35,7 +34,7 @@ void FUN_002637c8()
     }
     PlaceWindow *window = g_placeWin;
     memClear(window, sizeof(PlaceWindow));
-    window->job = asdProcessCreateSimple("PlaceWin Calc", 1, 0, 0, FUN_0032a9fc, NULL, NULL);
+    window->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("PlaceWin Calc"), 1, 0, 0, FUN_0032a9fc, NULL, NULL);
     taskCreateDraw("PlaceWin DrawUpLeft", 0x81, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     taskCreateDraw("PlaceWin DrawUpRight", 0xdf, 0, 0, placeWindowDrawLabel, NULL, NULL, window->job);
     window = g_placeWin;

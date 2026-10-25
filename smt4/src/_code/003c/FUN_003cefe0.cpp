@@ -10,7 +10,7 @@ extern "C" {
 void *asdOperatorNewC(u32);
 void asdMemFreeIfNotNull(void *);
 u32 FUN_00246134(s32, u32, s32, s32);
-u32 btlGetPassiveAffinityOverride(s32, u32);
+u32 btlGetPassiveAffinityOverride(u32, u32);
 s32 randRange(u16);
 void FUN_00246e24(u32, u32, BtlActionRecord *, u32, s32);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);

@@ -1,4 +1,5 @@
 #include "shard/GameDataBlocks.h"
+#include "util/GameDataGetPlayerName.h"
 
 extern "C" {
 

@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-extern s32 FUN_0023dcfc(u32 stat);
+extern u32 FUN_0023dcfc(u32 kind);
 extern s32 FUN_00245cc0(u32 stat);
 extern s32 battleGetEntryHalfword(s32 entry, u32 stat);
 }

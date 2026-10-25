@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W6_W6Match8_GpuDepth.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -87,7 +88,6 @@ extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: renderPopStateStacks. */
 /* Supplied declaration required: FUN_00168e00. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_001834e4. */
@@ -222,7 +222,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
                        *(int *)(temp_v2 + 0x10) + param_2 + (int)*(float *)(temp_v2 + 0x1c) + temp_v3);
           efctSetSpeed();
           temp_v9 = g_renderCtx;
-          temp_v10 = packNibblesAndByte(6,1,0);
+          temp_v10 = packNibblesAndByte(6, 1, 0);
           piVar7 = (int *)(temp_v9 + 0x12b8);
           temp_v11 = *piVar7;
           temp_v5 = piVar7[temp_v11 + 2];

@@ -1,5 +1,5 @@
-/* NON_MATCHING: register allocation only: retail keeps the entry count in r5 and the entry pointer in r6, built the other way round */
 #include "common.h"
+#include "gamedata/FlagsB.h"
 
 extern "C" {
 
@@ -13,9 +13,6 @@ extern s32 gameFlagIsSet(u32 flag);
 extern void *dataTableGet(s32 table, s32 section);
 extern Entry *dataTableGetEntries(void *section);
 extern s32 dataTableGetCount(void *section);
-extern s32 flagsBGetBit0(u32 id);
-extern s32 flagsBGetBit1(u32 id);
-extern void FUN_003ff160(u32 id);
 
 /* Walks the table (only while flag 0x40F is set); returns 1 if any entry was applied. */
 s32 FUN_003b6f00(void)
@@ -30,20 +27,16 @@ s32 FUN_003b6f00(void)
 
         result = 0;
         for (i = 0; i < 100; i++) {
-            Entry *entry;
-
             if (i >= count) {
                 break;
             }
-            entry = &entries[i];
-
-            if (entry->id != 0) {
-                if (flagsBGetBit0(entry->id) != 0) {
-                    if (flagsBGetBit1(entry->id) != 0) {
+            if (entries[i].id != 0) {
+                if (flagsBGetBit0(entries[i].id) != 0) {
+                    if (flagsBGetBit1(entries[i].id) != 0) {
                         result = 1;
                     }
-                } else if (entry->flag == 0 || gameFlagIsSet(entry->flag) != 0) {
-                    FUN_003ff160(entry->id);
+                } else if (entries[i].flag == 0 || gameFlagIsSet(entries[i].flag) != 0) {
+                    flagsBSetStateBits(entries[i].id);
                     result = 1;
                 }
             }

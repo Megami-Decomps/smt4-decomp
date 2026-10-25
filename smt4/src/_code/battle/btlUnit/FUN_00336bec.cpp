@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 struct BattleAppearanceTiming {
     s32 interval;
     s32 delay;
@@ -18,7 +19,6 @@ extern BattleAppearanceTiming DAT_00439a20;
 s32 compareDistanceFromOrigin(const void *left, const void *right);
 void FUN_002b7bca(void *entries, s32 count, u32 size, s32 (*compare)(const void *, const void *));
 void FUN_0024057c(BtlMainState *state, BtlActionRecord *action, s32 mode, s32 flags, s32 kind);
-void FUN_002451c4(s32 delay, s32 mode, BtlActionRecord *action, u32 alpha, s32 kind, s32 flags);
 void btlReflectInitKind9(s32 delay, s32 mode, BtlActionRecord *action, u32 effect, s32 kind);
 void FUN_0024082c(BtlMain *main, s32 duration);
 
@@ -51,7 +51,7 @@ void FUN_00336bec(BtlMainState *state)
             }
             s16 baseDelay = (s16)DAT_00439a20.baseDelay;
             FUN_0024057c(state, action, 0, 0, kind);
-            FUN_002451c4(order * interval + delay + baseDelay, 0, action, 255, kind, 0);
+            FUN_002451c4(order * interval + delay + baseDelay, 0, reinterpret_cast<u32>(action), 255, kind, 0);
             u32 effect = (action->status & 0x10) ? 7 : 6;
             btlReflectInitKind9(order * interval + baseDelay, 0, action, effect, 13);
             ++order;

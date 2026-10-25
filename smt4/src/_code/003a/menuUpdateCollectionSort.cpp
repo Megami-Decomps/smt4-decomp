@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match5_EntryCollection.h"
 #include "shard/GameModeFlags.h"
+#include "status/StatusCamera.h"
 
 struct CollectionCounterWork {
     u8 unk00[0x14];
@@ -15,7 +16,6 @@ s32 useCounterIsFinished(void);
 s32 useCounterGetCurrentValue(void);
 void useCounterRelease(void);
 void buttonHelpSetPreset(s32 preset);
-u8* FUN_002a0d0c(void);
 void FUN_0022e0fc(EntryCollection* collection, s32 mode);
 
 // Apply the saved ordering while the collection's counter menu remains active.

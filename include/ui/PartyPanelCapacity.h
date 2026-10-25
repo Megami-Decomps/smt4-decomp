@@ -32,4 +32,5 @@ typedef char PartyPanelCapacityOffsets[
     offsetof(PartyPanelCapacityViewA, fixedCapacity) == 0x1218 &&
     sizeof(PartyPanelCapacityViewA) == 0x121c ? 1 : -1];
 
+
 #endif

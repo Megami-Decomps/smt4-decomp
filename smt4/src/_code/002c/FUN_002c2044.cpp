@@ -1,5 +1,6 @@
 /* NON_MATCHING: guard-finalization NOPs are absent; shared identity pointer caching/register allocation differs. */
 #include "gfx/CameraMatrixCache.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern u32 _ZGVZN2nw4math5MTX348IdentityEvE8identity;
@@ -7,7 +8,6 @@ extern u32 _ZGVZN2nw4math5MTX448IdentityEvE8identity;
 extern Matrix34Data _ZZN2nw4math5MTX348IdentityEvE8identity;
 extern Matrix44 _ZZN2nw4math5MTX448IdentityEvE8identity;
 s32 __cxa_guard_acquire(u32 *guard);
-void memClear(void *memory, u32 size);
 void nn_math_ARMv6_MTX34CopyAsm(Matrix34Data *output, const Matrix34Data *input);
 void mtx44Copy(Matrix44 *output, const Matrix44 *input);
 void FUN_0011cfb4(void *parameters);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation differs (retail keeps id/kind/variant in r7/r6/r4 across both lookups and reuses sl as zero; the build spills the id); logic equivalent. */
 #include "common.h"
+#include "util/FUN_0015fb68.h"
 
 /* A table entry of 0x94 bytes (accessed fields). */
 struct TableEntry {
@@ -29,7 +30,6 @@ s32 dataTable18Sub0GetCount(void);
 RollState *FUN_00145f04(u8 kind, u32 id, u16 variant);
 s32 FUN_00148bb8(u32 id, u8 kind);
 u16 *FUN_00148c30(u8 kind, u32 id, u16 variant);
-s32 FUN_0015fb68(void);
 s32 randRange(u32 maximum);
 
 /* Roll every table entry's pending result: count down active results and draw new ones from the chance rows. */

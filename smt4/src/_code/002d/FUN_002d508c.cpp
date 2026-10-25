@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 165 rows); register allocation and the stack frame (20 vs 24 bytes) differ */
 #include "common.h"
 #include "util/TrigF32.h"
+#include "util/FUN_00256540.h"
 
 struct Vec3f {
     f32 x, y, z;
@@ -40,7 +41,6 @@ extern s8 DAT_0049fc64;
 extern s8 DAT_0049fce8;
 
 MapBlock* gameGetMapBlock(void);
-s32 FUN_00256540(void);
 void FUN_0027f958(f32* stickX, f32* stickY, s32 arg);
 void FUN_0026413c(void);
 f32 FUN_00281e34(f32 y, f32 x);

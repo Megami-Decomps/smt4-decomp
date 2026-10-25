@@ -12,4 +12,16 @@ void FUN_001835b4(u32 flags, u32 table, s32 id, u32 argument, u32 y, u32 slot);
 void FUN_002bf288(u32 flags, u32 table, s32 id, u32 argument, u32 y, u32 slot);
 }
 
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 FUN_002b6ad0(void);
+#ifdef __cplusplus
+}
+#endif
+
+
 #endif

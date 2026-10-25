@@ -3,6 +3,7 @@
 #include "ui/ButtonHelp.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 /* The part of a skill record this help text reads. */
 struct SkillHelpRecord {
@@ -29,7 +30,6 @@ SkillHelpRecord *FUN_00184310(u16 id);
 void FUN_00359974(s32 index, u32 a, u32 b, u32 c);
 void FUN_002c0940(char *output, s32 value);
 s32 textFormatBuffer(char *destination, const char *format, ...);
-void FUN_003180c4(u32 index, const char *value);
 void battleAttributeFormatName(char *out, s32 kind);
 void skillFormatTargetLabel(char *text, s32 target);
 void FUN_002ad414(u32 a, u32 b, u32 id, char *text);

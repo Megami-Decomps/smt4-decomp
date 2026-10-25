@@ -62,7 +62,7 @@ extern int FUN_00250ec0(unsigned int);
 extern int FUN_0026b564(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287528. */
-extern int FUN_00287894(unsigned short);
+extern int table1bOr1cGetRecordValue(unsigned short);
 /* Supplied declaration required: FUN_0028eeb8. */
 /* Supplied declaration required: FUN_00296934. */
 extern int idIsAtLeast350(unsigned int);
@@ -267,7 +267,7 @@ LAB_003822fc:
     FUN_002cdf2c(&temp_v5);
     puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
     dataTable1bOr1cGetRecord();
-    temp_v2 = FUN_00287894(*puVar5);
+    temp_v2 = table1bOr1cGetRecordValue(*puVar5);
     if (temp_v2 == 0) {
       puVar5 = (unsigned short *)(param_1[0x343] & 0xffff);
       dataTable1bOr1cGetRecord();

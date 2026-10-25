@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail conditionally copies nonzero counts; the direct count read compiles without that redundant branch. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/Result.h"
 
@@ -14,8 +13,12 @@ s32 asdCecInboxGetMessageCount(void)
     s32 result = asdCecMessageBoxOpen(g_asdCec.cec->box, g_asdCec.cec->unk00,
                                     g_asdCec.cec->unk04);
     if (nnResultIsSuccess(result)) {
-        count = g_asdCec.cec->box->inboxCount;
-        asdCecMessageBoxClose(g_asdCec.cec->box);
+        AsdCecMessageBox *box = g_asdCec.cec->box;
+        s32 messages = box->inboxCount;
+        if (messages != 0) {
+            count = messages;
+        }
+        asdCecMessageBoxClose(box);
     }
     return count;
 }

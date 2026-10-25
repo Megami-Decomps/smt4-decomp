@@ -1,5 +1,6 @@
 #include "ui/ButtonHelp.h"
 #include "shard/Shard0034.h"
+#include "event/eventCommand.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;

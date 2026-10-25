@@ -3,6 +3,8 @@
 #include "title/titleConfig.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0031.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -23,8 +25,6 @@ void FUN_002a0b58(void);
 void titleConfigDestroy(void);
 void FUN_0032ba8c(void);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 a, u32 b, void (*main)(void),
-                           void (*destroy)(void), void *owner);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void), void (*destroy)(void),
                    void *owner, u32 job);
 void paramsClearPacket(UiResourceParameters *params);
@@ -34,7 +34,6 @@ void uiSpriteSetKeyframe(void *sprite, s32 key, s32 restart);
 void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 restart);
 void FUN_00203b40(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
 void fillTwoWordsWithByte(void *destination, u32 value);
-void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void sysPlaySe(s32 sound);
 void FUN_0019de98(s32 channel, u32 color);
 s32 campIsState85(void);
@@ -51,7 +50,7 @@ void FUN_0037a2e4(void)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\titleConfig.cpp", 1071);
     TitleConfigA *config = static_cast<TitleConfigA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x160, 1));
     g_titleConfig = config;
-    config->job = asdProcessCreateSimple("TITLE_CONFIG_MAIN", 4, 0, 0, FUN_002a0b58, titleConfigDestroy, config);
+    config->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE_CONFIG_MAIN"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002a0b58), reinterpret_cast<AsdProcFunc>(titleConfigDestroy), reinterpret_cast<u32>(config));
     taskCreateDraw("TITLE_CONFIG D", 0xea, 0, 0, FUN_0032ba8c, NULL, NULL, config->job);
     paramsClearPacket(&config->params);
     paramsInit(&config->params, DAT_00536bec, 0x30, DAT_00536bec + 0x30, 0x30, 0, 0, 0, 0, 0, 0);
@@ -65,8 +64,8 @@ void FUN_0037a2e4(void)
     config->countA = 0;
     fillTwoWordsWithByte(config->touchRegions, 0xffffffff);
     config->countB = 0;
-    asdLoadFileAsyncSimple("camp/config.bf", &config->dataA, 0);
-    asdLoadFileAsyncSimple("camp/config.mbm", &config->dataB, 0);
+    asdLoadFileAsyncSimple("camp/config.bf", reinterpret_cast<u32 *>(&config->dataA), 0);
+    asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&config->dataB), 0);
     sysPlaySe(0x9b);
     FUN_0019de98(0, 0xf4f4f4ff);
     if (campIsState85() != 0) {

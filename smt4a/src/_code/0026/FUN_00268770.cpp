@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00268770` (_code @ 0x268770, 0x2944 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -108,7 +109,6 @@ extern int FUN_00230544(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern int uniteNotBusy(void);
-extern int FUN_0026140c(void);
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: recordGetModeForId. */
@@ -948,7 +948,7 @@ joined_r0x002694c0:
       temp_v14 = useCounterGetCurrentValue();
       temp_v6 = g_statusDown;
       if (temp_v14 != 0x69) {
-        temp_v14 = FUN_0026140c();
+        temp_v14 = reinterpret_cast<int>(FUN_0026140c());
         if ((*(unsigned char *)(temp_v14 + 0x15) & 0x7f) == 1) {
           if ((char)*(unsigned char *)(temp_v14 + 0x15) < '\0') {
             qsort(temp_v6 + 0x6e0,(int)*(short *)(temp_v6 + 0xee0),4,entryRefCompareByRankOrderId);

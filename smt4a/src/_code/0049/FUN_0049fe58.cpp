@@ -1,5 +1,6 @@
 /* NON_MATCHING: float register allocation and the HP clamp's conditional-store layout differ (retail keeps the percent damage in s23 and the group count in r5); logic and calls are identical. */
 #include "common.h"
+#include "gamedata/PlayerDataBlock.h"
 
 namespace {
 /* The player's save record (only the fields the damage touches). */
@@ -39,7 +40,6 @@ const u16 STATUS_NEVER = 0x400;
 }
 
 extern "C" {
-PlayerRecord *gameGetPlayerData(void);
 SlotRecord *gameGetSlotRecord(s32 slot);
 SlotTable *gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
@@ -64,10 +64,10 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
     if (!(percent > 0.0f)) {
         return;
     }
-    if ((mode == 0 || mode == 2 || mode == 3) && (gameGetPlayerData()->status & STATUS_PROTECTED) == 0 &&
-        (gameGetPlayerData()->status & STATUS_NEVER) == 0) {
-        f32 maxHp = (f32)gameGetPlayerData()->maxHp;
-        f32 hp = (f32)gameGetPlayerData()->hp;
+    if ((mode == 0 || mode == 2 || mode == 3) && (reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->status & STATUS_PROTECTED) == 0 &&
+        (reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->status & STATUS_NEVER) == 0) {
+        f32 maxHp = (f32)reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->maxHp;
+        f32 hp = (f32)reinterpret_cast<PlayerRecord *>(gameGetPlayerData())->hp;
         f32 damage = maxHp * percent * 0.01f;
         if (!(damage > 0.0f)) {
             damage = 1.0f;
@@ -77,7 +77,7 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
             remaining = 1.0f;
         }
         s16 newHp = (s16)(s32)remaining;
-        PlayerRecord *player = gameGetPlayerData();
+        PlayerRecord *player = reinterpret_cast<PlayerRecord *>(gameGetPlayerData());
         if (newHp <= player->maxHp) {
             if (newHp < 1) {
                 newHp = 1;

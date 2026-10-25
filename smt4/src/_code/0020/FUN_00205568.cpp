@@ -1,6 +1,7 @@
 /* NON_MATCHING: skill-list walks compile as up-counting index loops with different registers; retail walks a biased pointer counting down (pairs at -2 offset). */
 #include "common.h"
 #include <stddef.h>
+#include "gamedata/PlayerDataBlock.h"
 
 /* Two skill references packed into one 64-bit word. */
 struct PackedSkillPair {
@@ -45,7 +46,6 @@ struct SlotTableView {
 };
 
 extern "C" {
-PlayerSkillView *gameGetPlayerData(void);
 SlotTableView *gameGetSlotTable(void);
 UnitSkillView *gameGetUnitRecord(s32 index);
 
@@ -69,7 +69,7 @@ s32 FUN_00205568(u16 *out, const SkillSourceView *source, const PackedSkillPair 
         count = appendSkill(out, count, pair->first);
         count = appendSkill(out, count, pair->second);
     }
-    PlayerSkillView *player = gameGetPlayerData();
+    PlayerSkillView *player = reinterpret_cast<PlayerSkillView *>(gameGetPlayerData());
     count = appendSkill(out, count, player->firstSkill);
     pair = player->skills;
     for (s32 i = 0; i < 3; i++, pair++) {

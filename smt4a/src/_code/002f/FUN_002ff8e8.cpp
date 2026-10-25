@@ -1,5 +1,6 @@
 /* NON_MATCHING: only mode 2 swaps the old-state and current-slot address registers. */
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 static __inline void renderCtxSetBlend(RenderCtxA *context, s32 state)
 {
@@ -8,7 +9,6 @@ static __inline void renderCtxSetBlend(RenderCtxA *context, s32 state)
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-u32 packNibblesAndByte(s32, s32, u32);
 
 /* Select the packed blend-state preset for the requested draw mode. */
 void FUN_002ff8e8(u32 mode)

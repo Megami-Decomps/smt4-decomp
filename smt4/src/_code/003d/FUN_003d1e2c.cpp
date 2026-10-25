@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the battle target cursor step; retail repeats the clear-highlight loop inline for the forward and backward branches (unrolled by two) and scans with unsigned index tests, which armcc here compiles from the shared helper and signed loops. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* A battle side's unit records (0x114 bytes each); bit 8 of the flags at +0x50 marks a highlighted unit. */
 struct BattleSideUnits {
@@ -23,7 +24,6 @@ struct TargetSelectWork {
 
 extern "C" {
 void eventQueueAddUnique(s32 event);
-void memClear(void *block, s32 bytes);
 s32 FUN_0029ae44(void);
 s32 padIsButtonRepeat(u32 button);
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: close: armcc rewrites the 999 clamps as cmp #1000 (retail compares against a register-held 999), the equipment switch has no default in retail, and the parameter-block copy is 16 bytes in retail (built also spills a second block); register assignment differs */
 #include "gamedata/PlayerInitialization.h"
+#include "gamedata/PlayerDataBlock.h"
 
 /* Hit points, magic points and the five stats as stored back to back. */
 struct StatBlock {
@@ -39,7 +40,6 @@ struct StatLimits {
 
 extern "C" {
 
-PlayerInitialRecordIV *gameGetPlayerData(void);
 EquipRecord *dataTable08Sub2GetRecord(u32 id);
 void FUN_003c1e50(GrowthParameters *info);
 void FUN_003c1ab4(s32 level, GrowthValues *output, const GrowthParameters *parameters);
@@ -87,7 +87,7 @@ void FUN_00299370(PlayerInitialRecordIV *player)
     EquipRecord *record;
 
     if (player == NULL) {
-        player = gameGetPlayerData();
+        player = reinterpret_cast<PlayerInitialRecordIV *>(gameGetPlayerData());
     }
     current = (StatBlock *)&player->maximumHp;
     *current = *(const StatBlock *)&player->baseStats;

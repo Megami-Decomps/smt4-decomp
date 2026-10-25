@@ -13,7 +13,6 @@ extern "C" {
 extern CampCecOverlayWork *g_campCec;
 extern RenderCtx *g_titleScene;
 void FUN_002bed3c();
-void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 option);
 void FUN_002c1b64(RenderCtx *context, s32 mode);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
@@ -30,7 +29,7 @@ u32 campCecDrawDimmingOverlay()
     case 5:
         if (g_campCec->dimBackground != 0) {
             FUN_002bed3c();
-            FUN_002c39a4(g_titleScene);
+            renderCtxSelectStereoLayout(g_titleScene);
             RenderCtx *context = g_titleScene;
             s32 state = FUN_002c5d80(1, 0);
             renderStackPush(&context->stackA, state);

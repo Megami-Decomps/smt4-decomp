@@ -1,5 +1,6 @@
 /* NON_MATCHING: writes the GPU command stream that uploads a skinned mesh's bone matrices (per batch: either bone x bind-pose products, a plain copy of the bone matrices, or a single matrix, each as float24 uniform rows with reversed components, followed by the batch's trailing data); written from the decompilation, the matrix buffer is one array instead of the decompiler's split locals and the source/out parameters of gpuCmdWriteCopy are recovered from its call site */
 #include "common.h"
+#include "Model/MoriModelEffect.h"
 
 #define BATCH_FLAG_PRODUCT 1
 #define BATCH_FLAG_COPY 2
@@ -66,7 +67,6 @@ extern "C" {
 void FUN_001a063c(CmdStream *stream, u32 commands, s32 bytes);
 void FUN_0019a270(u32 *out, const u8 *matrix, u32 command);
 void nn_math_ARMv6_MTX34MultAsm(f32 *out, const u8 *boneMatrix, const u8 *bindPose);
-s32 gpuCmdPadToAlign16(s32 cursor, s32 offset);
 s32 gpuCmdWriteCopy(s32 cursor, s32 *mark, s32 size);
 
 /* Writes `rows` vec4 rows with their components reversed (w, z, y, x) after the two-word command header. */
@@ -127,7 +127,7 @@ void FUN_0019430c(SkinMesh *mesh, CmdStream *stream, SkinSkeleton *skeleton, Ski
 
         s32 cursor = reinterpret_cast<s32>(stream->cursor);
         if (cursor != 0 && batch->trailingSize != 0) {
-            cursor = gpuCmdPadToAlign16(cursor, ((cursor - stream->mark) & ~3) + 0x18);
+            cursor = reinterpret_cast<s32>(gpuCmdPadToAlign16(reinterpret_cast<u32 *>(cursor), ((cursor - stream->mark) & ~3) + 0x18));
             stream->cursor = reinterpret_cast<u32 *>(cursor);
             cursor = gpuCmdWriteCopy(cursor, copyMark, batch->trailingSize);
             stream->cursor = reinterpret_cast<u32 *>(cursor);

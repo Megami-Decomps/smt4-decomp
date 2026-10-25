@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail reaches the world and demon-range pointers through one base symbol (+4/+0xc), does not unroll the 24-slot init loop and keeps its world pointer in r4/r5 around the demon-table rebuild; this version unrolls the loop and keeps the world in r5, so the instruction count differs. The stores, calls and loop bounds are the same. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 /* The game world block: only the fields this reset writes are named by their offset. */
@@ -134,7 +135,6 @@ struct DemonRow {
 extern "C" {
 extern GameWorld *DAT_0043e2ac;
 extern DemonRange *DAT_0043e2b4;
-void memClear(void *data, u32 size);
 void rt_memclr(void *data, u32 size);
 const u16 *devilGetRecord(u32 id);   /* a demon record, read as halfwords */
 void FUN_0033f81c(void);

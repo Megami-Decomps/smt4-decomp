@@ -34,7 +34,7 @@ typedef struct SceneModels {
 
 int dataTable2eSub1GetCount(void);
 int dataTable2eSub0GetCount(void);
-int FUN_002a0428(AsdMdlObject *model, int flag);
+void FUN_002a0428(AsdMdlObject *model, u32 enabled);
 u16 *gameGetPlayerData(void);
 s16 *dataTable2eSub1GetRecord(int index);
 s16 *dataTable2eSub0GetRecord(int index);

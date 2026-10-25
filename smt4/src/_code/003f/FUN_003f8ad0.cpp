@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation: retail advances the table pointer with a writeback load (ldrb r3, [r0, #8]!) and keeps the table in r2; built keeps the table in r0 and the entry in r1. */
+/* NON_MATCHING: the lookup is now an inlined helper (the table pointer advances with the retail writeback load); armcc numbers the table copy and key r1/r2 where retail uses r2/r1. */
 #include "common.h"
 
 struct ByteEntry003f8ad0 {
@@ -17,14 +17,14 @@ struct ByteTable003f8ad0 {
 extern "C" {
 
 /* Looks the value of the largest key not above x up in the table: estimates the entry from the factor, then walks to it. */
-s32 FUN_003f8ad0(const ByteTable003f8ad0 *table, f32 x)
+static __inline s32 byteCurveLookup(const ByteTable003f8ad0 *curve, f32 x)
 {
     u32 key = (u32)x;
-    const ByteEntry003f8ad0 *entry = table->entries;
+    const ByteEntry003f8ad0 *entry = curve->entries;
     if (entry->key <= key) {
-        entry = &table->entries[table->count - 1];
+        entry = &curve->entries[curve->count - 1];
         if (key < entry->key) {
-            entry = &table->entries[(u32)(table->scale * ((f32)(table->count - 1) * x))];
+            entry = &curve->entries[(u32)(curve->scale * ((f32)(curve->count - 1) * x))];
             if (key >= entry->key) {
                 do {
                     entry++;
@@ -38,6 +38,11 @@ s32 FUN_003f8ad0(const ByteTable003f8ad0 *table, f32 x)
         }
     }
     return entry->value;
+}
+
+s32 FUN_003f8ad0(const ByteTable003f8ad0 *table, f32 x)
+{
+    return byteCurveLookup(table, x);
 }
 
 } /* extern "C" */

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "classes/Obj42242c.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int FUN_00233670(...);
 int FUN_0029ee6c(...);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
 int _ZN9Obj4224489buildListEv(...);
 int spriteTable22Acquire(void);
 int FUN_003ad0e0(void);
@@ -70,7 +70,7 @@ void FUN_003ab550(int *param_1)
   DAT_0043d9f8 = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_003ab744;
-  asdProcessCreateSimple(&LAB_003ab744,2,0,0,&LAB_003ace14,&LAB_003ace3c,piVar1);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_003ab744), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_003ace14), reinterpret_cast<AsdProcFunc>(&LAB_003ace3c), reinterpret_cast<u32>(piVar1));
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_003ab760;
   taskCreateDraw(&LAB_003ab760,0x6f,1,0,&LAB_003ad068,0,DAT_0043d9f8,puVar2);

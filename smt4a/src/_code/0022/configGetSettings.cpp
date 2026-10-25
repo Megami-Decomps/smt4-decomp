@@ -1,4 +1,5 @@
 #include "common.h"
+#include "mobiclip_ctrl/MobiclipCtrl.h"
 
 extern "C" {
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the constant 1 in r5 across the scrSetResult call (shared by the shift and the return value); built rematerialises it */
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -15,8 +16,6 @@ typedef struct BtlUnit002f0688 {
 
 extern u32 g_btlScriptUnit;
 
-u32 scrGetArg(u32 index);
-void scrSetResult(s32 value);
 
 /* Script command: reports whether bit (script argument 0) of the script unit's flag halfword is set. Returns 1. */
 u32 FUN_002f0688(void)

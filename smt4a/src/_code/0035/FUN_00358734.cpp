@@ -1,9 +1,9 @@
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32 kind, f32 value);
 s32 FUN_001692ac(u32 mode, u32 flags);
-s32 packNibblesAndByte(u32 low, u32 high, u32 byte);
 void eplUpdateActiveNodes(void);
 
 u32 FUN_00358734(void)

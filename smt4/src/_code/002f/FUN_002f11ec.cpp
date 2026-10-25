@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct BattleStateFlags {
     /* 0x00 */ u8 unk00[0xe0];
@@ -8,7 +9,6 @@ struct BattleStateFlags {
 extern "C" {
 
 BattleStateFlags *btlGetMainState(void);
-void scrSetResult(s32 result);
 
 /* Script command: reports whether the battle state's flag 0x40000 is clear. */
 u32 FUN_002f11ec(void)

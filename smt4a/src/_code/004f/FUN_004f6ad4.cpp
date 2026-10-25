@@ -1,5 +1,6 @@
 /* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
 #include "battle/BtlEffectLoad.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ char *FUN_00100d60(char *text, s32 character);
 s32 findRecordByKey(const char *key);
 void btlCameraFinishTransition(BtlEffectWorkA *work);
 u32 FUN_002282c8(u32 first, u32 second, u32 third);
-void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 
 /* Resolves the effects a battle unit asks for: names the battle ignores are skipped, numbered ones
  * select the numbered effect, any other name has its effect file loaded into the unit's slot. */
@@ -66,7 +66,7 @@ u32 FUN_004f6ad4(BtlEffectWorkA *work)
                         BtlEffectSlot *slot = &work->slots[i];
                         libc_strcpy(slot->name, FUN_00100d60(path, '/') + 1);
                         if (findRecordByKey(slot->name) == 0xff) {
-                            asdLoadFileAsyncSimple(path, &slot->file, 1);
+                            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->file), 1);
                             slot->flags |= 1;
                         }
                     }

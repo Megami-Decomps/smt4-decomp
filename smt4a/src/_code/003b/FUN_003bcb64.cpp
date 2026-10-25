@@ -1,6 +1,7 @@
 /* NON_MATCHING: rare-pass rejection shares the final failure block, and the ordinary-pass predicate is not outlined after success. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "util/GameStockContainsEntry.h"
 struct RecruitmentMasks {
     u8 prefix[8];
     u64 required;
@@ -15,7 +16,6 @@ BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 group);
 u32 randRange(u32 maximum);
 void sysMemClear(void *memory, u32 bytes);
 void scrSetResult(s32 result);
-s32 gameStockContainsEntry(u16 id);
 u32 FUN_002a4b28(u32 id);
 
 u32 FUN_003bcb64(void)

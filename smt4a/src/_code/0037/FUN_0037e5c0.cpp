@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 namespace {
 /* A row of the status screen's demon list. */

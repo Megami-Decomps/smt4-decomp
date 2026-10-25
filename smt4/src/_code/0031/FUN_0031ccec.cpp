@@ -1,9 +1,9 @@
 #include "battle/ListedEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 ListedState *btlGetMainState(void);
-void scrSetResult(s32 value);
 
 // Script command: result is the id of the first used, listed, non-excluded entry (-1 when there is none).
 u32 FUN_0031ccec(void)

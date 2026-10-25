@@ -8,6 +8,7 @@
 #include "AsdSDK/AsdDebugHooks.h"
 #include <math.h>
 #include "util/CalleeContracts.h"
+#include "title/titleMain.h"
 
 namespace {
 /* The editor's scratch buffer is past the shared menu-state prefix. */
@@ -63,7 +64,6 @@ void FUN_00387454();
 void asdCameraInitializeDefaults(EffectEditorCamera *, s32);
 void FUN_0014f0dc(void *, const PhaseVector *, const PhaseVector *, const PhaseVector *);
 void FUN_001523b8(EffectEditorCamera *, s32, f32, f32, f32, f32);
-void FUN_0036b824(EffectEditorCamera *);
 void FUN_003627ac(f32, f32);
 }
 
@@ -150,7 +150,7 @@ extern "C" void FUN_002830cc(void)
     asdCameraInitializeDefaults(&g_effectEditorCamera, 1);
     FUN_0014f0dc(&g_effectEditorCamera, &g_effectEditorCameraDefaults.eye, &g_effectEditorCameraDefaults.target, &g_effectEditorCameraDefaults.up);
     FUN_001523b8(&g_effectEditorCamera, 1, 30.0f, 20.0f, 25600.0f, 5.0f / 3.0f);
-    FUN_0036b824(&g_effectEditorCamera);
+    FUN_0036b824(reinterpret_cast<u32>(&g_effectEditorCamera));
     EditorResetStateView *startup = reinterpret_cast<EditorResetStateView *>(&g_effectEditor);
     startup->buffer = startup->scratch;
     g_effectEditor.selection.index = 0;

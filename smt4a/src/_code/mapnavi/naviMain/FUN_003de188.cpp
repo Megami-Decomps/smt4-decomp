@@ -7,8 +7,6 @@ extern "C" {
 extern NaviMainA *g_naviMain;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
-                           AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate,
                    AsdProcFunc onEnd, u32 work, void *owner);
 u8 *gameFlagsGetBlock(void);
@@ -72,8 +70,7 @@ void FUN_003de188(u32 unused, u32 argument)
     campButtonHelpAcquire();
     FUN_004930e4(argument);
 
-    navigation->job = asdProcessCreateSimple("NAVI PROC", 4, 0, 0, naviMenuStartIfIdle, naviRequestClose,
-                                             (u32)navigation);
+    navigation->job = asdProcessCreateSimple("NAVI PROC", 4, 0, 0, naviMenuStartIfIdle, naviRequestClose, (u32)navigation);
     navigation->drawTask = taskCreateDraw("NAVI DOWN", 0xe8, 1, 0, naviMainPollResourcesAndUpdatePanel, NULL,
                                           (u32)navigation, (void *)navigation->job);
     navigation->tasks.fadeTask = taskCreateDraw("NAVI FADE DRAW", 0xea, 0, 0, FUN_002ba728, NULL, 0,

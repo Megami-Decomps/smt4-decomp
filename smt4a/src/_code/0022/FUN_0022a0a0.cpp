@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a0a0` (_code @ 0x22a0a0, 0x530 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ extern int DAT_0057f280; /* 0x57f280 */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_00228b04. */
-extern int FUN_0026140c(void);
 extern unsigned int mapGetDisplayName(unsigned char);
 extern int resourceRunOperationIfUnblocked(int);
 extern int FUN_002a4894(int);
@@ -165,7 +165,7 @@ unsigned int FUN_0022a0a0(void)
           *(unsigned char *)(temp_v0 + 0x74c) = 1;
           *(unsigned int *)(temp_v0 + 0x744) = 3;
           if (-1 < *(int *)(temp_v0 + 0x750)) {
-            temp_v9 = FUN_0026140c();
+            temp_v9 = reinterpret_cast<int>(FUN_0026140c());
             pbVar11 = (unsigned char *)(temp_v9 + *(int *)(temp_v0 + 0x750));
             temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
             temp_v8 = FUN_002a4894(temp_v8);

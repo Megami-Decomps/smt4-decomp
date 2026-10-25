@@ -1,10 +1,10 @@
 #include "shard/Shard0039.h"
+#include "gamedata/PartyMoney.h"
 
 extern "C" {
 
 extern u32 g_btlMessageFlagMasks;
 extern s32 panelStateIs0(void);
-extern void partyAddMoneyClamped(u32 value);
 
 s32 panelStateSettleAndClear(void)
 {

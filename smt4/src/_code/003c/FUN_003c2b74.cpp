@@ -1,5 +1,6 @@
 /* NON_MATCHING: the two counter values use exchanged saved registers and different conditional-comparison scheduling. */
 #include "shard/Shard0031.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
 struct BoundedCounter {
     u8 kind;
@@ -10,7 +11,6 @@ struct BoundedCounter {
 };
 extern "C" {
 s32 FUN_0029efc0(FlaggedEntry *entry);
-s32 FUN_0029e93c(FlaggedEntry *entry);
 s32 flaggedEntryGetValueA(FlaggedEntry *entry);
 s32 flaggedEntryGetValueB(FlaggedEntry *entry);
 void scrollOwnerSetValue(FlaggedEntry *entry, s32 value);

@@ -1,9 +1,9 @@
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int FUN_00299370(int);
-int memClear(unsigned short *, int);
 int unitApplyLevelGrowth(unsigned short *, int, int);
 int FUN_003c1ef4(int);
 int strncpy(unsigned short *, unsigned int, int);
@@ -44,7 +44,7 @@ void FUN_00333ef8(fn_00333ef8_arg0 *param_1,unsigned int param_2,unsigned short 
   unsigned short *puVar1;
   
   puVar1 = (unsigned short *)gameGetPlayerData();
-  memClear(puVar1,0x8c);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar1), 0x8c));
   *(char *)(puVar1 + 0x3b) = (char)(int)param_1;
   puVar1[0x3a] = 0;
   strncpy(puVar1 + 0x26,param_2,0x12);

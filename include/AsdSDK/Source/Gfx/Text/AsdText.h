@@ -24,4 +24,20 @@ typedef struct AsdText {
 
 typedef char AsdTextTextOffsetCheck[sizeof(AsdText) == 0xBC ? 1 : -1];
 
+extern "C" {
+unsigned int FUN_00287704(int param_1);
+}
+
+extern "C" {
+u16 *FUN_002bf4f8(u32 file, s32 index);
+}
+
+extern "C" {
+u32 FUN_0014bd84(u32 index);
+}
+
+extern "C" {
+u32 asdGxGetCommandCursor(void);
+}
+
 #endif

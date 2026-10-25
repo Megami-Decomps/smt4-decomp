@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler merges paired status tests into combined masks; retail retains separate predicated TST instructions. */
 #include "common.h"
 
 struct EligibleEntry {
@@ -16,9 +15,13 @@ extern "C" u32 FUN_003e4d98(const EligibleEntry* entry)
     u16 status = entry->status;
     if ((status & 2) != 0)
         return 0;
-    if ((status & 0x400) != 0 || (status & 4) != 0)
+    if ((status & 0x400) != 0)
         return 0;
-    if ((status & 0x40) != 0 || (status & 0x80) != 0)
+    if ((status & 4) != 0)
+        return 0;
+    if ((status & 0x40) != 0)
+        return 0;
+    if ((status & 0x80) != 0)
         return 0;
     if ((status & 0x100) != 0)
         return 0;

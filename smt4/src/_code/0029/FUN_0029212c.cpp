@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029212c` (_code @ 0x29212c, 0x6d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int dataTable40FindById(void);
 int dataTable08Sub2GetRecord(void);
 int dataTable08Sub1GetRecord(void);
 int textFormatBuffer(...);
-int memClear(...);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
 typedef struct {
@@ -220,7 +220,7 @@ void FUN_0029212c(int param_1)
       textEncodeFontSlot(temp_v8 + 0x24,&temp_v12);
       temp_v8 = temp_v8 + 1;
     } while (temp_v8 < 5);
-    memClear(acStack_c8,0x5c);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(acStack_c8), 0x5c));
     temp_v8 = 0;
     temp_v15[0] = '\0';
     temp_v15[1] = '\0';

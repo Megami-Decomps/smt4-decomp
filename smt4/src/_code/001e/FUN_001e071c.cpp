@@ -13,7 +13,7 @@ int FUN_0025f6b8(...);
 int FUN_002bed3c(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(...);
+int renderCtxSelectStereoLayout(...);
 int FUN_002dc120(...);
 int FUN_002f1558(...);
 
@@ -51,7 +51,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002dc120. */
 /* Supplied declaration required: FUN_002f1558. */
@@ -66,7 +66,7 @@ void FUN_001e071c(fn_001e071c_arg0 *param_1)
   int temp_v2;
   int *piVar4;
   
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   FUN_002bed3c();
   if (param_1->field_0x3048 == 6) {
     if (*(int *)&param_1[1].field_0x28c8 == 3) {

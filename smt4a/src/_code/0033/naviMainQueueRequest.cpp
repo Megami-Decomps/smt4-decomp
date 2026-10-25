@@ -1,5 +1,6 @@
 #include "shard/NaviMain.h"
 #include "common.h"
+#include "util/NaviMainQueueRequest.h"
 
 extern "C" {
 extern NaviMainA *g_naviMain;

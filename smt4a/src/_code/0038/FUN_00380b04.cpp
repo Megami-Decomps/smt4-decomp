@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "util/BitsAt60Clear.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
 void bitsAt60Set(SlotRecord *, u16);
-void bitsAt60Clear(SlotRecord *, u16);
 s32 bitsAt60Test(SlotRecord *, u16);
 void FUN_004fcffc(u32, ScriptUnit *, BattleRosterRecordA *, u32);
 void FUN_004fdb18(u32, ScriptUnit *, BattleRosterRecordA *, u32, u32);

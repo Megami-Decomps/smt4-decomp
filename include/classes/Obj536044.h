@@ -15,6 +15,14 @@ public:
     void waitController();
 
 protected:
+    /* Remembers the current state, enters `next` and restarts the substate. */
+    void changeState(s32 next)
+    {
+        previousState = state;
+        state = next;
+        substate = 0;
+    }
+
     /* 0x00 */ u32 flags;
     /* 0x04 */ s32 state;
     /* 0x08 */ s32 substate;

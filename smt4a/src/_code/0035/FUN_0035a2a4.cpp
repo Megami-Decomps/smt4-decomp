@@ -1,5 +1,6 @@
 /* NON_MATCHING: StreetPass menu update is complete; switch case joining and initialized/refresh flag block layout differ. */
 #include "common.h"
+#include "util/GameDataBlocksGetFlagByte.h"
 
 struct MarkPresenceRecord {
     /* 0x00 */ u8 unk00[0x60];
@@ -30,7 +31,6 @@ void sysPlaySe(u32 sound);
 void FUN_0037c8e4(s32 enabled, s32 mode);
 void messageRestoreBanner();
 u32 FUN_003ba65c(void *controls);
-u32 gameDataBlocksGetFlagByte();
 extern CampCecFlagGlobals g_campCec;
 }
 

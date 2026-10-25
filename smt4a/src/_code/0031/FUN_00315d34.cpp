@@ -1,6 +1,7 @@
 /* NON_MATCHING: overlay/text argument contracts and the 128-byte text buffer match retail; cached zero/global registers, overlay scheduling and the early loop epilogue still differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "Model/MoriModelShadowMap.h"
 
 #define NOTICE_STATE_IDLE 0
 #define NOTICE_STATE_SLIDE_IN 1
@@ -43,10 +44,8 @@ struct MapInterface {
 
 extern "C" {
 extern MapInterface *g_mapIf;
-extern RenderCtxA *g_renderCtx;
 
 s32 FUN_001692ac(u32 a, u32 b);
-void FUN_00157558(RenderCtxA *context);
 void FUN_0016c4b8(RenderCtxA *context, void *surface);
 void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);

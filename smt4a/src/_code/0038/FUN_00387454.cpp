@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail loads the flag address (ldr r7) before `sub sp, #260`; built emits it after the sub */
 #include "common.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 
 s32 textFormatBuffer(char *output, const char *format, ...);
-u32 FUN_001642e4(const char *path, u32 a, u32 b, u32 c);
 void *asdEffectTextureCreate(const void *image);
 void asdMemFree(void *block);
 
@@ -21,7 +21,7 @@ void FUN_00387454(void)
         i = 0;
         do {
             textFormatBuffer(path, "effect/tex/be_%04d.stex", i + 1);
-            void *file = (void *)FUN_001642e4(path, 0, 1, 0x80);
+            void *file = asdLoadFileSyncNoContext(path, NULL, 1, 0x80);
             g_effectTextures[i] = asdEffectTextureCreate(file);
             asdMemFree(file);
             i++;

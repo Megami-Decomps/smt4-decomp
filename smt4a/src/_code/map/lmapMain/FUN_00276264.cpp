@@ -112,14 +112,14 @@ int mapIfStart(...);
 int libc_strcpy(...);
 int tableGroupFindEntryIndex(...);
 int frameTexInitActive(void);
-int FUN_00384d6c(...);
+int gameFlagsWriteWordBit(...);
 int FUN_003adef4(...);
 int naviMainFinishRequest(void);
 int sysPlayVoice(...);
 int FUN_00482c04(void);
 int FUN_00325a74(void);
 int lmapSnapshotTransitionState(void);
-int FUN_004bc758(...);
+int gameDataEntrySetBit7(...);
 
 int FUN_0015f858(...);
 int FUN_001654f0(void);
@@ -540,7 +540,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: FUN_00379d58. */
 /* Supplied declaration required: helpResourcesRelease. */
 /* Supplied declaration required: FUN_003847d4. */
-/* Supplied declaration required: FUN_00384d6c. */
+/* Supplied declaration required: gameFlagsWriteWordBit. */
 extern char FUN_00386720(void);
 /* Supplied declaration required: FUN_00387014. */
 /* Supplied declaration required: FUN_00398004. */
@@ -640,7 +640,7 @@ extern unsigned short gameFlagsGetWorkValue(void);
 /* Supplied declaration required: sub68OwnerDestroyAll. */
 /* Supplied declaration required: jobFlagObjStop. */
 /* Supplied declaration required: FUN_00482fd4. */
-/* Supplied declaration required: FUN_004bc758. */
+/* Supplied declaration required: gameDataEntrySetBit7. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
@@ -1871,7 +1871,7 @@ LAB_00278b38:
                                     temp_v8 = flagsBit7Get(g_gameState,DAT_005f1600);
                                     if (temp_v8 == 0) {
                                       popupTryStartScrollPrompt(g_gameState,DAT_005f1600);
-                                      FUN_004bc758(g_gameState,DAT_005f1600,1);
+                                      gameDataEntrySetBit7(g_gameState,DAT_005f1600,1);
                                     }
                                     popupTryStartTimedPrompt();
                                   }
@@ -1944,7 +1944,7 @@ LAB_00278b38:
                                 mapPopupReset();
                                 return 0;
                               }
-                              FUN_00384d6c(DAT_005f16d4,1);
+                              gameFlagsWriteWordBit(DAT_005f16d4,1);
                               DAT_005f1614 = '\x01';
                               DAT_005f185a = 0;
                               puVar2[3] = 0x43;

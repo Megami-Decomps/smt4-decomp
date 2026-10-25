@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail copies the animation points as integer word pairs (ldr/str, not ldrd/strd), keeps the panel's tail fields in a different base register, and orders the link-slot flag calls differently (about 140 diff lines). */
 #include "camp/ScriptPanelResources.h"
 #include "shard/Shard004B.h"
+#include "shard/Shard004A.h"
 
 /* The quest menu panel as FUN_004b7694 drives it: the focus animation and the selection tracker. */
 struct QuestPoint {
@@ -72,7 +73,6 @@ extern QuestPendingState DAT_005f16fc;
 QuestEntry *menu4CGetCurrentEntry(void *menu);
 QuestEntry *menu4CGetEntry(void *menu);
 s32 FUN_004babd8(void *menu);
-u16 flaggedValueHolderGetTotal(void *menu);
 void linkSlotSetFlag1C(QuestLinkSlot *slot, s32 value);
 void linkSlotSetFlag20(QuestLinkSlot *slot, s32 value);
 void FUN_00407eb0(QuestLinkSlot *slot, s32 kind, s32 unused);
@@ -112,7 +112,7 @@ void FUN_004b7694(QuestPanel *panel)
         panel->segmentTo.y = (f32)y;
         panel->duration = 10;
         panel->progress = 0;
-        panel->total = flaggedValueHolderGetTotal(&panel->menu);
+        panel->total = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&panel->menu));
         if (panel->linked != 0) {
             QuestEntry *current = menu4CGetEntry(&panel->menu);
             s32 kind = current->kind;

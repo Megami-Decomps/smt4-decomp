@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match7_WaveBuffer.h"
 
 extern "C" {
-WaveArchiveEntry *FUN_00129010(u32 archive);
+WaveArchiveEntry *soundBlockGetPayloadEnd(u32 archive);
 s32 FUN_00129020(u32 archive);
 u8 *FUN_00129034(u32 archive, s32 index);
 u8 *FUN_0013ac6c(u32 archive, s32 index);
@@ -14,7 +14,7 @@ void FUN_001294e0(void *voice, u32 archive, WaveBuffer *, WaveBuffer *, s32 inde
 // Queue the initial wave and, when present, its looping continuation.
 u32 soundQueueArchiveWaveBuffers(WavePlayer *player, u32 archive, WaveBuffer *initial, WaveBuffer *loop, s32 index)
 {
-    WaveArchiveEntry *entry = FUN_00129010(archive);
+    WaveArchiveEntry *entry = soundBlockGetPayloadEnd(archive);
     u8 *context = NULL;
     s32 count = FUN_00129020(archive);
     if (index > count - 1 || initial == NULL || (entry->looping && loop == NULL))

@@ -8,7 +8,7 @@ typedef struct Record {
 } Record;
 
 extern u32 flagBitIsSet(s32 id);
-extern Record *FUN_002ae584(s32 id);
+extern Record *appCostRecordFindById(s32 id);
 
 /* Comparison of two ids: an id with flag bits the other lacks sorts first (-1) or last (1); otherwise by the records' sort key. */
 s32 FUN_0019d758(s32 *a, s32 *b)
@@ -24,8 +24,8 @@ s32 FUN_0019d758(s32 *a, s32 *b)
         result = 1;
     }
     if (result == 0) {
-        Record *recordA = FUN_002ae584(*a);
-        Record *recordB = FUN_002ae584(*b);
+        Record *recordA = appCostRecordFindById(*a);
+        Record *recordB = appCostRecordFindById(*b);
 
         result = recordA->sortKey - recordB->sortKey;
     }

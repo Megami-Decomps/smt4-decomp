@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
@@ -25,10 +26,8 @@ typedef struct QuestUi {
     /* 0xCCA */ u16 category;
 } QuestUi;
 
-extern RenderCtxA *g_renderCtx;
 extern QuestUi *g_uiQuest;
 
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_00218640(void);
 void FUN_002f6048(QuestUi *ui);

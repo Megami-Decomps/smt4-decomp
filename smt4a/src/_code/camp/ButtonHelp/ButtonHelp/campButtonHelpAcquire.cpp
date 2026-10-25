@@ -46,8 +46,6 @@ extern "C" {
 extern ButtonHelpAcquireGlobals g_buttonHelp;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *data, u32 size);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcFunc update, AsdProcFunc destroy, void *work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
 void FUN_002e1698(u32 job);
@@ -75,8 +73,7 @@ void campButtonHelpAcquire(void)
         }
         ButtonHelpWorkA *work = g_buttonHelp.prefix.work;
         sysMemClear(work, sizeof(ButtonHelpWorkA));
-        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0,
-                                           FUN_002e1698, FUN_0025ccc0, NULL);
+        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ButtonHelp CALC"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002e1698), FUN_0025ccc0, NULL);
         work->jobs.drawTask = taskCreateDraw(reinterpret_cast<const s8 *>("ButtonHelp DRAW"), 234, 0, 0,
                                         FUN_002e169c, NULL, NULL, work->job);
         ButtonHelpWorkA *panel = g_buttonHelp.prefix.work;

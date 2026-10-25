@@ -11,8 +11,6 @@ extern AocBootGlobals g_aocBoot;
 extern AocMain *g_aocMain;
 
 void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 void FUN_002ba78c(void *dialog);
 s32 aocBootUpdate(u32 handle);
 void aocBootDestroy(u32 handle);
@@ -32,8 +30,7 @@ u32 aocBootCreate(void)
     boot->dialogOpen = 0;
     FUN_002ba78c(boot->dialog);
     boot->frames = 0;
-    g_aocBoot.boot->job = asdProcessCreateSimple((const s8 *)"aocBoot CALC", 2, 0, 0, aocBootUpdate,
-                                                 aocBootDestroy, 0);
+    g_aocBoot.boot->job = asdProcessCreateSimple((const s8 *)"aocBoot CALC", 2, 0, 0, aocBootUpdate, aocBootDestroy, 0);
     g_aocMain->flags &= ~AOC_MAIN_FLAGS_BOOT_MASK;
     return g_aocBoot.boot->job;
 }

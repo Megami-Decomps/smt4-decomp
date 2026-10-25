@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00101b5a` (_code @ 0x101b5a, 0x2ae bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "camp/CampCec/CampCecView.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ typedef struct {
 /* Supplied declaration required: FUN_0010195c. */
 extern unsigned char *FUN_001024a8(unsigned int, unsigned int, unsigned int *, int *);
 extern unsigned char *FUN_001024ac(unsigned int, unsigned int, unsigned int *, int *);
-extern int FUN_002e2ec0(void);
 extern int isAsciiDigit(unsigned int);
 /* Supplied declaration required: FUN_002e5550. */
 
@@ -78,7 +78,7 @@ unsigned char * FUN_00101b5a(unsigned int param_1,unsigned int param_2,unsigned 
   temp_v20 = param_2;
   temp_v21 = param_3;
   piStack_18 = param_4;
-  temp_v0 = FUN_002e2ec0();
+  temp_v0 = reinterpret_cast<int>(FUN_002e2ec0());
   temp_v19 = (unsigned int)*(unsigned char *)((int)*(int **)(temp_v0 + 0xc) + **(int **)(temp_v0 + 0xc));
   puVar8 = (unsigned char *)0xffffffff;
   do {

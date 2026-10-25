@@ -1,6 +1,7 @@
 /* NON_MATCHING: scheduling only: retail moves r3 after the float argument copies and stores the
  * two -1 fields last; this build hoists both. */
 #include "shard/S1Mover.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The work area of the task FUN_00244e1c starts (0x168 bytes). */
 struct ModelEffectTask {
@@ -26,7 +27,6 @@ struct ModelEffectTask {
 extern "C" {
 ModelEffectTask *taskCreate(void (*update)(ModelEffectTask *), u32 a, u32 b, u32 c, u32 d,
                             u32 size, u32 list, u32 e, u32 f);
-void memClear(void *block, s32 size);
 u32 FUN_002fdd9c(u32 id);
 void FUN_00200c9c(ModelEffectTask *task);
 

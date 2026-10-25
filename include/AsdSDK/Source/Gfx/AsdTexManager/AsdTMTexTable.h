@@ -98,4 +98,32 @@ s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 }
 #endif
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Looks up a table entry in the file of a layout (tail call to FUN_001834a4, linked as a nop). */
+u16 *layoutFindTableEntry(void *layout, s32 index);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 FUN_00203d74(void);
+#ifdef __cplusplus
+}
+#endif
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_00287728(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,11 +1,11 @@
 /* NON_MATCHING: vtable-backed Filter4Poly member requires class/member symbol migration; retail calls virtual slot 0x10 on this. */
 #include "romwright_types.h"
+#include "camp/PlayLog/PlayLog.h"
 
 extern "C" {
 
 int asdMemoryAlloc(int, int, int, int, int);
 int mtx44Copy(int, unsigned int);
-int asdTMTexLoadMainHeap(int, unsigned int);
 int resourceApplyNodeFlag(int, unsigned int);
 void* asdTMTexNodeSetMode(int, int);
 int FUN_0041d910(int *);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the item-sale list builder; retail hoists the list base (+0x9FFC), the counter address and the price accumulator address into callee-saved registers and builds the packed item word in a stack slot with piece moves, which armcc here allocates differently. */
 #include "common.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 /* The sale list window: slot 2 of its vtable attaches a list. */
 class SaleWindow {
@@ -50,7 +51,6 @@ extern u8 LAB_00494398;
 
 void sysMemClear(void *block, u32 bytes);
 u16 *FUN_00145f04(u8 rank, u32 seed);
-s32 FUN_00481100(u32 flag);
 s32 FUN_001ba3d0(u32 flag);
 void aocRecordLookup83(u32 flag);
 u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
@@ -72,7 +72,7 @@ void FUN_0049a5b4(SaleMenu *menu)
     sysMemClear(menu->entries, 0xC000);
     u16 *discount = FUN_00145f04(menu->rank, menu->seed);
     for (u32 flag = 0x3B7; flag < 0x47F; flag++) {
-        if (!FUN_00481100(flag))
+        if (!flagValueIsPositiveForward(flag))
             continue;
         s32 owned = FUN_001ba3d0(flag);
         for (s32 n = 0; n < owned; n++) {

@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "ui/ParamsClearPacket.h"
 #include "common.h"
 
 extern "C" {
@@ -53,7 +54,6 @@ static const s32 sPanelKeysD[] = {
     0, -1, -1, 0, -1, 0,
 };
 
-void paramsClearPacket(UiResourceParameters *params);
 
 void FUN_0014e188(PanelSprite *sprite, u32 group, u32 image, PanelSprites *owner, u16 id, f32 scale);
 void uiSpriteInitializeState(PanelSprite *sprite, u32 group, s32 image, u32 kind, PanelSprites *owner, u16 id, f32 scale);

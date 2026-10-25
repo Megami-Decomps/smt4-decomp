@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct SequenceValues {
     f32 values[6];
@@ -16,7 +17,6 @@ struct DeferredSequenceRequest {
 
 extern "C" {
 extern DeferredSequenceRequest g_deferredSequenceRequest;
-void asdSequenceRequest(s32 kind, const DeferredSequenceParameters* parameters, u32 size);
 
 // Submits a copy of the deferred request and clears its pending flag.
 void sequenceRequestFlushDeferred(void)
@@ -26,6 +26,6 @@ void sequenceRequestFlushDeferred(void)
     parameters.second = g_deferredSequenceRequest.parameters.second;
     parameters.values = g_deferredSequenceRequest.parameters.values;
     g_deferredSequenceRequest.pending = 0;
-    asdSequenceRequest(4, &parameters, sizeof(parameters));
+    asdSequenceRequest(4, reinterpret_cast<const void *>(&parameters), sizeof(parameters));
 }
 }

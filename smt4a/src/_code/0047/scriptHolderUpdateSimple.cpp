@@ -12,7 +12,7 @@ s32 scrRunOpcodesStub(ScriptRunState *process);
 u32 FUN_004186e0(void);
 void FUN_00418070(u32 object, s32 value);
 void optionsClearFlag1(void);
-void FUN_003a36b4(void);
+u32 FUN_003a36b4(void);
 void FUN_004731d8(void);
 
 u32 scriptHolderUpdateSimple(ScriptHolder *holder)

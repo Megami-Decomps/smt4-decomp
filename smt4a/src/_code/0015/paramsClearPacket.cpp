@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "ui/ParamsClearPacket.h"
 #include <string.h>
 
 extern "C" {

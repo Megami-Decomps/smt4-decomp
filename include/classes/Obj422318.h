@@ -2,11 +2,11 @@
 #define CLASSES_OBJ422318_H
 
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 int asdMemFreeNonNull(void *block);
 int asdMdlManagerMarkDestroy(u32 handle);
-int asdMdlManagerDestroy(u32 handle);
 void *asdOperatorNew(u32 bytes);
 }
 
@@ -35,7 +35,7 @@ public:
         }
         if (handle != 0) {
             asdMdlManagerMarkDestroy(handle);
-            asdMdlManagerDestroy(handle);
+            asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
             handle = 0;
         }
     }

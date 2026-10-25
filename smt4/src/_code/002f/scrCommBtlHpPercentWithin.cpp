@@ -1,11 +1,10 @@
 /* NON_MATCHING: register allocation only: retail accumulates the maximum in r5 and the current value in r6; built swaps them. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern s32 scrGetArg(u32 index);
-extern s32 scrSetResult(s32 value);
 
 /* Script command: pushes whether the live units' current/maximum HP percentage (argument 0 compares) is at most argument 0. */
 u32 scrCommBtlHpPercentWithin(void)

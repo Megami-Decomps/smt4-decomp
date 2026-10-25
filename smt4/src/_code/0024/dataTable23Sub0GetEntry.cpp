@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the AOC table count and entries pointer as a pair (add #996; ldm); built loads them as two separate ldr (both unconditional now) */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -19,14 +20,13 @@ typedef struct AocSystem {
 
 extern AocSystem *g_aocSystem;
 extern void *dataTableGet(s32 group, s32 index);
-extern Table23Entry *dataTableGetEntries(void *table);
 extern u32 dataTableGetCount(void *table);
 
 /* Returns entry `index` of data table 0x23/0, continuing into the AOC content entries after the base ones; NULL when out of range. */
 Table23Entry *dataTable23Sub0GetEntry(u32 index)
 {
     void *table = dataTableGet(0x23, 0);
-    Table23Entry *entries = dataTableGetEntries(table);
+    Table23Entry *entries = reinterpret_cast<Table23Entry *>(dataTableGetEntries(table));
     u32 count = dataTableGetCount(table);
 
     if (index < count) {

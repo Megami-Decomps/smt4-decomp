@@ -2,6 +2,7 @@
 #include "event/2dEvent/EventEffect.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 struct EventFilterWork {
     u32 job;
@@ -20,7 +21,6 @@ extern EventEffectGlobalsA g_eventEffect;
 void jobStop(u32 job, s32 arg);
 void asdMemFree(void *block);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void *textureGetIndexedResource(u32 index);
 
 /* Stop the event filter: release its texture, drop the shared filter texture when unused, and free the work. */
 void FUN_0039b7fc(void)

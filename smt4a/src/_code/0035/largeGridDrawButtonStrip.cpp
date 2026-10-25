@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail repeats an already-decided button-type test and duplicates offset drawing paths; the readable version shares those paths. */
 #include "common.h"
+#include "util/Vec2Fixed.h"
 #include "shard/TextureDrawCall.h"
 
 struct GridButtonSlide {
@@ -20,7 +21,6 @@ extern "C" {
 void efctSetSpeed(f32);
 s32 recordGetModeForId(s32);
 s32 vec2GetYInt(GridButtonSlide *);
-s32 vec2GetXInt(GridButtonSlide *);
 
 void largeGridDrawButtonStrip(LargeGridButtonDraw *work, s32 x, s32 y, s32 button, f32 scale)
 {

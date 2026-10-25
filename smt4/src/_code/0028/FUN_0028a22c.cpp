@@ -1,5 +1,6 @@
 #include "ui/PartyPanelState.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "status/StatusCamera.h"
 
 struct PartyPanelSavedFlags {
     u8 prefix[0x40];
@@ -8,7 +9,6 @@ struct PartyPanelSavedFlags {
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;
-PartyPanelSavedFlags *FUN_002a0d0c(void);
 void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *memory);
 void asdMemFreeNonNull(void *memory);
@@ -19,7 +19,7 @@ void jobStop(u32 job, u32 flags);
 void FUN_0028a22c(void)
 {
     PartyPanelState *panel = g_partyPanel;
-    FUN_002a0d0c()->restore = panel->unk42;
+    reinterpret_cast<PartyPanelSavedFlags *>(FUN_002a0d0c())->restore = panel->unk42;
     if (panel->resources.script) {
         scrScriptProcessDestroy(panel->resources.script);
     }

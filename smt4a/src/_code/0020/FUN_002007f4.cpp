@@ -36,7 +36,6 @@ typedef char BufferedRowsOffsets[
     sizeof(BufferedRowsPayload) == 0x130 ? 1 : -1];
 extern "C" {
 void FUN_00163aa4(UiSpriteState *, f32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
 void FUN_00203b40(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 

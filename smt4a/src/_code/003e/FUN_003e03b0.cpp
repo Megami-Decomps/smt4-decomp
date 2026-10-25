@@ -5,6 +5,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table00.h"
 #include "addon/aocMain.h"
+#include "util/AocReadyAndAccepts.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;
@@ -13,7 +14,6 @@ s32 FUN_003eebf4(BtlMainStateA *battle, s32 kind);
 Table00Record *dataTable00FindById(u32 id);
 void sysMemClear(void *destination, u32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
-s32 aocReadyAndAccepts(AocSystemA *system, u16 id);
 void aocQueueType38(AocSystemA *system, u16 id, void **destination, const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 void FUN_003e12a8(BattleArrangementLoadState *load, BtlMainStateA *battle);
@@ -31,7 +31,7 @@ void FUN_003e03b0(BattleArrangementLoadState *load, BtlMainStateA *battle)
         char path[128];
         sysMemClear(path, sizeof(path));
         textFormatBuffer(path, "battle/arngmt/%02d_%02d.earg", record->bustUp.value, record->bustUp.variation);
-        if (aocReadyAndAccepts(g_aocSystem, record->id))
+        if (aocReadyAndAccepts(reinterpret_cast<u32>(g_aocSystem), record->id))
             aocQueueType38(g_aocSystem, record->id, &reinterpret_cast<ArrangementFileView *>(battle)->file, path);
         else
             asdLoadFileAsyncSimple(path, &reinterpret_cast<ArrangementFileView *>(battle)->file, 0);

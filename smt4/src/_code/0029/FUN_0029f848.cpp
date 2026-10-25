@@ -1,9 +1,9 @@
 /* NON_MATCHING: only quotient argument moves differ (retail moves count into r0 before columns into r1); navigation setup and final stores agree. */
 #include "ui/GridNavigation.h"
+#include "util/ColorSetRgba.h"
 
 extern "C" {
 void rowWidgetInit(RowWidget *widget, s32 visible, u32 count);
-void colorSetRgba(RowWidget *widget, u8 first, u8 second, u8 third, u8 fourth);
 void objectSetRgba(RowWidget *widget, u8 first, u8 second, u8 third, u8 fourth);
 void FUN_002fc248(RowWidget *widget, u32 mode);
 

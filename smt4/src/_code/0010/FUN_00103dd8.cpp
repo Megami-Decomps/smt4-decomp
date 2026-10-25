@@ -11,7 +11,7 @@ typedef struct TitleScene {
 extern TitleScene *g_titleScene; /* 0x44ea00 */
 
 extern int FUN_002c35b0(int mode);
-extern int FUN_002bdb44(void);
+extern void FUN_002bdb44(void);
 extern int FUN_002c3530(int a, int b);
 extern int FUN_002c3a14(TitleScene *scene);
 

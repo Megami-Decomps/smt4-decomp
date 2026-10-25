@@ -1,5 +1,8 @@
 /* NON_MATCHING: readable rebuild of the main-partner select menu's state machine (draft args completed from the surrounding calls: the entry index passed to the script start, the destroyed script and the lost return of FUN_001517b4); armcc here shares the state-store tail and the script reload differently. */
 #include "common.h"
+#include "shard/Shard0031.h"
+#include "util/FUN_002a4894.h"
+#include "util/FUN_002a4894.h"
 
 /* The partner select menu (only the fields the state machine reads). */
 struct PartnerMenuFull {
@@ -41,7 +44,6 @@ void *FUN_003e4d68(u32 devil);
 void FUN_003e4e4c(u32 devil);
 void FUN_0035d03c(s32 flag);
 void FUN_00228b04(void *list, s32 flag);
-u32 FUN_002a4894(void *list);
 s32 FUN_001517b4(s32 a, s32 b);
 void dialogClose(s32 flag);
 void eventQueueAddUniqueIfValid(s32 event);
@@ -132,7 +134,7 @@ u32 FUN_004be608(PartnerMenuFull *menu)
         break;
     case 9:
         FUN_00228b04(menu->list, 1);
-        menu->selection = FUN_002a4894(menu->list);
+        menu->selection = FUN_002a4894(reinterpret_cast<const Object *>(menu->list));
         menu->cursor = menu->selection;
         if (FUN_001517b4(0, 1) != 0) {
             dialogClose(1);

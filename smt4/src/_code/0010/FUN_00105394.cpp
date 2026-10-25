@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation of the temporaries only (retail rotates r2/r3/ip differently in the tick test and in each countdown loop); control flow and instructions are otherwise identical. */
 #include "common.h"
+#include "shard/SaveWork.h"
 
 extern "C" {
 
@@ -20,13 +21,12 @@ typedef struct GameState {
 
 extern GameState g_gameState; /* 0x49f91c */
 
-extern MapBlock *gameGetMapBlock(void);
 extern int FUN_0010b580(void);
 
 /* Per-frame tick of the map block's countdowns; every 0x709 frames the slower tables count down as well. */
 void FUN_00105394(void)
 {
-    MapBlock *block = gameGetMapBlock();
+    MapBlock *block = reinterpret_cast<MapBlock *>(gameGetMapBlock());
     int i;
 
     g_gameState.tick = g_gameState.tick + 1;

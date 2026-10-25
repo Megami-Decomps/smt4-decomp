@@ -1,5 +1,7 @@
 #include "ui/MessageMain.h"
 #include "sys/Task.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 // The panel's display-enable byte is inside its existing opaque widget storage.
 struct MessageDisplayEnableView {
@@ -11,7 +13,6 @@ typedef char MessageDisplayEnableOffset[offsetof(MessageDisplayEnableView, enabl
 extern "C" {
 extern MessageGlobals g_messageMain;
 void asdTMTexTableLoadTmx(u32 table, u32 variant);
-void asdTMTexTableLoadSprites(u32 table);
 void FUN_002c58c8(u32 table, s32 index);
 void *FUN_002c4a34(void);
 void infoWindowCreate(void);

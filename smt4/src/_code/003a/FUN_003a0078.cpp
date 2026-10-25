@@ -1,10 +1,10 @@
 /* NON_MATCHING: register allocation: retail keeps a/b in r5/r4, the ids in r9/r8 and the keys in r6/r7 (here r7/r6, r8/r9, r4/r5). */
 #include "common.h"
+#include "gamedata/EquipmentSortPower.h"
 
 extern "C" {
 
 extern int contentGetKindValue(u16 id);
-extern int FUN_00230f44(u16 *entry);
 extern int contentGetEntryKind(u16 id);
 
 /* Comparison of two entries: by sort key (contentGetKindValue for kinds 2, 3 and 8, else 0), then by FUN_00230f44. */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: calls, relative-pointer stores and the byte-fill loop match retail; armcc allocates desc/header/image to r6/r5/r4 (retail r5/r4/r6), loads width and height with one vldmia and multiplies as w*4.0 (retail s2*w), and orders the final conditional stores differently. */
 #include "AsdSDK/Source/Gfx/Tex/TextureBuild.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 // memset: fill `count` bytes with the low byte of `value`.
 static inline void *fillBytes(void *destination, s32 value, u32 count)
@@ -12,7 +13,6 @@ static inline void *fillBytes(void *destination, s32 value, u32 count)
 }
 
 extern "C" {
-void *memClear(void *memory, u32 bytes);
 
 // Build a texture header and its image record from a description.
 TextureHeader *FUN_00120584(const TextureDesc *desc, TextureAllocator *allocator)

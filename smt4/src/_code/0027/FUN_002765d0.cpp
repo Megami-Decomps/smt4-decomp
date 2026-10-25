@@ -1,4 +1,5 @@
 /* NON_MATCHING: near (199 rows against 203): same table walk, flag tests and constants; retail keeps the table id in a stack slot (push {r3,...}), hoists 0xFFFFFFFF into r8 and the match-test constant in fp, evaluates dataTableGet(0x23,7) args in the other order inside the size test and splits the flagB test differently */
+#include "gamedata/DataTable.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -44,18 +45,15 @@ extern GameStateBlock g_gameState;           /* 0x49f91c */
 MapBlock *gameGetMapBlock(void);
 s32 mapEnemyHasAvailableSecondaryState(void);
 u32 FUN_00285574(void);
-u32 dataTableGet(s32 table, s32 sub);
-s32 dataTableGetCount(u32 table);
-EventEntry *dataTableGetEntries(void);
 s32 gameFlagIsSet(s32 flag);
 s32 FUN_00298dc8(u16 entry);
 
 /* Entry `index` of the event table: the built-in entries first, then the extra ones. */
 static EventEntry *eventTableEntry(u32 index)
 {
-    u32 table = dataTableGet(0x23, 7);
-    EventEntry *entries = dataTableGetEntries();
-    u32 count = dataTableGetCount(table);
+    void *section = dataTableGet(0x23, 7);
+    EventEntry *entries = static_cast<EventEntry *>(dataTableGetEntries(section));
+    u32 count = dataTableGetCount(section);
     if (index < count) {
         return &entries[index];
     }

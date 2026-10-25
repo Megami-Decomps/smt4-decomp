@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -283,7 +283,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   FUN_001835b4(2,0x1d,0xb3,*(short *)(temp_v5 + 8) + param_2,*(short *)(temp_v5 + 10) + param_3,0x6f);
   efctSetSpeed();
   temp_v4 = g_renderCtx;
-  temp_v11 = packNibblesAndByte(6,1,0);
+  temp_v11 = packNibblesAndByte(6, 1, 0);
   piVar14 = (int *)(temp_v4 + 0x12b8);
   temp_v12 = piVar14[*piVar14 + 2];
   piVar14[*piVar14 + 2] = temp_v11;
@@ -306,7 +306,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   FUN_001835b4(2,0x1d,0xb1,*(short *)(temp_v5 + 8) + param_2,*(short *)(temp_v5 + 10) + param_3,0x74);
   FUN_00183bb0();
   temp_v4 = g_renderCtx;
-  temp_v5 = packNibblesAndByte(6,7,0);
+  temp_v5 = packNibblesAndByte(6, 7, 0);
   piVar14 = (int *)(temp_v4 + 0x12b8);
   temp_v11 = piVar14[*piVar14 + 2];
   piVar14[*piVar14 + 2] = temp_v5;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: the selection range's stack slots and loads differ; entries base/product registers are swapped in the entry address (the active-entry byte already folds with the s8 flag). */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -8,7 +8,6 @@ extern "C" {
 s32 scrGetArg(s32 index);
 u32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 result);
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
 u32 FUN_0038c594()
@@ -18,7 +17,8 @@ u32 FUN_0038c594()
     u32 choice = btlResolveEntryChoice(scrGetArg(1));
     FUN_00301a08(choice, &selection.first, &selection.count);
     for (s32 index = selection.first; index < selection.first + selection.count; ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&

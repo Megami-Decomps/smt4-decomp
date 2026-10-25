@@ -29,3 +29,5 @@ _ZN14AocRequestBaseC1Ej = 0xe5801000; // the three AocRequest constructors (FUN_
 movieSyncGetState = 0xe590000c; // FUN_003d3594 (reloads &DAT_00617f40 into r0 after FUN_00425aa0; same body as unrelated nw_gfx getters)
 shopListItemGetId = 0xe1d000b4; // FUN_004a3154 (after add r0, r5, r0, lsl #5; result sign-narrowed separately)
 nnResultIsFailureBool = 0xe1a00fa0; // 0x474684 (Obj4221e4 vfunc, on legacyResourceIdRemap's r0; caller tests teq r0,#1)
+partyWidgetSetTransitionActive = 0xe5c01025; // FUN_0020b718 (widget reloaded into r0, mov r1, #0 before each store)
+partyWidgetSetTransitionPending = 0xe5c01027; // FUN_0020b718 (widget reloaded into r0, mov r1, #0 before each store)

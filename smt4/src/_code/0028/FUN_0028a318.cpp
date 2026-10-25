@@ -1,4 +1,5 @@
 #include "ui/PartyPanelState.h"
+#include "camp/CommonBg/CommonBg.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;

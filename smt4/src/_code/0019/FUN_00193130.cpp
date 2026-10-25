@@ -1,5 +1,6 @@
 /* NON_MATCHING: corrected scaled-magnitude helper's fourth divisor argument; emitter release/reset grouping, ring-index scratch registers and VFP constant lifetimes differ. */
 #include "common.h"
+#include "camp/ButtonHelp/ButtonHelp.h"
 
 /* A spawned particle node (only the fields the emitter sets). */
 struct ParticleNode {
@@ -51,8 +52,6 @@ struct ParticleEmitter {
 extern "C" {
 void nodeTreeReleaseItemClearOwner(ParticleNode *node);
 void nodeTreeReleaseItem(void *item);
-ParticleNode *FUN_00291310(u32 context, void *position, void *params, s32 two, u32 contextB, ParticleNode **slot,
-                           u32 index, u32 flag, s32 one, u32 contextC);
 f32 FUN_00291620(s32 mode, s32 maximum, u32 divisor);
 f32 FUN_00291234(s32 mode, s32 lower, s32 upper, u32 divisor);
 f32 FUN_0029118c(s32 mode, u32 numerator, u32 denominator);
@@ -105,9 +104,7 @@ void FUN_00193130(ParticleEmitter *emitter)
         else if (emitter->nodes[index] != NULL)
             nodeTreeReleaseItem(emitter->nodes[index]);
         u32 life = (u32)(emitter->lifeSeconds * 10.0f);
-        ParticleNode *node = FUN_00291310(emitter->context, emitter->position, &emitter->colorValue, 2,
-                                          emitter->contextB, &emitter->nodes[index], (u8)index, emitter->flag, 1,
-                                          emitter->contextC);
+        ParticleNode *node = reinterpret_cast<ParticleNode *>(FUN_00291310(emitter->context, reinterpret_cast<u32>(emitter->position), reinterpret_cast<u32>(&emitter->colorValue), 2, reinterpret_cast<const void *>(emitter->contextB), reinterpret_cast<u32>(&emitter->nodes[index]), (u8)index, emitter->flag, 1, emitter->contextC));
         emitter->nodes[index] = node;
         node->life = FUN_00291620(2, emitter->lifeJitter, 100) + node->life;
         node->size = FUN_00291234(0, life, 10, 10) * node->size;

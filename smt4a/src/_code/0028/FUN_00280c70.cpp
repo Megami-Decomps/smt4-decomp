@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation (retail hoists the constant 0 into r7 at entry and stores the kind and a zero as one strd) */
 #include "shard/S1Light.h"
+#include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ extern u32 g_effAsdLightHandle[2];
 extern u32 g_asdModelTransformBuilder[2];
 extern LightCount g_asdLightCount[2];
 
-void asdLightActivate(s32 scene);
 void FUN_002246d0(LightNode *node, s32 state);
 void sceneTraverserVisit(u32 lightHandle, u32 transformBuilder);
 

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gfx/VertexStreams.h"
 
 extern "C" u32 osConvertToPhysicalAddress(u32 address);
 

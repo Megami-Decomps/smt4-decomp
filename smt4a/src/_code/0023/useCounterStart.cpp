@@ -1,10 +1,10 @@
 /* NON_MATCHING: global load precedes push; count/value/loop scratch registers differ. */
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-u8 *FUN_0026140c(void);
 void FUN_002a4964(void *);
 s32 buttonHelpGetPanelMode(void);
 s32 buttonHelpGetPanelState(void);

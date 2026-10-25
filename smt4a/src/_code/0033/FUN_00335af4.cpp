@@ -1,12 +1,13 @@
 /* NON_MATCHING: entry-address operand registers and damage-call HP copy scheduling differ; remaining instructions match. */
 #include "battle/btlMain.h"
+#include "util/FUN_003ee0c0.h"
+#include "util/FUN_003ee0c0.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-void FUN_003ee0c0(BtlMainStateA *battle);
 void FUN_004fc094(s32 channel, ScriptUnit *unit, s32 kind, BattleRosterRecordA *record,
                   s32 a5, s32 maximum, s32 source, s32 target, s32 current,
                   s32 previousMaximum, s32 a11, s32 a12, s32 a13, s32 a14,

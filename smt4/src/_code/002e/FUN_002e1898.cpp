@@ -8,7 +8,7 @@ HalfPair48 *saveGetIndexedMapValue(s32 index);
 s32 gameDataBlockTestFlag(u32 mask);
 void buttonHelpSetPreset(u32 preset);
 s32 partyPanelIsActive(void);
-void FUN_0029e648(s32 enabled, s32 mode);
+void messageBannerInitSelection(s32 enabled, s32 mode);
 void messageInitializeSavedBanner(void);
 u32 FUN_0031e384(void *polling);
 u32 FUN_002228d4(void);
@@ -51,7 +51,7 @@ u32 FUN_002e1898(CampCecMenu *menu)
     }
     if (menu->savedBannerPending != 0) {
         menu->savedBannerPending = 0;
-        FUN_0029e648(1, 0);
+        messageBannerInitSelection(1, 0);
         messageInitializeSavedBanner();
     }
     if ((FUN_0031e384(menu->polling.work) & 2) != 0) {

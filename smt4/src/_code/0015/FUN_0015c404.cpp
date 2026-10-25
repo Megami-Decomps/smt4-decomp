@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015c404` (_code @ 0x15c404, 0xf4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(int, int);
 int nw_snd_internal_TaskManager_AppendTask(unsigned int, unsigned int *, int);
 int nw_ut_internal_LinkListImpl_insert(int, int, unsigned int *);
 
@@ -39,7 +39,7 @@ void FUN_0015c404(int param_1,unsigned int *param_2,unsigned int param_3,unsigne
     puVar2 = (unsigned int *)0x0;
   }
   else {
-    memClear(temp_v0,0x50);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v0), 0x50));
     puVar2 = (unsigned int *)_ZN9Obj421d10C1Ev(temp_v0);
     *puVar2 = (unsigned int)&DAT_00421d2c;
     puVar2[0x12] = 0;

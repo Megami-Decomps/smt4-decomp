@@ -1,5 +1,6 @@
 /* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled (blend mode from the frame texture); written from the decompilation, render-stack scheduling not compared with retail */
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 struct FrameCopySurface {
     /* 0x00 */ u8 unk00[0x14];
@@ -37,7 +38,6 @@ extern RenderCtxA *g_renderCtx;
 void surfaceCopy(FrameCopySurface *source, FrameCopySurface *destination);
 f32 FUN_001a9698(f32 base, f32 exponent);
 s32 FUN_001692ac(u32 a, u32 b);
-s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 void FUN_0016c4b8(RenderCtxA *context, FrameCopySurface *surface);
 void FUN_0019e3d0(u32 c0, u32 c1, u32 c2, u32 c3, f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
                   f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3, f32 u0, f32 v0, f32 u1, f32 v1,

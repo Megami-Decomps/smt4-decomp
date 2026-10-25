@@ -8,7 +8,7 @@ int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int sysMemClear(float *, int);
 int randomAdvanceShiftRegister(void);
-int FUN_00514540(...);
+int shiftRandomNextFraction(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int __aeabi_uidivmod(void);
@@ -68,7 +68,7 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -287,45 +287,45 @@ void FUN_00394a34(int param_1)
             else {
               sysMemClear(pfVar14,temp_v7 * 0xc);
               if (temp_v33 != 0) {
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v18 = 1.0f;
                 temp_v17 = ((1.0f - *(float *)(temp_v11 + 0xc0)) + temp_v9 * *(float *)(temp_v11 + 0xc0)) *
                          *(float *)(temp_v11 + 0xbc);
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v8 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 200)) + temp_v9 * *(float *)(temp_v11 + 200)) *
                          *(float *)(temp_v11 + 0xc4) - temp_v17;
                 pfVar17[3] = temp_v9 / temp_v8;
                 pfVar17[2] = temp_v17;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v17 = ((temp_v18 - *(float *)(temp_v11 + 0xd0)) + temp_v9 * *(float *)(temp_v11 + 0xd0))
                          * *(float *)(temp_v11 + 0xcc);
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v8 = (float)VectorUnsignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 0xd8)) + temp_v9 * *(float *)(temp_v11 + 0xd8))
                          * *(float *)(temp_v11 + 0xd4) - temp_v17;
                 pfVar17[5] = temp_v9 / temp_v8;
                 pfVar17[4] = temp_v17;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 0xe0)) + temp_v9 * *(float *)(temp_v11 + 0xe0))
                          * *(float *)(temp_v11 + 0xe8);
                 pfVar17[10] = temp_v9;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v9 = temp_v9 * 6.2831855f;
                 pfVar17[7] = temp_v9;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 0xf0)) + temp_v9 * *(float *)(temp_v11 + 0xf0))
                          * *(float *)(temp_v11 + 0xec);
                 pfVar17[6] = temp_v9;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 0xb4)) + temp_v9 * *(float *)(temp_v11 + 0xb4))
                          * *(float *)(temp_v11 + 0xb0);
                 pfVar17[8] = temp_v9;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 0xac)) + temp_v9 * *(float *)(temp_v11 + 0xac))
                          * *(float *)(temp_v11 + 0xa8);
                 pfVar17[9] = temp_v9;
-                FUN_00514540(0);
+                shiftRandomNextFraction(0);
                 temp_v9 = ((temp_v18 - *(float *)(temp_v11 + 0x9c)) + temp_v9 * *(float *)(temp_v11 + 0x9c))
                          * *(float *)(temp_v11 + 0x98);
                 pfVar17[0xb] = temp_v9;

@@ -5,7 +5,6 @@ extern "C" {
 u32 contentGetEntryKind(u32 id);
 EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32 id);
 EquipmentSortPowerSecondary *dataTable08Sub1GetRecord(u32 id);
-s32 FUN_00230f44(const u16 *item);
 }
 
 static inline u16 equipmentSortPower(u16 id)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: steps the touch-to-continue splash (loads its textures, pulses the prompt, fades in, waits for a touch or a timeout, then tears down); float constants now land in the retail registers (s18/s16/s17 = 60/1/0) but retail stores the initial fields in a different order (offsets first, pulse last, timeout in r8), keeps the SetPair1C argument in r1, and the vstmia/vldmia pairs of the build do not appear in retail */
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 #define SPLASH_STATE_LOAD 0
 #define SPLASH_STATE_FADE_IN 1
@@ -52,7 +53,6 @@ s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 b);
 void soundChannelStopAll(u32 mask);
 void slotSetRequest(s32 slot, s32 frames, s32 value);
-s32 FUN_0013def0(s32 slot);
 void FUN_003d54f8(s32 a, s32 b);
 
 u32 FUN_003e71a8(SplashWork *splash)

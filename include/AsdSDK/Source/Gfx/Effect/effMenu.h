@@ -75,4 +75,5 @@ typedef char EffMenuTextNodeLayoutCheck[sizeof(EffMenuTextNode) == 0x44 &&
 typedef char EffMenuTextListLayoutCheck[sizeof(EffMenuTextList) == 0xC &&
     offsetof(EffMenuTextList, head) == 8 ? 1 : -1];
 
+
 #endif

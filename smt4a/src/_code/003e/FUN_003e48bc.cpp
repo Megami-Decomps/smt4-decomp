@@ -1,4 +1,5 @@
 #include "shard/Shard003E.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 

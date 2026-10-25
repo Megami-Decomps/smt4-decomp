@@ -3,7 +3,6 @@
 #include "shard/ItemStackLimit.h"
 
 extern "C" {
-const ItemCategoryEntry *FUN_0019c06c(u32);
 EquipmentUpgradeState *FUN_00239200(void);
 const EquipmentUpgradeBonusRecord *dataTable08Sub2GetRecord(u32);
 void FUN_001a90f0(EquipmentUpgradeModifiers *, const EquipmentUpgradeModifiers *);
@@ -11,7 +10,7 @@ void FUN_001a90f0(EquipmentUpgradeModifiers *, const EquipmentUpgradeModifiers *
 // True when this equipment item cannot accept any further upgrade bonus.
 u32 FUN_0047fc38(u32 itemId)
 {
-    const ItemCategoryEntry *categoryInfo = FUN_0019c06c(itemId);
+    const ItemCategoryEntry *categoryInfo = itemCategoryFindByItemId(itemId);
     u8 category = categoryInfo ? categoryInfo->type : 0;
     EquipmentUpgradeState *upgrades = FUN_00239200();
     const EquipmentUpgradeBonusRecord *bonus = dataTable08Sub2GetRecord(itemId);

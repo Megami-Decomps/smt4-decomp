@@ -4,14 +4,14 @@
 extern "C" {
 
 int FUN_00117da4(int);
-int FUN_002c39a4(TitleScene *);
+int renderCtxSelectStereoLayout(TitleScene *);
 
 extern TitleScene *g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00117da4. */
 extern int FUN_002bff10(unsigned int);
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 
 
 int FUN_0010821c(void)
@@ -36,7 +36,7 @@ int FUN_0010821c(void)
       return temp_v1;
     }
     if (*(char *)(temp_v0 + 0xfd8) == '\0') {
-      FUN_002c39a4(g_titleScene);
+      renderCtxSelectStereoLayout(g_titleScene);
       FUN_00117da4(0);
       return 0;
     }

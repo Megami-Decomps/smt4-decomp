@@ -3,6 +3,8 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct SearchWindowDefaults {
     u8 primary[36];
@@ -17,10 +19,8 @@ extern const char DAT_00403ca0[];
 extern const char DAT_00403c88[];
 extern const char DAT_00403c70[];
 extern const SearchWindowDefaults DAT_00403b80;
-void memClear(void *, u32);
 s32 FUN_001ad180(u32);
 void FUN_001acdd8(u32);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, s32 (*)(u32), void *, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void drawParameterBlockClear(UiResourceParameters *);
 
@@ -42,7 +42,7 @@ void FUN_002cedd8(void)
     }
     SearchWinWork *work = DAT_0043e170;
     memClear(work, sizeof(*work));
-    work->job = asdProcessCreateSimple(DAT_00403ca0, 1, 0, 0, FUN_001ad180, NULL, NULL);
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403ca0), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001ad180), NULL, NULL);
     taskCreateDraw(DAT_00403c88, 129, 0, 0, FUN_001acdd8, NULL, NULL, work->job);
     taskCreateDraw(DAT_00403c70, 223, 0, 0, FUN_001acdd8, NULL, NULL, work->job);
     DrawingView *draw = reinterpret_cast<DrawingView *>(work);

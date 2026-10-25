@@ -1,4 +1,5 @@
 /* NON_MATCHING: screen/system allocation, total-count and texture scheduling differ; -O2 candidate. */
+#include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -30,9 +31,7 @@ extern "C" {
 extern AocSystemA *g_aocSystem;
 s32 FUN_00471960(AocSystemA *);
 s32 textureGetIndexedResource(u32);
-void *dataTableGet(u32, u32);
-void *dataTableGetEntries(void *);
-s32 dataTableGetCount(void *);
+
 s32 aocCountTableRecords(AocSystemA *);
 void FUN_00403b84(ContentListScreen *);
 void FUN_00203b40(ContentListScroller *, void *, s32, s32, s32, s32);

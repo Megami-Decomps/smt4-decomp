@@ -1,7 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fc720` (_code @ 0x1fc720, 0x1694 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -67,9 +69,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0014bd84. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -224,7 +224,7 @@ void FUN_001fc720(int param_1,int param_2)
         if (*(int *)(temp_v2 + 0x524) >= 9) {
           temp_v8 = uiSearchPrimary(temp_v23);
           if (temp_v8 == temp_v11 + 1) {
-            temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
+            temp_v17 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x2e4));
           }
           goto LAB_001fc9d0;
         }
@@ -235,7 +235,7 @@ LAB_001fc9d0:
           if (*(int *)(temp_v2 + 0x654) == temp_v11) {
             temp_v17 = *(int *)(temp_v2 + 0x524);
             if (temp_v17 >= 9) {
-              temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
+              temp_v17 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x2e4));
               goto LAB_001fca00;
             }
             temp_v17 = temp_v17 * -0x28;
@@ -254,7 +254,7 @@ LAB_001fca00:
               temp_v17 = temp_v17 * -0x28;
             }
             else {
-              temp_v17 = vec2GetXInt(temp_v2 + 0x2e4);
+              temp_v17 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x2e4));
             }
           }
         }
@@ -669,7 +669,7 @@ LAB_001fd57c:
   temp_v12 = g_renderCtx;
   temp_v3 = *(int *)(temp_v2 + 0x518);
   if ((temp_v3 == 4 || temp_v3 == 0xc) || temp_v3 == 0x11) {
-    temp_v3 = packNibblesAndByte(6,1,0);
+    temp_v3 = packNibblesAndByte(6, 1, 0);
     piVar17 = (int *)(temp_v12 + 0x12b8);
     temp_v11 = piVar17[*piVar17 + 2];
     piVar17[*piVar17 + 2] = temp_v3;
@@ -679,7 +679,7 @@ LAB_001fd57c:
     }
     fadeObjectResetIfActive(temp_v2 + 0x370);
     temp_v2 = g_renderCtx;
-    temp_v12 = packNibblesAndByte(6,7,0);
+    temp_v12 = packNibblesAndByte(6, 7, 0);
     piVar17 = (int *)(temp_v2 + 0x12b8);
     temp_v3 = piVar17[*piVar17 + 2];
     piVar17[*piVar17 + 2] = temp_v12;

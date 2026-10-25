@@ -6,7 +6,6 @@ extern void messageDismissNumericBanner(s32 a);
 extern void FUN_0019de98(s32 a, u32 color);
 extern void FUN_0022e774(void);
 extern void uiSpriteBankApplyPreset(u8 *block);
-extern void FUN_003343f0(s32 a);
 extern void sendEvent100020F(void);
 
 /* Enters state 0xD: sets up the display and resets the page selection. */

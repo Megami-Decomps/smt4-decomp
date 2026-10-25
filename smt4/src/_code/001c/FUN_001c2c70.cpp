@@ -1,5 +1,6 @@
 /* NON_MATCHING: four-argument scaled-magnitude call and float result recovered; remaining raw emitter draft has mixed float/integer fields and stale callee contracts. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int nodeTreeReleaseItem(...);
 int _ZN2nw4math5MTX448IdentityEv(...);
 int FUN_002b2144(...);
 int mtx44Copy(...);
-int memClear(float *, int);
 int FUN_0032ad34(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -150,7 +150,7 @@ void FUN_001c2c70(float *param_1)
       }
     }
     else {
-      memClear(param_1,100);
+      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_1), 100));
       temp_v14 = (float)VectorSignedToFloat(param_1[0x79],(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v16 = param_1 + 6;
       param_1[0x15] = param_1[0x61];

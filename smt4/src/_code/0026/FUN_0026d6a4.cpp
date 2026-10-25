@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026d6a4` (_code @ 0x26d6a4, 0x434 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int scrollOwnerSelectIndex(...);
 int objectPartRunUnlessLocked(...);
 int FUN_0029eb5c(...);
 int FUN_0029efa8(...);
-int FUN_002a0cc8(int);
 int eventQueueAddUniqueIfValid(int);
 int timerStart(int, int, int);
 int FUN_002c1658(int, int);

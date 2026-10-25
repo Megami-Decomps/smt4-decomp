@@ -1,7 +1,6 @@
 /* NON_MATCHING: Retail ldrh r1, [r1, #44] differs from recovered ldrh r2, [r1, #44]. */
 #include "common.h"
-
-struct DataTableLocalView;
+#include "gamedata/DataTable.h"
 
 struct TableEntryLocalView {
     u8 unk00[0x2C]; // 0x00
@@ -10,15 +9,12 @@ struct TableEntryLocalView {
 };
 
 extern "C" {
-DataTableLocalView* dataTableGet(u32 tableId, u32 index);
-TableEntryLocalView* dataTableGetEntries(DataTableLocalView* table);
-s32 dataTableGetCount(DataTableLocalView* table);
 
 // Compare entry values at 0x2C, treating zero or out-of-range indices as 99.
 s32 FUN_0049ebf0(const u16* leftIndex, const u16* rightIndex)
 {
-    DataTableLocalView* table = dataTableGet(0x46, 0);
-    const TableEntryLocalView* entries = dataTableGetEntries(table);
+    void *table = dataTableGet(0x46, 0);
+    const TableEntryLocalView* entries = static_cast<const TableEntryLocalView*>(dataTableGetEntries(table));
     if (entries == 0) {
         return 0;
     }

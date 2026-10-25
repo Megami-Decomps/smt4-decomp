@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include <stdlib.h>
+#include "gamedata/FlagsB.h"
 
 struct RankedUnlockEntry {
     u16 id;
@@ -39,10 +40,7 @@ void *asdOperatorNewD(u32);
 void asdOperatorDeleteC(void *);
 void rt_memcpy(void *, const void *, u32);
 s32 entryCompareByRank(const void *, const void *);
-s32 flagsBGetBit0(u32);
-s32 flagsBGetBit1(u32);
 s32 gameFlagIsSet(u32);
-void FUN_003ff160(u32);
 
 void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
 {
@@ -60,7 +58,7 @@ void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
         if (!flagsBGetBit0(id)) {
             if (entry->requiredFlag && !gameFlagIsSet(entry->requiredFlag))
                 continue;
-            FUN_003ff160(id);
+            flagsBSetStateBits(id);
         }
         if (flagsBGetBit1(id))
             work->hasNew = 1;

@@ -1,4 +1,5 @@
 #include "gamedata/GameData.h"
+#include "map/MapIfTimer.h"
 
 /* The small game data block viewed whole: the counter and the recorded clock time in seconds. */
 struct GameDataSmallBlock {

@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d3a4c` (_code @ 0x3d3a4c, 0x6a4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -40,7 +41,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -195,7 +195,7 @@ void FUN_003d3a4c(int param_1,int param_2)
                  (int)**(short **)(temp_v7 + 0xc),(int)(*(short **)(temp_v7 + 0xc))[1],1);
     temp_v5 = vec2GetYInt(temp_v2 + 0x1cc);
     temp_v0 = *(short *)(temp_v6 + 10);
-    temp_v7 = vec2GetXInt(temp_v2 + 0x1cc);
+    temp_v7 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x1cc));
     FUN_001835b4(2,0x12,0x422,temp_v7 + param_1 + (int)*(short *)(temp_v6 + 8),
                  temp_v5 + param_2 + (int)temp_v0,0xc9);
     temp_v5 = g_renderCtx;

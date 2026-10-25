@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail 56 vs built 56 rows; snapshot pointer registers and relocated global-base literals differ. */
 #include "map/mapMain.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 extern MapMainA *g_mapMain;
 extern GameStateA g_gameState;
-void mapProbePositionDownward(MapVector *);
 
 void FUN_0036ad7c(void)
 {

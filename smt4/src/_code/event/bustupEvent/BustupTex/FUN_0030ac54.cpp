@@ -3,6 +3,8 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "addon/aocMain.h"
+#include "util/FUN_002ae8e4.h"
+#include "util/FUN_002ae8e4.h"
 #include "AsdSDK/AsdMemUtil.h"
 extern "C" {
 extern AocSystem *g_aocSystem;
@@ -14,11 +16,9 @@ s32 aocContentGetIndexedRecord(void *definition, s32 enabled);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
-u32 FUN_002ae8e4(AocSystem *system, s32 table, s32 node, u32 heap);
 u32 FUN_002c58c8(s32 table, s32 node);
 s32 FUN_001ce4a4(u32 handle);
 void asdMTeXReleaseJobContext(u32 handle);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work);
 
 /* Start a bustup texture process, subject to its game-flag visibility rule. */
 void FUN_0030ac54(u32 id, s32 keepPlacement)
@@ -43,7 +43,7 @@ void FUN_0030ac54(u32 id, s32 keepPlacement)
     } else {
         if (work->node != -1) {
             if (aocRunByName(g_aocSystem, work->table, work->node, 1))
-                work->texture = FUN_002ae8e4(g_aocSystem, work->table, work->node, 0x10000);
+                work->texture = FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
             else
                 work->texture = FUN_002c58c8(work->table, work->node);
         }
@@ -53,6 +53,6 @@ void FUN_0030ac54(u32 id, s32 keepPlacement)
     work->alpha = 1.0f;
     work->active = 0;
     work->visible = 1;
-    asdProcessCreateSimple(DAT_004037a0, 2, 0, 0, FUN_001ce4a4, asdMTeXReleaseJobContext, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004037a0), 2, 0, 0, FUN_001ce4a4, asdMTeXReleaseJobContext, reinterpret_cast<u32>(work));
 }
 }

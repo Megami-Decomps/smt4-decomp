@@ -1,6 +1,6 @@
 #include "gamedata/ItemSortRecord.h"
 
-extern "C" const ItemSortRecord *FUN_002ae584(u32 itemId);
+extern "C" const ItemSortRecord *appCostRecordFindById(u32 itemId);
 
 static inline s32 itemCategoryPriority(u8 category)
 {
@@ -16,13 +16,13 @@ static inline s32 itemCategoryPriority(u8 category)
 
 extern "C" s32 itemCompareCategoryPriorityValue(const u32 *first, const u32 *second)
 {
-    const ItemSortRecord *left = FUN_002ae584(*first);
-    const ItemSortRecord *right = FUN_002ae584(*second);
+    const ItemSortRecord *left = appCostRecordFindById(*first);
+    const ItemSortRecord *right = appCostRecordFindById(*second);
     s32 difference = itemCategoryPriority(left->sort.category) -
         itemCategoryPriority(right->sort.category);
     if (!difference) {
-        left = FUN_002ae584(*first);
-        right = FUN_002ae584(*second);
+        left = appCostRecordFindById(*first);
+        right = appCostRecordFindById(*second);
         difference = left->sort.value - right->sort.value;
     }
     return difference;

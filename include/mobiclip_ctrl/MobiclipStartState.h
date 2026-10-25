@@ -30,4 +30,13 @@ typedef char MobiclipStartLayoutCheck[
 typedef char MobiclipStartStopFlagOffsetCheck[
     offsetof(MobiclipStartClock, stopRequested) == 0 && sizeof(MobiclipStartClock) == 0x10 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 FUN_00350ab8(void *obj, int index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

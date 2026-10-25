@@ -1,4 +1,4 @@
-/* NON_MATCHING: signed bit-index division/remainder and mask fusion allocate different registers from retail. */
+/* NON_MATCHING: the bit test's shift count lands in r1; retail keeps it in r2 (clear sequence matches). */
 #include "common.h"
 
 extern "C" u8 *gameDataBlockGetArea2D68(void);
@@ -10,8 +10,12 @@ extern "C" s32 areaConsumeOneShotFlags(s32 index)
         return 0;
     }
     if ((gameDataBlockGetArea2D68()[(u32)index >> 3] & (1U << ((u32)index & 7))) != 0) {
-        u8 *flag = gameDataBlockGetArea2D68() + index / 8;
-        *flag &= ~(1 << (index % 8));
+        u8 *area = gameDataBlockGetArea2D68();
+        s32 byte = index / 8;
+        s32 bit = index % 8;
+        u8 *flag = area + byte;
+        u32 mask = 1 << bit;
+        *flag &= ~mask;
         return 1;
     }
     return 0;

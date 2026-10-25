@@ -1,5 +1,6 @@
 /* NON_MATCHING: unit-slot address: retail loads the work pointer into r1 and the 0x3c7 stride into r0 (swapped here). */
 #include "common.h"
+#include "util/FUN_0027e3b8.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ extern BtlMain *g_btlMain; /* 0x4342c8 */
 extern u32 g_btlEvent; /* 0x435d48 */
 extern u32 g_btlUiBlock; /* 0x439ca8 */
 
-extern int FUN_0027e3b8(u32);
 extern int btlUiPanelFadeInWhenReady(u32);
 extern int btlReflectCreateKind24(int, BtlAction *, u32, int);
 extern int FUN_003ddee0(int, BtlAction *, BtlTarget *, int, int, int);
@@ -60,7 +60,7 @@ static __inline BtlUnit *btlGetUnit(s32 index)
 /* Runs the action: puts the unit into its idle/hit state (1 when hp <= 1, else 0 and a UI call), fires the action's hooks and marks the unit's slot. Returns 0 when blocked by an event. */
 u32 FUN_003cfb60(BtlWork **work, BtlAction *action)
 {
-    if (FUN_0027e3b8(g_btlEvent) != 0) {
+    if (FUN_0027e3b8(reinterpret_cast<int *>(g_btlEvent)) != 0) {
         return 0;
     }
     if ((*work)->state != 13) {

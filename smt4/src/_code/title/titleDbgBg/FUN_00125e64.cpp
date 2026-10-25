@@ -1,6 +1,7 @@
 /* NON_MATCHING: title debug labels and float coordinates restored; render-stack scheduling and common text-argument hoisting differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 namespace {
 struct TitleDebugBackgroundView {
@@ -17,7 +18,6 @@ u32 FUN_002c5d80(u32 mode, u32 option);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
 void *jyoucyuGetTableEntry(u32 index);
-void FUN_002be5a4(s32 layer, u32 color, const char *text, f32 x, f32 y, f32 z, f32 scale, f32 opacity);
 void FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
 
 // Draw the title debug background, PC/ROM loading indicator and the game title label.

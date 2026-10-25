@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps -1 in one register for the byte at +0xc and the halfword at +0x121c0, merges nothing in the 0xb7c..0xb84 stores (here two are fused into an stm), and refers to its key tables through DAT_00404a9c rather than .constdata; the same stores and calls in the same order. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "shard/SaveWork.h"
 
 /* A 0x8C-byte UI sprite. */
 struct NaviSprite {
@@ -97,7 +98,6 @@ static const s32 sKeysFifth[35] = {
 };
 
 extern "C" {
-NaviMapBlock *gameGetMapBlock(void);
 void NaviMain_InitCallbacks(NaviMainWork *work);
 void asdTMTexTableLoadTmx(s32 id, s32 arg);
 void rt_memclr(void *data, u32 size);
@@ -116,7 +116,7 @@ void uiSpriteInitializeState(NaviSprite *sprite, u32 group, s32 image, s32 kind,
    the five header sprites and the two animated sprites. */
 void NaviMain_InitInstance(NaviMainWork *work)
 {
-    NaviMapBlock *mapBlock = gameGetMapBlock();
+    NaviMapBlock *mapBlock = reinterpret_cast<NaviMapBlock *>(gameGetMapBlock());
     NaviMain_InitCallbacks(work);
     asdTMTexTableLoadTmx(0x33, 0);
     work->unk0c = -1;

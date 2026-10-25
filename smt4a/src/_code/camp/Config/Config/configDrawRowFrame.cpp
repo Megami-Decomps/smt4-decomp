@@ -2,6 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/Config/Config.h"
 #include "shard/S1ListPanel.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);
-u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
 // Draw one Config row's frame sprites (selected pair, plain pair or a four-segment bar) at (x, y).
 void configDrawRowFrame(s32 x, s32 y, s32 selected, s32 wide, s32 locked, f32 speed)

@@ -1,12 +1,12 @@
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 struct FileQueue;
 extern FileQueue *g_aocDisplay;
 
-void memClear(void *buffer, s32 size);
 AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 kind, s32 id, char *path);
 u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath,
                   u32 *transferredBytes, u32 mode, u32 bytes, void *context);

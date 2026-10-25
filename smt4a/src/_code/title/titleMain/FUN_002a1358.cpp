@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -51,8 +52,6 @@ void campButtonHelpAcquire(void);
 void campCommonBgAcquire(void);
 s32 aocHasType36(u32 aoc, u32 id);
 
-void *asdProcessCreateSimple(const char *name, u32 priority, u32 a, u32 b, void (*update)(void *), void (*release)(void *),
-                             u32 c);
 void taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);
 void FUN_0029f2fc(void *process);
 void titleMainRelease(void *process);
@@ -125,7 +124,7 @@ void FUN_002a1358(u8 *options)
         *((u8 *)title + 0x71) = *options;
         title->unk010 = 0;
     }
-    void *process = asdProcessCreateSimple("TITLE C", 4, 0, 0, FUN_0029f2fc, titleMainRelease, 0);
+    void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("TITLE C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0029f2fc), reinterpret_cast<AsdProcFunc>(titleMainRelease), 0));
 
     title->process = process;
     taskCreateDraw("TITLE UDrawLeft", 0x78, 0, 0, titleDrawModeOverlay, 0, 0, process);

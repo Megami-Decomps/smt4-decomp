@@ -117,4 +117,5 @@ typedef char BattleViewResetFieldsLayoutCheck[
     offsetof(BattleViewState, resetTail.unkA4) == 0xa4 &&
     offsetof(BattleViewState, tailSettings.unkBC) == 0xbc ? 1 : -1];
 
+
 #endif

@@ -2,12 +2,12 @@
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/Table00.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern const char DAT_00400918[];
 s32 btlFindNthActiveSpecialEntry(BtlMainState *battle, s32 kind);
 const Table00Record *dataTable00FindById(u32 id);
-void memClear(void *memory, u32 size);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);
 u32 entryCollectNewIdentifiers(BattleArrangementWork *work, BtlMainState *battle);

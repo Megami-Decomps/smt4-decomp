@@ -3,6 +3,7 @@
 #include "map/lmapMain.h"
 #include "map/mapDepart.h"
 #include <stddef.h>
+#include "title/titleMain.h"
 
 struct LocalCamera;
 
@@ -14,7 +15,6 @@ void asdCameraInitializeDefaults(LocalCamera *, s32);
 void FUN_0014f0dc(LocalCamera *, const MapVector *, const MapVector *,
                   const MapVector *);
 void FUN_001523b8(LocalCamera *, s32, f32, f32, f32, f32);
-void FUN_0036b824(LocalCamera *);
 
 void FUN_00303710(void)
 {
@@ -57,7 +57,7 @@ void FUN_00303710(void)
                  &DAT_005806a0.extra->camera.up);
     FUN_001523b8(&g_localCamera, 1, 36.0f, 10.0f, 2560000.0f,
                  1.66666662693023681640625f);
-    FUN_0036b824(&g_localCamera);
+    FUN_0036b824(reinterpret_cast<u32>(&g_localCamera));
 
     LmapExtraA *extra = DAT_005806a0.extra;
     reinterpret_cast<CameraBindingAccessA *>(extra)->binding->camera = &g_localCamera;

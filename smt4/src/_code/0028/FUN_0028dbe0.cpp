@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct PlayerData {
     /* 0x72 */ u16 mask;
 } PlayerData;
 
-extern UnitRecord *gameGetUnitRecord(void);
 extern PlayerData *gameGetPlayerData(void);
 extern u32 categoryGetColor(s16 value);
 
@@ -38,7 +38,7 @@ s32 FUN_0028dbe0(Selector *selector)
         if (selector->source < 0) {
             mask = gameGetPlayerData()->mask;
         } else {
-            mask = gameGetUnitRecord()->mask;
+            mask = static_cast<UnitRecord *>(gameGetUnitRecord(selector->source))->mask;
         }
         count = 0;
         for (bit = 1; bit < 11; bit++) {

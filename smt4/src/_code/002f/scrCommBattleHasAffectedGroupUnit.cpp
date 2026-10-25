@@ -1,9 +1,9 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
 int FUN_002499fc(u32 a, int *first, int *count);
-int scrSetResult(int result);
 extern u8 *btlGetMainState(void);
 int scrGetArg(int index);
 extern u8 *btlMainFindActiveEntry(void);

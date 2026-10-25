@@ -1,5 +1,6 @@
 #include "shard/W4_Match6_BibleScreen.h"
 #include "bible/bibleMain.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 extern BibleGlobals DAT_0043d9c8;
@@ -7,13 +8,12 @@ s32 scrRunOpcodesStub(BibleScript *script);
 s32 messageMainGetChoiceResult();
 s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_003a7fec(BibleScreen *screen, u32 id);
-s32 FUN_00240d5c(void *cursor);
+s32 flaggedEntryGetValueByState(void *cursor);
 s32 FUN_0029e924(void *cursor);
 void FUN_0022d434(BibleScreen *screen);
 void panelSetScrollPosition(void *cursor, s32 row, s32 scroll);
 s32 buttonHelpGetMode();
 void buttonHelpSetPreset(s32 mode);
-void FUN_002a0cc8(s32 enabled);
 void FUN_0029cc44(s32 enabled);
 void FUN_0029ee6c(s32 mode, u32 color);
 void beginStatusPanelClose();
@@ -52,7 +52,7 @@ void bibleApplyConfirmedSelection(BibleScreen *screen)
         s32 selected = flaggedValueHolderGetTotal(screen->cursor);
         FUN_003a7fec(screen, entries[selected].id);
         DAT_0043d9c8.mode = -1;
-        s32 scroll = FUN_00240d5c(screen->cursor);
+        s32 scroll = flaggedEntryGetValueByState(screen->cursor);
         s32 row = FUN_0029e924(screen->cursor);
         FUN_0022d434(screen);
         if (row > 0)

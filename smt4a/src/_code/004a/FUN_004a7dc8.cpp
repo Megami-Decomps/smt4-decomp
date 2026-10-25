@@ -2,7 +2,7 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-const SpriteInfo *FUN_0018349c(const AsdTextureRegion *region, s32 image);
+const SpriteInfo *layoutFindTableEntry(const AsdTextureRegion *region, s32 image);
 void efctSetSpeed(f32 opacity);
 f32 vec2GetSpeed(const void *object);
 void FUN_004934ac(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
@@ -20,7 +20,7 @@ typedef char TransitionSpeedViewOffsets[offsetof(TransitionSpeedView, frameSpeed
 
 void FUN_004a7dc8(BattleTransitionState *work, s32 anchor, u32 color, s32 alternate)
 {
-    const SpriteInfo *frame = FUN_0018349c(&work->frameDraw.region, anchor + 0x42F);
+    const SpriteInfo *frame = layoutFindTableEntry(&work->frameDraw.region, anchor + 0x42F);
     s32 x = frame->x;
     s32 y = frame->y;
     efctSetSpeed(vec2GetSpeed(&reinterpret_cast<const TransitionSpeedView *>(work)->frameSpeed));

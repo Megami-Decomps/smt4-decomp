@@ -71,4 +71,8 @@ typedef char NpcRoomDisplayOffsetsCheck[offsetof(NpcRoom, displayModels) == 0x64
     offsetof(NpcRoom, unkEC) == 0xEC && offsetof(NpcRoom, state) == 0xF0 && offsetof(NpcRoom, unkFC) == 0xFC &&
     offsetof(NpcRoom, unk102) == 0x102 ? 1 : -1];
 
+extern "C" {
+void mapCollisionRelease(void);
+}
+
 #endif

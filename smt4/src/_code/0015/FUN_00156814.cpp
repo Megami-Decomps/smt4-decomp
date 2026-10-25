@@ -2,7 +2,7 @@
 #include "gfx/ShaderProgramLoad.h"
 extern "C" {
 extern u8 *g_commandBufferCursor;
-void FUN_0015bd68(s32 geometryEnabled);
+void gfxCommandTemplateAppend(s32 geometryEnabled);
 void nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
 static inline u32 shaderBooleanMask(const ShaderExecutable *program)
@@ -27,7 +27,7 @@ void FUN_00156814(ShaderProgramLoadState *state, const ShaderProgramResource *re
         sameStages = geometryEnabled == (state->resource->geometryProgram >> 31) + 1;
     }
     if (!sameStages) {
-        FUN_0015bd68(geometryEnabled);
+        gfxCommandTemplateAppend(geometryEnabled);
         state->stages = geometryEnabled ? 2 : 1;
         state->geometryEnabled = geometryEnabled;
     }

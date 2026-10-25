@@ -3,12 +3,11 @@
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 #include <stdlib.h>
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
 extern f32 DAT_00573c00;
-void FUN_00157558(RenderCtx *context);
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void FUN_001634b4(UiSpriteState *sprite, f32 parallax);
 s32 btlFloatingNumberComparePriorityDescending(const void *, const void *);
 

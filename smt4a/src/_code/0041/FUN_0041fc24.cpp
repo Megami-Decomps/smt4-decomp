@@ -8,7 +8,7 @@ void FUN_0023b45c(s32 enabled);
 char *libc_strcpy(char *output, const char *input);
 void FUN_0033440c(u32 value);
 void FUN_0033449c(s32 value);
-void FUN_0034aac8(s32 enabled);
+void FUN_0034aac8(u8 value);
 void gameGlobalsQueueValues(void *player, s32 mode);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
 void *gameDataBlocksGetSaveData(void);

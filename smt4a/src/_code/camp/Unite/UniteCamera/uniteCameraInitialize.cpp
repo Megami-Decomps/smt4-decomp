@@ -1,6 +1,7 @@
 #include "gfx/CameraParameters.h"
 #include "gfx/CameraManager.h"
 #include "AsdSDK/AsdDebug.h"
+#include "title/titleMain.h"
 
 /* The fusion work appends its settings pointer to the shared camera prefix. */
 struct UniteCameraWorkView {
@@ -25,7 +26,6 @@ f32 FUN_001bbf0c(f32);
 void asdCameraInitializeDefaults(ManagedCamera *, s32);
 void FUN_0014f0dc(ManagedCamera *, const Vec3f *, const Vec3f *, const Vec3f *);
 void FUN_001523b8(ManagedCamera *, s32, f32, f32, f32, f32);
-void FUN_0036b824(ManagedCamera *);
 void asdCameraRegister(ManagedCamera *);
 void uiSetFloatPair(ManagedCamera *, f32, f32);
 
@@ -48,7 +48,7 @@ void uniteCameraInitialize(const CameraParameters *parameters)
     FUN_0014f0dc(&work->camera, &work->parameters->eye, &target, &work->parameters->up);
     FUN_001523b8(&work->camera, 1, work->parameters->fieldOfView, work->parameters->nearClip,
                  work->parameters->farClip, work->parameters->aspect);
-    FUN_0036b824(&work->camera);
+    FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     asdCameraRegister(&work->camera);
     uiSetFloatPair(&work->camera, 0.25f, 1.0f);
     g_handleRegistry->active = &work->camera;

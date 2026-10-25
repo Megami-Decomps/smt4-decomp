@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail reads texture.requested through the retained texture pointer (r5), the build folds it into the global base (r6). */
 #include "event/2dEvent/EventEffect.h"
+#include "util/AsdTMTexTableNodeIsLoaded.h"
 
 extern "C" {
 void jobStop(u32 job, u32 mode);
 void asdMemFree(void *memory);
-u32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
 void asdTMTexTableFreeEntry(u32 table);
 void *textureGetIndexedResource(u32 table);

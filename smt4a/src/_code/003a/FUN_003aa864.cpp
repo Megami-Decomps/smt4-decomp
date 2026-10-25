@@ -9,7 +9,7 @@ int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(void);
-int FUN_00514540(...);
+int shiftRandomNextFraction(...);
 int SUB41(double, int);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -104,7 +104,7 @@ extern int effGetFrameStep(void);
 extern unsigned int FUN_00221cb0(void);
 /* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -367,10 +367,10 @@ void FUN_003aa864(fn_003aa864_arg0 *param_1)
               }
             }
             else if (temp_v38 != 0) {
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v28 = temp_v28 * 6.2831855f;
               piVar23[2] = (int)temp_v28;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v22 = 1.0f;
               temp_v14 = 0;
               temp_v28 = ((1.0f - pfVar26->field_0x78) + temp_v28 * pfVar26->field_0x78) *
@@ -381,11 +381,11 @@ void FUN_003aa864(fn_003aa864_arg0 *param_1)
                 temp_v28 = -(float)piVar23[1];
                 piVar23[1] = (int)temp_v28;
               }
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v28 = ((temp_v22 - pfVar26->field_0x70) + temp_v28 * pfVar26->field_0x70) *
                        pfVar26->field_0x6c;
               piVar23[3] = (int)temp_v28;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v28 = (temp_v22 - pfVar26->field_0x68) + temp_v28 * pfVar26->field_0x68;
               piVar23[4] = (int)(pfVar26->field_0x60 * temp_v28);
               temp_v28 = pfVar26->field_0x64 * temp_v28;

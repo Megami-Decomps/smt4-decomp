@@ -3,7 +3,7 @@
 extern "C" {
 
 extern unsigned short *gameGetPlayerData(void);
-extern unsigned int FUN_00192718(unsigned int);
+extern unsigned int aocEntryGetKindForward(unsigned int);
 
 
 unsigned int FUN_00498408(unsigned int param_1,unsigned int param_2)
@@ -14,7 +14,7 @@ unsigned int FUN_00498408(unsigned int param_1,unsigned int param_2)
   unsigned int temp_v1;
   
   puVar1 = (unsigned short *)gameGetPlayerData();
-  temp_v0 = FUN_00192718(param_2);
+  temp_v0 = aocEntryGetKindForward(param_2);
   switch(temp_v0) {
   case 2:
     temp_v1 = (unsigned int)*puVar1;

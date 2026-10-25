@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c4ac4` (_code @ 0x3c4ac4, 0x46c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct {
 /* Supplied declaration required: asdListBoxSetItemMode3. */
 /* Supplied declaration required: asdListBoxSetItemMode2. */
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: gameRecordSetValueClamped. */
 extern unsigned int saveIsRecordValueBounded(unsigned short);
 extern unsigned int *FUN_002561d8(unsigned int, unsigned int, unsigned int);
@@ -46,7 +46,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
   }
   switch(temp_v0) {
   case 0:
-    puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+    puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
     *(unsigned int *)(param_1 + 0x1c) = *puVar4;
     temp_v0 = btlGetMainState();
     puVar2 = (unsigned int *)FUN_002561d8(temp_v0,*(unsigned int *)(param_1 + 0x1c),1);
@@ -75,7 +75,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
     break;
   case 1:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       temp_v0 = *puVar4;
       *(short *)puVar6 = (short)temp_v0;
       if (puVar2[0x9e] != 0) {
@@ -92,14 +92,14 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
     break;
   case 2:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)((int)puVar6 + 2) = (short)*puVar4;
       return;
     }
     break;
   case 3:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       temp_v0 = *puVar4;
       *(short *)(puVar6 + 1) = (short)temp_v0;
       if (puVar2[0x9e] != 0) {
@@ -116,42 +116,42 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
     break;
   case 4:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)((int)puVar6 + 6) = (short)*puVar4;
       return;
     }
     break;
   case 5:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)(puVar6 + 2) = (short)*puVar4;
       return;
     }
     break;
   case 6:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)((int)puVar6 + 10) = (short)*puVar4;
       return;
     }
     break;
   case 7:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)(puVar6 + 3) = (short)*puVar4;
       return;
     }
     break;
   case 8:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)((int)puVar6 + 0xe) = (short)*puVar4;
       return;
     }
     break;
   case 9:
     if (puVar6 != (unsigned int *)0x0) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       *(short *)(puVar6 + 4) = (short)*puVar4;
       return;
     }
@@ -184,7 +184,7 @@ void FUN_003c4ac4(int param_1,unsigned int param_2)
     break;
   case 0xc:
     if ((puVar2 != (unsigned int *)0x0) && ((*puVar2 & 0x10) != 0)) {
-      puVar4 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
+      puVar4 = (unsigned int *)reinterpret_cast<unsigned int *>(asdListBoxGetItemValuePtr(reinterpret_cast<void *>(*(unsigned int *)(param_1 + 0x10)), temp_v0));
       gameRecordSetValueClamped(*(unsigned short *)((int)puVar2 + 0xce),*puVar4);
       return;
     }

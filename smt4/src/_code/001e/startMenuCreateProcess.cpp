@@ -2,8 +2,6 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
-u32 asdProcessCreateSimple(const s8* name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 s32 FUN_0021073c(u32 handle);
 extern s32 DAT_004e3f64;
 extern void (*DAT_00465108)();

@@ -1,5 +1,7 @@
 /* NON_MATCHING: payload destination uses r4 instead of lr (register allocation only). */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/AsdTMTexTableCallFileC.h"
+#include "util/AsdTMTexTableCallFileC.h"
 
 /* Local view: the Apocalypse placement flags are a halfword. */
 struct TexturePlacementViewA {
@@ -16,13 +18,12 @@ struct TextureDrawRequestViewB {
 };
 
 extern "C" {
-TextureTableFilePrefixIV *asdTMTexTableCallFileC(u32 table, s32 id);
 void FUN_00184efc(TextureTableFilePrefixIV *, TextureTableEntryIV *, TextureDrawRequestViewB *, u32);
 
 // Draw a table texture with its stored origin.
 void FUN_001835b4(u32 flags, u32 table, s32 id, u32 argument, TextureDrawPayloadIV payload)
 {
-    TextureTableFilePrefixIV *file = asdTMTexTableCallFileC(table, id);
+    TextureTableFilePrefixIV *file = reinterpret_cast<TextureTableFilePrefixIV *>(asdTMTexTableCallFileC(table, id));
     TextureTableEntryIV *entry = &(*file->entries)[id % 1000];
     TexturePlacementViewA *placement = (TexturePlacementViewA *)entry->placement;
     TextureDrawRequestViewB request;

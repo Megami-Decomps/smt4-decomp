@@ -1,10 +1,6 @@
 /* NON_MATCHING: structure and calls match; armcc schedules the sort-key stores differently (retail stores each key's id and 0 separately and interleaves them with the second record load) and allocates r4/r6 differently */
 #include "common.h"
-
-struct SkillOwnerRecord {
-    /* 0x00 */ u8 unk00[0x26];
-    /* 0x26 */ u16 skillId;
-};
+#include "gamedata/Table8Type5Lookup.h"
 
 struct PassiveSkillRecord {
     /* 0x00 */ u8 unk00[0x22];
@@ -28,7 +24,6 @@ struct SkillSortKey {
 };
 
 extern "C" {
-SkillOwnerRecord *FUN_002498ec(u32 id);
 s32 idIsAbove400(u32 id);
 PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
 SkillRecord *dataTable40FindById(u32 id);
@@ -53,15 +48,15 @@ static inline s32 unitSortValue(SkillSortKey *key)
 /* Compares two skills for sorting: by their sort keys, then by their unit's key, then by the final tie-break. */
 s32 FUN_002dc634(const u16 *first, const u16 *second)
 {
-    SkillOwnerRecord *firstOwner = FUN_002498ec(*first);
-    SkillOwnerRecord *secondOwner = FUN_002498ec(*second);
+    Table8Type5Record *firstOwner = table8Type5FindById(*first);
+    Table8Type5Record *secondOwner = table8Type5FindById(*second);
     SkillSortKey firstKey;
     SkillSortKey secondKey;
     SkillSortKey *a = &firstKey;
     SkillSortKey *b = &secondKey;
-    a->skillId = firstOwner->skillId;
+    a->skillId = firstOwner->value;
     a->unit = 0;
-    b->skillId = secondOwner->skillId;
+    b->skillId = secondOwner->value;
     b->unit = 0;
 
     s32 difference = skillSortValue(a) - skillSortValue(b);

@@ -1,11 +1,11 @@
 /* NON_MATCHING: parameter registers are allocated differently (retail: id in r7, param in r5, frames in r6) and the channel selection branches are laid out differently. */
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 
 extern BgmChannelSelection g_titleConfigModeFlag;
 extern BgmRequestChannel DAT_004c53c4[2];
-int jyoucyuGetTableEntry(u32 index);
 
 /* Requests track `id` on a channel: queued behind a fade when one is running, else started directly. */
 static __inline void bgmChannelRequest(BgmRequestChannel *channel, s32 id, u32 param, u32 frames)

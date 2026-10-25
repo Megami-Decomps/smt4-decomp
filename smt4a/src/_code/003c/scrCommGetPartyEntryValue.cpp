@@ -1,4 +1,6 @@
+#include "util/FUN_002a4894.h"
 #include "shard/Shard003C.h"
+#include "shard/Shard0031.h"
 
 extern "C" {
 
@@ -19,7 +21,6 @@ typedef struct PartyOwner {
 } PartyOwner;
 
 extern s32 FUN_002a4878(u8 *block);
-extern s32 FUN_002a4894(u8 *block);
 extern Rec12C *FUN_003e4d68(u32 index);
 extern s32 FUN_0019e52c(u32 value);
 extern void scrSetResult(s32 value);
@@ -36,7 +37,7 @@ u32 scrCommGetPartyEntryValue(void)
         index = obj->unk32C;
     } else {
         index = FUN_002a4878(obj->block260);
-        index = index + FUN_002a4894(obj->block260) * 4;
+        index = index + FUN_002a4894(reinterpret_cast<const Object *>(obj->block260)) * 4;
     }
     entry = FUN_003e4d68(obj->ids[index] & 0xFFFF);
     scrSetResult(FUN_0019e52c(entry->unk12C));

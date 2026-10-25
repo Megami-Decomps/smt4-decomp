@@ -56,7 +56,7 @@ void FUN_002be5a4(s32 a, u32 icon, void *object, f32 x, f32 y);
 LayoutPoint *FUN_002bf4f8(s32 group, s32 part);
 void FUN_002c18e4(TitleScene *scene);
 void FUN_002c198c(TitleScene *scene);
-void FUN_002c39a4(TitleScene *scene);
+void renderCtxSelectStereoLayout(TitleScene *scene);
 s32 FUN_002c5d80(s32 a, s32 b);
 u32 vec2GetXInt(void *vec);
 u32 vec2GetYInt(void *vec);
@@ -66,7 +66,7 @@ u8 FUN_002109cc(void)
 {
     ButtonHelp *help = g_buttonHelp.block;
     if (help->enabled) {
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         renderStackPush(&g_titleScene->stack, FUN_002c5d80(1, 0));
         if (help->mode <= 3 && (help->mode < 2 || help->mode == 2 || help->mode == 3)) {
             FUN_00190e48();

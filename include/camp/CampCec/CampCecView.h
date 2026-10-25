@@ -29,4 +29,16 @@ typedef struct CampCecViewA {
     /* 0x138 */ void *heap;                /* heap block, freed on close */
 } CampCecViewA;
 
+extern "C" {
+u32 overlayIsNotBusy(void);
+}
+
+extern "C" {
+u32 FUN_002005a0(int id);
+}
+
+extern "C" {
+u8 *FUN_002e2ec0(void);
+}
+
 #endif

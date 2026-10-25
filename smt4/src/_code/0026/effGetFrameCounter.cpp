@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
 
 extern "C" {
 

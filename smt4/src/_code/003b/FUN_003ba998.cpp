@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "font/PlaceWin.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct Mover;
 extern "C" {
@@ -55,7 +56,6 @@ int slotSetRequest(int, int, int);
 int FUN_002a4bac(unsigned int);
 int asdMemFreeNonNull(int);
 int dataTable1bOr1cGetRecord(void);
-int libc_strcpy(unsigned char *, unsigned int);
 int asdMemFree(void);
 int commonBgStopChildAndReset(void);
 
@@ -233,7 +233,7 @@ void FUN_003ba998(int param_1)
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
         dataTable1bOr1cGetRecord();
         DAT_0049fa82 = *(unsigned short *)(temp_v3 + 2);
-        libc_strcpy(&DAT_0049fa84,temp_v3 + 0x138);
+        libc_strcpy(reinterpret_cast<unsigned int *>(&DAT_0049fa84), reinterpret_cast<unsigned int *>(temp_v3 + 0x138));
         DAT_0049fa80 = 1;
       }
       else if (pcVar4[3] != '\0') {

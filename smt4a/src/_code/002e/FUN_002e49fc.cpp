@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ const char *FUN_0015f858(u32 id, s32 arg);
 const char *FUN_00180118(u16 id);
 const char *contentEntryDataGet(s16 id, s32 arg);
 const char *FUN_0014bd84(u32 id);
-int FUN_003180c4(u32 kind, const char *text);
 int FUN_00359974(u32 kind, u32 id, s32 arg0, s32 arg1);
 
 /* Script command: looks up the text for the argument by kind (0-0x1F) and passes it to FUN_003180c4;

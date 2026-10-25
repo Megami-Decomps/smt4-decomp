@@ -1,6 +1,7 @@
 /* NON_MATCHING: same control flow as retail (shared step increment, duplicated sprite loops, out-of-line else), but the build keeps different values in r5-r8 (retail hoists 0 into r8 and the outgoing sprite pointer into r5) and stores stage/state with strd. */
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
+#include "util/FUN_0039f860.h"
 
 extern "C" {
 extern GameState g_gameState;
@@ -18,7 +19,6 @@ void FUN_00233240(void *window, s32 enable);
 s32 NaviMain_GetCurrentMap(void);
 s32 NaviMain_GetPosX(u16 *state);
 void naviMainSetCurrentMap(u16 *state, s32 map);
-void FUN_0039f860(u16 *state, s32 option);
 void FUN_002316e8(MapNaviDisplay *display, s32 map);
 void mapNaviDisplayLoadMap(MapNaviDisplay *display, s32 map);
 
@@ -45,7 +45,7 @@ void FUN_0039c09c(MapNaviDisplay *display)
         if (NaviMain_GetCurrentMap() != NaviMain_GetPosX(mapState)) {
             s32 map = NaviMain_GetPosX(mapState);
             naviMainSetCurrentMap(mapState, map);
-            FUN_0039f860(mapState, 0);
+            FUN_0039f860(reinterpret_cast<u32>(mapState), 0);
             work->counter = 0;
             if (map >= 100) {
                 work->mapVisible = 0;

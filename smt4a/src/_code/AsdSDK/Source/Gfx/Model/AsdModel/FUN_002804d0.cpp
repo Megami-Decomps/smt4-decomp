@@ -1,6 +1,7 @@
 /* NON_MATCHING: canonical graphics counters now share the retail global base; resource-list subobject bases, owned-part registers, and a few release branches still differ. */
 #include "common.h"
 #include "shard/S1GfxModel.h"
+#include "util/AsdFileRequestRelease.h"
 
 struct Allocator;
 struct AllocatorVTable {
@@ -39,7 +40,6 @@ extern GfxModelState g_gfxSettings;
 extern u8 DAT_00636ebc;
 extern u8 DAT_00636ec8;
 
-void asdFileRequestRelease(s32 request);
 void indexedListErase(u8* list, s32 node);
 void resourceListDestroy(u32 list);
 void asdMemFree(u32 block);
@@ -110,7 +110,7 @@ void FUN_002804d0(u32* model, s32 request, u32 unused, s32 unused2)
         }
         asdMemFree(reinterpret_cast<u32>(file));
         g_gfxSettings.loadedModels.count--;
-        if (request != 0) asdFileRequestRelease(request);
+        if (request != 0) asdFileRequestRelease(reinterpret_cast<void *>(request));
     }
     asdMemFree(model[9]);
     model[9] = 0;

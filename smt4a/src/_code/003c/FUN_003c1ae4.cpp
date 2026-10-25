@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 kind, u32 *first, u32 *count);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 void scrSetResult(s32 value);
 
@@ -17,7 +17,7 @@ u32 FUN_003c1ae4()
     // The counter cannot enter the existing +0x0A union without raising its alignment.
     struct CounterView { u8 prefix[0xCC]; s32 pending; };
     struct Selection { u32 count, first; } selection;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), &selection.first, &selection.count);
+    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), reinterpret_cast<s32 *>(&selection.first), reinterpret_cast<s32 *>(&selection.count));
     for (s32 index = selection.first; index < (s32)(selection.first + selection.count); ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;

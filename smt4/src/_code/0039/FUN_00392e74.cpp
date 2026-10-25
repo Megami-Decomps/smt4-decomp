@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the add-on content menu update; retail evaluates the % 20 / % 30 counters with the smull magic multiplies in a different order and dispatches the state's member function with the pointer-to-member adjustment folded into a tail `bx`. */
 #include "classes/AocMenu.h"
+#include "addon/aocMain.h"
 
 
 extern "C" {
@@ -13,7 +14,6 @@ struct AocMainBlock {
 };
 
 extern "C" {
-s32 FUN_002ad1e0(void *block);
 void FUN_0023392c(AocMenu *menu, s32 a, s32 b);
 void jobOwnerFreeSlotAndStop(void *owner);
 void jobStopAndClearFlags(AocMenu *menu);

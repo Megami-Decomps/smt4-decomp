@@ -30,7 +30,6 @@ void asdCameraInitializeDefaults(EffectProcessInit *camera, s32 enabled);
 void uiSetFloatPair(EffectProcessInit *camera, f32 distance, f32 scale);
 void FUN_0014f0dc(EffectProcessInit *camera, const f32 *eye, const f32 *target, const f32 *up);
 void FUN_001523b8(EffectProcessInit *camera, u32 pivot, f32 fov, f32 aspect, f32 nearClip, f32 farClip);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 s32 FUN_001f4c80(u32 job);
 void effectProcessDestroy(u32 job);

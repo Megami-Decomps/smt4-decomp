@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
 int FUN_00287528(unsigned char **);
-int FUN_00287704(int);
 int asdTextDrawFormatted(...);
 int libc_strcat(...);
 int FUN_002bcf4c(void);
@@ -29,7 +29,6 @@ extern int storyModeCanProceed(unsigned char);
 extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00287528. */
 extern int objectFlagBitIsSet(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00287704. */
 /* Supplied declaration required: asdTextDrawFormatted. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */

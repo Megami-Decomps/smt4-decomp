@@ -2,16 +2,16 @@
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
-GameBlock2830C *gameDataBlocksGetSaveData(void);
 
 /* Tests entry `id`'s bit in the save's earned set. */
 static inline bool unlockIsEarned(s32 id)
 {
     s32 byte = id / 8;
     s32 bit = id % 8;
-    return (progressUnlockByteGet(&gameDataBlocksGetSaveData()->unlocks.earned[byte]) & (1 << bit)) != 0;
+    return (progressUnlockByteGet(&reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byte]) & (1 << bit)) != 0;
 }
 
 /* Returns the name of the index-th earned entry of data table 0x4a (0x2c-byte records), or "" when

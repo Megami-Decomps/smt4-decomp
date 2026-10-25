@@ -1,5 +1,6 @@
 /* NON_MATCHING: load form of the 64-bit marker flags: retail loads the two words with separate ldr (register r1 base) and both mask words first; the build uses ldm and a different order. */
 #include "common.h"
+#include "util/GameDataGetMarkEntry.h"
 
 /* The battle state; only the phase value and the marker flags are named. */
 struct MarkerBattleState {
@@ -23,7 +24,6 @@ struct MarkEntry {
 extern "C" {
 
 extern MarkerMasks g_btlMain; /* 0x573920 */
-MarkEntry *gameDataGetMarkEntry(s32 index);
 
 /* Returns 1 when a marker flag is set, the phase is 1-4, or any of the 32 mark entries has a count; else 0. */
 u32 FUN_003e98e0(MarkerBattleState *battle)
@@ -32,7 +32,7 @@ u32 FUN_003e98e0(MarkerBattleState *battle)
         s32 used = 0;
 
         for (s32 i = 0; i < 0x20; i++) {
-            if (gameDataGetMarkEntry(i)->count != 0) {
+            if (reinterpret_cast<MarkEntry *>(gameDataGetMarkEntry(i))->count != 0) {
                 used++;
             }
         }

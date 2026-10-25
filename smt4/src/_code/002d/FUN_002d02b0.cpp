@@ -4,7 +4,6 @@
 
 extern "C" {
 extern UniteWork *g_unite;
-s32 dataTableGetEntry0102Value(u16);
 }
 
 static __inline s32 compareFusionDemons(u16 leftId, u16 rightId)

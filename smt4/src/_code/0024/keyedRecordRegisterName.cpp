@@ -1,8 +1,8 @@
 /* NON_MATCHING: sentinel loop remains rolled instead of retail's 48 byte stores; global-load scheduling differs. */
 #include "shard/W6_W6Match7_KeyedRecordStorage.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void*, u32);
 s32 FUN_002522f8(u8*, u32, const char*, ...);
 const u8* FUN_002522e0(const u8*, u32);
 extern u32 g_keyedRecordCount;

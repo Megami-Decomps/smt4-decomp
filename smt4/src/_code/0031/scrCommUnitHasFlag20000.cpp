@@ -1,8 +1,8 @@
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(int result);
 extern int FUN_002d1974(u32 a, u32 b);
 
 extern u32 g_btlScriptUnit;

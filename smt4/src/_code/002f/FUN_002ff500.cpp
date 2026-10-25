@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail keeps separate early-result call and common epilogue; compiler merges the matching-result branches. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 u32 scrGetArg(s32 argument);
 s32 scrSetResult(s32 result);
 u32 btlScriptResolveGroupArg(u32 group);
-void FUN_002499fc(u32 group, s32 *first, s32 *count);
 BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 

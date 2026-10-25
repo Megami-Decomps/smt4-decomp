@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild; retail loads g_aocSystem after setting the key id and replicates the `if (record) return record; return 0` check in every case, so each case body is a few instructions longer than armcc's merged form here. */
 #include "common.h"
+#include "shard/ItemStackLimit.h"
 
 /* Records keyed by the u16 `id` at 0x20; each table has its own record size. */
 struct ItemRecord {
@@ -36,7 +37,6 @@ struct BattleDataKind {
 extern "C" {
 extern AocSystem *g_aocSystem;
 
-BattleDataKind *FUN_0019c06c(void);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_0019e30c(const void *a, const void *b);
 s32 compareRecordKey(const void *a, const void *b);
@@ -56,7 +56,7 @@ void *FUN_0015f858(u32 id)
 {
     if (id == 0)
         return NULL;
-    BattleDataKind *data = FUN_0019c06c();
+    BattleDataKind *data = reinterpret_cast<BattleDataKind *>(itemCategoryFindByItemId(id));
     u32 kind = 0;
     if (data != NULL)
         kind = data->kind;

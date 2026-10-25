@@ -5,7 +5,6 @@
 
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 front);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 void asdMemFree(void *memory);
 s32 FUN_001400f8(u32 process);
 void asdModelProcessShutdown(u32 process);

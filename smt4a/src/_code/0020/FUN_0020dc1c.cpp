@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020dc1c` (_code @ 0x20dc1c, 0x9bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/FlagValueIsPositive.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 
@@ -17,7 +19,6 @@ int gameGlobalsQueueValues(...);
 int sysPlayVoice(...);
 int FUN_004803e4(...);
 int flagValueSub(...);
-int flagValueIsPositive(...);
 
 int FUN_00163aa4(...);
 int sysPlaySe(...);
@@ -83,9 +84,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: campResetScreen. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: campRebuildEnabledFlagList. */
-extern int FUN_0026c3a0(void);
 /* Supplied declaration required: ifTouchRegionAdd. */
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);

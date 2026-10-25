@@ -1,6 +1,6 @@
 /* NON_MATCHING: The transition-state switch merges pointer reloads and stores differently. */
 #include "shard/GameGlobals.h"
-extern "C" void playerModelLoadPart(u32, s32, s32);
+#include "status/StatusBustUp.h"
 
 // Requests the selected transition mode and enters the transition state.
 extern "C" void FUN_002992e0(s32 mode)

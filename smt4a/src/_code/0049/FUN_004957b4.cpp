@@ -4,7 +4,7 @@
 
 extern "C" {
 s32 FUN_0031d174(const void *selection);
-const SpriteInfo *FUN_0018349c(void *group, u32 sprite);
+const SpriteInfo *layoutFindTableEntry(void *group, u32 sprite);
 void FUN_0049339c(void *group, u32 sprite, s32 x, s32 y, s32 depth);
 void FUN_0049368c(void *group, u32 sprite, s32 x, s32 y, s32 depth, s32 enabled);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -38,9 +38,9 @@ void FUN_004957b4(ShopWork *base)
     if (work->category == 7 || work->category == 8)
         spriteOffset = 1;
     s32 row = FUN_0031d174(work->selections[work->category]);
-    const SpriteInfo *position = FUN_0018349c(work->sprites, row + spriteOffset + 0x4F);
+    const SpriteInfo *position = layoutFindTableEntry(work->sprites, row + spriteOffset + 0x4F);
     s16 positionX = position->x, positionY = position->y;
-    const SpriteInfo *origin = FUN_0018349c(work->sprites, 200);
+    const SpriteInfo *origin = layoutFindTableEntry(work->sprites, 200);
     s32 x = origin->x + positionX, y = positionY + origin->y;
     if (work->category != 8)
         FUN_0049339c(work->sprites, 8, x, y, depth);
@@ -53,7 +53,7 @@ void FUN_004957b4(ShopWork *base)
     if (work->showIncrease)
         FUN_0049368c(work->sprites, 0xC5, x, y, depth + 1, 1);
     u32 quantity = work->quantity;
-    const SpriteInfo *label = FUN_0018349c(work->sprites, 199);
+    const SpriteInfo *label = layoutFindTableEntry(work->sprites, 199);
     u32 color = 0xFFFFFFFF;
     s16 labelX = label->x, labelY = label->y;
     if (work->quantity == work->maximum)

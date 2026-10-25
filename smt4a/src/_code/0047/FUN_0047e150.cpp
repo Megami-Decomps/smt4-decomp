@@ -5,7 +5,7 @@
 
 extern "C" {
 extern AocSystemA *g_aocSystem;
-u32 FUN_004186e0(void);
+u16 FUN_004186e0(void);
 void textFormatBuffer(char *, const char *, ...);
 s32 aocPackageGrantsItem(AocSystemA *, u16, u32);
 void aocQueueType07(AocSystemA *, u32, void **, u32);

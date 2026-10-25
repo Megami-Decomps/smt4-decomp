@@ -11,7 +11,7 @@ void sysPlaySe(s32 sound);
 void cecProcessStart(void);
 void cecProcessCall4(void);
 void cecProcessDestroy(void);
-void FUN_002a6480(s32 mode);
+void FUN_002a6480(u16 value);
 void FUN_0031d890(void);
 SlotTable *gameGetSlotTable(void);
 SlotRecord *gameGetSlotRecord(s32 slot);

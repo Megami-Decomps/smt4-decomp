@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation differs: retail spills the member record and keeps the item loop base/limit (r5/r6) in registers and loads the divide-by-100 reciprocal later; logic matches. */
 #include "common.h"
+#include "mapnavi/naviMain.h"
 
 /* Battle reward input: base experience and the enemy level it came from. */
 struct RewardSource {
@@ -39,7 +40,6 @@ extern "C" {
 extern RewardOwner g_engineCleanupOwner;
 s8 *gameGetSlotTable(void);
 void gameGetPlayerData(void);
-s32 playerHasFlagBit(u32 bit);
 s32 FUN_0022fd80(s32 experience, s32 level);
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);

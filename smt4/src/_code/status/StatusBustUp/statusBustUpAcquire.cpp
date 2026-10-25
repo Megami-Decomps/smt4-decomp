@@ -1,10 +1,11 @@
 #include "AsdSDK/AsdDebug.h"
 
 #include "status/StatusBustUp.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 extern StatusBustUpResources DAT_0044e158;
-void asdTMTexTableLoadSprites(u32 table);
 void asdTMTexTableLoadTmx(u32 table, u32 node);
 void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 void rt_memclr(void *block, u32 size);

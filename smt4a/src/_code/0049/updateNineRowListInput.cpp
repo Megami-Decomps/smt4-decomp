@@ -1,3 +1,4 @@
+#include "util/FUN_002a4894.h"
 /* NON_MATCHING: compiler rotates the repeated-input loop and removes four branch/NOP rows; -O2 candidate. */
 #include "shard/Shard0031.h"
 
@@ -8,7 +9,6 @@ struct NineRowListInput {
 };
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *);
-s32 FUN_002a4894(FlaggedEntry *);
 s32 objectApplyIfUnblocked(FlaggedEntry *);
 u32 FUN_00228b04(FlaggedEntry *, u32);
 u32 FUN_001517b4(u32, u32);
@@ -23,10 +23,10 @@ void updateNineRowListInput(NineRowListInput *list)
         if (objectApplyIfUnblocked(&list->grid) > 9) {
             resourceRunOperationIfUnblocked(&list->grid);
             while (resourceRunOperationIfUnblocked(&list->grid) == previousTop &&
-                   (resourceRunOperationIfUnblocked(&list->grid) != 0 || FUN_002a4894(&list->grid) != 0)) {
+                   (resourceRunOperationIfUnblocked(&list->grid) != 0 || FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) != 0)) {
                 s32 top = resourceRunOperationIfUnblocked(&list->grid);
                 s32 count = objectApplyIfUnblocked(&list->grid);
-                if (top == count - 9 && FUN_002a4894(&list->grid) == 8)
+                if (top == count - 9 && FUN_002a4894(reinterpret_cast<const Object *>(&list->grid)) == 8)
                     break;
                 FUN_00228b04(&list->grid, 0);
             }

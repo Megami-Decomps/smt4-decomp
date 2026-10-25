@@ -7,7 +7,6 @@ InitializedUnitStatsA *gameGetOptions(void);
 UnitRecord *gameGetPlayerData(void);
 s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *, u32);
-const CategoryUnitStatsA *dataTableGetCategoryEntry(u32, s32);
 
 // Reset the selected category's unit and copy its base, current and maximum statistics.
 void FUN_004d9ebc(u32 categoryId)
@@ -21,7 +20,7 @@ void FUN_004d9ebc(u32 categoryId)
         }
     }
     sysMemClear(unit, 300);
-    const CategoryUnitStatsA *entry = dataTableGetCategoryEntry(categoryId, variant);
+    const CategoryUnitStatsA *entry = reinterpret_cast<const CategoryUnitStatsA *>(dataTableGetCategoryEntry(categoryId, variant));
     unit->categoryId = categoryId;
     unit->variant = variant;
     unit->id = 1201;

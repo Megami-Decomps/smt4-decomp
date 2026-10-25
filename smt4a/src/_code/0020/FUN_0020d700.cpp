@@ -1,5 +1,6 @@
 #include "common.h"
 #include "camp/CampMenuEntry.h"
+#include "camp/UIFade/UIFade.h"
 
 struct CampMenuState {
     /* 0x00 */ u8 unk00[0x40];

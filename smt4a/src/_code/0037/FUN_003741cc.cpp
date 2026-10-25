@@ -1,6 +1,8 @@
+#include "util/Vec2Fixed.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 struct SaveSlotMarkerAnchorA {
     u8 unk00[8];
@@ -15,11 +17,9 @@ static __inline UiSpriteState *slotTimer(SaveSlotTransitionPrefixA *work)
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-s32 vec2GetXInt(const UiSpriteState *);
 s32 vec2GetYInt(const UiSpriteState *);
 void efctSetSpeed(f32);
 f32 vec2GetSpeed(const void *object);
-s32 packNibblesAndByte(u32, u32, u32);
 const SaveSlotMarkerAnchorA *FUN_001834a4(u32, s32);
 
 void FUN_003741cc(SaveSlotTransitionPrefixA *work)

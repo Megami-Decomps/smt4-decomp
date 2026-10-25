@@ -2,11 +2,11 @@
 #include "shard/W4_Match6_DataSet.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern AocDisplay *g_aocDisplay;
 void *dataTableFileGetTable(void *file, u32 index);
-void memClear(void *buffer, u32 size);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void aocQueueFileLoad(AocDisplay *display, const char *path, DataFileRef *file,
                   u32 mode, u32 size, DataFileRef *context);

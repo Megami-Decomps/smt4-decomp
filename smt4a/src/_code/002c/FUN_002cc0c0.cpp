@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail reads each selected-widget value through separate pointer reloads; direct fields combine into LDRD. */
 #include "ui/PartyPanelState.h"
 #include "shard/Shard0031.h"
+#include "network/DataStore/DataStoreMain.h"
 
 // The sortable preview table follows the published Apocalypse panel prefix.
 struct PartyPanelPreviewWorkA {
@@ -17,7 +18,6 @@ extern PartyPanelPreviewWorkA* g_partyPanel;
 PartyStatusSlots* gameGetSlotTable(void);
 void btlItemComputeValues(s32 unit, u16 item, s32* first, s32* second);
 void pair40Set(u32 widget, s32 first, s32 second);
-void FUN_003344b4(s32 first, s32 second);
 
 void FUN_002cc0c0(void)
 {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and branch layout differ (retail reuses r8/r9 zeros, shares the cure-mask arrays at sp/sp+4 and merges the two owner branches' tails); logic equivalent. */
 #include "common.h"
+#include "util/BtlHasReserveReplacement.h"
 
 /* Item effect record (accessed fields). */
 struct ItemEffect {
@@ -34,7 +35,6 @@ s32 FUN_00269bf0(s32 unit);
 s32 saveResolvePartySlot(void);
 s32 gameGetUnitRecord(void);
 s32 gameGetPlayerData(void);
-s32 btlHasReserveReplacement(u32 index);
 s32 FUN_0033fc50(void);
 
 /* Returns 0 when the item has an effect on the target, otherwise 3. */

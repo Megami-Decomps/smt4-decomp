@@ -26,7 +26,7 @@ struct SkillPicker {
 }
 
 extern "C" {
-SkillCostRecord *dataTable06Sub1GetRecord(u32 id);
+SkillCostRecord *dataTable06Sub1GetRecord(u16 id);
 s32 idMapLookup(u32 id);
 void *dataTable40FindById(u32 id);
 void *passiveSkillLookupRecord(u32 id);

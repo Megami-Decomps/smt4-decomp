@@ -1,14 +1,14 @@
 /* NON_MATCHING: halfword conditional-load/zero order differs; bit read folds ADD/LDRB into indexed LDRB. */
 #include "shard/W5_W5Match7_FlagBanks.h"
+#include "shard/ItemStackLimit.h"
 
 extern "C" {
-const FlagValueRange *FUN_0019c06c(s32);
 FlagValueStorage *flagValueGetStorage(void);
 
 // Read a bit or halfword from the bank selected by the flag's range descriptor.
 u16 FUN_001ba3d4(s32 id)
 {
-    const FlagValueRange *range = FUN_0019c06c(id);
+    const FlagValueRange *range = reinterpret_cast<const FlagValueRange *>(itemCategoryFindByItemId(id));
     u8 bank = range ? range->bank : 0;
     if (range) {
         FlagValueStorage *storage = flagValueGetStorage();

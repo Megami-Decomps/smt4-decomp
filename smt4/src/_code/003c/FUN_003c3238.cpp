@@ -1,5 +1,6 @@
 /* NON_MATCHING: the scratch VFP register for unsigned line-height conversion is s1 instead of retail s2. */
 #include "common.h"
+#include "util/GameGetPlayerName.h"
 
 struct StatusHelpRecord {
     /* 0x00 */ u32 flags;
@@ -14,7 +15,6 @@ extern const char DAT_00400574[];
 extern const char DAT_0040057c[];
 extern const char DAT_00400584[];
 s32 textFormatBuffer(char *output, const char *format, ...);
-const char *gameGetPlayerName();
 const char *FUN_002bd06c(u16 entry);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
 }
@@ -29,7 +29,7 @@ extern "C" void FUN_003c3238(void *context, const StatusHelpRecord *record)
     const char *description = NULL;
     if (record->flags & 2) {
         textFormatBuffer(label, DAT_0040056c);
-        description = gameGetPlayerName();
+        description = reinterpret_cast<const char *>(gameGetPlayerName());
     } else if (record->flags & 8) {
         textFormatBuffer(label, DAT_00400574);
         description = FUN_002bd06c(record->entryId);

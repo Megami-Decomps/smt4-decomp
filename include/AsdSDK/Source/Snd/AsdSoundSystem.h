@@ -257,4 +257,28 @@ typedef struct AsdSndListener {
     /* 0x08 */ f32 z;
 } AsdSndListener;
 
+extern "C" {
+u32 dspComponentUnload(void);
+}
+
+extern "C" {
+u32 FUN_0010ec60(void);
+}
+
+extern "C" {
+u32 FUN_00295408(void);
+}
+
+extern "C" {
+u8 FUN_00295618(void);
+}
+
+extern "C" {
+u32 FUN_0023e330(u32 slot, u32 arg, s32 checkContext);
+}
+
+extern "C" {
+void textEncodeFontSlot(s32 slot, const u8 *text);
+}
+
 #endif

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "AsdSDK/MdlManagerDestroy.h"
 
 extern "C" {
 
@@ -11,8 +11,10 @@ typedef struct ObjFUN_00152bec {
 /* A debug hook armlink removed (the jump to it became a nop). */
 __declspec(noreturn) __weak void FUN_00152bec_hook(void *obj);
 
-void asdMdlManagerMarkDestroy(ObjFUN_00152bec *obj)
+void asdMdlManagerMarkDestroy(u32 handle)
 {
+    ObjFUN_00152bec *obj = reinterpret_cast<ObjFUN_00152bec *>(handle);
+
     obj->flags |= 0x200000;
     FUN_00152bec_hook(obj->child);
 }

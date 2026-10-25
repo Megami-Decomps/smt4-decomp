@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only (retail keeps the wall flag in r3, the constant 1 in r7 and the row pointer in r6; here ip/r6/r7). */
 #include "common.h"
+#include "shard/SaveWork.h"
 
 /* One grid cell of the generated maze layout. */
 struct MazeCell {
@@ -39,14 +40,13 @@ struct MazeGenState {
 };
 
 extern "C" {
-MazeBlock *gameGetMapBlock(void);
 u16 randNextInRange(u16 range);
 extern MazeGenState DAT_004bce8c;
 
 /* Lays out the maze grid: walls on the border and on even rows/columns, then picks the four exit cells. */
 void FUN_002852f0(s32 keepSize)
 {
-    MazeBlock *maze = gameGetMapBlock();
+    MazeBlock *maze = reinterpret_cast<MazeBlock *>(gameGetMapBlock());
 
     if (keepSize == 0) {
         maze->width = 11;

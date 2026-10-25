@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ typedef struct ValueTable {
     /* 0x148 */ u16 values[1];
 } ValueTable;
 
-int scrSetResult(int value);
 int scrGetArg(int index);
 ValueTable *dataTable1bOr1cGetRecord(u16 id);
 

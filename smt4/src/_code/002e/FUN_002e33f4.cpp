@@ -1,5 +1,6 @@
 /* NON_MATCHING: the player/unit duplicated accessors are expanded in another order than retail and the status-bit scan branches differ; the item effect logic is the same. */
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ typedef struct EffectUnit {
 } EffectUnit;
 
 s32 randNextInRange(u32 limit);
-EffectUnit *gameGetUnitRecord(void);
 EffectUnit *gameGetPlayerData(void);
 void FUN_00283f30(u16 skills[8], s32 arg);
 void FUN_002485d4(EffectUnit *unit, u16 skills[8]);
@@ -57,7 +57,7 @@ u32 FUN_002e33f4(s32 index, EffectRecord *effect, s32 previewOnly, s32 dryRun)
     if (index < 0) {
         player = gameGetPlayerData();
     } else {
-        unit = gameGetUnitRecord();
+        unit = static_cast<EffectUnit *>(gameGetUnitRecord(index));
         if (unit == NULL) {
             return 1;
         }

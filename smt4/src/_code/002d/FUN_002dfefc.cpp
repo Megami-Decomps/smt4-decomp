@@ -2,6 +2,7 @@
 #include "map/MapIfTimer.h"
 #include <stddef.h>
 #include "util/CalleeContracts.h"
+#include "shard/SaveWork.h"
 
 struct MapAppDiscoveryState {
     u8 unk000[0xD9C];
@@ -15,7 +16,6 @@ extern s32 g_gameState;
 extern char DAT_004b7608[];
 extern const char DAT_00404464[];
 u32 FUN_002bfdd4(void);
-MapAppDiscoveryState *gameGetMapBlock(void);
 s32 appCheckPurchaseRequirements(u32 app);
 s32 gameFlagIsSet(u32 flag);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -28,14 +28,14 @@ void FUN_002dfefc(s32 suppressNotification)
     u32 displayFlags = FUN_002bfdd4() | 4;
     bool discovered = false;
     for (u32 app = 1; app < 141; ++app) {
-        MapAppDiscoveryState *map = gameGetMapBlock();
+        MapAppDiscoveryState *map = reinterpret_cast<MapAppDiscoveryState *>(gameGetMapBlock());
         s32 byteIndex = (s32)app / 8;
         u32 mask = 1 << ((s32)app % 8);
         if ((map->discovered[byteIndex] & mask) == 0) {
             if (flagBitIsSet(app) != 0) {
-                gameGetMapBlock()->discovered[byteIndex] |= (u8)mask;
+                reinterpret_cast<MapAppDiscoveryState *>(gameGetMapBlock())->discovered[byteIndex] |= (u8)mask;
             } else if (appCheckPurchaseRequirements(app) != 2) {
-                gameGetMapBlock()->discovered[byteIndex] |= (u8)mask;
+                reinterpret_cast<MapAppDiscoveryState *>(gameGetMapBlock())->discovered[byteIndex] |= (u8)mask;
                 discovered = true;
             }
         }

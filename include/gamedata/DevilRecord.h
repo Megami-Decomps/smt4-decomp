@@ -103,4 +103,13 @@ typedef char DevilLearnedSkillOffsets[
 typedef char DevilRecordSpecialFusionOffsets[
     offsetof(DevilRecord, specialFusion.prerequisite) == 0x34 &&
     offsetof(DevilRecord, specialFusion.requiredFlag) == 0x36 ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+bool aocRunByName(u32 arg0, u32 name, u32 arg2, int checked);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

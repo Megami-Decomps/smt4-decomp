@@ -2,6 +2,7 @@
 #include "addon/aocBootProcess.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
+#include "util/AocClearDisplayFlag.h"
 
 #define AOC_BOOT_STATE_CHECK 0
 #define AOC_BOOT_STATE_QUERY 1
@@ -40,7 +41,6 @@ s32 sysLightEventTryWait(void *event);
 void asdFsIsSdCardDetected(void);
 void jyoucyuGetTableEntry(u32 id);
 void aocResetOperationState(AocSystemA *system);
-void aocClearDisplayFlag(AocSystemA *system);
 void flagObjAdvance(void *owner);
 void FUN_0047306c(void *owner, s32 a, s32 b, s32 c);
 RequestParameters FUN_0046f3ac(AocSystemA *system);

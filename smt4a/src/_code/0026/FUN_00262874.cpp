@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00262874` (_code @ 0x262874, 0x534c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 
@@ -173,7 +174,6 @@ extern int FUN_0022e750(void);
 extern int campCecHasObject(void);
 extern int useCounterIsFinished(void);
 extern int FUN_0023b3b8(void);
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: FUN_0023e908. */
 /* Supplied declaration required: FUN_0023f900. */

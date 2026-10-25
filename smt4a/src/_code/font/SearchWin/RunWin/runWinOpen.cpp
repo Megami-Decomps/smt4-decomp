@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "font/SearchWin/RunWin.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int uiSpriteSelectAnim(void *ui, int arg);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 void *asdMemoryAllocTracked(int heap, int align, int arg2, int size, int arg4);
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-u32 asdProcessCreateSimple(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6);
 void paramsClearPacket(void *player);
 void FUN_00208650(void);
 void LAB_00208984(void);
@@ -36,7 +36,7 @@ void runWinOpen(void)
     }
     run = g_runWin;
     sysMemClear(run, 0xe4);
-    run->task = asdProcessCreateSimple(LAB_002c7128, 3, 0, 0, LAB_00208984, 0, 0);
+    run->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_002c7128), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(LAB_00208984), 0, 0);
     taskCreateDraw(LAB_002c7138, 0xed, 0, 0, FUN_00208650, 0, 0, run->task);
     paramsClearPacket(run->sound);
     paramsInit(reinterpret_cast<UiResourceParameters *>(run->sound), DAT_0052fbfc, 0x24, DAT_0052fc20, 0x24, 0, 0, 0, 0, DAT_0052fc44, 0x70);

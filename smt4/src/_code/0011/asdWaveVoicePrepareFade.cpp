@@ -1,12 +1,12 @@
 /* NON_MATCHING: frames and reset-path lock occupy r6/r7 instead of retail r7/r6; first saved-register setup and target-volume store selection differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "sound/VoiceManagerCalls.h"
 
 extern "C" {
 extern AsdSndStatus g_asdSoundStatus;
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
 void sndVoiceFree(u32 voice);
-u32 FUN_002bd29c(u32 priority, u32 flags, u32 unused);
 void nn_snd_CTR_Voice_SetMixParam(u32 voice, const f32 *);
 void nn_snd_CTR_Voice_SetPitch(u32 voice, f32 pitch);
 void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);

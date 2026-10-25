@@ -1,11 +1,11 @@
 /* NON_MATCHING: only scheduling differs: retail stores the file data before loading the flags (no write-back addressing) and loads dataOffset before the texture pointer. */
 #include "gfx/StexLoad.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 extern "C" {
 char *libc_strcpy(char *dst, const char *src);
 char *libc_strcat(char *dst, const char *src);
 u32 libc_strlen(const char *s);
-u8 *FUN_001642e4(const char *path, s32 *size, u32 loadFlags, u32 alignment);
 StexHeader *asdTMSprDecompress(StexHeader *data, u32 mode, u32 alignment);
 s32 rt_memcmp(const void *first, const void *second, u32 bytes);
 void asdMemFree(void *memory);
@@ -15,7 +15,7 @@ AsdTexture *asdTextureCreate(s32 retry);
 u32 FUN_00169310(TexTableEntry *entry)
 {
     char path[64];
-    s32 size;
+    u32 size;
     TexTableFile *file = entry->file;
     TexTableNode *node = entry->node;
 
@@ -45,7 +45,7 @@ u32 FUN_00169310(TexTableEntry *entry)
                 loadFlags |= 2;
             }
         }
-        StexHeader *data = (StexHeader *)FUN_001642e4(path, &size, loadFlags, 0x80);
+        StexHeader *data = (StexHeader *)asdLoadFileSyncNoContext(path, &size, loadFlags, 0x80);
         if (data != NULL) {
             if (entry->node->compressed)
                 data = asdTMSprDecompress(data, mode, 0x80);

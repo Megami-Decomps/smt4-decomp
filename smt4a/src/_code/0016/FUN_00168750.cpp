@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_00168750.h"
 
 extern "C" {
 u32 FUN_001bcfb4(u32 first, u32 second, u32 third, u32 fourth,

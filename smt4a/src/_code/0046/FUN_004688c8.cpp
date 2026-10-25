@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 
@@ -64,7 +65,6 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int screenFadeIsBusy(void);
 extern int FUN_002a746c(void);
 /* Supplied declaration required: resultCreate. */
-extern int FUN_002e19f8(void);
 /* Supplied declaration required: FUN_002f0c18. */
 extern unsigned int FUN_0031f8cc(void);
 /* Supplied declaration required: uniteReleaseExit. */

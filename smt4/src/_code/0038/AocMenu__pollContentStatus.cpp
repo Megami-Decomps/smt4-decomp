@@ -1,5 +1,7 @@
+#include "util/FUN_00233fcc.h"
 /* NON_MATCHING: block layout of the 0x66/default tails, the constants 3/5 in r5/r6 (swapped) and the remap sign test (retail: lsrs #31; here cmp #0). */
 #include "classes/AocMenu.h"
+#include "util/FUN_00233fcc.h"
 #include "addon/aocMain.h"
 
 /* A result code and its description. */
@@ -40,7 +42,6 @@ extern "C" {
 extern AocMain *g_aocMain;
 
 void FUN_00233e70(AocPollMenu *menu, s32 first, s32 second);
-AocPollHandler *FUN_00233fcc(u8 *storage, s32 kind);
 void timeInitializeActiveState(AocPollResult *result);
 void FUN_00234124(AocPollMenu *menu, AocPollResult *result);
 void FUN_002341d4(AocPollCode *result, AocMain *main);
@@ -58,7 +59,7 @@ void AocMenu::pollContentStatus()
     switch (menu->step) {
     case 0:
         {
-            AocPollHandler *created = FUN_00233fcc(menu->handlerStorage, 0);
+            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(FUN_00233fcc(menu->handlerStorage, 0));
             menu->step = 1;
             menu->handler = created;
         }
@@ -68,7 +69,7 @@ void AocMenu::pollContentStatus()
             delete menu->handler;
         }
         {
-            AocPollHandler *created = FUN_00233fcc(menu->handlerStorage, 5);
+            AocPollHandler *created = reinterpret_cast<AocPollHandler *>(FUN_00233fcc(menu->handlerStorage, 5));
             menu->step = 3;
             menu->handler = created;
         }

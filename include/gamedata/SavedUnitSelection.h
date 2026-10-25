@@ -76,4 +76,13 @@ typedef char SavedUnitSelectionEditorOffsetsCheck[
     offsetof(SavedUnitSelection, editor.stats) == 0x28 &&
     offsetof(SavedUnitSelection, active) == 0x5C &&
     sizeof(SavedUnitSelectionResource) == 8 && sizeof(SavedUnitSelection) == 0x2FC ? 1 : -1];
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_00168980(u32 id);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

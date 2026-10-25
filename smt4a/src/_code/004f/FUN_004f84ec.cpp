@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the FUN_00100d60 call differs (retail sets the path pointer first). */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *FUN_00100d60(const char *string, s32 c);
 s32 findRecordByKey(const char *name);
-void asdLoadFileAsyncSimple(const char *path, void **data, s32 a);
 
 /* Resets the owner's effect slot to "ef_d_niyari" and starts loading its file unless a record already provides it. */
 u32 FUN_004f84ec(EffectOwner *owner)
@@ -55,7 +55,7 @@ u32 FUN_004f84ec(EffectOwner *owner)
     char *fullPath = path;
     libc_strcpy(slot->name, FUN_00100d60(fullPath, '/') + 1);
     if (findRecordByKey(slot->name) == 0xff) {
-        asdLoadFileAsyncSimple(fullPath, &slot->data, 1);
+        asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&slot->data), 1);
         slot->flags |= 1;
     }
     return 1;

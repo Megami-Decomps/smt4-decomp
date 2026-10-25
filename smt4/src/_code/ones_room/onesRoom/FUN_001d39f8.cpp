@@ -2,6 +2,7 @@
 #include "ones_room/onesRoom.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct RoomScriptProcess {
     u8 unk000[0x108];
@@ -20,8 +21,6 @@ void scrScriptProcessStartEntry(RoomScriptProcess *, s32);
 void FUN_00282bfc(s32, s32);
 s32 onesRoomTeardown(u32);
 void onesRoomSetEnabled(void);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32,
-                          s32 (*)(u32), void (*)(void), void *);
 extern OnesRoom *g_onesRoom;
 
 /* Create the room script, UI, and lifetime job. */
@@ -71,7 +70,6 @@ void FUN_001d39f8(s32 inactive)
         FUN_00282bfc(0, 0xFF);
         FUN_00282bfc(1, 0xFF);
     }
-    g_onesRoom->job = asdProcessCreateSimple("onesRoom C", 2, 0, 0,
-        onesRoomTeardown, onesRoomSetEnabled, g_onesRoom);
+    g_onesRoom->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("onesRoom C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(onesRoomTeardown), reinterpret_cast<AsdProcFunc>(onesRoomSetEnabled), reinterpret_cast<u32>(g_onesRoom));
 }
 }

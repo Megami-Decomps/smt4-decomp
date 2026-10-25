@@ -107,4 +107,12 @@ struct WhisperAnimationView {
     WhisperLineAnimation lines[5]; // 0xb4
 };
 
+extern "C" {
+u8 partyPanelGetFlag(void);
+}
+
+extern "C" {
+u8 *gameDataBlockGetArea28350(void);
+}
+
 #endif

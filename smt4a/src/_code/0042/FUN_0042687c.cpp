@@ -1,5 +1,6 @@
 /* NON_MATCHING: the mode byte and the push {r0-r3, r4-r6, lr} spill match (memcpy of the parameter); armcc orders/merges the command stores differently from retail (retail: strd first/second, stm count/descriptor/buffer) */
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 #include "nn/Result.h"
 #include <string.h>
 
@@ -11,15 +12,15 @@ u32 FUN_0042687c(u32 handle, u8 mode, u32 first, u32 second, u32 buffer, s32 cou
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
 
-    command->header = 0x10020104;
+    nn::os::SetIpcWord(command, 0, 0x10020104);
     memcpy(&command->words[0], &mode, sizeof(mode));
-    command->words[1] = first;
-    command->words[2] = second;
-    command->words[3] = count;
-    command->words[4] = (count << 5) | 10;
-    command->words[5] = buffer;
-    command->words[7] = handle;
-    command->words[6] = (count * 0x180) | 0xc;
+    nn::os::SetIpcWord(command, 2, first);
+    nn::os::SetIpcWord(command, 3, second);
+    nn::os::SetIpcWord(command, 4, count);
+    nn::os::SetIpcWord(command, 5, (count << 5) | 10);
+    nn::os::SetIpcWord(command, 6, buffer);
+    nn::os::SetIpcWord(command, 7, (count * 0x180) | 0xc);
+    nn::os::SetIpcWord(command, 8, handle);
     s32 result = nn::svc::SendSyncRequest(DAT_005c149c);
     return nnResultIsSuccess(result) ? command->words[0] : static_cast<u32>(result);
 }

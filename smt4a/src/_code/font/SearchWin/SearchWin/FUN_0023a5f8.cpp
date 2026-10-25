@@ -1,37 +1,30 @@
 /* NON_MATCHING: readable rebuild from asm of the search window's loading-dots draw (title-scene variant of FUN_0023a5f8); armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
-
-/* The title scene (its state stacks live at 0x1258 and 0x12B8). */
-struct TitleScene {
-    /* 0x0000 */ u8 unk0000[0x1258];
-    /* 0x1258 */ RenderStateStack firstStack;
-    /* 0x1278 */ u8 unk1278[0x40];
-    /* 0x12B8 */ RenderStateStack secondStack;
-};
+#include "Model/MoriModelShadowMap.h"
 
 /* Pushes the evaluated state on the title scene's first stack. */
-static __inline void titleScenePushFirst(TitleScene *scene, s32 state)
+static __inline void titleScenePushFirst(RenderCtxA *scene, s32 state)
 {
-    renderStackPushCounted(&scene->firstStack, state);
+    renderStackPushCounted(&scene->stackA, state);
 }
 
 /* Pushes the evaluated state on the title scene's second stack. */
-static __inline void titleScenePushSecond(TitleScene *scene, s32 state)
+static __inline void titleScenePushSecond(RenderCtxA *scene, s32 state)
 {
-    renderStackPushCounted(&scene->secondStack, state);
+    renderStackPushCounted(&scene->stackB, state);
 }
 
 /* Pops the title scene's first stack. */
-static __inline void titleScenePopFirst(TitleScene *scene)
+static __inline void titleScenePopFirst(RenderCtxA *scene)
 {
-    renderStackPop(&scene->firstStack);
+    renderStackPop(&scene->stackA);
 }
 
 /* Pops the title scene's second stack. */
-static __inline void titleScenePopSecond(TitleScene *scene)
+static __inline void titleScenePopSecond(RenderCtxA *scene)
 {
-    renderStackPop(&scene->secondStack);
+    renderStackPop(&scene->stackB);
 }
 
 /* The run window (only the fields read here). */
@@ -56,16 +49,14 @@ struct LayoutPoint {
 
 extern "C" {
 extern RunWin *DAT_0057f584;
-extern TitleScene *g_renderCtx;
 
-void FUN_00157558(TitleScene *scene);
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_001834a4(s32 group, s32 part);
 void FUN_00162790(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
 void FUN_00183bb0(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
-f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 u32 FUN_001692ac(s32 a, s32 b);
@@ -77,13 +68,13 @@ u8 FUN_0023a5f8(void)
     RunWin *win = DAT_0057f584;
     if (win->active != 0 && win->visible != 0) {
         FUN_00157558(g_renderCtx);
-        TitleScene *first = g_renderCtx;
+        RenderCtxA *first = g_renderCtx;
         titleScenePushFirst(first, FUN_001692ac(1, 0));
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         FUN_00164b5c(2, 8, 0x14, x, y, 101);
-        TitleScene *scene = g_renderCtx;
+        RenderCtxA *scene = g_renderCtx;
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         FUN_00164b5c(2, 8, 0x15, x, y, 102);
         titleScenePopSecond(g_renderCtx);

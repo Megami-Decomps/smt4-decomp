@@ -18,7 +18,6 @@ struct RowTransitionSprites {
 };
 
 extern "C" {
-void uiSpriteSelectAnim(UiSpriteState* sprite, u32 animation);
 void pairSetFirstResetSecond(UiSpriteState* sprite, u32 value);
 s32 FUN_00291e14(void);
 }

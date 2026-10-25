@@ -1,5 +1,6 @@
 /* NON_MATCHING: loop constant register allocation (retail r3/ip/r1/r5 vs r5/r6/r3/r7) and address-computation order differ; the null-callback path now matches. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct GfxAttributeLocalView {
     u32 unk00;             // 0x00
@@ -30,7 +31,6 @@ struct GfxStateLocalView {
 
 extern "C" {
 extern void* (*g_gfxAllocateCallback)(u32, u32, u32, u32);
-void memClear(void* destination, u32 size);
 
 // Allocate and clear the graphics state, then initialize its sixteen entry defaults.
 GfxStateLocalView* FUN_00137c14(void)

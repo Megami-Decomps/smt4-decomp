@@ -1,5 +1,6 @@
 /* Requests the shop sequence using script arguments or a queued shop selection. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct ShopRequest {
     u8 pending;
@@ -11,7 +12,6 @@ extern ShopRequest *DAT_0044df80;
 void *asdOperatorNew(u32 bytes);
 void *jyoucyuGetTableEntry(u32 index);
 s32 scrGetArg(u32 index);
-void asdSequenceRequest(u32 sequence, const void *arguments, u32 bytes);
 }
 
 static __inline ShopRequest *shopGetQueuedRequest(void)

@@ -1,5 +1,6 @@
 /* NON_MATCHING: saved integer registers and final integer-to-float coordinate scheduling differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // The layout context follows the known owner prefix, beyond its recovered extent.
 struct HighlightedPanelTextView {
@@ -10,7 +11,6 @@ struct HighlightedPanelTextView {
 
 extern "C" {
 extern PanelTextDefaultsPrefixA DAT_0057f0ac;
-const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
 u32 FUN_002a4b28(u16 textId);
 u32 FUN_00180118(u16 textId);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
@@ -27,12 +27,12 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     u32 style;
     u32 color;
     if (alternateStyle != 0) {
-        base = FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F);
+        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F));
         offsetEntry = 0x499;
         color = highlighted == 0 ? 0x9FE7FFFFu : 0xF5FF9FFFu;
         style = 3;
     } else {
-        base = FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E);
+        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E));
         offsetEntry = 0x48B;
         style = 2;
         color = 0xFFFFFFFFu;
@@ -45,8 +45,8 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     } else {
         textValue = DAT_0057f0ac.fallbackTextValue;
     }
-    const PanelTextLayoutEntryPrefixA *offset = FUN_0018349c(
-        reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry);
+    const PanelTextLayoutEntryPrefixA *offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(
+        reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
     drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout),
         style, color, textValue,
         static_cast<f32>(static_cast<s32>(offset->x) + baseX),

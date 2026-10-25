@@ -54,4 +54,8 @@ typedef char GauntletAppMenuListLayoutCheck[
     offsetof(GauntletAppMenuWork, list.sprites) == 0x2D8 &&
     sizeof(GauntletAppMenuWork) == 0x534 ? 1 : -1];
 
+extern "C" {
+void devilDispatchTextureResource(u32 id, u32 argument, u32 first, u32 second, s32 resolveDemon);
+}
+
 #endif

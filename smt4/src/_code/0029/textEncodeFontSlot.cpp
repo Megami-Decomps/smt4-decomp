@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 void memClearWords(void *buffer, u32 size);

@@ -3,9 +3,9 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-int asdMdlManagerDestroy(u32 handle);
 int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 }
@@ -95,5 +95,14 @@ struct ModelResourceOwner {
     /* 0x2C */ s32 state;
 };
 typedef char ModelResourceOwnerSizeCheck[sizeof(ModelResourceOwner) == 0x30 ? 1 : -1];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *FUN_0040619c(const void *owner, u32 index);
+#ifdef __cplusplus
+}
+#endif
 
 #endif

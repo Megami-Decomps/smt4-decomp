@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the literal pool order and where the g_engineResourceHandles address is loaded differ */
 #include "shard/W5_W5Match7_ResourceHandles.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 /* The partner topic window's state. */
 class PartnerTopic {
@@ -40,8 +41,6 @@ extern "C" {
 void FUN_0035d080(void *);
 void engineResourceSetSecondaryValue(void *);
 void FUN_0037d994(void *);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay, TopicCallback onUpdate,
-                           TopicCallback onEnd, void *work);
 void taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, TopicCallback onUpdate, void *onEnd,
                     void *work, u32 owner);
 void FUN_003f5598(PartnerTopic *topic);
@@ -51,7 +50,7 @@ void FUN_00370d84(void)
 {
     PartnerTopic *topic;
     g_engineResourceHandles.secondary = topic = new PartnerTopic();
-    topic->process = asdProcessCreateSimple("PartnerTopic PROC", 4, 0, 0, FUN_0035d080, NULL, NULL);
+    topic->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("PartnerTopic PROC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0035d080), NULL, NULL);
     taskCreateDraw("PartnerTopic UL", 0x81, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, topic->process);
     taskCreateDraw("PartnerTopic UR", 0xdd, 0, 0, engineResourceSetSecondaryValue, NULL, NULL, topic->process);
     taskCreateDraw("PartnerTopic DD", 0xeb, 0, 0, FUN_0037d994, NULL, NULL, topic->process);

@@ -108,7 +108,7 @@ int FUN_0013b790(...);
 int randomStateSeed(...);
 int systemInitializeAndResetSharedState(...);
 int asdGxCommandListCreate(...);
-int FUN_001642e4(...);
+int asdLoadFileSyncNoContext(...);
 int jyoucyuGetTableEntry(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
@@ -388,7 +388,7 @@ extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: FUN_0015a5c0. */
 /* Supplied declaration required: appletIsExitRequested. */
 /* Supplied declaration required: FUN_00161a10. */
-/* Supplied declaration required: FUN_001642e4. */
+/* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned long long FUN_00170390(unsigned int);
@@ -521,7 +521,7 @@ void FUN_00135c30(void)
   temp_v43 = 8;
   temp_v45 = 4;
   FUN_001399b0(&temp_v37,0);
-  FUN_001642e4(&LAB_0013605c,0,1,0x80);
+  asdLoadFileSyncNoContext(&LAB_0013605c,0,1,0x80);
   gfxSetupResGraphicsFile();
   temp_v3 = FUN_0013a608(1);
   FUN_0013b4ac();

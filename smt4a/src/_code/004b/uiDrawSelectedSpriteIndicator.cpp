@@ -1,12 +1,12 @@
 #include "ui/SpriteIndicator.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 SpriteInfo *FUN_001834a4(u32 group, s32 sprite);
 void efctSetSpeed(f32 speed);
-u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
 // Draw the selected indicator at the sprite's origin using a temporary blend mode.
 void uiDrawSelectedSpriteIndicator(SpriteIndicatorOwner *owner, s32 x, s32 y, f32 speed)

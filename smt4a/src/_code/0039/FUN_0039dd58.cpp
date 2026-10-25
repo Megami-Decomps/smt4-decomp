@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail copies the returned pointer into r1 before adding 0x100; built adds straight from r0 */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -15,8 +16,6 @@ typedef struct BattleActor {
 } BattleActor;
 
 extern BattleActor *FUN_001568f8(void *battle, u32 index);
-extern u32 scrGetArg(u32 index);
-extern void scrSetResult(s32 result);
 
 static inline bool statusHasBit(StatusFlags *status, u32 bit)
 {

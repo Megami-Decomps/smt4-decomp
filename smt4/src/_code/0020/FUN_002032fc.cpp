@@ -12,16 +12,15 @@ extern "C" void FUN_002032fc(ScalarEffectKeys *work, const ScalarEffectKeys *sou
         work->duration = source->keys[current + distance].frame - source->keys[current].frame;
         if (work->duration <= 0)
             continue;
-        ScalarEffectKey *next = &work->keys[current + distance];
-        if (next->value != 0 && next->randomRange > 0) {
-            s32 adjustment = static_cast<s32>(FUN_00291620(2, next->randomRange, 1));
+        if (work->keys[current + distance].value != 0 && work->keys[current + distance].randomRange > 0) {
+            s32 adjustment = static_cast<s32>(FUN_00291620(2, work->keys[current + distance].randomRange, 1));
             work->keys[work->nextKey + distance].value -= adjustment;
         }
         s32 nextIndex = work->nextKey + distance;
         const ScalarEffectKey *previous = &work->keys[work->nextKey];
-        next = &work->keys[nextIndex];
-        work->step = static_cast<f32>(next->value - previous->value) /
-                     static_cast<f32>(next->frame - previous->frame);
+        const ScalarEffectKey *next = &work->keys[nextIndex];
+        f32 frameSpan = static_cast<f32>(next->frame - previous->frame);
+        work->step = static_cast<f32>(next->value - previous->value) / frameSpan;
         work->target = static_cast<f32>(next->value);
         work->nextKey = nextIndex;
         return;

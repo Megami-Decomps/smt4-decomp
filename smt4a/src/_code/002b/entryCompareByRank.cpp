@@ -1,9 +1,8 @@
 #include "common.h"
+#include "gamedata/FlagsB.h"
 
 extern "C" {
 
-extern s32 flagsBGetBit0(u32 id);
-extern s32 flagsBGetBit1(u32 id);
 
 /* qsort comparison of two entries by rank, then by their first halfword (descending). */
 s32 entryCompareByRank(const u16 *a, const u16 *b)

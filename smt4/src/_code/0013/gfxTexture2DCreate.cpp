@@ -1,6 +1,6 @@
 #include "gfx/Texture2D.h"
+#include "AsdSDK/AsdMemUtil.h"
 extern "C" {
-void memClear(void*, u32);
 extern void* (*g_gfxAllocateCallback)(u32, u32, u32, u32);
 
 // Allocates a texture with nearest filtering, repeated coordinates, and cleared resource state.

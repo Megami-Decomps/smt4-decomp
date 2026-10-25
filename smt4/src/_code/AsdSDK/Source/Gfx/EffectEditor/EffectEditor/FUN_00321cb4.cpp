@@ -1,6 +1,8 @@
+#include "util/EffMenuListAppend.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00321cb4` (_code @ 0x321cb4, 0x80c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "gfx/EffectEditorStorage.h"
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 extern "C" {
 
 int CONCAT44(double, double);
@@ -9,7 +11,6 @@ int FUN_00249678(void);
 int FUN_0024c418(void);
 int asdDebugLog(...);
 int padAlternateButtonIndex(...);
-int effMenuListAppend(...);
 int FUN_0028836c(void);
 int FUN_002a2c00(void);
 int phaseCosInterpolate(void);
@@ -368,11 +369,11 @@ LAB_00321f54:
     *(int *)(temp_v11 + 0x18) = (int)((unsigned long long)in_d9 >> 0x20);
     *(unsigned int *)(temp_v11 + 0x1c) = temp_v13;
     *(unsigned int *)(temp_v11 + 4) = 7;
-    effMenuListAppend(temp_v11,1);
+    effMenuListAppend(reinterpret_cast<EffMenuNode *>(temp_v11),1);
     temp_v13 = 0x10000;
     memAlloc(0x10000,0x100,0,0x68,0x10,1);
     __aeabi_memcpy4();
-    effMenuListAppend(temp_v13,2);
+    effMenuListAppend(reinterpret_cast<EffMenuNode *>(temp_v13),2);
     temp_v10 = temp_v10 + 1;
   } while (temp_v10 < 9);
   temp_v28 = -(float)in_d10;

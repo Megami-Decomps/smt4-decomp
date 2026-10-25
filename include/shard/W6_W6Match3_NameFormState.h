@@ -26,4 +26,13 @@ typedef char NameFormTextOffsetCheck[offsetof(NameFormState, text) == 0x10 &&
 extern "C" void nameFormUpdate(NameFormState* form);
 
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *recordTableGet(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

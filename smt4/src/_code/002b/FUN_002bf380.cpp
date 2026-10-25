@@ -1,5 +1,8 @@
 /* NON_MATCHING: loop register allocation differs (flags in r6, packet stored as two stm pairs, table reloaded into lr); result-1 spill now matches. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "util/TexTableFindNode.h"
+#include "util/TexTableFindNode.h"
+#include "gfx/SpritePartDraw.h"
 
 struct SpritePartPlacement {
     s32 table, sprite;
@@ -26,13 +29,12 @@ struct SpritePartDraw {
 };
 typedef char SpritePartPlacementSizeCheck[sizeof(SpritePartPlacement) == 0x14 ? 1 : -1];
 extern "C" {
-TexSprite *texTableFindNode(u32 table, u32 sprite);
 s32 FUN_002af63c(SpriteDrawFile *file, TexSprite *sprite, SpritePartDraw *draw);
 
 u32 FUN_002bf380(u32 flags, u32 table, u32 spriteId, s32 x, s32 y, s32 z)
 {
     u32 result = 1;
-    TexSprite *sprite = texTableFindNode(table, spriteId);
+    TexSprite *sprite = reinterpret_cast<TexSprite *>(texTableFindNode(table, spriteId));
     if (!sprite)
         return 0;
     for (s32 i = 0; i < sprite->frameCount; ++i) {

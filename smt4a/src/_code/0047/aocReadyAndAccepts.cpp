@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/AocReadyAndAccepts.h"
 
 extern "C" {
 

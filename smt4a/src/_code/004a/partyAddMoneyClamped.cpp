@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match4_PartyWallet.h"
+#include "gamedata/PartyMoney.h"
 
 
 extern "C" {

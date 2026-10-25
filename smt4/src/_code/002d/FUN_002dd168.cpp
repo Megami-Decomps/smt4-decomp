@@ -10,7 +10,7 @@ int FUN_0024b5f0(...);
 int FUN_0024b660(...);
 int randomAdvanceShiftRegister(...);
 int FUN_0024b7bc(int, float *);
-int FUN_0024b830(...);
+int shiftRandomNextFraction(...);
 int gfxQuaternionWorkspaceBuildMatrix(void);
 int FUN_002b70cc(void);
 int VectorSignedToFloat(double, int);
@@ -79,7 +79,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_0024b660. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
 /* Supplied declaration required: FUN_0024b7bc. */
-/* Supplied declaration required: FUN_0024b830. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 extern int effGetFrameCounter(void);
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
 /* Supplied declaration required: FUN_002b70cc. */
@@ -161,7 +161,7 @@ void FUN_002dd168(int param_1)
           temp_v24 = *(float *)(param_1 + 4);
         }
         else {
-          FUN_0024b830(0);
+          shiftRandomNextFraction(0);
           temp_v19 = (float)VectorUnsignedToFloat
                                     (*(unsigned int *)(param_1 + 4),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v9 = (float)(int)(temp_v9 * ((float)temp_v17 - pfVar9[10]) * temp_v19);
@@ -176,7 +176,7 @@ void FUN_002dd168(int param_1)
         in_fpscr = temp_v6 | ((unsigned int)((temp_v9 != temp_v9) || (temp_v21 != temp_v21)) << 0x1c);
         temp_v0 = (unsigned char)(temp_v6 >> 0x18);
         if (!((unsigned char)((temp_v0 >> 6) & 1) || temp_v0 >> 7 != ((unsigned char)(in_fpscr >> 0x1c) & 1))) {
-          FUN_0024b830();
+          shiftRandomNextFraction();
           temp_v19 = (float)VectorUnsignedToFloat(pfVar9[9],(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v9 = *(float *)(param_1 + 0x14) + temp_v19 * temp_v9 * ((float)temp_v17 - pfVar9[10]);
           *(float *)(param_1 + 0x14) = temp_v9;
@@ -269,11 +269,11 @@ void FUN_002dd168(int param_1)
               pfVar6[1] = temp_v2;
               pfVar6[2] = temp_v10;
             }
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v9 = temp_v9 - temp_v20;
             temp_v10 = (float)((unsigned long long)temp_v22 >> 0x20);
             temp_v2 = temp_v9 * (float)temp_v22;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             DAT_004ea924 = (temp_v9 - temp_v20) * (float)temp_v22;
             temp_v9 = romwright_sqrt_4(temp_v2 * temp_v2 + temp_v10 * temp_v10 + DAT_004ea924 * DAT_004ea924);
             temp_v4 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 < temp_v10) << 0x1f) |
@@ -308,28 +308,28 @@ void FUN_002dd168(int param_1)
             pfVar6[3] = DAT_004ea91c;
             pfVar6[4] = temp_v2;
             pfVar6[5] = temp_v12;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v9 = ((temp_v21 - pfVar9[0x34]) + temp_v9 * pfVar9[0x34]) * pfVar9[0x33];
             pfVar6[0xb] = temp_v9;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v16 = ((temp_v21 - pfVar9[0x37]) + temp_v9 * pfVar9[0x37]) * pfVar9[0x36];
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v11 = pfVar9[0x39];
             temp_v15 = pfVar9[0x38];
             pfVar6[8] = temp_v16;
             temp_v13 = (float)VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v16 = ((temp_v21 - temp_v11) + temp_v9 * temp_v11) * temp_v15 - temp_v16;
             pfVar6[9] = temp_v16 / temp_v13;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v9 = ((temp_v21 - pfVar9[0x3b]) + temp_v16 * pfVar9[0x3b]) * pfVar9[0x3a];
             pfVar6[10] = temp_v9;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             temp_v16 = (float)temp_v23;
             pfVar6[6] = temp_v9 * temp_v16;
             temp_v9 = temp_v9 * temp_v16 * temp_v19;
             FUN_002b70cc();
             pfVar6[7] = temp_v9;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             DAT_004ea92c = (temp_v9 - temp_v20) * (float)temp_v22 * pfVar9[0x32];
             if ((temp_v26 & 1) != 0) {
               DAT_004ea91c = (float)temp_v17 * DAT_004ea92c;
@@ -361,20 +361,20 @@ void FUN_002dd168(int param_1)
             *pfVar7 = temp_v9;
             pfVar7[1] = temp_v2;
             pfVar7[2] = temp_v12;
-            FUN_0024b830(0);
+            shiftRandomNextFraction(0);
             pfVar6[0xc] = (temp_v21 - pfVar9[0x1b]) + temp_v14 * pfVar9[0x1b];
             if (temp_v28 == 2) {
               pfVar6[0xd] = temp_v10;
               pfVar6[0xe] = temp_v21;
             }
             else {
-              FUN_0024b830(0);
+              shiftRandomNextFraction(0);
               pfVar6[0xe] = (temp_v21 - pfVar9[0x26]) + temp_v14 * pfVar9[0x26];
               if (temp_v28 != 1) {
                 pfVar6[0xd] = temp_v10;
               }
               else {
-                FUN_0024b830(0);
+                shiftRandomNextFraction(0);
                 temp_v4 = 0;
                 pfVar6[0xd] = temp_v14 * temp_v16;
                 randomAdvanceShiftRegister();

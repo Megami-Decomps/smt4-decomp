@@ -19,7 +19,7 @@ typedef struct TitleWork {
 extern u32 g_titleScene;
 
 void FUN_001137fc(s32 arg);
-void FUN_002c39a4(u32 scene);
+void renderCtxSelectStereoLayout(u32 scene);
 s32 FUN_002bff10(s32 arg);
 TitleWork *jobGetWork(void);
 
@@ -36,7 +36,7 @@ u8 FUN_0010a110(void)
         return 0;
     }
     if (FUN_002bff10(0) == 0 && work->ready != 0) {
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         FUN_001137fc(0);
     }
     return 0;

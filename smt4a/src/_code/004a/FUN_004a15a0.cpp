@@ -1,4 +1,4 @@
-/* NON_MATCHING: sound branch placement, paired state stores, and flags write-back addressing differ. */
+/* NON_MATCHING: the sound branch layout and the clamp now match; retail stores the state/step pair with STRD, forms the flags write-back address from a base register and reads the hasValue/unk861 bytes through a +0x800 base. */
 #include "classes/Obj55c8d0.h"
 #include "shard/S1ListMenu.h"
 #include "util/CalleeContracts.h"
@@ -48,10 +48,10 @@ void FUN_004a15a0(Obj55c8d0 *menu)
     if (!changed)
         return;
 
-    if (menu->hasValue)
-        sysPlaySe(menu->unk861[0] == 1 ? 0x4E : 0x4F);
-    else
+    if (!menu->hasValue)
         sysPlaySe(0x2F);
+    else
+        sysPlaySe(menu->unk861[0] == 1 ? 0x4E : 0x4F);
     FUN_0032cfe0(menu);
     FUN_003343f0(0);
     state->state = 2;
@@ -61,8 +61,7 @@ void FUN_004a15a0(Obj55c8d0 *menu)
     target->vtbl->apply(target, &menu->flags);
     reinterpret_cast<BibleSelectionTarget *>(menu->touchSelection.unk34)->flags |= 0x1000;
     s32 count = reinterpret_cast<const CountView *>(&menu->flags)->count;
-    if (count >= 10)
-        count = 10;
+    count = count < 10 ? count : 10;
     FUN_004d05c4(&menu->touchSelection, 0x14, 0x40E, count);
     menu->touchSelection.soundEnabled = 1;
 }

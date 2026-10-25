@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 164 rows); register allocation and constant hoisting (0.26f parallax depth, layer ids) differ */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "util/Vec2Fixed.h"
 #include "util/PackNibbles.h"
 
 // Draw-state stack embedded in the render context.
@@ -43,7 +44,6 @@ extern "C" {
 
 extern RenderCtx* g_renderCtx;
 
-s32 vec2GetXInt(void* sprite);
 s32 vec2GetYInt(void* sprite);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void efctSetSpeed(f32 speed);

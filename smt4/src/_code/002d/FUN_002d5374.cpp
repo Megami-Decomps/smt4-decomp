@@ -3,6 +3,7 @@
 #include "map/MapEnvironment.h"
 #include "map/lmapMain.h"
 #include <math.h>
+#include "AsdSDK/Source/Gfx/Effect/effParts.h"
 
 extern "C" {
 extern MapEnvironmentEntry DAT_0049fb1c;
@@ -10,7 +11,6 @@ extern MapCameraWork *DAT_004474f4;
 extern LmapScene *g_lmapScene;
 void mapEnvironmentApplySelectedEntry();
 u32 FUN_0025bb34(u32 group, const char *name, u32 flags);
-void asdModelSlotSetTranslation(u32 slot, s32 index, f32 x, f32 y, f32 z);
 
 // Place the two player lights along the camera-to-target direction.
 void FUN_002d5374()

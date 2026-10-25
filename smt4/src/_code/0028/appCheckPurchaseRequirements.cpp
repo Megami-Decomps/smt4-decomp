@@ -1,5 +1,6 @@
 /* NON_MATCHING: narrowed-id/entry/default-value registers, level-load order and final comparison orientation differ from retail. */
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ typedef struct PlayerData002829d4 {
 typedef s32 Compare002829d4(const UnsignedRecordKey32 *a, const UnsignedRecordKey32 *b);
 
 void *dataTableGet(s32 table, s32 slot);
-Entry002829d4 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 Entry002829d4 *libc_bsearch(const Entry002829d4 *key, const Entry002829d4 *base, u32 count, u32 size, Compare002829d4 *compare);
 PlayerData002829d4 *gameGetPlayerData(void);
@@ -47,7 +47,7 @@ u8 appCheckPurchaseRequirements(u32 id)
     if (table == NULL) {
         return 2;
     }
-    entries = dataTableGetEntries(table);
+    entries = reinterpret_cast<Entry002829d4 *>(dataTableGetEntries(table));
     count = dataTableGetCount(table);
     key.id = id;
     entry = libc_bsearch(&key, entries, count, sizeof(Entry002829d4), unsignedKeyRecordCompare);
@@ -71,7 +71,7 @@ u8 appCheckPurchaseRequirements(u32 id)
     }
     table = dataTableGet(11, 0);
     if (table != NULL) {
-        entries = dataTableGetEntries(table);
+        entries = reinterpret_cast<Entry002829d4 *>(dataTableGetEntries(table));
         count = dataTableGetCount(table);
         key.id = id;
         entry = libc_bsearch(&key, entries, count, sizeof(Entry002829d4), unsignedKeyRecordCompare);

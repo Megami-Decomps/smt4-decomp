@@ -22,4 +22,14 @@ typedef struct AsdLoadJob {
     /* 0x14 */ u32 *result;    /* cleared at the start, set when the load finishes */
 } AsdLoadJob;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Starts an asynchronous load with the default request priority; *result is cleared now and
+ * set when the load finishes. */
+void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 flags);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

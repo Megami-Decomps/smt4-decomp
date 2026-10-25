@@ -1,6 +1,8 @@
+#include "util/DrawTextAtRelativePosition.h"
 /* NON_MATCHING: retail's prologue pushes r0-r3 with the saved registers and reads the entry argument from its pushed slot ([sp+96]) instead of keeping it in a register (frame 76 vs 92); the panel/alternate/textId registers also differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/DrawTextAtRelativePosition.h"
 
 namespace {
 struct ProfileEntryDrawView {
@@ -26,7 +28,7 @@ static __inline TextLayoutContextA *panelLayout(ProfileEntryDrawView *panel)
 }
 
 extern "C" {
-const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
+const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 DemonCaptionRecord *dataTable00FindById(u16 id);
 void FUN_004a7dc8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style);
 void FUN_004a7a50(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
@@ -34,8 +36,6 @@ void FUN_004a7cb0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 altern
 void FUN_004a7fb8(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 style, s32 fade, f32 scale);
 void FUN_004a7814(ProfileEntryDrawView *panel, u32 first, s32 entry, s32 alternate, s32 fade, u32 second);
 s32 textFormatBuffer(char *destination, const char *format, ...);
-void drawTextAtRelativePosition(TextLayoutContextA *context, u32 style, s32 x, s32 y, s32 first, s32 second,
-                                u32 color, s32 fade, const char *text);
 
 /* Draws one entry of the profile panel: its icon, tags and the two number captions. */
 void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 textId, f32 scale)
@@ -47,9 +47,9 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     u32 opacity = (u32)(scale * 255.0f) & 0xff;
     const PanelTextLayoutEntryPrefixA *base;
     if (alternate == 0) {
-        base = FUN_0018349c(panelLayout(panel), entry + 0x40E);
+        base = layoutFindTableEntry(panelLayout(panel), entry + 0x40E);
     } else {
-        base = FUN_0018349c(panelLayout(panel), entry + 0x42F);
+        base = layoutFindTableEntry(panelLayout(panel), entry + 0x42F);
     }
     s32 baseX = base->x;
     s32 baseY = base->y;
@@ -77,10 +77,10 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     const PanelTextLayoutEntryPrefixA *captionEntry;
     u32 color;
     if (alternate != 0) {
-        captionEntry = FUN_0018349c(panelLayout(panel), 0x49D);
+        captionEntry = layoutFindTableEntry(panelLayout(panel), 0x49D);
         color = 0xFBEB39FF;
     } else {
-        captionEntry = FUN_0018349c(panelLayout(panel), 0x48F);
+        captionEntry = layoutFindTableEntry(panelLayout(panel), 0x48F);
         color = 0xFFC90FFF;
     }
     s32 captionX = captionEntry->x + baseX;
@@ -95,9 +95,9 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     }
     const PanelTextLayoutEntryPrefixA *detailEntry;
     if (alternate != 0) {
-        detailEntry = FUN_0018349c(panelLayout(panel), 0x4A1);
+        detailEntry = layoutFindTableEntry(panelLayout(panel), 0x4A1);
     } else {
-        detailEntry = FUN_0018349c(panelLayout(panel), 0x493);
+        detailEntry = layoutFindTableEntry(panelLayout(panel), 0x493);
     }
     s32 detailX = detailEntry->x + baseX;
     s32 detailY = detailEntry->y + baseY;

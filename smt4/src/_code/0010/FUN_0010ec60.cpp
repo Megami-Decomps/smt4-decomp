@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 

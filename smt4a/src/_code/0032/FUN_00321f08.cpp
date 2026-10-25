@@ -1,12 +1,11 @@
 /* NON_MATCHING: callbacks and render restoration recovered; late-update callback addressing and tail block placement still differ. */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 extern EffMiscKind g_effMiscKinds[];
-extern RenderCtxA* g_renderCtx;
 void FUN_00145e24(RenderCtxA* context, u32 resource);
-void FUN_00157558(RenderCtxA* context);
 void uiSpriteRefreshMode(RenderCtxA* context);
 s32 effGetFrameStep(void);
 

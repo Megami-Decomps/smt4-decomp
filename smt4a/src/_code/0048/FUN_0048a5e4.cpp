@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0048a5e4` (_code @ 0x48a5e4, 0xaf8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -52,7 +53,6 @@ extern int gameFlagsGetBlock(void);
 extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern unsigned int gameGetIndexedSlotMember(unsigned int);
-extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
@@ -197,7 +197,7 @@ void FUN_0048a5e4(int param_1)
       FUN_00162790(2,0xffffffff,temp_v9);
     }
   }
-  temp_v2 = packNibblesAndByte(6,1,0);
+  temp_v2 = packNibblesAndByte(6, 1, 0);
   renderStackPushIndexed(g_renderCtx,6,temp_v2);
   FUN_0049368c(param_1 + 0x4d0,4000,0,0,DAT_00587f20,1);
   FUN_0049368c(param_1 + 0x4d0,0xfa1,0,0,DAT_00587f20,1);

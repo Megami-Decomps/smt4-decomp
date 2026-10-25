@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* A 0x8C-byte UI sprite; only the field this initializer writes is named. */
 struct StatusSprite {
@@ -65,9 +66,6 @@ static const s32 sKeysFifth[77] = {
 extern "C" {
 extern StatusDownWork *g_statusDown;
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
-void memClear(void *data, u32 size);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 FUN_001ca748(u32 handle);
@@ -95,8 +93,7 @@ void statusDownCreate(void)
     }
     StatusDownWork *status = g_statusDown;
     memClear(status, sizeof(StatusDownWork));
-    status->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"), 2, 0, 0,
-                                         FUN_001ca748, NULL, 0);
+    status->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMD CALC"), 2, 0, 0, FUN_001ca748, NULL, 0);
     status->drawTask = taskCreateDraw(reinterpret_cast<const s8 *>("TMD DDRAW"), 0xe7, 0, 0,
                                       FUN_001cca14, NULL, 0, reinterpret_cast<void *>(status->job));
     status = g_statusDown;

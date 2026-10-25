@@ -1,4 +1,5 @@
 #include "gamedata/DevilRecordA.h"
+#include "util/CalleeContracts.h"
 
 struct BaseTextureRecord {
     /* 0x00 */ u8 unk00[2];

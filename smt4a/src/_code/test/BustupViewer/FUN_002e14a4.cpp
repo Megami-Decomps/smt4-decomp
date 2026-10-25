@@ -8,8 +8,6 @@ extern "C" {
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void *asdLoadFileSyncDefault(const char *path);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 void taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 u32 spriteHandleCreate(u32 arg);

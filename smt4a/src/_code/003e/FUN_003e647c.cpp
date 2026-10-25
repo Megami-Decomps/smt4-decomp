@@ -4,7 +4,7 @@
 extern "C" {
 s32 tableGroupFindEntryIndex(u32, const char *);
 s32 scrScriptProcessStartEntry(u32, s32);
-s32 scrRunOpcodesStub(u32);
+u32 scrRunOpcodesStub(u32);
 extern const char DAT_005332dc[];
 
 // Run the shop description preamble followed by up to three item-specific scripts.

@@ -1,13 +1,10 @@
-/* Stores `value` (0/1) into bit 1 of the global flag byte. */
-#include "common.h"
+#include "gamedata/FlagsB.h"
 
 extern "C" {
 
-extern u8 *flagsBGetPtr(void);
-
-void gameFlagsSetAlternateMode(u32 unused, s8 value)
+void gameFlagsSetAlternateMode(s32 index, s8 value)
 {
-    u8 *flags = flagsBGetPtr();
+    u8 *flags = flagsBGetPtr(index);
 
     *flags = (*flags & ~2) | (value << 1);
 }

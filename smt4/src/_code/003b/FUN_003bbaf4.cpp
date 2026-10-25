@@ -4,7 +4,7 @@ extern "C" {
 
 int fileSlotLoad(int id);
 
-void FUN_003bbaf4(void)
+void FUN_003bbaf4(u32 *object)
 {
     fileSlotLoad(0x33);
 }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/SpriteTemplatePreferredDevil.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ typedef struct Record001fa498 {
     /* 0x02 */ u8 rank;
 } Record001fa498;
 
-u32 spriteTemplateGetPreferredDevilId(s32 index);
 Record001fa498 *dataTable00FindById(u32 id);
 
 /* Byte at +2 of the data-table-00 record for the id spriteTemplateGetPreferredDevilId picks for `index`. */

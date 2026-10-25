@@ -12,7 +12,6 @@ struct NpcRoomDebugWorkView {
 extern "C" {
 extern NpcRoomDebug *g_npcRoomDebug;
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
-u32 asdProcessCreateSimple(const char *name, u32 group, u32, u32, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end);
 u32 taskCreateDraw(const char *name, u32 priority, u32, u32, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, u32 parent);
 void FUN_001ed6ac(u32 handle);
 void npcRoomDebugDrawStartId(u32 handle);
@@ -28,7 +27,7 @@ void npcRoomDebugCreateTask()
     work->process = 0;
     work->unk04 = 0;
     work->unk08 = 0;
-    work->process = asdProcessCreateSimple("NpcRoomDebug Calc", 2, 0, 0, FUN_001ed6ac, NULL, NULL);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("NpcRoomDebug Calc"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001ed6ac), NULL, NULL);
     taskCreateDraw("NpcRoomDebug UDraw", 0x73, 0, 0, npcRoomDebugDrawStartId, NULL, NULL, work->process);
 }
 }

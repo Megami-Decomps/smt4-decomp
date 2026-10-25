@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00338dfc` (_code @ 0x338dfc, 0x45c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -49,7 +50,6 @@ extern int FUN_00272d44(void);
 /* Supplied declaration required: gameDataResetFloat. */
 /* Supplied declaration required: FUN_00359974. */
 extern int FUN_003e0024(void);
-extern int playerHasFlagBit(unsigned int);
 extern int FUN_003e0154(void);
 
 

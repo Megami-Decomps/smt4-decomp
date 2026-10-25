@@ -1,5 +1,6 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stdlib.h>
+#include "status/StatusCamera.h"
 
 union FusionPairBits {
     u64 packed;
@@ -20,7 +21,6 @@ struct FusionSortPreferences {
 
 extern "C" {
 extern UniteWork *g_unite;
-FusionSortPreferences *FUN_002a0d0c(void);
 s32 fusionComparePairsByRaceLevelAndId(const void *a, const void *b);
 s32 FUN_002dc7a0(const void *a, const void *b);
 s32 fusionComparePairsByParentLevelRaceId(const void *a, const void *b);
@@ -37,7 +37,7 @@ void FUN_0027f3dc(void *base, u32 count, u32 size, s32 (*compare)(const void *, 
 void FUN_00196d78(void)
 {
     UniteWork *work = g_unite;
-    const u8 *setting = &FUN_002a0d0c()->setting;
+    const u8 *setting = &reinterpret_cast<FusionSortPreferences *>(FUN_002a0d0c())->setting;
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {
         if (ascending) {

@@ -8,12 +8,12 @@ struct KindRecord {
     /* 0x23 */ u8 kind;
 };
 
-KindRecord *dataTable40FindById(void *id);
+KindRecord *dataTable40FindById(u32 id);
 
 /* Maps an entry's kind to a second category index (99 when there is no entry). */
-u32 FUN_0024c5a0(void *id)
+u32 FUN_0024c5a0(u32 id)
 {
-    if (id == NULL) {
+    if (id == 0) {
         return 99;
     }
     KindRecord *record = dataTable40FindById(id);

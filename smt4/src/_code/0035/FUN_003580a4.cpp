@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003580a4` (_code @ 0x3580a4, 0x458 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int FUN_00238f4c(int *, int);
 int FUN_0024ee68(int);
 int FUN_002ad66c(unsigned char **, int *);
-int memClear(int *, int);
 int FUN_002c567c(int *);
 int nn_cec_CTR_MessageBox_GetMessageBoxNum(int *, int);
 int rt_memcpy(int *, int, int);
@@ -139,7 +139,7 @@ unsigned int FUN_003580a4(int *param_1,unsigned int param_2,int param_3,int para
             if ((temp_v0 & 0x80000000) == 0) {
               nn_cec_CTR_MessageBox_ReadOutBoxIndex((unsigned int)param_1);
             }
-            memClear(param_1 + 0x67,0x60);
+            reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_1 + 0x67), 0x60));
             *(unsigned short *)(param_1 + 0x67) = 0x6363;
             param_1[0x68] = param_2;
             *(unsigned char *)((int)param_1 + 0x1a9) = 1;

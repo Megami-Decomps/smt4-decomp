@@ -1,4 +1,5 @@
 #include "battle/btlEffect.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: null fallback returns directly instead of retaining a zero selected ID; output stack slots and saved registers differ. */
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 s32 FUN_003e48bc(void);
@@ -9,7 +10,6 @@ s32 FUN_00187168(PartySlotA *slot);
 s32 partySlotMatchesSelected(PartySlotA *slot);
 PartySlotA *saveSlotFindSelected(void);
 s32 lcgRandomRange(u16 maximum);
-void *FUN_0019acdc(u16 id, u32 kind);
 void FUN_003f1b3c(u32 request, void *record, s32 kind, s32 *value, u32 result[3]);
 void FUN_0047f7ac(s32 enabled, u32 result);
 void btlReflectCreateKind44(s32 first, s32 second, s32 id, s32 value);
@@ -42,7 +42,7 @@ void FUN_003f0070(u32 request)
     if (selectedId != 0) {
         s32 value;
         u32 result[3];
-        void *record = FUN_0019acdc(selectedId, 1);
+        void *record = reinterpret_cast<void *>(FUN_0019acdc(selectedId, 1));
         FUN_003f1b3c(request, record, 6, &value, result);
         FUN_0047f7ac(1, result[0]);
         btlReflectCreateKind44(0, 0, selectedId, value);

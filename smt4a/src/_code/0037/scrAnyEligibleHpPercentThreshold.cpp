@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 namespace {
 inline s32 hpPercent(s32 hp, s32 maxHp)
@@ -15,7 +16,6 @@ extern "C" {
 s32 scrGetArg(s32);
 void scrSetResult(s32);
 s32 btlResolveEntryChoice(s32);
-void FUN_00301a08(s32, u32*, u32*);
 BtlCombatantEntryA* FUN_003eaf20(BtlMainStateA*);
 
 /* Check eligible HP percentages, preserving the special entry's opposite comparison. */
@@ -24,7 +24,7 @@ u32 scrAnyEligibleHpPercentThreshold(void)
     const s32 threshold = scrGetArg(0);
     const s32 kind = btlResolveEntryChoice(scrGetArg(1));
     s32 first, count;
-    FUN_00301a08(kind, reinterpret_cast<u32*>(&first), reinterpret_cast<u32*>(&count));
+    FUN_00301a08(kind, reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&first)), reinterpret_cast<s32 *>(reinterpret_cast<u32*>(&count)));
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&

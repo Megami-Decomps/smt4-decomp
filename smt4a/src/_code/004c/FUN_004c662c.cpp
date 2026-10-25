@@ -12,7 +12,7 @@ struct ReinforcementMasksView {
 extern "C" {
 extern ReinforcementMasksView DAT_005713f0;
 BtlMainStateA *btlGetMainState();
-s32 lcgRandomRange(u32);
+u32 lcgRandomRange(s32 limit);
 u16 FUN_004bc420(u32, u32, s32);
 
 u32 FUN_004c662c()

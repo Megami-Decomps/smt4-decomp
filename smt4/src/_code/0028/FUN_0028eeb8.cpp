@@ -17,7 +17,7 @@ typedef char ActiveFlagBlockViewOffsetsCheck[offsetof(ActiveFlagBlockView, slots
 
 extern "C" {
 GameFlagBlockPrefixIV *gameGetFlagBlock(void);
-s32 FUN_00287894(u32 id);
+s32 table1bOr1cGetRecordValue(u32 id);
 s32 FUN_00298f88(u32 id);
 void words3Clear(void *words);
 void FUN_0023ddbc(u32 flag, s32 value);
@@ -29,7 +29,7 @@ u32 FUN_0028eeb8(u32 id)
     ActiveFlagBlockView *block = (ActiveFlagBlockView *)gameGetFlagBlock();
     if (!(entry->flags & 1) && id < 0x15e)
         return 0;
-    s32 selectionKind = FUN_00287894(id);
+    s32 selectionKind = table1bOr1cGetRecordValue(id);
     if (!FUN_00298f88(id) && selectionKind && block->prefix.selectedEntryIndex)
         return 0;
     entry->flags = (entry->flags & ~4) | 2;

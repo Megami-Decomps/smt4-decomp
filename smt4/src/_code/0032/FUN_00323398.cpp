@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail returns 1 before the read-modify-write and keeps the flag address in r1. */
 #include "common.h"
 
 struct BattleFlags {
@@ -10,13 +9,16 @@ extern "C" {
 
 BattleFlags *btlGetMainState(void);
 
+static __inline u32 btlFlagsSet(u32 *flags, u32 mask)
+{
+    *flags |= mask;
+    return 1;
+}
+
 /* Script command: sets bit 17 of the battle's flag word at 0x44A0. */
 u32 FUN_00323398(void)
 {
-    u32 *flags = &btlGetMainState()->flags;
-
-    *flags |= 0x20000;
-    return 1;
+    return btlFlagsSet(&btlGetMainState()->flags, 0x20000);
 }
 
 } /* extern "C" */

@@ -8,7 +8,6 @@ extern SmokeFadeState *DAT_0043df28;
 extern SmokeFadeImage DAT_0043df40[2];
 extern RenderCtx *g_titleScene;
 void FUN_002bed3c();
-void FUN_002c39a4(RenderCtx *context);
 u32 FUN_002c5d80(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
@@ -21,7 +20,7 @@ s32 FUN_001ad4f4(u32)
     if (fade->active == 0)
         return 0;
     FUN_002bed3c();
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, false));
     s32 firstEntry = DAT_0043df40[0].node * 1000;
     efctSetSpeed(fade->opacity);

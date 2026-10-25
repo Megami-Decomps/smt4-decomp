@@ -23,7 +23,7 @@ struct FusionSkillFilterView {
 struct SkillCategoryRecord { u16 id; u8 category; };
 }
 extern "C" {
-const SkillCategoryRecord *dataTable06Sub1GetRecord(u32 id);
+const SkillCategoryRecord *dataTable06Sub1GetRecord(u16 id);
 s32 halfwordKeyEmptyLastCompare(const void *first, const void *second);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
                   s32 (*compare)(const void *, const void *));

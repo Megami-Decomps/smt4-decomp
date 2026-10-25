@@ -1,13 +1,13 @@
 /* NON_MATCHING: after asdTextureSetImage the slot pointer and the loop index trade r0/r1 against
  * retail (slot in r1, index and constants in r0) */
 #include "shard/W8_X10_ActiveTextureSlot.h"
+#include "AsdSDK/FileLoadSync.h"
 
 extern "C" {
 
 extern ActiveTextureSlot *g_activeTextureSlot;
 
 AsdTexture *asdTextureCreate(s32 flags);
-void *fileLoadSync(const char *path, u32 *size, s32 flags);
 void FUN_0019fc50(AsdTexture *texture, const void *data, u32 size, u32 flags);
 void asdMemFree(void *block);
 

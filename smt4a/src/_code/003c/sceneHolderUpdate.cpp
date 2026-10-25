@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the constants 1 (r7) and 0 (r6) in registers across the calls (and saves r7/r8); the build uses immediates */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct SceneHolder003c3ec4 {
 
 s32 jobIsValid(u32 handle);
 void sceneObjDestroy(SceneObj003c3ec4 *scene);
-void asdOperatorDelete(void);
 
 extern SceneHolder003c3ec4 g_engineCleanupOwner; /* 0x588c40 */
 
@@ -29,7 +29,7 @@ s32 sceneHolderUpdate(void)
         }
         sceneObjDestroy(scene);
         if (g_engineCleanupOwner.scene != NULL) {
-            asdOperatorDelete();
+            asdOperatorDelete(g_engineCleanupOwner.scene);
             g_engineCleanupOwner.scene = NULL;
         }
     }

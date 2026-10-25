@@ -1,6 +1,13 @@
-/* NON_MATCHING: place text transition scheduling has not matched retail. */
+/* NON_MATCHING: retail's two `element->mode = 2` stores re-materialise the 2 (a one-instruction `str r1,[r0,#264]` setter inlined by armlink; matched with such a setter row, but the caption select still differs: retail `addne r0,r4,#108; moveq r0,r4` vs ours `addne r4,r4,#108; mov r0,r4`). */
 #include "ui/PlaceTextTransition.h"
 #include "ui/SceneResourceWait.h"
+
+static inline void placeTextChangeState(PlaceTextTransition *transition, s32 next)
+{
+    transition->previousState = transition->state;
+    transition->state = next;
+    transition->frame = 0;
+}
 
 extern "C" {
 u32 FUN_004962e4(SceneResourceWaitState *state);
@@ -10,6 +17,7 @@ const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s3
 s32 dataTable17Count(PlaceTextTableCursor *cursor);
 s32 gameFlagIsSet(u16 flag);
 void placeWinStartText(const char *text);
+
 
 /* Prepare both screen elements, select the location caption, and start its transition. */
 void FUN_0049569c(PlaceTextTransition *transition)
@@ -26,8 +34,8 @@ void FUN_0049569c(PlaceTextTransition *transition)
         u8 area = transition->area;
         s32 location = transition->location;
         PlaceTextTableCursor cursor;
-        const PlaceTextRecord *records = dataTable17Type1GetEntry(&cursor, 0);
         s32 selected = -1;
+        const PlaceTextRecord *records = dataTable17Type1GetEntry(&cursor, 0);
         for (s32 index = 0; index < dataTable17Count(&cursor); ++index) {
             if (records[index].area == area && records[index].location == location) {
                 selected = index;
@@ -36,11 +44,8 @@ void FUN_0049569c(PlaceTextTransition *transition)
         }
         PlaceTextTableCursor selectedCursor;
         const PlaceTextRecord *record = dataTable17Type1GetEntry(&selectedCursor, selected);
-        const char *text = gameFlagIsSet(record->alternateFlag) != 0 ? record->alternateText : record->text;
-        placeWinStartText(text);
-        transition->previousState = transition->state;
-        transition->state = 1;
-        transition->frame = 0;
+        placeWinStartText(gameFlagIsSet(record->alternateFlag) == 0 ? record->text : record->alternateText);
+        placeTextChangeState(transition, 1);
     }
 }
 }

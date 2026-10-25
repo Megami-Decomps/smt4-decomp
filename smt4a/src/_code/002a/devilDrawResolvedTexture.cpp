@@ -1,10 +1,10 @@
 #include "gamedata/DevilRecordA.h"
+#include "util/CalleeContracts.h"
 extern "C" {
 extern u32 g_aocSystem;
 DevilRecordA *FUN_00184310(u32 id);
 void *dataTable00FindById(u32 id);
 s32 gameFlagIsSet(u32 flag);
-s32 devilIsTextureLoaded(s32 id, s32 resolve);
 s32 aocRunByName(u32 system, s32 category, s32 id, s32 mode);
 void FUN_00164b5c(s32 channel, s32 category, s32 variant, u32 first, u32 second, u32 third);
 void FUN_0017ffa8(s32 channel, s32 category, s32 resource, u32 first, u32 second, u32 third);

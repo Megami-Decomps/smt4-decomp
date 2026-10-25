@@ -41,7 +41,6 @@ extern "C" {
 
 extern GameStateA g_gameState;
 
-s32 FUN_003bf87c(void);
 GameFlagsBlock* gameFlagsGetBlock(void);
 s32 dataTable49Type1Count(void);
 NaviEntry* dataTable49GetEntry(s32 index);

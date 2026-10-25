@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation: retail keeps the queue tail in r0/next in r1 and loads the constant 1 separately for the node state (built shares r7 and swaps the walk registers). */
+/* NON_MATCHING: the queue walk now matches; armcc shares one constant 1 (r7) between the node state and the first ticket where retail loads it separately into r0. */
 #include "common.h"
 
 extern "C" {
@@ -44,7 +44,7 @@ void FUN_001565ec(QueueManager *manager, QueueNode *node)
     if (tail == NULL) {
         manager->head = node;
     } else {
-        for (next = tail->next; next != NULL; next = next->next) {
+        while ((next = tail->next) != NULL) {
             tail = next;
         }
         tail->next = node;

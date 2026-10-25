@@ -3,6 +3,8 @@
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include "util/CalleeContracts.h"
+#include "event/2dEvent/SmokeFade.h"
+#include "event/2dEvent/EventEffect.h"
 
 struct UnitScreenReadyViewA {
     u32 unk00;
@@ -26,7 +28,6 @@ struct UnitScreenReadyViewA {
 extern "C" {
 ScriptRunState* FUN_00275bc8(void* resource, u32 infoWindow);
 void scriptProcessSetMode(ScriptRunState* process, s32 mode);
-void infoWinSetText(u32 window, s32 text);
 void dialogOpen(s32 first, s32 second);
 void __aeabi_memset4(void* destination, u32 size, u32 value);
 void ifTouchRegionRemove(void);
@@ -46,7 +47,7 @@ void FUN_004be1c8(UnitScreenReadyViewA* work)
     work->script = script;
     scriptProcessSetMode(script, 2);
     if (work->mode == 1) {
-        infoWinSetText(work->infoWindow, 4);
+        infoWinSetText(reinterpret_cast<const char *>(work->infoWindow), 4);
         dialogOpen(0, 1);
         work->state = 9;
         return;

@@ -32,7 +32,7 @@ extern ResultScreen *g_result;
 extern RenderCtx *g_titleScene;
 
 s32 modelPairTryBind(ResultScreen *result);
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(s32 a, s32 b);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void efctSetSpeed(f32 speed);
@@ -52,7 +52,7 @@ u32 FUN_001a16c0(u32 job)
     ResultScreen *result = g_result;
 
     if (result != NULL && modelPairTryBind(result) != 0) {
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
         if (result->phase == 12 && result->step == 5 && uiSpriteGetCompletionState(&result->panel) == 0) {
             s32 curtain = result->curtain;

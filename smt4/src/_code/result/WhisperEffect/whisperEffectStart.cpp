@@ -3,6 +3,7 @@
  * text of every line, then creates the effect's update and draw tasks. */
 #include "common.h"
 #include "result/WhisperEffect.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int devilGetRecord(void);
 int memClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
 void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
-u32 asdProcessCreateSimple(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, VoidFunc destroy, void *work);
 int asdTMTexTableLoadTmx(int type, int arg);
 void FUN_0022413c(void);
 void whisperEffectDestroy(void);
@@ -93,7 +93,7 @@ void whisperEffectStart(u32 devilId)
     devilGetRecord();
     fx = g_whisperEffect;
     fx->handle = ((u8 *)devilId)[0x32] + 0x100008a;
-    fx->task = asdProcessCreateSimple(LAB_002f6a28, 2, 0, 0, LAB_00203cfc, whisperEffectDestroy, fx);
+    fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_002f6a28), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(LAB_00203cfc), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));
     taskCreateDraw(LAB_002f6a40, 0x7d, 0, 0, FUN_0022413c, 0, fx, fx->task);
     taskCreateDraw(LAB_002f6a5c, 0xdb, 0, 0, FUN_0022413c, 0, g_whisperEffect, g_whisperEffect->task);
     soundChannelStopAll(0);

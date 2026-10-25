@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the owner-offset literal load is scheduled before the selection store (retail reloads it after). */
 #include "ui/ItemListSelection.h"
+#include "event/2dEvent/2dEventTex.h"
 
 // Adding word fields would raise the alignment and size of the shared halfword-ended owner.
 struct ItemListFlowView {
@@ -27,7 +28,6 @@ void useCounterRelease();
 void sysPlaySe(u32 sound);
 void FUN_003343f0(u32 mode);
 s32 useCounterGetCurrentValue();
-ItemVariantStateView *FUN_0026140c();
 void FUN_004a84e8(ItemListSelectionEntry *selection, u8 animation);
 void FUN_004a3e04(ItemListSelectionOwner *owner);
 
@@ -43,7 +43,7 @@ void FUN_004a40f4(ItemListSelectionOwner *owner)
     } else if (useCounterGetCurrentValue() != 0x69) {
         g_animatedPageSelection.selection = -1;
         if ((s16)owner->selection.value != 0) {
-            u8 *variant = &FUN_0026140c()->variant;
+            u8 *variant = &reinterpret_cast<ItemVariantStateView *>(FUN_0026140c())->variant;
             u8 animation;
             switch (*variant & 0x7f) {
             case 1: animation = 6; break;

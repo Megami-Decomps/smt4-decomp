@@ -2,6 +2,7 @@
 #include "map/lmapMain.h"
 #include <math.h>
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "shard/SaveWork.h"
 
 /* An interactable of the field map: the talk list owns up to 32 of them. */
 class TalkTarget {
@@ -72,9 +73,8 @@ static __inline f32 mapVectorDistance(const MapVector &a, const MapVector &b)
 
 extern "C" {
 
-TalkMapBlock *gameGetMapBlock(void);
 TalkPlayerData *gameGetPlayerData(void);
-void FUN_0027d8b4(s32 id);
+void FUN_0027d8b4(u16 value);
 void sequenceRequestDefer(s32 id, s32 argument);
 void textFormatBuffer(char *buffer, const char *format, ...);
 extern LmapScene *g_lmapScene;
@@ -85,7 +85,7 @@ extern TalkGameState g_gameState;
 s32 FUN_00396370(TalkTargetList *list)
 {
     s32 result = -1;
-    TalkMapBlock *map = gameGetMapBlock();
+    TalkMapBlock *map = reinterpret_cast<TalkMapBlock *>(gameGetMapBlock());
     TalkPlayerData *player = gameGetPlayerData();
     s32 nearest = 999999;
     s32 i;

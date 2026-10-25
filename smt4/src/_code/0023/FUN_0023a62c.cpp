@@ -4,7 +4,7 @@
 extern "C" {
 AsdTexture *asdTextureCreate(s32);
 f32 FUN_002a66e0(u32, u32, u32 *);
-void FUN_002c2424(const void *, u32);
+u32 FUN_002c2424(const void *, u32);
 u32 osVirtToPhysAddress(const void *);
 
 __softfp void FUN_0023a62c(AsdTextureRegion *region, s32 textureWidth, s32 textureHeight,

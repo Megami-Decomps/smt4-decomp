@@ -1,9 +1,9 @@
 /* NON_MATCHING: frame sum uses r0 rather than r1, and the late-dispatch object setup follows the kind load. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonThunder.h"
+#include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
 
 extern "C" {
 
-s32 effGetFrameCounter(void);
 
 extern PolyThunderKind g_polyThunderKinds[];
 

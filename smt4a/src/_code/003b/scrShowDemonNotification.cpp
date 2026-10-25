@@ -1,5 +1,6 @@
 /* NON_MATCHING: initial registration branch layout and zero/one constant registers differ; -O2 candidate. */
 #include "ui/MessageMain.h"
+#include "util/FUN_00370ecc.h"
 extern "C" MessageGlobalsA g_messageMain;
 
 struct DemonBannerSprite { u8 data[0x8c]; };
@@ -31,7 +32,6 @@ void uiSpriteSetKeyframe(DemonBannerSprite *, s32, s32);
 void *saveSlotFindById(u16);
 void FUN_004bd410(u16);
 void FUN_003e48dc(unsigned int);
-const BannerDemon *FUN_00370ecc(u16);
 void sysPlayVoice(u32);
 
 u32 scrShowDemonNotification()
@@ -56,7 +56,7 @@ u32 scrShowDemonNotification()
             FUN_004bd410((u16)id);
             FUN_003e48dc((u16)id);
         }
-        const BannerDemon *record = FUN_00370ecc((u16)id);
+        const BannerDemon *record = reinterpret_cast<const BannerDemon *>(FUN_00370ecc((u16)id));
         if (record && record->id != id) {
             FUN_004bd410((u16)id);
             FUN_003e48dc((u16)id);

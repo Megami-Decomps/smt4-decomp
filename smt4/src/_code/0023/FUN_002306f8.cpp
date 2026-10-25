@@ -1,5 +1,6 @@
 /* NON_MATCHING: inlined price-return paths use fewer saved registers and reload constants on demand; common money-settlement block placement differs. */
 #include "gamedata/Table8Record.h"
+#include "gamedata/PartyMoney.h"
 
 struct InventoryTransactionItem {
     u16 id;
@@ -43,7 +44,6 @@ EquipmentTransactionPrices *dataTable08Sub2GetRecord(u32 id);
 ContentTransactionPrice *aocRecordLookup84(u32 id);
 void FUN_00250d84(u32 id, s32 quantity);
 void FUN_00295a18(u32 id, u32 quantity);
-void FUN_00295c04(s32 amount);
 s32 FUN_002973ec(void);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 }
@@ -81,7 +81,7 @@ extern "C" void FUN_002306f8(const InventoryTransactionItem *item, s32 quantity,
         if (item->priceFlags & 2)
             price = (s32)((u32)item->pricing.percent * price) / 100;
         s32 amount = (s32)((u32)price * -quantity);
-        FUN_00295c04(amount);
+        partyMoneyAddForward(amount);
         if (amount >= 0)
             gameCounterAddSaturating(31, amount);
         else
@@ -96,7 +96,7 @@ extern "C" void FUN_002306f8(const InventoryTransactionItem *item, s32 quantity,
         if (FUN_002973ec() == 2)
             price = (s32)((u32)price * 3);
         s32 amount = (s32)((0u - (u32)price) * quantity);
-        FUN_00295c04(amount);
+        partyMoneyAddForward(amount);
         if (amount >= 0)
             gameCounterAddSaturating(31, amount);
         else

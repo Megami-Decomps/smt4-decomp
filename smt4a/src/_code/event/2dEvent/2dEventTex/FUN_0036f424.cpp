@@ -1,6 +1,7 @@
 /* NON_MATCHING: 178 vs 173 rows; same instruction sequence except callee-saved register numbering (retail keeps the constant 1 in r5 and the global's address in r6) and the job-ordering loops. Twin of the other game's 2dEventTex creator. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 // Manager of the 2D event texture layer: the update process plus the jobs it owns.
 struct EventTexManager {
@@ -20,8 +21,6 @@ extern u32 g_eventTexHandles[4];
 
 void* asdMemoryAllocTracked(u32 size, u32 alignment, u32 arg, u32 memoryType, u32 flag);
 void sysMemClear(void* block, u32 size);
-u32 asdProcessCreateSimple(const char* name, s32 priority, s32 a, s32 b, void (*update)(void*),
-                           void (*release)(void*), void* owner);
 void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, s32 (*draw)(u32), s32 c,
                     void* owner, u32 parent);
 void FUN_002ad130(void* owner);
@@ -41,8 +40,7 @@ u32 FUN_0036f424(void)
         sysMemClear(manager, 0x98);
         g_eventTex = manager;
         manager->active = 1;
-        manager->process = asdProcessCreateSimple("EVE_2dTex", 4, 0, 0, FUN_002ad130,
-                                                  eventTexFree, manager);
+        manager->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_2dTex"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002ad130), reinterpret_cast<AsdProcFunc>(eventTexFree), reinterpret_cast<u32>(manager));
         taskCreateDraw("EVE_2dTexDraw", 0x81, 0, 0, FUN_002ad180, 0, manager, manager->process);
         taskCreateDraw("EVE_2dTexDraw", 0xdd, 0, 0, FUN_002ad180, 0, manager, manager->process);
 

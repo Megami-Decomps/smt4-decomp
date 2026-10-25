@@ -1,5 +1,6 @@
 /* NON_MATCHING: steps the lazily started event script task (start, wait for the script, branch to the next entry, finish); written from the decompilation, the state switch and its fall-through are not compared with retail */
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 #define LAZY_STATE_START 0
 #define LAZY_STATE_RUN_ENTRY 1
@@ -51,7 +52,6 @@ void FUN_001386b4(void);
 void gameDataBlocksReleaseHold(s32 mask);
 void gameDataFlagsClearBits(s32 mask);
 void gameDataBlocksMaskClearBits(s32 mask);
-void asdMemFree(void);
 
 /* Returns 1 when the task has finished (or none exists), otherwise 0. */
 u32 FUN_00229c9c(u32 unused, s32 enabled)
@@ -156,7 +156,7 @@ u32 FUN_00229c9c(u32 unused, s32 enabled)
             DAT_005e2110 = 0;
         }
         if (DAT_0057f6d0 != NULL)
-            asdMemFree();
+            asdMemFree(DAT_0057f6d0);
         DAT_0057f6d0 = NULL;
         return 1;
     case LAZY_STATE_WAIT_ENTRY:

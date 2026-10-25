@@ -16,7 +16,7 @@ extern "C" {
 extern AocSystem *g_aocSystem;
 
 Table8Record *FUN_0019227c(AocSystem *system, u32 id);
-Table8Owner *FUN_0019c06c(u32 id);
+Table8Owner *itemCategoryFindByItemId(u32 id);
 s32 FUN_00183450(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
     s32 (*compare)(const void *, const void *));
@@ -35,7 +35,7 @@ Table8Record *dataTable8FindRecord(u32 id)
             return record;
         }
     }
-    Table8Owner *owner = FUN_0019c06c(id);
+    Table8Owner *owner = itemCategoryFindByItemId(id);
     s32 section;
     if (owner == NULL) {
         section = 1;

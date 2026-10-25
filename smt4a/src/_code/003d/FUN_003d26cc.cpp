@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d26cc` (_code @ 0x3d26cc, 0x2ec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
-int FUN_00152f54(void);
 int renderCtxResetColorScale(int);
 int skinObjectUpdateMatrices(int);
 int FUN_001a1ee0(void);

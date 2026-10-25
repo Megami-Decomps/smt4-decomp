@@ -1,13 +1,13 @@
 /* NON_MATCHING: Control flow now matches; list/index/entry/global saved registers, kind loads and one secondary-list index register differ. */
 #include "ui/TransientSpriteList.h"
 #include "map/mapDepart.h"
+#include "gamedata/FlagBitTests.h"
 
 extern "C" {
 extern GameState g_gameState;
 s32 saveTestFlagRow(u8 row);
 s32 gameFlagIsSet(s32 flag);
 s32 FUN_002fb094(s32 id);
-s32 mapBlockBitTest(s32 id);
 }
 
 static __inline bool transientSpriteIsUnlocked(const TransientSpriteEntry *entry, bool allowAlternate)

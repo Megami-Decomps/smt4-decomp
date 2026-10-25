@@ -1,6 +1,8 @@
 /* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
 #include "battle/btlUI.h"
 #include "util/CalleeContracts.h"
+#include "mapnavi/naviMain.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
@@ -44,7 +46,6 @@ s32 dataTableGetCategoryEntry(s32 category, u32 entry);
 s32 FUN_0022fcb8(void);
 DataRecord *FUN_00184310(u32 id);
 s32 dataRecordGetKindValue(u32 id);
-s32 playerHasFlagBit(s32 bit);
 UnitState *btlUnitGet(u32 unit);
 s32 FUN_002e4308(s32 value, s32 mode, s32 flag);
 s32 FUN_00388424(s32 unit, s32 locked);

@@ -2,10 +2,10 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 u32 FUN_001696f4(void);
-u32 *asdGxGetCommandCursor(void);
 s32 FUN_0019a2ac(u32 *destination, const void *source, u32 command);
 s32 FUN_0019a270(u32 *destination, const void *source, u32 command);
 s32 asdModelCommitCommandRange(u32 *begin, u32 *end);
@@ -40,7 +40,7 @@ u32 FUN_00157e98(ModelCommandPrefixA *model, const u8 *commandData)
         shortData = commandData + 0x38;
     }
 
-    u32 *commands = asdGxGetCommandCursor();
+    u32 *commands = reinterpret_cast<u32 *>(asdGxGetCommandCursor());
     commands[0] = 0x80000000u | model->longCommandSelector;
     commands[1] = 0x000f02c0u;
     FUN_0019a2ac(commands + 2, longData, 0x00ff02c1u);

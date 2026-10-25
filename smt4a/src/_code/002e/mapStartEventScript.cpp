@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail retains discarded event-ID argument moves and different start-entry tail placement; resource-loading body matches. */
 #include "common.h"
 #include "addon/aocMain.h"
+#include "addon/AocDrawText.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match8_MapMain.h"
 
@@ -15,8 +16,6 @@ extern AocSystemA *g_aocSystem;
 void FUN_001695a0();
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 s32 aocPackageGrantsItem(AocSystemA *system, u32 id, s32 flags);
-void *aocDrawText7(AocSystemA *system, u32 id, s32 flags);
-void *aocDrawText8(AocSystemA *system, u32 id, s32 flags);
 void asdMemFree(void *memory);
 void *asdLoadFileSyncDefault(const char *path);
 MapScriptProcess *FUN_00275bc8(void *script, void *messages);

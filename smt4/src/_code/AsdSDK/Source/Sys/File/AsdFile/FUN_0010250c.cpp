@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 #include "AsdSDK/AsdDebug.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 extern AsdFileGlobals g_asdFile;
@@ -9,7 +10,6 @@ extern u32 g_asdFileMutex;
 extern u8 g_asdFileEvent[];
 
 void FUN_0010f5dc(void);
-u32 resourceCallDefaultOptions(u32 first, u32 second, u32 mode);
 void *asdMemoryAlloc(u32 bytes, u32 alignment, u32 flags, u32 heap, u32 clear);
 void romPathForward(u32 first, u32 second, void *buffer, u32 size, u32 mode);
 u32 FUN_0010f7b8(u32 first, u32 second, u32 mode);
@@ -17,7 +17,6 @@ u32 FUN_0010f698(const char *device, u32 first, u32 second, void *buffer, u32 si
 void asdFatalError(void);
 u32 FUN_002c52dc(u32 *handle, u32 initial, u32 maximum);
 u32 FUN_002c5254(u32 *handle, u32 object, u32 mode);
-void FUN_002c526c(void);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
 void FUN_0010d0f8(void);
 void FUN_0010f764(void);
@@ -46,11 +45,11 @@ void FUN_0010250c(void)
         result = 0;
     }
     if (nnResultIsFailure(result)) {
-        FUN_002c526c();
+        FUN_002c526c(result);
     }
     result = FUN_002c5254(&handle, g_asdFileMutex, 1);
     if (nnResultIsFailure(result)) {
-        FUN_002c526c();
+        FUN_002c526c(result);
     }
     nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
     FUN_0010d0f8();

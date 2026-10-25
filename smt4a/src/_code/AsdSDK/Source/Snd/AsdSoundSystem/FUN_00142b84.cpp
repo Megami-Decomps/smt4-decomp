@@ -34,7 +34,7 @@ s32 FUN_00158f64(void);
 s32 FUN_00159030(void);
 s32 FUN_00159d60(void);
 void sysFatalBreak(void);
-void FUN_0016f368(f32 volume);
+void sndMasterManagerSetVolume(f32 volume);
 void FUN_00171424(u32 value);
 void FUN_00159e58(u32 mode);
 u32 FUN_0015e0c8(const SoundSystemInitParameters *parameters);
@@ -49,7 +49,7 @@ void FUN_00142b84(s32 auxiliaryMode)
         sysFatalBreak();
     if (nnResultIsFailure(FUN_00159d60()))
         sysFatalBreak();
-    FUN_0016f368(1.0f);
+    sndMasterManagerSetVolume(1.0f);
     if (auxiliaryMode > 0) {
         FUN_00171424(30);
         FUN_00159e58(3);

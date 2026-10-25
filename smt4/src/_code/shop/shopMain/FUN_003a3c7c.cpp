@@ -9,7 +9,6 @@ s32 scrRunOpcodesStub(ScriptRunState *);
 void FUN_0029ee6c(u32, u32);
 void messageTargetSetValue(u32, u32);
 void messageMainSetEnabled(s32);
-u32 FUN_0022fbc0(SelectMenu *);
 void FUN_0022fb64(SelectMenu *);
 s32 FUN_0027ee9c(void);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);

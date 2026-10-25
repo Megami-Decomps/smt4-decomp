@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 struct ObjectParticleResourceView {
     EffMiscDesc description;
@@ -30,7 +31,6 @@ const u8 *resourceResolveDataPointer(ObjectParticleResourceView *);
 void *memAlloc(u32, u32, u32, u32, u32, u32);
 void rt_memclr(void *, u32);
 void __aeabi_memcpy4(void *, const void *, u32);
-void FUN_002e59f8(const void *, void *, u32);
 void FUN_003aa57c(EffObjectParticle *, u16, EffEmitterDesc *);
 void FUN_003b8ecc(EffObjectParticle *);
 AsdMdlObject *asdMdlManagerCreateFromSource(void *, u32, u32);

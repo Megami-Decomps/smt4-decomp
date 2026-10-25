@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/MdlManagerDestroy.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct {
     Entry entries[64];  /* 0x30 */
 } EntryTable;
 
-int asdMdlManagerMarkDestroy(void);
 
 extern EntryTable *g_deferredMapModels;
 
@@ -28,7 +28,7 @@ void entryTableMarkDestroy(void)
         Entry *entry = &g_deferredMapModels->entries[i];
 
         if (entry->handler != 0) {
-            asdMdlManagerMarkDestroy();
+            asdMdlManagerMarkDestroy(entry->handler);
         }
     }
 }

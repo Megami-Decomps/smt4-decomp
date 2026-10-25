@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "gfx/KeyedVectorTransition.h"
 
 extern "C" {
 

@@ -1,8 +1,8 @@
 #include "shard/S1AsdTexTable.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
-char *libc_strcpy(char *dst, const char *src);
 char *libc_strcat(char *dst, const char *src);
 u32 libc_strlen(const char *s);
 typedef void (*AsdLoadCallback)(void *userData);
@@ -16,7 +16,7 @@ TexTableEntry *FUN_002a6114(TexTableEntry *entry, u32 mode)
     TexTableFile *file = entry->file;
     TexTableNode *node = entry->node;
 
-    libc_strcpy(path, file->directory);
+    libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(file->directory));
     if (node->name[0] == '-') {
         libc_strcat(path, entry->slots[-(s8)node->name[1]].node->name);
     } else {

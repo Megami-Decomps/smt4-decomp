@@ -5,7 +5,7 @@
 extern "C" {
 extern PadAnalogSample DAT_004e3c28[2];
 extern PadAnalogSample DAT_004e3c48;
-void inputApplyDeadZone(f32 *value, f32 deadZone);
+f32 inputApplyDeadZone(f32 *value, f32 threshold);
 
 // Read normalized analog coordinates and apply the configured dead zone when enabled.
 u32 FUN_0027f958(f32 *outX, f32 *outY, u32 index)

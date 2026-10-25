@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00288538` (_code @ 0x288538, 0x5d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -36,7 +37,6 @@ extern int g_camp; /* 0x57f108 */
 /* Supplied declaration required: FUN_0015f858. */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_001834a4. */
@@ -71,7 +71,7 @@ void FUN_00288538(int param_1)
   int temp_v13;
   
   temp_v0 = g_camp + 0x914;
-  temp_v1 = vec2GetXInt(temp_v0);
+  temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(temp_v0));
   temp_v0 = vec2GetYInt(temp_v0);
   jobGetScalarValue();
   efctSetSpeed();

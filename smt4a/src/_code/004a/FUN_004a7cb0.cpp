@@ -1,6 +1,7 @@
 /* NON_MATCHING: centered panel text register allocation has not matched retail. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* The width reference lies beyond the shared lookup-result prefix. */
@@ -15,7 +16,6 @@ struct PanelLayoutOwnerView {
 }
 
 extern "C" {
-const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
 u32 FUN_0014bf3c(u16 textId, u32 flags);
 s32 curveEvaluateStandard(u32 textValue, u32 style);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
@@ -33,12 +33,12 @@ void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
     u32 style;
     u32 color;
     if (alternateStyle != 0) {
-        base = FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F);
+        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F));
         offsetEntry = 0x498;
         style = 3;
         color = 0xFFFFFFFF;
     } else {
-        base = FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E);
+        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E));
         offsetEntry = 0x48A;
         color = 0x08262DFF;
         style = 2;
@@ -48,7 +48,7 @@ void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
     u32 textValue = FUN_0014bf3c(static_cast<u16>(textId), 0);
     s32 textWidth = curveEvaluateStandard(textValue, 2);
     const CenteredPanelEntryView *offset = reinterpret_cast<const CenteredPanelEntryView *>(
-        FUN_0018349c(reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
+        layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
     drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout), style, color, textValue,
         static_cast<f32>(baseX + *offset->width / 2 + offset->position.x - textWidth / 2),
         static_cast<f32>(offset->position.y + baseY), opacity, 0.0f, scale);

@@ -49,4 +49,8 @@ typedef struct TitleDbgBgObj {
     /* 0x04 */ s32 unk04;
 } TitleDbgBgObj;
 
+extern "C" {
+void FUN_0036b824(u32 value);
+}
+
 #endif

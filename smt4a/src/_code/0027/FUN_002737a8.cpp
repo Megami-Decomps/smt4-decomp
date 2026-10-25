@@ -14,7 +14,7 @@ int FUN_00294854(void);
 int distSpatial(void);
 int mapTableValueSet(...);
 int FUN_00319f64(int);
-int FUN_00352e9c(int, int);
+int gameFlagsWriteBankBit(int, int);
 int FUN_003b51a4(void);
 int sysPlayVoice(void);
 int FUN_003fd7c0(...);
@@ -51,7 +51,7 @@ extern int FUN_002ddd7c(void);
 /* Supplied declaration required: FUN_00319f64. */
 extern int FUN_0033bfac(void);
 extern int gameTestFlagBlockBit(int);
-/* Supplied declaration required: FUN_00352e9c. */
+/* Supplied declaration required: gameFlagsWriteBankBit. */
 /* Supplied declaration required: FUN_003b51a4. */
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: controllerSetDestination. */
@@ -335,7 +335,7 @@ void FUN_002737a8(void)
                (temp_v2 = FUN_004ffa14(temp_v1), temp_v2 != 0)) {
               in_s0 = (int)temp_v9;
               FUN_003fe86c(temp_v1,2);
-              FUN_00352e9c((int)*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xb2),1);
+              gameFlagsWriteBankBit((int)*(short *)((int)piVar1 + temp_v4 * 0x3c + 0xb2),1);
               *(int *)(temp_v1 + 0x1fc) = (int)((unsigned long long)temp_v10 >> 0x20);
               *(unsigned short *)(piVar1 + temp_v4 * 0xf + 0x29) = 2;
             }

@@ -1,9 +1,8 @@
 /* NON_MATCHING: population counting uses an ascending bound instead of a countdown; signed-mask registers and result allocation differ. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(u32 index);
-void scrSetResult(s32 result);
 s32 FUN_00184964(s32 minimum, s32 maximum);
 
 // Pick an ordinal among the set bits in two script masks, then return its bit index.

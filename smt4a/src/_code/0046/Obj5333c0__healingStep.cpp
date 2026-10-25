@@ -1,6 +1,7 @@
 /* NON_MATCHING: identical except the constant setup order at the top (retail loads 0 into r6 before 5 into r5; armcc loads 5 first). */
 #include "classes/Obj5333c0.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/PartyMoney.h"
 
 extern "C" {
 void sysPlaySe(s32 id);
@@ -14,7 +15,6 @@ const u32 *gameGetSlotTable(void);
 s32 FUN_00467df8(void);
 void panelSetMode3(s32 amount, s32 flag);
 s32 panelStateIs0(void);
-void FUN_004a0ef4(s32 amount);
 
 s32 gameFlagIsSet(u32 flag);
 }
@@ -57,7 +57,7 @@ void Obj5333c0::healingStep()
         if (messageDismissNumericBanner(0) == 1) {
             substate++;
             unk0C = 0;
-            FUN_004a0ef4(-FUN_00467df8());
+            partyAddMoneyClampedForward(-FUN_00467df8());
         }
         break;
     case 4: {

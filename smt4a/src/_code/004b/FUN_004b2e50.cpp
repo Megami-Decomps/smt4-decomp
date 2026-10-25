@@ -1,7 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b2e50` (_code @ 0x4b2e50, 0xbfc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -36,10 +38,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001634b4. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: FUN_00183bb0. */
 extern int gameGetSlotRecord(void);
@@ -149,7 +149,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
       }
     }
     else {
-      temp_v2 = packNibblesAndByte(6,1,0);
+      temp_v2 = packNibblesAndByte(6, 1, 0);
       piVar14 = (int *)(temp_v7 + 0x12b8);
       temp_v3 = piVar14[*piVar14 + 2];
       piVar14[*piVar14 + 2] = temp_v2;
@@ -164,7 +164,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         temp_v2 = temp_v14 + temp_v7;
         temp_v0 = *(char *)(temp_v2 + 0x1c88);
         temp_v3 = param_1 + ((int)(temp_v13 + ((unsigned int)(temp_v13 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-        temp_v4 = vec2GetXInt(temp_v3 + 0xac);
+        temp_v4 = vec2GetXInt(reinterpret_cast<const void *>(temp_v3 + 0xac));
         temp_v12 = temp_v12 + temp_v4;
         temp_v3 = vec2GetYInt(temp_v3 + 0xac);
         temp_v11 = temp_v11 + temp_v3;
@@ -179,7 +179,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           temp_v10 = (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + temp_v11;
           temp_v3 = (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v12;
           if (*(char *)(temp_v15 + 0x8a) == '\0') {
-            temp_v4 = vec2GetXInt(temp_v15);
+            temp_v4 = vec2GetXInt(reinterpret_cast<const void *>(temp_v15));
             temp_v3 = temp_v4 + temp_v3;
             temp_v2 = vec2GetYInt(temp_v2);
             temp_v10 = temp_v10 + temp_v2;
@@ -208,7 +208,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         temp_v13 = partySlotMatchesSelected();
         if (temp_v13 == 0) {
           temp_v2 = param_1 + ((int)(temp_v7 + ((unsigned int)(temp_v7 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-          temp_v13 = vec2GetXInt(temp_v2 + 0x3f4);
+          temp_v13 = vec2GetXInt(reinterpret_cast<const void *>(temp_v2 + 0x3f4));
           temp_v12 = temp_v12 + temp_v13;
           temp_v13 = vec2GetYInt(temp_v2 + 0x3f4);
           temp_v11 = temp_v11 + temp_v13;
@@ -224,7 +224,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
     } while ((int)temp_v9 < 0xc);
     if (!(temp_v1 == 2 || temp_v1 == 4)) {
       if (temp_v1 == 7) {
-        temp_v7 = packNibblesAndByte(6,7,0);
+        temp_v7 = packNibblesAndByte(6, 7, 0);
         piVar14 = (int *)(temp_v13 + 0x12b8);
         temp_v12 = piVar14[*piVar14 + 2];
         piVar14[*piVar14 + 2] = temp_v7;
@@ -249,7 +249,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
       temp_v4 = *(char *)(temp_v14 + temp_v12 + 0x1c88) + 1;
       temp_v13 = gameGetSlotRecord();
       temp_v3 = param_1 + ((int)(temp_v11 + ((unsigned int)(temp_v11 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-      temp_v2 = vec2GetXInt(temp_v3 + 0xac);
+      temp_v2 = vec2GetXInt(reinterpret_cast<const void *>(temp_v3 + 0xac));
       temp_v7 = temp_v7 + temp_v2;
       temp_v2 = vec2GetYInt(temp_v3 + 0xac);
       temp_v1 = temp_v1 + temp_v2;
@@ -268,7 +268,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         FUN_0035ae58(*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + temp_v1,
                      (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1);
         temp_v13 = g_renderCtx;
-        temp_v10 = packNibblesAndByte(6,1,0);
+        temp_v10 = packNibblesAndByte(6, 1, 0);
         piVar14 = (int *)(temp_v13 + 0x12b8);
         temp_v6 = piVar14[*piVar14 + 2];
         piVar14[*piVar14 + 2] = temp_v10;
@@ -278,7 +278,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
         }
         FUN_001634b4(param_1 + temp_v4 * 0x8c + 0x24c4);
         temp_v13 = g_renderCtx;
-        temp_v4 = packNibblesAndByte(6,7,0);
+        temp_v4 = packNibblesAndByte(6, 7, 0);
         piVar14 = (int *)(temp_v13 + 0x12b8);
         temp_v10 = piVar14[*piVar14 + 2];
         piVar14[*piVar14 + 2] = temp_v4;
@@ -326,7 +326,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
       temp_v11 = partySlotMatchesSelected();
       if (temp_v11 == 0) {
         temp_v13 = param_1 + ((int)(temp_v12 + ((unsigned int)(temp_v12 >> 0x1f) >> 0x1e)) >> 2) * 0x8c;
-        temp_v11 = vec2GetXInt(temp_v13 + 0x3f4);
+        temp_v11 = vec2GetXInt(reinterpret_cast<const void *>(temp_v13 + 0x3f4));
         temp_v7 = temp_v7 + temp_v11;
         temp_v11 = vec2GetYInt(temp_v13 + 0x3f4);
         temp_v1 = temp_v1 + temp_v11;
@@ -345,7 +345,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           FUN_0035ae58(*(short *)(temp_v2 + 8) + temp_v7,*(short *)(temp_v2 + 10) + temp_v1,
                        (int)**(short **)(temp_v2 + 0xc),(int)(*(short **)(temp_v2 + 0xc))[1],1);
           temp_v11 = g_renderCtx;
-          temp_v3 = packNibblesAndByte(6,1,0);
+          temp_v3 = packNibblesAndByte(6, 1, 0);
           piVar14 = (int *)(temp_v11 + 0x12b8);
           temp_v4 = piVar14[*piVar14 + 2];
           piVar14[*piVar14 + 2] = temp_v3;
@@ -355,7 +355,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
           }
           FUN_001634b4(param_1 + (temp_v9 + 0x19) * 0x8c + 0x24c4);
           temp_v11 = g_renderCtx;
-          temp_v3 = packNibblesAndByte(6,7,0);
+          temp_v3 = packNibblesAndByte(6, 7, 0);
           piVar14 = (int *)(temp_v11 + 0x12b8);
           temp_v4 = piVar14[*piVar14 + 2];
           piVar14[*piVar14 + 2] = temp_v3;

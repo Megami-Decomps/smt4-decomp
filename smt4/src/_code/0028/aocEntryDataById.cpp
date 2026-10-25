@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ extern void *g_aocSystem;
 
 extern FoundEntry *entryListFindById(void *system, u32 id);
 extern void *dataTableGet(s32 table, s32 section);
-extern TableEntry *dataTableGetEntries(void *section);
 extern u32 dataTableGetCount(void *section);
 
 /* The data of the entry for `id`: the AOC system's own, else the table's entry (second half if
@@ -32,7 +32,7 @@ void *aocEntryDataById(u32 id, s32 second)
         return found->data;
     }
     section = dataTableGet(1, 0);
-    entries = dataTableGetEntries(section);
+    entries = reinterpret_cast<TableEntry *>(dataTableGetEntries(section));
     if (dataTableGetCount(section) <= id) {
         return entries;
     }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses the panel through a base at +0x800 (r6) for the mode/page/viewing bytes and entry table and a base at +0xA800 for the shown id, uses a 304-byte frame and branches the previous/current state tests differently; the call sequence is the same (about 210 diff lines). */
 #include "shard/Shard0032.h"
+#include "event/2dEvent/SmokeFade.h"
 
 /* One entry of the status panel's list: whether it is filled and the demon it shows. */
 struct StatusEntry {
@@ -34,7 +35,6 @@ typedef char StatusSlotTableOffsets[offsetof(StatusSlotTable, count) == 0x1CA3 ?
 
 extern "C" {
 u16 flaggedValueHolderGetTotal(void *holder);
-s32 FUN_0023b3d0(void);
 void FUN_0023b45c(s32 value);
 s32 FUN_002c7e3c(void);
 void FUN_0034a9c4(u32 id, s32 value);

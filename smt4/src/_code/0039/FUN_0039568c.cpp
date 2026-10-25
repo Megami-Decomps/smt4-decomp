@@ -1,6 +1,7 @@
 /* NON_MATCHING: global/component base loads, signed modulus and movement VFP multiplication scheduling differ. */
 #include "map/lmapMain.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "util/MathDistance.h"
 #include "util/CalleeContracts.h"
 
 struct AmbientMovementTransform {

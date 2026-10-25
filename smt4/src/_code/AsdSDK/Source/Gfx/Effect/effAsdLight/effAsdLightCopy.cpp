@@ -1,13 +1,13 @@
 /* NON_MATCHING: the debug trace now matches; retail still stores 0 to every rotation word as plain integer stores and then w = 1.0f separately (armcc pairs them into vstmia here). */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 extern const char DAT_004101c0[];
 
 void *memAlloc(int, int, int, int size, int align, int);
-void memClear(void *block, s32 size);
 void __aeabi_memcpy4(void *dst, const void *src, s32 size);
 
 /* Creates a light effect object as a copy of `src`'s parameters. */

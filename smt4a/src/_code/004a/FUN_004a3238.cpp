@@ -1,5 +1,8 @@
 /* NON_MATCHING: retail reads the window variant as add-immediates plus a displaced ldrsb and anchors the three case-5 tables (cf8/d20/d48) on one pool word (d20 +- 0x28); ours loads separate pool words, so case 0 shrinks and the switch offsets shift. */
 #include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/DrawTextAtRelativePosition.h"
+#include "util/DrawTextAtRelativePosition.h"
 
 /* Style block of an entry window. */
 struct EntryStyle {
@@ -29,7 +32,6 @@ void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
 s32 FUN_002a4b28(u32 text);
 void FUN_002e7284(void *textArea, u32 x, u32 y, u32 color, EntryLabel *label);
-void drawTextAtRelativePosition(void *textArea, s32 a, u32 x, u32 y, s32 b, s32 c, u32 d, u32 color, const char *text);
 void FUN_004a7814(EntryWindow *window, u32 first, s32 index, s32 enabled, u32 color, u32 second);
 void FUN_004a7a50(EntryWindow *window, s32 flag, u32 text, s32 index, s32 enabled, u32 color);
 void FUN_004a7ba0(EntryWindow *window, u32 text, s32 index, s32 enabled, u32 color, f32 scale);

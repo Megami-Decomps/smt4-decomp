@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ extern GlobalBlock g_gameState;
 
 u32 scrGetArg(...);
 u32 scrGetArgString(u32 index);
-int libc_strcpy(u8 *sub, u32 value);
 
 /* Stores the current scrGetArg value in the global block and updates its sub-object from entry 1; always reports success. */
 u32 scrGameStateSetEntry(void)
@@ -23,7 +23,7 @@ u32 scrGameStateSetEntry(void)
     u32 entry = scrGetArgString(1);
 
     g_gameState.value = value;
-    libc_strcpy(g_gameState.sub, entry);
+    libc_strcpy(reinterpret_cast<unsigned int *>(g_gameState.sub), reinterpret_cast<unsigned int *>(entry));
     return 1;
 }
 

@@ -4,6 +4,7 @@
 #include "gfx/CameraParameters.h"
 #include "status/StatusCamera.h"
 #include "shard/Shard0040.h"
+#include "title/titleMain.h"
 
 namespace {
 struct FountainInitializationView {
@@ -48,7 +49,6 @@ void cameraExportParameters(CameraParameters *output, const CameraParameterOwner
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
 void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_001523b8(CameraMatrixCache *camera, u32 pivot, f32 first, f32 second, f32 third, f32 fourth);
-void FUN_0036b824(CameraMatrixCache *camera);
 void campCommonBgAcquire();
 void campButtonHelpAcquire();
 void asdLoadFileAsyncSimple(const char *name, void **output, u32 mode);
@@ -93,7 +93,7 @@ void FUN_004cdddc(FountainInitializationView *work)
     FUN_0014f0dc(&work->camera, reinterpret_cast<const Vec3 *>(&pose.eye),
                 reinterpret_cast<const Vec3 *>(&pose.target), reinterpret_cast<const Vec3 *>(&pose.up));
     FUN_001523b8(&work->camera, 1, pose.fieldOfView, pose.nearClip, pose.farClip, pose.aspect);
-    FUN_0036b824(&work->camera);
+    FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     g_handleRegistry->fountain.camera = &work->camera;
     campCommonBgAcquire();
     campButtonHelpAcquire();

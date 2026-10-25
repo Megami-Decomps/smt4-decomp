@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "ui/UiSpriteState.h"
 #include "util/CalleeContracts.h"
+#include "event/2dEvent/SmokeFade.h"
 
 struct EquipmentMenuScriptViewA {
     u8 unk000[0x184];
@@ -18,7 +19,7 @@ typedef char EquipmentMenuAnimationOffsetCheck[
     offsetof(EquipmentMenuAnimationViewA, bank) == 0x3CC ? 1 : -1];
 extern "C" {
 extern u32 g_handleRegistry;
-void FUN_0038b010(s32);
+void FUN_0038b010(u8 value);
 void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
 void FUN_00167458(UiSpriteState *, s32);
 s32 vec2GetXInt(const UiSpriteState *);

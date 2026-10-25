@@ -1,7 +1,8 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
-void asdTMTexTableLoadSprites(u32 table);
 void FUN_002c58c8(u32 table, u32 option);
 }
 

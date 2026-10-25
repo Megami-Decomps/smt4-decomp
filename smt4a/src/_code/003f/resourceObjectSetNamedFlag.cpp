@@ -1,4 +1,3 @@
-/* NON_MATCHING: bit update is instruction-for-instruction equivalent, but byte-buffer/mask registers and bit-index scheduling differ. Candidate O2. */
 #include "common.h"
 
 struct ResourceNameDictionary {
@@ -29,13 +28,10 @@ extern "C" void resourceObjectSetNamedFlag(NamedFlagObject* object, const char* 
     u32 index = FUN_001a7a20(&resource->names, name, libc_strlen(name));
     if (index != 0xffff) {
         u8* bits = object->bits;
-        u32 value = bits[index >> 3];
-        u32 mask = 1u << (index & 7);
         if (enabled == 0) {
-            value &= ~mask;
+            bits[index >> 3] &= ~(1u << (index & 7));
         } else {
-            value |= mask;
+            bits[index >> 3] |= 1u << (index & 7);
         }
-        bits[index >> 3] = value;
     }
 }

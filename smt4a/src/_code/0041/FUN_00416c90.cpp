@@ -1,5 +1,6 @@
 /* NON_MATCHING: only scheduling differs (retail loads the buffer pointer after the float stores; built hoists the load above them). */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct SlotEntry {
     s32 unk00;          // 0x00
@@ -15,7 +16,6 @@ struct SlotEntry {
 
 extern "C" {
 
-void asdMemFreeSlot(void *buffer);
 
 // Reset all twelve slot entries, releasing their buffers.
 SlotEntry *FUN_00416c90(SlotEntry *entries)
@@ -30,7 +30,7 @@ SlotEntry *FUN_00416c90(SlotEntry *entries)
         entry->values[1] = 0.0f;
         entry->values[0] = 0.0f;
         if (entry->buffer != NULL) {
-            asdMemFreeSlot(entry->buffer);
+            asdMemFreeSlot(static_cast<void **>(entry->buffer));
             entry->buffer = NULL;
         }
         entry->unkac = 0;

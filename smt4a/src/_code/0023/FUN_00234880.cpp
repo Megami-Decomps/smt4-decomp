@@ -1,6 +1,6 @@
 /* NON_MATCHING: ratio VFP division destination, selected table-row/count register allocation and threshold load order differ. */
 #include "common.h"
-#include "shard/W4_W4Match5_DataTable.h"
+#include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
 
 struct PopupState {
@@ -39,7 +39,7 @@ s32 gameSlotTableFindFree(void);
 s8* gameGetSlotTable(void);
 s32 gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(s32 record);
-RatioMessage* dataTableGetEntries(void);
+
 s32 FUN_002d8b58(s32 kind, s32 id);
 
 // Opens the popup for the first ratio message matching the selected slot.
@@ -71,11 +71,11 @@ void FUN_00234880(void)
     f32 percent = (f32)current / (f32)maximum * 100.0f;
 
     void *table = dataTableGet(0x43, 0);
-    dataTableGetEntries();
+    dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);
     for (u32 i = 0; (s32)i < count; i++) {
         table = dataTableGet(0x43, 0);
-        RatioMessage* row = dataTableGetEntries();
+        RatioMessage* row = static_cast<RatioMessage*>(dataTableGetEntries(table));
         u32 rowCount = dataTableGetCount(table);
         if (i >= rowCount) row = NULL; else row += i;
         if (row->kind != 8 && row->kind != 9) continue;

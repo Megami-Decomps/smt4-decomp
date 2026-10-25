@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 choice, u32 *first, u32 *count);
 u32 FUN_002b54a0(const BtlCombatantEntryA *entry, s32 skill);
 void scrSetResult(s32 value);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
@@ -19,7 +19,7 @@ u32 FUN_003c6644(void)
     s32 skill = scrGetArg(1);
     s32 choice = btlResolveEntryChoice(scrGetArg(2));
     u32 first, count;
-    FUN_00301a08(choice, &first, &count);
+    FUN_00301a08(choice, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < (s32)(first + count); ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;

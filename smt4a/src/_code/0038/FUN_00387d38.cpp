@@ -2,6 +2,7 @@
 #include "camp/CampCec/CharacterRefreshWork.h"
 #include "shard/Shard0031.h"
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 u16 FUN_003b6fc4();
@@ -11,7 +12,6 @@ void FUN_003c1060();
 void FUN_00331380(s32 value);
 void sysPlaySe(s32 sound);
 s32 partyPanelExists();
-s32 FUN_00284e94();
 void campCecSetObjectValue(s32 value);
 void linkHolderApplyFlag(u32 handle, s32 enabled);
 

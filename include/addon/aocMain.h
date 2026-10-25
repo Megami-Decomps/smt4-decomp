@@ -211,4 +211,19 @@ typedef char AocSystemLayoutCheck[sizeof(AocSystem) == 0x39C && sizeof(AocSystem
 typedef char AocSystemOffsets[offsetof(AocSystem, devils.count) == 0x35C && offsetof(AocSystem, table00.count) == 0x364 && offsetof(AocSystem, lookup.entries) == 0x374 && offsetof(AocSystem, table.count) == 0x384 && offsetof(AocSystemA, table00.records) == 0x368 && offsetof(AocSystemA, table.count) == 0x384 && offsetof(AocMusicJob, current) == 0x3C ? 1 : -1];
 typedef char AocSystemAPackagesOffsets[offsetof(AocSystemA, packages.count) == 0x310 && offsetof(AocSystemA, packages.entries) == 0x318 ? 1 : -1];
 
+extern "C" {
+u32 FUN_00270a70(void);
+}
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Tests an event without waiting (tail call to nn_os_LightEvent_TryWait, linked as a nop). */
+s32 FUN_002ad1e0(void *event);
+#ifdef __cplusplus
+}
+#endif
+
+
+
 #endif

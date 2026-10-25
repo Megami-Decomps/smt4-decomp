@@ -53,7 +53,7 @@ AnalyzeTextBox *FUN_002bf4f0(void *panel, u32 id);
 s32 curveEvaluateStandard(const char *text, s32 mode);
 void FUN_002be56c(void *panel, s32 a, s32 b, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
 s32 FUN_0029e924(void *list);
-s32 FUN_00240d5c(void *list);
+s32 flaggedEntryGetValueByState(void *list);
 void FUN_003aa044(AnalyzeWork *work, s32 index, s32 selected, s32 id);
 void FUN_0022d7b0(AnalyzeWork *work, s32 step);
 
@@ -87,14 +87,14 @@ void FUN_003a9648(AnalyzeWork *work)
     s32 visible = work->rowCount < work->visibleRows ? work->rowCount : work->visibleRows;
 
     for (s32 i = 0; i < visible; i++) {
-        if (work->mode != 2 || FUN_00240d5c(work->list) != i) {
+        if (work->mode != 2 || flaggedEntryGetValueByState(work->list) != i) {
             FUN_003aa044(work, i + 1, 0, work->rows[first + i].id);
         }
     }
     if (work->rowCount > 0 && work->mode == 2) {
-        s32 id = work->rows[FUN_00240d5c(work->list) + first].id;
+        s32 id = work->rows[flaggedEntryGetValueByState(work->list) + first].id;
 
-        FUN_003aa044(work, FUN_00240d5c(work->list) + 1, 1, id);
+        FUN_003aa044(work, flaggedEntryGetValueByState(work->list) + 1, 1, id);
     }
     FUN_0022d7b0(work, slide + 1);
 }

@@ -1,8 +1,8 @@
 #include "gamedata/SelectedUnitQuery.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "script/ScriptArgs.h"
 extern "C" {
-void scrSetResult(s32);
 GameUnitSortRecord* gameGetUnitRecord(s32);
 PartyDamageSlotsIV* gameGetSlotTable(void);
 

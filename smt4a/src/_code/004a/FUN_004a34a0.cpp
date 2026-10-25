@@ -4,7 +4,6 @@
 extern "C" {
 void FUN_00184310(u16 id);
 u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
-s32 flaggedValueHolderGetTotal(void *selection);
 s32 FUN_002a4b28(u32 id);
 u32 FUN_004d05b4();
 s32 FUN_001ba3d4(u32 flag);
@@ -29,7 +28,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
         offsetof(ValidationView, candidates) == 0x868 ? 1 : -1];
     ValidationView *view = reinterpret_cast<ValidationView *>(screen);
     u32 cost = FUN_004a8750(id, view->mode, 0, view->rank >= 100, 0);
-    s32 selection = flaggedValueHolderGetTotal(view->selection);
+    s32 selection = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(view->selection));
     Candidate *selected = &view->candidates[selection];
     if (view->mode == 0) {
         FUN_00184310(selected->id);

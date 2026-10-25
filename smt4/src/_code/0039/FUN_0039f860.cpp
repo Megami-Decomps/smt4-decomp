@@ -1,4 +1,5 @@
 #include "shard/NaviMain.h"
+#include "util/FUN_0039f860.h"
 
 extern "C" {
 extern NaviMain *g_naviMain;

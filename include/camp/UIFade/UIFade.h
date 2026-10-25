@@ -20,4 +20,8 @@ typedef struct UIFadeGlobals {
     /* 0x04 */ UIFadeWork *work;
 } UIFadeGlobals;
 
+extern "C" {
+void FUN_0020d700(void);
+}
+
 #endif

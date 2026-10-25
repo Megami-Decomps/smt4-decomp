@@ -1,6 +1,7 @@
 /* NON_MATCHING: slot-relative addresses, aggregate copy and mask-update scheduling differ. */
 #include "battle/btlUI.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
+#include "util/CalleeContracts.h"
 
 static inline u32 findActionSlot(BtlUiA *ui)
 {
@@ -13,7 +14,6 @@ static inline u32 findActionSlot(BtlUiA *ui)
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-ProjectionMatrices *FUN_00152f54();
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 s32 btlScriptUnitHasFlags(u32 owner);
 void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 animation);
@@ -35,7 +35,7 @@ u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
     slot->progress = 0.0f;
     slot->active = 0;
     BattleUiActionVector position = {x, y, z};
-    FUN_002a1850(&position.x, 0, FUN_00152f54(), &position.x);
+    FUN_002a1850(&position.x, 0, reinterpret_cast<ProjectionMatrices *>(FUN_00152f54()), &position.x);
     slot->projected = position;
     slot->velocity[0] = slot->velocity[1] = slot->velocity[2] = 0.0f;
     slot->acceleration[0] = slot->acceleration[1] = slot->acceleration[2] = 0.0f;

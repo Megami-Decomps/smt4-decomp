@@ -1,13 +1,15 @@
-/* NON_MATCHING: the process name is a .constdata literal in retail (DAT_00409d80) and a stripped debug call precedes the allocation. */
+/* NON_MATCHING: debug trace and the .constdata process name now match; retail stores rowHeight/rowCount separately (r0=13, r1=10) where the build merges them into strd, and keeps the process-create arguments in different registers. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 s32 FUN_002bda9c(u32 handle);
 void asdListBoxDestroy(u32 handle);
 
+extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */
+extern const s8 DAT_0053d994[]; /* "AsdListBox" */
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, void *owner);
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
 void rowWidgetInit(void *widget, s32 rows, s32 unk);
@@ -19,12 +21,13 @@ u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)
     AsdListBox *box;
     u32 handle;
 
+    asdDebugTrace(DAT_0053d960, 748);
     box = (AsdListBox *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AsdListBox), 1);
     if (box == NULL) {
         return 0;
     }
 
-    handle = asdProcessCreateSimple((const s8 *)"AsdListBox", group, 0, 0, FUN_002bda9c, asdListBoxDestroy, box);
+    handle = asdProcessCreateSimple(DAT_0053d994, group, 0, 0, FUN_002bda9c, asdListBoxDestroy, reinterpret_cast<u32>(box));
     if (jobIsValid(parent) != 0) {
         jobSetParent(parent, handle);
     }

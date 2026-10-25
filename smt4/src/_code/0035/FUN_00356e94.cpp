@@ -1,8 +1,8 @@
 /* NON_MATCHING: packed command stores and cursor induction use different grouping and registers. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void *destination, u32 byteCount);
 u32 *FUN_001394c8(void);
 u32 *asdGxAppendStateReset(u32 *commands, u32 enabled);
 u32 *FUN_003572e8(u32 *commands, u32 enabled);

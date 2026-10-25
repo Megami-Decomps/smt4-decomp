@@ -86,4 +86,13 @@ typedef struct ModelOwner {
     /* 0x04 */ ModelSlot *slot;
 } ModelOwner;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_002c3364(u32 **ref);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

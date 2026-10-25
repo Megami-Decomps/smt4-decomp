@@ -1,10 +1,10 @@
 #include "gfx/NamedTextureCache.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 extern BattleEffectTextureSlot g_pendingTextures[26];
 extern NamedTextureCache g_textureCache;
 s32 libc_strcmp(const char *left, const char *right);
-void memClear(void *data, u32 size);
 char *strncpy(char *destination, const char *source, u32 count);
 AsdTexture *asdTextureCreate(u32 flags);
 }

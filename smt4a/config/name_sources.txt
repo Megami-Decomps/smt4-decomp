@@ -6550,3 +6550,35 @@
 003ae9d8 bustupCutAnimAssignSlot inferred [med] moves a portrait job into a display slot and records it in the recent-job history
 00281178 jobDetachFromParent inferred [high] unlinks a process from its parent child chain (jobSetParent helper detachProcess)
 003b8684 btlScriptFindEligibleEntryValueById inferred [med] returns the signed value of the first eligible entry with the requested id or -1
+004bb4dc _ZN9Obj557ec0D0Ev evidence deleting destructor of Obj557ec0: stores vtable _ZTV9Obj557ec0+8 (ldr before push), frees icon48/icon40 (asdMemFree), asdCecShutdown, tail-calls asdOperatorDelete(this); sits right after _ZN9Obj557ec0C1Ev at 0x4bb440 (size 0x60), same layout as _ZN9Obj557ed0D0Ev
+00165390 lookupRecordCompareIds inferred bsearch comparator: *(u16*)a - *(u16*)b; passed by FUN_00180118
+001642e4 asdLoadFileSyncNoContext inferred [high] asdLoadFileSync(NULL, NULL, path, size, flags, alignment) wrapper
+0016f368 sndMasterManagerSetVolume inferred [high] forwards the f32 volume to FUN_0016f33c on g_nnSndMasterManager
+00192718 aocEntryGetKindForward inferred [high] armlink-NOPed tail call to aocEntryGetKind(id); same forwarder shape as globalCriticalSectionEnterForward
+004a0ef4 partyAddMoneyClampedForward inferred [high] NOPed tail call forwarding (amount) to partyAddMoneyClamped
+00481100 flagValueIsPositiveForward inferred [high] NOPed tail call forwarding (index) to flagValueIsPositive
+003ff160 flagsBSetStateBits inferred [med] flagsBGetPtr(index) byte: clears bit 2 and sets bits 0-1
+003ff20c flagsBSetBit2 inferred [high] sets bit 2 of flagsBGetPtr(index) byte from the argument
+004bc944 gameDataEntryGetBit6 inferred [high] bit 6 of the byte at +3 of gameDataGetTableEntry(group,item)
+004bc758 gameDataEntrySetBit7 inferred [high] replaces bit 7 of the byte at +3 of gameDataGetTableEntry(group,item)
+0019c06c itemCategoryFindByItemId inferred [high] returns the item category entry (ItemCategoryEntry, 12 bytes at 0x531158) whose id range contains the item id, or NULL
+0018349c layoutFindTableEntry inferred [med] reads the file handle at +0x10 of a layout and tail-calls FUN_001834a4(file, index) (NOPed branch to next function)
+00221ee0 matrixGetTranslation inferred [high] twin of smt4 FUN_0019dad8
+003b6e3c scrCommGameFlagValueSet inferred [med] script command: stores arg1 into the 16-bit value table of the flag block at index arg0
+004cbab0 driftObjectStart inferred [med] twin of smt4 FUN_003c1414
+001cb490 gfxCommandTemplateAppend inferred [med] twin of smt4 FUN_0015bd68
+0037a1a0 staffRollDrawSecondaryColumn inferred [med] draws the 12 credits entries of the secondary column under a temporary render preset
+002b613c mapEnemyMoveIdleActorToRecord inferred [med] first idle unlocked map actor (state 2) gets the record position and moves to state 24
+00514540 shiftRandomNextFraction inferred [high] advances 4-word shift generator, returns 24-bit fraction in [0,1)
+003f2c1c threadHandleOwnerDestroy inferred [med] finalizes the thread and closes the owner handle at +0x3c, returns owner
+001418b8 soundPlayIfArchiveAvailable inferred [med] calls FUN_0015fe40(system, id) when the sound archive is available
+0037e078 statusDownEnterState3 inferred [high] status screen state 3, previous state saved, step cleared
+004f8f08 btlStageResetAndClearCameraFlag inferred [med] clears pending, runs two camera resets, clears camera flag 0x08000000
+0033ab1c gameFlagsWriteBlockBit inferred [med] sets or clears a bit of the flag block words at 0x14a8
+00352e9c gameFlagsWriteBankBit inferred [med] sets or clears a bit of the flag-work bit bank
+00384d6c gameFlagsWriteWordBit inferred [med] sets or clears a bit of the flag words at 0xe8c
+0035dc10 uniteStartEffectProcesses inferred [high] allocates the unite effect work once and creates the calc process and two draw tasks
+0033706c sortEntryComparePriorityThenKeys inferred [med] qsort comparator: ascending priority then descending halfword keys
+003b0b58 scrCommBattleCheckFieldEquals inferred [med] pushes whether battle field 0xec/0xf0 equals the script argument
+003e5354 partyAdjustCounterIfEnoughActive inferred [med] with flag 0x533 set and 2+ active party slots adds delta to counter at 0x2c4e clamped to 0..8
+003bf3f0 mapOverlaySetOpen inferred [med] switches the map overlay (opening plays SE 0x92, closing restores background and plays 0x10E)

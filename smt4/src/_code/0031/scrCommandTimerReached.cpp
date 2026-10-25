@@ -1,8 +1,8 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 u32 clockGetSecondsSinceStart();
-void scrSetResult(u32 value);
 /* Converts the command timer to a bounded script result. */
 s32 scrCommandTimerReached()
 {

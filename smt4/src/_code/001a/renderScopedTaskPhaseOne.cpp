@@ -9,7 +9,7 @@ s32 packNibblesAndByte(u32, u32, u32);
 void taskRunPhase(u32);
 void FUN_002c198c(RenderCtx *);
 void FUN_002c18e4(RenderCtx *);
-void FUN_002c39a4(RenderCtx *);
+void renderCtxSelectStereoLayout(RenderCtx *);
 
 s32 renderScopedTaskPhaseOne(u32 job)
 {
@@ -29,7 +29,7 @@ s32 renderScopedTaskPhaseOne(u32 job)
     renderStackPop(&g_titleScene->additional.stackC);
     FUN_002c198c(g_titleScene);
     FUN_002c18e4(g_titleScene);
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     return 0;
 }
 }

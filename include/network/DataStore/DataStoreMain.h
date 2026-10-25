@@ -115,4 +115,12 @@ typedef struct DataStoreCtrl {
     /* 0x0C */ DataStoreWork *work;
 } DataStoreCtrl;
 
+extern "C" {
+void FUN_003344b4(u32 a, u32 b);
+}
+
+extern "C" {
+u32 objBStateAllowsAction(void);
+}
+
 #endif

@@ -27,7 +27,7 @@ s32 dialogIsActive(void);
 void dialogClose(s32 mode);
 s32 btlUiIsIdleB(BtlUiA *ui);
 void slotSetRequest(s32 slot, s32 mode, s32 value);
-void FUN_004f8f08(BtlAuxA *context);
+void btlStageResetAndClearCameraFlag(BtlAuxA *context);
 BtlMainStateA *btlGetMainState(void);
 void partyModelSlotsLoad(BtlMainStateA *battle);
 s32 btlStartEntries(BtlMainStateA *battle);
@@ -54,7 +54,7 @@ void battleAdvanceEntryStartup(EntryStartupStep *step)
         }
     } else if (step->phase == 2) {
         if (FUN_00163e84(0)) {
-            FUN_004f8f08(g_btlAux);
+            btlStageResetAndClearCameraFlag(g_btlAux);
             partyModelSlotsLoad(btlGetMainState());
             ++step->phase;
         }

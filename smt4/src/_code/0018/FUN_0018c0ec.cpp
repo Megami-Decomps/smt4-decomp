@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018c0ec` (_code @ 0x18c0ec, 0x3164 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -57,7 +58,6 @@ int FUN_0029e788(void);
 int FUN_0029e874(...);
 int FUN_0029ede8(...);
 int FUN_0029f848(...);
-int FUN_002a0cc8(...);
 int devilGetRecord(void);
 int eventQueueAddUniqueIfValid(...);
 int FUN_002bd06c(...);
@@ -96,7 +96,7 @@ int resultSetMenuState(...);
 int FUN_00296934(void);
 int FUN_0029c43c(...);
 int messageTargetSetValue(unsigned int, int);
-int FUN_0029e648(int, int);
+int messageBannerInitSelection(int, int);
 int soundChannelRequestIfEnabled(int, int);
 int gameGetUnitRecord(...);
 int gameGetSlotTable(...);
@@ -204,7 +204,7 @@ extern int FUN_0029c48c(void);
 /* Supplied declaration required: FUN_0029d8f4. */
 extern int FUN_0029e0f8(void);
 /* Supplied declaration required: messageTargetSetValue. */
-/* Supplied declaration required: FUN_0029e648. */
+/* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: FUN_0029e788. */
 /* Supplied declaration required: FUN_0029e874. */
 extern int flagWordTestBit(int, unsigned int);
@@ -387,7 +387,7 @@ unsigned int FUN_0018c0ec(void)
     } while (temp_v8 < 0x18);
     FUN_00296474(temp_v2);
     resultSetMenuState(temp_v2,2);
-    FUN_0029e648(1,0);
+    messageBannerInitSelection(1,0);
     messageTargetSetValue(*(unsigned int *)(temp_v2 + 0x3650),1);
     temp_v8 = 0;
     temp_v4 = 0;

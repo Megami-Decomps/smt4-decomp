@@ -1,8 +1,8 @@
 /* NON_MATCHING: first animated-member address is placed directly in r0 rather than passed through r1. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entry);
 void efctSetSpeed(f32 speed);
 void FUN_00493518(TextLayoutContextA *context, s32 sprite, s32 x, s32 y, u32 flags, f32 scale);
 f32 vec2GetSpeed(const void *object);
@@ -27,8 +27,8 @@ void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternat
         offsetof(PanelDecorationView, first) == 0x214 &&
         offsetof(PanelDecorationView, last) == 0x78C ? 1 : -1];
     PanelDecorationView *panel = reinterpret_cast<PanelDecorationView *>(owner);
-    const PanelTextLayoutEntryPrefixA *position = FUN_0018349c(
-        reinterpret_cast<TextLayoutContextA *>(panel->layout), row + 0x42F);
+    const PanelTextLayoutEntryPrefixA *position = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(
+        reinterpret_cast<TextLayoutContextA *>(panel->layout), row + 0x42F));
     s32 x = position->x;
     s32 y = position->y;
     efctSetSpeed(vec2GetSpeed(&panel->first) * scale);

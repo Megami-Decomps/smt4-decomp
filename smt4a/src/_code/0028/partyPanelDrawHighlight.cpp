@@ -1,6 +1,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelState.h"
+#include "util/PackNibbles.h"
 
 struct PanelSpriteOrigin {
     /* 0x00 */ u8 unk00[8];
@@ -14,7 +15,6 @@ extern RenderCtxA *g_renderCtx;
 PanelSpriteOrigin *FUN_001834a4(u32 table, s32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
 
 // Draw the panel sprite, temporarily changing render state for its highlighted variant.
 void partyPanelDrawHighlight(s32 index, s32 x, s32 y, u32 flags, s32 highlighted, f32 speed)

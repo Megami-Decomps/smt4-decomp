@@ -5,7 +5,6 @@
 extern "C" {
 s32 dataTable23Type0CountWithAoc(void);
 const Table23TriggerRecord *dataTable23Sub0GetEntry(u32 index);
-MapTriggerFlagView *gameGetMapBlock(void);
 
 /* Mark all table-23 triggers that reference the supplied group and id. */
 void mapTriggerMarkTable23Matches(u32 group, u32 id)
@@ -21,7 +20,7 @@ void mapTriggerMarkTable23Matches(u32 group, u32 id)
         if ((entry->triggers[0].group == group && entry->triggers[0].id == id)
             || (entry->triggers[1].group == group && entry->triggers[1].id == id)
             || (entry->triggers[2].group == group && entry->triggers[2].id == id)) {
-            MapTriggerFlagView *map = gameGetMapBlock();
+            MapTriggerFlagView *map = reinterpret_cast<MapTriggerFlagView *>(gameGetMapBlock());
             if (index >= 0) {
                 map->flags[index / 32] |= 1U << (index % 32);
             }

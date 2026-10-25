@@ -1,6 +1,7 @@
 /* NON_MATCHING: twin of the IV FUN_0038ebd8 - retail unpacks the pending event with an ldm/stm copy into a second 20-byte temp, keeps the state constants in r6/r7/r8 and orders the switch tests as a compare ladder (frame 72 bytes here 52); the state machine, calls and stored fields are the same. */
 #include "classes/AocMenu.h"
 #include "classes/Obj422594.h"
+#include "test/BustupViewer.h"
 
 /* What the window operation reports (five words; the first byte is the result code). */
 struct InputEvent {
@@ -47,7 +48,6 @@ void windowCreateStatusOperation(void *operation, s32 mode);
 void FUN_0047bcdc(u32 *job, s32 mode);
 void FUN_00477d10(u32 *job, s32 a, s32 b);
 void FUN_0047bc90(u32 *job, InputEvent *event);
-s32 FUN_002e19f8(void);
 void releaseEntriesB(u32 *regions);
 void releaseEntriesA(u32 *entries);
 void FUN_00476e58(u32 *job, s32 a, s32 b);

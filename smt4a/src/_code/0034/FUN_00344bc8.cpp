@@ -2,16 +2,16 @@
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
-GameBlock2830C *gameDataBlocksGetSaveData(void);
 
 static __inline bool unlockBitIsEarned(s32 index)
 {
     s32 byteIndex = index / 8;
     s32 bitIndex = index % 8;
-    return (progressUnlockByteGet(&gameDataBlocksGetSaveData()->unlocks.earned[byteIndex]) & (1u << bitIndex)) != 0;
+    return (progressUnlockByteGet(&reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byteIndex]) & (1u << bitIndex)) != 0;
 }
 
 /* Returns the table index of the nth earned progress unlock, or the table count if fewer are earned. */

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 // Private views of the portions accessed by this function.
 struct JyoucyuAllocationView {
@@ -23,9 +24,6 @@ s32 FUN_0025c7e4(void);
 void jyoucyuRequest(void);
 u32 jyoucyuDrawLoadingOverlay(void);
 
-void* asdProcessCreateSimple(const char* name, u32 priority, u32 option,
-                             u32 flags, s32 (*entry)(void),
-                             void (*request)(void), void* argument);
 void taskCreateDraw(const char* name, u32 priority, u32 option, u32 flags,
                     u32 (*draw)(void), u32 option2, u32 option3,
                     void* process);
@@ -41,8 +39,7 @@ void jyoucyuInitialize(void)
     g_jyoucyu.unk04->unk08 = 0;
     JyoucyuAllocationView* state = g_jyoucyu.unk04;
 
-    state->process = asdProcessCreateSimple(
-        "JYOUCYU C", 4, 0, 0, FUN_0025c7e4, jyoucyuRequest, 0);
+    state->process = reinterpret_cast<void*>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("JYOUCYU C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0025c7e4), reinterpret_cast<AsdProcFunc>(jyoucyuRequest), 0));
 
     taskCreateDraw("JYOUCYU D", 0x89, 0, 0,
                    jyoucyuDrawLoadingOverlay, 0, 0, state->process);

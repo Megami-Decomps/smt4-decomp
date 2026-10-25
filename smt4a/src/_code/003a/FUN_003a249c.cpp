@@ -7,7 +7,6 @@
 
 extern "C" {
 
-s32 FUN_003bf87c(void);
 s32 dataTable49Type1Count(void);
 const Table49Trigger *dataTable49GetEntry(s32 index);
 Table49NaviEntry *dataTableGetEntry49(s32 index);

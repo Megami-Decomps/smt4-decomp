@@ -1,5 +1,8 @@
 /* NON_MATCHING: camp cec loader thread body; retail hoists the loader field addresses into r5-r8 before the loop and keeps the profile buffer/key differently on the stack (84 vs 44 byte frame) */
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 struct CecLoader {
     /* 0x000 */ u8 unk000[0xCEC];
@@ -35,7 +38,6 @@ extern "C" {
 extern CecProfileState *g_campCec;
 
 void cecProcessStart(void);
-void FUN_002005a0(u8 *profile);
 void cecProcessForward(void *block);
 void FUN_002597c0(void);
 u32 FUN_00259800(void);
@@ -44,7 +46,6 @@ void btlTalkBustUpCreate(void);
 void fileSlotLoad(s32 slot);
 void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
 void asdTMTexTableLoadEntryAsync(s32 type, s32 index);
-void asdTMTexTableLoadSprites(s32 type);
 void threadSleepDuration(s64 nanoseconds);
 void FUN_002bd2b4(void *block, u32 a, u32 b, u32 c);
 void rt_aeabi_memclr(void *block, u32 size);
@@ -77,7 +78,7 @@ void FUN_001ec6e0(CecLoader *loader)
             loader->hasProfile = cecQueryOptionalProcess();
             if (loader->hasProfile != 0 && gameDataBlockTestFlag(0x20) != 0) {
                 u8 profile[CEC_PROFILE_SIZE];
-                FUN_002005a0(profile);
+                FUN_002005a0(reinterpret_cast<int>(profile));
                 if (rt_memcmp(profile, g_campCec->profile, CEC_PROFILE_SIZE) != 0) {
                     if (*(u16 *)&g_campCec->unk00[0x90] != 0) {
                         FUN_002597c0();

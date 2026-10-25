@@ -14,7 +14,6 @@ typedef char JyoucyuDrawStatusOffset[offsetof(JyoucyuDrawStatusViewIV, status) =
 extern "C" {
 extern JyoucyuWork *g_jyoucyu;
 extern TitleScene *g_titleScene;
-void FUN_002c39a4(void *context);
 s32 FUN_002c5d80(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c(void);
@@ -27,7 +26,7 @@ u32 FUN_001e981c(void)
     JyoucyuDrawStatusViewIV *resident = (JyoucyuDrawStatusViewIV *)g_jyoucyu;
     if (resident->status >= 100)
         return 0;
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
     RenderCtx *context = (RenderCtx *)g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 0));
     efctSetSpeed(1.0f);

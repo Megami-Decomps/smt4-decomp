@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 100 vs built 87 rows, 84 diff lines. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
@@ -9,6 +9,7 @@ void FUN_001aeddc(u8 *src, u8 *dst);
 void FUN_001aec9c(u8 *src, u8 *dst);
 void *asdMemoryAllocAligned(int, int, int, s32 size, u32 align, int);
 void asdMemFree(void *block);
+extern const char DAT_0053cdb4[]; /* AsdTMSpr.cpp: __FILE__ */
 
 /* Decompresses sprite data (format 0x10, 0x20 or 0x30 in the high nibble of its first byte) into
  * a newly allocated buffer and frees the compressed data. Heap choice comes from bit 0 of
@@ -22,13 +23,17 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
     if ((format == 0x10 || format == 0x20 || format == 0x30) && (size = FUN_001aeecc(data)) != 0) {
         if (flags & 1) {
             if (flags & 2) {
+                asdDebugTrace(DAT_0053cdb4, 211);
                 out = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, size, align, 0);
             } else {
+                asdDebugTrace(DAT_0053cdb4, 215);
                 out = (u8 *)asdMemoryAllocAligned(0x10000, 0x100, 0, size, align, 1);
             }
         } else if (flags & 2) {
+            asdDebugTrace(DAT_0053cdb4, 222);
             out = (u8 *)asdMemoryAllocAligned(0x100, 0x100, 0, size, align, 0);
         } else {
+            asdDebugTrace(DAT_0053cdb4, 226);
             out = (u8 *)asdMemoryAllocAligned(0x100, 0x100, 0, size, align, 1);
         }
         if (format == 0x10) {

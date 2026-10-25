@@ -1,18 +1,18 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_00151ecc(unsigned int);
+s32 FUN_00151ecc(u32 value);
 
-/* Supplied declaration required: FUN_00151ecc. */
+struct ArchiveView {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 fileId;
+};
 
-
-void FUN_002ac780(int param_1)
-
+/* Forwards the archive's file id (at 0x4) to FUN_00151ecc and returns its result. */
+u32 FUN_002ac780(ArchiveView *archive)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00151ecc(*(unsigned int *)(param_1 + 4));
-  return;
+    return FUN_00151ecc(archive->fileId);
 }
 
 } /* extern "C" */

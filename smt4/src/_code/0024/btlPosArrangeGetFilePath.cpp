@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct PosArrange {
     /* 0xC4 */ s32 setB;    /* index of the 01_ file, or negative */
 } PosArrange;
 
-extern void memClear(void *block, s32 size);
 extern void FUN_002522f8(char *dest, s32 size, const char *format, ...);
 
 /* Builds the path of the battle position-arrange file for the selected set into a local buffer

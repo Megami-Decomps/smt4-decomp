@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ extern int FUN_002fddd8(...); /* 0x2fddd8 */
 extern int g_partyPanel; /* 0x57f268 */
 
 /* Supplied declaration required: qsort. */
-extern unsigned char *FUN_0026140c(void);
 /* Supplied declaration required: FUN_0026f3a0. */
 
 
@@ -38,7 +38,7 @@ void partyPanelSortByMode(void)
   unsigned char temp_v1;
   
   temp_v0 = g_partyPanel;
-  pbVar2 = (unsigned char *)FUN_0026140c();
+  pbVar2 = (unsigned char *)reinterpret_cast<unsigned char *>(FUN_0026140c());
   temp_v1 = ~(*pbVar2 >> 7) & 1;
   if ((*pbVar2 & 0x7f) == 2) {
     if (temp_v1 != 0) {

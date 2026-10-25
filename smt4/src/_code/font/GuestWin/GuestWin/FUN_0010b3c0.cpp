@@ -4,6 +4,8 @@
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 // The UI object extends past the shared guest-window prefix.
 struct GuestWinAllocationView {
@@ -18,9 +20,6 @@ struct GuestWinParameterDefaults {
 extern "C" {
 extern GuestWinWork* g_guestWin;
 extern const GuestWinParameterDefaults DAT_00403964;
-void memClear(void* memory, u32 size);
-u32 asdProcessCreateSimple(const char* name, u32 priority, u32 size, u32 flags,
-                           TaskFunc update, TaskFunc destroy, void* work);
 u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
                    TaskFunc update, TaskFunc destroy, void* work, u32 parent);
 void guestWinUpdate(void* work);
@@ -40,7 +39,7 @@ void FUN_0010b3c0(void)
     }
     GuestWinWork* work = g_guestWin;
     memClear(work, sizeof(GuestWinAllocationView));
-    work->job = asdProcessCreateSimple("GuestWin Calc", 1, 0, 0, guestWinUpdate, NULL, NULL);
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GuestWin Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(guestWinUpdate), NULL, NULL);
     taskCreateDraw("GuestWin DrawUpLeft", 0x81, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
     taskCreateDraw("GuestWin DrawUpRight", 0xDF, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
     work = g_guestWin;

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -88,7 +89,6 @@ extern int gameSlotTableFindFree(void);
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: gameDataCopySaveEntry. */
-extern int FUN_0026140c(void);
 extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int computeCountLimit(void);
@@ -172,7 +172,7 @@ void FUN_0028625c(int *param_1)
     if ((char)temp_v33[0x19] != '\0') {
       return;
     }
-    temp_v2 = FUN_0026140c();
+    temp_v2 = reinterpret_cast<int>(FUN_0026140c());
     temp_v3 = param_1[0x100];
     temp_v25 = (short *)(temp_v2 + 0x20);
     if (((temp_v3 == 5) || (temp_v3 == 6 || temp_v3 == 2)) && ((char)temp_v31[0x24] != '\0')) {
@@ -326,7 +326,7 @@ LAB_00286938:
             param_1[0x171] = 2000;
           }
           piVar9 = g_unite;
-          temp_v2 = FUN_0026140c();
+          temp_v2 = reinterpret_cast<int>(FUN_0026140c());
           temp_v16 = 1;
           temp_v12 = 0x100;
           asdMemoryAlloc(0x100,0x100,0,0xa00);
@@ -692,11 +692,11 @@ LAB_0028727c:
           }
           piVar9 = g_unite;
           if ((char)g_unite[0x108] != '\x02') {
-            temp_v2 = FUN_0026140c();
+            temp_v2 = reinterpret_cast<int>(FUN_0026140c());
             pbVar19 = (unsigned char *)(temp_v2 + 0x11);
           }
           else {
-            temp_v2 = FUN_0026140c();
+            temp_v2 = reinterpret_cast<int>(FUN_0026140c());
             pbVar19 = (unsigned char *)(temp_v2 + 0x12);
           }
           temp_v14 = ~(*pbVar19 >> 7) & 1;

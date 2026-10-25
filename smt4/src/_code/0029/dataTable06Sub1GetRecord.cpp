@@ -1,23 +1,21 @@
-/* Registers a 4-slot request for `id`, keyed by the table-6 handle, with the callback at 0x2DCA98. */
+/* Finds the record of data table 6/1 (four bytes each, a halfword key first) whose key is `id`. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
 
 extern "C" {
 
-extern u32 dataTableGetCount(u32 table);
-extern u32 dataTableGetEntries(void);
-extern u32 dataTableGet(s32 group, s32 id);
-extern void libc_bsearch(u16 *request, u32 owner, u32 table, s32 count, void *callback);
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 idMapCompareKeys(const void *left, const void *right);
 
-void dataTable06Sub1GetRecord(u16 id)
+void *dataTable06Sub1GetRecord(u16 id)
 {
-    u32 table = dataTableGet(6, 1);
-    u32 owner = dataTableGetEntries();
-    u16 request[2];
+    void *section = dataTableGet(6, 1);
+    void *entries = dataTableGetEntries(section);
+    u32 count = dataTableGetCount(section);
+    u16 key = id;
 
-    table = dataTableGetCount(table);
-    request[0] = id;
-    libc_bsearch(request, owner, table, 4, (void *)0x002DCA98);
+    return libc_bsearch(&key, entries, count, 4, idMapCompareKeys);
 }
 
 }

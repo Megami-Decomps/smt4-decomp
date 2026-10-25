@@ -1,5 +1,6 @@
 /* NON_MATCHING: Spring of Healing setup/teardown and hard-float arguments are recovered; root/model register allocation and shared epilogues differ. */
 #include "shard/HealingSceneWork.h"
+#include "util/CalleeContracts.h"
 
 struct HealingFreeCamera {
     /* 0x00 */ u8 unk00[8];
@@ -41,7 +42,6 @@ void *dataTableFileGetTable(void *file, u32 index);
 void *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 void placeWinStartText(const char *text);
-s32 FUN_0013def0(u32 index);
 void FUN_0013cab8(u32 index, u32 duration, u32 value);
 void FUN_00348c50(u32 mode);
 void priceMenuUpdateScripts(HealingSceneWork *work);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail reloads list->tail for node->prev and bumps count/tail through one writeback store; built reuses the loaded tail and uses separate stores. */
 #include "common.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 
 struct EffBlock;
 
@@ -21,16 +22,15 @@ struct EffList {
 
 extern "C" {
 
-void *FUN_001642e4(const void *path, u32 *size, u32 align, u32 flags);
 EffBlock *FUN_00290edc(void *data);
 void asdMemFree(void *ptr);
 EffNode *FUN_003007a0(void);
 
 // Load a block from a file, clone it into a new node and append the node to the list.
-void FUN_0037667c(EffList *list, const void *path)
+void FUN_0037667c(EffList *list, const char *path)
 {
     u32 size;
-    void *data = FUN_001642e4(path, &size, 1, 0x80);
+    void *data = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
     EffBlock *block = FUN_00290edc(data);
     asdMemFree(data);
     EffNode *node = FUN_003007a0();

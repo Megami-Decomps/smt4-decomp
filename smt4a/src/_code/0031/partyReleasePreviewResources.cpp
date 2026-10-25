@@ -1,5 +1,6 @@
 #include "camp/PartyResourceWork.h"
 #include "gamedata/DevilRecordA.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void asdMemFree(void *);
@@ -8,7 +9,6 @@ void FUN_0038b3f8(s32, s32);
 PartyTextureSlot *FUN_003e4d68(u32);
 s32 FUN_00187168(const PartyTextureSlot *);
 void ifTouchRegionRemove(void);
-s32 devilIsTextureLoaded(s32, s32);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);
 

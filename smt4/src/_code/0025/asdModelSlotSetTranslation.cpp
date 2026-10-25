@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_ModelColor.h"
+#include "AsdSDK/Source/Gfx/Effect/effParts.h"
 extern "C" {
 extern ModelColorBank DAT_004d9d88[];
 /* Set the model slot translation and mark its transform dirty. */

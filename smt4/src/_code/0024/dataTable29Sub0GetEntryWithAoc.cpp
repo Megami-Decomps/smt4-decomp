@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ typedef struct TableEntry {
 
 extern void *g_aocSystem;
 extern void *dataTableGet(s32 group, s32 index);
-extern TableEntry *dataTableGetEntries(void *table);
 extern u32 dataTableGetCount(void *table);
 extern u32 FUN_0025bed8(void *aoc, s32 type, s32 flag);
 extern TableEntry *FUN_003876c0(void *aoc, u32 index);
@@ -17,7 +17,7 @@ extern TableEntry *FUN_003876c0(void *aoc, u32 index);
 TableEntry *dataTable29Sub0GetEntryWithAoc(u32 index)
 {
     void *table = dataTableGet(0x29, 0);
-    TableEntry *entries = dataTableGetEntries(table);
+    TableEntry *entries = reinterpret_cast<TableEntry *>(dataTableGetEntries(table));
     u32 count = dataTableGetCount(table);
 
     if (index < count) {

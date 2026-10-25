@@ -4,7 +4,7 @@
 
 extern "C" {
 extern PanelTextDefaultsPrefixA DAT_0057f0ac;
-const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entryId);
+const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 u32 FUN_002a4b28(u16 textId);
 u32 FUN_00180118(u16 textId);
 void drawTextAtSnappedRectangle(TextLayoutContextA *context, u32 style,
@@ -24,12 +24,12 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, u16 textId,
     u32 style;
     u32 color;
     if (alternateStyle != 0) {
-        base = FUN_0018349c(context, entryIndex + 0x42F);
+        base = layoutFindTableEntry(context, entryIndex + 0x42F);
         offsetEntry = 0x499;
         style = 3;
         color = 0x9FE7FFFFu;
     } else {
-        base = FUN_0018349c(context, entryIndex + 0x40E);
+        base = layoutFindTableEntry(context, entryIndex + 0x40E);
         offsetEntry = 0x48B;
         style = 2;
         color = 0xFFFFFFFFu;
@@ -44,7 +44,7 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, u16 textId,
         textValue = DAT_0057f0ac.fallbackTextValue;
     }
 
-    const PanelTextLayoutEntryPrefixA *offset = FUN_0018349c(context, offsetEntry);
+    const PanelTextLayoutEntryPrefixA *offset = layoutFindTableEntry(context, offsetEntry);
     drawTextAtSnappedRectangle(context, style, color, textValue,
         static_cast<f32>(static_cast<s32>(offset->x) + baseX),
         static_cast<f32>(static_cast<s32>(offset->y) + baseY),

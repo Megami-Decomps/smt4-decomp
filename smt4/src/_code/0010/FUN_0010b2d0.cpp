@@ -27,7 +27,6 @@ extern RenderCtx *g_titleScene;
 
 s32 surfaceCopy(JobSurface *dest, JobSurface *src);
 s32 FUN_002bfadc(s32 arg, JobSurface *surface);
-void FUN_002c39a4(RenderCtx *scene);
 s32 FUN_002bff10(s32 arg);
 
 /* Title job step: once idle and ready, renders the scene into the surface at half size and marks it captured. */
@@ -41,7 +40,7 @@ s32 FUN_0010b2d0(u32 job)
     } else if (work->state.active != 0) {
         state = &work->state;
         if (state->captured == 0 && state->busy == 0 && state->ready != 0) {
-            FUN_002c39a4(g_titleScene);
+            renderCtxSelectStereoLayout(g_titleScene);
             work->surface->width = 0x200;
             work->surface->height = 0x200;
             work->state.unk62 = FUN_002bfadc(0, work->surface);

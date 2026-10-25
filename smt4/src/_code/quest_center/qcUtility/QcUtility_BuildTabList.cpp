@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation and spill order differ (retail keeps the first-random-slot argument in r8 and the slot list in r7); the slot-clearing loop compiles to a counted pointer loop instead of retail's indexed 2x-unrolled one */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "util/QcActive_GetField20.h"
 
 /* One tab's 20 quest slots: a quest index, QC_SLOT_FREE (-2, not filled yet) or QC_SLOT_BONUS (-1). */
 struct QcTab {
@@ -42,7 +43,6 @@ s32 QcUtility_GetQuestTableChunkCount(s32 group, s32 tableGroup);
 QcQuestRecord *dataTable26GroupGetRecord(s32 group, s32 tableGroup, s32 index);
 s32 gameFlagIsSet(s32 flagId);
 s32 randNextInRange(u16 range);
-s32 QcActive_GetField20(void);
 s32 QcActive_GetField22(void);
 s32 QcActive_GetField24(void);
 s32 QcActive_GetField26(void);

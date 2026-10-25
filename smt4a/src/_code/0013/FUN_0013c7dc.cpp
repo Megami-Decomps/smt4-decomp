@@ -1,12 +1,11 @@
 /* NON_MATCHING: flag-group address reuse, gate branches and the service-call NOP differ. */
 #include "shard/FrameWork.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 void FUN_00150d38(u32 value);
-void FUN_00157558(RenderCtxA *context);
 u32 stateValuesGetBySelector(u32 selector);
-extern RenderCtxA *g_renderCtx;
 
 s32 FUN_0013c7dc(u32 job)
 {

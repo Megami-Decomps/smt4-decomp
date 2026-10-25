@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/RecordPackedValue.h"
 
 extern "C" {
 

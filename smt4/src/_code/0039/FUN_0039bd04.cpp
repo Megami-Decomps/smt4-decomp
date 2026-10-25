@@ -1,6 +1,7 @@
 /* NON_MATCHING: title scene loading ring draw (nine dots rotating around a centre, "Activating..." caption); written from the decompilation, float/int conversions and the local text copy not compared with retail */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "text/TextDraw.h"
 
 struct TitleLoadingScene {
     /* 0x000 */ u8 unk000[0x9ED];
@@ -38,7 +39,6 @@ void FUN_002bed3c(void);
 s32 vec2GetXInt(void *state);
 void FUN_002bf380(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 LoadingSpriteFrame *FUN_002bf4f8(u32 bank, u32 sprite);
-void FUN_002be5a4(u32 layer, u32 color, const char *text, f32 x, f32 y);
 s32 FUN_002bedb0(RenderCtx *context, s32 stack);
 void FUN_002bf818(void *state);
 
@@ -77,7 +77,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
 
     LoadingSpriteFrame *caption = FUN_002bf4f8(0x1C, 0x1120);
     char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
-    FUN_002be5a4(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y);
+    FUN_002be5a4(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
     FUN_002bedb0(g_titleScene, 3);
     efctSetSpeed(1.0f);
     FUN_002bf818(origin);

@@ -2,7 +2,7 @@
 
 extern "C" {
 u32 flagBitIsSet(s32 id);
-const LookupSortKeys* FUN_002ae584(u32 id);
+const LookupSortKeys* appCostRecordFindById(u32 id);
 
 // Compare flag differences first, then the table's secondary key descending.
 s32 FUN_001f64c0(const s32* first, const s32* second)
@@ -16,8 +16,8 @@ s32 FUN_001f64c0(const s32* first, const s32* second)
     if ((secondFlags & ~firstFlags) != 0) {
         result = -1;
     } else if (result == 0) {
-        const LookupSortKeys* a = FUN_002ae584(*first);
-        const LookupSortKeys* b = FUN_002ae584(*second);
+        const LookupSortKeys* a = appCostRecordFindById(*first);
+        const LookupSortKeys* b = appCostRecordFindById(*second);
         result = b->secondary - a->secondary;
     }
     return result;

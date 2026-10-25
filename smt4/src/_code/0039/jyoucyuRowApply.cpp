@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail starts the row index with moveq r1,#0 (the build reuses r0, known to be 0 there) */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct Row00394750 {
     /* 0x08 */ u8 unk08[8];
 } Row00394750;
 
-s32 jyoucyuGetTableEntry(s32 index);
 void asdSoundSelectSlotB(s32 value);
 void asdSndEnsureCurrentSlotData(u32 value);
 

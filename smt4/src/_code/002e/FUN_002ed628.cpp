@@ -17,7 +17,7 @@ int FUN_002b0800(...);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 
@@ -47,7 +47,7 @@ extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, unsig
 extern unsigned int jobGetWork(unsigned int handle);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -74,7 +74,7 @@ int FUN_002ed628(unsigned int handle)
   float temp_v12;
   
   temp_v0 = jobGetWork(handle);
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v3 = g_titleScene;
   temp_v1 = FUN_002c5d80(1,0);
   piVar7 = (int *)(temp_v3 + 0x124c);

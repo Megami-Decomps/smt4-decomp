@@ -1,9 +1,9 @@
 /* NON_MATCHING: early completion return layout and frame-counter temporaries differ from retail's shared return block. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 s32 scrGetCommandFrame();
-s32 FUN_004186a4();
 void scrWorkSetValue(u32 index, s32 value);
 s32 scrWorkGetValue(u32 index);
 s32 dataTableValueOrZero(u32 index);

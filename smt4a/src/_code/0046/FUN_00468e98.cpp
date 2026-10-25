@@ -5,7 +5,7 @@
 extern "C" {
 extern QuestSelectionNotification DAT_005f16fc;
 QuestSelectionFlags *gameFlagsGetBlock();
-s32 FUN_002a746c();
+u8 FUN_002a746c();
 s32 FUN_002f153c();
 u8 uiQuestGetPanelMode();
 s32 uiQuestGetActive();

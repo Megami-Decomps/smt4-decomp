@@ -3,17 +3,17 @@
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include <math.h>
+#include "util/CalleeContracts.h"
 extern "C" {
 extern CameraVectorScratch DAT_006471dc;
 extern Vector4 DAT_005c1120;
-const ProjectionMatrices *FUN_00152f54(void);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 void FUN_001bced4(Matrix44 *output);
 
 f32 FUN_002914e8(f32 size)
 {
     Vector4 saved = DAT_006471dc.direction;
-    const ProjectionMatrices *camera = FUN_00152f54();
+    const ProjectionMatrices *camera = reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54());
     DAT_005c1120 = DAT_006471dc.direction;
     f32 world[3] = {DAT_005c1120.x, DAT_005c1120.y, DAT_005c1120.z};
     Vector4 projected;

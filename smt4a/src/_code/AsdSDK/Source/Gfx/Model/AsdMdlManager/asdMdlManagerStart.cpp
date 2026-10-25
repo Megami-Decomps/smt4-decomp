@@ -1,12 +1,12 @@
 /* NON_MATCHING: the worker entry function lives right after this one in retail, so retail takes its address pc-relative (`add r0, pc, #112`); built code loads it through the literal pool */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
-void *asdMemoryAllocTracked(int, int, int, s32 size, int);
 void tripleClear(u32 *list);
-void *asdProcessCreateSimple(void (*entry)(void), u32 arg, s32 a, s32 b, void (*onExit)(void), void (*onStart)(void), void *userData);
 void asdMemFree(void *block);
 void LAB_0014340c(void);
 void LAB_00151d9c(void);
@@ -29,7 +29,7 @@ void asdMdlManagerStart(u32 arg)
         *state = 0;
         tripleClear(&g_asdMdlList);
         tripleClear(&g_asdMdlList2);
-        g_asdMdlWorker = asdProcessCreateSimple(LAB_0014340c, arg, 0, 0, LAB_00151d9c, asdMdlManagerReleaseBlock, state);
+        g_asdMdlWorker = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_0014340c), arg, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(LAB_00151d9c), reinterpret_cast<AsdProcFunc>(asdMdlManagerReleaseBlock), reinterpret_cast<u32>(state)));
         if (g_asdMdlWorker == NULL) {
             asdMemFree(state);
         }

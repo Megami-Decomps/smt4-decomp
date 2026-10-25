@@ -14,8 +14,7 @@ void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
 s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
-s32 buttonHelpIsNotActive();
-s32 flaggedValueHolderGetTotal(const void *value);
+u8 buttonHelpIsNotActive(void);
 void FUN_0032d0c8(s32 channel, s32 kind, u32 id, s32 mode);
 const char *dataLookupDisplayName(void *storage, u32 id);
 s32 textFormatBuffer(char *output, const char *format, ...);
@@ -46,7 +45,7 @@ void FUN_004a4d70(Screen4A *screen)
             };
             typedef char AnalyzeListOffsetCheck[offsetof(AnalyzeListView, entries) == 0x864 ? 1 : -1];
             BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeListView *>(screen)->entries;
-            s32 index = flaggedValueHolderGetTotal(screen->listSelection.selectedIndex);
+            s32 index = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(screen->listSelection.selectedIndex));
             FUN_0032d0c8(0, 1, entries[index].id, 0);
             return;
         }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map/lmapMain.h"
 
 extern "C" {
 

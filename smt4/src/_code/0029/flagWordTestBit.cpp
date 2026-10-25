@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/FlagBitTests.h"
 
 extern "C" {
 
@@ -8,8 +8,10 @@ typedef struct Obj {
 } Obj;
 
 /* Whether bit `bit` of the flag word at +0x44 is set. */
-u8 flagWordTestBit(Obj *obj, u32 bit)
+u8 flagWordTestBit(const void *record, u32 bit)
 {
+    const Obj *obj = static_cast<const Obj *>(record);
+
     return ((u32)obj->flags & (1 << (bit & 0xff))) != 0;
 }
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00208c08` (_code @ 0x208c08, 0x1518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int FUN_0021af2c(void);
 int statusCameraApply(void);
-int devilIsTextureLoaded(...);
 int linkHolderRunAll(...);
 int FUN_003e5558(...);
 int FUN_003e5858(...);
@@ -382,7 +382,7 @@ unsigned int FUN_00208c08(void)
     if (!(*(char *)(temp_v2 + 0x2018) == '\x03' || *(char *)(temp_v2 + 0x2018) == '\n')) {
       temp_v3 = (int)*(short *)(temp_v2 + 0x138c);
       if (temp_v3 != 0) {
-        devilIsTextureLoaded(temp_v3,1);
+        devilIsTextureLoaded(temp_v3, 1);
         if (temp_v3 != 0) goto LAB_002093e4;
       }
       else {

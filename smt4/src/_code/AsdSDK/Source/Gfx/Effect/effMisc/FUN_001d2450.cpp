@@ -2,6 +2,8 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/Effect/effParticle.h"
+#include "AsdSDK/Source/Gfx/Effect/effParticleParamCopy.h"
 
 extern "C" {
 extern const char DAT_00410380[];
@@ -12,8 +14,6 @@ void objectBufferFree(void *buffer);
 void *FUN_002691d8(u16 kind, u32 count,
                     ParticleDefinitionPrefixIV *definition);
 void *FUN_00268fc4(void *source);
-void effParticleParamCopy(ParticleInstanceIV *destination,
-                          ParticleSourcePrefixIV *source);
 
 ParticleInstanceIV *FUN_001d2450(ParticleSourcePrefixIV *source)
 {
@@ -42,7 +42,7 @@ ParticleInstanceIV *FUN_001d2450(ParticleSourcePrefixIV *source)
     if (instance->count != 0) {
         if (source->auxiliary != 0)
             instance->auxiliary = FUN_00268fc4(source->auxiliary);
-        effParticleParamCopy(instance, source);
+        effParticleParamCopy(reinterpret_cast<EffParticleParam *>(instance), reinterpret_cast<EffParticleParam *>(source));
     }
     return instance;
 }

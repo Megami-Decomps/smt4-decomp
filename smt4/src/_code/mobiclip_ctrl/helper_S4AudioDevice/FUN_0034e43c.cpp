@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "common.h"
 #include "nn/Result.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The audio device's allocator interface: slot 0 allocates. */
 class AudioAllocator {
@@ -49,7 +50,6 @@ void FUN_0035a31c(const void *a, const void *b, u32 c, u32 d);
 void FUN_0011bf24();
 void FUN_0011cc1c();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
-void *memClear(void *destination, u32 size);
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(u32 heap, u32 type, u32 flags, u32 bytes, u32 alignment, u32 clear);
 void *asdOperatorNew(u32 bytes, void *owner);

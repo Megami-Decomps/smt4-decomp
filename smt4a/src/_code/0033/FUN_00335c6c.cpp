@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00335c6c` (_code @ 0x335c6c, 0x734 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ extern int btlGetMainState(void);
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: sysMemClear. */
-extern int flagValueIsPositive(int);
 
 
 void FUN_00335c6c(void)

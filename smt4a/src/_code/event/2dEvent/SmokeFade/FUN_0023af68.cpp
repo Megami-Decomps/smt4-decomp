@@ -40,7 +40,6 @@ extern SmokeFadeGlobals g_smokeFadeState;
 extern SmokeFadeRecord DAT_0057f498;
 
 s32 FUN_00162ea4(void);
-s32 FUN_00203d74(void);
 f32 mathInterpolateTimed(f32 from, f32 to, s32 duration, s32 elapsed);
 void slotSetRequest(s32 slot, s32 value, s32 flag);
 void FUN_003d54f8(s32 slot, s32 value);

@@ -10,7 +10,7 @@ int FUN_00299bc4(...);
 int gameSetStatusCameraHeightMode(...);
 int campRefreshEquipmentCategory(...);
 int beginStatusPanelClose(void);
-int FUN_0029e648(...);
+int messageBannerInitSelection(...);
 int asdMdlManagerDestroy(...);
 int timerStart(...);
 
@@ -84,7 +84,7 @@ extern int FUN_0029dfa8(void);
 extern int FUN_0029e0f8(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e648. */
+/* Supplied declaration required: messageBannerInitSelection. */
 /* Supplied declaration required: objectPartRunUnlessLocked. */
 extern int FUN_0029e958(int);
 /* Supplied declaration required: FUN_0029ee6c. */
@@ -723,7 +723,7 @@ joined_r0x00188f3c:
       *(unsigned int *)(temp_v5 + 0x25c0) = 0;
       campReleaseScreenTouchRegions(temp_v11,0);
       guestWinRequestOpen();
-      FUN_0029e648(1,0);
+      messageBannerInitSelection(1,0);
       messageInitializeSavedBanner();
       return;
     }

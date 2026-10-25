@@ -1,5 +1,6 @@
 /* NON_MATCHING: bank/category register lifetimes and changed-bit address computation differ from retail. */
 #include "common.h"
+#include "shard/ItemStackLimit.h"
 
 struct FlagValueDescription {
     /* 0x00 */ s32 firstId;
@@ -24,7 +25,6 @@ struct FlagValueStorage {
 };
 
 extern "C" void FUN_0041849c(u16 id);
-extern "C" FlagValueDescription *FUN_0019c06c(s32 id);
 extern "C" FlagValueStorage *flagValueGetStorage(void);
 extern "C" u32 itemGetStackLimit(s32 id);
 
@@ -34,7 +34,7 @@ extern "C" void flagValueAdd(s32 id, u32 amount)
     if (amount == 0)
         return;
     FUN_0041849c((u16)id);
-    FlagValueDescription *description = FUN_0019c06c(id);
+    FlagValueDescription *description = reinterpret_cast<FlagValueDescription *>(itemCategoryFindByItemId(id));
     if (description == NULL)
         return;
     u8 category = description->category;

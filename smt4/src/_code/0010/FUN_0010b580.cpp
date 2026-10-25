@@ -2,6 +2,7 @@
 /* Counts down the timers of the map's timed slots that are fully armed (flags 1, 2 and 4 set) and marks a slot
  * expired (flag 8) when its timer reaches zero. */
 #include "common.h"
+#include "shard/SaveWork.h"
 
 extern "C" {
 /* One timed slot of the map block (0x14 bytes). */
@@ -18,11 +19,10 @@ struct MapTimedSlots {
     /* 0xF20 */ TimedSlot slots[16];
 };
 
-MapTimedSlots *gameGetMapBlock(void);
 
 void FUN_0010b580(void)
 {
-    MapTimedSlots *block = gameGetMapBlock();
+    MapTimedSlots *block = reinterpret_cast<MapTimedSlots *>(gameGetMapBlock());
     TimedSlot *slot = block->slots;
     s32 remaining = 16;
 

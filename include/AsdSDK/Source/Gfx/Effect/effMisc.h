@@ -130,4 +130,8 @@ typedef struct EffRenderState {
     /* 0x118c */ u32 completion;
 } EffRenderState;
 
+extern "C" {
+EffEmitter *effEmitterCreateSmall(EffEmitterDesc *desc);
+}
+
 #endif

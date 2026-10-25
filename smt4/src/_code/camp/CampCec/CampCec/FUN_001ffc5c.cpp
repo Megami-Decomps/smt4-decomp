@@ -1,4 +1,7 @@
 /* NON_MATCHING: first rewrite from the asm (205 rows against 231; asdDebugTrace is a real call here but a nop after armlink inlining in retail): same flow, strings, constants and handler table; retail keeps the work pointer/size constant in more registers (r5 = 0xD7C then the draw callback, r7 = 1, r8 = &g_campCec) and builds the thread-create argument block (info, stack top, priority, affinity) with different stack stores, and the handler table stores use ldr/str pairs in a different order */
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "sys/ResultReport.h"
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
@@ -61,8 +64,6 @@ void FUN_001ec6e0(void);
 
 s32 asdMemAlloc(s32 size, s32 alignment, s32 a, s32 line, s32 b);
 s32 memAlloc(s32 size, s32 alignment, s32 a, s32 b, s32 c, s32 d);
-void memClear(void *memory, s32 size);
-u32 asdProcessCreateSimple(const char *name, s32 a, s32 b, s32 c, void *function, s32 d, s32 e);
 void taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*draw)(void), s32 c, s32 d, u32 owner);
 void *asdOperatorNew(s32 size, void (*owner)(void));
 s32 resultReportIfFailed(void *object, void *memory, s32 size);
@@ -77,9 +78,8 @@ void runWinOpenState(void);
 void gameDataBlocksAddFlags(s32 flags);
 void gameDataFlagsSetBits(s32 bits);
 s32 nn_cfg_CTR_IsRestrictP2pCec(void);
-s32 FUN_00359f90(void);
+u8 FUN_00359f90(void);
 u32 FUN_002bcc60(void *thread, s32 *info, void (*entry)(void), void *argument, s32 stackTop, s32 priority, s32 affinity, s32 flag);
-void FUN_002c526c(void);
 void asdDebugTrace(const char *path, s32 line);
 
 /* Creates the camp CEC screen: allocates its work, starts the update process and draw tasks,
@@ -95,7 +95,7 @@ void FUN_001ffc5c(void)
     }
     work = g_campCec;
     memClear(work, 0xD7C);
-    work->process = asdProcessCreateSimple("CampCec Calc", 1, 0, 0, &LAB_0018b20c, 0, 0);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCec Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_0018b20c), 0, 0);
     taskCreateDraw("CampCec DrawUpLeft", 0x7D, 0, 0, campCecDrawDimmingOverlay, 0, 0, work->process);
     taskCreateDraw("CampCec DrawUpRight", 0xDB, 0, 0, campCecDrawDimmingOverlay, 0, 0, work->process);
 
@@ -155,7 +155,7 @@ void FUN_001ffc5c(void)
         s32 info = 4;
         u32 result = FUN_002bcc60(work->thread, &info, FUN_001ec6e0, work, 0, 0x11, -2, 0);
         if (((result & 0x7E00000) != 0x600000) && (s32)result < 0) {
-            FUN_002c526c();
+            FUN_002c526c(result);
         }
     }
 }

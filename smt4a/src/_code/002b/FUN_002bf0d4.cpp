@@ -1,5 +1,8 @@
 /* NON_MATCHING: Texture region bounds and modulo-1000 selection are complete; preserved argument moves and signed-remainder instruction scheduling differ. */
 #include "common.h"
+#include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/AsdTMTexTableCallFileC.h"
+#include "util/AsdTMTexTableCallFileC.h"
 
 struct TextureRegion {
     /* 0x00 */ u16 x;
@@ -21,7 +24,6 @@ struct TextureRegionBounds {
     /* 0x08 */ s32 left;
     /* 0x0C */ s32 right;
 };
-extern "C" TextureRegionFile *asdTMTexTableCallFileC(u32 file, s32 region);
 
 /* Read the selected texture region's bounds, ignoring packed dimension flags. */
 extern "C" void FUN_002bf0d4(u32 file, s32 region, TextureRegionBounds *bounds)
@@ -29,7 +31,7 @@ extern "C" void FUN_002bf0d4(u32 file, s32 region, TextureRegionBounds *bounds)
     if (bounds == NULL) {
         return;
     }
-    TextureRegionFile *resource = asdTMTexTableCallFileC(file, region);
+    TextureRegionFile *resource = reinterpret_cast<TextureRegionFile *>(asdTMTexTableCallFileC(file, region));
     const TextureRegion *entry = &resource->table->regions[region % 1000];
     bounds->top = entry->y;
     bounds->bottom = entry->y + (entry->height & 0x7fff);

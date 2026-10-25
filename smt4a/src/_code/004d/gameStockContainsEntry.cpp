@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "util/GameStockContainsEntry.h"
 
 struct GameStockTable {
     GameSlotEntry entries[24]; // 0x0000

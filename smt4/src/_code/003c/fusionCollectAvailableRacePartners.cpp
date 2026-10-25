@@ -23,7 +23,7 @@ struct FusionRaceCombination {
 
 extern "C" {
 u16 *gameDataBlocksGetCounterPtr();
-u32 FUN_0029ea68(u32 id);
+u32 itemGetFlagBit1(u32 id);
 }
 
 static __inline u16 firstFusionDevilId()
@@ -64,7 +64,7 @@ extern "C" s32 fusionCollectAvailableRacePartners(const FusionRaceFilterIV *filt
         s32 first = firstFusionDevilId();
         s32 last = lastFusionDevilId();
         for (s32 id = first; id <= last; ++id) {
-            if (FUN_0029ea68((u16)id) && allowedRaces[devilGetRecord((u16)id)->race]) {
+            if (itemGetFlagBit1((u16)id) && allowedRaces[devilGetRecord((u16)id)->race]) {
                 output[count++] = (u16)id;
             }
         }
@@ -72,7 +72,7 @@ extern "C" s32 fusionCollectAvailableRacePartners(const FusionRaceFilterIV *filt
         s32 first = firstFusionDevilId();
         s32 last = lastFusionDevilId();
         for (s32 id = first; id <= last; ++id) {
-            if (FUN_0029ea68((u16)id)) {
+            if (itemGetFlagBit1((u16)id)) {
                 output[count++] = (u16)id;
             }
         }

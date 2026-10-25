@@ -1,5 +1,6 @@
 /* NON_MATCHING: packet initialization interleaves kind/flag stores with pair defaults; retail writes all four pair defaults first. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 struct SequenceFiveRequest {
     u8 kind; // 0x00
@@ -14,7 +15,6 @@ struct SequenceFiveRequest {
 };
 
 extern "C" {
-void asdSequenceRequest(s32 state, const void *argument, u32 size);
 
 // Request sequence five with an id and unspecified pair selections.
 u32 FUN_0026f960(u32 id)

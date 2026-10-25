@@ -1,11 +1,11 @@
 #include "camp/RenderCtx.h"
+#include "util/PackNibbles.h"
 
 struct RenderStateScopeWork { u8 prefix[0xC]; u32 state; };
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32 mode, f32 value);
 s32 FUN_001692ac(u32 first, u32 second);
-s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
 u32 FUN_004ce7c4(RenderStateScopeWork *work)
 {

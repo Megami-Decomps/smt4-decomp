@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ typedef struct Request {
     u8 unk08[120];  /* 0x08 */
 } Request;
 
-extern void memClear(void *buffer, s32 size);
 extern s32 FUN_002a6e7c(u32 owner, s32 kind, u32 key, Request *req);
 extern void aocDisplayQueueRecord(u32 context, Request *req, u32 arg0, u32 arg1, s32 flag0, s32 flag1, s32 flag2);
 extern u32 g_aocDisplay; /* 0x433130 */

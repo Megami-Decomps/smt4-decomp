@@ -1,5 +1,6 @@
 /* NON_MATCHING: creates and initialises the lmap main state (0x9370 bytes) and starts its calc and draw tasks; written from the decompilation, store order and constant materialisation not compared with retail */
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 /* One of the 0x88-byte lmap slots; the first three bytes are cleared here. The last slot of the
  * first array also holds three words that are set separately. */
@@ -143,8 +144,6 @@ LmapGameBlock *gameFlagsGetBlock(void);
 void FUN_002c23cc(s32 value);
 void FUN_00482ab0(void *object);
 void FUN_002442ac(void);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 first, u32 second,
-                           void *update, void *end, u32 work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, u32 work, u32 parent);
 s32 FUN_00276264(u32 handle);
@@ -260,7 +259,7 @@ void FUN_00272970(void)
     state->unkAE0 = 0;
     state->slotsA[0x7F].word0C = 0;
     state->unk08 = 0;
-    state->process = asdProcessCreateSimple("LMAP C", 4, 0, 0, (void *)FUN_00276264, (void *)lmapRequest, 0);
+    state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("LMAP C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_00276264), reinterpret_cast<AsdProcFunc>((void *)lmapRequest), 0);
     state->drawTask = taskCreateDraw("LMAP U", 0x72, 0, 0, (void *)FUN_002bc62c, (void *)FUN_0033feb4, 0, state->process);
 }
 

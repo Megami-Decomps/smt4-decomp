@@ -108,7 +108,6 @@ extern int gameGetUnitRecord(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002b6940. */
 extern int supportUnitGetEntry(int, unsigned short);
-extern int FUN_002b6ad0(void);
 extern int gameGetSupportUnitData(void);
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: FUN_002b70cc. */

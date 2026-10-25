@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
 #include "shard/W6_W6Match3_ColorFade.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
 namespace {
 struct BattleQueuedActionStep {
@@ -53,7 +54,6 @@ void FUN_0023f79c(BtlMainState *state, u32 flags);
 s32 FUN_003c0ab4(BtlActionRecord *action);
 s32 FUN_0033a7f8(BtlMainState *state, BtlActionRecord *action, u64 command);
 void FUN_0024057c(u32 owner, ColorFadeWork *action, s32 duration, u32 alpha);
-void FUN_002451c4(s32 layer, u32 context, BtlActionRecord *action, u32 mask, s32 priority, u32 flags);
 void btlReflectInitKind9(s32 layer, u32 context, BtlActionRecord *action, u32 kind, u32 mode);
 s32 FUN_003ae820(BtlUi *ui);
 void FUN_0033b1ac(BtlMainState *state, s32 actor);
@@ -101,7 +101,7 @@ void FUN_00343f44(u32, BattleQueuedActionStep *work)
             const s16 second = static_cast<s16>(DAT_00439a20.second);
             const s16 priority = static_cast<s16>(DAT_00439a20.priority);
             FUN_0024057c(reinterpret_cast<u32>(state), reinterpret_cast<ColorFadeWork *>(action), 0, 0);
-            FUN_002451c4(second + first, work->context, action, 0xFF, priority, 0);
+            FUN_002451c4(second + first, work->context, reinterpret_cast<u32>(action), 0xFF, priority, 0);
             u32 kind = 6;
             if ((action->status & 0x10) != 0) {
                 kind = 7;

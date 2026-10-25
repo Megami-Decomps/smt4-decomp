@@ -16,7 +16,7 @@ typedef struct BtlUi {
 
 extern BtlUi g_btlUi;
 
-s32 menu32ModeIsNot6(u8 *menu);
+u8 menu32ModeIsNot6(u8 *menu);
 s32 FUN_0039ebcc(u8 *panel);
 s32 FUN_00321500(u8 *menu);
 s32 uiSpriteSetKeyframeThree(u8 *panel);

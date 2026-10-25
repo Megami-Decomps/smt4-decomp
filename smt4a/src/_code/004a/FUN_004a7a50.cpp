@@ -10,7 +10,7 @@ struct DemonIconPanelView {
 typedef char DemonIconPanelOffsets[offsetof(DemonIconPanelView, layout) == 0xc8 &&
     offsetof(DemonIconPanelView, showUnknown) == 0x95 ? 1 : -1];
 extern "C" {
-const PanelTextLayoutEntryPrefixA *FUN_0018349c(void *, s32);
+const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(void *, s32);
 void devilDrawIconRelative(void *, s32, s32, s32, u32);
 void FUN_004934ac(void *, s32, s32, s32, u32);
 u32 FUN_002a4b28(u16);
@@ -21,16 +21,16 @@ void FUN_004a7a50(DemonIconPanelView *panel, s32 markStock, u32 demon, s32 row, 
 {
     const PanelTextLayoutEntryPrefixA *base;
     if (alternate)
-        base = FUN_0018349c(panel->layout, row + 0x42f);
+        base = layoutFindTableEntry(panel->layout, row + 0x42f);
     else
-        base = FUN_0018349c(panel->layout, row + 0x40e);
+        base = layoutFindTableEntry(panel->layout, row + 0x40e);
     s32 baseX = base->x;
     s32 baseY = base->y;
     const PanelTextLayoutEntryPrefixA *offset;
     if (alternate)
-        offset = FUN_0018349c(panel->layout, 0x495);
+        offset = layoutFindTableEntry(panel->layout, 0x495);
     else
-        offset = FUN_0018349c(panel->layout, 0x487);
+        offset = layoutFindTableEntry(panel->layout, 0x487);
     s32 x = offset->x + baseX;
     s32 y = offset->y + baseY;
     if (FUN_002a4b28(demon) || panel->showUnknown)

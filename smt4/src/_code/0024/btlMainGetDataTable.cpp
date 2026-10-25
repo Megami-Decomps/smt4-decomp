@@ -1,19 +1,23 @@
-#include "common.h"
+#include "battle/BtlTables.h"
 
 extern "C" {
 
-int dataTableFileGetTable(u32 value);
+void *dataTableFileGetTable(void *file, u32 index);
 
-typedef struct Obj {
+/* The part of the battle state that holds the loaded data-table file. */
+struct BtlTableFileView {
     /* 0x0000 */ u8 unk0000[0x2238];
-    /* 0x2238 */ u32 unk2238;
-} Obj;
+    /* 0x2238 */ void *file;
+};
 
-void btlMainGetDataTable(Obj *obj)
+void *btlMainGetDataTable(BtlMainState *state, u32 table)
 {
-    if (obj->unk2238 != 0) {
-        dataTableFileGetTable(obj->unk2238);
+    void *file = static_cast<BtlTableFileView *>(static_cast<void *>(state))->file;
+
+    if (file != NULL) {
+        return dataTableFileGetTable(file, table);
     }
+    return file;
 }
 
 } /* extern "C" */

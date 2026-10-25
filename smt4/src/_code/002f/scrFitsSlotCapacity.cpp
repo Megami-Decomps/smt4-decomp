@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ typedef struct Inventory {
     /* 0x910B */ u8 capacity;
 } Inventory;
 
-int scrSetResult(int value);
 int scrGetArg(int index);
 Inventory *gameGetSlotTable(void);
 int gameCountUnits(void);

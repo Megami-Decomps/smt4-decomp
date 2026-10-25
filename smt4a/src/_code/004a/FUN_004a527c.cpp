@@ -1,4 +1,5 @@
 #include "common.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct MotionScreenWork {
 s32 FUN_0026c3a0(void);
 void FUN_002c8538(s32 enabled);
 s32 FUN_00163aa4(void *motion, f32 step);
-s32 FUN_002e19f8(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void pointConvertToFloat(void *point, s32 x, s32 y);

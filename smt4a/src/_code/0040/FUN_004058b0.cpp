@@ -1,3 +1,5 @@
+#include "gfx/StereoParallax.h"
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: instructions, constants and frame match; only the callee-saved register assignment differs (retail keeps the panel in r5 and the title x in r6, so the later x/y/detail values rotate with it; this build puts the panel in r6 and the title x in r5). */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
@@ -5,10 +7,8 @@
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
-s32 vec2GetXInt(const void* position);
 s32 vec2GetYInt(const void* position);
 f32 vec2GetSpeed(const void* position);
-f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void efctSetSpeed(f32 speed);
 void FUN_004045ac(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void FUN_00402ab8(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);

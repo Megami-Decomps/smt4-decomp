@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct TitleDraw {
 extern TitleDraw g_titleFlags;
 extern u32 g_renderCtx;
 
-extern s32 FUN_00152f54(void);
 extern void FUN_00145e24(u32 scene, u32 arg);
 extern s32 FUN_001696f4(void);
 extern void asdGxCommandListBegin(u32 commandList);

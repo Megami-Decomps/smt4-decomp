@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022d434` (_code @ 0x22d434, 0x374 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ int FUN_00233730(...);
 int FUN_00233818(void);
 int ifTouchRegionClearAll(unsigned int);
 int FUN_0029ce60(unsigned int, int, int);
-int FUN_0029ea68(...);
+int itemGetFlagBit1(...);
 int devilGetRecord(...);
 int jyoucyuGetTableEntry(...);
 int FUN_002cd37c(void);
@@ -39,8 +40,7 @@ extern unsigned char gaugePercent(int, unsigned int);
 /* Supplied declaration required: FUN_00233818. */
 /* Supplied declaration required: ifTouchRegionClearAll. */
 /* Supplied declaration required: FUN_0029ce60. */
-/* Supplied declaration required: FUN_0029ea68. */
-extern int FUN_002a0d0c(void);
+/* Supplied declaration required: itemGetFlagBit1. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
@@ -82,7 +82,7 @@ void FUN_0022d434(int param_1)
       devilGetRecord();
       if ((puVar4 != (unsigned short *)0x0) && ((puVar4[3] & 1) != 0)) {
         temp_v10 = temp_v10 + 1;
-        temp_v3 = FUN_0029ea68(*puVar4);
+        temp_v3 = itemGetFlagBit1(*puVar4);
         if (temp_v3 != 0) {
           FUN_0022e17c(temp_v12,*puVar4,0);
           temp_v4 = (unsigned int)*puVar4;
@@ -95,7 +95,7 @@ void FUN_0022d434(int param_1)
     } while (temp_v9 < 0x4ff);
     *(short *)(param_1 + 0xa5ae) = temp_v10;
     if (*(short *)(param_1 + 0x5a8) != 0) {
-      temp_v9 = FUN_002a0d0c();
+      temp_v9 = reinterpret_cast<int>(FUN_002a0d0c());
       pbVar7 = (unsigned char *)(temp_v9 + 0xf);
       temp_v8 = *pbVar7 & 0x7f;
       if (temp_v8 == 1) {
@@ -163,7 +163,7 @@ void FUN_0022d434(int param_1)
       if ((puVar10 != (unsigned short *)0x0) &&
          (temp_v4 = (unsigned int)(unsigned short)puVar10[3], (puVar10[3] & 1) != 0)) {
         temp_v9 = temp_v9 + 1;
-        temp_v11 = FUN_0029ea68(*puVar10);
+        temp_v11 = itemGetFlagBit1(*puVar10);
         temp_v4 = (unsigned int)((unsigned long long)temp_v11 >> 0x20);
         if ((int)temp_v11 != 0) {
           temp_v3 = temp_v3 + 1;

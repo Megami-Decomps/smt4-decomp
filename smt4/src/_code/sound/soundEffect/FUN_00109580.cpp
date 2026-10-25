@@ -2,13 +2,13 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 extern const char DAT_004076c8[];
 extern SoundReverbEffect DAT_004c54f4;
 extern SoundReverbParameters DAT_004c5604;
 extern void *g_soundEffectBuffers[];
-void *jyoucyuGetTableEntry(u32 index);
 s32 nw_snd_FxReverb_SetParam(SoundReverbEffect *effect,
                              const SoundReverbParameters *parameters);
 u32 nw_snd_FxReverb_GetRequiredMemSize(SoundReverbEffect *effect);

@@ -1,10 +1,10 @@
 #include "map/mapDepart.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 void mapDepartSetTarget(s32 area, u32 map, u32 entrance);
 void FUN_0027d5ac(u32 map);
 s32 scrGetArg(u32 index);
-void asdSequenceRequest(u32 sequence, u32 arg1, u32 arg2);
 extern GameState g_gameState;
 
 /* Sets the departure destination and requests the map transition sequence. */

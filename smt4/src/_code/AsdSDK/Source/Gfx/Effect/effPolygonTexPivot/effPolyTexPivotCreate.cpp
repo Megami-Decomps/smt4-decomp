@@ -1,10 +1,11 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 99 vs built 93 rows, 71 diff lines. */
+/* NON_MATCHING: debug trace and allocation now match; retail zeroes the two rotation vectors with integer stores (str r1) before writing w = 1.0f, the build stores float zeros through VFP and merges them into vstm. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonTex.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
-void memClear(void *block, int size);
 PolyGeom *FUN_00247334(u32 count, int w, int h, u8 *table, int tableSize);
 void *resourceResolveHeaderPointer(PolyTexDesc *desc);
 u32 *resourceResolveDataPointer(PolyTexDesc *desc);
@@ -16,14 +17,18 @@ void refCountIncrement(u32 texture);
 void *effTlpCreate(u32 *resource);
 
 extern u8 DAT_004737c2;
+extern const char DAT_004104e0[]; /* effPolygonTexPivot.cpp: __FILE__ */
 
 /* Creates a textured polygon object from an effect description: zeroed object, one-segment
  * geometry, the effect's parameters copied in, and the description's resource attached
  * according to its type. */
 PolyTexPivotObject *effPolyTexPivotCreate(PolyTexDesc *desc)
 {
-    PolyTexPivotObject *obj = (PolyTexPivotObject *)memAlloc(0x10000, 0x100, 0, 328, 0x10, 1);
+    PolyTexPivotObject *obj;
     u32 *resource;
+
+    asdDebugTrace(DAT_004104e0, 35);
+    obj = (PolyTexPivotObject *)memAlloc(0x10000, 0x100, 0, 328, 0x10, 1);
 
     memClear(obj, 328);
     obj->rotation0.x = 0;

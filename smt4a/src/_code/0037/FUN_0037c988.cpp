@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail copies the 8-byte offset pair through VFP registers (vldmia/vstmia) and keeps it at different stack slots; this build uses ldrd/strd, and the register assignment follows */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 /* A pair of screen coordinates. */
 struct ScreenOffset {
@@ -43,7 +44,6 @@ void FUN_003cce74(SlotScreen *screen, u32 argument, s32 x, s32 y, f32 scale);
 s32 resourceRunOperationIfUnblocked(u32 *cursor);
 s32 FUN_002a4894(u32 *cursor);
 void efctSetSpeed(f32 speed);
-s32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
 /* Draws the eight slot icons of the slot screen: locked slots are blanked, unlocked ones get
    their frame, cursor flash and effect, then the shared cursor effect is restarted. */

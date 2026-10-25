@@ -1,6 +1,7 @@
 /* NON_MATCHING: steps the battle summon effect load/spawn (state 0 finds or loads the effect resource, state 1 waits for it and creates the effect objects); written from the decompilation, the descending free-slot searches and branch layout not compared with retail */
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "battle/BattleUnitSlot.h"
+#include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 
 #define SUMMON_CACHE_SLOTS 0x2A
 #define SUMMON_STATE_LOAD 0
@@ -98,7 +99,6 @@ s32 FUN_00294fe0(u32 resource);
 void modelAnimationEnsureData(u32 resource);
 SummonResource *FUN_00294090(s32 id, s32 flag);
 void FUN_0024057c(BtlSummonState *state, SummonEffect *effect, s32 flag);
-void FUN_002451c4(s32 a, u32 unit, SummonEffect *effect, s32 b, s32 c, s32 d);
 void btlReflectInitKind9(s32 a, u32 unit, SummonEffect *effect, u32 b, s32 c);
 void FUN_003c1964(s32 flag);
 void FUN_00240614(BattleVersionResources *resources);
@@ -199,7 +199,7 @@ u32 FUN_00337360(BtlSummonState *state, u32 request)
     s16 offsetB = (s16)DAT_00439a38;
     s16 offsetC = (s16)DAT_00439a28;
     FUN_0024057c(state, effect, 0);
-    FUN_002451c4(offsetB + offsetA, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), effect, 0xFF, offsetC, 0);
+    FUN_002451c4(offsetB + offsetA, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), reinterpret_cast<u32>(effect), 0xFF, offsetC, 0);
     u32 reflectKind = (effect->flags & 0x10) != 0 ? 7 : 6;
     btlReflectInitKind9(offsetB, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), effect, reflectKind, 0xD);
     return 1;

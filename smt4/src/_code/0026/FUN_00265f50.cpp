@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00265f50` (_code @ 0x265f50, 0x56c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int residentApplyFallbackValues(void);
 int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
-int FUN_00298d50(unsigned char *);
 int FUN_002c159c(unsigned char *);
 int FUN_002c1e30(unsigned char *, int);
 int FUN_002c1edc(unsigned char *, int, int, int);
@@ -223,7 +223,7 @@ void FUN_00265f50(int param_1)
            *(float *)(param_1 + 0x80) + (temp_v13 - *(float *)(param_1 + 0x80)) * 0.33333334f;
     }
   }
-  FUN_00298d50(&g_fixedCamera);
+  FUN_00298d50(reinterpret_cast<u32>(&g_fixedCamera));
   FUN_002c159c(&g_fixedCamera);
   FUN_002c1e30(&g_fixedCamera,1);
   FUN_002c1edc(&g_fixedCamera,param_1 + 0x78,param_1 + 0x84,param_1 + 0x54);

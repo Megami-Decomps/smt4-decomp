@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_ForwardEffect.h"
+extern "C" int FUN_0020ffe8(int, int);
 
 union AnimationFrameEncoding {
     f32 frame;
@@ -12,7 +13,6 @@ extern "C" {
 
 int FUN_002a0428(...);
 
-int FUN_0020ffe8(int, int);
 int FUN_0025bc80(void);
 int vec4Forward(void);
 f32 FUN_0027f94c(int);

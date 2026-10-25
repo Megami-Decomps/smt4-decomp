@@ -1,5 +1,6 @@
 /* NON_MATCHING: refresh-store placement matches; initial scheduling and case-6 return folding differ. */
 #include "camp/CampCec/CharacterRefreshWork.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 void playerSummaryFill(PlayerSummary *summary);
@@ -16,7 +17,6 @@ void linkHolderApplyFlag(void *link, s32 enabled);
 void campCecSetObjectValue(u32 value);
 void FUN_0031d890(void);
 s32 partyPanelExists(void);
-s32 FUN_00284e94(void);
 
 // Wait for a refresh command, then repopulate the character panel and StreetPass summary.
 u32 FUN_00387bb8(CharacterRefreshWork *work)

@@ -18,14 +18,14 @@ typedef struct ActorB {
     /* 0x72 */ u16 flags;
 } ActorB;
 
-Command *FUN_0019c06c(void);
+Command *itemCategoryFindByItemId(void);
 ActorA *dataTable8FindRecord(u32 actor);
 ActorB *dataTable08Sub2GetRecord(u32 actor);
 
 /* Returns the actor's flag for the current command's kind (bit 3 of flags at 0x42 or bit 1 of flags at 0x72); 1 when the command is not active. */
 u32 FUN_0047fe44(u32 actor)
 {
-    Command *command = FUN_0019c06c();
+    Command *command = itemCategoryFindByItemId();
 
     if (command == NULL) {
         return 0;

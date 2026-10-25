@@ -1,3 +1,4 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: scissor helper folds state reloads/conditions and uses different base addressing. */
 #include "ui/ClippedSprite.h"
 #include "shard/TextureDrawCall.h"
@@ -6,7 +7,6 @@
 extern "C" {
 extern RenderCtxScissorA *g_renderCtx;
 const SpriteInfo *FUN_001834a4(u32, u32);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 void FUN_00168e00(s32, s32, s32, s32);
 void renderPopStateStacks(void);
 

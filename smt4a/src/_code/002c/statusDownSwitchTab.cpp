@@ -1,4 +1,5 @@
 #include "status/StatusDown.h"
+#include "util/StatusDownSwitchTab.h"
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;

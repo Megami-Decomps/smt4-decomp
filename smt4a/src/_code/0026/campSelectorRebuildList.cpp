@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ typedef struct PlayerSelections {
 extern CampSelectors *g_camp; /* 0x57f108 */
 
 extern PlayerSelections *gameGetPlayerData(void);
-extern s32 flagValueIsPositive(u32 flag);
 extern void FUN_00203b40(u8 *widget, s32 count, s32 columns, s32 a, s32 b, s32 c);
 extern void FUN_002a4964(u8 *widget, s32 index);
 extern void FUN_003d0bc0(s32 id);

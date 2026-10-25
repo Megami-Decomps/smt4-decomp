@@ -7,7 +7,6 @@ extern "C" {
 extern u8 g_gameState;
 extern LmapScene *g_lmapScene;
 extern void *DAT_004474f4;
-SaveWork *gameGetMapBlock(void);
 
 void FUN_002758d8(void)
 {

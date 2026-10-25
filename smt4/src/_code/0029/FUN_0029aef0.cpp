@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail expands the five lower-level support checks; the readable scan remains a loop and folds the level address. */
 #include "gamedata/SavedUnitInitialization.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 u16 *gameDataBlocksGetCounterPtr(void);
 u8 *gameDataBlocksGetSaveData(void);
-u32 FUN_0029ea68(u32 index);
-void memClear(void *memory, u32 size);
+u32 itemGetFlagBit1(u32 index);
 
 // Find the highest registered level with enough support from its count and nearby occupied levels.
 s32 FUN_0029aef0(void)
@@ -15,7 +15,7 @@ s32 FUN_0029aef0(void)
     u8 counts[100];
     memClear(counts, sizeof(counts));
     for (s32 index = first; index <= last; ++index) {
-        if (FUN_0029ea68((u16)index)) {
+        if (itemGetFlagBit1((u16)index)) {
             SavedUnitDataBody *body = (SavedUnitDataBody *)gameDataBlocksGetSaveData();
             u32 level = body->units[index].values.level;
             if (level - 1 <= 98 && counts[level] < 20) {

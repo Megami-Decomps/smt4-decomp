@@ -1,11 +1,12 @@
 /* NON_MATCHING: callback-table address registers and the mode-tail block order differ. */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "camp/RenderCtx.h"
+#include "util/FUN_00145e24.h"
+#include "util/FUN_00145e24.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern EffMiscKind g_effMiscKinds[];
-void FUN_00145e24(RenderCtxA *context, u32 state);
 void FUN_00157558(RenderCtxA *context);
 void uiSpriteRefreshMode(RenderCtxA *context);
 
@@ -22,7 +23,7 @@ void FUN_002322c4(EffMiscObject *object)
     if (mode == 3 || mode == 4) {
         uiSpriteRefreshMode(g_renderCtx);
     } else if (mode == 5) {
-        FUN_00145e24(g_renderCtx, state);
+        FUN_00145e24(g_renderCtx, reinterpret_cast<void *>(state));
     }
 }
 }

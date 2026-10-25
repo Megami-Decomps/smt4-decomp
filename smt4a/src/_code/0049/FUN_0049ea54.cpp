@@ -2,6 +2,7 @@
 /* Opens the entry screen: validates the resources, loads the selected entry of table 0x46 and starts the intro sequence. */
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 
@@ -39,7 +40,6 @@ extern void flagsSetOrClearBit(void *panel, s32 arg);
 extern s32 textureGetIndexedResource(s32 id);
 extern void sysPlayVoice(u32 id);
 extern s32 loadSlotIsLoaded(s32 id);
-extern void FUN_0049d140(Screen *screen, s32 a, s32 b);
 extern void FUN_0049de10(Screen *screen);
 
 void FUN_0049ea54(Screen *screen)
@@ -57,7 +57,7 @@ void FUN_0049ea54(Screen *screen)
     screen->entries = static_cast<TableEntry *>(dataTableGetEntries(table));
     screen->entryCount = dataTableGetCount(table);
     if ((s32)screen->index <= 0 && screen->index >= screen->entryCount) {
-        FUN_0049d140(screen, 0, 0);
+        FUN_0049d140(reinterpret_cast<int>(screen), 0, 0);
         return;
     }
     screen->current = &screen->entries[screen->index];
@@ -75,7 +75,7 @@ void FUN_0049ea54(Screen *screen)
     screen->unk188 = 0;
     uiSpriteSelectAnim(screen->widgetA, 0);
     uiSpriteSelectAnim(screen->widgetB, 0);
-    FUN_0049d140(screen, 8, 9);
+    FUN_0049d140(reinterpret_cast<int>(screen), 8, 9);
     sysPlayVoice(0x1000170);
 }
 

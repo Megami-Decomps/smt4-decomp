@@ -3,6 +3,10 @@
 #include "gamedata/DataTable.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/aocMain.h"
+#include "util/FUN_002ae8e4.h"
+#include "util/FUN_002ae8e4.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern void *g_aocSystem;
@@ -11,12 +15,9 @@ extern const char DAT_004037a0[];
 void *asdMemAlloc(u32 heap, u32 alignment, u32 options, u32 size, u32 clear);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(void *system, s32 table, s32 node, u32 operation);
-u32 FUN_002ae8e4(void *system, s32 table, s32 node, u32 heap);
 u32 FUN_002c58c8(s32 table, s32 node);
 u32 FUN_001ce4a4(u32 process);
 u32 asdMTeXReleaseJobContext(u32 process);
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, u32 options,
-                           u32 (*update)(u32), u32 (*destroy)(u32), void *work);
 
 // Create a bustup texture process, loading its base or add-on texture unless loading is deferred.
 void FUN_002f5a10(s32 bustupId)
@@ -40,7 +41,7 @@ void FUN_002f5a10(s32 bustupId)
     } else {
         if (work->node != -1) {
             if (aocRunByName(g_aocSystem, work->table, work->node, 1))
-                work->texture = FUN_002ae8e4(g_aocSystem, work->table, work->node, 0x10000);
+                work->texture = FUN_002ae8e4(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
             else
                 work->texture = FUN_002c58c8(work->table, work->node);
         }
@@ -50,6 +51,6 @@ void FUN_002f5a10(s32 bustupId)
     work->alpha = 1.0f;
     work->active = 0;
     work->visible = 1;
-    asdProcessCreateSimple(DAT_004037a0, 2, 0, 0, FUN_001ce4a4, asdMTeXReleaseJobContext, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004037a0), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001ce4a4), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(work));
 }
 }

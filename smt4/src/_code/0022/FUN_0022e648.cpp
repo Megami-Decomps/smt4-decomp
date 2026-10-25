@@ -20,7 +20,7 @@ struct SelectionRollWork {
     SelectionRollGroup groups[9];
 };
 extern "C" {
-s32 FUN_00240d5c(FlaggedValueHolder *);
+s32 flaggedEntryGetValueByState(FlaggedValueHolder *);
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 u32 FUN_00230e04(u16 *);
 s32 btlRollClamped(u16, u32);
@@ -32,7 +32,7 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
 {
     work->state = 0;
     work->mode = mode;
-    s32 duration = FUN_00240d5c(&work->holders[work->category]);
+    s32 duration = flaggedEntryGetValueByState(&work->holders[work->category]);
     s32 category = work->category;
     duration += (category == 7 || category == 8) ? 1 : 2;
     s32 selected = flaggedValueHolderGetTotal(&work->holders[category]);

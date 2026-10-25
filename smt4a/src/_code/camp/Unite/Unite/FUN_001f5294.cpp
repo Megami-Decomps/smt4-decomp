@@ -4,6 +4,8 @@
 #include "gfx/CameraMotion.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_ContentWordList.h"
+#include "event/2dEvent/SmokeFade.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -41,7 +43,7 @@ int pairLogAppend(...);
 int FUN_00333dc8(...);
 int FUN_00334694(...);
 int FUN_00359a08(...);
-int FUN_0035dc10(void);
+int uniteStartEffectProcesses(void);
 int FUN_0035dd60(...);
 int uniteCreatePreviewModel(void);
 int FUN_00408184(...);
@@ -252,10 +254,8 @@ extern int messageMainIsWindowActive(void);
 extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern int FUN_0023b3b8(void);
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: uniteStartOrQueueRequest. */
-extern int FUN_0026140c(void);
 /* Supplied declaration required: FUN_0026264c. */
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: rebuildFusionCatalogLists. */
@@ -338,7 +338,7 @@ extern int uiQuestIsCreated(void);
 /* Supplied declaration required: FUN_0035ad50. */
 /* Supplied declaration required: useCounterRelease. */
 extern int FUN_0035db94(void);
-/* Supplied declaration required: FUN_0035dc10. */
+/* Supplied declaration required: uniteStartEffectProcesses. */
 /* Supplied declaration required: FUN_0035dd60. */
 /* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: uniteCreatePreviewModel. */
@@ -475,7 +475,7 @@ unsigned int FUN_001f5294(void)
   
   piVar3 = g_unite;
   ppiVar16 = &temp_v25;
-  temp_v4 = FUN_0026140c();
+  temp_v4 = reinterpret_cast<int>(FUN_0026140c());
   psVar24 = (short *)(temp_v4 + 0x20);
   temp_v18 = 0;
   temp_v47[0] = 0;
@@ -1011,7 +1011,7 @@ unsigned int FUN_001f5294(void)
       temp_v5 = 9;
       FUN_001517b4(9,1);
       if (temp_v5 != 0) {
-        temp_v5 = FUN_0026140c();
+        temp_v5 = reinterpret_cast<int>(FUN_0026140c());
         *(unsigned short *)(temp_v5 + 0x20) = 0xffff;
         *(unsigned short *)(temp_v5 + 0x22) = 0xffff;
         *(unsigned short *)(temp_v5 + 0x24) = 0;
@@ -2952,7 +2952,7 @@ LAB_001f9868:
       (**(romwright_code **)(*(int *)piVar3[0x2483] + 4))();
       piVar3[0x2483] = 0;
     }
-    FUN_0035dc10();
+    uniteStartEffectProcesses();
     if (piVar3[0x101] == 0x1d) {
       temp_v4 = 0;
       do {
@@ -3171,7 +3171,7 @@ LAB_001f9868:
           FUN_0039c744();
         }
         else {
-          temp_v4 = FUN_0026140c();
+          temp_v4 = reinterpret_cast<int>(FUN_0026140c());
           soundChannelStopAll(0);
           soundChannelRequestIfEnabled(piVar19[0x123],0,0x3c);
           if ((-1 < *(short *)(temp_v4 + 0x20)) &&

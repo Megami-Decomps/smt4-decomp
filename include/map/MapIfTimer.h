@@ -26,4 +26,13 @@ typedef char MapHintRecordOffsets[sizeof(MapHintRecord) == 0x60 &&
     offsetof(MapHintRecord, label) == 4 &&
     offsetof(MapIfTimer, hintLabel) == 0x14 && sizeof(MapIfTimer) == 0x18 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+s32 clockGetSecondsSinceStart(void);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

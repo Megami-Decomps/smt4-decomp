@@ -1,9 +1,9 @@
 /* NON_MATCHING: native timestamp argument copying and stack-slot reuse require unresolved class-value ABI semantics. */
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 void FUN_00193038(SaveCalendarTime *output, const u64 *time);
-void FUN_002e59f8(const void *source, void *destination, u32 bytes);
 void rt_aeabi_memclr(void *destination, u32 bytes);
 void FUN_0030fc80(u64 *output);
 

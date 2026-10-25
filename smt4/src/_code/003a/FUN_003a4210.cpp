@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the item-sale list builder; retail hoists the list base (+0x9FFC), the counter address and the price accumulator address into callee-saved registers and builds the packed item word in a stack slot with piece moves, which armcc here allocates differently. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The sale list window: slot 2 of its vtable attaches a list. */
 class SaleWindow {
@@ -49,7 +50,6 @@ struct PackedItem {
 extern "C" {
 extern u8 LAB_003a05c4;
 
-void memClear(void *block, u32 bytes);
 u16 *FUN_002c0a2c(u8 rank, u32 seed);
 s32 FUN_0028e9d0(u32 flag);
 s32 FUN_0028fb3c(u32 flag);

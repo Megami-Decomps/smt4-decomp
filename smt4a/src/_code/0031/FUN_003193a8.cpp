@@ -1,18 +1,18 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003193a8` (_code @ 0x3193a8, 0x71c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/SmokeFade.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
 int FUN_0022e774(void);
-int FUN_0023b45c(...);
 int FUN_00285800(void);
 int statusPanelSetOpen(...);
 int campCecSetObjectValue(...);
 int FUN_00319aec(...);
 int statusDisplayBindUnitRecord(...);
 int FUN_003343c0(...);
-int FUN_003343f0(...);
 int objBInitBlock19D0(void);
 int FUN_0033449c(...);
 int FUN_0038b3f8(...);
@@ -26,18 +26,15 @@ int scrScriptProcessStartEntry(...);
 int gameDataGetRecordValue(void);
 int FUN_002a5e7c(...);
 int statusDownSwitchTab(...);
-int FUN_002c8538(...);
 int FUN_002c85b0(...);
 int libc_strcpy(unsigned char [36], unsigned int);
 int FUN_003180c4(int, unsigned char [36]);
 int FUN_0031cf00(void);
 int btlTalkBustUpReleaseAllSlots(void);
 int btlTalkBustUpSetDemonTexture(...);
-int FUN_00359974(...);
 int btlTalkBustUpReleaseContent(void);
 int btlTalkBustUpSetUnk2F4(...);
 int FUN_00371c3c(unsigned int, int);
-int devilIsTextureLoaded(...);
 int FUN_004bcd90(...);
 int __aeabi_memcpy4(int, int, int);
 
@@ -49,9 +46,7 @@ extern int scrRunOpcodesStub(unsigned int);
 extern int FUN_0022e750(void);
 /* Supplied declaration required: FUN_0022e774. */
 extern int FUN_0023b3b8(void);
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
-extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002857b8(void);
 /* Supplied declaration required: FUN_00285800. */
@@ -297,7 +292,7 @@ unsigned int FUN_003193a8(int param_1)
       return 0;
     }
     temp_v3 = gameDataGetRecordValue();
-    devilIsTextureLoaded(temp_v3,1);
+    devilIsTextureLoaded(temp_v3, 1);
     if (temp_v3 == 0) {
       return 0;
     }
@@ -403,7 +398,7 @@ unsigned int FUN_003193a8(int param_1)
   case 10:
     btlTalkBustUpReleaseContent();
     *(unsigned int *)(param_1 + 0x3bc) = 0;
-    FUN_003343f0();
+    FUN_003343f0(0);
     temp_v8 = 3;
     *(unsigned int *)(param_1 + 0x3b0) = 9;
   }

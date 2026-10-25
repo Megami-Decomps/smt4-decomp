@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ffe84` (_code @ 0x1ffe84, 0x94c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 
@@ -67,7 +68,6 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_0022a030(int, int);
 extern int FUN_0022e714(void);
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023b45c. */
 extern int FUN_002684d0(int, int);
 /* Supplied declaration required: campShowSelectedEntryHelp. */

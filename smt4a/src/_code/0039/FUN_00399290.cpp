@@ -1,5 +1,6 @@
 /* NON_MATCHING: signed enable flag recovers the split address, but prologue placement and state/marker scratch registers still differ. */
 #include "common.h"
+#include "classes/Obj4209cc.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ typedef struct LmapMarkerState {
 
 extern LmapMarkerState *g_lmapMainState;
 
-LmapMarkerNode *FUN_0040619c(void *nodes, s32 index);
 
 /* Shows or hides map marker `index` (when it is enabled), updating its model node's visibility bits. */
 void FUN_00399290(s32 index, s32 show)
@@ -40,12 +40,12 @@ void FUN_00399290(s32 index, s32 show)
         if (show) {
             if (!state->markers[index].shown && state->markers[index].enabled) {
                 state->markers[index].shown = 1;
-                LmapMarkerNode *node = FUN_0040619c(state->model->nodes, index);
+                LmapMarkerNode *node = reinterpret_cast<LmapMarkerNode *>(FUN_0040619c(state->model->nodes, index));
                 node->flags &= ~3;
             }
         } else if (state->markers[index].shown && state->markers[index].enabled) {
             state->markers[index].shown = 0;
-            LmapMarkerNode *node = FUN_0040619c(state->model->nodes, index);
+            LmapMarkerNode *node = reinterpret_cast<LmapMarkerNode *>(FUN_0040619c(state->model->nodes, index));
             node->flags |= 3;
         }
     }

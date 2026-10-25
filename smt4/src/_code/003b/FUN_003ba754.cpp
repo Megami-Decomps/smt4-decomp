@@ -1,5 +1,6 @@
 /* NON_MATCHING: restored native script result/mode, work-save choices and explicit switch cases; BGM arguments, skip-restore branching and an unnamed game-state word still differ. */
 #include "common.h"
+#include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
 #include "script/scrScriptProcess.h"
 
@@ -40,11 +41,9 @@ void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
 void bgmReleaseStopped(void);
 void mapDepartSetTarget(u32 first, u32 second);
 s32 FUN_0027d8c8(void);
-s32 FUN_0027d98c(void);
 void FUN_0027db24(s32 flag);
 void gameRestoreWorkSave(s32 kind);
-s32 FUN_00287894(void);
-s32 FUN_002903f0(void);
+u32 FUN_002903f0(void);
 ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);
@@ -62,7 +61,8 @@ void FUN_003ba754(MapSceneView *scene)
     scriptProcessSetMode(process, 2);
     s32 mode = scene->mode;
     u8 restoreFlag = 0;
-    if (FUN_002903f0() != 0 && FUN_00287894() == 6) {
+    u32 quest = FUN_002903f0();
+    if (quest != 0 && table1bOr1cGetRecordValue(quest) == 6) {
         restoreFlag = 1;
     }
     FUN_0022b29c(scene, mode, 0xffffffff);

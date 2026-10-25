@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/DataTable9EntryOrZero.h"
 
 extern "C" {
 

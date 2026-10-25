@@ -1,13 +1,13 @@
 /* NON_MATCHING: stores of unk88..unk8a use r2/r1 for the constants where retail uses r1/r0 and schedules `mov r0, r4` before the last strb. */
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 extern const char g_effPartsSourcePath[]; /* "c:\SMT4\XRD686\sdds4\Patch\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void memClear(void *block, s32 size);
 void FUN_002a3d58(EffPart *part);
 
 /* Creates the 0xC0-byte variant of a part: cleared, its first 0x90 bytes cleared again, flags set, initialized. */

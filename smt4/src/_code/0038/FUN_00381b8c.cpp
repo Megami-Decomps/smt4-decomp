@@ -1,6 +1,10 @@
 /* NON_MATCHING: final selected-quest reset scheduling differs; native draw defaults now reproduce the retail table relocation. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "quest_center/QuestRuntime.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "quest_center/qcUtility.h"
 
 struct QuestCenterScreenStateIV {
     u32 flags;
@@ -43,14 +47,11 @@ const QuestCenterDrawDefaultsIV DAT_004057a8 = {
      -3, 0, -3, -3, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0}
 };
 void FUN_003852c8(void);
-void memClear(void *buffer, u32 size);
 void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 options);
 void drawParameterBlockClear(UiResourceParameters *parameters);
 
 void dataTable27Load(u32 *control);
-void FUN_00385aec(u32 *control);
 void FUN_00385af4(u32 *control);
-void asdTMTexTableLoadSprites(u32 table);
 void asdTMTexTableLoadEntryAsync(u32 table, s32 entry);
 u32 asdTextCreate(u32 options);
 void FUN_002637c8(void);

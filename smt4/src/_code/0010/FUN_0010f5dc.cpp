@@ -21,13 +21,13 @@ void FUN_0011bb34(u32 handle);
 void FUN_0011bb90(FsMount **mount);
 u32 FUN_002bbaf8(void);
 s32 nn_fs_ipc_FileSystem_SetPriority(u32 *session, s32 priority);
-void FUN_002bbb2c(s32 result, u32 location, u32 failed);
+void FUN_002bbb2c(s32 result, u32 location);
 
 static __inline void reportIfFailed(s32 result, u32 location)
 {
     u32 failed = (u32)result >> 31;
     if (failed) {
-        FUN_002bbb2c(result, location, failed);
+        FUN_002bbb2c(result, location);
     }
 }
 

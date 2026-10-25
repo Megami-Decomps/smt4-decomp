@@ -9,7 +9,7 @@ struct QuestPageMetadata {
 };
 
 extern "C" {
-s32 idIsAtLeast350(s32 id);
+u8 idIsAtLeast350(u32 id);
 u32 partyEntryFlagsBit1(s32 id);
 s32 partyEntryGetByte1(s32 id);
 u32 questHasSpecialDetailPage(u32 id);

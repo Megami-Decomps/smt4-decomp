@@ -45,8 +45,6 @@ s32 FUN_001b7f78(u32 job);
 void mapMainRequest(u32 job);
 void FUN_001e9508(u32 job);
 void FUN_002ca6dc(u32 job);
-u32 asdProcessCreateSimple(const char *name, s32 group, s32 priority, s32 flags,
-                          AsdProcUpdateFunc update, AsdProcFunc request, u32 data);
 u32 taskCreateDraw(const char *name, s32 group, s32 priority, s32 flags,
                    AsdProcFunc draw, AsdProcFunc request, u32 data, u32 parent);
 
@@ -98,7 +96,7 @@ void MapMain_Register(void)
     save->mapRegistration.pending = 0;
     map->scriptState = 0;
     map->freeOnEnd = 0;
-    u32 job = asdProcessCreateSimple("MAP C", 2, 0, 0, FUN_001b7f78, mapMainRequest, 0);
+    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MAP C"), 2, 0, 0, FUN_001b7f78, mapMainRequest, 0);
     map->job = job;
     map->drawJob = taskCreateDraw("MAP U", 0x6F, 0, 0, FUN_001e9508, FUN_002ca6dc, 0, job);
 }

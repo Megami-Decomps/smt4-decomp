@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 

@@ -4,6 +4,7 @@
 #include "map/lmapMain.h"
 #include "shard/SaveWork.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -15,8 +16,6 @@ u32 FUN_001d3e3c();
 void lmapMainRequest(void);
 s32 FUN_001fd9f4();
 void FUN_002d5088(void);
-void *asdProcessCreateSimple(const char *name, s32 id, s32 a, s32 b, u32 (*update)(), void (*finish)(void),
-                             void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, s32 (*update)(), void (*draw)(void),
                    void *work, u32 owner);
 
@@ -109,7 +108,7 @@ void FUN_001d2c14(void)
     save->mapRegistration.pending = 0;
     g_gameState.mapRegistration.pending = 0;
     state->freeOnEnd = 0;
-    state->job = (u32)asdProcessCreateSimple("LMAP C", 2, 0, 0, FUN_001d3e3c, lmapMainRequest, 0);
+    state->job = (u32)reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("LMAP C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001d3e3c), reinterpret_cast<AsdProcFunc>(lmapMainRequest), 0));
     state->drawTask = taskCreateDraw("LMAP U", 0x70, 0, 0, FUN_001fd9f4, FUN_002d5088, 0, state->job);
 }
 

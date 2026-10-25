@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/HunterDatabaseWork.h"
 #include <stddef.h>
+#include "ui/UiSpriteState.h"
 
 struct HunterDatabaseTemplate {
     u8 first[0x6C];
@@ -15,7 +16,6 @@ void paramsClearPacket(void *);
 void FUN_0014e188(UiSpriteState *, u32, u32, void *, u32, f32);
 void uiSpriteSetKeyframe(UiSpriteState *, u32, u32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, u32, u32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 extern u8 DAT_0052d000[];
 
 // Configure the hunter database's five widgets from its shared parameter packet.

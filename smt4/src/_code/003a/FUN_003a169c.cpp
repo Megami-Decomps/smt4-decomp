@@ -1,5 +1,7 @@
 /* NON_MATCHING: message-load branches merge, using conditional resource selections and different saved registers. */
 #include "shop/shopMain.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 // Resource and audio handles lie past the shared creation prefix; retain that prefix's extent.
 struct ShopResourceSetupViewIV {
@@ -23,7 +25,6 @@ void FUN_00289880(void);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
 void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
-void asdTMTexTableLoadSprites(u32 table);
 void FUN_002c58c8(u32 table, u32 variant);
 u32 FUN_002fdff4(u32 resource);
 u32 FUN_00285e44(u32 sound, u32 option, u32 flags);

@@ -1,10 +1,9 @@
 /* NON_MATCHING: render-stack push schedules its second address add earlier and the last call's 0x81 is rematerialised in r7 instead of reusing fp. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 kind, bool enabled);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: Message-box shared-global addressing and switch-block layout differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/CecSettingsSet.h"
 
 extern "C" {
 extern u32 DAT_0043ddb8;
@@ -12,7 +13,6 @@ u32 FUN_003103e4(u32 resource, u32 applicationId,
                  const char *applicationName, u32 messageData,
                  u32 messageSize, const char *messageBoxName,
                  u32 parameter6, u32 parameter7);
-s32 cecSettingsSet(u32 category, u32 setting, u32 value, u32 flags);
 u32 cecWriteMessageBoxNameAndData(u32 resource, u32 applicationId,
                                 const char *messageBoxName,
                                 u32 messageData, u32 messageSize);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-frame size, argument register allocation, and path-format literal placement differ from retail. */
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/AsdFileRequestHasFailed.h"
 
 extern "C" {
 extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
@@ -12,7 +13,6 @@ AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag);
 void asdFileRequestSetHeapKind(AsdFileRequest *request, u8 flags);
 void optionalParameterTrySet(AsdFileRequest *request, u32 priority);
 void asdFileWait(AsdFileRequest *request);
-s32 asdFileRequestHasFailed(AsdFileRequest *request);
 void asdFileRequestRelease(AsdFileRequest *request);
 
 /* Loads a file synchronously. Returns the buffer (now owned by the caller) and stores its size in
@@ -36,7 +36,7 @@ void *asdLoadFileSync(const char *path, u32 *size, u32 flags, u32 priority)
     asdFileRequestSetHeapKind(request, ((flags & ASD_LOAD_FLAG_0) != 0) | (((flags & ASD_LOAD_FLAG_1) != 0) ? 0x10 : 0));
     optionalParameterTrySet(request, priority);
     asdFileWait(request);
-    if (asdFileRequestHasFailed(request) != 0) {
+    if (asdFileRequestHasFailed(reinterpret_cast<s32 *>(request)) != 0) {
         if (size != NULL) {
             *size = 0;
         }

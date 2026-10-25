@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/GameDataEntries.h"
 
 extern "C" {
 
@@ -10,12 +10,10 @@ typedef struct FlagObject {
     /* 0x03 */ u8 unk03b : 1;
 } FlagObject;
 
-FlagObject *gameDataGetTableEntry(s32 id, u32 arg1, bool arg2);
-
 /* Looks the object up and sets its enabled flag to `enabled`. */
-void gameDataSetEntryEnabled(s32 id, u32 arg1, bool enabled)
+void gameDataSetEntryEnabled(u32 groupId, u32 itemId, bool enabled)
 {
-    FlagObject *object = gameDataGetTableEntry(id, arg1, enabled);
+    FlagObject *object = reinterpret_cast<FlagObject *>(gameDataGetTableEntry(groupId, itemId));
 
     object->enabled = enabled;
 }

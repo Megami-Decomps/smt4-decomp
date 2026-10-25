@@ -1,5 +1,6 @@
 /* NON_MATCHING: loads the map collision files (primary and optional secondary), allocates the work buffers and builds the collision tables for them; written from the decompilation and the retail disassembly, string pool order and the duplicated relocation code not compared with retail */
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/FileLoadSync.h"
 
 struct MapCollisionTables {
     /* 0x00 */ u32 offsetA;
@@ -44,7 +45,6 @@ extern "C" {
 extern MapCollision g_mapCollision;
 
 void textFormatBuffer(char *out, const char *format, ...);
-MapCollisionFile *fileLoadSync(const char *path, u32 *size, u32 flags);
 void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void asdMemFree(void *block);
 void FUN_001c24e4(s32 set);
@@ -65,7 +65,7 @@ static __inline void mapCollisionPath(char *path, s32 id, u32 sub)
 static __inline void mapCollisionAttach(const char *path)
 {
     u32 size[1];
-    MapCollisionFile *file = fileLoadSync(path, size, 0);
+    MapCollisionFile *file = static_cast<MapCollisionFile *>(fileLoadSync(path, size, 0));
     MapCollisionTables *tables = reinterpret_cast<MapCollisionTables *>(reinterpret_cast<u8 *>(file) + file->tablesOffset);
     g_mapCollision.file = file;
     g_mapCollision.fileBase = file;

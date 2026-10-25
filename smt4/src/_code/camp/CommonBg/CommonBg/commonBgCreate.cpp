@@ -1,6 +1,8 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 // The final word lies past the published CommonBackgroundChild prefix.
 struct CommonBackgroundDrawWork {
@@ -18,7 +20,6 @@ extern "C" {
 void* asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 u32 asdTextCreate(u32 kind);
 void asdTextDrawFormatted(u32 text, s32 kind, u32 color, s32 x, s32 y, const char* format);
-void asdTMTexTableLoadSprites(u32 id);
 void FUN_002c58c8(u32 id, s32 option);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                   AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);

@@ -15,7 +15,6 @@ typedef char GameIconAnimationOffsets[
     offsetof(GameIconAnimationView, first) == 0x530 ? 1 : -1];
 extern "C" {
 extern RenderCtx *g_titleScene;
-void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 flags);
 void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 location, f32 depth);
 void efctSetSpeed(f32 speed);
@@ -26,7 +25,7 @@ u8 FUN_001cdef8(void)
     s32 x = 0, y = 0;
     GameData *game = g_gameGlobals.data;
     if (game->unk1E61 && (game->unk1E67 == 3 || game->unk1E67 == 9)) {
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
         const GameIconAnimationView *animation = reinterpret_cast<const GameIconAnimationView *>(game);
         unitGetStereoScreenPosition(&x, &y, 9, 0.35f);

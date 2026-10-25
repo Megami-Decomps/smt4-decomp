@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "gamedata/UnitStatInitialization.h"
 #include "util/CalleeContracts.h"
+#include "event/2dEvent/EventEffect.h"
 extern "C" {
 InitializedUnitStatsA *FUN_003e4d68(u32 slot);
 s32 FUN_00187168(InitializedUnitStatsA *unit);
@@ -10,7 +11,6 @@ u32 lcgRandomRange(u32 maximum);
 BtlMainStateA *btlGetMainState(void);
 void FUN_003f1b3c(BtlMainStateA *state, u32 message, s32 kind, u32 *text, u32 *color);
 void FUN_0047f4cc(u32 color, f32 red, f32 green, f32 blue);
-void infoWinSetText(u32 window, u32 text);
 void uiNavigatorStart(u32 category, s32 first, s32 second, s32 third, s32 fourth);
 
 // Pick a party member for the navigator and show the corresponding battle message.
@@ -45,7 +45,7 @@ void FUN_00412488(void)
     // The information-window handle follows the shared battle-state extent.
     struct BattleInfoWindowView { u8 prefix[0x4D64]; u32 window; };
     typedef char BattleInfoWindowOffset[offsetof(BattleInfoWindowView, window) == 0x4D64 ? 1 : -1];
-    infoWinSetText(((BattleInfoWindowView *)state)->window, (u16)text);
+    infoWinSetText(reinterpret_cast<const char *>(((BattleInfoWindowView *)state)->window), (u16)text);
     uiNavigatorStart(selected, 1, 1, 0, 0);
 }
 }

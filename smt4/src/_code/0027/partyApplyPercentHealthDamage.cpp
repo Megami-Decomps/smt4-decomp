@@ -1,5 +1,6 @@
 /* NON_MATCHING: explicit support-progress states and zero-health test now match; player clamps, unit-loop flag tests, and support reduction registers still differ. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct DamagePlayer {
     u8 unk00[0x1c];
@@ -29,9 +30,8 @@ DamageSlots *gameGetSlotTable();
 DamageUnit *gameGetUnitRecord(s32 slot);
 s32 gameGetOptionProgressStatus();
 DamageUnit *gameGetSupportUnitData();
-void gameCounterAddSaturating(s32 event, s32 amount);
 u16 FUN_002903f0();
-s32 FUN_00287894(u32 id);
+s32 table1bOr1cGetRecordValue(u32 id);
 }
 
 static __inline s32 healthReduction(s32 maximum, s32 percentage)
@@ -120,7 +120,7 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
     s32 maximum = support->maximumHealth;
     s32 reduction = healthReduction(maximum, percentage);
     s32 remaining = support->currentHealth - reduction;
-    bool permitsZero = FUN_00287894(FUN_002903f0()) == 4;
+    bool permitsZero = table1bOr1cGetRecordValue(FUN_002903f0()) == 4;
     if (remaining <= 0 && !permitsZero)
         remaining = 1;
     if (remaining > maximum)

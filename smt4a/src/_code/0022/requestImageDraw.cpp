@@ -1,6 +1,8 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: ARMCC retains the initialization loop and reloads 1000 across requestIdToCode; retail unrolls calls and preserves r1. */
 #include "font/SearchWin/RunWin.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -13,7 +15,6 @@ s32 FUN_001692ac(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 void sysMemClear(void *memory, u32 bytes);
 u32 requestIdToCode(u32 id);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 depth, s32 flags, s32 mode);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);

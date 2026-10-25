@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -44,7 +45,6 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: uiDrawDataEntryRow. */
 /* Supplied declaration required: FUN_0022f9c8. */
 /* Supplied declaration required: FUN_0023dcec. */
-extern int FUN_0026140c(void);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 extern unsigned int computeCountLimit(void);
@@ -81,7 +81,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
   iStack_2c = param_2;
   temp_v15 = param_3;
   temp_v0 = uniteGetWork();
-  temp_v13 = FUN_0026140c();
+  temp_v13 = reinterpret_cast<int>(FUN_0026140c());
   temp_v13 = temp_v13 + 0x20;
   if (temp_v0 != 0) {
     temp_v10 = 0;

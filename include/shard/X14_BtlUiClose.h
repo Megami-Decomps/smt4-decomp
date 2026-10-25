@@ -33,4 +33,13 @@ typedef char BtlUiCloseOffsets[offsetof(BtlUiCloseState, helper) == 0x8 &&
     offsetof(BtlUiCloseState, ownedFlags) == 0x40 && offsetof(BtlUiCloseWork, job) == 0x80 &&
     offsetof(BtlUiCloseWork, flags) == 0x45A8 && offsetof(BtlUiHelper, job) == 0x10 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_004aa780(u32 unused, u8 value);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

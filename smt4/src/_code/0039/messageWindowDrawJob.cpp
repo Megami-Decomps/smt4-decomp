@@ -8,7 +8,7 @@ extern RenderCtx *g_titleScene;
 MessageWindowDrawState *jobGetWork(void);
 s32 vec2GetXInt(const void *window);
 s32 vec2GetYInt(const void *window);
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(s32 first, s32 second);
 void FUN_002bf380(s32 layer, s32 group, s32 kind, s32 x, s32 y, u32 flags);
 const void *FUN_0023478c(void *table, u32 index);
@@ -33,7 +33,7 @@ s32 messageWindowDrawJob(void *)
         }
         s32 x = vec2GetXInt(window);
         s32 y = vec2GetYInt(window);
-        FUN_002c39a4(g_titleScene);
+        renderCtxSelectStereoLayout(g_titleScene);
         RenderCtx *context = g_titleScene;
         renderCtxPushA(context, FUN_002c5d80(1, 0));
         FUN_002bf380(2, 0x3A, 6, x, y, 0x81);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: same code and instruction order; only register allocation differs (ip vs r2/r3) */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct Obj1b14dc {
     u8 *begin;
@@ -11,7 +12,6 @@ struct Obj1b14dcRange {
     s32 words;
 };
 
-extern "C" u8 *FUN_001af0d0(u8 *cursor, s32 flag);
 
 /* Zero-pads the buffer so the next block is 16-byte aligned, then closes the block: reports its start and size in words. */
 extern "C" void FUN_001b14dc(Obj1b14dc *buffer, Obj1b14dcRange *range)
@@ -27,7 +27,7 @@ extern "C" void FUN_001b14dc(Obj1b14dc *buffer, Obj1b14dcRange *range)
             cursor += padWords * 4;
         }
     }
-    buffer->cursor = FUN_001af0d0(cursor, 1);
+    buffer->cursor = reinterpret_cast<u8 *>(FUN_001af0d0(reinterpret_cast<u32 *>(cursor), 1));
     u8 *begin = buffer->begin;
     range->words = (buffer->cursor - begin) >> 2;
     range->start = begin;

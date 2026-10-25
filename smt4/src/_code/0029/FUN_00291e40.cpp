@@ -1,6 +1,7 @@
 /* NON_MATCHING: position-by-value frame recovered; only position setter's slot argument uses selected r6 instead of loop slot r4. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "util/AsdSoundGetPlayerPriority.h"
 
 extern "C" {
 s32 jyoucyuGetTableEntry(u32 index);
@@ -10,7 +11,6 @@ void FUN_002cc1c0(u32 slot, const SoundActorQueuePosition *position);
 void FUN_002ebc68(u32 sound, s32 slot);
 void FUN_002cc08c(u32 sound, s32 slot);
 void *FUN_002ebc34(s32 slot);
-s32 asdSoundGetPlayerPriority(void *player);
 
 /* Find an idle sound actor, or replace the player with the greatest priority value. */
 u32 FUN_00291e40(u32 sound, SoundActorQueuePosition position)
@@ -36,7 +36,7 @@ u32 FUN_00291e40(u32 sound, SoundActorQueuePosition position)
         }
         if (!started) {
             for (s32 slot = 0; slot < 16; ++slot) {
-                s32 priority = asdSoundGetPlayerPriority(FUN_002ebc34(slot));
+                s32 priority = asdSoundGetPlayerPriority(reinterpret_cast<u32>(FUN_002ebc34(slot)));
                 if (greatestPriority < priority) {
                     replacement = slot;
                     greatestPriority = priority;

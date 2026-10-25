@@ -1,4 +1,5 @@
 #include "shard/Shard0049.h"
+#include "gfx/RenderStateStack.h"
 
 extern "C" {
 

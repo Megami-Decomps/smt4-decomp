@@ -38,7 +38,7 @@ void FUN_00231bcc(const ComparisonMenuAnchor *, u32, s32, s32, u32, u32);
 s32 FUN_0029e924(ComparisonMenuSelection *);
 s32 rangeLimitMin(ComparisonMenuSelection *);
 s32 flaggedValueHolderGetTotal(ComparisonMenuSelection *);
-s32 FUN_00240d5c(ComparisonMenuSelection *);
+u32 flaggedEntryGetValueByState(ComparisonMenuSelection *);
 void FUN_003a9df4(ComparisonMenuScene *, s32, u32, s32);
 void FUN_0022d7b0(ComparisonMenuScene *, u32);
 
@@ -72,13 +72,13 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
     s32 visible = rangeLimitMin(&scene->selection);
     ComparisonMenuEntry *entries = scene->entries;
     for (s32 row = 0; row < visible; ++row) {
-        if (scene->mode != 2 || FUN_00240d5c(&scene->selection) != row)
+        if (scene->mode != 2 || flaggedEntryGetValueByState(&scene->selection) != row)
             FUN_003a9df4(scene, row, 0, entries[first + row].value);
     }
     if (scene->selection.count > 0 && scene->mode == 2) {
         s32 selected = flaggedValueHolderGetTotal(&scene->selection);
         s16 value = entries[selected].value;
-        s32 row = FUN_00240d5c(&scene->selection);
+        s32 row = flaggedEntryGetValueByState(&scene->selection);
         FUN_003a9df4(scene, row, 1, value);
     }
     FUN_0022d7b0(scene, layer);

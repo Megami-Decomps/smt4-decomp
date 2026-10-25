@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int FUN_002be5a4(...);
 int textFormatBuffer(...);
 int FUN_002bed3c(void);
 int FUN_002bf380(...);
-int FUN_002bf4f8(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_3: 9 slot(s), 36 byte(s) */
@@ -59,7 +59,6 @@ extern int aocIndexValueOrDefault(unsigned int);
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002bf380. */
-/* Supplied declaration required: FUN_002bf4f8. */
 
 
 void FUN_001aed18(int param_1,int param_2,int param_3)
@@ -104,7 +103,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     temp_v1 = FUN_0029efc0(temp_v11);
     temp_v8 = *(unsigned int *)(temp_v5 + (temp_v1 + temp_v7) * 8 + 0xe40);
     temp_v13 = temp_v8 >> 0x1f;
-    temp_v1 = FUN_002bf4f8(0x1d,temp_v7 + 0x40d);
+    temp_v1 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, temp_v7 + 0x40d));
     FUN_002bf288(2,0x1d,0x43a,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x6a)
     ;
     FUN_002bf288(2,0x1d,0x43b,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x6a)
@@ -113,7 +112,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     ;
     FUN_002bf288(2,0x1d,0x43d,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,0x6f)
     ;
-    temp_v2 = FUN_002bf4f8(0x1d,0x440);
+    temp_v2 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x440));
     temp_v12 = aocIndexValueOrDefault(temp_v9);
     if (temp_v12 != 0) {
       temp_v14 = 0xff;
@@ -144,7 +143,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       FUN_002be5a4(2,temp_v14,temp_v12,(int)*(short *)(temp_v2 + 8));
     }
-    temp_v2 = FUN_002bf4f8(0x1d,0x444);
+    temp_v2 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x444));
     if ((int)temp_v8 < 0) {
       temp_v4 = FUN_0029a9d4(temp_v9,1);
       textFormatBuffer(temp_v10,&LAB_001af104,temp_v4);
@@ -156,12 +155,12 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,4,0x6f,
                  temp_v10);
-    temp_v2 = FUN_002bf4f8(0x1d,0x43f);
+    temp_v2 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x43f));
     FUN_002b6c34((int)(short)temp_v9,
                  (int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,0x6f,temp_v13,0
                 );
-    temp_v2 = FUN_002bf4f8(0x1d,0x43e);
+    temp_v2 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x43e));
     if ((int)temp_v8 < 0) {
       drawSetColorFromRGBA8(*(unsigned int *)(temp_v5 + temp_v8 * 4 + 0x255c));
       temp_v6 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10);
@@ -192,11 +191,11 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     temp_v8 = *(unsigned int *)(temp_v5 + (temp_v1 + temp_v7) * 8 + 0xe40);
     temp_v13 = temp_v8 >> 0x1f;
     temp_v7 = FUN_0029efa8(temp_v11);
-    temp_v7 = FUN_002bf4f8(0x1d,temp_v7 + 0x42e);
+    temp_v7 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, temp_v7 + 0x42e));
     temp_v1 = FUN_0029efa8(temp_v11);
     FUN_0028f694(*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,
                  (int)*(short *)(temp_v5 + temp_v1 * 2 + 0xe0c));
-    temp_v1 = FUN_002bf4f8(0x1d,0x449);
+    temp_v1 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x449));
     temp_v12 = aocIndexValueOrDefault(temp_v9);
     if (temp_v12 != 0) {
       temp_v4 = 0xffffffff;
@@ -231,7 +230,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
     }
     FUN_002bf288(2,0x1d,0x446,*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,0x83)
     ;
-    temp_v1 = FUN_002bf4f8(0x1d,0x44d);
+    temp_v1 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x44d));
     if ((int)temp_v8 < 0) {
       temp_v4 = FUN_0029a9d4(temp_v9,1);
       textFormatBuffer(temp_v10,&LAB_001af104,temp_v4);
@@ -245,12 +244,12 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
                  temp_v10);
     FUN_002bf288(2,0x1d,0x445,*(short *)(temp_v7 + 8) + param_1,*(short *)(temp_v7 + 10) + param_2,0x83)
     ;
-    temp_v1 = FUN_002bf4f8(0x1d,0x448);
+    temp_v1 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x448));
     FUN_002b6c34((int)(short)temp_v9,
                  (int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v7 + 8) + param_1,
                  (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0x88,temp_v13,0
                 );
-    temp_v1 = FUN_002bf4f8(0x1d,0x447);
+    temp_v1 = reinterpret_cast<int>(FUN_002bf4f8(0x1d, 0x447));
     if ((int)temp_v8 < 0) {
       drawSetColorFromRGBA8(*(unsigned int *)(temp_v5 + temp_v8 * 4 + 0x255c));
       temp_v3 = (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v7 + 10);
@@ -273,7 +272,7 @@ void FUN_001aed18(int param_1,int param_2,int param_3)
   temp_v5 = FUN_0029ee54(temp_v5 + 0x1dc);
   if (temp_v5 < 1) {
     FUN_002bf380(2,0x1a,0x1b,param_1,param_2,0xdd);
-    temp_v5 = FUN_002bf4f8(0x1a,0x544);
+    temp_v5 = reinterpret_cast<int>(FUN_002bf4f8(0x1a, 0x544));
     textFormatBuffer(temp_v10,&LAB_001af638);
     puVar7 = temp_v10;
     fontMeasureLineAdvance(puVar7,2);

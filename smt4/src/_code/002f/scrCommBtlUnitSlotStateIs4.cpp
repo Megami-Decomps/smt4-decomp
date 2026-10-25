@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail adds the scaled index and then 0x100 plus a #0x26 displacement; built loads 0x126 from a literal and adds it to the index */
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct BattleUnit {
 
 extern u32 g_btlScriptUnit;
 extern s32 scrGetArg(s32 index);
-extern void scrSetResult(s32 result);
 
 /* Script command: sets the result to whether the next argument of the script unit's status is in state 4 (bits 10-15). */
 u32 scrCommBtlUnitSlotStateIs4(void)

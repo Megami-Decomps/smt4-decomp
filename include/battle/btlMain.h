@@ -572,4 +572,29 @@ typedef char BtlMainReinforcementOffsets[
     offsetof(BtlMainStateA, reinforcementChance.chanceBonus) == 0x45B9 &&
     sizeof(BtlMainStateA) == 0x4CF0 ? 1 : -1];
 
+
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+bool FUN_004d87e4(void **holder);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+s32 btlFindEntryNonzeroRecordValue(u32 id);
+#ifdef __cplusplus
+}
+#endif
+
+extern "C" {
+BattleRosterRecordA *btlFindMarkedReserveRecord(BtlMainStateA *state);
+}
+
 #endif

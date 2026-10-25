@@ -2,12 +2,12 @@
 #include "battle/BattleUnitSlot.h"
 #include "shard/W4_Match6_BtlScript.h"
 #include "util/CalleeContracts.h"
+#include "util/BtlFindNthActiveSpecialEntry.h"
 
 extern "C" {
 
 extern u32 g_btlScriptUnit; /* 0x43427c */
 
-extern int btlFindNthActiveSpecialEntry(BtlScript *script, int arg);
 extern u32 FUN_00245a7c(u32 arg, u32 pending);
 
 /* Starts the pending request (state 0) when the script is idle, the scripted unit is free and the script flags allow it. */

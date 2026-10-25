@@ -1,9 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: explicit states restore the retail jump table and named selection values restore field-load order; outgoing image arguments and speed/layer scheduling still differ. */
 #include "ui/UiSpriteState.h"
 #include "shard/TextureDrawCall.h"
 
 extern "C" {
-s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void efctSetSpeed(f32 scale);
 f32 vec2GetSpeed(const void *object);

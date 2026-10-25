@@ -18,7 +18,7 @@ int vec2GetXInt(...);
 int FUN_002bf380(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int uiDrawRotatingLoadingGrid(...);
 int FUN_002d96d4(...);
 
@@ -57,7 +57,7 @@ extern int FUN_002a0d0c(void);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: uiDrawRotatingLoadingGrid. */
 /* Supplied declaration required: FUN_002d96d4. */
@@ -85,7 +85,7 @@ unsigned int FUN_001add9c(void)
   unsigned char temp_v14;
   
   temp_v3 = g_unite;
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v5 = g_titleScene;
   temp_v4 = FUN_002c5d80(1,0);
   piVar14 = (int *)(temp_v5 + 0x124c);

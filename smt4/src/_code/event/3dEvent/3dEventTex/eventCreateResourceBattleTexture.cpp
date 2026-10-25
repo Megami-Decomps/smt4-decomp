@@ -1,5 +1,7 @@
 #include "event/BattleTexture.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 namespace {
 struct BattleTextureResourceRecord {
@@ -9,15 +11,12 @@ struct BattleTextureResourceRecord {
 }
 extern "C" {
 void *asdMemAlloc(s32 pool, s32 alignment, s32 flags, u32 bytes, s32 clear);
-void memClear(void *memory, u32 bytes);
 BattleTextureResourceRecord *dataTable25FindById(u32 id);
 s32 FUN_002c1d5c();
 u32 FUN_00294090(s32 textureId, s32 flags);
 u32 uiStepAnimatedContentTask(void *job);
 u32 FUN_001e023c(void *job);
 void jobWorkRelease(void *job);
-void *asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
-    u32 (*step)(void *), void (*destroy)(void *), void *work);
 void *taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, void *process);
 extern const char k_eventBattleTextureProcessName[];
@@ -58,7 +57,7 @@ void *eventCreateResourceBattleTexture(u32 id, f32 x, f32 y)
     work->position[1] = y;
     work->enabled = 1;
     work->unk15 = 0;
-    void *process = asdProcessCreateSimple(k_eventBattleTextureProcessName, 2, 0, 0, uiStepAnimatedContentTask, jobWorkRelease, work);
+    void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>(k_eventBattleTextureProcessName), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(uiStepAnimatedContentTask), reinterpret_cast<AsdProcFunc>(jobWorkRelease), reinterpret_cast<u32>(work)));
     taskCreateDraw(k_eventBattleTextureDrawName, 0x6F, 0, 0, FUN_001e023c, 0, work, process);
     return process;
 }

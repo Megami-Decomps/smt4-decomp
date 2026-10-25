@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00122a6c` (_code @ 0x122a6c, 0x498 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int __aeabi_memset4(int, int, int);
-int memClear(int, int);
 
 extern int g_textureBindingState; /* 0x4655c0 */
 
@@ -31,7 +31,7 @@ unsigned int FUN_00122a6c(int param_1)
   unsigned int temp_v11;
   
   g_textureBindingState = param_1;
-  memClear(param_1,0x868);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_1), 0x868));
   temp_v0 = g_textureBindingState;
   *(unsigned char *)(g_textureBindingState + 0x18) = 0;
   *(unsigned char *)(temp_v0 + 0x19) = 0;
@@ -72,7 +72,7 @@ unsigned int FUN_00122a6c(int param_1)
   *(unsigned char *)(temp_v0 + 0x106) = 0;
   *(unsigned char *)(temp_v0 + 0x109) = 0;
   *(unsigned int *)(temp_v0 + 0x100) = 0;
-  memClear(temp_v0 + 0x74,0x80);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v0 + 0x74), 0x80));
   temp_v0 = g_textureBindingState;
   temp_v1 = 0;
   temp_v2 = 0x10;

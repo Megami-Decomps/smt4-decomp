@@ -1,6 +1,7 @@
 /* NON_MATCHING: instruction scheduling and register choice only (retail routes nnosGetApplicationMemorySize's result through r4 before nnosInitAddressSpaceOnce and
  * schedules the constructor stores differently); the same instructions otherwise. */
 #include "shard/S2AsdMemInit.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ void nnosInitAddressSpaceOnce(u32 base, u32 size);
 void FUN_0010fae4(void);
 void nn_init_InitializeAllocator(u32 size);
 void nn_os_CriticalSection_Initialize(void *lock);
-void memClear(void *dst, u32 size);
 void addressBlockAllocate(void *block, u32 size);
 void rt_memclr(u32 base, u32 size);
 void heapOwnerCreate(void *expHeap, u32 base, u32 size, u32 flags);

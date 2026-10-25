@@ -1,4 +1,5 @@
 #include "shard/Shard0048.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 

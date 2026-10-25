@@ -1,6 +1,7 @@
 /* NON_MATCHING: scalar vector arithmetic fuses multiply/adds; retail uses vector-class temporaries and different VFP saves. */
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdDebug.h"
+#include "title/titleMain.h"
 
 struct StatusCameraRegistryView {
     u8 prefix[0xC];
@@ -15,7 +16,6 @@ void FUN_00154180(s32, s32, s32, s32);
 void asdCameraInitializeDefaults(StatusCameraWorkA *, s32);
 void FUN_0014f0dc(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
 void FUN_001523b8(StatusCameraWorkA *, s32, f32, f32, f32, f32);
-void FUN_0036b824(StatusCameraWorkA *);
 void asdCameraRegister(StatusCameraWorkA *);
 void uiSetFloatPair(StatusCameraWorkA *, f32, f32);
 
@@ -45,7 +45,7 @@ void FUN_002a6dcc(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxiliary,
     asdCameraInitializeDefaults(camera, 1);
     FUN_0014f0dc(camera, &camera->eye, &target, &up);
     FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
-    FUN_0036b824(camera);
+    FUN_0036b824(reinterpret_cast<u32>(camera));
     asdCameraRegister(camera);
     uiSetFloatPair(camera, viewportScale, 1.0f);
     g_handleRegistry->camera = camera;

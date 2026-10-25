@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/MdlManagerDestroy.h"
 
 extern "C" {
 
-int asdMdlManagerMarkDestroy(void);
 int asdMdlManagerDestroy(int handle);
 
 typedef struct Obj {
@@ -17,7 +17,7 @@ void uniteReleaseModel(void)
     int *model = &g_unite->model;
 
     if (*model != 0) {
-        asdMdlManagerMarkDestroy();
+        asdMdlManagerMarkDestroy(*model);
         asdMdlManagerDestroy(*model);
         *model = 0;
     }

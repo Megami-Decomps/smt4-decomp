@@ -1,6 +1,7 @@
 /* NON_MATCHING: the global base pointer is held in r6 (retail: r4); otherwise identical. */
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct ScriptResource;
 
@@ -40,7 +41,6 @@ int gameGlobalsSetSelected(int arg);
 int FUN_0029ee6c(int arg0, int color);
 int fileSlotFree(int arg);
 void scrScriptProcessDestroy(ScriptResource *resource);
-int asdMdlManagerDestroy(u32 handle);
 int ifTouchRegionRemove(void);
 int jobStop(void *context, int arg);
 
@@ -51,7 +51,7 @@ void FUN_00202f9c(void)
     SceneState *state2;
     u32 i;
 
-    asdMdlManagerDestroy(state->handle360);
+    asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(state->handle360));
     state->handle360 = 0;
     if (state->hasExtraTarget != 0) {
         ifTouchRegionRemove();

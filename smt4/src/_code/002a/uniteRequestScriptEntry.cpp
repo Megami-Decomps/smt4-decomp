@@ -1,8 +1,8 @@
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
-int FUN_002a0cc8(int arg);
 int buttonHelpSetPreset(int arg);
 extern int scrScriptProcessStartEntry(u32 a, int b);
 

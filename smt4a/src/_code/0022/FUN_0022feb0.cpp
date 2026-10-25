@@ -1,5 +1,7 @@
 /* NON_MATCHING: Counter values and nonzero-index lists are reconstructed; list append/count updates and persistent pointers allocate different registers/frame slots. */
 #include "gamedata/DataTable.h"
+#include "camp/Config/Config.h"
+#include "util/CountersGetB.h"
 
 struct CounterListDefinition {
     /* 0x00 */ s16 counter;
@@ -18,8 +20,6 @@ struct CounterSelectionWork {
 extern "C" {
 void sysMemClear(void *data, u32 size);
 u32 gameCountersGetWord(u8 counter);
-u32 countersGetB(u8 counter);
-u32 FUN_002e50d4();
 u32 gameDataGetTableValue();
 }
 

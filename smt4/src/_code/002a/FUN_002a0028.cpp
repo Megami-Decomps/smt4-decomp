@@ -1,5 +1,6 @@
 /* NON_MATCHING: unite list sizing and region rebuild are recovered; getter/base registers, invalid-region constant materialization, and count-loop layout differ. */
 #include "shard/W6_W6Match3_ScrollSelection.h"
+#include "status/StatusCamera.h"
 
 struct UniteTouchWork {
     /* 0x000 */ u8 unk000[0x438];
@@ -21,7 +22,6 @@ struct UniteMenuAvailability {
 
 extern "C" {
 extern UniteTouchWork *g_unite;
-UniteMenuAvailability *FUN_002a0d0c();
 s32 FUN_0029efc0(const ScrollSelection *selection);
 s32 FUN_0029efa8(const ScrollSelection *selection);
 void FUN_0029f848(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
@@ -35,7 +35,7 @@ u16 FUN_002b8584(u32 table, u32 index);
 extern "C" void FUN_002a0028(s32 refreshRegions)
 {
     UniteTouchWork *work = g_unite;
-    UniteMenuAvailability *available = FUN_002a0d0c();
+    UniteMenuAvailability *available = reinterpret_cast<UniteMenuAvailability *>(FUN_002a0d0c());
     ScrollSelection *selection = &work->selection;
     s32 top = FUN_0029efc0(selection);
     s32 offset = FUN_0029efa8(selection);

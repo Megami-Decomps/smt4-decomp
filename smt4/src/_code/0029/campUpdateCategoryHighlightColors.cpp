@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match8_CampInventory.h"
 #include "shard/PadState.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct CampUnitCategoryRecord {
     u8 unk00[0x44];
@@ -11,7 +12,6 @@ extern CampInventoryLists *g_camp;
 s32 FUN_0029ee54(CampInventoryController *controller);
 s32 FUN_0029efa8(CampInventoryController *controller);
 s32 FUN_0029efc0(CampInventoryController *controller);
-void memClear(void *buffer, u32 size);
 PadState *gameGetPlayerData();
 CampUnitCategoryRecord *gameGetUnitRecord(s32 unit);
 u32 categoryGetColor(s16 category);

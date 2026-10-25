@@ -1,5 +1,6 @@
 /* NON_MATCHING: state machine matches except armcc cross-jumps the shared "close prompt" tail differently (retail: case 4 branches back into case 3 tail; one row more) and orders the hoisted constants r0/r6 differently. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 namespace {
 // A record of the player's party: skill ids at 0x34, a validity byte per skill at 0x44.
@@ -42,7 +43,6 @@ SaveSlot *saveSlotFindById(u32 id);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageGetChoiceResult(void);
-void FUN_003180c4(s32 a, u32 b);
 void FUN_00333dc8(s32 a);
 void obj04Finish(void);
 s32 FUN_003df4a4(u16 skillId);
@@ -87,7 +87,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             break;
         }
         FUN_00333dc8(1);
-        FUN_003180c4(0, FUN_00180114(slot->demonId));
+        FUN_003180c4(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
         scrScriptProcessStartEntry(task->script, 0x13);
         task->step = 3;
     }
@@ -97,7 +97,7 @@ u32 FUN_0041774c(SkillLearnTask *task)
             if (messageGetChoiceResult() == 0) {
                 FUN_003e4e4c(task->slotId & 0xffff);
                 SaveSlot *slot = saveSlotFindById(task->slotId & 0xffff);
-                FUN_003180c4(0, FUN_00180114(slot->demonId));
+                FUN_003180c4(0, reinterpret_cast<const char *>(FUN_00180114(slot->demonId)));
                 scrScriptProcessStartEntry(task->script, 0x14);
                 task->step = 4;
                 break;

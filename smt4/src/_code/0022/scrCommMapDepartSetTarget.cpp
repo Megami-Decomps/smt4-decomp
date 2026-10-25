@@ -1,10 +1,10 @@
 #include "map/mapDepart.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
 void mapDepartSetTarget(u32 a, u32 b, u32 c);
 u32 scrGetArg(s32 index);
-void asdSequenceRequest(s32 a, s32 b, s32 c);
 
 extern GameState g_gameState;
 

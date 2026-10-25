@@ -41,4 +41,7 @@ struct MapTriggerFlagView {
     /* 0x7D4 */ u32 flags[1];
 };
 
+/* Returns the map block of the save data; callers view it as the sub-structure they use. */
+extern "C" SaveWork *gameGetMapBlock(void);
+
 #endif

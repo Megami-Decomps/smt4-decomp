@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail returns directly from every state (no shared epilogue), keeps the process in r4 with g_aocMain in r6 and copies the result through two stack records with ldm/stm; this build merges exits and reuses fewer registers. */
 #include "classes/AocMenu.h"
+#include "util/FUN_00233fcc.h"
+#include "util/FUN_00233fcc.h"
 #include "common.h"
 
 struct AocMenuObject;
@@ -51,7 +53,6 @@ void timeInitializeActiveState(u32 *state);
 void FUN_00233db8(AocMenuProcess *process, s32 value);
 void FUN_0023392c(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
-void *FUN_00233fcc(AocMenuObject *object, s32 kind);
 s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *script, s32 entry);
 void scrRunOpcodesStub(void *script);

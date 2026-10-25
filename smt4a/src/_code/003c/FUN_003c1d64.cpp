@@ -1,5 +1,5 @@
 /* NON_MATCHING: range locals and direct combatant flag reads recovered; excluded-mask load pair and AND scratch registers differ. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -9,7 +9,6 @@ s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 s32 FUN_003020fc(BtlCombatantEntryA *entry, u32 category);
 void scrSetResult(s32 value);
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 
 // Test requested eligible combatants, including the auxiliary unit, for an action category.

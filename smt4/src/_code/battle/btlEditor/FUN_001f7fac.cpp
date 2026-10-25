@@ -3,6 +3,7 @@
 #include "battle/EnemyEditor.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
+#include "map/mapDepart.h"
 struct BtlUi;
 /* The allocated session extends beyond the shared EnemyEditorWork prefix. */
 struct EditorSessionState {
@@ -32,7 +33,6 @@ void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_00256940(BtlMainState *battle, BtlMainState *owner, u32 enabled);
 void btlReflectQueueKind34(s32 mode, s32 index);
 void FUN_00256898(s32 enabled, s32 mode);
-void FUN_0025c2d0(BtlUi *ui, u32 enabled);
 
 void FUN_001f7fac(BtlMainState *battle)
 {
@@ -54,6 +54,6 @@ void FUN_001f7fac(BtlMainState *battle)
     }
     battle->editorControl.flags |= 0x80000;
     if (g_btlUiBlock)
-        FUN_0025c2d0(g_btlUiBlock, 1);
+        FUN_0025c2d0(reinterpret_cast<u32>(g_btlUiBlock), 1);
 }
 }

@@ -1,5 +1,6 @@
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 #include <stddef.h>
+#include "font/SWin/SWin.h"
 
 extern "C" {
 

@@ -1,5 +1,6 @@
 /* NON_MATCHING: unit/denominator register retention replaces retail spills/reloads; inner-loop limit and minimum-experience branch lowering differ, possibly under alternate optimization. */
 #include "shard/PadState.h"
+#include "gamedata/FlagBitTests.h"
 
 struct ExperienceResult {
     u8 unk0000[0x35b4];
@@ -32,7 +33,6 @@ PadState *gameGetPlayerData();
 u16 dataTable09Sub3GetRecord(s32, s32);
 u8 playerPadTestBit(u32);
 ExperienceUnit *gameGetUnitRecord(u32);
-u32 flagWordTestBit(const ExperienceUnit *, u32);
 ExperienceSkill *passiveSkillLookupRecord(u32);
 
 // Each reward consists of the base experience followed by the defeated unit's level.

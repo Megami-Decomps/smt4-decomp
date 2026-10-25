@@ -1,4 +1,4 @@
-/* NON_MATCHING: the allocation size is computed as (count*16 + count*4 + 40) before the trace in retail (shifts/adds, count kept in r8), and the loop registers differ */
+/* NON_MATCHING: allocation size, trace order and entries/objects stores match; retail groups refCount/unk20/self into one stm with the zero in r0 (built keeps the zero in ip), shifting the loop registers. */
 #include "AsdSDK/Source/Gfx/Effect/effTLP.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -20,13 +20,15 @@ TlpObject *effTlpCreate(TlpFile *file)
     u32 i;
     u32 total;
 
+    u32 entriesSize = count * 0x10;
+    u32 size = entriesSize + count * 4 + 0x28;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effTLP.cpp", 54);
-    tlp = (TlpObject *)memAlloc(0x10000, 0x100, 0, count * 0x14 + 0x28, 0x10, 1);
+    tlp = (TlpObject *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
     tlp->refCount = 0;
     tlp->unk20 = -1;
     tlp->self = tlp;
     tlp->entries = (TlpEntry *)tlp->payload;
-    tlp->objects = (void **)(tlp->payload + count * 0x10);
+    tlp->objects = (void **)(tlp->entries + count);
     src = file->entry;
     block = (u8 *)(src + count);
     tlp->unk00 = file->unk00;

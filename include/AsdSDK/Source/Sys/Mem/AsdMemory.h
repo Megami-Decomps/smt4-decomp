@@ -95,4 +95,16 @@ typedef struct AsdVramHeap {
     /* 0x18 */ u32 freeBytes;
 } AsdVramHeap;
 
+extern "C" {
+u8 FUN_004186a4(void);
+}
+
+extern "C" {
+bool partyPanelIsActive(void);
+}
+
+extern "C" {
+u32 partyEntryFlagsBit1(s32 index);
+}
+
 #endif

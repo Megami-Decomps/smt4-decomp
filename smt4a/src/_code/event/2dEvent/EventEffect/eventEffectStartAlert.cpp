@@ -1,6 +1,7 @@
 #include "event/2dEvent/EventEffect.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
@@ -8,8 +9,6 @@ void *asdMemoryAllocTracked(s32 pool, s32 alignment, s32 flags, u32 size, s32 cl
 u32 FUN_002281a0(void *job);
 u32 FUN_00261254(void *job);
 void eventEffectDestroy(void *job);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 owner,
-    u32 (*step)(void *), void (*destroy)(void *), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
 
@@ -23,7 +22,7 @@ void eventEffectStartAlert(s32 stopFrame)
     }
     EventEffectA *effect = g_eventEffect.effect;
     memset(effect, 0, sizeof(*effect));
-    effect->job = asdProcessCreateSimple("EvtAlart Calc", 3, 0, 0, FUN_002281a0, eventEffectDestroy, NULL);
+    effect->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EvtAlart Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002281a0), reinterpret_cast<AsdProcFunc>(eventEffectDestroy), NULL);
     taskCreateDraw("EvtAlart DrawUpLeft", 0x84, 0, 0, FUN_00261254, NULL, NULL, effect->job);
     taskCreateDraw("EvtAlart DrawUpRight", 0xe0, 0, 0, FUN_00261254, NULL, NULL, effect->job);
     effect->state = 0;

@@ -1,7 +1,6 @@
 /* NON_MATCHING: exploration bounds merging and bit-test shift registers differ. */
 #include "shard/SaveWork.h"
 
-extern "C" SaveWork *gameGetMapBlock(void);
 
 /* Test one cell of the selected five-by-seven exploration grid. */
 extern "C" bool FUN_002319e0(s32 region, s32 x, s32 y)

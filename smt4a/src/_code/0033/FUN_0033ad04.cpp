@@ -87,7 +87,7 @@ extern u32 *g_handleRegistry;
 extern EnemyAreaSelection DAT_005f17fc;
 void ptrListRemoveClearOwner(u32 *registry, u32 *owner);
 const EnemyKindRow *dataTable00FindById(u16 id);
-s32 FUN_004bb870(s32 spawnId);
+u16 FUN_004bb870(s32 index);
 }
 
 /* Drops the slot's resource: unregisters it (or marks it released), then deletes it if the slot owns it. */

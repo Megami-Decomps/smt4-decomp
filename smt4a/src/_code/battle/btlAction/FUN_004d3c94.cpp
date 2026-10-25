@@ -8,7 +8,6 @@ extern BtlAuxA *g_btlAux;
 u32 asdListBoxGetSelectedItemId(u32);
 s32 *asdListBoxGetIntValuePtr(u32, s32);
 f32 *asdListBoxGetFloatValuePtr(u32, s32);
-ReserveEditorRecord *btlFindMarkedReserveRecord(u32);
 
 /* Apply the selected debug-list value to a reserve record or its shared scalar. */
 void FUN_004d3c94(ReserveEditorWork *work, u32 id)
@@ -17,7 +16,7 @@ void FUN_004d3c94(ReserveEditorWork *work, u32 id)
     struct AuxEditorView { u8 unk0000[0x9C70]; f32 scalar; };
     typedef char AuxEditorScalarOffset[offsetof(AuxEditorView, scalar) == 0x9C70 ? 1 : -1];
     s32 item = asdListBoxGetSelectedItemId(work->listBox);
-    ReserveEditorRecord *record = btlFindMarkedReserveRecord(id);
+    ReserveEditorRecord *record = reinterpret_cast<ReserveEditorRecord *>(btlFindMarkedReserveRecord(reinterpret_cast<BtlMainStateA *>(id)));
     AuxEditorView *aux = (AuxEditorView *)g_btlAux;
     if (record != NULL) {
         switch (item) {

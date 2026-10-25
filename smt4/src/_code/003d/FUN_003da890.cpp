@@ -1,9 +1,9 @@
 /* NON_MATCHING: instruction-for-instruction identical except register numbering (first loop keeps the slot base in r8 in retail, r5 here; idOnly loop swaps r0/r1) */
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void *memClear(void *memory, u32 size);
 void asdMemFree(void *memory);
 }
 

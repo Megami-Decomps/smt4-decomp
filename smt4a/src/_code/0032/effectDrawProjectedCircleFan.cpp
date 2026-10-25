@@ -2,10 +2,10 @@
 #include "shard/W5_W5Match2_PlainData.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "shard/S1Mover.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern void *g_renderCtx;
-void *FUN_00152f54();
 const Matrix44 *block5B8OwnerGetBlock(void *owner);
 void memCopyWords(const void *source, void *destination, u32 bytes);
 void FUN_002a1850(Vec3f *out, s32 screen, void *projection, const Vec3f *position);
@@ -16,7 +16,7 @@ void FUN_0032c810(u32 firstColor, u32 secondColor, Point2 first, Point2 second,
 
 void effectDrawProjectedCircleFan(const Vec3f *center, u32 color, const Matrix44 *transform, f32 radius, f32 height)
 {
-    void *projection = FUN_00152f54();
+    void *projection = reinterpret_cast<void *>(FUN_00152f54());
     if (transform == NULL)
         transform = block5B8OwnerGetBlock(g_renderCtx);
     Matrix44 matrix;

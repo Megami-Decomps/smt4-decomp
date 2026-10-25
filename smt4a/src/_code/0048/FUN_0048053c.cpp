@@ -1,6 +1,8 @@
 /* NON_MATCHING: canonical modifier alignment, seven-halfword bonus extent and unsigned range bounds are restored; zero/one lifetimes, stack slot placement and clamp arithmetic scheduling remain different. */
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "util/DataTable08Sub2GetRecord.h"
 #include "gamedata/EquipmentUpgradeState.h"
+#include "shard/ItemStackLimit.h"
 
 // The points an equipment upgrade of one kind can still add: hit points (cap 999) and up to three
 // stats (cap 99), laid out like the bonuses already applied.
@@ -15,7 +17,6 @@ struct UpgradeLimits {
 
 extern "C" {
 s32 FUN_0047fc38(void);
-EquipmentUpgradeRecord* FUN_0019c06c(u32 item);
 void FUN_001a90f0(EquipmentUpgradeModifiers* extras, const EquipmentUpgradeModifiers* source);
 
 // Fills `limits` with how much more an upgrade of equipment `item` may add to its capped values.
@@ -24,7 +25,7 @@ void FUN_0048053c(s32 item, UpgradeLimits* limits)
     if (FUN_0047fc38() != 0) {
         return;
     }
-    EquipmentUpgradeRecord* record = FUN_0019c06c(item);
+    EquipmentUpgradeRecord* record = reinterpret_cast<EquipmentUpgradeRecord*>(itemCategoryFindByItemId(item));
     s32 kind = 0;
     if (record != NULL)
         kind = record->category;

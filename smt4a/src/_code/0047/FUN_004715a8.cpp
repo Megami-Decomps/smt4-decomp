@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reaches entryCount through a pointer kept in r5 (no store-to-load forwarding, count re-read for the vector constructor) and loads g_aocMain before the SD card branch. */
+/* NON_MATCHING: the g_aocMain argument load and the entryCount pointer (add r5,#1024/#68) now match; retail re-reads the count through that pointer after the store (armcc forwards the stored value instead) and loads the kind 0x33 constant before the first test. */
 #include "addon/aocMain.h"
 #include "gamedata/GroupedFileTables.h"
 #include "gamedata/TableEntryCache.h"
@@ -17,7 +17,7 @@ struct AocPackageStates {
 extern AocMain *g_aocMain;
 
 s32 asdFsIsSdCardDetected(void);
-s32 objGetFlagBit16(void);
+s32 objGetFlagBit16(AocMain *main);
 void asdOperatorDeleteB(void *block);
 void *asdOperatorNewE(u32 bytes);
 EntryState *__aeabi_vec_ctor_nocookie_nodtor(EntryState *, void (*)(EntryState *), u32 size, u32 count);
@@ -32,14 +32,15 @@ static __inline void rebuildStates(AocPackageStates *owner, s32 kind)
         owner->entries = NULL;
     }
     owner->entryCount = 0;
+    s32 *entryCount = &owner->entryCount;
     if (asdFsIsSdCardDetected() != 0) {
-        if (objGetFlagBit16() != 0) {
+        if (objGetFlagBit16(g_aocMain) != 0) {
             s32 count = aocCountPackageItemsOfType(owner, kind);
             owner->entryCount = count;
-            if (owner->entryCount > 0) {
+            if (*entryCount > 0) {
                 EntryState *states = (EntryState *)asdOperatorNewE(count * sizeof(EntryState));
                 if (states != NULL) {
-                    states = __aeabi_vec_ctor_nocookie_nodtor(states, entryStateClear, sizeof(EntryState), owner->entryCount);
+                    states = __aeabi_vec_ctor_nocookie_nodtor(states, entryStateClear, sizeof(EntryState), *entryCount);
                 }
                 owner->entries = states;
             }

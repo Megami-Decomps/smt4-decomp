@@ -1,10 +1,10 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct AocDisplay;
 
 extern "C" {
 
-void memClear(void *buffer, s32 size);
 s32 FUN_002a6e7c(u32 id, u32 kind, u32 variant, char *path);
 void aocDisplayQueueRecord(AocDisplay *display, const char *path, const char *secondPath, u32 *completion,
                            u32 mode, u32 bytes, void *context);

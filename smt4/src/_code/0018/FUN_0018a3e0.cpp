@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018a3e0` (_code @ 0x18a3e0, 0x880 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -10,10 +11,9 @@ int messageInitializeSavedBanner(void);
 int guestWinRequestOpen(void);
 int FUN_0029e328(...);
 int sortMenuCreate(...);
-int FUN_0029e648(...);
+int messageBannerInitSelection(...);
 int FUN_0029ee6c(...);
 int FUN_0029efd8(...);
-int FUN_002a0cc8(...);
 int buttonHelpSetPreset(...);
 
 int campUpdateCategoryHighlightColors(void);
@@ -77,7 +77,7 @@ extern int gameGetFlagByte12e8(void);
 extern int FUN_0029e02c(void);
 /* Supplied declaration required: FUN_0029e328. */
 /* Supplied declaration required: sortMenuCreate. */
-/* Supplied declaration required: FUN_0029e648. */
+/* Supplied declaration required: messageBannerInitSelection. */
 extern unsigned int objectPartRunUnlessLocked(int);
 extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029ee6c. */
@@ -394,7 +394,7 @@ LAB_0018a948:
     *(unsigned int *)(temp_v6 + 0x1c) = 0;
     *(unsigned int *)(temp_v6 + 0x14) = 0;
     guestWinRequestOpen();
-    FUN_0029e648(1,0);
+    messageBannerInitSelection(1,0);
     messageInitializeSavedBanner();
     temp_v5 = 0x100016e;
   }

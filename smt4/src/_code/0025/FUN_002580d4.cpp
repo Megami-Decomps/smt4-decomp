@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_0029ea68(u32 target);
+s32 itemGetFlagBit1(u32 target);
 s32 flagWordTestBit(s32 context, u32 property);
 s32 partyMemberFindById(u32 target);
 
@@ -16,7 +16,7 @@ void FUN_002580d4(u32 target, u32 a, u32 b, u32 c)
         FUN_002bf288(2, 0x24, 0x5b, a, b, c);
         return;
     }
-    if (FUN_0029ea68(target) != 0) {
+    if (itemGetFlagBit1(target) != 0) {
         FUN_002bf288(2, 0x24, 0x5a, a, b, c);
     }
 }

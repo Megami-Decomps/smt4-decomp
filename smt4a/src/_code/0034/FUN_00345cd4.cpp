@@ -1,6 +1,9 @@
 /* NON_MATCHING: two spots differ: the stack context is loaded into another register for the first push and first pop (retail builds the stack address in place in r4), and the third push (the stack's own top state as its argument) addresses its count through a literal offset where retail adds 0x10C0 and uses an immediate; layout, calls and offsets agree */
 #include "camp/RenderCtx.h"
+#include "util/FUN_00145e24.h"
+#include "util/FUN_00145e24.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -12,9 +15,7 @@ void FUN_00182540(EffectNode *node);
 void uiSpriteRefreshMode(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void skinObjectUpdateMatrices(RenderCtxA *context);
-u32 FUN_00152f54(void);
 s32 FUN_001692ac(u32 first, u32 second);
-void FUN_00145e24(RenderCtxA *context, u32 value);
 
 /* Draws the effect editor's menu under its own render states, then pops them again. */
 void FUN_00345cd4(void)
@@ -23,7 +24,7 @@ void FUN_00345cd4(void)
     renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     renderCtxPushB(g_renderCtx, g_renderCtx->stackB.entries[g_renderCtx->stackB.count]);
     if (g_effectEditor.dispatch.unk00 == 0) {
-        FUN_00145e24(g_renderCtx, FUN_00152f54());
+        FUN_00145e24(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
     } else {
         uiSpriteRefreshMode(g_renderCtx);
     }

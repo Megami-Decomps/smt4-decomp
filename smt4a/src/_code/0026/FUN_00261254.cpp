@@ -2,10 +2,9 @@
 #include "camp/RenderCtx.h"
 #include "event/2dEvent/EventEffect.h"
 #include "event/EffectQuadParameters.h"
+#include "Model/MoriModelShadowMap.h"
 extern "C" {
-extern RenderCtxA *g_renderCtx;
 extern EventEffectGlobalsA g_eventEffect;
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(s32 mode, s32 flags);
 void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 void FUN_00164034(const EffectQuadParameters *first, const EffectQuadParameters *second, const EffectQuadParameters *third, const EffectQuadParameters *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);

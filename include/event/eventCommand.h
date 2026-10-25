@@ -31,4 +31,13 @@ typedef struct EventCommandGlobals {
     /* 0x04 */ u32 job;      /* job stopped together with the command */
 } EventCommandGlobals;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_00342334(u8 value);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,6 +1,7 @@
 /* NON_MATCHING: ARMCC hoists state constants into r7/r8 and emits separate final status/state stores instead of retail's stm; control flow and relocations are reconstructed. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "event/eventCommand.h"
 
 struct GameOverScriptProcess {
     /* 0x000 */ u8 unk000[0x108];
@@ -25,7 +26,6 @@ void asdTMTexTableLoadTmx(u32 table, u32 flags);
 void asdTMTexLoadMainHeap(u32 table, u32 index);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);
-void FUN_00342334(u32 enabled);
 GameOverScriptProcess* FUN_00275bc8(void* script, void* messages);
 void scrScriptProcessStartEntry(GameOverScriptProcess* process, u32 entry);
 s32 scrRunOpcodesStub(GameOverScriptProcess* process);

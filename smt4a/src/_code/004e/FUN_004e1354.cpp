@@ -50,7 +50,7 @@ s32 chainCountIdUnflagged(u32 chain, BtlCommand *command);
 s32 isEntryUsable(u32 event);
 s32 FUN_004e753c(BtlActorRef *ref, BtlCommand *command, s32 mode);
 void FUN_004e81bc(BtlActorRef *ref, BtlCommand *command, s32 mode);
-void FUN_004f8f08(u32 block);
+void btlStageResetAndClearCameraFlag(u32 block);
 void FUN_004fbeac(s32, BtlCommand *, s32, s32, s32);
 void FUN_004fe764(s32, BtlCommand *, u32, s32, s32);
 
@@ -70,7 +70,7 @@ u32 FUN_004e1354(BtlActorRef *ref, BtlCommand *command)
             return 0;
         }
         btlScriptRecordGet(ref)->state = 1;
-        FUN_004f8f08(g_btlAux);
+        btlStageResetAndClearCameraFlag(g_btlAux);
         return 1;
     }
     if (actor->uiState != 4) {

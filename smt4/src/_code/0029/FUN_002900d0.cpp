@@ -1,5 +1,6 @@
 #include "shard/GameOptions.h"
 #include "gamedata/GameFlags.h"
+#include "camp/ButtonHelp/ButtonHelp.h"
 
 extern "C" {
 

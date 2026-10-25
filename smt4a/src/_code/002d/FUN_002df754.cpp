@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
+#include "shard/JobWork.h"
 
 namespace {
 struct RosterSpriteId {
@@ -15,7 +16,6 @@ struct RosterSpriteFrame {
 }
 
 extern "C" {
-BtlMainStateA *jobGetWork(u32 job);
 void FUN_00183bb0(void);
 RosterSpriteId *FUN_001568f8(BtlMainStateA *state, s32 index);
 RosterSpriteFrame *stateEntryFindById(BtlMainStateA *state, u32 id);
@@ -24,7 +24,7 @@ void FUN_0041a834(void *marker, const BattleVector3 *position, f32 alpha);
 
 u32 FUN_002df754(u32 job)
 {
-    BtlMainStateA *state = jobGetWork(job);
+    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(jobGetWork(job));
     FUN_00183bb0();
     f32 primaryDrawn = 0.0f;
     for (s32 i = 4; i < 54; ++i) {

@@ -1,3 +1,4 @@
+#include "util/FUN_00233fcc.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN7AocMenu19runConnectedProcessEv` (_code @ 0x3923b0, 0x4d4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"
@@ -10,7 +11,6 @@ int FUN_0023392c(...);
 int jobStopAndClearFlags(...);
 int FUN_00233db8(...);
 int FUN_00233e70(...);
-int FUN_00233fcc(...);
 int timeInitializeActiveState(...);
 int FUN_00234124(...);
 int asdFsIsSdCardDetected(...);

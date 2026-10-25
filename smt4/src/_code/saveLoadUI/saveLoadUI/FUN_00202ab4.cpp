@@ -2,6 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
 
 extern "C" {
 
@@ -15,12 +19,9 @@ int FUN_002bd954(...);
 int uiSpriteInitializeState(...);
 int gameDataBlocksGetSaveData(void);
 
-int memClear(...);
 int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
-int asdTMTexTableLoadSprites(...);
 int asdMemoryAlloc(...);
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int);
 int drawParameterBlockClear(...);
 int __aeabi_memcpy4(...);
 
@@ -93,7 +94,7 @@ void FUN_00202ab4(void)
   g_saveLoadUI = puVar1;
   *(unsigned char *)(puVar1 + 1) = 0;
   puVar2 = &LAB_00202ec8;
-  asdProcessCreateSimple(&LAB_00202ec8,2,0,0,&LAB_001c8e28,&LAB_00214a5c,0);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_00202ec8), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_001c8e28), reinterpret_cast<AsdProcFunc>(&LAB_00214a5c), 0);
   *puVar1 = (unsigned int)puVar2;
   taskCreateDraw(&LAB_00202edc,0x7f,0,0,FUN_001ed9a0,0,0,puVar2);
   taskCreateDraw(&LAB_00202eec,0xdd,0,0,FUN_001ed9a0,0,0,*puVar1);
@@ -165,8 +166,8 @@ void FUN_00202ab4(void)
   timerStart(puVar1 + 0x4a,3,0);
   timerStart(puVar1 + 0x6d,4,0);
   buttonHelpSetPreset(0xa8);
-  memClear(puVar1 + 0x93,0x80);
-  memClear(puVar1 + 0xb3,0x80);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar1 + 0x93), 0x80));
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar1 + 0xb3), 0x80));
   *(unsigned char *)(puVar1 + 0xd3) = 0;
   *(unsigned char *)((int)puVar1 + 0x34d) = 0;
   temp_v0 = 0x100;

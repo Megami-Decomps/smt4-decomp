@@ -1,5 +1,6 @@
 /* NON_MATCHING: same as the IV twin - the stack layout differs (retail keeps the current name pointer in the first word of the 128-byte text buffer) and registers are allocated differently; control flow and calls are the same. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ s32 findRecordByKey(const char *name);
 void btlCameraFinishTransition(EffectWork *work);
 u32 FUN_002282c8(u32 index, u32 kind, u32 flag);
 char *FUN_00100d60(const char *text, s32 character);
-void asdLoadFileAsyncSimple(const char *path, u32 *file, s32 flag);
 
 /* Prepares the four effect names: names naming a reference model select it, and every other name that is
  * not special starts loading its battle/effect file unless the record already exists. Returns 1 when the table exists. */

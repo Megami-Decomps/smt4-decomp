@@ -1,9 +1,9 @@
 /* NON_MATCHING: Shared-enable materialization, the mode-zero fast branch, and float-bit comparison registers differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/JobWork.h"
 
 extern "C" {
-JobAnimationWorkPrefixA *jobGetWork(u32 process);
 s32 FUN_00163aa4(void *state, f32 step);
 s32 FUN_0040898c(JobAnimationTargetPrefixA *target);
 }
@@ -21,7 +21,7 @@ static s32 floatRepresentation(f32 value)
 
 extern "C" u32 FUN_00357ea0(u32 process)
 {
-    JobAnimationWorkPrefixA *work = jobGetWork(process);
+    JobAnimationWorkPrefixA *work = reinterpret_cast<JobAnimationWorkPrefixA *>(jobGetWork(process));
     FUN_00163aa4(work->unk2C, 1.0f);
 
     const bool enabled = (work->code != 0x71);

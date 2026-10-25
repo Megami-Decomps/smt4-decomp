@@ -1,8 +1,8 @@
 /* NON_MATCHING: instruction/control-flow layout matches, but item ids and first/second priority values trade r4/r5. */
 #include "gamedata/ItemPriorityRecords.h"
+#include "addon/AocEntryKind.h"
 
 extern "C" {
-u32 FUN_00192718(u32 id);
 ContentItemPriorityRecord *contentEntryFindById2(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
 EquipmentItemPriorityRecord *dataTable08Sub2GetRecord(u32 id);
@@ -13,7 +13,7 @@ static inline u32 itemPriority(const u16 *item)
 {
     u32 id = *item;
     u32 priority = 0;
-    switch (FUN_00192718(id)) {
+    switch (aocEntryGetKindForward(id)) {
     case 2:
     case 3:
     case 4:

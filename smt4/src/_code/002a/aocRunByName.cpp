@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DevilRecord.h"
 
 extern "C" {
 

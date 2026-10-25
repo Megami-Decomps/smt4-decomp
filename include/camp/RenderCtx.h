@@ -82,8 +82,19 @@ typedef struct RenderCtxA {
             /* 0x0534 */ u8 unk0534[0xC4];
         } colorTarget;
     };
-    /* 0x05F8 */ u8 unk5F8;
-    /* 0x05F9 */ u8 unk05F9[0x103];
+    union {
+        /* 0x05F8 */ u8 unk5F8;
+        /* 0x05F8 */ u8 shownMode;   /* display area last switched to by FUN_00157558 */
+    };
+    /* 0x05F9 */ u8 unk05F9[3];
+    union {
+        /* 0x05FC */ u8 unk05FC[0x100];
+        struct {
+            /* 0x05FC */ u8 areaA[0x40];
+            /* 0x063C */ u8 areaB[0x40];
+            /* 0x067C */ u8 unk067C[0x80];
+        } displayAreas;
+    };
     /* 0x06FC */ u32 unk6FC;
     union {
         /* 0x0700 */ u8 unk0700[0xB58];
@@ -93,6 +104,10 @@ typedef struct RenderCtxA {
             /* 0x11E8 */ u8 colorScaleDirty;
             /* 0x11E9 */ u8 unk11E9[0x6F];
         } color;
+        struct {
+            u8 unk0700[0xA98];
+            /* 0x1198 */ u8 target[0x40];
+        } display;
         struct {
             u8 unk0700[0xAF0];
             /* 0x11F0 */ void *selectedPreset; /* preset block FUN_0016c4b8 keeps applied */
@@ -136,6 +151,11 @@ typedef char RenderCtxAStereoOffsetCheck[
 typedef char RenderCtxAColorScaleOffsetCheck[offsetof(RenderCtxA, color.colorScale) == 0x11D8 ? 1 : -1];
 typedef char RenderCtxAColorDirtyOffsetCheck[offsetof(RenderCtxA, color.colorScaleDirty) == 0x11E8 ? 1 : -1];
 typedef char RenderCtxAColorTargetOffsetCheck[offsetof(RenderCtxA, colorTarget.colorScaleTarget) == 0x530 ? 1 : -1];
+typedef char RenderCtxADisplayAreaOffsetCheck[
+    offsetof(RenderCtxA, shownMode) == 0x5F8 &&
+    offsetof(RenderCtxA, displayAreas.areaA) == 0x5FC &&
+    offsetof(RenderCtxA, displayAreas.areaB) == 0x63C &&
+    offsetof(RenderCtxA, display.target) == 0x1198 ? 1 : -1];
 
 /* Pushes `state` on the context's first stack; the stack is located after `state` is evaluated. */
 static __inline void renderCtxPushA(RenderCtx *context, int state)
@@ -209,5 +229,11 @@ static __inline void renderCtxPushG(RenderCtx *context, int state)
 {
     renderStackPush(&context->additional.stackG, state);
 }
+
+/* Switches the draw context to the layout of its current stereo phase (IV). */
+#ifdef __cplusplus
+extern "C" void renderCtxSelectStereoLayout(RenderCtx *context);
+#endif
+
 
 #endif

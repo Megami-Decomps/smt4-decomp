@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/MathDistance.h"
 
 
 extern "C" {

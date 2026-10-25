@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d96d4` (_code @ 0x2d96d4, 0x14d0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -9,7 +10,7 @@ int FUN_00290994(...);
 
 int FUN_002580d4(...);
 int FUN_0029a17c(...);
-int FUN_0029ea68(...);
+int itemGetFlagBit1(...);
 int FUN_0029efc0(...);
 int dataTable54FindById(void);
 int partyMemberFindById(...);
@@ -85,11 +86,10 @@ extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 extern int objectPartRunUnlessLocked(unsigned int *);
 extern int FUN_0029e93c(unsigned int *);
-/* Supplied declaration required: FUN_0029ea68. */
+/* Supplied declaration required: itemGetFlagBit1. */
 extern int FUN_0029efa8(unsigned int *);
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: dataTable54FindById. */
-extern int FUN_002a0d0c(void);
 /* Supplied declaration required: partyMemberFindById. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
 /* Supplied declaration required: devilGetRecord. */
@@ -156,7 +156,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
   temp_v27 = param_4;
   puVar4 = (unsigned int *)uniteGetWork();
   if (puVar4 != (unsigned int *)0x0) {
-    temp_v3 = FUN_002a0d0c();
+    temp_v3 = reinterpret_cast<int>(FUN_002a0d0c());
     temp_v22 = puVar4 + 0x1885;
     temp_v18 = 0;
     temp_v21 = puVar4 + 0x186c;
@@ -280,7 +280,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                           );
             }
             temp_v13 = FUN_002bf4f8(0x24,0xfa);
-            temp_v10 = FUN_0029ea68(*psVar8);
+            temp_v10 = itemGetFlagBit1(*psVar8);
             if (temp_v10 == 0) {
               FUN_002bf380(2,0x24,8,(int)&param_1->field_0x0 +
                                     (int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v3 + 8),
@@ -427,7 +427,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,0x88);
         }
         temp_v4 = FUN_002bf4f8(0x24,0x100);
-        temp_v13 = FUN_0029ea68(*psVar8);
+        temp_v13 = itemGetFlagBit1(*psVar8);
         if (temp_v13 == 0) {
           FUN_002bf380(2,0x24,8,(int)&param_1->field_0x0 +
                                 (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8),
@@ -630,7 +630,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           devilGetRecord();
           temp_v4 = FUN_002bf4f8(0x24,temp_v13 + 0xe3);
           temp_v10 = FUN_002bf4f8(0x24,0xdb);
-          temp_v7 = FUN_0029ea68(*puVar10);
+          temp_v7 = itemGetFlagBit1(*puVar10);
           if (temp_v7 == 0) {
             FUN_002bf380(2,0x24,8,(int)&param_1->field_0x0 +
                                   (int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v4 + 8),

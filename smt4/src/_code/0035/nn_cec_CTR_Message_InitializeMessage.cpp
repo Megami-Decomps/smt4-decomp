@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nn_cec_CTR_Message_InitializeMessage` (_code @ 0x359e0c, 0x60 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(unsigned short *, int);
 
 /* Supplied declaration required: memClear. */
 
@@ -27,7 +27,7 @@ void nn_cec_CTR_Message_InitializeMessage(unsigned short *param_1)
     } while (temp_v0 != 0);
   }
   *(unsigned char *)(param_1 + 0x98) = 0;
-  memClear(param_1,0x70);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_1), 0x70));
   *param_1 = 0x6060;
   *(unsigned int *)(param_1 + 0x9a) = 0;
   *(unsigned char *)((int)param_1 + 0x131) = 0;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: percentage damage, group selection and minimum-one-HP clamps are recovered; helper inlining, flag predicates and register allocation differ. */
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct DamagePartySlots {
     /* 0x0000 */ u8 unk0000[0x1c88];
@@ -9,7 +10,6 @@ struct DamagePartySlots {
 };
 
 extern "C" {
-PlayerData *gameGetPlayerData();
 DamagePartySlots *gameGetSlotTable();
 s32 gameSlotTableFindFree();
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
@@ -46,11 +46,11 @@ extern "C" void FUN_004a01c8(u32 group, u8 conditionBit, s32 percentage)
         return;
     u32 mask = 1u << conditionBit;
     if ((group == 0 || group == 2 || group == 3) &&
-        !(gameGetPlayerData()->unk5E & 2) &&
-        !(gameGetPlayerData()->unk5E & 0x400) &&
-        (gameGetPlayerData()->unk5E & mask)) {
-        s16 maximum = gameGetPlayerData()->unk1C;
-        PlayerData *current = gameGetPlayerData();
+        !(reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk5E & 2) &&
+        !(reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk5E & 0x400) &&
+        (reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk5E & mask)) {
+        s16 maximum = reinterpret_cast<PlayerData *>(gameGetPlayerData())->unk1C;
+        PlayerData *current = reinterpret_cast<PlayerData *>(gameGetPlayerData());
         s32 loss = maximum * percentage / 100;
         if (loss <= 0)
             loss = 1;
@@ -58,7 +58,7 @@ extern "C" void FUN_004a01c8(u32 group, u8 conditionBit, s32 percentage)
         if (remaining <= 0)
             remaining = 1;
         s16 value = remaining;
-        PlayerData *player = gameGetPlayerData();
+        PlayerData *player = reinterpret_cast<PlayerData *>(gameGetPlayerData());
         s16 limit = player->unk1C;
         if (value <= limit) {
             limit = value;

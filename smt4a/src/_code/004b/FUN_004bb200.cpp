@@ -1,5 +1,6 @@
 /* NON_MATCHING: request and transport status mapping recovered; shared resource/string address grouping and result sign test still differ. */
 #include "common.h"
+#include "map/mapHakai.h"
 
 struct CecMessageRequest {
     /* 0x00 */ u32 unk00;
@@ -17,7 +18,6 @@ u32 FUN_0042d694(u32 resource);
 void cecWriteMessageBoxNameAndData(u32 resource, u32 context, const char* title,
                                    const void* data, u32 size);
 s32 FUN_00316750(const char* text, const void* data, u32 size, u32 argument, u32 timeout);
-void asdCecCopySettings(void* settings);
 
 // Prepare outgoing CEC data and translate the transport result into application status.
 u32 FUN_004bb200(CecMessageRequest* request, u32 argument)
@@ -41,7 +41,7 @@ u32 FUN_004bb200(CecMessageRequest* request, u32 argument)
             status = 0x11;
         }
     } else {
-        asdCecCopySettings(request->settings);
+        asdCecCopySettings(reinterpret_cast<u32>(request->settings));
     }
     return status;
 }

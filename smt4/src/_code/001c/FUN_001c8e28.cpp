@@ -663,7 +663,7 @@ code_r0x001c9900:
           FUN_0026b4cc();
           gameCounterAddSaturating(0x20,1);
           iVar8 = FUN_002c09bc();
-          FUN_00322d18(DAT_0044de30 + 1,*(unsigned char *)(iVar8 + 2));
+          saveLoadStartSave(DAT_0044de30 + 1,*(unsigned char *)(iVar8 + 2));
         }
       }
     }

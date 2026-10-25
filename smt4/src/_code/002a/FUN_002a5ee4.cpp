@@ -2,14 +2,14 @@
 #include "shard/S1AsdTexTable.h"
 #include "addon/AocPackage.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 s32 FUN_002a6f48(u32 table);
 AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 type, s32 id, char *path);
 TexTableEntry *asdTMTexTableCallFileB(u32 table, u32 id);
 u32 optionalWorkGetValue();
-void memClear(void *buffer, u32 size);
-char *libc_strcpy(char *destination, const char *source);
 char *libc_strcat(char *destination, const char *source);
 u32 libc_strlen(const char *text);
 void FUN_00151cd8(void *data);
@@ -37,7 +37,7 @@ TexTableEntry *FUN_002a5ee4(AocSystem *system, u32 table, u32 id, u32 mode)
         return NULL;
     TexTableNode *node = entry->node;
     optionalWorkGetValue();
-    libc_strcpy(texturePath, entry->file->directory);
+    libc_strcpy(reinterpret_cast<unsigned int *>(texturePath), reinterpret_cast<unsigned int *>(entry->file->directory));
     if (node->name[0] == '-')
         libc_strcat(texturePath, entry->slots[-static_cast<s8>(node->name[1])].node->name);
     else
@@ -50,7 +50,7 @@ TexTableEntry *FUN_002a5ee4(AocSystem *system, u32 table, u32 id, u32 mode)
         entry->state = 0;
         return entry;
     }
-    libc_strcpy(requestPath, packagePath);
+    libc_strcpy(reinterpret_cast<unsigned int *>(requestPath), reinterpret_cast<unsigned int *>(packagePath));
     u32 flags = entry->flags;
     if ((flags & ~TEXENTRY_RETRY) != 0)
         return entry;

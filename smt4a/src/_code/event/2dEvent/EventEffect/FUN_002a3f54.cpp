@@ -1,3 +1,4 @@
+#include "gfx/StereoParallax.h"
 #include "event/2dEvent/EventFilter.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
@@ -11,7 +12,6 @@ void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 first, u32 second);
 s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 
 // Draw callback of the full-screen event filter: one overlay image faded by the work's opacity and pulse.
 u32 FUN_002a3f54(void *)

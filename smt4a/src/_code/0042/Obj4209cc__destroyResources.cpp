@@ -3,7 +3,6 @@
 
 extern "C" {
 extern void *g_handleRegistry;
-ModelResourceItem *FUN_0040619c(ModelResourceItems *items, s32 index);
 void objectVectorClear(ModelResourceItems *items);
 s32 ptrListRemoveClearOwner(void *registry, ModelResourceItem *item);
 }
@@ -31,7 +30,7 @@ void Obj4209cc::destroyResources()
     }
     s32 count = models()->items->count;
     for (s32 i = 0; i < count; ++i) {
-        ModelResourceItem *item = FUN_0040619c(models()->items, i);
+        ModelResourceItem *item = reinterpret_cast<ModelResourceItem *>(FUN_0040619c(models()->items, i));
         if (item != NULL) {
             ptrListRemoveClearOwner(g_handleRegistry, item);
         }

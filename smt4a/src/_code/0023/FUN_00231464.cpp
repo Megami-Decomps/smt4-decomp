@@ -6,9 +6,6 @@
 extern "C" {
 
 void *asdOperatorNew(u32 size);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags,
-                           AsdProcFunc start, AsdProcUpdateFunc poll,
-                           AsdProcFunc destroy, void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay,
                    u16 endDelay, AsdProcUpdateFunc callback,
                    AsdProcFunc destroy, void *work, u32 parent);
@@ -37,9 +34,7 @@ void FUN_00231464(void)
     }
 
     DAT_0057f678 = state;
-    state->processToken = asdProcessCreateSimple(
-        DAT_00530f28, 4, 0, 0, btlGameOverPollSequence,
-        jobDestroyGlobal, 0);
+    state->processToken = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00530f28), 4, 0, 0, btlGameOverPollSequence, jobDestroyGlobal, 0);
 
     taskCreateDraw(DAT_00530f18, 0x7E, 0, 0, FUN_00330a60,
                    0, 0, state->processToken);

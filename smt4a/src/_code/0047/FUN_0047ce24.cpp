@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0047ce24` (_code @ 0x47ce24, 0x7a4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -72,7 +73,6 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00167618. */
 /* Supplied declaration required: efctSetSpeed. */
-extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -212,10 +212,10 @@ LAB_0047cf80:
       temp_v9 = temp_v4 != 0;
       if (temp_v9) {
         temp_v20 = 0;
-        temp_v19[0x20] = (float)packNibblesAndByte(6,7,0);
-        temp_v19[0x21] = (float)packNibblesAndByte(6,1,0);
-        temp_v19[0x22] = (float)packNibblesAndByte(6,1,2);
-        temp_v19[0x23] = (float)packNibblesAndByte(5,0,1);
+        temp_v19[0x20] = (float)packNibblesAndByte(6, 7, 0);
+        temp_v19[0x21] = (float)packNibblesAndByte(6, 1, 0);
+        temp_v19[0x22] = (float)packNibblesAndByte(6, 1, 2);
+        temp_v19[0x23] = (float)packNibblesAndByte(5, 0, 1);
         FUN_0032cef8(*(unsigned int *)((int)temp_v19 + (*(unsigned short *)(temp_v8 + 0xc) >> 4 & 0xfc) + 0x80)
                     );
       }

@@ -1,7 +1,7 @@
 /* NON_MATCHING: packed-ID extraction/address scheduling and nested comparator register lifetimes differ from retail. */
 #include "shard/W6_W6Match8_FusionCompare.h"
+#include "shard/W5_W5Match2_UniteWork.h"
 
-extern "C" s32 dataTableGetEntry0102Value(u16 id);
 
 static __inline s32 compareFusionPriority(const u32 *first, const u32 *second)
 {

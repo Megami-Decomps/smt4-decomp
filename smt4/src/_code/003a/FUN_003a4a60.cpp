@@ -70,7 +70,7 @@ extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: uiAnimationAdvanceChannel. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: messageMainSetTargetFlags. */
-extern int FUN_00240d5c(unsigned int *);
+extern int flaggedEntryGetValueByState(unsigned int *);
 extern int aocItemGetPrice(int);
 extern int inputIsQuestMenuPressed(void);
 extern int FUN_0027ee9c(void);
@@ -227,7 +227,7 @@ void FUN_003a4a60(unsigned int *param_1)
       param_1[0x21a] = 0;
       ifTouchRegionRemove();
       ifTouchRegionRemove();
-      temp_v5 = FUN_00240d5c(param_1 + param_1[0x218] * 0x1d + 0x220);
+      temp_v5 = flaggedEntryGetValueByState(param_1 + param_1[0x218] * 0x1d + 0x220);
       temp_v6 = *puVar9;
       if (temp_v6 == 7 || temp_v6 == 8) {
         temp_v1 = temp_v5 + 1;
@@ -413,7 +413,7 @@ joined_r0x003a5580:
       if ((param_1[0x218] == 8) && (temp_v5 = FUN_0028e9d0(*puVar5), temp_v5 == 0)) {
         temp_v6 = param_1[0x218];
         puVar9 = param_1 + temp_v6 * 0x1d + 0x220;
-        temp_v3 = FUN_00240d5c(puVar9);
+        temp_v3 = flaggedEntryGetValueByState(puVar9);
         temp_v5 = FUN_0029e924(puVar9);
         FUN_0022fcb8(param_1,0);
         if (temp_v5 >= 1) {

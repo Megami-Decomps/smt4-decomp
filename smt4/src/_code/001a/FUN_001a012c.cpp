@@ -18,7 +18,7 @@ int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -51,7 +51,7 @@ extern unsigned short *gameGetPlayerData(void);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -75,7 +75,7 @@ unsigned int FUN_001a012c(void)
   unsigned int in_fpscr;
   
   temp_v1 = g_camp;
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v3 = g_titleScene;
   temp_v2 = FUN_002c5d80(1,0);
   piVar11 = (int *)(temp_v3 + 0x124c);

@@ -3,12 +3,12 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void *memory, u32 size);
 void comWindowProcessUpdate(void *task);
 void FUN_0011a434(void *task);
-u32 asdProcessCreateSimple(const char *name, s32 priority, s32 mode, s32 flags, void (*callback)(void *), u32 work, void *argument);
 void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags, void (*callback)(void *), u32 work, void *argument, u32 parent);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
@@ -27,7 +27,7 @@ void FUN_0010a7bc()
     }
     CommandWindow *window = g_comWin;
     memClear(window, sizeof(CommandWindow));
-    window->process = asdProcessCreateSimple("ComWin Calc", 1, 0, 0, comWindowProcessUpdate, 0, 0);
+    window->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("ComWin Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(comWindowProcessUpdate), 0, 0);
     taskCreateDraw("ComWin DrawUpLeft", 0x81, 0, 0, FUN_0011a434, 0, 0, window->process);
     taskCreateDraw("ComWin DrawUpRight", 0xdf, 0, 0, FUN_0011a434, 0, 0, window->process);
     window = g_comWin;

@@ -35,7 +35,7 @@ extern int nw_anim_PlayPolicy_Loop(...); /* 0x151500 */
 /* Supplied declaration required: animPlayerSetLoopPolicy. */
 /* Supplied declaration required: gfxObjectDestroy. */
 extern int effTimelineIsDone(unsigned int);
-extern unsigned int FUN_00263c1c(char *);
+extern unsigned int asdCameraLoadFromFile(char *);
 /* Supplied declaration required: FUN_0028703c. */
 /* Supplied declaration required: FUN_00287728. */
 extern unsigned int asdMdlManagerCreateSecondList(char *, unsigned int);
@@ -80,9 +80,9 @@ unsigned int FUN_00205184(void)
     if (temp_v1 == 0) {
       FUN_002a09b4("event/oc/oc_loop.bcenv",0);
       *(unsigned int *)(temp_v0 + 0x558) = 0;
-      temp_v2 = FUN_00263c1c("event/oc/oc_loop.bccam");
+      temp_v2 = asdCameraLoadFromFile("event/oc/oc_loop.bccam");
       *(unsigned int *)(temp_v0 + 0x55c) = temp_v2;
-      temp_v2 = FUN_00263c1c("event/oc/oc_start.bccam");
+      temp_v2 = asdCameraLoadFromFile("event/oc/oc_start.bccam");
       *(unsigned int *)(temp_v0 + 0x560) = temp_v2;
       temp_v2 = asdMdlManagerCreateSecondList("event/oc/oc_loop.bam",0x38);
       *(unsigned int *)(temp_v0 + 0x554) = temp_v2;

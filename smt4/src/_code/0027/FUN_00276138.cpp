@@ -21,7 +21,6 @@ typedef char MapSnapshotSaveOffsetCheck[offsetof(MapSnapshotSave, objectId) == 0
 extern "C" {
 extern MapMain *g_mapMain;
 extern GameState g_gameState;
-SaveWork *gameGetMapBlock();
 void FUN_00270f70(MapVector *position);
 
 // Save the return map and pose, unless a one-shot suppression flag was set.

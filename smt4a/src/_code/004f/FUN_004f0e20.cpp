@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W5_W5Match8_CameraTransition.h"
+#include "title/titleMain.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_001523b8(unsigned int *, int);
 int eventCommandSetPendingCleanup(void);
 int shakeEffectAlloc(void);
 int FUN_00348c50(int);
-int FUN_0036b824(unsigned int *);
 void btlCameraApplyBlendPreset(W5Match8CameraTransition*, u32 preset, s32 slot);
 
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -82,7 +82,7 @@ void FUN_004f0e20(unsigned int *param_1)
   asdCameraInitializeDefaults(param_1 + 0x1b,1);
   FUN_0014f0dc(param_1 + 0x1b,param_1 + 0x160,&temp_v3,&temp_v6);
   FUN_001523b8(param_1 + 0x1b,1);
-  FUN_0036b824(param_1 + 0x1b);
+  FUN_0036b824(reinterpret_cast<u32>(param_1 + 0x1b));
   asdCameraRegister(param_1 + 0x1b);
   *(unsigned int **)(g_handleRegistry + 0xc) = param_1 + 0x1b;
   param_1[0x1ad] = temp_v2;

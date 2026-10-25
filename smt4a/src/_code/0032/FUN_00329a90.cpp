@@ -1,6 +1,7 @@
 /* NON_MATCHING: render-context wrapper and conditional slide offset recovered; panel x-coordinate VFP conversion/register scheduling differs. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "Model/MoriModelShadowMap.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -22,8 +23,6 @@ struct LayoutEntry {
 
 extern "C" {
 extern MapDepartView *g_mapDepart;
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(u32 a, u32 b);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);

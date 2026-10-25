@@ -1,10 +1,10 @@
 #include "shard/GameDataBlocks.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int FUN_001a1110(void);
 int cecMessageIdClear(u8 *settings);
-int memClear(void *ptr, int size);
 
 void configSettingsResetDefaults(void)
 {
@@ -17,7 +17,7 @@ void configSettingsResetDefaults(void)
     settings[3] = 1;
     settings[4] = 1;
     FUN_001a1110();
-    memClear(g_gameDataBlocks.saveBlock, 0x80);
+    reinterpret_cast<int>(memClear(g_gameDataBlocks.saveBlock, 0x80));
 }
 
 } /* extern "C" */

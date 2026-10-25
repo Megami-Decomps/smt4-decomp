@@ -1,5 +1,6 @@
 /* NON_MATCHING: identical except the 0.0f offset constant, which this build keeps in s1 while retail reuses s0 after the 1.0f color stores. */
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ extern GfxSettings g_gfxSettings;
 extern u8 DAT_004dae48[]; /* model list */
 
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void memClear(void *memory, u32 size);
 void asdListAdd(void *list, void *item, s32 flags);
 
 /* Allocate a cleared model, set its defaults, and add it to the model list. */

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "shard/S1GfxModel.h"
 
 extern "C" {
 

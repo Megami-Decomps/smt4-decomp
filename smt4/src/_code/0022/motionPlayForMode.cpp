@@ -1,4 +1,5 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct MotionModeState {
     /* 0x0C */ MotionMode mode;
 } MotionModeState;
 
-MotionModeState *FUN_002a0d0c(void);
 void FUN_0022e0fc(MotionSlot *slot, s8 motion);
 
 /* Plays the motion for the current mode (resetting an unknown mode to 1); the next motion id is
@@ -37,7 +37,7 @@ void motionPlayForMode(MotionOwner *owner, s32 allowAlternate)
     if (owner->motion.id == 0) {
         return;
     }
-    mode = &FUN_002a0d0c()->mode;
+    mode = &reinterpret_cast<MotionModeState *>(FUN_002a0d0c())->mode;
     switch (mode->mode) {
     case 2:
         motion = 2;

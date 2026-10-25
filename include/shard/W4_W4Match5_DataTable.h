@@ -2,12 +2,12 @@
 #define W4_W4MATCH5_DATATABLE_H
 
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 /* The data-table accessors the game's data code calls (twin names in both games). */
 extern "C" {
 
 void *dataTableGet(s32 table, s32 slot);
-s32 dataTableGetCount(void *table);
 
 }
 

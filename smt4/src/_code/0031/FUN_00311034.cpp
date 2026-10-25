@@ -1,7 +1,7 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-void scrSetResult(s32 result);
 s32 gameCountUnits(void);
 
 /* Script command: sets the result to the unit count. */

@@ -8,12 +8,12 @@ extern "C" {
 int CONCAT44(...);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
-int FUN_00221ee0(float *);
+int matrixGetTranslation(float *);
 int FUN_0037ee54(void);
 int FUN_0043bc74(void);
 int FUN_0050d7ac(void);
 int randomAdvanceShiftRegister(...);
-int FUN_00514540(...);
+int shiftRandomNextFraction(...);
 int FUN_005145f4(void);
 int matrixCopySelectedToGlobal(float *);
 int FUN_005147dc(void);
@@ -104,12 +104,12 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_001a1ee0. */
 extern int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
-/* Supplied declaration required: FUN_00221ee0. */
+/* Supplied declaration required: matrixGetTranslation. */
 /* Supplied declaration required: FUN_0037ee54. */
 /* Supplied declaration required: FUN_0043bc74. */
 /* Supplied declaration required: FUN_0050d7ac. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: FUN_005145f4. */
 /* Supplied declaration required: matrixCopySelectedToGlobal. */
 /* Supplied declaration required: FUN_005147dc. */
@@ -202,7 +202,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
     temp_v0 = (unsigned char)(temp_v4 >> 0x18);
     temp_v32 = (temp_v7 * 3.1415927f) / temp_v32;
     if ((unsigned char)((temp_v0 >> 5) & 1) && !(unsigned char)(temp_v0 >> 6)) {
-      FUN_00221ee0(&temp_v38);
+      matrixGetTranslation(&temp_v38);
       temp_v35 = 0.34906584f;
       temp_v31 = 0;
       temp_v23[1] = *(float *)((int)temp_v25 + 0x80);
@@ -229,9 +229,9 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
                 temp_v7 = -temp_v28;
                 temp_v28 = temp_v7;
               }
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v12 = temp_v7 * 3.1415927f;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v15 = 40.743664f;
               temp_v42 = (temp_v7 * 0.95f + 0.050000012f) * temp_v28;
               temp_v5 = temp_v12 * 40.743664f;
@@ -247,7 +247,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
               temp_v13 = CONCAT44(temp_v12,*(float *)((int)temp_v25 + 0x7c));
               temp_v18 = *(float *)((int)temp_v25 + 0x80) + *(float *)((int)temp_v25 + 0x7c);
               temp_v7 = temp_v5;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v12 = (float)VectorSignedToFloat(temp_v22[5] + 1,(unsigned char)(temp_v4 >> 0x16) & 3);
               temp_v43 = (temp_v7 * 0.7f + 0.3f) * temp_v40;
               temp_v12 = (float)temp_v22[10] +
@@ -388,7 +388,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
                 do {
                   temp_v20 = (float)((unsigned long long)temp_v13 >> 0x20);
                   pfVar7 = pfVar7 + 0xf;
-                  FUN_00514540(0);
+                  shiftRandomNextFraction(0);
                   temp_v1 = 0;
                   temp_v7 = (temp_v7 * 0.75f + 0.25f) * temp_v35;
                   randomAdvanceShiftRegister();
@@ -401,10 +401,10 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
                     temp_v20 = temp_v20 - 3.1415927f;
                     temp_v14 = temp_v28;
                     temp_v28 = -temp_v28;
-                    FUN_00514540(0);
+                    shiftRandomNextFraction(0);
                     temp_v14 = -(temp_v14 * (temp_v12 * 0.95f + 0.050000012f));
                     temp_v42 = temp_v14;
-                    FUN_00514540(0);
+                    shiftRandomNextFraction(0);
                     temp_v43 = (temp_v14 * 0.7f + 0.3f) * temp_v40;
                   }
                   temp_v14 = temp_v20 * 40.743664f;
@@ -508,7 +508,7 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
             }
           }
           else {
-            FUN_00514540(0);
+            shiftRandomNextFraction(0);
             temp_v20 = 0.0f;
             temp_v7 = ((1.0f - *(float *)((int)temp_v25 + 0xa4)) +
                      temp_v7 * *(float *)((int)temp_v25 + 0xa4)) * *(float *)((int)temp_v25 + 0xa0)
@@ -516,20 +516,20 @@ void FUN_00392070(fn_00392070_arg0 *param_1)
             temp_v22[9] = (int)temp_v7;
             temp_v22[10] = 0;
             if (temp_v39 != 0) {
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v7 = (temp_v7 - 0.5f) * 2.0f * 0.7853982f;
               temp_v22[7] = (int)temp_v7;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v7 = temp_v7 * *(float *)((int)temp_v25 + 0x9c);
               temp_v22[0xb] = (int)temp_v7;
             }
             else {
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v22[0xb] = (int)temp_v20;
               temp_v7 = (temp_v7 - 0.5f) * 2.0f * 3.1415927f;
               temp_v22[7] = (int)temp_v7;
             }
-            FUN_00514540(0);
+            shiftRandomNextFraction(0);
             temp_v22[8] = (int)((temp_v7 - 0.5f) * 2.0f * 3.1415927f);
             FUN_005147dc();
             matrixSetRotationY(((f32*)temp_v22)[8]);

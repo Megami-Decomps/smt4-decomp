@@ -63,7 +63,7 @@ int textFormatBuffer(...);
 int asdCameraInitializeDefaults(...);
 int FUN_0013cab8(...);
 int FUN_001517b4(...);
-int FUN_001642e4(...);
+int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
 int FUN_001abbc4(void);
@@ -174,7 +174,7 @@ extern unsigned int FUN_00152f44(void);
 /* Supplied declaration required: FUN_001628c0. */
 /* Supplied declaration required: jobStop. */
 extern int jobIsValid(unsigned int);
-/* Supplied declaration required: FUN_001642e4. */
+/* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
@@ -456,16 +456,16 @@ unsigned int FUN_0027e0d8(void)
     campCommonBgAcquire();
     campButtonHelpAcquire();
     puVar9 = &LAB_0027e888;
-    FUN_001642e4(&LAB_0027e888,temp_v16,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_0027e888,temp_v16,1,0x80);
     puVar8[0x15e] = (unsigned int)puVar9;
     puVar9 = &LAB_0027e8a4;
-    FUN_001642e4(&LAB_0027e8a4,temp_v16,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_0027e8a4,temp_v16,1,0x80);
     puVar8[0x161] = (unsigned int)puVar9;
     puVar9 = &LAB_0027e8c0;
-    FUN_001642e4(&LAB_0027e8c0,temp_v16,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_0027e8c0,temp_v16,1,0x80);
     puVar8[0x164] = (unsigned int)puVar9;
     puVar9 = &LAB_0027e8dc;
-    FUN_001642e4(&LAB_0027e8dc,temp_v16,1,0x80);
+    asdLoadFileSyncNoContext(&LAB_0027e8dc,temp_v16,1,0x80);
     puVar8[0x167] = (unsigned int)puVar9;
     temp_v17 = 0;
     uStack_bc = 0x42c80000;

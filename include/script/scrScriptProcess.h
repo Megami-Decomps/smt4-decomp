@@ -29,4 +29,17 @@ struct ScriptRunState {
 typedef char ScriptRunStateModeOffsetCheck[
     __INTADDR__(&((ScriptRunState *)0)->mode) == 0x108 ? 1 : -1];
 
+extern "C" {
+void FUN_00298d50(u32 value);
+}
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 FUN_0022fbc0(void *screen);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

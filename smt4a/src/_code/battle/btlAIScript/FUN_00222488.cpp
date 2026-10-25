@@ -11,7 +11,7 @@ void sysMemClear(void *dst, u32 size);
 void textFormatBuffer(char *dst, const char *format, ...);
 s32 FUN_00240c34(const char *path);
 char *libc_strcpy(char *dst, const char *src);
-s32 aocContentLookupSucceeds(BtlAiScriptAocSystem *aoc, u16 id);
+u32 aocContentLookupSucceeds(BtlAiScriptAocSystem *aoc, u16 id);
 
 extern BtlAiScript *g_btlAiScript;
 extern BtlAiScriptAocSystem *g_aocSystem;
@@ -26,7 +26,7 @@ void FUN_00222488(BtlAiScriptActor *actor)
     const char *name;
     char path[0x80];
 
-    if (g_btlAiScript != NULL) {
+    if (script != NULL) {
         if (script->process != NULL) {
             scrScriptProcessDestroy(script->process);
             script->process = NULL;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct AocSystem0026a794 AocSystem0026a794;
 Entry0026a794 *recordTableFindById(AocSystem0026a794 *aoc, u32 id);
 Record0026a794 *dataTable40FindById(u32 id);
 void *dataTableGet(s32 table, s32 slot);
-Entry0026a794 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base, u32 count, u32 size, Compare0026a794 *compare);
 
@@ -34,7 +34,7 @@ static inline Entry0026a794 *findContentFlagEntry(u32 id)
     Entry0026a794 *entry = recordTableFindById(g_aocSystem, id);
     if (entry == NULL) {
         void *table = dataTableGet(4, 1);
-        Entry0026a794 *entries = dataTableGetEntries(table);
+        Entry0026a794 *entries = reinterpret_cast<Entry0026a794 *>(dataTableGetEntries(table));
         u32 count = dataTableGetCount(table);
         Entry0026a794 key;
         key.id = id;

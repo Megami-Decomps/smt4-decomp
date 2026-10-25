@@ -29,7 +29,6 @@ void FUN_0049df84(EventRow* row);
 void updateNineRowListInput(EventRow* row);
 s32 FUN_001517b4(u32 button, u32 mode);
 void eventQueueAddUniqueIfValid(u32 event);
-void uiSpriteSelectAnim(EventRowSprite* sprite, u32 animation);
 void FUN_0049ea54(EventRow* row);
 }
 

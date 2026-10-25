@@ -5,7 +5,6 @@
 
 extern "C" {
 
-int FUN_00287728(int layer);
 int soundChannelStopAll(int id);
 int asdTMTexTableReleaseNode(int type, int index);
 int asdMemFree(void *ptr);               /* heap free */

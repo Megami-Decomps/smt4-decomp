@@ -1,12 +1,7 @@
 /* NON_MATCHING: corrected retail parallax (0.25f) and label color (0x57d8ffff); label coordinate conversion, signed /5 and %8 scheduling, and zero-result epilogue still differ. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
-
-/* The render context (its second state stack lives at 0x12B8). */
-struct TitleScene {
-    /* 0x0000 */ u8 unk0000[0x12B8];
-    /* 0x12B8 */ RenderStateStack secondStack;
-};
+#include "Model/MoriModelShadowMap.h"
 
 /* The run window (only the fields read here). */
 struct RunWin {
@@ -30,16 +25,14 @@ struct LayoutPoint {
 
 extern "C" {
 extern RunWin *g_runWin;
-extern TitleScene *g_renderCtx;
 
-void FUN_00157558(TitleScene *scene);
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_001834a4(s32 group, s32 part);
 void FUN_00162790(s32 a, u32 color, void *label, f32 x, f32 y, f32 scale, f32 shear, f32 alpha);
 void FUN_00183bb0(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
-f32 renderCtxCalculateStereoParallax(TitleScene *scene, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *scene, f32 depth);
 void efctSetSpeed(f32 alpha);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 
@@ -55,12 +48,12 @@ u8 FUN_00208650(void)
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         FUN_00164b5c(2, 8, 19, x, y, 110);
-        TitleScene *scene = g_renderCtx;
+        RenderCtxA *scene = g_renderCtx;
         s32 state = packNibblesAndByte(6, 1, 0);
-        renderStackPushCountedDirect(&scene->secondStack, state);
+        renderStackPushCountedDirect(&scene->stackB, state);
         FUN_001835b4(2, 8, 0x150, x, 0, 111);
         FUN_001835b4(2, 8, 0x151, x, 0, 111);
-        renderStackPop(&g_renderCtx->secondStack);
+        renderStackPop(&g_renderCtx->stackB);
         LayoutPoint *labelPoint = FUN_001834a4(8, 0x153);
         FUN_00162790(4, 0x57D8FFFF, win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);

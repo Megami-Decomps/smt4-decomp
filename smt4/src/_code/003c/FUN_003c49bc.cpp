@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the byte value in r0 and the setting address in r1 (built swaps them) and shares the word store of cases 4 and 5 */
 #include "common.h"
+#include "battle/btlHelp.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ extern u32 DAT_00435e08;
 extern u32 DAT_00435e20;
 
 u32 asdListBoxGetSelectedItemId(void *listBox);
-u32 *asdListBoxGetItemValuePtr(void *listBox, u32 itemId);
 u32 *asdListBoxGetItemText(void *listBox, u32 itemId);
 
 typedef struct {

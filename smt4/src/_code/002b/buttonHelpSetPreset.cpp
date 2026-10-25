@@ -1,5 +1,6 @@
 /* NON_MATCHING: button-order constant storage, active-slot register allocation and transition-tail scheduling differ. */
 #include "ui/ButtonHelp.h"
+#include "quest_center/qcMain.h"
 
 struct ButtonHelpPresetRecord { u16 buttons[6]; u8 shown; };
 extern "C" {

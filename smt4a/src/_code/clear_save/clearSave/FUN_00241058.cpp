@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "map/mapRndMaze.h"
 
 extern "C" {
 
@@ -50,7 +51,6 @@ extern int screenFadeIsBusy(void);
 extern unsigned int messageMainGetValue(void);
 extern int messageGetChoiceResult(void);
 extern int FUN_002e07f4(void);
-extern int FUN_002ef9f0(void);
 extern int FUN_0037de28(void);
 /* Supplied declaration required: saveLoadStartWindowWithArgument. */
 /* Supplied declaration required: FUN_003d54f8. */

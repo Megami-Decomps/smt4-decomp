@@ -1,12 +1,12 @@
 #include "shard/S1AsdTexTable.h"
 
 extern "C" {
-TexTableEntry *asdTMTexTableCallFileB(void);
+TexTableEntry *asdTMTexTableCallFileB(s32 table, s32 index);
 TexTableEntry *FUN_002a6114(TexTableEntry *entry, u32 mode);
 
-/* Gets the current texture entry and starts its asynchronous load. */
-TexTableEntry *asdTMTexTableLoadEntryAsync(void)
+/* Gets texture table entry `index` of `table` and starts its asynchronous load. */
+TexTableEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index)
 {
-    return FUN_002a6114(asdTMTexTableCallFileB(), 0x10000);
+    return FUN_002a6114(asdTMTexTableCallFileB(table, index), 0x10000);
 }
 }

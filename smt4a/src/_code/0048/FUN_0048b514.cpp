@@ -1,3 +1,4 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, and signed animation getter; font-settings ownership, stack layout and saved work/context registers still differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
@@ -39,7 +40,6 @@ void renderStackPushIndexed(u32 context, s32 index, u32 value);
 void renderCtxPopState(u32 context, s32 index);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
-s32 vec2GetXInt(void *vec);
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_001834a4(s32 group, s32 part);
 void FUN_00162790(s32 a, u32 font, char *text, f32 x, f32 y, f32 shear, f32 slant, f32 alpha);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: path buffer/outgoing argument reuse and cold branch placement differ; -O2 candidate. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct MovieProcess {
     u32 process; // 0x00
@@ -43,7 +44,6 @@ void mobiclipProcessDestroy();
 void FUN_002c3038();
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
-u32 asdProcessCreateSimple(const char *, u32, u32, u32, void (*)(), void (*)(), MovieProcess *);
 u32 taskCreateDraw(const char *, u32, u32, u32, void (*)(), void (*)(), MovieProcess *, u32);
 s32 asdLoadFileGetUseRawPaths();
 void asdGxPresetRequest(u32);
@@ -57,7 +57,7 @@ u32 mobiclipProcessCreate(s32 movie, u8 options)
     MovieProcess *work = (MovieProcess *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MovieProcess), 1);
     g_mobiclipProcess.work = work;
     sysMemClear(work, sizeof(MovieProcess));
-    work->process = asdProcessCreateSimple(DAT_005329cc, 4, 0, 0, mobiclipProcessUpdate, mobiclipProcessDestroy, work);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_005329cc), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(mobiclipProcessUpdate), reinterpret_cast<AsdProcFunc>(mobiclipProcessDestroy), reinterpret_cast<u32>(work));
     work->leftDraw = taskCreateDraw(DAT_005329c0, 0x7e, 0, 0, FUN_002c3038, NULL, work, work->process);
     if (!DAT_005329a0[movie])
         work->rightDraw = taskCreateDraw((const char *)DAT_005329a0 + 0x78, 0xda, 0, 0, FUN_002c3038, NULL, work, work->process);

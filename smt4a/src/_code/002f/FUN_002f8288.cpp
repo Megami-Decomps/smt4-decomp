@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002f8288` (_code @ 0x2f8288, 0x220 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 
 int FUN_002c7bb0(...);
-int FUN_003344b4(unsigned int, unsigned int);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -88,16 +88,14 @@ void FUN_002f8288(void)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);
   if (*(short *)(temp_v0 + 0x38) < 0) {
-    FUN_003344b4(*(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x40),
-                 *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x44));
+    FUN_003344b4(*(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x40), *(unsigned int *)(*(int *)(temp_v0 + 0xa10) + 0x44));
     return;
   }
   temp_v1 = 0;
   do {
     if (*(int *)(temp_v0 + temp_v1 * 8 + 0xa80) == (int)*(short *)(temp_v0 + 0x38)) {
       temp_v4 = temp_v0 + temp_v1 * 4;
-      FUN_003344b4(*(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x40),
-                   *(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x44));
+      FUN_003344b4(*(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x40), *(unsigned int *)(*(int *)(temp_v4 + 0xa20) + 0x44));
     }
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x18);

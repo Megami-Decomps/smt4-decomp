@@ -2,7 +2,9 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
+#include "event/2dEvent/SmokeFade.h"
 
+#include "util/FUN_002857dc.h"
 extern "C" {
 
 typedef struct {
@@ -28,7 +30,6 @@ typedef struct {
     u8 colorTarget[0x54 - 0x14]; /* 0x14 */
 } ModeScreenEntry; /* size 0x54 */
 
-s32 FUN_002857dc(void);
 s32 byteTripleGetV0(void);
 void FUN_0041e58c(ModeScreen *screen);
 void FUN_0041f020(ModeScreen *screen, s32 arg);

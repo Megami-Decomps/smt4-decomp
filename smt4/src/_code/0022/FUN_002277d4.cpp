@@ -53,7 +53,7 @@ typedef struct SkillContext {
 } SkillContext;
 
 s32 FUN_0029e9cc(u16 recordId);
-u16 categoryMaskFromId(u8 category);
+int categoryMaskFromId(u32 id);
 s32 FUN_00228220(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
 

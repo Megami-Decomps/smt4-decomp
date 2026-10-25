@@ -10,8 +10,6 @@ s32 FUN_002c1d5c(void);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 randomOffsetJobUpdate(u32 job);
 void jobFreeWork(u32 job);
-u32 asdProcessCreateSimple(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 
 // Starts the shaking job for the bust-up display unless the effect is disabled; returns the job.
 u32 bustupShakeStart(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration)
@@ -26,8 +24,7 @@ u32 bustupShakeStart(f32 *outputX, f32 *outputY, f32 amplitude, f32 duration)
         work->duration = duration;
         work->amplitudeX = amplitude;
         work->amplitudeY = amplitude;
-        return asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_BustupShake"), 2, 0, 0, randomOffsetJobUpdate,
-            jobFreeWork, reinterpret_cast<u32>(work));
+        return asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVE_BustupShake"), 2, 0, 0, randomOffsetJobUpdate, jobFreeWork, reinterpret_cast<u32>(work));
     }
     return 0;
 }

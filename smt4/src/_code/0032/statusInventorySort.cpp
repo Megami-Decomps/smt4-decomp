@@ -1,6 +1,7 @@
 /* NON_MATCHING: ascending-comparator blocks stay inline instead of retail's out-of-line branch layout; lower optimization may change placement. */
 #include "status/StatusDown.h"
 #include "shard/W6_W6Match5_EntryCollection.h"
+#include "status/StatusCamera.h"
 
 namespace {
 struct StatusSortInventory {
@@ -16,7 +17,6 @@ struct StatusSortOptions {
 
 extern "C" {
 extern StatusDownState *g_statusDown;
-u8* FUN_002a0d0c(void);
 void FUN_002b7bca(void*, s32, s32, EntryComparator);
 void FUN_0027f3dc(void*, s32, s32, EntryComparator);
 s32 devilSlotCompareRaceDescending(const void*, const void*);

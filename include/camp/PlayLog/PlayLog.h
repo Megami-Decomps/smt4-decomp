@@ -20,4 +20,13 @@ typedef struct PlayLogWorkA {
     /* 0x35A */ u16 unk35A;
 } PlayLogWorkA;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *asdTMTexLoadMainHeap(u32 table, u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

@@ -1,11 +1,11 @@
 /* NON_MATCHING: range reload uses one LDRD instead of retail's separate count/first LDRs. */
 #include "battle/EntryStats.h"
+#include "util/SlotRangeSelect.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(s32 group, s32 *first, s32 *count);
 BtlMainState *btlGetMainState();
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 

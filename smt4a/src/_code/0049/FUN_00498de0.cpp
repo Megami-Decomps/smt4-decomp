@@ -1,5 +1,7 @@
-/* NON_MATCHING: readable rebuild of the equipment menu's selection tracking; retail evaluates the three category tests as three separate FUN_00192718 calls and keeps the preview copy of the player data at fixed stack slots, which armcc here schedules differently. */
+/* NON_MATCHING: readable rebuild of the equipment menu's selection tracking; retail evaluates the three category tests as three separate aocEntryGetKindForward calls and keeps the preview copy of the player data at fixed stack slots, which armcc here schedules differently. */
 #include "common.h"
+#include "addon/AocEntryKind.h"
+#include "network/DataStore/DataStoreMain.h"
 
 /* One list entry: the item id and its detail word. */
 struct EquipListEntry {
@@ -36,9 +38,7 @@ extern "C" {
 void *gameGetPlayerData(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 u32 FUN_004d02e0(void *holder);
-s32 FUN_00192718(u32 id);
 void FUN_002f0384(s32 mode);
-s32 objBStateAllowsAction(void);
 void FUN_0038b5fc(s32 kind, u16 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 bytes);
 void FUN_003df7c4(PlayerEquipmentBlock *block);
@@ -53,8 +53,8 @@ void FUN_00498de0(EquipMenu *menu)
     u32 id = list[cursor].id;
     u32 pending = FUN_004d02e0(menu->holders[menu->tab]);
     if (!(pending == 0 && menu->lastSelectedId == id)) {
-        s32 kind = FUN_00192718(id);
-        if (kind == 4 || FUN_00192718(id) == 5 || FUN_00192718(id) == 6) {
+        s32 kind = aocEntryGetKindForward(id);
+        if (kind == 4 || aocEntryGetKindForward(id) == 5 || aocEntryGetKindForward(id) == 6) {
             FUN_002f0384(0);
             menu->previewing = 0;
             menu->previewActive = 0;
@@ -67,11 +67,11 @@ void FUN_00498de0(EquipMenu *menu)
         }
     } else {
         if (id != 0) {
-            if (FUN_00192718(id) == 4)
+            if (aocEntryGetKindForward(id) == 4)
                 FUN_0038b5fc(0, id);
-            if (FUN_00192718(id) == 5)
+            if (aocEntryGetKindForward(id) == 5)
                 FUN_0038b5fc(1, id);
-            if (FUN_00192718(id) == 6)
+            if (aocEntryGetKindForward(id) == 6)
                 FUN_0038b5fc(2, id);
         }
         menu->previewing = 1;
@@ -81,7 +81,7 @@ void FUN_00498de0(EquipMenu *menu)
         PlayerEquipmentBlock preview;
         __aeabi_memcpy4(&preview, gameGetPlayerData(), 100);
         if (id != 0) {
-            switch (FUN_00192718(id)) {
+            switch (aocEntryGetKindForward(id)) {
             case 2:
                 preview.slots[0] = id;
                 break;

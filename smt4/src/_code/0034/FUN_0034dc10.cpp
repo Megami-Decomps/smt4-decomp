@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail walks the twelve register records with post-incremented stores (str [r0], #20 then #4) and loads the constants 2/14 in swapped registers; this build addresses the records by offset. */
 #include "shard/W6_W6Match7_CombinerState.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ u32 *FUN_002b5cf0(u8 *buffer, u32 size);
 void FUN_002b612c(CombinerState *state);
 void nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(CombinerStage *stage);
 u32 *nn_gr_CTR_Combiner_MakeCommand(CombinerState *state, u32 *commands);
-void memClear(void *memory, u32 bytes);
 
 /* Builds a GPU command list: the combiner (texture modulated by primary color, then black added), a clear 0x98-byte parameter block and twelve numbered (index, header, 0, 0, 0, 0) register records; returns the end of the list. */
 u32 *FUN_0034dc10(void)

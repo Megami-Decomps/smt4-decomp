@@ -1,6 +1,7 @@
 /* NON_MATCHING: close: register allocation only (float constants are hoisted to different VFP registers and the loop temporaries swap r0/r1); control flow, offsets and calls match */
 #include "map/mapDepart.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 /* The model a gimic's object is bound to. */
 struct GimicNode {
@@ -46,7 +47,6 @@ extern GimicList *g_mapGimic;
 extern GameState g_gameState;
 
 void asdMdlManagerMarkDestroy(GimicObject *object);
-void asdMdlManagerDestroy(GimicObject *object);
 s32 FUN_0027cda0(void);
 void FUN_002671f4(s32 id, f32 x, f32 y, f32 z, f32 w, f32 a, f32 b, f32 c);
 void nodeSetTranslation(GimicObject *object, s32 index, f32 *position);
@@ -69,7 +69,7 @@ void FUN_00274fac(void)
         } else if (g_mapGimic->mode == 1) {
             for (i = 23; i >= 0; i--) {
                 if (g_mapGimic->entries[i].object != NULL) {
-                    asdMdlManagerDestroy(g_mapGimic->entries[i].object);
+                    asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(g_mapGimic->entries[i].object));
                     g_mapGimic->entries[i].object = NULL;
                 }
             }

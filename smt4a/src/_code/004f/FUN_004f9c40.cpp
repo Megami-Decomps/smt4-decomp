@@ -1,5 +1,6 @@
 /* NON_MATCHING: assist-slot loop, path buffers and cache-name addresses use different saved registers. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct AssistEffectSlot {
     u8 index;
@@ -19,7 +20,6 @@ void textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *output, const char *input);
 const char *FUN_00100d60(const char *text, u32 character);
 u32 findRecordByKey(const char *name);
-void asdLoadFileAsyncSimple(const char *path, void **data, u32 mode);
 
 // Reset the two assist-effect slots and asynchronously load resources absent from the effect cache.
 u32 FUN_004f9c40(AssistEffectOwner *owner)
@@ -41,7 +41,7 @@ u32 FUN_004f9c40(AssistEffectOwner *owner)
         const char *name = FUN_00100d60(path, '/');
         libc_strcpy(slot->name, name + 1);
         if (findRecordByKey(slot->name) == 0xff) {
-            asdLoadFileAsyncSimple(path, &slot->data, 1);
+            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 1);
             slot->flags |= 1;
         }
     }

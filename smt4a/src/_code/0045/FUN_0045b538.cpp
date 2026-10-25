@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies the loop index to r3 and increments r1 before loading the node; compiler indexes directly then increments. */
+/* NON_MATCHING: loop-index copy and increment now match; the allocator swaps r2/r3 between the list pointer and the index copy. */
 #include "common.h"
 
 struct FlaggedNode {
@@ -23,8 +23,9 @@ extern "C" void FUN_0045b538(FlaggedNodeOwner* owner)
     u32 index = 0;
     if (index < owner->list->count) {
         do {
-            FlaggedNode* node = owner->list->entries[index];
-            ++index;
+            u32 current = index;
+            index++;
+            FlaggedNode* node = owner->list->entries[current];
             node->flags |= 0x40;
         } while (index < owner->list->count);
     }

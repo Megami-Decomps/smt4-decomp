@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct RecordNode {
     u32 unk00;

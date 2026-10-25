@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 

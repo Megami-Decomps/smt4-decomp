@@ -20,7 +20,6 @@ typedef char SpritePanelOffsets[sizeof(SpritePanel) == 0x408 ? 1 : -1];
 extern "C" {
 s32 FUN_00163aa4(UiSpriteState *sprite, f32 step);
 s32 FUN_00163e84(s32 index);
-void uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 void slotSetRequest(u32 index, u32 value, u32 extra);
 void FUN_00212204(u32 index);
 /* Sets the sprite's visibility.active byte / reads its signed completion flag. */

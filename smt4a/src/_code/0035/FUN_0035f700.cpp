@@ -1,3 +1,4 @@
+#include "util/FUN_003ee0c0.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -7,7 +8,6 @@ extern "C" {
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(void);
 s32 jobIsValid(u32 handle);
-void FUN_003ee0c0(BtlMainStateA *battle);
 void FUN_004fc094(s32, ScriptUnit *, s32, BattleRosterRecordA *,
     s32, s32, s32, s32, s32, s32, s32, s32, s32,
     s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);

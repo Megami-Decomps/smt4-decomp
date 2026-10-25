@@ -1,6 +1,7 @@
 /* NON_MATCHING: special-mode preference lookup is placed before the shared sort tests instead of in retail's cold block, changing two alignment NOPs; sort bodies otherwise match. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stdlib.h>
+#include "event/2dEvent/2dEventTex.h"
 
 struct FusionSortPreferences {
     u8 unk00[0x11];
@@ -10,7 +11,6 @@ struct FusionSortPreferences {
 
 extern "C" {
 extern UniteWork *g_unite;
-FusionSortPreferences *FUN_0026140c(void);
 s32 devilCompareByRankGradeAscending(const void *a, const void *b);
 s32 recordKindOrderCompare(const void *a, const void *b);
 s32 FUN_00270d74(const void *a, const void *b);
@@ -26,9 +26,9 @@ void uniteSortCandidateList(void)
     UniteWork *work = g_unite;
     const u8 *setting;
     if (work->menu.mode != 2) {
-        setting = &FUN_0026140c()->normal;
+        setting = &reinterpret_cast<FusionSortPreferences *>(FUN_0026140c())->normal;
     } else {
-        setting = &FUN_0026140c()->special;
+        setting = &reinterpret_cast<FusionSortPreferences *>(FUN_0026140c())->special;
     }
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {

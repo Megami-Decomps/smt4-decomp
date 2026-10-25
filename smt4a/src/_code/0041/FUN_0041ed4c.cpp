@@ -1,10 +1,10 @@
 /* NON_MATCHING: state, previous-state and frame stores exchange registers and instruction order. */
 #include "gamedata/SavedUnitSelection.h"
+#include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 extern void *g_handleRegistry;
 extern s8 g_saveLoadUIBase;
-s32 objBStateAllowsAction();
 void FUN_002f0384(s32 enabled);
 void FUN_0041dcc0(SavedUnitSelection *editor);
 s32 byte1IsZero();
@@ -17,7 +17,6 @@ void FUN_0038b5fc(s32 kind, u16 value);
 void FUN_0019de98(s32 slot, u32 color);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 void FUN_0022e774();
-void FUN_00168980(s32 state);
 
 // Apply staged player stats when requested, or release editor resources before closing.
 void FUN_0041ed4c(SavedUnitSelection *editor)

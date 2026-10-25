@@ -1,6 +1,7 @@
 /* NON_MATCHING: movement camera resource and float arguments restored; vector field bases, saved registers and initial key copy scheduling differ. */
 #include "gfx/MoveCameraCtrl.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
+#include "title/titleMain.h"
 
 extern "C" {
 extern void *g_handleRegistry;
@@ -11,7 +12,6 @@ void asdCameraInitializeDefaults(ManagedCamera *camera, s32 enabled);
 void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
 void FUN_0014f0dc(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
 void FUN_001523b8(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
-void FUN_0036b824(ManagedCamera *camera);
 void FUN_00407598(MoveCameraCtrlWork *work);
 
 // Load a movement-camera track and initialize its native camera, projection and first key.
@@ -47,7 +47,7 @@ void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
     uiSetFloatPair(&work->camera, 5.0f, 1.0f);
     FUN_0014f0dc(&work->camera, &work->eye, &work->target, &work->up);
     FUN_001523b8(&work->camera, 1, work->fieldOfView, work->nearClip, work->farClip, 1.6666666f);
-    FUN_0036b824(&work->camera);
+    FUN_0036b824(reinterpret_cast<u32>(&work->camera));
     static_cast<CurrentCameraView *>(g_handleRegistry)->camera = &work->camera;
     if (work->frameCount > 0) {
         work->frame = 0;

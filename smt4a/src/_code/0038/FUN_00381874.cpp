@@ -5,7 +5,7 @@
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_001642e4(unsigned char *, int, int, int);
+int asdLoadFileSyncNoContext(unsigned char *, int, int, int);
 int memAlloc(...);
 int asdTextureRelease(void);
 int asdMemFree(unsigned char *);
@@ -30,7 +30,7 @@ extern unsigned int *DAT_006471b4; /* 0x6471b4 */
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_001642e4. */
+/* Supplied declaration required: asdLoadFileSyncNoContext. */
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: memAlloc. */
@@ -199,7 +199,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                             handleBlockRefDrop();
                             param_1[0x10] = 0;
                           }
-                          FUN_001642e4(puVar4,0,1,0x80);
+                          asdLoadFileSyncNoContext(puVar4,0,1,0x80);
                           if (param_1[0x10] != 0) {
                             handleBlockRefDrop();
                             param_1[0x10] = 0;
@@ -237,7 +237,7 @@ unsigned long long FUN_00381874(unsigned int *param_1)
                           asdTextureRelease();
                           param_1[0xe] = 0;
                         }
-                        FUN_001642e4(puVar4,0,1,0x80);
+                        asdLoadFileSyncNoContext(puVar4,0,1,0x80);
                         if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
                           asdTextureRelease();
                           param_1[0xe] = 0;

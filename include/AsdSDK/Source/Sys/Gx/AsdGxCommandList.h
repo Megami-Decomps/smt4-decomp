@@ -38,4 +38,29 @@ typedef struct AsdGxCommandList {
     /* 0x30c */ u32 state;
 } AsdGxCommandList;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void *asdGxCommandListAllocBlock(void);
+#ifdef __cplusplus
+}
+#endif
+
+extern "C" {
+unsigned int jyoucyuGetTableEntry(int param_1);
+}
+
+extern "C" {
+u32 FUN_002c5210(void);
+}
+
+extern "C" {
+AsdGxCommandList *asdGxCommandListCreate(void);
+}
+
+extern "C" {
+u32 FUN_00167c14(u32 *x, u32 *y, s32 mode);
+}
+
 #endif

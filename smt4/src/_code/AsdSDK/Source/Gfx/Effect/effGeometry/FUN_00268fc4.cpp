@@ -1,6 +1,7 @@
 /* NON_MATCHING: same code and calls; retail keeps the memAlloc stack constants 1 and 16 in r5/r8 stored with two str under a 12-byte frame (push without sl), armcc here uses sl/r5 with one stm and an 8-byte frame, and in the buffer path loads the default tint with ldm/stm after the pointer add while armcc adds the pointer first. */
 #include "classes/EffGeomRecord.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
 
 struct EffGeomTintRgb { u32 value[3]; };
 
@@ -45,7 +46,6 @@ extern EffGeomDefaultTint DAT_004737f8;
 void *memAlloc(int, int, int, s32 size, int align, int);
 EffGeomBuffer *effGeomBufferCreate(u32 vertexCount, u32 flags, s32 arg);
 void recordPrepareActive(EffGeomRecord *record, u32 first, u32 second, u32 third);
-void refCountIncrement(void *shared);
 
 /* Makes a copy of a geometry handle: buffer-style handles get a new buffer with the same size and
  * flags, record-style handles a new record with the same index list. Shared data is referenced again. */
@@ -71,7 +71,7 @@ EffGeomCloneHandle *FUN_00268fc4(EffGeomCloneHandle *source)
         void *shared = source->buffer->shared;
         if (shared != NULL) {
             copy->buffer->shared = shared;
-            refCountIncrement(shared);
+            refCountIncrement(reinterpret_cast<int *>(shared));
         }
     } else {
         EffGeomRecord *original = source->record;
@@ -88,7 +88,7 @@ EffGeomCloneHandle *FUN_00268fc4(EffGeomCloneHandle *source)
         void *shared = source->shared;
         if (shared != NULL) {
             copy->shared = shared;
-            refCountIncrement(shared);
+            refCountIncrement(reinterpret_cast<int *>(shared));
         }
         for (u32 i = 0; i < source->record->state.unk18; i++)
             copy->record->vertices[i] = source->record->vertices[i];

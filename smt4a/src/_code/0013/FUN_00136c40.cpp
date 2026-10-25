@@ -1,5 +1,6 @@
 /* NON_MATCHING: first hook argument 0x04000000 uses MOV instead of retail's literal load. */
 #include "AsdSDK/AsdDebugHooks.h"
+#include "camp/CampCec/CampCecView.h"
 
 struct EncodingTableSlot {
     /* 0x00 */ u32 unk00;
@@ -9,7 +10,6 @@ struct EncodingTableSlot {
 };
 
 extern "C" {
-EncodingTableSlot* FUN_002e2ec0(void);
 const u8* FUN_00197c2c(u32 kind, const char* encoding);
 const u8* FUN_001bc5ac(u32 kind, const char* encoding);
 
@@ -18,7 +18,7 @@ void FUN_00136c40(void)
 {
     asdDebugHookPtrInt(NULL, 0x04000000);
     asdDebugHookPtrInt(NULL, 0x04000027);
-    EncodingTableSlot* slot = FUN_002e2ec0();
+    EncodingTableSlot* slot = reinterpret_cast<EncodingTableSlot*>(FUN_002e2ec0());
     slot->characterTable = FUN_00197c2c(0, NULL) + 1;
     slot->conversionTable = FUN_001bc5ac(0, NULL);
 }

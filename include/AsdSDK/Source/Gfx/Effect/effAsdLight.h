@@ -26,4 +26,8 @@ typedef struct EffAsdLightDesc {
     /* 0x0C */ u16 kind;
 } EffAsdLightDesc;
 
+extern "C" {
+void asdLightActivate(u32 index);
+}
+
 #endif

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail predicates the last release call (movne/movne/blne); armcc here branches around an unpredicated call. Everything else, including the compiler's two trailing nops, matches. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -16,15 +17,14 @@ struct TextureOwnerWork {
     /* 0x88 */ u8 hasDefault;
 };
 
-TextureOwnerWork *jobGetWork(void);
 void FUN_0040a244(void *resource);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void asdMemFree(void *block);
 
 /* Releases the work area's textures and frees it. */
-void FUN_0034da3c(void)
+void FUN_0034da3c(u32 job)
 {
-    TextureOwnerWork *work = jobGetWork();
+    TextureOwnerWork *work = reinterpret_cast<TextureOwnerWork *>(jobGetWork(job));
 
     if (work->resource == NULL) {
         if (work->mode != 1) {

@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match3_MapMarkerModels.h"
+#include "map/mapDepart.h"
 
 extern "C" {
 
@@ -164,7 +165,6 @@ int FUN_0027d8b4(...);
 int mapClearPendingEntries(void);
 int naviClearObjectBlock(void);
 int FUN_0027d968(void);
-int FUN_0027d98c(void);
 int FUN_0027db24(...);
 int sequenceRequestClearDeferred(void);
 int FUN_00281788(void);
@@ -465,7 +465,7 @@ extern int FUN_0027ee9c(void);
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
 /* Supplied declaration required: gameRestoreWorkSave. */
 extern int FUN_00287800(void);
-extern int FUN_00287894(void);
+extern int table1bOr1cGetRecordValue(void);
 /* Supplied declaration required: FUN_00287c34. */
 /* Supplied declaration required: mapConsumePendingJumpRequest. */
 /* Supplied declaration required: gameJumpRequestClear. */
@@ -627,7 +627,7 @@ unsigned int FUN_001d3e3c(void)
       case 0:
       case 3:
         temp_v6 = FUN_002903f0();
-        if ((temp_v6 != 0) && (temp_v6 = FUN_00287894(), temp_v6 == 6)) {
+        if ((temp_v6 != 0) && (temp_v6 = table1bOr1cGetRecordValue(), temp_v6 == 6)) {
           puVar7[0x265] = 1;
         }
         if (*(short *)(temp_v4 + 0x22) != 0) {
@@ -3317,7 +3317,7 @@ joined_r0x001d8c24:
     }
     if (*(char *)((int)puVar7 + 9) != '\0') {
       temp_v6 = FUN_002903f0();
-      if ((temp_v6 != 0) && (temp_v4 = FUN_00287894(), temp_v4 == 6)) {
+      if ((temp_v6 != 0) && (temp_v4 = table1bOr1cGetRecordValue(), temp_v4 == 6)) {
         dataTable1bOr1cGetRecord();
         FUN_0026f960(*(unsigned short *)(temp_v6 + 0x148));
         return 0xffffffff;

@@ -2,14 +2,14 @@
 #include "common.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stddef.h>
+#include "event/2dEvent/2dEventTex.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 struct FusionSelectionRecord {
     u8 unk00[0x36];
     u8 flags; // 0x36
 };
 extern "C" UniteWork *g_unite;
-extern "C" FusionSelectionRecord *FUN_0026140c(u16 id);
-extern "C" u8 flagValueIsPositive(s32 id);
 
 typedef char CheckFusionSelectedIdOffset[offsetof(UniteWork, registered.selectedId) == 0x92bc ? 1 : -1];
 
@@ -22,7 +22,7 @@ extern "C" s32 FUN_003347e8(s32 enabled)
     if (work) {
         u16 id = work->registered.selectedId;
         if (id) {
-            s32 result = (FUN_0026140c(id)->flags & 2) >> 1;
+            s32 result = (reinterpret_cast<FusionSelectionRecord *>(FUN_0026140c())->flags & 2) >> 1;
             if (result)
                 result = flagValueIsPositive(work->registered.selectedId) != 0;
             return result;

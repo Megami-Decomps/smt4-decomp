@@ -1,11 +1,11 @@
-/* NON_MATCHING: range/count stack placement, mask load pairing, and active-entry byte addressing differ. */
+/* NON_MATCHING: range/count stack placement now matches (count at sp, range array above it); remaining: retail loads the first/count pair with `ldm` straight into the index register, the unavailable-mask words with two separate loads, and addresses the active-entry bytes differently. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(u32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 kind, u32 *first, u32 *count);
 void scrSetResult(s32 result);
 BattleMaskEntry *FUN_003eaf20(BattleMaskState *battle);
 
@@ -15,10 +15,9 @@ u32 FUN_003bc468(void)
     s32 missingHp = scrGetArg(0);
     s32 choice = btlResolveEntryChoice(scrGetArg(1));
     s32 matches = 0;
-    u32 range[8];
-    u32 count;
-    FUN_00301a08(choice, range, &count);
-    for (s32 index = range[0]; index < static_cast<s32>(range[0] + count); ++index) {
+    struct { u32 count; u32 range[8]; } selection;
+    FUN_00301a08(choice, reinterpret_cast<s32 *>(selection.range), reinterpret_cast<s32 *>(&selection.count));
+    for (s32 index = selection.range[0]; index < static_cast<s32>(selection.count + selection.range[0]); ++index) {
         BattleMaskEntry *entry = &btlGetMainState()->entryView.entries[index];
         u64 flags = entry->mask;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&

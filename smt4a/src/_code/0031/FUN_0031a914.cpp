@@ -1,5 +1,6 @@
 /* NON_MATCHING: the (short) conversion for the switch is predicated (sxthlt) before the bge in retail; built emits it after the branch */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -16,8 +17,7 @@ extern char DAT_0052c8f4[];   /* "NoTableLoaded" */
 extern char DAT_0052c904[];   /* "NoName" */
 
 s32 loadSlotIsLoaded(u32 slot);
-void *dataTableGet(s32 table, s32 slot);
-NameTable0031a914 *dataTableGetEntries(void *table);
+
 
 /* The display name of party slot `index` (0..4) from data table 0x36; placeholder texts when the table is not loaded or the index is out of range. */
 const char *FUN_0031a914(s32 index)
@@ -27,7 +27,9 @@ const char *FUN_0031a914(s32 index)
 
     if (loadSlotIsLoaded(0x36) == 0) {
         result = DAT_0052c8f4;
-    } else if (index < 5) {
+    } else if (index >= 5) {
+        result = DAT_0052c904;
+    } else {
         switch ((s16)index) {
         case 0:
             row = 2;
@@ -48,9 +50,7 @@ const char *FUN_0031a914(s32 index)
             row = -1;
             break;
         }
-        result = dataTableGetEntries(dataTableGet(0x36, 0))->rows[row].name;
-    } else {
-        result = DAT_0052c904;
+        result = static_cast<NameTable0031a914 *>(dataTableGetEntries(dataTableGet(0x36, 0)))->rows[row].name;
     }
     return result;
 }

@@ -22,6 +22,7 @@ void FUN_001387c0(void);
 s32 processQueryAndFinish(s32 query, s32 first, s32 second);
 s32 FUN_002e0b5c(s32 query, s32 first, s32 second);
 
+
 void FUN_00371100(SaveLoadRequest *request)
 {
     g_saveLoadThread.busy = 1;

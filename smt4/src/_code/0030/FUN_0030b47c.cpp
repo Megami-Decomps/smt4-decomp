@@ -1,8 +1,8 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-int scrSetResult(u32 result);
 extern u8 *btlGetMainState(void);
 
 u32 FUN_0030b47c(void)

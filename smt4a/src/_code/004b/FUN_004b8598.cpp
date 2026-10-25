@@ -1,6 +1,7 @@
 /* NON_MATCHING: prologue order only - retail schedules `sub sp` after `ldr r1,[r0,#144]; mov r7,r0`, armcc emits it right after the push */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/DataTableSections.h"
 
 extern "C" {
 
@@ -58,7 +59,6 @@ extern void FUN_00407eb0(u32 handle, s32 kind, s32 flag);
 extern void FUN_004080bc(u32 handle, s32 a, s32 b);
 extern void mapSceneInitializeScriptAndEntry(MikadoPanel *panel);
 extern MikadoMenuEntry *menu4CGetCurrentEntry(u8 *menu);
-extern u8 *dataTable33Entries(u8 *scratch, s32 type);
 extern s32 dataTable33TypeCount(u8 *scratch, s32 type);
 
 /* Once the panel's textures and scripts are loaded, enters state 3 and loads the current entry's images into the cache. */
@@ -93,7 +93,7 @@ void FUN_004b8598(MikadoPanel *panel)
             FUN_004080bc(panel->cacheHandle, 0, -1);
             FUN_00407eb0(panel->cacheHandle, current->kind, 1);
             if (panel->entry->tableType >= 0) {
-                typeEntries = dataTable33Entries(scratch, panel->entry->tableType);
+                typeEntries = (u8 *)dataTable33Entries(scratch, panel->entry->tableType);
                 if (typeEntries != NULL) {
                     for (i = 0; i < dataTable33TypeCount(scratch, panel->entry->tableType); i++) {
                         textFormatBuffer(path, "%s%s.bam", g_mikadoPathPrefix, typeEntries);

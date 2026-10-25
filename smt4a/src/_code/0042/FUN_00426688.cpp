@@ -3,6 +3,7 @@
  * previous static-buffer slots afterwards; returns the reply word on success. */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 extern "C" {
 extern u32 DAT_005b4438;
@@ -10,8 +11,8 @@ extern u32 DAT_005b4438;
 s32 FUN_00426688(u32 buffer)
 {
     nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
-    command->header = 0x140002;
-    command->words[0] = 32;
+    nn::os::SetIpcWord(command, 0, 0x140002);
+    nn::os::SetIpcWord(command, 1, 32);
 
     /* The static buffer descriptor pair lives at thread-local storage + 0x180. */
     u32 *descriptor = (u32 *)((u8 *)nn::os::GetThreadLocalStorage() + 0x180);

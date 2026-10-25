@@ -5,6 +5,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 namespace {
 // The parameter block at 0xa4 lies in padding beginning at the unaligned offset 0x36
@@ -36,7 +37,6 @@ typedef char MessageInitializationOffsetsCheck[sizeof(MessageInitializationView)
 extern "C" {
 extern const u8 DAT_00403df8[];
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
-void memClear(void *data, u32 size);
 void FUN_002bc0e0(void);
 AsdText *asdTextCreate(u32 flags);
 void FUN_002bd82c(AsdText *text, u32 color);
@@ -44,8 +44,6 @@ void asdTextSetValueFlagsAndScalar(AsdText *text, u32 value, u32 flags, f32 scal
 void positionStateSet(AsdText *text, u32 first, u32 second, f32 scalar);
 s32 FUN_00114474(u32 handle);
 s32 FUN_00116a54(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 void drawParameterBlockClear(UiResourceParameters *parameters);
@@ -73,8 +71,7 @@ MessageWork *FUN_002c4a34(void)
     work->unk7E = 0;
     work->unk33 = 0;
     work->taskValue = -2;
-    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MESS_C"),
-        2, 0, 0, FUN_00114474, NULL, reinterpret_cast<u32>(work));
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MESS_C"), 2, 0, 0, FUN_00114474, NULL, reinterpret_cast<u32>(work));
     taskCreateDraw(reinterpret_cast<const s8 *>("MESS_U LEFT"), 0x81, 0, 0,
         FUN_00116a54, NULL, reinterpret_cast<u32>(work), reinterpret_cast<void *>(work->job));
     taskCreateDraw(reinterpret_cast<const s8 *>("MESS_U RIGHT"), 0xDF, 0, 0,

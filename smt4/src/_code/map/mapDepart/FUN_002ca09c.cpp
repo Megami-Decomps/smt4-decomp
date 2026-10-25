@@ -14,7 +14,7 @@ int FUN_002bed3c(void);
 int FUN_002bf380(...);
 int FUN_002bf4f8(...);
 int efctSetSpeed(void);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -44,7 +44,7 @@ extern unsigned char DAT_0049fd38; /* 0x49fd38 */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -74,7 +74,7 @@ unsigned int FUN_002ca09c(void)
   
   temp_v2 = g_mapDepart;
   if ((*(int *)(g_mapDepart + 0x18) >= 2) && (*(int *)(g_mapDepart + 0x18) < 0xb)) {
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     temp_v9 = g_titleScene;
     temp_v1 = FUN_002c5d80(1,0);
     piVar10 = (int *)(temp_v9 + 0x124c);

@@ -14,7 +14,6 @@ typedef char DemonTextureDrawRecordOffsets[offsetof(DemonTextureDrawRecord, alte
 extern "C" {
 extern u32 g_aocSystem;
 DemonTextureDrawRecord *dataTable00FindById(u32 id);
-s32 aocRunByName(u32 system, s32 category, s32 resource, s32 mode);
 void FUN_002ae9ec(s32 layer, s32 category, s32 resource, u32 first, u32 second, u32 third);
 void FUN_002bf380(s32 layer, s32 category, s32 variant, u32 first, u32 second, u32 third);
 void FUN_00389ddc(u32 system, s32 id, s32 layer, s32 resource, s32 mode, u32 first, u32 second, u32 third);

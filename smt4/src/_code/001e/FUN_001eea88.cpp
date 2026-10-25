@@ -72,7 +72,7 @@ void FUN_00258618(UniteRenderTarget *target);
 void FUN_00258408(const char *name);
 void FUN_00258170(UniteRenderTarget *target);
 u32 asdMdlManagerCreateLoaded(const char *path, s32 heap);
-u32 FUN_00263c1c(const char *path);
+u32 asdCameraLoadFromFile(const char *path);
 void FUN_002942c4(s32 id, u32 kind);
 u32 asdLoadFileSyncDefault(const char *path);
 const char *FUN_002cdecc(s8 tone);
@@ -113,23 +113,23 @@ void FUN_001eea88(void)
     if (work->materialCount == 2) {
         if (work->sacrifice) {
             work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2_ac.bam", 7);
-            work->camera = FUN_00263c1c("camp/jakyou_union2_ac.bccam");
+            work->camera = asdCameraLoadFromFile("camp/jakyou_union2_ac.bccam");
         } else {
             work->model = asdMdlManagerCreateLoaded("camp/jakyou_union2.bam", 7);
-            work->camera = FUN_00263c1c("camp/jakyou_union2.bccam");
+            work->camera = asdCameraLoadFromFile("camp/jakyou_union2.bccam");
         }
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
     if (work->materialCount == 3) {
         work->model = asdMdlManagerCreateLoaded("camp/jakyou_union3.bam", 7);
-        work->camera = FUN_00263c1c("camp/jakyou_union3.bccam");
+        work->camera = asdCameraLoadFromFile("camp/jakyou_union3.bccam");
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }
     if (work->materialCount == 4) {
         work->model = asdMdlManagerCreateLoaded("camp/jakyou_union4.bam", 7);
-        work->camera = FUN_00263c1c("camp/jakyou_union4.bccam");
+        work->camera = asdCameraLoadFromFile("camp/jakyou_union4.bccam");
         FUN_00258408("tx_devil1");
         FUN_00258170(&work->renderTarget);
     }

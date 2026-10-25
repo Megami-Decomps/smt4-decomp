@@ -3,13 +3,13 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 group, u32 *first, u32 *count);
 s32 FUN_002b54a0(BtlCombatantEntryA *entry, s32 kind);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 
@@ -19,7 +19,7 @@ u32 btlScriptAnyCandidateMatches(void)
     s32 kind = scrGetArg(0);
     s32 choice = scrGetArg(1);
     u32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
+    FUN_00301a08(btlResolveEntryChoice(choice), reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 i = first; i < (s32)(first + count); ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&

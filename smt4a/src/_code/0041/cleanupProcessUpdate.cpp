@@ -1,6 +1,7 @@
 /* NON_MATCHING: transition resets reuse the cached zero instead of retail's fresh zero registers; common-return layout also differs. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "event/2dEvent/SmokeFade.h"
 
 struct CleanupProcessState {
     /* 0x00 */ u8 unk00[8];
@@ -29,7 +30,6 @@ void FUN_0034a968(void);
 void sysPlaySe(u32 sound);
 void FUN_0022e774(void);
 void statusDownRestartTransition(void);
-s32 FUN_0026c3a0(void);
 s32 FUN_002effbc(void);
 s32 aocDataBlockHasEntries(void);
 void FUN_0019de98(u32 first, u32 color);

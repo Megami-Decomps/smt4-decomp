@@ -115,4 +115,22 @@ static __inline u32 decoderReadBigEndian32(const u8 *data)
 typedef char PackedDimensionDecoderSizeCheck[sizeof(PackedDimensionDecoder) == 0x24 ? 1 : -1];
 typedef char ShortValueDecoderSizeCheck[sizeof(ShortValueDecoder) == 0x24 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void FUN_003343f0(u8 value);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

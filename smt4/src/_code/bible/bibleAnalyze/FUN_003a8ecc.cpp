@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "util/CalleeContracts.h"
+#include "status/StatusCamera.h"
 
 /* This analysis screen extends beyond the shared BibleScreen work area. */
 struct BibleAnalyzeCursorView {

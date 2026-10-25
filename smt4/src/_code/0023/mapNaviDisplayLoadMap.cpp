@@ -1,6 +1,7 @@
 /* NON_MATCHING: clear-loop counter reuse adds one row, and category-center load scheduling/GPR allocation differ; alternate optimization may explain these differences. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/TexTableLoaded.h"
 
 struct MapNaviPoint {
     s32 x;
@@ -48,7 +49,6 @@ s32 dataTable2eSub2GetCount(void);
 const MapNaviTextureRecord* dataTable2eSub2GetRecord(s32 index);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 TexNode* FUN_002c58c8(s32 table, s32 node);
-AsdTexture* FUN_002c1c0c(s32 table, s32 node);
 s32 MapNaviTable_GetCategoryCount(const MapNaviTable* table);
 const MapNaviCategoryRecord* MapNaviTable_GetCategoryRecord(const MapNaviTable* table, s32 index);
 void FUN_0039d69c(MapNaviDisplay* display, s32 map);
@@ -72,7 +72,7 @@ void mapNaviDisplayLoadMap(MapNaviDisplay* display, s32 map)
     }
 
     FUN_002c58c8(0x33, display->textureIndex);
-    FUN_002c1c0c(0x33, display->textureIndex)->unk3c = 1;
+    asdTMTexTableGetNodeTexture(0x33, display->textureIndex)->unk3c = 1;
 
     for (s32 i = 0; i < 32; ++i) {
         display->iconPositions[i].x = 0;

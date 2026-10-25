@@ -131,6 +131,7 @@
 0x0011bd70 nn_cfg_CTR_IsDebugMode name
 0x0011bde8 FUN_0011bde8 between
 0x0011bf9c FUN_0011bf9c between
+0x0011bff4 FUN_0011bff4 between
 0x0011c264 FUN_0011c264 between
 0x0011c320 FUN_0011c320 between
 0x0011c448 FUN_0011c448 between

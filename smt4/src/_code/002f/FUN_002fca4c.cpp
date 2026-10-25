@@ -1,11 +1,11 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
 int FUN_00250d84(u32 id, u32 value);
 extern int flagValueIsPositive(u32 id);
 extern u32 FUN_0028fb40(u32 id);
-extern u8 *FUN_002a0d0c(void);
 
 /* For flags 0x79F-0x802 that flagValueIsPositive reports set, applies FUN_00250d84 and sets the flag's bit in the bitset at +0x44. */
 u32 FUN_002fca4c(void)

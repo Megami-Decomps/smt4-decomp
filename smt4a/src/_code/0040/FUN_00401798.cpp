@@ -1,5 +1,6 @@
 /* NON_MATCHING: logic agrees; register numbering/operand load order of the owner->frame and owner->metrics chains differs, and the table-search loop is rotated differently. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -57,9 +58,6 @@ typedef struct PositionRow {
     u16 unk06;
 } PositionRow;
 
-s32 dataTableGetCount(u32 table);
-PositionRow *dataTableGetEntries(void);
-u32 dataTableGet(u32 table, u32 index);
 
 /* Offset that centres a span of `outer` around `position`, measured from the origin. */
 static __inline f32 centreOffset(s32 outer, u16 inner, s32 position, s16 origin)
@@ -102,8 +100,8 @@ void FUN_00401798(CenteredLayout *layout, LayoutSource *source)
         }
     } else {
         u16 key = layout->owner->key;
-        u32 table = dataTableGet(0x3B, 0);
-        PositionRow *row = dataTableGetEntries();
+        void *table = dataTableGet(0x3B, 0);
+        PositionRow *row = static_cast<PositionRow *>(dataTableGetEntries(table));
         s32 count = dataTableGetCount(table);
         s32 i = 0;
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/qcMain.h"
 
 namespace { struct Presets { u8 padding[0xbc]; u32 first; u8 gap[0x74]; u32 second; }; }
 

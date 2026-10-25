@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/FlagBitTests.h"
 
 extern "C" {
 

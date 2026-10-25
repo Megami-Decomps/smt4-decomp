@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc spills the arguments (push {r0-r2}) and hoists the per-component colour addresses out of the vertex loop; retail keeps the parameters in registers, copies the seven parameter words with one ldm/stm and stores the eight colour components with reloads per vertex. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* A per-vertex colour buffer object: `colors` holds four floats per vertex. */
 struct TrackColorBuffer {
@@ -38,7 +39,6 @@ extern const u8 DAT_004737ce[];
 extern const u8 DAT_00472560[4]; /* vertex colour (rgba bytes) */
 
 void *memAlloc(int, int, int, int size, int align, int);
-void memClear(void *block, s32 size);
 void asdMemFree(void *block);
 void bufferObjDestroy(TrackColorBuffer *buffer);
 TrackColorBuffer *FUN_002469ec(u32 count, u32 first, const u8 *layout, s32 attributes, s32 stride);

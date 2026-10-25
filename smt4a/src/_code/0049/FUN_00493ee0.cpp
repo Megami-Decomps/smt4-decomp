@@ -1,5 +1,6 @@
 /* NON_MATCHING: The inlined value helper interchanges r4/r5 for record ids and the two comparison values. */
 #include "gamedata/Table8Record.h"
+#include "addon/AocEntryKind.h"
 
 struct EquipmentSortConsumable {
     u8 unk00[0x25];
@@ -15,7 +16,6 @@ struct EquipmentSortWeapon {
     u32 value;
 };
 extern "C" {
-u32 FUN_00192718(u32 id);
 EquipmentSortConsumable *contentEntryFindById2(u32 id);
 Table8Record *dataTable8FindRecord(u32 id);
 EquipmentSortArmor *dataTable08Sub2GetRecord(u32 id);
@@ -25,7 +25,7 @@ s32 FUN_0049c9a0(const u16 *id);
 static __inline u32 equipmentGetTypeSortValue(u32 id)
 {
     u32 value = 0;
-    switch (FUN_00192718(id)) {
+    switch (aocEntryGetKindForward(id)) {
     case 2:
     case 3:
     case 4:

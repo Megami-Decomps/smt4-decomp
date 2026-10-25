@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `scrComm_QuestUI_RunListLoop` (_code @ 0x201afc, 0x6b8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -21,8 +23,6 @@ int gameGetUnitRecord(...);
 int dataTable1bOr1cGetRecord(void);
 int FUN_002bd06c(unsigned int);
 int FUN_002be650(unsigned int, int);
-int libc_strcpy(unsigned int [32], unsigned int);
-int memClear(unsigned int [32], int);
 int FUN_00383674(void);
 int QuestCenter_GetActiveEntry(void);
 
@@ -121,10 +121,10 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       if (temp_v0 != 1) {
         if (temp_v0 == 2) {
           temp_v1 = 1;
-          memClear(temp_v12,0x80);
+          reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v12), 0x80));
           temp_v5 = (unsigned int)*(unsigned short *)(temp_v9 + 0x16e);
           FUN_002bd06c(temp_v5);
-          libc_strcpy(temp_v12,temp_v5);
+          libc_strcpy(reinterpret_cast<unsigned int *>(temp_v12), reinterpret_cast<unsigned int *>(temp_v5));
           textEncodeFontSlot(8,temp_v12);
           FUN_0029ede8(0x18,*(unsigned int *)(temp_v9 + 0x170),0xffffffff,0);
           temp_v6 = gameGetSlotTable();
@@ -149,10 +149,10 @@ unsigned int scrComm_QuestUI_RunListLoop(void)
       else {
         temp_v14 = (unsigned int)*(unsigned short *)(temp_v9 + 0x16e);
         temp_v8 = *(unsigned int *)(temp_v9 + 0x170);
-        memClear(temp_v12,0x80);
+        reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v12), 0x80));
         temp_v5 = temp_v14;
         FUN_002be650(temp_v14,1);
-        libc_strcpy(temp_v12,temp_v5);
+        libc_strcpy(reinterpret_cast<unsigned int *>(temp_v12), reinterpret_cast<unsigned int *>(temp_v5));
         textEncodeFontSlot(0,temp_v12);
         FUN_0029ede8(0x18,temp_v8,0xffffffff,0);
       }

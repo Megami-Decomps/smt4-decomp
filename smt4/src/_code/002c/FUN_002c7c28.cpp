@@ -3,15 +3,15 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "shard/W6_W6Match2_EmitterResources.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "AsdSDK/Source/Gfx/Effect/effParticleParamCopy.h"
 
 extern "C" {
-EffEmitter *effEmitterCreateSmall(EffEmitterDesc *descriptor);
 EffEmitter *effEmitterCreate(u32 count);
 void FUN_0024f8a4(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
 void *FUN_002691d8(u16 kind, u32 count, EffEmitterDesc *descriptor);
 void *FUN_00268fc4(void *auxiliary);
-void effParticleParamCopy(EffParticleParam *destination, const EffParticleParam *source);
 
 EffEmitter *FUN_002c7c28(EmitterResourceRequest *request)
 {

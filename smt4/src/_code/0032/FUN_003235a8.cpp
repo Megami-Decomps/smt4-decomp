@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct Result003235a8 {
     /* 0x0000 */ u8 unk0000[0xd040];
@@ -9,7 +10,6 @@ extern "C" {
 
 extern Result003235a8 *g_result;
 
-s32 scrSetResult(s32 value);
 
 /* Script command: returns the result block's value at 0xd040, or zero without one. */
 s32 FUN_003235a8(void)

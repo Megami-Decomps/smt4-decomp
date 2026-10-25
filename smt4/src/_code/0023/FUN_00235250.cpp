@@ -1,8 +1,8 @@
 #include "shard/S1Mover.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void *memory, u32 size);
 const Vec3f *asdSoundGetListener(void);
 
 // Clear movement state and seed all eight saved vectors from the current listener position.

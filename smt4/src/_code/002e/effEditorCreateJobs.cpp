@@ -5,7 +5,6 @@ extern "C" {
 
 extern ShutdownJobs g_shutdownJobs;
 
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 s32 jobGroupStopWhenReady(u32 handle);
 s32 titleSceneUpdateAndAdvanceTransition(u32 handle);
 s32 titleSceneInitializeCallback(u32 handle);

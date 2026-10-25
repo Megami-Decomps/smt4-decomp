@@ -1,6 +1,7 @@
 /* NON_MATCHING: the 64-bit flag loop uses different unroll indexing, zero registers and store grouping; a formation-ID reload is coalesced and the larger saved-register set changes the frame. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "shard/W6_W6Match8_BattleCommonResources.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 struct DevilDefinition;
 struct BattleEnemyFormation {
@@ -33,7 +34,6 @@ struct BattleEnemyRuntimeView {
 
 extern "C" {
 extern BattleCommonResources g_btlMainState;
-void memClear(void *memory, u32 size);
 void FUN_0027dc24(BtlState *state, BattleEnemyFormation *formation, s32 mode);
 const DevilDefinition *dataTable00FindById(u16 id);
 void FUN_0023ebc8(BtlState *state, u8 *payload, const DevilDefinition *definition);

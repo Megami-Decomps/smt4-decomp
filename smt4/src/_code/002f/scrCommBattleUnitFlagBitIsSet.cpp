@@ -1,6 +1,8 @@
 /* NON_MATCHING: retail loads the entry's flag halfword into r1 and branches to two shared 'mov r0,#1/#0; b scrSetResult' blocks at the end of the function; the build tests with ands and falls through */
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
+#include "gamedata/FlagBitTests.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -10,10 +12,8 @@ typedef struct MainEntry002f7cc4 {
 } MainEntry002f7cc4;
 
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 value);
 MainEntry002f7cc4 *btlMainFindEntryByListedId(void *state, s32 id);
-u32 gameGetUnitRecord(s32 index);
-s32 flagWordTestBit(u32 word, u32 bit);
+void *gameGetUnitRecord(s32 index);
 
 extern u32 g_btlScriptUnit; /* 0x43427c */
 

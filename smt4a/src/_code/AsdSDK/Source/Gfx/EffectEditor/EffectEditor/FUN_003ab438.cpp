@@ -7,7 +7,7 @@ int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int asdGxSetEffectColorFromRGBA8(unsigned int);
 int randomAdvanceShiftRegister(void);
-int FUN_00514540(...);
+int shiftRandomNextFraction(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -117,7 +117,7 @@ extern unsigned int effGetFrameStep(void);
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: asdGxSetEffectColorFromRGBA8. */
 /* Supplied declaration required: randomAdvanceShiftRegister. */
-/* Supplied declaration required: FUN_00514540. */
+/* Supplied declaration required: shiftRandomNextFraction. */
 /* Supplied declaration required: __aeabi_uidivmod. */
 
 
@@ -368,45 +368,45 @@ void FUN_003ab438(fn_003ab438_arg0 *param_1)
               }
             }
             else if (temp_v39 != 0) {
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v18 = temp_v18 * temp_v38;
               pfVar17[1] = temp_v18;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v35 = ((temp_v36 - pfVar18->field_0x6c) + temp_v18 * pfVar18->field_0x6c) *
                        pfVar18->field_0x68;
               temp_v13 = temp_v36;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v25 = pfVar18->field_0x74;
               temp_v19 = pfVar18->field_0x70;
               pfVar17[3] = temp_v35;
               temp_v28 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v35 = ((temp_v13 - temp_v25) + temp_v18 * temp_v25) * temp_v19 - temp_v35;
               pfVar17[4] = temp_v35 / temp_v28;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v18 = ((temp_v13 - pfVar18->field_0x7c) + temp_v35 * pfVar18->field_0x7c) *
                        pfVar18->field_0x78;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v25 = pfVar18->field_0x84;
               temp_v19 = pfVar18->field_0x80;
               pfVar17[5] = temp_v18;
               temp_v28 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v18 = ((temp_v13 - temp_v25) + temp_v35 * temp_v25) * temp_v19 - temp_v18;
               pfVar17[6] = temp_v18 / temp_v28;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v35 = ((temp_v13 - pfVar18->field_0x8c) + temp_v18 * pfVar18->field_0x8c) *
                        pfVar18->field_0x88;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v25 = pfVar18->field_0x94;
               temp_v19 = pfVar18->field_0x90;
               pfVar17[7] = temp_v35;
               temp_v28 = (float)VectorSignedToFloat(temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v35 = ((temp_v13 - temp_v25) + temp_v18 * temp_v25) * temp_v19 - temp_v35;
               pfVar17[8] = temp_v35 / temp_v28;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v18 = ((temp_v13 - pfVar18->field_0x64) + temp_v35 * pfVar18->field_0x64) *
                        pfVar18->field_0x60;
               pfVar17[9] = temp_v18;
-              FUN_00514540(0);
+              shiftRandomNextFraction(0);
               temp_v18 = ((temp_v13 - pfVar18->field_0x9c) + temp_v18 * pfVar18->field_0x9c) *
                        pfVar18->field_0x98;
               pfVar17[2] = temp_v18;

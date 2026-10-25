@@ -19,10 +19,8 @@ extern "C" {
 s32 scrRunOpcodesStub(u32 script);
 s32 FUN_00370794(void);
 s32 messageGetChoiceResult(void);
-s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
 u32 FUN_004a8750(u16 id, u8 mode, u32 option, u32 highRank, u32 flags);
 void panelSetMode3(u32 value, s32 option);
-void FUN_003343f0(u32 enabled);
 void objBInitBlocks274300(void);
 void messageMainSetTargetFlags(u32 flags);
 void flagValueSub(u32 id, s32 value);

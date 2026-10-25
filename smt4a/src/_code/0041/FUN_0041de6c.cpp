@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 
@@ -55,7 +56,6 @@ extern int FUN_002a6464(void);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: messageStateEndMode2. */
 /* Supplied declaration required: FUN_002f0384. */
-extern int objBStateAllowsAction(void);
 /* Supplied declaration required: FUN_0033440c. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_0034aac8. */

@@ -24,7 +24,7 @@ struct TextureContentTable {
 extern "C" {
 
 extern TextureContentTable DAT_0047e508;
-void textureContentRelease(void);
+void textureContentRelease(TextureContent *content);
 
 /* Drops one use of a texture content; on the last use it releases and deletes the registered object. */
 void FUN_00294f64(TextureRef *ref)
@@ -34,7 +34,7 @@ void FUN_00294f64(TextureRef *ref)
         for (s32 i = 0; i < 16; i++) {
             TextureContent *content = DAT_0047e508.entries[i];
             if (content != NULL && content->id == id) {
-                textureContentRelease();
+                textureContentRelease(content);
                 if (DAT_0047e508.entries[i] != NULL) {
                     delete DAT_0047e508.entries[i];
                 }

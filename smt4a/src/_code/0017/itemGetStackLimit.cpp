@@ -2,7 +2,7 @@
 
 extern "C" {
 
-ItemCategoryEntry *FUN_0019c06c(u32 id);
+ItemCategoryEntry *itemCategoryFindByItemId(u32 id);
 ItemRecordA *dataTable8FindRecord(u32 id);
 ItemRecordB *dataTable08Sub2GetRecord(u32 id);
 
@@ -10,7 +10,7 @@ ItemRecordB *dataTable08Sub2GetRecord(u32 id);
  * types (999 when the record leaves it 0), 0 for unknown items. */
 s32 itemGetStackLimit(u32 id)
 {
-    ItemCategoryEntry *entry = FUN_0019c06c(id);
+    ItemCategoryEntry *entry = itemCategoryFindByItemId(id);
 
     if (entry == NULL) {
         return 0;

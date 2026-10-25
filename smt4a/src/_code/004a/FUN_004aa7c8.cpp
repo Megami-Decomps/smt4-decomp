@@ -8,7 +8,7 @@ void menu32PlayCursorSeAndSelect(BtlUiObjCA *menu);
 void FUN_00321500(BtlUiObjAA *menu);
 s32 FUN_0039ebcc(BtlUiObjBA *sprite);
 void controllerStartInterpolation(u32 controller);
-s32 menu32ModeIsNot6(BtlUiObjAA *menu);
+u8 menu32ModeIsNot6(BtlUiObjAA *menu);
 
 // Advance the closing menu state and refresh the active sprite when its gates permit.
 void FUN_004aa7c8(void)

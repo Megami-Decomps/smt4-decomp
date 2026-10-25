@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the message buffer allocation. */
+/* NON_MATCHING: the stripped debug trace before the message buffer allocation is written; retail 388-byte frame (message/id/out-slot layout), the zero return through the read counter and the end clamp compare order still differ. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
@@ -36,7 +37,7 @@ s32 asdCecReadInboxMessages(u32 first, s32 count, u8 *out, s32 deleteRead)
     u32 bodySize;
 
     box = g_asdCec.cec->box;
-    if (asdCecMessageBoxOpen(box, g_asdCec.cec->unk00, g_asdCec.cec->unk04) < 0) {
+    if ((s32)(asdCecMessageBoxOpen(box, g_asdCec.cec->unk00, g_asdCec.cec->unk04) & 0x80000000) < 0) {
         return 0;
     }
 
@@ -50,6 +51,7 @@ s32 asdCecReadInboxMessages(u32 first, s32 count, u8 *out, s32 deleteRead)
         nn_cec_CTR_MessageBox_GetMessageId(box, &id, ASD_CEC_INBOX, index);
         size = asdCecMessageBoxGetMessageSize(box, ASD_CEC_INBOX, index);
         nn_cec_CTR_Message_Message_sub_object(&message);
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Net\\Cec\\AsdCec.cpp", 1240);
         buffer = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
         result = nn_cec_CTR_MessageBox_ReadMessage_3579D4(box, &message, buffer, size, 0, &id);
         if (result < 0) {

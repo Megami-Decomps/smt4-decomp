@@ -1,5 +1,6 @@
 /* NON_MATCHING: scratch buffer layout and inlined request helper address/register scheduling differ; no unused scratch padding is added. */
 #include "gamedata/PendingResourceRecords.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 extern const char DAT_00528420[3][0x20];
@@ -10,7 +11,6 @@ void textFormatBuffer(char *destination, const char *format, ...);
 char *libc_strcpy(char *destination, const char *source);
 char *FUN_00100d60(const char *string, s32 character);
 u32 findRecordByKey(const char *name);
-u32 asdLoadFileAsyncSimple(const char *path, const char **resource, s32 mode);
 }
 
 namespace {
@@ -30,7 +30,7 @@ inline void requestAssistEffect(PendingResourceRecord *record, const char *stem,
     libc_strcpy(path, formatted);
     libc_strcpy(record->name, FUN_00100d60(path, '/') + 1);
     if (findRecordByKey(record->name) == 0xFF) {
-        asdLoadFileAsyncSimple(path, &record->resource, 1);
+        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&record->resource), 1);
         record->flags |= 1;
     }
 }

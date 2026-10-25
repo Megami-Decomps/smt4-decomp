@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the map music selection (the draft's lost arguments restored: the slot table row's flags, the sub-area passed to the slot lookup and the lmap spawn index); armcc here reloads the area/sub fields and the game-state pointer differently across the override ladder. */
 #include "common.h"
+#include "gamedata/FlagBitTests.h"
+#include "util/FUN_002b950c.h"
 
 /* The game state (only the fields read here). */
 struct GameStateView {
@@ -51,10 +53,8 @@ extern MusicSlot DAT_00582364[];
 
 u8 *FUN_003cb88c(s32 area, s32 sub);
 void bgmReleaseStopped(void);
-s32 FUN_002b950c(void);
 void FUN_002b9520(void);
 void FUN_00249ac4(s32 area, s32 sub);
-s32 gameFlagsValueGet(void);
 s32 slotFindByPair(s32 area, s32 sub);
 s32 bgmGetStateById(u32 id);
 void FUN_003d4c68(u32 bgm);
@@ -86,7 +86,7 @@ void FUN_002bcafc(void)
     }
     if (map->area == 24) {
         lmapGetSpawnIndex();
-    } else if (gameFlagsValueGet() == 1) {
+    } else if (gameFlagsValueGet(map->area) == 1) {
         MusicSlot *slot = &DAT_00582364[slotFindByPair(map->area, map->sub)];
         if (slot->alternateBgm != 0) {
             g_gameState.bgm = slot->alternateBgm;

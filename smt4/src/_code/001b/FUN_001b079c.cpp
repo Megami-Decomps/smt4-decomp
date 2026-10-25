@@ -1,6 +1,7 @@
 /* NON_MATCHING: block layout and register allocation differ (retail hoists menu + entry*2 into a stack slot and tests kinds 0/13 and 1 in separate chains) */
 #include "common.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "status/StatusCamera.h"
 
 /* The filter menu's per-category id lists, each indexed by entry (entry 0 is "don't specify"). */
 struct FilterMenu {
@@ -36,7 +37,6 @@ struct StockUnit {
 };
 
 extern "C" {
-FilterSettings *FUN_002a0d0c(void);
 PartyDamageSlotsIV *gameGetSlotTable(void);
 StockUnit *gameGetUnitRecord(s32 slot);
 s32 flagWordTestBit(StockUnit *unit, u32 bit);
@@ -46,7 +46,7 @@ void uiFormatIndexedDisplayName(FilterMenu *menu, s32 kind, s32 index, char *lab
    the entry the settings currently have selected. */
 u8 FUN_001b079c(FilterMenu *menu, s32 kind, char *label, s32 entry)
 {
-    FilterSelection *settings = &FUN_002a0d0c()->selection;
+    FilterSelection *settings = &reinterpret_cast<FilterSettings *>(FUN_002a0d0c())->selection;
     u8 selected = 0;
 
     if (kind == 0) {

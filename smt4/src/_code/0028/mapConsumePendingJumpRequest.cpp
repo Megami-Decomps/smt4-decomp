@@ -1,12 +1,12 @@
 #include "map/MapJumpTransition.h"
 #include "map/mapDepart.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern GameState g_gameState;
 MapJumpRequest *gameJumpRequestGet(void);
 void gameJumpRequestClear(void);
 void FUN_00289574(u32 map, u32 entrance, u32 object, f32, f32, f32, f32, f32);
-void asdSequenceRequest(u32 sequence, const void *argument, u32 size);
 void mapDepartSetTarget(u32 map, u32 entrance, u32 object);
 
 // Consume a saved jump request and optionally switch to its destination sequence.

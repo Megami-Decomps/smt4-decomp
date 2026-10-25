@@ -2,15 +2,15 @@
 #include <algorithm>
 #include "shard/S1GfxModel.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
-ModelSlotList *asdModelGetSlotArray0(s32 slotIndex);
 void settings5BClearFlags(s32 flags);
 void FUN_00152fac(s32 slotIndex);
 
 void FUN_0029c2cc(ModelRemovalRequestPrefixIV *request, s32 slotIndex)
 {
-    ModelSlotList *list = asdModelGetSlotArray0(slotIndex);
+    ModelSlotList *list = reinterpret_cast<ModelSlotList *>(asdModelGetSlotArray0(slotIndex));
     ModelSlot *target = request->entry;
     ModelSlot **newEnd = std::remove(list->slots.begin, list->slots.end, target);
     ModelSlot **oldEnd = list->slots.end;

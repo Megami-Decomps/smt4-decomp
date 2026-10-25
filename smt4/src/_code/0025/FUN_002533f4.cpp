@@ -2,6 +2,8 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
+#include "util/Random.h"
+#include "util/AocFindQuestPayloadById.h"
 
 struct EncounterTemplateChoice { u16 templateId; u16 weight; };
 struct EncounterTemplateChoices { EncounterTemplateChoice entries[15]; };
@@ -11,10 +13,8 @@ extern "C" {
 extern AocSystem* g_aocSystem;
 u16* gameDataGetTableEntry(u32 category, u32 index);
 void FUN_002c0a9c(u32 category, u32 index, u32 initialize);
-EncounterTemplateChoices* aocFindQuestPayloadById(AocSystem*, u32);
 Table02Sub2Entry* aocFindSpriteTemplateByKey(AocSystem*, u32);
 Table00Record* dataTable00FindById(u32 id);
-s32 randNextInRange(u16 maximum);
 
 u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
 {
@@ -26,7 +26,7 @@ u16 FUN_002533f4(u32 category, u32 index, s32 filterArrangements)
     void* table = dataTableGet(2, 1);
     EncounterTemplateChoices* choices = static_cast<EncounterTemplateChoices*>(dataTableGetEntries(table));
     if (choicesId >= 0 && static_cast<u32>(choicesId) < dataTableGetCount(table)) {
-        EncounterTemplateChoices* addon = aocFindQuestPayloadById(g_aocSystem, choicesId);
+        EncounterTemplateChoices* addon = reinterpret_cast<EncounterTemplateChoices*>(aocFindQuestPayloadById(g_aocSystem, choicesId));
         if (addon) {
             choices = addon;
         } else {

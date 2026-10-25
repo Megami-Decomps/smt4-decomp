@@ -1,3 +1,4 @@
+#include "util/FUN_00233fcc.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN7AocMenu14runLicenseFlowEv` (_code @ 0x38e5f4, 0x48c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"
@@ -9,7 +10,6 @@ int FUN_0023392c(unsigned int *, int, int);
 int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
-int FUN_00233fcc(unsigned int *, int);
 int timeInitializeActiveState(unsigned int *);
 int FUN_00234124(unsigned int *, unsigned int *);
 int memClear(int, int);

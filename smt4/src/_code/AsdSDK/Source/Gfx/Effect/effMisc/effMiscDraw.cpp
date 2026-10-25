@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002c39a4(void);
+void renderCtxSelectStereoLayout(void);
 void effectRestoreSavedRenderPairs(EffRenderState *ctx, u32 value);
 void layoutApplyForState(EffRenderState *ctx);
 
@@ -21,7 +21,7 @@ void effMiscDraw(EffMiscObject *obj)
         return;
     }
     saved = g_titleScene->unk6f8;
-    FUN_002c39a4();
+    renderCtxSelectStereoLayout();
     g_effMiscKinds[obj->kind].lateUpdate(obj);
     if (mode == 3 || mode == 4) {
         layoutApplyForState(g_titleScene);

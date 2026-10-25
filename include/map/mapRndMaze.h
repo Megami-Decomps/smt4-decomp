@@ -10,4 +10,8 @@ typedef struct MapRndMazeA {
     /* 0x380 */ u32 unk380;
 } MapRndMazeA;
 
+extern "C" {
+u8 FUN_002ef9f0(void);
+}
+
 #endif

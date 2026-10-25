@@ -1,13 +1,11 @@
-#include "shard/Shard0037.h"
+#include "gamedata/DataTable.h"
+#include "gamedata/DataTableSections.h"
 
 extern "C" {
 
-extern void *dataTableGet(u32 index, u32 type);
-extern void *dataTableGetEntries(void *table);
-
-void dataTable5GetEntries(void)
+void *dataTable5GetEntries(void)
 {
-    dataTableGetEntries(dataTableGet(5, 0));
+    return dataTableGetEntries(dataTableGet(5, 0));
 }
 
 } /* extern "C" */

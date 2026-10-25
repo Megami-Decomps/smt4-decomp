@@ -28,7 +28,7 @@ void wordPairCopy(void *dest, void *src);
 void FUN_00358cbc(void);
 void titleConfigApply(void);
 void aocActivateFileGroupFlags(u32 system);
-int gameFlagIsSet(int id);
+bool gameFlagIsSet(u32 id);
 
 void asdMemFree(void *ptr);
 

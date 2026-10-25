@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00115cd0` (_code @ 0x115cd0, 0xc60 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_002b7bca(...);
 int FUN_002b7c54(...);
 int rt_memclr(void);
 int asdMemFree(void);
-int memClear(...);
 int asdMemoryAlloc(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -88,7 +88,7 @@ unsigned int FUN_00115cd0(int param_1,int param_2,int param_3)
   DAT_00465128[0xc] = param_2;
   piVar16[10] = param_1;
   piVar16[0xb] = param_3;
-  memClear(&temp_v18,0x1414);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(&temp_v18), 0x1414));
   if ((param_1 == 0 && param_2 == 0) || param_3 == 0) {
     return 0;
   }
@@ -233,7 +233,7 @@ LAB_00115f7c:
   temp_v0 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,DAT_00465128[6] * 4 + 4,1);
   temp_v20 = temp_v0;
-  memClear(temp_v0,DAT_00465128[6] * 4 + 4);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v0), DAT_00465128[6] * 4 + 4));
   temp_v0 = 0x100;
   asdMemoryAlloc(0x100,0x100,0,0x400);
   temp_v21 = temp_v0;

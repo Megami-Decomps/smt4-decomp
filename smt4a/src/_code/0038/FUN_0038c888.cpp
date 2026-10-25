@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation of the mask AND/ORR chain differs (the active-entry byte already folds with the s8 flag). */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "gamedata/BattleUnitSkills.h"
@@ -8,7 +8,6 @@
 #include "util/SlotRangeSelect.h"
 
 extern "C" {
-BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 u32 FUN_0027281c(BtlCombatantEntryA *unit);
 s32 btlResolveEntryChoice(s32 choice);

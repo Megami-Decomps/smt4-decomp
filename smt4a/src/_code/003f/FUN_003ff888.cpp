@@ -9,7 +9,7 @@ SlotRecord *gameGetSlotRecord(s32 slot);
 SlotTable *gameGetSlotTable(void);
 s32 FUN_004bd0d8(SlotRecord *record);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
-s32 FUN_004bd730(void);
+s32 FUN_004bd730(SlotRecord *record);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
 
 /* Searches the occupied roster for a record allowed by the current feature and status flags. */
@@ -36,7 +36,7 @@ s32 FUN_003ff888(void)
             }
             for (s32 index = 0; index < occupiedCount; ++index) {
                 SlotRecord *record = gameGetSlotRecord(occupiedSlots[index]);
-                if (record != NULL && FUN_004bd730() != 0 &&
+                if (record != NULL && FUN_004bd730(record) != 0 &&
                     FUN_004bd0d8(record) == 0 && bitsAt60Test(record, 1) == 0 &&
                     bitsAt60Test(record, 10) == 0) {
                     return 1;

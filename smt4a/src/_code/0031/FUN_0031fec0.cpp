@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031fec0` (_code @ 0x31fec0, 0x6e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
@@ -100,7 +100,7 @@ unsigned int FUN_0031fec0(void)
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
     temp_v3 = g_renderCtx;
-    temp_v2 = packNibblesAndByte(6,1,0);
+    temp_v2 = packNibblesAndByte(6, 1, 0);
     piVar7 = (int *)(temp_v3 + 0x12b8);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -167,7 +167,7 @@ unsigned int FUN_0031fec0(void)
       *(unsigned char *)(temp_v3 + 0x12d0) = 0;
     }
     temp_v3 = g_renderCtx;
-    temp_v2 = packNibblesAndByte(6,7,0);
+    temp_v2 = packNibblesAndByte(6, 7, 0);
     piVar7 = (int *)(temp_v3 + 0x12b8);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];
@@ -204,7 +204,7 @@ unsigned int FUN_0031fec0(void)
       *(unsigned char *)(temp_v3 + 0x12d0) = 0;
     }
     temp_v3 = g_renderCtx;
-    temp_v2 = packNibblesAndByte(6,1,0);
+    temp_v2 = packNibblesAndByte(6, 1, 0);
     piVar7 = (int *)(temp_v3 + 0x12b8);
     temp_v4 = *piVar7;
     temp_v5 = piVar7[temp_v4 + 2];

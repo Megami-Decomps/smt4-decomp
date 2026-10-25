@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021a9e8` (_code @ 0x21a9e8, 0x52c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
@@ -40,7 +41,6 @@ extern int btlMainGetUnk14(void);
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0047fbb4(unsigned int);
 extern int FUN_0047fd9c(unsigned int);
-extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_004c67d0. */
 
 

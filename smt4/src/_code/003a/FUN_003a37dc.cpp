@@ -3,7 +3,7 @@
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 s32 FUN_002c5d80(u32 kind, u32 mode);
 s32 jobIsValid(u32 job);
@@ -28,7 +28,7 @@ void FUN_003a37dc(TitleJobWork *work)
     if (draw->state <= 0 || draw->state >= 18) {
         return;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002bed3c();
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 0));

@@ -1,10 +1,10 @@
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "ui/UiSpriteState.h"
+#include "shard/W6_W6Match5_UnitCategory.h"
 
 extern "C" {
 SaveSlotSelectionPrefixA *saveSlotFindSelected(void);
-s32 FUN_0019acdc(u16 selectionId, u32 mode);
-s32 uiSpriteSelectAnim(UiSpriteState *sprite, s32 animation);
 s32 FUN_0020ad6c(SaveSlotTransitionPrefixA *ui, s32 state, s32 immediate);
 
 void saveSlotBeginTransition(SaveSlotTransitionPrefixA *ui, s32 inputCase, u8 option)

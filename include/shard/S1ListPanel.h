@@ -78,4 +78,13 @@ typedef struct ListPanel {
     /* 0x2E8 */ f32 speed;
 } ListPanel;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+s32 FUN_0028d1f4(u32 id);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

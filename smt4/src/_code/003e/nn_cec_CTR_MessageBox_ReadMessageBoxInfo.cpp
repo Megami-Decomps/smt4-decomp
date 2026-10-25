@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `nn_cec_CTR_MessageBox_ReadMessageBoxInfo` (_code @ 0x3e07e0, 0xc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(unsigned int, int);
 
 typedef int romwright_code(...);
 /* Supplied declaration required: memClear. */
@@ -21,7 +21,7 @@ unsigned int nn_cec_CTR_MessageBox_ReadMessageBoxInfo(int *param_1,unsigned int 
     return 0xe0e10bfd;
   }
   iStack_14 = 0;
-  memClear(param_2,0x60);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2), 0x60));
   temp_v0 = (**(romwright_code **)(*param_1 + 0x34))(param_1,param_2,0x60,&iStack_14,param_3,2,0x12);
   if (((temp_v0 & 0x3ff) != 0x3f7) && (iStack_14 == 0)) {
     temp_v0 = 0xc8810bef;

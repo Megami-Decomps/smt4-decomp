@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the sequence before clearing pending and uses STRD for the argument header; armcc reorders and uses separate stores. */
 #include "common.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 __packed struct SequenceRequestState {
     /* 0x00 */ u8 unk00[26];
@@ -20,7 +21,6 @@ extern "C" {
 
 void sequenceRequestClearDeferred();
 void gameRestoreWorkSave(s32 mode);
-void asdSequenceRequest(s32 kind, const SequenceArguments *arguments, u32 size);
 
 /* Consumes a pending sequence request and forwards its packed arguments. */
 s32 FUN_0039440c(SequenceRequestState *request)

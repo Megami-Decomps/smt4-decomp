@@ -88,4 +88,12 @@ typedef char BtlHelpGlobalsAMasksOffsetCheck[
     offsetof(BtlHelpGlobalsA, blockedTransitions) == 0x28 &&
     sizeof(BtlHelpGlobalsA) == 0x30 ? 1 : -1];
 
+extern "C" {
+void FUN_0022af9c(u8 value);
+}
+
+extern "C" {
+u32 *asdListBoxGetItemValuePtr(void *listBox, u32 id);
+}
+
 #endif

@@ -1,6 +1,9 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034abe0` (_code @ 0x34abe0, 0x1758 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/PackNibbles.h"
+#include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -24,7 +27,6 @@ int slotRecordFindById(...);
 int FUN_002a4b28(...);
 int FUN_00344cd0(...);
 int FUN_0035ae58(...);
-int devilDispatchTextureResource(...);
 int contentEntryFindById(void);
 int VectorSignedToFloat(...);
 
@@ -81,7 +83,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int vec2GetXInt(unsigned int *);
 extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00180114. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -94,7 +95,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_0020caec. */
 extern unsigned int *uniteGetWork(void);
-extern int FUN_0026140c(void);
 extern int recordGetModeForId(int);
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
@@ -153,7 +153,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
   if (puVar2 == (unsigned int *)0x0) {
     return;
   }
-  temp_v1 = FUN_0026140c();
+  temp_v1 = reinterpret_cast<int>(FUN_0026140c());
   temp_v15 = puVar2 + 0x188f;
   temp_v12 = 0;
   temp_v14 = puVar2 + 0x1876;
@@ -351,7 +351,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       temp_v2 = FUN_002a4878(temp_v15);
       temp_v9 = FUN_001834a4(0x1a,temp_v2 + 0xe3);
       temp_v2 = g_renderCtx;
-      temp_v8 = packNibblesAndByte(6,1,0);
+      temp_v8 = packNibblesAndByte(6, 1, 0);
       piVar15 = (int *)(temp_v2 + 0x12b8);
       temp_v6 = piVar15[*piVar15 + 2];
       piVar15[*piVar15 + 2] = temp_v8;
@@ -362,7 +362,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
       FUN_00164b5c(2,0x1a,0xd,(int)&param_1->field_0x0 + (int)*(short *)(temp_v9 + 8),
                    *(short *)(temp_v9 + 10) + param_2,0x79);
       temp_v2 = g_renderCtx;
-      temp_v9 = packNibblesAndByte(6,7,0);
+      temp_v9 = packNibblesAndByte(6, 7, 0);
       piVar15 = (int *)(temp_v2 + 0x12b8);
       temp_v8 = piVar15[*piVar15 + 2];
       piVar15[*piVar15 + 2] = temp_v9;

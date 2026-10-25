@@ -3,6 +3,7 @@
 #include "gamedata/DevilRecord.h"
 #include "shard/W6_W6Match2_RecordValue.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
 u32 dataTable05Sub4GetCount(void);
@@ -11,8 +12,7 @@ s32 gameFlagIsSet(u32 flag);
 bool gameRecordCopy(u32 id, RecordValue *record);
 s32 gameCountUnits(void);
 GameUnitSortRecord *gameGetUnitRecord(u32 slot);
-s32 FUN_0029ea68(u16 id);
-u32 arrayContainsU16(const u16 *values, u32 count, u16 wanted);
+s32 itemGetFlagBit1(u16 id);
 
 u16 FUN_0029fa0c(u32 context, u16 *output)
 {
@@ -52,7 +52,7 @@ u16 FUN_0029fa0c(u32 context, u16 *output)
                         break;
                     }
                 }
-                if (!owned[ingredient] && FUN_0029ea68(entry->recipe.ingredients[ingredient]))
+                if (!owned[ingredient] && itemGetFlagBit1(entry->recipe.ingredients[ingredient]))
                     owned[ingredient] = 1;
                 ++ingredientCount;
             }

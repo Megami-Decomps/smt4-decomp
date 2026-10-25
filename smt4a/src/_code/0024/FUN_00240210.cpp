@@ -1,5 +1,6 @@
 /* NON_MATCHING: block layout and register allocation differ (retail tests kinds 0/14 and 1 in separate chains and hoists menu + entry*2 into a stack slot) */
 #include "common.h"
+#include "event/2dEvent/2dEventTex.h"
 
 /* The filter menu's per-category id lists, each indexed by entry (entry 0 is "don't specify"). */
 struct FilterMenuA {
@@ -42,7 +43,6 @@ struct StockUnitA {
 };
 
 extern "C" {
-FilterSettingsA *FUN_0026140c(void);
 StockSlotTable *gameGetSlotTable(void);
 StockUnitA *gameGetSlotRecord(s32 slot);
 s32 bitsAt60Test(StockUnitA *unit, u32 bit);
@@ -52,7 +52,7 @@ void FUN_0021b390(FilterMenuA *menu, s32 kind, s32 index, char *label);
    the entry the settings currently have selected. */
 u8 FUN_00240210(FilterMenuA *menu, s32 kind, char *label, s32 entry)
 {
-    FilterSelectionA *settings = &FUN_0026140c()->selection;
+    FilterSelectionA *settings = &reinterpret_cast<FilterSettingsA *>(FUN_0026140c())->selection;
     u8 selected = 0;
 
     if (kind == 0) {

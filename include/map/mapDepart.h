@@ -184,7 +184,7 @@ typedef struct GameState {
             /* 0x22A */ u8 completed;
         } entryTransition;
     };
-    /* 0x251 */ u8 bgResetPending; /* set when the common background must be rebuilt */
+    /* 0x251 */ s8 bgResetPending; /* set when the common background must be rebuilt (read signed by retail) */
     /* 0x252 */ u8 unk252[0x32];
     /* 0x284 */ u8 unk284;
     /* 0x285 */ u8 unk285[0x73];
@@ -533,5 +533,28 @@ typedef char GameStateEnvironmentVariantOffsetCheck[
 typedef char GameStateMapRegistrationOffsetCheck[
     offsetof(GameState, mapRegistration.pending) == 0x22B &&
     sizeof(GameState) == 0x678 ? 1 : -1];
+
+extern "C" {
+void FUN_0025c2d0(u32 unused, u8 value);
+}
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+void mapProbePositionDownward(void *position);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u8 FUN_0027d98c(void);
+#ifdef __cplusplus
+}
+#endif
 
 #endif

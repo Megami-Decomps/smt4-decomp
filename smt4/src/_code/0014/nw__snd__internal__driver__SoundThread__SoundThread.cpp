@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN2nw3snd8internal6driver11SoundThreadC1Ev` (_code @ 0x140fa0, 0x9c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-int memClear(unsigned int *, int);
 
 /* Supplied declaration required: memClear. */
 
@@ -21,7 +21,7 @@ unsigned int * _ZN2nw3snd8internal6driver11SoundThreadC1Ev(unsigned int *param_1
   param_1[4] = 0;
   param_1[0x6c] = 0;
   param_1[0x6b] = 0;
-  memClear(param_1 + 6,0x194);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_1 + 6), 0x194));
   *(unsigned char *)(param_1 + 0x6d) = 0;
   param_1[0x71] = 0;
   param_1[0x73] = 0xffffffff;

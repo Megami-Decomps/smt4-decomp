@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
+#include "shard/JobWork.h"
 
 struct BattleMarkerLookup {
     u8 unk00[0xc];
@@ -13,7 +14,6 @@ struct BattleMarkerLookup {
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
 extern RenderCtxA *g_renderCtx;
-BtlMainStateA *jobGetWork();
 void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 BattleMarkerLookup *FUN_001568f8(BtlMainStateA *state, s16 group);
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
@@ -36,9 +36,9 @@ static __inline void battleDrawMarker(f32 x, f32 y, f32 width, f32 height, u32 c
     FUN_0014e314(color, color, color, color, x, y, width, height, 1.0f);
 }
 
-extern "C" u32 battleDrawRosterMarkerRects()
+extern "C" u32 battleDrawRosterMarkerRects(u32 job)
 {
-    BtlMainStateA *state = jobGetWork();
+    BtlMainStateA *state = reinterpret_cast<BtlMainStateA *>(jobGetWork(job));
     if (++state->drawCounters.markerTimer >= 30) {
         state->drawCounters.markerTimer -= 30;
     }

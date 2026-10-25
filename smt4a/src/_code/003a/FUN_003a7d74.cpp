@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: messageForwardDefaultMode. */
-extern int FUN_0026140c(void);
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: libc_strcpy. */
@@ -237,7 +237,7 @@ unsigned int FUN_003a7d74(void)
           temp_v6 = *piVar3;
           FUN_004da858(temp_v6,*puVar6);
           if (temp_v6 != 0) {
-            temp_v6 = FUN_0026140c();
+            temp_v6 = reinterpret_cast<int>(FUN_0026140c());
             pbVar7 = (unsigned char *)(temp_v6 + ((int)(temp_v8 + ((unsigned int)((int)temp_v8 >> 0x1f) >> 0x1d)) >> 3)
                              + 0x39);
             temp_v1 = *pbVar7;

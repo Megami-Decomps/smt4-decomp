@@ -1,5 +1,6 @@
 /* NON_MATCHING: slot-rank stores reuse the settings pointer instead of the retail panel base. */
 #include "battle/btlUI.h"
+#include "gamedata/SaveLoadProcess.h"
 
 extern "C" {
 extern BtlUiGlobals g_btlUi;
@@ -8,7 +9,6 @@ void FUN_00206368(BtlUiObjA *, s32 mode, s32 first, s32 second);
 u16 slotFindNonnegativeRank(void *owner, u32 slot);
 void communicationBeginTransition(s32 mode);
 void communicationSetResultPointer(void);
-void comWinSetText(const char *text);
 void memFill8(void *output, u32 value);
 void FUN_002ad8a8(BtlUiObjC *, const BtlUiSettings *settings);
 void FUN_002dc464(BtlUiObjC *);

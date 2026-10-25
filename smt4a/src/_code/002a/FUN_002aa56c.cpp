@@ -1,7 +1,9 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002aa56c` (_code @ 0x2aa56c, 0x1204 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -42,10 +44,8 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_00164b5c. */
-extern int vec2GetXInt(int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -284,14 +284,14 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
   if (!((temp_v5 == 1 || temp_v5 == 2) || temp_v5 == 6)) {
     temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = vec2GetXInt(temp_v1 + 0xb0);
+    temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0xb0));
     FUN_001835b4(2,0x1a,0x7c,temp_v1 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v7 + param_2 + (int)temp_v0,0xce);
   }
   else {
     temp_v7 = vec2GetYInt(temp_v1 + 0xb0);
     temp_v0 = *(short *)(temp_v4 + 10);
-    temp_v1 = vec2GetXInt(temp_v1 + 0xb0);
+    temp_v1 = vec2GetXInt(reinterpret_cast<const void *>(temp_v1 + 0xb0));
     FUN_001835b4(2,0x1a,0x282,temp_v1 + param_1 + (int)*(short *)(temp_v4 + 8),
                  temp_v7 + param_2 + (int)temp_v0,0xce);
   }
@@ -375,7 +375,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     temp_v1 = FUN_001834a4(0x1a,0x81);
   }
   temp_v2 = g_renderCtx;
-  temp_v5 = packNibblesAndByte(6,1,0);
+  temp_v5 = packNibblesAndByte(6, 1, 0);
   piVar12 = (int *)(temp_v2 + 0x12b8);
   temp_v7 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = temp_v5;
@@ -390,7 +390,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xdd);
   efctSetSpeed();
   temp_v1 = g_renderCtx;
-  temp_v2 = packNibblesAndByte(6,7,0);
+  temp_v2 = packNibblesAndByte(6, 7, 0);
   piVar12 = (int *)(temp_v1 + 0x12b8);
   temp_v4 = piVar12[*piVar12 + 2];
   piVar12[*piVar12 + 2] = temp_v2;

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int obj4FSlots28Reset(...);
 
 int FUN_00178b04(...);
 int dialogOpen(...);
-int infoWinSetText(...);
 int infoWinSetTimer(...);
 int halfRecClear(...);
 int FUN_003f20f0(void);
@@ -28,7 +28,7 @@ int FUN_004ecee8(...);
 int btlCameraFinishTransition(...);
 int objRef1F50Release(...);
 int FUN_004f84ec(...);
-int FUN_004f8f08(void);
+int btlStageResetAndClearCameraFlag(void);
 int FUN_004f8fa0(...);
 int FUN_004fb4fc(...);
 int btlReflectQueueValueAction(...);
@@ -241,7 +241,7 @@ extern int FUN_004f6478(int);
 /* Supplied declaration required: obj4FSlots28Reset. */
 extern int FUN_004f80e4(int);
 /* Supplied declaration required: FUN_004f84ec. */
-/* Supplied declaration required: FUN_004f8f08. */
+/* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: FUN_004f8fa0. */
 extern int FUN_004f9ae4(int, unsigned int);
 extern int FUN_004f9d44(int);
@@ -1300,7 +1300,7 @@ code_r0x004f054c:
       if (temp_v3 != 0) {
         temp_v2 = partyCountActiveSlots();
         if (temp_v2 < 3) {
-          infoWinSetText(*(unsigned int *)(*piStack_30 + 0x2268),0x3b);
+          infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(*piStack_30 + 0x2268)), 0x3b);
         }
         else {
           if (temp_v2 < 6) {
@@ -1309,7 +1309,7 @@ code_r0x004f054c:
           else {
             temp_v4 = 0x3c;
           }
-          infoWinSetText(*(unsigned int *)(*piStack_30 + 0x2268),temp_v4);
+          infoWinSetText(reinterpret_cast<const char *>(*(unsigned int *)(*piStack_30 + 0x2268)), temp_v4);
         }
         dialogOpen(1);
         infoWinSetTimer(0xffffffff);
@@ -1463,7 +1463,7 @@ code_r0x004f054c:
     objRef1F50Release(g_btlAux);
     btlCameraFinishTransition(g_btlAux);
     *(unsigned int *)(g_btlAux + 0x339c) = *(unsigned int *)(g_btlAux + 0x339c) & 0xffff7fff;
-    FUN_004f8f08();
+    btlStageResetAndClearCameraFlag();
     FUN_004f8fa0(g_btlAux);
     obj4FSlots28Reset(g_btlAux);
     *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) & 0xffffbfff;

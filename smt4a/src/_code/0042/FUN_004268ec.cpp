@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_004268ec.h"
 
 extern "C" {
 

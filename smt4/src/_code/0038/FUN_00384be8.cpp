@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00384be8` (_code @ 0x384be8, 0x64c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 
@@ -17,10 +19,8 @@ int libc_strcat(...);
 int buttonHelpSetPreset(int);
 int FUN_002bcfc0(unsigned char [64], unsigned char [140]);
 int textFormatBuffer(...);
-int libc_strcpy(unsigned char [64], unsigned int);
 int FUN_002bff50(void);
 int asdMemFree(void);
-int memClear(unsigned int *, int);
 int jyoucyuGetTableEntry(int);
 void animOwnerSetScale(unsigned int, float);
 int FUN_002e1230(...);
@@ -95,13 +95,13 @@ void FUN_00384be8(unsigned int *param_1)
     param_1[2] = param_1[2] + 1;
     puVar6 = param_1 + 0x36b;
     param_1[0x369] = 0;
-    memClear(puVar6,0x200);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar6), 0x200));
     param_1[0x368] = 0;
     temp_v2 = 0;
     if (0 < (int)param_1[0x363]) {
       do {
         temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
-        libc_strcpy(temp_v6,temp_v4 + param_1[temp_v2 * 2 + 0x357] * 0x88);
+        libc_strcpy(reinterpret_cast<unsigned int *>(temp_v6), reinterpret_cast<unsigned int *>(temp_v4 + param_1[temp_v2 * 2 + 0x357] * 0x88));
         FUN_002bcfc0(temp_v6,temp_v8);
         libc_strcat(puVar6,temp_v8);
         libc_strcat(puVar6,"<br>");

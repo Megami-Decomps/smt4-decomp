@@ -2,6 +2,8 @@
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "ui/ParamsClearPacket.h"
+#include "map/mapDepart.h"
 
 /* A 0x8C-byte UI sprite; only the data the initializers below pass around. */
 struct SceneSprite {
@@ -94,9 +96,7 @@ static const s32 sKeysFifth[21] = {
 extern "C" {
 extern SceneRecords DAT_005f1cbc;
 FlagWorkBanks *gameFlagsGetBlock(void);
-void mapProbePositionDownward(MapVector *position);
 void FUN_00352eec(void);
-void paramsClearPacket(UiResourceParameters *packet);
 
 void FUN_0014e188(SceneSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
 void uiSpriteSetKeyframe(SceneSprite *sprite, s32 keyframe, s32 restart);

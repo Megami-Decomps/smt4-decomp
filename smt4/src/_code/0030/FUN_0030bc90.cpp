@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler duplicates the success epilogue and aligns the shared result call differently from retail. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct CampCecCountState {
     u8 unk000[0x126];
@@ -13,7 +14,6 @@ struct CecSavedEntry {
 extern "C" {
 extern CampCecCountState *g_campCec;
 s32 scrGetArg(s32 index);
-void scrSetResult(s32);
 CecSavedEntry *FUN_00262f94(void);
 
 // Return either the current StreetPass count or the selected saved entry's count.

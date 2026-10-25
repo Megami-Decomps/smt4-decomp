@@ -12,7 +12,7 @@ u32 FUN_004186e0();
 s32 partyEntryFlagsBit1();
 void FUN_00418070(u32 owner, s32 state);
 void optionsClearFlag1();
-void FUN_003a36b4();
+u32 FUN_003a36b4(void);
 s32 gameBlockByte27E98Is1To3();
 extern const char g_questScriptFilePath[];
 extern const char g_questSystemMessagesPath[];

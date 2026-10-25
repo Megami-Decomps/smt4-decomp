@@ -43,7 +43,7 @@ void sendEvent100020F();
 void FUN_00498494(EquipmentMenu *, s32);
 u32 inputIsQuestMenuPressed();
 u32 inputIsQuestCancelPressed();
-void FUN_0038b010(u32);
+void FUN_0038b010(u8 value);
 void uiSpriteBankApplyPreset(SpritePresetBank *, u32);
 void obj04Finish();
 void releaseEntriesB(u32);

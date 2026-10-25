@@ -1,5 +1,7 @@
 /* NON_MATCHING: retail reads the id with ldrh + sxth and hoists uxth r6 before the slot call; armcc here folds it into one ldrsh. */
 #include "common.h"
+#include "gamedata/PartyMoney.h"
+#include "status/StatusCamera.h"
 
 namespace {
 struct PurchaseEntry {
@@ -31,9 +33,7 @@ s32 flaggedValueHolderGetTotal(void *holder);
 s32 partyFindFreeStockSlot(void);
 void FUN_0029c1c8(s32 slot, u16 id, bool discounted);
 s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
-void FUN_00295c04(s32 amount);
 void gameCounterAddSaturating(s32 counter, s32 amount);
-void FUN_002a0cc8(s32 arg);
 
 /* Once the message is closed, pay the price of the selected demon and move the menu to state 2. */
 void FUN_003a7de4(PurchaseMenu *menu)
@@ -48,7 +48,7 @@ void FUN_003a7de4(PurchaseMenu *menu)
             FUN_0029c1c8(slot, id, menu->discounted != 0);
         }
         s32 price = FUN_0029ce60(id, menu->discounted, 0, menu->level >= 100, 0);
-        FUN_00295c04(-price);
+        partyMoneyAddForward(-price);
         gameCounterAddSaturating(0x28, price);
         FUN_002a0cc8(0);
         menu->state = 2;

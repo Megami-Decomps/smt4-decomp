@@ -1,6 +1,7 @@
 /* NON_MATCHING: code, calls and constants match retail; only the register assignment of the five parameters and the result differs (armcc ranks them r6/r7/r5/r9/r8 where retail has r5/r6/r4/r8/r7 and keeps the result in r9). */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/Result.h"
+#include "mobiclip_ctrl/helper_S4Player.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
@@ -11,7 +12,6 @@ void nn_cec_CTR_Message_Message_sub_object(AsdCecMessage *message);
 void nn_cec_CTR_Message_NewMessage(AsdCecMessage *message, u32 id, s32 kind, u32 param0, u32 param1, u32 param2, u32 param3);
 u32 nn_cec_CTR_Message_SetExHeader(AsdCecMessage *message, u32 type, u32 size, const void *data);
 u32 nn_cec_CTR_Message_SetMessageBody(AsdCecMessage *message, const void *body, u32 size);
-s32 FUN_0042dd98(AsdCecMessageBox *box, AsdCecMessage *message, s32 mode, void *work);
 s32 wstrlenU16(const u16 *text);
 void FUN_0042d5b4(s32 arg);
 
@@ -30,7 +30,7 @@ s32 FUN_00316750(const u16 *text, const void *header, u32 headerSize, const void
         nn_cec_CTR_Message_SetExHeader(&message, 2, headerSize, header);
         nn_cec_CTR_Message_SetExHeader(&message, 4, wstrlenU16(text) << 1, text);
         nn_cec_CTR_Message_SetMessageBody(&message, body, bodySize);
-        result = FUN_0042dd98(g_asdCec.cec->box, &message, 1, g_asdCec.cec->work);
+        result = FUN_0042dd98(reinterpret_cast<u32>(g_asdCec.cec->box), reinterpret_cast<u32>(&message), 1, reinterpret_cast<u32>(g_asdCec.cec->work));
         u32 code = result & 0x80000000;
         if ((s32)code < 0) {
             code = 0xE0A1086C;

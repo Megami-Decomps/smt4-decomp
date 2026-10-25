@@ -1,8 +1,10 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: register allocation only: retail keeps one more callee-saved register live (fp, stack frame 20 vs 16) and hoists the sprite pointers and float constants differently */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "title/titleMain.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
+#include "Model/MoriModelShadowMap.h"
 
 /* A title-screen sprite: position, opacity and the texture frame it shows. */
 struct TitleSprite {
@@ -39,9 +41,7 @@ typedef char TitleScreenViewLayoutCheck[sizeof(TitleSprite) == 0x38 &&
 
 extern "C" {
 
-void FUN_00157558(RenderCtxA *context);
 u32 FUN_001692ac(u32 value, bool enabled);
-f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 TitleTextureEntry *FUN_001834a4(u32 texture, u32 frame);
 void efctSetSpeed(f32 alpha);
 void FUN_0034dc3c(void *menu);
@@ -49,7 +49,6 @@ u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
-extern RenderCtxA *g_renderCtx;
 extern TitleMainGlobals g_titleMain;
 
 static __inline bool titleSpriteIsVisible(const TitleSprite *sprite)

@@ -1,8 +1,8 @@
 /* NON_MATCHING: only scheduling differs: retail stores the file data before loading the flags (no write-back addressing) and loads dataOffset before the texture pointer. */
 #include "gfx/StexLoad.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
-char *libc_strcpy(char *dst, const char *src);
 char *libc_strcat(char *dst, const char *src);
 u32 libc_strlen(const char *s);
 u8 *asdLoadFileSync(const char *path, s32 *size, u32 loadFlags, u32 alignment);
@@ -19,7 +19,7 @@ u32 FUN_002b9178(TexTableEntry *entry)
     TexTableFile *file = entry->file;
     TexTableNode *node = entry->node;
 
-    libc_strcpy(path, file->directory);
+    libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(file->directory));
     if (node->name[0] == '-') {
         libc_strcat(path, entry->slots[-(s8)node->name[1]].node->name);
     } else {

@@ -13,16 +13,16 @@ struct IntroWork {
 
 extern "C" {
 
-IntroWork *jobGetWork(void);
+IntroWork *jobGetWork(u32 job);
 s32 FUN_002b8ee0(u8 *loader, s32 mode);
 u32 FUN_002aa024(s32 group, s32 id);
 s32 uiAnimationAdvanceChannel(u8 *animation, s32 channel);
 
 /* Steps the job: waits for its load, starts the sound, then runs the animation channel and
  * finally clears the busy flags. */
-u32 FUN_00391000(void)
+u32 FUN_00391000(u32 job)
 {
-    IntroWork *work = jobGetWork();
+    IntroWork *work = jobGetWork(job);
 
     switch (work->state) {
     case 0:

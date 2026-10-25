@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 struct BattleStageAccessoryPart {
     char name[30];
     u16 position[3];
@@ -21,7 +22,6 @@ extern void *g_mapAccessoryTable;
 BtlMainState *btlGetMainState(void);
 s32 FUN_002402c4(BtlMainState *state, const char *path);
 void FUN_002a09b4(const char *path, u32 mode);
-BattleStageNode *asdMdlManagerCreateSecondList(const char *path, u32 options);
 void *dataTableFileGetTable(void *file, u32 section);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 
@@ -43,7 +43,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
         stage->key0 = 1;
         stage->key1 = 1;
     }
-    stage->scene.nodes[0] = asdMdlManagerCreateSecondList(path, options);
+    stage->scene.nodes[0] = reinterpret_cast<BattleStageNode *>(asdMdlManagerCreateSecondList(path, options));
     void *table = dataTableFileGetTable(g_mapAccessoryTable, 0);
     const BattleStageAccessoryRecord *entries = (const BattleStageAccessoryRecord *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
@@ -60,7 +60,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
         const BattleStageAccessoryPart *part = &record->parts[index];
         if (part->name[0] != '0') {
             textFormatBuffer(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, part->name);
-            stage->scene.nodes[index + 1] = asdMdlManagerCreateSecondList(path, options);
+            stage->scene.nodes[index + 1] = reinterpret_cast<BattleStageNode *>(asdMdlManagerCreateSecondList(path, options));
             stage->scene.offsets[index + 1].x = (f32)part->position[0];
             stage->scene.offsets[index + 1].y = (f32)part->position[1];
             stage->scene.offsets[index + 1].z = (f32)part->position[2];

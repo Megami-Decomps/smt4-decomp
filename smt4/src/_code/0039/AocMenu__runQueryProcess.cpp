@@ -1,3 +1,4 @@
+#include "util/FUN_00233fcc.h"
 /* NON_MATCHING: content-menu update with a second query handler (kind 4) and the 0x66/0x67 result tails; written like _ZN7AocMenu17pollContentStatusEv, retail also copies the polled result through two stack temporaries before the checks (20 more rows) */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
@@ -52,7 +53,6 @@ extern "C" {
 extern AocSlotTable *g_aocMain;
 
 void FUN_00233e70(AocQueryMenu *menu, s32 first, s32 second);
-AocQueryHandler *FUN_00233fcc(u8 *storage, s32 kind);
 void timeInitializeActiveState(AocStatusResult *result);
 void FUN_00234124(AocQueryMenu *menu, AocStatusResult *result);
 s32 strIsEmpty(const AocStatusResult *result);
@@ -106,7 +106,7 @@ void AocMenu::runQueryProcess()
         return;
     }
     case 0: {
-        AocQueryHandler *created = FUN_00233fcc(menu->handlerStorage, 0);
+        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(FUN_00233fcc(menu->handlerStorage, 0));
         menu->step = 1;
         menu->handler = created;
         return;
@@ -114,7 +114,7 @@ void AocMenu::runQueryProcess()
     case 2: {
         if (menu->handler != NULL)
             delete menu->handler;
-        AocQueryHandler *created = FUN_00233fcc(menu->handlerStorage, 4);
+        AocQueryHandler *created = reinterpret_cast<AocQueryHandler *>(FUN_00233fcc(menu->handlerStorage, 4));
         menu->handler = created;
         s32 slot = flaggedValueHolderGetTotal(menu->slotHolder);
         ((AocQueryHandlerState *)created)->slotValue = aocMain->records[slot].value;

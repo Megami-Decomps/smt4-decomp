@@ -1,5 +1,6 @@
 /* NON_MATCHING: shared success epilogue is placed after the special-state test, adding a forward branch from the slot path. */
 #include "common.h"
+#include "shard/SaveWork.h"
 
 extern "C" {
 
@@ -12,12 +13,11 @@ typedef struct MapBlock {
 } MapBlock;
 
 extern int gameFlagIsSet(u32 flag);
-extern MapBlock *gameGetMapBlock(void);
 
 /* Classifies `id`: 3 when a required unlock flag is missing, 2 for id 0x18, 0 when its state is 3 or out of range, else 1. */
 u32 FUN_00288f78(s32 id)
 {
-    MapBlock *block = gameGetMapBlock();
+    MapBlock *block = reinterpret_cast<MapBlock *>(gameGetMapBlock());
 
     if ((id - 0x19 <= 5U || id == 0x66) && gameFlagIsSet(0x144) == 0) {
         return 3;
@@ -25,7 +25,7 @@ u32 FUN_00288f78(s32 id)
     if ((id - 0x1F <= 4U || id == 0x67) && gameFlagIsSet(0x15A) == 0) {
         return 3;
     }
-    if (gameGetMapBlock()->mode != 1) {
+    if (reinterpret_cast<MapBlock *>(gameGetMapBlock())->mode != 1) {
         if (id == 0x18) {
             return 2;
         }

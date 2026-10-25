@@ -8,7 +8,7 @@ extern "C" {
 extern TitleScene *g_titleScene;
 extern TitleGxPreset g_asdGxPresets[3];
 extern TitleGxPreset *DAT_004e3b4c;
-void FUN_002c39a4(TitleScene *scene);
+void renderCtxSelectStereoLayout(TitleScene *scene);
 void FUN_002c3a14(TitleScene *scene);
 void FUN_00343364(TitleScene *scene, const f32 *rectangle, u32 mode, u32 flags, f32 opacity);
 
@@ -26,7 +26,7 @@ void FUN_002f51bc(u32 mode, u32 flags, f32 x, f32 y, f32 width, f32 height, f32 
         preset = 2;
     g_titleScene->unk528 = preset;
     FUN_002c3a14(g_titleScene);
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_00343364(g_titleScene, rectangle, mode, flags, opacity);
     g_titleScene->unk528 = savedPreset;
 }

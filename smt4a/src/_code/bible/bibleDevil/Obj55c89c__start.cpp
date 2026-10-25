@@ -1,10 +1,10 @@
 /* NON_MATCHING: Retail instruction scheduling/register allocation differs (177 retail versus 150 compiled rows). */
 #include "classes/Obj55c89c.h"
 #include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
-int asdProcessCreateSimple(unsigned char *, int, int, int, unsigned char *, unsigned char *, int *);
 int taskCreateDraw(...);
 int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_0019de98(...);
@@ -90,7 +90,7 @@ void Obj55c89c::start()
   g_animatedPageSelection = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_004a2e94;
-  asdProcessCreateSimple(&LAB_004a2e94,4,0,0,&LAB_004a6e54,&LAB_004a6e7c,piVar1);
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_004a2e94), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_004a6e54), reinterpret_cast<AsdProcFunc>(&LAB_004a6e7c), reinterpret_cast<u32>(piVar1));
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_004a2eac;
   taskCreateDraw(&LAB_004a2eac,0x71,1,0,&LAB_004a6f64,0,g_animatedPageSelection,puVar2);

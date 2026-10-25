@@ -1,11 +1,10 @@
 /* NON_MATCHING: retail keeps the constant 1 in r7 (shared by the shift base and the return value); built reloads it. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern u32 scrGetArg(u32 index);
-extern void scrSetResult(s32 value);
 
 /* Script command: pushes 0 when a live, active unit of group argument 0 has flag bit argument 1 off, else 1; returns 1. */
 s32 scrCommBtlGroupFlagOffCheck(void)

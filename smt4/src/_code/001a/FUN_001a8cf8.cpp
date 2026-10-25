@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail spills the zero return value to the stack and hoists 0/5/100.0f into r9/sl/s19 with the loop index in r5 (built: r4/r8); the switch jump table and call sequence are identical */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "map/mapDepart.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 #define MAP_RANGE_ENTRY_COUNT 16
 
@@ -71,7 +72,6 @@ void FUN_002df824(s32 id, s32 flag);
 void FUN_002879dc(s32 a, s32 b, s32 c);
 void FUN_002878fc(s32 id);
 void asdMdlManagerMarkDestroy(s32 model);
-void asdMdlManagerDestroy(s32 model);
 
 /* Advances every active map-range entry: it triggers when the encounter source is close and
  * faces it, plays its sound and effect, then retires its model. */
@@ -139,7 +139,7 @@ u32 FUN_001a8cf8(void)
             break;
         case MAP_RANGE_DONE:
             if (entry->model != 0) {
-                asdMdlManagerDestroy(entry->model);
+                asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(entry->model));
                 entry->model = 0;
             }
             entry->active = 0;

@@ -72,7 +72,6 @@ void asdGxCommandListStartRecord(u32 *recorder);
 s32 FUN_0018c8c8(char *buffer, s32 size, s32 limit, const char *format, u32 value);
 void FUN_00186a64(u32 *recorder);
 void FUN_0018cf00(u32 renderer, u32 state, s32 arg);
-void FUN_00167eb0(u32 list);
 void nw_gfx_RenderContext_ResetState_2B7478(u32 renderer);
 void FUN_0018622c(u32 *recorder);
 
@@ -132,7 +131,7 @@ void FUN_0017721c(SceneDrawJob *job, u32 stateA, u32 stateB, s32 dumpCommands)
     FUN_00186a64(pass->recorder);
     if (pass->enabled != 0 && pass->sceneBuilt != 0) {
         FUN_0018cf00(renderer, stateA, 1);
-        FUN_00167eb0(pass->commandList);
+        FUN_00167eb0(reinterpret_cast<void *>(pass->commandList));
         nw_gfx_RenderContext_ResetState_2B7478(renderer);
     }
     FUN_0018cf00(renderer, stateA, 1);

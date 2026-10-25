@@ -4,6 +4,8 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
+#include "title/titleMain.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 namespace {
 // The opening's camera includes a final stereo parameter beyond the shared 0x508-byte prefix.
@@ -42,22 +44,18 @@ extern OpeningEventWork *g_event3dOpening;
 extern const char DAT_0052f680[]; // event/oc/oc_loop.bcenv
 extern const char DAT_0052f668[]; // event/oc/oc_loop.bccam
 extern const char DAT_0052f650[]; // event/oc/oc_start.bccam
-extern const char DAT_0052f638[]; // event/oc/oc_loop.bam
+extern char DAT_0052f638[]; // event/oc/oc_loop.bam
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void sysMemClear(void *data, u32 size);
 void asdCameraInitializeDefaults(CameraMatrixCache *camera, s32 mode);
 void uiSetFloatPair(CameraMatrixCache *camera, f32 first, f32 second);
 void FUN_0014f0dc(CameraMatrixCache *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_001523b8(CameraMatrixCache *camera, s32 mode, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
-void FUN_0036b824(CameraMatrixCache *camera);
 s32 FUN_002caea0(u32 handle);
 void event3dOpeningDestroy(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 s32 FUN_00162ea4(void);
 void asdEnvResetModelBank(const char *path, u32 flags);
 u32 FUN_00387350(const char *path);
-u32 asdMdlManagerCreateSecondList(const char *path, u32 group);
 
 u32 event3dOpeningCreate(void)
 {
@@ -86,9 +84,8 @@ u32 event3dOpeningCreate(void)
         FUN_0014f0dc(&work->camera.cache, &work->eye, &work->target, &work->up);
         FUN_001523b8(&work->camera.cache, 1, work->projection.fieldOfView,
             work->projection.nearClip, work->projection.farClip, work->projection.aspect);
-        FUN_0036b824(&work->camera.cache);
-        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("3dEventOpening Calc"),
-            4, 0, 0, FUN_002caea0, event3dOpeningDestroy, reinterpret_cast<u32>(work));
+        FUN_0036b824(reinterpret_cast<u32>(&work->camera.cache));
+        work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("3dEventOpening Calc"), 4, 0, 0, FUN_002caea0, event3dOpeningDestroy, reinterpret_cast<u32>(work));
         FUN_00162ea4();
         work->state = 1;
         work->substate = 0;
@@ -96,7 +93,7 @@ u32 event3dOpeningCreate(void)
         work->environment = 0;
         work->loopCamera = FUN_00387350(DAT_0052f668);
         work->startCamera = FUN_00387350(DAT_0052f650);
-        work->models = asdMdlManagerCreateSecondList(DAT_0052f638, 0x38);
+        work->models = reinterpret_cast<u32>(asdMdlManagerCreateSecondList(DAT_0052f638, 0x38));
         work->active = 1;
     }
     return g_event3dOpening->job;

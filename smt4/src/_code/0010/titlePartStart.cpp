@@ -23,7 +23,7 @@ typedef struct Work00109f40 {
 } Work00109f40;
 
 Work00109f40 *jobGetWork(void);
-void FUN_002c39a4(u32 scene);
+void renderCtxSelectStereoLayout(u32 scene);
 u8 FUN_002bfadc(s32 mode, Canvas00109f40 *canvas);
 
 extern u32 g_titleScene; /* 0x44ea00 */
@@ -37,7 +37,7 @@ u32 titlePartStart(void)
     if (part->ready == 0 || part->started != 0) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     work->canvas->width = 0x200;
     work->canvas->height = 0x200;
     work->part.result = FUN_002bfadc(0, work->canvas);

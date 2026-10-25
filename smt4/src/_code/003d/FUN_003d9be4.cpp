@@ -1,5 +1,6 @@
 /* NON_MATCHING: effect-resource cleanup needs recovered C++ destructor interfaces for both resource fields; manager constructor _ZN9Obj4208d4C1Ev installs vtable address point 0x4208dc. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int textureCacheReleaseAll(void);
 int modelManagerReleaseSlots(int);
 int asdMdlManagerDestroy(int);
 int asdMemFree(void);
-int memClear(int, int);
 int FUN_003da890(int);
 
 typedef int romwright_code(...);
@@ -46,7 +46,7 @@ void FUN_003d9be4(int param_1)
   do {
     temp_v0 = param_1 + temp_v1 * 0x8c;
     *(unsigned char *)(temp_v0 + 0x25c0) = 0xff;
-    memClear(temp_v0 + 0x25c8,0x80);
+    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v0 + 0x25c8), 0x80));
     if (*(int *)(temp_v0 + 0x25c4) != 0) {
       asdMemFree();
       *(unsigned int *)(temp_v0 + 0x25c4) = 0;

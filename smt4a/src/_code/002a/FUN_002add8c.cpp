@@ -7,7 +7,7 @@ void sysPlaySe(s32 sound);
 u32 FUN_002f3bc4(SlotTableEntry *record, s32 index, s32 source);
 void FUN_0032d0c8(s32 first, s32 second, u16 id, const SlotTableEntry *record);
 void FUN_00331380(s32 panel);
-s32 partyPanelIsActive(void);
+bool partyPanelIsActive(void);
 extern void *g_camp;
 
 void FUN_002add8c(void)

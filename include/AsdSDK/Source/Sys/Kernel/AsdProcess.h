@@ -93,4 +93,8 @@ typedef struct AsdProcessState {
     /* 0x14 */ u32 nextId;
 } AsdProcessState;
 
+extern "C" {
+u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
+}
+
 #endif

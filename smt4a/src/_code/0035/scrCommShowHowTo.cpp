@@ -2,6 +2,7 @@
 #include "shard/W5_W5Match6_CallbackController.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/DataTableSections.h"
 
 struct HowToWork {
     u32 job;
@@ -25,7 +26,6 @@ u32 scrGetArg(u32 index);
 u32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, s32 flags);
 void FUN_00348d7c(s32 id);
-void dataTableFree(u32 table);
 void ifTouchRegionRemove();
 void asdMemFreeSlot(void **slot);
 void asdMemFree(void *buffer);

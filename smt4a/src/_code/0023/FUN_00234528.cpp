@@ -1,11 +1,11 @@
 /* NON_MATCHING: local label snapshot and format buffer have different frame placement; category/state-store scheduling differs. */
 #include "common.h"
+#include "util/CalleeContracts.h"
 struct PopupSubstitutionNames { const char *names[12]; };
 struct PopupSelectedUnit { u8 prefix[0x12C]; u16 id; };
 extern "C" {
 extern void *g_popupState;
 extern PopupSubstitutionNames DAT_00531a98;
-void FUN_00152f44(void);
 PopupSelectedUnit *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: The message request uses one subobject pointer instead of retail's separately cached large-offset field addresses. */
 #include "battle/btlUI.h"
+#include "gamedata/SaveLoadProcess.h"
 
 namespace {
 struct BattleMessageRequest {
@@ -16,7 +17,6 @@ extern BtlUiGlobals g_btlUi;
 const char *dataTable0BFindById(u32 id);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_001ecb54(s32 id);
-void comWinSetText(const char *text);
 void communicationBeginTransition(s32 mode);
 
 /* Initializes a battle message request and begins displaying its selected text. */
@@ -32,7 +32,7 @@ void FUN_003ae06c(u32 unused, s32 textId, u32 parameter)
     text[0] = '\0';
     textFormatBuffer(text, "%s", dataTable0BFindById(static_cast<u16>(request->textId)));
     FUN_001ecb54(static_cast<s16>(textId));
-    comWinSetText(text);
+    comWinSetText(reinterpret_cast<const u8*>(text));
     communicationBeginTransition(0);
 }
 }

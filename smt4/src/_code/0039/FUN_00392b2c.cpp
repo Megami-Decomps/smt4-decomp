@@ -10,7 +10,7 @@ extern RenderCtx* g_titleScene;
 
 void FUN_002bed3c(void);
 void efctSetSpeed(f32 speed);
-void FUN_002c39a4(RenderCtx* scene);
+void renderCtxSelectStereoLayout(RenderCtx* scene);
 s32 FUN_002c5d80(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
@@ -27,7 +27,7 @@ void FUN_00392b2c(AocMenu* screen)
     if ((s32)screen->step <= 0) return;
     FUN_002bed3c();
     efctSetSpeed(1.0f);
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
     s32 x = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.38f);

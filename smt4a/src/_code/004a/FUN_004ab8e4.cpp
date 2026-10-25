@@ -1,10 +1,10 @@
 /* NON_MATCHING: compiler removes the nonzero portrait guard and uses slot-relative addressing. */
 #include "battle/btlUI.h"
 #include "battle/PortraitPanel.h"
+#include "util/CalleeContracts.h"
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 void sysMemClear(void *memory, u32 size);
-s32 devilIsTextureLoaded(s16 portrait, s32 kind);
 void FUN_00371c3c(s16 portrait, s32 kind);
 BattlePortraitLayout *FUN_001834a4(u32 table, u32 index);
 

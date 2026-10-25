@@ -1,6 +1,7 @@
 /* NON_MATCHING: register numbering only: after the two slot arrays retail puts the constant 0x100 in r7 and 10 in r6, armcc here uses r6 and r7 (same instructions and order otherwise). */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlConfig.h"
 #include "shard/S1Light.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 extern void *DAT_00471c40;
@@ -12,8 +13,6 @@ extern LightCount g_asdLightCount[2];
 void *asdMemoryGetDefaultAllocator(void);
 void *FUN_00111724(void *allocator, const AsdModelSlotConfig *config);
 void *FUN_001113b0(void *allocator, const AsdModelLimits *limits);
-u32 asdGxCommandListCreate(void);
-u32 asdGxCommandListAllocBlock(void);
 
 // Set up the model system: the default allocator, the two slot arrays, the limits table and the
 // per-scene command lists.
@@ -52,8 +51,8 @@ void FUN_00105a10(const AsdModelSettings *settings)
 
     for (s32 i = 0; i < 2; i++) {
         LightCount *scene = &g_asdLightCount[i];
-        scene->render.context = asdGxCommandListCreate();
-        scene->render.unk0c = asdGxCommandListCreate();
+        scene->render.context = reinterpret_cast<u32>(asdGxCommandListCreate());
+        scene->render.unk0c = reinterpret_cast<u32>(asdGxCommandListCreate());
         scene->render.buffer = (LightCommandBuffer *)asdGxCommandListAllocBlock();
     }
 }

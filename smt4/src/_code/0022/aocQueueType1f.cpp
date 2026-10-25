@@ -1,5 +1,6 @@
 /* Matches with -O1 (requested): the add-on content code was built at a lower optimisation level. */
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct AocRequest {
 
 extern u32 g_aocDisplay;
 
-extern void memClear(void *block, s32 size);
 extern s32 FUN_002a6e7c(u32 context, s32 kind, u32 arg, AocRequest *request);
 extern void aocDisplayQueueRecord(u32 display, AocRequest *request, u32 arg3, u32 arg2, s32 a, s32 mode, s32 b);
 

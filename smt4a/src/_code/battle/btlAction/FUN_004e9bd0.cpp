@@ -1,5 +1,6 @@
 /* NON_MATCHING: register assignment and the 64-bit target mask tests differ from retail (227 vs 231 rows); the skill usability checks are the same as smt4 FUN_002277d4's. */
 #include "common.h"
+#include "bible/bibleAnalyze.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ extern u64 g_btlTargetableMask;
 s32 FUN_0026264c(u16 recordId);
 s32 gameProgressIsAdvanced(void);
 s32 valueAtF0IsReady(SkillOwner *owner);
-u16 FUN_004c3a10(u8 category);
 s32 FUN_004c4604(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 out[8]);
 s32 FUN_004bfcfc(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c, u32 d);
 

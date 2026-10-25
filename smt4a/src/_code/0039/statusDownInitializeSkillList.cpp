@@ -1,5 +1,6 @@
 /* NON_MATCHING: menu-owned slot copies and parent-relative selector setup match; final state/phase reset uses two stores instead of retail's paired stm. */
 #include "status/StatusDown.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct StatusSkillSource {
     u8 unk00[0x34];
@@ -47,7 +48,6 @@ static inline void copyStatusSkillSlots(StatusSkillMenu *menu,
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
-StatusSkillSource *gameGetPlayerData();
 StatusSkillSource *slotRecordFindById(u16 id);
 s32 countUnlockedSlots();
 s32 getUnlockedSlotCount();
@@ -84,7 +84,7 @@ void statusDownInitializeSkillList()
     menu->source = NULL;
     FUN_002c7e3c();
     if (screen->selectedUnit <= 0) {
-        const StatusSkillSource *source = gameGetPlayerData();
+        const StatusSkillSource *source = reinterpret_cast<StatusSkillSource *>(gameGetPlayerData());
         s32 count = countUnlockedSlots();
         menu->count = count;
         copyStatusSkillSlots(menu, source, count);

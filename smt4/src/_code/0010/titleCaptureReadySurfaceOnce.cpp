@@ -29,7 +29,7 @@ extern u32 g_titleScene;
 
 s32 surfaceCopy(Surface *dest, Surface *src);
 s32 FUN_002bfadc(s32 arg, Surface *surface);
-s32 FUN_002c39a4(u32 scene);
+s32 renderCtxSelectStereoLayout(u32 scene);
 TitleWork *jobGetWork(u32 job);
 
 /* Title job step: once active and ready, renders the scene into the surface at half size and marks it captured. */
@@ -47,7 +47,7 @@ s32 titleCaptureReadySurfaceOnce(u32 job)
     if (state->ready == 0) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     work->surface->width = 0x200;
     work->surface->height = 0x200;
     work->state.unk62 = FUN_002bfadc(0, work->surface);

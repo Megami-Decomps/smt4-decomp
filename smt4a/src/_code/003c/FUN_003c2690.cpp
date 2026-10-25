@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: efctSetSpeed. */
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001834a4. */
 /* Supplied declaration required: pairSetHalves. */
 /* Supplied declaration required: jobGetScalarValue. */
@@ -105,7 +105,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
                          ,(int)(short)(((*(short *)(temp_v3 + 10) + temp_v0) - (short)param_4) -
                                       *(short *)(temp_v4 + 10)));
             temp_v6 = g_renderCtx;
-            temp_v3 = packNibblesAndByte(6,1,0);
+            temp_v3 = packNibblesAndByte(6, 1, 0);
             piVar9 = (int *)(temp_v6 + 0x12b8);
             temp_v4 = piVar9[*piVar9 + 2];
             piVar9[*piVar9 + 2] = temp_v3;
@@ -115,7 +115,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
             }
             fadeObjectResetIfActive(temp_v2);
             temp_v6 = g_renderCtx;
-            temp_v2 = packNibblesAndByte(6,7,0);
+            temp_v2 = packNibblesAndByte(6, 7, 0);
             piVar9 = (int *)(temp_v6 + 0x12b8);
             temp_v3 = piVar9[*piVar9 + 2];
             piVar9[*piVar9 + 2] = temp_v2;
@@ -134,7 +134,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
         pairSetHalves(temp_v6,(int)(short)(*(short *)(temp_v3 + 8) + temp_v1),
                      (int)(short)(*(short *)(temp_v3 + 10) + temp_v0));
         temp_v3 = g_renderCtx;
-        temp_v4 = packNibblesAndByte(6,1,0);
+        temp_v4 = packNibblesAndByte(6, 1, 0);
         piVar9 = (int *)(temp_v3 + 0x12b8);
         temp_v5 = piVar9[*piVar9 + 2];
         piVar9[*piVar9 + 2] = temp_v4;
@@ -144,7 +144,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
         }
         fadeObjectResetIfActive(temp_v6);
         temp_v6 = g_renderCtx;
-        temp_v3 = packNibblesAndByte(6,7,0);
+        temp_v3 = packNibblesAndByte(6, 7, 0);
         piVar9 = (int *)(temp_v6 + 0x12b8);
         temp_v4 = piVar9[*piVar9 + 2];
         piVar9[*piVar9 + 2] = temp_v3;
@@ -157,7 +157,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
         pairSetHalves(temp_v2,(int)(short)((*(short *)(temp_v6 + 8) + temp_v1) - *(short *)(temp_v3 + 8)),
                      (int)(short)((*(short *)(temp_v6 + 10) + temp_v0) - *(short *)(temp_v3 + 10)));
         temp_v6 = g_renderCtx;
-        temp_v3 = packNibblesAndByte(6,1,0);
+        temp_v3 = packNibblesAndByte(6, 1, 0);
         piVar9 = (int *)(temp_v6 + 0x12b8);
         temp_v4 = piVar9[*piVar9 + 2];
         piVar9[*piVar9 + 2] = temp_v3;
@@ -167,7 +167,7 @@ void FUN_003c2690(int param_1,int param_2,int param_3,int param_4)
         }
         fadeObjectResetIfActive(temp_v2);
         temp_v6 = g_renderCtx;
-        temp_v2 = packNibblesAndByte(6,7,0);
+        temp_v2 = packNibblesAndByte(6, 7, 0);
         piVar9 = (int *)(temp_v6 + 0x12b8);
         temp_v3 = piVar9[*piVar9 + 2];
         piVar9[*piVar9 + 2] = temp_v2;

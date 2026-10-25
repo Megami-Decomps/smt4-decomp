@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "shard/X14_BtlUiClose.h"
 
 extern "C" {
 

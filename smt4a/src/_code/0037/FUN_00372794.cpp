@@ -1,5 +1,6 @@
 /* NON_MATCHING: registers and logic match, but armcc places the playerHasFlagBit and btlMainGetUnk14 calls inline; retail moves both to out-of-line blocks after the return. */
 #include "common.h"
+#include "mapnavi/naviMain.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct SkillMenuWork {
 
 SkillUser *gameGetSlotRecord(s32 slot);
 SkillUser *btlMainGetUnk14(void);
-s32 playerHasFlagBit(u32 bit);
 s32 bitsAt60Test(SkillUser *user, u32 bit);
 SkillTableEntry *dataTable04FindById(s32 id);
 s32 FUN_004bd098(SkillUser *user, s32 id);

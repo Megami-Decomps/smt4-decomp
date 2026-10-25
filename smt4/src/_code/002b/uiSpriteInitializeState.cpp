@@ -1,7 +1,7 @@
 #include "ui/UiSpriteState.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
-void memClear(void *memory, u32 size);
 
 /* Initializes the sprite state and its five source-dependent channels. */
 void uiSpriteInitializeState(UiSpriteState *sprite, u32 value0, u32 value1, u32 value2, UiSpriteSource *source, u16 id, f32 value)

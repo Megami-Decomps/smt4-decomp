@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int timerStart(...);
 int FUN_002bd954(...);
 int spriteStartAnimationByIndex(...);
 
-int memClear(int, int);
 int FUN_002eb76c(...);
 int mapIfRequestResource(int);
 int drawParameterBlockClear(int);
@@ -87,7 +87,7 @@ void FUN_003b7b58(int param_1)
   asdLoadFileAsyncSimple("battle/Result.bf",(unsigned int *)(param_1 + 0x3564),0);
   asdLoadFileAsyncSimple("battle/ResultMsg.mbm",(unsigned int *)(param_1 + 0x356c),0);
   asdLoadFileAsyncSimple("battle/DevilLvUp.bf",(unsigned int *)(param_1 + 0x3570),0);
-  memClear(param_1 + 0x35b4,100);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_1 + 0x35b4), 100));
   *(unsigned int *)(param_1 + 0x3618) = 0;
   *(unsigned int *)(param_1 + 0x361c) = 0;
   *(unsigned int *)(param_1 + 0x3620) = 0;

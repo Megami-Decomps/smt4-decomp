@@ -1,5 +1,7 @@
+#include "util/FUN_00233fcc.h"
 /* NON_MATCHING: retail unpacks the pending event with an ldm/stm copy into a second 20-byte temp, keeps the state constants in r6/r7/r8 and orders the switch tests as a compare ladder (frame 72 bytes here 52); the state machine, calls and stored fields are the same. */
 #include "classes/AocMenu.h"
+#include "util/FUN_00233fcc.h"
 #include "classes/Obj422594.h"
 
 /* What the window operation reports (five words; the first byte is the result code). */
@@ -43,7 +45,6 @@ void timeInitializeActiveState(InputEvent *event);
 s32 strIsEmpty(InputEvent *event);
 s32 byteIsAtLeast100(InputEvent *event);
 void jobStopAndClearFlags(u32 *job);
-void FUN_00233fcc(void *operation, s32 mode);
 void FUN_00233db8(u32 *job, s32 mode);
 void FUN_0023392c(u32 *job, s32 a, s32 b);
 void FUN_00234124(u32 *job, InputEvent *event);

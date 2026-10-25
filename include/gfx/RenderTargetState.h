@@ -68,4 +68,13 @@ typedef char RenderTargetClearOffsetsCheck[
     offsetof(RenderTargetSystemView, clear.depth) == 0x1A4 &&
     offsetof(RenderTargetSystemView, clear.mask) == 0x1B0 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 osVirtToPhysAddress(u32 address);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

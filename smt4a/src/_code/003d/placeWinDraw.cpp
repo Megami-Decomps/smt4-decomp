@@ -1,5 +1,6 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 12 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 struct PlaceWindowPosition {
     f32 x, y;
@@ -23,8 +24,6 @@ struct PlaceWindow {
 
 extern "C" {
 extern PlaceWindow *g_placeWin;
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *);
 s32 FUN_001692ac(s32 mode, s32 flags);
 s32 vec2GetXInt(const PlaceWindowPosition *);
 s32 vec2GetYInt(const PlaceWindowPosition *);

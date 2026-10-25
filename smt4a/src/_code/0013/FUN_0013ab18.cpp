@@ -42,7 +42,7 @@ extern const char DAT_0053621c[8];
 s32 FUN_0013ebe8(u32 handle, u32 id, u32 volume, u32 param);
 u32 FUN_00140924(s32 handle, s32 fadeTime);
 s32 FUN_001414d4(u32 handle, s32 direction, u32 fadeTime);
-const char *FUN_001418b8(u32 id);
+const char *soundPlayIfArchiveAvailable(u32 id);
 u32 asdSoundHandleListFind(u32 handle);
 s32 jyoucyuGetTableEntry(u32 index);
 s32 rt_memcmp(const void *a, const void *b, u32 size);
@@ -135,7 +135,7 @@ void FUN_0013ab18(void)
                     }
                     if (!waiting) {
                         u32 volume = g_resourceSharedFlag.flag;
-                        const char *name = FUN_001418b8(channel->soundId);
+                        const char *name = soundPlayIfArchiveAvailable(channel->soundId);
                         u32 id = channel->soundId;
                         if (rt_memcmp(name, DAT_0053621c, 8) == 0 &&
                             id != 0x100008B && id != 0x100008C && id != 0x100008D &&

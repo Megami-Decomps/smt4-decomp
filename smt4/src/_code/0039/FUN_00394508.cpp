@@ -2,6 +2,7 @@
 #include "map/MapJumpTransition.h"
 #include "map/mapDepart.h"
 #include "addon/aocMain.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 namespace {
 /* The transition-completed flag lies past the shared controller prefix. */
@@ -11,9 +12,8 @@ extern "C" {
 extern GameState g_gameState;
 const MapJumpRequest *gameJumpRequestGet(void);
 s32 gameStateIsFlagSetAndLarge(void);
-s32 FUN_002080e8(void);
+u32 FUN_002080e8(void);
 s32 FUN_00287304(void);
-void asdSequenceRequest(u32 sequence, const void *parameters, u32 bytes);
 void FUN_002a03d8(s32 screen, s32 frames);
 void mapDepartSetTarget(s32 map, s32 area, s32 object);
 void gameJumpRequestClear(void);

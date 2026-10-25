@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct BattleState {
     /* 0x1FC0 */ BattleUnit *units;
 } BattleState;
 
-s32 scrSetResult(s32 value);
 BattleState *btlGetMainState(void);
 s32 scrGetArg(s32 index);
 

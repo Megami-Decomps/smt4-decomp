@@ -3,6 +3,8 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
+#include "mapnavi/naviMain.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 
@@ -15,7 +17,7 @@ int FUN_0026cbb8(...);
 int FUN_002a5e7c(...);
 void statusReplaceSkills(const u16 *skills, u8 count);
 int FUN_0037dfb0(...);
-int FUN_0037e078(void);
+int statusDownEnterState3(void);
 int buttonHelpSetMode(...);
 int stateHolderEnterState7(void);
 int statusDownEnterState11(...);
@@ -215,13 +217,11 @@ extern float __aeabi_ul2f(int, unsigned int);
 extern int FUN_0022e750(void);
 /* Supplied declaration required: FUN_0022e774. */
 /* Supplied declaration required: FUN_0023acdc. */
-extern int FUN_0023b3d0(void);
 /* Supplied declaration required: FUN_0023c384. */
 /* Supplied declaration required: FUN_00240674. */
 extern int *FUN_0025e684(int);
 extern int dialogIsActive(void);
 extern int messageMainIsIdle(void);
-extern int FUN_0026c3a0(void);
 /* Supplied declaration required: statusCommitSelectedSkills. */
 /* Supplied declaration required: FUN_0026cbb8. */
 /* Supplied declaration required: FUN_00275bc8. */
@@ -278,7 +278,7 @@ extern unsigned int dataTable0aSub0GetValueById(unsigned short);
 extern int stateHolderStateIs8Or10(void);
 extern int FUN_0037df64(void);
 /* Supplied declaration required: FUN_0037dfb0. */
-/* Supplied declaration required: FUN_0037e078. */
+/* Supplied declaration required: statusDownEnterState3. */
 /* Supplied declaration required: FUN_0037e12c. */
 /* Supplied declaration required: FUN_00387240. */
 /* Supplied declaration required: buttonHelpSetMode. */
@@ -302,7 +302,6 @@ extern int statusDownGetCursorPosition(void);
 /* Supplied declaration required: roundObjFinish. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
-extern int playerHasFlagBit(unsigned int);
 /* Supplied declaration required: engineGetFloatTableValue. */
 /* Supplied declaration required: actorIsActive. */
 extern int partySlotMatchesSelected(unsigned int);
@@ -1856,7 +1855,7 @@ joined_r0x002075ac:
           temp_v7 = 6;
         }
         else {
-          FUN_0037e078();
+          statusDownEnterState3();
           temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
         }
         *(int *)(temp_v6 + 0x436c) = temp_v7;

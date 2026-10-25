@@ -2,6 +2,7 @@
 #include "addon/aocMain.h"
 #include "classes/AocMenu.h"
 #include "classes/WindowOperation.h"
+#include "util/AocClearDisplayFlag.h"
 
 struct JobOwner;
 struct JobFlagsWork;
@@ -50,7 +51,6 @@ u32 jobIsValid(u32 job);
 u32 jobStop(u32 job, s32 mode);
 void ifTouchRegionRemove();
 void FUN_0016ccb4(u32 *queryResult);
-void aocClearDisplayFlag(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 
 // Runs the scene one frame. While the content is released (states 4..14 with the add-on event signalled) the scene

@@ -1,7 +1,10 @@
+#include "gfx/StereoParallax.h"
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 170 rows); retail keeps the panel's 0x400 flags base in r7 and uses a larger callee-saved set */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
 #include "battle/BtlMainAccess.h"
+#include "util/PackNibbles.h"
 
 struct DrawRing {
     s32 index;              // 0x00
@@ -42,10 +45,8 @@ extern "C" {
 extern RenderCtx* g_renderCtx;
 extern u64 DAT_0057a9b0;
 
-f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void FUN_001634b4(void* sprite, f32 offset);
 void efctSetSpeed(f32 speed);
-s32 packNibblesAndByte(u32 a, u32 b, u32 c);
 void FUN_003b21a4(ResultPanel* panel);
 
 static void setDrawState(s32 value)

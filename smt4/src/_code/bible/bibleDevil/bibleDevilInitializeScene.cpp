@@ -38,7 +38,6 @@ extern "C" {
 extern BibleDevilTasks DAT_0043d9c8;
 void entryTableClear(void *table);
 void menuSetModeAndResetTransitions(s32);
-u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, BibleDevilTaskWork *, u32);
 s32 uiCallbackUpdate(u32);
 void uiCallbackFree(u32);
@@ -69,7 +68,7 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     BibleDevilTaskWork *work = (BibleDevilTaskWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(BibleDevilTaskWork), 1);
     DAT_0043d9c8.work = work;
     work->screen = screen;
-    fields->calculate = asdProcessCreateSimple("BIBLE DEVIL CALC", 2, 0, 0, uiCallbackUpdate, uiCallbackFree, work);
+    fields->calculate = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BIBLE DEVIL CALC"), 2, 0, 0, uiCallbackUpdate, uiCallbackFree, reinterpret_cast<u32>(work));
     fields->drawUpper = taskCreateDraw("BIBLE DEVIL UP", 111, 1, 0, FUN_003ac738, NULL, DAT_0043d9c8.work, fields->calculate);
     fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, btlDevilListFinishDrawCallback, NULL, DAT_0043d9c8.work, fields->calculate);
     rectangleInitializeSelection(fields->rectangle, 320, 0, 29);

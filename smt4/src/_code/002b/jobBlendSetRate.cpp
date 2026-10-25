@@ -3,7 +3,7 @@
 // Select the blend rate, keeping the three special job kinds at full rate.
 extern "C" void jobBlendSetRate(u32 job, s32 fullRate)
 {
-    JobBlendWork* work = jobGetWork(job);
+    JobBlendWork* work = reinterpret_cast<JobBlendWork *>(jobGetWork(job));
     if (fullRate != 0) {
         work->blend = 1.0f;
     } else {

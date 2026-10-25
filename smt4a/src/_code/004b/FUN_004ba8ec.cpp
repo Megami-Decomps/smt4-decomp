@@ -2,6 +2,7 @@
 #include "shard/S2UiTexLoader.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/Shard004A.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ extern "C" {
 #define UI_TEX_NONE (-1)
 
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
-extern s32 flaggedValueHolderGetTotal(UiTexLoader *loader);
 extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);
 extern s32 FUN_00163aa4(UiTexSprite *sprite, f32 time);
 extern void entryDispatchUpdate(void *anim, s32 count);
@@ -28,7 +28,7 @@ void FUN_004ba8ec(UiTexLoader *loader)
     }
 
     if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState(sprite) != 0) {
-        s32 entryFrame = loader->entries[flaggedValueHolderGetTotal(loader)]->frame + 1;
+        s32 entryFrame = loader->entries[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(loader))]->frame + 1;
         s32 keyframe = loader->next.keyframe;
         if (keyframe == entryFrame) {
             loader->pending.node = loader->next.node;

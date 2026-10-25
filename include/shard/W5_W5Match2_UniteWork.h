@@ -304,4 +304,22 @@ typedef char UniteWorkResultBuildAOffsets[
     offsetof(UniteWork, inheritanceA.skills) == 0x8B70 &&
     sizeof(UniteWork) == 0x9454 ? 1 : -1];
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u32 FUN_0029e93c(const void *object);
+#ifdef __cplusplus
+}
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+u16 dataTableGetEntry0102Value(u32 index);
+#ifdef __cplusplus
+}
+#endif
+
 #endif

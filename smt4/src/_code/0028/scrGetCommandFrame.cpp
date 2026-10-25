@@ -1,5 +1,6 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 

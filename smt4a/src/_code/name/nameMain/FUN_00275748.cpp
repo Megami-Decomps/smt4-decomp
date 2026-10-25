@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps `mode` live across the process creation (a dead `cmp r5,#0; ldrne r1,[r5]` read of *mode after it) and places the default-form branch out of line; the rest matches. */
 #include "AsdSDK/AsdDebug.h"
 #include "name/NameEntryWorkA.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern NameGlobals g_name;
@@ -12,8 +13,6 @@ extern const char DAT_00532f8c[];
 void *asdMemoryAllocTracked(u32 heap, u32 type, u32 flags, u32 bytes, u32 clear);
 void stateSetterConstruct(NameFormStateA *form, s32 mode);
 void stateSetterConstructDefault(NameFormStateA *form);
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, u32 argument, void *update, void *teardown,
-                           void *work);
 u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 argument, void *draw, void *unused, void *work,
                    u32 parent);
 u32 nameEntryUpdateTask(void);
@@ -32,7 +31,7 @@ void FUN_00275748(const u32 *mode, u32 unused)
     } else {
         stateSetterConstructDefault(&work->form);
     }
-    work->state.task = asdProcessCreateSimple(DAT_00532f70, 4, 0, 0, (void *)nameEntryUpdateTask, (void *)FUN_00316108, g_name.work);
+    work->state.task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00532f70), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)nameEntryUpdateTask), reinterpret_cast<AsdProcFunc>((void *)FUN_00316108), reinterpret_cast<u32>(g_name.work));
     taskCreateDraw(DAT_00532f80, 0x85, 1, 0, (void *)nameDrawIfVisible, 0, g_name.work, work->state.task);
     taskCreateDraw(DAT_00532f80, 0xE1, 1, 0, (void *)nameDrawIfVisible, 0, g_name.work, work->state.task);
     work->state.unk08 = taskCreateDraw(DAT_00532f8c, 0xEA, 1, 0, (void *)nameFormUpdateCallback, 0, g_name.work, work->state.task);

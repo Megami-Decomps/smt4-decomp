@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
 int FUN_0014afd0(...);
 int jobStop(...);
 int eventQueueAddUnique(int);
-int aocLoadTextureNode(unsigned int, unsigned int, unsigned int, int);
 int asdTMTexTableReleaseNode(...);
 int aocHandleButtons(int, int);
 int VectorSignedToFloat(...);
@@ -79,7 +79,6 @@ extern int FUN_00184964(unsigned int, unsigned int);
 /* Supplied declaration required: aocLoadTextureNode. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
-extern int FUN_00203d74(void);
 /* Supplied declaration required: aocHandleButtons. */
 extern int FUN_003fce08(unsigned int, unsigned int);
 extern int nkdwLoaderParse(unsigned int);
@@ -128,8 +127,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
       temp_v2 = aocRunByName(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
                            1);
       if (temp_v2 != 0) {
-        aocLoadTextureNode(g_aocSystem,*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44),
-                     0x10000);
+        aocLoadTextureNode(g_aocSystem, *(unsigned int *)(temp_v1 + 0x40), *(unsigned int *)(temp_v1 + 0x44), 0x10000);
       }
       else {
         FUN_0014afd0(*(unsigned int *)(temp_v1 + 0x40),*(unsigned int *)(temp_v1 + 0x44));

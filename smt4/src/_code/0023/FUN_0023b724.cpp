@@ -1,5 +1,6 @@
 /* NON_MATCHING: native draw-packet constructor restores byte-only wideIndices initialization; saved first-index, buffer-size, and zero registers still differ. */
 #include "common.h"
+#include "gfx/RenderTargetState.h"
 
 struct ModelIndexDraw {
     u32 physicalAddress;
@@ -18,7 +19,6 @@ struct IndexedModelCommands {
 extern "C" {
 void *asdPrimAlloc(u32);
 void rt_memcpy(void *, const void *, u32);
-u32 osVirtToPhysAddress(const void *);
 void modelShaderSubmitCommands(IndexedModelCommands *, u32 *, const ModelIndexDraw *);
 }
 
@@ -27,7 +27,7 @@ extern "C" void FUN_0023b724(IndexedModelCommands *model, u32 unused, s32 first,
 {
     if ((model->flags & 0x100) != 0) {
         ModelIndexDraw draw;
-        draw.physicalAddress = osVirtToPhysAddress(model->indices + first);
+        draw.physicalAddress = osVirtToPhysAddress(reinterpret_cast<u32>(model->indices + first));
         draw.count = count;
         draw.wideIndices = 0;
         modelShaderSubmitCommands(model, model->shaderCommands, &draw);
@@ -36,7 +36,7 @@ extern "C" void FUN_0023b724(IndexedModelCommands *model, u32 unused, s32 first,
     ModelIndexDraw *draw = &model->indexDraw;
     void *indices = asdPrimAlloc(count * sizeof(u16));
     rt_memcpy(indices, model->indices + first, count * sizeof(u16));
-    draw->physicalAddress = osVirtToPhysAddress(indices);
+    draw->physicalAddress = osVirtToPhysAddress(reinterpret_cast<u32>(indices));
     draw->count = count;
     draw->wideIndices = 0;
     modelShaderSubmitCommands(model, model->shaderCommands, draw);

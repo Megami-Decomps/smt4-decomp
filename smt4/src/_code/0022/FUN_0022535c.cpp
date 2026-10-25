@@ -4,7 +4,7 @@
 extern "C" {
 extern BtlTalkBustUp *g_btlTalkBustUp;
 extern RenderCtx *g_titleScene;
-void FUN_002c39a4(RenderCtx *);
+void renderCtxSelectStereoLayout(RenderCtx *);
 s32 FUN_002c5d80(u32, u32);
 f32 renderCtxCalculateStereoParallax(RenderCtx *, f32);
 s32 aocJobIsValid(void);
@@ -19,7 +19,7 @@ u32 FUN_0022535c(void)
     BtlTalkBustUp *portrait = g_btlTalkBustUp;
     if (portrait == NULL)
         return 0;
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
     if (portrait->unk2F4 && portrait->state == 2) {
         s32 offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);

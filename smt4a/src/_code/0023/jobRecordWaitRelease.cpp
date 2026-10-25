@@ -1,8 +1,8 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-void asdOperatorDelete(void);
 s32 jobIsValid(u32 job);
 extern u32 *DAT_0057f678;
 
@@ -17,7 +17,7 @@ u32 jobRecordWaitRelease(void)
             return 0;
         }
         if (DAT_0057f678 != NULL) {
-            asdOperatorDelete();
+            asdOperatorDelete(DAT_0057f678);
             DAT_0057f678 = NULL;
         }
     }

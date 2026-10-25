@@ -10,3 +10,4 @@ s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 
 } /* extern "C" */
+

@@ -1,8 +1,8 @@
 /* NON_MATCHING: compiler emits sparse comparisons rather than the retail ten-way dispatch table. */
 #include "shard/GameModeFlags.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
-u8 *FUN_002a0d0c(void);
 
 // Test the stored enable byte for the four supported modes.
 u8 FUN_002240b4(u32 mode)

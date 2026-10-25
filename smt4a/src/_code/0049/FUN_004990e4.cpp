@@ -2,6 +2,7 @@
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
@@ -27,9 +28,7 @@ typedef struct HintWindow {
     /* 0x16058 */ u32 frame;
 } HintWindow;
 
-extern RenderCtxA *g_renderCtx;
 
-void FUN_00157558(RenderCtxA *ctx);
 void FUN_00183bb0(void);
 s32 FUN_001692ac(u32 kind, u32 arg);
 void shopMainDrawPairedJobs(HintWindow *window);

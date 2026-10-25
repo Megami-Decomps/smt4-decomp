@@ -1,13 +1,10 @@
-#include "common.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 
-/* A debug hook armlink removed (the jump to it became a nop). */
-__declspec(noreturn) __weak void FUN_002e59f8_hook(void *a, void *b, void *c);
-
-void FUN_002e59f8(void *a, void *b, void *c)
+void FUN_002e59f8(const void *source, void *destination, u32 bytes)
 {
-    FUN_002e59f8_hook(b, a, c);
+    rt_memcpy(destination, source, bytes);
 }
 
 } /* extern "C" */

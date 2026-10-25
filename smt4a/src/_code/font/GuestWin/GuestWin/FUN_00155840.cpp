@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00157558(int);
 int FUN_00162790(...);
 int dataTable25FindById(...);
 int efctSetSpeed(void);
@@ -30,11 +30,9 @@ typedef struct {
 } void_stack;
 
 extern int g_guestWin; /* 0x57f570 */
-extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00162790. */
 extern int infoWinHasValue(void);
 /* Supplied declaration required: dataTable25FindById. */
@@ -79,7 +77,7 @@ unsigned int FUN_00155840(void)
   if ((((*(int *)(g_guestWin + 8) != 0) && (temp_v1 = gameOptionsClassifyMode(), temp_v1 != 0)) && (temp_v1 != 1))
      && (temp_v1 = gameGetOptions(), *(short *)(temp_v1 + 0x62) != 0)) {
     FUN_00157558(g_renderCtx);
-    temp_v3 = g_renderCtx;
+    temp_v3 = (int)g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
     piVar10 = (int *)(temp_v3 + 0x1258);
     temp_v7 = *piVar10;
@@ -92,7 +90,7 @@ unsigned int FUN_00155840(void)
     }
     temp_v3 = vec2GetXInt(temp_v4 + 0x30);
     temp_v9 = 0.25f;
-    renderCtxCalculateStereoParallax(g_renderCtx);
+    renderCtxCalculateStereoParallax((int)g_renderCtx);
     temp_v4 = vec2GetYInt(temp_v4 + 0x30);
     efctSetSpeed();
     temp_v2 = FUN_001834a4(8,0xda);
@@ -100,7 +98,7 @@ unsigned int FUN_00155840(void)
     if (temp_v7 != 0) {
       temp_v2 = FUN_001834a4(8,0xdb);
     }
-    temp_v7 = g_renderCtx;
+    temp_v7 = (int)g_renderCtx;
     temp_v8 = temp_v3 + (int)temp_v9 + (int)*(short *)(temp_v2 + 8);
     temp_v4 = *(short *)(temp_v2 + 10) + temp_v4;
     temp_v3 = packNibblesAndByte(6,1,0);
@@ -112,7 +110,7 @@ unsigned int FUN_00155840(void)
       *(unsigned char *)(temp_v7 + 0x12d0) = 0;
     }
     FUN_001835b4(2,8,0xc9,temp_v8,temp_v4,0x15);
-    temp_v3 = g_renderCtx;
+    temp_v3 = (int)g_renderCtx;
     temp_v2 = packNibblesAndByte(6,7,0);
     piVar10 = (int *)(temp_v3 + 0x12b8);
     temp_v7 = piVar10[*piVar10 + 2];
@@ -155,8 +153,8 @@ unsigned int FUN_00155840(void)
     FUN_00162790(2,0xff,temp_v10);
     FUN_00183bb0();
     efctSetSpeed();
-    temp_v4 = g_renderCtx;
-    piVar10 = (int *)(g_renderCtx + 0x1258);
+    temp_v4 = (int)g_renderCtx;
+    piVar10 = (int *)((int)g_renderCtx + 0x1258);
     temp_v1 = *piVar10;
     temp_v3 = piVar10[temp_v1 + 2];
     *piVar10 = temp_v1 - 1;

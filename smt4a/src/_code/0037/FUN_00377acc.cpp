@@ -58,7 +58,7 @@ extern void *g_mapEnemy;
 extern void *g_handleRegistry;
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 Table00Record *dataTable00FindById(u32 id);
-s32 FUN_004bb870(s32 behavior);
+u16 FUN_004bb870(s32 index);
 
 static __inline EnemySelectionRecord *enemySelectionRecordForKind(u32 kind, s32 index)
 {

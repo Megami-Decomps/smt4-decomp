@@ -1,5 +1,6 @@
 /* NON_MATCHING: result/completion lifetimes and channel-base offsets match; loop index scratch registers and the progress LDR/VMOV versus VLDR/VMOV handoff differ. */
 #include "common.h"
+#include "camp/CampCec/CampCecView.h"
 
 struct OverlayFadeChannel {
     union { f32 value; s32 bits; } progress;
@@ -19,7 +20,6 @@ struct OverlayFadeWork {
 };
 extern "C" {
 u32 FUN_002e1c94(f32 *value, s32 duration, s32 frame, f32 start, f32 target);
-s32 overlayIsNotBusy();
 
 // Step both fade channels and finish the transition once its endpoint and overlay gate are ready.
 u32 FUN_0036ce70(OverlayFadeWork *work)

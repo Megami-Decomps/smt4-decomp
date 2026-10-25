@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only in the final bit update (retail: r1 holds the mask temp chain differently) */
 /* Sets or clears flag `id` in the global flag bit array; alias ids are first mapped to their canonical flag. */
 #include "common.h"
 
@@ -36,10 +35,12 @@ void FUN_00377158(s32 id, s32 set)
     } else if (id == 0xA6 || id == 0xA7) {
         id = 0xA4;
     }
+    s32 word = id / 32;
+    s32 bit = id % 32;
     if (set != 0) {
-        flags->bits[id / 32] |= 1 << (id % 32);
+        flags->bits[word] |= 1 << bit;
     } else {
-        flags->bits[id / 32] &= ~(1 << (id % 32));
+        flags->bits[word] &= ~(1 << bit);
     }
 }
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ s32 vec2GetXInt(CursorSprite *sprite);
 s32 vec2GetYInt(CursorSprite *sprite);
 void pointConvertToFloat(void *point, s32 x, s32 y);
 s32 FUN_0026c3a0(void);
-s32 FUN_002e19f8(void);
 s32 utilityReturnSuccess(void *object);
 void FUN_002c8538(s32 value);
 void FUN_0033449c(s32 value);

@@ -37,7 +37,7 @@ extern int DAT_0049fca0; /* 0x49fca0 */
 /* Supplied declaration required: mathInterpolatePackedTable. */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: FUN_002c1b64. */
-extern unsigned int FUN_002c1c0c(unsigned int, unsigned int);
+extern unsigned int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002e0460. */
@@ -183,7 +183,7 @@ unsigned int FUN_001fd9f4(void)
     }
     *(float *)(temp_v3 + 0xe8) = temp_v6;
     temp_v7 = *(unsigned int *)(temp_v3 + 0xe4);
-    temp_v2 = FUN_002c1c0c(0xe,2);
+    temp_v2 = asdTMTexTableGetNodeTexture(0xe,2);
     FUN_002c1b64(g_titleScene,temp_v2);
     temp_v1 = g_titleScene;
     temp_v3 = packNibblesAndByte(6,7,0);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation and store scheduling only: retail loads the cache base first and keeps the arguments in r5/sl/r8, stores the vptr and id with one stm and tests the allocation with cmp/mov r9; ours reaches the same stores with different registers and order */
 #include "classes/Obj557b08.h"
 #include <new>
+#include "quest_center/qcCtrl.h"
 
 /* The model cache: a word, then 16 entries. */
 struct ModelCache {
@@ -20,7 +21,6 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void FUN_003fc1b0(Obj557b08 *model, s32 id);
 void FUN_003fcd20(Obj557b08 *model);
-s32 FUN_004705ec(u32 system, s32 id, s32 flag);
 void FUN_00470b60(u32 system, s32 id, void **handle, const char *path);
 s32 FUN_00470b18(u32 system, s32 id, s32 flag);
 void FUN_004713ec(u32 system, s32 id, void **handle, const char *path);

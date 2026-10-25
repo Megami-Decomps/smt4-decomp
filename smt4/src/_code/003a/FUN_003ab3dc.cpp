@@ -30,7 +30,7 @@ void uiRectDrawAtBottomRight(void *render, s32 kind, s32 x, s32 y, s32 depth);
 void FUN_00231bcc(void *render, s32 sprite, s32 x, s32 y, s32 depth, s32 flags);
 s32 FUN_0029e924(void *cursor);
 s32 rangeLimitMin(void *cursor);
-s32 FUN_00240d5c(void *cursor);
+u32 flaggedEntryGetValueByState(void *cursor);
 s32 flaggedValueHolderGetTotal(void *cursor);
 void FUN_003abae8(SkillListRenderView *view, s32 row, s32 item, s32 selected, s32 depth);
 void FUN_00288e68(s32 id);
@@ -46,12 +46,12 @@ static __inline void drawSkillListContents(SkillListRenderView *view, s32 depth)
     s32 first = FUN_0029e924(&view->cursor);
     s32 count = rangeLimitMin(&view->cursor);
     for (s32 row = 0; row < count; ++row) {
-        if (view->state != 3 || FUN_00240d5c(&view->cursor) != row)
+        if (view->state != 3 || flaggedEntryGetValueByState(&view->cursor) != row)
             FUN_003abae8(view, row, first + row, 0, depth);
     }
     if (view->state == 3) {
         s32 item = flaggedValueHolderGetTotal(&view->cursor);
-        s32 row = FUN_00240d5c(&view->cursor);
+        s32 row = flaggedEntryGetValueByState(&view->cursor);
         FUN_003abae8(view, row, item, 1, depth + 1);
         SkillListRow *rows = view->rows;
         item = flaggedValueHolderGetTotal(&view->cursor);

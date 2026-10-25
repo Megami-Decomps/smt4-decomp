@@ -5,16 +5,16 @@
 
 extern "C" {
 extern QuaternionWorkspace DAT_004ea81c;
-f32 FUN_0024b830(u32 stream);
+f32 shiftRandomNextFraction(u32 stream);
 u32 randomAdvanceShiftRegister(u32 stream);
 
 void FUN_003024d0(EffObjectParticle *emitter, EffObjectParticleState *particle)
 {
     Vec3f direction;
     if (emitter->initialMotion.randomDirection) {
-        direction.x = (FUN_0024b830(0) - 0.5f) * 2.0f;
-        direction.y = (FUN_0024b830(0) - 0.5f) * 2.0f;
-        direction.z = (FUN_0024b830(0) - 0.5f) * 2.0f;
+        direction.x = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
+        direction.y = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
+        direction.z = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;
     } else {
         direction = emitter->initialMotion.direction;
     }
@@ -33,9 +33,9 @@ void FUN_003024d0(EffObjectParticle *emitter, EffObjectParticleState *particle)
         particle->motion.direction.y = 1.0f;
         particle->motion.direction.z = 0.0f;
     }
-    f32 speed = FUN_0024b830(0);
+    f32 speed = shiftRandomNextFraction(0);
     particle->motion.speed = ((1.0f - emitter->initialMotion.variance) + speed * emitter->initialMotion.variance) * emitter->initialMotion.speed;
-    particle->motion.angle = FUN_0024b830(0) * 6.2831855f;
+    particle->motion.angle = shiftRandomNextFraction(0) * 6.2831855f;
     if (emitter->initialMotion.faceMode == 1) {
         particle->motion.face = (s8)(randomAdvanceShiftRegister(0) % 6);
     } else if (emitter->initialMotion.faceMode == 2) {

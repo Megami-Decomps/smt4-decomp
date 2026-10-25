@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/ComputeCountLimit.h"
 
 extern "C" {
 

@@ -1,13 +1,13 @@
 /* NON_MATCHING: phase-two test direction and shared zero-return epilogue merging differ. */
 #include "map/mapDepart.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
+#include "util/ClearByte.h"
 
 extern "C" {
 extern MapDepartExtraA *DAT_00581280;
 extern void *g_handleRegistry;
 s32 flagPairCondition(s16, s16);
 void ptrListRemoveClearOwner(void *, u32);
-void clearByte(void *);
 s32 FUN_00295e54(s16, s16, u32);
 
 u32 FUN_0033e1d4(void)
@@ -58,7 +58,7 @@ u32 FUN_0033e1d4(void)
                     entry->handle = NULL;
                 }
                 if (entry->state) {
-                    clearByte(entry->state);
+                    clearByte(reinterpret_cast<u8 *>(entry->state));
                     entry->state = NULL;
                 }
                 entry->active = 0;

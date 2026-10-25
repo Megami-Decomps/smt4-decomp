@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/2dEvent/2dEventTex.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct Obj37dab0 {
 extern Obj37dab0 *g_partyPanel;
 
 __weak void *FUN_0037dab0_hook(void *p);
-u8 *FUN_0026140c(void);
 void scrScriptProcessDestroy(void);
 void asdMemFree(void *p);
 void asdOperatorDelete(void *p);

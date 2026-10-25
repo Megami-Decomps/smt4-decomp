@@ -1,4 +1,5 @@
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ Entry003004fc *btlMainFindEntryByListedId(void *state, s32 id);
 s32 gameGetUnitRecord(s32 index);
 s32 FUN_0033b960(s32 value);
 void gameSavedFlagSet(s16 value);
-void scrSetResult(s32 value);
 
 /* Script command: looks up the value for script argument 0 (a battle entry below 0x6d, a unit record from there on), converts it
  * with FUN_0033b960, calls gameSavedFlagSet when the result is positive and reports it. Returns 1. */

@@ -1,13 +1,13 @@
 /* NON_MATCHING: uninitialized failure return and invariant-count loop recovered; retail retains a second saved container pointer. */
 /* Finds an indexed EPL block payload in an ATBC or ABCH model container. */
 #include "shard/S3AsdModelAttr.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 extern const char g_asdModelContainerAtbcMagic[];
 extern const char g_asdModelContainerAbchMagic[];
 extern const char DAT_0053d1a0[];
 s32 rt_memcmp(const void *left, const void *right, u32 bytes);
-void FUN_002e59f8(const void *source, void *destination, u32 bytes);
 void *FUN_001ad70c(const AsdAtbcHeader *container, s32 index)
 {
     void *payload; // Retail leaves the failure result uninitialized.

@@ -1,10 +1,10 @@
 /* NON_MATCHING: roll/weight registers (r2/r3) and the loop comparison orientation (cmp count,index; bgt) differ; the table-selection switch now matches. */
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
+#include "battle/BtlTables.h"
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
-void *btlGetTable(BtlMainStateA *state, u32 table);
 s32 scrGetArg(u32 index);
 s32 randRange(u32 maximum);
 void scrSetResult(s32 value);

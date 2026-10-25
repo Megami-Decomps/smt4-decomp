@@ -5,7 +5,7 @@
 extern "C" {
 extern s32 g_asdLightCount;
 void objectBufferFree(AsdLightBuffer *buffer);
-void asdLightSelectActive(s32 enable);
+u32 asdLightSelectActive(s32 kind);
 void asdMemFree(void *memory);
 }
 

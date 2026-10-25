@@ -153,7 +153,7 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 extern int FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_0027e760. */
-extern int FUN_00287894(void);
+extern int table1bOr1cGetRecordValue(void);
 /* Supplied declaration required: gameOptionsEnableAndReset. */
 extern int FUN_0029022c(void);
 /* Supplied declaration required: FUN_002903f0. */
@@ -634,7 +634,7 @@ void FUN_001fc6e8(unsigned int param_1)
       temp_v3 = FUN_0029022c();
       if (temp_v3 != 0) {
         FUN_002903f0();
-        temp_v3 = FUN_00287894();
+        temp_v3 = table1bOr1cGetRecordValue();
         if (temp_v3 != 0 && temp_v3 != 3) {
           temp_v3 = gameGetSupportUnitData();
           temp_v0 = *(unsigned short *)(temp_v3 + 0x608);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail retains default-name base in r5; compiler reloads it and emits a second string-pool relocation. */
 #include "gamedata/PlayerInitialization.h"
 #include <string.h>
+#include "AsdSDK/AsdMemUtil.h"
 
 /* Local view: stock-count metadata extends beyond the recovered party-slot prefix. */
 struct InitialPlayerSlotsView {
@@ -20,7 +21,6 @@ void FUN_001a1110(void);
 InitialPlayerSlotsView *gameGetSlotTable(void);
 PlayerInitialRecordIV *gameGetPlayerData(void);
 void FUN_00295a18(u32 item, u32 count);
-void memClear(void *memory, u32 size);
 void FUN_003c1ef4(u32 mode);
 void FUN_00299370(u32 slot);
 void FUN_001dd930(void);

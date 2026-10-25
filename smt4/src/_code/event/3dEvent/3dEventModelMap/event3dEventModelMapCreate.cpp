@@ -1,5 +1,6 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The battle-map model state of a 3D event: the map's environment and model list, driven by a calc process. */
 struct Event3dModelMap {
@@ -24,15 +25,12 @@ extern const char DAT_00403610[]; /* "battle/battle_map/b%03d_%02d.bam" */
 extern const char DAT_00403698[]; /* "Event3dModelMap_Calc" */
 
 void *asdMemAlloc(s32 heap, s32 align, s32 flags, s32 size, s32 clear);
-void memClear(void *block, u32 size);
 void FUN_002c2044(void *object, s32 mode);
 void FUN_0018a104(Event3dModelMap *map);
 s32 FUN_002c1d5c(void);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002a09b4(char *path, s32 mode);
 u32 asdMdlManagerCreateSecondList(char *path, u32 count);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-                           AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
 s32 FUN_00221e1c(u32 handle);
 void FUN_002fe144(u32 handle);
 

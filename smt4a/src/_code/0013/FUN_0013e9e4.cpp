@@ -1,7 +1,7 @@
 /* NON_MATCHING: frame base matches; readiness tests combine into conditional LDRB/CMP instead of retail's separate branches. */
 #include "shard/JobWork.h"
+#include "Model/MoriModelShadowMap.h"
 
-struct RenderContext;
 struct RenderJobFrame {
     u8 unk00[0x14];
     u8 ready;
@@ -18,9 +18,7 @@ struct RenderJobWork {
 typedef char RenderJobFrameOffsetCheck[offsetof(RenderJobWork, frame) == 0x1400 ? 1 : -1];
 
 extern "C" {
-extern RenderContext *g_renderCtx;
 bool stateValuesGetBySelector(u32 index);
-void FUN_00157558(RenderContext *context);
 void FUN_0014b01c(u32 value);
 
 bool FUN_0013e9e4(u32 job)

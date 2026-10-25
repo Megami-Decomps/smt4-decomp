@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "event/2dEvent/Npc2d.h"
 
 extern "C" {
 
-int FUN_00254600(int);
 int FUN_0025461c(void);
 int FUN_0025463c(void);
 int FUN_002595e0(void);

@@ -1,5 +1,5 @@
 /* NON_MATCHING: signed selection range now matches; wide-mask scratch registers and saved-register set differ. */
-#include "battle/btlMain.h"
+#include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
@@ -7,7 +7,6 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 void scrSetResult(s32 value);
 
@@ -19,7 +18,8 @@ u32 FUN_003a8c10()
     s32 first, count;
     FUN_00301a08(btlResolveEntryChoice(scrGetArg(2)), &first, &count);
     for (s32 index = first; index < first + count; ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&
             (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&

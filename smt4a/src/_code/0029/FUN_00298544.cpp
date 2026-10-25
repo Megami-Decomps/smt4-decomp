@@ -1,5 +1,6 @@
 /* NON_MATCHING: render-stack address scheduling and color/VFP argument scheduling differ. */
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 namespace {
 /* Local view: the shared battle layout does not extend to the overlay color. */
@@ -11,9 +12,7 @@ struct BattleOverlayView {
 
 extern "C" {
 extern BattleOverlayView *g_btlMain;
-extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(u32 mode, u32 flags);
-void FUN_00157558(RenderCtxA *context);
 void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 void FUN_0014e314(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);

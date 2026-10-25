@@ -1,3 +1,4 @@
+#include "util/FUN_002a4894.h"
 /* NON_MATCHING: packed-coordinate construction and snapshot register lifetimes differ. */
 #include "shard/Shard0031.h"
 #include "ui/TouchRectangleRequest.h"
@@ -9,7 +10,6 @@ s32 uiSearchSecondary(const FlaggedEntry *);
 s32 resourceRunEmbeddedOperationIfUnblocked(const FlaggedEntry *);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *);
 s32 FUN_002a4878(const FlaggedEntry *);
-s32 FUN_002a4894(const FlaggedEntry *);
 void flaggedEntrySetValueA(FlaggedEntry *, s32);
 void flaggedEntrySetValueB(FlaggedEntry *, s32);
 u32 FUN_002e2848(FlaggedEntry *, u32, u32, u32, u32, u32, s32, s32);
@@ -45,7 +45,7 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
     s32 primaryBefore = resourceRunEmbeddedOperationIfUnblocked(entry);
     primaryBefore += FUN_002a4878(entry);
     s32 secondaryBefore = resourceRunOperationIfUnblocked(entry);
-    secondaryBefore += FUN_002a4894(entry);
+    secondaryBefore += FUN_002a4894(reinterpret_cast<const Object *>(entry));
     if (accepted >= 0) {
         if (secondary)
             flaggedEntrySetValueB(entry, accepted);
@@ -65,7 +65,7 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
         bool changed = primaryAfter != primaryBefore;
         if (!changed) {
             s32 secondaryAfter = resourceRunOperationIfUnblocked(entry);
-            secondaryAfter += FUN_002a4894(entry);
+            secondaryAfter += FUN_002a4894(reinterpret_cast<const Object *>(entry));
             changed = secondaryAfter != secondaryBefore;
         }
         if (changed)

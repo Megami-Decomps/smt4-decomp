@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 
 extern "C" {
 
@@ -20,11 +21,9 @@ typedef struct LoadingWork {
     /* 0x179C */ s32 messageIndex;
 } LoadingWork;
 
-extern u8 *g_renderCtx;
 extern u8 *g_aocMain;
 
 LoadingWork *jobGetWork(u32 job);
-void FUN_00157558(u8 *context);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 s32 FUN_00473910(u8 *aoc, u32 id);
@@ -45,7 +44,7 @@ s32 FUN_00478ac4(u32 job)
     u32 messageIds[4] = {0x6E, 0x6F, 0x70, 0x71};
 
     FUN_00157558(g_renderCtx);
-    renderCtxPushA(reinterpret_cast<RenderCtxA *>(g_renderCtx), FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     FUN_00164b5c(2, 0x2F, 5, 0, 0, 0x81);
     s32 body = FUN_00473910(aoc, messageIds[work->messageIndex]);
 
@@ -77,7 +76,7 @@ s32 FUN_00478ac4(u32 job)
             }
         }
     }
-    renderStackPop((RenderStateStack *)(g_renderCtx + 0x1258));
+    renderStackPop(&g_renderCtx->stackA);
     return 0;
 }
 

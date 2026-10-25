@@ -68,15 +68,13 @@ void FUN_002c159c(void *camera);
 void FUN_002c1edc(void *camera, BustupVec3 *position, BustupVec3 *target, BustupVec3 *up);
 void FUN_002c1e30(void *camera, s32 flag, f32 fov, f32 nearPlane, f32 farPlane, f32 aspect);
 void FUN_00298d50(void *camera);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, void *work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, void *work, u32 owner);
 s32 FUN_002169cc(u32 job);
 s32 jobDrawOrderedChildren(u32 job);
 void bustupCutAnimDestroy(u32 job);
 void textFormatBuffer(char *buffer, const char *format, u32 id);
-u32 FUN_00263c1c(const char *path);
+u32 asdCameraLoadFromFile(const char *path);
 u32 asdMdlManagerCreateSecondList(const char *path, u32 flags);
 void FUN_0024edd4(BustupModelNode *node, s32 part);
 void cameraExportParameters(BustupCameraSetup *setup, u32 model);
@@ -112,14 +110,13 @@ u32 FUN_002fc29c(void)
         FUN_00298d50(block->camera);
         block->unk5f0 = 0;
         block->unk5f2 = 1;
-        block->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BustupCutAnim"), 2, 0, 0,
-                                            FUN_002169cc, bustupCutAnimDestroy, block);
+        block->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BustupCutAnim"), 2, 0, 0, FUN_002169cc, bustupCutAnimDestroy, reinterpret_cast<u32>(block));
         taskCreateDraw(reinterpret_cast<const s8 *>("BustupCutAnimDraw"), 0x6f, 0, 0, jobDrawOrderedChildren, NULL, block, block->job);
         block->unk5ec = 0;
         char path[76];
         for (u32 i = 0; i < BUSTUP_CUT_ENTRIES; i++) {
             textFormatBuffer(path, "event/BustUpEvent/%s.bccam", g_bustupCutAnim.ids[i]);
-            block->models[i] = FUN_00263c1c(path);
+            block->models[i] = asdCameraLoadFromFile(path);
             textFormatBuffer(path, "event/BustUpEvent/%s.bam", g_bustupCutAnim.ids[i]);
             block->lists[i] = asdMdlManagerCreateSecondList(path, 7);
         }

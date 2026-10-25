@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc places the first camera-height else arm (tab 3) after the repeat-right test instead of right behind the call; every other instruction matches */
 #include "common.h"
 #include <stddef.h>
+#include "network/DataStore/DataStoreMain.h"
 
 #define SHOP_TAB_NONE 7
 
@@ -49,7 +50,6 @@ extern "C" {
 
 s32 gameFlagIsSet(u32 id);
 s32 recordGetModeForId(s32 id);
-s32 objBStateAllowsAction(void);
 void gameSetStatusCameraHeightMode(s32 mode);
 s32 FUN_0040ab8c(ShopCursorObject *object);
 void FUN_0040aad4(ShopCursorObject *object, s32 mode);

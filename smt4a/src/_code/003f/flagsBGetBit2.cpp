@@ -1,8 +1,6 @@
-#include "shard/Shard003F.h"
+#include "gamedata/FlagsB.h"
 
 extern "C" {
-
-extern u8 *flagsBGetPtr(s32 index);
 
 u32 flagsBGetBit2(s32 index)
 {

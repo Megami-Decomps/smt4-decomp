@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00133568` (_code @ 0x133568, 0xdc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
 int FUN_002aa790(int, int, unsigned int);
-int memClear(unsigned int, int);
 int FUN_002a691c(...);
 
 typedef int romwright_code(...);
@@ -274,7 +274,7 @@ void FUN_00133568(unsigned int *param_1)
   else {
     temp_v4 = (*g_gfxAllocateCallback)(0x10000,0x100,0,0x4000);
   }
-  memClear(temp_v4,0x4000);
+  reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v4), 0x4000));
   if ((unsigned int)g_commandBufferCursor < g_commandBufferEnd) {
     g_commandBufferCursor[1] = 0xf02cb;
     *g_commandBufferCursor = 0;

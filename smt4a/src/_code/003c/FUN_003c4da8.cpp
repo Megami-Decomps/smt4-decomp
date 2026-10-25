@@ -8,7 +8,7 @@ s32 scrGetArg(s32 index);
 void scrSetResult(u32 result);
 EngineUnitRecord *gameGetSlotRecord(void);
 EngineUnitRecord *FUN_003e503c(u16 index);
-s32 flagAt4IsClearOrMissing(void);
+u8 flagAt4IsClearOrMissing(void);
 u32 uiSelectedRecordGetFirst(void);
 
 extern EngineUnitsRef g_engineCleanupOwner;

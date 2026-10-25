@@ -14,8 +14,6 @@ BustupEffectLineObject *FUN_002282c8(u32 group, u32 id, u32 flags);
 s32 effLineJobUpdate(u32 handle);
 void jobWorkDestroy0(u32 handle);
 s32 jobResetOwnerCallback(u32 handle);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 void bustupCutAnimSetJobParam(u32 handle);
@@ -32,8 +30,7 @@ extern "C" s32 bustupEffectStartLine()
         memset(work, 0, sizeof(*work));
         work->object = FUN_002282c8(10, 7, 0);
         work->setLifetime(0.0f, (f32)duration);
-        u32 process = asdProcessCreateSimple(DAT_0052f714, 4, 0, 0,
-            effLineJobUpdate, jobWorkDestroy0, reinterpret_cast<u32>(work));
+        u32 process = asdProcessCreateSimple(DAT_0052f714, 4, 0, 0, effLineJobUpdate, jobWorkDestroy0, reinterpret_cast<u32>(work));
         taskCreateDraw(DAT_0052f704, 0x73, 0, 0, jobResetOwnerCallback, NULL,
             reinterpret_cast<u32>(work), reinterpret_cast<void *>(process));
         bustupCutAnimSetJobParam(process);

@@ -1,4 +1,5 @@
 #include "shard/GameDataBlocks.h"
+#include "event/2dEvent/Npc2d.h"
 
 extern "C" {
 

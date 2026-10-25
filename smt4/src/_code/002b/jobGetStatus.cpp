@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler combines the two status-word loads into ldrd. */
 #include "common.h"
 
 namespace { struct JobWork { u32 job; s32 first; s32 second; }; }
@@ -9,6 +8,6 @@ JobWork *jobGetWork(u32 job);
 s32 jobGetStatus(u32 job)
 {
     JobWork *work = jobGetWork(job);
-    return work->second + work->first;
+    return work->first + work->second;
 }
 }

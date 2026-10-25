@@ -1,5 +1,6 @@
 #include "battle/btlScript.h"
 #include "battle/BattleUnitSlot.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct Character {
     /* 0x20 */ Stats *stats;
 } Character;
 
-int scrSetResult(int value);
 int scrGetArg(int index);
 
 /* Script command: passes to scrSetResult whether the stat selected by script argument 0 (0 -> 7, 1 -> 10, 2 -> 11) is positive. */

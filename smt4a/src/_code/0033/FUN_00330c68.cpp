@@ -1,11 +1,11 @@
 /* NON_MATCHING: ARMCC schedules save-point stores and global loads in different registers. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "map/lmapMain.h"
+#include "util/FUN_002b945c.h"
 
 extern "C" {
 extern LmapSceneA* g_lmapScene;
 extern GameStateA g_gameState;
-void FUN_002b945c(u32 handle);
 void mapPlaceSet(u32 kind, u32 enabled, u32 flags);
 void FUN_00376fb8(u32 handle);
 

@@ -18,8 +18,9 @@ typedef struct Scene {
 } Scene;
 extern Scene *g_infoWin;
 
-/* If the scene is running, moves it to state 5 with a 30-frame timer and restarts its members (the second one too in mode 2). */
-void dialogClose(void)
+/* If the scene is running, moves it to state 5 with a 30-frame timer and restarts its members (the second one too in mode 2).
+ * Callers pass an `immediate` flag that this function does not read. */
+void dialogClose(s32 immediate)
 {
     Scene *scene = g_infoWin;
 

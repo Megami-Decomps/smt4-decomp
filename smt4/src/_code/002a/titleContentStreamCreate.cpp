@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match7_UnitHeapModule.h"
 #include "nn/Result.h"
 #include <new>
+#include "AsdSDK/AsdMemUtil.h"
 
 struct DirectFileStream;
 struct DirectFileAdapter;
@@ -57,7 +58,6 @@ extern UnitHeapModuleState g_titleContentAdapterHeap;
 DirectFileStream *FUN_001392fc();
 DirectFileStream *_ZN9Obj420decC1Ev(DirectFileStream *);
 s32 FUN_00138f14(DirectFileStream *, DirectFileAdapter *, u32, u32, u32, u32, u32);
-void memClear(void *, u32 bytes);
 void *nn_fnd_UnitHeapTemplate_nn_os_LockPolicy_Object_nn_os_CriticalSection_Allocate(UnitHeapModuleState *);
 u32 nn_fs_ipc_FileSystem_OpenFileDirectly(u32 *session, u32 *fileHandle,
                                          u32 transaction, u32 archiveId,

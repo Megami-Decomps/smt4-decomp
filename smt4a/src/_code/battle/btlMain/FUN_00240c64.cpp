@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the battle main creation; armcc here lays out the 0x16-byte stack record and the allocation traces differently, and orders the force-flag merges (retail merges the two masks as separate 32-bit ors). */
 #include "AsdSDK/AsdDebug.h"
 #include "sys/Task.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 /* The battle main state (only the fields the creation sets). */
 struct BattleMainState {
@@ -56,7 +57,6 @@ extern "C" {
 extern BattleMainGlobals g_btlMain;
 
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 mode, u32 size, u32 tracked);
-u32 asdProcessCreateSimple(const char *, s32, u32, u32, TaskFunc, TaskFunc, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, TaskFunc, TaskFunc, void *, u32);
 u8 *gameGetSlotTable(void);
 u8 *flagValueGetStorage(void);
@@ -114,7 +114,7 @@ void FUN_00240c64(void *start, s32 kind)
     }
     state->forceFlags |= g_btlMain.forcedMask;
     state->transitionPending = 0;
-    state->job = asdProcessCreateSimple("btlMain", 4, 0, 0, FUN_0024bcd4, FUN_002def6c, g_btlMain.state);
+    state->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("btlMain"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0024bcd4), reinterpret_cast<AsdProcFunc>(FUN_002def6c), reinterpret_cast<u32>(g_btlMain.state));
     taskCreateDraw("BTLMAIN U", 0x75, 0, 0, FUN_0029853c, NULL, NULL, state->job);
     taskCreateDraw("BTLMAIN D", 0xEA, 0, 0, FUN_002df4a8, NULL, NULL, state->job);
     taskCreateDraw("BTLFADE UL", 0x85, 0, 0, FUN_00298544, NULL, NULL, state->job);

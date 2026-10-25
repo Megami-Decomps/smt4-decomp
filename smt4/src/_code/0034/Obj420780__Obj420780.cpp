@@ -23,7 +23,7 @@ struct PanelTextureTarget {
 
 extern "C" {
 PanelTexture *FUN_002bf4f8(u32 table, s32 index);
-PanelTextureTarget *FUN_002c1c0c(u32 table, s32 index);
+PanelTextureTarget *asdTMTexTableGetNodeTexture(u32 table, s32 index);
 }
 
 /* Packs the unit-interval components into four bytes, first component in the top byte. */
@@ -80,6 +80,6 @@ Obj420780::Obj420780()
     scale = (f32) * (s16 *)texture->record;
     color = packColor((const ColorRecord *)FUN_002bf4f8(0x14, 0x6b)->record);
     shadowColor = packColor((const ColorRecord *)FUN_002bf4f8(0x14, 0x6e)->record);
-    FUN_002c1c0c(0x14, 3)->mode = 3;
-    FUN_002c1c0c(0x14, 2)->mode = 2;
+    asdTMTexTableGetNodeTexture(0x14, 3)->mode = 3;
+    asdTMTexTableGetNodeTexture(0x14, 2)->mode = 2;
 }

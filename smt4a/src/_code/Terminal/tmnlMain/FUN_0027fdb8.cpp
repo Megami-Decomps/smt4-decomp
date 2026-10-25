@@ -1,6 +1,7 @@
 #include "Terminal/tmnlMain.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern TmnlWorkA* g_tmnl;
@@ -16,7 +17,6 @@ void terminalSignalComplete(void);
 void FUN_002bd4f8(void);
 void FUN_00358a40(void);
 void FUN_003161b4(void);
-u32 asdProcessCreateSimple(const char*, u32, u32, u32, void (*)(void), void (*)(void), u32);
 u32 taskCreateDraw(const char*, u32, u32, u32, void (*)(void), u32, u32, u32);
 
 void FUN_0027fdb8(const u32* destination)
@@ -85,7 +85,7 @@ void FUN_0027fdb8(const u32* destination)
         work->openingMode = 1;
         FUN_0022677c(0, 0xFF);
     }
-    work->task = asdProcessCreateSimple("TMNL C", 4, 0, 0, FUN_0027e0d8, terminalSignalComplete, 0);
+    work->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("TMNL C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0027e0d8), reinterpret_cast<AsdProcFunc>(terminalSignalComplete), 0);
     taskCreateDraw("TMNL UD", 0x77, 0, 0, FUN_002bd4f8, 0, 0, work->task);
     taskCreateDraw("TMNL UD", 0xD3, 0, 0, FUN_00358a40, 0, 0, work->task);
     taskCreateDraw("TMNL DD", 0xEB, 0, 0, FUN_003161b4, 0, 0, work->task);

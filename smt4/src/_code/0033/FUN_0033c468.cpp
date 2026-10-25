@@ -2,6 +2,7 @@
 #include "ui/SlotPlacement.h"
 #include "shard/PadState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/PlayerDataBlock.h"
 
 /* The cycle fields occupy unaligned-union padding, and the blink fields extend the shared prefix. */
 struct AnimatedSlotPlacementView {
@@ -20,7 +21,6 @@ struct AnimatedSlotPlacementView {
 };
 
 extern "C" {
-PadState *gameGetPlayerData(void);
 PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 void slotPlacementGetPosition(const SlotPlacement *placement, s32 *x, s32 *y);
 
@@ -30,7 +30,7 @@ void FUN_0033c468(AnimatedSlotPlacementView *placement)
     case 0: {
         u16 ailments;
         if (placement->unitIndex < 0)
-            ailments = gameGetPlayerData()->unk72;
+            ailments = reinterpret_cast<PadState *>(gameGetPlayerData())->unk72;
         else
             ailments = gameGetUnitRecord(placement->unitIndex)->ailments;
         s32 count = 0;

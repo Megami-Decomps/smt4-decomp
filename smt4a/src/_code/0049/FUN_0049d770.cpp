@@ -3,9 +3,9 @@
 #include "gamedata/DataTable.h"
 #include <stdlib.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 
 extern "C" {
-void *textureGetIndexedResource(u32 group);
 u8 flagsAtGetBit0(s32 id);
 s32 gameFlagIsSet(u16 flag);
 void flagsAtSetBits01(s32 id);

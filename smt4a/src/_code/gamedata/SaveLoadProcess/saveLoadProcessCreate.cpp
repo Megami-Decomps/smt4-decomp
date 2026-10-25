@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 struct SaveLoadWork {
     /* 0x00 */ void *process;
@@ -37,7 +38,6 @@ SaveHeader *gameDataBlocksGetSaveData(void);
 void FUN_003712a4(void *);
 void work8BufDestroy(void *);
 void FUN_003a7938(void *);
-void *asdProcessCreateSimple(const char *, s32, s32, s32, ProcessCallback, ProcessCallback, void *);
 void asdProcessClearSelectedFlags(void *, u32, u32);
 void *taskCreateDraw(const char *, s32, s32, s32, ProcessCallback, void *, void *, void *);
 extern SaveLoadState g_saveLoadProcess;
@@ -58,7 +58,7 @@ void *saveLoadProcessCreate(s32 selection, u8 option)
     g_saveLoadProcess.unk04 = 0;
     g_saveLoadProcess.unk08 = 0;
     g_saveLoadProcess.unk06 = 0;
-    work->process = asdProcessCreateSimple("Load", 4, 0, 0, FUN_003712a4, work8BufDestroy, work);
+    work->process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>("Load"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_003712a4), reinterpret_cast<AsdProcFunc>(work8BufDestroy), reinterpret_cast<u32>(work)));
     asdProcessClearSelectedFlags(work->process, 0x80000, 0);
     if (selection <= 1) {
         work->slot = selection;

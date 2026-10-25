@@ -29,7 +29,6 @@ s32 FUN_002c1d5c();
 void FUN_002c58c8(s32, s32);
 s32 FUN_001dfc64(u32);
 void FUN_002db92c(u32);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, AsdProcUpdateFunc, AsdProcFunc, void *);
 
 /* Create an NPC texture process with its three image rectangles and optional first-image origin. */
 void FUN_0032743c(s32 npcId)
@@ -75,6 +74,6 @@ void FUN_0032743c(s32 npcId)
         FUN_002c58c8(0x32, 0);
     }
     work->speed = 0.3f;
-    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
+    asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
 }
 }

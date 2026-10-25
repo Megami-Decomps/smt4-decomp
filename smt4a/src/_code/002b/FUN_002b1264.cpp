@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail unrolls the six animation-counter resets; this loop remains rolled. */
 #include "battle/ActorCardAnimations.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 s32 btlScriptUnitHasFlags(u32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 }
 
 /* Reset one card's animation channels and select its default sprite animations. */

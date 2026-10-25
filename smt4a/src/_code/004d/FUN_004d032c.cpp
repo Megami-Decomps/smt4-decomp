@@ -5,7 +5,6 @@ extern "C" {
 void recordTrackDirtyValue(FlaggedEntry *record, u32 value);
 void scrollOwnerSetValue(FlaggedEntry *record, u32 value);
 void flaggedEntrySetValueB(FlaggedEntry *record, u32 value);
-void flaggedEntrySetValueA(FlaggedEntry *record, u32 value);
 u32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *record);
 u32 resourceRunOperationIfUnblocked(FlaggedEntry *record);
 

@@ -1,11 +1,11 @@
 #include "shard/PlayScene.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
 int FUN_00292f4c(PlayScene *scene);
 int FUN_00297b94(PlayScene *scene, u32 a, u32 b);
 int beginStatusPanelClose(void);
-int FUN_002a0cc8(int arg);
 int timerStart(void *timer, int a, int b);
 extern u32 FUN_00297ca4(PlayScene *scene, u32 a);
 

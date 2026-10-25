@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/MessageKindForward.h"
 
 extern "C" {
 

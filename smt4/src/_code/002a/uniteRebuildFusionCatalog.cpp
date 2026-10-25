@@ -1,6 +1,8 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/SkillFlags.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "status/StatusCamera.h"
 
 struct FusionCatalogOptions {
     u8 unk00[8];
@@ -16,12 +18,10 @@ typedef char FusionCatalogFilterOffsets[offsetof(FusionCatalogState, options.rac
     offsetof(FusionCatalogState, options.skillCategory) == 0x31 ? 1 : -1];
 extern "C" {
 extern UniteWork *g_unite;
-const FusionCatalogState *FUN_002a0d0c(void);
 s32 devilIsAvailable(void *, u16);
-s32 FUN_0029ea68(u16);
+s32 itemGetFlagBit1(u16);
 s32 FUN_0029e9cc(u16);
 s32 arrayContainsU16(const u16 *, s32, u16);
-void memClear(void *, u32);
 void rt_memclr(void *, u32);
 s32 devilCompareTablePriority(const void *, const void *);
 void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
@@ -32,7 +32,7 @@ extern const u32 DAT_004032e8[];
 void uniteRebuildFusionCatalog(void)
 {
     UniteWork *work = g_unite;
-    const FusionCatalogOptions *options = &FUN_002a0d0c()->options;
+    const FusionCatalogOptions *options = &reinterpret_cast<const FusionCatalogState *>(FUN_002a0d0c())->options;
     memClear(work->catalogIV.demons, sizeof(work->catalogIV.demons));
     rt_memclr(work->catalogIV.races, sizeof(work->catalogIV.races));
     rt_memclr(work->catalogIV.skills, sizeof(work->catalogIV.skills));
@@ -41,7 +41,7 @@ void uniteRebuildFusionCatalog(void)
     for (u16 id = 0; id < 1201; ++id) {
         if (devilIsAvailable(work->context, id)) {
             const DevilSortRecord *record = devilGetRecord(id);
-            if (FUN_0029ea68(record->id) || FUN_0029e9cc(record->id)) {
+            if (itemGetFlagBit1(record->id) || FUN_0029e9cc(record->id)) {
                 if (!options->race || options->race == record->race)
                     work->catalogIV.demons[demonCount++] = record->id;
                 if (!arrayContainsU16(work->catalogIV.races, raceCount, record->race))

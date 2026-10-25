@@ -2,6 +2,8 @@
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
+#include "util/Random.h"
+#include "util/DataTable9EntryOrZero.h"
 
 extern "C" {
 
@@ -69,10 +71,7 @@ extern AocSystem *g_aocSystem;
 QuestRewardRecord *dataTable1bOr1cGetRecord(void *quest);
 QuestRuntimeStatus *questGetRuntimeStatus(void *quest);
 PlayerLevelView *gameGetPlayerData(void);
-u32 dataTable9EntryOrZero(u32 level);
-void *dataTableGetEntries(void *section);
-u32 dataTableGetCount(void *section);
-u32 randNextInRange(s32 limit);
+
 
 static __inline LootTable *questRewardFindLootTable(u16 tableId)
 {

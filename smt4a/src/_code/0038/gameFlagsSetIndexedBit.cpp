@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail evaluates the enabled test before the word/mask arithmetic and builds the mask in r2 after loading the word; scheduling and register assignment differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 struct GameFlagBitsView {
@@ -13,15 +12,13 @@ void gameFlagsSetIndexedBit(s32 flag, s32 enabled)
     FlagWorkBanks *block = gameFlagsGetBlock();
     if (flag > 0) {
         GameFlagBitsView *flags = (GameFlagBitsView *)block;
-        u32 *word = &flags->words[flag / 32];
-        u32 bits = *word;
-        u32 mask = 1u << (flag % 32);
+        s32 word = flag / 32;
+        s32 bit = flag % 32;
         if (enabled != 0) {
-            bits |= mask;
+            flags->words[word] |= 1 << bit;
         } else {
-            bits &= ~mask;
+            flags->words[word] &= ~(1 << bit);
         }
-        *word = bits;
     }
 }
 }

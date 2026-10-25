@@ -54,8 +54,6 @@ struct BtlMainGlobals {
 extern "C" {
 extern BtlMainGlobals g_btlMainState;
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
-u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
-    AsdProcUpdateFunc update, AsdProcFunc destroy, void *work);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 owner);
 void *gameGetSlotTable(void);
@@ -112,8 +110,7 @@ void FUN_001b0db4(const BtlStartRequest *request, s32 size)
         work->flags3 |= 0x202;
     }
     work->freeOnEnd = 0;
-    work->mainJob = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BTLMAIN C"), 2, 0, 0,
-                                           battleMainProcessUpdate, FUN_0020f04c, g_btlMainState.work);
+    work->mainJob = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BTLMAIN C"), 2, 0, 0, battleMainProcessUpdate, FUN_0020f04c, reinterpret_cast<u32>(g_btlMainState.work));
     taskCreateDraw(reinterpret_cast<const s8 *>("BTLMAIN U"), 0x73, 0, 0, btlEditorQueryFalse, NULL, 0, work->mainJob);
     taskCreateDraw(reinterpret_cast<const s8 *>("BTLMAIN D"), 0xe6, 0, 0, sceneQueryFalse, NULL, 0, work->mainJob);
     taskCreateDraw(reinterpret_cast<const s8 *>("BTLFADE LU"), 0x80, 0, 0, FUN_001e4ac0, NULL, 0, work->mainJob);

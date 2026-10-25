@@ -1,5 +1,7 @@
 /* NON_MATCHING: each copy's destination is staged through r3/r2 instead of loaded straight into r0 after the source call */
 #include "AsdSDK/AsdDebug.h"
+#include "mobiclip_ctrl/MobiclipCtrl.h"
+#include "Model/MoriModelManager.h"
 
 extern "C" {
 
@@ -15,8 +17,6 @@ extern const char DAT_00533ec0[];
 
 void *asdMemoryAlloc(u32 heap, u32 align, s32 flags, u32 size, s32 fromTop);
 void *gameDataBlocksGetTable(void);
-void *configGetSettings(void);
-void *gameDataBlocksGetSaveData(void);
 void __aeabi_memcpy4(void *dst, const void *src, u32 size);
 void wordPairCopy(void *dst, const void *src);
 
@@ -38,9 +38,9 @@ void FUN_002ac390(void)
     g_saveLoadUIBase.saveDataBackup = asdMemoryAlloc(0x100, 0x100, 0, 0x2a71c, 1);
     gameData = gameDataBlocksGetTable();
     __aeabi_memcpy4(g_saveLoadUIBase.gameDataBackup, gameData, 0x80);
-    config = configGetSettings();
+    config = reinterpret_cast<void *>(configGetSettings());
     wordPairCopy(g_saveLoadUIBase.configBackup, config);
-    saveData = gameDataBlocksGetSaveData();
+    saveData = reinterpret_cast<void *>(gameDataBlocksGetSaveData());
     __aeabi_memcpy4(g_saveLoadUIBase.saveDataBackup, saveData, 0x2a71c);
 }
 

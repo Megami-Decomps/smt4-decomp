@@ -11,7 +11,6 @@ extern LightCount g_asdLightCount[2];
 void asdLightActivate(s32 index);
 void FUN_002abbe8(void *list, LightRegistration *light);
 void nw_gfx_SceneNode_AttachChild(void *parent, LightRegistry *child);
-void sceneTraverserVisit(void *traverser, void *root);
 
 // Remove a scene light, restoring an empty auxiliary root before refreshing transforms.
 void FUN_001c0a44(LightRegistration *light, s32 group)

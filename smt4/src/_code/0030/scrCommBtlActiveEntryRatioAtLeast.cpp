@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ typedef struct ActiveEntry {
 
 extern int scrGetArg(s32 index);
 extern ActiveEntry *btlMainFindActiveEntry(void);
-extern int scrSetResult(int value);
 
 static __inline int statsPercentage(const ActiveEntryStats *stats)
 {

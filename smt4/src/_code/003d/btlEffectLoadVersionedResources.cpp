@@ -1,5 +1,7 @@
 /* NON_MATCHING: compiler merges reserved-name null guards and allocates a smaller frame; -O2 candidate. */
 #include "shard/W6_W6Match6_EffectLoader.h"
+#include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
@@ -9,9 +11,7 @@ extern const char DAT_004008c4[];
 u32 libc_strlen(const char *);
 s32 libc_strcmp(const char *, const char *);
 s32 libc_strncmp(const char *, const char *, u32);
-void memClear(void *, u32);
 void textFormatBuffer(char *, const char *, ...);
-void libc_strcpy(char *, const char *);
 u32 keyedRecordRegisterName(void *);
 u32 FUN_00249e54(u32, const char *);
 
@@ -37,7 +37,7 @@ void btlEffectLoadVersionedResources(EffectLoader *loader)
             memClear(path, sizeof(path));
             memClear(formattedPath, sizeof(formattedPath));
             textFormatBuffer(formattedPath, DAT_004008c4, name);
-            libc_strcpy(path, formattedPath);
+            libc_strcpy(reinterpret_cast<unsigned int *>(path), reinterpret_cast<unsigned int *>(formattedPath));
             if (libc_strlen(path)) {
                 EffectResource *resource = &loader->resources[slot];
                 const char *version = resource->version;

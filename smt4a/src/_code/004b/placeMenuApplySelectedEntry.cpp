@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ int dialogOpen(int arg0, int arg1);
 int placeWinStartText(u8 *name);
 int scrRunOpcodesStub(void *handle);
 int placeWinSetValue(int arg);
-int infoWinSetText(u32 owner, int kind);
 
 /* When the menu's handle is in state 2, releases its handle and resources, switches to state 5 and applies the selected entry. */
 void placeMenuApplySelectedEntry(Menu *menu)
@@ -44,7 +44,7 @@ void placeMenuApplySelectedEntry(Menu *menu)
         menu->resourceB = NULL;
         dialogOpen(0, 0);
         u32 owner = menu->owner;
-        infoWinSetText(owner, menu->entry->kind);
+        infoWinSetText(reinterpret_cast<const char *>(owner), menu->entry->kind);
         menu->state = 5;
         menu->stateArg = 0;
         menu->busy = 0;

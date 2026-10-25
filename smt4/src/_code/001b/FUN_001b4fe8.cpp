@@ -1,6 +1,7 @@
 /* NON_MATCHING: only resource-pointer load scheduling around exit-state byte stores differs. */
 #include "addon/SceneResource.h"
 #include "ui/SceneWindowWork.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 
 extern "C" {
@@ -14,7 +15,6 @@ void FUN_00296fec();
 void FUN_00392e74(SceneResource *);
 void FUN_002a03d8(u32, u32);
 void soundChannelStopAll(u32);
-void asdSequenceRequest(s32, const void *, u32);
 void FUN_002c5700();
 void *FUN_0027e974(SceneResource *);
 void buttonHelpRelease();

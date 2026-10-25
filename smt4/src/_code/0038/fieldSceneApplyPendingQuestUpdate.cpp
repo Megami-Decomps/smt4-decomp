@@ -58,7 +58,7 @@ void mapClearPendingEntries(void);
 void FUN_00273d34(void);
 void FUN_00273c54(void);
 void FUN_00296934(void);
-void FUN_0029e648(s32 a, s32 b);
+void messageBannerInitSelection(s32 a, s32 b);
 void messageTargetSetValue(s32 target, s32 value);
 s32 questCenterGetHealingFee(void);
 void messageMainSetTargetFlags(s32 flags);
@@ -133,7 +133,7 @@ void fieldSceneApplyPendingQuestUpdate(FieldSceneWork *work)
         return;
     }
     if (pending->messageActive != 0) {
-        FUN_0029e648(1, 0);
+        messageBannerInitSelection(1, 0);
         messageTargetSetValue(-questCenterGetHealingFee(), 0);
         messageMainSetTargetFlags(1);
         work->pending.messageActive = 0;

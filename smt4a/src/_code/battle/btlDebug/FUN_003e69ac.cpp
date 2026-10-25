@@ -1,6 +1,7 @@
 /* NON_MATCHING: the 64-bit flag clears use per-word and/bic with mvn in retail (built folds the masks with orr+bic), the cases share one exit instead of duplicating the epilogue, and the stack setup assigns script mode via a separate register */
 #include "script/scrScriptProcess.h"
 #include "gamedata/GameFlags.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ extern u32 g_btlUiBlock;
 extern u32 g_btlAux;
 
 BtlContinueView *btlGetMainState(void);
-s32 asdLoadFileAsyncSimple(const char *path, void **slot, s32 arg);
 ScriptRunState *FUN_00275bc8(void *resource, u32 entry);
 s32 dialogIsActive(void);
 void dialogClose(s32 arg);
@@ -43,7 +43,7 @@ void btlUiClearSelectionSlots(u32 block);
 void FUN_003ebc08(BtlContinueView *state, s32 arg);
 
 void FUN_003756c8(s32 arg);
-void FUN_004f8f08(u32 aux);
+void btlStageResetAndClearCameraFlag(u32 aux);
 void FUN_004ab734(u32 block);
 
 /* Drives the continue prompt: loads and starts its script, waits for it to finish, then restores the battle flags. */
@@ -52,7 +52,7 @@ u32 FUN_003e69ac(ContinueState *continueState)
     u32 next;
     switch (continueState->state) {
     case 0:
-        asdLoadFileAsyncSimple(DAT_0052801c, &continueState->resource, 0);
+        asdLoadFileAsyncSimple(DAT_0052801c, reinterpret_cast<u32 *>(&continueState->resource), 0);
         next = 1;
         break;
     case 1:
@@ -95,7 +95,7 @@ u32 FUN_003e69ac(ContinueState *continueState)
             }
         }
         FUN_003756c8(0);
-        FUN_004f8f08(g_btlAux);
+        btlStageResetAndClearCameraFlag(g_btlAux);
         FUN_004ab734(g_btlUiBlock);
         next = 5;
         break;

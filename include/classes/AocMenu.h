@@ -4,6 +4,7 @@
 #include "common.h"
 #include "shard/ScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
+#include "util/FUN_00233fcc.h"
 
 extern "C" void *asdOperatorNew(u32 bytes);
 extern "C" void asdOperatorDelete(void *block);
@@ -98,5 +99,13 @@ typedef char AocMenuAnimatedOffsetsCheck[
     __INTADDR__(&((AocMenu *)0)->animated.effects) == 0x37c &&
     __INTADDR__(&((AocMenu *)0)->animated.slowTick) == 0x1128 &&
     __INTADDR__(&((AocMenu *)0)->animated.fastTick) == 0x112c ? 1 : -1];
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+/* Canonical declaration (matches the definition). */
+#ifdef __cplusplus
+}
+#endif
 
 #endif

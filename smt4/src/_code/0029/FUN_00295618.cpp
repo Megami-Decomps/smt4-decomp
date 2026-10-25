@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
 

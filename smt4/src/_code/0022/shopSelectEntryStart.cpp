@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ typedef struct ShopScene {
     /* 0x15D3C */ s32 idCount;
 } ShopScene;
 
-s32 memClear(void *block, s32 size);
 u32 dataTable17Sub0GetRecord(u32 *scratch, s32 id);
 u32 FUN_002bcfc0(u32 record, s32 arg);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
@@ -29,7 +29,7 @@ void shopSelectEntryStart(ShopScene *scene, s32 mode)
     u32 scratch;
     s32 i;
 
-    memClear(scene->text, 0x200);
+    reinterpret_cast<s32>(memClear(scene->text, 0x200));
     for (i = 0; i < scene->idCount; i++) {
         s32 id;
         u32 record;

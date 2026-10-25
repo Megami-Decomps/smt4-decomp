@@ -1,4 +1,5 @@
 /* NON_MATCHING: near (200 rows against 203): same slot walk, fade/loop state machine, constants and calls from the asm; retail indexes the sound-object table with an unsigned compare (movcs/bcs), keeps the table base in r4 (add r9,r4,#0 and sl = base+256 derived from it) and shares the `object->data` free path as a call-free block, ours takes the base from one literal with signed index compares (a u32 index variant moved the rows to 206) */
+#include "util/FUN_0014375c.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned int u32;
@@ -49,7 +50,6 @@ extern SoundObjectTable DAT_0061978c;
 s32 jyoucyuGetTableEntry(u32 index);
 s32 FUN_001681a4(AsdSndObject *handle);
 AsdSndObject *asdSoundObjectCreate(u32 data, u32 option, u32 kind, f32 gain0, f32 gain1);
-void FUN_0014375c(AsdSndObject *handle, f32 leftGain, f32 rightGain);
 s32 asdSoundObjectRegister(AsdSndObject *handle, s32 id, s32 flag);
 s32 asdSoundObjectFadeOut(AsdSndObject *handle);
 s32 asdMemFree(u32 memory);

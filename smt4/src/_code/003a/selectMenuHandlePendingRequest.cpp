@@ -5,7 +5,7 @@ extern "C" {
 void uiRectDrawAtBottomRight(void *cursor, s32 a, s32 b, s32 c, u32 listId);
 s32 FUN_0029e924(MenuList *list);
 s32 rangeLimitMin(MenuList *list);
-s32 FUN_00240d5c(MenuList *list);
+s32 flaggedEntryGetValueByState(MenuList *list);
 u32 flaggedValueHolderGetTotal(MenuList *list);
 void FUN_003a21b8(SelectMenu *menu, s32 index, s32 marked, s32 value);
 void FUN_002332e8(MenuView *view, s32 first, s32 selected);
@@ -32,16 +32,16 @@ void selectMenuHandlePendingRequest(SelectMenu *menu)
         s32 count = rangeLimitMin(list);
 
         for (s32 i = 0; i < count; i++) {
-            if (!pickMode || FUN_00240d5c(list) != i) {
+            if (!pickMode || flaggedEntryGetValueByState(list) != i) {
                 FUN_003a21b8(menu, i + 1, 0, first + i);
             }
         }
         if (pickMode && list->marked > 0) {
             u32 marked = flaggedValueHolderGetTotal(list);
 
-            FUN_003a21b8(menu, FUN_00240d5c(list) + 1, 1, marked);
+            FUN_003a21b8(menu, flaggedEntryGetValueByState(list) + 1, 1, marked);
         }
-        s32 selected = FUN_00240d5c(list);
+        s32 selected = flaggedEntryGetValueByState(list);
 
         FUN_002332e8(menu->view, FUN_0029e924(list), selected);
         menu->view->vtbl->setList(menu->view, listId);

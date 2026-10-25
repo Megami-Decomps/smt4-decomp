@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct AocEntry {
 } AocEntry;
 
 extern int textFormatBuffer(char *out, const char *format, const char *dir, const char *name);
-extern int memClear(void *buffer, int size);
 extern int aocQueueFileLoad(u32 context, char *path, void *arg0, int arg1, int size, void *arg2);
 
 extern u32 g_aocDisplay; /* 0x433130 */
@@ -25,7 +25,7 @@ void aocEntryBeginBaseLoad(AocEntry *entry)
 {
     char path[128];
 
-    memClear(path, 0x80);
+    reinterpret_cast<int>(memClear(path, 0x80));
     entry->unk38 = 0;
     entry->unk3c = 0;
     entry->unk40 = 0;

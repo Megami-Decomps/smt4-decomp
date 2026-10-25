@@ -1,5 +1,8 @@
 /* NON_MATCHING: readable rebuild from asm of the battle command menu's result selection; retail shares its skip/candidate tails by jumps (the draft's six gotos) and computes the work-block offsets from three base registers, which armcc here emits from the structured conditions. */
 #include "common.h"
+#include "ui/PartyPanelCapacity.h"
+#include "util/FUN_002a4878.h"
+#include "util/FUN_002a4878.h"
 
 /* One command-menu entry (only the fields read here). */
 struct CommandEntry {
@@ -62,7 +65,6 @@ s32 idListHasFlaggedRecord(MemberRecord *member);
 s32 FUN_00291e14(void);
 EquipmentInfo *FUN_00184310(u32 equipment);
 s32 FUN_002b24fc(void);
-s32 FUN_002a4878(void *list);
 
 /* Whether a target command is usable by the member: allowed by the member's equipment when no
  * flagged record applies. */
@@ -110,7 +112,7 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
             continue;
         if ((entry->attributes & 1) && FUN_00291e14() != 0)
             continue;
-        if (FUN_002a4878(work->lists + work->selected * 100) == count)
+        if (FUN_002a4878(reinterpret_cast<const Object *>(work->lists + work->selected * 100)) == count)
             break;
         count++;
     }

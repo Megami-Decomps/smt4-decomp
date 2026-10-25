@@ -8,7 +8,7 @@ Obj4206e8::~Obj4206e8()
         slots[i].release();
     }
     if (handle != 0) {
-        asdMdlManagerDestroy(handle);
+        asdMdlManagerDestroy(reinterpret_cast<AsdMdlObject *>(handle));
         handle = 0;
     }
 }

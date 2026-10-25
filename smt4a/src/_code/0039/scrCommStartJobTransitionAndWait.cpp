@@ -20,7 +20,7 @@ u32 scrCommStartJobTransitionAndWait(void)
         }
     } else {
         u32 job = scrGetArg(0);
-        FUN_0019d96c(jobGetWork(job), 7, 20);
+        FUN_0019d96c(reinterpret_cast<JobBlendWork *>(jobGetWork(job)), 7, 20);
         ((TransitionJobView*)jobGetWork(job))->control = 2;
     }
     return 0;

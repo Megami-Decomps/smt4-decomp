@@ -323,4 +323,16 @@ typedef char LmapExtraAFollowOffsetsCheck[
     offsetof(LmapExtraA, followPresets.lateralDistance) == 0x14C &&
     offsetof(LmapExtraA, followPresets.rearDistance) == 0x18C ? 1 : -1];
 
+extern "C" {
+u32 gameDataCopySaveEntry(u32 index, void *dest);
+}
+
+extern "C" {
+u32 FUN_002cf854(void);
+}
+
+extern "C" {
+void FUN_00492ac8(u32 unused, u32 value);
+}
+
 #endif

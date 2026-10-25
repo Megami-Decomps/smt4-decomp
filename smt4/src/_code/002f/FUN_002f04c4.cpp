@@ -1,9 +1,9 @@
 /* NON_MATCHING: grouped stats offsets match; percentage base, numerator and constant registers differ. */
 #include "battle/EntryStats.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-void scrSetResult(s32 result);
 BtlMainState *btlGetMainState(void);
 
 /* Script command: sets 1 when a present, active, unblocked entry with the id has at most the given MP percentage. */

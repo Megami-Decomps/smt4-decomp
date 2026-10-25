@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern AsdSequence g_asdSequence;

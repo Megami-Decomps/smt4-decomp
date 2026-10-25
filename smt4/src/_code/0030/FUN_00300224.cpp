@@ -4,7 +4,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 BtlState *btlGetMainState(void);
-BtlUnitEntry *btlMainFindEntryByListedId(BtlState *state, u32 id);
+BtlUnitEntry *btlMainFindEntryByListedId(BtlState *state, s32 id);
 void FUN_00255180(u32 id, s32 kind, s32 value);
 
 /* Selects one of the actor's two special battle modes and queues its corresponding update. */

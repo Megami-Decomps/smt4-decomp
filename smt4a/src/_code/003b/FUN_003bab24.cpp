@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "Model/MoriModelShadowMap.h"
 
 /* Sprite description returned by FUN_001834a4. */
 struct SpriteInfo {
@@ -31,8 +32,6 @@ struct CommonBackgroundOverlay {
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "status/StatusCamera.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ typedef struct QuestEntry {
 
 extern QuestMenu *g_uiQuest;
 
-extern QuestEntry *FUN_002a0d0c(void);
 extern u32 FUN_0029ee54(QuestCursor *cursor);
 extern void FUN_002b7bca(void *list, u32 count, u32 size, SortCompare compare);
 extern void FUN_0027f3dc(void *list, u32 count, u32 size, SortCompare compare);
@@ -46,7 +46,7 @@ void uiQuestSortListByEntryKind(s32 mode)
     QuestMenu *menu = g_uiQuest;
 
     if (mode == 0) {
-        QuestEntry *entry = FUN_002a0d0c();
+        QuestEntry *entry = reinterpret_cast<QuestEntry *>(FUN_002a0d0c());
         u8 *info = &entry->kindAndAlternate;
         QuestCursor *cursor = &menu->cursor;
         u8 *list = menu->list;

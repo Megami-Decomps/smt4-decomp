@@ -1,6 +1,7 @@
 /* NON_MATCHING: same instruction sequence as retail; only the register assignment of the file/list/node/source/entry pointers differs (retail: file r8, list r5, node r6, source r9, entry r4). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 
 extern "C" {
@@ -59,7 +60,6 @@ typedef struct EffPartsFile {
     /* 0x88 */ u32 nodesOffset;
 } EffPartsFile;
 
-void *FUN_001642e4(const char *path, u8 *size, u32 a, u32 b);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void sysMemClear(void *block, s32 size);
 void FUN_001b4ddc(void *part);
@@ -85,8 +85,8 @@ static EffPartNode *effPartListNth(EffPartList *list, s32 index)
  * after the node they copy, and attached nodes are linked to their parent. */
 EffPartList *FUN_0029127c(const char *path)
 {
-    u8 size;
-    EffPartsFile *file = (EffPartsFile *)FUN_001642e4(path, &size, 1, 0x80);
+    u32 size;
+    EffPartsFile *file = (EffPartsFile *)asdLoadFileSyncNoContext(path, &size, 1, 0x80);
     asdDebugTrace(g_effPartsSourcePath, 1443);
     EffPartList *list = (EffPartList *)memAlloc(0x10000, 0x100, 0, 0x90, 0x10, 1);
 

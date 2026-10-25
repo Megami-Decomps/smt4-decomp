@@ -1,9 +1,9 @@
 #include "shard/Shard0035.h"
+#include "ui/UiSpriteState.h"
 
 extern "C" {
 
 extern ObjBRef g_gameGlobals;
-extern void uiSpriteSelectAnim(u8 *block, s32 value);
 
 void objBInitBlocks274300(void)
 {

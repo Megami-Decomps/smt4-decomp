@@ -6,7 +6,7 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 extern const MessageImageChoices g_messageSelectedImagePairs;
-void FUN_002c39a4(RenderCtx *context);
+void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
@@ -21,7 +21,7 @@ void messageDrawSelectedImagePair(const MessageImageSelector *owner, const f32 *
     if (owner == NULL || alpha == NULL || *alpha == 0.0f) {
         return;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(g_titleScene);
     FUN_002bed3c();
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 0));

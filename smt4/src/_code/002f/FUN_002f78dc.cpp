@@ -4,7 +4,6 @@
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
-void scrSetResult(s32 result);
 
 // Return whether the selected battle flag is set to the script interpreter.
 u32 FUN_002f78dc(void)

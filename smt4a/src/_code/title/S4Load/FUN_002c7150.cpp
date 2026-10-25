@@ -2,16 +2,15 @@
 #include "title/S4Load.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern S4Load *g_s4Load;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void rt_aeabi_memclr(void *memory, u32 size);
-void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 u32 spriteHandleCreate(u32 kind);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags, u32 stack,
-                            u32 (*update)(), void (*destroy)(), void *work);
 u32 taskCreateDraw(const char *name, s32 priority, u32 flags, u32 stack,
                    u32 (*draw)(), u32 destroy, void *work, u32 parent);
 u32 FUN_002364fc();
@@ -58,15 +57,15 @@ u32 FUN_002c7150(void)
     work->selection = 0;
     work->page = 1;
     work->loaded = 0;
-    asdLoadFileAsyncSimple("title/loadS4.bf", &work->dataA, 0);
-    asdLoadFileAsyncSimple("title/loadS4.mbm", &work->dataB, 0);
+    asdLoadFileAsyncSimple("title/loadS4.bf", reinterpret_cast<u32 *>(&work->dataA), 0);
+    asdLoadFileAsyncSimple("title/loadS4.mbm", reinterpret_cast<u32 *>(&work->dataB), 0);
     work->dataSize = 0x80;
     work->process = NULL;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\title\\S4Load.cpp", 215);
     work->data = asdMemoryAlloc(0x100, 0x100, 0, work->dataSize, 1);
     work->sprite = spriteHandleCreate(0);
     work->closing = 0;
-    work->job = asdProcessCreateSimple("S4 LOAD TEST C", 4, 0, 0, FUN_002364fc, s4LoadDestroy, NULL);
+    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("S4 LOAD TEST C"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002364fc), reinterpret_cast<AsdProcFunc>(s4LoadDestroy), NULL);
     taskCreateDraw("S4 LOAD TEST UL", 0x7E, 0, 0, FUN_0027dbac, 0, NULL, work->job);
     taskCreateDraw("S4 LOAD TEST UR", 0xDA, 0, 0, FUN_0027dbac, 0, NULL, work->job);
     taskCreateDraw("S4 LOAD TEST D", 0xEC, 0, 0, FUN_002bd488, 0, NULL, work->job);

@@ -6,6 +6,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The debug mask lies beyond the shared three-word global prefix. */
 struct BattleDebugInitializationGlobalsView {
@@ -25,7 +26,6 @@ s32 FUN_002ba870(u32 process);
 s32 lmapJobQueryZero(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
-void *asdMemoryAllocTracked(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 s32 jobIsValid(u32 job);
 void FUN_003592dc(u32 list);
 void jobStop(u32 job, s32 delay);

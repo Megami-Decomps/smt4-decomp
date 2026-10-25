@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/Shard0042.h"
+#include "util/FUN_00421858.h"
 
 struct BattleTransitionAssetA { u8 data[0x34]; };
 struct BattleTransitionPlacementA {
@@ -31,7 +32,6 @@ BtlCombatantEntryA* FUN_003f0e20(BtlMainStateA* battle, s32 group);
 s32 state2CIsNot1(State2C* controller);
 void FUN_00421514(State2C* controller, BattleTransitionAssetA* asset, f32 scale);
 void attachmentsSetOffset(State2C* controller, const f32* position);
-void FUN_00421858(State2C* controller);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
 void FUN_00421078(State2C* controller);
 void FUN_004fa15c(BattlePlacementTransitionViewA* work);

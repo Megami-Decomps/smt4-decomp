@@ -1,4 +1,5 @@
 #include "common.h"
+#include "test/BustupViewer.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct UiCursorWork {
 } UiCursorWork;
 
 s32 FUN_00163aa4(void *motion, f32 step);
-s32 FUN_002e19f8(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);

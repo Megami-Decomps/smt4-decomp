@@ -1,13 +1,13 @@
 /* NON_MATCHING: the adjacent effect object is loaded separately instead of derived from the parameter address. */
 #include "sound/SoundEffectDelay.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {
 extern SoundEffectDelay DAT_004c5484;
 extern SoundEffectDelayParameters DAT_004c54e4;
 extern void *g_soundEffectBuffers;
 extern const char DAT_004076c8[];
-u32 jyoucyuGetTableEntry(u32 index);
 void FUN_00110d54(SoundEffectDelay *effect, const SoundEffectDelayParameters *parameters);
 u32 nw_snd_FxDelay_GetRequiredMemSize(SoundEffectDelay *effect);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);

@@ -1,5 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "util/PackNibbles.h"
 
 /* A menu entry's draw state: a mode, a selected row and an animation frame. */
 struct MenuEntryDraw {
@@ -16,7 +17,6 @@ extern const s8 DAT_0057f220[];
 void FUN_00164b5c(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 f32 FUN_001f3eec(f32 start, f32 end, f32 duration, f32 time);
 void efctSetSpeed(f32 speed);
-u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 
 // Draw a menu entry: frame, a row-offset glow that fades in and out, and its decorations.
 void campMenuEntryDraw(MenuEntryDraw *entry, s32 priority)

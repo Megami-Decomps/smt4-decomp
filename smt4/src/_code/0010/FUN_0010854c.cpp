@@ -1,5 +1,6 @@
 /* NON_MATCHING: readiness branches target the preceding epilogue instruction; first downsample dimension copies reverse r0/r1. */
 #include "shard/FrameWork.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef char FrameCopyLayoutCheck[
 
 s32 FUN_002bff10(u32 arg);
 s32 FUN_002bfadc(u32 arg, JobSurface *surface);
-void FUN_002c39a4(u32 scene);
 void surfaceCopy(JobSurface *src, JobSurface *dst);
 
 extern u32 g_titleScene;
@@ -48,7 +48,7 @@ s32 FUN_0010854c(u32 job)
     if (work->frame.blocked != 0) {
         return 0;
     }
-    FUN_002c39a4(g_titleScene);
+    renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
     work->frame.surface->width = 0x200;
     work->frame.surface->height = 0x200;
     reinterpret_cast<FrameCopyControlView *>(&work->flags)->result = FUN_002bfadc(0, work->frame.surface);

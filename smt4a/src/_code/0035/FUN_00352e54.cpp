@@ -1,4 +1,3 @@
-/* NON_MATCHING: quotient/remainder registers and enabled-condition scheduling differ from retail. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
@@ -6,14 +5,12 @@ extern "C" {
 void FUN_00352e54(s32 bit, s32 enabled)
 {
     FlagWorkBanks *flags = gameFlagsGetBlock();
-    s32 index = bit / 32;
-    u32 value = flags->first[index];
-    u32 mask = 1u << (bit % 32);
+    s32 word = bit / 32;
+    s32 shift = bit % 32;
     if (enabled != 0) {
-        value |= mask;
+        flags->first[word] |= 1 << shift;
     } else {
-        value &= ~mask;
+        flags->first[word] &= ~(1 << shift);
     }
-    flags->first[index] = value;
 }
 }

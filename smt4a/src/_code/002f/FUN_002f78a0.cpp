@@ -19,7 +19,6 @@ extern "C" {
 void FUN_0014e188(UiSpriteState *, u32, u32, UiSpriteSource *, u32, f32);
 void uiSpriteSetKeyframe(UiSpriteState *, s32, s32);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-void uiSpriteSelectAnim(UiSpriteState *, s32);
 
 /* Initialize the repeating menu sprites and their label, cursor and indicator. */
 void FUN_002f78a0(MenuSpriteBankView *work)

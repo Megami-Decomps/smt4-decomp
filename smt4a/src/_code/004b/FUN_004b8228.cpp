@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/2dEvent/EventEffect.h"
 
 struct StepText {
     u8 unk00[2];     // 0x00
@@ -26,7 +27,6 @@ s32 scrRunOpcodesStub(u32 script);
 void FUN_004b7d88(TextStep *step);
 void FUN_00215978(s32 arg);
 void dialogOpen(u8 mode, u8 arg);
-void infoWinSetText(u32 window, s32 id);
 void placeWinStartText(const void *text);
 void placeWinSetValue(s32 value);
 
@@ -37,7 +37,7 @@ void FUN_004b8228(TextStep *step)
         FUN_004b7d88(step);
         FUN_00215978(0);
         dialogOpen(0, 0);
-        infoWinSetText(step->infoWindow, step->textEntry->infoId);
+        infoWinSetText(reinterpret_cast<const char *>(step->infoWindow), step->textEntry->infoId);
         step->substate = 0;
         step->state = 5;
         step->unkA88 = 0;

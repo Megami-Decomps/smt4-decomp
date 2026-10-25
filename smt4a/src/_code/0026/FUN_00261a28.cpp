@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
@@ -102,7 +103,6 @@ extern int FUN_003e4d68(unsigned int);
 /* Supplied declaration required: FUN_003fd5bc. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 /* Supplied declaration required: flagValueSub. */
-extern int flagValueIsPositive(unsigned int);
 /* Supplied declaration required: FUN_0048111c. */
 /* Supplied declaration required: FUN_004bcb54. */
 /* Supplied declaration required: FUN_004bcd90. */

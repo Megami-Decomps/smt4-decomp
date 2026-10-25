@@ -44,12 +44,11 @@ typedef char ScriptedEnemyMotionLayoutCheck[sizeof(ScriptedEnemyMotionView) == s
 extern "C" {
 extern MapEnemy *g_mapEnemy;
 extern EnemyMotionSelection DAT_0049fb1c;
-EnemyMotionRecord *contentEntryGetD(s32 id);
 
 void FUN_001f9188(void)
 {
     MapEnemy *map = g_mapEnemy;
-    EnemyMotionRecord *motion = contentEntryGetD(DAT_0049fb1c.contentId);
+    EnemyMotionRecord *motion = reinterpret_cast<EnemyMotionRecord *>(contentEntryGetD(DAT_0049fb1c.contentId));
     for (s32 i = 0; i < MAP_ENEMY_COUNT; ++i) {
         ScriptedEnemyMotionView *enemy = reinterpret_cast<ScriptedEnemyMotionView *>(&map->entries[i]);
         if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 && enemy->state == 2) {

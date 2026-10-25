@@ -1,5 +1,6 @@
 /* NON_MATCHING: histogram bounds fold into conditional loads and threshold-return branches are simplified. */
 #include "gamedata/GameData.h"
+#include "Model/MoriModelManager.h"
 
 struct HistogramSaveRecordA {
     u16 value;
@@ -11,7 +12,6 @@ struct HistogramSaveViewA {
 };
 extern "C" {
 u16 *gameDataGetSmallBlock(void);
-GameDataBlock *gameDataBlocksGetSaveData(void);
 s32 FUN_002a4b28(u32 index);
 void sysMemClear(void *memory, u32 size);
 
@@ -24,7 +24,7 @@ s32 FUN_004dad8c(void)
     sysMemClear(histogram, sizeof(histogram));
     for (s32 index = first; index <= last; ++index) {
         if (FUN_002a4b28(static_cast<u16>(index))) {
-            const HistogramSaveViewA *save = reinterpret_cast<const HistogramSaveViewA *>(gameDataBlocksGetSaveData());
+            const HistogramSaveViewA *save = reinterpret_cast<const HistogramSaveViewA *>(reinterpret_cast<GameDataBlock *>(gameDataBlocksGetSaveData()));
             u32 value = save->records[index].value;
             if (value - 1 < 999 && histogram[value] < 20)
                 ++histogram[value];

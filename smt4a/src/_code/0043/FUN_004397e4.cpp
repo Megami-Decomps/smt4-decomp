@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc forwards the two stack-passed words through VFP registers (vldm/vstr); retail keeps all four stack arguments in general registers (ldm) and stores them with stm. */
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 extern "C" {
 
@@ -13,17 +14,17 @@ s32 FUN_004397e4(u32 first, u32 firstSize, u32 second, u32 secondSize, u32 *out,
 {
     nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
 
-    cmd->header = 0x120106;
-    cmd->words[0] = firstSize;
-    cmd->words[1] = secondSize;
-    cmd->words[2] = arg5;
-    cmd->words[3] = thirdSize;
-    cmd->words[4] = (firstSize << 14) | 0xC02;
-    cmd->words[5] = first;
-    cmd->words[6] = (secondSize << 20) | 0x402;
-    cmd->words[7] = second;
-    cmd->words[8] = (thirdSize << 4) | 0xC;
-    cmd->words[9] = third;
+    nn::os::SetIpcWord(cmd, 0, 0x120106);
+    nn::os::SetIpcWord(cmd, 1, firstSize);
+    nn::os::SetIpcWord(cmd, 2, secondSize);
+    nn::os::SetIpcWord(cmd, 3, arg5);
+    nn::os::SetIpcWord(cmd, 4, thirdSize);
+    nn::os::SetIpcWord(cmd, 5, (firstSize << 14) | 0xC02);
+    nn::os::SetIpcWord(cmd, 6, first);
+    nn::os::SetIpcWord(cmd, 7, (secondSize << 20) | 0x402);
+    nn::os::SetIpcWord(cmd, 8, second);
+    nn::os::SetIpcWord(cmd, 9, (thirdSize << 4) | 0xC);
+    nn::os::SetIpcWord(cmd, 10, third);
     s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
     if (nnResultIsSuccess(result)) {
         *out = cmd->words[1];

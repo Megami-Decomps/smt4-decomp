@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void *FUN_001642e4(u32 path, u32 *size, s32 count, s32 flags);
+void *asdLoadFileSyncNoContext(u32 path, u32 *size, s32 count, s32 flags);
 void *FUN_00290edc(void *block);
 void asdMemFree(void *block);
 
@@ -10,7 +10,7 @@ void asdMemFree(void *block);
 void *effBlockLoadClone(u32 path)
 {
     u32 size;
-    void *file = FUN_001642e4(path, &size, 1, 0x80);
+    void *file = asdLoadFileSyncNoContext(path, &size, 1, 0x80);
     void *clone = FUN_00290edc(file);
 
     asdMemFree(file);

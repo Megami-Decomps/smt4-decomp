@@ -1,6 +1,7 @@
 /* NON_MATCHING: work reload, result-bitfield zero test, parent registers and shared return layout differ. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "gamedata/UnitStats.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 extern UniteWork *g_unite;
@@ -9,7 +10,6 @@ void FUN_0029dc74(u32 id, StatBlock *result);
 void uniteMergeInheritedSkillsAndStats(void *context, const StatBlock *first,
     const StatBlock *second, const StatBlock *third, StatBlock *result);
 void uniteBuildInheritedSkillCandidates(u32 id, const StatBlock *first, const StatBlock *second);
-s32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
 s32 flagCountUnlockedSlots(const StatBlock *unit);
 void unitRecalculateEffectiveStats(StatBlock *unit);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);

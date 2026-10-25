@@ -61,7 +61,7 @@ void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);
 void sndSystemShutdown(void);
-void dspUnloadIdleComponent(void);
+u32 dspUnloadIdleComponent(void);
 void dspCallbackShutdown(void);
 }
 

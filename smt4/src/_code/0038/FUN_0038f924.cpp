@@ -9,7 +9,7 @@ int FUN_002347b8(unsigned int, unsigned int, unsigned char [1024]);
 int FUN_002be5a4(int, unsigned int, unsigned char [1024], int);
 int FUN_002bf380(int, int, int, int, int, int);
 int FUN_002bf4f8(...);
-int FUN_002c39a4(int);
+int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(int, int);
 
 typedef int romwright_code(...);
@@ -32,7 +32,7 @@ extern int curveEvaluateStandard(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
 extern int jobGetWork(unsigned int task);
-/* Supplied declaration required: FUN_002c39a4. */
+/* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -62,7 +62,7 @@ int FUN_0038f924(unsigned int task)
   temp_v3 = jobGetWork(task);
   temp_v2 = g_aocMain;
   temp_v11 = *(unsigned int *)(temp_v3 + 0x1798);
-  FUN_002c39a4(g_titleScene);
+  renderCtxSelectStereoLayout(g_titleScene);
   temp_v6 = g_titleScene;
   temp_v4 = FUN_002c5d80(1,0);
   piVar11 = (int *)(temp_v6 + 0x124c);

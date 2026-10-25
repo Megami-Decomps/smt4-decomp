@@ -1,5 +1,6 @@
 /* NON_MATCHING: the info-pointer address (obj + 0x664) is kept in r6 and the texture id in r5; retail has them swapped. */
 #include "common.h"
+#include "camp/PlayLog/PlayLog.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ typedef struct Entry {
 
 s32 textureGetIndexedResource(u32 texId);
 s32 asdTMTexTableLoadTmx(u32 texId, s32 arg);
-s32 asdTMTexLoadMainHeap(u32 texId, u32 texSub);
 s32 FUN_00403a34(Entry *entry, u32 id);
 s32 FUN_00203b40(void *sprite, u32 resource, s32 a, s32 b, s32 c, s32 d);
 s32 flagsSetOrClearBit(void *sprite, s32 arg);

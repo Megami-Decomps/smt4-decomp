@@ -1,11 +1,10 @@
 /* NON_MATCHING: writeback form only: retail loads flags with `ldr r1,[r0,r1,lsl #3]!` and reuses r0 for the slot address; built adds the unit address separately */
 /* Reports through scrSetResult whether any active, unlocked unit has a clean or type-2 entry in the slot chosen by scrGetArg(0); always returns 1. */
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern void scrSetResult(s32 found);
-extern s32 scrGetArg(u32 index);
 
 u32 FUN_002f6fcc(void)
 {

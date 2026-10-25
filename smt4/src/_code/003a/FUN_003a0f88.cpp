@@ -34,7 +34,7 @@ extern "C" {
 
 extern RenderCtx *g_titleScene;
 
-s32 FUN_00240d5c(const ChoicePanelEntry *entry);
+u32 flaggedEntryGetValueByState(const ChoicePanelEntry *entry);
 const SpritePosition *FUN_002bf4f0(void *sprites, u32 id);
 void uiRectDrawAtBottomRight(void *sprites, s32 mode, s32 x, s32 y, s32 depth);
 void FUN_00231bcc(void *sprites, u32 image, s32 x, s32 y, s32 depth, u32 flags);
@@ -54,7 +54,7 @@ void FUN_003a0f88(ChoicePanel *panel)
     if (kind == 7 || kind == 8) {
         step = 1;
     }
-    const SpritePosition *frame = FUN_002bf4f0(panel->sprites, FUN_00240d5c(&panel->entries[kind]) + step + 0x4f);
+    const SpritePosition *frame = FUN_002bf4f0(panel->sprites, flaggedEntryGetValueByState(&panel->entries[kind]) + step + 0x4f);
     s32 frameX = frame->x;
     s32 frameY = frame->y;
     const SpritePosition *origin = FUN_002bf4f0(panel->sprites, 200);

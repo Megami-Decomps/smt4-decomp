@@ -1,7 +1,10 @@
+#include "util/Vec2Fixed.h"
 /* NON_MATCHING: work/coordinate and zero saved registers differ, and the switch default branch uses a different layout. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
+#include "Model/MoriModelShadowMap.h"
+#include "util/PackNibbles.h"
 
 struct PositionedMenuDrawWork {
     u8 unk000[0x14];
@@ -10,11 +13,7 @@ struct PositionedMenuDrawWork {
     UiSpriteState position;
 };
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(u32 first, u32 second);
-s32 packNibblesAndByte(u32 first, u32 second, u32 third);
-s32 vec2GetXInt(const UiSpriteState *position);
 s32 vec2GetYInt(const UiSpriteState *position);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);

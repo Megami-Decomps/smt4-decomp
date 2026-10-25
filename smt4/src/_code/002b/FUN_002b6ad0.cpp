@@ -1,5 +1,6 @@
 #include "shard/GameOptions.h"
 #include "util/CalleeContracts.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 

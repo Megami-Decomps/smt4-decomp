@@ -54,4 +54,16 @@ typedef char EventEffectGlobalsALayoutCheck[sizeof(EventEffectGlobalsA) == 0x88 
     offsetof(EventEffectGlobalsA, textureUsers) == 0x10 &&
     offsetof(EventEffectGlobalsA, texture) == 0x7c ? 1 : -1];
 
+extern "C" {
+u32 FUN_00284e94(void);
+}
+
+extern "C" {
+u8 *FUN_002840ac(void);
+}
+
+extern "C" {
+void infoWinSetText(const char *entry, u32 arg);
+}
+
 #endif

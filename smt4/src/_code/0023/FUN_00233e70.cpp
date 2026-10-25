@@ -3,6 +3,7 @@
 #include "addon/AocHandleJob.h"
 #include "shard/ScreenTransitionState.h"
 #include "nn/Result.h"
+#include "util/FUN_002ba8f4.h"
 
 static inline s32 aocResultLevel(u32 result)
 {
@@ -14,7 +15,6 @@ static inline s32 aocResultLevel(u32 result)
 
 extern "C" {
 extern AocMain *g_aocMain;
-void FUN_002ba8f4(AocObjA *operation);
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 void FUN_0038b420(AocMain *main, u32 low, u32 high);
 u32 FUN_002a1200(const u32 *result);

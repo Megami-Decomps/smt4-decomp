@@ -36,4 +36,12 @@ typedef struct StatusCameraWorkA {
     /* 0x534 */ CameraLens lens;
 } StatusCameraWorkA;
 
+extern "C" {
+u8 *FUN_002a0d0c(void);
+}
+
+extern "C" {
+void FUN_002a0cc8(u8 value);
+}
+
 #endif

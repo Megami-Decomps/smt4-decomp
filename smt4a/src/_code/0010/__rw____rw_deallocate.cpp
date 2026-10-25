@@ -1,13 +1,11 @@
-#include "common.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 extern "C" {
 
-void asdOperatorDelete(void);
-
-/* Forwards to asdOperatorDelete. */
-void _ZN4__rw15__rw_deallocateEPvji(void)
+/* Forwards the block to asdOperatorDelete. */
+void _ZN4__rw15__rw_deallocateEPvji(void *block, u32 count, s32 alignment)
 {
-    asdOperatorDelete();
+    asdOperatorDelete(block);
 }
 
 } /* extern "C" */
