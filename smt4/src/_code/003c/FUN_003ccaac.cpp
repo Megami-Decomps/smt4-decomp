@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ccaac` (_code @ 0x3ccaac, 0x23e0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -27,7 +28,7 @@ int FUN_00228220(...);
 int FUN_00228930(...);
 int mathScaleThreeHalves(...);
 int FUN_0022899c(unsigned int, unsigned int, unsigned int, int, int, int);
-int FUN_002296f4(...);
+int frameRangeExtend(...);
 int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
 int btlReflectInitKind9(...);
@@ -139,7 +140,7 @@ extern int FUN_00228808(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00228930. */
 /* Supplied declaration required: mathScaleThreeHalves. */
 /* Supplied declaration required: FUN_0022899c. */
-/* Supplied declaration required: FUN_002296f4. */
+/* Supplied declaration required: frameRangeExtend. */
 extern int FUN_00229914(int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
@@ -160,7 +161,6 @@ extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_0027df30. */
 /* Supplied declaration required: FUN_0027e3e8. */
-extern int btlUnitGet(int *);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_0028299c(int);
 /* Supplied declaration required: passiveSkillLookupRecord. */
@@ -360,7 +360,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
         btlTargetSetFlag10(*param_1,param_8,1);
       }
       btlTargetSetFlag10(*param_1,param_7,0);
-      FUN_002296f4(param_1,param_2,param_8,temp_v30,0xf,0x1e);
+      frameRangeExtend(param_1,param_2,param_8,temp_v30,0xf,0x1e);
       param_9 = 1;
       temp_v30 = temp_v30 + 0xd;
       temp_v59 = 0;
@@ -379,7 +379,7 @@ void FUN_003ccaac(int *param_1,unsigned int *param_2,unsigned int param_3,unsign
       btlTargetSetFlag10(*param_1,param_8,1);
     }
     btlTargetSetFlag10(*param_1,param_7,0);
-    FUN_002296f4(param_1,param_2,param_8,temp_v30,0xf,0x1e);
+    frameRangeExtend(param_1,param_2,param_8,temp_v30,0xf,0x1e);
     temp_v30 = temp_v30 + 0xd;
     temp_v54 = 0;
     param_9 = 1;
@@ -823,7 +823,7 @@ LAB_003cd944:
       FUN_002550d8(param_8,2,temp_v4,0);
       if (temp_v16 == 0) {
         temp_v11 = 3;
-        temp_v5 = btlUnitGet(param_1);
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
         temp_v8 = 0;
         temp_v14 = 0x85;
         do {
@@ -836,7 +836,7 @@ LAB_003cd944:
           temp_v8 = temp_v8 + 1;
         } while (temp_v14 != 0);
         temp_v26 = 2;
-        temp_v5 = btlUnitGet(param_1);
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
         temp_v8 = 0;
         do {
           temp_v14 = temp_v5 + temp_v8 * 8;
@@ -894,7 +894,7 @@ LAB_003cd944:
           if (temp_v5 < 3) {
             temp_v5 = 3;
           }
-          FUN_002296f4(param_1,param_2,param_8,temp_v30,temp_v5,temp_v5);
+          frameRangeExtend(param_1,param_2,param_8,temp_v30,temp_v5,temp_v5);
           temp_v30 = temp_v30 + temp_v5;
         }
       }
@@ -905,7 +905,7 @@ LAB_003cd944:
         if (temp_v8 != 0) {
           temp_v5 = temp_v5 + *(int *)(temp_v8 + 0x5c) + temp_v30 + temp_v7 + 10;
         }
-        FUN_002296f4(param_1,param_2,param_8,temp_v5,0x14,0x14);
+        frameRangeExtend(param_1,param_2,param_8,temp_v5,0x14,0x14);
         if ((*(unsigned int *)(*param_1 + 0x44a8) & 4) == 0) {
           *(unsigned short *)(temp_v61 + 0xd4) = 0;
         }
@@ -951,7 +951,7 @@ LAB_003cd944:
               }
               temp_v33 = 4;
               btlTargetSetFlag10(*param_1,param_7,0);
-              temp_v5 = btlUnitGet(param_1);
+              temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
               temp_v7 = 0;
               goto LAB_003ce3ec;
             }
@@ -1041,7 +1041,7 @@ LAB_003ce46c:
       if (0 < temp_v42) {
         FUN_0023c0d0(param_1,param_2,param_8,temp_v42);
       }
-      FUN_002296f4(param_1,param_2,param_8,temp_v30,0xf,0x14);
+      frameRangeExtend(param_1,param_2,param_8,temp_v30,0xf,0x14);
       temp_v7 = FUN_0022810c(DAT_00435d18,1);
       temp_v16 = temp_v7 + temp_v5;
       if (temp_v7 + temp_v5 <= (int)param_2[7]) {
@@ -1071,7 +1071,7 @@ LAB_003ce46c:
         temp_v7 = FUN_00227dbc(DAT_00435d18);
         FUN_003dda54(temp_v7 + temp_v30,param_2,temp_v71,
                      *(int *)(*param_1 + 0x1e98) + param_8 * 0x114,temp_v5,temp_v26);
-        FUN_002296f4(param_1,param_2,param_8,temp_v30,10,0xf);
+        frameRangeExtend(param_1,param_2,param_8,temp_v30,10,0xf);
         puVar11 = (unsigned int *)*param_1;
         btlMainFindEntryByListedId(puVar11,param_8);
         temp_v16 = temp_v53;
@@ -1192,7 +1192,7 @@ LAB_003ce96c:
     if (0 < temp_v48) {
       FUN_0023c0d0(param_1,param_2,param_7,temp_v48);
     }
-    FUN_002296f4(param_1,param_2,param_7,temp_v7,0xf,0x14);
+    frameRangeExtend(param_1,param_2,param_7,temp_v7,0xf,0x14);
     temp_v5 = FUN_0022810c(DAT_00435d18,1);
     temp_v4 = temp_v5 + temp_v14;
     if (temp_v5 + temp_v14 <= (int)param_2[7]) {

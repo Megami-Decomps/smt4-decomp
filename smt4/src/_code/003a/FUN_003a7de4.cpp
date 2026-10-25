@@ -28,7 +28,7 @@ s32 messageMainTargetIsClear(void);
 s32 gameGlobalsFlagIsClear(void);
 void messageMainSetTargetFlags(s32 flags);
 s32 flaggedValueHolderGetTotal(void *holder);
-s32 FUN_0029c1fc(void);
+s32 partyFindFreeStockSlot(void);
 void FUN_0029c1c8(s32 slot, u16 id, bool discounted);
 s32 FUN_0029ce60(u16 id, u8 discounted, s32 mode, bool highLevel, s32 flags);
 void FUN_00295c04(s32 amount);
@@ -42,7 +42,7 @@ void FUN_003a7de4(PurchaseMenu *menu)
         messageMainSetTargetFlags(0);
         PurchaseEntry *entry = &menu->entries[flaggedValueHolderGetTotal(menu->selection)];
         s16 id = entry->id;
-        s32 slot = FUN_0029c1fc();
+        s32 slot = partyFindFreeStockSlot();
         if (slot != -1) {
             FUN_0029c1c8(slot, id, menu->discounted != 0);
         }

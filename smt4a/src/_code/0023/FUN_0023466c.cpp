@@ -1,5 +1,6 @@
 /* NON_MATCHING: table lookup null/bounds registers and popup-field store grouping differ. */
 #include "gamedata/DataTable.h"
+#include "gamedata/GameFlags.h"
 
 struct PopupConditionRecord {
     s32 id;
@@ -30,7 +31,7 @@ struct PopupTriggerStateView {
 extern "C" {
 extern PopupTriggerStateView *g_popupState;
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(s32 flag, s32 value);
+
 PopupMessageResource *FUN_00365bc4(s32 message);
 
 /* Activate the first matching kind-seven popup and mark its blocking flag. */
@@ -52,7 +53,7 @@ void FUN_0023466c(s32 id, s32 argument)
             popup->text = message->text;
             popup->trigger = record->id;
             popup->header = message->header;
-            gameFlagSetValue(record->blockingFlag, 1);
+            gameFlagSetValue(record->blockingFlag, 1, 1);
             return;
         }
     }

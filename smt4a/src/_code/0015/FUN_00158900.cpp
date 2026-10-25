@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail mov r7, r0 differs from recovered mov r6, r0. */
+/* NON_MATCHING: cursor initialization and final text-load argument setup are scheduled differently. */
 #include "common.h"
 
 struct DecodeStateView {
@@ -27,18 +27,19 @@ void FUN_00158900(TextObjectView* object, const char* source, u32 options)
     u16 text[264];
     DecodeStateView state = {0, 0};
     u16* output = text;
+    const char* cursor = source;
 
     refIsNullOrZero(&state);
     for (;;) {
-        s32 byteCount = FUN_00100836(source, 0x105, &state);
+        s32 byteCount = FUN_00100836(cursor, 0x105, &state);
         if (byteCount == 0) {
             break;
         }
-        if (FUN_002e3c44(output, source, byteCount, &state) == 0) {
+        if (FUN_002e3c44(output, cursor, byteCount, &state) == 0) {
             break;
         }
         ++output;
-        source += byteCount;
+        cursor += byteCount;
     }
 
     *output = 0;

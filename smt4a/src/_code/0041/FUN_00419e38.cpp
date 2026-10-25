@@ -38,7 +38,7 @@ struct EffectRecordSets {
 
 extern "C" {
 void asdMemFree(void *block);
-void sysMemClear(void *memory, u32 size);
+void *sysMemClear(void *memory, u32 size);
 void FUN_0042cb74(void *part);
 
 static void effectRecordReset(EffectRecord *record)

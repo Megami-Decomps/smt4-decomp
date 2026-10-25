@@ -1,5 +1,6 @@
 /* NON_MATCHING: a single compare - retail tests the upper level bound as `cmp max, level; strge` while armcc emits the operands the other way round (`cmp level, max; strle`); everything else is identical. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 namespace {
 /* A demon record: only the fields the filter reads. */
@@ -30,13 +31,13 @@ void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
 DevilRecord *devilGetRecord(u32 id);
 u32 randNextInRange(u32 maximum);
-u32 FUN_0029c1fc(void);
+u32 partyFindFreeStockSlot(void);
 void FUN_0029c1c8(u32 arg, u32 id, s32 flag);
 u32 FUN_00252190(u32 id, s32 a, s32 b);
 void eventTexSetJobParam(u32 job);
-void FUN_00289234(u32 job);
+void eventTexRegisterAndSortTask(u32 job);
 void FUN_00247bf4(u32 job, s32 frame, s32 flag);
-void memClear(void *data, u32 size);
+void *memClear(void *data, u32 size);
 const char *FUN_002bd06c(u32 id);
 const char *demonGetRaceLabel(u32 id, s32 kind);
 char *libc_strcpy(char *destination, const char *source);
@@ -45,7 +46,6 @@ u32 fileSlotGetBuffer(u32 slot);
 void FUN_002bff38(s32 arg);
 s32 messageForwardDefaultMode(u32 buffer, s32 message, s32 frame, s32 mode, s32 arg);
 s32 jobIsValid(u32 job);
-NpcJobWork *jobGetWork(u32 job);
 void jobStop(u32 job, s32 arg);
 
 /* Script command: spawns a random demon whose level lies in [arg0, arg1] as an NPC, shows its name and race in a
@@ -77,7 +77,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
             return 1;
         }
         u16 chosen = (u16)candidates[randNextInRange((u16)(count - 1))];
-        FUN_0029c1c8(FUN_0029c1fc(), chosen, 0);
+        FUN_0029c1c8(partyFindFreeStockSlot(), chosen, 0);
         scrWorkSetValue(0, 1);
         DAT_0044cfa0 = 0;
         scrWorkSetValue(1, chosen);
@@ -86,7 +86,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
     case 1: {
         u32 job = FUN_00252190(scrWorkGetValue(1), 0, 0);
         eventTexSetJobParam(job);
-        FUN_00289234(job);
+        eventTexRegisterAndSortTask(job);
         scrWorkSetValue(2, job);
         FUN_00247bf4(job, 0, 1);
         scrWorkSetValue(0, 2);
@@ -140,7 +140,7 @@ u32 scrComm_Npc_SpawnRandomInRange(void)
     case 12: {
         u32 job = scrWorkGetValue(2);
         if (jobIsValid(job) != 0) {
-            NpcJobWork *work = jobGetWork(job);
+            NpcJobWork *work = reinterpret_cast<NpcJobWork *>(jobGetWork(job));
             if (work->mode == 1) {
                 jobStop(job, 0);
             } else {

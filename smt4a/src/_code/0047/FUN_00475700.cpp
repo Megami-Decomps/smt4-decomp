@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00475700` (_code @ 0x475700, 0x40c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "addon/AocBufferRequest.h"
 
 extern "C" {
 
@@ -14,7 +15,7 @@ int FUN_0042792c(...);
 int FUN_00427c38(int *, unsigned char [1024], int);
 int FUN_00427ff4(...);
 int FUN_0043c2d4(...);
-int FUN_00473824(...);
+void aocApplicationRecreatePrimaryRequest(AocApplicationRequestView *app);
 int FUN_00473980(...);
 int FUN_00474d0c(void);
 int FUN_00500244(...);
@@ -55,7 +56,7 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00427c38. */
 /* Supplied declaration required: FUN_00427ff4. */
 /* Supplied declaration required: FUN_0043c2d4. */
-/* Supplied declaration required: FUN_00473824. */
+/* Supplied declaration required: aocApplicationRecreatePrimaryRequest. */
 /* Supplied declaration required: FUN_00473980. */
 /* Supplied declaration required: FUN_00474d0c. */
 extern unsigned int FUN_00500234(unsigned int);
@@ -203,7 +204,7 @@ int * FUN_00475700(int param_1)
       temp_v14[2] = temp_v0 + 0xe3;
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
-    FUN_00473824(temp_v0);
+    aocApplicationRecreatePrimaryRequest(reinterpret_cast<AocApplicationRequestView *>(temp_v0));
     textFormatBuffer(temp_v8,&LAB_00475b64);
     textFormatBuffer(temp_v9,&LAB_00475b10);
     textFormatBuffer(temp_v10,&LAB_00475b70);

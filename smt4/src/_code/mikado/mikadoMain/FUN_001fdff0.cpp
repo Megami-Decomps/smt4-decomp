@@ -2,13 +2,17 @@
 #include "mikado/mikadoMain.h"
 #include <stddef.h>
 
+extern "C" void asdMemFreeNonNull(void *block);
+inline void MikadoCamera::operator delete(void *block)
+{
+    asdMemFreeNonNull(block);
+}
+
 extern "C" {
 extern MikadoGlobals g_mikado;
-extern int _ZN9Obj55ca08D1Ev(Obj55ca08 *sub);
 void FUN_003ba734(MikadoCamera *camera, const UShortVec3 *start);
-void FUN_002a7838(void);
+void FUN_002a7838(MikadoCamera *camera);
 void sceneUpdateHandlerAndWidget(MikadoCamera *camera);
-int asdMemFreeNonNull(int block);
 
 /* Steps the mikado controller's state machine: creates the camera, runs its scene, then tears it
  * down; returns -1 once finished. */
@@ -37,9 +41,9 @@ u32 FUN_001fdff0(void)
         work->state = 3;
         work->done = 1;
         if (work->camera != NULL) {
-            FUN_002a7838();
+            FUN_002a7838(work->camera);
             if (work->camera != NULL) {
-                asdMemFreeNonNull(_ZN9Obj55ca08D1Ev(&work->camera->sub) - offsetof(MikadoCamera, sub));
+                delete work->camera;
             }
             work->camera = NULL;
         }

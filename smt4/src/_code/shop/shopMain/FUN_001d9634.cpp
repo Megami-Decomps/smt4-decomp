@@ -95,8 +95,6 @@ u32 FUN_001d9634(void)
             u8 *scene = memory != NULL ? FUN_003a5e30(memory, 1, kind, sub) : NULL;
             shop->scene = scene;
             s32 selection = shop->selection;
-            if (selection == 8)
-                selection = 8;
             *(s32 *)(scene + 0x860) = selection;
         }
         shopResetMessageState(shop->scene);

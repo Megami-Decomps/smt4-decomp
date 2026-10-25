@@ -1,5 +1,6 @@
 /* NON_MATCHING: common forced/normal game-over decision is merged and retail's post-dereference null guard is omitted. */
 #include "battle/btlMain.h"
+#include "gamedata/GameFlags.h"
 #include "battle/btlGameOver.h"
 
 static inline bool gameOverMaskMatches(u64 flags, const u32 mask[2])
@@ -12,7 +13,7 @@ extern BtlGameOverGlobalsA DAT_0057f678;
 void FUN_00231464();
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 flag);
-void gameFlagSetValue(u32 flag, u32 value, u32 width);
+
 void btlCreateGameOverJobs(BtlMainStateA *state);
 
 void FUN_0031cd00(BtlMainStateA *state)

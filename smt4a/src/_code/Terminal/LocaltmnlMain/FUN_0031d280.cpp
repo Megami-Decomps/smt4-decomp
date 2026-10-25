@@ -8,7 +8,7 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignment, s32 flags, u32 size, s32 cl
 void messageSetMode(s32 mode);
 s32 FUN_00328838(u32 job);
 void localTmnlOnComplete(u32 job);
-s32 FUN_00357f9c(u32 job);
+s32 terminalDrawActiveSlotHandles(u32 job);
 s32 localTerminalDrawOverlays(u32 job);
 s32 FUN_0037a068(u32 job);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 flags, s32 workSize,
@@ -63,7 +63,7 @@ void FUN_0031d280(const u32 *options)
         state->result = 0;
     }
     state->prefix.task = asdProcessCreateSimple("TMNL LO C", 4, 0, 0, FUN_00328838, localTmnlOnComplete, 0);
-    taskCreateDraw("TMNL LO UD", 0x77, 0, 0, FUN_00357f9c, NULL, NULL, state->prefix.task);
+    taskCreateDraw("TMNL LO UD", 0x77, 0, 0, terminalDrawActiveSlotHandles, NULL, NULL, state->prefix.task);
     taskCreateDraw("TMNL LO UD", 0xd3, 0, 0, localTerminalDrawOverlays, NULL, NULL, state->prefix.task);
     taskCreateDraw("TMNL LO DD", 0xeb, 0, 0, FUN_0037a068, NULL, NULL, state->prefix.task);
 }

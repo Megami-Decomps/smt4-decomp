@@ -1,4 +1,4 @@
-/* NON_MATCHING: scene pointer is computed later; selection and refresh-address registers differ. */
+/* NON_MATCHING: scene address is evaluated before map lookup; selection and refresh-address registers and result moves still differ. */
 #include "ui/NaviCategorySelection.h"
 #include "gamedata/MapNaviCategories.h"
 
@@ -12,8 +12,9 @@ const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext 
 // Select the requested marker category, falling back to the map's default category.
 void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category)
 {
+    void *scene = work->scene;
     s32 map = naviGetActiveStateValue();
-    s32 section = naviMainSelectPair(work->scene);
+    s32 section = naviMainSelectPair(scene);
     MapNaviMarkerIcon *marker = dataTable2BFindType1Entry(work, map, category);
     if (marker) {
         s8 icon = (s8)marker->icon;

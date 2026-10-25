@@ -1,7 +1,7 @@
-/* NON_MATCHING: live candidate count is preserved in a callee-saved register, adding stack-alignment padding. */
+/* NON_MATCHING: multifile btlUnitGet restores the 436-byte frame and caller-saved count; candidate base and flags/HP scratch still exchange r6/r7. */
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "battle/BattleUnitSlot.h"
 
-extern "C" BattleActionUnit *btlUnitGet(BtlState **owner);
 
 // Mark the last eligible unit at the highest HP encountered in the roster.
 extern "C" void FUN_003cf7fc(BtlState **owner)

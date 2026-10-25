@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the copy of id into r4 is scheduled before the id>400 branch (retail after it) and one branch target differs */
 #include "common.h"
 
 extern "C" {
@@ -26,10 +25,23 @@ Entry0026a794 *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base, u32 count, u32 size, Compare0026a794 *compare);
 
-/* The id comparator at 0x145a98 (unnamed; retail embeds its address). */
-#define ID_COMPARE_0026A794 ((Compare0026a794 *)0x145a98)
+s32 FUN_00145a98(const Entry0026a794 *first, const Entry0026a794 *second);
 
 extern AocSystem0026a794 *g_aocSystem; /* 0x433158 */
+
+static inline Entry0026a794 *findContentFlagEntry(u32 id)
+{
+    Entry0026a794 *entry = recordTableFindById(g_aocSystem, id);
+    if (entry == NULL) {
+        void *table = dataTableGet(4, 1);
+        Entry0026a794 *entries = dataTableGetEntries(table);
+        u32 count = dataTableGetCount(table);
+        Entry0026a794 key;
+        key.id = id;
+        entry = libc_bsearch(&key, entries, count, sizeof(Entry0026a794), FUN_00145a98);
+    }
+    return entry;
+}
 
 /* Flag test on entry `id`: ids above 400 come from the add-on content or data table 4 section 1 (bit 30 clear), the rest from dataTable40FindById (sign bit clear gives 1). */
 u32 contentEntryFlagTest(u32 id)
@@ -38,16 +50,7 @@ u32 contentEntryFlagTest(u32 id)
     Record0026a794 *record;
 
     if (id > 400) {
-        entry = recordTableFindById(g_aocSystem, id);
-        if (entry == NULL) {
-            void *table = dataTableGet(4, 1);
-            Entry0026a794 *entries = dataTableGetEntries(table);
-            u32 count = dataTableGetCount(table);
-            Entry0026a794 key;
-
-            key.id = id;
-            entry = libc_bsearch(&key, entries, count, sizeof(Entry0026a794), ID_COMPARE_0026A794);
-        }
+        entry = findContentFlagEntry(id);
         if (entry != NULL) {
             return ~(entry->flags >> 30) & 1;
         }

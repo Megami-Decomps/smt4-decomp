@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps shared constants 0 (r8) and 1 (r6) in registers and has one exit for the no-slot and success returns; build rematerialises them (record null select, timer store and epilogue order differ). */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 struct StatusEventRecord {
     u32 id;
@@ -38,9 +39,6 @@ s32 playerHasFlagBit(u32 bit);
 s32 saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);
-u32 dataTableGet(u32 table, u32 index);
-StatusEventRecord *dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 char *FUN_002d8b58(u32 kind, u32 id);
 void *rt_memcpy(void *dest, const void *src, u32 size);
 int textFormatBuffer(char *dest, const char *name, const char *format);
@@ -64,12 +62,12 @@ u32 FUN_0020ecd4(void)
         if ((gameFlagIsSet(0x1A2) == 0 || randRange(99) + 1 > 50) &&
             (playerHasFlagBit(5) != 0 || playerHasFlagBit(9) != 0) && g_gameState.statusTimer == 0) {
             g_gameState.statusTimer = 1;
-            u32 table = dataTableGet(0x43, 0);
-            dataTableGetEntries();
+            void *table = dataTableGet(0x43, 0);
+            dataTableGetEntries(table);
             s32 count = dataTableGetCount(table);
             for (u32 i = 0; (s32)i < count; i++) {
-                u32 recordTable = dataTableGet(0x43, 0);
-                StatusEventRecord *records = dataTableGetEntries();
+                void *recordTable = dataTableGet(0x43, 0);
+                StatusEventRecord *records = static_cast<StatusEventRecord *>(dataTableGetEntries(recordTable));
                 StatusEventRecord *record = i < dataTableGetCount(recordTable) ? records + i : 0;
                 if (record->type != 4 || record->id != slot->statusId)
                     continue;

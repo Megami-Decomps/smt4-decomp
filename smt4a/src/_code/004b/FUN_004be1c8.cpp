@@ -25,6 +25,7 @@ struct UnitScreenReadyViewA {
 extern "C" {
 s32 FUN_0023b3d0(void);
 ScriptRunState* FUN_00275bc8(void* resource, u32 infoWindow);
+void scriptProcessSetMode(ScriptRunState* process, s32 mode);
 void infoWinSetText(u32 window, s32 text);
 void dialogOpen(s32 first, s32 second);
 void __aeabi_memset4(void* destination, u32 size, u32 value);
@@ -43,7 +44,7 @@ void FUN_004be1c8(UnitScreenReadyViewA* work)
     }
     ScriptRunState* script = FUN_00275bc8(work->scriptResource, work->infoWindow);
     work->script = script;
-    script->mode = 2;
+    scriptProcessSetMode(script, 2);
     if (work->mode == 1) {
         infoWinSetText(work->infoWindow, 4);
         dialogOpen(0, 1);

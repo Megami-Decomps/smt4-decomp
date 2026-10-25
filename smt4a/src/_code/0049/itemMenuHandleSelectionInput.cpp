@@ -36,7 +36,7 @@ u32 FUN_004954e8(EquipmentMenu *);
 void messageChoiceShowCurrent(EquipmentMenu *);
 u32 FUN_004d0584();
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
-u32 FUN_0049cad0(const EquipmentChoice *);
+u32 shopGetEntryPrice(const EquipmentChoice *);
 u32 btlRollClamped(u16, u32);
 void sendEvent100020E();
 void sendEvent100020F();
@@ -73,7 +73,7 @@ void itemMenuHandleSelectionInput(EquipmentMenu *menu)
     const EquipmentChoice *choice = &menu->choices[category].choices[index];
     bool eligible = true;
     if (menu->category != 8) {
-        u32 limit = FUN_0049cad0(choice);
+        u32 limit = shopGetEntryPrice(choice);
         eligible = btlRollClamped(choice->id, limit) != 0;
     }
     if (eligible && confirmed) {

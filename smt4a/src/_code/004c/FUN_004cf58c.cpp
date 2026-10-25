@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the two-part stereo sprite draw (a wide sprite and a narrow sprite, each in its own render state with the effect speed set); the build keeps the scene pointer and the 1.0f speed in different registers and does not reproduce retail's float round trip of the parallax offset. */
+/* NON_MATCHING: float stereo-offset round trips recovered; VFP destinations and first render-stack pop allocation still differ. */
 #include "camp/RenderCtx.h"
 
 // A sprite effect owner (observed fields).
@@ -29,7 +29,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     efctSetSpeed(1.0f);
     FUN_00183bb0();
     FUN_001834a4(0x22, 3000);
-    s32 wideOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
+    f32 wideOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
     FUN_001835b4(2, 0x22, 3000, wideOffset, 0, 2);
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
@@ -37,7 +37,7 @@ void FUN_004cf58c(StereoSpriteEffect *effect)
     efctSetSpeed(effect->speed);
     FUN_00183bb0();
     FUN_001834a4(0x22, 1000);
-    s32 narrowOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
+    f32 narrowOffset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
     FUN_001835b4(2, 0x22, 1000, narrowOffset, 0, 6);
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);

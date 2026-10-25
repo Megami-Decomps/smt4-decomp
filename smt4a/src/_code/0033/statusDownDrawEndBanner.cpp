@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; measured width moves unnecessarily, centered X/Y occupy opposite registers, and final VFP argument loads are scheduled differently. */
+/* NON_MATCHING: centered-width expression recovered; final VFP argument conversions and literal loads still differ. */
 #include "shard/S1ListPanel.h"
 
 extern "C" {
@@ -22,8 +22,8 @@ void statusDownDrawEndBanner(s32 x, s32 y, f32 alpha)
     FUN_001835b4(2, 0x12, 0x5c0, anchor->x + x, anchor->y + y, 0x97);
     u8 text[24];
     textFormatBuffer(text, DAT_00536bc4);
-    s32 width = fontMeasureLineAdvance(text, 2);
-    s32 textX = x + (anchor->x + (anchor->size[0] - width) / 2);
+    s32 textX = anchor->x + (anchor->size[0] - fontMeasureLineAdvance(text, 2)) / 2;
+    textX = x + textX;
     s32 textY = y + anchor->y;
     const SpriteInfo *baseline = FUN_001834a4(0x12, 0x561);
     textY += baseline->y;

@@ -57,7 +57,7 @@ void FUN_003ca5a4();
 void ptrListRemoveClearOwner(void *, AreaHandleOwner *);
 void lmapInitializeActorHandles();
 void FUN_0036aa04(AreaMainState *);
-void FUN_00483834(LmapObj *);
+void controllerUpdateWithIdleTimer(LmapObj *);
 void FUN_00297c3c();
 void FUN_00234b30();
 void FUN_002737a8();
@@ -106,7 +106,7 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     }
     g_gameState.pending = 0;
     FUN_0036aa04(state);
-    FUN_00483834(&state->setter);
+    controllerUpdateWithIdleTimer(&state->setter);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();

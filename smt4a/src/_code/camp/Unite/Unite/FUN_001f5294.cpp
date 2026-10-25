@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f5294` (_code @ 0x1f5294, 0x7094 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/CameraMotion.h"
+#include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_ContentWordList.h"
 
 extern "C" {
@@ -69,8 +71,8 @@ int FUN_003cca18(...);
 int FUN_004a8750(...);
 int FUN_004bcd90(...);
 int FUN_004d0eec(void);
-int FUN_004da5c4(...);
-int FUN_004da6e0(...);
+int unitRecordMergeInheritedFlags(...);
+int recordMergeByteMasks(...);
 int __aeabi_memcpy4(...);
 
 int slotRecordFindById(...);
@@ -128,7 +130,6 @@ int objectApplyIfUnblocked(...);
 int FUN_003450d4(...);
 int bitsHolderSetBit(...);
 int FUN_00359974(...);
-int gameFlagSetValue(...);
 
 int FUN_00184b90(...);
 int dataTableGet(...);
@@ -161,8 +162,6 @@ int FUN_003343f0(...);
 int buttonHelpGetValue(void);
 int soundChannelRequestIfEnabled(...);
 int FUN_003d54f8(...);
-int FUN_003f9ac4(int, int *, int);
-int controllerRefreshAtUnitScale(...);
 int FUN_003fe86c(...);
 int FUN_0040a908(...);
 int FUN_0040a918(...);
@@ -366,9 +365,6 @@ extern int partyPanelIsStateTwentyFive(void);
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
-/* Supplied declaration required: FUN_003f9ac4. */
-/* Supplied declaration required: controllerRefreshAtUnitScale. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: countersRaiseA. */
@@ -393,8 +389,8 @@ extern int FUN_0040af60(int);
 extern unsigned int FUN_004d0cd4(void);
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: FUN_004d0eec. */
-/* Supplied declaration required: FUN_004da5c4. */
-/* Supplied declaration required: FUN_004da6e0. */
+/* Supplied declaration required: unitRecordMergeInheritedFlags. */
+/* Supplied declaration required: recordMergeByteMasks. */
 /* Supplied declaration required: FUN_004da77c. */
 extern int FUN_004dad8c(int);
 /* Supplied declaration required: entryDefIsAvailable. */
@@ -515,7 +511,7 @@ unsigned int FUN_001f5294(void)
       if (temp_v5 != 1) {
         if (temp_v5 == 2) {
           if (piVar3[0x2484] != 0) {
-            FUN_003f9ac4(piVar3[0x2484],piVar3 + 0x2485,0);
+            FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0, 1.0f);
           }
           FUN_002c8894();
         }
@@ -526,12 +522,12 @@ unsigned int FUN_001f5294(void)
           if (piVar3[0x2483] != 0) {
             FUN_003fe86c(*(unsigned int *)(piVar3[0x2483] + 4),0,2);
           }
-          controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
-          FUN_003f9ac4(piVar3[0x2484],piVar3 + 0x2485,0);
+          controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0);
+          FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0, 60.0f);
           piVar3[0x2498] = 0x3c;
         }
         if (piVar3[0x2484] != 0) {
-          FUN_003f9ac4(piVar3[0x2484],piVar3 + 0x2485,0);
+          FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0, 1.0f);
         }
         FUN_002c8894();
         piVar3[0x2498] = piVar3[0x2498] + 1;
@@ -552,7 +548,7 @@ unsigned int FUN_001f5294(void)
           FUN_0040ae70(temp_v5,1);
           *(unsigned char *)(*(int *)(temp_v5 + 0x14) + 0xc4) = 0;
         }
-        controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
+        controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0);
         uniteCameraInitialize(piVar3 + 0x2485);
         temp_v26 = 0x20000;
         temp_v7 = asdVramBGetFreeBytes();
@@ -936,7 +932,7 @@ unsigned int FUN_001f5294(void)
           piVar3[0xff] = piVar3[0xff] + 1;
           return 0;
         }
-        gameFlagSetValue(0x455,1);
+        gameFlagSetValue(0x455, 1, 1);
         FUN_002a7b74();
         uniteStartOrQueueRequest(3);
         sysPlaySe(0x53);
@@ -2575,7 +2571,7 @@ LAB_001f8d58:
         __aeabi_memcpy4(asStack_170,temp_v15,300);
       }
       temp_v25 = piVar3 + 0x19a7;
-      FUN_004da6e0(*piVar3,temp_v40,asStack_170,0);
+      recordMergeByteMasks(*piVar3,temp_v40,asStack_170,0);
       piVar3[0x19b7] = piVar3[0x22db];
       piVar3[0x19b4] = piVar3[0x22d8];
       piVar3[0x19b5] = piVar3[0x22d9];
@@ -2584,7 +2580,7 @@ LAB_001f8d58:
     else {
       temp_v47[0] = 0;
       unitRecordBuild((short)piVar3[0x148e]);
-      FUN_004da5c4(*piVar3,piVar3 + temp_v47[0] * 10 + 0x148e,piVar3 + 0x19a7);
+      unitRecordMergeInheritedFlags(*piVar3,piVar3 + temp_v47[0] * 10 + 0x148e,piVar3 + 0x19a7);
       piVar3[0x19b7] = piVar3[0x22db];
       piVar3[0x19b4] = piVar3[0x22d8];
       piVar3[0x19b5] = piVar3[0x22d9];
@@ -3227,7 +3223,7 @@ LAB_001f9868:
       FUN_003fe86c(temp_v4,0,2);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
       temp_v4 = *(int *)(piVar3[0x2482] + 4);
-      controllerRefreshAtUnitScale(piVar3[0x2484],piVar3 + 0x2485,0);
+      controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(piVar3[0x2484]), reinterpret_cast<CameraMotionOutput *>(piVar3 + 0x2485), 0);
       uniteCameraInitialize(piVar3 + 0x2485);
       *(unsigned int *)(temp_v4 + 4) = *(unsigned int *)(temp_v4 + 4) & 0xfffffffc;
     }
@@ -3318,7 +3314,7 @@ LAB_001f9868:
           piVar3[0xff] = piVar3[0xff] + 1;
           return 0;
         }
-        gameFlagSetValue(0x457,1);
+        gameFlagSetValue(0x457, 1, 1);
         FUN_002a7b74();
         uniteStartOrQueueRequest(4);
         sysPlaySe(0x5b);
@@ -3930,7 +3926,7 @@ joined_r0x001fbbe8:
         piVar3[0xff] = piVar3[0xff] + 1;
         return 0;
       }
-      gameFlagSetValue(0x456,1);
+      gameFlagSetValue(0x456, 1, 1);
       FUN_00215bbc();
       FUN_002c39dc(0x12,0,0xffffffff);
       FUN_00284ee4(0);

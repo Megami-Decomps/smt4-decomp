@@ -4,7 +4,6 @@
 _ZNK9Obj558bd08getCountEv = 0xe5900040; // 0x43236c 0x432394 0x4323d0 (Obj558bd0::printProfile, after mov r0, r4)
 _ZN21Obj558cbcListenerPart8setValueEf = 0xed800a06; // 0x432590 (Obj558cbc ctor, after adds r0, r0, #136; vldr s0, [r5, #20])
 vec2GetSpeed = 0xed900a08; // 0x4058dc 0x405918 0x4059b8 (FUN_004058b0, after add r0, r5, #N)
-recordGetSignedFlags = 0xe1d008da; // 0x25cda4 0x25ce90 (FUN_0025ccc0, after add r0, r0, #52); smt4 keeps the function at 0x2499ac
 uiSpriteGetMode = 0xe1d005fc; // 0x4871cc 0x487218 (FUN_00487124, after mov r0, r7)
 spriteSetVisible = 0xe5c0103c; // 0x472704 0x472710 (FUN_00472568, after mov r1, #1; add r0, r4, #1088 / mov r0, r5)
 spriteSetLayer = 0xe1c013ba; // 0x2cdb60 0x2cdbb8 0x2cdc10 0x2cdc68 (FUN_002cdad4, after mov r1, #N; add r0, r4, #off)
@@ -23,3 +22,9 @@ aocMenuSetReadyFlag = 0xe5c01b81; // 0x478a04 0x47879c (aocMenuInitializeSprites
 progressUnlockByteGet = 0xe5d00000; // 0x344c40 0x35aa70 (FUN_00344bc8, FUN_0035a9fc: the byte address is formed in full in r0, add #0x2ec unfolded, then read)
 devilGetVoiceCategory = 0xe5d00038; // 0x416dd4 (FUN_00416d30: the record FUN_00184310 returned in r0 is passed; the u8 result is then widened by sxtb, which a direct field read would fold into ldrsb)
 renderCtxSetStereoMode = 0xe580152c; // 0x14623c (FUN_00146048: mov r1, #0 sets the argument and the context is loaded into r0 just before)
+loadStepGetPendingSlots = 0xe590012c; // 0x3e11d4 (FUN_003e11ac, after mov r0, r5)
+asdMdlNodeGetCount = 0xe5900028; // asdMdlManagerDestroy, after ldr r0, [r5, #8]; result kept by subs r6, r0, #0
+questUiGetInstance = 0xe5900000; // 0x320840 (FUN_00320834: reloads *&g_uiQuest into r0 right after ldr r4, [r0])
+_ZN14AocRequestBaseC1Ej = 0xe5801000; // the three AocRequest constructors (FUN_004279a8 family): r2/r3 saved to r5/r4 across it, this in r0, handle in r1
+movieSyncGetState = 0xe590000c; // FUN_003d3594 (reloads &DAT_00617f40 into r0 after FUN_00425aa0; same body as unrelated nw_gfx getters)
+shopListItemGetId = 0xe1d000b4; // FUN_004a3154 (after add r0, r5, r0, lsl #5; result sign-narrowed separately)

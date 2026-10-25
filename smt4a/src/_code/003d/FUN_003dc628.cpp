@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003dc628` (_code @ 0x3dc628, 0x19a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ int FUN_0037c8e4(...);
 int FUN_0037e1b0(...);
 int messageRestoreBanner(void);
 int FUN_003da8f4(...);
-int gameFlagSetValue(int, int);
 
 /* stack frame of void: 6 slot(s), 22 byte(s) */
 typedef struct {
@@ -158,7 +158,6 @@ extern int uniteIsPhase26Active(void);
 extern int campCecEditRun(void);
 /* Supplied declaration required: FUN_003da8f4. */
 extern int gameDataFlagTestBit(void);
-/* Supplied declaration required: gameFlagSetValue. */
 
 
 /* WARNING: Removing unreachable block (ram,0x0019dec4) */
@@ -211,7 +210,7 @@ void FUN_003dc628(void)
   temp_v5 = uniteStateIsDone();
   if ((((temp_v5 == 0) && (temp_v5 = gameFlagIsSet(0x458), temp_v5 == 0)) &&
       (temp_v5 = uniteRequestGet(), temp_v5 == 0x1a)) && (temp_v5 = uniteNotBusy(), temp_v5 != 0)) {
-    gameFlagSetValue(0x458,1);
+    gameFlagSetValue(0x458, 1, 1);
     sysPlaySe(0x52);
     FUN_0037e1b0((int)*(char *)(temp_v9 + 0xb8),1);
     FUN_002c8538(1);
@@ -220,7 +219,7 @@ void FUN_003dc628(void)
   temp_v5 = uniteStateIsDone();
   if (((temp_v5 == 0) && (temp_v5 = gameFlagIsSet(0x459), temp_v5 == 0)) &&
      ((temp_v5 = uniteRequestGet(), temp_v5 == 0x19 && (temp_v5 = uniteNotBusy(), temp_v5 != 0)))) {
-    gameFlagSetValue(0x459,1);
+    gameFlagSetValue(0x459, 1, 1);
   }
   temp_v5 = uniteStateIsDone();
   if (((((temp_v5 == 0) && (temp_v5 = gameFlagIsSet(0x418), temp_v5 == 0)) ||

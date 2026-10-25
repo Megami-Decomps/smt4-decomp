@@ -1,4 +1,4 @@
-/* NON_MATCHING: used-list search is predicated and merge helpers allocate different registers. */
+/* NON_MATCHING: search branch structure matches; null setup, saved-register roles and merge link loads differ. */
 #include "common.h"
 
 // Apocalypse's block nodes have a pool field before their links, unlike the shared IV prefix.
@@ -58,14 +58,19 @@ static void mergeNext(VramHeapStateA *heap, VramFreeNodeA *block)
     }
 }
 
+static VramFreeNodeA *findBlock(VramFreeListA *list, u32 address)
+{
+    for (VramFreeNodeA *block = list->first; block != NULL; block = block->next) {
+        if (block->address == address)
+            return block;
+    }
+    return NULL;
+}
+
 // Return a used VRAM run to the sorted free list and coalesce adjacent runs.
 void asdVramHeapFree(VramHeapStateA *heap, u32 address)
 {
-    VramFreeNodeA *block = heap->used.first;
-    for (; block != NULL; block = block->next) {
-        if (block->address == address)
-            break;
-    }
+    VramFreeNodeA *block = findBlock(&heap->used, address);
     unlinkBlock(&heap->used, block);
     heap->freeBytes += block->size;
     FUN_0019c920(&heap->free, block);

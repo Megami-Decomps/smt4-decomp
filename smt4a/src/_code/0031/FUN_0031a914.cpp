@@ -27,9 +27,7 @@ const char *FUN_0031a914(s32 index)
 
     if (loadSlotIsLoaded(0x36) == 0) {
         result = DAT_0052c8f4;
-    } else if (index >= 5) {
-        result = DAT_0052c904;
-    } else {
+    } else if (index < 5) {
         switch ((s16)index) {
         case 0:
             row = 2;
@@ -51,6 +49,8 @@ const char *FUN_0031a914(s32 index)
             break;
         }
         result = dataTableGetEntries(dataTableGet(0x36, 0))->rows[row].name;
+    } else {
+        result = DAT_0052c904;
     }
     return result;
 }

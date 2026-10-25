@@ -1,9 +1,8 @@
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
 extern s32 scrGetArg(s32 index);
-extern u32 btlUnitGet(u32 unit);
 extern void FUN_0026beb4(s32 a, u32 unit, s32 kind, s32 b, s32 c);
 
 extern u32 g_btlScriptUnit;
@@ -41,7 +40,7 @@ s32 scrCommBtlUnitSetStateFromArg(void)
         kind = 0x10;
         break;
     }
-    FUN_0026beb4(0, btlUnitGet(g_btlScriptUnit), kind, 0, 1);
+    FUN_0026beb4(0, reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit))), kind, 0, 1);
     return 1;
 }
 

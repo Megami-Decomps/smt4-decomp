@@ -72,6 +72,18 @@ def read_objects(path):
     return objects
 
 
+def read_aliases(path):
+    """Every `type:alias` line of a symbol file: {name: address}. A second name the linker gives an
+    address that already has one (`__init_array_end` of an empty array equals its start): an object
+    referencing the alias is relinked against the address's own name (build.py `link_aliases`)."""
+    aliases = {}
+    for line in Path(path).read_text(encoding="utf-8").splitlines():
+        match = SYMBOL.match(line)
+        if match and "type:alias" in match[3].split(' orig:"')[0].split():
+            aliases[match[1]] = int(match[2], 16)
+    return aliases
+
+
 def read_object_sizes(path):
     """{address: size} of the `type:object` lines that give a `size:0x...`: a pool word pointing inside
     such an object (a vtable's address point, 8 bytes in) is a relocation to it plus an addend."""

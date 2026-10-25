@@ -7,7 +7,7 @@ extern RenderCtx *g_titleScene;
 /* Pushes a render state; when it changes (or the stack is dirty) the new state is applied. */
 void renderStatePush(s32 value)
 {
-    renderStackPush(&g_titleScene->stackB, value);
+    renderCtxPushB(g_titleScene, value);
 }
 
 } /* extern "C" */

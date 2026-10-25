@@ -9,7 +9,7 @@ struct BattleSoundIdentity {
 extern "C" {
 void FUN_001566a8(s32 category, u32 sound, u32 volume, u32 flags, s32 enabled, float left, float right);
 BattleSoundIdentity* FUN_001568f8(BtlMainStateA* battle, s32 group);
-void FUN_0015f490(u32 id, u32 sound, s32 enabled, s32 flags, float volume);
+void FUN_0015f490(u32 id, s32 sound, u32 enabled, u32 flags, f32 volume);
 BtlMainStateA* btlGetMainState(void);
 u32 FUN_0014af98(void);
 u32 FUN_00152f44(void);

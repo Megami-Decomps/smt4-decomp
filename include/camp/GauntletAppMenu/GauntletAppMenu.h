@@ -27,10 +27,10 @@ typedef struct GauntletAppMenuWork {
             /* 0x2A8 */ u32 count;
             /* 0x2AC */ const void *table;   /* the entry table of data slot 0xD */
             /* 0x2B0 */ u32 tableCount;
-            /* 0x2B4 */ u8 forceFirst;
-            /* 0x2B5 */ u8 forceSecond;
+            /* 0x2B4 */ s8 forceFirst;
+            /* 0x2B5 */ s8 forceSecond;
             /* 0x2B6 */ u8 forceMiddle;
-            /* 0x2B7 */ u8 forceThird;
+            /* 0x2B7 */ s8 forceThird;
             /* 0x2B8 */ u8 params[0x20];     /* draw parameter block shared by the sprites */
             /* 0x2D8 */ GauntletSprite sprites[4];
         } list;
@@ -48,6 +48,8 @@ typedef char GauntletAppMenuListLayoutCheck[
     offsetof(GauntletAppMenuWork, list.entries) == 0x74 &&
     offsetof(GauntletAppMenuWork, list.count) == 0x2A8 &&
     offsetof(GauntletAppMenuWork, list.forceFirst) == 0x2B4 &&
+    offsetof(GauntletAppMenuWork, list.forceSecond) == 0x2B5 &&
+    offsetof(GauntletAppMenuWork, list.forceMiddle) == 0x2B6 &&
     offsetof(GauntletAppMenuWork, list.forceThird) == 0x2B7 &&
     offsetof(GauntletAppMenuWork, list.sprites) == 0x2D8 &&
     sizeof(GauntletAppMenuWork) == 0x534 ? 1 : -1];

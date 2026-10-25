@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and block placement: retail keeps the flag block in fp, the two name tables in r9/sl and places the field-name selector tail after the 0x65 handling; the instruction stream otherwise follows. */
+/* NON_MATCHING: flag-block/name-table saved registers and incoming level/selector load scheduling differ; branch layout matches. */
 #include "common.h"
 
 extern "C" {
@@ -97,25 +97,25 @@ void FUN_003849cc(s32 kind, s32 index, s32 mode, char *buffer, s32 level)
         }
         if (selector == 2) {
             s8 site = (s8)flags[0x7C6];
-            if (site == 0) {
-                textFormatBuffer(buffer, "\202c\202\217\202\215\202\201\202\211\202\216");
+            if (site != 0) {
+                if (index >= 100) {
+                    FUN_0032725c(index - 100, buffer, -1);
+                    return;
+                }
+                textFormatBuffer(buffer, sites[site]);
                 return;
             }
-            if (index >= 100) {
-                FUN_0032725c(index - 100, buffer, -1);
-                return;
-            }
-            textFormatBuffer(buffer, sites[site]);
+            textFormatBuffer(buffer, "\202c\202\217\202\215\202\201\202\211\202\216");
             return;
         }
     }
-    if (kind != 0xcb && (kind == 0x65 || kind < 0x66)) {
+    if (kind == 0xcb || (kind != 0x65 && kind >= 0x66)) {
         libc_strcpy(name, dataTableEntryNameById(kind, index));
-        libc_strcpy(reading, nameTableFind(kind, index));
-        textFormatBuffer(buffer, "%s\201@%s", name, reading);
+        textFormatBuffer(buffer, "%s", name);
         return;
     }
     libc_strcpy(name, dataTableEntryNameById(kind, index));
-    textFormatBuffer(buffer, "%s", name);
+    libc_strcpy(reading, nameTableFind(kind, index));
+    textFormatBuffer(buffer, "%s\201@%s", name, reading);
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: directory pointer stays in a saved register; accessory position converts/stores scalar components rather than the native vector sequence. */
+/* NON_MATCHING: compile-time directory constant restores owner registers; accessory vector construction and record-loop operand allocation still differ. */
 #include "shard/W6_W6Match1_BattleStageModel.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -14,6 +14,8 @@ struct BattleStageAccessoryRecord {
 };
 typedef char BattleStageAccessoryLayout[sizeof(BattleStageAccessoryPart) == 0x24 &&
     sizeof(BattleStageAccessoryRecord) == 0x4C && offsetof(BattleStageAccessoryPart, position) == 0x1E ? 1 : -1];
+
+#define BATTLE_STAGE_DIRECTORY "battle/battle_map/"
 extern "C" {
 extern void *g_mapAccessoryTable;
 BtlMainState *btlGetMainState(void);
@@ -25,20 +27,19 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 
 void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
 {
-    const char *directory = "battle/battle_map/";
     char path[64];
     stage->key0 = area;
     stage->key1 = variant;
-    textFormatBuffer(path, "%se%03d_%02d.bcenv", directory, area, variant);
+    textFormatBuffer(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, area, variant);
     if (!FUN_002402c4(btlGetMainState(), path)) {
-        textFormatBuffer(path, "%se%03d_%02d.bcenv", directory, 1, 1);
+        textFormatBuffer(path, "%se%03d_%02d.bcenv", BATTLE_STAGE_DIRECTORY, 1, 1);
         stage->key0 = 1;
         stage->key1 = 1;
     }
     FUN_002a09b4(path, 0);
-    textFormatBuffer(path, "%sb%03d_%02d.bam", directory, area, variant);
+    textFormatBuffer(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, area, variant);
     if (!FUN_002402c4(btlGetMainState(), path)) {
-        textFormatBuffer(path, "%sb%03d_%02d.bam", directory, 1, 1);
+        textFormatBuffer(path, "%sb%03d_%02d.bam", BATTLE_STAGE_DIRECTORY, 1, 1);
         stage->key0 = 1;
         stage->key1 = 1;
     }
@@ -58,7 +59,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
     for (s32 index = 0; index < 2; ++index) {
         const BattleStageAccessoryPart *part = &record->parts[index];
         if (part->name[0] != '0') {
-            textFormatBuffer(path, "%s%s.bam", directory, part->name);
+            textFormatBuffer(path, "%s%s.bam", BATTLE_STAGE_DIRECTORY, part->name);
             stage->scene.nodes[index + 1] = asdMdlManagerCreateSecondList(path, options);
             stage->scene.offsets[index + 1].x = (f32)part->position[0];
             stage->scene.offsets[index + 1].y = (f32)part->position[1];

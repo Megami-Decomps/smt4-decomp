@@ -1,10 +1,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlScript.h"
+#include "battle/BattleUnitSlot.h"
 
 struct ScriptUnit;
 extern "C" {
 s32 scrGetArg(u32 index);
-ScriptUnit *btlUnitGet(u32 id);
 BtlMainState *btlGetMainState();
 void FUN_00250720(BtlMainState *battle);
 void FUN_002551ac(s32 actor, ScriptUnit *unit, BtlActionRecord *action, s32 mode,
@@ -17,7 +17,7 @@ void FUN_002505c0(s32 actor, ScriptUnit *unit, void *key, s32 mode, s32 duplicat
 u32 btlScriptDamageFirstCombatantNonlethally()
 {
     s32 damage = scrGetArg(0);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     FUN_00250720(btlGetMainState());
     if (btlGetMainState()->entries[0].value <= damage)
         damage = btlGetMainState()->entries[0].value - 1;

@@ -59,7 +59,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: jobGetWork. */
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: padButtonIsPressed. */
@@ -144,9 +144,9 @@ LAB_002be87c:
     temp_v3 = 3;
     goto LAB_002bdaf8;
   case 3:
-    temp_v1 = FUN_00163fd4(7);
+    temp_v1 = slotIsActive(7);
     temp_v8 = temp_v1 != 0;
-    if ((!(unsigned char)temp_v8) && (temp_v1 = FUN_00163fd4(8), temp_v1 != 0)) {
+    if ((!(unsigned char)temp_v8) && (temp_v1 = slotIsActive(8), temp_v1 != 0)) {
       temp_v8 = '\x02';
     }
     temp_v9 = *(char *)((int)piVar2 + 0x3d) == '\0';

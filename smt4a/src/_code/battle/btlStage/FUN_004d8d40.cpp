@@ -1,4 +1,4 @@
-/* NON_MATCHING: lifecycle switch peels state one instead of a jump table; stage-ID pair load grouping differs. */
+/* NON_MATCHING: context assignment and stage-ID validation loads schedule differently in state one. */
 #include "battle/btlStage.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match1_BattleStageModelA.h"
@@ -32,12 +32,14 @@ u32 FUN_004d8d40(BtlStage *stage, s32 enabled)
         return 0;
     }
     switch ((u32)stage->state) {
+    case 0:
+        break;
     case 1: {
         FUN_002c23cc(0);
         stage->context = g_btlStage.context;
         s32 id = stage->apocalypse.identifiers.stageId;
-        s32 variant = stage->apocalypse.identifiers.stageVariant;
-        if (id < 0 || variant < 0) {
+        s32 variant;
+        if (id < 0 || (variant = stage->apocalypse.identifiers.stageVariant) < 0) {
             id = 1;
             variant = 1;
         }

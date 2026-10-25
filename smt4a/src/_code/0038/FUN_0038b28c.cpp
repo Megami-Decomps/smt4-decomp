@@ -1,11 +1,10 @@
-/* NON_MATCHING: the return-0 exit is an unpredicated mov r0,#0 before the branch; retail predicates it (movne r0,#0; bne). */
 #include "common.h"
 
 extern "C" {
 
 extern s32 scrGetCommandFrame(void);
 extern s32 FUN_004186a4(void);
-extern u32 FUN_004186e0(u32 value);
+extern u16 FUN_004186e0(void);
 extern void FUN_00418070(u32 value, s32 arg);
 extern void partyEntryIsAvailable(u32 value);
 extern void optionsClearFlag1(void);
@@ -33,7 +32,7 @@ s32 FUN_0038b28c(void)
         if (scrWorkGetValue(0) != 0) {
             return 0;
         }
-        value = FUN_004186e0(0);
+        value = FUN_004186e0();
         FUN_00418070(value, 0);
         partyEntryIsAvailable(value);
         optionsClearFlag1();

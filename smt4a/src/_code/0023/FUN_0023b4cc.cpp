@@ -34,6 +34,7 @@ void FUN_002f6048(QuestUi *ui);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 s32 vec2GetXInt(void *vector);
 s32 vec2GetYInt(void *vector);
+f32 vec2GetSpeed(const void *vector);
 void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
 void FUN_001835b4(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
@@ -98,7 +99,7 @@ u32 FUN_0023b4cc(void)
         s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.3f);
         s32 x = vec2GetXInt(ui->panel);
         s32 y = vec2GetYInt(ui->panel);
-        f32 speed = ui->panelSpeed;
+        f32 speed = vec2GetSpeed(ui->panel);
 
         efctSetSpeed(speed);
         u16 category = ui->category;
@@ -126,7 +127,7 @@ u32 FUN_0023b4cc(void)
     }
     }
     renderStackPop(&g_renderCtx->stackA);
-    renderStackSet(&g_renderCtx->stackB, packNibblesAndByte(6, 7, 0));
+    renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

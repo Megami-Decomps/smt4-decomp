@@ -4053,3 +4053,67 @@
 0010b224 titleCaptureReadySurfaceOnce inferred [high] Capture the ready title surface at 512x512, downsample dimensions and mark the capture complete.
 0037003c resourceReleaseRelativeMember inferred [high] Resolve the optional self-relative pointer at member offset 8 and release it through the resource helper.
 002499ac uiSpriteGetCompletionState inferred [high] Twin of smt4a objectGetSignedFlag; signed UiSpriteState completion@0x8a is used after cursor animation in FUN_003a099c; Main confirmed shared owner.
+00396274 _ZN9Obj42233cC1Ev evidence Constructor stores _ZTV9Obj42233c+8 and calls Obj422318(s32); factory allocates size 0x9c.
+0034f06c _ZN9Obj420a2c12buildEntriesEP14Obj420a2cOwnerP15Obj420a2cSourceS3_ evidence Exact armcc emitted symbol; retail forwards owner/sourceA/sourceB in r1-r3 to FUN_0034f768.
+002e0d34 terminalGetCharacterDisplayName inferred [high] Looks up terminal name-table id; ids above 200 use the player name.
+00312e78 scrBtlSelectRandomCategoryEntry inferred [high] Collects table-8 ids matching script category and returns one random id through scrSetResult.
+0033be40 partyClassifyDemonLevelRequirement inferred [high] Returns status 1 normally, or level-gated 0/2 when a required stored demon is absent.
+0034f768 mobiclipDecoderSetSources inferred [high] Requires nonnull allocator owner and assigns owner/first source/second source at decoder+4,+8,+c.
+00210e38 campCecEditDrawContents inferred [high] Draw CEC editor header, scrolling directory rows and scrollbar
+002f316c effPartCloneAfter inferred [high] Allocate and initialize an effect part copy and insert it after the source list node
+00348f70 questActivateEligibleCategorySix inferred [high] Activate newly eligible category-six quests and snapshot progress bookkeeping
+003acf1c selectionSetUnitByRecordId inferred [med] Update selection identifiers and resolve corresponding table-zero record indices
+003c59fc btlDebugCreateAttackCameraMenu inferred [high] Creates 31-row Attack Camera Menu from active battle camera parameters
+001924d0 mapObjResetSlots inferred [high] Clears the pending map-object request and resets all 24 live object slots.
+001d350c mapSelectNearestInteractiveModel inferred [high] Selects active deferred model within 90 distance and 70-degree facing error, then publishes its ID and label.
+0027de24 modelManagerReleaseSlots inferred [high] Deletes owned objects and destroys model handles across all 109 manager slots.
+0022b14c listUpdateRevealTransition inferred [high] Waits for list texture readiness, reveals rows successively, advances the intro sprite and reports signed completion.
+0027e6f4 btlFindNthActiveSpecialEntry inferred [med] Returns nth entry id whose flags contain both 0x1 and 0x100, else -1
+002ebe68 bustupShakeStart inferred [high] Allocates timed two-axis shake work and starts EVE_BustupShake process
+002296f4 frameRangeExtend inferred [high] Extends the indexed frame interval using nonnegative offsets from a clamped base.
+00288ef0 unitGetStereoScreenPosition inferred [high] Writes unit screen coordinates and adds stereo parallax to X.
+00312c10 scrCommBtlTableValue inferred [high] Reads battle table13 at a script-supplied one-based index clamped to table bounds and sets the script result.
+001db548 cecInitializeSupport inferred [med] Runs the allocator hook and CEC setup wrapper; returns success when the signed result failure bit is clear.
+001f6524 devilCompareTablePriority inferred [med] Compares table01/02 values, record byte2 ascending, byte3 descending, then demon IDs.
+003107fc scrCommOpenCounterPanel inferred [high] Opens g_messageMain's counter panel in mode10, copies the current game counter and starts animation6.
+00293e08 nodeGroupSetScale inferred [high] Applies a by-value scale to a group's root owner and all three nonnull child owners.
+00124fe8 buttonHelpIsButtonEnabled inferred [high] Tests the six help button IDs and their 8-to-4 / 9-to-3 aliases for an enabled slot.
+0022b83c uiClampScrollOffset inferred [high] Clamps a scroll offset to the object's size minus the400x240 viewport.
+002c6a64 titleDrawLogo inferred [high] Draws title logo glow and layers with visibility and animation speed.
+002d54dc mikadoDestroyCameraCallback inferred [high] Registered Mikado cleanup callback marks completion, finalizes and deletes the owned camera.
+002d5534 mikadoDrawCameraCallback inferred [high] Registered Mikado draw callback draws an existing camera in active states and returns0.
+0021bc04 mapMarkVisitedAndUpdateRegionFlags inferred [high] Sets map unlock flag and region progress flags then enables the map entry
+0022d800 uiDrawScrollingSelectionEntry inferred [high] Draws framed selection glyphs and clipped scrolling contents for one widget entry
+00232a6c effectPoolCreateObject inferred [high] Creates one of two effect object classes in first free pool slot and starts it
+002540b8 questClearOwnerModeBitsIfEligible inferred [med] Clears owner ID mode bits after runtime flag and ID-kind eligibility checks
+0028ffb8 uiQuestCountDetailPages inferred [high] Counts current entry detail pages and resets selection that falls past page count
+002c87a4 mapEnemyRestartIdleEntries inferred [high] Restarts active unblocked map enemies in idle or completed states
+00343810 modelApplyChangedCachedVector inferred [high] Applies cached four-component vector to resource when changed or marked dirty
+003a80f4 bibleApplyConfirmedSelection inferred [high] Commits compendium selection after confirmation and either restores list cursor or closes empty list
+003c8db4 fusionCandidateMatchesParentFilter inferred [high] Checks result identity availability race and required or excluded parent slots
+0032b1b4 recordFilterMaskByKind inferred [med] Filters input mask according to record kind and grouped kind aliases.
+002d57a8 cursorSelectedItemIsAtLimit inferred [med] Tests selected grid item's current float against its limit; returns true without a selected item.
+002f14ec scrCommTestBattleFlag inferred [high] Tests the script-selected bit in battle state flags and writes the script result.
+002eb278 targetSelectChangeDisplayMode inferred [high] Resets primary/secondary target animations when switching display mode.
+002ae3c0 contentGetEntryKind inferred [high] Public item-kind query wrapper tail-calls aocEntryGetKind; branch-to-next becomes retail NOP.
+003cf438 btlSelectActorCommandMotion inferred [high] Sets actor motion from forced state, turn flags and current command skill or item skill.
+0029c1fc partyFindFreeStockSlot inferred [high] Checks occupied prefix against roster capacity, then finds unused unit record.
+00300904 btlUiGetSelectedColumnValue inferred [high] Searches enabled battle-panel columns and returns the selected column word or minus1.
+0038aa80 aocBoardDrawParameterOverlay inferred [high] Draws enabled add-on board overlay using the draw owner's animation speed and temporary render state.
+002568c4 btlReflectQueueKind34 inferred [high] Queue kind0x34 and invalidate secondary ID when a prior same-actor kind0x34 action exists.
+00253ba0 mapEnemyIsClosestMarkedByAdjustedDistance inferred [high] Compare marked enemy target distance against active marked enemies, adding300 for state2.
+001f5f94 fusionComparePairsByRaceLevelAndId inferred [high] Compare first parent then second parent by ascending race, descending level, ascending demon ID.
+00324e34 btlScriptGroupHasRemainingTurns inferred [high] Report positive remaining-turn counter on an eligible group member or the active battle entry.
+00289234 eventTexRegisterAndSortTask inferred [high] Remove invalid event texture jobs, register a new handle, compact slots, and sort by job status.
+00293a60 partyPanelIsStateThree inferred [high] Report whether the party panel exists and is in state3.
+001ad264 keyedRecordSetVectorPair3 inferred [high] Copies input vector pair to keyed record slot3 at11C after native remaining-count bounds check.
+002331c0 renderCtxPopB inferred [high] Pops canonical title render-context stackB and reapplies the exposed current state.
+00232554 titleScissorApplyOrClearRequests inferred [high] Applies bottom-screen scissor with owner offset or clears/reapplies the current title request state.
+003578b8 cecStopService inferred [med] Stops the CEC service and propagates the stop result; IDENTICAL after preserving the direct stop result.
+002217bc effectTextureFindOrReserve inferred [high] Finds a named effect texture or reserves a cache slot/loading request; canonical texture-cache object now IDENTICAL.
+0029b7b8 partyClassifyRequestedSources inferred [high] Classifies requested source IDs by party ownership/other availability into the output halfwords and validates the set; IDENTICAL nested scan.
+0032820c lmapApplyLightVisibilityGrid inferred [high] Flattens the ten-by-eight light grid column-first, skips marker9, and enables/disables matching light children.
+002dcb60 recordCompareKindAndOrder inferred [high] Comparator sorts table1b/1c records by descending recovered kind rank, then descending order.
+0014ed58 asdModelRebuildAttributeRecords inferred [high] Releases/frees existing model attribute records and rebuilds the collection for a key.
+00389ed8 aocDisplayQueueFormattedEntry inferred [high] Formats kind16 into a128-byte buffer and queues the nonempty record on the AOC display.
+00311be4 dataTableChooseWeightedId inferred [high] Chooses a low-byte ID from section5/7 with24-bit weights packed into each table word.

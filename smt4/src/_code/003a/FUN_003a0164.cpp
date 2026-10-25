@@ -2,7 +2,7 @@
 #include "gamedata/EquipmentSortPower.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
 extern "C" {
-u32 FUN_002ae3c0(u32 id);
+u32 contentGetEntryKind(u32 id);
 EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32 id);
 EquipmentSortPowerSecondary *dataTable08Sub1GetRecord(u32 id);
 s32 FUN_00230f44(const u16 *item);
@@ -14,7 +14,7 @@ static inline u16 equipmentSortPower(u16 id)
     struct ExtendedPowerView { u8 prefix[0xA6]; u16 power; };
     typedef char ExtendedPowerOffset[offsetof(ExtendedPowerView, power) == 0xA6 ? 1 : -1];
     u16 power = 0;
-    switch (FUN_002ae3c0(id)) {
+    switch (contentGetEntryKind(id)) {
     case 2: case 3: case 4: case 5: case 6: case 7: case 8:
         power = ((ExtendedPowerView *)dataTable08Sub2GetRecord(id))->power;
         break;

@@ -16,7 +16,7 @@ extern "C" {
 extern AocSystem *g_aocSystem;
 extern const char DAT_0052d13c[];
 s32 tableByteGet1(s32 page);
-void FUN_0023723c(u32 sprite, s32 font, u32 color, s32 flags, s32 style, const char *format, ...);
+void asdTextFormatStream(u32 sprite, s32 font, u32 color, s32 flags, s32 style, const char *format, ...);
 void *FUN_00471678(AocSystem *system, s32 page, s32 entry);
 const char *fileSectionGetData(u32 file, s32 entry, s32 *length);
 void asdTextDrawDirectoryEntry(u32 sprite, s32 font, u32 color, s32 flags, s32 style, void *file, s32 entry);
@@ -29,7 +29,7 @@ void FUN_00403a34(HunterDatabaseWork *work, s32 page)
     s32 count = tableByteGet1(page) + 1;
     view->total = 0;
     for (s32 entry = 0; entry < 5; ++entry) {
-        FUN_0023723c(work->sprites[entry], 3, 0xFFFFFFFF, 0, 3, DAT_0052d13c);
+        asdTextFormatStream(work->sprites[entry], 3, 0xFFFFFFFF, 0, 3, DAT_0052d13c);
     }
     for (s32 entry = 0; entry < count; ++entry) {
         void *source = FUN_00471678(g_aocSystem, page, entry);

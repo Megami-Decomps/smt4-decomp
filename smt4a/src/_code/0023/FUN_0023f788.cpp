@@ -1,4 +1,4 @@
-/* NON_MATCHING: snapshot default-clear stores are absent; saved registers and optional-subject branch layout differ. */
+/* NON_MATCHING: snapshot default clears and optional-subject guards recovered; snapshot copy splits its third word out of retail's ldm/stm group. */
 #include "battle/BattleCommandTargets.h"
 #include "shard/Shard0032.h"
 #include "gamedata/Table04Record.h"
@@ -31,18 +31,23 @@ void FUN_0023f788(BattleCommandTargets *command)
     SkillSelectionView *selection = reinterpret_cast<SkillSelectionView *>(command);
     selection->skills = SkillLists();
     for (s32 subject = 0; subject < 4; ++subject) {
+        SkillList skills = {0};
         s16 id = selection->subjects[subject];
         if (id == -4)
             continue;
         UnitRecord *unit;
         if (id == -1) {
             unit = gameGetPlayerData();
+        } else if (id == -2) {
+            unit = btlMainGetUnk14();
+            if (unit == NULL)
+                continue;
         } else {
-            unit = id == -2 ? btlMainGetUnk14() : gameGetSlotRecord(id);
+            unit = gameGetSlotRecord(id);
             if (unit == NULL)
                 continue;
         }
-        SkillList skills = *reinterpret_cast<const SkillList *>(unit->skillList.skills);
+        skills = *reinterpret_cast<const SkillList *>(unit->skillList.skills);
         s32 written = 0;
         for (s32 index = 0; index < 8; ++index) {
             u16 skill = skills.ids[index];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only (retail keeps the work block in r4 and the allocation size in r5; the build swaps them) and the sides clamp compiles to movcc where retail has movls */
+/* NON_MATCHING: side clamp matches; work/size and new-block registers differ, and geometry result is stored without retail's r1 copy. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -25,10 +25,7 @@ PolyWindBlock *effPolyWindGeomClone2(PolyObject *obj)
     block->data = block->payload;
     block->self = block;
     sides = params->sides;
-    if (sides <= 3) {
-        sides = 3;
-    }
-    params->sides = sides;
+    params->sides = sides > 3 ? sides : 3;
     block->geom = FUN_002ff43c(srcBlock->geom);
     FUN_003cb24c(block, params);
     return block;

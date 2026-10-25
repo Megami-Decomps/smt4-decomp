@@ -21,13 +21,16 @@ u32 FUN_001061ec()
         g_titleFlags.overlay.frame = 0;
     } else {
         f32 color[4];
-        color[0] = color[1] = color[2] = color[3] = 1.0f;
-        if (g_titleFlags.overlay.frame >= 84) {
-            color[3] = 0.2f * (f32)(u32)(88 - g_titleFlags.overlay.frame);
+        color[0] = 1.0f;
+        color[1] = 1.0f;
+        color[2] = 1.0f;
+        color[3] = 1.0f;
+        if (g_titleFlags.overlay.frame > 83) {
+            color[3] = (f32)(u32)(88 - g_titleFlags.overlay.frame) * 0.2f;
         } else if (g_titleFlags.overlay.frame < 22) {
             color[3] = (f32)(g_titleFlags.overlay.frame - 2) * 0.05f;
         }
-        if (0.0f < color[3]) {
+        if (color[3] > 0.0f) {
             u32 resource = FUN_002c1c0c(0x2c, 0);
             FUN_002c1b64(g_titleScene, resource);
             FUN_002c1ac8(color, color, color, color, 128.0f, 88.0f, 64.0f, 64.0f,

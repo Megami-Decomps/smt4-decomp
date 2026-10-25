@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037be64` (_code @ 0x37be64, 0x5b0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_0031654c(unsigned int, int);
 int FUN_0034543c(int);
 int FUN_0036fcd0(unsigned int, int);
 int partyRefreshSlotValues(void);
-int gameFlagSetValue(int, int);
 int recordSetClampedCurrent(int, unsigned int);
 
 /* stack frame of void: 5 slot(s), 18 byte(s) */
@@ -43,7 +43,6 @@ extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_0034543c. */
 /* Supplied declaration required: FUN_0036fcd0. */
 /* Supplied declaration required: partyRefreshSlotValues. */
-/* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: recordSetClampedCurrent. */
 
@@ -80,7 +79,7 @@ void FUN_0037be64(void)
   FUN_002e59f8(temp_v6 + 0x28310,temp_v16,0x28);
   rt_aeabi_memclr(temp_v6 + 0x28310,0x50);
   rt_aeabi_memclr(temp_v6 + 0x28360,0x30);
-  gameFlagSetValue(0x4c7,1);
+  gameFlagSetValue(0x4c7, 1, 1);
   temp_v19 = temp_v6 + 0x28300;
   temp_v15 = 0;
   do {

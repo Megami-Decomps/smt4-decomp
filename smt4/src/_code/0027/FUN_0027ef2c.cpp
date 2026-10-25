@@ -1,8 +1,8 @@
 /* NON_MATCHING: The queue counter update and zero-kind state setup are scheduled differently. */
 #include "shard/W8Match1_PositionRequests.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 extern "C" {
 extern PositionRequestPool* DAT_00448c20;
-u32 FUN_00291e40(void);
 
 // Initializes the first free positional request and increments the live request count.
 void FUN_0027ef2c(u32 id, s32 kind, f32 x, f32 y, f32 z)
@@ -21,7 +21,8 @@ void FUN_0027ef2c(u32 id, s32 kind, f32 x, f32 y, f32 z)
                 request->timer = 0;
                 request->state = 0;
             } else {
-                request->timer = FUN_00291e40();
+                SoundActorQueuePosition position = { x, y, z };
+                request->timer = FUN_00291e40(id, position);
                 request->state = 1;
             }
             ++DAT_00448c20->count;

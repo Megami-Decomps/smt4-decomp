@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002000c8` (_code @ 0x2000cc, 0x48c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int cecProcessForward(void);
 int FUN_002597c0(void);
 int objectFlagsClear(unsigned int, int);
 int saveGetMapFlag(int, int);
-int gameFlagSetValue(int, int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(void);
 int gameGetUnitRecord(...);
@@ -34,7 +34,6 @@ extern int cecQueryOptionalProcess(void);
 /* Supplied declaration required: FUN_002597c0. */
 /* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: saveGetMapFlag. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int messageMainGetChoiceResult(void);
@@ -110,7 +109,7 @@ unsigned int FUN_002000c8(int *param_1,int param_2)
           rt_aeabi_memclr(temp_v3 + 0x38,0x14);
           FUN_0025463c();
           FUN_002595e0();
-          gameFlagSetValue(0x550,1);
+          gameFlagSetValue(0x550, 1, 1);
           *(unsigned int *)(temp_v4 + 0x38) = 7;
           *(unsigned char *)(temp_v4 + 0x3c) = (*(unsigned char *)(temp_v4 + 0x3c) & 0xfe) | 2;
           if ((*(char *)(temp_v4 + 0x3f) != '\0') &&

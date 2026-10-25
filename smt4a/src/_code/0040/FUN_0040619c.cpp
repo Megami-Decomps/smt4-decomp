@@ -1,5 +1,5 @@
-/* NON_MATCHING: owner/index use r5/r4 instead of retail r4/r5, and SUBS folds the initial compare/copy; fdiff also classifies retail's final POP as data. */
 #include "common.h"
+extern "C" void _ZN4__rw10__rw_throwEiz(s32 kind, ...);
 
 struct IndexedValues {
     u32 unk00;
@@ -12,15 +12,26 @@ struct IndexedValues {
     {
         return end - begin;
     }
+
+    void checkIndex(const u32 &index) const
+    {
+        if (index >= size())
+            _ZN4__rw10__rw_throwEiz(9, "", "", index, size());
+    }
+
+    void *at(u32 index) const
+    {
+        checkIndex(index);
+        return begin[index];
+    }
 };
 
-extern "C" void _ZN4__rw10__rw_throwEiz(s32 kind, ...);
 
 extern "C" void *FUN_0040619c(const IndexedValues *owner, u32 index)
 {
-    if ((s32)index < 0 || index >= owner->count)
+    if ((s32)index < 0)
         return NULL;
-    if (index >= owner->size())
-        _ZN4__rw10__rw_throwEiz(9, "", "", index, owner->size());
-    return owner->begin[index];
+    if (index >= owner->count)
+        return NULL;
+    return owner->at(index);
 }

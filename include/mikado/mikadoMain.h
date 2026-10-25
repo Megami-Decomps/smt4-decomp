@@ -3,6 +3,7 @@
 #define MIKADO_MIKADOMAIN_H
 
 #include "common.h"
+#include <stddef.h>
 #include "classes/FloatState.h"
 #include "classes/Obj55ca08.h"
 #include "classes/SelectionState.h"
@@ -24,6 +25,7 @@ public:
 class MikadoCamera {
 public:
     MikadoCamera() : unk00(0), unk10(0), flags(0) {}
+    static void operator delete(void *block);
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
 
     /* Loads the scene resources (talk/check windows, button help, sprite tables) and clears the state. */
@@ -83,10 +85,21 @@ typedef struct MikadoWork {
 } MikadoWork;
 
 typedef struct MikadoGlobals {
-    /* 0x00 */ u32 unk00;
+    union {
+        /* 0x00 */ u32 unk00;
+        struct {
+            /* 0x00 */ u8 active;
+            /* 0x01 */ u8 reserved01[3];
+        } flags;
+    };
     /* 0x04 */ MikadoWork *work;
     /* 0x08 */ u32 cameraStartA;           /* initial camera position components */
     /* 0x0C */ u32 cameraStartC;
 } MikadoGlobals;
+
+typedef char MikadoWorkLayoutCheck[sizeof(MikadoWork) == 0xC &&
+    offsetof(MikadoWork, camera) == 8 ? 1 : -1];
+typedef char MikadoGlobalsLayoutCheck[sizeof(MikadoGlobals) == 0x10 &&
+    offsetof(MikadoGlobals, work) == 4 && offsetof(MikadoGlobals, flags.active) == 0 ? 1 : -1];
 
 #endif

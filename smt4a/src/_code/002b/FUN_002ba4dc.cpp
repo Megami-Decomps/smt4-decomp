@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail splits the active-flag address as +0x1500 then ldrb #244 (add r3, r3, #5376; ldrb r3, [r3, #244]); built folds it as +5120 +500 */
 #include "common.h"
 
 extern "C" {
@@ -7,7 +6,7 @@ struct FlagBlock {
     /* 0x000 */ u8 unk000[0xe17];
     /* 0xe17 */ s8 entryCount;
     /* 0xe18 */ u8 unke18[0x15f4 - 0xe18];
-    /* 0x15f4 */ u8 active[0x50];
+    /* 0x15f4 */ s8 active[0x50];
     /* 0x1644 */ s16 ids[1];
 };
 

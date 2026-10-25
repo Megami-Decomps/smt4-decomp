@@ -7,6 +7,7 @@ extern "C" {
 void uiSpriteSetKeyframe(UiSpriteState *, s32 animation, s32 frame);
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32 animation, s32 frame);
 void uiSpriteSelectAnim(UiSpriteState *, s32 animation);
+void spriteSetLayer(UiSpriteState *, u16 layer);
 void sysPlaySe(u32 sound);
 void sysPlayVoice(u32 voice);
 
@@ -27,10 +28,6 @@ void FUN_002c8778(u16 questId)
         u32 firstCounter; // 0xd48
         u32 secondCounter; // 0xd4c
     };
-    struct QuestSpritePlaybackView {
-        u8 unk00[0x3a];
-        u16 repeatCount;
-    };
     typedef char QuestEntryViewOffsetCheck[offsetof(QuestEntryView, details) == 0x5ac && offsetof(QuestEntryView, questId) == 0xcca && offsetof(QuestEntryView, firstCounter) == 0xd48 ? 1 : -1];
     QuestEntryView *menu = reinterpret_cast<QuestEntryView *>(g_uiQuest);
     menu->questId = questId;
@@ -44,18 +41,16 @@ void FUN_002c8778(u16 questId)
         uiSpriteSetImageKeyframe(&menu->details[1], 11, 0);
         uiSpriteSelectAnim(&menu->details[2], 6);
         uiSpriteSelectAnim(&menu->details[3], 7);
-        QuestSpritePlaybackView *counterSprite =
-            reinterpret_cast<QuestSpritePlaybackView *>(&menu->details[4]);
-        uiSpriteSelectAnim(reinterpret_cast<UiSpriteState *>(counterSprite), 8);
-        counterSprite->repeatCount = 2;
+        UiSpriteState *counterSprite = &menu->details[4];
+        uiSpriteSelectAnim(counterSprite, 8);
+        spriteSetLayer(counterSprite, 2);
         uiSpriteSelectAnim(&menu->details[5], 10);
         menu->firstCounter = 0;
         menu->secondCounter = 0;
     }
     UiQuestApoc *state = g_uiQuest;
-    s32 previousState = state->menuState;
+    state->previousMenuState = state->menuState;
     state->menuState = 0x11;
-    state->previousMenuState = previousState;
     state->menuTimer = 0;
     sysPlaySe(0x1a);
     sysPlayVoice(0x10000ca);

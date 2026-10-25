@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack push uses ip instead of r3; background rectangle VFP setup is scheduled earlier. */
+/* NON_MATCHING: background rectangle width/height VFP setup is scheduled before packed-color argument moves. */
 #include "camp/RenderCtx.h"
 #include "kernel/jyoucyu.h"
 #include "title/titleMain.h"

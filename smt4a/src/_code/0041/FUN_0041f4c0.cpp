@@ -32,7 +32,7 @@ s32 FUN_002857dc(void);
 s32 byteTripleGetV0(void);
 void FUN_0041e58c(ModeScreen *screen);
 void FUN_0041f020(ModeScreen *screen, s32 arg);
-s32 FUN_00163fd4(s32 id);
+s32 slotIsActive(s32 id);
 void FUN_002f0384(s32 arg);
 void FUN_0019de98(void *target, u32 color);
 
@@ -60,7 +60,7 @@ void FUN_0041f4c0(ModeScreen *screen)
     screen->unk44d = 0;
     screen->unk44e = 0;
     FUN_0041f020(screen, 1);
-    if (FUN_00163fd4(6) != 0 || FUN_00163fd4(3) != 0 || FUN_00163fd4(12) != 0 || FUN_00163fd4(15) != 0) {
+    if (slotIsActive(6) != 0 || slotIsActive(3) != 0 || slotIsActive(12) != 0 || slotIsActive(15) != 0) {
         screen->unk30c = 1;
         FUN_002f0384(0);
         screen->unk68 = 0;

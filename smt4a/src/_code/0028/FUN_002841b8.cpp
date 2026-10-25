@@ -36,7 +36,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void scrCommMessageSetMode(s32 mode);
 s32 gameFlagIsSet(u32 flag);
 void FUN_0021bdac(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
-void FUN_0023723c(u32 handle, s32 a, s32 b, s32 c, s32 d, const char *format, const char *text);
+void asdTextFormatStream(u32 handle, s32 a, s32 b, s32 c, s32 d, const char *format, const char *text);
 void msgBoxFlagsSetBit7(u32 handle);
 void sortMenuAcquire(s32 a, s32 b);
 void FUN_0031f208(u8 key);
@@ -76,7 +76,7 @@ s32 FUN_002841b8(s32 start, s32 index, u32 context)
             work->mode = 0x15;
         }
         FUN_0021bdac(context, 0, 0, 6, 0, 0);
-        FUN_0023723c(work->handle, 4, -1, 0, 3, "%s",
+        asdTextFormatStream(work->handle, 4, -1, 0, 3, "%s",
                      "\201\162\201\100\202\166\202\210\202\205\202\222\202\205\201\100\202\227\202\217\202\225\202\214\202\204\201\100"
                      "\202\231\202\217\202\225\201\100\202\214\202\211\202\213\202\205\201\100\202\224\202\217\201\100\202\207\202\217"
                      "\201\110");

@@ -5,7 +5,7 @@
 extern "C" {
 
 int eventTexCallIfIdle(...);
-int FUN_00154bbc(...);
+int bustupRequestIdleOwnerTextureFrame(...);
 int messageMainSetMode(...);
 int __aeabi_memcpy4(...);
 
@@ -45,7 +45,7 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 extern int eventTexSelectJobsById(short);
 extern int bustupCutAnimSelectSlotsByWorkId(short);
 /* Supplied declaration required: eventTexCallIfIdle. */
-/* Supplied declaration required: FUN_00154bbc. */
+/* Supplied declaration required: bustupRequestIdleOwnerTextureFrame. */
 extern unsigned int FUN_00156850(unsigned short, unsigned int);
 extern unsigned int FUN_00156868(void);
 extern unsigned int gameGetPlayerName(void);
@@ -236,7 +236,7 @@ FUN_00141f8c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
         temp_v2 = *(unsigned short *)(param_2 + (temp_v7 + 1) * 2);
         wstrBufferPutChar(param_3,param_5,temp_v2,param_6);
         temp_v4 = temp_v8;
-        FUN_00154bbc(temp_v8,temp_v3,temp_v1,temp_v2,0xffffffff);
+        bustupRequestIdleOwnerTextureFrame(temp_v8,temp_v3,temp_v1,temp_v2,0xffffffff);
         if (temp_v4 != 0) {
           return 1;
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses a six-entry jump table; compiler emits a comparison tree and delays common return. */
+/* NON_MATCHING: explicit idle phases restore the six-entry jump table; floating-zero preload, idle/default return placement and selected-map argument/global load scheduling differ. */
 #include "map/lmapMain.h"
 struct MapElevationView {
     u8 prefix[0xB];
@@ -70,7 +70,10 @@ u32 FUN_00386720(void)
         break;
     case 2:
         FUN_0033feb8((LmapMainStateA *)state);
-        break;
+        return 0;
+    case 3:
+    case 4:
+        return 0;
     case 5:
         state->radius = 200.0f;
         FUN_002df914();

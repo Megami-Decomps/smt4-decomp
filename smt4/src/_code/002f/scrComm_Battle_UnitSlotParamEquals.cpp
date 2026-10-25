@@ -1,10 +1,10 @@
 #include "battle/btlUnit.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
 void scrSetResult(s32 result);
 s32 scrGetArg(s32 arg);
-BtlUnit *btlUnitGet(u32 unit);
 
 extern u32 g_btlScriptUnit;
 
@@ -25,7 +25,7 @@ s32 scrComm_Battle_UnitSlotParamEquals(void)
         index = 0xB;
     }
     value = scrGetArg(1);
-    unit = btlUnitGet(g_btlScriptUnit);
+    unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     slotParams = unit->params + index;
     scrSetResult(slotParams[0x39] == value);
     return 1;

@@ -12,7 +12,7 @@ struct ActionKindSlot {
 // Counts active flagged action slots of the requested kind, excluding the four reserved slots.
 extern "C" s32 FUN_003e9888(BtlMainStateA* state, s32 kind)
 {
-    ActionKindSlot* slots = reinterpret_cast<ActionKindSlot*>(state->unk1ED4);
+    ActionKindSlot* slots = reinterpret_cast<ActionKindSlot*>(state->roster);
     s32 count = 0;
     for (s32 index = 4; index < 54; ++index) {
         ActionKindSlot* slot = &slots[index];

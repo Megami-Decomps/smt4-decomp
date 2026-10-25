@@ -1,4 +1,4 @@
-/* NON_MATCHING: Render-stack destination register, saved float registers and centered text coordinate scheduling differ. */
+/* NON_MATCHING: canonical render push fixes stack-address scheduling; saved VFP constants and centered text conversions still differ. */
 #include "camp/RenderCtx.h"
 #include "shard/S3UiLookup.h"
 
@@ -26,8 +26,7 @@ void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
     efctSetSpeed(work->alpha);
     FUN_00183bb0();
     RenderCtxA *context = g_renderCtx;
-    s32 state = FUN_001692ac(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(context, FUN_001692ac(1, 0));
     efctSetSpeed(1.0f);
     FUN_001834a4(0x2B, 0x56);
     UiTextMetrics *metrics = FUN_001834a4(0x2B, 0x59);

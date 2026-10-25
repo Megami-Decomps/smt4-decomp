@@ -1,4 +1,4 @@
-/* NON_MATCHING: enemy selection ownership and model rebinding restored; saved-register assignment and flag-field addressing differ. */
+/* NON_MATCHING: signed ownership flags and record lookup shape recovered; saved pointer roles, registration guard and owned-model reset stores differ. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include "gamedata/Table00.h"
 
@@ -49,8 +49,8 @@ struct EnemySlotSelectionView {
     u8 variant;
     s32 poolIndex;
     RegisteredHandle *model;
-    u8 registered;
-    u8 owned;
+    s8 registered;
+    s8 owned;
 };
 }
 extern "C" {
@@ -60,21 +60,27 @@ void ptrListRemoveClearOwner(void *registry, u32 handle);
 Table00Record *dataTable00FindById(u32 id);
 s32 FUN_004bb870(s32 behavior);
 
+static __inline EnemySelectionRecord *enemySelectionRecordForKind(u32 kind, s32 index)
+{
+    EnemySelectionTablesView *tables = static_cast<EnemySelectionTablesView *>(g_mapEnemy);
+    EnemySelectionRecord *record;
+    if (kind == 1)
+        record = &tables->primary[index];
+    else if (kind == 2)
+        record = &tables->secondary[index];
+    else if (kind == 3)
+        record = &tables->primary[index];
+    else if (kind == 4)
+        record = &tables->extra[index];
+    return record;
+}
+
 // Release the previous owned or borrowed model, then bind a matching enemy selection record.
 void FUN_00377acc(EnemySlotSelectionView *slot, s32 id, u32 kind)
 {
-    EnemySelectionTablesView *tables = static_cast<EnemySelectionTablesView *>(g_mapEnemy);
     // The caller supplies one of the four supported selection kinds.
     for (s32 index = 0; index < 16; ++index) {
-        EnemySelectionRecord *record;
-        if (kind == 1)
-            record = &tables->primary[index];
-        else if (kind == 2)
-            record = &tables->secondary[index];
-        else if (kind == 3)
-            record = &tables->primary[index];
-        else if (kind == 4)
-            record = &tables->extra[index];
+        EnemySelectionRecord *record = enemySelectionRecordForKind(kind, index);
         if (record->id != id)
             continue;
         if (slot->model != NULL && slot->registered != 0) {

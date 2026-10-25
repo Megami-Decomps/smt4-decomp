@@ -3,8 +3,8 @@
 #include "shard/SpriteDetailPanel.h"
 
 extern "C" {
-extern RenderCtx* g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtx* context, f32 depth);
+extern RenderCtxScissorA* g_renderCtx;
+f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 SpriteInfo* FUN_001834a4(u32 group, s32 sprite);
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void FUN_00404dd0(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);

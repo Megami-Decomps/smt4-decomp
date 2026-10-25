@@ -1,4 +1,4 @@
-/* NON_MATCHING: sprite completion accessor lacks retail's signed load/NOPs; next-state constant lifetime and stores differ. */
+/* NON_MATCHING: linker-inlined signed completion getter recovered; next-state constant lifetime and stores differ. */
 #include "classes/Obj536044.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include <stddef.h>
@@ -13,6 +13,7 @@ void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
 s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
+s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 
 // Finish the map-scene animation, then wait for its script before advancing.
 void FUN_00495584(Obj536044 *scene)
@@ -48,7 +49,7 @@ void FUN_00495584(Obj536044 *scene)
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
         pointConvertToFloat(state->position, x, y);
-        if (!uiAnimatedSpriteIsFinished(sprite))
+        if (!uiSpriteGetCompletionState(sprite))
             return;
         state->flags &= ~0xe00;
         if (!lmapSceneGetScript()) {

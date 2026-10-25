@@ -36,7 +36,7 @@ u32 FUN_00417e08(u16 id)
         entry->hasPartner = 0;
     }
     entry->cleared = 0;
-    entry->flagsB &= 0xC2;
+    entry->flagsB &= ~0x3D;
     if (kind == 10 && FUN_001ada74(id) != 0) {
         entry->flagsB |= 0x20;
     }
@@ -71,11 +71,11 @@ u32 FUN_00417e08(u16 id)
                 }
             }
         }
-        for (i = 0x500; i < 0x520; i++) {
+        for (u32 flag = 0x500; flag < 0x520; flag++) {
             u8 *bits = (u8 *)gameFlagBlockGet();
 
-            FUN_004bb6d8(i, 0);
-            bits[i >> 3] &= ~(1 << (i & 7));
+            FUN_004bb6d8(flag, 0);
+            bits[flag >> 3] &= ~(1u << (flag & 7));
         }
     }
     return 1;

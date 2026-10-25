@@ -95,7 +95,7 @@ extern int messageMainTargetIsClear(void);
 extern int FUN_0029e924(unsigned int *);
 /* Supplied declaration required: FUN_0029ede8. */
 extern int sys43e188GetState(void);
-extern unsigned int FUN_002ae3c0(unsigned short);
+extern unsigned int contentGetEntryKind(unsigned short);
 extern unsigned short *gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: ifTouchRegionRemove. */
@@ -459,7 +459,7 @@ joined_r0x003a5580:
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x220);
       temp_v0 = *(unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94);
       puVar5 = (unsigned short *)gameGetPlayerData();
-      temp_v4 = FUN_002ae3c0(temp_v0);
+      temp_v4 = contentGetEntryKind(temp_v0);
       switch(temp_v4) {
       case 2:
         *puVar5 = temp_v0;

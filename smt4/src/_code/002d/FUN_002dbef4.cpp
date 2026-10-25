@@ -1,4 +1,4 @@
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 struct Obj2dbef4Data {
     u8 unk00[0xe8];
@@ -12,13 +12,12 @@ struct Obj2dbef4Unit {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-Obj2dbef4Unit *btlUnitGet(u32 id);
 void scrSetResult(s32 result);
 
 /* Script command: sets the result to a halfword of the script unit's data record. */
 s32 FUN_002dbef4(void)
 {
-    scrSetResult(btlUnitGet(g_btlScriptUnit)->data->value);
+    scrSetResult(reinterpret_cast<Obj2dbef4Unit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->value);
     return 1;
 }
 }

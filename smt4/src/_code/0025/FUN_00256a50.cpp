@@ -23,7 +23,7 @@ s32 FUN_002c5d80(u32 kind, u32 arg);
 void FUN_001f6b74(u32 aux);
 void FUN_002c1b64(RenderCtx *ctx, u32 handle);
 void camSetMatrixB(RenderCtx *ctx, const f32 *matrix);
-void FUN_00343810(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
+void modelApplyChangedCachedVector(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
 void renderCtxSelectBlendPreset(u32 mode);
 void FUN_00347198(u32 object);
 void FUN_0034724c(u32 object);
@@ -61,7 +61,7 @@ void FUN_00256a50(DrawPacket *packet, u32 mode)
         f32 g = (f32)packet->color[2] * (1.0f / 255.0f);
         f32 b = (f32)packet->color[1] * (1.0f / 255.0f);
         f32 a = (f32)packet->color[0] * (1.0f / 255.0f);
-        FUN_00343810(g_titleScene, r * (1.0f / 255.0f), g * (1.0f / 255.0f), b * (1.0f / 255.0f),
+        modelApplyChangedCachedVector(g_titleScene, r * (1.0f / 255.0f), g * (1.0f / 255.0f), b * (1.0f / 255.0f),
                      a * (1.0f / 255.0f));
         renderCtxSelectBlendPreset(mode);
         if (packet->pending != 0) {

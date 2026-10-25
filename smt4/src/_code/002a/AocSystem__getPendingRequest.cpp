@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail keeps the lookup code in r0 (zero constant in r1) and tests the sign bit with `ands r2, r0, #0x80000000; bpl`; this build moves the code to r1 and tests with tst/beq */
+/* NON_MATCHING: native SDK success predicate restores ANDS/BPL; lookup-code/zero registers and the move into the pair-constructor argument remain reversed. */
 #include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -42,7 +43,7 @@ void _ZN9AocSystem17getPendingRequestEv(u32 arg, Request *request)
         request->name.words[2] = 0;
         request->name.words[3] = 0;
         request->pending = 0;
-        if ((code & 0x80000000) != 0) {
+        if (!nnResultIsSuccess(code)) {
             node->pair = *_ZN18WindowStatusResultC1Ej(&local, code);
         }
     }

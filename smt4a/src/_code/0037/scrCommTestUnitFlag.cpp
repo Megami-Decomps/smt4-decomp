@@ -8,7 +8,7 @@ extern "C" {
 s32 scrCommTestUnitFlag(void)
 {
     u32 index = scrGetArg(0);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     scrSetResult((unit->data->flags & (1u << index)) != 0);
     return 1;
 }

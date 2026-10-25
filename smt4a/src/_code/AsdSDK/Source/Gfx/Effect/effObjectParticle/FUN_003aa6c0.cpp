@@ -23,11 +23,6 @@ union ObjectParticleCreationView {
         void *modelData;
     } creation;
 };
-/* Model graph links extend beyond the recovered shared AsdMdlNode prefix. */
-struct ParticleModelRenderView { u8 unk00[0x28]; u32 enabled; };
-struct ParticleModelBindingView { u8 unk00[8]; ParticleModelRenderView *render; };
-struct ParticleModelGraphView { u8 unk000[0x220]; ParticleModelBindingView *binding; };
-struct ParticleModelNodeView { AsdMdlNode node; ParticleModelGraphView *graph; };
 extern "C" {
 extern const char DAT_00544ac4[], DAT_00544af8[];
 ObjectParticleHeaderView *resourceResolveHeaderPointer(ObjectParticleResourceView *);
@@ -68,7 +63,7 @@ EffObjectParticle *FUN_003aa6c0(ObjectParticleResourceView *resource)
                     FUN_002e59f8(data, particle->creation.modelData, size);
                     AsdMdlObject *model = asdMdlManagerCreateFromSource(particle->creation.modelData, size, 7);
                     particle->creation.model = model;
-                    reinterpret_cast<ParticleModelNodeView *>(model->node)->graph->binding->render->enabled = 1;
+                    model->node->resource->state->flags->flags = 1;
                 }
                 FUN_003b8ecc(&particle->object);
             }

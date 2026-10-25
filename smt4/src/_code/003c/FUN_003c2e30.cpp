@@ -1,10 +1,10 @@
 #include "common.h"
 
 extern "C" {
-void uiPointerHitsRect(s32 first, s32 second, s32 third, s32 fourth, s32 kind);
+s32 uiPointerHitsRect(s32 first, s32 second, s32 third, s32 fourth, u32 kind);
 /* Forwards the request with its fixed kind. */
-void FUN_003c2e30(s32 first, s32 second, s32 third, s32 fourth)
+s32 FUN_003c2e30(s32 first, s32 second, s32 third, s32 fourth)
 {
-    uiPointerHitsRect(first, second, third, fourth, 3);
+    return uiPointerHitsRect(first, second, third, fourth, 3);
 }
 }

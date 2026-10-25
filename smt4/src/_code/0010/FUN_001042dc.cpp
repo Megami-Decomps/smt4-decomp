@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction selection/order differs: retail .word 0x00000000  [R_ARM_ABS32 DAT_004daed8]; compiler .word 0x3f800000  [R_ARM_ABS32 DAT_004daed8]  [R_ARM_ABS32 DAT_00464c40]. */
+/* NON_MATCHING: literal pool orders 1.0f before the vector address; retail orders the address first. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -9,11 +9,12 @@ extern Vector4 *DAT_00464c40;
 /* Initializes the default four-component vector to one. */
 void FUN_001042dc(void)
 {
-    DAT_004daed8.x = 1.0f;
-    DAT_004daed8.y = 1.0f;
-    DAT_004daed8.z = 1.0f;
-    DAT_004daed8.w = 1.0f;
-    DAT_00464c40 = &DAT_004daed8;
+    Vector4 *vector = &DAT_004daed8;
+    vector->x = 1.0f;
+    vector->y = 1.0f;
+    vector->z = 1.0f;
+    vector->w = 1.0f;
+    DAT_00464c40 = vector;
 }
 
 } /* extern "C" */

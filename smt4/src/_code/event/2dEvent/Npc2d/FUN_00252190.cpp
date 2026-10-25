@@ -16,7 +16,6 @@ s32 FUN_001dfc64(u32 handle);
 void FUN_002db92c(u32 handle);
 u32 asdProcessCreateSimple(const char *name, s32 group, s32 startDelay, s32 endDelay,
                            AsdProcUpdateFunc update, AsdProcFunc end, void *work);
-
 // Start an NPC portrait animation in the region determined by its horizontal position.
 void FUN_00252190(u32 npcId, u32 mode, s32 x)
 {

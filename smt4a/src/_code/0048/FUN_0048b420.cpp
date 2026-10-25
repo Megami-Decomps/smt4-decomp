@@ -1,6 +1,6 @@
-/* NON_MATCHING: scissor state caching saves an extra register and changes the stack frame and slot-clear sequence. */
+/* NON_MATCHING: canonical stack replacement matches the frame and clear sequence; context pointer stays in r0 and its tail address is formed before the zero argument, unlike retail. */
 /* Applies a panel-relative scissor rectangle, or clears its render-context scissor slot. */
-#include "common.h"
+#include "gfx/RenderStateStack.h"
 
 extern "C" {
 void rectRecRead(u32 table, u32 id, s32 *x, s32 *y, s32 *width, s32 *height);
@@ -20,21 +20,7 @@ void FUN_0048b420(void *panel, s32 enabled)
         renderSetClippedScissor(x, y, width, height);
         return;
     }
-    struct ScissorState {
-        u32 index;
-        u32 unk04;
-        u32 slots[4];
-        u8 active;
-        u8 unk19[3];
-        void (*refresh)(u32 enabled);
-    };
-    /* This render-context tail is beyond the currently shared context prefix. */
-    ScissorState *state = (ScissorState *)((u8 *)g_renderCtx + 0x1318);
-    u32 previous = state->slots[state->index];
-    state->slots[state->index] = 0;
-    if (state->active || previous != 0) {
-        state->refresh(0);
-        state->active = 0;
-    }
+    RenderStateStack *state = (RenderStateStack *)((u8 *)g_renderCtx + 0x1318);
+    renderStackSet(state, 0);
 }
 }

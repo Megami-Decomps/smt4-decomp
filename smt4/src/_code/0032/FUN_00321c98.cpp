@@ -1,5 +1,5 @@
-/* NON_MATCHING: armcc folds the table offset into the literal-pool address; retail loads the table base and adds the record offset. */
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct Inner {
     /* 0x00 */ u8 unk00[0x8C];
@@ -18,11 +18,10 @@ struct Record {
 
 extern "C" {
 extern Record DAT_0044fdc0[];
-void FUN_0024330c(void *member, s32 value, const Record *record);
 }
 
 extern "C" void FUN_00321c98(Object *object)
 {
     Inner *inner = object->inner;
-    FUN_0024330c(inner->member, inner->value, &DAT_0044fdc0[1]);
+    FUN_0024330c(reinterpret_cast<u32 *>(inner->member), inner->value, reinterpret_cast<EffectEditorOptions *>(&DAT_0044fdc0[1]), reinterpret_cast<EffectEditorOptions *>(DAT_0044fdc0));
 }

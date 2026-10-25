@@ -1,4 +1,3 @@
-/* NON_MATCHING: same code and instruction order, but armcc allocates the depth/value registers the other way round (r1/r2 swapped). */
 #include "script/ScriptVm.h"
 
 extern "C" {
@@ -7,7 +6,8 @@ extern "C" {
 u32 FUN_001dc810(ScriptVmProcess *process)
 {
     process->tags[process->depth] = process->tags[0x1b];
-    process->values[process->depth] = process->values[0x1b];
+    s32 depth = process->depth;
+    process->values[depth] = process->values[0x1b];
     process->depth++;
     process->pc++;
     return 1;

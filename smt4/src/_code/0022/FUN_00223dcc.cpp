@@ -1,6 +1,7 @@
-/* NON_MATCHING: 171 vs 168 rows: retail's frame is 32 bytes (the two wait-result slots share the outgoing-argument area of the later FUN_00294834 call); ours allocates them separately (40 bytes). */
+/* NON_MATCHING: thread wait, portrait slots and buffer-return contracts fixed; stack-owner lifetime and color argument stores differ. */
 #include "common.h"
 #include "nn/svc.h"
+#include "nn/Result.h"
 
 // Fusion (unite) screen object: only the members its teardown touches.
 struct UniteScreen {
@@ -14,7 +15,7 @@ struct UniteScreen {
     u8* scratchB;               // 0x0428
     s32 scriptProcess;          // 0x042c
     u8 unk0430[0x6660 - 0x430];
-    s16 pendingIds[4];          // 0x6660
+    u16 pendingIds[4];          // 0x6660
     u8 unk6668[0x95c8 - 0x6668];
     s32 modelManagerA;          // 0x95c8
     s32 modelManagerB;          // 0x95cc
@@ -31,8 +32,8 @@ extern "C" {
 
 extern UniteScreen* g_unite;
 
-u32 FUN_002c40f8(s32* signalled, s32* unused, s32 count, s32 waitAll, s64 timeout, u32 handle);
-void FUN_002c526c(void);
+s32 FUN_002c40f8(s32 *signalled, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
+void FUN_002c526c(s32 result);
 void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(s32 object);
 void asdMemFreeNonNull(s32 object);
@@ -51,10 +52,20 @@ void asdMdlManagerMarkDestroy(s32 manager);
 void asdMdlManagerDestroy(s32 manager);
 void FUN_002958f8(s32 id, s32 arg);
 void scrScriptProcessDestroy(s32 process);
-void bufferArrayFree(void);
+u8 *bufferArrayFree(u8 *buffer);
 void jobStop(s32 job, s32 arg);
 void fileSlotFree(s32 slot);
 void mapMainCallIfFlag(s32 flag);
+
+
+static __inline void uniteWaitForThread(u32 thread)
+{
+    s32 handle = thread;
+    s32 signalled;
+    s32 result = FUN_002c40f8(&signalled, &handle, 1, 0, -1LL);
+    if (nnResultIsFailure(result))
+        FUN_002c526c(result);
+}
 
 // Destroys the fusion screen: stops its worker thread, releases its models, scripts and buffers.
 void FUN_00223dcc(void)
@@ -63,9 +74,7 @@ void FUN_00223dcc(void)
     if (screen == NULL) return;
 
     screen->stopRequested = 1;
-    s32 signalled;
-    s32 unused;
-    if (FUN_002c40f8(&signalled, &unused, 1, 0, -1LL, screen->thread) >> 31) FUN_002c526c();
+    uniteWaitForThread(screen->thread);
     screen->threadDone = 1;
     nn_os_Thread_FinalizeImpl(&screen->thread);
     if (screen->thread != 0) {
@@ -99,14 +108,13 @@ void FUN_00223dcc(void)
     screen->modelManagerA = 0;
     screen->modelManagerB = 0;
     for (s32 i = 0; i < 4; i++) {
-        if (screen->pendingIds[i] != 0) FUN_002958f8(screen->pendingIds[i], 1);
+        if (screen->pendingIds[i] != 0) FUN_002958f8((s16)screen->pendingIds[i], 1);
     }
     scrScriptProcessDestroy(screen->scriptProcess);
     asdMemFree((s32)screen->scratchB);
     asdMemFree((s32)screen->scratchA);
     if (screen->buffer != NULL) {
-        bufferArrayFree();
-        asdMemFreeNonNull((s32)screen->buffer);
+        asdMemFreeNonNull((s32)bufferArrayFree(screen->buffer));
     }
     screen->buffer = NULL;
     jobStop(screen->job, 0);

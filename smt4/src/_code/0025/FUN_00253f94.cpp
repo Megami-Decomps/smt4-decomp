@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only in the final base*level multiply (retail: base in r1, constant in r2) */
+/* NON_MATCHING: bounded level division reproduces the retail reciprocal; base and reciprocal registers r1/r2 remain swapped. */
 /* Returns base * level / 100 (at least 1) for the unit, where base is the low 10 bits of its flags word. */
 #include "common.h"
 
@@ -14,7 +14,7 @@ typedef struct Unit {
 
 u32 FUN_00253f94(Unit *unit)
 {
-    u32 level;
+    u16 level;
     s32 scaled;
 
     if (unit == NULL) {
@@ -27,7 +27,7 @@ u32 FUN_00253f94(Unit *unit)
     if (level == 100) {
         return unit->base;
     }
-    scaled = (s32)(((u64)(unit->base * level) * 0x028F5C29) >> 32);
+    scaled = (unit->base * level) / 100;
     if (scaled <= 0) {
         scaled = 1;
     }

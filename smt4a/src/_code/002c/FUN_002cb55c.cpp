@@ -10,7 +10,7 @@ int libc_strcpy(unsigned short *, unsigned int);
 int sysMemClear(unsigned short *, int);
 int FUN_003df7c4(unsigned short *);
 int FUN_003dfad4(unsigned char *, unsigned short *);
-int FUN_00480a00(void);
+int recordGetPercentageScaledBase(void);
 int __aeabi_memcpy4(unsigned short *, unsigned short *, int);
 
 /* stack frame of param_3: 8 slot(s), 16 byte(s) */
@@ -33,7 +33,7 @@ extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: FUN_003df7c4. */
 /* Supplied declaration required: FUN_003dfad4. */
 extern int countUnlockedSlots(void);
-/* Supplied declaration required: FUN_00480a00. */
+/* Supplied declaration required: recordGetPercentageScaledBase. */
 extern int FUN_004ccbf0(unsigned short);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -120,19 +120,19 @@ void FUN_002cb55c(unsigned short *param_1,unsigned short *param_2,unsigned int *
   temp_v6 = (unsigned int)*param_2;
   dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
-    temp_v2 = FUN_00480a00();
+    temp_v2 = recordGetPercentageScaledBase();
     param_1[0xc] = temp_v2;
   }
   temp_v6 = (unsigned int)param_2[1];
   dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
-    temp_v2 = FUN_00480a00();
+    temp_v2 = recordGetPercentageScaledBase();
     param_1[0xd] = temp_v2;
   }
   temp_v6 = (unsigned int)param_2[2];
   dataTable08Sub2GetRecord();
   if (temp_v6 != 0) {
-    temp_v3 = FUN_00480a00();
+    temp_v3 = recordGetPercentageScaledBase();
     param_1[0xd] = temp_v3 + param_1[0xd];
   }
   FUN_003dfad4(&temp_v7,param_2);

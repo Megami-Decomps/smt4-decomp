@@ -2,6 +2,7 @@
 #include "addon/SceneResource.h"
 #include "ui/SceneWindowWork.h"
 
+
 extern "C" {
 extern SceneResourceWork *g_sceneResourceWork;
 void FUN_002898e4();

@@ -34,7 +34,7 @@ struct PanelWork {
 
 extern "C" {
 s32 FUN_001517b4(s32 a, s32 b);
-s32 FUN_00163fd4(s32 a);
+s32 slotIsActive(s32 a);
 void uiSpriteSetImageKeyframe(PanelSprite *sprite, s32 keyframe, s32 flag);
 void uiSpriteSelectAnim(PanelSprite *sprite, s32 animation);
 void workSetStateByte(PanelSprite *sprite, s32 value);
@@ -49,7 +49,7 @@ void FUN_00165088(PanelWork *panel, u32 state)
         return;
     case 1:
     case 10:
-        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0)
+        if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0)
             workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
         else
             uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
@@ -61,7 +61,7 @@ void FUN_00165088(PanelWork *panel, u32 state)
     case 0x11:
     case 0x12:
     case 0x13:
-        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0) {
+        if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0) {
             sprites[PANEL_SPRITE_MAIN].hidden = 0;
             sprites[PANEL_SPRITE_SIDE].hidden = 0;
         } else {
@@ -71,7 +71,7 @@ void FUN_00165088(PanelWork *panel, u32 state)
         workSetStateByte(&sprites[PANEL_SPRITE_SECOND], 0);
         return;
     case 6:
-        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0)
+        if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0)
             workSetStateByte(&sprites[PANEL_SPRITE_MAIN], 0);
         else if (*(s32 *)&sprites[PANEL_SPRITE_MAIN].progress == 0x3F800000)
             uiSpriteSetImageKeyframe(&sprites[PANEL_SPRITE_MAIN], 2, 0);
@@ -79,7 +79,7 @@ void FUN_00165088(PanelWork *panel, u32 state)
     case 7:
     case 8:
     case 9:
-        if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0) {
+        if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0) {
             sprites[PANEL_SPRITE_MAIN].hidden = 0;
             workSetStateByte(&sprites[PANEL_SPRITE_SEVENTH], 0);
         } else {

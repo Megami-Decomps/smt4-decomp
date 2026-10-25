@@ -17,12 +17,12 @@ typedef struct ContentDesc003e1390 {
 } ContentDesc003e1390;
 
 void asdMemFree(void *memory);
-void asdLoadFileAsyncSimple(u8 name[132], u32 *handle, s32 flags);
-void libc_strcpy(u8 dst[132], u32 src);
-void sysMemClear(u8 dst[132], s32 size);
+void asdLoadFileAsyncSimple(const char *name, u32 *handle, s32 flags);
+char *libc_strcpy(char *dst, const char *src);
+void *sysMemClear(void *dst, u32 size);
 void FUN_003e21c8(ContentRequest003e1390 *request, ContentDesc003e1390 *desc);
-void aocQueueType39(u32 aoc, u32 index, u32 *handle, u8 name[132]);
-u32 btlPosArrangeGetFileName(ContentDesc003e1390 *desc);
+void aocQueueType39(u32 aoc, u32 index, u32 *handle, const char *name);
+char *btlPosArrangeGetFileName(ContentDesc003e1390 *desc);
 s32 FUN_0046ebf0(u32 aoc);
 
 extern u32 g_aocSystem; /* 0x570280 */
@@ -30,7 +30,7 @@ extern u32 g_aocSystem; /* 0x570280 */
 /* Starts loading a content request: queues it through the add-on content system when the descriptor has an add-on index, otherwise from the default source. */
 void contentRequestStart(ContentRequest003e1390 *request, ContentDesc003e1390 *desc)
 {
-    u8 name[132];
+    char name[128];
 
     sysMemClear(name, 0x80);
     libc_strcpy(name, btlPosArrangeGetFileName(desc));

@@ -1,10 +1,10 @@
-/* NON_MATCHING: cached-node registers, snapshot store scheduling and immediate/queued tail placement differ. */
+/* NON_MATCHING: release-node argument recovered; snapshot store, cached-node clear register and immediate/queued tail placement differ. */
 #include "ui/SpriteTransition.h"
 
 extern "C" {
 SpriteTransitionWork *jobGetWork(u32);
 s32 gameFlagIsSet(u32);
-void asdTMTexTableReleaseNode(u32);
+void asdTMTexTableReleaseNode(s32 table, s32 node);
 void FUN_002a60cc(void *, u32, s32);
 void aocSlotRelease(SpriteTransitionWork *);
 s32 FUN_0024ecc0(u32, u32);
@@ -30,7 +30,7 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
     SpriteTransitionWork *work = jobGetWork(job);
     SpriteResourceView *resource = reinterpret_cast<SpriteResourceView *>(work);
     if (resource->node != -1 && resource->active) {
-        asdTMTexTableReleaseNode(work->unk10);
+        asdTMTexTableReleaseNode(work->unk10, resource->node);
         FUN_002a60cc(g_aocSystem, work->unk10, resource->node);
         resource->node = -1;
         resource->active = 0;

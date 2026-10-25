@@ -20,7 +20,7 @@ int FUN_004bd17c(...);
 int dispatchIfFound(unsigned int, unsigned int, int);
 int bitsAt60Clear(int, int);
 int FUN_004d0d70(void);
-int FUN_004da6e0(...);
+int recordMergeByteMasks(...);
 int FUN_004db914(int, int, unsigned int, int *);
 int __aeabi_memcpy4(...);
 
@@ -76,7 +76,7 @@ extern int getUnlockedSlotCount(int);
 extern unsigned int FUN_004d0cd4(void);
 /* Supplied declaration required: FUN_004d0d70. */
 extern int FUN_004da520(int, unsigned char *, unsigned char *);
-/* Supplied declaration required: FUN_004da6e0. */
+/* Supplied declaration required: recordMergeByteMasks. */
 /* Supplied declaration required: FUN_004db914. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -199,7 +199,7 @@ unsigned char FUN_001ff014(int param_1)
   dispatchIfFound(temp_v3,(piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
   if (temp_v10 != 0) {
     temp_v35 = (unsigned short)((unsigned int)(piVar1[param_1 * 2 + 0x4ef] << 0xf) >> 0x11);
-    FUN_004da6e0(*piVar1,temp_v38,temp_v30,0,temp_v34);
+    recordMergeByteMasks(*piVar1,temp_v38,temp_v30,0,temp_v34);
     temp_v4 = slotRecordFindById(temp_v35);
     *(unsigned int *)(temp_v4 + 0x68) = temp_v36;
     *(unsigned int *)(temp_v4 + 0x6c) = uStack_104;

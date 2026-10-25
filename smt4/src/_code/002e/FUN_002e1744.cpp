@@ -1,6 +1,7 @@
-/* NON_MATCHING: panel readiness checks branch individually instead of retail conditional loads and tests. */
+/* NON_MATCHING: transition subobject matches all accesses; transition pointer and result saved registers r5/r6 remain exchanged. */
 /* Starts a ready character-panel script and advances the panel's slide/fade transition. */
 #include "script/scrScriptProcess.h"
+#include <stddef.h>
 
 extern "C" {
 u32 FUN_0026f784(void *link);
@@ -16,6 +17,14 @@ void uiAnimateStaggeredSlidesAndFades(void *panel, u32 mode);
 
 u32 FUN_002e1744(void *object)
 {
+    struct PanelTransitionState {
+        u8 unk00[0x10];
+        u32 phase;
+        u8 unk14[0x10];
+        u8 busy;
+        u8 unk25[4];
+        s8 needsHelp;
+    };
     struct PanelWork {
         u32 unk00;
         void *link;
@@ -29,31 +38,33 @@ u32 FUN_002e1744(void *object)
         void *resource;
         u32 entry;
         void *record;
-        u8 unkB0[0x60];
-        u32 phase;
-        u8 unk114[0x10];
-        u8 busy;
-        u8 unk125[4];
-        s8 needsHelp;
+        u8 unkB0[0x50];
+        PanelTransitionState transition;
     };
+    typedef char PanelTransitionLayoutCheck[
+        offsetof(PanelWork, transition) == 0x100 &&
+        offsetof(PanelTransitionState, busy) == 0x24 &&
+        offsetof(PanelTransitionState, needsHelp) == 0x29 &&
+        sizeof(PanelWork) == 0x12c ? 1 : -1];
     PanelWork *work = (PanelWork *)object;
+    PanelTransitionState *transition = &work->transition;
     u32 result = 0;
-    if (!work->busy && FUN_0026f784(work->link) &&
+    if (!transition->busy && FUN_0026f784(work->link) &&
         work->resource != NULL && work->entry != 0 && work->record != NULL) {
         if (work->ready == 1) {
             work->process = FUN_00297060(work->resource, work->entry);
             scriptProcessSetMode(work->process, 2);
-            work->busy = 1;
+            work->transition.busy = 1;
             linkHolderApplyFlag(work->link, 1);
             characterInfoPanelPopulate(work->panel, work->selection, work->record);
             if (!FUN_0028d594()) {
                 FUN_0026f188(FUN_0026f1f0(), 15);
             }
-            if (!work->needsHelp) {
-                work->phase = 1;
+            if (!transition->needsHelp) {
+                work->transition.phase = 1;
             } else {
                 buttonHelpSetPreset(226);
-                work->phase = 2;
+                work->transition.phase = 2;
             }
             result = 2;
         }

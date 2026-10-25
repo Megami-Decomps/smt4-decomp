@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -23,7 +24,7 @@ extern GameState g_gameState;
 
 extern FlagBlock *gameFlagsGetBlock(void);
 extern Entry *dataTable2FType1GetEntry(s32 id);
-extern void gameFlagSetValue(s32 id, s32 value, s32 arg2);
+
 extern void gameFlagsSet(s32 index, s32 value);
 
 /* When enabled, apply the current table-0x2f entry's flag and value (0xff when absent). */

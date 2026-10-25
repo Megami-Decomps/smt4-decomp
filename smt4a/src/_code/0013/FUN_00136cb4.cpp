@@ -5,7 +5,7 @@ extern "C" {
 
 s32 FUN_00147374(void);
 s32 FUN_00147550(u32 size, u32 address, u32 permission);
-s32 FUN_00147a9c(s32 session);
+u32 FUN_00147a9c(u8 session);
 void FUN_0016f9bc(u8 *buffer, u32 size);
 void nn_applet_CTR_detail_OpenSession(void);
 void nn_applet_CTR_detail_CloseSession(void);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the search window's loading-dots draw (title-scene variant of FUN_001acdd8); armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
+/* NON_MATCHING: label-draw argument setup/literal ordering, frame /5 multiply operands, and final zero-return scheduling differ; loading-dot loop instructions agree. */
 #include "gfx/RenderStateStack.h"
 
 /* The title scene (its state stacks live at 0x124C and 0x12AC). */

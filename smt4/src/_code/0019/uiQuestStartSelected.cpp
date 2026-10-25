@@ -26,7 +26,7 @@ typedef struct UiQuest00199024 {
 s32 uiBindRecordRewardText(u32 id, s32 a, s32 b);
 void gameOptionsEnableAndReset(void);
 void FUN_0028eeb8(u32 id);
-void FUN_0028ffb8(u32 id);
+void uiQuestCountDetailPages(u32 id);
 void FUN_00290404(void);
 void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
@@ -53,7 +53,7 @@ void uiQuestStartSelected(void)
     FUN_0028eeb8(id);
     gameGetOptionProgressStatus();
     gameOptionsEnableAndReset();
-    FUN_0028ffb8(id);
+    uiQuestCountDetailPages(id);
     spriteStartAnimationByIndex(quest->panel, 2);
     uiBindRecordRewardText(id, 0, 1);
     if (scrScriptProcessStartEntry(quest->script, 3) != 0) {

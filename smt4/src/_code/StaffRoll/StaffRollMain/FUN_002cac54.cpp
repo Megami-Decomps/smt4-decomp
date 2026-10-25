@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses the 1.0f constant register itself as the float row counter of the second loop and keeps 200.0f/520.0f/160.0f/240.0f in the hoisted s-registers (vpush d8-d10); built copies it (vmov s17,s16) and uses d8-d9 */
+/* NON_MATCHING: corrected initial speed and second-column row to retail 0.0f; vector stores, VFP constant/temporary allocation, and handler argument scheduling still differ. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -37,7 +37,7 @@ void FUN_002cac54(s32 skipFade)
     g_staffRoll = work;
     work->closing = 0;
     work->skip = 0;
-    work->speed = 1.0f;
+    work->speed = 0.0f;
 
     asdTMTexTableLoadTmx(0x34, 0);
     for (u32 i = 0; i < 12; i++)
@@ -51,7 +51,7 @@ void FUN_002cac54(s32 skipFade)
         work->lineA[i].x = 200.0f - work->sizes[i].width * 0.5f;
         work->lineA[i].y = (f32)(i * height) + 520.0f;
     }
-    f32 row = 1.0f;
+    f32 row = 0.0f;
     for (s32 i = 0; i < 12; i++) {
         work->lineB[i].x = 160.0f - work->sizes[i].width * 0.5f;
         work->lineB[i].y = row * work->sizes[i].height + 240.0f;

@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail retains removed allocation debug setup and lowers initial work clearing differently. */
+/* NON_MATCHING: allocation debug trace recovered; native work zero/scale initialization grouping differs. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 union CommonBgFlags { u32 raw; struct { u8 first, second, unk02[2]; } bytes; };
 struct CrazingBackgroundWork {
@@ -14,6 +15,7 @@ extern "C" {
 extern CommonBgCreateGlobals g_commonBg;
 extern const char DAT_0052c828[];
 extern const char DAT_0052c810[];
+extern const char DAT_0052c7d8[];
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 s32 FUN_0039a7ac(u32 process);
 s32 FUN_003bab24(u32 process);
@@ -24,8 +26,10 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 flags, AsdProcFunc start,
 void campCommonBgCreateCrazingSumaho()
 {
     if (g_commonBg.references == 0) {
-        if (!g_commonBg.work)
+        if (!g_commonBg.work) {
+            asdDebugTrace(DAT_0052c7d8, 0x72a);
             g_commonBg.work = (CrazingBackgroundWork *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(CrazingBackgroundWork), 1);
+        }
         CrazingBackgroundWork *work = g_commonBg.work;
         *work = CrazingBackgroundWork();
         work->process = asdProcessCreateSimple(DAT_0052c828, 4, 0, NULL, FUN_0039a7ac, NULL, NULL);

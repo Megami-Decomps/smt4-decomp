@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 12 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: named effect-color snapshot restores packet initialization loads; final quad argument/VFP scheduling still differs. */
 #include "camp/RenderCtx.h"
 #include "event/2dEvent/EventEffect.h"
 #include "event/EffectQuadParameters.h"
@@ -24,11 +24,12 @@ u32 FUN_00261254(void)
     FUN_00157558(g_renderCtx);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
+    u32 color = effect->color;
     EffectQuadParameters parameters;
     parameters.weight = 1.0f;
     parameters.u = 0.0f;
     parameters.v = 0.0f;
-    parameters.color = effect->color;
+    parameters.color = color;
     FUN_0016c4b8(g_renderCtx, 0);
     FUN_00164034(&parameters, &parameters, &parameters, &parameters, 0.0f, 0.0f, 400.0f, 240.0f, 0.21484375f);
     FUN_00183bb0();

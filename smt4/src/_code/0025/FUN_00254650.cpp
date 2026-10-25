@@ -11,14 +11,14 @@ struct PreviewAnimationIds { u32 values[3]; };
 typedef char PreviewInteractionOffsets[(offsetof(PreviewInteractionView, animation) == 0x24 && offsetof(PreviewInteractionView, zoomSteps) == 0x28) ? 1 : -1];
 extern "C" {
 extern const PreviewAnimationIds DAT_004028e0;
-void FUN_00293e08(void *model, f32 x, f32 y, f32 z);
+void nodeGroupSetScale(void *model, f32 x, f32 y, f32 z);
 void statusCameraSetEye(f32 x, f32 y, f32 z);
 void objSetAnglesDegrees(void *model, const f32 *angles);
 void FUN_0020ffe8(void *model, u32 animation, f32 start, f32 blend);
 }
 static inline void updatePreviewZoom(PreviewInteractionView *work)
 {
-    FUN_00293e08(work->preview.modelGroup, work->preview.scale, work->preview.scale, work->preview.scale);
+    nodeGroupSetScale(work->preview.modelGroup, work->preview.scale, work->preview.scale, work->preview.scale);
     f32 eyeY = 6.3f;
     if (work->zoomSteps > 0)
         eyeY += static_cast<f32>(work->zoomSteps) * 0.08f;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only r0/r1 assignment in the two-ingredient recipe comparison differs. */
+/* NON_MATCHING: named first ingredient recovers r0/r1 allocation; its two equality comparisons still reverse retail operand order. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/FusionRecipe.h"
 #include "camp/Unite/FusionCandidates.h"
@@ -25,10 +25,12 @@ u8 FUN_004da980(void *owner, u16 firstId, u16 secondId)
                 if (recipe->ingredients[slot])
                     ++ingredients;
             }
-            if (ingredients == 2 &&
-                ((recipe->ingredients[0] == first->id && recipe->ingredients[1] == second->id) ||
-                 (recipe->ingredients[1] == first->id && recipe->ingredients[0] == second->id)))
-                return 5;
+            if (ingredients == 2) {
+                u16 firstIngredient = recipe->ingredients[0];
+                if ((firstIngredient == first->id && recipe->ingredients[1] == second->id) ||
+                    (recipe->ingredients[1] == first->id && firstIngredient == second->id))
+                    return 5;
+            }
         }
     }
     if (dataTable05FindByPriorityAndKey(first->race, second->race))

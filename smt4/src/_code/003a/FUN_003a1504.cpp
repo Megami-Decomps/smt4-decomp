@@ -8,7 +8,7 @@ extern s32 FUN_0029e0f8(void);
 extern void FUN_0029defc(u32 a, s32 b);
 extern void statusPanelSetOpen(s32 a);
 extern s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *info);
-extern s32 FUN_002ae3c0(u32 id);
+extern s32 contentGetEntryKind(u32 id);
 extern void FUN_0029a084(s32 kind, u16 id);
 extern s32 FUN_00295618(void);
 extern void gameGlobalsSetSelected(s32 a);
@@ -35,13 +35,13 @@ void FUN_003a1504(Scene3a *scene)
             list = &scene->lists[scene->slot];
             id = list->entries[flaggedValueHolderGetTotal(&scene->slotInfo[scene->slot])].id;
             if (id != 0) {
-                if (FUN_002ae3c0(id) == 4) {
+                if (contentGetEntryKind(id) == 4) {
                     FUN_0029a084(0, id);
                 }
-                if (FUN_002ae3c0(id) == 5) {
+                if (contentGetEntryKind(id) == 5) {
                     FUN_0029a084(1, id);
                 }
-                if (FUN_002ae3c0(id) == 6) {
+                if (contentGetEntryKind(id) == 6) {
                     FUN_0029a084(2, id);
                 }
             }

@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00402290` (_code @ 0x402290, 0x764 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" {
 
@@ -13,7 +15,6 @@ int packFields(...);
 int flagsPackFourBooleans(...);
 int block530OwnerReset(int, float *, int);
 int FUN_004097b4(int, int *, int, int);
-int FUN_004ff058(...);
 int VectorSignedToFloat(...);
 
 typedef struct fn_00402290_arg0 fn_00402290_arg0;
@@ -247,7 +248,11 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x12d4))();
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
-  FUN_004ff058(param_1->field_0x4,temp_v4,&temp_v14,0xffffffff,1);
+  GpuFloatEncoding positionZ;
+  positionZ.bits = temp_v16;
+  SpriteDrawVector3 position = {temp_v14, temp_v15, positionZ.value};
+  FUN_004ff058((SpriteDrawOwner *)param_1->field_0x4, temp_v4, &position,
+               0xFFFFFFFFu, 1, 1.0f);
   temp_v0 = g_renderCtx;
   piVar5 = (int *)(g_renderCtx + 0x12b8);
   temp_v1 = *piVar5;

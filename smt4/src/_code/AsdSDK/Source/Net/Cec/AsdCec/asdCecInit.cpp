@@ -1,4 +1,3 @@
-/* NON_MATCHING: the stripped debug trace now matches; retail passes an unset register (r4, never saved) as a second argument to both asdOperatorNew calls and allocates r5/r6 differently. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -8,7 +7,7 @@ extern AsdCecGlobals g_asdCec;
 void asdMemFreeNonNull(void *work);
 void asdMemFree(void *block);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void *asdOperatorNew(u32 size);
+void *asdOperatorNew(u32 size, ...);
 void *_ZN12CecMessageIdC1Ev(void *self);
 AsdCecMessageBox *_ZN9Obj420e4cC1Ej(AsdCecMessageBox *self, int unk);
 
@@ -18,6 +17,8 @@ s32 asdCecInit(void)
     AsdCec *cec;
     void *work;
     AsdCecMessageBox *box;
+    // The retail allocation overload forwards an uninitialised nothrow tag.
+    u32 nothrowTag;
 
     if (g_asdCec.cec != NULL) {
         asdMemFreeNonNull(g_asdCec.cec->work);
@@ -35,13 +36,13 @@ s32 asdCecInit(void)
     cec->unk10 = 0;
     cec->unk14 = 0;
 
-    work = asdOperatorNew(8);
+    work = asdOperatorNew(8, nothrowTag);
     if (work != NULL) {
         work = _ZN12CecMessageIdC1Ev(work);
     }
     g_asdCec.cec->work = work;
 
-    box = (AsdCecMessageBox *)asdOperatorNew(sizeof(AsdCecMessageBox));
+    box = (AsdCecMessageBox *)asdOperatorNew(sizeof(AsdCecMessageBox), nothrowTag);
     if (box != NULL) {
         box = _ZN9Obj420e4cC1Ej(box, 0);
     }

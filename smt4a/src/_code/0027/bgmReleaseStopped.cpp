@@ -16,7 +16,7 @@ struct BgmSlot {
 
 extern BgmSlot DAT_0061951c[2];
 s32 jyoucyuGetTableEntry(u32 index);
-void handlerFinishById(u32 handle, s32 arg);
+void handlerFinishById(s32 handle, s32 frames);
 
 /* Completes and clears every music slot that is in use and has finished; true if any was released. */
 u32 bgmReleaseStopped(void)

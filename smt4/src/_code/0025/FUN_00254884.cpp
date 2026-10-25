@@ -32,10 +32,10 @@ u32 FUN_00254884(const char *input, u16 *output, s32 root)
     case 2: textFormatBuffer(reinterpret_cast<char *>(path), DAT_00409ca4, DAT_004651e8[2], input); break;
     case 3: textFormatBuffer(reinterpret_cast<char *>(path), DAT_00409ca4, DAT_004651e8[3], input); break;
     }
-    u32 length = libc_strlen(reinterpret_cast<const char *>(path));
-    if ((s32)length > 248)
+    s32 length = libc_strlen(reinterpret_cast<const char *>(path));
+    if (length > 248)
         return 0;
-    for (s32 index = 0; index < (s32)length; ++index)
+    for (s32 index = 0; index < length; ++index)
         output[index] = path[index];
     return 1;
 }

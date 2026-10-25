@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002332f4` (_code @ 0x2332f4, 0xa20 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ int gameFlagWordSetBit(...);
 int mathAbsHeadingErrorToPoint(void);
 int naviMainFinishRequest(void);
 int FUN_003d4ed8(...);
-int gameFlagSetValue(int, int);
 int countersAddSaturating(...);
 
 typedef int romwright_code(...);
@@ -99,7 +99,6 @@ extern int gameFlagsBitTest(int);
 /* Supplied declaration required: entryTableFlagTargetsOfId203. */
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: FUN_003d4ed8. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
 extern int gamePackedFlagTest(unsigned int);
 
@@ -272,7 +271,7 @@ unsigned int FUN_002332f4(void)
             if (((!(unsigned char)((temp_v0 >> 6) & 1) && temp_v0 >> 7 == ((unsigned char)(in_fpscr >> 0x1c) & 1)) &&
                 ((int)temp_v12 < 0x428c0000)) && (temp_v16 != 0)) {
               if (*(short *)(temp_v5 + 0xac) != 2) {
-                gameFlagSetValue(0x48d,1);
+                gameFlagSetValue(0x48d, 1, 1);
               }
               temp_v4 = FUN_00367f98();
               if (temp_v4 != 10) {

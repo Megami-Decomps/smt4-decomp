@@ -1,4 +1,4 @@
-/* NON_MATCHING: state-store tail merging and reuse of the script mode constant differ from retail. */
+/* NON_MATCHING: recovered script-mode setter matches; state-store tail merging differs. */
 #include "common.h"
 
 struct QuestScriptProcess {
@@ -28,6 +28,7 @@ s32 FUN_00298dc8();
 void FUN_0029016c(u32 selection, s32 flags);
 void FUN_002900d0();
 s32 gameJumpRequestIsPending();
+void scriptProcessSetMode(QuestScriptProcess *process, u32 mode);
 
 // Load quest script resources, run the requested entry, and finish any jump entry.
 u32 questSysLoadStep(QuestLoadStep *step)
@@ -46,7 +47,7 @@ u32 questSysLoadStep(QuestLoadStep *step)
             buttonHelpSetPreset(0x90);
         }
         step->process = FUN_00297060(step->script, step->messages);
-        step->process->mode = 2;
+        scriptProcessSetMode(step->process, 2);
         scrScriptProcessStartEntry(step->process, step->entry);
         step->state = 2;
         break;
@@ -59,19 +60,18 @@ u32 questSysLoadStep(QuestLoadStep *step)
             FUN_0029016c(selection, 0);
         }
         FUN_002900d0();
-        if (!gameJumpRequestIsPending()) {
+        if (gameJumpRequestIsPending()) {
+            scrScriptProcessStartEntry(step->process, 13);
+            step->state = 3;
+        } else {
             step->state = 4;
-            break;
         }
-        scrScriptProcessStartEntry(step->process, 13);
-        step->state = 3;
         break;
     }
     case 3:
-        if (scrRunOpcodesStub(step->process) != 2) {
-            return 0;
+        if (scrRunOpcodesStub(step->process) == 2) {
+            step->state = 4;
         }
-        step->state = 4;
         break;
     case 4:
         return 1;

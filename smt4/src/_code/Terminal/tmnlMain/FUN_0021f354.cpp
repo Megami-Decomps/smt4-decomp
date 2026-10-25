@@ -1,4 +1,4 @@
-/* NON_MATCHING: terminal-name VFP literal loads and scoped-state pointer calculations are scheduled differently. */
+/* NON_MATCHING: canonical render push/pop recovered; terminal-name VFP literal loads remain scheduled differently. */
 #include "camp/RenderCtx.h"
 
 struct TerminalDrawWork { u8 unk00[9]; u8 nameIndex; u8 unk0a[6]; s32 state; };
@@ -18,21 +18,8 @@ u32 FUN_0021f354()
         if (work->state == 1)
             FUN_002be5a4(3, -1, DAT_00432cf8[work->nameIndex].text, 150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
         RenderCtx *scene = g_titleScene;
-        s32 state = FUN_002c5d80(1, 0);
-        RenderStateStack *stack = &scene->stackA;
-        s32 previous = stack->entries[stack->count];
-        stack->entries[++stack->count] = state;
-        if (stack->dirty || previous != state) {
-            stack->apply(state);
-            stack->dirty = 0;
-        }
-        stack = &g_titleScene->stackA;
-        previous = stack->entries[stack->count--];
-        state = stack->entries[stack->count];
-        if (stack->dirty || previous != state) {
-            stack->apply(state);
-            stack->dirty = 0;
-        }
+        renderCtxPushA(scene, FUN_002c5d80(1, 0));
+        renderStackPop(&g_titleScene->stackA);
     }
     return 0;
 }

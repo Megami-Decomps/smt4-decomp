@@ -25,7 +25,7 @@ extern SessionHolder g_btlUi;
 extern void jobStop(u32 window, s32 arg);
 extern void asdMemFree(Session *session);
 extern void asdOperatorDelete(u32 handle);
-extern void FUN_00318c3c(void *subState);
+extern void partyReleasePreviewResources(void *subState);
 extern void campCommonBgRelease(void);
 
 void FUN_00290ba4(Owner *owner)
@@ -34,7 +34,7 @@ void FUN_00290ba4(Owner *owner)
 
     campCommonBgRelease();
     session = g_btlUi.session;
-    FUN_00318c3c(session->subState);
+    partyReleasePreviewResources(session->subState);
     asdOperatorDelete(session->handle);
     session->handle = 0;
     if (g_btlUi.session != NULL) {

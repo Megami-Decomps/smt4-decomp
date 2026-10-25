@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a7d74` (_code @ 0x3a7d74, 0x514 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-int gameFlagSetValue(...);
 
 int FUN_00180118(...);
 int gameFlagIsSet(...);
@@ -43,7 +43,6 @@ extern int FUN_00330bb4(unsigned short);
 /* Supplied declaration required: contentEntryFindById. */
 /* Supplied declaration required: dataTableFindRecordWord. */
 /* Supplied declaration required: dataTable5Type9Count. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004da858. */
 extern int fusionClassifyRecipeAvailability(int, unsigned short, unsigned int *);
 /* Supplied declaration required: fusionListAvailableSpecialRecipes. */
@@ -247,7 +246,7 @@ unsigned int FUN_003a7d74(void)
               *pbVar7 = temp_v1 | (unsigned char)temp_v0;
               *(char *)((int)piVar3 + temp_v3 + 0x91b4) = (char)temp_v8;
               temp_v3 = temp_v3 + 1;
-              gameFlagSetValue(unaff_r11,1);
+              gameFlagSetValue(unaff_r11, 1, 1);
             }
           }
         }

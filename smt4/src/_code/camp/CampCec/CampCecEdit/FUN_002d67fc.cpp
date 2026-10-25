@@ -31,7 +31,7 @@ typedef struct {
 extern unsigned char LAB_001c0e9c; /* 0x1c0e9c */
 extern unsigned char LAB_001c0efc; /* 0x1c0efc */
 extern unsigned char LAB_001ebdb8; /* 0x1ebdb8 */
-extern int FUN_00210e38(...); /* 0x210e38 */
+extern int campCecEditDrawContents(...); /* 0x210e38 */
 extern unsigned char LAB_00220d38; /* 0x220d38 */
 extern int FUN_00220d58(...); /* 0x220d58 */
 extern unsigned char LAB_002d6c0c; /* 0x2d6c0c */
@@ -102,7 +102,7 @@ void FUN_002d67fc(unsigned char param_1)
   taskCreateDraw(&LAB_002d6c40,0xcc,0,0,&LAB_001ebdb8,0,0,*puVar1);
   taskCreateDraw(&LAB_002d6c60,0x7d,0,0,&LAB_001c0e9c,0,0,*puVar1);
   taskCreateDraw(&LAB_002d6c78,0xdb,0,0,&LAB_001c0e9c,0,0,*puVar1);
-  taskCreateDraw(&LAB_002d6c94,0xe6,0,0,FUN_00210e38,0,0,*puVar1);
+  taskCreateDraw(&LAB_002d6c94,0xe6,0,0,campCecEditDrawContents,0,0,*puVar1);
   puVar1[0x44] = 0xffffffff;
   puVar1[0x42] = 0xffffffff;
   puVar1[0x43] = 0;

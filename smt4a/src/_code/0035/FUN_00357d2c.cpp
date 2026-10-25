@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail push {r4, r5, r6, lr} differs from recovered push {r4, r5, r6, r7, r8, lr}. */
+/* NON_MATCHING: candidate/request registers differ, and the alternate-search return adds a branch-to-next NOP. */
 #include "common.h"
 
 struct SaveSlotView {
@@ -14,6 +14,16 @@ s32 FUN_00187168(SaveSlotView* slot);
 s32 FUN_003e4e4c(s32 value);
 void FUN_003e48dc(u16 value);
 
+static __inline s32 findEligibleAlternate(u32 requestedValue)
+{
+    for (s32 index = 0; index < 12; ++index) {
+        SaveSlotView *candidate = FUN_003e4d68((u16)index);
+        if (candidate->unk12C != requestedValue && FUN_00187168(candidate) != 0)
+            return candidate->unk12C;
+    }
+    return 0;
+}
+
 // Select an eligible alternate before processing the currently selected value.
 u32 FUN_00357d2c(void)
 {
@@ -21,19 +31,7 @@ u32 FUN_00357d2c(void)
     SaveSlotView* selectedSlot = saveSlotFindSelected();
 
     if (selectedSlot != 0 && selectedSlot->unk12C == requestedValue) {
-        u16 replacementValue;
-        s32 index;
-        for (index = 0; index < 12; ++index) {
-            SaveSlotView* candidate = FUN_003e4d68((u16)index);
-            if (candidate->unk12C != requestedValue && FUN_00187168(candidate) != 0) {
-                replacementValue = candidate->unk12C;
-                break;
-            }
-        }
-        if (index == 12) {
-            replacementValue = 0;
-        }
-        FUN_003e4e4c(replacementValue);
+        FUN_003e4e4c(findEligibleAlternate(requestedValue));
     }
 
     FUN_003e48dc((u16)requestedValue);

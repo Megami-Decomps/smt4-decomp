@@ -1,4 +1,3 @@
-/* NON_MATCHING: only previous/current transition state registers differ (r0/r1 exchanged). */
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 
@@ -17,6 +16,13 @@ void sendEvent100020F(void);
 void sendEvent100020E(void);
 void menuOpenCommandList(EquipmentMenuState *menu);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
+
+static inline void shopMenuChangeState(EquipmentMenuState *menu, u32 state)
+{
+    menu->transition.previousState = menu->transition.state;
+    menu->transition.state = state;
+    menu->transition.frame = 0;
+}
 
 // Navigate equipment choices or enter the shop's auxiliary menu.
 void FUN_00498594(EquipmentMenuState *menu)
@@ -45,9 +51,7 @@ void FUN_00498594(EquipmentMenuState *menu)
     if (inputIsQuestMenuPressed()) {
         uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(menu->unk00000 + 0x3CC), 1);
         sendEvent100020F();
-        menu->transition.previousState = menu->transition.state;
-        menu->transition.frame = 0;
-        menu->transition.state = 0x13;
+        shopMenuChangeState(menu, 0x13);
     } else if (inputIsQuestCancelPressed()) {
         sendEvent100020E();
         menuOpenCommandList(menu);

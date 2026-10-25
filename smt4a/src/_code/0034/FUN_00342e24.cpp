@@ -64,7 +64,7 @@ unsigned int FUN_00342e24(int param_1)
     }
     FUN_002a5cf4();
     FUN_0032e30c(*(unsigned int *)(param_1 + 8));
-    FUN_0032e25c(*(unsigned int *)(param_1 + 8),(int)*(short *)(param_1 + 0x108));
+    slotNameDisplaySetEntry(*(unsigned int *)(param_1 + 8),(int)*(short *)(param_1 + 0x108));
     characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0x58));
     FUN_002e264c(*(unsigned int *)(param_1 + 8));
@@ -184,14 +184,14 @@ code_r0x00343274:
     *(unsigned int *)(param_1 + 0x164) = (unsigned int)*(unsigned char *)(*(int *)(param_1 + 8) + 0x21);
     FUN_0032e30c();
     *(unsigned char *)(*(int *)(param_1 + 8) + 0x21) = *(unsigned char *)(param_1 + 0x10d);
-    FUN_0032e25c(*(unsigned int *)(param_1 + 8),(int)*(short *)(param_1 + 0x108));
+    slotNameDisplaySetEntry(*(unsigned int *)(param_1 + 8),(int)*(short *)(param_1 + 0x108));
     if (*(short *)(*(int *)(param_1 + 8) + 0x34) == 0) {
       FUN_002e6dd0(*(int *)(param_1 + 8) + 0x50,0x14);
     }
     *(unsigned char *)(param_1 + 0x154) = 1;
     FUN_002a5cf4();
     FUN_0032e30c(*(unsigned int *)(param_1 + 8));
-    FUN_0032e25c(*(unsigned int *)(param_1 + 8),(int)*(short *)(param_1 + 0x108));
+    slotNameDisplaySetEntry(*(unsigned int *)(param_1 + 8),(int)*(short *)(param_1 + 0x108));
     characterInfoPanelPopulate(*(unsigned int *)(param_1 + 0xc),*(unsigned int *)(param_1 + 8),
                  *(unsigned int *)(param_1 + 0x58));
     FUN_002e264c(*(unsigned int *)(param_1 + 8));

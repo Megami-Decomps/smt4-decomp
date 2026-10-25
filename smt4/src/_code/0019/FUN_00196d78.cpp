@@ -21,7 +21,7 @@ struct FusionSortPreferences {
 extern "C" {
 extern UniteWork *g_unite;
 FusionSortPreferences *FUN_002a0d0c(void);
-s32 FUN_001f5f94(const void *a, const void *b);
+s32 fusionComparePairsByRaceLevelAndId(const void *a, const void *b);
 s32 FUN_002dc7a0(const void *a, const void *b);
 s32 fusionComparePairsByParentLevelRaceId(const void *a, const void *b);
 s32 uniteComparePairsDescending(const void *a, const void *b);
@@ -41,7 +41,7 @@ void FUN_00196d78(void)
     bool ascending = (*setting & 0x80) == 0;
     if ((*setting & 0x7f) == 1) {
         if (ascending) {
-            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_001f5f94);
+            FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), fusionComparePairsByRaceLevelAndId);
         } else {
             FUN_002b7bca(work->pairSortIV.sortedPairs, work->pairSortIV.sortedCount, sizeof(u16), FUN_002dc7a0);
         }

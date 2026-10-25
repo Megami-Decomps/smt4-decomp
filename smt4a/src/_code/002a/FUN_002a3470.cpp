@@ -1,19 +1,16 @@
-/* NON_MATCHING: retail hoists the call arguments into r0/r1 before the compare; the switch's jump table cannot be compared byte for byte */
+/* NON_MATCHING: explicit argument zero and semantic dispatcher recover ABI/setup; two final equality-chain comparisons retain command in r0 instead of saved r4. */
 #include "common.h"
 
 extern "C" {
 
-s32 scrGetArg(...);
+u32 scrGetArg(u32 index);
 void FUN_002378b8(s32 command, s32 target);
 void FUN_002a3518(s32 command, s32 target);
 
 /* A script command with argument 1 == 13 stops the event textures and bust-up slots for these
  * argument 0 values; every other call is handled elsewhere. */
-void FUN_002a3470(void)
+static __inline void dispatchScriptTextureCommand(s32 command, s32 target)
 {
-    s32 command = scrGetArg();
-    s32 target = scrGetArg(1);
-
     if (target == 13) {
         switch (command) {
         case 1:
@@ -36,6 +33,13 @@ void FUN_002a3470(void)
         }
     }
     FUN_002378b8(command, target);
+}
+
+void FUN_002a3470(void)
+{
+    s32 command = scrGetArg(0);
+    s32 target = scrGetArg(1);
+    dispatchScriptTextureCommand(command, target);
 }
 
 } /* extern "C" */

@@ -42,11 +42,12 @@ void FUN_00111bb4()
     TextureObject *object = DAT_004652a8->objects;
     while (object) {
         TextureObject *next = object->next;
-        for (TextureObjectBindingGroup *group = DAT_004652a8->bindings; group; group = group->next) {
+        TextureObjectLists *lists = DAT_004652a8;
+        for (TextureObjectBindingGroup *group = lists->bindings; group; group = group->next) {
             for (s32 i = 0; i < 2; ++i) {
                 TextureObjectBinding &binding = group->bindings[i];
                 if (binding.object == object) {
-                    if (DAT_004652a8->active == group) {
+                    if (lists->active == group) {
                         *g_textureBindingState |= 1;
                     }
                     binding.object = NULL;

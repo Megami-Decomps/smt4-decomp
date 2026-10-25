@@ -1,4 +1,4 @@
-/* NON_MATCHING: vector reserve capacity/allocation saved registers swap, and the trailing sentinel store moves past pointer initialization. */
+/* NON_MATCHING: native sentinel initializer restores its store order; vector reserve pointer/capacity scheduling and copy registers differ. */
 #include "common.h"
 #include <vector>
 #include "stl/MacroMax.h"
@@ -45,10 +45,9 @@ struct MatrixSlotList {
 
 /* A list of up to 1024 matrices plus the eight slot values the owner reports. */
 MatrixSlotList::MatrixSlotList(u32 a, SlotOwner *owner, u32 c)
-    : unk0c(a), unk14(c), unkAC(0), unkB0(0)
+    : unk0c(a), unk14(c), unkA8(-1), unkAC(0), unkB0(0)
 {
     unk10 = (u8 *)owner + 16;
-    unkA8 = -1;
     matrices.reserve(1024);
     for (s32 i = 0; i < 8; i++) {
         slots[i] = FUN_0016b034(owner, i);

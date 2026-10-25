@@ -27,7 +27,7 @@ extern "C" {
 extern AnimatedPageSelection g_animatedPageSelection;
 
 s32 useCounterIsFinished(void);
-void FUN_004cf8dc(void* sprite, s32 mode);
+void entryDispatchUpdate(void* sprite, s32 mode);
 u32 vec2GetXInt(void* sprite);
 u32 vec2GetYInt(void* sprite);
 void pointConvertToFloat(void* pointer, u32 x, u32 y);
@@ -61,7 +61,7 @@ void FUN_004a1db4(StatusMenu* menu)
 {
     if (useCounterIsFinished() == 0) return;
 
-    FUN_004cf8dc(menu->rowSprite, menu->mode);
+    entryDispatchUpdate(menu->rowSprite, menu->mode);
     void* sprite = reinterpret_cast<u8*>(menu) + menu->mode * 0x8c + 0xfc;
     u32 y = vec2GetYInt(sprite);
     u32 x = vec2GetXInt(sprite);

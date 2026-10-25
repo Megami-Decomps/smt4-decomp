@@ -1,6 +1,6 @@
 #include "battle/btlReflect.h"
 
-extern "C" ReflectAction *FUN_004102d8(ReflectContext *context, s32 id, s32 target, u32 flags);
+
 extern "C" char *libc_strcpy(char *dest, const char *src);
 
 /* Queues a kind-20 text action; when `unique`, an already queued kind-20 action with no value
@@ -8,7 +8,7 @@ extern "C" char *libc_strcpy(char *dest, const char *src);
 extern "C" ReflectAction *FUN_004fec2c(s32 id, u32 flags, u32 value, u32 word18, const char *text,
                                        s32 unique)
 {
-    ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)id, 0, flags);
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, flags);
     ReflectAction *queued;
 
     if (unique) {

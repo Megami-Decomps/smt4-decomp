@@ -1,4 +1,4 @@
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 struct UnitData {
     /* 0x00 */ u8 unk00[0x14c];
@@ -14,12 +14,11 @@ extern "C" {
 
 extern u32 g_btlScriptUnit;
 
-UnitWithData *btlUnitGet(u32 id);
 
 /* Script command: sets the scripted unit's halfword at 0x14c to 6. */
 u32 FUN_002e3b04(void)
 {
-    UnitData *data = btlUnitGet(g_btlScriptUnit)->data;
+    UnitData *data = reinterpret_cast<UnitWithData *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data;
     data->value = 6;
     return 1;
 }

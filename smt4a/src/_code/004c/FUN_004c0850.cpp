@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004c0850` (_code @ 0x4c0850, 0x714 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_003f0e20(...);
 int FUN_003f21ec(void);
 int FUN_003f24e0(unsigned int *, int);
 int FUN_003f2aac(unsigned int *, int, int);
-int gameFlagSetValue(...);
 int countersAddSaturating(int, int);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -36,7 +36,6 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f24e0. */
 /* Supplied declaration required: FUN_003f2aac. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
 extern unsigned int FUN_004c53fc(unsigned int);
 extern int btlUnitGet(unsigned int);
@@ -145,11 +144,11 @@ void FUN_004c0850(int param_1,int param_2,unsigned short param_3)
       }
       temp_v1 = gameFlagIsSet(0x4b0);
       if (temp_v1 == 0) {
-        gameFlagSetValue(0x4b0,1);
+        gameFlagSetValue(0x4b0, 1, 1);
       }
       FUN_003f21ec();
       if ((puVar2 != (unsigned int *)0x0) && (temp_v1 = gameFlagIsSet(0x4c6), temp_v1 == 0)) {
-        gameFlagSetValue(0x4c6,1);
+        gameFlagSetValue(0x4c6, 1, 1);
       }
     }
     if ((DAT_00571414 & puVar3[1]) != 0 || (*puVar3 & DAT_00571410) != 0) {

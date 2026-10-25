@@ -1,4 +1,4 @@
-/* NON_MATCHING: near (197 rows against 204): same math and order; retail inlines the return-0 stub questQueryFalse as `mov r0,#0` (ours keeps the call in a single-file compile), and keeps the first unit record, second record, active flag and level in stack slots with a different register split (r9 totals, sl exp, fp magic) where ours keeps them in r5-r9/fp */
+/* NON_MATCHING: reward/passive loops retain different registers and stack spills; first unit record now supplies the final member index and the money guard encloses its linker-inlined bonus query. */
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;
@@ -75,13 +75,15 @@ void FUN_00223360(BattleReward *reward)
     PlayerData *player = gameGetPlayerData();
 
     u32 money = reward->money;
-    u32 bonusPercent = questQueryFalse();
-    if (money != 0 && bonusPercent != 0) {
-        u32 bonus = money * bonusPercent / 100;
-        if (bonus == 0) {
-            bonus = 1;
+    if (money != 0) {
+        u32 bonusPercent = questQueryFalse();
+        if (bonusPercent != 0) {
+            u32 bonus = money * bonusPercent / 100;
+            if (bonus == 0) {
+                bonus = 1;
+            }
+            money += bonus;
         }
-        money += bonus;
     }
     totals->totalMoney += money;
 
@@ -120,8 +122,8 @@ void FUN_00223360(BattleReward *reward)
         if (slots->member[i] < 0) {
             continue;
         }
-        UnitRecord *unit = gameGetUnitRecord(slots->member[i]);
-        if (flagWordTestBit(unit, 1) != 0 || flagWordTestBit(unit, 10) != 0 || flagWordTestBit(unit, 2) != 0) {
+        UnitRecord *firstUnit = gameGetUnitRecord(slots->member[i]);
+        if (flagWordTestBit(firstUnit, 1) != 0 || flagWordTestBit(firstUnit, 10) != 0 || flagWordTestBit(firstUnit, 2) != 0) {
             continue;
         }
         s32 member = slots->member[i];
@@ -129,7 +131,7 @@ void FUN_00223360(BattleReward *reward)
         if (slots->member[8] == member || slots->member[9] == member || slots->member[10] == member) {
             active = 1;
         }
-        unit = gameGetUnitRecord(member);
+        UnitRecord *unit = gameGetUnitRecord(member);
         f32 scale = 1.0f;
         for (s32 k = 0; k < 8; k++) {
             if (unit->passive[k] != 0) {
@@ -150,7 +152,7 @@ void FUN_00223360(BattleReward *reward)
         if ((s32)value <= 0 && exp != 0) {
             value = 1;
         }
-        totals->expByMember[unit->memberIndex] += value;
+        totals->expByMember[firstUnit->memberIndex] += value;
     }
 }
 

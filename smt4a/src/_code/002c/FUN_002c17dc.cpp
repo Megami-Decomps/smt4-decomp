@@ -7,13 +7,16 @@ extern "C" {
 int rangeInit(...);
 int FUN_00237da0(...);
 int FUN_00238e20(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
-int FUN_00238f08(unsigned int, unsigned char [288], unsigned char [496], unsigned int *, unsigned int *, int, int, int);
+struct LayoutTaskWork;
+LayoutTaskWork *FUN_00238f08(unsigned int owner, const void *params, const void *layout,
+                           void *context, unsigned int *ownerSlot, unsigned char kind,
+                           unsigned short frame, const void *templateData);
 int nodeTreeReleaseItemClearOwner(...);
 int nodeGroupRelease(...);
 int nodeGroupReleaseAlt(...);
 int nodeTreeReleaseItem(...);
 int FUN_002a39a4(...);
-int FUN_002e5154(...);
+int nodeReleaseOwnedItemsAndSelf(...);
 int FUN_0035bc4c(...);
 int keyedGetEntryValue(...);
 int __aeabi_memcpy4(unsigned char [32], int, int);
@@ -37,7 +40,7 @@ extern int keyedRecordCountGet(void);
 /* Supplied declaration required: nodeGroupReleaseAlt. */
 /* Supplied declaration required: nodeTreeReleaseItem. */
 /* Supplied declaration required: FUN_002a39a4. */
-/* Supplied declaration required: FUN_002e5154. */
+/* Supplied declaration required: nodeReleaseOwnedItemsAndSelf. */
 extern int keyedRecordFindPart(unsigned char, unsigned int);
 /* Supplied declaration required: FUN_0035bc4c. */
 extern int keyedRecordGetEntryValue(unsigned char, int);
@@ -104,7 +107,7 @@ void FUN_002c17dc(unsigned int *param_1)
                     temp_v7 = keyedGetEntryValue(*(unsigned char *)(param_1 + 0xc),temp_v2);
                     FUN_00238f08(temp_v7,temp_v9,temp_v11,param_1 + 0xd,
                                  param_1 + param_1[6] + 0x44,*(unsigned char *)(param_1 + 0x54),temp_v1,
-                                 temp_v3);
+                                 (const void *)temp_v3);
                     param_1[param_1[6] + 0x44] = temp_v7;
                     param_1[6] = param_1[6] + 1;
                   }
@@ -170,7 +173,7 @@ void FUN_002c17dc(unsigned int *param_1)
     temp_v2 = 0;
     if (temp_v2 < (int)param_1[4]) {
       do {
-        FUN_002e5154(param_1[temp_v2 + 0x24]);
+        nodeReleaseOwnedItemsAndSelf(param_1[temp_v2 + 0x24]);
         temp_v2 = temp_v2 + 1;
       } while (temp_v2 < (int)param_1[4]);
     }

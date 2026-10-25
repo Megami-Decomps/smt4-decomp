@@ -3,14 +3,14 @@
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
-u32 taskCreateDraw(const char *name, u32 priority, u32, u32, void (*start)(void *), void (*end)(void *), void *work, u32 parent);
+u32 taskCreateDraw(const char *name, u32 priority, u32, u32, s32 (*start)(u32), void (*end)(u32), void *work, u32 parent);
 u32 FUN_0031b654(u32 kind);
 void jobSetParent(u32 parent, u32 child);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 void FUN_004f55c8(void *data, BtlEffectJobA *owner);
-void btlEffectDispatchCurrentJob(void *work);
-void btlEffectDestroy(void *work);
-void FUN_002dece8(void *work);
+s32 btlEffectDispatchCurrentJob(u32 job);
+void btlEffectDestroy(u32 job);
+s32 FUN_002dece8(u32 job);
 
 // Create battle effect jobs and allocate their shared work buffer.
 void btlEffectCreateTasks(BtlEffectJobA *owner)

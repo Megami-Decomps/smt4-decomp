@@ -30,7 +30,7 @@ void FUN_002c9edc(u32 job);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_00256940(BtlMainState *battle, BtlMainState *owner, u32 enabled);
-void FUN_002568c4(s32 mode, s32 index);
+void btlReflectQueueKind34(s32 mode, s32 index);
 void FUN_00256898(s32 enabled, s32 mode);
 void FUN_0025c2d0(BtlUi *ui, u32 enabled);
 
@@ -49,7 +49,7 @@ void FUN_001f7fac(BtlMainState *battle)
     session->initial.rightSelection = -1;
     if (g_btlMain) {
         if (g_btlMain->talk.unitIndex >= 0 && FUN_00256940(g_btlMain, battle, 1))
-            FUN_002568c4(0, 0);
+            btlReflectQueueKind34(0, 0);
         FUN_00256898(1, 0);
     }
     battle->editorControl.flags |= 0x80000;

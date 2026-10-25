@@ -1,6 +1,7 @@
 /* NON_MATCHING: the two-element id table is loaded from the pool with ldm/stm in retail and the stereo-parallax float/int round trips schedule differently; the draw sequence is the same. */
 #include "common.h"
 #include "camp/RenderCtx.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
 
@@ -11,10 +12,6 @@ typedef struct HintLayout {
     /* 0x0A */ s16 y;
 } HintLayout;
 
-/* A three-float vector the animation is placed with. */
-typedef struct HintVec3 {
-    f32 x, y, z;
-} HintVec3;
 
 /* The hint window's work block (only the fields touched here). */
 typedef struct HintWindow {
@@ -35,7 +32,7 @@ extern RenderCtxA *g_renderCtx;
 void FUN_00157558(RenderCtxA *ctx);
 void FUN_00183bb0(void);
 s32 FUN_001692ac(u32 kind, u32 arg);
-void FUN_00499b58(HintWindow *window);
+void shopMainDrawPairedJobs(HintWindow *window);
 s32 placeWinGetValue(void);
 s32 FUN_00284f50(void);
 s32 FUN_00284f70(void);
@@ -43,7 +40,6 @@ HintLayout *FUN_001834a4(u32 kind, u32 index);
 void FUN_00164b5c(s32 a, s32 b, s32 c, s32 x, s32 y, s32 z);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 f32 asdAnimGetTrackLastFrame(u32 animation, s32 track);
-void FUN_003fabfc(u32 animation, s32 a, const HintVec3 *position, s32 b, s32 c, f32 frame, f32 scale);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);
 
@@ -54,7 +50,7 @@ void FUN_004990e4(HintWindow *window)
     FUN_00183bb0();
     renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     if (window->mode != 1) {
-        FUN_00499b58(window);
+        shopMainDrawPairedJobs(window);
         if (placeWinGetValue() != 0) {
             s32 x = FUN_00284f50();
             s32 y = FUN_00284f70();
@@ -74,14 +70,15 @@ void FUN_004990e4(HintWindow *window)
             }
         }
         if ((window->flags & 0x2000) != 0 && window->step > 0 && window->step < 20) {
-            HintVec3 position;
+            SpriteDrawVector3 position;
 
             position.x = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.33f);
             position.y = 46.0f;
             position.z = 0.0f;
             window->frame += 2;
             window->frame = window->frame % (s32)asdAnimGetTrackLastFrame(window->animation, 0);
-            FUN_003fabfc(window->animation, 0, &position, -1, 0, (f32)(s32)window->frame, 1.0f);
+            FUN_003fabfc(reinterpret_cast<SpriteDrawOwner *>(window->animation), 0, &position,
+                          0xFFFFFFFFu, 0, (f32)(s32)window->frame, 1.0f);
         }
     }
     renderStackPop(&g_renderCtx->stackA);

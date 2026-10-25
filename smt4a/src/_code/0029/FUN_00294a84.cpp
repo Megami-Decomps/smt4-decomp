@@ -34,11 +34,10 @@ u32 FUN_002d8b58(s32 type);
 extern "C" void FUN_00294a84(s32 immediate)
 {
     FUN_00152f44(immediate);
-    switch (g_popupState->state) {
-    case 3: return;
-    case 0: break;
-    default: return;
-    }
+    if (g_popupState->state == 3)
+        return;
+    if (g_popupState->state != 0)
+        return;
     PopupSaveSlot *slot = saveSlotFindSelected();
     if (slot == NULL) {
         return;

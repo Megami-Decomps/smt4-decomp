@@ -1,4 +1,4 @@
-/* NON_MATCHING: only state-transition byte-store scheduling/register choices differ. */
+/* NON_MATCHING: suspended transition matches; idle transition's frame/state/previousState stores remain reordered. */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "gamedata/DataTable.h"
 
@@ -12,6 +12,14 @@ void ptrListRemoveClearOwner(void* registry, u32 handle);
 void FUN_0022e774(void);
 void FUN_0019de98(void* color, u32 rgba);
 void FUN_0041f020(SaveLoadControllerA* controller, s32 enabled);
+
+static inline void saveLoadTransition(SaveLoadControllerA *controller, u8 state, u8 nextState)
+{
+    controller->previousState = controller->state;
+    controller->state = state;
+    controller->frame = 0;
+    controller->nextState = nextState;
+}
 
 // Exit to the suspended state or reset the idle save/load screen for another selection.
 void FUN_0041eeec(SaveLoadControllerA* controller)
@@ -30,21 +38,13 @@ void FUN_0041eeec(SaveLoadControllerA* controller)
             }
         }
         FUN_0022e774();
-        u8 previous = controller->state;
-        controller->frame = 0;
-        controller->state = 16;
-        controller->previousState = previous;
-        controller->nextState = 12;
+        saveLoadTransition(controller, 16, 12);
     } else if (!controller->busy) {
         s32 colorIndex = controller->colorIndex;
         void* section = dataTableGet(0x3D, 0);
         SaveLoadColorRecordA* colors = static_cast<SaveLoadColorRecordA*>(dataTableGetEntries(section));
         FUN_0019de98(colors[colorIndex].color, 0xF4F4F4FF);
-        u8 previous = controller->state;
-        controller->frame = 0;
-        controller->state = 4;
-        controller->previousState = previous;
-        controller->nextState = 0;
+        saveLoadTransition(controller, 4, 0);
         controller->pending = 0;
         controller->confirmed = 0;
         controller->canceled = 0;

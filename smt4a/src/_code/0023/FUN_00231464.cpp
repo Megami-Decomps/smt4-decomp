@@ -1,24 +1,22 @@
-/* NON_MATCHING: Task allocation null-branch selection and initialization-store addressing differ. */
+/* NON_MATCHING: canonical process callbacks recovered; allocation null-branch and work initialization store bases differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
-/* Callback signatures are not recovered by this caller. These declarations
- * describe address-only callback arguments, not native class ABI. */
 extern "C" {
-typedef void (*GameOverCallbackA)(...);
 
 void *asdOperatorNew(u32 size);
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 argument2,
-                           u32 argument3, GameOverCallbackA poll,
-                           GameOverCallbackA destroy, u32 argument6);
-void taskCreateDraw(const char *name, u32 priority, u32 argument2,
-                    u32 argument3, GameOverCallbackA callback,
-                    u32 argument5, u32 argument6, u32 processToken);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 flags,
+                           AsdProcFunc start, AsdProcUpdateFunc poll,
+                           AsdProcFunc destroy, void *work);
+u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay,
+                   u16 endDelay, AsdProcUpdateFunc callback,
+                   AsdProcFunc destroy, void *work, u32 parent);
 
-void btlGameOverPollSequence(...);
-void jobDestroyGlobal(...);
-void FUN_00330a60(...);
-void FUN_00330a58(...);
+s32 btlGameOverPollSequence(u32 job);
+void jobDestroyGlobal(u32 job);
+s32 FUN_00330a60(u32 job);
+s32 FUN_00330a58(u32 job);
 
 extern GameOverWorkPrefixA *DAT_0057f678;
 extern const char DAT_00530f28[];

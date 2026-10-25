@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation: retail keeps the module base in r8, computes the texture base after the first free and indexes it from r9. */
+/* NON_MATCHING: texture-release helper forms the texture base after the buffer free; module/work/texture/index register assignment still differs. */
 #include "common.h"
 
 struct SmokeFadeWork {
@@ -31,15 +31,9 @@ s32 textureGetIndexedResource(u32 table);
 void asdTMTexTableFreeEntry(u32 table);
 void jobStop(u32 job, s32 arg);
 
-/* Frees the smoke fade's buffer, releases its texture nodes and entries, stops its job and frees the work. */
-void FUN_002efd64(void)
+static inline void smokeFadeReleaseTextures(SmokeFadeTexture *textures)
 {
-    SmokeFadeWork *work = DAT_0043df28.work;
-    SmokeFadeTexture *textures = DAT_0043df28.textures;
-    s32 i;
-
-    asdMemFree(work->buffer);
-    for (i = 0; i < 2; i++) {
+    for (s32 i = 0; i < 2; ++i) {
         if (textures[i].nodeHeld) {
             if (asdTMTexTableNodeIsLoaded(textures[i].table, textures[i].node)) {
                 asdTMTexTableReleaseNode(textures[i].table, textures[i].node);
@@ -47,7 +41,7 @@ void FUN_002efd64(void)
             textures[i].nodeHeld = 0;
         }
     }
-    for (i = 0; i < 2; i++) {
+    for (s32 i = 0; i < 2; ++i) {
         if (textures[i].entryHeld) {
             if (textureGetIndexedResource(textures[i].table)) {
                 asdTMTexTableFreeEntry(textures[i].table);
@@ -55,6 +49,15 @@ void FUN_002efd64(void)
             textures[i].entryHeld = 0;
         }
     }
+}
+
+/* Frees the smoke fade's buffer, releases its texture nodes and entries, stops its job and frees the work. */
+void FUN_002efd64(void)
+{
+    SmokeFadeWork *work = DAT_0043df28.work;
+
+    asdMemFree(work->buffer);
+    smokeFadeReleaseTextures(DAT_0043df28.textures);
     jobStop(work->job, 0);
     asdMemFree(work);
     DAT_0043df28.work = NULL;

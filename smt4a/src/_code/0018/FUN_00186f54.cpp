@@ -1,13 +1,14 @@
-#include "common.h"
+#include "gamedata/KeyedCatalog.h"
 
 extern "C" {
 
-__declspec(noreturn) __weak void FUN_00186f54_hook(void);
+struct CatalogRecord;
+const CatalogRecord *dataFindKeyedRecordWithOverrides(u32 id);
 
-/* Calls the engine's (removed) noreturn hook; armlink turned the tail branch into a nop. */
-void FUN_00186f54(void)
+/* The catalog's name occupies the first bytes of its keyed record. */
+const char *FUN_00186f54(u32 id)
 {
-    FUN_00186f54_hook();
+    return reinterpret_cast<const char *>(dataFindKeyedRecordWithOverrides(id));
 }
 
 } /* extern "C" */

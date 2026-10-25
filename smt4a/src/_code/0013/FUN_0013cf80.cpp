@@ -9,9 +9,9 @@ u8 FUN_00154edc(u32 mode, JobSurface *surface);
 extern u32 g_renderCtx;
 
 /* Starts a 512x512 capture into the job's surface once one is requested and nothing blocks it. */
-s32 FUN_0013cf80(void)
+s32 FUN_0013cf80(u32 job)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
 
     work->captured = 0;
     if (!work->captureEnabled || !work->captureRequested) {

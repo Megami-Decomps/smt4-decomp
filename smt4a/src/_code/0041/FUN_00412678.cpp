@@ -22,7 +22,7 @@ static __inline u32 *vertexResetCommandSlots(u32 *commands, const Obj42072cState
             *commands++ = 0;
             *commands++ = (index * 3 + 0x205) | 0xF0000;
         }
-        if (cache->entries[index].used != 0) {
+        if (cache->entries[index].enabled != 0) {
             *commands++ = index;
             *commands++ = 0x803F0232;
             *commands++ = 0;

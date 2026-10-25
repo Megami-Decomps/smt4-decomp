@@ -16,7 +16,7 @@ extern Owner00316164 *g_shop;
 void shopRefreshChildDirtyRows(Child00316164 *child);
 
 /* While the shop owner is in state 0, 1 or 2, hands its child (if any) to shopRefreshChildDirtyRows. Always returns 0. */
-u32 ownerChildNotifyEarlyState(void)
+s32 ownerChildNotifyEarlyState(u32 process)
 {
     Owner00316164 *owner = g_shop;
 

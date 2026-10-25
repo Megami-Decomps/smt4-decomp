@@ -8,9 +8,9 @@ void FUN_002b4828(u32 operation);
 void *fileSlotGetBuffer(u32 slot);
 
 // Process a pending applet message and clear the completed request bits.
-u32 FUN_00121e5c(void)
+s32 FUN_00121e5c(u32 job)
 {
-    JobAppletMessage *work = reinterpret_cast<JobAppletMessage *>(jobGetWork());
+    JobAppletMessage *work = reinterpret_cast<JobAppletMessage *>(jobGetWork(job));
     u32 flags = work->flags;
     if (flags & 1) {
         if (!(flags & 8) || (flags & 2)) {

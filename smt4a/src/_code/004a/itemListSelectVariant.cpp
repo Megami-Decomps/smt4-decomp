@@ -6,7 +6,7 @@ SelectionValueRecord *FUN_0026140c(void);
 void FUN_004a84e8(ItemListSelectionEntry *entry, s32 selection);
 
 // Select the item-list presentation variant, retaining its alternate-state bit.
-void itemListSelectVariant(ItemListSelectionOwner *owner, s32 useAlternate)
+void itemListSelectVariant(ItemListSelectionOwner *owner, s32 useAlternate, s32 unused)
 {
     if (owner->selection.value == 0) {
         return;

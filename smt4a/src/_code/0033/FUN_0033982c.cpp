@@ -39,7 +39,7 @@ extern signed char DAT_005f1c70; /* 0x5f1c70 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int gameFlagsGetBlock(void);
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -119,14 +119,14 @@ void FUN_0033982c(void)
         temp_v6 = (unsigned int)*(unsigned char *)(temp_v2 + 0xb4);
       }
       if (DAT_005f1618 == 0 && temp_v6 == 0) {
-        if (((*(char *)(temp_v2 + 0xb5) != '\0') && (temp_v4 = FUN_00163fd4(8), temp_v4 == 0)) &&
-           (temp_v4 = FUN_00163fd4(7), temp_v4 == 0)) {
+        if (((*(char *)(temp_v2 + 0xb5) != '\0') && (temp_v4 = slotIsActive(8), temp_v4 == 0)) &&
+           (temp_v4 = slotIsActive(7), temp_v4 == 0)) {
           *(unsigned char *)(g_lmapView + 0xb5) = 0;
         }
         if (*(short *)(g_lmapView + 0xb6) < 7) {
-          temp_v4 = FUN_00163fd4(8);
+          temp_v4 = slotIsActive(8);
           temp_v7 = temp_v4 != 0;
-          temp_v4 = FUN_00163fd4(7);
+          temp_v4 = slotIsActive(7);
           temp_v8 = temp_v4 != 0;
           temp_v4 = padButtonIsPressed(4);
           temp_v9 = temp_v4 != 0;
@@ -142,7 +142,7 @@ void FUN_0033982c(void)
         }
         if (((temp_v10 && temp_v2 == 0) && (temp_v4 = lmapSceneGetUnk0(), temp_v4 == 1)) &&
            ((temp_v4 = inputIsQuestMenuPressed(), temp_v4 != 0 ||
-            (((temp_v4 = FUN_00163fd4(8), temp_v4 != 0 && (temp_v4 = FUN_00163fd4(7), temp_v4 != 0)) &&
+            (((temp_v4 = slotIsActive(8), temp_v4 != 0 && (temp_v4 = slotIsActive(7), temp_v4 != 0)) &&
              ((temp_v4 = padButtonIsPressed(8), temp_v4 == 0 &&
               ((temp_v4 = padButtonIsPressed(7), temp_v4 == 0 && (*(char *)(g_lmapView + 0xb5) == '\0'))))))
             )))) {
@@ -156,9 +156,9 @@ void FUN_0033982c(void)
     }
   }
   else {
-    temp_v4 = FUN_00163fd4(8);
+    temp_v4 = slotIsActive(8);
     temp_v7 = temp_v4 != 0;
-    temp_v4 = FUN_00163fd4(7);
+    temp_v4 = slotIsActive(7);
     temp_v8 = temp_v4 != 0;
   }
   temp_v27 = &DAT_005f1bfc;

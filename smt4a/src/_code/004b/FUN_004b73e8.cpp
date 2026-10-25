@@ -11,7 +11,7 @@ void obj04Finish(void);
 ListEntry20 *menu4CGetCurrentEntry(Menu4C *menu);
 void FUN_004b7694(CampScriptPanelResources *panel);
 void FUN_004b75d0(CampScriptPanelResources *panel);
-void FUN_004b9ff4(CampScriptPanelResources *panel, void *animation);
+void uiClampScrollOffset(CampScriptPanelResources *panel, void *animation);
 void spatialAdvanceTransformTransition(u32 handle);
 
 void FUN_004b73e8(CampScriptPanelResources *panel)
@@ -60,7 +60,7 @@ void FUN_004b73e8(CampScriptPanelResources *panel)
         }
     }
     FUN_004b75d0(panel);
-    FUN_004b9ff4(panel, panel->transition.animation);
+    uiClampScrollOffset(panel, panel->transition.animation);
     if (panel->cacheLoaded)
         spatialAdvanceTransformTransition(panel->cacheHandle);
 }

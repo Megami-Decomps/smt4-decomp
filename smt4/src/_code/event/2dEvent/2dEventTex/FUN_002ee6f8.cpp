@@ -22,11 +22,11 @@ void* asdMemAlloc(u32 size, u32 alignment, u32 arg, u32 memoryType, u32 flag);
 void memClear(void* block, u32 size);
 u32 asdProcessCreateSimple(const char* name, s32 priority, s32 a, s32 b, void (*update)(void*),
                            void (*release)(void*), void* owner);
-void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, void (*draw)(void*), s32 c,
+void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, s32 (*draw)(u32), s32 c,
                     void* owner, u32 parent);
 void eventTexUpdateScreenShake(void* owner);
 void eventTextureRelease(void* owner);
-void FUN_001f42d4(void* owner);
+s32 FUN_001f42d4(u32 job);
 s32 jobIsValid(u32 job);
 void FUN_0026e68c(u32 job, s32 arg);
 void jobSetParent(u32 parent, u32 job);

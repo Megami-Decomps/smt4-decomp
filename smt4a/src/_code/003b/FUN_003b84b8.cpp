@@ -12,7 +12,7 @@ extern UnitFlagMasks g_btlCandidateMasks;
 // Adds all three preset masks to the referenced script unit's leading flag word.
 u32 FUN_003b84b8(const u32* unitId)
 {
-    ScriptUnit* unit = btlUnitGet(*unitId);
+    ScriptUnit* unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(*unitId)));
     // The opaque entry's first eight bytes are its combined flags.
     u64& flags = *reinterpret_cast<u64*>(unit->entryView.entry);
     flags |= g_btlCandidateMasks.masks[0] | g_btlCandidateMasks.masks[1] | g_btlCandidateMasks.masks[2];

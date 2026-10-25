@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation (retail keeps the resource in r5 and the track in r4, reuses the old buffer register as the free argument) */
+/* NON_MATCHING: native buffer/header handoff and field narrowing now match; resource and returned track trade r4/r5. */
 #include "common.h"
 
 struct ResourceDesc {
@@ -32,14 +32,15 @@ TrackObject *FUN_003a20e4(ResourceDesc *resource)
     void *data;
 
     polygonTrackRebuildResources(track, resource->count, header);
-    u16 count = resource->count;
+    u32 count = resource->count;
 
     void *oldBuffer = track->buffer;
+    header += 0x1C;
 
     if (oldBuffer != NULL) {
         objectBufferFree(oldBuffer);
     }
-    track->buffer = FUN_002b2d74(count, track->unk00, header + 0x1C);
+    track->buffer = FUN_002b2d74(static_cast<u16>(count), track->unk00, header);
     data = resourceResolveDataPointer(resource);
     if (data != NULL) {
         effHolderSetParams(track, resource->paramCount, data);

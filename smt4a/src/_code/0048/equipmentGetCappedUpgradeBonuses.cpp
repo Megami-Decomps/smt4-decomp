@@ -1,29 +1,7 @@
-/* NON_MATCHING: -O2 candidate; zero lifetime/save set, inclusive index bound form, table-base address splitting, and first clamp registers differ. */
+/* NON_MATCHING: zero lifetime/save set, upgrade-bank address splitting and first clamp scratch registers differ. */
 #include "shard/W5_W5Match7_EntrySort.h"
-
-struct EquipmentIdRange {
-    u32 first;
-    u32 last;
-    u8 kind;
-    u8 unk09[3];
-};
-
-struct EquipmentUpgradeBonusRecord {
-    s16 rating;
-    s16 bonus;
-    u8 unk04[8];
-};
-
-struct EquipmentUpgradeStorage {
-    u8 unk00[8];
-    EquipmentUpgradeBonusRecord records[3][120];
-};
-
-struct EquipmentBonusCaps {
-    u8 unk00[0x33];
-    s8 stats[3];
-    s16 rating;
-};
+#include "gamedata/EquipmentUpgradeState.h"
+#include "shard/ItemStackLimit.h"
 
 static inline s32 capUpgradeBonus(s32 value, s32 maximum)
 {
@@ -31,14 +9,14 @@ static inline s32 capUpgradeBonus(s32 value, s32 maximum)
 }
 
 extern "C" {
-const EquipmentIdRange *FUN_0019c06c(u32 id);
-EquipmentUpgradeStorage *FUN_00239200();
+const ItemCategoryEntry *FUN_0019c06c(u32 id);
+EquipmentUpgradeState *FUN_00239200();
 
 void equipmentGetCappedUpgradeBonuses(u32 id, s16 *values)
 {
-    const EquipmentIdRange *range = FUN_0019c06c(id);
-    u8 kind = range != NULL ? range->kind : 0;
-    EquipmentUpgradeStorage *storage = FUN_00239200();
+    const ItemCategoryEntry *range = FUN_0019c06c(id);
+    u8 kind = range != NULL ? range->type : 0;
+    EquipmentUpgradeState *storage = FUN_00239200();
     values[0] = 0;
     values[1] = 0;
     values[2] = 0;
@@ -53,41 +31,42 @@ void equipmentGetCappedUpgradeBonuses(u32 id, s16 *values)
         if ((s32)index < 0) {
             return;
         }
-        if (index >= 120) {
+        if (index > 119) {
             return;
         }
-        values[0] = storage->records[0][index].rating;
-        values[4] = storage->records[0][index].bonus;
-        values[6] = storage->records[0][index].bonus;
+        values[0] = storage->categories[0][index].power;
+        values[4] = storage->categories[0][index].secondary;
+        values[6] = storage->categories[0][index].secondary;
         break;
     case 5:
         index = id - 0x1a5;
         if ((s32)index < 0) {
             return;
         }
-        if (index >= 120) {
+        if (index > 119) {
             return;
         }
-        values[0] = storage->records[1][index].rating;
+        values[0] = storage->categories[1][index].power;
         break;
     case 6:
         index = id - 0x21d;
         if ((s32)index < 0) {
             return;
         }
-        if (index >= 120) {
+        if (index > 119) {
             return;
         }
-        values[0] = storage->records[2][index].rating;
-        values[5] = storage->records[2][index].bonus;
+        values[0] = storage->categories[2][index].power;
+        values[5] = storage->categories[2][index].secondary;
         break;
     }
-    const EquipmentBonusCaps *base = (const EquipmentBonusCaps *)dataTable08Sub2GetRecord(id);
+    const EquipmentUpgradeBonusRecord *base =
+        reinterpret_cast<const EquipmentUpgradeBonusRecord *>(dataTable08Sub2GetRecord(id));
     if (base != NULL) {
-        values[0] = capUpgradeBonus(values[0], 999 - base->rating);
-        values[4] = capUpgradeBonus(values[4], 99 - base->stats[0]);
-        values[5] = capUpgradeBonus(values[5], 99 - base->stats[1]);
-        values[6] = capUpgradeBonus(values[6], 99 - base->stats[2]);
+        values[0] = capUpgradeBonus(values[0], 999 - base->power);
+        values[4] = capUpgradeBonus(values[4], 99 - (s8)base->modifiers[2]);
+        values[5] = capUpgradeBonus(values[5], 99 - (s8)base->modifiers[3]);
+        values[6] = capUpgradeBonus(values[6], 99 - (s8)base->modifiers[4]);
     }
 }
 }

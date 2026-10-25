@@ -1,4 +1,4 @@
-/* NON_MATCHING: prologue constants, pulse-end scheduling and steady-state blink byte stores differ. */
+/* NON_MATCHING: pulse-end order recovered; prologue constant scheduling and steady-state blink branch folding differ. */
 #include "event/2dEvent/SnowNoise.h"
 
 extern "C" {
@@ -24,13 +24,14 @@ u32 FUN_002a4488()
     case 1: {
         s32 frame = work->frame;
         if (frame > 4) {
-            if (frame > 8) {
+            if (frame <= 8) {
+                frame = 8 - frame;
+            } else {
                 work->opacity = 0.0f;
                 work->state = 5;
                 work->frame = 0;
                 break;
             }
-            frame = 8 - frame;
         }
         work->complete = 0;
         work->opacity = (f32)frame * 0.25f * 0.5f;
@@ -50,10 +51,15 @@ u32 FUN_002a4488()
             work->complete = 1;
         }
         break;
-    case 3:
+    case 3: {
+        s32 frame = work->frame;
         work->opacity = 0.5f;
-        work->complete = work->frame % 4 < 2;
+        if (frame % 4 >= 2)
+            work->complete = 0;
+        else
+            work->complete = 1;
         break;
+    }
     case 4:
         if (work->frame < 4) {
             work->complete = 0;

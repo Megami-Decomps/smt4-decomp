@@ -1,6 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ba998` (_code @ 0x2ba998, 0x1c90 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: action-scale payload contract recovered; the battle-state dispatcher still has decompiler-shaped 64-bit masks, call contracts and control flow. */
 #include "romwright_types.h"
+#include "battle/BattleActionScale.h"
+struct BtlMainStateA;
 
 extern "C" {
 
@@ -39,7 +40,7 @@ int FUN_004fed5c(...);
 
 int FUN_00270c18(void);
 int btlEventTaskCreate(...);
-int FUN_002b4f28(...);
+void FUN_002b4f28(BtlMainStateA *, unsigned int mode, int combatantIndex, BattleActionScale scale, unsigned int option);
 int FUN_002cf698(...);
 int FUN_00363990(...);
 int FUN_00385c44(...);
@@ -61,7 +62,7 @@ int FUN_004d88fc(...);
 int state4DStop(...);
 int state4DStart(...);
 int FUN_004f8f08(...);
-int FUN_004fb670(...);
+int btlQueueDuplicateSuppressedAction(...);
 int FUN_004fdb18(...);
 int FUN_004feecc(...);
 int VectorSignedToFloat(...);
@@ -263,7 +264,7 @@ extern unsigned int *btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004f5e6c. */
 /* Supplied declaration required: state339CFinish. */
 /* Supplied declaration required: FUN_004f8f08. */
-/* Supplied declaration required: FUN_004fb670. */
+/* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fdb18. */
 /* Supplied declaration required: FUN_004fed5c. */
@@ -754,7 +755,8 @@ LAB_002bb21c:
     temp_v6 = temp_v7;
     FUN_003f29c0(temp_v7,temp_v22);
     if (temp_v6 != 0) {
-      FUN_002b4f28(temp_v7,temp_v22[0],temp_v22[1],temp_v22[2],temp_v22[3]);
+      BattleActionScale scale = { (s32)temp_v22[2] };
+      FUN_002b4f28(reinterpret_cast<BtlMainStateA *>(temp_v7),temp_v22[0],temp_v22[1],scale,temp_v22[3]);
       temp_v6 = jobIsValid(*(unsigned int *)(temp_v7 + 0x3c));
       if (temp_v6 != 0) {
         return;
@@ -783,7 +785,7 @@ LAB_002bb21c:
     else {
       FUN_003f26d4(temp_v7);
       *(unsigned int *)(g_btlPartnerAttack + 8) = 1;
-      FUN_004fb670(0,0);
+      btlQueueDuplicateSuppressedAction(0,0);
       FUN_004feecc(1,0);
       temp_v6 = 0;
       do {

@@ -6411,3 +6411,107 @@
 004282f0 windowGetOperationFailure inferred [med] Return the operation result only on SDK failure, otherwise zero.
 00494940 panelUpdatePageExitTransition inferred [med] Advance sprite motion and transition pages to states17/18 once animation completion and optional page gate allow it.
 00280068 uiSpriteGetCompletionState inferred [high] Twin of smt4 recordGetSignedFlags; UiSpriteState completion@0x8a is queried after motion in matched FUN_00494940.
+004279a8 _ZN16AocBufferRequestC1EjPvj inferred size:0x10 primary application buffer request constructor; base source handle plus state/buffer/size.
+004279cc _ZN16AocBufferRequestD1Ev inferred Primary buffer request destructor forwards to common source-handle base destructor.
+00426e94 _ZN19AocAuxBufferRequestC1EjPvj inferred size:0x10 auxiliary application buffer request constructor at owner slot 0x5b0.
+004285cc _ZN19AocAuxBufferRequestD1Ev inferred Auxiliary buffer request destructor forwards to common source-handle base destructor.
+00429d00 _ZN17AocCatalogRequestC1EjPvj inferred size:0x10 stack buffer request used during catalog processing in FUN_004767a8.
+00429d24 _ZN17AocCatalogRequestD1Ev inferred Catalog request destructor forwards to common source-handle base destructor.
+004285d0 _ZN14AocRequestBaseD1Ev inferred Common nonvirtual request-base destructor returns this unchanged.
+002e56ec __aeabi_vec_delete evidence Native delete[] of Obj422214Owner emits identical aocMainShutdown instructions and destructor relocation; only call symbol differs. Wrapper calls rt_vec_delete then asdOperatorDeleteB, ARM ABI vector delete runtime.
+004102d8 btlQueueReflectAction evidence Twin of smt4 0x22699c: btlActionReflect.cpp debug line508 versus444; same actor pair, options, cleared action fields, linked-list append and count increment. Apocalypse extends allocation to0xa8 and clears text words at0x68.
+0052d140 g_spritePanelResourceBundle evidence size:0x22c FUN_003f84e8 retail pools DAT_0052d200 then subtracts 0x6c and 0x54 to first/second chunks; paramsInit counts are 0x54,0x6c,0x16c. Existing source already models one contiguous three-chunk bundle at 0x52d140; request sized symbol to canonicalize fifth-chunk relocation as bundle+0xc0.
+00423670 _ZN9Obj420a2c12buildEntriesEP14Obj420a2cOwnerP15Obj420a2cSourceS3_ evidence Same canonical class method; retail forwards owner/sourceA/sourceB in r1-r3 to FUN_00423d7c.
+004227b0 _ZN19MobiclipStreamOwnerD1Ev inferred [high] Native destructor closes handles at +0x50/+0x4c, finalizes and closes thread at +0x30, and returns this via recovered base. Real C++ destructor ABI enables write-back member walk; pointer-return C wrapper wrongly keeps owner live. Class size:0x54; no source callers.
+00281afc scriptVmPushReservedSlot inferred [high] Copies reserved stack slot 27 tag/value into the current depth, increments depth and pc.
+002920e0 btlViewUnregisterFlaggedAttachments inferred [high] Applies map/flag eligibility, unregisters six attachment owners, marks attachment state 2.
+00320834 questUiPlaySelectionSound inferred [high] Plays quest choice sounds based on menu kind, navigation variant, count, and selection.
+004801ac itemApplyPercentageHpHeal inferred [high] Applies or checks item HP-percent healing, clamps to maximum, returns 0 when effective and1 otherwise.
+004fb670 btlQueueDuplicateSuppressedAction inferred [high] Queues kind63 with payload and invalidates its secondary id when an earlier kind63 has the same signed actor id.
+00423d7c mobiclipDecoderSetSources inferred [high] Twin requires nonnull allocator owner and assigns both source pointers.
+00138114 soundEffectInitializeDelay inferred [high] Set delay parameters, allocate delay work buffer and queue effect on bus zero
+00177474 gfxFlushLightRenderCommands inferred [med] Apply light-render parameters, reset active dirty context and flush command buffer
+00233170 mapGimmickResetControllers inferred [high] Reset map gimmick entry, slot and extra controller state
+003872b8 uiGetLayoutPointDifference inferred [high] Store the coordinate difference of two bank layout point records
+003a3b88 lmapRebuildModelContent inferred [high] Rebuild local map model content from pending request and link base content
+003e5c68 modelApplyNonzeroGroupRotation inferred [high] Apply nonzero Euler rotation to main and attached child controllers
+00423efc uiCreateRequestObject inferred [med] Allocate Obj557f74 through supplied allocator and configure request-dependent compact extent
+00480a00 recordGetPercentageScaledBase inferred [high] Return ten-bit base scaled by halfword percentage, minimum one when inputs nonzero
+004b88e0 eventUpdateScriptLaunch inferred [high] Launch named event script and release bytecode/messages after completion
+004da6e0 recordMergeByteMasks inferred [high] Merge two or three 64-byte flag ranges and finalize destination record
+0013f578 comWinInitialize inferred [high] Allocates ComWin menu work, registers calc/draw tasks and initializes its resource and sprite states
+0039b604 eventInitializeBlinkFade inferred [high] Allocates blink-fade work, installs calc/draw tasks and loads two effect textures
+00138d34 mathInitDefaultUnitVector inferred [high] Sets all four components of the default vector to 1.0f and publishes its pointer.
+00294774 mapEplSetSlotPosition inferred [high] Stores XYZ and zero W for the indexed EPL slot, then applies the position to its live list.
+00303564 lmapUpdateCameraDistancePair inferred [high] Derives the local camera pair from horizontal scene-to-target distance and target scale.
+0049ef38 stereoSpriteDrawSelectedChoice inferred [high] Waits for both choice groups, centers the selected sprite with stereo parallax and temporarily sets its draw speed.
+0038791c bustupConfigureSlotTransition inferred [high] Initializes the portrait slot, dispatches its transition mode, and snapshots the current position for movement transitions.
+003c3b7c effectEditorBindObjectTexture inferred [high] Binds the effect object's body with the effect editor texture and shared effect table.
+0039c244 saveLoadStartDefaultWindow inferred [med] Creates the save/load runner and concrete window, starts mode zero with argument one, and clears owner flags.
+0039c2a4 saveLoadStartWindowWithArgument inferred [high] Creates the save/load runner and concrete window, starts mode one with the caller argument, and clears owner flags.
+00230a50 unitGetStereoScreenPosition inferred [high] Returns unit x plus depth stereo parallax and unit y through output pointers
+0049cad0 shopGetEntryPrice inferred [high] Retrieves item/equipment price, applies shop percentage, triples for table flag4
+004ccb0c unitBuildStatGrowthPacket inferred [high] Builds packed18-byte HP/MP/stat growth packet from unit record
+003c61e4 btlScriptHasPositiveCandidateCondition inferred [high] Tests available required nonexcluded entries for positive condition at+C4
+002e5154 nodeReleaseOwnedItemsAndSelf inferred [high] Releases50 owned items, clears node/slot state and releases node
+0020f054 mapObjectResetSlots inferred [high] Clears the map-object request and resets all24 object slots.
+003857d8 aocFindSupplementalRecordIndex inferred [high] Searches table23 section3 and its add-on extension by ID, returning the combined index or -1 at the sentinel/end.
+002159f8 saveWorkClearFlagMask inferred [high] Clears the supplied byte mask at an indexed flag byte in the saved work image.
+004b9ff4 uiClampScrollOffset inferred [high] Exact twin of IV's scroll offset clamp.
+00202450 campDrawCurrentSubscreen inferred [med] Dispatches camp subscreen rendering, with party-aware paths using the current camp snapshot.
+002c7ce8 statusDownSwitchTab inferred [high] Exact behavioral twin of IV's named statusDownSwitchTab.
+004a18ec itemMenuDispatchSelectedEntry inferred [high] Dispatches selected menu row ID with the alternate flag, then returns to state2.
+001519c4 messageCreatePanelEffects inferred [high] Creates four message effects with panel base/accent speed scales and restores normal speed
+0015e8d0 soundArchiveLoadInfoBlock inferred [high] Seeks and reads archive info block into caller buffer then attaches it to file header
+00246344 partyTryOpenLevelLimitPopup inferred [high] Starts party popup when selected unit meets player-level threshold and random gate
+00318c3c partyReleasePreviewResources inferred [high] Removes party touch regions and releases preview model and texture resources
+003251e8 mapEnemyRestartActiveEntries inferred [high] Restarts active unblocked map-enemy entries in states zero four or five
+00357f9c terminalDrawActiveSlotHandles inferred [high] Draws four active terminal slot handles on pages one through fourteen under three saved render states
+00372c70 scrCommBattleGroupMpPercentAtMost inferred [high] Script command tests matching battle candidates' current MP percentage against threshold.
+0019f7dc materialUploadChangedParameters inferred [high] Updates fourth float parameter and uploads block when changed or dirty.
+0028c620 btlCommandResolveSelectedTarget inferred [high] Resolves selected reserve target, queues validation and preserves forced result.
+00473824 aocApplicationRecreatePrimaryRequest inferred [high] Deletes owned primary request, replaces its 128-KiB buffer and constructs native AocBufferRequest.
+00473710 aocApplicationReleasePrimaryRequest inferred [high] Deletes owned primary request and releases its backing buffer.
+0014055c frameTexCaptureSecondVariant inferred [high] Second capture job variant captures once into a 512x512 surface then halves recorded dimensions.
+003a8298 dataTableChooseWeightedByteId inferred [high] Chooses low-byte id from table 5 section 7 using packed 24-bit weights.
+00483834 controllerUpdateWithIdleTimer inferred [med] Updates an unblocked controller and advances its idle timer into mode 2 at 120.
+00389f0c dataTable0ProbeEntryById inferred [high] Binary-searches table zero section zero using a 0xb4-byte id key; discards the result.
+003e8244 dataTable4dSelectRowEntry inferred [high] Selects uniformly from the nonzero prefix of the requested table 0x4d row.
+00499b58 shopMainDrawPairedJobs inferred [high] Draws two owned jobs while shop state is 1-19, preserving render state.
+00163fd4 slotIsActive inferred [high] Tests unblocked slot mask against mode-selected active bit word.
+003cd2c4 campDrawFrame inferred [med] Draws the camp frame and alternate decorations with animation-scale preservation.
+0031c104 eventEffectStartAlert inferred [high] Allocates and clears pulsing alert work, starts its calc and stereo draw jobs, and arms optional stop frame.
+004cf8dc entryDispatchUpdate inferred [high] Dispatches entry update by kind, with distinct mode for special entry four.
+00243d90 jyoucyuInitialize inferred [high] Allocates resident-state work and registers JYOUCYU calc and loading-overlay draw tasks.
+001385ec renderBeginPrimaryScreen inferred [high] Selects primary framebuffer, clears stereo mode/target, and resets rendering context.
+004119fc btlPartnerUpdateScript inferred [high] Loads, starts, runs and releases partner attack scripts through scriptPhase state machine.
+003d3594 moviePumpUntilReady inferred [high] Pumps streaming input until playback starts or cancellation/end state arrives.
+0013db18 frameTexRenderBackdropOnce inferred [high] Captures an enabled backdrop surface once and halves its stored dimensions.
+002a37a4 commonBackgroundDraw inferred [high] Draws the active common background at playback speed while preserving render stack.
+0023723c asdTextFormatStream inferred [high] Formats a bounded variadic text buffer and appends signed stream terminators before submission.
+0032e25c slotNameDisplaySetEntry inferred [high] Copies a selected party/default record name and sort key into its display.
+002e10ac asdSoundStopSlot inferred [high] Stops a populated ordinary sound slot over the forwarded fade duration; reports whether the slot table/index were valid.
+004da5c4 unitRecordMergeInheritedFlags inferred [high] Unions inheritance flags from twelve selected saved/template unit records and finalizes the destination.
+003f8198 renderWithTemporaryDrawState inferred [high] Calls nested renderer under pushed draw state and restores blend/color state.
+0023799c renderScopedTaskPhaseOne inferred [high] Runs task phase1 under three render stacks and restores matrices/color state.
+003d1aa0 gauntletAppBuildAvailableEntries inferred [high] Builds forced or eligible app entries, initializes navigation and sorts them.
+004863f8 uiAdvanceConditionalScreenSprite inferred [high] Advances a sprite when screen conditions hold and transitions to state2 on completion.
+00374120 scrCheckBattleStateFlag inferred [high] Reads script argument0 as a bit index and returns the battle flag-word bit state.
+004fdc0c btlReflectQueueValueAction inferred [high] Queue kind0x13 with value/parameter and optional earlier-empty-action secondary-ID invalidation.
+00154bbc bustupRequestIdleOwnerTextureFrame inferred [high] Find idle bustup slot belonging to owner and issue its texture frame request.
+00229fd0 gameSaveWorkOrFlagMask inferred [high] OR an eight-bit mask into the indexed save-work flag byte.
+003e4e64 partyResetAndRefreshSlotStats inferred [high] Clears active slot reset word, refreshes copied stats and applies conditional 1.25 multiplier.
+0039a72c messageCloseWindowAndIsIdle inferred [high] Starts requested message-window close animation on first command frame and reports busy==0.
+004f283c btlCameraHasDefaultParameters inferred [high] Tests the camera defaults subobject against all established scalar defaults.
+004a6e7c animatedPageSelectionRelease inferred [high] Releases the selected page object and clears its owned pointer; real return type is void.
+0034ee5c saveSlotBeginTransition inferred [high] Initializes selected-slot eligibility, option, animation selectors and pending save transition.
+001801b8 gameSaveTestFlag inferred [high] Tests the requested mask in a saved-work flag byte.
+0035f9c8 scrCommSetBattleCommandFlag inferred [high] Sets script argument0-selected bit in the battle command flag word at4CC8 and returns1.
+0023aac8 keyedRecordSetVectorPair0 inferred [high] Copies input vector pair to keyed record slot0 atBC after native remaining-count bounds check.
+0031b53c effectTextureFindOrReserve inferred [high] Apocalypse twin of the named effect texture cache lookup/reservation routine; IDENTICAL.
+00183318 buttonHelpBeginExit inferred [high] Begins button-help image/sprite exit handling; IDENTICAL after evaluating the nested panel address at each call.
+004112c4 battleAdvanceEntryStartup inferred [high] Advances overlay close, slot request, party model loading and entry startup phases; IDENTICAL with the native stage-query contract and multifile metadata.
+0037a728 textExpandSingleByteGlyphs inferred [high] Expands single-byte characters with a glyph table, preserves multibyte pairs, and encodes newline as f801.
+0029400c gameObjectKindIsAvailable inferred [high] Normalizes kinds44-47 to43 and checks class1 plus its enabled byte in the game flag block.
+0047d7f0 statusDecodeActivityState inferred [high] Decodes pending/active/alternate bytes into state0,1,2,or3.
+003ca9bc effectEditorApplySecondaryOwnerOptions inferred [med] Applies the second0x38-byte option entry to the nested owner's editor block, passing the table base as the fourth argument.

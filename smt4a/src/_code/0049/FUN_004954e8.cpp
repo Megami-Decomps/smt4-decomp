@@ -28,7 +28,7 @@ struct SubmenuWork {
 extern "C" {
 void menuSynchronizeFlaggedSelection(SubmenuSelectionOwner *owner, SubmenuRecord *record);
 void sub10OwnerStart(SubmenuRecord *record);
-void FUN_004cf8dc(void *owner, s32 value);
+void entryDispatchUpdate(void *owner, s32 value);
 s32 selectOwnerGetSelected(SubmenuSelectionOwner *owner);
 s32 selectOwnerGetActive(const SubmenuSelectionOwner *owner);
 s32 FUN_004d0058(SubmenuRecord *record, s32 selected);
@@ -40,8 +40,8 @@ u32 FUN_004954e8(SubmenuWork *work)
     menuSynchronizeFlaggedSelection(&work->selection, record);
     work->view->table->setRecord(work->view, record);
     sub10OwnerStart(record);
-    FUN_004cf8dc(work->unk3CC, 2);
-    FUN_004cf8dc(work->unk3CC, 12);
+    entryDispatchUpdate(work->unk3CC, 2);
+    entryDispatchUpdate(work->unk3CC, 12);
     u32 result = 0;
     if (selectOwnerGetActive(&work->selection) != 0) {
         if (FUN_004d0058(record, selectOwnerGetSelected(&work->selection)) != 0) {

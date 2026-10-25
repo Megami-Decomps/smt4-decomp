@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002331c0(void);
+int renderCtxPopB(void);
 int jobGetScalarValue(void);
 int renderCtxCallB(void);
 int FUN_002a8a58(int *, unsigned int);
@@ -70,7 +70,7 @@ extern unsigned int DAT_004d46dc; /* 0x4d46dc */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int asdSoundGetOption2(void);
-/* Supplied declaration required: FUN_002331c0. */
+/* Supplied declaration required: renderCtxPopB. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: renderCtxCallB. */
 /* Supplied declaration required: FUN_002a8a58. */
@@ -430,12 +430,12 @@ LAB_00393954:
           quadSetOrderedVectors(&temp_v26,&temp_v25,temp_v19 + 0x20,&temp_v17,temp_v21,0);
         }
         if (temp_v10) {
-          FUN_002331c0();
+          renderCtxPopB();
         }
         return 1;
       }
       if (temp_v10) {
-        FUN_002331c0();
+        renderCtxPopB();
       }
     }
     param_2 = 0;
@@ -466,7 +466,7 @@ LAB_00393b58:
       quadSetOrderedVectors(&temp_v23,&temp_v22,temp_v19 + 0x20,&temp_v18,temp_v21,0);
     }
     if (temp_v10) {
-      FUN_002331c0();
+      renderCtxPopB();
     }
   }
   return param_2;

@@ -70,7 +70,7 @@ extern float DAT_00635340; /* 0x635340 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: padButtonRepeat. */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
@@ -281,8 +281,8 @@ LAB_00346d70:
                 goto LAB_003469d8;
               }
             }
-            temp_v4 = FUN_00163fd4(7);
-            if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x18), temp_v4 != 0)) {
+            temp_v4 = slotIsActive(7);
+            if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x18), temp_v4 != 0)) {
               temp_v7 = DAT_0059dc34 != 1;
               temp_v12 = DAT_0063533c;
               if (temp_v7) {
@@ -296,9 +296,9 @@ LAB_00346d70:
               }
             }
             else {
-              temp_v4 = FUN_00163fd4(8);
+              temp_v4 = slotIsActive(8);
               temp_v13 = (float)temp_v14;
-              if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x1c), temp_v4 != 0)) {
+              if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x1c), temp_v4 != 0)) {
                 temp_v7 = DAT_0059dc34 != 1;
                 temp_v12 = DAT_0063533c;
                 if (temp_v7) {
@@ -329,8 +329,8 @@ joined_r0x00346b14:
             goto LAB_00346af8;
           }
         }
-        temp_v4 = FUN_00163fd4(7);
-        if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x18), temp_v4 != 0)) {
+        temp_v4 = slotIsActive(7);
+        if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x18), temp_v4 != 0)) {
           temp_v7 = DAT_0059dc34 != 1;
           temp_v12 = DAT_0063533c;
           if (temp_v7) {
@@ -339,9 +339,9 @@ joined_r0x00346b14:
           temp_v12 = temp_v12 + (float)temp_v14 * (float)((unsigned long long)temp_v14 >> 0x20);
         }
         else {
-          temp_v4 = FUN_00163fd4(8);
+          temp_v4 = slotIsActive(8);
           temp_v13 = (float)temp_v14;
-          if ((temp_v4 == 0) && (temp_v4 = FUN_00163fd4(0x1c), temp_v4 == 0)) {
+          if ((temp_v4 == 0) && (temp_v4 = slotIsActive(0x1c), temp_v4 == 0)) {
             temp_v7 = DAT_0059dc34 == 1;
             temp_v12 = DAT_00635340;
             if (temp_v7) {
@@ -381,14 +381,14 @@ LAB_00346af8:
             temp_v4 = padButtonRepeat();
             if (temp_v4 == 0) goto LAB_003468dc;
           }
-          temp_v4 = FUN_00163fd4(7);
-          if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x18), temp_v4 != 0)) {
+          temp_v4 = slotIsActive(7);
+          if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x18), temp_v4 != 0)) {
             DAT_0059dc64 = DAT_0059dc64 - (float)temp_v14 * (float)((unsigned long long)temp_v14 >> 0x20);
           }
           else {
-            temp_v4 = FUN_00163fd4(8);
+            temp_v4 = slotIsActive(8);
             temp_v12 = (float)temp_v14;
-            if ((temp_v4 == 0) && (temp_v4 = FUN_00163fd4(0x1c), temp_v4 == 0)) {
+            if ((temp_v4 == 0) && (temp_v4 = slotIsActive(0x1c), temp_v4 == 0)) {
               DAT_0059dc64 = DAT_0059dc64 - temp_v12;
             }
             else {
@@ -398,14 +398,14 @@ LAB_00346af8:
         }
         else {
 LAB_003467fc:
-          temp_v4 = FUN_00163fd4(7);
-          if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x18), temp_v4 != 0)) {
+          temp_v4 = slotIsActive(7);
+          if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x18), temp_v4 != 0)) {
             DAT_0059dc64 = DAT_0059dc64 + (float)temp_v14 * (float)((unsigned long long)temp_v14 >> 0x20);
           }
           else {
-            temp_v4 = FUN_00163fd4(8);
+            temp_v4 = slotIsActive(8);
             temp_v12 = (float)temp_v14;
-            if ((temp_v4 == 0) && (temp_v4 = FUN_00163fd4(0x1c), temp_v4 == 0)) {
+            if ((temp_v4 == 0) && (temp_v4 = slotIsActive(0x1c), temp_v4 == 0)) {
               DAT_0059dc64 = DAT_0059dc64 + temp_v12;
             }
             else {

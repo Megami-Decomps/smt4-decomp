@@ -44,29 +44,29 @@ extern unsigned char LAB_001393f8; /* 0x1393f8 */
 extern unsigned char LAB_00139404; /* 0x139404 */
 extern unsigned char LAB_00139410; /* 0x139410 */
 extern unsigned char LAB_0013941c; /* 0x13941c */
-extern int frameTexReleaseWork(...); /* 0x13c1a0 */
-extern int FUN_0013c660(...); /* 0x13c660 */
+extern void frameTexReleaseWork(unsigned int job); /* 0x13c1a0 */
+extern int FUN_0013c660(unsigned int job); /* 0x13c660 */
 extern int FUN_0013c6d4(...); /* 0x13c6d4 */
 extern int FUN_0013c764(unsigned int job); /* 0x13c764 */
-extern int FUN_0013c7dc(...); /* 0x13c7dc */
-extern int renderSurfaceDownsampleJob(...); /* 0x13cb90 */
-extern int FUN_0013cd7c(...); /* 0x13cd7c */
-extern int FUN_0013cf80(...); /* 0x13cf80 */
-extern int FUN_0013d030(...); /* 0x13d030 */
+extern int FUN_0013c7dc(unsigned int job); /* 0x13c7dc */
+extern int renderSurfaceDownsampleJob(unsigned int job); /* 0x13cb90 */
+extern int FUN_0013cd7c(unsigned int job); /* 0x13cd7c */
+extern int FUN_0013cf80(unsigned int job); /* 0x13cf80 */
+extern int FUN_0013d030(unsigned int job); /* 0x13d030 */
 extern int panelUpdateAnimatedScale(...); /* 0x13d0f0 */
 extern int FUN_0013d2dc(...); /* 0x13d2dc */
-extern int FUN_0013db18(...); /* 0x13db18 */
-extern int jobRenderOnce(...); /* 0x13dbb4 */
-extern int FUN_0013dc70(...); /* 0x13dc70 */
+extern int frameTexRenderBackdropOnce(unsigned int job); /* 0x13db18 */
+extern int jobRenderOnce(unsigned int job); /* 0x13dbb4 */
+extern int FUN_0013dc70(unsigned int job); /* 0x13dc70 */
 extern int frameTexDrawWhenReady(...); /* 0x13dd18 */
 extern int FUN_0013e7c4(...); /* 0x13e7c4 */
-extern int FUN_0013e848(...); /* 0x13e848 */
+extern int FUN_0013e848(unsigned int job); /* 0x13e848 */
 extern int FUN_0013e8f8(...); /* 0x13e8f8 */
 extern int FUN_0013e9e4(...); /* 0x13e9e4 */
 extern int FUN_0013ee80(...); /* 0x13ee80 */
 extern unsigned int FUN_0013ef3c(unsigned int process); /* 0x13ef3c */
-extern int FUN_0014055c(...); /* 0x14055c */
-extern int FUN_00140618(...); /* 0x140618 */
+extern int frameTexCaptureSecondVariant(unsigned int job); /* 0x14055c */
+extern int FUN_00140618(unsigned int job); /* 0x140618 */
 extern unsigned char DAT_00530cfc; /* 0x530cfc */
 extern unsigned char DAT_00530d14; /* 0x530d14 */
 extern unsigned char DAT_00530d38; /* 0x530d38 */
@@ -138,7 +138,7 @@ void FUN_00138e14(void)
   taskCreateDraw(&LAB_00139264,0xd1,0,0,FUN_0013d030,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139270,0x6e,0,0,FUN_0013c764,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_0013927c,0xd0,0,0,FUN_0013c7dc,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139288,0x7b,0,0,FUN_0013db18,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_00139288,0x7b,0,0,frameTexRenderBackdropOnce,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139294,0xd7,0,0,jobRenderOnce,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392a0,0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,g_frameTex,*puVar2);
@@ -146,7 +146,7 @@ void FUN_00138e14(void)
   taskCreateDraw(&LAB_001392c8,0xd6,0,0,FUN_0013ef3c,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392d8,0x87,0,0,FUN_0013e8f8,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392e8,0xe3,0,0,FUN_0013e9e4,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392b8,0x82,0,0,FUN_0014055c,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392b8,0x82,0,0,frameTexCaptureSecondVariant,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392c8,0xde,0,0,FUN_00140618,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001393f8,0x7a,0,0,FUN_0013e7c4,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_00139404,0xd6,0,0,FUN_0013e848,0,g_frameTex,*puVar2);

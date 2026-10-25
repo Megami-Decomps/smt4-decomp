@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001fa8e4` (_code @ 0x1fa8e4, 0x9d8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 
@@ -73,7 +74,6 @@ extern int unitGroupHasFlag(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
-extern unsigned int FUN_00291e40(unsigned int);
 /* Supplied declaration required: gameCounterAddSaturating. */
 extern int padIsButtonRepeat(unsigned int);
 extern int padIsButtonPressed(unsigned int);
@@ -374,7 +374,7 @@ void FUN_001fa8e4(void)
         partyApplyNonlethalAilmentDamage(2,5);
         *(unsigned int *)(g_lmapScene + 0x160) = temp_v6;
         FUN_002562e4(0xf,0x50);
-        temp_v6 = FUN_00291e40(0x1000186);
+        temp_v6 = FUN_00291e40(0x1000186, soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c)));
         temp_v8 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x18c) = temp_v6;
         *(unsigned int *)(temp_v8 + 400) = 0x14;

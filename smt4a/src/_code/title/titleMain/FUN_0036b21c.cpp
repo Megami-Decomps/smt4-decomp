@@ -52,12 +52,19 @@ void renderCtxResetColorScale(RenderCtxA *context);
 extern RenderCtxA *g_renderCtx;
 extern TitleMainGlobals g_titleMain;
 
+static __inline bool titleSpriteIsVisible(const TitleSprite *sprite)
+{
+    if (sprite->alpha <= 0.0f)
+        return false;
+    return true;
+}
+
 /* Draws a sprite at its stereo-shifted position with its own opacity, if it is visible. */
 static __inline void titleDrawSprite(TitleSprite *sprite, u32 order)
 {
     s32 offset;
 
-    if (sprite->alpha <= 0.0f) {
+    if (!titleSpriteIsVisible(sprite)) {
         return;
     }
     offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
@@ -90,7 +97,7 @@ u32 FUN_0036b21c(void)
     last = &title->sprites[5];
     width = entry->size->width;
     height = entry->size->height;
-    if (!(last->alpha <= 0.0f)) {
+    if (titleSpriteIsVisible(last)) {
         s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 
         efctSetSpeed(last->alpha);

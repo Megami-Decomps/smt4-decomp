@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 struct GameFlagTriggers {
     /* 0x00 */ u8 unk00[0x4C];
@@ -7,7 +8,7 @@ struct GameFlagTriggers {
 };
 extern "C" {
 extern u8 DAT_005e2074[];
-void gameFlagSetValue(s32 id, s32 value, s32 notify);
+
 
 /* Applies the game flags selected by the trigger byte and trigger mask. */
 void gameApplyFlagTriggers(void)

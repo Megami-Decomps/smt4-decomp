@@ -15,7 +15,7 @@ int FUN_0049339c(...);
 int drawTextAtRelativePosition(...);
 int FUN_004934ac(...);
 int FUN_0049368c(...);
-int FUN_0049cad0(...);
+int shopGetEntryPrice(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_4: 9 slot(s), 36 byte(s) */
@@ -50,7 +50,7 @@ extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_0049368c. */
 extern int FUN_00498408(int, unsigned int);
 extern int itemGetNameOrFallback(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0049cad0. */
+/* Supplied declaration required: shopGetEntryPrice. */
 extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int aocItemGetPrice(unsigned short *);
 
@@ -181,7 +181,7 @@ void FUN_00494d68(int param_1,int param_2,int param_3,unsigned short *param_4)
       temp_v10 = -0xa006001;
     }
     if (*(int *)(param_1 + 0xb40) != 8) {
-      temp_v6 = FUN_0049cad0(param_4);
+      temp_v6 = shopGetEntryPrice(param_4);
       temp_v4 = btlRollClamped(*param_4,temp_v6);
       if (temp_v4 == 0) {
         temp_v10 = 0x787878ff;
@@ -223,7 +223,7 @@ LAB_00495274:
     }
     temp_v15 = 0x9a;
     if (temp_v8 != 8) {
-      temp_v6 = FUN_0049cad0(param_4);
+      temp_v6 = shopGetEntryPrice(param_4);
       temp_v4 = btlRollClamped(*param_4,temp_v6);
       if (temp_v4 == 0) {
         temp_v10 = -0x64646401;
@@ -269,7 +269,7 @@ LAB_00495274:
   drawTextAtSnappedRectangle(param_1 + 0x3a4,temp_v5,temp_v10,temp_v14);
   if (temp_v16 != 0) {
     if (*(int *)(param_1 + 0xb40) != 8) {
-      temp_v5 = FUN_0049cad0();
+      temp_v5 = shopGetEntryPrice();
     }
     else {
       temp_v5 = aocItemGetPrice(param_4);

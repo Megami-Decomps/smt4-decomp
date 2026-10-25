@@ -1,4 +1,4 @@
-/* NON_MATCHING: matches retail apart from register assignment in the icon loop (strd pairing) and the order of the total/previousTotal stores (armcc merges them into one stm). */
+/* NON_MATCHING: backward-scroll guards are predicated instead of separately branched; total/previousTotal stores merge, and icon-loop registers pair with strd instead of retail's stm sequence. */
 #include "ui/SdCardMenu.h"
 
 extern "C" {
@@ -24,11 +24,14 @@ void FUN_0041e7c0(SdCardMenu *menu)
         s32 offset = menu->offset;
         s32 total = position + value + offset;
         menu->total = total;
-        if (value <= 0 && offset + 1 <= total && menu->previousTotal < total) {
-            scrollOwnerSetValue(&menu->list, position - 1);
-            flaggedEntrySetValueA(&menu->list, 1);
+        if (value <= 0) {
+            if (offset + 1 <= total && menu->previousTotal < total) {
+                scrollOwnerSetValue(&menu->list, position - 1);
+                flaggedEntrySetValueA(&menu->list, 1);
+            }
         } else if (value >= 1) {
-            if (offset + (span - 1) > total && menu->previousTotal > total) {
+            const s32 lastVisibleIndex = span - 1;
+            if (offset + lastVisibleIndex > total && menu->previousTotal > total) {
                 scrollOwnerSetValue(&menu->list, position + 1);
                 flaggedEntrySetValueA(&menu->list, 0);
             }

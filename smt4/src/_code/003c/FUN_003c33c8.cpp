@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c33c8` (_code @ 0x3c33c8, 0x630 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
 extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
 /* Supplied declaration required: objectFlagsClear. */
 /* Supplied declaration required: objectFlagSetBit. */
-extern unsigned int btlUnitGet(unsigned int);
 extern int FUN_00295d7c(void);
 extern int gameGetUnitRecord(void);
 extern int gameGetSlotTable(void);
@@ -172,7 +172,7 @@ void FUN_003c33c8(int param_1,int param_2)
             temp_v5 = (int)*(short *)((int)puVar7 + temp_v4 * 2 + 8);
             if (-1 < temp_v5) {
               temp_v6 = *(int *)(param_2 + 0x1e98);
-              temp_v3 = btlUnitGet(g_btlScriptUnit);
+              temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
               FUN_00246e24(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18),1);
             }
             temp_v4 = temp_v4 + 1;
@@ -222,7 +222,7 @@ void FUN_003c33c8(int param_1,int param_2)
       temp_v5 = (int)*(short *)(temp_v8 + temp_v4 * 2 + 8);
       if (-1 < temp_v5) {
         temp_v6 = *(int *)(param_2 + 0x1e98);
-        temp_v3 = btlUnitGet(g_btlScriptUnit);
+        temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
         FUN_00246e24(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18),1);
       }
       temp_v4 = temp_v4 + 1;
@@ -247,7 +247,7 @@ void FUN_003c33c8(int param_1,int param_2)
               temp_v5 = (int)*(short *)((int)puVar7 + temp_v4 * 2 + 8);
               if (-1 < temp_v5) {
                 temp_v6 = *(int *)(param_2 + 0x1e98);
-                temp_v3 = btlUnitGet(g_btlScriptUnit);
+                temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
                 FUN_00246d38(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18));
               }
               temp_v4 = temp_v4 + 1;
@@ -283,7 +283,7 @@ void FUN_003c33c8(int param_1,int param_2)
           temp_v5 = (int)*(short *)(temp_v8 + temp_v4 * 2 + 8);
           if (-1 < temp_v5) {
             temp_v6 = *(int *)(param_2 + 0x1e98);
-            temp_v3 = btlUnitGet(g_btlScriptUnit);
+            temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
             FUN_00246d38(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18));
           }
           temp_v4 = temp_v4 + 1;

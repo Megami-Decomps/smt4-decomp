@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 // Private view of the record returned by FUN_001ad9b4.
 namespace {
@@ -16,7 +17,7 @@ extern "C" {
 u8* gameFlagBlockGetEntry(u16 entryId);
 s32 FUN_003df390(u16 entryId);
 EntryRecordView* FUN_001ad9b4(u16 entryId);
-void gameFlagSetValue(u32 flagId, u32 value, u32 mode);
+
 
 // Set the associated flags for eligible entries whose nonzero threshold has been reached.
 void gameFlagSetEligibleEntryFlagsAtThreshold(s32 threshold)

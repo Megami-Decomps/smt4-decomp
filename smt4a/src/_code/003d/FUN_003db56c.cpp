@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003db56c` (_code @ 0x3db56c, 0xb10 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/KeyedCatalog.h"
 
 extern "C" {
 
@@ -52,7 +53,6 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
-extern unsigned int FUN_00186f54(unsigned int);
 /* Supplied declaration required: fadeObjectResetIfActive. */
 extern int recordGetModeForId(int);
 extern int resourceRunOperationIfUnblocked(int);
@@ -156,7 +156,7 @@ void FUN_003db56c(int param_1)
           FUN_00183bb0();
         }
         temp_v4 = FUN_001834a4(0x14,0x590);
-        temp_v3 = FUN_00186f54(temp_v7);
+        temp_v3 = reinterpret_cast<u32>(FUN_00186f54(temp_v7));
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v1,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v0,
@@ -252,7 +252,7 @@ void FUN_003db56c(int param_1)
       FUN_00183bb0();
     }
     temp_v5 = FUN_001834a4(0x14,0x599);
-    temp_v3 = FUN_00186f54(temp_v7);
+    temp_v3 = reinterpret_cast<u32>(FUN_00186f54(temp_v7));
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,

@@ -2,12 +2,12 @@
 #include "addon/LoadingTask.h"
 
 extern "C" {
-void FUN_0038f8d0(void *task);
-void FUN_0038f924(void *task);
+s32 FUN_0038f8d0(u32 task);
+s32 FUN_0038f924(u32 task);
 u32 asdProcessCreateSimple(const char *name, s32 priority, s32 mode, s32 flags,
-                           void (*callback)(void *), s32 work, void *argument);
+                           s32 (*callback)(u32), s32 work, void *argument);
 void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags,
-                    void (*callback)(void *), s32 work, void *argument, u32 parent);
+                    s32 (*callback)(u32), s32 work, void *argument, u32 parent);
 
 // Start the calculation and drawing tasks for the add-on loading indicator.
 void FUN_00233db8(AocLoadingTask *loading, u32 request)

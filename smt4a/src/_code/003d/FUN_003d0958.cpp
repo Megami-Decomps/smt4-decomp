@@ -7,7 +7,7 @@ extern "C" {
 extern SpriteWindow *g_sWin; /* 0x57f57c */
 s32 FUN_0028520c(s16 id);
 s32 FUN_001517b4(s32 first, s32 second);
-s32 FUN_00163fd4(s32 id);
+s32 slotIsActive(s32 id);
 s32 FUN_00163aa4(ByteStateWork *sprite, f32 speed);
 void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void FUN_0019e330(ByteStateWork *sprite, s32 keyframe, s32 frame);
@@ -49,7 +49,7 @@ s32 FUN_003d0958(void)
     case 1:
         if (FUN_0028520c((s16)window->textureId)) {
             if (window->phase == 0) {
-                if (FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0) {
+                if (FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0) {
                     workSetStateByte(&window->sprite, 1);
                 } else {
                     uiSpriteSetImageKeyframe(&window->sprite, 0, 0);

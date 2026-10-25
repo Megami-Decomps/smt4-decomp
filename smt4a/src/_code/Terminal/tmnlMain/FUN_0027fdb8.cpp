@@ -1,10 +1,11 @@
 #include "Terminal/tmnlMain.h"
+#include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern TmnlWorkA* g_tmnl;
 void* asdMemoryAllocTracked(u32, u32, u32, u32, u32);
-void gameFlagSetValue(u32, u32, u32);
+
 bool gameFlagIsSet(u32);
 void messageSetMode(u32);
 void questSetPackedFlag(u32, u32);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: stat selection and candidate-mask AND register allocation differ. */
+/* NON_MATCHING: argument local and <= -1 stat test recover selection setup; candidate-mask AND registers differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -10,8 +10,9 @@ void scrSetResult(s32 result);
 
 u32 FUN_003b0bb8()
 {
+    s32 argument = scrGetArg(0);
     s32 stat = 0;
-    switch (scrGetArg(0)) {
+    switch (argument) {
     case 0: stat = 7; break;
     case 1: stat = 8; break;
     case 2: stat = 10; break;
@@ -26,7 +27,7 @@ u32 FUN_003b0bb8()
         if ((flags & g_btlCandidateMasks.unavailable) != 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&
             (flags & g_btlCandidateMasks.excluded) == 0 &&
-            ((CandidateStatView *)entry)->values[stat] < 0) {
+            ((CandidateStatView *)entry)->values[stat] <= -1) {
             scrSetResult(1);
             return 1;
         }

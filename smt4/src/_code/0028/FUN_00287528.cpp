@@ -1,11 +1,12 @@
 /* NON_MATCHING: cumulative flag setters share different blocks and tier-flag registers; final result stores differ. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
 s32 FUN_002c5ef0(void);
 u32 randBetween(u32 first, u32 last);
-void gameFlagSetValue(u32 flag, s32 value, s32 enabled);
+
 
 // Set cumulative quest-completion tier flags and optionally choose the corresponding reward index.
 void FUN_00287528(u32 *reward)

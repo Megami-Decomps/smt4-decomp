@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail copies the 16-byte stock id table with a single ldm and hoists the player-name string pointer above the player-record setup; the new-game setup is otherwise the same (202 vs 204 rows). */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -40,7 +41,7 @@ void textFormatBuffer(void *buffer, const char *format);
 void FUN_00417b70(s32 arg);
 void FUN_00417e08(s32 arg);
 void saveNameBlockReset(void);
-void gameFlagSetValue(s32 flag, s32 value, s32 silent);
+
 void FUN_003e45bc(s32 a, s32 b, s32 c);
 void FUN_00353b00(s32 arg);
 

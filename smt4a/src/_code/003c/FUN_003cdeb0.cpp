@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack frame layout differs (retail keeps the cursor and row spills inside the outgoing-argument area, frame 84 bytes vs 100) and the register assignment follows */
+/* NON_MATCHING: live entry-ID reloads restore retail stat/helper argument handling; cursor/row spills occupy a larger frame and empty-slot coordinate/pool scheduling still differ. */
 #include "common.h"
 
 /* Position record of an icon in the icon table (only the screen position). */
@@ -76,20 +76,19 @@ void FUN_003cdeb0(SlotListScreen *screen, u32 argument, s32 x, s32 y, f32 scale)
     } else if (mode == 1 || mode == 2 || mode == 6) {
         color = 0xf5ff9fff;
     }
-    u16 id = screen->entryIds[entry];
-    textFormatBuffer(text, "%s", FUN_0014bd84(id));
+    textFormatBuffer(text, "%s", FUN_0014bd84(screen->entryIds[entry]));
     SlotIconPosition *nameBox = FUN_001834a4(0x1a, 0x1a2);
     FUN_00162790(3, color, text, (f32)(frame->x + nameBox->x + x), (f32)(frame->y + nameBox->y + y), 0.0f, 0.0f, scale);
     SlotIconPosition *statBox = FUN_001834a4(0x1a, 0x1a1);
-    FUN_00185e84((s16)id, frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0, 0);
-    if (!recordContainsPairedId(argument, id)) {
-        FUN_004bd6b0(argument, id, FUN_002a4894(&screen->cursor));
+    FUN_00185e84((s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0, 0);
+    if (!recordContainsPairedId(argument, screen->entryIds[entry])) {
+        FUN_004bd6b0(argument, screen->entryIds[entry], FUN_002a4894(&screen->cursor));
     }
-    statDrawClampedDelta(argument, (s16)id, frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0);
+    statDrawClampedDelta(argument, (s16)screen->entryIds[entry], frame->x + statBox->x + x, frame->y + statBox->y + y, 0x8d, 0);
     if (filled) {
         SlotIconPosition *countBox = FUN_001834a4(0x1a, 0x1a6);
         FUN_00180310(1, frame->x + countBox->x + x, frame->y + countBox->y + y, 1, 4, 0x8d, "%d",
-                     FUN_004bcbb4(argument, id));
+                     FUN_004bcbb4(argument, screen->entryIds[entry]));
     } else {
         FUN_001834a4(0x1a, 0x19b);
     }

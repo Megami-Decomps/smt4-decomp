@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cf02c` (_code @ 0x3cf02c, 0x10e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gfx/CameraMotion.h"
 
 extern "C" {
 
@@ -41,8 +42,6 @@ int FUN_002c8894(void);
 int sysPlayVoice(...);
 int soundChannelRequestIfEnabled(int, int, int);
 int FUN_003d54f8(...);
-int FUN_003f9ac4(...);
-int controllerRefreshAtUnitScale(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(void);
 int FUN_003fe86c(...);
 int FUN_0040aa6c(...);
@@ -114,8 +113,6 @@ extern int FUN_0026c3a0(void);
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: FUN_003f9ac4. */
-/* Supplied declaration required: controllerRefreshAtUnitScale. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: workOwnerRelease. */
@@ -223,7 +220,7 @@ unsigned int FUN_003cf02c(void)
       temp_v12 = *(short *)(*(int *)(temp_v6 + 0x34) + 0x94) != 0;
       *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
       if (temp_v12) {
-        controllerRefreshAtUnitScale(temp_v6,temp_v2 + 0xa0,0);
+        controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(temp_v6), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0);
       }
       else {
         temp_v6 = **(int **)(*(int *)(temp_v6 + 0x34) + 0x48);
@@ -314,7 +311,7 @@ unsigned int FUN_003cf02c(void)
     }
     if (*(int *)(temp_v2 + 0x98) != 0) {
       if (*(char *)(temp_v2 + 0x128) != '\0') {
-        FUN_003f9ac4(*(int *)(temp_v2 + 0x98),temp_v2 + 0xa0,0);
+        FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(*(int *)(temp_v2 + 0x98)), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0, 1.0f);
         temp_v16 = temp_v13;
       }
       FUN_002c8894();
@@ -389,7 +386,7 @@ unsigned int FUN_003cf02c(void)
       temp_v12 = *(short *)(*(int *)(temp_v6 + 0x34) + 0x94) != 0;
       *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
       if (temp_v12) {
-        controllerRefreshAtUnitScale(temp_v6,temp_v2 + 0xe4,0);
+        controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(temp_v6), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xe4), 0);
       }
       else {
         temp_v6 = **(int **)(*(int *)(temp_v6 + 0x34) + 0x48);
@@ -481,9 +478,8 @@ LAB_003cf9bc:
         temp_v12 = *(short *)(*(int *)(temp_v3 + 0x34) + 0x94) != 0;
         *(unsigned char *)(temp_v2 + 0x128) = temp_v12;
         if (temp_v12) {
-          controllerRefreshAtUnitScale(temp_v3,temp_v2 + 0xa0,0);
-          VectorSignedToFloat(temp_v10,(unsigned char)(temp_v4 >> 0x16) & 3);
-          FUN_003f9ac4(*(unsigned int *)(temp_v2 + 0x98),temp_v2 + 0xa0,0);
+          controllerRefreshAtUnitScale(reinterpret_cast<AnimatedObject *>(temp_v3), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0);
+          FUN_003f9ac4(reinterpret_cast<AnimatedObject *>(*(unsigned int *)(temp_v2 + 0x98)), reinterpret_cast<CameraMotionOutput *>(temp_v2 + 0xa0), 0, static_cast<f32>(temp_v10));
         }
         else {
           temp_v3 = **(int **)(*(int *)(temp_v3 + 0x34) + 0x48);

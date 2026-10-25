@@ -8,7 +8,7 @@ int gameDataSetLinkSlot(...);
 int dataTable1bOr1cGetRecord(void);
 int buttonHelpSetPreset(...);
 
-int FUN_002540b8(...);
+int questClearOwnerModeBitsIfEligible(...);
 int uiBindRecordRewardText(...);
 int FUN_0028fe0c(unsigned int, int);
 int FUN_002903f0(void);
@@ -39,7 +39,7 @@ extern int g_uiQuest; /* 0x43dd50 */
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: gameDataSetLinkSlot. */
-/* Supplied declaration required: FUN_002540b8. */
+/* Supplied declaration required: questClearOwnerModeBitsIfEligible. */
 /* Supplied declaration required: uiBindRecordRewardText. */
 extern bool questIsOfferable(unsigned short);
 /* Supplied declaration required: FUN_0028fe0c. */
@@ -153,7 +153,7 @@ void FUN_001afc0c(void)
           temp_v9 = temp_v4 - 2;
         }
         if ((temp_v12 && temp_v4 != 2) && temp_v9 < 0 == temp_v13) {
-          FUN_002540b8(temp_v1);
+          questClearOwnerModeBitsIfEligible(temp_v1);
         }
         *(unsigned short *)(temp_v1 + 0x982) = temp_v8;
         *(unsigned short *)(temp_v1 + 0x984) = 0;
@@ -186,7 +186,7 @@ void FUN_001afc0c(void)
           temp_v9 = temp_v4 - 2;
         }
         if ((temp_v12 && temp_v4 != 2) && temp_v9 < 0 == temp_v13) {
-          FUN_002540b8(temp_v1);
+          questClearOwnerModeBitsIfEligible(temp_v1);
         }
         *(unsigned short *)(temp_v1 + 0x982) = temp_v8;
         *(unsigned short *)(temp_v1 + 0x984) = 0;
@@ -425,7 +425,7 @@ LAB_001b02f8:
                   *(unsigned int *)(temp_v9 + 8) = temp_v6;
                   *(unsigned int *)(temp_v9 + 0x10) = 0;
                   if (*(short *)(temp_v1 + 0x982) != 0) {
-                    FUN_002540b8(temp_v1);
+                    questClearOwnerModeBitsIfEligible(temp_v1);
                     *(unsigned short *)(temp_v1 + 0x982) = 0;
                   }
                   temp_v6 = 0x100016e;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail keeps context in caller-saved r3 across btlUnitGet (same-unit knowledge of the callee's register use), which a separate unit cannot reproduce; the rest is the resulting allocation. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -29,13 +29,12 @@ typedef struct BtlMarkTarget {
     /* 0x38 */ u8 marks[109];
 } BtlMarkTarget;
 
-BtlMarkTarget *btlUnitGet(void);
 
 /* Marks the unit slots a command may target: present units in mode 2, the enemy side's
  * targetable units (4..53) for side 1, otherwise every targetable visible unit. */
 void FUN_003d0fcc(BtlMarkContext *context, s32 side, s32 mode)
 {
-    BtlMarkTarget *target = btlUnitGet();
+    BtlMarkTarget *target = reinterpret_cast<BtlMarkTarget *>(btlUnitGet(reinterpret_cast<BtlState *const *>(context)));
     BtlMarkUnit *units;
     s32 i;
 

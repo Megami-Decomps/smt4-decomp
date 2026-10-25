@@ -1,4 +1,4 @@
-/* Walks the table of 84-byte entries and fires FUN_00229fd0 for each entry that matches the given id and whose two flags are not both set. */
+/* Walks the table of 84-byte entries and fires gameSaveWorkOrFlagMask for each entry that matches the given id and whose two flags are not both set. */
 #include "common.h"
 
 extern "C" {
@@ -15,7 +15,7 @@ typedef struct {
     u8 unk53[1];    /* 0x53 */
 } TableEntry;
 
-void FUN_00229fd0(s32 id, s32 param);
+void gameSaveWorkOrFlagMask(s32 id, s32 param);
 u32 dataTableGet(u32 group, u32 index);
 s32 gameFlagIsSet(u16 flag);
 u32 dataTableGetCount(u32 group);
@@ -34,7 +34,7 @@ void tableFireMatchingEntries(u32 matchId)
     for (i = 0; i < count; i++, entry++) {
         if (entry->matchA == matchId || entry->matchB == matchId) {
             if (gameFlagIsSet(entry->flagA) == 0 || gameFlagIsSet(entry->flagB) == 0) {
-                FUN_00229fd0(entry->id, entry->param);
+                gameSaveWorkOrFlagMask(entry->id, entry->param);
             }
         }
     }

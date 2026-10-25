@@ -14,7 +14,7 @@ void FUN_0047f780(s32 category, s32 first, s32 second);
 /* Request the scripted unit's category effect unless the current battle selection blocks it. */
 void FUN_003ece9c(BtlMainStateA *state)
 {
-    ScriptCategoryUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptCategoryUnit *unit = reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
         return;
     }
@@ -32,7 +32,7 @@ void FUN_003ece9c(BtlMainStateA *state)
     }
     UnitCategoryState *entry = FUN_003eaf20(state);
     s32 category = FUN_0019acdc(entry->record->id, 1);
-    BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(btlUnitGet(g_btlScriptUnit))->data;
+    BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))))->data;
     switch ((s16)data->unk1BE) {
     case 1:
         FUN_0047f780(category, -1, 0);

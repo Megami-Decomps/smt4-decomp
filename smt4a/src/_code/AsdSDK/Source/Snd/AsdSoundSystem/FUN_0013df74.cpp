@@ -11,7 +11,7 @@ int trackerMoveTo(...);
 int FUN_0015e1ec(...);
 int FUN_0015e314(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_0015e420(...);
-int FUN_0015e8d0(unsigned char *, unsigned int, unsigned int);
+int soundArchiveLoadInfoBlock(unsigned char *, unsigned int, unsigned int);
 int FUN_0015ea28(unsigned char *, unsigned char *);
 int FUN_0015fea8(unsigned char *, unsigned char *, int);
 int asdMemoryAlloc(...);
@@ -73,7 +73,7 @@ extern unsigned int DAT_0064c01c; /* 0x64c01c */
 /* Supplied declaration required: FUN_0015e1ec. */
 /* Supplied declaration required: FUN_0015e314. */
 /* Supplied declaration required: FUN_0015e420. */
-/* Supplied declaration required: FUN_0015e8d0. */
+/* Supplied declaration required: soundArchiveLoadInfoBlock. */
 /* Supplied declaration required: FUN_0015ea28. */
 extern int nw_snd_SoundArchive_IsAvailable(unsigned char *);
 /* Supplied declaration required: FUN_0015fea8. */
@@ -119,7 +119,7 @@ unsigned int FUN_0013df74(unsigned int param_1,int param_2,unsigned char *param_
   temp_v5 = (unsigned char *)0x1;
   asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_0063e6b8 = temp_v2;
-  FUN_0015e8d0(&g_asdSoundSystem,temp_v2,temp_v1);
+  soundArchiveLoadInfoBlock(&g_asdSoundSystem,temp_v2,temp_v1);
   temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_0063e494,&g_asdSoundSystem);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;

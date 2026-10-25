@@ -4,7 +4,7 @@
 struct CallbackSlotWork {
     u32 job; // 0x000
     u8 unk004[0x2f4];
-    u16 regions[12]; // 0x2f8
+    s16 regions[12]; // 0x2f8
     s32 regionCount; // 0x310
     void *firstBuffer; // 0x314
     void *secondBuffer; // 0x318
@@ -29,7 +29,7 @@ void FUN_003492dc()
     if (work->regionCount > 0) {
         for (s32 i = 0; i < work->regionCount++; ++i) {
             ifTouchRegionRemove();
-            work->regions[i] = 0xffff;
+            work->regions[i] = -1;
         }
         work->regionCount = 0;
         ifTouchResetRecord();

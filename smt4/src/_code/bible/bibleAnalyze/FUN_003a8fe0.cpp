@@ -1,9 +1,10 @@
-/* NON_MATCHING: saved screen/table registers, record-loop scheduling and virtual-call branch layout differ. */
+/* NON_MATCHING: restored engine/nothrow allocation, owned-controller stores, and cursor initialization argument; saved screen/table registers, record-loop scheduling, and virtual-call branch layout differ. */
 #include "classes/Obj42242c.h"
 #include "AsdSDK/AsdDebug.h"
 
 class Obj42238c : public ObjBase3c2ef0 {
 public:
+    static void *operator new(u32 bytes, void *owner) throw() { return asdOperatorNew(bytes, owner); }
     virtual ~Obj42238c();
     virtual void initialize(const void *source);
     virtual void vfunc10(u32 arg);
@@ -50,7 +51,9 @@ public:
     /* 0x0DC */ u8 timers[0x480];
     /* 0x55C */ u8 listView[0x10];
     /* 0x56C */ u8 listReady;
-    /* 0x56D */ u8 unk56D[0x37];
+    /* 0x56D */ u8 unk56D[0x23];
+    /* 0x590 */ ObjBase3c2ef0 *controller;
+    /* 0x594 */ u8 unk594[0x10];
     /* 0x5A4 */ u8 customMode;
     /* 0x5A5 */ u8 unk5A5[3];
     /* 0x5A8 */ u8 unk5A8[4];
@@ -71,6 +74,7 @@ typedef char BibleAnalyzeScreenLayoutCheck[
     offsetof(BibleAnalyzeScreen, customMode) == 0x5A4 &&
     offsetof(BibleAnalyzeScreen, unk5A8) == 0x5A8 &&
     offsetof(BibleAnalyzeScreen, rectangle) == 0xC8 &&
+    offsetof(BibleAnalyzeScreen, controller) == 0x590 &&
     offsetof(BibleAnalyzeScreen, selectedSlot) == 0xA5B0 &&
     offsetof(BibleAnalyzeScreen, shownCount) == 0xA6BA &&
     sizeof(BibleAnalyzeScreen) == 0xA6C0 ? 1 : -1];
@@ -125,8 +129,11 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
     screen->fadeTask = taskCreateDraw("BIBLE ANALYZE DOWN", 0xE6, 1, 0, (void *)FUN_003acdec, NULL, DAT_0043d990, screen->job);
 
     s32 limit;
+    // The allocation owner is not initialized in the retail code.
+    void *allocationOwner;
     if (screen->customMode != 0) {
-        Obj42238c *window = new Obj42238c;
+        Obj42238c *window = new (allocationOwner) Obj42238c;
+        screen->controller = window;
         window->rectangle = screen->rectangle;
         limit = screen->devilCount > BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
         FUN_00233670(screen->listView, 0x1C, 0x1030, limit);
@@ -141,8 +148,9 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
             }
         }
     } else {
-        Obj42242c *window = new Obj42242c;
-        window->initialize(NULL);
+        Obj42242c *window = new (allocationOwner) Obj42242c;
+        screen->controller = window;
+        window->initialize(screen->rangeBase);
         window->state |= 0x1000;
         window->rectangle = screen->rectangle;
         limit = screen->devilCount > BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;

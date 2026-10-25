@@ -32,7 +32,7 @@ extern u32 DAT_00435d18;
 
 extern s32 scrRunOpcodesStub(u32 job);
 extern s32 FUN_00256940(BtlMain *main, BtlState *state, s32 arg);
-extern void FUN_002568c4(s32 a, s32 b);
+extern void btlReflectQueueKind34(s32 a, s32 b);
 extern void FUN_00256898(s32 a, s32 b);
 extern void battleSelectButtonHelpPreset(s32 a);
 extern void FUN_00242914(void *block, s32 arg);
@@ -44,7 +44,7 @@ s32 FUN_003c7760(BtlTask *task, BtlState *state)
 {
     if ((state->flags & BTL_FLAG_ACTIVE) != 0 && (task->flags & 1) == 0) {
         if (g_btlMain->unk760 >= 0 && FUN_00256940(g_btlMain, state, 1) != 0) {
-            FUN_002568c4(0, 0);
+            btlReflectQueueKind34(0, 0);
         }
         FUN_00256898(1, 0);
         task->flags |= 1;

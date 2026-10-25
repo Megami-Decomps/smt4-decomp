@@ -1,16 +1,11 @@
-/* NON_MATCHING: retail loads the two marker mask words with one `ldm r2, {r0, r2}` (an 8-byte copy?) where armcc emits two ldr; registers shift accordingly. */
+/* NON_MATCHING: canonical mask type and direct marker union remove one row; retail still pairs the marker loads as LDM instead of two LDRs (47 versus 48 rows). */
 #include "battle/btlMain.h"
 #include "gamedata/Table8Record.h"
-
-/* Battle-wide marker masks; a set blocked bit stops the action. */
-struct BtlMarkerMaskTable {
-    /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u64 blocked;
-};
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 extern "C" {
 
-extern BtlMarkerMaskTable DAT_00573c90;
+extern BattleCandidateMasks DAT_00573c90;
 
 BtlMainStateA *btlGetMainState(void);
 u32 FUN_00400164(void *actor, u16 value);
@@ -34,9 +29,8 @@ u32 FUN_004000a8(void *actor, u32 id)
         return FUN_00400164(actor, record->unk32);
     }
     BtlMainStateA *state = btlGetMainState();
-    u64 markers = static_cast<u64>(state->markerMasks.words[0]) |
-                  (static_cast<u64>(state->markerMasks.words[1]) << 32);
-    if ((markers & DAT_00573c90.blocked) != 0) {
+    u64 markers = state->markerMasks.bits;
+    if ((DAT_00573c90.excluded & markers) != 0) {
         return 0;
     }
     return FUN_00400284(actor, 1, record, 1) ? 3 : 0;

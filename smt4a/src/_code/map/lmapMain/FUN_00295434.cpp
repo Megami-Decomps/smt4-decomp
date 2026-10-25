@@ -1,5 +1,6 @@
 /* NON_MATCHING: the step counter is now read/written as g_gameState+0x4FC with the one store through DAT_005f1af8 (as retail; the block matches). Remaining: retail takes g_lmapPopupMessages as ONE literal pointing at element 4 (r5, others by sub/add) and spills the flags block to the stack (push {r3..}); the extern array gets a literal at the base. Defining the 8-entry table here (its param is a const char* to rodata text) did not change that. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 struct PopupMessage {
     char text[0x40];    // message resource name
@@ -37,7 +38,7 @@ extern s32 DAT_005f1af8;
 
 GameFlagsBlock* gameFlagsGetBlock(void);
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(s32 flag, s32 value, s32 notify, GameFlagsBlock* block);
+
 
 // Opens the popup for the message row and marks it as shown.
 static void showPopup(const PopupMessage* message, s32 kind)
@@ -70,7 +71,7 @@ void FUN_00295434(void)
         } else {
             showPopup(&g_lmapPopupMessages[0], 0xbb);
         }
-        gameFlagSetValue(0x11f6, 1, 1, block);
+        gameFlagSetValue(0x11f6, 1, 1);
         return;
     }
     if (!gameFlagIsSet(0x11f4) && g_gameState.steps >= 4) {
@@ -80,10 +81,10 @@ void FUN_00295434(void)
             } else {
                 showPopup(&g_lmapPopupMessages[2], 0xbb);
             }
-            gameFlagSetValue(0x11f4, 1, 1, block);
+            gameFlagSetValue(0x11f4, 1, 1);
             return;
         }
-        gameFlagSetValue(0x11f4, 1, 0, block);
+        gameFlagSetValue(0x11f4, 1, 1);
     }
     if (!gameFlagIsSet(0x11f7) && g_gameState.steps >= 6) {
         if (gameFlagIsSet(0x4c9)) {
@@ -91,13 +92,13 @@ void FUN_00295434(void)
         } else {
             showPopup(&g_lmapPopupMessages[1], 0xbb);
         }
-        gameFlagSetValue(0x11f7, 1, 1, block);
+        gameFlagSetValue(0x11f7, 1, 1);
         return;
     }
     if (!gameFlagIsSet(0x11f8) && g_gameState.state == 0x1f) {
         gameFlagIsSet(0x4c9);
         showPopup(&g_lmapPopupMessages[7], 0xad);
-        gameFlagSetValue(0x11f8, 1, 1, block);
+        gameFlagSetValue(0x11f8, 1, 1);
         return;
     }
 }

@@ -67,7 +67,6 @@ f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathGetShortestAngleDelta(f32 first, f32 second);
 f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 targetX, f32 targetY, f32 targetZ);
-u32 FUN_00291e40(u32 soundId, SoundActorQueuePosition position);
 void FUN_002df824(s32 id, s32 flag);
 void FUN_002879dc(s32 a, s32 b, s32 c);
 void FUN_002878fc(s32 id);

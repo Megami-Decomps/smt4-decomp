@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc here duplicates the `return 1` tail for the slot path (b to a copy); retail shares one `mov r0, #1; pop` between the slot and special-state paths. */
+/* NON_MATCHING: shared success epilogue is placed after the special-state test, adding a forward branch from the slot path. */
 #include "common.h"
 
 extern "C" {
@@ -35,12 +35,10 @@ u32 FUN_00288f78(s32 id)
         if (block->slotState[id] == 3) {
             return 0;
         }
-        return 1;
+    } else if (block->specialState == 3) {
+        return 0;
     }
-    if (block->specialState != 3) {
-        return 1;
-    }
-    return 0;
+    return 1;
 }
 
 }

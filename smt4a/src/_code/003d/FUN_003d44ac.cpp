@@ -40,7 +40,7 @@ void FUN_0014e188(LayoutSprite *sprite, s32 group, s32 image, void *owner, s32 f
 void uiSpriteSelectAnim(LayoutSprite *sprite, s32 anim);
 void pairSetFirstResetSecond(LayoutSprite *sprite, s32 value);
 void FUN_00387240(LayoutSprite *sprite, s32 group, s32 value);
-void FUN_003872b8(LayoutSprite *sprite, s32 group, s32 first, s32 second);
+void uiGetLayoutPointDifference(LayoutSprite *sprite, s32 group, s32 first, s32 second);
 void FUN_0036b63c(LayoutSprite *sprite, u8 value);
 
 /* The animation id of the layout's n-th sprite state. */
@@ -96,7 +96,7 @@ void FUN_003d44ac(SpriteLayout *layout)
         return;
     case 8:
         pairSetFirstResetSecond(&layout->sprites[0], 0x13881);
-        FUN_003872b8(&layout->sprites[0], 16, 80000, 0x13881);
+        uiGetLayoutPointDifference(&layout->sprites[0], 16, 80000, 0x13881);
         return;
     case 0xd:
         pairSetFirstResetSecond(&layout->sprites[1], layoutId(layout, 1));

@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler uses different saved registers and folds the byte index into scaled memory accesses. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 u8 *gameGetFlagBlock(void);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc merges the identical state-7 tails of case 5 and the script's final step (retail keeps them separate with different register use) and schedules the frame-counter/state stores in the other order. */
+/* NON_MATCHING: script-mode setter and phase switch match; state-7 tail merging and result-state store scheduling differ. */
 #include "battle/btlGameOver.h"
 
 extern "C" {
@@ -20,10 +20,11 @@ struct BtlMainStateView {
     s32 gameOverKind;
 };
 BtlMainStateView *btlGetMainState(void);
-BtlGameOverA *FUN_003e6c14(BtlGameOverA *work);
-BtlGameOverA *talkEventStartScript(BtlGameOverA *work);
-BtlGameOverA *FUN_003e71a8(BtlGameOverA *work);
-BtlGameOverA *stepStateBattleStart(BtlGameOverA *work);
+u32 FUN_003e6c14(BtlGameOverA *work);
+s32 talkEventStartScript(BtlGameOverA *work);
+u32 FUN_003e71a8(BtlGameOverA *work);
+u32 stepStateBattleStart(BtlGameOverA *work);
+void scriptProcessSetMode(void *process, u32 mode);
 }
 
 /* The save counter is outside the shared save-data prefixes. */
@@ -49,7 +50,7 @@ extern "C" {
 /* Game-over state machine: plays the eye animation and timeline, loads the screen's files, runs
  * the script and hands over to the result states. Returns the next state's result: 0 to keep
  * running, -1 when finished. */
-BtlGameOverA *FUN_003e6f50(BtlGameOverA *work)
+s32 FUN_003e6f50(BtlGameOverA *work)
 {
     switch (work->state) {
     case GAMEOVER_STATE_EYES_START:
@@ -88,17 +89,20 @@ BtlGameOverA *FUN_003e6f50(BtlGameOverA *work)
         work->state = GAMEOVER_STATE_START;
         return stepStateBattleStart(work);
     case GAMEOVER_STATE_SCRIPT:
-        if (work->step.phase == 0) {
+        switch (work->step.phase) {
+        case 0:
             work->process = FUN_00275bc8(work->dataA, work->dataB);
-            ((u32 *)work->process)[0x108 / 4] = 1;
+            scriptProcessSetMode(work->process, 1);
             scrScriptProcessStartEntry(work->process, 0);
             scrScriptProcessStartEntry(work->process, 4);
             work->step.phase = 1;
-        } else if (work->step.phase == 1) {
+            break;
+        case 1:
             if (scrRunOpcodesStub(work->process) == 2) {
                 work->step.phase = 99;
             }
-        } else if (work->step.phase == 99) {
+            break;
+        case 99:
             work->state = GAMEOVER_STATE_START;
             return stepStateBattleStart(work);
         }
@@ -114,15 +118,15 @@ BtlGameOverA *FUN_003e6f50(BtlGameOverA *work)
                 return FUN_003e71a8(work);
             }
             work->state = GAMEOVER_STATE_DONE;
-            return (BtlGameOverA *)-1;
+            return -1;
         }
         break;
     case GAMEOVER_STATE_RESULT:
         return FUN_003e71a8(work);
     case GAMEOVER_STATE_DONE:
-        return (BtlGameOverA *)-1;
+        return -1;
     }
-    return NULL;
+    return 0;
 }
 
 } /* extern "C" */

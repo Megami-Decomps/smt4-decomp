@@ -1,9 +1,22 @@
-/* NON_MATCHING: compiler combines retail's conditional TST #4 / TST #8 pair into one TST #12. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "classes/Obj422594.h"
 
 extern "C" AocMain* g_aocMain;
+
+static __inline bool aocOperationBusy(u32 flags)
+{
+    if (flags & 4)
+        return true;
+    return false;
+}
+
+static __inline bool aocOperationPending(u32 flags)
+{
+    if (flags & 8)
+        return true;
+    return false;
+}
 
 struct AocWindowStep {
     /* 0x000 */ u32 unk000;
@@ -17,7 +30,7 @@ struct AocWindowStep {
 void AocMenu::leaveWhenAocFree()
 {
     AocWindowStep* work = reinterpret_cast<AocWindowStep*>(this);
-    if ((g_aocMain->flags & 4) == 0 && (g_aocMain->flags & 8) == 0) {
+    if (!aocOperationBusy(g_aocMain->flags) && !aocOperationPending(g_aocMain->flags)) {
         work->state = 3;
         work->substate = 0;
         if (work->window != NULL) {

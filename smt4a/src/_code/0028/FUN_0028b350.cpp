@@ -17,7 +17,7 @@ int sentinelLookupGetValue(void);
 int FUN_0019e330(...);
 int FUN_00202188(...);
 int FUN_00387240(...);
-int FUN_003872b8(...);
+int uiGetLayoutPointDifference(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of param_2: 7 slot(s), 28 byte(s) */
@@ -39,7 +39,7 @@ extern unsigned short g_battleSlotCount; /* 0x5e2058 */
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: uiApplyIndexedPanelSpriteSizes. */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: pairSetFirstResetSecond. */
@@ -50,7 +50,7 @@ extern int FUN_0019be8c(unsigned int);
 /* Supplied declaration required: FUN_00202188. */
 extern unsigned short textMeasureLineWidth(unsigned int, int);
 /* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: FUN_003872b8. */
+/* Supplied declaration required: uiGetLayoutPointDifference. */
 
 
 void FUN_0028b350(int param_1,int param_2)
@@ -93,7 +93,7 @@ void FUN_0028b350(int param_1,int param_2)
     pairSetFirstResetSecond(param_1 + 0x1b4,2000);
     temp_v6 = 9;
     FUN_001517b4(9,2);
-    if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
+    if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
@@ -135,7 +135,7 @@ void FUN_0028b350(int param_1,int param_2)
     }
     temp_v6 = 9;
     FUN_001517b4(9,2);
-    if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
+    if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
       *(unsigned char *)(param_1 + 0x351) = 1;
     }
@@ -156,36 +156,36 @@ void FUN_0028b350(int param_1,int param_2)
               }
               pairSetFirstResetSecond(param_1 + 0x240,0x7dd);
               FUN_0019e330(param_1 + 0x240,1,0);
-              FUN_003872b8(param_1 + 0x240,8,0x7e0,0x7dd);
+              uiGetLayoutPointDifference(param_1 + 0x240,8,0x7e0,0x7dd);
             }
             else {
               pairSetFirstResetSecond(param_1 + 0x240,0x7d2);
               FUN_0019e330(param_1 + 0x240,1,0);
-              FUN_003872b8(param_1 + 0x240,8,0x7d6,0x7d2);
+              uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d6,0x7d2);
             }
           }
           else {
             pairSetFirstResetSecond(param_1 + 0x240,0x7de);
             FUN_0019e330(param_1 + 0x240,1,0);
-            FUN_003872b8(param_1 + 0x240,8,0x7e1,0x7de);
+            uiGetLayoutPointDifference(param_1 + 0x240,8,0x7e1,0x7de);
           }
         }
         else {
           pairSetFirstResetSecond(param_1 + 0x240,0x7d3);
           FUN_0019e330(param_1 + 0x240,1,0);
-          FUN_003872b8(param_1 + 0x240,8,0x7d7,0x7d3);
+          uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d7,0x7d3);
         }
       }
       else {
         pairSetFirstResetSecond(param_1 + 0x240,0x7dc);
         FUN_0019e330(param_1 + 0x240,1,0);
-        FUN_003872b8(param_1 + 0x240,8,0x7df,0x7dc);
+        uiGetLayoutPointDifference(param_1 + 0x240,8,0x7df,0x7dc);
       }
     }
     else {
       pairSetFirstResetSecond(param_1 + 0x240,0x7d1);
       FUN_0019e330(param_1 + 0x240,1,0);
-      FUN_003872b8(param_1 + 0x240,8,0x7d5,0x7d1);
+      uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d5,0x7d1);
     }
     *(unsigned short *)(param_1 + 0x27a) = 2;
     return;
@@ -193,7 +193,7 @@ void FUN_0028b350(int param_1,int param_2)
     pairSetSecondResetFirst(param_1 + 0x1b4,0x10);
     temp_v6 = 9;
     FUN_001517b4(9,2);
-    if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
+    if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {
@@ -217,7 +217,7 @@ void FUN_0028b350(int param_1,int param_2)
     temp_v7 = 9;
     FUN_001517b4(9,2);
     if (temp_v7 == 0) {
-      temp_v7 = FUN_00163fd4(6);
+      temp_v7 = slotIsActive(6);
 joined_r0x0028baa4:
       if (temp_v7 == 0) {
         uiSpriteSelectAnim(param_1 + 0x1b4,3);
@@ -239,7 +239,7 @@ joined_r0x0028baa4:
     temp_v7 = 9;
     FUN_001517b4(9,2);
     if (temp_v7 == 0) {
-      temp_v7 = FUN_00163fd4(6);
+      temp_v7 = slotIsActive(6);
       goto joined_r0x0028baa4;
     }
     break;
@@ -247,7 +247,7 @@ joined_r0x0028baa4:
     pairSetSecondResetFirst(param_1 + 0x1b4,2);
     temp_v6 = 9;
     FUN_001517b4(9,2);
-    if ((temp_v6 != 0) || (temp_v6 = FUN_00163fd4(6), temp_v6 != 0)) {
+    if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
       *(unsigned char *)(param_1 + 0x239) = 1;
     }
     else {

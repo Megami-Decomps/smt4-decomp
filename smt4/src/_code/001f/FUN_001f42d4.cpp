@@ -1,15 +1,19 @@
-/* NON_MATCHING: scheduling of the three inlined render-stack pushes (retail interleaves the count update differently) and the origin pair, which retail loads with one vldmia into s0/s1 */
+/* NON_MATCHING: three inlined render-stack push schedules and job-array base reuse differ; grouped origin and explicit callback handle are recovered. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 
+
+struct TitleJobOrigin {
+    f32 x;
+    f32 y;
+};
 /* The title scene's job list: up to ten drawn jobs and the origin they are placed at. */
 struct TitleJobWork {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u32 jobs[10];
     /* 0x2C */ s32 count;
     /* 0x30 */ u8 unk30[0x30];
-    /* 0x60 */ f32 originX;
-    /* 0x64 */ f32 originY;
+    /* 0x60 */ TitleJobOrigin origin;
 };
 
 struct EventTexState {
@@ -22,7 +26,7 @@ extern "C" {
 extern EventTexState *g_eventTex; /* 0x43ded0 */
 extern RenderCtx *g_titleScene;   /* 0x44ea00 */
 
-TitleJobWork *jobGetWork(void);
+TitleJobWork *jobGetWork(u32 job);
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
 s32 FUN_00285584(u32 job, s32 x, s32 y);
@@ -33,9 +37,9 @@ void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the title scene's jobs with the three render stacks pushed. */
-u32 FUN_001f42d4(void)
+s32 FUN_001f42d4(u32 job)
 {
-    TitleJobWork *work = jobGetWork();
+    TitleJobWork *work = jobGetWork(job);
     s32 i;
 
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
@@ -43,18 +47,16 @@ u32 FUN_001f42d4(void)
     renderCtxPushB(g_titleScene, packNibblesAndByte(6, 7, 0));
     for (i = 0; i < work->count; i++) {
         if (g_eventTex->jobsActive) {
-            if (jobIsValid(work->jobs[i])) {
-                s32 x = (s32)work->originX;
-                s32 y = (s32)work->originY;
-
-                FUN_00285584(work->jobs[i], x, y);
-            }
-        } else if (jobIsValid(work->jobs[i]) && jobGetStatus(work->jobs[i]) == 4) {
-            s32 x = (s32)work->originX;
-            s32 y = (s32)work->originY;
-
-            FUN_00285584(work->jobs[i], x, y);
+            if (!jobIsValid(work->jobs[i]))
+                continue;
+        } else {
+            if (!jobIsValid(work->jobs[i]) || jobGetStatus(work->jobs[i]) != 4)
+                continue;
         }
+        TitleJobOrigin origin = work->origin;
+        s32 x = (s32)origin.x;
+        s32 y = (s32)origin.y;
+        FUN_00285584(work->jobs[i], x, y);
     }
     renderStackPop(&g_titleScene->stackB);
     renderStackPop(&g_titleScene->stackA);

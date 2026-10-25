@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 108 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: panel completion/speed getters and x/y evaluation match; remaining differences are render-stack set/pop operands and shared return-block layout. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 
@@ -41,6 +41,8 @@ u32 vec2GetYInt(void *vector);
 void FUN_003b3388(ResultScreen *result, u32 x, u32 y);
 void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
+s8 uiSpriteGetCompletionState(const void *sprite);
+f32 vec2GetSpeed(const void *sprite);
 
 /* Draws the result screen: while the curtain closes after the results step, slides the curtain
  * halves in and runs the effect speed; then draws the result sprites for phases below 9.
@@ -52,7 +54,7 @@ u32 FUN_001a16c0(u32 job)
     if (result != NULL && modelPairTryBind(result) != 0) {
         FUN_002c39a4(g_titleScene);
         renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
-        if (result->phase == 12 && result->step == 5 && result->panel.hold == 0) {
+        if (result->phase == 12 && result->step == 5 && uiSpriteGetCompletionState(&result->panel) == 0) {
             s32 curtain = result->curtain;
 
             if (curtain < 16) {
@@ -67,8 +69,8 @@ u32 FUN_001a16c0(u32 job)
                 FUN_002bf288(2, 0x28, 0x114, 0, curtain + 240, 0xF1);
                 renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));
             }
-            if (result->curtain >= 9) {
-                efctSetSpeed(result->panel.curtainSpeed);
+            if (result->curtain > 8) {
+                efctSetSpeed(vec2GetSpeed(&result->panel));
                 FUN_002bf288(2, 0x28, 0x115, 0, 0, 0xF2);
                 efctSetSpeed(1.0f);
             }
@@ -77,7 +79,9 @@ u32 FUN_001a16c0(u32 job)
         if (result->phase < 9) {
             if (result->phase != 0) {
                 renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
-                FUN_003b3388(result, vec2GetXInt(result->position), vec2GetYInt(result->position));
+                u32 x = vec2GetXInt(result->position);
+                u32 y = vec2GetYInt(result->position);
+                FUN_003b3388(result, x, y);
                 renderStackPop(&g_titleScene->stackA);
             }
             renderCtxSetB(g_titleScene, packNibblesAndByte(6, 7, 0));

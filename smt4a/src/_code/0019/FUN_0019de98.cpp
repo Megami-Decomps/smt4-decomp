@@ -1,5 +1,6 @@
-/* NON_MATCHING: line-buffer clear bases and parser scratch registers differ; 78 versus retail 79 instructions. */
+/* NON_MATCHING: standard two-line clears recover retail's base addressing; second-clear scratch register and parser-counter initialization still differ (79 rows each). */
 #include "ui/ButtonHelp.h"
+#include <string.h>
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;
@@ -22,11 +23,8 @@ void FUN_0019de98(const s8 *text, u32 color)
         work->mode = 0;
         return;
     }
-    for (s32 line = 0; line < 2; ++line) {
-        u32 *words = reinterpret_cast<u32 *>(work->entries[line].data);
-        for (s32 word = 0; word < 16; ++word)
-            words[word] = 0;
-    }
+    memset(work->entries[0].data, 0, sizeof(work->entries[0].data));
+    memset(work->entries[1].data, 0, sizeof(work->entries[1].data));
     s32 line = 0;
     s32 start = 0;
     s32 offset = 0;

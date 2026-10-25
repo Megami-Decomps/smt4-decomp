@@ -57,13 +57,13 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
             FUN_0034a968();
             process->stage = 2;
         case 2:
+            process->timer = 0;
             process->state = 5;
             process->stage = 0;
-            process->timer = 0;
             sysPlaySe(process->alternateSound ? 0x11d : 0x67);
             break;
         }
-        return 0;
+        break;
     case 4:
         return FUN_00417234(process);
     case 5:
@@ -89,10 +89,11 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
             process->stage = 0;
             break;
         }
-        return 0;
+        break;
     case 7:
         return -1;
     default:
-        return 0;
+        break;
     }
+    return 0;
 }

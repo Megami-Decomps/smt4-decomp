@@ -266,7 +266,7 @@ extern int statusDownGetCursorIndex(void);
 /* Supplied declaration required: FUN_0033b7a0. */
 /* Supplied declaration required: FUN_0033b838. */
 extern unsigned int devilRollDropItem(int);
-extern unsigned int FUN_0033be40(int);
+extern unsigned int partyClassifyDemonLevelRequirement(int);
 /* Supplied declaration required: FUN_0033be90. */
 /* Supplied declaration required: skillChooseRandomFlaggedSlot. */
 /* Supplied declaration required: unitApplyLevelGrowth. */
@@ -876,7 +876,7 @@ LAB_0018d058:
                   }
                 }
                 demonApplyLevelGrowth(temp_v17,temp_v7);
-                temp_v9 = FUN_0033be40(temp_v17);
+                temp_v9 = partyClassifyDemonLevelRequirement(temp_v17);
                 *(unsigned int *)(temp_v18 + 0x428c) = temp_v9;
                 temp_v8 = FUN_0033b838(temp_v17,temp_v7,0);
                 if (temp_v8 != 0) {

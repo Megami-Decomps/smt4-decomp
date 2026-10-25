@@ -1,4 +1,4 @@
-/* NON_MATCHING: grid navigation behavior restored; quotient argument moves and final mode/selection store scheduling differ. */
+/* NON_MATCHING: only quotient argument moves differ (retail moves count into r0 before columns into r1); navigation setup and final stores agree. */
 #include "ui/GridNavigation.h"
 
 extern "C" {

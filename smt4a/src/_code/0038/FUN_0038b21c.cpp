@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -11,7 +12,7 @@ u32 scrGetArg(u32 index);
 s32 FUN_002c2758(u16 id);
 FlagRecord *FUN_003de92c(u16 id);
 s32 FUN_002c7b8c(u16 id, s32 state);
-s32 gameFlagSetValue(u32 flag, s32 value, s32 arg);
+
 
 /* Script command: for an id in state 1 that has a record, sets state 2 and raises the record's flags. */
 u32 FUN_0038b21c(void)

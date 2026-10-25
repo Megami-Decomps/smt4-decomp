@@ -23,8 +23,8 @@ extern "C" {
 extern RandomMazeState g_mapRndMaze;
 u32 randRange(u16 max);
 
-/* Starts a new random maze: sizes it (11x11 unless `keepSize`), fills the cell grid with walls on the
-   border and every even lattice point, then opens the four border gates at random positions. */
+/* Starts a random maze, using11x11 unless keepSize is set; fills the border/even lattice
+   with walls, then places four randomized border-adjacent wall segments. */
 void FUN_002296b0(s32 keepSize)
 {
     FlagWorkBanks *flags = gameFlagsGetBlock();

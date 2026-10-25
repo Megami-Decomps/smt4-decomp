@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b10e4` (_code @ 0x1b10e4, 0x5b4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int uiAdjustIntegerFromRepeat(...);
 int FUN_001c36d8(...);
 int gameRestorePrimaryWorkSave(void);
 int FUN_00287728(...);
-int gameFlagSetValue(...);
 int scrScriptProcessStartEntry(...);
 int slotSetRequest(...);
 int FUN_0029ee6c(...);
@@ -35,7 +35,6 @@ extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: gameRestorePrimaryWorkSave. */
 /* Supplied declaration required: FUN_00287728. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: gameFlagSetValue. */
 extern unsigned int messageTargetGetValue(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);
@@ -217,8 +216,8 @@ unsigned int FUN_001b10e4(void)
         *(unsigned char *)(temp_v0 + 0x16) = 1;
       }
       FUN_001c36d8(temp_v0 + 0x10);
-      gameFlagSetValue(0x556,1);
-      gameFlagSetValue(0x555,1);
+      gameFlagSetValue(0x556, 1, 1);
+      gameFlagSetValue(0x555, 1, 1);
       FUN_0030aa50(2);
       temp_v4 = 9;
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;

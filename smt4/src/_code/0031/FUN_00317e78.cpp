@@ -1,4 +1,4 @@
-/* NON_MATCHING: the section handle and entries pointer land in r4/r5 the other way round in every repetition. */
+/* NON_MATCHING: section/entries saved registers are swapped for the five stride-four sections; larger-record sections match. */
 #include "gamedata/DataTable.h"
 
 extern "C" {

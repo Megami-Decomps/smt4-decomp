@@ -1,7 +1,7 @@
 #ifndef SHARD_W6_W6MATCH5_UNITCATEGORY_H
 #define SHARD_W6_W6MATCH5_UNITCATEGORY_H
 
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 struct UnitCategoryRecord {
     u8 unk000[0x12c];
@@ -18,7 +18,6 @@ struct ScriptCategoryUnit {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-ScriptCategoryUnit *btlUnitGet(u32);
 s32 FUN_0019acdc(u16, u32);
 }
 

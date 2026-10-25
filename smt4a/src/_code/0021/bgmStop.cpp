@@ -23,7 +23,7 @@ extern "C" {
 extern BgmSlot DAT_0061951c[BGM_SLOT_COUNT];
 
 s32 jyoucyuGetTableEntry(u32 index);
-void handlerFinishById(u32 slot, s32 mode);
+void handlerFinishById(s32 slot, s32 frames);
 
 /* Stops the slot's sound at once and clears the slot. */
 static void bgmSlotStop(BgmSlot *slot)

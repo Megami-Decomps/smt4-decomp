@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00225ddc` (_code @ 0x225ddc, 0x75c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 struct ScriptHolder;
 
 extern "C" {
@@ -17,7 +18,7 @@ int scriptHolderFree2(...);
 int textFormatBuffer(...);
 int sysPlaySe(int);
 int FUN_001695a0(void);
-int FUN_00183318(int);
+int buttonHelpBeginExit(int);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int asdLoadFileSyncDefault(void);
@@ -38,7 +39,6 @@ int FUN_003b61ec(void);
 int eventCommandStop(void);
 int eventOpeningResetValidJob(void);
 int FUN_003d54f8(...);
-int gameFlagSetValue(...);
 int aocDrawText8(int, unsigned int, int);
 int aocDrawText7(int, unsigned int, int);
 int FUN_0047e430(int, int);
@@ -75,7 +75,7 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_00183318. */
+/* Supplied declaration required: buttonHelpBeginExit. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
@@ -105,7 +105,6 @@ extern int campButtonHelpIsActive(void);
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: eventOpeningResetValidJob. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
@@ -185,7 +184,7 @@ unsigned int FUN_00225ddc(void)
           if (temp_v3 == 0) {
             return 0;
           }
-          FUN_00183318(1);
+          buttonHelpBeginExit(1);
           return 0;
         }
       }
@@ -246,7 +245,7 @@ unsigned int FUN_00225ddc(void)
         temp_v3 = scrRunOpcodesStub(puVar2[0xc]);
         if (temp_v3 == 2) {
           if (puVar2[7] != 0) {
-            gameFlagSetValue(puVar2[7],1);
+            gameFlagSetValue(puVar2[7], 1, 1);
           }
           puVar3 = g_aocJob;
           if (g_aocJob != (unsigned int *)0x0) {

@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `btlUnitSetParam` (_code @ 0x24c614, 0xe18 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
 int FUN_00229998(int *);
 int FUN_00247478(unsigned int [110], int, unsigned int);
-int btlUnitGet(...);
 int dataTable08Sub1GetRecord(void);
 int FUN_003cf1a8(int *);
 int FUN_003cf7fc(int *);
@@ -61,12 +61,12 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
   
   temp_v11 = 0;
   temp_v10 = 0;
-  temp_v2 = btlUnitGet(param_1);
+  temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
   switch(*(unsigned short *)(*(int *)(temp_v2 + 0x28) + 0x14c)) {
   case 1:
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v11 = (unsigned int)((**(unsigned int **)(temp_v2 + 0x20) & 0x10) == 0);
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     FUN_00247478(temp_v12,*param_1,*(unsigned int *)(temp_v2 + 0x20));
     if ((short)temp_v12[0] == 0) {
       temp_v10 = 0;
@@ -77,17 +77,17 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
     break;
   case 2:
   case 3:
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v7 = *(short *)(*(int *)(temp_v2 + 0x28) + 0x14e);
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     FUN_003d0bec(param_1,*(unsigned int *)(temp_v2 + 0x20),(int)temp_v7,&temp_v11,&temp_v10);
     break;
   case 8:
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v2 = (int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x14e);
     dataTable08Sub1GetRecord();
     if (*(short *)(temp_v2 + 0x62) == 0) {
-      temp_v3 = btlUnitGet(param_1);
+      temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
       temp_v11 = (unsigned int)((**(unsigned int **)(temp_v3 + 0x20) & 0x10) != 0);
       if ((*(unsigned char *)(temp_v2 + 0x6a) & 0x80) == 0) {
         temp_v10 = 0;
@@ -96,12 +96,12 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       temp_v10 = 1;
       break;
     }
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     FUN_003d0bec(param_1,*(unsigned int *)(temp_v3 + 0x20),*(unsigned short *)(temp_v2 + 0x62),&temp_v11,
                  &temp_v10);
     break;
   case 0xb:
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v11 = (unsigned int)((**(unsigned int **)(temp_v2 + 0x20) & 0x10) != 0);
     temp_v10 = 0;
   }
@@ -207,7 +207,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar10 = psVar10 + 0x144;
     } while (temp_v3 != 0);
     if (temp_v2 != 0) {
-      temp_v3 = btlUnitGet(param_1);
+      temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
       temp_v3 = temp_v3 + 0x38;
       temp_v6 = temp_v12[temp_v2 - 1];
       *(unsigned char *)(temp_v6 + temp_v3) = 1;
@@ -242,7 +242,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       FUN_003cf1a8(param_1);
       return;
     }
-    temp_v3 = btlUnitGet();
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v3 = temp_v3 + 0x38;
     temp_v6 = temp_v12[temp_v2 - 1];
     *(unsigned char *)(temp_v6 + temp_v3) = 1;
@@ -264,7 +264,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar10 = psVar10 + 0x144;
     } while (temp_v3 != 0);
     temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 8:
@@ -284,7 +284,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar10 = psVar10 + 0x144;
     } while (temp_v3 != 0);
     temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 9:
@@ -304,7 +304,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar10 = psVar10 + 0x144;
     } while (temp_v3 != 0);
     temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 10:
@@ -324,7 +324,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar10 = psVar10 + 0x144;
     } while (temp_v3 != 0);
     temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 0xb:
@@ -397,9 +397,9 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
     } while (temp_v3 != 0);
     break;
   case 0xf:
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v6 = (unsigned int)*(unsigned short *)(temp_v2 + 0x2c);
-    temp_v2 = btlUnitGet(param_1);
+    temp_v2 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v6 + temp_v2 + 0x38) = 1;
     return;
   case 0x10:
@@ -408,7 +408,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
     do {
       temp_v8 = temp_v2;
       if ((*(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v2 * 0x288) & 0x400) != 0) {
-        temp_v5 = btlUnitGet(param_1);
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
         temp_v6 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1fc0) + temp_v2 * 0x288 + 0x6e);
         if (*(unsigned short *)(temp_v5 + 0x2c) != temp_v6) {
           temp_v12[temp_v3] = temp_v6;
@@ -418,7 +418,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       temp_v2 = temp_v8 + 1;
     } while (temp_v2 < 0x6d);
     temp_v2 = randRange((temp_v3 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     temp_v6 = temp_v12[temp_v2];
     temp_v3 = temp_v3 + 0x38;
     *(unsigned char *)(temp_v6 + temp_v3) = 1;
@@ -436,7 +436,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < 0x6d);
     temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 0x12:
@@ -465,7 +465,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x6d);
     temp_v2 = randRange((temp_v3 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 0x14:
@@ -520,7 +520,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x6d);
     temp_v2 = randRange((temp_v3 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 0x18:
@@ -570,7 +570,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar12 = psVar12 + 0x144;
     } while (temp_v3 != 0);
     temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   case 0x1b:
@@ -587,12 +587,12 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 0x6d);
     temp_v2 = randRange((temp_v3 - 1U) & 0xffff);
-    temp_v3 = btlUnitGet(param_1);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
     *(unsigned char *)(temp_v12[temp_v2] + temp_v3 + 0x38) = 1;
     return;
   }
   temp_v2 = randRange((temp_v2 - 1U) & 0xffff);
-  temp_v3 = btlUnitGet(param_1);
+  temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(param_1)));
   temp_v6 = temp_v12[temp_v2];
   temp_v3 = temp_v3 + 0x38;
   *(unsigned char *)(temp_v6 + temp_v3) = 1;

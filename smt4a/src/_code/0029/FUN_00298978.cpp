@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00298978` (_code @ 0x298978, 0x85c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ int FUN_003b61ec(void);
 int eventCommandStop(void);
 int eventOpeningResetValidJob(void);
 int soundChannelStopAll(int);
-int gameFlagSetValue(...);
 int aocDrawText8(int, unsigned int, int);
 int aocDrawText7(int, unsigned int, int);
 
@@ -79,7 +79,6 @@ extern int flagBrowserStep(void);
 /* Supplied declaration required: eventCommandStop. */
 /* Supplied declaration required: eventOpeningResetValidJob. */
 /* Supplied declaration required: soundChannelStopAll. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocDrawText8. */
 /* Supplied declaration required: aocDrawText7. */
 extern int aocPackageGrantsItem(int, unsigned int, unsigned int);
@@ -151,7 +150,7 @@ unsigned int FUN_00298978(void)
       temp_v1 = puVar2[7];
     }
     if (*(char *)(puVar2 + 9) != '\0' && temp_v1 != 0) {
-      gameFlagSetValue(temp_v1,1);
+      gameFlagSetValue(temp_v1, 1, 1);
     }
     puVar3 = g_aocJob;
     if (g_aocJob != (unsigned int *)0x0) {

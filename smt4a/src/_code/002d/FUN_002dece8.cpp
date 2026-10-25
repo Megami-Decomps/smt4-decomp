@@ -1,5 +1,6 @@
 /* NON_MATCHING: same logic as the other render-state push/pop users; the inlined renderStackPush/Pop helpers schedule their index arithmetic differently and the effect null checks branch differently */
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 /* A battle effect part that draws a child object through the render state stack. */
 struct EffectChildVtable {
@@ -26,20 +27,17 @@ extern "C" {
 extern BtlEffectGlobals g_btlEffect;
 extern RenderCtxA *g_renderCtx;
 
-void *jobGetWork(void);
 s32 FUN_00387580(u32 kind, f32 value);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 /* Draws the battle effect's child object inside its own render state. */
-u32 FUN_002dece8(void)
+s32 FUN_002dece8(u32 job)
 {
-    jobGetWork();
+    jobGetWork(job);
     BtlEffectObject *effect = g_btlEffect.object;
     if (effect != NULL && (effect->flags & 2) != 0 && effect->child != NULL) {
-        RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_00387580(6, 0.0f);
-        renderStackPush(&context->additional.stackC, state);
+        renderCtxPushC(g_renderCtx, FUN_00387580(6, 0.0f));
         effect->child->vtable->draw(effect->child);
         renderStackPop(&g_renderCtx->additional.stackC);
         skinObjectUpdateMatrices(g_renderCtx);

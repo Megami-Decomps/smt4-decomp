@@ -20,7 +20,7 @@ extern int DAT_005f1618; /* 0x5f1618 */
 extern signed char DAT_005f161d; /* 0x5f161d */
 
 extern int gameFlagsGetBlock(void);
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: mapIfStart. */
@@ -81,14 +81,14 @@ void FUN_0033f9f4(void)
   }
   if ((!(DAT_005f161d != '\0' || temp_v0 != '\0')) && (DAT_005f1618 == 0)) {
     if (*(char *)(temp_v5 + 0xb4) != '\0') goto LAB_0033fcfc;
-    if (((*(char *)(temp_v5 + 0xb5) != '\0') && (temp_v5 = FUN_00163fd4(8), temp_v5 == 0)) &&
-       (temp_v5 = FUN_00163fd4(7), temp_v5 == 0)) {
+    if (((*(char *)(temp_v5 + 0xb5) != '\0') && (temp_v5 = slotIsActive(8), temp_v5 == 0)) &&
+       (temp_v5 = slotIsActive(7), temp_v5 == 0)) {
       *(unsigned char *)(g_lmapView + 0xb5) = 0;
     }
     if (*(short *)(g_lmapView + 0xb6) < 7) {
-      temp_v5 = FUN_00163fd4(8);
+      temp_v5 = slotIsActive(8);
       temp_v6 = temp_v5 != 0;
-      temp_v5 = FUN_00163fd4(7);
+      temp_v5 = slotIsActive(7);
       temp_v7 = temp_v5 != 0;
       temp_v5 = padButtonIsPressed(4);
       temp_v8 = temp_v5 != 0;
@@ -96,7 +96,7 @@ void FUN_0033f9f4(void)
       temp_v9 = temp_v5 != 0;
       if ((*(short *)(g_lmapView + 0xb6) == 0) &&
          ((temp_v5 = inputIsQuestMenuPressed(), temp_v5 != 0 ||
-          (((temp_v5 = FUN_00163fd4(8), temp_v5 != 0 && (temp_v5 = FUN_00163fd4(7), temp_v5 != 0)) &&
+          (((temp_v5 = slotIsActive(8), temp_v5 != 0 && (temp_v5 = slotIsActive(7), temp_v5 != 0)) &&
            ((temp_v5 = padButtonIsPressed(8), temp_v5 == 0 &&
             ((temp_v5 = padButtonIsPressed(7), temp_v5 == 0 && (*(char *)(g_lmapView + 0xb5) == '\0'))))))))
          )) {

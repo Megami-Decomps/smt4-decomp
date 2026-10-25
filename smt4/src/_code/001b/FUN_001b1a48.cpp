@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains both record and text bases; mode/offset register allocation differs. */
+/* NON_MATCHING: text base and mode setup recovered; record/index saved registers r4/r5 are exchanged. */
 #include "battle/btlMain.h"
 
 struct BtlTextEntryFlags { u32 flags; };
@@ -25,11 +25,13 @@ void FUN_001b1a48(s32 side, u32 first, const void *configuration, s32 spacing, u
     const TextConfigurationView *config = static_cast<const TextConfigurationView *>(configuration);
     BtlMainState *battle = btlGetMainState();
     for (s32 index = 0; index < 4; ++index) {
-        const TextEntry *entry = &config->entries[index];
-        if (libc_strlen(entry->text) && libc_strcmp(entry->text, DAT_00400440)) {
-            u32 kind = entry->kind;
+        const char *text = config->entries[index].text;
+        if (libc_strlen(text) && libc_strcmp(text, DAT_00400440)) {
+            u32 kind = config->entries[index].kind;
             s32 offset = FUN_0028299c(DAT_00435d18) * spacing;
-            u32 mode = side < 0 ? 3 : 2;
+            u32 mode = 2;
+            if (side < 0)
+                mode = 3;
             switch (kind) {
             case 0: case 1: case 2: case 3: case 4: case 5: case 12:
                 if (kind == 12 && listedId >= 0) {
@@ -37,7 +39,7 @@ void FUN_001b1a48(s32 side, u32 first, const void *configuration, s32 spacing, u
                     if (target != NULL && (target->flags & 2) == 0)
                         break;
                 }
-                FUN_00282820(entry->position + offset, first, second, listedId, 6, mode, kind, entry->text);
+                FUN_00282820(config->entries[index].position + offset, first, second, listedId, 6, mode, kind, config->entries[index].text);
                 break;
             }
         }

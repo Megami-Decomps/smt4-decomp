@@ -3,9 +3,9 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxScissorA *g_renderCtx;
 const SpriteInfo *FUN_001834a4(u32, u32);
-f32 renderCtxCalculateStereoParallax(RenderCtx *, f32);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);
 void FUN_00168e00(s32, s32, s32, s32);
 void FUN_001835b4(s32, u32, u32, s32, s32, s32);
 void renderPopStateStacks(void);

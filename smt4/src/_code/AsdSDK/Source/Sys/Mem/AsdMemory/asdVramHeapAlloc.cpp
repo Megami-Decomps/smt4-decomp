@@ -7,11 +7,11 @@ extern "C" {
 extern const char g_asdMemorySourcePath[]; /* __FILE__ of AsdMemory.cpp */
 
 AsdVramBlock *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void asdVramBlockListInsert(void *list, AsdVramBlock *block);
+void asdVramBlockListInsert(AsdVramBlockList *list, AsdVramBlock *block);
 
 /* Allocates `size` bytes (rounded up to 128) from the first free block that is big enough;
  * returns the address, or 0 when no free block fits. */
-u32 asdVramHeapAlloc(AsdVramHeap *heap, u32 size, u32 unk08, u32 unk0c)
+u32 asdVramHeapAlloc(AsdVramHeap *heap, u32 size)
 {
     AsdVramBlock *free;
     AsdVramBlock *block;
@@ -43,7 +43,7 @@ u32 asdVramHeapAlloc(AsdVramHeap *heap, u32 size, u32 unk08, u32 unk0c)
                 free->addr += blockSize;
                 free->size -= blockSize;
                 heap->freeBytes -= block->size;
-                asdVramBlockListInsert(heap, block);
+                asdVramBlockListInsert(&heap->used, block);
                 return block->addr;
             }
 
@@ -64,7 +64,7 @@ u32 asdVramHeapAlloc(AsdVramHeap *heap, u32 size, u32 unk08, u32 unk0c)
             free->prev = NULL;
             free->next = NULL;
             heap->free.count--;
-            asdVramBlockListInsert(heap, free);
+            asdVramBlockListInsert(&heap->used, free);
             return free->addr;
         }
     }

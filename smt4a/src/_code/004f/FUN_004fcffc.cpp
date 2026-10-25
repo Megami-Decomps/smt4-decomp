@@ -6,7 +6,7 @@ struct ReflectedMemberStatusA { u8 unk00[0x110]; u16 flags; };
 extern "C" {
 void *btlGetMainState();
 ReflectedMemberStatusA *FUN_001568f8(void *battle, s32 member);
-ReflectAction *FUN_004102d8(ReflectContext *context, s16 actor, s16 secondary, u32 options);
+
 
 // Queue a status clear followed by recovery actions when no blocking status remains.
 u32 FUN_004fcffc(s16 actor, u32 options, ReflectTargetA *target, u32 mask)
@@ -19,7 +19,7 @@ u32 FUN_004fcffc(s16 actor, u32 options, ReflectTargetA *target, u32 mask)
             flags = member->flags;
     }
     if (mask) {
-        ReflectAction *action = FUN_004102d8(g_btlActionReflect, actor, 0, options);
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
         action->kind = 38;
         action->target = (u32)target;
         flags &= ~mask;
@@ -27,10 +27,10 @@ u32 FUN_004fcffc(s16 actor, u32 options, ReflectTargetA *target, u32 mask)
         action->parameter = mask;
     }
     if (rosterMember && !(flags & 0x582)) {
-        ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)(actor + 1), 0, options);
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 1), 0, options);
         action->kind = 28;
         action->target = (u32)target;
-        action = FUN_004102d8(g_btlActionReflect, (s16)(actor + 1), 0, options);
+        action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 1), 0, options);
         action->kind = 11;
         action->target = (u32)target;
         action->value = mask;

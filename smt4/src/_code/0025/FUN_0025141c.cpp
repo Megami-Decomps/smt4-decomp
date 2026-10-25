@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025141c` (_code @ 0x25141c, 0x974 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: remaining native alpha argument and efctSetSpeed float arguments are absent from this draft; large render-stack and draw-expression differences remain. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -76,7 +75,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002888a8. */
 extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
-extern int gameGetUnitRecord(void);
+extern int gameGetUnitRecord(s32 slot);
 extern unsigned int categoryGetColor(int);
 extern int gameGetPlayerData(void);
 extern unsigned int FUN_002bd068(unsigned short);
@@ -140,7 +139,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     temp_v15 = FUN_00288ddc((int)(short)temp_v7,0xffffffff);
   }
   else {
-    temp_v3 = gameGetUnitRecord();
+    temp_v3 = gameGetUnitRecord((s32)param_1->field_0x34);
     if (temp_v3 != 0) {
       temp_v2 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
       textFormatBuffer(temp_v17,&LAB_00251798,temp_v2);
@@ -200,7 +199,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
           temp_v1 = *(unsigned short *)(temp_v3 + 0x72);
         }
         else {
-          temp_v3 = gameGetUnitRecord();
+          temp_v3 = gameGetUnitRecord((s32)param_1->field_0x34);
           temp_v1 = *(unsigned short *)(temp_v3 + 0x44);
         }
         temp_v5 = 1;

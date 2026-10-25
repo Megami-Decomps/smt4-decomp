@@ -18,7 +18,7 @@ u32 FUN_0028cdec(PlayScene *scene)
     FUN_0028cb40(scene, kind, skill);
     s32 selection = objectPartRunUnlessLocked(&scene->targeting.selector);
     // The party selection tail lies beyond the shared SlotTable prefix.
-    struct PartyView { u8 prefix[0x9107]; s8 slots[8]; };
+    struct PartyView { u8 prefix[0x9108]; s8 slots[4]; };
     // Properties in the shared record's unaligned byte union cannot be exposed as words in place.
     struct SkillView {
         u8 unk00[0x20];
@@ -36,9 +36,9 @@ u32 FUN_0028cdec(PlayScene *scene)
     };
     if (selection != 0) {
         const PartyView *party = static_cast<const PartyView *>(gameGetSlotTable());
-        FUN_002621b4(scene->unk305C - 1, party->slots[selection], skill[0], &scene->targeting.targets[selection]);
+        FUN_002621b4(scene->unk305C - 1, party->slots[selection - 1], skill[0], &scene->targeting.targets[selection]);
         party = static_cast<const PartyView *>(gameGetSlotTable());
-        if (party->slots[selection] < 0) {
+        if (party->slots[selection - 1] < 0) {
             const SkillView *record = static_cast<const SkillView *>(dataTable40FindById(skill[0]));
             if ((record != NULL && record->properties.targeting == 2 && record->category == 3) ||
                 record->id == 0x8b || record->id == 0x136) {

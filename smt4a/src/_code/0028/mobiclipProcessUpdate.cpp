@@ -73,15 +73,15 @@ u32 FUN_003d2eec(const char *path);
 void FUN_003d54f8(u32 screen, u32 duration);
 u32 sysLightEventTryWait(AocObjB *event);
 void FUN_00229104();
-s32 FUN_003d3594();
-s32 FUN_00163fd4(u32 button);
+s32 moviePumpUntilReady();
+s32 slotIsActive(u32 button);
 void slotSetRequest(u32 slot, u32 duration, u32 color);
 s32 FUN_002e07f4();
 void mobiclipCtrlShutdown();
 void FUN_001f51ac();
 void soundSetupArchiveAndSlots();
 void soundInitializePersistentSlots();
-void FUN_00138114();
+void soundEffectInitializeDelay();
 void FUN_0013ae58();
 void titleConfigApply();
 void engineClearStateFlag1();
@@ -119,7 +119,7 @@ static inline void resetMoviePlayback()
     FUN_001f51ac();
     soundSetupArchiveAndSlots();
     soundInitializePersistentSlots();
-    FUN_00138114();
+    soundEffectInitializeDelay();
     FUN_0013ae58();
     titleConfigApply();
     engineClearStateFlag1();
@@ -229,12 +229,12 @@ extern "C" s32 mobiclipProcessUpdate()
         FUN_00229104();
         ++work->state;
     case 5:
-        if (FUN_003d3594()) {
+        if (moviePumpUntilReady()) {
             if (work->autoSkip) {
                 if (!work->allowSkip || !work->skippable)
                     return 0;
             } else {
-                if ((!FUN_00163fd4(9) && !FUN_00163fd4(6)) || !work->skippable)
+                if ((!slotIsActive(9) && !slotIsActive(6)) || !work->skippable)
                     return 0;
             }
             if (work->fadeOut) {

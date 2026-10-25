@@ -1,8 +1,9 @@
-/* NON_MATCHING: logic and call order match; retail reserves 16 more bytes of struct-return temporaries (72-byte frame, layout it@28/rec@40/extra@64) and passes an uninitialised r1 (the nothrow tag) to asdOperatorNewB. */
+/* NON_MATCHING: owner-aware allocator contract restored with retail's unset owner; list iterator/item and hidden status-result temporary layouts still differ from retail's 72-byte frame. */
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "nn/Result.h"
+#include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
@@ -32,7 +33,6 @@ struct AocListJob {
 WindowStatusResult FUN_00354608(void *parameters, void *source);
 void FUN_00234624(AocListEntry **entry, void *table, u32 index);
 u32 FUN_00234618(AocListEntry **entry);
-void *asdOperatorNewB(u32 size, ...);
 WindowStatusResult FUN_003df0c4(AocListEntry **entry, u8 *extra, AocListItem *item, s32 flag, u32 index);
 WindowStatusResult FUN_003df4dc(void *handle, void *buffer, u32 count);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
@@ -51,7 +51,8 @@ void FUN_0038ae30(AocListJob *job)
     AocListEntry *entry;
     FUN_00234624(&entry, aoc->contentTable, job->entryIndex);
     u32 itemCount = FUN_00234618(&entry);
-    u16 *ids = (u16 *)asdOperatorNewB(itemCount * 2);
+    void *owner; // Retail forwards an uninitialised owner hint in r5.
+    u16 *ids = (u16 *)asdOperatorNewB(itemCount * 2, owner);
     u32 kept = 0;
     if (ids != NULL) {
         for (u32 i = 0; i < itemCount; i++) {

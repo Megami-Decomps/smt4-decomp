@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rebuild of the map interface marker refresh; retail loads g_mapIf twice from separate pool words, copies the position with ldm/stm and lays the marker-kind switch out as a jump table whose bodies share `str r0, [r4, #28]`, none of which armcc reproduces here. */
-#include "common.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
-struct MapIfVec3 { f32 x, y, z; };
+typedef SoundActorQueuePosition MapIfVec3;
 
 /* One map interface marker: shown flag, redraw flag, a position and its kind. */
 struct MapIfMarker {
@@ -53,7 +53,6 @@ extern MapIf *g_mapIf;
 extern MapIfPlayerState g_gameState;
 
 void mapMarkerSynchronizeModelState(void *marker);
-void FUN_00291e40(u32 effect, f32 x, f32 y, f32 z);
 
 /* Brings the map interface's destination and player markers in line with the player state: shows
  * the destination marker at its cell (raised) with a kind chosen from the destination kind, hides it
@@ -64,7 +63,7 @@ void FUN_002c8858(void)
     MapIfMarker *marker = &mapIf->destinationMarker;
     if (g_gameState.destinationSet) {
         if (marker->shown == 0 && g_gameState.indoors == 0 && *((u8 *)g_mapIf + 0xCCE0) == 0)
-            FUN_00291e40(0x10001FF, g_gameState.destination.x, g_gameState.destination.y, g_gameState.destination.z);
+            FUN_00291e40(0x10001FF, g_gameState.destination);
         marker->shown = 1;
         marker->dirty = 1;
         marker->position = g_gameState.destination;

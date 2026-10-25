@@ -1,4 +1,4 @@
-/* NON_MATCHING: state switch uses comparisons instead of the retail jump table; sprite-scale getter and layer scheduling also differ. */
+/* NON_MATCHING: explicit states restore the retail jump table and named selection values restore field-load order; outgoing image arguments and speed/layer scheduling still differ. */
 #include "ui/UiSpriteState.h"
 
 extern "C" {
@@ -40,11 +40,19 @@ void FUN_0049d594(void *panel)
     efctSetSpeed(1.0f);
     FUN_0049d938(work, x, y, scale);
     efctSetSpeed(scale);
+    s32 first = work->first;
+    s32 second = work->second;
+    s32 selected = work->selected;
     FUN_00344cd0(work->controller, x, y, 0x33,
         0x50, 0x51, 0x52, 0x53, 0x54, 0x55, 0x56,
-        work->selected, work->first, work->second, 0x6a, 0);
+        selected, first, second, 0x6a, 0);
     efctSetSpeed(1.0f);
     switch (work->state) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+        break;
     case 4:
     case 5:
     case 6:

@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 27 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: separate guards restore retail comparisons, but armcc shrink-wraps the prologue after them and shares a different early-return epilogue. */
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -16,15 +16,21 @@ u32 FUN_001e9508(void)
         s32 id;
     };
     extern MapDrawSelectionView *g_mapMain;
-    RenderCtx *context = g_titleScene;
     s32 id = g_mapMain->id;
-    if (id >= 21 && id < 110 && static_cast<u32>(id - 84) >= 12 && id != 24) {
-        renderCtxPushA(context, FUN_002c5d80(5, 0));
-        FUN_001f9f64();
-        MapMain_DrawMinimapIcons();
-        renderStackPop(&g_titleScene->stackA);
-        mapEplUpdateEntriesIfAny();
-    }
+    if (id < 21)
+        return 0;
+    if (id >= 110)
+        return 0;
+    if (static_cast<u32>(id - 84) <= 11)
+        return 0;
+    if (id == 24)
+        return 0;
+    RenderCtx *context = g_titleScene;
+    renderCtxPushA(context, FUN_002c5d80(5, 0));
+    FUN_001f9f64();
+    MapMain_DrawMinimapIcons();
+    renderStackPop(&g_titleScene->stackA);
+    mapEplUpdateEntriesIfAny();
     return 0;
 }
 }

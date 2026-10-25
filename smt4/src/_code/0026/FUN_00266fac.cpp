@@ -1,5 +1,5 @@
 /* NON_MATCHING: spatial-sound VFP allocation and position-to-target copy loads differ from retail. */
-#include "common.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 struct MapHudAnimation {
     u8 unk00[0x30];
@@ -26,7 +26,6 @@ extern "C" {
 extern MapHudSelection *g_mapIf;
 extern s32 g_gameState;
 extern DeferredMapModelPosition *g_deferredMapModels;
-void FUN_00291e40(u32, f32, f32, f32);
 }
 
 /* Restart the HUD's selection animation and sound at the selected map model. */
@@ -42,8 +41,10 @@ extern "C" void FUN_00266fac(s32 mode, s32 id)
         animation->id = id;
         if (g_gameState > 100) {
             const f32 *position = g_deferredMapModels[id].position;
-            FUN_00291e40(0x10001FD, position[0] / 3.0f,
-                         position[1] / 3.0f, position[2] / 3.0f);
+            SoundActorQueuePosition soundPosition = {
+                position[0] / 3.0f, position[1] / 3.0f, position[2] / 3.0f
+            };
+            FUN_00291e40(0x10001FD, soundPosition);
         }
         animation->position[0] = 0.0f;
         animation->position[1] = 20.0f;

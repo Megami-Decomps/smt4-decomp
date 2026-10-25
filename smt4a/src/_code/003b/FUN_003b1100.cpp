@@ -34,17 +34,17 @@ u32 FUN_003b1100(void)
     FUN_00301a08(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
-        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
-            (g_btlCandidateMasks.required & entry->flags) &&
-            !(g_btlCandidateMasks.excluded & entry->flags) &&
-            ((const BattleCandidateSignedValuesView *)entry)->values[valueIndex] < 0) {
+        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
+            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
+            ((const BattleCandidateSignedValuesView *)entry)->values[valueIndex] <= -1) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
-        if (entry && ((const BattleCandidateSignedValuesView *)entry)->values[valueIndex] < 0) {
+        if (entry && ((const BattleCandidateSignedValuesView *)entry)->values[valueIndex] <= -1) {
             scrSetResult(1);
             return 1;
         }

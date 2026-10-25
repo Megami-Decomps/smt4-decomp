@@ -1,8 +1,6 @@
-/* NON_MATCHING: channel frame/output addresses are loaded after the sentinel test, and duration comparison reverses the VFP operands. */
-#include "shard/W5_W5Match7_AnimatedObject.h"
+/* NON_MATCHING: channel sampling methods now match; playback-duration VFP comparison operands and branch predicate still differ. */
+#include "gfx/CameraMotion.h"
 #include "shard/W6_W6Match2_AnimationPlayback.h"
-#include "shard/W6_W6Match6_ProjectionCamera.h"
-#include "status/StatusCamera.h"
 #include <string.h>
 
 namespace {
@@ -40,15 +38,10 @@ struct CameraMotionResource {
     u8 unk4C[0x44];
     CameraMotionClip **clips;
 };
-// The sampled target extends beyond the shared 0x38-byte CameraLookAt prefix.
-struct SampledCamera {
-    CameraLookAt camera;
-    Vec3 animationTarget;
-};
 typedef char CameraMotionLayoutCheck[
     offsetof(CameraMotionDefinition, projection) == 0x34 &&
     offsetof(CameraMotionResource, clips) == 0x90 &&
-    offsetof(SampledCamera, animationTarget) == 0x38 ? 1 : -1];
+    offsetof(CameraMotionOutput, animationTarget) == 0x38 ? 1 : -1];
 }
 
 extern "C" {
@@ -57,7 +50,26 @@ u32 FUN_00522a08(CameraMotionCurve *curve, f32 *output, f32 frame);
 u32 FUN_00198848(CameraMotionCurve *curve, Vec3 *output, f32 frame);
 void FUN_0019eb14(CameraLookAt *camera);
 
-bool FUN_003f9ac4(AnimatedObject *object, SampledCamera *output, s32 index, f32 delta)
+static __inline void cameraMotionSampleTransform(CameraMotionClip *clip,
+                                                 CameraMotionTransform *output, f32 frame)
+{
+    if (clip->transformIndex != 0xFF)
+        FUN_001986c4(clip->curves[clip->transformIndex], output, frame);
+}
+
+static __inline void cameraMotionSampleRoll(CameraMotionClip *clip, f32 *output, f32 frame)
+{
+    if (clip->rollIndex != 0xFF)
+        FUN_00522a08(clip->curves[clip->rollIndex], output, frame);
+}
+
+static __inline void cameraMotionSampleTarget(CameraMotionClip *clip, Vec3 *output, f32 frame)
+{
+    if (clip->targetIndex != 0xFF)
+        FUN_00198848(clip->curves[clip->targetIndex], output, frame);
+}
+
+bool FUN_003f9ac4(AnimatedObject *object, CameraMotionOutput *output, s32 index, f32 delta)
 {
     bool active = true;
     CameraMotionResource *resource = static_cast<CameraMotionResource *>(object->animation.resource);
@@ -67,12 +79,9 @@ bool FUN_003f9ac4(AnimatedObject *object, SampledCamera *output, s32 index, f32 
     if (clip->transformIndex == 0xFF && clip->rollIndex == 0xFF && clip->targetIndex == 0xFF)
         return false;
     CameraMotionTransform transform = definition->transform;
-    if (clip->transformIndex != 0xFF)
-        FUN_001986c4(clip->curves[clip->transformIndex], &transform, object->progress);
-    if (clip->rollIndex != 0xFF)
-        FUN_00522a08(clip->curves[clip->rollIndex], &output->camera.rollRadians, object->progress);
-    if (clip->targetIndex != 0xFF)
-        FUN_00198848(clip->curves[clip->targetIndex], &output->animationTarget, object->progress);
+    cameraMotionSampleTransform(clip, &transform, object->progress);
+    cameraMotionSampleRoll(clip, &output->camera.rollRadians, object->progress);
+    cameraMotionSampleTarget(clip, &output->animationTarget, object->progress);
     memcpy(output->camera.eye, &transform.translation, sizeof(transform.translation));
     output->camera.projection.nearClip = projection->nearClip;
     output->camera.projection.farClip = projection->farClip;

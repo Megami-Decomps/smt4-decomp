@@ -25,7 +25,7 @@ int FUN_00215bd0(void);
 int scrScriptProcessStartEntry(...);
 int gameDataGetRecordValue(void);
 int FUN_002a5e7c(...);
-int FUN_002c7ce8(...);
+int statusDownSwitchTab(...);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
 int libc_strcpy(unsigned char [36], unsigned int);
@@ -59,7 +59,7 @@ extern int FUN_002857b8(void);
 /* Supplied declaration required: FUN_002a5e7c. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int statusDownGetFlag(void);
-/* Supplied declaration required: FUN_002c7ce8. */
+/* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
 extern int FUN_002e1a18(unsigned int);
@@ -243,7 +243,7 @@ unsigned int FUN_003193a8(int param_1)
             temp_v3 = (int)*(short *)(param_1 + 0xe8);
             if (temp_v3 < 1) {
               FUN_002c85b0(0);
-              FUN_002c7ce8(0);
+              statusDownSwitchTab(0);
               FUN_002c8538(0);
               temp_v8 = gameDataGetRecordValue();
               FUN_00371c3c(temp_v8,1);
@@ -391,7 +391,7 @@ unsigned int FUN_003193a8(int param_1)
       temp_v7 = gameDataGetRecordValue();
       FUN_0038b3f8(temp_v7,1);
       FUN_002c85b0(0);
-      FUN_002c7ce8(0);
+      statusDownSwitchTab(0);
       FUN_0038b548(1);
       FUN_0023b45c(0);
       FUN_002c8538(0);

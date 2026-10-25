@@ -59,7 +59,7 @@ typedef struct EffPartsFile {
     /* 0x88 */ u32 nodesOffset;
 } EffPartsFile;
 
-void *asdLoadFileSync(const char *path, u8 *size, u32 a, u32 b);
+void *asdLoadFileSync(const char *path, u32 *size, u32 a, u32 b);
 void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void memClear(void *block, s32 size);
 void FUN_002a3d58(void *part);
@@ -85,7 +85,7 @@ static EffPartNode *effPartListNth(EffPartList *list, s32 index)
  * after the node they copy, and attached nodes are linked to their parent. */
 EffPartList *FUN_001e1a70(const char *path)
 {
-    u8 size;
+    u32 size;
     EffPartsFile *file = (EffPartsFile *)asdLoadFileSync(path, &size, 1, 0x80);
     asdDebugTrace(g_effPartsSourcePath, 1463);
     EffPartList *list = (EffPartList *)memAlloc(0x10000, 0x100, 0, 0x90, 0x10, 1);

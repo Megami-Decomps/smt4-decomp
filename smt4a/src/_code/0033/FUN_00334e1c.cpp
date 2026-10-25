@@ -42,7 +42,7 @@ enum {
 };
 
 void drawSetColorFromRGBA8(u32 rgba);
-void FUN_00230a50(s32 *x, s32 *y, s32 row, f32 scale);
+void unitGetStereoScreenPosition(s32 *x, s32 *y, s32 row, f32 scale);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 void FUN_002f752c(StatListWork *work, s32 *value, s32 *extra, s32 entry, s32 compare);
@@ -63,7 +63,7 @@ void FUN_00334e1c(StatListWork *work, s32 entry)
     s32 extraDifference = 0;
 
     drawSetColorFromRGBA8(0xFFFFFFFF);
-    FUN_00230a50(&position.first, &position.second, entry + STAT_ROW_BASE, 0.26f);
+    unitGetStereoScreenPosition(&position.first, &position.second, entry + STAT_ROW_BASE, 0.26f);
     f32 savedSpeed = jobGetScalarValue();
     efctSetSpeed(((StatDisplayTable *)g_gameGlobals.data)->rows[entry + STAT_ROW_BASE].speed);
     FUN_002f752c(work, &stat.first, &stat.second, entry, work->compareEnabled);

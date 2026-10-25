@@ -18,7 +18,7 @@ typedef char SaveWriterPayloadLayoutCheck[
     offsetof(SaveWriteBodyPrefix, mode) == 2 && sizeof(SaveWriteBodyPrefix) == 4 ? 1 : -1];
 
 extern "C" {
-SaveLoadProcessWork24 *jobGetWork(void);
+SaveLoadProcessWork24 *jobGetWork(u32 process);
 s32 FUN_001a1d08(void);
 s32 FUN_002cedbc(void);
 void asdMemFree(void *memory);
@@ -35,9 +35,9 @@ void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 extern SaveByteSettings g_byteSettings;
 
 // Build a complete save image, submit it, and publish the asynchronous write result.
-u32 FUN_002efba0(void)
+s32 FUN_002efba0(u32 process)
 {
-    SaveLoadProcessWork24 *work = jobGetWork();
+    SaveLoadProcessWork24 *work = jobGetWork(process);
     switch (work->state) {
     case 0: {
         work->bufferSize = sizeof(SaveFilePayloadIV);
@@ -46,8 +46,7 @@ u32 FUN_002efba0(void)
         titleConfigStoreOptions();
         gameDataBlocksGetSaveData()->metadata.option = work->option;
         rt_memcpy(work->buffer, gameDataBlocksGetTable(), 0x80);
-        const void *settings = configGetSettings();
-        FUN_002ad8b4(((SaveFilePayloadIV *)work->buffer)->settings, settings);
+        FUN_002ad8b4(((SaveFilePayloadIV *)work->buffer)->settings, configGetSettings());
         SaveWriteBodyPrefix *body = (SaveWriteBodyPrefix *)((SaveFilePayloadIV *)work->buffer)->save;
         __aeabi_memcpy4(body, gameDataBlocksGetSaveData(), 0x24D28);
         body->version = 3;

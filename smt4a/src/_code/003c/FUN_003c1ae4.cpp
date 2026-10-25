@@ -6,7 +6,7 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 kind, s32 *first, s32 *count);
+void FUN_00301a08(s32 kind, u32 *first, u32 *count);
 BtlMainStateA *btlGetMainState();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 void scrSetResult(s32 value);
@@ -16,10 +16,9 @@ u32 FUN_003c1ae4()
 {
     // The counter cannot enter the existing +0x0A union without raising its alignment.
     struct CounterView { u8 prefix[0xCC]; s32 pending; };
-    s32 first;
-    s32 count;
-    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), &first, &count);
-    for (s32 index = first; index < first + count; ++index) {
+    struct Selection { u32 count, first; } selection;
+    FUN_00301a08(btlResolveEntryChoice(scrGetArg(0)), &selection.first, &selection.count);
+    for (s32 index = selection.first; index < (s32)(selection.first + selection.count); ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         u64 flags = entry->flags;
         if (!(flags & g_btlCandidateMasks.unavailable) &&

@@ -1,5 +1,4 @@
-/* NON_MATCHING: retail keeps the two zero arguments in saved registers (r5/r6) and stores
- * visible/total with one strd; armcc here rematerializes 0 and stores them separately */
+/* NON_MATCHING: two-axis reset retains retail zero arguments; visible/total stores and direction truncation still differ. */
 #include "common.h"
 
 #define UNK233730_HORIZONTAL 0
@@ -24,6 +23,18 @@ void flaggedEntrySetValueA(void *list, s32 value);
 void recordTrackDirtyValue(void *list, s32 value);
 void flaggedEntrySetValueB(void *list, s32 value);
 
+static inline void resetScrollerPosition(Unk233730Scroller *scroller, s32 horizontal, s32 vertical)
+{
+    if (scroller->direction == UNK233730_HORIZONTAL) {
+        scrollOwnerSetValue(scroller->list, horizontal);
+        flaggedEntrySetValueA(scroller->list, vertical);
+    }
+    if (scroller->direction == UNK233730_VERTICAL) {
+        recordTrackDirtyValue(scroller->list, horizontal);
+        flaggedEntrySetValueB(scroller->list, vertical);
+    }
+}
+
 /* Sets the scroller up for `total` items, `visible` of them on screen along `direction`, and
  * rewinds it. */
 void FUN_00233730(Unk233730Scroller *scroller, s32 visible, s32 total, s32 direction, s32 unused,
@@ -37,14 +48,7 @@ void FUN_00233730(Unk233730Scroller *scroller, s32 visible, s32 total, s32 direc
     scroller->visible = visible;
     scroller->total = total;
     scroller->direction = direction;
-    if (scroller->direction == UNK233730_HORIZONTAL) {
-        scrollOwnerSetValue(scroller->list, 0);
-        flaggedEntrySetValueA(scroller->list, 0);
-    }
-    if (scroller->direction == UNK233730_VERTICAL) {
-        recordTrackDirtyValue(scroller->list, 0);
-        flaggedEntrySetValueB(scroller->list, 0);
-    }
+    resetScrollerPosition(scroller, 0, 0);
     scroller->dirty = 0;
 }
 

@@ -1,6 +1,5 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004767a8` (_code @ 0x4767a8, 0x42c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: native catalog request lifetime recovered; remaining aggregate temporaries and result-call contracts differ. */
+#include "addon/AocBufferRequest.h"
 
 extern "C" {
 
@@ -12,13 +11,11 @@ int FUN_00426fe4(int *, int, int);
 int recordClearWideHandle(...);
 int _ZN9Obj4279d4C1Ejj(int [3], unsigned char [1024], int);
 int FUN_00427ff4(...);
-int FUN_00429934(int *, unsigned char [16]);
-int FUN_00429c08(int *, unsigned char [16], int);
-int FUN_00429d00(unsigned char [16], unsigned int, unsigned char [1024], int);
-int FUN_00429d24(...);
+int FUN_00429934(int *, AocCatalogRequest *);
+int FUN_00429c08(int *, AocCatalogRequest *, int);
 int FUN_0043c2d4(...);
 int FUN_00473980(...);
-int aocApplicationRecreateDecoder(...);
+void aocApplicationRecreateDecoder(AocApplicationRequestView *app);
 int FUN_004760bc(void);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -56,8 +53,6 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00427ff4. */
 /* Supplied declaration required: FUN_00429934. */
 /* Supplied declaration required: FUN_00429c08. */
-/* Supplied declaration required: FUN_00429d00. */
-/* Supplied declaration required: FUN_00429d24. */
 /* Supplied declaration required: FUN_0043c2d4. */
 /* Supplied declaration required: FUN_00473980. */
 /* Supplied declaration required: aocApplicationRecreateDecoder. */
@@ -120,7 +115,6 @@ void FUN_004767a8(int param_1)
   unsigned int uStack_3c;
   int temp_v16;
   unsigned int uStack_34;
-  unsigned char temp_v17 [16];
   
   temp_v0 = g_aocMain;
   FUN_00426fe4(&temp_v8,g_aocMain + 0x28,g_aocMain + 0x18);
@@ -130,18 +124,17 @@ void FUN_004767a8(int param_1)
   if (temp_v1 < 0) {
     return;
   }
-  FUN_00429d00(temp_v17,*(unsigned int *)(temp_v0 + 0x80),temp_v6,0x400);
-  FUN_00429c08(&temp_v8,temp_v17,temp_v0 + 0x694);
+  AocCatalogRequest request(*(unsigned int *)(temp_v0 + 0x80), temp_v6, 0x400);
+  FUN_00429c08(&temp_v8, &request, temp_v0 + 0x694);
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
   *(unsigned int *)(param_1 + 0x10) = uStack_f4;
   temp_v1 = legacyResourceIdRemap(param_1 + 0xc);
   if (temp_v1 < 0) {
     recordClearWideHandle(temp_v0 + 0x28);
-    FUN_00429d24(temp_v17);
     return;
   }
   _ZN9Obj4279d4C1Ejj(temp_v12,temp_v7,0x400);
-  FUN_00429934(&temp_v8,temp_v17);
+  FUN_00429934(&temp_v8, &request);
   temp_v14 = temp_v8;
   uStack_74 = uStack_f4;
   uStack_70 = temp_v9;
@@ -246,7 +239,7 @@ void FUN_004767a8(int param_1)
     temp_v12[2] = temp_v0 + 0xe3;
     iStack_a4 = *(int *)(temp_v0 + 0x364);
   }
-  aocApplicationRecreateDecoder(temp_v0);
+  aocApplicationRecreateDecoder(reinterpret_cast<AocApplicationRequestView *>(temp_v0));
   FUN_00426e18(&temp_v8,*(unsigned int *)(temp_v0 + 0x5b0),*(unsigned int *)(temp_v0 + 0x684),0x40,temp_v12
               );
   *(unsigned int *)(param_1 + 0xc) = temp_v8;
@@ -278,12 +271,10 @@ void FUN_004767a8(int param_1)
         *(unsigned int *)(param_1 + 0x10) = uStack_f4;
         legacyResourceIdRemap(param_1 + 0xc);
       }
-      FUN_00429d24(temp_v17);
       return;
     }
   }
   recordClearWideHandle(temp_v0 + 0x28);
-  FUN_00429d24(temp_v17);
   return;
 }
 

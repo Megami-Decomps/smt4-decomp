@@ -1,5 +1,5 @@
 /* NON_MATCHING: reciprocal division result is allocated to s0 instead of retail s1; all other instructions match. */
-#include "common.h"
+#include "shard/JobWork.h"
 
 struct BackgroundFadeWork {
     u8 unk00[0x24];
@@ -9,14 +9,13 @@ struct BackgroundFadeWork {
 
 extern "C" {
 s32 scrGetArg(s32 index);
-BackgroundFadeWork *jobGetWork(u32 job);
 
 // Configure the job's fade progress and reciprocal frame duration.
 u32 scrCommSetBackgroundFadeDuration(void)
 {
     u32 job = scrGetArg(0);
     s32 duration = scrGetArg(1);
-    BackgroundFadeWork *work = jobGetWork(job);
+    BackgroundFadeWork *work = reinterpret_cast<BackgroundFadeWork *>(jobGetWork(job));
     if (duration == 0) {
         work->progress = 1.0f;
         work->step = 0.0f;

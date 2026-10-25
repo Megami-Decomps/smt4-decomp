@@ -11,7 +11,7 @@ int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
 int FUN_00358e94(...);
-int FUN_003872b8(...);
+int uiGetLayoutPointDifference(...);
 int FUN_0046ed8c(unsigned int, unsigned int, unsigned int, int);
 int VectorSignedToFloat(...);
 
@@ -37,7 +37,7 @@ extern int FUN_001834a4(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00358e94. */
-/* Supplied declaration required: FUN_003872b8. */
+/* Supplied declaration required: uiGetLayoutPointDifference. */
 /* Supplied declaration required: FUN_0046ed8c. */
 
 
@@ -256,7 +256,7 @@ void FUN_003d939c(int param_1)
     if (*(char *)(param_1 + 0x2f5) == '\0') break;
     temp_v1 = vec2GetXInt(param_1 + 0x20);
     temp_v2 = vec2GetYInt(param_1 + 0x20);
-    FUN_003872b8(param_1 + 0xac,0x10,*(int *)(param_1 + 0xb0) - 1);
+    uiGetLayoutPointDifference(param_1 + 0xac,0x10,*(int *)(param_1 + 0xb0) - 1);
     FUN_00358e94(param_1 + 0xac,(int)temp_v1,(int)temp_v2);
     temp_v8 = g_renderCtx;
     if (*(int *)(param_1 + 0x2f0) == 7) {

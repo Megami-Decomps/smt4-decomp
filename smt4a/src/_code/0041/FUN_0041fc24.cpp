@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected-slot load/address ordering and save-name copy argument scheduling differ. */
+/* NON_MATCHING: selected/applied slot comparison recovered; occupied-slot address and save-name copy scheduling still differ. */
 #include "common.h"
 #include <stddef.h>
 
@@ -59,7 +59,8 @@ void FUN_0041fc24(void *context)
     // Packed profile fields overlap opaque, unaligned storage in the shared save-load view.
     ControllerView *work = static_cast<ControllerView *>(context);
     s32 selection = work->selectedSlot;
-    if (selection == work->appliedSlot)
+    s32 applied = work->appliedSlot;
+    if (selection == applied)
         return;
     work->appliedSlot = selection;
     if (work->slotFlags[selection]) {

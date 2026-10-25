@@ -1,5 +1,6 @@
 /* NON_MATCHING: -O2 candidate; signed indexing folds into ADD, bitset stores reschedule, and lookup/default-value registers and branches differ. */
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "gamedata/GameFlags.h"
 
 struct UnlockRecord {
     /* 0x00 */ UnsignedRecordKey32 identity;
@@ -31,7 +32,7 @@ const UnlockRecord* libc_bsearch(const UnlockRecord* key, const UnlockRecord* en
                                 u32 count, u32 stride, UnlockKeyComparator* compare);
 s32 unsignedKeyRecordCompare(const UnsignedRecordKey32* left, const UnsignedRecordKey32* right);
 void saveSubtractCounterSaturating(u32 amount);
-void gameFlagSetValue(u32 flag, u32 mode, u32 value);
+
 }
 
 namespace {

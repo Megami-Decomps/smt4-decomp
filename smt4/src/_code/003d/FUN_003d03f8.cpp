@@ -22,7 +22,7 @@ extern "C" {
 s32 btlShowListedActionMessage(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 other);
 void FUN_00227d18(s32 kind);
 void FUN_00227fac(void);
-void FUN_002296f4(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 a, s32 b);
+void frameRangeExtend(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 a, s32 b);
 void FUN_0023c0d0(s32 *state, BtlUnit *unit, s32 kind, s32 amount);
 void actionCreateKindSeventeen(s32 a, BtlUnit *unit, s32 b);
 void FUN_002505c0(s32 slot, BtlUnit *unit, u32 id, s32 a, s32 b, s32 c, s32 d);
@@ -80,14 +80,14 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlUnitSkill *
         FUN_0027df30(slot, unit, skill, 0, extraEffect, -1, -1, 0, a, b, c, 0, 0);
     if (hit != 0) {
         if ((unit->skill->flags & 0x400) != 0) {
-            FUN_002296f4(state, unit, unit->skill->kind, slot, 0x3C, 0x3C);
+            frameRangeExtend(state, unit, unit->skill->kind, slot, 0x3C, 0x3C);
             btlShowListedActionMessage(state, unit, unit->skill->kind, slot + 0x3C, 0);
         } else {
-            FUN_002296f4(state, unit, skill->kind, slot, 0x1E, 0x1E);
+            frameRangeExtend(state, unit, skill->kind, slot, 0x1E, 0x1E);
             btlShowListedActionMessage(state, unit, skill->kind, slot + 0x1E, slot);
         }
     } else {
-        FUN_002296f4(state, unit, skill->kind, slot, 0x1E, 0x1E);
+        frameRangeExtend(state, unit, skill->kind, slot, 0x1E, 0x1E);
     }
     return hit;
 }

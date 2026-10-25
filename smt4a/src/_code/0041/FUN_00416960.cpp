@@ -1,8 +1,9 @@
-/* NON_MATCHING: text-pointer load and projected-coordinate arithmetic are scheduled differently; retail also retains removed message-debug hook setup/NOPs. */
+/* NON_MATCHING: text-pointer load precedes slot resets, and projected-coordinate updates reuse the X sum instead of retail's store/reload sequence; message-debug hooks are restored. */
 #include "ui/AnimatedMessageSlots.h"
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 struct PartnerMessageOwnerView {
     AnimatedMessageSlot slots[12];
@@ -21,7 +22,7 @@ typedef char PartnerMessageViewOffsets[offsetof(PartnerMessageOwnerView, source)
     offsetof(PartnerMessageBattleView, directory) == 0x4D64 ? 1 : -1];
 
 extern "C" {
-void asdMemFreeSlot(void *object);
+void asdMemFreeSlot(void **object);
 void FUN_0014e188(UiSpriteState *sprite, u32 kind, u32 color, const UiSpriteSource *source, u16 priority, f32 scale);
 void pairSetFirstResetSecond(UiSpriteState *sprite, s32 image);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 image, s32 frame);
@@ -49,7 +50,7 @@ void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector
     slot->position.x = 0.0f;
     slot->position.z = 0.0f;
     if (slot->text != NULL) {
-        asdMemFreeSlot(slot->text);
+        asdMemFreeSlot(reinterpret_cast<void **>(slot->text));
         slot->text = NULL;
     }
     slot->width = 0;
@@ -73,7 +74,9 @@ void FUN_00416960(PartnerMessageOwnerView *owner, s32 index, u32 message, Vector
     positionStateSet(slot->text, 0, 0x646464FF, 0.0f);
     objFlagsSetBits(slot->text, 8);
     objFlagsSetBits(slot->text, 0x100);
+    asdDebugHookPtr("btlPartnerMessage");
     asdTextDrawDirectoryEntry(slot->text, 3, ~0u, 0, 3, battle->directory, slot->messageId);
+    asdDebugHookVoid();
     slot->width = textMeasureLineWidth(slot->text, 0);
 }
 }

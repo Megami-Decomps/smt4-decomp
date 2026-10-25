@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the first act mask as two words (hi then lo) before the flags ldrd; otherwise identical */
 #include "battle/BattleUnitRecordState.h"
+#include "gamedata/GameFlags.h"
 
 /* What FUN_003e8bb0 reports about the unit's pending command. */
 struct BtlAiCommandInfo {
@@ -55,7 +56,7 @@ s32 FUN_004c87e0(void);
 s32 stateAtCIs4(u32 aiScript);
 s32 jobIsValid(u32 job);
 s32 gameFlagIsSet(u32 id);
-void gameFlagSetValue(u32 id, s32 a, s32 b);
+
 void sysMemClear(void *buffer, s32 size);
 BtlAiCommandInfo FUN_003e8bb0(BtlMainStateA *battle, u32 commandId);
 void FUN_004e7c04(BattleUnitRecordState *units, s32 a);

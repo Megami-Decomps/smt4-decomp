@@ -165,6 +165,11 @@ static __inline void renderCtxPushC(RenderCtx *context, int state)
     renderStackPush(&context->additional.stackC, state);
 }
 
+static __inline void renderCtxPushC(RenderCtxA *context, int state)
+{
+    renderStackPush(&context->additional.stackC, state);
+}
+
 /* Pushes the evaluated state on the context's second stack. */
 static __inline void renderCtxPushB(RenderCtx *context, int state)
 {

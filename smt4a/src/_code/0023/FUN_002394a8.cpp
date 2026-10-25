@@ -49,7 +49,7 @@ extern int jobGetWork(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0017ffa8. */
-extern int FUN_001801b8(unsigned short, unsigned char);
+extern int gameSaveTestFlag(unsigned short, unsigned char);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -139,7 +139,7 @@ unsigned int FUN_002394a8(void)
             if (((!temp_v13 && (-1 < temp_v1 && temp_v1 <= temp_v4)) && (temp_v1 < 8)) &&
                (puVar5 = *(unsigned short **)(g_npcRoom + temp_v1 * 4 + 0x28),
                puVar5 != (unsigned short *)0x0)) {
-              temp_v4 = FUN_001801b8(*puVar5,*(unsigned char *)(puVar5 + 0x29));
+              temp_v4 = gameSaveTestFlag(*puVar5,*(unsigned char *)(puVar5 + 0x29));
               temp_v19 = (unsigned int)temp_v20;
               if (temp_v4 == 0) {
                 temp_v5 = temp_v5 + temp_v1 * 0xc;
@@ -163,7 +163,7 @@ unsigned int FUN_002394a8(void)
               if ((g_npcRoom != 0) &&
                  (puVar5 = *(unsigned short **)(g_npcRoom + temp_v1 * 4 + 0x28),
                  puVar5 != (unsigned short *)0x0)) {
-                temp_v5 = FUN_001801b8(*puVar5,*(unsigned char *)(puVar5 + 0x29));
+                temp_v5 = gameSaveTestFlag(*puVar5,*(unsigned char *)(puVar5 + 0x29));
                 if (temp_v5 == 0) {
                   temp_v14 = (float)VectorSignedToFloat(5 - *(int *)(temp_v4 + temp_v1 * 0xc + 0x110),
                                                       (unsigned char)(in_fpscr >> 0x16) & 3);

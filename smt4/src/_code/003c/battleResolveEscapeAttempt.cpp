@@ -37,7 +37,7 @@ extern BattleVersionResources *DAT_00435d18;
 extern BtlEvent *g_btlEvent;
 void FUN_00229a3c(s16, u32, u32, s32, s32);
 bool FUN_00256940(BtlMain *, const BtlScript *, s32);
-void FUN_002568c4(s16, u32);
+void btlReflectQueueKind34(s16, u32);
 BattleAction *FUN_00256898(s32, u32);
 u32 FUN_0026beb4(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
@@ -59,7 +59,7 @@ void battleResolveEscapeAttempt(BattleRetreatOwner *owner, BattleRetreatAction *
     BtlMain *main = g_btlMain;
     if (reinterpret_cast<BattleRetreatMainFields *>(main)->active >= 0 &&
         FUN_00256940(main, script, 1))
-        FUN_002568c4(0, 0);
+        btlReflectQueueKind34(0, 0);
     FUN_00256898(1, 0);
     FUN_0026beb4(0, reinterpret_cast<u32>(action), 15, action->argument, 1);
     s32 chance = FUN_003bf1e4();

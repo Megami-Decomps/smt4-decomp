@@ -1,4 +1,4 @@
-/* NON_MATCHING: builds the 3-5 entry choice menu (entries 0 and 4 depend on flags 0x558 / 0x559) and its sprites; written from the decompilation, branch layout not compared with retail */
+/* NON_MATCHING: sprite scale/restart arguments and signed initial-choice switch are corrected; initial-selection flag-query control flow and same-file animation-table addressing remain. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct MenuSprite {
@@ -39,9 +39,9 @@ void FUN_00203b40(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
 void FUN_002a4964(ChoiceMenuWork *work, s32 selected);
 void paramsClearPacket(UiResourceParameters *resources);
 
-void FUN_0014e188(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flag);
-void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe);
-void uiSpriteSetImageKeyframe(MenuSprite *sprite, s32 keyframe);
+void FUN_0014e188(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, u16 flag, f32 scale);
+void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe, s32 restart);
+void uiSpriteSetImageKeyframe(MenuSprite *sprite, s32 keyframe, s32 initial);
 void uiSpriteSelectAnim(MenuSprite *sprite, s32 animation);
 
 /* Sets up the menu: frame size by entry count, the visible entries (icon, slot), the initial
@@ -89,7 +89,7 @@ void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
 
     work->end = -1;
     s32 selected;
-    switch (initial) {
+    switch ((s16)initial) {
     case 0: selected = 2; break;
     case 1: selected = 1; break;
     case 2: selected = 3; break;
@@ -105,15 +105,15 @@ void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
     FUN_002a4964(work, work->selected);
     paramsClearPacket(&work->resources);
     paramsInit(&work->resources, &DAT_0052c83c, 0x18, &DAT_0052c854, 0x30, NULL, 0, NULL, 0, &DAT_0052c884, 0x70);
-    FUN_0014e188(&work->header, 0x24, 0x57, &work->resources, 1);
-    uiSpriteSetKeyframe(&work->header, 0);
-    uiSpriteSetImageKeyframe(&work->header, 0);
+    FUN_0014e188(&work->header, 0x24, 0x57, &work->resources, 1, 1.0f);
+    uiSpriteSetKeyframe(&work->header, 0, 0);
+    uiSpriteSetImageKeyframe(&work->header, 0, 0);
     for (s32 i = 0; i < MENU_CHOICE_COUNT; i++) {
-        FUN_0014e188(&work->entries[i], 0x24, 0x57, &work->resources, 1);
-        uiSpriteSetKeyframe(&work->entries[i], 0);
-        uiSpriteSetImageKeyframe(&work->entries[i], 0);
+        FUN_0014e188(&work->entries[i], 0x24, 0x57, &work->resources, 1, 1.0f);
+        uiSpriteSetKeyframe(&work->entries[i], 0, 0);
+        uiSpriteSetImageKeyframe(&work->entries[i], 0, 0);
     }
-    FUN_0014e188(&work->cursor, 0x24, 1, &work->resources, 1);
+    FUN_0014e188(&work->cursor, 0x24, 1, &work->resources, 1, 1.0f);
     uiSpriteSelectAnim(&work->cursor, 0);
     work->cursorShown = 0;
 }

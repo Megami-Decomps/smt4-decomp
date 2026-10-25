@@ -16,7 +16,7 @@ extern "C" {
 void FUN_00297684(void *object);
 s32 objSlotsAllEmpty(void *object);
 void nodeOwnerSetTranslations(void *object, const Vec3f *translation);
-void FUN_00293e08(void *object, Vec3f scale);
+void nodeGroupSetScale(void *object, Vec3f scale);
 void objSetAnglesDegrees(void *object, const Vec3f *angles);
 void lmapSceneSetUnk134(s32 value);
 
@@ -36,7 +36,7 @@ s32 FUN_0026f784(PlacedObject *placed)
             scale.x = placed->scale;
             scale.z = placed->scale;
             scale.y = placed->scale;
-            FUN_00293e08(placed->object, scale);
+            nodeGroupSetScale(placed->object, scale);
             objSetAnglesDegrees(placed->object, &placed->angles);
             lmapSceneSetUnk134(0);
             applied = 1;

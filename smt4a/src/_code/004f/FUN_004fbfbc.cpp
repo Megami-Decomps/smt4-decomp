@@ -4,7 +4,7 @@
 
 extern "C" {
 
-ReflectAction *FUN_004102d8(ReflectContext *queue, s16 id, u32 mode, u32 options);
+
 
 /* Queues a kind-17 reflect action on `target` for `id` unless one for that target is already queued; returns the new action or NULL. */
 ReflectAction *FUN_004fbfbc(s32 id, s32 target, u32 value, f32 scale)
@@ -24,7 +24,7 @@ ReflectAction *FUN_004fbfbc(s32 id, s32 target, u32 value, f32 scale)
     if (queued) {
         return NULL;
     }
-    action = FUN_004102d8(g_btlActionReflect, id, 0, target);
+    action = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, target);
     action->value = value;
     action->kind = 17;
     action->scalarPayload.scalar = scale;

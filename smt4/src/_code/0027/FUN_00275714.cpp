@@ -3,7 +3,6 @@
 
 extern "C" {
 extern SoundActorQueue *DAT_00448c20;
-u32 FUN_00291e40(u32 soundId, SoundActorQueuePosition position);
 
 void FUN_00275714()
 {

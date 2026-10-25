@@ -19,7 +19,7 @@ extern "C" {
 void flagValueSub(u32 flag, s32 amount);
 s32 flagValueIsPositive(u32 flag);
 UnitCategoryRecord *FUN_003e4d68(u32 id);
-s32 FUN_004801ac(UnitCategoryRecord *unit, u32 flag, s32 apply);
+s32 itemApplyPercentageHpHeal(UnitCategoryRecord *unit, u32 flag, s32 apply);
 void scrollOwnerSelectIndex(void *cursor, s32 column);
 void FUN_002a4964(void *cursor, s32 row);
 void statusPanelSetOpen(s32 open);
@@ -33,7 +33,7 @@ void FUN_004be49c(Obj25C *menu)
         return;
     }
     UnitCategoryRecord *unit = FUN_003e4d68((u16)menu->ids[menu->selectionIndex.selected]);
-    if (FUN_004801ac(unit, menu->unk334, 1)) {
+    if (itemApplyPercentageHpHeal(unit, menu->unk334, 1)) {
         menu->flags[menu->selectionIndex.selected] = 0;
         s32 next = findNextEnabledUnit(menu, menu->selectionIndex.selected);
         if (next >= 0) {

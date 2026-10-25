@@ -1,16 +1,16 @@
 /* NON_MATCHING: readable rewrite of the shake job update; the build fuses the old-offset loads into one vldmia, hoists the 0.01f constant and keeps the sign selects in different registers than retail, so the three-way branch layout also differs. */
 #include "event/bustupEvent/BustupShake.h"
+#include "shard/JobWork.h"
 
 
 extern "C" {
-ShakeJobWork *jobGetWork(u32 job);
 s32 FUN_00184964(s32 minimum, s32 maximum);
 
 // Picks a new random shake offset (opposing the old direction while it is moving), publishes it and advances the timer;
 // returns -1 once the duration is over and the offset has been cleared.
 s32 FUN_002ac078(u32 job)
 {
-    ShakeJobWork *work = jobGetWork(job);
+    ShakeJobWork *work = reinterpret_cast<ShakeJobWork *>(jobGetWork(job));
     f32 one = 1.0f;
     f32 amplitudeX = work->amplitudeX;
     f32 amplitudeY = work->amplitudeY;

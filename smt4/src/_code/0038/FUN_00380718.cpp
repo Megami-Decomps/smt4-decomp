@@ -1,5 +1,5 @@
+/* NON_MATCHING: signed adjacent flags match; final list-insertion argument setup remains reversed. */
 #include "classes/Obj421aa4.h"
-/* NON_MATCHING: adjacent flag addressing and the final list-insertion argument setup differ. */
 #include "common.h"
 
 struct SoundLoadSlot;
@@ -34,8 +34,8 @@ struct SoundLoadSlot {
     /* 0x450 */ u32 unk450;
     /* 0x454 */ u32 unk454;
     /* 0x458 */ u8 unk458[4];
-    /* 0x45c */ u8 state;
-    /* 0x45d */ u8 active;
+    /* 0x45c */ s8 state;
+    /* 0x45d */ s8 active;
     /* 0x45e */ u8 unk45e;
 };
 struct SoundTaskManager;

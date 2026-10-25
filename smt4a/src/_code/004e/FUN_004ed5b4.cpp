@@ -25,7 +25,7 @@ int FUN_004c571c(...);
 int FUN_004c8ee0(...);
 int FUN_004c9160(...);
 int clearTwo200Buffers(unsigned int);
-int FUN_004fb670(int, unsigned int *);
+int btlQueueDuplicateSuppressedAction(int, unsigned int *);
 int FUN_004fcffc(int, int, unsigned int, int);
 int FUN_004fd508(int, unsigned int *, int, unsigned int);
 int btlReflectRequestPairScalar(int, unsigned int *, int);
@@ -121,7 +121,7 @@ extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: FUN_004eb838. */
 extern int FUN_004f2708(int, int, unsigned int);
 /* Supplied declaration required: clearTwo200Buffers. */
-/* Supplied declaration required: FUN_004fb670. */
+/* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fcffc. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: btlReflectRequestPairScalar. */
@@ -325,7 +325,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
       if (((*(int *)(g_btlCamera + 0x7cc) != (int)*(short *)(*param_1 + 0x2004)) &&
           (-1 < *(int *)(g_btlCamera + 0x7cc))) &&
          (temp_v19 = FUN_004f2708(g_btlCamera,*param_1,1), temp_v19 != 0)) {
-        FUN_004fb670(0,param_2);
+        btlQueueDuplicateSuppressedAction(0,param_2);
       }
       temp_v27[0] = 1;
       btlReflectRequestPairScalar(1,param_2,(int)*(short *)(*param_1 + 0x2004));

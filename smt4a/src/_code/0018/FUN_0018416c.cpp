@@ -4,7 +4,7 @@
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
 s32 gameFlagIsSet(u32);
-u16 FUN_0019e52c(u32);
+u16 FUN_0019e52c(u16);
 
 // Check whether the unit is in the unlocked portion of either saved availability list.
 u32 FUN_0018416c(u32 unitId)
@@ -23,13 +23,17 @@ u32 FUN_0018416c(u32 unitId)
     AvailabilityView *save = reinterpret_cast<AvailabilityView *>(&g_gameDataBlocks.saveBlock->save.sub);
     if (gameFlagIsSet(0x4F6)) {
         for (s32 i = 0; i < 20; ++i) {
+            u16 id = save->ordered[i].id;
             u16 value = save->ordered[i].value & 0x3FF;
             if (previous != value) {
                 rank = i + 1;
                 previous = value;
             }
-            if (save->ordered[i].id == unitId)
-                return rank <= 10;
+            if (id == unitId) {
+                if (rank <= 10)
+                    return 1;
+                return 0;
+            }
         }
     }
     if (gameFlagIsSet(0x4F7)) {
@@ -38,7 +42,7 @@ u32 FUN_0018416c(u32 unitId)
             u32 category = save->categories[i].id;
             for (s32 variant = 0; variant < 3; ++variant) {
                 if (category - 1 < 8) {
-                    u16 key = 0;
+                    s32 key = 0;
                     switch (category) {
                     case 1: key = 0xAE; break;
                     case 2: key = 0xAF; break;

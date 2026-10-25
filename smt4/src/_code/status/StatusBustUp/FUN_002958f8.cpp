@@ -35,9 +35,7 @@ void FUN_002958f8(s32 portrait, s32 isDevil)
                     return;
                 }
                 s8 *references = static_cast<s8 *>(DAT_0044e158.workB);
-                s8 remaining = references[portrait] - 1;
-                references[portrait] = remaining;
-                if (remaining > 0) {
+                if (--references[portrait] > 0) {
                     return;
                 }
                 if (asdTMTexTableNodeIsLoaded(0x23, portrait)) {
@@ -53,9 +51,7 @@ void FUN_002958f8(s32 portrait, s32 isDevil)
         }
     }
     s8 *references = static_cast<s8 *>(DAT_0044e158.workA);
-    s8 remaining = references[portrait] - 1;
-    references[portrait] = remaining;
-    if (remaining > 0) {
+    if (--references[portrait] > 0) {
         return;
     }
     if (asdTMTexTableNodeIsLoaded(0x17, portrait)) {

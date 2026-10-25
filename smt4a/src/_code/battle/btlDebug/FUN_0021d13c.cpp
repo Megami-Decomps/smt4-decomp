@@ -38,7 +38,7 @@ int FUN_0019de98(...);
 int gameGetSlotRecord(...);
 int FUN_0020acd8(...);
 int FUN_0021a6c8(...);
-int FUN_0028c620(...);
+int btlCommandResolveSelectedTarget(...);
 int FUN_002ccde8(...);
 int FUN_0038b3f8(...);
 int devilIsTextureLoaded(...);
@@ -176,7 +176,7 @@ extern int useCounterIsFinished(void);
 extern int FUN_0026c3a0(void);
 /* Supplied declaration required: FUN_00270104. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_0028c620. */
+/* Supplied declaration required: btlCommandResolveSelectedTarget. */
 /* Supplied declaration required: btlMainGetUnk14. */
 extern int FUN_00291e14(void);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
@@ -1784,7 +1784,7 @@ LAB_0021fbdc:
         *(unsigned int *)(param_1 + 0x3c90) = 0;
         *(unsigned int *)(param_1 + 0x3c94) = 0;
         if (temp_v4 != 7) {
-          FUN_0028c620(param_1);
+          btlCommandResolveSelectedTarget(param_1);
         }
         else {
           *(unsigned int *)(param_1 + 0x3c98) = 0;
@@ -1859,7 +1859,7 @@ LAB_0021fbdc:
             *(unsigned int *)(param_1 + 0x3c94) = 0;
             if (temp_v4 != 7) {
               temp_v4 = param_1;
-              FUN_0028c620();
+              btlCommandResolveSelectedTarget();
               temp_v10 = (unsigned int)temp_v23;
               if (temp_v4 != 0) break;
             }

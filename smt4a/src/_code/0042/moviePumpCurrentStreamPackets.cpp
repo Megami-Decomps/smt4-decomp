@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail frame44 versus direct SDK outputs32, timestamp-load grouping and hoisted owner-base scheduling differ; optimization candidate. */
+/* NON_MATCHING: retail reserves a 44-byte packet-output frame, tests timestamp words separately and retains player+0x500 for the prepared flag; the direct SDK-output locals use 32 bytes and different base scheduling. */
 #include "shard/W6_W6Match7_MoviePacketPump.h"
 
 extern "C" {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: selection range setup corrected; combatant flag alignment and mask-chain scheduling still differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -24,12 +24,12 @@ u32 FUN_003a8928()
     } else if (kind == 3) {
         property = 11;
     }
-    struct Selection { s32 first; s32 count; } selection;
+    s32 first, count;
     u32 choice = btlResolveEntryChoice(scrGetArg(1));
-    FUN_00301a08(choice, &selection.first, &selection.count);
+    FUN_00301a08(choice, &first, &count);
     // These words cannot enter the shared union at unaligned +0x0a without shifting its fields.
     struct PropertyView { u8 prefix[0x74]; s32 values[12]; };
-    for (s32 index = selection.first; index < selection.first + selection.count; ++index) {
+    for (s32 index = first; index < count + first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         const PropertyView *properties = reinterpret_cast<const PropertyView *>(entry);
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&

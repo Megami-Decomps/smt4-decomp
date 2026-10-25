@@ -10,7 +10,7 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 f
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 btlTalkUpdateIfPresent(u32 process);
 void btlTalkJobRelease(u32 process);
-void __aeabi_memset4(void *destination, u32 bytes, u32 value);
+void __aeabi_memset4(void *destination, u32 bytes, s32 value);
 void btlUiPanelStart(void *ui);
 extern BtlTalkA *g_btlTalk;
 extern void *g_btlUiBlock;

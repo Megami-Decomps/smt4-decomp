@@ -1,5 +1,5 @@
 #include "battle/btlScript.h"
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -20,13 +20,12 @@ typedef struct Unit {
 } Unit;
 
 s32 scrGetArg(u32 index);
-Unit *btlUnitGet(u32 unit);
 
 /* Script command: sets the script unit's slot to mode 2 with the script's argument. */
 u32 FUN_002e3b30(void)
 {
     s32 arg = scrGetArg(0);
-    UnitSlot *slot = &btlUnitGet(g_btlScriptUnit)->data->slot;
+    UnitSlot *slot = &reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->slot;
 
     slot->mode = 2;
     slot->arg = arg;

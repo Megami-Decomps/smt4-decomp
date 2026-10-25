@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038f924` (_code @ 0x38f924, 0x2e4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: callback handle forwarding recovered; render-stack state, text lookup arguments and integer-to-float rendering remain decompiler-shaped. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -33,12 +32,12 @@ extern int curveEvaluateStandard(unsigned char *, unsigned int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: FUN_002bf4f8. */
-extern int jobGetWork(void);
+extern int jobGetWork(unsigned int task);
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
-unsigned int FUN_0038f924(void)
+int FUN_0038f924(unsigned int task)
 
 {
 /* irregular: irregular input(s): in_fpscr; 8 native warning(s); review required */
@@ -61,7 +60,7 @@ unsigned int FUN_0038f924(void)
   unsigned int temp_v14 [5];
   unsigned int temp_v15;
   
-  temp_v3 = jobGetWork();
+  temp_v3 = jobGetWork(task);
   temp_v2 = g_aocMain;
   temp_v11 = *(unsigned int *)(temp_v3 + 0x1798);
   FUN_002c39a4(g_titleScene);

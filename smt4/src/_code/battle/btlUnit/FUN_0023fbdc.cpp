@@ -60,7 +60,7 @@ extern ReflectLayouts DAT_00439a20;
 extern u32 g_btlUiBlock;
 void FUN_0024082c(BtlMain *btl, s32 frames);
 void FUN_00254f58(ReflectBattle *battle);
-s32 FUN_0027e6f4(ReflectBattle *battle, s32 mode);
+s32 btlFindNthActiveSpecialEntry(ReflectBattle *battle, s32 mode);
 void btlSetSelectedListedValue(s32 value);
 void FUN_003ae720(u32 block, s32 mode);
 void FUN_00240678(ReflectTask *task, ReflectBattle *battle);
@@ -88,7 +88,7 @@ void FUN_0023fbdc(ReflectTask *task, ReflectBattle *battle)
         if ((*phase & 2) != 0) {
             FUN_00254f58(battle);
             *phase |= 0x200000;
-            if (FUN_0027e6f4(battle, 1) < 0 && (battle->flags2 & 0x20) == 0) {
+            if (btlFindNthActiveSpecialEntry(battle, 1) < 0 && (battle->flags2 & 0x20) == 0) {
                 btlSetSelectedListedValue(3);
             }
         } else {

@@ -3,7 +3,7 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0();
@@ -15,12 +15,12 @@ void FUN_0041c45c(const UiScaledDrawPosition *position, const SpriteInfo *sprite
     s32 x = position->x + sprite->x;
     s32 y = position->y + sprite->y;
     f32 speed = position->speed;
-    RenderCtx *context = g_renderCtx;
-    context->blendStateView.state.push(packNibblesAndByte(6, 1, 0));
+    RenderCtxA *context = g_renderCtx;
+    renderCtxPushB(context, packNibblesAndByte(6, 1, 0));
     efctSetSpeed(speed);
     FUN_00183bb0();
     FUN_00164b5c(2, 0x2b, 6, x, y, 2);
-    g_renderCtx->blendStateView.state.pop();
+    renderStackPop(&g_renderCtx->stackB);
     efctSetSpeed(1.0f);
 }
 }

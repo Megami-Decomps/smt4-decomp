@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached scene and typed cell indexing differ in load scheduling, VFP allocation, and neighbor-address formation. */
+/* NON_MATCHING: indexed neighbor accesses recover retail cell offsets; spawn-path load scheduling and VFP/register allocation still differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
 
@@ -39,12 +39,12 @@ void lmapSceneRestoreEntryPosition(void)
     LmapFlagData *flags = reinterpret_cast<LmapFlagData *>(gameFlagsGetBlock());
     f32 heading = 0.0f;
     s32 spawnIndex = lmapGetSpawnIndex();
-    LmapScene *scene = g_lmapScene;
     if (spawnIndex != 0 && spawnIndex < 100) {
         const LmapSpawn *spawn = &g_lmapSpawns[spawnIndex];
         f32 x = spawn->x * 700.0f + 350.0f;
         f32 z = spawn->z * 700.0f + 350.0f;
         f32 spawnHeading = spawn->heading;
+        LmapScene *scene = g_lmapScene;
         scene->position.x = x;
         scene->position.y = 0.0f;
         scene->position.z = z;
@@ -56,22 +56,23 @@ void lmapSceneRestoreEntryPosition(void)
         g_lmapView->heading = spawnHeading;
         return;
     }
-    LmapCell *cell = &flags->cells[flags->z * 15 + flags->x];
+    s32 cellIndex = flags->z * 15 + flags->x;
     f32 x = flags->x * 700.0f + 350.0f;
     f32 z = flags->z * 700.0f + 350.0f;
+    LmapScene *scene = g_lmapScene;
     scene->position.x = x;
     scene->position.y = 0.0f;
     scene->position.z = z;
     scene->targetPosition.x = x;
     scene->targetPosition.y = 0.0f;
     scene->targetPosition.z = z;
-    if (cell[-15].kind == 2)
+    if (flags->cells[cellIndex - 15].kind == 2)
         heading = 180.0f;
-    if (cell[15].kind == 2)
+    if (flags->cells[cellIndex + 15].kind == 2)
         heading = 0.0f;
-    if (cell[-1].kind == 2)
+    if (flags->cells[cellIndex - 1].kind == 2)
         heading = 270.0f;
-    if (cell[1].kind == 2)
+    if (flags->cells[cellIndex + 1].kind == 2)
         heading = 90.0f;
     scene->heading = heading;
     scene->targetHeading = heading;

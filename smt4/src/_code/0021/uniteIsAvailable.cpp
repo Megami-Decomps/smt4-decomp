@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc decomposes the blocking-flag offset into two adds instead of retail's add and indexed load. */
 #include "shard/W5_W5Match2_UniteWork.h"
 
 extern "C" {

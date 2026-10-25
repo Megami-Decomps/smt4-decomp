@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214324` (_code @ 0x214324, 0xa70 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
 int npcRoomDestroy(void);
 int buttonHelpSetSelectedId(...);
-int gameFlagSetValue(...);
 
 int textFormatBuffer(...);
 int asdSequenceRequest(...);
@@ -61,7 +61,7 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 /* Supplied declaration required: jobSetIntensity. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00168980. */
-extern int FUN_001801b8(unsigned short, unsigned char);
+extern int gameSaveTestFlag(unsigned short, unsigned char);
 extern int asdTMTexTableNodeIsLoaded(unsigned int, unsigned short);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
@@ -92,7 +92,6 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
 /* Supplied declaration required: eventTexAddHandle. */
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_00214324(void)
@@ -438,11 +437,11 @@ LAB_00214b50:
     }
     temp_v7 = gameFlagIsSet(0x295);
     if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x296), temp_v7 == 0)) {
-      gameFlagSetValue(0x296,1);
+      gameFlagSetValue(0x296, 1, 1);
     }
     temp_v7 = gameFlagIsSet(0x297);
     if ((temp_v7 != 0) && (temp_v7 = gameFlagIsSet(0x298), temp_v7 == 0)) {
-      gameFlagSetValue(0x298,1);
+      gameFlagSetValue(0x298, 1, 1);
     }
     npcRoomDestroy();
     return 0xffffffff;
@@ -452,7 +451,7 @@ LAB_00214b50:
     do {
       puVar10 = (unsigned short *)puVar2[temp_v7 + 10];
       if ((puVar10 != (unsigned short *)0x0) &&
-         (temp_v5 = FUN_001801b8(*puVar10,*(unsigned char *)(puVar10 + 0x29)), temp_v5 == 0)) {
+         (temp_v5 = gameSaveTestFlag(*puVar10,*(unsigned char *)(puVar10 + 0x29)), temp_v5 == 0)) {
         if ((int)puVar2[temp_v7 * 3 + 0x42] < (int)puVar2[temp_v7 * 3 + 0x43]) {
           puVar2[temp_v7 * 3 + 0x42] = puVar2[temp_v7 * 3 + 0x42] + 1;
         }

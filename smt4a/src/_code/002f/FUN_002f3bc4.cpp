@@ -19,7 +19,7 @@ extern UniteWork *g_unite;
 UnitRecord *slotRecordFindById(u32 id);
 void unitRecordBuild(s32 id, UnitRecord *out);
 void __aeabi_memcpy4(void *out, const void *source, u32 size);
-void FUN_004da6e0(void *context, UnitRecord *first, UnitRecord *second,
+void recordMergeByteMasks(void *context, UnitRecord *first, UnitRecord *second,
                   s32 option, UnitRecord *out);
 void FUN_0028a538(u32 resultId, UnitRecord *first, UnitRecord *second);
 s32 arrayContainsU16(const u16 *skills, s32 count, u16 skill);
@@ -38,7 +38,7 @@ u32 FUN_002f3bc4(UnitRecord *out, s32 index, s32 mode, u32)
         UnitRecord *second = slotRecordFindById(pair->secondId);
         if (!first || !second)
             return 0;
-        FUN_004da6e0(work->context, first, second, 0, out);
+        recordMergeByteMasks(work->context, first, second, 0, out);
         FUN_0028a538(pair->resultId, first, second);
         for (s32 i = 0; i < 24; ++i) {
             if (work->inheritanceA.skills[i] != 0 &&

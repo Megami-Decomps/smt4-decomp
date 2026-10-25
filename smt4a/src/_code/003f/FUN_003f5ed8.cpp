@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP register allocation and the layout of the window-index stores differ from retail; the update logic is the same. */
+/* NON_MATCHING: the visible-window loop remains partially unrolled rather than retail's straight-line stores, changing saved registers and the dialog call frame. */
 #include "common.h"
 
 extern "C" {
@@ -24,7 +24,8 @@ typedef struct DialogWork {
     /* 0x5D0 */ f32 blink;
     /* 0x5D4 */ u8 unk5d4[0xC];
     /* 0x5E0 */ u16 *selected;
-    /* 0x5E4 */ u16 ids[1];
+    /* 0x5E4 */ u16 unk5e4;
+    /* 0x5E6 */ u16 ids[1];
 } DialogWork;
 
 typedef struct DialogWorkView {
@@ -58,11 +59,11 @@ void FUN_003f5ed8(DialogWork *work)
     FUN_00163aa4(work->pulseB, 1.0f);
     FUN_00163aa4(work->pulseC, 1.0f);
     work->blinkTimer--;
-    if (work->blinkTimer < 1) {
+    if (work->blinkTimer <= 0) {
         work->blinkTimer = 30;
         work->blink = 1.0f;
-        work->blink -= 0.053333335f;
-    } else if (work->blinkTimer > 15) {
+    }
+    if (work->blinkTimer > 15) {
         work->blink -= 0.053333335f;
     }
     if (work->blinkTimer < 15) {
@@ -75,9 +76,10 @@ void FUN_003f5ed8(DialogWork *work)
 
     if (work->selectedId != id) {
         s32 *window = (s32 *)((u8 *)work + 0x6B4);
+        s32 offset = work->offset;
 
         for (s32 i = 0; i < 9; i++) {
-            window[i] = work->offset + i - 5;
+            window[i] = offset + i - 5;
         }
     }
     work->selectedId = id;

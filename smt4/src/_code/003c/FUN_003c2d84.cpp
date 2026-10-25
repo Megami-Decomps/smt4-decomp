@@ -1,4 +1,4 @@
-/* NON_MATCHING: The initial mode load uses r0 and a separate record-address add instead of retail's r1 load with writeback. */
+/* NON_MATCHING: named mode snapshot and record pointer restore the post-indexed mode load; only the two saved-argument moves are reversed. */
 #include "gfx/TrackedRecord.h"
 
 extern "C" {
@@ -13,10 +13,12 @@ u32 FUN_0029efc0(FlaggedEntry *record);
 void FUN_003c2d84(TrackedRecordOwner *owner, u32 value)
 {
     u32 tracked;
-    if (owner->mode == 1) {
-        tracked = FUN_0029e93c(&owner->record);
+    u32 mode = owner->mode;
+    FlaggedEntry *record = &owner->record;
+    if (mode == 1) {
+        tracked = FUN_0029e93c(record);
     } else {
-        tracked = FUN_0029efc0(&owner->record);
+        tracked = FUN_0029efc0(record);
     }
     if (owner->mode == 0) {
         scrollOwnerSetValue(&owner->record, tracked);

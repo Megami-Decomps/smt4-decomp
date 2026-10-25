@@ -1,5 +1,6 @@
 /* NON_MATCHING: Popup failure-block placement and countdown-store predication differ. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -11,7 +12,7 @@ extern s32 DAT_005f1ac0;
 s32 gameFlagStateIsOne(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 range);
-s32 gameFlagSetValue(s32 flag, s32 value, s32 mode);
+
 s32 FUN_002d8b58(u32 group, u32 entry);
 
 void FUN_002240f0(void)

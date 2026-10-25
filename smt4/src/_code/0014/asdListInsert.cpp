@@ -1,4 +1,3 @@
-/* NON_MATCHING: one instruction scheduled differently: retail adds the 1 of the negative-index adjustment before adding the count, ahead of the head load */
 #include "common.h"
 
 extern "C" {
@@ -60,7 +59,8 @@ s32 asdListInsert(AsdList *list, AsdListNode *node, s32 index)
         list->head = node;
     } else {
         if (index < 0) {
-            index += count + 1;
+            ++index;
+            index += count;
         }
         at = asdListFind(list, index);
         prev = at->prev;

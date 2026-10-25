@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final slot value is loaded with `ldrsh` (retail `ldrh`) and the +0x2004 store address comes from a literal pool word; retail forms r1 = list + 0x2000 and stores at [r1, #4]. */
+/* NON_MATCHING: slot publication uses the native unsigned halfword value; state subobject store still uses a pooled0x2004 offset instead of base+0x2000 with displacement4. */
 #include "common.h"
 
 extern "C" {
@@ -8,6 +8,7 @@ extern "C" {
 typedef struct SlotState {
     /* 0x0 */ u8 unk0[4];
     /* 0x4 */ s16 current;          /* the slot value in use, -1 when there is none */
+    void setCurrent(u32 value) { current = value; }
 } SlotState;
 
 typedef struct SlotList {
@@ -35,15 +36,15 @@ void FUN_003e892c(SlotList *list)
             break;
         }
     } while (list->slots[list->cursor] < 0);
-    s16 value;
+    u32 value;
 
     if (list->cursor >= 0) {
-        value = list->slots[list->cursor];
+        value = static_cast<u16>(list->slots[list->cursor]);
     } else {
         list->cursor = 0;
         value = -1;
     }
-    list->state.current = value;
+    list->state.setCurrent(value);
 }
 
 }

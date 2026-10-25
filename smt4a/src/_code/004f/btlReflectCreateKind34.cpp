@@ -1,15 +1,13 @@
-#include "common.h"
-struct ReflectionEntry {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u8 state;
-    /* 0x5 */ u8 unk5[19];
-    /* 0x18 */ u32 first;
-    /* 0x1C */ u8 unk1C[12];
-    /* 0x28 */ u32 second;
-};
+#include "battle/btlReflect.h"
+
 extern "C" {
-extern void *g_btlActionReflect;
-ReflectionEntry *FUN_004102d8(void *reflection,s32 id,u32 category,u32 options);
 /* Creates reflection state 52 with two arguments. */
-ReflectionEntry *btlReflectCreateKind34(s32 id,u32 options,u32 first,u32 second){ReflectionEntry *entry=FUN_004102d8(g_btlActionReflect,(s16)id,0,options);entry->state=52;entry->second=second;entry->first=first;return entry;}
+ReflectAction *btlReflectCreateKind34(s32 id, u32 options, u32 first, u32 second)
+{
+    ReflectAction *entry = btlQueueReflectAction(g_btlActionReflect, (s16)id, 0, options);
+    entry->kind = 52;
+    entry->value = second;
+    entry->wordValues.unk18 = first;
+    return entry;
+}
 }

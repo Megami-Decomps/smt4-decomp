@@ -1,4 +1,4 @@
-/* NON_MATCHING: cost/level registers are reversed and the default percentage loads before its condition. */
+/* NON_MATCHING: cost and incoming level occupy exchanged saved registers; conditional default percentage now matches. */
 #include "common.h"
 
 struct DevilLevelRecord {
@@ -18,12 +18,14 @@ extern "C" u32 devilCalculateRankCost(u32 id, s32 rank, s32 level)
     u32 *costs = (u32 *)dataTableGetEntries(dataTableGet(9, 1));
     u32 cost = costs[rank - 1];
     s32 difference = level - devilGetRecord(id)->level + 1;
-    u32 percent = 100;
+    u32 percent;
     if (difference > 0) {
         if (difference > 10)
             difference = 10;
         u16 *percentages = (u16 *)dataTableGetEntries(dataTableGet(9, 2));
         percent = percentages[difference - 1];
+    } else {
+        percent = 100;
     }
     return cost * percent / 100;
 }

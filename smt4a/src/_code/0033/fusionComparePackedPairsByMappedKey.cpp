@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; pair-table address folding adds a 0x13b8 literal and inlined member-ID/record registers differ. */
+/* NON_MATCHING: pair-table address folding adds a 0x13b8 literal and member-ID/record register lifetimes differ. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 

@@ -98,7 +98,7 @@ extern char s_SAVE_EPL__0059f006[10]; /* 0x59f006 */
 extern char s_LOAD_EPL__0059f010[10]; /* 0x59f010 */
 
 /* Supplied declaration required: textFormatBuffer. */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: padButtonRepeat. */
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: memAlloc. */
@@ -217,13 +217,13 @@ LAB_00388cd0:
           if (temp_v4 == 0) goto LAB_00388d64;
         }
         temp_v14 = 1;
-        temp_v4 = FUN_00163fd4(7);
-        if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x18), temp_v4 != 0)) {
+        temp_v4 = slotIsActive(7);
+        if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x18), temp_v4 != 0)) {
           temp_v8 = temp_v8 + 10;
         }
         else {
-          temp_v4 = FUN_00163fd4(8);
-          if ((temp_v4 == 0) && (temp_v4 = FUN_00163fd4(0x1c), temp_v4 == 0)) {
+          temp_v4 = slotIsActive(8);
+          if ((temp_v4 == 0) && (temp_v4 = slotIsActive(0x1c), temp_v4 == 0)) {
             temp_v8 = temp_v8 + 1;
           }
           else {
@@ -235,8 +235,8 @@ LAB_00388cd0:
 LAB_00388c50:
         if (temp_v8 == 0) goto LAB_00388cd0;
         temp_v14 = 1;
-        temp_v4 = FUN_00163fd4(7);
-        if ((temp_v4 != 0) || (temp_v4 = FUN_00163fd4(0x18), temp_v4 != 0)) {
+        temp_v4 = slotIsActive(7);
+        if ((temp_v4 != 0) || (temp_v4 = slotIsActive(0x18), temp_v4 != 0)) {
           if (temp_v8 >= 10) {
             temp_v8 = temp_v8 - 10;
           }
@@ -245,8 +245,8 @@ LAB_00388c50:
           }
         }
         else {
-          temp_v4 = FUN_00163fd4(8);
-          if ((temp_v4 == 0) && (temp_v4 = FUN_00163fd4(0x1c), temp_v4 == 0)) {
+          temp_v4 = slotIsActive(8);
+          if ((temp_v4 == 0) && (temp_v4 = slotIsActive(0x1c), temp_v4 == 0)) {
             temp_v8 = temp_v8 - 1;
           }
           else if (temp_v8 >= 100) {
@@ -588,13 +588,13 @@ LAB_003894e4:
 LAB_00389604:
   temp_v11 = 1;
   FUN_003874ec(0);
-  temp_v3 = FUN_00163fd4(0x18);
+  temp_v3 = slotIsActive(0x18);
   if (temp_v3 != 0) {
     temp_v11 = 2;
     FUN_003874ec(1);
   }
   else {
-    temp_v3 = FUN_00163fd4(0x1c);
+    temp_v3 = slotIsActive(0x1c);
     if (temp_v3 != 0) {
       temp_v11 = 4;
       FUN_003874ec(1);

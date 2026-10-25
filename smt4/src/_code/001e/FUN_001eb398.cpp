@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r6, [pc, #120] differs from recovered ldr r6, [pc, #116]. */
+/* NON_MATCHING: global-base loads are scheduled after the frame comparison and command index/base register roles differ. */
 #include "common.h"
 
 struct CommandEntryView {

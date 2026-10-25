@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the enabled byte through a second base (marker + 0xB00, offset 0x78) and swaps r3/ip for the state pointer; the rest matches. */
+/* NON_MATCHING: signed enable flag recovers the split address, but prologue placement and state/marker scratch registers still differ. */
 #include "common.h"
 
 extern "C" {
@@ -14,7 +14,7 @@ typedef struct LmapMarkerModel {
 } LmapMarkerModel;
 
 typedef struct LmapMarker {
-    /* 0x00 */ u8 enabled;
+    /* 0x00 */ s8 enabled;
     /* 0x01 */ u8 shown;
     /* 0x02 */ u8 unk02[0x86];
 } LmapMarker;

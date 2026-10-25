@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite with a per-slot roll helper compiles (218 vs 236 rows); the zone-to-slot assignment is inferred from the branch layout and retail shares the re-roll blocks differently */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 // Current map block header: kind 1 carries the (area, floor) pair of the player's position.
 struct MapBlock {
@@ -10,7 +11,7 @@ struct MapBlock {
 
 extern "C" {
 
-void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+
 s32 gameFlagIsSet(u32 flag);
 s32 randNextInRange(s32 range);
 MapBlock* gameGetMapBlock(void);

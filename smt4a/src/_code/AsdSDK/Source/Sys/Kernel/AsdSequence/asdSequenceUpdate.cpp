@@ -5,13 +5,10 @@ extern "C" {
 extern AsdSequence g_asdSequence;
 
 void asdMemFree(void *block);
-
 /* The sequence's process callback: runs the current state's update and the idle state's, then
  * performs a pending transition (or falls back to the idle state). Always returns 0. */
 s32 asdSequenceUpdate(u32 handle)
 {
-    AsdSeqState *states;
-
     if ((g_asdSequence.current < 0 || g_asdSequence.states[g_asdSequence.current].update() == 0) &&
         g_asdSequence.states[0].update() == 0) {
         if (g_asdSequence.next != -1) {

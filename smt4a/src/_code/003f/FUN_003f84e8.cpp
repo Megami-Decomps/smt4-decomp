@@ -1,4 +1,4 @@
-/* NON_MATCHING: parameter argument stores and resource-bundle literal alias differ. */
+/* NON_MATCHING: resource bundle relocation now agrees; paramsInit outgoing argument-store scheduling still differs. */
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
@@ -13,7 +13,7 @@ typedef char SpritePanelResourceOffsets[
     sizeof(SpritePanelResourceBundle) == 0x22C ? 1 : -1];
 
 extern "C" {
-extern const SpritePanelResourceBundle DAT_0052d140;
+extern const SpritePanelResourceBundle g_spritePanelResourceBundle;
 void paramsClearPacket(UiResourceParameters *);
 
 void FUN_0014e188(UiSpriteState *, u32, s32, UiResourceParameters *, u32, f32);
@@ -35,9 +35,9 @@ void FUN_003f84e8(void *work)
         offsetof(PanelView, sprites) == 0x16C && sizeof(PanelView) == 0x5CC ? 1 : -1];
     PanelView *panel = (PanelView *)work;
     paramsClearPacket(&panel->parameters);
-    paramsInit(&panel->parameters, DAT_0052d140.firstChunk, sizeof(DAT_0052d140.firstChunk),
-               DAT_0052d140.secondChunk, sizeof(DAT_0052d140.secondChunk),
-               NULL, 0, NULL, 0, DAT_0052d140.fifthChunk, sizeof(DAT_0052d140.fifthChunk));
+    paramsInit(&panel->parameters, g_spritePanelResourceBundle.firstChunk, sizeof(g_spritePanelResourceBundle.firstChunk),
+               g_spritePanelResourceBundle.secondChunk, sizeof(g_spritePanelResourceBundle.secondChunk),
+               NULL, 0, NULL, 0, g_spritePanelResourceBundle.fifthChunk, sizeof(g_spritePanelResourceBundle.fifthChunk));
     FUN_0014e188(&panel->sprites[0], 0x31, 0, &panel->parameters, 0xC9, 1.0f);
     uiSpriteSetKeyframe(&panel->sprites[0], 1, 0);
     uiSpriteSetImageKeyframe(&panel->sprites[0], 0, 0);

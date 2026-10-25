@@ -1,4 +1,4 @@
-/* NON_MATCHING: positional float argument evaluation/conversion order and paired constant loads differ. */
+/* NON_MATCHING: queue initialization scheduling, positional conversion core registers and fixed-placement float loads differ. */
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
@@ -23,9 +23,10 @@ void FUN_001b49c0(s32 map, s32 area)
         do {
             const Placement *placement = static_cast<const Placement *>(aocDataTable2dGetEntryKind4(index));
             if (placement->map != -1 && placement->map == map && placement->area == area) {
+                SoundActorQueuePosition position = {placement->x, placement->y, placement->z};
                 s32 sound = placement->sound;
                 FUN_0027ef2c(sound != 0 ? sound + 0x1000260 : 0x1000260,
-                             sound != 0, placement->x, placement->y, placement->z);
+                             sound != 0, position.x, position.y, position.z);
             }
             ++index;
         } while (index < FUN_002f4814());

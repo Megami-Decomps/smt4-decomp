@@ -1,10 +1,12 @@
-/* NON_MATCHING: quest menu input step (list cursor, tab switch, open/close transitions); written from the decompilation, scheduling not compared with retail */
+/* NON_MATCHING: corrected inventory entry/category offsets and help arguments; owner subobject bases, ID loads and saved-register scheduling differ. */
 #include "common.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "ui/ItemListSelection.h"
+#include <stddef.h>
 
 struct QuestListEntry {
-    /* 0x00 */ u8 tabsActive;   /* only meaningful in entry 0 */
-    /* 0x01 */ u8 unk01[3];
-    /* 0x04 */ s16 questId;
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u16 questId;
     /* 0x06 */ u8 unk06[0x1A];
 };
 
@@ -24,9 +26,11 @@ struct QuestMenu {
     /* 0x0818 */ u8 entriesA[0x34];
     /* 0x084C */ u32 entriesB;
     /* 0x0850 */ u8 unk0850[0x10];
-    /* 0x0860 */ QuestListEntry entries[1];
-    /* 0x0880 */ u8 unk0880[0xA9F2];
-    /* 0xA872 */ u16 preset;
+    /* 0x0860 */ u8 tabsActive;
+    /* 0x0861 */ u8 unk0861[3];
+    /* 0x0864 */ QuestListEntry entries[1];
+    /* 0x0884 */ u8 unk0884[0x9FEE];
+    /* 0xA872 */ s16 preset;
     /* 0xA874 */ s32 category;
     /* 0xA878 */ u8 unkA878[2];
     /* 0xA87A */ s16 categories[1];
@@ -35,11 +39,21 @@ struct QuestMenu {
     /* 0xA97C */ s16 categoryCursor;
     /* 0xA97E */ s8 touchedCategory;
 };
+typedef char QuestMenuLayoutCheck[
+    offsetof(QuestMenu, tabsActive) == 0x860 &&
+    offsetof(QuestMenu, entries) == 0x864 &&
+    offsetof(QuestMenu, preset) == 0xA872 &&
+    offsetof(QuestMenu, category) == 0xA874 &&
+    offsetof(QuestMenu, categories) == 0xA87A &&
+    offsetof(QuestMenu, categoryCount) == 0xA97A &&
+    offsetof(QuestMenu, categoryCursor) == 0xA97C &&
+    offsetof(QuestMenu, touchedCategory) == 0xA97E &&
+    sizeof(QuestListEntry) == 0x20 && sizeof(QuestMenu) == 0xA980 ? 1 : -1];
 
 extern "C" {
 s32 flaggedValueHolderGetTotal(void *holder);
 void uiOpenStartAnimations(QuestMenu *menu);
-void FUN_0032d0c8(s32 a, s32 b, s32 questId);
+void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extra);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
 QuestSpriteFrame *FUN_0018349c(void *layout, s32 sprite);
@@ -63,22 +77,23 @@ void FUN_00212724(void);
 
 #define QUEST_COLOR_FADE 0xF4F4F4FF
 
-/* One input step of the quest menu: tracks the highlighted quest, handles touch tab switching and
- * then either leaves for the detail view, closes, or does nothing. */
+/* One selection-menu input step: updates highlighted-item help and touch categories,
+ * then opens a detail view, closes, or leaves the menu unchanged. */
 void FUN_004a580c(QuestMenu *menu)
 {
-    s16 previousQuest = menu->entries[flaggedValueHolderGetTotal(menu->list)].questId;
+    QuestListEntry *entries = menu->entries;
+    s16 previousQuest = entries[flaggedValueHolderGetTotal(menu->list)].questId;
     uiOpenStartAnimations(menu);
-    s16 quest = menu->entries[flaggedValueHolderGetTotal(menu->list)].questId;
+    s16 quest = entries[flaggedValueHolderGetTotal(menu->list)].questId;
     if (quest != previousQuest)
-        FUN_0032d0c8(0, 1, quest);
+        FUN_0032d0c8(NULL, 1, (u16)quest, 0);
 
     s32 menuPressed = inputIsQuestMenuPressed();
     s32 cancelPressed = 0;
-    if (menu->entries[0].questId > 0)
+    if ((s16)reinterpret_cast<ItemListSelectionOwner *>(menu)->selection.value > 0)
         cancelPressed = inputIsQuestCancelPressed();
 
-    if (menu->categoryCount > 0 && menu->entries[0].tabsActive == 1) {
+    if (menu->categoryCount > 0 && menu->tabsActive == 1) {
         for (s32 i = 0; i < 2; i++) {
             QuestSpriteFrame *tab = FUN_0018349c((u8 *)menu + 200, i + 0x1023);
             s32 x = tab->x;
@@ -136,7 +151,7 @@ void FUN_004a580c(QuestMenu *menu)
         return;
     }
     FUN_0022e774();
-    if (menu->entries[0].tabsActive == 0)
+    if (menu->tabsActive == 0)
         FUN_00212724();
     FUN_0019de98(0, QUEST_COLOR_FADE);
     uiSpriteBankApplyPreset((u8 *)menu + 0xDC, 1);

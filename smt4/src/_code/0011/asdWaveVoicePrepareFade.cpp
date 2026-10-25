@@ -1,4 +1,4 @@
-/* NON_MATCHING: frames and lock occupy r6/r7 instead of retail r7/r6; status-address and initial flag registers consequently differ. */
+/* NON_MATCHING: frames and reset-path lock occupy r6/r7 instead of retail r7/r6; first saved-register setup and target-volume store selection differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
@@ -19,8 +19,9 @@ void asdWaveVoicePrepareFade(AsdSndWaveVoice *sound, s32 frames, f32 volume, f32
 {
     if (sound == NULL)
         return;
+    AsdSndStatus *status = &g_asdSoundStatus;
     if (!(sound->unk90 & 0x202)) {
-        void *lock = g_asdSoundStatus.unk08;
+        void *lock = status->unk08;
         nn_os_CriticalSection_Enter(lock);
         sound->fadeFrames = frames;
         sound->unk84 = 0;
@@ -38,7 +39,7 @@ void asdWaveVoicePrepareFade(AsdSndWaveVoice *sound, s32 frames, f32 volume, f32
     }
     if (!(sound->unk90 & 0x200))
         return;
-    void *lock = g_asdSoundStatus.unk08;
+    void *lock = status->unk08;
     nn_os_CriticalSection_Enter(lock);
     sndVoiceFree(sound->voice);
     sound->voice = FUN_002bd29c(0x7fff, 0, 0);

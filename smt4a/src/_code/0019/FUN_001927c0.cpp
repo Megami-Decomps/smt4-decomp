@@ -1,45 +1,25 @@
-/* NON_MATCHING: scheduling/register allocation only: retail predicates the load of `shared` (ldrne, before the branch) and decrements the two counts through r1; built loads it after the branch and decrements in r0. */
-#include "common.h"
+/* NON_MATCHING: controller kind loads after the null branch instead of predicated before it; count decrements use r0 instead of r1. */
+#include "map/ControllerPool.h"
 
 extern "C" {
 
-typedef struct Slot Slot;
-
-typedef struct SlotVtable {
-    /* 0x00 */ void (*unk00)(Slot *slot);
-    /* 0x04 */ void (*release)(Slot *slot);
-} SlotVtable;
-
-struct Slot {
-    /* 0x00 */ SlotVtable *vtable;
-    /* 0x04 */ u8 unk04[4];
-    /* 0x08 */ s32 shared;
-};
-
-typedef struct SlotPool {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ s32 usedCount;
-    /* 0x14 */ s32 ownedCount;  /* slots that are not shared */
-    /* 0x18 */ Slot *slots[32];
-} SlotPool;
-
-/* Releases every slot in the pool and updates the counts. */
-void FUN_001927c0(SlotPool *pool)
+/* Release every controller, retaining its kind before the release invalidates it. */
+void FUN_001927c0(ControllerPool *pool)
 {
     s32 i = 0;
 
     do {
-        Slot *slot = pool->slots[i];
+        Controller *slot = pool->slots[i];
 
         if (slot != NULL) {
-            s32 shared = slot->shared;
+            s32 kind = slot->lifecycle.kind;
 
-            slot->vtable->release(slot);
+            slot->vtable->lifetime.release(slot);
             pool->slots[i] = NULL;
-            if (shared == 0) {
-                pool->ownedCount--;
+            if (kind == 0) {
+                pool->firstKindCount--;
             }
-            pool->usedCount--;
+            pool->count--;
         }
         i++;
     } while (i < 32);

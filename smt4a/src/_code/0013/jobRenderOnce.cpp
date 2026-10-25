@@ -9,9 +9,9 @@ void FUN_00157558(u32 renderCtx);
 extern u32 g_renderCtx;
 
 /* Per-frame job step: marks a pending request when stateValuesGetBySelector asks for one; otherwise, if enabled and neither done nor pending, renders once into a 0x200 x 0x200 surface, halves its size and sets `done`. Always returns 0. */
-u8 jobRenderOnce(void)
+s32 jobRenderOnce(u32 job)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
 
     if (stateValuesGetBySelector(0) != 0) {
         work->pending = 1;

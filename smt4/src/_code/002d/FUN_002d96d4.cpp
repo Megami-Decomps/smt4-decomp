@@ -79,7 +79,7 @@ extern unsigned int *uniteGetWork(void);
 extern int FUN_0028cfbc(unsigned int *);
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029b7b8(unsigned int, unsigned int, unsigned char *);
+extern int partyClassifyRequestedSources(unsigned int, unsigned int, unsigned char *);
 extern int FUN_0029d644(unsigned int *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
@@ -209,7 +209,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                   temp_v13 = temp_v13 + 1;
                 } while (temp_v13 < (int)(unsigned int)*(unsigned short *)(puVar4 + 0x24ce));
               }
-              temp_v3 = FUN_0029b7b8(*puVar4,temp_v18,temp_v23);
+              temp_v3 = partyClassifyRequestedSources(*puVar4,temp_v18,temp_v23);
               if (temp_v3 == 0) {
                 temp_v25 = 1;
               }
@@ -314,7 +314,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
               temp_v10 = temp_v10 + 1;
             } while (temp_v10 < (int)(unsigned int)*(unsigned short *)(puVar4 + 0x24ce));
           }
-          temp_v4 = FUN_0029b7b8(*puVar4,temp_v18,temp_v23);
+          temp_v4 = partyClassifyRequestedSources(*puVar4,temp_v18,temp_v23);
           if (temp_v4 == 0) {
             temp_v25 = 1;
           }
@@ -470,7 +470,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
                 temp_v10 = temp_v10 + 1;
               } while (temp_v10 < (int)(unsigned int)*(unsigned short *)(puVar4 + 0x24ce));
             }
-            temp_v10 = FUN_0029b7b8(*puVar4,temp_v18,temp_v23);
+            temp_v10 = partyClassifyRequestedSources(*puVar4,temp_v18,temp_v23);
             if (temp_v10 == 0) {
               temp_v25 = 1;
             }

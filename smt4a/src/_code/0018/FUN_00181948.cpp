@@ -1,11 +1,10 @@
-/* NON_MATCHING: loop/image branches merge, frame-set count shift is hoisted, and integer/VFP scratch registers differ. */
+/* NON_MATCHING: duration division overwrites s0 instead of using s2; next-key address/load scheduling differs. */
 #include "ui/UiSpriteState.h"
 
 static inline UiSpriteFrameKey *spriteFrameSet(UiSpriteSource *source, s16 requested)
 {
     s32 section = 0;
-    u32 count = source->frameAnimation.frameTableBytes >> 2;
-    for (u32 i = 0; i < count; ++i) {
+    for (u32 i = 0; i < (source->frameAnimation.frameTableBytes >> 2); ++i) {
         if (section == requested) {
             return &source->frameKeys[i];
         }
@@ -58,7 +57,9 @@ extern "C" void FUN_00181948(UiSpriteState *sprite, f32 rate)
     }
     if (image == -2) {
         sprite->frameTrack.key = 0;
-        image = keys->image;
+        sprite->unk04 = keys->image;
+        sprite->unk08 = ~0u;
+        return;
     }
     sprite->unk04 = image;
     sprite->unk08 = ~0u;

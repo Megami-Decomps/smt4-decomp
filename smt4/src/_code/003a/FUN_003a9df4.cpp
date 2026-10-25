@@ -34,7 +34,7 @@ typedef struct RowPanel {
 } RowPanel;
 
 extern LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
-extern void FUN_0022d800(RowPanel *panel, s32 index, s32 alpha, s32 row);
+extern void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
 extern void FUN_0022d9c8(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
 extern void FUN_0022daac(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
 extern void FUN_0022db94(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
@@ -67,7 +67,7 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     baseX = slot->x;
     baseY = slot->y;
     if (selected != 0) {
-        FUN_0022d800(panel, index, alpha, panel->cursor.row);
+        uiDrawScrollingSelectionEntry(panel, index, alpha, panel->cursor.row);
     }
     FUN_0022dcac(panel, 1, id, index, selected, alpha);
     FUN_0022db94(panel, id, index, selected, alpha);

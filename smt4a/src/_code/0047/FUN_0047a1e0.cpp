@@ -6,7 +6,7 @@ extern "C" {
 StagedOpenWork *jobGetWork(void);
 s32 FUN_00167458(void *loader, s32 arg);
 u32 FUN_0019d890(u32 group, u32 item);
-s32 FUN_004cf8dc(void *fade, s32 arg);
+s32 entryDispatchUpdate(void *fade, s32 arg);
 
 /* Steps the job's open sequence: wait for the loader, then for the fade, then clear the busy flags. */
 s32 FUN_0047a1e0(void)
@@ -24,7 +24,7 @@ s32 FUN_0047a1e0(void)
     case 1:
         break;
     case 2:
-        if (FUN_004cf8dc(work->fade, 1)) {
+        if (entryDispatchUpdate(work->fade, 1)) {
             work->state = 3;
         }
         break;

@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: dataTable17Sub1GetCount. */
 extern int dataTable17Sub1GetRecord(unsigned int *, unsigned int);
 /* Supplied declaration required: FUN_00233730. */
-extern unsigned int FUN_002ae3c0(short);
+extern unsigned int contentGetEntryKind(short);
 extern unsigned long long FUN_002c0a2c(unsigned char, unsigned int, unsigned int);
 extern int gameTestIndexedAuxiliaryFlag(short);
 extern int questEvaluateUnlockConditions(void);
@@ -124,7 +124,7 @@ unsigned int FUN_003a45fc(int param_1)
         if ((temp_v3 == 2) && (temp_v3 = gameTestIndexedAuxiliaryFlag(temp_v1), temp_v3 == 0)) {
           temp_v10 = 1;
         }
-        temp_v5 = FUN_002ae3c0(temp_v1);
+        temp_v5 = contentGetEntryKind(temp_v1);
         switch(temp_v5) {
         default:
           goto LAB_003a49b8;

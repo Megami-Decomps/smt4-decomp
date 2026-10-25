@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail keeps the table address in a register and adds the offset at run time; armcc folds it into the pool word. */
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct ParameterData {
     /* 0x00 */ u8 data[0x8c];
@@ -15,13 +15,12 @@ extern "C" {
 
 extern u8 DAT_0059ee68[];
 
-void FUN_0031ab38(void *source, u32 value, void *destination);
 
 /* Virtual slot: applies the owner's parameter block at +96 to the table at DAT_0059ee68 +112. */
 void FUN_003c5bac(ParameterOwner *owner)
 {
     ParameterData *data = owner->parameters;
-    FUN_0031ab38(data->data + 96, data->value, DAT_0059ee68 + 112);
+    FUN_0031ab38(reinterpret_cast<u32 *>(data->data + 96), data->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68 + 112), reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68));
 }
 
 } /* extern "C" */

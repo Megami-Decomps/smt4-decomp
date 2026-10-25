@@ -1,4 +1,5 @@
 #include "shard/Sys4651e8.h"
+#include "sys/ProcessResult.h"
 
 extern "C" {
 

@@ -17,7 +17,7 @@ int cameraBeginScalarTransition(...);
 int FUN_004f41b0(int, int, int);
 int FUN_004f6d34(void);
 int FUN_004f7b84(...);
-int FUN_004fb670(...);
+int btlQueueDuplicateSuppressedAction(...);
 int FUN_004fd268(...);
 int FUN_004fdcd8(...);
 
@@ -61,7 +61,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f6d34. */
 /* Supplied declaration required: FUN_004f7b84. */
-/* Supplied declaration required: FUN_004fb670. */
+/* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fd268. */
 /* Supplied declaration required: FUN_004fdcd8. */
 
@@ -163,7 +163,7 @@ LAB_003e1f28:
         }
         FUN_004f41b0(g_btlCamera,0,(int)(short)piVar3[2]);
         FUN_004fdcd8((int)*(short *)((int)piVar3 + 10),param_1,0,0,7,0,6,0);
-        FUN_004fb670((int)(short)piVar3[4],param_1,(int)*(short *)((int)piVar3 + 0x12));
+        btlQueueDuplicateSuppressedAction((int)(short)piVar3[4],param_1,(int)*(short *)((int)piVar3 + 0x12));
       }
     }
     else {

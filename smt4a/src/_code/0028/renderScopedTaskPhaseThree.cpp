@@ -11,9 +11,9 @@ void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);
 void FUN_00157558(RenderCtxA *);
 
-u32 renderScopedTaskPhaseThree()
+s32 renderScopedTaskPhaseThree(u32 job)
 {
-    jobGetWork();
+    jobGetWork(job);
     RenderCtxA *context = g_renderCtx;
     s32 state = FUN_00387580(6, 0.0f);
     renderStackPush(&context->additional.stackC, state);

@@ -31,10 +31,10 @@ void uiSetFloatPair(EffectProcessInit *camera, f32 distance, f32 scale);
 void FUN_0014f0dc(EffectProcessInit *camera, const f32 *eye, const f32 *target, const f32 *up);
 void FUN_001523b8(EffectProcessInit *camera, u32 pivot, f32 fov, f32 aspect, f32 nearClip, f32 farClip);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work);
-u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, void *work, u32 parent);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
 s32 FUN_001f4c80(u32 job);
 void effectProcessDestroy(u32 job);
-s32 FUN_0023799c(u32 job);
+s32 renderScopedTaskPhaseOne(u32 job);
 s32 renderScopedTaskPhaseZero(u32 job);
 s32 renderScopedTaskPhaseThree(u32 job);
 
@@ -69,11 +69,11 @@ u32 FUN_0031b654(u8 keepScene)
     FUN_001523b8(process, 1, process->fieldOfView, 1.6666666f, 0.1f, 100000.0f);
     process->process = asdProcessCreateSimple((const s8 *)"EffectProc", 4, 0, 0, FUN_001f4c80, effectProcessDestroy, (u32)process);
     if (process->keepScene != 0) {
-        process->drawThree = taskCreateDraw("EffectDrawDown2D", 0x89, 0, 0, FUN_0023799c, NULL, process, process->process);
+        process->drawThree = taskCreateDraw((const s8 *)"EffectDrawDown2D", 0x89, 0, 0, renderScopedTaskPhaseOne, NULL, (u32)process, (void *)process->process);
     } else {
-        process->drawZero = taskCreateDraw("EffectDrawUp3D", 0x72, 0, 0, renderScopedTaskPhaseZero, NULL, process, process->process);
-        process->drawTwo = taskCreateDraw("EffectDrawUp2D", 0x89, 0, 0, FUN_0023799c, NULL, process, process->process);
-        process->drawThree = taskCreateDraw("EffectDrawDown2D", 0xEC, 0, 0, renderScopedTaskPhaseThree, NULL, process, process->process);
+        process->drawZero = taskCreateDraw((const s8 *)"EffectDrawUp3D", 0x72, 0, 0, renderScopedTaskPhaseZero, NULL, (u32)process, (void *)process->process);
+        process->drawTwo = taskCreateDraw((const s8 *)"EffectDrawUp2D", 0x89, 0, 0, renderScopedTaskPhaseOne, NULL, (u32)process, (void *)process->process);
+        process->drawThree = taskCreateDraw((const s8 *)"EffectDrawDown2D", 0xEC, 0, 0, renderScopedTaskPhaseThree, NULL, (u32)process, (void *)process->process);
     }
     return process->process;
 }

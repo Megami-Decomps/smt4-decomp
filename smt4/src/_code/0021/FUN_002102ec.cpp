@@ -1,7 +1,7 @@
 /* NON_MATCHING: final success result is materialized in r4 before r0, rather than r0 before r4. */
 #include "shard/W6_W6Match1_PositionedStream.h"
 
-extern "C" void FUN_002c3510(u32 result);
+#include "sys/ProcessResult.h"
 extern "C" void asdFatalError();
 extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 

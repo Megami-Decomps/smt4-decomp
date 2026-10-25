@@ -1,4 +1,4 @@
-/* NON_MATCHING: final reset-store scheduling differs and grouped defaults use a base-plus-offset relocation. */
+/* NON_MATCHING: final selected-quest reset scheduling differs; native draw defaults now reproduce the retail table relocation. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "quest_center/QuestRuntime.h"
 
@@ -32,11 +32,16 @@ struct QuestCenterScreenStateIV {
     u32 second;
 };
 struct QuestCenterDrawDefaultsIV {
-    u8 first[24];
-    u8 second[168];
+    f32 first[6];
+    s32 second[42];
 };
 extern "C" {
-extern const QuestCenterDrawDefaultsIV DAT_004057a8;
+const QuestCenterDrawDefaultsIV DAT_004057a8 = {
+    {0.0f, 1.0f, 4.0f, 1.0f, 0.0f, 4.0f},
+    {-3, 0, -3, 0, 0, -3, 0, -3, 0, -3, -3, 0, -3, 0,
+     -1, 0, -1, -1, 0, -1, 0, -3, 0, -3, 1, 0, -3, 0,
+     -3, 0, -3, -3, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0}
+};
 void FUN_003852c8(void);
 void memClear(void *buffer, u32 size);
 void asdLoadFileAsyncSimple(const char *path, u32 *result, u32 options);

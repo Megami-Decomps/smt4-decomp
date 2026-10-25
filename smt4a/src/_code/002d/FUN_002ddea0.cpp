@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail keeps the loop index in r5 and the record in r4, and loads the y/z operands of naviConfigureEntry as a vldmia pair (built evaluates z first) */
+/* NON_MATCHING: captured position vector restores paired y/z conversion; loop-index/record registers and x-conversion scheduling differ. */
 #include "common.h"
 
 /* The engine record list as this function reads it: its 0x58-byte effect records with their kind word and
@@ -76,9 +76,10 @@ void FUN_002ddea0(void)
                     if (FUN_0033aa6c((s16)record->flagId) != 0) {
                         FUN_00244c70(0, 35, -1, record->frame, record->position);
                         if (g_engineRecordList->naviCount < 16) {
+                            Vec4F position = record->position;
                             naviConfigureEntry(g_engineRecordList->naviCount, g_engineRecordList->mapId,
-                                               g_engineRecordList->areaId, (s32)record->position.x,
-                                               (s32)record->position.y, (s32)record->position.z, 1);
+                                               g_engineRecordList->areaId, (s32)position.x,
+                                               (s32)position.y, (s32)position.z, 1);
                             record->naviSlot = g_engineRecordList->naviCount;
                             g_engineRecordList->naviCount++;
                         }

@@ -56,7 +56,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } void_stack;
 
-extern int FUN_00202450(...); /* 0x202450 */
+extern int campDrawCurrentSubscreen(...); /* 0x202450 */
 extern int FUN_00227418(...); /* 0x227418 */
 extern int FUN_0025ec04(...); /* 0x25ec04 */
 extern unsigned char LAB_002c3794; /* 0x2c3794 */
@@ -153,8 +153,8 @@ void FUN_002c3398(void)
   puVar3 = &LAB_002c3794;
   asdProcessCreateSimple(&LAB_002c3794,4,0,0,FUN_003d56dc,0,0);
   *puVar2 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002c37a4,0x7e,0,0,FUN_00202450,0,0,puVar3);
-  taskCreateDraw(&LAB_002c37b4,0xda,0,0,FUN_00202450,0,0,*puVar2);
+  taskCreateDraw(&LAB_002c37a4,0x7e,0,0,campDrawCurrentSubscreen,0,0,puVar3);
+  taskCreateDraw(&LAB_002c37b4,0xda,0,0,campDrawCurrentSubscreen,0,0,*puVar2);
   puVar3 = &LAB_002c37cc;
   taskCreateDraw(&LAB_002c37cc,0xeb,0,0,FUN_00227418,0,0,*puVar2);
   puVar2[2] = (unsigned int)puVar3;

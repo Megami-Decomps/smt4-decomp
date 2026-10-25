@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004cbd70` (_code @ 0x4cbd70, 0x5d4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ int btlTalkBustUpSetDemonTexture(int, int);
 int obj04Finish(void);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_0037dfb0(int, int);
-int gameFlagSetValue(int, int);
 int countersAddSaturating(int, int);
 int FUN_004bcd90(int);
 
@@ -64,7 +64,6 @@ extern int stateHolderStateIs0x12(void);
 /* Supplied declaration required: statusDownEnterState11. */
 extern int statusDownGetCursorPosition(void);
 extern unsigned int sysPlayVoice(unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: countersAddSaturating. */
 /* Supplied declaration required: FUN_004bcd90. */
 /* Supplied declaration required: FUN_004bd6b0. */
@@ -116,7 +115,7 @@ LAB_004cbdc8:
         FUN_004bcd90(temp_v1);
         FUN_0019de98(0,0xf4f4f4ff);
         if ((*(short *)(temp_v1 + 0x62) == 0x114) && (temp_v1 = gameFlagIsSet(0x4d7), temp_v1 == 0)) {
-          gameFlagSetValue(0x4d7,1);
+          gameFlagSetValue(0x4d7, 1, 1);
         }
         if (*(short *)(temp_v0 + 6) != 0) {
           sysPlaySe(0x6c);

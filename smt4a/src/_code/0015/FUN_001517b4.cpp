@@ -4,7 +4,7 @@
 extern "C" {
 s32 padButtonRepeat(s32 key);
 s32 padButtonIsPressed(s32 key);
-s32 FUN_00163fd4(s32 key);
+s32 slotIsActive(s32 key);
 s32 FUN_00164cf4(s32 direction);
 s32 buttonHelpIsKindInitialSelection(s32 direction);
 s32 FUN_00166fa0(s32 direction);
@@ -21,7 +21,7 @@ static __inline s32 padButtonQuery(s32 button, s32 mode)
         result = padButtonIsPressed(button);
         break;
     case 2:
-        result = FUN_00163fd4(button);
+        result = slotIsActive(button);
         break;
     }
     return result;

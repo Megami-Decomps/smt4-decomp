@@ -1,5 +1,5 @@
-/* NON_MATCHING: armcc predicates the form-pointer load and null test behind the first two guards; retail branches before loading the form pointer. */
-#include "common.h"
+/* NON_MATCHING: canonical accessor and form guards match; result normalization branches to the shared zero return instead of MOVNE. */
+#include "battle/BattleUnitSlot.h"
 
 struct ScriptUnitForm {
     u8 unk000[0x12c]; // 0x000
@@ -18,19 +18,18 @@ struct ScriptBattleUnit {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-ScriptBattleUnit* btlUnitGet(u32 unitId);
 s32 FUN_0019acdc(u16 formId, u32 flags);
 
 // Test whether the script's battle unit resolves to form category three.
 s32 FUN_003f25e8()
 {
-    ScriptBattleUnit* unit = btlUnitGet(g_btlScriptUnit);
-    if (unit != NULL && unit->data != NULL) {
-        ScriptUnitForm* form = unit->data->form;
-        if (form != NULL) {
-            return FUN_0019acdc(form->id, 0) == 3;
-        }
-    }
-    return 0;
+    ScriptBattleUnit* unit = reinterpret_cast<ScriptBattleUnit *>(
+        btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+    if (unit == NULL || unit->data == NULL)
+        return 0;
+    ScriptUnitForm* form = unit->data->form;
+    if (form == NULL)
+        return 0;
+    return FUN_0019acdc(form->id, 0) == 3;
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite compiles (209 vs 203 rows); interpolation argument order from retail call sites; register allocation and the short-circuit loaded-texture checks differ */
+/* NON_MATCHING: unsigned timeline bounds and switch shape recovered; global address, clamp reloads, interpolation argument and float constant lifetimes differ. */
 #include "common.h"
 
 // Fade/slide banner shown over the event scene.
@@ -45,7 +45,8 @@ static s32 loadedTextureCount()
 u32 FUN_0031c794(void)
 {
     EventEffect* effect = g_eventEffect;
-    if (effect->state == 0) {
+    switch (effect->state) {
+    case 0:
         if (loadedTextureCount() == 2) {
             FUN_00212204(0);
             effect->state = 1;
@@ -58,42 +59,40 @@ u32 FUN_0031c794(void)
                 effect->alpha = 1.0f;
             }
         }
-    } else if (effect->state == 1) {
+        break;
+    case 1:
         if (effect->slideOnly != 0) {
             f32 alpha = effect->alpha - 0.1f;
             s32 offset = effect->offset - 0x16;
             effect->offset = offset;
             effect->alpha = alpha;
-            if (offset < -0xb3) {
-                if (alpha <= 0.0f) {
-                    effect->frame = 300;
-                    offset = effect->offset;
-                    if (-0xb4 >= offset) offset = -0xb4;
-                } else {
-                    offset = -0xb4;
-                }
+            if (offset <= -0xb4 && alpha <= 0.0f) {
+                effect->frame = 300;
+                offset = effect->offset;
             }
+            if (offset <= -0xb4)
+                offset = -0xb4;
             effect->offset = offset;
             f32 shown = 0.0f;
-            if (0.0f < alpha) shown = alpha;
+            if (alpha > 0.0f) shown = alpha;
             effect->alpha = shown;
         } else {
             s32 t = effect->frame - 0xf;
-            if (t < 0x79) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 0x78, t);
+            if ((u32)t <= 0x78) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 0x78, t);
             t = effect->frame - 0x88;
-            if (t < 7) effect->offset = lerpIntSplitClamped(-0xb4, 0x28, 6, t);
+            if ((u32)t <= 6) effect->offset = lerpIntSplitClamped(-0xb4, 0x28, 6, t);
             t = effect->frame - 0x8f;
-            if (t < 8) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 7, t);
+            if ((u32)t <= 7) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 7, t);
             t = effect->frame - 0xc3;
-            if (t < 5) effect->offset = lerpIntSplitClamped(-0xb4, 0x28, 4, t);
+            if ((u32)t <= 4) effect->offset = lerpIntSplitClamped(-0xb4, 0x28, 4, t);
             t = effect->frame - 200;
-            if (t < 7) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 6, t);
+            if ((u32)t <= 6) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 6, t);
             t = effect->frame - 0xcf;
-            if (t < 5) effect->offset = lerpIntSplitClamped(-0xb4, 0x28, 4, t);
+            if ((u32)t <= 4) effect->offset = lerpIntSplitClamped(-0xb4, 0x28, 4, t);
             if (effect->frame >= 0xd4) effect->offset = lerpIntSplitClamped(0x28, -0xb4, 0x2d, effect->frame - 0xd4);
 
-            if ((u32)(effect->frame - 0xf) < 0xbc) effect->alpha = mathInterpolateTimed(0xca, 1.0f, 0.6f, effect->frame - 0xf);
-            if ((u32)(effect->frame - 0xcb) < 8) effect->alpha = mathInterpolateTimed(8, 0.6f, 0.7f, effect->frame - 0xcb);
+            if ((u32)(effect->frame - 0xf) <= 0xbb) effect->alpha = mathInterpolateTimed(0xca, 1.0f, 0.6f, effect->frame - 0xf);
+            if ((u32)(effect->frame - 0xcb) <= 7) effect->alpha = mathInterpolateTimed(8, 0.6f, 0.7f, effect->frame - 0xcb);
             if (effect->frame >= 0xf0) effect->alpha = mathInterpolateTimed(0x3c, 0.7f, 1.0f, effect->frame - 0xf0);
             if (FUN_00203d74() != 0) {
                 effect->slideOnly = 1;
@@ -105,6 +104,7 @@ u32 FUN_0031c794(void)
             effect->active = 0;
             effect->state = 2;
         }
+        break;
     }
     if (FUN_00162ea4() != 0 && loadedTextureCount() == 2) effect->state = 2;
     return 0;

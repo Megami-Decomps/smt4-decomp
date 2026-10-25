@@ -49,6 +49,6 @@ extern "C" u32 *FUN_002265ac(GxDrawSettings **owner, u32 *commands, s32 reset)
     *commands++ = readMask;
     *commands++ = 0x10114;
     *commands++ = writeMask;
-    *commands = 0x10115;
-    return commands + 1;
+    *commands++ = 0x10115;
+    return commands;
 }

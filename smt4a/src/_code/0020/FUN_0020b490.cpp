@@ -10,7 +10,7 @@ void FUN_00168980(s32 mode);
 void FUN_0019de98(s32 target, u32 color);
 void FUN_0023b45c(u8 value);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
-void FUN_002c7ce8(u8 value);
+void statusDownSwitchTab(u8 value);
 void FUN_002c8538(u8 value);
 void FUN_002c85b0(u8 value);
 void FUN_00333f6c(void);
@@ -70,7 +70,7 @@ void FUN_0020b490(EngineUnits *result, s32 mode)
             FUN_00371f18();
             FUN_003a7b2c();
             FUN_002c85b0(0);
-            FUN_002c7ce8(0);
+            statusDownSwitchTab(0);
             FUN_0023b45c(0);
             FUN_002c8538(0);
             FUN_0033449c(0);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the order of the work-block field stores and the zero float register differ from retail (192 vs 198 rows); the title setup is the same. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -49,7 +50,7 @@ u8 *FUN_001834a4(u32 group, u32 id);
 void campButtonHelpAcquire(void);
 void campCommonBgAcquire(void);
 s32 aocHasType36(u32 aoc, u32 id);
-void gameFlagSetValue(s32 flag, s32 value, s32 silent);
+
 void *asdProcessCreateSimple(const char *name, u32 priority, u32 a, u32 b, void (*update)(void *), void (*release)(void *),
                              u32 c);
 void taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), u32 c, u32 d, void *process);

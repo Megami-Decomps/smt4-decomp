@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack push uses ip, context/zero saved registers swap, and parallax conversion scheduling differs. */
+/* NON_MATCHING: canonical render push and integer pixel conversion recovered; icon draw argument setup scheduling differs. */
 #include "camp/RenderCtx.h"
 #include "saveLoadUI/SaveLoadState.h"
 
@@ -27,13 +27,12 @@ u32 FUN_003a7938(void)
     if (saveLoadThreadValueGet() || saveLoadJobIsReady()) {
         FUN_00157558(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_001692ac(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         efctSetSpeed(1.0f);
         FUN_00183bb0();
-        f32 x = renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
+        s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
         const SaveLoadActivityView *activity = (const SaveLoadActivityView *)&g_saveLoadProcess;
-        FUN_001835b4(2, 8, activity->frame + 389, (s32)x, 0, 6);
+        FUN_001835b4(2, 8, activity->frame + 389, x, 0, 6);
         renderStackPop(&g_renderCtx->stackA);
         efctSetSpeed(1.0f);
         FUN_00183bb0();

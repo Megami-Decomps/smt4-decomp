@@ -1,4 +1,4 @@
-/* NON_MATCHING: default optimization unrolls the six-channel scan by two and saves an extra GPR (94/102 rows); capability-group flow and all typed offsets agree. O2 candidate. */
+/* NON_MATCHING: six-channel scan unrolls by two and saves an extra GPR; capability cases and record offsets match retail. */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 extern "C" void gfxMarkMaterialAnimationCapabilities(const MaterialFlagAnimation* animation,

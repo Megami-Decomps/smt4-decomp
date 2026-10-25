@@ -1,4 +1,4 @@
-/* NON_MATCHING: success-result materialization uses r1 and a shared success branch differs; all model-load and XYZ=0.01f callback arguments are restored. */
+/* NON_MATCHING: uniform-scale helper restores XYZ argument allocation; success-result materialization and shared return branches remain different. */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -13,6 +13,11 @@ void FUN_004d854c(u32 *owner);
 void callOnHandleField4D(u32 *owner, f32 x, f32 y, f32 z);
 void modelOwnerLoadNamed(u32 *owner, const char *name);
 
+static __inline void battleModelSetUniformScale(u32 *owner, f32 scale)
+{
+    callOnHandleField4D(owner, scale, scale, scale);
+}
+
 // Load the scripted battle model, then finish once its asynchronous load completes.
 u32 FUN_003a9540(void)
 {
@@ -21,7 +26,7 @@ u32 FUN_003a9540(void)
         u32 ready = FUN_004d87e4(state->eventModel.owner);
         if (ready != 0) {
             FUN_004d854c(state->eventModel.owner);
-            callOnHandleField4D(state->eventModel.owner, 0.01f, 0.01f, 0.01f);
+            battleModelSetUniformScale(state->eventModel.owner, 0.01f);
             state->eventModel.loaded = 1;
             ready = 1;
         }

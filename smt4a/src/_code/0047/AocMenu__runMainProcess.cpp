@@ -69,7 +69,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_00473910. */
 /* Supplied declaration required: countOwnerIsValidIndex. */
 /* Supplied declaration required: FUN_00477d10. */
-extern int FUN_0047d7f0(int);
+extern int statusDecodeActivityState(int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 extern int FUN_004d0058(unsigned int *, unsigned int);
 /* Supplied declaration required: sub10OwnerStart. */
@@ -249,7 +249,7 @@ LAB_0047996c:
             return;
           }
           temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
-          temp_v2 = FUN_0047d7f0(puVar1[0x19e] + temp_v2 * 0x9c8);
+          temp_v2 = statusDecodeActivityState(puVar1[0x19e] + temp_v2 * 0x9c8);
           if (temp_v2 == 0) goto LAB_004797d0;
           if (temp_v2 == 1) goto LAB_00479820;
           if (temp_v2 == 2) goto LAB_00479870;

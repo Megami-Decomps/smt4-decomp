@@ -29,37 +29,31 @@ void FUN_004ce300(FountainMenu *menu);
 void FUN_004cdbd4(FountainMenu *menu)
 {
     s32 index;
-    s32 next;
 
-    if (scrRunOpcodesStub(menu->script) == 2) {
-        messageBannerRestartOrClear();
-        if (messageMainGetValue() != 0) {
-            if (FUN_0034919c() != 0) {
-                messageDismissNumericBanner(0);
-            }
-            index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cdc);
-            if (index >= 0) {
-                scrScriptProcessStartEntry(menu->script, index);
-            }
-            next = 5;
-        } else {
-            menu->state = 7;
-            if (FUN_004ced50(menu) != 0) {
-                menu->state = 8;
-                FUN_004ce300(menu);
-                return;
-            }
-            if (FUN_0034919c() != 0) {
-                messageDismissNumericBanner(0);
-            }
-            index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cc8);
-            if (index >= 0) {
-                scrScriptProcessStartEntry(menu->script, index);
-            }
-            next = 10;
-        }
-        menu->state = next;
+    if (scrRunOpcodesStub(menu->script) != 2)
+        return;
+    messageBannerRestartOrClear();
+    if (messageMainGetValue() != 0) {
+        if (FUN_0034919c() != 0)
+            messageDismissNumericBanner(0);
+        index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cdc);
+        if (index >= 0)
+            scrScriptProcessStartEntry(menu->script, index);
+        menu->state = 5;
+        return;
     }
+    menu->state = 7;
+    if (FUN_004ced50(menu) != 0) {
+        menu->state = 8;
+        FUN_004ce300(menu);
+        return;
+    }
+    if (FUN_0034919c() != 0)
+        messageDismissNumericBanner(0);
+    index = tableGroupFindEntryIndex(menu->tableGroup, DAT_00530cc8);
+    if (index >= 0)
+        scrScriptProcessStartEntry(menu->script, index);
+    menu->state = 10;
 }
 
 } /* extern "C" */

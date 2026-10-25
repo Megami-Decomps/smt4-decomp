@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail maps both constructor-array boundary addresses to one global symbol; distinct linker boundary symbols are required. */
 #include "common.h"
 
 extern "C" {

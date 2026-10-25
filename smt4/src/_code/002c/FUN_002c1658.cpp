@@ -2,7 +2,7 @@
 #include "common.h"
 
 extern "C" {
-bool FUN_00124fe8(u32);
+bool buttonHelpIsButtonEnabled(u32);
 u32 padIsButtonRepeat(u32);
 u32 padIsButtonPressed(u32);
 u8 FUN_002c15fc(u32);
@@ -49,6 +49,6 @@ extern "C" s32 FUN_002c1658(s32 button, s32 mode)
     if (mode == 1)
         return buttonHelpKindIsTriggered(helpKind);
     if (mode == 2)
-        return FUN_00124fe8(helpKind);
+        return buttonHelpIsButtonEnabled(helpKind);
     return 0;
 }

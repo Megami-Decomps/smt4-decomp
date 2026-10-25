@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002d9b50` (_code @ 0x2d9b50, 0x12e4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -52,7 +53,6 @@ int FUN_00324e38(...);
 int sysPlayVoice(...);
 int FUN_003d4ed8(...);
 int FUN_003e54b8(...);
-int gameFlagSetValue(...);
 
 /* stack frame of void: 4 slot(s), 16 byte(s) */
 typedef struct {
@@ -141,7 +141,6 @@ extern int linkHolderCallFirst(unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
 extern int linkHolderCheckFirst(unsigned int);
 /* Supplied declaration required: linkedTargetSetFloat. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: flagValueSub. */
 extern int inputIsQuestCancelPressed(void);
 
@@ -233,7 +232,7 @@ void FUN_002d9b50(void)
         if (g_gameState == 0x18) {
           temp_v6 = *(int *)(temp_v0 + 0x1520);
           if (temp_v6 != 0) {
-            gameFlagSetValue(temp_v6,1);
+            gameFlagSetValue(temp_v6, 1, 1);
             *(int *)(temp_v0 + 0x1520) = 0;
           }
         }

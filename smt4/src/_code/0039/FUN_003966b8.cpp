@@ -47,7 +47,7 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: recordSetDirection. */
 /* Supplied declaration required: recordSetOrigin. */
 /* Supplied declaration required: FUN_002329a8. */
-extern int FUN_00232a6c(int, unsigned int, unsigned int);
+extern int effectPoolCreateObject(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00267144. */
 extern int dataTableGetRecordFifty(void);
 /* Supplied declaration required: FUN_00273f5c. */
@@ -107,7 +107,7 @@ void FUN_003966b8(int param_1)
                 ((temp_v1 = gameFlagIsSet(temp_v2 + 0x310), temp_v1 == 0 &&
                  ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))))) &&
                (((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
-                (temp_v1 = FUN_00232a6c(param_1,1,2), temp_v1 != 0)))) {
+                (temp_v1 = effectPoolCreateObject(param_1,1,2), temp_v1 != 0)))) {
               temp_v7 = (float)VectorSignedToFloat((int)*(short *)(pcVar2 + 2),
                                                     (unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v8 = (float)VectorSignedToFloat((int)*(short *)(pcVar2 + 4),
@@ -144,7 +144,7 @@ void FUN_003966b8(int param_1)
         else if ((((temp_v1 == *(int *)(param_1 + 4)) && ((int)pcVar2[1] == *(int *)(param_1 + 8))) &&
                  ((*(short *)(pcVar2 + 0x14) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 != 0)))) &&
                 (((*(short *)(pcVar2 + 0x16) == 0 || (temp_v1 = gameFlagIsSet(), temp_v1 == 0)) &&
-                 (temp_v1 = FUN_00232a6c(param_1,1,2), temp_v1 != 0)))) {
+                 (temp_v1 = effectPoolCreateObject(param_1,1,2), temp_v1 != 0)))) {
           temp_v7 = (float)VectorSignedToFloat((int)*(short *)(pcVar2 + 2),
                                                 (unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v8 = (float)VectorSignedToFloat((int)*(short *)(pcVar2 + 4),

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00249dec` (_code @ 0x249dec, 0xf4c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ int gameFlagsBitSet(int, int);
 int FUN_003689d0(void);
 int mathAbsHeadingErrorToPoint(void);
 int FUN_00385384(void);
-int gameFlagSetValue(int, int);
 int FUN_00408184(...);
 int aocFindPackagePayload(unsigned short *, unsigned int);
 int flagValueAdd(...);
@@ -137,7 +137,6 @@ extern int mathCirclesOverlap(void);
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
 /* Supplied declaration required: FUN_00385384. */
 /* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: aocFindPackagePayload. */
 extern unsigned int FUN_00480738(unsigned int);
@@ -295,7 +294,7 @@ joined_r0x00249fd4:
                   temp_v4 = *(int *)(temp_v8 + 0xcc);
                   FUN_003689d0();
                   if (*(short *)(temp_v4 + 0x10) != 0) {
-                    gameFlagSetValue((int)*(short *)(temp_v4 + 0x10),1);
+                    gameFlagSetValue((int)*(short *)(temp_v4 + 0x10), 1, 1);
                   }
                   temp_v10 = (*(unsigned int *)&s__a_a_00587f08.u1[0]);
                   if (*(short *)(temp_v4 + 0x12) != 0) {

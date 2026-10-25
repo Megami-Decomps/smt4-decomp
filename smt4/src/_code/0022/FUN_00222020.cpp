@@ -3,7 +3,7 @@
 extern "C" {
 
 int FUN_00252190(int obj, int arg1, int arg2);
-int FUN_00289234(int obj);
+int eventTexRegisterAndSortTask(int obj);
 int eventTexSetJobParam(void);
 int scrSetResult(int obj);
 int scrGetArg(int index);
@@ -16,7 +16,7 @@ int FUN_00222020(void)
 
     obj = FUN_00252190(obj, 0, value);
     eventTexSetJobParam();
-    FUN_00289234(obj);
+    eventTexRegisterAndSortTask(obj);
     scrSetResult(obj);
     return 1;
 }

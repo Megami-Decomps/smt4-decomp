@@ -3,6 +3,7 @@
 #define CAMP_CONFIG_CONFIG_H
 
 #include "common.h"
+#include <stddef.h>
 
 /* Work area, Shin Megami Tensei IV. */
 typedef struct ConfigWork {
@@ -45,9 +46,13 @@ typedef struct ConfigWorkA {
     /* 0xC0 */ u8 param;
     /* 0xC1 */ u8 unkC1[0x36F];
     /* 0x430 */ ConfigDrawParams draw;
-    /* 0x4C0 */ u8 hasType24A;
-    /* 0x4C1 */ u8 hasType24B;
+    /* 0x4C0 */ s8 hasType24A;
+    /* 0x4C1 */ s8 hasType24B;
     /* 0x4C2 */ u8 unk4C2[0xA];
 } ConfigWorkA;
+typedef char ConfigWorkALayoutCheck[
+    sizeof(ConfigWorkA) == 0x4CC &&
+    offsetof(ConfigWorkA, hasType24A) == 0x4C0 &&
+    offsetof(ConfigWorkA, hasType24B) == 0x4C1 ? 1 : -1];
 
 #endif

@@ -1,22 +1,24 @@
-/* NON_MATCHING: instruction scheduling and register allocation differ; retail 44 vs built 44 rows, 7 diff lines. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "shard/W4_W4Match2_IndexedList.h"
+#include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
 
 void FUN_00152c00(AsdMdlNode *node);
 void asdMdlListDestroyModels(AsdMdlObject *obj);
 void FUN_00152894(AsdMdlNode *node, void *data);
-s32 lookupListFindByKey(u32 *list, AsdMdlObject *obj);
-void indexedListErase(u32 *list);
+s32 asdMdlNodeGetCount(const AsdMdlNode *node);
+LookupListNode *lookupListFindByKey(const LookupList *list, u32 key);
+IndexedNode *indexedListErase(IndexedList *list, IndexedNode *node);
 void asdMemFree(void *block);
 
-extern u32 g_asdMdlList;
+extern IndexedList g_asdMdlList;
 
 /* Destroys a model object: releases its node data and records, removes it from the model list
  * and frees it. */
 void asdMdlManagerDestroy(AsdMdlObject *obj)
 {
-    s32 removed;
+    LookupListNode *removed;
 
     if (obj->node->unk0c >= 0) {
         obj->flags |= 0x200000;
@@ -24,10 +26,10 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
     }
     asdMdlListDestroyModels(obj);
     if (obj->records != NULL) {
-        s32 count = obj->node->count;
+        s32 count = asdMdlNodeGetCount(obj->node);
         s32 i = 0;
 
-        if (i < count) {
+        if (count > 0) {
             do {
                 asdMemFree(obj->records[i].data);
                 i++;
@@ -37,9 +39,9 @@ void asdMdlManagerDestroy(AsdMdlObject *obj)
         obj->records = NULL;
     }
     FUN_00152894(obj->node, obj->request);
-    removed = lookupListFindByKey(&g_asdMdlList, obj);
-    if (removed != 0) {
-        indexedListErase(&g_asdMdlList);
+    removed = lookupListFindByKey(reinterpret_cast<const LookupList *>(&g_asdMdlList), reinterpret_cast<u32>(obj));
+    if (removed != NULL) {
+        indexedListErase(&g_asdMdlList, reinterpret_cast<IndexedNode *>(removed));
     }
     asdMemFree(obj);
 }

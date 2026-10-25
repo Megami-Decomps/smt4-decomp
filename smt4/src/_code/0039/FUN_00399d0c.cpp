@@ -11,7 +11,7 @@ int FUN_00231ad4(...);
 int pairCopy(int, float *);
 int FUN_00231bcc(...);
 float FUN_00231d2c(int);
-int FUN_00232554(...);
+int titleScissorApplyOrClearRequests(...);
 int FUN_002b04e8(...);
 int gameGetMapBlock(void);
 int uiDrawTransientSprites(...);
@@ -58,7 +58,7 @@ extern unsigned int FUN_002319e0(unsigned int, int, int);
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
-/* Supplied declaration required: FUN_00232554. */
+/* Supplied declaration required: titleScissorApplyOrClearRequests. */
 extern float *lmapSceneGetObj(int);
 extern int FUN_00288f78(int);
 /* Supplied declaration required: FUN_002b04e8. */
@@ -149,7 +149,7 @@ void FUN_00399d0c(int param_1)
   }
   temp_v4 = FUN_00288f78(temp_v3);
   temp_v12 = (unsigned int)(temp_v4 == 2 || temp_v4 == 3);
-  FUN_00232554(temp_v44,1);
+  titleScissorApplyOrClearRequests(temp_v44,1);
   temp_v15 = (float)((unsigned long long)temp_v22 >> 0x20);
   temp_v27 = 0x4320000000000000;
   temp_v13 = 160.0f;
@@ -874,7 +874,7 @@ LAB_0039aba4:
     temp_v3 = mathHeadingToDirectionCode(temp_v44,NaviMain_GetState());
     FUN_00231bcc(temp_v44 + 0x164,temp_v3 + 0xbb9,temp_v4,temp_v18,0xb,1);
   }
-  FUN_00232554(temp_v44,0);
+  titleScissorApplyOrClearRequests(temp_v44,0);
   DAT_0044cdd8 = 0xf1;
   FUN_00231dec(temp_v44);
   return;

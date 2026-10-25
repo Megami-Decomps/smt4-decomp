@@ -9,7 +9,7 @@ int FUN_002276f8(int);
 int FUN_00241d58(int);
 int keyedRecordsFreeAll(void);
 int textureCacheReleaseAll(void);
-int FUN_0027de24(int);
+int modelManagerReleaseSlots(int);
 int asdMdlManagerDestroy(int);
 int asdMemFree(void);
 int memClear(int, int);
@@ -24,7 +24,7 @@ extern int g_btlMain; /* 0x4342c8 */
 /* Supplied declaration required: FUN_00241d58. */
 /* Supplied declaration required: keyedRecordsFreeAll. */
 /* Supplied declaration required: textureCacheReleaseAll. */
-/* Supplied declaration required: FUN_0027de24. */
+/* Supplied declaration required: modelManagerReleaseSlots. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: memClear. */
@@ -66,7 +66,7 @@ void FUN_003d9be4(int param_1)
   if (g_btlMain != 0) {
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xf7ffffff;
   }
-  FUN_0027de24(param_1);
+  modelManagerReleaseSlots(param_1);
   temp_v1 = 0;
   do {
     temp_v0 = param_1 + temp_v1 * 0x28;

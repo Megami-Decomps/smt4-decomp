@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the final fallback command update differs in register allocation/scheduling; -O2 candidate. */
+/* NON_MATCHING: final fallback actor-command addressing differs; actor setter/accessor variants do not reproduce retail scheduling. */
 #include "battle/btlAction.h"
 
 struct AlternateActionBattle {

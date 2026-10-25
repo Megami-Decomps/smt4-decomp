@@ -1,13 +1,8 @@
-/* NON_MATCHING: scheduling/branch layout only: retail forms the pointer to work+0xF00 (`add r0, r4, #3840`) between the active test and the captured test, and exits the ready test through its own return; built reads the captured byte from the work base and shares one exit. */
-#include "common.h"
+/* NON_MATCHING: canonical job/surface/context contracts recovered; state-base formation and captured/ready guard exits differ. */
+#include "shard/JobWork.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
-
-typedef struct Surface {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-} Surface;
 
 typedef struct TitleState {
     /* 0x00 */ u8 unk00[0x60];
@@ -23,23 +18,22 @@ typedef struct TitleState {
 
 typedef struct TitleWork {
     /* 0x000 */ u8 unk000[8];
-    /* 0x008 */ Surface *surface;
+    /* 0x008 */ JobSurface *surface;
     /* 0x00C */ u8 unk00C[0xEF4];
     /* 0xF00 */ TitleState state;
 } TitleWork;
 
-extern u32 g_titleScene;
+extern RenderCtx *g_titleScene;
 
-s32 surfaceCopy(Surface *dest, Surface *src);
-s32 FUN_002bfadc(s32 arg, Surface *surface);
-s32 FUN_002c39a4(u32 scene);
+s32 surfaceCopy(JobSurface *dest, JobSurface *src);
+s32 FUN_002bfadc(s32 arg, JobSurface *surface);
+void FUN_002c39a4(RenderCtx *scene);
 s32 FUN_002bff10(s32 arg);
-TitleWork *jobGetWork(void);
 
 /* Title job step: once idle and ready, renders the scene into the surface at half size and marks it captured. */
-u8 FUN_0010b2d0(void)
+s32 FUN_0010b2d0(u32 job)
 {
-    TitleWork *work = jobGetWork();
+    TitleWork *work = reinterpret_cast<TitleWork *>(jobGetWork(job));
     TitleState *state;
 
     if (FUN_002bff10(0) != 0) {

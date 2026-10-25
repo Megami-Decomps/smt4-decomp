@@ -1,4 +1,4 @@
-/* NON_MATCHING: camera reset constant loads and grouped floating-point stores are scheduled differently. */
+/* NON_MATCHING: instructions match, but the global-address literal follows the float constants instead of preceding them. */
 /* Resets map camera controls, scalar tracks, and transition defaults. */
 #include "map/MapCameraWork.h"
 

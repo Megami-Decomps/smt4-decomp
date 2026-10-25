@@ -11,19 +11,16 @@ struct AnimatedCompletionState {
 // Disabled, absent and looping clips are complete; otherwise compare playback time.
 extern "C" bool animationIsClipComplete(AnimatedCompletionState* object)
 {
-    if ((object->flags & 2) == 0) {
-        AnimationSelection* selection = &object->selection;
-        AnimationClip* clip = selection->clip;
-        if (clip != NULL) {
-            if (selection->flags != 2) {
-                if (selection->flags == 1) {
-                    return true;
-                }
-            } else if ((clip->flags & 1) != 0) {
-                return true;
-            }
-            return selection->time >= clip->duration;
-        }
+    if (object->flags & 2)
+        return true;
+    AnimationClip *clip = object->selection.clip;
+    if (clip == NULL)
+        return true;
+    if (object->selection.flags != 2) {
+        if (object->selection.flags == 1)
+            return true;
+    } else if (clip->flags & 1) {
+        return true;
     }
-    return true;
+    return object->selection.time >= clip->duration;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Saved output/category registers, float-conversion staging and height-comparison lowering differ. */
+/* NON_MATCHING: ordered vertical exclusion and nearest-distance guards now agree; output/category ownership and distance-argument VFP staging still differ. */
 #include "map/mapObj.h"
 #include "map/mapDepart.h"
 
@@ -28,21 +28,25 @@ void FUN_00325ba4(s32 firstCategory, s32 secondCategory, s32 thirdCategory,
             record->object == (s16)g_mapObj->request.object &&
             (record->category == firstCategory || record->category == secondCategory ||
              record->category == thirdCategory)) {
-            f32 pointX = record->x;
-            f32 pointY = record->y;
-            f32 pointZ = record->z;
+            MapVector point = {
+                (f32)record->x, (f32)record->y, (f32)record->z
+            };
             f32 threshold = y + 50.0f;
-            if ((vertical <= 0 || pointY >= threshold) &&
-                (vertical >= -1 || threshold >= pointY)) {
-                s32 distance = (s32)distSpatial(x, y, z, pointX, pointY, pointZ);
-                if (distance < nearest) {
-                    position->x = pointX;
-                    position->y = pointY;
-                    position->z = pointZ;
-                    *heading = record->heading;
-                    nearest = distance;
-                }
+            if (vertical > 0 && point.y < threshold) {
+                continue;
             }
+            if (vertical < -1 && threshold < point.y) {
+                continue;
+            }
+            s32 distance = (s32)distSpatial(x, y, z, point.x, point.y, point.z);
+            if (distance >= nearest) {
+                continue;
+            }
+            position->x = point.x;
+            position->y = point.y;
+            position->z = point.z;
+            *heading = record->heading;
+            nearest = distance;
         }
     }
 }

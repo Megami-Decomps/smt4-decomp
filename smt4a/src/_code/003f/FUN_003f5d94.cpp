@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved registers and direct alpha-load addressing differ from retail's position-relative accesses. */
+/* NON_MATCHING: native animation-alpha getters restored; frame-glyph lifetime and base-coordinate saved registers still differ. */
 #include "ui/AnimatedDigitPanel.h"
 #include "camp/RenderCtx.h"
 
@@ -9,6 +9,7 @@ void efctSetSpeed(f32 alpha);
 void FUN_001835b4(s32 mode, s32 group, s32 x, s32 y, u32 color, s32 glyph);
 s32 vec2GetXInt(const SpritePlaybackView *position);
 s32 vec2GetYInt(const SpritePlaybackView *position);
+f32 vec2GetSpeed(const SpritePlaybackView *position);
 void FUN_003f5b14(DigitPanelDisplay *display, s32 x, s32 y, s32 first, s32 second, f32 alpha);
 void FUN_003f54c4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
 void FUN_003f61b4(DigitPanelDisplay *display, s32 x, s32 y, f32 alpha);
@@ -23,11 +24,11 @@ void FUN_003f5d94(DigitPanelDisplay *display, s32 x, u32 color, f32 alpha)
     FUN_001835b4(2, 0x31, 9, x, color, 0x8D);
     s32 baseX = vec2GetXInt(&display->position);
     s32 baseY = vec2GetYInt(&display->position);
-    f32 baseAlpha = display->position.alpha;
+    f32 baseAlpha = vec2GetSpeed(&display->position);
     FUN_003f5b14(display, baseX, baseY, 0x17, 0x1A, baseAlpha);
     s32 contentX = vec2GetXInt(&display->contentPosition) + baseX;
     s32 contentY = vec2GetYInt(&display->contentPosition) + baseY;
-    f32 contentAlpha = display->contentPosition.alpha * baseAlpha;
+    f32 contentAlpha = vec2GetSpeed(&display->contentPosition) * baseAlpha;
     if (display->state == 0) {
         FUN_003f54c4(display, contentX, contentY, contentAlpha);
         FUN_003f61b4(display, baseX, baseY, contentAlpha);

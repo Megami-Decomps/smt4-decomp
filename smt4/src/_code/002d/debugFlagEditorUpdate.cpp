@@ -1,8 +1,9 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-int gameFlagSetValue(int a, u32 b, int c);
+
 int gameFlagIsSet(int id);
 extern int DAT_0043e360;
 extern int padIsButtonRepeat(u32 button);

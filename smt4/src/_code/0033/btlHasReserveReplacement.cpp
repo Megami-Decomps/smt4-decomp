@@ -1,5 +1,6 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlUnit.h"
+#include "battle/BattleUnitSlot.h"
 
 // The count lies beyond the existing party-slot prefix view.
 struct ReservePartyView {
@@ -10,7 +11,6 @@ struct ReservePartyView {
 };
 extern "C" {
 extern u32 g_btlScriptUnit;
-BtlUnit* btlUnitGet(u32 id);
 BtlUnitLink* gameGetUnitRecord(s32 slot);
 ReservePartyView* gameGetSlotTable(void);
 
@@ -19,7 +19,7 @@ u32 btlHasReserveReplacement(const BtlUnitEntry* entry)
 {
     if (entry != NULL) {
         if (entry->flags & 2) {
-            BtlUnit* actor = btlUnitGet(g_btlScriptUnit);
+            BtlUnit* actor = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
             if (actor->params != NULL && (*(u32*)actor->params & 2)) {
                 ReservePartyView* party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {

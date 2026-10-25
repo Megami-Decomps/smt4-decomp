@@ -1,4 +1,4 @@
-/* NON_MATCHING: constant scheduling only: the build hoists the constant 0 into r6 and the argument 0x10 into r1 earlier than retail */
+/* NON_MATCHING: native content-slot node receiver recovered; zero/table-id constant hoisting and final state/timer store registers differ. */
 #include "common.h"
 
 extern "C" {
@@ -15,7 +15,7 @@ typedef struct BustUp0035fc4c {
 
 typedef struct AocSystem0035fc4c AocSystem0035fc4c;
 
-void asdTMTexTableReleaseNode(s32 table);
+void asdTMTexTableReleaseNode(s32 table, s32 node);
 void FUN_001b2d54(AocSystem0035fc4c *aoc, s32 table, s32 slot);
 
 extern AocSystem0035fc4c *g_aocSystem; /* 0x570280 */
@@ -28,7 +28,7 @@ void btlTalkBustUpReleaseContent(void)
 
     if (bustUp != NULL) {
         if (bustUp->contentSlot >= 0) {
-            asdTMTexTableReleaseNode(0x10);
+            asdTMTexTableReleaseNode(0x10, bustUp->contentSlot);
             if (g_btlTalkBustUp != NULL) {
                 g_btlTalkBustUp->textureLoaded = 0;
             }

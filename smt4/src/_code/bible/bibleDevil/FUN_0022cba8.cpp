@@ -6,7 +6,7 @@ extern "C" {
 
 int digitsDrawAtAreaCorner(...);
 int FUN_0022d7b0(...);
-int FUN_0022d800(...);
+int uiDrawScrollingSelectionEntry(...);
 int FUN_0022d9c8(...);
 int FUN_0022daac(...);
 int FUN_0022db94(...);
@@ -31,7 +31,7 @@ extern unsigned int DAT_0049375c; /* 0x49375c */
 
 /* Supplied declaration required: digitsDrawAtAreaCorner. */
 /* Supplied declaration required: FUN_0022d7b0. */
-/* Supplied declaration required: FUN_0022d800. */
+/* Supplied declaration required: uiDrawScrollingSelectionEntry. */
 /* Supplied declaration required: FUN_0022d9c8. */
 /* Supplied declaration required: FUN_0022daac. */
 /* Supplied declaration required: FUN_0022db94. */
@@ -208,7 +208,7 @@ LAB_0022cd30:
             temp_v0 = (int)*(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
             temp_v2 = FUN_00240d5c(param_1 + 0x20);
             temp_v12 = (float)(*(int *)(param_1 + 0x594) + 1);
-            FUN_0022d800(param_1,temp_v2,temp_v12,(int)*(char *)(param_1 + 0x56d));
+            uiDrawScrollingSelectionEntry(param_1,temp_v2,temp_v12,(int)*(char *)(param_1 + 0x56d));
             temp_v16 = 1.4013e-45f;
             temp_v17 = temp_v12;
             FUN_0022dcac(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v0,temp_v2);

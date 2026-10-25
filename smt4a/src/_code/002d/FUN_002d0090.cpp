@@ -1,4 +1,3 @@
-/* NON_MATCHING: existing baseline uses an unconditional global load and duplicated return epilogue instead of retail's conditional load/shared return. */
 #include "battle/btlView.h"
 #include <stddef.h>
 
@@ -28,33 +27,38 @@ static inline void activateBattleView(BattleViewOwner **slot)
     object->flags |= 1;
 }
 
-static inline void attachBattleView(BattleViewOwner **slot)
+static inline void attachBattleView(BattleViewState *state, BattleViewOwner **slot)
 {
     FUN_0040ab7c(*slot, 2);
-    FUN_0040aad4(*slot, g_battleViewState.attachments.primary[0]->object);
+    FUN_0040aad4(*slot, state->attachments.primary[0]->object);
     handleRegistryRegisterObject(g_handleRegistry, (*slot)->object);
 }
 
 // Attach all six battle-view objects once their resources are ready.
 extern "C" s32 FUN_002d0090()
 {
-    if (!gameFlagIsSet(0x4d0))
+    BattleViewState *state = gameFlagIsSet(0x4d0) ? &g_battleViewState : NULL;
+    if (state == NULL)
         return 1;
-    BattleViewState *state = &g_battleViewState;
-    if (!FUN_0040ab8c(state->attachments.primary[0]) ||
-        !FUN_0040ab8c(state->attachments.primary[1]) ||
-        !FUN_0040ab8c(state->attachments.primary[2]) ||
-        !FUN_0040ab8c(state->children[0]) ||
-        !FUN_0040ab8c(state->children[1]) ||
-        !FUN_0040ab8c(state->children[2]))
-        return 0;
+    s32 ready = FUN_0040ab8c(state->attachments.primary[0]);
+    if (!ready) return ready;
+    ready = FUN_0040ab8c(state->attachments.primary[1]);
+    if (!ready) return ready;
+    ready = FUN_0040ab8c(state->attachments.primary[2]);
+    if (!ready) return ready;
+    ready = FUN_0040ab8c(state->children[0]);
+    if (!ready) return ready;
+    ready = FUN_0040ab8c(state->children[1]);
+    if (!ready) return ready;
+    ready = FUN_0040ab8c(state->children[2]);
+    if (!ready) return ready;
     FUN_0040ab7c(state->attachments.primary[0], 2);
     activateBattleView(&state->attachments.primary[0]);
     activateBattleView(&state->attachments.primary[1]);
     activateBattleView(&state->attachments.primary[2]);
-    attachBattleView(&state->children[0]);
-    attachBattleView(&state->children[1]);
-    attachBattleView(&state->children[2]);
+    attachBattleView(state, &state->children[0]);
+    attachBattleView(state, &state->children[1]);
+    attachBattleView(state, &state->children[2]);
     state->attachments.state = 1;
     return 1;
 }

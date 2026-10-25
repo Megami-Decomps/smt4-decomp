@@ -1758,7 +1758,7 @@
 0x0034f6cc FUN_0034f6cc between
 0x0034f6e8 FUN_0034f6e8 callers
 0x0034f758 soundResetPairState between
-0x0034f768 FUN_0034f768 between
+0x0034f768 mobiclipDecoderSetSources name
 0x0034f780 _ZN9Obj420a2c14releaseSourcesEv callers
 0x0034f7ec FUN_0034f7ec between
 0x0034f800 FUN_0034f800 between

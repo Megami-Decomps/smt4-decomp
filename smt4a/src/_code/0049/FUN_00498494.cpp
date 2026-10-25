@@ -5,7 +5,7 @@ extern "C" {
 s32 FUN_001ba3d0(s16);
 s32 FUN_0031d174(EquipmentMenuCursor *);
 s32 FUN_00498408(EquipmentMenuState *, s16);
-u32 FUN_0049cad0(EquipmentMenuItem *);
+u32 shopGetEntryPrice(EquipmentMenuItem *);
 s32 btlRollClamped(s16, u32);
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 
@@ -25,7 +25,7 @@ void FUN_00498494(EquipmentMenuState *state, u32 nextState)
     EquipmentMenuItem *item = &state->pages[page].items[index];
     s32 value;
     if (state->page != 8) {
-        u32 maximum = FUN_0049cad0(item);
+        u32 maximum = shopGetEntryPrice(item);
         value = btlRollClamped(item->id, maximum);
     } else {
         value = FUN_001ba3d0(item->id);

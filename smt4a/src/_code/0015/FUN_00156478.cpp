@@ -1,4 +1,4 @@
-/* NON_MATCHING: state machine matches in structure; retail keeps zero in r6 (r5 holds a window copy in the timer case), fuses textWidth/labelX loads with ldrd in the label scroll and orders the textRight loads differently. */
+/* NON_MATCHING: close transition and label arrival match; textRight scroll uses swapped width/position registers. */
 #include "shard/W4_Match3_InfoWindow.h"
 
 extern "C" {
@@ -8,6 +8,20 @@ void FUN_00167458(void *sprite, s32 arg);
 s32 vec2GetXInt(const void *position);
 void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 arg);
+
+static inline void infoWindowBeginClose()
+{
+    InfoWindow *window = g_infoWin;
+    if (window->state != 0) {
+        window->state = 5;
+        window->timer = 30;
+        uiSpriteSetKeyframe(&window->sprites.background, 1, 0);
+        uiSpriteSetImageKeyframe(&window->sprites.background, 1, 0);
+        if (window->active == 2) {
+            uiSpriteSetKeyframe(&window->sprites.content, 4, 0);
+        }
+    }
+}
 
 // Per-frame update of the info window: fades the frame in, scrolls a wide label, waits out its timer and fades out.
 s32 FUN_00156478(void)
@@ -33,9 +47,9 @@ s32 FUN_00156478(void)
         FUN_00167458(&window->labelAnimation, 0);
         window->labelX = vec2GetXInt(&window->labelAnimation);
         if (window->labelX <= 0) {
+            window->labelX = 0;
             window->state = 3;
             window->frame = 0;
-            window->labelX = 0;
         }
         window->textRight = window->labelX + window->textWidth + 42;
         break;
@@ -53,13 +67,7 @@ s32 FUN_00156478(void)
         break;
     case 4:
         if ((s32)window->timer >= 0 && window->frame > (s32)window->timer) {
-            window->state = 5;
-            window->timer = 30;
-            uiSpriteSetKeyframe(&window->sprites.background, 1, 0);
-            uiSpriteSetImageKeyframe(&window->sprites.background, 1, 0);
-            if (window->active == 2) {
-                uiSpriteSetKeyframe(&window->sprites.content, 4, 0);
-            }
+            infoWindowBeginClose();
         }
         break;
     case 5:

@@ -22,3 +22,6 @@ shopListItemGetId = 0xe1d000b4; // 0x3a82a8 (FUN_003a8240: add r0, r5, r0, lsl #
 scriptProcessSetMode = 0xe5801108; // 0x27376c (FUN_002736e8): mov r1, #2 sets the argument, r0 is the stored process, and r0 is reloaded from the holder right after the call
 asdGxGetBlackForced = 0xe5d001d0; // 0x105c54 (asdGxResumeAndApplyPreset: the presets address is loaded again into r0 as the argument although r4 holds it)
 frameAnimationGetBusy = 0xe1d008d5; // 0x25a0ac (frameTexPollTransitionComplete: the animation sub-object address is formed in r0, add #0xe8 unfolded, and rebuilt right after)
+eventFlagForScene = 0xe2800b02; // 0x1ed510 (FUN_001ed4e0, after mov r0, r5; result moved to r4)
+asdMdlNodeGetCount = 0xe5900028; // asdMdlManagerDestroy, after ldr r0, [r5, #8]; result kept by subs r6, r0, #0
+shopResultGetText = 0xe2800e17; // 0x2591f0 (shopFormatCommandResult, on shopGetResult's r0; result moved to r4)

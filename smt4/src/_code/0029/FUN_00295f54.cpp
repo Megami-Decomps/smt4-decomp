@@ -1,4 +1,4 @@
-/* NON_MATCHING: message-resource address lifetime, search scratch registers and constant-load placement differ. */
+/* NON_MATCHING: resource slot and distinct message paths match; one address-add schedule and dialog-mode constant setup differ. */
 #include "gamedata/UnitStats.h"
 
 struct UnitNotificationView {
@@ -23,7 +23,7 @@ const char *demonGetRaceLabel(u16, u32);
 char *libc_strcpy(char *, const char *);
 void textEncodeFontSlot(u32, const char *);
 void infoWinSetMessage(u32, u32);
-void dialogOpen(s32);
+void dialogOpen(u8);
 void infoWinSetTimer(s32);
 void infoWinSetValue(s32);
 
@@ -37,6 +37,7 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
             infoWinStartTimer(1);
         return;
     }
+    u32 *messages = &notifications->messages;
     s16 index = -1;
     for (s32 i = 0; i < 25; ++i) {
         if (notifications->order[i] == notifications->current) {
@@ -44,17 +45,17 @@ void FUN_00295f54(UnitNotificationView *notifications, s32)
             break;
         }
     }
-    u32 message = 200;
-    if (index != 0) {
+    if (index == 0) {
+        infoWinSetMessage(*messages, 200);
+    } else {
         const StatBlock *unit = gameGetUnitRecord(index - 1);
         char text[32] = {};
         libc_strcpy(text, FUN_002bd06c(unit->id));
         textEncodeFontSlot(8, text);
         libc_strcpy(text, demonGetRaceLabel(unit->id, 0));
         textEncodeFontSlot(16, text);
-        message = 201;
+        infoWinSetMessage(*messages, 201);
     }
-    infoWinSetMessage(notifications->messages, message);
     ++notifications->current;
     dialogOpen(1);
     if (notifications->count == notifications->current) {

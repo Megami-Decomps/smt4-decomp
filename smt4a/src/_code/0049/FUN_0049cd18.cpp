@@ -1,11 +1,22 @@
-/* NON_MATCHING: same logic; for the sale path's AOC record case (kind 10) retail ends the case with `ldrne r4,[r0,#44]; beq` into a shared `ldr r4,=99999999` block, while armcc here emits `bne` plus its own inline `ldr r4,=99999999`, so the sale switch is 4 bytes longer and every later branch target and jump-table word shifts by 4. */
+/* NON_MATCHING: corrected unsupported buy-kind11 and recovered percentage bitfield; sale missing-price block sharing and percentage multiply/divide registers still differ. */
 #include "common.h"
+#include <stddef.h>
 
 /* An item stack: its id and flags (bit 1: priced by a percentage in bits 2..9). */
 struct ItemStack {
     /* 0x00 */ u16 id;
-    /* 0x02 */ u16 flags;
+    /* 0x02 */ union {
+        u16 flags;
+        struct {
+            u16 unk00 : 1;
+            u16 percentagePriced : 1;
+            u16 percentage : 8;
+            u16 unk0A : 6;
+        } pricing;
+    };
 };
+typedef char ItemStackLayoutCheck[
+    sizeof(ItemStack) == 4 && offsetof(ItemStack, flags) == 2 ? 1 : -1];
 
 /* The price fields of the two record kinds. */
 struct ItemRecord {
@@ -74,7 +85,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         }
         }
         if (stack->flags & 2)
-            price = ((stack->flags & 0x3FF) >> 2) * price / 100;
+            price = stack->pricing.percentage * price / 100;
         total = price * count;
     } else {
         flagValueAdd(stack->id, count);
@@ -84,7 +95,6 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         s32 price = 0;
         switch (aocEntryGetKind(id)) {
         case 1:
-        case 11:
         case 12: {
             ItemRecord *record = dataTable8FindRecord(id);
             price = record != NULL ? record->buyPrice : PRICE_MISSING;
@@ -105,7 +115,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         }
         }
         if (stack->flags & 2)
-            price = ((stack->flags & 0x3FF) >> 2) * price / 100;
+            price = stack->pricing.percentage * price / 100;
         if (gameDataBlocksGetTableFlag() == 4)
             price *= 3;
         total = -price * count;

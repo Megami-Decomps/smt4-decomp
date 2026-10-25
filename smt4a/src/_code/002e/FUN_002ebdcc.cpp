@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ebdcc` (_code @ 0x2ebdcc, 0x8a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ int bustupCutAnimSetFlag(int);
 int btlTalkBustUpSetUnk2F4(int);
 int FUN_003deea4(...);
 int FUN_003df168(int *, unsigned int);
-int gameFlagSetValue(...);
 int FUN_00417a60(...);
 int gameFlagSlotSetEnableBit(unsigned int, int);
 int optionsClearFlag1(void);
@@ -101,7 +101,6 @@ extern unsigned int btlTalkBustUpGetId(void);
 /* Supplied declaration required: FUN_003dea6c. */
 /* Supplied declaration required: FUN_003deea4. */
 /* Supplied declaration required: FUN_003df168. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00417c24. */
 /* Supplied declaration required: gameFlagSlotSetEnableBit. */
@@ -178,7 +177,7 @@ unsigned int FUN_002ebdcc(void)
         temp_v10 = temp_v4 + temp_v2 * 2;
         temp_v0 = *(short *)(temp_v10 + 0xe0);
         if (temp_v0 != 0) {
-          gameFlagSetValue(temp_v0,1);
+          gameFlagSetValue(temp_v0, 1, 1);
         }
         temp_v0 = *(short *)(temp_v10 + 0xe6);
         if (temp_v0 != 0) {

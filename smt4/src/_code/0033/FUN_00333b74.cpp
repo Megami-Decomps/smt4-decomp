@@ -1,5 +1,6 @@
-/* NON_MATCHING: the loot-weight sum is accumulated by retail in two interleaved running totals with software-pipelined loads, and the quest-record slot address is built with different shifts; the reward logic is the same. */
+/* NON_MATCHING: reward-list/section registers are exchanged, pipelined loot-weight temporaries differ, and gold multiply operands are reversed. */
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
@@ -22,14 +23,13 @@ typedef struct QuestRuntimeStatus {
     u8 flags;                  /* bit 3: use the second reward slot set */
 } QuestRuntimeStatus;
 
-/* A loot table (0x50 bytes): eight (id, weight) pairs and a last extra weight. */
+/* A loot table (0x50 bytes): eight (id, weight) pairs after its 0x30-byte header. */
 typedef struct LootTable {
     /* 0x00 */ u8 unk00[0x30];
     struct {
         /* 0x30 */ u16 id;
         /* 0x32 */ u16 weight;
     } pairs[8];
-    /* 0x50 */ u8 unk50[0x4];
 } LootTable;
 
 /* The reward list being filled (only the fields written here). */
@@ -53,6 +53,11 @@ typedef struct AocSystem {
     LootCacheEntry *loot;
 } AocSystem;
 
+typedef char QuestRewardLayouts[
+    sizeof(RewardSlot) == 12 && offsetof(QuestRewardRecord, slots) == 0x154 &&
+    sizeof(LootTable) == 0x50 && offsetof(LootTable, pairs) == 0x30 &&
+    sizeof(LootCacheEntry) == 0x54 && offsetof(LootCacheEntry, table) == 4 ? 1 : -1];
+
 typedef struct PlayerLevelView {
     u8 unk00[0x76];
     u8 level;
@@ -67,7 +72,24 @@ u32 dataTable9EntryOrZero(u32 level);
 void *dataTableGet(u32 table, u32 section);
 void *dataTableGetEntries(void *section);
 u32 dataTableGetCount(void *section);
-s32 randNextInRange(s32 limit);
+u32 randNextInRange(s32 limit);
+
+static __inline LootTable *questRewardFindLootTable(u16 tableId)
+{
+    if (g_aocSystem->loot != NULL) {
+        LootCacheEntry *entry = g_aocSystem->loot;
+        u32 count = g_aocSystem->lootCount;
+        for (u32 index = 0; index < count; ++index, ++entry) {
+            if (entry->key == tableId) {
+                return reinterpret_cast<LootTable *>(entry->table);
+            }
+        }
+    }
+    void *section = dataTableGet(0x1C, 1);
+    LootTable *tables = static_cast<LootTable *>(dataTableGetEntries(section));
+    dataTableGetCount(section);
+    return &tables[tableId];
+}
 
 /* Fills the reward list for a quest: a fixed item, a set value, or 3-7 rolls on a loot table, and
  * its gold (a fixed amount, or a percent of the player's level base). */
@@ -78,9 +100,10 @@ void FUN_00333b74(RewardList *list, void *quest)
     if (record == NULL) {
         return;
     }
-    RewardSlot *slot = &record->slots[(questGetRuntimeStatus(quest)->flags >> 3) & 1];
+    u8 flags = questGetRuntimeStatus(quest)->flags;
+    RewardSlot *slot = &record->slots[(flags >> 3) & 1];
 
-    if ((questGetRuntimeStatus(quest)->flags & 8) != 0 && slot->kind == 0) {
+    if ((flags & 8) != 0 && slot->kind == 0) {
         slot = &record->slots[0];
     }
     if (slot->kind == 1) {
@@ -89,26 +112,7 @@ void FUN_00333b74(RewardList *list, void *quest)
     } else if (slot->kind == 3) {
         list->value = slot->amount;
     } else if (slot->kind == 4) {
-        u16 tableId = slot->arg;
-        LootTable *table = NULL;
-
-        if (g_aocSystem->loot != NULL) {
-            LootCacheEntry *entry = g_aocSystem->loot;
-
-            for (u32 i = 0; i < g_aocSystem->lootCount; i++, entry++) {
-                if (entry->key == tableId) {
-                    table = (LootTable *)entry->table;
-                    break;
-                }
-            }
-        }
-        if (table == NULL) {
-            void *section = dataTableGet(0x1C, 1);
-            LootTable *tables = (LootTable *)dataTableGetEntries(section);
-
-            dataTableGetCount(section);
-            table = &tables[tableId];
-        }
+        LootTable *table = questRewardFindLootTable(slot->arg);
         s32 total = 0;
         for (s32 i = 0; i < 8; i++) {
             if (table->pairs[i].weight != 0) {
@@ -119,7 +123,7 @@ void FUN_00333b74(RewardList *list, void *quest)
         s32 added = 0;
 
         for (; rolls != 0; rolls--) {
-            s32 pick = randNextInRange(total - 1);
+            s32 pick = randNextInRange((u16)(total - 1));
 
             for (s32 i = 0; i < 8; i++) {
                 if (table->pairs[i].weight == 0) {
@@ -142,13 +146,15 @@ void FUN_00333b74(RewardList *list, void *quest)
         gold = slot->gold;
     } else {
         u32 base;
+        u32 level = gameGetPlayerData()->level;
 
-        if (gameGetPlayerData()->level >= 99) {
+        if (level >= 99) {
             base = dataTable9EntryOrZero(98);
+            list->gold = base;
         } else {
-            base = dataTable9EntryOrZero(gameGetPlayerData()->level);
+            base = dataTable9EntryOrZero(level);
+            list->gold = base;
         }
-        list->gold = base;
         gold = base * slot->percent / 100;
     }
     list->gold = gold;

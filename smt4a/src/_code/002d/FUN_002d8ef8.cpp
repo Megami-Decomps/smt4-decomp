@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: around the unk164/unk168 pair store retail keeps the zero in r1 and the scene in r0 (reloaded from g_lmapScene), this build swaps them. */
+/* NON_MATCHING: final area-type lookup compares entry/player keys in r2/r1 rather than retail r1/r2; scene reset now agrees. */
 #include "common.h"
 #include "gfx/ObjectRegistry.h"
 
@@ -79,6 +79,12 @@ static __inline RegisteredObject *registerModel(SceneModel *model)
     return object;
 }
 
+static __inline void resetSceneAreaSelection(SceneModels *scene)
+{
+    scene->unk164 = 0;
+    scene->unk168 = -1;
+}
+
 /* Sets up the map scene's models for the player's current area. */
 extern "C" void FUN_002d8ef8(void)
 {
@@ -111,8 +117,7 @@ extern "C" void FUN_002d8ef8(void)
     registerModel(g_lmapScene->area);
     g_lmapScene->model184 = g_gameState.model530;
     registerModel(g_lmapScene->model184);
-    g_lmapScene->unk164 = 0;
-    g_lmapScene->unk168 = -1;
+    resetSceneAreaSelection(g_lmapScene);
     g_lmapScene->model178 = g_gameState.model528;
     registerModel(g_lmapScene->model178);
     g_lmapScene->model17C = g_gameState.model52C;

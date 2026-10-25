@@ -22,11 +22,11 @@ void* asdMemoryAllocTracked(u32 size, u32 alignment, u32 arg, u32 memoryType, u3
 void sysMemClear(void* block, u32 size);
 u32 asdProcessCreateSimple(const char* name, s32 priority, s32 a, s32 b, void (*update)(void*),
                            void (*release)(void*), void* owner);
-void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, void (*draw)(void*), s32 c,
+void taskCreateDraw(const char* name, s32 priority, s32 a, s32 b, s32 (*draw)(u32), s32 c,
                     void* owner, u32 parent);
 void FUN_002ad130(void* owner);
 void eventTexFree(void* owner);
-void FUN_002ad180(void* owner);
+s32 FUN_002ad180(u32 job);
 s32 jobIsValid(u32 job);
 void FUN_0026e68c(u32 job, s32 arg);
 void jobSetParent(u32 parent, u32 job);

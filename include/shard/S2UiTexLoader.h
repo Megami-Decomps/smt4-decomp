@@ -32,7 +32,7 @@ typedef struct UiTexRequest {
 /* The loader (at +0x9c of the screen). */
 typedef struct UiTexLoader {
     /* 0x000 */ u8 unk000[0xa8];
-    /* 0x0a8 */ u8 anim[0x744];             /* animation object updated every frame (FUN_004cf8dc) */
+    /* 0x0a8 */ u8 anim[0x744];             /* animation object updated every frame (entryDispatchUpdate) */
     /* 0x7ec */ UiTexEntry *entries[0x7f];
     /* 0x9e8 */ u8 unk9e8[5];
     /* 0x9ed */ u8 cycling;                  /* advances `cycle` every update */

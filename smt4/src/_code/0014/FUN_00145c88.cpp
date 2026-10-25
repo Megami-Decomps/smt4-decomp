@@ -1,17 +1,19 @@
-/* NON_MATCHING: source/destination provider load operands and one world-matrix result move differ; matrix snapshot and recursive tail match. */
+/* NON_MATCHING: source/destination provider traversal matches; world-matrix result/index operand allocation still omits one retail move. */
 #include "gfx/ModelBoneAttachment.h"
 extern "C" {
 s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
 void nn_math_ARMv6_MTX34CopyAsm(SkeletonMatrix34 *destination, const SkeletonMatrix34 *source);
+
 
 // Copy the parent's selected world transform into this bone, then synchronize attached descendants.
 u32 FUN_00145c88(ModelBoneAttachment *attachment, ModelBoneAttachmentRoot *parent)
 {
     if (!modelHasLoadedAttachment(attachment->object))
         return 0;
-    ModelBoneMatrixProvider *destination = attachment->object->model->owner->secondary.skeleton.provider;
     ModelBoneMatrixProvider *source = parent->model->owner->secondary.skeleton.provider;
-    SkeletonMatrix44 *world = &source->vtable->getWorldMatrices(source)->matrices[attachment->sourceBone];
+    ModelBoneMatrixProvider *destination = attachment->object->model->owner->secondary.skeleton.provider;
+    ModelBoneWorldMatrixSet *worldMatrices = source->vtable->getWorldMatrices(source);
+    SkeletonMatrix44 *world = &worldMatrices->matrices[attachment->sourceBone];
     SkeletonMatrix34 transform = *reinterpret_cast<SkeletonMatrix34 *>(world);
     SkeletonMatrix34 *matrix = &destination->vtable->getMatrices(destination)->matrices[attachment->destinationBone];
     nn_math_ARMv6_MTX34CopyAsm(matrix, &transform);

@@ -75,7 +75,7 @@ void screenStartOrClear(u32 buffer, s32 frames);
 void characterInfoPanelPopulate(StatusDevil *devil, StatusCharacter *character, u32 extra);
 s32 devilIsTextureLoaded(s32 modelId, s32 arg);
 void resourceEntryMarkReleased(u32 resources, s32 index);
-void FUN_003e5c68(u32 handle, void *controller);
+void modelApplyNonzeroGroupRotation(u32 handle, void *controller);
 u32 gameGetPlayerData(void);
 
 /* Once the demon model and the panel resources are loaded, populates the character info panel and
@@ -126,7 +126,7 @@ u32 FUN_00359dc4(StatusScreen *screen)
                 } else {
                     screen->state = 5;
                     screen->stateArg = 1;
-                    FUN_003e5c68(screen->links->handle, screen->links->controller);
+                    modelApplyNonzeroGroupRotation(screen->links->handle, screen->links->controller);
                 }
                 for (s32 i = 0; i < 2; i++) {
                     FUN_002e1c94(screen->timers[i].work, 4, screen->timers[i].frame, 0.0f, 1.0f);

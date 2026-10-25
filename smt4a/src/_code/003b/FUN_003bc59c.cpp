@@ -1,5 +1,6 @@
-/* NON_MATCHING: same as battleCountActionsByAttribute - the 64-bit candidate-mask tests schedule as ldm/scalar loads instead of retail's ldrd and the attribute shifts use r0 instead of r1; control flow and stack layout match. */
+/* NON_MATCHING: canonical main-state view and explicit choice forwarding recovered; mask loads, attribute shifts and range reloads differ. */
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 
@@ -43,24 +44,17 @@ struct BattleChoiceSpan {
     s32 count[3];
     s32 range[8];
 };
-/* The battle block's combatant table. */
-struct BattleCombatantTable {
-    u8 unk0000[0x1ffc];
-    BtlCombatantEntryA *entries;
-    u8 unk2000[0x4cd1 - 0x2000];
-    u8 selectionActive;                     // 0x4cd1
-};
 }
 
 extern "C" {
 BattleActionSkill *dataTable04FindById(u32 id);
 BattleActionItem *dataTable8FindRecord(s32 id);
-BattleCombatantTable *btlGetMainState(void);
+BtlMainStateA *btlGetMainState(void);
 u32 scrGetArg(s32 index);
 void scrSetResult(s32 value);
-u32 btlResolveEntryChoice(void);
+u32 btlResolveEntryChoice(s32 choice);
 void FUN_00301a08(u32 choice, s32 range[8], s32 count[3]);
-const BtlCombatantEntryA *FUN_003eaf20(BattleCombatantTable *state);
+const BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
 s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attribute);
 
 /* Script command: counts the skills of one attribute (arg 0) among the actions of the chosen combatants,
@@ -68,12 +62,11 @@ s32 battleCountActionsByAttribute(const BtlCombatantEntryA *combatant, u32 attri
 s32 FUN_003bc59c(void)
 {
     u32 attribute = scrGetArg(0);
-    scrGetArg(1);
-    u32 choice = btlResolveEntryChoice();
+    u32 choice = btlResolveEntryChoice(scrGetArg(1));
     s32 total = 0;
     BattleChoiceSpan span;
     FUN_00301a08(choice, span.range, span.count);
-    for (s32 index = span.range[0]; index < span.range[0] + span.count[0]; index++) {
+    for (s32 index = span.range[0]; index < span.count[0] + span.range[0]; index++) {
         const BtlCombatantEntryA *combatant = &btlGetMainState()->entries[index];
         const BattleActionCountView *actions = reinterpret_cast<const BattleActionCountView *>(combatant);
         u64 flags = combatant->flags;
@@ -126,7 +119,7 @@ s32 FUN_003bc59c(void)
             total += found;
         }
     }
-    if (btlGetMainState()->selectionActive != 0) {
+    if (btlGetMainState()->unk4cd1 != 0) {
         const BtlCombatantEntryA *selected = FUN_003eaf20(btlGetMainState());
         if (selected != NULL) {
             total += battleCountActionsByAttribute(selected, attribute);

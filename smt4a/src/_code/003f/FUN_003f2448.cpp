@@ -7,7 +7,7 @@ s32 FUN_0019acdc(u16 id, u32 flags);
 // Tests whether the active script unit's record is in category two.
 bool FUN_003f2448(void)
 {
-    ScriptUnit* unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit* unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (unit == NULL || unit->entryView.entry == NULL) {
         return 0;
     }

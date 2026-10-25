@@ -20,7 +20,7 @@ static __inline void sortTableSection(s32 table, s32 section,
                                      s32 (*compare)(const void *, const void *))
 {
     void *resource = dataTableGet(table, section);
-    void *entries = dataTableGetEntries(resource);
+    Record *entries = static_cast<Record *>(dataTableGetEntries(resource));
     u32 count = dataTableGetCount(resource);
     qsort(entries, count, sizeof(Record), compare);
 }

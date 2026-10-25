@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 112 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: corrected fade base from0x394 to0x794, restored linker-inlined speed getter and three-byte glyph buffer; remaining stack operations and blink division registers differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 
@@ -27,13 +27,14 @@ typedef struct SlotPicker {
     /* 0x022 */ s8 selected;
     /* 0x023 */ u8 unk023[0x8D];
     /* 0x0B0 */ u8 slotText[8][2];      /* two glyph bytes per slot */
-    /* 0x0C0 */ u8 unk0c0[0x2D4];
-    /* 0x394 */ SlotFade fade;
+    /* 0x0C0 */ u8 unk0c0[0x6D4];
+    /* 0x794 */ SlotFade fade;
 } SlotPicker;
 
 extern RenderCtx *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void FUN_002c39a4(RenderCtx *context);
 void FUN_002bed3c(void);
@@ -50,21 +51,23 @@ void FUN_002c18e4(RenderCtx *context);
  * slot's cursor (blinking every 30 frames) and the slot's two-glyph label. */
 void FUN_00398ba8(SlotPicker *picker)
 {
-    f32 scale = picker->fade.speed;
+    f32 scale = vec2GetSpeed(&picker->fade);
 
     efctSetSpeed(scale);
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
 
     FUN_002c39a4(g_renderCtx);
     FUN_002bed3c();
-    renderCtxPushA(g_renderCtx, FUN_002c5d80(1, 0));
+    RenderCtx *context = g_renderCtx;
+    s32 state = FUN_002c5d80(1, 0);
+    renderStackPushCountedDirect(&context->stackA, state);
     FUN_002c1b64(g_renderCtx, 0);
     FUN_002bf288(2, 0x2E, 0, parallax, 0, 0xB);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     FUN_002bf288(2, 0x2E, 1, parallax, 0, 0xB);
     FUN_002bf288(2, 0x2E, 2, parallax, 0, 0xB);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
-    char label[4] = {0, 0, 0, 0};
+    char label[3] = {0, 0, 0};
 
     for (s32 i = 0; i < 8; i++) {
         SlotLayout *slot = FUN_002bf4f8(0x2E, i + 8);

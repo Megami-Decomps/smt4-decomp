@@ -4,18 +4,18 @@
 
 extern "C" {
 
-int deletingDtor_002e56ec(unsigned int, unsigned char *);
+int __aeabi_vec_delete(unsigned int, unsigned char *);
 
 extern unsigned char LAB_00124a43; /* 0x124a43 */
 
-/* Supplied declaration required: deletingDtor_002e56ec. */
+/* Supplied declaration required: __aeabi_vec_delete. */
 
 
 unsigned int * FUN_0012d568(unsigned int *param_1)
 
 {
 /* irregular: 1 native warning(s); review required */
-  deletingDtor_002e56ec(*param_1,&LAB_00124a43);
+  __aeabi_vec_delete(*param_1,&LAB_00124a43);
   return param_1;
 }
 

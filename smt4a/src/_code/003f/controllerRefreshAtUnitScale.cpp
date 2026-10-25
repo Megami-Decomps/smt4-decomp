@@ -1,13 +1,12 @@
-#include "shard/W5_W5Match7_AnimatedObject.h"
+#include "gfx/CameraMotion.h"
 
 extern "C" {
 
-void FUN_003f9ac4(AnimatedObject *object, f32 scale);
 
-void controllerRefreshAtUnitScale(AnimatedObject *object)
+void controllerRefreshAtUnitScale(AnimatedObject *object, CameraMotionOutput *output, s32 index)
 {
     object->progress = 0.0f;
-    FUN_003f9ac4(object, 1.0f);
+    FUN_003f9ac4(object, output, index, 1.0f);
     object->progress = 0.0f;
 }
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019f3dc` (_code @ 0x19f3dc, 0x6a4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int asdSequenceRequest(...);
 
 int FUN_00289608(int, int);
 int msgWindowReset(void);
-int gameFlagSetValue(...);
 int FUN_002897b0(int);
 int FUN_002897d0(...);
 int FUN_002897f0(unsigned int, unsigned int);
@@ -73,7 +73,6 @@ extern char *gameJumpRequestGet(void);
 /* Supplied declaration required: FUN_00289608. */
 extern int FUN_002896bc(void);
 /* Supplied declaration required: msgWindowReset. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897b0. */
 extern int FUN_002897c0(void);
 /* Supplied declaration required: FUN_002897d0. */
@@ -241,7 +240,7 @@ unsigned int FUN_0019f3dc(void)
           return 0;
         }
         if (puVar2[7] != 0) {
-          gameFlagSetValue(puVar2[7],1);
+          gameFlagSetValue(puVar2[7], 1, 1);
         }
         uiFadeRelease();
         buttonHelpRelease();

@@ -1,7 +1,7 @@
 /* NON_MATCHING: failure-report argument scheduling and final success-result materialization differ. */
 #include "shard/W6_W6Match1_PositionedStream.h"
 
-extern "C" void FUN_0013ebd8(u32 result);
+#include "sys/ProcessResult.h"
 extern "C" void FUN_0032ca54(u32 result);
 extern "C" void sysFatalBreak();
 extern "C" void vcallSlot12IfValid(u32 handle);

@@ -1,8 +1,9 @@
-/* NON_MATCHING: retail retains dead inline no-op loads and a constant-true phase-four guard; phase-store joins differ. */
+/* NON_MATCHING: phase-four return-true predicate identity is unknown; phase-store joins and final channel lookup scheduling differ. */
 #include "battle/ActionStateChannels.h"
 #include "battle/ActionKindSelection.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 struct BtlSkill;
 extern "C" {
@@ -53,7 +54,8 @@ u32 FUN_003d1c1c(ActionStateChannelOwner **owner, ActionKindSelection *work)
     case 3:
         if (!modelOwnerResetPlayerIfReady(*owner))
             return 0;
-        dataTable40FindById(work->command->skill);
+        asdDebugHookPtrInt(*owner, reinterpret_cast<const u8 *>(
+            dataTable40FindById(work->command->skill))[0x55]);
         work->sequence.phase = 4;
         break;
     case 4:

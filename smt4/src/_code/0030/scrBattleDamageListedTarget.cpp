@@ -19,7 +19,7 @@ u32 scrBattleDamageListedTarget(void)
 {
     u32 targetId = scrGetArg(0);
     s32 amount = scrGetArg(1);
-    ScriptUnit *source = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     BtlEntry *target = btlMainFindEntryByListedId(btlGetMainState(), targetId);
     FUN_00250720(btlGetMainState());
     BtlActionRecord *action = &btlGetMainState()->actions.records[target->members.ids[0]];

@@ -1,6 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00128174` (_code @ 0x128174, 0x1b8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: create-file size and result are recovered; remaining save-record construction uses unrecovered romwright locals and call contracts. */
 #include "romwright_types.h"
+#include "nn/fs/ArchiveCreateFile.h"
 
 extern "C" {
 
@@ -9,7 +9,6 @@ int FUN_001398dc(void);
 int FUN_001398f8(unsigned char **);
 int FUN_0013a5b0(unsigned int *, int *);
 int FUN_002ad66c(int *, int *);
-int FUN_002ad80c(unsigned int, unsigned int, int, int);
 int FUN_002ad888(void);
 int FUN_002bb648(void);
 int FUN_002bb6c4(unsigned char **, int *);
@@ -58,7 +57,6 @@ extern unsigned char DAT_00471b5c; /* 0x471b5c */
 /* Supplied declaration required: FUN_001398f8. */
 /* Supplied declaration required: FUN_0013a5b0. */
 /* Supplied declaration required: FUN_002ad66c. */
-/* Supplied declaration required: FUN_002ad80c. */
 /* Supplied declaration required: FUN_002ad888. */
 /* Supplied declaration required: FUN_002bb648. */
 /* Supplied declaration required: FUN_002bb6c4. */
@@ -73,7 +71,6 @@ void FUN_00128174(void)
 /* irregular: 12 native warning(s); review required */
   unsigned int *puVar1;
   unsigned short *puVar2;
-  unsigned int temp_v0;
   unsigned int temp_v1;
   int temp_v2;
   int temp_v3;
@@ -108,7 +105,7 @@ void FUN_00128174(void)
   
   temp_v1 = (*(unsigned int *)((unsigned char *)&DAT_00471b5c + 0x4));
   FUN_002ad888();
-  FUN_002ad80c(temp_v1,temp_v0,0x14,0);
+  temp_v1 = FUN_002ad80c(reinterpret_cast<const u16 *>(temp_v1), 0x14);
   if ((int)temp_v1 >= 0) {
     FUN_002c567c(&temp_v4);
     temp_v28 = temp_v4;

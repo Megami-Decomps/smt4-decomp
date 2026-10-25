@@ -1,7 +1,7 @@
-/* NON_MATCHING: needs multifile with btlUnitGet and FUN_004e9ae8 once their register clobber sets match retail. */
+/* NON_MATCHING: matched getter/multifile and target-mask snapshot restore frame/registers; initial mask load writeback and literal pool order differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BattleUnitSlot.h"
 
 namespace {
 
@@ -23,9 +23,10 @@ void FUN_004e6fb0(BattleAiContext *context)
     s32 count = 0;
     s32 lowestHp = 100000000;
     BtlCombatantEntryA *entry = context->state->entries;
+    u64 targetable = g_btlAction.targetable;
 
     for (s32 i = 0; i < 109; ++i, ++entry) {
-        if ((entry->flags & g_btlAction.targetable) && entry->hp <= lowestHp) {
+        if ((entry->flags & targetable) != 0 && entry->hp <= lowestHp) {
             candidates[count++] = entry->indexView.selectionIndex;
             lowestHp = entry->hp;
         }

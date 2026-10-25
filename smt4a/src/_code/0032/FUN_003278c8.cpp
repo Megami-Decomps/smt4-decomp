@@ -1,10 +1,11 @@
 /* NON_MATCHING: The active-slot offset is synthesized instead of literal-loaded, and the state destination uses its canonical global rather than the retail interior alias. */
 #include "shard/W5_W5Match7_FlagBanks.h"
+#include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 extern GameStateA g_gameState;
-void gameFlagSetValue(s32 flag, s32 value, s32 notify);
+
 
 /* Consumes active restoration entries with the requested key and raises their completion flags. */
 void FUN_003278c8(s32 key)

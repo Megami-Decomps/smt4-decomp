@@ -7,6 +7,7 @@ extern "C" {
 extern s32 aocItemGetPrice(u32 id);
 extern s32 FUN_00230f44(u32 id);
 
+
 s32 FUN_003a075c(u32 a, u32 b)
 {
     s32 keyA = aocItemGetPrice(a);

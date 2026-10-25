@@ -10,7 +10,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern int FUN_004863f8(...); /* 0x4863f8 */
+extern int uiAdvanceConditionalScreenSprite(...); /* 0x4863f8 */
 extern int FUN_00487124(...); /* 0x487124 */
 extern int FUN_0048a4c0(...); /* 0x48a4c0 */
 extern int FUN_0048b8a4(...); /* 0x48b8a4 */
@@ -49,7 +49,7 @@ void FUN_0048738c(int param_1)
   } while (temp_v0 < 0x11);
   *(unsigned int *)(param_1 + 0x13f8) = 0x48e408;
   *(unsigned int *)(param_1 + 0x13fc) = 0;
-  *(romwright_code **)(param_1 + 0x1400) = FUN_004863f8;
+  *(romwright_code **)(param_1 + 0x1400) = uiAdvanceConditionalScreenSprite;
   *(unsigned int *)(param_1 + 0x1404) = 0;
   *(romwright_code **)(param_1 + 0x1408) = FUN_00487124;
   *(unsigned int *)(param_1 + 0x140c) = 0;

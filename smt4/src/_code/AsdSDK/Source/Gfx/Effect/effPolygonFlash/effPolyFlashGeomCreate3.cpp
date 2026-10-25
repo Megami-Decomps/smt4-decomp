@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 33 vs built 30 rows, 28 diff lines. */
+/* NON_MATCHING: payload-address and table-size scratch registers r1/r2 are exchanged. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 

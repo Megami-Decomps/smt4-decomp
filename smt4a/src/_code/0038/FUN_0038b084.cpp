@@ -4,7 +4,7 @@
 extern "C" {
 extern NpcRoomA *g_npcRoom;
 char *libc_strcpy(char *destination, const char *source);
-void FUN_001654f8(const char *source, char *destination, s32 mode);
+char *FUN_001654f8(const char *source, char *destination, s32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 void FUN_003c1060(void);
 void FUN_0038892c(u32 text, u32 parameter);

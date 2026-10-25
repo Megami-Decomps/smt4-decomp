@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; preserved record/ID registers and placement of the valid-target branch differ, changing native alignment padding. */
+/* NON_MATCHING: valid-target branch layout restored; record/id/low-bound register lifetimes and one native alignment NOP differ. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/PadState.h"
 #include "AsdSDK/AsdDebug.h"
@@ -13,13 +13,14 @@ struct TalkDevilRecord {
     u16 targetId;              // 0x82
     u8 unk84[0x24];
 };
+struct Table01Record;
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 TalkDevilRecord *dataTable00FindById(u16 id);
 PadState *gameGetPlayerData();
-s32 partyHasStoredDemon(u16 id);
-void FUN_002bd06c(u16 id);
+u32 partyHasStoredDemon(u32 id);
+Table01Record *FUN_002bd06c(u16 id);
 s32 randBetween(s32 low, s32 high);
 s32 randNextInRange(u32 maximum);
 void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
@@ -31,8 +32,10 @@ u32 btlTalkCommand_SelectTalkTarget()
     u16 target = source->targetId;
     TalkDevilRecord *record = dataTable00FindById(target);
     devilGetRecord(target);
-    if (!target || !record || !(record->flags & 0x400) ||
-        gameGetPlayerData()->unk76 < record->level || partyHasStoredDemon(target)) {
+    if (target && record && (record->flags & 0x400) &&
+        gameGetPlayerData()->unk76 >= record->level && !partyHasStoredDemon(target)) {
+        scrSetResult(target);
+    } else {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Talk\\btlTalkCommand.cpp", 0x387);
         s16 *candidates = (s16 *)asdMemAlloc(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT,
                                             0, 0x962, 1);
@@ -46,7 +49,7 @@ u32 btlTalkCommand_SelectTalkTarget()
         if (span < 10) {
             span = 10;
         }
-        s32 low = (s16)(high - span);
+        s16 low = high - span;
         if (randBetween(low, high) <= 0) {
             scrSetResult(-1);
         } else {
@@ -71,8 +74,6 @@ u32 btlTalkCommand_SelectTalkTarget()
             scrSetResult(result);
         }
         asdMemFree(candidates);
-    } else {
-        scrSetResult(target);
     }
     return 1;
 }

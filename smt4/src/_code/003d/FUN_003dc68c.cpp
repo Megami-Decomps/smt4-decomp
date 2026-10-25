@@ -25,9 +25,9 @@ struct EffectSlot {
 struct BtlEffectWork {
     u8 unk0000[0x1CFC];
     char *names;                // 0x1CFC: entries of 0x16 bytes from +0x108
-    u8 unk1D00[0x694];
-    EffectSlot slots[4];        // 0x2394 - 4
-    u8 unk25C4[0xA70];
+    u8 unk1D00[0x690];
+    EffectSlot slots[4];        // 0x2390
+    u8 unk25C0[0xA74];
     u32 bufferHandle;         // 0x3034
     u8 bufferIndex;           // 0x3038
 };

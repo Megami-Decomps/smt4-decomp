@@ -69,11 +69,13 @@ typedef char JobWorkCaptureTargetOffsetCheck[offsetof(JobWork, captureTarget) ==
 typedef char JobWorkFadeActiveOffsetCheck[offsetof(JobWork, fadeActive) == 0x144E ? 1 : -1];
 typedef char JobWorkFadeColorOffsetCheck[offsetof(JobWork, fadeColor) == 0x147C ? 1 : -1];
 typedef char JobWorkFadeFramesOffsetCheck[offsetof(JobWork, fadeFrames) == 0x1488 ? 1 : -1];
+typedef char JobWorkSizeCheck[sizeof(JobWork) == 0x1494 ? 1 : -1];
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-JobWork *jobGetWork(void);
+/* The accessor resolves work from the incoming task/process handle. */
+JobWork *jobGetWork(u32 job);
 #ifdef __cplusplus
 }
 #endif

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -12,7 +13,7 @@ typedef struct Table2EEntry {
 s32 dataTable2ECount(void);
 Table2EEntry *dataTable2EGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(s32 flag, s32 value, s32 notify);
+
 void gameFlagsGetBlock(void);
 void gameDataSetEntryEnabled(s32 id, u32 arg1, bool enabled);
 

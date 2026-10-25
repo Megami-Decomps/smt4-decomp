@@ -1,6 +1,7 @@
-/* NON_MATCHING: the registry removal differs (retail walks the vector with begin/end loaded together via ldrd from a base at registry+0x14 and materializes the removed flag; LightRegistry::remove loads them separately), plus saved-register assignment in the owned-object loops (r6/r7 swapped); the destroy loops and tail otherwise match. */
+/* NON_MATCHING: registry begin/end load pairing and removed-flag materialization, owned-object loop registers, and graphics-global base selection differ. */
 #include "gfx/LightRegistry.h"
 #include "classes/AsdAllocatorObject.h"
+#include "shard/S1GfxModel.h"
 
 /* An object with a virtual destructor in slot 0 that is handed back to the allocator it came from. */
 struct OwnedObject {
@@ -28,8 +29,7 @@ struct LightResourceSet {
 };
 
 extern "C" {
-extern u32 DAT_00464b7c;
-extern u32 g_asdModelTransformBuilder;
+extern GfxModelState g_gfxSettings;
 
 void sceneTraverserVisit(u32 traverser, u32 root);
 void asdMemFreeNonNull(void *memory);
@@ -91,7 +91,7 @@ void FUN_00263e50(LightResourceSet *set)
     asdMemFreeNonNull(set->resource);
     asdMemFree(set->extra);
     asdMemFree(set);
-    sceneTraverserVisit(DAT_00464b7c, g_asdModelTransformBuilder);
+    sceneTraverserVisit(g_gfxSettings.attachInfo[0], g_gfxSettings.transformBuilder[0]);
 }
 
 } /* extern "C" */

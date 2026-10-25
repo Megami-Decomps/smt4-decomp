@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003116c8` (_code @ 0x3116c8, 0x510 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_00248620(...);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
 int messageForwardDefaultMode(...);
-int gameFlagSetValue(...);
 int textEncodeFontSlot(...);
 int dataTable54FindById(void);
 int FUN_0029fa0c(int, int *);
@@ -30,9 +30,8 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: scrWorkGetValue. */
 /* Supplied declaration required: scrWorkSetValue. */
 /* Supplied declaration required: messageForwardDefaultMode. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: textEncodeFontSlot. */
-extern int FUN_0029b7b8(int, unsigned short, unsigned int *);
+extern int partyClassifyRequestedSources(int, unsigned short, unsigned int *);
 /* Supplied declaration required: dataTable54FindById. */
 /* Supplied declaration required: FUN_0029fa0c. */
 extern int FUN_002a0d0c(void);
@@ -88,7 +87,7 @@ unsigned int FUN_003116c8(void)
         temp_v5 = temp_v9;
         if (((temp_v3 != 0) &&
             (temp_v6 = gameDataBlocksGetFlagBit2(*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c)), temp_v6 == 0)
-            ) && (temp_v6 = FUN_0029b7b8(*piVar3,*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c),
+            ) && (temp_v6 = partyClassifyRequestedSources(*piVar3,*(unsigned short *)((int)piVar3 + temp_v8 * 2 + 0x933c),
                                         temp_v10), temp_v6 != 0)) {
           temp_v5 = temp_v9 + 1;
           *(char *)((int)piVar3 + temp_v9 + 0x93dc) =
@@ -241,7 +240,7 @@ unsigned int FUN_003116c8(void)
             *pbVar6 = temp_v1 | (unsigned char)temp_v0;
             *(char *)((int)piVar3 + temp_v9 + 0x9574) = (char)temp_v7;
             temp_v9 = temp_v9 + 1;
-            gameFlagSetValue(unaff_r11,1);
+            gameFlagSetValue(unaff_r11, 1, 1);
           }
         }
       }

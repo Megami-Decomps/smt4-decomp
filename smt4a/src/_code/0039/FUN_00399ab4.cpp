@@ -6,7 +6,7 @@ u32 FUN_00169d8c(s32 preset);
 u32 FUN_00169db4(s32 preset);
 void cursorResetFromParam(void);
 void asdModelCommandBlockRelease(void);
-extern RenderCtx *g_renderCtx;
+extern RenderCtxScissorA *g_renderCtx;
 extern u32 *DAT_005b3fe4;
 extern u32 DAT_005b3fe8;
 
@@ -19,7 +19,7 @@ void FUN_00399ab4(u32 origin)
     u32 *buffer = DAT_005b3fe4;
     u32 minimum;
     u32 maximum;
-    if (g_renderCtx->states[g_renderCtx->stateIndex] != 0) {
+    if (g_renderCtx->scissor.entries[g_renderCtx->scissor.count] != 0) {
         u32 top = origin >> 16;
         u32 left = origin & 0xFFFF;
         u32 clampedTop = top;
@@ -29,7 +29,7 @@ void FUN_00399ab4(u32 origin)
         if (width <= left)
             clampedLeft = width - 1;
         minimum = clampedTop | (clampedLeft << 16);
-        u32 extent = g_renderCtx->scissorMaximum.values[g_renderCtx->scissorMaximum.index];
+        u32 extent = g_renderCtx->scissorMaximum.entries[g_renderCtx->scissorMaximum.count];
         u32 bottom = top + (extent >> 16) - 1;
         if (static_cast<s32>(bottom) < 0)
             bottom = 0;

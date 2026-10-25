@@ -1,4 +1,4 @@
-/* NON_MATCHING: the final clamp: retail tests the float bit pattern as an integer (vmov r1,s0; cmp r1,#0x3f800000) and branches around the hold step instead of predicating it. */
+/* NON_MATCHING: explicit hold segment and positive-or-zero clamp restore control flow and unordered clamp behavior; segment comparisons and rising addition use reversed operands. */
 #include "common.h"
 
 struct RampParameter {
@@ -23,19 +23,16 @@ void _ZN9Obj557b285slot6Ev(RampParameter *self)
     if (frame < self->riseEnd) {
         value = value + self->riseStep;
         self->value = value;
-    } else if (frame >= self->holdEnd) {
-        if (self->fallEnd > frame) {
-            value = value - self->fallStep;
-            self->value = value;
-        }
+    } else if (frame < self->holdEnd) {
+        // Hold the current value until the falling segment starts.
+    } else if (self->fallEnd > frame) {
+        value = value - self->fallStep;
+        self->value = value;
     }
     if (value > 1.0f) {
         self->value = 1.0f;
     } else {
-        if (value < 0.0f) {
-            value = 0.0f;
-        }
-        self->value = value;
+        self->value = value > 0.0f ? value : 0.0f;
     }
 }
 

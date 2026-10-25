@@ -1,4 +1,4 @@
-/* NON_MATCHING: mask comparisons use one fewer saved register and active-entry byte addressing differs. */
+/* NON_MATCHING: only required-mask AND scratch registers differ; active-entry addressing now matches. */
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"

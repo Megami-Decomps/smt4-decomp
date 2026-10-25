@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial channel lookup/call registers and the final dirty-byte store scheduling differ. */
+/* NON_MATCHING: direct previous-value update recovers channel lookup; virtual clip-select load registers and dirty-store scheduling differ. */
 #include "shard/Shard0034.h"
 #include <stddef.h>
 
@@ -36,9 +36,8 @@ extern "C" void FUN_002a55ec(ModelPropertyController *controller, s32 index, f32
         if (time > end)
             time = end;
         f32 value = channel->interpolate(channel->start, channel->end, time, channel->work);
-        f32 previous = channel->current;
+        channel->previous = channel->current;
         channel->current = value;
-        channel->previous = previous;
         channel->dirty = 1;
     }
 }

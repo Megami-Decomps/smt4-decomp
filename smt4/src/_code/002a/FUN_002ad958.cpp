@@ -18,7 +18,7 @@ static __inline s64 millisecondsToNanoseconds(s64 ms)
     return ms * 1000000;
 }
 
-// Sleeps for the countdown's remaining time in microseconds; in debug mode the delay is
+// Sleeps for the countdown's remaining time in milliseconds; in debug mode the delay is
 // divided by a clock-derived factor.
 void FUN_002ad958(s32 shortDelay)
 {

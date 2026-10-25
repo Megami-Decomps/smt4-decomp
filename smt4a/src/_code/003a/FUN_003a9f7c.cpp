@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains six inactive dispatch iterations; typed four-entry dispatch and mask loads differ. */
+/* NON_MATCHING: dispatch guard peeling, sprite visibility getter, and mask/register loads differ. */
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
 #include "ui/UiSpriteState.h"
@@ -36,8 +36,8 @@ void FUN_003a9f7c(BtlUiObjAA* object)
     }
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.29f);
     s32 x = vec2GetXInt(&panel->anchor) + parallax;
-    for (s32 i = 0; i < 4; ++i) {
-        if (panel->frame.visibility.active != 0) {
+    for (s32 i = 0; i < 10; ++i) {
+        if (i <= 3 && panel->frame.visibility.active != 0) {
             if (i == 0) {
                 FUN_001634b4(&panel->frame, (f32)x);
             }

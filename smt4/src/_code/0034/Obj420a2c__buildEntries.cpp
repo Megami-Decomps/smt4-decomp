@@ -1,14 +1,16 @@
 #include "classes/Obj420a2c.h"
 
 extern "C" {
-int FUN_0034f768(Obj420a2c *self);
+bool mobiclipDecoderSetSources(Obj420a2c *self, Obj420a2cOwner *owner,
+                  Obj420a2cSource *sourceA, Obj420a2cSource *sourceB);
 int FUN_0034f0fc(Obj420a2c *self, Obj420a2cSource *source, u32 *handle, Obj420a2cEntry *entry, u32 *out);
 }
 
 /* Builds the entry of each present source; fails when the first step or a source does. */
-int Obj420a2c::buildEntries()
+int Obj420a2c::buildEntries(Obj420a2cOwner *owner, Obj420a2cSource *firstSource,
+                           Obj420a2cSource *secondSource)
 {
-    if (!FUN_0034f768(this)) {
+    if (!mobiclipDecoderSetSources(this, owner, firstSource, secondSource)) {
         return 0;
     }
     if (sourceA != NULL && !FUN_0034f0fc(this, sourceA, &handles[0], &entries[0], &outA[0])) {

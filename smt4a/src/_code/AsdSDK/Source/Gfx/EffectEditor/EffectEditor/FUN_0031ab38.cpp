@@ -1,6 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031ab38` (_code @ 0x31ab38, 0x9f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: recovered parameter/options pointers and native status mask; vector temporaries and input-state control flow still differ. */
 #include "romwright_types.h"
+#include "gfx/EffectEditorParameters.h"
 
 extern "C" {
 
@@ -35,8 +35,6 @@ typedef struct {
 } param_4_stack;
 
 extern unsigned char LAB_0031b530; /* 0x31b530 */
-extern unsigned char LAB_00400001; /* 0x400001 */
-extern unsigned char LAB_00400003; /* 0x400003 */
 extern signed char DAT_0059dbe9; /* 0x59dbe9 */
 extern int DAT_0059dc40; /* 0x59dc40 */
 extern unsigned int DAT_0059dc44; /* 0x59dc44 */
@@ -81,7 +79,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: effMenuListAppend. */
 
 
-unsigned char * FUN_0031ab38(unsigned int *param_1,int param_2,int param_3,int param_4)
+u32 FUN_0031ab38(u32 *param_1, s32 param_2, EffectEditorOptions *param_3, EffectEditorOptions *param_4)
 
 {
 /* irregular: 2 goto(s); irregular input(s): in_d8, in_fpscr; 14 native warning(s); review required */
@@ -117,7 +115,7 @@ unsigned char * FUN_0031ab38(unsigned int *param_1,int param_2,int param_3,int p
   float afStack_74 [2];
   float temp_v26;
   unsigned int temp_v27;
-  unsigned char *temp_v28;
+  u32 temp_v28;
   unsigned int temp_v29;
   unsigned int *puStack_34;
   int temp_v30;
@@ -125,15 +123,15 @@ unsigned char * FUN_0031ab38(unsigned int *param_1,int param_2,int param_3,int p
   int temp_v32;
   
   temp_v20 = (float)((unsigned long long)in_d8 >> 0x20);
-  temp_v32 = param_4;
-  temp_v31 = param_3;
+  temp_v32 = reinterpret_cast<int>(param_4);
+  temp_v31 = reinterpret_cast<int>(param_3);
   temp_v30 = param_2;
   puStack_34 = param_1;
   temp_v22 = 0x3f800000;
   if (param_2 == 0) {
     temp_v20 = 0.0f;
   }
-  temp_v28 = &LAB_00400001;
+  temp_v28 = 0x400001;
   if (param_2 != 0) {
     temp_v20 = (float)VectorUnsignedToFloat(param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v20 = 1.0f / temp_v20;
@@ -188,7 +186,7 @@ unsigned char * FUN_0031ab38(unsigned int *param_1,int param_2,int param_3,int p
   DAT_0063536c = param_1[10];
   DAT_0059dc4c = *pfVar18;
   DAT_0059dc50 = afStack_74[temp_v16];
-  if ((DAT_0059dbe9 == '\0') && (FUN_00200bcc(param_3), DAT_0059dc40 == 1)) {
+  if ((DAT_0059dbe9 == '\0') && (FUN_00200bcc(reinterpret_cast<int>(param_3)), DAT_0059dc40 == 1)) {
     FUN_00200bcc(temp_v32);
   }
   if (DAT_0059dc40 == 0) {
@@ -265,7 +263,7 @@ unsigned char * FUN_0031ab38(unsigned int *param_1,int param_2,int param_3,int p
             }
           }
         }
-        temp_v28 = &LAB_00400003;
+        temp_v28 = 0x400003;
       }
 LAB_0031ad90:
       temp_v9 = padButtonRepeat(5);
@@ -507,7 +505,7 @@ LAB_0031ad90:
     if (DAT_0059dc40 != 0) {
       temp_v13 = *(unsigned int *)(temp_v32 + 0x10);
       if ((temp_v13 & 8) != 0) {
-        temp_v28 = (unsigned char *)((unsigned int)temp_v28 | 2);
+        temp_v28 |= 2;
       }
       return temp_v28;
     }
@@ -518,12 +516,12 @@ LAB_0031b4b4:
       DAT_0059dc40 = 0;
     }
     else {
-      temp_v28 = (unsigned char *)((unsigned int)temp_v28 & 0xfffffffe);
+      temp_v28 &= ~1u;
     }
   }
   temp_v13 = *(unsigned int *)(temp_v31 + 0x10);
   if ((temp_v13 & 8) != 0) {
-    temp_v28 = (unsigned char *)((unsigned int)temp_v28 | 2);
+    temp_v28 |= 2;
   }
   return temp_v28;
 }

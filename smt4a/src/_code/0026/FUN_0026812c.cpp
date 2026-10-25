@@ -1,5 +1,6 @@
-/* NON_MATCHING: the build folds the (0 < id && id < 64) range test into one unsigned compare; retail tests both bounds separately (cmp #0; ble / cmp #64; bge) and keeps the ID in r4 afterwards. */
+/* NON_MATCHING: separate signed bounds and table-entry receiver recovered; compiler combines initial compare and ID save with SUBS. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -11,16 +12,15 @@ typedef struct IdValueRecord {
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_002321f8(const void *left, const void *right);
-u32 dataTableGetCount(u32 table);
-void *dataTableGetEntries(void);
-u32 dataTableGet(u32 id, u32 type);
 
 /* Returns whether `id` (1-63) has a record in table 0x47 with a non-negative value. */
 u32 FUN_0026812c(s32 id)
 {
-    if (id > 0 && id < 0x40) {
-        u32 table = dataTableGet(0x47, 0);
-        void *entries = dataTableGetEntries();
+    if (id <= 0)
+        return 0;
+    if (id < 0x40) {
+        void *table = dataTableGet(0x47, 0);
+        void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
         IdValueRecord key;
         key.id = id;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00385c44` (_code @ 0x385c44, 0x8e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_003ed6e8(...);
 int FUN_003f0070(...);
 int FUN_003f0e20(...);
 int FUN_003f26d4(...);
-int gameFlagSetValue(int, int, int);
 int itemEffectPlay(...);
 void btlUiStartCommandSelection(unsigned int, int, signed char, signed char, bool, bool);
 int FUN_004a9c84(...);
@@ -83,13 +83,12 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_003f0070. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: itemEffectPlay. */
 /* Supplied declaration required: FUN_004a9c84. */
 /* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c571c. */
-extern int hasFlag80Or1000(unsigned int);
+extern unsigned int hasFlag80Or1000(unsigned int, unsigned int *);
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlReflectCreateKind44. */
 
@@ -346,7 +345,7 @@ LAB_003861d0:
       temp_v8 = FUN_002e2b38();
       if ((temp_v8 != 0) &&
          ((temp_v8 = btlUnitGet(g_btlScriptUnit), temp_v8 == 0 ||
-          (temp_v8 = hasFlag80Or1000(g_btlScriptUnit), temp_v8 == 0)))) {
+          (temp_v8 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v8), temp_v8 == 0)))) {
         if (((DAT_005739f4 & param_1[0x1169]) == 0 && (DAT_005739f0 & *puVar15) == 0) &&
            ((*puVar15 & DAT_00573a28) == 0 && (param_1[0x1169] & DAT_00573a2c) == 0)) {
           temp_v7 = flagSelectVariant();
@@ -372,7 +371,7 @@ LAB_003861d0:
       }
       param_1[0x1358] = 0;
       temp_v8 = btlUnitGet(g_btlScriptUnit);
-      if ((temp_v8 == 0) || (temp_v8 = hasFlag80Or1000(g_btlScriptUnit), temp_v8 == 0)) {
+      if ((temp_v8 == 0) || (temp_v8 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v8), temp_v8 == 0)) {
         temp_v7 = param_1[0x1169];
         temp_v12 = *puVar15;
         if (((DAT_005739f0 & temp_v12) == 0 && (DAT_005739f4 & temp_v7) == 0) &&

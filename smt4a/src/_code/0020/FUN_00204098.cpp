@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00204098` (_code @ 0x204098, 0x459c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
@@ -105,7 +106,6 @@ int FUN_00340a94(...);
 int FUN_00387240(...);
 int sysPlayVoice(...);
 int FUN_003d2158(...);
-int gameFlagSetValue(...);
 int itemResetOverLimitStates(...);
 int playerAdvanceLevelsAndRecover(...);
 int FUN_004ccbf0(...);
@@ -313,7 +313,6 @@ extern unsigned int FUN_003f3104(int);
 extern unsigned int btlGetDemonEvolutionStatus(int);
 /* Supplied declaration required: FUN_003f36a4. */
 /* Supplied declaration required: skillChooseRandomFlaggedSlot. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: flagValueAdd. */
 /* Supplied declaration required: partyAddMoneyClamped. */
 extern int scriptProcessCreateWhenReady(int);
@@ -992,7 +991,7 @@ LAB_0020524c:
             *(unsigned int *)(temp_v7 + 0x30) = 0;
           }
           if ((*(unsigned short *)(temp_v7 + 0x62) >= 10) && (temp_v7 = gameFlagIsSet(0x4d7), temp_v7 == 0)) {
-            gameFlagSetValue(0x4d7,1);
+            gameFlagSetValue(0x4d7, 1, 1);
           }
           temp_v43 = (char *)gameGetSlotTable();
           temp_v50 = (unsigned char *)(temp_v6 + 0x74c4);

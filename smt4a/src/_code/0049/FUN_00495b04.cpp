@@ -51,7 +51,7 @@ extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_0049368c. */
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: contentGetUpgradedKindValue. */
-extern unsigned int FUN_0049cad0(unsigned short *);
+extern unsigned int shopGetEntryPrice(unsigned short *);
 extern int btlRollClamped(unsigned short, unsigned int);
 
 
@@ -179,7 +179,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
       temp_v8 = *(int *)(param_1 + 0xb40);
     }
     if (param_2 != 0 && temp_v8 != 8) {
-      temp_v11 = FUN_0049cad0(param_4);
+      temp_v11 = shopGetEntryPrice(param_4);
       temp_v8 = btlRollClamped(*param_4,temp_v11);
       if (temp_v8 == 0) {
         temp_v15 = 0x787878ff;
@@ -200,7 +200,7 @@ void FUN_00495b04(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     temp_v15 = -1;
     if (param_2 != 0 && temp_v8 != 8) {
-      temp_v11 = FUN_0049cad0(param_4);
+      temp_v11 = shopGetEntryPrice(param_4);
       temp_v8 = btlRollClamped(*param_4,temp_v11);
       if (temp_v8 == 0) {
         temp_v15 = -0x64646401;
@@ -305,7 +305,7 @@ LAB_00495f20:
   textFormatBuffer(temp_v22,&LAB_00496270,temp_v8);
   drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v15,temp_v14,temp_v22);
   if (param_2 != 0) {
-    temp_v9 = FUN_0049cad0(param_4);
+    temp_v9 = shopGetEntryPrice(param_4);
     if (param_3 != 0) {
       temp_v8 = FUN_0018349c(param_1 + 0x3a4,0xba);
       temp_v10 = 0xffffffff;

@@ -45,7 +45,7 @@ extern "C" {
 DataTable5* dataTable5GetEntries(void);
 s32 FUN_004dc3b4(UniteContext* ctx, u16* first, u16* second, FusionResult* result);
 DevilInfo* FUN_00184310(u32 id);
-s32 FUN_003a8298(void);
+s32 dataTableChooseWeightedByteId(void);
 u32 randRange(u32 range);
 s32 slotRecordFindById(u32 id);
 u32 FUN_0023e32c(u16* first, u16* second, u32 id, u32 level);
@@ -64,7 +64,7 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
     if (FUN_004dc3b4(ctx, first, second, result) == 0) return 0;
 
     DevilInfo* info = FUN_00184310(result->product);
-    u16 level = FUN_003a8298() + info->level;
+    u16 level = dataTableChooseWeightedByteId() + info->level;
     if (randRange(99) < 5) {
         if (slotRecordFindById(0x218) == 0) {
             found = 0x218;

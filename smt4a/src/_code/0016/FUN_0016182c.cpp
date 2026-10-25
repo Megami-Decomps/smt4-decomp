@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains an error-check comparison and saved zero register; final tail call differs. */
+/* NON_MATCHING: retail saves initial nngxGetError result and emits cmp r7,#0 before the final unconditional nngxGetError call, with no flag consumer. */
 #include "shard/W6_W6Match7_TextureBinding.h"
 
 extern "C" {

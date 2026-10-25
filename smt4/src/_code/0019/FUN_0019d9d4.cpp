@@ -6,7 +6,7 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 void FUN_002c1b64(RenderCtx *context, u32 value);
-s32 FUN_002c5d80(u32 mode, u32 value);
+u32 FUN_002c5d80(u32 mode, bool enabled);
 void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -21,8 +21,8 @@ void FUN_0019d9d4(const RectangleDrawInputPrefixIV *input)
 
     FUN_002c1b64(g_titleScene, 0);
     RenderCtx *context = g_titleScene;
-    const s32 state = FUN_002c5d80(1, 0);
-    renderStackPush(&context->stackA, state);
+    const u32 state = FUN_002c5d80(1, false);
+    renderCtxPushA(context, state);
 
     FUN_002c0944(color, color, color, color,
                  input->left, input->top,

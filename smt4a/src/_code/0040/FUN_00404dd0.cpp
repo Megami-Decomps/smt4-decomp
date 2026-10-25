@@ -15,11 +15,11 @@ struct CenteredSpriteWork {
 };
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 SpriteInfo *FUN_001834a4(u32 group, s32 image);
 void FUN_001835b4(s32 layer, u32 group, s32 image, s32 x, s32 y, s32 priority);
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 
 /* Center the selected sprite inside a reference sprite and apply stereo parallax. */
 void FUN_00404dd0(CenteredSpriteWork *work, s32 x, s32 y, f32 speed)

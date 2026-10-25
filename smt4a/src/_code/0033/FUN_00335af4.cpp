@@ -20,7 +20,7 @@ u32 FUN_00335af4(void)
 {
     BtlMainStateA *battle = reinterpret_cast<BtlMainStateA *>(btlGetMainState());
     FUN_003ee0c0(battle);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     s32 sequence = 0;
     for (s32 index = 0; index < 4; ++index) {
         BtlCombatantEntryA *entry = &battle->entries[index];

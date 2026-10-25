@@ -1,4 +1,4 @@
-/* NON_MATCHING: near: 137 rows against 146; retail keeps a constant-false guard (mov #0 / cmp / nop / bne) before the kind-9 test and re-tests the kind in the kind-3 chain, shows as dead compare/branch pairs ours omits; it also indexes the slot table as [selection, base] and loads the 64-bit button word with ldrd (ours ldm). Prologue, page base and logic match. */
+/* NON_MATCHING: recovered slot/flag query arguments restore paired battle-state loads; retail retains a linker-inlined false guard and kind-three re-test whose original callee identity is unresolved, and branch/index-base layout differs. */
 #include "common.h"
 #include "battle/BtlDebugMenuEntry.h"
 
@@ -21,10 +21,10 @@ extern "C" {
 extern BtlDebugMasks DAT_00573bd8;
 
 s8 *gameGetSlotTable(void);
-u32 gameGetSlotRecord(void);
+u32 gameGetSlotRecord(s32 slotIndex);
 BtlDebugEntry *FUN_002cc228(u8 index, s32 empty);
-s32 gameFlagIsSet(void);
-s32 gameDataFlagTestBit(void);
+s32 gameFlagIsSet(u32 flag);
+u8 gameDataFlagTestBit(u32 bit);
 BtlStateMasks *btlGetMainState(void);
 s32 idListHasFlaggedRecord(u32 record);
 s32 FUN_00291e14(void);
@@ -45,16 +45,18 @@ u8 FUN_003da6ac(BtlDebugMenu *menu, s32 which)
         u32 record = 0;
         s32 selection = menu->selection;
 
-        if (selection != 4 && selection != 0 && slotFlags[selection] >= 0) {
-            record = gameGetSlotRecord();
+        if (selection != 4 && selection != 0) {
+            s32 slotIndex = slotFlags[selection];
+            if (slotIndex >= 0)
+                record = gameGetSlotRecord(slotIndex);
         }
         if (entry == NULL || entry->enabled != 1) {
             continue;
         }
-        if (entry->flagId != 0 && gameFlagIsSet() == 0) {
+        if (entry->flagId != 0 && gameFlagIsSet(entry->flagId) == 0) {
             continue;
         }
-        if (entry->dataFlagId != 0 && gameDataFlagTestBit() == 0) {
+        if (entry->dataFlagId != 0 && gameDataFlagTestBit(entry->dataFlagId) == 0) {
             continue;
         }
         if (entry->needsBattleState != 0 && (btlGetMainState()->held & DAT_00573bd8.blocked) != 0) {

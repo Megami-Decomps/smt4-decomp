@@ -1,5 +1,6 @@
 /* NON_MATCHING: O3 combines the final flags/state/counter writes into one STM instead of retail's STR plus STM; zero/one load order also differs. O2 candidate. */
 #include "shard/Shard0046.h"
+#include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
 
 extern "C" {
@@ -10,7 +11,7 @@ void FUN_0037d6e4(s32 mode);
 void FUN_003a7630(s32 mode);
 void FUN_003c1060(void);
 void FUN_003c3e14(void);
-void gameFlagSetValue(u32 flag, s32 value, u32 enabled);
+
 s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);

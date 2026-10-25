@@ -1,9 +1,10 @@
 /* NON_MATCHING: open-result lifetime, resize argument order and constant result materialization differ. */
 #include "shard/RomFileOpenState.h"
+#include "nn/Result.h"
 
 extern "C" s32 FUN_002e0e04(const char *path, char *resolvedPath, s32 flags);
 extern "C" s32 FUN_001883b0(RomOpenFile *file, const char *path, u32 mode);
-extern "C" void FUN_0013ebd8(u32 result);
+#include "sys/ProcessResult.h"
 extern "C" void sysFatalBreak();
 extern "C" void vcallSlot12IfValid(u32 handle);
 
@@ -20,13 +21,13 @@ extern "C" s32 FUN_0032c900(RomFileOpenState *state, const char *path, u32 size)
     if (!FUN_002e0e04(path, resolvedPath, 0))
         return fileRecordResult(0xe0e046bc);
     romOpenFileInitialize(&state->file);
-    s32 result = FUN_001883b0(&state->file, resolvedPath, 6);
-    if ((s32)(result & 0x80000000) < 0)
+    nn::Result result = FUN_001883b0(&state->file, resolvedPath, 6);
+    if (nnResultIsFailure(result))
         return fileRecordResult(result);
     const PositionedResizeVtable *vtable = static_cast<PositionedResizeVtable *>(state->interface.vtable);
     result = vtable->resize(reinterpret_cast<PositionedStream *>(state), (u64)size);
     FUN_0013ebd8(result);
-    if ((s32)(result & 0x80000000) < 0) {
+    if (nnResultIsFailure(result)) {
         if ((state->file.unk00 & ~1u) != 0) {
             if (state->file.unk00 & 1)
                 sysFatalBreak();

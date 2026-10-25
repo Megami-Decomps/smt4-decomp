@@ -35,7 +35,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_00157558. */
-extern int jobGetWork(void);
+extern int jobGetWork(unsigned int process);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -53,7 +53,7 @@ extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsig
 /* Supplied declaration required: campMenuEntryDraw. */
 
 
-unsigned int FUN_0036dff4(void)
+int FUN_0036dff4(unsigned int process)
 
 {
 /* irregular: irregular input(s): in_fpscr, in_s0; 15 native warning(s); review required */
@@ -74,7 +74,7 @@ unsigned int FUN_0036dff4(void)
   unsigned long long temp_v11;
   float temp_v12;
   
-  temp_v0 = jobGetWork();
+  temp_v0 = jobGetWork(process);
   FUN_00157558(g_renderCtx);
   temp_v3 = g_renderCtx;
   temp_v1 = FUN_001692ac(1,0);

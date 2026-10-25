@@ -17,7 +17,7 @@ int slotResetIdle(...);
 int FUN_002505c0(...);
 int btlUiPlaySceneFadeOutWhenReady(unsigned int);
 int FUN_00282820(...);
-int FUN_00293e08(void);
+int nodeGroupSetScale(void);
 int soundSlotStopById(void);
 int FUN_002c1658(int, int);
 int FUN_00338358(int);
@@ -62,7 +62,7 @@ extern int tableIsSupportedKind(int, unsigned int);
 /* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
 /* Supplied declaration required: btlUiPanelFadeInWhenReady. */
 /* Supplied declaration required: FUN_00282820. */
-/* Supplied declaration required: FUN_00293e08. */
+/* Supplied declaration required: nodeGroupSetScale. */
 extern int FUN_00293ed0(int);
 /* Supplied declaration required: soundSlotStopById. */
 /* Supplied declaration required: buttonHelpGetMode. */
@@ -156,7 +156,7 @@ unsigned int FUN_003d173c(int *param_1,int param_2)
         if (temp_v0 != 0) {
           if (temp_v0 != 0x5a) {
             if ((temp_v0 == 100) && (*(int *)(*param_1 + 0x4394) != 0)) {
-              FUN_00293e08();
+              nodeGroupSetScale();
             }
           }
           else {

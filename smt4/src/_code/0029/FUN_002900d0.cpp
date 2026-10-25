@@ -1,8 +1,8 @@
 #include "shard/GameOptions.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-int gameFlagSetValue(int a, int b, int c);
 extern GameOptions *gameGetSupportUnitData(void);
 
 void FUN_002900d0(void)

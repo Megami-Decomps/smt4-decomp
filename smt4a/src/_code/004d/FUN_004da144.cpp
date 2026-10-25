@@ -1,11 +1,11 @@
-/* NON_MATCHING: category-count/selection values use different registers, and stat-copy registers differ despite matching store order. */
+/* NON_MATCHING: counting loop and stat-copy order match; selection ordinal and current-category registers remain exchanged. */
 #include "gamedata/UnitStatInitialization.h"
 #include "shard/Shard0032.h"
 
 extern "C" {
 InitializedUnitStatsA *gameGetOptions(void);
 UnitRecord *gameGetPlayerData(void);
-u32 randRange(u16 maximum);
+u32 randRange(u32 maximum);
 s32 equipmentTableFindIndexById(u32 categoryId, u16 playerId);
 void sysMemClear(void *data, u32 size);
 const CategoryUnitStatsA *dataTableGetCategoryEntry(u32 categoryId, s32 variant);
@@ -15,13 +15,11 @@ void FUN_004da144(void)
 {
     InitializedUnitStatsA *options = gameGetOptions();
     u32 count = 0;
-    if (options->partyCategories[0] != 0)
-        ++count;
-    if (options->partyCategories[1] != 0)
-        ++count;
-    if (options->partyCategories[2] != 0)
-        ++count;
-    s32 selected = randRange(static_cast<u16>(count - 1));
+    for (s32 i = 0; i < 3; ++i) {
+        if (options->partyCategories[i] != 0)
+            ++count;
+    }
+    u32 selected = randRange(static_cast<u16>(count - 1));
     s32 index = 0;
     for (;;) {
         if (options->partyCategories[index] != 0) {

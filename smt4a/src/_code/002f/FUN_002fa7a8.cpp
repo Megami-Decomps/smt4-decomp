@@ -8,7 +8,7 @@ int sysPlaySe(int);
 int dataTable8FindRecord(...);
 int dataTable04FindById(void);
 int FUN_0020ad6c(int, int, int);
-int FUN_0028c620(...);
+int btlCommandResolveSelectedTarget(...);
 int FUN_002c7bb0(...);
 int FUN_002ccde8(...);
 int flaggedEntrySetValueB(...);
@@ -36,7 +36,7 @@ typedef struct {
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_0020ad6c. */
-/* Supplied declaration required: FUN_0028c620. */
+/* Supplied declaration required: btlCommandResolveSelectedTarget. */
 extern int FUN_002a4878(int);
 /* Supplied declaration required: FUN_002c7bb0. */
 /* Supplied declaration required: FUN_002ccde8. */
@@ -115,7 +115,7 @@ void FUN_002fa7a8(int param_1)
       }
     }
     else {
-      FUN_0028c620(param_1);
+      btlCommandResolveSelectedTarget(param_1);
     }
     if ((*(unsigned int *)(temp_v2 + 0x28) & 0x1ff) >> 5 == 4) {
       *puVar10 = 0x24;
@@ -181,7 +181,7 @@ void FUN_002fa7a8(int param_1)
         }
       }
       else {
-        FUN_0028c620(param_1);
+        btlCommandResolveSelectedTarget(param_1);
       }
       if ((*(unsigned int *)(temp_v4 + 0x28) & 0x1ff) >> 5 == 4) {
         *puVar10 = 0x24;

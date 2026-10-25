@@ -1,6 +1,6 @@
-/* NON_MATCHING: inline help-table lookup keeps NULL and text-color constants in different registers and shortens two tail-call setup sequences. */
 #include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
 struct PartyHelpRecord {
     u8 kind;
@@ -11,7 +11,7 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 s32 FUN_00282e70(void);
 s32 FUN_00282ccc(void);
-void updateEquippedWeaponHelp(u32 mode);
+void updateEquippedWeaponHelp(RelativeDirectory *directory, u32 index);
 void* dataTableGet(u32 id, u8 section);
 PartyHelpRecord* dataTableGetEntries(void* table);
 u32 dataTableGetCount(void* table);
@@ -25,7 +25,9 @@ static __inline const char* partyHelpText(u32 index)
 {
     void* table = dataTableGet(0x39, 0);
     PartyHelpRecord* records = dataTableGetEntries(table);
-    return dataTableGetCount(table) > index ? records[index].text : NULL;
+    if (dataTableGetCount(table) > index)
+        return records[index].text;
+    return NULL;
 }
 
 // Refresh context help for the current party-menu mode or selected member.
@@ -35,7 +37,7 @@ extern "C" void FUN_001b0558(void)
     s32 equippedWeapon = FUN_00282e70();
     s32 selection = FUN_00282ccc();
     if (equippedWeapon) {
-        updateEquippedWeaponHelp(0);
+        updateEquippedWeaponHelp(NULL, 0);
         return;
     }
     if (selection < 0) {

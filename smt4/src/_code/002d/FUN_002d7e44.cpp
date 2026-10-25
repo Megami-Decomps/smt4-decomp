@@ -15,23 +15,19 @@ void FUN_001db658(s32 count, u32 colorA, u32 colorB, f32 x, f32 y, f32 z, f32 he
 void FUN_002d7e44()
 {
     // The render cache and debug flag are beyond the shared prefix layouts.
-    struct TitleSceneDrawView {
-        u8 prefix[0x124C];
-        RenderCtxCachedState state;
-    };
     struct EditorDrawView {
         u8 prefix[0x78];
         s32 debugBackdrop;
     };
-    TitleSceneDrawView *scene = reinterpret_cast<TitleSceneDrawView *>(g_titleScene);
+    RenderCtx *scene = reinterpret_cast<RenderCtx *>(g_titleScene);
     u32 state = FUN_002c5d80(1, 1);
-    scene->state.push(state);
+    renderCtxPushA(scene, state);
     FUN_002c1b64(g_titleScene, 0);
     u32 enabled = 1;
     if (effMenuGetFlag() != 0 && g_titleScene->unk528 == 0)
         enabled = 0;
     effMenuCallHandler(0, enabled);
-    reinterpret_cast<TitleSceneDrawView *>(g_titleScene)->state.pop();
+    renderStackPop(&reinterpret_cast<RenderCtx *>(g_titleScene)->stackA);
     if (reinterpret_cast<EditorDrawView *>(&g_effectEditor)->debugBackdrop != 0)
         FUN_001db658(30, 0x606060FF, 0x909090FF, 0.0f, 0.0f, 0.0f, 17.5f);
 }

@@ -1,4 +1,4 @@
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -26,13 +26,12 @@ typedef struct BtlUnitTable {
     /* 0x5A8 */ BtlSlot slots[BTL_SLOT_COUNT];
 } BtlUnitTable;
 
-extern BtlUnitTable *btlUnitGet(void);
 extern s32 FUN_00229914(BtlSlotState **state, BtlUnitTable *table, s32 unit);
 
 /* Largest slot value among the used slots whose entry is in the battle and passes FUN_00229914. */
 s32 btlSlotsGetMaxValue(BtlSlotState **state)
 {
-    BtlUnitTable *table = btlUnitGet();
+    BtlUnitTable *table = reinterpret_cast<BtlUnitTable *>(btlUnitGet(reinterpret_cast<BtlState *const *>(state)));
     s32 best = 0;
     s32 i;
 

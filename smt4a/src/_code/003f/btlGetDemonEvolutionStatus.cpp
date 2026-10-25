@@ -1,4 +1,3 @@
-/* NON_MATCHING: status/unit/template saved registers are r6/r4/r5 instead of retail r4/r5/r6. */
 #include "shard/Shard0032.h"
 
 struct DemonEvolutionData {
@@ -11,14 +10,18 @@ extern "C" {
 const DemonEvolutionData* FUN_00184310(u16 id);
 u32 gameStockContainsEntry(u32 id);
 
-// Report evolution availability, excluding a target already present in the party.
-u8 btlGetDemonEvolutionStatus(const UnitRecord* unit)
+static __inline u8 demonEvolutionStatus(const UnitRecord *unit, const DemonEvolutionData *evolution)
 {
-    const DemonEvolutionData* evolution = FUN_00184310(unit->id);
     u8 status = 1;
     if (evolution->targetId != 0 && gameStockContainsEntry(evolution->targetId) == 0) {
         status = evolution->requiredLevel <= unit->unk64 ? 0 : 2;
     }
     return status;
+}
+
+// Report evolution availability, excluding a target already present in the party.
+u8 btlGetDemonEvolutionStatus(const UnitRecord *unit)
+{
+    return demonEvolutionStatus(unit, FUN_00184310(unit->id));
 }
 }

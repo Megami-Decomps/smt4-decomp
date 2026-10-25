@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads pendingSlots through a copy in r0 (an inlined accessor call) and stores state before unk10 in steps 4 and 5; logic and registers otherwise match. */
+/* NON_MATCHING: pending-slot accessor matches; state/counter stores remain reversed in steps 4 and 5. */
 #include "common.h"
 
 extern "C" {
@@ -25,12 +25,12 @@ s32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, s32 priority);
 u32 FUN_003e1114(LoadStepMachine *machine, LoadStepOwner *owner);
 u32 FUN_003e2470(LoadStepMachine *machine, LoadStepOwner *owner);
+s32 loadStepGetPendingSlots(LoadStepOwner *owner);
 
 static __inline void loadStepEnter(LoadStepMachine *machine, s32 state)
 {
     machine->state = state;
-    machine->unk10 = 0;
-    machine->unk0C = 0;
+    machine->unk0C = machine->unk10 = 0;
 }
 
 /* Starts the load steps: requests slot 0x4E and enters step 3 while slots are pending, otherwise runs steps 4-6. */
@@ -39,7 +39,7 @@ u32 FUN_003e11ac(LoadStepMachine *machine, LoadStepOwner *owner)
     if (isEntryUsable(g_btlEvent)) {
         return 0;
     }
-    if (owner->pendingSlots > 0) {
+    if (loadStepGetPendingSlots(owner) > 0) {
         loadStepEnter(machine, 2);
         if (!loadSlotIsLoaded(0x4E)) {
             loadSlotRequestAsync(0x4E, 0);

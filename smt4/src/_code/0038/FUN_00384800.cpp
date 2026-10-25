@@ -13,7 +13,7 @@ typedef struct StateObject {
     /* 0x20 */ u8 display[1];
 } StateObject;
 
-extern s32 FUN_00348f70(void);
+extern s32 questActivateEligibleCategorySix(void);
 extern s32 FUN_0034904c(void);
 extern s32 gameFlagIsSet(u32 id);
 extern void scrScriptProcessStartMappedEntry(StateObject *obj, const char *name);
@@ -24,7 +24,7 @@ extern void *dataTable28Sub0GetRecord(void *display, s32 slot);
 
 void FUN_00384800(StateObject *obj)
 {
-    if (FUN_0034904c() != 0 && FUN_00348f70() != 0) {
+    if (FUN_0034904c() != 0 && questActivateEligibleCategorySix() != 0) {
         buttonHelpSetPreset(0x3C);
         scrScriptProcessStartMappedEntry(obj, "qc_sysque_add");
         obj->state = 13;

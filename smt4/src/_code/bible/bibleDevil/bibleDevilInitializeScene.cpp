@@ -1,4 +1,4 @@
-/* NON_MATCHING: callback stack arguments, saved screen/table registers and final row-address scheduling differ. */
+/* NON_MATCHING: engine/nothrow allocation contract restored; callback stack arguments, saved screen/table registers, and final row-address scheduling differ. */
 #include "shard/W4_Match6_BibleScreen.h"
 #include "shard/Shard0031.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -73,7 +73,9 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     fields->drawUpper = taskCreateDraw("BIBLE DEVIL UP", 111, 1, 0, FUN_003ac738, NULL, DAT_0043d9c8.work, fields->calculate);
     fields->drawLower = taskCreateDraw("BIBLE DEVIL DOWN", 230, 1, 0, btlDevilListFinishDrawCallback, NULL, DAT_0043d9c8.work, fields->calculate);
     rectangleInitializeSelection(fields->rectangle, 320, 0, 29);
-    Obj42242c *controller = new Obj42242c;
+    // Retail forwards an uninitialized allocation owner in r4.
+    void *allocationOwner;
+    Obj42242c *controller = new (allocationOwner) Obj42242c;
     fields->controller = controller;
     controller->rectangle = fields->rectangle;
     FUN_0022d434(screen);

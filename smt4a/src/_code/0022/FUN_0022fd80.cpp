@@ -1,4 +1,4 @@
-/* NON_MATCHING: multiply operand order and one extra branch in the minimum-one result guard differ. */
+/* NON_MATCHING: minimum-one guard still emits an extra conditional branch; percentage accumulator now matches retail multiply operand order. */
 #include "shard/Shard0032.h"
 #include "gamedata/EquipmentValueModifier.h"
 
@@ -33,13 +33,15 @@ u32 FUN_0022fd80(s32 value, u32 kind)
             }
         }
     }
-    u32 adjusted = static_cast<u32>(static_cast<s32>(multiplier * 100.0f) * value) / 100;
+    s32 percentage = static_cast<s32>(multiplier * 100.0f);
+    u32 adjusted = value;
+    adjusted *= percentage;
+    adjusted /= 100;
     u32 rate = dataTable9Type3GetClamped(player->id, kind);
     u32 result = adjusted * rate / 100;
     if (result == 0) {
-        if (adjusted != 0) {
+        if (adjusted != 0)
             result = 1;
-        }
     }
     return result;
 }

@@ -1,4 +1,5 @@
 #include "shard/Shard0037.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -15,7 +16,7 @@ typedef struct JobScene360 {
 
 extern s32 scrRunOpcodesStub(u32 job);
 extern void gameDataAddCappedPoints(s32 id);
-extern void gameFlagSetValue(s32 index, s32 value, s32 flag);
+
 extern u32 maskToCode(void);
 extern void eventQueueAddUnique(u32 value);
 

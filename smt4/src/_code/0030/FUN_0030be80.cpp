@@ -8,7 +8,7 @@ struct LinkedEntryMetadata {
 
 extern "C" {
 LinkedEntryMetadata* FUN_002498ec(u32 id);
-u16 FUN_00288e68(u16 id);
+u16 FUN_00288e68(u32 id);
 s32 FUN_0028d1f4(u32 id);
 
 // Sorts entries by computed linked-record value descending, then linked ID descending.

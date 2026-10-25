@@ -18,7 +18,7 @@ typedef struct UiQuestCursor {
 /* The detail panel at 0x500. */
 typedef struct UiQuestPanel {
     /* 0x00 */ u8 unk00[0xC4];
-    /* 0xC4 */ u8 detailMode;   /* 0 = list view */
+    /* 0xC4 */ s8 detailMode;   /* 0 = list view */
     /* 0xC5 */ u8 unkC5[3];
     /* 0xC8 */ s32 selection;
     /* 0xCC */ u8 unkCC[4];
@@ -87,6 +87,9 @@ typedef char UiQuestSelectorOffsets[
 typedef char UiQuestPanelEntryDirectoryOffsets[
     offsetof(UiQuestPanel, entryDirectory) == 0xE0 &&
     offsetof(UiQuestPanel, entryOwnership.borrowed) == 0xF7 &&
+    sizeof(UiQuestPanel) == 0x160 && sizeof(UiQuest) == 0x984 ? 1 : -1];
+typedef char UiQuestDetailModeOffsetCheck[
+    offsetof(UiQuestPanel, detailMode) == 0xC4 && offsetof(UiQuest, panel) == 0x500 &&
     sizeof(UiQuestPanel) == 0x160 && sizeof(UiQuest) == 0x984 ? 1 : -1];
 
 #endif

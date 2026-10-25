@@ -20,7 +20,7 @@ struct ScrollTrack {
 
 struct ScrollScissorView {
     u8 prefix[0x130C];
-    RenderCtxCachedState state;
+    RenderStateStack state;
 };
 
 extern "C" {
@@ -72,13 +72,13 @@ void FUN_00290994(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 trackId,
     s32 left, top, width, height;
     if (horizontal != 0) {
         width = scrollThumb(FUN_0028cfbc(list), FUN_0029e958(list), track->range->length, FUN_0029e93c(list), &offset);
-        g_titleScene->state.set(SCROLL_SCISSOR_ON);
+        renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_ON);
         left = track->x + x + offset;
         top = track->y + y;
         height = track->range->thickness;
     } else {
         height = scrollThumb(FUN_0029d644(list), FUN_0029ee54(list), track->range->thickness, FUN_0029efc0(list), &offset);
-        g_titleScene->state.set(SCROLL_SCISSOR_ON);
+        renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_ON);
         left = track->x + x;
         top = y + offset + track->y;
         width = track->range->length;
@@ -86,7 +86,7 @@ void FUN_00290994(void *list, s32 x, s32 y, u32 group, u32 frameId, u32 trackId,
     FUN_0029a17c(left, top, width, height, 1);
 
     FUN_002bf288(SCROLL_LAYER, group, thumbPressed != 0 ? trackPressedId : trackId, x, y, layer + SCROLL_LAYER_THUMB_OFFSET);
-    g_titleScene->state.set(SCROLL_SCISSOR_OFF);
+    renderStackSet(&g_titleScene->state, SCROLL_SCISSOR_OFF);
 }
 
 } /* extern "C" */

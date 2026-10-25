@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps screen+0x500 in a register for the mode/page loads (r5) and reads the row id with ldrh+sxth+uxth; armcc here uses r4-relative loads and a single ldrsh. */
+/* NON_MATCHING: existing row-ID getter restores ldrh/sxth/uxth, but its clobber set delays mov r2,0; refresh stores also choose swapped scratch registers. */
 #include "common.h"
 
 /* One animated cursor channel of the screen's widget. */
@@ -26,7 +26,7 @@ struct BibleDevilScreen {
     BibleDevilWidget widget;        /* 0xdc */
     u8 unk55c[0x5a4 - 0x55c];
     s8 mode;                        /* 0x5a4 */
-    u8 page;                        /* 0x5a5 */
+    s8 page;                        /* 0x5a5 */
     u8 unk5a6;
     u8 pageChanged;                 /* 0x5a7 */
     BibleDevilRow rows[1280];  /* 0x5a8 */
@@ -49,6 +49,7 @@ s32 FUN_00293aac(void);
 s32 gameGetFlagByte12e8(void);
 void FUN_00233240(BibleDevilWidget *, s32);
 s32 flaggedValueHolderGetTotal(void *);
+u16 shopListItemGetId(const BibleDevilRow *);
 s32 FUN_0029ce60(u32, s32, s32, s32, s32);
 void FUN_0029e648(s32, s32);
 void messageTargetSetValue(s32, s32);
@@ -86,8 +87,8 @@ void FUN_003a72a4(BibleDevilScreen *screen)
         FUN_00233240(&screen->widget, screen->selected);
         if (screen->mode == 0) {
             BibleDevilRow *rows = screen->rows;
-            s16 id = rows[flaggedValueHolderGetTotal(screen->cursor)].id;
-            s32 delta = FUN_0029ce60(id, screen->page, 0, screen->level >= 100, 0);
+            s16 id = shopListItemGetId(&rows[flaggedValueHolderGetTotal(screen->cursor)]);
+            s32 delta = FUN_0029ce60(static_cast<u16>(id), static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
             FUN_0029e648(1, 0);
             messageTargetSetValue(-delta, 0);
         }

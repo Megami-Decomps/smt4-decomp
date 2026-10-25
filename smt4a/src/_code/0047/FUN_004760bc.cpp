@@ -16,7 +16,7 @@ int sysMemClear(...);
 int wstrlenU16(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
-int FUN_0037a728(...);
+int textExpandSingleByteGlyphs(...);
 int FUN_00426eb8(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
@@ -74,7 +74,7 @@ extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: wstrlenU16. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: FUN_0037a728. */
+/* Supplied declaration required: textExpandSingleByteGlyphs. */
 /* Supplied declaration required: FUN_00426eb8. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
@@ -367,7 +367,7 @@ int FUN_004760bc(int param_1)
         } while (temp_v6 != 0);
       }
       FUN_00102bbc(temp_v12 + 0x180,temp_v41,0x800);
-      FUN_0037a728(temp_v12 + 0x180,temp_v41,0x7fe);
+      textExpandSingleByteGlyphs(temp_v12 + 0x180,temp_v41,0x7fe);
       libc_strcpy(temp_v12 + 0x180,temp_v41);
       temp_v6 = wstrlenU16(temp_v12 + 0x180);
       temp_v11 = 0;

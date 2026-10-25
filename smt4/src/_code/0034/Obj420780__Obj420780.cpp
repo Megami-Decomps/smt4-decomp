@@ -1,4 +1,4 @@
-/* NON_MATCHING: the "" literal sits before the vtable word in this build's pool (retail after it), the two colour packs schedule their float->int conversions differently and the slot loop loads the x offset into another register. */
+/* NON_MATCHING: color packing's VFP loads, multiplies, conversions and integer scratch registers differ. */
 #include "classes/Obj420780.h"
 #include "shard/W6_W6Match2_FormattedTextSource.h"
 
@@ -29,11 +29,10 @@ PanelTextureTarget *FUN_002c1c0c(u32 table, s32 index);
 /* Packs the unit-interval components into four bytes, first component in the top byte. */
 static __inline u32 packColor(const ColorRecord *color)
 {
-    u32 first = (u32)(color->component[0] * 255.0f);
-    u32 second = (u32)(color->component[1] * 255.0f);
-    u32 third = (u32)(color->component[2] * 255.0f);
-    u32 fourth = (u32)(color->component[3] * 255.0f);
-    return (first << 24) | (second << 16) | (third << 8) | fourth;
+    return ((u32)(color->component[0] * 255.0f) << 24) |
+           ((u32)(color->component[1] * 255.0f) << 16) |
+           ((u32)(color->component[2] * 255.0f) << 8) |
+           (u32)(color->component[3] * 255.0f);
 }
 
 Obj420780::Obj420780()

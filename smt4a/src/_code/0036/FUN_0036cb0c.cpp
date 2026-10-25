@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite compiles (211 vs 207 rows); retail keeps the pulse in s16 and a different register allocation; mode/argument roles inferred */
+/* NON_MATCHING: native mode dispatch and call operands restored; row/base/name lifetimes, zero x-offset and pulse VFP operands differ. */
 #include "common.h"
 
 struct LayoutEntry {
@@ -14,13 +14,13 @@ void FUN_001835b4(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void FUN_00164b5c(s32 layer, s32 group, s32 index, s32 x, s32 y, s32 z);
 void efctSetSpeed(f32 speed);
 void FUN_001527d8(u32 text, u32 color);
-void FUN_0025cc78(u32 text, s32 x, s32 y, s32 z);
+void FUN_0025cc78(const void *text, s32 x, s32 y, s32 z, f32 scale);
 void asdTextDrawDirectoryEntry(u32 text, s32 a, u32 b, s32 c, s32 d, u32 name, s32 index);
-u32 FUN_0035aa90(s32 index);
-void FUN_001654f8(u32 id, s32 arg);
-void FUN_0023723c(u32 text, s32 a, u32 b, s32 c, s32 d, u32 value);
-void FUN_00344bc8(s32 index);
-s32 FUN_0032ecac(void);
+const char *FUN_0035aa90(s32 index);
+char *FUN_001654f8(const char *source, char *destination, s32 size);
+void asdTextFormatStream(u32 text, u32 a, u32 b, u32 c, u32 d, const char *format, ...);
+s32 FUN_00344bc8(s32 index);
+u32 FUN_0032ecac(s32 bit);
 
 // Draws one list row: the frame and its pulsing highlight, the caption text chosen by `mode`
 // and, for mode 1, the extra marker.
@@ -37,7 +37,7 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
 
     s32 phase = pulseFrame % 0x28;
     if (phase >= 0x14) phase = 0x28 - phase;
-    f32 pulse = (f32)phase * 0.05f;
+    f32 pulse = (f32)phase / 20.0f;
     efctSetSpeed(pulse);
     FUN_001835b4(2, 0x2e, 0xf9, frame->x, frame->y, 0x22);
     efctSetSpeed(1.0f);
@@ -52,14 +52,18 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
 
     LayoutEntry* caption = FUN_001834a4(0x2e, 0xe4);
     s32 index = base + row + offset;
-    if (mode == 0) {
+    switch (mode) {
+    case 0:
+    case 2:
+    case 3:
         asdTextDrawDirectoryEntry(text, 3, 0xffffffff, 0, 3, name, index);
-    } else if (mode == 1) {
-        u32 id = FUN_0035aa90(index);
-        FUN_001654f8(id, 0);
-        FUN_0023723c(text, 3, 0xffffffff, 0, 3, id);
-    } else if (mode == 2 || mode == 3) {
-        asdTextDrawDirectoryEntry(text, 3, 0xffffffff, 0, 3, name, index);
+        break;
+    case 1: {
+        const char *source = FUN_0035aa90(index);
+        char *converted = FUN_001654f8(source, NULL, 0);
+        asdTextFormatStream(text, 3, 0xffffffff, 0, 3, converted);
+        break;
+    }
     }
     FUN_001835b4(2, 0x2e, 0xe3, frame->x, frame->y, 0xd);
     if (selected != 0) {
@@ -67,11 +71,12 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
     } else {
         FUN_001527d8(text, 0x9fe7ffff);
     }
-    FUN_0025cc78(text, frame->x + caption->x, frame->y + caption->y, 0x15);
+    FUN_0025cc78(reinterpret_cast<const void *>(text), frame->x + caption->x,
+                 frame->y + caption->y, 0x15, 1.0f);
     FUN_001527d8(text, 0xffffffff);
     if (mode == 1) {
-        FUN_00344bc8(index);
-        if (FUN_0032ecac() != 0) {
+        s32 bit = FUN_00344bc8(index);
+        if (FUN_0032ecac(bit) != 0) {
             LayoutEntry* marker = FUN_001834a4(0x14, 0x597);
             FUN_00164b5c(2, 0x14, 7, frame->x + marker->x, marker->y + frame->y, 0xc);
         }

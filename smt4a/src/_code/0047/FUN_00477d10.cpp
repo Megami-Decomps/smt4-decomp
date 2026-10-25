@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00182084(void);
-int FUN_00183318(...);
+int buttonHelpBeginExit(...);
 int FUN_00183f58(...);
 int ifTouchDecrementTimer(void);
 int FUN_0019de98(...);
@@ -23,14 +23,14 @@ extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00182084. */
-/* Supplied declaration required: FUN_00183318. */
+/* Supplied declaration required: buttonHelpBeginExit. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: ifTouchDecrementTimer. */
 /* Supplied declaration required: FUN_0019de98. */
 /* Supplied declaration required: FUN_002bf4f4. */
 /* Supplied declaration required: buttonHelpSetSelectedId. */
 extern int countOwnerIsValidIndex(int, unsigned int);
-extern int FUN_0047d7f0(int);
+extern int statusDecodeActivityState(int);
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 
 
@@ -101,7 +101,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
         return;
       }
       temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
-      temp_v2 = FUN_0047d7f0(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
+      temp_v2 = statusDecodeActivityState(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
       if (temp_v2 == 0) {
         FUN_00183f58(4,0xc,0x4c,0);
         FUN_00183f58(5,0,0);
@@ -165,7 +165,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
   case 0xffffffff:
     if ((*param_1 & 0x100000) != 0) {
       *param_1 = *param_1 & 0xffefffff;
-      FUN_00183318(0);
+      buttonHelpBeginExit(0);
       temp_v2 = 0;
       do {
         ifTouchDecrementTimer();

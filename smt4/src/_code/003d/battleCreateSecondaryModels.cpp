@@ -1,4 +1,4 @@
-/* NON_MATCHING: duplicate-search exit checks, source-ID registers and merged flag tests differ from retail. */
+/* NON_MATCHING: duplicate lookup uses r2 instead of r1 for the slot-stride intermediate. */
 #include "common.h"
 
 struct BattleAttachmentValues { u32 first, second, third; };
@@ -36,6 +36,27 @@ extern "C" void textFormatBuffer(char *destination, const char *format, ...);
 extern "C" BattleAttachmentMainState *btlGetMainState(void);
 extern "C" void *asdMdlManagerCreateSecondList(const char *name, s32 kind);
 
+
+static inline bool battleHasSecondaryAttachment(const BattleAttachmentOwner *owner,
+    s32 firstId, s32 secondId)
+{
+    for (s32 index = 0; index < 50; ++index) {
+        const BattleAttachmentSlot *slot = &owner->slots[index];
+        if (slot->firstId >= 0 && slot->secondId >= 0 &&
+            slot->firstId == firstId && slot->secondId == secondId)
+            return true;
+    }
+    return false;
+}
+
+static inline bool battleSecondarySlotIsAvailable(const BattleAttachmentSlot *slot)
+{
+    if (slot->flags & 2)
+        return false;
+    if (slot->flags & 4)
+        return false;
+    return true;
+}
 /* Create secondary models for valid battle attachments not already present in the owner. */
 extern "C" void battleCreateSecondaryModels(BattleAttachmentOwner *owner, s32 kind)
 {
@@ -50,18 +71,11 @@ extern "C" void battleCreateSecondaryModels(BattleAttachmentOwner *owner, s32 ki
         BattleAttachmentSource *source = &main->sources[sourceIndex];
         if (source->firstId < 0 || source->secondId < 0)
             continue;
-        s32 slotIndex;
-        for (slotIndex = 0; slotIndex < 50; ++slotIndex) {
-            BattleAttachmentSlot *slot = &owner->slots[slotIndex];
-            if (slot->firstId >= 0 && slot->secondId >= 0 &&
-                slot->firstId == source->firstId && slot->secondId == source->secondId)
-                break;
-        }
-        if (slotIndex < 50)
+        if (battleHasSecondaryAttachment(owner, source->firstId, source->secondId))
             continue;
-        for (slotIndex = 0; slotIndex < 50; ++slotIndex) {
+        for (s32 slotIndex = 0; slotIndex < 50; ++slotIndex) {
             BattleAttachmentSlot *slot = &owner->slots[slotIndex];
-            if (!(slot->flags & 2) && !(slot->flags & 4)) {
+            if (battleSecondarySlotIsAvailable(slot)) {
                 slot->model = asdMdlManagerCreateSecondList(name, 7);
                 slot->firstId = source->firstId;
                 slot->secondId = source->secondId;

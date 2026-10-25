@@ -1,4 +1,4 @@
-/* NON_MATCHING: state initialization store scheduling and global-address register reuse differ from retail. */
+/* NON_MATCHING: selected=-1 is stored immediately before state=0 rather than immediately after it. */
 #include "battle/btlPartnerAttack.h"
 #include "AsdSDK/AsdDebug.h"
 #include "battle/PartnerAttackEntries.h"
@@ -27,7 +27,9 @@ void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
 {
     jobIsValid(owner->job);
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlPartnerAttack.cpp", 0x77b);
-    g_btlPartnerAttack = static_cast<BtlPartnerAttackA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1cc, 1));
+    BtlPartnerAttackA *state = static_cast<BtlPartnerAttackA *>(asdMemoryAllocTracked(0x100, 0x100, 0, 0x1cc, 1));
+    BtlPartnerAttackA **global = &g_btlPartnerAttack;
+    *global = state;
     owner->job = taskCreateDraw("btlPartnerAttack Calc", 4, 0, 0,
                                btlPartnerAttackJobCallback, scriptObjDestroy, owner, owner->parent);
     taskCreateDraw("btlPartnerAttack DrawUp3D", 0x71, 0, 0,
@@ -35,7 +37,7 @@ void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
     taskCreateDraw("btlPartnerAttack DrawUp2D", 0x75, 0, 0,
                    renderObjAttach, NULL, NULL, owner->job);
 
-    BtlPartnerAttackA *state = g_btlPartnerAttack;
+    state = *global;
     state->unk00 = 0;
     state->unk04 = 0;
     state->unk08 = 0;
@@ -54,6 +56,6 @@ void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
         state->scriptData = NULL;
     }
     state->unk2c = 0;
-    state->entries = new (&g_btlPartnerAttack) PartnerAttackEntries;
+    state->entries = new (global) PartnerAttackEntries;
 }
 }

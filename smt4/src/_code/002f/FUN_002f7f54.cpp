@@ -13,7 +13,7 @@ u32 FUN_002f7f54()
     s32 hpPercent = scrGetArg(0);
     s32 mpPercent = scrGetArg(1);
     s32 showEffect = scrGetArg(2);
-    ScriptUnit *actor = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *actor = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     s32 count = 0;
     u32 effect = showEffect > 0 ? 0x3E0 : 0;
     for (s32 slot = 0; slot < 4; ++slot) {

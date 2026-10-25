@@ -28,7 +28,7 @@ s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amou
         } else {
             bonus = recordGetScaledMaximum(gameGetSlotRecord(targetId - 109)) * percentage / 100;
         }
-        if (bonus < 1) {
+        if (bonus <= 0) {
             bonus = 1;
         }
         amount += (f32)bonus;

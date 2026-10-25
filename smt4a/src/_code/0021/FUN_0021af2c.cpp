@@ -25,7 +25,7 @@ struct GameGlobals {
 
 extern "C" {
 extern GameGlobals g_gameGlobals;
-void FUN_002c7ce8(s32 step);
+void statusDownSwitchTab(s32 step);
 
 /* Drive the transition object one step: start the phases of the requested transition kind. */
 void FUN_0021af2c(void)
@@ -37,87 +37,87 @@ void FUN_0021af2c(void)
     u8 kind = state->kind;
     if (kind == 0) {
         if (current->phase == 0)
-            FUN_002c7ce8(0);
+            statusDownSwitchTab(0);
         if (current->phase == 1)
-            FUN_002c7ce8(1);
+            statusDownSwitchTab(1);
         if (state->skipFinish == 0 && current->phase == 2)
-            FUN_002c7ce8(2);
+            statusDownSwitchTab(2);
         return;
     }
     if (kind == 7) {
         if (state->unk2010 != 0) {
             if (current->phase == 0)
-                FUN_002c7ce8(0);
+                statusDownSwitchTab(0);
             if (current->phase == 1)
-                FUN_002c7ce8(1);
+                statusDownSwitchTab(1);
             if (current->phase == 2)
-                FUN_002c7ce8(5);
+                statusDownSwitchTab(5);
         } else {
             if (current->phase == 0)
-                FUN_002c7ce8(0);
+                statusDownSwitchTab(0);
             if (current->phase == 1)
-                FUN_002c7ce8(1);
+                statusDownSwitchTab(1);
         }
         return;
     }
     if (kind == 9 || kind == 10 || kind == 11 || kind == 12 || kind == 8) {
         if (current->phase == 0)
-            FUN_002c7ce8(1);
+            statusDownSwitchTab(1);
         if (current->phase == 1)
-            FUN_002c7ce8(5);
+            statusDownSwitchTab(5);
         return;
     }
     if (kind == 15) {
         if (current->phase == 0)
-            FUN_002c7ce8(0);
+            statusDownSwitchTab(0);
         return;
     }
     if (kind == 14) {
         if (current->phase == 0)
-            FUN_002c7ce8(0);
+            statusDownSwitchTab(0);
         if (current->phase == 1)
-            FUN_002c7ce8(1);
+            statusDownSwitchTab(1);
         if (state->skipFinish == 0 && current->phase == 2)
-            FUN_002c7ce8(5);
+            statusDownSwitchTab(5);
         return;
     }
     u8 subKind = state->subKind;
     if (kind == 4) {
         if (subKind == 7 || subKind == 12) {
             if (current->phase == 0)
-                FUN_002c7ce8(1);
+                statusDownSwitchTab(1);
         } else {
             if (current->phase == 0)
-                FUN_002c7ce8(0);
+                statusDownSwitchTab(0);
             if (current->phase == 1)
-                FUN_002c7ce8(1);
+                statusDownSwitchTab(1);
         }
         return;
     }
     if (subKind == 6) {
         if (current->phase == 0)
-            FUN_002c7ce8(1);
+            statusDownSwitchTab(1);
         return;
     }
     if (subKind == 13) {
         if (current->phase == 0)
-            FUN_002c7ce8(1);
+            statusDownSwitchTab(1);
         if (current->phase == 1)
-            FUN_002c7ce8(5);
+            statusDownSwitchTab(5);
         return;
     }
     if (state->unk2010 == 0) {
         if (current->phase == 0)
-            FUN_002c7ce8(0);
+            statusDownSwitchTab(0);
         if (current->phase == 1)
-            FUN_002c7ce8(1);
+            statusDownSwitchTab(1);
         return;
     }
     if (current->phase == 0)
-        FUN_002c7ce8(0);
+        statusDownSwitchTab(0);
     if (current->phase == 1)
-        FUN_002c7ce8(1);
+        statusDownSwitchTab(1);
     if (current->phase == 2)
-        FUN_002c7ce8(5);
+        statusDownSwitchTab(5);
 }
 }

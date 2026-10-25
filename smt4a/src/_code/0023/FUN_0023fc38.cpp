@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail shares one sysPlaySe call between the confirm leaves and leaves the row-not-0/1 cases through a direct branch to the button-help code (a goto in the decompile); this build tests the sound for zero instead and schedules the move/cancel branches differently. */
+/* NON_MATCHING: common sysPlaySe block placement, conditional sound move order, and row-load scheduling differ. */
 #include "common.h"
 
 /* The party panel as the cursor-sound code reads it. */
@@ -42,31 +42,27 @@ void FUN_0023fc38(void)
     s32 confirmed = FUN_002cad18();
     s32 demonId = partyPanelGetSelectedDemonId();
     if (confirmed != 0) {
-        u32 sound = 0;
         if (subPage) {
             if (panel->page != 0x10) {
-                sound = panel->secondColumn == 0 ? 0x1d : 0x1e;
+                sysPlaySe(panel->secondColumn == 0 ? 0x1d : 0x1e);
             } else {
-                sound = panel->secondColumn == 0 ? 0xb9 : 0xba;
+                sysPlaySe(panel->secondColumn == 0 ? 0xb9 : 0xba);
             }
         } else if (panel->page == 0xc && gameFlagIsSet(0x401) != 0) {
-            sound = panel->secondColumn == 0 ? 0xc0 : 0xc1;
+            sysPlaySe(panel->secondColumn == 0 ? 0xc0 : 0xc1);
         } else {
             s32 row = panel->row;
             if (panel->secondColumn != 0) {
                 if (row == 0) {
-                    sound = 0x1c;
+                    sysPlaySe(0x1c);
                 } else if (row == 1) {
-                    sound = 0x28;
+                    sysPlaySe(0x28);
                 }
             } else if (row == 0) {
-                sound = 0x1b;
+                sysPlaySe(0x1b);
             } else if (row == 1) {
-                sound = 0x27;
+                sysPlaySe(0x27);
             }
-        }
-        if (sound != 0) {
-            sysPlaySe(sound);
         }
     } else if (demonId < 0) {
         u32 sound;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: grouped package loading restored; count test, stack-buffer scheduling and destination-slot addressing differ. */
+/* NON_MATCHING: unsigned count guard restored; path setup, directory preheader scheduling and destination-slot addressing differ. */
 #include "gamedata/GroupedFileTables.h"
 
 struct AocDisplay;
@@ -12,7 +12,7 @@ void *FUN_001b2ebc(AocDisplay *display, const char *path, s32 option,
                    void *size, s32 enabled, s32 alignment, s32 flags);
 s32 FUN_001b315c(FileTableGroup *group);
 FileTableKindRecord *FUN_001b31ac(FileTableGroup *group);
-u32 FUN_001b31e0(FileTableGroup *group);
+s32 FUN_001b31e0(FileTableGroup *group);
 
 // Open matching package files into the caller's slots and mark the owner's request slots.
 void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlot *output)
@@ -35,11 +35,8 @@ void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlo
             continue;
         FileTableKindRecord *records = FUN_001b31ac(group);
         u32 count = FUN_001b31e0(group);
-        if (count == 0)
-            continue;
         const char *directory = reinterpret_cast<const DirectoryGroupView *>(group)->directory;
-        u32 index = 0;
-        do {
+        for (u32 index = 0; index < count; ++index) {
             FileTableKindRecord *record = &records[index];
             if (record->kind == kind) {
                 if (outputIndex >= capacity || output == NULL)
@@ -51,8 +48,7 @@ void FUN_004701d8(GroupedFileTables *owner, s32 kind, s32 capacity, FileTableSlo
                 slot->enabled = 1;
                 reinterpret_cast<LoadOwnerView *>(owner)->requests[outputIndex++].unk0D[0] = 1;
             }
-            ++index;
-        } while (index < count);
+        }
     }
 }
 }

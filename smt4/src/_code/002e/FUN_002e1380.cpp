@@ -1,5 +1,7 @@
-/* NON_MATCHING: retail tests results with ands into r1 and keeps a zero in r5 across the calls, and lays the error path after the success path; nn::Result-style IsFailure check not reproduced. */
+/* NON_MATCHING: corrected completion values and u64 create-file size; retail retains separate completion exits and tests sign bits with ands, whereas the build merges exits. */
+#include "sys/ProcessResult.h"
 #include "common.h"
+#include "nn/fs/ArchiveCreateFile.h"
 
 extern "C" {
 
@@ -18,9 +20,7 @@ typedef struct SaveStreamOwner {
 
 void *FUN_00254884(u32 id, u8 *buffer, s32 flags);
 u32 FUN_002ad888(void);
-s32 FUN_002ad80c(u8 *buffer, u32 context, u32 size, s32 flags);
 s32 FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
-void FUN_002c3510(void);
 
 static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 {
@@ -39,20 +39,21 @@ s32 FUN_002e1380(SaveStreamOwner *owner, u32 id, u32 size)
 
     if (FUN_00254884(id, buffer, 2) == NULL) {
         result = 0xE0E046BC;
-        FUN_002c3510();
+        FUN_002c3510(result);
         return result;
     }
-    result = FUN_002ad80c(buffer, FUN_002ad888(), size, 0);
-    if (result & 0x80000000) {
-        FUN_002c3510();
+    FUN_002ad888();
+    result = FUN_002ad80c(reinterpret_cast<const u16 *>(buffer), size);
+    if ((s32)(result & 0x80000000) < 0) {
+        FUN_002c3510(result);
         return result;
     }
     result = saveStreamOpen(&owner->stream, buffer, 2);
-    if (result & 0x80000000) {
-        FUN_002c3510();
+    if ((s32)(result & 0x80000000) < 0) {
+        FUN_002c3510(result);
         return result;
     }
-    FUN_002c3510();
+    FUN_002c3510(0);
     return 0;
 }
 

@@ -24,7 +24,7 @@ typedef struct BtlDebugWork {
 
 extern BtlDebugState g_btlDebugState;
 
-BtlDebugWork *jobGetWork(void);
+BtlDebugWork *jobGetWork(u32 handle);
 u32 asdListBoxGetSelectedItemId(u32 listBox);
 const char *aocIndexValueOrDefault(u32 index);
 void textDrawDefaultString(const char *text, f32 x, f32 y);
@@ -33,9 +33,9 @@ void FUN_003c2fe8(BtlDebugMenu *menu, u32 value);
 void FUN_003c3238(BtlDebugMenu *menu, u32 value);
 
 /* Battle debug menu update: act on the selected list item for the menu's current state. */
-u32 FUN_001fc5c0(void)
+s32 FUN_001fc5c0(u32 handle)
 {
-    BtlDebugWork *work = jobGetWork();
+    BtlDebugWork *work = jobGetWork(handle);
     BtlDebugMenu *menu = g_btlDebugState.menu;
 
     if (menu == NULL) {

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "battle/btlTargetSelect.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -152,7 +153,6 @@ extern int FUN_00255de0(unsigned int, unsigned int);
 extern int FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: btlEventSelectTrigger. */
 /* Supplied declaration required: FUN_0027e760. */
-extern unsigned int *btlUnitGet(unsigned int);
 extern int FUN_00287894(void);
 /* Supplied declaration required: gameOptionsEnableAndReset. */
 extern int FUN_0029022c(void);
@@ -903,7 +903,7 @@ LAB_001fd348:
       jobStop(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc),0);
     }
     *(unsigned int *)(temp_v4 + 0x84) = 0;
-    puVar5 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
+    puVar5 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     *puVar5 = 0;
     btlDebugOpen((BtlMainState *)temp_v4,1);
     return;
@@ -913,7 +913,7 @@ LAB_001fd348:
       jobStop(*(unsigned int *)(temp_v4 + *(int *)(temp_v4 + 0x84) * 4 + 0xc),0);
     }
     *(unsigned int *)(temp_v4 + 0x84) = 0;
-    puVar5 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
+    puVar5 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     *puVar5 = 0;
     FUN_001f7fac(temp_v4);
     return;

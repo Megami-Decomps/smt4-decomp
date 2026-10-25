@@ -13,10 +13,11 @@ extern EventTexSlots *g_eventTex;
 /* Returns 1 if any pair of consecutive slots (stepping by two) has an empty slot, else 0. */
 u32 FUN_0039af04(void)
 {
+    EventTexSlots *slots = g_eventTex;
     s32 i = 0;
 
     while (1) {
-        if (g_eventTex->entry[i] == NULL || g_eventTex->entry[i + 1] == NULL) {
+        if (slots->entry[i] == NULL || slots->entry[i + 1] == NULL) {
             return 1;
         }
         i += 2;

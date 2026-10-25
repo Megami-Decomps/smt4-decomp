@@ -6,7 +6,7 @@ extern "C" {
 BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(BtlMainStateA *);
 void FUN_0047effc(s32, u32, u32);
-ReflectAction *FUN_004102d8(ReflectContext *, s32, s32, u32);
+
 
 /* Queue paired reflected actions, using a different second value for unflagged units. */
 u32 FUN_004fd3f0(u32 actor, u32 unit, u32 target)
@@ -16,23 +16,23 @@ u32 FUN_004fd3f0(u32 actor, u32 unit, u32 target)
     if (btlScriptUnitHasFlags(btlGetMainState())) {
         FUN_0047effc(0, unit, actor);
         secondValue = 0;
-        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+        action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, unit);
         action->flagView.flags |= 4;
         action->kind = 0x2B;
         action->target = target;
         action->value = 0;
         action->parameter = 0;
-        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+        action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, unit);
     } else {
         FUN_0047effc(0, unit, actor);
         secondValue = 0x10;
-        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+        action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, unit);
         action->flagView.flags |= 4;
         action->kind = 0x2B;
         action->target = target;
         action->value = 0;
         action->parameter = 0;
-        action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, unit);
+        action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, unit);
     }
     action->flagView.flags |= 4;
     action->target = target;

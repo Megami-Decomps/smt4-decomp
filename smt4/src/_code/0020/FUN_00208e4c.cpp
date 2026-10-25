@@ -94,7 +94,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_0025363c. */
 /* Supplied declaration required: FUN_00253860. */
 extern int FUN_00253968(char *);
-extern int FUN_00253ba0(char *);
+extern int mapEnemyIsClosestMarkedByAdjustedDistance(char *);
 /* Supplied declaration required: FUN_00253c70. */
 extern int FUN_00256550(unsigned int);
 /* Supplied declaration required: FUN_0025b4b0. */
@@ -218,7 +218,7 @@ void FUN_00208e4c(void)
             break;
           }
         }
-        if ((*(char *)(temp_v3 + 0xb1) == '\0') || (temp_v6 = FUN_00253ba0(pcVar17), temp_v6 != 0)) {
+        if ((*(char *)(temp_v3 + 0xb1) == '\0') || (temp_v6 = mapEnemyIsClosestMarkedByAdjustedDistance(pcVar17), temp_v6 != 0)) {
           temp_v30 = *(float *)(temp_v3 + 0x54);
           temp_v31 = *(float *)(temp_v3 + 0x58);
           temp_v32 = *(float *)(temp_v3 + 0x5c);
@@ -452,7 +452,7 @@ LAB_002095d4:
               if ((temp_v16 && temp_v7 != '\0') && pcVar9 != (char *)0x2) goto LAB_0020cf74;
               temp_v6 = temp_v6 + 1;
             } while (temp_v6 < 0x20);
-            temp_v6 = FUN_00253ba0(pcVar17);
+            temp_v6 = mapEnemyIsClosestMarkedByAdjustedDistance(pcVar17);
             if (temp_v6 != 0) {
               *(unsigned int *)(temp_v3 + 0xd8) = 0;
 LAB_002096e8:
@@ -593,7 +593,7 @@ LAB_00209658:
             break;
           }
         }
-        if ((*(char *)(temp_v3 + 0xb1) == '\0') || (temp_v6 = FUN_00253ba0(pcVar17), temp_v6 != 0)) {
+        if ((*(char *)(temp_v3 + 0xb1) == '\0') || (temp_v6 = mapEnemyIsClosestMarkedByAdjustedDistance(pcVar17), temp_v6 != 0)) {
           *(int *)(temp_v3 + 0xbc) = *(int *)(temp_v3 + 0xbc) + 1;
           *(int *)(temp_v3 + 0x1a0) = *(int *)(temp_v3 + 0x1a0) + 1;
           *(int *)(temp_v3 + 0xc4) = *(int *)(temp_v3 + 0xc4) + 1;
@@ -678,7 +678,7 @@ LAB_00209658:
             break;
           }
         }
-        if ((*(char *)(temp_v3 + 0xb1) != '\0') && (temp_v6 = FUN_00253ba0(pcVar17), temp_v6 == 0)) {
+        if ((*(char *)(temp_v3 + 0xb1) != '\0') && (temp_v6 = mapEnemyIsClosestMarkedByAdjustedDistance(pcVar17), temp_v6 == 0)) {
           *(unsigned int *)(temp_v3 + 0xb8) = 0;
           *(unsigned int *)(temp_v3 + 0xbc) = 0;
           temp_v6 = randNextInRange(0x1e);
@@ -902,7 +902,7 @@ LAB_00209c48:
           }
         }
         *(int *)(temp_v3 + 0xbc) = *(int *)(temp_v3 + 0xbc) + 1;
-        if ((*(char *)(temp_v3 + 0xb1) != '\0') && (temp_v6 = FUN_00253ba0(pcVar17), temp_v6 == 0))
+        if ((*(char *)(temp_v3 + 0xb1) != '\0') && (temp_v6 = mapEnemyIsClosestMarkedByAdjustedDistance(pcVar17), temp_v6 == 0))
         goto LAB_0020a934;
         temp_v6 = FUN_00253968(pcVar17);
         if (temp_v6 != 0) {
@@ -1098,7 +1098,7 @@ LAB_0020a6f0:
           }
         }
         *(int *)(temp_v3 + 0xbc) = *(int *)(temp_v3 + 0xbc) + 1;
-        if ((*(char *)(temp_v3 + 0xb1) == '\0') || (temp_v6 = FUN_00253ba0(pcVar17), temp_v6 != 0)) {
+        if ((*(char *)(temp_v3 + 0xb1) == '\0') || (temp_v6 = mapEnemyIsClosestMarkedByAdjustedDistance(pcVar17), temp_v6 != 0)) {
           temp_v6 = FUN_00253968(pcVar17);
           if (temp_v6 == 0) {
             temp_v30 = *(float *)(temp_v3 + 0x54);

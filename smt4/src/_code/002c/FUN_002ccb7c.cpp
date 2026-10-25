@@ -1,10 +1,11 @@
 /* NON_MATCHING: retail tests bit 3 immediately after clearing it; the dead branch is intentionally absent. */
 #include "shard/W8Match1_ScriptPhase.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 u32 scrRunOpcodesStub(u32 process);
 void FUN_0026e630(u32 value);
-void gameFlagSetValue(u32 flag, u32 value, u32 notify);
+
 void eventQueueAddUnique(u32 event);
 
 u32 FUN_002ccb7c(ScriptPhaseWork *work)

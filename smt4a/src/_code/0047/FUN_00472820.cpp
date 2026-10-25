@@ -1,6 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00472820` (_code @ 0x472820, 0x5f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: native draw callback handle restored; translator renderer/effect contracts still drop float inputs/results and render-state operations differ. */
 #include "romwright_types.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
@@ -35,7 +35,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00162790. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164168. */
-extern unsigned int *jobGetWork(void);
 extern int vec2GetXInt(void);
 extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
@@ -51,7 +50,7 @@ extern unsigned int FUN_0023b4a4(unsigned int);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 
-unsigned int FUN_00472820(void)
+s32 FUN_00472820(u32 job)
 
 {
 /* irregular: irregular input(s): in_fpscr; 12 native warning(s); review required */
@@ -75,7 +74,7 @@ unsigned int FUN_00472820(void)
   unsigned int temp_v13;
   int temp_v14;
   
-  puVar2 = (unsigned int *)jobGetWork();
+  puVar2 = reinterpret_cast<unsigned int *>(jobGetWork(job));
   if ((*puVar2 & 0x10) != 0) {
     temp_v11 = DAT_00570284;
     renderCtxCalculateStereoParallax(g_renderCtx);

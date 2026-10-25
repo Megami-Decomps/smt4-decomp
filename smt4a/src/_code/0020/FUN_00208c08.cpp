@@ -20,7 +20,7 @@ int devilIsTextureLoaded(...);
 int linkHolderRunAll(...);
 int FUN_003e5558(...);
 int FUN_003e5858(...);
-int FUN_003e5c68(...);
+int modelApplyNonzeroGroupRotation(...);
 int aocHandleButtons(...);
 int FUN_0040ae70(...);
 int VectorSignedToFloat(...);
@@ -72,7 +72,7 @@ extern int DAT_00588fd4; /* 0x588fd4 */
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: FUN_00163aa4. */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int lmapMainIsRunning(void);
 extern unsigned int vec2GetXInt(int);
@@ -117,7 +117,7 @@ extern int FUN_0039c1f4(void);
 /* Supplied declaration required: FUN_003e5858. */
 extern int fourPtrsAllNull(unsigned int);
 /* Supplied declaration required: linkHolderClearFlag. */
-/* Supplied declaration required: FUN_003e5c68. */
+/* Supplied declaration required: modelApplyNonzeroGroupRotation. */
 extern unsigned int _ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: aocHandleButtons. */
 /* Supplied declaration required: FUN_003fce08. */
@@ -423,7 +423,7 @@ unsigned int FUN_00208c08(void)
         temp_v15[0] = *(float *)(temp_v2 + 0x2038) + temp_v12 * 0.025f;
         linkHolderRunAll(*(unsigned int *)(temp_v2 + 0x2034),temp_v15);
         FUN_003e5558(*(unsigned int *)(temp_v2 + 0x2034));
-        FUN_003e5c68(*(unsigned int *)(temp_v2 + 0x2034),temp_v2 + 0x2044);
+        modelApplyNonzeroGroupRotation(*(unsigned int *)(temp_v2 + 0x2034),temp_v2 + 0x2044);
 LAB_002093e4:
         if ((*(char *)(temp_v2 + 0x1382) != '\0') ||
            ((*(char *)(temp_v2 + 0x2018) != '\x03' && (*(char *)(temp_v2 + 0x2018) != '\n')))) {
@@ -506,7 +506,7 @@ LAB_002093e4:
            ((*(char *)(temp_v2 + 0x2015) == '\0' || (*(char *)(DAT_00588e2c + 0xc) != '\0')))) {
 LAB_002097e0:
           if (*(short *)(temp_v2 + 0x138e) < 0) {
-            temp_v3 = FUN_00163fd4(0xe);
+            temp_v3 = slotIsActive(0xe);
             if (temp_v3 != 0) {
               if ((int)*(float *)(temp_v2 + 0x2050) < 0x3cf5c28f) {
                 *(float *)(temp_v2 + 0x2050) = *(float *)(temp_v2 + 0x2050) + 0.0005f;
@@ -515,7 +515,7 @@ LAB_002097e0:
               FUN_003e5558(*(unsigned int *)(temp_v2 + 0x2034));
               FUN_00240170();
             }
-            temp_v3 = FUN_00163fd4(0xf);
+            temp_v3 = slotIsActive(0xf);
             if (temp_v3 != 0) {
               if ((int)*(float *)(temp_v2 + 0x2050) >= 0x3c449ba7) {
                 *(float *)(temp_v2 + 0x2050) = *(float *)(temp_v2 + 0x2050) - 0.0005f;
@@ -524,7 +524,7 @@ LAB_002097e0:
               FUN_003e5558(*(unsigned int *)(temp_v2 + 0x2034));
               FUN_00240170();
             }
-            temp_v3 = FUN_00163fd4(0xd);
+            temp_v3 = slotIsActive(0xd);
             if (temp_v3 != 0) {
               temp_v12 = *(float *)(temp_v2 + 0x2048) - 5.0f;
               *(float *)(temp_v2 + 0x2048) = temp_v12;
@@ -536,7 +536,7 @@ LAB_002097e0:
                 *(float *)(temp_v2 + 0x2048) = temp_v12 + 360.0f;
               }
             }
-            temp_v3 = FUN_00163fd4(0xc);
+            temp_v3 = slotIsActive(0xc);
             if (temp_v3 != 0) {
               temp_v12 = *(float *)(temp_v2 + 0x2048) + 5.0f;
               *(float *)(temp_v2 + 0x2048) = temp_v12;
@@ -544,7 +544,7 @@ LAB_002097e0:
                 *(float *)(temp_v2 + 0x2048) = temp_v12 - 360.0f;
               }
             }
-            FUN_003e5c68(*(unsigned int *)(temp_v2 + 0x2034),temp_v2 + 0x2044);
+            modelApplyNonzeroGroupRotation(*(unsigned int *)(temp_v2 + 0x2034),temp_v2 + 0x2044);
             statusCameraApply();
             FUN_003e5858(*(unsigned int *)(temp_v2 + 0x2034));
             temp_v4 = vec2GetXInt(temp_v2 + 0x418);

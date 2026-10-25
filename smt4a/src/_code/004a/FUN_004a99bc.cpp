@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail sign-extends the s16 id with sxth at the menuStateBeginSelect call; armcc here treats the short parameter as already extended. */
-#include "common.h"
+/* NON_MATCHING: stored unsigned ID and signed menu conversion match retail; only initial global-work pointer/constant setup is scheduled differently. */
+#include "battle/btlUI.h"
+#include "gamedata/KeyedCatalog.h"
 
 extern "C" {
 
@@ -11,25 +12,20 @@ struct BtlUiWork {
     /* 0xC044 */ u32 owner;
     /* 0xC048 */ u32 unkC048;
     /* 0xC04C */ u32 kind;
-    /* 0xC050 */ s16 id;
+    /* 0xC050 */ u16 id;
 };
 
-struct BtlUi {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ BtlUiWork *work;
-};
 
-extern BtlUi g_btlUi;
+extern BtlUiGlobalsA g_btlUi;
 s32 textFormatBuffer(char *output, const char *format, ...);
-u32 FUN_00186f54(u16 id);
-void menuStateBeginSelect(s32 id);
+void menuStateBeginSelect(s16 id);
 void FUN_00227af0(const char *text);
 void menuStateStartSelect(s32 mode);
 
 /* Opens the battle selection menu for `id`, titled with its name. */
-void FUN_004a99bc(u32 unused, s16 id, u32 owner)
+void FUN_004a99bc(BtlUiA *unused, u16 id, s32 owner)
 {
-    BtlUiWork *work = g_btlUi.work;
+    BtlUiWork *work = reinterpret_cast<BtlUiWork *>(g_btlUi.ui);
     char title[64];
 
     work->active = 1;

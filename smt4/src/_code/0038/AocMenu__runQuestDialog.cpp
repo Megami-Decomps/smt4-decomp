@@ -1,4 +1,3 @@
-/* NON_MATCHING: phase-register allocation, signed cursor loads and branch padding differ. */
 #include "classes/AocMenu.h"
 #include "ui/SceneWindowWork.h"
 
@@ -10,6 +9,7 @@ void FUN_0027e9c0(void *dialog);
 s32 FUN_0027ee9c();
 s32 inputIsQuestMenuPressed();
 void eventQueueAddUniqueIfValid(u32 event);
+s8 uiSpriteGetCompletionState(const SceneWindowCursorView *cursor);
 
 // Open the confirmation entry, handle accept/cancel, then retire its callback.
 void AocMenu::runQuestDialog()
@@ -23,7 +23,7 @@ void AocMenu::runQuestDialog()
         return;
     }
     if (phase != 1) {
-        if (phase == 2 && window->dialog.cursor.confirmed != 0) {
+        if (phase == 2 && uiSpriteGetCompletionState(&window->dialog.cursor) != 0) {
             jobOwnerFreeSlotAndStop(&window->dialogJob);
             window->transition.state = 3;
             window->transition.phase = 0;
@@ -32,7 +32,7 @@ void AocMenu::runQuestDialog()
                 window->transition.callback = NULL;
             }
         }
-    } else if (window->dialog.cursor.confirmed != 0) {
+    } else if (uiSpriteGetCompletionState(&window->dialog.cursor) != 0) {
         if (FUN_0027ee9c()) {
             eventQueueAddUniqueIfValid(0x100016D);
             FUN_0023392c(window, -1, 0);

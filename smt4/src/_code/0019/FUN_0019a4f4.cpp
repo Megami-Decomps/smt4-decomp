@@ -31,7 +31,8 @@ int uiSpriteSetImageKeyframe(...);
 int dataTable08Sub1GetRecord(...);
 int FUN_002b8ee0(...);
 int timerStart(...);
-int FUN_00338c38(void);
+struct BtlScript;
+void FUN_00338c38(BtlScript *script);
 
 int FUN_00190ab0(...);
 int FUN_0028d310(void);
@@ -1193,7 +1194,7 @@ LAB_0019be74:
       if (((*(int *)(param_1 + 0x3044) >= 0x18) &&
           (temp_v17 = FUN_002bf818(param_1 + 0x96c), *(int *)(param_1 + 0x3044) == 0x18)) &&
          ((*(unsigned int *)(*(int *)(param_1 + 0x3040) + 0x44a0) & 0x2000000) == 0)) {
-        FUN_00338c38();
+        FUN_00338c38((BtlScript *)*(unsigned int *)(param_1 + 0x3040));
       }
     }
     else {

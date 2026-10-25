@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the placement of the hoisted menu+0x3800 address differs: retail computes it after the slot counter is cleared, the build before. */
+/* NON_MATCHING: menu-state base hoist precedes the slot clear; kind-3 test uses BEQ/B rather than retail BNE/B. */
 #include "battle/BattleCommandMenu.h"
 
 extern "C" {
@@ -38,12 +38,14 @@ void FUN_0028e9ec(BattleCommandMenu *menu)
                     BattleCommandEntry *command = FUN_00292960(i, 0);
                     if (!battleCommandIsAvailable(command))
                         continue;
-                    if (command->kind != 5) {
-                        if (command->kind != 3 || idOwnerHasActiveObject(unit) != 0)
-                            slotCount++;
-                    } else if (state->slotCommandLocked == 0) {
-                        slotCount++;
+                    if (command->kind == 5) {
+                        if (state->slotCommandLocked != 0)
+                            continue;
+                    } else if (command->kind == 3) {
+                        if (idOwnerHasActiveObject(unit) == 0)
+                            continue;
                     }
+                    slotCount++;
                 }
             }
         }

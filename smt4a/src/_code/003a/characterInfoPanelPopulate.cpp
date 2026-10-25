@@ -42,7 +42,7 @@ extern "C" {
 void FUN_001654f8(const char *source, char *destination, u32 flags);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_aeabi_memclr(void *destination, u32 size);
-void FUN_0023723c(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
+void asdTextFormatStream(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *dataTable4AGetEntry2C(u32 id);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_0015f858(u32 equipment, u32 flags);
@@ -68,7 +68,7 @@ static __forceinline void setCharacterEquipmentLabelA(CharacterInfoPanelA *panel
 {
     if (record->equipment[slot]) {
         FUN_001654f8(FUN_0015f858(record->equipment[slot], 0), buffer, 0);
-        FUN_0023723c(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
+        asdTextFormatStream(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
         panel->equipmentIds[slot] = record->equipment[slot];
     } else {
         panel->equipmentIds[slot] = 0;
@@ -88,7 +88,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         return;
     char buffer[128];
     FUN_001654f8(record->name, buffer, 0);
-    FUN_0023723c(panel->name, 3, -1u, 0, 0, buffer);
+    asdTextFormatStream(panel->name, 3, -1u, 0, 0, buffer);
     const char *title = dataTable4AGetEntry2C(record->title);
     if (record->flags & 2)
         __aeabi_memcpy4(buffer, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
@@ -96,14 +96,14 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         FUN_001654f8(title, buffer, 0);
     else
         rt_aeabi_memclr(buffer, sizeof(buffer));
-    FUN_0023723c(panel->title, 2, -1u, 0, 0, buffer);
+    asdTextFormatStream(panel->title, 2, -1u, 0, 0, buffer);
     if (messages)
-        FUN_0023723c(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, record->message, 0));
+        asdTextFormatStream(panel->description, 2, -1u, 0, 0, "%s", fileSectionGetData(messages, record->message, 0));
     else {
         buffer[0] = '\x81';
         buffer[1] = '\x40';
         buffer[2] = '\0';
-        FUN_0023723c(panel->description, 2, -1u, 0, 0, buffer);
+        asdTextFormatStream(panel->description, 2, -1u, 0, 0, buffer);
     }
     setCharacterEquipmentLabelA(panel, record, 0, buffer);
     setCharacterEquipmentLabelA(panel, record, 1, buffer);
@@ -117,22 +117,22 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         FUN_001654f8(FUN_00180118(record->demon), buffer, 0);
     else
         ARM_common_memcpy4_7(buffer, "\x81\x7c\x81\x7c\x81\x7c");
-    FUN_0023723c(panel->demonName, 1, -1u, 0, 0, buffer);
+    asdTextFormatStream(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_00168594(buffer, 1, 0.0f);
     if (record->owner)
         FUN_001654f8(FUN_0014bf3c(record->demon, 0), buffer, 0);
     else
         FUN_001a90f0(buffer, "\x81\x7c\x81\x7c");
-    FUN_0023723c(panel->race, 2, -1u, 0, 0, buffer);
+    asdTextFormatStream(panel->race, 2, -1u, 0, 0, buffer);
     panel->raceWidth = (s32)FUN_00168594(buffer, 2, 0.0f);
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot] && record->owner) {
             FUN_001654f8(FUN_0014bd84(record->skills[slot]), buffer, 0);
-            FUN_0023723c(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
+            asdTextFormatStream(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_00168594(buffer, 1, 0.0f);
         } else {
             textFormatBuffer(buffer, "\x81\x7c\x81\x7c\x81\x7c");
-            FUN_0023723c(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
+            asdTextFormatStream(panel->skillLabels[slot], 2, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_00168594(buffer, 2, 0.0f);
         }
     }
@@ -154,11 +154,11 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
         void *item = FUN_0019acdc(record->specialItem, 0);
         u16 id = FUN_0036fcd0(item, 0);
         FUN_001654f8(FUN_00180118(FUN_0019e52c(id)), buffer, 0);
-        FUN_0023723c(panel->specialItemName, 2, -1u, 0, 0, buffer);
+        asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);
         panel->specialItemWidth = (s32)FUN_00168594(buffer, 2, 0.0f);
     } else {
         rt_aeabi_memclr(buffer, sizeof(buffer));
-        FUN_0023723c(panel->specialItemName, 2, -1u, 0, 0, buffer);
+        asdTextFormatStream(panel->specialItemName, 2, -1u, 0, 0, buffer);
         panel->specialItemWidth = 0;
     }
 

@@ -21,7 +21,7 @@ extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern unsigned int DAT_00571618; /* 0x571618 */
 extern unsigned int DAT_0057161c; /* 0x57161c */
 
-extern int FUN_00163fd4(unsigned int, unsigned int);
+extern int slotIsActive(unsigned int, unsigned int);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int);
@@ -181,7 +181,7 @@ void FUN_004d1470(int param_1,int param_2)
     }
     break;
   case 0x10:
-    temp_v4 = FUN_00163fd4(0,temp_v3);
+    temp_v4 = slotIsActive(0,temp_v3);
     if (temp_v4 == 0) {
       return;
     }
@@ -260,7 +260,7 @@ void FUN_004d1470(int param_1,int param_2)
     } while (temp_v4 < 0x32);
     return;
   case 0x11:
-    temp_v4 = FUN_00163fd4(0,temp_v3);
+    temp_v4 = slotIsActive(0,temp_v3);
     if (temp_v4 != 0) {
       temp_v0 = *(char *)(param_1 + 0x14);
       temp_v9 = temp_v0 == '\0';

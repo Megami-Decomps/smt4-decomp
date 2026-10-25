@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail adds the scaled index and then 0x100 plus a #0x26 displacement; built loads 0x126 from a literal and adds it to the index */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -14,7 +14,6 @@ typedef struct BattleUnit {
 } BattleUnit;
 
 extern u32 g_btlScriptUnit;
-extern BattleUnit *btlUnitGet(u32 unit);
 extern s32 scrGetArg(void);
 extern void scrSetResult(s32 result);
 
@@ -23,7 +22,7 @@ u32 scrCommBtlUnitSlotStateIs4(void)
 {
     s32 slot = scrGetArg();
 
-    scrSetResult((btlUnitGet(g_btlScriptUnit)->status->slots[slot] >> 10) == 4);
+    scrSetResult((reinterpret_cast<BattleUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->status->slots[slot] >> 10) == 4);
     return 1;
 }
 

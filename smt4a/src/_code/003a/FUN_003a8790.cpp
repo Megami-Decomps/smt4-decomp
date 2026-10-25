@@ -1,4 +1,4 @@
-/* NON_MATCHING: category extraction uses UXTH rather than LSL; successful-result tail placement differs. */
+/* NON_MATCHING: category bit extraction matches; final skill-list success path duplicates rather than sharing the result-setting tail. */
 #include "battle/btlUnit.h"
 #include "gamedata/BattleUnitSkills.h"
 #include "gamedata/Table00.h"
@@ -21,7 +21,7 @@ u32 FUN_003a8790(void)
     if (entry->record) {
         for (s32 index = 0; index < 8; ++index) {
             const Table04Record *skill = dataTable04FindById(entry->record->skills[index]);
-            if (skill && category == ((skill->properties & 0xffff) >> 11)) {
+            if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
             }
@@ -30,7 +30,7 @@ u32 FUN_003a8790(void)
     if (entry->secondaryRecord) {
         for (s32 index = 0; index < 8; ++index) {
             const Table04Record *skill = dataTable04FindById(entry->secondaryRecord->skills[index]);
-            if (skill && category == ((skill->properties & 0xffff) >> 11)) {
+            if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
             }
@@ -40,7 +40,7 @@ u32 FUN_003a8790(void)
         const Table00Record *demon = dataTable00FindById(entry->id);
         for (s32 index = 0; index < 8; ++index) {
             const Table04Record *skill = dataTable04FindById(demon->skillList.ids[index]);
-            if (skill && category == ((skill->properties & 0xffff) >> 11)) {
+            if (skill && category == ((skill->properties >> 11) & 0x1f)) {
                 scrSetResult(1);
                 return 1;
             }

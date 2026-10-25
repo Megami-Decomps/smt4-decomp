@@ -6,9 +6,9 @@ void appletShowTextMessage(const u16*);
 void FUN_001764f4(u32);
 void* dataTableValueOrZero(u32);
 
-u32 FUN_0015f2ec(void)
+s32 FUN_0015f2ec(u32 job)
 {
-    JobAppletMessage* work = reinterpret_cast<JobAppletMessage*>(jobGetWork());
+    JobAppletMessage* work = reinterpret_cast<JobAppletMessage*>(jobGetWork(job));
     u32 flags = work->flags;
     if ((flags & 1) != 0) {
         if ((flags & 8) != 0 && (flags & 2) == 0) {

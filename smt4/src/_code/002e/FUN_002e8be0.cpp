@@ -88,7 +88,10 @@ void FUN_002e8be0(void)
         DAT_004474f4->mode = -2;
         buttonHelpSetPreset(0xdb);
         mapIfActivateRecord(1, g_gameState.overviewRecord);
-        MapVector viewPosition = g_gameState.overviewPosition;
+        MapVector viewPosition;
+        viewPosition.x = g_gameState.overviewPosition.x;
+        viewPosition.y = g_gameState.overviewPosition.y;
+        viewPosition.z = g_gameState.overviewPosition.z;
         viewPosition.x = viewPosition.x + FUN_0028250c(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         viewPosition.z = viewPosition.z + FUN_00282390(g_gameState.overviewHeading * DEGREES_TO_RADIANS) * 80.0f;
         FUN_001b4478(viewPosition.x, viewPosition.y, viewPosition.z, g_gameState.overviewDirection);

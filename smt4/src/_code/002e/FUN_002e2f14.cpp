@@ -1,4 +1,4 @@
-/* NON_MATCHING: only scheduling differs: retail reads the thread handle (ldr r2, [r0, #68]) before `sub sp` and recomputes the thread address (add r5, r4, #68) after the finalize call instead of before it. */
+/* NON_MATCHING: thread-handle load occurs after the stack allocation rather than before it. */
 #include "nn/Result.h"
 #include "nn/os/Handle.h"
 #include "nn/os/Thread.h"

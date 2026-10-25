@@ -12,7 +12,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
 s32 commonBackgroundUpdateFade(u32 handle);
 void FUN_002a35fc(u32 handle);
 s32 FUN_002a3600(u32 handle);
-s32 FUN_002a37a4(u32 handle);
+s32 commonBackgroundDraw(u32 handle);
 void uiFadeOpen();
 void campCommonBgCreateCrazingSumaho();
 s32 gameFlagIsSet(u32 flag);
@@ -32,7 +32,7 @@ extern "C" void campCommonBgAcquire()
                                                           commonBackgroundUpdateFade, FUN_002a35fc, 0);
         taskCreateDraw((const s8 *)"COMBG DDRAW", 0xe8, 0, 0, FUN_002a3600, NULL, 0,
                        (void *)background->counters.unk00);
-        taskCreateDraw((const s8 *)"COMBG DDRAW FADE", 0x15f, 0, 0, FUN_002a37a4, NULL, 0,
+        taskCreateDraw((const s8 *)"COMBG DDRAW FADE", 0x15f, 0, 0, commonBackgroundDraw, NULL, 0,
                        (void *)background->counters.unk00);
         uiFadeOpen();
         background = g_commonBg.background;

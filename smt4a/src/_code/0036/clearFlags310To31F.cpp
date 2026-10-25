@@ -1,8 +1,9 @@
 #include "shard/Shard0036.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-extern void gameFlagSetValue(u32 index, s32 value, s32 flag);
+
 
 void clearFlags310To31F(void)
 {

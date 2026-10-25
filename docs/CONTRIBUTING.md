@@ -44,12 +44,34 @@ Every match must be one a programmer could have written for a reason.
   A no-argument wrapper can accidentally consume the incoming `r0` unchanged: check the real
   callee and restore explicit pointer/handle forwarding. For registered process/draw callbacks,
   compare the body with its registrar and recover the callback parameter and result types too.
+  `shard/JobWork.h` declares the canonical `JobWork *jobGetWork(u32 job)` accessor:
+  pass the incoming handle explicitly, use `s32 (u32 job)` for process/draw updates and
+  `void (u32 job)` for destruction callbacks, and keep the registrar's declarations in sync.
+  `gamedata/GameFlags.h` declares `void gameFlagSetValue(u32 id, s32 value, s32 notify)`
+  for both games. Pass the retail third argument explicitly: normal setters notify with `1`,
+  while the flag-change handlers use `0` to avoid redispatch. The setter has no result;
+  recover any subsequent value from the actual producer rather than assigning its stale `r0`.
+  `gfx/EffectEditorParameters.h` owns both games' four-argument parameter-editor contracts.
+  Their two option-list pointers are real arguments: a table base kept in `r3` while `r2`
+  addresses a later entry is not merely missed literal folding. Preserve both pointers and
+  use the native integer status mask rather than treating values such as `0x400003` as addresses.
+  `gfx/CameraMotion.h` owns Apocalypse camera sampling and reset forwarding: preserve the
+  output pose and clip index through `controllerRefreshAtUnitScale`, and pass the sampler's
+  `f32` delta explicitly (unit step, 60/480-frame advance, or the converted transition count).
+  Its 0x44-byte output extends, rather than enlarges, the shared 0x38-byte look-at camera.
+  Sound-stop wrappers also forward the incoming fade duration: Apocalypse's registered-handle
+  retirement, handler finish, and ordinary slot-stop functions take `(id, s32 frames)`.
+  Keep the second argument through `asdSoundObjectStop`; a callee that leaves `r1` untouched
+  is forwarding it, not proving that the stop function takes only one argument.
   At large byte-field offsets, check signedness before reshaping the layout: an `s8` flag can
   reproduce a folded `add`/`ldrb` even when a zero test makes the load itself unsigned.
   Keep packing local to genuinely unaligned members, with size/offset assertions; packing an
   entire record can incorrectly downgrade its otherwise-aligned word accesses.
   A float-shaped stack argument does not alone prove a variadic callee: a one-word integer/float
   payload union can have the same calling convention.
+  Preserve explicit switch cases even when a case and `default` perform the same operation:
+  collapsing them into adjacent labels can change armcc's entire decision tree. The Apocalypse
+  title overlay matches with separate case-7/default bodies and context lookup inside its drawing cases.
 - Shared record layouts must have one definition in a common header. Include that header from
   each user; unrelated layouts with coincidentally identical names need distinct type names.
   Check which class owns a tail field before extending a base: sibling classes can have
@@ -63,6 +85,10 @@ Every match must be one a programmer could have written for a reason.
   `battle/btlReflect.h`. Its actor selectors are word-sized arguments even though the allocator
   stores their low halfwords; preserve the caller's explicit signed-halfword conversions and
   consume the returned action, not the queue context, when filling a newly queued payload.
+  Render-state caches use `gfx/RenderStateStack.h` and `camp/RenderCtx.h`: use `RenderCtx`
+  for IV and `RenderCtxA` for Apocalypse, with the context push/set wrappers when the state
+  argument is evaluated before locating the stack. `shard/S1ListPanel.h` supplies only the
+  derived Apocalypse scissor extension; do not recreate the removed cached-state/context types.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in
@@ -206,6 +232,13 @@ Constructors and destructors are written as such (`Obj55afc4::~Obj55afc4()`, ref
   writeback before interpreting the final pointer adjustment;
 - preserve class-value copy semantics as well as layout: a small iterator with a nontrivial
   copy constructor uses hidden result storage, unlike an ordinary one-word aggregate;
+- SDK result values use the one-word `nn::Result` in `nn/Result.h` when default construction
+  is visible in retail: its invalid initial code is `0xE7E3FFFF`, even when the enclosing
+  request constructor later assigns success. Keep integer result codes for raw ABI declarations.
+- VFP loads/stores can copy integer aggregate fields without converting them. Sprite drawing
+  passes the filter, placement-enable and Y-flip words together on the stack, while animation
+  time and overall scale remain scalar VFP arguments; follow the downstream field tests,
+  rather than inferring float parameter types from the copy instructions alone.
 - recover a callback table's actual owner and use native member functions/member pointers,
   not a second owner layout or integer pairs standing in for member pointers. Preserve each
   callback's real arguments and return type, even when its body ignores an argument. Native

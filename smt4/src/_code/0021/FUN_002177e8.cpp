@@ -23,7 +23,7 @@ void FUN_003ddbcc(s32 channel, ScriptUnit *unit, s32 a3, s32 a4, s32 a5, s32 fra
 u32 FUN_002177e8(void)
 {
     s32 id = scrGetArg(0);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     if (id < BTL_ENTRY_COUNT) {
         BtlActionRecord *record = &btlGetMainState()->actions.records[id];
         BtlEntry *entry = btlMainFindEntryByListedId(btlGetMainState(), id);

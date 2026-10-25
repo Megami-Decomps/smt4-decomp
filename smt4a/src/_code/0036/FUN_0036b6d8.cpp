@@ -13,7 +13,7 @@ void loadSlotRequestAsync(s32 slot, s32 flags);
 u16 ifTouchGetButtonHelpValue(void);
 void FUN_002c7e6c(void);
 void FUN_002c85b0(s32 a);
-void FUN_002c7ce8(s32 a);
+void statusDownSwitchTab(s32 a);
 void FUN_002c8538(s32 a);
 void objBMarkAndInit20D4(void);
 void stateHolderMarkAndInit2588(void);
@@ -53,7 +53,7 @@ void FUN_0036b6d8(s32 mode, u32 id)
     scene->slot = ifTouchGetButtonHelpValue();
     FUN_002c7e6c();
     FUN_002c85b0(0);
-    FUN_002c7ce8(0);
+    statusDownSwitchTab(0);
     FUN_002c8538(0);
     objBMarkAndInit20D4();
     stateHolderMarkAndInit2588();

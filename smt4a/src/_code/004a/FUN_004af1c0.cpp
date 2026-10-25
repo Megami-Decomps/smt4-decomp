@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail cmp r4, r0 differs from recovered cmp r0, r4. */
+/* NON_MATCHING: sentinel and ancestor-right equality comparisons reverse CMP operands; one ancestor-right scratch uses r1 instead of retail r2. */
 #include "common.h"
 
 namespace {

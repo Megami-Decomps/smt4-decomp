@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack pushes: retail loads g_titleScene before the call and computes the stack address after it; armcc hoists the address; push scheduling differs. */
+/* NON_MATCHING: canonical stack-C wrapper matches its push; stack-A previous/count register grouping still differs. */
 #include "camp/RenderCtx.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
@@ -16,14 +16,6 @@ struct TerminalScreen {
 };
 typedef char TerminalScreenSlotsOffsetCheck[offsetof(TerminalScreen, slots) == 0x568 ? 1 : -1];
 
-static __inline void pushX(RenderStateStack *st, int state)
-{
-    int prev = st->entries[st->count]; ++st->count; st->entries[st->count] = state;
-    if (st->dirty != 0 || prev != state) {
-        st->apply(state);
-        st->dirty = 0;
-    }
-}
 extern "C" {
 extern TerminalScreen *g_tmnl;
 extern RenderCtx *g_titleScene;
@@ -37,7 +29,7 @@ u32 FUN_001fe23c(void)
 {
     TerminalScreen *screen = g_tmnl;
     if ((u32)(screen->page - 1) < 98) {
-        pushX(&g_titleScene->additional.stackC, FUN_002865c0(6, 0.0f));
+        renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
         renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
         renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
         for (s32 i = 0; i < 4; ++i) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: whole body matches (MikadoCamera::initialize, string globals, FloatState ctor); armcc keeps the zero/-1 constants in r6/r0 where retail hoists them to r7/r8, and retail's asdOperatorNew call carries an extra stale r6 argument (as in the other `new` sites) that has no source expression. */
+/* NON_MATCHING: zero/-1 lifetimes differ; retail passes an uninitialized r6 as an extra allocation operand, while the recovered allocation overload takes only size. */
 #include "mikado/mikadoMain.h"
 struct ContentTransition;
 struct Mover;

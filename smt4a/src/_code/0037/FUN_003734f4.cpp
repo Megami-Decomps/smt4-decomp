@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: scalar selection range recovered; required/excluded mask load grouping and AND scratch registers differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -17,14 +17,14 @@ u32 FUN_003734f4()
     u32 id = scrGetArg(0);
     s32 threshold = scrGetArg(1);
     u32 choice = btlResolveEntryChoice(scrGetArg(2));
-    s32 range[8];
+    s32 first;
     s32 count;
-    FUN_00301a08(choice, range, &count);
-    for (s32 index = range[0]; index < range[0] + count; ++index) {
+    FUN_00301a08(choice, &first, &count);
+    for (s32 index = first; index < count + first; ++index) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
             (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 && entry->id == id &&
+            (g_btlCandidateMasks.excluded & entry->flags) == 0 && entry->id == id &&
             entry->mp * 100 / entry->maxMp <= threshold) {
             scrSetResult(1);
             return 1;

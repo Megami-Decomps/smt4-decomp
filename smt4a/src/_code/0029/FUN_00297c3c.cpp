@@ -1,4 +1,4 @@
-/* NON_MATCHING: the visibility flag updates (`flags |= 3` / `flags &= ~3`) come out predicated (orreq/streq, bicne/strne) where retail branches around orr+str; everything else is identical */
+/* NON_MATCHING: visibility updates are predicated where retail branches around OR/BIC+store; initial model-owner/global-flag loads also use swapped r0/r1. */
 #include "gfx/EngineRecordList.h"
 #include "map/mapDepart.h"
 

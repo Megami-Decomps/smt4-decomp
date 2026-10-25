@@ -87,7 +87,7 @@ void FUN_003bb9d4(void *list);
 s32 gameStateIsFlagSetAndLarge(void);
 void listScrollToId(void *list, s32 id);
 ListRow *FUN_0022b8c0(void *list);
-void FUN_0022b83c(MenuWindow *window, f32 *pair);
+void uiClampScrollOffset(MenuWindow *window, f32 *pair);
 void FUN_0022b778(MenuWindow *window);
 void FUN_0022b6c4(void *list);
 
@@ -165,8 +165,8 @@ void FUN_0022b29c(MenuWindow *window, s32 selected, s32 state)
     window->viewY = window->originY;
     window->cornerX = (f32)x - 200.0f;
     window->cornerY = (f32)y - 120.0f;
-    FUN_0022b83c(window, &window->viewX);
-    FUN_0022b83c(window, &window->cornerX);
+    uiClampScrollOffset(window, &window->viewX);
+    uiClampScrollOffset(window, &window->cornerX);
     window->sizeCopyX = window->sizeX;
     window->sizeCopyY = window->sizeY;
     window->targetX = (f32)x;

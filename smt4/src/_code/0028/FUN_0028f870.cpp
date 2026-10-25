@@ -63,8 +63,8 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     s32 previousHeld = ifTouchGetSelectionModeForRegion(camp->previousRegion);
     s32 nextHeld = ifTouchGetSelectionModeForRegion(camp->nextRegion);
     s32 thumbHeld = ifTouchGetSelectionModeForRegion(camp->thumbRegion);
-    u32 previousSprite;
-    u32 nextSprite;
+    s32 previousSprite;
+    s32 nextSprite;
     if (wide != 0) {
         if (FUN_0029ee54(list) <= 11) {
             return;
@@ -107,7 +107,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     s32 thumbOffset = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * FUN_0029efc0(list) >> 12;
     setRenderState(g_titleScene, 3);
     FUN_0029a17c(x + track->x, track->y + y + thumbOffset, track->cell[0], thumbHeight, 1);
-    u32 thumbSprite;
+    s32 thumbSprite;
     if (wide != 0) {
         thumbSprite = 0x41d;
         if (thumbHeld != 0) {

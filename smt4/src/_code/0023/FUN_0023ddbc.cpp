@@ -1,9 +1,10 @@
 /* NON_MATCHING: flag value, entry array/count, and cached state saved-register allocation differs. */
 #include "gamedata/DataTable.h"
+#include "gamedata/GameFlags.h"
 #include <stddef.h>
 
 extern "C" {
-void gameFlagSetValue(u32 flag, u32 value, s32 notify);
+
 s32 gameFlagIsSet(u32 flag);
 void *aocEntryFind(u8 keyA, u8 keyB);
 void *gameDataGetTableEntry(u8 keyA, u8 keyB);

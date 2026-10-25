@@ -28,7 +28,7 @@ extern "C" const SortMenuParameterData DAT_0052ded8 = {
 extern "C" {
 extern SortMenuSingleton g_useCounter;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
-void sysMemClear(void *, u32);
+void *sysMemClear(void *, u32);
 u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, u32);
 s32 FUN_0022a0a0(u32);

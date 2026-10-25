@@ -23,7 +23,7 @@ extern BattleActionCamera *g_btlCamera;
 extern void *g_btlUiBlock;
 extern void *g_btlAux;
 s32 FUN_004f2708(BattleActionCamera *camera, BattleMaskState *battle, s32 flags);
-void FUN_004fb670(s32, s32, s32);
+void btlQueueDuplicateSuppressedAction(s32, s32, s32);
 void FUN_004feecc(s32, s32);
 s32 scrRunOpcodesStub(u32 process);
 void FUN_003756c8(s32 mode);
@@ -35,7 +35,7 @@ u32 btlActionStepFinishPendingChanges(BattleActionStep *step, BattleMaskState *b
 {
     if ((battle->mask & g_btlEvent.pendingMask) != 0 && (step->flags & 1) == 0) {
         if (g_btlCamera->target >= 0 && FUN_004f2708(g_btlCamera, battle, 1)) {
-            FUN_004fb670(0, 0, 0);
+            btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);
         step->flags |= 1;

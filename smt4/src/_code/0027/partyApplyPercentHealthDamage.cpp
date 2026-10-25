@@ -1,4 +1,4 @@
-/* NON_MATCHING: health-clamp operand scheduling and unit-loop flag tests produce different register allocation and branches. */
+/* NON_MATCHING: explicit support-progress states and zero-health test now match; player clamps, unit-loop flag tests, and support reduction registers still differ. */
 #include "common.h"
 
 struct DamagePlayer {
@@ -105,10 +105,16 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
         return;
     if (gameGetOptionProgressStatus() != 2)
         return;
-    if (gameGetOptionProgressStatus() == 2) {
+    switch (gameGetOptionProgressStatus()) {
+    case 0:
+    case 1:
+        break;
+    case 2: {
         DamageUnit *support = gameGetSupportUnitData();
-        if ((support->flags & 2) || static_cast<u16>(support->currentHealth) == 0)
+        if ((support->flags & 2) || support->currentHealth == 0)
             return;
+        break;
+    }
     }
     DamageUnit *support = gameGetSupportUnitData();
     s32 maximum = support->maximumHealth;

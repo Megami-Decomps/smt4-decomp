@@ -14,7 +14,8 @@ extern EventCommandGlobals g_eventCommand;
 bool FUN_002c2098(void)
 {
     if (scrGetCommandFrame() == 0) {
-        eventSetUnderMessageFade(scrGetArg(0) == 0 ? 0xFF : 0xFFFFFFFF, 10, 1, 1.0f);
+        u32 argument = scrGetArg(0);
+        eventSetUnderMessageFade(argument == 0 ? 0xFF : 0xFFFFFFFF, 10, 1, 1.0f);
         return false;
     }
     return g_eventCommand.command->unk10 == g_eventCommand.command->unk14;

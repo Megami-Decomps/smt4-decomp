@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail keeps the table's address in a register and adds 0x70 to it; armcc folds the offset into the literal. */
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct Effect003c5c34 {
     /* 0x00 */ u8 unk00[0xb8];
@@ -22,13 +22,12 @@ extern "C" {
 
 extern Table003c5c34 DAT_0059ee68;
 
-void FUN_0031ab38(void *body, u32 value, const void *entry);
 
 /* Forwards the effect's body (0x124) and value (0xb8) with the entry at 0x70 of DAT_0059ee68. */
 void FUN_003c5c34(Object003c5c34 *object)
 {
     Effect003c5c34 *effect = object->effect;
-    FUN_0031ab38(effect->body, effect->value, DAT_0059ee68.entry);
+    FUN_0031ab38(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68.entry), reinterpret_cast<EffectEditorOptions *>(&DAT_0059ee68));
 }
 
 } /* extern "C" */

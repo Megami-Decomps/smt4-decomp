@@ -1,4 +1,4 @@
-/* NON_MATCHING: close: retail multiplies with smulbb (both operands halfwords), evaluates the mark's bit index before calling gameGetMapBlock and keeps the kind test as two branches where built predicates the increment */
+/* NON_MATCHING: mark bit is captured before the map lookup and candidate counter lifetime matches; bit-address scratch registers and kind-test folding differ. */
 #include "map/mapDepart.h"
 
 /* A record of data table 0x2E (section 2): a timed area event. */
@@ -93,7 +93,8 @@ void FUN_002f3694(void)
                     AreaMarkRecord *mark = FUN_0025b670(j);
 
                     if (mark->active != -1 && mark->areaId == areaId) {
-                        markBitSet(gameGetMapBlock(), mark->bit);
+                        s32 bit = mark->bit;
+                        markBitSet(gameGetMapBlock(), bit);
                     }
                 }
                 for (group = 0; group < 16; group++) {
@@ -112,13 +113,13 @@ void FUN_002f3694(void)
                     }
                     if (candidates != 0) {
                         s32 pick;
-                        s32 count = 0;
 
                         if (candidates == 1) {
                             pick = 0;
                         } else {
                             pick = randNextInRange((u16)(candidates - 1));
                         }
+                        s32 count = 0;
                         for (j = 0; j < dataTableGetRecordFortyNine(); j++) {
                             AreaSlotRecord *slot = FUN_0027ee24(j);
 

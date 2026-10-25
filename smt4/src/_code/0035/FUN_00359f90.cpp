@@ -42,7 +42,7 @@ u8 FUN_00359f90(void)
     u32 limitLow = DAT_0042f000.limit[0];
     u32 limitHigh = DAT_0042f000.limit[1];
     nn_os_CriticalSection_Leave(&g_moduleCriticalSection1);
-    return info.value >= (limitLow | (limitHigh << 8));
+    return (limitLow | (limitHigh << 8)) <= info.value;
 }
 
 } /* extern "C" */

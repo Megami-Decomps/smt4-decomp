@@ -6,7 +6,7 @@
 extern "C" {
 
 int modelSetVisible(unsigned int, int);
-int FUN_0022b83c(int, int);
+int uiClampScrollOffset(int, int);
 int FUN_00232848(void);
 int FUN_002328b4(void);
 int FUN_00234cd8(unsigned int, int, int);
@@ -27,7 +27,7 @@ extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0022b238(int);
 /* Supplied declaration required: modelSetVisible. */
-/* Supplied declaration required: FUN_0022b83c. */
+/* Supplied declaration required: uiClampScrollOffset. */
 extern int FUN_0022b8c0(int);
 /* Supplied declaration required: FUN_00232848. */
 /* Supplied declaration required: FUN_002328b4. */
@@ -95,8 +95,8 @@ void FUN_003b875c(int param_1)
     *(unsigned int *)(param_1 + 100) = *(unsigned int *)(param_1 + 0x5c);
     *(float *)(param_1 + 0x68) = temp_v9 - 200.0f;
     *(float *)(param_1 + 0x6c) = temp_v10 - 120.0f;
-    FUN_0022b83c(param_1,param_1 + 0x60);
-    FUN_0022b83c(param_1,param_1 + 0x68);
+    uiClampScrollOffset(param_1,param_1 + 0x60);
+    uiClampScrollOffset(param_1,param_1 + 0x68);
     *(unsigned int *)(param_1 + 0x78) = *(unsigned int *)(param_1 + 0x70);
     temp_v11 = VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);

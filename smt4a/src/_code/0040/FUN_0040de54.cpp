@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040de54` (_code @ 0x40de54, 0x247c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: restored help request option; signed mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_BattleCamera.h"
 #include "battle/btlMain.h"
@@ -61,7 +60,7 @@ int FUN_0040ca18(...);
 int FUN_0040d274(...);
 int btlUiSetDefaultLimits(...);
 int FUN_004c8800(...);
-int FUN_004c8cb0(...);
+unsigned int FUN_004c8cb0(unsigned int object, int index, unsigned char option);
 int FUN_004c8d8c(...);
 int FUN_004c8e30(...);
 int FUN_004c909c(...);
@@ -78,7 +77,7 @@ int flags64CSetTarget(...);
 int FUN_004f26cc(...);
 int FUN_004f41b0(...);
 int FUN_004fb4fc(...);
-int FUN_004fb670(...);
+int btlQueueDuplicateSuppressedAction(...);
 int btlReflectSetValuePair(...);
 int btlReflectRequestPairScalar(...);
 
@@ -261,7 +260,7 @@ extern int animationIsReferencedClipComplete(unsigned int);
 /* Supplied declaration required: flags64CSetTarget. */
 /* Supplied declaration required: FUN_004f26cc. */
 extern int FUN_004f2708(int, int, unsigned int);
-extern int FUN_004f283c(int);
+extern int btlCameraHasDefaultParameters(int);
 /* Supplied declaration required: FUN_004f41b0. */
 /* Supplied declaration required: FUN_004f5238. */
 /* Supplied declaration required: FUN_004f56cc. */
@@ -284,7 +283,7 @@ extern int FUN_004fa7bc(int);
 /* Supplied declaration required: keyedValueFindPair. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fb4fc. */
-/* Supplied declaration required: FUN_004fb670. */
+/* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fb798. */
 /* Supplied declaration required: btlReflectCreateKind19. */
 /* Supplied declaration required: FUN_004fd508. */
@@ -818,7 +817,7 @@ joined_r0x0040ec14:
       break;
     }
     if (psVar2[0x12] == 0) {
-      FUN_004c8cb0(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0x26));
+      FUN_004c8cb0(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0x26),1);
       psVar2[0x12] = psVar2[0x12] + 1;
       temp_v4 = 1;
       psVar2[1] = temp_v4;
@@ -916,8 +915,8 @@ joined_r0x0040ec14:
         (temp_v9 = FUN_004f2708(g_btlCamera,temp_v3,0), temp_v9 != 0)) &&
        (((*(unsigned int *)(temp_v3 + 0x45a0) & DAT_00571370) == 0 &&
          (*(unsigned int *)(temp_v3 + 0x45a4) & DAT_00571374) == 0 ||
-        (temp_v9 = FUN_004f283c(g_btlCamera), temp_v9 == 0)))) {
-      FUN_004fb670(0,*(unsigned int *)(psVar2 + 4));
+        (temp_v9 = btlCameraHasDefaultParameters(g_btlCamera), temp_v9 == 0)))) {
+      btlQueueDuplicateSuppressedAction(0,*(unsigned int *)(psVar2 + 4));
     }
     temp_v5 = uRam00571360;
     if ((*unaff_r8 & 0x200) != 0) {

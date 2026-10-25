@@ -17,11 +17,11 @@ void FUN_00231574(void)
         selected = resourceRunEmbeddedOperationIfUnblocked(work->portraitSelectionA.alternateCursor);
     }
     for (s32 slot = 0; slot < 4; ++slot) {
-        u32 id = static_cast<u16>(work->portraitSelectionA.loaded[slot]);
-        if (id != 0 && work->portraitSelectionA.desired[selected] != id &&
-            work->portraitSelectionA.desired[selected + 1] != id &&
-            work->portraitSelectionA.desired[selected + 2] != id &&
-            work->portraitSelectionA.desired[selected + 3] != id) {
+        u16 id = static_cast<u16>(work->portraitSelectionA.loaded[slot]);
+        if (id != 0 && id != work->portraitSelectionA.desired[selected] &&
+            id != work->portraitSelectionA.desired[selected + 1] &&
+            id != work->portraitSelectionA.desired[selected + 2] &&
+            id != work->portraitSelectionA.desired[selected + 3]) {
             if (devilIsTextureLoaded(work->portraitSelectionA.loaded[slot], 1)) {
                 FUN_0038b3f8(work->portraitSelectionA.loaded[slot], 1);
                 work->portraitSelectionA.loaded[slot] = 0;
@@ -29,11 +29,11 @@ void FUN_00231574(void)
         }
     }
     for (s32 index = 0; index < 4; ++index) {
-        u32 id = work->portraitSelectionA.desired[selected + index];
-        if (id != 0 && static_cast<u16>(work->portraitSelectionA.loaded[0]) != id &&
-            static_cast<u16>(work->portraitSelectionA.loaded[1]) != id &&
-            static_cast<u16>(work->portraitSelectionA.loaded[2]) != id &&
-            static_cast<u16>(work->portraitSelectionA.loaded[3]) != id) {
+        u16 id = work->portraitSelectionA.desired[selected + index];
+        if (id != 0 && id != static_cast<u16>(work->portraitSelectionA.loaded[0]) &&
+            id != static_cast<u16>(work->portraitSelectionA.loaded[1]) &&
+            id != static_cast<u16>(work->portraitSelectionA.loaded[2]) &&
+            id != static_cast<u16>(work->portraitSelectionA.loaded[3])) {
             for (s32 slot = 0; slot < 4; ++slot) {
                 if (work->portraitSelectionA.loaded[slot] == 0) {
                     FUN_00371c3c(static_cast<s16>(work->portraitSelectionA.desired[selected + index]), 1);

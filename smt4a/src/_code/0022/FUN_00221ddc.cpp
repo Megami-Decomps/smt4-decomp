@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 17 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: rectangle depth corrected to retail 0.0f; its saved VFP lifetime and color argument forwarding still differ. */
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -24,7 +24,7 @@ void FUN_00221ddc(const void *rectangle)
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
     FUN_0014e314(color, color, color, color,
-                box->left, box->top, box->right - box->left, box->bottom - box->top, 1.0f);
+                box->left, box->top, box->right - box->left, box->bottom - box->top, 0.0f);
     renderStackPop(&g_renderCtx->stackA);
 }
 }

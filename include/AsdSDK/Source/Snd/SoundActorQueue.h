@@ -42,5 +42,28 @@ struct SoundActorQueue {
 typedef char SoundActorQueueEntrySizeCheck[sizeof(SoundActorQueueEntry) == 0x20 ? 1 : -1];
 typedef char SoundActorQueueTimerOffsetCheck[offsetof(SoundActorQueueEntry, inactiveFrames) == 0x12 &&
     sizeof(SoundActorQueueEntry) == 0x20 ? 1 : -1];
+typedef char SoundActorQueuePositionLayoutCheck[
+    sizeof(SoundActorQueuePosition) == 0xC &&
+    offsetof(SoundActorQueuePosition, x) == 0 && offsetof(SoundActorQueuePosition, y) == 4 &&
+    offsetof(SoundActorQueuePosition, z) == 8 &&
+    offsetof(SoundActorQueueEntry, position) == 0x14 ? 1 : -1];
 
+/* Adapt the engine's three-float position arrays to the positional-sound value type. */
+static __inline SoundActorQueuePosition soundActorPositionFromArray(const f32 *values)
+{
+    SoundActorQueuePosition position = { values[0], values[1], values[2] };
+    return position;
+}
+
+static __inline SoundActorQueuePosition soundActorScalePosition(SoundActorQueuePosition position, f32 scale)
+{
+    position.x *= scale;
+    position.y *= scale;
+    position.z *= scale;
+    return position;
+}
+
+/* Start a positional actor sound, returning its slot handle or the invalid handle. */
+extern "C" u32 FUN_00291e40(u32 soundId, SoundActorQueuePosition position);
+extern "C" void eventSoundPlayByKind(u32 kind, s32 index, SoundActorQueuePosition position);
 #endif

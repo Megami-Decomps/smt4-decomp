@@ -2,16 +2,12 @@
 #define CLASSES_OBJ55C244_H
 
 #include "common.h"
+#include "shard/S1NnOs.h"
+#include <stddef.h>
 
 extern "C" void nn_os_LightEvent_Initialize(void *event, s32 clearMode);
 extern "C" void nn_os_LightEvent_Signal(void *event);
 
-/* nn::os::LightEvent: the SDK clears it when it is constructed. */
-struct LightEvent {
-    u32 state;
-    u32 waiters;
-    LightEvent() : state(0), waiters(0) {}
-};
 
 /* The object whose vtable is at 0x55c244 (named after it until its real name is known): a base
  * class that owns a signalled light event and playback state. Slots 0/1 are the (pure)
@@ -51,5 +47,8 @@ protected:
 };
 
 typedef char Obj55c244LayoutCheck[sizeof(Obj55c244) == 0x40 ? 1 : -1];
+typedef char Obj55c244EventLayoutCheck[
+    sizeof(LightEvent) == 8 && offsetof(LightEvent, state) == 0 &&
+    offsetof(LightEvent, lock) == 4 ? 1 : -1];
 
 #endif

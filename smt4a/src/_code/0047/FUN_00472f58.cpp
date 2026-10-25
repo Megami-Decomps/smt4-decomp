@@ -12,11 +12,11 @@ struct AocBoardWork {
     u32 timer;
 };
 extern "C" {
-u32 FUN_00472568(void);
-u32 FUN_00472820(void);
-u32 FUN_00472e1c(void);
-u32 asdProcessCreateSimple(const char *, u32, u32, u32, u32 (*)(void), u32, AocBoardWork *);
-void taskCreateDraw(const char *, u32, u32, u32, u32 (*)(void), u32, AocBoardWork *, u32);
+s32 FUN_00472568(u32 job);
+s32 FUN_00472820(u32 job);
+s32 FUN_00472e1c(u32 job);
+u32 asdProcessCreateSimple(const char *, u32, u32, u32, s32 (*)(u32), u32, AocBoardWork *);
+void taskCreateDraw(const char *, u32, u32, u32, s32 (*)(u32), void (*)(u32), AocBoardWork *, u32);
 void *FUN_00473754(AocMainA *, u32, void *);
 extern const char DAT_005271ac[]; // "Aoc board CALC"
 extern const char DAT_0052719c[]; // "Aoc board UP L"

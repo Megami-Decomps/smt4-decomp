@@ -3,7 +3,7 @@
 extern "C" {
 
 s32 FUN_001517b4(s32 kind, s32 mode);
-s32 FUN_00163fd4(s32 kind);
+s32 slotIsActive(s32 kind);
 
 /* A state block whose byte at 0x0D marks it busy. */
 typedef struct State5e2040 {
@@ -19,7 +19,7 @@ s32 FUN_001456fc(s32 messageId)
 {
     MessageMainWork *work;
 
-    if (FUN_001517b4(0, 1) != 0 || FUN_001517b4(9, 2) != 0 || FUN_00163fd4(6) != 0 ||
+    if (FUN_001517b4(0, 1) != 0 || FUN_001517b4(9, 2) != 0 || slotIsActive(6) != 0 ||
         FUN_001517b4(10, 2) != 0 || DAT_005e2040.busy != 0) {
         return 1;
     }

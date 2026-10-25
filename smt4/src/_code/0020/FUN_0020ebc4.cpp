@@ -1,8 +1,9 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-void gameFlagSetValue(s32 flag, s32 value, s32 mode);
+
 s32 scrGetArg(s32 index);
 
 /* Script command: sets the game flag given by the first argument. */

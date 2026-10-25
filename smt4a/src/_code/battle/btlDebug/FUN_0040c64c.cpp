@@ -115,8 +115,8 @@ void FUN_0040c64c(u32 unused, UnitSelectStep *step)
         if (FUN_004c9b38(unit) != 0) {
             unit->flags58 &= ~8u;
             unit->flags60 |= 0x800;
-            SlotPair *pair = &state->pairs[step->slot + 1];
-            if (FUN_003f1534(state, unit, pair->first, pair->second) == 0) {
+            if (FUN_003f1534(state, unit, state->pairs[step->slot + 1].first,
+                            state->pairs[step->slot + 1].second) == 0) {
                 step->result = 0;
                 return;
             }

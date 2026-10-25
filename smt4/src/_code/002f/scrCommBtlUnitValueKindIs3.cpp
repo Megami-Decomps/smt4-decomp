@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail adds the 0x126 element offset after the scaled index (add #256 then ldrh #38); built loads 0x126 from the literal pool and uses a register offset. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -14,7 +14,6 @@ typedef struct BtlUnit {
 } BtlUnit;
 
 extern u32 g_btlScriptUnit;
-extern BtlUnit *btlUnitGet(u32 unit);
 extern s32 scrGetArg(void);
 extern s32 scrSetResult(s32 value);
 
@@ -23,7 +22,7 @@ u32 scrCommBtlUnitValueKindIs3(void)
 {
     s32 index = scrGetArg();
 
-    scrSetResult(btlUnitGet(g_btlScriptUnit)->data->values[index] >> 10 == 3);
+    scrSetResult(reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data->values[index] >> 10 == 3);
     return 1;
 }
 

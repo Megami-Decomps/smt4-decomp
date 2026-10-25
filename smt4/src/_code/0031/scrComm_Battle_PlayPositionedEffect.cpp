@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rewrite compiles (169 vs 170 rows); stack frame (84 vs 92 bytes) and register allocation differ */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 // Effect request handed to the battle effect queue (32 bytes). It first carries the
 // effect set's name, then is reused for one request per matching effect slot.
@@ -58,7 +58,6 @@ s32 scrGetArg(s32 index);
 s32 libc_strcmp(const char* a, const char* b);
 s32 libc_strlen(const char* s);
 s32 FUN_0027e3b8(u32 event);
-u32 btlUnitGet(u32 unit);
 s32 FUN_0028299c(BattleEffectState* state);
 
 // Script command: plays the effect set `arg0` on every living side, positioned by the sign of `arg1`.
@@ -75,7 +74,7 @@ void scrComm_Battle_PlayPositionedEffect(void)
     FUN_002454c4(DAT_00435d18, &request, 1, 0);
 
     BattleMain* main = btlGetMainState();
-    u32 user = btlUnitGet(g_btlScriptUnit);
+    u32 user = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     s32 placed = 0;
     u8* effectSlots = DAT_00435d18->effectSlots;
     BattleMain* mainForEntries = main;

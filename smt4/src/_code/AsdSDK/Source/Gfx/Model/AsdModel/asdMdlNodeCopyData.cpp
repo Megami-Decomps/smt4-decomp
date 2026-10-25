@@ -58,7 +58,7 @@ void asdMdlNodeCopyData(AsdMdlNode *dest, AsdMdlNode *source, s32 mode)
         g_gfxSettings.sharedModels++;
     }
     dest->data = source->data;
-    (*(s32 *)source->data)++;
+    (*(s32 *)dest->data)++;
     dest->count = 1;
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 0x1244);
     dest->table = (void **)asdMemoryAlloc(0x100, 0x100, 0, dest->count << 2, 1);

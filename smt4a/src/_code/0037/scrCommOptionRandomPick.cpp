@@ -61,4 +61,5 @@ u32 scrCommOptionRandomPick(void)
     return 1;
 }
 
+
 } /* extern "C" */

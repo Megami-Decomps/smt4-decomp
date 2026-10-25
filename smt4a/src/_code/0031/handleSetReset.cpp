@@ -3,7 +3,7 @@
 extern "C" {
 
 extern void nodeTreeReleaseItemClearOwner(u32 handle);
-extern void FUN_002e5154(u32 handle);
+extern void nodeReleaseOwnedItemsAndSelf(u32 handle);
 extern void nodeGroupReleaseAlt(u32 handle);
 extern void nodeGroupRelease(u32 handle);
 
@@ -17,7 +17,7 @@ void handleSetReset(HandleSet *set)
             nodeTreeReleaseItemClearOwner(set->listA[i]);
         }
         for (i = 0; i < set->countB; i++) {
-            FUN_002e5154(set->listB[i]);
+            nodeReleaseOwnedItemsAndSelf(set->listB[i]);
         }
         for (i = 0; i < set->countD; i++) {
             nodeGroupReleaseAlt(set->listD[i]);

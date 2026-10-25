@@ -1,5 +1,6 @@
-/* NON_MATCHING: the step/state stores merge differently (retail writes the previous state first and stores the new state and step with one strd) and the shop tab/item address arithmetic is evaluated in another order (182 vs 182 rows); the input handling is the same. */
+/* NON_MATCHING: state transition, panel arguments and tail-field offsets recovered; selected-tab/item address evaluation and saved registers still differ. */
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
@@ -30,13 +31,25 @@ typedef struct ShopMainWork {
     /* 0x00B48 */ u8 unk00b48[0x18];
     /* 0x00B60 */ ShopTab tabs[9];
     /* 0x00F74 */ u16 items[9][2049];   /* per tab: entries of two halfwords */
-    /* 0x09F86 */ u8 unk09f86[0x60A6];
+    /* 0x09F86 */ u8 unk09f86[0x1602C - 0x9F86];
     /* 0x1602C */ s16 leftRecord;
     /* 0x1602E */ s16 rightRecord;
     /* 0x16030 */ s16 regionCount;
     /* 0x16032 */ u8 unk16032[0xE];
     /* 0x16040 */ u32 returnMode;
+
+    void setState(s32 next)
+    {
+        previousState = state;
+        state = next;
+        step = 0;
+    }
 } ShopMainWork;
+typedef char ShopMainWorkOffsets[
+    offsetof(ShopMainWork, leftRecord) == 0x1602C &&
+    offsetof(ShopMainWork, rightRecord) == 0x1602E &&
+    offsetof(ShopMainWork, regionCount) == 0x16030 &&
+    offsetof(ShopMainWork, returnMode) == 0x16040 ? 1 : -1];
 
 /* The cursor jump table: for each cursor, the cursor reached by moving left and right. */
 typedef struct CursorLink {
@@ -48,7 +61,7 @@ extern CursorLink DAT_00588f78[];
 
 void messageMainSetFlag(s32 flag);
 s32 scrRunOpcodesStub(u32 script);
-void panelSetTarget(s32 target);
+u32 panelSetTarget(u32 target, u8 flag);
 s32 FUN_004954e8(ShopMainWork *work);
 void messageChoiceShowCurrent(ShopMainWork *work);
 s32 FUN_004d0584(void);
@@ -81,9 +94,7 @@ void FUN_00499fdc(ShopMainWork *work)
 {
     if (work->step != 0) {
         if (work->step == 1 && scrRunOpcodesStub(work->script) == 2) {
-            work->previousState = work->state;
-            work->state = 5;
-            work->step = 0;
+            work->setState(5);
             FUN_0019de98(0, 0xF4F4F4FF);
             messageMainSetFlag(1);
         }
@@ -91,7 +102,7 @@ void FUN_00499fdc(ShopMainWork *work)
     }
     messageMainSetFlag(0);
     scrRunOpcodesStub(work->script);
-    panelSetTarget(0);
+    panelSetTarget(0, 0);
     s32 blocked = FUN_004954e8(work);
 
     messageChoiceShowCurrent(work);

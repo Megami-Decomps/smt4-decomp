@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail copies r1 before r0 in the prologue and keeps the loaded flags byte in r1 (the build uses r2) */
+/* NON_MATCHING: flag-byte snapshot recovers retail clear registers; initial index/value save moves are still reversed. */
 #include "common.h"
 
 extern "C" {
@@ -26,8 +26,9 @@ void flagEntrySetValue(s32 index, u32 value)
     }
     entry->value = value;
     if ((value & 0xff) < 2) {
+        u8 flags = entry->flags;
         entry->value = 0;
-        entry->flags &= ~0x40;
+        entry->flags = flags & ~0x40;
     }
 }
 

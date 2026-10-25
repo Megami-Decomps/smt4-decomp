@@ -2,8 +2,8 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtx* g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtx* context, f32 depth);
+extern RenderCtxA* g_renderCtx;
+f32 renderCtxCalculateStereoParallax(RenderCtxA* context, f32 depth);
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
 SpriteInfo* FUN_001834a4(u32 table, u32 id);

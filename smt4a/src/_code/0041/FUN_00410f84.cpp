@@ -63,7 +63,7 @@ s32 btlSpawnStageHeightEffects(StageState *state);
 s32 asdMemFree(void *memory);
 s32 asdLoadFileAsyncSimple(const u8 *name, void **destination, s32 flag);
 s32 mathVectorClear(f32 *vector);
-s32 btlStageGetModeIndex(StageState *state);
+s32 btlStageGetModeIndex(u32 context);
 s32 FUN_00411c04(StageState *state, s32 flag);
 s32 partyCountActiveSlots(void);
 s32 controllerGroupSetPosition(u32 model, f32 x, f32 y, f32 z);
@@ -101,7 +101,7 @@ void FUN_00410f84(StageState *state)
         mathVectorClear(g_btlCamera);
         g_btlCamera[3] = 0.0f;
         g_btlCamera[4] = 0.0f;
-        s32 mode = btlStageGetModeIndex(state);
+        s32 mode = btlStageGetModeIndex(reinterpret_cast<u32>(state));
         if (mode >= 0) {
             g_btlCamera[0] = DAT_00529780[mode].cameraPos[0];
             g_btlCamera[1] = DAT_00529780[mode].cameraPos[1];
@@ -113,7 +113,7 @@ void FUN_00410f84(StageState *state)
         state->value = 0;
         state->id = -1;
         FUN_00411c04(state, 1);
-        s32 mode = btlStageGetModeIndex(state);
+        s32 mode = btlStageGetModeIndex(reinterpret_cast<u32>(state));
         if (mode >= 0) {
             s32 count = partyCountActiveSlots();
             const StageModeParams *params = &DAT_00529780[mode];

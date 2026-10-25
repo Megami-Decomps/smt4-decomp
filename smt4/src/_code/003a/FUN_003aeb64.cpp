@@ -62,7 +62,7 @@ struct OrderPair {
 extern "C" {
 BattleState *btlGetMainState(void);
 BattleRecord *btlMainFindEntryByListedId(BattleState *state, s32 id);
-s32 FUN_0027e6f4(BattleState *state, s32 arg);
+s32 btlFindNthActiveSpecialEntry(BattleState *state, s32 arg);
 s32 recordCompareFloatKey(const void *a, const void *b);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 PartySlot *saveResolvePartySlot(s32 index);
@@ -72,7 +72,7 @@ u32 battleGetEntryHalfword(s32 id, s32 field);
 static s32 sideOf(UnitEntry *unit)
 {
     s32 side = 0;
-    if (FUN_0027e6f4(btlGetMainState(), 1) < 0 && unit->team != 2) {
+    if (btlFindNthActiveSpecialEntry(btlGetMainState(), 1) < 0 && unit->team != 2) {
         side = 1;
     }
     return side;

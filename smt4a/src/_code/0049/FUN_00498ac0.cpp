@@ -1,5 +1,6 @@
-/* NON_MATCHING: readable rebuild of the appraisal shop (shop_Kantei) scene update; retail shares the state/timer store tail between cases and loads the two entry-name literals from the code pool, which armcc here compiles per case. The release helpers' and touch-region remove's arguments are as the draft left them (variadic/void). */
+/* NON_MATCHING: state/timer store-tail sharing and entry-name literal placement differ; cursor completion getter and synchronization/release contracts are recovered. */
 #include "common.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 /* The appraisal shop scene. */
 struct AppraisalShop {
@@ -12,8 +13,17 @@ struct AppraisalShop {
     /* 0x0184 */ u32 tableGroup;
     /* 0x0188 */ u8 unk0188[4];
     /* 0x018C */ u32 script;
-    /* 0x0190 */ u8 unk0190[0x23C];
-    /* 0x03CC */ u8 sprites[0xD8];
+    /* 0x0190 */ u8 unk0190[0x214];
+    /* 0x03A4 */ f32 cursorPosition[2];
+    /* 0x03AC */ u8 unk03AC[0x20];
+    union {
+        /* 0x03CC */ u8 sprites[0xD8];
+        struct {
+            u8 unk03CC[0x20];
+            /* 0x03EC */ UiAnimatedSprite cursor;
+            u8 unk0478[0x2C];
+        } animation;
+    };
     /* 0x04A4 */ u8 unk04A4[0x64];
     /* 0x0508 */ u8 unk0508[0x600];
     /* 0x0B08 */ u8 menu[0x34];
@@ -31,9 +41,19 @@ struct AppraisalShop {
     /* 0x16046 */ u8 unk16046[2];
     /* 0x16048 */ s32 selection;
 };
+typedef char AppraisalShopCursorLayoutCheck[
+    offsetof(AppraisalShop, cursorPosition) == 0x3A4 &&
+    offsetof(AppraisalShop, animation.cursor) == 0x3EC &&
+    offsetof(AppraisalShop, animation.cursor.finished) == 0x476 &&
+    sizeof(AppraisalShop) == 0x1604C ? 1 : -1];
 
+struct MenuSelectionScan;
+struct FlaggedMenuList;
+struct CountAt30;
+struct CountAt5A;
 extern "C" {
 void ifTouchRegionRemove(void);
+s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 void FUN_00167458(void *vec, s32 arg);
 void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(void *sprites, s32 preset);
@@ -47,13 +67,13 @@ s32 panelStateIs0(void);
 void panelSetTarget(u32 panel, s32 target);
 void pointConvertToFloat(void *dest, u32 x, u32 y);
 void FUN_004963f8(AppraisalShop *shop);
-void FUN_004cf8dc(void *sprites, s32 arg);
+void entryDispatchUpdate(void *sprites, s32 arg);
 void sub10OwnerStart(void *values);
 void sendEvent100020E(void);
 s32 FUN_004d0584(void);
-void releaseEntriesA(...);
-void releaseEntriesB(...);
-void menuSynchronizeFlaggedSelection(void *menu);
+void releaseEntriesA(CountAt30 *menu);
+void releaseEntriesB(CountAt5A *owner);
+void menuSynchronizeFlaggedSelection(MenuSelectionScan *menu, FlaggedMenuList *values);
 s32 messageMainIsIdle(void);
 u32 vec2GetXInt(void *vec);
 u32 vec2GetYInt(void *vec);
@@ -95,13 +115,13 @@ void FUN_00498ac0(AppraisalShop *shop)
         }
         return;
     case 3: {
-        u8 *cursor = (u8 *)shop + 0x3EC;
+        UiAnimatedSprite *cursor = &shop->animation.cursor;
         FUN_00167458(cursor, 0);
         u32 y = vec2GetYInt(cursor);
         u32 x = vec2GetXInt(cursor);
-        pointConvertToFloat((u8 *)shop + 0x3A4, x, y);
+        pointConvertToFloat(shop->cursorPosition, x, y);
         scrRunOpcodesStub(shop->script);
-        if (*((u8 *)shop + 0x476) != 0) {
+        if (uiSpriteGetCompletionState(cursor) != 0) {
             panelSetTarget(shop->panel, 0);
             shop->state = 4;
         }
@@ -109,12 +129,13 @@ void FUN_00498ac0(AppraisalShop *shop)
     }
     case 4: {
         scrRunOpcodesStub(shop->script);
-        menuSynchronizeFlaggedSelection(shop->menu);
-        (*(void (**)(void **, void *))((u8 *)*shop->menuOwner + 0xC))(shop->menuOwner, shop->flaggedValues);
-        sub10OwnerStart(shop->flaggedValues);
-        FUN_004cf8dc(shop->sprites, 2);
-        FUN_004cf8dc(shop->sprites, 0xC);
-        s32 total = flaggedValueHolderGetTotal(shop->flaggedValues);
+        FlaggedMenuList *values = reinterpret_cast<FlaggedMenuList *>(shop->flaggedValues);
+        menuSynchronizeFlaggedSelection(reinterpret_cast<MenuSelectionScan *>(shop->menu), values);
+        (*(void (**)(void **, void *))((u8 *)*shop->menuOwner + 0xC))(shop->menuOwner, values);
+        sub10OwnerStart(values);
+        entryDispatchUpdate(shop->sprites, 2);
+        entryDispatchUpdate(shop->sprites, 0xC);
+        s32 total = flaggedValueHolderGetTotal(values);
         screenShowMessage(shop->messages[total * 3]);
         if (FUN_004d0584() != 0) {
             sendEvent100020E();
@@ -128,8 +149,8 @@ void FUN_00498ac0(AppraisalShop *shop)
     case 5:
         if (messageMainIsIdle() != 0 && panelStateIs0() == 1) {
             FUN_004963f8(shop);
-            releaseEntriesB(shop->menuOwner);
-            releaseEntriesA(shop->menu);
+            releaseEntriesB(reinterpret_cast<CountAt5A *>(shop->menuOwner));
+            releaseEntriesA(reinterpret_cast<CountAt30 *>(shop->menu));
             for (s32 i = 0; i < shop->touchRegionCount; i++)
                 ifTouchRegionRemove();
             shop->previousMode = shop->mode;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: first help-status OR grouping and boolean refresh assignment lower differently. */
+/* NON_MATCHING: first help-status OR grouping combines 0x1C/0x1E where retail tests 0x1C alone before combining 0x1E/0xB8. */
 #include "ui/PartyPanelState.h"
 
 extern "C" {
@@ -20,8 +20,9 @@ void FUN_0026cf4c(void)
         s32 help = buttonHelpGetStatus();
         s32 mode = FUN_00282e70();
         s32 selection = FUN_00282ccc();
-        if (help == 0x1C || help == 0x1E || help == 0xB8 || help == 0xBF || help == 0xCC)
-            refresh = !mode || !panel->unk42;
+        if ((help == 0x1C || help == 0x1E || help == 0xB8 || help == 0xBF || help == 0xCC) &&
+            (!mode || !panel->unk42))
+            refresh = true;
         if ((help == 0x1B || help == 0x1D || help == 0xB7 || help == 0xBE || help == 0xE3) &&
             (!mode || panel->unk42))
             refresh = true;

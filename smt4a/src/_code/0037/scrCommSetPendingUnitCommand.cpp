@@ -1,4 +1,4 @@
-/* NON_MATCHING: pending command word stores merge into STM instead of retail's writeback STR / ASR / STR. */
+/* NON_MATCHING: recovered no-argument script callback and explicit argument index zero; pending low/high stores still merge instead of retail's STR/ASR/STR sequence. */
 #include "battle/btlUnit.h"
 
 extern "C" {
@@ -20,9 +20,9 @@ static __inline void setPendingCommand(BtlMainStateA* main, s32 command)
 }
 
 // Set unit command 12 and publish its sign-extended pending command word.
-u32 scrCommSetPendingUnitCommand(s32 argIndex)
+u32 scrCommSetPendingUnitCommand(void)
 {
-    u32 argument = static_cast<u32>(scrGetArg(argIndex));
+    u32 argument = static_cast<u32>(scrGetArg(0));
     setUnitCommand(btlUnitGet(g_btlScriptUnit)->data, 12);
     BtlMainStateA* main = btlGetMainState();
     u32 command = argument | 0x10000;

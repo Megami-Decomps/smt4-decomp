@@ -1,13 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of a state scene's draw (a tiled panel, its sprite table and the current state's handler); armcc here orders the render-state pushes and the float stereo offsets differently, and keeps the x offset and loop counters in other registers. */
-#include "gfx/RenderStateStack.h"
+#include "camp/RenderCtx.h"
 
-/* The render context: two render-state stacks. */
-struct RenderCtx {
-    /* 0x0000 */ u8 unk0000[0x1258];
-    /* 0x1258 */ RenderStateStack firstStack;
-    /* 0x1278 */ u8 unk1278[0x40];
-    /* 0x12B8 */ RenderStateStack secondStack;
-};
 
 struct LayoutPoint {
     /* 0x00 */ u8 unk00[8];
@@ -35,20 +28,20 @@ public:
 };
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 extern PanelSprite DAT_00526314[24];
 
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
-void FUN_00157558(RenderCtx *ctx);
+void FUN_00157558(RenderCtxA *ctx);
 u32 FUN_001692ac(s32 a, s32 b);
 s32 packNibblesAndByte(u32 a, u32 b, u32 c);
-f32 renderCtxCalculateStereoParallax(RenderCtx *ctx, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 depth);
 s32 textureGetIndexedResource(s32 index);
 void FUN_001835b4(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
 LayoutPoint *FUN_001834a4(s32 group, s32 part);
-void skinObjectUpdateMatrices(RenderCtx *ctx);
-void renderCtxResetColorScale(RenderCtx *ctx);
+void skinObjectUpdateMatrices(RenderCtxA *ctx);
+void renderCtxResetColorScale(RenderCtxA *ctx);
 
 /* Draws the panel (tiled background, its sprite table and the edge sprites) inside two render
  * states, then calls the handler of the scene's current state. */
@@ -59,12 +52,12 @@ void FUN_0047c00c(StateScene *scene)
     FUN_00183bb0();
     efctSetSpeed(1.0f);
     FUN_00157558(g_renderCtx);
-    RenderCtx *first = g_renderCtx;
+    RenderCtxA *first = g_renderCtx;
     u32 firstState = FUN_001692ac(1, 0);
-    renderStackPushCounted(&first->firstStack, firstState);
-    RenderCtx *second = g_renderCtx;
+    renderStackPushCountedDirect(&first->stackA, firstState);
+    RenderCtxA *second = g_renderCtx;
     s32 secondState = packNibblesAndByte(6, 7, 0);
-    renderStackPush(&second->secondStack, secondState);
+    renderCtxPushB(second, secondState);
     renderCtxCalculateStereoParallax(g_renderCtx, 0.38f);
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.36f);
     if (textureGetIndexedResource(0x2F) != 0) {
@@ -85,8 +78,8 @@ void FUN_0047c00c(StateScene *scene)
     }
     for (s32 i = 0; i < 11; i++)
         FUN_001835b4(2, 20, 0x7F4 + i, x, 0, 16);
-    renderStackPop(&g_renderCtx->secondStack);
-    renderStackPop(&g_renderCtx->firstStack);
+    renderStackPop(&g_renderCtx->stackB);
+    renderStackPop(&g_renderCtx->stackA);
     FUN_00183bb0();
     efctSetSpeed(1.0f);
     skinObjectUpdateMatrices(g_renderCtx);

@@ -76,7 +76,7 @@ extern int engineCleanupIsDone(void);
 extern int querySlotHasHandle(void);
 /* Supplied declaration required: FUN_00163aa4. */
 extern int FUN_00163e84(unsigned int);
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: workCommandRefreshActiveSlots. */
@@ -591,11 +591,11 @@ LAB_0014c9fc:
                 temp_v8 = padButtonRepeat(6);
                 if (temp_v8 == 0) {
                   temp_v8 = padButtonRepeat(0xe);
-                  if (((temp_v8 == 0) || (temp_v8 = FUN_00163fd4(5), temp_v8 != 0)) ||
-                     (temp_v8 = FUN_00163fd4(6), temp_v8 != 0)) {
+                  if (((temp_v8 == 0) || (temp_v8 = slotIsActive(5), temp_v8 != 0)) ||
+                     (temp_v8 = slotIsActive(6), temp_v8 != 0)) {
                     temp_v8 = padButtonRepeat(0xf);
-                    if (((temp_v8 == 0) || (temp_v8 = FUN_00163fd4(6), temp_v8 != 0)) ||
-                       (temp_v8 = FUN_00163fd4(5), temp_v8 != 0)) {
+                    if (((temp_v8 == 0) || (temp_v8 = slotIsActive(6), temp_v8 != 0)) ||
+                       (temp_v8 = slotIsActive(5), temp_v8 != 0)) {
                       if (*(char *)(temp_v2 + 0x95) == '\0') {
                         temp_v8 = 0;
                         FUN_001517b4(0,1);
@@ -853,7 +853,7 @@ joined_r0x0014cce4:
             temp_v8 = 9;
             FUN_001517b4(9,2);
             if ((temp_v8 != 0) ||
-               ((*(char *)(temp_v2 + 0x95) == '\0' && (temp_v8 = FUN_00163fd4(6), temp_v8 != 0))))
+               ((*(char *)(temp_v2 + 0x95) == '\0' && (temp_v8 = slotIsActive(6), temp_v8 != 0))))
             goto LAB_0014cbbc;
           }
           goto LAB_0014cbac;
@@ -926,7 +926,7 @@ LAB_0014cbbc:
         if (temp_v8 == 0) {
           temp_v8 = 9;
           FUN_001517b4(9,2);
-          if (((temp_v8 != 0) || (temp_v8 = FUN_00163fd4(6), temp_v8 != 0)) || (DAT_005e204c != '\0'))
+          if (((temp_v8 != 0) || (temp_v8 = slotIsActive(6), temp_v8 != 0)) || (DAT_005e204c != '\0'))
           goto LAB_0014d584;
 LAB_0014d5b8:
           if (*(char *)(temp_v2 + 0x6d) == '\0') goto LAB_0014d5c4;

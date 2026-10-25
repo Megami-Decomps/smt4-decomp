@@ -1,11 +1,11 @@
 /* NON_MATCHING: error literal loads into r4 then moves to r0; retail loads into r0 then preserves it in r4. */
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 extern "C" {
 s32 FUN_002e0e04(const char *path, u16 *converted, s32 kind);
 s32 FUN_001886bc(void);
 u32 FUN_00188444(const u16 *path);
-void FUN_0013ebd8(u32 result);
 
 // Perform the filesystem operation on a converted kind-two path and save its result.
 u32 FUN_003596e0(const char *path)

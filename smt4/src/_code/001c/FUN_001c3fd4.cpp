@@ -183,7 +183,7 @@ extern int FUN_0029ae44(void);
 /* Supplied declaration required: FUN_0029bed8. */
 extern unsigned int FUN_0029c0c0(unsigned int, int);
 /* Supplied declaration required: FUN_0029c1c8. */
-extern unsigned int FUN_0029c1fc(void);
+extern unsigned int partyFindFreeStockSlot(void);
 extern int messageMainTargetIsClear(void);
 extern int FUN_0029c40c(void);
 /* Supplied declaration required: FUN_0029c43c. */
@@ -2665,7 +2665,7 @@ LAB_001c7c50:
           FUN_0029bbc8();
           partyFindActiveSlotById(*(unsigned short *)(temp_v24 + 0x46));
           FUN_0029bbc8();
-          temp_v7 = FUN_0029c1fc();
+          temp_v7 = partyFindFreeStockSlot();
           temp_v6 = FUN_0029ea68(*(unsigned short *)(temp_v1 + 0xb96));
           FUN_0029c1c8(temp_v7,*(unsigned short *)(temp_v1 + 0xb96),0);
           temp_v4 = gameGetUnitRecord(temp_v7);

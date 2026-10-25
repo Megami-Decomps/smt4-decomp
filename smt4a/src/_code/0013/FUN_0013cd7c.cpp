@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail lower-bound clamp, grouped work addressing and saved registers differ. */
+/* NON_MATCHING: recovered minimum reduction-level clamp; grouped flag bases and surface-copy register allocation still differ. */
 #include "gfx/FrameTextureWork.h"
 #include "shard/JobWork.h"
 #include "camp/RenderCtx.h"
@@ -22,9 +22,9 @@ static inline void reduceSurface(JobSurface *&source, JobSurface *&destination)
     destination->width = source->width >> 1;
     destination->height = source->height >> 1;
 }
-extern "C" u32 FUN_0013cd7c(void)
+extern "C" s32 FUN_0013cd7c(u32 job)
 {
-    SurfaceReductionWork *work = reinterpret_cast<SurfaceReductionWork *>(jobGetWork());
+    SurfaceReductionWork *work = reinterpret_cast<SurfaceReductionWork *>(jobGetWork(job));
     FrameTextureWork *frame = &work->frame;
     frame->unkFAE = 0;
     if (stateValuesGetBySelector(0) || !frame->unkFA4 || !frame->unkFA5 || !frame->unk1490 || frame->unk148C)
@@ -36,8 +36,11 @@ extern "C" u32 FUN_0013cd7c(void)
     frame->unkFAC[0] = FUN_00154edc(0, surface);
     s32 selector = stateValuesGetBySelector(0);
     s32 levels = static_cast<s32>(frame->mode);
-    if (!selector && levels > 1)
+    if (!selector && levels > 1) {
         --levels;
+        if (levels < 1)
+            levels = 1;
+    }
     if (frame->unk1494) {
         for (s32 level = 0; level < levels; ++level) {
             if (level == 0)

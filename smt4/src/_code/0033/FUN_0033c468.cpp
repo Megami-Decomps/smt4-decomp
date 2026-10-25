@@ -37,7 +37,7 @@ void FUN_0033c468(AnimatedSlotPlacementView *placement)
         for (s32 bit = 1; bit <= 10; ++bit)
             if (ailments & (1 << bit))
                 ++count;
-        if (count >= 2 && ++placement->cycleFrames >= 24) {
+        if (count > 1 && ++placement->cycleFrames >= 24) {
             placement->cycleIndex = (placement->cycleIndex + 1) % count;
             placement->cycleFrames = 0;
         }
@@ -57,7 +57,7 @@ void FUN_0033c468(AnimatedSlotPlacementView *placement)
         }
         break;
     }
-    if (placement->blinking && ++placement->blinkFrames >= 14)
+    if (placement->blinking && ++placement->blinkFrames > 13)
         placement->blinking = 0;
     ++placement->frame;
 }

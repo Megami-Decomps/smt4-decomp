@@ -1,5 +1,6 @@
 /* NON_MATCHING: the minimal live flag arrays/spills use a 44-byte frame instead of retail's 76-byte frame; preserved-value address formation also differs. */
 #include "gamedata/GameData.h"
+#include "gamedata/GameFlags.h"
 
 struct RestoreSavePayload {
     /* 0x00000 */ u32 unk00000;
@@ -24,7 +25,7 @@ extern "C" {
 extern GameDataBlocks g_gameDataBlocks;
 extern const RestoreFlagIds DAT_00404204;
 s32 gameFlagIsSet(u32 flag);
-void gameFlagSetValue(u32 flag, s32 value, s32 update);
+
 void *FUN_0033f6d8(void);
 void flagBlockCopyRecord(void *snapshot);
 void asdMemFree(void *);

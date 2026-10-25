@@ -1,4 +1,4 @@
-/* NON_MATCHING: local vector-output lifetimes retain a 24-byte frame instead of retail's 20-byte temporary reuse and prevent its footer tail-call; row-address allocation also differs. */
+/* NON_MATCHING: visibility-point stack slots are reversed, signed/unsigned bit tests share one vmov, and row-base scheduling differs. */
 #include "shard/W6_W6Match2_OffsetPosition2D.h"
 
 struct ComparisonMenuPoint {
@@ -42,14 +42,19 @@ s32 FUN_00240d5c(ComparisonMenuSelection *);
 void FUN_003a9df4(ComparisonMenuScene *, s32, u32, s32);
 void FUN_0022d7b0(ComparisonMenuScene *, u32);
 
-void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
+static bool comparisonMenuOnScreen(const ComparisonMenuScene *scene)
 {
     ComparisonMenuPoint position, offset;
     pairCopy(&scene->anchor, &position);
     uiMenuAnchorGetOffset(&scene->anchor, &offset);
     union { f32 value; s32 signedBits; u32 bits; } x;
     x.value = position.x + offset.x;
-    if (x.signedBits >= 0x43a00000 || x.bits >= 0xc3a00000)
+    return x.signedBits < 0x43a00000 && x.bits < 0xc3a00000;
+}
+
+void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
+{
+    if (!comparisonMenuOnScreen(scene))
         return;
 
     u32 layer = scene->layer;
@@ -65,13 +70,14 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
 
     s32 first = FUN_0029e924(&scene->selection);
     s32 visible = rangeLimitMin(&scene->selection);
+    ComparisonMenuEntry *entries = scene->entries;
     for (s32 row = 0; row < visible; ++row) {
         if (scene->mode != 2 || FUN_00240d5c(&scene->selection) != row)
-            FUN_003a9df4(scene, row, 0, scene->entries[first + row].value);
+            FUN_003a9df4(scene, row, 0, entries[first + row].value);
     }
     if (scene->selection.count > 0 && scene->mode == 2) {
         s32 selected = flaggedValueHolderGetTotal(&scene->selection);
-        s16 value = scene->entries[selected].value;
+        s16 value = entries[selected].value;
         s32 row = FUN_00240d5c(&scene->selection);
         FUN_003a9df4(scene, row, 1, value);
     }

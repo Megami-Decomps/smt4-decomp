@@ -1,11 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e2d88` (_code @ 0x1e2d88, 0x4fc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 
 int mathDistanceBetweenPoints(void);
-int FUN_00291e40(int);
 
 extern int DAT_00447e10; /* 0x447e10 */
 extern int g_lmapScene; /* 0x447e88 */
@@ -14,7 +14,6 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 extern int DAT_0049fb30; /* 0x49fb30 */
 
 /* Supplied declaration required: mathDistanceBetweenPoints. */
-/* Supplied declaration required: FUN_00291e40. */
 
 
 void FUN_001e2d88(void)
@@ -116,7 +115,7 @@ LAB_001e2fd0:
             *(unsigned char *)(temp_v5 + 0x24) = 1;
             *(unsigned int *)(temp_v5 + 0x38) = 0;
             if (DAT_0049f934 == '\0') {
-              FUN_00291e40(0x1000265);
+              FUN_00291e40(0x1000265, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v5 + 0x28)));
             }
             temp_v2 = *(int *)(temp_v5 + 0x54);
             *(int *)(temp_v5 + 0x18) = *(int *)(temp_v5 + 0x18) + 1;

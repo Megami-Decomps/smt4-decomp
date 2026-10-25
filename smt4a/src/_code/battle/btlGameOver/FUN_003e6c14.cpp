@@ -1,4 +1,4 @@
-/* NON_MATCHING: timeline end comparison operands and 64-bit mask LDRD versus LDM allocation differ. */
+/* NON_MATCHING: timeline end comparison now matches; forced-state mask loads use LDRD and different scratch registers. */
 #include "battle/btlGameOver.h"
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
@@ -48,7 +48,8 @@ u32 FUN_003e6c14(BtlGameOverA *work)
         slotSetRequest(0, timeline->fade0, 255);
     if (work->timing.frameCounter == timeline->fade1Frame)
         slotSetRequest(1, timeline->fade1, 255);
-    if (work->timing.frameCounter <= (u32)timeline->endFrame)
+    u32 endFrame = timeline->endFrame;
+    if (endFrame >= work->timing.frameCounter)
         return 0;
 
     BtlMainStateA *battle = btlGetMainState();

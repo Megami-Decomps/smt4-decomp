@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling only: the prologue moves of count/color come after the compare in retail, the last call stores its stack arguments with one stm, and the literal pool puts "%d" after the empty-slot string */
+/* NON_MATCHING: count/color prologue scheduling, final variadic argument stores and literal string order differ. */
 #include "skill/SkillSlotScreen.h"
 #include "shard/S1ListPanel.h"
 
@@ -6,7 +6,7 @@ extern "C" {
 
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00162790(u32 font, u32 color, const char *text, f32 x, f32 y, f32 z, f32 width, f32 height);
-void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const void *table, s32 value);
+void FUN_00180310(u32 layer, s32 x, s32 y, u32 enabled, u32 flags, u32 mode, const char *format, ...);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 void FUN_00185e84(s16 id, s32 x, s32 y, u32 layer, u32 a, u32 b);

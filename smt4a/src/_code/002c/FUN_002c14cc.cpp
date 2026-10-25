@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_0039b604(void);
+void eventInitializeBlinkFade(void);
 void FUN_003b6d04(void);
 s32 scrGetCommandFrame(void);
 s32 eventEffectIsStateTwo(void);
 
-/* Script command: when scrGetCommandFrame reports nonzero, runs FUN_003b6d04 if eventEffectIsStateTwo allows it and returns whether it did; otherwise runs FUN_0039b604 and returns 0. */
+/* Script command: when scrGetCommandFrame reports nonzero, runs FUN_003b6d04 if eventEffectIsStateTwo allows it and returns whether it did; otherwise runs eventInitializeBlinkFade and returns 0. */
 u8 FUN_002c14cc(void)
 {
     s32 result;
@@ -20,7 +20,7 @@ u8 FUN_002c14cc(void)
         }
         return result != 0;
     }
-    FUN_0039b604();
+    eventInitializeBlinkFade();
     return 0;
 }
 

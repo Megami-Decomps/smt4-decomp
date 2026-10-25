@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains an empty metadata path and two NOPs before GetCount; pointer/constant scheduling differs by three rows, possibly under alternate optimization. */
+/* NON_MATCHING: retail retains an empty metadata path and two weak-hook NOPs before GetCount; pointer/constant scheduling differs by three rows. */
 #include "shard/W4_Match6_DataSet.h"
 #include "gamedata/DataTable.h"
 

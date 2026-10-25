@@ -1,4 +1,4 @@
-/* NON_MATCHING: one register copy differs in the second table search (retail keeps the record pointer and the stage value in the same register as the id). */
+/* NON_MATCHING: stage override selection matches retail; saved game-state/scene-global bases r6/r7 are exchanged. */
 #include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
@@ -41,10 +41,8 @@ u32 FUN_002d400c(void)
         for (s32 i = 0; i < dataTable2eSub0GetCount(); i++) {
             StageRecord *record = dataTable2eSub0GetRecord(i);
             if (record->id == player->mapId) {
-                s32 stage = g_gameState.sceneModels.stageOverride;
-                if (stage == -1) {
-                    stage = record->stage;
-                }
+                s32 stage = g_gameState.sceneModels.stageOverride == -1 ?
+                    record->stage : g_gameState.sceneModels.stageOverride;
                 if (stage == g_gameState.sceneModels.stage) {
                     return 1;
                 }

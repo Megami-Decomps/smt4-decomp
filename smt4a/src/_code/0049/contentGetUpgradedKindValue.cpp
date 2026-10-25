@@ -11,7 +11,7 @@ struct ContentUpgradeBonuses {
 
 extern "C" s32 aocEntryGetKind(u32 id);
 extern "C" ContentUpgradeValueRecord *dataTable08Sub2GetRecord(u32 id);
-extern "C" s32 FUN_00480a00(const ContentUpgradeValueRecord *record);
+extern "C" s32 recordGetPercentageScaledBase(const ContentUpgradeValueRecord *record);
 extern "C" void equipmentGetCappedUpgradeBonuses(u32 id, ContentUpgradeBonuses *bonuses);
 
 /* Include capped equipment upgrades in the primary downloadable-content value. */
@@ -36,7 +36,7 @@ extern "C" s32 contentGetUpgradedKindValue(u32 id)
     default:
         ContentUpgradeValueRecord *record = dataTable08Sub2GetRecord(id);
         if (record != NULL)
-            value = FUN_00480a00(record);
+            value = recordGetPercentageScaledBase(record);
         break;
     }
     return value;

@@ -34,8 +34,8 @@ int rectangleInitializeSelection(unsigned int *, int, int, int);
 int FUN_00493a7c(...);
 int FUN_00498de0(...);
 int FUN_00498ff0(...);
-int FUN_0049cad0(...);
-int FUN_004cf8dc(...);
+int shopGetEntryPrice(...);
+int entryDispatchUpdate(...);
 int flaggedValueHolderGetTotal(...);
 int sendEvent100020F(void);
 int sendEvent100020E(void);
@@ -91,11 +91,11 @@ extern int FUN_00498408(unsigned int *, unsigned short);
 /* Supplied declaration required: FUN_00498de0. */
 /* Supplied declaration required: FUN_00498ff0. */
 extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
-/* Supplied declaration required: FUN_0049cad0. */
+/* Supplied declaration required: shopGetEntryPrice. */
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
 extern int aocItemGetPrice(int);
 /* Supplied declaration required: FUN_0049cd18. */
-/* Supplied declaration required: FUN_004cf8dc. */
+/* Supplied declaration required: entryDispatchUpdate. */
 /* Supplied declaration required: flaggedValueHolderGetTotal. */
 /* Supplied declaration required: setListWindow. */
 /* Supplied declaration required: sendEvent100020F. */
@@ -122,8 +122,8 @@ void FUN_0049b00c(unsigned int *param_1)
   unsigned char temp_v7;
   
   temp_v7 = 0;
-  FUN_004cf8dc(param_1 + 0xf3,2);
-  FUN_004cf8dc(param_1 + 0xf3,0xc);
+  entryDispatchUpdate(param_1 + 0xf3,2);
+  entryDispatchUpdate(param_1 + 0xf3,0xc);
   switch(param_1[2]) {
   case 0:
     *param_1 = *param_1 | 0x1000;
@@ -137,7 +137,7 @@ void FUN_0049b00c(unsigned int *param_1)
     param_1[0x5812] = temp_v6;
     break;
   case 1:
-    FUN_004cf8dc(param_1 + 0xf3,6);
+    entryDispatchUpdate(param_1 + 0xf3,6);
     temp_v4 = vec2GetYInt(param_1 + 0x1cd);
     temp_v2 = vec2GetXInt(param_1 + 0x1cd);
     pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
@@ -147,7 +147,7 @@ void FUN_0049b00c(unsigned int *param_1)
       temp_v6 = param_1[0x2d0];
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       if (param_1[0x2d0] != 8) {
-        temp_v5 = FUN_0049cad0();
+        temp_v5 = shopGetEntryPrice();
         temp_v5 = temp_v5 * param_1[0x2d2];
       }
       else {
@@ -167,8 +167,8 @@ void FUN_0049b00c(unsigned int *param_1)
     temp_v6 = flaggedValueHolderGetTotal(puVar10);
     menuSynchronizeFlaggedSelection(param_1 + 0x2c2,puVar10);
     (**(romwright_code **)(*(int *)param_1[0x2cf] + 0xc))((int *)param_1[0x2cf],puVar10);
-    FUN_004cf8dc(param_1 + 0xf3,2);
-    FUN_004cf8dc(param_1 + 0xf3,0xc);
+    entryDispatchUpdate(param_1 + 0xf3,2);
+    entryDispatchUpdate(param_1 + 0xf3,0xc);
     temp_v1 = flaggedValueHolderGetTotal(puVar10);
     if (temp_v6 == temp_v1) {
       FUN_002c2c80(puVar10);
@@ -179,7 +179,7 @@ void FUN_0049b00c(unsigned int *param_1)
     temp_v6 = param_1[0x2d0];
     temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (*puVar9 != 8) {
-      temp_v5 = FUN_0049cad0();
+      temp_v5 = shopGetEntryPrice();
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     else {
@@ -239,7 +239,7 @@ void FUN_0049b00c(unsigned int *param_1)
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
       puVar5 = (unsigned short *)((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xf74);
       if (*puVar9 != 8) {
-        temp_v4 = FUN_0049cad0(puVar5);
+        temp_v4 = shopGetEntryPrice(puVar5);
         temp_v6 = btlRollClamped(*puVar5,temp_v4);
       }
       else {
@@ -269,7 +269,7 @@ void FUN_0049b00c(unsigned int *param_1)
     break;
   case 3:
     if ((*param_1 & 0x1000) != 0) {
-      FUN_004cf8dc(param_1 + 0xf3,7);
+      entryDispatchUpdate(param_1 + 0xf3,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1f0);
       temp_v2 = vec2GetXInt(param_1 + 0x1f0);
       pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);
@@ -311,7 +311,7 @@ void FUN_0049b00c(unsigned int *param_1)
     temp_v6 = param_1[0x2d0];
     temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (param_1[0x2d0] != 8) {
-      temp_v5 = FUN_0049cad0();
+      temp_v5 = shopGetEntryPrice();
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     else {
@@ -372,7 +372,7 @@ joined_r0x0049bb38:
     temp_v6 = param_1[0x2d0];
     temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x2d8);
     if (param_1[0x2d0] != 8) {
-      temp_v5 = FUN_0049cad0();
+      temp_v5 = shopGetEntryPrice();
       temp_v5 = temp_v5 * param_1[0x2d2];
     }
     else {
@@ -394,7 +394,7 @@ joined_r0x0049bb38:
     param_1[3] = param_1[3] + 1;
     scrRunOpcodesStub(param_1[99]);
     if ((*param_1 & 0x1000) != 0) {
-      FUN_004cf8dc(param_1 + 0xf3,7);
+      entryDispatchUpdate(param_1 + 0xf3,7);
       temp_v4 = vec2GetYInt(param_1 + 0x1f0);
       temp_v2 = vec2GetXInt(param_1 + 0x1f0);
       pointConvertToFloat(param_1 + 0xee,temp_v2,temp_v4);

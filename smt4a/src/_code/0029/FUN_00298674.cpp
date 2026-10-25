@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached render-state push/pop address scheduling and zero-register lifetime differ. */
+/* NON_MATCHING: render-stack zero constant is initialized after the readiness test rather than before it. */
 #include "battle/btlUI.h"
 #include "camp/RenderCtx.h"
 

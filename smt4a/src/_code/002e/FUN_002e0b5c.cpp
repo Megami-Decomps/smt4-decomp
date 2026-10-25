@@ -1,11 +1,11 @@
 /* NON_MATCHING: compiler factors repeated filesystem module/range tests; retail retains separate checks. */
+#include "sys/ProcessResult.h"
 #include "nn/Result.h"
 
 extern "C" {
 extern u8 DAT_005b40c8;
 u32 globalBlockGetFirst();
 u32 FUN_00429d98(u32 handle);
-void FUN_0013ebd8(u32 result);
 
 // Poll content mounting, caching success and classifying the supported filesystem error ranges.
 u32 FUN_002e0b5c()

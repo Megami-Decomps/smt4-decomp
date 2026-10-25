@@ -32,20 +32,20 @@ typedef char SpriteJobWorkOffsets[
     sizeof(JobSprite) == 0x8C ? 1 : -1];
 
 extern "C" {
-SpriteJobWork *jobGetWork(void);
+SpriteJobWork *jobGetWork(u32 job);
 void FUN_0014e188(JobSprite *sprite, s32 mode, u32 id, void *shared, s32 priority, f32 scale);
 void FUN_00163aa4(JobSprite *sprite, f32 delta);
 void pairSetSecondResetFirst(JobSprite *sprite, u32 second);
 void pairSetFirstResetSecond(JobSprite *sprite, u32 first);
 void uiSpriteSelectAnim(JobSprite *sprite, s32 group);
 void FUN_00387240(JobSprite *sprite, s32 mode, s32 id);
-s8 recordGetSignedFlags(const JobSprite *sprite);
+s8 uiSpriteGetCompletionState(const JobSprite *sprite);
 void spriteSetVisible(JobSprite *sprite, u8 visible);
 
 /* Advances the three-sprite banner: builds the sprites, plays them until the first one finishes, then ends. */
-u32 FUN_00472568(void)
+s32 FUN_00472568(u32 job)
 {
-    SpriteJobWork *work = jobGetWork();
+    SpriteJobWork *work = jobGetWork(job);
     work->frame = (work->frame + 1) % 40;
     switch (work->state) {
     case 0:
@@ -79,7 +79,7 @@ u32 FUN_00472568(void)
     case 1:
         FUN_00163aa4(&work->first, 1.0f);
         FUN_00163aa4(&work->last, 1.0f);
-        if (recordGetSignedFlags(&work->first) != 0) {
+        if (uiSpriteGetCompletionState(&work->first) != 0) {
             work->flags |= 0x20;
             work->state = 2;
         }
@@ -92,7 +92,7 @@ u32 FUN_00472568(void)
     case 3:
         FUN_00163aa4(&work->first, 1.0f);
         FUN_00163aa4(&work->last, 1.0f);
-        if (recordGetSignedFlags(&work->first) != 0)
+        if (uiSpriteGetCompletionState(&work->first) != 0)
             work->state = 4;
         break;
     case 4:

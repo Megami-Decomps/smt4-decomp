@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 /* The part of the map block that holds the pending flag slots (8 slots). */
 struct MapBlockFlagView {
@@ -11,7 +12,7 @@ struct MapBlockFlagView {
 
 extern "C" {
 
-void gameFlagSetValue(s32 flag, s32 value, s32 mode);
+
 MapBlockFlagView *gameGetMapBlock(void);
 
 /* Retires the pending flag slots keyed `key`: deactivates each and raises its game flag. */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: lazy model-scene creation has not yet been matched. */
+/* NON_MATCHING: scoped pass configuration restores the retail shadow-attachment tail call; setup packet constant/store scheduling still differs. */
 #include "Model/MoriScene.h"
 #include <new>
 class Obj557d00;
@@ -19,17 +19,19 @@ void FUN_0040ae70(Obj557c48 *manager, s32 attach)
             scene = new (storage) Obj557b68;
         manager->setScene(scene);
         moriSceneSetFogDefaults(manager->scene(), NULL);
-        Obj557b68 *current = manager->scene();
-        MoriPassConfig pass;
-        pass.enabled = 0;
-        pass.width = 0x30000;
-        pass.height = 0x10000;
-        pass.depth = 0x10000;
-        pass.unk14 = 0;
-        pass.target = manager->sceneResource();
-        pass.enabled = 1;
-        FUN_00406834(reinterpret_cast<UiLookupObj *>(current),
-            reinterpret_cast<UiOwner *>(FUN_001581dc(&pass)));
+        {
+            Obj557b68 *current = manager->scene();
+            MoriPassConfig pass;
+            pass.enabled = 0;
+            pass.width = 0x30000;
+            pass.height = 0x10000;
+            pass.depth = 0x10000;
+            pass.unk14 = 0;
+            pass.target = manager->sceneResource();
+            pass.enabled = 1;
+            FUN_00406834(reinterpret_cast<UiLookupObj *>(current),
+                reinterpret_cast<UiOwner *>(FUN_001581dc(&pass)));
+        }
         if (attach != 0 && manager->scene() != NULL)
             FUN_003fed38(manager->shadowMap(), &manager->scene()->layer);
     }

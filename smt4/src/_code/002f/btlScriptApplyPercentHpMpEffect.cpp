@@ -1,9 +1,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
-BtlEntry *btlUnitGet(u32 unit);
 BtlMainState *btlGetMainState(void);
 void FUN_0027df30(s32 mode, BtlEntry *unit, BtlActionRecord *records, s32 target,
                   s32 hp, s32 mp, u32 color, u32 flags, s32 first, s32 second,
@@ -16,7 +16,7 @@ u32 btlScriptApplyPercentHpMpEffect(void)
     s32 hpPercent = scrGetArg(0);
     s32 mpPercent = scrGetArg(1);
     s32 show = scrGetArg(2);
-    BtlEntry *unit = btlUnitGet(g_btlScriptUnit);
+    BtlEntry *unit = reinterpret_cast<BtlEntry *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     u32 flags = 0;
     if (show > 0)
         flags = 0x3e0;

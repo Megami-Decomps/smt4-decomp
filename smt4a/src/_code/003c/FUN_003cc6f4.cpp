@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct FUN_003cc6f4Sub {
     u8 unk00[0x60];
@@ -20,13 +21,12 @@ extern "C" {
 
 extern u8 DAT_0059ee68[];
 
-void FUN_0031ab38(u8 *block, s32 value, const u8 *entry, const u8 *table);
 
 /* Hands the parent's block and value, a descriptor entry and its table to FUN_0031ab38. */
 void FUN_003cc6f4(FUN_003cc6f4Obj *obj)
 {
     FUN_003cc6f4Sub *sub = &obj->parent->sub;
-    FUN_0031ab38(sub->block, sub->value, DAT_0059ee68 + 0x70, DAT_0059ee68);
+    FUN_0031ab38(reinterpret_cast<u32 *>(sub->block), sub->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68 + 0x70), reinterpret_cast<EffectEditorOptions *>(DAT_0059ee68));
 }
 
 } /* extern "C" */

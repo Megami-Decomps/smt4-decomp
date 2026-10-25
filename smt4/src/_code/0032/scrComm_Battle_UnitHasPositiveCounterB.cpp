@@ -1,14 +1,13 @@
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
 int scrSetResult(int result);
-extern u8 *btlUnitGet(u32 id);
 
 extern u32 g_btlScriptUnit;
 u32 scrComm_Battle_UnitHasPositiveCounterB(void)
 {
-    u8 *unit = btlUnitGet(g_btlScriptUnit);
+    u8 *unit = reinterpret_cast<u8 *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
 
     if (*(s16 *)(*(int *)(unit + 0x20) + 0x90) > 0) {
         scrSetResult(1);

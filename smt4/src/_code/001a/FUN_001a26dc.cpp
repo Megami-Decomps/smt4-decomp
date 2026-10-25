@@ -72,7 +72,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
-extern int FUN_002e0d34(unsigned int);
+extern int terminalGetCharacterDisplayName(unsigned int);
 /* Supplied declaration required: tmnlGetEntryText. */
 
 
@@ -136,7 +136,7 @@ unsigned int FUN_001a26dc(void)
     FUN_002bf288(2,0x1e,0x28,0,temp_v3,0xc9);
     FUN_002bf288(2,0x1e,0x29,0,temp_v3,0xc9);
     temp_v7 = FUN_002bf4f8(0x1e,0x2a);
-    temp_v8 = FUN_002e0d34(*(unsigned int *)(temp_v2 + 0x7ec));
+    temp_v8 = terminalGetCharacterDisplayName(*(unsigned int *)(temp_v2 + 0x7ec));
     if (temp_v8 != 0) {
       textFormatBuffer(temp_v11,&LAB_001a2aa8);
     }

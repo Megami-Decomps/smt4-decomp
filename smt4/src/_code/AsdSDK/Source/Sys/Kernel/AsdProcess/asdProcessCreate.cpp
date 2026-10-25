@@ -1,4 +1,4 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the process allocation. */
+/* NON_MATCHING: signed-byte process-name hash is recovered; group, callback and process-id search registers differ. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 #include "AsdSDK/AsdDebug.h"
@@ -32,7 +32,7 @@ u32 asdProcessCreate(const s8 *name, s32 group, u16 startDelay, u16 endDelay, As
 
     proc->nameSum = 0;
     for (i = 0; (proc->name[i] = name[i]) != '\0' && i < ASD_PROC_NAME_LEN; i++) {
-        proc->nameSum += name[i];
+        proc->nameSum += static_cast<s8>(name[i]);
     }
     proc->group = group;
     proc->name[ASD_PROC_NAME_LEN - 1] = '\0';

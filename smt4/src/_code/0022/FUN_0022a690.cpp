@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail converts the float id once before the first call and keeps it in s17; here the conversion is placed after btlGetMainState and registers/switch offsets shift. */
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BattleUnitSlot.h"
 
 struct BtlMainState;
 
@@ -16,7 +17,6 @@ extern const f32 DAT_00439ab0[7];
 extern u32 g_btlScriptUnit;
 BtlMainState *btlGetMainState(void);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 id);
-BtlEntry *btlUnitGet(u32 unit);
 
 /* Rate multiplier for a script's damage kind (7-11) applied to the listed combatant, with the extra boosts for kinds 7 and 8. */
 f32 FUN_0022a690(s32 kind, f32 listedId)
@@ -52,7 +52,7 @@ f32 FUN_0022a690(s32 kind, f32 listedId)
         rate = stepRate(DAT_00439ab0, -other) * rate;
         break;
     }
-    if (!(btlUnitGet(g_btlScriptUnit)->flags & 0x200)) {
+    if (!(reinterpret_cast<BtlEntry *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->flags & 0x200)) {
         if (kind == 8) {
             entry = btlMainFindEntryByListedId(btlGetMainState(), (s32)listedId);
             if (entry && entry->effects.primaryAlternate > 0)

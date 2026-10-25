@@ -1,10 +1,11 @@
 /* NON_MATCHING: group/item spill choice and cache-reset instruction scheduling differ. */
 #include "gamedata/ItemFlagState.h"
+#include "gamedata/GameFlags.h"
 #include "gamedata/DataTable.h"
 
 extern "C" {
 s32 gameFlagIsSet(u32);
-void gameFlagSetValue(u32, u32, s32);
+
 ItemFlagCacheState *gameDataGetTableEntry(u8, u8);
 const ItemFlagVariant *FUN_0015fa74(u8, u8);
 void FUN_00148d68(u8, u8, s32);

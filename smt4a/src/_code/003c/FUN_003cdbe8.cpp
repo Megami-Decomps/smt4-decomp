@@ -5,7 +5,7 @@ extern "C" {
 u32 scrGetArg(u32);
 s32 bustupCutAnimFindSlot(u32);
 void bustupCutAnimSetPlacement(u32, s32, s32, s32, s32);
-void FUN_0038791c(u32, s32, s32, u32, u32, u32);
+void bustupConfigureSlotTransition(u32, s32, s32, u32, u32, u32);
 
 // Place a pair of cut-in portraits, transitioning whichever portrait needs to change slots.
 u32 FUN_003cdbe8(void)
@@ -22,10 +22,10 @@ u32 FUN_003cdbe8(void)
         bustupCutAnimSetPlacement(right, 1, 0, 0, 0);
     } else if (leftSlot > 0) {
         bustupCutAnimSetPlacement(left, 2, 0, 0, 0);
-        FUN_0038791c(right, 1, 3, duration, x, y);
+        bustupConfigureSlotTransition(right, 1, 3, duration, x, y);
     } else {
         bustupCutAnimSetPlacement(right, 1, 0, 0, 0);
-        FUN_0038791c(left, 2, 3, duration, x, y);
+        bustupConfigureSlotTransition(left, 2, 3, duration, x, y);
     }
     return 1;
 }

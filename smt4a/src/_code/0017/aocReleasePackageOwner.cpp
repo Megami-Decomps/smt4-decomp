@@ -7,7 +7,7 @@ extern "C" {
 
 int _ZN9Obj4221d4D1Ev(...);
 int FUN_00191f68(AocPackageOwner *owner);
-int deletingDtor_002e56ec(void *handle, int (*callback)(...));
+int __aeabi_vec_delete(void *handle, int (*callback)(...));
 
 extern AocMainA *g_aocMain;
 
@@ -18,7 +18,7 @@ void aocReleasePackageOwner(AocPackageOwner *owner)
     owner->unk314 = 0;
     owner->unk350 = 0;
     if (owner->handle != NULL) {
-        deletingDtor_002e56ec(owner->handle, _ZN9Obj4221d4D1Ev);
+        __aeabi_vec_delete(owner->handle, _ZN9Obj4221d4D1Ev);
         owner->handle = NULL;
     }
     FUN_00191f68(owner);

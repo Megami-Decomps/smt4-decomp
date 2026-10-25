@@ -12,37 +12,37 @@ struct OverlayTask {
 }
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 u32 FUN_001692ac(u32 mode, u32 enabled);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 SpriteInfo *FUN_001834a4(u32 group, u32 id);
 void FUN_001835b4(s32 layer, s32 group, u32 id, s32 x, s32 y, s32 order);
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 
 /* Draw the two parallax-shifted overlay sprites while the overlay task is in phase 9. */
 u32 FUN_003e7578(OverlayTask *task)
 {
     if (task->phase == 9 && task->enabled != 0) {
-        RenderCtx *context = g_renderCtx;
+        RenderCtxA *context = g_renderCtx;
         u32 mode = FUN_001692ac(1, 0);
-        context->drawStateView.state.push(mode);
+        renderCtxPushA(context, mode);
         efctSetSpeed(1.0f);
         FUN_00183bb0();
         FUN_001834a4(0x22, 3000);
         f32 shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
         FUN_001835b4(2, 0x22, 3000, (s32)shift, 0, 2);
-        g_renderCtx->drawStateView.state.pop();
+        renderStackPop(&g_renderCtx->stackA);
         efctSetSpeed(1.0f);
         context = g_renderCtx;
         mode = FUN_001692ac(1, 0);
-        context->drawStateView.state.push(mode);
+        renderCtxPushA(context, mode);
         efctSetSpeed(task->fadeScale);
         FUN_00183bb0();
         FUN_001834a4(0x22, 1000);
         shift = (f32)(s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.28f);
         FUN_001835b4(2, 0x22, 1000, (s32)shift, 0, 6);
-        g_renderCtx->drawStateView.state.pop();
+        renderStackPop(&g_renderCtx->stackA);
         efctSetSpeed(1.0f);
         return 0;
     }

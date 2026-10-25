@@ -5,7 +5,7 @@ struct ItemSlot;
 
 extern "C" {
 
-extern u32 FUN_00230e04(ItemSlot *slot);
+extern s32 FUN_00230e04(ItemSlot *slot);
 extern u16 FUN_00230f44(const u16 *id);
 
 static __inline s32 compareByPrimary(const void *a, const void *b)

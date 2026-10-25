@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail sub r2, r2, r0; compiler cmp r0, r2. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -9,8 +8,8 @@ extern KeyedRecordVectorPairs g_keyedRecords[];
 /* Copies a pair of vectors into the indexed record. */
 void FUN_0023aa8c(s32 index, const VectorPair *vectors)
 {
-    if (index < g_keyedRecordCount) {
-        g_keyedRecords[index].pairs[1] = *vectors;
+    if (g_keyedRecordCount - index - 1 >= 0) {
+        g_keyedRecords[index].pairs[3] = *vectors;
     }
 }
 

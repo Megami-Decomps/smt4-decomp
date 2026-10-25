@@ -95,7 +95,7 @@ void FUN_003da890(u32 table);
 void FUN_003d9d74(u32 table);
 void FUN_003cee94(BtlState **battle, BtlSetupEntry *entry);
 void FUN_003db378(u32 table);
-s32 FUN_0027e6f4(BtlState *state, s32 flag);
+s32 btlFindNthActiveSpecialEntry(BtlState *state, s32 flag);
 BtlSoundRecord *FUN_00227ecc(u32 table, s32 flag);
 void FUN_0023e52c(BtlState **battle, BtlSetupEntry *entry, u32 first, u32 second);
 void FUN_003cc944(BtlState **battle, BtlSetupEntry *entry, s32 flag);
@@ -165,7 +165,7 @@ void FUN_003d3944(BtlState **battle, BtlSetupEntry *entry, u32 unused3, u32 unus
     FUN_003cee94(battle, entry);
     FUN_003db378(DAT_00435d18);
     {
-        BtlSoundRecord *sound = FUN_00227ecc(DAT_00435d18, FUN_0027e6f4(*battle, 1) >= 0);
+        BtlSoundRecord *sound = FUN_00227ecc(DAT_00435d18, btlFindNthActiveSpecialEntry(*battle, 1) >= 0);
 
         if (sound != NULL) {
             FUN_0023e52c(battle, entry, sound->first, sound->second);

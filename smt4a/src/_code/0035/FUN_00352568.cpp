@@ -29,7 +29,7 @@ extern signed char DAT_005f1c70; /* 0x5f1c70 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 /* Supplied declaration required: gameFlagsGetBlock. */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 extern unsigned int FUN_0029202c(void);
 /* Supplied declaration required: FUN_0030250c. */
@@ -85,14 +85,14 @@ void FUN_00352568(void)
         temp_v3 = (unsigned int)*(unsigned char *)(temp_v0 + 0xb4);
       }
       if (DAT_005f1618 == 0 && temp_v3 == 0) {
-        if (((*(char *)(temp_v0 + 0xb5) != '\0') && (temp_v1 = FUN_00163fd4(8), temp_v1 == 0)) &&
-           (temp_v1 = FUN_00163fd4(7), temp_v1 == 0)) {
+        if (((*(char *)(temp_v0 + 0xb5) != '\0') && (temp_v1 = slotIsActive(8), temp_v1 == 0)) &&
+           (temp_v1 = slotIsActive(7), temp_v1 == 0)) {
           *(unsigned char *)(g_lmapView + 0xb5) = 0;
         }
         if (*(short *)(g_lmapView + 0xb6) < 7) {
-          temp_v1 = FUN_00163fd4(8);
+          temp_v1 = slotIsActive(8);
           temp_v5 = temp_v1 != 0;
-          temp_v1 = FUN_00163fd4(7);
+          temp_v1 = slotIsActive(7);
           if (temp_v1 != 0) {
             temp_v4 = 1;
           }
@@ -104,7 +104,7 @@ void FUN_00352568(void)
         }
         if ((temp_v6 && temp_v0 == 0) &&
            ((temp_v1 = inputIsQuestMenuPressed(), temp_v1 != 0 ||
-            (((temp_v1 = FUN_00163fd4(8), temp_v1 != 0 && (temp_v1 = FUN_00163fd4(7), temp_v1 != 0)) &&
+            (((temp_v1 = slotIsActive(8), temp_v1 != 0 && (temp_v1 = slotIsActive(7), temp_v1 != 0)) &&
              ((temp_v1 = padButtonIsPressed(8), temp_v1 == 0 &&
               ((temp_v1 = padButtonIsPressed(7), temp_v1 == 0 && (*(char *)(g_lmapView + 0xb5) == '\0'))))))
             )))) {
@@ -115,9 +115,9 @@ void FUN_00352568(void)
     }
   }
   else {
-    temp_v1 = FUN_00163fd4(8);
+    temp_v1 = slotIsActive(8);
     temp_v5 = temp_v1 != 0;
-    temp_v1 = FUN_00163fd4(7);
+    temp_v1 = slotIsActive(7);
     temp_v4 = temp_v1 != 0;
   }
   if (((DAT_005f161d != '\0') && (DAT_005f1a5e != '\0')) && (temp_v1 = sub68OwnerCall1(), temp_v1 != 0)) {

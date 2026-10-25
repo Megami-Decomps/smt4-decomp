@@ -45,9 +45,9 @@ char* libc_strcpy(char* destination, const char* source);
 u32 FUN_002ef6b8(s32 movie, u8 option)
 {
     asdDebugTrace(DAT_00404e84, 524);
-    MobiclipProcessCreateViewIV* work = static_cast<MobiclipProcessCreateViewIV*>(
+    g_mobiclipProcess.work = static_cast<MobiclipProcessWork *>(
         asdMemAlloc(0x100, 0x100, 0, sizeof(MobiclipProcessCreateViewIV), 1));
-    g_mobiclipProcess.work = reinterpret_cast<MobiclipProcessWork*>(work);
+    MobiclipProcessCreateViewIV *work = reinterpret_cast<MobiclipProcessCreateViewIV *>(g_mobiclipProcess.work);
     memClear(work, sizeof(MobiclipProcessCreateViewIV));
     work->process = asdProcessCreateSimple(DAT_00404e7c, 2, 0, 0,
         FUN_001dd280, mobiclipProcessDestroy, work);

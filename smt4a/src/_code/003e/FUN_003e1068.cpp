@@ -34,6 +34,7 @@ extern int FUN_003ece50(BtlObject *obj);
 extern int FUN_003eaa9c(BtlObject *obj);
 extern int FUN_003e1454(StateRequest *request, BtlObject *obj);
 
+
 /* Chooses the next state: state 0x10 when the object's skill has flag 2 set and the follow-up check passes, else state 0x14 and a restart. */
 void FUN_003e1068(StateRequest *request, BtlObject *obj)
 {

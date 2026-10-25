@@ -9,7 +9,7 @@ extern "C" {
 f32 FUN_001bbf0c(f32 radians);
 f32 FUN_001bc124(f32 radians);
 void eplSlotStartRequest(s32 slot);
-void FUN_00294774(s32 slot, f32 x, f32 y, f32 z);
+void mapEplSetSlotPosition(s32 slot, f32 x, f32 y, f32 z);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *dest, const MTX34 *source);
 void eplSlotApplyParameters(s32 slot, const MTX34 *matrix);
 extern LmapSceneA *g_lmapScene;
@@ -88,6 +88,6 @@ void FUN_003136e4(f32 angle, f32 distance)
         nn_math_ARMv6_MTX34CopyAsm(&applied, &matrix);
         eplSlotApplyParameters(0, &applied);
     }
-    FUN_00294774(0, x, y, z);
+    mapEplSetSlotPosition(0, x, y, z);
 }
 }

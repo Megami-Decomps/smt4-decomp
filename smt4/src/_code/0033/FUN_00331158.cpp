@@ -1,10 +1,5 @@
-/* NON_MATCHING: near (211 rows against 209, 32 diff lines): same states, calls, constants and event ids; retail loads 0x100016D into r8 (CANCEL derived as r8+1 in r9) where ours loads 0x100016E and derives the other by subtraction, and shares one `eventQueueAddUniqueIfValid; return` tail placed right after the select path, which our separate returns do not merge */
-typedef unsigned char u8;
-typedef signed char s8;
-typedef unsigned short u16;
-typedef short s16;
-typedef unsigned int u32;
-typedef int s32;
+/* NON_MATCHING: 211 rows versus retail 209: successful selection shares its argument-setup tail with the final SELECT event instead of the common event-call tail. */
+#include "common.h"
 
 extern "C" {
 
@@ -49,7 +44,7 @@ struct CampWork {
     u16 idTable[1];            /* 0x147C: ids indexed by list position */
 };
 
-extern CampWork *g_campWork;   /* 0x43da90 */
+extern CampWork *g_camp;
 
 s32 guestWinRequestClose(void);
 s32 FUN_0028fc60(u32 id);
@@ -75,7 +70,7 @@ u32 FUN_002bf4f8(u32 a, u32 b);
 /* Switches the camp to `state`, remembering the previous one. */
 static void campChangeState(u32 state)
 {
-    CampWork *camp = g_campWork;
+    CampWork *camp = g_camp;
 
     camp->previousState = camp->state;
     camp->state = state;
@@ -86,7 +81,7 @@ static void campChangeState(u32 state)
 /* Input handling for one of the three camp list screens (`kind` 11, 12 or 13). */
 void FUN_00331158(s32 kind)
 {
-    CampWork *camp = g_campWork;
+    CampWork *camp = g_camp;
     CampList *list = 0;
 
     if (kind == CAMP_LIST_A) {
@@ -119,19 +114,17 @@ void FUN_00331158(s32 kind)
     if ((FUN_002c1658(0, 1) | touched) != 0 && kind == CAMP_LIST_A) {
         s32 index = FUN_0029efc0(list) + FUN_0029efa8(list);
         u32 id = camp->idTable[index];
-        if (FUN_0028fc60(id) == 0) {
-            eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
-            return;
+        if (FUN_0028fc60(id) != 0) {
+            camp->selectedId = camp->idTable[index];
+            timerStart(camp->timer, 3, 0);
+            camp->returnState = 11;
+            campChangeState(5);
+            campReleaseScreenTouchRegions(list, 1);
+            guestWinRequestClose();
+            FUN_0029cc44(1);
+            return eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
         }
-        camp->selectedId = camp->idTable[index];
-        timerStart(camp->timer, 3, 0);
-        camp->returnState = 11;
-        campChangeState(5);
-        campReleaseScreenTouchRegions(list, 1);
-        guestWinRequestClose();
-        FUN_0029cc44(1);
-        eventQueueAddUniqueIfValid(CAMP_EVENT_SELECT);
-        return;
+        return eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
     }
 
     if (FUN_002c1658(1, 1) != 0) {
@@ -140,8 +133,7 @@ void FUN_00331158(s32 kind)
         camp->returnState = 6;
         campChangeState(5);
         campReleaseScreenTouchRegions(list, 1);
-        eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
-        return;
+        return eventQueueAddUniqueIfValid(CAMP_EVENT_CANCEL);
     }
 
     if (FUN_002c1658(9, 1) == 0) {

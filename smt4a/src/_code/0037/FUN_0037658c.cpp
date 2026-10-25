@@ -9,7 +9,7 @@ void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void sysMemClear(void* destination, u32 size);
 void FUN_001b4ddc(EffPart *record);
 
-// Allocate and initialize a copy, insert it before the source, and update the owner's count.
+// Allocate and initialize a copy, insert it after the source, and update the owner's count.
 LinkedItem *FUN_0037658c(LinkedItems *owner, LinkedItem *source)
 {
     EffPart *part = FUN_003007a0();

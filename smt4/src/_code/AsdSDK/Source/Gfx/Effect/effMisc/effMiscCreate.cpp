@@ -7,7 +7,7 @@ extern const char DAT_00410204[]; /* __FILE__ */
 
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
-void rt_memcpy(void *dest, const void *src, u32 size);
+void *rt_memcpy(void *dest, const void *src, u32 size);
 
 extern EffMiscKind g_effMiscKinds[];
 

@@ -1,10 +1,11 @@
-/* NON_MATCHING: temporary draw initialization clears padding and saved-register allocation differs from retail. */
+/* NON_MATCHING: native draw-packet constructor restores byte-only wideIndices initialization; saved first-index, buffer-size, and zero registers still differ. */
 #include "common.h"
 
 struct ModelIndexDraw {
     u32 physicalAddress;
     u32 count;
     u8 wideIndices;
+    ModelIndexDraw() : physicalAddress(0), count(0), wideIndices(0) {}
 };
 struct IndexedModelCommands {
     u32 unk00;
@@ -25,7 +26,7 @@ void modelShaderSubmitCommands(IndexedModelCommands *, u32 *, const ModelIndexDr
 extern "C" void FUN_0023b724(IndexedModelCommands *model, u32 unused, s32 first, u32 count)
 {
     if ((model->flags & 0x100) != 0) {
-        ModelIndexDraw draw = {0, 0, 0};
+        ModelIndexDraw draw;
         draw.physicalAddress = osVirtToPhysAddress(model->indices + first);
         draw.count = count;
         draw.wideIndices = 0;

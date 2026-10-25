@@ -2,13 +2,13 @@
 
 extern "C" {
 
-void FUN_00300904(BtlUiObjC *obj);
+void btlUiGetSelectedColumnValue(BtlUiObjC *obj);
 
 extern BtlUiGlobals g_btlUi;
 
 void FUN_003af054(void)
 {
-    FUN_00300904(&g_btlUi.ui->objC);
+    btlUiGetSelectedColumnValue(&g_btlUi.ui->objC);
 }
 
 } /* extern "C" */

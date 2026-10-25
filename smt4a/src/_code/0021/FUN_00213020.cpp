@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the particle emitter update; the float/int mixed emitter block is typed here by its use (retail passes its address to the parameter helpers), and armcc here keeps the ring indices, 10.0f and 0.01f in different registers across the helper calls. */
+/* NON_MATCHING: restored four-argument random-range call; ring index registers, cleanup owner register, and floating constant hoisting differ. */
 #include "common.h"
 
 /* A spawned particle node (only the fields the emitter sets). */
@@ -53,9 +53,9 @@ void nodeTreeReleaseItemClearOwner(ParticleNode *node);
 void nodeTreeReleaseItem(void *item);
 ParticleNode *FUN_00237da0(u32 context, void *position, void *params, s32 two, u32 contextB, ParticleNode **slot,
                            u32 index, u32 flag, s32 one, u32 contextC);
-f32 FUN_002039d0(s32 a, s32 b, s32 c);
-f32 FUN_0028324c(s32 a, u32 b, s32 c);
-f32 FUN_00283328(s32 a, s32 b, s32 c);
+f32 FUN_002039d0(s32 mode, s32 maximum, u32 divisor);
+f32 FUN_0028324c(s32 mode, s32 lower, s32 upper, u32 divisor);
+f32 FUN_00283328(s32 mode, u32 numerator, u32 denominator);
 void FUN_0034a16c(void *params, void *a, void *b, void *c, void *d);
 void FUN_0035cc80(void *params, void *a, void *b, void *c, void *d, void *e, void *f, void *g);
 
@@ -110,7 +110,7 @@ void FUN_00213020(ParticleEmitter *emitter)
                                           emitter->contextC);
         emitter->nodes[index] = node;
         node->life = FUN_002039d0(2, emitter->lifeJitter, 100) + node->life;
-        node->size = FUN_0028324c(0, life, 10) * node->size;
+        node->size = FUN_0028324c(0, life, 10, 10) * node->size;
         node->tint = (f32)emitter->tintValue;
         node->offsetA = FUN_002039d0(0, emitter->offsetBase, 100) + (f32)emitter->colorValue * 0.01f;
         node->origin = 0.0f;

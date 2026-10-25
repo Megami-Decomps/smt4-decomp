@@ -5,7 +5,7 @@
 extern "C" {
 extern BtlAuxA* g_btlAux;
 u32 btlEffectNameHasPrefix(BtlAuxA* auxiliary, const char* name);
-ReflectAction* FUN_004102d8(ReflectContext* context, s32 actor, s32 secondary, u32 options);
+
 s32 libc_strcmp(const char* first, const char* second);
 
 ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
@@ -18,14 +18,14 @@ ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
         f32 second;
     };
     if (btlEffectNameHasPrefix(g_btlAux, name)) {
-        ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+        ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
         action->kind = 4;
         return action;
     }
     if (target >= 109) {
         return NULL;
     }
-    ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+    ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
     action->kind = 1;
     action->first = (u16)first;
     action->second = (u16)target;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: output/first-record registers r4/r5 and x/y source registers r2/r3 are exchanged. */
+/* NON_MATCHING: output/first-record saved registers r4/r5 are exchanged; named coordinate snapshots recover retail x/y scratch registers. */
 #include "shard/W6_W6Match3_PointDifference.h"
 
 extern "C" const PointLookupRecord* FUN_002bf4f8(u32 bank, u32 index);
@@ -8,8 +8,10 @@ extern "C" void FUN_00262210(PointDeltaWork* output, u32 bank, u32 firstIndex, u
 {
     const PointLookupRecord* first = FUN_002bf4f8(bank, firstIndex);
     const PointLookupRecord* second = FUN_002bf4f8(bank, secondIndex);
+    s16 firstX = first->x;
     s16 firstY = first->y;
+    s16 secondX = second->x;
     s16 secondY = second->y;
-    output->x = first->x - second->x;
+    output->x = firstX - secondX;
     output->y = firstY - secondY;
 }

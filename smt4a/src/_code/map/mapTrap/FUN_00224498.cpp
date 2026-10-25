@@ -1,4 +1,4 @@
-/* NON_MATCHING: inlined load helper hoists model-path addresses across allocation calls and changes literal order. */
+/* NON_MATCHING: g_gameState literal/count load precedes g_mapTrap literal/pointer load; model allocation, paths and enable operations match. */
 #include "map/mapTrap.h"
 #include "map/mapDepart.h"
 #include "Model/ModelList.h"
@@ -16,18 +16,9 @@ void FUN_0040aad4(ModelList *model, s32 index);
 void handleRegistryRegisterObject(void *registry, ModelResourceItem *model);
 }
 
-static inline void loadTrapModel(ModelList **slot, const char *path, s32 line)
+static __inline void enableTrapModel(ModelResourceItem *model)
 {
-    ModelList *model = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
-        "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", line));
-    if (model != NULL)
-        model = modelListInit(model);
-    *slot = model;
-    FUN_0040aa6c(model, path);
-    FUN_0040aad4(*slot, 0);
-    ModelResourceItem *body = reinterpret_cast<ModelResourceItem *>((*slot)->content.body);
-    handleRegistryRegisterObject(g_handleRegistry, body);
-    body->flags |= 3;
+    model->flags |= 3;
 }
 
 extern "C" {
@@ -47,13 +38,41 @@ void FUN_00224498(s32 area, s32 map)
     if (trap->setup.count > 0) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&trap->display.phase);
         display->phase = 0;
-        loadTrapModel(&display->models[0], "map/unit/u006.bam", 0x7E);
-        loadTrapModel(&display->models[1], "map/unit/u061.bam", 0x87);
+        ModelList *first = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+            "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x7E));
+        if (first != NULL)
+            first = modelListInit(first);
+        display->models[0] = first;
+        FUN_0040aa6c(first, "map/unit/u006.bam");
+        FUN_0040aad4(display->models[0], 0);
+        ModelResourceItem *firstBody = reinterpret_cast<ModelResourceItem *>(display->models[0]->content.body);
+        handleRegistryRegisterObject(g_handleRegistry, firstBody);
+        enableTrapModel(firstBody);
+
+        ModelList *second = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+            "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x87));
+        if (second != NULL)
+            second = modelListInit(second);
+        display->models[1] = second;
+        FUN_0040aa6c(second, "map/unit/u061.bam");
+        FUN_0040aad4(display->models[1], 0);
+        ModelResourceItem *secondBody = reinterpret_cast<ModelResourceItem *>(display->models[1]->content.body);
+        handleRegistryRegisterObject(g_handleRegistry, secondBody);
+        enableTrapModel(secondBody);
         g_mapTrap->setup.active = 1;
     }
     if (area == 0x1A && (map == 0xB || map == 0xD)) {
         DisplayModels *display = reinterpret_cast<DisplayModels *>(&g_mapTrap->display.phase);
-        loadTrapModel(&display->models[2], "map/unit/u097.bam", 0x99);
+        ModelList *extra = static_cast<ModelList *>(FUN_00178b04(sizeof(ModelList),
+            "c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTrap.cpp", 0x99));
+        if (extra != NULL)
+            extra = modelListInit(extra);
+        display->models[2] = extra;
+        FUN_0040aa6c(extra, "map/unit/u097.bam");
+        FUN_0040aad4(display->models[2], 0);
+        ModelResourceItem *extraBody = reinterpret_cast<ModelResourceItem *>(display->models[2]->content.body);
+        handleRegistryRegisterObject(g_handleRegistry, extraBody);
+        enableTrapModel(extraBody);
     }
 }
 }

@@ -1,12 +1,12 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr) (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: required-mask low/high scratch assignment prevents LDM pairing; range layout and HP arithmetic match. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
 namespace {
-inline s32 hpPercent(const BtlCombatantEntryA& entry)
+inline s32 hpPercent(s32 hp, s32 maxHp)
 {
-    return entry.hp * 100 / entry.maxHp;
+    return hp * 100 / maxHp;
 }
 }
 
@@ -27,17 +27,16 @@ u32 scrAnyEligibleHpPercentThreshold(void)
     FUN_00301a08(kind, reinterpret_cast<u32*>(&first), reinterpret_cast<u32*>(&count));
     for (s32 index = first; index < first + count; ++index) {
         const BtlCombatantEntryA* entry = &btlGetMainState()->entries[index];
-        const u64 flags = entry->flags;
-        if (!(flags & g_btlCandidateMasks.unavailable) &&
-            (flags & g_btlCandidateMasks.required) && !(flags & g_btlCandidateMasks.excluded) &&
-            hpPercent(*entry) >= threshold) {
+        if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
+            (entry->flags & g_btlCandidateMasks.required) && !(entry->flags & g_btlCandidateMasks.excluded) &&
+            hpPercent(entry->hp, entry->maxHp) >= threshold) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         const BtlCombatantEntryA* entry = FUN_003eaf20(btlGetMainState());
-        if (entry != NULL && hpPercent(*entry) <= threshold) {
+        if (entry != NULL && hpPercent(entry->hp, entry->maxHp) <= threshold) {
             scrSetResult(1);
             return 1;
         }

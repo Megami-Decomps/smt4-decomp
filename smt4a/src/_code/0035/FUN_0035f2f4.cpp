@@ -1,9 +1,10 @@
-/* NON_MATCHING: readable rewrite compiles (173 vs 173 rows); retail reads the battle mask presets through one base pointer into a global struct (g_battleMaskPresets + 24) and orders the argument stores differently */
+/* NON_MATCHING: restored signed side index and selected-record reset argument; battle-mask loads and count-argument stack marshalling still differ. */
 #include "common.h"
 
 struct BattleSide {
     u64 flags;              // 0x000
-    s32 unitIndex;          // 0x008 (low halfword)
+    s16 unitIndex;          // 0x008
+    u8 unk0a[2];
     u8 unk0c[0x25c - 0x0c];
     u32 spriteA;            // 0x25c
     u8 unk260[4];
@@ -35,8 +36,8 @@ struct BattleMaskPresets {
 extern BattleMaskPresets g_battleMaskPresets;
 
 BattleMain* btlGetMainState(void);
-u32 FUN_003e0154(void);
-u32 FUN_003e0164(void);
+s32 FUN_003e0154(void);
+s32 FUN_003e0164(void);
 void FUN_004fb798(s32 a, s32 b, s32 c, u8* unit, s32 d, u32 e, u32 f, s32 g, u32 mask, s32 h, s32 i, s32 j, s32 k, s32 l, s32 m);
 s32 gameDataBlocksGetTableFlag(void);
 s32 gameDataFlagTestBit(u32 bit);
@@ -53,8 +54,8 @@ void btlEffectsRelease(BattleMain* battle);
 u32 FUN_0035f2f4(void)
 {
     BattleMain* battle = btlGetMainState();
-    u32 first = FUN_003e0154();
-    u32 second = FUN_003e0164();
+    s32 first = FUN_003e0154();
+    s32 second = FUN_003e0164();
     FUN_004fb798(0, 0, 0, *reinterpret_cast<u8**>(reinterpret_cast<u8*>(battle) + 0x1ed4), 0, first, second, -1, 2, 0, 0, 9, 0, 0, 1);
 
     s32 tableFlag = gameDataBlocksGetTableFlag();
@@ -88,8 +89,9 @@ u32 FUN_0035f2f4(void)
         s32 record = static_cast<s8>(table[i + 0x1ca0]);
         if (record >= 0 && hadFlag[i] != 0) bitsAt60Set(table + record * 300 + 0x68, 4);
     }
-    if (saveSlotFindSelected() != NULL) {
-        FUN_004bcb54(NULL);
+    u8 *selected = static_cast<u8 *>(saveSlotFindSelected());
+    if (selected != NULL) {
+        FUN_004bcb54(selected);
         saveSlotApplySelected(battle);
         btlClearMode4D74(battle);
     }

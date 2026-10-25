@@ -9,15 +9,14 @@ typedef struct Entry0026a69c {
     /* 0x03 */ u8 unk03;
 } Entry0026a69c;
 
-typedef s32 Compare0026a69c(const Entry0026a69c *a, const Entry0026a69c *b);
+typedef s32 Compare0026a69c(const void *a, const void *b);
 
 void *dataTableGet(s32 table, s32 slot);
 Entry0026a69c *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 Entry0026a69c *libc_bsearch(const Entry0026a69c *key, const Entry0026a69c *base, u32 count, u32 size, Compare0026a69c *compare);
 
-/* The id comparator at 0x2dca98 (unnamed; retail embeds its address). */
-#define ID_COMPARE_0026A69C ((Compare0026a69c *)0x2dca98)
+s32 idMapCompareKeys(const void *left, const void *right);
 
 extern u8 DAT_00404386[]; /* 0x404386 */
 
@@ -30,7 +29,7 @@ u8 idMapLookup(u16 id)
     Entry0026a69c key;
 
     key.id = id;
-    return DAT_00404386[libc_bsearch(&key, entries, count, sizeof(Entry0026a69c), ID_COMPARE_0026A69C)->index];
+    return DAT_00404386[libc_bsearch(&key, entries, count, sizeof(Entry0026a69c), idMapCompareKeys)->index];
 }
 
 } /* extern "C" */

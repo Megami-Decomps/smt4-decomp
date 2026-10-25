@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc turns the words[] clearing loop into __aeabi_memclr4 (retail keeps a two-way unrolled loop), schedules the scene vectors as individual vstr instead of vstm runs and allocates float registers differently */
+/* NON_MATCHING: words[] clear becomes __aeabi_memclr4 instead of retail's pair-unrolled loop; scene vector copies group differently, the optional three-word clear uses separate stores and task callback declarations still lack native handle types. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "map/lmapMain.h"

@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fad14` (_code @ 0x3fad14, 0x8bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" {
 
@@ -94,11 +96,17 @@ extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
-void FUN_003fad14(int param_1,int param_2,float *param_3,unsigned int param_4,int param_5,float *param_6,
-                 int *param_7,int param_8)
+void FUN_003fad14(SpriteDrawOwner *owner, s32 param_2, const SpriteDrawVector3 *placement,
+                  u32 param_4, s32 param_5, const SpriteDrawVector2 *offset,
+                  const SpriteDrawVector2 *keyScale, s32 param_8, f32 globalScale)
 
 {
-/* irregular: 1 goto(s); irregular input(s): in_fpscr, in_s0; 10 native warning(s); review required */
+  const s32 param_1 = (s32)owner;
+  const f32 *param_3 = &placement->x;
+  const f32 *param_6 = offset != NULL ? &offset->x : NULL;
+  GpuFloatEncoding globalScaleEncoding;
+  globalScaleEncoding.value = globalScale;
+/* irregular: 1 goto(s); irregular input(s): in_fpscr; remaining native math requires review */
   char temp_v0;
   int temp_v1;
   int temp_v2;
@@ -109,7 +117,6 @@ void FUN_003fad14(int param_1,int param_2,float *param_3,unsigned int param_4,in
   unsigned int temp_v5;
   int temp_v6;
   unsigned int in_fpscr;
-  unsigned int in_s0;
   unsigned int temp_v7;
   unsigned int temp_v8;
   float temp_v9;
@@ -143,7 +150,7 @@ void FUN_003fad14(int param_1,int param_2,float *param_3,unsigned int param_4,in
   unsigned char temp_v37;
   int iStack_34;
   int iStack_30;
-  float *temp_v38;
+  const float *temp_v38;
   unsigned int temp_v39;
   
   if (*(int *)(param_1 + 0x10) != 0) {
@@ -153,7 +160,7 @@ void FUN_003fad14(int param_1,int param_2,float *param_3,unsigned int param_4,in
       temp_v5 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x1c) + param_2 * 4);
       temp_v6 = (unsigned int)*(unsigned short *)(*(int *)(param_1 + 0x1c) + param_2 * 4 + 2) + (temp_v5 - 1);
       if ((int)temp_v5 <= temp_v6) {
-        temp_v14 = romwright_piece_4_4(in_s0,0x3f000000);
+        temp_v14 = romwright_piece_4_4(globalScaleEncoding.bits,0x3f000000);
         temp_v13 = 0x800000003f800000;
         temp_v15 = 0;
         temp_v16 = 0x43810000;
@@ -255,8 +262,8 @@ LAB_003fade8:
                   }
                   nn_math_ARMv6_MTX34CopyAsm(temp_v35,&_ZZN2nw4math5MTX348IdentityEvE8identity);
                   in_fpscr = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v9 == (float)temp_v15) << 0x1e);
-                  if (((!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) || (*param_7 != 0x3f800000)) ||
-                     (param_7[1] != 0x3f800000)) {
+                  if (((!romwright_subpiece_4_1_0(in_fpscr >> 0x1e,0)) || keyScale->x != 1.0f) ||
+                     (keyScale->y != 1.0f)) {
                     temp_v9 = (float)((unsigned long long)temp_v13 >> 0x20);
                     temp_v24 = 0;
                     temp_v23 = 0x3f800000;
@@ -273,12 +280,16 @@ LAB_003fade8:
                     temp_v30 = temp_v12;
                     temp_v34 = temp_v9;
                     nn_math_ARMv6_MTX34MultAsm(temp_v35,&temp_v23);
-                    temp_v23 = (unsigned int)*(unsigned long long *)param_7;
+                    GpuFloatEncoding scaleXEncoding;
+                    scaleXEncoding.value = keyScale->x;
+                    temp_v23 = scaleXEncoding.bits;
                     temp_v24 = 0;
                     temp_v25 = 0;
                     temp_v26 = 0.0f;
                     temp_v27 = 0;
-                    temp_v28 = (unsigned int)((unsigned long long)*(unsigned long long *)param_7 >> 0x20);
+                    GpuFloatEncoding scaleYEncoding;
+                    scaleYEncoding.value = keyScale->y;
+                    temp_v28 = scaleYEncoding.bits;
                     temp_v29 = 0;
                     temp_v30 = 0.0f;
                     temp_v31 = 0;
@@ -421,7 +432,7 @@ LAB_003fade8:
                 VectorUnsignedToFloat((unsigned int)*(unsigned short *)(pfVar7 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
                 FUN_0020cb74(*(unsigned int *)
                               (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18)
-                             ,temp_v38,&temp_v19,pfVar7 + 4,temp_v4,param_7,1,param_8);
+                             ,temp_v38,&temp_v19,pfVar7 + 4,temp_v4,keyScale,1,param_8);
               }
             }
           }

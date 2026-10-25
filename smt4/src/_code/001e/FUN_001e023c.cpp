@@ -1,15 +1,14 @@
-/* NON_MATCHING: retail evaluates the three color channels as separate multiplies (no CSE), keeps the pushes' address computation after the call, and returns through the early-out with r0 cleared; built merges the channel multiplies */
+/* NON_MATCHING: lane scaling and canonical render pushes now match their retail operation shapes; VFP conversion registers, draw-argument scheduling and the cleared early return differ. */
 #include "camp/RenderCtx.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
-static __inline void pushState(RenderStateStack *stack, s32 state)
+static __inline u32 packFadeColor(EffectColor color)
 {
-    s32 previous = stack->entries[stack->count];
-    ++stack->count;
-    stack->entries[stack->count] = state;
-    if (stack->dirty != 0 || previous != state) {
-        stack->apply(state);
-        stack->dirty = 0;
-    }
+    u32 red = (u32)(color.red * 255.0f);
+    u32 green = (u32)(color.green * 255.0f);
+    u32 blue = (u32)(color.blue * 255.0f);
+    u32 alpha = (u32)(color.alpha * 255.0f);
+    return (((((red << 8) + green) << 8) + blue) << 8) + alpha;
 }
 
 extern "C" {
@@ -55,13 +54,12 @@ u32 FUN_001e023c(void)
         }
         RenderCtx *context = g_titleScene;
         s32 state = FUN_002c5d80(5, 1);
-        pushState(&context->stackA, state);
+        renderCtxPushA(context, state);
         context = g_titleScene;
         state = FUN_002865c0(6, 0.0f);
-        pushState(&context->additional.stackC, state);
-        u32 color = ((((u32)(job->intensity * 255.0f) << 8) + (u32)(job->intensity * 255.0f)) << 8) +
-                    (u32)(job->intensity * 255.0f);
-        color = (color << 8) + (u32)(job->alpha * 255.0f);
+        renderCtxPushC(context, state);
+        EffectColor fade = {job->intensity, job->intensity, job->intensity, job->alpha};
+        u32 color = packFadeColor(fade);
         FUN_0033e160(job->handle, 0, (s32)job->level, job->params, color, 0, job->origin);
         renderStackPop(&g_titleScene->additional.stackC);
         renderStackPop(&g_titleScene->stackA);

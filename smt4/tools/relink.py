@@ -147,6 +147,24 @@ def data_references(path):
     return sections, references
 
 
+def section_globals(path, sections):
+    """The global symbols an ELF32 object defines in the named `sections`."""
+    data = Path(path).read_bytes()
+    shoff, = struct.unpack_from("<I", data, 0x20)
+    shentsize, shnum, shstrndx = struct.unpack_from("<HHH", data, 0x2E)
+    headers = [struct.unpack_from("<IIIIIIIIII", data, shoff + i * shentsize) for i in range(shnum)]
+    cstr = lambda at: data[at:data.index(b"\0", at)].decode()
+    wanted = {i for i, h in enumerate(headers) if cstr(headers[shstrndx][4] + h[0]) in sections}
+    names = set()
+    for symtab in (h for h in headers if h[1] == 2):
+        strtab = headers[symtab[6]]
+        for at in range(symtab[4], symtab[4] + symtab[5], 16):
+            name_at, _value, _size, info, _other, section = struct.unpack_from("<IIIBBH", data, at)
+            if info >> 4 in (1, 2) and section in wanted:
+                names.add(cstr(strtab[4] + name_at))
+    return names
+
+
 R_ARM_ABS32 = 2
 
 
@@ -379,6 +397,7 @@ def main():
     swapped, oversized, with_data, retargeted, rewritten = 0, [], [], [], []
     missing, no_retail, entered_across, overlapped, object_for = [], [], [], [], {}
     data_placed = []  # (address, size, object, section): an object's own constants at their retail address
+    data_names = {}  # object -> the global names its own placed data sections define
     # Where each kind of the object's data may sit: .rodata and .data hold bytes of the image; .bss is the
     # zero-filled range past it, which no bytes of `.code` cover.
     windows = {"rodata": (segments["rodata"][0], segments["data"][0]), "data": segments["data"],
@@ -458,6 +477,7 @@ def main():
                 object_for[function] = target
                 if own:
                     data_placed += [(start, length, target, section) for section, (start, length) in own[0].items()]
+                    data_names[target] = section_globals(ROOT / target, set(own[0]))
                     constants_here = own[0]
             else:
                 oversized.append((unit["function"], size, retail_size))
@@ -542,16 +562,19 @@ def main():
     # symbols: functions linked as bytes (typed, with the Thumb bit, so ld
     # picks BL or BLX as retail did) and decompiler names that carry their
     # address (`DAT_00412345`, `s_normal_00433a70`, `LAB_00118194`, ...).
+    # Data names a linked object defines in its own placed sections (a unit defining its file's globals).
+    defined_data = set().union(*(data_names.get(target, set()) for _a, _s, target, _sec in constants))
     symbols = [(name, value, True) for name, value in sorted(names.items()) if name not in defined]
     addressed = {}
     for _, _, target, _ in placed:
         for match in re.finditer(rb"\0([A-Za-z_][A-Za-z0-9_]*_([0-9a-f]{8}))(?=\0)", (ROOT / target).read_bytes()):
             name = match[1].decode()
-            if name not in names:
+            if name not in names and name not in defined_data:
                 addressed[name] = int(match[2], 16)
     symbols += [(name, value, False) for name, value in sorted(addressed.items())]
     # Named globals (`type:object` in the symbol file) the objects reference.
-    symbols += [(name, value, False) for name, value in sorted(objects.items()) if name not in defined and name not in addressed]
+    symbols += [(name, value, False) for name, value in sorted(objects.items())
+                if name not in defined and name not in addressed and name not in defined_data]
     symbols_object = gaps_dir / "symbols.o"
     blob_object(symbols_object, ".text", b"", True, symbols)
     inputs.append(symbols_object.relative_to(ROOT).as_posix())

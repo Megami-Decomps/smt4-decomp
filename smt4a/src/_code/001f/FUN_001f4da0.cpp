@@ -23,7 +23,6 @@ struct DataBlocks {
 };
 
 extern "C" {
-
 extern DataBlocks g_gameDataBlocks;
 
 /* Looks up the cached value for `key` in the 16-record table; an unused record is picked when the key is absent. */

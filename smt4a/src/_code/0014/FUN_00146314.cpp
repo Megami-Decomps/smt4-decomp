@@ -1,4 +1,3 @@
-/* NON_MATCHING: the target is loaded after selecting parameters instead of being captured before the branch. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
 struct HandleRegistryView {
@@ -31,6 +30,7 @@ u32 FUN_00146314()
 {
     HandleRegistryView *registry = g_handleRegistry;
     if (FUN_00158124(registry)) {
+        void *target = registry->target;
         const void *parameters;
         RenderParameterOverride *override = DAT_0056fcb8;
         if (override && (override->flags & 1) && (override->flags & 2)) {
@@ -38,7 +38,7 @@ u32 FUN_00146314()
         } else {
             parameters = registry->defaultParameters;
         }
-        FUN_00157e98(registry->target, parameters);
+        FUN_00157e98(target, parameters);
     }
     FUN_00145e24(g_renderCtx, FUN_00152f54());
     RegisteredHandle **end = g_handleRegistry->end;

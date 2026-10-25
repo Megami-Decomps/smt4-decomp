@@ -16,7 +16,7 @@ typedef struct Loader {
     /* 0xD74 */ u32 target;
 } Loader;
 
-extern s32 FUN_0022b14c(void *resource);
+extern s32 listUpdateRevealTransition(void *resource);
 extern void textFormatBuffer(u8 *buffer, const char *format, s32 arg);
 extern u32 tableGroupFindEntryIndex(u32 listener, u8 *buffer);
 extern void scrScriptProcessStartEntry(u32 target, u32 handle);
@@ -25,7 +25,7 @@ void loaderStartScriptEntry(Loader *loader)
 {
     u8 path[32];
 
-    if (FUN_0022b14c(loader->resource) != 0) {
+    if (listUpdateRevealTransition(loader->resource) != 0) {
         textFormatBuffer(path, "%s", loader->pathBase + 0x20);
         scrScriptProcessStartEntry(loader->target, tableGroupFindEntryIndex(loader->listener, path));
         loader->state = 4;

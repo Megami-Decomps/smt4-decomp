@@ -1,13 +1,5 @@
-#include "common.h"
+#include "classes/Obj557e3c.h"
 
-extern "C" {
-
-void asdOperatorDelete(void *block);
-
-/* Deleting destructor: nothing to destroy, so it just releases the object. */
-void _ZN9Obj557e3cD0Ev(void *self)
+Obj557e3c::~Obj557e3c()
 {
-    asdOperatorDelete(self);
 }
-
-} /* extern "C" */

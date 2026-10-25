@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_0019af70(...);
 int FUN_0019f764(unsigned int, unsigned int, int);
-int FUN_0019f7dc(...);
+int materialUploadChangedParameters(...);
 int FUN_001a64f4(unsigned char [4]);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -45,7 +45,7 @@ extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 #endif
 /* Supplied declaration required: FUN_0019af70. */
 /* Supplied declaration required: FUN_0019f764. */
-/* Supplied declaration required: FUN_0019f7dc. */
+/* Supplied declaration required: materialUploadChangedParameters. */
 /* Supplied declaration required: FUN_001a64f4. */
 /* Supplied declaration required: callbackBindingInitFromKind. */
 extern int __aeabi_uidivmod(unsigned int, int);
@@ -120,7 +120,7 @@ void FUN_00181ae0(unsigned int param_1,unsigned int *param_2,int param_3,int par
   piVar13 = *(int **)(temp_v6 + 8);
   temp_v2 = temp_v7;
   callbackBindingInitFromKind(reinterpret_cast<FontStringReader *>(&temp_v20), reinterpret_cast<FontEncodingSource *>(piVar13), 0x30);
-  FUN_0019f7dc(g_renderCtx);
+  materialUploadChangedParameters(g_renderCtx);
   temp_v20 = param_3;
   temp_v14 = (unsigned long long)temp_v7 << 0x20;
   temp_v13 = (unsigned long long)temp_v2;
@@ -292,7 +292,7 @@ LAB_00181ef0:
       temp_v13 = (unsigned long long)(unsigned int)temp_v10;
     } while (param_4 >= temp_v20 - param_3);
   }
-  FUN_0019f7dc(g_renderCtx);
+  materialUploadChangedParameters(g_renderCtx);
   return;
 }
 

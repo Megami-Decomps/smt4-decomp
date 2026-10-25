@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r2, [pc, #140] differs from recovered ldrb r2, [r4, #476]. */
+/* NON_MATCHING: signed force-update byte recovers retail indexed load; vector-copy destination and call argument addresses use different registers. */
 #include "common.h"
 
 namespace {
@@ -12,7 +12,7 @@ struct UpdateStateView {
     u32 unk52C;                 // +0x052C
     u8 unk530[0xC9C];           // +0x0530
     Float4View unk11CC;         // +0x11CC
-    u8 unk11DC;                 // +0x11DC
+    s8 unk11DC;                 // +0x11DC
 };
 
 }

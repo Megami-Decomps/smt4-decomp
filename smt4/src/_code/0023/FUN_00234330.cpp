@@ -31,7 +31,7 @@ static inline const char *naKeyFormat(u32 kind)
 // Build the NA_* text key of the given kind (name, sort name, descriptions, disclaimer, icon) for two IDs.
 void FUN_00234330(char *dest, u32 kind, u32 first, u32 second)
 {
-    char key[68];
+    char key[64];
     stringFormatUnbounded(key, naKeyFormat(kind), FUN_0035a010(first), FUN_0035a060(second));
     rt_memcpy(dest, key, 0x40);
 }

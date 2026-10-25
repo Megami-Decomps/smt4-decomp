@@ -1,10 +1,11 @@
-/* NON_MATCHING: animated scale loads fold to panel-relative addressing instead of retail's retained member bases/accessor NOPs, changing final draw scheduling. */
+/* NON_MATCHING: first animated-member address is placed directly in r0 rather than passed through r1. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 extern "C" {
 const PanelTextLayoutEntryPrefixA *FUN_0018349c(TextLayoutContextA *context, s32 entry);
 void efctSetSpeed(f32 speed);
 void FUN_00493518(TextLayoutContextA *context, s32 sprite, s32 x, s32 y, u32 flags, f32 scale);
+f32 vec2GetSpeed(const void *object);
 
 void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternate, f32 scale)
 {
@@ -30,7 +31,7 @@ void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternat
         reinterpret_cast<TextLayoutContextA *>(panel->layout), row + 0x42F);
     s32 x = position->x;
     s32 y = position->y;
-    efctSetSpeed(panel->first.scale * scale);
+    efctSetSpeed(vec2GetSpeed(&panel->first) * scale);
     FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
     FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x426, x, y, flags, scale);
     FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x428, x, y, flags, scale);
@@ -40,12 +41,12 @@ void FUN_004a80d8(PanelTextOwnerPrefixA *owner, s32 row, u32 flags, s32 alternat
         FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5CF, x, y, flags, scale);
         FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D0, x, y, flags, scale);
         FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D2, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D1, x, y, flags, panel->last.scale * scale);
+        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5D1, x, y, flags, vec2GetSpeed(&panel->last) * scale);
     } else {
         FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42A, x, y, flags, scale);
         FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42B, x, y, flags, scale);
         FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x5C9, x, y, flags, scale);
-        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42C, x, y, flags, panel->last.scale * scale);
+        FUN_00493518(reinterpret_cast<TextLayoutContextA *>(panel->layout), 0x42C, x, y, flags, vec2GetSpeed(&panel->last) * scale);
     }
 }
 }

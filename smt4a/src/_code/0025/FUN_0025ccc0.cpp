@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the 0x5E2 flag through a second base (work+0x500) and keeps the first loop's call/else layout out of line; also needs recordGetSignedFlags (ldrsb r0,[r0,#138]) in smt4a config/inlined.txt. */
+/* NON_MATCHING: retail reads the 0x5E2 flag through a second base (work+0x500) and keeps the first loop's call/else layout out of line; also needs uiSpriteGetCompletionState (ldrsb r0,[r0,#138]) in smt4a config/inlined.txt. */
 #include "ui/ButtonHelp.h"
 
 extern "C" {
@@ -7,7 +7,7 @@ extern ButtonHelpPresetGlobalsA g_buttonHelp;
 extern ButtonHelpQueuedSelections DAT_0057f0d8;
 
 void FUN_00163aa4(ButtonHelpUnit *unit, f32 speed);
-s8 recordGetSignedFlags(const ButtonHelpUnit *unit);
+s8 uiSpriteGetCompletionState(const ButtonHelpUnit *unit);
 void FUN_00167458(ButtonHelpUnit *unit, s32 flag);
 void FUN_0031879c(void);
 void FUN_001a90e0(u8 *help);
@@ -39,7 +39,7 @@ u32 FUN_0025ccc0(void)
                     last = i;
                 }
             }
-            if (work->unk0C > last && recordGetSignedFlags(&work->units[last]) != 0) {
+            if (work->unk0C > last && uiSpriteGetCompletionState(&work->units[last]) != 0) {
                 g_buttonHelp.prefix.work->state = 2;
                 g_buttonHelp.prefix.work->unk0C = 0;
             }
@@ -56,7 +56,7 @@ u32 FUN_0025ccc0(void)
                         last = i;
                     }
                 }
-                if (work->unk0C > last && recordGetSignedFlags(&work->units[last]) != 0) {
+                if (work->unk0C > last && uiSpriteGetCompletionState(&work->units[last]) != 0) {
                     for (s32 i = 0; i < 6; i++) {
                         work->clear.active[i] = 0;
                     }

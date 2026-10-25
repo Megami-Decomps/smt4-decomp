@@ -1,13 +1,13 @@
 /* NON_MATCHING: result/sign-test register allocation and zero-value lifetime differ from retail. */
+#include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
+#include "nn/fs/ArchiveCreateFile.h"
 
 extern "C" {
 void FUN_00254824(u32 result);
 s32 FUN_00254884(const void *path, u8 *normalized, u32 encoding);
-u32 FUN_002ad80c(const u8 *path, s64 size);
 void *FUN_002ad888(void);
 u32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);
-void FUN_002c3510(u32 result);
 void asdFatalError(void);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
@@ -21,7 +21,7 @@ u32 FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
         return result;
     }
     FUN_002ad888();
-    u32 result = FUN_002ad80c(normalized, size);
+    u32 result = FUN_002ad80c(reinterpret_cast<const u16 *>(normalized), size);
     FUN_002c3510(result);
     if ((s32)(result & 0x80000000) < 0) {
         FUN_00254824(result);

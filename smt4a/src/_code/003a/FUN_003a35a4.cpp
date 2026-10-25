@@ -1,4 +1,4 @@
-/* NON_MATCHING: The destination/current-map comparison operands are allocated to opposite registers. */
+/* NON_MATCHING: named current-map comparison fixes loads/registers; cmp operands remain reversed. */
 #include "gamedata/NaviDestinationRecord.h"
 #include "shard/NaviMain.h"
 #include "map/mapDepart.h"
@@ -22,7 +22,8 @@ void FUN_003a35a4(void)
     NaviMapRequest request = {destination->mapId, destination->unk30, destination->unk32};
     main->mapRequest = request;
     pair20638Set(&main->transition, destination->unk32, destination->unk34, destination->unk36);
-    if ((u32)destination->mapId != main->currentMap) {
+    u32 currentMap = main->currentMap;
+    if ((u32)destination->mapId != currentMap) {
         menuEnterState11(&main->transition);
     } else {
         g_gameState.navigation.naviMapPending = 1;

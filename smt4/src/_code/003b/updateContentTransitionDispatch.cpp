@@ -26,7 +26,7 @@ void messageMainFinishWindow();
 u32 FUN_0022b8c0(void *);
 void FUN_003b875c(ContentTransition *);
 void FUN_0022b778(ContentTransition *);
-void FUN_0022b83c(ContentTransition *, void *);
+void uiClampScrollOffset(ContentTransition *, void *);
 void FUN_00341a3c(u32);
 
 void updateContentTransitionDispatch(ContentTransition *scene)
@@ -78,7 +78,7 @@ void updateContentTransitionDispatch(ContentTransition *scene)
         }
     }
     FUN_0022b778(scene);
-    FUN_0022b83c(scene, update->input);
+    uiClampScrollOffset(scene, update->input);
     if (update->processActive)
         FUN_00341a3c(update->process);
 }

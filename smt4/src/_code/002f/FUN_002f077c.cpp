@@ -1,5 +1,5 @@
 #include "battle/btlScript.h"
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -13,7 +13,6 @@ typedef struct BtlUnit {
     /* 0x28 */ UnitStats *stats;
 } BtlUnit;
 
-extern BtlUnit *btlUnitGet(u32 unit);
 extern void scrSetResult(s32 value);
 extern s32 scrGetArg(u32 index);
 
@@ -22,7 +21,7 @@ u32 FUN_002f077c(void)
 {
     s32 index = scrGetArg(0);
 
-    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(stats->skills[index] >> 10 == 2);
     return 1;

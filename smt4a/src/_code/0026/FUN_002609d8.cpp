@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002609d8` (_code @ 0x2609d8, 0x7ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" {
 
@@ -18,7 +20,6 @@ int FUN_001b4a00(float *, float *);
 int mathMatrixTranslateLocal(float *, float *, float *);
 int FUN_001f3eec(void);
 int renderCtxCallB(float *);
-int FUN_003fabfc(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 
@@ -331,8 +332,12 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
       temp_v11 = VectorFloatToUnsigned(temp_v13 * 255.0f,3);
       temp_v9 = VectorFloatToUnsigned(temp_v13 * 255.0f,3);
       temp_v10 = VectorFloatToUnsigned(temp_v14 * 255.0f,3);
-      FUN_003fabfc(*(unsigned int *)(temp_v2 + 0x4c),0,&temp_v17,
-                   temp_v10 + (temp_v9 + (temp_v11 + temp_v3 * 0x100) * 0x100) * 0x100);
+      GpuFloatEncoding positionX;
+      positionX.bits = (u32)temp_v17;
+      SpriteDrawVector3 position = {positionX.value, temp_v18, temp_v16};
+      FUN_003fabfc((SpriteDrawOwner *)*(unsigned int *)(temp_v2 + 0x4C), 0, &position,
+                   temp_v10 + (temp_v9 + (temp_v11 + temp_v3 * 0x100) * 0x100) * 0x100,
+                   0, *(float *)(temp_v2 + 0x5C), *(float *)(temp_v2 + 0x34));
     }
   }
   return;

@@ -9,7 +9,7 @@ int eventCommandDispatchPendingCleanup(void);
 int FUN_002276f8(...);
 int battleResetCounterAndFlag(void);
 int modelSetResetSlots(...);
-int FUN_0027de24(...);
+int modelManagerReleaseSlots(...);
 int asdSoundSelectSlotB(...);
 int btlUiRecountParty(...);
 int objDestroyChild(...);
@@ -20,7 +20,7 @@ int FUN_001d2710(...);
 int btlEntryValuesCopy(...);
 int FUN_00227b14(int *, int, int, int);
 int FUN_00229098(int *);
-int FUN_002296f4(...);
+int frameRangeExtend(...);
 int FUN_00229c5c(int *, int, int);
 int FUN_00244fb0(...);
 int FUN_00246454(int, unsigned int *, unsigned int *);
@@ -64,7 +64,7 @@ extern int DAT_004e316c; /* 0x4e316c */
 /* Supplied declaration required: btlEntryValuesCopy. */
 /* Supplied declaration required: FUN_00227b14. */
 /* Supplied declaration required: FUN_00229098. */
-/* Supplied declaration required: FUN_002296f4. */
+/* Supplied declaration required: frameRangeExtend. */
 /* Supplied declaration required: FUN_00229c5c. */
 /* Supplied declaration required: battleResetCounterAndFlag. */
 extern int *gameSlotFindByCategory(void);
@@ -75,7 +75,7 @@ extern unsigned int saveResolvePartySlot(int);
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
 /* Supplied declaration required: modelSetResetSlots. */
-/* Supplied declaration required: FUN_0027de24. */
+/* Supplied declaration required: modelManagerReleaseSlots. */
 extern int *FUN_0027e3b8(unsigned int *);
 /* Supplied declaration required: btlEventSelectTrigger. */
 extern int *FUN_00293230(int);
@@ -279,12 +279,12 @@ LAB_003d243c:
     }
     if (temp_v0 == 6) {
       FUN_0026beb4(0,puVar8,1,*(unsigned int *)(temp_v2 + 0x28),1);
-      FUN_002296f4(param_1,puVar8,(int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x62),0,5,5);
+      frameRangeExtend(param_1,puVar8,(int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x62),0,5,5);
       return param_1;
     }
     if (temp_v0 == 0xf) {
       FUN_0026beb4(piVar2,puVar8,0,*(unsigned int *)(temp_v2 + 0x28),1);
-      FUN_002296f4(param_1,puVar8,(int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x62),0,5,5);
+      frameRangeExtend(param_1,puVar8,(int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x62),0,5,5);
       return param_1;
     }
     break;
@@ -362,7 +362,7 @@ code_r0x0027e38c:
     FUN_002276f8(DAT_00435d18);
     *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) & 0xffff7fff;
     battleResetCounterAndFlag();
-    FUN_0027de24(DAT_00435d18);
+    modelManagerReleaseSlots(DAT_00435d18);
     modelSetResetSlots(DAT_00435d18);
     *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;
     eventCommandDispatchPendingCleanup();

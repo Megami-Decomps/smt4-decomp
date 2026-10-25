@@ -15,7 +15,7 @@ void bustupCutAnimRequestStopSlots(void);
 void eventTexRequestStopAll(void);
 u32 FUN_002ba85c(void);
 void FUN_0021bdac(u32, u32, u32, s32, s32, s32);
-void FUN_0023723c(u32, s32, u32, s32, s32, const u8 *, const u8 *);
+void asdTextFormatStream(u32, s32, u32, s32, s32, const u8 *, const u8 *);
 void msgBoxFlagsSetBit7(u32 box);
 void sortMenuAcquire(u32, s32);
 void FUN_0031f208(u8 label);
@@ -52,7 +52,7 @@ u32 FUN_0036dbd8(void)
         u32 argument = scrGetArg(0);
         u32 commandFrame = scrGetCommandFrame();
         FUN_0021bdac(message, argument, commandFrame, 6, 0, 0);
-        FUN_0023723c(work->box, 4, 0xffffffff, 0, 3, &LAB_0036de90, &LAB_0036de54);
+        asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, &LAB_0036de90, &LAB_0036de54);
         msgBoxFlagsSetBit7(work->box);
         work->unk19C4 = 0;
         work->flags |= 0x20;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: inlined table resolver merges fallback tail; table/block index saved registers and bool materialization differ. */
+/* NON_MATCHING: inlined resolver merges fallback tail and exchanges block/table saved registers; explicit variant selection now matches zero/one materialization. */
 #include "gamedata/NamedVariantTable.h"
 
 extern "C" {
@@ -43,7 +43,9 @@ NamedVariantTableEntry *FUN_00335660(s32 variant, const char *name, s32 invert)
         entries = namedVariantResolve(key->block, key->table);
     else
         entries = namedVariantResolve(0, 0);
-    u32 selected = variant != 0;
+    u32 selected = 0;
+    if (variant)
+        selected = 1;
     if (invert)
         selected = 1 - selected;
     return entries + selected;

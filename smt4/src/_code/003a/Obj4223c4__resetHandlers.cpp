@@ -19,7 +19,7 @@ extern int FUN_003a7b54(...); /* 0x3a7b54 */
 extern int partyRefreshCompleteAndUpdateSummaries(...); /* 0x3a7be4 */
 extern int FUN_003a7de4(...); /* 0x3a7de4 */
 extern int FUN_003a7f98(...); /* 0x3a7f98 */
-extern int FUN_003a80f4(...); /* 0x3a80f4 */
+extern int bibleApplyConfirmedSelection(...); /* 0x3a80f4 */
 extern int FUN_003a8240(...); /* 0x3a8240 */
 extern int FUN_003a836c(...); /* 0x3a836c */
 
@@ -62,7 +62,7 @@ void Obj4223c4::resetHandlers()
   *(unsigned int *)(param_1 + 0xa5e4) = 0;
   *(romwright_code **)(param_1 + 0xa5e8) = FUN_003a836c;
   *(unsigned int *)(param_1 + 0xa5ec) = 0;
-  *(romwright_code **)(param_1 + 0xa5f0) = FUN_003a80f4;
+  *(romwright_code **)(param_1 + 0xa5f0) = bibleApplyConfirmedSelection;
   *(unsigned int *)(param_1 + 0xa5f4) = 0;
   *(romwright_code **)(param_1 + 0xa5f8) = partyRefreshCompleteAndUpdateSummaries;
   *(unsigned int *)(param_1 + 0xa5fc) = 0;

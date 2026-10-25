@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail branches around an unpredicated tail call to asdTMTexTableReleaseNode (separate epilogue); built predicates it (movge/blge) */
+/* NON_MATCHING: recovered table/index release arguments; retail branches to an unconditional tail call while armcc predicates the call. */
 #include "gamedata/DataTable.h"
 
 struct TexTableKey {
@@ -9,7 +9,7 @@ struct TexTableKey {
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_002321f8(const void *a, const void *b);
-void asdTMTexTableReleaseNode(s32 node);
+void asdTMTexTableReleaseNode(s32 table, s32 node);
 
 /* Releases texture table node 0x34 when the id has a non-negative entry in data table 0x47. */
 void FUN_0023a55c(u16 id)
@@ -21,9 +21,11 @@ void FUN_0023a55c(u16 id)
 
     key.id = id;
     TexTableKey *found = (TexTableKey *)libc_bsearch(&key, entries, count, 4, FUN_002321f8);
-    if (found != NULL && found->node >= 0) {
-        asdTMTexTableReleaseNode(0x34);
-    }
+    if (found == NULL)
+        return;
+    if (found->node < 0)
+        return;
+    asdTMTexTableReleaseNode(0x34, found->node);
 }
 
 } /* extern "C" */

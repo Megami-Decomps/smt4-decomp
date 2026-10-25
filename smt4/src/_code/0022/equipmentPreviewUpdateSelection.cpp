@@ -10,7 +10,7 @@ s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *);
 u32 FUN_003c2d54(Scene3aSlotInfo *);
 void FUN_002996d8(u32);
 s32 FUN_00299fc0();
-s32 FUN_002ae3c0(u32);
+s32 contentGetEntryKind(u32);
 void FUN_0029963c(u32, u16);
 const PlayerEquipmentPreview *gameGetPlayerData();
 void *__aeabi_memcpy4(void *, const void *, u32);
@@ -33,11 +33,11 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
         }
     } else {
         if (item) {
-            if (FUN_002ae3c0(item) == 4)
+            if (contentGetEntryKind(item) == 4)
                 FUN_0029963c(0, item);
-            if (FUN_002ae3c0(item) == 5)
+            if (contentGetEntryKind(item) == 5)
                 FUN_0029963c(1, item);
-            if (FUN_002ae3c0(item) == 6)
+            if (contentGetEntryKind(item) == 6)
                 FUN_0029963c(2, item);
         }
         scene->preview.requested = 1;
@@ -47,7 +47,7 @@ void equipmentPreviewUpdateSelection(Scene3a *scene)
         PlayerEquipmentPreview player;
         __aeabi_memcpy4(&player, gameGetPlayerData(), sizeof(player));
         if (item) {
-            switch (FUN_002ae3c0(item)) {
+            switch (contentGetEntryKind(item)) {
             case 2: player.equipment[0] = item; break;
             case 3: player.equipment[1] = item; break;
             case 4: player.equipment[3] = item; break;

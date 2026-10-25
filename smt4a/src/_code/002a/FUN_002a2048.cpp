@@ -29,12 +29,12 @@ f32 *FUN_002a2048(f32 *matrix, const f32 *translation, s32 mode)
         m[14] = translation[2];
         return matrix;
     case 1:
-        m[12] = translation[1] * m[4] + translation[2] * m[8] +
-                m[12] + translation[0] * m[0];
-        m[13] = translation[1] * m[5] + translation[2] * m[9] +
-                m[13] + translation[0] * m[1];
-        m[14] = translation[1] * m[6] + translation[2] * m[10] +
-                m[14] + translation[0] * m[2];
+        m[12] = translation[0] * m[0] + translation[1] * m[4] +
+                translation[2] * m[8] + m[12];
+        m[13] = translation[0] * m[1] + translation[1] * m[5] +
+                translation[2] * m[9] + m[13];
+        m[14] = translation[0] * m[2] + translation[1] * m[6] +
+                translation[2] * m[10] + m[14];
         return matrix;
     case 2:
         m[12] += translation[0];

@@ -1,14 +1,14 @@
 /* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free) and the g_uiQuest address in r8; the build coalesces them */
-/* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free); the build coalesces them */
 #include "common.h"
 
 extern "C" {
 
 int jobStop(unsigned int, int);
 int ifTouchRegionRemove(void);
-int asdMemFree(...);
+void asdMemFree(void *allocation);
 int asdTMTexTableReleaseNode(int, int);
-int scrScriptProcessDestroy(unsigned int);
+struct ScriptResource;
+void scrScriptProcessDestroy(ScriptResource *resource);
 int dataTableFree(int);
 int uiFadeSetVisible(int);
 int asdTMTexTableFreeEntry(int);
@@ -21,12 +21,12 @@ typedef struct TouchRegions {
 typedef struct UiQuest {
     /* 0x000 */ u32 job;
     /* 0x004 */ u8 unk004[0x8F0];
-    /* 0x8F4 */ u32 buffer8f4;
-    /* 0x8F8 */ u32 buffer8f8;
-    /* 0x8FC */ u32 process8fc;
-    /* 0x900 */ u32 buffer900;
-    /* 0x904 */ u32 buffer904;
-    /* 0x908 */ u32 process908;
+    /* 0x8F4 */ void *buffer8f4;
+    /* 0x8F8 */ void *buffer8f8;
+    /* 0x8FC */ ScriptResource *process8fc;
+    /* 0x900 */ void *buffer900;
+    /* 0x904 */ void *buffer904;
+    /* 0x908 */ ScriptResource *process908;
     /* 0x90C */ u8 unk90c[0x3F4];
     /* 0xD00 */ TouchRegions touch;
 } UiQuest;

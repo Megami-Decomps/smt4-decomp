@@ -1,4 +1,4 @@
-/* NON_MATCHING: register/addressing only: retail loads the unit array pointer once (r1) and addresses flags and HP through the scaled index (`mov r2, #200; add r0, r2, r0, lsl #3`); built copies index to r4 after `mov r1, r2` and derives separate addresses. */
+/* NON_MATCHING: HP <= 0 predicate recovered; scaled unit-array address folds into writeback rather than separate flags/HP offsets. */
 #include "common.h"
 
 extern "C" {
@@ -42,9 +42,9 @@ u32 FUN_00229914(BattleState **stateRef, CopyTable *table, s32 index)
         index = entry->unitIndex;
     }
     if (table->entries[index].valueA == 0) {
-        BattleUnit *unit = &(*stateRef)->units[index];
+        BattleUnit *units = (*stateRef)->units;
 
-        if ((unit->flags & 1) != 0 && (unit->flags & 0x400000) == 0 && unit->hp < 1) {
+        if ((units[index].flags & 1) != 0 && (units[index].flags & 0x400000) == 0 && units[index].hp <= 0) {
             return 1;
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the VFP constant registers differ (retail loads 400,240,0 into s6,s5,s4). */
+/* NON_MATCHING: horizontal-extent constant uses s3 instead of s6, and zero/global literal ordering differs; named rectangle bounds recover the remaining VFP constants. */
 #include "ui/FrameTex.h"
 
 extern "C" {
@@ -8,14 +8,18 @@ extern FrameWorkA* g_frameTex;
 void FUN_00283cf4(u32 first, u32 second, u8 option, u32 param, f32 horizontalPadding, f32 verticalPadding)
 {
     FrameWorkA* work = g_frameTex;
-    work->overlayX[0] = -horizontalPadding;
-    work->overlayX[1] = horizontalPadding + 400.0f;
-    work->overlayX[2] = -horizontalPadding;
-    work->overlayX[3] = horizontalPadding + 400.0f;
-    work->overlayY[0] = -verticalPadding;
-    work->overlayY[1] = -verticalPadding;
-    work->overlayY[2] = verticalPadding + 240.0f;
-    work->overlayY[3] = verticalPadding + 240.0f;
+    f32 left = -horizontalPadding;
+    f32 right = horizontalPadding + 400.0f;
+    f32 top = -verticalPadding;
+    f32 bottom = verticalPadding + 240.0f;
+    work->overlayX[0] = left;
+    work->overlayX[1] = right;
+    work->overlayX[2] = left;
+    work->overlayX[3] = right;
+    work->overlayY[0] = top;
+    work->overlayY[1] = top;
+    work->overlayY[2] = bottom;
+    work->overlayY[3] = bottom;
     work->overlayResource = second;
     work->overlayValue = 0.0f;
     work->overlayOption = option;

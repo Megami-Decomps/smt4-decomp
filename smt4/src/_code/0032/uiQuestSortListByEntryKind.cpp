@@ -36,7 +36,7 @@ extern int FUN_002193bc(const void *, const void *);
 extern int FUN_00219488(const void *, const void *);
 extern int dataTableCompareRecordValues(const void *, const void *);
 extern int FUN_002d04ac(const void *, const void *);
-extern int FUN_002dcb60(const void *, const void *);
+extern int recordCompareKindAndOrder(const void *, const void *);
 extern int FUN_002f2798(const void *, const void *);
 
 /* Sorts the menu's list with the comparison of the selected quest entry's kind (the primary or
@@ -63,7 +63,7 @@ void uiQuestSortListByEntryKind(s32 mode)
             if (primary) {
                 FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_001f62ec);
             } else {
-                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, FUN_002dcb60);
+                FUN_002b7bca(list, FUN_0029ee54(cursor), 2, recordCompareKindAndOrder);
             }
         }
         if ((*info & 0x7F) == 0x18) {

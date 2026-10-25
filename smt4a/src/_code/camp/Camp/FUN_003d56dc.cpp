@@ -37,8 +37,8 @@ int useCounterRelease(void);
 int clearFlags310To31F(void);
 int campCecSetValue(...);
 int messageDismissNumericBanner(...);
-int FUN_0039c244(void);
-int FUN_0039c2a4(...);
+int saveLoadStartDefaultWindow(void);
+int saveLoadStartWindowWithArgument(...);
 int FUN_003d0bc0(...);
 int flag0CSet(...);
 
@@ -335,8 +335,8 @@ extern int saveLoadUIHasResult(void);
 extern int aocDataBlockHasEntries(void);
 extern int flagAt4IsClear(void);
 /* Supplied declaration required: FUN_0039c0e4. */
-/* Supplied declaration required: FUN_0039c244. */
-/* Supplied declaration required: FUN_0039c2a4. */
+/* Supplied declaration required: saveLoadStartDefaultWindow. */
+/* Supplied declaration required: saveLoadStartWindowWithArgument. */
 extern int FUN_0039c608(void);
 extern unsigned short uiQuestRunEnabledAction(void);
 /* Supplied declaration required: freeTexTable24. */
@@ -1648,7 +1648,7 @@ joined_r0x003d7c38:
       temp_v4 = temp_v4 + 1;
     } while (temp_v4 < 8);
     FUN_00163aa4(puVar2 + 0x222);
-    if ((puVar2[5] == 1) && (FUN_0039c2a4(1), puVar2[7] == 0x37)) {
+    if ((puVar2[5] == 1) && (saveLoadStartWindowWithArgument(1), puVar2[7] == 0x37)) {
       flag0CSet(DAT_00588e2c);
     }
     if ((((int)puVar2[5] >= 2) && (*(char *)((int)puVar2 + 0x6e2) != '\0')) &&
@@ -1676,7 +1676,7 @@ joined_r0x003d7c38:
     break;
   case 0x32:
     if (puVar2[5] == 1) {
-      FUN_0039c244();
+      saveLoadStartDefaultWindow();
     }
     if (((int)puVar2[5] >= 2) && (temp_v4 = FUN_002ef9f0(), temp_v4 == 0)) {
       temp_v4 = saveLoadUIHasResult();

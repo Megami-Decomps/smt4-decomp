@@ -1,4 +1,5 @@
 #include "shard/Shard0034.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -6,7 +7,7 @@ extern s32 DAT_0057f6dc;
 extern u32 padButtonRepeat(u32 button);
 extern u32 padButtonIsPressed(u32 button);
 extern u32 gameFlagIsSet(s32 index);
-extern void gameFlagSetValue(s32 index, u32 value, s32 flag);
+
 
 /* Moves the 0x1500-entry flag browser cursor with the D-pad / shoulder buttons and toggles the flag under it. */
 u32 flagBrowserStep(void)

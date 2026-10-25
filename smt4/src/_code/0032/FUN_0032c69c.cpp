@@ -4,7 +4,7 @@
 extern "C" {
 
 extern void *jyoucyuGetTableEntry(s32 index);
-extern void bgmStop(s32 handle, s32 fade, s32 mode);
+extern void bgmStop(s32 handle, u32 fade, s32 mode);
 
 /* Stops all BGM with a 15-frame fade, unless the jyoucyu table entry 1 is set. */
 void FUN_0032c69c(void)

@@ -65,7 +65,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int *uniteGetWork(void);
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029b7b8(unsigned int, unsigned short, unsigned char *);
+extern int partyClassifyRequestedSources(unsigned int, unsigned short, unsigned char *);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 extern int FUN_0029efa8(unsigned int *);
@@ -145,7 +145,7 @@ void FUN_00215d68(fn_00215d68_arg0 *param_1,int param_2)
         temp_v8 = temp_v8 + 1;
       } while (temp_v8 < (int)(unsigned int)*(unsigned short *)(temp_v14 + 0xe));
     }
-    temp_v8 = FUN_0029b7b8(*puVar2,temp_v10,temp_v16);
+    temp_v8 = partyClassifyRequestedSources(*puVar2,temp_v10,temp_v16);
     FUN_002bf380(2,0x24,6,param_1,param_2,0x65);
     FUN_002bf288(2,0x24,0x14b,param_1,param_2,0x6a);
     FUN_002bf288(2,0x24,0x14c,param_1,param_2,0x6a);

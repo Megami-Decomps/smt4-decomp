@@ -5,7 +5,7 @@
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
-s32 hasFlag80Or1000(u32 unit);
+u32 hasFlag80Or1000(u32 unit, u32 *flags);
 s32 FUN_003eebf4(const BtlMainStateA *battle, s32 ordinal);
 bool FUN_0047f78c();
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
@@ -17,7 +17,8 @@ u32 FUN_0047f4cc(u32 sound, f32 volume, f32 gain, f32 pitch);
 void FUN_003eed44(BtlMainStateA *battle)
 {
     if (battle->voiceGate.blocked == 0 && battle->encounterGate.disabled == 0) {
-        if ((btlUnitGet(g_btlScriptUnit) == NULL || !hasFlag80Or1000(g_btlScriptUnit)) &&
+        ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+        if ((unit == NULL || !hasFlag80Or1000(g_btlScriptUnit, reinterpret_cast<u32 *>(unit))) &&
             FUN_003eebf4(battle, 1) < 0) {
             if ((battle->stateFlags64.bits & g_btlMain.voiceBlocking.blocked) == 0 &&
                 (battle->stateFlags64.bits & g_btlMain.voiceState.attempted) == 0) {

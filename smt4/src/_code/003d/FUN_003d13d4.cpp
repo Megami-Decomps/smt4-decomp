@@ -41,7 +41,7 @@ u8 *gameGetSlotTable(void);
 s32 partyHasEligibleMember(BattleSideInfo *side);
 void FUN_00246454(s32 offset, ActionWork *work, BattleUnit *unit);
 void FUN_0024b888(s32 offset, ActionWork *work, s32 down, s32 pick, f32 scale, s32 zero);
-void FUN_002296f4(BattleContext *context, ActionWork *work, s32 skill, s32 base, s32 a, s32 b);
+void frameRangeExtend(BattleContext *context, ActionWork *work, s32 skill, s32 base, s32 a, s32 b);
 
 /* Sets up the target markers of an enemy action: marks the `count` targets the action covers (the
  * allowed units, or the party members for a party action), resolves which one is the selected pick
@@ -113,7 +113,7 @@ u32 FUN_003d13d4(BattleContext *context, ActionWork *work, u32 a, u32 b, f32 sca
         FUN_0024b888(step * count + base + selected, work, 0, pick, scale, 0);
         work->flags |= WORK_MARKED;
     }
-    FUN_002296f4(context, work, *(s16 *)(work->actor + 0x62), base, 15, 20);
+    frameRangeExtend(context, work, *(s16 *)(work->actor + 0x62), base, 15, 20);
     return 1;
 }
 

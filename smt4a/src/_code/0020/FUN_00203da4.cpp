@@ -37,7 +37,7 @@ void bustupCutAnimClearFlags(void);
 void eventTexClearFlagB8(void);
 s32 bustupCutAnimIsStateFive(void);
 s32 FUN_00163e84(u32 value);
-void FUN_0023723c(ObjectHandle handle, u32 a, u32 b, u32 c, u32 d, const char *format, const char *text);
+void asdTextFormatStream(ObjectHandle handle, u32 a, u32 b, u32 c, u32 d, const char *format, const char *text);
 void asdTextDrawDirectoryEntry(ObjectHandle handle, u32 kind, u32 textHandle, u32 a, u32 b,
                                const char *text, u32 arg);
 
@@ -56,7 +56,7 @@ void FUN_00203da4(MessageOpenWork *work, const char *text, u32 arg, s32 kind, u3
     } else {
         work->empty = 0;
         if (work->hasPending != 0) {
-            FUN_0023723c(handle, 3, 0xFFFFFFFF, 0, 3, "%s", text);
+            asdTextFormatStream(handle, 3, 0xFFFFFFFF, 0, 3, "%s", text);
         } else if (kind == 12 || kind == 13) {
             asdTextDrawDirectoryEntry(handle, 3, 0xFFFFFFFF, 0, 3, text, arg);
         } else if (kind == 11) {

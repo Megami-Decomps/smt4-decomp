@@ -26,7 +26,7 @@ int FUN_002c198c(...);
 int requestForward(...);
 
 int FUN_001ee4e4(...);
-int FUN_00288ef0(...);
+int unitGetStereoScreenPosition(...);
 int FUN_00293ac0(void);
 int fontMeasureLineAdvance(...);
 int drawSetColorFromRGBA8(...);
@@ -120,7 +120,7 @@ extern int g_titleScene; /* 0x44ea00 */
 extern int isLowThreshold(int, int);
 extern unsigned int FUN_00288ddc(int, int);
 /* Supplied declaration required: FUN_00288e68. */
-/* Supplied declaration required: FUN_00288ef0. */
+/* Supplied declaration required: unitGetStereoScreenPosition. */
 /* Supplied declaration required: FUN_00293ac0. */
 extern int FUN_0029e9cc(unsigned short);
 /* Supplied declaration required: FUN_002b0750. */
@@ -237,17 +237,17 @@ unsigned char FUN_001a321c(void)
   temp_v38 = (char *)(temp_v34 + 0x1e67);
   temp_v18 = 0;
   if (*temp_v38 != '\x03' && *temp_v38 != '\t') {
-    FUN_00288ef0(&temp_v28,&temp_v30,9);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,9);
     efctSetSpeed();
     FUN_002bf288(2,0x1a,0,temp_v28,temp_v30,0x81);
     efctSetSpeed();
-    FUN_00288ef0(&temp_v28,&temp_v30,7);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,7);
     efctSetSpeed();
     FUN_002bf288(2,0x1a,1,temp_v28,temp_v30,0x81);
     temp_v7 = temp_v34;
     if (-1 < *(char *)(temp_v34 + 0x12ef)) {
       FUN_002bf288(2,0x1a,0xb5,temp_v28,temp_v30,0x81);
-      FUN_00288ef0(&temp_v28,&temp_v30,8);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,8);
       if (*(char *)(temp_v7 + 0x12f4) != '\0') {
         FUN_002bf288(2,0x1a,0xb6,temp_v28,temp_v30,0x83);
         FUN_002bf288(2,0x1a,0xb7,temp_v28,temp_v30,0x83);
@@ -279,7 +279,7 @@ unsigned char FUN_001a321c(void)
       FUN_002be5a4(2,0xff,temp_v35,temp_v28);
     }
     efctSetSpeed();
-    FUN_00288ef0(&temp_v28,&temp_v30,8);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,8);
     efctSetSpeed();
     FUN_002bf288(2,0x1a,2,temp_v28,temp_v30,0x81);
   }
@@ -289,7 +289,7 @@ unsigned char FUN_001a321c(void)
     temp_v7 = FUN_00293ac0();
     temp_v17 = (float)temp_v18;
     if (temp_v7 >= 2) {
-      FUN_00288ef0(&temp_v28,&temp_v30,8);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,8);
       efctSetSpeed();
       FUN_002bf288(2,0x1a,3,temp_v28,temp_v30,0x81);
       FUN_002bf288(2,0x1a,4,temp_v28,temp_v30,0x81);
@@ -330,7 +330,7 @@ unsigned char FUN_001a321c(void)
       }
     }
     if (*(int *)(temp_v34 + 0x12dc) >= 7) {
-      FUN_00288ef0(&temp_v28,&temp_v30,6);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,6);
       pcVar21 = (char *)(temp_v34 + 0x1e66);
       temp_v8 = *(unsigned int *)(temp_v34 + 0x1898);
       if (*pcVar21 == '\f' || *pcVar21 == '\n') {
@@ -377,11 +377,11 @@ unsigned char FUN_001a321c(void)
   temp_v20 = 0.305f;
   if ((*temp_v38 == '\b') || (*(short *)(temp_v34 + 0x1300) == 0)) goto LAB_001a3ea8;
   if ((*(char *)(temp_v5 + 0x1e60) != '\0') || (*temp_v38 != '\t')) {
-    FUN_00288ef0(&temp_v28,&temp_v30,0xe);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xe);
     if ((*(int *)(temp_v34 + 0x12dc) >= 7) && (*temp_v38 == '\x05' || *temp_v38 == '\x06')) {
-      FUN_00288ef0(&temp_v28,&temp_v30,0xb);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xb);
       FUN_002bf288(2,0x1a,0xbb,temp_v28,temp_v30,0xc9);
-      FUN_00288ef0(&temp_v28,&temp_v30,0xc);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xc);
       FUN_002bf288(2,0x1a,0xbc,temp_v28,temp_v30,0xce);
       temp_v7 = g_titleScene;
       if ((*(char *)(temp_v34 + 0x759) != '\0') && (*(char *)(temp_v34 + 0x75e) != '\0')) {
@@ -394,7 +394,7 @@ unsigned char FUN_001a321c(void)
           *(unsigned char *)(temp_v7 + 0x12c4) = 0;
         }
         if ((*(char *)(temp_v34 + 0x7e5) != '\0') && (*(char *)(temp_v34 + 0x7ea) != '\0')) {
-          FUN_00288ef0(&temp_v28,&temp_v30,0xd);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xd);
           temp_v7 = vec2GetXInt(temp_v34 + 0x1e8);
           temp_v6 = vec2GetYInt(temp_v34 + 0x1e8);
           FUN_002bf288(2,0x1a,0xbd,(unsigned char *)((int)temp_v28 + temp_v7),temp_v6 + (int)temp_v30,0xd3)
@@ -402,7 +402,7 @@ unsigned char FUN_001a321c(void)
         }
         else {
           efctSetSpeed();
-          FUN_00288ef0(&temp_v28,&temp_v30,0xd);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xd);
           FUN_002bf288(2,0x1a,0xbe,temp_v28,temp_v30,0xd3);
           FUN_002bf288(2,0x1a,0xbe,temp_v28,temp_v30,0xd4);
           efctSetSpeed();
@@ -418,24 +418,24 @@ unsigned char FUN_001a321c(void)
         }
       }
     }
-    FUN_00288ef0(&temp_v28,&temp_v30,0xf);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
     FUN_002bf288(2,0x1a,0x1f,temp_v28,temp_v30,0xd8);
     pcVar21 = (char *)(temp_v34 + 0x1e66);
     temp_v0 = *pcVar21;
     if (temp_v0 != '\r' && temp_v0 != '\x06') {
-      FUN_00288ef0(&temp_v28,&temp_v30,0xf);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
       FUN_002bf380(2,0x1a,0,temp_v28,temp_v30,0xd8);
     }
-    FUN_00288ef0(&temp_v28,&temp_v30,0x10);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x10);
     FUN_002bf288(2,0x1a,0x2d,temp_v28,temp_v30,0xd8);
     FUN_002bf288(2,0x1a,0x2e,temp_v28,temp_v30,0xd8);
     FUN_002bf288(2,0x1a,0x38,temp_v28,temp_v30,0xd8);
     FUN_002bf288(2,0x1a,0x39,temp_v28,temp_v30,0xd8);
-    FUN_00288ef0(&temp_v28,&temp_v30,0x11);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x11);
     FUN_002bf288(2,0x1a,0x4a,temp_v28,temp_v30,0xd8);
     temp_v7 = 0;
     do {
-      FUN_00288ef0(&temp_v28,&temp_v30,temp_v7 + 0x12);
+      unitGetStereoScreenPosition(&temp_v28,&temp_v30,temp_v7 + 0x12);
       temp_v6 = FUN_002bf4f8(0x1a,temp_v7 + 0x7b);
       FUN_002bf288(2,0x1a,0x68,temp_v28,(int)*(short *)(temp_v6 + 10) + (int)temp_v30,0xd8);
       FUN_002bf288(2,0x1a,temp_v7 + 0x69,temp_v28,(int)temp_v30 + (int)*(short *)(temp_v6 + 10),0xdd);
@@ -447,7 +447,7 @@ unsigned char FUN_001a321c(void)
       temp_v17 = (float)temp_v19;
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 5);
-    FUN_00288ef0(&temp_v28,&temp_v30,0x17);
+    unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x17);
     if (*(char *)(temp_v5 + 0x1e60) != '\0') {
       if (*pcVar21 == '\0') {
         FUN_002bf288(2,0x1a,0x8a,temp_v28,temp_v30,0xd8);
@@ -475,7 +475,7 @@ LAB_001a3ea8:
         temp_v6 = temp_v34;
         if (*temp_v38 != '\b') {
           if (*(char *)(temp_v34 + 0x12f3) == '\0') {
-            FUN_00288ef0(&temp_v28,&temp_v30,0xe);
+            unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xe);
             if (*pcVar21 != '\0') {
               if (*pcVar21 != '\r') {
                 temp_v21 = FUN_002bd068(*puVar18);
@@ -516,7 +516,7 @@ LAB_001a3ea8:
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
             FUN_002be5a4(3,0xffffffff,temp_v35);
           }
-          FUN_00288ef0(&temp_v28,&temp_v30,0xf);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
           psVar24 = (short *)(unsigned int)*(unsigned short *)(temp_v7 + 0x1302);
           drawSetColorFromRGBA8(0xff);
           if (*(char *)(temp_v5 + 0x1e62) != '\0') {
@@ -541,7 +541,7 @@ LAB_001a3ea8:
           FUN_002bdf94(6,(unsigned char *)((int)temp_v28 + (int)*(short *)(temp_v10 + 8)),
                        (int)temp_v30 + (int)*(short *)(temp_v10 + 10),1,2,0xdd,&LAB_001a43f4);
           FUN_002bed3c();
-          FUN_00288ef0(&temp_v28,&temp_v30,0xf);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xf);
           temp_v10 = temp_v34;
           if (*pcVar21 != '\r' && *pcVar21 != '\x06') {
             psVar24 = *(short **)(temp_v34 + 0x1304);
@@ -564,7 +564,7 @@ LAB_001a3ea8:
             FUN_002bed3c();
           }
           gameDataBlocksGetSaveData();
-          FUN_00288ef0(&temp_v28,&temp_v30,0x10);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x10);
           temp_v2 = *(short *)(temp_v7 + 0x1308);
           temp_v3 = *(short *)(temp_v7 + 0x130c);
           psVar24 = (short *)(int)temp_v3;
@@ -833,7 +833,7 @@ LAB_001a3ea8:
             }
           }
           temp_v19 = (unsigned long long)(unsigned int)temp_v17;
-          FUN_00288ef0(&temp_v28,&temp_v30,0x11);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x11);
           FUN_002bed3c();
           temp_v10 = 0;
           do {
@@ -886,7 +886,7 @@ LAB_001a3ea8:
           do {
             psVar12 = (short *)0x0;
             drawSetColorFromRGBA8(0xff);
-            FUN_00288ef0(&temp_v28,&temp_v30,temp_v13 + 0x12);
+            unitGetStereoScreenPosition(&temp_v28,&temp_v30,temp_v13 + 0x12);
             temp_v36 = FUN_002bf4f8(0x1a,temp_v13 + 0x7b);
             temp_v23 = (short *)FUN_002bf4f8(0x1a,0x7a);
             if (temp_v13 != 0) {
@@ -1356,7 +1356,7 @@ LAB_001a3ea8:
             FUN_002bed3c();
             temp_v13 = temp_v13 + 1;
           } while (temp_v13 < 5);
-          FUN_00288ef0(&temp_v28,&temp_v30,0x17);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0x17);
           drawSetColorFromRGBA8(0xff);
           if (*pcVar21 == '\0') {
             psVar24 = (short *)(int)*(short *)(temp_v7 + 0x1310);
@@ -1567,7 +1567,7 @@ LAB_001a3ea8:
             temp_v13 = 6 - (temp_v13 + temp_v11);
             do {
               if (((unsigned int)*(unsigned short *)(temp_v7 + 0x1314) & (1 << (temp_v8 & 0xff))) != 0) {
-                FUN_00288ef0(&temp_v28,&temp_v30,(0x1d - temp_v10) - temp_v13);
+                unitGetStereoScreenPosition(&temp_v28,&temp_v30,(0x1d - temp_v10) - temp_v13);
                 temp_v12 = temp_v13 + temp_v10;
                 temp_v11 = FUN_002bf4f8(0x1a,temp_v12 + 0xa9);
                 FUN_00288844((unsigned char *)((int)*(short *)(temp_v11 + 8) + (int)temp_v28),
@@ -1587,7 +1587,7 @@ LAB_001a3ea8:
           }
           temp_v17 = (float)temp_v19;
           if ((*temp_v38 == '\x03') && (*(char *)(temp_v6 + 0x12f0) != '\0')) {
-            FUN_00288ef0(&temp_v28,&temp_v30,10);
+            unitGetStereoScreenPosition(&temp_v28,&temp_v30,10);
             FUN_002bf380(2,0x1a,1,temp_v28,temp_v30,0xdd);
             temp_v13 = 0;
 LAB_001a6868:
@@ -1595,7 +1595,7 @@ LAB_001a6868:
             temp_v14 = 0x3d;
 LAB_001a68b0:
             do {
-              FUN_00288ef0(&temp_v28,&temp_v30,10);
+              unitGetStereoScreenPosition(&temp_v28,&temp_v30,10);
               temp_v10 = FUN_002bf4f8(0x1a,temp_v13 + 0xa2);
               if (*(char *)(temp_v6 + 0x12ee) == temp_v13) {
                 FUN_002bf380(2,0x1a,3,(unsigned char *)((int)*(short *)(temp_v10 + 8) + (int)temp_v28),
@@ -1678,7 +1678,7 @@ LAB_001a68b0:
           }
         }
         else {
-          FUN_00288ef0(&temp_v28,&temp_v30,0xe);
+          unitGetStereoScreenPosition(&temp_v28,&temp_v30,0xe);
           FUN_002bf288(2,0x1a,0xc2,temp_v28,temp_v30,0xdd);
           temp_v8 = (unsigned int)*(unsigned short *)(temp_v5 + 0x1eb6);
           FUN_00288e68(temp_v8);

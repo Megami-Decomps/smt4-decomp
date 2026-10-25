@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail keeps DAT_0059ef80 in a register and subtracts 0xa8 from it; armcc folds the offset into the literal. */
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct Effect003cc1a0 {
     /* 0x00 */ u8 unk00[0x60];
@@ -16,13 +16,12 @@ extern "C" {
 
 extern u8 DAT_0059ef80[];
 
-void FUN_0031ab38(void *body, u32 value, const void *entry);
 
 /* Forwards the effect's body (0x60) and value (0x8c) with the entry 0xa8 before DAT_0059ef80. */
 void FUN_003cc1a0(Object003cc1a0 *object)
 {
     Effect003cc1a0 *effect = object->effect;
-    FUN_0031ab38(effect->body, effect->value, DAT_0059ef80 - 0xa8);
+    FUN_0031ab38(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0059ef80 - 0xa8), reinterpret_cast<EffectEditorOptions *>(DAT_0059ef80));
 }
 
 } /* extern "C" */

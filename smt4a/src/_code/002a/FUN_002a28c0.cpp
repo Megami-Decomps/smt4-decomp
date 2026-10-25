@@ -55,7 +55,7 @@ void FUN_002a4664(s32 *value);
 u8 FUN_002a46b8(void);
 void engineForwardVariadicCommand(CecMessageRecord *record, s32 value, u32 a, u32 b);
 u32 gameDataGetRecordValue(void);
-void FUN_0032e25c(CecMessageRecord *record, u32 value);
+void slotNameDisplaySetEntry(CecMessageRecord *record, u32 value);
 u32 gameDataBlocksGetWord27E8C(void);
 void rt_aeabi_memclr(void *block, u32 size);
 s32 cecQueryOptionalProcess(void);
@@ -86,7 +86,7 @@ void FUN_002a28c0(CecThreadWork *work)
             FUN_002a4664(&progress);
             engineForwardVariadicCommand(FUN_002bf520(), progress, 0, 0);
             FUN_002bf520()->gameFlag = FUN_002a46b8();
-            FUN_0032e25c(FUN_002bf520(), gameDataGetRecordValue());
+            slotNameDisplaySetEntry(FUN_002bf520(), gameDataGetRecordValue());
             FUN_002bf520()->word27E8C = gameDataBlocksGetWord27E8C();
             if (gameDataGetRecordValue() == 0)
                 rt_aeabi_memclr(FUN_002bf520()->ownerId, CEC_MESSAGE_RECORD_ID_SIZE);
@@ -103,7 +103,7 @@ void FUN_002a28c0(CecThreadWork *work)
                             FUN_002bf520();
                             cecProcessForward();
                         } else {
-                            FUN_0032e25c(FUN_002bf520(), 0);
+                            slotNameDisplaySetEntry(FUN_002bf520(), 0);
                             cecProcessCall2();
                             FUN_002bf520();
                             cecProcessForward();

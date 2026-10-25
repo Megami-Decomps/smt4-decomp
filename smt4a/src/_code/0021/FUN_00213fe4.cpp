@@ -1,5 +1,6 @@
-/* NON_MATCHING: near: 207 rows against 208; retail loads the effect and argument into r0/r1 before each channel's mode test (r5/r6 swapped with ours) and rebuilds the counter compare as limit >= counter+1 through a spare register; the channel blocks, offsets and callees agree. */
+/* NON_MATCHING: channel mode/counter/limit registers and argument setup scheduling differ; the consumed RGB timing argument is now passed explicitly. */
 #include "common.h"
+#include "shard/W6_W6Match8_ColorKeys.h"
 
 #define COLOR_KEY_CHANNELS 9
 #define COLOR_KEY_VALUES 11
@@ -22,7 +23,7 @@ struct ColorKeyEffect {
 
 extern "C" {
 
-void colorKeyTrackAdvanceRgb(ColorKeyEffect *effect);
+void colorKeyTrackAdvanceRgb(ColorKeyTrack *effect, const ColorKey *timing);
 void FUN_00285320(ColorKeyEffect *effect, u32 arg);
 void FUN_002853ec(ColorKeyEffect *effect, u32 arg);
 void FUN_002a65fc(ColorKeyEffect *effect, u32 arg);
@@ -44,7 +45,8 @@ void FUN_00213fe4(ColorKeyEffect *effect, u32 arg)
             effect->param[0] = 0.0f;
             effect->param[1] = 0.0f;
             effect->param[2] = 0.0f;
-            colorKeyTrackAdvanceRgb(effect);
+            colorKeyTrackAdvanceRgb(reinterpret_cast<ColorKeyTrack *>(effect),
+                                    reinterpret_cast<const ColorKey *>(arg));
         } else {
             FUN_00229264(&effect->value[0], effect->param[0], effect->target[0]);
             FUN_00229264(&effect->value[1], effect->param[1], effect->target[1]);

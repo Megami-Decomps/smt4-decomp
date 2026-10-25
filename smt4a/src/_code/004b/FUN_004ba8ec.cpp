@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction scheduling (retail forms the sprite pointer later and loads the keyframe after the entry's frame). */
+/* NON_MATCHING: restored queued-node argument, linker-inlined signed flags getter and frame compare; sprite base still forms before cycle update. */
 #include "shard/S2UiTexLoader.h"
 
 extern "C" {
@@ -6,12 +6,13 @@ extern "C" {
 #define UI_TEX_TABLE 31 /* the texture table the nodes belong to */
 #define UI_TEX_NONE (-1)
 
-extern s32 asdTMTexTableNodeIsLoaded(s32 table, ...);
+extern s32 asdTMTexTableNodeIsLoaded(s32 table, s32 node);
 extern void asdTMTexTableReleaseNode(s32 table, s32 node);
 extern s32 flaggedValueHolderGetTotal(UiTexLoader *loader);
 extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);
 extern s32 FUN_00163aa4(UiTexSprite *sprite, f32 time);
-extern void FUN_004cf8dc(void *anim, s32 count);
+extern void entryDispatchUpdate(void *anim, s32 count);
+s8 uiSpriteGetCompletionState(const UiTexSprite *sprite);
 
 /* Per-frame update of the screen's texture loader: advances the cycle counter, starts the queued
  * image on its keyframe, promotes the pending image once the sprite is done and releases every
@@ -25,8 +26,10 @@ void FUN_004ba8ec(UiTexLoader *loader)
         loader->cycle = (loader->cycle + 1) % 16;
     }
 
-    if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE) != 0 && sprite->animating != 0) {
-        if (loader->next.keyframe == loader->entries[flaggedValueHolderGetTotal(loader)]->frame + 1) {
+    if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState(sprite) != 0) {
+        s32 entryFrame = loader->entries[flaggedValueHolderGetTotal(loader)]->frame + 1;
+        s32 keyframe = loader->next.keyframe;
+        if (keyframe == entryFrame) {
             loader->pending.node = loader->next.node;
             loader->pending.keyframe = loader->next.keyframe;
             loader->next.node = UI_TEX_NONE;
@@ -50,7 +53,7 @@ void FUN_004ba8ec(UiTexLoader *loader)
             loader->nodeLoaded[node] = 0;
         }
     }
-    FUN_004cf8dc(loader->anim, 12);
+    entryDispatchUpdate(loader->anim, 12);
 }
 
 } /* extern "C" */

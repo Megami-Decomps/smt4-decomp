@@ -4,7 +4,7 @@
 
 // Private view of the initialized prefix of the resident allocation.
 struct JyoucyuStateView {
-    void* unk00;       // 0x00
+    u32 process;       // 0x00: process handle
     u8 unk04;          // 0x04
     u8 unk05[3];       // 0x05
     u32 unk08;         // 0x08
@@ -15,16 +15,16 @@ extern JyoucyuStateView* g_jyoucyu;
 extern u8 LAB_001c0400;
 
 void jyoucyuRequest();
-void FUN_001e981c();
+u32 FUN_001e981c();
 
 void* asdMemoryAlloc(u32 size, u32 alignment, u32 flags, u32 category,
                      u32 heap);
-void* asdProcessCreateSimple(const char* name, u32 priority, u32 unk08,
-                             u32 unk0C, const void* unk10,
-                             void (*request)(), u32 unk18);
+u32 asdProcessCreateSimple(const char* name, u32 priority, u32 unk08,
+                          u32 unk0C, const void* unk10,
+                          void (*request)(), u32 unk18);
 void taskCreateDraw(const char* name, u32 priority, u32 unk08, u32 unk0C,
-                    void (*callback)(), u32 unk14, u32 unk18,
-                    void* process);
+                    u32 (*callback)(), u32 unk14, u32 unk18,
+                    u32 process);
 
 // Allocate resident state and create its control process and draw task.
 void FUN_001b3c34(void)
@@ -37,9 +37,9 @@ void FUN_001b3c34(void)
     state->unk04 = 0;
     state->unk08 = 0;
 
-    void* process = asdProcessCreateSimple(
+    u32 process = asdProcessCreateSimple(
         "JYOUCYU C", 2, 0, 0, &LAB_001c0400, jyoucyuRequest, 0);
-    state->unk00 = process;
+    state->process = process;
     taskCreateDraw("JYOUCYU D", 0x84, 0, 0, FUN_001e981c,
                    0, 0, process);
 }

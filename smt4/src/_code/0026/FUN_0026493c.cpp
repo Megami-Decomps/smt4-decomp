@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026493c` (_code @ 0x26493c, 0x7d4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int FUN_00277b5c(unsigned int, unsigned int);
 int randomGetNormalizedFloat(void);
 int partyApplyStatusMask(int, int, int);
 int partyApplyPercentHealthDamage(int, int);
-int FUN_00291e40(int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int FUN_002bf810(int);
 int FUN_002bff50(void);
@@ -66,7 +66,6 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: partyApplyStatusMask. */
 /* Supplied declaration required: partyApplyPercentHealthDamage. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
-/* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -219,7 +218,8 @@ LAB_00264b84:
     temp_v14[4] = 0.6f;
     temp_v14[5] = 0.6f;
     if (*(int *)(param_1 + 0xd0) == 0) {
-      FUN_00291e40(0x1000186);
+      FUN_00291e40(0x1000186, soundActorScalePosition(
+          soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x28)), 1.0f / 3.0f));
       partyApplyPercentHealthDamage(2,3);
       partyApplyStatusMask(2,5,0xf);
       *(unsigned short *)(param_1 + 0x4eec) = 0xf;

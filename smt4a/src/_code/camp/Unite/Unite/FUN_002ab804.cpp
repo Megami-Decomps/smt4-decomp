@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ab804` (_code @ 0x2ab804, 0x760 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "gamedata/GameFlags.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -32,7 +33,6 @@ int FUN_0031416c(...);
 int mapSettings5BSetValueIfActive(...);
 int loadSlotEnsureLoaded(...);
 int _ZN9Obj557af8C1EPK21AsdAnimCameraResource(...);
-int gameFlagSetValue(...);
 int fusionListAvailableSpecialRecipes(...);
 int fusionRaceSelectionInitialize(...);
 int paramsClearPacket(...);
@@ -105,7 +105,6 @@ extern int lmapSceneGetScript(void);
 /* Supplied declaration required: mapSettings5BSetValueIfActive. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
-/* Supplied declaration required: gameFlagSetValue. */
 extern int modelListInit(void);
 extern int bitsAt60Test(int, unsigned int);
 extern int FUN_004dad8c(void);

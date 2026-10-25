@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains separate cleanup/job work pointers while the build coalesces them, and the controller address is hoisted; candidate -O2. */
+/* NON_MATCHING: command-frame local recovers controller load timing; cleanup and job work pointers still coalesce. */
 #include "shard/W5_W5Match6_CallbackController.h"
 
 struct HowToWork {
@@ -35,8 +35,9 @@ void asdOperatorDelete(void *object);
 
 u32 scrCommShowHowTo()
 {
+    u32 frame = scrGetCommandFrame();
     HowToControllerView *controller = (HowToControllerView *)&g_callbackController;
-    if (scrGetCommandFrame() == 0) {
+    if (frame == 0) {
         s32 id = (s32)scrGetArg(0);
         if (!loadSlotIsLoaded(0x46)) {
             loadSlotRequestAsync(0x46, 0);

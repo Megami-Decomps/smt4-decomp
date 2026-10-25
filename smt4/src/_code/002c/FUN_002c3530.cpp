@@ -1,4 +1,4 @@
-/* NON_MATCHING: only r2/ip allocation differs (retail keeps the globals base in r2 and the preset id in ip) */
+/* NON_MATCHING: local preset-system view fixes dispatch registers; parameter/id address and VFP load scheduling still differ. */
 #include "common.h"
 
 struct Vec3f {
@@ -35,24 +35,25 @@ void FUN_00119750(GxPreset *preset, void *data, u32 id, s32 mode, u32 arg, Vec3f
 /* Starts preset 0, 1 or 2 (2 only when the system is not busy); presets 0 and 1 use parameter set 0, preset 2 set 1. */
 void FUN_002c3530(s32 preset, u32 arg, u32 unused, s32 index)
 {
+    GxPresets *presets = &g_asdGxPresets;
     GxPreset *selected = NULL;
 
     if (preset == 0) {
         index = 0;
-        selected = &g_asdGxPresets.presets[0];
+        selected = &presets->presets[0];
     } else if (preset == 1) {
         index = 0;
-        selected = &g_asdGxPresets.presets[1];
+        selected = &presets->presets[1];
     } else if (preset == 2) {
-        if (g_asdGxPresets.busy == 1) {
+        if (presets->busy == 1) {
             return;
         }
         index = 1;
-        selected = &g_asdGxPresets.presets[2];
+        selected = &presets->presets[2];
     }
-    FUN_00119750(selected, selected->data + 0x18, g_asdGxPresets.ids[index], 7, arg,
-                 g_asdGxPresets.params[index].position, g_asdGxPresets.params[index].weight,
-                 g_asdGxPresets.extra[index]);
+    FUN_00119750(selected, selected->data + 0x18, presets->ids[index], 7, arg,
+                 presets->params[index].position, presets->params[index].weight,
+                 presets->extra[index]);
 }
 
 } /* extern "C" */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: default code has the same instruction sequence but assigns the game-state/global-pointer/zero values to different r4-r6 registers. */
+/* NON_MATCHING: named game-state view recovers r4; popup-global slot and zero value remain swapped between r5/r6. */
 #include "map/lmapMain.h"
 #include "map/mapDepart.h"
 
@@ -15,12 +15,13 @@ s32 FUN_002d8b58(s32 kind, s32 eventId);
 
 void popupTryStartTimedPrompt(void)
 {
-    if (g_gameState.mapFlags.popupElapsedFrames >= 18000 && g_popupState->event.state == 0) {
+    GameStateA *game = &g_gameState;
+    if (game->mapFlags.popupElapsedFrames >= 18000 && g_popupState->event.state == 0) {
         g_popupState->eventId = 0xad;
         g_popupState->event.state = 11;
         g_popupState->event.unk04 = 0;
         g_popupState->event.unk14 = FUN_002d8b58(2, g_popupState->eventId);
-        g_gameState.mapFlags.popupElapsedFrames = 0;
+        game->mapFlags.popupElapsedFrames = 0;
     }
 }
 

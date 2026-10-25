@@ -1,5 +1,6 @@
 /* NON_MATCHING: case 3 stores nextState before dataEntries via a pre-indexed str; retail stores dataEntries then tail-merges mov r0,#4/str (+4 bytes shift after) */
 #include "battle/btlCamera.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -11,8 +12,8 @@ typedef struct BtlIntroTask {
     /* 0x0C */ u32 timer;
     /* 0x10 */ u32 step;
     /* 0x14 */ u8 unk14[0x170];
-    /* 0x184 */ u32 dataFile;
-    /* 0x188 */ u32 dataEntries;
+    /* 0x184 */ void *dataFile;
+    /* 0x188 */ void *dataEntries;
 } BtlIntroTask;
 
 extern u32 g_btlUiBlock; /* 0x57a9c8 */
@@ -23,13 +24,12 @@ extern u32 g_btlActionReflect; /* 0x5712f0 */
 extern int btlGetMainState(void);
 extern int dialogIsActive(void);
 extern void dialogClose(int);
-extern int dataTableFileGetTable(u32, int);
-extern u32 dataTableGetEntries(void);
+extern void *dataTableFileGetTable(void *file, u32 section);
 extern int chainCountIdUnflagged(u32, int);
 extern int FUN_003ecd94(void);
 extern void FUN_00410628(BtlIntroTask *);
-extern void FUN_004112c4(BtlIntroTask *);
-extern void FUN_004119fc(BtlIntroTask *);
+extern void battleAdvanceEntryStartup(BtlIntroTask *);
+extern void btlPartnerUpdateScript(BtlIntroTask *);
 extern void FUN_00410d44(BtlIntroTask *);
 extern int FUN_004aa768(u32, int);
 extern int btlUiIsIdleB(u32);
@@ -75,18 +75,19 @@ void FUN_00412248(BtlIntroTask *task)
         }
         break;
     case 2:
-        FUN_004112c4(task);
+        battleAdvanceEntryStartup(task);
         break;
-    case 3:
+    case 3: {
         if (task->step != 0 || task->dataFile == 0) {
             break;
         }
-        dataTableFileGetTable(task->dataFile, 0);
-        task->dataEntries = dataTableGetEntries();
+        void *section = dataTableFileGetTable(task->dataFile, 0);
+        task->dataEntries = dataTableGetEntries(section);
         btlIntroSetNextState(task, 4);
         break;
+    }
     case 4:
-        FUN_004119fc(task);
+        btlPartnerUpdateScript(task);
         break;
     case 5:
         FUN_00410d44(task);

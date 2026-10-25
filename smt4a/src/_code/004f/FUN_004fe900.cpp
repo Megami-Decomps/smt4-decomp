@@ -2,13 +2,13 @@
 #include "battle/btlReflect.h"
 
 extern "C" {
-ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 
 // Queue the two halves of an actor-pair transition with their separate scalar values.
 u32 FUN_004fe900(s32 actor, u32 options, u32 target, u32 parameter, s32 actorStep,
                  u32 firstValue, u32 secondValue, s32 enabled)
 {
-    ReflectAction *first = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+    ReflectAction *first = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
     if (!enabled) {
         first->flagView.flags |= 4;
     }
@@ -17,7 +17,7 @@ u32 FUN_004fe900(s32 actor, u32 options, u32 target, u32 parameter, s32 actorSte
     first->value = firstValue;
     first->parameter = parameter;
 
-    ReflectAction *second = FUN_004102d8(g_btlActionReflect, (s16)(actor + actorStep), 0, options);
+    ReflectAction *second = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + actorStep), 0, options);
     if (!enabled) {
         second->flagView.flags |= 4;
     }

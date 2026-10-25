@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of a battle phase step that clears the phase's flag masks and advances to the next sub-phase; armcc here schedules the 64-bit mask updates (retail loads each mask half separately and uses bic/mvn chains) and the saturating counters differently. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 /* The battle main state (only the fields this step reads). */
 struct BattleMainState {
@@ -53,7 +54,7 @@ extern "C" {
 extern BattleMainGlobals g_btlMain;
 extern u32 g_btlUiBlock;
 
-void gameFlagSetValue(s32 flag, s32 value);
+
 u32 *FUN_003eaf20(BattleFlagsState *battle);
 void FUN_003f26d4(BattleFlagsState *battle);
 void btlUiIdsRefresh(u32 block);
@@ -77,7 +78,7 @@ static void bumpByte(u8 *counter)
  * whether the phase resolved, starts the next sub-phase. */
 void FUN_003f034c(BattleFlagsState *battle)
 {
-    gameFlagSetValue(0x591, 0);
+    gameFlagSetValue(0x591, 0, 1);
     battle->flags &= ~g_btlMain.clearMaskC & ~g_btlMain.clearMaskA & ~g_btlMain.clearMaskD & ~g_btlMain.clearMaskH;
     if (battle->hasExtra)
         battle->extra = FUN_003eaf20(battle)[0x100];

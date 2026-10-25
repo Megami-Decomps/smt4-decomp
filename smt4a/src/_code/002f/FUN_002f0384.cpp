@@ -1,17 +1,8 @@
 /* NON_MATCHING: preset/tail-call block layout and VFP constant-pool ordering differ. */
-#include "common.h"
-
-struct StatusCameraGameStateA {
-    u8 unk0000[0x2018];
-    u8 mode; // 0x2018
-};
-struct StatusCameraGlobalsA {
-    u32 unk00;
-    StatusCameraGameStateA *data; // 0x04
-};
+#include "shard/Shard0033.h"
 
 extern "C" {
-extern StatusCameraGlobalsA g_gameGlobals;
+extern ObjBRef g_gameGlobals;
 void FUN_00240170(void);
 void statusCameraSetEye(f32, f32, f32);
 void statusCameraApply(void);
@@ -19,7 +10,7 @@ void statusCameraApply(void);
 // Restore the configured or default camera preset in the two supported screen modes.
 void FUN_002f0384(s32 configured)
 {
-    u8 mode = g_gameGlobals.data->mode;
+    u8 mode = g_gameGlobals.instance->unk2018;
     if (mode != 3 && mode != 10)
         return;
     if (configured != 0)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the mode-flag move order, the second loop counter init (retail predicates it) and the sprite argument move order differ. */
+/* NON_MATCHING: pending-loop conditional initialization recovered; mode flag and sprite argument scheduling differ. */
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
@@ -31,14 +31,21 @@ extern "C" void FUN_00225238(SpriteBankUpdate *bank, s32 added, s32 removed)
         spriteStartAnimationByIndex(&bank->fourth[i], 4);
         spriteStartAnimationByIndex(&bank->second[i], 0);
         spriteStartAnimationByIndex(&bank->first[i], 2);
-        pairSetFirstResetSecond(&bank->first[i], bank->mode != 0);
+        s32 enabled;
+        if (bank->mode == 0)
+            enabled = 0;
+        else
+            enabled = 1;
+        pairSetFirstResetSecond(&bank->first[i], enabled);
     }
-    for (s32 i = 0; i < bank->pending; ++i) {
-        s32 index = bank->active - i - 1;
-        pairSetFirstResetSecond(&bank->second[index], 6);
-        UiAnimatedSprite *sprite = &bank->second[index];
-        spriteStartAnimationByIndex(sprite, 1);
-        spriteStartAnimationByIndex(&bank->third[index], 6);
-        spriteStartAnimationByIndex(&bank->fourth[index], 4);
+    if (bank->pending > 0) {
+        for (s32 i = 0; i < bank->pending; ++i) {
+            s32 index = bank->active - i - 1;
+            pairSetFirstResetSecond(&bank->second[index], 6);
+            UiAnimatedSprite *sprite = &bank->second[index];
+            spriteStartAnimationByIndex(sprite, 1);
+            spriteStartAnimationByIndex(&bank->third[index], 6);
+            spriteStartAnimationByIndex(&bank->fourth[index], 4);
+        }
     }
 }

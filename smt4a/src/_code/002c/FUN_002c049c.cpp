@@ -1,6 +1,8 @@
-/* NON_MATCHING: retail keeps the stage constants out of registers and has compiler no-ops after several calls (232 rows vs 229); built hoists the constant 2 into r7 and lays the branches out slightly differently; the answer flow is the same. */
+/* NON_MATCHING: process mode setter recovered; answer branches and shared flag/reset tails still differ (retail 232 rows, built 230). */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 #include "camp/CampCec/CampCecSetting.h"
+#include "script/scrScriptProcess.h"
 
 extern "C" {
 
@@ -9,6 +11,7 @@ extern CampCecSetting *g_campCecSetting;
 u32 FUN_00275bc8(void *fileA, void *fileB);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
+void scriptProcessSetMode(ScriptRunState *script, s32 mode);
 s32 messageGetChoiceResult(void);
 void sysPlaySe(s32 id);
 s32 cecProcessGetValue(void);
@@ -24,7 +27,7 @@ void FUN_0034280c(s32 arg);
 void stateAtF4Destroy(void);
 void gameDataBlocksSetFlagBits(u32 flag, s32 value);
 s32 gameDataTestFlags(u32 flag);
-void gameFlagSetValue(s32 flag, s32 a, s32 b);
+
 void gameGetSlotTable(void);
 
 /* The CEC settings screen's per-frame update (the task callback campCecSettingOpen installs):
@@ -40,7 +43,7 @@ u32 FUN_002c049c(void)
             u32 script = FUN_00275bc8(setting->heapA, setting->heapB);
 
             setting->resource = script;
-            *(u32 *)(script + 0x108) = 2;
+            scriptProcessSetMode(reinterpret_cast<ScriptRunState *>(script), 2);
             setting->started = 1;
         }
     } else if (setting->done == 0) {

@@ -23,7 +23,7 @@ int uiFadeSetVisible(...);
 int FUN_00275bc8(...);
 int sysMemClear(...);
 int FUN_00387240(...);
-int FUN_003872b8(...);
+int uiGetLayoutPointDifference(...);
 int loadSlotEnsureLoaded(...);
 int gameFlagClearModeBits(...);
 int paramsClearPacket(...);
@@ -76,7 +76,7 @@ extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_00387240. */
-/* Supplied declaration required: FUN_003872b8. */
+/* Supplied declaration required: uiGetLayoutPointDifference. */
 extern int partyEntryGetBit5(unsigned short);
 extern int partyEntryGetBit6(unsigned short);
 /* Supplied declaration required: loadSlotEnsureLoaded. */
@@ -171,7 +171,7 @@ void FUN_002f0c18(void)
   FUN_0014e188(puVar2 + 0x76,0x1e,0,puVar2 + 5,0xc9);
   FUN_0014e188(puVar2 + 0x99,0x1e,0x61,puVar2 + 5,0x68);
   uiSpriteSelectAnim(puVar2 + 0x99,2);
-  FUN_003872b8(puVar2 + 0x99,0x1e,0x2a,0x61);
+  uiGetLayoutPointDifference(puVar2 + 0x99,0x1e,0x2a,0x61);
   FUN_0014e188(puVar2 + 0xbc,0x1e,0x5d,puVar2 + 5,0xa1);
   uiSpriteSelectAnim(puVar2 + 0xbc,2);
   FUN_00387240(puVar2 + 0xbc,0x1e,0x53);
@@ -183,7 +183,7 @@ void FUN_002f0c18(void)
   FUN_0014e188(puVar7,0x1e,0x5c,puVar2 + 5,0xa1);
   uiSpriteSetKeyframe(puVar7,0);
   uiSpriteSetImageKeyframe(puVar7,8,0);
-  FUN_003872b8(puVar7,0x1e,0x5a,0x5c);
+  uiGetLayoutPointDifference(puVar7,0x1e,0x5a,0x5c);
   puVar7 = puVar2 + 0x125;
   FUN_0014e188(puVar7,0x1e,0,puVar2 + 5,0xc9);
   uiSpriteSetKeyframe(puVar7,2,0);

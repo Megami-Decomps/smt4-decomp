@@ -1,5 +1,6 @@
 /* NON_MATCHING: all 22 state handlers and the jump table are written; retail reads the entry flag as a signed byte through a separate address add (ldrsb), keeps case 9's copy of the state-22 tail unshared, and the block layout/shared tails differ, so rows differ. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 struct SaveLoadBase {
     /* 0x00 */ u8 unk00[2];
@@ -77,7 +78,7 @@ void *configGetSettings(void);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void wordPairCopy(void *destination, const void *source);
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(s32 flag, s32 value, s32 mark);
+
 void gameDataAddHomeButtonHold(s32 value);
 void messageMainSetFlag(s32 value);
 void sysPlaySe(s32 id);

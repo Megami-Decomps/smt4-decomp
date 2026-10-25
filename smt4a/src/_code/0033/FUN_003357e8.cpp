@@ -11,9 +11,9 @@ s32 scrGetArg(u32 index);
 BattleCommandState* btlGetMainState(void);
 
 // Maps the script selector to command modes 12, 11, or the default 5.
-u32 FUN_003357e8(u32 argumentIndex)
+u32 FUN_003357e8(void)
 {
-    switch (scrGetArg(argumentIndex)) {
+    switch (scrGetArg(0)) {
     case 0:
         btlGetMainState()->mode = 12;
         break;

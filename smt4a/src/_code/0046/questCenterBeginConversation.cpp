@@ -1,5 +1,6 @@
 /* NON_MATCHING: O3 hoists the final interactive byte load before the state/counter STM and consumes r4 instead of a temporary base (123/123). */
 #include "shard/W6_W6Match7_QuestInteraction.h"
+#include "gamedata/GameFlags.h"
 #include "shard/Shard0046.h"
 
 extern "C" {
@@ -9,7 +10,7 @@ void placeWinStartText(const u8 *name);
 void FUN_003a7630(s32 mode);
 void FUN_003c1060();
 void FUN_003c3e14();
-void gameFlagSetValue(u32 flag, s32 value, u32 enabled);
+
 s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);

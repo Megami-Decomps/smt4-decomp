@@ -1,4 +1,4 @@
-/* NON_MATCHING: scroll-bar draw; retail keeps the list view pointer in r7 (built spills it) and reaches the render-state stack through base+0x1000+0x120 address arithmetic with a conditional restore; calls, float math and tail call efctSetSpeed match */
+/* NON_MATCHING: named stereo parallax restores retail coordinate lifetimes; extended render-state stack addressing and conditional restore scheduling still differ. */
 #include "camp/RenderCtx.h"
 
 /* Sprite frame of the scroll bar's thumb: its offset and a pointer to its size. */
@@ -33,8 +33,9 @@ u32 renderPopStateStacks(void);
 void FUN_004042fc(u8 *list, s32 x, s32 y, f32 speed)
 {
     void *view = list + 0x28;
-    x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     efctSetSpeed(speed);
+    x += parallax;
     FUN_001835b4(2, 0x32, 0x2A, x, y, 0xC9);
     FUN_001835b4(2, 0x32, 0xC, x, y, 0xC9);
 

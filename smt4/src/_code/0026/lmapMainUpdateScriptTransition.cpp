@@ -1,4 +1,5 @@
 #include "map/lmapMain.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
@@ -10,7 +11,7 @@ void FUN_002897b0(s32 enabled);
 s32 FUN_002c1d5c();
 void FUN_002a03d8(u32 channel, u32 duration);
 s32 scrRunOpcodesStub(void *script);
-void gameFlagSetValue(u32 flag, u32 value, u32 width);
+
 void messageSlotSet(u32 slot);
 void scrScriptProcessDestroy(void *script);
 void asdMemFree(void *allocation);

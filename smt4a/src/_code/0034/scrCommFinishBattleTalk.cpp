@@ -1,11 +1,12 @@
 #include "map/MapSelection.h"
+#include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 
 extern "C" {
 
 void asdSequenceRequest(s32 a, s32 b, s32 c);
 void btlTalkBustUpDestroy(void);
-void gameFlagSetValue(s32 a, s32 b, s32 c);
+
 s32 gameFlagIsSet(u32 id);
 
 extern GameStateA g_gameState;

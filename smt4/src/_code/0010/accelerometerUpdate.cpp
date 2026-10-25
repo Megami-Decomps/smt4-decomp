@@ -1,17 +1,7 @@
 /* NON_MATCHING: local-static storage/runtime relocations differ from retail's named reader/guard aliases, and VFP transform scheduling differs. */
 #include "common.h"
+#include "classes/AccelerometerReader.h"
 
-namespace nn { namespace hid { namespace CTR {
-class AccelerometerReader {
-public:
-    explicit AccelerometerReader(void *source);
-    ~AccelerometerReader();
-    /* 0x00 */ void *source;
-    /* 0x04 */ u16 bias;
-    /* 0x06 */ u16 sensitivity;
-    /* 0x08 */ u8 state[0x50];
-};
-}}}
 
 struct AccelerometerRawSample {
     /* 0x00 */ s16 x;
@@ -63,8 +53,8 @@ extern "C" s32 accelerometerUpdate(void)
     static nn::hid::CTR::AccelerometerReader reader(FUN_0011c454());
     AccelerometerState *state = &g_accelerometerState;
     if (state->calibrationPending) {
-        reader.bias = state->bias;
-        reader.sensitivity = state->sensitivity;
+        reader.position = state->bias;
+        reader.capacity = state->sensitivity;
         state->calibrationPending = 0;
     }
     FUN_002bd808(&state->sample.auxiliary);

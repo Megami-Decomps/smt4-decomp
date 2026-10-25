@@ -21,7 +21,7 @@ u32 FUN_0035f700(void)
     BtlMainStateA *battle = btlGetMainState();
     BtlCombatantEntryA *entry = FUN_003eaf20();
     s32 damage = entry->maxHp * percentage / 100;
-    ScriptUnit *source = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *source = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     bool defeated = false;
     if (jobIsValid(battle->auxiliaryTask.job) != 0) {
         if (entry->hp <= damage)

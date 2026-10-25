@@ -1,4 +1,4 @@
-/* NON_MATCHING: mode dispatch layout differs: retail tests 0, 1, 3 in order with the data-record copy placed straight after the compares and a shared tail; the build orders the blocks differently and schedules the slot store earlier. */
+/* NON_MATCHING: field copies corrected; slot-store scheduling and duplicated learned-bit store tail still differ. */
 #include "common.h"
 
 /* A unit record (0x604 bytes, accessed fields). */
@@ -35,8 +35,8 @@ struct DevilRecord {
     u8 unk00[3];
     u8 level;               // 0x03
     u8 unk04[0x10];
-    u16 stat[7];            // 0x14..0x20 (non-contiguous ids: see copies below)
-    u8 unk22[0x16];
+    u16 stat[8];            // 0x14..0x22
+    u8 unk24[0x14];
     u16 learnIndex;         // 0x38
     u8 unk3A[2];
     u16 resist[8];          // 0x3C
@@ -88,22 +88,21 @@ void FUN_001a7dbc(UnitRecord *unit, u8 slot, u32 id, s32 mode)
     switch (mode) {
     case 0:
     case 3: {
-        const u16 *fields = reinterpret_cast<const u16 *>(reinterpret_cast<const u8 *>(record) + 0x14);
         unit->level = record->level;
-        unit->stat[0] = fields[0];
-        unit->stat[1] = fields[1];
-        unit->stat[2] = fields[3];
-        unit->stat[4] = fields[5];
-        unit->stat[5] = fields[6];
-        unit->stat[6] = fields[7];
-        unit->stat[3] = fields[4];
-        unit->current0E = 0;
-        unit->current10 = 0;
-        unit->base1C = fields[3];
-        unit->base20 = fields[5];
-        unit->base22 = fields[6];
-        unit->base24 = fields[7];
-        unit->base1E = fields[4];
+        unit->stat[0] = record->stat[0];
+        unit->stat[1] = record->stat[1];
+        unit->stat[2] = record->stat[3];
+        unit->stat[4] = record->stat[5];
+        unit->stat[5] = record->stat[6];
+        unit->stat[6] = record->stat[7];
+        unit->stat[3] = record->stat[4];
+        unit->base1C = 0;
+        unit->base1E = 0;
+        unit->base20 = record->stat[3];
+        unit->base24 = record->stat[5];
+        unit->base26 = record->stat[6];
+        unit->base28 = record->stat[7];
+        unit->base22 = record->stat[4];
         for (s32 i = 0; i < 8; i++)
             unit->resist[i] = record->resist[i];
         unit->learnedBits[record->learnIndex >> 3] |= 1 << (record->learnIndex & 7);
@@ -113,31 +112,31 @@ void FUN_001a7dbc(UnitRecord *unit, u8 slot, u32 id, s32 mode)
         DevilCopy copy;
         gameRecordCopy(id, &copy);
         unit->level = copy.level;
-        unit->stat[0] = copy.current[1];
-        unit->stat[1] = copy.current[2];
+        unit->stat[0] = copy.first;
+        unit->stat[1] = copy.second;
         unit->stat[2] = copy.stat[0];
         unit->stat[4] = copy.stat[2];
         unit->stat[5] = copy.stat[3];
         unit->stat[6] = copy.stat[4];
         unit->stat[3] = copy.stat[1];
-        unit->current0E = 0;
-        unit->current10 = 0;
-        unit->base1C = copy.stat[5];
-        unit->base20 = copy.resist[0];
-        unit->base22 = copy.resist[1];
-        unit->base24 = copy.resist[2];
-        unit->base1E = copy.stat[6];
+        unit->base1C = 0;
+        unit->base1E = 0;
+        unit->base20 = copy.stat[5];
+        unit->base24 = copy.current[0];
+        unit->base26 = copy.current[1];
+        unit->base28 = copy.current[2];
+        unit->base22 = copy.stat0E;
         for (s32 i = 0; i < 8; i++)
-            unit->resist[i] = copy.resist[i + 2];
+            unit->resist[i] = copy.resist[i];
         unit->extra30 = copy.extra30;
-        unit->unk601 = (copy.flags << 26) >> 28;
+        unit->unk601 = (static_cast<u32>(copy.flags) << 26) >> 28;
         unit->learnedBits[record->learnIndex >> 3] |= 1 << (record->learnIndex & 7);
         break;
     }
     }
     unitRecalculateEffectiveStats(unit);
-    unit->current2A = unit->stat[0];
-    unit->current2C = unit->stat[1];
+    unit->current2A = unit->current0E;
+    unit->current2C = unit->current10;
     FUN_0029bde4(unit);
 }
 }

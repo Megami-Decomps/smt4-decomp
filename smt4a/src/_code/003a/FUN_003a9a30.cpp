@@ -17,17 +17,12 @@ u32 FUN_003a9a30(void)
     u32 field = btlGetTable(btlGetMainState(), 0xd);
     u16 *table = dataTableGetEntries();
     int count = dataTableGetCount(field);
-    int index;
-
     if (requested < 1) {
-        index = 1;
-    } else {
-        index = count;
-        if (index >= requested) {
-            index = requested;
-        }
+        count = 1;
+    } else if (count > requested) {
+        count = requested;
     }
-    scrSetResult(table[index - 1]);
+    scrSetResult(table[count - 1]);
     return 1;
 }
 

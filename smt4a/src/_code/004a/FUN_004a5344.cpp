@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail holds the effect speed (1.0f) and the row scale in VFP registers s17/s16 across the calls and passes the shared stack word through [sp] each time; the draw sequence is the same. */
+/* NON_MATCHING: scoped visibility and linker speed getter recover frame and tail call; reset-speed constant lifetime and row pointer schedule differ. */
 #include "common.h"
 
 extern "C" {
@@ -30,8 +30,6 @@ typedef struct PanelWork {
     /* 0x028 */ s32 count;
     /* 0x02C */ u8 unk02c[0x9C];
     /* 0x0C8 */ u8 panel[0xD4];         /* the panel the positions and sizes are read from */
-    /* 0x19C */ u8 unk19c[0x60];
-    /* 0x1FC */ PanelScale scales[1];
 } PanelWork;
 
 typedef struct PanelWorkView {
@@ -42,6 +40,7 @@ typedef struct PanelWorkView {
 } PanelWorkView;
 
 void efctSetSpeed(f32 speed);
+f32 vec2GetSpeed(const void *object);
 void words2Copy(void *panel, PanelPair *out);
 void pairAt8Get(void *panel, PanelPair *out);
 void FUN_004935c8(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
@@ -53,21 +52,28 @@ s32 flaggedValueHolderGetTotal(void *list);
 void FUN_004a5ea0(PanelWork *work, s32 index, s32 selected, s32 id, f32 scale);
 void owner4ASetSizeAndCall(PanelWork *work, u32 style);
 
+static __inline bool panelIntersectsHorizontalView(PanelWork *work)
+{
+    PanelPair position;
+    PanelPair size;
+    words2Copy(work->panel, &position);
+    pairAt8Get(work->panel, &size);
+    f32 right = position.x + size.x;
+    return right < 320.0f && right > -320.0f;
+}
+
 /* Draws the panel's rows when it is on screen: sets its six frame parts from the shared style,
  * then each visible list row (the selected one drawn last when a row is selected). */
 void FUN_004a5344(PanelWork *work)
 {
-    PanelPair position;
-    PanelPair size;
-
-    words2Copy(work->panel, &position);
-    pairAt8Get(work->panel, &size);
-    f32 right = position.x + size.x;
-
-    if (!(right < 320.0f && right > -320.0f)) {
+    if (!panelIntersectsHorizontalView(work)) {
         return;
     }
-    f32 scale = ((PanelScale *)((u8 *)work + *(s16 *)((u8 *)work + 0xA872) * sizeof(PanelScale) + 0xFC))->scale;
+    struct PanelScaleBank { u8 prefix[0xFC]; PanelScale entries[1]; };
+    struct PanelSelection { u8 prefix[0xA872]; s16 index; };
+    const PanelSelection *selection = reinterpret_cast<const PanelSelection *>(work);
+    const PanelScaleBank *bank = reinterpret_cast<const PanelScaleBank *>(work);
+    f32 scale = vec2GetSpeed(&bank->entries[selection->index]);
     u32 style = ((PanelWorkView *)work)->style;
 
     FUN_004935c8(work->panel, 1, 0, 0, style, scale);

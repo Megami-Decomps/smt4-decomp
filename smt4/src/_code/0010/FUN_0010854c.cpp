@@ -1,4 +1,4 @@
-/* NON_MATCHING: readiness and chain-mode loads use the enclosing work base rather than the retail nested-subobject bases. */
+/* NON_MATCHING: readiness branches target the preceding epilogue instruction; first downsample dimension copies reverse r0/r1. */
 #include "shard/FrameWork.h"
 
 extern "C" {
@@ -30,16 +30,21 @@ void surfaceCopy(JobSurface *src, JobSurface *dst);
 extern u32 g_titleScene;
 
 /* Builds the successive half-size copies of the work's base surface (a chain through two further surfaces when `chained`). */
-u32 FUN_0010854c(void)
+s32 FUN_0010854c(u32 job)
 {
-    FrameCopyWork *work = reinterpret_cast<FrameCopyWork *>(jobGetWork());
+    FrameCopyWork *work = reinterpret_cast<FrameCopyWork *>(jobGetWork(job));
     work->flags.surfaceReady = 0;
-    if (FUN_002bff10(0) != 0 || work->flags.active == 0) {
+    if (FUN_002bff10(0) != 0) {
         return 0;
     }
-    if (work->flags.ready == 0 || work->frame.surface == NULL) {
+    FrameReadyFlags *flags = &work->flags;
+    if (flags->active == 0) {
         return 0;
     }
+    if (flags->ready == 0 || work->frame.surface == NULL) {
+        return 0;
+    }
+    FrameSurfaceState *frame = &work->frame;
     if (work->frame.blocked != 0) {
         return 0;
     }
@@ -55,7 +60,7 @@ u32 FUN_0010854c(void)
             levels = 1;
         }
     }
-    if (work->frame.unkE0 != 0) {
+    if (frame->unkE0 != 0) {
         for (s32 i = 0; i < levels; i++) {
             if (i == 0) {
                 surfaceCopy(work->frame.surface, work->second);

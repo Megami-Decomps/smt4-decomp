@@ -18,7 +18,7 @@ int gameFlagsGetBlock(void);
 int FUN_0025cb1c(void);
 int residentApplyFallbackValues(void);
 int FUN_003033d4(void);
-int FUN_00303564(void);
+int lmapUpdateCameraDistancePair(void);
 int FUN_00324b68(void);
 int FUN_0036b824(...);
 int cameraAnimationSampleAndAdvance(int, int *, int);
@@ -80,7 +80,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: FUN_003033d4. */
-/* Supplied declaration required: FUN_00303564. */
+/* Supplied declaration required: lmapUpdateCameraDistancePair. */
 /* Supplied declaration required: FUN_00324b68. */
 /* Supplied declaration required: FUN_00330108. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
@@ -146,7 +146,7 @@ void FUN_00292b84(void)
     temp_v2 = g_lmapView[0xaf];
     cameraAnimationSampleAndAdvance(temp_v2,g_lmapView + 0xb0,0);
     if (temp_v2 != 0) {
-      FUN_00303564();
+      lmapUpdateCameraDistancePair();
       piVar5 = g_lmapView;
       temp_v10 = g_lmapView[0xb3];
       temp_v2 = g_lmapView[0xb4];
@@ -296,7 +296,7 @@ void FUN_00292b84(void)
   if ((char)g_lmapView[0x88] != '\0') {
     FUN_003033d4();
     FUN_001523b8(&g_localCamera,1);
-    FUN_00303564();
+    lmapUpdateCameraDistancePair();
     FUN_00324b68();
     FUN_0036b824(&g_localCamera);
     *(unsigned char **)(g_lmapView[0xc5] + 0xc) = &g_localCamera;
@@ -713,7 +713,7 @@ LAB_002936f8:
   }
   FUN_0036b824(&g_localCamera);
   *(unsigned char **)(g_lmapView[0xc5] + 0xc) = &g_localCamera;
-  FUN_00303564();
+  lmapUpdateCameraDistancePair();
   FUN_001523b8(&g_localCamera,1);
   temp_v2 = *g_lmapView;
   if (!((temp_v2 == 7 || temp_v2 == 8) || temp_v2 == 9)) {

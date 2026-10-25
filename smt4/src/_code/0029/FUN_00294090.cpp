@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the cache base in r4 from the prologue and builds the entry through the allocation result (r0) in a placement-new style constructor, then copies it to r6; the build allocates r4/r8/r9 differently and lays out the NPC/devil branches in a different order. */
 #include "common.h"
+struct AocSystem;
 
 // A cached texture/model resource (0x48 bytes, vtable _ZTV9Obj4206f8): which file it comes from, the file buffer being
 // loaded and a reference count.
@@ -39,8 +40,8 @@ void FUN_0033e7c4(ResourceContent *content, s32 id);
 void FUN_0033f2b8(ResourceContent *content);
 s32 FUN_0023e330(u32 system, s32 id, u32 flag);
 s32 FUN_0023e3a4(u32 system, s32 id, u32 flag);
-void aocQueueType0c(u32 system, s32 id, void **output, const char *name);
-void FUN_00389ed8(u32 system, s32 id, void **output, const char *name);
+void aocQueueType0c(AocSystem *system, s32 id, void **output, const char *name);
+void aocDisplayQueueFormattedEntry(u32 system, s32 id, void **output, const char *name);
 
 // Returns the cached resource for `id`, or creates one in a free slot; with `queueLoad` set its file starts loading
 // (from the AOC data when present, else from the base game).
@@ -95,7 +96,7 @@ ResourceContent *FUN_00294090(s32 id, s32 queueLoad, u32 unused, u32 heap)
             content->kind = 4;
             content->index = npcId;
             if (FUN_0023e330(g_aocSystem, npcId, 1) != 0) {
-                aocQueueType0c(g_aocSystem, npcId, &content->file, name);
+                aocQueueType0c(reinterpret_cast<AocSystem *>(g_aocSystem), npcId, &content->file, name);
             } else {
                 asdLoadFileAsyncSimple(name, &content->file, 0);
             }
@@ -106,7 +107,7 @@ ResourceContent *FUN_00294090(s32 id, s32 queueLoad, u32 unused, u32 heap)
             content->kind = 12;
             content->index = id - 1;
             if (FUN_0023e3a4(g_aocSystem, id, 1) != 0) {
-                FUN_00389ed8(g_aocSystem, id, &content->file, name);
+                aocDisplayQueueFormattedEntry(g_aocSystem, id, &content->file, name);
             } else {
                 asdLoadFileAsyncSimple(name, &content->file, 0);
             }

@@ -35,7 +35,7 @@ struct IntroIconRecord {
 };
 
 extern "C" {
-IntroWork *jobGetWork(void);
+IntroWork *jobGetWork(u32 process);
 void eventQueueAddUnique(u32 event);
 IntroIconRecord *FUN_001834a4(u32 table, u32 index);
 s32 recordGetModeForId(s32 id);
@@ -53,9 +53,9 @@ static __inline void introEnter(IntroWork *work, s32 state)
     work->timer = 0;
 }
 
-u32 FUN_0031a5e4(void)
+s32 FUN_0031a5e4(u32 process)
 {
-    IntroWork *work = jobGetWork();
+    IntroWork *work = jobGetWork(process);
     work->tick = (work->tick + 1) % 60;
     switch (work->state) {
     case INTRO_STATE_APPEAR:

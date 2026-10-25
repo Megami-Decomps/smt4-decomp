@@ -1,4 +1,4 @@
-/* NON_MATCHING: x and y get s16/s17 swapped (retail: x in s17, y in s16) so armcc merges their stores into one VSTMIA. */
+/* NON_MATCHING: corrected integral x/y/tag contract and removed softfp workaround; y/tag spill-register order still differs. */
 #include "common.h"
 
 extern "C" {
@@ -18,9 +18,9 @@ typedef struct TexDrawFile {
 
 typedef struct TexDrawParams {
     /* 0x00 */ u32 id;
-    /* 0x04 */ u32 value;
-    /* 0x08 */ f32 x;
-    /* 0x0C */ f32 y;
+    /* 0x04 */ s32 x;
+    /* 0x08 */ s32 y;
+    /* 0x0C */ u32 tag;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ s32 width;
     /* 0x18 */ s32 height;
@@ -34,7 +34,7 @@ TexDrawFile *asdTMTexTableCallFileC(u32 table, s32 texture);
 u32 FUN_00184efc(TexDrawFile *file, TexDrawItem *item, TexDrawParams *params);
 
 /* Draws texture `texture` of `table` at (x, y) with the given size; does nothing for an empty size. */
-__softfp u32 FUN_00185dd4(u32 id, u32 table, s32 texture, u32 value, f32 x, s32 width, s32 height, f32 y)
+u32 FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag)
 {
     TexDrawParams params;
 
@@ -44,9 +44,9 @@ __softfp u32 FUN_00185dd4(u32 id, u32 table, s32 texture, u32 value, f32 x, s32 
     TexDrawFile *file = asdTMTexTableCallFileC(table, texture);
     TexDrawItem *item = &file->list->items[texture % 1000];
     params.id = id | 0x8000;
-    params.value = value;
     params.x = x;
     params.y = y;
+    params.tag = tag;
     params.unk10 = 0;
     params.width = width;
     params.height = height;

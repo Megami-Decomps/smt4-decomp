@@ -1,5 +1,5 @@
 /* NON_MATCHING: instruction scheduling of the final record address only (retail loads the g_btlAction record base before the camera flag update, the build loads the constant 0x495 and the stored 0x1D earlier). */
-#include "common.h"
+#include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 
 extern "C" {
@@ -28,15 +28,11 @@ typedef struct BtlCommand {
     /* 0x24 */ BtlSkill *skill;
 } BtlCommand;
 
-typedef struct BtlActionRecord {
-    /* 0x00 */ u8 unk00[9];
-    /* 0x09 */ u8 state;
-} BtlActionRecord;
+struct BtlActorScriptState {
+    u8 unk00[9];
+    u8 state;
+};
 
-typedef struct BtlActionGlobals {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ u32 *data;        /* per-actor records (BtlActionRecord), 0x495 words each */
-} BtlActionGlobals;
 
 typedef struct BtlCameraBlock {
     /* 0x000 */ u8 unk000[0x64C];
@@ -57,7 +53,7 @@ extern int FUN_004fde5c(int a, BtlCommand *cmd, BtlSkill *skill, int b, int c, i
 u32 FUN_004e7418(BtlActorRef *ref, BtlCommand *cmd)
 {
     BtlActor *actor;
-    BtlActionRecord *record;
+    BtlActorScriptState *record;
 
     if (isEntryUsable(g_btlEvent) != 0) {
         return 0;
@@ -77,7 +73,8 @@ u32 FUN_004e7418(BtlActorRef *ref, BtlCommand *cmd)
     btlReflectCreateKind2e(0x1E, cmd, cmd->target, 1);
     btlCommandExtendAnimationWindow(ref, cmd, cmd->skill->animation, 0, 0x1E, 0x1E);
     g_btlCamera->flags &= ~0x2000000;
-    record = (BtlActionRecord *)(ref->actor->slot * 0x495 + g_btlAction.data);
+    record = reinterpret_cast<BtlActorScriptState *>(
+        static_cast<u32 *>(g_btlAction.data) + ref->actor->slot * 0x495);
     record->state = 0x1D;
     return 1;
 }

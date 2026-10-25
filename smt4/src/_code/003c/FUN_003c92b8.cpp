@@ -29,7 +29,7 @@ UnitRecordView *gameGetUnitRecord(s32 index);
 PartySlotsView *gameGetSlotTable(void);
 s32 partyMemberFindById(u32 id);
 u32 randNextInRange(u32 limit);
-s32 FUN_00311be4(void);
+s32 dataTableChooseWeightedId(void);
 u32 FUN_003c9b94(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *entry);
 
 /* Picks the demon a fusion of `first` and `second` yields and stores it in `entry`: the pair's
@@ -45,7 +45,7 @@ u32 FUN_003c92b8(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *ent
         return 0;
     }
     DevilSortRecord *baseRecord = devilGetRecord((u16)entry->resultId);
-    u32 level = FUN_00311be4() + baseRecord->level;
+    u32 level = dataTableChooseWeightedId() + baseRecord->level;
 
     if (randNextInRange(99) < 5) {
         if (partyMemberFindById(0x218) == 0) {

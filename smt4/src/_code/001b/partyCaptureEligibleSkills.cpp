@@ -1,5 +1,6 @@
-/* NON_MATCHING: snapshot zeroing uses different registers and a final writeback store; the skill filtering loops otherwise match. */
+/* NON_MATCHING: snapshot memset uses r0 for zero and r1 for its address instead of retail's r1/r0; filtering loops match. */
 #include "common.h"
+#include <string.h>
 
 struct PartySkillRecord {
     u8 unk00[0x34];
@@ -32,9 +33,7 @@ s32 idIsAbove400(u32 id);
 void partyCaptureEligibleSkills(PartySkillSnapshot *screen)
 {
     s32 count = 0;
-    for (s32 index = 0; index < 16; ++index) {
-        screen->snapshot.words[index] = 0;
-    }
+    memset(&screen->snapshot, 0, sizeof(screen->snapshot));
     for (s32 index = 0; index < 8; ++index) {
         u16 id = gameGetPlayerData()->skills[index];
         SkillSnapshotInfo *info = dataTable40FindById(id);

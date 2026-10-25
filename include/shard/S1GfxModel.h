@@ -59,7 +59,7 @@ typedef struct GfxModelState {
         /* 0x38 */ u8 unk38[8];
         struct {
             /* 0x38 */ u32 count;
-            /* 0x3C */ u8 unk3C[4];
+            /* 0x3C */ s32 instanceCount;
         } loadedModels;
     };
     /* 0x40 */ s32 unk40;
@@ -78,6 +78,8 @@ typedef struct GfxModelState {
 typedef char GfxModelStateSizeCheck[sizeof(GfxModelState) == 0xD4 ? 1 : -1];
 typedef char GfxModelStateLoadedCountOffsetCheck[
     offsetof(GfxModelState, loadedModels.count) == 0x38 ? 1 : -1];
+typedef char GfxModelStateInstanceCountOffsetCheck[
+    offsetof(GfxModelState, loadedModels.instanceCount) == 0x3C ? 1 : -1];
 
 typedef struct ModelOwner {
     /* 0x00 */ u8 unk00[4];

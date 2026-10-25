@@ -5,7 +5,7 @@
 extern "C" {
 
 extern ConfigWorkA *g_config;
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *position);
@@ -41,9 +41,9 @@ void configDrawRowFrame(s32 x, s32 y, s32 selected, s32 wide, s32 locked, f32 sp
         FUN_001835b4(2, 36, 143, x, y, 11);
         FUN_001835b4(2, 36, 144, x, y, 11);
     }
-    RenderCtx *context = g_renderCtx;
+    RenderCtxA *context = g_renderCtx;
     u32 state = packNibblesAndByte(6, 7, 0);
-    context->blendStateView.state.set(state);
+    renderCtxSetB(context, state);
     efctSetSpeed(1.0f);
 }
 

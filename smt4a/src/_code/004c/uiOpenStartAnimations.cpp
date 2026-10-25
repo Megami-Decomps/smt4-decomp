@@ -22,7 +22,7 @@ struct UiOpenOwner {
 extern "C" {
 void menuSynchronizeFlaggedSelection(UiOpenBinding *binding, UiOpenController *controller);
 void sub10OwnerStart(UiOpenController *controller);
-u32 FUN_004cf8dc(UiOpenAnimation *animation, s32 stage);
+u32 entryDispatchUpdate(UiOpenAnimation *animation, s32 stage);
 
 // Bind and start the UI controller, then run its opening animation stages.
 u32 uiOpenStartAnimations(UiOpenOwner *owner)
@@ -31,8 +31,8 @@ u32 uiOpenStartAnimations(UiOpenOwner *owner)
     UiBindingObserver *observer = owner->observer;
     observer->callbacks->bind(observer, &owner->controller);
     sub10OwnerStart(&owner->controller);
-    FUN_004cf8dc(&owner->animation, 2);
-    FUN_004cf8dc(&owner->animation, 3);
-    return FUN_004cf8dc(&owner->animation, 12);
+    entryDispatchUpdate(&owner->animation, 2);
+    entryDispatchUpdate(&owner->animation, 3);
+    return entryDispatchUpdate(&owner->animation, 12);
 }
 }

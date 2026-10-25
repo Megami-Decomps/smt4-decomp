@@ -1,4 +1,3 @@
-/* NON_MATCHING: entry-table address setup is not preserved across the first helper and removed-hook NOPs are absent. */
 #include "shard/Shard0031.h"
 
 struct PreviewMenuWindow { u8 kind; u8 unk01[3]; s32 minimum, maximum; u32 unk0c; FlaggedEntry entry; };
@@ -35,8 +34,9 @@ void FUN_004a38bc(PreviewMenuWork *work)
     if (scrRunOpcodesStub(work->script) != 2)
         return;
     if (messageGetChoiceResult() == 0) {
+        PreviewMenuEntry *entries = work->entries;
         u32 index = flaggedValueHolderGetTotal(&work->window);
-        demonRefreshSavedSnapshot(work, work->entries[index].option);
+        demonRefreshSavedSnapshot(work, entries[index].option);
         g_animatedPageSelection.selected = 0xffffffff;
         s32 count = FUN_0031d174(&work->window);
         s32 first = FUN_002a482c(&work->window);

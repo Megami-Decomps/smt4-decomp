@@ -1,4 +1,4 @@
-/* NON_MATCHING: the argument forwarding of the number draw calls and register assignment differ from retail (224 vs 226 rows); the card drawing is the same. */
+/* NON_MATCHING: saved draw arguments, numeric-call stack setup and HP coordinate temporaries use different registers; portrait conversion and cycling marker remainder now follow retail. */
 #include "common.h"
 
 extern "C" {
@@ -9,7 +9,7 @@ typedef struct PartnerCardUnit {
     /* 0x2A */ s16 hp;
     /* 0x2C */ u8 unk2c[0x34];
     /* 0x60 */ u16 flags;               /* bit 1: dimmed; bits 1..13: owned marker kinds */
-    /* 0x62 */ s16 portrait;
+    /* 0x62 */ u16 portrait;
     /* 0x64 */ u16 level;
 } PartnerCardUnit;
 
@@ -26,7 +26,7 @@ typedef struct PartnerCardScreen {
     /* 0x005 */ u8 unk005[0x333];
     /* 0x338 */ u8 active[16];
     /* 0x348 */ s32 cycle[12];          /* frames each slot's marker has been shown */
-    /* 0x388 */ s32 marker[12];         /* which owned marker each slot shows */
+    /* 0x378 */ s32 marker[12];         /* which owned marker each slot shows */
 } PartnerCardScreen;
 
 s32 FUN_002b4dcc(PartnerCardUnit *unit);
@@ -41,7 +41,6 @@ void drawSetColorFromRGBA8(u32 color);
 void FUN_00183bb0(void);
 u32 markerKindGetColor(s16 kind);
 void FUN_0018152c(s16 portrait, s32 x, s32 y, u32 id, u32 flag);
-s32 __aeabi_idivmod(s32 a, s32 b);
 void FUN_004bda84(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale);
 
 /* Draws partner card `slot` for `unit` at (`x`, `y`) with fade `scale`: the card frame, level, hp
@@ -49,7 +48,7 @@ void FUN_004bda84(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
  * 24 frames. */
 void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s32 x, s32 y, f32 scale)
 {
-    s16 portrait = unit->portrait;
+    u16 portrait = unit->portrait;
     u32 level = unit->level;
     s32 hp = unit->hp;
     s32 maxHp = FUN_002b4dcc(unit);
@@ -110,11 +109,11 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
             count++;
         }
     }
-    if (count >= 2) {
+    if (count > 1) {
         screen->cycle[slot]++;
         if (screen->cycle[slot] >= 24) {
+            screen->marker[slot] = (screen->marker[slot] + 1) % count;
             screen->cycle[slot] = 0;
-            screen->marker[slot] = __aeabi_idivmod(screen->marker[slot] + 1, count);
         }
     }
     FUN_004bda84(screen, unit, slot, x, y, scale);

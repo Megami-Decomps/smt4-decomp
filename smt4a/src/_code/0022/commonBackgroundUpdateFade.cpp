@@ -1,4 +1,4 @@
-/* NON_MATCHING: global/zero constants swap r6/r7, and the owned-child null/keepAlive test is predicated rather than branched; candidate -O2. */
+/* NON_MATCHING: zero/one setup order, predicated owned-child keepAlive test, and literal-pool order differ; saved global/zero registers now match. */
 #include "shard/W6_W6Match5_CommonBackground.h"
 
 extern "C" {
@@ -6,6 +6,14 @@ bool FUN_002ef9f0();
 s32 gameFlagIsSet(u32 flag);
 void jobStop(u32 job, s32 reason);
 void asdMemFree(void *memory);
+
+static __inline bool commonBackgroundChildIsKeptAlive(const CommonBackgroundChild *child)
+{
+    if (child == NULL) {
+        return false;
+    }
+    return child->keepAlive != 0;
+}
 
 s32 commonBackgroundUpdateFade(u32 handle)
 {
@@ -52,7 +60,7 @@ s32 commonBackgroundUpdateFade(u32 handle)
         break;
     }
     if (!FUN_002ef9f0()) {
-        if (g_commonBg.owned == NULL || g_commonBg.owned->keepAlive == 0) {
+        if (!commonBackgroundChildIsKeptAlive(g_commonBg.owned)) {
             if (gameFlagIsSet(0x11)) {
                 CommonBackgroundChild *owned = g_commonBg.owned;
                 if (owned != NULL && --g_commonBg.referenceBytes[2] <= 0) {

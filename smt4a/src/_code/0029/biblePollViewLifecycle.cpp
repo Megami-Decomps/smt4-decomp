@@ -1,4 +1,4 @@
-/* NON_MATCHING: native allocation and virtual interfaces are integrated; retail's allocation NOPs and branch scheduling remain unmatched. */
+/* NON_MATCHING: view allocation/constructor contracts agree; initial global registers and allocation-case common-tail placement differ. */
 #include "bible/bibleMain.h"
 #include "classes/Obj55c89c.h"
 #include "classes/Obj55c8d0.h"

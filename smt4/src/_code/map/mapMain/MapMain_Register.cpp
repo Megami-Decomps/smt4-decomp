@@ -39,7 +39,7 @@ void FUN_001b4764(void);
 void FUN_001b3da4(void);
 void FUN_00192420(void);
 void mapDepartResetWork(void);
-void FUN_001924d0(void);
+void mapObjResetSlots(void);
 void mapGimicClearAll(void);
 s32 FUN_001b7f78(u32 job);
 void mapMainRequest(u32 job);
@@ -53,9 +53,8 @@ u32 taskCreateDraw(const char *name, s32 group, s32 priority, s32 flags,
 void MapMain_Register(void)
 {
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\map\\mapMain.cpp", 392);
-    MapMainInitializationView *map = static_cast<MapMainInitializationView *>(
-        asdMemAlloc(0x100, 0x100, 0, sizeof(MapMain), 1));
-    g_mapMain = reinterpret_cast<MapMain *>(map);
+    g_mapMain = static_cast<MapMain *>(asdMemAlloc(0x100, 0x100, 0, sizeof(MapMain), 1));
+    MapMainInitializationView *map = reinterpret_cast<MapMainInitializationView *>(g_mapMain);
     SaveWork *save = gameGetMapBlock();
     FUN_00280ac0(1);
     map->startupFlags[0] = 0;
@@ -88,7 +87,7 @@ void MapMain_Register(void)
     FUN_001b3da4();
     FUN_00192420();
     mapDepartResetWork();
-    FUN_001924d0();
+    mapObjResetSlots();
     mapGimicClearAll();
     map->messageId = 0x1C2;
     map->messageState = 0;

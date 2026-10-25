@@ -9,7 +9,7 @@ void FUN_00303f48(void);
 void FUN_00273060(void);
 
 /* Advance the map-enemy teardown phases, unregistering resources before releasing them. */
-s32 mapEnemyCleanupUpdate(void *, void *)
+s32 mapEnemyCleanupUpdate(u32 job)
 {
     SceneCleanupOwner *owner = reinterpret_cast<SceneCleanupOwner *>(g_mapEnemy);
     switch (owner->state) {

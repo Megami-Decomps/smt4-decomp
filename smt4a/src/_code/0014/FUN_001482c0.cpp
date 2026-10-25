@@ -14,7 +14,7 @@ int nn_os_LightEvent_Initialize(...);
 int _ZN18WindowStatusResultC1Ej(...);
 int sysMemClear(...);
 
-typedef int romwright_code(...);
+typedef int romwright_code(unsigned int job);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char LAB_001484e4; /* 0x1484e4 */
 extern unsigned char LAB_001484f4; /* 0x1484f4 */
-extern int FUN_0015f2ec(...); /* 0x15f2ec */
+extern int FUN_0015f2ec(unsigned int job); /* 0x15f2ec */
 
 /* Supplied declaration required: asdProcessCreateSimple. */
 extern int FUN_001585bc(int);

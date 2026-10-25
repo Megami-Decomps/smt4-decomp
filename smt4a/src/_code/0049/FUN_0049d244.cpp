@@ -9,8 +9,8 @@ struct MenuCaptionView {
 };
 typedef char MenuCaptionOffset[offsetof(MenuCaptionView, caption) == 0x84 ? 1 : -1];
 extern "C" {
-extern RenderCtx *g_renderCtx;
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+extern RenderCtxA *g_renderCtx;
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
 void FUN_001835b4(u32 layer, u32 group, u32 index, s32 x, s32 y, u32 color);
 SpriteInfo *FUN_001834a4(u32 group, u32 id);

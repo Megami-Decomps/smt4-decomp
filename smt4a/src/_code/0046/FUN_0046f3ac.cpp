@@ -15,7 +15,7 @@ u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(Que
 int byteIsAtLeast100(...);
 int legacyResourceIdRemap(...);
 int FUN_002e3140(...);
-int deletingDtor_002e56ec(...);
+int __aeabi_vec_delete(...);
 int FUN_002fb0d4(...);
 int asdFsIsSdCardDetected(...);
 int FUN_0046c528(...);
@@ -57,7 +57,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: byteIsAtLeast100. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: deletingDtor_002e56ec. */
+/* Supplied declaration required: __aeabi_vec_delete. */
 /* Supplied declaration required: FUN_002fb0d4. */
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: FUN_0046c528. */
@@ -130,7 +130,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         return;
       }
       if (*(int *)(param_2 + 0x318) != 0) {
-        deletingDtor_002e56ec(*(int *)(param_2 + 0x318),_ZN9Obj4221d4D1Ev);
+        __aeabi_vec_delete(*(int *)(param_2 + 0x318),_ZN9Obj4221d4D1Ev);
         *(unsigned int *)(param_2 + 0x318) = 0;
       }
       aocFinishHandleOperation(&temp_v8,param_2);
@@ -301,7 +301,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
   *(unsigned int *)(param_2 + 0x314) = 0;
   *(unsigned int *)(param_2 + 0x350) = 0;
   if (*(int *)(param_2 + 0x318) != 0) {
-    deletingDtor_002e56ec(*(int *)(param_2 + 0x318),_ZN9Obj4221d4D1Ev);
+    __aeabi_vec_delete(*(int *)(param_2 + 0x318),_ZN9Obj4221d4D1Ev);
     *(unsigned int *)(param_2 + 0x318) = 0;
   }
   FUN_00191f68(param_2);

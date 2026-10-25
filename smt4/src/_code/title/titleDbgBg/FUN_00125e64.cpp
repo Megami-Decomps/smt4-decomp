@@ -26,8 +26,7 @@ u32 FUN_00125e64()
     TitleDebugBackgroundView *work = DAT_0044e2e8;
     if (work->state == 1) {
         RenderCtx *context = g_titleScene;
-        u32 state = FUN_002c5d80(1, 0);
-        renderStackPush(&context->stackA, state);
+        renderCtxPushA(context, FUN_002c5d80(1, 0));
         efctSetSpeed(1.0f);
         FUN_002bed3c();
         FUN_002bf288(2, 0, 0, 0, 0, 0xB);

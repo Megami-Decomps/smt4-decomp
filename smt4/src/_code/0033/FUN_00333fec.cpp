@@ -1,4 +1,3 @@
-/* NON_MATCHING: the clamp to at least 1 is built with movlt/movge into r1; retail clamps r4 with movlt then moves it into r1 */
 #include "common.h"
 
 extern "C" {
@@ -12,13 +11,20 @@ typedef struct PlayerData {
 
 extern PlayerData *gameGetPlayerData(void);
 
+static inline s32 playerClampPositive(s32 value)
+{
+    if (value < 1)
+        value = 1;
+    return value;
+}
+
 /* Sets the player value to `value` clamped to at least 1, but never above the player's limit. */
 void FUN_00333fec(s32 value)
 {
     PlayerData *player = gameGetPlayerData();
     s32 limit = player->limit;
 
-    player->value = value <= limit ? (value < 1 ? 1 : value) : limit;
+    player->value = value <= limit ? playerClampPositive(value) : limit;
 }
 
 } /* extern "C" */

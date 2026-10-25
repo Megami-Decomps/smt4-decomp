@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 recordGetModeForId(u32 id);
-void FUN_003cd2c4(s32 x, s32 y, u32 special, f32 effect);
+void campDrawFrame(s32 x, s32 y, u32 special, f32 effect);
 void FUN_001835b4(u32 flags, u32 group, s32 sprite, s32 x, s32 y, u32 layer);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);
 const char *FUN_0015f858(s32 message, u32 variant);
@@ -20,7 +20,7 @@ void uiDrawItemListRow(s32 x, s32 y, s32 message, s32 category, u32 color, u32 i
             color = 0xF5FF9FFF;
         special = 1;
     }
-    FUN_003cd2c4(x, y, special, effect);
+    campDrawFrame(x, y, special, effect);
     FUN_001835b4(2, 18, 1140, x, y, 196);
     const SpriteInfo *icon = FUN_001834a4(18, 1141);
     uiDrawItemCategoryIcon((s16)category, icon->x + x, icon->y + y, 196, 0);

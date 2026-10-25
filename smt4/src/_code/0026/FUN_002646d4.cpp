@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail 46 vs built 47 rows; settling-loop and scene-transform argument scheduling differ. */
+/* NON_MATCHING: named record pointer restores settling-loop shape and address writeback; initial global/constant loads are scheduled differently. */
 #include "map/mapIf.h"
 #include "map/lmapMain.h"
 
@@ -13,8 +13,9 @@ void FUN_002646d4(s32 updateScene)
 {
     MapIfState *state = g_mapIf.state;
     for (s32 index = 0; index < 128; ++index) {
-        if (state->records[index].active)
-            state->records[index].transition.restart = 1;
+        MapIfRecord *record = &state->records[index];
+        if (record->active)
+            record->transition.restart = 1;
     }
     for (s32 pass = 0; pass < 3; ++pass) {
         FUN_001e5e78(1);

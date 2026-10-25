@@ -1,5 +1,6 @@
 /* NON_MATCHING: countdown and three-argument flag update recovered; cold initialization placement and overlapping countdown-symbol relocation differ. */
 #include "map/mapDepart.h"
+#include "gamedata/GameFlags.h"
 
 struct MapPopupState {
     /* 0x00 */ s32 state;
@@ -12,7 +13,7 @@ extern "C" {
 extern MapPopupState* g_popupState;
 extern GameStateA g_gameState;
 s32 randRange(s32 maximum);
-void gameFlagSetValue(u32 flag, s32 value, s32 persist);
+
 s32 gameFlagIsSet(u32 flag);
 s32 gameFlagStateIsOne(void);
 u32 FUN_002d8b58(u32 kind, u32 resource);

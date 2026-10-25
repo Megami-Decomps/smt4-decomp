@@ -1,5 +1,5 @@
 /* NON_MATCHING: final unit lookup adds one register move and changes call scheduling; -O2 candidate. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 struct DamageTarget {
     u32 flags; // 0x000
@@ -23,7 +23,6 @@ struct SlotManager;
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
-void *btlUnitGet(u32 index);
 DamageBattleState *btlGetMainState();
 void FUN_00250720(SlotManager *manager);
 void FUN_002505c0(s32, void *, u32, s32, s32, s32, s32);
@@ -35,7 +34,7 @@ u32 scrBattleDamagePartyHp()
 {
     s32 amount = scrGetArg(0);
     s32 mode = scrGetArg(1);
-    void *source = btlUnitGet(g_btlScriptUnit);
+    void *source = btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit));
     for (s32 slot = 0; slot < 4; ++slot) {
         DamageTarget *target = &btlGetMainState()->targets[slot];
         if ((target->flags & 1) && !(target->flags & 0x40) && target->unitIndex >= 0) {

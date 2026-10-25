@@ -25,7 +25,7 @@ extern int FUN_0019de98(const char *text, u32 color);
 /* Shows the help text of the selected item: fixed texts for ids 0x8B, 0x8C, 0x81 and 0x80, else the entry with the matching id. */
 void FUN_0021b1a8(HelpMenu *menu)
 {
-    const char *text;
+    const char *text = NULL;
     u32 id;
     u32 i;
     int first = resourceRunOperationIfUnblocked(menu->list);
@@ -40,14 +40,11 @@ void FUN_0021b1a8(HelpMenu *menu)
         text = DAT_0052ccbc[5];
     } else if (id == 0x80) {
         text = DAT_0052ccbc[7];
-    } else {
-        goto lookup;
     }
     if (text != NULL) {
         FUN_0019de98(text, 0xF4F4F4FF);
         return;
     }
-lookup:
     for (i = 0; i < menu->entryCount; i++) {
         if (menu->entries[i].id == id) {
             FUN_0019de98(menu->entries[i].text, 0xF4F4F4FF);

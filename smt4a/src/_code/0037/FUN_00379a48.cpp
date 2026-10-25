@@ -16,11 +16,11 @@ struct DebugBoundsPalette { u32 colors[12]; };
 typedef char DebugSpatialBoundsOffsets[sizeof(DebugSpatialBounds) == 0x20 &&
     offsetof(DebugSpatialBoundsQueue, count) == 0x1900 ? 1 : -1];
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 extern DebugSpatialBoundsQueue DAT_00611874;
 extern const DebugBoundsPalette DAT_00532240;
 u32 FUN_001692ac(u32, u32);
-void FUN_0016c4b8(RenderCtx *, u32);
+void FUN_0016c4b8(RenderCtxA *, u32);
 void FUN_00280a08(u32, u32, u32, u32,
                  f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 
@@ -28,8 +28,8 @@ void FUN_00379a48(f32 height)
 {
     DebugBoundsPalette palette = DAT_00532240;
     if (DAT_00611874.count) {
-        RenderCtx *context = g_renderCtx;
-        context->drawStateView.state.push(FUN_001692ac(5, 1));
+        RenderCtxA *context = g_renderCtx;
+        renderCtxPushA(context, FUN_001692ac(5, 1));
         FUN_0016c4b8(g_renderCtx, 0);
         for (s32 index = 0; index < DAT_00611874.count; ++index) {
             const DebugSpatialBounds *bounds = &DAT_00611874.bounds[index];
@@ -41,7 +41,7 @@ void FUN_00379a48(f32 height)
                 bounds->maximum.x, elevation, bounds->minimum.z,
                 bounds->maximum.x, elevation, bounds->maximum.z);
         }
-        g_renderCtx->drawStateView.state.pop();
+        renderStackPop(&g_renderCtx->stackA);
     }
 }
 }

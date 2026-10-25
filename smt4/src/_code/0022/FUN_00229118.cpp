@@ -13,7 +13,7 @@ int FUN_00247478(...);
 int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(...);
 int btlGetMainState(void);
-int FUN_002eb278(...);
+int targetSelectChangeDisplayMode(...);
 int FUN_002eb340(...);
 int btlTargetSelectSetInfoPanel(...);
 
@@ -47,7 +47,7 @@ extern int battleGetEntryHalfword(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_002eb278. */
+/* Supplied declaration required: targetSelectChangeDisplayMode. */
 /* Supplied declaration required: FUN_002eb340. */
 /* Supplied declaration required: btlTargetSelectSetInfoPanel. */
 extern int __aeabi_idivmod(int, int);
@@ -85,7 +85,7 @@ void FUN_00229118(int *param_1,int param_2,unsigned int param_3,int param_4)
   unsigned int temp_v17 [9];
   
   if (param_2 == 0) {
-    FUN_002eb278(0);
+    targetSelectChangeDisplayMode(0);
     return;
   }
   if (param_3 != 0xffffffff) {
@@ -285,7 +285,7 @@ LAB_002292ac:
     } while (temp_v0 < 5);
     temp_v1 = 2;
   }
-  FUN_002eb278(temp_v1);
+  targetSelectChangeDisplayMode(temp_v1);
   return;
 }
 

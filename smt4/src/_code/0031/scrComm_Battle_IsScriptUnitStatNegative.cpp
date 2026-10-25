@@ -1,5 +1,5 @@
 /* Reports through scrSetResult whether the stat slot selected by scrGetArg (0/1/2 -> slot 7/10/11) of the current unit is negative; always returns 1. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -16,7 +16,6 @@ typedef struct UnitRef {
 extern u32 g_btlScriptUnit;
 
 extern s32 scrGetArg(u32 index);
-extern UnitRef *btlUnitGet(u32 id);
 extern void scrSetResult(s32 value);
 
 u32 scrComm_Battle_IsScriptUnitStatNegative(void)
@@ -34,7 +33,7 @@ u32 scrComm_Battle_IsScriptUnitStatNegative(void)
     Unit *unit;
     s32 value;
 
-    ref = btlUnitGet(g_btlScriptUnit);
+    ref = reinterpret_cast<UnitRef *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     unit = ref->unit;
     value = unit->stats[slot];
     scrSetResult(value <= -1);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: shop main state step (open, wait for the list, close, exit requests); written from the decompilation, the lazily created request record and the allocation null checks are not compared with retail */
+/* NON_MATCHING: list construction omits mode/normalized-ID arguments; request-record publication and exit-state data accesses also differ. */
 #include "common.h"
 
 #define SHOP_STATE_OPEN 0
@@ -71,7 +71,7 @@ static ShopRequestRecord *shopRequestRecordGet(void)
 }
 
 /* Steps the shop. Returns -1 once the shop asks to be left, otherwise 0. */
-s32 FUN_0027dda4(void)
+s32 FUN_0027dda4(u32 process)
 {
     ShopSession *shop = g_shop;
     s32 slot[2];

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -17,7 +18,7 @@ s32 gameFlagEntryGetBit(u16 id, u32 bit);
 s32 FUN_003df390(u16 id);
 UnlockRecord *FUN_001ad9b4(u16 id);
 u32 itemDataGetValue(u16 id);
-void gameFlagSetValue(u32 flag, s32 value, u32 enabled);
+
 void FUN_00417b70(u16 id);
 
 /* Unlocks every entry 100..399 whose required level the player has reached. */

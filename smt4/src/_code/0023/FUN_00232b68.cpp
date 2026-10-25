@@ -53,7 +53,7 @@ extern int gameGetUnitRecord(void);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002e33f4. */
 extern fn_00232b68_arg0 *FUN_0031c344(fn_00232b68_arg0 *, fn_00232b68_arg1 *);
-extern int FUN_0032b1b4(fn_00232b68_arg1 *, unsigned short);
+extern int recordFilterMaskByKind(fn_00232b68_arg1 *, unsigned short);
 
 
 int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned int *param_3,unsigned int *param_4,
@@ -139,7 +139,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
       pfVar11 = (fn_00232b68_arg0 *)FUN_0031c344(param_1,param_2);
     }
     if (temp_v5 != 0) {
-      temp_v6 = FUN_0032b1b4(param_2,*(unsigned short *)(temp_v5 + 0x72));
+      temp_v6 = recordFilterMaskByKind(param_2,*(unsigned short *)(temp_v5 + 0x72));
       if (temp_v6 != 0) {
         if (param_3 == (unsigned int *)0x0) {
           padClearBits();
@@ -237,7 +237,7 @@ LAB_00232fa8:
       *(short *)(temp_v5 + 0x2c) = temp_v2;
     }
     else {
-      temp_v5 = FUN_0032b1b4(param_2,*(unsigned short *)(temp_v6 + 0x44));
+      temp_v5 = recordFilterMaskByKind(param_2,*(unsigned short *)(temp_v6 + 0x44));
       if (temp_v5 != 0) {
         if (param_3 == (unsigned int *)0x0) {
           objectFlagsClear(temp_v6);

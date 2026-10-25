@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e4d70` (_code @ 0x1e4d70, 0x7cc bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int asdLoadFileSetUseRawPaths(int);
 int FUN_00282bfc(int, int);
 int FUN_00287728(int);
 int msgWindowReset(void);
-int gameFlagSetValue(...);
 int FUN_00289880(void);
 int FUN_002898e4(void);
 int aocBufferQueueDisplay(int, unsigned int, int);
@@ -47,7 +47,6 @@ extern int asdLoadFileGetUseRawPaths(void);
 /* Supplied declaration required: FUN_00282bfc. */
 /* Supplied declaration required: FUN_00287728. */
 /* Supplied declaration required: msgWindowReset. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00289880. */
@@ -122,7 +121,7 @@ unsigned int FUN_001e4d70(void)
       }
     }
     else if ((*(char *)(puVar1 + 9) != '\0') && (puVar1[7] != 0)) {
-      gameFlagSetValue(puVar1[7],1);
+      gameFlagSetValue(puVar1[7], 1, 1);
     }
     uiFadeRelease();
     buttonHelpRelease();

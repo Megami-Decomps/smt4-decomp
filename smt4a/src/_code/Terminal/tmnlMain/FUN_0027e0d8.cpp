@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027e0d8` (_code @ 0x27e0d8, 0x1cd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 #include "gfx/CameraAnimationApply.h"
 
 extern "C" {
@@ -81,7 +82,6 @@ int FUN_003870a8(...);
 int soundChannelRequestIfEnabled(...);
 int controllerTargetNodeStart(...);
 int linkedTargetSetFloat(...);
-int gameFlagSetValue(...);
 int FUN_0040ae70(...);
 int modelSetDrawMode(...);
 
@@ -253,7 +253,6 @@ extern unsigned int *_ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: controllerApplyAtUnitScale. */
 /* Supplied declaration required: cameraAnimationSampleAndAdvance. */
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fd8dc. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: FUN_00406768. */
@@ -581,7 +580,7 @@ unsigned int FUN_0027e0d8(void)
           puVar3[5] = 0;
           sysPlaySe(0xa7);
           scrScriptProcessStartEntry(puVar3[10],0x16);
-          gameFlagSetValue(*(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 0x56fd70),1);
+          gameFlagSetValue(*(unsigned int *)((unsigned int)*(unsigned char *)((int)puVar3 + 9) * 0x3c + 0x56fd70), 1, 1);
           break;
         }
         FUN_003870a8(puVar3);

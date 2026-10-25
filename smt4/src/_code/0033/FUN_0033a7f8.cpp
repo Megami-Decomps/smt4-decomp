@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0033a7f8` (_code @ 0x33a7f8, 0x45c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -30,8 +31,6 @@ static float romwright_fabs_4(float value)
 #endif
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 extern int FUN_0027d9e8(int, unsigned int);
-/* Supplied declaration required: FUN_0027da30. */
-extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_002b7bca. */
 /* Supplied declaration required: memClear. */
 
@@ -213,7 +212,7 @@ LAB_0033ab28:
     }
   }
   else {
-    temp_v3 = btlUnitGet(g_btlScriptUnit);
+    temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     temp_v3 = *(int *)(temp_v3 + 0x24);
     if (temp_v3 == 0) {
       return 0;

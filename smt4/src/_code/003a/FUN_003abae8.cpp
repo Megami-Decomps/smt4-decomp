@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0022d800(int, int, int, int);
+int uiDrawScrollingSelectionEntry(int, int, int, int);
 int drawTextAtRelativePosition(...);
 int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int, int, int, int);
@@ -27,7 +27,7 @@ typedef struct {
 extern unsigned char LAB_003abd7c; /* 0x3abd7c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0022d800. */
+/* Supplied declaration required: uiDrawScrollingSelectionEntry. */
 /* Supplied declaration required: drawTextAtRelativePosition. */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
@@ -71,7 +71,7 @@ void FUN_003abae8(int param_1,int param_2,int param_3,int param_4,int param_5)
   temp_v3 = (int)*(short *)(temp_v1 + 8);
   temp_v1 = (int)*(short *)(temp_v1 + 10);
   if (param_4 != 0) {
-    FUN_0022d800(param_1,param_2,param_5,(int)*(char *)(param_1 + 0x56d));
+    uiDrawScrollingSelectionEntry(param_1,param_2,param_5,(int)*(char *)(param_1 + 0x56d));
     temp_v9 = 3;
     temp_v4 = 0xffffffff;
     temp_v10 = 0x4e0;

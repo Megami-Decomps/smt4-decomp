@@ -1,10 +1,11 @@
-#include "common.h"
+#include "addon/AocBufferRequest.h"
+#include "classes/Obj422214Owner.h"
 
 extern "C" {
 
 typedef struct AocMain {
     /* 0x000 */ u8 unk000[0x678];
-    /* 0x678 */ void *loader;
+    /* 0x678 */ Obj422214Owner *loader;
 } AocMain;
 
 extern AocMain *g_aocMain;
@@ -13,9 +14,8 @@ extern void FUN_00169548(s32 arg);
 extern void messageMainSetFlag(s32 arg);
 extern void gameDataBlocksReleaseHold(s32 arg);
 extern void gameDataFlagsClearBits(s32 arg);
-extern void deletingDtor_002e56ec(void *object, void *callback);
-extern void FUN_00473710(AocMain *aoc);
-extern void ownerReleaseResources(AocMain *aoc);
+extern void aocApplicationReleasePrimaryRequest(AocApplicationRequestView *aoc);
+extern void ownerReleaseResources(AocApplicationRequestView *aoc);
 
 /* Shuts the add-on content main down: releases its subsystems, deletes the loader and finishes the block. */
 void aocMainShutdown(void)
@@ -28,11 +28,11 @@ void aocMainShutdown(void)
     gameDataFlagsClearBits(4);
     aoc = g_aocMain;
     if (aoc->loader != NULL) {
-        deletingDtor_002e56ec(aoc->loader, (void *)0x47D8E8);
+        delete[] aoc->loader;
         aoc->loader = NULL;
     }
-    FUN_00473710(aoc);
-    ownerReleaseResources(aoc);
+    aocApplicationReleasePrimaryRequest(reinterpret_cast<AocApplicationRequestView *>(aoc));
+    ownerReleaseResources(reinterpret_cast<AocApplicationRequestView *>(aoc));
 }
 
 } /* extern "C" */

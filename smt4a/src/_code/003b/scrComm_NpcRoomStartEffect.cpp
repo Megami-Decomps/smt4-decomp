@@ -24,8 +24,8 @@ typedef struct NpcRoom {
 extern NpcRoom *g_npcRoom; /* 0x588124 */
 
 extern int scrGetArg(int index);
-extern int FUN_001801b8(u32 id, u32 variant);
-extern int FUN_002159f8(u32 id, u32 variant);
+extern int gameSaveTestFlag(u32 id, u32 variant);
+extern int saveWorkClearFlagMask(u32 id, u32 variant);
 
 /* Script command: starts effect `kind` for the room's NPC with the given id and variant; an unknown NPC falls back to kind 5. */
 u32 scrComm_NpcRoomStartEffect(void)
@@ -36,11 +36,11 @@ u32 scrComm_NpcRoomStartEffect(void)
     u32 kind = 0;
     int i;
 
-    if (FUN_001801b8(id, variant & 0xFF) == 0) {
+    if (gameSaveTestFlag(id, variant & 0xFF) == 0) {
         timer = 0;
         kind = 5;
     }
-    FUN_002159f8(id, variant & 0xFF);
+    saveWorkClearFlagMask(id, variant & 0xFF);
     if (g_npcRoom != NULL) {
         for (i = 0; i < 8; i++) {
             NpcData *npc = g_npcRoom->npcs[i];

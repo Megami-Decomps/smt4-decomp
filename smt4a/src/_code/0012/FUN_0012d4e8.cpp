@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_002e5694(int, unsigned int, int, unsigned char *);
-int deletingDtor_002e56ec(int, unsigned char *);
+int __aeabi_vec_delete(int, unsigned char *);
 int FUN_0030c546(...);
 int FUN_0030eb1c(unsigned char [4]);
 
@@ -21,7 +21,7 @@ extern unsigned char LAB_00124a43; /* 0x124a43 */
 
 extern unsigned int FUN_00124a28(unsigned char *);
 /* Supplied declaration required: FUN_002e5694. */
-/* Supplied declaration required: deletingDtor_002e56ec. */
+/* Supplied declaration required: __aeabi_vec_delete. */
 /* Supplied declaration required: FUN_0030c546. */
 /* Supplied declaration required: FUN_0030eb1c. */
 
@@ -57,7 +57,7 @@ int FUN_0012d4e8(int *param_1,unsigned int param_2)
   for (; temp_v1 < param_2; temp_v1 = temp_v1 + 1) {
     FUN_0030c546(temp_v1 * 8 + temp_v5,temp_v7);
   }
-  deletingDtor_002e56ec(*param_1,&LAB_00124a43);
+  __aeabi_vec_delete(*param_1,&LAB_00124a43);
   temp_v0 = temp_v5;
   param_1[1] = param_2;
   *param_1 = temp_v5;

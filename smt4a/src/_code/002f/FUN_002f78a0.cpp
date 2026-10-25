@@ -1,4 +1,3 @@
-/* NON_MATCHING: only initial source-pointer, constant and loop-counter setup is scheduled differently. */
 #include "ui/UiSpriteState.h"
 
 struct MenuSpriteBankView {
@@ -25,19 +24,18 @@ void uiSpriteSelectAnim(UiSpriteState *, s32);
 /* Initialize the repeating menu sprites and their label, cursor and indicator. */
 void FUN_002f78a0(MenuSpriteBankView *work)
 {
-    UiSpriteSource *source = &work->source;
     for (s32 i = 0; i < 13; ++i) {
         UiSpriteState *sprite = &work->slots[i];
-        FUN_0014e188(sprite, 0x14, 0xbb9, source, 0xc9, 1.0f);
+        FUN_0014e188(sprite, 0x14, 0xbb9, &work->source, 0xc9, 1.0f);
         uiSpriteSetKeyframe(sprite, 10, 0);
         uiSpriteSetImageKeyframe(sprite, 0x13, 0);
     }
-    FUN_0014e188(&work->label, 0x14, 0xbd8, source, 0xc9, 1.0f);
+    FUN_0014e188(&work->label, 0x14, 0xbd8, &work->source, 0xc9, 1.0f);
     uiSpriteSetImageKeyframe(&work->label, 6, 0);
-    FUN_0014e188(&work->cursor, 0x14, 0xbd8, source, 0xc9, 1.0f);
+    FUN_0014e188(&work->cursor, 0x14, 0xbd8, &work->source, 0xc9, 1.0f);
     uiSpriteSelectAnim(&work->cursor, 8);
     work->state = 0;
-    FUN_0014e188(&work->indicator, 0x14, 0xbd8, source, 0xc9, 1.0f);
+    FUN_0014e188(&work->indicator, 0x14, 0xbd8, &work->source, 0xc9, 1.0f);
     uiSpriteSetImageKeyframe(&work->indicator, 0x16, 0);
 }
 }

@@ -1,15 +1,15 @@
-/* NON_MATCHING: render-stack address computation moves before state encoding and push-index registers differ from retail. */
+/* NON_MATCHING: work pointer and zero constant occupy exchanged saved registers; canonical render wrappers match stack scheduling. */
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-void *jobGetWork(void);
 s32 FUN_002865c0(u32 mode, f32 alpha);
 s32 FUN_002c5d80(u32 mode, u32 flags);
 s32 packNibblesAndByte(u32 first, u32 second, u32 value);
 void FUN_0028186c(u32 handle);
 
-u32 FUN_002248b8(void)
+s32 FUN_002248b8(u32 job)
 {
     struct DrawWork {
         u8 prefix00[0xC];
@@ -18,14 +18,11 @@ u32 FUN_002248b8(void)
     };
     typedef char DrawWorkOffsetsCheck[
         offsetof(DrawWork, handle) == 0xC && offsetof(DrawWork, enabled) == 0x10 ? 1 : -1];
-    DrawWork *work = (DrawWork *)jobGetWork();
+    DrawWork *work = (DrawWork *)jobGetWork(job);
     if (work->enabled) {
-        RenderCtx *context = g_titleScene;
-        renderStackPush(&context->additional.stackC, FUN_002865c0(6, 0.0f));
-        context = g_titleScene;
-        renderStackPush(&context->stackA, FUN_002c5d80(1, 0));
-        context = g_titleScene;
-        renderStackPush(&context->stackB, packNibblesAndByte(6, 1, 0));
+        renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
+        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
         FUN_0028186c(work->handle);
         renderStackPop(&g_titleScene->stackB);
         renderStackPop(&g_titleScene->stackA);

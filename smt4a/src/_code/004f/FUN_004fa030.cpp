@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail ldr r1, [r5] differs from recovered ldr r0, [r5]. */
 #include "common.h"
 
 namespace {
@@ -23,7 +22,7 @@ struct BattleEffectView {
 
 extern "C" {
 void* btlGetMainState(void);
-s32 btlScriptUnitHasFlags(void* mainState);
+s32 btlScriptUnitHasFlags(void);
 s32 libc_strcmp(const char* left, const char* right);
 extern BattleEffectView g_btlEffect;
 }
@@ -31,7 +30,8 @@ extern BattleEffectView g_btlEffect;
 // Find the first matching effect's signed field, unless unit flags block the search.
 extern "C" s32 FUN_004fa030(EffectOwnerView* owner)
 {
-    if (btlScriptUnitHasFlags(btlGetMainState()) != 0) {
+    btlGetMainState();
+    if (btlScriptUnitHasFlags() != 0) {
         return -1;
     }
 

@@ -9,7 +9,7 @@ IdRecord *FUN_00141548(IdRecordOwner *owner, u16 id)
     s32 i;
 
     for (i = 0; i < owner->recordCount; i++) {
-        if (owner->records[i].id == id) {
+        if (id == owner->records[i].id) {
             return &owner->records[i];
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: bsearch callback store scheduling and the shared success-branch join differ. */
+/* NON_MATCHING: override-aware lookup helper restores shared result test/alignment; first bsearch comparator stack argument is still stored early. */
 #include "addon/aocMain.h"
 #include "gamedata/Table00.h"
 #include "gamedata/DataTable.h"
@@ -9,8 +9,7 @@ s32 FUN_001ab89c(const void *left, const void *right);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,
                    s32 (*compare)(const void *, const void *));
 
-// Copy up to eight skill IDs, preferring the downloadable table over the base table.
-s32 FUN_0035bd94(u16 id, u16 *skills, s32 count)
+static __inline Table00Record *findTable00RecordWithOverride(u16 id)
 {
     Table00Record key;
     key.id = id;
@@ -27,6 +26,13 @@ s32 FUN_0035bd94(u16 id, u16 *skills, s32 count)
         record = static_cast<Table00Record *>(libc_bsearch(&key, entries,
             entryCount, sizeof(Table00Record), FUN_001ab89c));
     }
+    return record;
+}
+
+// Copy up to eight skill IDs, preferring the downloadable table over the base table.
+s32 FUN_0035bd94(u16 id, u16 *skills, s32 count)
+{
+    Table00Record *record = findTable00RecordWithOverride(id);
     if (record != NULL) {
         if (count > 8) {
             count = 8;

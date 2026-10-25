@@ -4,7 +4,9 @@
 
 ```
 smt4/, smt4a/     one project per game: config/, include/, src/, objdiff.json, build.py, tools/
-  config/symbols.txt       every function's name, address and size, and every named global
+  config/symbols.txt       every function's name, address and size, and every named global; a
+                           `type:alias` line is a second linker name for a named address
+                           (`__init_array_end` of the empty init array), built as that address's name
   config/name_sources.txt  where each name came from (evidence or inferred)
   config/tus.json          function -> original source file (tools/assign_tus.py)
   src/_code/<file>/        functions placed in their original source file's folder (AsdSDK/..., battle/...)

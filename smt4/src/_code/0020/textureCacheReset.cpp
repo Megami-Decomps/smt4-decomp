@@ -1,14 +1,14 @@
-#include "common.h"
+#include "gfx/NamedTextureCache.h"
 
 extern "C" {
 
 int memClear(void *ptr, int size);
 
-extern u8 g_textureCache;
+extern NamedTextureCache g_textureCache;
 
 void textureCacheReset(void)
 {
-    memClear(&g_textureCache, 0x1308);
+    memClear(&g_textureCache, sizeof(g_textureCache));
 }
 
 } /* extern "C" */

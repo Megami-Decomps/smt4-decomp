@@ -17,8 +17,8 @@ static __inline bool stageHasMode(const BattleStageMode* stage, s32 mode)
     return stage->state == 8 && stage->mode == mode;
 }
 
-// Map the three supported state-8 stage modes to their selection indices.
-extern "C" s32 btlStageGetModeIndex(void)
+// Map state-8 stage modes to their selection indices; callers still pass their context.
+extern "C" s32 btlStageGetModeIndex(u32)
 {
     const BattleStageMode* stage = &g_btlStageModel->selection;
     if (stageHasMode(stage, 4))

@@ -11,7 +11,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_004a15a0(...); /* 0x4a15a0 */
-extern int FUN_004a18ec(...); /* 0x4a18ec */
+extern int itemMenuDispatchSelectedEntry(...); /* 0x4a18ec */
 extern int FUN_004a2064(...); /* 0x4a2064 */
 extern int _ZN13BibleItemMenu7confirmEv(...); /* 0x4a2238 */
 extern int FUN_004a2404(...); /* 0x4a2404 */
@@ -60,7 +60,7 @@ void Obj55c89c::resetHandlers()
   *(unsigned int *)(param_1 + 0xa894) = 0;
   *(romwright_code **)(param_1 + 0xa898) = FUN_004a3154;
   *(unsigned int *)(param_1 + 0xa89c) = 0;
-  *(romwright_code **)(param_1 + 0xa8a0) = FUN_004a18ec;
+  *(romwright_code **)(param_1 + 0xa8a0) = itemMenuDispatchSelectedEntry;
   *(unsigned int *)(param_1 + 0xa8a4) = 0;
   *(romwright_code **)(param_1 + 0xa8a8) = screen4AFinish;
   *(unsigned int *)(param_1 + 0xa8ac) = 0;

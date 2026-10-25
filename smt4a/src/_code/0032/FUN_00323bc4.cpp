@@ -9,12 +9,14 @@ u32 FUN_00323bc4(const EffectTimelinePart *part)
     s32 maximum = -1;
     for (const EffectTimelinePart *child = part->children; child != NULL; child = child->next) {
         s32 (*duration)(void *) = g_handlerTable[child->block->type].timeline.duration;
-        s32 length = -1;
+        s32 length;
         if (duration != NULL) {
             length = duration(child->block->data);
             if (length == 0) {
                 return 0;
             }
+        } else {
+            length = -1;
         }
         s32 endFrame = length + child->startFrame;
         if (maximum < endFrame) {

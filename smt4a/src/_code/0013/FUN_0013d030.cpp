@@ -10,9 +10,9 @@ s32 stateValuesGetBySelector(void);
 extern u32 g_renderCtx;
 
 /* Starts a 512x512 capture into the job's second surface when requested, unblocked and no state selector is active. */
-s32 FUN_0013d030(void)
+s32 FUN_0013d030(u32 job)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
 
     work->capturedC = 0;
     if (stateValuesGetBySelector() == 0 && work->captureEnabled && work->captureRequested &&

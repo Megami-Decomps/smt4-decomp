@@ -1,5 +1,6 @@
 /* NON_MATCHING: first draw-task callback and work-pointer argument registers are swapped. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
@@ -22,7 +23,7 @@ extern QuestCenterRegistrationGlobals g_qcMain;
 void *jyoucyuGetTableEntry(u32 index);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void QcMain_SetFlag(s32 id, s32 value);
-void gameFlagSetValue(u32 id, s32 mode, s32 value);
+
 s32 QuestCenterMainProcUpdate(u32 handle);
 void effectQcFinish(u32 handle);
 s32 qcMainEndBackgroundPass(u32 handle);

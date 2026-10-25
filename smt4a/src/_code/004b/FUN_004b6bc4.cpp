@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail spills the script-table local (not the script) in the entry loop, keeps the s16 x/y in r2/r3 across FUN_004b9ff4 (needs multifile FUN_004b9ff4), and the tail pair stores differ (stm vs vstm/strd) */
+/* NON_MATCHING: retail spills the script-table local (not the script) in the entry loop, keeps the s16 x/y in r2/r3 across uiClampScrollOffset (needs multifile uiClampScrollOffset), and the tail pair stores differ (stm vs vstm/strd) */
 #include "map/mapDepart.h"
 
 /* A row of data table 33 (type 0): which group of list entries a menu type shows. */
@@ -72,7 +72,7 @@ s32 resultGetListEntryLabel(void *list, ResultListEntry *entry, s32 type);
 s32 FUN_0046eb24(void *aocSystem, s32 kind);
 ResultListEntry *contentEntryGetFromFilesByKind(void *aocSystem, s32 kind, s32 index);
 s32 FUN_004b75d0(ResultMenu *menu);
-void FUN_004b9ff4(ResultMenu *menu, f32 *offset);
+void uiClampScrollOffset(ResultMenu *menu, f32 *offset);
 s32 gameStateIsFlagSetAndLarge(void);
 s32 menu4CScrollToKind(void *list, s32 kind);
 ListMenuEntry *menu4CGetCurrentEntry(void *list);
@@ -185,8 +185,8 @@ void FUN_004b6bc4(ResultMenu *menu, s32 type, s32 group)
     menu->scrollTarget[1] = menu->scroll[1];
     menu->focusTarget[0] = x - 200.0f;
     menu->focusTarget[1] = y - 120.0f;
-    FUN_004b9ff4(menu, menu->scrollTarget);
-    FUN_004b9ff4(menu, menu->focusTarget);
+    uiClampScrollOffset(menu, menu->scrollTarget);
+    uiClampScrollOffset(menu, menu->focusTarget);
     menu->viewOriginCopy[0] = menu->viewOrigin[0];
     menu->viewOriginCopy[1] = menu->viewOrigin[1];
     menu->focus[0] = x;

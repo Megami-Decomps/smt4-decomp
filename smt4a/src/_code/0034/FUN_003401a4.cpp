@@ -22,7 +22,7 @@ int sub68OwnerCall9(void);
 int FUN_003868dc(int);
 int sysPlayVoice(int);
 int FUN_003d4ed8(int);
-int FUN_00483834(int);
+int controllerUpdateWithIdleTimer(int);
 int partyTryInflictCondition(int, int, int);
 int FUN_0049f8a4(int, int);
 int VectorSignedToFloat(int, int);
@@ -76,7 +76,7 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned int *);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d4ed8. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: FUN_00483834. */
+/* Supplied declaration required: controllerUpdateWithIdleTimer. */
 /* Supplied declaration required: partyTryInflictCondition. */
 /* Supplied declaration required: FUN_0049f8a4. */
 extern short __aeabi_idivmod(int, int);
@@ -396,7 +396,7 @@ void FUN_003401a4(int param_1)
       temp_v7 = *(int *)(param_1 + 0xd4) + 1;
       *(int *)(param_1 + 0xd4) = temp_v7;
       if (temp_v7 >= 10) {
-        FUN_00483834(param_1 + 0xf4);
+        controllerUpdateWithIdleTimer(param_1 + 0xf4);
         FUN_00234b30();
       }
       if (*(int *)(param_1 + 0xd4) == 0x14) {

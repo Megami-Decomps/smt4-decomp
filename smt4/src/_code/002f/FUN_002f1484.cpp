@@ -1,4 +1,4 @@
-#include "common.h"
+#include "gamedata/UnitStats.h"
 
 extern "C" {
 
@@ -6,7 +6,7 @@ int btlMainFindEntryByListedId(u8 *btl, int index);
 u8 *btlGetMainState(void);
 int FUN_002954bc(u32 entity);
 int scrGetArg(int index);
-int FUN_003bc8f8(u32 entity, u32 value);
+void FUN_003bc8f8(StatBlock *entity, u32 value);
 extern u32 gameGetUnitRecord(int index);
 
 /* Script command: looks up entity `id` (battle unit below 0x6D, otherwise party member id - 0x6D) and applies the value to it. */
@@ -26,7 +26,7 @@ u32 FUN_002f1484(void)
     } else {
         entity = gameGetUnitRecord(id - 0x6d);
     }
-    FUN_003bc8f8(entity, value);
+    FUN_003bc8f8(reinterpret_cast<StatBlock *>(entity), value);
     FUN_002954bc(entity);
     return 1;
 }

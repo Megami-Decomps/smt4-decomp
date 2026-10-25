@@ -13,7 +13,7 @@ SpriteInfo *FUN_001834a4(s32 group, s32 sprite);
 void FUN_001835b4(s32 layer, s32 group, s32 sprite, s32 x, s32 y, s32 flags);
 u32 FUN_0035aa90(s32 index);
 const char *FUN_001654f8(u32 id, s32 section, s32 option);
-void FUN_0023723c(u32 text, s32 layer, u32 color, s32 flags, s32 mode, const char *value);
+void asdTextFormatStream(u32 text, s32 layer, u32 color, s32 flags, s32 mode, const char *value);
 void asdTextDrawDirectoryEntry(u32 text, s32 layer, u32 color, s32 flags, s32 mode, u32 directory, s32 index);
 void FUN_0025cc78(u32 text, s32 x, s32 y, s32 style, f32 scale);
 
@@ -33,7 +33,7 @@ void FUN_003426c0(const DirectoryListPlacement *placement, u32 text, u32 directo
             asdTextDrawDirectoryEntry(text, 2, 0xFFFFFFFF, 0, 3, directory, row + first + offset);
             break;
         case 1:
-            FUN_0023723c(text, 2, 0xFFFFFFFF, 0, 3,
+            asdTextFormatStream(text, 2, 0xFFFFFFFF, 0, 3,
                          FUN_001654f8(FUN_0035aa90(row + first + offset), 0, 0));
             break;
         }

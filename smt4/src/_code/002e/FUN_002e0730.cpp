@@ -23,6 +23,7 @@ struct TitleLogoWork {
     /* 0x30 */ s32 fadeState; /* 113: hidden */
 };
 
+
 extern "C" {
 TitleLogoWork *jobGetWork(u32 job);
 void FUN_002bf818(void *fade);

@@ -4,9 +4,9 @@
 extern "C" {
 
 /* Fetch the current job work and report zero. */
-u32 lmapJobQueryZero(void)
+s32 lmapJobQueryZero(u32 job)
 {
-    jobGetWork();
+    jobGetWork(job);
     return 0;
 }
 

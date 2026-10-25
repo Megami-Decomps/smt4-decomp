@@ -18,7 +18,7 @@ u32 FUN_00380b04(void)
     s32 target = scrGetArg(0);
     u16 status = scrGetArg(1);
     s32 enable = scrGetArg(2);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (target < 109) {
         BattleRosterRecordA *record = &btlGetMainState()->roster[target];
         if (!enable) {

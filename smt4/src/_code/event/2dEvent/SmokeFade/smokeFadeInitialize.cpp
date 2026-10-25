@@ -7,7 +7,7 @@ extern SmokeFadeState *DAT_0043df28;
 extern SmokeFadeImage DAT_0043df40[2];
 void *asdMemAlloc(u32, u32, u32, u32, u32);
 s32 FUN_001ad6fc(u32);
-u8 FUN_001ad4f4(u32);
+s32 FUN_001ad4f4(u32);
 u32 asdProcessCreateSimple(const char *, s32, s32, s32, s32 (*)(u32), void *, void *);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void *textureGetIndexedResource(u32);

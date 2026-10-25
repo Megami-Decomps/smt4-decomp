@@ -7,7 +7,7 @@ extern "C" {
 int uiQuestStartSelected(void);
 int uiFadeRequestHalf(void);
 int FUN_0028fe0c(...);
-int FUN_0028ffb8(...);
+int uiQuestCountDetailPages(...);
 int FUN_002900d0(void);
 int FUN_0029016c(...);
 int FUN_002902a0(...);
@@ -52,7 +52,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_001afc0c. */
 /* Supplied declaration required: uiFadeRequestHalf. */
 /* Supplied declaration required: FUN_0028fe0c. */
-/* Supplied declaration required: FUN_0028ffb8. */
+/* Supplied declaration required: uiQuestCountDetailPages. */
 /* Supplied declaration required: FUN_002900d0. */
 /* Supplied declaration required: FUN_0029016c. */
 extern int FUN_0029022c(void);
@@ -807,7 +807,7 @@ joined_r0x0019627c:
         if (*(char *)(temp_v1 + 0x5f2) != '\0') {
           temp_v3 = *(unsigned short *)(temp_v1 + 0x97e);
         }
-        FUN_0028ffb8(temp_v3);
+        uiQuestCountDetailPages(temp_v3);
         temp_v11 = g_uiQuest;
         *(unsigned int *)(g_uiQuest + 8) = *(unsigned int *)(g_uiQuest + 4);
         *(unsigned int *)(temp_v11 + 4) = 0x15;

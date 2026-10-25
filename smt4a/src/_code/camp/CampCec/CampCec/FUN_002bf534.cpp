@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002bf534` (_code @ 0x2bf534, 0x7cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match4_CampCecResumeState.h"
 
 extern "C" {
@@ -26,7 +27,7 @@ int sysMemClear(void);
 int rt_aeabi_memclr(...);
 int cecProcessCall2(void);
 int gameDataBlocksSetFlagBits(...);
-int FUN_0032e25c(...);
+int slotNameDisplaySetEntry(...);
 int FUN_00331380(int);
 int ownerSetName(...);
 int campStatusSceneCreateModel(unsigned int *);
@@ -106,7 +107,7 @@ extern int rt_memcmp(unsigned char *, unsigned int *, unsigned int);
 /* Supplied declaration required: cecProcessCall2. */
 extern unsigned char FUN_0031cee0(void);
 /* Supplied declaration required: gameDataBlocksSetFlagBits. */
-/* Supplied declaration required: FUN_0032e25c. */
+/* Supplied declaration required: slotNameDisplaySetEntry. */
 extern unsigned int gameDataBlocksGetWord27E8C(void);
 /* Supplied declaration required: FUN_00331380. */
 /* Supplied declaration required: ownerSetName. */
@@ -118,7 +119,6 @@ extern int gameDataTestFlags(unsigned int);
 /* Supplied declaration required: campCecDrawSetCreate. */
 /* Supplied declaration required: soundChannelRequestIfEnabled. */
 /* Supplied declaration required: loadSlotRequestAsync. */
-extern int gameFlagSetValue(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004310c0. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: nn_cfg_CTR_IsRestrictP2pCec. */
@@ -200,14 +200,14 @@ void FUN_002bf534(int param_1)
   puVar4[0xc] = (unsigned int)FUN_0036cfb0;
   puVar4[0xe] = (unsigned int)&LAB_003193a0;
   puVar4[0xf] = (unsigned int)jobSceneWaitStep;
-  temp_v2 = gameFlagSetValue(0x4ca,0,1);
+  gameFlagSetValue(0x4ca,0,1);
   puVar4[0x5a] = 0;
-  nn_cfg_CTR_IsRestrictP2pCec();
+  temp_v2 = nn_cfg_CTR_IsRestrictP2pCec();
   if (temp_v2 != 0) {
     puVar4[0x5a] = 1;
   }
   else {
-    FUN_004310c0();
+    temp_v2 = FUN_004310c0();
     if (temp_v2 == 0) {
       puVar4[0x5a] = 2;
     }
@@ -256,7 +256,7 @@ void FUN_002bf534(int param_1)
   temp_v1 = FUN_002a46b8();
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
   temp_v3 = gameDataGetRecordValue();
-  FUN_0032e25c(DAT_0057f114 + 0x10,temp_v3);
+  slotNameDisplaySetEntry(DAT_0057f114 + 0x10,temp_v3);
   temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
   puVar2 = DAT_0057f114;
@@ -305,7 +305,7 @@ void FUN_002bf534(int param_1)
   temp_v1 = FUN_002a46b8();
   *(unsigned char *)((int)DAT_0057f114 + 0x82) = temp_v1;
   temp_v3 = gameDataGetRecordValue();
-  FUN_0032e25c(DAT_0057f114 + 0x10,temp_v3);
+  slotNameDisplaySetEntry(DAT_0057f114 + 0x10,temp_v3);
   temp_v3 = gameDataBlocksGetWord27E8C();
   DAT_0057f114[0x19] = temp_v3;
 LAB_002bfb8c:
@@ -318,7 +318,7 @@ LAB_002bfb8c:
 LAB_002bfc18:
       temp_v2 = gameDataGetRecordValue();
       if (temp_v2 == 0) {
-        FUN_0032e25c(DAT_0057f114 + 0x10,0);
+        slotNameDisplaySetEntry(DAT_0057f114 + 0x10,0);
       }
       if ((*(char *)(puVar4 + 0x5b) != '\0') && (temp_v2 = gameDataTestFlags(0x20), temp_v2 != 0)) {
         FUN_002c0b10(&temp_v9);
@@ -347,7 +347,7 @@ LAB_002bfc18:
   }
   temp_v6 = gameDataGetRecordValue();
   if (temp_v6 != *(unsigned short *)(temp_v4 + 0x62)) {
-    FUN_0032e25c(DAT_0057f114 + 0x10,(int)*(short *)(temp_v4 + 0x62));
+    slotNameDisplaySetEntry(DAT_0057f114 + 0x10,(int)*(short *)(temp_v4 + 0x62));
     FUN_002a6480((int)*(short *)(temp_v4 + 0x62));
   }
   goto LAB_002bfc18;

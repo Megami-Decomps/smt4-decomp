@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b7f78` (_code @ 0x1b7f78, 0x8098 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
 extern "C" {
@@ -64,7 +65,7 @@ int modelGroupsMarkActiveDestroy(void);
 int mapBlockLoadTableRecord(void);
 int mapModelMarkDestroy(void);
 int mapEnemyStopRequest(void);
-int FUN_002c87a4(void);
+int mapEnemyRestartIdleEntries(void);
 int mapEnemyEndEligibleStates(void);
 int FUN_002dfe64(void);
 int eventQueueAddSelected(void);
@@ -253,7 +254,7 @@ int FUN_00342078(...);
 
 int FUN_0010bb84(int, int);
 int questClassifyCompletionNotification(void);
-int FUN_0021bc04(unsigned int, unsigned int);
+int mapMarkVisitedAndUpdateRegionFlags(unsigned int, unsigned int);
 int actorApplyAlpha(void);
 int dataTableGetRecord23(...);
 int FUN_0027d7b0(...);
@@ -267,7 +268,6 @@ int FUN_0027db24(...);
 int sequenceRequestClearDeferred(void);
 int FUN_00281788(void);
 int gameRestoreWorkSave(int);
-int gameFlagSetValue(int, int);
 int FUN_002f3694(void);
 int MapIf_Register(unsigned int, int);
 int VectorSignedToFloat(...);
@@ -478,7 +478,7 @@ extern int gameMapHasActiveSlotId(int);
 /* Supplied declaration required: lmapSceneUpdateHandles. */
 /* Supplied declaration required: asdMdlBanksDestroyAll. */
 /* Supplied declaration required: FUN_0021baf4. */
-/* Supplied declaration required: FUN_0021bc04. */
+/* Supplied declaration required: mapMarkVisitedAndUpdateRegionFlags. */
 /* Supplied declaration required: FUN_0021be00. */
 /* Supplied declaration required: gfxDestroyModelGroups. */
 extern int FUN_0021e4bc(void);
@@ -633,7 +633,6 @@ extern int dataTable2fSub1GetRecord(int);
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00289880. */
@@ -740,7 +739,7 @@ extern int mapMainPollScript(void);
 /* Supplied declaration required: mapIfApplyRecordFlags. */
 /* Supplied declaration required: FUN_00276138. */
 /* Supplied declaration required: mapPerFrameUpdate. */
-/* Supplied declaration required: FUN_002c87a4. */
+/* Supplied declaration required: mapEnemyRestartIdleEntries. */
 extern int FUN_002d2b40(void);
 extern int FUN_002d3b20(void);
 /* Supplied declaration required: FUN_002d3e18. */
@@ -823,7 +822,7 @@ unsigned int FUN_001b7f78(void)
     *(unsigned char *)((int)puVar14 + 0x45) = 0;
     temp_v10 = gameFlagIsSet(0x18);
     if (temp_v10 != 0) {
-      gameFlagSetValue(0x52a,1);
+      gameFlagSetValue(0x52a, 1, 1);
     }
     temp_v14 = DAT_0049fd14;
     DAT_0049f930 = 1;
@@ -841,7 +840,7 @@ unsigned int FUN_001b7f78(void)
         if (*(short *)(temp_v9 + 0x22) != 0) {
           temp_v10 = FUN_0027d968();
           if (temp_v10 != -1) {
-            gameFlagSetValue((int)*(short *)(temp_v9 + 0x22),1);
+            gameFlagSetValue((int)*(short *)(temp_v9 + 0x22), 1, 1);
           }
           else {
             naviClearObjectBlock();
@@ -1060,7 +1059,7 @@ LAB_001b848c:
       FUN_0010bb84(0x100,0x30000);
       *(unsigned char *)(puVar23 + 0xf) = 1;
     }
-    FUN_0021bc04(puVar14[0xb],puVar14[0xc]);
+    mapMarkVisitedAndUpdateRegionFlags(puVar14[0xb],puVar14[0xc]);
     FUN_002f3694();
     if (puVar14[0xb] != 0x18) {
       *(unsigned char *)(temp_v9 + 0x792) = 0;
@@ -5104,7 +5103,7 @@ LAB_001bec78:
           else {
             puVar14[9] = 0x53;
             puVar14[10] = 0;
-            FUN_002c87a4();
+            mapEnemyRestartIdleEntries();
           }
           DAT_0049f924 = (unsigned int)(unsigned char)pcVar13[3];
           DAT_0049f928 = puVar14[0xb];
@@ -5442,7 +5441,7 @@ LAB_001bf6c8:
         }
         else {
           if (temp_v14 == 3) {
-            FUN_002c87a4();
+            mapEnemyRestartIdleEntries();
           }
           if (*(char *)(puVar14 + 7) != '\0') {
             *(unsigned char *)(puVar14 + 7) = 0;

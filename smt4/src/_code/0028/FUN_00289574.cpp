@@ -4,7 +4,7 @@
 namespace { struct EffectSettings { u32 first; u32 second; u32 flags; u32 third; f32 values[5]; }; }
 
 extern "C" {
-/* Updates or returns the requested state. */
+/* Set the pending map/entrance/object jump and its five transform parameters. */
 extern EffectSettings DAT_0049fd14;
 void FUN_00289574(u32 first, u32 second, u32 third, f32 a, f32 b, f32 c, f32 d, f32 e)
 {

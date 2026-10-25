@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP register allocation differs (constants and percentages land in other s-registers); candidate for the b1454 compiler */
+/* NON_MATCHING: percentage/constant VFP allocation and shared player/party skill-loop grouping differ; compiler-version changes are not a remedy. */
 #include "common.h"
 
 /* A skill record's flag word: the low bits hold the skill's recovery kind. */
@@ -56,7 +56,7 @@ void playerSetClampedValue(s32 value);
 u32 recordGetScaledMaximum(RegenUnit *unit);
 void recordSetClampedCurrent(RegenUnit *unit, s32 value);
 void selectionStateSetClamped(RegenUnit *unit, s32 value);
-void FUN_003e4e64(void);
+void partyResetAndRefreshSlotStats(void);
 
 /* Clamps a recovery percentage to 0-100. */
 static __inline void clamp(f32 *percent)
@@ -157,7 +157,7 @@ void FUN_003ee734(RegenTurn *turn)
         playerClearFlagMask(2);
         FUN_003e0064(1);
     }
-    FUN_003e4e64();
+    partyResetAndRefreshSlotStats();
 }
 
 } /* extern "C" */

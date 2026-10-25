@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00193440` (_code @ 0x193440, 0x7a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: four-argument scaled-magnitude call and float result recovered; remaining raw emitter draft has mixed float/integer fields and stale callee contracts. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -95,7 +94,7 @@ static float romwright_fabs_4(float value)
 #endif
 /* Supplied declaration required: FUN_00291060. */
 /* Supplied declaration required: FUN_0029118c. */
-extern unsigned int FUN_00291234(unsigned int, float, unsigned int);
+extern f32 FUN_00291234(s32 mode, s32 lower, s32 upper, u32 divisor);
 /* Supplied declaration required: FUN_00291310. */
 /* Supplied declaration required: FUN_00291340. */
 /* Supplied declaration required: nodeTreeReleaseItemClearOwner. */
@@ -228,7 +227,7 @@ void FUN_00193440(float *param_1)
       FUN_00291310(temp_v3,param_1 + 0xe,param_1 + 0x5b,3,param_1[0x87],param_1 + (int)temp_v6 + 0x8e,
                    (unsigned int)temp_v6 & 0xff,*(unsigned char *)(param_1 + 0x8b),1,param_1[0x88]);
       param_1[(int)temp_v6 + 0x8e] = temp_v3;
-      temp_v4 = FUN_00291234(0,temp_v9,10);
+      temp_v10 = FUN_00291234(0,(s32)temp_v9,10,10);
       temp_v25 = (unsigned int)((unsigned long long)temp_v26 >> 0x20);
       temp_v23 = (unsigned int)temp_v24;
       temp_v10 = temp_v10 * *(float *)((int)temp_v3 + 500);

@@ -15,7 +15,7 @@ struct ExtendedLabelledRecord {
 };
 extern "C" {
 const char *FUN_001654f8(const char *input, char *output, u32 flags);
-void FUN_0023723c(u32 handle, s32 mode, s32 selection, u32 flags, u32 options, const char *text);
+void asdTextFormatStream(u32 handle, s32 mode, s32 selection, u32 flags, u32 options, const char *text);
 const char *FUN_00180118(u16 message);
 void ARM_common_memcpy4_7(char *output, const char *text);
 void __aeabi_memcpy4(void *output, const void *input, u32 bytes);
@@ -30,16 +30,16 @@ extern "C" s32 uiDrawExtendedRecordLabel(ExtendedRecordLabels *labels, const Ext
     if (labels == NULL)
         return 0;
     char text[80];
-    FUN_0023723c(labels->handles[0], 2, -1, 0, 0, FUN_001654f8(record->name, NULL, 0));
+    asdTextFormatStream(labels->handles[0], 2, -1, 0, 0, FUN_001654f8(record->name, NULL, 0));
     if (record->message)
         FUN_001654f8(FUN_00180118(record->message), text, 0);
     else
         ARM_common_memcpy4_7(text, "\x81\x7c\x81\x7c\x81\x7c");
-    FUN_0023723c(labels->handles[1], 2, -1, 0, 0, text);
+    asdTextFormatStream(labels->handles[1], 2, -1, 0, 0, text);
     __aeabi_memcpy4(text, "\x82\x63\x82\x85\x82\x96\x82\x85\x82\x8c\x82\x8f\x82\x90\x82\x85\x82\x92", 19);
-    FUN_0023723c(labels->handles[2], 2, -1, 0, 0, text);
+    asdTextFormatStream(labels->handles[2], 2, -1, 0, 0, text);
     textFormatBuffer(text, DAT_0052c008);
-    FUN_0023723c(labels->description, 2, -1, 0, 0, text);
+    asdTextFormatStream(labels->description, 2, -1, 0, 0, text);
     labels->descriptionWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
     labels->active = 1;
     return 1;

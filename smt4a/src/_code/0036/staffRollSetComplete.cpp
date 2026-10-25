@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 namespace {
 struct StaffRollState {
@@ -9,7 +10,7 @@ struct StaffRollState {
 
 extern "C" {
 extern StaffRollState *g_staffRoll;
-void gameFlagSetValue(u32 flag, u32 value, u32 count);
+
 
 /* Marks the staff roll complete in both the save flags and its local state. */
 void staffRollSetComplete(void)

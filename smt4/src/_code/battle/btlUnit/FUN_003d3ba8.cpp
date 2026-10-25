@@ -30,7 +30,7 @@ int FUN_003de978(...);
 int FUN_00227668(...);
 int FUN_00228220(unsigned int, int, int, int, int, unsigned int, int, char [16]);
 int FUN_00228930(...);
-int FUN_002296f4(...);
+int frameRangeExtend(...);
 int FUN_00229a3c(...);
 int btlTargetSetFlag10(...);
 int FUN_00246080(...);
@@ -38,7 +38,7 @@ int FUN_00246454(...);
 int FUN_00247478(short *, unsigned int, unsigned int);
 int FUN_00255180(...);
 int FUN_00256898(...);
-int FUN_002568c4(...);
+int btlReflectQueueKind34(...);
 int FUN_00282820(...);
 int btlMainFindEntryByListedId(...);
 int FUN_0029cc44(int);
@@ -121,7 +121,7 @@ extern int FUN_0022810c(int, unsigned int);
 extern int FUN_002281a4(int);
 /* Supplied declaration required: FUN_00228220. */
 /* Supplied declaration required: FUN_00228930. */
-/* Supplied declaration required: FUN_002296f4. */
+/* Supplied declaration required: frameRangeExtend. */
 extern int FUN_00229914(unsigned int *, unsigned int *, int);
 /* Supplied declaration required: FUN_00229a3c. */
 /* Supplied declaration required: btlTargetSetFlag10. */
@@ -143,7 +143,7 @@ extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_00256898. */
-/* Supplied declaration required: FUN_002568c4. */
+/* Supplied declaration required: btlReflectQueueKind34. */
 /* Supplied declaration required: FUN_0026beb4. */
 /* Supplied declaration required: FUN_00282820. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
@@ -306,7 +306,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v12 = temp_v3 + temp_v5 + temp_v6;
       FUN_00246080(temp_v12,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114,3);
       btlTargetSetFlag10(*param_1,temp_v4,0);
-      FUN_002296f4(param_1,param_2,temp_v7,temp_v3 + temp_v5,10,0x14);
+      frameRangeExtend(param_1,param_2,temp_v7,temp_v3 + temp_v5,10,0x14);
       FUN_00228930(param_1,temp_v7,1);
       temp_v4 = valueRangeSameSide(temp_v4,temp_v7);
       temp_v3 = param_2[4];
@@ -359,7 +359,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       *(unsigned int *)(*param_1 + 0x88) = 4;
       *param_2 = *param_2 | 0x2000;
       FUN_00256898(1,param_2);
-      FUN_002568c4(0,param_2);
+      btlReflectQueueKind34(0,param_2);
       *(unsigned int *)(g_btlMain + 0x760) = 0xffffffff;
       break;
     case 0xb:
@@ -367,7 +367,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v12 = *param_1;
       btlMainFindEntryByListedId(temp_v12,(int)temp_v9);
       FUN_00246454(temp_v3 + 0x28,param_2,temp_v12);
-      FUN_002296f4(param_1,param_2,(int)temp_v9,temp_v3,0x1e,0x1e);
+      frameRangeExtend(param_1,param_2,(int)temp_v9,temp_v3,0x1e,0x1e);
       break;
     case 0xc:
       temp_v3 = temp_v27;
@@ -394,7 +394,7 @@ void FUN_003d3ba8(unsigned int *param_1,unsigned int *param_2)
       temp_v3 = FUN_00227668(DAT_00435d18);
       temp_v4 = slotTableValueReducedByRecord(temp_v12);
       FUN_003dda20(temp_v3,param_2,-temp_v4);
-      FUN_002296f4(param_1,param_2,temp_v5,temp_v3,10,0x14);
+      frameRangeExtend(param_1,param_2,temp_v5,temp_v3,10,0x14);
       if (temp_v4 != 0) {
         FUN_00228930(param_1,temp_v5,3);
       }

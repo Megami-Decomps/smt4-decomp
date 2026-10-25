@@ -1,6 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00385f74` (_code @ 0x385f74, 0x1720 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: owner-aware allocations now pass retail's indeterminate owner and retain returned buffers; the remaining raw resource dispatch, accessor contracts and callback layouts are still unrecovered. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
 extern "C" {
 
@@ -11,7 +11,6 @@ int nnnstdMemCpy(...);
 
 int itemVariantReselect(unsigned int);
 int aocTexCtrlInit(...);
-int asdOperatorNewB(...);
 int dataTableFileGetTable(...);
 int FUN_002ac0c4(void);
 int FUN_002ac0f8(void);
@@ -153,7 +152,6 @@ extern unsigned char LAB_00387c68; /* 0x387c68 */
 /* Supplied declaration required: FUN_00141710. */
 /* Supplied declaration required: itemVariantReselect. */
 /* Supplied declaration required: aocTexCtrlInit. */
-/* Supplied declaration required: asdOperatorNewB. */
 /* Supplied declaration required: dataTableFileGetTable. */
 /* Supplied declaration required: FUN_002ac0c4. */
 /* Supplied declaration required: FUN_002ac0f8. */
@@ -455,152 +453,153 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
       temp_v37 = temp_v37 + 1;
     } while (temp_v37 < param_1->field_0x310);
   }
+  void *owner; /* Retail leaves the owner word unset at these array allocations. */
   if (param_1->field_0x35c != 0) {
     temp_v2 = param_1->field_0x35c * 0x94;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x360 = temp_v2;
   }
   if (param_1->field_0x364 != 0) {
     temp_v2 = param_1->field_0x364 * 0xa8;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x368 = temp_v2;
   }
   if (param_1->field_0x36c != 0) {
     temp_v2 = param_1->field_0x36c << 2;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x370 = temp_v2;
   }
   if (param_1->field_0x374 != 0) {
     temp_v2 = param_1->field_0x374 * 0x28;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x378 = temp_v2;
   }
   if (param_1->field_0x37c != 0) {
     temp_v2 = param_1->field_0x37c * 0x22;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x380 = temp_v2;
   }
   if (param_1->field_0x384 != 0) {
     temp_v2 = param_1->field_0x384 * 0x1b4;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x388 = temp_v2;
   }
   if (param_1->field_0x38c != 0) {
     temp_v2 = param_1->field_0x38c * 0x54;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x390 = temp_v2;
   }
   if (param_1->field_0x394 != 0) {
     temp_v2 = param_1->field_0x394 << 4;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x398 = temp_v2;
   }
   if (param_1->field_0x3e4 != 0) {
     temp_v2 = param_1->field_0x3e4 << 5;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3e8 = temp_v2;
   }
   if (param_1->field_0x3ec != 0) {
     temp_v2 = param_1->field_0x3ec * 0xc;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3f0 = temp_v2;
   }
   if (param_1->field_0x3f4 != 0) {
     temp_v2 = param_1->field_0x3f4 << 5;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3f8 = temp_v2;
   }
   if (param_1->field_0x3fc != 0) {
     temp_v2 = param_1->field_0x3fc * 0x14;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x400 = temp_v2;
   }
   if (param_1->field_0x404 != 0) {
     temp_v2 = param_1->field_0x404 * 0x1c;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x408 = temp_v2;
   }
   if (param_1->field_0x40c != 0) {
     temp_v2 = param_1->field_0x40c * 0x2c;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x410 = temp_v2;
   }
   if (param_1->field_0x414 != 0) {
     temp_v2 = param_1->field_0x414 * 0xc;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x418 = temp_v2;
   }
   if (param_1->field_0x41c != 0) {
     temp_v2 = param_1->field_0x41c * 0xc;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x420 = temp_v2;
   }
   if (param_1->field_0x424 != 0) {
     temp_v2 = param_1->field_0x424 * 0x18;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x428 = temp_v2;
   }
   if (param_1->field_0x42c != 0) {
     temp_v2 = param_1->field_0x42c * 0x18;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x430 = temp_v2;
   }
   if (param_1->field_0x434 != 0) {
     temp_v2 = param_1->field_0x434 * 0x68;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x438 = temp_v2;
   }
   if (param_1->field_0x43c != 0) {
     temp_v2 = param_1->field_0x43c * 0x3c;
-    asdOperatorNewB();
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x440 = temp_v2;
   }
   if (param_1->field_0x39c != 0) {
     temp_v2 = param_1->field_0x39c * 0x58;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3a0 = temp_v2;
     temp_v2 = param_1->field_0x39c << 1;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3a4 = temp_v2;
   }
   if (param_1->field_0x3a8 != 0) {
     temp_v2 = param_1->field_0x3a8 << 7;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3ac = temp_v2;
     temp_v2 = param_1->field_0x3a8 << 1;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3b0 = temp_v2;
   }
   if (param_1->field_0x3b4 != 0) {
     temp_v2 = param_1->field_0x3b4 * 0xa8;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3b8 = temp_v2;
     temp_v2 = param_1->field_0x3b4 << 1;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3bc = temp_v2;
   }
   if (param_1->field_0x3c0 != 0) {
     temp_v2 = param_1->field_0x3c0 * 0x3c;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3c4 = temp_v2;
     temp_v2 = param_1->field_0x3c0 << 1;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3c8 = temp_v2;
   }
   if (param_1->field_0x3cc != 0) {
     temp_v2 = param_1->field_0x3cc * 0x30;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3d0 = temp_v2;
     temp_v2 = param_1->field_0x3cc << 1;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3d4 = temp_v2;
   }
   if (param_1->field_0x3d8 != 0) {
     temp_v2 = param_1->field_0x3d8 * 0x2c;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3dc = temp_v2;
     temp_v2 = param_1->field_0x3d8 << 1;
-    asdOperatorNewB(temp_v2,unaff_r5);
+    temp_v2 = (int)asdOperatorNewB(temp_v2, owner);
     param_1->field_0x3e0 = temp_v2;
   }
   temp_v13 = 0;

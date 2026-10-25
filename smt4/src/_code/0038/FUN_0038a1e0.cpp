@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail shares one `str r0,[r4,#8]` tail between the state 1 and state 3 transitions (movne r0,#4 + branch) and schedules the state-0 stores differently; armcc here predicates the store and hoists the constant. */
 #include "common.h"
+#include "shard/JobWork.h"
 
 /* A 0x8C-byte UI sprite; only the fields this job touches. */
 struct JobSprite {
@@ -29,7 +30,6 @@ struct SpriteTrioWork {
 };
 
 extern "C" {
-SpriteTrioWork *jobGetWork(void);
 void FUN_002bd954(JobSprite *sprite, u32 group, u32 image, JobSpritePacket *owner, u16 id, f32 scale);
 void pairSetSecondResetFirst(JobSprite *sprite, s32 index);
 void pairSetFirstResetSecond(JobSprite *sprite, s32 index);
@@ -40,9 +40,9 @@ void spriteSetVisible(JobSprite *sprite, u8 visible);
 s32 uiSpriteGetCompletionState(JobSprite *sprite);
 
 /* Per-frame update: plays the three sprites in sequence (fade in, hold, fade out). */
-u32 FUN_0038a1e0(void)
+s32 FUN_0038a1e0(u32 job)
 {
-    SpriteTrioWork *work = jobGetWork();
+    SpriteTrioWork *work = reinterpret_cast<SpriteTrioWork *>(jobGetWork(job));
     work->frame = (work->frame + 1) % 40;
     switch (work->state) {
     case 0:

@@ -1,10 +1,11 @@
 /* NON_MATCHING: retail hoists the compare constants 0x18b/0x1a6/0x11f9 into registers (r0/r6/r5) and shares one set-flag block; built compares with sub/subs immediates and duplicates the block. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
 s32 scrGetArg(u32 index);
-void gameFlagSetValue(u32 flag, u32 value, u32 notify);
+
 
 // Script command: set the story flag given by the argument, plus the follow-up flags tied to a few of them.
 u32 FUN_002ba7b8(void)

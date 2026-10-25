@@ -3,7 +3,7 @@
 
 extern "C" {
 
-typedef void PlayPolicy00254a2c(void);
+typedef f32 PlayPolicy00254a2c(void *context, f32 start, f32 end, f32 *frame);
 
 typedef struct Player00254a2c {
     /* 0x00 */ u8 unk00[0x4c];
@@ -20,6 +20,7 @@ typedef struct Owner00254a2c {
 } Owner00254a2c;
 
 extern PlayPolicy00254a2c nw_anim_PlayPolicy_Loop; /* 0x151500 */
+extern PlayPolicy00254a2c FUN_00155650;
 
 /* Sets the looping policy of the owner's active player: the library loop policy when loop is set, otherwise the one at 0x155650. */
 void animPlayerSetLoopPolicy(Owner00254a2c *owner, s32 loop)
@@ -32,13 +33,7 @@ void animPlayerSetLoopPolicy(Owner00254a2c *owner, s32 loop)
         player = owner->playerA;
     }
     if (player != NULL) {
-        PlayPolicy00254a2c *policy;
-
-        if (loop == 0) {
-            policy = (PlayPolicy00254a2c *)0x155650;
-        } else {
-            policy = nw_anim_PlayPolicy_Loop;
-        }
+        PlayPolicy00254a2c *policy = loop != 0 ? nw_anim_PlayPolicy_Loop : FUN_00155650;
         player->policySet = 1;
         player->policy = policy;
     }

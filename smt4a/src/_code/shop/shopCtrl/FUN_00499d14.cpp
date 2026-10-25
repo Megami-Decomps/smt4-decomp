@@ -14,7 +14,7 @@ typedef struct Scene {
 
 s32 FUN_002c7e6c(void);
 s32 FUN_002c85b0(u32 arg);
-s32 FUN_002c7ce8(s32 arg);
+s32 statusDownSwitchTab(s32 arg);
 u32 gameGetPlayerData(void);
 s32 FUN_0033449c(s32 arg);
 s32 gameGlobalsQueueValues(u32 data, s32 arg);
@@ -39,7 +39,7 @@ void FUN_00499d14(Scene *scene)
         value = 8;
     }
     FUN_002c85b0(value);
-    FUN_002c7ce8(0);
+    statusDownSwitchTab(0);
     player = gameGetPlayerData();
     FUN_0033449c(1);
     gameGlobalsQueueValues(player, 0);

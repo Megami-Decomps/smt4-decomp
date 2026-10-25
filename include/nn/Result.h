@@ -4,6 +4,21 @@
 
 #include "common.h"
 
+#ifdef __cplusplus
+namespace nn {
+class Result {
+public:
+    Result() : value(0xE7E3FFFFu) {}
+    Result(u32 code) : value(code) {}
+    operator u32() const { return value; }
+
+private:
+    u32 value;
+};
+typedef char ResultSizeCheck[sizeof(Result) == sizeof(u32) ? 1 : -1];
+}
+#endif
+
 static __inline bool nnResultIsFailure(s32 result)
 {
     bool failed = ((u32)result >> 31) != 0;

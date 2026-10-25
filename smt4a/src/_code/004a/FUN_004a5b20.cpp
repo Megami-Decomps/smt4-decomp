@@ -1,7 +1,9 @@
-/* NON_MATCHING: retail keeps the loop counters and the data-table pointers in stack slots (about 90 bytes of frame) and orders the nested-loop exits differently; armcc keeps them in registers here. */
+/* NON_MATCHING: recovered selector/scroller arguments; nested-loop counters and table pointers occupy registers instead of retail's88-byte frame. */
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "ui/ItemListSelection.h"
 
+struct Unk4cfeb0Scroller;
 extern "C" {
 
 /* A gift-table style entry: a first key and up to 24 more (key, two words) records. */
@@ -69,8 +71,8 @@ u16 *FUN_00184310(u32 id);
 s32 FUN_0026264c(u32 id);
 void campFillUnitComparison(ListEntry *out, u32 id, s32 arg);
 void FUN_004a833c(void *list, ListEntry *entry);
-void itemListSelectVariant(EntryListWork *work, s32 arg);
-void FUN_004cfeb0(void *header, s32 a, s32 b, s32 c, s32 d);
+void FUN_004cfeb0(Unk4cfeb0Scroller *scroller, s32 visible, s32 total,
+    s32 direction, s32 unused, s32 option);
 
 /* Scans every (group, subgroup) entry, and for each of its keys every item and unlockable id that
  * is allowed, adding it to the work's list; then finalises the list. */
@@ -131,8 +133,8 @@ void FUN_004a5b20(EntryListWork *work)
             }
         }
     }
-    itemListSelectVariant(work, 1);
-    FUN_004cfeb0(work->header, 10, work->first, 0, 1);
+    itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(work), 1, 1);
+    FUN_004cfeb0(reinterpret_cast<Unk4cfeb0Scroller *>(work->header), 10, work->first, 0, 1, 1);
     asdDebugHookPtrInt(work->header, 1);
     work->ready = 1;
     work->busy = 0;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same update; retail forms the owner's transform pointer (owner + 0x24) once up front and addresses x/y/z from it, built addresses them from the owner (+0x28..0x30) */
+/* NON_MATCHING: transform base matches; final Z velocity and position loads remain reversed. */
 #include "common.h"
 
 extern "C" {
@@ -31,13 +31,14 @@ void FUN_00395830(Particle *particle);
 void FUN_00395dbc(Particle *particle)
 {
     ParticleOwner *owner = particle->owner;
+    ParticleTransform *transform = &owner->transform;
 
     if (owner->frame % 10 == 0) {
         FUN_00395830(particle);
     }
-    owner->transform.x += particle->velocityX;
-    owner->transform.y += particle->velocityY;
-    owner->transform.z += particle->velocityZ;
+    transform->x += particle->velocityX;
+    transform->y += particle->velocityY;
+    transform->z += particle->velocityZ;
 }
 
 } /* extern "C" */

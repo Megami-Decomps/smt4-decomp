@@ -27,7 +27,7 @@ s32 flaggedValueHolderGetTotal(void *holder);
 void *devilGetRecord(u16 id);
 u32 gameSlotTableGetHeader(void);
 s32 partyHasStoredDemon(u16 id);
-s32 FUN_0029c1fc(void);
+s32 partyFindFreeStockSlot(void);
 
 /* Check whether the demon can be bought; on failure record why (1 money, 2 already stored, 3 not allowed, 5 no room) and return 0. */
 s32 demonPurchaseValidate(PurchaseMenu *menu, u16 id)
@@ -45,7 +45,7 @@ s32 demonPurchaseValidate(PurchaseMenu *menu, u16 id)
         error = 2;
     } else if (menu->discounted == 2) {
         error = 3;
-    } else if (FUN_0029c1fc() == -1) {
+    } else if (partyFindFreeStockSlot() == -1) {
         error = 5;
     } else {
         return menu->error == 0;

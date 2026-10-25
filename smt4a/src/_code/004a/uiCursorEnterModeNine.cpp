@@ -22,7 +22,7 @@ typedef struct CursorOwner {
 } CursorOwner;
 
 void FUN_00163aa4(CursorSprite *sprite, f32 rate);
-s8 recordGetSignedFlags(const void *record);
+s8 uiSpriteGetCompletionState(const void *record);
 s32 vec2GetXInt(CursorSprite *sprite);
 s32 vec2GetYInt(CursorSprite *sprite);
 void pointConvertToFloat(void *point, s32 x, s32 y);
@@ -42,7 +42,7 @@ void uiCursorEnterModeNine(CursorOwner *owner)
     if (FUN_0026c3a0() == 0) {
         return;
     }
-    if (recordGetSignedFlags(cursor) == 0) {
+    if (uiSpriteGetCompletionState(cursor) == 0) {
         return;
     }
     if (FUN_002e19f8() == 0) {

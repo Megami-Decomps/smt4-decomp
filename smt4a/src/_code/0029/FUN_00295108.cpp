@@ -1,5 +1,6 @@
 /* NON_MATCHING: story popup trigger (milestone flags, then a weighted scan of the popup table); written from the decompilation, flag-chain branch layout not compared with retail */
 #include "gamedata/DataTable.h"
+#include "gamedata/GameFlags.h"
 
 struct PopupEntry {
     /* 0x00 */ s32 id;
@@ -30,7 +31,7 @@ extern s32 g_gameState;
 extern s32 DAT_005f1994;
 
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(s32 flag, s32 value);
+
 s32 randRange(u32 maximum);
 void popupQueueInsertUnique(s32 state);
 s32 FUN_002d8b58(s32 kind);
@@ -65,7 +66,7 @@ void FUN_00295108(s32 immediate)
     }
 
     if (milestoneFlag != 0 && gameFlagIsSet(milestoneFlag) == 0) {
-        gameFlagSetValue(milestoneFlag, 1);
+        gameFlagSetValue(milestoneFlag, 1, 1);
         triggered = true;
         DAT_005f1994 = 0;
     } else if (DAT_005f1994 != 0) {

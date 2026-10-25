@@ -1,4 +1,4 @@
-/* NON_MATCHING: O3 swaps slot/cache register roles, hoists the 3800 cache base and splits the CC byte offset; O2 may restore retail scheduling. */
+/* NON_MATCHING: slot/cache register roles and early 0x3800 base hoisting differ; signed 0x38CC flag now matches folded byte access. */
 #include "shard/PadState.h"
 #include "shard/W4_Match6_BtlEntry.h"
 
@@ -9,13 +9,17 @@ struct PartyStatusCache {
     /* 0x3420 */ u8 unk3420[0x37BC - 0x3420];
     /* 0x37BC */ u8 unk37BC[5];
     /* 0x37C1 */ u8 unk37C1[0x38CC - 0x37C1];
-    /* 0x38CC */ u8 unk38CC[5];
+    /* 0x38CC */ s8 unk38CC[5];
     /* 0x38D1 */ u8 unavailable[5];
     /* 0x38D6 */ s16 hp[5];
     /* 0x38E0 */ s16 mp[5];
     /* 0x38EA */ s16 level[5];
     /* 0x38F4 */ s16 unitIndex[5];
 };
+typedef char PartyStatusCacheLayoutCheck[
+    offsetof(PartyStatusCache, unk38CC) == 0x38CC &&
+    offsetof(PartyStatusCache, unitIndex) == 0x38F4 &&
+    sizeof(PartyStatusCache) == 0x3900 ? 1 : -1];
 struct PartySlotTable {
     /* 0x0000 */ u8 unk0000[0x9108];
     /* 0x9108 */ s8 partyIndices[3];

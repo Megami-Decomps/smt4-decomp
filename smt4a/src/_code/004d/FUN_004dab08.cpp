@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail addresses every filter field after the first through one hoisted base (f + 0x100, r4) and keeps the filter pointer in r8, memberA/memberB in r6/r7; armcc here keeps the bytes on the filter pointer */
+/* NON_MATCHING: signed filter flags restore shared high-offset base and saved registers; bracket count/selector loads remain unconditional below the zero branch rather than predicated above it. */
 #include "common.h"
 #include <stddef.h>
 
@@ -18,25 +18,25 @@ struct RecordFilter {
     /* 0x148 */ u8 matchId;
     /* 0x149 */ u8 unk149;
     /* 0x14A */ u16 id;
-    /* 0x14C */ u8 matchCategory;
+    /* 0x14C */ s8 matchCategory;
     /* 0x14D */ u8 unk14D;
     /* 0x14E */ u16 category;
-    /* 0x150 */ u8 matchBracket;
+    /* 0x150 */ s8 matchBracket;
     /* 0x151 */ u8 unk151[3];
     /* 0x154 */ s32 bracket;    /* 0: any, 1..9: count in [10 * (n - 1), 10 * n), 10: 90 and up */
     /* 0x158 */ u8 unk158[0x16];
-    /* 0x16E */ u8 requireMembers;
+    /* 0x16E */ s8 requireMembers;
     /* 0x16F */ u8 unk16F;
     /* 0x170 */ s16 requiredSlotA;
     /* 0x172 */ s16 requiredSlotB;
-    /* 0x174 */ u8 excludeMembers;
+    /* 0x174 */ s8 excludeMembers;
     /* 0x175 */ u8 unk175;
     /* 0x176 */ s16 excludedSlotA;
     /* 0x178 */ s16 excludedSlotB;
-    /* 0x17A */ u8 allowExcludedCategory;
+    /* 0x17A */ s8 allowExcludedCategory;
     /* 0x17B */ u8 unk17B[0x39];
-    /* 0x1B4 */ u8 skipLearned;
-    /* 0x1B5 */ u8 limitCount;
+    /* 0x1B4 */ s8 skipLearned;
+    /* 0x1B5 */ s8 limitCount;
 };
 
 struct SlotRecord {
@@ -44,7 +44,8 @@ struct SlotRecord {
     /* 0x62 */ u16 id;
 };
 
-typedef char RecordFilterOffsets[offsetof(RecordFilter, bracket) == 0x154 &&
+typedef char RecordFilterOffsets[sizeof(RecordFilter) == 0x1B8 &&
+    offsetof(RecordFilter, bracket) == 0x154 &&
     offsetof(RecordFilter, requiredSlotA) == 0x170 &&
     offsetof(RecordFilter, excludedSlotB) == 0x178 &&
     offsetof(RecordFilter, allowExcludedCategory) == 0x17A &&

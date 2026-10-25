@@ -33,7 +33,7 @@ int devilIsTextureLoaded(...);
 int FUN_003b60c0(unsigned int, int);
 int sysPlayVoice(...);
 int resourceEntryMarkReleased(...);
-int FUN_003e5c68(...);
+int modelApplyNonzeroGroupRotation(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -45,7 +45,7 @@ extern int g_campCecView; /* 0x57f130 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Supplied declaration required: uiPointerHitsRect. */
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
 /* Supplied declaration required: FUN_00182054. */
@@ -77,7 +77,7 @@ extern int FUN_0039a2d8(int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_003e54b8. */
 /* Supplied declaration required: resourceEntryMarkReleased. */
 extern int fourPtrsAllNull(unsigned int);
-/* Supplied declaration required: FUN_003e5c68. */
+/* Supplied declaration required: modelApplyNonzeroGroupRotation. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -208,7 +208,7 @@ unsigned int FUN_0025d6a0(void)
             linkHolderApplyFlag(*(unsigned int *)(temp_v0 + 8),1);
             *(unsigned char *)(temp_v0 + 0x13d) = 1;
           }
-          FUN_003e5c68(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c),*(int *)(temp_v0 + 8) + 0xc);
+          modelApplyNonzeroGroupRotation(*(unsigned int *)(*(int *)(temp_v0 + 8) + 0x1c),*(int *)(temp_v0 + 8) + 0xc);
           *(unsigned int *)(temp_v0 + 0x11c) = 1;
           if (*(char *)(temp_v0 + 0xec) == '\0') {
             linkHolderApplyFlag(*(unsigned int *)(temp_v0 + 8),0);
@@ -319,11 +319,11 @@ LAB_0025d9ec:
             }
             else {
               temp_v5 = padButtonRepeat(4);
-              if ((((temp_v5 == 0) || (temp_v5 = FUN_00163fd4(6), temp_v5 != 0)) ||
-                  (temp_v5 = FUN_00163fd4(5), temp_v5 != 0)) || (temp_v5 = FUN_00163fd4(3), temp_v5 != 0)) {
+              if ((((temp_v5 == 0) || (temp_v5 = slotIsActive(6), temp_v5 != 0)) ||
+                  (temp_v5 = slotIsActive(5), temp_v5 != 0)) || (temp_v5 = slotIsActive(3), temp_v5 != 0)) {
                 temp_v5 = padButtonRepeat(3);
-                if (((temp_v5 == 0) || (temp_v5 = FUN_00163fd4(6), temp_v5 != 0)) ||
-                   ((temp_v5 = FUN_00163fd4(5), temp_v5 != 0 || (temp_v5 = FUN_00163fd4(4), temp_v5 != 0))))
+                if (((temp_v5 == 0) || (temp_v5 = slotIsActive(6), temp_v5 != 0)) ||
+                   ((temp_v5 = slotIsActive(5), temp_v5 != 0 || (temp_v5 = slotIsActive(4), temp_v5 != 0))))
                 {
                   temp_v5 = padButtonRepeat(10);
                   if (temp_v5 != 0) {
@@ -512,20 +512,20 @@ LAB_0025dd50:
               temp_v1 = 2;
             }
           }
-          else if (((((*(unsigned int *)(temp_v0 + 300) & 8) == 0) || (temp_v5 = FUN_00163fd4(6), temp_v5 != 0))
-                   || (temp_v5 = FUN_00163fd4(5), temp_v5 != 0)) ||
-                  ((temp_v5 = FUN_00163fd4(3), temp_v5 != 0 || (temp_v5 = FUN_00163fd4(4), temp_v5 != 0))))
+          else if (((((*(unsigned int *)(temp_v0 + 300) & 8) == 0) || (temp_v5 = slotIsActive(6), temp_v5 != 0))
+                   || (temp_v5 = slotIsActive(5), temp_v5 != 0)) ||
+                  ((temp_v5 = slotIsActive(3), temp_v5 != 0 || (temp_v5 = slotIsActive(4), temp_v5 != 0))))
           {
             if (((((*(unsigned int *)(temp_v0 + 300) & 0x10) == 0) ||
-                 ((temp_v5 = FUN_00163fd4(6), temp_v5 != 0 || (temp_v5 = FUN_00163fd4(5), temp_v5 != 0))))
-                || (temp_v5 = FUN_00163fd4(3), temp_v5 != 0)) || (temp_v5 = FUN_00163fd4(4), temp_v5 != 0))
+                 ((temp_v5 = slotIsActive(6), temp_v5 != 0 || (temp_v5 = slotIsActive(5), temp_v5 != 0))))
+                || (temp_v5 = slotIsActive(3), temp_v5 != 0)) || (temp_v5 = slotIsActive(4), temp_v5 != 0))
             {
-              if (((((*(unsigned int *)(temp_v0 + 300) & 4) == 0) || (temp_v5 = FUN_00163fd4(6), temp_v5 != 0)) ||
-                  (temp_v5 = FUN_00163fd4(5), temp_v5 != 0)) ||
-                 ((temp_v5 = FUN_00163fd4(3), temp_v5 != 0 || (temp_v5 = FUN_00163fd4(4), temp_v5 != 0)))) {
-                if (((temp_v9 == -1) || (temp_v5 = FUN_00163fd4(6), temp_v5 != 0)) ||
-                   ((temp_v5 = FUN_00163fd4(5), temp_v5 != 0 ||
-                    ((temp_v5 = FUN_00163fd4(3), temp_v5 != 0 || (temp_v5 = FUN_00163fd4(4), temp_v5 != 0)))
+              if (((((*(unsigned int *)(temp_v0 + 300) & 4) == 0) || (temp_v5 = slotIsActive(6), temp_v5 != 0)) ||
+                  (temp_v5 = slotIsActive(5), temp_v5 != 0)) ||
+                 ((temp_v5 = slotIsActive(3), temp_v5 != 0 || (temp_v5 = slotIsActive(4), temp_v5 != 0)))) {
+                if (((temp_v9 == -1) || (temp_v5 = slotIsActive(6), temp_v5 != 0)) ||
+                   ((temp_v5 = slotIsActive(5), temp_v5 != 0 ||
+                    ((temp_v5 = slotIsActive(3), temp_v5 != 0 || (temp_v5 = slotIsActive(4), temp_v5 != 0)))
                     ))) {
                   temp_v5 = FUN_002e1a18(4);
                   if (temp_v5 != 0) {

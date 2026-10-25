@@ -1,5 +1,5 @@
 /* NON_MATCHING: identical instruction sequence to retail except for register numbering (retail keeps the result in r6, the reward record in r7 and the loop counter in r1; the build uses r8/r6/r2 and reorders the parameter moves). */
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 // One roll slot of a drop table entry: the item and its weight.
 struct DropSlot {
@@ -64,9 +64,6 @@ u32 gameGetUnlockedCountLimit(void);
 u32 FUN_004ccbf0(u32 level);
 EncounterRecord *FUN_001ad9b4(s32 index);
 void gameFlagBlockGetEntry(s32 index);
-void *dataTableGet(u32 kind, u32 flag);
-DropEntry *dataTableGetEntries(void);
-s32 dataTableGetCount(void *table);
 
 // The drop table entry `id`: from the add-on content when it provides one, else from the base game's table.
 static __inline DropEntry *findDropEntry(u16 id)
@@ -80,7 +77,7 @@ static __inline DropEntry *findDropEntry(u16 id)
         }
     }
     void *table = dataTableGet(0x1c, 1);
-    DropEntry *entries = dataTableGetEntries();
+    DropEntry *entries = static_cast<DropEntry *>(dataTableGetEntries(table));
     dataTableGetCount(table);
     return &entries[id];
 }

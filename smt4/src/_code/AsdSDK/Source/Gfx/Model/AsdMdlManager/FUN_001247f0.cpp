@@ -49,7 +49,7 @@ extern s32 DAT_004dae28;                  /* models accepted from the pending li
 
 void FUN_00138c14(void);
 void FUN_00138d0c(u32 instance, MdlModel *model, s32 node, u32 index);
-void FUN_0014ed58(MdlBody *body, u32 argument);
+void asdModelRebuildAttributeRecords(MdlBody *body, u32 argument);
 void asdMdlNodeInit(s32 owner, u32 index);
 void asdListAdd(MdlListEntry **list, MdlListEntry *entry, s32 flag);
 void indexedListErase(MdlListEntry **list, MdlListEntry *entry);
@@ -88,7 +88,7 @@ void FUN_001247f0(void)
                 body->nextHandle = 0;
                 body->finishedHandle = next;
                 body->flags &= ~MDL_BODY_FLAG_BLENDING;
-                FUN_0014ed58(body, body->unk58);
+                asdModelRebuildAttributeRecords(body, body->unk58);
             }
         }
         FUN_002b2b64(body);

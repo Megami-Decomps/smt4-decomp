@@ -3,14 +3,14 @@
 
 extern "C" {
 
-extern int FUN_0049cad0(u32 id);
+extern int shopGetEntryPrice(u32 id);
 extern int FUN_0049c9a0(u32 id);
 
-/* Compare function for sorting ids: by FUN_0049cad0 (descending), then by FUN_0049c9a0 (ascending). */
+/* Compare function for sorting ids: by shopGetEntryPrice (descending), then by FUN_0049c9a0 (ascending). */
 int FUN_004944d0(u32 a, u32 b)
 {
-    int keyA = FUN_0049cad0(a);
-    int keyB = FUN_0049cad0(b);
+    int keyA = shopGetEntryPrice(a);
+    int keyB = shopGetEntryPrice(b);
     int diff = keyB - keyA;
 
     if (diff != 0) {

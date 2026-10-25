@@ -13,13 +13,13 @@ struct SessionHintAnimationView {
 };
 struct HintTextFontSettingsPrefix { u8 prefix[0xC]; u32 font; };
 extern "C" {
-extern RenderCtx* g_renderCtx;
+extern RenderCtxA* g_renderCtx;
 extern HintTextFontSettingsPrefix g_uiTextFontSettings;
 extern const char DAT_00532728[55];
 void words2Copy(const void* source, void* destination);
 u32 FUN_001692ac(u32 kind, u32 option);
-void renderStackPushIndexed(RenderCtx* context, s32 slot, u32 state);
-void renderCtxPopState(RenderCtx* context, s32 slot);
+void renderStackPushIndexed(RenderCtxA* context, s32 slot, u32 state);
+void renderCtxPopState(RenderCtxA* context, s32 slot);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 s32 vec2GetXInt(UiSpriteState* animation);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Script-kind load versus process-store scheduling and the final state/reset value registers differ. */
+/* NON_MATCHING: final menu state and script-phase reset use exchanged r0/r1 registers. */
 #include "camp/CecMenu.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 
@@ -24,8 +24,10 @@ u32 FUN_002ece60(CampCecMenu *work)
     switch (work->scriptFlow.phase) {
     case 0:
         if (work->scriptResource != 0 && work->unkCF8 != 0) {
-            work->script.process = FUN_00297060(work->scriptResource, work->unkCF8);
-            scrScriptProcessStartEntry(work->script.process, work->scriptFlow.kind == 1 ? 0x1C : 0x1D);
+            u32 process = FUN_00297060(work->scriptResource, work->unkCF8);
+            s32 entry = work->scriptFlow.kind == 1 ? 0x1C : 0x1D;
+            work->script.process = process;
+            scrScriptProcessStartEntry(process, entry);
             buttonHelpSetPreset(0x3C);
             cecProcessStart();
             FUN_0025461c();
@@ -53,8 +55,8 @@ u32 FUN_002ece60(CampCecMenu *work)
     case 2:
         if (scrRunOpcodesStub(work->script.process) == 2) {
             work->state = 15;
-            result = 2;
             work->scriptFlow.phase = 0;
+            result = 2;
         }
         break;
     }

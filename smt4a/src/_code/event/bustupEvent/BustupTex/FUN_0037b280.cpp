@@ -16,7 +16,7 @@ extern const char DAT_0052f77c[]; // Allocation source path.
 extern const char DAT_0052f76c[]; // Shared "EVE_BustupTex" process name.
 extern AocSystemA* g_aocSystem;
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
-void sysMemClear(void* block, s32 size);
+void* sysMemClear(void* block, u32 size);
 s32 FUN_00162ea4(void);
 s32 aocRunByName(AocSystemA* system, s32 table, s32 node, u32 option);
 u32 aocLoadTextureNode(AocSystemA* system, s32 table, s32 node, u32 heap);
@@ -38,9 +38,11 @@ void FUN_0037b280(s32 portrait)
     work->texture.id = 0;
     work->texture.x = 150.0f;
     work->texture.y = 150.0f;
-    DataTableView<s16> portraits(26, 1);
+    void* table = dataTableGet(26, 1);
+    const s16* portraits = static_cast<const s16*>(dataTableGetEntries(table));
+    dataTableGetCount(table);
     s32 index = portrait - 1;
-    work->texture.node = portraits.entries[index];
+    work->texture.node = portraits[index];
     if (FUN_00162ea4()) {
         work->texture.deferred = 1;
     } else {

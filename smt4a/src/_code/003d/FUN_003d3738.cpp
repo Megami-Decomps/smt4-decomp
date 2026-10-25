@@ -4,7 +4,7 @@ extern "C" {
 
 extern SpriteWindow *g_sWin; /* 0x57f57c */
 s32 FUN_001517b4(s32 first, s32 second);
-s32 FUN_00163fd4(s32 id);
+s32 slotIsActive(s32 id);
 void uiSpriteSetImageKeyframe(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void FUN_0019e330(ByteStateWork *sprite, s32 keyframe, s32 frame);
 void workSetStateByte(ByteStateWork *work, u8 state);
@@ -19,7 +19,7 @@ void FUN_003d3738(void)
     }
     window->state = 3;
     window->phase = 0;
-    if (FUN_001517b4(9, 2) == 0 && FUN_00163fd4(6) == 0) {
+    if (FUN_001517b4(9, 2) == 0 && slotIsActive(6) == 0) {
         uiSpriteSetImageKeyframe(&window->sprite, 1, 0);
         FUN_0019e330(&window->sprite, 1, 0);
     } else {

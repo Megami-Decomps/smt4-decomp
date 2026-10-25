@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match7_BattleEffects.h"
 
 extern "C" {
-ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
 s16 btlFindEntryValue(s32 group, u32 kind);
@@ -13,7 +13,7 @@ s16 btlFindEntryValue(s32 group, u32 kind);
 ReflectAction *FUN_004fda78(s32 actor, s32 secondary, u32 options,
                           BattleRosterMotionA *target, s32 value, u16 extraId)
 {
-    ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actor, (s16)secondary, options);
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, (s16)secondary, options);
     action->kind = 8;
     action->value = value;
     action->target = (u32)target;

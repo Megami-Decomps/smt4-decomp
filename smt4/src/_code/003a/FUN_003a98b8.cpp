@@ -1,6 +1,6 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003a98b8` (_code @ 0x3a98b8, 0x2f8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: recovered touch-query results and four-argument help update; owner-field addressing and remaining typed layout still differ. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match4_RelativeDirectory.h"
 
 extern "C" {
 
@@ -11,7 +11,7 @@ int uiOwnerUpdateAnimationChannels(int);
 int FUN_00233818(int);
 int ifTouchRegionClearAll(unsigned int);
 int beginStatusPanelClose(void);
-int FUN_0029da34(int, int, int);
+void FUN_0029da34(RelativeDirectory *directory, u32 entry, u16 devilId, u32 context);
 int useCounterStart(void);
 int FUN_0029e328(int);
 int sortMenuCreate(int, int);
@@ -68,12 +68,12 @@ void FUN_003a98b8(int param_1)
   int temp_v9;
   
   temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  temp_v1 = *(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
+  temp_v1 = (s16)*(u16 *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
   uiOwnerUpdateAnimationChannels(param_1);
   temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x20);
-  temp_v0 = *(short *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
+  temp_v0 = (s16)*(u16 *)(param_1 + 0x5a8 + temp_v2 * 0x20 + 4);
   if (temp_v0 != temp_v1) {
-    FUN_0029da34(0,1,temp_v0);
+    FUN_0029da34(NULL, 1, (u16)temp_v0, 0);
   }
   temp_v2 = inputIsQuestMenuPressed();
   temp_v9 = 0;
@@ -88,13 +88,12 @@ void FUN_003a98b8(int param_1)
       temp_v1 = *(short *)(temp_v3 + 10);
       temp_v7 = (int)**(short **)(temp_v3 + 0xc);
       temp_v8 = (int)(*(short **)(temp_v3 + 0xc))[1];
-      temp_v3 = temp_v6;
-      FUN_003c2e1c(temp_v6,(int)temp_v1,temp_v7,temp_v8);
+      temp_v3 = FUN_003c2e1c(temp_v6,(int)temp_v1,temp_v7,temp_v8);
       if (temp_v3 != 0) {
         *(char *)(param_1 + 0xa6be) = (char)temp_v5;
       }
-      FUN_003c2e30(temp_v6,(int)temp_v1,temp_v7,temp_v8);
-      if (temp_v6 != 0) {
+      temp_v3 = FUN_003c2e30(temp_v6,(int)temp_v1,temp_v7,temp_v8);
+      if (temp_v3 != 0) {
         *(char *)(param_1 + 0xa6be) = (char)temp_v5;
         if (temp_v5 != 0) {
           temp_v1 = *(short *)(param_1 + 0xa6bc) + 1;
@@ -134,7 +133,7 @@ void FUN_003a98b8(int param_1)
       temp_v4 = 5;
     }
     *(unsigned short *)(param_1 + 0xa5b2) = temp_v4;
-    FUN_00233240(param_1 + 0xdc,temp_v4);
+    FUN_00233240(param_1 + 0xdc,(s16)temp_v4);
     ifTouchRegionClearAll(*(unsigned int *)(param_1 + 0x590));
     FUN_00233818(param_1 + 0x55c);
     return;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: failure-report argument scheduling and final success-result materialization differ. */
 #include "shard/W6_W6Match1_PositionedStream.h"
 
-extern "C" void FUN_002c3510(u32 result);
+#include "sys/ProcessResult.h"
 extern "C" void FUN_00254824(u32 result);
 extern "C" void asdFatalError();
 extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);

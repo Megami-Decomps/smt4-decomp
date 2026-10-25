@@ -1,4 +1,5 @@
 /* NON_MATCHING: path-operation return paths share cleanup instead of retaining retail's duplicated epilogues. */
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 extern "C" {
@@ -7,7 +8,6 @@ u32 libc_strlen(const char *text);
 void FUN_001886bc();
 s32 FUN_00188444(const u16 *path);
 s32 FUN_0042b32c(const u16 *path);
-void FUN_0013ebd8();
 
 s32 FUN_00317e50(const char *path)
 {
@@ -25,7 +25,7 @@ s32 FUN_00317e50(const char *path)
     } else {
         result = 0xe0e046bc;
     }
-    FUN_0013ebd8();
+    FUN_0013ebd8(result);
     return result;
 }
 }

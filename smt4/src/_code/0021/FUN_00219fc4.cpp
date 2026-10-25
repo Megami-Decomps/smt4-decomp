@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero-index-count branch and copy-loop scratch registers differ. */
+/* NON_MATCHING: signed index loop matches zero-count branch; copy-loop source/destination scratch registers differ. */
 #include "gfx/TiledIndexMesh.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 
@@ -25,7 +25,7 @@ EffectGeometryCloneView *FUN_00219fc4(EffectGeometryCloneView *source)
         copy->referenceCount = source->referenceCount;
         refCountIncrement(copy->referenceCount);
     }
-    for (u32 i = 0; i < source->storage->counts.indexCount; ++i)
+    for (s32 i = 0; i < source->storage->counts.indexCount; ++i)
         copy->storage->indices[i] = source->storage->indices[i];
     for (s32 i = 0; i < source->count; ++i)
         copy->colors[i] = source->colors[i];

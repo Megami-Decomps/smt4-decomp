@@ -14,7 +14,7 @@ u32 FUN_004fc094(s32 mode, ScriptUnit *unit, s32 kind, BattleRosterRecordA *rost
 u32 btlScriptDamageFirstCombatantNonlethally()
 {
     s32 damage = scrGetArg(0);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     FUN_003ee0c0(btlGetMainState());
     if (btlGetMainState()->entries[0].hp <= damage)
         damage = btlGetMainState()->entries[0].hp - 1;

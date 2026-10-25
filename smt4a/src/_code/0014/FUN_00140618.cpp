@@ -30,9 +30,9 @@ void FUN_00157558(RenderCtxA *context);
 u8 FUN_00154edc(u32 selector, JobSurface *surface);
 void surfaceCopy(JobSurface *destination, JobSurface *source);
 
-u8 FUN_00140618()
+s32 FUN_00140618(u32 job)
 {
-    CaptureWorkViewA *work = (CaptureWorkViewA *)jobGetWork();
+    CaptureWorkViewA *work = (CaptureWorkViewA *)jobGetWork(job);
     if (stateValuesGetBySelector(0) != 0) {
         work->skipped = 1;
     } else if (work->enabled) {

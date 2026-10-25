@@ -12,7 +12,7 @@ int _ZN18WindowStatusResultC1Ej(...);
 int memClear(...);
 int asdProcessCreateSimple(...);
 
-typedef int romwright_code(...);
+typedef int romwright_code(unsigned int job);
 /* stack frame of param_1: 2 slot(s), 8 byte(s) */
 typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
@@ -21,7 +21,7 @@ typedef struct {
 
 extern unsigned char LAB_00111388; /* 0x111388 */
 extern unsigned char LAB_00111398; /* 0x111398 */
-extern int FUN_00121e5c(...); /* 0x121e5c */
+extern int FUN_00121e5c(unsigned int job); /* 0x121e5c */
 
 extern int FUN_0011b918(int);
 extern int FUN_0011b930(int);

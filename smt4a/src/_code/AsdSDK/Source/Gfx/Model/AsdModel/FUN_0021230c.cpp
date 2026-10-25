@@ -11,6 +11,18 @@ struct ModelInstanceDescription {
     u32 alignment, auxiliaryAlignment, enabled, flags;
     EmitterCloneModelBody *source, *model;
     EmitterCloneRenderStateOwner *renderState;
+    ModelInstanceDescription(u32 initialFlags = 0)
+    {
+        first = 1;
+        second = 1;
+        enabled = 1;
+        flags = initialFlags;
+        source = NULL;
+        model = NULL;
+        renderState = NULL;
+        alignment = 4;
+        auxiliaryAlignment = 8;
+    }
 };
 extern "C" {
 extern GfxModelState g_gfxSettings;
@@ -40,30 +52,17 @@ void FUN_0021230c(AsdMdlObject *destination, const AsdMdlObject *source, s32 mod
     if (mode == 1) {
         original->instance->renderState->state->enabled |= 1;
         AsdAllocatorObject *allocator = asdMemoryGetAllocatorA();
+        void *resource = original->instance->source.resource;
         ModelInstanceDescription description;
-        description.first = 1;
-        description.second = 1;
-        description.enabled = 1;
-        description.flags = 0;
-        description.alignment = 4;
-        description.auxiliaryAlignment = 8;
         description.renderState = original->instance->renderState;
         description.source = original->instance;
         description.model = original->instance;
-        result->instance = FUN_001b6d08(&description, 0, original->instance->source.resource, allocator);
+        result->instance = FUN_001b6d08(&description, 0, resource, allocator);
     } else if (mode == 0) {
         AsdAllocatorObject *allocator = asdMemoryGetAllocatorA();
-        ModelInstanceDescription description;
-        description.first = 1;
-        description.second = 1;
-        description.flags = 0x834;
-        description.enabled = 1;
-        description.source = NULL;
-        description.model = NULL;
-        description.renderState = NULL;
-        description.alignment = 4;
-        description.auxiliaryAlignment = 8;
-        result->instance = FUN_001b6d08(&description, 0, original->instance->source.resource, allocator);
+        void *resource = original->instance->source.resource;
+        ModelInstanceDescription description(0x834);
+        result->instance = FUN_001b6d08(&description, 0, resource, allocator);
     }
     if ((source->flags & 2) != 0) {
         FUN_00386548(result->instance);

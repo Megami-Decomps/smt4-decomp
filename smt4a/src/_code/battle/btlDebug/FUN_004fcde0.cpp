@@ -11,7 +11,7 @@ struct BattleReflectMarkingState {
 extern "C" {
 extern BattleReflectMarkingState DAT_00573c08;
 BtlMainStateA* btlGetMainState(void);
-ReflectAction* FUN_004102d8(ReflectContext* context, s32 actor, s32 secondary, u32 options);
+
 
 // Queue roster reflection commands followed by a marked-combatant command.
 u32 FUN_004fcde0(s32 actor, u32 options, BtlCombatantEntryA* combatant)
@@ -22,7 +22,7 @@ u32 FUN_004fcde0(s32 actor, u32 options, BtlCombatantEntryA* combatant)
             BattleRosterRecordA* roster = &btlGetMainState()->roster[index];
             if (roster != NULL && (roster->motion.flags & 1) && (roster->motion.flags & 2) &&
                 roster->motion.unitIndex == selected && (roster->motion.flags & 0x400)) {
-                ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+                ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
                 action->flagView.flags |= 4;
                 action->target = (u32)roster;
                 action->kind = 0x2C;
@@ -32,7 +32,7 @@ u32 FUN_004fcde0(s32 actor, u32 options, BtlCombatantEntryA* combatant)
         }
     }
     combatant->flags |= DAT_00573c08.marked;
-    ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)(actor + 20), 0, options);
+    ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + 20), 0, options);
     action->kind = 0x2E;
     action->wordValues.unk18 = (u32)combatant;
     action->value = 0;

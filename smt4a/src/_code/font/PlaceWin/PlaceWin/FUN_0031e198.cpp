@@ -22,7 +22,7 @@ u32 taskCreateDraw(const char *name, u32 group, u32, u32,
                    u32 (*draw)(u32), u32, u32, u32 parent);
 void paramsClearPacket(void *packet);
 
-void FUN_0014e188(void *animation, u32 layer, u32 resource, void *packet, u32 mode, f32 scale);
+void FUN_0014e188(void *animation, u32 layer, u32 resource, const void *packet, u16 mode, f32 scale);
 void uiSpriteSelectAnim(void *animation, u32 index);
 
 /* Allocate the place caption window, create its update/draw jobs and initialize its animation. */

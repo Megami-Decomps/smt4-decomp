@@ -1,4 +1,4 @@
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -20,7 +20,6 @@ static __inline s32 percentOf(s32 value, s32 total)
     return value * 100 / total;
 }
 
-extern BtlUnit *btlUnitGet(u32 unit);
 extern void scrSetResult(s32 value);
 extern s32 scrGetArg(u32 index);
 
@@ -28,7 +27,7 @@ extern s32 scrGetArg(u32 index);
 u32 scrComm_BtlHpPercentAtMost(void)
 {
     s32 percent = scrGetArg(0);
-    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(percentOf(stats->hp, stats->maxHp) <= percent);
     return 1;

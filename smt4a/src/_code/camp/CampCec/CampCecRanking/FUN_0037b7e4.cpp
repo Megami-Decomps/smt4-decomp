@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037b7e4` (_code @ 0x37b7e4, 0x518 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "gamedata/GameFlags.h"
 #include "romwright_types.h"
 
 extern "C" {
@@ -14,12 +15,12 @@ int asdMemoryAllocTracked(...);
 int FUN_001654f8(...);
 int FUN_00180118(...);
 int asdTMTexLoadMainHeap(...);
-int FUN_0023723c(...);
+int asdTextFormatStream(...);
 int asdLoadFileAsyncSimple(...);
 int sysMemClear(...);
 int rt_aeabi_memclr(...);
 int FUN_00319aec(...);
-int gameFlagSetValue(...);
+
 int paramsClearPacket(...);
 
 /* stack frame of void: 8 slot(s), 32 byte(s) */
@@ -62,13 +63,12 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
-/* Supplied declaration required: FUN_0023723c. */
+/* Supplied declaration required: asdTextFormatStream. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_00319aec. */
 extern unsigned short FUN_0036fcd0(unsigned int, unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: paramsClearPacket. */
 
 
@@ -188,7 +188,7 @@ void FUN_0037b7e4(void)
       }
       puVar7 = (unsigned int *)&temp_v7;
       FUN_001654f8(puVar7,0);
-      FUN_0023723c(puVar2[temp_v5 + 0x82],temp_v1,0xffffffff,0,0,puVar7);
+      asdTextFormatStream(puVar2[temp_v5 + 0x82],temp_v1,0xffffffff,0,0,puVar7);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 0x14);
     temp_v5 = 0;
@@ -216,7 +216,7 @@ void FUN_0037b7e4(void)
       }
       puVar7 = (unsigned int *)&temp_v7;
       FUN_001654f8(puVar7,0);
-      FUN_0023723c(puVar2[temp_v5 + 0x96],temp_v1,0xffffffff,0,0,puVar7);
+      asdTextFormatStream(puVar2[temp_v5 + 0x96],temp_v1,0xffffffff,0,0,puVar7);
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 7);
   }

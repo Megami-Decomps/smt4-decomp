@@ -4,7 +4,7 @@
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
-ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 target, u32 options);
+
 
 /* Queue scalar actions for the requested model slot, or every enabled model slot. */
 u8 FUN_004fd2cc(s32 actor, u32 options, s32 allSlots, s32 slot,
@@ -19,7 +19,7 @@ u8 FUN_004fd2cc(s32 actor, u32 options, s32 allSlots, s32 slot,
                     s16 offset = battle->reflectedSlots.actorOffsets[index];
                     if (offset < 0)
                         return 0;
-                    ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)(actor + offset), 0, options);
+                    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)(actor + offset), 0, options);
                     action->kind = 0x46;
                     action->first = i;
                     action->second = (s16)parameter;
@@ -30,7 +30,7 @@ u8 FUN_004fd2cc(s32 actor, u32 options, s32 allSlots, s32 slot,
                 }
             }
         } else {
-            ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+            ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
             action->kind = 0x46;
             action->first = slot;
             action->second = (s16)parameter;

@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation only: retail loads the data-blocks pointer into r2 and adds 0x88 into r1; built uses r1 for both. */
-#include "common.h"
+#include "gamedata/GameData.h"
 
 extern "C" {
 
@@ -10,17 +10,18 @@ typedef struct FlagBlock {
     /* 0x24B5C */ u8 flagsB[0x48]; /* ids 0x40..0x47 retain their full index */
 } FlagBlock;
 
-typedef struct DataBlocks {
+struct SaveFlagBlockView {
     /* 0x00 */ u8 unk00[0x88];
     /* 0x88 */ FlagBlock flagBlock;
-} DataBlocks;
+};
 
-typedef struct DataBlocksHolder {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ DataBlocks *blocks;
-} DataBlocksHolder;
+typedef char SaveFlagBlockViewLayoutCheck[
+    offsetof(SaveFlagBlockView, flagBlock) == 0x88 &&
+    offsetof(FlagBlock, flagsA) == 0x1EC10 &&
+    offsetof(FlagBlock, flagsB) == 0x24B5C &&
+    sizeof(SaveFlagBlockView) == 0x24C2C ? 1 : -1];
 
-extern DataBlocksHolder g_gameDataBlocks;
+extern GameDataBlocks g_gameDataBlocks;
 
 static __inline u8 *flagByteGet(FlagBlock *block, s32 index)
 {
@@ -35,7 +36,8 @@ u32 gameDataBlocksGetFlagBit2(s32 index)
 {
     if (index < 0x48) {
         if (index >= 0) {
-            FlagBlock *block = &g_gameDataBlocks.blocks->flagBlock;
+            GameSaveData *save = g_gameDataBlocks.saveBlock;
+            FlagBlock *block = &reinterpret_cast<SaveFlagBlockView *>(save)->flagBlock;
             u8 *flag = flagByteGet(block, index);
 
             if (flag != NULL) {

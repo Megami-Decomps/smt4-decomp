@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the instruction order inside the three inlined render-state pushes differs (retail schedules each push differently); the loop, pops and calls are identical. */
+/* NON_MATCHING: callback handle and shared draw coordinates recovered; push expression order and job-loop address sharing differ. */
 #include "camp/RenderCtx.h"
 
 namespace {
@@ -21,7 +21,7 @@ struct EventTex {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 extern EventTex *g_eventTex;
-EventDrawWork *jobGetWork(void);
+EventDrawWork *jobGetWork(u32 job);
 s32 jobIsValid(u32 job);
 s32 jobGetStatus(u32 job);
 s32 FUN_001692ac(u32 a, u32 b);
@@ -32,9 +32,9 @@ void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 /* Draws the event's jobs under temporary render-state presets. */
-u32 FUN_002ad180(void)
+s32 FUN_002ad180(u32 job)
 {
-    EventDrawWork *work = jobGetWork();
+    EventDrawWork *work = jobGetWork(job);
     RenderCtxA *context = g_renderCtx;
     s32 state = FUN_001692ac(1, 0);
     renderStackPush(&context->stackA, state);
@@ -46,14 +46,15 @@ u32 FUN_002ad180(void)
     renderStackPush(&context->stackB, state);
     for (s32 i = 0; i < work->jobCount; i++) {
         if (g_eventTex->drawAll != 0) {
-            if (jobIsValid(work->jobs[i]) != 0) {
-                FUN_002609d8(work->jobs[i], (s32)work->x, (s32)work->y);
-            }
+            if (!jobIsValid(work->jobs[i]))
+                continue;
         } else {
-            if (jobIsValid(work->jobs[i]) != 0 && jobGetStatus(work->jobs[i]) == 4) {
-                FUN_002609d8(work->jobs[i], (s32)work->x, (s32)work->y);
-            }
+            if (!jobIsValid(work->jobs[i]) || jobGetStatus(work->jobs[i]) != 4)
+                continue;
         }
+        f32 x = work->x;
+        f32 y = work->y;
+        FUN_002609d8(work->jobs[i], (s32)x, (s32)y);
     }
     renderStackPop(&g_renderCtx->stackB);
     renderStackPop(&g_renderCtx->stackA);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: anchor operand allocation, flow-mode constant hoisting and repeated mode comparisons differ from retail. */
+/* NON_MATCHING: anchor operand allocation and repeated mode-comparison scheduling differ; process modes use the real inlined setter. */
 #include "ui/SpriteAnchorGroup.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -7,6 +7,7 @@ extern const u8 DAT_00405878[23];
 s32 asdTMTexTableNodeIsLoaded(u32 table, u32 index);
 TextureTableEntryIV *FUN_002bf4f8(u32 table, s32 index);
 ScriptRunState *FUN_00297060(void *buffer, void *arguments);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 s32 FUN_002c2a04(s32 index);
 void FUN_002a03d8(s32 index, s32 mode);
 
@@ -33,9 +34,9 @@ void FUN_00381fd4(SpriteAnchorGroupWork *work)
             work->current[index + 11].y += work->rest[22].y;
         }
         work->firstProcess = FUN_00297060(work->firstBuffer, work->firstArguments);
-        work->firstProcess->mode = 2;
+        scriptProcessSetMode(work->firstProcess, 2);
         work->secondProcess = FUN_00297060(work->secondBuffer, work->secondArguments);
-        work->secondProcess->mode = 2;
+        scriptProcessSetMode(work->secondProcess, 2);
         work->state = work->mode == 1 || work->mode == 2 ? 14 : 3;
         work->frame = 0;
         if (work->mode != 1 && work->mode != 2) {

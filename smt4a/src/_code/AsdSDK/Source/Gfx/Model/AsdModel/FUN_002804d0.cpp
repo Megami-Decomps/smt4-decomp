@@ -1,5 +1,6 @@
-/* NON_MATCHING: twin of smt4 FUN_00152894; readable rewrite compiles (211 vs 209 rows); register allocation differs */
+/* NON_MATCHING: canonical graphics counters now share the retail global base; resource-list subobject bases, owned-part registers, and a few release branches still differ. */
 #include "common.h"
+#include "shard/S1GfxModel.h"
 
 struct Allocator;
 struct AllocatorVTable {
@@ -34,9 +35,7 @@ struct SharedFile {
 
 extern "C" {
 
-extern s32 DAT_005b3c2c;
-extern s32 DAT_005b3c30;
-extern s32 DAT_005b3c34;
+extern GfxModelState g_gfxSettings;
 extern u8 DAT_00636ebc;
 extern u8 DAT_00636ec8;
 
@@ -96,8 +95,8 @@ void FUN_002804d0(u32* model, s32 request, u32 unused, s32 unused2)
 
     SharedFile* shared = reinterpret_cast<SharedFile*>(model[1]);
     s32 remaining = --shared->refCount;
-    if ((model[0] & 2) != 0) DAT_005b3c34--;
-    if (remaining < 1) {
+    if ((model[0] & 2) != 0) g_gfxSettings.unk40--;
+    if (remaining <= 0) {
         s32 resource = reinterpret_cast<SharedFile*>(model[1])->resource;
         if (resource != 0) nw_gfx_res_ResGraphicsFile_Cleanup(&resource);
         u32* file = reinterpret_cast<u32*>(model[1]);
@@ -110,7 +109,7 @@ void FUN_002804d0(u32* model, s32 request, u32 unused, s32 unused2)
             indexedListErase(&DAT_00636ebc, node);
         }
         asdMemFree(reinterpret_cast<u32>(file));
-        DAT_005b3c2c--;
+        g_gfxSettings.loadedModels.count--;
         if (request != 0) asdFileRequestRelease(request);
     }
     asdMemFree(model[9]);
@@ -118,7 +117,7 @@ void FUN_002804d0(u32* model, s32 request, u32 unused, s32 unused2)
     s32 node = lookupListFindByKey(&DAT_00636ec8, model);
     if (node != 0) indexedListErase(&DAT_00636ec8, node);
     asdMemFree(reinterpret_cast<u32>(model));
-    DAT_005b3c30--;
+    g_gfxSettings.loadedModels.instanceCount--;
 }
 
 } /* extern "C" */

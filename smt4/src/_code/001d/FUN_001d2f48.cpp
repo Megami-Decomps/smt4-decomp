@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc uses r3 for zero and tests enemy fields in a different schedule; retail keeps zero in ip. */
+/* NON_MATCHING: zero and scratch registers are exchanged; enemy state/timer stores do not combine into STM. */
 #include "common.h"
 
 struct DepartureGameState {
@@ -60,7 +60,7 @@ void FUN_001d2f48(void)
     g_gameState.target[3] = 0.0f;
     for (s32 index = 0; index < 32; ++index) {
         DepartingEnemy *enemy = &table->enemies[index];
-        if (enemy->active != 0 && enemy->kind > 0 && enemy->kind < 11 &&
+        if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 &&
             enemy->locked == 0 && enemy->state == 16) {
             --table->activeCount;
             enemy->state = 11;

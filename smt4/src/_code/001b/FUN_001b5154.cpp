@@ -1,5 +1,5 @@
 /* NON_MATCHING: near (205 rows against 206): retail shares the `if (dialogIsActive()) infoWinStartTimer(1)` tail and the clear-and-return-0 stub between its early exits, and runs the bit-clear through r1/r2; ours repeats the tails inline and clears through r0. Conditions, order of checks and constants follow retail. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 #define PICK_ACTIVE_FLAGS 0x140
 #define PICK_FLAG_ARMED_A 0x40
@@ -42,7 +42,6 @@ BtlPickWork *jobGetWork(void);
 s32 dialogIsActive(void);
 void infoWinStartTimer(s32 value);
 s32 jobIsValid(u32 job);
-BtlPickUnit *btlUnitGet(void);
 s32 btlReflectCountEntriesById(u32 reflect, u32 id);
 s32 FUN_003adab8(void);
 s32 btlScriptUnitIsPresentAndActive(BtlPickWork *work);
@@ -105,7 +104,7 @@ u32 FUN_001b5154(void)
         return 0;
     }
     if (g_btlScriptUnit != 0) {
-        BtlPickUnit *unit = btlUnitGet();
+        BtlPickUnit *unit = reinterpret_cast<BtlPickUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
 
         if (unit != NULL && unit->action != NULL &&
             (unit->action->kind == 7 || unit->action->kind == 9 || unit->action->kind == 13)) {

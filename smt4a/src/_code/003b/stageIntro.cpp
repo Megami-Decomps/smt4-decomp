@@ -1,4 +1,5 @@
 #include "shard/Shard003B.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -17,7 +18,7 @@ typedef struct StageObj {
 extern StageObj *g_mapGimic;
 
 extern void naviMainSetFlagsAndActivate(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
-extern void gameFlagSetValue(u32 index, s32 value, s32 flag);
+
 
 /* Plays the stage's introduction for its kind (0, 4, 8, 0xE, 0x12) and then flags it. */
 void stageIntro(void)

@@ -1,5 +1,6 @@
-/* NON_MATCHING: readable rewrite compiles (172 vs 154 rows); retail keeps a float constant in s16 (vpush d8) used by a float helper this version does not model, and addresses the screen fields via different base registers */
+/* NON_MATCHING: native animation-rate arguments and shared navigation flags are recovered; sprite/selection subobject base registers and phase block layout still differ. */
 #include "common.h"
+#include "map/mapDepart.h"
 
 // Map selection screen: only the members this update touches.
 struct MapScreen {
@@ -12,7 +13,7 @@ struct MapScreen {
     u8 selectedMarker;          // 0x64
     u8 unk65[0x504 - 0x65];
     u8 pointerSprite[0x58e - 0x504];    // 0x504
-    u8 cursorLocked;            // 0x58e
+    s8 cursorLocked;            // 0x58e
     u8 unk58f;
     u8 menuSprite[0xc40 - 0x590];       // 0x590
     u8 listSprites[6][0x8c];    // 0xc40
@@ -20,10 +21,9 @@ struct MapScreen {
 
 extern "C" {
 
-extern u8 DAT_005f1a5c;
-extern s8 DAT_005f1a5e;
+extern GameStateA g_gameState;
 
-s32 FUN_00163aa4(void* sprite);
+s32 FUN_00163aa4(void* sprite, f32 step);
 void FUN_00167458(void* sprite, s32 arg);
 void uiSpriteSetImageKeyframe(void* sprite, s32 image, s32 keyframe);
 void dialogClose(s32 arg);
@@ -52,12 +52,12 @@ void FUN_0048bdec(MapScreen* screen)
     u8* dirtyB = &SCREEN_BYTE(screen, 0x7b91);
     if (phase == 0) {
         if (SCREEN_BYTE(screen, 0x20644) != 0) {
-            for (s32 i = 0; i < 6; i++) FUN_00163aa4(screen->listSprites[i]);
-            FUN_00163aa4(SCREEN_PTR(screen, 0x112c));
-            FUN_00163aa4(SCREEN_PTR(screen, 0x10a0));
+            for (s32 i = 0; i < 6; i++) FUN_00163aa4(screen->listSprites[i], 1.0f);
+            FUN_00163aa4(SCREEN_PTR(screen, 0x112c), 1.0f);
+            FUN_00163aa4(SCREEN_PTR(screen, 0x10a0), 1.0f);
         }
-        FUN_00163aa4(titleSprite);
-        if (FUN_00163aa4(screen->menuSprite) != 0) screen->phase = 1;
+        FUN_00163aa4(titleSprite, 1.0f);
+        if (FUN_00163aa4(screen->menuSprite, 1.0f) != 0) screen->phase = 1;
         u32 y = vec2GetYInt(screen->menuSprite);
         u32 x = vec2GetXInt(screen->menuSprite);
         pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
@@ -69,13 +69,13 @@ void FUN_0048bdec(MapScreen* screen)
         FUN_00492ac8(cursor, 0);
         FUN_0048821c(screen, screen->mapIndex);
         uiSpriteSetImageKeyframe(titleSprite, 2, 0);
-        if (DAT_005f1a5e != 0) {
-            DAT_005f1a5e = 0;
+        if (g_gameState.navigation.naviMapPending != 0) {
+            g_gameState.navigation.naviMapPending = 0;
             screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
             *dirtyA = 1;
             *dirtyB = 1;
         } else {
-            DAT_005f1a5e = 1;
+            g_gameState.navigation.naviMapPending = 1;
             FUN_0048d248(screen, FUN_00492c84(cursor));
         }
         FUN_0048a378(screen);
@@ -87,12 +87,12 @@ void FUN_0048bdec(MapScreen* screen)
             dialogClose(1);
             SCREEN_BYTE(screen, 0x20644) = 0;
             FUN_0048a378(screen);
-            DAT_005f1a5c = 0;
+            g_gameState.navigation.alternateNaviMap = 0;
         }
         screen->phase = 2;
     } else if (phase == 2) {
-        FUN_00163aa4(titleSprite);
-        FUN_00163aa4(SCREEN_PTR(screen, 0x1014));
+        FUN_00163aa4(titleSprite, 1.0f);
+        FUN_00163aa4(SCREEN_PTR(screen, 0x1014), 1.0f);
         FUN_00167458(screen->pointerSprite, 0);
         if (screen->cursorLocked != 0) {
             if (screen->mapIndex > 100) screen->flags &= 0xfffdffff;

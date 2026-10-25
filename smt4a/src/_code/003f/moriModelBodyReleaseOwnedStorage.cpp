@@ -1,4 +1,4 @@
-/* NON_MATCHING: fixed subobject bases are folded into whole-object offsets, changing saved-register allocation; candidate -O2. */
+/* NON_MATCHING: Native storage destructors recover subobject bases; pre-destructor values cleanup and loop index address register still differ. */
 #include "Model/MoriModelContent.h"
 #include "shard/W6_W6Match2_AnimationPlayback.h"
 
@@ -17,13 +17,13 @@ struct MoriAnimationStorage {
     };
     u8 unk24[8];
     void *values;
-    void release();
+    ~MoriAnimationStorage();
 };
 struct MoriRootStorage {
     u8 unk00[8];
     void *buffer;
     u8 unk0c[0x10];
-    void release();
+    ~MoriRootStorage();
 };
 struct MoriModelCleanupView {
     u32 unk000;
@@ -41,7 +41,7 @@ struct MoriModelCleanupView {
 };
 extern "C" void asdMemFree(void *buffer);
 
-__inline void MoriAnimationStorage::release()
+__inline MoriAnimationStorage::~MoriAnimationStorage()
 {
     if (buffers.frames != NULL) {
         asdMemFree(buffers.frames);
@@ -53,7 +53,7 @@ __inline void MoriAnimationStorage::release()
     }
 }
 
-__inline void MoriRootStorage::release()
+__inline MoriRootStorage::~MoriRootStorage()
 {
     if (buffer != NULL) {
         asdMemFree(buffer);
@@ -68,16 +68,16 @@ extern "C" void moriModelBodyReleaseOwnedStorage(MoriModelBody *body)
         delete object->effect;
         object->effect = NULL;
     }
-    object->animations[3].release();
+    object->animations[3].~MoriAnimationStorage();
     if (object->animations[2].values != NULL) {
         asdMemFree(object->animations[2].values);
         object->animations[2].values = NULL;
     }
-    object->animations[2].release();
+    object->animations[2].~MoriAnimationStorage();
     for (s32 index = 0; index < 2; ++index) {
-        object->animations[index].release();
+        object->animations[index].~MoriAnimationStorage();
     }
-    object->root.release();
+    object->root.~MoriRootStorage();
     if (object->buffer264 != NULL) {
         asdMemFree(object->buffer264);
         object->buffer264 = NULL;

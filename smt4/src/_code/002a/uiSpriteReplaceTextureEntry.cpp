@@ -1,14 +1,13 @@
-/* NON_MATCHING: the initial entry/flag values swap r0/r1 and the AOC request's r2/r3 setup order differs; all remaining instructions match. */
 #include "shard/W6_W6Match8_TextureSwap.h"
 #include "addon/aocMain.h"
 
 extern "C" {
 extern AocSystem *g_aocSystem;
 void asdTMTexTableReleaseNode(u32 node, s32 entry);
-bool asdTMTexTableNodeIsLoaded(u32 node);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 void *asdTMTexTableLoadEntryAsync(u32 node, s32 entry);
 void FUN_002a60cc(AocSystem *system, u32 node, s32 entry);
-bool aocRunByName(AocSystem *system, u32 node, s32 entry, u32 mode);
+bool aocRunByName(AocSystem *system, u32 node, u32 entry, s32 checked);
 void *FUN_002a5ee4(AocSystem *system, u32 node, s32 entry, u32 size);
 bool FUN_002c1d5c();
 void FUN_002a880c(TextureSwap *work, s32 state, s32 arg);
@@ -25,7 +24,7 @@ void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
             }
             work->entry = entry;
         } else if (work->blocked == 0) {
-            if (work->entry != -1 && !asdTMTexTableNodeIsLoaded(work->node)) {
+            if (work->entry != -1 && !asdTMTexTableNodeIsLoaded(work->node, work->entry)) {
                 if (work->queuedEntry == -1) {
                     work->queuedEntry = entry;
                 }
@@ -44,7 +43,7 @@ void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
                     work->previousEntry = work->entry;
                 }
                 work->entry = entry;
-                if (aocRunByName(g_aocSystem, work->node, entry, 1)) {
+                if (aocRunByName(g_aocSystem, work->node, work->entry, 1)) {
                     work->texture = FUN_002a5ee4(g_aocSystem, work->node, work->entry, 0x10000);
                 } else {
                     work->texture = asdTMTexTableLoadEntryAsync(work->node, work->entry);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail bl 0 [R_ARM_CALL FUN_002c567c] differs from recovered add r0, sp, #8. */
+/* NON_MATCHING: temporary retrieved clock and copied working date-time occupy reversed eight-byte stack slots. */
 #include "common.h"
 
 // Private views of the date-time value and the referenced game-data records.

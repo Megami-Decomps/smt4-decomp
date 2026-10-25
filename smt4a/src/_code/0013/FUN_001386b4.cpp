@@ -1,8 +1,8 @@
+#include "sys/ProcessResult.h"
 #include "nn/Result.h"
 
 extern "C" {
 
-int FUN_0013ebd8(void);
 int FUN_00142b04(void);
 s32 FUN_001a0380(void);
 
@@ -15,7 +15,7 @@ s32 FUN_001386b4(void)
 
     FUN_00142b04();
     result = FUN_001a0380();
-    FUN_0013ebd8();
+    FUN_0013ebd8(result);
     if (nnResultIsSuccess(result)) {
         DAT_005b40c9 = 0;
     }

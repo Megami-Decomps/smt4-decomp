@@ -42,7 +42,7 @@ struct SoundPlayer {
 extern "C" {
 extern SoundPlayer g_buttonHelp;
 SoundSceneEntry *dataTableGetEntry0e(u32 id);
-void FUN_00183318(s32 mode);
+void buttonHelpBeginExit(s32 mode);
 void FUN_00183e58(void);
 void FUN_00183f58(u32 channel, u32 kind, u32 value, u32 arg);
 void FUN_00183c0c(void);
@@ -70,7 +70,7 @@ void sysPlaySe(u32 id)
     SoundSceneEntry *to = dataTableGetEntry0e(id);
     if (from != NULL && to != NULL) {
         if (from->isLayered == 0 && to->isLayered != 0) {
-            FUN_00183318(1);
+            buttonHelpBeginExit(1);
         } else {
             FUN_00183e58();
         }

@@ -15,7 +15,7 @@ struct IconPanel {
 };
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 void gfxSelectStatusIconPair(u32 kind, u32 *foreground, u32 *background, s32 alternate);
 void efctSetSpeed(f32 speed);
 s32 vec2GetXInt(const void *position);
@@ -44,13 +44,13 @@ void FUN_002fa1b0(IconPanel *panel, u32 kind, s32 x, s32 y, f32 speed, s32 alter
         FUN_001835b4(2, 13, 222, offsetX, offsetY, 53);
         if (panel->styled == 1) {
             efctSetSpeed(panel->position.scale * speed);
-            RenderCtx *render = g_renderCtx;
+            RenderCtxA *render = g_renderCtx;
             u32 blend = packNibblesAndByte(6, 1, 0);
-            render->blendStateView.state.set(blend);
+            renderCtxSetB(render, blend);
             FUN_001835b4(2, 13, 222, offsetX, offsetY, 54);
             render = g_renderCtx;
             blend = packNibblesAndByte(6, 7, 0);
-            render->blendStateView.state.set(blend);
+            renderCtxSetB(render, blend);
             efctSetSpeed(speed);
         }
         FUN_001835b4(2, 13, background, x, y, 55);

@@ -1,5 +1,6 @@
-/* NON_MATCHING: register assignment: retail keeps the payload pointer and the constants in different registers (r7/r8 vs r6-r9) and loads the zero words of the 12-byte payload with strd (185 vs 186 rows). */
+/* NON_MATCHING: typed branch payloads restore frame and literal name copy; zero-pair stores and saved constant registers differ. */
 #include "common.h"
+#include <string.h>
 
 extern "C" {
 
@@ -41,6 +42,17 @@ typedef struct SceneGameState {
     /* 0x5C */ char saveName[0x10];
 } SceneGameState;
 
+struct SceneSequenceOptions {
+    u32 id;
+    u32 first;
+    u32 second;
+};
+struct NamedSceneSequence {
+    u32 id;
+    s32 slot;
+    char name[24];
+};
+
 extern SceneGameState g_gameState;
 extern s32 DAT_0049fd14;
 
@@ -63,54 +75,52 @@ void messageMainFinishWindow(void);
  * message window and marks the transition done. */
 void FUN_003b92b4(SceneWork *work)
 {
-    u32 payload[8];
-
     if (spriteTableFreeLoaded(work->sprites) == 0) {
         return;
     }
     u32 flags = work->flags;
 
     if ((flags & 0x1000000) != 0) {
-        payload[0] = work->record->id;
-        asdSequenceRequest(10, payload, 4);
+        u32 payload = work->record->id;
+        asdSequenceRequest(10, &payload, sizeof(payload));
     } else if ((flags & 0x2000000) != 0) {
-        payload[0] = work->record->id + 100;
-        asdSequenceRequest(10, payload, 4);
+        u32 payload = work->record->id + 100;
+        asdSequenceRequest(10, &payload, sizeof(payload));
     } else if ((flags & 0x8000000) != 0) {
-        *(u16 *)payload = work->record->id;
-        asdSequenceRequest(0x12, payload, 2);
+        u16 payload = work->record->id;
+        asdSequenceRequest(0x12, &payload, sizeof(payload));
         FUN_002a03d8(0, 10);
         FUN_002a03d8(1, 10);
     } else if ((flags & 0x4000000) != 0) {
-        payload[0] = work->record->id;
-        payload[1] = 0;
-        payload[2] = 0;
-        asdSequenceRequest(16, payload, 12);
+        SceneSequenceOptions payload = {work->record->id, 0, 0};
+        asdSequenceRequest(16, &payload, sizeof(payload));
     } else if ((flags & 0x200000) != 0) {
         gameCopyPersistentSave();
-        payload[0] = work->record->id40;
-        payload[1] = -1;
-        libc_strcpy((char *)&payload[2], work->record->name);
-        asdSequenceRequest(4, payload, 32);
+        NamedSceneSequence payload;
+        payload.id = work->record->id40;
+        payload.slot = -1;
+        libc_strcpy(payload.name, work->record->name);
+        asdSequenceRequest(4, &payload, sizeof(payload));
     } else if ((flags & 0x40000) != 0) {
         gameCopyPersistentSave();
-        payload[0] = g_gameState.saveId;
-        payload[1] = -1;
-        libc_strcpy((char *)&payload[2], g_gameState.saveName);
-        asdSequenceRequest(4, payload, 32);
+        NamedSceneSequence payload;
+        payload.id = g_gameState.saveId;
+        payload.slot = -1;
+        libc_strcpy(payload.name, g_gameState.saveName);
+        asdSequenceRequest(4, &payload, sizeof(payload));
     } else if ((flags & 0x800000) != 0) {
-        payload[0] = work->record->id;
-        asdSequenceRequest(13, payload, 4);
+        u32 payload = work->record->id;
+        asdSequenceRequest(13, &payload, sizeof(payload));
     } else if ((flags & 0x20000000) != 0) {
-        payload[0] = 0;
-        asdSequenceRequest(20, payload, 4);
+        u32 payload = 0;
+        asdSequenceRequest(20, &payload, sizeof(payload));
     } else if (work->requestEvent6 != 0) {
         asdSequenceRequest(6, NULL, 0);
     } else if (work->requestEvent8 != 0) {
         asdSequenceRequest(8, NULL, 0);
     } else if (work->requestCounter != 0) {
-        payload[0] = DAT_0049fd14 - 200;
-        asdSequenceRequest(14, payload, 4);
+        u32 payload = DAT_0049fd14 - 200;
+        asdSequenceRequest(14, &payload, sizeof(payload));
     } else if (work->returnToMap != 0) {
         void *entry = FUN_002903f0();
 
@@ -123,10 +133,11 @@ void FUN_003b92b4(SceneWork *work)
         bgmReleaseStopped();
         soundChannelStopAll(15);
         g_gameState.endingRequested = 1;
-        payload[0] = 1;
-        payload[1] = -1;
-        libc_strcpy((char *)&payload[2], "e001_01");
-        asdSequenceRequest(4, payload, 32);
+        NamedSceneSequence payload;
+        payload.id = 1;
+        payload.slot = -1;
+        memcpy(payload.name, "e001_01", sizeof("e001_01"));
+        asdSequenceRequest(4, &payload, sizeof(payload));
     }
     if ((work->flags & 0x40) != 0) {
         work->flags &= ~0x40;

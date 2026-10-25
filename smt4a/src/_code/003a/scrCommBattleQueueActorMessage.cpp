@@ -39,19 +39,19 @@ u8 scrCommBattleQueueActorMessage()
     if (isEntryUsable(g_btlEvent) && !FUN_004f5a78(g_btlAux)) {
         return 0;
     }
-    btlUnitGet(g_btlScriptUnit);
+    reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     u32 encounter = ((BattleEncounterView *)btlGetMainState())->encounter;
     if (encounter != 0x167 && encounter != 0x168) {
         if (actor != 0) {
             FUN_002980e4(actor, 0);
-            ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+            ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
             BtlMainStateA *state = btlGetMainState();
             FUN_004fb6f4(0, 0, &state->roster[target], value, actor, 0, -1);
             btlEmitMessageTableEntries(actor, (u32)unit,
                 ((BattleMessageSource *)g_btlAux)->messages, 0, target, target);
         }
     } else if (actor != 0) {
-        BattlePendingUnit *unit = (BattlePendingUnit *)btlUnitGet(g_btlScriptUnit);
+        BattlePendingUnit *unit = (BattlePendingUnit *)reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit->pending != 0) {
             s32 count = chainCountIdUnflagged((ChainOwner *)g_btlActionReflect, 0);
             if (count <= 0) {

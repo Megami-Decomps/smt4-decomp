@@ -1,8 +1,19 @@
-/* NON_MATCHING: member search is not pair-unrolled and vector return epilogues merge. */
+/* NON_MATCHING: member lookup is not pair-unrolled, saved state/index/part roles differ and vector-return epilogues merge; arrangement kind 1 now has its explicit zero-height case. */
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
+
+/* Find the part occupied by a listed member, or -1 when it is absent. */
+static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
+{
+    for (s32 member = 0; member < 50; ++member) {
+        if (id == entry->members.ids[member])
+            return member;
+    }
+    return -1;
+}
+
 extern "C" {
 struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[50]; };
 BattleAnchorSource *FUN_0027da30(BtlMainState *state, s32 index);
@@ -24,16 +35,10 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
     BtlActionRecord *action = &state->actions.records[index];
     BattleVector3 position;
     if (!(action->status & 0x10) || forceEnemy) {
-        s32 part = 0;
         BtlEntry *entry = btlMainFindEntryByListedId(state, action->memberId);
-        if (entry != NULL) {
-            for (s32 member = 0; member < 50; ++member) {
-                if (entry->members.ids[member] == action->memberId) {
-                    part = member;
-                    break;
-                }
-            }
-        }
+        s32 part = entry != NULL ? findBattleMemberPart(entry, action->memberId) : -1;
+        if (part < 0)
+            part = 0;
         BattleAnchorSource *source = FUN_0027da30(state, index);
         const EnemyDrawOffsetOwner *owner = FUN_0027d9e8(state, source->parts[part]);
         ActionAnchorView *anchor = (ActionAnchorView *)action;
@@ -48,10 +53,17 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         BattleAnchorSource *source = FUN_0027da30(state, index);
         u8 kind = dataTable00FindById(source->id)->arrangement.first;
         f32 height = 0.0f;
-        if (kind == 0)
+        switch (kind) {
+        case 0:
             height = 15.0f;
-        else if (kind == 2)
+            break;
+        case 1:
+            height = 0.0f;
+            break;
+        case 2:
             height = -20.0f;
+            break;
+        }
         position.z += height;
     }
     return position;

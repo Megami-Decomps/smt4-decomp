@@ -5,7 +5,7 @@
 
 extern "C" {
 BtlMainStateA *btlGetMainState(void);
-ReflectAction *FUN_004102d8(ReflectContext *context, s32 actorId, u32 options, u32 argument);
+
 
 // Queue changes requested by active battle roster records, clearing each pending flag.
 u32 FUN_004fe7e4(s32 actorId, u32 argument, u32 duration)
@@ -17,14 +17,14 @@ u32 FUN_004fe7e4(s32 actorId, u32 argument, u32 duration)
         if ((flags & 1) && (flags & 2) && (flags & 0x10000)) {
             if (record->render.value6c == 0x4C4C4CFF) {
                 f32 parameter = *(const f32 *)&record->render.value70;
-                ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actorId, 0, argument);
+                ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actorId, 0, argument);
                 action->flagView.flags |= 4;
                 action->target = (u32)record;
                 action->kind = 0x2B;
                 action->value = duration;
                 action->parameterScalar = parameter;
             } else {
-                ReflectAction *action = FUN_004102d8(g_btlActionReflect, (s16)actorId, 0, argument);
+                ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actorId, 0, argument);
                 action->flagView.flags |= 4;
                 action->target = (u32)record;
                 action->kind = 0x2C;

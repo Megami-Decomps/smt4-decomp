@@ -1,5 +1,4 @@
-/* NON_MATCHING: the inlined array release is scheduled differently (the array pointers are reloaded
- * relative to this, in r0/r1/r3, instead of loaded as a pair through the member's address) */
+/* NON_MATCHING: vector release uses a member-relative LDRD pair where retail reloads begin/end separately through the owner; initial pair load also moves before vtable store. */
 #include "classes/Obj557b58.h"
 
 /* Deletes every item, then frees the array. */

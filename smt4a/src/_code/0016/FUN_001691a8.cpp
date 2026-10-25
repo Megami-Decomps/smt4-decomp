@@ -1,7 +1,7 @@
 #include "npc_room/NpcRoom.h"
 extern "C" {
 extern NpcRoomA* g_npcRoom;
-s32 FUN_001801b8(u16, u8);
+s32 gameSaveTestFlag(u16, u8);
 
 // Tests whether an occupied room slot still has pending work.
 u32 FUN_001691a8(s32 slot)
@@ -12,7 +12,7 @@ u32 FUN_001691a8(s32 slot)
         if (occupant == NULL) {
             return 0;
         }
-        if (FUN_001801b8(occupant->id, occupant->kind) == 0) {
+        if (gameSaveTestFlag(occupant->id, occupant->kind) == 0) {
             if (room->progress[slot].unk00 >= room->progress[slot].unk04 &&
                 room->progress[slot].unk08 >= 5) {
                 return 0;

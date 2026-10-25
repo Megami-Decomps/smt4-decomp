@@ -1,9 +1,6 @@
-/* NON_MATCHING: retail computes the two part pointers in r5/r6 (first part r5, second r6) via add-chains + mov; built swaps the two registers. */
+/* NON_MATCHING: native mutable second-sprite update receiver recovered; first/second sprite saved registers and address-binding schedule differ. */
 #include "common.h"
-
-struct Part {
-    u8 unk00[0x8c];
-};
+#include "ui/UiSpriteState.h"
 
 struct PartOwner {
     u8 unk000[0xa4];
@@ -11,24 +8,24 @@ struct PartOwner {
     u8 unkA8[4];
     s32 xAC;       // 0x0ac
     u8 unkB0[0x658];
-    Part parts[2]; // 0x708
+    UiSpriteState parts[2]; // 0x708
 };
 
 extern "C" {
 
-void FUN_002b8ee0(Part *part, s32 value);
-void FUN_002bf818(void);
-s32 vec2GetXInt(Part *part);
-s8 uiSpriteGetCompletionState(const Part *part);
+s32 FUN_002b8ee0(UiSpriteState *part, s32 value);
+s32 FUN_002bf818(UiSpriteState *part);
+s32 vec2GetXInt(const UiSpriteState *part);
+s8 uiSpriteGetCompletionState(const UiSpriteState *part);
 void messageOwnerSetState(PartOwner *owner, s32 mode);
 
-// Reset the first part, copy its x position into the owner and start mode 2 when both parts are flagged.
+// Advance the first sprite's slide and the second's keyframe, then enter mode2 when both finish.
 void FUN_00398964(PartOwner *owner)
 {
-    Part *first = &owner->parts[0];
+    UiSpriteState *first = &owner->parts[0];
     FUN_002b8ee0(first, 0);
-    Part *second = &owner->parts[1];
-    FUN_002bf818();
+    UiSpriteState *second = &owner->parts[1];
+    FUN_002bf818(second);
     s32 x = vec2GetXInt(first);
     owner->xA4 = x;
     owner->xAC = x;

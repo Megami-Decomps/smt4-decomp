@@ -1,4 +1,4 @@
-/* NON_MATCHING: compare operand order and predication only: retail compares (start, length) and (remaining, count) as written with conditional moves/stores; the build swaps both compares and branches around the zeroing. */
+/* NON_MATCHING: start/remaining comparisons now match; retail predicates the out-of-range zero stores instead of branching. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
@@ -19,14 +19,15 @@ s32 FUN_004267bc(u32 handle, s32 mode, u32 first, u32 second, u16 *data, u32 cou
 WindowStatusResult FUN_004ffee0(HalfwordSource **source, u32 *readCount, u32 handle, u32 count, u32 start)
 {
     HalfwordSource *input = *source;
+    u32 length = input->length;
     s32 status;
 
-    if (start >= input->length) {
+    if (start >= length) {
         status = 0;
         *readCount = 0;
     } else {
-        u32 remaining = input->length - start;
-        if (remaining < count) {
+        u32 remaining = length - start;
+        if (count > remaining) {
             count = remaining;
         }
         status = FUN_004267bc(handle, 1, input->first, input->second, input->data + start, count);

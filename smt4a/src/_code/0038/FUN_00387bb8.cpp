@@ -1,9 +1,9 @@
-/* NON_MATCHING: common refresh-byte store is placed after case 6 rather than at case 1; initial scheduling differs. */
+/* NON_MATCHING: refresh-store placement matches; initial scheduling and case-6 return folding differ. */
 #include "camp/CampCec/CharacterRefreshWork.h"
 
 extern "C" {
 void playerSummaryFill(PlayerSummary *summary);
-void FUN_0032e25c(PlayerSummary *summary, u32 argument);
+void slotNameDisplaySetEntry(PlayerSummary *summary, u32 argument);
 s32 cecQueryOptionalProcess(void);
 s32 gameDataTestFlags(u32 flags);
 void cecProcessCall2(void);
@@ -26,7 +26,7 @@ u32 FUN_00387bb8(CharacterRefreshWork *work)
         work->refresh = 0;
         playerSummaryFill(work->summary);
         if (work->mode == 0) {
-            FUN_0032e25c(work->summary, 0);
+            slotNameDisplaySetEntry(work->summary, 0);
         }
         if (cecQueryOptionalProcess() && gameDataTestFlags(0x20)) {
             cecProcessCall2();
@@ -56,15 +56,8 @@ u32 FUN_00387bb8(CharacterRefreshWork *work)
             work->refresh = 1;
             break;
         case 6:
-            if (work->mode != 0) {
-                if (!partyPanelExists()) {
-                    return 0;
-                }
-                if (!FUN_00284e94()) {
-                    return 0;
-                }
-            }
-            work->refresh = 1;
+            if (work->mode == 0 || (partyPanelExists() && FUN_00284e94()))
+                work->refresh = 1;
             break;
         case 2:
         case 3:

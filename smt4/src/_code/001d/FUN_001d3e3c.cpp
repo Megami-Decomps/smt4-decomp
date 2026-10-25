@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d3e3c` (_code @ 0x1d3e3c, 0x5448 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match3_MapMarkerModels.h"
 
@@ -151,7 +152,7 @@ int FUN_002e1230(...);
 int __aeabi_memcpy4(...);
 
 int questClassifyCompletionNotification(void);
-int FUN_0021bc04(unsigned int, unsigned int);
+int mapMarkVisitedAndUpdateRegionFlags(unsigned int, unsigned int);
 int FUN_00277b5c(...);
 int navigationSetArguments(...);
 int FUN_0027d5ac(...);
@@ -169,7 +170,6 @@ int sequenceRequestClearDeferred(void);
 int FUN_00281788(void);
 int FUN_0028527c(int);
 int gameRestoreWorkSave(int);
-int gameFlagSetValue(...);
 int asdLoadFileAsyncSimple(...);
 int FUN_002a09b4(...);
 int textFormatBuffer(...);
@@ -351,7 +351,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: regionFindRecord. */
 /* Supplied declaration required: mapSelectNearbyDeferredModel. */
 /* Supplied declaration required: questClassifyCompletionNotification. */
-/* Supplied declaration required: FUN_0021bc04. */
+/* Supplied declaration required: mapMarkVisitedAndUpdateRegionFlags. */
 /* Supplied declaration required: cameraRegistryRemove. */
 /* Supplied declaration required: FUN_00263cb8. */
 /* Supplied declaration required: FUN_00263e50. */
@@ -472,7 +472,6 @@ extern int FUN_00287894(void);
 /* Supplied declaration required: FUN_002895a8. */
 /* Supplied declaration required: FUN_00289608. */
 extern int FUN_002896bc(void);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
 extern unsigned int scrScriptProcessGetEntry(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0028a420. */
@@ -634,7 +633,7 @@ unsigned int FUN_001d3e3c(void)
         if (*(short *)(temp_v4 + 0x22) != 0) {
           temp_v6 = FUN_0027d968();
           if (temp_v6 != -1) {
-            gameFlagSetValue((int)*(short *)(temp_v4 + 0x22),1);
+            gameFlagSetValue((int)*(short *)(temp_v4 + 0x22), 1, 1);
           }
           else {
             naviClearObjectBlock();
@@ -763,7 +762,7 @@ unsigned int FUN_001d3e3c(void)
     puVar7[3] = temp_v6;
     break;
   case 2:
-    FUN_0021bc04(puVar7[0x10],puVar7[0x12]);
+    mapMarkVisitedAndUpdateRegionFlags(puVar7[0x10],puVar7[0x12]);
     FUN_002f3694();
     textFormatBuffer(temp_v29,&LAB_001d47f4,puVar7[0x10] - 100);
     FUN_002a09b4(temp_v29,0);
@@ -2406,7 +2405,7 @@ LAB_001d6bd0:
   case 0x3a:
     lmapMainStep();
     if (puVar7[0x33] == 1) {
-      gameFlagSetValue(0x529,1);
+      gameFlagSetValue(0x529, 1, 1);
       DAT_0049fb45 = 1;
       DAT_0049fb46 = 1;
       DAT_0049f934 = '\0';

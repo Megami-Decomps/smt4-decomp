@@ -1,5 +1,5 @@
 /* NON_MATCHING: readable rewrite from retail call sites compiles (173 vs ~180 rows); scenario copy loops and register allocation differ from retail */
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 // Row of the debug scenario table (0x74 bytes): the state the game is set to.
 struct ScenarioRow {
@@ -49,7 +49,7 @@ struct BattleMainBlock {
     u32 mapId;              // 0xb8
     u32 spawnId;            // 0xbc
     u8 unk00c0[0x223c - 0xc0];
-    s32 scenarioFile;       // 0x223c
+    void *scenarioFile;     // 0x223c
     u8 unk2240[0x44a0 - 0x2240];
     u32 flags;              // 0x44a0
 };
@@ -70,20 +70,18 @@ u8 gameSlotFindByCategory(UnitRecord* record);
 void* FUN_00282be4(void);
 UnitRecord* gameGetUnitRecord(s32 index);
 SlotTable* gameGetSlotTable(void);
-u32 dataTableFileGetTable(s32 file, u32 arg);
+void *dataTableFileGetTable(void *file, s32 arg);
 PlayerData* gameGetPlayerData(void);
 const char* gameGetPlayerName(void);
-s32 dataTableGetCount(u32 table);
-ScenarioRow* dataTableGetEntries(u32 table);
 
 // Debug: loads scenario row `row` into the running game (player, party, skills, stock).
 void FUN_0033adf8(BattleMainBlock* battle, u32 row)
 {
     if ((battle->flags & 0x40000) == 0 || row == 0) return;
 
-    u32 table = 0;
+    void *table = 0;
     if (battle->scenarioFile != 0) table = dataTableFileGetTable(battle->scenarioFile, 0);
-    ScenarioRow* rows = dataTableGetEntries(table);
+    ScenarioRow *rows = static_cast<ScenarioRow *>(dataTableGetEntries(table));
     s32 count = dataTableGetCount(table);
     if (row > (u32)(count - 1)) return;
     ScenarioRow* scenario = &rows[row];

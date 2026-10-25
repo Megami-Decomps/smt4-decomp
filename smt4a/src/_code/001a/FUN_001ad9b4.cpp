@@ -1,5 +1,5 @@
-/* NON_MATCHING: scheduling: retail stores the comparator stack argument after the other argument setup of the first bsearch call */
-#include "common.h"
+/* NON_MATCHING: canonical item-record return/id contract restored; first bsearch stack argument scheduling and table literal order differ. */
+#include "shard/W5_W5Match7_DataRecord.h"
 
 struct AocSystemView {
     /* 0x000 */ u8 unk000[0x384];
@@ -27,25 +27,29 @@ struct KeyedRecord {
     u8 unk02[0x134 - 2];
 };
 
-/* Looks the id up in the add-on content's override records, then in data tables 27 and 28; the result is unused. */
-void FUN_001ad9b4(u16 id)
+/* Look up an add-on override or a base-table record by its identifier. */
+ItemDataRecord *FUN_001ad9b4(u32 id)
 {
     TableIds tables = DAT_00531010;
     KeyedRecord key;
 
     key.id = id;
-    if (g_aocSystem->overrideRecords != NULL && libc_bsearch(&key, g_aocSystem->overrideRecords, g_aocSystem->overrideCount, sizeof(KeyedRecord), u16KeyRecordCompare) != NULL) {
-        return;
+    if (g_aocSystem->overrideRecords != NULL) {
+        ItemDataRecord *record = static_cast<ItemDataRecord *>(libc_bsearch(&key, g_aocSystem->overrideRecords, g_aocSystem->overrideCount, sizeof(KeyedRecord), u16KeyRecordCompare));
+        if (record != NULL)
+            return record;
     }
+    ItemDataRecord *record;
     for (u32 i = 0; i < 2; i++) {
         u32 table = dataTableGet(tables.ids[i], 0);
         void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
 
-        if (libc_bsearch(&key, entries, count, sizeof(KeyedRecord), u16KeyRecordCompare) != NULL) {
-            return;
-        }
+        record = static_cast<ItemDataRecord *>(libc_bsearch(&key, entries, count, sizeof(KeyedRecord), u16KeyRecordCompare));
+        if (record != NULL)
+            return record;
     }
+    return record;
 }
 
 } /* extern "C" */

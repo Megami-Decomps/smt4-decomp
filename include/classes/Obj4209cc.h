@@ -2,6 +2,7 @@
 #define CLASSES_OBJ4209CC_H
 
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 int asdMdlManagerDestroy(u32 handle);
@@ -45,7 +46,7 @@ public:
     /* In Apocalypse the handle field at 0x08 holds the model list instead of a model-manager handle. */
     ModelResourceList *models() const { return reinterpret_cast<ModelResourceList *>(handle); }
 
-/* public: the deleting destructor is still C-form (_ZN9Obj4209ccD0Ev) and reaches the fields. */
+/* Public resource fields shared by construction and resource teardown. */
     /* 0x00: vtable pointer */
     /* 0x04 */ u32 unk04;
     /* 0x08 */ u32 handle;
@@ -58,6 +59,10 @@ public:
     /* 0x34 */ f32 unk34[3];
     /* 0x40 */ u16 unk40;       /* starts at 7 */
 };
+
+typedef char Obj4209ccLayoutCheck[sizeof(Obj4209cc) == 0x44 &&
+    offsetof(Obj4209cc, rowA) == 0x0C &&
+    offsetof(Obj4209cc, buffer) == 0x24 ? 1 : -1];
 
 /* Prefix used by a shared deleting-destructor callback. */
 struct Obj4209ccCallbackView {

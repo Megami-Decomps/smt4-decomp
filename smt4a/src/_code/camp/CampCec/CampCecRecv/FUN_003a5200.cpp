@@ -22,7 +22,7 @@ int FUN_002e59f8(void);
 int FUN_003180c4(...);
 int cecProcessCall1(void);
 int FUN_0031cf00(...);
-int FUN_0032e25c(...);
+int slotNameDisplaySetEntry(...);
 int playerSummaryFill(void);
 int FUN_00330b7c(void);
 int FUN_00333474(...);
@@ -105,7 +105,7 @@ extern short *dataTable4AGetEntry(int);
 extern int FUN_0031cee0(void);
 /* Supplied declaration required: FUN_0031cf00. */
 /* Supplied declaration required: FUN_0031d5e8. */
-/* Supplied declaration required: FUN_0032e25c. */
+/* Supplied declaration required: slotNameDisplaySetEntry. */
 /* Supplied declaration required: playerSummaryFill. */
 extern int cecProcessGetEntry(int);
 extern int FUN_0033004c(void);
@@ -352,7 +352,7 @@ joined_r0x003a52e4:
           temp_v3 = cecProcessGetEntry(temp_v8);
         }
         if (*(short *)(temp_v3 + 0x60) == 0) {
-          FUN_0032e25c(temp_v3,0);
+          slotNameDisplaySetEntry(temp_v3,0);
         }
         temp_v12 = playerSummaryIsIncomplete(temp_v3);
         if (temp_v12 == 0) {

@@ -1,5 +1,6 @@
-/* NON_MATCHING: native's transient invalid-result initialization is omitted; local request construction and stack/register allocation differ. */
+/* NON_MATCHING: canonical SDK result construction matches; full-path pointer reuse, saved registers and stack allocation differ. */
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "nn/Result.h"
 #include <stddef.h>
 
 namespace {
@@ -24,7 +25,7 @@ struct AsdSyncFileRecordA {
     AsdSyncFileRecordA *onDoneArg;
     void (*onOpen)(void *);
     void *context;
-    s32 result;
+    nn::Result result;
     u32 unk144;
     u32 unk148;
 };

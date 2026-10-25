@@ -42,7 +42,7 @@ extern LmapScene *g_lmapScene;
 SpawnPoint *dataTable29Sub0GetEntryWithAoc(u32 id);
 u32 randNextInRange(s32 limit);
 s32 FUN_002533f4(s32 category, u32 index, s32 initialize);
-SpawnedObject *FUN_00232a6c(SpawnerPool *pool, s32 kind, u32 callback);
+SpawnedObject *effectPoolCreateObject(SpawnerPool *pool, s32 kind, u32 callback);
 void FUN_002329a8(SpawnedObject *object, u32 model);
 void recordSetOrigin(SpawnedObject *object, const f32 *position);
 void recordSetDirection(SpawnedObject *object, const f32 *direction);
@@ -103,7 +103,7 @@ void FUN_00396b08(SpawnerPool *spawner, s32 mode)
     f32 direction[3] = {0.0f, 0.0f, 0.0f};
     f32 position[3] = {50.0f, 50.0f, 50.0f};
     s32 kind = FUN_002533f4(spawner->category, spawner->index, 0);
-    SpawnedObject *object = FUN_00232a6c(spawner, 0, 0);
+    SpawnedObject *object = effectPoolCreateObject(spawner, 0, 0);
     if (object == NULL) {
         return;
     }

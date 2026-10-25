@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail forms the type-array address (stack + 0x20) before decrementing and loads the type with a register offset. */
+/* NON_MATCHING: type-array pointer recovers address timing; ldrb base/index register order remains reversed. */
 #include "shard/W4_W4Match2_ScrStack.h"
 
 extern "C" {
@@ -7,8 +7,9 @@ extern "C" {
  * resolving variable references. */
 s32 scrPopInt(ScriptStack *stack)
 {
+    const u8 *types = stack->types;
     s32 slot = --stack->count;
-    switch (stack->types[slot]) {
+    switch (types[slot]) {
     case SCR_VALUE_INT:
     case SCR_VALUE_RAW:
         return stack->values[slot].i;

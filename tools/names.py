@@ -92,7 +92,12 @@ class Game:
                 if key in unit:
                     unit[key] = re.sub(r"(?<=/)" + re.escape(old_stem) + r"(?=\.)", new_stem, unit[key])
             self.units[new] = unit
-            self.files.append((old_source, unit["source"]))
+            if unit["source"] != old_source:
+                # Other units built from the same file (several functions of one source) follow it.
+                for other in self.units.values():
+                    if other is not unit and other.get("source") == old_source:
+                        other["source"] = unit["source"]
+                self.files.append((old_source, unit["source"]))
             self.stems[old_stem] = new_stem
         self.renamed.append((old, new))
 

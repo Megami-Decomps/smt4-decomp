@@ -754,7 +754,7 @@ code_r0x0032d518:
         break;
       }
     }
-    FUN_003acf1c((int)*(short *)((int)puVar17 + (iVar7 + iVar19) * 2 + 0x1db4));
+    selectionSetUnitByRecordId((int)*(short *)((int)puVar17 + (iVar7 + iVar19) * 2 + 0x1db4));
     FUN_003aca0c();
     uVar18 = FUN_0029e908(puVar17 + 0xd);
     dataTable15GetUnlockedEntryId((int)*(char *)(puVar17 + 0x26),uVar18);

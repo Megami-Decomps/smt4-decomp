@@ -1,4 +1,4 @@
-/* NON_MATCHING: vector inputs recover the VFP ABI and branch condition, but squared-distance/division registers differ and the returned overlap boolean adds one move. */
+/* NON_MATCHING: direct overlap returns match; square-root intermediate, division registers and result-height store scheduling differ. */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 #include <math.h>
 
@@ -14,15 +14,13 @@ bool mapResolveCircleOverlapXZ(CollisionVector *result, CollisionVector first, f
         distance = 0.01f;
     }
     f32 radius = firstRadius + secondRadius;
-    bool overlap = radius >= distance;
-    if (overlap) {
+    if (radius >= distance) {
         result->x = second.x + (dx / distance) * radius;
         result->y = first.y;
         result->z = second.z + (dz / distance) * radius;
+        return true;
     }
-    else {
-        *result = first;
-    }
-    return overlap;
+    *result = first;
+    return false;
 }
 }

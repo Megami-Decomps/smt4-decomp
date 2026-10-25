@@ -1,6 +1,6 @@
 #include "shard/S1ListPanel.h"
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
 u32 packNibblesAndByte(u32 first, u32 second, u32 third);
 void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
@@ -13,14 +13,14 @@ void btlDrawLayeredHud(u32 context, s32 x, s32 y, u32 value, f32 speed)
     efctSetSpeed(speed);
     FUN_001835b4(2, 12, 131, x, y, 11);
     FUN_001835b4(2, 12, 132, x, y, 16);
-    RenderCtx *render = g_renderCtx;
+    RenderCtxA *render = g_renderCtx;
     u32 blend = packNibblesAndByte(6, 1, 0);
-    render->blendStateView.state.set(blend);
+    renderCtxSetB(render, blend);
     for (s32 index = 0; index < 3; ++index)
         FUN_001835b4(2, 12, index + 128, x, y, 21);
     render = g_renderCtx;
     blend = packNibblesAndByte(6, 7, 0);
-    render->blendStateView.state.set(blend);
+    renderStackSet(&render->stackB, blend);
     SpriteInfo *layout = FUN_001834a4(12, 133);
     FUN_0018152c(value, layout->x + x, layout->y + y, 26, 0);
     efctSetSpeed(1.0f);

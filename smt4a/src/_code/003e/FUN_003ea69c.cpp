@@ -1,7 +1,8 @@
-/* NON_MATCHING: stats snapshot reloads versus cached HP/MP, packed-entry masks/live registers and initial byte-flag zero stores differ. */
+/* NON_MATCHING: cached stat registers and original attribute-block copy grouping differ; initial flag stores and packed skill-bitfield operations now match structurally. */
 #include "battle/btlUnit.h"
 #include "shard/PadState.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/PackedSkillSlot.h"
 #include <string.h>
 
 extern "C" {
@@ -15,20 +16,23 @@ s32 playerAlignmentClass();
 void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
 {
     // Four-word skill views would enlarge the shared 0x3a-byte union region.
+    struct Attributes {
+        u16 values[5];
+        u16 reserved;
+    };
     struct Values {
         s32 hp, maxHp, mp, maxMp;
-        u16 attributes[5];
-        u16 reserved;
+        Attributes attributes;
     };
     struct SnapshotView {
         u8 initialized, reserved01;
-        u16 header[4];
+        s16 header[4];
         u8 unk00a[0xca];
-        u8 changes[4];
+        struct { u8 hp, maxHp, mp, maxMp; } changes;
         Values current, original;
         u16 flags, counterA, counterB, sourceKind;
         UnitSummarySkills skills;
-        u16 packed[21], originalPacked[21];
+        PackedSkillSlot packed[21], originalPacked[21];
         u8 flagsBySlot[21], changedBySlot[21], levels[21];
         u8 percentage, alignment, reserved1bd;
         u8 groups[3][8];
@@ -63,18 +67,26 @@ void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
     SnapshotView *snapshot = reinterpret_cast<SnapshotView *>(unit);
     const SourceView *source = reinterpret_cast<const SourceView *>(player);
     snapshot->initialized = 1;
-    snapshot->header[3] = 0xffff;
+    snapshot->header[3] = -1;
     snapshot->header[0] = 0;
-    snapshot->header[1] = 0xffff;
-    snapshot->header[2] = 0xffff;
-    memset(snapshot->changes, 0, sizeof(snapshot->changes));
-    snapshot->current.hp = source->hp;
-    snapshot->current.maxHp = source->maxHp;
-    snapshot->current.mp = source->mp;
-    snapshot->current.maxMp = source->maxMp;
+    snapshot->header[1] = -1;
+    snapshot->header[2] = -1;
+    snapshot->changes.hp = 0;
+    snapshot->changes.maxHp = 0;
+    snapshot->changes.mp = 0;
+    snapshot->changes.maxMp = 0;
+    s32 hp = source->hp;
+    snapshot->current.hp = hp;
+    s32 maxHp = source->maxHp;
+    snapshot->current.maxHp = maxHp;
+    s32 mp = source->mp;
+    snapshot->current.mp = mp;
+    s32 maxMp = source->maxMp;
+    snapshot->current.maxMp = maxMp;
     for (s32 index = 0; index < 5; ++index)
-        snapshot->current.attributes[index] = source->attributes[index];
-    snapshot->original = snapshot->current;
+        snapshot->current.attributes.values[index] = source->attributes[index];
+    Values captured = { hp, maxHp, mp, maxMp, snapshot->current.attributes };
+    snapshot->original = captured;
     snapshot->flags = source->flags;
     snapshot->counterA = 0;
     snapshot->counterB = 0;
@@ -85,17 +97,11 @@ void FUN_003ea69c(u32, BtlUnitDataA *unit, const PadState *player)
     clearTwoWords(snapshot->groups[2]);
     rt_memclr(snapshot->scratch, sizeof(snapshot->scratch));
     for (s32 index = 0; index < 21; ++index) {
-        u8 entry = index;
-        snapshot->packed[index] = (snapshot->packed[index] & 0xfc00) |
-            (playerPackedEntryLow10(entry) & 0x3ff);
-        snapshot->packed[index] = (snapshot->packed[index] & 0x3ff) |
-            (static_cast<u16>(playerPackedEntryHigh(entry)) << 10);
-        snapshot->originalPacked[index] = (snapshot->originalPacked[index] & 0xfc00) |
-            (playerPackedEntryLow10(entry) & 0x3ff);
-        s16 level = playerPackedEntryHigh(entry);
-        snapshot->originalPacked[index] = (snapshot->originalPacked[index] & 0x3ff) |
-            (static_cast<u16>(level) << 10);
-        snapshot->levels[index] = level & 0x3f;
+        snapshot->packed[index].id = playerPackedEntryLow10((u8)index);
+        snapshot->packed[index].unk00 = playerPackedEntryHigh((u8)index);
+        snapshot->originalPacked[index].id = playerPackedEntryLow10((u8)index);
+        snapshot->originalPacked[index].unk00 = playerPackedEntryHigh((u8)index);
+        snapshot->levels[index] = snapshot->originalPacked[index].unk00;
     }
     snapshot->percentage = 100;
     switch (playerAlignmentClass()) {

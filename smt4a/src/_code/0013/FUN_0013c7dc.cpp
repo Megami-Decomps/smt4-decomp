@@ -8,9 +8,9 @@ void FUN_00157558(RenderCtxA *context);
 u32 stateValuesGetBySelector(u32 selector);
 extern RenderCtxA *g_renderCtx;
 
-u32 FUN_0013c7dc()
+s32 FUN_0013c7dc(u32 job)
 {
-    FrameWorkA *work = reinterpret_cast<FrameWorkA *>(jobGetWork());
+    FrameWorkA *work = reinterpret_cast<FrameWorkA *>(jobGetWork(job));
     if (stateValuesGetBySelector(0) == 0 && work->flags.active &&
         work->flags.ready && work->flags.surfaceReady && work->frame.surface != 0 &&
         !work->frame.blocked) {

@@ -3,7 +3,7 @@
 #include <stddef.h>
 
 extern "C" {
-void memClear(void *memory, u32 size);
+void *memClear(void *memory, u32 size);
 void asdMemFree(void *memory);
 }
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail 65 vs built 66 rows; resource-array pointer arithmetic and teardown store scheduling differ. */
+/* NON_MATCHING: direct resource-array accesses recover base arithmetic; resource index scratch and panel clear argument scheduling differ. */
 #include "common.h"
 
 extern "C" {
@@ -53,11 +53,10 @@ void FUN_004f55c8(void *camera)
     FUN_004f8fa0(camera);
     obj4FSlots28Reset(camera);
     for (s32 index = 0; index < 50; ++index) {
-        CameraResourceSlot *slot = &state->resources[index];
-        slot->state = 0;
-        slot->id = -1;
-        workOwnerRelease(slot->owner);
-        slot->pending = 0;
+        state->resources[index].state = 0;
+        state->resources[index].id = -1;
+        workOwnerRelease(state->resources[index].owner);
+        state->resources[index].pending = 0;
     }
     state->flags = 0;
     state->mode = 12;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002991d4` (_code @ 0x2991d4, 0x15bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ int FUN_003a6b10(...);
 int FUN_003ca244(void);
 int sysPlayVoice(...);
 int loadSlotEnsureLoaded(int);
-int gameFlagSetValue(int, int);
 int FUN_00480a54(void);
 
 /* stack frame of void: 12 slot(s), 48 byte(s) */
@@ -177,7 +177,6 @@ extern unsigned short *dataTable20GetEntry(int);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d2158. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: gameScaleCategoryAmount. */
 /* Supplied declaration required: FUN_00480a54. */
@@ -288,7 +287,7 @@ unsigned int FUN_002991d4(void)
       temp_v11 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x108));
       if (temp_v11 == 2) {
         if (*(int *)(temp_v4 + 0x10c) != 0) {
-          gameFlagSetValue(*(int *)(temp_v4 + 0x10c),1);
+          gameFlagSetValue(*(int *)(temp_v4 + 0x10c), 1, 1);
         }
         messageSlotSet(0);
         scrScriptProcessDestroy(*(unsigned int *)(temp_v4 + 0x108));

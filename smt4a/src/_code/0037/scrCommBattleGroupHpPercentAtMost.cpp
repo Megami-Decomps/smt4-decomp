@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); entries base/product registers are swapped in the entry address (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: scalar range uses an 8-byte frame versus retail 40; range order, total registers and final exclusion-mask operands differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -20,19 +20,24 @@ u32 scrCommBattleGroupHpPercentAtMost()
     u32 first, count;
     FUN_00301a08(kind, &first, &count);
     for (s32 index = first; index < (s32)(first + count); ++index) {
-        const BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+        const BtlCombatantEntryA *entries = btlGetMainState()->entries;
+        const BtlCombatantEntryA *entry = &entries[index];
         u64 flags = entry->flags;
         if (!(g_btlCandidateMasks.unavailable & flags) &&
-            (g_btlCandidateMasks.required & flags) && !(g_btlCandidateMasks.excluded & flags)) {
-            totalHp += entry->hp;
-            totalMaxHp += entry->maxHp;
+            (flags & g_btlCandidateMasks.required) && !(g_btlCandidateMasks.excluded & flags)) {
+            s32 hp = entry->hp;
+            s32 maxHp = entry->maxHp;
+            totalHp += hp;
+            totalMaxHp += maxHp;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         const BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
         if (entry != NULL) {
-            totalHp += entry->hp;
-            totalMaxHp += entry->maxHp;
+            s32 hp = entry->hp;
+            s32 maxHp = entry->maxHp;
+            totalHp += hp;
+            totalMaxHp += maxHp;
         }
     }
     scrSetResult(totalHp * 100 / totalMaxHp <= threshold);

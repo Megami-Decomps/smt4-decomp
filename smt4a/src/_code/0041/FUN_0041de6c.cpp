@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041de6c` (_code @ 0x41de6c, 0x460 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ int gameGlobalsQueueValues(...);
 int FUN_0038b5fc(...);
 int messageMainSetFlag(...);
 unsigned int saveLoadStartSave(int, unsigned char);
-int gameFlagSetValue(int, int);
 int FUN_00408184(int, int);
 int __aeabi_memcpy4(...);
 
@@ -66,7 +66,6 @@ extern int byteTripleGetV1(void);
 /* Supplied declaration required: messageMainSetFlag. */
 extern int byteArr5Get4(void);
 /* Supplied declaration required: saveLoadStartSave. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -109,10 +108,10 @@ void FUN_0041de6c(int param_1)
     temp_v1 = gameDataBlocksGetSaveData();
     __aeabi_memcpy4(temp_v1,*(unsigned int *)(param_1 + 0x24),0x2a71c);
     if ((DAT_00588e16 != '\0') && (temp_v0 = gameFlagIsSet(0x470), temp_v0 == 0)) {
-      gameFlagSetValue(0x470,1);
+      gameFlagSetValue(0x470, 1, 1);
     }
     if ((DAT_00588e17 != '\0') && (temp_v0 = gameFlagIsSet(0x471), temp_v0 == 0)) {
-      gameFlagSetValue(0x471,1);
+      gameFlagSetValue(0x471, 1, 1);
     }
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x40),1);
     puVar2 = (unsigned short *)gameDataBlocksGetSaveData();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same logic as retail; armcc keeps the effect in r6 and the target record in r7 (swapped here) and compiles the HP/MP merge as a longer branch tree. */
+/* NON_MATCHING: HP/MP coupling matches the retail guards; effect/target saved registers and the shared party-unit lookup exit still differ. */
 #include "common.h"
 
 /* The item or skill effect being tested (only the fields read here). */
@@ -72,11 +72,10 @@ u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 use
         if ((wanted & RECOVER_MP) && (player->status & 2) == 0 && player->mp != player->maxMp)
             changes |= RECOVER_MP;
         if ((wanted & RECOVER_HP) && (wanted & RECOVER_MP)) {
-            if ((changes & RECOVER_HP) == 0 ||
-                ((changes & RECOVER_MP) == 0 && ((changes |= RECOVER_MP), (changes & RECOVER_HP) == 0))) {
-                if (changes & RECOVER_MP)
-                    changes |= RECOVER_HP;
-            }
+            if ((changes & RECOVER_HP) != 0 && (changes & RECOVER_MP) == 0)
+                changes |= RECOVER_MP;
+            if ((changes & RECOVER_HP) == 0 && (changes & RECOVER_MP) != 0)
+                changes |= RECOVER_HP;
         }
         if ((wanted & CURE_STATUS) != 0) {
             u16 cureMask = 0;
@@ -93,11 +92,10 @@ u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 use
         if ((wanted & RECOVER_MP) && (unit->status & 0x406) == 0 && unit->mp != unit->maxMp)
             changes |= RECOVER_MP;
         if ((wanted & RECOVER_HP) && (wanted & RECOVER_MP)) {
-            if ((changes & RECOVER_HP) == 0 ||
-                ((changes & RECOVER_MP) == 0 && ((changes |= RECOVER_MP), (changes & RECOVER_HP) == 0))) {
-                if (changes & RECOVER_MP)
-                    changes |= RECOVER_HP;
-            }
+            if ((changes & RECOVER_HP) != 0 && (changes & RECOVER_MP) == 0)
+                changes |= RECOVER_MP;
+            if ((changes & RECOVER_HP) == 0 && (changes & RECOVER_MP) != 0)
+                changes |= RECOVER_HP;
         }
         if ((wanted & CURE_STATUS) != 0) {
             u16 cureMask = 0;

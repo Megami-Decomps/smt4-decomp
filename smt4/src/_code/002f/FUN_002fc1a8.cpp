@@ -14,7 +14,7 @@ extern void *g_effectTextures[22]; /* 0x4d96f0 */
 /* Loads the 22 numbered effect textures once. */
 void FUN_002fc1a8(void)
 {
-    char path[260];
+    char path[256];
     s32 i;
 
     if (g_effectTexturesLoaded == 0) {

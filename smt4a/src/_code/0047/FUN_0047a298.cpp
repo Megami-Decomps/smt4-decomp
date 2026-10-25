@@ -15,15 +15,15 @@ struct AocDrawWork {
 };
 struct AocDrawText { u16 text[64]; };
 
-typedef char CheckDrawStateOffset[offsetof(RenderCtx, drawStateView.state) == 0x1258 ? 1 : -1];
+typedef char CheckDrawStateOffset[offsetof(RenderCtxA, stackA) == 0x1258 ? 1 : -1];
 typedef char CheckDrawWorkPosition[offsetof(AocDrawWork, alternate) == 0x185c ? 1 : -1];
 
 extern "C" {
 AocDrawWork *jobGetWork(u32 job);
 s32 vec2GetXInt(const AocDrawPosition *position);
 s32 vec2GetYInt(const AocDrawPosition *position);
-extern RenderCtx *g_renderCtx;
-void FUN_00157558(RenderCtx *context);
+extern RenderCtxA *g_renderCtx;
+void FUN_00157558(RenderCtxA *context);
 u32 FUN_001692ac(s32 mode, s32 option);
 void FUN_00164b5c(s32 layer, s32 group, s32 sprite, s32 x, s32 y, u32 flags);
 s32 FUN_00473910(AocMainA *main, s32 id);
@@ -48,8 +48,8 @@ extern "C" s32 FUN_0047a298(u32 job)
         s32 x = vec2GetXInt(position);
         s32 y = vec2GetYInt(position);
         FUN_00157558(g_renderCtx);
-        RenderCtx *context = g_renderCtx;
-        context->drawStateView.state.push(FUN_001692ac(1, 0));
+        RenderCtxA *context = g_renderCtx;
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         FUN_00164b5c(2, 47, 6, x, y, 0x81);
         AocDrawText text[8];
         s32 count = FUN_00473754(main, FUN_00473910(main, 101), text);
@@ -57,7 +57,7 @@ extern "C" s32 FUN_0047a298(u32 job)
             SpriteInfo *sprite = FUN_001834a4(47, 67 + i);
             FUN_00162790(3, 0xfc4f46ff, &text[i], static_cast<f32>(sprite->x + x), static_cast<f32>(sprite->y + y), 0.5f, 0.0f, 1.0f);
         }
-        g_renderCtx->drawStateView.state.pop();
+        renderStackPop(&g_renderCtx->stackA);
     }
     return 0;
 }

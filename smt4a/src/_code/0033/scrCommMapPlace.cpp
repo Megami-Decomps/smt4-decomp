@@ -1,9 +1,10 @@
 #include "map/mapDepart.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
 void mapPlaceSet(u32 a, u32 b, u32 c);
-void gameFlagSetValue(s32 a, s32 b, s32 c);
+
 s32 gameFlagIsSet(u32 id);
 u32 scrGetArg(s32 index);
 

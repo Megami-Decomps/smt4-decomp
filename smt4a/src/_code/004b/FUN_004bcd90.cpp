@@ -20,7 +20,7 @@ struct DerivedBattleStats {
 };
 
 extern "C" {
-StatGrowthParameters FUN_004ccb0c(u16 id);
+StatGrowthParameters unitBuildStatGrowthPacket(u16 id);
 void FUN_004cc6a4(u16 level, s16 *output, const StatGrowthParameters *parameters);
 u32 FUN_003da998(s32 level, const StatGrowthParameters *parameters);
 u32 FUN_003daaf4(s32 level, const StatGrowthParameters *parameters);
@@ -56,7 +56,7 @@ extern "C" void FUN_004bcd90(DerivedBattleStats *record)
     record->derived[5] = clampDerivedStat(record->derived[5] + record->bonuses[5]);
     record->derived[6] = clampDerivedStat(record->derived[6] + record->bonuses[6]);
     record->derived[3] = clampDerivedStat(record->derived[3] + record->bonuses[3]);
-    StatGrowthParameters parameters = FUN_004ccb0c(record->id);
+    StatGrowthParameters parameters = unitBuildStatGrowthPacket(record->id);
     FUN_004cc6a4(record->level, record->derived, &parameters);
     s32 hpDifference = record->base[0] - FUN_003da998(1, &parameters);
     u32 baseMp = FUN_003daaf4(1, &parameters);

@@ -1,15 +1,6 @@
-/* NON_MATCHING: Retail uses r7/r8/r6 for owner/part/slot; the compiled C entry uses r8/r6/r7. */
+/* NON_MATCHING: native deleting destructor is the right size; owner/part/slot use r8/r6/r7 instead of retail r7/r8/r6. */
 #include "classes/Obj4209cc.h"
 
-extern "C" {
-
-/* The deleting destructor of Obj4209cc: armcc's own D0 calls the destructor body instead of
- * inlining it as retail does, so it stays in C form. */
-void _ZN9Obj4209ccD0Ev(Obj4209cc *self);
-
-extern u8 DAT_004209d0;   /* the vtable's address point */
-
-}
 
 /* Destroys the part and hands its memory back to the allocator it came from. */
 static void releasePart(Obj4209ccPart **slot)
@@ -25,22 +16,38 @@ static void releasePart(Obj4209ccPart **slot)
 
 /* Destroys and releases each part (two rows of three), then the handle and the block, and frees
  * the object. */
-void _ZN9Obj4209ccD0Ev(Obj4209cc *self)
+inline Obj4209cc::~Obj4209cc()
 {
-    *(const void **)self = &DAT_004209d0;
-    self->unk04 = 0;
+    unk04 = 0;
     for (int i = 0; i < 3; i++) {
-        releasePart(&self->rowA[i]);
-        releasePart(&self->rowB[i]);
-        self->rowA[i] = NULL;
+        releasePart(&rowA[i]);
+        releasePart(&rowB[i]);
+        rowA[i] = NULL;
     }
-    if (self->handle != 0) {
-        asdMdlManagerDestroy(self->handle);
-        self->handle = 0;
+    if (handle != 0) {
+        asdMdlManagerDestroy(handle);
+        handle = 0;
     }
-    if (self->buffer != NULL) {
-        asdMemFree(self->buffer);
-        self->buffer = NULL;
+    if (buffer != NULL) {
+        asdMemFree(buffer);
+        buffer = NULL;
     }
-    asdMemFreeNonNull(self);
+}
+
+Obj4209cc::Obj4209cc()
+{
+    unk04 = 0;
+    handle = 0;
+    buffer = NULL;
+    unk28 = 0;
+    unk2C = 0;
+    scale = 1.0f;
+    unk34[0] = 0.0f;
+    unk34[1] = 0.0f;
+    unk34[2] = 0.0f;
+    unk40 = 7;
+    for (int i = 0; i < 3; i++) {
+        rowA[i] = NULL;
+        rowB[i] = NULL;
+    }
 }

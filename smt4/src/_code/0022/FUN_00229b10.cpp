@@ -1,4 +1,4 @@
-/* NON_MATCHING: event-result branch sharing and action-thread field-address hoisting differ. */
+/* NON_MATCHING: event-success block placement and state/selection saved-register assignment differ; named slot setter avoids the hoisted kind-byte offset. */
 #include "battle/ActionKindSelection.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
@@ -11,6 +11,12 @@ s32 FUN_0027e3b8(BattleEvent *);
 s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
 const void *dataTable40FindById(s32);
 void battleSetActionKind(BtlMainState **);
+
+static __inline void battleSetSelectedActionThreadKind(s32 index, u8 kind)
+{
+    ActionKindThread *thread = &static_cast<ActionKindThread *>(g_btlAction.data)[index];
+    thread->kind = kind;
+}
 
 /* Prefer a battle event, then command-specific action kinds, before normal selection. */
 void FUN_00229b10(BtlMainState **state, const ActionKindSelection *selection)
@@ -32,30 +38,33 @@ void FUN_00229b10(BtlMainState **state, const ActionKindSelection *selection)
         offsetof(ActionStateView, flags) == 0x44A8 ? 1 : -1];
     if (!FUN_0027e3b8(g_btlEvent)) {
         s32 unit = selection->entry->unitIndex;
-        s32 triggered;
         if ((u16)selection->command->kind != 11) {
-            triggered = btlEventSelectTrigger(g_btlEvent, 3, unit, 0);
-        } else {
-            triggered = btlEventSelectTrigger(g_btlEvent, 7, unit, 0);
-        }
-        if (triggered) {
+            if (btlEventSelectTrigger(g_btlEvent, 3, unit, 0)) {
+                const ActionStateView *view = (const ActionStateView *)*state;
+                battleSetSelectedActionThreadKind(view->currentAction, 24);
+                return;
+            }
+        } else if (btlEventSelectTrigger(g_btlEvent, 7, unit, 0)) {
             const ActionStateView *view = (const ActionStateView *)*state;
-            ((ActionKindThread *)g_btlAction.data)[view->currentAction].kind = 24;
+            battleSetSelectedActionThreadKind(view->currentAction, 24);
             return;
         }
     }
+    bool special = false;
     s16 kind = selection->command->kind;
     if (kind == 3) {
         const SkillActionView *skill = (const SkillActionView *)dataTable40FindById(selection->command->skill);
-        bool special = skill != NULL && skill->special != 0;
+        if (skill != NULL && skill->special != 0) {
+            special = true;
+        }
         const ActionStateView *view = (const ActionStateView *)*state;
         if (!(view->flags & 0x800) && special) {
-            ((ActionKindThread *)g_btlAction.data)[view->currentAction].kind = 12;
+            battleSetSelectedActionThreadKind(view->currentAction, 12);
             return;
         }
     } else if (kind == 13) {
         const ActionStateView *view = (const ActionStateView *)*state;
-        ((ActionKindThread *)g_btlAction.data)[view->currentAction].kind = 8;
+        battleSetSelectedActionThreadKind(view->currentAction, 8);
         return;
     }
     battleSetActionKind(state);

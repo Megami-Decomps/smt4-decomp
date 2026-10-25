@@ -1,12 +1,13 @@
-/* NON_MATCHING: bitmap loads/stores use different address bases and unlock-flag switch tests are reordered. */
+/* NON_MATCHING: bitmap loads/stores use different address bases; unlock-flag if-chain now preserves retail test order. */
 #include "gamedata/AppUnlockState.h"
+#include "gamedata/GameFlags.h"
 #include "gamedata/AppPurchaseRecord.h"
 
 extern "C" {
 const AppPurchaseSortRecord *dataFindKeyedRecordWithOverrides(u32 id);
 void FUN_002f0bd8(u32 cost);
 void updateUnlockedEntryCount();
-void gameFlagSetValue(u32 flag, u32 bank, u32 value);
+
 AppUnlockState *gameDataBlockGetArea2D68();
 s32 FUN_003e4230(u32 id);
 
@@ -39,16 +40,12 @@ u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
         if (record->type == 0) {
             ++state->categoryCounts[record->category & 0x3f];
         }
-        switch (id) {
-        case 46:
+        if (id == 46) {
             gameFlagSetValue(0x520, 0, 1);
-            break;
-        case 24:
+        } else if (id == 24) {
             gameFlagSetValue(0x521, 0, 1);
-            break;
-        case 118:
+        } else if (id == 118) {
             gameFlagSetValue(0x527, 0, 1);
-            break;
         }
     }
     return 1;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the constant 1 into sl before the entry loop (extra push of sl, loop counter in r4/entry in r5) and converts the two float arguments into s1/s0 rather than s0/s2 */
 #include "gamedata/Table49NaviEntry.h"
+#include "gamedata/GameFlags.h"
 #include "gamedata/Table49Trigger.h"
 #include "map/mapDepart.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
@@ -11,7 +12,7 @@ s32 dataTable49Type1Count(void);
 const Table49Trigger *dataTable49GetEntry(s32 index);
 Table49NaviEntry *dataTableGetEntry49(s32 index);
 s32 gameFlagIsSet(s32 flag);
-void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+
 void naviMainSetFlagsAndActivate(u8 first, u8 second, s32 third, s32 fourth, s32 fifth, s32 sixth);
 void navigationSetOrQueueRequest(s32 mapId, s32 areaId, s32 x, f32 y, f32 z);
 extern GameStateA g_gameState;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: extra context moves, saved registers and section-store registers differ. */
+/* NON_MATCHING: lookup-owned table contexts restore call setup; selected-section/refresh stores use swapped value/constant registers. */
 #include "map/NavigationInterpolation.h"
 #include "gamedata/MapNaviCategories.h"
 struct MapNaviSectionRecord {
@@ -29,10 +29,11 @@ const MapNaviSectionRecord *dataTable2bSub1GetRecord(MapNaviTableContext *contex
 u32 MapNaviTable_GetCategoryCount(MapNaviTableContext *context);
 const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *context, u32 index);
 }
-static inline const MapNaviSectionRecord *findNaviSection(MapNaviTableContext *context, s32 map, u32 category)
+static inline const MapNaviSectionRecord *findNaviSection(s32 map, u32 category)
 {
-    u32 count = dataTable2bSub1GetCount(context);
-    const MapNaviSectionRecord *records = dataTable2bSub1GetRecord(context, 0);
+    MapNaviTableContext context;
+    u32 count = dataTable2bSub1GetCount(&context);
+    const MapNaviSectionRecord *records = dataTable2bSub1GetRecord(&context, 0);
     for (s32 i = 0; i < static_cast<s32>(count); ++i) {
         if (records[i].map == -1)
             break;
@@ -41,10 +42,11 @@ static inline const MapNaviSectionRecord *findNaviSection(MapNaviTableContext *c
     }
     return 0;
 }
-static inline const MapNaviCategoryRecord *findNaviCategory(MapNaviTableContext *context, s32 map, s32 area)
+static inline const MapNaviCategoryRecord *findNaviCategory(s32 map, s32 area)
 {
-    u32 count = MapNaviTable_GetCategoryCount(context);
-    const MapNaviCategoryRecord *records = MapNaviTable_GetCategoryRecord(context, 0);
+    MapNaviTableContext context;
+    u32 count = MapNaviTable_GetCategoryCount(&context);
+    const MapNaviCategoryRecord *records = MapNaviTable_GetCategoryRecord(&context, 0);
     for (s32 i = 0; i < static_cast<s32>(count); ++i) {
         if (records[i].id == -1)
             break;
@@ -65,16 +67,15 @@ extern "C" void FUN_0039c57c(NaviSectionSelectionView *work, u32 category)
 {
     s32 map = NaviMain_GetPosX(work->motion.cursorData);
     s32 area = NaviMain_GetPosY(work->motion.cursorData);
-    MapNaviTableContext context;
-    const MapNaviSectionRecord *section = findNaviSection(&context, map, category);
+    const MapNaviSectionRecord *section = findNaviSection(map, category);
     if (section) {
         applyNaviSection(work, section);
         return;
     }
     work->state.selection = 0;
-    const MapNaviCategoryRecord *fallback = findNaviCategory(&context, map, area);
+    const MapNaviCategoryRecord *fallback = findNaviCategory(map, area);
     if (fallback) {
-        section = findNaviSection(&context, map, fallback->category);
+        section = findNaviSection(map, fallback->category);
         if (section)
             applyNaviSection(work, section);
     }

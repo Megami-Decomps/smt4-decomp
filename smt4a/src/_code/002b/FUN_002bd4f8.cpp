@@ -1,4 +1,4 @@
-/* NON_MATCHING: render-stack push scheduling only: retail computes the new-entry address after the previous-entry load (and orders the second push's address adds differently) */
+/* NON_MATCHING: second (stack A) push increments the count before loading the previous entry; retail uses indexed previous-entry load first. */
 #include "camp/RenderCtx.h"
 
 /* The terminal screen: its page and four slots (0xC bytes each). */
@@ -16,29 +16,6 @@ struct TermScreenA {
 };
 typedef char TermScreenASlotsOffsetCheck[offsetof(TermScreenA, slots) == 0x57C ? 1 : -1];
 
-static __inline void pushState(RenderStateStack *stack, s32 state)
-{
-    s32 previous = stack->entries[stack->count];
-    ++stack->count;
-    stack->entries[stack->count] = state;
-    if (stack->dirty != 0 || previous != state) {
-        stack->apply(state);
-        stack->dirty = 0;
-    }
-}
-
-static __inline void pushStateIndexed(RenderStateStack *stack, s32 state)
-{
-    s32 index = stack->count;
-    s32 previous = stack->entries[index];
-    index++;
-    stack->count = index;
-    stack->entries[index] = state;
-    if (stack->dirty != 0 || previous != state) {
-        stack->apply(state);
-        stack->dirty = 0;
-    }
-}
 
 extern "C" {
 extern TermScreenA *g_tmnl;
@@ -53,15 +30,9 @@ u32 FUN_002bd4f8(void)
 {
     TermScreenA *screen = g_tmnl;
     if ((u32)(screen->page - 1) < 17) {
-        RenderCtxA *context = g_renderCtx;
-        s32 state = FUN_00387580(6, 0.0f);
-        pushState(&context->additional.stackC, state);
-        context = g_renderCtx;
-        state = FUN_001692ac(1, 0);
-        pushStateIndexed(&context->stackA, state);
-        context = g_renderCtx;
-        state = packNibblesAndByte(6, 1, 0);
-        pushState(&context->stackB, state);
+        renderCtxPushC(g_renderCtx, FUN_00387580(6, 0.0f));
+        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+        renderCtxPushB(g_renderCtx, packNibblesAndByte(6, 1, 0));
         for (s32 i = 0; i < 4; ++i) {
             if (screen->slots[i].inUse != 0) {
                 FUN_00182540(screen->slots[i].handle);

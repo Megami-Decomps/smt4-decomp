@@ -42,8 +42,7 @@ u32 FUN_003581bc(void)
     if (depart->state == 11) {
         FUN_00157558(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
-        s32 preset = FUN_001692ac(1, 0);
-        renderStackPush(&context->stackA, preset);
+        renderCtxPushA(context, FUN_001692ac(1, 0));
         efctSetSpeed(1.0f);
         FUN_00183bb0();
         if (depart->state == 11) {

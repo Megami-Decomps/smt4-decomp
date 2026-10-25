@@ -1,5 +1,6 @@
 /* NON_MATCHING: the inlined flag clear folds the byte index into scaled ldrb/strb and keeps 0 as an immediate; retail computes id>>3 and ~(1<<bit) in registers (same issue as gameFlagSetValue). */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 

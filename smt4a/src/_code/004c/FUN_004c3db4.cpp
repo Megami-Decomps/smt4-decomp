@@ -30,7 +30,7 @@ extern int gameFlagIsSet(void);
 extern int gameProgressIsAdvanced(void);
 /* Supplied declaration required: asdOperatorNewD. */
 /* Supplied declaration required: asdOperatorDeleteC. */
-extern int FUN_003e8244(int, unsigned int);
+extern int dataTable4dSelectRowEntry(int, unsigned int);
 extern int valueAtF0IsReady(int);
 extern int FUN_003eaea0(int, int);
 extern unsigned int dataTableCountEntrySet(int);
@@ -152,7 +152,7 @@ void FUN_004c3db4(unsigned int *param_1)
           if (temp_v12 < temp_v10) {
             do {
               if (temp_v10 <= temp_v3) break;
-              temp_v7 = FUN_003e8244(temp_v1,puVar7[temp_v5]);
+              temp_v7 = dataTable4dSelectRowEntry(temp_v1,puVar7[temp_v5]);
               temp_v11 = temp_v3;
               if (0 < temp_v7) {
                 piVar12[temp_v3] = temp_v7;

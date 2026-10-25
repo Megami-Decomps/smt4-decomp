@@ -82,7 +82,10 @@ typedef char SdCardMenuOffsetCheck[
 /* True when the list has scrolled past the first entry at `index`. */
 static __inline bool sdCardMenuEntryScrolled(const SdCardMenu *menu, s32 index)
 {
-    return menu->offset + menu->listPosition + index >= 1;
+    bool scrolled = false;
+    if (menu->offset + menu->listPosition + index >= 1)
+        scrolled = true;
+    return scrolled;
 }
 
 #endif

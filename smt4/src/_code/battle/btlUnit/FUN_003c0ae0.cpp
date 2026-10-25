@@ -59,7 +59,7 @@ extern u32 DAT_00439cf8;     /* action tint colour */
 u32 FUN_0027d9e8(void *unit, u32 trackId);
 void FUN_0027da30(void *unit, s32 animation);
 s32 FUN_0027dab0(void *unit, BtlUnitAction *action);
-s32 FUN_0027e6f4(void *unit, s32 arg);
+s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
 f32 FUN_002881bc(void);
 s32 asdAnimGetTrackLastFrame(u32 track, s32 index);
 BtlUnitRecord *dataTable00FindById(u32 id);
@@ -84,10 +84,10 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
                     else if (unitKind == 2)
                         action->cameraKind = 2;
                 } else {
-                    s32 slot = FUN_0027e6f4(unit, 1);
+                    s32 slot = btlFindNthActiveSpecialEntry(unit, 1);
                     bool near = false;
                     if (slot >= 0) {
-                        slot = FUN_0027e6f4(unit, 1);
+                        slot = btlFindNthActiveSpecialEntry(unit, 1);
                         u16 recordId = *(u16 *)(*(u8 **)(unit + 0x1FC0) + slot * 0x288 + 0xCE);
                         BtlUnitRecord *record = dataTable00FindById(recordId);
                         if (record->attackType == 1 || record->attackType == 3)

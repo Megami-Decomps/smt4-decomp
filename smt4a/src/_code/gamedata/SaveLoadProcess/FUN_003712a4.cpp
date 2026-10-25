@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003712a4` (_code @ 0x3712a4, 0x4a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_00268250(...);
 int FUN_002c9104(void);
 int gameApplyFlagTriggers(void);
 int FUN_00388068(void);
-int gameFlagSetValue(int, int);
 int gameFlagsSetFlagsFromTaggedGroupEntries(unsigned int);
 int bitsAt60Clear(int, int);
 int FUN_004d0c4c(void);
@@ -48,7 +48,6 @@ extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: gameApplyFlagTriggers. */
 extern int byte1IsZero(void);
 /* Supplied declaration required: FUN_00388068. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
@@ -107,7 +106,7 @@ unsigned int FUN_003712a4(void)
       if (*(char *)(temp_v1 + 0x18) == '\0') {
         temp_v4 = gameFlagIsSet(0x595);
         if (temp_v4 == 0) {
-          gameFlagSetValue(0x595,1);
+          gameFlagSetValue(0x595, 1, 1);
           temp_v4 = 0;
           do {
             temp_v2 = partyFindSlotById(0);

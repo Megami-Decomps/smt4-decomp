@@ -33,7 +33,7 @@ u8 FUN_0027052c(void);
 void FUN_001a8cf8(void);
 void FUN_0019dd38(void);
 void mapIfTimerStep(void);
-void FUN_001d350c(Vec3 position, f32 value);
+void mapSelectNearestInteractiveModel(Vec3 position, f32 value);
 void FUN_00274798(void);
 void FUN_0027522c(void);
 void FUN_00274fac(void);
@@ -63,7 +63,7 @@ void mapPerFrameUpdate(void)
     FUN_001a8cf8();
     FUN_0019dd38();
     mapIfTimerStep();
-    FUN_001d350c(g_lmapScene->position, g_lmapScene->unk50);
+    mapSelectNearestInteractiveModel(g_lmapScene->position, g_lmapScene->unk50);
     FUN_00274798();
     FUN_0027522c();
     FUN_00274fac();

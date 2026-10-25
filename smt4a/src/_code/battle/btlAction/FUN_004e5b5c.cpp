@@ -1,7 +1,7 @@
-/* NON_MATCHING: needs matched multifile callees btlUnitGet and FUN_004e9ae8; context/count saved registers also differ. */
+/* NON_MATCHING: matched getter and multifile restore caller-saved pick; entry flags load as LDM instead of retail's reversed-register LDR pair. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "battle/BattleUnit.h"
+#include "battle/BattleUnitSlot.h"
 
 struct BtlActionContext {
     /* 0x00 */ BtlMainStateA *battle;

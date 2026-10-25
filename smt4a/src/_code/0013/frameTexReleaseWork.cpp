@@ -8,9 +8,9 @@ void asdMemFree(void *memory);
 extern FrameWorkA *g_frameTex;
 
 /* Frees the job work area's four buffers and the area itself, and clears the global that referred to it. */
-void frameTexReleaseWork(void)
+void frameTexReleaseWork(u32 job)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
 
     asdTextureRelease(work->bufferA);
     asdTextureRelease(work->surface);

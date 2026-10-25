@@ -1,6 +1,7 @@
 /* NON_MATCHING: the scheduling of one literal-pool load differs (retail loads 0x2A71C into r2 before the r1 load of the third snapshot). */
 /* Releases the saved-state buffers: copies them back to their owners, re-arms the pending requests, then frees the buffers. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -28,7 +29,7 @@ void FUN_00358cbc(void);
 void titleConfigApply(void);
 void aocActivateFileGroupFlags(u32 system);
 int gameFlagIsSet(int id);
-void gameFlagSetValue(int id, int a, int b);
+
 void asdMemFree(void *ptr);
 
 void FUN_003c91ec(void)

@@ -41,7 +41,7 @@ extern unsigned char LAB_0046b910; /* 0x46b910 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
 /* Supplied declaration required: jyoucyuGetTableEntry. */
-extern unsigned int FUN_001801b8(unsigned short, unsigned char);
+extern unsigned int gameSaveTestFlag(unsigned short, unsigned char);
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 extern int scrRunOpcodesStub(unsigned int);
@@ -125,7 +125,7 @@ void FUN_0046b18c(unsigned int *param_1)
           }
           temp_v2 = 0;
           do {
-            temp_v5 = FUN_001801b8((short)param_1[0x33d],
+            temp_v5 = gameSaveTestFlag((short)param_1[0x33d],
                                  *(unsigned char *)((int)param_1 + temp_v2 * 10 + 0xe4a));
             *(char *)((int)param_1 + temp_v2 * 10 + 0xe46) = (char)temp_v5;
             messageSetIndexedFlag(temp_v2,temp_v5);
@@ -229,7 +229,7 @@ void FUN_0046b18c(unsigned int *param_1)
     if ((char)param_1[6] == '\0') {
       temp_v2 = 0;
       do {
-        temp_v6 = FUN_001801b8((short)param_1[0x33d],
+        temp_v6 = gameSaveTestFlag((short)param_1[0x33d],
                              *(unsigned char *)((int)param_1 + temp_v2 * 10 + 0xe4a));
         *(char *)((int)param_1 + temp_v2 * 10 + 0xe46) = (char)temp_v6;
         messageSetIndexedFlag(temp_v2,temp_v6);

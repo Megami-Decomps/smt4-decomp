@@ -1,18 +1,11 @@
-/* NON_MATCHING: mask-test temporary registers and active-entry flag address formation differ from retail. */
+/* NON_MATCHING: first two 64-bit mask tests use different AND temporaries, omitting retail's r9 save and four frame bytes. */
 #include "common.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match7_BattleCandidateMasks.h"
 
-struct CombatantStatMasks {
-    u64 active;       /* 0x00 */
-    u8 unk08[0x10];
-    u64 excluded;     /* 0x18 */
-    u8 unk20[8];
-    u64 blocked;      /* 0x28 */
-};
 
 extern "C" {
-extern CombatantStatMasks g_btlCandidateMasks;
 u32 scrGetArg(s32 index);
 s32 btlResolveEntryChoice(s32 choice);
 void FUN_00301a08(s32 group, u32 *first, u32 *count);
@@ -32,9 +25,9 @@ u32 btlScriptGetEncodedCombatantStat()
         BattleMaskState *battle = btlGetMainState();
         BtlCombatantEntryA *entry = &reinterpret_cast<BtlCombatantEntryA *>(battle->entryMaskView.mask)[index];
         u64 flags = entry->flags;
-        if ((flags & g_btlCandidateMasks.excluded) == 0 &&
-            (flags & g_btlCandidateMasks.active) != 0 &&
-            (flags & g_btlCandidateMasks.blocked) == 0 &&
+        if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
+            (flags & g_btlCandidateMasks.required) != 0 &&
+            (flags & g_btlCandidateMasks.excluded) == 0 &&
             entry->id == id && (entry->encodedStats.values[stat] >> 10) == 1) {
             scrSetResult(1);
             return 1;

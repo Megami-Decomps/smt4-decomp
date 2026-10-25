@@ -1,6 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ce598` (_code @ 0x3ce598, 0xa90 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
+#include "gamedata/KeyedCatalog.h"
 
 extern "C" {
 
@@ -18,9 +20,8 @@ int messageBannerRestartOrClear(void);
 int FUN_00353b00(...);
 int FUN_00359974(...);
 int useCounterRelease(void);
-int FUN_003d1aa0(...);
+int gauntletAppBuildAvailableEntries(...);
 int gauntletAppSortMenuEntries(void);
-int gameFlagSetValue(...);
 
 int uiPointerHitsRect(int, int, int, int, int);
 int FUN_00163aa4(...);
@@ -58,7 +59,6 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern unsigned int FUN_001834a4(unsigned int, unsigned int);
-extern unsigned int FUN_00186f54(unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_0021b1a8. */
@@ -86,7 +86,7 @@ extern unsigned int flaggedEntryGetValueA(int);
 /* Supplied declaration required: FUN_00353b00. */
 /* Supplied declaration required: FUN_00359974. */
 /* Supplied declaration required: useCounterRelease. */
-/* Supplied declaration required: FUN_003d1aa0. */
+/* Supplied declaration required: gauntletAppBuildAvailableEntries. */
 /* Supplied declaration required: gauntletAppSortMenuEntries. */
 /* Supplied declaration required: FUN_003dc0c0. */
 /* Supplied declaration required: FUN_003e41f8. */
@@ -96,7 +96,6 @@ extern unsigned int dataRecordGetValue(unsigned int);
 /* Supplied declaration required: FUN_003e45bc. */
 extern int gameDataFlagTestBit(unsigned int);
 extern int gameDataAreaBitTest(unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
 
 
 unsigned int FUN_003ce598(void)
@@ -324,7 +323,7 @@ unsigned int FUN_003ce598(void)
         if (!(temp_v7 == 0 && temp_v10[0] == '\0')) {
           temp_v7 = FUN_003e45bc(temp_v5,0,1);
           if (temp_v7 != 0) {
-            temp_v8 = FUN_00186f54(temp_v5);
+            temp_v8 = reinterpret_cast<u32>(FUN_00186f54(temp_v5));
             FUN_003180c4(0,temp_v8);
             temp_v8 = dataRecordGetValue(temp_v5);
             FUN_00359974(0x18,temp_v8,0xffffffff,0);
@@ -435,7 +434,7 @@ unsigned int FUN_003ce598(void)
       if (temp_v9 && temp_v4 == 0) {
         temp_v8 = resourceRunOperationIfUnblocked(temp_v6 + 0x10);
         temp_v5 = flaggedEntryGetValueA(temp_v6 + 0x10);
-        FUN_003d1aa0(temp_v6);
+        gauntletAppBuildAvailableEntries(temp_v6);
         scrollOwnerSetValue(temp_v6 + 0x10,temp_v8);
         flaggedEntrySetValueA(temp_v6 + 0x10,temp_v5);
         FUN_0021b1a8(temp_v6);
@@ -469,7 +468,7 @@ unsigned int FUN_003ce598(void)
   case 8:
     temp_v7 = scrRunOpcodesStub(*(unsigned int *)(temp_v6 + 0x530));
     if (temp_v7 == 2) {
-      gameFlagSetValue(0x4b7,1);
+      gameFlagSetValue(0x4b7, 1, 1);
       campResetScreen();
       FUN_0021b1a8(temp_v6);
       FUN_003dc0c0(temp_v6,3);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0028625c` (_code @ 0x28625c, 0x1304 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int asdMemFree(...);
 int FUN_00203b40(...);
 int statusPanelSetOpen(...);
 int FUN_0031f718(...);
-int gameFlagSetValue(...);
 
 int asdMemoryAlloc(...);
 int slotRecordFindById(...);
@@ -94,7 +94,6 @@ extern int FUN_002a4b28(unsigned short);
 extern int computeCountLimit(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0031f718. */
-/* Supplied declaration required: gameFlagSetValue. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: recSet148. */
 /* Supplied declaration required: recSet150. */
@@ -583,7 +582,7 @@ LAB_00286c80:
             }
           }
           else {
-            gameFlagSetValue(0x461,0);
+            gameFlagSetValue(0x461, 0, 1);
             qsort(temp_v18,param_1[0x172],8,&LAB_0034f784);
             temp_v12 = 0;
             temp_v13 = 0;
@@ -622,7 +621,7 @@ LAB_00286c80:
                   }
 LAB_00287134:
                   if ((int)temp_v12 <= (int)temp_v10) {
-                    gameFlagSetValue(0x461,1);
+                    gameFlagSetValue(0x461, 1, 1);
                     temp_v2 = param_1[temp_v13 * 2 + 0x4ef];
                     temp_v8 = temp_v12 + 1;
                     param_1[temp_v12 * 2 + 0x241e] = param_1[temp_v13 * 2 + 0x4ee];

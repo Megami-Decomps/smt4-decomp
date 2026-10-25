@@ -1,4 +1,4 @@
-/* NON_MATCHING: releases the pooled blocks of a record (26 length words cleared, 31 heap blocks freed); written from the decompilation, store/branch scheduling not compared with retail */
+/* NON_MATCHING: all 26 count clears and 31 block releases match semantically; retail snapshots the first block before clearing and preserves explicit high-offset slot addresses across delete calls. */
 #include "common.h"
 
 /* Tail of an object that keeps its tables as (count, heap block) pairs. */

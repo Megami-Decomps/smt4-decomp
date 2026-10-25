@@ -2,11 +2,11 @@
 #include "shard/S1ListPanel.h"
 #include <stddef.h>
 
-typedef char CheckCachedStateSize[sizeof(RenderCtxCachedState) == 0x20 ? 1 : -1];
-typedef char CheckScissorMinimumOffset[offsetof(RenderCtx, scissorMinimum) == 0x1338 ? 1 : -1];
-typedef char CheckScissorMaximumOffset[offsetof(RenderCtx, scissorMaximum) == 0x1358 ? 1 : -1];
+typedef char CheckCachedStateSize[sizeof(RenderStateStack) == 0x20 ? 1 : -1];
+typedef char CheckScissorMinimumOffset[offsetof(RenderCtxScissorA, scissorMinimum) == 0x1338 ? 1 : -1];
+typedef char CheckScissorMaximumOffset[offsetof(RenderCtxScissorA, scissorMaximum) == 0x1358 ? 1 : -1];
 
-extern "C" RenderCtx *g_renderCtx;
+extern "C" RenderCtxScissorA *g_renderCtx;
 extern "C" s32 FUN_00169d8c(u32 viewport);
 extern "C" s32 FUN_00169db4(u32 viewport);
 extern "C" s32 asdGxPresetsGetEnable(u32 viewport);
@@ -15,7 +15,7 @@ extern "C" s32 stateValuesGetBySelector(u32 viewport);
 // Mirror the requested scissor rectangle into viewport coordinates and enable scissoring.
 extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 height)
 {
-    u32 viewport = g_renderCtx->viewportView.viewport;
+    u32 viewport = g_renderCtx->stereoMode;
     s32 maximumX = FUN_00169d8c(viewport) - 1;
     s32 maximumY = FUN_00169db4(viewport) - 1;
     switch (asdGxPresetsGetEnable(viewport)) {
@@ -50,8 +50,8 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         minimumY = maximumY;
     if (endY > maximumY)
         endY = maximumY;
-    g_renderCtx->scissorMinimum.set(static_cast<u32>(minimumY) | (static_cast<u32>(minimumX) << 16));
-    g_renderCtx->scissorMaximum.set(static_cast<u32>(endY) | (static_cast<u32>(endX) << 16));
+    renderStackSet(&g_renderCtx->scissorMinimum, static_cast<u32>(minimumY) | (static_cast<u32>(minimumX) << 16));
+    renderStackSet(&g_renderCtx->scissorMaximum, static_cast<u32>(endY) | (static_cast<u32>(endX) << 16));
     renderCtxResumeScissor(g_renderCtx);
     return 1;
 }

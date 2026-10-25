@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 /* The pending quest/event update the scene works from (0xD00..0xD56 of the controller). */
 struct FieldScenePending {
@@ -50,7 +51,7 @@ u16 FUN_002eff34(void);
 s32 questGetPrimaryState(void);
 u8 questGetSecondaryState(void);
 s32 FUN_002cf738(void);
-void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+
 MapBlock *gameGetMapBlock(void);
 void FUN_00273f5c(void);
 void mapClearPendingEntries(void);

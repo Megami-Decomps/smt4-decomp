@@ -1,3 +1,4 @@
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "gamedata/SaveLoadProcessState.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
@@ -9,10 +10,10 @@ void gameDataBlocksAddFlags(u32 flags);
 void gameDataFlagsSetBits(u32 flags);
 void gameDataFlagsSet(u32 flags);
 GameSaveData *gameDataBlocksGetSaveData(void);
-void FUN_002efa00(void);
-void jobTeardownFlagsAndWork(void);
-u32 asdProcessCreateSimple(const char *name, s32 priority, u32 argument, u32 owner,
-                          void (*update)(void), void (*release)(void), void *work);
+s32 FUN_002efa00(u32 job);
+void jobTeardownFlagsAndWork(u32 process);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u32 argument, AsdProcFunc start,
+                          AsdProcUpdateFunc update, AsdProcFunc release, void *work);
 void asdProcessClearSelectedFlags(u32 process, u32 mask, u32 flags);
 
 u32 saveStartLoadProcess(u32 option)

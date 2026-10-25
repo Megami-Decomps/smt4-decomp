@@ -12,7 +12,7 @@ typedef struct MenuState {
 extern MenuState *g_menuState;
 
 /* Switches the menu to mode 5 with `argument` and clears `confirmed`. */
-void menuStateBeginSelect(u16 argument)
+void menuStateBeginSelect(s16 argument)
 {
     MenuState *menu;
 

@@ -1,5 +1,6 @@
-/* NON_MATCHING: same instruction sequence as retail except callee-saved register numbering (retail keeps HP total/max/slot count in r5-r7, the entry in r4) and the placement of the 100.0f pool load. */
+/* NON_MATCHING: ratio VFP division destination, selected table-row/count register allocation and threshold load order differ. */
 #include "common.h"
+#include "shard/W4_W4Match5_DataTable.h"
 
 struct PopupState {
     s32 state;      // 0x00
@@ -38,9 +39,7 @@ s32 gameSlotTableFindFree(void);
 s8* gameGetSlotTable(void);
 s32 gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(s32 record);
-u32 dataTableGet(u32 table, u32 arg);
 RatioMessage* dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 s32 FUN_002d8b58(s32 kind, s32 id);
 
 // Opens the popup for the first ratio message matching the selected slot.
@@ -71,13 +70,14 @@ void FUN_00234880(void)
     }
     f32 percent = (f32)current / (f32)maximum * 100.0f;
 
-    u32 table = dataTableGet(0x43, 0);
+    void *table = dataTableGet(0x43, 0);
     dataTableGetEntries();
     s32 count = dataTableGetCount(table);
     for (u32 i = 0; (s32)i < count; i++) {
         table = dataTableGet(0x43, 0);
-            RatioMessage* row = dataTableGetEntries();
-        if (i >= dataTableGetCount(table)) row = NULL; else row += i;
+        RatioMessage* row = dataTableGetEntries();
+        u32 rowCount = dataTableGetCount(table);
+        if (i >= rowCount) row = NULL; else row += i;
         if (row->kind != 8 && row->kind != 9) continue;
         if (row->id != slot->id) continue;
         if (row->requiredFlag != 0 && !gameFlagIsSet(row->requiredFlag)) continue;

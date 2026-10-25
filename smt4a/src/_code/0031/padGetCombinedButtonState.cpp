@@ -35,7 +35,7 @@ extern StickDirectionTable DAT_005b40cc;   /* 0x5b40cc */
 
 s32 padButtonIsPressed(s32 button);
 s32 padButtonRepeat(s32 button);
-s32 FUN_00163fd4(s32 button);
+s32 slotIsActive(s32 button);
 s32 FUN_00317af8(f32 *x, f32 *y, s32 flag);
 f32 FUN_0050d8e4(f32 x, f32 y);
 
@@ -69,14 +69,14 @@ u32 padGetCombinedButtonState(s32 buttonA, s32 buttonB, s32 mode)
     case BUTTON_MODE_REPEAT:
         stateA = padButtonRepeat(buttonA);
         stateB = padButtonRepeat(buttonB);
-        if (FUN_00163fd4(buttonA) != 0 && FUN_00163fd4(buttonB) != 0) {
+        if (slotIsActive(buttonA) != 0 && slotIsActive(buttonB) != 0) {
             stateB = 0;
         }
         result = stateA | stateB;
         break;
     case BUTTON_MODE_HELD:
-        stateA = FUN_00163fd4(buttonA);
-        stateB = FUN_00163fd4(buttonB);
+        stateA = slotIsActive(buttonA);
+        stateB = slotIsActive(buttonB);
         result = stateA | stateB;
         break;
     }
@@ -91,8 +91,8 @@ u32 padGetCombinedButtonState(s32 buttonA, s32 buttonB, s32 mode)
     }
 
     if (DAT_005b40cc.enabled != 0 &&
-        (FUN_00163fd4(BUTTON_STICK_UP) != 0 || FUN_00163fd4(BUTTON_STICK_LEFT) != 0 ||
-         FUN_00163fd4(BUTTON_STICK_DOWN) != 0 || FUN_00163fd4(BUTTON_STICK_RIGHT) != 0)) {
+        (slotIsActive(BUTTON_STICK_UP) != 0 || slotIsActive(BUTTON_STICK_LEFT) != 0 ||
+         slotIsActive(BUTTON_STICK_DOWN) != 0 || slotIsActive(BUTTON_STICK_RIGHT) != 0)) {
         f32 x;
         f32 y;
         FUN_00317af8(&x, &y, 0);
@@ -104,22 +104,22 @@ u32 padGetCombinedButtonState(s32 buttonA, s32 buttonB, s32 mode)
             return result;
         }
         /* The up sector wraps through 0: [center - halfWidth + 360, 360) and [center, center + halfWidth). */
-        if (FUN_00163fd4(BUTTON_STICK_UP) != 0) {
+        if (slotIsActive(BUTTON_STICK_UP) != 0) {
             if ((f32)(DAT_005b40cc.up.center - DAT_005b40cc.up.halfWidth) + 360.0f <= angle && angle < 360.0f) {
                 return result;
             }
             if ((f32)DAT_005b40cc.up.center <= angle && angle < (f32)(DAT_005b40cc.up.center + DAT_005b40cc.up.halfWidth)) {
                 return result;
             }
-        } else if (FUN_00163fd4(BUTTON_STICK_LEFT) != 0) {
+        } else if (slotIsActive(BUTTON_STICK_LEFT) != 0) {
             if (angleInSector(angle, &DAT_005b40cc.left)) {
                 return result;
             }
-        } else if (FUN_00163fd4(BUTTON_STICK_DOWN) != 0) {
+        } else if (slotIsActive(BUTTON_STICK_DOWN) != 0) {
             if (angleInSector(angle, &DAT_005b40cc.down)) {
                 return result;
             }
-        } else if (FUN_00163fd4(BUTTON_STICK_RIGHT) != 0) {
+        } else if (slotIsActive(BUTTON_STICK_RIGHT) != 0) {
             if (angleInSector(angle, &DAT_005b40cc.right)) {
                 return result;
             }

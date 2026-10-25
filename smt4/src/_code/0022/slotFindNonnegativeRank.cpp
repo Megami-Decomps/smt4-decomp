@@ -1,4 +1,4 @@
-/* NON_MATCHING: the slot-list base and the loaded halfword use r3/ip where retail uses ip/r3. */
+/* NON_MATCHING: slot-list base and loaded halfword use ip/r3 instead of retail r3/ip. */
 #include "common.h"
 extern "C" {
 struct OrderedSlotList { u8 unk00[0x2F06]; s16 slots[12]; };

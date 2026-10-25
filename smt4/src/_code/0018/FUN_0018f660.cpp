@@ -18,7 +18,7 @@ int __aeabi_uidivmod(...);
 
 int FUN_0020ffe8(...);
 int objSetAnglesDegrees(...);
-int FUN_00293e08(...);
+int nodeGroupSetScale(...);
 int nodeOwnerSetTranslations(...);
 int FUN_00293f10(...);
 int aocHandleButtons(...);
@@ -78,14 +78,14 @@ extern char *DAT_0044e144; /* 0x44e144 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0020ffe8. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
-extern int FUN_00293a60(void);
+extern int partyPanelIsStateThree(void);
 extern int FUN_00293a88(void);
 extern int FUN_00293aac(void);
 extern int FUN_00293ac0(void);
 extern int FUN_00293b8c(void);
 /* Supplied declaration required: statusDownRestoreTabForMode. */
 /* Supplied declaration required: objSetAnglesDegrees. */
-/* Supplied declaration required: FUN_00293e08. */
+/* Supplied declaration required: nodeGroupSetScale. */
 /* Supplied declaration required: nodeOwnerSetTranslations. */
 extern int objSlotsAllEmpty(unsigned int);
 /* Supplied declaration required: FUN_00293f10. */
@@ -448,7 +448,7 @@ LAB_0018fbe4:
         temp_v14 = (char *)romwright_f2u((float)((*(float *)(pcVar4 + 0x1e84) + temp_v10 * temp_v11)));
         nodeOwnerSetTranslations(*(unsigned int *)pcVar13,&temp_v14);
         in_s0 = *(float *)(pcVar4 + 0x1e9c);
-        FUN_00293e08(*(unsigned int *)pcVar13);
+        nodeGroupSetScale(*(unsigned int *)pcVar13);
         objSetAnglesDegrees(*(unsigned int *)pcVar13,pcVar4 + 0x1e90);
 LAB_0018fd84:
         if ((pcVar4[0x12f2] != '\0') || ((*pcVar5 != '\x03' && (*pcVar5 != '\t')))) {
@@ -558,7 +558,7 @@ LAB_0018ffcc:
               *(float *)(pcVar4 + 0x1e9c) = *(float *)(pcVar4 + 0x1e9c) + 0.0005f;
               *(int *)(pcVar4 + 0x1ea0) = *(int *)(pcVar4 + 0x1ea0) + 1;
             }
-            FUN_00293e08(*(unsigned int *)(pcVar4 + 0x1e80));
+            nodeGroupSetScale(*(unsigned int *)(pcVar4 + 0x1e80));
             FUN_00294d6c();
           }
           temp_v7 = FUN_002c15fc(0xf);
@@ -567,7 +567,7 @@ LAB_0018ffcc:
               *(float *)(pcVar4 + 0x1e9c) = *(float *)(pcVar4 + 0x1e9c) - temp_v12;
               *(int *)(pcVar4 + 0x1ea0) = *(int *)(pcVar4 + 0x1ea0) - 1;
             }
-            FUN_00293e08(*(unsigned int *)(pcVar4 + 0x1e80));
+            nodeGroupSetScale(*(unsigned int *)(pcVar4 + 0x1e80));
             FUN_00294d6c();
           }
           temp_v7 = FUN_002c15fc(0xd);
@@ -673,7 +673,7 @@ LAB_00190190:
                  ((temp_v7 = FUN_00293aac(), temp_v7 != 0 || (*(int *)(pcVar5 + 0x14) >= 0xc)))) &&
                 (temp_v7 = FUN_0029c46c(), temp_v7 != 0)) &&
                (((temp_v7 = FUN_0029c48c(), temp_v7 != 0 && (temp_v7 = FUN_00293a88(), temp_v7 != 0)) &&
-                (temp_v7 = FUN_00293a60(), temp_v7 == 0)))) {
+                (temp_v7 = partyPanelIsStateThree(), temp_v7 == 0)))) {
               temp_v7 = 8;
               FUN_002c1658(8,0);
               if (temp_v7 != 0) {
@@ -705,7 +705,7 @@ LAB_00190190:
                (((temp_v7 = FUN_00293aac(), temp_v7 != 0 || (*(int *)(pcVar13 + 0x14) >= 0xc)) &&
                 ((((temp_v7 = FUN_0029c46c(), temp_v7 != 0 && (temp_v7 = FUN_0029c48c(), temp_v7 != 0))
                   && (temp_v7 = FUN_00293a88(), temp_v7 != 0)) &&
-                 (temp_v7 = FUN_00293a60(), temp_v7 == 0)))))) {
+                 (temp_v7 = partyPanelIsStateThree(), temp_v7 == 0)))))) {
               temp_v7 = 7;
               FUN_002c1658(7,0);
               if (temp_v7 != 0) {
@@ -737,7 +737,7 @@ LAB_00190190:
                 ((temp_v7 = FUN_00293aac(), temp_v7 != 0 || (*(int *)(pcVar13 + 0x14) >= 0xc)))) &&
                ((((temp_v7 = FUN_0029c46c(), temp_v7 != 0 && (temp_v7 = FUN_0029c48c(), temp_v7 != 0))
                  && (temp_v7 = FUN_00293a88(), temp_v7 != 0)) &&
-                ((temp_v7 = FUN_00293a60(), temp_v7 == 0 && (*(int *)(pcVar4 + 0x12e4) != 0)))))) {
+                ((temp_v7 = partyPanelIsStateThree(), temp_v7 == 0 && (*(int *)(pcVar4 + 0x12e4) != 0)))))) {
               temp_v7 = 1;
               FUN_002c1658();
               if (temp_v7 != 0) {

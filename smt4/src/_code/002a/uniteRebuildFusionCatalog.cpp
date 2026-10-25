@@ -23,7 +23,7 @@ s32 FUN_0029e9cc(u16);
 s32 arrayContainsU16(const u16 *, s32, u16);
 void memClear(void *, u32);
 void rt_memclr(void *, u32);
-s32 FUN_001f6524(const void *, const void *);
+s32 devilCompareTablePriority(const void *, const void *);
 void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
 const SkillFlagsRecord *dataTable06Sub1GetRecord(u16);
 s32 FUN_001a15f4(s16);
@@ -49,7 +49,7 @@ void uniteRebuildFusionCatalog(void)
             }
         }
     }
-    FUN_002b7bca(work->catalogIV.demons, demonCount, sizeof(u16), FUN_001f6524);
+    FUN_002b7bca(work->catalogIV.demons, demonCount, sizeof(u16), devilCompareTablePriority);
     s32 skillCount = 0;
     for (u16 id = 0; id < 501; ++id) {
         const SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a4cfc` (_code @ 0x2a4cfc, 0xff8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -55,7 +56,7 @@ int FUN_002f0c18(void);
 int FUN_00319b10(void);
 int uiQuestReturnToList(void);
 int FUN_00334560(void);
-int FUN_0035c810(void);
+u32 FUN_0035c810(void);
 int FUN_0035dbd4(int);
 int messageDismissNumericBanner(...);
 int partyPanelSetHidden(...);
@@ -135,7 +136,6 @@ extern int FUN_003da8f4(int, unsigned int);
 /* Supplied declaration required: obj48Arm. */
 /* Supplied declaration required: pair40Set. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-extern unsigned int gameFlagSetValue(unsigned int, unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x0020b744) */
@@ -318,8 +318,8 @@ void FUN_002a4cfc(void)
     campChangeState(0x24);
     return;
   case 0x1c:
-    temp_v1 = gameFlagSetValue(0x48c,1);
-    FUN_0035c810();
+    gameFlagSetValue(0x48c, 1, 1);
+    temp_v1 = FUN_0035c810();
     *(unsigned int *)(temp_v3 + 0xc) = temp_v1;
     FUN_002a5cf4();
     FUN_0019de98(0,0xf4f4f4ff);

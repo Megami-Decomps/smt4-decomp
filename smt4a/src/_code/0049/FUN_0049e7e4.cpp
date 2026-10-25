@@ -3,10 +3,10 @@
 
 extern "C" {
 
-extern RenderCtx *g_renderCtx;
+extern RenderCtxScissorA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
-f32 renderCtxCalculateStereoParallax(RenderCtx *ctx, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 scale);
 void FUN_001835b4(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 z);
 SpriteInfo *FUN_001834a4(s32 group, s32 id);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);

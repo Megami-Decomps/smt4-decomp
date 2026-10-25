@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004fd508` (_code @ 0x4fd508, 0x454 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "battle/btlReflect.h"
 
 extern "C" {
 
-int FUN_004102d8(...);
 int FUN_004fb43c(...);
 int VectorSignedToFloat(...);
 
@@ -16,7 +16,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_5_stack;
 
-extern int g_btlActionReflect; /* 0x5712f0 */
 extern unsigned int DAT_00573c40; /* 0x573c40 */
 extern unsigned int DAT_00573c44; /* 0x573c44 */
 extern unsigned int DAT_00573c48; /* 0x573c48 */
@@ -25,7 +24,6 @@ extern unsigned int DAT_00573c4c; /* 0x573c4c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int btlGetMainState(void);
 extern int btlScriptUnitHasFlags(int);
-/* Supplied declaration required: FUN_004102d8. */
 /* Supplied declaration required: FUN_004fb43c. */
 
 
@@ -218,8 +216,7 @@ FUN_004fd508(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsi
   }
   temp_v8 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v1 = g_btlActionReflect;
-  FUN_004102d8(g_btlActionReflect,(int)(short)param_1,0,param_2);
+  temp_v1 = reinterpret_cast<int>(btlQueueReflectAction(g_btlActionReflect,(int)(short)param_1,0,param_2));
   *(unsigned char *)(temp_v1 + 4) = 0x27;
   *(short *)(temp_v1 + 0x24) = (short)(int)temp_v8;
   *(short *)(temp_v1 + 0x26) = (short)(int)temp_v9;

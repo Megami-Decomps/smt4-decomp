@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00215cb8` (_code @ 0x215cb8, 0x168c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ int FUN_002f15f8(...);
 int sysPlayVoice(...);
 int FUN_003d498c(...);
 void uiQuestRefreshDetailPages(int);
-int gameFlagSetValue(...);
 int FUN_00417a60(...);
 int FUN_00418070(...);
 int FUN_004186e0(void);
@@ -40,7 +40,7 @@ int asdMemFreeSlot(unsigned int);
 int FUN_0023eaf8(void);
 int FUN_0023ff10(void);
 int questMarkSelectedSpecialDetail(void);
-int FUN_00320834(void);
+int questUiPlaySelectionSound(void);
 int buttonHelpGetValue(void);
 int FUN_003d474c(void);
 
@@ -77,7 +77,7 @@ extern int objectApplyIfUnblocked(int);
 extern int useCounterGetCurrentValue(void);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_002f15f8. */
-/* Supplied declaration required: FUN_00320834. */
+/* Supplied declaration required: questUiPlaySelectionSound. */
 extern int FUN_00335384(int);
 /* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: useCounterRelease. */
@@ -85,7 +85,6 @@ extern int FUN_00335384(int);
 /* Supplied declaration required: sysPlayVoice. */
 /* Supplied declaration required: FUN_003d474c. */
 /* Supplied declaration required: FUN_003d498c. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00418070. */
 extern int FUN_004186a4(void);
@@ -198,7 +197,7 @@ unsigned int FUN_00215cb8(void)
       }
     }
     else {
-      FUN_00320834();
+      questUiPlaySelectionSound();
     }
     temp_v7 = *(unsigned int *)(temp_v1 + 0xc);
     break;
@@ -305,7 +304,7 @@ unsigned int FUN_00215cb8(void)
         }
       }
       else {
-        FUN_00320834();
+        questUiPlaySelectionSound();
       }
     }
     else {
@@ -515,7 +514,7 @@ unsigned int FUN_00215cb8(void)
     if (*(char *)(temp_v4 + 6) == '\v') {
       flagValueAdd(*(unsigned short *)(temp_v4 + 0xf2),*(unsigned int *)(temp_v4 + 0xf4));
       if (*(short *)(temp_v4 + 0xf2) == 0x39b) {
-        gameFlagSetValue(0x4d1,1);
+        gameFlagSetValue(0x4d1, 1, 1);
       }
       FUN_00417a60(temp_v8);
     }

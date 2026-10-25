@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the empty-table early exit differs: retail branches straight to the epilogue (r0 already holds the zero count), this build branches to its own `mov r0, #0`. */
+/* NON_MATCHING: empty-table branch targets a different zero-return path instead of retail's direct epilogue; all other instructions agree. */
 #include "gamedata/DataTable.h"
 
 struct Table67Record {
@@ -12,9 +12,6 @@ extern "C" Table67Record *FUN_00365bc4(s32 id)
     void *table = dataTableGet(67, 1);
     Table67Record *entries = (Table67Record *)dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
-    if (count == 0) {
-        return NULL;
-    }
     for (s32 i = 0; i < count; ++i) {
         if (entries[i].id == id) {
             return &entries[i];

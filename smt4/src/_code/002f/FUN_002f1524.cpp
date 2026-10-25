@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail updates the flag word through r0 and returns a fresh `mov r0,#1`; built uses r1/r2 and returns r2 */
+/* NON_MATCHING: explicit script argument index recovered; flag address and constant-one lifetimes differ. */
 /* Clears the flag bit selected by scrGetArg in the manager's flag word; always returns 1. */
 #include "common.h"
 
@@ -10,11 +10,11 @@ typedef struct Manager {
 } Manager;
 
 extern Manager *btlGetMainState(void);
-extern u8 scrGetArg(void);
+extern s32 scrGetArg(u32 index);
 
 u32 FUN_002f1524(void)
 {
-    u8 bit = scrGetArg();
+    u8 bit = static_cast<u8>(scrGetArg(0));
 
     btlGetMainState()->flags &= ~(1 << bit);
     return 1;

@@ -14,7 +14,7 @@ void FUN_0034aae4();
 void clearFlags310To31F();
 u16 FUN_00372140();
 u16 uiQuestRunEnabledAction();
-void FUN_00183318(s32);
+void buttonHelpBeginExit(s32);
 void FUN_0019de98(s32, u32);
 void FUN_0037c8e4(s32, s32);
 void panelSetTarget(s32, s32);
@@ -73,7 +73,7 @@ void FUN_00468e98(PickObjectResources *owner)
     if (action) {
         work->action = action;
         FUN_0019de98(0, 0xF4F4F4FF);
-        FUN_00183318(1);
+        buttonHelpBeginExit(1);
         work->state = 12;
         work->phase = 0;
         FUN_003a7630(0);

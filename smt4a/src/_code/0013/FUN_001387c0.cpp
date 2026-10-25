@@ -1,3 +1,4 @@
+#include "sys/ProcessResult.h"
 #include "common.h"
 #include "nn/Result.h"
 
@@ -6,7 +7,6 @@ extern "C" {
 extern u8 DAT_005b40c8;
 extern u32 globalBlockGetFirst(void);
 extern u32 FUN_001a0380(const char *path);
-extern void FUN_0013ebd8(void);
 
 /* Unmounts the current registration and clears its mounted flag on success. */
 bool FUN_001387c0(void)
@@ -16,7 +16,7 @@ bool FUN_001387c0(void)
     }
     const char *path = reinterpret_cast<const char *>(globalBlockGetFirst());
     u32 status = FUN_001a0380(path);
-    FUN_0013ebd8();
+    FUN_0013ebd8(status);
     if (nnResultIsSuccess(status)) {
         DAT_005b40c8 = 0;
         return true;

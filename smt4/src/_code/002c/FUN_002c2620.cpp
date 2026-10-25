@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the base/element register pair is swapped (r5/r6) and the literal pool carries an extra word */
+/* NON_MATCHING: registry/bucket bases use r6/r5 rather than retail r5/r6, and traversal uses r3/r2 rather than r2/r3. */
 #include "common.h"
 
 /* A node of the graphics context's id registry: an id and the data it names, chained in id order. */
@@ -47,28 +47,24 @@ void FUN_002c2620(u32 id)
         GfxRegistryNode *head = ctx->chains[id & 0x1f];
         if (head == NULL) {
             ctx->chains[id & 0x1f] = node;
-            return;
-        }
-        if (head->id > id) {
+        } else if (head->id > id) {
             node->next = head;
             ctx->chains[id & 0x1f] = node;
-            return;
-        }
-        GfxRegistryNode *prev = head;
-        GfxRegistryNode *next = prev->next;
-        while (next != NULL) {
-            if (next->id > id) {
-                prev->next = node;
-                node->next = next;
-                if (next != NULL) {
-                    return;
+        } else {
+            GfxRegistryNode *prev = head;
+            GfxRegistryNode *next = prev->next;
+            while (next != NULL) {
+                if (next->id > id) {
+                    prev->next = node;
+                    node->next = next;
+                    break;
                 }
-                break;
+                prev = next;
+                next = next->next;
             }
-            prev = next;
-            next = next->next;
+            if (next == NULL)
+                prev->next = node;
         }
-        prev->next = node;
     }
     ctx->found[ctx->slot] = node;
 }

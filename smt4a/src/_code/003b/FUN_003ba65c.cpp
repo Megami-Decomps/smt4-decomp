@@ -25,7 +25,7 @@ extern "C" {
 extern SeqSave *DAT_0057f69c;
 extern s32 DAT_0057f6b8;      /* progress through the sequence */
 
-s32 FUN_00163fd4(u32 button);
+s32 slotIsActive(u32 button);
 s32 padButtonRepeat(u32 button);
 s32 padButtonIsPressed(u32 button);
 void FUN_00317af8(f32 *angle, u8 buffer[16], s32 flag);
@@ -63,7 +63,7 @@ u8 FUN_003ba65c(void)
     u8 flags = DAT_0057f69c->flags;
     const f32 *sequence = (flags & SEQ_FLAG_REVERSED) != 0 ? SEQUENCE_REVERSED : SEQUENCE_DEFAULT;
 
-    if (FUN_00163fd4(SEQ_BUTTON_SHOULDER_A) == 0 || FUN_00163fd4(SEQ_BUTTON_SHOULDER_B) == 0) {
+    if (slotIsActive(SEQ_BUTTON_SHOULDER_A) == 0 || slotIsActive(SEQ_BUTTON_SHOULDER_B) == 0) {
         DAT_0057f6b8 = 0;
         return flags;
     }

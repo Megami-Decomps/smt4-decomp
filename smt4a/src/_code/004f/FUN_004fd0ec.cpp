@@ -2,7 +2,7 @@
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
 
-extern "C" ReflectAction *FUN_004102d8(ReflectContext *context, s32 actor, s32 secondary, u32 options);
+
 extern "C" s16 btlFindEntryValue(s32 memberId, u32 field);
 
 /* Queue a target action, using its member id when a matching target action already exists. */
@@ -17,7 +17,7 @@ extern "C" ReflectAction *FUN_004fd0ec(s32 actor, s32 secondary, u32 options, Bt
             repeated = true;
         }
     }
-    ReflectAction *action = FUN_004102d8(context, (s16)actor, (s16)secondary, options);
+    ReflectAction *action = btlQueueReflectAction(context, (s16)actor, (s16)secondary, options);
     action->target = reinterpret_cast<u32>(target);
     action->kind = 2;
     action->scalar = reinterpret_cast<const f32 &>(valueBits);

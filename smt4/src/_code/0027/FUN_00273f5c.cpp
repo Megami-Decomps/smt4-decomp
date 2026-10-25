@@ -1,8 +1,9 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-int gameFlagSetValue(int a, int b, int c);
+
 
 void FUN_00273f5c(void)
 {

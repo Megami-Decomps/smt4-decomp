@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail still executes `result = 0` ahead of the record-null test (mov r4,#0) which the build proves redundant and drops */
 #include "common.h"
 
 extern "C" {
@@ -10,6 +9,16 @@ typedef struct Record001e1794 {
 
 Record001e1794 *dataTable1bOr1cGetRecord(u32 id);
 u32 FUN_00298e00(u16 id);
+
+static inline s32 compareDevilRecordOrder(const u16 *first, const u16 *second)
+{
+    Record001e1794 *recA = dataTable1bOr1cGetRecord(*first);
+    Record001e1794 *recB = dataTable1bOr1cGetRecord(*second);
+    s32 result = 0;
+    if (recA != NULL && recB != NULL)
+        result = recA->order - recB->order;
+    return result;
+}
 
 /* Sort comparator over two ids: the one whose mask has bits the other lacks sorts first, ties go by record order. */
 s32 devilMaskCompare(u16 *a, u16 *b)
@@ -25,13 +34,7 @@ s32 devilMaskCompare(u16 *a, u16 *b)
         result = 1;
     }
     if (result == 0) {
-        Record001e1794 *recA = dataTable1bOr1cGetRecord(*a);
-        Record001e1794 *recB = dataTable1bOr1cGetRecord(*b);
-
-        result = 0;
-        if (recA != NULL && recB != NULL) {
-            result = recA->order - recB->order;
-        }
+        result = compareDevilRecordOrder(a, b);
     }
     return result;
 }

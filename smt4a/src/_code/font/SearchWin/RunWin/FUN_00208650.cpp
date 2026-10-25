@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the run window's loading-dots draw; armcc here keeps the frame divisions (retail: magic-number /5, then %8 via shifts) and the two spilled neighbour indices in different registers, and orders the stereo-parallax float convert differently. */
+/* NON_MATCHING: corrected retail parallax (0.25f) and label color (0x57d8ffff); label coordinate conversion, signed /5 and %8 scheduling, and zero-result epilogue still differ. */
 #include "gfx/RenderStateStack.h"
 
 /* The render context (its second state stack lives at 0x12B8). */
@@ -51,7 +51,7 @@ u8 FUN_00208650(void)
     if (win->active != 0 && win->visible != 0) {
         FUN_00157558(g_renderCtx);
         FUN_001835b4(2, 8, 0x14F, 0, 0, 109);
-        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.27f);
+        s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         FUN_00164b5c(2, 8, 19, x, y, 110);
@@ -62,7 +62,7 @@ u8 FUN_00208650(void)
         FUN_001835b4(2, 8, 0x151, x, 0, 111);
         renderStackPop(&g_renderCtx->secondStack);
         LayoutPoint *labelPoint = FUN_001834a4(8, 0x153);
-        FUN_00162790(4, 0xF49800FF, win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
+        FUN_00162790(4, 0x57D8FFFF, win->label, (f32)(labelPoint->x + (x - 20)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
         s32 lit = step % 8;

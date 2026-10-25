@@ -1,7 +1,6 @@
 /* NON_MATCHING: global add-on flags are cached rather than reloaded, and final flags/state stores combine into one STM; candidate -O2. */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
-#include "classes/AocMenu.h"
 
 struct CountAt30;
 struct CountAt5A;

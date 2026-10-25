@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the apply-path target calculation uses r1/r0/r5 instead of retail r0/r1/ip (112/112 rows). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlAction.h"
+#include "battle/BattleUnitSlot.h"
 
 struct BtlUnit;
 
@@ -13,7 +14,6 @@ struct BattleActionTableView {
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(u32 index);
-BtlUnit* btlUnitGet(u32 id);
 BtlMainState* btlGetMainState();
 u32 FUN_002463e8(u32 status);
 u32 FUN_00246134(s32 entryId, u32 resistance, s32 mode, s32 option);
@@ -31,7 +31,7 @@ u32 btlScriptSetPartyStatus()
     u32 status = scrGetArg(0);
     s32 apply = scrGetArg(1);
     s32 checkResistance = scrGetArg(2);
-    BtlUnit* source = btlUnitGet(g_btlScriptUnit);
+    BtlUnit* source = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     BtlMainState* state = btlGetMainState();
     BattleActionTableView* table = reinterpret_cast<BattleActionTableView*>(state);
     u32 mask = 1u << status;

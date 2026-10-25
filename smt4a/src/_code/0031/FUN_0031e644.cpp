@@ -1,9 +1,9 @@
-/* NON_MATCHING: retail passes the still-zero r0 (FUN_00162ea4's result) to FUN_002f0c18 and returns 1 with `movne`; built reloads 0 into r0 and branches to a shared `mov r0, #1`. */
+/* NON_MATCHING: explicit script-argument index and busy-result forwarding now match; retail predicates the early busy return while source shares a later return-one block. */
 #include "common.h"
 
 extern "C" {
 
-s32 scrGetArg(void);
+s32 scrGetArg(u32 index);
 s32 scrGetCommandFrame(void);
 int gameFlagSlotAdvanceCounter(s32 arg);
 s32 FUN_00162ea4(void);
@@ -16,15 +16,16 @@ int sysPlaySe(s32 id);
 /* Script command: on its first frame starts the effect (finishing early if FUN_00162ea4 reports busy); then waits for uiQuestIsIdle. */
 u8 FUN_0031e644(void)
 {
-    u16 arg = scrGetArg();
+    u16 arg = scrGetArg(0);
     s32 done;
 
     if (scrGetCommandFrame() == 0) {
         gameFlagSlotAdvanceCounter(arg);
-        if (FUN_00162ea4() != 0) {
+        s32 busy = FUN_00162ea4();
+        if (busy != 0) {
             return 1;
         }
-        FUN_002f0c18(0);
+        FUN_002f0c18(busy);
         FUN_002f1554(arg);
     }
     done = uiQuestIsIdle();

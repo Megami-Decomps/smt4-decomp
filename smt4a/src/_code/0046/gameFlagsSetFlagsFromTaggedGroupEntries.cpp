@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 struct FlagEntryView {
     u8 unk00;                 // 0x00
@@ -21,7 +22,7 @@ extern "C" {
 s32 FUN_001b315c(FlagGroupView* group);
 FlagEntryView* FUN_001b31ac(FlagGroupView* group);
 u32 FUN_001b31e0(FlagGroupView* group);
-s32 gameFlagSetValue(u32 flag, s32 value, s32 mode);
+
 
 // Set flags referenced by entries tagged '6' in each active group.
 void gameFlagsSetFlagsFromTaggedGroupEntries(FlagOwnerView* owner)

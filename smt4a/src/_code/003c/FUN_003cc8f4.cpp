@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct Inner {
     /* 0x00 */ u8 unk00[0x34];
@@ -17,11 +18,10 @@ struct Record {
 
 extern "C" {
 extern Record DAT_0059eea0[];
-void FUN_0031ab38(void *member, s32 value, const Record *entry, const Record *table);
 }
 
 extern "C" void FUN_003cc8f4(Object *object)
 {
     Inner *inner = object->inner;
-    FUN_0031ab38(inner->member, inner->value, &DAT_0059eea0[1], DAT_0059eea0);
+    FUN_0031ab38(reinterpret_cast<u32 *>(inner->member), inner->value, reinterpret_cast<EffectEditorOptions *>(&DAT_0059eea0[1]), reinterpret_cast<EffectEditorOptions *>(DAT_0059eea0));
 }

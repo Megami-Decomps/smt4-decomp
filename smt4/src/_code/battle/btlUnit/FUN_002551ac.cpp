@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/btlReflect.h"
 #include "romwright_types.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -52,7 +53,6 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 extern short battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
-extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 extern int FUN_00293230(unsigned int *);
 /* Supplied declaration required: btlGetMainState. */
@@ -181,7 +181,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
           temp_v3 = temp_v6;
         }
         if (0 < temp_v6) {
-          temp_v4 = btlUnitGet(g_btlScriptUnit);
+          temp_v4 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
           *(unsigned char *)(temp_v4 + 0x59c) = 1;
           temp_v4 = 0;
           if (param_13 == 0) {

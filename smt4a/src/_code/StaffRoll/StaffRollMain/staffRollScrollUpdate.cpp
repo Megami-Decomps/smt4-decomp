@@ -9,7 +9,7 @@ extern "C" {
 extern StaffRollWork *g_staffRoll;
 
 extern int gameFlagIsSet(u32 flag);
-extern int FUN_00163fd4(u32 button);
+extern int slotIsActive(u32 button);
 
 void staffRollScrollUpdate(void)
 {
@@ -26,7 +26,7 @@ void staffRollScrollUpdate(void)
             roll->lineB[i].y -= roll->speed;
         }
     }
-    if ((FUN_00163fd4(9) != 0 || FUN_00163fd4(6) != 0) && roll->skip == 0 && gameFlagIsSet(0x565) != 0) {
+    if ((slotIsActive(9) != 0 || slotIsActive(6) != 0) && roll->skip == 0 && gameFlagIsSet(0x565) != 0) {
         roll->skip = 1;
     }
     if (roll->finished != 0) {

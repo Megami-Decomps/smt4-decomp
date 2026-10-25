@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00231bcc(...);
 float FUN_00231d2c(int);
 int FUN_00231dec(...);
-int FUN_00232554(...);
+int titleScissorApplyOrClearRequests(...);
 int mathDistanceBetweenPoints(void);
 int FUN_002bedb0(...);
 int FUN_002bee04(unsigned int, int, unsigned int);
@@ -35,7 +35,7 @@ extern unsigned char g_gameState; /* 0x49f91c */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 /* Supplied declaration required: FUN_00231dec. */
-/* Supplied declaration required: FUN_00232554. */
+/* Supplied declaration required: titleScissorApplyOrClearRequests. */
 extern float *lmapSceneGetObj(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 extern int FUN_00288f78(unsigned int);
@@ -107,7 +107,7 @@ void FUN_003996c8(int param_1)
       return;
     }
   }
-  FUN_00232554(param_1,1);
+  titleScissorApplyOrClearRequests(param_1,1);
   (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xb;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0x5a8d) == '\0') {
@@ -215,7 +215,7 @@ LAB_003998fc:
     }
     FUN_002bedb0(g_titleScene,3);
   }
-  FUN_00232554(param_1,0);
+  titleScissorApplyOrClearRequests(param_1,0);
   (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xf1;
   FUN_00231dec(param_1);
   (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) + 1;

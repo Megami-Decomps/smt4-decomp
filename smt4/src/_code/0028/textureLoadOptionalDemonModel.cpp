@@ -1,4 +1,4 @@
-/* NON_MATCHING: optimization may recover native constant hoisting, first-record register reuse and final coordinate STM; typed repeated resolution is otherwise faithful. */
+/* NON_MATCHING: repeated key resolution keeps separate record/key registers, rematerializes the model limit, and emits strd rather than retail coordinate stm. */
 #include "addon/aocMain.h"
 #include "gamedata/DevilModel.h"
 

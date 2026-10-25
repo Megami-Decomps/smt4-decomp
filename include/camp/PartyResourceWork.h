@@ -9,7 +9,7 @@ struct PartyResourceWork {
     /* 0x480E */ u8 unk480E[0x306];
     /* 0x4B14 */ s16 previewTexture;
     /* 0x4B16 */ u8 unk4B16[2];
-    /* 0x4B18 */ u8 previewShared;
+    /* 0x4B18 */ s8 previewShared;
     /* 0x4B19 */ u8 unk4B19[0x7F];
     /* 0x4B98 */ void *data;
     /* 0x4B9C */ u8 unk4B9C[0x14];

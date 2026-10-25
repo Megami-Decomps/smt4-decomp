@@ -13,7 +13,7 @@ void FUN_002984d4(void* work);
 void FUN_003285dc(void* work);
 void btlEditorUpdate(void* work);
 s32 FUN_004f2708(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
-void FUN_004fb670(u32 first, u32 second, u32 third);
+void btlQueueDuplicateSuppressedAction(u32 first, u32 second, u32 third);
 void FUN_004feecc(u32 enabled, u32 option);
 void FUN_004aa780(void* work, u32 enabled);
 extern BtlCameraA* g_btlCamera;
@@ -38,7 +38,7 @@ void FUN_002b50e4(BtlMainStateA* battle)
     if (g_btlCamera) {
         if (g_btlCamera->orientation.editor.selection >= 0 &&
             FUN_004f2708(g_btlCamera, battle, 1)) {
-            FUN_004fb670(0, 0, 0);
+            btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00276264` (_code @ 0x276264, 0x6f00 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 struct ScriptHolder;
 
 extern "C" {
@@ -100,7 +101,7 @@ int eventQueueAddUnique(...);
 int dataTable08Sub2GetRecord(void);
 int FUN_0020ecd4(void);
 int popupTryStartScrollPrompt(...);
-int FUN_00246344(void);
+int partyTryOpenLevelLimitPopup(void);
 int popupStateSetAndShow(...);
 void popupTryStartTimedPrompt(void);
 int FUN_00294cfc(...);
@@ -137,7 +138,7 @@ int FUN_003401a4(...);
 int mapProbePositionDownward(...);
 int FUN_00387014(void);
 int FUN_00471d00(void);
-int FUN_00483834(...);
+int controllerUpdateWithIdleTimer(...);
 int fireEntriesMatchingPair(...);
 
 int FUN_0013cab8(...);
@@ -174,7 +175,7 @@ int FUN_00178b04(...);
 int FUN_001cd3ec(...);
 int asdLoadFileAsyncWrap(...);
 int asdLoadFileSyncDefault(void);
-int FUN_00233170(void);
+int mapGimmickResetControllers(void);
 int FUN_00275bc8(...);
 void mapIfInitializeSceneControllers(void);
 int navigationSetArguments(...);
@@ -197,7 +198,7 @@ int handleRegistryRegisterObject(...);
 int FUN_0024ad50(void);
 int mapGimicInitializeProcessing(...);
 int FUN_00314b7c(...);
-int FUN_003a3b88(void);
+int lmapRebuildModelContent(void);
 
 int textFormatBuffer(...);
 int gameDataTableGetFlag(void);
@@ -213,7 +214,6 @@ int gameApplyCurrentFlagTableEntry(void);
 int sysClearCachedFlag(void);
 int FUN_003b5714(...);
 int gameFlagSetEligibleEntryFlagsAtThreshold(int);
-int gameFlagSetValue(...);
 int countersAddSaturating(int, int);
 int FUN_0040ae70(...);
 int resourceOwnerLoadNamed(...);
@@ -434,7 +434,7 @@ extern int FUN_001bd118(void);
 /* Supplied declaration required: FUN_002237a0. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00227a70. */
-/* Supplied declaration required: FUN_00233170. */
+/* Supplied declaration required: mapGimmickResetControllers. */
 /* Supplied declaration required: FUN_002342b8. */
 /* Supplied declaration required: popupTryStartScrollPrompt. */
 /* Supplied declaration required: FUN_00234b30. */
@@ -442,7 +442,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: gameDataCopySaveToWork. */
 /* Supplied declaration required: FUN_00239b10. */
 /* Supplied declaration required: FUN_00244ac8. */
-/* Supplied declaration required: FUN_00246344. */
+/* Supplied declaration required: partyTryOpenLevelLimitPopup. */
 /* Supplied declaration required: resourceSlotsRelease. */
 /* Supplied declaration required: mapReleaseTableTexture. */
 /* Supplied declaration required: mapLoadSkyTable. */
@@ -567,7 +567,6 @@ extern int FUN_003cd4b4(unsigned int);
 /* Supplied declaration required: FUN_003de188. */
 /* Supplied declaration required: gameFlagSetEligibleEntryFlagsAtThreshold. */
 extern int gameDataFlagTestBit(unsigned int);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_0040619c. */
 /* Supplied declaration required: objectVectorClear. */
@@ -600,7 +599,7 @@ extern int FUN_0047e150(int);
 extern int scriptHolderUpdateSimple(int);
 /* Supplied declaration required: FUN_00482c04. */
 /* Supplied declaration required: FUN_00483294. */
-/* Supplied declaration required: FUN_00483834. */
+/* Supplied declaration required: controllerUpdateWithIdleTimer. */
 /* Supplied declaration required: lmapEnemyCtrlLoadModels. */
 /* Supplied declaration required: fieldBuildAreaPlacementList. */
 /* Supplied declaration required: stateSetterSetFromBase. */
@@ -636,7 +635,7 @@ extern int engineHasActiveRecord(void);
 /* Supplied declaration required: lmapSnapshotTransitionState. */
 /* Supplied declaration required: FUN_0037723c. */
 extern unsigned short gameFlagsGetWorkValue(void);
-/* Supplied declaration required: FUN_003a3b88. */
+/* Supplied declaration required: lmapRebuildModelContent. */
 /* Supplied declaration required: fireEntriesMatchingPair. */
 /* Supplied declaration required: sub68OwnerDestroyAll. */
 /* Supplied declaration required: jobFlagObjStop. */
@@ -859,7 +858,7 @@ unsigned int FUN_00276264(void)
       if (DAT_005f1a58 == 0) {
         return 0;
       }
-      gameFlagSetValue(DAT_005f1a58,1);
+      gameFlagSetValue(DAT_005f1a58, 1, 1);
       DAT_005f1a58 = 0;
       return 0;
     }
@@ -1029,7 +1028,7 @@ unsigned int FUN_00276264(void)
         FUN_002df914();
       }
       FUN_00379d58();
-      FUN_003a3b88();
+      lmapRebuildModelContent();
       lmapInitializeActorHandles();
       puVar2[3] = puVar2[3] + 1;
     }
@@ -1047,7 +1046,7 @@ LAB_00276e5c:
       if (temp_v6 != 0) {
         puVar2[3] = puVar2[3] + 1;
 LAB_00276e7c:
-        FUN_00233170();
+        mapGimmickResetControllers();
         mapGimicInitializeProcessing(puVar2[0x10],0);
         puVar2[3] = puVar2[3] + 1;
 LAB_00276e9c:
@@ -1607,7 +1606,7 @@ LAB_00276f5c:
                 }
                 FUN_00311b74();
                 if (*(char *)((int)puVar2 + 0xb) == '\0') {
-                  FUN_00483834(puVar2 + 0x3d);
+                  controllerUpdateWithIdleTimer(puVar2 + 0x3d);
                 }
                 FUN_00234b30();
                 FUN_002737a8();
@@ -1867,7 +1866,7 @@ LAB_00278b38:
                                   if (temp_v8 == 0) {
                                     FUN_00295108(0);
                                     FUN_0020ecd4();
-                                    FUN_00246344();
+                                    partyTryOpenLevelLimitPopup();
                                     FUN_00294cfc(DAT_005f18e8);
                                     temp_v8 = flagsBit7Get(g_gameState,DAT_005f1600);
                                     if (temp_v8 == 0) {
@@ -1916,7 +1915,7 @@ LAB_00278b38:
                                 }
                                 DAT_005f1898 = 0x41a00000;
                                 DAT_005f1894 = 0x44160000;
-                                gameFlagSetValue(DAT_005f1a58,1);
+                                gameFlagSetValue(DAT_005f1a58, 1, 1);
                                 DAT_005f1a58 = 0;
                                 return 0;
                               }
@@ -2143,7 +2142,7 @@ LAB_00278774:
                           if (temp_v8 != 0) {
                             temp_v8 = gameFlagIsSet(0x19f);
                             if (temp_v8 == 0) {
-                              gameFlagSetValue(0x1fc,1);
+                              gameFlagSetValue(0x1fc, 1, 1);
                             }
                           }
                         }
@@ -2152,7 +2151,7 @@ LAB_00278774:
                           if (temp_v8 != 0) {
                             temp_v8 = gameFlagIsSet(0x184);
                             if (temp_v8 == 0) {
-                              gameFlagSetValue(0x1fc,1);
+                              gameFlagSetValue(0x1fc, 1, 1);
                             }
                           }
                         }
@@ -2245,7 +2244,7 @@ LAB_00278774:
       } while (temp_v8 < 0x20);
       DAT_005f161f = 1;
       FUN_0036aa04(puVar19);
-      FUN_00483834(puVar19 + 0x3d);
+      controllerUpdateWithIdleTimer(puVar19 + 0x3d);
       FUN_00297c3c();
       FUN_00234b30();
       FUN_002737a8();
@@ -2288,7 +2287,7 @@ LAB_00278774:
     } while (temp_v8 < 0x20);
     DAT_005f161f = 0;
     FUN_0036aa04(puVar19);
-    FUN_00483834(puVar19 + 0x3d);
+    controllerUpdateWithIdleTimer(puVar19 + 0x3d);
     FUN_00297c3c();
     FUN_00234b30();
     FUN_002737a8();
@@ -2319,7 +2318,7 @@ LAB_00278774:
           temp_v7 = gameFlagIsSet(0x111d);
           temp_v23 = temp_v7 == 0;
           if (temp_v23) {
-            gameFlagSetValue(0x111d,1);
+            gameFlagSetValue(0x111d, 1, 1);
           }
           DAT_005f18d0 = (unsigned int)*(unsigned short *)(temp_v10 + 0x40);
           temp_v6 = temp_v6 + 1;
@@ -3558,7 +3557,7 @@ LAB_0027a030:
   case 0x4a:
     FUN_00387014();
     if (puVar2[0x33] == 1) {
-      gameFlagSetValue(0x529,1);
+      gameFlagSetValue(0x529, 1, 1);
       DAT_005f1859 = 1;
       DAT_005f185a = 1;
       DAT_005f1614 = '\0';
@@ -3809,7 +3808,7 @@ LAB_0027a030:
       } while (temp_v8 < 0x20);
     }
     FUN_00379d58();
-    FUN_003a3b88();
+    lmapRebuildModelContent();
     lmapInitializeActorHandles();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;
@@ -4114,7 +4113,7 @@ LAB_0027a030:
       } while (temp_v8 < 0x20);
     }
     FUN_00379d58();
-    FUN_003a3b88();
+    lmapRebuildModelContent();
     lmapInitializeActorHandles();
     temp_v8 = puVar2[3] + 1;
     puVar2[3] = temp_v8;

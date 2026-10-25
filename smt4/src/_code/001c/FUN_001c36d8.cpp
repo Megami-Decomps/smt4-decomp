@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c36d8` (_code @ 0x1c36d8, 0x778 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ int FUN_0026e630(...);
 int FUN_0026f824(int);
 int gameCopyPersistentSave(void);
 int FUN_00287c34(int);
-int gameFlagSetValue(...);
+
 int FUN_00299370(...);
 int FUN_0029c1c8(...);
 int unitRecalculateEffectiveStats(...);
@@ -70,7 +71,6 @@ extern int gameDataGetWorkBlock(void);
 /* Supplied declaration required: FUN_0026f824. */
 /* Supplied declaration required: gameCopyPersistentSave. */
 /* Supplied declaration required: FUN_00287c34. */
-/* Supplied declaration required: gameFlagSetValue. */
 extern int flagBitIsSet(unsigned int);
 /* Supplied declaration required: FUN_00299370. */
 /* Supplied declaration required: FUN_0029c1c8. */
@@ -289,53 +289,53 @@ void FUN_001c36d8(int param_1)
               *(unsigned int *)(temp_v2 + 0x24ba0) = temp_v9;
               do {
                 if (temp_v16[temp_v6] != '\0') {
-                  gameFlagSetValue(temp_v6 + 0x426,1);
+                  gameFlagSetValue(temp_v6 + 0x426, 1, 1);
                 }
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0x36);
               temp_v6 = 0;
               do {
                 if (temp_v16[temp_v6 + 0x38] != '\0') {
-                  gameFlagSetValue(temp_v6 + 0x467,1);
+                  gameFlagSetValue(temp_v6 + 0x467, 1, 1);
                 }
                 temp_v6 = temp_v6 + 1;
               } while (temp_v6 < 0xe);
               FUN_0033f86c(temp_v2 + 0xb91c,temp_v3 + 0xb91c);
               if (temp_v7 != 0) {
-                gameFlagSetValue(0x556,1);
+                gameFlagSetValue(0x556, 1, 1);
               }
               if (temp_v0 != 0) {
-                gameFlagSetValue(0x557,1);
+                gameFlagSetValue(0x557, 1, 1);
               }
               if (temp_v19 != 0) {
-                gameFlagSetValue(0x555,1);
+                gameFlagSetValue(0x555, 1, 1);
               }
               if (temp_v20 != 0) {
-                gameFlagSetValue(0x674,1);
+                gameFlagSetValue(0x674, 1, 1);
               }
               if (temp_v21 != 0) {
-                gameFlagSetValue(0x675,1);
+                gameFlagSetValue(0x675, 1, 1);
               }
               if (temp_v22 != 0) {
-                gameFlagSetValue(0x676,1);
+                gameFlagSetValue(0x676, 1, 1);
               }
               if (temp_v23 != 0) {
-                gameFlagSetValue(0x677,1);
+                gameFlagSetValue(0x677, 1, 1);
               }
               if (temp_v24 != (unsigned int *)0x0) {
-                gameFlagSetValue(0x678,1);
+                gameFlagSetValue(0x678, 1, 1);
               }
               if (temp_v25 != 0) {
-                gameFlagSetValue(0x679,1);
+                gameFlagSetValue(0x679, 1, 1);
               }
               if (temp_v26 != 0) {
-                gameFlagSetValue(0x67a,1);
+                gameFlagSetValue(0x67a, 1, 1);
               }
               if (temp_v27 != 0) {
-                gameFlagSetValue(0x67b,1);
+                gameFlagSetValue(0x67b, 1, 1);
               }
               if (temp_v28 != 0) {
-                gameFlagSetValue(0x464,1);
+                gameFlagSetValue(0x464, 1, 1);
               }
               temp_v9 = *(unsigned int *)(temp_v3 + 0x24b1c);
               temp_v10 = *(unsigned int *)(temp_v3 + 0x24b20);
@@ -407,7 +407,7 @@ void FUN_001c36d8(int param_1)
                         unitRecalculateEffectiveStats(temp_v6);
                         saveGetMapFlag(0x20,1);
                         if (temp_v1 != 0) {
-                          gameFlagSetValue(0x551,1);
+                          gameFlagSetValue(0x551, 1, 1);
                         }
                       }
                       temp_v0 = temp_v0 + 1;
@@ -435,10 +435,10 @@ void FUN_001c36d8(int param_1)
                 }
                 temp_v5 = temp_v5 + 1;
               } while (temp_v5 < 8);
-              gameFlagSetValue(0x565,1);
+              gameFlagSetValue(0x565, 1, 1);
               if (temp_v22 != 0) {
-                gameFlagSetValue(0x466,1);
-                gameFlagSetValue(0x410,1);
+                gameFlagSetValue(0x466, 1, 1);
+                gameFlagSetValue(0x410, 1, 1);
               }
               aocActivateFileGroupFlags(g_aocSystem);
               return;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 43 diff lines remain, scheduling/register allocation only. */
 #include "title/titleMain.h"
 #include "camp/RenderCtx.h"
 
@@ -24,15 +23,14 @@ u32 drawTitleModeOverlay()
     const TitleRenderState *state = (const TitleRenderState *)title;
     if (state->hidden || !state->ready)
         return 0;
-    RenderCtxA *context = g_renderCtx;
     switch (state->mode) {
     case 3:
-        renderCtxPushA(context, FUN_001692ac(1, 0));
+        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
         FUN_001835b4(2, 0x2a, 6000, 0, 0, 0xb);
         renderStackPop(&g_renderCtx->stackA);
         break;
     case 4:
-        renderCtxPushA(context, FUN_001692ac(1, 0));
+        renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
         FUN_001835b4(2, 0x2a, 7000, 0, 0, 0xb);
         renderStackPop(&g_renderCtx->stackA);
         break;
@@ -40,6 +38,8 @@ u32 drawTitleModeOverlay()
     case 14:
         break;
     case 7:
+        FUN_0036b21c();
+        break;
     default:
         FUN_0036b21c();
         break;

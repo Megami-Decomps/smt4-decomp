@@ -235,7 +235,7 @@ void FUN_004eea40(int *param_1,unsigned int *param_2)
       *(unsigned int *)(*piStack_30 + 0xa8) = 4;
       *param_2 = *param_2 | 0x2000;
       FUN_004feecc(1,param_2);
-      FUN_004fb670(0,param_2);
+      btlQueueDuplicateSuppressedAction(0,param_2);
       *(unsigned int *)(DAT_00571508 + 0x7cc) = 0xffffffff;
       break;
     case 0xb:

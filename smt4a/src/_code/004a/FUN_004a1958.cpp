@@ -70,7 +70,7 @@ void releaseEntriesA(void);
 void slotPoolResetTrackedState(void);
 SlotTable *gameGetSlotTable(void);
 EntryRecord *FUN_00184310(u16 index);
-EntryRecord *FUN_00389f0c(u16 index);
+EntryRecord *dataTable0ProbeEntryById(u16 index);
 s32 FUN_0032fbd0(void *slot);
 s32 FUN_002a4b28(u16 id);
 void campFillUnitComparison(u8 *out, u16 id, s32 flag);
@@ -176,7 +176,7 @@ void FUN_004a1958(EntryScreen *screen)
         s32 owned = 0;
 
         for (s32 index = 0; index < 0x4FF; index++) {
-            EntryRecord *record = FUN_00389f0c((u16)(index + 1));
+            EntryRecord *record = dataTable0ProbeEntryById((u16)(index + 1));
 
             if (record != NULL && (record->flags & 1) != 0) {
                 total++;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0029f2fc` (_code @ 0x29f2fc, 0x1724 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -34,7 +35,7 @@ int commonBgBeginExit(void);
 int objectE0ResetFlags1040(void);
 int campCommonBgRelease(void);
 int FUN_0037a2e4(void);
-int FUN_0039c244(void);
+int saveLoadStartDefaultWindow(void);
 int mobiclipProcessSetFlag77(...);
 int FUN_003c4f28(...);
 int commonBgReset(void);
@@ -56,7 +57,6 @@ int mobiclipProcessSetFlag78(...);
 int soundChannelStopAll(...);
 int FUN_003d54f8(...);
 int loadSlotEnsureLoaded(int);
-int gameFlagSetValue(...);
 int VectorSignedToFloat(...);
 
 /* stack frame of void: 1 slot(s), 4 byte(s) */
@@ -135,7 +135,7 @@ extern int FUN_0035e6d4(unsigned int *);
 /* Supplied declaration required: FUN_0037a2e4. */
 extern int titleConfigIsClosed(void);
 extern int saveLoadUIHasResult(void);
-/* Supplied declaration required: FUN_0039c244. */
+/* Supplied declaration required: saveLoadStartDefaultWindow. */
 /* Supplied declaration required: FUN_003b5064. */
 /* Supplied declaration required: FUN_003b61ec. */
 /* Supplied declaration required: mobiclipProcessSetFlag78. */
@@ -148,7 +148,6 @@ extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: soundChannelStopAll. */
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
 extern int aocHasType36(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
@@ -486,7 +485,7 @@ LAB_0029fb00:
     else {
       FUN_0019de98(0,0xf4f4f4ff);
       puVar4[0x23] = 0x1d;
-      gameFlagSetValue(0x81d,1);
+      gameFlagSetValue(0x81d, 1, 1);
       temp_v6 = gameFlagIsSet(0x81d);
       temp_v8 = 0x1d;
       mobiclipProcessCreate(0x1d,temp_v6);
@@ -831,7 +830,7 @@ LAB_0029fb00:
     break;
   case 0xd:
     if (*(char *)((int)DAT_00589170 + 0x5a) == '\0') {
-      FUN_0039c244();
+      saveLoadStartDefaultWindow();
       puVar4[0x1f] = 0;
       puVar4[0x1e] = 0xe;
       puVar4[0x20] = 0;

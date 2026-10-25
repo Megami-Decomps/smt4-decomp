@@ -28,7 +28,7 @@ u32 FUN_003a969c()
     if (message != 0) {
         FUN_002980e4(message, 1);
         BtlMainStateA *battle = btlGetMainState();
-        ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+        ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         BtlEffectSlotBlock *slots = g_btlAux->slots;
         s32 written = 0;
         for (s32 index = 0; index < 4; ++index) {

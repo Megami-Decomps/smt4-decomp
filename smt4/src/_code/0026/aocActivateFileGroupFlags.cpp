@@ -1,11 +1,12 @@
 #include "gamedata/GroupedFileTables.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 s32 FUN_002ac12c(FileTableGroup *);
 FileTableKindRecord *FUN_002ac0f8(FileTableGroup *);
 u32 FUN_002ac0c4(FileTableGroup *);
 s32 gameFlagIsSet(u32);
-void gameFlagSetValue(u32, s32, s32);
+
 s32 flagValueIsPositive(u32);
 void FUN_00295a18(u32, s32);
 void *jyoucyuGetTableEntry(u32);

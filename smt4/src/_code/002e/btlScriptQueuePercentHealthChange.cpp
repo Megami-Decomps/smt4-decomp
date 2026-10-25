@@ -1,5 +1,6 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlAction.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 void FUN_002505c0(s32, void *, u32, s32, s32, s32, s32);
@@ -8,7 +9,6 @@ void FUN_002551ac(s32, void *, BtlActionRecord *, s32, s32, u32, u32, s32, s32,
                   s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32);
 extern u32 g_btlScriptUnit;
 BtlEntry *btlMainFindActiveEntry();
-void *btlUnitGet(u32 id);
 BtlMainState *btlGetMainState();
 s32 scrGetArg(u32 index);
 
@@ -19,7 +19,7 @@ u32 btlScriptQueuePercentHealthChange()
     BtlMainState *state = btlGetMainState();
     BtlEntry *entry = btlMainFindActiveEntry();
     s32 amount = entry->maxHp * percent / 100;
-    void *unit = btlUnitGet(g_btlScriptUnit);
+    void *unit = btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit));
     if (entry->members.ids[0] >= 0) {
         FUN_00250720(state);
         FUN_002551ac(0, unit, &state->actions.records[entry->members.ids[0]], 0,

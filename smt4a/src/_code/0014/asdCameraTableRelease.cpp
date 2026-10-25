@@ -18,7 +18,7 @@ void FUN_001524cc(u32 handle);
 extern Owner g_asdCamera;
 
 /* Releases every non-zero handle of the owner's table, then the two extra handles; always returns 0. */
-u32 asdCameraTableRelease(void)
+s32 asdCameraTableRelease(u32 process)
 {
     s32 i;
     Table *table;

@@ -14,7 +14,7 @@ int FUN_002aff70(...);
 int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c1b64(unsigned int, unsigned int);
-int FUN_00343810(...);
+int modelApplyChangedCachedVector(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44MultAsm(...);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
@@ -142,7 +142,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002c18e4. */
 /* Supplied declaration required: FUN_002c198c. */
 /* Supplied declaration required: FUN_002c1b64. */
-/* Supplied declaration required: FUN_00343810. */
+/* Supplied declaration required: modelApplyChangedCachedVector. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
@@ -268,7 +268,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
   VectorUnsignedToFloat((unsigned int)param_1->field_0x66,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x65,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x64,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_00343810(g_titleScene,(unsigned int)param_1->field_0x66,(unsigned int)param_1->field_0x65,
+  modelApplyChangedCachedVector(g_titleScene,(unsigned int)param_1->field_0x66,(unsigned int)param_1->field_0x65,
                (unsigned int)param_1->field_0x64);
   temp_v67 = (fn_001f6b74_arg0 *)0x0;
   pfVar3 = param_1->field_0x18;

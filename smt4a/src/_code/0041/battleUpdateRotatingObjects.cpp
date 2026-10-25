@@ -1,4 +1,4 @@
-/* NON_MATCHING: polling loop bounds merge into conditional compares, and threshold compares reverse retail's operands. */
+/* NON_MATCHING: named frame thresholds recover comparison operand order; loop-bound compares still merge and global-frame modulo registers differ. */
 #include "common.h"
 
 struct RotatingBattleObjectState {
@@ -26,14 +26,16 @@ extern "C" void battleUpdateRotatingObjects(RotatingBattleObjectState *state)
         for (s32 visible = 0; visible < state->count + 1 && visible < 2; ++visible) {
             s32 index = state->start + visible;
             ++state->frames[index];
-            if (state->frames[index] >= engineLookupObjectById((s16)state->ids[index]))
+            s32 frameCount = engineLookupObjectById((s16)state->ids[index]);
+            if (state->frames[index] >= frameCount)
                 state->frames[index] = 0;
         }
     } else {
         for (s32 visible = 0; visible < state->count && visible < 1; ++visible) {
             s32 index = (state->start + visible) % state->count;
             ++state->frames[index];
-            if (state->frames[index] >= engineLookupObjectById((s16)state->ids[index]))
+            s32 frameCount = engineLookupObjectById((s16)state->ids[index]);
+            if (state->frames[index] >= frameCount)
                 state->frames[index] = 0;
         }
     }

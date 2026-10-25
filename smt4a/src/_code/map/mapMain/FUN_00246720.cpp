@@ -1,4 +1,4 @@
-/* NON_MATCHING: identical statements; armcc schedules the global loads (g_mapMain store, g_gameState base, g_handleRegistry) and the `strb [r4, #12]` slightly differently from retail. */
+/* NON_MATCHING: allocation publication order recovered; handle-registry load and free-on-end store scheduling still differ. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/GameGlobals.h"
@@ -85,8 +85,8 @@ void FUN_002496b8(void);
 void FUN_002442ac(void);
 void FUN_0020ef94(void);
 void mapDepartResetWork(void);
-void FUN_0020f054(void);
-void FUN_00233170(void);
+void mapObjectResetSlots(void);
+void mapGimmickResetControllers(void);
 void mapMainRequest(u32 handle);
 s32 FUN_0024f4ac(u32 handle);
 void noopCallback(u32 handle);
@@ -104,8 +104,8 @@ u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, As
 void FUN_00246720(void)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapMain.cpp", 543);
-    MapMainBlockA *map;
-    g_mapMain = map = (MapMainBlockA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapMainBlockA), 1);
+    g_mapMain = (MapMainBlockA *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(MapMainBlockA), 1);
+    MapMainBlockA *map = g_mapMain;
     u8 *flagsBlock = gameFlagsGetBlock();
     FUN_002c23cc(1);
     map->flag0D = 0;
@@ -149,8 +149,8 @@ void FUN_00246720(void)
     FUN_002442ac();
     FUN_0020ef94();
     mapDepartResetWork();
-    FUN_0020f054();
-    FUN_00233170();
+    mapObjectResetSlots();
+    mapGimmickResetControllers();
     map->messageId = 0x1C2;
     map->messageState = 0;
     map->counterB8 = 0;

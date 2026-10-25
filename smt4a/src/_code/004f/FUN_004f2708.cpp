@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlCamera.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnitSlot.h"
 
 /* The shared CameraTransitionGlobals prefix ends at 0x2c. */
 struct BattleCameraGateGlobalsView {
@@ -17,7 +18,6 @@ extern "C" {
 extern BattleCameraGateGlobalsView g_btlCamera;
 extern u32 g_btlScriptUnit;
 s32 FUN_003eb1cc(BtlMainStateA *battle);
-BtlCombatantEntryA *btlUnitGet(u32 unit);
 
 /* Gate camera progression on battle masks, the script unit and camera flags. */
 u32 FUN_004f2708(u32 unused, BtlMainStateA *battle, s32 checkTransition)
@@ -30,7 +30,8 @@ u32 FUN_004f2708(u32 unused, BtlMainStateA *battle, s32 checkTransition)
             return 1;
         if (battle->stateFlags64.bits & g_btlCamera.unitBlocked)
             return 0;
-        BtlCombatantEntryA *unit = btlUnitGet(g_btlScriptUnit);
+        BtlCombatantEntryA *unit = reinterpret_cast<BtlCombatantEntryA *>(
+            btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit && ((u32)unit->flags & 0x2000))
             return 0;
         if (checkTransition) {

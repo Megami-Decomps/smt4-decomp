@@ -1,4 +1,4 @@
-/* NON_MATCHING: checking frame capture downsample passes; retail's redundant minimum-step clamp is omitted. */
+/* NON_MATCHING: retail minimum-pass clamp is recovered; capture-flag addressing, early return layout and surface size-update scheduling differ. */
 #include "ui/FrameTex.h"
 #include "shard/JobWork.h"
 #include "shard/S1ListPanel.h"
@@ -9,7 +9,7 @@ u8 FUN_002bfadc(u32 screen, JobSurface *surface);
 s32 FUN_002bff10(u32 screen);
 void surfaceCopy(JobSurface *source, JobSurface *destination);
 
-u32 FUN_0010835c(void)
+s32 FUN_0010835c(u32 job)
 {
     // The extra source and ping-pong surfaces lie beyond FrameWork's recovered end.
     struct DownsampleView {
@@ -22,7 +22,7 @@ u32 FUN_0010835c(void)
     };
     typedef char DownsampleSurfaceOffsets[offsetof(DownsampleView, source) == 0xFDC &&
         offsetof(DownsampleView, first) == 0xFE4 && offsetof(DownsampleView, second) == 0xFE8 ? 1 : -1];
-    DownsampleView *work = (DownsampleView *)jobGetWork();
+    DownsampleView *work = (DownsampleView *)jobGetWork(job);
     work->frame.unkE95 = 0;
     if (!work->frame.unkE8C || !work->frame.quadActive || !work->source || work->frame.unkFD8)
         return 0;
@@ -32,8 +32,12 @@ u32 FUN_0010835c(void)
     work->frame.unkE94 = FUN_002bfadc(0, work->source);
     s32 ready = FUN_002bff10(0);
     s32 passes = (s32)work->frame.unkE90;
-    if (!ready && passes > 1)
+    if (!ready && passes > 1) {
         --passes;
+        if (passes < 1) {
+            passes = 1;
+        }
+    }
     if (work->separateSurfaces) {
         for (s32 pass = 0; pass < passes; ++pass) {
             if (pass == 0) {

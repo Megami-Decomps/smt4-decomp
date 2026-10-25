@@ -1,4 +1,4 @@
-/* NON_MATCHING: twin of smt4 FUN_002cac54: retail uses the 1.0f constant register itself as the float row counter and keeps 200.0f in s20 (vpush d8-d10); built copies it and uses d8-d9 */
+/* NON_MATCHING: corrected initial speed and second-column row to retail 0.0f; vector stores, VFP constant/temporary allocation, and handler argument scheduling still differ, as in the smt4 twin. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -37,7 +37,7 @@ void FUN_0032b688(s32 skipFade)
     g_staffRoll = work;
     work->closing = 0;
     work->skip = 0;
-    work->speed = 1.0f;
+    work->speed = 0.0f;
 
     asdTMTexTableLoadTmx(0x29, 0);
     for (u32 i = 0; i < 12; i++)
@@ -51,7 +51,7 @@ void FUN_0032b688(s32 skipFade)
         work->lineA[i].x = 200.0f - work->sizes[i].width * 0.5f;
         work->lineA[i].y = (f32)(i * height) + 520.0f;
     }
-    f32 row = 1.0f;
+    f32 row = 0.0f;
     for (s32 i = 0; i < 12; i++) {
         work->lineB[i].x = 160.0f - work->sizes[i].width * 0.5f;
         work->lineB[i].y = row * work->sizes[i].height + 240.0f;

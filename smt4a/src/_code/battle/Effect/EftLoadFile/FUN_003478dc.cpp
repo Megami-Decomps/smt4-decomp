@@ -8,7 +8,7 @@ int asdMemoryAllocTracked(...);
 int asdMemFree(...);
 int FUN_0023aa50(...);
 int FUN_0023aa8c(...);
-int FUN_0023aac8(...);
+int keyedRecordSetVectorPair0(...);
 int FUN_0023aca0(...);
 int sysMemClear(void);
 int keyedCopyPayload(...);
@@ -65,13 +65,13 @@ extern unsigned char LAB_003480c4; /* 0x3480c4 */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: FUN_0023aa50. */
 /* Supplied declaration required: FUN_0023aa8c. */
-/* Supplied declaration required: FUN_0023aac8. */
+/* Supplied declaration required: keyedRecordSetVectorPair0. */
 /* Supplied declaration required: FUN_0023aca0. */
 extern int libc_strlen(int);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: keyedCopyPayload. */
 /* Supplied declaration required: libc_strcmp. */
-extern unsigned int FUN_0031b53c(int);
+extern unsigned int effectTextureFindOrReserve(int);
 /* Supplied declaration required: FUN_00389cf0. */
 /* Supplied declaration required: FUN_003b6728. */
 /* Supplied declaration required: rt_memcpy. */
@@ -350,7 +350,7 @@ LAB_00347c88:
       }
       do {
         temp_v5 = temp_v4 + temp_v12 * 0x28;
-        temp_v7 = FUN_0031b53c(temp_v5 + 0x204);
+        temp_v7 = effectTextureFindOrReserve(temp_v5 + 0x204);
         temp_v12 = temp_v12 + 1;
         *(unsigned int *)(temp_v5 + 0x228) = temp_v7;
       } while (temp_v12 < (int)temp_v9);
@@ -506,7 +506,7 @@ LAB_00347c88:
   FUN_00389cf0(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
   FUN_003b6728(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
   keyedCopyPayload(temp_v49,param_2 + 0x14);
-  FUN_0023aac8(temp_v49,temp_v47);
+  keyedRecordSetVectorPair0(temp_v49,temp_v47);
   FUN_0023aca0(temp_v49,&temp_v23);
   FUN_0023aa50(temp_v49,&temp_v31);
   FUN_0023aa8c(temp_v49,&temp_v39);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: final clamp layout only: retail branches (`beq; mov r4,#99; b`) around a shared `mov r4,#99` block, built folds the compares into one test */
 /* Returns the level plus the bonus of the highest-priority held button (1/2/4/6 for the first group, 9/12/15 for the second), capped at 99 (or 99 outright when button 0x29 is held). */
 #include "common.h"
 
@@ -43,7 +42,10 @@ u32 FUN_0029dde0(void)
     if (flagBitIsSet(3) != 0) {
         result = g_gameDataBlocks.state->level + 15;
     }
-    if (flagBitIsSet(0x29) != 0 || result > 99) {
+    if (flagBitIsSet(0x29) != 0) {
+        result = 99;
+    }
+    if (result > 99) {
         result = 99;
     }
     return result;

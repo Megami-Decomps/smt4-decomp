@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024bcd4` (_code @ 0x24bcd4, 0x1ca4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -38,7 +39,6 @@ int soundChannelStopAll(...);
 int btlActionPrepareFromSource(...);
 int FUN_003ee734(...);
 int FUN_003ef1e4(...);
-int gameFlagSetValue(...);
 int FUN_0040a244(void);
 int btlHelpFreeEntries(void);
 int FUN_004c8e30(...);
@@ -73,7 +73,7 @@ void FUN_004c8bb8(int alternate, unsigned int argument);
 int FUN_004d7a70(...);
 int FUN_004d7fe4(void);
 int state4DStart(int);
-int hasFlag80Or1000(...);
+unsigned int hasFlag80Or1000(unsigned int, unsigned int *);
 int btlUnitGet(...);
 int FUN_004fb798(...);
 
@@ -226,7 +226,6 @@ extern int FUN_003ed878(unsigned int);
 /* Supplied declaration required: FUN_003ef1e4. */
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_003f26d4. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_003fda64. */
 /* Supplied declaration required: FUN_0040a244. */
 /* Supplied declaration required: chainCountIdUnflagged. */
@@ -609,10 +608,10 @@ LAB_0024c6f0:
 LAB_0024c770:
           if ((temp_v1 == '\x01') &&
              ((temp_v3 = btlUnitGet(g_btlScriptUnit), temp_v3 == 0 ||
-              (temp_v3 = hasFlag80Or1000(g_btlScriptUnit,temp_v3), temp_v3 == 0)))) goto LAB_0024d75c;
+              (temp_v3 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v3), temp_v3 == 0)))) goto LAB_0024d75c;
         }
         temp_v3 = btlUnitGet(g_btlScriptUnit);
-        if (((temp_v3 == 0) || (temp_v3 = hasFlag80Or1000(g_btlScriptUnit), temp_v3 == 0)) && (temp_v1 == '\x02'))
+        if (((temp_v3 == 0) || (temp_v3 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v3), temp_v3 == 0)) && (temp_v1 == '\x02'))
         {
           stateAtCIs4(g_btlAiScript);
         }
@@ -871,7 +870,7 @@ joined_r0x0024cba8:
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 0x6d);
       gameFlagSetValue(0x590,0,1);
-      gameFlagSetValue(0x591,0);
+      gameFlagSetValue(0x591, 0, 1);
       holderStopJob(temp_v2);
       temp_v5 = *(unsigned int *)(temp_v2 + 0x45a4) | uRam00573a6c;
       *puVar16 = uRam00573a68 | *puVar16;

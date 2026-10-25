@@ -1,4 +1,5 @@
 #include "shard/GlobalBlocks.h"
+#include "sys/ProcessResult.h"
 
 extern "C" {
 

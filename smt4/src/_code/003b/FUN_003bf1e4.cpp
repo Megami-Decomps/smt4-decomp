@@ -18,7 +18,7 @@ struct BattleEscapeState {
 extern "C" {
 
 BattleEscapeState *btlGetMainState(void);
-s32 FUN_0027e6f4(BattleEscapeState *state, s32 flag);
+s32 btlFindNthActiveSpecialEntry(BattleEscapeState *state, s32 flag);
 s32 FUN_002973ec(void);
 
 /* Chance in percent (0..100) that the party escapes: compares the party's average stats with the
@@ -60,7 +60,7 @@ s32 FUN_003bf1e4(void)
     s32 agilityGap = partyAgility / partyCount - enemyAgility / enemyCount;
     s32 luckGap = partyLuck / partyCount - enemyLuck / enemyCount;
     s32 surprise = 0;
-    if (FUN_0027e6f4(state, 1) >= 0) {
+    if (btlFindNthActiveSpecialEntry(state, 1) >= 0) {
         surprise = -50;
     }
     s32 chance = agilityGap + luckGap / 2 + state->difficulty * 10 + surprise + 50;

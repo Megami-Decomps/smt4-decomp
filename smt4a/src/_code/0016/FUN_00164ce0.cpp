@@ -3,9 +3,9 @@
 extern "C" {
 
 /* Stores `value` in the byte at 0x31 of the job work area. */
-void FUN_00164ce0(u32 unused, u8 value)
+void FUN_00164ce0(u32 job, u8 value)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
     work->unk0031 = value;
 }
 

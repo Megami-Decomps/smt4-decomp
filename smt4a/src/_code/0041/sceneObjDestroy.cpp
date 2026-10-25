@@ -17,7 +17,7 @@ typedef struct SceneObj {
 extern void FUN_00371f18(void);
 extern void FUN_003a7b2c(void);
 extern void FUN_002c85b0(s32 value);
-extern void FUN_002c7ce8(u32 value);
+extern void statusDownSwitchTab(u32 value);
 extern void FUN_0023b45c(s32 flag);
 extern void FUN_002c8538(u8 value);
 extern void FUN_0033449c(s32 value);
@@ -35,7 +35,7 @@ void sceneObjDestroy(SceneObj *scene)
     FUN_00371f18();
     FUN_003a7b2c();
     FUN_002c85b0(0);
-    FUN_002c7ce8(0);
+    statusDownSwitchTab(0);
     FUN_0023b45c(0);
     FUN_002c8538(0);
     FUN_0033449c(0);

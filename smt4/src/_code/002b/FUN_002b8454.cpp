@@ -1,4 +1,4 @@
-/* NON_MATCHING: queued-value array uses indexed-record addressing instead of a retained array base; saved registers shift. */
+/* NON_MATCHING: retained queued-value base matches; saved-register allocation for queued arrays, sentinel and active flag still differs. */
 #include "ui/ButtonHelp.h"
 
 extern "C" {
@@ -14,19 +14,20 @@ void FUN_002b8454(u32 slot, s32 kind, s32 value, s32 defer)
     if (!work)
         return;
     if (defer) {
+        s32 *queuedValues = DAT_0043da50.values;
         s32 queuedKind = DAT_0043da50.kinds[slot];
         if (queuedKind < 0) {
             for (s32 index = 0; index < 6; ++index) {
                 if (work->active[index]) {
                     DAT_0043da50.kinds[slot] = kind;
-                    DAT_0043da50.values[slot] = value;
+                    queuedValues[slot] = value;
                     return;
                 }
             }
         }
-        if (queuedKind == kind && DAT_0043da50.values[slot] == value) {
+        if (queuedKind == kind && queuedValues[slot] == value) {
             DAT_0043da50.kinds[slot] = -1;
-            DAT_0043da50.values[slot] = -1;
+            queuedValues[slot] = -1;
         }
     }
     work->kinds[slot].kind = kind;

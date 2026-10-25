@@ -1,6 +1,7 @@
 /* NON_MATCHING: close: retail loads the target position as x then a y/z vldmia pair and moves r0/-1 after the prologue vpush; built groups the VFP loads differently and uses r0 rather than r1 for the list counters */
 #include "map/lmapMain.h"
 #include <math.h>
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 /* An interactable of the field map: the talk list owns up to 32 of them. */
 class TalkTarget {
@@ -73,7 +74,6 @@ extern "C" {
 
 TalkMapBlock *gameGetMapBlock(void);
 TalkPlayerData *gameGetPlayerData(void);
-void FUN_00291e40(s32 id, f32 x, f32 y, f32 z);
 void FUN_0027d8b4(s32 id);
 void sequenceRequestDefer(s32 id, s32 argument);
 void textFormatBuffer(char *buffer, const char *format, ...);
@@ -104,8 +104,12 @@ s32 FUN_00396370(TalkTargetList *list)
                     result = target->id;
                     if (map->talkEnabled != 0 && target->requiredLevel < player->level) {
                         g_gameState.talkPrompt = 1;
-                        FUN_00291e40(0x1000187, target->position.x * (1.0f / 3.0f),
-                                     target->position.y * (1.0f / 3.0f), target->position.z * (1.0f / 3.0f));
+                        SoundActorQueuePosition position = {
+                            target->position.x * (1.0f / 3.0f),
+                            target->position.y * (1.0f / 3.0f),
+                            target->position.z * (1.0f / 3.0f)
+                        };
+                        FUN_00291e40(0x1000187, position);
                     }
                 } else if (target->kind == 1) {
                     g_gameState.eventValue = 0;

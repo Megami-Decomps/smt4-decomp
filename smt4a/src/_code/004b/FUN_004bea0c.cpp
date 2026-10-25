@@ -57,7 +57,7 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0035d03c. */
 extern int FUN_0035db94(void);
 /* Supplied declaration required: FUN_003e4d68. */
-extern int FUN_004801ac(int, unsigned int, unsigned int);
+extern int itemApplyPercentageHpHeal(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_004be49c. */
 /* Supplied declaration required: FUN_004be990. */
 
@@ -132,7 +132,7 @@ void FUN_004bea0c(int param_1)
         if (*(char *)(param_1 + 4) == '\x02') {
           temp_v4 = FUN_003e4d68(*(unsigned int *)(param_1 + *(int *)(param_1 + 0x32c) * 4 + 0x2c4) & 0xffff);
           if ((temp_v4 != 0) &&
-             (temp_v4 = FUN_004801ac(temp_v4,*(unsigned int *)(param_1 + 0x334),0), temp_v4 == 0)) {
+             (temp_v4 = itemApplyPercentageHpHeal(temp_v4,*(unsigned int *)(param_1 + 0x334),0), temp_v4 == 0)) {
             if (*(int *)(param_1 + 0x334) == 0x7cd) {
               temp_v2 = 0x100021c;
             }

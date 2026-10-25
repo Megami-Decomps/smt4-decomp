@@ -1,5 +1,6 @@
-/* NON_MATCHING: same unlink; retail works on a copy of the node pointer in r1 and reads the (prev, next) pair with ldrd, built uses r4 directly and ldm */
+/* NON_MATCHING: canonical ScopedCriticalLock restores lock-address setup; retail keeps an extra node-pointer copy and paired links use LDRD instead of LDM. */
 #include "common.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 
@@ -20,15 +21,10 @@ struct LockedList {
     /* 0x0c */ CriticalSection lock;
 };
 
-void nn_os_CriticalSection_Enter(CriticalSection *section);
-void nn_os_CriticalSection_Leave(CriticalSection *section);
-
 /* Unlinks `node` from the circular list under the list's lock and clears the node. */
 void FUN_0017e1c0(LockedList *list, ListNode *node)
 {
-    CriticalSection *lock = &list->lock;
-
-    nn_os_CriticalSection_Enter(lock);
+    ScopedCriticalLock lock(list->lock);
     if (node->prev == node) {
         list->head = NULL;
     } else {
@@ -42,7 +38,6 @@ void FUN_0017e1c0(LockedList *list, ListNode *node)
     node->prev = NULL;
     node->unk08 = 0;
     node->unk0c = 0;
-    nn_os_CriticalSection_Leave(lock);
 }
 
 } /* extern "C" */

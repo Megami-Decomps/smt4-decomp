@@ -1,5 +1,6 @@
 /* NON_MATCHING: the 64-bit flag clears use per-word and/bic with mvn in retail (built folds the masks with orr+bic), the cases share one exit instead of duplicating the epilogue, and the stack setup assigns script mode via a separate register */
 #include "script/scrScriptProcess.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -40,7 +41,7 @@ s32 scrRunOpcodesStub(ScriptRunState *script);
 s32 gameFlagIsSet(u32 flag);
 void btlUiClearSelectionSlots(u32 block);
 void FUN_003ebc08(BtlContinueView *state, s32 arg);
-void gameFlagSetValue(u32 flag, s32 value, s32 arg);
+
 void FUN_003756c8(s32 arg);
 void FUN_004f8f08(u32 aux);
 void FUN_004ab734(u32 block);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: command panel transitions restored; extended-widget flag base, 64-bit mask loads and loop scratch registers differ. */
+/* NON_MATCHING: signed disabled flag base matches; 64-bit mask loads and icon-loop scratch registers differ. */
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
 #include "ui/UiSpriteState.h"
@@ -40,7 +40,7 @@ void FUN_003363a8(BtlUiObjCA *panel, u32 selection, u8 first, u32 second)
         u8 first;
         u8 second;
         u8 padding38B3;
-        u8 disabled;
+        s8 disabled;
     };
     CommandPanelView *work = reinterpret_cast<CommandPanelView *>(panel);
     work->first = first;

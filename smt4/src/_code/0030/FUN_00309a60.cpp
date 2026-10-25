@@ -1,9 +1,9 @@
 /* NON_MATCHING: compiler collapses filesystem error-category tests and duplicate delete branches. */
+#include "sys/ProcessResult.h"
 #include "nn/Result.h"
 
 extern "C" {
 s32 FUN_001db820(u64 id, u32 directories, u32 files, const char *iconPath);
-void FUN_002c3510(u32 result);
 s32 nn_fs_DeleteExtSaveData(u64 id);
 
 // Recreate missing or corrupt external save data while preserving unrelated filesystem errors.

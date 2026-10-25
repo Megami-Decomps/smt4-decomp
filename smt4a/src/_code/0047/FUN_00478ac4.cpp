@@ -1,4 +1,4 @@
-/* NON_MATCHING: register assignment and the unrolled dot-grid index arithmetic differ from retail (181 vs 188 rows); the loading message drawing is the same. */
+/* NON_MATCHING: task handle and signed rotating-marker remainder contract restored; message-ID initialization lifetime and marker-grid temporaries still differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 
@@ -22,7 +22,7 @@ typedef struct LoadingWork {
 extern u8 *g_renderCtx;
 extern u8 *g_aocMain;
 
-LoadingWork *jobGetWork(void);
+LoadingWork *jobGetWork(u32 job);
 void FUN_00157558(u8 *context);
 s32 FUN_001692ac(s32 a, s32 b);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
@@ -36,16 +36,16 @@ void FUN_00162790(u32 first, u32 second, const u16 *text, f32 x, f32 y, f32 z, f
 /* Draws the loading message with its spinning marker: the message text for the current index,
  * centred in its frame, and a 3x3 grid of dots where the lit pair rotates every five frames.
  * Always returns 0. */
-u32 FUN_00478ac4(void)
+s32 FUN_00478ac4(u32 job)
 {
-    LoadingWork *work = jobGetWork();
+    LoadingWork *work = jobGetWork(job);
     u8 *aoc = g_aocMain;
     u32 frame = work->frame;
     u8 text[1024];
     u32 messageIds[4] = {0x6E, 0x6F, 0x70, 0x71};
 
     FUN_00157558(g_renderCtx);
-    renderStackPush((RenderStateStack *)(g_renderCtx + 0x1258), FUN_001692ac(1, 0));
+    renderCtxPushA(reinterpret_cast<RenderCtxA *>(g_renderCtx), FUN_001692ac(1, 0));
     FUN_00164b5c(2, 0x2F, 5, 0, 0, 0x81);
     s32 body = FUN_00473910(aoc, messageIds[work->messageIndex]);
 
@@ -55,11 +55,11 @@ u32 FUN_00478ac4(void)
     s32 left = (frameLayout->x + (frameLayout->size[0] >> 1) - (width >> 1)) - 9;
 
     FUN_00162790(3, 0x57D8FFFF, (const u16 *)text, (f32)left, (f32)frameLayout->y, 0.5f, 0.0f, 1.0f);
-    u32 step = frame / 5;
-    u32 first = step % 8;
-    u32 second = (step + 4) % 8;
-    u32 firstTrail = (first + 7) % 8;
-    u32 secondTrail = (second + 7) % 8;
+    s32 step = frame / 5;
+    s32 first = step % 8;
+    s32 second = (step + 4) % 8;
+    s32 firstTrail = (first + 7) % 8;
+    s32 secondTrail = (second + 7) % 8;
 
     for (s32 row = 0; row < 3; row++) {
         for (s32 column = 0; column < 3; column++) {

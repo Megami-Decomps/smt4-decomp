@@ -3,13 +3,12 @@
 
 extern "C" {
 
-u8 *gameGetFlagBlock(u32 index);
+u8 *gameGetFlagBlock(void);
 
 /* Tests bit `index` of the flag bitmap returned by gameGetFlagBlock. */
 bool gameFlagIsSet(u32 index)
 {
-    u8 *flags = gameGetFlagBlock(index);
-
+    u8 *flags = gameGetFlagBlock();
     return (flags[index >> 3] & (1 << (index & 7))) != 0;
 }
 

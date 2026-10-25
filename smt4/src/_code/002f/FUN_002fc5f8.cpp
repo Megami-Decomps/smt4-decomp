@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved job/portrait/mode registers, position snapshot load scheduling, and final mode branch polarity differ. */
+/* NON_MATCHING: saved job/portrait/mode registers and final mode branch polarity differ. */
 #include "ui/SpriteTransition.h"
 extern "C" {
 s32 gameFlagIsSet(u32 flag);
@@ -57,8 +57,9 @@ void FUN_002fc5f8(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 th
             SpriteTransitionWork *current = jobGetWork(job);
             // A naturally aligned local view avoids enlarging the byte-aligned padding union.
             struct PositionView { u8 prefix[0x34]; Vec3f position; };
+            Vec3f position = ((const PositionView *)current)->position;
             current->state = 1;
-            current->start = ((const PositionView *)current)->position;
+            current->start = position;
         }
         FUN_002a4e18(&work->target, work->unk08);
         break;

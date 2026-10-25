@@ -1,4 +1,4 @@
-/* NON_MATCHING: loaded-flag store scheduling and magic-comparison registers differ from retail. */
+/* NON_MATCHING: named magic operand restores comparison registers; loaded-flag constant uses r2 instead of retail r3. */
 #include "gamedata/NpcPackage.h"
 #include "addon/aocMain.h"
 
@@ -27,7 +27,8 @@ void FUN_0033f2b8(NpcPackageWork* work, s32 id)
     work->id = -id;
     work->loaded = 1;
     work->header = file;
-    if (file->magic == 0x57444B4E) {
+    u32 magic = file->magic;
+    if (magic == 0x57444B4E) {
         work->primary = reinterpret_cast<NpcPackagePrimaryRecord*>(file + 1);
         work->secondary = reinterpret_cast<NpcPackageSecondaryRecord*>(work->primary + file->primaryCount);
         work->indices = reinterpret_cast<u32*>(work->secondary + file->secondaryCount);

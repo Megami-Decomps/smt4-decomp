@@ -3,11 +3,11 @@
 extern "C" {
 
 extern void statusDownInitializeSkillList(void);
-extern void FUN_002c7ce8(int value);
+extern void statusDownSwitchTab(int value);
 void FUN_002c7cd4(void)
 {
     statusDownInitializeSkillList();
-    FUN_002c7ce8(6);
+    statusDownSwitchTab(6);
 }
 
 } /* extern "C" */

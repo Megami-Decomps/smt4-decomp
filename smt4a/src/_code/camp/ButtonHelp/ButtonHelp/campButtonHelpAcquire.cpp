@@ -55,7 +55,7 @@ void FUN_0025ccc0(u32 job);
 void paramsClearPacket(UiResourceParameters *packet);
 
 void FUN_0014e188(ButtonHelpUnit *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
-void FUN_003872b8(ButtonHelpUnit *sprite, u32 group, u32 image, s32 kind);
+void uiGetLayoutPointDifference(ButtonHelpUnit *sprite, u32 group, u32 image, s32 kind);
 void FUN_00387240(ButtonHelpUnit *sprite, u32 group, s32 arg);
 void spriteSetLayer(ButtonHelpUnit *sprite, u16 layer);
 void spriteSetVisible(ButtonHelpUnit *sprite, u8 visible);
@@ -85,7 +85,7 @@ void campButtonHelpAcquire(void)
                    sKeysThird, sizeof(sKeysThird), NULL, 0, sKeysFifth, sizeof(sKeysFifth));
         for (s32 i = 0; i < 6; i++) {
             FUN_0014e188(&panel->units[i], 10, 3, &panel->packet, 16, 1.0f);
-            FUN_003872b8(&panel->units[i], 10, 17 + i, 3);
+            uiGetLayoutPointDifference(&panel->units[i], 10, 17 + i, 3);
         }
         FUN_0014e188(&panel->selected[0], 10, 0, &panel->packet, 16, 1.0f);
         FUN_0014e188(&panel->selected[1], 10, 1, &panel->packet, 16, 1.0f);

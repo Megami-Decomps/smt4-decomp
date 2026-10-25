@@ -25,7 +25,7 @@ void FUN_002c58c8(s32 table, s32 node);
 s32 FUN_001dfc64(u32 process);
 void FUN_002db92c(u32 process);
 u32 asdProcessCreateSimple(const s8 *name, s32 group, u16 firstDelay, u16 lastDelay,
-    AsdProcUpdateFunc update, AsdProcFunc end, void *work);
+    AsdProcUpdateFunc update, AsdProcFunc end, u32 work);
 
 void FUN_0031bc80(u32 npc, s32 position, u32 variant)
 {
@@ -75,6 +75,6 @@ void FUN_0031bc80(u32 npc, s32 position, u32 variant)
             FUN_002c58c8(work->textureTable, work->textureNode);
     }
     work->speed = 0.3f;
-    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, work);
+    asdProcessCreateSimple(DAT_00403570, 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));
 }
 }

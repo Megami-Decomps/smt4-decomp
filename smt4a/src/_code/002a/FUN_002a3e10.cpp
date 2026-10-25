@@ -1,5 +1,6 @@
 /* NON_MATCHING: The movie/seen-flag registers are reversed, and completion clears the job in an outlined branch instead of a predicated store. */
 #include "event/eventCommand.h"
+#include "gamedata/GameFlags.h"
 
 namespace {
 struct MovieEventGlobals {
@@ -15,7 +16,7 @@ void FUN_00342334(s32 enabled);
 void commonBgStopAndResetFade(void);
 u32 gameFlagIsSet(s32 flag);
 u32 mobiclipProcessCreate(s32 movie, u32 alreadySeen);
-void gameFlagSetValue(s32 flag, s32 value, s32 notify);
+
 s32 jobIsValid(u32 job);
 
 /* Starts the selected movie once, marks it seen, and waits until its process has finished. */

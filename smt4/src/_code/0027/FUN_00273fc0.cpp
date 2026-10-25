@@ -20,7 +20,7 @@ int FUN_0027fca0(unsigned int);
 int modelSelectSecondaryMotion(...);
 int FUN_0028c618(...);
 int nodeSetTranslation(...);
-int FUN_00293e08(int);
+int nodeGroupSetScale(int);
 int nodeOwnerSetTranslations(int, int *);
 int playerModelLoadPart(...);
 int FUN_00297684(int);
@@ -57,7 +57,7 @@ extern int asdMdlManagerCreateFromSource(unsigned int, unsigned int, unsigned in
 /* Supplied declaration required: modelSelectSecondaryMotion. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_00293e08. */
+/* Supplied declaration required: nodeGroupSetScale. */
 /* Supplied declaration required: nodeOwnerSetTranslations. */
 /* Supplied declaration required: playerModelLoadPart. */
 /* Supplied declaration required: FUN_00297684. */
@@ -147,7 +147,7 @@ void FUN_00273fc0(void)
     nodeOwnerSetTranslations(g_lmapScene[0x65],&temp_v3);
     FUN_003351e0(g_lmapScene[0x65]);
     piVar7 = (int *)0x3f800000;
-    FUN_00293e08(g_lmapScene[0x65]);
+    nodeGroupSetScale(g_lmapScene[0x65]);
   }
   temp_v1 = 0;
   if ((char)g_lmapScene[0x17] == '\0') {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: default look-at address anchoring retains an extra register; process-argument stores differ. */
 #include "gfx/CameraManager.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern const char DAT_0053d0a0[];
@@ -11,9 +12,9 @@ void sysMemClear(void *, u32);
 void asdCameraInitializeDefaults(ManagedCamera *, s32);
 void FUN_0014f0dc(ManagedCamera *, const CameraDefaultVector *, const CameraDefaultVector *, const CameraDefaultVector *);
 void FUN_001523b8(ManagedCamera *, s32, f32, f32, f32, f32);
-void asdCameraFreeWork(void);
-void asdCameraTableRelease(void);
-u32 asdProcessCreateSimple(const char *, u32, s32, s32, void (*)(void), void (*)(void), CameraManagerWork *);
+void asdCameraFreeWork(u32 process);
+s32 asdCameraTableRelease(u32 process);
+u32 asdProcessCreateSimple(const char *, s32, u32, AsdProcFunc, AsdProcUpdateFunc, AsdProcFunc, void *);
 
 /* Initialize the top and bottom screen cameras and start their manager process. */
 void FUN_0013a48c(u32 priority)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 115 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: indexed first-stack push and three-byte label restored; set/pop state registers, glyph coordinates and blink remainder allocation still differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 
@@ -58,14 +58,16 @@ void FUN_00485718(SlotPicker *picker)
 
     FUN_00157558(g_renderCtx);
     FUN_00183bb0();
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
+    RenderCtxA *context = g_renderCtx;
+    s32 state = FUN_001692ac(1, 0);
+    renderStackPushCountedDirect(&context->stackA, state);
     FUN_0016c4b8(g_renderCtx, 0);
     FUN_001835b4(2, 0x23, 0, parallax, 0, 0xB);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     FUN_001835b4(2, 0x23, 1, parallax, 0, 0xB);
     FUN_001835b4(2, 0x23, 2, parallax, 0, 0xB);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 7, 0));
-    char label[4] = {0, 0, 0, 0};
+    char label[3] = {0, 0, 0};
 
     for (s32 i = 0; i < 8; i++) {
         SlotLayout *slot = FUN_001834a4(0x23, i + 8);

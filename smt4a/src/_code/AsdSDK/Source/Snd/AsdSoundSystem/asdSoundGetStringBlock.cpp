@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail reads the string block back through a pointer computed before the branch (the globals are one data block of this unit). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -22,15 +21,15 @@ extern void FUN_0015e978(void *reader, void *stringBlock, u32 size);
 void *asdSoundGetStringBlock(void)
 {
     AsdSoundArchive *archive = &g_asdSoundSystem;
+    s32 available = nw_snd_SoundArchive_IsAvailable(archive->reader);
     void **stringBlock = &archive->stringBlock;
+    if (!available)
+        return archive->stringBlock;
+    u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(archive->fileHeader);
 
-    if (nw_snd_SoundArchive_IsAvailable(archive->reader)) {
-        u32 size = nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(archive->fileHeader);
-
-        asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 1103);
-        *stringBlock = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
-        FUN_0015e978(archive->reader, *stringBlock, size);
-    }
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp", 1103);
+    archive->stringBlock = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
+    FUN_0015e978(archive->reader, archive->stringBlock, size);
     return *stringBlock;
 }
 

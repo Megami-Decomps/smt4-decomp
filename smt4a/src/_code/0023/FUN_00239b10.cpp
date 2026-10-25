@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation (retail keeps the save block in sl and recomputes the 0x21e14 float address instead of holding it) */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -31,7 +32,7 @@ void asdMemFree(void *p);
 void *FUN_003fd478(void);
 void partyCopyRecord100(void *record);
 s32 gameFlagIsSet(u32 id);
-void gameFlagSetValue(u32 id, s32 value, s32 arg2);
+
 void __aeabi_memcpy4(void *dst, void *src, u32 size);
 
 /* Copies the work block over the save data's game data, keeping the party record and the

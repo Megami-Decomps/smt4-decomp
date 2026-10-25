@@ -1,4 +1,5 @@
 #include "map/lmapMain.h"
+#include "gamedata/GameFlags.h"
 #include "script/scrScriptProcess.h"
 struct ScriptState;
 /* The script fields are beyond the shared map-state prefix. */
@@ -23,7 +24,7 @@ void byteTableASetValue3(u32 value);
 s32 FUN_00162ea4(void);
 void FUN_003d54f8(s32 display, s32 mode);
 u32 scrRunOpcodesStub(ScriptState *state);
-void gameFlagSetValue(u32 flag, s32 value, s32 persistent);
+
 void messageSlotSet(s32 slot);
 void scrScriptProcessDestroy(ScriptResource *script);
 void asdMemFree(void *memory);

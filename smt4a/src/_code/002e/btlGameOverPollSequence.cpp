@@ -7,7 +7,7 @@ s32 FUN_004cef24(BtlGameOverSequence *sequence);
 u32 btlGameOverRunEyeSequence(BtlGameOverSequence *sequence);
 
 /* Dispatches the game-over sequence and reports completion after its owner job stops. */
-s32 btlGameOverPollSequence(void)
+s32 btlGameOverPollSequence(u32 job)
 {
     BtlGameOverSequence *sequence = DAT_0057f678;
     if (sequence == NULL) {

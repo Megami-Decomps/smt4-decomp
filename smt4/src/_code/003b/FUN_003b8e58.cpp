@@ -92,7 +92,7 @@ void buttonHelpSetPreset(s32 preset);
 void textFormatBuffer(u8 buffer[36], const char *format, const char *text);
 void modelLoadBamAndEnable(NodeEnableOwner *model, const char *path);
 s32 scrRunOpcodesStub(u32 script);
-s32 FUN_0022b14c(void *block);
+s32 listUpdateRevealTransition(void *block);
 GateEntry *FUN_0022b238(void *block, s32 index);
 void contentTransitionApplyCommand(ContentTransition *transition, const void *command);
 
@@ -216,14 +216,14 @@ void FUN_003b8e58(GateScene *scene)
         return;
 
     case GATE_STEP_WAIT_CLOSE_EXIT:
-        if (FUN_0022b14c(scene->objBlock) == 0)
+        if (listUpdateRevealTransition(scene->objBlock) == 0)
             return;
         messageStatesSetFirst(1);
         gateEnterDialog(scene);
         return;
 
     case GATE_STEP_WAIT_CLOSE:
-        if (FUN_0022b14c(scene->objBlock) == 0)
+        if (listUpdateRevealTransition(scene->objBlock) == 0)
             return;
         gateEnterDialog(scene);
         return;

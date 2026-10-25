@@ -4,7 +4,13 @@
 // Observed prefix of the panel owning the packed numeric value.
 struct PackedNumberPanelView {
     u8 prefix[0x7E3C];
-    u32 packedValue;
+    union {
+        u32 packedValue;
+        struct {
+            u32 lowBits : 12;
+            u32 number : 20;
+        } fields;
+    };
 };
 typedef char PackedNumberPanelValueOffsetCheck[offsetof(PackedNumberPanelView, packedValue) == 0x7E3C ? 1 : -1];
 
@@ -25,7 +31,7 @@ void FUN_004b40f4(PackedNumberPanelView *panel, s32 x, s32 y)
     FUN_001835b4(2, 0x1D, 0xC4, anchor->x + x, anchor->y + y, 0x6F);
     FUN_001835b4(2, 0x1D, 0xC5, anchor->x + x, anchor->y + y, 0x74);
     FUN_001835b4(2, 0x1D, 0xC6, anchor->x + x, anchor->y + y, 0x79);
-    u32 value = panel->packedValue >> 12;
+    u32 value = panel->fields.number;
     if (value > 9999)
         value = 9999;
     const SpriteInfo *number = FUN_001834a4(0x1D, 0xCB);

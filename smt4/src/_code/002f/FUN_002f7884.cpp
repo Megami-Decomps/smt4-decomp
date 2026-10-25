@@ -1,5 +1,5 @@
 #include "battle/btlScript.h"
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -13,7 +13,6 @@ typedef struct MainState {
 } MainState;
 
 s32 scrGetArg(u32 index);
-u32 btlUnitGet(u32 unit);
 MainState *btlGetMainState(void);
 int btlReflectCreateKind2d(s32 a, u32 caster, Unit *target, s32 b);
 
@@ -21,7 +20,7 @@ int btlReflectCreateKind2d(s32 a, u32 caster, Unit *target, s32 b);
 u32 FUN_002f7884(void)
 {
     s32 index = scrGetArg(0);
-    u32 caster = btlUnitGet(g_btlScriptUnit);
+    u32 caster = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
 
     btlReflectCreateKind2d(0, caster, &btlGetMainState()->units[index], 0);
     return 1;

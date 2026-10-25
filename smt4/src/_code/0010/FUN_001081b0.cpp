@@ -26,9 +26,9 @@ void FUN_002c39a4(Screen2c39a4 *screen);
 void FUN_00117da4(s32 mode);
 
 // Refresh the title layout and process the prepared frame surface once its gates permit.
-u32 FUN_001081b0(void)
+s32 FUN_001081b0(u32 job)
 {
-    FrameCompletionView *work = reinterpret_cast<FrameCompletionView *>(jobGetWork());
+    FrameCompletionView *work = reinterpret_cast<FrameCompletionView *>(jobGetWork(job));
     const FrameReadinessView &flags = work->flags;
     if (flags.active && flags.ready && flags.surfaceReady &&
         work->surface != NULL && !work->blocked) {

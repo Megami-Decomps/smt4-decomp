@@ -1,4 +1,4 @@
-/* NON_MATCHING: input/zero VFP allocation saves d8-d10 rather than d8-d11, and the region-table base is reloaded; a lower optimization level may preserve retail's live ranges. */
+/* NON_MATCHING: retained region-table base recovered; input/zero VFP grouping and region/edge index registers differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 
 struct RegionEdge {
@@ -30,10 +30,11 @@ f32 mathVec3Dot(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 // Select the containing map region independently for ordinary and alternate kinds.
 void mapSelectContainingRegions(RegionPoint point)
 {
+    MapRegionTable *table = &DAT_004c14a0;
     g_gameState.overrideKinds[0] = -1;
     g_gameState.overrideKinds[2] = -1;
-    for (s32 index = 0; index < DAT_004c14a0.count; ++index) {
-        MapRegion *region = &DAT_004c14a0.regions[index];
+    for (s32 index = 0; index < table->count; ++index) {
+        MapRegion *region = &table->regions[index];
         MapVector direction;
         MapVector normal;
         for (s32 edge = 0; edge < 4; ++edge) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the job's sprite with a grey level and alpha (special sprite ids draw twice, the second pass additive); written from the decompilation, render-stack push scheduling and the float to byte conversions not compared with retail */
 #include "camp/RenderCtx.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 struct SpriteJobWork {
     /* 0x00 */ s32 spriteId;
@@ -10,7 +11,8 @@ struct SpriteJobWork {
     /* 0x15 */ u8 prepared;
     /* 0x16 */ u8 visible;
     /* 0x17 */ u8 unk17;
-    /* 0x18 */ s32 origin[7];   /* origin handed to the draw calls */
+    /* 0x18 */ SpriteDrawVector3 origin;
+    /* 0x24 */ u8 unk24[0x10];
     /* 0x34 */ s32 sprite;
     /* 0x38 */ u8 unk38[8];
     /* 0x40 */ s32 frame;
@@ -27,7 +29,6 @@ SpriteJobWork *jobGetWork(void);
 void FUN_00230038(SpriteJobWork *work);
 s32 FUN_001692ac(u32 a, u32 b);
 s32 FUN_00387580(u32 mode);
-void spriteDrawWithOrigin(s32 sprite, s32 layer, s32 *origin, u32 color, s32 flag, s32 mode);
 void FUN_003fba4c(s32 sprite, s32 layer, s32 frame, s32 *origin, u32 color, s32 mode);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -56,11 +57,14 @@ u32 FUN_00289f10(void)
         bool twoPass = work->spriteId == SPRITE_ID_FADE_A || work->spriteId == SPRITE_ID_FADE_B
                        || work->spriteId == SPRITE_ID_FADE_C;
         if (!twoPass) {
-            FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, work->origin,
+            FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, (s32 *)&work->origin,
                          spriteColorPack(work->level, work->alpha), 0);
         } else {
-            spriteDrawWithOrigin(work->sprite, 0, work->origin, spriteColorPack(work->level, work->alpha), 1, 0);
-            FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, work->origin,
+            SpriteDrawPlacementOptions options = {1, 0};
+            spriteDrawWithOrigin((SpriteDrawOwner *)work->sprite, 0, &work->origin,
+                                 spriteColorPack(work->level, work->alpha), options,
+                                 (f32)work->frame, 1.0f);
+            FUN_003fba4c(work->sprite, 0, (s32)(f32)work->frame, (s32 *)&work->origin,
                          spriteColorPack(work->level, work->alpha), 2);
         }
 

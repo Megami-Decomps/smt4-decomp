@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; first wrap test branches BNE/add then B/wrap instead of retail BEQ/wrap then B/add. */
+/* NON_MATCHING: first wrap test branches BNE/add then B/wrap instead of retail BEQ/wrap then B/add. */
 #include "shard/W6_W6Match7_NumericStepper.h"
 
 extern "C" {

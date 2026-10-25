@@ -1,5 +1,5 @@
 /* NON_MATCHING: shared phase helpers outline differently, state-null checks merge, and round-reset/effect aggregate scheduling differs from retail. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 #include <stddef.h>
 
 struct BattleTaskActor {
@@ -136,7 +136,7 @@ s32 spriteTablesLoadedEnough(void *ui);
 s32 jyoucyuEnsureResidentEntry();
 void FUN_0027e760(BattleTaskGate *gate);
 s32 btlEncountCheck(BattleTaskContext *work);
-s32 FUN_0027e6f4(BattleTaskContext *work, u32 kind);
+s32 btlFindNthActiveSpecialEntry(BattleTaskContext *work, u32 kind);
 void *dataTableFileGetTable(void *file, u32 table);
 BattleTaskOpening *dataTableGetEntries(void *table);
 s32 dataTableGetCount(void *table);
@@ -157,7 +157,6 @@ s32 battleUiIsFadeAndFieldReady(void *ui);
 s32 btlUiIsWidgetOutsideClosingState(void *ui);
 s32 btlUiIsIdle(void *ui);
 void FUN_0027df30(u32 first, u32 second, BattleTaskActor *actor, u32 flags, BattleTaskEffect effect);
-BattleTaskUnit *btlUnitGet(void *manager);
 void btlAiScriptIsFinished(void *script);
 s32 FUN_0027de98(BattleTaskContext *work);
 s32 btlUiIsIdleForCommand(void *ui);
@@ -168,7 +167,7 @@ void memClear(void *memory, u32 size);
 void wordTripleClear(u32 *values);
 void FUN_00294f64(void *resource);
 void listBoxClearSelectionAndReset(void *event);
-void FUN_0027de24(void *event);
+void modelManagerReleaseSlots(void *event);
 void modelSetResetSlots(void *event);
 void btlEventResetSlots(void *event);
 void mathVectorClear(void *main);
@@ -227,7 +226,7 @@ static inline bool battleTaskUiReady()
 
 static inline BattleTaskOpening *findBattleTaskOpening(BattleTaskContext *work)
 {
-    s16 opening = work->reserves[FUN_0027e6f4(work, 1)].opening;
+    s16 opening = work->reserves[btlFindNthActiveSpecialEntry(work, 1)].opening;
     if (work->openingData) {
         void *table = dataTableFileGetTable(work->openingData, 0);
         BattleTaskOpening *entries = dataTableGetEntries(table);
@@ -286,7 +285,7 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
         }
     }
     listBoxClearSelectionAndReset(DAT_00435d18);
-    FUN_0027de24(DAT_00435d18);
+    modelManagerReleaseSlots(DAT_00435d18);
     modelSetResetSlots(DAT_00435d18);
     btlEventResetSlots(DAT_00435d18);
     mathVectorClear(g_btlMain);
@@ -305,7 +304,7 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
     FUN_00338cfc(work, 1);
     if (!(work->parameters.mode.flags & 8))
         FUN_0027dbc8(3, 1);
-    BattleTaskUnit *unit = btlUnitGet(g_btlScriptUnit);
+    BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     if (unit && unit->stats) {
         unit->stats->first = 0;
         unit->stats->second = 0;
@@ -447,7 +446,7 @@ extern "C" s32 battleMainProcessUpdate()
             break;
         if (work->special == 1)
             setBattleTaskState(5);
-        else if (FUN_0027e6f4(work, 1) < 0 || (work->flags & 2))
+        else if (btlFindNthActiveSpecialEntry(work, 1) < 0 || (work->flags & 2))
             setBattleTaskState(7);
         else
             setBattleTaskState(findBattleTaskOpening(work) ? 6 : 7);
@@ -460,17 +459,17 @@ extern "C" s32 battleMainProcessUpdate()
                     FUN_0027e5e4(actor);
             }
         }
-        if (FUN_0027e6f4(work, 1) < 0 || (work->flags & 2))
+        if (btlFindNthActiveSpecialEntry(work, 1) < 0 || (work->flags & 2))
             setBattleTaskState(7);
         else
             setBattleTaskState(findBattleTaskOpening(work) ? 6 : 7);
         break;
     case 6:
-        if (work->timer == 30 && FUN_0027e6f4(work, 1) >= 0 && !(work->flags & 2)) {
+        if (work->timer == 30 && btlFindNthActiveSpecialEntry(work, 1) >= 0 && !(work->flags & 2)) {
             scrScriptProcessStartEntry(work->openingScript, work->special == 1 ? 3 : 0);
             buttonHelpSetPreset(0x90);
         }
-        if (work->timer < 31 || FUN_0027e6f4(work, 1) < 0 || (work->flags & 2) ||
+        if (work->timer < 31 || btlFindNthActiveSpecialEntry(work, 1) < 0 || (work->flags & 2) ||
             scrRunOpcodesStub(work->openingScript) != 2)
             break;
         if (!btlEventSelectTrigger(g_btlEvent, 0, -1u, 0)) {
@@ -554,15 +553,15 @@ extern "C" s32 battleMainProcessUpdate()
             break;
         }
         {
-            u8 mode = btlUnitGet(g_btlScriptUnit)->mode;
+            u8 mode = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->mode;
             if (mode > 0x21)
                 setBattleTaskState(15);
             if (mode == 1) {
-                BattleTaskUnit *unit = btlUnitGet(g_btlScriptUnit);
+                BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
                 if (!unit || !(unit->flags & 0x1080))
                     break;
             }
-            BattleTaskUnit *unit = btlUnitGet(g_btlScriptUnit);
+            BattleTaskUnit *unit = reinterpret_cast<BattleTaskUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
             if (unit && (unit->flags & 0x1080))
                 break;
             if (mode == 2)

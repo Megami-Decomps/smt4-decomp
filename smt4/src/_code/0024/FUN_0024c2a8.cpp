@@ -1,4 +1,4 @@
-/* NON_MATCHING: the byte is addressed as base + 0xcf0 with the shifted index as a register offset on both ldrb and strb; retail writes the sum back (ldrb [r0, r4, lsr #3]!) and stores through it. */
+/* NON_MATCHING: saved group/set registers r5/r6 are exchanged; byte-address writeback matches retail. */
 #include "common.h"
 
 extern "C" {

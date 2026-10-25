@@ -15,7 +15,7 @@ typedef struct Menu4B {
     /* 0xA872 */ s16 page;
 } Menu4B;
 
-extern void FUN_004cf8dc(u8 *block, s32 page);
+extern void entryDispatchUpdate(u8 *block, s32 page);
 extern u32 vec2GetXInt(u8 *entry);
 extern u32 vec2GetYInt(u8 *entry);
 extern void pointConvertToFloat(u8 *block, u32 a, u32 b);
@@ -38,7 +38,7 @@ void menu4BUpdate(Menu4B *obj)
     u8 *entry;
     s32 page;
 
-    FUN_004cf8dc(obj->block0DC, obj->page);
+    entryDispatchUpdate(obj->block0DC, obj->page);
     entry = (u8 *)obj + obj->page * 0x8C + 0xFC;
     pointConvertToFloat(obj->blockC8, vec2GetXInt(entry), vec2GetYInt(entry));
     if (gameGetMode() != 0 && statusDownGetFlag() == 0) {

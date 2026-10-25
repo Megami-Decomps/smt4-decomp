@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail retains side-effect-free error-category checks and linker-NOP hints omitted by this readable control flow. */
 /* Creates external save data using an icon file, then mounts it and records the active state. */
+#include "sys/ProcessResult.h"
 #include "nn/Result.h"
 
 extern "C" {
 void *fileLoadSync(const char *path, u32 *size, u32 flags);
 s32 FUN_00354e48(u64 id, const void *icon, u32 size, u32 files, u32 directories);
-void FUN_002c3510(u32 result);
 u32 FUN_002c3520(void);
 s32 FUN_00354dac(u32 handle, u64 id);
 extern u8 g_appletBusyFlag;

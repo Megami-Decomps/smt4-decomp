@@ -18,7 +18,7 @@ struct BibleSelectionTarget {
 };
 
 extern "C" {
-s32 FUN_004cf8dc(void *, s32);
+s32 entryDispatchUpdate(void *, s32);
 s32 vec2GetXInt(const Vec2Int *);
 s32 vec2GetYInt(const Vec2Int *);
 void pointConvertToFloat(SelectionRectangle *, s32, s32);
@@ -40,7 +40,7 @@ void FUN_004a15a0(Obj55c8d0 *menu)
     };
     StateView *state = reinterpret_cast<StateView *>(menu);
     SelectionView *selection = reinterpret_cast<SelectionView *>(menu);
-    s32 changed = FUN_004cf8dc(menu->unk0dc, selection->selectedIndex);
+    s32 changed = entryDispatchUpdate(menu->unk0dc, selection->selectedIndex);
     const Vec2Int *position = &selection->entries[selection->selectedIndex].position;
     s32 y = vec2GetYInt(position);
     s32 x = vec2GetXInt(position);

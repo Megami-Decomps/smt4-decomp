@@ -12,12 +12,12 @@ int FUN_0019a46c(...);
 int FUN_001a1564(int, int, int);
 int libc_strcpy(...);
 int asdOperatorDeleteB(...);
-int deletingDtor_002e56ec(int, unsigned char *);
+int __aeabi_vec_delete(int, unsigned char *);
 int sysMemClear(...);
 int wstrlenU16(...);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
-int FUN_0037a728(...);
+int textExpandSingleByteGlyphs(...);
 int FUN_00426eb8(...);
 int FUN_00473c5c(...);
 int FUN_004749a0(...);
@@ -83,12 +83,12 @@ extern unsigned char objGetFlagBit1(int);
 extern int legacyResourceIdRemap(int);
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: asdOperatorDeleteB. */
-/* Supplied declaration required: deletingDtor_002e56ec. */
+/* Supplied declaration required: __aeabi_vec_delete. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: wstrlenU16. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: asdOperatorNewE. */
-/* Supplied declaration required: FUN_0037a728. */
+/* Supplied declaration required: textExpandSingleByteGlyphs. */
 /* Supplied declaration required: FUN_00426eb8. */
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
@@ -250,7 +250,7 @@ int FUN_00474d0c(int param_1)
   puVar13 = (unsigned int *)(g_aocMain + 0x678);
   temp_v51 = param_1;
   if (*(int *)(g_aocMain + 0x678) != 0) {
-    deletingDtor_002e56ec(*(int *)(g_aocMain + 0x678),&LAB_0047d8e8);
+    __aeabi_vec_delete(*(int *)(g_aocMain + 0x678),&LAB_0047d8e8);
     *puVar13 = 0;
   }
   temp_v9 = *(int *)(temp_v8 + 0x67c) + 1;
@@ -400,7 +400,7 @@ int FUN_00474d0c(int param_1)
           } while (temp_v9 != 0);
         }
         FUN_00102bbc(temp_v4 + 0x180,temp_v49,0x800);
-        FUN_0037a728(temp_v4 + 0x180,temp_v49,0x7fe);
+        textExpandSingleByteGlyphs(temp_v4 + 0x180,temp_v49,0x7fe);
         libc_strcpy(temp_v4 + 0x180,temp_v49);
         temp_v9 = wstrlenU16(temp_v4 + 0x180);
         temp_v5 = 0;

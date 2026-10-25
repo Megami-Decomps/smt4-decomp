@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004e20c0` (_code @ 0x4e20c0, 0x3590 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
 #include "battle/BattleCommandValue.h"
 
@@ -37,7 +38,6 @@ int __aeabi_memcpy4(...);
 
 int FUN_003e8bb0(...);
 int FUN_003f21ec(void);
-int gameFlagSetValue(...);
 int FUN_004c2ca8(...);
 int FUN_004c34e0(...);
 int btlFindEntryValue(...);
@@ -248,7 +248,6 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f21ec. */
 /* Supplied declaration required: FUN_003f2aac. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_004bf348. */
 /* Supplied declaration required: FUN_004bfa30. */
 /* Supplied declaration required: FUN_004bfcfc. */
@@ -643,7 +642,7 @@ LAB_004e2728:
       temp_v13 = *param_1;
       FUN_003f21ec();
       if ((temp_v13 != 0) && (temp_v5 = gameFlagIsSet(0x4c6), temp_v5 == 0)) {
-        gameFlagSetValue(0x4c6,1);
+        gameFlagSetValue(0x4c6, 1, 1);
       }
     }
   }
@@ -1138,7 +1137,7 @@ LAB_004e34b8:
         btlReflectInitKind23(temp_v5 + temp_v85 + temp_v12,param_2,0x33,(int)temp_v43,param_2[8]);
         temp_v5 = gameFlagIsSet(0xbb);
         if (temp_v5 != 0) {
-          gameFlagSetValue(0xb9,1);
+          gameFlagSetValue(0xb9, 1, 1);
         }
       }
       *(unsigned int *)(*(int *)(*param_1 + 0x1ed4) + temp_v87) =
@@ -1890,7 +1889,7 @@ LAB_004e5308:
   if (((DAT_00571284 & *(unsigned int *)(*param_1 + 0x45a4)) != 0 ||
        (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571280) != 0) &&
      (temp_v12 = gameFlagIsSet(0xba), temp_v12 != 0)) {
-    gameFlagSetValue(0xb8,1);
+    gameFlagSetValue(0xb8, 1, 1);
   }
   if (temp_v107 != 0) {
     if (temp_v107 != 1) {

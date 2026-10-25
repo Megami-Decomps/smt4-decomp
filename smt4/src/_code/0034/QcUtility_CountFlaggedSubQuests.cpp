@@ -1,10 +1,15 @@
-/* NON_MATCHING: current C compilation omits the retail ARM hint NOP after each record lookup; the original source/inlining shape remains unrecovered. */
 #include "common.h"
 
 struct QuestRecord;
 struct QuestFlagEntry {
     u8 flags;     // 0x00
     u8 unk01[3];  // 0x01
+
+    bool isFlagged() const
+    {
+        bool flagged = (flags & 8) >> 3;
+        return flagged;
+    }
 };
 struct QuestFlagState {
     u8 unk000[0x200];       // 0x000
@@ -22,7 +27,7 @@ s32 QcUtility_CountFlaggedSubQuests(void)
     for (s32 id = 100; id < 400; ++id) {
         if (dataTable1bOr1cGetRecord(static_cast<u16>(id)) != NULL) {
             u16 index = static_cast<u16>(id);
-            if ((gameGetFlagBlock()->entries[index].flags & 8) != 0) {
+            if (gameGetFlagBlock()->entries[index].isFlagged()) {
                 ++count;
             }
         }

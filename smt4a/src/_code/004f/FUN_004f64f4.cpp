@@ -13,7 +13,8 @@ struct VersionLoadSet {
 };
 
 extern "C" {
-void btlGetMainState(void);
+struct BtlMainStateA;
+BtlMainStateA *btlGetMainState(void);
 s32 btlScriptUnitHasFlags(void);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const char *);

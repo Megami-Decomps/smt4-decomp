@@ -1,4 +1,5 @@
 /* NON_MATCHING: compiler merges the two access-mode branches; retail duplicates the bookkeeping reset and open call. */
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 struct ArchiveOpenWork {
@@ -13,7 +14,6 @@ struct ArchiveOpenWork {
 extern "C" {
 void FUN_002e0e04(const char *path, void *convertedPath, u32 mode);
 s32 FUN_001883b0(void *archive, void *convertedPath, u32 mode);
-void FUN_0013ebd8(u32 result);
 
 // Convert a path, reset archive bookkeeping and open it using the requested access mode.
 s32 FUN_002bee0c(ArchiveOpenWork *work, const char *path, s32 mode)

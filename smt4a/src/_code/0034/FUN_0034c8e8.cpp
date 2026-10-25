@@ -1,5 +1,5 @@
-/* NON_MATCHING: the two flag-bit clears at 0x36 are merged into one `bic r2, r3, #3`; retail keeps them as `bic r3, r3, #1` then `and r2, r3, #253`. */
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 
@@ -18,12 +18,14 @@ typedef struct Member {
     /* 0x34 */ u8 unk34;
     /* 0x35 */ s8 unk35;
     /* 0x36 */ u8 flagA : 1;
-    /*      */ u8 flagB : 1;
+    /*      */ s8 flagB : 1;
     /*      */ u8 flagsRest : 6;
     /* 0x37 */ u8 unk37;
     /* 0x38 */ u8 unk38[0xB];
     /* 0x43 */ u8 unk43;
 } Member;
+typedef char MemberResetLayoutCheck[offsetof(Member, unk37) == 0x37 &&
+    offsetof(Member, id2) == 0x2E && sizeof(Member) == 0x44 ? 1 : -1];
 
 Member *FUN_0026140c(void);
 

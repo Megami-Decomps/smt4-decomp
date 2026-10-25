@@ -1,4 +1,5 @@
 /* NON_MATCHING: success value: retail builds it in r0 then copies it to r4 (`mov r0, #0; mov r4, r0`); built `mov r4, #0; mov r0, r4`. */
+#include "sys/ProcessResult.h"
 #include "nn/Result.h"
 
 extern "C" {
@@ -19,7 +20,6 @@ typedef struct FileObj {
     /* 0x8 */ u32 handle;
 } FileObj;
 
-extern void FUN_002c3510(u32 result);
 extern void asdFatalError(void);
 extern void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 

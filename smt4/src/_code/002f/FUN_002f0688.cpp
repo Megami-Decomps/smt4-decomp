@@ -1,5 +1,5 @@
 /* NON_MATCHING: retail keeps the constant 1 in r5 across the scrSetResult call (shared by the shift and the return value); built rematerialises it */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -15,7 +15,6 @@ typedef struct BtlUnit002f0688 {
 
 extern u32 g_btlScriptUnit;
 
-BtlUnit002f0688 *btlUnitGet(u32 id);
 u32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
 
@@ -23,7 +22,7 @@ void scrSetResult(s32 value);
 u32 FUN_002f0688(void)
 {
     u32 bit = scrGetArg(0);
-    UnitStats002f0688 *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    UnitStats002f0688 *stats = reinterpret_cast<BtlUnit002f0688 *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult((stats->flags & (1 << bit)) != 0);
     return 1;

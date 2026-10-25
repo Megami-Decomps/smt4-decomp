@@ -5,7 +5,7 @@
 
 extern "C" {
 BtlMainStateA* btlGetMainState(void);
-ReflectAction* FUN_004102d8(ReflectContext* context, s32 actor, s32 secondary, u32 options);
+
 
 // Queue depth-dependent reflection actions for active roster entries outside the source group.
 u32 FUN_004fe618(s32 actor, u32 options, u32 value, const BattleRosterRecordA* source)
@@ -18,14 +18,14 @@ u32 FUN_004fe618(s32 actor, u32 options, u32 value, const BattleRosterRecordA* s
             if (source->reflection.group != target->reflection.group ||
                 source->reflection.group < 0 || target->reflection.group < 0) {
                 if (target->motion.position[2] > source->motion.position[2]) {
-                    ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+                    ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
                     action->flagView.flags |= 4;
                     action->target = (u32)target;
                     action->kind = 0x2C;
                     action->value = value;
                     action->parameter = 0;
                 } else {
-                    ReflectAction* action = FUN_004102d8(g_btlActionReflect, (s16)actor, 0, options);
+                    ReflectAction* action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
                     action->flagView.flags |= 4;
                     action->target = (u32)target;
                     action->kind = 0x2B;

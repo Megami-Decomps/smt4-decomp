@@ -1,4 +1,4 @@
-/* NON_MATCHING: range bank load is not predicated; halfword-return tail and bit-mask register differ. */
+/* NON_MATCHING: halfword conditional-load/zero order differs; bit read folds ADD/LDRB into indexed LDRB. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
@@ -9,8 +9,8 @@ FlagValueStorage *flagValueGetStorage(void);
 u16 FUN_001ba3d4(s32 id)
 {
     const FlagValueRange *range = FUN_0019c06c(id);
+    u8 bank = range ? range->bank : 0;
     if (range) {
-        u8 bank = range->bank;
         FlagValueStorage *storage = flagValueGetStorage();
         u8 *data = reinterpret_cast<u8 *>(storage);
         switch (bank) {
@@ -29,10 +29,12 @@ u16 FUN_001ba3d4(s32 id)
         default: data = NULL; break;
         }
         id -= range->firstId;
-        if (range->width == 0)
-            return (data[id / 8] & (1 << (id % 8))) != 0;
-        if (range->width == 1)
-            return reinterpret_cast<u16 *>(data)[id];
+        if (range->width == 0) {
+            const u8 byte = data[id / 8];
+            const s32 bit = id % 8;
+            return (byte & (1u << bit)) != 0;
+        }
+        return range->width != 1 ? 0 : reinterpret_cast<u16 *>(data)[id];
     }
     return 0;
 }

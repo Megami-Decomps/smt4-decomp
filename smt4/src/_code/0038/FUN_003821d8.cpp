@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003821d8` (_code @ 0x3821d8, 0x694 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ int FUN_00250d84(int, unsigned int);
 int FUN_00269dc8(void);
 int buttonHelpResetSlots(void);
 int FUN_00287528(int);
-int gameFlagSetValue(int, int);
 int FUN_0028eeb8(int);
 int FUN_00296934(void);
 int scrResultStopJobAndReleaseUi(void);
@@ -63,7 +63,6 @@ extern int FUN_0026b564(void);
 extern int screenFadeIsBusy(void);
 /* Supplied declaration required: FUN_00287528. */
 extern int FUN_00287894(unsigned short);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_0028eeb8. */
 /* Supplied declaration required: FUN_00296934. */
 extern int idIsAtLeast350(unsigned int);
@@ -298,7 +297,7 @@ LAB_003822fc:
     temp_v2 = questIsCompleted(0x6f);
     if (((temp_v2 != 0) && (temp_v2 = questIsCompleted(0xd4), temp_v2 != 0)) &&
        (temp_v2 = questIsCompleted(0xd5), temp_v2 != 0)) {
-      gameFlagSetValue(0x669,1);
+      gameFlagSetValue(0x669, 1, 1);
     }
     FUN_00287528(0);
     temp_v4 = 0;

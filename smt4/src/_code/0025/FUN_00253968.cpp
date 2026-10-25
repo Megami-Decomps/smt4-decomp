@@ -1,6 +1,7 @@
-/* NON_MATCHING: control flow and instructions match retail; register assignment differs (retail keeps the 0x49FA1C block in r5, map block r6, player r7, game state r8). */
+/* NON_MATCHING: map-block and player pointers occupy opposite callee-saved registers; trigger owner and marker stores now match. */
 #include "map/mapDepart.h"
 #include "map/mapEnemy.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 /* The map block's flag at +0xDC0 gates the approach-marker check. */
 struct MapBlockView {
@@ -43,7 +44,6 @@ f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
 f32 FUN_0028250c(f32 value);
 f32 FUN_00282390(f32 value);
-void FUN_00291e40(u32 sound, MapVector position);
 
 /* True when the encounter source is within range and facing `position`. */
 static __inline bool isSourceApproaching(const MapVector &position)
@@ -57,7 +57,8 @@ u32 FUN_00253968(MapEnemyEncounterView *enemy)
 {
     MapBlockView *mapBlock = gameGetMapBlock();
     PlayerLevelView *player = gameGetPlayerData();
-    if (DAT_0049fa1c.sourceActive != 0 && DAT_0049fa1c.sourceKind != 0) {
+    EncounterTriggerState *trigger = &DAT_0049fa1c;
+    if (trigger->sourceActive != 0 && trigger->sourceKind != 0) {
         bool approaching = isSourceApproaching(enemy->position);
         if (!approaching && (enemy->kind == 6 || enemy->kind == 16) && enemy->behavior == 4) {
             MapVector shifted = enemy->position;
@@ -66,15 +67,15 @@ u32 FUN_00253968(MapEnemyEncounterView *enemy)
             approaching = isSourceApproaching(shifted);
         }
         if (approaching) {
-        if (DAT_0049fa1c.delay == 0) {
-            DAT_0049fa1c.delay = 8;
-            DAT_0049fa1c.modelId = enemy->modelId;
+        if (trigger->delay == 0) {
+            trigger->delay = 8;
+            trigger->modelId = enemy->modelId;
             f32 heading = mathPositionHeadingDegrees(enemy->position, g_gameState.encounterSourcePosition);
             g_gameState.encounterMarkerPosition.x = enemy->position.x;
             g_gameState.encounterMarkerPosition.y = enemy->position.y + 110.0f;
             g_gameState.encounterMarkerPosition.z = enemy->position.z;
-            g_gameState.encounterApproach = 0;
             g_gameState.encounterMarkerHeading = heading;
+            g_gameState.encounterApproach = 0;
             enemy->heading = mathPositionHeadingDegrees(enemy->position, g_lmapScene->position);
             if (enemy->eventEnabled == 0 && mapBlock->unkDC0 != 0) {
                 if (enemy->kind != 0 && enemy->kind < 11 && enemy->level < player->level)
@@ -82,8 +83,8 @@ u32 FUN_00253968(MapEnemyEncounterView *enemy)
                 else
                     g_gameState.encounterApproach = 0;
             }
-            MapVector soundPosition = { enemy->position.x, enemy->position.y + 110.0f, enemy->position.z };
-            FUN_00291e40(DAT_0049fa1c.approach != 0 ? 0x1000187 : 0x1000185, soundPosition);
+            SoundActorQueuePosition soundPosition = { enemy->position.x, enemy->position.y + 110.0f, enemy->position.z };
+            FUN_00291e40(trigger->approach != 0 ? 0x1000187 : 0x1000185, soundPosition);
         }
             return 1;
         }

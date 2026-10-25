@@ -1,9 +1,9 @@
 /* NON_MATCHING: Retail retains effect-free result-classification branches and release NOPs absent from the readable implementation. */
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 extern "C" {
 void *FUN_0013c174(const void *input, u32 info[2], s32 mode);
-void FUN_0013ebd8(s32 result);
 unsigned long long FUN_00142b04(void);
 s32 FUN_00429fcc(unsigned long long context, unsigned long long titleId);
 s32 FUN_0042a068(u32 titleIdLow, u32 titleIdHigh, const void *data,

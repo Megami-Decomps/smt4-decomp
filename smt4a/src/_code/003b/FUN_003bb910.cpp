@@ -1,4 +1,4 @@
-/* NON_MATCHING: combatant-array base and mask operands use different registers. */
+/* NON_MATCHING: combatant-array base and index arithmetic use r0/r1 opposite to retail; mask operands now agree. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -34,7 +34,7 @@ extern "C" u32 FUN_003bb910(void)
         const BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         const CombatantComparisonValues *values = (const CombatantComparisonValues *)entry;
         if ((entry->flags & g_btlCandidateMasks.unavailable) != 0 &&
-            (entry->flags & g_btlCandidateMasks.required) != 0 &&
+            (g_btlCandidateMasks.required & entry->flags) != 0 &&
             (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
             values->values[valueIndex] < threshold) {
             scrSetResult(1);

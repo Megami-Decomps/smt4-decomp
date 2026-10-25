@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_MapMain.h"
+#include "gamedata/GameFlags.h"
 
 namespace {
 union MapScriptCompletion {
@@ -22,7 +23,7 @@ void byteTableASetValue3(s32 enabled);
 s32 FUN_00162ea4();
 void FUN_003d54f8(s32 channel, s32 mode);
 s32 scrRunOpcodesStub(MapScriptProcess* process);
-void gameFlagSetValue(s32 flag, s32 value, s32 mode);
+
 void messageSlotSet(s32 slot);
 void scrScriptProcessDestroy(MapScriptProcess* process);
 void asdMemFree(void* allocation);

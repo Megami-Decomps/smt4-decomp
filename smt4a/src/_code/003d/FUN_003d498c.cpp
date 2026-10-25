@@ -12,7 +12,7 @@ void asdTextDrawDirectoryEntry(u32 window, s32 mode, u32 color, u32 flags, s32 t
 s32 partyEntryGetByte1(u32 id);
 s32 FUN_003de464(u32 id, u32 mode);
 char *FUN_001654f8(const char *name, char *output, s32 size);
-void FUN_0023723c(u32 window, s32 mode, u32 color, u32 flags, s32 type, const char *format, const char *text);
+void asdTextFormatStream(u32 window, s32 mode, u32 color, u32 flags, s32 type, const char *format, const char *text);
 s32 questHasSpecialDetailPage(u32 id);
 s32 itemDataGetCategory(u32 id);
 void uiQuestRefreshDetailPages(u32 id);
@@ -42,7 +42,7 @@ void FUN_003d498c(u32 id, u32 mode)
     s32 detail = FUN_003de464(id, mode);
     if (detail < 0) {
         const char *name = FUN_001654f8(FUN_001ad9b4(id)->name.encoded, 0, 0);
-        FUN_0023723c(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", name);
+        asdTextFormatStream(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, "%s", name);
     } else {
         asdTextDrawDirectoryEntry(work->sprites[1], 3, 0xFFFFFFFF, 0, 3, reinterpret_cast<const void *>(work->messages), detail);
     }

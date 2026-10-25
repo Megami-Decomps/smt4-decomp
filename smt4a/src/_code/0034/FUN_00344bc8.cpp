@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail adds the byte index to the save pointer before the 0x282ec offset and loads with no immediate; branch offsets follow. */
+/* NON_MATCHING: compiler inserts an extra nop hint between earned-bit test and skip branch; remaining operations/registers match. */
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"

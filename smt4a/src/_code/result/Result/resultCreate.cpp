@@ -1,6 +1,7 @@
 /* NON_MATCHING: initial owner/result register lifetimes and draw-task result store differ. */
 #include "shard/X14_EngineUnits.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 extern EngineUnitsRef g_engineCleanupOwner;
@@ -11,12 +12,12 @@ extern const char DAT_00533cc0[];
 extern const char DAT_00533cb0[];
 void campCommonBgAcquire();
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, s32 kind);
-void FUN_00204098(u32 job);
-s32 FUN_00267bf0(u32 job);
-void FUN_00229324(u32 task);
-void FUN_00267c70(u32 task);
-u32 asdProcessCreateSimple(const char *, s32, s32, s32, void (*)(u32), s32 (*)(u32), void *);
-u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), u32, u32, u32);
+s32 FUN_00204098(u32 job);
+void FUN_00267bf0(u32 job);
+s32 FUN_00229324(u32 task);
+s32 FUN_00267c70(u32 task);
+u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
+u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
 void FUN_004b6390(EngineUnits *result);
 u16 ifTouchGetButtonHelpValue();
 void FUN_0020b490(EngineUnits *result, s32 state);
@@ -41,11 +42,11 @@ void resultCreate(s32 mode)
         EngineUnits *result = &allocation->result;
         g_engineCleanupOwner.instance = result;
         result->job = asdProcessCreateSimple(DAT_00533ce8, 4, 0, 0,
-            FUN_00204098, FUN_00267bf0, NULL);
-        taskCreateDraw(DAT_00533cd4, 0x85, 0, 0, FUN_00229324, 0, 0, result->job);
-        taskCreateDraw(DAT_00533cc0, 0xe1, 0, 0, FUN_00229324, 0, 0, result->job);
+            FUN_00204098, FUN_00267bf0, 0);
+        taskCreateDraw(DAT_00533cd4, 0x85, 0, 0, FUN_00229324, NULL, 0, reinterpret_cast<void *>(result->job));
+        taskCreateDraw(DAT_00533cc0, 0xe1, 0, 0, FUN_00229324, NULL, 0, reinterpret_cast<void *>(result->job));
         allocation->drawTask = taskCreateDraw(DAT_00533cb0, 0xea, 0, 0,
-            FUN_00267c70, 0, 0, result->job);
+            FUN_00267c70, NULL, 0, reinterpret_cast<void *>(result->job));
         FUN_004b6390(result);
         result->exitMode = mode;
         result->exitSe = 0;

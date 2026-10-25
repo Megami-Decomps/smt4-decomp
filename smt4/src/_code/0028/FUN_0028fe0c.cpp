@@ -14,7 +14,7 @@ void asdTextDrawFormatted(u32 text, s32 font, s32 mode, s32 x, s32 y, const char
 s32 FUN_00241c40(s32 quest);
 s32 FUN_003336dc(s32 quest, u32 state);
 u8 *FUN_002bcfc0(const u8 *source, u8 *output);
-void FUN_0028ffb8(s32 quest);
+void uiQuestCountDetailPages(s32 quest);
 
 // Populate title, optional detail and reward text from add-on or retail quest directories.
 void FUN_0028fe0c(u16 quest, u32 state)
@@ -46,7 +46,7 @@ void FUN_0028fe0c(u16 quest, u32 state)
         } else {
             asdTextDrawDirectoryEntry(menu->panel.texts[1], 3, -1, 0, 3, menu->panel.sysImages, reward);
         }
-        FUN_0028ffb8(quest);
+        uiQuestCountDetailPages(quest);
     }
 }
 }

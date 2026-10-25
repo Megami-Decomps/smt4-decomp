@@ -1,15 +1,16 @@
-/* NON_MATCHING: result-value copy ABI and array allocator's extra argument differ. */
+/* NON_MATCHING: native array allocation now forwards retail's unset owner word; result-value temporary and copy ABI still differ. */
 #include "addon/AocPackageMountBatch.h"
+#include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
 extern "C" {
-void *asdOperatorNewB(u32 bytes);
 WindowOperationResult FUN_0038b6d8(WindowOperationState *state, const WindowOperationRequest *request);
 s32 byteIsAtLeast100(const WindowOperationResult *result);
 }
 
 inline void *Obj4221d4::operator new[](u32 bytes) throw()
 {
-    return asdOperatorNewB(bytes);
+    void *owner; // The array allocation forwards retail's unset owner word.
+    return asdOperatorNewB(bytes, owner);
 }
 
 // Construct package states and retain the first failed mount operation, or success.

@@ -42,20 +42,39 @@ void FUN_0034bb54(AsdModelRenderPass *pass, RenderCtx *context)
         /* 0x294 */ f32 depthOffset;
     };
     typedef char CameraDepthOffsetCheck[offsetof(CameraDepthView, depthOffset) == 0x294 ? 1 : -1];
+    struct ModelPassContextView {
+        u8 unk00[0x14];
+        u32 state;
+        u8 unk18[8];
+        u32 flags;
+        u8 unk24[0x80];
+        void *camera;
+        u8 unkA8[4];
+        void **cameras;
+        u8 unkB0[8];
+        s32 cameraIndex;
+    };
+    typedef char ModelPassContextOffsets[
+        offsetof(ModelPassContextView, state) == 0x14 &&
+        offsetof(ModelPassContextView, flags) == 0x20 &&
+        offsetof(ModelPassContextView, camera) == 0xA4 &&
+        offsetof(ModelPassContextView, cameras) == 0xAC &&
+        offsetof(ModelPassContextView, cameraIndex) == 0xB8 ? 1 : -1];
+    ModelPassContextView *modelPass = reinterpret_cast<ModelPassContextView *>(context);
     nw_gfx_RenderContext_ResetState_2B7478(context);
     FUN_00364e28(context, pass->target);
     ShaderLightVector4 clearColor(1.0f, 1.0f, 1.0f, 1.0f);
     grRenderTargetClear(context, 0x4000, &clearColor);
-    void *camera = context->modelPass.cameras[pass->cameraIndex];
-    context->modelPass.cameraIndex = pass->cameraIndex;
-    if (context->modelPass.camera != camera) {
-        context->modelPass.camera = camera;
+    void *camera = modelPass->cameras[pass->cameraIndex];
+    modelPass->cameraIndex = pass->cameraIndex;
+    if (modelPass->camera != camera) {
+        modelPass->camera = camera;
         f32 depth = ((CameraDepthView *)camera)->depthOffset;
         DAT_004720f0 = depth == 0.0f ? 0 : encodeCameraDepth(-depth);
     }
-    context->modelPass.flags = pass->flags;
-    FUN_002ab92c(context, context->modelPass.camera, 0);
+    modelPass->flags = pass->flags;
+    FUN_002ab92c(context, modelPass->camera, 0);
     FUN_002a4908(context, 0);
-    context->modelPass.state = 3;
+    modelPass->state = 3;
 }
 }

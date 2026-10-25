@@ -1,9 +1,11 @@
-/* NON_MATCHING: the existing zero-argument decoder method omits retail's unused argument setup; shared-context addresses differ. */
+/* NON_MATCHING: shared-global address derivation and clock multiply operand registers differ; decoder arguments and signed division match retail. */
 #include "mobiclip_ctrl/MobiclipStartState.h"
 #include "classes/Obj420a2c.h"
 #include "classes/Obj557f00.h"
+#include "shard/W6_W6Match2_LongDivision.h"
 
 extern "C" {
+__value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 extern MobiclipStartTable DAT_00617f40;
 extern Obj420a2c DAT_00617e70;
 extern u32 DAT_00617e64;
@@ -25,15 +27,16 @@ void FUN_00229104()
     FUN_004251e8(&DAT_00617f40, 0, 0);
     FUN_004250dc(&DAT_00617f40, 0);
     const MobiclipStartRecord *record = FUN_00424c2c(&DAT_00617f40, table46COwnerGet(&DAT_00617f40, 0));
-    if (!DAT_00617e70.Obj420a2c::buildEntries())
+    if (!DAT_00617e70.Obj420a2c::buildEntries((Obj420a2cOwner *)&DAT_00617e64,
+                                           (Obj420a2cSource *)record, NULL))
         FUN_0043128c(1);
     if (DAT_00617f40.audioIndex != -1) {
         const void *audioRecord = tableRecordGetChecked(&DAT_00617f40, DAT_00617f40.audioIndex);
         if (!DAT_00617f18.Obj557f00::open((u32)&DAT_00617e64, audioRecord, 1, 16))
             FUN_0043128c(1);
     }
-    g_mobiclipCtrl.position = (s64)((u64)record->ticks * 1000000) / record->timeScale;
-    s32 count = stateObjectClassify(&DAT_00617f40, record);
+    g_mobiclipCtrl.position = ll_sdiv((s64)((u64)record->ticks * 1000000), record->timeScale).quotient;
+    s64 count = stateObjectClassify(&DAT_00617f40, record);
     g_mobiclipCtrl.position *= count;
     FUN_004241e0(&DAT_00617f40.thread);
 }

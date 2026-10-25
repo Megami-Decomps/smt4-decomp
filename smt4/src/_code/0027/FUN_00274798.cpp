@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00274798` (_code @ 0x274798, 0x814 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
 int FUN_0028c618(unsigned int, int);
 int nodeSetTranslation(unsigned int, int);
-int FUN_00291e40(unsigned int);
 int modelSelectPrimaryMotion(unsigned int);
 int FUN_002b2b64(unsigned int);
 
@@ -40,7 +40,6 @@ extern signed char DAT_0049f93e; /* 0x49f93e */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
 /* Supplied declaration required: FUN_0028c618. */
 /* Supplied declaration required: nodeSetTranslation. */
-/* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002b2b64. */
 
@@ -279,7 +278,7 @@ LAB_002748b4:
                 else {
                   temp_v3 = 0x100022b;
                 }
-                FUN_00291e40(temp_v3);
+                FUN_00291e40(temp_v3, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v1 + 0x1c)));
               }
               else if ((((0x41a7ffff >= temp_v9) && (temp_v8 >= 0x41a80000)) ||
                        ((0x4273ffff >= temp_v9 && (temp_v8 >= 0x42740000)))) ||
@@ -293,7 +292,7 @@ LAB_002748b4:
                 else {
                   temp_v3 = 0x100022a;
                 }
-                FUN_00291e40(temp_v3);
+                FUN_00291e40(temp_v3, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v1 + 0x1c)));
               }
             }
             *(int *)(temp_v1 + 0x30) = temp_v8;

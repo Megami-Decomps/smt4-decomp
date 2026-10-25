@@ -45,7 +45,7 @@ u32 placeWindowDrawLabel(void)
     FUN_002c39a4(g_titleScene);
     RenderCtx *context = g_titleScene;
     u32 state = FUN_002c5d80(1, 0);
-    renderStackPush(&context->stackA, state);
+    renderCtxPushA(context, state);
     s32 x = vec2GetXInt(&window->position);
     x += static_cast<s32>(renderCtxCalculateStereoParallax(g_titleScene, 0.27f));
     s32 y = vec2GetYInt(&window->position);

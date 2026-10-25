@@ -6,7 +6,7 @@ extern "C" {
 // Test whether the script-selected unit's record belongs to category one.
 s32 FUN_003f23fc(void)
 {
-    ScriptCategoryUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptCategoryUnit *unit = reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (unit == NULL || unit->state == NULL)
         return 0;
     UnitCategoryRecord *record = unit->state->record;

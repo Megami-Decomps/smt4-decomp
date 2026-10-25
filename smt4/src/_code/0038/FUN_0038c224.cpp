@@ -1,7 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0038c224` (_code @ 0x38c224, 0x9b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: typed owner-aware allocations retain returned array/item buffers; result, DateTime and iterator layouts and other raw callee contracts remain unrecovered. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_ArchiveIcon.h"
+#include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
 extern "C" {
 
@@ -11,7 +11,6 @@ int FUN_002344d8(...);
 int FUN_002345a4(...);
 int FUN_00234624(unsigned char [48], unsigned int, unsigned int);
 int FUN_0026281c(...);
-int asdOperatorNewB(...);
 int FUN_002b4b80(int, int);
 int wstrlenU16(...);
 int FUN_002ba81c(...);
@@ -76,7 +75,6 @@ extern unsigned int FUN_00234468(int);
 extern int FUN_00234618(unsigned char *);
 /* Supplied declaration required: FUN_00234624. */
 /* Supplied declaration required: FUN_0026281c. */
-/* Supplied declaration required: asdOperatorNewB. */
 extern int legacyResourceIdRemap(int);
 extern unsigned char objGetFlagBit0(int);
 extern unsigned char objGetFlagBit1(int);
@@ -233,7 +231,7 @@ int FUN_0038c224(int param_1)
   int temp_v38;
   int *temp_v39;
   int temp_v40;
-  unsigned int temp_v41;
+  void *itemOwner; /* Retail reads this uninitialised owner from sp+444. */
   int temp_v42;
   unsigned int uStack_1a64;
   int temp_v43;
@@ -253,8 +251,8 @@ int FUN_0038c224(int param_1)
     FUN_002b4b80(*(int *)(g_aocMain + 0x678),0x394214);
   }
   temp_v9 = *(int *)(temp_v8 + 0x67c) + 1;
-  puVar4 = (unsigned int *)(temp_v9 * 0x9c8 + 8);
-  asdOperatorNewB();
+  void *owner; /* Retail forwards an uninitialised owner hint in r5. */
+  puVar4 = (unsigned int *)asdOperatorNewB(temp_v9 * 0x9c8 + 8, owner);
   puVar5 = (unsigned int *)0x0;
   if (puVar4 != (unsigned int *)0x0) {
     puVar5 = puVar4 + 2;
@@ -523,8 +521,7 @@ int FUN_0038c224(int param_1)
           *(unsigned char *)(temp_v16 + 0x9b2) = 1;
         }
         temp_v3 = FUN_00234618(temp_v17);
-        temp_v9 = temp_v3 * 0x18;
-        asdOperatorNewB(temp_v9,temp_v41);
+        temp_v9 = (int)asdOperatorNewB(temp_v3 * 0x18, itemOwner);
         temp_v1 = 1;
         temp_v15 = 0;
         temp_v2 = 1;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only: retail loads the grid column constant 0 right after the owner pointer (mov r1, #0 before the active test) and uses r1/r2 for it; built loads it later into r2 */
 #include "common.h"
 
 extern "C" {
@@ -38,14 +37,20 @@ static __inline Gauge *gaugeTableGet(const GaugeTable *table, s32 row, s32 colum
     return table->gauges[row * table->stride + column];
 }
 
+static __inline Gauge *gaugeOwnerGetGauge(const GaugeOwner *owner, s32 column)
+{
+    if (owner->active == 0) {
+        return NULL;
+    }
+    return gaugeTableGet(owner->table, owner->index, column);
+}
+
 /* True when the task has no running gauge: nothing queued, none active, or its value reached its limit. */
 u32 gaugeTaskIsIdle(Task *task)
 {
-    GaugeOwner *owner;
     Gauge *gauge;
-
-    if (task->count <= 0 || (owner = task->owner, owner->active == 0)
-        || (gauge = gaugeTableGet(owner->table, owner->index, 0), gauge == NULL)
+    if (task->count <= 0
+        || (gauge = gaugeOwnerGetGauge(task->owner, 0), gauge == NULL)
         || gauge->value >= gauge->limit) {
         return 1;
     }

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00162790(...);
 int efctSetSpeed(void);
 int FUN_001835b4(...);
-int FUN_00230a50(int *, int [3], int);
+int unitGetStereoScreenPosition(int *, int [3], int);
 void drawParameterChangeBadge(unsigned int, int, int, int, int);
 int VectorSignedToFloat(...);
 
@@ -31,7 +31,7 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001834a4(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001835b4. */
-/* Supplied declaration required: FUN_00230a50. */
+/* Supplied declaration required: unitGetStereoScreenPosition. */
 extern int FUN_0026264c(unsigned short);
 extern unsigned int FUN_003a6f84(unsigned int);
 
@@ -64,7 +64,7 @@ void FUN_0022e9c8(void)
     temp_v11 = 0;
     temp_v12[0] = 0;
     temp_v0 = *(unsigned short *)((*(int *)((unsigned char *)&g_gameGlobals + 0x4)) + 0x19a8);
-    FUN_00230a50(&temp_v11,temp_v12,0x17);
+    unitGetStereoScreenPosition(&temp_v11,temp_v12,0x17);
     efctSetSpeed();
     FUN_001835b4(2,0x12,0x119,temp_v11,temp_v12[0],0xdd);
     FUN_001835b4(2,0x12,0x11a,temp_v11,temp_v12[0],0xdd);

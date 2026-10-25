@@ -1,4 +1,4 @@
-/* NON_MATCHING: the process name is a literal pool string in retail (reached with add r0, pc); the compiler puts it in .constdata. */
+/* NON_MATCHING: constant and global state stores are scheduled differently; process-name literal now matches. */
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
 
 extern "C" {

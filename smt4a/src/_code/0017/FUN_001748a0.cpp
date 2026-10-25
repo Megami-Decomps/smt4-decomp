@@ -1,5 +1,6 @@
 /* NON_MATCHING: inlined conversion loops use fewer saved registers, and native result-assert macro lowering differs. */
 #include "nw/snd/SoundArchiveDisk.h"
+#include "nn/Result.h"
 
 extern "C" {
 void refIsNullOrZero(MoviePathConversionState *conversion);
@@ -7,6 +8,12 @@ u32 FUN_00100836(const char *text, u32 encoding, MoviePathConversionState *conve
 s32 FUN_002e3c44(u16 *output, const char *text, u32 bytes, MoviePathConversionState *conversion);
 s32 FUN_001883b0(MovieOpenFile *file, const u16 *path, u32 mode);
 void FUN_0016e800(u32 result, const void *location);
+}
+
+static inline void reportNativeFileFailure(nn::Result result, const void *location)
+{
+    if (nnResultIsFailure(result))
+        FUN_0016e800(result, location);
 }
 
 static inline s32 openNativeFile(MovieOpenFile *file, const char *path)
@@ -34,13 +41,12 @@ extern "C" s32 FUN_001748a0(NativeFileReader *reader, const char *path, s32 supp
 {
     reader->suppressErrors = suppressErrors;
     if (suppressErrors) {
-        s32 result = openNativeFile(&reader->file, path);
+        nn::Result result = openNativeFile(&reader->file, path);
         reader->result = result;
-        return result >= 0;
+        return nnResultIsSuccess(result);
     }
-    s32 result = openNativeFile(&reader->file, path);
-    if (result < 0) {
-        FUN_0016e800(result, (const void *)__current_pc());
-    }
+    nn::Result result = openNativeFile(&reader->file, path);
+    if (!nnResultIsSuccess(result))
+        reportNativeFileFailure(result, (const void *)__current_pc());
     return 1;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: descriptor stack layout, initialization interleaving and saved registers differ. */
+/* NON_MATCHING: the default count=1 constant stays live in r8 and is reused for color attributes; retail uses r1 during construction and reloads 1 into r7 later, changing save/frame allocation. */
 #include "gfx/VertexStreams.h"
 #include "shard/W6_W6Match5_ShaderBinding.h"
 static inline u32 vertexStreamBytes(const VertexStreamSource *source, u32 flag, u32 stride)

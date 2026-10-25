@@ -10,7 +10,7 @@ extern const char DAT_003ff748[]; // "Aoc board DOWN"
 u32 FUN_002347b8(u32, u32, void *);
 s32 FUN_0038a1e0(u32);
 s32 FUN_0038a478(u32);
-s32 FUN_0038aa80(u32);
+s32 aocBoardDrawParameterOverlay(u32);
 u32 asdProcessCreateSimple(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, u32, void *);
 
@@ -30,7 +30,7 @@ void aocBoardCreateDrawJobs(DrawParameterOwner *state, u32 resource, u8 enabled,
                        reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
         taskCreateDraw(DAT_003ff758, 0xE0, 1, 0, FUN_0038a478, NULL,
                        reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
-        taskCreateDraw(DAT_003ff748, 0x160, 1, 0, FUN_0038aa80, NULL,
+        taskCreateDraw(DAT_003ff748, 0x160, 1, 0, aocBoardDrawParameterOverlay, NULL,
                        reinterpret_cast<u32>(state), reinterpret_cast<void *>(state->control.process));
     }
 }

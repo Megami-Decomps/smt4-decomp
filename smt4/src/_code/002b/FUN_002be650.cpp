@@ -1,5 +1,6 @@
 /* NON_MATCHING: prologue, per-table lookups (inlined) and stack layout match; retail keeps a separate null/payload check (cmp; nop; beq) per case with one shared +0x20 tail, built merges/predicates them */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -49,9 +50,6 @@ void *FUN_002b4504(AocRecordSystem *system, u32 id);
 int FUN_002b4748(void);
 void *dataTable08Sub1GetRecord(u32 id);
 void *dataTable08Sub2GetRecord(u32 id);
-int dataTableGet(u32 table, u32 index);
-void *dataTableGetEntries(void);
-u32 dataTableGetCount(int table);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, int (*compare)(const void *, const void *));
 
 int dataTable08Sub0CompareKeys(const void *a, const void *b);
@@ -65,11 +63,11 @@ static inline u8 *getTable08Sub0Record(u32 id)
     u8 *record;
     key.id = id;
     if (g_aocSystem->cache3A0 == 0 || (record = (u8 *)FUN_0014162c(g_aocSystem, id)) == NULL) {
-        int table = dataTableGet(8, 0);
+        void *table = dataTableGet(8, 0);
         if (table == 0) {
             return NULL;
         }
-        void *entries = dataTableGetEntries();
+        void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
         record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), dataTable08Sub0CompareKeys);
     }
@@ -82,11 +80,11 @@ static inline u8 *getTable08Sub3Record(u32 id)
     u8 *record;
     key.id = id;
     if (g_aocSystem->cache3C4 == 0 || (record = (u8 *)FUN_001317c8(g_aocSystem, id)) == NULL) {
-        int table = dataTableGet(8, 3);
+        void *table = dataTableGet(8, 3);
         if (table == 0) {
             return NULL;
         }
-        void *entries = dataTableGetEntries();
+        void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
         record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), aocCompareRecord83Keys);
     }
@@ -99,11 +97,11 @@ static inline u8 *getTable08Sub4Record(u32 id)
     u8 *record;
     key.id = id;
     if (g_aocSystem->cache3D0 == 0 || (record = (u8 *)FUN_00131898(g_aocSystem, id)) == NULL) {
-        int table = dataTableGet(8, 4);
+        void *table = dataTableGet(8, 4);
         if (table == 0) {
             return NULL;
         }
-        void *entries = dataTableGetEntries();
+        void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
         record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), aocCompareRecord84Keys);
     }
@@ -116,11 +114,11 @@ static inline u8 *getTable08Sub5Record(u32 id)
     u8 *record;
     key.id = id;
     if (g_aocSystem->cache3DC == 0 || (record = (u8 *)FUN_002b4504(g_aocSystem, id)) == NULL) {
-        int table = dataTableGet(8, 5);
+        void *table = dataTableGet(8, 5);
         if (table == 0) {
             return NULL;
         }
-        void *entries = dataTableGetEntries();
+        void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
         record = (u8 *)libc_bsearch(&key, entries, count, sizeof(key), compareLookupKey);
     }

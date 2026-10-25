@@ -55,7 +55,7 @@ extern char DAT_00447088[];       /* resource paths, 0x50 bytes apart */
 void *FUN_00316f70(u32 source, s32 kind);
 void sceneAttachLightChild(LmapNodeList *list, s32 index);
 void FUN_00265b78(s32 index, s32 flag);
-void FUN_0032820c(const char *path);
+void lmapApplyLightVisibilityGrid(const char *path);
 void nn_math_ARMv6_MTX33CopyAsm(Mtx33 *destination, const Mtx33 *source);
 
 /* Origin (x, y, z) of each of the four map areas. */
@@ -77,7 +77,7 @@ void FUN_002666b0(void)
     LmapMarkerState *current = g_lmapMainState;
 
     if (g_gameState == 0x65 && DAT_0049f920 >= 1 && DAT_0049f920 <= 9) {
-        FUN_0032820c(DAT_00447088 + 0x50 * (DAT_0049f920 - 1));
+        lmapApplyLightVisibilityGrid(DAT_00447088 + 0x50 * (DAT_0049f920 - 1));
     } else {
         for (s32 i = 0; i < current->nodes->count; i++) {
             sceneAttachLightChild(state->nodes, i);

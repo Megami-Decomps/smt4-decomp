@@ -1,4 +1,4 @@
-/* NON_MATCHING: same states and calls; retail shares one `substep = 3` store between the shop-funds check and the choice result, compares cost/funds as `cmp cost, funds; ble`, and keeps the "npcShop_Few_HaveSkill" literal in the pool by ldr, which armcc here lays out differently. */
+/* NON_MATCHING: shared script-entry symbol and cost/funds comparison now match; compiler places the shared substep-three store after the choice test instead of before it. */
 #include "common.h"
 
 /* The shop scene: its mode, substep, the script and the item list. */
@@ -16,6 +16,7 @@ struct ShopScene {
 
 
 extern "C" {
+extern const char DAT_00533214[]; /* "npcShop_Few_HaveSkill", shared script-entry name. */
 s32 eventQueueAddUniqueIfValid(u32 event);
 void sysPlaySe(u32 id);
 void FUN_0019de98(s32 a, u32 color);
@@ -80,18 +81,16 @@ extern "C" void FUN_003e37f8(ShopScene *scene)
         eventQueueAddUniqueIfValid(0x100020E);
         FUN_003343f0(1);
         FUN_00333dc8(1);
-        if (!(state->cost > state->funds)) {
-            scene->substep = 3;
-            return;
-        }
-        {
-            s32 entry = tableGroupFindEntryIndex(scene->tableGroup, "npcShop_Few_HaveSkill");
+        if (state->cost > state->funds) {
+            s32 entry = tableGroupFindEntryIndex(scene->tableGroup, DAT_00533214);
             if (entry >= 0)
                 scrScriptProcessStartEntry(scene->script, entry);
+            sysPlaySe(0xA4);
+            next = 4;
+            break;
         }
-        sysPlaySe(0xA4);
-        next = 4;
-        break;
+        scene->substep = 3;
+        return;
     case 3:
         pushMode(scene, 5);
         return;

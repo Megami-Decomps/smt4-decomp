@@ -5,7 +5,7 @@ extern "C" {
 extern ScreenWindowTransition *g_sWin;
 extern AocSystemA *g_aocSystem;
 s32 FUN_001517b4(s32 category, s32 mode);
-s32 FUN_00163fd4(u32 state);
+s32 slotIsActive(u32 state);
 s32 FUN_002321f8(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 enabled);
@@ -17,7 +17,7 @@ void FUN_00208a34(s32 window, u32 flags)
 {
     ScreenWindowTransition *work = g_sWin;
     if (work->current != window) {
-        if (FUN_001517b4(9, 2) || FUN_00163fd4(6))
+        if (FUN_001517b4(9, 2) || slotIsActive(6))
             flags = 0;
         work->previous = work->current;
         g_sWin->current = window;

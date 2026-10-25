@@ -82,7 +82,9 @@ void FUN_003ab550(int *param_1)
   uiInitializeEightTimerSet(param_1 + 0x37);
   FUN_00233240(param_1 + 0x37,0);
   FUN_00233240(param_1 + 0x37,1);
-  Obj42242c *controller = new Obj42242c;
+  // The allocation owner is not initialized in the retail code.
+  void *allocationOwner;
+  Obj42242c *controller = new (allocationOwner) Obj42242c;
   param_1[0x164] = (int)controller;
   controller->rectangle = param_1 + 0x32;
   _ZN9Obj4224489buildListEv(param_1);

@@ -3,19 +3,19 @@
 
 extern "C" {
 
-extern RenderCtx *g_renderCtx;
+extern RenderCtxScissorA *g_renderCtx;
 
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
 void efctSetSpeed(f32 speed);
-f32 renderCtxCalculateStereoParallax(RenderCtx *ctx, f32 scale);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *ctx, f32 scale);
 void FUN_001835b4(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 z);
 SpriteInfo *FUN_001834a4(s32 group, s32 id);
 void FUN_00164168(u32 icon, s32 x, s32 y, s32 z, s32 a, s32 value);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void renderPopStateStacks(void);
 void FUN_0049ec78(ListPanel *panel, PanelRow *row, s32 x, s32 y, s32 z);
-void FUN_0049ef38(ListPanel *panel, PanelRow *row, s32 x, s32 y, s32 z);
+void stereoSpriteDrawSelectedChoice(ListPanel *panel, PanelRow *row, s32 x, s32 y, s32 z);
 void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed);
 
 /* Draw the panel's frame, tab strip and the rows (icon strips and scissored entry text), then the
@@ -64,7 +64,7 @@ void FUN_0049e3f8(ListPanel *panel)
             if (textKind == 2) {
                 FUN_0049ec78(panel, row, x, textY, 0x6A);
             } else if (textKind == 1) {
-                FUN_0049ef38(panel, row, x, textY, 0x6A);
+                stereoSpriteDrawSelectedChoice(panel, row, x, textY, 0x6A);
             }
             if (suspended) {
                 renderCtxResumeScissor(g_renderCtx);

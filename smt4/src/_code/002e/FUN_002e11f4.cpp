@@ -1,41 +1,34 @@
-/* NON_MATCHING: the policy store is scheduled before the `playing` byte store; retail stores the byte first. */
-#include "common.h"
+/* NON_MATCHING: the clamp-policy pointer store is scheduled before the enabled-byte store; retail stores the byte first. */
+#include "classes/Obj421460.h"
 
 extern "C" {
 
-typedef s32 (*AnimPlayPolicy)(void);
-
-typedef struct AnimPlayer {
-    /* 0x00 */ u8 unk00[0x4C];
-    /* 0x4C */ AnimPlayPolicy policy;
-    /* 0x50 */ u8 unk50[8];
-    /* 0x58 */ u8 playing;
-} AnimPlayer;
+typedef f32 (*AnimPlayPolicy)(f32 lower, f32 upper, f32 value);
 
 typedef struct AnimOwner {
     /* 0x00 */ u8 unk00[0x58];
     /* 0x58 */ s32 count;
     /* 0x5C */ u8 unk5c[4];
-    /* 0x60 */ AnimPlayer *player;
+    /* 0x60 */ Obj421460 *player;
 } AnimOwner;
 
-extern s32 nw_anim_PlayPolicy_Loop(void);
+extern f32 nw_anim_PlayPolicy_Loop(f32 lower, f32 upper, f32 value);
 
-/* Starts the owner's player with the looping play policy, or with the policy at 0x155650 when `loop` is 0. */
+/* Starts the owner's track with either the looping or clamping play policy. */
 void FUN_002e11f4(AnimOwner *owner, s32 loop)
 {
-    AnimPlayer *player;
+    Obj421460 *player;
 
     if (owner->count > 0 && (player = owner->player) != NULL) {
         AnimPlayPolicy policy;
 
         if (loop == 0) {
-            policy = (AnimPlayPolicy)0x155650;
+            policy = FUN_00155650;
         } else {
             policy = nw_anim_PlayPolicy_Loop;
         }
-        player->playing = 1;
-        player->policy = policy;
+        player->enabled = 1;
+        player->clamp = policy;
     }
 }
 

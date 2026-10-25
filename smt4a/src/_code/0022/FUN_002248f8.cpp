@@ -8,7 +8,7 @@ int jobStop(...);
 int asdMemFree(void);
 int FUN_001a1ee0(void);
 int asdOperatorDelete(...);
-int FUN_00318c3c(...);
+int partyReleasePreviewResources(...);
 
 int randRange(...);
 int eventQueueAddUniqueIfValid(...);
@@ -136,7 +136,7 @@ extern int FUN_00284e94(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_002f9418. */
 extern int FUN_002fc0a4(int);
-/* Supplied declaration required: FUN_00318c3c. */
+/* Supplied declaration required: partyReleasePreviewResources. */
 /* Supplied declaration required: FUN_0031db84. */
 /* Supplied declaration required: menu32PlayCursorSeAndSelect. */
 /* Supplied declaration required: FUN_00321338. */
@@ -923,7 +923,7 @@ LAB_002255d4:
       *(unsigned int *)(temp_v0 + 0x74a0) = 0x15;
       campCommonBgRelease();
       temp_v10 = g_btlUiBlock;
-      FUN_00318c3c(g_btlUiBlock + 0x28c4);
+      partyReleasePreviewResources(g_btlUiBlock + 0x28c4);
       asdOperatorDelete(*(unsigned int *)(temp_v10 + 0x7488));
       *(unsigned int *)(temp_v10 + 0x7488) = 0;
       if (g_btlUiBlock != 0) {

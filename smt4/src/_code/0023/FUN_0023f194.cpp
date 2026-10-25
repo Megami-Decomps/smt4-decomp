@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail builds 0x817 as 23 + 0x800 (mov/add) where this loads a literal; state 6 is hoisted into r6 and the outer guard returns through its own pop */
+/* NON_MATCHING: recovered scene-flag accessor and notification argument; state 6 is materialized at the final transition rather than held in r6, and guard-return sharing differs. */
 #include "battle/btlMain.h"
+#include "gamedata/GameFlags.h"
 struct BattleActionHistoryState;
 
 extern "C" {
@@ -26,38 +27,37 @@ void FUN_001e1874(BtlMainState *state);
 void eventCommandDispatchPendingCleanup(void);
 u32 gameFlagIsSet(u32 flag);
 u32 FUN_002ef6b8(s32 kind, u32 arg);
-void gameFlagSetValue(u32 flag, s32 value);
 s32 jobIsValid(u32 job);
 s32 FUN_0023f074(BtlEndTask *task);
+s32 eventFlagForScene(s32 scene);
 
 /* Once both FUN_002c2a04 slots report 3, stops the battle's jobs and starts the follow-up job (flag 0x817). */
 s32 FUN_0023f194(BtlEndTask *task)
 {
-    if (task->unk0C != 0 && task->unk14 != 0) {
-        if (FUN_002c2a04(0) == 3 && FUN_002c2a04(1) == 3) {
-            BtlMainState *state = btlGetMainState();
+    if (task->unk0C == 0 || task->unk14 == 0)
+        return 0;
+    if (FUN_002c2a04(0) != 3 || FUN_002c2a04(1) != 3)
+        return 0;
 
-            FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(state));
-            btlTalkBustUpDestroy();
-            jobStopIfValidB(state);
-            jobStopIfValidA(state);
-            FUN_001e1874(state);
-            if (g_btlMain != NULL) {
-                eventCommandDispatchPendingCleanup();
-            }
-            if (!(task->flags & 1)) {
-                task->job = FUN_002ef6b8(23, gameFlagIsSet(0x817));
-                gameFlagSetValue(0x817, 1);
-                task->state = 5;
-                if (jobIsValid(task->job)) {
-                    return 0;
-                }
-            }
-            task->state = 6;
-            return FUN_0023f074(task);
-        }
+    BtlMainState *state = btlGetMainState();
+    FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(state));
+    btlTalkBustUpDestroy();
+    jobStopIfValidB(state);
+    jobStopIfValidA(state);
+    FUN_001e1874(state);
+    if (g_btlMain != NULL)
+        eventCommandDispatchPendingCleanup();
+
+    if (!(task->flags & 1)) {
+        u32 completionFlag = eventFlagForScene(23);
+        task->job = FUN_002ef6b8(23, gameFlagIsSet(completionFlag));
+        gameFlagSetValue(completionFlag, 1, 1);
+        task->state = 5;
+        if (jobIsValid(task->job))
+            return 0;
     }
-    return 0;
+    task->state = 6;
+    return FUN_0023f074(task);
 }
 
 } /* extern "C" */

@@ -1,5 +1,6 @@
 /* NON_MATCHING: payload subaddresses use fewer saved registers and success/failure state-store blocks merge differently. */
 #include "gamedata/SaveLoadProcessState.h"
+#include "shard/JobWork.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -10,7 +11,6 @@ struct SaveFilePayloadIV {
 };
 typedef char SaveFilePayloadIVSizeCheck[sizeof(SaveFilePayloadIV) == 0x24db0 ? 1 : -1];
 extern "C" {
-SaveLoadProcessWork24 *jobGetWork();
 s32 FUN_001a1d08();
 s32 FUN_002cedbc();
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
@@ -23,9 +23,9 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_0026b4cc();
 extern SaveByteSettings g_byteSettings;
 
-u32 FUN_002efa00()
+s32 FUN_002efa00(u32 job)
 {
-    SaveLoadProcessWork24 *work = jobGetWork();
+    SaveLoadProcessWork24 *work = reinterpret_cast<SaveLoadProcessWork24 *>(jobGetWork(job));
     switch (work->state) {
     case 4:
         work->bufferSize = sizeof(SaveFilePayloadIV);

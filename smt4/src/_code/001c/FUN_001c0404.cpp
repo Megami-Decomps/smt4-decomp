@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail splits the 13-case state switch around state 7 and keeps constant 1 hoisted; the build orders the switch table and branches differently. */
+/* NON_MATCHING: fixed missing sequence-request size argument; retail hoists constant 1 before work load and has one extra word before the literal pool. */
 #include "common.h"
 
 /* The loading task's work: its state word is at +8. */
@@ -27,7 +27,7 @@ void FUN_0026f824(s32 value);
 void buttonHelpAcquireResources(void);
 void asdTMTexTableLoadSprites(s32 table);
 void FUN_002c5620(void);
-void asdSequenceRequest(s32 sequence, s32 argument);
+void asdSequenceRequest(u32 sequence, const void *argument, u32 size);
 void FUN_002c58c8(s32 a, s32 b);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
 void FUN_002fc1a8(void);
@@ -121,7 +121,7 @@ u32 FUN_001c0404(LoadTask **task)
         break;
     case 0x65:
         DAT_00446db4 = 1;
-        asdSequenceRequest(0x16, 0);
+        asdSequenceRequest(0x16, NULL, 0);
         return 0xFFFFFFFF;
     }
     return 0;

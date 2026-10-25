@@ -10,7 +10,7 @@ s32 FUN_001d1d78(const u16 *, const u16 *);
 s32 FUN_002c6e90(const u16 *, const u16 *);
 s32 devilCompareBySetCategoryGrade(const u16 *, const u16 *);
 s32 devilCompare(const u16 *, const u16 *);
-s32 FUN_001f6524(const u16 *, const u16 *);
+s32 devilCompareTablePriority(const u16 *, const u16 *);
 s32 devilCompareByEntryValue(const u16 *, const u16 *);
 void FUN_002b7bca(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
 void FUN_0027f3dc(void *entries, u32 count, u32 stride, s32 (*compare)(const u16 *, const u16 *));
@@ -45,7 +45,7 @@ void FUN_00191df4(void)
     }
     if ((*preference & 0x7f) == 3) {
         if (ascending)
-            FUN_0027f3dc(work->base.portraitSelectionIV.desired, work->list.count, 2, FUN_001f6524);
+            FUN_0027f3dc(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompareTablePriority);
         else
             FUN_0027f3dc(work->base.portraitSelectionIV.desired, work->list.count, 2, devilCompareByEntryValue);
     }

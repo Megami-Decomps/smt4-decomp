@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r2, [pc, #124] differs from recovered ldr r3, [pc, #112]. */
+/* NON_MATCHING: retail retains two global work loads and uses a pooled0x2034 accessor in mode two; this build shares one field base across cases. */
 #include "common.h"
 
 namespace {

@@ -16,7 +16,7 @@ void FUN_004fb43c(s32 actor, ScriptUnit *unit, void *key, s32 mode, s32 duplicat
 u32 btlScriptDamageFirstCombatantAndQueueAction()
 {
     s32 damage = scrGetArg(0);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     FUN_003ee0c0(btlGetMainState());
     if (btlGetMainState()->entries[0].hp <= damage)
         damage = btlGetMainState()->entries[0].hp - 1;

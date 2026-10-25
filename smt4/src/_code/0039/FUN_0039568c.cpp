@@ -1,5 +1,6 @@
 /* NON_MATCHING: global/component base loads, signed modulus and movement VFP multiplication scheduling differ. */
 #include "map/lmapMain.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 struct AmbientMovementTransform {
     u32 unk00;
@@ -32,7 +33,6 @@ extern LmapScene *g_lmapScene;
 void FUN_0039560c(AmbientMovementWork *work);
 u32 randNextInRange(u32 limit);
 f32 mathDistanceBetweenPoints(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
-void eventSoundPlayByKind(u32 sound, s32 kind, f32 x, f32 y, f32 z);
 
 void FUN_0039568c(AmbientMovementWork *work)
 {
@@ -69,9 +69,12 @@ void FUN_0039568c(AmbientMovementWork *work)
             if (movement->frame <= 60) {
                 movement->frame = 60;
             }
-            eventSoundPlayByKind(movement->sound, 1, movement->position.x * (1.0f / 3.0f),
-                                  movement->position.y * (1.0f / 3.0f),
-                                  movement->position.z * (1.0f / 3.0f));
+            SoundActorQueuePosition position = {
+                movement->position.x * (1.0f / 3.0f),
+                movement->position.y * (1.0f / 3.0f),
+                movement->position.z * (1.0f / 3.0f)
+            };
+            eventSoundPlayByKind(movement->sound, 1, position);
             ++work->state;
         }
     }

@@ -15,7 +15,7 @@ struct PortraitImageDimensions {
 extern "C" {
 extern void *g_aocSystem;
 const Table00Record *dataTable00FindById(u16);
-s32 asdTMTexTableNodeIsLoaded(u32);
+s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 recordPrepareLinkedOwner(void *, u32, s32);
 const PortraitImageDimensions *FUN_002bf4f8(u32, s32);
 void FUN_002b04e8(s32, u32, s32, s32, s32, u32, const PortraitClipBounds *);
@@ -60,7 +60,7 @@ extern "C" void FUN_0031eba0(s32 unit, s32 sourceX, s32 sourceY, u32 color, s32 
     s32 loadedImage;
     if (!resolveClippedPortrait(unit, lookup, loadedBank, loadedImage))
         return;
-    if (!asdTMTexTableNodeIsLoaded(loadedBank))
+    if (!asdTMTexTableNodeIsLoaded(loadedBank, loadedImage))
         return;
     if (!recordPrepareLinkedOwner(g_aocSystem, bank, image)) {
         s32 sprite = image * 1000 + 1;

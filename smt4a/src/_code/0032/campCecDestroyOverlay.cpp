@@ -10,7 +10,7 @@ extern void scrScriptProcessDestroy(u32 process);
 extern void jobStop(u32 job, u16 arg);
 extern u8 gameDataTestFlags(u8 value);
 extern s32 gameDataGetRecordValue(void);
-extern void FUN_0032e25c(void *block, s32 value);
+extern void slotNameDisplaySetEntry(void *block, s32 value);
 extern void cecProcessCall2(void);
 extern u32 cecProcessForward(void *block);
 extern u32 *rt_aeabi_memclr(void *block, u32 size);
@@ -49,7 +49,7 @@ void campCecDestroyOverlay(s32 leaving)
     } else {
         if (overlay->unk16C != 0 && gameDataTestFlags(0x20) != 0) {
             if (gameDataGetRecordValue() == 0) {
-                FUN_0032e25c(g_campCec.instance->block40, 0);
+                slotNameDisplaySetEntry(g_campCec.instance->block40, 0);
             }
             cecProcessCall2();
             cecProcessForward(g_campCec.instance->block40);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: parameter tables load independent addresses instead of retail's adjacent-table subtractions. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "font/GuestWin/GuestWin.h"
 #include "ui/UiSpriteState.h"
@@ -15,7 +14,12 @@ void paramsClearPacket(void *);
 
 void FUN_0014e188(UiSpriteState *, u32, u32, void *, u32, f32);
 void uiSpriteSelectAnim(UiSpriteState *, s32);
-extern u8 DAT_0052fa2c[], DAT_0052fa44[], DAT_0052fa5c[];
+static const u32 guestWindowTextureParameters[] = { 0, 0, 0, 0x140, 0, 8 };
+static const u32 guestWindowTransformParameters[] = { 0x3f800000, 0x3f800000, 0, 0x3f800000, 0, 4 };
+static const s32 guestWindowAnimationParameters[] = {
+    1, 0, -3, 0, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0,
+    0, 0, -3, 1, 0, -3, 0, -1, 0, -1, -1, 0, -1, 0
+};
 extern GuestWinWorkA *g_guestWin;
 
 // Allocate the guest window and create its update, left-screen and right-screen draw tasks.
@@ -42,7 +46,7 @@ void FUN_001409e4(void)
     taskCreateDraw("GuestWin DrawUpRight", 0xe2, 0, 0, FUN_00155840, 0, 0, work->process);
     work = reinterpret_cast<GuestWindowView *>(g_guestWin);
     paramsClearPacket(work->parameters);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(work->parameters), DAT_0052fa2c, 0x18, DAT_0052fa44, 0x18, 0, 0, 0, 0, DAT_0052fa5c, 0x70);
+    paramsInit(reinterpret_cast<UiResourceParameters *>(work->parameters), guestWindowTextureParameters, 0x18, guestWindowTransformParameters, 0x18, 0, 0, 0, 0, guestWindowAnimationParameters, 0x70);
     FUN_0014e188(&work->sprite, 8, 0x87, work->parameters, 1, 1.0f);
     uiSpriteSelectAnim(&work->sprite, 0);
 }

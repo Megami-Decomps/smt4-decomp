@@ -1,16 +1,20 @@
-/* NON_MATCHING: the effect-speed constant and the pushed-state bookkeeping are scheduled differently (retail holds 1.0f in s16 across the pops and spreads the float arguments of the overlay call over s0-s4). */
+/* NON_MATCHING: real fade-animation speed getter recovered; effect/draw VFP argument placement and render-state pop bookkeeping differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
 
+struct TitleFadeAnimation {
+    u8 prefix[0x20];
+    f32 speed;
+};
 /* A title-scene overlay object: flags at 0 (0x80: fade overlay), a state at 4 (drawn from 3 on) and
  * its fade amount at 0x208. */
 typedef struct TitleOverlay {
     /* 0x000 */ u32 flags;
     /* 0x004 */ s32 state;
-    /* 0x008 */ u8 unk008[0x200];
-    /* 0x208 */ f32 fade;
+    /* 0x008 */ u8 unk008[0x1E0];
+    /* 0x1E8 */ TitleFadeAnimation fadeAnimation;
 } TitleOverlay;
 
 extern RenderCtx *g_titleScene;
@@ -23,6 +27,7 @@ void FUN_002c1b64(RenderCtx *ctx, u32 handle);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 FUN_002c15ac(u32 kind);
 void FUN_002c0944(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
+f32 vec2GetSpeed(const void *object);
 void FUN_0038368c(TitleOverlay *overlay);
 void FUN_002c198c(RenderCtx *ctx);
 void FUN_002c18e4(RenderCtx *ctx);
@@ -39,7 +44,7 @@ void FUN_003844a0(TitleOverlay *overlay)
     efctSetSpeed(1.0f);
     renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
     if ((overlay->flags & 0x80) != 0) {
-        u8 alpha = (u8)(u32)(overlay->fade * 192.0f);
+        u8 alpha = (u8)(u32)(vec2GetSpeed(&overlay->fadeAnimation) * 192.0f);
 
         renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
         FUN_002c1b64(g_titleScene, 0);

@@ -1,9 +1,9 @@
 /* NON_MATCHING: coordinate load order and segment placement constant hoisting differ. */
 #include "shard/S1ListPanel.h"
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 s32 FUN_003e4978(void);
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);
 void efctSetSpeed(f32 speed);
 void FUN_001835b4(u32 flags, s32 group, s32 sprite, s32 x, s32 y, s32 z);
 const SpriteInfo *FUN_001834a4(u32 group, u32 sprite);

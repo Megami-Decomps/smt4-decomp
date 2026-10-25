@@ -20,11 +20,11 @@ struct ItemRowContext {
 typedef char CheckItemRowSize[sizeof(ItemRowAnimation) == 0x8c ? 1 : -1];
 typedef char CheckItemRowOffset[offsetof(ItemRowContext, rows) == 0x128ac ? 1 : -1];
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 extern const char DAT_0052b4b4[];
 extern const char DAT_0052b4c4[];
 SpriteInfo *FUN_001834a4(s32 group, s32 index);
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
+f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 value);
 s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 void btlDrawLayeredHud(ItemRowContext *context, s32 x, s32 y, s32 label);

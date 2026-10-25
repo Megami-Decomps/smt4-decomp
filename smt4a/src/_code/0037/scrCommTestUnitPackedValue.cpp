@@ -8,7 +8,7 @@ extern "C" {
 s32 scrCommTestUnitPackedValue(u32 index)
 {
     s32 slot = scrGetArg(index);
-    ScriptUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     scrSetResult((unit->data->values[slot] >> 10) == 1);
     return 1;
 }

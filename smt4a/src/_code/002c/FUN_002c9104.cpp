@@ -1,12 +1,11 @@
-/* NON_MATCHING: Retail bl 0 [R_ARM_CALL FUN_0030fc80] differs from recovered add r0, sp, #8. */
+/* NON_MATCHING: retrieved and constructed date-time locals occupy opposite stack slots. */
 #include "common.h"
 
 // Private views of the date-time value and the referenced game-data records.
 namespace {
 
 struct DateTimeView {
-    u32 unk00; // 0x00
-    u32 unk04; // 0x04
+    u64 ticks; // 0x00
 };
 
 struct TimeRecordView {

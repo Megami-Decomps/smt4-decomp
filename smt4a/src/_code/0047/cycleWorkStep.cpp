@@ -12,7 +12,7 @@ typedef struct CycleWork {
 extern CycleWork *jobGetWork(u32 job);
 
 /* Advances the job's 40-step counter (+0x1798); past 0x14 it sets flag 0x200. */
-u32 cycleWorkStep(u32 job)
+s32 cycleWorkStep(u32 job)
 {
     CycleWork *work = jobGetWork(job);
     u32 *counter = &work->counter;

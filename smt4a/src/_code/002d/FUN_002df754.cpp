@@ -1,4 +1,4 @@
-/* NON_MATCHING: vertical anchor arithmetic contracts to VMLA rather than retail's two multiplies, and the initial zero registers are exchanged. */
+/* NON_MATCHING: separate scaled-height/baseline products recover retail arithmetic; zero/constants and initial roster address registers differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W6_W6Match8_BattleSpritePlacement.h"
@@ -45,8 +45,10 @@ u32 FUN_002df754(u32 job)
                     const BattleSpriteFrame *frame = stateEntryFindById(state, sprite->id)->frame;
                     BattleVector3 position = *reinterpret_cast<BattleVector3 *>(record->motion.position);
                     const u32 height = frame->height;
-                    position.y += static_cast<f32>(143 - (frame->top + static_cast<s32>(height))) * record->motion.scale +
-                        static_cast<f32>(height) * record->motion.scale;
+                    f32 scale = record->motion.scale;
+                    f32 scaledHeight = static_cast<f32>(height) * scale;
+                    f32 baselineOffset = static_cast<f32>(143 - (frame->top + static_cast<s32>(height))) * scale;
+                    position.y += baselineOffset + scaledHeight;
                     position.y += record->motion.scale * 2.0f;
                     position.x += record->spriteOffset.x;
                     position.y += record->spriteOffset.y;

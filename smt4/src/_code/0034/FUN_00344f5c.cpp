@@ -1,7 +1,7 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00344f5c` (_code @ 0x344f5c, 0x1b8c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: restored help option argument; signed-byte mode dispatch, VFP frame and switch control-flow tails remain unrecovered. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleQueue.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -44,7 +44,7 @@ int btlReflectCreateKind18(...);
 int FUN_0023cd08(...);
 int FUN_0023f4e4(...);
 int FUN_002505c0(...);
-int FUN_002568c4(...);
+int btlReflectQueueKind34(...);
 int FUN_0027e5e4(...);
 int FUN_00293230(...);
 int FUN_00338060(...);
@@ -70,7 +70,6 @@ int FUN_0023c700(...);
 int FUN_00244fb0(...);
 int slotResetIdle(...);
 int FUN_0027dbc8(...);
-int btlUnitGet(...);
 int btlMainFindEntryByListedId(...);
 int btlGetMainState(...);
 int FUN_002b6b00(...);
@@ -81,7 +80,7 @@ int FUN_00344cf4(...);
 int FUN_00394bbc(...);
 int FUN_003adc64(...);
 int btlUiInitializeIndexedSlots(...);
-int FUN_003c0390(...);
+int FUN_003c0390(unsigned int request, int entryIndex, unsigned char argument);
 int btlMessageStartUnlessFlagged(...);
 int FUN_003d1388(...);
 int VectorSignedToFloat(...);
@@ -134,7 +133,7 @@ extern int tableIsSupportedKind(unsigned int, unsigned int);
 /* Supplied declaration required: bgmSwitchCurrent. */
 extern int FUN_002485b8(void);
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_002568c4. */
+/* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: effectAreAllCompletionChecksReady. */
 /* Supplied declaration required: FUN_0026beb4. */
@@ -319,7 +318,7 @@ LAB_00344fc0:
     }
     else {
       *(unsigned int *)(DAT_00435d18 + 0x3028) = temp_v7 | 2;
-      temp_v5 = btlUnitGet(g_btlScriptUnit);
+      temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
       if (*(char *)(temp_v5 + 0x59c) != '\0') {
         FUN_00394bbc(*(unsigned int *)(temp_v5 + 0x594) & 0xffff,*(unsigned int *)(psVar2 + 4));
       }
@@ -583,7 +582,7 @@ LAB_00345938:
         temp_v5 = g_btlScriptUnit;
         FUN_003d1388();
         temp_v11 = temp_v5 < 2;
-        temp_v5 = btlUnitGet(g_btlScriptUnit);
+        temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
         FUN_0023c638(g_btlScriptUnit,(int)*(short *)(*(int *)(temp_v5 + 0x20) + 0x6e));
         FUN_0027dbc8(temp_v4,1);
       }
@@ -600,7 +599,7 @@ LAB_00345938:
     temp_v5 = btlGetMainState();
     if ((*(unsigned int *)(temp_v5 + 0x44a0) & 0x140) == 0) {
       if (psVar2[0x12] == 0) {
-        FUN_003c0390(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0x26));
+        FUN_003c0390(*(unsigned int *)(psVar2 + 0x14),*(unsigned int *)(psVar2 + 0x26),1);
         psVar2[0x12] = psVar2[0x12] + 1;
         temp_v1 = 1;
         psVar2[1] = temp_v1;
@@ -681,7 +680,7 @@ LAB_00345938:
     break;
   case '\x16':
     temp_v5 = btlGetMainState();
-    puVar9 = (unsigned int *)btlUnitGet(g_btlScriptUnit);
+    puVar9 = reinterpret_cast<unsigned int *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     unaff_r5 = (unsigned int *)(int)(short)*(unsigned int *)(psVar2 + 0x14);
     if (psVar2[0x13] != 0) {
       unaff_r5 = (unsigned int *)0x1;
@@ -690,7 +689,7 @@ LAB_00345938:
         (temp_v9 = FUN_00256940(g_btlMain,temp_v5,0), temp_v9 != 0)) &&
        (((*(unsigned int *)(temp_v5 + 0x44a0) & 0x1000) == 0 ||
         (temp_v9 = cameraTestDefaultPose(g_btlMain), temp_v9 == 0)))) {
-      FUN_002568c4(0,*(unsigned int *)(psVar2 + 4));
+      btlReflectQueueKind34(0,*(unsigned int *)(psVar2 + 4));
     }
     if ((*puVar9 & 0x200) != 0) {
       unaff_r5 = (unsigned int *)0x0;
@@ -1058,7 +1057,7 @@ LAB_00346258:
     break;
   case '.':
     unaff_r5 = (unsigned int *)btlGetMainState();
-    temp_v4 = btlUnitGet(g_btlScriptUnit);
+    temp_v4 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     if (*(int *)(psVar2 + 0x14) == 0) {
       temp_v5 = 0;
       puVar9 = unaff_r5 + 0x7a6;

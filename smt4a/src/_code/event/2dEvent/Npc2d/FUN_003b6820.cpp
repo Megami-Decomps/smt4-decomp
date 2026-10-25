@@ -1,4 +1,4 @@
-/* NON_MATCHING: constructor store order, placement dispatch, variant reload and task argument scheduling differ. */
+/* NON_MATCHING: split scale initialization and stored variant reload now match; saved arguments, placement dispatch, and task argument scheduling still differ. */
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
@@ -43,7 +43,8 @@ void FUN_003b6820(u32 id, s32 placement, u32 variant)
     asdDebugTrace(DAT_0052f4fc, 0x380);
     PortraitTaskWorkA *work = static_cast<PortraitTaskWorkA *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(PortraitTaskWorkA), 1));
     sysMemClear(work, sizeof(PortraitTaskWorkA));
-    work->base.scale.x = work->base.scale.y = 1.0f;
+    work->base.scale.x = 1.0f;
+    work->base.scale.y = 1.0f;
     work->base.scale.z = 0.0f;
     work->create.handle = 0xFFFFFFFF;
     work->base.state = 0x41;
@@ -55,7 +56,7 @@ void FUN_003b6820(u32 id, s32 placement, u32 variant)
     for (s32 index = 0; index < 6; ++index)
         work->create.cached[index] = 0;
     work->create.normalizedId = FUN_00283498(id);
-    work->create.file = *dataTable19FindAddonWord(work->create.normalizedId, variant);
+    work->create.file = *dataTable19FindAddonWord(work->create.normalizedId, work->create.variant);
     if (placement == 0) {
         work->base.x = -20;
         work->base.rotation = -48.0f;

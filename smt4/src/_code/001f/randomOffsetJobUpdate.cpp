@@ -1,14 +1,14 @@
 /* NON_MATCHING: division temporary uses S1 rather than S3 and final sign branch is not placed after the epilogue; -O2 candidate. */
 #include "event/bustupEvent/BustupShake.h"
+#include "shard/JobWork.h"
 
 
 extern "C" {
-ShakeJobWorkIV *jobGetWork(u32 job);
 s32 randBetween(s32 minimum, s32 maximum);
 
 s32 randomOffsetJobUpdate(u32 job)
 {
-    ShakeJobWorkIV *work = jobGetWork(job);
+    ShakeJobWorkIV *work = reinterpret_cast<ShakeJobWorkIV *>(jobGetWork(job));
     f32 amplitudeX = work->amplitudeX;
     f32 amplitudeY = work->amplitudeY;
     if (work->elapsed >= work->fadeStart && work->duration > work->fadeStart) {

@@ -1,6 +1,6 @@
 #ifndef SHARD_W5_W5MATCH7_SCRIPTUNIT_H
 #define SHARD_W5_W5MATCH7_SCRIPTUNIT_H
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 struct ScriptEntryInfo {
     /* 0x000 */ u8 unk000[0x12c];
     /* 0x12C */ u16 id;
@@ -32,7 +32,6 @@ struct ScriptUnit {
 };
 extern "C" {
 extern u32 g_btlScriptUnit;
-ScriptUnit *btlUnitGet(u32 id);
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 result);
 }

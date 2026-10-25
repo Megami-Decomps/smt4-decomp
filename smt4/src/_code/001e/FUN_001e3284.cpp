@@ -1,4 +1,4 @@
-/* NON_MATCHING: all bank-reset stores and loop sizes match, but the initial global/pointer loads and loop-counter register allocation differ. */
+/* NON_MATCHING: global reset/load ordering now matches; work/global-address registers and subordinate loop-counter registers are exchanged. */
 #include "common.h"
 
 struct ResetEntry {
@@ -85,8 +85,8 @@ static __inline void resetSubEntry(ResetSubEntry *entry)
 // Reset the main entry bank and its two subordinate banks.
 extern "C" void FUN_001e3284()
 {
-    ResetEntryWork *work = DAT_00447e10;
     g_gameState.unk214 = 0;
+    ResetEntryWork *work = DAT_00447e10;
     work->unk0000 = 0;
     work->unk000c = 0;
     work->unk000e = 0;

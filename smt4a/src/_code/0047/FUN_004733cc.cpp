@@ -1,4 +1,4 @@
-/* NON_MATCHING: logic and call order match; retail reserves 16 more bytes of struct-return temporaries (72-byte frame, layout it@28/rec@40/extra@64) and passes an uninitialised r1 (the nothrow tag) to asdOperatorNewE. */
+/* NON_MATCHING: restored uninitialised nothrow tag; retail struct-return temporaries reserve72 bytes versus56 here, and item ID read bypasses its accessor. */
 #include "addon/aocMain.h"
 #include "classes/WindowStatus.h"
 #include "AsdSDK/AsdDebugHooks.h"
@@ -51,7 +51,9 @@ void FUN_004733cc(AocListJob *job)
     AocListEntry *entry;
     table30GetEntryB(&entry, aoc->contentTable, job->entryIndex);
     u32 itemCount = FUN_004ffd4c(&entry);
-    u16 *ids = (u16 *)asdOperatorNewE(itemCount * 2);
+    // Retail forwards an uninitialised nothrow tag in r1.
+    u32 nothrowTag;
+    u16 *ids = (u16 *)asdOperatorNewE(itemCount * 2, nothrowTag);
     u32 kept = 0;
     if (ids != NULL) {
         for (u32 i = 0; i < itemCount; i++) {

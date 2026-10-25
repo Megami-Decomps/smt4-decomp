@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reaches the flag at +0x4C0 through a separate base register (r5 + 0x400) and keeps the zero in r1/r6; register allocation differs */
+/* NON_MATCHING: restored node0 release argument and signed ownership flags; only zero argument/constant lifetime and high-base setup order differ. */
 /* Closes the Config screen: releases the resources it acquired, frees its heap blocks and the work area. */
 #include "common.h"
 #include "camp/Config/Config.h"
@@ -6,7 +6,7 @@
 extern "C" {
 
 int asdMemFree(void *ptr);               /* heap free */
-int asdTMTexTableReleaseNode(int type);
+int asdTMTexTableReleaseNode(int type, u32 node);
 int scrScriptProcessDestroy(u32 resource);
 int ifTouchRegionRemove(void);
 int dataTableFree(int id);
@@ -22,7 +22,7 @@ void configDestroy(void)
 
     if (g_config != NULL) {
         if (config->hasType24B != 0) {
-            asdTMTexTableReleaseNode(0x24);
+            asdTMTexTableReleaseNode(0x24, 0);
             config->hasType24B = 0;
         }
         if (config->hasType24A != 0) {

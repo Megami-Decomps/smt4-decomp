@@ -1,22 +1,24 @@
-/* NON_MATCHING: retail retains the zero result in r5 and sets the forwarded argument separately on both exits; compiler uses an immediate zero and merges the argument setup. */
+/* NON_MATCHING: default result is preserved correctly; forwarded fade argument is still shared before the family test rather than set in each tail-call branch. */
 #include "common.h"
 
 struct ResidentTableEntry;
 
 extern "C" {
 ResidentTableEntry* jyoucyuGetTableEntry(u32 index);
-u32 asdSoundApplyBankValue(u32 index, u32 value);
-u32 FUN_002e10ac(u32 index, u32 value);
+s32 asdSoundApplyBankValue(u32 index, s32 frames);
+s32 asdSoundStopSlot(u32 index, s32 frames);
 
 // Apply the value to the selected sound family unless resident table entry one is active.
 u32 FUN_003d2158(s32 soundId, u32 value)
 {
-    if (jyoucyuGetTableEntry(1) != NULL) {
-        return 0;
+    u32 result = 0;
+    if (jyoucyuGetTableEntry(1) == NULL) {
+        if (soundId >= 100000) {
+            return asdSoundApplyBankValue(soundId - 100000, value);
+        } else {
+            return asdSoundStopSlot(soundId, value);
+        }
     }
-    if (soundId >= 100000) {
-        return asdSoundApplyBankValue(soundId - 100000, value);
-    }
-    return FUN_002e10ac(soundId, value);
+    return result;
 }
 }

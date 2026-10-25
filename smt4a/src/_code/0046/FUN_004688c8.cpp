@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004688c8` (_code @ 0x4688c8, 0x5c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ int FUN_0034aae4(void);
 int stateHolder4Request(int);
 int FUN_003dec50(void);
 int FUN_003df168(int *, int);
-int gameFlagSetValue(...);
 int FUN_00417a60(int);
 int FUN_00417e08(int);
 int pickObjStart(unsigned int *, unsigned char *);
@@ -74,7 +74,6 @@ extern int stateHolder4IsD(void);
 /* Supplied declaration required: stateHolder4Request. */
 /* Supplied declaration required: FUN_003dec50. */
 /* Supplied declaration required: FUN_003df168. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00417a60. */
 /* Supplied declaration required: FUN_00417e08. */
 /* Supplied declaration required: pickObjStart. */
@@ -251,7 +250,7 @@ LAB_004689f8:
         temp_v3 = temp_v4 + temp_v2 * 2;
         temp_v0 = *(short *)(temp_v3 + 0xe0);
         if (temp_v0 != 0) {
-          gameFlagSetValue(temp_v0,1);
+          gameFlagSetValue(temp_v0, 1, 1);
         }
         temp_v0 = *(short *)(temp_v3 + 0xe6);
         if (temp_v0 != 0) {

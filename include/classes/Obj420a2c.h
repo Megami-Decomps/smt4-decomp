@@ -45,7 +45,8 @@ class Obj420a2c : public Obj420a2cBase {
 public:
     Obj420a2c();
     ~Obj420a2c();
-    virtual int buildEntries(); /* +0x00 */
+    virtual int buildEntries(Obj420a2cOwner *owner, Obj420a2cSource *sourceA,
+                             Obj420a2cSource *sourceB); /* +0x00 */
     virtual void releaseSources(); /* +0x04 */
     virtual s32 getValue(u32) const; /* +0x08 */
     virtual u32 getOutput(u32) const; /* +0x0c */
@@ -61,5 +62,7 @@ public:
     /* 0x40 */ Obj420a2cEntry entries[3];
     /* 0xA0 */ u32 unkA0;
 };
+typedef char Obj420a2cLayoutCheck[sizeof(Obj420a2cBase) == 8 &&
+    sizeof(Obj420a2cEntry) == 0x20 && sizeof(Obj420a2c) == 0xA4 ? 1 : -1];
 
 #endif

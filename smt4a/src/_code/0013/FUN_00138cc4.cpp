@@ -1,10 +1,10 @@
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 extern "C" {
 
 extern u8 DAT_005b40ca;
 
-int FUN_0013ebd8(void);
 int FUN_00144534(void);
 int FUN_001a0380(void);
 
@@ -15,7 +15,7 @@ int FUN_00138cc4(void)
 
     FUN_00144534();
     result = FUN_001a0380();
-    FUN_0013ebd8();
+    FUN_0013ebd8(result);
     if ((s32)(result & 0x80000000) >= 0) {
         DAT_005b40ca = 0;
     }

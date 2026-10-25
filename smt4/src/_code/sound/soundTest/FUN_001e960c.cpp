@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail rematerializes the increment/decrement on the in-range wrap path. */
 #include "common.h"
 #include <stddef.h>
 
@@ -15,13 +14,14 @@ typedef char SoundTestControlViewOffsetsCheck[
     offsetof(SoundTestControlView, state) == 8 &&
     offsetof(SoundTestControlView, selection) == 0x10 ? 1 : -1];
 
-inline s32 wrapSoundTestSelection(s32 selection)
+inline s32 stepSoundTestSelection(s32 selection, s32 step)
 {
-    if (selection > 9) {
-        return 0;
-    }
-    if (selection < 0) {
-        return 9;
+    if (selection + step > 9) {
+        selection = 0;
+    } else if (selection + step < 0) {
+        selection = 9;
+    } else {
+        selection += step;
     }
     return selection;
 }
@@ -52,10 +52,10 @@ u32 FUN_001e960c()
         break;
     case 1:
         if (padIsButtonRepeat(4)) {
-            work->selection = wrapSoundTestSelection(work->selection - 1);
+            work->selection = stepSoundTestSelection(work->selection, -1);
         }
         if (padIsButtonRepeat(3)) {
-            work->selection = wrapSoundTestSelection(work->selection + 1);
+            work->selection = stepSoundTestSelection(work->selection, 1);
         }
         if (padIsButtonPressed(0)) {
             switch (work->selection) {

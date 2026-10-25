@@ -2,12 +2,13 @@
 #include "gfx/NamedEffectAttachment.h"
 #include "gfx/QuaternionWorkspace.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "nw/math/MTX33.h"
 
 extern "C" {
 extern const char DAT_0052607c[];
 void memClearWords(void *destination, u32 size);
 s32 textFormatBuffer(char *destination, const char *format, ...);
-u8 lookupNameEntry(AsdMdlNode *node, const char *name, EffectAttachmentPosition *position);
+u8 lookupNameEntry(AsdMdlNode *node, const char *name, nw::math::VEC3 *position);
 u32 FUN_0019f30c(AsdMdlNode *node, const char *name, RotationQuaternion *rotation);
 void FUN_001b4eb8(void *effect, const EffectAttachmentPosition *position);
 void FUN_001acb48(void *effect, const RotationQuaternion *rotation);
@@ -31,7 +32,7 @@ void FUN_001881e8(AsdMdlObject *model, NamedEffectAttachment *attachments)
             char name[32];
             memClearWords(name, sizeof(name));
             textFormatBuffer(name, DAT_0052607c, entry->index);
-            EffectAttachmentPosition jointPosition;
+            nw::math::VEC3 jointPosition;
             if (lookupNameEntry(node, name, &jointPosition)) {
                 position.x = jointPosition.x;
                 position.y = jointPosition.y;

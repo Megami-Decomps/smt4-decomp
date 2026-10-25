@@ -1,19 +1,9 @@
-/* NON_MATCHING: sprite-coordinate/dimension load order and pointer registers differ; retail retains an extra sprite-pointer move for each masked-dimension region. */
+/* NON_MATCHING: native title-config global receiver and callback view recovered; masked sprite dimension/position loads and saved-pointer moves differ. */
 #include "shard/S1ListPanel.h"
-
-struct SpriteTouchPanel {
-    /* 0x00 */ u8 unk00[0x1c];
-    /* 0x1c */ s16 regions[4];
-    /* 0x24 */ s16 count;
-    /* 0x26 */ u8 unk26[0xc2];
-    /* 0xe8 */ u8 selection[1];
-};
-
-struct SpriteTouchOwner {
-    SpriteTouchPanel *panel;
-};
+#include "title/titleConfig.h"
 
 extern "C" {
+extern TitleConfigCallbackView *g_titleConfig;
 void ifTouchRegionRemove(void);
 void memFill8(void *, u32 value);
 s32 FUN_0029efa8(void *selection);
@@ -29,22 +19,22 @@ static __inline s32 addSpriteTouchRegion(const SpriteInfo *anchor, const SpriteI
 }
 
 // Rebuild four touch regions from the selected sprite-group anchor.
-extern "C" void FUN_00259e98(SpriteTouchOwner *owner)
+extern "C" void FUN_00259e98(void)
 {
-    SpriteTouchPanel *panel = owner->panel;
-    for (s32 index = 0; index < panel->count; ++index) {
+    TitleConfigCallbackView *panel = g_titleConfig;
+    for (s32 index = 0; index < panel->countB; ++index) {
         ifTouchRegionRemove();
     }
-    memFill8(panel->regions, 0xffffffff);
-    panel->count = 0;
-    SpriteInfo *anchor = FUN_002bf4f8(0x2f, FUN_0029efa8(panel->selection) + 0x1f);
-    panel->regions[0] = addSpriteTouchRegion(anchor, FUN_002bf4f8(0x2f, 0x1b));
-    ++panel->count;
-    panel->regions[1] = addSpriteTouchRegion(anchor, FUN_002bf4f8(0x2f, 0x34));
-    panel->regions[2] = addSpriteTouchRegion(anchor, FUN_002bf4f8(0x2f, 0x38));
+    memFill8(&panel->resetButton, 0xffffffff);
+    panel->countB = 0;
+    SpriteInfo *anchor = FUN_002bf4f8(0x2f, FUN_0029efa8(panel->cursor) + 0x1f);
+    panel->resetButton = addSpriteTouchRegion(anchor, FUN_002bf4f8(0x2f, 0x1b));
+    ++panel->countB;
+    panel->leftButton = addSpriteTouchRegion(anchor, FUN_002bf4f8(0x2f, 0x34));
+    panel->rightButton = addSpriteTouchRegion(anchor, FUN_002bf4f8(0x2f, 0x38));
     SpriteInfo *sprite = FUN_002bf4f8(0x2f, 0x33);
-    panel->regions[3] = ifTouchRegionAdd(static_cast<s16>(anchor->x + sprite->x),
-                                        static_cast<s16>(anchor->y + sprite->y),
-                                        sprite->size[0], sprite->size[1]);
-    panel->count += 3;
+    panel->slider = ifTouchRegionAdd(static_cast<s16>(anchor->x + sprite->x),
+                                   static_cast<s16>(anchor->y + sprite->y),
+                                   sprite->size[0], sprite->size[1]);
+    panel->countB += 3;
 }

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 struct MapResumeFlagsView {
     u8 unk0000[0x16a0];
@@ -8,7 +9,7 @@ struct MapResumeFlagsView {
 extern "C" {
 MapResumeFlagsView *gameFlagsGetBlock(void);
 extern s32 g_gameState;
-void gameFlagSetValue(u32, s32, s32);
+
 s32 gameFlagIsSet(u32);
 void btlViewResetDefaults(void);
 void FUN_002440f4(void);

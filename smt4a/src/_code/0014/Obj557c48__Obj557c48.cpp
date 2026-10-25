@@ -1,3 +1,4 @@
+/* NON_MATCHING: vector reserve storage/count arithmetic and growth branches differ; native object fields and0x100 capacities preserved. */
 #include "classes/Obj557c48.h"
 
 /* Clears the table and reserves room for 0x100 words and 0x100 entries. */

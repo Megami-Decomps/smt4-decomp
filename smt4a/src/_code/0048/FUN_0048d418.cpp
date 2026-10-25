@@ -1,4 +1,4 @@
-/* NON_MATCHING: close: register assignment (retail: count r6, loop index r5) and the placement of the gameState test / mode-group compare chains differ; logic and the three loops are the same */
+/* NON_MATCHING: for-loop counter lifetimes match; mode predicate grouping and sort/output scratch registers differ. */
 #include "map/mapDepart.h"
 
 /* The destination list this function fills: entries of {active, id} followed by the entry count. */
@@ -42,56 +42,51 @@ void FUN_0048d418(SelectableList *list, s32 kind)
     s32 count = 0;
     s32 j;
 
-    if (dataTable2BType1Count(&view) > 0) {
-        do {
-            TableRecord *record = dataTable2BType1GetEntry(&view, i);
-            s32 found;
+    for (; i < dataTable2BType1Count(&view); ++i) {
+        TableRecord *record = dataTable2BType1GetEntry(&view, i);
+        s32 found;
 
-            if (record->kind != kind) {
+        if (record->kind != kind)
+            continue;
+        found = 0;
+        if (kind == 0x17) {
+            s32 mode = g_gameState.submode;
+            if (((mode == 1 || mode == 2) || (mode == 3 || mode == 6)) &&
+                (record->first == 0xB0 || record->first == 0x7F || record->first == 0x80))
                 continue;
-            }
-            found = 0;
-            if (kind == 0x17) {
-                s32 mode = g_gameState.submode;
-
-                if (((mode == 1 || mode == 2) || (mode == 3 || mode == 6)) &&
-                    (record->first == 0xB0 || record->first == 0x7F || record->first == 0x80)) {
-                    continue;
-                }
-                if ((mode == 4 || mode == 5) && (record->first == 0x79 || record->first == 0x7A ||
-                                                 record->first == 0x7D || record->first == 0x7E)) {
-                    continue;
-                }
-            }
-            if (!(*(s32 *)((u8 *)&g_gameState + 0x660) != 0 ||
-                  ((record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag) != 0) &&
-                   (record->excludedFlag == 0 || gameFlagIsSet(record->excludedFlag) == 0) &&
-                   FUN_004083a8(record->first, record->second) != 0))) {
+            if ((mode == 4 || mode == 5) && (record->first == 0x79 || record->first == 0x7A ||
+                                            record->first == 0x7D || record->first == 0x7E))
                 continue;
-            }
-            for (j = 0; j < count; j++) {
-                if (ids[j] == record->id) {
-                    found = 1;
-                }
-            }
-            if (!found) {
-                ids[count++] = record->id;
-            }
-        } while (++i < dataTable2BType1Count(&view));
-        for (i = 0; i < count - 1; i++) {
-            for (j = i + 1; j < count; j++) {
-                if (ids[j] > ids[i]) {
-                    s16 swap = ids[i];
-
-                    ids[i] = ids[j];
-                    ids[j] = swap;
-                }
+        }
+        if (g_gameState.showAllEntries == 0) {
+            if (record->requiredFlag != 0 && !gameFlagIsSet(record->requiredFlag))
+                continue;
+            if (record->excludedFlag != 0 && gameFlagIsSet(record->excludedFlag))
+                continue;
+            if (!FUN_004083a8(record->first, record->second))
+                continue;
+        }
+        for (j = 0; j < count; j++) {
+            if (ids[j] == record->id)
+                found = 1;
+        }
+        if (!found) {
+            s16 id = record->id;
+            ids[count++] = id;
+        }
+    }
+    for (i = 0; i < count - 1; i++) {
+        for (j = i + 1; j < count; j++) {
+            if (ids[j] > ids[i]) {
+                s16 swap = ids[i];
+                ids[i] = ids[j];
+                ids[j] = swap;
             }
         }
-        for (i = 0; i < count; i++) {
-            list->entries[i].active = 1;
-            list->entries[i].id = ids[i];
-        }
+    }
+    for (i = 0; i < count; i++) {
+        list->entries[i].active = 1;
+        list->entries[i].id = ids[i];
     }
     list->count = count;
 }

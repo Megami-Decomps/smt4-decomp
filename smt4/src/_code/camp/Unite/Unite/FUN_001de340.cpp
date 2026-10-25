@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001de340` (_code @ 0x1de340, 0x1360 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
-int gameFlagSetValue(...);
 int statusPanelSetOpen(...);
 int FUN_0029defc(...);
 int FUN_0029f848(...);
@@ -60,7 +60,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001d1d78(...); /* 0x1d1d78 */
-extern int FUN_001f6524(...); /* 0x1f6524 */
+extern int devilCompareTablePriority(...); /* 0x1f6524 */
 extern int devilCompareRaceLevelDescending(...); /* 0x2073e4 */
 extern int devilCompareBySetCategoryGrade(...); /* 0x219720 */
 extern int FUN_002c6e90(...); /* 0x2c6e90 */
@@ -80,7 +80,6 @@ extern int *g_unite; /* 0x43dd68 */
 /* Supplied declaration required: halfwordListAppendGroup. */
 /* Supplied declaration required: FUN_00269bc4. */
 /* Supplied declaration required: gameRecordCopy. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: statusPanelSetOpen. */
 extern int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029defc. */
@@ -596,7 +595,7 @@ LAB_001dedf4:
             }
           }
           else {
-            gameFlagSetValue(0x461,0);
+            gameFlagSetValue(0x461, 0, 1);
             FUN_002b7bca(temp_v19,param_1[0x16d],8,&LAB_002dcf9c);
             temp_v13 = 0;
             temp_v14 = 0;
@@ -635,7 +634,7 @@ LAB_001dedf4:
                   }
 LAB_001df284:
                   if ((int)temp_v13 <= (int)temp_v11) {
-                    gameFlagSetValue(0x461,1);
+                    gameFlagSetValue(0x461, 1, 1);
                     temp_v2 = param_1[temp_v14 * 2 + 0x4e5];
                     temp_v8 = temp_v13 + 1;
                     param_1[temp_v13 * 2 + 0x250e] = param_1[temp_v14 * 2 + 0x4e4];
@@ -740,7 +739,7 @@ LAB_001df3cc:
           }
           if ((*pbVar20 & 0x7f) == 3) {
             if (temp_v15 != 0) {
-              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,FUN_001f6524);
+              FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareTablePriority);
             }
             else {
               FUN_002b7bca(piVar9 + 0x189e,piVar9[0x199c],2,devilCompareByEntryValue);

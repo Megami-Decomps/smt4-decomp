@@ -8,7 +8,7 @@ int FUN_0023cb70(int, unsigned int, int, int);
 int transitionConfigureAndReset(int, unsigned int, int);
 int FUN_0023cd08(...);
 int FUN_00256898(int, unsigned int);
-int FUN_002568c4(int, unsigned int);
+int btlReflectQueueKind34(int, unsigned int);
 int FUN_002630e0(...);
 int FUN_003d64dc(...);
 int FUN_003d6b7c(...);
@@ -44,7 +44,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: transitionConfigureAndReset. */
 /* Supplied declaration required: FUN_0023cd08. */
 /* Supplied declaration required: FUN_00256898. */
-/* Supplied declaration required: FUN_002568c4. */
+/* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002630e0. */
 extern unsigned int btlGetMainState(void);
@@ -87,7 +87,7 @@ void FUN_003445f8(unsigned int param_1,int param_2)
       temp_v4 = btlGetMainState();
       temp_v5 = FUN_00256940(g_btlMain,temp_v4,1);
       if ((temp_v5 != 0) && ((*(unsigned int *)(g_btlMain + 0x634) & 0x1000000) == 0)) {
-        FUN_002568c4(0,*(unsigned int *)(param_2 + 8));
+        btlReflectQueueKind34(0,*(unsigned int *)(param_2 + 8));
       }
     }
     FUN_00256898(1,*(unsigned int *)(param_2 + 8));

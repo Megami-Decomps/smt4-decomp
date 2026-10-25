@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 81 diff lines remain, scheduling/register allocation only. */
+/* NON_MATCHING: positive-count preheader schedules loop initialization after the guard; final repeated-color argument uses r0 rather than the preceding r2 copy. */
 #include "camp/RenderCtx.h"
 #include <string.h>
 
@@ -19,19 +19,24 @@ void FUN_003a3400(f32 height)
 {
     u32 colors[12];
     memcpy(colors, DAT_00532240.colors, sizeof(colors));
-    if (DAT_006160e0.count != 0) {
+    DebugBoundsRegistry *registry = &DAT_006160e0;
+    if (registry->count != 0) {
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, FUN_001692ac(5, 1));
         FUN_0016c4b8(g_renderCtx, 0);
-        if (DAT_006160e0.count > 0) {
+        if (registry->count > 0) {
             height += 100.0f;
-            for (s32 index = 0; index < DAT_006160e0.count; ++index) {
-                const DebugBoundsRecord *bounds = &DAT_006160e0.entries[index];
+            for (s32 index = 0; index < registry->count; ++index) {
+                const DebugBoundsRecord *bounds = &registry->entries[index];
+                f32 minimumX = bounds->minimum[0];
+                f32 minimumZ = bounds->minimum[2];
+                f32 maximumZ = bounds->maximum[2];
+                f32 maximumX = bounds->maximum[0];
                 u32 color = colors[index % 12] | 0x70;
-                FUN_00280a08(bounds->minimum[0], height, bounds->minimum[2],
-                    bounds->minimum[0], height, bounds->maximum[2],
-                    bounds->maximum[0], height, bounds->minimum[2],
-                    bounds->maximum[0], height, bounds->maximum[2], color, color, color, color);
+                FUN_00280a08(minimumX, height, minimumZ,
+                    minimumX, height, maximumZ,
+                    maximumX, height, minimumZ,
+                    maximumX, height, maximumZ, color, color, color, color);
             }
         }
         renderStackPop(&g_renderCtx->stackA);

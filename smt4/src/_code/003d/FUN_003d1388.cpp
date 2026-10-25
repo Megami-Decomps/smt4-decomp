@@ -6,7 +6,7 @@ extern "C" {
 // Count pairs with a nonnegative first value and a positive second value.
 s32 FUN_003d1388(void *contextHandle)
 {
-    UnitPairTable *unit = btlUnitGet(contextHandle);
+    UnitPairTable *unit = reinterpret_cast<UnitPairTable *>(btlUnitGet(reinterpret_cast<BtlState *const *>(contextHandle)));
     s32 *first = &unit->pairs[0][0];
     s32 *second = &unit->pairs[0][1];
     s32 count = 0;

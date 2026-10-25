@@ -1,10 +1,13 @@
-/* NON_MATCHING: compiler trims default cases0..2 and rebases the jump table at3; retail retains a zero-based83-entry table. Candidate -O2/-O1. */
 #include "common.h"
 
 extern "C" {
 u32 FUN_00368868(u32 kind)
 {
     switch (kind) {
+    case 0:
+    case 1:
+    case 2:
+        return 1;
     case 3:
     case 4:
     case 5:

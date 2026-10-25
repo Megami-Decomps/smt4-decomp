@@ -1,6 +1,7 @@
 /* NON_MATCHING: block layout: retail shares one reset-and-return block placed after the first flag test (beyond the threshold arms), and spills the table handle to the stack instead of fp; the entry bounds check also compares in the other direction */
 /* Starts the party-gift popup when the player's money has reached its level threshold: a table entry of kind 0x12 for the selected slot whose two flags allow it. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 struct PopupState {
     u32 state;
@@ -31,24 +32,21 @@ s32 randRange(s32 maximum);
 void *saveSlotFindSelected(void);
 void *gameGetPlayerData(void);
 s32 FUN_00480c28(void);
-u32 dataTableGet(u32 table, u32 index);
-GiftEntry *dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 u32 FUN_002d8b58(u32 kind);
 
 /* Number of entries in the gift table. */
 static __inline u32 giftTableCount(void)
 {
-    u32 table = dataTableGet(0x43, 0);
-    dataTableGetEntries();
+    void *table = dataTableGet(0x43, 0);
+    dataTableGetEntries(table);
     return dataTableGetCount(table);
 }
 
 /* The index-th gift table entry, or NULL when out of range. */
 static __inline GiftEntry *giftTableEntry(u32 index)
 {
-    u32 table = dataTableGet(0x43, 0);
-    GiftEntry *entries = dataTableGetEntries();
+    void *table = dataTableGet(0x43, 0);
+    GiftEntry *entries = static_cast<GiftEntry *>(dataTableGetEntries(table));
     return index < dataTableGetCount(table) ? &entries[index] : NULL;
 }
 
@@ -58,10 +56,14 @@ void FUN_00246128(void)
         u8 record[0x12C];
         u16 id;
     };
+    struct PlayerLevelView {
+        u8 prefix[0x62];
+        u16 level;
+    };
     if (g_popupState->state != 0) {
         return;
     }
-    s32 level = *(u16 *)((u8 *)gameGetPlayerData() + 0x62);
+    s32 level = static_cast<PlayerLevelView *>(gameGetPlayerData())->level;
     s32 money = FUN_00480c28();
     if (level <= 20) {
         if (money < 5000) {

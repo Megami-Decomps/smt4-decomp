@@ -4,7 +4,7 @@ extern "C" {
 void FUN_001654f8(const char *text, char *buffer, s32 mode);
 f32 FUN_00168594(const char *text, s32 font, f32 initialWidth);
 void uiSpriteSetKeyframe(void *sprite, s32 track, s32 frame);
-void FUN_0023723c(void *text, s32 font, u32 color, s32 mode, s32 alignment, const char *buffer);
+void asdTextFormatStream(void *text, s32 font, u32 color, s32 mode, s32 alignment, const char *buffer);
 void sysMemClear(void *buffer, u32 size);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 vec2GetXInt(const void *vector);
@@ -39,7 +39,7 @@ void infoWinExpandAndSetText(const char *text)
                 break;
             }
         }
-        FUN_0023723c(window->text, 3, 0xFFFFFFFF, 0, 3, window->message.buffer);
+        asdTextFormatStream(window->text, 3, 0xFFFFFFFF, 0, 3, window->message.buffer);
         window->timer = 30;
     }
 }

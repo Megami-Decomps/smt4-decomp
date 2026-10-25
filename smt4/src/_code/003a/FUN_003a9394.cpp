@@ -1,14 +1,8 @@
-/* NON_MATCHING: Retail beq 8c differs from recovered ldrbne r0, [r5, #138]. */
 #include "common.h"
+#include "ui/UiSpriteState.h"
 
 // Private views of the fields accessed by this routine.
 namespace {
-
-struct PositionStateView {
-    u8 unk00[0x8A]; // 0x00
-    s8 unk8A;       // 0x8A
-};
-
 struct UpdateStateView {
     u8 unk00[0x14];               // 0x000
     u32 unk14;                    // 0x014
@@ -16,7 +10,7 @@ struct UpdateStateView {
     u8 unk1C[0x7A];               // 0x01C
     u8 unk96[0x32];               // 0x096
     u8 unkC8[0xC0];               // 0x0C8
-    PositionStateView unk188;     // 0x188
+    UiSpriteState unk188;         // 0x188
 };
 
 }
@@ -25,9 +19,10 @@ extern "C" {
 void pointConvertToFloat(void* destination, s32 x, s32 y);
 s32 FUN_00295618(void);
 void FUN_0029e874(s32 value);
-void FUN_002bf818(PositionStateView* position);
-s32 vec2GetYInt(const PositionStateView* position);
-s32 vec2GetXInt(const PositionStateView* position);
+void FUN_002bf818(UiSpriteState* position);
+s32 vec2GetYInt(const UiSpriteState* position);
+s32 vec2GetXInt(const UiSpriteState* position);
+s8 uiSpriteGetCompletionState(const UiSpriteState* position);
 s32 FUN_0026b564(void);
 s32 utilityReturnSuccess(void* state);
 
@@ -38,7 +33,7 @@ void FUN_003a9394(UpdateStateView* state)
         FUN_0029e874(0);
     }
 
-    PositionStateView* position = &state->unk188;
+    UiSpriteState* position = &state->unk188;
     FUN_002bf818(position);
     s32 y = vec2GetYInt(position);
     s32 x = vec2GetXInt(position);
@@ -47,7 +42,7 @@ void FUN_003a9394(UpdateStateView* state)
     if (FUN_00295618() == 0) {
         return;
     }
-    if (position->unk8A == 0) {
+    if (uiSpriteGetCompletionState(position) == 0) {
         return;
     }
     if (FUN_0026b564() == 0) {

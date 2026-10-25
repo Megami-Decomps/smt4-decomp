@@ -8,11 +8,11 @@ typedef struct Entry {
     /* 0x0C */ u8 flag;
 } Entry;
 
-void FUN_00183318(s32 value);
+void buttonHelpBeginExit(s32 value);
 void FUN_00183e58(void);
 Entry *dataTableGetEntry0e(u32 id);
 
-/* Compares the entries for the record's id and for `id`: when the first has its flag clear and the second set, runs FUN_00183318(1); otherwise FUN_00183e58. Does nothing if either entry is missing. */
+/* Compares the entries for the record's id and for `id`: when the first has its flag clear and the second set, runs buttonHelpBeginExit(1); otherwise FUN_00183e58. Does nothing if either entry is missing. */
 void FUN_00168980(u32 id)
 {
     Entry *current;
@@ -24,7 +24,7 @@ void FUN_00168980(u32 id)
         return;
     }
     if (current->flag == 0 && other->flag != 0) {
-        FUN_00183318(1);
+        buttonHelpBeginExit(1);
         return;
     }
     FUN_00183e58();

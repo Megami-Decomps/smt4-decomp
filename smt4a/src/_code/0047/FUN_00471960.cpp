@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail indexes the slot bytes as register offsets (`#12 + i*16`) without unrolling; indexing owner->slots[i] directly unrolls the loop by two. */
+/* NON_MATCHING: slot bytes use computed object bases instead of retail's12/13-plus-index register offsets; slot-array load is predicated. */
 #include "addon/aocMain.h"
 
 extern "C" {

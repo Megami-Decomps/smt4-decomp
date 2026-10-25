@@ -14,7 +14,7 @@ int FUN_00246d38(...);
 int FUN_00250720(int);
 int FUN_002550d8(...);
 int FUN_00255180(...);
-int FUN_002568c4(int, unsigned int *);
+int btlReflectQueueKind34(int, unsigned int *);
 int FUN_002569ac(...);
 int FUN_0026beb4(int, unsigned int *, int, unsigned int, int);
 int memClear(unsigned int *, int);
@@ -43,7 +43,7 @@ extern int FUN_00245c78(void);
 /* Supplied declaration required: FUN_00250720. */
 /* Supplied declaration required: FUN_002550d8. */
 /* Supplied declaration required: FUN_00255180. */
-/* Supplied declaration required: FUN_002568c4. */
+/* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, int, unsigned int);
 /* Supplied declaration required: FUN_002569ac. */
 /* Supplied declaration required: FUN_0026beb4. */
@@ -209,7 +209,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
     if (((*(int *)(g_btlMain + 0x760) != (int)*(short *)(*param_1 + 0x1fc8)) &&
         (-1 < *(int *)(g_btlMain + 0x760))) &&
        (temp_v7 = FUN_00256940(g_btlMain,*param_1,1), temp_v7 != 0)) {
-      FUN_002568c4(0,param_2);
+      btlReflectQueueKind34(0,param_2);
     }
     btlReflectCreateKind18(1,param_2,(int)*(short *)(*param_1 + 0x1fc8),1,1);
     if (((*(unsigned int *)param_2[8] & 0x20) == 0) || (temp_v7 = FUN_00245c78(), temp_v7 != 0)) {

@@ -2,7 +2,7 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtx* g_renderCtx;
+extern RenderCtxA* g_renderCtx;
 extern const void* DAT_0056fd38;
 extern const u8 DAT_0056df38[][60];
 void FUN_00162790(u32 font, u32 color, const u8* text,
@@ -25,10 +25,10 @@ u32 FUN_003161b4(void)
         FUN_00162790(3, 0xFFFFFFFF, DAT_0056df38[work->selection] + 7,
                       150.0f, 0.0f, 0.0f, 1.0f, 1.0f);
     }
-    RenderCtx* context = g_renderCtx;
+    RenderCtxA* context = g_renderCtx;
     u32 value = FUN_001692ac(1, 0);
-    context->drawStateView.state.push(value);
-    g_renderCtx->drawStateView.state.pop();
+    renderCtxPushA(context, value);
+    renderStackPop(&g_renderCtx->stackA);
     return 0;
 }
 }

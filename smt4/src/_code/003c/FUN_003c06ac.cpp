@@ -15,7 +15,7 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **file, u32 flags);
 void FUN_003dadd8(u32 value);
 s32 FUN_00256940(BtlMainState *battle, u32 unitId, u32 flags);
-void FUN_002568c4(u32 first, u32 second);
+void btlReflectQueueKind34(u32 first, u32 second);
 u32 FUN_00256898(u32 first, u32 second);
 
 u32 FUN_003c06ac(BattleTalkWork *work)
@@ -37,7 +37,7 @@ u32 FUN_003c06ac(BattleTalkWork *work)
     FUN_003dadd8(DAT_00435d18);
     work->ready = 1;
     if (g_btlMain->talk.unitIndex >= 0 && FUN_00256940(g_btlMain, work->unitId, 1)) {
-        FUN_002568c4(0, 0);
+        btlReflectQueueKind34(0, 0);
     }
     return FUN_00256898(1, 0);
 }

@@ -3,14 +3,17 @@
 
 #include "common.h"
 
+extern "C" void asdOperatorDelete(void *block);
+
 /* The object whose vtable is at 0x557e3c (named after it until its real name is known): a 0x730-byte
- * state object with five 0x80-byte slots. Slots 0/1 are the (pure) destructor, slots 2-6 its other
- * virtual methods. */
+ * state object with five 0x80-byte slots. Slots 0/1 are its concrete destructor variants;
+ * slot 2 starts an operation with a mode and argument, followed by four other virtual methods. */
 class Obj557e3c {
 public:
     Obj557e3c();
-    virtual ~Obj557e3c() = 0;
-    virtual void slot2();
+    virtual ~Obj557e3c();
+    static void operator delete(void *block) { asdOperatorDelete(block); }
+    virtual void slot2(u32 mode, u32 argument);
     virtual void slot3();
     virtual void slot4();
     virtual void slot5();

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the zero-mask color block is scheduled after the category-loop increment rather than before it; all other instructions match. */
 #include "shard/W6_W6Match8_CampInventory.h"
 #include "shard/PadState.h"
 
@@ -40,7 +39,9 @@ void campUpdateCategoryHighlightColors()
             categories = gameGetUnitRecord(unit)->categories;
         }
         s32 ordinal = 0;
-        if (categories != 0) {
+        if (categories == 0) {
+            work->categoryColors[unit + 1] = 0xffffffff;
+        } else {
             for (s32 category = 1; category < 11; ++category) {
                 if (categories & (1u << category)) {
                     if (work->categoryIndices[unit + 1] == ordinal) {
@@ -50,8 +51,6 @@ void campUpdateCategoryHighlightColors()
                     ++ordinal;
                 }
             }
-        } else {
-            work->categoryColors[unit + 1] = 0xffffffff;
         }
         if (++work->categoryTimers[unit + 1] >= 24) {
             work->categoryIndices[unit + 1] = (work->categoryIndices[unit + 1] + 1) % ordinal;

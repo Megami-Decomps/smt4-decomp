@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -31,7 +32,7 @@ void FUN_00417a60(u32 id);
 s32 FUN_004186a4(void);
 u32 FUN_004186e0(void);
 void optionsClearFlag1(void);
-void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+
 
 /* Script command: shows the talk bust-up of a talk record. Its first frame applies the record's flags; later
  * frames run a two-phase sequence (phase 0 prepares the message window state, phase 1 shows the bust-up). */

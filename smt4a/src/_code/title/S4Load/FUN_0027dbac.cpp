@@ -1,10 +1,10 @@
-/* NON_MATCHING: shared float constant hoisting and immediate versus saved loop constants change the frame and VFP schedule. */
+/* NON_MATCHING: slot-label helper recovers saved loop constants; shared 1.0f constant remains hoisted across the draw branches. */
 #include "title/S4Load.h"
 #include "shard/S1ListPanel.h"
 
 extern "C" {
 extern S4Load* g_s4Load;
-extern RenderCtx* g_renderCtx;
+extern RenderCtxA* g_renderCtx;
 void efctSetSpeed(f32 alpha);
 void FUN_00183bb0(void);
 void rt_aeabi_memclr(void* memory, u32 size);
@@ -13,6 +13,15 @@ void FUN_0016c4b8(void* context, const void* selection);
 void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 depth);
 SpriteInfo* FUN_001834a4(u32 group, u32 id);
 void FUN_00164168(const void* text, s32 x, s32 y, s32 fade, u32 start, s32 length, f32 scale);
+
+static inline void drawLoadSlotLabels(S4Load *work, s32 firstSprite, s32 slotCount, u32 textStyle, f32 scale)
+{
+    for (s32 index = 0; index < slotCount; ++index) {
+        SpriteInfo *sprite = FUN_001834a4(8, firstSprite + index);
+        FUN_00164168(reinterpret_cast<const void *>(work->unk2B8), sprite->x - 10,
+                     sprite->y - 10, 101, textStyle, index, scale);
+    }
+}
 
 u32 FUN_0027dbac(void)
 {
@@ -47,11 +56,7 @@ u32 FUN_0027dbac(void)
         break;
     }
     if (state->phase == 21 || state->phase == 22 || state->phase == 23) {
-        for (s32 index = 0; index < 7; ++index) {
-            SpriteInfo* sprite = FUN_001834a4(8, index + 105);
-            FUN_00164168(reinterpret_cast<const void*>(work->unk2B8), sprite->x - 10,
-                         sprite->y - 10, 101, 6, index, 1.0f);
-        }
+        drawLoadSlotLabels(work, 105, 7, 6, 1.0f);
     }
     efctSetSpeed(1.0f);
     FUN_00183bb0();

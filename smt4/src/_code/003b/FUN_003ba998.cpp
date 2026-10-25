@@ -80,7 +80,7 @@ extern int FUN_0017fb54(void);
 /* Supplied declaration required: FUN_0022afc4. */
 /* Supplied declaration required: objBlockInitAndMark. */
 /* Supplied declaration required: buttonHelpSelectByProgress. */
-extern int FUN_0022b14c(int);
+extern int listUpdateRevealTransition(int);
 /* Supplied declaration required: modelSetVisible. */
 /* Supplied declaration required: FUN_0022b29c. */
 /* Supplied declaration required: FUN_0022b6c4. */
@@ -385,7 +385,7 @@ void FUN_003ba998(int param_1)
     }
     break;
   case 6:
-    temp_v6 = FUN_0022b14c(param_1 + 0x9c);
+    temp_v6 = listUpdateRevealTransition(param_1 + 0x9c);
     if ((temp_v6 != 0) && (temp_v6 = screenFadeIsBusy(), temp_v6 == 0)) {
       if (*(char *)(param_1 + 0xdac) == '\0') {
         temp_v6 = 5;

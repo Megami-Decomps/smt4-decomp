@@ -16,12 +16,10 @@ void FUN_003135bc(f32 angle, f32 distance)
         FUN_003136e4(angle, distance);
         return;
     }
-    f32 x = g_lmapScene->transform.position[0];
-    f32 y = g_lmapScene->transform.position[1];
-    f32 z = g_lmapScene->transform.position[2];
+    MapVector position = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
     f32 radians = (g_lmapScene->transform.headingDegrees + angle) * 0.017453292f;
-    x += FUN_001bc124(radians) * distance;
-    z += FUN_001bbf0c(radians) * distance;
-    effectSpawnKindTen(x, y, z);
+    position.x += FUN_001bc124(radians) * distance;
+    position.z += FUN_001bbf0c(radians) * distance;
+    effectSpawnKindTen(position.x, position.y, position.z);
 }
 }

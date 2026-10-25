@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001ad228(...);
-int FUN_001ad264(...);
+int keyedRecordSetVectorPair3(...);
 int FUN_001ad2a0(...);
 int FUN_001ad484(...);
 int keyedCopyPayload(...);
@@ -62,11 +62,11 @@ extern unsigned char LAB_0024a638; /* 0x24a638 */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_001ad228. */
-/* Supplied declaration required: FUN_001ad264. */
+/* Supplied declaration required: keyedRecordSetVectorPair3. */
 /* Supplied declaration required: FUN_001ad2a0. */
 /* Supplied declaration required: FUN_001ad484. */
 /* Supplied declaration required: keyedCopyPayload. */
-extern unsigned int FUN_002217bc(int);
+extern unsigned int effectTextureFindOrReserve(int);
 /* Supplied declaration required: libc_strcmp. */
 extern int libc_strlen(int);
 /* Supplied declaration required: asdMemFree. */
@@ -350,7 +350,7 @@ LAB_0024a200:
       }
       do {
         temp_v5 = temp_v4 + temp_v12 * 0x28;
-        temp_v7 = FUN_002217bc(temp_v5 + 0x204);
+        temp_v7 = effectTextureFindOrReserve(temp_v5 + 0x204);
         temp_v12 = temp_v12 + 1;
         *(unsigned int *)(temp_v5 + 0x228) = temp_v7;
       } while (temp_v12 < (int)temp_v9);
@@ -509,7 +509,7 @@ LAB_0024a200:
   FUN_001ad2a0(temp_v49,temp_v47);
   FUN_001ad484(temp_v49,&temp_v23);
   FUN_001ad228(temp_v49,&temp_v31);
-  FUN_001ad264(temp_v49,&temp_v39);
+  keyedRecordSetVectorPair3(temp_v49,&temp_v39);
   asdMemFree(temp_v3);
   asdMemFree(temp_v12);
   return temp_v49;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; population loops become dual output pointers instead of indexed entries, and selector-base/final-state clear grouping differ. */
+/* NON_MATCHING: menu-owned slot copies and parent-relative selector setup match; final state/phase reset uses two stores instead of retail's paired stm. */
 #include "status/StatusDown.h"
 
 struct StatusSkillSource {
@@ -36,12 +36,12 @@ struct StatusSkillScreen {
     StatusSkillMenu menu;
 };
 
-static inline void copyStatusSkillSlots(StatusSkillEntry *entries,
+static inline void copyStatusSkillSlots(StatusSkillMenu *menu,
                                         const StatusSkillSource *source, s32 count)
 {
     for (s32 index = 0; index < count; ++index) {
-        entries[index].skill.id = source->skills[index];
-        entries[index].level = source->levels[index];
+        menu->entries[index].skill.id = source->skills[index];
+        menu->entries[index].level = source->levels[index];
     }
 }
 
@@ -79,7 +79,7 @@ void statusDownInitializeSkillList()
     menu->entries[6].level = 0;
     menu->entries[7].idWord = 0;
     menu->entries[7].level = 0;
-    fillTwoWordsWithByte((u32 *)menu->selection, ~0u);
+    fillTwoWordsWithByte((u32 *)screen->menu.selection, ~0u);
     menu->changed = 0;
     menu->source = NULL;
     FUN_002c7e3c();
@@ -87,13 +87,13 @@ void statusDownInitializeSkillList()
         const StatusSkillSource *source = gameGetPlayerData();
         s32 count = countUnlockedSlots();
         menu->count = count;
-        copyStatusSkillSlots(menu->entries, source, count);
+        copyStatusSkillSlots(menu, source, count);
     } else {
         StatusSkillSource *source = slotRecordFindById((u16)screen->selectedUnit);
         menu->source = source;
         s32 count = getUnlockedSlotCount();
         menu->count = count;
-        copyStatusSkillSlots(menu->entries, source, count);
+        copyStatusSkillSlots(menu, source, count);
     }
     s32 items = menu->count + 1;
     FUN_00203b40(menu->controller, items, items, 1, 1, 1);

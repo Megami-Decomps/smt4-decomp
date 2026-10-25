@@ -30,6 +30,7 @@ s32 rangeGetMinimumLimit(u8 *range);
 u32 FUN_002a482c(u8 *range);
 void partyIdsActivateEntry(PartySlots *party, u32 id);
 void FUN_004a6cfc(PartySlots *party);
+u32 shopListItemGetId(const DevilListItem *item);
 
 /* Updates the menu, then rebuilds its party list from the devils shown on the current page. */
 void FUN_004a677c(DevilListMenu *menu)
@@ -48,7 +49,8 @@ void FUN_004a677c(DevilListMenu *menu)
     for (s32 i = 0; i < count; i++) {
         DevilListItem *items = menu->items;
 
-        partyIdsActivateEntry(&menu->party, items[FUN_002a482c(menu->range) + i].id);
+        u16 id = shopListItemGetId(&items[FUN_002a482c(menu->range) + i]);
+        partyIdsActivateEntry(&menu->party, id);
     }
     FUN_004a6cfc(&menu->party);
 }

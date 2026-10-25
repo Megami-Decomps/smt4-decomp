@@ -48,7 +48,7 @@ EffEmitter *FUN_002d15fc(EffEmitter *source)
     clone->scale = 1.0f;
     __aeabi_memcpy4(clone->parameters, original->parameters, sizeof(clone->parameters));
     EffEmitter *emitter = reinterpret_cast<EffEmitter *>(clone);
-    FUN_00313760(emitter, original->resource->kind, description);
+    FUN_00313760(emitter, original->resource->kind, original->resource->description);
     if (clone->resource->data != NULL) {
         if (original->kind == 3) {
             if (clone->model != NULL) {

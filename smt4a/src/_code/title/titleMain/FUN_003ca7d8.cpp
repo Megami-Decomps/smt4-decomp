@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail add r1, r4, #120 differs from recovered add r0, r4, #120. */
 #include "common.h"
 
 // Private layout views for the fields accessed by this function.
@@ -33,6 +32,13 @@ s32 sysPlaySe(s32 soundId);
 void frameTransitionSetMode(s32 mode);
 u16 FUN_001643b4(u32 group, u32 entry);
 
+static inline void setTitleState(TitleStateView *state, u32 nextState)
+{
+    state->unk78 = nextState;
+    state->unk7C = 0;
+    state->unk80 = 0;
+}
+
 // Reset title state, load five entries, and begin transition mode 2.
 void FUN_003ca7d8(void)
 {
@@ -48,8 +54,6 @@ void FUN_003ca7d8(void)
     state->unk3D = 0;
     frameTransitionSetMode(2);
     state->unk60 = 1;
-    state->unk78 = 0xB;
-    state->unk7C = 0;
-    state->unk80 = 0;
+    setTitleState(state, 0xB);
 }
 }

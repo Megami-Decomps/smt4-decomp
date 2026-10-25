@@ -1,4 +1,4 @@
-/* NON_MATCHING: adjacent task/state store folding, random-delay registers and extra-model loop form differ. */
+/* NON_MATCHING: named extra-model records restore retail loop and task/state stores; task argument setup and vector-copy scratch registers still differ. */
 #include "map/mapEnemy.h"
 #include "sys/Task.h"
 #include "shard/S1Mover.h"
@@ -136,9 +136,10 @@ void MapEnemy_Register(u32 parent)
         entry->owned = 0;
     }
     for (s32 index = 0; index < 21; ++index) {
-        work->extraModels[index].model = NULL;
-        work->extraModels[index].registered = 0;
-        work->extraModels[index].active = 0;
+        MapEnemyExtraModel *entry = &work->extraModels[index];
+        entry->model = NULL;
+        entry->registered = 0;
+        entry->active = 0;
     }
 }
 }

@@ -1,20 +1,21 @@
-/* NON_MATCHING: compiler allocates the saved maximum and result registers differently and combines the two comparisons. */
 #include "common.h"
+
+struct BtlMainState;
+struct BtlEntry;
 
 
 extern "C" {
-u32 scrGetArg(u32 index);
-void btlGetMainState(void);
-s32 btlMainFindActiveEntry(void);
-void scrSetResult(u32 value);
+s32 scrGetArg(u32 index);
+BtlMainState *btlGetMainState(void);
+BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
+void scrSetResult(s32 value);
 u32 FUN_002ff31c(void)
 {
-    u32 maximum = scrGetArg(0);
-    btlGetMainState();
-    u32 result = 0;
-    if (btlMainFindActiveEntry() != 0) { result = 1; }
-    if (result > maximum) { result = maximum; }
-    scrSetResult(result);
+    s32 maximum = scrGetArg(0);
+    s32 required = 0;
+    if (btlMainFindActiveEntry(btlGetMainState()) != NULL)
+        required = 1;
+    scrSetResult(required <= maximum);
     return 1;
 }
 }

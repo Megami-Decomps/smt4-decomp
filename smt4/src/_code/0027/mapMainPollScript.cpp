@@ -1,4 +1,5 @@
 #include "map/mapMain.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 extern MapMain *g_mapMain;
@@ -10,7 +11,7 @@ void FUN_002897b0(s32 enabled);
 s32 FUN_002c1d5c(void);
 void FUN_002a03d8(s32 channel, s32 mode);
 s32 scrRunOpcodesStub(void *process);
-void gameFlagSetValue(s32 flag, s32 value, s32 mode);
+
 void messageSlotSet(s32 slot);
 void scrScriptProcessDestroy(void *process);
 void asdMemFree(void *allocation);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: near: 223 rows against 224; in the row-label loop retail loads the entry's count into r2 and moves the entry to r1 after, ours loads into r0 after copying the entry to r1. Everything else agrees (tasks, strings, records). */
+/* NON_MATCHING: row-label loop uses r0 for entry count after copying entry to r1; retail retains entry in r0, loads count into r2, then loads the row handle through r1/r2 (211 vs 210 rows). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 

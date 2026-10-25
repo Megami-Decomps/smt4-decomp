@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0040c190` (_code @ 0x40c190, 0x4bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int skinObjectUpdateMatrices(int);
 int FUN_0037aa68(unsigned int, int);
 int block530OwnerReset(int, float *, int);
 int FUN_004097b4(int, int *, int, int);
-int FUN_004ff058(unsigned int, unsigned int, float *, unsigned int, int);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -189,7 +189,9 @@ void FUN_0040c190(int param_1)
   temp_v9 = temp_v7 + temp_v8 + temp_v9;
   temp_v11 = temp_v7;
   temp_v1 = FUN_004ff4b0(*(unsigned int *)(param_1 + 4),0);
-  FUN_004ff058(*(unsigned int *)(param_1 + 4),temp_v1,&temp_v9,0xffffffff,1);
+  SpriteDrawVector3 position = {temp_v9, temp_v10, temp_v11};
+  FUN_004ff058((SpriteDrawOwner *)*(unsigned int *)(param_1 + 4), temp_v1, &position,
+               0xFFFFFFFFu, 1, 1.0f);
   temp_v0 = g_renderCtx;
   piVar6 = (int *)(g_renderCtx + 0x1298);
   temp_v2 = *piVar6;

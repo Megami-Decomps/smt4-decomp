@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail forms &items (+0x864) before the cursor call and loads the id as ldrh+sxth+uxth; ours folds the offset into a pool constant and uses ldrsh. */
 #include "common.h"
 
 extern "C" {
@@ -22,6 +21,13 @@ typedef struct PurchasePanel {
     /* 0x861 */ u8 alternate;
     /* 0x862 */ u8 unk862[2];
     /* 0x864 */ PanelListItem items[1];
+
+    s32 isAlternate() const
+    {
+        if (alternate == 0)
+            return 0;
+        return 1;
+    }
 } PurchasePanel;
 
 s32 panelStateIs0(void);
@@ -29,11 +35,12 @@ s32 FUN_0035dbb0(void);
 void messageMainSetTargetFlags(s32 arg);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 FUN_004d0cd4(void);
-void dispatchIfFound(s32 target, u16 id, bool alternate);
+void dispatchIfFound(s32 target, u32 id, s32 alternate);
 s32 FUN_004a8750(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
 void FUN_004a0ef4(s32 amount);
 void FUN_00408184(s32 kind, s32 amount);
 void FUN_003343f0(s32 arg);
+u16 shopListItemGetId(const PanelListItem *item);
 
 /* Buys the entry under the cursor: notifies the target, pays its price and moves the panel to state 2. */
 void FUN_004a3154(PurchasePanel *panel)
@@ -46,10 +53,12 @@ void FUN_004a3154(PurchasePanel *panel)
         return;
     }
     messageMainSetTargetFlags(0);
-    id = panel->items[flaggedValueHolderGetTotal(panel->cursor)].id;
+    PanelListItem *items = panel->items;
+    id = shopListItemGetId(&items[flaggedValueHolderGetTotal(panel->cursor)]);
+    u16 itemId = id;
     target = FUN_004d0cd4();
     if (target != -1) {
-        dispatchIfFound(target, id, panel->alternate != 0);
+        dispatchIfFound(target, itemId, panel->isAlternate());
     }
     price = FUN_004a8750(id, panel->alternate, 0, panel->level >= 100, 0);
     FUN_004a0ef4(-price);

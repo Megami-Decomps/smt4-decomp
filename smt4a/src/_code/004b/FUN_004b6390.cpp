@@ -11,7 +11,7 @@ int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int asdTMTexLoadMainHeap(int, int);
 int asdLoadFileAsyncSimple(...);
-int FUN_002c7ce8(...);
+int statusDownSwitchTab(...);
 int FUN_002c7e6c(void);
 int FUN_002c8538(...);
 int FUN_002c85b0(...);
@@ -45,7 +45,7 @@ extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: asdLoadFileAsyncSimple. */
-/* Supplied declaration required: FUN_002c7ce8. */
+/* Supplied declaration required: statusDownSwitchTab. */
 /* Supplied declaration required: FUN_002c7e6c. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c85b0. */
@@ -235,7 +235,7 @@ void FUN_004b6390(int param_1)
   *(unsigned int *)(param_1 + 0x4394) = 0;
   FUN_002c7e6c();
   FUN_002c85b0(0);
-  FUN_002c7ce8(0);
+  statusDownSwitchTab(0);
   FUN_002c8538(0);
   campButtonHelpAcquire();
   FUN_003e4140(param_1 + 0x7f40);

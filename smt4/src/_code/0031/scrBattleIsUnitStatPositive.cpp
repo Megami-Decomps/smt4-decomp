@@ -1,5 +1,5 @@
 #include "battle/btlScript.h"
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -13,7 +13,6 @@ typedef struct Character {
     /* 0x20 */ Stats *stats;
 } Character;
 
-int btlUnitGet(u32 id);
 int scrSetResult(int value);
 int scrGetArg(int index);
 
@@ -31,7 +30,7 @@ u32 scrBattleIsUnitStatPositive(void)
     } else if (which == 2) {
         slot = 11;
     }
-    stats = ((Character *)btlUnitGet(g_btlScriptUnit))->stats;
+    stats = reinterpret_cast<Character *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
     scrSetResult(stats->values[slot] >= 1);
     return 1;
 }

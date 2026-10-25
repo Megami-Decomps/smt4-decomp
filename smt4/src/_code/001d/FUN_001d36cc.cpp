@@ -14,7 +14,6 @@ extern SoundListener *DAT_004474f4;
 extern f32 DAT_004482b8[];
 
 f32 mathDistanceBetweenPoints(SoundActorQueuePosition from, SoundActorQueuePosition to);
-u32 FUN_00291e40(u32 soundId, SoundActorQueuePosition position);
 void FUN_002877d4(u32 handle);
 s32 asd3dSoundActorIsPlaying(u32 handle);
 

@@ -9,7 +9,7 @@ struct FusionSelectionRecord {
 };
 extern "C" UniteWork *g_unite;
 extern "C" FusionSelectionRecord *FUN_0026140c(u16 id);
-extern "C" s32 flagValueIsPositive(u16 id);
+extern "C" u8 flagValueIsPositive(s32 id);
 
 typedef char CheckFusionSelectedIdOffset[offsetof(UniteWork, registered.selectedId) == 0x92bc ? 1 : -1];
 

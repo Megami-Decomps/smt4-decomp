@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -16,7 +17,7 @@ int FUN_00187168(int value);
 int FUN_0019e52c(u16 id);
 int rt_aeabi_memclr(u16 *slots, int size);
 int FUN_003e4e4c(u16 id);
-int gameFlagSetValue(int a, int b, int c);
+
 int FUN_004bd410(u16 id);
 
 /* Runs the activation sequence for each usable slot id, then clears the slot table; always reports success. */

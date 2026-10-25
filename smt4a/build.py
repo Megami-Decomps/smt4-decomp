@@ -420,6 +420,49 @@ def name_static_initialiser(obj, unit):
     return True
 
 
+_ALIASES = None
+
+
+def link_aliases(obj):
+    """An undefined reference to a `type:alias` name of config/symbols.txt (a second name the linker
+    gives an address that has its own: `__init_array_end` of an empty array is `__init_array_start`)
+    is pointed at the address's own name, the one retail's relocation carries."""
+    import struct
+    global _ALIASES
+    if _ALIASES is None:
+        sys.path.insert(0, str(ROOT / "tools"))
+        import split
+        path = ROOT / "config" / "symbols.txt"
+        own = {**{address: name for address, (name, _size, _thumb) in split.read_symbols(path).items()},
+               **split.read_objects(path)}
+        _ALIASES = {alias: own[address] for alias, address in split.read_aliases(path).items() if address in own}
+    if not _ALIASES:
+        return
+    data = bytearray(Path(obj).read_bytes())
+    sections, _ = read_elf(data)
+    changed = False
+    for table in (s for s in sections if s["type"] == 2):
+        strtab = sections[table["link"]]
+        names = bytes(data[strtab["offset"]:strtab["offset"] + strtab["size"]])
+        for at in range(table["offset"], table["offset"] + table["size"], 16):
+            name_at, = struct.unpack_from("<I", data, at)
+            shndx, = struct.unpack_from("<H", data, at + 14)
+            name = names[name_at:names.index(b"\0", name_at)].decode()
+            if shndx or name not in _ALIASES:
+                continue
+            target = _ALIASES[name].encode()
+            found = names.find(b"\0" + target + b"\0")
+            if found >= 0:
+                struct.pack_into("<I", data, at, found + 1)
+            elif len(target) <= len(name):
+                data[strtab["offset"] + name_at:strtab["offset"] + name_at + len(name)] = target.ljust(len(name), b"\0")
+            else:
+                raise SystemExit(f"{obj}: cannot point alias {name} at {_ALIASES[name]}")
+            changed = True
+    if changed:
+        Path(obj).write_bytes(data)
+
+
 def finish_object(compiler, unit, source, obj):
     """What happens to a freshly compiled unit object: a destructor's or a file's extra functions and
     vtable are cut away (recompiling with --split_sections), then armlink's NOPs are applied."""
@@ -429,6 +472,7 @@ def finish_object(compiler, unit, source, obj):
         done = subprocess.run(split_command, capture_output=True, text=True, cwd=ROOT)
         if done.returncode == 0:
             carve(obj, unit)
+    link_aliases(obj)
     link_weak_calls(obj, unit)
 
 

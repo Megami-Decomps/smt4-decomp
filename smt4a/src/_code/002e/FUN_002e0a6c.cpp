@@ -1,7 +1,7 @@
 /* NON_MATCHING: final success result is materialized in r4 before r0, rather than r0 before r4. */
 #include "shard/W6_W6Match1_PositionedStream.h"
 
-extern "C" void FUN_0013ebd8(u32 result);
+#include "sys/ProcessResult.h"
 extern "C" void sysFatalBreak();
 extern "C" void vcallSlot12IfValid(u32 handle);
 

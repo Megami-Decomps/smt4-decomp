@@ -1,4 +1,4 @@
-/* NON_MATCHING: depth/flag constants use different saved registers and selected row addressing does not retain the table base. */
+/* NON_MATCHING: depth-aware contents renderer restores native calls and row-table access; initial depth capture/copy still differs. */
 #include "common.h"
 #include <stddef.h>
 
@@ -37,29 +37,36 @@ void FUN_00288e68(s32 id);
 void buttonHelpShowSkillDetails(void);
 void FUN_0022d7b0(SkillListRenderView *view, s32 depth);
 
-// Draw the skill list, lifting its selected row and updating the skill-details help.
+// Draw visible rows at the requested depth, lifting the selected row by one layer.
+static __inline void drawSkillListContents(SkillListRenderView *view, s32 depth)
+{
+    if (view->cursor.count == 0) {
+        return;
+    }
+    s32 first = FUN_0029e924(&view->cursor);
+    s32 count = rangeLimitMin(&view->cursor);
+    for (s32 row = 0; row < count; ++row) {
+        if (view->state != 3 || FUN_00240d5c(&view->cursor) != row)
+            FUN_003abae8(view, row, first + row, 0, depth);
+    }
+    if (view->state == 3) {
+        s32 item = flaggedValueHolderGetTotal(&view->cursor);
+        s32 row = FUN_00240d5c(&view->cursor);
+        FUN_003abae8(view, row, item, 1, depth + 1);
+        SkillListRow *rows = view->rows;
+        item = flaggedValueHolderGetTotal(&view->cursor);
+        FUN_00288e68(rows[item].id);
+        buttonHelpShowSkillDetails();
+    }
+    FUN_0022d7b0(view, depth);
+}
+
 void FUN_003ab3dc(SkillListRenderView *view)
 {
     uiRectDrawAtBottomRight(view->render, 3, 0, 0, 0x1F);
     FUN_00231bcc(view->render, 0x4C7, 0, 0, 0x1F, 1);
     FUN_00231bcc(view->render, 0x4C8, 0, 0, 0x1F, 1);
     FUN_00231bcc(view->render, 0x4CA, 0, 0, 0x1F, 1);
-    if (view->cursor.count != 0) {
-        s32 first = FUN_0029e924(&view->cursor);
-        s32 count = rangeLimitMin(&view->cursor);
-        for (s32 row = 0; row < count; ++row) {
-            if (view->state != 3 || FUN_00240d5c(&view->cursor) != row)
-                FUN_003abae8(view, row, first + row, 0, 0x1F);
-        }
-        if (view->state == 3) {
-            s32 item = flaggedValueHolderGetTotal(&view->cursor);
-            s32 row = FUN_00240d5c(&view->cursor);
-            FUN_003abae8(view, row, item, 1, 0x20);
-            item = flaggedValueHolderGetTotal(&view->cursor);
-            FUN_00288e68(view->rows[item].id);
-            buttonHelpShowSkillDetails();
-        }
-        FUN_0022d7b0(view, 0x1F);
-    }
+    drawSkillListContents(view, 0x1F);
 }
 }

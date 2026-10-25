@@ -1,4 +1,4 @@
-/* NON_MATCHING: sentinel comparison and tree-successor loads use different registers and branches. */
+/* NON_MATCHING: cached left-child successor restores the retail loop; four pointer comparison operands and one parent-right register differ. */
 #include "common.h"
 
 struct ResourceTreeValue {
@@ -34,11 +34,12 @@ bool FUN_003b214c(ResourceTreeOwner *owner)
         if (!FUN_003afac0(node->value->resource)) {
             ready = false;
         }
-        if (node->right) {
-            node = node->right;
-            while (node->left) {
-                node = node->left;
-            }
+        ResourceTreeNode *successor = node->right;
+        if (successor) {
+            do {
+                node = successor;
+                successor = node->left;
+            } while (successor);
         } else {
             ResourceTreeNode *parent = node->parent;
             while (node == parent->right) {

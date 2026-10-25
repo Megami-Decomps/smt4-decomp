@@ -43,7 +43,7 @@ int FUN_002e24c8(void);
 int FUN_003aacd0(void);
 int FUN_003aca0c(void);
 int spriteTable22Acquire(void);
-int FUN_003acf1c(int);
+int selectionSetUnitByRecordId(int);
 int FUN_003ad0e0(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -98,7 +98,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_003aacd0. */
 /* Supplied declaration required: FUN_003aca0c. */
 /* Supplied declaration required: spriteTable22Acquire. */
-/* Supplied declaration required: FUN_003acf1c. */
+/* Supplied declaration required: selectionSetUnitByRecordId. */
 /* Supplied declaration required: FUN_003ad0e0. */
 
 
@@ -156,7 +156,7 @@ void FUN_001d0750(int *param_1)
     FUN_003ad0e0();
     temp_v1 = FUN_0029efc0(temp_v2 + 0x240);
     temp_v4 = FUN_0029efa8(temp_v2 + 0x240);
-    FUN_003acf1c((int)*(short *)(temp_v2 + (temp_v4 + temp_v1) * 2 + 0x1db4));
+    selectionSetUnitByRecordId((int)*(short *)(temp_v2 + (temp_v4 + temp_v1) * 2 + 0x1db4));
     FUN_003aca0c();
     FUN_003aacd0();
     *(unsigned int *)(temp_v2 + 0x20) = 0x10;

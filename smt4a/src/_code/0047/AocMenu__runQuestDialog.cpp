@@ -9,7 +9,7 @@ void flagObjAdvance(u32 *dialog);
 s32 FUN_004d0584(void);
 s32 inputIsQuestMenuPressed(void);
 void eventQueueAddUniqueIfValid(u32 event);
-s8 recordGetSignedFlags(const void *record);
+s8 uiSpriteGetCompletionState(const void *record);
 
 /* Open the quest dialog, handle confirmation/menu cancellation, and release its callback on exit. */
 void AocMenu::runQuestDialog()
@@ -23,7 +23,7 @@ void AocMenu::runQuestDialog()
         window->transition.phase = 1;
         break;
     case 1:
-        if (recordGetSignedFlags(&window->dialog.cursor) != 0) {
+        if (uiSpriteGetCompletionState(&window->dialog.cursor) != 0) {
             if (FUN_004d0584() != 0) {
                 eventQueueAddUniqueIfValid(0x0100020E);
                 FUN_00477d10(window, -1, 0);
@@ -42,7 +42,7 @@ void AocMenu::runQuestDialog()
         }
         break;
     case 2:
-        if (recordGetSignedFlags(&window->dialog.cursor) != 0) {
+        if (uiSpriteGetCompletionState(&window->dialog.cursor) != 0) {
             jobOwnerFreeSlotAndStop(dialog);
             window->transition.state = 3;
             window->transition.phase = 0;

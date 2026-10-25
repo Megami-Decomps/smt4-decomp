@@ -29,7 +29,7 @@ void FUN_0014afd0(s32 kind, s32 index);
 MessageWindowWork *FUN_00145280(void);
 void FUN_001527d8(u32 handle, s32 value);
 void infoWindowInitialize(void);
-void FUN_0013f578(void);
+void comWinInitialize(void);
 void FUN_001409e4(void);
 s32 FUN_0013f7c4(u32 handle);
 void FUN_00144efc(void (*callback)(void));
@@ -61,7 +61,7 @@ void FUN_00137144(void)
     for (s32 i = 0; i < 12; i++)
         DAT_005e2010[i]->layer = 13;
     infoWindowInitialize();
-    FUN_0013f578();
+    comWinInitialize();
     FUN_001409e4();
     taskCreateDraw((const s8 *)"MESS_D", 239, 0, 0, FUN_0013f7c4, NULL, (u32)g_messageMain.main, (void *)g_messageMain.main->head);
     MessageWindowWork *main = g_messageMain.main;

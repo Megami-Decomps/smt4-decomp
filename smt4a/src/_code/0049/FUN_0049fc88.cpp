@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two shared status-set tails branch with reversed polarity (retail beq skip; b set) and the unit/11 argument moves are ordered differently; registers and layout otherwise match. */
+/* NON_MATCHING: shared affinity-allow predicate recovers player status tail; unit tail branch polarity and unit/11 argument setup order still differ. */
 #include "shard/Shard0031.h"
 #include "shard/Shard004B.h"
 
@@ -10,7 +10,15 @@ PartyStatusSlots* gameGetSlotTable(void);
 s32 gameSlotTableFindFree(void);
 s32 randRange(u32 maximum);
 void FUN_003dfad4(u16* affinities, const PlayerStatusViewA* player);
-void affinityResolveUnitSlot(u16* output, const ScaledRecordValues* unit, s32 affinity);
+void affinityResolveUnitSlot(u16* output, ScaledRecordValues* unit, s32 affinity);
+
+static inline s32 statusAffinityAllows(u16 affinity)
+{
+    u32 state = affinity >> 10;
+    if (state == 1 || state == 3 || state == 4)
+        return 0;
+    return 1;
+}
 
 void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
 {
@@ -22,13 +30,12 @@ void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
     if ((group == 0 || group == 2 || group == 3) &&
         !(gameGetPlayerData()->status & 2) && !(gameGetPlayerData()->status & 0x400) &&
         !(gameGetPlayerData()->status & mask) && static_cast<f32>(randRange(99)) < chance) {
-        bool resisted = false;
+        s32 canApply = 1;
         if (statusBit == 5) {
             FUN_003dfad4(affinities, gameGetPlayerData());
-            u16 state = affinities[11] >> 10;
-            resisted = state == 1 || state == 3 || state == 4;
+            canApply = statusAffinityAllows(affinities[11]);
         }
-        if (!resisted) {
+        if (canApply) {
             PlayerStatusViewA* player = gameGetPlayerData();
             player->status |= mask;
         }
@@ -64,14 +71,13 @@ void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
             continue;
         }
         if (static_cast<f32>(randRange(99)) < chance) {
+            s32 canApply = 1;
             if (statusBit == 5) {
                 affinityResolveUnitSlot(affinities, unit, 11);
-                u16 state = affinities[0] >> 10;
-                if (state == 1 || state == 3 || state == 4) {
-                    continue;
-                }
+                canApply = statusAffinityAllows(affinities[0]);
             }
-            unit->flags |= mask;
+            if (canApply)
+                unit->flags |= mask;
         }
     }
 }

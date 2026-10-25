@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r7, [pc, #136] differs from recovered ldr r7, [pc, #140]. */
+/* NON_MATCHING: initial global mask uses add+ldm instead of retail's two immediate-offset ldrs; named flags now match the object load and return paths. */
 #include "common.h"
 
 namespace {
@@ -29,8 +29,11 @@ void* dataTable04FindById(s32 id);
 // Resolve a valid table ID and optionally test and set the object's battle mask.
 s32 FUN_003f1a9c(BattleObjectView* object, s32 mode)
 {
-    if (mode != 0 && (object->unk45A0 & g_btlMain.unk1C0) != 0) {
-        return 0;
+    if (mode != 0) {
+        u64 flags = object->unk45A0;
+        if ((flags & g_btlMain.unk1C0) != 0) {
+            return 0;
+        }
     }
 
     BattleEntryView* entry = FUN_003eaf20(object);

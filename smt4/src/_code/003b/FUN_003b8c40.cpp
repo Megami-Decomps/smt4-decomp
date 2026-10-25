@@ -38,7 +38,7 @@ typedef char CampResultStateOffsets[
 
 extern "C" {
 extern AocMain *g_aocMain;
-s32 FUN_0022b14c(FlaggedValueHolder *value);
+s32 listUpdateRevealTransition(FlaggedValueHolder *value);
 s32 scrRunOpcodesStub(ScriptRunState *process);
 void buttonHelpSelectByProgress(CampResultStateView *work);
 u16 flaggedValueHolderGetTotal(const FlaggedValueHolder *value);
@@ -52,7 +52,7 @@ void infoWinSetMessage(void *window, u32 message);
 
 void FUN_003b8c40(CampResultStateView *work)
 {
-    s32 ready = FUN_0022b14c(&work->value);
+    s32 ready = listUpdateRevealTransition(&work->value);
     if (scrRunOpcodesStub(work->firstProcess) != 2 || !ready)
         return;
     buttonHelpSelectByProgress(work);

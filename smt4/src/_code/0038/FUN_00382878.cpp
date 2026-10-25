@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00382878` (_code @ 0x382878, 0x450 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
 int FUN_00287528(unsigned char **);
 int FUN_00287704(int);
-int gameFlagSetValue(int, int);
 int asdTextDrawFormatted(...);
 int libc_strcat(...);
 int FUN_002bcf4c(void);
@@ -30,7 +30,6 @@ extern int dataTable26GroupGetRecord(int, unsigned char, unsigned int);
 /* Supplied declaration required: FUN_00287528. */
 extern int objectFlagBitIsSet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00287704. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: asdTextDrawFormatted. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */
@@ -98,7 +97,7 @@ void FUN_00382878(int param_1)
       temp_v2 = FUN_00287704(*(unsigned char *)(param_1 + 0x18));
       FUN_00381958(temp_v2,param_1 + 0x20,*(unsigned int *)(param_1 + 0x1c),temp_v8);
       if (*(int *)(param_1 + 0x1c) == 0) {
-        gameFlagSetValue(0x424,1);
+        gameFlagSetValue(0x424, 1, 1);
       }
     }
   }

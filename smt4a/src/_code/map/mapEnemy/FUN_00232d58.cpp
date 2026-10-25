@@ -1,6 +1,7 @@
 /* NON_MATCHING: the per-slot field stores are written in field order rather than retail's interleaved order, and the record layouts are named by offset only (their meaning is not yet known); the stores compile with different grouping and register use than retail (228 vs 237 rows). */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 extern "C" {
 
@@ -143,7 +144,7 @@ typedef struct EnemyRef {
 
 /* The map enemy block (0x4D84 bytes). */
 typedef struct MapEnemy {
-    /* 0x0000 */ void *task;
+    /* 0x0000 */ u32 task;
     /* 0x0004 */ u32 f0004;
     /* 0x0008 */ u32 f0008;
     /* 0x000C */ u32 f000C;
@@ -172,11 +173,11 @@ typedef struct MapEnemy {
 extern MapEnemy *g_mapEnemy;
 
 void *asdMemoryAllocTracked(u32 size, u32 alignment, u32 a, u32 b, u32 c);
-void *taskCreateDraw(const char *name, u32 priority, u32 a, u32 b, void (*draw)(void *), void (*release)(void *), u32 c,
-                     u32 parent);
+u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc draw, AsdProcFunc release, u32 work, void *owner);
 s32 randRange(u32 limit);
-void mapEnemyCleanupUpdate(void *task);
-void mapEnemyRelease(void *task);
+s32 mapEnemyCleanupUpdate(u32 job);
+void mapEnemyRelease(u32 job);
 
 /* Creates the map enemy manager: allocates its block, starts the draw task and resets the 40
  * enemy slots, the small and cleared record tables and the reference tables. */
@@ -186,7 +187,8 @@ void FUN_00232d58(u32 parent)
     MapEnemy *enemy = (MapEnemy *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x4D84, 1);
 
     g_mapEnemy = enemy;
-    enemy->task = taskCreateDraw("MENEMY", 4, 0, 0, mapEnemyCleanupUpdate, mapEnemyRelease, 0, parent);
+    enemy->task = taskCreateDraw(reinterpret_cast<const s8 *>("MENEMY"), 4, 0, 0, mapEnemyCleanupUpdate, mapEnemyRelease, 0,
+                                 reinterpret_cast<void *>(parent));
     enemy->f0004 = 0;
     enemy->f0008 = 0;
     enemy->f000C = 0;

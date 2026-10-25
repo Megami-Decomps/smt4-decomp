@@ -1,10 +1,5 @@
 /* NON_MATCHING: near (197 rows against 205): same control flow and calls; retail keeps the price in r7/menu flag in fp and tests the signed window/holder flag bytes with ldrsb, ours picks r8/sl and ldrb; retail also emits armcc nops around the calls */
-typedef unsigned char u8;
-typedef signed char s8;
-typedef unsigned short u16;
-typedef short s16;
-typedef unsigned int u32;
-typedef int s32;
+#include "common.h"
 
 extern "C" {
 
@@ -48,7 +43,7 @@ struct SkillRecord {
     u8 padA2[6];
 };
 
-u32 uiOwnerUpdateAnimationChannels(void);
+u32 uiOwnerUpdateAnimationChannels(SkillShopScreen *screen);
 s32 flaggedValueHolderGetTotal(ShopHolder *holder);
 s32 messageTargetSetValue(u32 value, s32 arg);
 s32 inputIsQuestMenuPressed(void);
@@ -86,7 +81,7 @@ int statusPanelSetOpen(s32 open);
  * rejects a purchase, and keeps the skill help panel in sync with the highlighted row. */
 void FUN_003abed8(SkillShopScreen *screen)
 {
-    uiOwnerUpdateAnimationChannels();
+    uiOwnerUpdateAnimationChannels(screen);
     u8 *base = (u8 *)screen;
     u32 price = *(u32 *)(base + flaggedValueHolderGetTotal(&screen->holder) * 0x20 + 0x5B4);
     messageTargetSetValue(-price, 0);

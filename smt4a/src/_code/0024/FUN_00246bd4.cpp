@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00246bd4` (_code @ 0x246bd4, 0x29c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: oversized recovered state machine differs from retail control flow; removed a draft flag-set call absent from the retail unit. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -73,7 +72,6 @@ int mapMainStartEntry(...);
 int mapTrapGetUnk38(...);
 int FUN_003d2158(...);
 int linkHolderApplyFirst(...);
-int gameFlagSetValue(...);
 
 int mapIfSetMode1(...);
 int FUN_002342b8(...);
@@ -412,7 +410,6 @@ extern int linkHolderCheckFirst(int);
 /* Supplied declaration required: linkedTargetSetFloat. */
 /* Supplied declaration required: linkHolderSetFlag. */
 /* Supplied declaration required: linkHolderClearFlag. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: controllerSetDestination. */
 /* Supplied declaration required: FUN_003fd7c0. */
 /* Supplied declaration required: FUN_003fd924. */
@@ -4603,7 +4600,6 @@ joined_r0x00248750:
             piVar18 = (int *)((int)uStack_5c + 0x1520);
             temp_v32 = *piVar18;
             if (temp_v32 != 0) {
-              gameFlagSetValue(temp_v32,1);
               *piVar18 = 0;
             }
           }

@@ -3,12 +3,12 @@
 
 extern "C" {
 
-void *jyoucyuGetTableEntry(s32 index);
-void bgmStop(s32 handle, s32 fade, s32 mode);
+s32 jyoucyuGetTableEntry(u32 index);
+void bgmStop(s32 handle, u32 fade, s32 mode);
 
 void bgmStopWithoutEntry(void)
 {
-    if (jyoucyuGetTableEntry(1) == NULL) {
+    if (jyoucyuGetTableEntry(1) == 0) {
         bgmStop(-1, 15, 0);
     }
 }

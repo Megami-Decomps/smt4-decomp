@@ -6,11 +6,10 @@ extern void *g_eventCommand;
 s32 asdMemFree(void *work);
 
 /* Releases the event-command job's work block. */
-s32 eventCommandFreeWorkCallback()
+void eventCommandFreeWorkCallback(u32 job)
 {
-    asdMemFree(jobGetWork());
+    asdMemFree(jobGetWork(job));
     g_eventCommand = NULL;
-    return 0;
 }
 
 }

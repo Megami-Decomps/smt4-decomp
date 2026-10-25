@@ -1,5 +1,6 @@
-/* NON_MATCHING: case 4 stores the new state through the shared tail (conditional add, then branch into the common str) where the build stores unconditionally. */
+/* NON_MATCHING: case-4 shared transition tail now matches; initial entry-address/state registers r0/r1 remain exchanged. */
 #include "common.h"
+#include <stddef.h>
 
 extern "C" {
 struct StatusCursor;
@@ -49,8 +50,14 @@ struct StatusFlow {
     /* 0x5a8 */ StatusListEntry entries[1];
 };
 
-// The unlocked-skill result lives after the last entry.
-#define STATUS_FLOW_UNLOCK(flow) (*(u32 *)((u8 *)(flow) + 0xa5b4))
+// The result is beyond the recovered status-flow prefix.
+struct StatusFlowResult : StatusFlow {
+    u8 unk5C8[0xa5b4 - sizeof(StatusFlow)];
+    u32 unlockedSkill;
+};
+typedef char StatusFlowResultLayout[sizeof(StatusFlow) == 0x5c8 &&
+    offsetof(StatusFlowResult, unlockedSkill) == 0xa5b4 &&
+    sizeof(StatusFlowResult) == 0xa5b8 ? 1 : -1];
 
 // Advances the skill-learning flow by one step.
 void FUN_003ab128(StatusFlow *flow)
@@ -81,7 +88,7 @@ void FUN_003ab128(StatusFlow *flow)
             return;
         }
         u32 unlocked = statusDownGetValue();
-        STATUS_FLOW_UNLOCK(flow) = unlocked;
+        static_cast<StatusFlowResult *>(flow)->unlockedSkill = unlocked;
         if (unlocked != 0) {
             gameClearUnlockedSavedId(unlocked & 0xffff);
             flaggedValueHolderGetTotal(flow->entryHolder);
@@ -101,11 +108,11 @@ void FUN_003ab128(StatusFlow *flow)
         if (buttonHelpIsNotActive() == 0) {
             return;
         }
-        if (STATUS_FLOW_UNLOCK(flow) != 0) {
+        if (static_cast<StatusFlowResult *>(flow)->unlockedSkill != 0) {
             flow->state++;
-        } else {
-            flow->state = 10;
+            return;
         }
+        flow->state = 10;
         return;
     }
     case 5:

@@ -1,8 +1,11 @@
-/* NON_MATCHING: retail stores the vtable pointer and the event words separately (str/str/str, no stm) and addresses the u8 at 0x2c as `[this+0x14]+0x18` (a sub-object based at 0x14 holds the playback floats and that byte); the build merges the first stores into stm and uses [this, #44]. */
+/* NON_MATCHING: constructor merges vtable/event stores and folds playback-byte addressing into this+0x2c; retail keeps separate stores and a playback subobject base. */
 #include "classes/Obj55c244.h"
+
 
 Obj55c244::Obj55c244()
 {
+    event.state = 0;
+    event.lock = 0;
     nn_os_LightEvent_Initialize(&event, 1);
     unk0c = 0;
     unk0d = 0;

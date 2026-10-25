@@ -1,4 +1,3 @@
-/* NON_MATCHING: event notification returns directly rather than branching through the shared exit; -O2 candidate. */
 #include "shard/Shard0031.h"
 
 struct LargeTouchGrid {
@@ -69,7 +68,8 @@ s32 largeGridHandleTouchSelection(LargeTouchGrid *work)
                 return type;
             }
             eventQueueAddUniqueIfValid(0x100020d);
-            return type;
+            handled = true;
+            break;
         }
     }
     return handled ? type : 0;

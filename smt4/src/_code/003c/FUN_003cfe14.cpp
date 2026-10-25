@@ -42,7 +42,7 @@ extern "C" {
 void btlShowListedActionMessage(s32* battle, ActionContext* ctx, s32 id, s32 value, s32 arg);
 void FUN_00227d18(s32 id);
 void FUN_00227fac(void);
-void FUN_002296f4(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
+void frameRangeExtend(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
 s32 FUN_00229914(s32* battle, ActionContext* ctx, s32 id);
 void FUN_0023c0d0(s32* battle, ActionContext* ctx, s32 id, s32 amount);
 void actionCreateKindSeventeen(s32 kind, ActionContext* ctx, s32 arg);
@@ -99,14 +99,14 @@ u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
     }
     if (result != 0) {
         if ((ctx->target->flags & 0x400) != 0) {
-            FUN_002296f4(battle, ctx, ctx->target->listedId, 10, 0x3c, 0x3c);
+            frameRangeExtend(battle, ctx, ctx->target->listedId, 10, 0x3c, 0x3c);
             btlShowListedActionMessage(battle, ctx, ctx->target->listedId, 0x46, 0);
         } else {
-            FUN_002296f4(battle, ctx, ctx->target->listedId, 10, 0x1e, 0x1e);
+            frameRangeExtend(battle, ctx, ctx->target->listedId, 10, 0x1e, 0x1e);
             btlShowListedActionMessage(battle, ctx, ctx->target->listedId, 0x28, 0);
         }
     } else {
-        FUN_002296f4(battle, ctx, ctx->target->listedId, 10, 0x1e, 0x1e);
+        frameRangeExtend(battle, ctx, ctx->target->listedId, 10, 0x1e, 0x1e);
     }
     return result;
 }

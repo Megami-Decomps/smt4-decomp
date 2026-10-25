@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail preloads 0x2A5 and derives the first flag id from it (sub #67), comparing the second id against the register; armcc here loads and compares each id separately. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ struct SupportUnitData {
 
 SupportUnitData *gameGetSupportUnitData(void);
 void FUN_001a7dbc(SupportUnitData *data, s32 a, s32 id, s32 b);
-void gameFlagSetValue(s32 flag, s32 value, s32 notify);
+
 
 /* Clears the support unit and, for two special ids, marks its story flag. */
 void FUN_002560a4(s32 id)

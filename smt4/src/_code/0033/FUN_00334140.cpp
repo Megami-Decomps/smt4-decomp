@@ -5,7 +5,7 @@
 
 extern "C" {
 extern const char DAT_00400918[];
-s32 FUN_0027e6f4(BtlMainState *battle, s32 kind);
+s32 btlFindNthActiveSpecialEntry(BtlMainState *battle, s32 kind);
 const Table00Record *dataTable00FindById(u32 id);
 void memClear(void *memory, u32 size);
 s32 textFormatBuffer(char *output, const char *format, ...);
@@ -15,7 +15,7 @@ u32 FUN_002408ac(BattleArrangementWork *work, BtlMainState *battle);
 
 u32 FUN_00334140(BattleArrangementWork *work, BtlMainState *battle)
 {
-    s32 index = FUN_0027e6f4(battle, 1);
+    s32 index = btlFindNthActiveSpecialEntry(battle, 1);
     if (index >= 0) {
         battle->battleFlags |= 0x4000000;
         const Table00Record *record = dataTable00FindById(battle->entries[index].id);

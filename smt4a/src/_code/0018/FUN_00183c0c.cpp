@@ -1,4 +1,4 @@
-/* NON_MATCHING: count-pointer caching, paired-handle addressing and selected-field stores differ. */
+/* NON_MATCHING: coupled touch handles now share a pair base and the native touch count gets its own pointer; count stores, selected-halfword addressing and argument scheduling still differ. */
 #include "ui/ButtonHelp.h"
 
 union HelpRegistrationViewA {
@@ -22,7 +22,7 @@ void FUN_001a90e0(void *pair);
 static __inline void registerHelpTouch(HelpRegistrationViewA *work, s32 index, s32 sprite)
 {
     work->touch.handles[index] = FUN_0019d890(10, sprite);
-    ++work->base.count;
+    ++work->touch.count;
 }
 
 // Reset help animations and install touch regions appropriate to each of the six button kinds.
@@ -40,8 +40,11 @@ extern "C" void FUN_00183c0c(void)
             } else if (kind == 9) {
                 registerHelpTouch(work, index, 0x85);
             } else if (kind == 21 || kind == 20) {
-                registerHelpTouch(work, index, index + 0x1f);
-                registerHelpTouch(work, index + 1, index + 0x20);
+                u16 *handles = &work->touch.handles[index];
+                handles[0] = FUN_0019d890(10, index + 0x1f);
+                ++work->touch.count;
+                handles[1] = FUN_0019d890(10, index + 0x20);
+                ++work->touch.count;
             } else {
                 registerHelpTouch(work, index, index + 0x1f);
             }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: readable rebuild of the place window start-up; retail keeps the constant 2 in r1 for the two window stores, scales the record index with a shifted add chain and shares the exit, which armcc here allocates differently. */
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "font/PlaceWin.h"
@@ -38,6 +37,7 @@ s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 s32 jobIsValid(u32 job);
 s32 eventTexJobSlotsDone(u32 job);
 ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
+void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void FUN_002a03d8(s32 a, s32 b);
 void FUN_0029e648(s32 a, s32 b);
 void messageTargetSetValue(s32 value, s32 arg);
@@ -76,9 +76,9 @@ void FUN_003a0d64(PlaceScene *scene)
         return;
 
     scene->scriptA = reinterpret_cast<ScriptRunState *>(FUN_00297060(scene->scriptFile, scene->scriptOwner));
-    scene->scriptA->mode = 2;
+    scriptProcessSetMode(scene->scriptA, 2);
     scene->scriptB = reinterpret_cast<ScriptRunState *>(FUN_00297060(scene->scriptFile, scene->scriptOwner));
-    scene->scriptB->mode = 2;
+    scriptProcessSetMode(scene->scriptB, 2);
     FUN_002a03d8(0, 10);
     FUN_002a03d8(1, 10);
     FUN_0029e648(1, 0);
@@ -100,14 +100,14 @@ void FUN_003a0d64(PlaceScene *scene)
     placeWinStartText(record->text);
 
     if (placeFlagsAnySet()) {
-        scene->state = 1;
         scene->substate = 0;
+        scene->state = 1;
         FUN_003a4210(scene);
         buttonHelpSetPreset(0x75);
         FUN_0029ee6c(0, 0x323232FF);
     } else {
-        scene->state = 3;
         scene->substate = 0;
+        scene->state = 3;
     }
 }
 

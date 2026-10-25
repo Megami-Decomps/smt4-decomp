@@ -50,7 +50,7 @@ int FUN_0023092c(void);
 int FUN_00230b9c(unsigned int, unsigned int, int);
 int FUN_00230d30(void);
 int recordGetModeForId(...);
-int FUN_002c7ce8(...);
+int statusDownSwitchTab(...);
 int flaggedEntryGetValueA(...);
 int flaggedEntrySetValueA(...);
 int FUN_003423e8(...);
@@ -121,7 +121,7 @@ extern int messageMainGetValue(void);
 /* Supplied declaration required: statusDownRestartTransition. */
 /* Supplied declaration required: objectApplyIfUnblocked. */
 extern int useCounterGetCurrentValue(void);
-/* Supplied declaration required: FUN_002c7ce8. */
+/* Supplied declaration required: statusDownSwitchTab. */
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
 extern int FUN_002c7e54(void);
@@ -464,7 +464,7 @@ LAB_00268d68:
               statusDownInitializeSkillList(0);
               eventQueueAddUniqueIfValid(0x100020e);
               temp_v3 = 6;
-              FUN_002c7ce8(temp_v3);
+              statusDownSwitchTab(temp_v3);
             }
           }
         }
@@ -1465,7 +1465,7 @@ LAB_00269f7c:
     if ((g_statusDown == 0) || (*(int *)(g_statusDown + 0x2564) == 5)) {
       FUN_003343f0(0);
       temp_v3 = *(unsigned char *)(temp_v2 + 0x515);
-      FUN_002c7ce8(temp_v3);
+      statusDownSwitchTab(temp_v3);
     }
   }
   temp_v16 = *(char *)(temp_v2 + 0x528) == '\0';

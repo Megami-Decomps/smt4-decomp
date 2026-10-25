@@ -1,8 +1,8 @@
-/* NON_MATCHING: all default instructions match except sector division/conversion use s0 instead of retail's s2 quotient. */
+/* NON_MATCHING: sector division/conversion uses s0 rather than retail's s2 quotient; all other instructions agree. */
 #include "common.h"
 
 extern "C" {
-// Wrap to one revolution and round to the nearest of32 heading sectors.
+// Wrap to one revolution and round to the nearest of 32 heading sectors.
 f32 calcHeadingRoundedTo32Directions(f32 angle)
 {
     while (angle >= 360.0f) {

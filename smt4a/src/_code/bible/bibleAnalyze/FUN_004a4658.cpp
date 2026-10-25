@@ -47,7 +47,7 @@ typedef char AnalyzeConfirmationOffsets[
 extern "C" {
 extern AnalyzeSuffixGlobals DAT_0057f0a0;
 extern const char DAT_0052b5bc[], DAT_0052b5c4[];
-s32 FUN_004cf8dc(void *buttons, s32 index);
+s32 entryDispatchUpdate(void *buttons, s32 index);
 s32 vec2GetYInt(const f32 *point);
 s32 vec2GetXInt(const f32 *point);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
@@ -62,7 +62,7 @@ void FUN_004d05c4(void *controls, s32 kind, u32 flags, s32 count);
 
 void FUN_004a4658(Screen4A *screen)
 {
-    s32 activated = FUN_004cf8dc(screen->block0DC, screen->unkA872);
+    s32 activated = entryDispatchUpdate(screen->block0DC, screen->unkA872);
     AnalyzeButtonsView *buttons = reinterpret_cast<AnalyzeButtonsView *>(screen);
     f32 *position = buttons->buttons[screen->unkA872].position;
     s32 y = vec2GetYInt(position);

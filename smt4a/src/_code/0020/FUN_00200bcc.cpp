@@ -26,7 +26,7 @@ static float romwright_fabs_4(float value)
     return value < (float)0 ? -value : value;
 }
 #endif
-extern int FUN_00163fd4(unsigned int);
+extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 
@@ -161,9 +161,9 @@ LAB_00200e54:
     temp_v18 = 50.0f;
     if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x1e), temp_v4 != 0)) {
       temp_v5 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
-      temp_v3 = FUN_00163fd4(7);
+      temp_v3 = slotIsActive(7);
       temp_v15 = 0.1f;
-      if ((temp_v3 != 0) || (temp_v3 = FUN_00163fd4(0x18), temp_v3 != 0)) {
+      if ((temp_v3 != 0) || (temp_v3 = slotIsActive(0x18), temp_v3 != 0)) {
         temp_v17 = CONCAT44(temp_v5,*(float *)(temp_v11 + 0x14) * 5.0f);
         if (*(char *)(temp_v11 + 4) == '\a') {
           temp_v3 = (int)*(float *)(temp_v11 + 0x14) << 4;
@@ -173,8 +173,8 @@ LAB_00200e54:
         }
       }
       else {
-        temp_v3 = FUN_00163fd4(8);
-        if ((temp_v3 != 0) || (temp_v3 = FUN_00163fd4(0x1c), temp_v3 != 0)) {
+        temp_v3 = slotIsActive(8);
+        if ((temp_v3 != 0) || (temp_v3 = slotIsActive(0x1c), temp_v3 != 0)) {
           if (*(char *)(temp_v11 + 4) != '\a') {
             temp_v3 = (int)*(float *)(temp_v11 + 0x14) * 100;
           }
@@ -184,8 +184,8 @@ LAB_00200e54:
           temp_v17 = CONCAT44(temp_v5,*(float *)(temp_v11 + 0x14) * temp_v18);
         }
         else {
-          temp_v3 = FUN_00163fd4(0);
-          if ((temp_v3 != 0) || (temp_v3 = FUN_00163fd4(0x14), temp_v3 != 0)) {
+          temp_v3 = slotIsActive(0);
+          if ((temp_v3 != 0) || (temp_v3 = slotIsActive(0x14), temp_v3 != 0)) {
             temp_v3 = *(int *)(temp_v11 + 0x10);
             temp_v16 = VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v17 = romwright_piece_4_4(temp_v5,temp_v16);
@@ -483,9 +483,9 @@ LAB_002010f0:
       temp_v4 = padButtonRepeat(4);
       if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x11), temp_v4 != 0)) {
         temp_v5 = (unsigned int)((unsigned long long)temp_v17 >> 0x20);
-        temp_v3 = FUN_00163fd4(7);
+        temp_v3 = slotIsActive(7);
         temp_v18 = -0.1f;
-        if ((temp_v3 != 0) || (temp_v3 = FUN_00163fd4(0x18), temp_v3 != 0)) {
+        if ((temp_v3 != 0) || (temp_v3 = slotIsActive(0x18), temp_v3 != 0)) {
           if (*(char *)(temp_v11 + 4) != '\a') {
             temp_v3 = (int)*(float *)(temp_v11 + 0x14) * -10;
           }
@@ -497,8 +497,8 @@ LAB_002010f0:
           temp_v17 = CONCAT44(temp_v5,temp_v18 * temp_v15);
         }
         else {
-          temp_v3 = FUN_00163fd4(8);
-          if ((temp_v3 != 0) || (temp_v3 = FUN_00163fd4(0x1c), temp_v3 != 0)) {
+          temp_v3 = slotIsActive(8);
+          if ((temp_v3 != 0) || (temp_v3 = slotIsActive(0x1c), temp_v3 != 0)) {
             if (*(char *)(temp_v11 + 4) != '\a') {
               temp_v3 = (int)*(float *)(temp_v11 + 0x14) * -100;
             }
@@ -510,8 +510,8 @@ LAB_002010f0:
             temp_v17 = CONCAT44(temp_v5,temp_v18 * temp_v15);
           }
           else {
-            temp_v3 = FUN_00163fd4(0);
-            if ((temp_v3 != 0) || (temp_v3 = FUN_00163fd4(0x14), temp_v3 != 0)) {
+            temp_v3 = slotIsActive(0);
+            if ((temp_v3 != 0) || (temp_v3 = slotIsActive(0x14), temp_v3 != 0)) {
               temp_v3 = -*(int *)(temp_v11 + 0x10);
               temp_v16 = VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
               temp_v17 = romwright_piece_4_4(temp_v5,temp_v16);

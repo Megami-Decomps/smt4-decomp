@@ -1,16 +1,16 @@
-/* Calls FUN_003dd1a4 with the global's field at +0x18 and the FUN_002c08f0 value, if that field is set; returns its result or 0. */
+/* Dispatch the active battle effect with this job's work buffer, or return zero when no effect is active. */
 #include "battle/btlEffect.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
 extern BtlEffectGlobals g_btlEffect;
 
-extern u32 jobGetWork(void);
 extern s32 FUN_004fa828(void *target, u32 value);
 
-s32 btlEffectDispatchCurrentJob(void)
+s32 btlEffectDispatchCurrentJob(u32 job)
 {
-    u32 value = jobGetWork();
+    u32 value = reinterpret_cast<u32>(jobGetWork(job));
 
     if (g_btlEffect.data != NULL) {
         return FUN_004fa828(g_btlEffect.data, value);

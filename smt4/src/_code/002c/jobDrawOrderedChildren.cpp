@@ -1,5 +1,5 @@
-/* NON_MATCHING: empty-slot compaction is not outlined cold, and render-stack push scheduling differs; -O2 candidate. */
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 struct OrderedJobDrawWork {
     u8 unk000[0x5f2];
@@ -12,7 +12,6 @@ struct OrderedJobDrawWork {
 };
 extern "C" {
 extern RenderCtx *g_titleScene;
-OrderedJobDrawWork *jobGetWork(u32);
 s32 jobIsValid(u32);
 f32 jobGetScalarFrame(u32);
 s32 FUN_002865c0(u32, f32);
@@ -22,7 +21,7 @@ void FUN_002c18e4(RenderCtx *);
 
 u32 jobDrawOrderedChildren(u32 job)
 {
-    OrderedJobDrawWork *work = jobGetWork(job);
+    OrderedJobDrawWork *work = reinterpret_cast<OrderedJobDrawWork *>(jobGetWork(job));
     for (s32 i = 0; i < 10; ++i) {
         if (work->jobs[i] && !jobIsValid(work->jobs[i]))
             work->jobs[i] = 0;
@@ -31,25 +30,29 @@ u32 jobDrawOrderedChildren(u32 job)
     do {
         changed = false;
         for (s32 i = 0; i < 9; ++i) {
-            if (work->jobs[i]) {
-                if (work->jobs[i + 1]) {
-                    f32 frame = jobGetScalarFrame(work->jobs[i]);
-                    if (frame > jobGetScalarFrame(work->jobs[i + 1])) {
-                        changed = true;
-                        u32 previous = work->jobs[i];
-                        work->jobs[i] = work->jobs[i + 1];
-                        work->jobs[i + 1] = previous;
-                    }
+            if (!work->jobs[i]) {
+                u32 *following = &work->jobs[i + 1];
+                if (*following) {
+                    work->jobs[i] = *following;
+                    changed = true;
+                    *following = 0;
                 }
-            } else if (work->jobs[i + 1]) {
-                work->jobs[i] = work->jobs[i + 1];
-                changed = true;
-                work->jobs[i + 1] = 0;
+                continue;
+            }
+            if (work->jobs[i + 1]) {
+                f32 frame = jobGetScalarFrame(work->jobs[i]);
+                if (frame > jobGetScalarFrame(work->jobs[i + 1])) {
+                    changed = true;
+                    u32 previous = work->jobs[i];
+                    work->jobs[i] = work->jobs[i + 1];
+                    work->jobs[i + 1] = previous;
+                }
             }
         }
     } while (changed);
     RenderCtx *render = g_titleScene;
-    renderStackPush(&render->additional.stackC, FUN_002865c0(6, 0.0f));
+    s32 renderState = FUN_002865c0(6, 0.0f);
+    renderStackPush(&render->additional.stackC, renderState);
     if (work->drawAll) {
         for (s32 i = 0; i < 10; ++i) {
             if (jobIsValid(work->jobs[i]))

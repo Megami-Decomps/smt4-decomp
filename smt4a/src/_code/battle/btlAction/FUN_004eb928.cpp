@@ -31,7 +31,7 @@ int FUN_004f84ec(...);
 int FUN_004f8f08(void);
 int FUN_004f8fa0(...);
 int FUN_004fb4fc(...);
-int FUN_004fdc0c(...);
+int btlReflectQueueValueAction(...);
 
 int FUN_0023acdc(...);
 int dataTable41FindById(void);
@@ -91,7 +91,7 @@ int FUN_004e6b64(...);
 int FUN_004e8454(int *);
 int FUN_004eaa68(...);
 int FUN_004ee5b4(int *, unsigned int *);
-int FUN_004fb670(...);
+int btlQueueDuplicateSuppressedAction(...);
 int FUN_004fcde0(...);
 int FUN_004fda78(...);
 int FUN_004feecc(...);
@@ -248,7 +248,7 @@ extern int FUN_004f9d44(int);
 extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: btlReflectCreateKind25. */
-/* Supplied declaration required: FUN_004fb670. */
+/* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004fbc30. */
 /* Supplied declaration required: FUN_004fbeac. */
 /* Supplied declaration required: FUN_004fc094. */
@@ -257,7 +257,7 @@ extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: btlReflectCreateKind34. */
 /* Supplied declaration required: FUN_004fda78. */
-/* Supplied declaration required: FUN_004fdc0c. */
+/* Supplied declaration required: btlReflectQueueValueAction. */
 /* Supplied declaration required: FUN_004fdcd8. */
 /* Supplied declaration required: FUN_004fe618. */
 /* Supplied declaration required: btlReflectSetValuePair. */
@@ -605,7 +605,7 @@ LAB_004ebd00:
         *(unsigned int *)(*piStack_30 + 0xa8) = 4;
         *puVar25 = *puVar25 | 0x2000;
         FUN_004feecc(1,puVar25);
-        FUN_004fb670(0,puVar25);
+        btlQueueDuplicateSuppressedAction(0,puVar25);
         *(unsigned int *)(g_btlCamera + 0x7cc) = 0xffffffff;
         break;
       case 0xb:
@@ -1364,7 +1364,7 @@ code_r0x004f054c:
       *(unsigned int *)(temp_v3 + 0x45a4) = *(unsigned int *)(temp_v3 + 0x45a4) & temp_v17;
     }
     temp_v27 = 0;
-    FUN_004fdc0c(0,puVar25,0x34,*(unsigned int *)(temp_v20 + 0x24));
+    btlReflectQueueValueAction(0,puVar25,0x34,*(unsigned int *)(temp_v20 + 0x24));
     return;
   case 0x12:
     if (((*puVar25 & 0x1080) == 0) && (temp_v3 = FUN_003efb18(), temp_v3 == 0)) {

@@ -43,7 +43,10 @@ void FUN_00337c20(BtlMainStateView *state, s32 mode)
             continue;
         }
         BtlEntryView *entry = &state->entries[index];
-        if (!(entry->flags & 1) || (entry->flags & 0x40)) {
+        if (!(entry->flags & 1)) {
+            continue;
+        }
+        if (entry->flags & 0x40) {
             continue;
         }
         BtlEntryStatus *status = &entry->status;
@@ -51,7 +54,10 @@ void FUN_00337c20(BtlMainStateView *state, s32 mode)
             continue;
         }
         if (mode == 0) {
-            if ((entry->flags & 0x10) || (entry->flags & 0x20)) {
+            if (entry->flags & 0x10) {
+                continue;
+            }
+            if (entry->flags & 0x20) {
                 continue;
             }
         } else if (mode == 1) {

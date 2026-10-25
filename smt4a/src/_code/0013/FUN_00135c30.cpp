@@ -55,7 +55,7 @@ int ifTouchAcquireUser(...);
 int gameDataAllocBlocks(...);
 int FUN_0013778c(...);
 int asdSequenceRequest(...);
-int FUN_00138114(...);
+int soundEffectInitializeDelay(...);
 int gameDataBlocksReleaseHold(...);
 int titleConfigApply(...);
 int FUN_001389ec(...);
@@ -89,7 +89,7 @@ int asdNgcInit(...);
 int appletCloseApplication(...);
 int FUN_00138764(...);
 int FUN_00138a64(...);
-int FUN_00138d34(...);
+int mathInitDefaultUnitVector(...);
 int asdPrimInit(...);
 int asdFileHashPackOpen(...);
 int asdTMTexTableLoadList(...);
@@ -291,7 +291,7 @@ extern unsigned long long FUN_00137e5c(void);
 /* Supplied declaration required: gameDataFlagsClearBits. */
 /* Supplied declaration required: asdSequenceRequest. */
 /* Supplied declaration required: FUN_00137f94. */
-/* Supplied declaration required: FUN_00138114. */
+/* Supplied declaration required: soundEffectInitializeDelay. */
 extern int engineGetStateFlag(void);
 /* Supplied declaration required: asdMemoryInit. */
 /* Supplied declaration required: asdNgcInit. */
@@ -318,7 +318,7 @@ extern int FUN_00138cb4(void);
 /* Supplied declaration required: FUN_00138cc4. */
 /* Supplied declaration required: gameDataBlocksMaskClearBits. */
 /* Supplied declaration required: appletUnlockAndRestoreDisplay. */
-/* Supplied declaration required: FUN_00138d34. */
+/* Supplied declaration required: mathInitDefaultUnitVector. */
 /* Supplied declaration required: asdPrimInit. */
 /* Supplied declaration required: FUN_00138e14. */
 /* Supplied declaration required: asdFileHashPackOpen. */
@@ -499,7 +499,7 @@ void FUN_00135c30(void)
   temp_v2 = g_renderCtx;
   temp_v3 = FUN_001692ac(5,1);
   *(unsigned int *)(temp_v2 + 0x1384) = temp_v3;
-  FUN_00138d34();
+  mathInitDefaultUnitVector();
   asdGxPresetVectorSet(0);
   asdGxPresetVectorSet(1);
   __aeabi_vec_ctor_nocookie_nodtor(&temp_v22,&LAB_0013ba98,0x3c,2);
@@ -552,7 +552,7 @@ void FUN_00135c30(void)
   soundSetupArchiveAndSlots();
   soundInitializePersistentSlots();
   FUN_0013ae58();
-  FUN_00138114();
+  soundEffectInitializeDelay();
   titleConfigSetDefaults();
   titleConfigApply();
   FUN_0013963c();

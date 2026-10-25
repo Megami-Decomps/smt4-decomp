@@ -225,7 +225,7 @@ struct UniteWork {
             /* 0x8B70 */ u16 skills[24];
         } inheritanceA;
     };
-    /* 0x9450 */ u8 blocked;
+    /* 0x9450 */ s8 blocked;
 };
 
 struct UniteWorkIV {
@@ -242,6 +242,9 @@ struct UniteWorkIV {
     };
     /* 0x95D8 */ s32 unk95D8;
 };
+
+typedef char UniteWorkBlockedOffsetCheck[
+    offsetof(UniteWork, blocked) == 0x9450 && sizeof(UniteWork) == 0x9454 ? 1 : -1];
 
 struct UniteDescriptionEntry {
     /* 0x00 */ u8 unk00[0x55];

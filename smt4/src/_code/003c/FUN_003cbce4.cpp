@@ -1,5 +1,6 @@
 /* NON_MATCHING: only register allocation of the action-slot address computation differs (retail loads the unit, the slot stride, then the table pointer into r0/r2/r3). */
 #include "battle/btlAction.h"
+#include "battle/ActionKindSelection.h"
 
 /* The combatant being driven; only the fields this state machine reads. */
 struct ReflectUnit {
@@ -28,8 +29,6 @@ struct ReflectTarget {
     u32 delay;              // 0xF04
 };
 
-/* Each combatant's action slot is 0xF1C bytes; its kind byte is at +9. */
-enum { ACTION_SLOT_WORDS = 0x3C7, ACTION_SLOT_KIND = 9 };
 
 extern "C" {
 extern BtlActionGlobals g_btlAction;
@@ -43,7 +42,7 @@ void btlReflectInitKind9(s32 layer, ReflectTarget *target, u32 context, u32 kind
 void *FUN_003cfc84(ReflectActor *actor, ReflectTarget *target, s32 alternate);
 void FUN_003d0220(ReflectActor *actor, ReflectTarget *target, s32 alternate);
 void FUN_00229a3c(s32 a, ReflectTarget *target, s32 b, s32 c, s32 d);
-void FUN_002296f4(ReflectActor *actor, ReflectTarget *target, s32 id, s32 a, s32 b, s32 c);
+void frameRangeExtend(ReflectActor *actor, ReflectTarget *target, s32 id, s32 a, s32 b, s32 c);
 
 /* Drive one tick of the reflect action; true once it has switched the combatant's action kind. */
 u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
@@ -53,8 +52,8 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
         if (nodeListCountActiveById(g_btlActionReflect, target) != 0) {
             return 0;
         }
-        u32 *slot = &((u32 *)g_btlAction.data)[actor->unit->slotIndex * ACTION_SLOT_WORDS];
-        ((u8 *)slot)[ACTION_SLOT_KIND] = 1;
+        ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+        slot->kind = 1;
         battleResetCounterAndFlag(DAT_00435d18);
         return 1;
     }
@@ -73,8 +72,8 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
         }
         if (ready != NULL) {
             target->delay = 0;
-            u32 *slot = &((u32 *)g_btlAction.data)[actor->unit->slotIndex * ACTION_SLOT_WORDS];
-            ((u8 *)slot)[ACTION_SLOT_KIND] = 0x1b;
+            ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+            slot->kind = 0x1b;
             return 1;
         }
         if (actor->unit->state != 4) {
@@ -87,9 +86,9 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
         target->step = target->step + 1;
         if (nodeListCountActiveById(g_btlActionReflect, target) <= 0 && ready != NULL) {
             target->delay = 0x1e;
-            FUN_002296f4(actor, target, target->source->id, 0, 0x11, 0x11);
-            u32 *slot = &((u32 *)g_btlAction.data)[actor->unit->slotIndex * ACTION_SLOT_WORDS];
-            ((u8 *)slot)[ACTION_SLOT_KIND] = 0x1b;
+            frameRangeExtend(actor, target, target->source->id, 0, 0x11, 0x11);
+            ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+            slot->kind = 0x1b;
             return 1;
         }
     }

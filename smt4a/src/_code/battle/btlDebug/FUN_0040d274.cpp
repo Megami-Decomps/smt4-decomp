@@ -12,7 +12,7 @@ int FUN_004f2938(...);
 int cameraBeginScalarTransition(int, unsigned int, int);
 int FUN_004f3f1c(int, unsigned int, int, int);
 void FUN_004f4348(int camera, float x, float y, float z, unsigned int duration, unsigned int mode);
-int FUN_004fb670(int, unsigned int);
+int btlQueueDuplicateSuppressedAction(int, unsigned int);
 int FUN_004feecc(int, unsigned int);
 int VectorSignedToFloat(...);
 
@@ -51,7 +51,7 @@ extern int FUN_004f2708(int, unsigned int, unsigned int);
 /* Supplied declaration required: cameraBeginScalarTransition. */
 /* Supplied declaration required: FUN_004f3f1c. */
 /* Supplied declaration required: FUN_004f4348. */
-/* Supplied declaration required: FUN_004fb670. */
+/* Supplied declaration required: btlQueueDuplicateSuppressedAction. */
 /* Supplied declaration required: FUN_004feecc. */
 
 
@@ -87,7 +87,7 @@ void FUN_0040d274(unsigned int param_1,int param_2)
       temp_v4 = btlGetMainState();
       temp_v5 = FUN_004f2708(g_btlCamera,temp_v4,1);
       if ((temp_v5 != 0) && ((*(unsigned int *)(g_btlCamera + 0x64c) & 0x1000000) == 0)) {
-        FUN_004fb670(0,*(unsigned int *)(param_2 + 8));
+        btlQueueDuplicateSuppressedAction(0,*(unsigned int *)(param_2 + 8));
       }
     }
     FUN_004feecc(1,*(unsigned int *)(param_2 + 8));

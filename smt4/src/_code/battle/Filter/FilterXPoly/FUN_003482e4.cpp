@@ -1,6 +1,7 @@
-/* NON_MATCHING: builds the vertex ring of the X polygon filter (centre, first rim vertex and the rest by repeated rotation with the table sine/cosine); written from the decompilation and the retail disassembly, float to int conversions and the unused alignment argument of asdOperatorNewB are not compared with retail */
+/* NON_MATCHING: the owner-aware index allocation is restored; sine/cosine interpolation grouping, vector copy operations and VFP conversions still differ from retail. */
 #include "AsdSDK/AsdDebug.h"
 #include "nw/math/MTX44.h"
+#include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
 
 struct XPolyVertex {
     f32 x, y, z;
@@ -45,7 +46,6 @@ extern SinCosEntry DAT_00407ed0[256];
 
 void FUN_0023b49c(XPolyFilter *filter, u32 argument, u32 base);
 void *asdMemoryAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
-void *asdOperatorNewB(u32 size);
 void mtx44Copy(void *destination, const nw::math::MTX44 *source);
 
 /* Sine and cosine of an angle given in table units (256 per turn, interpolated). */
@@ -69,7 +69,7 @@ void FUN_003482e4(XPolyFilter *filter, XPolyParams *params, u32 argument)
     FUN_0023b49c(filter, argument, params->baseArgument);
     asdDebugTrace(XPOLY_SOURCE, 48);
     filter->vertices = static_cast<XPolyVertex *>(asdMemoryAlloc(0x100, 0x100, 0, (filter->params->segments + 1) * sizeof(XPolyVertex), 1));
-    filter->indices = asdOperatorNewB((filter->params->segments + 1) * 12);
+    filter->indices = asdOperatorNewB((filter->params->segments + 1) * 12, reinterpret_cast<void *>(1));
 
     f32 step = (360.0f / (f32)filter->params->segments) * XPOLY_UNITS_PER_DEGREE;
     f32 sinA, cosA, sinB, cosB, sinC, cosC;

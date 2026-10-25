@@ -46,7 +46,7 @@ void FUN_0034dae0(void *unitData, u32 id)
     unit->level = level;
     if (base != NULL) {
         f32 multiplier = progression * 0.3f + 1.0f + progression * progression * (1.0f / 15.0f);
-        s32 experience = static_cast<s32>(static_cast<f32>(base->experience) * multiplier);
+        s32 experience = static_cast<s32>(multiplier * static_cast<f32>(base->experience));
         rewards->experience = experience;
         if (9999999 <= experience) {
             experience = 9999999;

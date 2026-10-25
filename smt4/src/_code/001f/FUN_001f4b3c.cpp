@@ -1,25 +1,19 @@
-#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "gfx/NamedTextureCache.h"
 
 extern "C" {
 
-int asdTexTgaLoadNw4c(void *block, u32 a, u32 b, int c);
+void asdTexTgaLoadNw4c(AsdTexture *texture, const AsdTgaHeader *file, u32 bytes, u32 flags);
 
-typedef struct Request {
-    /* 0x00 */ AsdTexture *block;
-    /* 0x04 */ u8 unk04[0x40];
-    /* 0x44 */ u32 unk44;
-    /* 0x48 */ u8 ready;
-} Request;
 
-void FUN_001f4b3c(u32 unused, Request *request, u32 arg)
+void FUN_001f4b3c(u32 unused, BattleEffectTextureSlot *request, u32 bytes)
 {
-    asdTexTgaLoadNw4c(request->block, request->unk44, arg, 0x10000);
-    request->block->image.flags = 0x2000000;
-    request->block->unk3c = 1;
-    request->block->unk40 = 1;
-    request->block->unk38 = 0;
-    asdTextureSetImage(request->block);
-    request->ready = 1;
+    asdTexTgaLoadNw4c(request->texture, static_cast<const AsdTgaHeader *>(request->file), bytes, 0x10000);
+    request->texture->image.flags = 0x2000000;
+    request->texture->unk3c = 1;
+    request->texture->unk40 = 1;
+    request->texture->unk38 = 0;
+    asdTextureSetImage(request->texture);
+    request->loaded = 1;
 }
 
 } /* extern "C" */

@@ -1,4 +1,5 @@
 /* NON_MATCHING: Retail mov r6, r3 differs from recovered mov r6, r3. */
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 struct FileView;
@@ -18,7 +19,6 @@ struct FileView {
 };
 
 extern "C" {
-void FUN_0013ebd8(s32 result);
 void sysFatalBreak(void);
 void vcallSlot12IfValid(u32 handle);
 

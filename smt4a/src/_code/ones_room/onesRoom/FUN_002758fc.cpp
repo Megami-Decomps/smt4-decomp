@@ -24,8 +24,8 @@ u32 asdProcessCreateSimple(const char *name, s32 priority, s32 first, s32 second
 void FUN_002758fc(s32 inactive)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\ones_room\\onesRoom.cpp", 146);
-    OnesRoomWork *room = static_cast<OnesRoomWork *>(asdMemoryAlloc(0x100, 0x100, 0, 0x14, 1));
-    g_onesRoom = reinterpret_cast<OnesRoom *>(room);
+    g_onesRoom = static_cast<OnesRoom *>(asdMemoryAlloc(0x100, 0x100, 0, 0x14, 1));
+    OnesRoomWork *room = reinterpret_cast<OnesRoomWork *>(g_onesRoom);
     room->job = 0;
     room->dataA = NULL;
     room->process = NULL;

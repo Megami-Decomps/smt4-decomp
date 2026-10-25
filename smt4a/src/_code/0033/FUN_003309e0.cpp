@@ -13,13 +13,13 @@ struct FrameReadinessState {
 
 extern "C" {
 extern FrameReadinessState* g_frameTex;
-s32 recordGetSignedFlags(const SceneSprite *sprite);
+s32 uiSpriteGetCompletionState(const SceneSprite *sprite);
 
 u32 FUN_003309e0(void)
 {
     const FrameReadinessState* frame = g_frameTex;
     if (frame->enabled != 0 && frame->active != 0) {
-        if (recordGetSignedFlags(&frame->first) != 0 && recordGetSignedFlags(&frame->second) != 0) {
+        if (uiSpriteGetCompletionState(&frame->first) != 0 && uiSpriteGetCompletionState(&frame->second) != 0) {
             return 1;
         }
         return 0;

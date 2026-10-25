@@ -11,10 +11,17 @@ PopupMessageRecord *FUN_00365bc4(s32 message);
 const char *FUN_002d8b58(s32 category, s32 id)
 {
     if (category < 26 && category != 7) {
-        DataTableView<PopupChoiceRecord> records(0x43, 0);
-        for (s32 index = 0; index < static_cast<s32>(records.count); ++index) {
-            DataTableView<PopupChoiceRecord> current(0x43, 0);
-            PopupChoiceRecord *record = current.at(index);
+        void *section = dataTableGet(0x43, 0);
+        dataTableGetEntries(section);
+        s32 count = dataTableGetCount(section);
+        for (u32 index = 0; static_cast<s32>(index) < count; ++index) {
+            section = dataTableGet(0x43, 0);
+            PopupChoiceRecord *record = static_cast<PopupChoiceRecord *>(dataTableGetEntries(section));
+            u32 entryCount = dataTableGetCount(section);
+            if (index >= entryCount)
+                record = NULL;
+            else
+                record += index;
             if (record->category == category && record->id == id &&
                 (record->requiredFlag == 0 || gameFlagIsSet(record->requiredFlag)) &&
                 (record->excludedFlag == 0 || !gameFlagIsSet(record->excludedFlag))) {

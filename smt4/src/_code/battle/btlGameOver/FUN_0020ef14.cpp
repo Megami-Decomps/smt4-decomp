@@ -1,16 +1,16 @@
 /* NON_MATCHING: The recovered state and job pointers use opposite registers across the dispatch. */
 #include "battle/btlGameOver.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 extern BtlGameOver* g_btlGameOver;
-BtlGameOverJobWork* jobGetWork(void);
 s32 asdProcessGetFrames(u32);
 s32 FUN_00335950(BtlGameOver*);
 
 // Advances the game-over timer and runs its state machine when the job can update.
-s32 FUN_0020ef14(void)
+s32 FUN_0020ef14(u32 job)
 {
-    BtlGameOverJobWork* work = jobGetWork();
+    BtlGameOverJobWork* work = reinterpret_cast<BtlGameOverJobWork *>(jobGetWork(job));
     BtlGameOver* state = g_btlGameOver;
     if (state == NULL) {
         return 0;

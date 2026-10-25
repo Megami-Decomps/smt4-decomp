@@ -1,4 +1,4 @@
-/* NON_MATCHING: light-color call is branched rather than predicated, adding one instruction; readiness load uses r0 and argument setup is later. O2 candidate. */
+/* NON_MATCHING: readiness and guarded color helpers recover retail except bank-zero setup is unconditional rather than movge. */
 #include "battle/btlStage.h"
 #include "shard/W6_W6Match1_BattleStageModel.h"
 
@@ -23,6 +23,17 @@ u32 FUN_00340558(BattleStageModel *stage);
 s32 FUN_0025bb34(s32 type, const char *name, s32 bank);
 void FUN_003c7cf0(BattleStageModel *stage, s32 key0, s32 key1);
 void FUN_003c8058(BattleStageModel *stage);
+static inline void stageSetLightColor(s32 slot, u32 bank, f32 red, f32 green, f32 blue)
+{
+    if (slot >= 0)
+        asdModelSlotSetColor(slot, bank, red, green, blue);
+}
+
+static inline bool stageIsReady(BattleStageModel *stage)
+{
+    return stage->ready != 0 && FUN_00340558(stage) != 0;
+}
+
 
 u32 btlStageUpdate(BattleStageModel *stage, u32 work)
 {
@@ -41,14 +52,12 @@ u32 btlStageUpdate(BattleStageModel *stage, u32 work)
         stage->state = 2;
         break;
     case 2: {
-        if (stage->ready != 0 && FUN_00340558(stage) != 0) {
+        if (stageIsReady(stage)) {
             btlStageUpdateNodePositions(stage, stage->position);
             mapSetThreeTargetRotations(stage, 0.0f, g_btlMain->yaw, 0.0f);
             s32 lightSlot = FUN_0025bb34(0, DAT_004017a0, 0);
             stage->lightSlot = lightSlot;
-            if (lightSlot >= 0) {
-                asdModelSlotSetColor(lightSlot, 0, 0.5f, 0.5f, 0.5f);
-            }
+            stageSetLightColor(lightSlot, 0, 0.5f, 0.5f, 0.5f);
             FUN_003c7cf0(stage, stage->key0, stage->key1);
             stage->state = 4;
         }

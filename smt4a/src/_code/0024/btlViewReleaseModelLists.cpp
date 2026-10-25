@@ -1,11 +1,12 @@
 #include "battle/btlView.h"
+#include "gamedata/GameFlags.h"
 #include "map/MapSelection.h"
 
 extern "C" {
 extern BattleViewState g_battleViewState;
 
 s32 gameFlagIsSet(u32 flag);
-void gameFlagSetValue(u32 flag, s32 value, s32 mode);
+
 struct GameFlagBlock {
     /* 0x0000 */ u8 unk0000[0x16A0];
     /* 0x16A0 */ s32 unk16A0;

@@ -50,7 +50,7 @@ extern int FUN_0027e3b8(u32);
 extern int btlUiPanelFadeInWhenReady(u32);
 extern int btlReflectCreateKind24(int, BtlAction *, u32, int);
 extern int FUN_003ddee0(int, BtlAction *, BtlTarget *, int, int, int);
-extern int FUN_002296f4(BtlWork **, BtlAction *, int, int, int, int);
+extern int frameRangeExtend(BtlWork **, BtlAction *, int, int, int, int);
 
 static __inline BtlUnit *btlGetUnit(s32 index)
 {
@@ -75,7 +75,7 @@ u32 FUN_003cfb60(BtlWork **work, BtlAction *action)
         FUN_003ddee0(0, action, action->target, 0, 0, 0);
     }
     btlReflectCreateKind24(30, action, action->unk20, 1);
-    FUN_002296f4(work, action, action->target->unk62, 0, 30, 30);
+    frameRangeExtend(work, action, action->target->unk62, 0, 30, 30);
     g_btlMain->flags &= ~BTL_MAIN_FLAG_ACTION_PENDING;
     btlGetUnit((*work)->unitIndex)->state = 27;
     return 1;

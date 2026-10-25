@@ -57,7 +57,7 @@ void btlEntryValuesCopy(BattleTurn *turn, ActionWork *work);
 void FUN_00227b14(void *ui, u16 member, s32 mode);
 void FUN_0022a5d8(s32 effect, ActionEntry *entry, s32 mode);
 void FUN_0026beb4(s32 chance, ActionWork *work, s32 a, ActionRecord *record, s32 b);
-void FUN_002296f4(BattleTurn *turn, ActionWork *work, s32 id, s32 a, s32 b, s32 c);
+void frameRangeExtend(BattleTurn *turn, ActionWork *work, s32 id, s32 a, s32 b, s32 c);
 s32 battleGetEntryHalfword(s32 id, s32 index);
 void FUN_002550d8(s32 id, s32 stat, s32 delta, s32 preview);
 s32 randRange(s32 range);
@@ -98,7 +98,7 @@ u32 FUN_003d2ea0(BattleTurn *turn, ActionWork *work)
     if (effect != 0) {
         FUN_0022a5d8(effect, work->entry, 1);
         FUN_0026beb4(chance, work, 0, work->record, 1);
-        FUN_002296f4(turn, work, work->record->id, 0, 0x1e, 0x1e);
+        frameRangeExtend(turn, work, work->record->id, 0, 0x1e, 0x1e);
         g_btlScriptUnit[turn->state->actorIndex].command = 0x1b;
     } else {
         if ((pending & 0x40) == 0) {

@@ -8,7 +8,7 @@
 extern "C" {
 void FUN_0022708c(MaterialMergeOwner *);
 void FUN_002276f8(MaterialMergeOwner *);
-void FUN_0027de24(MaterialMergeOwner *);
+void modelManagerReleaseSlots(MaterialMergeOwner *);
 void FUN_00241d58(BattleSpritePlacement *);
 void asdMdlManagerMarkDestroy(AsdMdlObject *);
 void asdMdlManagerDestroy(AsdMdlObject *);
@@ -44,7 +44,7 @@ extern "C" void FUN_003d971c(MaterialMergeOwner *owner)
     control->state = 0;
     FUN_0022708c(owner);
     FUN_002276f8(owner);
-    FUN_0027de24(owner);
+    modelManagerReleaseSlots(owner);
 
     KeyedValueTable *models = reinterpret_cast<KeyedValueTable *>(owner);
     for (s32 i = 0; i < 50; ++i) {

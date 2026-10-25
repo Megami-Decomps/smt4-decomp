@@ -1,4 +1,4 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; register allocation of the mask AND/ORR chain differs; u64 mask loads pair differently (ldm versus two ldr); the frame/saved-register set differs (the active-entry byte already folds with the s8 flag). */
+/* NON_MATCHING: explicit choice argument and shared HP-percentage operation restore range/HP load grouping; required candidate mask still uses two loads instead of LDM. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -6,31 +6,38 @@
 extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-u32 btlResolveEntryChoice(void);
+u32 btlResolveEntryChoice(s32 choice);
 void FUN_00301a08(u32 group, s32 *first, s32 *count);
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
+
+static __inline s32 entryHpPercentage(const BtlCombatantEntryA *entry)
+{
+    s32 hp = entry->hp;
+    s32 maximum = entry->maxHp;
+    return hp * 100 / maximum;
+}
 
 // Report whether any eligible battle entry is at or below the requested HP percentage.
 u32 btlScriptAnyEntryHpAtMost(void)
 {
     s32 percent = scrGetArg(0);
-    scrGetArg(1);
+    s32 choice = scrGetArg(1);
     s32 first, count;
-    FUN_00301a08(btlResolveEntryChoice(), &first, &count);
+    FUN_00301a08(btlResolveEntryChoice(choice), &first, &count);
     for (s32 i = first; i < first + count; ++i) {
         BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
         if (!(entry->flags & g_btlCandidateMasks.unavailable) &&
             (entry->flags & g_btlCandidateMasks.required) &&
             !(entry->flags & g_btlCandidateMasks.excluded) &&
-            entry->hp * 100 / entry->maxHp <= percent) {
+            entryHpPercentage(entry) <= percent) {
             scrSetResult(1);
             return 1;
         }
     }
     if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
-        if (entry && entry->hp * 100 / entry->maxHp <= percent) {
+        if (entry && entryHpPercentage(entry) <= percent) {
             scrSetResult(1);
             return 1;
         }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00241058` (_code @ 0x241058, 0x5c4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -14,9 +15,8 @@ int FUN_00212204(...);
 int FUN_00239b08(void);
 int FUN_00261a28(...);
 int scrScriptProcessStartEntry(...);
-int FUN_0039c2a4(...);
+int saveLoadStartWindowWithArgument(...);
 int FUN_003d54f8(int, int);
-int gameFlagSetValue(...);
 int clearTwoWordsAndByte(...);
 
 /* stack frame of void: 2 slot(s), 8 byte(s) */
@@ -52,9 +52,8 @@ extern int messageGetChoiceResult(void);
 extern int FUN_002e07f4(void);
 extern int FUN_002ef9f0(void);
 extern int FUN_0037de28(void);
-/* Supplied declaration required: FUN_0039c2a4. */
+/* Supplied declaration required: saveLoadStartWindowWithArgument. */
 /* Supplied declaration required: FUN_003d54f8. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: clearTwoWordsAndByte. */
 
 
@@ -219,9 +218,9 @@ unsigned int FUN_00241058(void)
         *(unsigned char *)(temp_v0 + 0x18) = 1;
       }
       FUN_00261a28(temp_v0 + 0x10);
-      gameFlagSetValue(0x556,1);
-      gameFlagSetValue(0x555,1);
-      FUN_0039c2a4(2);
+      gameFlagSetValue(0x556, 1, 1);
+      gameFlagSetValue(0x555, 1, 1);
+      saveLoadStartWindowWithArgument(2);
       temp_v4 = 9;
       *(unsigned int *)(temp_v0 + 0xc) = temp_v4;
       break;

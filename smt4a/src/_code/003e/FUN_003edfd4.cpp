@@ -13,7 +13,7 @@ s32 FUN_0047f4cc(s32 effectId, f32 scale, f32 alphaA, f32 alphaB);
 /* Unless the script unit is flagged 0x80/0x1000, recreate the special combatant's effect. */
 void FUN_003edfd4(BtlMainStateA *state)
 {
-    ScriptCategoryUnit *unit = btlUnitGet(g_btlScriptUnit);
+    ScriptCategoryUnit *unit = reinterpret_cast<ScriptCategoryUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     UnitCategoryState *entry;
     if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit)) {
         return;

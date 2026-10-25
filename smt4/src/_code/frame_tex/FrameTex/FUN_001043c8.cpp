@@ -45,14 +45,14 @@ extern unsigned char LAB_00104998; /* 0x104998 */
 extern unsigned char LAB_001049a4; /* 0x1049a4 */
 extern int frameTexReleaseWork(...); /* 0x1078ec */
 extern int FUN_001080c0(...); /* 0x1080c0 */
-extern int FUN_0010812c(...); /* 0x10812c */
-extern int FUN_001081b0(...); /* 0x1081b0 */
+extern int FUN_0010812c(unsigned int job); /* 0x10812c */
+extern int FUN_001081b0(unsigned int job); /* 0x1081b0 */
 extern int FUN_0010821c(...); /* 0x10821c */
-extern int FUN_0010835c(...); /* 0x10835c */
-extern int FUN_0010854c(...); /* 0x10854c */
+extern int FUN_0010835c(unsigned int job); /* 0x10835c */
+extern int FUN_0010854c(unsigned int job); /* 0x10854c */
 extern int FUN_00108754(...); /* 0x108754 */
 extern int FUN_001087f4(...); /* 0x1087f4 */
-extern int FUN_0010889c(...); /* 0x10889c */
+extern s32 FUN_0010889c(u32 job);
 extern int FUN_00108b0c(...); /* 0x108b0c */
 extern int FUN_00109348(...); /* 0x109348 */
 extern int FUN_001093e8(...); /* 0x1093e8 */
@@ -65,7 +65,7 @@ extern int FUN_0010a110(...); /* 0x10a110 */
 extern int titleBackdropRender(...); /* 0x10a3a4 */
 extern int titleCaptureHalfSizeSurfaceOnce(...); /* 0x10a450 */
 extern int titleCaptureReadySurfaceOnce(unsigned int job); /* 0x10b224 */
-extern int FUN_0010b2d0(...); /* 0x10b2d0 */
+extern int FUN_0010b2d0(unsigned int job); /* 0x10b2d0 */
 extern unsigned char DAT_00404164; /* 0x404164 */
 extern unsigned char DAT_0040417c; /* 0x40417c */
 extern unsigned char DAT_00404188; /* 0x404188 */

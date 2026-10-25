@@ -5,7 +5,7 @@
 extern "C" {
 
 void *asdMemoryAllocTracked(int, int, int, s32 size, int);
-void *FUN_0013c174(char *path, u8 *size, u32 flags);
+void *FUN_0013c174(const char *path, u32 *size, u32 flags);
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
@@ -24,12 +24,12 @@ TexFile *asdTMTexTableLoadSprites(s32 idx)
     TexTableHeader *header;
     char dir[0x80];
     char path[0x100];
-    u8 size[8];
+    u32 size;
     TexFile *texFile = asdTMTexTableLoadTmx(idx, 0);
 
     if (texFile != NULL && (entry = &g_texTable.entries[idx], entry->sprites == NULL)) {
         char *p;
-        u32 *file;
+        SprFileHeader *file;
 
         header = (TexTableHeader *)g_texTable.header;
         libc_strcpy(dir, header->dirPrefix);
@@ -41,9 +41,9 @@ TexFile *asdTMTexTableLoadSprites(s32 idx)
         }
         libc_strcpy(header->dirPrefix, dir);
         textFormatBuffer(path, "%s%s%s.%s", header->dirPrefix, entry->name, "GroupTable", "tgd");
-        file = (u32 *)FUN_0013c174(path, size, 0);
+        file = static_cast<SprFileHeader *>(FUN_0013c174(path, &size, 0));
         if (file != NULL) {
-            u8 *src = (u8 *)(file + 0x10);
+            u8 *src = reinterpret_cast<u8 *>(file + 1);
             TexSprite *prev = NULL;
             SprFileHeader *spriteHeader;
             s32 i;
@@ -52,7 +52,7 @@ TexFile *asdTMTexTableLoadSprites(s32 idx)
             entry->sprites = (TexSprList *)asdMemoryAllocTracked(0x100, 0x100, 0, 8, 1);
             asdDebugTrace(DAT_0053d054, 296);
             entry->sprites->header = (SprFileHeader *)asdMemoryAllocTracked(0x100, 0x100, 0, 0x40, 1);
-            *entry->sprites->header = *(SprFileHeader *)file;
+            *entry->sprites->header = *file;
             spriteHeader = entry->sprites->header;
             for (i = 0; i < spriteHeader->spriteCount; i++) {
                 TexSprite *sprite;

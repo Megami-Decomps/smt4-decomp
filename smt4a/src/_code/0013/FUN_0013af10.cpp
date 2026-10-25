@@ -57,7 +57,7 @@ s32 FUN_00152bf8(AsdSndObject *handle);
 void rt_aeabi_memclr(void *memory, s32 size);
 s32 FUN_00162ea4(void);
 s32 FUN_001517b4(s32 a, s32 b);
-s32 FUN_00163fd4(s32 a);
+s32 slotIsActive(s32 a);
 
 /* The sound object in slot `index`, or NULL when the index is out of range. */
 static __inline SoundObject *soundObjectAt(s32 index)
@@ -161,7 +161,7 @@ void FUN_0013af10(void)
             soundObjectRelease(object, loop);
         }
     }
-    if (DAT_0061978c.enabled == 1 && FUN_001517b4(9, 2) == 0 && FUN_00163fd4(6) == 0) {
+    if (DAT_0061978c.enabled == 1 && FUN_001517b4(9, 2) == 0 && slotIsActive(6) == 0) {
         DAT_0061978c.enabled = 0;
     }
 }

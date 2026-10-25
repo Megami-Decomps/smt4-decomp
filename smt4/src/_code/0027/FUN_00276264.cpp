@@ -1,5 +1,5 @@
 /* NON_MATCHING: register choice only: retail loads g_aocSystem into r2 and adds the list offset in place, this build uses r1 then r2 */
-#include "common.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -19,15 +19,12 @@ typedef struct AocSystem {
 
 extern AocSystem *g_aocSystem;
 
-extern void *dataTableGet(u32 table, u32 index);
-extern u32 dataTableGetCount(void *table);
-extern Entry *dataTableGetEntries(void);
 
 /* Returns entry `index` of data table 0x23/5, or of the AOC system's extra entries that follow it; NULL when out of range. */
 Entry *FUN_00276264(u32 index)
 {
     void *table = dataTableGet(0x23, 5);
-    Entry *entries = dataTableGetEntries();
+    Entry *entries = static_cast<Entry *>(dataTableGetEntries(table));
     u32 count = dataTableGetCount(table);
 
     if (index < count) {

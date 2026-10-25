@@ -1,11 +1,11 @@
-/* NON_MATCHING: retail has the view-cursor getter inlined by armlink (`add r0,r4,#12; ldr r0,[r0,#28]` where this loads the cursor directly), and keeps listBox/label in r6/r7 the other way round. */
+/* NON_MATCHING: canonical task accessor and linker-inlined cursor getter agree; listBox/label remain swapped in r7/r6 versus retail r6/r7. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 extern const char DAT_00409d40[]; /* AsdListBox.cpp: __FILE__ */
 
-AsdListBoxModel *jobGetWork(AsdListBox *listBox);
 void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(AsdListBox *listBox);
@@ -17,7 +17,7 @@ char *strncpy(char *dst, const char *src, u32 n);
 /* Appends a plain item labelled `label` to the list box; returns the item's id. */
 u32 asdListBoxAddItem(AsdListBox *listBox, const char *label)
 {
-    AsdListBoxModel *model = jobGetWork(listBox);
+    AsdListBoxModel *model = reinterpret_cast<AsdListBoxModel *>(jobGetWork(reinterpret_cast<u32>(listBox)));
     AsdListBoxItem *item;
 
     asdDebugTrace(DAT_00409d40, 1011);

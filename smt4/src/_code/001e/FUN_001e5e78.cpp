@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e5e78` (_code @ 0x1e5e78, 0x25f8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int FUN_0028250c(void);
 int mathDistanceBetweenPoints(void);
 int mathGetShortestAngleDelta(void);
 int mathPositionHeadingDegrees(void);
-int FUN_00291e40(int);
 int infoWinStartTimer(...);
 int FUN_002ad314(...);
 int FUN_0030fb0c(char *, int);
@@ -76,7 +76,6 @@ extern int FUN_0025b4b0(float *, unsigned int *, unsigned int);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 /* Supplied declaration required: mathGetShortestAngleDelta. */
 /* Supplied declaration required: mathPositionHeadingDegrees. */
-/* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: infoWinStartTimer. */
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: FUN_0030fb0c. */
@@ -369,7 +368,7 @@ LAB_001e6120:
           temp_v29 = 0;
           if (*(short *)(temp_v12 + 0x1f8) >= 0x1f) {
             if (*(char *)(temp_v4 + 0xcce0) == '\0') {
-              FUN_00291e40(0x10001fe);
+              FUN_00291e40(0x10001fe, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)));
             }
             *(unsigned int *)(temp_v12 + 0x1d4) = 4;
             *(unsigned short *)(temp_v12 + 0x1fa) = 0;
@@ -467,7 +466,8 @@ LAB_001e6120:
         if (temp_v9 != 0) {
           if (*(int *)(temp_v12 + 0x1e4) >= 0x22) {
             if (*(char *)(temp_v4 + 0xcce0) == '\0') {
-              FUN_00291e40(0x10001fd);
+              FUN_00291e40(0x10001fd, soundActorScalePosition(
+                  soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)), 1.0f / 3.0f));
             }
             mapFlagSet(*(unsigned int *)(temp_v12 + 500));
             temp_v8 = 6;
@@ -475,7 +475,7 @@ LAB_001e6120:
             break;
           }
           if (*(char *)(temp_v4 + 0xcce0) == '\0') {
-            FUN_00291e40(0x10001fd);
+            FUN_00291e40(0x10001fd, soundActorPositionFromArray(reinterpret_cast<const f32 *>(temp_v12 + 0x22c)));
           }
           *(unsigned int *)(temp_v12 + 0x1d4) = 3;
           *(unsigned short *)(temp_v12 + 0x1f8) = 0;

@@ -1,17 +1,19 @@
-/* NON_MATCHING: position snapshot stores use integer loads instead of retail's float/register grouping. */
+/* NON_MATCHING: native depth getter and grouped snapshots now agree; owner/index saved registers and header destination base still differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+
+struct SpritePositionView { u8 unk00[0x20]; f32 depth; u8 unk24[0x68]; };
+struct PositionSnapshot { s32 x, y; f32 depth; };
+struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
 
 extern "C" {
 void FUN_00163aa4(void *sprite, f32 delta);
 s32 vec2GetXInt(const void *sprite);
 s32 vec2GetYInt(const void *sprite);
+f32 vec2GetSpeed(const void *sprite);
 
 // Advance the revealed sprites and save their positions as transition origins.
 void FUN_00420a2c(void *context)
 {
-    struct SpritePositionView { u8 unk00[0x20]; f32 depth; u8 unk24[0x68]; };
-    struct PositionSnapshot { s32 x, y; f32 depth; };
-    struct SpriteSnapshot { PositionSnapshot position; u8 unk0c[0x38]; };
     union CaptureView {
         SaveLoadTransitionPrefixA state;
         struct {
@@ -42,21 +44,26 @@ void FUN_00420a2c(void *context)
     }
     s32 x = vec2GetXInt(&work->sprites.header);
     s32 y = vec2GetYInt(&work->sprites.header);
-    work->snapshots.header.x = x;
-    work->snapshots.header.y = y;
-    work->snapshots.header.depth = work->sprites.header.depth;
+    f32 depth = vec2GetSpeed(&work->sprites.header);
+    PositionSnapshot *header = &work->snapshots.header;
+    header->x = x;
+    header->y = y;
+    header->depth = depth;
     for (s32 index = 0; index < work->state.spriteCount; ++index) {
         s32 x = vec2GetXInt(&work->sprites.entries[index]);
         s32 y = vec2GetYInt(&work->sprites.entries[index]);
-        f32 depth = work->sprites.entries[index].depth;
-        work->snapshots.entries[index].position.x = x;
-        work->snapshots.entries[index].position.y = y;
-        work->snapshots.entries[index].position.depth = depth;
+        f32 depth = vec2GetSpeed(&work->sprites.entries[index]);
+        PositionSnapshot *snapshot = &work->snapshots.entries[index].position;
+        snapshot->x = x;
+        snapshot->y = y;
+        snapshot->depth = depth;
     }
     x = vec2GetXInt(&work->sprites.entries[0]);
     y = vec2GetYInt(&work->sprites.entries[0]);
-    work->selected.position.x = x;
-    work->selected.position.y = y;
-    work->selected.position.depth = work->sprites.entries[0].depth;
+    depth = vec2GetSpeed(&work->sprites.entries[0]);
+    PositionSnapshot *selected = &work->selected.position;
+    selected->x = x;
+    selected->y = y;
+    selected->depth = depth;
 }
 }

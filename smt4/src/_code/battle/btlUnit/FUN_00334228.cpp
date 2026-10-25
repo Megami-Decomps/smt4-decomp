@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_00240520(int, int);
 int FUN_002408ac(unsigned int *, int);
-int FUN_0027e6f4(int, int);
+int btlFindNthActiveSpecialEntry(int, int);
 int FUN_002881bc(void);
 int dataTable00FindById(void);
 int FUN_002b7bca(int *, int, int, unsigned char *);
@@ -39,7 +39,7 @@ extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 /* Supplied declaration required: FUN_00240520. */
 /* Supplied declaration required: FUN_002408ac. */
 extern int FUN_0027dab0(int, int);
-/* Supplied declaration required: FUN_0027e6f4. */
+/* Supplied declaration required: btlFindNthActiveSpecialEntry. */
 /* Supplied declaration required: FUN_002881bc. */
 /* Supplied declaration required: dataTable00FindById. */
 /* Supplied declaration required: FUN_002b7bca. */
@@ -93,7 +93,7 @@ void FUN_00334228(unsigned int *param_1,int param_2)
   FUN_002fe394(temp_v4,0x32,*(unsigned int *)(param_2 + 0x1e88),param_2 + 0x1074);
   temp_v7 = temp_v29;
   temp_v15 = temp_v4;
-  FUN_0027e6f4(temp_v29,1);
+  btlFindNthActiveSpecialEntry(temp_v29,1);
   piVar10 = (int *)(temp_v29 + 0x1fc0);
   temp_v5 = (unsigned int)*(unsigned short *)(*piVar10 + temp_v7 * 0x288 + 0xce);
   temp_v17 = temp_v7;

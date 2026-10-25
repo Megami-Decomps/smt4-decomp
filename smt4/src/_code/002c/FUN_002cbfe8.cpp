@@ -1,10 +1,10 @@
 /* NON_MATCHING: success/error block placement and owner/result register assignment differ. */
+#include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
 
 extern "C" {
 s32 FUN_00254884(const void *path, u8 *normalized, u32 encoding);
 s32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);
-void FUN_002c3510(s32 result);
 
 // Normalize a path, initialize the supported file mode and report the resulting status.
 s32 FUN_002cbfe8(RomFileOpenState *state, const void *path, s32 mode)

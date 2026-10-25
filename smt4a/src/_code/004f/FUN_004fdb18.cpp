@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
-ReflectAction *FUN_004102d8(ReflectContext *, s32, u32, u32);
+
 BtlMainStateA *btlGetMainState(void);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, s32);
 }
@@ -14,15 +14,15 @@ extern "C" u32 FUN_004fdb18(s16 actor, u32 options, BattleRosterRecordA *target,
                              u32 parameter, s32 checkStatus)
 {
     s16 nextActor = actor + 1;
-    ReflectAction *action = FUN_004102d8(g_btlActionReflect, nextActor, 0, options);
+    ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, nextActor, 0, options);
     action->kind = 27;
     action->target = reinterpret_cast<u32>(target);
     action->parameter = parameter;
-    action = FUN_004102d8(g_btlActionReflect, nextActor, 0, options);
+    action = btlQueueReflectAction(g_btlActionReflect, nextActor, 0, options);
     action->kind = 9;
     action->target = reinterpret_cast<u32>(target);
     action->value = parameter;
-    action = FUN_004102d8(g_btlActionReflect, actor, 0, options);
+    action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
     action->kind = 38;
     action->target = reinterpret_cast<u32>(target);
     action->value = 1;
@@ -30,7 +30,7 @@ extern "C" u32 FUN_004fdb18(s16 actor, u32 options, BattleRosterRecordA *target,
     if (checkStatus) {
         const BtlCombatantEntryA *entry = FUN_003f0e20(btlGetMainState(), target->motion.group);
         if (entry->statusFlags & 0x10) {
-            action = FUN_004102d8(g_btlActionReflect, nextActor, 0, options);
+            action = btlQueueReflectAction(g_btlActionReflect, nextActor, 0, options);
             action->kind = 38;
             action->target = reinterpret_cast<u32>(target);
             action->value = 0;

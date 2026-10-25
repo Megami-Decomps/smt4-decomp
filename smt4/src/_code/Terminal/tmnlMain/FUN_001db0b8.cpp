@@ -1,5 +1,6 @@
 /* NON_MATCHING: three constant questSetPackedFlag calls load r1 before r0; retail loads r0 before r1. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 #include "AsdSDK/AsdDebug.h"
 #include "Terminal/tmnlMain.h"
 
@@ -9,7 +10,7 @@ void *asdMemAlloc(u32 size, u32 alignment, u32 flags, u32 memoryType, u32 mode);
 s32 questTestPackedFlag(u32 flag);
 void questSetPackedFlag(u32 index, s32 enabled);
 s32 gameFlagIsSet(u32 flag);
-void gameFlagSetValue(u32 flag, u32 unused, u32 value);
+
 void messageStatesSetFirst(u32 state);
 void gameCounterAddSaturating(u32 counter, u32 amount);
 void FUN_00282bfc(u32 first, u32 second);

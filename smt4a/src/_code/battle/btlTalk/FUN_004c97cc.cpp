@@ -69,7 +69,7 @@ void textFormatBuffer(char* out, const char* format, ...);
 void asdLoadFileAsyncSimple(const char* path, u32* out, s32 flag);
 void FUN_004f741c(u8* aux);
 s32 FUN_004f2708(s32 camera, BattleMain* battle, s32 flag);
-void FUN_004fb670(s32 a, s32 b, s32 c);
+void btlQueueDuplicateSuppressedAction(s32 a, s32 b, s32 c);
 void FUN_004feecc(s32 a, s32 b);
 s32 btlAuxAreResourcesReady(u8* aux);
 void FUN_004f89e8(u8* aux);
@@ -101,7 +101,7 @@ s32 FUN_004c97cc(BtlTalkWindow* window, s32 unused)
         FUN_004f741c(g_btlAux);
         window->state = 1;
         if (*reinterpret_cast<s32*>(g_btlCamera + 0x7cc) >= 0 && FUN_004f2708(g_btlCamera, window->battle, 1) != 0) {
-            FUN_004fb670(0, 0, 0);
+            btlQueueDuplicateSuppressedAction(0, 0, 0);
         }
         FUN_004feecc(1, 0);
         return 0;

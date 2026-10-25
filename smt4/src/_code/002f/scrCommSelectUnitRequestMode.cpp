@@ -1,5 +1,6 @@
 #include "battle/btlUnit.h"
 
+#include "battle/BattleUnitSlot.h"
 struct UnitSummary {
     u16 unk00;
     u16 kind; // 0x02
@@ -14,15 +15,14 @@ struct UnitRequestView {
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-BtlUnit *btlUnitGet(u32 id);
 BtlMainState *btlGetMainState();
 void FUN_00247478(UnitSummary *out, BtlMainState *state, const s16 *params);
 
 u32 scrCommSelectUnitRequestMode()
 {
-    UnitRequestView *request = (UnitRequestView *)btlUnitGet(g_btlScriptUnit)->data;
+    UnitRequestView *request = (UnitRequestView *)reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->data;
     request->active = 1;
-    const s16 *params = btlUnitGet(g_btlScriptUnit)->params;
+    const s16 *params = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->params;
     BtlMainState *state = btlGetMainState();
     UnitSummary summary;
     FUN_00247478(&summary, state, params);

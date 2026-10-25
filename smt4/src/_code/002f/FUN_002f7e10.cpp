@@ -1,12 +1,12 @@
-/* NON_MATCHING: compiler does not hoist effect/zero constants into saved registers, and clear-status exits duplicate the epilogue. */
+/* NON_MATCHING: effect/zero constants are not hoisted into saved registers, and the effect path has a separate return epilogue. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
-u32 btlUnitGet(u32 id);
 BtlMainState *btlGetMainState(void);
 GameUnitSortRecord *gameGetUnitRecord(s32 slot);
 u32 FUN_00246d38(s32 actor, u32 unit, BtlActionRecord *target, u32 mask);
@@ -22,26 +22,25 @@ u32 FUN_002f7e10(void)
     s32 target = scrGetArg(0);
     u16 bit = scrGetArg(1);
     s32 enabled = scrGetArg(2);
-    u32 actor = btlUnitGet(g_btlScriptUnit);
+    u32 actor = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)));
     if (target < 109) {
         BtlActionRecord *record = &btlGetMainState()->actions[target];
-        if (enabled == 0) {
+        if (enabled != 0)
+            FUN_00246e24(0, actor, record, 1 << bit, 1);
+        else
             FUN_00246d38(0, actor, record, 1 << bit);
-            return 1;
-        }
-        FUN_00246e24(0, actor, record, 1 << bit, 1);
     } else {
         GameUnitSortRecord *unit = gameGetUnitRecord(target - 109);
-        if (enabled == 0) {
+        if (enabled != 0) {
+            objectFlagSetBit(unit, bit);
+            if (bit != 4 && flagWordTestBit(unit, 4))
+                objectFlagsClear(unit, 16);
+        } else {
             objectFlagsClear(unit, (u16)(1 << bit));
-            return 1;
-        }
-        objectFlagSetBit(unit, bit);
-        if (bit != 4 && flagWordTestBit(unit, 4)) {
-            objectFlagsClear(unit, 16);
         }
     }
-    FUN_002505c0(0, actor, 0x10001BD, 0, 0, 0, 0);
+    if (enabled != 0)
+        FUN_002505c0(0, actor, 0x10001BD, 0, 0, 0, 0);
     return 1;
 }
 }

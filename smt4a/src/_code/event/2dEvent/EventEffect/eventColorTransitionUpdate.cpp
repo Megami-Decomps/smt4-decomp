@@ -17,9 +17,9 @@ extern TextureSlot DAT_0057f43c[4];
 s32 asdTMTexTableNodeIsLoaded(u32, u32);
 void FUN_0038a538(u32);
 
-u32 eventColorTransitionUpdate()
+s32 eventColorTransitionUpdate(u32 job)
 {
-    EventColorTransition *effect = (EventColorTransition *)jobGetWork();
+    EventColorTransition *effect = (EventColorTransition *)jobGetWork(job);
     switch (effect->state) {
     case 0:
         if (effect->textureSlot < 4 &&

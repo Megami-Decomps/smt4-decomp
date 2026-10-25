@@ -1,6 +1,6 @@
-/* NON_MATCHING: The selected-candidate count stays live across the unit getter in retail. */
+/* NON_MATCHING: matched getter/multifile restores caller-saved count; candidate array and flags scratch registers remain swapped. */
+#include "battle/BattleUnitSlot.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
-extern "C" BattleActionUnit* btlUnitGet(BtlState**);
 
 // Marks the last eligible unit at the lowest HP encountered in the roster.
 extern "C" void FUN_00229998(BtlState** owner)

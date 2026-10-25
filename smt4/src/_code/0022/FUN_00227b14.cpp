@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps two UI base registers; source uses one and schedules initial loads differently. */
+/* NON_MATCHING: singleton panel-resume helper recovers both UI base registers, but their copy is made inside mode 14 rather than at entry. */
 #include "battle/btlUI.h"
 
 extern "C" {
@@ -9,6 +9,17 @@ void playSceneFadeInStart(BtlUiObjA *);
 s32 FUN_0028be84(BtlUiObjB *);
 s32 playSceneIsFadeOutDone(BtlUiObjA *);
 void FUN_00297f1c(BtlUiObjC *, u32 selection, s32 mode, u32 options);
+
+static inline void battleUiRestorePanels()
+{
+    BtlUi *ui = g_btlUi.ui;
+    if (playSceneIsFadeOutDone(&ui->objA)) {
+        if (FUN_0028be84(&ui->objB)) {
+            playSceneFadeInStart(&ui->objA);
+            playSceneTimerSubStart(&ui->objB);
+        }
+    }
+}
 
 // Translate the battle UI mode and restore the faded panel when resuming it.
 void FUN_00227b14(void *, u32 selection, u32 mode, u32 options)
@@ -27,12 +38,7 @@ void FUN_00227b14(void *, u32 selection, u32 mode, u32 options)
     case 8: panelMode = 7; break;
     case 14:
         panelMode = 11;
-        if (playSceneIsFadeOutDone(&ui->objA)) {
-            if (FUN_0028be84(&ui->objB)) {
-                playSceneFadeInStart(&ui->objA);
-                playSceneTimerSubStart(&ui->objB);
-            }
-        }
+        battleUiRestorePanels();
         FUN_00206270(&ui->objC);
         ui->panelState.state = 11;
         break;

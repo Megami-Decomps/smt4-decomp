@@ -6,7 +6,7 @@ extern "C" {
 extern const PhaseTrigEntry DAT_00536d14[];
 
 s32 padButtonIsPressed(u32 button);
-s32 FUN_00163fd4(u32 button);
+s32 slotIsActive(u32 button);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(PhaseVector *destination, const f32 *matrix);
 void FUN_0014f0dc(void *camera, const PhaseVector *eye, const PhaseVector *center, const PhaseVector *up);
 
@@ -31,14 +31,14 @@ void FUN_002fe590(void)
     }
     g_effectEditorCameraDefaults.rotation.y += stick[2] * 3.2f;
     g_effectEditorCameraDefaults.rotation.x -= stick[3] * 3.2f;
-    if (FUN_00163fd4(28) == 0) {
+    if (slotIsActive(28) == 0) {
         g_effectEditorCameraDefaults.offset.x += stick[0] * 10.0f;
         g_effectEditorCameraDefaults.offset.z -= stick[1] * 10.0f;
     }
-    if (FUN_00163fd4(23) != 0) {
+    if (slotIsActive(23) != 0) {
         g_effectEditorCameraDefaults.offset.y -= 5.0f;
     }
-    if (FUN_00163fd4(18) != 0) {
+    if (slotIsActive(18) != 0) {
         g_effectEditorCameraDefaults.offset.y += 5.0f;
     }
     offset.x = g_effectEditorCameraDefaults.eye.x - g_effectEditorCameraDefaults.target.x;

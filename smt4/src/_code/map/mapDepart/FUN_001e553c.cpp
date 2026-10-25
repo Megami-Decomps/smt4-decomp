@@ -1,8 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001e553c` (_code @ 0x1e553c, 0x910 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
+extern s32 g_lmapScene;
 
 int mapDepartSetTarget(...);
 int fileSlotFree(...);
@@ -13,10 +16,8 @@ int entrySetParams(unsigned int, int, int);
 int FUN_0025b670(void);
 int FUN_00273358(...);
 int navigationResetTimer(void);
-int gameFlagSetValue(int, int);
 int FUN_002897f0(int, unsigned char *);
 int messageSlotSet(int);
-int FUN_00291e40(int);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
 int fileSlotLoad(int);
@@ -72,11 +73,9 @@ extern int unlockFlagTest(unsigned int);
 extern int inputIsQuestMenuPressed(void);
 /* Supplied declaration required: mapDepartSetTarget. */
 extern int FUN_0027ee9c(void);
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_002897f0. */
 /* Supplied declaration required: messageSlotSet. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
-/* Supplied declaration required: FUN_00291e40. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: FUN_00297060. */
 extern int messageMainGetChoiceResult(void);
@@ -174,7 +173,7 @@ unsigned int FUN_001e553c(void)
       temp_v4 = scrRunOpcodesStub(*(unsigned int *)(g_mapDepart + 0x60));
       if (temp_v4 == 2) {
         if (*(int *)(temp_v2 + 100) != 0) {
-          gameFlagSetValue(*(int *)(temp_v2 + 100),1);
+          gameFlagSetValue(*(int *)(temp_v2 + 100), 1, 1);
         }
         messageSlotSet(0);
         scrScriptProcessDestroy(*(unsigned int *)(temp_v2 + 0x60));
@@ -307,11 +306,14 @@ unsigned int FUN_001e553c(void)
     }
     if (*(int *)(temp_v2 + 0x1c) == 6) {
       *(unsigned char *)(temp_v2 + 0x3c) = 1;
+      SoundActorQueuePosition soundPosition =
+          soundActorPositionFromArray(reinterpret_cast<const f32 *>(g_lmapScene + 0x1c));
+      soundPosition.y += 30.0f;
       if (g_gameState < 100) {
-        FUN_00291e40(0x1000200);
+        FUN_00291e40(0x1000200, soundPosition);
       }
       else {
-        FUN_00291e40(0x1000200);
+        FUN_00291e40(0x1000200, soundActorScalePosition(soundPosition, 1.0f / 3.0f));
       }
     }
     if (*(int *)(temp_v2 + 0x1c) == 7) {

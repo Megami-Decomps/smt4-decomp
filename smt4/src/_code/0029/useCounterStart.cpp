@@ -1,10 +1,10 @@
-/* NON_MATCHING: global load precedes push; value offset/count load pairing and counter register differ. */
+/* NON_MATCHING: global load precedes push; count/value/loop scratch registers differ. */
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
 
 extern "C" {
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-const u8 *FUN_002a0d0c(void);
+u8 *FUN_002a0d0c(void);
 void FUN_0029eb5c(void *);
 s32 FUN_0028d594(void);
 s32 buttonHelpGetSecondaryState(void);
@@ -41,7 +41,7 @@ void useCounterStart(void)
                 break;
             }
         }
-        work->highBit = *value >> 7;
+        work->highBit = (*value & 0x80) >> 7;
     }
     if (work->mode == 2)
         return;

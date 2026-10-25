@@ -10,9 +10,9 @@ s32 stateValuesGetBySelector(u32 selector);
 extern u32 g_renderCtx;
 
 /* Captures the screen once (512x512 into the job's surface) while fading; a state selector skips it. */
-s32 FUN_0013e848(void)
+s32 FUN_0013e848(u32 job)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(job);
 
     if (stateValuesGetBySelector(0) != 0) {
         work->fadeCaptureSkipped = 1;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: ring pointer/register allocation and secondary-ring selection instructions differ. */
+/* NON_MATCHING: conditional preset addressing now matches; incoming arguments, first ring pointer, and value use different saved registers. */
 #include "gfx/AsdGxPresetRing.h"
 
 extern "C" {
@@ -19,8 +19,7 @@ void FUN_0010ec90(s32 refresh, s32 secondaryEnabled)
     asdGfxSetMode(0x400);
     FUN_002c2620(value);
     u32 previous = asdGxPresetPrevious(secondaryPreset);
-    AsdGxPresetRing* secondary = secondaryEnabled ? secondaryPreset : primary;
-    value = secondary->values[previous];
+    value = secondaryEnabled ? secondaryPreset->values[previous] : primary->values[previous];
     asdGfxSetMode(0x410);
     FUN_002c2620(value);
     value = output->values[asdGxPresetPrevious(output)];

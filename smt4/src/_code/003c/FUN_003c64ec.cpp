@@ -22,7 +22,9 @@ int FUN_003c4ac4(...);
 int FUN_003c4f38(...);
 int talkCtrlDebugMenuBuild(...);
 int FUN_003c56d8(...);
-int FUN_003c59fc(...);
+struct BattleCameraMenuOwner;
+struct BattleCameraMenuContext;
+void btlDebugCreateAttackCameraMenu(BattleCameraMenuOwner *, BattleCameraMenuContext *);
 int FUN_003c5eb0(...);
 int FUN_003c5ffc(...);
 int FUN_003c63a8(...);
@@ -114,7 +116,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: FUN_003c4f38. */
 /* Supplied declaration required: talkCtrlDebugMenuBuild. */
 /* Supplied declaration required: FUN_003c56d8. */
-/* Supplied declaration required: FUN_003c59fc. */
+/* Supplied declaration required: btlDebugCreateAttackCameraMenu. */
 /* Supplied declaration required: FUN_003c5eb0. */
 /* Supplied declaration required: FUN_003c5ffc. */
 /* Supplied declaration required: FUN_003c63a8. */
@@ -485,7 +487,8 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
       FUN_003c5eb0(param_1);
     }
     else {
-      FUN_003c59fc(param_1);
+      btlDebugCreateAttackCameraMenu(reinterpret_cast<BattleCameraMenuOwner *>(param_1),
+                   reinterpret_cast<BattleCameraMenuContext *>(param_2));
     }
     temp_v5 = 6;
     break;

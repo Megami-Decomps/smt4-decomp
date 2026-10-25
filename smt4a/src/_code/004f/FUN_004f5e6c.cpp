@@ -1,4 +1,4 @@
-/* NON_MATCHING: global-camera flag update uses a split address; final resource-loop base and registers differ. */
+/* NON_MATCHING: direct resource-array accesses match; camera flag write still forms a split address. */
 #include "battle/btlCamera.h"
 
 extern "C" {
@@ -60,18 +60,16 @@ void FUN_004f5e6c(void *controller)
     state->animation = 0;
     keyedRecordsFreeAll();
     textureCacheReleaseAll();
-    BtlCameraA *camera = g_btlCamera;
-    if (camera != NULL) {
-        camera->flags &= ~0x8000000;
+    if (g_btlCamera != NULL) {
+        g_btlCamera->flags &= ~0x8000000;
     }
     FUN_004f8fa0(controller);
     obj4FSlots28Reset(controller);
     for (s32 index = 0; index < 50; ++index) {
-        ResourceSlot *resource = &state->resources[index];
-        resource->id = -1;
-        resource->state = 0;
-        workOwnerRelease(resource->owner);
-        resource->pending = 0;
+        state->resources[index].id = -1;
+        state->resources[index].state = 0;
+        workOwnerRelease(state->resources[index].owner);
+        state->resources[index].pending = 0;
     }
 }
 }

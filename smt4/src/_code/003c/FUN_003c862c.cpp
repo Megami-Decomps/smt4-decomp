@@ -6,7 +6,7 @@ GameOptions* gameGetSupportUnitData(void);
 SupportUnitRecord* supportUnitGetEntry(s32, u32);
 void affinityResolveUnitSlot(PackedSkillSlot*, GameOptions*, s32);
 
-u16 FUN_003c862c(s32 index)
+u32 FUN_003c862c(u32 index)
 {
     GameOptions* unit = gameGetSupportUnitData();
     GameOptions* current = gameGetSupportUnitData();

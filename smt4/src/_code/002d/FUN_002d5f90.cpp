@@ -1,4 +1,5 @@
 /* NON_MATCHING: Retail mov r6, r3 differs from recovered mov r6, r3. */
+#include "sys/ProcessResult.h"
 #include "common.h"
 
 struct FileView;
@@ -18,7 +19,6 @@ struct FileView {
 };
 
 extern "C" {
-void FUN_002c3510(s32 result);
 void asdFatalError(void);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 

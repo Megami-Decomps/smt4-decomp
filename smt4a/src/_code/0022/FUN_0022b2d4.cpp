@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ int compareWithFeedbackColor(...);
 int FUN_0025e704(...);
 int FUN_00334e1c(...);
 int FUN_00345098(void);
-int FUN_003fabfc(...);
 int FUN_00480da8(...);
 int VectorUnsignedToFloat(...);
 
@@ -41,7 +41,7 @@ int FUN_00183bb0(void);
 int fontMeasureLineAdvance(...);
 int FUN_00184310(void);
 int drawSetColorFromRGBA8(...);
-int FUN_00230a50(...);
+int unitGetStereoScreenPosition(...);
 int devilDrawResolvedTexture(...);
 int FUN_00334044(void);
 int VectorSignedToFloat(...);
@@ -139,7 +139,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019acdc. */
 /* Supplied declaration required: jobGetScalarValue. */
 /* Supplied declaration required: FUN_0022e9c8. */
-/* Supplied declaration required: FUN_00230a50. */
+/* Supplied declaration required: unitGetStereoScreenPosition. */
 /* Supplied declaration required: compareWithFeedbackColor. */
 /* Supplied declaration required: FUN_0025e704. */
 extern int FUN_0026264c(unsigned short);
@@ -230,12 +230,12 @@ unsigned char FUN_0022b2d4(void)
   }
   temp_v22 = 0;
   if (*(char *)(temp_v2 + 0x2018) != '\x03' && *(char *)(temp_v2 + 0x2018) != '\n') {
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,10);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,10);
     efctSetSpeed();
     temp_v24 = 1.80768e-43f;
     FUN_001835b4(2,0x12,0,temp_v27[5],temp_v27[6]);
     efctSetSpeed();
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,8);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,8);
     efctSetSpeed();
     temp_v24 = 1.80768e-43f;
     FUN_001835b4(2,0x12,1,temp_v27[5],temp_v27[6]);
@@ -243,7 +243,7 @@ unsigned char FUN_0022b2d4(void)
     if (-1 < *(char *)(temp_v28 + 0x137f)) {
       temp_v24 = 1.80768e-43f;
       FUN_001835b4(2,0x12,0xb5,temp_v27[5],temp_v27[6]);
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,9);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,9);
       if (*(char *)(temp_v4 + 0x1384) != '\0') {
         temp_v24 = 1.8357e-43f;
         FUN_001835b4(2,0x12,0xb6,temp_v27[5],temp_v27[6]);
@@ -289,7 +289,7 @@ unsigned char FUN_0022b2d4(void)
       }
     }
     efctSetSpeed();
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,9);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,9);
     efctSetSpeed();
     temp_v24 = 1.80768e-43f;
     FUN_001835b4(2,0x12,2,temp_v27[5],temp_v27[6]);
@@ -311,7 +311,7 @@ joined_r0x0022b6e4:
       case 0:
         if (*(int *)(temp_v28 + 0x1370) == 7) {
 LAB_0022b750:
-          FUN_00230a50(temp_v27 + 5,temp_v27 + 6,9);
+          unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,9);
           efctSetSpeed();
           temp_v24 = 1.80768e-43f;
           FUN_001835b4(2,0x12,3,temp_v27[5],temp_v27[6]);
@@ -368,14 +368,14 @@ LAB_0022b750:
         temp_v0 = *(char *)(temp_v2 + 0x2013);
       }
       if ((temp_v18 && temp_v0 == '\0') || (*(char *)(temp_v28 + 0x1366) == '\0')) {
-        FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x22);
+        unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x22);
         temp_v24 = 3.09687e-43f;
         FUN_001835b4(2,0x12,0xb5,temp_v27[5],temp_v27[6]);
         temp_v24 = 3.09687e-43f;
         FUN_001835b4(2,0x12,0x93,temp_v27[5],temp_v27[6]);
       }
       if (*(int *)(temp_v28 + 0x1368) >= 8) {
-        FUN_00230a50(temp_v27 + 5,temp_v27 + 6,7);
+        unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,7);
         temp_v10 = *(unsigned int *)(temp_v28 + 0x1930);
         if (*(char *)(temp_v2 + 0x2017) == '\r' || *(char *)(temp_v2 + 0x2017) == '\v') {
           temp_v10 = 0x9b9b9bff;
@@ -419,8 +419,12 @@ LAB_0022b9b8:
             if (*(short *)(temp_v28 + 0x138e) == 0x241) {
               temp_v25 = (unsigned char *)romwright_f2u((float)((romwright_u2f((unsigned int)(temp_v25)) + 23.9f)));
             }
-            VectorUnsignedToFloat(*(unsigned int *)(temp_v2 + 0x202c),(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_003fabfc(*(unsigned int *)(temp_v2 + 0x2028),0,&temp_v24,temp_v10 | 0xff,0);
+            SpriteDrawVector3 position = {
+                temp_v24, romwright_u2f((u32)temp_v25), romwright_u2f((u32)temp_v26)
+            };
+            FUN_003fabfc((SpriteDrawOwner *)*(unsigned int *)(temp_v2 + 0x2028), 0,
+                         &position, temp_v10 | 0xFF, 0,
+                         (f32)*(unsigned int *)(temp_v2 + 0x202C), 1.0f);
           }
         }
         efctSetSpeed();
@@ -434,7 +438,7 @@ LAB_0022b9b8:
   temp_v4 = temp_v28;
   if (((*(char *)(temp_v2 + 0x2018) != '\t') && (*(short *)(temp_v28 + 0x1390) != 0)) &&
      ((*(char *)(temp_v2 + 0x2011) != '\0' || (*(char *)(temp_v2 + 0x2018) != '\n')))) {
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xf);
     efctSetSpeed();
     temp_v24 = 3.0268e-43f;
     if (*(unsigned short *)(temp_v4 + 0x1392) >= 100) {
@@ -447,7 +451,7 @@ LAB_0022b9b8:
     }
     temp_v0 = *(char *)(temp_v2 + 0x2017);
     if ((temp_v0 != '\x0e' && temp_v0 != '\a') && temp_v0 != '\x10') {
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xf);
       if (*(unsigned short *)(temp_v4 + 0x1392) >= 100) {
         temp_v4 = FUN_001834a4(0x12,0x12e);
         temp_v27[5] = temp_v27[5] + **(short **)(temp_v4 + 0xc);
@@ -455,7 +459,7 @@ LAB_0022b9b8:
       temp_v24 = 3.0268e-43f;
       FUN_00164b5c(2,0x12,0,temp_v27[5],temp_v27[6]);
     }
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x10);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x10);
     efctSetSpeed();
     temp_v24 = 3.0268e-43f;
     FUN_001835b4(2,0x12,0x2d,temp_v27[5],temp_v27[6]);
@@ -467,7 +471,7 @@ LAB_0022b9b8:
       temp_v24 = 3.0268e-43f;
       FUN_001835b4(2,0x12,0x39,temp_v27[5],temp_v27[6]);
     }
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x11);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x11);
     efctSetSpeed();
     if (*(char *)(temp_v2 + 0x2017) != '\x04') {
       temp_v24 = 3.0268e-43f;
@@ -475,7 +479,7 @@ LAB_0022b9b8:
       if (*(char *)(temp_v2 + 0x2017) != '\x04') {
         temp_v4 = 0;
         do {
-          FUN_00230a50(temp_v27 + 5,temp_v27 + 6,temp_v4 + 0x12);
+          unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,temp_v4 + 0x12);
           efctSetSpeed();
           temp_v3 = FUN_001834a4(0x12,temp_v4 + 0x7b);
           temp_v24 = 3.0268e-43f;
@@ -492,7 +496,7 @@ LAB_0022b9b8:
         } while (temp_v4 < 5);
       }
     }
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x17);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x17);
     efctSetSpeed();
     if ((*(char *)(temp_v2 + 0x2011) != '\0') && (*(char *)(temp_v2 + 0x2017) == '\0')) {
       temp_v24 = 3.0268e-43f;
@@ -531,7 +535,7 @@ LAB_0022b9b8:
     temp_v21 = (float)((unsigned long long)temp_v22 >> 0x20);
     if (*(char *)(temp_v2 + 0x2018) != '\t') {
       if (*(char *)(temp_v28 + 0x1383) == '\0') {
-        FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xe);
+        unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xe);
         temp_v22 = (unsigned long long)(unsigned int)temp_v21 << 0x20;
         if (*(char *)(temp_v2 + 0x2017) != '\0') {
           if (*(char *)(temp_v2 + 0x2017) != '\x0e') {
@@ -605,7 +609,7 @@ LAB_0022b9b8:
           FUN_001835b4(2,0x12,0x133,temp_v27[5],temp_v27[6]);
         }
       }
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xf);
       efctSetSpeed();
       puVar22 = (unsigned char *)(unsigned int)*(unsigned short *)(temp_v4 + 0x1392);
       drawSetColorFromRGBA8(0xffffffff);
@@ -643,7 +647,7 @@ LAB_0022b9b8:
         ;
       }
       FUN_00183bb0();
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xf);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xf);
       efctSetSpeed();
       temp_v3 = temp_v28;
       temp_v0 = *(char *)(temp_v2 + 0x2017);
@@ -675,7 +679,7 @@ LAB_0022b9b8:
         }
       }
       gameDataBlocksGetSaveData();
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x10);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x10);
       temp_v22 = (unsigned long long)temp_v10 << 0x20;
       efctSetSpeed();
       temp_v3 = temp_v28;
@@ -1095,7 +1099,7 @@ LAB_0022b9b8:
           }
         }
         if (*(char *)(temp_v2 + 0x2017) != '\x04') {
-          FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x11);
+          unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x11);
           efctSetSpeed();
           FUN_00183bb0();
           temp_v7 = 0;
@@ -1170,7 +1174,7 @@ LAB_0022b9b8:
         } while (temp_v8 < 5);
       }
       temp_v22 = (unsigned long long)temp_v10 << 0x20;
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0x17);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0x17);
       efctSetSpeed();
       drawSetColorFromRGBA8(0xffffffff);
       if ((*(char *)(temp_v2 + 0x2011) != '\0') && (*(char *)(temp_v2 + 0x2017) == '\0')) {
@@ -1395,7 +1399,7 @@ LAB_0022b9b8:
       }
       goto LAB_0022dd30;
     }
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xe);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xe);
     efctSetSpeed();
     temp_v24 = 3.09687e-43f;
     FUN_001835b4(2,0x12,0xc2,temp_v27[5],temp_v27[6]);
@@ -1424,7 +1428,7 @@ LAB_0022e040:
       jobGetScalarValue();
       temp_v22 = (unsigned long long)(unsigned int)temp_v21 << 0x20;
       efctSetSpeed();
-      FUN_00230a50(&temp_v25,&temp_v26,0xc);
+      unitGetStereoScreenPosition(&temp_v25,&temp_v26,0xc);
       temp_v24 = 2.81661e-43f;
       FUN_001835b4(2,0x12,0xbb,temp_v25,temp_v26);
       efctSetSpeed();
@@ -1459,7 +1463,7 @@ LAB_0022e040:
         temp_v7 = 0x114;
       }
       temp_v27[0] = (unsigned char *)(temp_v4 % 10);
-      FUN_00230a50(&temp_v25,&temp_v26,0xd);
+      unitGetStereoScreenPosition(&temp_v25,&temp_v26,0xd);
       temp_v24 = 2.81661e-43f;
       FUN_001835b4(2,0x12,temp_v6,temp_v25,temp_v26);
       temp_v4 = FUN_001834a4(0x12,temp_v15);
@@ -1489,7 +1493,7 @@ LAB_0022e040:
     if ((temp_v18 && temp_v0 == '\0') && (*(int *)(DAT_00588fd4 + 0x20c0) != 0)) {
       temp_v25 = (unsigned char *)0x0;
       temp_v26 = (unsigned char *)0x0;
-      FUN_00230a50(&temp_v25,&temp_v26,0xf);
+      unitGetStereoScreenPosition(&temp_v25,&temp_v26,0xf);
       temp_v22 = (unsigned long long)(unsigned int)temp_v21 << 0x20;
       efctSetSpeed();
       temp_v3 = 0;
@@ -1592,7 +1596,7 @@ LAB_0022e46c:
   return 0;
 LAB_0022dbfc:
   if (((unsigned int)*(unsigned short *)(temp_v4 + 0x13ac) & (1 << (temp_v10 & 0xff))) != 0) {
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,(0x1d - temp_v7) - (6 - temp_v8));
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,(0x1d - temp_v7) - (6 - temp_v8));
     temp_v12 = (6 - temp_v8) + temp_v7;
     temp_v5 = FUN_001834a4(0x12,temp_v12 + 0xa9);
     efctCallRoutineWithSpeedOverride(temp_v27[5] + *(short *)(temp_v5 + 8),temp_v27[6] + *(short *)(temp_v5 + 10),0xd3);
@@ -1621,7 +1625,7 @@ LAB_0022dcd0:
 LAB_0022dd30:
   temp_v21 = (float)((unsigned long long)temp_v22 >> 0x20);
   if ((*(char *)(temp_v2 + 0x2018) == '\x03') && (*(char *)(temp_v4 + 0x1380) != '\0')) {
-    FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xb);
+    unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xb);
     temp_v24 = 3.09687e-43f;
     FUN_00164b5c(2,0x12,1,temp_v27[5],temp_v27[6]);
     temp_v3 = 0;
@@ -1630,7 +1634,7 @@ LAB_0022dde4:
     temp_v17 = 0x3d;
 LAB_0022de2c:
     do {
-      FUN_00230a50(temp_v27 + 5,temp_v27 + 6,0xb);
+      unitGetStereoScreenPosition(temp_v27 + 5,temp_v27 + 6,0xb);
       temp_v7 = FUN_001834a4(0x12,temp_v3 + 0xa2);
       temp_v6 = 0xffffffff;
       if (*(char *)(temp_v4 + 0x137e) == temp_v3) {

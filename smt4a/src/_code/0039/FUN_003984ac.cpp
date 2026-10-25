@@ -18,7 +18,7 @@ int FUN_004c1114(...);
 int btlSlotSetStoreValue(...);
 int FUN_004c571c(...);
 int btlSelectSourceTriggeredSkill(int, int);
-int hasFlag80Or1000(...);
+unsigned int hasFlag80Or1000(unsigned int, unsigned int *);
 int FUN_004fcffc(...);
 
 /* stack frame of param_1: 4 slot(s), 16 byte(s) */
@@ -183,7 +183,7 @@ void FUN_003984ac(int param_1)
         temp_v6 = btlUnitGet(g_btlScriptUnit);
         temp_v3 = 0;
         if (temp_v6 != 0) {
-          temp_v6 = hasFlag80Or1000(g_btlScriptUnit,temp_v6);
+          temp_v6 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v6);
           temp_v3 = 0;
           if (temp_v6 != 0) {
             temp_v3 = 1;
@@ -191,7 +191,7 @@ void FUN_003984ac(int param_1)
         }
         FUN_004abba8(g_btlUiBlock,temp_v3 ^ 1);
         temp_v6 = btlUnitGet(g_btlScriptUnit);
-        if ((temp_v6 == 0) || (temp_v6 = hasFlag80Or1000(g_btlScriptUnit), temp_v6 == 0)) {
+        if ((temp_v6 == 0) || (temp_v6 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v6), temp_v6 == 0)) {
           jyoucyuGetTableEntry(1);
         }
       }
@@ -430,7 +430,7 @@ LAB_00398c7c:
         temp_v6 = btlUnitGet(g_btlScriptUnit);
         temp_v3 = 0;
         if (temp_v6 != 0) {
-          temp_v6 = hasFlag80Or1000(g_btlScriptUnit,temp_v6);
+          temp_v6 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v6);
           temp_v3 = 0;
           if (temp_v6 != 0) {
             temp_v3 = 1;
@@ -438,7 +438,7 @@ LAB_00398c7c:
         }
         FUN_004abba8(g_btlUiBlock,temp_v3 ^ 1);
         temp_v6 = btlUnitGet(g_btlScriptUnit);
-        if ((temp_v6 == 0) || (temp_v6 = hasFlag80Or1000(g_btlScriptUnit), temp_v6 == 0)) {
+        if ((temp_v6 == 0) || (temp_v6 = hasFlag80Or1000(g_btlScriptUnit,(unsigned int *)temp_v6), temp_v6 == 0)) {
           jyoucyuGetTableEntry(1);
           if ((*piVar11 != 0) &&
              ((((temp_v6 = FUN_0019acdc(*(unsigned short *)(*piVar11 + 300),0), temp_v6 == 1 ||

@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, int);
 int eplSlotStartRequest(...);
-int FUN_00294774(...);
+int mapEplSetSlotPosition(...);
 int controllerSetDestination(...);
 int animationSelectClip(...);
 
@@ -87,7 +87,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_0025ef68. */
 /* Supplied declaration required: eplSlotStartRequest. */
 /* Supplied declaration required: FUN_002826dc. */
-/* Supplied declaration required: FUN_00294774. */
+/* Supplied declaration required: mapEplSetSlotPosition. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: FUN_002d1f40. */
 /* Supplied declaration required: FUN_003250ac. */
@@ -738,7 +738,7 @@ LAB_002dc4e4:
       if (temp_v0 == 5) {
         if (g_lmapScene[0x75] == 0x32) {
           eplSlotStartRequest(3);
-          FUN_00294774(3);
+          mapEplSetSlotPosition(3);
         }
         piVar2 = g_lmapScene;
         if (g_lmapScene[0x75] >= 0x37) {
@@ -752,7 +752,7 @@ LAB_002dc4e4:
       if (temp_v0 == 0xb) {
         if (g_lmapScene[0x75] == 0x56) {
           eplSlotStartRequest(3);
-          FUN_00294774(3);
+          mapEplSetSlotPosition(3);
         }
         piVar2 = g_lmapScene;
         if (g_lmapScene[0x75] >= 0x5b) {
@@ -773,7 +773,7 @@ LAB_002dc4e4:
                *(unsigned int *)(*(int *)(g_lmapScene[0x60] + 4) + 4) | 1;
           *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) = *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) | 1;
         }
-        FUN_00294774(3);
+        mapEplSetSlotPosition(3);
       }
       temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
       temp_v0 = FUN_004ff98c(temp_v5);
@@ -899,7 +899,7 @@ joined_r0x002dc288:
       }
       if (g_lmapScene[0x75] == 0x5a) {
         eplSlotStartRequest(3);
-        FUN_00294774(3);
+        mapEplSetSlotPosition(3);
       }
       piVar2 = g_lmapScene;
       if (g_lmapScene[0x75] >= 0x5f) {
@@ -989,7 +989,7 @@ joined_r0x002dc288:
                *(unsigned int *)(*(int *)(g_lmapScene[0x60] + 4) + 4) | 1;
           *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) = *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) | 1;
         }
-        FUN_00294774(3);
+        mapEplSetSlotPosition(3);
       }
       temp_v5 = *(unsigned int *)(g_lmapScene[0x60] + 4);
       temp_v0 = FUN_004ff98c(temp_v5);
@@ -1171,7 +1171,7 @@ LAB_002dd03c:
     controllerSetRotationEulerDegrees(*(unsigned int *)(g_lmapScene[99] + 4));
     if (g_lmapScene[0x75] == 1) {
       eplSlotStartRequest(1);
-      FUN_00294774(1);
+      mapEplSetSlotPosition(1);
     }
     temp_v0 = FUN_004ffa14(*(unsigned int *)(g_lmapScene[0x60] + 4));
     piVar2 = g_lmapScene;
@@ -1197,7 +1197,7 @@ LAB_002dd03c:
     *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) = *(unsigned int *)(*(int *)(piVar2[99] + 4) + 4) & 0xfffffffc;
     if (piVar2[0x75] == 0x11) {
       eplSlotStartRequest(2);
-      FUN_00294774(2);
+      mapEplSetSlotPosition(2);
     }
     temp_v0 = FUN_004ffa14(*(unsigned int *)(g_lmapScene[0x60] + 4));
     piVar2 = g_lmapScene;

@@ -3,9 +3,9 @@
 #include "shard/S1ListPanel.h"
 
 extern "C" {
-extern RenderCtx *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 s32 padButtonIsPressed(u32 button);
-void FUN_0016c4b8(RenderCtx *context, s32 layer);
+void FUN_0016c4b8(RenderCtxA *context, s32 layer);
 void FUN_0014e314(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 z);
 

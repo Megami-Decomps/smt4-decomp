@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/ItemListSelection.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ ItemRecord *FUN_00184310(u16 itemId);
 void sysPlaySe(s32 se);
 void FUN_003343f0(s32 value);
 s32 useCounterGetCurrentValue(void);
-void itemListSelectVariant(ItemListMenu *menu, s32 a, s32 b);
 
 /* Wait for the use counter; once it finishes, play the confirm sound and move to state 2. */
 void itemListMenuWaitUseCounter(ItemListMenu *menu)
@@ -52,7 +52,7 @@ void itemListMenuWaitUseCounter(ItemListMenu *menu)
         menu->state = 2;
         menu->timer = 0;
     } else if (useCounterGetCurrentValue() != 0x69) {
-        itemListSelectVariant(menu, 1, 1);
+        itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(menu), 1, 1);
     }
 }
 

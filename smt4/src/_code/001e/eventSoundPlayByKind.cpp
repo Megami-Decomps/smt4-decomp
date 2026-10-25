@@ -1,11 +1,10 @@
-#include "common.h"
+#include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
 
-void FUN_00291e40(s32 sound);
 
 /* Plays the sound for a kind of event; kinds in a group share a base id and the index picks one of three variants. */
-void eventSoundPlayByKind(u32 kind, s32 index)
+void eventSoundPlayByKind(u32 kind, s32 index, SoundActorQueuePosition position)
 {
     s32 sound = 0;
 
@@ -48,7 +47,7 @@ void eventSoundPlayByKind(u32 kind, s32 index)
         sound = index + 0x1000257;
         break;
     }
-    FUN_00291e40(sound);
+    FUN_00291e40(sound, position);
 }
 
 } /* extern "C" */

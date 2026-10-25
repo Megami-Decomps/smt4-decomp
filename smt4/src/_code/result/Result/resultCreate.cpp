@@ -1,6 +1,7 @@
 /* NON_MATCHING: global pointer uses r5 instead of r4; draw-task result store omits retail's r0-to-r1 move. */
 #include "result/ResultInput.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 /* Local view: process handles and result kind lie beyond ResultInputWork's recovered end. */
 struct ResultProcessWorkIV {
@@ -27,14 +28,14 @@ extern const char DAT_00405dc8[];
 extern const char DAT_00405db8[];
 void FUN_002898e4(void);
 void *asdMemAlloc(u32 heap, u32 alignment, u32 options, u32 size, u32 clear);
-u32 FUN_0018c0ec(u32 process);
-u32 scrResultDestroy(u32 process);
-u32 FUN_001a16c0(u32 process);
-u32 FUN_001c8974(u32 process);
-u32 asdProcessCreateSimple(const char *name, u32 priority, u32 flags, u32 options,
-                           u32 (*update)(u32), u32 (*destroy)(u32), void *work);
-u32 taskCreateDraw(const char *name, u32 priority, u32 flags, u32 options,
-                   u32 (*draw)(u32), u32 (*destroy)(u32), void *work, u32 parent);
+s32 FUN_0018c0ec(u32 process);
+void scrResultDestroy(u32 process);
+s32 FUN_001a16c0(u32 process);
+s32 FUN_001c8974(u32 process);
+u32 asdProcessCreateSimple(const char *name, s32 priority, u16 startDelay, u16 endDelay,
+                           AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work);
+u32 taskCreateDraw(const char *name, s32 priority, u16 startDelay, u16 endDelay,
+                   AsdProcUpdateFunc draw, AsdProcFunc destroy, u32 work, void *parent);
 void FUN_003b7b58(ResultProcessWorkIV *work);
 void resultSetMenuState(ResultProcessWorkIV *work, s32 state);
 
@@ -47,10 +48,10 @@ void resultCreate(u8 kind)
         ResultProcessWorkIV *work = (ResultProcessWorkIV *)asdMemAlloc(0x100, 0x100, 0, sizeof(*work), 1);
         g_result = work;
         work->calculate = asdProcessCreateSimple(DAT_00405df0, 2, 0, 0,
-                                                FUN_0018c0ec, scrResultDestroy, NULL);
-        taskCreateDraw(DAT_00405ddc, 0x80, 0, 0, FUN_001a16c0, NULL, NULL, work->calculate);
-        taskCreateDraw(DAT_00405dc8, 0xDE, 0, 0, FUN_001a16c0, NULL, NULL, work->calculate);
-        work->drawDown = taskCreateDraw(DAT_00405db8, 0xE6, 0, 0, FUN_001c8974, NULL, NULL, work->calculate);
+                                                FUN_0018c0ec, scrResultDestroy, 0);
+        taskCreateDraw(DAT_00405ddc, 0x80, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));
+        taskCreateDraw(DAT_00405dc8, 0xDE, 0, 0, FUN_001a16c0, NULL, 0, reinterpret_cast<void *>(work->calculate));
+        work->drawDown = taskCreateDraw(DAT_00405db8, 0xE6, 0, 0, FUN_001c8974, NULL, 0, reinterpret_cast<void *>(work->calculate));
         FUN_003b7b58(work);
         work->kind = kind;
         resultSetMenuState(work, 1);

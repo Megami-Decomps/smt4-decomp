@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only - retail keeps r3 free for the first inlined render-stack push (mine uses ip) and schedules the float sum of the counter text as (a + b) + c after loading the offset in a different order; calls and stores are identical. */
+/* NON_MATCHING: render-context wrapper and conditional slide offset recovered; panel x-coordinate VFP conversion/register scheduling differs. */
 #include "camp/RenderCtx.h"
 
 namespace {
@@ -48,7 +48,7 @@ u32 FUN_00329a90(void)
         FUN_00157558(g_renderCtx);
         RenderCtxA *context = g_renderCtx;
         s32 preset = FUN_001692ac(1, 0);
-        renderStackPush(&context->stackA, preset);
+        renderCtxPushA(context, preset);
         s32 state = depart->state;
         if (state == 5 || state == 6) {
             efctSetSpeed(1.0f);
@@ -58,9 +58,11 @@ u32 FUN_00329a90(void)
             efctSetSpeed(1.0f);
             FUN_00183bb0();
             depart = g_mapDepart;
-            f32 offset = 0.0f;
+            f32 offset;
             if (depart->slide < 5) {
                 offset = 500.0f - (f32)(depart->slide * 100);
+            } else {
+                offset = 0.0f;
             }
             FUN_00164b5c(2, 19, 30, (s32)offset, 0, 11);
             LayoutEntry *panel = FUN_001834a4(19, 0x1105);

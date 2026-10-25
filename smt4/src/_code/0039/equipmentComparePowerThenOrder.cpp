@@ -13,14 +13,14 @@ const EquipmentSortPowerPrimary *dataTable08Sub0GetRecord(u32);
 const EquipmentSortPowerSecondary *dataTable08Sub1GetRecord(u32);
 const EquipmentSortPowerTertiaryView *dataTable08Sub2GetRecord(u32);
 s32 FUN_00230f44(const u16 *);
-u32 FUN_002ae3c0(u32);
+u32 contentGetEntryKind(u32);
 
 // Compare equipment by subtype-specific power, then by its secondary ordering key.
 s32 equipmentComparePowerThenOrder(const u16 *left, const u16 *right)
 {
     u32 leftId = *left;
     u32 leftPower = 0;
-    switch (FUN_002ae3c0(leftId)) {
+    switch (contentGetEntryKind(leftId)) {
     case 2: case 3: case 4: case 5: case 6: case 7: case 8:
         leftPower = dataTable08Sub2GetRecord(leftId)->power;
         break;
@@ -29,7 +29,7 @@ s32 equipmentComparePowerThenOrder(const u16 *left, const u16 *right)
     }
     u32 rightId = *right;
     u32 rightPower = 0;
-    switch (FUN_002ae3c0(rightId)) {
+    switch (contentGetEntryKind(rightId)) {
     case 2: case 3: case 4: case 5: case 6: case 7: case 8:
         rightPower = dataTable08Sub2GetRecord(rightId)->power;
         break;

@@ -17,7 +17,7 @@ struct ReflectSubjectGroup {
 
 extern "C" {
 
-ReflectAction *FUN_004102d8(ReflectContext *context, s16 actor, s32 secondary, u32 options);
+
 void *btlGetMainState(void);
 ReflectSubjectGroup *FUN_001568f8(void *state, s16 group);
 s32 idSetFindSubjectIndex(void *state, ReflectSubject *subject);
@@ -38,7 +38,7 @@ ReflectAction *FUN_004fd968(s32 actor, u32 options, ReflectSubject *subject, u32
         }
         queued = next;
     }
-    ReflectAction *action = FUN_004102d8(context, actor, 0, options);
+    ReflectAction *action = btlQueueReflectAction(context, (s16)actor, 0, options);
     ReflectSubjectGroup *group = FUN_001568f8(btlGetMainState(), subject->group);
     s32 index = idSetFindSubjectIndex(btlGetMainState(), subject);
     if (index < 0) {

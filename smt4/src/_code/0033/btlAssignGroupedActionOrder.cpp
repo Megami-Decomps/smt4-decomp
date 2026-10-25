@@ -1,4 +1,4 @@
-/* NON_MATCHING: initializer cursor registers swap and the sorted-ID address/load schedule differs; candidate -O2. */
+/* NON_MATCHING: initializer cursor registers swap and the sorted-ID address/load schedule differs. */
 #include "battle/btlMain.h"
 
 struct BattleActionOrderingRecord {

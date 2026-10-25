@@ -1,12 +1,13 @@
 /* NON_MATCHING: condition-code merging and duplicated trigger-notification tails differ from retail. */
 #include "gamedata/Table49Trigger.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 void FUN_003a249c(void);
 s32 dataTable49Type1Count(void);
 const Table49Trigger* dataTable49GetEntry(s32 index);
 s32 gameFlagIsSet(u32 flag);
-void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+
 
 // Apply unconsumed table triggers for a group and its selected entry.
 u32 FUN_003b961c(s32 groupId, s32 entryId)

@@ -3,7 +3,7 @@
 
 extern "C" s32 FUN_00254884(const char *path, char *resolvedPath, s32 flags);
 extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
-extern "C" void FUN_002c3510(u32 result);
+#include "sys/ProcessResult.h"
 
 static __inline s32 romFileOpen(RomOpenFile *file, const char *path, u32 mode)
 {

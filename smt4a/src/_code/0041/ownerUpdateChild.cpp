@@ -13,7 +13,7 @@ typedef struct ChildVtbl004188ec {
 
 typedef struct Child004188ec {
     /* 0x00 */ ChildVtbl004188ec *vtbl;
-    /* 0x04 */ u8 running;
+    /* 0x04 */ u8 complete;
 } Child004188ec;
 
 typedef struct Owner004188ec {
@@ -23,7 +23,7 @@ typedef struct Owner004188ec {
     /* 0x08 */ Child004188ec *child;
 } Owner004188ec;
 
-/* Updates the owner's child; once it is no longer running releases it. Marks the owner done unless the child is still running. */
+/* Updates the child and releases it once its completion flag is set. Marks the owner done unless a child is still pending. */
 void ownerUpdateChild(Owner004188ec *owner)
 {
     Child004188ec *child = owner->child;
@@ -32,7 +32,7 @@ void ownerUpdateChild(Owner004188ec *owner)
         child->vtbl->update(child);
         child = owner->child;
         if (child != NULL) {
-            if (child->running == 0) {
+            if (child->complete == 0) {
                 return;
             }
             child->vtbl->stop(child);

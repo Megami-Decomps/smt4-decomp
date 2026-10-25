@@ -1,6 +1,17 @@
 /* NON_MATCHING: Surface-selector load register, one clamp move and the three render-state push register schedules differ. */
 #include "camp/RenderCtx.h"
 
+/* Scissor stacks follow the shared rendering-context prefix. */
+struct ScissorContextView {
+    u8 unk0000[0x1318];
+    RenderStateStack mode;
+    RenderStateStack lower;
+    RenderStateStack upper;
+};
+typedef char ScissorOffsetsCheck[offsetof(ScissorContextView, lower) == 0x1338 &&
+    offsetof(ScissorContextView, upper) == 0x1358 && sizeof(ScissorContextView) == 0x1378 ? 1 : -1];
+
+
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 u32 FUN_00169d8c(u32 selector);
@@ -10,15 +21,6 @@ s32 stateValuesGetBySelector(u32 selector);
 
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height)
 {
-    /* These scissor stacks lie beyond the shared render-context prefix. */
-    struct ScissorContextView {
-        u8 unk0000[0x1318];
-        RenderStateStack mode;
-        RenderStateStack lower;
-        RenderStateStack upper;
-    };
-    typedef char ScissorOffsetsCheck[offsetof(ScissorContextView, lower) == 0x1338 &&
-        offsetof(ScissorContextView, upper) == 0x1358 ? 1 : -1];
     u32 selector = g_renderCtx->stereoMode;
     s32 maxX = FUN_00169d8c(selector) - 1;
     s32 maxY = FUN_00169db4(selector) - 1;

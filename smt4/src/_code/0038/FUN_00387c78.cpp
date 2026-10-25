@@ -1,4 +1,4 @@
-/* NON_MATCHING: file availability/data access uses a shared computed address rather than two indexed loads. */
+/* NON_MATCHING: direct package-file accesses restore the two indexed loads, but base and availability registers are reversed. */
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
 #include "gamedata/DataTable.h"
@@ -21,9 +21,8 @@ const char *FUN_00387c78(AocSystem *system, s32 id)
             for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
                 if (descriptions[fileIndex].kind != 0x21)
                     continue;
-                AocPackageFile *files = package->fileTable.files;
-                if (files[fileIndex].state.available) {
-                    void *table = dataTableFileGetTable(files[fileIndex].data, 1);
+                if (package->fileTable.files[fileIndex].state.available) {
+                    void *table = dataTableFileGetTable(package->fileTable.files[fileIndex].data, 1);
                     DisplayNameOverride *records = (DisplayNameOverride *)dataTableGetEntries(table);
                     s32 count = dataTableGetCount(table);
                     for (s32 recordIndex = 0; recordIndex < count; ++recordIndex) {

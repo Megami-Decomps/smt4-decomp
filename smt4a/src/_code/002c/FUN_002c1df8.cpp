@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction order only: retail loads the other table's first word before the entry's id (ldr r0, [r0] then ldrsh r1); the compiler loads the id first. */
+/* NON_MATCHING: other-table word and entry ID now load in retail order, but their r0/r1 operands are exchanged. */
 #include "common.h"
 
 extern "C" {
@@ -11,7 +11,7 @@ typedef struct TableEntry {
     /* 0x27 */ u8 unk27;
 } TableEntry;                        /* 0x28 */
 
-u32 tbcrBlockGetPayload(void);
+s32 tbcrBlockGetPayload(void *file);
 void *dataTableFileGetTable(void *file, u32 index);
 TableEntry *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
@@ -20,7 +20,7 @@ u32 dataTableGetCount(void *table);
  * file's other tables whose first entry has the same id and stores that table's index. */
 void FUN_002c1df8(void *file)
 {
-    u32 tableCount = tbcrBlockGetPayload();
+    u32 tableCount = tbcrBlockGetPayload(file);
     void *table = dataTableFileGetTable(file, 0);
     TableEntry *entry = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
@@ -32,7 +32,9 @@ void FUN_002c1df8(void *file)
             continue;
         }
         for (j = 1; j < tableCount; j++) {
-            if (*(s32 *)dataTableGetEntries(dataTableFileGetTable(file, j)) == entry->id) {
+            s32 otherId = *(s32 *)dataTableGetEntries(dataTableFileGetTable(file, j));
+            s32 entryId = entry->id;
+            if (otherId == entryId) {
                 entry->fileIndex = j;
                 break;
             }

@@ -1,5 +1,6 @@
 /* NON_MATCHING: command setup and 64-bit mask loads use different order and registers. */
 #include "battle/btlMain.h"
+#include "gamedata/GameFlags.h"
 #include "battle/btlUnit.h"
 #include "battle/btlScript.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
@@ -22,7 +23,7 @@ extern "C" {
 s32 scrGetArg(u32 index);
 BtlUnitA *btlUnitGet(u32 index);
 BtlMainStateA *btlGetMainState();
-void gameFlagSetValue(u32 flag, s32 value, s32 notify);
+
 
 u32 FUN_0035e9fc()
 {

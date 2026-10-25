@@ -1,5 +1,6 @@
 /* Preserves valid active-slot ids while rebuilding the party and reactivates those slots. */
 #include "common.h"
+#include "gamedata/GameFlags.h"
 
 struct ActiveSlotView {
     u8 unk000[0x12C];
@@ -11,7 +12,7 @@ void rt_aeabi_memclr(void *memory, u32 size);
 void FUN_003e48dc(s32 id);
 void FUN_003e4e4c(u32 mode);
 ActiveSlotView *FUN_003e503c(u16 slot);
-void gameFlagSetValue(u32 flag, u32 value, s32 notify);
+
 void *gameDataBlocksGetSaveData(void);
 void *saveSlotFindById(u16 id);
 u32 FUN_00187168(void *slot);

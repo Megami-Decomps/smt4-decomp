@@ -1,12 +1,11 @@
-/* NON_MATCHING: critical-section/global pointer caching, temporary stack placement and message-header clear ordering differ. */
+/* NON_MATCHING: scoped critical-section guards and ordered message clears recovered; virtual-read result/guard stack layout and saved registers differ. */
 #include "shard/CecMessageBox.h"
 #include "shard/W6_W6Match6_CecMessageBox.h"
+#include "nn/os/CriticalSectionLock.h"
 
 extern "C" {
 extern CecModuleFlags g_asdCecModuleFlags;
-extern u32 g_asdCecMessageBoxCriticalSection, DAT_006426cc;
-void nn_os_CriticalSection_Enter(void *section);
-void nn_os_CriticalSection_Leave(void *section);
+extern u32 g_asdCecMessageBoxCriticalSection, g_asdCecMessageBoxStateCriticalSection;
 u32 nn_cec_CTR_MessageBox_WriteBoxInfo(MessageBox *box, s32 kind, const void *header, const void *data);
 u32 nn_cec_CTR_MessageBox_WriteMessageBoxInfo(MessageBox *box);
 void sysMemClear(void *data, u32 size);
@@ -33,15 +32,15 @@ void FUN_0042e870(MessageBox *box, s32 preserveOpen)
         offsetof(ResetView, outbox) == 0x3AC && offsetof(ResetView, message) == 0x55C &&
         offsetof(ModuleView, inboxOwned) == 3 ? 1 : -1];
     ResetView *work = reinterpret_cast<ResetView *>(box);
+    CriticalSectionLock lock(&g_asdCecMessageBoxCriticalSection);
     ModuleView *flags = reinterpret_cast<ModuleView *>(&g_asdCecModuleFlags);
-    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxCriticalSection);
     if (preserveOpen == 0) {
         if (box->id != 0) {
             if (box->unk008[2])
                 nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox, work->inboxData);
             if (box->unk008[3])
                 nn_cec_CTR_MessageBox_WriteBoxInfo(box, 1, &work->outbox, work->outboxData);
-            if (g_asdCecModuleFlags.open) {
+            if (flags->prefix.open) {
                 u32 result[2];
                 box->vtbl->read(box, box->id, 0x96, 0x14, result);
                 nn_cec_CTR_MessageBox_WriteMessageBoxInfo(box);
@@ -56,28 +55,30 @@ void FUN_0042e870(MessageBox *box, s32 preserveOpen)
         work->outbox.words[index] = 0;
     sysMemClear(work->inboxData, sizeof(work->inboxData));
     sysMemClear(work->outboxData, sizeof(work->outboxData));
-    work->message.words[0] = work->message.words[1] = 0;
+    work->message.words[0] = 0;
+    work->message.words[1] = 0;
     sysMemClear(work->messageData, sizeof(work->messageData));
-    nn_os_CriticalSection_Enter(&DAT_006426cc);
-    if (flags->inboxOwned) {
-        FUN_00430e58(work->inboxHandle);
-        flags->inboxOwned = 0;
+    {
+        CriticalSectionLock stateLock(&g_asdCecMessageBoxStateCriticalSection);
+        if (flags->inboxOwned) {
+            FUN_00430e58(work->inboxHandle);
+            flags->inboxOwned = 0;
+        }
     }
-    nn_os_CriticalSection_Leave(&DAT_006426cc);
-    nn_os_CriticalSection_Enter(&DAT_006426cc);
-    if (flags->outboxOwned) {
-        FUN_00430e58(work->outboxHandle);
-        flags->outboxOwned = 0;
+    {
+        CriticalSectionLock stateLock(&g_asdCecMessageBoxStateCriticalSection);
+        if (flags->outboxOwned) {
+            FUN_00430e58(work->outboxHandle);
+            flags->outboxOwned = 0;
+        }
     }
-    nn_os_CriticalSection_Leave(&DAT_006426cc);
     work->inbox.signature = 0x6262;
     work->outbox.signature = 0x6262;
     work->message.signature = 0x6767;
     if (preserveOpen == 0) {
         FUN_0042d5b4(0);
-        g_asdCecModuleFlags.started = 0;
+        flags->prefix.started = 0;
     }
-    g_asdCecModuleFlags.open = 0;
-    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
+    flags->prefix.open = 0;
 }
 }

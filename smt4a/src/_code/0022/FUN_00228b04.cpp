@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern int FUN_00163fd4(void);
+extern int slotIsActive(void);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 extern int padButtonIsPressed(unsigned char);
 /* Supplied declaration required: FUN_002be8d0. */
@@ -109,10 +109,10 @@ unsigned char FUN_00228b04(int param_1,int param_2)
     do {
       temp_v9 = param_1 + temp_v4;
       temp_v15 = 0;
-      if ((*(char *)(temp_v9 + 4) != ' ') && (temp_v10 = FUN_00163fd4(), temp_v10 != 0)) {
+      if ((*(char *)(temp_v9 + 4) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) {
         temp_v15 = 1;
       }
-      if (((*(char *)(temp_v9 + 8) != ' ') && (temp_v10 = FUN_00163fd4(), temp_v10 != 0)) || (temp_v15)) {
+      if (((*(char *)(temp_v9 + 8) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) || (temp_v15)) {
         temp_v0 = *(char *)(temp_v9 + 4);
         puVar12 = (unsigned short *)(param_1 + 0x5c);
         if (temp_v0 == '\x05') {
@@ -158,10 +158,10 @@ unsigned char FUN_00228b04(int param_1,int param_2)
     do {
       temp_v9 = param_1 + temp_v4;
       temp_v15 = 0;
-      if ((*(char *)(temp_v9 + 0x2c) != ' ') && (temp_v10 = FUN_00163fd4(), temp_v10 != 0)) {
+      if ((*(char *)(temp_v9 + 0x2c) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) {
         temp_v15 = 1;
       }
-      if (((*(char *)(temp_v9 + 0x30) != ' ') && (temp_v10 = FUN_00163fd4(), temp_v10 != 0)) || (temp_v15))
+      if (((*(char *)(temp_v9 + 0x30) != ' ') && (temp_v10 = slotIsActive(), temp_v10 != 0)) || (temp_v15))
       {
         temp_v0 = *(char *)(temp_v9 + 0x2c);
         puVar12 = (unsigned short *)(param_1 + 0x5e);

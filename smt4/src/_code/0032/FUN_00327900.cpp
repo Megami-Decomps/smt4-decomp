@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail keeps DAT_0044fdc0 in a register and adds 0x38 to it; armcc folds the offset into the literal. */
 #include "common.h"
+#include "gfx/EffectEditorParameters.h"
 
 struct Effect00327900 {
     /* 0x00 */ u8 unk00[0x8c];
@@ -26,13 +26,12 @@ extern "C" {
 
 extern Table00327900 DAT_0044fdc0;
 
-void FUN_0024330c(void *body, u32 value, const void *entry);
 
 /* Forwards the owner's effect (0x1c): its body (0x8c) and value (0xb8) with the entry at 0x38 of DAT_0044fdc0. */
 void FUN_00327900(Object00327900 *object)
 {
     Effect00327900 *effect = &object->owner->effect;
-    FUN_0024330c(effect->body, effect->value, DAT_0044fdc0.entry);
+    FUN_0024330c(reinterpret_cast<u32 *>(effect->body), effect->value, reinterpret_cast<EffectEditorOptions *>(DAT_0044fdc0.entry), reinterpret_cast<EffectEditorOptions *>(&DAT_0044fdc0));
 }
 
 } /* extern "C" */

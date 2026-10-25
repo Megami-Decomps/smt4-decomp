@@ -1,4 +1,4 @@
-/* NON_MATCHING: color argument copies use equivalent registers, and the two global literal-pool words are reversed. */
+/* NON_MATCHING: corrected draw argument order; color copies, float setup scheduling, and global literal-pool order still differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include <stddef.h>
@@ -14,8 +14,8 @@ extern "C" {
 extern BattleOverlayView *g_btlMainState;
 extern RenderCtx *g_titleScene;
 void forwardRecoveredCallback(void);
-void FUN_002c0944(f32 x, f32 y, f32 width, f32 height, f32 depth,
-                  u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight);
+void FUN_002c0944(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
+                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002c1b64(RenderCtx *context, s32 mode);
 void FUN_002c39a4(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 enabled);
@@ -27,7 +27,7 @@ s32 FUN_001e4ac0(u32 job)
     renderCtxPushA(g_titleScene, FUN_002c5d80(5, 1));
     FUN_002c39a4(g_titleScene);
     FUN_002c1b64(g_titleScene, 0);
-    FUN_002c0944(0.0f, 0.0f, 400.0f, 240.0f, 0.0f, color, color, color, color);
+    FUN_002c0944(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
     forwardRecoveredCallback();
     renderStackPop(&g_titleScene->stackA);
     return 0;

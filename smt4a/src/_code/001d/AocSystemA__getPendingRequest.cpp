@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the lookup code in r0 (zero constant in r1) and tests the sign bit with `ands r2, r0, #0x80000000; bpl`; this build moves the code to r1 and tests with tst/beq */
+/* NON_MATCHING: signed failure-bit test matches; lookup code/zero registers remain swapped around name clearing and result construction. */
 #include "common.h"
 
 extern "C" {
@@ -42,7 +42,8 @@ void _ZN10AocSystemA17getPendingRequestEv(u32 arg, Request *request)
         request->name.words[2] = 0;
         request->name.words[3] = 0;
         request->pending = 0;
-        if ((code & 0x80000000) != 0) {
+        s32 failure = code & 0x80000000;
+        if (failure < 0) {
             node->pair = *_ZN18WindowStatusResultC1Ej(&local, code);
         }
     }

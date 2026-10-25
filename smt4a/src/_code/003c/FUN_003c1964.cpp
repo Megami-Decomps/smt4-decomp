@@ -14,7 +14,7 @@ extern "C" {
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
-void FUN_00301a08(s32 group, u32 *first, u32 *count);
+void FUN_00301a08(s32 group, s32 *first, s32 *count);
 BtlMainStateA *btlGetMainState(void);
 BattleThresholdEntryView *FUN_003eaf20(BtlMainStateA *state);
 
@@ -34,9 +34,9 @@ u32 FUN_003c1964(void)
     }
     s32 threshold = scrGetArg(1);
     s32 group = btlResolveEntryChoice(scrGetArg(2));
-    struct EntryRange { u32 first, count; } range;
-    FUN_00301a08(group, &range.first, &range.count);
-    for (s32 index = range.first; index < (s32)(range.first + range.count); ++index) {
+    s32 first, count;
+    FUN_00301a08(group, &first, &count);
+    for (s32 index = first; index < count + first; ++index) {
         BattleThresholdEntryView *entry = &((BattleThresholdEntryView *)btlGetMainState()->entries)[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&

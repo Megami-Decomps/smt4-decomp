@@ -1,4 +1,4 @@
-/* NON_MATCHING: fade completion/result flags share fewer saved registers and the integer/float tests are scheduled differently. */
+/* NON_MATCHING: result/completion lifetimes and channel-base offsets match; loop index scratch registers and the progress LDR/VMOV versus VLDR/VMOV handoff differ. */
 #include "common.h"
 
 struct OverlayFadeChannel {
@@ -24,32 +24,32 @@ s32 overlayIsNotBusy();
 // Step both fade channels and finish the transition once its endpoint and overlay gate are ready.
 u32 FUN_0036ce70(OverlayFadeWork *work)
 {
+    u32 result = 0;
+    bool complete = false;
     s8 entering = work->entering;
     if (entering) {
         for (s32 i = 0; i < 2; ++i) {
-            OverlayFadeChannel *channel = &work->channels[i];
-            FUN_002e1c94(&channel->progress.value, 4, channel->frame, 0.0f, 1.0f);
-            ++channel->frame;
+            FUN_002e1c94(&work->channels[i].progress.value, 4, work->channels[i].frame, 0.0f, 1.0f);
+            ++work->channels[i].frame;
         }
     } else {
         for (s32 i = 0; i < 2; ++i) {
-            OverlayFadeChannel *channel = &work->channels[i];
-            FUN_002e1c94(&channel->progress.value, 3, channel->frame, 1.0f, 0.0f);
-            ++channel->frame;
+            FUN_002e1c94(&work->channels[i].progress.value, 3, work->channels[i].frame, 1.0f, 0.0f);
+            ++work->channels[i].frame;
         }
     }
-    bool complete = false;
+    union { f32 value; s32 bits; } progress = {work->channels[1].progress.value};
     // The upper-end test uses the stored IEEE-754 progress representation.
-    if (work->channels[1].progress.bits >= 0x3f800000 && entering)
+    if (progress.bits >= 0x3f800000 && entering)
         complete = true;
-    if (work->channels[1].progress.value <= 0.0f && !entering)
+    if (progress.value <= 0.0f && !entering)
         complete = true;
     if (overlayIsNotBusy() && complete) {
         if (!entering)
             work->active = 0;
         work->state = work->nextState;
-        return 3;
+        result = 3;
     }
-    return 0;
+    return result;
 }
 }

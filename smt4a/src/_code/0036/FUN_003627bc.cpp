@@ -1,4 +1,4 @@
-/* NON_MATCHING: std::remove's find loop compares against a copy of the end in r0 (retail) and the build keeps the end in place; the build also merges the buffer/slot loads into an ldm and needs two more callee-saved registers. */
+/* NON_MATCHING: std::remove omits retail's copied end pointer in its find loop, and adjacent buffer/slot loads merge into ldm. */
 #include "gfx/AsdLightSet.h"
 #include <algorithm>
 
@@ -10,7 +10,7 @@ void asdMemFree(void *memory);
 }
 
 /* Takes `light` out of the vector; true when it was registered. */
-static __inline bool lightVectorRemove(AsdLightVector &vector, AsdLight *light)
+static __inline bool lightVectorRemove(AsdLightVector &vector, AsdLight *const &light)
 {
     AsdLight **newEnd = std::remove(vector.begin, vector.end, light);
     bool removed = vector.end != newEnd;

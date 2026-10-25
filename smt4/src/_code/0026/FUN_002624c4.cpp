@@ -52,7 +52,7 @@ FusionDevilRecord* devilGetRecord(u16 id);
 SkillRecordView* dataTable06Sub1GetRecord(u16 id);
 s32 devilIsAvailable(FusionPreviewUnit* unit, u16 id);
 void FUN_002b7bca(void* base, s32 count, s32 size, void* compare);
-s32 FUN_003c8db4(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);
+s32 fusionCandidateMatchesParentFilter(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);
 void FUN_003c9754(FusionPreviewUnit* unit, u32 first, u32 second, u32 product);
 extern u8 LAB_002c6f08;
 // Builds the fusion result of two demons: product, inherited skills and cost.
@@ -68,7 +68,7 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
     if (pair == NULL) return ret;
     if ((pair->value & 0xffff) == 0) return ret;
     if (!devilIsAvailable(unit, pair->value & 0xffff)) return ret;
-    if (!FUN_003c8db4(unit, first, second, pair->value & 0xffff)) return ret;
+    if (!fusionCandidateMatchesParentFilter(unit, first, second, pair->value & 0xffff)) return ret;
 
     result->firstParent = first;
     result->secondParent = second;

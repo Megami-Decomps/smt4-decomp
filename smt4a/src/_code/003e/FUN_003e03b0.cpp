@@ -1,4 +1,4 @@
-/* NON_MATCHING: battle/record saved registers exchange, destination pointer is formed earlier, and immediate-file dispatch lacks retail's null-result helper shape. */
+/* NON_MATCHING: deferred file-destination evaluation restores retail address timing; battle/record saved registers and immediate-ready null-result helper shape still differ. */
 #include "battle/BattleArrangementLoad.h"
 #include "battle/btlMain.h"
 #include "battle/btlEncount.h"
@@ -31,15 +31,14 @@ void FUN_003e03b0(BattleArrangementLoadState *load, BtlMainStateA *battle)
         char path[128];
         sysMemClear(path, sizeof(path));
         textFormatBuffer(path, "battle/arngmt/%02d_%02d.earg", record->bustUp.value, record->bustUp.variation);
-        void **destination = &reinterpret_cast<ArrangementFileView *>(battle)->file;
         if (aocReadyAndAccepts(g_aocSystem, record->id))
-            aocQueueType38(g_aocSystem, record->id, destination, path);
+            aocQueueType38(g_aocSystem, record->id, &reinterpret_cast<ArrangementFileView *>(battle)->file, path);
         else
-            asdLoadFileAsyncSimple(path, destination, 0);
+            asdLoadFileAsyncSimple(path, &reinterpret_cast<ArrangementFileView *>(battle)->file, 0);
         load->state = 9;
         load->count = 0;
         load->frame = 0;
-        if (*destination != NULL) {
+        if (reinterpret_cast<ArrangementFileView *>(battle)->file != NULL) {
             load->state = 10;
             FUN_003e12a8(load, battle);
         }

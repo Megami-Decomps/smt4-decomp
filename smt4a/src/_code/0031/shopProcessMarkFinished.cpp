@@ -3,9 +3,8 @@
 extern "C" ShopWork *g_shop;
 
 // Mark the shop process as finished.
-extern "C" ShopWork *shopProcessMarkFinished(void *context)
+extern "C" void shopProcessMarkFinished(u32 process)
 {
     ShopWork *work = g_shop;
     work->done = 1;
-    return work;
 }

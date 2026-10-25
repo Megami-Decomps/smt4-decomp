@@ -1,49 +1,38 @@
-/* NON_MATCHING: loop shape only: retail counts the ordered slots with a plain signed index and a separate counter (`add r0; cmp r0, #24; add r1; blt`); built needs a u16 index (extra uxth, bcc) to keep the two counters apart. */
-#include "common.h"
+/* NON_MATCHING: canonical slot table and signed loop recovered; ordered-index and used-count registers are exchanged. */
+#include "shard/Shard0031.h"
+#include <stddef.h>
+
+struct PartySlotCountView : PartyStatusSlots {
+    /* 0x1CA3 */ u8 count;
+};
+typedef char PartySlotCountOffset[offsetof(PartySlotCountView, count) == 0x1CA3 ? 1 : -1];
 
 extern "C" {
+PartySlotCountView *gameGetSlotTable(void);
+s32 FUN_004bd730(SlotTableEntry *entry);
 
-typedef struct SlotEntry {
-    /* 0x000 */ u8 data[300];
-} SlotEntry;
+static inline s32 countOrderedSlots(const PartySlotCountView *table)
+{
+    s32 count = 0;
+    for (s32 index = 0; index < 24; ++index) {
+        if (table->active.slots[index] < 0)
+            break;
+        ++count;
+    }
+    return count;
+}
 
-typedef struct SlotTable {
-    /* 0x0000 */ u8 unk0000[0x68];
-    /* 0x0068 */ SlotEntry entries[22];
-    /* 0x1A30 */ u8 unk1a30[0x258];
-    /* 0x1C88 */ s8 order[0x1B];
-    /* 0x1CA3 */ u8 count;
-} SlotTable;
-
-SlotTable *gameGetSlotTable(void);
-s32 FUN_004bd730(SlotEntry *entry);
-
-/* Returns the index of the first free slot entry when the ordered slots are not all in use, else -1. */
+/* Return the first free entry when there is room in the ordered party slots. */
 s32 FUN_004d0cd4(void)
 {
-    SlotTable *table = gameGetSlotTable();
-    SlotTable *orderTable = gameGetSlotTable();
-    s32 used = 0;
-    u16 i = 0;
-    s32 index;
-
-    do {
-        if (orderTable->order[i] < 0) {
-            break;
-        }
-        i++;
-        used++;
-    } while (i < 0x18);
+    PartySlotCountView *table = gameGetSlotTable();
+    s32 used = countOrderedSlots(gameGetSlotTable());
     if (table->count > used) {
-        SlotTable *entries = gameGetSlotTable();
-
-        index = 0;
-        do {
-            if (FUN_004bd730(&entries->entries[index]) == 0) {
+        PartySlotCountView *entries = gameGetSlotTable();
+        for (s32 index = 0; index < 24; ++index) {
+            if (FUN_004bd730(&entries->active.entries[index]) == 0)
                 return index;
-            }
-            index++;
-        } while (index < 0x18);
+        }
     }
     return -1;
 }

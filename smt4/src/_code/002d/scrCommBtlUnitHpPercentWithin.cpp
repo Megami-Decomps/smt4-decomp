@@ -1,5 +1,5 @@
 /* NON_MATCHING: register allocation only: retail loads the constant 100 into r0 after the two halfword loads (smulbb r0,r2,r0); built keeps it in r2 beforehand. */
-#include "common.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
@@ -16,7 +16,6 @@ typedef struct BtlUnit {
 
 extern u32 g_btlScriptUnit;
 
-extern BtlUnit *btlUnitGet(u32 unit);
 extern s32 scrGetArg(void);
 extern void scrSetResult(s32 value);
 
@@ -24,7 +23,7 @@ extern void scrSetResult(s32 value);
 s32 scrCommBtlUnitHpPercentWithin(void)
 {
     s32 limit = scrGetArg();
-    UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+    UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlState *const *>(g_btlScriptUnit)))->stats;
 
     scrSetResult(stats->hp * 100 / stats->maxHp <= limit);
     return 1;

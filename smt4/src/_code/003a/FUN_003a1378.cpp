@@ -6,7 +6,7 @@ void FUN_002306f8(const Scene3aEntry* item, s32 quantity, u32 flags);
 void FUN_0026e630(u32 amount);
 void FUN_00295c04(u32 amount);
 void gameCounterAddSaturating(s32 index, u32 amount);
-s32 FUN_002ae3c0(u32 id);
+s32 contentGetEntryKind(u32 id);
 u32 aocGetContentFlags(u32 id);
 
 // Apply the scene's total and item deltas, converting downloadable entries separately.
@@ -21,7 +21,7 @@ void FUN_003a1378(Scene3a* scene)
         if (id == 0) {
             break;
         }
-        if (FUN_002ae3c0(id) == 10) {
+        if (contentGetEntryKind(id) == 10) {
             FUN_0026e630(aocGetContentFlags(id) * quantity);
             item.attributes.options = 0;
             item.id = id;

@@ -7,7 +7,7 @@ extern s32 DAT_0044f864;
 extern u32 DAT_0044f54c;
 extern EffectSelectionTemplate DAT_0044f858;
 LinkedItem* linkedFindItemByIndex(LinkedItems* list, s32 index);
-LinkedItem* FUN_002f316c(LinkedItems* list, LinkedItem* after);
+LinkedItem* effPartCloneAfter(LinkedItems* list, LinkedItem* after);
 
 // Duplicate the selected effect part and select the scratch template.
 u32 FUN_0031e844(void)
@@ -15,7 +15,7 @@ u32 FUN_0031e844(void)
     LinkedItem* selected = linkedFindItemByIndex(
         static_cast<LinkedItems*>(g_effectEditor.selection.list),
         g_effectEditor.selection.index + DAT_0044f864);
-    LinkedItem* copy = FUN_002f316c(
+    LinkedItem* copy = effPartCloneAfter(
         static_cast<LinkedItems*>(g_effectEditor.selection.list), selected);
     DAT_0044f54c = 0;
     copy->data = selected->data;

@@ -1,5 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c2c70` (_code @ 0x1c2c70, 0x878 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: four-argument scaled-magnitude call and float result recovered; remaining raw emitter draft has mixed float/integer fields and stale callee contracts. */
 #include "romwright_types.h"
 
 extern "C" {
@@ -9,7 +8,7 @@ int FUN_00212224(...);
 int FUN_0026e768(...);
 int FUN_00291060(...);
 int FUN_0029118c(int, double, int);
-int FUN_00291234(int, double, int);
+f32 FUN_00291234(s32 mode, s32 lower, s32 upper, u32 divisor);
 int FUN_00291310(double, float *, float *, int);
 int FUN_00291340(float *, float *, float *, float *);
 int nodeTreeReleaseItemClearOwner(double);
@@ -195,7 +194,7 @@ void FUN_001c2c70(float *param_1)
       temp_v11 = temp_v10;
       FUN_00291310(temp_v3,param_1 + 0x19,param_1 + 0x66,1);
       param_1[(int)temp_v8 + 0x99] = temp_v3;
-      FUN_00291234(0,temp_v10,10);
+      temp_v11 = FUN_00291234(0,(s32)(u32)temp_v10,10,10);
       *(float *)((int)temp_v3 + 500) = temp_v11 * *(float *)((int)temp_v3 + 500);
       temp_v11 = (float)VectorSignedToFloat(param_1[0x6d],(unsigned char)(in_fpscr >> 0x16) & 3);
       *(float *)((int)temp_v3 + 0x34c) = temp_v11;

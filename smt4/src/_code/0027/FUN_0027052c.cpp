@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0027052c` (_code @ 0x27052c, 0x78c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "gamedata/GameFlags.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_0027eee0(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int mathAbsHeadingErrorToPoint(void);
-int gameFlagSetValue(int, int);
 int FUN_00295a18(int, int);
 int gameCounterAddSaturating(int, int);
 int asdMdlManagerDestroy(void);
@@ -67,7 +67,6 @@ extern int FUN_0027ef00(void);
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: mathAbsHeadingErrorToPoint. */
-/* Supplied declaration required: gameFlagSetValue. */
 /* Supplied declaration required: FUN_00295a18. */
 /* Supplied declaration required: gameCounterAddSaturating. */
 /* Supplied declaration required: asdMdlManagerDestroy. */
@@ -181,7 +180,7 @@ joined_r0x002706c8:
                 else {
                   FUN_0027ee24();
                   if (*(short *)(temp_v3 + 0x10) != 0) {
-                    gameFlagSetValue((int)*(short *)(temp_v3 + 0x10),1);
+                    gameFlagSetValue((int)*(short *)(temp_v3 + 0x10), 1, 1);
                   }
                   temp_v16 = (int)*(short *)(temp_v3 + 0x12);
                   if (temp_v16 != 0) {

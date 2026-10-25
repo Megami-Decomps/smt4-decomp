@@ -18,7 +18,7 @@ int FUN_002c18e4(...);
 int FUN_002c198c(...);
 int FUN_002c1b64(...);
 int FUN_002c39a4(int);
-int FUN_002c6a64(int);
+int titleDrawLogo(int);
 int FUN_0033cc84(unsigned int);
 int SUB84(double, int);
 int VectorSignedToFloat(...);
@@ -69,7 +69,7 @@ extern int FUN_002bf4f8(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c39a4. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-/* Supplied declaration required: FUN_002c6a64. */
+/* Supplied declaration required: titleDrawLogo. */
 /* Supplied declaration required: FUN_0033cc84. */
 
 
@@ -170,7 +170,7 @@ int FUN_001b72e0(unsigned int job)
         }
         temp_v5 = temp_v5 + 1;
       } while (temp_v5 < 0xc);
-      FUN_002c6a64(temp_v1 + 0x2200);
+      titleDrawLogo(temp_v1 + 0x2200);
       FUN_00218c50(temp_v1 + 8);
       FUN_0033cc84(*(unsigned int *)(temp_v1 + 0x7e20));
       if (*(char *)(temp_v1 + 0x7e4b) != '\0') {

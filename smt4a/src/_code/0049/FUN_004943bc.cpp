@@ -3,7 +3,7 @@
 
 extern "C" {
 s32 contentGetUpgradedKindValue(u16 id);
-s32 FUN_0049c9a0(const u16 *entry);
+u16 FUN_0049c9a0(const u16 *entry);
 s32 FUN_00192718(u16 id);
 
 /* Sorts selected content kinds by descending kind value, then by the entry's secondary key. */

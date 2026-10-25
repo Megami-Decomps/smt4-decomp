@@ -11,7 +11,7 @@ struct SoundVolumeGlobals {
     SoundVolumeOwner *owners[2]; // 0x1210
 };
 extern "C" SoundVolumeGlobals g_asdSound;
-extern "C" void nw_snd_internal_BasicSound_SetVolume(void *sound, f32 volume, s32 frames);
+extern "C" void nw_snd_internal_BasicSound_SetVolume(void *sound, s32 frames, f32 volume);
 
 // Set either active sound slot's normalized volume with an optional ramp.
 extern "C" void audioApplyChannelVolume(u32 slot, u32 value, s32 frames)
@@ -21,7 +21,8 @@ extern "C" void audioApplyChannelVolume(u32 slot, u32 value, s32 frames)
         if (owner) {
             owner->volume = value;
             if (value > 127) {
-                owner->volume = value = 127;
+                value = 127;
+                owner->volume = value;
             }
             f32 volume;
             if (value == 0)
@@ -32,7 +33,7 @@ extern "C" void audioApplyChannelVolume(u32 slot, u32 value, s32 frames)
                     volume = 2.0f;
             }
             if (owner->sound)
-                nw_snd_internal_BasicSound_SetVolume(owner->sound, volume, frames);
+                nw_snd_internal_BasicSound_SetVolume(owner->sound, frames, volume);
         }
     }
 }

@@ -24,7 +24,7 @@ struct PageSelectionGlobals {
 
 extern "C" {
 extern PageSelectionGlobals g_animatedPageSelection;
-void FUN_004cf8dc(void *animation, s32 track);
+void entryDispatchUpdate(void *animation, s32 track);
 s32 vec2GetYInt(const void *point);
 s32 vec2GetXInt(const void *point);
 void pointConvertToFloat(void *point, s32 x, s32 y);
@@ -38,7 +38,7 @@ void FUN_0032cfe0(AnimatedPage *page);
 // Animate out, toggle the page contents, then animate back in.
 void uiAnimatedPageToggleStep(AnimatedPage *page)
 {
-    FUN_004cf8dc(page->animation, page->track);
+    entryDispatchUpdate(page->animation, page->track);
     const void *point = page->tracks[page->track].point;
     s32 y = vec2GetYInt(point);
     s32 x = vec2GetXInt(point);

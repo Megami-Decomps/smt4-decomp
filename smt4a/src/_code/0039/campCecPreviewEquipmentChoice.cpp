@@ -10,7 +10,7 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 s32 FUN_002e2114(OutfitPreview *preview);
 void outfitPreviewConfigureEquipment(OutfitPreview *preview, const OutfitPreviewEquipment *equipment);
 void FUN_002e207c(OutfitPreview *preview);
-void FUN_003e5c68(void *modelGroup, const f32 *rotation);
+void modelApplyNonzeroGroupRotation(void *modelGroup, const f32 *rotation);
 void linkHolderApplyFlag(OutfitPreview *preview, u32 enabled);
 
 // Preview an equipment choice without changing the player's saved outfit.
@@ -39,7 +39,7 @@ void campCecPreviewEquipmentChoice(u32 itemId)
         FUN_002e207c(reinterpret_cast<OutfitPreview *>(edit->unk04));
         OutfitPreview *preview = reinterpret_cast<OutfitPreview *>(edit->unk04);
         if (preview != NULL && preview->modelGroup != NULL) {
-            FUN_003e5c68(preview->modelGroup, preview->rotation);
+            modelApplyNonzeroGroupRotation(preview->modelGroup, preview->rotation);
         }
         linkHolderApplyFlag(reinterpret_cast<OutfitPreview *>(edit->unk04), 0);
         edit->preview.outfitSelectionActive = 0;
