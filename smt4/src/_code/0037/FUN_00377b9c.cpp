@@ -10,7 +10,7 @@ int FUN_00377a10(...);
 int FUN_003784a4(...);
 int FUN_00378698(...);
 int FUN_0037960c(...);
-int FUN_00379864(...);
+int soundObjectPostByte0b(...);
 int UnsignedDoesSaturate(...);
 int UnsignedSaturate(...);
 int nw_snd_SoundHandle_DetachSound(int *);
@@ -61,7 +61,7 @@ extern int FUN_002bf684(void);
 /* Supplied declaration required: FUN_003784a4. */
 /* Supplied declaration required: FUN_00378698. */
 /* Supplied declaration required: FUN_0037960c. */
-/* Supplied declaration required: FUN_00379864. */
+/* Supplied declaration required: soundObjectPostByte0b. */
 extern int FUN_003e7114(unsigned int, unsigned int, unsigned short *);
 extern int FUN_003e716c(unsigned int, unsigned int, unsigned char *);
 /* Supplied declaration required: nw_snd_SoundHandle_DetachSound. */
@@ -369,7 +369,7 @@ joined_r0x00377e5c:
   }
   temp_v4 = nw_snd_SoundPlayer_detail_AppendSound(temp_v3,piVar9);
   if (temp_v4 != 0) {
-    FUN_00379864(piVar9,(int)temp_v16);
+    soundObjectPostByte0b(piVar9,(int)temp_v16);
     temp_v4 = *(int *)(param_1 + 4);
     FUN_00141fd0(temp_v4,temp_v32);
     if (temp_v4 != 1) {

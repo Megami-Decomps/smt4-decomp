@@ -17,7 +17,10 @@ struct Obj4209d8Cell {
     /* 0x050 */ u32 flags;
     /* 0x054 */ u8 unk54[0xE];
     /* 0x062 */ s16 unitId;
-    /* 0x064 */ u8 unk64[0x34];
+    /* 0x064 */ u32 color;
+    /* 0x068 */ u32 unk68;
+    /* 0x06C */ u32 modulation;
+    /* 0x070 */ u8 unk70[0x28];
     /* 0x098 */ u32 colorPhase;
     /* 0x09C */ u8 unk9c[0x20];
     /* 0x0BC */ f32 height;

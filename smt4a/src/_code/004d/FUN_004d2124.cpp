@@ -45,10 +45,10 @@ void FUN_004d2124(BattleDebugPanelWork *work, BtlMainStateA *battle)
         offsetof(TalkDebugMaskView, messageWindow) == 0xC8 &&
         offsetof(TalkDebugMaskView, talkBeginningLife) == 0xD8 ? 1 : -1];
     TalkDebugMaskView *masks = (TalkDebugMaskView *)&DAT_005715f8;
-    asdListBoxSetToggleItem(work->panelJob, 0, (battle->markerMasks.bits & masks->talkAll) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 0, (masks->talkAll & battle->markerMasks.bits) != 0);
     asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & masks->bustup) != 0);
     asdListBoxSetIntItem(work->panelJob, 2, battle->negotiation.bustupIndex, 0, 600, 0);
     asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & masks->messageWindow) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & masks->talkBeginningLife) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 4, (masks->talkBeginningLife & battle->markerMasks.bits) != 0);
 }
 }

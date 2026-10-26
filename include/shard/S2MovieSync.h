@@ -19,7 +19,7 @@ class MovieSyncSource;
 
 typedef struct MovieSync {
     /* 0x000 */ u8 unk000[0xc];
-    /* 0x00c */ s32 state;                 /* 1 = stopped */
+    /* 0x00c */ volatile s32 state;        /* 1 = stopped; polled while the playback thread changes it */
     /* 0x010 */ u8 unk010[8];
     /* 0x018 */ u32 *backend;
     /* 0x01c */ s32 counter;

@@ -35,7 +35,7 @@ s32 panelStateIs0(void);
 s32 FUN_0035dbb0(void);
 void messageMainSetTargetFlags(s32 arg);
 s32 flaggedValueHolderGetTotal(void *holder);
-s32 FUN_004d0cd4(void);
+s32 partyFindFirstUnusedEntry(void);
 void dispatchIfFound(s32 target, u32 id, s32 alternate);
 s32 FUN_004a8750(u16 id, u8 alternate, s32 arg2, bool highLevel, s32 arg4);
 void FUN_00408184(s32 kind, s32 amount);
@@ -56,7 +56,7 @@ void shopPurchaseConfirmSelected(PurchasePanel *panel)
     PanelListItem *items = panel->items;
     id = shopListItemGetId(&items[flaggedValueHolderGetTotal(panel->cursor)]);
     u16 itemId = id;
-    target = FUN_004d0cd4();
+    target = partyFindFirstUnusedEntry();
     if (target != -1) {
         dispatchIfFound(target, itemId, panel->isAlternate());
     }

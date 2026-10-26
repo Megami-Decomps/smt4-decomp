@@ -15,7 +15,7 @@ int gameApplyFlagTriggers(void);
 int FUN_00388068(void);
 int gameFlagsSetFlagsFromTaggedGroupEntries(unsigned int);
 int bitsAt60Clear(int, int);
-int FUN_004d0c4c(void);
+int partySlotsCompact(void);
 int FUN_004d0d70(void);
 int __aeabi_memcpy4(unsigned int, int, int);
 
@@ -51,7 +51,7 @@ extern int byte1IsZero(void);
 /* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
 extern int bitsAt60Test(int, unsigned int);
 /* Supplied declaration required: bitsAt60Clear. */
-/* Supplied declaration required: FUN_004d0c4c. */
+/* Supplied declaration required: partySlotsCompact. */
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -134,7 +134,7 @@ unsigned int FUN_003712a4(void)
             }
             temp_v4 = temp_v4 + 1;
           } while (temp_v4 < 0x18);
-          FUN_004d0c4c();
+          partySlotsCompact();
           temp_v4 = 0;
           do {
             temp_v2 = gameGetSlotRecord(temp_v4);

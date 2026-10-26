@@ -1,4 +1,4 @@
-/* NON_MATCHING: only register allocation differs (the maximum update keeps the field value in r1, flag read-modify-writes use r2, enemy-count loop registers). */
+/* NON_MATCHING: maximum update now uses an atLeast helper (retail order/condition reproduced); remaining: battle address computed after the entry value address, flag read-modify-writes use r1 where retail uses r2, `movs` null test on the found unit, enemy-count loop registers. */
 #include "shard/W4_Match6_BtlEntry.h"
 
 struct CommandEventBattle {
@@ -32,14 +32,17 @@ void FUN_0026beb4(u32, CommandEventChoice *, u32, u32, u32);
 void FUN_002569ac(CommandEventContext *, u32);
 void btlEntryValuesCopy(CommandEventContext *, CommandEventChoice *);
 
+static __inline s32 atLeastS32(s32 value, s32 minimum)
+{
+    return value > minimum ? value : minimum;
+}
+
 void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *choice)
 {
     BtlEntry *target = btlMainFindEntryByListedId(context->battle, context->battle->target);
     if (target && !(context->battle->flags & 0x200)) {
         CommandEventBattle *battle = context->battle;
-        u16 value = ((CommandEventUnit *)target)->value;
-        if (battle->maximum <= value)
-            battle->maximum = value;
+        battle->maximum = atLeastS32(battle->maximum, ((CommandEventUnit *)target)->value);
     }
     switch (context->battle->mode) {
     case 1:

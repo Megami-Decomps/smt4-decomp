@@ -7,7 +7,7 @@ extern GameStateA g_gameState;
 void asdMemFree(void *memory);
 void scrScriptProcessDestroy(ScriptProcess *process);
 void asdTMTexTableReleaseNode(s32 table, u32 node);
-void FUN_0019f548(u32 handle);
+void cameraResourcesRelease(u32 handle);
 void FUN_00214da4(void);
 
 /* Release both script panels and, unless retained globally, their cached data. */
@@ -45,7 +45,7 @@ void FUN_004b7a54(CampScriptPanelResources *work)
     };
     if (work->cacheLoaded && !reinterpret_cast<const CacheRetentionView *>(&g_gameState)->retain) {
         work->cacheLoaded = 0;
-        FUN_0019f548(work->cacheHandle);
+        cameraResourcesRelease(work->cacheHandle);
         for (s32 index = 0; index < 10; ++index) {
             if (work->cachedFiles[index] != NULL) {
                 asdMemFree(work->cachedFiles[index]);

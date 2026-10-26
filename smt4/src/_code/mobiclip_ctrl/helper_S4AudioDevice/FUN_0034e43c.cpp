@@ -50,7 +50,7 @@ extern const char DAT_00404ee4[];
 void FUN_0011be58();
 void FUN_0035a31c(const void *a, const void *b, u32 c, u32 d);
 void FUN_0011bf24();
-void FUN_0011cc1c();
+void dspsndInitializeManagers();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(u32 heap, u32 type, u32 flags, u32 bytes, u32 alignment, u32 clear);
@@ -70,7 +70,7 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     } else {
         FUN_0011bf24();
     }
-    FUN_0011cc1c();
+    dspsndInitializeManagers();
     nw_snd_SoundSystem_SetMasterVolume(1.0f);
     if (DAT_0044d0f8.allocator != NULL) {
         return 0;

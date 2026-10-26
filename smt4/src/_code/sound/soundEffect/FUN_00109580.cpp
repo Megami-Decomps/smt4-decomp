@@ -19,7 +19,7 @@ u32 nw_snd_FxReverb_GetRequiredMemSize(SoundReverbEffect *effect);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 kind);
 s32 nw_snd_FxReverb_AssignWorkBuffer(SoundReverbEffect *effect,
                                     void *buffer, u32 size);
-s32 FUN_00120dc4(u32 bus, SoundReverbEffect *effect);
+s32 soundSourceQueueReadyRequest(u32 bus, SoundReverbEffect *effect);
 
 void FUN_00109580(void)
 {
@@ -43,6 +43,6 @@ void FUN_00109580(void)
     asdDebugTrace(DAT_004076c8, 108);
     void *buffer = g_soundEffectBuffers[1] = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
     nw_snd_FxReverb_AssignWorkBuffer(&DAT_004c54f4, buffer, requiredSize);
-    FUN_00120dc4(1, &DAT_004c54f4);
+    soundSourceQueueReadyRequest(1, &DAT_004c54f4);
 }
 }

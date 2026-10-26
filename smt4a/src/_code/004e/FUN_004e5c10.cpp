@@ -80,7 +80,7 @@ s32 FUN_004e933c(BtlActorView *actor, BtlCommandView *command);
 void FUN_004e7c04(BtlActorView *actor, s32 flag);
 void FUN_003e8bb0(BtlTargetModeView *out, BtlMainView *main, BtlSideMask *target);
 void btlUnitMarkTargetCandidates(BtlActorView *actor, s32 flag, s32 mode);
-void FUN_004e5b5c(BtlActorView *actor);
+void btlActionMarkRandomTargetableUnit(BtlActorView *actor);
 void FUN_004eb838(BtlActorView *actor, BtlCommandView *command);
 void FUN_004c9220(s32 id, BtlSideMask *target);
 void FUN_004c9160(s32 id, BtlSideMask *target, s32 a, s32 b);
@@ -113,7 +113,7 @@ void FUN_004e5c10(BtlActorView *actor, BtlCommandView *command)
             FUN_003e8bb0(&mode, actor->main, command->target);
             effect->mode = (mode.selector == 1) ? 2 : 1;
             if (mode.targetKind == 0)
-                FUN_004e5b5c(actor);
+                btlActionMarkRandomTargetableUnit(actor);
             else if (mode.targetKind == 1)
                 btlUnitMarkTargetCandidates(actor, marked, 1);
             else if (mode.targetKind == 2)

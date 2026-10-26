@@ -4,6 +4,8 @@
 
 extern "C" InheritedValueCollection::Appender DAT_0041064c[2];
 
+extern "C" u32 objectGetCategoryTwo(void);
+
 // Apply inherited scalar values and replay the source's two append lists.
 extern "C" void FUN_001325c4(InheritedValueDestinationOwner *destination,
     const InheritedValueSourceOwner *source, u32 value, u32 index)
@@ -11,7 +13,8 @@ extern "C" void FUN_001325c4(InheritedValueDestinationOwner *destination,
     InheritedValueCollection *values = &destination->data->values;
     InheritedValueSource *inherited = source->data;
     values->slot(index) = value;
-    values->slot(2) = FUN_002c5be8(2);
+    u32 id = objectGetCategoryTwo();
+    values->slot(id) = FUN_002c5be8(id);
     if (inherited->firstValue.begin != inherited->firstValue.end)
         values->firstValue = *inherited->firstValue.begin;
     if (inherited->secondValue.begin != inherited->secondValue.end)

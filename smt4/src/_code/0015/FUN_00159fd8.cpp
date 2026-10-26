@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00146e40(unsigned char *);
+void FUN_00146e40(unsigned char *, signed char);
 int FUN_0015d254(unsigned char *);
 int FUN_002a208c(void);
 
@@ -30,7 +30,7 @@ void FUN_00159fd8(void)
       FUN_002a208c();
     }
     DAT_0044e7c4 = uRam1ff810c0;
-    FUN_00146e40(&g_nnSndMasterManager);
+    FUN_00146e40(&g_nnSndMasterManager, (signed char)uRam1ff810c0);
     FUN_0015d254(&g_dspsndState);
     DAT_0044e7c5 = '\x01';
   }

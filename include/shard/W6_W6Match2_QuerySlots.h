@@ -20,7 +20,7 @@ struct QuerySlot {
 
 static __inline QuerySlot* querySlotAt(QuerySlot* slots, u32 index)
 {
-    return index < 4 ? &slots[index] : NULL;
+    return index >= 4 ? NULL : &slots[index];
 }
 
 #endif

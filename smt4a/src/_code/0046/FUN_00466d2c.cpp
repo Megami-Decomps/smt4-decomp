@@ -1,51 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00466d2c` (_code @ 0x466d2c, 0x80 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches except the constant/address register order of the header stores; retail copies the 64-bit value with ldrd/strd at the word-aligned offset 0x2C, which needs a packed 64-bit field (here two words are copied with ldm/stm). */
+#include "classes/ObjectCommandRequests.h"
 
-extern "C" {
+/* Two words copied as a unit. */
+struct ObjectWordPair {
+    u32 low, high;
+};
 
-int listAppendNode(int);
-int objectCommandReserveWords(int, int);
+/* A three-word vector. */
+struct ObjectVec3 {
+    u32 x, y, z;
+};
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
+/* The extra description a type-35 command carries. */
+struct ObjectCursorShape {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ const ObjectWordPair *value;
+    /* 0x0C */ u32 fourth;
+};
 
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
+/* A type-35 command (14 words). */
+struct ObjectShapeNode {
+    /* 0x00 */ u32 next;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 token;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ ObjectVec3 vector;
+    /* 0x20 */ u32 first;
+    /* 0x24 */ u32 second;
+    /* 0x28 */ u32 fourth;
+    /* 0x2C */ ObjectWordPair value;
+    /* 0x34 */ u32 vectorX;
+};
 
-
-void FUN_00466d2c(int param_1,unsigned int *param_2,unsigned int *param_3)
-
+// Queues a type-35 command for the cursor object describing a vector and a shape.
+extern "C" void FUN_00466d2c(ObjectCursorOwner *owner, const ObjectCursorShape *shape, const ObjectVec3 *vector)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  
-  temp_v0 = objectCommandQueueGet();
-  temp_v1 = temp_v0;
-  objectCommandReserveWords(temp_v0,0xe);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 0x23;
-  *(int *)(temp_v1 + 0x10) = param_1 + 0x124;
-  temp_v2 = param_3[1];
-  temp_v3 = param_3[2];
-  *(unsigned int *)(temp_v1 + 0x14) = *param_3;
-  *(unsigned int *)(temp_v1 + 0x18) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x1c) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0x24) = param_2[1];
-  *(unsigned int *)(temp_v1 + 0x20) = *param_2;
-  *(unsigned int *)(temp_v1 + 0x28) = param_2[3];
-  temp_v2 = ((unsigned int *)param_2[2])[1];
-  *(unsigned int *)(temp_v1 + 0x2c) = *(unsigned int *)param_2[2];
-  *(unsigned int *)(temp_v1 + 0x30) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x34) = *param_3;
-  listAppendNode(temp_v0);
-  return;
+    ObjectCommandQueue *queue = objectCommandQueueGet();
+    ObjectShapeNode *command = (ObjectShapeNode *)objectCommandBegin(queue, 14);
+    command->kind = 35;
+    command->owner = (u32)&owner->params;
+    command->vector = *vector;
+    command->second = shape->second;
+    command->first = shape->first;
+    command->fourth = shape->fourth;
+    command->value = *shape->value;
+    command->vectorX = vector->x;
+    listAppendNode(queue, (ObjectCommand *)command);
 }
-
-} /* extern "C" */

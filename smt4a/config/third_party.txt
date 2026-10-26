@@ -2538,7 +2538,7 @@
 0x0016f3e4 FUN_0016f3e4 between
 0x0016f574 FUN_0016f574 between
 0x0016f6f8 nn_snd_CTR_Dspsnd_Finalize name
-0x0016f7ec FUN_0016f7ec between
+0x0016f7ec dspsndHandlePendingRequest between
 0x0016f854 FUN_0016f854 between
 0x0016f864 FUN_0016f864 between
 0x0016f988 FUN_0016f988 between
@@ -3636,8 +3636,8 @@
 0x001c7d28 nn_snd_CTR_VoiceImpl_SetBiquadFilterCoefficients name
 0x001c7d50 nn_math_CntBit1 name
 0x001c7d94 FUN_001c7d94 between
-0x001c7dc4 FUN_001c7dc4 between
-0x001c7e34 FUN_001c7e34 between
+0x001c7dc4 blockGatherColumnPairs between
+0x001c7e34 blockGatherPackedHalfwords between
 0x001c7f14 FUN_001c7f14 callers
 0x001c8248 FUN_001c8248 callers
 0x001c8e74 FUN_001c8e74 callers
@@ -6416,7 +6416,7 @@
 0x0043a560 serviceCloseInitializedHandle between
 0x0043a59c FUN_0043a59c between
 0x0043a654 FUN_0043a654 between
-0x0043a670 FUN_0043a670 between
+0x0043a670 modelServiceEnsureOpen between
 0x0043a718 FUN_0043a718 between
 0x0043a734 nnResultCheckReport0043aab4 between
 0x0043a750 FUN_0043a750 between
@@ -6790,7 +6790,7 @@
 0x00452620 FUN_00452620 between
 0x00452624 FUN_00452624 between
 0x004526cc FUN_004526cc between
-0x0045277c FUN_0045277c between
+0x0045277c resourceClearActiveAndRelease between
 0x004527a8 resourceReleaseRelativeMember between
 0x004527d0 FUN_004527d0 between
 0x004528cc FUN_004528cc between

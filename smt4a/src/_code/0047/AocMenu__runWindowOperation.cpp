@@ -38,7 +38,7 @@ void FUN_00476e58(u32 *job, s32 a, s32 b);
 void FUN_004cfeb0(u32 *range, s32 a, s32 entry, s32 b, s32 c, s32 d);
 void touchRegisterFirstRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
-void FUN_004d091c(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
+void touchRegionOwnerAdd(Obj422594 *object, s32 x, s32 y, s32 width, s32 height);
 s32 rangeGetMinimumLimit(u32 *range);
 void FUN_004d05c4(u32 *entries, u32 group, u32 id, s32 value);
 
@@ -120,7 +120,7 @@ void AocMenu::runWindowOperation()
                 record = asdTMTexTableEntryAt(0x2f, 0x50);
                 touchRegisterSecondRegion(object, record->x, record->y, record->placement->width, record->placement->height);
                 record = asdTMTexTableEntryAt(0x2f, 0x4e);
-                FUN_004d091c(object, record->x, record->y, record->placement->width, record->placement->height);
+                touchRegionOwnerAdd(object, record->x, record->y, record->placement->width, record->placement->height);
                 reinterpret_cast<u8 *>(job)[0x34c] = 1;
                 reinterpret_cast<u16 *>(job)[0xbb * 2] = reinterpret_cast<u16 *>(job)[0xbb * 2] | 0x1000;
                 s32 limit = rangeGetMinimumLimit(job + 0x90);

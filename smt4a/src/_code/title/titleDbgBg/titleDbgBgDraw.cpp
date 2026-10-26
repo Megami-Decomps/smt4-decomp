@@ -16,7 +16,7 @@ extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(s32 mode, s32 flags);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
-void FUN_00182884(s32 mode, void *display, f32 x, f32 y);
+f32 FUN_00182884(s32 mode, void *display, f32 x, f32 y);
 
 /* Draws a white debug label on the title background. */
 static __inline void drawDebugLabel(const char *text, f32 x, f32 y)

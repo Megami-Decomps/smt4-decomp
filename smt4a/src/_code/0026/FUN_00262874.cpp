@@ -280,7 +280,7 @@ extern int FUN_0049fbb8(unsigned int, int, unsigned short);
 /* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: bitsAt60Clear. */
 /* Supplied declaration required: FUN_004bd6b0. */
-extern unsigned int FUN_004d0cd4(void);
+extern unsigned int partyFindFirstUnusedEntry(void);
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: FUN_004fd508. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -2974,7 +2974,7 @@ LAB_0026700c:
             FUN_004d0d70();
             partyFindSlotById(*(unsigned short *)(temp_v22 + 0x62));
             FUN_004d0d70();
-            temp_v10 = FUN_004d0cd4();
+            temp_v10 = partyFindFirstUnusedEntry();
             temp_v4 = FUN_002a4b28(*(unsigned short *)(temp_v1 + 0xefa));
             dispatchIfFound(temp_v10,*(unsigned short *)(temp_v1 + 0xefa),0);
             temp_v14 = gameGetSlotRecord(temp_v10);

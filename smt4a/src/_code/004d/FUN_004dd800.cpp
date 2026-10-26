@@ -12,7 +12,7 @@ int dataTable04FindById(void);
 int FUN_003e8bb0(...);
 int FUN_004c9160(...);
 int btlActionMarkRandomStatusTarget(...);
-int FUN_004e5b5c(...);
+int btlActionMarkRandomTargetableUnit(...);
 int FUN_004e6880(...);
 int FUN_004e7c04(...);
 int FUN_004e8454(...);
@@ -44,7 +44,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_004a9308. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: btlActionMarkRandomStatusTarget. */
-/* Supplied declaration required: FUN_004e5b5c. */
+/* Supplied declaration required: btlActionMarkRandomTargetableUnit. */
 /* Supplied declaration required: FUN_004e6880. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
@@ -135,7 +135,7 @@ LAB_004ddb40:
             if (temp_v2 != 0x16) {
               if (temp_v2 != 0x1c) {
                 if (temp_v2 != 0x1f) {
-                  FUN_004e5b5c(param_1);
+                  btlActionMarkRandomTargetableUnit(param_1);
                 }
                 else {
                   FUN_004e6880(param_1,0x1f);
@@ -154,7 +154,7 @@ LAB_004ddb40:
           }
         }
         else {
-          FUN_004e5b5c(param_1);
+          btlActionMarkRandomTargetableUnit(param_1);
         }
       }
       temp_v1 = 0;
@@ -199,7 +199,7 @@ LAB_004ddb48:
         }
       }
       else {
-        FUN_004e5b5c(param_1);
+        btlActionMarkRandomTargetableUnit(param_1);
       }
       temp_v1 = 0;
       temp_v3 = 0x6d;

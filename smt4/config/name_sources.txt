@@ -4290,3 +4290,36 @@
 002c66cc __aeabi_vec_dtor evidence ARM C++ ABI array destructor helper (armcc emits calls to __aeabi_vec_dtor)
 001954b0 asdMdlBanksReset inferred [high] sets every bank manager and model manager slot of the six model banks to NULL (companion of asdMdlBanksDestroyAll)
 00123b88 gfxReleaseEntryBlocks inferred [high] twin of smt4a FUN_00161c64
+0034e2ac _ZN19MobiclipStreamOwnerD1Ev evidence twin of smt4a _ZN19MobiclipStreamOwnerD1Ev (same bytes: reader destroy, two handle closes, thread finalize with write-back member walk); native destructor returns this
+0034e618 deferredTransferEnqueue inferred [med] queues a data block for the deferred-transfer thread
+00370010 resourceClearActiveAndRelease inferred [med] clears the active word and releases the self-relative resource
+00380aa0 rangeDispatchEvaluate inferred [med] constant, packed-bit or callback evaluation of a ranged record
+003603f8 modelServiceEnsureOpen inferred [med] opens the model service once and caches the ready flag
+00380894 soundRequestPostType30 inferred [med] posts sound-manager request 0x30 (id, argument)
+0037ab08 soundVoicePostWord11 inferred [med] posts request 0x11 with one word for the voice's parameter holder
+0037ac9c soundVoicePostByte12 inferred [med] posts request 0x12 with one byte
+0037ae14 soundVoicePostWords13 inferred [med] posts request 0x13 with two words
+0037ae60 soundVoicePostWords0d inferred [med] posts request 0x0d with three words
+00380444 soundVoicePostWord26 inferred [med] posts request 0x26 with one word
+00380594 soundVoicePostByte27 inferred [med] posts request 0x27 with one byte
+003795b0 soundObjectPostByte09 inferred [med] posts request 0x09 with the object's id and one byte
+00379864 soundObjectPostByte0b inferred [med] posts request 0x0b with the object's id and one byte
+00379cfc soundStreamPostConsumed inferred [med] posts request 0x30 for the bytes consumed since start and rewinds the cursor
+0037a0e4 soundVoicePostRequestBlock inferred [med] posts request 0x29 with the voice's request block
+003806a0 soundVoicePostCursor inferred [med] posts request 0x25 (cursor) and remembers its value pair
+0037c954 soundStreamPostTargetState inferred [med] posts request 0x2b describing the stream target and flushes
+0037c86c soundStreamPostTargetLevel inferred [med] posts request 0x2c describing the stream target with a level and flushes
+0012f7e4 soundObjectPostStop inferred [med] posts request 0x32 for the object, flushes and clears its queue state
+002a880c bustupSpriteStartTransition inferred [high] twin
+00192420 mapDeferredModelsReset inferred [high] clears the deferred map model table state and entries, then resets the timed vector queues
+0015a5c4 blockGatherColumnPairs inferred [med] gathers four two-column blocks in reverse index order
+0015a634 blockGatherPackedHalfwords inferred [med] gathers packed halfword pairs from four blocks in reverse index order
+003cf1a8 btlSelectRandomMarkedUnit inferred [med] picks random entry with flag 0x400 and sets selected-unit byte
+003cf884 btlClearActionMarksAndSelectTarget inferred [med] clears action status bits 4|8 for 109 entries then marks first active entry with selectionIndex==selection as target
+003d0160 btlMarkUnitByHpRank inferred [med] collects entries flagged 0x400, sorts by HP rank, marks the rank-th unit as selected
+003c7ffc stageRequestSubmitLocked inferred [med] enters the request lock, submits stage work with width/height (1x1 when negative), sets pending, leaves the lock
+00129478 dspsndHandlePendingRequest inferred [high] runs the pending DSP sound request, latches the DSP status and signals the DSP event
+0011cc1c dspsndInitializeManagers inferred [med] initializes DSP, master, voice and effect managers once and installs callbacks
+00120dc4 soundSourceQueueReadyRequest inferred [med] queues a type 0x33 sound request when the source reports ready
+00351bb8 objectGetCategoryTwo inferred [med] constant-2 category getter (vtable slot); armlink inlines it at direct callers such as FUN_001325c4
+00328c90 scrCommResultSetCurrentUnitTableValue inferred [med] script command: looks up a table value for the current result-screen party entry and sets it as the result

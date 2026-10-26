@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler merges reserved-name null guards and allocates a smaller frame; -O2 candidate. */
+/* NON_MATCHING: nameStartsWith/nameEquals keep retail's repeated null tests; retail loads each g_btlEffect prefix after its test, keeps the &formatted pointer in a callee-saved register and uses a 260-byte frame. */
 #include "shard/W6_W6Match6_EffectLoader.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -9,6 +9,17 @@ extern const char DAT_00400914[], DAT_0040090c[], DAT_004008c4[];
 u32 libc_strlen(const char *);
 s32 libc_strcmp(const char *, const char *);
 s32 libc_strncmp(const char *, const char *, u32);
+
+static __inline bool nameStartsWith(const char *name, const char *prefix)
+{
+    return name && !libc_strncmp(name, prefix, libc_strlen(prefix));
+}
+
+static __inline bool nameEquals(const char *name, const char *other)
+{
+    return name && !libc_strcmp(name, other);
+}
+
 void textFormatBuffer(char *, const char *, ...);
 u32 keyedRecordRegisterName(void *);
 u32 FUN_00249e54(u32, const char *);
@@ -21,13 +32,13 @@ void btlEffectLoadSecondaryResources(EffectLoader *loader)
             if (!libc_strlen(name) || !libc_strcmp(name, DAT_00400914) ||
                 !libc_strcmp(DAT_0040090c, name))
                 continue;
-            if (name && !libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)))
+            if (nameStartsWith(name, g_btlEffect.prefix))
                 continue;
-            if (name && !libc_strcmp(name, g_btlEffect.reserved.name))
+            if (nameEquals(name, g_btlEffect.reserved.name))
                 continue;
-            if (name && !libc_strncmp(name, g_btlEffect.otherPrefix, libc_strlen(g_btlEffect.otherPrefix)))
+            if (nameStartsWith(name, g_btlEffect.otherPrefix))
                 continue;
-            if (name && !libc_strcmp(name, g_btlEffect.reserved.otherName))
+            if (nameEquals(name, g_btlEffect.reserved.otherName))
                 continue;
             char path[128];
             char formattedPath[128];

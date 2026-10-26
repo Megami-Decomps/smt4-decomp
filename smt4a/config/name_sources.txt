@@ -6719,3 +6719,17 @@
 00161c64 gfxReleaseEntryBlocks inferred [high] hands an entry main/sub driver blocks back through g_gfxReleaseCallback per entry kind, then clears both block pointers
 00473c5c textConvertToBoundedWide inferred [med] decodes text into temporary wide storage and copies a capacity-bounded NUL-terminated result
 0040b730 playerLoadOutfitPartModel inferred [med] loads one outfit part (0 head, 1 body, 2 legs) model path player/plNN_MMM{hd,bd,lg}V.bam with group 8 model 0 fallback, then starts the load
+00422af0 deferredTransferEnqueue inferred [med] twin
+0045277c resourceClearActiveAndRelease inferred [med] twin
+0043a670 modelServiceEnsureOpen inferred [med] twin
+0019d96c bustupSpriteStartTransition inferred [high] starts transition `operation` (1..9, fade/hold modes with default durations) on a bustup sprite, releases its addon slot and queues the texture replacement
+0019f548 cameraResourcesRelease inferred [med] unregisters and deletes the camera work's primary/area/secondary/tertiary/auxiliary handles, resets selections and re-initialises the camera areas
+001c7dc4 blockGatherColumnPairs inferred [med] twin of smt4 FUN_0015a5c4
+001c7e34 blockGatherPackedHalfwords inferred [med] twin of smt4 FUN_0015a634
+0016f7ec dspsndHandlePendingRequest inferred [high] twin of smt4 FUN_00129478; runs the pending DSP sound request, latches the DSP status and signals the DSP event
+00159d60 dspsndInitializeManagers inferred [med] twin of smt4 FUN_0011cc1c; initializes DSP, master, voice and effect managers once and installs callbacks
+004261b4 objectGetCategoryTwo inferred [med] twin of smt4 FUN_00351bb8
+004d091c touchRegionOwnerAdd inferred [high] registers a touch region and stores id, x, y, width, height, count++ in the owner
+004d0c4c partySlotsCompact inferred [high] shifts occupied party slots down over empty (-1) entries, preserving order
+004d0cd4 partyFindFirstUnusedEntry inferred [med] counts ordered party slots, if below the table count returns the first entry whose check returns 0
+004e5b5c btlActionMarkRandomTargetableUnit inferred [high] collects targetable combatant indices, filters via FUN_004e9ae8, marks one random pick in the acting unit's targeted flags

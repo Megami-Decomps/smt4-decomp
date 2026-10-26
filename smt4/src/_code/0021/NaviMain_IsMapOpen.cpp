@@ -1,13 +1,19 @@
-/* NON_MATCHING: fragment of a larger function (valid lookup body is followed by a literal pool and an orphan mov r0,#1 instruction) */
-/* romwright 0.5.0 decompilation of NaviMain_IsMapOpen for reference (not compiled; its own view of the boundaries):
+#include "shard/NaviMain.h"
 
-unsigned char FUN_0021e9cc(void)
+struct NavigationState;
 
+extern "C" {
+extern NaviMain *g_naviMain;
+bool naviStateIsMapOpen(const NavigationState *navigation);
+
+/* Whether the navigation screen exists and is in one of its map-open states. */
+bool NaviMain_IsMapOpen(void)
 {
-  if (DAT_0044cdf0 == 0) {
-    return 0;
-  }
-  return *(int *)(DAT_0044cdf0 + 0x44) == 4 || *(int *)(DAT_0044cdf0 + 0x44) == 6;
+    NaviMain *navi = g_naviMain;
+    if (navi == NULL) {
+        return false;
+    }
+    return naviStateIsMapOpen((const NavigationState *)navi->state);
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: current-slot access loads literal0x1218 and uses register-indexed addressing instead of retail sound+0x1000/offset0x218, with swapped root/slot registers. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
@@ -11,7 +10,7 @@ s32 FUN_001388dc(u32 item)
 {
     AsdSoundSystem *sound = &g_asdSound;
     s32 result = 0;
-    AsdSndSlotA *slot = sound->currentSlotA;
+    AsdSndSlotA *slot = g_asdSound.currentSlotA;
     if (slot != NULL && slot->hasHeap != 0) {
         result = FUN_00132da4(&sound->loaderState.loader, item, 0xffffffff);
         if (result != 0) {

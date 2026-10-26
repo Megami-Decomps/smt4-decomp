@@ -10,8 +10,8 @@ extern "C" void FUN_003d7244(BattleVectorTransition *state, s32 target, s32 mode
     state->alternateDestination.x = x;
     state->alternateDestination.y = y;
     state->alternateDestination.z = z;
-    state->alternateMode = mode;
     state->alternateTarget = target;
     state->alternateFrame = 0;
+    state->alternateMode = mode;
     state->flags |= 0x8000;
 }

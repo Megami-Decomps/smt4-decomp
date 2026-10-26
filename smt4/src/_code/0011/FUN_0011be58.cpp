@@ -1,4 +1,4 @@
-/* NON_MATCHING: callback-bank clearing is unrolled and uses a different global base than retail. */
+/* NON_MATCHING: retail reaches the banks through g_callbackFuncs (functions bank first, the others at -32/-64) and addresses g_callbackState+0x14 through its own literal. */
 #include "nn/Result.h"
 #include "shard/W9_W9Match7_SoundCallbacks.h"
 
@@ -11,6 +11,14 @@ s32 FUN_002c1398(u32 mode);
 u32 libc_strlen(const char *text);
 s32 asdModelForwardChecked(u32 *resource, const char *name, u32 length, u32 flags);
 void FUN_0012a294(void *queue);
+
+/* Clears one entry of each callback bank. */
+static __inline void soundCallbackBankClear(SoundCallbackBanks *banks, s32 index)
+{
+    banks->functions[index] = 0;
+    banks->arguments[index] = 0;
+    banks->owners[index] = 0;
+}
 
 /* Open the DSP resource once, clear callback banks, and initialize its pending queue. */
 s32 FUN_0011be58(void)
@@ -30,9 +38,7 @@ s32 FUN_0011be58(void)
     g_callbackState.resource = &g_callbackState.resourceWord;
     g_callbackState.resourceWord = g_callbackState.openedResource;
     for (s32 index = 0; index < 8; ++index) {
-        DAT_004c6464.functions[index] = 0;
-        DAT_004c6464.arguments[index] = 0;
-        DAT_004c6464.owners[index] = 0;
+        soundCallbackBankClear(&DAT_004c6464, index);
     }
     g_callbackState.active = 0;
     g_callbackState.count = 0;

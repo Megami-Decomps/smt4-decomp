@@ -40,7 +40,7 @@ extern "C" void facingUpdateAngles(FacingAngles *state, s32 reverse)
     }
     if (state->mode == 2) {
         u32 angle = FUN_0043bb48(state->direction.y - state->target.y, state->direction.x - state->target.x);
-        u32 degrees = (360u * static_cast<u16>(angle - 0x4000)) >> 16;
+        u32 degrees = (static_cast<u16>(angle - 0x4000) * 360u) >> 16;
         state->yaw = degrees;
         if (reverse) {
             state->yaw = -degrees;

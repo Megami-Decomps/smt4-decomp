@@ -21,7 +21,7 @@ struct BtlTarget {
 
 extern "C" {
 s32 btlShowListedActionMessage(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 other);
-void FUN_00227fac(void);
+u32 FUN_00227fac(u32 listedId);
 void frameRangeExtend(s32 *state, BtlUnit *unit, s32 kind, s32 slot, s32 a, s32 b);
 void FUN_0023c0d0(s32 *state, BtlUnit *unit, s32 kind, s32 amount);
 void actionCreateKindSeventeen(s32 a, BtlUnit *unit, s32 b);
@@ -39,13 +39,9 @@ s32 FUN_003d03f8(s32 *state, BtlUnit *unit, s32 amount, s32 slot, BtlUnitSkill *
 {
     s32 hit = 0;
     s32 extraEffect = -1;
-    s32 kind = skill->kind;
-    FUN_00227fac();
+    s32 kind = FUN_00227fac(skill->kind);
     u32 *view = context + 0x40;
-    s32 count = kind;
-    if (kind > 0)
-        count = amount;
-    if (count > 0) {
+    if (kind > 0 && amount > 0) {
         u8 *table = reinterpret_cast<u8 *>(unit) + skill->kind * 10;
         u32 limit = *reinterpret_cast<u16 *>(table + 0x9D4);
         if (static_cast<s32>(limit) <= amount) {

@@ -30,6 +30,17 @@ Every match must be one a programmer could have written for a reason.
   exception is `include/nn/svc.h`, which declares the CTR-SDK's system calls, thread-local storage
   and barriers with armcc's `__svc` and cp15 intrinsics as the SDK did; game code calls them
   through that header and nowhere else.
+- **`volatile` on shared state, only when all four hold:**
+  1. it is on the field or global declaration in the shared type, never a cast at one use;
+  2. the field is plausibly shared with another thread, an interrupt or hardware (polled state,
+     event or ready flags, ring cursors);
+  3. retail reloads it where no other source shape can (no intervening call or aliasing store
+     between the loads);
+  4. every user of the type still compiles, and every function that was `IDENTICAL` stays so.
+
+  Example: `MovieSync::state` (`include/shard/S2MovieSync.h`), polled by
+  `movieSyncDrainSourcePositions` while the playback thread changes it; retail reloads it before
+  every compare of a chain.
 - **Allowed, because the original did it:** real prototypes for callees (a value retail keeps live
   in `r1`/`r2` is usually an argument the decompiler dropped), signed/unsigned and width choices,
   `for`/`while`/`switch` shapes, early returns, pointer variables that a programmer would use to

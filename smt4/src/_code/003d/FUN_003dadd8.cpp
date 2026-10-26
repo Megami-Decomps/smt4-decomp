@@ -28,6 +28,15 @@ char *libc_strcpy(char *dest, const char *src);
 char *FUN_002522e0(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
 
+static __inline void formatEffectPath(char *path, char *formatted, s32 effectIndex)
+{
+    memClear(path, 128);
+    const char *effectName = DAT_00400804[effectIndex];
+    memClear(formatted, 128);
+    textFormatBuffer(formatted, DAT_004008c4, effectName);
+    libc_strcpy(path, formatted);
+}
+
 /* Resets the five battle effect slots and starts loading each effect file not already registered. */
 u32 FUN_003dadd8(BattleEffectOwner *owner)
 {
@@ -43,11 +52,7 @@ u32 FUN_003dadd8(BattleEffectOwner *owner)
             slot->data = NULL;
         }
         slot->flags = 0;
-        memClear(path, sizeof(path));
-        const char *effectName = DAT_00400804[i];
-        memClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_004008c4, effectName);
-        libc_strcpy(path, formatted);
+        formatEffectPath(path, formatted, i);
         libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 0);

@@ -20,8 +20,8 @@ void effectEditorCreateSelectedNameLabel()
     node->unk04 = 200;
     node->initialKind = 194;
     g_effectEditor.text.name->unk14 = 9;
+    s32 position = DAT_0059e9a8.indices.extraOffset + g_effectEditor.selection.index;
     effEditorSetTextValue(g_effectEditor.text.name, linkedFindItemByIndex(
-        (LinkedItems *)g_effectEditor.selection.list,
-        g_effectEditor.selection.index + DAT_0059e9a8.indices.extraOffset)->label.text);
+        (LinkedItems *)g_effectEditor.selection.list, position)->label.text);
 }
 }

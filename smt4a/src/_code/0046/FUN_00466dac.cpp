@@ -1,39 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00466dac` (_code @ 0x466dac, 0x50 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches except the saved-register numbering (retail keeps the first byte argument in r4, the owner in r6; armcc numbers them in order of first use). */
+#include "classes/ObjectCommandRequests.h"
 
-extern "C" {
-
-int listAppendNode(int, int);
-int objectCommandReserveWords(int, int);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-
-
-void FUN_00466dac(int param_1,unsigned char param_2,unsigned char param_3)
-
+// Queues a type-37 command for the cursor object carrying a flag and an option byte.
+extern "C" void FUN_00466dac(ObjectCursorOwner *owner, u8 flag, u8 option)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = objectCommandQueueGet();
-  temp_v1 = temp_v0;
-  objectCommandReserveWords(temp_v0,6);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 0x25;
-  *(int *)(temp_v1 + 0x10) = param_1 + 0x124;
-  *(unsigned char *)(temp_v1 + 0x14) = param_2;
-  *(unsigned char *)(temp_v1 + 0x15) = param_3;
-  listAppendNode(temp_v0,temp_v1);
-  return;
+    ObjectCommandQueue *queue = objectCommandQueueGet();
+    ObjectCommand *command = objectCommandBegin(queue, 6);
+    command->kind = 37;
+    command->owner = (u32)&owner->params;
+    command->payload.bytes.flag = flag;
+    command->payload.bytes.option = option;
+    listAppendNode(queue, command);
 }
-
-} /* extern "C" */

@@ -73,7 +73,7 @@ extern int FUN_002a4b28(unsigned int);
 extern int getUnlockedSlotCount(int);
 /* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: bitsAt60Clear. */
-extern unsigned int FUN_004d0cd4(void);
+extern unsigned int partyFindFirstUnusedEntry(void);
 /* Supplied declaration required: FUN_004d0d70. */
 extern int FUN_004da520(int, unsigned char *, unsigned char *);
 /* Supplied declaration required: recordMergeByteMasks. */
@@ -194,7 +194,7 @@ unsigned char FUN_001ff014(int param_1)
     partyFindSlotById(temp_v31);
     FUN_004d0d70();
   }
-  temp_v3 = FUN_004d0cd4();
+  temp_v3 = partyFindFirstUnusedEntry();
   temp_v1 = FUN_002a4b28((piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2);
   dispatchIfFound(temp_v3,(piVar1[param_1 * 2 + 0x4ef] & 0x1ffffU) >> 2,0);
   if (temp_v10 != 0) {

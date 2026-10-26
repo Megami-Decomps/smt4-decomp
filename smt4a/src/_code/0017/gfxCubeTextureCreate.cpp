@@ -1,4 +1,3 @@
-/* NON_MATCHING: the unk18[0] store is scheduled before the face loop setup instead of after it. */
 #include "gfx/CubeTexture.h"
 extern "C" {
 void sysMemClear(void*, u32);
@@ -24,9 +23,7 @@ GfxCubeTexture* gfxCubeTextureCreate(u32 parameter)
             texture->unk24[0] = 0.0f;
             texture->unk2C = 0;
             texture->unk14 = -1000;
-            texture->unk18[2] = 0.0f;
-            texture->unk18[1] = 0.0f;
-            texture->unk18[0] = 0.0f;
+            texture->unk18[0] = texture->unk18[1] = texture->unk18[2] = 0.0f;
             for (i = 0; i < 6; i++) {
                 texture->faces[i].parameter = parameter;
             }

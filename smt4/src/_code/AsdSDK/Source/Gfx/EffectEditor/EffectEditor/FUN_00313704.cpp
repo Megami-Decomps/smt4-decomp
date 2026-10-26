@@ -1,4 +1,4 @@
-/* NON_MATCHING: tail-call argument setup moves the resource-name pointer before reloading the label. */
+/* NON_MATCHING: tail-call argument setup: build moves the resource-name pointer (r1) before reloading the label (r0); retail reloads first. */
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
 void asdMemoryFreeLocked(void* memory);
@@ -11,12 +11,11 @@ void FUN_00313704()
         asdMemoryFreeLocked(g_effectEditor.label);
         g_effectEditor.label = NULL;
     }
-    const char *name = g_effectEditorResourceName;
+    char *name = g_effectEditorResourceName;
     EffMenuNode* label = effMenuNodeCreate(".EPL");
     g_effectEditor.label = label;
     label->unk04 = 100;
     label->initialKind = 0xb6;
-    label = g_effectEditor.label;
-    effEditorSetTextValue(label, name);
+    effEditorSetTextValue(g_effectEditor.label, name);
 }
 }

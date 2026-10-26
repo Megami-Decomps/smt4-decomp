@@ -1,4 +1,4 @@
-/* NON_MATCHING: category-array address formation and shared unlink epilogue placement differ; 67 built versus 65 retail rows. */
+/* NON_MATCHING: only register numbering differs (retail keeps the usage record in r0/r2 where the build uses r1). */
 #include "sys/AllocationTracking.h"
 
 extern "C" {
@@ -13,10 +13,12 @@ AllocationHeader *FUN_001246cc(void *payload)
     usage->bytes -= header->size;
     if ((header->tag & 0xFF) < 8) {
         u32 category = FUN_002b30fc(header);
-        DAT_00465120.usage->categoryBytes[category] -= header->size;
+        usage = DAT_00465120.usage;
+        usage->categoryBytes[category] -= header->size;
         category = FUN_002b30fc(header);
-        DAT_00465120.usage->categoryPayloadBytes[category] =
-            (DAT_00465120.usage->categoryPayloadBytes[category] -
+        usage = DAT_00465120.usage;
+        usage->categoryPayloadBytes[category] =
+            (usage->categoryPayloadBytes[category] -
              (header->size - header->alignment)) + sizeof(AllocationHeader);
     }
     AllocationLink *link = &header->link;

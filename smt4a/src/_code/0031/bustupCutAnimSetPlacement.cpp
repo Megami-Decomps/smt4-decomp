@@ -41,7 +41,7 @@ void asdTMTexTableReleaseNode(u32 table, s32 node);
 void FUN_001b2d54(AocSystemA* system, u32 table, s32 node);
 void aocSlotRelease(AocSlot* slot);
 s32 bustupCutAnimAssignSlot(u32 job, s32 slot);
-void FUN_0019d96c(BustupPlacementWork* work, s32 operation, s32 duration);
+void bustupSpriteStartTransition(BustupPlacementWork* work, s32 operation, s32 duration);
 u32 FUN_001ad1ac(Vec3f* position, s32 slot);
 
 void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
@@ -67,15 +67,15 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
     const s32 result = bustupCutAnimAssignSlot(job, slot);
     if (result != 0) {
         if (result == 1) {
-            FUN_0019d96c(work, 2, 0);
+            bustupSpriteStartTransition(work, 2, 0);
             work->state = 2;
             return;
         }
         if (result == 2) {
             if (snap != 0) {
-                FUN_0019d96c(work, 6, 0);
+                bustupSpriteStartTransition(work, 6, 0);
             } else {
-                FUN_0019d96c(work, 7, 0);
+                bustupSpriteStartTransition(work, 7, 0);
             }
             work->state = 2;
             work->previous = work->destination;
@@ -83,7 +83,7 @@ void bustupCutAnimSetPlacement(u32 job, s32 slot, s32 snap, s32 x, s32 y)
             return;
         }
         if (result == 3) {
-            FUN_0019d96c(work, 5, 0);
+            bustupSpriteStartTransition(work, 5, 0);
             BustupPlacementWork* active = (BustupPlacementWork*)jobGetWork(job);
             active->state = 1;
             active->startPosition = active->basePosition;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses mov r2, r0 where the compiled block uses ldrd r2, [r1]. */
+/* Erases a node from an intrusive list and returns the node that followed it (nw::ut::internal::LinkListImpl::erase). */
 #include "common.h"
 
 struct ListNode {
@@ -10,7 +10,7 @@ struct ListState {
     u32 count; // 0x00
 };
 
-extern "C" void FUN_001b6668(ListState* list, ListNode* node)
+extern "C" ListNode* FUN_001b6668(ListState* list, ListNode* node)
 {
     ListNode* next = node->next;
     ListNode* prev = node->prev;
@@ -20,4 +20,5 @@ extern "C" void FUN_001b6668(ListState* list, ListNode* node)
     list->count -= 1;
     node->next = NULL;
     node->prev = NULL;
+    return next;
 }

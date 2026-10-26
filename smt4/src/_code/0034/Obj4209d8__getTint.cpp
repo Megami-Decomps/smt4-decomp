@@ -1,33 +1,20 @@
-/* NON_MATCHING: Packed color modulation is reconstructed; duplicated model-table lookups and float channel conversion/multiplication scheduling differ. */
-#include "classes/Obj4209cc.h"
+/* NON_MATCHING: rewritten as the real Obj4209d8 member over its cell table; retail reloads the cell array pointer for the tint and the color separately and interleaves the four channel conversions (armcc here hoists the cell address and orders the conversions differently). */
+#include "classes/Obj4209d8.h"
 
-struct ModelColorEntry {
-    /* 0x000 */ u8 unk000[0x64];
-    /* 0x064 */ u32 color;
-    /* 0x068 */ u32 unk068;
-    /* 0x06C */ u32 modulation;
-    /* 0x070 */ u8 unk070[0xa4];
-};
-struct ModelColorTable {
-    /* 0x0000 */ u8 unk0000[0x1e98];
-    /* 0x1E98 */ ModelColorEntry *entries;
-};
 struct ModelColorDefaults {
     /* 0x00 */ u8 unk00[0x18];
     /* 0x18 */ u32 unmodulated;
 };
 extern "C" ModelColorDefaults DAT_00439ce0;
 
-/* Modulate each packed color channel unless this entry uses the default tint. */
-extern "C" u32 _ZNK9Obj4209d87getTintEj(Obj4209cc *owner, u32 index)
+/* Modulate each packed color channel of a cell's color by its tint unless the cell uses the default tint. */
+u32 Obj4209d8::getTint(u32 index) const
 {
-    const ModelColorTable *table = reinterpret_cast<const ModelColorTable *>(owner->unk04);
-    const ModelColorEntry *entry = &table->entries[index];
-    u32 tint = entry->modulation;
-    u32 color = entry->color;
+    u32 tint = owner->cells[index].modulation;
     if (tint == DAT_00439ce0.unmodulated) {
-        return color;
+        return owner->cells[index].color;
     }
+    u32 color = owner->cells[index].color;
     f32 alpha = static_cast<f32>(color >> 24);
     f32 blue = static_cast<f32>((color & 0xff0000) >> 16);
     f32 green = static_cast<f32>((color & 0xff00) >> 8);

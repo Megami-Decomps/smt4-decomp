@@ -1,4 +1,4 @@
-/* NON_MATCHING: independent default-state stores are reordered and process callback arguments use STR plus STM instead of one retail STM. */
+/* NON_MATCHING: default-state stores now match; the process callback arguments still use STR plus STM (callbacks loaded into r1/r2) instead of retail's single `stm sp, {r0, r1, r4}` with the callbacks loaded first (same tail in FUN_00252190 / FUN_00285e44). */
 #include "event/NpcTextureWork.h"
 #include "addon/aocMain.h"
 #include "code/Code002a.h"
@@ -37,9 +37,9 @@ void FUN_0031bc80(u32 npc, s32 position, u32 variant)
     work->scale.x = 1.0f;
     work->scale.y = 1.0f;
     work->scale.z = 0.0f;
-    work->npc.lastImage = -1;
-    work->npcId = npc;
     work->state = 65;
+    work->npcId = npc;
+    work->npc.lastImage = -1;
     work->npcVariant.index = variant;
     work->textureTable = 3;
     work->npc.source = dataTable25FindById(npc);

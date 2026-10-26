@@ -18,7 +18,7 @@ extern u8 g_dspsndState;
 
 typedef void (*SoundCallback)(void);
 void FUN_0016f3a8(void);
-void FUN_0016f7ec(void);
+void dspsndHandlePendingRequest(void);
 void FUN_0016f3e4(void);
 void FUN_001590c0(SoundCallback first, SoundCallback second, SoundCallback third);
 void FUN_001bd5f8(void);
@@ -33,7 +33,7 @@ s32 sndSystemShutdown(void)
         return 0;
     }
     DAT_005894e4.running = 0;
-    FUN_001590c0(FUN_0016f3e4, FUN_0016f7ec, FUN_0016f3a8);
+    FUN_001590c0(FUN_0016f3e4, dspsndHandlePendingRequest, FUN_0016f3a8);
     FUN_001bd5f8();
     FUN_0016f374();
     sndMasterFinalize(&g_nnSndMasterManager);

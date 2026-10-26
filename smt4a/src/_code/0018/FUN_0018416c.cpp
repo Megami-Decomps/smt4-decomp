@@ -1,10 +1,10 @@
-/* NON_MATCHING: save.sub@0x88 base is restored; ordered-row load scheduling, key narrowing and return tails differ. */
+/* NON_MATCHING: only the return tails differ: retail shares one `mov r0, #0; pop` at the end of the function (also reached by the rank and level tests), the build keeps a copy after the `mov r0, #1` return and branches back to it. */
 #include "shard/W4_W4Match6b_GameDataBlock.h"
 
 extern "C" {
 extern GameDataBlocksA g_gameDataBlocks;
 s32 gameFlagIsSet(u32);
-u16 FUN_0019e52c(u32 key);
+u16 FUN_0019e52c(u16 key);
 
 // Check whether the unit is in the unlocked portion of either saved availability list.
 u32 FUN_0018416c(u32 unitId)
@@ -57,7 +57,8 @@ u32 FUN_0018416c(u32 unitId)
                     case 8: key = variant == 0 ? 0xB3 : 0xBA; break;
                     case 7: key = 5; break;
                     }
-                    if (unitId == FUN_0019e52c(key))
+                    u32 unit = FUN_0019e52c(key);
+                    if (unitId == unit)
                         return level - 1 <= 2;
                 }
             }

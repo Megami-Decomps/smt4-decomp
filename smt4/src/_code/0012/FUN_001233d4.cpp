@@ -10,9 +10,9 @@ extern CommandBufferHandleAllocator g_gfxAllocateCallback;
 void FUN_001233d4(s32 count, u32 *handles)
 {
     for (s32 index = 0; index < count; ++index) {
-        CommandBufferHandleNode *node = NULL;
-        if (g_gfxAllocateCallback.allocate)
-            node = (CommandBufferHandleNode *)g_gfxAllocateCallback.allocate(0x10000, 0x100, 0, sizeof(*node));
+        CommandBufferHandleNode *node = g_gfxAllocateCallback.allocate
+            ? (CommandBufferHandleNode *)g_gfxAllocateCallback.allocate(0x10000, 0x100, 0, sizeof(*node))
+            : NULL;
         memClear(node, sizeof(*node));
         node->buffer.unk2c = 0x300;
         u32 id = g_gfxAllocateCallback.nextId;

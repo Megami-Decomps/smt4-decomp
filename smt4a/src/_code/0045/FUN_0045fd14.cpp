@@ -1,48 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045fd14` (_code @ 0x45fd14, 0x58 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: written from the retail flow; retail forms the block address (command + 0x14) early in r8 and the parameter-holder address after the type store, armcc schedules both later. */
+#include "classes/ObjectCommandRequests.h"
 
-extern "C" {
+/* Four payload words copied into a command as a block. */
+struct ObjectCommandBlock {
+    u32 words[4];
+};
 
-int listAppendNode(int, int);
-int objectCommandReserveWords(int, int);
+/* A type-41 command: the owner's parameter holder, a four-word block and one more word. */
+struct ObjectCommandBlockNode {
+    /* 0x00 */ u32 next;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 token;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ ObjectCommandBlock block;
+    /* 0x24 */ u32 value;
+};
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-} param_3_stack;
-
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-
-
-void FUN_0045fd14(int param_1,unsigned int param_2,unsigned int *param_3)
-
+// Queues a type-41 command for the owner's parameter holder.
+extern "C" void FUN_0045fd14(ObjectCommandOwner *owner, u32 value, const ObjectCommandBlock *block)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  
-  temp_v0 = objectCommandQueueGet();
-  temp_v1 = temp_v0;
-  objectCommandReserveWords(temp_v0,10);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 0x29;
-  *(int *)(temp_v1 + 0x10) = param_1 + 0x118;
-  *(unsigned int *)(temp_v1 + 0x24) = param_2;
-  temp_v2 = param_3[1];
-  temp_v3 = param_3[2];
-  temp_v4 = param_3[3];
-  *(unsigned int *)(temp_v1 + 0x14) = *param_3;
-  *(unsigned int *)(temp_v1 + 0x18) = temp_v2;
-  *(unsigned int *)(temp_v1 + 0x1c) = temp_v3;
-  *(unsigned int *)(temp_v1 + 0x20) = temp_v4;
-  listAppendNode(temp_v0,temp_v1);
-  return;
+    ObjectCommandQueue *queue = objectCommandQueueGet();
+    ObjectCommandBlockNode *command = (ObjectCommandBlockNode *)objectCommandBegin(queue, 10);
+    ObjectCommandBlock *payload = &command->block;
+    command->kind = 41;
+    command->owner = (u32)&owner->params;
+    command->value = value;
+    *payload = *block;
+    listAppendNode(queue, (ObjectCommand *)command);
 }
-
-} /* extern "C" */

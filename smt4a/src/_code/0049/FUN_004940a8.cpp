@@ -4,7 +4,7 @@
 extern "C" {
 
 int rectRecRead(...);
-int FUN_004d091c(...);
+int touchRegionOwnerAdd(...);
 int touchRegisterFirstRegion(...);
 int touchRegisterSecondRegion(...);
 
@@ -17,7 +17,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: rectRecRead. */
-/* Supplied declaration required: FUN_004d091c. */
+/* Supplied declaration required: touchRegionOwnerAdd. */
 /* Supplied declaration required: touchRegisterFirstRegion. */
 /* Supplied declaration required: touchRegisterSecondRegion. */
 
@@ -40,7 +40,7 @@ void FUN_004940a8(unsigned int param_1,int param_2)
     rectRecRead(0x20,0xfb,&temp_v2,&uStack_20,&temp_v1,temp_v3);
     touchRegisterSecondRegion(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
     rectRecRead(0x20,0xfc,&temp_v2,&uStack_20,&temp_v1,temp_v3);
-    FUN_004d091c(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
+    touchRegionOwnerAdd(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
     return;
   }
   rectRecRead(0x20,0xfd,&temp_v2,&uStack_20,&temp_v1,temp_v3);
@@ -48,7 +48,7 @@ void FUN_004940a8(unsigned int param_1,int param_2)
   rectRecRead(0x20,0xfe,&temp_v2,&uStack_20,&temp_v1,temp_v3);
   touchRegisterSecondRegion(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
   rectRecRead(0x20,0xff,&temp_v2,&uStack_20,&temp_v1,temp_v3);
-  FUN_004d091c(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
+  touchRegionOwnerAdd(param_1,temp_v2,uStack_20,temp_v1,temp_v3[0]);
   return;
 }
 

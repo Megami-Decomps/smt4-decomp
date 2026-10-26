@@ -60,7 +60,7 @@ s32 gameFlagIsSet(u32 id);
 void sysMemClear(void *buffer, s32 size);
 BtlAiCommandInfo FUN_003e8bb0(BtlMainStateA *battle, u32 commandId);
 void FUN_004e7c04(BattleUnitRecordState *units, s32 a);
-void FUN_004e5b5c(BattleUnitRecordState *units);
+void btlActionMarkRandomTargetableUnit(BattleUnitRecordState *units);
 void FUN_004e8454(BattleUnitRecordState *units);
 void btlUnitMarkTargetCandidates(BattleUnitRecordState *units, s32 a, s32 set);
 void btlUnitSetParam(BattleUnitRecordState *units, s32 param, s32 a, s32 b);
@@ -101,7 +101,7 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
                 FUN_004e7c04(units, 0);
                 switch (info.targetMode) {
                 case 0:
-                    FUN_004e5b5c(units);
+                    btlActionMarkRandomTargetableUnit(units);
                     break;
                 case 1:
                     btlUnitMarkTargetCandidates(units, 0, 1);
@@ -125,14 +125,14 @@ u32 FUN_004ec950(BattleUnitRecordState *units, BtlAiCommand *cmd)
                 sysMemClear(cmd->scratch, 0x85);
             }
         }
-        if ((g_btlAction.menuMask & units->battle->stateFlags64.bits) != 0) {
+        if ((units->battle->stateFlags64.bits & g_btlAction.menuMask) != 0) {
             sysMemClear(cmd->scratch, 0x85);
             FUN_004e8454(units);
             cmd->record->state = 2;
             cmd->record->param = FUN_003f0bd8(units->battle, 0);
             btlUnitSetParam(units, 1, 0, 1);
         }
-        if ((g_btlAction.targetMask & units->battle->stateFlags64.bits) != 0) {
+        if ((units->battle->stateFlags64.bits & g_btlAction.targetMask) != 0) {
             sysMemClear(cmd->scratch, 0x85);
             FUN_004e8454(units);
             cmd->record->state = 2;

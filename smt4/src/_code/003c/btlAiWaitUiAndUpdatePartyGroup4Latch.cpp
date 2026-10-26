@@ -54,9 +54,10 @@ u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BattleActionUnit* action)
     }
 
     PartyPhaseState* state = context->state;
+    BtlMainState* main = &state->main;
     s32 count = 0;
     for (s32 i = 0; i < 4; ++i) {
-        const BtlEntry& entry = state->main.entries[i];
+        const BtlEntry& entry = main->entries[i];
         if ((entry.flags & BTL_ENTRY_FLAG_ACTIVE) &&
             !(entry.flags & BTL_ENTRY_FLAG_BLOCKED) && (entry.groupMask & 0x10)) {
             ++count;
@@ -64,13 +65,11 @@ u32 btlAiWaitUiAndUpdatePartyGroup4Latch(void* work, BattleActionUnit* action)
     }
     if (count != 4) {
         state->script.battleFlags &= ~0x10000000u;
-    } else {
-        if (!(state->script.battleFlags & 0x10000000)) {
-            state->script.battleFlags |= 0x10000000;
-            static_cast<ScriptActorRecord*>(
-                g_btlAction.data)[context->state->phase.scriptUnit].state = 0x1F;
-            return 1;
-        }
+    } else if (!(state->script.battleFlags & 0x10000000)) {
+        state->script.battleFlags |= 0x10000000;
+        static_cast<ScriptActorRecord*>(
+            g_btlAction.data)[context->state->phase.scriptUnit].state = 0x1F;
+        return 1;
     }
     FUN_00229754(context, action);
     return 1;

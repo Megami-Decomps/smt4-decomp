@@ -1,63 +1,44 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045fc4c` (_code @ 0x45fc4c, 0xc4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches except the node store scheduling and the VFP numbering of the fade interpolation (retail converts the elapsed count into s2, the duration into s1). */
+#include "classes/ObjectCommandRequests.h"
 
-extern "C" {
+/* A type-0x2d command (7 words): the owner's parameter holder, a parameter bit and the fade's value. */
+struct ObjectFadeNode {
+    /* 0x00 */ u32 next;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 token;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ u32 bit;
+    /* 0x18 */ f32 value;
+};
 
-int listAppendNode(int);
-int objectCommandReserveWords(int, int);
-int FUN_0045f478(void);
-int VectorSignedToFloat(int, int);
+extern "C" void FUN_0045f478(ObjectCommandOwner *owner);
 
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-/* Supplied declaration required: FUN_0045f478. */
-
-
-void FUN_0045fc4c(int param_1)
-
+// Sends the changed parameters: after updating them, queues a type-0x2d command for each of the four
+// fades whose bit is set in the changed mask, carrying the fade's current value.
+extern "C" void FUN_0045fc4c(ObjectCommandOwner *owner)
 {
-/* irregular: irregular input(s): in_fpscr; 4 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int in_fpscr;
-  float temp_v5;
-  float temp_v6;
-  
-  FUN_0045f478();
-  temp_v0 = objectCommandQueueGet();
-  temp_v3 = 0;
-  temp_v4 = (unsigned int)*(unsigned short *)(param_1 + 0x328c);
-  do {
-    if ((temp_v4 & 1) != 0) {
-      temp_v1 = temp_v0;
-      objectCommandReserveWords(temp_v0,7);
-      temp_v2 = param_1 + temp_v3 * 0x10;
-      *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-      *(unsigned char *)(temp_v1 + 4) = 0x2d;
-      *(int *)(temp_v1 + 0x10) = param_1 + 0x118;
-      *(int *)(temp_v1 + 0x14) = 1 << (temp_v3 & 0xff);
-      if (*(int *)(temp_v2 + 0x3054) >= *(int *)(temp_v2 + 0x3050)) {
-        temp_v5 = *(float *)(temp_v2 + 0x304c);
-      }
-      else {
-        temp_v6 = (float)VectorSignedToFloat(*(int *)(temp_v2 + 0x3054),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v5 = (float)VectorSignedToFloat(*(int *)(temp_v2 + 0x3050),(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v5 = ((*(float *)(temp_v2 + 0x304c) - *(float *)(temp_v2 + 0x3048)) * temp_v6) / temp_v5 +
-                *(float *)(temp_v2 + 0x3048);
-      }
-      *(float *)(temp_v1 + 0x18) = temp_v5;
-      listAppendNode(temp_v0);
+    FUN_0045f478(owner);
+    ObjectCommandQueue *queue = objectCommandQueueGet();
+    u32 mask = owner->changedMask;
+    for (u32 i = 0; i < 4; i++) {
+        if ((mask & 1) != 0) {
+            ObjectFadeNode *command = (ObjectFadeNode *)objectCommandBegin(queue, 7);
+            command->kind = 0x2d;
+            command->owner = (u32)&owner->params;
+            command->bit = 1 << i;
+            ObjectFade *fade = &owner->fades[i];
+            s32 elapsed = fade->elapsed;
+            s32 duration = fade->duration;
+            f32 value;
+            if (elapsed >= duration) {
+                value = fade->target;
+            } else {
+                value = (fade->target - fade->start) * (f32)elapsed / (f32)duration + fade->start;
+            }
+            command->value = value;
+            listAppendNode(queue, (ObjectCommand *)command);
+        }
+        mask >>= 1;
     }
-    temp_v3 = temp_v3 + 1;
-    temp_v4 = temp_v4 >> 1;
-  } while (temp_v3 < 4);
-  return;
 }
-
-} /* extern "C" */

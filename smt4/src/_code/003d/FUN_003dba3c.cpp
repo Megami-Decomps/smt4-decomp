@@ -29,6 +29,15 @@ char *libc_strcpy(char *dest, const char *src);
 char *FUN_002522e0(const char *string, s32 c);
 s32 keyedRecordFindByName(const char *name);
 
+static __inline void formatEffectPath(char *path, char *formatted, s32 effectIndex)
+{
+    memClear(path, 0x80);
+    const char *effectName = DAT_004007c4[effectIndex];
+    memClear(formatted, 0x80);
+    textFormatBuffer(formatted, DAT_004008c4, effectName);
+    libc_strcpy(path, formatted);
+}
+
 /* Resets both flash effect slots and starts loading each effect file that no record provides yet. */
 u32 FUN_003dba3c(FlashEffects *effects)
 {
@@ -46,10 +55,7 @@ u32 FUN_003dba3c(FlashEffects *effects)
             slot->data = NULL;
         }
         slot->flags = 0;
-        memClear(path, sizeof(path));
-        memClear(formatted, sizeof(formatted));
-        textFormatBuffer(formatted, DAT_004008c4, DAT_004007c4[i]);
-        libc_strcpy(path, formatted);
+        formatEffectPath(path, formatted, i);
         libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
             asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 0);

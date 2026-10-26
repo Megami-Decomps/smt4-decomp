@@ -1,4 +1,3 @@
-/* NON_MATCHING: indexed access and signed active flag reproduce retail's 0x5700-based member addressing; only timer-reset scratch registers remain. */
 #include "common.h"
 #include <stddef.h>
 
@@ -70,7 +69,7 @@ extern "C" void categoryPreviewCycleTint(CategoryPreviewWork *work)
                 continue;
             s32 categoryCount = 0;
             for (s32 category = 1; category < 11; ++category) {
-                if (!(work->entries[index].categories & (1u << (u8)category)))
+                if (!(work->entries[index].categories & (1u << (s8)category)))
                     continue;
                 if (work->categoryIndex == categoryCount) {
                     FUN_00317e58(categoryGetColor((s16)category));

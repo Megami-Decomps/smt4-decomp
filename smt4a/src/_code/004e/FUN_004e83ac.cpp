@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads unk158 as entries + index*0x408 + 0x158 (not off the entry pointer) and schedules the index copy after the r1 argument move; register allocation differs. */
+/* NON_MATCHING: the entry flags load as an ldr pair where retail uses ldrd, and the index copy is scheduled before the r1 argument move; the unk158 address now matches retail (entries + (0x158 + index * 0x408)). */
 #include "battle/btlAction.h"
 
 /* The 0x408-byte combatant entry as the action target check sees it. */
@@ -46,10 +46,9 @@ u32 FUN_004e83ac(ActionTargetOwner *owner, ActionTargetSlots *table, s32 index)
         index = target->selectionIndex;
     }
     if (table->slots[index].taken == 0) {
-        ActionTargetEntry *entry = &owner->battle->entries[index];
-        u64 flags = entry->flags;
+        u64 flags = owner->battle->entries[index].flags;
         if ((flags & g_btlAction.targetableMask) != 0 && (flags & g_btlAction.untargetableMask) == 0 &&
-            entry->unk158 <= 0) {
+            *reinterpret_cast<s32 *>(reinterpret_cast<u8 *>(owner->battle->entries) + (0x158 + index * 0x408)) <= 0) {
             return 1;
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: optional-origin/deferred-load block placement and callback argument stores differ. */
+/* NON_MATCHING: block layout now matches (deferred-load arm out of line); only the process callback arguments differ (build: str + stm, callbacks loaded r1 then r0; retail: callbacks loaded r0/r1 first and one `stm sp, {r0, r1, r4}`). */
 #include "event/NpcTextureWork.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -66,12 +66,12 @@ void FUN_0032743c(s32 npcId)
     work->scale.y = 0.0f;
     work->display.screenRegion = 5;
     work->y = (s32)work->npc.sizes[1][1];
-    if (FUN_002c1d5c()) {
-        work->deferred = 1;
-    } else {
+    if (!FUN_002c1d5c()) {
         work->deferred = 0;
         FUN_002c58c8(work->textureTable, work->textureNode);
         FUN_002c58c8(0x32, 0);
+    } else {
+        work->deferred = 1;
     }
     work->speed = 0.3f;
     asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00403570), 2, 0, 0, FUN_001dfc64, FUN_002db92c, reinterpret_cast<u32>(work));

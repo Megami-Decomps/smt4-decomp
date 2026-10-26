@@ -386,7 +386,7 @@ extern int FUN_0040af60(int);
 /* Supplied declaration required: dispatchIfFound. */
 /* Supplied declaration required: bitsAt60Test. */
 /* Supplied declaration required: bitsAt60Clear. */
-extern unsigned int FUN_004d0cd4(void);
+extern unsigned int partyFindFirstUnusedEntry(void);
 /* Supplied declaration required: FUN_004d0d70. */
 /* Supplied declaration required: FUN_004d0eec. */
 /* Supplied declaration required: unitRecordMergeInheritedFlags. */
@@ -2983,7 +2983,7 @@ LAB_001f9868:
         }
         temp_v4 = temp_v4 + 1;
       } while (temp_v4 < 0xc);
-      temp_v15 = FUN_004d0cd4();
+      temp_v15 = partyFindFirstUnusedEntry();
       temp_v4 = FUN_002a4b28(*(unsigned short *)((int)piVar19 + 0x66fe));
       dispatchIfFound(temp_v15,*(unsigned short *)((int)piVar19 + 0x66fe),0);
       temp_v5 = slotRecordFindById(*(unsigned short *)((int)piVar19 + 0x66fe));

@@ -9,11 +9,11 @@ struct TransitionJobView {
 
 extern "C" {
 u32 scrGetCommandFrame(void);
-void FUN_002a880c(JobBlendWork* work, u32 mode, s32 frames);
+void bustupSpriteStartTransition(JobBlendWork* work, u32 mode, s32 frames);
 
 static inline void startJobBlend(s32 job, u32 mode, s32 frames)
 {
-    FUN_002a880c((JobBlendWork *)jobGetWork(job), mode, frames);
+    bustupSpriteStartTransition((JobBlendWork *)jobGetWork(job), mode, frames);
 }
 
 u32 scrCommStartJobTransitionAndWait(void)

@@ -21,8 +21,8 @@ typedef struct LevelTableSet {
  * group's first level), or 0 when there is none. */
 u16 FUN_004dc154(LevelTableSet *set, s32 group, u32 level)
 {
-    s16 bestDiff = 999;
     u16 bestId = 0;
+    s16 bestDiff = 999;
     s32 i;
 
     if (set->counts[group] != 0) {

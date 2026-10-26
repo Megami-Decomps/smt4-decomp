@@ -10,7 +10,7 @@ void FUN_001b2d54(AocSystemA *system, u32 node, s32 entry);
 bool aocRunByName(AocSystemA *system, u32 node, u32 entry, s32 checked);
 void *FUN_001a6568(AocSystemA *system, u32 node, s32 entry, u32 size);
 bool FUN_00162ea4();
-void FUN_0019d96c(TextureSwap *work, s32 state, s32 arg);
+void bustupSpriteStartTransition(TextureSwap *work, s32 state, s32 arg);
 
 void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
 {
@@ -50,9 +50,9 @@ void uiSpriteReplaceTextureEntry(TextureSwap *work, s32 entry, s32 transition)
                 }
                 if (work->previousTexture != NULL) {
                     if (transition < 0) {
-                        FUN_0019d96c(work, 3, 0);
+                        bustupSpriteStartTransition(work, 3, 0);
                     } else {
-                        FUN_0019d96c(work, 4, 0);
+                        bustupSpriteStartTransition(work, 4, 0);
                     }
                 }
             }

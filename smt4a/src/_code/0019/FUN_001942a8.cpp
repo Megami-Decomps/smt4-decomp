@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads each (word count, data) pair with two separate ldr (count first); the build merges the pair into one ldm. Call shape (bl/pop) now matches. */
+/* NON_MATCHING: with an inline helper (evaluation left to right) the prefix and block loads match retail (separate ldr, count first); the last append then becomes a tail call (`b FUN_001a063c`) where retail ends with `bl; pop {r4, r5, r6, pc}`, and the block pair loads as ldrd. */
 #include "common.h"
 
 struct CommandWords {
@@ -21,7 +21,7 @@ extern "C" {
 void FUN_001a063c(u32* destination, const u32* words, u32 bytes);
 }
 
-static void appendWords(u32* destination, u32 wordCount, const u32* data)
+static __inline void appendWords(u32* destination, u32 wordCount, const u32* data)
 {
     FUN_001a063c(destination, data, wordCount * sizeof(u32));
 }

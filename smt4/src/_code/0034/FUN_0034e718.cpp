@@ -1,40 +1,6 @@
-/* NON_MATCHING: armcc removes the initial running-byte reload and uses different queue/stream registers and loop scheduling from retail. */
-#include "shard/W6_W6Match7_WaveBuffer.h"
+/* NON_MATCHING: with the worker's shared cursors volatile (see the struct fields) the reloads, ldrd/strd counters and loop tests match retail; remaining: constant-register numbering (retail sl=4, r9=16 loaded lazily), the submitted-sample strd address form and the wave-buffer store scheduling. */
+#include "sound/AudioStreamWorker.h"
 #include <stddef.h>
-
-struct AudioStreamSlot {
-    u32 voice; // 0x00
-    WaveBuffer *buffers; // 0x04
-    u8 unk08[0x30];
-    u32 capacity; // 0x38
-    u32 unk3c;
-    s32 channels; // 0x40
-    u32 writeIndex; // 0x44
-    u32 readIndex; // 0x48
-    u32 queued; // 0x4c
-    u32 pending; // 0x50
-    u32 unk54;
-    u64 submittedSamples; // 0x58
-    s64 consumedSamples; // 0x60
-    u8 unk68[8];
-};
-struct AudioStreamWorker {
-    u8 running; // 0x00
-    u8 unk01[7];
-    AudioStreamSlot *streams; // 0x08
-    u8 unk0c[8];
-    u32 streamCount; // 0x14
-    u32 written; // 0x18
-    u32 read; // 0x1c
-};
-struct AudioStreamRequest {
-    AudioStreamSlot *stream;
-    u8 *data;
-    u32 bytes;
-};
-typedef char CheckStreamSlotSize[sizeof(AudioStreamSlot) == 0x70 ? 1 : -1];
-typedef char CheckWaveBufferSize[sizeof(WaveBuffer) == 0x18 ? 1 : -1];
-typedef char CheckWaveBufferStatus[offsetof(WaveBuffer, playback.status) == 0x11 ? 1 : -1];
 
 extern "C" {
 extern AudioStreamWorker DAT_0044d0f8;
@@ -69,7 +35,7 @@ extern "C" void FUN_0034e718()
                     stream->readIndex = 0;
             }
         }
-        while (DAT_0044d0f8.read < DAT_0044d0f8.written) {
+        while (DAT_0044d0f8.written > DAT_0044d0f8.read) {
             AudioStreamSlot *stream = DAT_004c4104[DAT_0044d0f8.read & 63].stream;
             if (stream) {
                 if (stream->queued >= stream->capacity)
@@ -79,7 +45,7 @@ extern "C" void FUN_0034e718()
                 nn_snd_CTR_InitializeWaveBuffer(&stream->buffers[stream->writeIndex]);
                 stream->buffers[stream->writeIndex].data = data;
                 u32 samples = FUN_00360060(bytes, 1, stream->channels);
-                stream->submittedSamples += samples;
+                stream->submittedSamples = stream->submittedSamples + samples;
                 stream->buffers[stream->writeIndex].sampleCount = samples;
                 stream->buffers[stream->writeIndex].looping = 0;
                 FUN_001565e4(stream->voice, &stream->buffers[stream->writeIndex]);

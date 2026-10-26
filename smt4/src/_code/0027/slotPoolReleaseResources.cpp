@@ -15,7 +15,7 @@ typedef struct SlotPool {
 
 extern SlotPool *g_deferredMapModels;
 
-extern void FUN_00192420(void);
+extern void mapDeferredModelsReset(void);
 extern void asdMdlManagerDestroy(void *resource);
 extern void FUN_002e0094(void);
 
@@ -30,7 +30,7 @@ void slotPoolReleaseResources(void)
         }
     }
     FUN_002e0094();
-    FUN_00192420();
+    mapDeferredModelsReset();
 }
 
 }

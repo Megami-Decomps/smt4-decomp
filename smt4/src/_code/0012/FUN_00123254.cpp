@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail predicates the next-handle store (cmp; strcc) where this builds a conditional min plus unconditional store; two saved registers are swapped. */
+/* NON_MATCHING: the next-handle store is predicated but compares the other way (retail cmp r0,r1; strcc, built cmp r1,r0; strhi) and two saved registers (handles r9/context r8) are swapped. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gfx/HandleRegistry.h"
 
@@ -40,7 +40,7 @@ void FUN_00123254(s32 count, const u32 *handles)
                 }
                 handle = handles[index];
                 if (handle < g_gfxAllocateCallback.nextBufferId) {
-                    g_gfxAllocateCallback.nextBufferId = handle;
+                    g_gfxAllocateCallback.nextBufferId = handles[index];
                 }
                 if (previous == NULL) {
                     BufferNode *head = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);

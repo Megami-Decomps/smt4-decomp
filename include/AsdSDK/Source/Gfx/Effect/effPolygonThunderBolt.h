@@ -5,6 +5,7 @@
 
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
+#include "gfx/PackedColorBytes.h"
 
 /* Parameter block of a bolt-strip thunder effect. */
 typedef struct ThunderBoltParams {
@@ -25,16 +26,38 @@ typedef char ThunderBoltParamsLayoutCheck[
 
 /* The three vertex colours of one strip step: 0x14 bytes, the last two repeat the first two. */
 typedef struct ThunderBoltVertex {
-    /* 0x00 */ u32 colorC;
-    /* 0x04 */ u32 colorB;
-    /* 0x08 */ u32 colorA;
-    /* 0x0C */ u32 repeatB;
-    /* 0x10 */ u32 repeatC;
+    /* 0x00 */ PackedColorBytes colorA;
+    /* 0x04 */ PackedColorBytes colorB;
+    /* 0x08 */ PackedColorBytes colorC;
+    /* 0x0C */ PackedColorBytes repeatB;
+    /* 0x10 */ PackedColorBytes repeatA;
 } ThunderBoltVertex;
+
+/* The three parameter colours split into their rgb and alpha parts, computed once per effect. */
+typedef struct ThunderBoltColors {
+    u32 rgbA;
+    u32 rgbB;
+    u32 rgbC;
+    u32 alphaA;
+    u32 alphaB;
+    u32 alphaC;
+} ThunderBoltColors;
+
+static inline ThunderBoltColors thunderBoltSplitColors(const ThunderBoltParams *params)
+{
+    ThunderBoltColors colors;
+    colors.rgbA = params->colorA & 0xFFFFFF;
+    colors.rgbB = params->colorB & 0xFFFFFF;
+    colors.rgbC = params->colorC & 0xFFFFFF;
+    colors.alphaA = params->colorA >> 24;
+    colors.alphaB = params->colorB >> 24;
+    colors.alphaC = params->colorC >> 24;
+    return colors;
+}
 
 /* Colours every vertex of a bolt strip: the alpha of each colour is scaled by a ramp that rises
  * over the first `rampIn` steps, holds, and falls from step `rampOut` to the end. */
-static inline void thunderBoltFillColors(PolyGeom *geom, const ThunderBoltParams *params, s32 rampIn, s32 rampOut)
+static inline void thunderBoltFillColors(PolyGeom *geom, const ThunderBoltColors *colors, s32 rampIn, s32 rampOut)
 {
     u32 steps = geom->size / 5;
     ThunderBoltVertex *vertex = (ThunderBoltVertex *)geom->buf->colors;
@@ -46,14 +69,14 @@ static inline void thunderBoltFillColors(PolyGeom *geom, const ThunderBoltParams
             ramp = 1.0f;
         else
             ramp = (f32)(steps - i) / (f32)(steps - rampOut);
-        u32 alphaC = (u32)((f32)(params->colorC >> 24) * ramp);
-        u32 alphaB = (u32)((f32)(params->colorB >> 24) * ramp);
-        u32 alphaA = (u32)((f32)(params->colorA >> 24) * ramp);
-        vertex->colorC = (params->colorC & 0xFFFFFF) | (alphaC << 24);
-        vertex->colorB = (params->colorB & 0xFFFFFF) | (alphaB << 24);
-        vertex->colorA = (params->colorA & 0xFFFFFF) | (alphaA << 24);
+        u32 alphaA = (u32)((f32)colors->alphaA * ramp);
+        u32 alphaB = (u32)((f32)colors->alphaB * ramp);
+        u32 alphaC = (u32)((f32)colors->alphaC * ramp);
+        packedColorBytesSet(&vertex->colorA, colors->rgbA | (alphaA << 24));
+        packedColorBytesSet(&vertex->colorB, colors->rgbB | (alphaB << 24));
+        packedColorBytesSet(&vertex->colorC, colors->rgbC | (alphaC << 24));
         vertex->repeatB = vertex->colorB;
-        vertex->repeatC = vertex->colorC;
+        vertex->repeatA = vertex->colorA;
         vertex++;
     }
 }

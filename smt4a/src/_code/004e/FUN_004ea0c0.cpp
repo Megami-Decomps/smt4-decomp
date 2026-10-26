@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the allocation of the two global addresses differs (retail g_btlAction r6/g_btlEvent r7, ours swapped) and the final reach-mask load pairing (retail ldm/ldm after add #56). */
+/* NON_MATCHING: only the operand order of the 64-bit excluded-mask test and the final reach-mask load pairing (retail ldm/ldm after add #56) differ; global-address registers now match. */
 #include "battle/btlEvent.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -32,7 +32,7 @@ u32 FUN_004ea0c0(BattleEventOwnerRef *owner, const BattleEventCandidate *candida
     if (!(candidate->flags & 0x10000)) {
         BtlCombatantEntryA *entry = candidate->entry;
         if (!(entry->flags & g_btlAction.targetableMask) ||
-            (entry->flags & g_btlAction.interaction.excludedMask))
+            (g_btlAction.interaction.excludedMask & entry->flags))
             return 0;
     } else {
         if (owner->state->available <= 0)

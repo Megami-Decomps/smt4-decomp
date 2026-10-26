@@ -12,8 +12,9 @@ struct Obj55b680Res {
 /* Releases a resource a scene object did not take over: its data block, then the record. */
 static __inline void Obj55b680ReleaseRes(AsdAllocatorObject *allocator, Obj55b680Res *res)
 {
+    u8 *base = (u8 *)&res->dataOffset;
     s32 offset = res->dataOffset;
-    void *data = offset != 0 ? (void *)((u8 *)&res->dataOffset + offset) : NULL;
+    u8 *data = offset != 0 ? base + offset : NULL;
     if (data != NULL) {
         allocator->release(data);
     }

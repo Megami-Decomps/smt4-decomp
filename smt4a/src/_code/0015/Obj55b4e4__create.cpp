@@ -1,4 +1,4 @@
-/* NON_MATCHING: the object pointer is now a conditional-new expression (72->~40 diff lines); retail also builds the release of an unadopted resource with predicated adds/mov and shares one zero register, ours branches and reorders the relative-pointer add (inline Obj55b680ReleaseRes in a shared header). */
+/* NON_MATCHING: register allocation only: retail copies the allocator word of the handle at the constructor call (a copy of the argument register r1) and numbers the owner/allocator r5/r6; the zero register is shared as in retail. */
 #include <new>
 #include "classes/Obj55b4e4.h"
 

@@ -90,7 +90,7 @@ void FUN_004fd508(s32 arg, BtlAiAction *action, u32 kind, u32 uiIndex, s32 flag)
 void FUN_004e7168(BtlUnitHandle *handle, BtlAiAction *action)
 {
     BtlUnitRecord *unit = FUN_003f0e20(handle->data, handle->data->actor);
-    if (unit != NULL && (handle->data->flags & g_btlAction.mask0f8) == 0) {
+    if (unit != NULL && (g_btlAction.mask0f8 & handle->data->flags) == 0) {
         if (unit->priority > handle->data->highestPriority) {
             handle->data->highestPriority = unit->priority;
         }

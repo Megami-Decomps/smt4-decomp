@@ -6,9 +6,9 @@ extern "C" {
 
 int FUN_00150c4c(unsigned int, unsigned int, int, int, int, int, int);
 int FUN_002b4ee4(...);
-int FUN_003795b0(...);
+int soundObjectPostByte09(...);
 int FUN_0037a05c(int, int, int, int, unsigned int, int, unsigned int, unsigned int);
-int FUN_0037a0e4(int, unsigned int, unsigned int, unsigned int);
+int soundVoicePostRequestBlock(int, unsigned int, unsigned int, unsigned int);
 int VectorSignedToFloat(unsigned int, int);
 int nw_snd_internal_BasicSound_SetInitialVolume(int);
 
@@ -23,9 +23,9 @@ typedef struct {
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00150c4c. */
 /* Supplied declaration required: FUN_002b4ee4. */
-/* Supplied declaration required: FUN_003795b0. */
+/* Supplied declaration required: soundObjectPostByte09. */
 /* Supplied declaration required: FUN_0037a05c. */
-/* Supplied declaration required: FUN_0037a0e4. */
+/* Supplied declaration required: soundVoicePostRequestBlock. */
 /* Supplied declaration required: nw_snd_internal_BasicSound_SetInitialVolume. */
 
 
@@ -80,10 +80,10 @@ FUN_003784a4(int param_1,int param_2,unsigned int *param_3,unsigned short *param
     temp_v3 = *(unsigned int *)(param_1 + 4);
     FUN_00150c4c(temp_v3,*param_3,param_2 + 0x29c8,0x200,0,0,1);
   }
-  FUN_0037a0e4(param_2,temp_v1,param_7,temp_v3);
+  soundVoicePostRequestBlock(param_2,temp_v1,param_7,temp_v3);
   VectorSignedToFloat(param_3[4],(unsigned char)(in_fpscr >> 0x16) & 3);
   nw_snd_internal_BasicSound_SetInitialVolume(param_2);
-  FUN_003795b0(param_2,*(unsigned char *)(param_3 + 5));
+  soundObjectPostByte09(param_2,*(unsigned char *)(param_3 + 5));
   FUN_002b4ee4(param_2,*(unsigned char *)((int)param_3 + 0x15));
   return 0;
 }

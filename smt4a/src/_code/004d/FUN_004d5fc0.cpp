@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag-store epilogue sharing and scalar-value load scheduling differ. */
+/* NON_MATCHING: only the order of the predicated orr/bic pair in case 2 differs (retail emits orrne before biceq). */
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 
@@ -22,13 +22,12 @@ void FUN_004d5fc0(CameraDebugMenu *menu, u32 unused, u32 index)
     switch (index) {
     case 0:
         if (listBoxItemHasOwner(menu->list)) {
-            if (g_btlCamera->flags & 0x20)
-                return;
+            if (!(g_btlCamera->flags & 0x20))
+                transitionResetPosition(g_btlCamera);
+        } else {
             transitionResetPosition(g_btlCamera);
-            return;
+            g_btlCamera->flags &= ~0x20;
         }
-        transitionResetPosition(g_btlCamera);
-        g_btlCamera->flags &= ~0x20;
         return;
     case 1:
         if (listBoxItemHasOwner(menu->list))
@@ -45,10 +44,10 @@ void FUN_004d5fc0(CameraDebugMenu *menu, u32 unused, u32 index)
         return;
     case 3:
         DAT_0057150c = *asdListBoxGetFloatValuePtr(menu->list, index);
-        return;
+        break;
     case 4:
         DAT_00571510 = *asdListBoxGetFloatValuePtr(menu->list, index);
-        return;
+        break;
     case 5:
         g_btlCamera->vector[0] = *asdListBoxGetFloatValuePtr(menu->list, index);
         return;

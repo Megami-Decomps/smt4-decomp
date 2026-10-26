@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_002b4ee4(int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
-int FUN_003795b0(int, int);
-int FUN_0037ab08(int, int);
-int FUN_0037ac9c(int, int);
-int FUN_0037ae14(...);
-int FUN_0037ae60(int, unsigned int, int, int);
+int soundObjectPostByte09(int, int);
+int soundVoicePostWord11(int, int);
+int soundVoicePostByte12(int, int);
+int soundVoicePostWords13(...);
+int soundVoicePostWords0d(int, unsigned int, int, int);
 int FUN_0037aeb0(...);
 int FUN_0037bd50(int *, int);
 int FUN_0037be24(unsigned char *, unsigned char *, int, unsigned int, int);
@@ -64,12 +64,12 @@ extern unsigned char LAB_0014c240; /* 0x14c240 */
 extern int soundArchiveReadBankInfo(unsigned int, int, unsigned int *);
 /* Supplied declaration required: FUN_002b4ee4. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
-/* Supplied declaration required: FUN_003795b0. */
-/* Supplied declaration required: FUN_0037ab08. */
+/* Supplied declaration required: soundObjectPostByte09. */
+/* Supplied declaration required: soundVoicePostWord11. */
 extern int FUN_0037ab50(int, int *, unsigned int *);
-/* Supplied declaration required: FUN_0037ac9c. */
-/* Supplied declaration required: FUN_0037ae14. */
-/* Supplied declaration required: FUN_0037ae60. */
+/* Supplied declaration required: soundVoicePostByte12. */
+/* Supplied declaration required: soundVoicePostWords13. */
+/* Supplied declaration required: soundVoicePostWords0d. */
 /* Supplied declaration required: FUN_0037aeb0. */
 /* Supplied declaration required: FUN_0037bd50. */
 /* Supplied declaration required: FUN_0037be24. */
@@ -213,17 +213,17 @@ FUN_00378698(int param_1,int param_2,unsigned int *param_3,unsigned int *param_4
     }
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 4);
-  FUN_0037ae60(temp_v33,*(unsigned int *)(param_1 + 0xa0),temp_v9,param_1 + 8);
+  soundVoicePostWords0d(temp_v33,*(unsigned int *)(param_1 + 0xa0),temp_v9,param_1 + 8);
   temp_v1 = temp_v33;
   VectorSignedToFloat(param_3[4],(unsigned char)(in_fpscr >> 0x16) & 3);
   nw_snd_internal_BasicSound_SetInitialVolume(temp_v33);
-  FUN_003795b0(temp_v1,*(unsigned char *)(param_3 + 5));
+  soundObjectPostByte09(temp_v1,*(unsigned char *)(param_3 + 5));
   FUN_002b4ee4(temp_v1,*(unsigned char *)((int)param_3 + 0x15));
-  FUN_0037ab08(temp_v33,*(unsigned char *)(param_4 + 6));
-  FUN_0037ac9c(temp_v33,(int)*(char *)((int)param_4 + 0x19));
+  soundVoicePostWord11(temp_v33,*(unsigned char *)(param_4 + 6));
+  soundVoicePostByte12(temp_v33,(int)*(char *)((int)param_4 + 0x19));
   temp_v5 = 0;
   if (*(int *)(param_1 + 0x18) != 0) {
-    FUN_0037ae14(temp_v33,*(int *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c));
+    soundVoicePostWords13(temp_v33,*(int *)(param_1 + 0x18),*(unsigned int *)(param_1 + 0x1c));
     temp_v5 = temp_v4;
   }
   if (param_5 == 0) {

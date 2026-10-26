@@ -1,11 +1,13 @@
-/* NON_MATCHING: VFP register allocation and the jump-table layout of the state switch differ from retail; the draw selection is the same. */
+/* NON_MATCHING: row layout and the full seven-argument FUN_0032b4f8 call now match retail; retail keeps 0x41 and 2 in r7/r9 (computing 0x42/0x43 as r7+1/+2 at each use) and loads all five row fields before the kind switch, which armcc here does not. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
+#include "code/Code0032.h"
 
 extern "C" {
 
-/* One row of the list (0x10 bytes). */
+/* One row of the list: rows sit 0x10 apart, and a row's flag bytes (0x10..0x13) are stored in the
+ * first word of the following row. */
 typedef struct ListRow {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ f32 x;
@@ -20,16 +22,16 @@ typedef struct ListRow {
     /* 0x13 */ s8 shown;
 } ListRow;
 
-/* The list work block (only the rows and the selection count). */
+/* The list work block: five rows, the selection count and the mark extent. */
 typedef struct ListWork {
-    /* 0x00 */ ListRow rows[5];
-    /* 0x50 */ u8 unk50[4];
+    /* 0x00 */ u8 rows[0x54];
     /* 0x54 */ s32 count;
+    /* 0x58 */ f32 extentX;
+    /* 0x5C */ f32 extentY;
 } ListWork;
 
 extern void *g_titleScene;
 
-void FUN_0032b4f8(s32 id, s32 tag, s32 subTag);
 
 /* Draws the five rows of the list: each shown row sets its tag, picks its icon id from its kind
  * and flags, and draws the icon plus the extra marks some states carry. */
@@ -38,17 +40,16 @@ void FUN_00349214(ListWork *work)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.7f);
 
     for (s32 i = 0; i < 5; i++) {
-        ListRow *row = &work->rows[i];
+        ListRow *row = (ListRow *)&work->rows[i * 0x10];
 
         if (row->shown == 0) {
             continue;
         }
         s32 tag = row->tag;
-        s8 subTag = tag == 0 ? row->subTag : (s8)tag;
         s32 state;
 
-        if (tag != 0 || subTag != 0) {
-            FUN_0032b4f8(0x41, tag, row->subTag);
+        if (tag != 0 || (u8)row->subTag != 0) {
+            FUN_0032b4f8(0x41, tag, row->subTag, row->x + (f32)parallax, row->y, work->extentX, work->extentY);
         }
         if (row->hasKind == 0) {
             state = 3;

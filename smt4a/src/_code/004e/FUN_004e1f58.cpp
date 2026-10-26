@@ -37,7 +37,7 @@ void FUN_004e1f58(BtlMainGlobalsA *globals, const BattleActionUnit *action, s32 
         BattleRetainedRosterEntry *entries = globals->state->retainedRoster.entries;
         s32 existing;
         for (existing = 0; existing < 109; ++existing) {
-            if (entries[existing].id == id && entries[existing].key == record->modelMatch.key)
+            if (entries[existing].id == id && record->modelMatch.key == entries[existing].key)
                 break;
         }
         if (existing < 109)

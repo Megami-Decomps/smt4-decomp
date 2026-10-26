@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail packs the depth bias using different integer temporaries and accesses merged graphics globals through their owning bases. */
-#include "shard/W6_W6Match8_GpuDepth.h"
+/* NON_MATCHING: material/camera selection now matches retail; the float24 depth-bias packing schedules its sign/exponent/fraction extraction after the zero test (retail extracts all three first and shifts the fraction in each arm). */
+#include "gfx/ModelDepthBias.h"
 
 struct ModelDrawMaterial {
     u8 unk000[0x294];
@@ -17,44 +17,39 @@ struct ModelMaterialContext {
     u8 unkB0[8];
     s32 materialIndex; // 0xb8
 };
+// The recording state of one scene pass (0x18 bytes; the pass table is labelled g_asdLightCount).
+struct ScenePassRecording {
+    u8 unk00[0x10];
+    u32 recorder; // 0x10
+    u8 unk14[4];
+};
+
 extern "C" {
 void FUN_002c35b0(u32 flags);
 void asdGxCommandListStartRecord(u32 list);
 extern u32 DAT_004720f0;
-extern u32 DAT_004dad90;
+extern ScenePassRecording g_asdLightCount[2];
 
-// Bind a material and encode its negated depth bias into the GPU's float24 format.
-void FUN_0034914c(const ModelDrawSelection *selection, ModelMaterialContext *context)
+// Makes material `index` current and, when it changed, loads its negated depth bias in the GPU's float24 format.
+static __inline void modelSelectMaterial(ModelMaterialContext *context, s32 index)
 {
-    FUN_002c35b0(0);
-    ModelDrawMaterial *material = context->materials[selection->materialIndex];
-    context->materialIndex = selection->materialIndex;
+    ModelDrawMaterial *material = context->materials[index];
+    context->materialIndex = index;
     if (context->current != material) {
         context->current = material;
         if (material->depthBias == 0.0f) {
             DAT_004720f0 = 0;
         } else {
-            GpuFloatEncoding encoding;
-            encoding.value = -material->depthBias;
-            u32 sign = encoding.bits & 0x80000000 ? 0x800000 : 0;
-            DAT_004720f0 = sign;
-            u32 magnitude = encoding.bits & 0x7fffffff;
-            u32 exponent = 0;
-            if (magnitude) {
-                exponent = (magnitude >> 23) - 64;
-                if (exponent < 0) {
-                    asdGxCommandListStartRecord(DAT_004dad90);
-                    return;
-                }
-                if (exponent >= 128) {
-                    DAT_004720f0 = 0x7f0000;
-                    asdGxCommandListStartRecord(DAT_004dad90);
-                    return;
-                }
-            }
-            DAT_004720f0 = ((encoding.bits & 0x7fffff) >> 7) | sign | ((exponent & 0x7f) << 16);
+            DAT_004720f0 = gpuEncodeDepthBias(-material->depthBias);
         }
     }
-    asdGxCommandListStartRecord(DAT_004dad90);
+}
+
+// Bind the selected material, then restart recording on the first pass's command list.
+void FUN_0034914c(const ModelDrawSelection *selection, ModelMaterialContext *context)
+{
+    FUN_002c35b0(0);
+    modelSelectMaterial(context, selection->materialIndex);
+    asdGxCommandListStartRecord(g_asdLightCount[0].recorder);
 }
 }

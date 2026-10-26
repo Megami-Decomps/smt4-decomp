@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail ldr r0, [r4] differs from recovered ldr r0, [r4]. */
 #include "common.h"
 #include "Model/MoriModelEffect.h"
 
@@ -26,8 +25,8 @@ void FUN_001a063c(WriteStateView* state, s32 value, u32 options)
             *state->unk0C = ((u32)state->cursor - (u32)state->unk08) >> 3;
         }
 
-        state->unk08 = state->cursor;
         state->unk0C = output;
+        state->unk08 = state->cursor;
         if (state->unk10 == 0) {
             state->unk10 = ((u32)state->cursor - (u32)state->unk04) & ~3u;
         }

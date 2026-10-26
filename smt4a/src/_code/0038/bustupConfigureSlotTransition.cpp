@@ -6,7 +6,7 @@ s32 gameFlagIsSet(u32 flag);
 SpriteTransitionWork *jobGetWork(u32 job);
 void aocSlotRelease(SpriteTransitionWork *work);
 s32 bustupCutAnimAssignSlot(u32 job, u32 portrait);
-void FUN_0019d96c(SpriteTransitionWork *work, u32 mode, u32 flags);
+void bustupSpriteStartTransition(SpriteTransitionWork *work, u32 mode, u32 flags);
 void FUN_001ad1ac(Vec3f *target, u32 portrait);
 
 void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u32 second, u32 third)
@@ -29,25 +29,25 @@ void bustupConfigureSlotTransition(u32 job, u32 portrait, s32 mode, u32 first, u
         }
         break;
     case 1:
-        FUN_0019d96c(work, 2, 0);
+        bustupSpriteStartTransition(work, 2, 0);
         work->state = 2;
         break;
     case 2:
         if (mode == 0) {
-            FUN_0019d96c(work, 7, 0);
+            bustupSpriteStartTransition(work, 7, 0);
         } else if (mode == 1) {
-            FUN_0019d96c(work, 6, 0);
+            bustupSpriteStartTransition(work, 6, 0);
         } else if (mode == 2) {
             bustupCutStartSlotTransition(work->job, first, second, third, 0xFFFFFFFF);
-            FUN_0019d96c(work, 7, 0);
+            bustupSpriteStartTransition(work, 7, 0);
         } else if (mode == 3) {
             bustupCutStartSlotTransition(work->job, first, second, third, 0xFFFFFFFF);
-            FUN_0019d96c(work, 6, 0);
+            bustupSpriteStartTransition(work, 6, 0);
         }
         work->state = 2;
         break;
     case 3:
-        FUN_0019d96c(work, 5, 0);
+        bustupSpriteStartTransition(work, 5, 0);
         {
             SpriteTransitionWork *current = jobGetWork(job);
             // A naturally aligned local view avoids enlarging the byte-aligned padding union.

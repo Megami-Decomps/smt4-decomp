@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r6, [pc, #144] differs from recovered ldr r6, [pc, #136]. */
+/* NON_MATCHING: only the schedule of the g_pendingTextures address load differs: retail issues `ldr r6, [pc, ...]` before `sub sp, sp, #136`, the build after it. */
 #include "common.h"
 #include "AsdSDK/FileLoadSync.h"
 
@@ -33,9 +33,8 @@ void FUN_00328d2c(void)
             entry->texture = asdTextureCreate(0);
             FUN_002522f8(path, sizeof(path), "%s%s.tga",
                          "battle/effect/tex/", entry->name);
-            void* fileData = fileLoadSync(path, &fileSize, 0);
-            entry->fileData = fileData;
-            asdTexTgaLoadNw4c(entry->texture, fileData, fileSize, 0x10000);
+            entry->fileData = fileLoadSync(path, &fileSize, 0);
+            asdTexTgaLoadNw4c(entry->texture, entry->fileData, fileSize, 0x10000);
         }
     }
 }

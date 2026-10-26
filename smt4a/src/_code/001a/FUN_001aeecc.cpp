@@ -1,17 +1,30 @@
-/* NON_MATCHING: instruction selection/order differs: retail mov r1, r0; compiler ldr r1, [r0]. */
-#include "shard/W5_W5Match1_RecordKeys.h"
+/* NON_MATCHING: only the schedule of the two byte-3 loads differs (retail loads the word first and reads the byte through the saved source pointer). */
+#include "common.h"
+
+/* The LZ header word: the byte at +3 is merged into the loaded word separately (retail's bic/orr). */
+union LzWord {
+    u32 value;
+    struct {
+        u32 low : 24;
+        u32 high : 8;
+    } parts;
+};
 
 extern "C" {
 
-/* Selects the first packed word when its upper bytes are nonzero, otherwise the second. */
-u32 FUN_001aeecc(const PackedWordPair *pair)
+/* Returns the advertised output size of a compressed block: the 24-bit size in the first word, or the full word that follows when that is zero. */
+u32 FUN_001aeecc(const u8 *source)
 {
-    u32 result = (pair->first.word & 0xFFFFFF) | ((u32)pair->first.bytes[3] << 24);
-    result >>= 8;
-    if (result == 0) {
-        result = (pair->second.word & 0xFFFFFF) | ((u32)pair->second.bytes[3] << 24);
+    LzWord word;
+    word.value = *(const u32 *)source;
+    word.parts.high = source[3];
+    u32 size = word.value >> 8;
+    if (size == 0) {
+        word.value = *(const u32 *)(source + 4);
+        word.parts.high = source[7];
+        size = word.value;
     }
-    return result;
+    return size;
 }
 
 } /* extern "C" */

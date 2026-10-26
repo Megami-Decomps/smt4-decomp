@@ -8,7 +8,7 @@ u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
 u32 FUN_004d05b4();
 s32 FUN_001ba3d4(u32 flag);
 s32 gameStockContainsEntry(u32 id);
-s32 FUN_004d0cd4();
+s32 partyFindFirstUnusedEntry();
 
 /* Set the reason a stock selection cannot proceed, allowing the override-warning result. */
 u32 FUN_004a34a0(Screen4A *screen, u32 id)
@@ -43,7 +43,7 @@ u32 FUN_004a34a0(Screen4A *screen, u32 id)
     } else if (view->mode == 2) {
         reason = 3;
     } else {
-        if (FUN_004d0cd4() == -1) {
+        if (partyFindFirstUnusedEntry() == -1) {
             screen->unkA870 = 5;
             return 0;
         }

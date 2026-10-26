@@ -1,5 +1,6 @@
-/* NON_MATCHING: readable rebuild of a thunder bolt-strip kind's create; the colour ramp (VFP int/float conversions through d8) is scheduled differently by armcc, and retail's float 1.0 lives in d8 across the bolt loop. */
+/* NON_MATCHING: the trace, level clamp, colour bytes (packedColorBytesSet per vertex) and hoisted colour parts now match retail's shape (row counts equal or within 2); remaining: saved-register/spill assignment (retail spills params to a 88-byte frame, loads the ramp pair with one vldmia) and the allocation-size/trace argument order. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonThunderBolt.h"
+#include "AsdSDK/AsdDebug.h"
 
 /* One bolt of the effect (0x30 bytes). */
 struct ThunderBolt {
@@ -18,32 +19,40 @@ struct ThunderBoltBlock {
 };
 
 extern "C" {
+extern const char DAT_0041052c[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, int size);
 PolyGeom *FUN_0024505c(u32 segments, u8 *table, int w, int tableSize);
 
 extern u8 DAT_0047372c;
 
+/* Allocates the bolt block of `bytes` bytes, recording the allocation site first. */
+static ThunderBoltBlock *allocBoltBlock(u32 bytes)
+{
+    asdDebugTrace(DAT_0041052c, 695);
+    return (ThunderBoltBlock *)memAlloc(0x10000, 0x100, 0, bytes, 0x10, 1);
+}
+
 /* Creates the bolts of a thunder effect: one strip geometry per bolt, coloured by the ramp. */
 ThunderBoltBlock *FUN_00315860(ThunderBoltParams *params)
 {
     u32 count = params->boltCount;
-    ThunderBoltBlock *block = (ThunderBoltBlock *)memAlloc(0x10000, 0x100, 0, count * 0x30 + 0x10, 0x10, 1);
+    ThunderBoltBlock *block = allocBoltBlock(count * 0x30 + 0x10);
     rt_memclr(block, count * 0x30 + 0x10);
     block->bolts = block->storage;
     block->self = block;
     u32 level = params->level;
-    if (level < 4)
-        level = 3;
+    level = level > 3 ? level : 3;
     params->level = level;
-    f32 span = (f32)(level + 1);
+    ThunderBoltColors colors = thunderBoltSplitColors(params);
+    f32 span = (f32)(s32)(level + 1);
     s32 rampIn = (s32)(params->rampIn * span);
     s32 rampOut = (s32)(params->rampOut * span);
     ThunderBolt *bolt = block->bolts;
     for (u32 i = 0; i < count; i++) {
         PolyGeom *geom = FUN_0024505c((u16)params->level, &DAT_0047372c, 5, 0x48);
         bolt->geom = geom;
-        thunderBoltFillColors(geom, params, rampIn, rampOut);
+        thunderBoltFillColors(geom, &colors, rampIn, rampOut);
         bolt->id = -4 * (s32)i - 1;
         bolt++;
     }

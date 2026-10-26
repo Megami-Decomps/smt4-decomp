@@ -41,7 +41,7 @@ struct BattleSide {
 extern "C" {
 
 void btlShowListedActionMessage(s32* battle, ActionContext* ctx, s32 id, s32 value, s32 arg);
-void FUN_00227fac(void);
+u32 FUN_00227fac(u32 listedId);
 void frameRangeExtend(s32* battle, ActionContext* ctx, s32 id, s32 a, s32 b, s32 c);
 s32 FUN_00229914(s32* battle, ActionContext* ctx, s32 id);
 void FUN_0023c0d0(s32* battle, ActionContext* ctx, s32 id, s32 amount);
@@ -57,17 +57,14 @@ s32 FUN_00293230(s32 battle);
 u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
 {
     u32 value = 0xffffffff;
+    u8 result = 0;
     *reinterpret_cast<u32*>(reinterpret_cast<u8*>(ctx->actor) + 200) = 0;
-    s32 id = ctx->target->listedId;
-    FUN_00227fac();
-    s32 positive = id;
-    if (0 < id) positive = amount;
-    ActionSlotRow* row = reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4);
-    if (positive >= 1 && amount >= (s32)row->minPower) {
-        if (id != 2) {
-            if (id == 1) value = 1;
+    s32 affinity = FUN_00227fac(ctx->target->listedId);
+    if (affinity > 0 && amount > 0 && amount >= (s32)reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4)->minPower) {
+        if (affinity != 2) {
+            if (affinity == 1) value = 1;
         } else if ((ctx->actor->status & 8) == 0) {
-            value = row->value;
+            value = reinterpret_cast<ActionSlotRow*>(reinterpret_cast<u8*>(ctx) + ctx->target->listedId * 10 + 0x9d4)->value;
         } else {
             value = 1;
         }
@@ -76,12 +73,12 @@ u8 FUN_003cfe14(s32* battle, ActionContext* ctx, s32 amount)
     }
     FUN_0023c0d0(battle, ctx, ctx->target->listedId, -amount);
     s32 followUp = FUN_00229914(battle, ctx, ctx->target->listedId);
-    u8 result = followUp != 0;
-    BattleSide* side = reinterpret_cast<BattleSide*>(*battle);
-    if ((s32)value >= 1) {
+    if (followUp != 0)
+        result = 1;
+    if ((s32)value > 0) {
         result = 0;
-    } else if (result && (ctx->actor->flags & 0x10) != 0 && side->mode == 1) {
-        side->phase = 0xd;
+    } else if (result && (ctx->actor->flags & 0x10) != 0 && reinterpret_cast<BattleSide*>(*battle)->mode == 1) {
+        reinterpret_cast<BattleSide*>(*battle)->phase = 0xd;
     }
     u32 a = 0xffffffff, b = 0xffffffff, c = 0xffffffff;
     if ((ctx->actor->flags & 0x10) == 0) {

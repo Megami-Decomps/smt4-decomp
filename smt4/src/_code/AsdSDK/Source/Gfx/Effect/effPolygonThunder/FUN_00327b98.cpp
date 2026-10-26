@@ -1,13 +1,14 @@
-/* NON_MATCHING: builds the lightning strips of a polygon thunder effect (one strip per bolt, vertex colours fading in and out along the bolt); written from the decompilation and the retail disassembly, float conversions and the vertex store layout not compared with retail */
+/* NON_MATCHING: the trace, level clamp, colour bytes (packedColorBytesSet per vertex) and hoisted colour parts now match retail's shape (row counts equal or within 2); remaining: saved-register/spill assignment (retail spills params to a 88-byte frame, loads the ramp pair with one vldmia) and the allocation-size/trace argument order. */
 #include "AsdSDK/AsdDebug.h"
+#include "gfx/PackedColorBytes.h"
 
 /* Packed vertex colour data of one strip vertex: three RGBA colours and two copies. */
 struct ThunderVertex {
-    /* 0x00 */ u8 color0[4];
-    /* 0x04 */ u8 color1[4];
-    /* 0x08 */ u8 color2[4];
-    /* 0x0C */ u32 copy1;
-    /* 0x10 */ u32 copy0;
+    /* 0x00 */ PackedColorBytes color0;
+    /* 0x04 */ PackedColorBytes color1;
+    /* 0x08 */ PackedColorBytes color2;
+    /* 0x0C */ PackedColorBytes copy1;
+    /* 0x10 */ PackedColorBytes copy0;
 };
 
 struct ThunderVertexBuffer {
@@ -49,30 +50,31 @@ struct ThunderParams {
 
 extern "C" {
 extern u8 DAT_0047372c[];
+extern const char DAT_0041052c[]; /* effect source file name (__FILE__) */
 
 void *memAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment, u32 zero);
 ThunderStrip *FUN_0024505c(u32 segments, const u8 *signature, u32 valuesPerVertex, u32 vertexSize);
 
-/* Writes the colour (rgb of `rgb`, alpha scaled by `envelope`) into a vertex colour. */
-static __inline void thunderColor(u8 *out, u32 rgb, u32 argb, f32 envelope)
+/* Allocates the strip block of `bytes` bytes, recording the allocation site first. */
+static ThunderBlock *allocStripBlock(u32 bytes)
 {
-    out[0] = (u8)rgb;
-    out[1] = (u8)(rgb >> 8);
-    out[2] = (u8)(rgb >> 16);
-    out[3] = (u8)(u32)((f32)(argb >> 24) * envelope);
+    asdDebugTrace(DAT_0041052c, 1181);
+    return static_cast<ThunderBlock *>(memAlloc(0x10000, 0x100, 0, bytes, 0x10, 1));
 }
 
 ThunderBlock *FUN_00327b98(ThunderParams *params)
 {
     u32 stripCount = params->strips;
-    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonThunder.cpp", 1181);
-    ThunderBlock *block = static_cast<ThunderBlock *>(memAlloc(0x10000, 0x100, 0, stripCount * sizeof(ThunderEntry) + 4, 0x10, 1));
+    ThunderBlock *block = allocStripBlock(stripCount * sizeof(ThunderEntry) + 4);
     block->entries = block->storage;
 
-    if (params->segments < 4)
-        params->segments = 3;
-    if ((params->segments & 1) == 0)
-        params->segments++;
+    u32 segments = params->segments;
+    segments = segments > 3 ? segments : 3;
+    params->segments = segments;
+    if ((segments & 1) == 0) {
+        segments++;
+        params->segments = segments;
+    }
 
     u32 color0 = params->color0;
     u32 color1 = params->color1;
@@ -87,7 +89,7 @@ ThunderBlock *FUN_00327b98(ThunderParams *params)
 
     ThunderEntry *entry = block->entries;
     for (u32 strip = 0; strip < stripCount; strip++) {
-        ThunderStrip *bolt = FUN_0024505c(params->segments, DAT_0047372c, 5, 0x48);
+        ThunderStrip *bolt = FUN_0024505c((u16)params->segments, DAT_0047372c, 5, 0x48);
         entry->strip = bolt;
         u32 vertexCount = bolt->vertexValues / 5;
         ThunderVertex *vertex = bolt->buffer->vertices;
@@ -100,11 +102,11 @@ ThunderBlock *FUN_00327b98(ThunderParams *params)
                 else
                     envelope = (f32)(vertexCount - i - 1) / (f32)(vertexCount - fadeOutStart);
             }
-            thunderColor(vertex->color0, rgb0, color0, envelope);
-            thunderColor(vertex->color1, rgb1, color1, envelope);
-            thunderColor(vertex->color2, rgb2, color2, envelope);
-            vertex->copy1 = *reinterpret_cast<u32 *>(vertex->color1);
-            vertex->copy0 = *reinterpret_cast<u32 *>(vertex->color0);
+            packedColorBytesSet(&vertex->color0, rgb0 | ((u32)((f32)(color0 >> 24) * envelope) << 24));
+            packedColorBytesSet(&vertex->color1, rgb1 | ((u32)((f32)(color1 >> 24) * envelope) << 24));
+            packedColorBytesSet(&vertex->color2, rgb2 | ((u32)((f32)(color2 >> 24) * envelope) << 24));
+            vertex->copy1 = vertex->color1;
+            vertex->copy0 = vertex->color0;
             vertex++;
         }
         entry->marker = (s32)(strip * -4) - 1;

@@ -1,11 +1,4 @@
-/* NON_MATCHING: every store before the node matches; the node setup is scheduled differently (retail keeps the node in r0 and copies it to r1 for listAppendNode; the id store is last here). */
-#include "classes/Obj421aa4.h"
-
-extern "C" {
-Obj421aa4Manager *FUN_002baed8(void);
-Obj421aa4Node *FUN_002b4f64(Obj421aa4Manager *manager, int kind);
-void listAppendNode(Obj421aa4Manager *manager, Obj421aa4Node *node);
-}
+#include "classes/Obj421aa4Requests.h"
 
 /* Resets every parameter to its default and announces the object to the sound manager. */
 void Obj421aa4::init()
@@ -71,8 +64,7 @@ void Obj421aa4::init()
     unk58[1] = 1.0f;
     unk58[0] = 1.0f;
     unk60 = 0.0f;
-    node = FUN_002b4f64(manager, 6);
-    node->stamp = manager->unk184;
+    node = soundRequestBegin(manager, 6);
     node->type = 3;
     node->arg = &unk85[4];
     node->id = id;

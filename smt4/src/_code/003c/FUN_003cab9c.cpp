@@ -1,7 +1,8 @@
-/* NON_MATCHING: retail keeps the result 1 in r6 and returns through one shared exit, reads the action kind with ldrsh and dispatches phases 0/1/2/5 through a different branch tree; this build returns from each path and uses ldrh. */
+/* NON_MATCHING: contract fixes applied (owner->state passed to the slot helpers, FUN_003dc504(DAT_00435d18) result tested, shared result exit, action-data slot setter, case order); retail merges the command store of four case groups into one tail and loads the slot stride from the pool each time. */
 #include "common.h"
 #include "battle/btlUnit.h"
 #include "gamedata/DataTable40.h"
+#include "battle/btlAction.h"
 
 /* The record of a combatant's chosen action: its id is at 0x62. */
 struct TurnRecord {
@@ -14,7 +15,7 @@ struct TurnActor {
     /* 0x000 */ u8 unk000[0xFA];
     /* 0x0FA */ u16 flags;
     /* 0x0FC */ u8 unk0FC[0x50];
-    /* 0x14C */ u16 kind;
+    /* 0x14C */ s16 kind;
     /* 0x14E */ s16 skill;
 };
 
@@ -57,37 +58,43 @@ struct DataTable40Record {
 };
 
 extern "C" {
-extern TurnScriptSlot *g_btlScriptUnit;
+extern BtlActionGlobals g_btlAction;
 extern void *DAT_00435d18;
 
-s32 objSlotStateIsActiveRange(TurnOwner *owner, s32 slot);
-void slotResetIdle(TurnOwner *owner, s32 slot, u32 value);
-s32 FUN_003dc504(void);
+s32 objSlotStateIsActiveRange(TurnState *state, s32 slot);
+void slotResetIdle(TurnState *state, s32 slot, u32 value);
+s32 FUN_003dc504(void *work);
 void FUN_003da010(void *resources);
 void FUN_003dcaac(void *resources, u32 value);
-void btlTargetSetFlag10(TurnOwner *owner, s32 targetId, s32 primary);
+void btlTargetSetFlag10(TurnState *state, s32 targetId, s32 primary);
+
+static __inline void turnSetCommand(TurnOwner *owner, u8 command)
+{
+    TurnScriptSlot *slot = &static_cast<TurnScriptSlot *>(g_btlAction.data)[owner->state->actorIndex];
+    slot->command = command;
+}
 
 /* Drives the action's animation phases; returns 1 when the action is over and its script command is set. */
 u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
 {
+    u32 result = 0;
     switch (work->phase) {
     case 0:
-        if (objSlotStateIsActiveRange(owner, 0) != 0) {
-            slotResetIdle(owner, 0, 0x1e);
+        if (objSlotStateIsActiveRange(owner->state, 0) != 0) {
+            slotResetIdle(owner->state, 0, 0x1e);
         }
         work->phase = 1;
         /* fall through */
     case 1:
-        FUN_003dc504();
-        if (DAT_00435d18 == 0) {
-            return 0;
+        if (FUN_003dc504(DAT_00435d18) == 0) {
+            return result;
         }
         FUN_003da010(DAT_00435d18);
         work->phase = 2;
-        return 0;
+        return result;
     case 2:
         if (FUN_003db7b4(DAT_00435d18) == 0) {
-            return 0;
+            return result;
         }
         work->phase = 5;
         if ((owner->state->stateFlags & 4) == 0) {
@@ -97,12 +104,12 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
     case 5:
         break;
     default:
-        return 0;
+        return result;
     }
     if (work->elapsed != 0 && work->elapsed > work->duration) {
-        return 0;
+        return result;
     }
-    u8 command;
+    result = 1;
     switch (work->actor->kind) {
     case 1:
     case 2:
@@ -122,37 +129,31 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
                 }
             }
         }
-        command = 0xe;
-        break;
-    case 4:
-        command = 0x14;
+        turnSetCommand(owner, 0xe);
         break;
     case 5:
     case 6:
     case 0xf:
     case 0x10:
     case 0x11:
-        command = 0x13;
+        turnSetCommand(owner, 0x13);
+        break;
+    case 4:
+        turnSetCommand(owner, 0x14);
         break;
     case 7:
-        command = 0xf;
+        turnSetCommand(owner, 0xf);
         break;
     case 0xd:
-        command = 8;
+        turnSetCommand(owner, 8);
         break;
     case 0xe:
-        command = 0x16;
+        turnSetCommand(owner, 0x16);
         break;
-    default:
-        if ((work->actor->flags & 0x10) != 0) {
-            btlTargetSetFlag10(owner, work->record->id, 0);
-        }
-        return 1;
     }
-    g_btlScriptUnit[owner->state->actorIndex].command = command;
     if ((work->actor->flags & 0x10) != 0) {
-        btlTargetSetFlag10(owner, work->record->id, 0);
+        btlTargetSetFlag10(owner->state, work->record->id, 0);
     }
-    return 1;
+    return result;
 }
 }

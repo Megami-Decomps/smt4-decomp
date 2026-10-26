@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the NULL of the bounds-checked lookup hoisted in r9 (movcs r0, r9, pushing r9/sl); armcc emits movcs r0, #0. */
+/* NON_MATCHING: the bounds-checked lookup is a static helper (NULL now hoisted in r9 like retail); armcc still orients the index/count compare as `cmp count, index; addhi` (retail `cmp index, count; addcc`) and sets dataTableGet's r0/r1 in the other order in the loop body. */
 #include "gamedata/DataTable.h"
 
 /* A table 0x2E section 3 entry, keyed by two signed bytes. */
@@ -10,12 +10,19 @@ struct Table2eSub3Entry {
 
 extern "C" {
 
+static Table2eSub3Entry *table2eSub3EntryAt(u32 index)
+{
+    DataTableView<Table2eSub3Entry> table(0x2e, 3);
+    if (index < table.count)
+        return &table.entries[index];
+    return NULL;
+}
+
 /* Finds the table 0x2E section 3 entry with the given key pair, or NULL. */
 Table2eSub3Entry *FUN_00328168(s32 first, s32 second)
 {
     for (s32 index = 0; index < (s32)dataTableGetCount(dataTableGet(0x2e, 3)); index++) {
-        DataTableView<Table2eSub3Entry> table(0x2e, 3);
-        Table2eSub3Entry *entry = table.at(index);
+        Table2eSub3Entry *entry = table2eSub3EntryAt(index);
         if (entry->first == first && entry->second == second) {
             return entry;
         }

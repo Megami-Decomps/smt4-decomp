@@ -11,7 +11,7 @@ void FUN_00110d54(SoundEffectDelay *effect, const SoundEffectDelayParameters *pa
 u32 nw_snd_FxDelay_GetRequiredMemSize(SoundEffectDelay *effect);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 void nw_snd_FxDelay_AssignWorkBuffer(SoundEffectDelay *effect, void *buffer, u32 size);
-void FUN_00120dc4(u32 bus, SoundEffectDelay *effect);
+void soundSourceQueueReadyRequest(u32 bus, SoundEffectDelay *effect);
 void FUN_00109580();
 
 void FUN_001036fc()
@@ -26,7 +26,7 @@ void FUN_001036fc()
         asdDebugTrace(DAT_004076c8, 71);
         g_soundEffectBuffers = asdMemoryAlloc(0x10000, 0x100, 0, size, 1);
         nw_snd_FxDelay_AssignWorkBuffer(&DAT_004c5484, g_soundEffectBuffers, size);
-        FUN_00120dc4(0, &DAT_004c5484);
+        soundSourceQueueReadyRequest(0, &DAT_004c5484);
     }
     FUN_00109580();
 }

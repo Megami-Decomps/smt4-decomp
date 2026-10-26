@@ -7,7 +7,7 @@
 struct LeveledLists;
 
 extern "C" {
-u32 FUN_003c8c2c();
+u8 FUN_003c8c2c(void *owner, u16 firstId, u16 secondId);
 u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
                  UnitePairEntryIV *output);
 u32 FUN_003c911c(LeveledLists *owner, u16 firstId, u16 secondId,
@@ -19,7 +19,7 @@ u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
                  UnitePairEntryIV *output)
 {
     u32 accepted = 0;
-    switch (FUN_003c8c2c()) {
+    switch (FUN_003c8c2c(owner, firstId, secondId)) {
     case 0:
         break;
     case 1:

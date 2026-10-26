@@ -37,7 +37,7 @@ void FUN_00280ac0(s32 mode);
 void MapEpl_InitState(void);
 void FUN_001b4764(void);
 void FUN_001b3da4(void);
-void FUN_00192420(void);
+void mapDeferredModelsReset(void);
 void mapDepartResetWork(void);
 void mapObjResetSlots(void);
 void mapGimicClearAll(void);
@@ -83,7 +83,7 @@ void MapMain_Register(void)
     MapEpl_InitState();
     FUN_001b4764();
     FUN_001b3da4();
-    FUN_00192420();
+    mapDeferredModelsReset();
     mapDepartResetWork();
     mapObjResetSlots();
     mapGimicClearAll();

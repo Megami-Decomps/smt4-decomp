@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail tail-calls the final node builder; the escaped local cursor keeps the compiled frame live, and initial argument setup is scheduled differently. */
+/* NON_MATCHING: the cursor local now lives in an inner scope so armcc tail-calls the final builder like retail; only the initial argument setup (retail keeps node->data in r3 and copies node to r1 first) is scheduled differently. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct NodeInitializationData {
@@ -19,8 +19,10 @@ void asdMdlNodeInit(AsdMdlNode* node, u32 parameter)
 {
     NodeInitializationData* data = static_cast<NodeInitializationData*>(node->data);
     data->cursor = data->begin;
-    u8* cursor = static_cast<NodeInitializationData*>(node->data)->begin;
-    FUN_0019afe4(&cursor, node, parameter, 0);
+    {
+        u8* cursor = static_cast<NodeInitializationData*>(node->data)->begin;
+        FUN_0019afe4(&cursor, node, parameter, 0);
+    }
     FUN_0019d57c(node, static_cast<NodeInitializationData*>(node->data)->parameter);
     FUN_0019cbf8(node);
 }

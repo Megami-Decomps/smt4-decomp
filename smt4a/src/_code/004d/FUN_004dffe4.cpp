@@ -11,7 +11,7 @@ struct BattleTargetSelectionView {
 }
 extern "C" {
 extern BtlActionGlobals g_btlAction;
-void FUN_004e5b5c(BattleTargetSelectionView *context);
+void btlActionMarkRandomTargetableUnit(BattleTargetSelectionView *context);
 void FUN_004e6ed8(BattleTargetSelectionView *context, s32 mode);
 void FUN_004e7d20(BattleTargetSelectionView *context, s32 count);
 
@@ -22,7 +22,7 @@ void FUN_004dffe4(BattleTargetSelectionView *context)
     s32 remaining = 0;
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &context->battle->entries[index];
-        if ((entry->flags & g_btlAction.clearedFlags.mask) != 0) {
+        if ((g_btlAction.clearedFlags.mask & entry->flags) != 0) {
             s32 chance = btlFindEntryNonzeroRecordValue(entry->unitIndex);
             if (chance > 0 && (s32)lcgRandomRange(99) > chance)
                 context->battle->entries[index].flags &= ~g_btlAction.clearedFlags.mask;
@@ -41,7 +41,7 @@ void FUN_004dffe4(BattleTargetSelectionView *context)
         }
     } else {
         if (remaining != 2) {
-            FUN_004e5b5c(context);
+            btlActionMarkRandomTargetableUnit(context);
             return;
         }
         if (roll < 40) {

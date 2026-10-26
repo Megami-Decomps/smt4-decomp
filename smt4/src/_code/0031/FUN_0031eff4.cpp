@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop bound uses one LDRD instead of retail's two scalar loads; remaining instruction sequence matches. */
+/* NON_MATCHING: the in-loop bound loads first and count with one LDRD; retail loads first then count with two scalar LDRs (its pre-loop check pairs them as in the build). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
@@ -13,10 +13,11 @@ BtlEntry *btlMainFindActiveEntry(BtlMainState *);
 // Report whether the selected group or active entry has either pending effect.
 u32 FUN_0031eff4(void)
 {
-    u32 first, count;
-    u32 group = (u32)btlScriptResolveGroupArg(scrGetArg(0));
-    FUN_002499fc(group, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 index = first; index < static_cast<s32>(count + first); ++index) {
+    s32 first;
+    s32 count;
+    u32 group = btlScriptResolveGroupArg(scrGetArg(0));
+    FUN_002499fc(group, &first, &count);
+    for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&

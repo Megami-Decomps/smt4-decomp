@@ -8,7 +8,7 @@ void asdTMTexTableReleaseNode(s32 table, s32 node);
 void FUN_002a60cc(void *, u32, s32);
 void aocSlotRelease(SpriteTransitionWork *);
 s32 FUN_0024ecc0(u32, u32);
-void FUN_002a880c(SpriteTransitionWork *, s32, s32);
+void bustupSpriteStartTransition(SpriteTransitionWork *, s32, s32);
 void FUN_002a4e18(Vec3f *, u32);
 extern void *g_aocSystem;
 
@@ -49,18 +49,18 @@ void FUN_00249c4c(u32 job, u32 resourceId, s32 immediate)
         }
         break;
     case 1:
-        FUN_002a880c(work, 2, 0);
+        bustupSpriteStartTransition(work, 2, 0);
         work->state = 2;
         break;
     case 2:
         if (immediate)
-            FUN_002a880c(work, 6, 0);
+            bustupSpriteStartTransition(work, 6, 0);
         else
-            FUN_002a880c(work, 7, 0);
+            bustupSpriteStartTransition(work, 7, 0);
         work->state = 2;
         break;
     case 3: {
-        FUN_002a880c(work, 5, 0);
+        bustupSpriteStartTransition(work, 5, 0);
         SpriteTransitionWork *current = (SpriteTransitionWork *)jobGetWork(job);
         current->state = 1;
         current->start = reinterpret_cast<SpriteResourceView *>(current)->position;

@@ -6,7 +6,7 @@ extern "C" {
 
 int sysMemClear(...);
 int FUN_003e8bb0(...);
-int FUN_004e5b5c(...);
+int btlActionMarkRandomTargetableUnit(...);
 int FUN_004e7080(...);
 int FUN_004e7c04(...);
 int FUN_004e8454(...);
@@ -113,7 +113,7 @@ extern unsigned int FUN_004c53fc(unsigned int);
 /* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c8ee0. */
 /* Supplied declaration required: FUN_004c9160. */
-/* Supplied declaration required: FUN_004e5b5c. */
+/* Supplied declaration required: btlActionMarkRandomTargetableUnit. */
 /* Supplied declaration required: FUN_004e7080. */
 /* Supplied declaration required: FUN_004e7c04. */
 /* Supplied declaration required: FUN_004e8454. */
@@ -541,7 +541,7 @@ unsigned int FUN_004ed5b4(int *param_1,unsigned int *param_2)
           }
         }
         else {
-          FUN_004e5b5c(param_1);
+          btlActionMarkRandomTargetableUnit(param_1);
         }
         *param_2 = *param_2 | 0x204;
         FUN_004eb838(param_1,param_2);

@@ -1,18 +1,13 @@
-/* NON_MATCHING: near-structure only: same maths (block colour x effect tint x part colour, packed back as ARGB bytes) but retail schedules the four-channel unpack/multiply with different VFP register allocation (s16 scale, s17-s20 saved product, s21 255.0, packed bytes assembled by rev/bit-field byte stores into the object colour) and a 68-byte frame, ours builds a 96-byte frame and a plain word store */
+/* NON_MATCHING: same maths, frame (68 bytes) and addressing as retail (shared EffectColor state, effectColorCopy vector copies, colour bytes through byte-channel bitfields set from a byte swap); VFP register numbering differs (retail: s16 scale, s17-s20 saved product, s21 255.0) and the unpack/multiply scheduling. */
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef int s32;
 typedef float f32;
+#include "shard/W6_W6Match3_EffectColor.h"
+#include "gfx/PackedColorBytes.h"
 
 extern "C" {
-
-/* One 4-channel colour scratch pair used while tinting (the retail image keeps it in globals):
- * `current` is the unpacked colour of the part being tinted, `tint` the tint it is multiplied by. */
-struct TintScratch {
-    f32 current[4];   /* 0x4EA91C */
-    f32 tint[4];      /* 0x4EA92C */
-};
 
 struct TintObject {
     u16 flags;        /* 0x00: bit 0x100 = tinted */
@@ -55,36 +50,39 @@ struct TintEffect {
     TintBlock *block;     /* 0x34 */
 };
 
-extern TintScratch DAT_004ea91c;
+extern EffectColorProductState DAT_004ea81c;
 
 u32 FUN_00269694(TintBlock *block, u32 *colorSource);
 void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
 void matrixApplyByMode(u8 *transform, u8 *matrix, s32 flag);
 void FUN_00256a50(TintObject *object, u32 frame);
 
+/* A packed colour word addressed by its byte channels. */
+union TintColor {
+    u32 value;
+    struct {
+        u32 red : 8;
+        u32 green : 8;
+        u32 blue : 8;
+        u32 alpha : 8;
+    } channels;
+};
+
 /* Unpacks the four bytes of a packed colour (high byte first) into 0..1 floats. */
-static void unpackColor(u32 color, f32 *out)
+static void unpackColor(u32 color, EffectColor *out)
 {
-    out[0] = (f32)(color >> 24) * 0.003921569f;
-    out[1] = (f32)((color & 0xFFFFFF) >> 16) * 0.003921569f;
-    out[2] = (f32)((color & 0xFFFF) >> 8) * 0.003921569f;
-    out[3] = (f32)(color & 0xFF) * 0.003921569f;
+    out->red = (f32)(color >> 24) * 0.003921569f;
+    out->green = (f32)((color & 0xFFFFFF) >> 16) * 0.003921569f;
+    out->blue = (f32)((color & 0xFFFF) >> 8) * 0.003921569f;
+    out->alpha = (f32)(color & 0xFF) * 0.003921569f;
 }
 
-static void multiplyColor(f32 *color, const f32 *by)
+static void multiplyColor(EffectColor *color, const EffectColor *by)
 {
-    color[0] = color[0] * by[0];
-    color[1] = color[1] * by[1];
-    color[2] = color[2] * by[2];
-    color[3] = color[3] * by[3];
-}
-
-static void copyColor(f32 *to, const f32 *from)
-{
-    to[0] = from[0];
-    to[1] = from[1];
-    to[2] = from[2];
-    to[3] = from[3];
+    color->red = color->red * by->red;
+    color->green = color->green * by->green;
+    color->blue = color->blue * by->blue;
+    color->alpha = color->alpha * by->alpha;
 }
 
 /* Tints every ready part of the effect by (block colour * effect tint * part colour), once the
@@ -97,13 +95,14 @@ void FUN_0031b42c(TintEffect *effect)
     if (effect->frame <= block->startFrame || block->startFrame == 0) {
         s32 partCount = block->partCount;
         u32 blockColor = FUN_00269694(block, block->colorSource);
-        f32 saved[4];
-        u8 matrix[0x5C];
+        EffectColor saved;
+        TintColor color;
+        u8 matrix[0x40];
 
-        unpackColor(effect->tint, DAT_004ea91c.tint);
-        unpackColor(blockColor, DAT_004ea91c.current);
-        multiplyColor(DAT_004ea91c.current, DAT_004ea91c.tint);
-        copyColor(saved, DAT_004ea91c.current);
+        unpackColor(effect->tint, &DAT_004ea81c.factor);
+        unpackColor(blockColor, &DAT_004ea81c.color);
+        multiplyColor(&DAT_004ea81c.color, &DAT_004ea81c.factor);
+        effectColorCopy(&DAT_004ea81c.color, &saved);
         matrixInitializeWithScaleAndOffset(matrix, effect, 0, effect->scale);
 
         for (s32 n = 0; n < partCount; n++) {
@@ -111,14 +110,19 @@ void FUN_0031b42c(TintEffect *effect)
             if (part->ready > 0) {
                 TintObject *object = part->object;
                 matrixApplyByMode(object->transform, matrix, 0);
-                unpackColor(part->color, DAT_004ea91c.current);
-                copyColor(DAT_004ea91c.tint, saved);
-                multiplyColor(DAT_004ea91c.current, DAT_004ea91c.tint);
-                u32 a = (u32)(DAT_004ea91c.current[0] * 255.0f);
-                u32 r = (u32)(DAT_004ea91c.current[1] * 255.0f);
-                u32 g = (u32)(DAT_004ea91c.current[2] * 255.0f);
-                u32 b = (u32)(DAT_004ea91c.current[3] * 255.0f);
-                object->color = (a << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+                unpackColor(part->color, &DAT_004ea81c.color);
+                effectColorCopy(&saved, &DAT_004ea81c.factor);
+                multiplyColor(&DAT_004ea81c.color, &DAT_004ea81c.factor);
+                u32 a = (u32)(DAT_004ea81c.color.red * 255.0f);
+                u32 r = (u32)(DAT_004ea81c.color.green * 255.0f);
+                u32 g = (u32)(DAT_004ea81c.color.blue * 255.0f);
+                u32 b = (u32)(DAT_004ea81c.color.alpha * 255.0f);
+                u32 packed = (a << 24) | ((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF);
+                color.channels.red = packedColorSwap32(packed) >> 24;
+                color.channels.green = packedColorSwap32(packed) >> 16;
+                color.channels.blue = packedColorSwap32(packed) >> 8;
+                color.channels.alpha = packedColorSwap32(packed);
+                object->color = color.value;
                 if (block->tinted != 0) {
                     object->flags = object->flags | 0x100;
                 } else {

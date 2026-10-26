@@ -18,18 +18,23 @@ struct DspComponentState {
 
 extern DspComponentState g_callbackState;
 extern u8 DAT_004657b8[];
+extern s8 DAT_0044e459;
 u32 nn_dsp_CTR_DSP_LoadComponent(s32 session, const u8 *image, u32 size, u16 programMask, u16 dataMask, s8 *loaded);
 
 u32 FUN_0011bf24(void)
 {
     DspComponentState *callbackStatePtr = &g_callbackState;
-    callbackStatePtr->image = DAT_004657b8;
-    callbackStatePtr->imageSize = 0xC20A;
-    callbackStatePtr->programMask = 0xFF;
-    callbackStatePtr->dataMask = 0xFF;
+    const u8 *image = DAT_004657b8;
+    u32 imageSize = 0xC20A;
+    u16 programMask = 0xFF;
+    u16 dataMask = 0xFF;
+    callbackStatePtr->image = image;
+    callbackStatePtr->imageSize = imageSize;
+    callbackStatePtr->programMask = programMask;
+    callbackStatePtr->dataMask = dataMask;
     if (callbackStatePtr->session != 0 && callbackStatePtr->loaded == 0) {
-        return nn_dsp_CTR_DSP_LoadComponent(callbackStatePtr->session, DAT_004657b8, 0xC20A, 0xFF, 0xFF,
-                                            &callbackStatePtr->loaded);
+        return nn_dsp_CTR_DSP_LoadComponent(callbackStatePtr->session, image, imageSize, programMask, dataMask,
+                                            &DAT_0044e459);
     }
     return 0xC8A0A7FC;
 }

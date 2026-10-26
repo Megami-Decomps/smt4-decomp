@@ -1,6 +1,6 @@
-/* NON_MATCHING: trace, clamp and big-endian color byte stores now match retail; remaining: register allocation (retail keeps the block pointer on the stack and the loop count/colors in r5-fp). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
 #include "AsdSDK/AsdDebug.h"
+#include "gfx/PackedColorBytes.h"
 
 extern "C" {
 
@@ -19,7 +19,7 @@ PolyGeom **effPolyRingGeomCreate1(PolyParams *params)
     PolyGeom **block = (PolyGeom **)memAlloc(0x10000, 0x100, 0, 4, 0x10, 1);
     u32 segments = params->segments;
     PolyGeom *geom;
-    u8 *colors;
+    PackedColorBytes *vertices;
     u32 quads;
     u32 colorA, colorB, colorC;
     u32 i;
@@ -29,29 +29,17 @@ PolyGeom **effPolyRingGeomCreate1(PolyParams *params)
     geom = FUN_0024505c(segments & 0xffff, &DAT_00473708, 4, 0x48);
     *block = geom;
     quads = geom->size / 4;
-    colors = geom->buf->colors;
+    vertices = (PackedColorBytes *)geom->buf->colors;
     geom->flags |= 0x20;
     colorA = params->colorA;
     colorB = params->colorB;
     colorC = params->colorC;
     for (i = 0; i < quads; i++) {
-        colors[0] = __rev(colorA) >> 24;
-        colors[1] = __rev(colorA) >> 16;
-        colors[2] = __rev(colorA) >> 8;
-        colors[3] = __rev(colorA);
-        colors[4] = __rev(colorB) >> 24;
-        colors[5] = __rev(colorB) >> 16;
-        colors[6] = __rev(colorB) >> 8;
-        colors[7] = __rev(colorB);
-        colors[8] = __rev(colorB) >> 24;
-        colors[9] = __rev(colorB) >> 16;
-        colors[10] = __rev(colorB) >> 8;
-        colors[11] = __rev(colorB);
-        colors[12] = __rev(colorC) >> 24;
-        colors[13] = __rev(colorC) >> 16;
-        colors[14] = __rev(colorC) >> 8;
-        colors[15] = __rev(colorC);
-        colors += 16;
+        packedColorBytesSet(&vertices[0], colorA);
+        packedColorBytesSet(&vertices[1], colorB);
+        packedColorBytesSet(&vertices[2], colorB);
+        packedColorBytesSet(&vertices[3], colorC);
+        vertices += 4;
     }
     return block;
 }

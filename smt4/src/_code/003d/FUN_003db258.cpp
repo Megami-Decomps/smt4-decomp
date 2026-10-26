@@ -1,4 +1,4 @@
-/* NON_MATCHING: filename buffers start eight bytes later; flags/name addressing and saved path register differ. */
+/* NON_MATCHING: filename buffers start eight bytes later (retail keeps 8 spare bytes after them); flag-clear temp register and the id-store order differ. */
 #include "gfx/VersionedTextureRequest.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
@@ -17,7 +17,7 @@ u32 FUN_003db258(VersionedTextureOwner *owner, const char *effect)
     owner->flags &= ~0x30000;
     VersionedTextureRequest *request = &owner->request;
     request->id = 0xff;
-    memClear(request->name, sizeof(request->name));
+    memClear(owner->request.name, sizeof(request->name));
     if (request->format) {
         asdMemFree(request->format);
         request->format = NULL;
@@ -28,10 +28,10 @@ u32 FUN_003db258(VersionedTextureOwner *owner, const char *effect)
     memClear(formatted, 0x80);
     textFormatBuffer(formatted, DAT_004008c4, effect);
     libc_strcpy(path, formatted);
-    char *basename = FUN_002522e0(path, '/');
-    libc_strcpy(request->name, basename + 1);
+    char *fullPath = path;
+    libc_strcpy(request->name, FUN_002522e0(fullPath, '/') + 1);
     if (keyedRecordFindByName(request->name) == 0xff) {
-        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&request->format), 0);
+        asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&request->format), 0);
         request->flags |= 1;
     }
     return 1;

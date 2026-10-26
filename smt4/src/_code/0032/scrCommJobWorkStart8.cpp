@@ -5,9 +5,9 @@ extern "C" {
 
 s32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
-s32 FUN_002a880c(u32 work, s32 a, s32 b);
+s32 bustupSpriteStartTransition(u32 work, s32 a, s32 b);
 
-/* Script command: on the first frame queues FUN_002a880c on the job work with (8, argument 1); finishes once the command frame reaches argument 1. */
+/* Script command: on the first frame queues bustupSpriteStartTransition on the job work with (8, argument 1); finishes once the command frame reaches argument 1. */
 u32 scrCommJobWorkStart8(void)
 {
     s32 frames = scrGetArg(1);
@@ -19,7 +19,7 @@ u32 scrCommJobWorkStart8(void)
     } else {
         s32 job = scrGetArg(0);
         s32 mode = 8;
-        FUN_002a880c(reinterpret_cast<u32>(jobGetWork(job)), mode, frames);
+        bustupSpriteStartTransition(reinterpret_cast<u32>(jobGetWork(job)), mode, frames);
     }
     return 0;
 }

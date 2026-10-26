@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag-update registers and one float-literal load schedule differ (81 rows each). */
+/* NON_MATCHING: the 0.0f pool load before the case-35 FUN_004f3f1c call is scheduled before mov r2 where retail places it after mov r1; everything else matches. */
 #include "battle/btlCamera.h"
 
 namespace {
@@ -18,8 +18,9 @@ u32 FUN_004e81bc(u32 unused, CameraCueWork *work, s32 extended)
 {
     if (extended != 0) {
         if (work->frame == 15) {
-            g_btlCamera->flags |= 0x100000;
-            cameraBeginScalarTransition(g_btlCamera, 6.0f, 50, 1);
+            BtlCameraA *camera = g_btlCamera;
+            camera->flags |= 0x100000;
+            cameraBeginScalarTransition(camera, 6.0f, 50, 1);
             FUN_004f3f1c(g_btlCamera, 50, 1, 0, 8.0f);
         }
         if (work->frame <= 65)

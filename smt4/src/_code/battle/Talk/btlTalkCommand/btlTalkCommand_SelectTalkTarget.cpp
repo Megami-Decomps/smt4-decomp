@@ -1,4 +1,4 @@
-/* NON_MATCHING: valid-target branch layout restored; record/id/low-bound register lifetimes and one native alignment NOP differ. */
+/* NON_MATCHING: the unsigned target now loads and passes like retail (ldrh, no uxth); callee-saved register assignment for source/target/record (retail r6/r4/r5) and one native alignment NOP differ. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/PadState.h"
 #include "AsdSDK/AsdDebug.h"
@@ -29,7 +29,7 @@ void asdMemFree(void *memory);
 u32 btlTalkCommand_SelectTalkTarget()
 {
     TalkDevilRecord *source = dataTable00FindById((u16)scrGetArg(0));
-    s16 target = source->targetId;
+    u16 target = source->targetId;
     TalkDevilRecord *record = dataTable00FindById(target);
     devilGetRecord(target);
     if (target && record && (record->flags & 0x400) &&

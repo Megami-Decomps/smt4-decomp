@@ -1,4 +1,4 @@
-/* NON_MATCHING: sound-global addressing, null-handle guard folding and saved VFP/core register allocation differ. */
+/* NON_MATCHING: the pitch/pan arguments are copied as one double (retail copies them singly into s17/s16), the null-slot return value is -1 directly (retail returns the index variable) and the first g_asdSound call uses a separate literal in retail. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "code/Code002b.h"
 
@@ -18,6 +18,7 @@ void nw_snd_internal_BasicSound_SetVolume(BasicSoundControlView *sound, s32 fade
 
 s32 FUN_0012655c(u32 soundId, u32 level, s32 fadeFrames, f32 pitch, f32 pan)
 {
+    AsdSoundSystem *sound = &g_asdSound;
     AsdSndSlotB *slot = g_asdSound.currentSlotB;
     if (!slot)
         return -1;
@@ -28,14 +29,14 @@ s32 FUN_0012655c(u32 soundId, u32 level, s32 fadeFrames, f32 pitch, f32 pan)
             break;
         }
     }
-    if (index < 0)
+    if (index == -1)
         return -1;
-    if (!FUN_002bf684(&g_asdSound) || !FUN_00141fd0(&g_asdSound, soundId))
+    if (!FUN_002bf684(sound) || !FUN_00141fd0(sound, soundId))
         return index;
     if (!asdSndEnsureCurrentSlotData(soundId))
         return -1;
     s32 *handle = &slot->handles[index];
-    bool started = (u8)nw_snd_SoundStartable_StartSound(g_asdSound.player, handle, soundId, 0) == 0;
+    bool started = (u8)nw_snd_SoundStartable_StartSound(sound->player, handle, soundId, 0) == 0;
     union { f32 value; s32 bits; } volume;
     volume.value = 0.0f;
     if (level) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: head/node use opposite r1/r2 assignments, and the compiler places the common zero-return block after the empty-list initialization. */
+/* NON_MATCHING: layout matches; only head/node use opposite r1/r2 assignments (retail node r1, head r2). */
 #include "common.h"
 
 struct ModelRegistryLink {
@@ -26,15 +26,15 @@ u32 FUN_00129584(ModelRegistryEntry *entry, u32 parameter)
     entry->parameter = parameter;
     ModelRegistryLink *head = g_modelWorkList;
     ModelRegistryLink *node = modelRegistryGetLink(entry);
-    if (head != NULL) {
+    if (head == NULL) {
+        entry->link.next = entry->link.previous = modelRegistryGetLink(entry);
+        g_modelWorkList = modelRegistryGetLink(entry);
+    } else {
         node->previous = head;
         head->next->previous = node;
         node->next = head->next;
         head->next = node;
-        return 0;
     }
-    entry->link.next = entry->link.previous = modelRegistryGetLink(entry);
-    g_modelWorkList = modelRegistryGetLink(entry);
     return 0;
 }
 }

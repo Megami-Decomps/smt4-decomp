@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation differs: retail moves the text pointer to r3 and alpha to s4 up front and loads the font handle last. */
+/* NON_MATCHING: register allocation only: the opacity temp (retail r0, built r1) and the 0.0f constant (retail s0, built s2) differ. */
 #include "AsdSDK/Source/Gfx/Text/TextDefaults.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "text/TextDraw.h"
@@ -8,12 +8,10 @@ extern "C" {
 extern AsdTextDefaults g_asdTextDefaults;
 
 
-/* Draws the text at (x, y) with the given opacity and returns the drawn width (0 when nothing drew). */
-f32 FUN_00124c60(AsdText *text, s32 x, s32 y, f32 alpha)
+/* Draws the text at (left, top) with the given opacity and returns the drawn width (0 when nothing drew). */
+static __inline f32 asdTextDrawAt(AsdText *text, f32 left, f32 top, f32 alpha)
 {
     f32 width = 0.0f;
-    f32 left = (f32)x;
-    f32 top = (f32)y;
 
     if (text->unk54 != 0 && text->text[0] != '\0') {
         u8 opacity;
@@ -32,6 +30,11 @@ f32 FUN_00124c60(AsdText *text, s32 x, s32 y, f32 alpha)
         }
     }
     return width;
+}
+
+f32 FUN_00124c60(AsdText *text, s32 x, s32 y, f32 alpha)
+{
+    return asdTextDrawAt(text, (f32)x, (f32)y, alpha);
 }
 
 } /* extern "C" */

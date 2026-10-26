@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
-void FUN_00380894(void);
+void soundRequestPostType30(void);
 void *nw_snd_internal_FrameHeap_Alloc(void *heap, u32 size, void (*callback)(void), u32 flags);
 }
 
@@ -21,7 +21,7 @@ struct SoundHeap {
     void *alloc(u32 size)
     {
         ScopedCriticalLock guard(lock);
-        return allocLocked(size, FUN_00380894, 0);
+        return allocLocked(size, soundRequestPostType30, 0);
     }
 };
 

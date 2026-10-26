@@ -9,7 +9,7 @@ int dataTable8FindRecord(void);
 int FUN_003e8bb0(unsigned int [112], int);
 int FUN_004dffe4(int *);
 int btlActionMarkRandomStatusTarget(...);
-int FUN_004e5b5c(...);
+int btlActionMarkRandomTargetableUnit(...);
 int FUN_004e6ed8(int *, int);
 int btlAiMarkLowestHpTarget(int *);
 int FUN_004e7c04(int *, unsigned int);
@@ -47,7 +47,7 @@ extern int lcgRandomRange(short);
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004dffe4. */
 /* Supplied declaration required: btlActionMarkRandomStatusTarget. */
-/* Supplied declaration required: FUN_004e5b5c. */
+/* Supplied declaration required: btlActionMarkRandomTargetableUnit. */
 /* Supplied declaration required: FUN_004e6ed8. */
 /* Supplied declaration required: btlAiMarkLowestHpTarget. */
 /* Supplied declaration required: FUN_004e7c04. */
@@ -155,7 +155,7 @@ void btlUnitSetParam(int *param_1,int param_2,unsigned int param_3,int param_4)
     FUN_004dffe4(param_1);
     break;
   case 2:
-    FUN_004e5b5c(param_1);
+    btlActionMarkRandomTargetableUnit(param_1);
     break;
   case 3:
     btlAiMarkLowestHpTarget(param_1);
@@ -227,7 +227,7 @@ joined_r0x004deccc:
       *(unsigned char *)(temp_v8 + temp_v5 + 0x38) = 1;
     }
     else {
-      FUN_004e5b5c(param_1);
+      btlActionMarkRandomTargetableUnit(param_1);
     }
     break;
   case 7:

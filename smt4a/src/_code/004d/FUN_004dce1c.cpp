@@ -105,7 +105,7 @@ void FUN_004dce1c(BtlUnitHandle *handle, BtlAiAction *action)
         escaped = 0;
     }
     flagsData = reinterpret_cast<BtlFlagsData *>(handle->data);
-    if ((flagsData->flags & g_btlAction.mask128) != 0) {
+    if ((g_btlAction.mask128 & flagsData->flags) != 0) {
         escaped = 1;
     }
     if (handle->data->uiState == 4) {

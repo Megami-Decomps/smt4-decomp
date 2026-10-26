@@ -1,4 +1,4 @@
-/* NON_MATCHING: the four list walks, head copy and registers match; armcc threads the skip branch of the second and third walk to the end of the following walk (beq 0x48/0x5c) where retail jumps to the next walk's guard (0x34/0x48). */
+/* NON_MATCHING: the four list walks (an inline helper per walk gives retail's r0..r3 walker registers) match except that retail loads the head into r0 and copies it to r3 at the first guard, while the build loads r3 and copies to r0, so armcc threads the guards' skip branches (0x34/0x48/0x5c) where retail jumps to each next walk's guard (0x20/0x34/0x48). */
 #include "common.h"
 
 struct AddressRange {
@@ -15,26 +15,22 @@ extern "C" {
 
 extern AllocationAddressRanges g_allocationAddressRanges; /* 0x5b4028 */
 
-/* Walks the allocation address-range list four times; the per-pass bookkeeping was stripped from the release build. */
+/* Walks a chain to its end; the per-step bookkeeping was stripped from the release build. */
+static __inline void walkRanges(AddressRange *range)
+{
+    while (range != NULL) {
+        range = range->next;
+    }
+}
+
+/* Walks the allocation address-range list four times. */
 void FUN_0019a534(void)
 {
-    AddressRange *range = *g_allocationAddressRanges.head;
-    AddressRange *head = range;
-    while (range != NULL) {
-        range = range->next;
-    }
-    range = head;
-    while (range != NULL) {
-        range = range->next;
-    }
-    range = head;
-    while (range != NULL) {
-        range = range->next;
-    }
-    range = head;
-    while (range != NULL) {
-        range = range->next;
-    }
+    AddressRange *head = *g_allocationAddressRanges.head;
+    walkRanges(head);
+    walkRanges(head);
+    walkRanges(head);
+    walkRanges(head);
 }
 
 } /* extern "C" */

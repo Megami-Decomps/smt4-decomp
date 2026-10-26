@@ -19,7 +19,10 @@ extern void FUN_001b2d54(u32 system, u32 node, s32 handle);
 /* Releases the slot's texture node and handle and marks the slot inactive. */
 void aocSlotRelease(AocSlot *slot)
 {
-    if (slot == NULL || slot->handle == -1) {
+    if (slot == NULL) {
+        return;
+    }
+    if (slot->handle == -1) {
         return;
     }
     if (slot->active != 0) {

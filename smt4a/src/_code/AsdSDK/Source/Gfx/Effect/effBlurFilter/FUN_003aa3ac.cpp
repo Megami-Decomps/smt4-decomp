@@ -1,6 +1,7 @@
-/* NON_MATCHING: REV-based color extraction and scalar VFP output stores still differ from retail. */
+/* NON_MATCHING: retail loads the packed colour into r1 with the next shiftRandomNextFraction argument (mov r0,#0) hoisted before the REV colour bytes, so one more register (r10) is saved and the VFP temps s16/s17 swap. */
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/QuaternionWorkspace.h"
+#include "gfx/PackedColorBytes.h"
 #include "code/Code0051_Smt4a.h"
 
 struct ScatterParams {
@@ -18,7 +19,7 @@ struct ScatterParams {
 };
 struct ScatterQuad {
     /* 0x00 */ u32 unk00;
-    /* 0x04 */ u8 color[4];
+    /* 0x04 */ PackedColorBytes color;
     /* 0x08 */ u32 payload08;
     /* 0x0C */ u32 payload0C;
     /* 0x10 */ u32 unk10;
@@ -54,12 +55,7 @@ ScatterSample* FUN_003aa3ac(ScatterParams* params)
         ScatterQuad& quad = sample.quad;
         quad.payload08 = params->payload10;
         quad.payload0C = params->payload14;
-        const u32 color = params->color;
-        quad.color[0] = static_cast<u8>(color);
-        quad.color[1] = static_cast<u8>(color >> 8);
-        quad.color[2] = static_cast<u8>(color >> 16);
-        quad.color[3] = static_cast<u8>(color >> 24);
-
+        packedColorBytesSet(&quad.color, params->color);
         const f32 spread = params->spread;
         const f32 halfSize = static_cast<f32>(params->size) * 0.5f;
         const f32 randomX = (shiftRandomNextFraction(0) - 0.5f) * 2.0f;

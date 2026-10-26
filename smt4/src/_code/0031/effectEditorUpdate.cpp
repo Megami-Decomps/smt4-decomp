@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail loads the state into r0 (so it reloads g_effectEditor.object for the free) and sums the offsets in r0; the build keeps state in r1 / the offset in r2. */
+/* NON_MATCHING: the item-index sum now matches retail (named position local, extraOffset + baseOffset); remaining: retail loads the state into r0 (overwriting the object pointer) and reloads g_effectEditor.object for the free, the build keeps the object in r0 and the state in r1. */
 #include "common.h"
 #include "shard/W6_W6Match2_GeometryResources.h"
 
@@ -36,10 +36,12 @@ u32 effectEditorUpdate(void)
     s32 data;
 
     FUN_002f2aa8(g_effectEditor.object);
-    data = linkedFindItemByIndex(g_effectEditor.source, g_effectEditor.baseOffset + DAT_0044f858.extraOffset);
+    s32 position = DAT_0044f858.extraOffset + g_effectEditor.baseOffset;
+    data = linkedFindItemByIndex(g_effectEditor.source, position);
     s32 nameOffset = data + 0x9c;
     namedObjectFormatName(g_effectEditor.object, nameOffset);
-    if (g_effectEditor.object->state == 2 || g_effectEditor.object->state == 1) {
+    s32 state = g_effectEditor.object->state;
+    if (state == 2 || state == 1) {
         asdMemoryFreeLocked(g_effectEditor.object);
         g_effectEditor.object = NULL;
         return 0;

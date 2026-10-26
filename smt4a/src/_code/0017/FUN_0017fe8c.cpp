@@ -1,4 +1,4 @@
-/* NON_MATCHING: category address formation now matches (usage pointer + index, immediate offset); register numbering of the size/usage temporaries and the shared unlink epilogue placement differ. */
+/* NON_MATCHING: unlink layout and instructions match; the category-array updates allocate r1/r2 (usage pointer vs size) opposite to retail (usage r2, size r1; payload path r3/r2/r1). */
 #include "sys/AllocationTracking.h"
 
 extern "C" {
@@ -24,21 +24,21 @@ AllocationHeaderA *FUN_0017fe8c(void *payload)
             (payloadUsage->categoryPayloadBytes[category] - (header->size - header->alignment)) + 0x40;
     }
     AllocationLink *link = &header->link;
-    if (link->previous) {
-        if (!link->next) {
-            g_allocationAddressRanges.usage->tail = link->previous;
-            link->previous->next = NULL;
-        } else {
-            link->previous->next = link->next;
-            link->next->previous = link->previous;
-        }
-    } else {
+    if (!link->previous) {
         if (link->next) {
             g_allocationAddressRanges.usage->head = link->next;
             link->next->previous = NULL;
         } else {
             g_allocationAddressRanges.usage->tail = NULL;
             g_allocationAddressRanges.usage->head = NULL;
+        }
+    } else {
+        if (!link->next) {
+            g_allocationAddressRanges.usage->tail = link->previous;
+            link->previous->next = NULL;
+        } else {
+            link->previous->next = link->next;
+            link->next->previous = link->previous;
         }
     }
     if (g_allocationAddressRanges.usage->cursor == link)

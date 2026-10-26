@@ -1,16 +1,16 @@
 /* NON_MATCHING: failure exit is duplicated after the scan loop (armcc tail-duplicates the 0-result tail call); retail branches every failure path to one shared exit. */
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
+#include "classes/WindowOperation.h"
 
 extern "C" {
 s32 libc_strlen(const char *text);
 s32 libc_strcmp(const char *left, const char *right);
-void FUN_0015e6f4(void *output, AocSystem *system, const char *mountName,
-                  u32 archive, u32 flags, u32 id);
-void _ZN21WindowOperationResultC1Eh(void *output, u32 found);
+WindowOperationResult FUN_0015e6f4(AocSystem *system, const char *mountName,
+                                   u32 archive, u32 flags, u32 id);
 
 // Resolve an aoc-prefixed path to the mounted content package's archive.
-void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
+WindowOperationResult FUN_0015dc2c(AocSystem *system, const char *path)
 {
     if (system->packages.count != 0 && system->packages.entries != NULL) {
         char mountName[16] = {};
@@ -26,9 +26,8 @@ void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
                     for (s32 packageIndex = 0; packageIndex < system->packages.count; ++packageIndex) {
                         AocPackage *package = &system->packages.entries[packageIndex];
                         if (libc_strcmp(mountName, package->mountName) == 0) {
-                            FUN_0015e6f4(output, system, package->mountName, package->archive,
-                                          package->flags, package->id);
-                            return;
+                            return FUN_0015e6f4(system, package->mountName, package->archive,
+                                                package->flags, package->id);
                         }
                     }
                 }
@@ -36,6 +35,6 @@ void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
             }
         }
     }
-    _ZN21WindowOperationResultC1Eh(output, 0);
+    return WindowOperationResult(0);
 }
 }

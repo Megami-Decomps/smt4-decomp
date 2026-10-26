@@ -1,5 +1,6 @@
-/* NON_MATCHING: allocation head, arm order and call masks match retail (plain static allocWindBlock); remaining: scheduling of the sides clamp against the block copy (retail copies the block to r5 after the clamp loads). */
+/* NON_MATCHING: allocation head, arm order, call masks and the sides clamp (atLeastU32) match retail; remaining: retail loads the size terms into r0/r1 the other way round (header constant 12 in r1), and moves the new block to r5 after the `mov r2, #76` argument setup. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
+#include "util/ValueLimits.h"
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -32,8 +33,7 @@ PolyWindBlock *effPolyWindGeomCreate0(PolyWindParams *params, void *texture)
     PolyWindBlock *block = allocWindBlock(params->segments * 0x2c + 0xc);
     u32 sides;
 
-    sides = params->sides;
-    sides = sides > 3 ? sides : 3;
+    sides = atLeastU32(params->sides, 3);
     params->sides = sides;
     block->geom = FUN_002469ec(params->segments & 0xffff, sides & 0xffff, &DAT_00473708, 4, 0x4c);
     if (texture == NULL) {

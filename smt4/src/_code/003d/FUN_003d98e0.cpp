@@ -55,7 +55,7 @@ static __inline u32 registerHandle(EffectOwner *owner, u32 handle)
 }
 
 /* Starts the effect `effect` of the given kind at the (offset) origin in a free slot, and registers its handle in the owner's list; returns the handle. */
-u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, u32 index, u32 indexArg, s32 kind, u32 target, Vec2 origin)
+u32 FUN_003d98e0(EffectOwner *owner, u32 effect, u32 arg, s32 index, u32 indexArg, s32 kind, u32 target, Vec2 origin)
 {
     if (effect == 0xff) {
         return 0;

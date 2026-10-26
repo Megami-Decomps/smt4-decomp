@@ -18,7 +18,7 @@ extern RenderCtx *g_titleScene;
 u32 FUN_002c5d80(u32 mode, u32 option);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c();
-void FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
+f32 FUN_002aed34(s32 layer, void *parameters, f32 x, f32 y);
 
 // Draw the title debug background, PC/ROM loading indicator and the game title label.
 u32 FUN_00125e64()

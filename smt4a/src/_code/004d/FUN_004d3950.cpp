@@ -1,4 +1,4 @@
-/* NON_MATCHING: builds the "btl Stage Menu" debug list box; only the sign-bit test of item 10 (retail: and 0x80000000 / cmp / movlt, built: lsr 31), the 50000 limits (retail loads each from its own pool word) and the literal pool layout differ */
+/* NON_MATCHING: builds the "btl Stage Menu" debug list box; only the scheduling of the first 50000 limit pool load against the model pointer load in item 11 differs. */
 #include "common.h"
 
 struct BtlStageVec3 {
@@ -56,6 +56,14 @@ extern HandleRegistry *g_handleRegistry;
 extern BtlStageModel *g_btlStageModel;
 extern u8 DAT_00572800[];   /* item descriptions */
 
+static __inline s32 stageMenuFirstHidden(void)
+{
+    s32 hidden = 0;
+    if ((g_handleRegistry->first->flags & STAGE_MENU_FLAG_HIDDEN) < 0)
+        hidden = 1;
+    return hidden;
+}
+
 s32 jobIsValid(u32 job);
 void FUN_003592dc(u32 job);
 void jobStop(u32 job, s32 arg);
@@ -89,7 +97,7 @@ void FUN_004d3950(StageMenuOwner *owner, StageMenuParent *parent)
     asdListBoxSetIntItem(owner->listBox, 7, g_btlStageModel->rangeNear, 0, 10000, 0);
     asdListBoxSetIntItem(owner->listBox, 8, g_btlStageModel->rangeFar, 0, 10000, 0);
     asdListBoxSetFloatItem(owner->listBox, 9, 0, 10, g_btlStageModel->fogDensity);
-    asdListBoxSetIntItem(owner->listBox, 10, (g_handleRegistry->first->flags & STAGE_MENU_FLAG_HIDDEN) < 0, 0, 1, 0);
+    asdListBoxSetIntItem(owner->listBox, 10, stageMenuFirstHidden(), 0, 1, 0);
     asdListBoxSetFloatItem(owner->listBox, 11, -50000, 50000, g_btlStageModel->lightX);
     asdListBoxSetFloatItem(owner->listBox, 12, -50000, 50000, g_btlStageModel->lightY);
     asdListBoxSetIntItem(owner->listBox, 13, g_btlStageModel->ambientR, 0, 0xFF, 0);

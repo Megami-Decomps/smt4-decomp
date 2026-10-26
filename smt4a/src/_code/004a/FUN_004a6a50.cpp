@@ -6,7 +6,7 @@
 extern "C" {
 
 extern void rectRecRead(s32 group, s32 id, s32 *a, s32 *b, s32 *c, s32 *d);
-extern void FUN_004d091c(u32 target, s32 a, s32 b, s32 c, s32 d);
+extern void touchRegionOwnerAdd(u32 target, s32 a, s32 b, s32 c, s32 d);
 extern void touchRegisterFirstRegion(u32 target, s32 a, s32 b, s32 c, s32 d);
 extern void touchRegisterSecondRegion(u32 target, s32 a, s32 b, s32 c, s32 d);
 
@@ -23,7 +23,7 @@ void FUN_004a6a50(u32 target, const void *source)
     rectRecRead(0x14, 0x574, &a, &b, &c, &d);
     touchRegisterSecondRegion(target, a, b, c, d);
     rectRecRead(0x14, 0x575, &a, &b, &c, &d);
-    FUN_004d091c(target, a, b, c, d);
+    touchRegionOwnerAdd(target, a, b, c, d);
 }
 
 }

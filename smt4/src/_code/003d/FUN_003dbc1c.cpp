@@ -1,4 +1,4 @@
-/* NON_MATCHING: reference search is a findReferenceEffect helper (retail keeps the same shape); retail keeps the &formatted pointer in sl across the loop, spills the inlined search's name to its stack slot and keeps the name null tests before each strcmp/strncmp, which the build drops. */
+/* NON_MATCHING: name-compare helpers restore retail's repeated null tests; retail keeps the &formatted pointer in a callee-saved register across the loop, spills the inlined search's name and loads each g_btlEffect prefix after its null test. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -45,6 +45,16 @@ static s32 findReferenceEffect(const char *name)
     return -1;
 }
 
+static __inline bool nameStartsWith(const char *name, const char *prefix)
+{
+    return name != NULL && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
+}
+
+static __inline bool nameEquals(const char *name, const char *other)
+{
+    return name != NULL && libc_strcmp(name, other) == 0;
+}
+
 /* Resolves each of the four effect names to an effect id: names that are empty or special are
  * skipped, names naming a reference slot copy that slot's id, and names starting with "VER"
  * register a record. */
@@ -65,16 +75,16 @@ void FUN_003dbc1c(EffectWork *work)
         if (libc_strcmp(DAT_0040090c, name) == 0) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[0], libc_strlen(g_btlEffect[0])) == 0) {
+        if (nameStartsWith(name, g_btlEffect[0])) {
             continue;
         }
-        if (name != NULL && libc_strcmp(name, g_btlEffect[4]) == 0) {
+        if (nameEquals(name, g_btlEffect[4])) {
             continue;
         }
-        if (name != NULL && libc_strncmp(name, g_btlEffect[3], libc_strlen(g_btlEffect[3])) == 0) {
+        if (nameStartsWith(name, g_btlEffect[3])) {
             continue;
         }
-        if (name != NULL && libc_strcmp(name, g_btlEffect[5]) == 0) {
+        if (nameEquals(name, g_btlEffect[5])) {
             continue;
         }
         char path[128];

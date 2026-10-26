@@ -54,7 +54,7 @@ extern void FUN_0019de98(u32 a, u32 color);
 extern void placeWinRelease(void);
 extern void FUN_001add1c(u8 *text);
 extern void FUN_001a6500(u8 *text);
-extern void FUN_0019f548(PanelHelper *helper);
+extern void cameraResourcesRelease(PanelHelper *helper);
 extern void asdOperatorDelete(void *object);
 extern void resourceOwnerReleaseAndReset(u32 *registry);
 extern void ptrListRemoveClearOwner(u32 *registry, u32 handle);
@@ -89,7 +89,7 @@ void scriptPanelRelease(ScriptPanel *panel)
     FUN_001add1c(panel->text);
     FUN_001a6500(panel->text);
     if (panel->helper != NULL) {
-        FUN_0019f548(panel->helper);
+        cameraResourcesRelease(panel->helper);
         asdDebugHookPtr(panel->helper);
         if (panel->helper != NULL) {
             asdOperatorDelete(panelHelperFromSub((HelperSub *)asdDebugHookPass(&panel->helper->sub)));

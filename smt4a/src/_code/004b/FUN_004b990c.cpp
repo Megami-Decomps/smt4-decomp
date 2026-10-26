@@ -39,7 +39,7 @@ int dataTable33Entries(void);
 int dataTable33TypeCount(...);
 
 int asdMemFree(void);
-int FUN_0019f548(unsigned int);
+int cameraResourcesRelease(unsigned int);
 int FUN_001ad9b4(void);
 int slotSetRequest(int, int, int);
 int dialogClose(int);
@@ -89,7 +89,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int gameFlagIsSet(void);
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019f548. */
+/* Supplied declaration required: cameraResourcesRelease. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: slotSetRequest. */
 extern int campIsState51(void);
@@ -181,7 +181,7 @@ void FUN_004b990c(int param_1)
     *(unsigned int *)(param_1 + 0x30) = 0;
     commonBgStopChildAndReset();
     if (*(char *)(param_1 + 0x1214) != '\0') {
-      FUN_0019f548(*(unsigned int *)(param_1 + 0x1218));
+      cameraResourcesRelease(*(unsigned int *)(param_1 + 0x1218));
       if (*(int *)(param_1 + 0x1218) != 0) {
         asdOperatorDelete(*(int *)(param_1 + 0x1218));
       }

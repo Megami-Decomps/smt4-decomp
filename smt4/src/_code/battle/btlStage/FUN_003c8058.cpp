@@ -22,7 +22,7 @@ extern const char DAT_00401770[];
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(s32 heap, s32 category, s32 flags, s32 bytes, s32 alignment, s32 count);
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_003c7ffc(void *argument);
+void stageRequestSubmitLocked(void *argument);
 void FUN_003f6ec4(void);
 void FUN_003f6ff4(void);
 void FUN_003f6f80(void);
@@ -63,7 +63,7 @@ void FUN_003c8058(BattleStageWorkerView *worker)
     descriptor.callbacks[1] = FUN_003f6ff4;
     descriptor.callbacks[2] = FUN_003f6f80;
     BattleStageWorkerView *argument = worker;
-    s32 result = FUN_002bcc60(&worker->thread, &descriptor, FUN_003c7ffc, &argument,
+    s32 result = FUN_002bcc60(&worker->thread, &descriptor, stageRequestSubmitLocked, &argument,
         worker->stackInfo->unk08 + worker->stackInfo->unk0C, 0x11, 0, 0);
     if (nnResultIsFailure(result))
         FUN_002c526c(result);

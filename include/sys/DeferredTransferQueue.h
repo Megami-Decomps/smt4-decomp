@@ -16,8 +16,8 @@ struct DeferredTransferState {
     DeferredTransferSlot *slots;
     u8 unk0C[8];
     u32 count;
-    u32 produced;
-    u32 consumed;
+    volatile u32 produced;
+    volatile u32 consumed;
 };
 struct DeferredTransferJob {
     DeferredTransferSlot *slot;

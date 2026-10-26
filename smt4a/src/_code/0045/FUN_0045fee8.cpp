@@ -1,41 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045fee8` (_code @ 0x45fee8, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "classes/ObjectCommandRequests.h"
 
-extern "C" {
+/* A voice update: a parameter set whose halfword at 8 is the changed-parameter mask (0x50 bytes). */
+struct ObjectVoiceUpdate {
+    /* 0x00 */ u32 unk00[2];
+    /* 0x08 */ u16 changedMask;
+    /* 0x0A */ u8 unk0A[0x46];
+};
 
-int listAppendNode(int, int);
-int objectCommandReserveWords(int, int);
-int __aeabi_memcpy4(int, int, int);
+/* A type-39 command: the owner's parameter holder and a copy of the update. */
+struct ObjectVoiceUpdateNode {
+    /* 0x00 */ u32 next;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 token;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ ObjectVoiceUpdate update;
+};
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-/* Supplied declaration required: __aeabi_memcpy4. */
-
-
-void FUN_0045fee8(int param_1,int param_2)
-
+// Records the update's changed mask and queues a type-39 command carrying the whole update.
+extern "C" void FUN_0045fee8(ObjectCommandOwner *owner, const ObjectVoiceUpdate *update)
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  *(unsigned short *)(param_1 + 0x328c) = *(unsigned short *)(param_2 + 8);
-  temp_v0 = objectCommandQueueGet();
-  temp_v1 = temp_v0;
-  objectCommandReserveWords(temp_v0,0x19);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 0x27;
-  *(int *)(temp_v1 + 0x10) = param_1 + 0x118;
-  __aeabi_memcpy4(temp_v1 + 0x14,param_2,0x50);
-  listAppendNode(temp_v0,temp_v1);
-  return;
+    owner->changedMask = update->changedMask;
+    ObjectCommandQueue *queue = objectCommandQueueGet();
+    ObjectVoiceUpdateNode *command = (ObjectVoiceUpdateNode *)objectCommandBegin(queue, 25);
+    command->kind = 39;
+    command->owner = (u32)&owner->params;
+    command->update = *update;
+    listAppendNode(queue, (ObjectCommand *)command);
 }
-
-} /* extern "C" */

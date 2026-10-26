@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail spells out four checks and retains an unused 9999 literal load; the readable loop is not unrolled by this compiler. */
+/* NON_MATCHING: the four entry checks are spelled out as in retail; retail also keeps an unused 9999 literal load in r6 and does not fold the first block's compare against the initial zero. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -24,13 +24,26 @@ s32 btlGetMaximumNamedValue(NamedBattleValues *values)
     if (values->entries == NULL || FUN_00293230(static_cast<void *>(btlGetMainState())))
         return -1;
     s32 maximum = 0;
-    for (s32 i = 0; i < 4; ++i) {
-        if (libc_strlen(values->entries[i].name) &&
-            libc_strcmp(values->entries[i].name, "0") != 0 &&
-            values->entries[i].value >= 0 &&
-            values->entries[i].value > maximum)
-            maximum = values->entries[i].value;
-    }
+    if (libc_strlen(values->entries[0].name) &&
+        libc_strcmp(values->entries[0].name, "0") != 0 &&
+        values->entries[0].value >= 0 &&
+        values->entries[0].value > maximum)
+        maximum = values->entries[0].value;
+    if (libc_strlen(values->entries[1].name) &&
+        libc_strcmp(values->entries[1].name, "0") != 0 &&
+        values->entries[1].value >= 0 &&
+        values->entries[1].value > maximum)
+        maximum = values->entries[1].value;
+    if (libc_strlen(values->entries[2].name) &&
+        libc_strcmp(values->entries[2].name, "0") != 0 &&
+        values->entries[2].value >= 0 &&
+        values->entries[2].value > maximum)
+        maximum = values->entries[2].value;
+    if (libc_strlen(values->entries[3].name) &&
+        libc_strcmp(values->entries[3].name, "0") != 0 &&
+        values->entries[3].value >= 0 &&
+        values->entries[3].value > maximum)
+        maximum = values->entries[3].value;
     return maximum;
 }
 }

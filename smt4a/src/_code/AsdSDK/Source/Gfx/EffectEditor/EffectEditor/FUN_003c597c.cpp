@@ -41,8 +41,8 @@ extern "C" u32 FUN_003c597c()
 {
     // Related-item metadata and the name tail extend beyond the shared item prefix.
     struct ItemView { EffectSelectionItem item; u32 related; u32 flags; char name[1]; };
-    EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.selection.list,
-        g_effectEditor.selection.index + DAT_0059e9a8.index);
+    s32 position = DAT_0059e9a8.index + g_effectEditor.selection.index;
+    EffectSelectionItem *source = linkedFindItemByIndex(g_effectEditor.selection.list, position);
     EffectSelectionItem *copy = FUN_00376628(g_effectEditor.selection.list, source->block);
     g_effectEditor.selection.item = copy;
     rt_memcpy_w144(copy, source);

@@ -2,32 +2,23 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnit.h"
+#include "battle/btlAction.h"
 
 struct BattleTargetWork {
     /* 0x00 */ u8 unk00[0x38];
     /* 0x38 */ u8 candidates[109];
 };
 
-struct BattleActionMasks {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ u64 alternateRequired;
-    /* 0x18 */ u8 unk18[0x20];
-    /* 0x38 */ u64 unavailable;
-    /* 0x40 */ u64 alternateUnavailable;
-    /* 0x48 */ u8 unk48[0x10];
-    /* 0x58 */ u64 required;
-};
-
 extern "C" {
-extern BattleActionMasks g_btlAction;
+extern BtlActionGlobals g_btlAction;
 
 // Mark the battle slots permitted by the requested target-selection mode.
 void btlUnitMarkTargetCandidates(BtlMainStateA **reference, s32 group, s32 mode)
 {
     BattleTargetWork *work = reinterpret_cast<BattleTargetWork *>(btlUnitGet(reference));
     if (mode == 2) {
-        const u64 alternateRequired = g_btlAction.alternateRequired;
-        const u64 alternateUnavailable = g_btlAction.alternateUnavailable;
+        const u64 alternateRequired = g_btlAction.targetableMask;
+        const u64 alternateUnavailable = g_btlAction.interaction.excludedMask;
         BtlCombatantEntryA *entry = (*reference)->entries;
         for (s32 i = 0; i < 109; ++i, ++entry) {
             if ((entry->flags & alternateRequired) &&
@@ -37,7 +28,7 @@ void btlUnitMarkTargetCandidates(BtlMainStateA **reference, s32 group, s32 mode)
         return;
     }
     if (group == 1) {
-        const u64 required = g_btlAction.required;
+        const u64 required = g_btlAction.clearedFlags.mask;
         BtlCombatantEntryA *entry = &(*reference)->entries[4];
         for (s32 i = 0; i < 50; ++i, ++entry) {
             if (entry->flags & required)
@@ -45,8 +36,8 @@ void btlUnitMarkTargetCandidates(BtlMainStateA **reference, s32 group, s32 mode)
         }
         return;
     }
-    const u64 required = g_btlAction.required;
-    const u64 unavailable = g_btlAction.unavailable;
+    const u64 required = g_btlAction.clearedFlags.mask;
+    const u64 unavailable = g_btlAction.interaction.reachMask;
     BtlCombatantEntryA *entry = (*reference)->entries;
     for (s32 i = 0; i < 109; ++i, ++entry) {
         if ((entry->flags & required) &&

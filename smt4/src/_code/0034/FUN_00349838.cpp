@@ -20,6 +20,8 @@ extern "C" s32 FUN_00349838(Obj349838 *image)
         bytesPerPixel = 3;
     } else if (image->format == 0x6758) {
         bytesPerPixel = 2;
+    } else if (image->format == 0x6756) {
+        bytesPerPixel = 1;
     } else {
         bytesPerPixel = 1;
     }

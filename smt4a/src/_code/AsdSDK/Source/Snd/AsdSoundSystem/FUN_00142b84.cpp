@@ -32,7 +32,7 @@ extern SoundStartupStateA g_asdSoundSystem;
 extern SoundStartupControlA g_asdSoundDuck;
 s32 FUN_00158f64(void);
 s32 FUN_00159030(void);
-s32 FUN_00159d60(void);
+s32 dspsndInitializeManagers(void);
 void sysFatalBreak(void);
 void sndMasterManagerSetVolume(f32 volume);
 void FUN_00159e58(u32 mode);
@@ -46,7 +46,7 @@ void FUN_00142b84(s32 auxiliaryMode)
         sysFatalBreak();
     if (nnResultIsFailure(FUN_00159030()))
         sysFatalBreak();
-    if (nnResultIsFailure(FUN_00159d60()))
+    if (nnResultIsFailure(dspsndInitializeManagers()))
         sysFatalBreak();
     sndMasterManagerSetVolume(1.0f);
     if (auxiliaryMode > 0) {

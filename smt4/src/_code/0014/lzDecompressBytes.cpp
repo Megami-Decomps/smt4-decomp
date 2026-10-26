@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the 0x111-length arm schedules differently (retail shifts the high nibble before loading the two extension bytes; the build loads the first byte first). */
 #include "common.h"
 
 static __inline u32 readLzWord(const u8 *source)
@@ -31,8 +30,9 @@ extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
                 if (!extended) {
                     length += 3;
                 } else if (length == 1) {
-                    length = ((first & 15) << 12) | (source[1] << 4) | (source[2] >> 4);
-                    source += 2;
+                    length = (first & 15) << 12;
+                    length |= *++source << 4;
+                    length |= *++source >> 4;
                     length += 0x111;
                 } else if (length == 0) {
                     length = ((first & 15) << 4) | (*++source >> 4);

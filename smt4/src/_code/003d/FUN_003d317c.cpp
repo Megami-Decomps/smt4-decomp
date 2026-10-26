@@ -20,7 +20,7 @@ int btlReflectQueueKind34(int, unsigned int *);
 int FUN_002569ac(...);
 int FUN_0026beb4(int, unsigned int *, int, unsigned int, int);
 int FUN_003c0484(...);
-int FUN_003cf884(int *, unsigned int *, unsigned int);
+int btlClearActionMarksAndSelectTarget(int *, unsigned int *, unsigned int);
 int memClearTwo200(unsigned int);
 
 /* stack frame of param_2: 1 slot(s), 4 byte(s) */
@@ -52,7 +52,7 @@ extern int FUN_00293230(int);
 /* Supplied declaration required: memClear. */
 extern int btlUiIsSceneTransitionReady(int);
 /* Supplied declaration required: FUN_003c0484. */
-/* Supplied declaration required: FUN_003cf884. */
+/* Supplied declaration required: btlClearActionMarksAndSelectTarget. */
 /* Supplied declaration required: memClearTwo200. */
 
 
@@ -153,7 +153,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
       *(unsigned short *)(param_2[10] + 0x14e) = 8;
       param_2[0x168] = 0;
       reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
-      FUN_003cf884(param_1,param_2,param_2[0xd]);
+      btlClearActionMarksAndSelectTarget(param_1,param_2,param_2[0xd]);
       *(unsigned short *)(*param_1 + 0x225a) =
            *(unsigned short *)(*(int *)(*param_1 + 0x1fc0) + param_2[0xd] * 0x288 + 8);
       *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xb;
@@ -175,7 +175,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
       }
       reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
       piVar4 = param_1;
-      FUN_003cf884(param_1,param_2,param_2[0xd]);
+      btlClearActionMarksAndSelectTarget(param_1,param_2,param_2[0xd]);
       if (piVar4 != (int *)0x0) {
         *param_2 = *param_2 | 0x204;
         FUN_00229b10(param_1,param_2);

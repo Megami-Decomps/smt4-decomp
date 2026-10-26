@@ -11,7 +11,7 @@ typedef struct Obj {
 
 extern u8 g_nnSndMasterManagerImpl;
 
-void FUN_00146e40(Obj *obj, u8 value)
+void FUN_00146e40(Obj *obj, s8 value)
 {
     obj->unk26 = value;
     FUN_0013ac54(&g_nnSndMasterManagerImpl);

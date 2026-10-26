@@ -1,4 +1,4 @@
-/* NON_MATCHING: inlined argument reads retain cursor reloads absent from retail; -O2 candidate. */
+/* NON_MATCHING: cursor reads now forward like retail (the reader takes a reference); only the loop-invariant table registers (retail r2/r3 swapped) and the argument registers of the 3- and 4-argument arms differ. */
 #include "common.h"
 
 struct TextCommandToken {
@@ -24,11 +24,11 @@ extern TextCommandCallback DAT_00636f68[8];
 extern u16 DAT_0063af98[8];
 extern u32 DAT_0063afa8[8];
 
-static __inline u16 nextTextCommandArgument(TextCommandCursor *cursor)
+static __inline u16 nextTextCommandArgument(TextCommandCursor &cursor)
 {
-    s32 index = ++cursor->index;
-    ++cursor->consumed;
-    return cursor->tokens[index].value;
+    s32 index = ++cursor.index;
+    ++cursor.consumed;
+    return cursor.tokens[index].value;
 }
 
 // Find a registered text control code and invoke it with up to four token arguments.
@@ -41,28 +41,28 @@ void asdTextDispatchRegisteredCommand(TextCommandCursor *cursor, u32 code)
                 DAT_00636f68[i].none();
                 return;
             case 1: {
-                u16 first = nextTextCommandArgument(cursor);
+                u16 first = nextTextCommandArgument(*cursor);
                 DAT_00636f68[i].one(first);
                 return;
             }
             case 2: {
-                u16 first = nextTextCommandArgument(cursor);
-                u16 second = nextTextCommandArgument(cursor);
+                u16 first = nextTextCommandArgument(*cursor);
+                u16 second = nextTextCommandArgument(*cursor);
                 DAT_00636f68[i].two(first, second);
                 return;
             }
             case 3: {
-                u16 first = nextTextCommandArgument(cursor);
-                u16 second = nextTextCommandArgument(cursor);
-                u16 third = nextTextCommandArgument(cursor);
+                u16 first = nextTextCommandArgument(*cursor);
+                u16 second = nextTextCommandArgument(*cursor);
+                u16 third = nextTextCommandArgument(*cursor);
                 DAT_00636f68[i].three(first, second, third);
                 return;
             }
             case 4: {
-                u16 first = nextTextCommandArgument(cursor);
-                u16 second = nextTextCommandArgument(cursor);
-                u16 third = nextTextCommandArgument(cursor);
-                u16 fourth = nextTextCommandArgument(cursor);
+                u16 first = nextTextCommandArgument(*cursor);
+                u16 second = nextTextCommandArgument(*cursor);
+                u16 third = nextTextCommandArgument(*cursor);
+                u16 fourth = nextTextCommandArgument(*cursor);
                 DAT_00636f68[i].four(first, second, third, fourth);
                 return;
             }

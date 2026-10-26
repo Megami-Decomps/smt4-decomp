@@ -16,8 +16,21 @@ struct Obj421aa4Node {
         /* 0x08 */ u32 sequence;
     } completion;
     /* 0x0C */ u32 stamp;
-    /* 0x10 */ u32 id;
-    /* 0x14 */ void *arg;
+    union {
+        /* 0x10 */ u32 id;
+        /* 0x10 */ u8 idByte;
+    };
+    union {
+        /* 0x14 */ void *arg;
+        /* 0x14 */ u32 word;
+        /* 0x14 */ u8 byte;
+    };
+};
+
+/* The larger request nodes (7 and 8 words) carry more payload words after the 0x18-byte node. */
+struct Obj421aa4NodeWide : Obj421aa4Node {
+    /* 0x18 */ u32 word2;
+    /* 0x1C */ u32 word3;
 };
 
 /* The sound manager: a request list and a running stamp at +0x184. */

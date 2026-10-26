@@ -1,4 +1,4 @@
-/* NON_MATCHING: filter factory matches in structure and calls (inline Obj42094c/child constructors, vertex and motion buffers, identity matrices, colour push); keeps the child scalar stores split instead of stm, and numbers registers differently. */
+/* NON_MATCHING: calls, stores and constants match retail; callee-saved numbering differs (retail: config r7, zero r6, child r8; built: config r6, zero r8, child r7), the filter null test is `movs r5, r0` where retail uses `moveq r5, #0`, and the motion address is formed after the IdentityEmit call instead of before. */
 #include "classes/Obj42094c.h"
 #include "classes/Obj420708.h"
 #include "classes/Obj420880.h"
@@ -15,7 +15,7 @@ void FUN_0023b49c(Obj42094c *filter, u32 flags, u32 textureId);
 
 /* Builds the four-polygon filter over `config`: a colour child (flat or fading), the vertex and
  * motion buffers, one identity matrix per motion and the texture, then pushes the config's colour. */
-Obj42094c *FUN_0034b6d4(Filter4PolyConfig *config, u32 flags, s32 fading)
+extern "C" Obj42094c *FUN_0034b6d4(Filter4PolyConfig *config, u32 flags, s32 fading)
 {
     Obj420794Child *child = NULL;
     if (fading != 0) {

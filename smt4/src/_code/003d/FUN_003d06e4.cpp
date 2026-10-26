@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail inlines the candidate loop three times (frame 468 bytes, units found by a pointer walk with the flag test first); this version shares one helper so the frame, the unit scan and register allocation differ. The calls and their arguments are the same. */
+/* NON_MATCHING: the candidate loop is written three times and the unit scan is a pointer walk (frame 468 now matches); retail tail-duplicates the budget compare into both cost arms and numbers a few callee-saved registers differently. */
 #include "common.h"
 #include "gamedata/DataTable40.h"
 
@@ -50,30 +50,6 @@ s32 FUN_002277d4(BattleBlock **block, AiState *state, SkillInfo *info, AiUnit **
 s32 FUN_0029e9cc(u32 skillId);
 void btlMarkLowestHpUnit(BattleBlock **block);
 
-/* Tries the nine candidate skills in order: the first one the actor can afford and FUN_002277d4 accepts is used. */
-static s32 tryCandidates(BattleBlock **block, AiState *state, u16 *skills, AiUnit **units, s32 count, s32 a, s32 b)
-{
-    for (s32 i = 0; i < 9; i++) {
-        if (skills[i] != 0) {
-            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
-            if (info != NULL) {
-                s32 cost;
-                if ((*state->environment & 2) != 0) {
-                    cost = FUN_0029a9d4(skills[i], 1);
-                } else {
-                    cost = FUN_0029a924(skills[i]);
-                }
-                if (cost <= state->selection->budget) {
-                    if (FUN_002277d4(block, state, info, units, count, a, b) != 0) {
-                        return 1;
-                    }
-                }
-            }
-        }
-    }
-    return 0;
-}
-
 /* Picks the AI's command: gathers the units that take part, tries the first-choice behaviour, then walks the
    sorted candidate skills in three passes with different modes, and falls back to a plain attack (or a
    guard when a unit can still be hit). */
@@ -81,10 +57,10 @@ void FUN_003d06e4(BattleBlock **block, AiState *state)
 {
     AiUnit *units[109];
     s32 count = 0;
-    for (s32 i = 0; i < 109; i++) {
-        AiUnit *unit = reinterpret_cast<AiUnit *>((*block)->units + i * 0x288);
-        if ((unit->flags & 0x400) != 0) {
-            units[count] = unit;
+    AiUnit *walk = reinterpret_cast<AiUnit *>((*block)->units);
+    for (s32 i = 0; i < 109; i++, walk++) {
+        if ((walk->flags & 0x400) != 0) {
+            units[count] = reinterpret_cast<AiUnit *>((*block)->units + i * 0x288);
             count++;
         }
     }
@@ -99,17 +75,47 @@ void FUN_003d06e4(BattleBlock **block, AiState *state)
     } else {
         FUN_002b7bca(skills, 9, 2, unitCompareByPriorityValue);
     }
-    if (tryCandidates(block, state, skills, units, count, 1, 0)) {
-        return;
+    for (s32 i = 0; i < 9; i++) {
+        if (skills[i] != 0) {
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
+            if (info != NULL) {
+                s32 cost = (*state->environment & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : FUN_0029a924(skills[i]);
+                if (cost <= state->selection->budget) {
+                    if (FUN_002277d4(block, state, info, units, count, 1, 0) != 0) {
+                        return;
+                    }
+                }
+            }
+        }
     }
     if (FUN_003d10a0(block, state, units, count, 0) != 0) {
         return;
     }
-    if (tryCandidates(block, state, skills, units, count, 0, 1)) {
-        return;
+    for (s32 i = 0; i < 9; i++) {
+        if (skills[i] != 0) {
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
+            if (info != NULL) {
+                s32 cost = (*state->environment & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : FUN_0029a924(skills[i]);
+                if (cost <= state->selection->budget) {
+                    if (FUN_002277d4(block, state, info, units, count, 0, 1) != 0) {
+                        return;
+                    }
+                }
+            }
+        }
     }
-    if (tryCandidates(block, state, skills, units, count, 0, 2)) {
-        return;
+    for (s32 i = 0; i < 9; i++) {
+        if (skills[i] != 0) {
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
+            if (info != NULL) {
+                s32 cost = (*state->environment & 2) != 0 ? FUN_0029a9d4(skills[i], 1) : FUN_0029a924(skills[i]);
+                if (cost <= state->selection->budget) {
+                    if (FUN_002277d4(block, state, info, units, count, 0, 2) != 0) {
+                        return;
+                    }
+                }
+            }
+        }
     }
     for (s32 i = 0; i < count; i++) {
         AiUnit *unit = units[i];

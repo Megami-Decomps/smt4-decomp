@@ -12,10 +12,12 @@ s32 FUN_002efc44(EntryData *entry, u32 index, s32 kind);
 s32 FUN_003dfed4(u32 id, u32 index)
 {
     EntryData *entry = (EntryData *)dataTable04FindById(id);
-    if (!entry)
+    if (entry == NULL)
         return 0;
     s32 maximum = entry->maximum;
     s32 remaining = maximum - FUN_002efc44(entry, index, 4);
-    return remaining > 0 ? remaining : 1;
+    if (remaining > 0)
+        return remaining;
+    return 1;
 }
 }

@@ -34,10 +34,10 @@ static __inline GfxRecord *gfxSelfRelativeRecord(s32 *offset)
 void FUN_0036f8a4(GfxResource *resource)
 {
     GfxResource *checked;
-    if (resource != NULL && (~resource->flags & 0x20000011) == 0) {
-        checked = resource;
-    } else {
+    if (resource == NULL || (~resource->flags & 0x20000011) != 0) {
         checked = NULL;
+    } else {
+        checked = resource;
     }
 
     if (checked->owner != 0) {

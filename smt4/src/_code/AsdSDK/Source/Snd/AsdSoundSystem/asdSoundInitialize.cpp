@@ -40,7 +40,7 @@ extern AsdSoundSystem g_asdSound;
 extern SoundControlView g_asdSoundDuck;
 s32 FUN_0011be58();
 s32 FUN_0011bf24();
-s32 FUN_0011cc1c();
+s32 dspsndInitializeManagers();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
 u32 FUN_0012a740(u32 value);
 void sndMasterManagerApply(u32 mode);
@@ -56,7 +56,7 @@ void asdSoundInitialize(s32 auxiliaryMode)
     if (nnResultIsFailure(FUN_0011bf24())) {
         asdFatalError();
     }
-    if (nnResultIsFailure(FUN_0011cc1c())) {
+    if (nnResultIsFailure(dspsndInitializeManagers())) {
         asdFatalError();
     }
     nw_snd_SoundSystem_SetMasterVolume(1.0f);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: extension metadata load pairing and count-sum scratch register differ from retail. */
+/* NON_MATCHING: the extension count/array pair now loads with one ldm like retail, but retail keeps the pointer in r1 and the pair in r2/r3 where this build uses r2 and r1/r2. */
 #include "gamedata/Table23Availability.h"
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
@@ -29,8 +29,9 @@ static Table23AvailabilityRecord *availabilityRecordAt(u32 index)
     u32 count = dataTableGetCount(section);
     if (index < count)
         return &entries[index];
-    AvailabilityExtension::Records extension =
-        reinterpret_cast<AvailabilityExtension *>(g_aocSystem)->records;
+    AvailabilityExtension::Records *source =
+        &reinterpret_cast<AvailabilityExtension *>(g_aocSystem)->records;
+    AvailabilityExtension::Records extension = *source;
     u32 extensionCount = extension.count;
     if (extensionCount + count > index)
         return &extension.entries[index - count];

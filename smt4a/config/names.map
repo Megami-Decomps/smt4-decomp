@@ -6299,3 +6299,17 @@
 00161c64 gfxReleaseEntryBlocks
 00473c5c textConvertToBoundedWide
 0040b730 playerLoadOutfitPartModel
+00422af0 deferredTransferEnqueue
+0045277c resourceClearActiveAndRelease
+0043a670 modelServiceEnsureOpen
+0019d96c bustupSpriteStartTransition
+0019f548 cameraResourcesRelease
+001c7dc4 blockGatherColumnPairs
+001c7e34 blockGatherPackedHalfwords
+0016f7ec dspsndHandlePendingRequest
+00159d60 dspsndInitializeManagers
+004261b4 objectGetCategoryTwo
+004d091c touchRegionOwnerAdd
+004d0c4c partySlotsCompact
+004d0cd4 partyFindFirstUnusedEntry
+004e5b5c btlActionMarkRandomTargetableUnit

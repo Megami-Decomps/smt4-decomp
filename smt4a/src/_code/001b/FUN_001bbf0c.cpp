@@ -3,7 +3,7 @@
 
 extern "C" {
 void __set_errno(s32);
-f32 FUN_001c4370(s32 *, f32);
+f32 FUN_001c4370(s32 *quadrant, u32 bits, f32 value);
 
 // Reduce to a quadrant and evaluate the short sine or cosine polynomial.
 f32 FUN_001bbf0c(f32 value)
@@ -24,7 +24,7 @@ f32 FUN_001bbf0c(f32 value)
         value = (((value - multiple * 1.5703125f) - multiple * 0.00048375129699707031f) -
                  multiple * 7.5495336204767227e-8f) - multiple * 2.5633440682570896e-12f;
     } else {
-        value = FUN_001c4370(&quadrant, value);
+        value = FUN_001c4370(&quadrant, encoding.bits, value);
     }
 
     if (quadrant < 0) {

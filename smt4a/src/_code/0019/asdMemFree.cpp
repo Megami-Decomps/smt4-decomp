@@ -1,4 +1,4 @@
-/* NON_MATCHING: same calls, the two range tests (ldrd) and the unlock duplicated per branch; only register numbering (memory r4/state r5 in retail) and two compiler nop hints around the failure test differ */
+/* NON_MATCHING: registers, range tests and unlock duplication match; retail has a `nop {0}` between the unlock failure test (`lsrs r1, r0, #31`) and its branch in both arms, with no source construct found that yields it. */
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
@@ -28,17 +28,16 @@ static __inline void allocatorUnlock(AllocatorState &state)
 void asdMemFree(void *memory)
 {
     FUN_0018003c();
-    AllocatorState &state = g_allocationAddressRanges;
     u32 address = (u32)memory;
-    u32 firstStart = state.firstRangeStart;
-    u32 secondStart = state.secondRangeStart;
-    if ((firstStart <= address && address <= firstStart + state.firstRangeSize) ||
-        (secondStart <= address && address <= secondStart + state.secondRangeSize)) {
+    u32 firstStart = g_allocationAddressRanges.firstRangeStart;
+    u32 secondStart = g_allocationAddressRanges.secondRangeStart;
+    if ((firstStart <= address && address <= firstStart + g_allocationAddressRanges.firstRangeSize) ||
+        (secondStart <= address && address <= secondStart + g_allocationAddressRanges.secondRangeSize)) {
         asdMemoryFreeRegion(memory);
-        allocatorUnlock(state);
+        allocatorUnlock(g_allocationAddressRanges);
     } else {
         asdMemoryFreeRegion(FUN_0017fe8c(memory));
-        allocatorUnlock(state);
+        allocatorUnlock(g_allocationAddressRanges);
     }
 }
 

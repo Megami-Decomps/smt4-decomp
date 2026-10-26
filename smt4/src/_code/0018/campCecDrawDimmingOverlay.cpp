@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail initializes a white local color that is overwritten before every use; dead stores are intentionally omitted. */
+/* NON_MATCHING: jump table and the white colour initialisation now match retail; the VFP registers holding 0.0f and 1.0f (s16/s17) are swapped and the argument setup schedules differently. */
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match3_EffectColor.h"
 
@@ -22,7 +22,16 @@ void efctSetSpeed(f32 alpha);
 
 u32 campCecDrawDimmingOverlay()
 {
+    EffectColor color;
+    color.red = 1.0f;
+    color.green = 1.0f;
+    color.blue = 1.0f;
+    color.alpha = 1.0f;
     switch (g_campCec->state) {
+    case 0:
+    case 1:
+    case 2:
+        break;
     case 3:
     case 4:
     case 5:
@@ -32,7 +41,6 @@ u32 campCecDrawDimmingOverlay()
             RenderCtx *context = g_titleScene;
             s32 state = FUN_002c5d80(1, 0);
             renderStackPush(&context->stackA, state);
-            EffectColor color;
             color.red = 0.0f;
             color.green = 0.0f;
             color.blue = 0.0f;

@@ -32,14 +32,14 @@ struct CameraMoveWork {
 
 extern "C" {
 
-void FUN_0019d96c(CameraMoveWork *work, s32 arg1, s32 arg2);
+void bustupSpriteStartTransition(CameraMoveWork *work, s32 arg1, s32 arg2);
 
 /* Start a move towards target over frames (or stop it when target is 0), raising the start height by to - from. */
 void FUN_00185830(u32 job, s32 target, s32 frames, f32 from, f32 to)
 {
     CameraMoveWork *work = (CameraMoveWork *)jobGetWork(job);
     if (target == 0) {
-        FUN_0019d96c(work, 1, 0);
+        bustupSpriteStartTransition(work, 1, 0);
         work->state = 2;
     } else {
         work->elapsed = 0.0f;

@@ -98,7 +98,7 @@ u32 FUN_004e0314(BattleMenuOwner *owner, CommandMenu *menu)
         FUN_004fb43c(0, menu, 0x1000296, 0, 1, 0, 0);
         for (s32 i = 0; i < 109; i++) {
             BtlCombatantEntryA *entry = &owner->state->entries[i];
-            if ((entry->flags & g_btlAction.requiredAny) != 0 && (entry->flags & g_btlAction.excluded) == 0 &&
+            if ((g_btlAction.requiredAny & entry->flags) != 0 && (entry->flags & g_btlAction.excluded) == 0 &&
                 (entry->statusFlags & 0x400) != 0) {
                 FUN_004c9d04(entry->indexView.selectionIndex, 0, 0);
             }

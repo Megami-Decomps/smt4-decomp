@@ -1,5 +1,6 @@
-/* NON_MATCHING: saved-register set, global address reuse, result-sign test and backend argument setup differ. */
+/* NON_MATCHING: the result test now matches (nnResultIsFailure: lsrs + blne); remaining: retail keeps the constants 0 (r9) and 1 (r8) in registers, derives 0x105 as r8 + 260 and the open-file globals from one base (r7), so its saved-register set is r4-sl and the global address reuse differs. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
+#include "nn/Result.h"
 
 extern "C" {
 s32 refIsNullOrZero(MoviePathConversionState *);
@@ -41,7 +42,7 @@ void FUN_0032b3c4(const char *filename)
         file->sizeHigh = 0;
         file->positionLow = 0;
         file->positionHigh = 0;
-        if (FUN_002bb5a4(&file->handle, path, 1) >> 31)
+        if (nnResultIsFailure(FUN_002bb5a4(&file->handle, path, 1)))
             asdFatalError();
     }
     FUN_0034dddc(DAT_004c4080, &DAT_004c40e0, DAT_004c3a38);

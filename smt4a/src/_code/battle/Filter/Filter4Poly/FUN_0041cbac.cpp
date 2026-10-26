@@ -15,7 +15,7 @@ void btlFilterLoadTexture(Obj42094c *filter, u32 flags, u32 textureId);
 
 /* Builds the four-polygon filter over `config`: a colour child (flat or fading), the vertex and
  * motion buffers, one identity matrix per motion and the texture, then pushes the config's colour. */
-Obj42094c *FUN_0041cbac(Filter4PolyConfig *config, u32 flags, s32 fading)
+extern "C" Obj42094c *FUN_0041cbac(Filter4PolyConfig *config, u32 flags, s32 fading)
 {
     Obj420794Child *child = NULL;
     if (fading != 0) {

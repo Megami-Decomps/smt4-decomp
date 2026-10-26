@@ -21,7 +21,7 @@ struct BattleUnit;
 extern "C" {
 extern BtlActionGlobals g_btlAction;
 s32 FUN_004e9ae8(BtlMainStateA *const *main, s32 *ids, s32 count, s32 forced);
-void FUN_004e5b5c(BtlMainStateA *const *main);
+void btlActionMarkRandomTargetableUnit(BtlMainStateA *const *main);
 s32 lcgRandomRange(u16 maximum);
 BattleUnit *btlUnitGet(BtlMainStateA *const *main);
 
@@ -47,7 +47,7 @@ void btlSelectMinimumPriorityTarget(BtlMainStateA *const *main)
     }
     count = FUN_004e9ae8(main, ids, count, 1);
     if (count == 0) {
-        FUN_004e5b5c(main);
+        btlActionMarkRandomTargetableUnit(main);
         return;
     }
     s32 index = lcgRandomRange((u16)(count - 1));

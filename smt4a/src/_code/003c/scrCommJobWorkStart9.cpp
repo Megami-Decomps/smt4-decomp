@@ -4,11 +4,11 @@ extern "C" {
 s32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
 u32 jobGetWork(u32 job);
-void FUN_0019d96c(u32 work, u32 command, s32 frames);
+void bustupSpriteStartTransition(u32 work, u32 command, s32 frames);
 
 static __inline void startJobWorkCommand(u32 job, u32 command, s32 frames)
 {
-    FUN_0019d96c(jobGetWork(job), command, frames);
+    bustupSpriteStartTransition(jobGetWork(job), command, frames);
 }
 
 u32 scrCommJobWorkStart9(void)

@@ -31,7 +31,7 @@ void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
 DevilRecord *FUN_00184310(u32 id);
 u32 randRange(u32 maximum);
-u32 FUN_004d0cd4(void);
+u32 partyFindFirstUnusedEntry(void);
 void dispatchIfFound(u32 arg, u32 id, s32 flag);
 u32 npc2dCreateDemonPortrait(u32 id, s32 a, s32 b, s32 c, f32 scale);
 void eventTexSetJobParam(u32 job);
@@ -77,7 +77,7 @@ u32 FUN_003707a8(void)
             return 1;
         }
         u16 chosen = (u16)candidates[randRange((u16)(count - 1))];
-        dispatchIfFound(FUN_004d0cd4(), chosen, 0);
+        dispatchIfFound(partyFindFirstUnusedEntry(), chosen, 0);
         scrWorkSetValue(0, 1);
         DAT_00588008 = 0;
         scrWorkSetValue(1, chosen);

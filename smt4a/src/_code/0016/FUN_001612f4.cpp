@@ -40,7 +40,7 @@ void FUN_001612f4(s32 count, const u32 *handles)
                 }
                 handle = handles[index];
                 if (handle < g_gfxAllocateCallback.nextBufferId) {
-                    g_gfxAllocateCallback.nextBufferId = handle;
+                    g_gfxAllocateCallback.nextBufferId = handles[index];
                 }
                 if (previous == NULL) {
                     BufferNode *head = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);

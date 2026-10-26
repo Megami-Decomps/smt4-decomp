@@ -28,18 +28,24 @@ u32 FUN_004d0d70(u32 slot)
                 break;
             }
         }
-        table = gameGetSlotTable();
+        SaveSlotTable *compact = gameGetSlotTable();
         for (s32 index = 0; index < 24; ++index) {
-            if (table->party[index] < 0) {
-                s32 next = index;
-                do {
+            if (compact->party[index] < 0) {
+                s32 next = index + 1;
+                if (next >= 24) {
+                    return 1;
+                }
+                for (;;) {
+                    if (compact->party[next] >= 0) {
+                        compact->party[index] = compact->party[next];
+                        compact->party[next] = -1;
+                        break;
+                    }
                     ++next;
                     if (next >= 24) {
                         return 1;
                     }
-                } while (table->party[next] < 0);
-                table->party[index] = table->party[next];
-                table->party[next] = -1;
+                }
             }
         }
         return 1;

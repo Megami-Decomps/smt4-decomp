@@ -5,11 +5,11 @@ extern "C" {
 
 s32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
-void FUN_0019d96c(TextureSwap* work, s32 command, s32 frames);
+void bustupSpriteStartTransition(TextureSwap* work, s32 command, s32 frames);
 
 static inline void startTextureWorkCommand(u32 job, s32 command, s32 frames)
 {
-    FUN_0019d96c((TextureSwap *)jobGetWork(job), command, frames);
+    bustupSpriteStartTransition((TextureSwap *)jobGetWork(job), command, frames);
 }
 
 u32 scrCommJobWorkStart8(void)

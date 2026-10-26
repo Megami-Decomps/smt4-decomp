@@ -3,11 +3,11 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-void FUN_0019d96c(void* work, s32 enabled, s32 duration);
+void bustupSpriteStartTransition(void* work, s32 enabled, s32 duration);
 
 static inline void startJobWorkCommand(u32 job, s32 enabled, s32 duration)
 {
-    FUN_0019d96c(jobGetWork(job), enabled, duration);
+    bustupSpriteStartTransition(jobGetWork(job), enabled, duration);
 }
 
 // Start a ten-frame job operation on the first script frame and finish on frame ten.

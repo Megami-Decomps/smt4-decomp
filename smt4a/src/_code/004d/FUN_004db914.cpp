@@ -106,7 +106,7 @@ u32 FUN_004db914(UniteContext* ctx, u16* first, u16* second, FusionResult* resul
                 u32 candidateId = uniteFindClosestEligibleCandidate(ctx, race & 0xff, wanted, 1);
                 found = candidateId;
                 DevilInfo* candidate = FUN_00184310(candidateId);
-                if (candidate->id != info->id && candidate->id != *first && candidate->id != *second && candidate->level <= wanted) {
+                if (info->id != candidate->id && candidate->id != *first && candidate->id != *second && candidate->level <= wanted) {
                     s32 slot;
                     for (slot = 0; slot < 24; slot++) {
                         s8 member = gameGetSlotTable()->slots[slot];

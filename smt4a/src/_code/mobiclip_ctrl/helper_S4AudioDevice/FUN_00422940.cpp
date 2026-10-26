@@ -50,7 +50,7 @@ extern const char DAT_00532a54[];
 
 void FUN_00158f64();
 void FUN_00159030();
-void FUN_00159d60();
+void dspsndInitializeManagers();
 void sndMasterManagerSetVolume(f32 value);
 void *sysMemClear(void *destination, u32 size);
 void nn_os_CriticalSection_Initialize(void *section);
@@ -68,7 +68,7 @@ u32 FUN_00422940(AudioAllocator *allocator, s32 ringCount, u8 loop)
 {
     FUN_00158f64();
     FUN_00159030();
-    FUN_00159d60();
+    dspsndInitializeManagers();
     sndMasterManagerSetVolume(1.0f);
     DAT_005880d0.loop = loop;
     if (DAT_005880d0.allocator != NULL) {

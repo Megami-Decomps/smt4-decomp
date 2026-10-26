@@ -1,45 +1,46 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00460824` (_code @ 0x460824, 0x78 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches except the argument/saved-register order of the two stack bytes and the pair, and the pair is stored with two vstr where retail uses one vstmia. */
+#include "classes/ObjectCommandRequests.h"
 
-extern "C" {
+/* A pair of floats (or the 64-bit word holding them) copied as a unit. */
+union ObjectFloatPair {
+    u64 bits;
+    f32 values[2];
+};
 
-int listAppendNode(int, int);
-int objectCommandReserveWords(int, int);
+/* A type-13 command (11 words). */
+struct ObjectPairNode {
+    /* 0x00 */ u32 next;
+    /* 0x04 */ u8 kind;
+    /* 0x05 */ u8 unk05[7];
+    /* 0x0C */ u32 token;
+    /* 0x10 */ u32 owner;
+    /* 0x14 */ u32 first;
+    /* 0x18 */ u32 second;
+    /* 0x1C */ u32 third;
+    /* 0x20 */ u8 flagA;
+    /* 0x21 */ u8 flagB;
+    /* 0x22 */ u8 unk22[2];
+    /* 0x24 */ ObjectFloatPair pair;
+};
 
-/* stack frame of param_7: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_7_stack;
+struct ObjectPairOwner {
+    /* 0x000 */ u8 unk000[0x128];
+    /* 0x128 */ u32 params;
+};
 
-extern int objectCommandQueueGet(void);
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-
-
-void FUN_00460824(int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 unsigned char param_5,unsigned char param_6,unsigned long long param_7)
-
+// Queues a type-13 command for the owner's parameter holder.
+extern "C" void FUN_00460824(ObjectPairOwner *owner, u32 first, u32 second, u32 third, u8 flagA, u8 flagB,
+                             ObjectFloatPair pair)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = objectCommandQueueGet();
-  temp_v1 = temp_v0;
-  objectCommandReserveWords(temp_v0,0xb);
-  *(unsigned int *)(temp_v1 + 0xc) = *(unsigned int *)(temp_v0 + 0x184);
-  *(unsigned char *)(temp_v1 + 4) = 0xd;
-  *(int *)(temp_v1 + 0x10) = param_1 + 0x128;
-  *(unsigned int *)(temp_v1 + 0x14) = param_2;
-  *(unsigned int *)(temp_v1 + 0x18) = param_3;
-  *(unsigned int *)(temp_v1 + 0x1c) = param_4;
-  *(unsigned char *)(temp_v1 + 0x20) = param_5;
-  *(unsigned char *)(temp_v1 + 0x21) = param_6;
-  *(int *)(temp_v1 + 0x24) = (int)param_7;
-  *(int *)(temp_v1 + 0x28) = (int)((unsigned long long)param_7 >> 0x20);
-  listAppendNode(temp_v0,temp_v1);
-  return;
+    ObjectCommandQueue *queue = objectCommandQueueGet();
+    ObjectPairNode *command = (ObjectPairNode *)objectCommandBegin(queue, 11);
+    command->kind = 13;
+    command->owner = (u32)&owner->params;
+    command->first = first;
+    command->second = second;
+    command->third = third;
+    command->flagA = flagA;
+    command->flagB = flagB;
+    command->pair = pair;
+    listAppendNode(queue, (ObjectCommand *)command);
 }
-
-} /* extern "C" */

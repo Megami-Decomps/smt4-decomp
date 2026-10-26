@@ -9,9 +9,9 @@ extern "C" {
 int btlMarkLowestHpUnit(int *);
 int FUN_00247478(unsigned int [110], int, unsigned int);
 int dataTable08Sub1GetRecord(void);
-int FUN_003cf1a8(int *);
+int btlSelectRandomMarkedUnit(int *);
 int btlMarkHighestHpUnit(int *);
-int FUN_003d0160(int *, int);
+int btlMarkUnitByHpRank(int *, int);
 int FUN_003d0bec(int *, unsigned int, int, unsigned int *, int *);
 int FUN_003d0fcc(int *, unsigned int);
 
@@ -29,9 +29,9 @@ extern int randRange(unsigned int);
 /* Supplied declaration required: btlUnitGet. */
 /* Supplied declaration required: dataTable08Sub1GetRecord. */
 extern unsigned int FUN_003c83e0(void);
-/* Supplied declaration required: FUN_003cf1a8. */
+/* Supplied declaration required: btlSelectRandomMarkedUnit. */
 /* Supplied declaration required: btlMarkHighestHpUnit. */
-/* Supplied declaration required: FUN_003d0160. */
+/* Supplied declaration required: btlMarkUnitByHpRank. */
 /* Supplied declaration required: FUN_003d0bec. */
 /* Supplied declaration required: FUN_003d0fcc. */
 
@@ -155,22 +155,22 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
     } while (temp_v8 != 0);
     if (temp_v3 >= 3) {
       if (temp_v2 < 0x1e) {
-        FUN_003d0160(param_1,3);
+        btlMarkUnitByHpRank(param_1,3);
         return;
       }
       if (temp_v2 < 0x41) {
-        FUN_003d0160(param_1,2);
+        btlMarkUnitByHpRank(param_1,2);
         return;
       }
     }
     else {
       temp_v3 = reinterpret_cast<int>(btlGetMainState());
       if (*(short *)(temp_v3 + 0x1fc4) != 2) {
-        FUN_003cf1a8(param_1);
+        btlSelectRandomMarkedUnit(param_1);
         return;
       }
       if (temp_v2 < 0x28) {
-        FUN_003d0160(param_1,2);
+        btlMarkUnitByHpRank(param_1,2);
         return;
       }
     }
@@ -178,7 +178,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
     btlMarkHighestHpUnit(param_1);
     return;
   case 2:
-    FUN_003cf1a8(param_1);
+    btlSelectRandomMarkedUnit(param_1);
     return;
   case 3:
     btlMarkLowestHpUnit(param_1);
@@ -213,7 +213,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       *(unsigned char *)(temp_v6 + temp_v3) = 1;
       return;
     }
-    FUN_003cf1a8(param_1);
+    btlSelectRandomMarkedUnit(param_1);
     return;
   case 6:
     temp_v2 = 0;
@@ -239,7 +239,7 @@ void btlUnitSetParam(int *param_1,unsigned int param_2,unsigned int param_3)
       psVar10 = psVar10 + 0x144;
     } while (temp_v3 != 0);
     if (temp_v2 == 0) {
-      FUN_003cf1a8(param_1);
+      btlSelectRandomMarkedUnit(param_1);
       return;
     }
     temp_v3 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));

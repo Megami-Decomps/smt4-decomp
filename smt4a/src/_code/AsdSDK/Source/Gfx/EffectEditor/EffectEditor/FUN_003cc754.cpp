@@ -13,7 +13,8 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 u32 FUN_003cc754(u32 result)
 {
-    void *item = linkedFindItemByIndex(reinterpret_cast<const LinkedItems *>(g_effectEditor.selection.list), g_effectEditor.selection.index + DAT_0059e9a8.index);
+    s32 position = DAT_0059e9a8.index + g_effectEditor.selection.index;
+    void *item = linkedFindItemByIndex(reinterpret_cast<const LinkedItems *>(g_effectEditor.selection.list), position);
     __aeabi_memcpy4(item, &g_effectEditorSettings, sizeof(g_effectEditorSettings));
     __aeabi_memcpy4(g_effectEditorSavedSnapshot.data, &g_effectEditorSettings, sizeof(g_effectEditorSavedSnapshot.data));
     g_effectEditor.unk00[6] = 1;

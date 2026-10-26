@@ -6,7 +6,7 @@ extern "C" {
 
 int listAppendNode(int, int);
 int FUN_002b4f64(int, int);
-int FUN_00379cfc(int);
+int soundStreamPostConsumed(int);
 int nw_snd_internal_PlayerHeapDataManager_Initialize(int, unsigned int);
 
 extern unsigned char LAB_0037ad88; /* 0x37ad88 */
@@ -15,7 +15,7 @@ extern unsigned char LAB_0037ad88; /* 0x37ad88 */
 /* Supplied declaration required: FUN_002b4f64. */
 extern int FUN_002baed8(void);
 extern int _ZN2nw3snd8internal6driver11SoundThread11GetInstanceEv(void);
-/* Supplied declaration required: FUN_00379cfc. */
+/* Supplied declaration required: soundStreamPostConsumed. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 /* Supplied declaration required: nw_snd_internal_PlayerHeapDataManager_Initialize. */
@@ -62,7 +62,7 @@ unsigned char FUN_0037ab50(int param_1,unsigned int *param_2,unsigned int *param
     *(unsigned int *)(param_1 + 0x260) = temp_v3;
     *(unsigned int *)(param_1 + 0x264) = temp_v4;
     *(unsigned char *)(param_1 + 0x554) = 1;
-    FUN_00379cfc(temp_v5);
+    soundStreamPostConsumed(temp_v5);
     temp_v0 = FUN_002baed8();
     temp_v2 = temp_v0;
     FUN_002b4f64(temp_v0,7);

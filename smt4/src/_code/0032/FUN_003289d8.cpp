@@ -1,12 +1,18 @@
-/* NON_MATCHING: retail argument packing or conditional store scheduling differs. */
-#include "common.h"
-struct ParameterState { u8 unk00[8]; u32 value; u8 unk0c[12]; u32 previous; };
-struct ParameterOwner { u32 unk00; ParameterState *state; };
-extern "C" void FUN_002a9834(u32 *value, ParameterOwner *owner, s32 mode, s32 reserved);
-/* Saves the parameter and passes its previous value to the helper. */
-extern "C" void FUN_003289d8(ParameterOwner *owner, s32 mode)
+/* NON_MATCHING: build copies the incoming parameter to r2 before the push; retail loads the node data first (same family as asdMdlNodeInit). */
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+struct NodeInitializationData {
+    u32 unk00[2];  // 0x00
+    u8* begin;     // 0x08
+    u32 parameter; // 0x0c
+    u8 unk10[8];   // 0x10
+    u8* cursor;    // 0x18
+};
+extern "C" void FUN_002a9834(u8** cursor, AsdMdlNode* node, u32 parameter, u32 flags);
+/* Resets the model data cursor and builds the node state. */
+extern "C" void FUN_003289d8(AsdMdlNode *node, u32 parameter)
 {
-    owner->state->previous = owner->state->value;
-    u32 value = owner->state->value;
-    FUN_002a9834(&value, owner, mode, 0);
+    NodeInitializationData* data = static_cast<NodeInitializationData*>(node->data);
+    data->cursor = data->begin;
+    u8* cursor = static_cast<NodeInitializationData*>(node->data)->begin;
+    FUN_002a9834(&cursor, node, parameter, 0);
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail shares one zero register (r9) for the null result, the moved resource and the zeroed fields; built uses separate ones */
+/* NON_MATCHING: register allocation only: retail copies the allocator word of the handle at the constructor call (a copy of the argument register r1) and numbers the owner/allocator r5/r6; the zero register is shared as in retail. */
 #include <new>
 #include "classes/Obj55bb90.h"
 
@@ -25,10 +25,7 @@ Obj55bb90 *Obj55bb90::create(void *owner, AsdAllocatorObject *allocator)
 {
     Obj55b680ResHandle<Obj55bb90Res> res = {FUN_00172718(allocator, 0), allocator};
     void *memory = allocator->allocate(sizeof(Obj55bb90), 4);
-    Obj55bb90 *fog = NULL;
-    if (memory != NULL) {
-        fog = new (memory) Obj55bb90(owner, res.take());
-    }
+    Obj55bb90 *fog = memory != NULL ? new (memory) Obj55bb90(owner, res.take()) : NULL;
     fog->initialize(allocator);
     if (res.res != NULL) {
         nw_gfx_Fog_DestroyResFog(allocator, res.res);

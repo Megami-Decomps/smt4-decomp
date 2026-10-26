@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc allocates a zero register and schedules transition callbacks and state stores differently. */
+/* NON_MATCHING: only the zero for `next = 0` is a fresh `mov r1,#0` in retail where armcc reuses r5. */
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
 
 extern "C" {
@@ -9,20 +9,21 @@ void asdMemFree(void *block);
  * performs a pending transition (or falls back to the idle state). Always returns 0. */
 s32 asdSequenceUpdate(u32 handle)
 {
-    if ((g_asdSequence.current < 0 || g_asdSequence.states[g_asdSequence.current].update() == 0) &&
-        g_asdSequence.states[0].update() == 0) {
-        if (g_asdSequence.next != -1) {
-            g_asdSequence.states[g_asdSequence.next].enter(g_asdSequence.nextArg, g_asdSequence.nextArgSize);
-            g_asdSequence.current = g_asdSequence.next;
-            if (g_asdSequence.nextArg != NULL) {
-                asdMemFree(g_asdSequence.nextArg);
+    AsdSequence *seq = &g_asdSequence;
+    if ((seq->current < 0 || seq->states[seq->current].update() == 0) &&
+        seq->states[0].update() == 0) {
+        if (seq->next != -1) {
+            seq->states[seq->next].enter(seq->nextArg, seq->nextArgSize);
+            seq->current = seq->next;
+            if (seq->nextArg != NULL) {
+                asdMemFree(seq->nextArg);
             }
-            g_asdSequence.nextArg = NULL;
-            g_asdSequence.next = -1;
-            g_asdSequence.nextArgSize = 0;
+            seq->nextArg = NULL;
+            seq->next = -1;
+            seq->nextArgSize = 0;
             return 0;
         }
-        g_asdSequence.current = -1;
+        seq->current = -1;
         if (g_asdSequence.states[0].enter != NULL) {
             g_asdSequence.next = 0;
             g_asdSequence.nextArg = NULL;

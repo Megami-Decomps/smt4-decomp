@@ -1,16 +1,7 @@
 /* NON_MATCHING: retail updates the two result words with bic/orr masks in registers and stores them with one strd, and re-reads the paired-key record's value after each result store (the result words alias it); this build's u64 bit-field inserts schedule differently and cache the value. */
 #include "common.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
-
-/* The 64-bit candidate record the fusion search fills in for one result. */
-struct FusionResult {
-    u64 first : 15;
-    u64 second : 15;
-    u64 flags : 2;
-    u64 low : 2;
-    u64 skill : 15;
-    u64 cost : 15;
-};
+#include "gamedata/PackedIdentifiers.h"
 
 /* The record the paired-key search returns: its value is the result demon's id. */
 struct PairedKeyRecord {
@@ -51,7 +42,7 @@ u32 battleCandidateMatchesSkillFilters(FusionState *state, u32 first, u32 second
 s32 halfwordKeyEmptyLastCompare(const void *left, const void *right);
 
 /* Builds the result of fusing `first` and `second`: fills `result` and the state's skill list; returns the state or 0. */
-FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, FusionResult *result)
+FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, PackedIdentifiers *result)
 {
     FusionState *found = 0;
     PairedKeyRecord *record;
@@ -61,10 +52,10 @@ FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, FusionResul
         record = dataTable1fFindPairedKey(second, first);
     }
     if (record != 0) {
-        result->first = first;
-        result->second = second;
+        result->firstIdentifier = first;
+        result->secondIdentifier = second;
         u32 demonId = record->value & 0xffff;
-        result->skill = record->value;
+        result->resultIdentifier = record->value;
         if (demonId != 0 && entryDefIsAvailable(state, demonId) != 0) {
             found = 0;
             if (FUN_004dab08(state, first, second, demonId) != 0) {
@@ -106,7 +97,7 @@ FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, FusionResul
                     }
                     result->cost = cost;
                 }
-                battleCandidateMatchesSkillFilters(state, first, second, result->skill);
+                battleCandidateMatchesSkillFilters(state, first, second, result->resultIdentifier);
                 found = state;
             }
         }

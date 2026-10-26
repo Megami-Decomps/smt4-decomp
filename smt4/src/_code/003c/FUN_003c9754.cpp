@@ -39,10 +39,9 @@ u32 FUN_003c9754(FusionCandidateFilter *owner, u32 unusedA, u32 unusedB, u16 id)
     } else if (filter->matchCategory != 0) {
         s32 index = 0;
         for (;;) {
-            u16 skill = filter->skills[index];
-            if (skill == 0)
+            if (filter->skills[index] == 0)
                 return 0;
-            if (dataTable06Sub1GetRecord(skill)->category == filter->category)
+            if (dataTable06Sub1GetRecord(filter->skills[index])->category == filter->category)
                 break;
             if (++index >= 24)
                 return 0;

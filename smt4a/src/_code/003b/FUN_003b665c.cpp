@@ -13,9 +13,9 @@ void engineFreeCallback(void *memory);
 u32 FUN_003b665c()
 {
     FUN_00375ec8(g_effectEditor.text.name);
+    s32 position = DAT_0059e9a8.indices.extraOffset + g_effectEditor.selection.index;
     LinkedItem *item = linkedFindItemByIndex(
-        (LinkedItems *)g_effectEditor.selection.list,
-        g_effectEditor.selection.index + DAT_0059e9a8.indices.extraOffset);
+        (LinkedItems *)g_effectEditor.selection.list, position);
     namedObjectFormatName(g_effectEditor.text.name, item->label.text);
     if (g_effectEditor.text.name->unk08 == 2 || g_effectEditor.text.name->unk08 == 1) {
         engineFreeCallback(g_effectEditor.text.name);

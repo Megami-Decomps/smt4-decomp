@@ -51,7 +51,7 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
     for (s16 index = 4; index < 0x36; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
         if (entry != NULL && (entry->flags & g_btlAction.targetableMask) != 0 &&
-            (entry->flags & g_btlAction.interaction.excludedMask) == 0 && entry->selection.marked != 0)
+            (g_btlAction.interaction.excludedMask & entry->flags) == 0 && entry->selection.marked != 0)
             return;
     }
     s16 kind = (s16)unit->data->unk1BE;

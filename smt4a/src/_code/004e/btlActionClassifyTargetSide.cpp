@@ -28,7 +28,7 @@ void btlActionClassifyTargetSide(u32 unused, const TargetUnit *unit, u32 skillId
         *scope = 0;
         break;
     case 1:
-        *side = !(unit->flags & g_btlAction.enemySideMask);
+        *side = !(g_btlAction.enemySideMask & unit->flags);
         *scope = 1;
         break;
     case 2:

@@ -66,11 +66,11 @@ void FUN_004d48d0(BattleDebugPanelWork *work, BtlMainStateA *battle)
     }
     asdListBoxSetIntItem(work->panelJob, 2, DAT_00573970, 0, 0x4B1, 0);
     asdListBoxSetIntItem(work->panelJob, 3, DAT_00573b80, 0, 1000, 0);
-    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & DAT_005715f8.maskA8) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 5, (battle->markerMasks.bits & DAT_005715f8.maskB0) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 6, (battle->markerMasks.bits & DAT_005715f8.maskB8) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 4, (DAT_005715f8.maskA8 & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 5, (DAT_005715f8.maskB0 & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 6, (DAT_005715f8.maskB8 & battle->markerMasks.bits) != 0);
     asdListBoxSetToggleItem(work->panelJob, 11, (battle->markerMasks.bits & DAT_005715f8.mask118) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 12, (battle->markerMasks.bits & DAT_005715f8.mask158) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 12, (DAT_005715f8.mask158 & battle->markerMasks.bits) != 0);
     asdListBoxSetToggleItem(work->panelJob, 14, (battle->markerMasks.bits & DAT_005715f8.maskD0) != 0);
     asdListBoxSetToggleItem(work->panelJob, 15, (battle->markerMasks.bits & DAT_005715f8.mask128) != 0);
     asdListBoxSetToggleItem(work->panelJob, 13, (battle->markerMasks.bits & DAT_005715f8.mask168) != 0);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: loader/source saved registers are swapped and state-store/null-check scheduling differs. */
+/* NON_MATCHING: loader/source saved registers are swapped (retail loader r5, source r4), the state store is followed by the images/font reload in retail (ours hoists the load) and the final call is if-converted. */
 #include "battle/BattleEventAssets.h"
 
 extern "C" {
@@ -11,10 +11,10 @@ u32 FUN_0046c4b4(void *system, u32 archiveId);
 void aocQueueType20(void *system, u32 archiveId, void **output, const char *path);
 void aocQueueType1f(void *system, u32 archiveId, void **output, const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **output, u32 flags);
-void FUN_004d7e20(BattleEventAssetLoadState *, const BattleEventAssetSourceA *);
+u32 FUN_004d7e20(BattleEventAssetLoadState *, const BattleEventAssetSourceA *);
 
 // Load event images and font from add-on storage when available, then initialize the event.
-void FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSourceA *source)
+u32 FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSourceA *source)
 {
     char imagePath[128];
     char fontPath[128];
@@ -36,8 +36,9 @@ void FUN_004d83b4(BattleEventAssetLoadState *loader, const BattleEventAssetSourc
         loader->state = 6;
         if (loader->font) {
             loader->state = 7;
-            FUN_004d7e20(loader, source);
+            return FUN_004d7e20(loader, source);
         }
     }
+    return 0;
 }
 }

@@ -7,13 +7,13 @@ extern "C" {
 typedef struct StateTrack00199024 {
     /* 0x0 */ u32 state;
     /* 0x4 */ u32 previous;
+    /* 0x8 */ u8 unk8[4];
+    /* 0xc */ u32 timer;
 } StateTrack00199024;
 
 typedef struct UiQuest00199024 {
     /* 0x000 */ u8 unk000[4];
     /* 0x004 */ StateTrack00199024 track;
-    /* 0x00c */ u8 unk00c[4];
-    /* 0x010 */ u32 timer;
     /* 0x014 */ u8 unk014[0x250];
     /* 0x264 */ u8 panel[0x350];
     /* 0x5b4 */ u32 script;
@@ -23,6 +23,13 @@ typedef struct UiQuest00199024 {
     /* 0x660 */ u8 list[0x12a];
     /* 0x78a */ u16 ids[1];
 } UiQuest00199024;
+
+static __inline void uiQuestEnterState(StateTrack00199024 *track, u32 next)
+{
+    track->previous = track->state;
+    track->state = next;
+    track->timer = 0;
+}
 
 s32 uiBindRecordRewardText(u32 id, s32 a, s32 b);
 void gameOptionsEnableAndReset(void);
@@ -44,7 +51,6 @@ void uiQuestStartSelected(void)
     s32 base;
     s32 offset;
     u16 id;
-    StateTrack00199024 *track;
 
     quest->busy = 1;
     base = FUN_0029efc0(quest->list);
@@ -59,10 +65,7 @@ void uiQuestStartSelected(void)
     if (scrScriptProcessStartEntry(quest->script, 3) != 0) {
         buttonHelpSetPreset(0x9e);
         FUN_00290404();
-        track = &g_uiQuest->track;
-        track->previous = track->state;
-        track->state = 0xc;
-        g_uiQuest->timer = 0;
+        uiQuestEnterState(&g_uiQuest->track, 0xc);
     }
 }
 

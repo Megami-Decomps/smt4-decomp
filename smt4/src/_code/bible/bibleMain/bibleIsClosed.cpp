@@ -1,4 +1,4 @@
-/* NON_MATCHING: control flow now matches (single exit through eor r0, r0, #1); only the register allocation differs: retail keeps zero in r6 and &g_bible in r5, built swaps them. */
+/* NON_MATCHING: control flow matches (single exit through eor r0, r0, #1); only the register allocation differs: retail keeps zero in r6 and &g_bible in r5, built swaps them (`!bibleIsRunning()` fixes the registers but splits the exit). */
 /* The same shutdown poll as biblePollShutdown with the result inverted: returns 0 while the bible
  * screen is still running, 1 once it is gone. */
 #include "common.h"

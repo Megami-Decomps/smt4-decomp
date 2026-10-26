@@ -1,12 +1,9 @@
 /* NON_MATCHING: buffer-bound arithmetic, loop registers, archive setter and request scheduling differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
-#include "classes/Obj421aa4.h"
+#include "classes/Obj421aa4Requests.h"
 
 extern "C" {
 u32 FUN_00141fb4(void *archive);
-Obj421aa4Manager *FUN_002baed8(void);
-Obj421aa4Node *FUN_002b4f64(Obj421aa4Manager *, s32);
-void listAppendNode(Obj421aa4Manager *, Obj421aa4Node *);
 
 /* Bind caller-owned file slots to the archive, then queue the data-manager setup. */
 u32 FUN_00121030(AsdSndDataManagerView *manager, void *archive, void *buffer, u32 bufferSize)
@@ -24,8 +21,7 @@ u32 FUN_00121030(AsdSndDataManagerView *manager, void *archive, void *buffer, u3
     manager->loader.archive = archive;
 
     Obj421aa4Manager *queue = FUN_002baed8();
-    Obj421aa4Node *command = FUN_002b4f64(queue, 5);
-    command->stamp = queue->unk184;
+    Obj421aa4Node *command = soundRequestBegin(queue, 5);
     command->type = 0x31;
     command->id = reinterpret_cast<u32>(manager); /* this command's payload is a manager pointer */
     listAppendNode(queue, command);

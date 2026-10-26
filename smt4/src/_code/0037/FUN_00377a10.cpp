@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_002b4ee4(...);
-int FUN_003795b0(...);
+int soundObjectPostByte09(...);
 int FUN_0037bf4c(...);
-int FUN_00380444(...);
+int soundVoicePostWord26(...);
 int FUN_0038048c(...);
-int FUN_00380594(...);
-int FUN_003806a0(...);
+int soundVoicePostByte27(...);
+int soundVoicePostCursor(...);
 int VectorSignedToFloat(...);
 int nw_snd_internal_BasicSound_SetInitialVolume(...);
 
@@ -37,12 +37,12 @@ typedef struct {
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b4ee4. */
-/* Supplied declaration required: FUN_003795b0. */
+/* Supplied declaration required: soundObjectPostByte09. */
 /* Supplied declaration required: FUN_0037bf4c. */
-/* Supplied declaration required: FUN_00380444. */
+/* Supplied declaration required: soundVoicePostWord26. */
 /* Supplied declaration required: FUN_0038048c. */
-/* Supplied declaration required: FUN_00380594. */
-/* Supplied declaration required: FUN_003806a0. */
+/* Supplied declaration required: soundVoicePostByte27. */
+/* Supplied declaration required: soundVoicePostCursor. */
 extern int vcallSlot5(unsigned int, unsigned int);
 /* Supplied declaration required: nw_snd_internal_BasicSound_SetInitialVolume. */
 
@@ -118,14 +118,14 @@ void FUN_00377a10(int param_1,fn_00377a10_arg1 *param_2,unsigned int *param_3,un
     FUN_0038048c(param_2,&temp_v11,&temp_v5);
   }
   else {
-    FUN_003806a0(param_2,temp_v1,temp_v3,&temp_v5);
+    soundVoicePostCursor(param_2,temp_v1,temp_v3,&temp_v5);
   }
   VectorSignedToFloat(param_3[4],(unsigned char)(in_fpscr >> 0x16) & 3);
   nw_snd_internal_BasicSound_SetInitialVolume(param_2);
-  FUN_003795b0(param_2,*(unsigned char *)(param_3 + 5));
+  soundObjectPostByte09(param_2,*(unsigned char *)(param_3 + 5));
   FUN_002b4ee4(param_2,*(unsigned char *)((int)param_3 + 0x15));
-  FUN_00380444(param_2,*(unsigned char *)(param_4 + 2));
-  FUN_00380594(param_2,(int)*(char *)((int)param_4 + 9));
+  soundVoicePostWord26(param_2,*(unsigned char *)(param_4 + 2));
+  soundVoicePostByte27(param_2,(int)*(char *)((int)param_4 + 9));
   return;
 }
 

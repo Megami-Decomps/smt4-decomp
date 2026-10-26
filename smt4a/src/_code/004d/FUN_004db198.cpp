@@ -1,29 +1,28 @@
-/* NON_MATCHING: retail 60 vs built 60 rows; rounded-level calculation and result-id bitfield store scheduling differ. */
+/* NON_MATCHING: the packed pair is read/written as one ldrd/strd u64 in retail (separate word accesses here) and the table-entries pointer is copied to r1 before the id compare; lookup, rounded level, u16 ids and saved registers match. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
-#include "shard/W5_W5Match2_UniteWork.h"
-#include "gamedata/Table05Pair.h"
+#include "gamedata/PackedIdentifiers.h"
+#include "gamedata/DataTableAccess_Table05Pair.h"
 
 extern "C" {
-const Table05Pair *dataFindSymmetricPair(s8, s8);
 const u8 *dataTable5GetEntries(void);
-u32 FUN_004dc154(void *, u8, u16);
+u16 FUN_004dc154(void *, u8, u16);
 
-u32 FUN_004db198(void *context, u32 firstId, u32 secondId, UnitePairEntryIV *output)
+u32 FUN_004db198(void *context, u16 firstId, u16 secondId, PackedIdentifiers *output)
 {
     const DevilRecordA *first = FUN_00184310(firstId);
     const DevilRecordA *second = FUN_00184310(secondId);
-    const Table05Pair *recipe = dataFindSymmetricPair(static_cast<s8>(first->race),
-                                                    static_cast<s8>(second->race));
+    const Table05Pair *recipe = dataFindSymmetricPair(first->race, second->race);
     const u8 *levelBias = dataTable5GetEntries();
     if (first->id != second->id && recipe != NULL) {
-        u32 level = (static_cast<u32>(first->level) + second->level + 1) / 2;
-        u32 result = FUN_004dc154(context, static_cast<u8>(recipe->unk02),
-                                static_cast<u16>(*levelBias + level));
+        u32 level = first->level + second->level;
+        if ((first->level + second->level) % 2 == 1)
+            ++level;
+        u16 result = FUN_004dc154(context, recipe->result, *levelBias + level / 2);
         if (result != first->id && result != second->id && result != 0) {
             // Both games use the same two packed operand ids and result id.
-            output->firstId = firstId;
-            output->secondId = secondId;
-            output->resultId = result;
+            output->firstIdentifier = firstId;
+            output->secondIdentifier = secondId;
+            output->resultIdentifier = result;
             return 1;
         }
     }

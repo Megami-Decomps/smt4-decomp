@@ -1,75 +1,66 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00463a9c` (_code @ 0x463a9c, 0xf8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: matches except that armcc loads the owner's start word (with write-back) before the reloaded target pointer where retail loads the target first. */
+#include "classes/ObjectCommandRequests.h"
+
+/* A pair of floats (or the 64-bit word holding them) copied as a unit. */
+union ObjectLevelPair {
+    u64 bits;
+    f32 values[2];
+};
+
+/* A command stream target: its kind (0 or 1) selects how a command describes it. */
+struct ObjectStreamTarget {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 id;
+    /* 0x14 */ u8 unk14[8];
+    /* 0x1C */ u8 kind;
+    /* 0x1D */ u8 unk1D[0x0A];
+    /* 0x27 */ u8 flag;
+    /* 0x28 */ u8 unk28[0x29];
+    /* 0x51 */ u8 suppressed;
+};
+
+struct ObjectStreamOwner {
+    /* 0x00 */ u8 unk00[0x1C];
+    /* 0x1C */ u8 request[0x20];
+    /* 0x3C */ u32 start;
+    /* 0x40 */ ObjectLevelPair level;
+    /* 0x48 */ u8 flag;
+    /* 0x49 */ u8 unk49[3];
+    /* 0x4C */ ObjectStreamTarget *target;
+};
 
 extern "C" {
-
-int listAppendNode(int, int);
-int objectCommandReserveWords(int, int);
-int FUN_001911a4(int, int);
-int FUN_00463e10(int, int, int, unsigned int, int, unsigned int);
-int FUN_004645ec(int, int, int, unsigned int, int, unsigned int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-/* Supplied declaration required: listAppendNode. */
-/* Supplied declaration required: objectCommandReserveWords. */
-/* Supplied declaration required: FUN_001911a4. */
-extern int FUN_00191330(void);
-/* Supplied declaration required: FUN_00463e10. */
-/* Supplied declaration required: FUN_004645ec. */
-
-
-void FUN_00463a9c(int param_1)
-
-{
-/* irregular: 5 native warning(s); review required */
-  unsigned char temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned long long temp_v6;
-  unsigned int temp_v7;
-  
-  *(unsigned char *)(*(int *)(param_1 + 0x4c) + 0x27) = *(unsigned char *)(param_1 + 0x48);
-  temp_v4 = *(int *)(param_1 + 0x4c);
-  temp_v5 = *(unsigned int *)(param_1 + 0x3c);
-  temp_v6 = *(unsigned long long *)(param_1 + 0x40);
-  if (*(char *)(temp_v4 + 0x51) != '\0') {
-    return;
-  }
-  temp_v1 = FUN_00191330();
-  temp_v2 = temp_v1;
-  objectCommandReserveWords(temp_v1,0x19);
-  *(unsigned int *)(temp_v2 + 0xc) = *(unsigned int *)(temp_v1 + 0x184);
-  *(unsigned char *)(temp_v2 + 4) = 0x2b;
-  temp_v7 = (unsigned int)((unsigned long long)temp_v6 >> 0x20);
-  if (*(char *)(temp_v4 + 0x1c) != '\0') {
-    if (*(char *)(temp_v4 + 0x1c) != '\x01') {
-      temp_v0 = 0;
-    }
-    else {
-      temp_v3 = temp_v4;
-      FUN_004645ec(temp_v4,temp_v2,param_1 + 0x1c,temp_v5,(int)temp_v6,temp_v7);
-      temp_v0 = (unsigned char)temp_v3;
-    }
-  }
-  else {
-    temp_v3 = temp_v4;
-    FUN_00463e10(temp_v4,temp_v2,param_1 + 0x1c,temp_v5,(int)temp_v6,temp_v7);
-    temp_v0 = (unsigned char)temp_v3;
-  }
-  *(unsigned char *)(temp_v2 + 0x14) = temp_v0;
-  *(unsigned int *)(temp_v2 + 0x10) = *(unsigned int *)(temp_v4 + 0x10);
-  listAppendNode(temp_v1,temp_v2);
-  FUN_001911a4(temp_v1,1);
-  return;
+ObjectCommandQueue *FUN_00191330(void);
+s32 FUN_001911a4(ObjectCommandQueue *queue, s32 value);
+u8 FUN_00463e10(ObjectStreamTarget *target, ObjectCommand *command, u8 *request, u32 start, ObjectLevelPair level);
+u8 FUN_004645ec(ObjectStreamTarget *target, ObjectCommand *command, u8 *request, u32 start, ObjectLevelPair level);
 }
 
-} /* extern "C" */
+// Copies the owner's flag to its target and queues a type-43 command describing the target with the owner's
+// request block, unless the target is suppressed, then flushes the queue.
+extern "C" void FUN_00463a9c(ObjectStreamOwner *owner)
+{
+    u8 *request = owner->request;
+    owner->target->flag = owner->flag;
+    ObjectStreamTarget *target = owner->target;
+    u32 start = owner->start;
+    ObjectLevelPair level = owner->level;
+    if (target->suppressed != 0) {
+        return;
+    }
+    ObjectCommandQueue *queue = FUN_00191330();
+    ObjectCommand *command = objectCommandBegin(queue, 25);
+    command->kind = 43;
+    u8 value = target->kind;
+    if (value == 0) {
+        value = FUN_00463e10(target, command, request, start, level);
+    } else if (value == 1) {
+        value = FUN_004645ec(target, command, request, start, level);
+    } else {
+        value = 0;
+    }
+    command->payload.bytes.flag = value;
+    command->owner = target->id;
+    listAppendNode(queue, command);
+    FUN_001911a4(queue, 1);
+}

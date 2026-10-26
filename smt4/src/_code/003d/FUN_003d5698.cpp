@@ -1,11 +1,12 @@
-/* NON_MATCHING: adjacent snapshot globals are separately addressed, with different vector register/store grouping. */
+/* NON_MATCHING: snapshot globals are modelled as from/to pairs (retail loads each pair from one literal); retail takes the delta through pointers to the destination/origin vectors and re-reads the origin directly, with different vector register grouping. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
-extern f32 DAT_00493518;
-extern f32 DAT_00493524;
-extern BattleVector3 DAT_00493530;
-extern BattleVector3 DAT_0049353c;
+struct SnapshotPair {
+    BattleVector3 from, to;
+};
+extern SnapshotPair DAT_00493518;
+extern SnapshotPair DAT_00493530;
 f32 FUN_00227280(s32 mode, s32 duration, u32 frame);
 void FUN_003d7298(BattleVectorTransition *, u32);
 
@@ -50,7 +51,7 @@ void FUN_003d5698(BattleVectorTransition *owner, u32 frame)
     if (work->vectors.flags & 0x100000)
         return;
     f32 factor = FUN_00227280(0, work->channels.duration, frame);
-    work->channels.scale = DAT_00493518 + (DAT_00493524 - DAT_00493518) * factor;
+    work->channels.scale = DAT_00493518.from.x + (DAT_00493518.to.x - DAT_00493518.from.x) * factor;
     BattleVector3 delta = {
         work->vectors.destination.x - work->channels.origin.x,
         work->vectors.destination.y - work->channels.origin.y,
@@ -60,13 +61,13 @@ void FUN_003d5698(BattleVectorTransition *owner, u32 frame)
     work->vectors.elapsed.y = work->channels.origin.y + delta.y * factor;
     work->vectors.elapsed.z = work->channels.origin.z + delta.z * factor;
     BattleVector3 currentDelta = {
-        DAT_0049353c.x - DAT_00493530.x,
-        DAT_0049353c.y - DAT_00493530.y,
-        DAT_0049353c.z - DAT_00493530.z
+        DAT_00493530.to.x - DAT_00493530.from.x,
+        DAT_00493530.to.y - DAT_00493530.from.y,
+        DAT_00493530.to.z - DAT_00493530.from.z
     };
-    work->vectors.current.x = DAT_00493530.x + currentDelta.x * factor;
-    work->vectors.current.y = DAT_00493530.y + currentDelta.y * factor;
-    work->vectors.current.z = DAT_00493530.z + currentDelta.z * factor;
+    work->vectors.current.x = DAT_00493530.from.x + currentDelta.x * factor;
+    work->vectors.current.y = DAT_00493530.from.y + currentDelta.y * factor;
+    work->vectors.current.z = DAT_00493530.from.z + currentDelta.z * factor;
 
     f32 primaryDelta = work->channels.primaryTarget - work->channels.primaryStart;
     factor = FUN_00227280(0, work->channels.duration, frame);

@@ -1,31 +1,34 @@
-/* NON_MATCHING: ring-buffer arithmetic and wide-count scheduling have not been matched. */
+/* NON_MATCHING: the available-space arithmetic and loads match retail; retail keeps copies of the destination and size across the memcpy/commit calls (mov r7,r5; mov r5,r6), numbers the saved registers differently and stores the carry high word and cursor with stm where this build uses strd. */
 #include "classes/Obj557f00.h"
 extern "C" {
 u64 resourceGetWideHandle(u32 handle);
+u64 runtimeShiftLeftWide(u64 value, u32 shift);
 void *rt_memcpy(void *destination, const void *source, u32 size);
-s32 FUN_00422af0(u32 handle, void *pixels, u32 size);
+s32 deferredTransferEnqueue(u32 handle, const void *pixels, u32 size);
 }
 
 bool Obj557f00::read(void *source, u32 size)
 {
-    u32 previous = (u32)submitted;
-    u64 consumed = resourceGetWideHandle(handle) << description->height;
-    u32 available = capacity - (previous - (u32)consumed);
+    u64 previous = submitted;
+    u64 consumed = runtimeShiftLeftWide(resourceGetWideHandle(handle), description->height);
+    u32 available = capacity - (u32)(previous - consumed);
+    u32 tailSpace = capacity - cursor;
     u32 offset = cursor;
-    u32 trailing = capacity - offset;
-    if (trailing < size) {
-        available -= trailing;
+    if (tailSpace < size) {
+        available -= tailSpace;
         offset = 0;
     }
-    u8 *destination = pixels + offset;
-    if (size <= available && destination != NULL) {
-        rt_memcpy(destination, source, size);
-        s32 result = FUN_00422af0(handle, destination, size);
-        if (result != 0) {
-            submitted += size;
-            cursor = destination - pixels + size;
+    if (size <= available) {
+        u8 *destination = pixels + offset;
+        if (destination != NULL) {
+            rt_memcpy(destination, source, size);
+            s32 result = deferredTransferEnqueue(handle, destination, size);
+            if (result != 0) {
+                submitted += size;
+                cursor = (destination - pixels) + size;
+            }
+            return result != 0;
         }
-        return result != 0;
     }
     return false;
 }

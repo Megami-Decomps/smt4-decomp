@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail copies the allocator at the constructor call (the handle's allocator word is a copy of the argument register), the build copies it up front; the shared zero register matches */
+/* NON_MATCHING: register allocation only: retail copies the allocator word of the handle at the constructor call (a copy of the argument register r1) and numbers the owner/allocator r5/r6; the zero register is shared as in retail. */
 #include <new>
 #include "classes/Obj421158.h"
 

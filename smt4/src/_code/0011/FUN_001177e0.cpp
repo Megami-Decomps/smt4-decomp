@@ -11,7 +11,7 @@ void asdSoundSlotCSelect(u32 first, u32 second);
 s32 FUN_00119da8(u32 index);
 void nw_ut_internal_LinkListImpl_erase_2B743C(void *list, void *node);
 u8 FUN_0012f664(void *manager);
-void FUN_0012f7e4(void *dataManager);
+void soundObjectPostStop(void *dataManager);
 void FUN_0012f844(void *player);
 void FUN_0014047c(void *archive);
 void asdMemFree(void *buffer);
@@ -74,7 +74,7 @@ void FUN_001177e0()
         asdMemFree(spatial->buffer);
     }
     sound->path[0] = 0;
-    FUN_0012f7e4(sound->dataManager);
+    soundObjectPostStop(sound->dataManager);
     FUN_0012f844(sound->player);
     FUN_0014047c(sound->archive);
     if (sound->infoBlock != NULL) {

@@ -94,7 +94,7 @@ extern int getUnlockedSlotCount(unsigned int);
 extern int FUN_004cc8d8(unsigned short, unsigned short);
 /* Supplied declaration required: FUN_004cd4b8. */
 extern int gameStockContainsEntry(unsigned int);
-extern unsigned int FUN_004d0cd4(void);
+extern unsigned int partyFindFirstUnusedEntry(void);
 extern int FUN_004d0eec(void);
 
 
@@ -135,7 +135,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     temp_v8 = *(unsigned int *)((int)param_1 + temp_v0 * 0x24 + 0x3c);
     temp_v9 = *(unsigned int *)((int)param_1 + temp_v0 * 0x24 + 0x40);
     partyAddMoneyClamped(-*(int *)((int)param_1 + temp_v0 * 0x24 + 0x24));
-    temp_v4 = FUN_004d0cd4();
+    temp_v4 = partyFindFirstUnusedEntry();
     uStack_3e = (unsigned short)((unsigned int)temp_v3 >> 0x10);
     temp_v0 = FUN_002a4b28();
     dispatchIfFound(temp_v4,uStack_3e,0);

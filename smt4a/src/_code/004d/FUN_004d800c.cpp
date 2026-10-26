@@ -119,7 +119,7 @@ extern "C" u32 FUN_004d800c(BattleEventLoadStep *step, BtlMainStateA *battle)
         scrScriptProcessStartEntry(step->scriptProcess, step->entry);
         step->state = 10;
         step->ticks = 0;
-        if (battle->stateFlags64.bits & g_btlEvent.mask) sysPlaySe(223);
+        if (g_btlEvent.mask & battle->stateFlags64.bits) sysPlaySe(223);
         if (step->type == 5) {
             battle->stateFlags64.bits |= g_btlEvent.mask;
             sysPlaySe(223);

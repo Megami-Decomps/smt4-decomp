@@ -32,7 +32,7 @@ struct PartyMenu {
     /* 0x3410 */ u8 unk3410[0xc];
     /* 0x341c */ u16 pages[3][8];         /* per page: the entries on offer, 0 = empty */
     /* 0x344c */ u8 unk344c[0x34];
-    /* 0x3480 */ s16 usable[60];          /* the usable ids */
+    /* 0x3480 */ u16 usable[60];          /* the usable ids */
 };
 
 /* The player record: two ids at +2 and +4. */
