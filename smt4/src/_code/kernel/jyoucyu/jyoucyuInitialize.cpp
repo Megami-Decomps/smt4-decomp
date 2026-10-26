@@ -12,7 +12,7 @@ struct JyoucyuStateView {
 
 extern "C" {
 extern JyoucyuStateView* g_jyoucyu;
-u32 FUN_001c0400();
+s32 jyoucyuLoadStep(u32 handle);
 
 void jyoucyuRequest();
 u32 FUN_001e981c();
@@ -34,7 +34,7 @@ void jyoucyuInitialize(void)
     g_jyoucyu->unk08 = 0;
     JyoucyuStateView* state = g_jyoucyu;
 
-    state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("JYOUCYU C"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_001c0400), reinterpret_cast<AsdProcFunc>(jyoucyuRequest), 0);
+    state->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("JYOUCYU C"), 2, 0, 0, jyoucyuLoadStep, reinterpret_cast<AsdProcFunc>(jyoucyuRequest), 0);
     taskCreateDraw("JYOUCYU D", 0x84, 0, 0, FUN_001e981c,
                    0, 0, state->process);
 }

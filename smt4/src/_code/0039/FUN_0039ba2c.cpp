@@ -1,4 +1,4 @@
-/* NON_MATCHING: centered-text VFP scheduling and merged unsigned animation-completion check differ. */
+/* NON_MATCHING: centered-text VFP scheduling differs (retail loads origin.x/y with two vldr, build merges them into one vldm); the completion getter call matches. */
 #include "shard/S1ListPanel.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "ui/UiSpriteState.h"
@@ -31,6 +31,7 @@ SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 f32 FUN_0028f4b4(const u8 *text, s32 mode, f32 scale);
 void FUN_002bf818(UiSpriteState *sprite);
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 void FUN_0039ba2c(TitleBannerView *banner)
 {
@@ -51,7 +52,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
     FUN_002bf818((&banner->sprite));
-    if (banner->closing && (&banner->sprite)->animationFlags.completed)
+    if (banner->closing && uiSpriteGetCompletionState(&banner->sprite))
         banner->complete = 1;
 }
 }

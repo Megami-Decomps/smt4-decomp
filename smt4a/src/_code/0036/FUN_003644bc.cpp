@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `ldrsb r1, [r0, #55]` where armcc emits `mov r0, #0`. */
 #include "common.h"
 
 extern "C" {
@@ -8,7 +7,7 @@ extern GameStateView g_gameState;
 
 s32 FUN_003644bc(void)
 {
-    return g_gameState.state == -1 && g_gameState.kind == -4;
+    return g_gameState.state == -1 && g_gameState.kind == 4;
 }
 
 } /* extern "C" */

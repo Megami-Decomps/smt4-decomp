@@ -1,13 +1,16 @@
-/* NON_MATCHING: retail redundantly loads a global word and conditionally clears r0 before returning zero. */
+/* The result is the battle-debug work pointer, reported as zero once it has been consumed. */
 #include "shard/JobWork.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 extern "C" {
 
-/* Fetch the current job work and report zero. */
 s32 lmapJobQueryZero(u32 job)
 {
     jobGetWork(job);
-    return 0;
+    s32 result = (s32)g_btlDebugState.work;
+    if (result != 0)
+        result = 0;
+    return result;
 }
 
 }

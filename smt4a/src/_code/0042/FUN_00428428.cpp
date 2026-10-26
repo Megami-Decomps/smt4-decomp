@@ -1,6 +1,7 @@
-/* NON_MATCHING: format switches lower to comparisons and Result failure tests lower to signed compares. */
+/* NON_MATCHING: result tests (nnResultIsFailure) and the five-label jump table now match retail; remaining: register allocation (retail keeps resource/keys in r8/r9, the flags in r3 and the globals in r7/r5). */
 #include "common.h"
 #include <stddef.h>
+#include "nn/Result.h"
 
 struct ResourceMappingKey { u32 words[2]; };
 struct ResourceMappingInfo {
@@ -19,6 +20,7 @@ static inline u32 resourceMappingFlags(u8 kind)
     switch (kind) {
     case 0: return 0x8c;
     case 1: return 0xd;
+    case 2: return 0;
     case 3: return 0x10;
     case 4: return 0x30;
     default: return 0;
@@ -36,7 +38,7 @@ u32 FUN_00428428(u32 resource, const ResourceMappingKey *keys, u32 count)
 {
     u32 available;
     u32 result = FUN_00500254(resource, &available);
-    if (result >> 31) {
+    if (nnResultIsFailure(result)) {
         return result;
     }
     if (!available) {
@@ -46,7 +48,7 @@ u32 FUN_00428428(u32 resource, const ResourceMappingKey *keys, u32 count)
     if (count) {
         for (u32 i = 0; i < count; ++i) {
             result = FUN_0050028c(resource, &info, &keys[i], 1);
-            if (result >> 31) {
+            if (nnResultIsFailure(result)) {
                 return result;
             }
             u32 flags = resourceMappingFlags(info.kind);
@@ -58,7 +60,7 @@ u32 FUN_00428428(u32 resource, const ResourceMappingKey *keys, u32 count)
         u32 key;
         for (u32 i = 0; i < available; ++i) {
             result = FUN_00500350(resource, &key, &info, 1, i);
-            if (result >> 31) {
+            if (nnResultIsFailure(result)) {
                 return result;
             }
             u32 flags = resourceMappingFlags(info.kind);

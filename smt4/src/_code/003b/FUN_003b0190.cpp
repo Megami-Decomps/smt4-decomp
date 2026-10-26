@@ -1,4 +1,3 @@
-/* NON_MATCHING: post-increment reads and the shift-after-or accumulation now match; only the placement of the shared return-1 block differs. */
 #include "common.h"
 
 extern "C" {
@@ -11,31 +10,31 @@ u32 FUN_003b0190(const u8 *bytes, u32 *value, s32 *position, s32 end)
     ++*position;
     if (!(byte & 0x80)) {
         *value = byte;
-    } else {
-        if (*position == end)
-            return 0;
-        *value = (byte & 0x7f) << 7;
-        byte = *bytes++;
-        ++*position;
-        if (!(byte & 0x80)) {
-            *value |= byte;
-        } else {
-            if (*position == end)
-                return 0;
-            *value = (*value | (byte & 0x7f)) << 7;
-            byte = *bytes++;
-            ++*position;
-            if (!(byte & 0x80)) {
-                *value |= byte;
-            } else {
-                if (*position == end)
-                    return 0;
-                *value = (*value | (byte & 0x7f)) << 7;
-                *value |= *bytes++;
-                ++*position;
-            }
-        }
+        return 1;
     }
+    if (*position == end)
+        return 0;
+    *value = (byte & 0x7f) << 7;
+    byte = *bytes++;
+    ++*position;
+    if (!(byte & 0x80)) {
+        *value |= byte;
+        return 1;
+    }
+    if (*position == end)
+        return 0;
+    *value = (*value | (byte & 0x7f)) << 7;
+    byte = *bytes++;
+    ++*position;
+    if (!(byte & 0x80)) {
+        *value |= byte;
+        return 1;
+    }
+    if (*position == end)
+        return 0;
+    *value = (*value | (byte & 0x7f)) << 7;
+    *value |= *bytes;
+    ++*position;
     return 1;
 }
 }

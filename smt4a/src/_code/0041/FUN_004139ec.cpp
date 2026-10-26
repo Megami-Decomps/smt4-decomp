@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail copies the callback's member-function pointer with ldm/stm before storing the vtable and schedules the settings stores differently; armcc uses ldrd/strd and a different order */
+/* NON_MATCHING: the callback is now a real class (Obj55cac4, vtable via its constructor) and the guarded construction matches retail; the dialog/callback registers (r5/r6), the settings-store order and the pool order differ. */
 #include "classes/Obj5597fc.h"
 #include <stddef.h>
+#include <new>
 
 class DialogOwner {
 public:
@@ -31,23 +32,33 @@ struct DialogSettings {
     u8 unk6d[0xb];
 };
 typedef void (DialogOwner::*DialogCallbackMethod)();
-struct DialogCallback {
-    const void *vtable;
-    DialogOwner *owner;
-    DialogCallbackMethod method;
-    void *dialog;
+/* The callback object the holder invokes: a member function of the dialog's owner. Slot 0 is the
+ * destructor; the other virtual methods are defined with the holder code. */
+class Obj55cac4 {
+public:
+    Obj55cac4(DialogOwner *owner, const DialogCallbackMethod &method)
+    {
+        this->method = method;
+        this->owner = owner;
+    }
+    virtual ~Obj55cac4();
+    virtual void slot2();
+    virtual void slot3();
+
+    DialogOwner *owner;         // 0x04
+    DialogCallbackMethod method; // 0x08
+    void *dialog;               // 0x10
 };
 typedef char CheckSettingsSize[sizeof(DialogSettings) == 0x78 ? 1 : -1];
-typedef char CheckCallbackSize[sizeof(DialogCallback) == 0x14 ? 1 : -1];
+typedef char CheckCallbackSize[sizeof(Obj55cac4) == 0x14 ? 1 : -1];
 
 extern "C" {
 extern const DialogCallbackMethod DAT_00532fc4;
-extern const u8 DAT_0055cacc[];
 void FUN_00110b28(u8 *text, const SmallTextString *source);
 void *_Znwj(u32 size);
 void *FUN_002fafd8(void *allocation, s32 mode);
 void holderSetFlagBits(void *holder, u32 flags);
-void FUN_00103f54(void *holder, DialogCallback *callback, s32 index, s32 enabled);
+void FUN_00103f54(void *holder, Obj55cac4 *callback, s32 index, s32 enabled);
 void FUN_0011b63e(void *slot, void *dialog, DialogSettings *settings, void *context);
 
 /* Opens the dialog with default settings: an empty text, a 999 kind and a callback back into the owner. */
@@ -63,11 +74,9 @@ void FUN_004139ec(DialogOwner *owner)
 
     void *dialog = _Znwj(0x78);
     dialog = dialog != NULL ? FUN_002fafd8(dialog, 0) : NULL;
-    DialogCallback *callback = static_cast<DialogCallback *>(_Znwj(sizeof(DialogCallback)));
-    if (callback) {
-        callback->owner = owner;
-        callback->method = DAT_00532fc4;
-        callback->vtable = DAT_0055cacc;
+    void *memory = _Znwj(sizeof(Obj55cac4));
+    if (memory) {
+        Obj55cac4 *callback = new (memory) Obj55cac4(owner, DAT_00532fc4);
         callback->dialog = dialog;
         holderSetFlagBits(dialog, 2);
         FUN_00103f54(dialog, callback, 0, 1);

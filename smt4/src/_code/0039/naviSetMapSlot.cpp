@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed slot addressing advances the base by 0x62; the compiler moves the clear branch inside the inlined category search and changes icon-result registers. */
+/* NON_MATCHING: slot addressing (table + index*16 with the 0x62 folded into the store offsets) and the out-of-line clear arm now match; the stack-argument loads (retail ldm of area/flags) and the enabled/icon result registers still differ. */
 #include "common.h"
 #include "shard/MapNaviTable_GetCategoryCount.h"
 
@@ -73,26 +73,25 @@ static __inline NavigationIcon *findNavigationIcon(s32 map, u8 category)
 void naviSetMapSlot(NavigationSlotTable *table, s32 index, s32 active, s32 map,
                   s32 area, u16 flags, u32 unused, u16 value, s32 enabled)
 {
-    NavigationSlot *slot = &table->slots[index];
-    if (!active) {
-        slot->map = 0;
-        slot->area = 0;
-        slot->category = 0;
-        slot->icon = 0;
-        slot->enabled = 0;
-        slot->flags = 0;
-        slot->value = 0;
-        slot->unk03 = 0;
-        return;
+    if (active) {
+        NavigationCategory *category = findNavigationCategory(map, area);
+        NavigationIcon *icon = findNavigationIcon(map, category->category);
+        table->slots[index].map = map;
+        table->slots[index].area = area;
+        table->slots[index].category = category->category;
+        table->slots[index].icon = icon->icon;
+        table->slots[index].enabled = enabled != 0;
+        table->slots[index].flags = flags;
+        table->slots[index].value = value;
+    } else {
+        table->slots[index].map = 0;
+        table->slots[index].area = 0;
+        table->slots[index].category = 0;
+        table->slots[index].icon = 0;
+        table->slots[index].enabled = 0;
+        table->slots[index].flags = 0;
+        table->slots[index].value = 0;
+        table->slots[index].unk03 = 0;
     }
-    NavigationCategory *category = findNavigationCategory(map, area);
-    NavigationIcon *icon = findNavigationIcon(map, category->category);
-    slot->map = map;
-    slot->area = area;
-    slot->category = category->category;
-    slot->icon = icon->icon;
-    slot->enabled = enabled != 0;
-    slot->flags = flags;
-    slot->value = value;
 }
 }

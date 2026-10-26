@@ -1,4 +1,4 @@
-/* NON_MATCHING: Mirrored-rectangle screen-width selection and state-stack address formation differ. */
+/* NON_MATCHING: the screen-width select now matches (320 then moveq 400); retail's parameter-copy and callee-saved register assignment differ. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -9,7 +9,9 @@ extern TitleSceneRectanglePrefixIV *g_titleScene;
 void FUN_0029a17c(s32 x, s32 y, u32 width, s32 height,
                   s32 useNarrowScreen)
 {
-    const u32 screenWidth = useNarrowScreen == 0 ? 400u : 320u;
+    u32 screenWidth = 320u;
+    if (useNarrowScreen == 0)
+        screenWidth = 400u;
     u32 left = screenWidth - (static_cast<u32>(x) + width);
     u32 top = 240u - static_cast<u32>(height) - static_cast<u32>(y);
     u32 clippedWidth = width;

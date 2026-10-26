@@ -14,7 +14,8 @@ u32 FUN_0015e1ec(SoundArchivePool *state, const void *archive, void *buffer, u32
     u32 reservedBytes = 0;
     ArchivePoolCounts counts;
     if (FUN_001784b0(archive, &counts)) {
-        reservedBytes = (counts.firstCount + counts.secondCount + counts.thirdCount) * 0x2c;
+        reservedBytes = counts.thirdCount + (counts.firstCount + counts.secondCount);
+        reservedBytes *= 0x2c;
     }
     nw_snd_internal_PoolImpl_CreateImpl(state->pool, buffer, size, 0x2c);
     state->availableSize = size - reservedBytes;

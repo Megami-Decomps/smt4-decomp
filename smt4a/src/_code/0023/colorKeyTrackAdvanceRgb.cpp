@@ -6,9 +6,7 @@ extern "C" void colorKeyTrackAdvanceRgb(ColorKeyTrack *track, const ColorKey *ti
 {
     s32 skip = 1;
     s32 current = track->nextKey;
-    if (current >= 3) {
-        track->nextKey = 4;
-    } else {
+    if (current < 3) {
         for (; current + skip < 4; ++skip) {
             track->duration = timing[current + skip].frame - timing[current].frame;
             if (track->duration > 0) {
@@ -24,5 +22,7 @@ extern "C" void colorKeyTrackAdvanceRgb(ColorKeyTrack *track, const ColorKey *ti
                 return;
             }
         }
+    } else {
+        track->nextKey = 4;
     }
 }

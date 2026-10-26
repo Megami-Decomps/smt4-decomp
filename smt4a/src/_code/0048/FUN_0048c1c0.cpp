@@ -1,4 +1,4 @@
-/* NON_MATCHING: global-address caching, sprite-loop temporaries and state-store ordering differ from retail. */
+/* NON_MATCHING: armcc keeps g_gameState's address in r8 across the switch; retail reloads it from the pool at every use (r8 saved but unused), which also changes later constant scheduling. */
 #include "ui/NaviCategorySelection.h"
 #include "ui/ButtonHelp.h"
 #include "map/mapDepart.h"
@@ -58,9 +58,9 @@ void FUN_0048c1c0(NaviCategorySelectionWork *work)
         uiSpriteBankApplyPreset(&view->bank, 1);
         if (!g_gameState.mapFlags.unk295)
             FUN_00168980(27);
-        g_gameState.unk034[0x42F] = 1; // Navigation animation active at 0x463.
-        view->state = 1;
+        g_gameState.navigation.unk463 = 1;
         flagsSetBits(&view->flags, 0x01000008);
+        view->state = 1;
         return;
     case 1: {
         for (s32 index = 0; index < 6; ++index)
@@ -76,7 +76,7 @@ void FUN_0048c1c0(NaviCategorySelectionWork *work)
             work->unk07B93[0] = 1;
             g_gameState.controllerFlags.primary = 0;
             g_gameState.navigation.alternateNaviMap = 0;
-            g_gameState.unk034[0x42F] = 0;
+            g_gameState.navigation.unk463 = 0;
             g_gameState.navigation.naviMapPending = 0;
             view->state = 2;
             flagsSetBits(&view->flags, 2);

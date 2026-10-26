@@ -4713,3 +4713,9 @@
 00269bf0 btlLinkGetMaxHp
 00312148 btlScriptAnySelectedPositiveStat
 0032b278 effectFilterChannelsByCategory
+001c0400 jyoucyuLoadStep
+002486a8 mapCellMarkNeighborsState2
+002d3e18 mapIfDestroyModelManagers
+00275f8c mapCompleteActiveAndPendingGroups
+0033a2c4 btlFindEntrySelectionByKey
+003b0cf4 moLivePlayerReleaseIdleStreams

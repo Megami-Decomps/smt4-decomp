@@ -1,4 +1,4 @@
-/* NON_MATCHING: camera preset vector stores and floating-constant allocation differ. */
+/* NON_MATCHING: case order (0,2,3,1/4,5) and jump table now match retail; floating-constant hoisting (retail loads seven constants before the switch) and the merged vstmia stores differ. */
 #include "gfx/CameraPoseBlend.h"
 
 static __inline void setCameraVector(BattleVector3 *vector, f32 x, f32 y, f32 z)
@@ -25,13 +25,6 @@ extern "C" void FUN_003d84d8(CameraPoseBlendView *camera, u32 preset, s32 destin
         setCameraVector(&pose->position, 0.0f, 6.3f, 44.5f);
         setCameraVector(&pose->up, 44.5f, 0.0f, 0.0f);
         break;
-    case 1:
-    case 4:
-        pose->scalar = 35.0f;
-        setCameraVector(&pose->target, 0.0f, 0.0f, -1.0f);
-        setCameraVector(&pose->position, 0.0f, 2.3f, 55.0f);
-        setCameraVector(&pose->up, 55.0f, -7.7f, 180.0f);
-        break;
     case 2:
         pose->scalar = 35.0f;
         setCameraVector(&pose->target, 0.8f, 0.0f, -0.6f);
@@ -43,6 +36,13 @@ extern "C" void FUN_003d84d8(CameraPoseBlendView *camera, u32 preset, s32 destin
         setCameraVector(&pose->target, 0.0f, 0.0f, -1.0f);
         setCameraVector(&pose->position, 1.8f, 4.0f, 46.5f);
         setCameraVector(&pose->up, 46.5f, -9.9f, 180.0f);
+        break;
+    case 1:
+    case 4:
+        pose->scalar = 35.0f;
+        setCameraVector(&pose->target, 0.0f, 0.0f, -1.0f);
+        setCameraVector(&pose->position, 0.0f, 2.3f, 55.0f);
+        setCameraVector(&pose->up, 55.0f, -7.7f, 180.0f);
         break;
     case 5:
         pose->scalar = 35.0f;

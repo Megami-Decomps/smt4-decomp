@@ -1,4 +1,4 @@
-/* NON_MATCHING: completion-byte loads fold to direct unsigned addressing instead of retail's accessor/NOP sequence; phase and return branches factor differently. */
+/* NON_MATCHING: completion getter sequences match retail; retail shares one `mode = 0` store between cases 4 and 6, factors the phase tests as bne/b and orders the pending/current copy before the sprite address, constants in a different order. */
 #include "ui/MenuState.h"
 #include "ui/UiSpriteState.h"
 #include <stddef.h>
@@ -6,6 +6,7 @@
 extern "C" {
 extern MenuState *g_menuState;
 s32 FUN_00163aa4(UiSpriteState *sprite, f32 speed);
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 // Advance the opening, closing and delayed multi-panel animation phases.
 u32 FUN_00156230(void)
@@ -40,7 +41,7 @@ u32 FUN_00156230(void)
         if (work->phase == 0) {
             FUN_00163aa4(&work->sprites[0], 1.0f);
             FUN_00163aa4(&work->sprites[2], 1.0f);
-            if (work->sprites[0].animationFlags.completed && work->sprites[2].animationFlags.completed) {
+            if (uiSpriteGetCompletionState(&work->sprites[0]) && uiSpriteGetCompletionState(&work->sprites[2])) {
                 work->timer = 0;
                 work->phase = 2;
                 FUN_00163aa4(&work->sprites[1], 1.0f);
@@ -61,7 +62,7 @@ u32 FUN_00156230(void)
     case 6:
         FUN_00163aa4(&work->sprites[0], 1.0f);
         FUN_00163aa4(&work->sprites[2], 1.0f);
-        if (work->sprites[0].animationFlags.completed && work->sprites[2].animationFlags.completed)
+        if (uiSpriteGetCompletionState(&work->sprites[0]) && uiSpriteGetCompletionState(&work->sprites[2]))
             work->mode = 0;
         break;
     }

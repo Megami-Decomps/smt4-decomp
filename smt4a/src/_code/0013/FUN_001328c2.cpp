@@ -1,37 +1,40 @@
-/* NON_MATCHING: the node-end pointer is loaded into r1 where retail uses r2 (retail keeps the free-list link value in r1 live); same as FUN_00132514. */
+/* Pool allocator: pops a node from the free list, otherwise bump-allocates one 0x38-byte element (growing the pool first when the current block is full). */
 #include "common.h"
 
 extern "C" {
 
-typedef struct PoolNode {
-    /* 0x00 */ struct PoolNode *next;     /* free-list link while unused */
-    /* 0x04 */ u8 unk04[0x34];
-} PoolNode;                                /* 0x38 bytes */
+typedef struct Element {
+    u8 data[0x38];
+} Element;
 
-typedef struct NodePool {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ PoolNode *freeList;
-    /* 0x08 */ PoolNode *cursor;           /* next never-used node */
-    /* 0x0C */ PoolNode *end;
-} NodePool;
+typedef struct FreeNode {
+    struct FreeNode *next;
+} FreeNode;
 
-extern void FUN_001328ea(NodePool *pool);
+typedef struct Pool {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ FreeNode *freeList;
+    /* 0x08 */ Element *cursor;
+    /* 0x0C */ Element *limit;
+} Pool;
 
-/* Takes a node from the pool: the head of the free list, else the next unused node (growing the pool when exhausted). */
-PoolNode *FUN_001328c2(NodePool *pool)
+extern void FUN_001328ea(Pool *pool, s32 singleElement);
+
+Element *FUN_001328c2(Pool *pool, s32 singleElement)
 {
-    PoolNode *node = pool->freeList;
+    FreeNode *node = pool->freeList;
+    Element *element;
 
     if (node != NULL) {
         pool->freeList = node->next;
-        return node;
+        return (Element *)node;
     }
-    if (pool->cursor == pool->end) {
-        FUN_001328ea(pool);
+    if (pool->cursor == pool->limit) {
+        FUN_001328ea(pool, singleElement);
     }
-    node = pool->cursor;
-    pool->cursor = node + 1;
-    return node;
+    element = pool->cursor;
+    pool->cursor = element + 1;
+    return element;
 }
 
-} /* extern "C" */
+}

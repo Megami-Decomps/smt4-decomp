@@ -1,4 +1,4 @@
-/* NON_MATCHING: vector arithmetic restored; grouped loads, float registers and first-entry block placement differ. */
+/* NON_MATCHING: branch layout (first-entry arm out of line) and the length sign test now match retail; retail loads the Vec3 operands with vldm triples where this build loads individual components. */
 #include "shard/W6_W6Match2_VectorQueue.h"
 #include "shard/S1Mover.h"
 
@@ -12,12 +12,17 @@ void FUN_00295d40(void)
     VectorQueue *queue = &g_vectorQueueWork->queues[g_vectorQueueWork->activeQueue];
     for (s32 i = 0; i < (s32)queue->count; ++i) {
         QueuedVector *entry = &queue->entries[i];
-        if (i != 0) {
+        if (i == 0) {
+            entry->kind |= ~1u;
+            entry->direction.x = 0.0f;
+            entry->direction.y = 0.0f;
+            entry->direction.z = 0.0f;
+        } else {
             entry->kind |= 1;
             QueuedVector *previous = entry - 1;
             f32 length = distSpatial(entry->x, entry->y, entry->z,
                                      previous->x, previous->y, previous->z);
-            if (0.0f > length)
+            if (length < 0.0f)
                 length = -length;
             Vec3f previousPosition = *(const Vec3f *)&previous->x;
             Vec3f position = *(const Vec3f *)&entry->x;
@@ -32,11 +37,6 @@ void FUN_00295d40(void)
                 direction.z *= reciprocal;
             }
             *(Vec3f *)&entry->direction = direction;
-        } else {
-            entry->kind |= ~1u;
-            entry->direction.x = 0.0f;
-            entry->direction.y = 0.0f;
-            entry->direction.z = 0.0f;
         }
     }
     ++g_vectorQueueWork->activeQueue;

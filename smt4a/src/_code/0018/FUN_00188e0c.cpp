@@ -1,17 +1,16 @@
-/* NON_MATCHING: sign test only: retail extracts the sign bit with `lsrs r0,r0,#31; beq`, built uses `cmp r0,#0; bge` */
-/* Forwards a failed FUN_0016f1d4 result (sign bit set) to sysFatalBreak. */
-#include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
-extern s32 FUN_0016f1d4(void);
-extern void sysFatalBreak(void);
+s32 FUN_0016f1d4(void);
+int sysFatalBreak(void);
 
+/* Calls FUN_0016f1d4 and reports through sysFatalBreak when it returns a failure result. */
 void FUN_00188e0c(void)
 {
-    if (FUN_0016f1d4() < 0) {
+    if (nnResultIsFailure(FUN_0016f1d4())) {
         sysFatalBreak();
     }
 }
 
-}
+} /* extern "C" */

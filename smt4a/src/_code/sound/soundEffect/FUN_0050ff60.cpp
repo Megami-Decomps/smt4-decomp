@@ -39,7 +39,7 @@ extern const u32 DAT_006306ec[];
 
 int __aeabi_atexit(void *object, void (*destructor)(void *), void *moduleHandle);
 void FUN_0045ec40(void *object);
-void FUN_0045f1f0(void *object);
+void _ZN9Obj55be80D1Ev(void *object);
 
 // Constructs the global sound effects (smoothing and reverb), registers their destructors and
 // sets the default parameters.
@@ -52,7 +52,7 @@ void FUN_0050ff60(void)
     DAT_0061963c.fall = 0.5f;
     DAT_0061963c.enabled = 0;
     Obj55be80 *reverb = new (&DAT_0061963c + 1) Obj55be80();
-    __aeabi_atexit(reverb, FUN_0045f1f0, &entry);
+    __aeabi_atexit(reverb, _ZN9Obj55be80D1Ev, &entry);
     DAT_0061975c.time = 60;
     DAT_0061975c.delay = 4000;
     DAT_0061975c.volume = 100;

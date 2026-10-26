@@ -58,12 +58,12 @@ u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
     u32 result = baseValue;
     u16 packed = cost->fixed;
     if ((packed & 0xfff) != 4000) {
-        if (packed & 0xfff) {
-            result = FUN_003bf53c(unitParameter, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(packed & 0xfff)), 1.0f, 1.0f, DAT_00446d30[passiveBonuses]);
-        } else {
+        if (!(packed & 0xfff)) {
             result = 0;
             if (cost->percent)
                 result = mathApplyReductionMultiplier(baseValue, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(cost->percent)) * 0.01f);
+        } else {
+            result = FUN_003bf53c(unitParameter, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(packed & 0xfff)), 1.0f, 1.0f, DAT_00446d30[passiveBonuses]);
         }
     }
     return result;

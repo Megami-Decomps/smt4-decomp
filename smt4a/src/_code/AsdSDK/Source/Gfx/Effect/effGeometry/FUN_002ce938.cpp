@@ -1,4 +1,4 @@
-/* NON_MATCHING: slot null handling, saved count/product registers, color-loop registers and final stores differ. */
+/* NON_MATCHING: slot null handling matches retail; callee-saved register assignment differs (retail keeps stack-arg constant 16 in fp, per-item counts in r6/r7, slot in r8). */
 #include "shard/W6_W6Match3_EffectColor.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -33,9 +33,8 @@ EffectGeometryBatchView *FUN_002ce938(s32 count, s32 verticesPerItem, s32 triang
 {
     asdDebugTrace(DAT_0054baf8, 504);
     EffectGeometryBatchView *batch = static_cast<EffectGeometryBatchView *>(memAlloc(0x10000, 0x100, 0, sizeof(EffectGeometryBatchView), 0x10, 1));
-    EffectGeometrySlotView *slot = static_cast<EffectGeometrySlotView *>(FUN_00178b04(sizeof(EffectGeometrySlotView), DAT_0054baf8, 506));
-    if (slot != NULL)
-        slot = slotReset(slot);
+    EffectGeometrySlotView *slotMemory = static_cast<EffectGeometrySlotView *>(FUN_00178b04(sizeof(EffectGeometrySlotView), DAT_0054baf8, 506));
+    EffectGeometrySlotView *slot = (slotMemory != NULL) ? slotReset(slotMemory) : NULL;
     s32 triangles = trianglesPerItem * count;
     s32 vertices = verticesPerItem * count;
     slotInit(slot, 0x25, triangles * 3, vertices);

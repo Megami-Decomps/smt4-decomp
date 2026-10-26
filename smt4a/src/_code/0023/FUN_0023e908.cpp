@@ -1,4 +1,4 @@
-/* NON_MATCHING: touch-count base address is hoisted before cleanup and the first-page population branch is laid out earlier. */
+/* NON_MATCHING: branch layout of the visible-count test now matches retail; the count field address (add r6) is hoisted above the first loop here, retail forms it after the handle reset, and the zero register differs. */
 #include "ui/PartyPanelState.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
@@ -44,10 +44,12 @@ void FUN_0023e908(void)
             ++panel->count;
         }
         s32 visibleCount = 12;
-        if (panel->page != 0)
+        if (panel->page == 0) {
+            if (reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count < 12)
+                visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count;
+        } else {
             visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count - 12;
-        else if (reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count < 12)
-            visibleCount = reinterpret_cast<RosterCountView *>(gameGetSlotTable())->count;
+        }
         for (s32 i = 0; i < visibleCount; ++i) {
             panel->handles[i + 4] = FUN_001643b4(0x11, i + 0x31);
             ++panel->count;

@@ -22,8 +22,10 @@ void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key)
     AsdEplEntry *entry;
     s32 total = 0;
 
-    model->records.count = 0;
-    for (s32 i = 0; i < model->containers.count; i++) {
+    AsdModelAttrRecords *records = &model->records;
+    AsdModelAttrContainers *containers = &model->containers;
+    records->count = 0;
+    for (s32 i = 0; i < containers->count; i++) {
         AsdAtbcHeader *atbc = (AsdAtbcHeader *)data;
 
         if ((rt_memcmp(atbc, g_asdModelContainerAtbcMagic, 4) == 0 || rt_memcmp(atbc, g_asdModelContainerAbchMagic, 4) == 0) && atbc->count > 0 && atbc->count > i) {
@@ -48,16 +50,16 @@ void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key)
             total += entry->hi - entry->lo + 1;
         }
     }
-    model->records.count = total;
+    records->count = total;
     if (total == 0) {
-        model->records.items = NULL;
+        records->items = NULL;
         return;
     }
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdModel.cpp", 1693);
-    model->records.items = (AsdModelAttrRecord *)asdMemoryAllocTracked(256, 256, 0, model->records.count * sizeof(AsdModelAttrRecord), 1);
+    records->items = (AsdModelAttrRecord *)asdMemoryAllocTracked(256, 256, 0, records->count * sizeof(AsdModelAttrRecord), 1);
 
     s32 count = 0;
-    for (s32 i = 0; i < model->containers.count; i++) {
+    for (s32 i = 0; i < containers->count; i++) {
         AsdAtbcHeader *atbc = (AsdAtbcHeader *)data;
 
         if ((rt_memcmp(atbc, g_asdModelContainerAtbcMagic, 4) == 0 || rt_memcmp(atbc, g_asdModelContainerAbchMagic, 4) == 0) && atbc->count > 0 && atbc->count > i) {
@@ -80,18 +82,15 @@ void FUN_001ad2a4(AsdModelAttrModel *model, u8 *data, s32 key)
         }
         AsdEplTail *tail = entry != NULL ? &entry->tail : NULL;
 
-        if ((entry->flags & 1) == 0 && entry->key == key && entry->lo <= entry->hi) {
-            s32 id = entry->lo;
-
-            do {
-                AsdModelAttrRecord *record = &model->records.items[count];
+        if ((entry->flags & 1) == 0 && entry->key == key) {
+            for (s32 id = entry->lo; entry->hi >= id; id++) {
+                AsdModelAttrRecord *record = &records->items[count];
 
                 record->id = id;
                 record->handle = FUN_001abbc4(tail);
                 count++;
-                id++;
                 record->flags = entry->flags;
-            } while (entry->hi >= id);
+            }
         }
     }
 }

@@ -1,34 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0043015c` (_code @ 0x43015c, 0x38 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
-extern "C" {
+extern "C" s32 g_nnCecdHandle;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern int g_nnCecdHandle; /* 0x5c1fc4 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_0043015c(unsigned int *param_1)
-
+/* Sends the parameterless request 0x10; on success stores the fourth response word in *out and returns the service's result word. */
+extern "C" s32 FUN_0043015c(u32 *out)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x100000;
-  software_interrupt(0x32);
-  temp_v0 = g_nnCecdHandle;
-  if (-1 < g_nnCecdHandle) {
-    *param_1 = *(unsigned int *)(temp_v1 + 0x8c);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    nn::os::SetIpcWord(command, 0, 0x100000);
+    s32 result = nn::svc::SendSyncRequest(g_nnCecdHandle);
+    if (nnResultIsSuccess(result)) {
+        *out = command->words[2];
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */

@@ -1,10 +1,7 @@
-/* NON_MATCHING: unresolved removed call: retail starts with a linker nop followed by bx lr, with no named weak target */
-/* romwright 0.5.0 decompilation of FUN_0023a1b8 for reference (not compiled; its own view of the boundaries):
+#include "AsdSDK/AsdDebugHooks.h"
 
-unsigned int FUN_0023a1b8(unsigned int param_1)
-
+/* A stripped debug hook. */
+extern "C" void FUN_0023a1b8(void)
 {
-  return param_1;
+    asdDebugHookVoid();
 }
-*/
-#include "common.h"

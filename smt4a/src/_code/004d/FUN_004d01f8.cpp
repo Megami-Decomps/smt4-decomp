@@ -1,4 +1,4 @@
-/* NON_MATCHING: The embedded-entry pointer is retained rather than recomputed; getter/setter registers differ. */
+/* NON_MATCHING: the entry address is recomputed at every use like retail (cycleEntry helper); retail keeps the secondary value in r0 until the final setter calls and the state pointer in r5, the build copies it early and uses r4/r5/r6 differently. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gamedata/GameDataAccess_Shard0031.h"
@@ -12,22 +12,25 @@ s32 scrollOwnerSetValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
 
+/* The entry embedded in the cycle state, 0x10 bytes in. */
+static __inline FlaggedEntry *cycleEntry(ResourceValueCyclePrefixA *state)
+{
+    return reinterpret_cast<FlaggedEntry *>(reinterpret_cast<u8 *>(state) + 0x10);
+}
+
 void FUN_004d01f8(ResourceValueCyclePrefixA *state)
 {
-    FlaggedEntry *entry = reinterpret_cast<FlaggedEntry *>(
-        reinterpret_cast<u8 *>(state) + 0x10);
-
     s32 primary;
     if (state->mode == 1)
-        primary = resourceRunEmbeddedOperationIfUnblocked(entry);
+        primary = resourceRunEmbeddedOperationIfUnblocked(cycleEntry(state));
     else
-        primary = resourceRunOperationIfUnblocked(entry);
+        primary = resourceRunOperationIfUnblocked(cycleEntry(state));
 
     s32 secondary;
     if (state->mode == 1)
-        secondary = flaggedEntryGetValueB(entry);
+        secondary = flaggedEntryGetValueB(cycleEntry(state));
     else
-        secondary = flaggedEntryGetValueA(entry);
+        secondary = flaggedEntryGetValueA(cycleEntry(state));
 
     if (primary > 0) {
         --primary;
@@ -43,12 +46,12 @@ void FUN_004d01f8(ResourceValueCyclePrefixA *state)
     }
 
     if (state->mode == 0) {
-        scrollOwnerSetValue(entry, primary);
-        flaggedEntrySetValueA(entry, secondary);
+        scrollOwnerSetValue(cycleEntry(state), primary);
+        flaggedEntrySetValueA(cycleEntry(state), secondary);
     }
     if (state->mode == 1) {
-        recordTrackDirtyValue(entry, primary);
-        flaggedEntrySetValueB(entry, secondary);
+        recordTrackDirtyValue(cycleEntry(state), primary);
+        flaggedEntrySetValueB(cycleEntry(state), secondary);
     }
 }
 }

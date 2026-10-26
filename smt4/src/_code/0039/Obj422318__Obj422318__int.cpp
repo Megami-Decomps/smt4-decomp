@@ -2,8 +2,8 @@
 #include "classes/Obj422318.h"
 
 Obj422318::Obj422318(s32 mode)
+    : unk04(mode)
 {
-    unk04 = mode;
     unk24 = 0;
     child = NULL;
     handle = 0;

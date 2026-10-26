@@ -1,8 +1,8 @@
-/* NON_MATCHING: first animation iteration is peeled and completion checks use unsigned byte loads instead of native signed accessor loads. */
+/* NON_MATCHING: armcc threads the first iteration of the first loop (`i == 0` known on entry) where retail tests i == 0 each pass; view/index/complete registers follow from that. */
 #include "ui/UiSpriteState.h"
 struct StagedAnimationView {
-    u8 prefix[0x2CF8];
-    UiSpriteState entrances[7];
+    u8 prefix[0x2D84];
+    UiSpriteState first[6];
     u8 unk30CC[0x8C];
     UiSpriteState reveals[6];
     u8 unk34A0[0xA8];
@@ -12,23 +12,24 @@ struct StagedAnimationView {
     u8 unk3630[0x18];
     u8 soundPlayed[6];
 };
-typedef char StagedAnimationOffsets[offsetof(StagedAnimationView, entrances) == 0x2CF8 &&
+typedef char StagedAnimationOffsets[offsetof(StagedAnimationView, first) == 0x2D84 &&
     offsetof(StagedAnimationView, reveals) == 0x3158 &&
     offsetof(StagedAnimationView, counters) == 0x3548 &&
     offsetof(StagedAnimationView, soundEnabled) == 0x3618 &&
     offsetof(StagedAnimationView, soundPlayed) == 0x3648 ? 1 : -1];
 extern "C" {
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void FUN_002bf810(u32 sound);
-void FUN_002bf818(UiSpriteState *sprite);
+s32 FUN_002bf818(UiSpriteState *sprite);
 u32 FUN_002960ec(StagedAnimationView *view)
 {
     u32 complete = 1;
     for (s32 i = 0; i < 6; ++i) {
-        if (i == 0 || view->entrances[i].animationFlags.completed)
-            FUN_002bf818(&view->entrances[i + 1]);
+        if (i == 0 || uiSpriteGetCompletionState(&view->first[i - 1]))
+            FUN_002bf818(&view->first[i]);
     }
     for (s32 i = 0; i < 6; ++i) {
-        if (view->entrances[i + 1].animationFlags.completed) {
+        if (uiSpriteGetCompletionState(&view->first[i])) {
             if (view->soundEnabled[i] && !view->soundPlayed[i]) {
                 FUN_002bf810(0x1000174);
                 view->soundPlayed[i] = 1;
@@ -37,7 +38,7 @@ u32 FUN_002960ec(StagedAnimationView *view)
         }
     }
     for (s32 i = 0; i < 6; ++i) {
-        if (!view->entrances[i + 1].animationFlags.completed || !view->reveals[i].animationFlags.completed) {
+        if (!uiSpriteGetCompletionState(&view->first[i]) || !uiSpriteGetCompletionState(&view->reveals[i])) {
             complete = 0;
             break;
         }

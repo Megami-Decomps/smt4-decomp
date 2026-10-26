@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail peels the first history copy and unrolls the rest by two; the build retains a single-copy loop. */
+/* NON_MATCHING: the entry shift is a struct assignment, so armcc peels the first copy and unrolls the rest like retail; it still folds the second copy's address into the first (retail recomputes it from the incremented index). */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 // This view includes trailing history state beyond RenderChannelTable's known end.
@@ -17,7 +17,6 @@ struct TextHistoryTableView {
 
 extern "C" {
 extern RenderChannelState g_textRendererSettings;
-void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 // Make room for a new history record and reset its type marker.
 void FUN_0014553c()
@@ -29,7 +28,7 @@ void FUN_0014553c()
         if (history->selected >= 64) {
             for (s32 i = 0; i < 63; ++i) {
                 history = (TextHistoryTableView *)g_textRendererSettings.table;
-                __aeabi_memcpy4(&history->entries[i], &history->entries[i + 1], sizeof(history->entries[i]));
+                history->entries[i] = history->entries[i + 1];
             }
             ((TextHistoryTableView *)g_textRendererSettings.table)->selected = 63;
         }

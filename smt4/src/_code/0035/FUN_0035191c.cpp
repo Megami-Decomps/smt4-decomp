@@ -1,39 +1,42 @@
-/* NON_MATCHING: retail inlines SVC 0x23 in the thread-handle destructor; no SDK wrapper exists here and added SVC intrinsics/assembly are prohibited. */
-#include "romwright_types.h"
+#include "common.h"
+#include "nn/svc.h"
+#include <stddef.h>
+#include "mobiclip_ctrl/DeblockerHandle.h"
+
+extern "C" {
+void mobiclipS4PlayerDestroy(void *player);
+void mobiclipDeblockerRelease(u32 *handle);
+void nn_os_Thread_FinalizeImpl(u32 *thread);
+}
+
+/* The movie player (only what its destructor touches): the reader thread handle and the deblocker handle. */
+struct MoviePlayerView {
+    /* 0x000 */ u8 unk000[0x28];
+    /* 0x028 */ u32 threadHandle;
+    /* 0x02c */ u8 unk02c[0x12c];
+    /* 0x158 */ u32 deblocker;
+};
+typedef char MoviePlayerViewOffsetsCheck[
+    offsetof(MoviePlayerView, threadHandle) == 0x28 &&
+    offsetof(MoviePlayerView, deblocker) == 0x158 ? 1 : -1];
 
 extern "C" {
 
-int mobiclipDeblockerRelease(unsigned int *);
-int mobiclipS4PlayerDestroy(void);
-int mwmofilterDeblockerRelease(unsigned int);
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: mobiclipDeblockerRelease. */
-/* Supplied declaration required: mobiclipS4PlayerDestroy. */
-/* Supplied declaration required: mwmofilterDeblockerRelease. */
-extern void nn_os_Thread_FinalizeImpl(unsigned int);
-
-
-int FUN_0035191c(int param_1)
-
+/* Stops the player, releases its deblocker and closes its thread. */
+MoviePlayerView *FUN_0035191c(MoviePlayerView *player)
 {
-/* irregular: 4 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  
-  mobiclipS4PlayerDestroy();
-  puVar1 = (unsigned int *)(param_1 + 0x158);
-  mobiclipDeblockerRelease(puVar1);
-  mwmofilterDeblockerRelease(*puVar1);
-  *puVar1 = 0;
-  piVar2 = (int *)(param_1 + 0x28);
-  nn_os_Thread_FinalizeImpl((unsigned int)piVar2);
-  if (*piVar2 != 0) {
-    software_interrupt(0x23);
-    *piVar2 = 0;
-  }
-  return param_1;
+    mobiclipS4PlayerDestroy(player);
+    u32 *handle = &player->deblocker;
+    mobiclipDeblockerRelease(handle);
+    mwmofilterDeblockerRelease(*handle);
+    *handle = 0;
+    handle = &player->threadHandle;
+    nn_os_Thread_FinalizeImpl(handle);
+    if (*handle != 0) {
+        nn::svc::CloseHandle(*handle);
+        *handle = 0;
+    }
+    return player;
 }
 
 } /* extern "C" */

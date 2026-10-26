@@ -1,4 +1,4 @@
-/* NON_MATCHING: record-table base loads and slot-record tail-call placement differ from retail. */
+/* NON_MATCHING: record-array base now hoisted like retail (local records pointer passed to the helper); remaining: frame 304 vs 300, r4/r5 swap, branch/tail-call layout. */
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
@@ -31,17 +31,18 @@ void FUN_0035ad50(u32 id, SlotTableEntry *record);
 u32 FUN_002a4b28(u16 id);
 void FUN_0032d0c8(u32 screen, u32 kind, u16 id, const SlotTableEntry *record);
 
-static inline u16 itemListGetSelectedDetailId(ItemListDetailOwnerView *work)
+static inline u16 itemListGetSelectedDetailId(ItemListDetailRecord *records, FlaggedValueHolder *selection)
 {
-    return work->records[flaggedValueHolderGetTotal(&work->selection)].id;
+    return records[flaggedValueHolderGetTotal(selection)].id;
 }
 
 void FUN_0032cfe0(ItemListSelectionOwner *owner)
 {
     ItemListDetailOwnerView *work = (ItemListDetailOwnerView *)owner;
-    s16 id = (s16)itemListGetSelectedDetailId(work);
+    ItemListDetailRecord *records = work->records;
+    s16 id = (s16)itemListGetSelectedDetailId(records, &work->selection);
     if (work->useSlotRecord) {
-        id = (s16)itemListGetSelectedDetailId(work);
+        id = (s16)itemListGetSelectedDetailId(records, &work->selection);
         if (work->detailKind == 1) {
             SlotTableEntry *slot = slotRecordFindById((u16)id);
             // Retail's corresponding tail call falls through into the adjacent renderer.

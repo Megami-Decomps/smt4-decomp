@@ -1,4 +1,4 @@
-/* NON_MATCHING: the state-4 switch case is placed after the reset decision and final clear stores exchange pointer/value registers. */
+/* NON_MATCHING: block layout and the state switch match retail; the mode dispatch branch polarity (bne b4 / b 84 vs beq 84 / b b4) and the final clearing stores' pointer/value registers differ. */
 #include "map/lmapMain.h"
 #include "map/mapDepart.h"
 
@@ -19,22 +19,18 @@ void FUN_00354098()
     };
     ExtraTransitionView *extra;
     bool enable = false;
-    switch (g_gameState.mode) {
-    case 1:
+    if (g_gameState.mode == 1) {
         if (g_gameState.submode == 1)
             return;
         enable = gameFlagIsSet(0x72) && !gameFlagIsSet(0xB1);
-        break;
-    case 2:
+    } else if (g_gameState.mode == 2) {
         if (g_gameState.submode == 5)
             return;
         enable = !gameFlagIsSet(0x91);
-        break;
-    case 4:
+    } else if (g_gameState.mode == 4) {
         if (g_gameState.submode == 2)
             return;
         enable = gameFlagIsSet(0xF4) && !gameFlagIsSet(0xF6);
-        break;
     }
     extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
     if (enable) {
@@ -42,13 +38,15 @@ void FUN_00354098()
             extra->state = 1;
         return;
     }
-    if (extra->state == 0)
+    switch (extra->state) {
+    case 0:
         return;
-    if (extra->state == 3) {
+    case 3:
         lmapClearExtraFlag();
         extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
         if (extra->handle != 0)
             FUN_003d2158(extra->handle, 0);
+        break;
     }
     extra = reinterpret_cast<ExtraTransitionView *>(g_lmapScene);
     extra->first = 0;

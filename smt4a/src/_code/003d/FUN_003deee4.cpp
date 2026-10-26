@@ -20,7 +20,8 @@ u32 FUN_003deee4(u32 requestedAttribute)
         if (index < 350) {
             if ((*gameFlagBlockGetEntry(index) & 1) == 0)
                 continue;
-        } else {
+        }
+        if (index >= 350) {
             if (FUN_001ad9b4(index) == 0)
                 continue;
         }

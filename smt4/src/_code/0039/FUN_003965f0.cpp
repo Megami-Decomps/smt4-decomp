@@ -31,7 +31,10 @@ extern "C" void FUN_003965f0(void *object)
         if (entry->flags & 1) {
             entry->callbacks->update(entry);
             entry = queue->entries[i];
-            if (entry == NULL || (entry->flags & 1)) {
+            if (entry->flags & 1) {
+                continue;
+            }
+            if (entry == NULL) {
                 continue;
             }
         }

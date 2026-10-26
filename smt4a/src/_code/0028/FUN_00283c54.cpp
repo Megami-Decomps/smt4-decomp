@@ -1,11 +1,11 @@
-/* NON_MATCHING: Float-bit clamp temporaries change integer/VFP allocation, prologue scheduling and literal-pool order. */
+/* NON_MATCHING: the byte flag parameter is now an s32 (callers declare FUN_00283c54(f32, f32, u32, u32, s32, s32)); remaining: retail interleaves the second clamp compare after the global load and literal loads (prologue/literal-pool scheduling). */
 #include "gfx/FrameTextureWork.h"
 
 extern "C" {
 extern FrameTextureWork *g_frameTex;
 
 /* Expands frame-transition bounds around the screen and stores its timing and mode. */
-void FUN_00283c54(u32 state, u32 duration, u8 active, u32 mode, f32 horizontal, f32 vertical)
+void FUN_00283c54(u32 state, u32 duration, s32 active, u32 mode, f32 horizontal, f32 vertical)
 {
     union FloatWord { f32 value; s32 bits; } width, height;
     width.value = horizontal;

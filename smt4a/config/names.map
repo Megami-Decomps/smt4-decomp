@@ -6281,3 +6281,12 @@
 003e8704 keyedAccumulatorAdd
 002304d0 partyPanelHasSlotValue
 00471d00 aocSelectedRecordIsUnavailable
+0045f1f0 _ZN9Obj55be80D1Ev
+0042d340 _ZN9Obj42d340D1Ev
+0042cd08 _ZN9Obj42cd08D1Ev
+0013f0f4 fontPoolCreate
+00371068 mapCellMarkNeighborsState2
+003adef4 mapFlagSetNormalizedId
+0038e6bc activityRecordsAreIdle
+0015e978 soundArchiveLoadStringBlock
+0039e89c scrBtlAddPresetFlagsToMatchingUnits

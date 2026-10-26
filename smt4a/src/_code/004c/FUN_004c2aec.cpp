@@ -12,6 +12,7 @@ s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 s32 FUN_004c55e4(s32 unit, u32 skill);
 f32 FUN_004c28b4(s32 unit, s32 kind);
 
+
 s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amount)
 {
     BtlCombatantEntryA *source = FUN_003f0e20(btlGetMainState(), sourceId);
@@ -19,8 +20,8 @@ s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amou
     if (percentage > 0) {
         s32 bonus;
         if (target) {
-            if (source && !(source->flags & DAT_005713f0.affinity) &&
-                (target->flags & DAT_005713f0.affinity)) {
+            if (source && !(DAT_005713f0.affinity & source->flags) &&
+                (DAT_005713f0.affinity & target->flags)) {
                 bonus = target->maxHp * percentage / 200;
             } else {
                 bonus = target->maxHp * percentage / 100;
@@ -39,8 +40,8 @@ s32 FUN_004c2aec(u32 skill, s32 sourceId, s32 targetId, s32 percentage, f32 amou
     if (bonusPercentage > 0) {
         amount = (1.0f + (f32)bonusPercentage * 0.01f) * amount;
     }
-    if (source && target && !(source->flags & DAT_005713f0.affinity) &&
-        (target->flags & DAT_005713f0.affinity) && (s32)amount > 9999) {
+    if (source && target && !(DAT_005713f0.affinity & source->flags) &&
+        (DAT_005713f0.affinity & target->flags) && (s32)amount > 9999) {
         amount = 9999.0f;
     }
     return (s32)amount;

@@ -4,12 +4,19 @@
 extern "C" {
 extern MapTimerBanks* g_vectorQueueWork;
 
+struct Vector {
+    float x, y, z;
+};
+
+// Copies through pointers: armcc moves such a value with VFP vldmia/vstmia.
+static __inline void vectorCopy(const Vector *source, Vector *destination)
+{
+    *destination = *source;
+}
+
 // Allocate a timed vector transition, taking its endpoints from a selected bank.
 MapTimerSlot* FUN_00312de8(s32 bankIndex, float duration)
 {
-    struct Vector {
-        float x, y, z;
-    };
     struct BankView {
         /* 0x000 */ u32 active;
         /* 0x004 */ Vector origin;
@@ -39,7 +46,7 @@ MapTimerSlot* FUN_00312de8(s32 bankIndex, float duration)
             slot->mode = 0;
             slot->state = 0;
             slot->bank = bankIndex;
-            slot->origin = bank->origin;
+            vectorCopy(&bank->origin, &slot->origin);
             slot->target = bank->target;
             slot->duration = duration;
             slot->elapsed = 0.0f;

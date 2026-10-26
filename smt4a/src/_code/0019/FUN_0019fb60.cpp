@@ -1,39 +1,35 @@
-/* NON_MATCHING: retail uses ldr r3, [r0, #-8] where the compiled block uses sub r3, r0, #8. */
+/* NON_MATCHING: footer reads and arm layout (literal arm first) match retail; remaining: armcc hoists the shared token byte load above the flag test and register allocation of compressedSize/headerSize differs. */
 #include "common.h"
 
-struct BackwardCompressionFooter {
-    s8 compressedSize[3]; // 0x00: compressed span, including footer
-    u8 headerSize;        // 0x03: bytes skipped before the compressed stream
-    s8 expansionSize[4];  // 0x04: additional output bytes, little-endian
-};
-
+// Backward-compressed buffer: the last eight bytes are a footer holding the compressed span
+// (24 bits, including the footer), the header size (1 byte) and the expansion size (32 bits).
 extern "C" void FUN_0019fb60(u8* buffer, u32 inputSize, u32 bufferCapacity)
 {
     u8* inputEnd = buffer + inputSize;
-    const BackwardCompressionFooter* footer =
-        reinterpret_cast<const BackwardCompressionFooter*>(inputEnd - 8);
 
-    u32 compressedSize = (u32)footer->compressedSize[0]
-                       | ((u32)footer->compressedSize[1] << 8)
-                       | ((u32)footer->compressedSize[2] << 16);
+    u32 compressedSize = (u32)inputEnd[-8]
+                       | ((u32)inputEnd[-7] << 8)
+                       | ((u32)inputEnd[-6] << 16);
     if (compressedSize > inputSize)
         return;
-
-    u32 expansionSize = (u32)footer->expansionSize[0]
-                      | ((u32)footer->expansionSize[1] << 8)
-                      | ((u32)footer->expansionSize[2] << 16)
-                      | ((u32)footer->expansionSize[3] << 24);
+    u32 headerSize = inputEnd[-5];
+    u32 expansionSize = ((u32)inputEnd[-1] << 24)
+                      | ((u32)inputEnd[-2] << 16)
+                      | ((u32)inputEnd[-3] << 8)
+                      | (u32)inputEnd[-4];
     if (inputSize + expansionSize > bufferCapacity)
         return;
 
     u8* inputStart = inputEnd - compressedSize;
-    u8* input = inputEnd - footer->headerSize;
+    u8* input = inputEnd - headerSize;
     u8* output = inputEnd + expansionSize;
 
     while (inputStart < input) {
         u8 flags = *--input;
-        for (u32 bit = 0; bit < 8; ++bit) {
-            if (flags & 0x80) {
+        for (s32 bit = 0; bit < 8; ++bit) {
+            if (!(flags & 0x80)) {
+                *--output = *--input;
+            } else {
                 u32 tokenHigh = input[-1];
                 u32 tokenLow = input[-2];
                 input -= 2;
@@ -44,9 +40,6 @@ extern "C" void FUN_0019fb60(u8* buffer, u32 inputSize, u32 bufferCapacity)
                     output[-1 - (s32)copied] = match[-1 - (s32)copied];
                 }
                 output -= length;
-            } else {
-                u8 value = *--input;
-                *--output = value;
             }
 
             flags = (u8)(flags << 1);

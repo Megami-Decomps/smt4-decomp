@@ -5,7 +5,7 @@ extern "C" {
 // Skip zero-length segments and prepare the next scalar interpolation step.
 void FUN_002853ec(EffectScalarKeyLegacyTrack *track, const EffectScalarKeyLegacySource *source)
 {
-    if (track->index > 2)
+    if (track->index >= 3)
         track->index = 4;
     s32 current = track->index;
     for (s32 advance = 1; current + advance < 4; ++advance) {

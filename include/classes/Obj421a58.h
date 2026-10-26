@@ -3,10 +3,20 @@
 
 #include "common.h"
 
+/* The three words every smoothing state starts with, right after the vtable pointer. */
+class Obj421a58Base {
+public:
+    Obj421a58Base() : unk04(0), unk08(0), unk0c(250) {}
+
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u32 unk08;
+    /* 0x0C */ u32 unk0c;
+};
+
 /* The object whose vtable is at 0x421a58 (named after it until its real name is known): a
  * smoothing state with a fixed number of tracked channels (up to four). Slot 0 is the destructor
  * (retail has no deleting variant), slots 2-4 are its other virtual methods. */
-class Obj421a58 {
+class Obj421a58 : public Obj421a58Base {
 public:
     Obj421a58();
     virtual ~Obj421a58();
@@ -16,9 +26,6 @@ public:
 
 protected:
     /* 0x00: vtable pointer */
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 unk08;
-    /* 0x0C */ u32 unk0c;
     /* 0x10 */ f32 unk10;
     /* 0x14 */ f32 unk14;
     /* 0x18 */ u8 unk18;

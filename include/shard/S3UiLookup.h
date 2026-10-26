@@ -29,12 +29,17 @@ typedef struct UiFoundEntry {
     /* 0x30 */ u32 value;            /* big endian */
 } UiFoundEntry;
 
+/* The entries table and the dictionary that finds their keys. */
+typedef struct UiLookupTable {
+    /* 0x00 */ UiFoundEntry **entries;
+    /* 0x04 */ u8 dictionary[0x68];
+} UiLookupTable;
+
 typedef struct UiContext {
     /* 0x00 */ u8 unk00[0x30];
     /* 0x30 */ u32 *handle;          /* first word handed to FUN_004064a8 */
     /* 0x34 */ u8 unk34[8];
-    /* 0x3C */ UiFoundEntry **entries;
-    /* 0x40 */ u8 dictionary[0x68];
+    /* 0x3C */ UiLookupTable lookup;
     /* 0xA8 */ UiNameSlots **slots;
 } UiContext;
 

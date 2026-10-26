@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail retains removed debug filename/line setup and synchronization-hook NOPs. */
+/* NON_MATCHING: debug trace added (retail pool string + line 336); retail keeps `handle` in the 4-byte push {r3} frame shared with the stack argument and retains removed synchronization-hook NOPs (before the second result check, after the event initialisation and before the tail call) */
 #include "nn/Result.h"
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 // Apocalypse's startup prefix differs from the IV loader globals in AsdFile.h.
 struct FileStartupGlobals { u32 unk00; void *buffer; u32 state, semaphore; };
@@ -25,6 +26,7 @@ void FUN_00136df8()
     g_asdFile.state = 0;
     FUN_00146720();
     u32 size = resourceCallDefaultOptions(16, 16, 1);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 336);
     g_asdFile.buffer = asdMemoryAlloc(0x100, 0x100, 0, size, 1);
     FUN_0014685c(16, 16, g_asdFile.buffer, size, 1);
     u32 handle = 0;

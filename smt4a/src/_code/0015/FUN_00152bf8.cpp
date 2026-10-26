@@ -1,5 +1,6 @@
-/* NON_MATCHING: sound-status base addressing, list traversal outlining and neighbor-pointer reloads differ. */
+/* NON_MATCHING: list-walk outlining (retail puts the advance steps and the head-removal arm out of line) and neighbor-pointer reloads differ; base addressing and the scoped lock now match. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 /* Apocalypse's status suffix lies past the shared IV sound-system definition. */
 struct ApocalypseSoundStatusView {
@@ -9,15 +10,13 @@ struct ApocalypseSoundStatusView {
 
 extern "C" {
 extern ApocalypseSoundStatusView g_asdSoundSystem;
-void nn_os_CriticalSection_Enter(void *section);
-void nn_os_CriticalSection_Leave(void *section);
 void nn_snd_CTR_FreeVoice(u32 voice);
 void asdMemFree(void *memory);
 }
 
-static inline bool asdContainsSoundObject(AsdSndObject *object)
+static inline bool asdContainsSoundObject(AsdSndStatusApoc *status, AsdSndObject *object)
 {
-    for (AsdSndObject *item = g_asdSoundSystem.status.objects; item; item = item->next) {
+    for (AsdSndObject *item = status->objects; item; item = item->next) {
         if (item == object) {
             return true;
         }
@@ -25,9 +24,9 @@ static inline bool asdContainsSoundObject(AsdSndObject *object)
     return false;
 }
 
-static inline void asdUnlinkSoundObject(AsdSndObject *object)
+static inline void asdUnlinkSoundObject(AsdSndStatusApoc *status, AsdSndObject *object)
 {
-    for (AsdSndObject *item = g_asdSoundSystem.status.objects; item; item = item->next) {
+    for (AsdSndObject *item = status->objects; item; item = item->next) {
         if (item == object) {
             if (object->prev) {
                 object->prev->next = object->next;
@@ -35,15 +34,15 @@ static inline void asdUnlinkSoundObject(AsdSndObject *object)
                     object->next->prev = object->prev;
                 }
             } else {
-                g_asdSoundSystem.status.objects = object->next;
-                if (g_asdSoundSystem.status.objects) {
-                    g_asdSoundSystem.status.objects->prev = NULL;
+                status->objects = object->next;
+                if (status->objects) {
+                    status->objects->prev = NULL;
                 }
             }
             break;
         }
     }
-    --g_asdSoundSystem.status.objectCount;
+    --status->objectCount;
 }
 
 extern "C" void FUN_00152bf8(AsdSndObject *object)
@@ -52,9 +51,10 @@ extern "C" void FUN_00152bf8(AsdSndObject *object)
         return;
     }
     /* Apocalypse's critical section begins at status + 0x0c. */
-    nn_os_CriticalSection_Enter(&g_asdSoundSystem.status.unk08[4]);
-    if (asdContainsSoundObject(object)) {
-        asdUnlinkSoundObject(object);
+    AsdSndStatusApoc *status = &g_asdSoundSystem.status;
+    ScopedCriticalLock lock(static_cast<void *>(&status->unk08[4]));
+    if (asdContainsSoundObject(status, object)) {
+        asdUnlinkSoundObject(status, object);
     }
     for (s32 index = 0; index < object->voiceCount; ++index) {
         if (object->voices[index]) {
@@ -62,5 +62,4 @@ extern "C" void FUN_00152bf8(AsdSndObject *object)
         }
     }
     asdMemFree(object);
-    nn_os_CriticalSection_Leave(&g_asdSoundSystem.status.unk08[4]);
 }

@@ -1,36 +1,39 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0016cb50` (_code @ 0x16cb50, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Sets voice `index` to state 2 (under the sound lock). */
+#include "common.h"
 
 extern "C" {
+/* One sound voice (0x70 bytes); the first word is the driver voice handle. */
+struct Voice {
+    /* 0x00 */ u32 handle;
+    /* 0x04 */ u8 unk04[0x6C];
+};
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
+/* The voice table: a pointer to the voices and their count. */
+struct VoiceTable {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ Voice *voices;
+    /* 0x0C */ u8 unk0c[8];
+    /* 0x14 */ u32 count;
+};
 
-extern int DAT_005880d8; /* 0x5880d8 */
-extern unsigned int DAT_005880e4; /* 0x5880e4 */
-extern unsigned int g_soundVoiceCriticalSection; /* 0x618518 */
+extern VoiceTable DAT_005880d0;
+extern u8 g_soundVoiceCriticalSection;
+void nn_os_CriticalSection_Enter(void *section);
+void nn_os_CriticalSection_Leave(void *section);
+void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-extern void nn_snd_CTR_Voice_SetState(unsigned int, int);
-
-
-void FUN_0016cb50(unsigned int param_1)
-
+void FUN_0016cb50(u32 index)
 {
-  if ((int)param_1 < 0) {
-    return;
-  }
-  if (param_1 < DAT_005880e4) {
-    nn_os_CriticalSection_Enter((unsigned int)&g_soundVoiceCriticalSection);
-    nn_snd_CTR_Voice_SetState(*(unsigned int *)(DAT_005880d8 + param_1 * 0x70),2);
-    nn_os_CriticalSection_Leave((unsigned int)&g_soundVoiceCriticalSection);
-    return;
-  }
-  return;
+    if ((s32)index < 0) {
+        return;
+    }
+    u32 count = DAT_005880d0.count;
+    if (index >= count) {
+        return;
+    }
+    nn_os_CriticalSection_Enter(&g_soundVoiceCriticalSection);
+    Voice *voice = &DAT_005880d0.voices[index];
+    nn_snd_CTR_Voice_SetState(voice->handle, 2);
+    nn_os_CriticalSection_Leave(&g_soundVoiceCriticalSection);
 }
-
-} /* extern "C" */
+}

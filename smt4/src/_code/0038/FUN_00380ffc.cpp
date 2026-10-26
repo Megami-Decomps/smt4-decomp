@@ -1,2 +1,7 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x40b89c; not written yet. */
 #include "common.h"
+
+/* Smaller of the first and third float arguments. */
+extern "C" f32 FUN_00380ffc(f32 a, f32 unused, f32 b)
+{
+    return a > b ? b : a;
+}

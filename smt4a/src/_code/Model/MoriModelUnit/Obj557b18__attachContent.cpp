@@ -1,4 +1,4 @@
-/* NON_MATCHING: closest with cflags -O2 (the mesh-count loops are not unrolled there); remaining: the table pointer lives in r1 in retail, null-checked conversions use `addsne` where this build emits addne+cmp, max compare operands are swapped, and no nop after the allocation test. */
+/* NON_MATCHING: the unsigned mesh-count loop counter stops armcc unrolling the loops (as in retail); remaining: the table pointer lives in r1 in retail, null-checked conversions use `addsne` where this build emits addne+cmp, max compare operands are swapped, and no nop after the allocation test. */
 #include "classes/Obj557b18.h"
 #include <new>
 
@@ -14,7 +14,7 @@ void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *so
 static __inline s32 maxElementCount(UnitMeshDescriptor **meshes, u16 count)
 {
     s32 largest = 0;
-    for (s32 index = 0; index < count; ++index) {
+    for (u32 index = 0; index < count; ++index) {
         s32 elements = meshes[index]->elementCount;
         if (largest < elements) {
             largest = elements;

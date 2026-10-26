@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses ldr r0, [pc, #144] where the compiled block uses ldr ip, [pc, #148]. */
+/* NON_MATCHING: the clamp now compiles to retail's vmovle (ternary form); retail uses r0/r1 for the sound-state base and shares the active-flag store between both arms, the build uses ip and a separate store. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
@@ -17,9 +17,7 @@ void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames,
     if (enable != 0) {
         g_asdSoundDuck.flags |= 1;
         g_asdSoundDuck.level = level;
-        if (level <= 0.0f) {
-            level = 0.0f;
-        }
+        level = level > 0.0f ? level : 0.0f;
         g_asdSoundDuck.level = level;
 
         DuckLevelBits clampedLevel;

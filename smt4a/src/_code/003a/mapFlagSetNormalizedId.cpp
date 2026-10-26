@@ -1,9 +1,8 @@
-/* NON_MATCHING: aliased flag selection and word-mask branch ordering differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
 // Normalize related map identifiers before changing their shared persistent flag.
-void FUN_003adef4(s32 id, s32 enabled)
+void mapFlagSetNormalizedId(s32 id, s32 enabled)
 {
     FlagWorkBanks *work = gameFlagsGetBlock();
     if (id == 0x10 || id == 0x11) id = 8;
@@ -17,11 +16,13 @@ void FUN_003adef4(s32 id, s32 enabled)
     else if (id == 0x74 || id == 0x77) id = 0x6f;
     else if (id == 0x82 || id == 0x83) id = 0x80;
     s32 word = id / 32;
-    u32 mask = 1u << (id % 32);
-    if (enabled == 0) {
-        work->mappedFlags.words[word] &= ~mask;
-    } else if ((work->mappedFlags.words[word] & mask) == 0) {
-        work->mappedFlags.words[word] |= mask;
+    s32 bit = id % 32;
+    if (enabled != 0) {
+        if ((work->mappedFlags.words[word] & (1u << bit)) == 0) {
+            work->mappedFlags.words[word] |= 1u << bit;
+        }
+    } else {
+        work->mappedFlags.words[word] &= ~(1u << bit);
     }
 }
 }

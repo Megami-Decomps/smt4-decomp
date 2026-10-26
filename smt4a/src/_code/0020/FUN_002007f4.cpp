@@ -1,4 +1,4 @@
-/* NON_MATCHING: completion-byte signedness, cached display bases and state/animation register allocation differ. */
+/* NON_MATCHING: completion getter calls match; cached display bases and the state/constant register allocation (retail keeps 1 in r7 and 0 in r6, loads 1 again for display.finished) differ. */
 #include "ui/UiSpriteState.h"
 
 struct BufferedRowsDisplay {
@@ -36,6 +36,7 @@ typedef char BufferedRowsOffsets[
     sizeof(BufferedRowsPayload) == 0x130 ? 1 : -1];
 extern "C" {
 void FUN_00163aa4(UiSpriteState *, f32);
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 void __aeabi_memcpy4(void *, const void *, u32);
 void FUN_00203b40(BufferedRowsDisplay *, u32, u32, u32, u32, u32);
 
@@ -45,7 +46,7 @@ void FUN_002007f4(BufferedRowsWork *work)
     case 0:
         for (s32 index = 0; index < 5; ++index)
             FUN_00163aa4(&work->rows[index], 1.0f);
-        if (!work->rows[4].animationFlags.completed)
+        if (!uiSpriteGetCompletionState(&work->rows[4]))
             return;
         work->state = 1;
         break;
@@ -54,7 +55,7 @@ void FUN_002007f4(BufferedRowsWork *work)
     case 2:
         for (s32 index = 0; index < 5; ++index)
             FUN_00163aa4(&work->rows[index], 1.0f);
-        if (!work->rows[4].animationFlags.completed)
+        if (!uiSpriteGetCompletionState(&work->rows[4]))
             return;
         work->state = 3;
         // fall through

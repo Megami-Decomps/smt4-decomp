@@ -113,7 +113,7 @@ int libc_strcpy(...);
 int tableGroupFindEntryIndex(...);
 int frameTexInitActive(void);
 int gameFlagsWriteWordBit(...);
-int FUN_003adef4(...);
+int mapFlagSetNormalizedId(...);
 int naviMainFinishRequest(void);
 int sysPlayVoice(...);
 int FUN_00482c04(void);
@@ -551,7 +551,7 @@ extern char FUN_00386720(void);
 /* Supplied declaration required: gameApplyCurrentFlagTableEntry. */
 extern int dataTable2FType0GetEntry(int);
 /* Supplied declaration required: uiPlayGatedActionFeedback. */
-/* Supplied declaration required: FUN_003adef4. */
+/* Supplied declaration required: mapFlagSetNormalizedId. */
 extern int FUN_003ae4d0(unsigned int);
 /* Supplied declaration required: naviMainFinishRequest. */
 /* Supplied declaration required: sysClearCachedFlag. */
@@ -1963,7 +1963,7 @@ LAB_00278b38:
                               if (temp_v8 == -1) {
                                 return 0;
                               }
-                              FUN_003adef4(temp_v8,1);
+                              mapFlagSetNormalizedId(temp_v8,1);
                               naviMainFinishRequest();
                               return 0;
                             }

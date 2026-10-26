@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses a separate second-tier base and a different schedule for float conversions. */
+/* NON_MATCHING: tier bases now match retail's hoisted `base + 44`; the zero-initialiser copy chain, the base register pair (sl/fp) and the float conversion schedule differ. */
 #include "common.h"
 
 extern "C" {
@@ -16,9 +16,11 @@ s32 FUN_00480c28()
     s32 third = 0;
     s32 fourth = 0;
     s32 fifth = 0;
+    const u32 *firstTier = DAT_0057f6f8[0];
+    const u32 *secondTier = DAT_0057f6f8[1];
     for (s32 i = 0; i < 11; ++i) {
-        first += FUN_001ba3d4(DAT_0057f6f8[0][i]);
-        second += FUN_001ba3d4(DAT_0057f6f8[1][i]);
+        first += FUN_001ba3d4(firstTier[i]);
+        second += FUN_001ba3d4(secondTier[i]);
         third += FUN_001ba3d4(DAT_0057f750[i]);
         fourth += FUN_001ba3d4(DAT_0057f77c[i]);
         fifth += FUN_001ba3d4(DAT_0057f7a8[i]);

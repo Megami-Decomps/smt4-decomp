@@ -1,4 +1,5 @@
 /* Updates the screen cursor, then finishes a confirmed selection once help is idle. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/Shard004A.h"
 
 extern "C" {
@@ -8,7 +9,6 @@ s32 vec2GetYInt(const void *selection);
 void pointConvertToFloat(f32 *position, s32 x, s32 y);
 s32 buttonHelpIsNotActive(void);
 void FUN_0032cfe0(Screen4A *screen);
-s8 uiSpriteGetCompletionState(const void *record);
 
 void FUN_004a2404(Screen4A *screen)
 {
@@ -18,7 +18,7 @@ void FUN_004a2404(Screen4A *screen)
     s32 y = vec2GetYInt(selection);
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);
-    if (uiSpriteGetCompletionState(selection) != 0 && buttonHelpIsNotActive()) {
+    if (uiSpriteGetCompletionState((const UiAnimatedSprite *)selection) != 0 && buttonHelpIsNotActive()) {
         FUN_003343f0(0);
         screen->state = 2;
         screen->unk18 = 0;

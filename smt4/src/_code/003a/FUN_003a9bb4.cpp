@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the loop counters and the data-table pointers in stack slots (about 90 bytes of frame) and orders the nested-loop exits differently; armcc keeps them in registers here. */
+/* NON_MATCHING: the table-slot and list-head pointers are now precomputed at entry as in retail; retail also keeps the loop counters and data-table pointers in stack slots (88-byte frame vs 56) and orders the nested-loop exits differently. */
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
 
@@ -76,9 +76,11 @@ void FUN_00233730(void *header, s32 a, s32 b, s32 c, s32 d);
  * is allowed, adding it to the work's list; then finalises the list. */
 void FUN_003a9bb4(EntryListWork *work)
 {
+    u32 *tableSlot = &work->table;
+    s16 *list = &work->first;
     for (s32 group = 1; group < 16; group++) {
         for (s32 sub = 0; sub < 16; sub++) {
-            OccurrenceEntry *entry = FUN_003bc0ac(work->table, group, sub);
+            OccurrenceEntry *entry = FUN_003bc0ac(*tableSlot, group, sub);
 
             if (entry == NULL) {
                 break;
@@ -124,7 +126,7 @@ void FUN_003a9bb4(EntryListWork *work)
                             }
                             listEntry.value = value;
                             listEntry.enabled = 1;
-                            recordListAppendUniqueKey(&work->first, &listEntry);
+                            recordListAppendUniqueKey(list, &listEntry);
                         }
                     }
                 }

@@ -29,6 +29,8 @@ struct ResourceListOwnerVector {
     /* 0x04 */ ResourceListOwnerEntry **end;
     /* 0x08 */ ResourceListOwnerEntry **capacityEnd;
 
+    ResourceListOwnerVector() : begin(NULL), end(NULL), capacityEnd(NULL) {}
+
     void clear()
     {
         ResourceListOwnerEntry **first = begin;

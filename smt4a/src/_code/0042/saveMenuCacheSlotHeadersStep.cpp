@@ -1,4 +1,5 @@
 /* NON_MATCHING: the mode switch loads the old mode into r1 and the new mode into r0 in retail (the reverse here) and the final tail call sets r1 before the increment. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/SaveSlotHeaderWork.h"
 
 extern "C" {
@@ -6,7 +7,6 @@ u32 scrRunOpcodesStub(ScriptState *script);
 void saveLoadProcessCreate(s32 slot, s32 mode);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
 void FUN_00420a2c(SaveSlotHeaderWork *work);
-s32 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 s32 byteTripleGetV0();
 s32 byteArr5Get3();
 const void *gameDataBlocksGetTable();

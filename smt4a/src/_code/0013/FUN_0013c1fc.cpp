@@ -20,19 +20,22 @@ void FUN_0013c1fc(void)
         DAT_005b4000.available = 0;
     }
     s32 available = DAT_005b4000.available;
-    for (s32 index = 0; index < 31; ++index) {
-        const InputCounterBinding *binding = &DAT_0053d740[index];
-        u32 buttons = 0;
-        if (binding->sourceSelector == 0) {
+    const InputCounterBinding *binding = DAT_0053d740;
+    u32 *counter = DAT_00640000;
+    for (s32 index = 0; index < 31; ++index, ++binding, ++counter) {
+        u32 buttons;
+        if (binding->sourceSelector != 0) {
+            buttons = 0;
+        } else {
             if (available <= 0) {
                 continue;
             }
             buttons = DAT_0063ffd0;
         }
         if ((buttons & binding->mask) != 0) {
-            ++DAT_00640000[index];
+            ++*counter;
         } else {
-            DAT_00640000[index] = 0;
+            *counter = 0;
         }
     }
     if ((DAT_005b4000.flags & 2) != 0) {

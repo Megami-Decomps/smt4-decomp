@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail recovers the owner from the member reset result; this wrapper preserves the owner in r4. */
 #include "common.h"
+#include <stddef.h>
 
 struct MemberState {
     /* 0x00 */ u8 unk00[0x60];
@@ -12,13 +12,14 @@ struct OwnerState {
 
 extern "C" {
 
-void _ZN10FloatStateC1Ev(MemberState *member);
+/* Constructs a FloatState and returns it. */
+MemberState *_ZN10FloatStateC1Ev(MemberState *member);
 
 /* Resets the owner's embedded state. */
 OwnerState *FUN_003f2be4(OwnerState *owner)
 {
-    _ZN10FloatStateC1Ev(&owner->member);
-    return owner;
+    MemberState *member = _ZN10FloatStateC1Ev(&owner->member);
+    return reinterpret_cast<OwnerState *>(reinterpret_cast<u8 *>(member) - offsetof(OwnerState, member));
 }
 
 }

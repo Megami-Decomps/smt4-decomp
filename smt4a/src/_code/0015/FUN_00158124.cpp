@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail preserves r4 and uses a separate loop-entry compare; this source folds the active-child count loop. */
+/* NON_MATCHING: the enabled/resource words are now read before the override test as in retail; retail keeps the child count in r0 with r4 saved and uses a separate loop-entry compare. */
 #include "common.h"
 
 struct ActiveChild {
@@ -33,12 +33,14 @@ extern "C" ActivityOverride *DAT_0056fcb8;
 extern "C" bool FUN_00158124(ActivityOwner *owner)
 {
     if (!(owner->flags & 1)) {
+        u32 enabled = owner->enabled;
+        u32 resource = owner->resource;
         ActivityParameters *parameters;
         if (DAT_0056fcb8 && (DAT_0056fcb8->flags & 1) && (DAT_0056fcb8->flags & 2))
             parameters = &DAT_0056fcb8->parameters;
         else
             parameters = owner->parameters;
-        if (owner->enabled && owner->resource && parameters && parameters->weight != 0.0f) {
+        if (enabled && resource && parameters && parameters->weight != 0.0f) {
             s32 activeCount = 0;
             for (ActiveChild **child = owner->begin; child != owner->end; ++child)
                 if (!((*child)->flags & 1))

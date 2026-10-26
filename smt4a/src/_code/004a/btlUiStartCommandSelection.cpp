@@ -23,7 +23,7 @@ struct BattleCommandWarningView {
 };
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-void eventPanelSelectSpritePreset(EventPanelPresetWork *, s32 mode, u8 optionB, u8 optionA, s32 animated);
+void eventPanelSelectSpritePreset(EventPanelPresetWork *, s32 mode, s32 optionB, s32 optionA, s32 animated);
 void FUN_002cd118(BtlUiObjAA *, s32 mode, s16 first, s16 second);
 void FUN_00227af0(const char *message);
 void menuStateReset();
@@ -35,7 +35,7 @@ void menu32Advance(Menu32 *menu);
 void uiMenuActivateAndCountEntries(MenuState *menu);
 
 void btlUiStartCommandSelection(u32 unusedContext, s32 mode, s8 first, s8 second,
-                  bool enemyFirst, bool activate)
+                  s32 enemyFirst, s32 activate)
 {
     BtlUiA *ui = g_btlUi.ui;
     BattleCommandModeView *command = (BattleCommandModeView *)ui->unk74A4;

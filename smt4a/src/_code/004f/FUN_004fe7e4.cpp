@@ -24,12 +24,13 @@ u32 FUN_004fe7e4(s32 actorId, u32 argument, u32 duration)
                 action->value = duration;
                 action->parameterScalar = parameter;
             } else {
+                u32 parameter = 0xFF;
                 ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actorId, 0, argument);
                 action->flagView.flags |= 4;
                 action->target = (u32)record;
                 action->kind = 0x2C;
                 action->value = duration;
-                action->parameter = 0xFF;
+                action->parameter = parameter;
             }
             record->render.flags &= ~0x10000;
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the manager in two registers (r5 for the first part, r6 for the animation lookup) and hoists the loads of the two readiness words above the override test; the build uses one register and conditional loads. */
+/* NON_MATCHING: the two readiness words are now read before the override test and FUN_00156994 takes its real (model, matrix, dt) arguments, as in retail; retail still copies the manager into a second register (mov r5,r6) and reads its animation set through the original register. */
 #include "common.h"
 
 /* A model in the manager's list. */
@@ -40,13 +40,15 @@ extern ModelManager *g_handleRegistry;
 extern ModelOverride *DAT_0056fcb8;
 
 void FUN_00158038(ModelManager *manager);
-void FUN_00156994(f32 weight, ModelAnimationSet *animations);
+void FUN_00156994(ModelEntry *model, ModelAnimationSet *outMatrix, f32 dt);
 
 // Applies every model's weight to the manager's animation set.
 static __inline void applyModelWeights(ModelManager *self)
 {
     FUN_00158038(self);
     if ((self->flags & 2) == 0) {
+        u32 ready = self->unk10;
+        u32 started = self->unk04;
         ModelAnimationSet *active;
         ModelOverride *override = DAT_0056fcb8;
         if (override != NULL && (override->flags & 1) && (override->flags & 2)) {
@@ -54,7 +56,7 @@ static __inline void applyModelWeights(ModelManager *self)
         } else {
             active = self->animations;
         }
-        if (self->unk10 != 0 && self->unk04 != 0) {
+        if (ready != 0 && started != 0) {
             ModelEntry **entry;
             ModelEntry **end;
             if (active != NULL) {
@@ -66,7 +68,7 @@ static __inline void applyModelWeights(ModelManager *self)
                 if (animations != NULL) {
                     ModelAnimationSet *base = animations + 1;
                     do {
-                        FUN_00156994((*entry)->weight, base);
+                        FUN_00156994(*entry, base, (*entry)->weight);
                         entry++;
                     } while (entry != end);
                 }

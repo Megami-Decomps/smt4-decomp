@@ -49,10 +49,8 @@ WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)
         request.flags = -2;
         Obj4221bc *owner = this;
         u32 status = FUN_002bcc60(manager->queue, &request.size, FUN_0038ae30, &owner);
-        if ((status & 0x7e00000) != 0x600000) {
-            if (nnResultIsFailure(status)) {
-                FUN_002c526c(status);
-            }
+        if (nnResultIsFailureExceptSummary(status, 3)) {
+            FUN_002c526c(status);
         }
     }
     return output;

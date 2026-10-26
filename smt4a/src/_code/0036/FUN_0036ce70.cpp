@@ -1,4 +1,4 @@
-/* NON_MATCHING: result/completion lifetimes and channel-base offsets match; loop index scratch registers and the progress LDR/VMOV versus VLDR/VMOV handoff differ. */
+/* NON_MATCHING: only the loop index scratch register differs (retail scales the index in r1, build in r0); progress now loads with vldr/vmov like retail. */
 #include "common.h"
 #include "camp/CampCec/CampCecView.h"
 
@@ -21,6 +21,14 @@ struct OverlayFadeWork {
 extern "C" {
 u32 FUN_002e1c94(f32 *value, s32 duration, s32 frame, f32 start, f32 target);
 
+/* Non-negative IEEE-754 values keep their numeric order when compared as signed words. */
+static __inline s32 floatBits(f32 value)
+{
+    union { f32 value; s32 bits; } representation;
+    representation.value = value;
+    return representation.bits;
+}
+
 // Step both fade channels and finish the transition once its endpoint and overlay gate are ready.
 u32 FUN_0036ce70(OverlayFadeWork *work)
 {
@@ -38,11 +46,11 @@ u32 FUN_0036ce70(OverlayFadeWork *work)
             ++work->channels[i].frame;
         }
     }
-    union { f32 value; s32 bits; } progress = {work->channels[1].progress.value};
+    f32 progress = work->channels[1].progress.value;
     // The upper-end test uses the stored IEEE-754 progress representation.
-    if (progress.bits >= 0x3f800000 && entering)
+    if (floatBits(progress) >= 0x3f800000 && entering)
         complete = true;
-    if (progress.value <= 0.0f && !entering)
+    if (progress <= 0.0f && !entering)
         complete = true;
     if (overlayIsNotBusy() && complete) {
         if (!entering)

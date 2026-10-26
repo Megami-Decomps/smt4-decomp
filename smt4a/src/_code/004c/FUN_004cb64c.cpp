@@ -100,12 +100,12 @@ void FUN_004cb64c(BtlSlotBattle *battle, BtlSpawnEntry *entry)
             }
             table = FUN_001568f8(battle, entry->tableIndex);
             id = table->ids[index];
-            if (uiHasEntryId(battle, id) != 0) {
-                entry->flags |= ENTRY_ID_BOTH;
-            } else {
+            if (uiHasEntryId(battle, id) == 0) {
                 entry->flags &= ~(u64)ENTRY_ID_BOTH;
                 valueSlotsInsert(battle, FUN_00409fe8(id, 1));
                 uiInsertIdInFirstFreeSlot(battle, (s16)id);
+            } else {
+                entry->flags |= ENTRY_ID_BOTH;
             }
             entry->flags &= ~(u64)ENTRY_REGISTER_ID;
         }

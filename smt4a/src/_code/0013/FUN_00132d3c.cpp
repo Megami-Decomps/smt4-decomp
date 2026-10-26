@@ -1,43 +1,38 @@
-/* NON_MATCHING: the element-end pointer is loaded into r1 where retail uses r2 (it keeps the link->next value in r1 live). */
 #include "common.h"
 
 extern "C" {
 
-typedef struct Node {
-    /* 0x00 */ struct Node *next;
-} Node;
+/* 12-byte pool element; a free element's first word links to the next free one. */
+typedef struct Element {
+    struct Element *next;   /* 0x00 */
+    u8 data[12 - 4];
+} Element;
 
-typedef struct Elem {
-    u32 w0;
-    u32 w1;
-    u32 w2;
-} Elem;                          /* 12 bytes */
+/* Pool handing out elements from a free list, then from the current block. */
+typedef struct {
+    u8 unk00[4];
+    Element *freeList;      /* 0x04 */
+    Element *cursor;        /* 0x08 next unused element of the current block */
+    Element *blockEnd;      /* 0x0c */
+} ElementPool;
 
-typedef struct Cursor {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ Node *link;       /* non-NULL: following a link chain */
-    /* 0x08 */ Elem *cur;        /* current element when not on a chain */
-    /* 0x0C */ Elem *end;
-} Cursor;
+void FUN_00132d64(ElementPool *pool, s32 singleElement);
 
-int FUN_00132d64(Cursor *cursor);
-
-/* Post-increment of the cursor: follows the link chain if there is one, otherwise advances by one element (growing at the end); returns the previous position. */
-void *FUN_00132d3c(Cursor *cursor)
+/* Takes an element from the free list, or from the current block (growing it when full). */
+Element *FUN_00132d3c(ElementPool *pool, s32 singleElement)
 {
-    Node *link = cursor->link;
-    Elem *cur;
+    Element *element = pool->freeList;
 
-    if (link != NULL) {
-        cursor->link = link->next;
-        return link;
+    if (element != NULL) {
+        pool->freeList = element->next;
+        return element;
     }
-    if (cursor->cur == cursor->end) {
-        FUN_00132d64(cursor);
+    if (pool->cursor == pool->blockEnd) {
+        FUN_00132d64(pool, singleElement);
     }
-    cur = cursor->cur;
-    cursor->cur = cur + 1;
-    return cur;
+    element = pool->cursor;
+    pool->cursor = element + 1;
+    return element;
 }
 
 } /* extern "C" */

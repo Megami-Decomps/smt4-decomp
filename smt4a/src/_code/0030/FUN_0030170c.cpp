@@ -1,4 +1,3 @@
-/* NON_MATCHING: the block-end pointer is compared from r1 where retail uses r2. */
 #include "common.h"
 
 extern "C" {
@@ -17,10 +16,10 @@ typedef struct {
     Element *blockEnd;      /* 0x0c */
 } ElementPool;
 
-int FUN_00132b7a(ElementPool *pool);
+void FUN_00132b7a(ElementPool *pool, s32 singleElement);
 
 /* Takes an element from the free list, or from the current block (growing it when full). */
-Element *FUN_0030170c(ElementPool *pool)
+Element *FUN_0030170c(ElementPool *pool, s32 singleElement)
 {
     Element *element = pool->freeList;
 
@@ -29,7 +28,7 @@ Element *FUN_0030170c(ElementPool *pool)
         return element;
     }
     if (pool->cursor == pool->blockEnd) {
-        FUN_00132b7a(pool);
+        FUN_00132b7a(pool, singleElement);
     }
     element = pool->cursor;
     pool->cursor = element + 1;

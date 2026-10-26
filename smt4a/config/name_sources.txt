@@ -6694,3 +6694,14 @@
 003e8704 keyedAccumulatorAdd inferred [high] twin of smt4 FUN_003369e0
 002304d0 partyPanelHasSlotValue inferred [med] twin of smt4 FUN_001a7d48
 00471d00 aocSelectedRecordIsUnavailable inferred [med] twin of smt4 FUN_002764a8
+0045f1f0 _ZN9Obj55be80D1Ev evidence size:0x74 base destructor: stores Obj55be80 vtable (_ZTV9Obj55be80+8), registered with __aeabi_atexit in FUN_0050ff60
+0042d340 _ZN9Obj42d340D1Ev inferred member destructor: closes the u32 kernel handle (svc 0x23) if nonzero, clears it; registered by __aeabi_atexit for g_asdFileMutex in FUN_0050e2e0 (static initialiser). Same body as KernelHandle dtor at 0x42d200 but a separate class.
+0042cd08 _ZN9Obj42cd08D1Ev inferred empty (bx lr) destructor registered by __aeabi_atexit for g_asdFileEvent (2 zero words) in FUN_0050e2e0 and FUN_00512210.
+005b3fcc g_asdFileWorkerThread inferred size:0x8 Obj2fd02a record (state 0, active 1) built by FUN_0050e2e0 static initialiser; read as DAT_005b3fcc by FUN_0014287c/FUN_00137f94
+0013f0f4 fontPoolCreate inferred [high] selects Shift-JIS and allocates the 0x2c-byte font record pool (AsdFont.cpp:636 trace)
+00371068 mapCellMarkCrossNeighbors inferred [med] marks the cell and its four neighbours when their state is 2
+003adef4 mapFlagSetNormalizedId inferred [med] folds aliased map ids to a canonical id then sets or clears its persistent flag bit
+0038e6bc activityRecordsAreIdle inferred [med] checks records 50..59 inactive
+0015e978 soundArchiveLoadStringBlock inferred [high] twin of smt4 soundArchiveLoadStringBlock
+0039e89c scrBtlAddPresetFlagsToMatchingUnits inferred [med] script command: adds preset flags to units 4..53 with matching id that satisfy the required/excluded masks
+00371068 mapCellMarkNeighborsState2 inferred [med] twin of smt4 mapCellMarkNeighborsState2

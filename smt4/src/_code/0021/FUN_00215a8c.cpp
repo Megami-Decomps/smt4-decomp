@@ -41,14 +41,12 @@ void FUN_00215a8c(const StatusDownEntry *entry)
 
     if (status->selection >= 0 && status->mode == 1) {
         s32 scene = FUN_0029ac94();
-        u32 preset;
 
         if (scene == 13 || scene == 6) {
-            preset = 0x2F;
+            buttonHelpSetPreset(0x2F);
         } else {
-            preset = 0x1F;
+            buttonHelpSetPreset(0x1F);
         }
-        buttonHelpSetPreset(preset);
     }
     status->selection = -1;
     status->entryUnk00 = entry->unk00;

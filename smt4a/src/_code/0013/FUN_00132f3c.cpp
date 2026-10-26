@@ -1,41 +1,38 @@
-/* NON_MATCHING: register allocation only: retail loads the pool limit into r2, built into r1 */
-/* Pool allocator: pops a node from the free list, otherwise bump-allocates one 0xC-byte element (growing the pool first when the current block is full). */
 #include "common.h"
 
 extern "C" {
 
+/* 12-byte pool element; a free element's first word links to the next free one. */
 typedef struct Element {
-    u8 data[0xC];
+    struct Element *next;   /* 0x00 */
+    u8 data[12 - 4];
 } Element;
 
-typedef struct FreeNode {
-    struct FreeNode *next;
-} FreeNode;
+/* Pool handing out elements from a free list, then from the current block. */
+typedef struct {
+    u8 unk00[4];
+    Element *freeList;      /* 0x04 */
+    Element *cursor;        /* 0x08 next unused element of the current block */
+    Element *blockEnd;      /* 0x0c */
+} ElementPool;
 
-typedef struct Pool {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ FreeNode *freeList;
-    /* 0x08 */ Element *cursor;
-    /* 0x0C */ Element *limit;
-} Pool;
+void FUN_00132f64(ElementPool *pool, s32 singleElement);
 
-extern void FUN_00132f64(Pool *pool);
-
-Element *FUN_00132f3c(Pool *pool)
+/* Takes an element from the free list, or from the current block (growing it when full). */
+Element *FUN_00132f3c(ElementPool *pool, s32 singleElement)
 {
-    FreeNode *node = pool->freeList;
-    Element *element;
+    Element *element = pool->freeList;
 
-    if (node != NULL) {
-        pool->freeList = node->next;
-        return (Element *)node;
+    if (element != NULL) {
+        pool->freeList = element->next;
+        return element;
     }
-    if (pool->cursor == pool->limit) {
-        FUN_00132f64(pool);
+    if (pool->cursor == pool->blockEnd) {
+        FUN_00132f64(pool, singleElement);
     }
     element = pool->cursor;
     pool->cursor = element + 1;
     return element;
 }
 
-}
+} /* extern "C" */

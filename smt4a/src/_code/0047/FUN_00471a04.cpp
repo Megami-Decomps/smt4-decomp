@@ -62,13 +62,13 @@ void FUN_00471a04(void *package, u32 p2, u32 a, void *name, s32 x0, s32 y0, u32 
     void *node = asdTMTexTableGetNode(15, name);
     SpriteDrawRequest request;
     FUN_001ab8e0(&request, a, x1, y1, scale);
-    request.flags |= 0x28000;
     TextureSize *size = &texture->next->next->next->info->size;
+    request.flags |= 0x28000;
     request.left = size->width + (x1 - x0);
     request.right = request.left + extent.width;
+    request.source = extent;
     request.top = size->height + (y1 - y0);
     request.bottom = request.top + extent.height;
-    request.source = extent;
     FUN_0019b770(size, &request, node, 0);
 }
 

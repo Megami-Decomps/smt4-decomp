@@ -1,10 +1,10 @@
 /* NON_MATCHING: enterMode's two values use exchanged registers; the mode and remembered-mode stores now have the retail order. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/SaveSlotHeaderWork.h"
 #include "network/DataStore/DataStoreMain.h"
 
 extern "C" {
 extern void *g_handleRegistry;
-s32 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 void ptrListRemoveClearOwner(void *registry, u32 handle);
 void FUN_0041e3a0(SaveSlotHeaderWork *work, s32 resetHeader);
 void FUN_00420a2c(SaveSlotHeaderWork *work);

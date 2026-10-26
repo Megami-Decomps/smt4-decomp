@@ -1,14 +1,18 @@
-/* NON_MATCHING: Reverb parameter store grouping and shared global-anchor addressing differ. */
+/* NON_MATCHING: retail stores the three integer values as one stm (+ the table pointer from the same address register); built splits the stores. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
+struct SoundReverbEffect {
+    u8 unk00[0x110];
+};
+
 extern "C" {
 extern const char DAT_00536228[];
-extern SoundReverbEffect DAT_0061964c;
-extern SoundReverbParameters DAT_0061975c;
-extern void *g_soundEffectBuffers[];
+SoundReverbEffect DAT_0061964c;
+SoundReverbParameters DAT_0061975c;
+extern void *g_soundEffectBuffers[2];
 s32 nw_snd_FxReverb_SetParam(SoundReverbEffect *effect,
                              const SoundReverbParameters *parameters);
 u32 nw_snd_FxReverb_GetRequiredMemSize(SoundReverbEffect *effect);
@@ -19,7 +23,7 @@ s32 queueRequesterNode(u32 bus, SoundReverbEffect *effect);
 
 void FUN_0013ddf0(void)
 {
-    if (jyoucyuGetTableEntry(1) == NULL)
+    if (jyoucyuGetTableEntry(1) != NULL)
         return;
     DAT_0061975c.integerParameters[0] = 90;
     DAT_0061975c.integerParameters[1] = 1200;
@@ -37,8 +41,7 @@ void FUN_0013ddf0(void)
     nw_snd_FxReverb_SetParam(&DAT_0061964c, &DAT_0061975c);
     u32 requiredSize = nw_snd_FxReverb_GetRequiredMemSize(&DAT_0061964c);
     asdDebugTrace(DAT_00536228, 108);
-    void *buffer = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
-    g_soundEffectBuffers[11] = buffer;
+    void *buffer = g_soundEffectBuffers[1] = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
     nw_snd_FxReverb_AssignWorkBuffer(&DAT_0061964c, buffer, requiredSize);
     queueRequesterNode(1, &DAT_0061964c);
 }

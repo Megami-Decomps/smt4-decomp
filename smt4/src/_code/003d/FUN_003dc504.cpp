@@ -1,4 +1,3 @@
-/* NON_MATCHING: guards and calls now match retail; armcc hoists each group's base address (work + group offset) out of the slot loop (r5) where retail adds the group offset to work + i*0x8c per iteration (and uses r4/r5/r6 for index/work/table). */
 #include "common.h"
 
 /* One loading slot (0x8C bytes). */
@@ -25,24 +24,21 @@ public:
 struct LoadingWork {
     /* 0x0000 */ u8 unk0000[0x1cfc];
     /* 0x1CFC */ void *table;       /* the loading table; NULL until it is set up */
-    /* 0x1D00 */ LoadingSlot slotsA[4];
-    /* 0x1F30 */ LoadingSlot slotsB[4];
-    /* 0x2160 */ LoadingSlot slotsC[4];
-    /* 0x2390 */ LoadingSlot slotsD[4];
+    /* 0x1D00 */ LoadingSlot slots[4][4];   /* four groups of four slots */
     /* 0x25C0 */ u8 unk25c0[0xa74];
     /* 0x3034 */ LoadingReadiness *readiness;
 };
 
-extern "C" {
-void __aeabi_memcpy4(void *dest, const void *source, u32 bytes);
+extern "C" void __aeabi_memcpy4(void *dest, const void *source, u32 bytes);
 
 // Whether every slot in use has loaded its resource (nothing to check without a loading table).
-static inline bool slotsLoaded(void *table, const LoadingSlot *slots)
+template <s32 group>
+static inline bool slotsLoaded(void *table, const LoadingWork *work)
 {
     if (table != NULL) {
         for (s32 i = 0; i < 4; i++) {
             LoadingSlot slot;
-            __aeabi_memcpy4(&slot, &slots[i], sizeof(LoadingSlot));
+            __aeabi_memcpy4(&slot, &work->slots[group][i], sizeof(LoadingSlot));
             if ((slot.flags & 1) && slot.resource == 0) {
                 return false;
             }
@@ -51,20 +47,22 @@ static inline bool slotsLoaded(void *table, const LoadingSlot *slots)
     return true;
 }
 
+extern "C" {
+
 // Whether every slot in use has finished loading and the loader's readiness object agrees.
 s32 FUN_003dc504(LoadingWork *work)
 {
     void *table = work->table;
-    if (!slotsLoaded(table, work->slotsA)) {
+    if (!slotsLoaded<0>(table, work)) {
         return 0;
     }
-    if (!slotsLoaded(table, work->slotsB)) {
+    if (!slotsLoaded<1>(table, work)) {
         return 0;
     }
-    if (!slotsLoaded(table, work->slotsC)) {
+    if (!slotsLoaded<2>(table, work)) {
         return 0;
     }
-    if (!slotsLoaded(table, work->slotsD)) {
+    if (!slotsLoaded<3>(table, work)) {
         return 0;
     }
     if (work->readiness != NULL && work->readiness->IsReady() == 0) {

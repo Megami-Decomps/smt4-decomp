@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_002486a8(int, int);
+int mapCellMarkNeighborsState2(int, int);
 float mathSnapHeading8(float angle);
 int SBORROW4(int, int);
 
@@ -20,7 +20,7 @@ typedef struct {
 } void_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: FUN_002486a8. */
+/* Supplied declaration required: mapCellMarkNeighborsState2. */
 extern int gameGetMapBlock(void);
 
 
@@ -149,7 +149,7 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
       temp_v5 = temp_v10;
       temp_v4 = temp_v11[2];
       while (temp_v6 = temp_v1 + temp_v4 * 0x78 + temp_v5 * 8, *(char *)(temp_v6 + 0x3c) == '\x02') {
-        FUN_002486a8(temp_v5,temp_v4);
+        mapCellMarkNeighborsState2(temp_v5,temp_v4);
         if (temp_v7 < 2) {
           temp_v0 = *(char *)(temp_v6 + 0x34);
           temp_v8 = temp_v0 == '\x02';
@@ -157,7 +157,7 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
             temp_v0 = *(char *)(temp_v6 + 0x2c);
           }
           if (temp_v8 && temp_v0 == '\x02') {
-            FUN_002486a8(temp_v5 - 2,temp_v4);
+            mapCellMarkNeighborsState2(temp_v5 - 2,temp_v4);
           }
           temp_v0 = *(char *)(temp_v6 + 0x44);
           temp_v8 = temp_v0 == '\x02';
@@ -165,7 +165,7 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
             temp_v0 = *(char *)(temp_v6 + 0x4c);
           }
           if (temp_v8 && temp_v0 == '\x02') {
-            FUN_002486a8(temp_v5 + 2,temp_v4);
+            mapCellMarkNeighborsState2(temp_v5 + 2,temp_v4);
           }
           temp_v0 = *(char *)(temp_v6 - 0x3c);
           temp_v8 = temp_v0 == '\x02';
@@ -173,7 +173,7 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
             temp_v0 = *(char *)(temp_v6 - 0xb4);
           }
           if (temp_v8 && temp_v0 == '\x02') {
-            FUN_002486a8(temp_v5,temp_v4 - 2);
+            mapCellMarkNeighborsState2(temp_v5,temp_v4 - 2);
           }
           temp_v0 = *(char *)(temp_v6 + 0xb4);
           temp_v8 = temp_v0 == '\x02';
@@ -181,21 +181,21 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
             temp_v0 = *(char *)(temp_v6 + 300);
           }
           if (temp_v8 && temp_v0 == '\x02') {
-            FUN_002486a8(temp_v5,temp_v4 + 2);
+            mapCellMarkNeighborsState2(temp_v5,temp_v4 + 2);
           }
         }
         else if (temp_v7 < 4) {
           if (*(char *)(temp_v6 + 0x34) == '\x02') {
-            FUN_002486a8(temp_v5 - 1,temp_v4);
+            mapCellMarkNeighborsState2(temp_v5 - 1,temp_v4);
           }
           if (*(char *)(temp_v6 + 0x44) == '\x02') {
-            FUN_002486a8(temp_v5 + 1,temp_v4);
+            mapCellMarkNeighborsState2(temp_v5 + 1,temp_v4);
           }
           if (*(char *)(temp_v6 - 0x3c) == '\x02') {
-            FUN_002486a8(temp_v5,temp_v4 - 1);
+            mapCellMarkNeighborsState2(temp_v5,temp_v4 - 1);
           }
           if (*(char *)(temp_v6 + 0xb4) == '\x02') {
-            FUN_002486a8(temp_v5,temp_v4 + 1);
+            mapCellMarkNeighborsState2(temp_v5,temp_v4 + 1);
           }
         }
         temp_v7 = temp_v7 + 1;
@@ -234,7 +234,7 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
         }
         if ((temp_v7 < 0 == temp_v8) && (temp_v4 <= *(char *)(temp_v1 + 0xdd1) - 2)) {
           while (*(char *)(temp_v1 + temp_v4 * 0x78 + temp_v5 * 8 + 0x3c) == '\x02') {
-            FUN_002486a8(temp_v5,temp_v4);
+            mapCellMarkNeighborsState2(temp_v5,temp_v4);
             temp_v5 = temp_v5 + unaff_r9;
             temp_v4 = temp_v4 + unaff_r10;
           }
@@ -272,7 +272,7 @@ void FUN_002e29c0(float in_s0, float in_s1, float in_s2)
         }
         if ((temp_v7 < 0 == temp_v8) && (temp_v4 <= *(char *)(temp_v1 + 0xdd1) - 2)) {
           while (*(char *)(temp_v1 + temp_v4 * 0x78 + temp_v5 * 8 + 0x3c) == '\x02') {
-            FUN_002486a8(temp_v5,temp_v4);
+            mapCellMarkNeighborsState2(temp_v5,temp_v4);
             temp_v5 = temp_v5 + unaff_r9;
             temp_v4 = temp_v4 + unaff_r10;
           }

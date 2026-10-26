@@ -1,4 +1,4 @@
-/* NON_MATCHING: unified bank selection folds two retail branches; shared-flag boolean normalization and scheduling differ (110/101 rows). */
+/* NON_MATCHING: identical except the prologue move order (retail copies the size into r6 before the entry into r4). */
 #include "shard/W6_W6Match5_TextureEntry.h"
 #include "shard/S1AsdTexTable.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
@@ -23,9 +23,21 @@ s32 rt_memcmp(const void* first, const void* second, u32 size);
 void asdMemFree(void* allocation);
 AsdTexture* asdTextureCreate(s32 shared);
 
+// Places the entry's texture in a VRAM heap and records the bank in the entry flags.
+static __inline void assignVramBank(TextureHeapEntry* entry, u32 heap, u32 mode)
+{
+    if (entry != NULL && entry->texture != NULL) {
+        entry->texture->unk08 = heap;
+        entry->flags |= mode;
+    }
+}
+
 // Keep the loaded allocation alive for its texture's pixel storage, then upload it.
 void FUN_001b5154(u8* data, TextureHeapEntry* entry, u32 size)
 {
+    if (data == NULL) {
+        return;
+    }
     if (entry->node->compressed) {
         u32 flags = 1;
         if (entry->flags & TEXENTRY_RETRY) {
@@ -39,7 +51,11 @@ void FUN_001b5154(u8* data, TextureHeapEntry* entry, u32 size)
     }
     StexHeader* header = reinterpret_cast<StexHeader*>(data);
     if (header->unk24 == 0) {
-        entry->texture = asdTextureCreate((entry->flags & TEXENTRY_RETRY) != 0);
+        s32 retry = 0;
+        if (entry->flags & TEXENTRY_RETRY) {
+            retry = 1;
+        }
+        entry->texture = asdTextureCreate(retry);
         entry->texture->target = header->target;
         entry->texture->dimensions.width = header->width;
         entry->texture->dimensions.height = header->height;
@@ -59,11 +75,10 @@ void FUN_001b5154(u8* data, TextureHeapEntry* entry, u32 size)
     entry->flags = flags;
     entry->fileData = data;
     if (flags & (TEXENTRY_MODE_20 | TEXENTRY_MODE_40)) {
-        u32 mode = (flags & TEXENTRY_MODE_20) ? TEXENTRY_MODE_20 : TEXENTRY_MODE_40;
-        u32 heap = (mode == TEXENTRY_MODE_20) ? ASD_HEAP_VRAM_A : ASD_HEAP_VRAM_B;
-        if (entry != NULL && entry->texture != NULL) {
-            entry->texture->unk08 = heap;
-            entry->flags |= mode;
+        if ((flags & TEXENTRY_MODE_20) == 0) {
+            assignVramBank(entry, ASD_HEAP_VRAM_B, TEXENTRY_MODE_40);
+        } else {
+            assignVramBank(entry, ASD_HEAP_VRAM_A, TEXENTRY_MODE_20);
         }
     }
     if (entry->texture != NULL) {

@@ -1,14 +1,18 @@
-/* NON_MATCHING: compiler folds repeated game-data pointer loads and uses a different clamp/pool layout. */
+/* NON_MATCHING: retail reads the money-like word through the save pointer and writes it through a second, separately loaded save pointer (+0x88 body block); armcc folds the two global loads. */
 #include "common.h"
 
-namespace { struct Game { u8 padding[0x24ba8]; u32 money; }; struct Blocks { u32 header; Game *game; }; }
+namespace {
+struct Body { u8 padding[0x24b20]; u32 money; };
+struct Game { u8 header[0x88]; Body body; };
+struct Blocks { u32 header; Game *game; };
+}
 
 extern "C" {
 extern Blocks g_gameDataBlocks;
 void FUN_002f5004(u32 amount)
 {
-    u32 money = g_gameDataBlocks.game->money + amount;
-    if (money >= 10000000) { money = 9999999; }
-    g_gameDataBlocks.game->money = money;
+    u32 money = g_gameDataBlocks.game->body.money + amount;
+    Body *body = &g_gameDataBlocks.game->body;
+    if (money > 9999999) { body->money = 9999999; } else { body->money = money; }
 }
 }

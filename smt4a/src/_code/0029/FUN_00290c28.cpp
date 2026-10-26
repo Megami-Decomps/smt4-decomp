@@ -32,7 +32,8 @@ extern "C" void FUN_00290c28(SpriteGroupPlayer *player, SpriteGroupDrawState *ou
                 state->frame = definition->count - 1;
             }
         }
-        state->frameCount = ((FrameView *)state->data)[state->frame].duration;
+        s32 frame = state->frame;
+        state->frameCount = ((FrameView *)state->data)[frame].duration;
     }
     FrameView *frame = &((FrameView *)state->data)[state->frame];
     if (definition->kind & 1)

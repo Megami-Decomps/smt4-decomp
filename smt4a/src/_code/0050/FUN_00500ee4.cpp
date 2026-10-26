@@ -1,26 +1,30 @@
-/* NON_MATCHING: compiler changes the packed-header store and input/bitfield register scheduling; O2 also differs. */
+/* NON_MATCHING: header word schedules differently (retail ORs the second-field shift before loading `first`, one scratch register fewer). */
 #include "common.h"
 
 struct PackedSettingData {
-    u8 unk00[0x7c]; // 0x00
-    u32 payload;     // 0x7c
+    u8 unk00[0x7c];
+    u32 payload;
 };
 
 struct PackedSetting {
-    u8 enabled;             // 0x00
-    u8 first;               // 0x01
-    u8 second;              // 0x02
-    u8 unk03;               // 0x03
-    PackedSettingData* data; // 0x04
+    u8 enabled;
+    u8 first;
+    u8 second;
+    u8 unk03;
+    PackedSettingData* data;
 };
+
+struct CommandPair { u32 header, id; };
 
 extern "C" u32* gxEmitFramebufferAccessMasks(u32* data, u32* output, s32 count);
 
-// Write the setting's command header and optionally append its data payload.
 extern "C" u32* FUN_00500ee4(const PackedSetting* setting, u32* output, s32 includeData)
 {
-    *output++ = (setting->enabled != 0) | (setting->second << 4) | (setting->first << 8);
-    *output++ = 0x30104;
+    CommandPair pair;
+    pair.header = (setting->enabled != 0) | (setting->second << 4) | (setting->first << 8);
+    pair.id = 0x30104;
+    *(CommandPair*)output = pair;
+    output += 2;
     if (includeData) {
         return gxEmitFramebufferAccessMasks(&setting->data->payload, output, 1);
     }

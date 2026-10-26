@@ -13,7 +13,7 @@ extern u8 entry;
 void FUN_001f3e64(void *array);
 void _ZN12KernelHandleC1Ev(void *object);
 void _ZN9Obj2fd02aD1Ev(void *object);
-void FUN_0042cd08(void *object);
+void _ZN9Obj42cd08D1Ev(void *object);
 void __aeabi_vec_ctor_nocookie_nodtor(void *array, void (*construct)(void *), u32 size, u32 count);
 s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 }
@@ -28,5 +28,5 @@ extern "C" void FUN_00512210(void)
     __aeabi_atexit(&DAT_005b4454, _ZN9Obj2fd02aD1Ev, &entry);
     DAT_005b445c.first = 0;
     DAT_005b445c.second = 0;
-    __aeabi_atexit(&DAT_005b445c, FUN_0042cd08, &entry);
+    __aeabi_atexit(&DAT_005b445c, _ZN9Obj42cd08D1Ev, &entry);
 }

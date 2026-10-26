@@ -1,4 +1,3 @@
-/* NON_MATCHING: Enable/disable blocks are laid out differently and retail retains additional NOPs around its notifications. */
 #include "map/mapDepart.h"
 
 extern "C" {
@@ -15,21 +14,23 @@ void sysPlaySe(u32 id);
 u32 FUN_0038ae58(void)
 {
     s32 enabled = scrGetArg(0);
-    if (enabled != 0) {
+    if (enabled == 0) {
+        if (g_gameState.mapFlags.unk295 != 0) {
+            g_gameState.mapFlags.unk295 = 0;
+            if (gameFlagIsSet(0x49A) == 0) {
+                FUN_003b61ec();
+            } else {
+                commonBgReset();
+            }
+            sub68OwnerCall3();
+        }
+    } else {
         if (g_gameState.mapFlags.unk295 == 0) {
             g_gameState.mapFlags.unk295 = 1;
             naviMainEnterState4IfActive();
             FUN_003b61ec();
             sysPlaySe(0x92);
         }
-    } else if (g_gameState.mapFlags.unk295 != 0) {
-        g_gameState.mapFlags.unk295 = 0;
-        if (gameFlagIsSet(0x49A) != 0) {
-            commonBgReset();
-        } else {
-            FUN_003b61ec();
-        }
-        sub68OwnerCall3();
     }
     return 1;
 }

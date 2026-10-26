@@ -1,18 +1,14 @@
-/* NON_MATCHING: the flag byte is copied through r1 instead of r3. */
+/* NON_MATCHING: retail loads the byte into r3 instead of reusing the source register r1. */
 #include "common.h"
 
-extern "C" {
+struct Value5 {
+    /* 0x00 */ u32 word;
+    /* 0x04 */ u8 byte;
+};
 
-typedef struct Pair {
-    u32 value;
-    u8 flag;
-} Pair;
-
-/* Copy-assigns a Pair. */
-void FUN_002a7c80(Pair *dst, const Pair *src)
+/* Copies the five-byte value. */
+extern "C" void FUN_002a7c80(Value5 *dest, const Value5 *src)
 {
-    dst->value = src->value;
-    dst->flag = src->flag;
+    dest->word = src->word;
+    dest->byte = src->byte;
 }
-
-} /* extern "C" */

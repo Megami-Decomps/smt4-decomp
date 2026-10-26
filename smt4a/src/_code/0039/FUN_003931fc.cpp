@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP multiply-subtract contraction, conditional execution and particle-loop scheduling differ. */
+/* NON_MATCHING: the value store is hoisted above the branch (predicated vldrle/vstrle) where retail stores it in each arm; the separate end-ramp local removes the fused multiply-subtract like retail */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 
 extern "C" f32 shiftRandomNextFraction(u32 stream);
@@ -15,9 +15,9 @@ extern "C" void FUN_003931fc(EffParticleBatch *batch)
     f32 start = ((1.0f - parameters->startVariance) + random * parameters->startVariance) * parameters->start;
     if (duration > 0) {
         random = shiftRandomNextFraction(0);
+        f32 end = ((1.0f - parameters->endVariance) + random * parameters->endVariance) * parameters->end;
         state->value = start;
-        state->step = (((1.0f - parameters->endVariance) + random * parameters->endVariance) *
-                       parameters->end - start) / (f32)duration;
+        state->step = (end - start) / (f32)duration;
     } else {
         state->value = start;
         state->step = 0.0f;

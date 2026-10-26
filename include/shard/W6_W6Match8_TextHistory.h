@@ -5,7 +5,7 @@
 
 struct TextHistoryChannel {
     u8 unk00[0xc];
-    s16 text[126];
+    u16 text[126];
     u8 unk108[0x30];
 };
 struct TextHistoryCapture {

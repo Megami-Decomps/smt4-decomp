@@ -1,4 +1,4 @@
-/* NON_MATCHING: glyph initializer uses a compiler constant rather than the retail data symbol; stack layout and loop scheduling differ. */
+/* NON_MATCHING: the digit table lands at sp+16 in a 44-byte frame (retail sp+12, 36 bytes) and the second early exit returns r4 instead of sharing the r6 exit; the digit loop now matches retail's counted loop */
 #include "common.h"
 
 extern "C" {
@@ -39,20 +39,16 @@ s32 FUN_001dba90(char *destination, u32 value, s32 width, s32 zeroPad)
     } else {
         textFormatBuffer(buffer, DAT_0040971c, value);
     }
-    if (width > 0) {
-        const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));
-        do {
-            u32 digit = 10;
-            if ((u32)(*character - '0') <= 9) {
-                digit = *character - '0';
-            }
-            if (destination != NULL) {
-                *destination++ = digits[digit][0];
-                *destination++ = digits[digit][1];
-            }
-            --width;
-            ++character;
-        } while (width > 0);
+    const s8 *character = reinterpret_cast<const s8 *>(buffer + (10 - width));
+    for (; width > 0; --width, ++character) {
+        u32 digit = 10;
+        if ((u32)(*character - '0') <= 9) {
+            digit = *character - '0';
+        }
+        if (destination != NULL) {
+            *destination++ = digits[digit][0];
+            *destination++ = digits[digit][1];
+        }
     }
     return length;
 }

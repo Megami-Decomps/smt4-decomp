@@ -1,20 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ee978` (_code @ 0x2ee978, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-int FUN_0030f138(...);
+void FUN_0030f138(u32 object, u8 *table, s32 flag);
+extern u8 DAT_00539e8a[];
 
-/* Supplied declaration required: FUN_0030f138. */
-
-
-void FUN_002ee978(unsigned int param_1)
-
+/* Calls FUN_0030f138 with the table at 0x538B10 and 0. */
+void FUN_002ee978(u32 object)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0030f138(param_1,"RVCID",0);
-  return;
+    FUN_0030f138(object, DAT_00539e8a, 0);
 }
 
 } /* extern "C" */

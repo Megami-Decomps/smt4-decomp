@@ -1,4 +1,3 @@
-/* NON_MATCHING: bit-array address computation uses different quotient/mask registers. */
 #include "common.h"
 #include "shard/SaveWork.h"
 
@@ -10,6 +9,17 @@ struct MapCompletedGroupState {
 extern "C" s32 dataTable23Type0FindIndexById(u32 id);
 extern "C" void mapIfClearGroupState(u32 id);
 
+/* Sets a group's bit in the map block's completed-group mask. */
+static __inline void mapMarkGroupCompleted(s32 index)
+{
+    MapCompletedGroupState *map = reinterpret_cast<MapCompletedGroupState *>(gameGetMapBlock());
+    if (index >= 0) {
+        s32 word = index / 32;
+        s32 bit = index % 32;
+        map->completedGroups[word] |= 1u << bit;
+    }
+}
+
 /* Mark a known map group complete and clear its live state. */
 extern "C" void mapCompleteGroup(u32 id)
 {
@@ -17,9 +27,7 @@ extern "C" void mapCompleteGroup(u32 id)
         return;
     s32 index = dataTable23Type0FindIndexById(id);
     if (index != -1) {
-        MapCompletedGroupState *map = reinterpret_cast<MapCompletedGroupState *>(gameGetMapBlock());
-        if (index >= 0)
-            map->completedGroups[index / 32] |= 1u << (index % 32);
+        mapMarkGroupCompleted(index);
         mapIfClearGroupState(id);
     }
 }

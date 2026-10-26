@@ -1,5 +1,6 @@
-/* NON_MATCHING: status normalization folds and signed division calls __aeabi_ldivmod instead of ll_sdiv. */
+/* NON_MATCHING: the division now calls ll_sdiv like retail; remaining: retail reloads the record once and tests the Result twice through the inlined failure-bool helper (lsrs/moveq/lsrs/movne), and keeps the 64-bit rounding in ip-based registers. */
 #include "nn/Result.h"
+#include "shard/W6_W6Match2_LongDivision.h"
 #include "classes/WindowStatus.h"
 #include "shard/S3IpcRequest.h"
 
@@ -32,6 +33,7 @@ struct SizeQueryOwner {
 };
 
 extern "C" {
+__value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 s32 FUN_00439be4(u64 *size, const IpcParams6 *params, u32 buffer, u32 length);
 
 WindowStatusResult FUN_004fffc0(SizeQueryOwner *owner, u32 *blocks)
@@ -44,7 +46,7 @@ WindowStatusResult FUN_004fffc0(SizeQueryOwner *owner, u32 *blocks)
                              owner->record->buffer, owner->record->size);
     if (!nnResultIsFailure(status)) {
         u64 rounded = (size + 0x1ffff) & 0xfffe0000ULL;
-        *blocks = (u32)((s64)rounded / 0x20000);
+        *blocks = (u32)ll_sdiv((s64)rounded, 0x20000).quotient;
         status = 0;
     }
     return WindowStatusResult(status);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: float constants and values agree, but default optimization reorders/merges stores and allocates different VFP literal registers (94/92); alternate scheduling/optimization candidate. */
+/* NON_MATCHING: VFP register assignment differs from retail (retail hoists seven literals, 2.3/55 land in adjacent s2/s3 for vstm, 180 in s4, 35 in s5); retail also treats cases 1 and 4 as separate identical arms the compiler merged, which the build cannot reproduce without growing the diff. */
 #include "shard/W5_W5Match8_CameraTransition.h"
 
 namespace {

@@ -27,7 +27,7 @@ s32 FUN_00167458(SpritePlaybackView *sprite, s32 reverse)
     if (reverse != 0) {
         step = -step;
     }
-    sprite->transition.displacement += step * -4096;
+    sprite->transition.displacement -= step * 4096;
     s32 position = sprite->transition.displacement >> 12;
     if (reverse != 0) {
         if (position >= 0) {
@@ -53,6 +53,6 @@ s32 FUN_00167458(SpritePlaybackView *sprite, s32 reverse)
         sprite->finished = 0;
     }
     sprite->active = 1;
-    return (s8)sprite->finished;
+    return uiSpriteGetCompletionState(reinterpret_cast<const UiAnimatedSprite *>(sprite));
 }
 }

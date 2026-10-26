@@ -1,11 +1,12 @@
-/* NON_MATCHING: compiler reduces the sign-bit test to a shift instead of retail's mask and compare. */
 #include "common.h"
 
-
 extern "C" {
-/* Reads or computes the requested value. */
+/* Tests the sign bit of a flag word. */
 u8 FUN_002cbe5c(u32 value)
 {
-    return (value & 0x80000000) != 0;
+    s32 bit = value & 0x80000000;
+    if (bit < 0)
+        return 1;
+    return 0;
 }
 }

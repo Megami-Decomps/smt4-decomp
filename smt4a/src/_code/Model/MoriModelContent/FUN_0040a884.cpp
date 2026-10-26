@@ -32,12 +32,13 @@ void FUN_0040a884(MoriModelContentLoad *content, u32 id)
     request.first = content->unk18;
     request.second = content->unk1C;
     request.mode = content->unk14;
-    content->unk0C = FUN_001581dc(&request);
+    u32 resource = FUN_001581dc(&request);
+    content->unk0C = resource;
 
     void *mem = FUN_00178b04(0x1c, DAT_00526000, 0xfb);
     MoriModelBinding *binding = NULL;
     if (mem != NULL) {
-        binding = _ZN9Obj557b58C1Ev(mem, content->unk0C);
+        binding = _ZN9Obj557b58C1Ev(mem, resource);
     }
     content->binding = binding;
 }

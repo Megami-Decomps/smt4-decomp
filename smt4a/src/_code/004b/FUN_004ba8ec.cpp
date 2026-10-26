@@ -1,4 +1,5 @@
 /* NON_MATCHING: restored queued-node argument, linker-inlined signed flags getter and frame compare; sprite base still forms before cycle update. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/S2UiTexLoader.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/Shard004A.h"
@@ -12,7 +13,6 @@ extern void asdTMTexTableReleaseNode(s32 table, s32 node);
 extern void uiSpriteSetImageKeyframe(UiTexSprite *sprite, s32 a, s32 b);
 extern s32 FUN_00163aa4(UiTexSprite *sprite, f32 time);
 extern void entryDispatchUpdate(void *anim, s32 count);
-s8 uiSpriteGetCompletionState(const UiTexSprite *sprite);
 
 /* Per-frame update of the screen's texture loader: advances the cycle counter, starts the queued
  * image on its keyframe, promotes the pending image once the sprite is done and releases every
@@ -26,7 +26,7 @@ void FUN_004ba8ec(UiTexLoader *loader)
         loader->cycle = (loader->cycle + 1) % 16;
     }
 
-    if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState(sprite) != 0) {
+    if (loader->next.keyframe != UI_TEX_NONE && asdTMTexTableNodeIsLoaded(UI_TEX_TABLE, loader->next.keyframe) != 0 && uiSpriteGetCompletionState((const UiAnimatedSprite *)sprite) != 0) {
         s32 entryFrame = loader->entries[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(loader))]->frame + 1;
         s32 keyframe = loader->next.keyframe;
         if (keyframe == entryFrame) {

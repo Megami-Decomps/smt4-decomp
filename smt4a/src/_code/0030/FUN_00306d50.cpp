@@ -1,38 +1,47 @@
-/* NON_MATCHING: retail reloads the next link and uses different register allocation and virtual-call scheduling. */
 #include "common.h"
 
-class ListValue {
-public:
-    virtual void release();
+struct ListValue;
+struct ListValueVtable {
+    void (*destroy)(ListValue *);
 };
-
+struct ListValue {
+    ListValueVtable *vtable; // 0x00
+};
 struct ListNode {
-    ListNode* next;   // 0x00
-    ListNode* prev;   // 0x04
-    u32 valueStorage; // 0x08: inline polymorphic value
+    ListNode *next; // 0x00
+    ListNode *previous; // 0x04
+    ListValue value; // 0x08
+};
+struct PooledList {
+    u32 unk00;
+    ListNode *freeNodes; // 0x04
+    u32 unk08[2];
+    ListNode *sentinel; // 0x10
+    u32 count; // 0x14
 };
 
-struct NodeList {
-    u32 unk00;       // 0x00
-    ListNode* free;   // 0x04
-    u32 unk08[2];    // 0x08
-    ListNode* end;    // 0x10
-    u32 count;       // 0x14
+struct ListIterator {
+    ListNode *node;
+    explicit ListIterator(ListNode *value) : node(value) {}
+    ListIterator(const ListIterator &other) : node(other.node) {}
 };
 
-extern "C" void FUN_00306d50(ListNode** result, NodeList* list, ListNode** iterator)
+// Unlink an element, destroy its value, and return the following iterator.
+extern "C" ListIterator FUN_00306d50(PooledList *list, const ListIterator &position)
 {
-    if (list->end == *iterator) {
-        *result = list->end;
-        return;
+    ListNode *sentinel = list->sentinel;
+    if (position.node == sentinel) {
+        ListIterator end(sentinel);
+        return end;
     }
-    ListNode* next = (*iterator)->next;
-    (*iterator)->prev->next = (*iterator)->next;
-    (*iterator)->next->prev = (*iterator)->prev;
+    ListIterator next(position.node->next);
+    position.node->previous->next = position.node->next;
+    position.node->next->previous = position.node->previous;
     --list->count;
-    reinterpret_cast<ListValue*>(&(*iterator)->valueStorage)->release();
-    ListNode* node = *iterator;
-    node->next = list->free;
-    list->free = node;
-    *result = next;
+    ListValue *value = &position.node->value;
+    value->vtable->destroy(value);
+    ListNode *node = position.node;
+    node->next = list->freeNodes;
+    list->freeNodes = node;
+    return next;
 }

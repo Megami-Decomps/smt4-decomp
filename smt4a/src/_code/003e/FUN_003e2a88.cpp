@@ -1,4 +1,4 @@
-/* NON_MATCHING: effect-flag reload, camera branch placement, and 64-bit mask load/store scheduling differ. */
+/* NON_MATCHING: flag reload and camera-duration branch layout now match; retail tests the flag with ands (not tst), loads the battle mask with ldrd (r0:r1) before the encounter mask, and orders the final step stores differently. */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -34,21 +34,17 @@ void FUN_003e2a88(BtlStep *step, BtlMainStateA *battle)
     // The final effect mask extends beyond the shared encounter-global extent.
     extern EncounterEffectMasksView g_btlEncount;
     extern EffectCameraView *g_btlCamera;
-    u32 flags;
-    if (step->counters.unk0C != 0) {
-        flags = step->counters.unk0C;
-    } else {
+    if (step->counters.unk0C == 0) {
         FUN_004f7b84(g_btlAux, DAT_00528548);
         g_btlCamera->flags |= 0x4000;
-        flags = step->counters.unk0C | 2;
-        step->counters.unk0C = flags;
+        step->counters.unk0C |= 2;
     }
-    if ((flags & 2) != 0 && FUN_004f6d34(g_btlAux)) {
+    if ((step->counters.unk0C & 2) != 0 && FUN_004f6d34(g_btlAux)) {
         FUN_003e2840(step, battle, 4);
-        if (g_btlCamera->duration != 0)
-            FUN_004f1c5c(g_btlCamera, g_btlCamera->duration);
-        else
+        if (g_btlCamera->duration == 0)
             FUN_004f1c5c(g_btlCamera, 120);
+        else
+            FUN_004f1c5c(g_btlCamera, g_btlCamera->duration);
         if ((battle->stateFlags64.bits & g_btlEncount.initial) == 0) {
             FUN_003ed6e8(battle);
             FUN_003f26d4(battle);

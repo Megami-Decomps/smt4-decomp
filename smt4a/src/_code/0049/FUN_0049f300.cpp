@@ -1,4 +1,3 @@
-/* NON_MATCHING: only two temporaries (r1/r2) of the final stack-set sequence differ; the icon arm layout now matches. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "util/BitsAndBytes.h"
@@ -6,7 +5,7 @@ struct PanelFrameDrawWork {
     u32 job;
     u8 state;
     u8 unk005[0x46F];
-    u8 showIcon;
+    s8 showIcon;
 };
 typedef char PanelFrameDrawWorkIconCheck[offsetof(PanelFrameDrawWork, showIcon) == 0x474 ? 1 : -1];
 extern "C" {

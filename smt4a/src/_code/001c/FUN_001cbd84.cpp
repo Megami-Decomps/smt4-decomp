@@ -1,16 +1,15 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001cbd84` (_code @ 0x1cbd84, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail stores start, then adds, then stores end as separate str; armcc merges them into add + stm. */
+#include "common.h"
 
-extern "C" {
+struct SpanState {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ u32 start;
+    /* 0x20 */ u32 end;
+};
 
-
-void FUN_001cbd84(int param_1,int param_2,int param_3)
-
+/* Sets the span from a start and a length. */
+extern "C" void FUN_001cbd84(SpanState *span, u32 start, u32 length)
 {
-  *(int *)(param_1 + 0x1c) = param_2;
-  *(int *)(param_1 + 0x20) = param_2 + param_3;
-  return;
+    span->start = start;
+    span->end = start + length;
 }
-
-} /* extern "C" */

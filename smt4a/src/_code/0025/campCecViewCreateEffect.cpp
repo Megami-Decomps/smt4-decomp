@@ -1,4 +1,3 @@
-/* NON_MATCHING: selection uses a literal offset and stack arguments use STRD instead of retail short-offset loads and STR. */
 #include "common.h"
 
 extern "C" {
@@ -23,14 +22,19 @@ struct CampCecView {
 extern CampCecView *g_campCecView;
 void *FUN_0032d61c(u32 effectId, void *resource, void *parameters, u32 mode, u32 flags, s32 selection);
 void efctSetSpeed(void *effect, f32 speed);
+/* Resets the view's speed to 1.0 and, when the option is enabled, creates the effect for the selection. */
 s32 campCecViewCreateEffect(void)
 {
-    g_campCecView->speed = 1.0f;
-    if (g_campCecView->options.enabled != 0) {
-        void *effect = FUN_0032d61c(g_campCecView->options.effectId, g_campCecView->resource,
-                                  &g_campCecView->speed, 0, 0, g_campCecView->options.selection);
-        efctSetSpeed(effect, 1.0f);
+    CampCecView *view = g_campCecView;
+    CampCecViewOptions *options = &view->options;
+
+    view->speed = 1.0f;
+    if (view->options.enabled == 0) {
+        return 0;
     }
+    void *effect = FUN_0032d61c(view->options.effectId, view->resource, &view->speed, 0, 0,
+                                options->selection);
+    efctSetSpeed(effect, 1.0f);
     return 0;
 }
 

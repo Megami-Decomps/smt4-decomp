@@ -41,3 +41,4 @@ queuedHandleGetToken = 0xe5900004; // 0x473d8c (FUN_00473d74, after add r0, sp, 
 mobiclipHeapGetAllocation = 0xe5900030; // FUN_001f51ac (twin of smt4 FUN_0017feb4)
 partyWidgetGetCost = 0xe5900044; // FUN_002cc0c0 (twin of smt4 partyPanelRefreshItemPreview)
 partyWidgetGetX = 0xe5900040; // FUN_002cc0c0 (twin of smt4 partyPanelRefreshItemPreview)
+recordGetActive = 0xe1d008d5; // FUN_0038e6bc (loop, after add r0, r0, #32)

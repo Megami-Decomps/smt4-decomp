@@ -125,18 +125,18 @@ extern "C" s32 FUN_002d3b20()
             instance->enabled = 1;
             instance->type = i + 0x1500;
             instance->definition = i;
-            if (created != 0) {
-                instance->cloned = 1;
-                instance->clone = asdMdlManagerClone(g_mapRangeWork->models[g_mapRangeWork->modelIndex].handle, 0);
-                instance->cloneEnabled = 1;
-                instance->baseModel = 0;
-                FUN_002a0428(instance->clone, 1);
-            } else {
+            if (created == 0) {
                 instance->cloned = 0;
                 instance->clone = 0;
                 instance->cloneEnabled = 0;
                 instance->baseModel = g_mapRangeWork->modelIndex;
                 FUN_002a0428(g_mapRangeWork->models[g_mapRangeWork->modelIndex].handle, 1);
+            } else {
+                instance->cloned = 1;
+                instance->clone = asdMdlManagerClone(g_mapRangeWork->models[g_mapRangeWork->modelIndex].handle, 0);
+                instance->cloneEnabled = 1;
+                instance->baseModel = 0;
+                FUN_002a0428(instance->clone, 1);
             }
             ++created;
         }

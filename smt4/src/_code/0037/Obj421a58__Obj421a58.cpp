@@ -1,8 +1,8 @@
-/* NON_MATCHING: same stores and loops as retail; the build schedules the vtable store after the first byte/word stores (retail stores it right after the third word), keeps the channel count in a register (retail reloads it with ldrb) and prologue pushes r4. */
+/* NON_MATCHING: the three leading words now come from Obj421a58Base and the prologue matches; the build merges the base's word 2/3 stores into one stm (retail stores them singly) and keeps the channel count in a register (retail reloads it with ldrb). */
 #include "classes/Obj421a58.h"
 
 Obj421a58::Obj421a58()
-    : unk04(0), unk08(0), unk0c(250), unk10(0.4f), unk14(0.5f)
+    : unk10(0.4f), unk14(0.5f)
 {
     unk18 = 0;
     unk1c = 0;

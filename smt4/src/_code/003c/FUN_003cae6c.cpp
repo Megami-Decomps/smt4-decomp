@@ -71,7 +71,7 @@ extern u32 g_btlUiBlock;
 s32 FUN_003af084(u32 block);
 void btlUiCopyStatePairs(u32 block, char *valid, u64 *mask, u64 *pair);
 SkillRecord *dataTable08Sub1GetRecord(s32 id);
-s32 FUN_0033a2c4(BattleBlock *block, s32 index);
+s32 btlFindEntrySelectionByKey(BattleBlock *block, s32 index);
 s32 playerPadTestBit(u32 bit);
 void FUN_00247478(CommandInfo *info, BattleBlock *block, u32 *environment);
 void FUN_003d0d1c(BattleBlock **block, CommandState *state);
@@ -166,7 +166,7 @@ u32 FUN_003cae6c(BattleBlock **block, CommandState *state)
             for (s32 i = 0; i < 0x40; i++) {
                 if ((mask & ((u64)1 << i)) != 0) {
                     if (i != 0) {
-                        s32 slot = FUN_0033a2c4(*block, i - 1);
+                        s32 slot = btlFindEntrySelectionByKey(*block, i - 1);
                         if (slot < 0) {
                             slot = i + 0x6c;
                         }

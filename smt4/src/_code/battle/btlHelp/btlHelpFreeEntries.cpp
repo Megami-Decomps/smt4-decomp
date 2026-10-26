@@ -1,4 +1,3 @@
-/* NON_MATCHING: Unlinking keeps the list owner in r0 and moves the entry into the free argument only after updating the links. */
 #include "common.h"
 #include "ui/UiControl.h"
 

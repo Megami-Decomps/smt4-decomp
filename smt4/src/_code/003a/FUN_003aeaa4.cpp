@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler uses a 44-byte stack frame and schedules command assembly before the global UI lookup. */
+/* NON_MATCHING: frame (push {r4,lr}; sub 48) matches; retail computes the UI object pointer first and keeps it in r0 while the command is assembled (ldr before the push), the build holds it in r4 and loads it after the command stores. */
 #include "battle/btlUI.h"
 
 struct UiPosition {
@@ -11,7 +11,7 @@ struct BattleUiCommand {
     u16 third; // 0x06
     UiPosition position; // 0x08
     u32 value; // 0x14
-    u8 unk18[0x14];
+    u8 unk18[0x18];
 };
 
 extern "C" {
@@ -22,6 +22,7 @@ u32 FUN_002d00a4(BtlUiObjC *, const BattleUiCommand *);
 void FUN_003aeaa4(u32, u16 kind, u32 value, u16 first, u16 second, u16 third,
                   UiPosition position)
 {
+    BtlUiObjC *ui = &g_btlUi.ui->objC;
     BattleUiCommand command;
     command.kind = kind;
     command.first = first;
@@ -29,6 +30,6 @@ void FUN_003aeaa4(u32, u16 kind, u32 value, u16 first, u16 second, u16 third,
     command.third = third;
     command.position = position;
     command.value = value;
-    FUN_002d00a4(&g_btlUi.ui->objC, &command);
+    FUN_002d00a4(ui, &command);
 }
 }

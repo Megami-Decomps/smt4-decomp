@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps one bottom-tested component-copy loop; the build peels its first iteration and schedules the command header differently. */
+/* NON_MATCHING: the component-copy loop now matches retail's bottom-tested form; the command-header stores are scheduled differently (retail pairs words 3 and the length header in one stm). */
 #include "common.h"
 
 // Append vertex-shader float uniforms in the GPU's reversed component order.
@@ -19,18 +19,17 @@ extern "C" u32 *FUN_001a057c(u32 *commands, u32 firstUniform, const f32 (*vector
         const f32 *y = &vectors[1][1];
         const f32 *x = &vectors[1][0];
         f32 *output = (f32 *)commands;
-        do {
+        for (; remaining > 0; --remaining) {
             output[0] = *w;
-            --remaining;
-            w += 4;
             output[1] = *z;
-            z += 4;
             output[2] = *y;
-            y += 4;
             output[3] = *x;
+            w += 4;
+            z += 4;
+            y += 4;
             x += 4;
             output += 4;
-        } while (remaining != 0);
+        }
         commands += count * 4 - 4;
     }
     *commands++ = 0;

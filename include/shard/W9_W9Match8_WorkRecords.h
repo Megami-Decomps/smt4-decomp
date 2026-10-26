@@ -894,6 +894,13 @@ typedef char TextureDrawRequestPrefixIVLayoutCheck[
     offsetof(TextureDrawRequestPrefixIV, horizontalUnit) == 0x2C &&
     offsetof(TextureDrawRequestPrefixIV, verticalUnit) == 0x2E ? 1 : -1];
 
+/* The reset-able values of a save/load screen transition. */
+struct SaveLoadTransitionValues {
+    /* 0x0 */ u32 value0;
+    /* 0x4 */ u32 value1;
+    /* 0x8 */ f32 progress;
+};
+
 // Observed prefixes, not recovered allocation sizes or sprite-array bounds.
 // Sprite storage overlaps the opaque regions and some named transition storage.
 struct SaveLoadTransitionPrefixA {
@@ -911,9 +918,7 @@ struct SaveLoadTransitionPrefixA {
     /* 0x2FC */ u8 unk2FC[0x324];
     /* 0x620 */ u32 transitionCounter;
     /* 0x624 */ u8 unk624[0xC8];
-    /* 0x6EC */ u32 transitionValue0;
-    /* 0x6F0 */ u32 transitionValue1;
-    /* 0x6F4 */ f32 transitionProgress;
+    /* 0x6EC */ SaveLoadTransitionValues transition;
 };
 
 struct SaveLoadUiSharedPrefixA {
@@ -931,9 +936,9 @@ typedef char SaveLoadTransitionPrefixAHeadCheck[
 typedef char SaveLoadTransitionPrefixATailCheck[
     offsetof(SaveLoadTransitionPrefixA, selectedValue) == 0x2F8 &&
     offsetof(SaveLoadTransitionPrefixA, transitionCounter) == 0x620 &&
-    offsetof(SaveLoadTransitionPrefixA, transitionValue0) == 0x6EC &&
-    offsetof(SaveLoadTransitionPrefixA, transitionValue1) == 0x6F0 &&
-    offsetof(SaveLoadTransitionPrefixA, transitionProgress) == 0x6F4 &&
+    offsetof(SaveLoadTransitionPrefixA, transition) == 0x6EC &&
+    offsetof(SaveLoadTransitionPrefixA, transition.value1) == 0x6F0 &&
+    offsetof(SaveLoadTransitionPrefixA, transition.progress) == 0x6F4 &&
     sizeof(SaveLoadTransitionPrefixA) == 0x6F8 ? 1 : -1];
 typedef char SaveLoadUiSharedPrefixACheck[
     offsetof(SaveLoadUiSharedPrefixA, selectedValue) == 0x14 &&

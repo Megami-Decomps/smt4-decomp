@@ -49,6 +49,7 @@ extern "C" {
 extern NaviGameFlags g_gameState;
 
 s32 FUN_00163aa4(void *sprite, f32 delta);
+s8 uiSpriteGetCompletionState(const void *sprite);
 void uiSpriteBankApplyPreset(void *bank, s32 preset);
 void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 restart);
 void uiSpriteSetImageKeyframe(void *sprite, s32 keyframe, s32 restart);
@@ -78,14 +79,14 @@ void FUN_0048bad0(NaviMenu *menu)
         menu->counter = 0;
         void *mapState = menu->mapState;
 
-        if (NaviMain_GetCurrentMap() != (s32)naviMainGetRequestedMap(menu->mapState) || g_gameState.forceMapReload != 0) {
-            u32 map = naviMainGetRequestedMap(menu->mapState);
+        if (NaviMain_GetCurrentMap() != (s32)naviMainGetRequestedMap(mapState) || g_gameState.forceMapReload != 0) {
+            u32 map = naviMainGetRequestedMap(mapState);
 
-            naviMainSetCurrentMap(menu->mapState, map);
-            FUN_00492ac8(reinterpret_cast<u32>(menu->mapState), 0);
+            naviMainSetCurrentMap(mapState, map);
+            FUN_00492ac8(reinterpret_cast<u32>(mapState), 0);
             FUN_0048821c(menu, map);
         }
-        FUN_0048d248(menu, FUN_00492c84(menu->mapState));
+        FUN_0048d248(menu, FUN_00492c84(mapState));
         uiSpriteSetImageKeyframe(menu->imageSpriteA, 3, 0);
         uiSpriteSetImageKeyframe(menu->imageSpriteB, 5, 0);
         FUN_0048a378(menu);
@@ -106,7 +107,7 @@ void FUN_0048bad0(NaviMenu *menu)
         FUN_00163aa4(menu->backSprite, 1.0f);
         FUN_00163aa4(&menu->frameSprite, 1.0f);
     } else if (menu->step == 2) {
-        if (menu->frameSprite.hidden == 0) {
+        if (uiSpriteGetCompletionState(&menu->frameSprite) == 0) {
             FUN_00163aa4(&menu->frameSprite, 1.0f);
         }
         menu->mode = 2;

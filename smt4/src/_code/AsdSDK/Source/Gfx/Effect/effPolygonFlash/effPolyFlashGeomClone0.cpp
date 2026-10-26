@@ -1,4 +1,4 @@
-/* NON_MATCHING: the debug trace now matches; retail reads the clone source with one ldm from owner+0x3c (add r0,r0,#60 first), here writeback loads (r6/r4 swapped) and different block/segment-size register use. */
+/* NON_MATCHING: the allocation head now matches (plain static allocGeomBlock); retail reads the clone source with one ldm from owner+0x3c (add r0,r0,#60 first) into r4/r6, here writeback loads with the registers swapped, and the segment count is reloaded after the geometry call. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -14,18 +14,25 @@ extern const char DAT_00410408[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00268fc4(PolyGeom *src);
 
+/* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
+static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
+{
+    asdDebugTrace(DAT_00410408, line);
+    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadBytes + 0x10, 0x10, 1);
+    block->data = block->payload;
+    block->self = block;
+    return block;
+}
+
 /* Clones a polygon effect's geometry block and gives each segment alternating texture coordinates. */
 PolyGeomBlock *effPolyFlashGeomClone0(PolyCloneOwner *owner)
 {
     PolyCloneSrc *src = &owner->clone;
     PolyGeomBlock *srcBlock = src->block;
     PolyParams *params = src->params;
-    asdDebugTrace(DAT_00410408, 2090);
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x28 + 0x10, 0x10, 1);
+    PolyGeomBlock *block = allocGeomBlock(params->segments * 0x28, 2090);
     PolyGeom *geom;
 
-    block->data = block->payload;
-    block->self = block;
     geom = FUN_00268fc4(srcBlock->geom);
     block->geom = geom;
     if (params->segments != 0) {

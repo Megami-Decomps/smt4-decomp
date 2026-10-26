@@ -91,7 +91,10 @@ void FUN_002a28c0(CecThreadWork *work)
             if (gameDataGetRecordValue() == 0)
                 rt_aeabi_memclr(FUN_002bf520()->ownerId, CEC_MESSAGE_RECORD_ID_SIZE);
 
-            if (work->offline != 1) {
+            if (work->offline == 1) {
+                dataStoreProcessCreate();
+                work->dataStore = work->offline;
+            } else {
                 work->cecAvailable = (s8)cecQueryOptionalProcess();
                 if (work->cecAvailable != 0 && gameDataTestFlags(0x20) != 0) {
                     u16 id[2];
@@ -111,9 +114,6 @@ void FUN_002a28c0(CecThreadWork *work)
                         }
                     }
                 }
-            } else {
-                dataStoreProcessCreate();
-                work->dataStore = work->offline;
             }
             work->step++;
         } else if (work->step == CEC_STEP_WAIT_FILES && work->itemTable != 0) {

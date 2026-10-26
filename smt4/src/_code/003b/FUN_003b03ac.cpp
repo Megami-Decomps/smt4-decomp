@@ -7,7 +7,7 @@ extern "C" {
 int FUN_001ed8ac(...);
 int FUN_0022c564(unsigned int *, int, unsigned int);
 int FUN_003b0a10(void);
-int FUN_003b0cf4(unsigned int *);
+int moLivePlayerReleaseIdleStreams(unsigned int *);
 int FUN_003b0db8(unsigned int *, int, unsigned int *, unsigned int);
 int FUN_003b0f88(unsigned int *, int, unsigned int *, unsigned int);
 int FUN_003b2318(unsigned int *, int, unsigned int *, unsigned int);
@@ -32,7 +32,7 @@ typedef struct {
 /* Supplied declaration required: FUN_0022c564. */
 extern int FUN_003b0964(unsigned int *);
 /* Supplied declaration required: FUN_003b0a10. */
-/* Supplied declaration required: FUN_003b0cf4. */
+/* Supplied declaration required: moLivePlayerReleaseIdleStreams. */
 /* Supplied declaration required: FUN_003b0db8. */
 /* Supplied declaration required: FUN_003b0f88. */
 /* Supplied declaration required: FUN_003b2318. */
@@ -149,7 +149,7 @@ LAB_003b0700:
           if (puVar7 == (unsigned int *)0x0) {
             return (unsigned int *)0x44;
           }
-          FUN_003b0cf4(param_1);
+          moLivePlayerReleaseIdleStreams(param_1);
           puVar7 = param_1 + 0x50d;
           FUN_0022c564(puVar7,0,param_1[0x510]);
           param_1[0x510] = 0;

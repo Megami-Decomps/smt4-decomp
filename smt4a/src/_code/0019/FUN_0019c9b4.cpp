@@ -1,10 +1,9 @@
-/* NON_MATCHING: retail peels the first history copy and unrolls the remaining copies. */
+/* NON_MATCHING: the entry shift is a struct assignment, so armcc now peels the first copy and unrolls the rest like retail; it still folds the second copy's address into the first (retail recomputes it from the incremented index). */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <stddef.h>
 
 extern "C" {
 extern RenderChannelState g_inputResetState;
-void *__aeabi_memcpy4(void *destination, const void *source, u32 bytes);
 
 void FUN_0019c9b4()
 {
@@ -30,7 +29,7 @@ void FUN_0019c9b4()
         if (history->selected >= 64) {
             for (s32 i = 0; i < 63; ++i) {
                 history = (TextHistoryTableView *)g_inputResetState.table;
-                __aeabi_memcpy4(&history->entries[i], &history->entries[i + 1], sizeof(history->entries[i]));
+                history->entries[i] = history->entries[i + 1];
             }
             ((TextHistoryTableView *)g_inputResetState.table)->selected = 63;
         }

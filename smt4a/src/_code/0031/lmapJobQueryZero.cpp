@@ -1,13 +1,16 @@
-/* NON_MATCHING: retail redundantly loads a global word (DAT_005715f8+8) and conditionally clears r0 before returning zero. */
+/* The result is the work-state word, reported as zero once it has been consumed. */
 #include "shard/JobWork.h"
 
 extern "C" {
+extern struct { u32 unk00; u32 unk04; s32 value; } DAT_005715f8;
 
-/* Fetch the current job work and report zero. */
 s32 lmapJobQueryZero(u32 job)
 {
     jobGetWork(job);
-    return 0;
+    s32 result = DAT_005715f8.value;
+    if (result != 0)
+        result = 0;
+    return result;
 }
 
 }

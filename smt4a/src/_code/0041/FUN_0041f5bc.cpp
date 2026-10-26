@@ -6,6 +6,20 @@ extern SaveLoadUiSharedPrefixA g_saveLoadUIBase;
 void uiSpriteSetKeyframe(UiSpriteState *sprite, s32 animation, s32 frame);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 frame, s32 flags);
 void FUN_00420a2c(SaveLoadTransitionPrefixA *work);
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
+static void transitionValuesSet(SaveLoadTransitionValues *transition, u32 value0, u32 value1, f32 progress)
+{
+    transition->value0 = value0;
+    transition->value1 = value1;
+    transition->progress = progress;
+}
+
+// Restart a sprite's animation from its first keyframe and image.
+static __inline void spriteRestart(UiSpriteState *sprite)
+{
+    uiSpriteSetKeyframe(sprite, 5, 0);
+    uiSpriteSetImageKeyframe(sprite, 0, 0);
+}
 
 // Reset all transition sprites and resume the pending state once the last completes.
 void FUN_0041f5bc(SaveLoadTransitionPrefixA *work)
@@ -18,21 +32,17 @@ void FUN_0041f5bc(SaveLoadTransitionPrefixA *work)
     };
     typedef char SpriteViewOffsets[offsetof(SpriteView, additional) == 0x500 ? 1 : -1];
     SpriteView *sprites = (SpriteView *)work;
-    uiSpriteSetKeyframe(&sprites->first, 5, 0);
-    uiSpriteSetImageKeyframe(&sprites->first, 0, 0);
+    spriteRestart(&sprites->first);
     for (s32 index = 0; index < work->spriteCount; ++index) {
-        uiSpriteSetKeyframe(&sprites->additional[index], 5, 0);
-        uiSpriteSetImageKeyframe(&sprites->additional[index], 0, 0);
+        spriteRestart(&sprites->additional[index]);
     }
-    work->transitionValue0 = 0;
-    work->transitionValue1 = 0;
-    work->transitionProgress = 0.0f;
+    transitionValuesSet(&work->transition, 0, 0, 0.0f);
     work->transitionCounter = 0;
     work->previousState = work->currentState;
     work->currentState = 15;
     work->stateCounter = 0;
     FUN_00420a2c(work);
-    if (sprites->additional[work->spriteCount - 1].animationFlags.completed) {
+    if (uiSpriteGetCompletionState(&sprites->additional[work->spriteCount - 1])) {
         s8 nextState = work->pendingState;
         work->previousState = work->currentState;
         work->currentState = nextState;

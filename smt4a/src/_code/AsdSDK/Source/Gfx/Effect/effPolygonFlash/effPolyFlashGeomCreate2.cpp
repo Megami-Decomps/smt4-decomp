@@ -1,4 +1,3 @@
-/* NON_MATCHING: only temp registers differ after the allocation (retail uses r1/r2 swapped and copies the geometry result through r1). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -18,7 +17,8 @@ PolyGeomBlock *effPolyFlashGeomCreate2(PolyParams *params)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonFlash.cpp", 151);
     block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
-    block->data = block->payload;
+    u8 *payload = block->payload;
+    block->data = payload;
     block->self = block;
     block->geom = FUN_002b3b58(segments & 0xffff, 3, 5, DAT_005c1f28, 72);
     return block;

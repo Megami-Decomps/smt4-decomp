@@ -1,4 +1,4 @@
-/* NON_MATCHING: masked-pair loads and boolean result use different registers. */
+/* NON_MATCHING: retail loads the entry's flag pair with one ldm and the mask words with two ldr; the build uses ldrd for the mask and ldr pairs for the flags. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -17,7 +17,10 @@ BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
 /* Returns status 0x105 when either masked battle-state word is present. */
 u32 FUN_004c65e8(u32 id)
 {
-    const FlagPair *flags = reinterpret_cast<const FlagPair *>(FUN_003f0e20(btlGetMainState(), id));
-    return ((flags->low & DAT_005713f0.mask.low) | (flags->high & DAT_005713f0.mask.high)) != 0 ? 0x105 : 0;
+    FlagPair flags = *reinterpret_cast<const FlagPair *>(FUN_003f0e20(btlGetMainState(), id));
+    u32 result = 0;
+    if (((DAT_005713f0.mask.low & flags.low) | (flags.high & DAT_005713f0.mask.high)) != 0)
+        result = 0x105;
+    return result;
 }
 }

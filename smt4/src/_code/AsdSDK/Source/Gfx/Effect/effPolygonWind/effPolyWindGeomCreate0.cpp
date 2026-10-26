@@ -1,4 +1,4 @@
-/* NON_MATCHING: same calls, trace and stores; retail keeps params in r4 and shares r5 between the size and the block (register allocation only) */
+/* NON_MATCHING: allocation head, arm order and call masks match retail (plain static allocWindBlock); remaining: scheduling of the sides clamp against the block copy (retail copies the block to r5 after the clamp loads). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -15,26 +15,31 @@ void FUN_003269d4(PolyWindBlock *block, PolyWindParams *params);
 
 extern u8 DAT_00473708;
 
+/* Allocates a wind block of `payloadBytes` (header included), recording the allocation site first. */
+static PolyWindBlock *allocWindBlock(u32 payloadBytes)
+{
+    asdDebugTrace(DAT_00410604, 1041);
+    PolyWindBlock *block = (PolyWindBlock *)memAlloc(0x10000, 0x100, 0, payloadBytes, 0x10, 1);
+    block->data = block->payload;
+    block->self = block;
+    return block;
+}
+
 /* Builds the geometry block of a wind polygon effect with at least 3 sides, textured with the
  * given texture or a default one, and initializes its segments. */
 PolyWindBlock *effPolyWindGeomCreate0(PolyWindParams *params, void *texture)
 {
-    u32 size = params->segments * 0x2c + 0xc;
-    PolyWindBlock *block;
+    PolyWindBlock *block = allocWindBlock(params->segments * 0x2c + 0xc);
     u32 sides;
 
-    asdDebugTrace(DAT_00410604, 1041);
-    block = (PolyWindBlock *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
-    block->data = block->payload;
-    block->self = block;
     sides = params->sides;
     sides = sides > 3 ? sides : 3;
     params->sides = sides;
-    block->geom = FUN_002469ec(params->segments, sides & 0xffff, &DAT_00473708, 4, 0x4c);
-    if (texture != NULL) {
-        asdTextureHolderLoad(block->geom, texture);
-    } else {
+    block->geom = FUN_002469ec(params->segments & 0xffff, sides & 0xffff, &DAT_00473708, 4, 0x4c);
+    if (texture == NULL) {
         refSlotAssign(block->geom, FUN_0024c3c8(20));
+    } else {
+        asdTextureHolderLoad(block->geom, texture);
     }
     FUN_003269d4(block, params);
     return block;

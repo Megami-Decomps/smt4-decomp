@@ -1,11 +1,15 @@
-/* NON_MATCHING: enemy-model slot base addressing and model-setup register scheduling differ from retail. */
+/* NON_MATCHING: the g_gameState+0x200 limit access now matches retail; retail addresses the extra-model slot as (map + index*8 + 0x3000) with the fields at +76/+80/+81 instead of forming the slot pointer. */
 #include "map/mapEnemy.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
 
 extern "C" {
 extern MapEnemy *g_mapEnemy;
-extern EnemyExtraModelLimits DAT_0049fb1c;
+struct EnemyExtraModelGameState {
+    u8 unk000[0x200];
+    EnemyExtraModelLimits limits; // 0x200
+};
+extern EnemyExtraModelGameState g_gameState;
 extern EnemyExtraModelSource DAT_00448ca8[];
 void textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
@@ -25,7 +29,7 @@ s32 FUN_00256550(u32 index)
             ++count;
         }
     }
-    if (count >= DAT_0049fb1c.capacity) {
+    if (count >= g_gameState.limits.capacity) {
         return 0;
     }
     char path[36];

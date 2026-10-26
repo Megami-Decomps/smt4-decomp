@@ -24,7 +24,12 @@ u32 FUN_002feb40()
     RenameTextBuffers text;
     u32 status = 0x400001;
     const char *directory = "effect_editor/ep/";
-    if (g_effectEditor.label != NULL) {
+    if (g_effectEditor.label == NULL) {
+        EffMenuNode *node = effMenuNodeCreate(".EP");
+        g_effectEditor.label = node;
+        node->initialKind = 0xb6;
+        node->unk04 = 100;
+    } else {
         FUN_00375ec8(reinterpret_cast<KeyboardState *>(g_effectEditor.label));
         namedObjectFormatFullName(reinterpret_cast<NamedObject *>(g_effectEditor.label), text.fullName);
         namedObjectFormatName(reinterpret_cast<NamedObject *>(g_effectEditor.label), text.shortName);
@@ -35,11 +40,6 @@ u32 FUN_002feb40()
                 return status;
             }
         }
-    } else {
-        EffMenuNode *node = effMenuNodeCreate(".EP");
-        g_effectEditor.label = node;
-        node->initialKind = 0xb6;
-        node->unk04 = 100;
     }
     if (text.result == 0)
         return status;

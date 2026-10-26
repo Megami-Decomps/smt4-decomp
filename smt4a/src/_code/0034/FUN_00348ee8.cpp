@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail push {r4, r5, r6} differs from recovered push {r4, r5, r6, r7}. */
+/* NON_MATCHING: register allocation only: retail keeps the digit and the 1300 limit in swapped registers (r3/r2). */
 #include "common.h"
 
 struct EncodedRecordView {
@@ -11,24 +11,20 @@ struct EncodedRecordView {
 // Return the relative payload for record kinds 0 and 1 when the decimal value is at least 1300.
 extern "C" u8* FUN_00348ee8(EncodedRecordView* record)
 {
-    const s32 value = (record->digits[0] - '0') * 1000
-                    + (record->digits[1] - '0') * 100
-                    + (record->digits[2] - '0') * 10
-                    + (record->digits[3] - '0');
+    s32 value = (record->digits[0] - '0') * 1000;
+    value += (record->digits[1] - '0') * 100;
+    value += (record->digits[2] - '0') * 10;
+    value += record->digits[3] - '0';
 
-    switch (record->unk0A) {
-    case 0:
+    if (record->unk0A == 0) {
         if (value >= 1300) {
             return reinterpret_cast<u8*>(record) + record->payloadOffset;
         }
-        break;
-    case 1: {
+    } else if (record->unk0A == 1) {
         u8* payload = reinterpret_cast<u8*>(record) + record->payloadOffset;
         if (value >= 1300) {
             return payload;
         }
-        break;
-    }
     }
 
     return 0;

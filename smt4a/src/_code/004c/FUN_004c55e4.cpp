@@ -17,18 +17,17 @@ void *FUN_00184310(u16 id);
 s32 FUN_004c55e4(u32 unitId, u32 skillId)
 {
     BtlCombatantEntryA *unit = FUN_003f0e20(btlGetMainState(), unitId);
-    u64 flags = unit->flags;
-    if (flags & DAT_005713f0.mappedValue) {
+    if (DAT_005713f0.mappedValue & unit->flags) {
         Table04Record *skill = dataTable04FindById(skillId);
         if (skill) {
             return FUN_002efc44(skill, padGetMappedValue(skillId), 2);
         }
-    } else if (flags & DAT_005713f0.sourceValue) {
+    } else if (DAT_005713f0.sourceValue & unit->flags) {
         Table04Record *skill = dataTable04FindById(skillId);
         if (skill) {
             return FUN_0034a304(skill, FUN_004bd098(unit->sourceId, skillId), 2);
         }
-    } else if (flags & DAT_005713f0.affinity) {
+    } else if (DAT_005713f0.affinity & unit->flags) {
         Table04Record *skill = dataTable04FindById(skillId);
         if (skill) {
             // This lookup's response bytes extend beyond the shared unit-record prefixes.

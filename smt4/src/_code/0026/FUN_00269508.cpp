@@ -1,4 +1,4 @@
-/* NON_MATCHING: segment dispatch, floating-point register allocation and zero-duration ratio paths differ. */
+/* NON_MATCHING: split points are signed like retail; retail evaluates both segment-length operands before the zero-duration test and schedules the key loads after them. */
 #include "gfx/SegmentedScalarCurve.h"
 
 static __inline f32 segmentProgress(f32 frame, f32 duration)
@@ -20,7 +20,7 @@ extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
         end = curve->end;
         progress = static_cast<f32>(frame) / total;
     } else if (curve->intermediateCount == 1) {
-        u32 split = static_cast<s32>(curve->firstFraction * total);
+        s32 split = static_cast<s32>(curve->firstFraction * total);
         if (frame < split) {
             start = curve->start;
             end = curve->firstValue;
@@ -37,7 +37,7 @@ extern "C" f32 FUN_00269508(const void *data, s32 frame, s32 duration)
             end = curve->firstValue;
             progress = static_cast<f32>(frame) / static_cast<f32>(first);
         } else {
-            u32 second = static_cast<s32>(curve->secondFraction * total);
+            s32 second = static_cast<s32>(curve->secondFraction * total);
             if (frame < second) {
                 start = curve->firstValue;
                 end = curve->secondValue;

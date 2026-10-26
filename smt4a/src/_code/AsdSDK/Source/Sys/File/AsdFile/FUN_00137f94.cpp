@@ -1,4 +1,4 @@
-/* NON_MATCHING: close: retail addresses the worker through two literals (DAT_005b3fcc for the handle test and joined flag, g_asdFile for the rest), materializes the description test as a bool (movne/teq) and keeps a zero constant in r6; the build uses one base register and a direct branch. */
+/* NON_MATCHING: the description test now materialises its bool like retail; retail keeps a zero constant in r6 (movne r2/r3 before the svc) and reads the worker handle once more through r5 */
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "nn/os/AddressSpaceManager.h"
@@ -16,6 +16,7 @@ struct AsdFileWorker {
 extern "C" {
 
 extern AsdFileWorker g_asdFile;
+extern NnOsThread g_asdFileWorkerThread;  /* the same thread object, as its other users name it */
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
@@ -30,16 +31,18 @@ void FUN_001a0380(const char *mount);
 // file packs and the ROM mount.
 void FUN_00137f94(void)
 {
-    if (g_asdFile.thread.handle != 0) {
-        s32 result = svcWaitSynchronization1(g_asdFile.thread.handle, 0);
+    if (g_asdFileWorkerThread.handle != 0) {
+        s32 result = svcWaitSynchronization1(g_asdFileWorkerThread.handle, 0);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             FUN_002e3140(result, failed);
         }
         nnResultFields fields;
         fields.value = result;
-        if (fields.fields.description == 0x3fe) {
-            result = nn::svc::SetThreadPriority(g_asdFile.thread.handle, nn_os_detail_ConvertLibraryToSvcPriority(0x10));
+        bool differs = fields.fields.description != 0x3fe;
+        bool timedOut = differs != 1;
+        if (timedOut) {
+            result = nn::svc::SetThreadPriority(g_asdFileWorkerThread.handle, nn_os_detail_ConvertLibraryToSvcPriority(0x10));
             failed = nnResultIsFailure(result);
             if (failed) {
                 FUN_002e3140(result, failed);
@@ -47,7 +50,7 @@ void FUN_00137f94(void)
             g_asdFile.stopRequested = 1;
             nn_os_LightEvent_Signal(g_asdFile.event);
             syncWaitHandleForever(&g_asdFile.thread.handle);
-            g_asdFile.thread.joined = 1;
+            g_asdFileWorkerThread.joined = 1;
             g_asdFile.thread.~NnOsThread();
             FUN_001469a8(g_asdFile.stack);
         }

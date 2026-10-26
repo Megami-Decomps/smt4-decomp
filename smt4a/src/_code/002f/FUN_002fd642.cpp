@@ -1,56 +1,47 @@
-/* NON_MATCHING: register allocation only: retail keeps the arguments in r4/r5/r6 in order (result, list, position) and the next node in r7; built allocates r7/r4/r5/r6. */
 #include "common.h"
 
-extern "C" {
-
-typedef struct Value Value;
-
-typedef struct ValueVtable {
-    /* 0x0 */ void (*destroy)(Value *value);
-} ValueVtable;
-
-struct Value {
-    /* 0x0 */ ValueVtable *vtable;
+struct ListValue;
+struct ListValueVtable {
+    void (*destroy)(ListValue *);
 };
-
-typedef struct ListNode ListNode;
-
+struct ListValue {
+    ListValueVtable *vtable; // 0x00
+};
 struct ListNode {
-    /* 0x0 */ ListNode *next;
-    /* 0x4 */ ListNode *prev;
-    /* 0x8 */ Value value;
+    ListNode *next; // 0x00
+    ListNode *previous; // 0x04
+    ListValue value; // 0x08
+};
+struct PooledList {
+    u32 unk00;
+    ListNode *freeNodes; // 0x04
+    u32 unk08[2];
+    ListNode *sentinel; // 0x10
+    u32 count; // 0x14
 };
 
-typedef struct List {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ ListNode *freeList;
-    /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ ListNode *anchor;
-    /* 0x14 */ s32 count;
-} List;
+struct ListIterator {
+    ListNode *node;
+    explicit ListIterator(ListNode *value) : node(value) {}
+    ListIterator(const ListIterator &other) : node(other.node) {}
+};
 
-typedef struct ListIter {
-    /* 0x0 */ ListNode *node;
-} ListIter;
-
-/* Unlinks the node `pos` refers to (not the anchor), destroys its value, returns it to the free list and stores the next node in *result. */
-void FUN_002fd642(ListIter *result, List *list, ListIter *pos)
+// Unlink an element, destroy its value, and return the following iterator.
+extern "C" ListIterator FUN_002fd642(PooledList *list, const ListIterator &position)
 {
-    ListNode *anchor = list->anchor;
-    ListNode *next;
-
-    if (pos->node == anchor) {
-        result->node = anchor;
-        return;
+    ListNode *sentinel = list->sentinel;
+    if (position.node == sentinel) {
+        ListIterator end(sentinel);
+        return end;
     }
-    next = pos->node->next;
-    pos->node->prev->next = pos->node->next;
-    pos->node->next->prev = pos->node->prev;
-    list->count = list->count - 1;
-    pos->node->value.vtable->destroy(&pos->node->value);
-    pos->node->next = list->freeList;
-    list->freeList = pos->node;
-    result->node = next;
+    ListIterator next(position.node->next);
+    position.node->previous->next = position.node->next;
+    position.node->next->previous = position.node->previous;
+    --list->count;
+    ListValue *value = &position.node->value;
+    value->vtable->destroy(value);
+    ListNode *node = position.node;
+    node->next = list->freeNodes;
+    list->freeNodes = node;
+    return next;
 }
-
-} /* extern "C" */

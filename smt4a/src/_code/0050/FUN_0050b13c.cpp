@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x55c454; not written yet. */
 #include "common.h"
+
+struct ValueSlot {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 flag;
+    /* 0x08 */ u8 value;
+};
+
+/* Stores the byte and marks the slot set. */
+extern "C" void FUN_0050b13c(u32 unused, ValueSlot *slot, const u8 *src)
+{
+    slot->value = *src;
+    slot->flag = 1;
+}

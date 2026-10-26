@@ -1,4 +1,4 @@
-/* NON_MATCHING: distance bits remain in a GPR rather than VFP across heading call; selector literal base and load scheduling differ. */
+/* NON_MATCHING: distance now stays in s16 across the heading call (floatBits helper); remaining diff is the i/enemy register pair (r4/r5 swapped), the first vmov r0,s0 vs s16 and the enemy-vector load order in the distSpatial call. */
 #include "shard/W5_W5Match7_SceneSlots.h"
 
 struct EnemyApproachMode {
@@ -20,6 +20,14 @@ f32 distSpatial(f32 x, f32 y, f32 z, f32 otherX, f32 otherY, f32 otherZ);
 f32 mathAbsHeadingErrorToPoint(f32 x, f32 y, f32 z, f32 heading, f32 otherX, f32 otherY, f32 otherZ);
 s32 FUN_0036d984(const MapVector *position, const MapVector *other, u32 flags);
 
+/* Non-negative IEEE-754 values keep their numeric order when compared as signed words. */
+static __inline s32 floatBits(f32 value)
+{
+    union { f32 value; s32 bits; } representation;
+    representation.value = value;
+    return representation.bits;
+}
+
 /* Start an unobstructed nearby enemy's approach when distance or heading permits. */
 u32 FUN_003850b4(void)
 {
@@ -27,15 +35,13 @@ u32 FUN_003850b4(void)
     for (s32 i = 0; i < 40; ++i) {
         SceneSlot *enemy = &enemies->slots[i];
         if (enemy->active && (enemy->state == 6 || enemy->state == 7 || enemy->state == 15)) {
-            const MapVector *player = &g_lmapScene->position;
-            union { f32 value; s32 bits; } distance, angle;
-            distance.value = distSpatial(player->x, player->y, player->z,
-                                          enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
-            if (distance.bits <= 0x447a0000) {
-                player = &g_lmapScene->position;
-                angle.value = mathAbsHeadingErrorToPoint(player->x, player->y, player->z, g_lmapScene->heading,
+            f32 distance = distSpatial(g_lmapScene->position.x, g_lmapScene->position.y, g_lmapScene->position.z,
+                                       enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
+            if (floatBits(distance) <= 0x447a0000) {
+                f32 angle = mathAbsHeadingErrorToPoint(g_lmapScene->position.x, g_lmapScene->position.y,
+                                           g_lmapScene->position.z, g_lmapScene->heading,
                                            enemy->previousPosition.x, enemy->previousPosition.y, enemy->previousPosition.z);
-                if ((distance.bits >= 0x43960000 || angle.bits >= 0x42f00000) &&
+                if ((floatBits(distance) >= 0x43960000 || floatBits(angle) >= 0x42f00000) &&
                     FUN_0036d984(&g_lmapScene->position, &enemy->previousPosition, 0) == -1) {
                     enemy->state = 30;
                     enemy->approach.mode = DAT_00580b94[DAT_005f18bf].mode;

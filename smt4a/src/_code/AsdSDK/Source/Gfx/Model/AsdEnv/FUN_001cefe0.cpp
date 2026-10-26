@@ -11,23 +11,24 @@ void FUN_001cefe0(const AsdEnvironmentCommands *commands, u32 index)
 {
     if (DAT_00646598[index] != commands) {
         DAT_00646598[index] = commands;
-        u32 *payload = g_commandBufferCursor + 2;
+        u32 *cursor = g_commandBufferCursor;
+        u32 *payload = cursor + 2;
         if (index == 23) {
-            g_commandBufferCursor[0] = 0;
-            g_commandBufferCursor[1] = 0xf00e6;
+            cursor[0] = 0;
+            cursor[1] = 0xf00e6;
         } else {
             if (index >= 7) {
                 ++index;
             }
-            g_commandBufferCursor[0] = index * 0x100;
-            g_commandBufferCursor[1] = 0xf01c5;
+            cursor[0] = index * 0x100;
+            cursor[1] = 0xf01c5;
         }
+        g_commandBufferCursor = payload;
         const void *data = NULL;
         if (commands->dataOffset != 0) {
             data = (const u8 *)&commands->dataOffset + commands->dataOffset;
         }
         u32 size = commands->size;
-        g_commandBufferCursor = payload;
         nnnstdMemCpy(payload, data, size);
         g_commandBufferCursor = (u32 *)((u8 *)g_commandBufferCursor + (size & ~3U));
     }

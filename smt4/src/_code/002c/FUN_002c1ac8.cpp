@@ -1,14 +1,15 @@
-/* NON_MATCHING: The fourth integer argument is saved before the VFP argument copies instead of after them. */
 #include "common.h"
+#include "code/Code002b.h"
 
 extern "C" {
-extern const u32 *DAT_00464c40;
+extern u32 DAT_00464c40;
 void gpuSubmitDefaultPacket(void);
-void FUN_002b13d8(const u32 *first, const u32 *second, const u32 *third, const u32 *fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
+void FUN_002b13d8(u32 first, u32 second, u32 third, u32 fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
 void submitDefaultFloatParameters(void);
 
-/* Substitutes shared defaults for the integer parameters and forwards the complete scalar block. */
-void FUN_002c1ac8(const u32 *first, const u32 *second, const u32 *third, const u32 *fourth, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, f32 value8)
+/* Substitutes the shared default for empty integer parameters and submits the scalar parameter block. */
+/* The fourth colour is declared after the first four floats: ABI-equal (r3), and it is the order retail copies the arguments in. */
+void FUN_002c1ac8(u32 first, u32 second, u32 third, f32 value0, f32 value1, f32 value2, f32 value3, f32 value4, f32 value5, f32 value6, f32 value7, u32 fourth, f32 value8)
 {
     if (first == 0) first = DAT_00464c40;
     if (second == 0) second = DAT_00464c40;

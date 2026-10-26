@@ -1,19 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00147314` (_code @ 0x147314, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct SleepHandlerSlot {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u8 unk04[0x3c];
+    /* 0x40 */ u32 second;
+};
+
+struct SleepModuleState {
+    /* 0x00 */ u8 unk00[0x2c];
+    /* 0x2c */ SleepHandlerSlot slot;
+};
 
 extern "C" {
 
-extern unsigned int DAT_00589220; /* 0x589220 */
-extern unsigned int DAT_00589260; /* 0x589260 */
+extern SleepModuleState DAT_005891f4;
 
-
-void FUN_00147314(unsigned int param_1,unsigned int param_2)
-
+/* Stores the two words of the handler slot at offset 0x2c. */
+void FUN_00147314(u32 first, u32 second)
 {
-  DAT_00589220 = param_1;
-  DAT_00589260 = param_2;
-  return;
+    SleepHandlerSlot *slot = &DAT_005891f4.slot;
+    slot->first = first;
+    slot->second = second;
 }
 
 } /* extern "C" */

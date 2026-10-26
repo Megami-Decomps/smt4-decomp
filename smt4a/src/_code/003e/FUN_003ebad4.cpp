@@ -1,4 +1,4 @@
-/* NON_MATCHING: Visibility conditions are if-converted and model/transform base registers differ. */
+/* NON_MATCHING: call structure now matches retail (three setHandleEnabled arms); retail places `marked = NULL` at the loop exit, addresses reflected[] from the 0x2300 block and tests the guards as separate branches. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -41,12 +41,20 @@ void FUN_003ebad4(BtlMainStateA *battle)
     }
     for (s32 index = 0; index < 4; ++index) {
         if (environment->handles[index] != 0) {
-            bool enabled = true;
             if (environment->reflected[index] != 0 && marked != NULL &&
-                (marked->marker.flags & 0x800) != 0 && (marked->render.flags & 0x4000) == 0) {
-                enabled = (marked->marker.flags & 0x2000) != 0;
+                (marked->marker.flags & 0x800) != 0) {
+                if ((marked->render.flags & 0x4000) != 0) {
+                    setHandleEnabled(environment->handles[index], 1);
+                } else {
+                    if ((marked->marker.flags & 0x2000) != 0) {
+                        setHandleEnabled(environment->handles[index], 1);
+                    } else {
+                        setHandleEnabled(environment->handles[index], 0);
+                    }
+                }
+            } else {
+                setHandleEnabled(environment->handles[index], 1);
             }
-            setHandleEnabled(environment->handles[index], enabled);
             const BattleVector3 &position = environment->positions[index];
             callOnHandleField4B(environment->handles[index], position.x, position.y, position.z);
             const BattleVector3 &rotation = environment->rotations[index];

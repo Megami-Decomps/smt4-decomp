@@ -1,9 +1,9 @@
-/* NON_MATCHING: finished/active sprite accessors fold into owner-relative byte accesses instead of retail's separate accessor address calculations. */
 #include "ui/SpriteTransitionGroup.h"
 #include "font/ComWin/ComWin.h"
 
 extern "C" {
 s32 FUN_002bf818(SpriteTransitionMember *sprite);
+void workSetStateByte(SpriteTransitionMember *sprite, u8 state);
 
 // Advance the four-sprite transition and return to idle after its paired exit animation.
 void FUN_00206b80(SpriteTransitionGroup *group)
@@ -29,9 +29,9 @@ void FUN_00206b80(SpriteTransitionGroup *group)
         FUN_002bf818(&group->sprites[1]);
         if (uiAnimatedSpriteIsFinished(&group->sprites[0].animation) &&
             uiAnimatedSpriteIsFinished(&group->sprites[1].animation)) {
-            group->sprites[0].playback.active = 0;
-            group->sprites[1].playback.active = 0;
-            group->sprites[2].playback.active = 0;
+            workSetStateByte(&group->sprites[0], 0);
+            workSetStateByte(&group->sprites[1], 0);
+            workSetStateByte(&group->sprites[2], 0);
             group->state = 1;
             group->frame = 0;
         }

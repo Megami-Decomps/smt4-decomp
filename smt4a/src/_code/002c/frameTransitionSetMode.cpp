@@ -1,10 +1,15 @@
-/* NON_MATCHING: -O2 candidate; the 60-byte preset copy splits into mixed VFP/integer chunks instead of one15-register transfer, increasing preserved registers/frame size. */
+/* NON_MATCHING: the 60-byte preset copy now matches retail (local struct copy: one vldmia/vstmia of 15 registers); retail keeps one preserved register and stack word fewer (r7 for the frame pointer global, 4-byte frame) than the build (r8, 8 bytes). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
 struct FrameTransitionPresets {
-    s32 values[15];
+    f32 values[15];
 };
+static __inline void frameTransitionPresetsCopy(const FrameTransitionPresets *source, FrameTransitionPresets *destination)
+{
+    FrameTransitionPresets value = *source;
+    *destination = value;
+}
 struct FrameTransitionWork {
     u8 unk00[0x1c];
     u8 enabled;
@@ -63,7 +68,7 @@ void frameTransitionSetMode(s32 mode)
         g_frameTex->dirty = 1;
         FUN_0014e188(&work->sprites[0], 20, 2000, &work->resources, 11, 1.0f);
         uiSpriteSetImageKeyframe(&work->sprites[0], 0, 0);
-        work->presets = g_frameTransitionDefaultPresets;
+        frameTransitionPresetsCopy(&g_frameTransitionDefaultPresets, &work->presets);
         FUN_003b7b4c(work);
         FUN_0014e188(&work->sprites[2], 20, 2000, &work->resources, 11, 1.0f);
         uiSpriteSetImageKeyframe(&work->sprites[2], 2, 0);

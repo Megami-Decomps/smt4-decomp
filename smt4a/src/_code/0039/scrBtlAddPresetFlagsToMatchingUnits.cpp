@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the preset words in different groups (ldm of words 1-3, 6-7, 8-9) and allocates registers differently; the loop body is the same. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "script/ScriptArgs.h"
@@ -17,18 +16,21 @@ extern BtlMaskPresets g_battleMaskPresets;
 
 /* Script command: adds the preset flags to every battle unit 4..53 with id argument 0 that has the
  * required flags and none of the excluded ones. */
-u32 FUN_0039e89c(void)
+u32 scrBtlAddPresetFlagsToMatchingUnits(void)
 {
     u32 id = scrGetArg(0);
     BtlMainStateA *state = btlGetMainState();
-    BtlMaskPresets presets = g_battleMaskPresets;
+    u64 required = g_battleMaskPresets.required;
+    u64 requiredToo = g_battleMaskPresets.requiredToo;
+    u64 excluded = g_battleMaskPresets.excluded;
+    u64 added = g_battleMaskPresets.added;
     s32 i;
 
     for (i = 4; i < 54; i++) {
         BtlCombatantEntryA *unit = &state->entries[i];
-        if ((unit->flags & presets.required) && !(unit->flags & presets.excluded) &&
-            (unit->flags & presets.requiredToo) && unit->id == id) {
-            unit->flags |= presets.added;
+        if ((unit->flags & required) && !(unit->flags & excluded) &&
+            (unit->flags & requiredToo) && unit->id == id) {
+            unit->flags |= added;
         }
     }
     return 1;

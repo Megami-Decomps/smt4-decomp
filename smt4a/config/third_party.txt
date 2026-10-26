@@ -6101,7 +6101,7 @@
 0x0042cb74 FUN_0042cb74 between
 0x0042cbb0 FUN_0042cbb0 between
 0x0042cc10 FUN_0042cc10 between
-0x0042cd08 FUN_0042cd08 between
+0x0042cd08 _ZN9Obj42cd08D1Ev between
 0x0042cd0c FUN_0042cd0c between
 0x0042ce1c registerObj8Holder between
 0x0042ce3c _ZN2nn2os15CriticalSectionD1Ev name
@@ -6124,7 +6124,7 @@
 0x0042d30c FUN_0042d30c between
 0x0042d328 FUN_0042d328 between
 0x0042d32c FUN_0042d32c between
-0x0042d340 FUN_0042d340 between
+0x0042d340 _ZN9Obj42d340D1Ev between
 0x0042d368 FUN_0042d368 between
 0x0042d378 FUN_0042d378 between
 0x0042d3d8 FUN_0042d3d8 between

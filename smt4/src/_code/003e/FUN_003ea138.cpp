@@ -1,2 +1,20 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x422104; not written yet. */
 #include "common.h"
+
+struct InnerRecord {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u16 value;
+};
+struct MiddleRecord {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ InnerRecord *inner;
+};
+struct OuterRecord {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ MiddleRecord *middle;
+};
+
+/* Reads the value two links down the record chain. */
+extern "C" u32 FUN_003ea138(OuterRecord *outer)
+{
+    return outer->middle->inner->value;
+}

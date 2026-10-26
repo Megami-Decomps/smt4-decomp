@@ -1,4 +1,4 @@
-/* NON_MATCHING: O3 folds completion getters to unsigned loads and removes four NOPs, hoists an offset literal, and changes the final completion-loop registers; candidate -O2. */
+/* NON_MATCHING: getters and row count match retail; only r7/r8 are swapped (loop-exit constant vs the soundPlayed element pointer). */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "map/lmapMain.h"
 

@@ -1,2 +1,14 @@
-/* NON_MATCHING: found outside every function: called by FUN_0011fe98; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Returns 1 when the two referenced words differ. */
+u32 FUN_001320f2(s32 *a, s32 *b)
+{
+    if (*a != *b) {
+        return 1;
+    }
+    return 0;
+}
+
+} /* extern "C" */

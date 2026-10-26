@@ -1,14 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00439ea0` (_code @ 0x439ea0, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct SndMasterManagerView {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ f32 volume;
+};
 
 extern "C" {
 
+extern SndMasterManagerView g_nnSndMasterManager;
 
-void FUN_00439ea0(void)
-
+/* Returns the master volume of the sound manager. */
+f32 FUN_00439ea0(void)
 {
-  return;
+    return g_nnSndMasterManager.volume;
 }
 
 } /* extern "C" */

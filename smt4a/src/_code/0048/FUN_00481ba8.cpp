@@ -2,9 +2,13 @@
 #include "map/lmapMain.h"
 #include <math.h>
 
+struct Float3 {
+    f32 values[3];
+};
+
 struct ChaseTarget {
     u8 unk00[0x2C];  // 0x00
-    f32 position[3]; // 0x2C
+    Float3 position; // 0x2C
 };
 
 struct ChaseMotion {
@@ -21,14 +25,11 @@ extern LmapScene *g_lmapScene; /* 0x447e88 */
 /* Points the velocity from the target toward the map scene position, scaled to the speed. */
 void FUN_00481ba8(ChaseMotion *motion)
 {
-    const f32 *target = motion->target->position;
+    Float3 target = motion->target->position;
     f32 speed = motion->speed;
-    f32 tx = target[0];
-    f32 ty = target[1];
-    f32 tz = target[2];
-    f32 dx = g_lmapScene->transform.position[0] - tx;
-    f32 dy = g_lmapScene->transform.position[1] - ty;
-    f32 dz = g_lmapScene->transform.position[2] - tz;
+    f32 dx = g_lmapScene->transform.position[0] - target.values[0];
+    f32 dy = g_lmapScene->transform.position[1] - target.values[1];
+    f32 dz = g_lmapScene->transform.position[2] - target.values[2];
     f32 scale = 1.0f / sqrtf(dx * dx + dy * dy + dz * dz);
 
     motion->velocity[0] = dx * scale * speed;

@@ -1,25 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00357a24` (_code @ 0x357a24, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+extern "C" void *FUN_00357a38(u32 bytes, u32 alignment, u32 flags, u32 heap, u32 enabled);
 
-int FUN_00357a38(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: FUN_00357a38. */
-
-
-void FUN_00357a24(void)
-
+// Forward the allocation request with the final option enabled.
+extern "C" void *FUN_00357a24(u32 bytes, u32 alignment, u32 flags, u32 heap)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00357a38();
-  return;
+    return FUN_00357a38(bytes, alignment, flags, heap, 1);
 }
-
-} /* extern "C" */

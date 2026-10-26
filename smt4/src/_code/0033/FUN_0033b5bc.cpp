@@ -1,10 +1,24 @@
-/* NON_MATCHING: linker-erased member constructor call at +0x0c has no recovered target. */
-/* romwright 0.5.0 decompilation of FUN_0033b5bc for reference (not compiled; its own view of the boundaries):
-
-unsigned int FUN_0033b5bc(unsigned int param_1)
-
-{
-  return param_1;
-}
-*/
 #include "common.h"
+#include <stddef.h>
+
+struct MemberState {
+    /* 0x00 */ u8 unk00[0x60];
+};
+
+struct OwnerState {
+    /* 0x000 */ u8 unk00[0x4dc];
+    /* 0x4dc */ MemberState member;
+};
+
+extern "C" {
+
+/* An empty constructor: armlink removes the call, leaving the member pointer in r0. */
+MemberState *FUN_0034b144(MemberState *member);
+
+OwnerState *FUN_0033b5bc(OwnerState *owner)
+{
+    MemberState *member = FUN_0034b144(&owner->member);
+    return reinterpret_cast<OwnerState *>(reinterpret_cast<u8 *>(member) - offsetof(OwnerState, member));
+}
+
+}

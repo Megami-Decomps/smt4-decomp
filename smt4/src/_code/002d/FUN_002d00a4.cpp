@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed cache entries hoist the full entry address; retail keeps separate member-base addresses and a different clear-loop register allocation. */
+/* NON_MATCHING: one hoisted count for both loops and direct entry indexing now follow retail; remaining: register allocation (retail computes the owner column-count address before the push and keeps different loop registers). */
 #include "battle/btlUI.h"
 
 namespace {
@@ -32,30 +32,28 @@ typedef char BattleUiPositionCacheEntryLayoutCheck[sizeof(BattleUiPositionCacheE
 extern "C" u32 FUN_002d00a4(BtlUiObjC *owner, const BattleUiPositionEntryParameters *request)
 {
     BattleUiPositionCacheView *cache = reinterpret_cast<BattleUiPositionCacheView *>(owner);
-    for (s32 i = 0; i < owner->columnCount; ++i) {
-        cache->entries[i].used = 0;
-    }
     const s32 count = owner->columnCount;
     for (s32 i = 0; i < count; ++i) {
-        BattleUiPositionCacheEntry *entry = &cache->entries[i];
-        if (entry->parameters.id == request->id && entry->parameters.x == request->x &&
-            entry->parameters.y == request->y && entry->parameters.z == request->z) {
+        cache->entries[i].used = 0;
+    }
+    for (s32 i = 0; i < count; ++i) {
+        if (cache->entries[i].parameters.id == request->id && cache->entries[i].parameters.x == request->x &&
+            cache->entries[i].parameters.y == request->y && cache->entries[i].parameters.z == request->z) {
             cache->entries[i].active = 1;
-            entry->parameters.mode = request->mode;
-            return entry->handle;
+            cache->entries[i].parameters.mode = request->mode;
+            return cache->entries[i].handle;
         }
     }
-    BattleUiPositionCacheEntry *entry = &cache->entries[count];
-    entry->parameters.id = request->id;
-    entry->parameters.first = request->first;
-    entry->parameters.second = request->second;
-    entry->parameters.mode = request->mode;
-    entry->parameters.x = request->x;
-    entry->parameters.y = request->y;
-    entry->parameters.z = request->z;
-    entry->parameters.value = request->value;
-    entry->active = 1;
-    entry->used = 0;
-    entry->handle = count;
+    cache->entries[count].parameters.id = request->id;
+    cache->entries[count].parameters.first = request->first;
+    cache->entries[count].parameters.second = request->second;
+    cache->entries[count].parameters.mode = request->mode;
+    cache->entries[count].parameters.x = request->x;
+    cache->entries[count].parameters.y = request->y;
+    cache->entries[count].parameters.z = request->z;
+    cache->entries[count].parameters.value = request->value;
+    cache->entries[count].active = 1;
+    cache->entries[count].used = 0;
+    cache->entries[count].handle = count;
     return owner->columnCount++;
 }

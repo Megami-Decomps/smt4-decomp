@@ -1,33 +1,47 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307d38` (_code @ 0x307d38, 0x42 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
+struct ListValue;
+struct ListValueVtable {
+    void (*destroy)(ListValue *);
+};
+struct ListValue {
+    ListValueVtable *vtable; // 0x00
+};
+struct ListNode {
+    ListNode *next; // 0x00
+    ListNode *previous; // 0x04
+    ListValue value; // 0x08
+};
+struct PooledList {
+    u32 unk00;
+    ListNode *freeNodes; // 0x04
+    u32 unk08[2];
+    ListNode *sentinel; // 0x10
+    u32 count; // 0x14
+};
 
-typedef int romwright_code(...);
+struct ListIterator {
+    ListNode *node;
+    explicit ListIterator(ListNode *value) : node(value) {}
+    ListIterator(const ListIterator &other) : node(other.node) {}
+};
 
-void FUN_00307d38(int *param_1,int param_2,int *param_3)
-
+// Unlink an element, destroy its value, and return the following iterator.
+extern "C" ListIterator FUN_00307d38(PooledList *list, const ListIterator &position)
 {
-  unsigned int *puVar1;
-  int *piVar2;
-  int temp_v0;
-  
-  piVar2 = (int *)*param_3;
-  if (piVar2 == *(int **)(param_2 + 0x10)) {
-    *param_1 = (int)*(int **)(param_2 + 0x10);
-    return;
-  }
-  temp_v0 = *piVar2;
-  *(int *)piVar2[1] = *piVar2;
-  *(int *)(*(int *)*param_3 + 4) = ((int *)*param_3)[1];
-  *(int *)(param_2 + 0x14) = *(int *)(param_2 + 0x14) - 1;
-  (*(romwright_code *)**(unsigned int **)(*param_3 + 8))();
-  puVar1 = (unsigned int *)*param_3;
-  *puVar1 = *(unsigned int *)(param_2 + 4);
-  *(unsigned int **)(param_2 + 4) = puVar1;
-  *param_1 = temp_v0;
-  return;
+    ListNode *sentinel = list->sentinel;
+    if (position.node == sentinel) {
+        ListIterator end(sentinel);
+        return end;
+    }
+    ListIterator next(position.node->next);
+    position.node->previous->next = position.node->next;
+    position.node->next->previous = position.node->previous;
+    --list->count;
+    ListValue *value = &position.node->value;
+    value->vtable->destroy(value);
+    ListNode *node = position.node;
+    node->next = list->freeNodes;
+    list->freeNodes = node;
+    return next;
 }
-
-} /* extern "C" */

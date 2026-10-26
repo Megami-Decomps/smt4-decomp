@@ -15,7 +15,7 @@ struct AsdFileWorker {
 extern "C" {
 extern AsdFileWorker g_asdFile;
 extern const char DAT_0053d448[]; /* the AsdFile.cpp path */
-extern u8 DAT_005b3fcc[]; /* the worker thread's handle and joined flag */
+extern u8 g_asdFileWorkerThread[]; /* the worker thread's handle and joined flag */
 
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
@@ -51,7 +51,7 @@ void FUN_0014287c(void)
     descriptor.callbacks[1] = emptyStub_0010032c;
     descriptor.callbacks[2] = FUN_00100326;
     ThreadStackInfo *info = &g_asdFile.threadStack->info;
-    s32 result = FUN_002fb0d4(DAT_005b3fcc, &descriptor, FUN_0014b66c, &argument, info->size + info->address, 18, -2, 0);
+    s32 result = FUN_002fb0d4(g_asdFileWorkerThread, &descriptor, FUN_0014b66c, &argument, info->size + info->address, 18, -2, 0);
     if (nnResultIsFailureExceptSummary(result, 3)) {
         FUN_002e3140(result);
     }

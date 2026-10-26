@@ -1,4 +1,5 @@
 /* NON_MATCHING: signed completion getter, sprite bank and shared script-run tail recovered; state-store registers and inlined receiver copy differ. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "ui/UiSpriteState.h"
@@ -31,7 +32,6 @@ s32 FUN_0040ab8c();
 void FUN_0040aad4(EquipmentMenuResource *, s32);
 void handleRegistryRegisterObject(u32, u32);
 void FUN_003fd7b4(u32, f32, f32, f32);
-s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 static __inline void equipmentMenuFinishPageTransition(EquipmentMenuState *work)
 {
@@ -76,7 +76,7 @@ void FUN_00494740(EquipmentMenuState *work)
         s32 y = vec2GetYInt(sprite);
         s32 x = vec2GetXInt(sprite);
         pointConvertToFloat(&work->detail.region, x, y);
-        if (uiSpriteGetCompletionState(sprite)) {
+        if (uiSpriteGetCompletionState((const UiAnimatedSprite *)sprite)) {
             equipmentMenuFinishPageTransition(work);
         }
     }

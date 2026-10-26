@@ -1,4 +1,3 @@
-/* NON_MATCHING: fixed missing sequence-request size argument; retail hoists constant 1 before work load and has one extra word before the literal pool. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -12,6 +11,7 @@ struct LoadTask {
 };
 
 extern "C" {
+extern LoadTask *g_jyoucyu;
 extern u32 g_btlUiBlock;
 extern u8 DAT_00446db4;
 void FUN_00192884(void);
@@ -39,9 +39,9 @@ void FUN_0033f784(void);
 void spriteTables14And15Load(u32 block);
 
 /* Run one step of the boot-time resource loading sequence. Returns -1 once it is finished. */
-u32 FUN_001c0400(LoadTask **task)
+s32 jyoucyuLoadStep(u32 handle)
 {
-    LoadTask *work = *task;
+    LoadTask *work = g_jyoucyu;
     switch (work->state) {
     case 0:
         work->state = 1;

@@ -1,44 +1,33 @@
-/* NON_MATCHING: retail updates 64-bit semaphore counters and emits SVC 0x18 directly; the required intrinsic/assembly is forbidden by this assignment. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail loads/stores the 64-bit counters with ldrd/strd (8-byte aligned pair accesses) and reads the limit as two words; the build uses ldm/stm. Arithmetic and svc 0x18 (nn::svc::SignalEvent) match. */
+#include "common.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+
+struct EventCounters {
+    /* 0x00 */ s64 total;
+    /* 0x08 */ s64 unk08;
+    /* 0x10 */ s64 limit;
+    /* 0x18 */ s64 used;
+    /* 0x20 */ u8 unk20[0x2c];
+    /* 0x4c */ u32 event;
+};
 
 extern "C" {
+void FUN_002c526c(s32 result, bool failed);
 
-int FUN_002c526c(void);
-int software_interrupt(int);
-
-#ifndef ROMWRIGHT_CARRY_4_DEFINED
-#define ROMWRIGHT_CARRY_4_DEFINED
-#define romwright_carry_4(left, right) ((unsigned char)((unsigned long long)(unsigned int)(left) + (unsigned long long)(unsigned int)(right) > 0xffffffffULL))
-#endif
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c526c. */
-
-
-unsigned int FUN_002fe2f4(unsigned int *param_1,unsigned int param_2)
-
+/* Adds `count` to the event's counters and signals it; returns 0 when the count does not fit the limit. */
+u32 FUN_002fe2f4(EventCounters *counters, u32 count)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = param_1[6];
-  if ((int)(param_1[5] - (param_1[7] + (unsigned int)(param_1[4] < temp_v1))) <
-      (int)(unsigned int)(param_1[4] - temp_v1 < param_2)) {
-    temp_v0 = 0;
-  }
-  else {
-    param_1[6] = temp_v1 + param_2;
-    param_1[7] = param_1[7] + (unsigned int)romwright_carry_4(temp_v1,param_2);
-    temp_v1 = *param_1;
-    *param_1 = temp_v1 + param_2;
-    param_1[1] = param_1[1] + (unsigned int)romwright_carry_4(temp_v1,param_2);
-    software_interrupt(0x18);
-    if ((int)param_1[0x13] < 0) {
-      FUN_002c526c();
+    if (counters->limit - counters->used - count < 0) {
+        return 0;
     }
-    temp_v0 = 1;
-  }
-  return temp_v0;
+    counters->used += count;
+    counters->total += count;
+    s32 result = nn::svc::SignalEvent(counters->event);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
+    }
+    return 1;
 }
-
-} /* extern "C" */
+}

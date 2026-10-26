@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O2 candidate; signed reverse load, repeated segment sign extensions, sequence cold-block layout and VFP division registers differ. */
+/* NON_MATCHING: retail narrows the next segment index twice (call-site cast, then after the s16 store) and converts the frame count into s2; ours narrows once and converts in place. */
 #include "common.h"
 
 struct ScaleSegment {
@@ -35,15 +35,25 @@ struct ScaleController {
     u8 unk8b;
 };
 
-static __inline void startScaleSegment(ScaleController *controller,
-                                      s16 index, s8 reverse)
+static __inline f32 scaleSegmentStart(const ScaleSegment *segment, s32 reverse)
+{
+    return reverse ? segment->end : segment->start;
+}
+
+static __inline f32 scaleSegmentEnd(const ScaleSegment *segment, s32 reverse)
+{
+    return reverse ? segment->start : segment->end;
+}
+
+static void startScaleSegment(ScaleController *controller,
+                              s16 index, s8 reverse)
 {
     controller->segmentIndex = index;
     controller->frame = 0;
     controller->reverse = reverse;
     controller->reset = 0;
-    const ScaleSegment *segment = &controller->segments[controller->segmentIndex];
-    f32 scale = reverse ? segment->end : segment->start;
+    const ScaleSegment *segment = &controller->segments[index];
+    f32 scale = scaleSegmentStart(segment, reverse);
     controller->scale[0] = scale;
     controller->scale[1] = scale;
     controller->scale[2] = scale;
@@ -57,28 +67,27 @@ extern "C" void controllerUpdateUniformScaleTrack(ScaleController *controller)
     const ScaleSegment *segment = &controller->segments[controller->segmentIndex];
     u32 frames = segment->frames;
     if (controller->frame >= (s32)frames) {
+        s8 reverse = controller->reverse;
         if (segment->loop) {
-            controller->scale[0] = controller->reverse ? segment->end : segment->start;
+            controller->scale[0] = scaleSegmentStart(segment, reverse);
             controller->frame = 0;
         } else {
-            controller->scale[0] = controller->reverse ? segment->start : segment->end;
-            if (controller->sequencing && controller->sequence != NULL &&
-                controller->sequence[controller->sequenceIndex].segment != -1) {
+            controller->scale[0] = scaleSegmentEnd(segment, reverse);
+            if (!(controller->sequencing && controller->sequence != NULL &&
+                  controller->sequence[controller->sequenceIndex].segment != -1)) {
+                controller->complete = 1;
+            } else {
                 ++controller->sequenceIndex;
                 const ScaleSequenceEntry *next = &controller->sequence[controller->sequenceIndex];
-                if (next->segment != -1 && next->segment != -3) {
-                    if (next->segment != -2) {
-                        startScaleSegment(controller, (s16)next->segment, next->reverse);
-                    } else {
-                        controller->sequenceIndex = 0;
-                        const ScaleSequenceEntry *first = controller->sequence;
-                        startScaleSegment(controller, (s16)first->segment, first->reverse);
-                    }
-                } else {
+                if (next->segment == -1 || next->segment == -3) {
                     controller->complete = 1;
+                } else if (next->segment == -2) {
+                    controller->sequenceIndex = 0;
+                    const ScaleSequenceEntry *first = controller->sequence;
+                    startScaleSegment(controller, (s16)first->segment, first->reverse);
+                } else {
+                    startScaleSegment(controller, (s16)next->segment, next->reverse);
                 }
-            } else {
-                controller->complete = 1;
             }
         }
     } else {

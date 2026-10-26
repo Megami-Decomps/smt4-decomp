@@ -32,21 +32,25 @@ void FUN_00145084(u32 kind)
         u32 parameter;
         u8 active[2];
     };
+    TextureRecord *texture = NULL;
+    Surface *surface = NULL;
+    u32 activeIndex = 0;
     RenderPresetView *presets = (RenderPresetView *)&g_asdGxPresets;
     if (presets->suspended != 1) {
-        TextureRecord *texture = NULL;
-        Surface *surface = NULL;
-        u32 activeIndex = 0;
-        if (kind == 0x400) {
+        switch (kind) {
+        case 0x400:
             texture = &presets->textures[0];
             surface = &presets->surfaces[0];
-        } else if (kind == 0x401) {
+            break;
+        case 0x401:
             activeIndex = 1;
             texture = &presets->textures[2];
             surface = &presets->surfaces[2];
-        } else if (kind == 0x410) {
+            break;
+        case 0x410:
             texture = &presets->textures[1];
             surface = &presets->surfaces[1];
+            break;
         }
         u32 memoryMode = texture->memoryMode;
         u32 selected = surface->selected;

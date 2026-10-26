@@ -1,4 +1,4 @@
-/* NON_MATCHING: nonvolatile state loads coalesce, redundant readiness checks disappear, and sleep/zero-slot branches are hoisted differently. */
+/* NON_MATCHING: retail reloads sync->state before every compare (thread-polled field; matches with `volatile s32 state`); remaining diffs are branch layout around the state=7 store and the sleep loop. */
 #include "shard/S2MovieSync.h"
 #include "shard/W6_W6Match7_MovieSource.h"
 

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Completion getters fold to direct byte tests, and phase-one constant folding/dispatch scheduling differ. */
+/* NON_MATCHING: phase-one `++phase` folds to the constant 2 (retail adds 1 to the loaded switch value) and the dispatch/constant scheduling differs; getters match. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "ui/UiControl.h"
 

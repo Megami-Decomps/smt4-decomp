@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail shares one zero register (r9) for the null result, the moved resource and the zeroed fields, and copies the allocator at the constructor call; built uses separate registers */
+/* NON_MATCHING: register allocation only: retail copies the allocator at the constructor call (the handle's allocator word is a copy of the argument register), the build copies it up front; the shared zero register matches */
 #include <new>
 #include "classes/Obj421158.h"
 
@@ -22,10 +22,7 @@ Obj421158 *Obj421158::create(void *owner, AsdAllocatorObject *allocator)
 {
     Obj421230ResHandle<Obj421158Res> res = {FUN_0013d7a0(allocator, 0), allocator};
     void *memory = allocator->allocate(sizeof(Obj421158), 4);
-    Obj421158 *light = NULL;
-    if (memory != NULL) {
-        light = new (memory) Obj421158(owner, res.take());
-    }
+    Obj421158 *light = memory != NULL ? new (memory) Obj421158(owner, res.take()) : NULL;
     light->initialize(allocator);
     if (res.res != NULL) {
         nw_gfx_FragmentLight_DestroyResFragmentLight(allocator, res.res);

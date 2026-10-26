@@ -1,4 +1,4 @@
-/* NON_MATCHING: the debug trace (string, line, nop) and size/clamp shapes now match retail; what remains is register allocation (retail keeps the effect object's fields in r4/r6 via a writeback load and the new block in r5; armcc swaps them) and the geometry result being reused in r1. */
+/* NON_MATCHING: allocation head, arm order and the clamp match retail; retail keeps the geometry in r0 into the replace arm and copies it to r6 only in the default-texture arm, and loads the segment count again after the call. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -13,29 +13,37 @@ u32 sysGetTableWord(int id);
 void refCountIncrement(u32 texture);
 extern u8 DAT_005c1f82;
 
+/* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
+static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
+{
+    asdDebugTrace(DAT_00544ba8, line);
+    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadBytes + 0x10, 0x10, 1);
+    block->data = block->payload;
+    block->self = block;
+    return block;
+}
+
 /* Builds a polygon effect's textured geometry block (the given texture, or a default one) and gives each segment alternating texture coordinates. The effect's unk70 is clamped to at least 1. */
 PolyGeomBlock *effPolyFlashGeomTexCreate2(PolyParams *params, void *texture)
 {
     PolyGeom *geom;
-    asdDebugTrace(DAT_00544ba8, 1199);
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x18 + 0x10, 0x10, 1);
+    PolyGeomBlock *block = allocGeomBlock(params->segments * 0x18, 1199);
 
-    block->data = block->payload;
-    block->self = block;
-    params->unk70 = (params->unk70 < 2) ? 1 : params->unk70;
+    params->unk70 = (params->unk70 <= 1) ? 1 : params->unk70;
     geom = FUN_002b3b58(params->segments & 0xffff, 2, 4, &DAT_005c1f82, 76);
     block->geom = geom;
-    if (texture != NULL) {
-        textureSlotReplace(geom, texture);
-    } else {
+    if (texture == NULL) {
         geom->unk04 = sysGetTableWord(18);
         refCountIncrement(geom->unk04);
+    } else {
+        textureSlotReplace(geom, texture);
     }
-    if (params->segments != 0) {
+    u32 segments = params->segments;
+    if (segments != 0) {
         PolyQuadUV *uv = block->geom->buf->uv;
         u32 i;
 
-        for (i = 0; i < params->segments; i++) {
+        for (i = 0; i < segments; i++) {
             if (i & 1) {
                 uv->u0 = 0.5f; uv->v0 = 0;
                 uv->u1 = 0;    uv->v1 = 0;

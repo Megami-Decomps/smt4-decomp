@@ -14,7 +14,6 @@ extern "C" {
 s32 FUN_00167458(UiAnimatedSprite* sprite, s32 reverse);
 s32 FUN_00163aa4(UiAnimatedSprite* sprite, f32 frameStep);
 s32 vec2GetXInt(UiAnimatedSprite* sprite);
-s32 uiSpriteGetCompletionState(const UiAnimatedSprite* sprite);
 void stateSetterEnterState(StateSetterSpriteWork* work, s32 state);
 
 void FUN_004852a0(StateSetterSpriteWork* work)

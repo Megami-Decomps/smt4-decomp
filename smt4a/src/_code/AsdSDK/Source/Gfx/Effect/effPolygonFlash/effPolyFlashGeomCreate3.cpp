@@ -1,4 +1,3 @@
-/* NON_MATCHING: only two scratch registers differ (retail: block->payload address in r1 and the constant 72 in r2; built: the other way round) */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -18,7 +17,8 @@ PolyGeomBlock *effPolyFlashGeomCreate3(PolyParams *params)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonFlash.cpp", 858);
     block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, dataSize + 0x10, 0x10, 1);
 
-    block->data = block->payload;
+    u8 *payload = block->payload;
+    block->data = payload;
     block->self = block;
     block->geom = FUN_002b3b58((u16)segments, 12, 13, &DAT_005c1f3a, 72);
     return block;

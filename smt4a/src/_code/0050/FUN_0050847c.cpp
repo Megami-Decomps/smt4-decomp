@@ -1,26 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050847c` (_code @ 0x50847c, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves only lr (push {lr}/pop {pc}) where armcc here saves {r4, lr}; library-style codegen. */
+#include "common.h"
+
+struct LookupResult {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+};
 
 extern "C" {
 
-int FUN_005083a0(int, int);
+LookupResult *FUN_005083a0(void *owner, u32 mode);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_005083a0. */
-
-
-unsigned int FUN_0050847c(int param_1)
-
+/* Looks the owner up in mode 0x4000 and returns the word at offset 0x8. */
+u32 FUN_0050847c(void *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_005083a0(param_1,0x4000);
-                    /* WARNING: Treating indirect jump as return */
-  return *(unsigned int *)(param_1 + 8);
+    return FUN_005083a0(owner, 0x4000)->value;
 }
 
 } /* extern "C" */

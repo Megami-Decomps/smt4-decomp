@@ -36,11 +36,11 @@ u32 *FUN_001bab50(const GrTextureUnit *texture, u32 *commands, u32 emitFunction)
         ((u32)texture->wrapS << 8) | ((u32)texture->wrapT << 12) |
         ((u32)(texture->type == 2 || texture->type == 5) << 24);
     *commands++ = 0xF009B;
-    if (texture->type != 3 && texture->type != 0) {
+    if (texture->type == 3 || texture->type == 0) {
+        *commands++ = 0;
+    } else {
         *commands++ = textureEncodeLodBias(texture->lodBias) |
             ((u32)texture->lodMax << 16) | ((u32)texture->lodMin << 24);
-    } else {
-        *commands++ = 0;
     }
     *commands++ = 0xF009C;
     *commands++ = texture->imageBits >> 3;

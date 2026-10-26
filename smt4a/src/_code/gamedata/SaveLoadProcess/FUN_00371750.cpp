@@ -1,6 +1,7 @@
 /* NON_MATCHING: step function of the save-write process (stage 0: snapshot the extra block and write it to slot file 0x62; stage 2: build the full save image of 0x2a7a4 bytes and write it; stages 1 and 3 wait for the write and either advance, fail to stage 5 or animate the wait counter; stages 4/5 end with a result); written from the decompilation, the goto into the stage-3 wait is rebuilt as a shared helper and the allocation arguments follow gameDataAllocBlocks */
 #include "common.h"
 #include "gamedata/SaveLoadProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 #define SAVE_STAGE_WRITE_EXTRA 0
 #define SAVE_STAGE_WAIT_EXTRA 1
@@ -91,6 +92,7 @@ u32 FUN_00371750(void)
     switch (job->stage) {
     case SAVE_STAGE_WRITE_EXTRA: {
         job->size = SAVE_EXTRA_SIZE;
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 156);
         job->buffer = static_cast<u8 *>(asdMemoryAlloc(SAVE_ALLOC_HEAP, SAVE_ALLOC_ALIGN, 0, job->size, 1));
         titleConfigWriteToSave();
         s32 index = job->kind == 1 ? job->slot : job->slot - 1;
@@ -127,6 +129,7 @@ u32 FUN_00371750(void)
 
     case SAVE_STAGE_WRITE_FULL: {
         job->size = SAVE_FULL_SIZE;
+        asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\SaveLoadProcess.cpp", 243);
         job->buffer = static_cast<u8 *>(asdMemoryAlloc(SAVE_ALLOC_HEAP, SAVE_ALLOC_ALIGN, 0, job->size, 1));
         titleConfigWriteToSave();
         s8 slot = (s8)job->slot;

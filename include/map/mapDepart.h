@@ -96,6 +96,15 @@ typedef __packed struct GameStateRecord {
     /* 0x32 */ u32 unk32;
 } GameStateRecord;
 
+/* The pending map jump and its five transform parameters inside the game state (at 0x3F8). */
+struct GameStateJumpRequest {
+    /* 0x00 */ u32 first;
+    /* 0x04 */ u32 second;
+    /* 0x08 */ u32 flags;
+    /* 0x0C */ u32 third;
+    /* 0x10 */ f32 values[5];
+};
+
 /* The global game state block (Shin Megami Tensei IV). Only the fields read so far are named. */
 typedef struct GameState {
     /* 0x000 */ s32 unk000;
@@ -221,6 +230,10 @@ typedef struct GameState {
             /* 0x3E0 */ u32 forceVisible;
             /* 0x3E4 */ u8 unk3E4[0x294];
         } spriteVisibility;
+        struct {
+            /* 0x370 */ u8 unk370[0x88];
+            /* 0x3F8 */ GameStateJumpRequest request;
+        } jump;
     };
 } GameState;
 typedef char GameStateCampCleanupOffsetCheck[

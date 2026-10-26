@@ -31,6 +31,13 @@ s32 mapIfSpawnEffect(u32 layer, s32 effect, u32 owner, s32 tag,
 }
 
 
+/* Spawns an effect at the slot's tag and transform. */
+static __inline void spawnSlotEffect(s32 effect, const MapStateEffectSlot* slot)
+{
+    mapIfSpawnEffect(0, effect, ~0u, slot->tag,
+        slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+}
+
 extern "C" {
 /* Spawn active map-slot effects according to area variant, category and saved flags. */
 void mapSpawnActiveSlotEffects()
@@ -45,29 +52,23 @@ void mapSpawnActiveSlotEffects()
             if (!mapSavedFlagIsSet(static_cast<s16>(slot->flagIndex))) {
                 if (g_mapStateSlots->areaId < 100) {
                     if (slot->category == 7) {
-                        mapIfSpawnEffect(0, 0x1F, ~0u, slot->tag,
-                            slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+                        spawnSlotEffect(0x1F, slot);
                     } else {
-                        mapIfSpawnEffect(0, 0x1E, ~0u, slot->tag,
-                            slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+                        spawnSlotEffect(0x1E, slot);
                     }
                 } else {
-                    mapIfSpawnEffect(0, 0x25, ~0u, slot->tag,
-                        slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+                    spawnSlotEffect(0x25, slot);
                 }
             }
         } else if (slot->state == 1) {
             if (g_mapStateSlots->areaId < 100) {
                 if (category != 1) {
-                    mapIfSpawnEffect(0, 0x1D, ~0u, slot->tag,
-                        slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+                    spawnSlotEffect(0x1D, slot);
                 } else {
-                    mapIfSpawnEffect(0, 0x1E, ~0u, slot->tag,
-                        slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+                    spawnSlotEffect(0x1E, slot);
                 }
             } else {
-                mapIfSpawnEffect(0, 0x26, ~0u, slot->tag,
-                    slot->transform[0], slot->transform[1], slot->transform[2], slot->transform[3]);
+                spawnSlotEffect(0x26, slot);
             }
         }
     }

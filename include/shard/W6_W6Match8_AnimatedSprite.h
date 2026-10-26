@@ -18,9 +18,12 @@ struct UiAnimatedSprite {
     u8 unk8b;
 };
 
+/* The sprite's completion byte (+0x8A): a real one-instruction function that armlink inlines. */
+extern "C" s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
+
 static __inline bool uiAnimatedSpriteIsFinished(const UiAnimatedSprite *sprite)
 {
-    return sprite->finished != 0;
+    return uiSpriteGetCompletionState(sprite) != 0;
 }
 
 struct SpriteAnimationCommand {

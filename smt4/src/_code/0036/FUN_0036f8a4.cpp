@@ -46,7 +46,7 @@ void FUN_0036f8a4(GfxResource *resource)
 
     if (checked->owner != 0) {
         GfxRecord *record = gfxResourceRecord(checked);
-        if (record->context != 0) {
+        if (record->context) {
             g_gfxReleaseCallback(record->context, 0x101, checked->owner, record->handle);
             record->handle = 0;
         }

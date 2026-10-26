@@ -1,5 +1,6 @@
-/* NON_MATCHING: native result construction uses different saved registers and omits retail's removed-hook NOPs. */
+/* NON_MATCHING: retail has a linker-NOPed hook between the first failure test (lsrs r1,r0,#31) and its branch, keeps the failure arm inline and uses r5-r7; the hook's shape is unknown. */
 #include "classes/WindowStatus.h"
+#include "nn/Result.h"
 
 extern "C" {
 u32 FUN_00352f50(u64 handle);
@@ -11,15 +12,16 @@ WindowStatusResult FUN_003df4dc(const u64 *handle, void *buffer, u32 size)
     if (*handle == 0)
         return WindowStatusResult(0xe0a13882);
     u32 result = FUN_00352f50(*handle);
-    if ((s32)result < 0)
-        return WindowStatusResult(result);
-    result = ipcRequest04Forward(1, *handle, buffer, size);
-    if (result == 0xd880803b)
-        return WindowStatusResult(0xd8813889);
-    if (result == 0xd900803e)
-        return WindowStatusResult(0xd8e1389b);
-    if ((s32)result < 0)
-        return WindowStatusResult(result);
-    return WindowStatusResult(0);
+    if (!nnResultIsFailure(result)) {
+        result = ipcRequest04Forward(1, *handle, buffer, size);
+        if (result == 0xd880803b)
+            return WindowStatusResult(0xd8813889);
+        if (result == 0xd900803e)
+            return WindowStatusResult(0xd8e1389b);
+        if (nnResultIsFailure(result))
+            return WindowStatusResult(result);
+        return WindowStatusResult(0);
+    }
+    return WindowStatusResult(result);
 }
 }

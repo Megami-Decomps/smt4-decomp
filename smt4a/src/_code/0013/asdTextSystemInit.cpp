@@ -4,7 +4,7 @@ extern "C" {
 extern u8 DAT_0057f598;
 extern u8 DAT_0057f5d8;
 
-void FUN_0013f0f4(s32 count);
+void fontPoolCreate(s32 count);
 s32 FUN_0014190c(const char *path);
 void FUN_00140e6c(s32 slot, s32 font);
 void FUN_0013f188(s32 slot, f32 offset);
@@ -32,7 +32,7 @@ void FUN_0013dadc(void);
  * mode, and registers the two text slots (0xF87A, 0xF87B) with their callbacks. */
 void asdTextSystemInit(void)
 {
-    FUN_0013f0f4(6);
+    fontPoolCreate(6);
     FUN_00140e6c(1, FUN_0014190c("font/TsukuMin_9_9.bcfnt"));
     FUN_00140e6c(2, FUN_0014190c("font/TsukuMin_12_12.bcfnt"));
     FUN_00140e6c(3, FUN_0014190c("font/TsukuMin_14_14.bcfnt"));

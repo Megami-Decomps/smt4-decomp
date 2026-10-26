@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP allocation: retail keeps the 1.0f constant in s16 across the strlen call and x/y in s17/s18 (saves d8-d9) and loads s7/s5/s4 from the pool; the build packs x/y into d8 and derives s7 from s2. Same pattern as debugDrawText (candidate -O2). */
+/* NON_MATCHING: ported from smt4 FUN_002aed34 (arguments follow the retail pool: zero, zero, 10, 13, zero, 1); retail keeps x/y in s17/s18 and zero in s16 across strlen (saves d8-d9) while the build packs x/y into d8. */
 #include "shard/W6_W6Match2_TextDrawState.h"
 
 extern "C" {
@@ -12,11 +12,12 @@ void FUN_00181ae0(TextRenderer *renderer, u32 font, const char *text, u32 length
 /* Draws `text` at (x, y) with the renderer of slot `slot` (0-8); empty text and bad slots draw nothing. */
 void FUN_00182884(u32 slot, const char *text, f32 x, f32 y)
 {
+    f32 zero = 0.0f;
     if (slot < 9) {
         u32 length = libc_strlen(text);
         if (length != 0) {
             FUN_00181ae0(DAT_0053d130[slot], DAT_005b3bc0.unk0c, text, length,
-                         x, y, 1.0f, 1.0f, 10.0f, 13.0f, 1.0f, 1.0f);
+                         x, y, zero, zero, 10.0f, 13.0f, zero, 1.0f);
         }
     }
 }

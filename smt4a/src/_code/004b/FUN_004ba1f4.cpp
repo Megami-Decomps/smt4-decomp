@@ -1,4 +1,4 @@
-/* NON_MATCHING: reset-array stores use an offset literal, packet arguments use strd, and sprite/bank pointers remain live; 92 versus retail 88 instructions. */
+/* NON_MATCHING: sprite/bank addresses are recomputed per call and the id table stores follow retail; remaining: register choices and the two paramsInit stack arguments (retail stores them with two str, the build merges them into a strd). */
 #include "shard/Shard004B.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
@@ -33,19 +33,19 @@ void FUN_004ba1f4(Menu4C *menu)
         menu->resetFlags[index] = 0;
     menu->unk101C = -1;
     menu->unk1020 = -1;
-    for (s32 index = 0; index < 4; ++index)
-        menu->selectionIds[index] = -1;
+    menu->selectionIds[0] = -1;
+    menu->selectionIds[1] = -1;
+    menu->selectionIds[2] = -1;
+    menu->selectionIds[3] = -1;
     paramsClearPacket(&parameters->packet);
     // These three adjacent tables are anchored by the final table's retail data symbol.
     paramsInit(&parameters->packet, DAT_00532924 - 0x24, 0xc, DAT_00532924 - 0x18, 0x18, 0, 0, 0, 0, DAT_00532924, 0x38);
     for (s32 index = 0; index < 10; ++index) {
-        UiSpriteState *sprite = reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]);
-        FUN_0014e188(sprite, 0x1f, 0, &parameters->packet, 0x15, 1.0f);
-        uiSpriteSetImageKeyframe(sprite, 0, 0);
+        FUN_0014e188(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
+        uiSpriteSetImageKeyframe(reinterpret_cast<UiSpriteState *>(menu->rowsA10[index]), 0, 0);
     }
     FUN_0014e188(reinterpret_cast<UiSpriteState *>(menu->unkF88), 0x1f, 0, &parameters->packet, 0x15, 1.0f);
-    SpritePresetBank *bank = reinterpret_cast<SpritePresetBank *>(menu->blockA8);
-    FUN_004cf7cc(bank);
-    uiSpriteBankApplyPreset(bank, 0xc);
+    FUN_004cf7cc(reinterpret_cast<SpritePresetBank *>(menu->blockA8));
+    uiSpriteBankApplyPreset(reinterpret_cast<SpritePresetBank *>(menu->blockA8), 0xc);
 }
 }

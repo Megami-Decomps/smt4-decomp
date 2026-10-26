@@ -422,7 +422,9 @@ static __inline ScalarAnimationChannel *modelPropertyScalarChannel(LegacyModelPr
     if (node->count == 0) {
         return NULL;
     }
-    return (ScalarAnimationChannel *)node->table->targets[node->index * node->table->stride + channel];
+    ModelPropertyTable *table = node->table;
+    s32 base = node->index * table->stride;
+    return (ScalarAnimationChannel *)table->targets[base + channel];
 }
 typedef char LegacyModelPropertyNodeSizeCheck[sizeof(LegacyModelPropertyNode) == 0x150 ? 1 : -1];
 typedef char LegacyModelPropertyControllerSizeCheck[sizeof(LegacyModelPropertyController) == 0x5C ? 1 : -1];

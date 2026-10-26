@@ -1,4 +1,4 @@
-/* NON_MATCHING: indexed placement address formation and saved registers differ across the two slot scans. */
+/* NON_MATCHING: slot address formation in the first scan now matches (offsets folded into the loads); armcc unrolls both 50-entry scans by two where retail keeps them rolled, and the saved registers differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -25,8 +25,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
     u16 kind = variants->identity.kind;
     s32 key = variants->keys[variantIndex];
     for (s32 i = 0; i < 50; ++i) {
-        const MaterialMergePlacement &slot = owner->placements.entries[i];
-        if (slot.key == key && (slot.activation.flags & 1)) {
+        if (owner->placements.entries[i].key == key && (owner->placements.entries[i].activation.flags & 1)) {
             return 1;
         }
     }
@@ -38,7 +37,7 @@ u32 FUN_003db0c0(MaterialMergeOwner *owner, BtlActionRecord *action)
                 // The shared state's byte padding starts at an odd address; keep this view local.
                 struct SelectionView { u8 unk000[0xc4]; s32 index; };
                 typedef char SelectionViewOffset[offsetof(SelectionView, index) == 0xc4 ? 1 : -1];
-                s32 selection = reinterpret_cast<SelectionView *>(state)->index;
+                u32 selection = reinterpret_cast<SelectionView *>(state)->index;
                 u32 variant = 0;
                 if (selection >= 0) {
                     variant = FUN_00337ba0(state, (s16)selection, kind);

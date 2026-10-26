@@ -1,4 +1,4 @@
-/* NON_MATCHING: texture transfer record scheduling has not matched retail. */
+/* NON_MATCHING: store/bitfield order now matches retail; only register naming differs (retail ip/lr for the pool constant and height, r5-r8 for the record pointer math; the build swaps ip/lr and uses r8 differently). */
 #include "gfx/TextureTransferCommand.h"
 
 extern "C" {
@@ -26,11 +26,11 @@ void FUN_001962c0(AsdCmdBuffer *buffer, const void *source, void *destination,
     command->source = source;
     command->destination = destination;
     command->input.size.width = width;
+    command->format.inputFormat = format;
     command->output.size.width = static_cast<u16>(command->input.value);
     command->input.size.height = height;
-    command->output.size.height = static_cast<u16>(command->input.value >> 16);
-    command->format.inputFormat = format;
     command->format.outputFormat = command->format.inputFormat;
+    command->output.size.height = static_cast<u16>(command->input.value >> 16);
     command->format.options = 4;
     command->format.enabled = 1;
     globalCriticalSectionEnterForward();

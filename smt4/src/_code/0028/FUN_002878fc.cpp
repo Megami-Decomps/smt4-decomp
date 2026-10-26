@@ -1,8 +1,8 @@
-/* NON_MATCHING: retail addresses counts and pools from the containing collision global rather than its count subrecord. */
+/* NON_MATCHING: structure now matches retail; retail hoists the pool 0/1 counts and pointers (r7-r9, sl) out of the pool loop and selects them with register moves, the build loads them in place. */
 #include "gfx/TaggedRecordPools.h"
 
 extern "C" {
-extern TaggedRecordPools DAT_00446fec;
+extern TaggedRecordPools g_mapCollision;
 extern TaggedPoolRecord g_collisionPlaneTable[];
 
 // Disable every matching tag in the four dynamic record pools and the static pool.
@@ -11,13 +11,27 @@ void FUN_002878fc(s32 tag)
     if (tag == 0)
         return;
     for (s32 pool = 0; pool < 4; ++pool) {
-        TaggedPoolRecord *record = DAT_00446fec.pools[pool];
-        for (u32 remaining = DAT_00446fec.counts[pool]; remaining > 0; --remaining, ++record)
+        s32 count;
+        TaggedPoolRecord *record;
+        if (pool == 0) {
+            count = g_mapCollision.counts[0];
+            record = g_mapCollision.pools[0];
+        } else if (pool == 1) {
+            count = g_mapCollision.counts[1];
+            record = g_mapCollision.pools[1];
+        } else if (pool == 2) {
+            count = g_mapCollision.counts[2];
+            record = g_mapCollision.pools[2];
+        } else {
+            count = g_mapCollision.counts[3];
+            record = g_mapCollision.pools[3];
+        }
+        for (; count > 0; --count, ++record)
             if (record->tag == tag)
                 record->enabled = 0;
     }
     TaggedPoolRecord *record = g_collisionPlaneTable;
-    for (s32 remaining = DAT_00446fec.counts[4]; remaining > 0; --remaining, ++record)
+    for (s32 remaining = g_mapCollision.counts[4]; remaining > 0; --remaining, ++record)
         if (record->tag == tag)
             record->enabled = 0;
 }

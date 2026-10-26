@@ -42,7 +42,7 @@ void lmapSceneCreateEffect(void);
 int cameraUnregisterFixed(void);
 int textureReleaseActiveSlot(void);
 int mapObjClearEntry(void);
-int FUN_002d3e18(void);
+int mapIfDestroyModelManagers(void);
 
 int mapDepartFreeWork(void);
 int FUN_001a9574(void);
@@ -150,7 +150,7 @@ int FUN_00275dec(void);
 int battlePrepareEncounter(void);
 int FUN_00275e4c(void);
 int buttonHelpSelectMapPreset(void);
-int FUN_00275f8c(void);
+int mapCompleteActiveAndPendingGroups(void);
 int mapFlagSlotsRetireByKey(...);
 int gameCopyPersistentSave(void);
 int navigationApplyArguments(...);
@@ -550,7 +550,7 @@ extern char *campGetState(void);
 /* Supplied declaration required: battlePrepareEncounter. */
 /* Supplied declaration required: FUN_00275e4c. */
 /* Supplied declaration required: buttonHelpSelectMapPreset. */
-/* Supplied declaration required: FUN_00275f8c. */
+/* Supplied declaration required: mapCompleteActiveAndPendingGroups. */
 extern int FUN_00276060(unsigned int);
 /* Supplied declaration required: mapFlagSlotsRetireByKey. */
 extern int dataTable2fSub0GetRecord(int);
@@ -742,7 +742,7 @@ extern int mapMainPollScript(void);
 /* Supplied declaration required: mapEnemyRestartIdleEntries. */
 extern int FUN_002d2b40(void);
 extern int FUN_002d3b20(void);
-/* Supplied declaration required: FUN_002d3e18. */
+/* Supplied declaration required: mapIfDestroyModelManagers. */
 /* Supplied declaration required: FUN_002d3e88. */
 /* Supplied declaration required: mapEnemyEndEligibleStates. */
 extern int mapEnemyIsModeTwo(void);
@@ -2241,7 +2241,7 @@ LAB_001ba78c:
                                                     if (temp_v9 != 0xff) {
                                                       gameMapBitSet(DAT_0049f9c4,1);
                                                       navigationFinishReadyField();
-                                                      FUN_00275f8c();
+                                                      mapCompleteActiveAndPendingGroups();
                                                       temp_v9 = 0x22;
                                                       temp_v16 = 0;
                                                       puVar14[9] = temp_v9;
@@ -4338,7 +4338,7 @@ LAB_001bd824:
           uStack_1c4 = (unsigned int)DAT_0049fa19;
           uStack_1c8 = (unsigned int)DAT_0049fa18;
           naviRegisterTransitionsAndRequest(DAT_0049fa14,DAT_0049fa15,DAT_0049fa16,DAT_0049fa17);
-          FUN_00275f8c();
+          mapCompleteActiveAndPendingGroups();
           if (DAT_0049f968 == 0) {
             lmapSetSceneId();
             *(unsigned char *)((int)puVar14 + 0x47) = 1;
@@ -4821,7 +4821,7 @@ LAB_001be80c:
     }
     FUN_0027fc14(0);
     FUN_00273840(0);
-    FUN_00275f8c();
+    mapCompleteActiveAndPendingGroups();
     FUN_0027d7b0(DAT_0049f990,DAT_0049f994,DAT_0049f998);
     pcVar13 = (char *)dataTableGetRecord23();
     temp_v9 = (int)*pcVar13;
@@ -4970,7 +4970,7 @@ LAB_001bec78:
         return 0;
       }
     }
-    FUN_00275f8c();
+    mapCompleteActiveAndPendingGroups();
     if ((int)DAT_0049f990 >= 200) {
       puVar14[9] = 0x6f;
       mapDepartSetTarget(DAT_0049f990,0);
@@ -5198,7 +5198,7 @@ LAB_001bec78:
     objectDestroyModelManager();
     asdMdlBanksDestroyAll();
     gfxDestroyModelGroups();
-    FUN_002d3e18();
+    mapIfDestroyModelManagers();
     mapEplFree();
     temp_v9 = puVar14[9] + 1;
     puVar14[9] = temp_v9;
@@ -5580,7 +5580,7 @@ joined_r0x001bfcb4:
     if (temp_v9 == 0) {
       return 0;
     }
-    FUN_00275f8c();
+    mapCompleteActiveAndPendingGroups();
     temp_v9 = 0x6f;
     temp_v16 = 0;
     puVar14[9] = temp_v9;
@@ -5673,7 +5673,7 @@ joined_r0x001bfcb4:
       objectDestroyModelManager();
       asdMdlBanksDestroyAll();
       gfxDestroyModelGroups();
-      FUN_002d3e18();
+      mapIfDestroyModelManagers();
       mapTableRelease();
       mapEplFree();
       mapObjClearEntry();

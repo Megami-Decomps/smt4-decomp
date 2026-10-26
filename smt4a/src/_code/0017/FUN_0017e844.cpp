@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r0, [pc, #152] differs from recovered ldr r0, [pc, #156]. */
+/* NON_MATCHING: head and the default-format stores match retail; retail saves r8 as well (unused) and allocates the loop constants (4 in r3, 0x1406 in ip, the zero copy in r1) differently. */
 #include "common.h"
 
 struct GfxAttributeFormatLocalView {
@@ -39,15 +39,17 @@ void sysMemClear(void* destination, u32 size);
 // Allocate and clear the graphics state, then initialize its sixteen entry defaults.
 GfxStateLocalView* FUN_0017e844(void)
 {
-    GfxStateLocalView* state = 0;
-    if (g_gfxAllocateCallback) {
+    GfxStateLocalView* state;
+    if (!g_gfxAllocateCallback) {
+        state = 0;
+    } else {
         state = static_cast<GfxStateLocalView*>(
             g_gfxAllocateCallback(0x10000, 0x100, 0, 0x348));
         if (state) {
             sysMemClear(state, 0x348);
-            const GfxAttributeFormatLocalView defaultFormat = {4, 0x1406};
             for (s32 index = 0; index < 16; ++index) {
-                state->unk000[index].unk04 = defaultFormat;
+                state->unk000[index].unk04.unk00 = 4;
+                state->unk000[index].unk04.unk04 = 0x1406;
                 state->unk188[index].unk08 = 0.0f;
                 state->unk188[index].unk04 = 0.0f;
                 state->unk188[index].unk00 = 0.0f;

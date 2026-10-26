@@ -1,11 +1,11 @@
-/* NON_MATCHING: typed text-write accessor introduces an explicit halfword conversion and different per-mode increment tails. */
+/* NON_MATCHING: u16 param/text fix conversions; remaining diff is switch-value register (r2 vs r0) and shared tail block base load order. */
 #include "shard/W6_W6Match8_TextHistory.h"
 
 extern "C" {
 extern RenderChannelState g_inputResetState;
 
 // Append text-history characters or capture byte-swapped text between the capture control codes.
-void textHistoryAppendCodepoint(u32 codepoint)
+void textHistoryAppendCodepoint(u16 codepoint)
 {
     if (!g_inputResetState.enabled || !g_inputResetState.ready) {
         return;

@@ -1,4 +1,5 @@
 /* NON_MATCHING: retail computes the scene address before the position call and keeps it in r4, copies the position pair with two ldr/str pairs (the copy is overwritten right after), loads 1.0f separately from the sprite fade value and loads g_gameState once up front; this build copies with ldrd/strd, shares the 1.0f in s16 and reloads g_gameState. */
+#include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "map/NavigationFadeWork.h"
 
 struct GameStateFade {
@@ -11,7 +12,6 @@ struct GameStateFade {
 extern "C" {
 extern GameStateFade g_gameState;
 void uiPlayGatedActionFeedback(void);
-s32 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 void FUN_00163aa4(UiAnimatedSprite *sprite, f32 value);
 NavigationPoint *sub68OwnerGetBlock60(void);
 void naviMainSetValuePair(void *scene, const NavigationPoint *position);

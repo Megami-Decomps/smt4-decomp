@@ -1,17 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001d07e0` (_code @ 0x1d07e0, 0x14 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-
-unsigned int FUN_001d07e0(unsigned int param_1)
-
+/* Passes 0 and 1 through, anything else becomes 3. */
+extern "C" u32 FUN_001d07e0(u32 value)
 {
-  if (param_1 >= 2) {
-    param_1 = 3;
-  }
-  return param_1;
+    if (value == 0 || value == 1) {
+        return value;
+    }
+    return 3;
 }
-
-} /* extern "C" */

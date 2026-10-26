@@ -1,5 +1,4 @@
-/* NON_MATCHING: selection-roll result stores are combined and category address registers differ. */
-#include "nn/Result.h"
+/* NON_MATCHING: the duration add, the element base address (computed before the total query) and the clamp now match retail; retail keeps no zero register (state/frame stores are separate, the last two result words are two stm pairs) where the build merges them into one stm with a hoisted zero. */
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
 struct SelectionRollGroup {
@@ -34,20 +33,21 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
     work->state = 0;
     work->mode = mode;
     s32 duration = flaggedEntryGetValueByState(&work->holders[work->category]);
-    s32 category = work->category;
-    duration += (category == 7 || category == 8) ? 1 : 2;
-    s32 selected = flaggedValueHolderGetTotal(&work->holders[category]);
-    u16 *entry = &work->groups[category].values[selected * 2];
+    duration = (work->category == 7 || work->category == 8) ? duration + 1 : duration + 2;
+    u16 *values = work->groups[work->category].values;
+    s32 selected = flaggedValueHolderGetTotal(&work->holders[work->category]);
+    u16 *entry = &values[selected * 2];
     s32 result;
     if (work->category != 8) {
         result = btlRollClamped(*entry, FUN_00230e04(entry));
     } else {
-        result = FUN_0028fb3c(*entry);
-        if (nnResultIsFailure(result)) {
-            result = 0;
-        } else if (result >= 100) {
-            result = 99;
+        s32 value = FUN_0028fb3c(*entry);
+        if (value < 0) {
+            value = 0;
+        } else if (value > 99) {
+            value = 99;
         }
+        result = value;
         if (FUN_00230b90(work, *entry)) {
             --result;
         }

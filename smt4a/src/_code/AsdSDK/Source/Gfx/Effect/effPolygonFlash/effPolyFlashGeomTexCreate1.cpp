@@ -1,4 +1,3 @@
-/* NON_MATCHING: payload-size arithmetic, allocation setup and geometry/texture register allocation differ from retail. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -13,19 +12,23 @@ u32 sysGetTableWord(int id);
 void refCountIncrement(u32 texture);
 extern u8 DAT_005c1f82;
 
+/* Allocates a geometry block (16-byte header plus `payloadBytes`), recording the allocation site first. */
+static PolyGeomBlock *allocGeomBlock(u32 payloadBytes, s32 line)
+{
+    asdDebugTrace(DAT_00544ba8, line);
+    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadBytes + 0x10, 0x10, 1);
+    block->data = block->payload;
+    block->self = block;
+    return block;
+}
+
 /* Builds a polygon effect's textured geometry block (the given texture, or a default one) and gives each segment alternating texture coordinates. */
 PolyGeomBlock *effPolyFlashGeomTexCreate1(PolyParams *params, void *texture)
 {
     PolyGeom *geom;
-    PolyGeomBlock *block;
-    u32 segments;
-    u32 payloadSize = params->segments * 0x18;
 
-    asdDebugTrace(DAT_00544ba8, 1641);
-    block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, payloadSize + 0x10, 0x10, 1);
+    PolyGeomBlock *block = allocGeomBlock(params->segments * 0x18, 1641);
 
-    block->data = block->payload;
-    block->self = block;
     geom = FUN_002b3b58(params->segments & 0xffff, 2, 4, &DAT_005c1f82, 76);
     block->geom = geom;
     if (texture == NULL) {
@@ -34,7 +37,7 @@ PolyGeomBlock *effPolyFlashGeomTexCreate1(PolyParams *params, void *texture)
     } else {
         textureSlotReplace(geom, texture);
     }
-    segments = params->segments;
+    u32 segments = params->segments;
     if (segments != 0) {
         PolyQuadUV *uv = block->geom->buf->uv;
         u32 i;

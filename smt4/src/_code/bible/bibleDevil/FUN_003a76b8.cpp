@@ -1,4 +1,4 @@
-/* NON_MATCHING: preview state stores, list-entry base caching and party/preview branch placement differ. */
+/* NON_MATCHING: arm placement, cached entry base and id extensions now match retail; remaining: retail delays the preview arm's id sign-extension (ldrh ... sxth) and stores the phase/source bytes in a different order. */
 #include "classes/Obj42247c.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/UnitStats.h"
@@ -22,6 +22,7 @@ extern s32 DAT_0043d9c8[2];
 void FUN_003a76b8(Obj42247c *view)
 {
     // The concrete compendium view's source flag and entry array extend past the shared base.
+    struct DetailEntry { u32 unk00; u16 id; u8 unk06[0x1a]; };
     struct DetailView {
         u8 prefix[0x14];
         u32 phase, timer;
@@ -35,7 +36,7 @@ void FUN_003a76b8(Obj42247c *view)
         CompendiumPreviewHandle *preview;
         u8 fromParty, source;
         u8 unk5A6[2];
-        struct { u32 unk00; u16 id; u8 unk06[0x1a]; } entries[1];
+        DetailEntry entries[1];
     };
     typedef char LayoutCheck[__INTADDR__(&((DetailView *)0)->input) == 0x96 &&
         __INTADDR__(&((DetailView *)0)->entries) == 0x5a8 ? 1 : -1];
@@ -47,12 +48,9 @@ void FUN_003a76b8(Obj42247c *view)
         state->phase = 1;
         state->timer = 0;
         state->source = 1;
-        if (state->fromParty != 0) {
-            u16 id = state->entries[flaggedValueHolderGetTotal(&state->selection)].id;
-            buttonHelpSetPreset(0x4c);
-            FUN_0029da34(0, 1, id, partyMemberFindById(id));
-        } else {
-            s16 id = state->entries[flaggedValueHolderGetTotal(&state->selection)].id;
+        DetailEntry *entries = state->entries;
+        if (!(state->fromParty != 0)) {
+            s16 id = entries[flaggedValueHolderGetTotal(&state->selection)].id;
             s32 cost = FUN_0029ce60(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-cost, 0);
@@ -60,6 +58,10 @@ void FUN_003a76b8(Obj42247c *view)
             StatBlock unit;
             unitInitializeFromSavedRecord(static_cast<u16>(id), &unit);
             FUN_0029da34(0, 1, static_cast<u16>(id), &unit);
+        } else {
+            s16 id = entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            buttonHelpSetPreset(0x4c);
+            FUN_0029da34(0, 1, static_cast<u16>(id), partyMemberFindById(static_cast<u16>(id)));
         }
         FUN_00233240(state->timers, 0);
         FUN_00233240(state->timers, 1);

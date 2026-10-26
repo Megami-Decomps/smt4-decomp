@@ -1,4 +1,4 @@
-/* NON_MATCHING: build recognizes the byte swap as `rev` (retail has the shift/or sequence), hoists the slot value address and builds the owner base pointer with a separate null test. */
+/* NON_MATCHING: owner test, the lookup-table base (UiLookupTable at +0x3c), slot value/state pointers and the non-`rev` byte swap now match retail; the swap's masks are materialised differently (retail keeps 0xFF in a register) and the lookup key lives in r1 in retail (here r0, so a redundant move). */
 #include "common.h"
 #include "shard/S3UiLookup.h"
 
@@ -18,7 +18,7 @@ void FUN_0040683c(UiLookupObj *obj)
 {
     UiOwnerBase *owner = obj->owner != NULL ? &obj->owner->base : NULL;
 
-    if (obj->owner == NULL || owner == NULL) {
+    if (owner == NULL) {
         return;
     }
     UiNameSlots *slots = *owner->context->slots;
@@ -28,12 +28,13 @@ void FUN_0040683c(UiLookupObj *obj)
         bool recorded = false;
 
         for (u32 i = 0; i < list->count; i++) {
-            UiContext *context = owner->context;
             const u16 *name = list->names[i];
-            u32 key = FUN_001a7a20(context->dictionary, name, libc_strlen(name));
+            UiContext *context = owner->context;
+            UiLookupTable *lookup = &context->lookup;
+            u32 key = FUN_001a7a20(lookup->dictionary, name, libc_strlen(name));
 
             if (key != UILOOKUP_NOT_FOUND) {
-                UiFoundEntry *entry = owner->context->entries[key];
+                UiFoundEntry *entry = owner->context->lookup.entries[key];
 
                 if ((entry->flags & 8) != 0) {
                     FUN_004064a8(obj, slot, entry, *owner->context->handle);
@@ -41,9 +42,11 @@ void FUN_0040683c(UiLookupObj *obj)
                     u32 value = entry->value;
 
                     recorded = true;
-                    obj->values[slot].value = SWAP32(value);
-                    obj->values[slot].set = 1;
-                    obj->slots[(u16)slot].flags |= 1;
+                    UiSlotValue *slotValue = &obj->values[slot];
+                    slotValue->value = (value << 24) + (((value >> 8) & 0xFF) << 16) + (((value >> 16) & 0xFF) << 8) + (value >> 24);
+                    slotValue->set = 1;
+                    UiSlotState *slotState = &obj->slots[(u16)slot];
+                    slotState->flags |= 1;
                 }
             }
         }

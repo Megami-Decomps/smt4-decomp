@@ -1,4 +1,4 @@
-/* NON_MATCHING: stack placement now matches (text buffer declared first); centered-text FP scheduling (retail uses separate vldr for origin.x/y, build uses vldm) and completion-flag addressing differ. */
+/* NON_MATCHING: stack placement matches and the completion getter call matches; centered-text FP scheduling differs (retail uses separate vldr for origin.x/y, build uses vldm). */
 #include "shard/Shard0033.h"
 #include "shard/S1ListPanel.h"
 #include "text/TextDraw.h"
@@ -29,6 +29,7 @@ void FUN_00164b5c(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 f32 FUN_00168594(const char* text, u32 kind, f32 spacing);
 void FUN_00163aa4(UiSpriteState* animation, f32 step);
+s8 uiSpriteGetCompletionState(const UiSpriteState* sprite);
 
 void FUN_0048b260(ObjB* work)
 {
@@ -53,7 +54,7 @@ void FUN_0048b260(ObjB* work)
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
     FUN_00163aa4(&hint->animation, 1.0f);
-    if (hint->requested && hint->animation.animationFlags.completed) {
+    if (hint->requested && uiSpriteGetCompletionState(&hint->animation)) {
         hint->finished = 1;
     }
 }

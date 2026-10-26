@@ -45,7 +45,7 @@ class Obj4209cc : public Obj4209ccBase {
 public:
     Obj4209cc();
     virtual ~Obj4209cc();
-    static void operator delete(void *block) { asdMemFreeNonNull(block); }
+    static void operator delete(void *block);
 
     /* Destroys and releases the two rows of parts, releases each model of the model list and
      * deletes the list (Apocalypse; see models()). */

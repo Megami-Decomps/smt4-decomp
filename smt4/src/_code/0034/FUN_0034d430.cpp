@@ -1,7 +1,25 @@
-/* NON_MATCHING: Scratch-buffer address calculations and loop load/store register allocation differ. */
+/* NON_MATCHING: parameter copy (ldm/stm), scratch-struct members and stack layout now follow retail; armcc folds the 0x4C target block base and keeps a copy of sp (r8) where retail addresses sp directly. */
 #include "common.h"
 #include <stddef.h>
 #include "shard/W9_W9Match8_WorkRecords.h"
+
+struct ParameterTriple { u32 words[3]; };
+// The target's parameter block starts at 0x4C.
+struct TargetBlock {
+    u8 unk00[0x30];
+    ParameterTriple parameters;
+    u32 flags;
+};
+struct TargetView {
+    u8 unk00[0x4C];
+    TargetBlock block;
+};
+
+static void targetSetParameters(TargetBlock *block, const ParameterTriple &parameters)
+{
+    block->parameters = parameters;
+    block->flags |= 0x800;
+}
 
 extern "C" {
 void effectComputeScaledImageBounds(u32 key, u32 *output);
@@ -24,8 +42,12 @@ void FUN_0034d430(ParameterUpdatePrefixIV *state, u32 key, f32 amount)
     };
     // These views identify observed accesses, not complete descriptor sizes.
     struct ScratchView {
-        u32 words[0x358 / 4];
-        u32 parameters[3];
+        u8 head[0x208];
+        SourceView source;           // 0x208
+        u32 unk238[(0x2B4 - 0x238) / 4];
+        ApplyView destination;       // 0x2B4
+        u8 unk2E0[0x358 - 0x2E0];
+        ParameterTriple parameters;  // 0x358
     };
     typedef char SourceOffsets[
         offsetof(SourceView, auxiliary) == 8 &&
@@ -36,6 +58,8 @@ void FUN_0034d430(ParameterUpdatePrefixIV *state, u32 key, f32 amount)
         offsetof(ApplyView, target) == 0x28 &&
         sizeof(ApplyView) == 0x2C ? 1 : -1];
     typedef char ScratchOffsets[
+        offsetof(ScratchView, source) == 0x208 &&
+        offsetof(ScratchView, destination) == 0x2B4 &&
         offsetof(ScratchView, parameters) == 0x358 &&
         sizeof(ScratchView) == 0x364 ? 1 : -1];
 
@@ -43,28 +67,19 @@ void FUN_0034d430(ParameterUpdatePrefixIV *state, u32 key, f32 amount)
     state->amount = amount;
 
     ScratchView scratch;
-    effectComputeScaledImageBounds(key, scratch.parameters);
+    effectComputeScaledImageBounds(key, scratch.parameters.words);
     if (state->binding != 0) {
-        SourceView *source = reinterpret_cast<SourceView *>(
-            &scratch.words[0x208 / 4]);
-        ApplyView *destination = reinterpret_cast<ApplyView *>(
-            &scratch.words[0x2B4 / 4]);
-
         for (s32 index = 0; index < 3; ++index) {
-            ParameterTargetPrefixIV *target =
-                state->binding->collection->targets[index];
-            target->parameters[0] = scratch.parameters[0];
-            target->parameters[1] = scratch.parameters[1];
-            target->parameters[2] = scratch.parameters[2];
-            target->flags |= 0x800;
+            targetSetParameters(&reinterpret_cast<TargetView *>(
+                state->binding->collection->targets[index])->block, scratch.parameters);
 
-            source->auxiliary = &scratch.words[0x2B0 / 4];
-            destination->target = state->binding->collection->targets[index];
-            FUN_003108b0(scratch.words, source);
+            scratch.source.auxiliary = &scratch.unk238[(0x2B0 - 0x238) / 4];
+            scratch.destination.target = state->binding->collection->targets[index];
+            FUN_003108b0(&scratch, &scratch.source);
 
-            destination->source = source;
-            source->target = state->binding->collection->targets[index];
-            FUN_0032360c(destination, state->key, scratch.words);
+            scratch.destination.source = &scratch.source;
+            scratch.source.target = state->binding->collection->targets[index];
+            FUN_0032360c(&scratch.destination, state->key, &scratch);
         }
     }
 }

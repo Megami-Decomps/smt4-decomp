@@ -1,2 +1,9 @@
-/* NON_MATCHING: found outside every function: its address is in _ZTV9Obj4223f8; not written yet. */
-#include "common.h"
+#include "classes/Obj4223f8.h"
+
+/* Runs the state handler of the current step, when it has one. */
+void Obj4223f8::unk0c()
+{
+    if (handlers[0][step] != NULL) {
+        (this->*handlers[0][step])();
+    }
+}

@@ -4262,3 +4262,9 @@
 00269bf0 btlLinkGetMaxHp inferred [med] max HP of the active unit linked to a record (flag 8), sibling of btlSourceGetMaxHp
 00312148 btlScriptAnySelectedPositiveStat inferred [high] sibling of btlScriptAnySelectedNegativeStat (stat >= 1)
 0032b278 effectFilterChannelsByCategory inferred [med] sibling of recordFilterMaskByKind (category at +0x38)
+001c0400 jyoucyuLoadStep inferred [high] per-frame resource loading state machine of the jyoucyu process
+002486a8 mapCellMarkNeighborsState2 inferred [med] marks the cell and its four neighbours when their state is 2 (twin smt4a FUN_00371068)
+002d3e18 mapIfDestroyModelManagers inferred [high] destroys the two slot model managers (g_mapIf +0xCC90/+0xCC94) and clears them
+00275f8c mapCompleteActiveAndPendingGroups inferred [med] sets the completed-group bit of the active and pending group ids and clears their live state
+0033a2c4 btlFindEntrySelectionByKey inferred [med] returns selectionIndex of first battle entry whose lookup key (+0xd4) equals key, else -1
+003b0cf4 moLivePlayerReleaseIdleStreams inferred [high] smt4 twin of smt4a MoLivePlayer::releaseIdleStreams: clears active flag of used streams, erases idle ones

@@ -1,4 +1,4 @@
-/* NON_MATCHING: aggregate vector copies and matrix temporary stack allocation differ from retail. */
+/* NON_MATCHING: the shared member-wise vector copy now matches retail (ported from smt4 FUN_00246afc); the stack layout differs (retail: vector at sp+4 then the three matrices, 220-byte frame, &matrix cached in r7) and is independent of declaration order. */
 #include "shard/X14_ModelTransform.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexTMX.h"
 
@@ -17,11 +17,14 @@ void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, u32 flags)
 // Compose optional scale, rotation and translation, then install the model transform.
 void FUN_00338330(TransformOwnerA *owner, const TransformVec3 *translation, const void *rotationSource, const TransformVec3 *scale)
 {
+    TransformVec3 value;
     TransformMtx44 scaleMatrix;
     TransformMtx44 matrix;
     TransformRotation rotation;
     if (scale) {
-        TransformVec3 value = *scale;
+        value.x = scale->x;
+        value.y = scale->y;
+        value.z = scale->z;
         mathMatrixApplyScale(reinterpret_cast<f32 *>(&scaleMatrix), reinterpret_cast<const f32 *>(&value), 0);
     } else {
         matrix44SetIdentity(&scaleMatrix);
@@ -33,7 +36,9 @@ void FUN_00338330(TransformOwnerA *owner, const TransformVec3 *translation, cons
         matrixCopyFull(&matrix, &scaleMatrix);
     }
     if (translation) {
-        TransformVec3 value = *translation;
+        value.x = translation->x;
+        value.y = translation->y;
+        value.z = translation->z;
         FUN_002a2048(&matrix, &value, 2);
     }
     matrixApplyByMode(owner->transform, &matrix, 0);

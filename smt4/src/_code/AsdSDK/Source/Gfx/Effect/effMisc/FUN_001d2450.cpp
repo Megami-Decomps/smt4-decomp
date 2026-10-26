@@ -1,4 +1,4 @@
-/* NON_MATCHING: Particle allocation argument scheduling, saved registers, and resource-ID zero extension differ. */
+/* NON_MATCHING: the shared size constant (r8) and the resource-kind uxth now match (plain static allocate-and-clear helper, u32 kind); retail reloads source->resource->definition for the count multiplier instead of reusing the definition pointer and allocates source/definition/count in r5/r6/r7. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -15,6 +15,14 @@ void *FUN_002691d8(u16 kind, u32 count,
                     ParticleDefinitionPrefixIV *definition);
 void *FUN_00268fc4(void *source);
 
+static ParticleInstanceIV *allocateParticleInstance(u32 size)
+{
+    asdDebugTrace(DAT_00410380, 450);
+    ParticleInstanceIV *instance = static_cast<ParticleInstanceIV *>(memAlloc(0x10000, 0x100, 0, size, 0x10, 1));
+    rt_memclr(instance, size);
+    return instance;
+}
+
 ParticleInstanceIV *FUN_001d2450(ParticleSourcePrefixIV *source)
 {
     ParticleDefinitionPrefixIV *definition = source->resource->definition;
@@ -25,15 +33,12 @@ ParticleInstanceIV *FUN_001d2450(ParticleSourcePrefixIV *source)
     if (count > 300)
         count = 300;
 
-    asdDebugTrace(DAT_00410380, 450);
-    ParticleInstanceIV *instance = static_cast<ParticleInstanceIV *>(
-        memAlloc(0x10000, 0x100, 0, sizeof(ParticleInstanceIV), 0x10, 1));
-    rt_memclr(instance, sizeof(ParticleInstanceIV));
+    ParticleInstanceIV *instance = allocateParticleInstance(sizeof(ParticleInstanceIV));
     instance->index = -1;
     instance->count = count;
     instance->scale = 1.0f;
 
-    u16 kind = source->resource->kind;
+    u32 kind = source->resource->kind;
     if (instance->objectBuffer != 0)
         objectBufferFree(instance->objectBuffer);
     instance->objectBuffer = FUN_002691d8(kind, instance->count, definition);

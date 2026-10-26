@@ -1,11 +1,10 @@
-/* NON_MATCHING: CEC buffer stack placement, Result tests, and virtual-call/register scheduling differ. */
+/* NON_MATCHING: scoped lock matches retail; the build hoists &info into an extra saved register (r8) and tests Result with a masked compare (retail: ands/bmi), shifting registers and the frame by a word. */
 #include "shard/W6_W6Match6_CecMessageBox.h"
 #include "nn/Result.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
-extern u32 g_asdCecMessageBoxCriticalSection;
-void nn_os_CriticalSection_Enter(void *section);
-void nn_os_CriticalSection_Leave(void *section);
+extern CriticalSection g_asdCecMessageBoxCriticalSection;
 s32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(AsdCecMessageBox *box);
 s32 nn_cec_CTR_MessageBox_WriteBoxInfo(AsdCecMessageBox *box, s32 kind, CecMessageIndexHeader *header, AsdCecMessageId *ids);
 
@@ -20,9 +19,8 @@ s32 FUN_00358664(AsdCecMessageBox *box, s32 kind)
         s32 (*refresh)(AsdCecMessageBox *, u32 id, u32 first, u32 second, u32 third);
     };
     CecMessageBoxOpenView *view = reinterpret_cast<CecMessageBoxOpenView *>(box);
-    nn_os_CriticalSection_Enter(&g_asdCecMessageBoxCriticalSection);
+    ScopedCriticalLock lock(&g_asdCecMessageBoxCriticalSection);
     if (view->id == 0) {
-        nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
         return static_cast<s32>(0xc8810bea);
     }
     u32 info[2];
@@ -44,7 +42,6 @@ s32 FUN_00358664(AsdCecMessageBox *box, s32 kind)
                 nn_cec_CTR_MessageBox_ReadOutBoxIndex(box);
         }
     }
-    nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);
     return result;
 }
 }

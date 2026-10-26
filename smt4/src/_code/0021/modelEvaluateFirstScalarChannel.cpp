@@ -1,4 +1,4 @@
-/* NON_MATCHING: the interpolation callback takes its start/end as one by-value ScalarRange pair (vldmia) and the nullable endpoint guard now matches; remaining: the channel lookup chain uses writeback loads and the dirty/previous stores are scheduled differently. */
+/* NON_MATCHING: the channel lookup chain (table, index, stride, targets) and the nullable endpoint guard match; retail keeps the constant channel 0 in a register (mla r0,r0,r3,r2 with r2 = 0) where armcc folds it into a plain mul, and the callback load/vldmia and dirty/previous stores are scheduled differently. */
 #include "shard/Shard0034.h"
 
 /* Evaluate the first scalar channel, clamping time to the channel's endpoint. */

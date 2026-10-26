@@ -1,5 +1,6 @@
-/* NON_MATCHING: result-code checks, completion-handle stack initialization, and drain-loop register allocation differ. */
+/* NON_MATCHING: register numbering and the argument/stack-initialisation scheduling differ (retail stores the zero arguments and the completion word with one stm and keeps the drain flag in r5) */
 #include "common.h"
+#include "nn/Result.h"
 
 struct CecCompletionQueue {
     u8 unk000[0x78];
@@ -13,7 +14,7 @@ struct CecCompletionQueue {
 extern "C" {
 extern CecCompletionQueue *g_cecProcess;
 s32 FUN_002c40f8(s32 *, const u32 *, s32, s32, u32, u32);
-void FUN_002c526c(u32, u32);
+void FUN_002c526c(s32, bool);
 bool nn_os_CriticalSection_TryEnter(void *);
 void nn_os_CriticalSection_Leave(void *);
 }
@@ -21,30 +22,38 @@ void nn_os_CriticalSection_Leave(void *);
 /* Poll the worker completion handle and consume completed queued notifications. */
 extern "C" u32 FUN_002cd680(void)
 {
+    u32 drained = 0;
     CecCompletionQueue *queue = g_cecProcess;
-    if (queue == NULL) {
-        return 0;
-    }
-    u32 completion = queue->completion;
-    if (completion != 0) {
-        s32 index;
-        u32 result = FUN_002c40f8(&index, &completion, 1, 0, 0, 0);
-        if (result < 0) {
-            FUN_002c526c((u32)result, 1);
-        }
-        if (((u32)result & 0x3FF) == 0x3FE) {
-            if (!nn_os_CriticalSection_TryEnter(queue->lock)) {
-                return 0;
+
+    if (queue != NULL) {
+        u32 completion = queue->completion;
+        bool timedOut = false;
+
+        if (completion != 0) {
+            s32 index;
+            s32 result = FUN_002c40f8(&index, &completion, 1, 0, 0, 0);
+            bool failed = nnResultIsFailure(result);
+            if (failed) {
+                FUN_002c526c(result, failed);
             }
-            if (queue->produced != queue->consumed) {
+            nnResultFields fields;
+            fields.value = result;
+            bool differs = fields.fields.description != 0x3FE;
+            timedOut = differs != 1;
+        }
+        if (timedOut) {
+            if (nn_os_CriticalSection_TryEnter(queue->lock)) {
+                if (queue->produced != queue->consumed) {
+                    ++queue->consumed;
+                }
+                nn_os_CriticalSection_Leave(queue->lock);
+            }
+        } else {
+            while (queue->consumed != queue->produced) {
                 ++queue->consumed;
             }
-            nn_os_CriticalSection_Leave(queue->lock);
-            return 0;
+            drained = 1;
         }
     }
-    while (queue->consumed != queue->produced) {
-        ++queue->consumed;
-    }
-    return 1;
+    return drained;
 }

@@ -1,12 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0019029c's literal pool; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_001b1aa8 for reference (not compiled; its own view of the boundaries):
-
-void FUN_001b1aa8(unsigned int *param_1)
-
-{
-  *param_1 = 0xffffffff;
-  param_1[1] = 0;
-  return;
-}
-*/
 #include "common.h"
+
+struct RangeState {
+    /* 0x00 */ s32 first;
+    /* 0x04 */ s32 second;
+};
+
+/* Resets the range to its unset state. */
+extern "C" void FUN_001b1aa8(RangeState *range)
+{
+    range->first = -1;
+    range->second = 0;
+}

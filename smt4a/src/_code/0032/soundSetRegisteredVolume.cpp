@@ -1,4 +1,4 @@
-/* NON_MATCHING: linked-list loop scheduling and volume argument allocation differ from retail. */
+/* NON_MATCHING: list-walk layout now matches retail (index test first, node check inside); retail keeps the volume in r1/node in r3 and skips the zero test after the >127 clamp, the build allocates them the other way. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 struct SoundHandleList {
@@ -13,7 +13,10 @@ extern "C" void FUN_0015e874(void *fader, u32 fadeId, f32 target);
 extern "C" void soundSetRegisteredVolume(s32 id, u32 volume, u32 fadeId)
 {
     AsdSndHandleNode *node = g_soundHandleList.head;
-    for (s32 index = 0; index < g_soundHandleList.count && node != NULL; ++index, node = node->next) {
+    for (s32 index = 0; index < g_soundHandleList.count; ++index, node = node->next) {
+        if (node == NULL) {
+            break;
+        }
         if (node->id == id) {
             node->unk0d = volume;
             f32 target;

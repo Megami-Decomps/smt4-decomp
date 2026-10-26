@@ -1,4 +1,4 @@
-/* NON_MATCHING: rectangle request occupies eight fewer stack bytes and aggregate rectangle copying is lowered differently. */
+/* NON_MATCHING: stack frame and member-wise rectangle copy now match retail; only the scheduling/registers of the id % 1000 frame lookup differ. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gfx/SpriteTextureRect.h"
 
@@ -11,6 +11,7 @@ struct TexturedRectangleRequest {
     s32 height, width;
     TexturedRectangle rectangle;
     u16 columns, rows;
+    u8 unk30[8];
 };
 extern "C" {
 void FUN_00184efc(TexNode *texture, const TexturedRectangleFrame *frame, const TexturedRectangleRequest *request, u32 flags);
@@ -19,6 +20,8 @@ void FUN_00184efc(TexNode *texture, const TexturedRectangleFrame *frame, const T
 void FUN_001849bc(u32 flags, u32 group, s32 id, u32 color, u64 payload, const TexturedRectangle *rectangle)
 {
     TexNode *texture = asdTMTexTableCallFileC(group, id);
+    const TexturedRectangleFrame *frames = *(const TexturedRectangleFrame **)texture->set;
+    const TexturedRectangleFrame *frame = &frames[id % 1000];
     TexturedRectangleRequest request;
     request.flags = flags;
     request.color = color;
@@ -30,11 +33,13 @@ void FUN_001849bc(u32 flags, u32 group, s32 id, u32 color, u64 payload, const Te
     request.rows = 1;
     if (rectangle) {
         request.flags |= 0x28000;
-        request.rectangle = *rectangle;
-        request.height = rectangle->bottom - rectangle->top;
-        request.width = rectangle->right - rectangle->left;
+        request.rectangle.left = rectangle->left;
+        request.rectangle.right = rectangle->right;
+        request.rectangle.top = rectangle->top;
+        request.rectangle.bottom = rectangle->bottom;
+        request.height = request.rectangle.bottom - request.rectangle.top;
+        request.width = request.rectangle.right - request.rectangle.left;
     }
-    const TexturedRectangleFrame *frames = *(const TexturedRectangleFrame **)texture->set;
-    FUN_00184efc(texture, &frames[id % 1000], &request, 0);
+    FUN_00184efc(texture, frame, &request, 0);
 }
 }

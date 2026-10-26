@@ -1,4 +1,4 @@
-/* NON_MATCHING: operation-start block placement and saved-profile copy/flag argument registers differ. */
+/* NON_MATCHING: block layout and instruction count now match retail; only register allocation of the profile copy (index in r2 vs r0) and the slot-flag store (r0/r1 swapped) differ */
 #include "saveLoadUI/SaveLoadControllerA.h"
 #include "script/scrScriptProcess.h"
 
@@ -47,7 +47,14 @@ void FUN_0041dcc0(SaveLoadControllerA *controller)
             else
                 work->operation.done = 1;
         }
-    } else if (work->operation.started) {
+    } else if (!work->operation.started) {
+        if (!work->operation.loading) {
+            work->operation.started = 1;
+            saveLoadProcessCreate(controller->selectedSlot + 1, 0);
+            scrRunOpcodesStub(work->operation.script);
+            work->timing.frame = 0;
+        }
+    } else {
         ++work->timing.frame;
         if (saveLoadThreadHasResult()) {
             if (work->operation.readyToFinish)
@@ -76,11 +83,6 @@ void FUN_0041dcc0(SaveLoadControllerA *controller)
                 scrScriptProcessStartEntry(work->operation.script, 6);
             }
         }
-    } else if (!work->operation.loading) {
-        work->operation.started = 1;
-        saveLoadProcessCreate(controller->selectedSlot + 1, 0);
-        scrRunOpcodesStub(work->operation.script);
-        work->timing.frame = 0;
     }
 }
 }

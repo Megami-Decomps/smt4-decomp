@@ -1,4 +1,4 @@
-/* NON_MATCHING: widget/opacity addressing, coordinate lifetimes and GPR allocation differ, and retail retains two opacity-load NOPs; optimization flags may explain them. */
+/* NON_MATCHING: widget address is spilled to the stack while the row base stays in fp (retail keeps the widget in r9 and spills the row base) and GPR allocation differs; the opacity read is the linker-inlined vec2GetSpeed. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 
@@ -31,6 +31,7 @@ struct PartyComparisonScene {
 
 extern "C" {
 void efctSetSpeed(f32);
+f32 vec2GetSpeed(const void *);
 s32 vec2GetXInt(const void *);
 s32 vec2GetYInt(const void *);
 SpriteInfo *asdTMTexTableEntryAt(u32, s32);
@@ -53,7 +54,7 @@ void campDrawPartyComparisonIndicators(PartyComparisonScene *scene, s32 forceFul
         s32 y = vec2GetYInt(scene->origin) + localY + offsetY;
         if (!scene->suppressed[row]) {
             if (scene->faded[row])
-                efctSetSpeed(scene->widgets[row + 5].opacity);
+                efctSetSpeed(vec2GetSpeed(&scene->widgets[row + 5]));
             if (scene->values[row] < scene->values[scene->selected]) {
                 FUN_002bf288(2, 0x15, 0x12, x, y, 0x1f);
                 FUN_002bf288(2, 0x15, scene->values[row] + 0x17, x, y, 0x24);

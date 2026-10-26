@@ -1,4 +1,4 @@
-/* NON_MATCHING: The action kind loads inside each mode branch instead of before it, changing saved registers and list addressing. */
+/* NON_MATCHING: kind now loaded once before the mode test and units index addressed directly (row count and push set match); only register allocation (kind in r0 vs retail r4, units base r4 vs r0) and the if-chain branch polarity remain. */
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 namespace {
@@ -24,15 +24,16 @@ u32 FUN_0027de98(BattleActionListState *state)
     if (state->count > 0) {
         s32 index = 0;
         do {
-            BattleListedAction *action = &state->actions[index];
+            s32 kind = state->actions[index].kind;
             if (state->mode == 0) {
-                if (action->kind != 4) {
+                if (kind != 4) {
                     return 1;
                 }
-                if ((state->units[action->unitIndex].groupMask & 0x1C0) == 0) {
+                if ((state->units[state->actions[index].unitIndex].groupMask & 0x1C0) == 0) {
                     return 1;
                 }
-            } else if (action->kind == 5) {
+            } else if (kind != 5) {
+            } else {
                 return 1;
             }
             ++index;

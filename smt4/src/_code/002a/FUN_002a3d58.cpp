@@ -1,13 +1,10 @@
-/* NON_MATCHING: Retail vldr s0, [pc, #116] differs from recovered vldr s0, [pc, #120]. */
+/* NON_MATCHING: the (-1, 0x80) pair is stored with stm (retail strd r0,r1) because the colour pointer sits in r0 instead of r2; the VFP colour copy matches now */
 #include "common.h"
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
 
 struct Float4LocalView {
-    f32 unk00; // 0x00
-    f32 unk04; // 0x04
-    f32 unk08; // 0x08
-    f32 unk0C; // 0x0C
+    f32 v[4];
 };
 
 struct PolyDefaultsLocalView {
@@ -34,17 +31,17 @@ void FUN_002a3d58(PolyDefaultsLocalView *record)
     memClear(record, 0x80);
 
     memset(&record->unk00, 0, sizeof(record->unk00));
-    record->unk00.unk0C = 1.0f;
+    record->unk00.v[3] = 1.0f;
 
     memset(&record->unk10, 0, sizeof(record->unk10));
-    record->unk10.unk0C = 1.0f;
+    record->unk10.v[3] = 1.0f;
 
     memset(&record->unk40, 0, sizeof(record->unk40));
-    record->unk40.unk0C = 1.0f;
-    record->unk40.unk04 = 5.0f;
+    record->unk40.v[3] = 1.0f;
+    record->unk40.v[1] = 5.0f;
 
     memset(&record->unk50, 0, sizeof(record->unk50));
-    record->unk50.unk0C = 1.0f;
+    record->unk50.v[3] = 1.0f;
 
     record->unk60 = 1.0f;
     record->unk74 = 1.0f;
