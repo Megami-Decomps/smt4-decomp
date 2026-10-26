@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/ComputeCountLimit.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 

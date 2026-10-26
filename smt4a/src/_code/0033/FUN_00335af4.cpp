@@ -1,7 +1,6 @@
 /* NON_MATCHING: entry-address operand registers and damage-call HP copy scheduling differ; remaining instructions match. */
 #include "battle/BtlMainAccess.h"
-#include "util/FUN_003ee0c0.h"
-#include "util/FUN_003ee0c0.h"
+#include "code/Code003e.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"

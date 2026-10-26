@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
-#include "util/FUN_0027d9e8.h"
+#include "code/Code0027.h"
 
 struct BattleMemberResources {
     u16 unk00;

@@ -1,6 +1,5 @@
 #include "nn/svc.h"
 #include "nn/Result.h"
-#include "util/CalleeContracts.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 struct AllocatorLock {

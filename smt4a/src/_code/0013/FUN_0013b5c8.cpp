@@ -1,6 +1,7 @@
 /* NON_MATCHING: connectivity initialization has different critical-section exit paths and register allocation. */
 #include "nn/Result.h"
 #include "common.h"
+#include "code/Code0014_Smt4a.h"
 
 struct ConnectivityInitState {
     u32 unk00;
@@ -13,7 +14,6 @@ extern u32 g_moduleCriticalSection4;
 extern const char DAT_00536c61[]; /* ac:u */
 void nn_os_CriticalSection_Enter(void *);
 void nn_os_CriticalSection_Leave(void *);
-s32 FUN_00146650(void);
 void FUN_0014668c(u32);
 s32 FUN_0016f864(void);
 s32 FUN_0016f988(u32 *, const char *, u32, u32);

@@ -2,7 +2,7 @@
 #include "battle/BattleMovementEffects.h"
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;

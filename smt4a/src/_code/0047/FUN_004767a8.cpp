@@ -33,12 +33,6 @@ typedef struct {
     unsigned int sp900; /* 0x900: local_900 */
 } param_1_stack;
 
-extern unsigned char LAB_00476bd8; /* 0x476bd8 */
-extern unsigned char LAB_00476be8; /* 0x476be8 */
-extern unsigned char LAB_00476bec; /* 0x476bec */
-extern unsigned char LAB_00476bfc; /* 0x476bfc */
-extern unsigned char LAB_00476c0c; /* 0x476c0c */
-extern unsigned char LAB_00476c1c; /* 0x476c1c */
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: FUN_001a1564. */
@@ -228,11 +222,11 @@ void FUN_004767a8(int param_1)
   *(unsigned int *)(temp_v0 + 0x45c) = uStack_bc;
   *(unsigned int *)(temp_v0 + 0x460) = uStack_b8;
   *(unsigned int *)(temp_v0 + 0x464) = uStack_b4;
-  stringFormatUnbounded(temp_v0 + 0x468,&LAB_00476be8,&LAB_00476bd8);
-  stringFormatUnbounded(temp_v0 + 0x4a8,&LAB_00476be8,&LAB_00476bec);
-  stringFormatUnbounded(temp_v0 + 0x4e8,&LAB_00476be8,&LAB_00476bfc);
-  stringFormatUnbounded(temp_v0 + 0x528,&LAB_00476be8,&LAB_00476c0c);
-  stringFormatUnbounded(temp_v0 + 0x568,&LAB_00476be8,&LAB_00476c1c);
+  stringFormatUnbounded(temp_v0 + 0x468,"%s","SET_SALE_INDEX");
+  stringFormatUnbounded(temp_v0 + 0x4a8,"%s","SET_SALE_NEW");
+  stringFormatUnbounded(temp_v0 + 0x4e8,"%s","SET_SALE_PRICE");
+  stringFormatUnbounded(temp_v0 + 0x528,"%s","SET_SALE_ECARD");
+  stringFormatUnbounded(temp_v0 + 0x568,"%s","SET_SALE_CHANGE");
   temp_v12[0] = temp_v0 + 0x368;
   temp_v12[1] = 9;
   if (*(int *)(temp_v0 + 0x364) != 0) {

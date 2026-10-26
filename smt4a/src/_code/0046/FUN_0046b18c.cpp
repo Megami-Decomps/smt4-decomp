@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ int libc_strcpy(unsigned char [64], unsigned int);
 int sysMemClear(unsigned int *, int);
 int buttonHelpSetSelectedId(int);
 int messageSetIndexedFlag(unsigned int, unsigned int);
-int FUN_003c1060(void);
 int FUN_003fe86c(...);
 int pickObjStart(unsigned int *, unsigned char *);
 int FUN_0046a278(unsigned int *, unsigned int);

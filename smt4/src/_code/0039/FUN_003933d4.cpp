@@ -1,6 +1,7 @@
 /* Draws an indexed resource record, using its intrinsic dimensions when requested. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0039_Smt4.h"
 
 extern "C" {
 void FUN_002a6d1c(void *parameters, u32 flags, u32 first, u32 second, u32 third);

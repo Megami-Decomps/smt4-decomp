@@ -59,8 +59,8 @@ public:
     /* 0x24 */ u32 unk24;
     /* 0x28 */ f32 basePosition[3];
     /* 0x34 */ u8 unk34[0xC];
-    /* 0x40 */ f32 scale[3];
-    /* 0x4C */ f32 rotation[3];
+    /* 0x40 */ f32 rotation[3];
+    /* 0x4C */ f32 scale[3];
     /* 0x58 */ s32 frames;
     /* 0x5C */ u8 unk5c[0xC];
     /* 0x68 */ Obj422318Child *child;

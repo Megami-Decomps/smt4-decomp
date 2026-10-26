@@ -1,8 +1,9 @@
 /* NON_MATCHING: occupied-slot flag address is selection + (work + 0x2ec) in retail (add r1,r4,#748; ldrb [r0,r1]); the build forms work + selection then adds the offset. */
 #include "common.h"
 #include <stddef.h>
-#include "util/CalleeContracts.h"
-#include "util/GameDataBlocksGetSaveData.h"
+#include "code/Code0023.h"
+#include "code/Code002c.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 void FUN_0023b45c(s32 enabled);

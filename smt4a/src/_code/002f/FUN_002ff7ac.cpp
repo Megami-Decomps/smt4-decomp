@@ -22,7 +22,7 @@ extern "C" {
 void FUN_002b4c30(XformMtx21a1a4 *dest, const XformMtx21a1a4 *src);
 void matrix44SetIdentity(XformMtx21a1a4 *mtx);
 void FUN_002a2048(XformMtx21a1a4 *mtx, const XformVec21a1a4 *translation, s32 order);
-void FUN_002a1fb4(void *dest, const XformMtx21a1a4 *mtx, s32 arg);
+void matrixApplyByMode(void *dest, const XformMtx21a1a4 *mtx, s32 arg);
 
 // Build base (or identity) x uniform scale x translation and store it into the owner's transform.
 void FUN_002ff7ac(XformOwner21a1a4 *owner, const XformVec21a1a4 *translation, const XformMtx21a1a4 *base,
@@ -43,7 +43,7 @@ void FUN_002ff7ac(XformOwner21a1a4 *owner, const XformVec21a1a4 *translation, co
         vec = *translation;
         FUN_002a2048(&mtx, &vec, 2);
     }
-    FUN_002a1fb4(owner->transform, &mtx, 0);
+    matrixApplyByMode(owner->transform, &mtx, 0);
 }
 
 } /* extern "C" */

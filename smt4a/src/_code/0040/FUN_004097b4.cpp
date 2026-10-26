@@ -1,6 +1,6 @@
 /* NON_MATCHING: armcc hoists the address of context->stereoMode into a callee-saved register (retail reloads [r4,#0x52c] twice), which pushes `mode` and `fade` onto the stack */
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 

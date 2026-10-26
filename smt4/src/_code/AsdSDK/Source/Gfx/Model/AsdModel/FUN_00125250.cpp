@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00125250` (_code @ 0x125250, 0xa98 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 
@@ -54,7 +55,6 @@ extern int DAT_004dad98; /* 0x4dad98 */
 /* Supplied declaration required: FUN_00131a2c. */
 /* Supplied declaration required: FUN_001411bc. */
 /* Supplied declaration required: FUN_00141a18. */
-extern int FUN_00145e10(void);
 extern int FUN_002af294(int, int);
 /* Supplied declaration required: _ZSt11remove_copyIPiS0_iET0_T_S2_S1_RKT1_. */
 /* Supplied declaration required: FUN_002c2968. */

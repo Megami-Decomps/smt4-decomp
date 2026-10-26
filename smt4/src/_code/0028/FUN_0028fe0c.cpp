@@ -13,7 +13,7 @@ void asdTextDrawDirectoryEntry(u32 text, s32 font, s32 mode, s32 x, s32 y, u32 d
 void asdTextDrawFormatted(u32 text, s32 font, s32 mode, s32 x, s32 y, const char *format, ...);
 u8 FUN_00241c40(int index);
 s32 FUN_003336dc(s32 quest, u32 state);
-u8 *FUN_002bcfc0(const u8 *source, u8 *output);
+u8 *textConvertToGlyphPairs(const u8 *source, u8 *output);
 void uiQuestCountDetailPages(s32 quest);
 
 // Populate title, optional detail and reward text from add-on or retail quest directories.
@@ -41,7 +41,7 @@ void FUN_0028fe0c(u16 quest, u32 state)
         s32 reward = FUN_003336dc(quest, state);
         if (reward < 0) {
             SecondarySortRecord *record = dataTable1bOr1cGetRecord(quest);
-            const u8 *text = FUN_002bcfc0(record->description.encoded, NULL);
+            const u8 *text = textConvertToGlyphPairs(record->description.encoded, NULL);
             asdTextDrawFormatted(menu->panel.texts[1], 3, -1, 0, 3, "%s", text);
         } else {
             asdTextDrawDirectoryEntry(menu->panel.texts[1], 3, -1, 0, 3, menu->panel.sysImages, reward);

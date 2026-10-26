@@ -16,7 +16,7 @@ int partyFindSlotById(...);
 int FUN_0023f900(void);
 int FUN_002a5e7c(...);
 int FUN_002cb84c(void);
-int FUN_002cc0c0(void);
+int partyPanelRefreshItemPreview(void);
 int sysMemClear(...);
 int FUN_002f8288(void);
 int FUN_0031d890(void);
@@ -224,7 +224,7 @@ extern unsigned short partyPanelGetSelectedDemonId(void);
 extern unsigned char FUN_002cad18(void);
 /* Supplied declaration required: FUN_002cb84c. */
 /* Supplied declaration required: FUN_002cbca8. */
-/* Supplied declaration required: FUN_002cc0c0. */
+/* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002cf5bc. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_002effbc(void);
@@ -2915,7 +2915,7 @@ LAB_0026700c:
           }
           temp_v4 = temp_v4 + 1;
         } while (temp_v4 < 0x18);
-        FUN_002cc0c0();
+        partyPanelRefreshItemPreview();
         temp_v10 = 1;
         temp_v14 = 10;
       }

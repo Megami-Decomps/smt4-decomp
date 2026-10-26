@@ -57,14 +57,6 @@ typedef struct {
     unsigned int sp88; /* 0x88: local_88 */
 } void_stack;
 
-extern unsigned char LAB_002a7940; /* 0x2a7940 */
-extern unsigned char LAB_002a7994; /* 0x2a7994 */
-extern unsigned char LAB_002a79d0; /* 0x2a79d0 */
-extern unsigned char LAB_002a79ec; /* 0x2a79ec */
-extern unsigned char LAB_002a7a14; /* 0x2a7a14 */
-extern unsigned char LAB_002a7a4c; /* 0x2a7a4c */
-extern unsigned char LAB_002a7a68; /* 0x2a7a68 */
-extern unsigned char LAB_002a7a7c; /* 0x2a7a7c */
 extern const UniteEffectParameterTables DAT_0052f360;
 extern int DAT_0057f2c4; /* 0x57f2c4 */
 
@@ -145,7 +137,7 @@ void FUN_002a74ac(void)
   if (*(short *)(temp_v0 + 0x1e) == 2) {
     if (*(char *)(temp_v0 + 0x20) != '\0') {
       temp_v3 = 0x20;
-      FUN_00178b04(0x20,&LAB_002a7940,0x6ea);
+      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ea);
       temp_v2 = 0;
       if (temp_v3 != 0) {
         temp_v2 = modelListInit();
@@ -154,13 +146,13 @@ void FUN_002a74ac(void)
       FUN_0040aa6c();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
       FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-      asdLoadFileWithSize(&LAB_002a7994,&temp_v5,1);
+      asdLoadFileWithSize("camp/jakyou_union2_ac.bch",&temp_v5,1);
       temp_v3 = 0x48;
-      FUN_00178b04(0x48,&LAB_002a7940,0x6ef);
+      FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6ef);
     }
     else {
       temp_v3 = 0x20;
-      FUN_00178b04(0x20,&LAB_002a7940,0x6f2);
+      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f2);
       temp_v2 = 0;
       if (temp_v3 != 0) {
         temp_v2 = modelListInit();
@@ -169,20 +161,20 @@ void FUN_002a74ac(void)
       FUN_0040aa6c();
       FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
       FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-      asdLoadFileWithSize(&LAB_002a79d0,&temp_v5,1);
+      asdLoadFileWithSize("camp/jakyou_union2.bch",&temp_v5,1);
       temp_v3 = 0x48;
-      FUN_00178b04(0x48,&LAB_002a7940,0x6f7);
+      FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x6f7);
     }
     if (temp_v3 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v0 + 0x98) = temp_v3;
-    FUN_003d2a00(&LAB_002a79ec);
+    FUN_003d2a00("tx_devil1");
     FUN_001fc348(temp_v0 + 0x38);
   }
   if (*(short *)(temp_v0 + 0x1e) == 3) {
     temp_v3 = 0x20;
-    FUN_00178b04(0x20,&LAB_002a7940,0x70c);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x70c);
     temp_v2 = 0;
     if (temp_v3 != 0) {
       temp_v2 = modelListInit();
@@ -191,19 +183,19 @@ void FUN_002a74ac(void)
     FUN_0040aa6c();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
     FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-    asdLoadFileWithSize(&LAB_002a7a14,&temp_v5,1);
+    asdLoadFileWithSize("camp/jakyou_union3.bch",&temp_v5,1);
     temp_v3 = 0x48;
-    FUN_00178b04(0x48,&LAB_002a7940,0x711);
+    FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x711);
     if (temp_v3 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v0 + 0x98) = temp_v3;
-    FUN_003d2a00(&LAB_002a79ec);
+    FUN_003d2a00("tx_devil1");
     FUN_001fc348(temp_v0 + 0x38);
   }
   if (*(short *)(temp_v0 + 0x1e) == 4) {
     temp_v3 = 0x20;
-    FUN_00178b04(0x20,&LAB_002a7940,0x723);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x723);
     temp_v2 = 0;
     if (temp_v3 != 0) {
       temp_v2 = modelListInit();
@@ -212,14 +204,14 @@ void FUN_002a74ac(void)
     FUN_0040aa6c();
     FUN_0040ab7c(*(unsigned int *)(temp_v0 + 0x90),0);
     FUN_0040aad4(*(unsigned int *)(temp_v0 + 0x90),0);
-    asdLoadFileWithSize(&LAB_002a7a4c,&temp_v5,1);
+    asdLoadFileWithSize("camp/jakyou_union4.bch",&temp_v5,1);
     temp_v3 = 0x48;
-    FUN_00178b04(0x48,&LAB_002a7940,0x728);
+    FUN_00178b04(0x48,"c:\\SMT4F\\SMT4F\\sdds4\\program\\camp\\Unite\\UniteEffect.cpp",0x728);
     if (temp_v3 != 0) {
       _ZN9Obj557af8C1EPK21AsdAnimCameraResource();
     }
     *(int *)(temp_v0 + 0x98) = temp_v3;
-    FUN_003d2a00(&LAB_002a79ec);
+    FUN_003d2a00("tx_devil1");
     FUN_001fc348(temp_v0 + 0x38);
   }
   temp_v3 = 0;
@@ -229,13 +221,12 @@ void FUN_002a74ac(void)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < (int)(unsigned int)*(unsigned short *)(temp_v0 + 0x1e));
   }
-  puVar4 = &LAB_002a7a68;
   asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 + 0x334) = puVar4;
   temp_v1 = (unsigned int)*(unsigned short *)(temp_v0 + 0xc);
   FUN_00184310();
   temp_v3 = FUN_003316b4((int)*(char *)(temp_v1 + 0x38));
-  textFormatBuffer(temp_v12,&LAB_002a7a7c,temp_v3 + 1);
+  textFormatBuffer(temp_v12,"battle/DevilMsg/%s.mbm",temp_v3 + 1);
   puVar4 = temp_v12;
   asdLoadFileSyncDefault();
   *(unsigned char **)(temp_v0 + 0x33c) = puVar4;

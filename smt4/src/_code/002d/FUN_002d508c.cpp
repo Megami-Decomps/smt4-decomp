@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 165 rows); register allocation and the stack frame (20 vs 24 bytes) differ */
 #include "common.h"
 #include "util/TrigF32.h"
-#include "util/FUN_00256540.h"
+#include "code/Code0025.h"
 
 struct Vec3f {
     f32 x, y, z;

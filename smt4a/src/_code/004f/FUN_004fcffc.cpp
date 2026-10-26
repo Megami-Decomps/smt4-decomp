@@ -9,7 +9,7 @@ ReflectedMemberStatusA *FUN_001568f8(void *battle, s32 member);
 
 
 // Queue a status clear followed by recovery actions when no blocking status remains.
-u32 FUN_004fcffc(s16 actor, u32 options, ReflectTargetA *target, u32 mask)
+u32 FUN_004fcffc(s32 actor, u32 options, ReflectTargetA *target, u32 mask)
 {
     u32 flags = 0;
     bool rosterMember = target->entryIndex < 109;
@@ -19,7 +19,7 @@ u32 FUN_004fcffc(s16 actor, u32 options, ReflectTargetA *target, u32 mask)
             flags = member->flags;
     }
     if (mask) {
-        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
+        ReflectAction *action = btlQueueReflectAction(g_btlActionReflect, (s16)actor, 0, options);
         action->kind = 38;
         action->target = (u32)target;
         flags &= ~mask;

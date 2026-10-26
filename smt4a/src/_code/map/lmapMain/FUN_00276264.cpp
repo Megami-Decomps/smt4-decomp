@@ -137,7 +137,7 @@ int FUN_003180c4(...);
 int FUN_003401a4(...);
 int mapProbePositionDownward(...);
 int FUN_00387014(void);
-int FUN_00471d00(void);
+int aocSelectedRecordIsUnavailable(void);
 int controllerUpdateWithIdleTimer(...);
 int fireEntriesMatchingPair(...);
 
@@ -582,7 +582,7 @@ extern unsigned int modelListInit(void);
 extern int FUN_0040af60(unsigned int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 extern int FUN_004186e0(void);
-/* Supplied declaration required: FUN_00471d00. */
+/* Supplied declaration required: aocSelectedRecordIsUnavailable. */
 /* Supplied declaration required: gameDataSaveSetValues. */
 /* Supplied declaration required: FUN_004731d8. */
 extern int gameBlockByte27E98Is1To3(void);
@@ -1571,7 +1571,7 @@ LAB_00276f5c:
                   return 0;
                 }
                 temp_v8 = g_aocSystem;
-                FUN_00471d00();
+                aocSelectedRecordIsUnavailable();
                 if (temp_v8 != 0) {
                   puVar2[3] = 0x16;
                   puVar2[4] = 0;

@@ -59,8 +59,6 @@ typedef struct {
     unsigned int sp1A0; /* 0x1a0: local_1a0 */
 } param_1_stack;
 
-extern unsigned char LAB_004141dc; /* 0x4141dc */
-extern unsigned char LAB_004141f4; /* 0x4141f4 */
 extern int FUN_0041488c(...); /* 0x41488c */
 extern unsigned char DAT_0055a4c0; /* 0x55a4c0 */
 extern unsigned char DAT_0055a500; /* 0x55a500 */
@@ -184,7 +182,7 @@ void FUN_00413e50(int param_1)
   *(unsigned char **)(temp_v0 - 0x90) = &DAT_0055a500;
   FUN_00432dd8();
   temp_v10 = 0;
-  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v32,&LAB_004141dc);
+  temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v32,"change_nkm");
   _ZN9Obj55aff4aSERKS_(temp_v11,temp_v1);
   _ZN9Obj55aff4D1Ev(temp_v32);
   temp_v12 = 999;
@@ -220,10 +218,10 @@ void FUN_00413e50(int param_1)
   temp_v0 = gameFlagIsSet(0x580);
   if (temp_v0 != 0) {
     temp_v1 = randRange(0xffff);
-    textFormatBuffer(&temp_v17,&LAB_004141f4,temp_v1,0);
+    textFormatBuffer(&temp_v17,"%llu",temp_v1,0);
   }
   else {
-    textFormatBuffer(&temp_v17,&LAB_004141f4,temp_v1,temp_v3);
+    textFormatBuffer(&temp_v17,"%llu",temp_v1,temp_v3);
   }
   temp_v1 = _ZN9Obj55aff4C1EPKc(temp_v33,&temp_v17);
   FUN_00522a48(&temp_v24,temp_v1);

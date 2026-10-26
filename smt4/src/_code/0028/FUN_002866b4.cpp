@@ -1,5 +1,5 @@
-/* NON_MATCHING: near (207 rows against 205): flow, constants and calls follow retail; retail's prologue is a variadic-style `push {r0-r3,...}` with the 5th/6th stack arguments read at sp+72/+76 and the 6th forwarded to FUN_0028e6d0 through a VFP register copy (vldr/vstr), which a plain u32 parameter does not reproduce, and register allocation differs */
 #include "script/ScriptArgs.h"
+/* NON_MATCHING: near (207 rows against 205): flow, constants and calls follow retail; retail's prologue is a variadic-style `push {r0-r3,...}` with the 5th/6th stack arguments read at sp+72/+76 and the 6th forwarded to FUN_0028e6d0 through a VFP register copy (vldr/vstr), which a plain u32 parameter does not reproduce, and register allocation differs */
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef unsigned int u32;

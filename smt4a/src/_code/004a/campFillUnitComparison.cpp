@@ -1,5 +1,5 @@
 #include "camp/UnitComparison.h"
-#include "shard/campFillUnitComparison.h"
+#include "camp/CampStateQueries_UnitComparison.h"
 #include "shard/Shard0031.h"
 #include "shard/Shard0032.h"
 #include "gamedata/DevilRecordA.h"

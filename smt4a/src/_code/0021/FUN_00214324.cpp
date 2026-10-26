@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/SavedUnitSelection.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ int scrScriptProcessStartEntry(...);
 int obj04Finish(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
-int FUN_003c3e14(void);
 int eventTexAddHandle(...);
 int soundChannelStopAll(int);
 int FUN_003d54f8(...);

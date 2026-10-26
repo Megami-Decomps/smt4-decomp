@@ -1,7 +1,7 @@
 /* NON_MATCHING: closing-animation loop peels its initial bound check, and the inlined replacement search adds a join NOP. */
 #include "ui/MessageMain.h"
 #include "shard/W6_W6Match1_PartySlot.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;

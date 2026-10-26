@@ -3,7 +3,6 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "shard/W6_W6Match2_EmitterResources.h"
-#include "util/CalleeContracts.h"
 
 extern "C" {
 EffEmitter *effEmitterCreateSmall(EffEmitterDesc *descriptor);

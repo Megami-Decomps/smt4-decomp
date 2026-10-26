@@ -1,6 +1,6 @@
 /* NON_MATCHING: battle unit action timing setup; float chain and the shared hit-type branch (retail jumps back into the first case) are written plainly and not compared with retail */
 #include "common.h"
-#include "util/FUN_0027d9e8.h"
+#include "code/Code0027.h"
 
 /* The camera/animation parameters of the action camera, read from the battle main state. */
 struct BtlCameraState {

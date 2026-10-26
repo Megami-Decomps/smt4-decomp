@@ -1,4 +1,4 @@
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 
 // Sorts entries by the secondary byte key ascending, then the table tie key ascending.

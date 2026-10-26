@@ -3,6 +3,8 @@
 #include "gamedata/DevilRecordA.h"
 #include "font/SWin/SWin.h"
 #include "gamedata/Table04Record.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
+#include "map/lmapMain.h"
 
 // Demon record in the party/compendium format (0x12c bytes).
 struct DemonRecord {
@@ -67,8 +69,6 @@ extern "C" {
 void sysMemClear(void* data, u32 size);
 s8* gameGetSlotTable(void);
 void gameItemSetFlag(u32 id, s32 value);
-void gameDataCopySaveEntry(u32 id, SaveEntry* out);
-void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
 void FUN_0031f190(u32 id, s32 arg);
 void FUN_004bcd90(DemonRecord* record);

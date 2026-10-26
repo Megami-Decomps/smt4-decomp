@@ -1,5 +1,6 @@
 /* NON_MATCHING: AocMenu state machine matches instruction for instruction (inline operator new, out-of-line ctor/dtor, delete); armcc loads screen->menu before the state-3 store where retail loads it after. */
 #include "classes/AocMenu.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
 
 /* The add-on content screen's work: a small state machine around the AocMenu it owns. */
 struct AocMenuScreen {
@@ -20,7 +21,6 @@ void FUN_003a7644(AocMenu *menu);
 void FUN_0047c36c(AocMenu *menu);
 void FUN_003d54f8(s32 channel, s32 value);
 void soundChannelStopAll(s32 mask);
-void asdSequenceRequest(s32 id, u8 *request, s32 flag);
 void aocMainShutdown(void);
 void campButtonHelpRelease(void);
 void helpTexturesRelease(void);

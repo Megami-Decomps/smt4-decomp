@@ -1,7 +1,6 @@
-/* NON_MATCHING: the inlined flag clear folds the byte index into scaled ldrb/strb and keeps 0 as an immediate; retail computes id>>3 and ~(1<<bit) in registers (same issue as gameFlagSetValue). */
 #include "common.h"
 #include "gamedata/GameFlags.h"
-#include "shard/gameGetFlagBlock.h"
+#include "gamedata/GameDataAccess_VariantA.h"
 
 extern "C" {
 
@@ -22,12 +21,12 @@ static inline void gameFlagWrite(u32 id, u32 value)
 {
     u8 *bits = reinterpret_cast<GameFlagBlock29016c *>(gameGetFlagBlock())->bits;
     FUN_0023ddbc(id, value);
-    u32 byte = id >> 3;
-    u32 bit = id & 7;
+    u32 index = id >> 3;
     if (value) {
-        bits[byte] |= 1 << bit;
+        bits[index] |= 1 << (id & 7);
     } else {
-        bits[byte] &= ~(1 << bit);
+        s32 keep = ~(1 << (id & 7));
+        bits[index] &= keep;
     }
 }
 

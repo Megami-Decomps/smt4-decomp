@@ -1,5 +1,6 @@
 /* Hooks the object's handle to its callback, configures its two modes and starts it (state 1). */
 #include "common.h"
+#include "code/Code0040_Smt4a.h"
 
 extern "C" {
 

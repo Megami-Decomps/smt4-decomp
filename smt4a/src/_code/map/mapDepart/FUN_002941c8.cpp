@@ -23,12 +23,12 @@ extern unsigned char LAB_00294640; /* 0x294640 */
 extern unsigned char LAB_00294654; /* 0x294654 */
 extern unsigned char LAB_00294664; /* 0x294664 */
 extern int FUN_002991d4(...); /* 0x2991d4 */
-extern unsigned char LAB_00329a78; /* 0x329a78 */
+extern unsigned char mapDepartReleaseOnTaskEnd; /* 0x329a78 */
 extern int FUN_00329a90(...); /* 0x329a90 */
 extern unsigned char LAB_00329d64; /* 0x329d64 */
 extern int FUN_003581bc(...); /* 0x3581bc */
-extern unsigned char LAB_0037a070; /* 0x37a070 */
-extern unsigned char LAB_0037a074; /* 0x37a074 */
+extern unsigned char FUN_0037a070; /* 0x37a070 */
+extern unsigned char FUN_0037a074; /* 0x37a074 */
 extern unsigned int *g_mapDepart; /* 0x5806c4 */
 extern int g_gameState; /* 0x5f15fc */
 
@@ -194,10 +194,10 @@ void FUN_002941c8(int *param_1)
   }
   *(unsigned char *)(puVar1 + 2) = 0;
   puVar5 = &LAB_0029462c;
-  asdProcessCreateSimple(&LAB_0029462c,4,0,0,FUN_002991d4,&LAB_00329a78,0);
+  asdProcessCreateSimple(&LAB_0029462c,4,0,0,FUN_002991d4,&mapDepartReleaseOnTaskEnd,0);
   *puVar1 = (unsigned int)puVar5;
-  taskCreateDraw(&LAB_00294640,0x71,0,0,&LAB_00329d64,&LAB_0037a074,0,puVar5);
-  taskCreateDraw(&LAB_00294654,0x75,0,0,FUN_00329a90,&LAB_0037a070,0,*puVar1);
+  taskCreateDraw(&LAB_00294640,0x71,0,0,&LAB_00329d64,&FUN_0037a074,0,puVar5);
+  taskCreateDraw(&LAB_00294654,0x75,0,0,FUN_00329a90,&FUN_0037a070,0,*puVar1);
   taskCreateDraw(&LAB_00294664,0xea,0,0,FUN_003581bc,0,0,*puVar1);
   return;
 }

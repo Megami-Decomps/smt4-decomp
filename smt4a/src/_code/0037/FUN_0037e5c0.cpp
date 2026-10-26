@@ -1,10 +1,10 @@
 /* NON_MATCHING: constant materialisation only - retail loads each layout entry id (0x576/0x577/0x578/0x579/0x57d) and the 0x598 field offset from the literal pool, while armcc here derives them from one register and folds the offset; control flow and calls are identical. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "gamedata/GameDataAccess.h"
 
 namespace {
 /* A row of the status screen's demon list. */
@@ -42,7 +42,6 @@ struct LayoutEntry {
 extern "C" {
 extern StatusDownView *g_statusDown;
 void efctSetSpeed(f32 speed);
-s32 recordGetModeForId(s32 id);
 void statusDownCreatePanelEffects(s32 x, s32 y, s32 highlighted);
 void FUN_00185e84(s16 demon, s32 x, s32 y, u32 slot, s32 a, s32 b);
 void statDrawClampedDelta(u32 demon, s32 other, s32 x, s32 y, u32 slot, s32 a);

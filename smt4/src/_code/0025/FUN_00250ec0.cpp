@@ -2,7 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "map/mapDepart.h"
-#include "shard/FUN_00287800.h"
+#include "code/Code0028.h"
 
 /* One requirement of a quest record. */
 struct QuestRequirement {
@@ -40,7 +40,6 @@ SlotTable *gameGetSlotTable(void);
 UnitRecord *gameGetUnitRecord(s32 slot);
 bool bitsetTestBit(const void *bits, u16 bit);
 u32 bitArrayCountSet1to500(const void *bits);
-u32 FUN_0028fb40(u16 id);
 s32 partyFindActiveSlotById(u16 id);
 u16 *FUN_00348b7c(u32 id);
 s32 aocEntryGetKind(u16 id);

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
-#include "util/GameDataBlocksGetSaveData.h"
+#include "gamedata/GameDataAccess.h"
 
 struct RankingScriptProcess {
     /* 0x000 */ u8 unk000[0x108];

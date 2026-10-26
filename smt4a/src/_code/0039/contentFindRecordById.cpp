@@ -1,6 +1,5 @@
 #include "gamedata/DataTable.h"
 #include "addon/PackageSelection.h"
-#include "util/CalleeContracts.h"
 
 extern "C" {
 

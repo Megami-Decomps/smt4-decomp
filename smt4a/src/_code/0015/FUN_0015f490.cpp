@@ -1,8 +1,8 @@
 /* NON_MATCHING: plays a demon's voice/motion line: picks the name slot of the 0x7c-byte record for the requested kind (with the random variants), copies the 10-character name, patches its trailing digits / suffix letter from the kind-specific override table, and starts it; written from the decompilation, the argument of FUN_00184310, the field read from its result and the base offset of the name slots inside the record are recovered from lost arguments, and the float scale arrives in s0 (VFP argument) */
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
-#include "shard/lcgRandomRange.h"
+#include "code/Code0014.h"
+#include "util/Random.h"
 
 #define LINE_TABLE 0x3E
 #define LINE_TABLE_OVERRIDES 1

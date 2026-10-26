@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail tests bit 3 immediately after clearing it; the dead branch is intentionally absent. */
 #include "shard/W8Match1_ScriptPhase.h"
 #include "gamedata/GameFlags.h"
-#include "util/EventQueueAddUnique.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 u32 scrRunOpcodesStub(u32 process);

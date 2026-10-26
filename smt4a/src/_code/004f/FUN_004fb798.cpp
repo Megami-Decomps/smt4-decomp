@@ -3,14 +3,14 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/btlReflect.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {
 
 int FUN_001568f8(...);
 int FUN_003f0e20(int, int);
 
-int FUN_004c571c(int, int, int, int);
+int btlAdjustPropertyClamped(int, int, int, int);
 int FUN_004fb43c(...);
 int FUN_004fd0ec(...);
 
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: FUN_001568f8. */
 extern int FUN_003eb1cc(void);
 /* Supplied declaration required: FUN_003f0e20. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004fb43c. */
 /* Supplied declaration required: FUN_004fd0ec. */
 
@@ -53,7 +53,7 @@ FUN_004fb798(int param_1,unsigned int param_2,int param_3,int param_4,unsigned i
   
   temp_v0 = *(short *)(param_4 + 0x6a) < 0x6d;
   if (temp_v0) {
-    FUN_004c571c((int)*(short *)(param_4 + 0x6a),1,1,0);
+    btlAdjustPropertyClamped((int)*(short *)(param_4 + 0x6a),1,1,0);
   }
   temp_v1 = (short)param_1 + (short)param_10;
   if (-1 < param_10) {

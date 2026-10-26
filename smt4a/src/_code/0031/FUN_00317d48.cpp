@@ -1,6 +1,6 @@
 /* NON_MATCHING: result/sign-test register allocation and zero-value lifetime differ from retail. */
 #include "sys/ProcessResult.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 #include "shard/RomFileOpenState.h"
 #include "nn/fs/ArchiveCreateFile.h"
 

@@ -14,7 +14,7 @@ int FUN_003f0e20(unsigned int *, int);
 int FUN_00408184(...);
 
 int btlCombatantGetSummaryValues(...);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int FUN_004c8340(...);
 int FUN_004fb43c(...);
 int FUN_004fd0ec(...);
@@ -43,7 +43,7 @@ typedef struct {
     unsigned int sp140; /* 0x140: local_140 */
 } param_26_stack;
 
-extern unsigned char LAB_00221a7c; /* 0x221a7c */
+extern unsigned char FUN_00221a7c; /* 0x221a7c */
 extern unsigned int g_btlScriptUnit; /* 0x57113c */
 extern int g_btlAux; /* 0x573808 */
 extern unsigned int DAT_00573c08; /* 0x573c08 */
@@ -68,7 +68,7 @@ extern int idSetFindSubjectIndex(unsigned int, int);
 extern int FUN_004c1480(int);
 extern short btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlCombatantGetSummaryValues. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c8340. */
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: FUN_004fb43c. */
@@ -138,7 +138,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   temp_v19 = puVar5;
   if (temp_v0) {
     if (param_16 == 0) {
-      FUN_004c571c((int)*(short *)(param_4 + 0x6a),0,1);
+      btlAdjustPropertyClamped((int)*(short *)(param_4 + 0x6a),0,1);
     }
     if (param_13 != 1) {
       if (param_11 != 0) {
@@ -212,7 +212,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < 0x36);
-          qsort(temp_v14,temp_v4,4,&LAB_00221a7c);
+          qsort(temp_v14,temp_v4,4,&FUN_00221a7c);
           temp_v5 = 0;
           temp_v4 = 0;
           do {
@@ -325,7 +325,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
       temp_v14[1] = 1;
       FUN_004fde5c(temp_v21,param_2,param_4,param_14);
     }
-    FUN_004c571c((int)*(short *)(param_4 + 0x6a),1,1,0);
+    btlAdjustPropertyClamped((int)*(short *)(param_4 + 0x6a),1,1,0);
     if ((-1 < param_18) && (temp_v22 != 0)) {
       temp_v15 = (int)(short)((short)param_18 + temp_v2);
       temp_v13 = 0x3f800000;

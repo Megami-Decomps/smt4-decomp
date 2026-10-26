@@ -1,7 +1,7 @@
 /* NON_MATCHING: battle AI command choice (roll against 10% / 40% bands); written from the decompilation, branch layout (retail jumps into the shared 0x2B/0x2C call) and scheduling not compared */
 #include "common.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 #define BTL_UNIT_COUNT_ALL 0x6D
 #define BTL_UNIT_STRIDE 0x1D0

@@ -2,7 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "ui/UiSpriteState.h"
 #include "ui/MessageMain.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 struct MessageBoxCategoryViewA {
     u8 unk00[0x48];

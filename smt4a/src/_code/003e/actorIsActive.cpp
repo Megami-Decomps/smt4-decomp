@@ -1,6 +1,6 @@
 /* True when the object exists, is enabled, and none of its blocking state bits (0x2, 0x4, 0x400) are set. */
 #include "common.h"
-#include "util/actorIsActive.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

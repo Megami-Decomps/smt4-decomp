@@ -1,11 +1,11 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026b0e4` (_code @ 0x26b0e4, 0x10ac bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
-#include "util/PackNibbles.h"
-#include "util/FUN_002a4878.h"
+#include "util/BitsAndBytes.h"
+#include "code/Code002a.h"
 
 extern "C" {
 
@@ -45,8 +45,6 @@ typedef struct {
     unsigned int spC0; /* 0xc0: local_c0 */
 } void_stack;
 
-extern unsigned char LAB_0026be98; /* 0x26be98 */
-extern unsigned char LAB_0026be9c; /* 0x26be9c */
 extern unsigned char DAT_00536b70; /* 0x536b70 */
 extern int g_statusDown; /* 0x588fe8 */
 extern int g_renderCtx; /* 0x59dbb4 */
@@ -394,7 +392,6 @@ LAB_0026b644:
                        0xba);
           temp_v8 = asdTMTexTableEntryAt(0x12,0x4ad);
           temp_v18 = (unsigned int)*(unsigned short *)(temp_v10 + 0xf4a);
-          temp_v17 = &LAB_0026be98;
           FUN_00180310(2,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v1,1,6,0xba);
         }
@@ -404,7 +401,6 @@ LAB_0026b644:
           FUN_001835b4(2,0x12,0x4a6,*(short *)(temp_v5 + 8) + temp_v0,*(short *)(temp_v5 + 10) + temp_v1,
                        0xba);
           temp_v10 = asdTMTexTableEntryAt(0x12,0x4ad);
-          temp_v17 = &LAB_0026be9c;
           FUN_00180310(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v0,
                        (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v1,1,6,0xba);
         }

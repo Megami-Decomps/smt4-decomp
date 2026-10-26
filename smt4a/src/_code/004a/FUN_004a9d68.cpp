@@ -1,8 +1,8 @@
 /* NON_MATCHING: slot-relative addresses, aggregate copy and mask-update scheduling differ. */
 #include "battle/btlUI.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
-#include "util/CalleeContracts.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "code/Code0015.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 static inline u32 findActionSlot(BtlUiA *ui)
 {

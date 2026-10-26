@@ -1,7 +1,7 @@
 /* NON_MATCHING: unroll matches; retail hoists the fourth entry's load above the compares and keeps an unused 9999 literal. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlEffect.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 extern "C" {
 
 // Returns the largest nonnegative selection metric, or its fallback when none is positive.

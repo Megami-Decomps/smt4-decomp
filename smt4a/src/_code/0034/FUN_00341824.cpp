@@ -2,7 +2,7 @@
 #include "sys/ProcessResult.h"
 #include "common.h"
 #include "nn/Result.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 struct FileView;
 

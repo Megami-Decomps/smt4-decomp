@@ -1,7 +1,7 @@
 /* NON_MATCHING: the scale literal is loaded before the two final integer-argument moves. */
 #include "event/EventTaskRequest.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/scrGetArg.h"
+#include "script/ScriptArgs.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {

@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 #define CEC_VIEW_ROWS 3
 #define CEC_VIEW_ENTRY_COUNT 32
@@ -52,7 +53,6 @@ extern "C" {
 
 extern CecViewWork *g_campCecView;
 
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void sysMemClear(void *memory, u32 size);
 void taskCreateDraw(const char *name, s32 layer, u32 a, u32 b, void *callback, u32 c, u32 d, u32 parent);
 void sysPlaySe(u32 id);

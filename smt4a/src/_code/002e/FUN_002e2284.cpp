@@ -1,4 +1,3 @@
-/* NON_MATCHING: callback return-state branch placement and post-banner compiler hints differ; 62 built versus 64 retail rows. */
 #include "shard/W6_W6Match4_CampCecResumeState.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -28,13 +27,13 @@ u32 FUN_002e2284(CampCecResumeState *work)
             work->launch.script = FUN_00275bc8(work->launch.resource, work->launch.entry);
             work->launch.script->mode = 2;
             progressConditionsUpdateUnlocks();
-            if (gameFlagIsSet(0x4AA)) {
-                work->state = 1;
-                sysPlaySe(0x10D);
-            } else {
+            if (!gameFlagIsSet(0x4AA)) {
                 work->state = 13;
                 scrScriptProcessStartEntry(work->launch.script, 0x1F);
                 campHideNumericBanner();
+            } else {
+                work->state = 1;
+                sysPlaySe(0x10D);
             }
             status = 3;
         }

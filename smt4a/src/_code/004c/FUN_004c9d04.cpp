@@ -9,7 +9,7 @@ int FUN_00184310(...);
 int __aeabi_memset4(...);
 int asdOperatorDelete(...);
 int sysMemClear(...);
-int FUN_003e8704(...);
+int keyedAccumulatorAdd(...);
 int FUN_003e8794(...);
 int battleReleaseRetiredUnitResources(...);
 int FUN_003ef978(...);
@@ -72,7 +72,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: asdOperatorDelete. */
 /* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: FUN_003e8704. */
+/* Supplied declaration required: keyedAccumulatorAdd. */
 /* Supplied declaration required: FUN_003e8794. */
 /* Supplied declaration required: battleReleaseRetiredUnitResources. */
 /* Supplied declaration required: FUN_003ef978. */
@@ -204,7 +204,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
         temp_v6 = puVar13[0xeb];
         do {
           if (puVar13[temp_v6 + 0xe5] != 0) {
-            FUN_003e8704(temp_v5,puVar13[temp_v6 + 0xe5],1);
+            keyedAccumulatorAdd(temp_v5,puVar13[temp_v6 + 0xe5],1);
             puVar13[temp_v6 + 0xe5] = 0;
           }
           temp_v6 = temp_v6 - 1;

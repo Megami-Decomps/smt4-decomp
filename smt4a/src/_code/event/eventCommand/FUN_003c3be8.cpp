@@ -1,7 +1,7 @@
 /* NON_MATCHING: the 0.0f z literal is loaded after the two integer-argument moves in retail (same scheduling miss as eventCommand_31BEBC). */
 #include "event/EventTaskRequest.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/scrGetArg.h"
+#include "script/ScriptArgs.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {

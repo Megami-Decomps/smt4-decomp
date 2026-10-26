@@ -107,12 +107,20 @@ Every match must be one a programmer could have written for a reason.
   `commandOwner`/`commandFrame`/`workValues`, variable tables) and `ScriptContext`/`g_scrContext`
   (the operand registers of the binary operators plus `active`, the running process), with
   `g_scrIntVars`/`g_scrFloatVars` and `scrPopInt`/`scrPopFloat`. `script/ScriptArgs.h` declares
-  `scrGetArg`, `scrSetResult`, `scrGetCommandOwner` and `scrCommMessageSetMode`; the frame counter
-  is `util/ScrGetCommandFrame.h`. Do not declare local process/context views or these callees.
+  `scrGetCommandOwner`, `scrCommMessageSetMode` and `scrGetCommandFrame` (the frame counter).
+  Do not declare local process/context views or these callees.
   Battle commands of IV take the battle block from `battle/BtlMainAccess.h` (`btlGetMainState()`);
   `BtlMainState` (`battle/btlMain.h`, 0x4A58 bytes as allocated, entries are `BtlEntry` from
   `shard/W4_Match6_BtlEntry.h`) is the only definition: add fields as views of its unions with
   offset asserts instead of writing a per-function state or entry view.
+- Function declarations live in subsystem headers (`ui/UiControl.h`, `gamedata/GameDataAccess.h`,
+  `battle/BattleHelpers.h`, `AsdSDK/Source/Gfx/AsdGfxHelpers.h`, ...), never in a header named after
+  one function (renames break those). A function with no known subsystem is declared in
+  `code/Code<NNNN>.h`, named by the high half of its address. A header suffix `_Shard…`/`_<Type>`
+  means the group needs that type header; `_Variant<A..>` groups hold the declarations whose
+  signature differs between users (callers with a local, differently typed prototype) so they do
+  not collide in one translation unit. Do not write local prototypes of a function that already
+  has a header; find it with `grep -rn "<name>(" include`.
 - `blx` against `bl` on a call is not a difference: the linker picks it. Retail target objects hold
   calls in the compiler's form (`bl` with a call relocation).
 - **Compiler flags need evidence.** A unit can override the flags with a `cflags` list in

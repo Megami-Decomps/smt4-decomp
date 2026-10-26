@@ -1,6 +1,6 @@
 /* NON_MATCHING: draws the save list (selected slot first, then the other slots, then the optional extra rows and the footer); written from the decompilation, render-stack push scheduling not compared with retail */
 #include "camp/RenderCtx.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 struct SaveRowSprite {
     /* 0x00 */ u8 data[0x8C];

@@ -1,7 +1,7 @@
 /* NON_MATCHING: only register allocation/pool order differs (retail loads the colour with a writeback LDR and the icon-table pointer in r0/r1; the icon tables are also read from the image's constant data at DAT_00588f78-relative rodata where this build emits its own copy). */
 #include "common.h"
 #include <stddef.h>
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 /* The panel object the shop screen owns; slot 4 refreshes it. */
 class ShopPanel {

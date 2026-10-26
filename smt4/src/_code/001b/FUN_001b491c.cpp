@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail retains redundant per-index selector dispatch in both three-channel loops; valid-domain calls use the common selector directly. */
 #include "map/lmapMain.h"
 
 extern "C" {
@@ -11,13 +10,21 @@ void FUN_00343c58(LmapScript *owner, u8 channel, u32 value, u32 selector);
 void FUN_001b491c(void)
 {
     playerModelListCreate(g_lmapScene->script, 448);
-    if (g_lmapScene->restoreChannelValues == 0) {
+    if (g_lmapScene->restoreChannelValues != 0) {
         for (s32 i = 0; i < 3; ++i) {
-            playerModelLoadPart(g_lmapScene->script, static_cast<u8>(i), 448);
+            u32 selector; /* retail leaves it unset for indices outside 0..2 */
+            if (i == 0 || i == 1 || i == 2) {
+                selector = 448;
+            }
+            FUN_00343c58(g_lmapScene->script, static_cast<u8>(i), g_lmapScene->channelValues[i], selector);
         }
     } else {
         for (s32 i = 0; i < 3; ++i) {
-            FUN_00343c58(g_lmapScene->script, static_cast<u8>(i), g_lmapScene->channelValues[i], 448);
+            u32 selector; /* retail leaves it unset for indices outside 0..2 */
+            if (i == 0 || i == 1 || i == 2) {
+                selector = 448;
+            }
+            playerModelLoadPart(g_lmapScene->script, static_cast<u8>(i), selector);
         }
     }
 }

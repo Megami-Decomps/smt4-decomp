@@ -1,5 +1,3 @@
-/* NON_MATCHING: retail loads the registry address inside the outer loop and computes the slot
- * address once before the release call; this build hoists the registry into r5 and keeps j live. */
 #include "classes/Obj4207c0.h"
 
 extern "C" {
@@ -16,15 +14,16 @@ Obj4207c0::~Obj4207c0()
         if (resource == NULL) {
             continue;
         }
+        Obj4207c0Registry *registry = &DAT_005cc508;
         if (resource->refCount == 1) {
-            Obj4207c0Registry *registry = &DAT_005cc508;
             u32 id = resource->id;
             for (s32 j = 0; j < 16; j++) {
-                Obj4207c0Resource *entry = registry->entries[j];
+                Obj4207c0Resource **slot = reinterpret_cast<Obj4207c0Resource **>(registry) + j;
+                Obj4207c0Resource *entry = slot[1];
                 if (entry != NULL && entry->id == id) {
                     gfxResourceTableReleaseTexturesAndBuffers(entry);
-                    delete registry->entries[j];
-                    registry->entries[j] = NULL;
+                    delete slot[1];
+                    slot[1] = NULL;
                     break;
                 }
             }

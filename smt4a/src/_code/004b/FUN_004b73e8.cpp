@@ -5,7 +5,7 @@
 extern "C" {
 extern void *g_aocSystem;
 extern s16 DAT_005f17a8, DAT_005f17aa;
-s32 FUN_00471d00(void *system);
+s32 aocSelectedRecordIsUnavailable(void *system);
 void slotSetRequest(s32 slot, s32 frames, s32 alpha);
 void obj04Finish(void);
 ListEntry20 *menu4CGetCurrentEntry(Menu4C *menu);
@@ -24,7 +24,7 @@ void FUN_004b73e8(CampScriptPanelResources *panel)
         panel->transition.state = 12;
         panel->transition.timer = 0;
         DAT_005f17a8 = 0;
-    } else if (FUN_00471d00(g_aocSystem)) {
+    } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
         panel->transition.state = 14;
         panel->transition.timer = 0;
     } else {

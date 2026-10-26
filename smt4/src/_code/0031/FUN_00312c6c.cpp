@@ -5,7 +5,6 @@
 #include "battle/BtlTables.h"
 #include "util/Random.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 void scrSetResult(s32 value);

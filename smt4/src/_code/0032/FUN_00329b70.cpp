@@ -16,7 +16,7 @@ int FUN_00258408(...);
 int FUN_00258618(...);
 int FUN_00282bfc(...);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_002954f4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(...);
 int soundChannelStopAll(...);
 int slotSetRequest(...);
@@ -90,7 +90,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_00294f64. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: FUN_002958f8. */
@@ -497,7 +497,7 @@ LAB_0032a1a4:
     textEncodeFontSlot(0x10,temp_v14);
     scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x2a0),0x10);
     buttonHelpSetPreset(0x58);
-    FUN_002954f4(*(unsigned short *)(temp_v2 + 0xc),1);
+    btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0xc),1);
     btlTalkBustUpSetUnk2F4(1);
     temp_v7 = g_screenStateWork;
     *(unsigned int *)(g_screenStateWork + 4) = 6;

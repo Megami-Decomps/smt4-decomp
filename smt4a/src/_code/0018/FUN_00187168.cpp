@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 struct FlagState {
     u8 unk00[0x130]; // 0x000

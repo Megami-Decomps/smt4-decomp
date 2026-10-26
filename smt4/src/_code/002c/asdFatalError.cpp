@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/AsdFatalError.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

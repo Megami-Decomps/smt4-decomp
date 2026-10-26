@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_ShiftRandom.h"
+#include "code/Code0051_Smt4a.h"
 
 extern "C" {
 extern ShiftRandomState DAT_006357c8;

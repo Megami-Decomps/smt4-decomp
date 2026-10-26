@@ -1,5 +1,6 @@
 /* NON_MATCHING: related-item argument registers, catalog-loop hoisting and count-update branches differ. */
 #include "gfx/EffectEditorStorage.h"
+#include "AsdSDK/AsdMemCopy.h"
 extern "C" {
 extern EffectSelectionContext DAT_0059e9a8;
 extern EffectSelectionCatalogEntry *DAT_0059e624[13];
@@ -14,7 +15,6 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 EffectSelectionParts *FUN_002b30e4(EffectSelectionItem *item);
 char *libc_strcpy(char *destination, const char *source);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *block);
-void rt_memcpy(void *destination, const void *source, u32 size);
 void effPartSetData(EffectSelectionBlock *block, void *data, u32 size, u16 id);
 void *FUN_00243c24(EffectSelectionBlock *block);
 void effectEditorApplyHandlerState(void *instance);

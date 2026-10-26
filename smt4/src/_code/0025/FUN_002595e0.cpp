@@ -1,11 +1,11 @@
 /* NON_MATCHING: active-slot search is unrolled; save-selection, unit-base and stock addresses fold differently. */
 #include "gamedata/UnitSelectionInput.h"
 #include "shard/GameDataBlocks.h"
+#include "gamedata/FlagBitTests.h"
 
 extern "C" {
 void objectFlagsClear(StatBlock *unit, u32 flags);
 u32 objectFlagSetBit(StatBlock *unit, u32 bit);
-s32 flagWordTestBit(StatBlock *unit, u32 bit);
 
 // Save a reserved-unit selection, remove it from active slots, and update stock selection flags.
 void FUN_002595e0(const UnitSelectionInput *input)

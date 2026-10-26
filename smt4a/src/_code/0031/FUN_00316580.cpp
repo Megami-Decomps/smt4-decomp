@@ -1,4 +1,4 @@
-/* NON_MATCHING: horizontal settle animation branch scheduling differs from retail. */
+/* NON_MATCHING: the opening offset (0x3C000, then -0x78000 when sliding from the left) and the speed update now match retail; retail merges the speed selection into the opening-frame branch (shared cmp/bne), the build tests the side again. */
 #include "ui/UiSpriteState.h"
 
 extern "C" {
@@ -11,8 +11,11 @@ u32 FUN_00316580(UiSpriteState *sprite, s32 fromRight)
 {
     u32 settled = 1;
     s32 frame = sprite->motionFrame;
-    if (frame == 0)
-        sprite->motion.horizontalOffset = fromRight != 0 ? 0x3C000 : -0x3C000;
+    if (frame == 0) {
+        sprite->motion.horizontalOffset = 0x3C000;
+        if (fromRight == 0)
+            sprite->motion.horizontalOffset -= 0x78000;
+    }
     s32 speed = fromRight != 0 ? 11 : -11;
     if (frame > 0) {
         if (fromRight != 0) {
@@ -25,7 +28,7 @@ u32 FUN_00316580(UiSpriteState *sprite, s32 fromRight)
                 speed = 0;
         }
     }
-    sprite->motion.horizontalOffset -= speed * 0x1000;
+    sprite->motion.horizontalOffset -= speed << 12;
     s32 position = sprite->motion.horizontalOffset >> 12;
     if ((fromRight != 0 && position <= 0) || (fromRight == 0 && position >= 0)) {
         sprite->motion.horizontalOffset = 0;

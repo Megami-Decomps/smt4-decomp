@@ -35,16 +35,17 @@ void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 keyframe, s32 frame);
 /* Per-frame update of the panel: advances its two sprite animations and the pulse timers. */
 void FUN_00487124(PulsePanel *panel)
 {
+    GameStateA *gameStatePtr = &g_gameState;
     u32 frozen;
 
     if (panel->mode == -1) {
         return;
     }
-    if (g_gameState.navigation.alternateNaviMap != 0) {
-        g_gameState.inputBlocked = 0;
+    if (gameStatePtr->navigation.alternateNaviMap != 0) {
+        gameStatePtr->inputBlocked = 0;
     }
     frozen = (panel->flags & 0x1000) >> 12;
-    if (g_gameState.controllerFlags.primary != 0) {
+    if (gameStatePtr->controllerFlags.primary != 0) {
         if (FUN_0048e40c(panel) != 0 && panel->mode != 0) {
             FUN_0048c394(panel);
         }
@@ -101,8 +102,8 @@ void FUN_00487124(PulsePanel *panel)
         if (FUN_00485d1c(panel) != 0) {
             panel->flags |= 1;
         }
-        if (g_gameState.navigation.alternateNaviMap != 0) {
-            g_gameState.inputBlocked = 1;
+        if (gameStatePtr->navigation.alternateNaviMap != 0) {
+            gameStatePtr->inputBlocked = 1;
         }
     }
 }

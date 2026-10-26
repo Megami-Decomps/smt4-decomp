@@ -1,7 +1,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 

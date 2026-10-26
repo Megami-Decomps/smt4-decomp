@@ -45,13 +45,6 @@ typedef struct {
     unsigned int sp190; /* 0x190: local_190 */
 } void_stack;
 
-extern unsigned char LAB_00218a40; /* 0x218a40 */
-extern unsigned char LAB_00218e4c; /* 0x218e4c */
-extern unsigned char LAB_00218e54; /* 0x218e54 */
-extern unsigned char LAB_00218e58; /* 0x218e58 */
-extern unsigned char LAB_00218e68; /* 0x218e68 */
-extern unsigned char LAB_002196dc; /* 0x2196dc */
-extern unsigned char LAB_002196e4; /* 0x2196e4 */
 extern int g_uiQuest; /* 0x57f28c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
@@ -207,7 +200,7 @@ void FUN_00218640(void)
     partyDrawCategorySelectionIcon(temp_v25,*(short *)(temp_v13 + 8) + temp_v12,*(short *)(temp_v13 + 10) + temp_v5,0x6a);
     temp_v13 = asdTMTexTableEntryAt(0x1e,0x12);
     temp_v8 = FUN_00156850(temp_v25,0);
-    textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
+    textFormatBuffer(temp_v27,"%s",temp_v8);
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0xffffffff,temp_v27);
@@ -234,7 +227,7 @@ void FUN_00218640(void)
     renderCtxCalculateStereoParallax(g_renderCtx);
     temp_v13 = asdTMTexTableEntryAt(0x1e,0x1a);
     temp_v8 = FUN_00156868(temp_v25);
-    textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
+    textFormatBuffer(temp_v27,"%s",temp_v8);
     temp_v12 = temp_v4 + (int)temp_v16;
     VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -244,18 +237,18 @@ void FUN_00218640(void)
     if (temp_v2 != 1) {
       if (temp_v2 != 3) {
         if (temp_v2 != 4) {
-          textFormatBuffer(temp_v27,&LAB_00218e4c);
+          textFormatBuffer(temp_v27,"\x81|\x81|\x81|");
           temp_v13 = asdTMTexTableEntryAt(0x1e,0x1b);
         }
         else {
           temp_v8 = aocGetEntryData(*(unsigned short *)(temp_v19 + 0xf2));
-          textFormatBuffer(temp_v27,&LAB_00218a40,temp_v8);
+          textFormatBuffer(temp_v27,"%s",temp_v8);
           temp_v13 = asdTMTexTableEntryAt(0x1e,0x1b);
         }
       }
       else {
         FUN_002c0940(temp_v28,*(unsigned int *)(temp_v19 + 0xf4));
-        textFormatBuffer(temp_v27,&LAB_00218e68,temp_v28);
+        textFormatBuffer(temp_v27,"%s\x81@\x82l\x82\x81\x82\x83\x82\x83\x82\x81",temp_v28);
         temp_v13 = asdTMTexTableEntryAt(0x1e,0x1b);
       }
       VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -269,12 +262,11 @@ void FUN_00218640(void)
       temp_v13 = asdTMTexTableEntryAt(0x1e,0x1c);
       temp_v7 = (unsigned int)*(unsigned short *)(temp_v19 + 0xf2);
       FUN_0015f858(temp_v7,0);
-      textFormatBuffer(temp_v27,&LAB_00218a40,temp_v7);
+      textFormatBuffer(temp_v27,"%s",temp_v7);
       temp_v18 = (float)VectorSignedToFloat(*(short *)(temp_v13 + 8) + temp_v12,
                                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v13 + 10) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,temp_v27);
-      puStack_188 = &LAB_00218e54;
       temp_v12 = (int)temp_v18 + (int)temp_v16;
       FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v4 + temp_v12 + 3,
                    (temp_v5 - 1) + (int)*(short *)(temp_v13 + 10),0,7,0x6a);
@@ -285,7 +277,7 @@ void FUN_00218640(void)
       textDrawString(2,0xffffffff,temp_v28);
     }
     else {
-      textFormatBuffer(temp_v27,&LAB_00218e58,*(unsigned int *)(temp_v19 + 0xf4));
+      textFormatBuffer(temp_v27,"\x83f\x81[\x83^\x96\xb3\x82\xb5x%d",*(unsigned int *)(temp_v19 + 0xf4));
       asdTMTexTableEntryAt(0x1e,0x1c);
     }
     temp_v18 = temp_v17;
@@ -483,7 +475,7 @@ LAB_00218d20:
               }
             } while ((temp_v10 != temp_v11 && temp_v19 != temp_v7) && temp_v9 < 0 == temp_v15);
             if (psVar13 != (short *)0x0) {
-              textFormatBuffer(temp_v27,&LAB_002196dc,psVar13 + 1,temp_v33,temp_v31);
+              textFormatBuffer(temp_v27,"%s\x81@%s\x81^%s",psVar13 + 1,temp_v33,temp_v31);
             }
           }
         }
@@ -491,11 +483,11 @@ LAB_00218d20:
           temp_v19 = (unsigned int)temp_v21;
           if (temp_v22 != '\0') {
             FUN_0015f858(temp_v19,0);
-            textFormatBuffer(temp_v27,&LAB_002196dc,temp_v19,temp_v33,temp_v31);
+            textFormatBuffer(temp_v27,"%s\x81@%s\x81^%s",temp_v19,temp_v33,temp_v31);
           }
           else {
             temp_v8 = FUN_00180114(temp_v19);
-            textFormatBuffer(temp_v27,&LAB_002196dc,temp_v8,temp_v33,temp_v31);
+            textFormatBuffer(temp_v27,"%s\x81@%s\x81^%s",temp_v8,temp_v33,temp_v31);
           }
         }
         if (temp_v24 < *(unsigned int *)(temp_v35 + 0x104)) {
@@ -530,7 +522,7 @@ LAB_00218d20:
         temp_v9 = dataTableGetEntries();
         temp_v7 = dataTableGetCount(temp_v8);
         if ((temp_v19 < temp_v7) && (temp_v9 + temp_v19 * 0x60 != -1)) {
-          textFormatBuffer(temp_v27,&LAB_002196e4);
+          textFormatBuffer(temp_v27,"%s");
           VectorSignedToFloat(temp_v32 * 0x10 + 0xb + *(short *)(temp_v12 + 10) + temp_v13,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(short *)(temp_v12 + 8) + temp_v6,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,10 +1,10 @@
 /* NON_MATCHING: block layout: retail places the shared `return 1` and the command-frame-zero arm between the two frameTextureGetState arms of the other branch; swapping the if/else order does not reproduce it. */
 #include "common.h"
 #include "camp/Unite/UniteEffect.h"
+#include "code/Code0020.h"
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 scrGetCommandFrame(void);
-s32 FUN_00203d74(void);
 s32 frameTextureGetState(void);
 void slotSetRequest(u32 screen, s32 duration, u32 color);
 s32 FUN_00162ea4(void);

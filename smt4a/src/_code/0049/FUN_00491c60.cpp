@@ -1,6 +1,7 @@
 /* NON_MATCHING: only difference is the entry->type compare chain using r0 instead of retail's r1 (4 compares in loop 1, 2 in loop 2) */
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
+#include "shard/W5_W5Match7_SelectedRecord.h"
 
 /* One selectable entry of the map's destination lists. */
 struct LmapListEntry {
@@ -43,7 +44,6 @@ s32 gameFlagIsSet(u32 id);
 s32 gameOwnedBitTest2(s32 id);
 s32 gameFlagsBitTest(s32 id);
 s32 gameFlagsGetWorkState(void);
-s32 dataTableHasMatchingEntry35(u32 key);
 s32 FUN_002e707c(u32 key);
 s32 FUN_003bf5a8(s32 id);
 s32 FUN_004083a8(u8 id);

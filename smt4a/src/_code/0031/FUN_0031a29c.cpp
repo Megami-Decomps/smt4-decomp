@@ -1,9 +1,9 @@
 /* NON_MATCHING: shared flag constants are kept across calls differently and the stack frame is smaller. */
 #include "ui/MessageMain.h"
+#include "shard/W6_W6Match1_PositionedStream.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
-void scrCommMessageSetMode(u32 mode);
 u32 scrGetCommandFrame();
 s32 scrGetArg(u32 index);
 void *scrGetCommandOwner();

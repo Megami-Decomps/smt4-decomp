@@ -12,9 +12,10 @@ void asdMemFree(void *memory);
 // Release both node-level and table-level texture references before stopping the effect.
 void eventEffectFreeTextures(void)
 {
-    EventEffectWorkIV *effect = g_eventEffect.effect;
+    EventEffectGlobalsIV *eventEffectPtr = &g_eventEffect;
+    EventEffectWorkIV *effect = eventEffectPtr->effect;
     for (s32 index = 0; index < 2; ++index) {
-        EventFilterTexture *texture = &g_eventEffect.textures[index];
+        EventFilterTexture *texture = &eventEffectPtr->textures[index];
         if (texture->requested) {
             if (asdTMTexTableNodeIsLoaded(texture->table, texture->node)) {
                 asdTMTexTableReleaseNode(texture->table, texture->node);
@@ -23,7 +24,7 @@ void eventEffectFreeTextures(void)
         }
     }
     for (s32 index = 0; index < 2; ++index) {
-        EventFilterTexture *texture = &g_eventEffect.textures[index];
+        EventFilterTexture *texture = &eventEffectPtr->textures[index];
         // The byte following node ownership tracks the table entry's reference.
         if (texture->unk09[0]) {
             if (textureGetIndexedResource(texture->table) != NULL) {
@@ -34,6 +35,6 @@ void eventEffectFreeTextures(void)
     }
     jobStop(effect->job, 0);
     asdMemFree(effect);
-    g_eventEffect.effect = NULL;
+    eventEffectPtr->effect = NULL;
 }
 }

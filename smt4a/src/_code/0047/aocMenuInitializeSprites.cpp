@@ -1,6 +1,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W4_Match3_AocMainA.h"
 #include "text/TextDraw.h"
+#include "addon/AocSystem_Smt4a.h"
 
 struct AocUiSprite {
     u8 data[0x8c];

@@ -1,6 +1,6 @@
 /* NON_MATCHING: VFP argument setup (the sliding-offset float and the text position) and the pool-constant loads are scheduled differently; the draw sequence is the same. */
 #include "common.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 extern "C" {
 

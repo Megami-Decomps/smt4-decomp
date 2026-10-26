@@ -1,5 +1,6 @@
 /* NON_MATCHING: resource slot and distinct message paths match; one address-add schedule and dialog-mode constant setup differ. */
 #include "gamedata/UnitStats.h"
+#include "code/Code002b_Smt4.h"
 
 struct UnitNotificationView {
     u8 unk0000[0x356C];
@@ -12,7 +13,6 @@ struct UnitNotificationView {
 typedef char UnitNotificationOffsets[offsetof(UnitNotificationView, current) == 0xCFC8 &&
     offsetof(UnitNotificationView, count) == 0xCFCA ? 1 : -1];
 extern "C" {
-s32 FUN_002b6b04();
 s32 dialogIsActive();
 s32 dialogGetTimer();
 void infoWinStartTimer(s32);

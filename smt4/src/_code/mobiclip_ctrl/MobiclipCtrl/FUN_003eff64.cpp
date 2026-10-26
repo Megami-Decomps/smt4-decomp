@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_3_stack;
 
-extern unsigned char LAB_0034f6c8; /* 0x34f6c8 */
+extern unsigned char FUN_0034f6c8; /* 0x34f6c8 */
 extern unsigned char DAT_00420ef4; /* 0x420ef4 */
 extern unsigned int DAT_0044d024; /* 0x44d024 */
 extern char *DAT_0044d030; /* 0x44d030 */
@@ -215,7 +215,7 @@ void FUN_003eff64(unsigned int param_1,unsigned int param_2,int param_3)
   DAT_004c3b08 = 0;
   DAT_004c3b1c = 0;
   DAT_004c3b1d = 0;
-  FUN_00351878(&DAT_004c3b20,&LAB_0034f6c8,0x100000);
+  FUN_00351878(&DAT_004c3b20,&FUN_0034f6c8,0x100000);
   DAT_004c4080 = 0;
   DAT_004c4084 = 0;
   DAT_004c4088 = 0;

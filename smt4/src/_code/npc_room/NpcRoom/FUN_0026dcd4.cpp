@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0026dcd4` (_code @ 0x26dcd4, 0x62c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
 
 int FUN_00252190(...);
 int FUN_00285e44(...);
-int FUN_00289880(...);
 int FUN_002898e4(...);
 int buttonHelpCreate(...);
 int FUN_00290d5c(...);
@@ -36,14 +36,9 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00194278(...); /* 0x194278 */
-extern unsigned char LAB_001aba44; /* 0x1aba44 */
-extern unsigned char LAB_001dd8e8; /* 0x1dd8e8 */
-extern unsigned char LAB_0026e004; /* 0x26e004 */
-extern unsigned char LAB_0026e018; /* 0x26e018 */
-extern unsigned char LAB_0026e02c; /* 0x26e02c */
-extern unsigned char LAB_0026e044; /* 0x26e044 */
+extern unsigned char FUN_001aba44; /* 0x1aba44 */
+extern unsigned char FUN_001dd8e8; /* 0x1dd8e8 */
 extern unsigned char LAB_0026e300; /* 0x26e300 */
-extern unsigned char LAB_0026e314; /* 0x26e314 */
 extern unsigned int *g_npcRoom; /* 0x44d198 */
 
 /* Supplied declaration required: FUN_00252190. */
@@ -100,12 +95,11 @@ void FUN_0026dcd4(unsigned int param_1)
   }
   puVar6 = g_npcRoom;
   memClear();
-  puVar7 = &LAB_0026e004;
-  asdProcessCreateSimple(&LAB_0026e004,2,0,0,FUN_00194278,0,0);
+  asdProcessCreateSimple("NpcRoom Calc",2,0,0,FUN_00194278,0,0);
   *puVar6 = (unsigned int)puVar7;
-  taskCreateDraw(&LAB_0026e018,0x7a,0,0,&LAB_001aba44,0,0,puVar7);
-  taskCreateDraw(&LAB_0026e02c,0xd8,0,0,&LAB_001aba44,0,0,*puVar6);
-  taskCreateDraw(&LAB_0026e044,0xe6,0,0,&LAB_001dd8e8,0,0,*puVar6);
+  taskCreateDraw("NpcRoom UDrawLeft",0x7a,0,0,&FUN_001aba44,0,0,puVar7);
+  taskCreateDraw("NpcRoom UDrawRight",0xd8,0,0,&FUN_001aba44,0,0,*puVar6);
+  taskCreateDraw("NpcRoom DDraw",0xe6,0,0,&FUN_001dd8e8,0,0,*puVar6);
   fileSlotLoad(0x35);
   fileSlotLoad(0x1a);
   *(short *)(puVar6 + 0x40) = (short)param_1;
@@ -237,7 +231,7 @@ LAB_0026e0ac:
   } while (7 >= temp_v6);
   temp_v4 = asdLoadFileSyncDefault(&LAB_0026e300);
   puVar6[0x12] = temp_v4;
-  temp_v6 = asdLoadFileSyncDefault(&LAB_0026e314);
+  temp_v6 = asdLoadFileSyncDefault("[Q");
   puVar6[0x13] = temp_v6;
   FUN_00297060(temp_v6,puVar6[0x12]);
   puVar6[0x14] = temp_v6;

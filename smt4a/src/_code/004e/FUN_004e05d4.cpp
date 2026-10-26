@@ -3,7 +3,8 @@
 #include "romwright_types.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
-#include "util/FUN_003ee0c0.h"
+#include "code/Code003e.h"
+#include "code/Code004c_Smt4a.h"
 
 extern "C" {
 
@@ -18,7 +19,7 @@ int FUN_003f1b3c(int, unsigned int, unsigned int, unsigned int *, int *);
 int FUN_0047f4cc(int);
 int FUN_004aa878(void);
 int btlSlotSetStoreValue(...);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
 int FUN_004cab9c(void);
 int FUN_004e5830(int *, unsigned int *, unsigned int);
@@ -78,8 +79,7 @@ extern int chainCountIdUnflagged(unsigned int);
 /* Supplied declaration required: FUN_004aa878. */
 extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlSlotSetStoreValue. */
-extern unsigned int FUN_004c53fc(unsigned int);
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 extern int FUN_004c8a9c(void);
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004cab9c. */
@@ -305,7 +305,7 @@ LAB_004e0ac0:
       if ((*(unsigned short *)(param_2[10] + 0x110) & 0x80) != 0) {
         if (((DAT_00571260 & temp_v4) == 0 && (temp_v7 & DAT_00571264) == 0) &&
            (temp_v3 = btlFindEntryValue(temp_v2,0x1b), temp_v3 == 0)) {
-          FUN_004c571c(temp_v2,0x1b,1,0);
+          btlAdjustPropertyClamped(temp_v2,0x1b,1,0);
         }
       }
       else {
@@ -316,7 +316,7 @@ LAB_004e0ac0:
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0) &&
            (temp_v3 = btlFindEntryValue(temp_v2,0x1c), temp_v3 == 0)) {
-          FUN_004c571c(temp_v2,0x1c,1,0);
+          btlAdjustPropertyClamped(temp_v2,0x1c,1,0);
         }
       }
       else {
@@ -327,7 +327,7 @@ LAB_004e0ac0:
         if (((DAT_00571260 & *(unsigned int *)(*param_1 + 0x45a0)) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0) &&
            (temp_v3 = btlFindEntryValue(temp_v2,0x1d), temp_v3 == 0)) {
-          FUN_004c571c(temp_v2,0x1d,1,0);
+          btlAdjustPropertyClamped(temp_v2,0x1d,1,0);
         }
       }
       else {
@@ -338,7 +338,7 @@ LAB_004e0ac0:
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (DAT_00571260 & *(unsigned int *)(*param_1 + 0x45a0)) == 0) &&
            (temp_v3 = btlFindEntryValue(temp_v2,0x1e), temp_v3 == 0)) {
-          FUN_004c571c(temp_v2,0x1e,1,0);
+          btlAdjustPropertyClamped(temp_v2,0x1e,1,0);
         }
       }
       else {
@@ -349,7 +349,7 @@ LAB_004e0ac0:
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0) &&
            (temp_v3 = btlFindEntryValue(temp_v2,0x1f), temp_v3 == 0)) {
-          FUN_004c571c(temp_v2,0x1f,1,0);
+          btlAdjustPropertyClamped(temp_v2,0x1f,1,0);
         }
       }
       else {
@@ -364,7 +364,7 @@ LAB_004e0ac0:
         if (((*(unsigned int *)(*param_1 + 0x45a4) & DAT_00571264) == 0 &&
              (*(unsigned int *)(*param_1 + 0x45a0) & DAT_00571260) == 0) &&
            (temp_v3 = btlFindEntryValue(temp_v2,0x21), temp_v3 == 0)) {
-          FUN_004c571c(temp_v2,0x21,1,0);
+          btlAdjustPropertyClamped(temp_v2,0x21,1,0);
         }
       }
       else {

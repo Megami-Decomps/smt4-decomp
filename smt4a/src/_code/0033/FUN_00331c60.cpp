@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/Table04Record.h"
-#include "util/actorIsActive.h"
+#include "sys/RuntimeObjects.h"
 
 /* Battle reward input: base experience and the enemy level it came from. */
 struct RewardSource {

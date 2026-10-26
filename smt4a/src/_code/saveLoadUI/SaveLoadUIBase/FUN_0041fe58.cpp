@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 

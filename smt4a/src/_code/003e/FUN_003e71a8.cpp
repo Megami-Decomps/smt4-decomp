@@ -1,7 +1,9 @@
 /* NON_MATCHING: steps the touch-to-continue splash (loads its textures, pulses the prompt, fades in, waits for a touch or a timeout, then tears down); float constants now land in the retail registers (s18/s16/s17 = 60/1/0) but retail stores the initial fields in a different order (offsets first, pulse last, timeout in r8), keeps the SetPair1C argument in r1, and the vstmia/vldmia pairs of the build do not appear in retail */
 #include "common.h"
-#include "util/CalleeContracts.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "code/Code0013.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantD.h"
+extern "C" void asdTMTexTableFreeEntry(u32 table);
 
 #define SPLASH_STATE_LOAD 0
 #define SPLASH_STATE_FADE_IN 1
@@ -39,9 +41,7 @@ extern "C" {
 void clearWordHalfByte(SplashHalfByte *word);
 s32 textureGetIndexedResource(u32 table);
 void asdTMTexTableLoadTmx(u32 table, s32 flag);
-s32 asdTMTexTableNodeIsLoaded(u32 table, s32 node);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
-void asdTMTexTableFreeEntry(u32 table);
 void campCommonBgInitializeCrazingSumaho(void);
 void ref208SetPair1C(u8 a, u8 b);
 void commonBgReleaseOwnedJob(void);

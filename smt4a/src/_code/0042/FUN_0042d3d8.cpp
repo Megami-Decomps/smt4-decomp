@@ -6,7 +6,7 @@ extern "C" {
 
 int svcSleepThread(int, int);
 int FUN_002e3140(unsigned int, int, int, int);
-int FUN_0042fd28(int *);
+int cecdDispatchBackendCall(int *);
 int software_interrupt(int);
 
 /* stack frame of param_2: 2 slot(s), 8 byte(s) */
@@ -24,9 +24,9 @@ extern unsigned int g_moduleCriticalSection6; /* 0x6426b4 */
 /* Supplied declaration required: svcSleepThread. */
 /* Supplied declaration required: FUN_002e3140. */
 extern int FUN_0042fbd4(void);
-/* Supplied declaration required: FUN_0042fd28. */
+/* Supplied declaration required: cecdDispatchBackendCall. */
 extern unsigned int resourceDispatch(unsigned int *);
-extern int FUN_00430394(unsigned int);
+extern int cecdDispatchBackendCall2(unsigned int);
 extern int svcRequestChannelByIndex(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -63,10 +63,10 @@ int FUN_0042d3d8(int param_1,int param_2)
     }
     if (param_2 != 0) {
       if (param_1 != 0) {
-        temp_v1 = FUN_00430394(0xc);
+        temp_v1 = cecdDispatchBackendCall2(0xc);
       }
       else {
-        temp_v1 = FUN_00430394(0xb);
+        temp_v1 = cecdDispatchBackendCall2(0xb);
       }
     }
     else {
@@ -78,10 +78,10 @@ int FUN_0042d3d8(int param_1,int param_2)
         temp_v4 = temp_v6;
       }
       if (param_1 != 0) {
-        temp_v3 = FUN_00430394(0xc);
+        temp_v3 = cecdDispatchBackendCall2(0xc);
       }
       else {
-        temp_v3 = FUN_00430394(0xb);
+        temp_v3 = cecdDispatchBackendCall2(0xb);
       }
       while( 1 ) {
         software_interrupt(0x24);
@@ -89,7 +89,7 @@ int FUN_0042d3d8(int param_1,int param_2)
           FUN_002e3140(temp_v4,-((int)temp_v4 >> 0x1f),1000000000,0);
         }
         temp_v1 = temp_v3;
-        if ((((temp_v4 & 0x3ff) != 0x3fe) || (FUN_0042fd28(&temp_v7), temp_v7 == 1)) ||
+        if ((((temp_v4 & 0x3ff) != 0x3fe) || (cecdDispatchBackendCall(&temp_v7), temp_v7 == 1)) ||
            (temp_v1 = temp_v5, temp_v0 >= 0x3d)) break;
         temp_v0 = temp_v0 + 1;
       }

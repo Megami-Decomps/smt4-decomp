@@ -1,5 +1,6 @@
 /* Reads the two display values of table entry `id % 1000`, preferring the override record when it is active. */
 #include "common.h"
+#include "code/Code002e_Smt4a.h"
 
 extern "C" {
 

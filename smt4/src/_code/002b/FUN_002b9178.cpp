@@ -12,7 +12,7 @@ void asdMemFree(void *memory);
 AsdTexture *asdTextureCreate(s32 retry);
 
 /* Build the entry's file path and load it synchronously; on success the entry holds the new texture and its file data. */
-u32 FUN_002b9178(TexTableEntry *entry)
+u32 FUN_002b9178(TexTableNamedEntry *entry)
 {
     char path[64];
     s32 size;

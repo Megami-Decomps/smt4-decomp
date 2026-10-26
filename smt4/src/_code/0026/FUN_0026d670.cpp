@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "code/Code0026_Smt4.h"
 
 extern "C" {
 

@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4.h"
 
 extern "C" {
 extern const char DAT_00409a68[];

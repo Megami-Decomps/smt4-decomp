@@ -1,6 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table8Record.h"
-#include "shard/dataTable8FindRecord.h"
+#include "gamedata/DataTableAccess_VariantD_Table8Record.h"
 
 struct AocSystem {
     /* 0x000 */ u8 unk000[0x3ac];

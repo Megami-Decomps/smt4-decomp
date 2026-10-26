@@ -1,5 +1,5 @@
 #include "shard/Shard0031.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 struct PreviewMenuWindow { u8 kind; u8 unk01[3]; s32 minimum, maximum; u32 unk0c; FlaggedEntry entry; };
 struct PreviewMenuEntry { s16 previewState; u16 unk02, option; u8 unk06[0x1a]; };

@@ -1,5 +1,4 @@
-/* NON_MATCHING: retail reloads g_titleScene after the phase store (ldr r4,[pc]; ldr r0,[r4] twice); the build keeps the first load. */
-#include "common.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
@@ -14,6 +13,7 @@ extern int FUN_002c35b0(int mode);
 extern void FUN_002bdb44(void);
 extern int FUN_002c3530(int a, int b);
 extern int FUN_002c3a14(TitleScene *scene);
+void renderCtxSetStereoMode(TitleScene *scene, u32 mode);
 
 /* Switches the title scene to phase 2 and refreshes it. */
 u32 FUN_00103dd8(void)
@@ -21,7 +21,7 @@ u32 FUN_00103dd8(void)
     FUN_002c35b0(2);
     FUN_002bdb44();
     FUN_002c3530(2, 0);
-    g_titleScene->phase = 2;
+    renderCtxSetStereoMode(g_titleScene, 2);
     FUN_002c3a14(g_titleScene);
     return 0;
 }

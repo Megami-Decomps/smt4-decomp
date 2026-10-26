@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code004f_Smt4a.h"
 struct ObjectOwner { u8 unk0000[8016]; void *object; };
 extern "C" {
 void *asdOperatorNew(u32 size);

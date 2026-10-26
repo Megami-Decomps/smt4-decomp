@@ -1,4 +1,5 @@
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "event/bustupEvent/BustupSlotControl_Smt4a.h"
 
 extern "C" {
 extern BustupCutAnimA *g_bustupCutAnim;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: ARMCC emits a comparison chain for the two-state switch, changing retail's jump table, hint NOP, and pool layout. */
 #include "classes/Obj4209cc.h"
-#include "util/FUN_003fdadc.h"
+#include "code/Code003f.h"
 
 extern "C" {
 extern const char DAT_005271fc[];

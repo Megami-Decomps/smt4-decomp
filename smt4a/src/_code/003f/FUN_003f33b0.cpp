@@ -1,5 +1,6 @@
-/* NON_MATCHING: 169 vs 160 rows; register numbering differs (retail reuses the dead argument registers) and retail lays the skill-collection branch out of line. */
+/* NON_MATCHING: instruction rows now equal retail (169); recordContainsPairedId takes the skill id and the slot count is signed; only register numbering differs (retail keeps the arg/out-skills pair in r7/r8 and the table in r6 after the 0x1c00 add). */
 #include "common.h"
+#include "shard/W6_W6Match8_BattleDebug.h"
 
 // Party member record (0x12c bytes): only the parts merged here.
 struct MemberRecord {
@@ -28,7 +29,6 @@ void dispatchIfFound(u8 id, u32 arg, s32 mode);
 s32 bitsAt60Test(void* record, u32 bit);
 void bitsAt60Set(void* record, u32 bit);
 void FUN_002a6894(void* record);
-s32 recordContainsPairedId(void* record);
 void qsort(void* base, u32 count, u32 size, s32 (*compare)(const void*, const void*));
 s32 FUN_002c2bf4(const void* a, const void* b);
 u32 getUnlockedSlotCount(void* record);
@@ -61,7 +61,7 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
     s32 added = 0;
     for (s32 i = 0; i < 8; i++) {
         if (copy.skills[i] != 0) {
-            if (!recordContainsPairedId(record)) {
+            if (!recordContainsPairedId((const PairedIdList *)record, copy.skills[i])) {
                 outSkills[added++] = copy.skills[i];
             } else if (copy.skills[i] != 0) {
                 duplicates++;
@@ -69,12 +69,12 @@ u32 FUN_003f33b0(MemberRecord* source, u32 arg, u16* outSkills)
         }
     }
     qsort(outSkills, 8, 2, FUN_002c2bf4);
-    u32 unlocked = getUnlockedSlotCount(record);
+    s32 unlocked = getUnlockedSlotCount(record);
     if (8 - added > 0) outSkills[added] = 0;
 
     MemberRecord* member = record;
     s32 unplaced = added;
-    for (u32 i = 0; i < unlocked; i++) {
+    for (s32 i = 0; i < unlocked; i++) {
         if (member->skills[i] == 0) unplaced--;
     }
     if (unplaced > 0) {

@@ -1,9 +1,8 @@
 /* NON_MATCHING: recovered signed panel flag, speed accessors and offset pair; clip-rectangle argument scheduling and cached-state scratch registers still differ. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "util/Vec2Fixed.h"
-#include "util/Vec2Fixed.h"
-#include "util/PackNibbles.h"
+#include "util/MathFunctions.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct GaugePosition {

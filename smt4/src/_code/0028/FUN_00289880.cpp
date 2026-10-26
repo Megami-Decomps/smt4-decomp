@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match5_CommonBackground.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
 s32 jobIsValid(u32);

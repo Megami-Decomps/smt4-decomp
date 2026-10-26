@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 s32 FUN_003478dc(s32 index, const char *data);

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code002a_Smt4a.h"
 extern "C" {
 struct Object { u8 unk00[0x28]; u8 child; u8 unk29[0x39]; u8 blocked; };
 s32 FUN_00340f88(void *object);

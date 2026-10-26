@@ -1,7 +1,7 @@
 /* NON_MATCHING: draws the camp menu's "new" marker for a menu id when the matching notification flag is set; written from the decompilation and the retail disassembly, the id dispatch and render-stack scheduling not compared with retail */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct CampNotice {

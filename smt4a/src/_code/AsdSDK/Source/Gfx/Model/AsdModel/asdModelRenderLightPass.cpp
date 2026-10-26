@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail contains a provably unreachable registerBlockRequestGroups branch after MOV r0,#0; dead source code is not reproduced. */
 #include "shard/S1GfxModel.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 namespace {
 struct ModelLightVisitorView {
@@ -49,7 +50,6 @@ void FUN_00197eb0(void*, u32);
 void sceneTraverserVisit(u32, void*);
 void FUN_00176800(void*, u32, u32);
 void FUN_0018e9d8(void*, u32);
-s32 FUN_001696f4(void);
 void FUN_00176e84(void*, u32, u32, u32);
 void FUN_0017721c(void*, u32, u32, u32);
 void nw_gfx_RenderContext_ResetState_2B7478(void*);

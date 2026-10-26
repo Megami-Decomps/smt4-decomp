@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 
 extern "C" {
 
@@ -13,7 +13,7 @@ typedef struct TitleDraw {
 extern TitleDraw g_titleFlags;
 extern u32 g_renderCtx;
 
-extern void FUN_00145e24(u32 scene, u32 arg);
+extern void effectRestoreSavedRenderPairs(u32 scene, u32 arg);
 extern s32 FUN_001696f4(void);
 extern void asdGxCommandListBegin(u32 commandList);
 
@@ -21,7 +21,7 @@ extern void asdGxCommandListBegin(u32 commandList);
 u32 titlePrepareDrawFrame(void)
 {
     if (FUN_00152f54() != 0) {
-        FUN_00145e24(g_renderCtx, FUN_00152f54());
+        effectRestoreSavedRenderPairs(g_renderCtx, FUN_00152f54());
     }
     if (g_titleFlags.hidden == 0 && g_titleFlags.enabled != 0 && FUN_001696f4() == 1) {
         asdGxCommandListBegin(g_titleFlags.commandList);

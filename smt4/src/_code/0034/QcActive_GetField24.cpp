@@ -1,4 +1,5 @@
 #include "common.h"
+#include "quest_center/QuestStatus_Smt4.h"
 
 extern "C" {
 

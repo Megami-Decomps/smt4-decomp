@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
-#include "util/MemClearWords.h"
+#include "util/MemoryHelpers.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;

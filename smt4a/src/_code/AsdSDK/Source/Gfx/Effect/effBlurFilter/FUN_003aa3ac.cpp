@@ -1,6 +1,7 @@
 /* NON_MATCHING: REV-based color extraction and scalar VFP output stores still differ from retail. */
 #include "AsdSDK/AsdDebug.h"
 #include "gfx/QuaternionWorkspace.h"
+#include "code/Code0051_Smt4a.h"
 
 struct ScatterParams {
     /* 0x00 */ s32 count;
@@ -36,7 +37,6 @@ struct ScatterSample {
 extern "C" {
 extern const char g_effBlurFilterSourcePath[];
 void* memAlloc(u32, u32, u32, u32, u32, u32);
-f32 shiftRandomNextFraction(s32);
 
 /* Allocate the scatter samples and seed their frame, color and square bounds. */
 ScatterSample* FUN_003aa3ac(ScatterParams* params)

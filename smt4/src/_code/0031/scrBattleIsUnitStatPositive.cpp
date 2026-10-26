@@ -1,7 +1,6 @@
 #include "battle/btlScript.h"
 #include "battle/BattleUnitSlot.h"
 #include "script/ScriptArgs.h"
-
 extern "C" {
 
 typedef struct Stats {

@@ -3,6 +3,7 @@
 #include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
 #include "script/scrScriptProcess.h"
+#include "shard/W6_W6Match1_BgmRequestChannel.h"
 
 struct ScriptFile;
 struct ScriptProcessWork;
@@ -42,7 +43,6 @@ void bgmReleaseStopped(void);
 void mapDepartSetTarget(u32 first, u32 second);
 s32 FUN_0027d8c8(void);
 void gameRestoreWorkSave(s32 kind);
-u32 FUN_002903f0(void);
 ScriptProcessWork *FUN_00297060(ScriptFile *file, u32 owner);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 void soundChannelRequestIfEnabled(s32 id, s32 flag, s32 frames);

@@ -31,7 +31,7 @@ int buttonHelpResetSlots(void);
 int FUN_0026b738(...);
 int recordContainsPairedId(...);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_002954f4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0029bd4c(void);
 int beginStatusPanelClose(void);
@@ -75,7 +75,7 @@ extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: infoWinSetMessage. */
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int dialogIsActive(void);
@@ -455,7 +455,7 @@ void FUN_001cea8c(int param_1)
     }
     temp_v15 = btlTalkBustUpGetValue();
     if (temp_v15 == 0) {
-      FUN_002954f4(*(unsigned short *)(temp_v5 + 0x46),1);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v5 + 0x46),1);
       btlTalkBustUpSetUnk2F4(1);
     }
     temp_v15 = gameFlagIsSet(0x406);

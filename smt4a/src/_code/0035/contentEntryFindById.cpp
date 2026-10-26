@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match3_ContentWordList.h"
-#include "shard/contentEntryFindById.h"
+#include "gamedata/GameDataAccess_ContentWordList.h"
 
 extern "C" {
 

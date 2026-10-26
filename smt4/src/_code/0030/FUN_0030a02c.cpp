@@ -1,9 +1,6 @@
 /* NON_MATCHING: armcc hoists the constant 1 above the branch (mov r7, #1) where retail loads it separately in the lock block (r1) and after it (r4), so registers and one nop differ */
 #include "ui/MessageMain.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;

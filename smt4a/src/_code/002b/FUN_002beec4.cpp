@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match1_PositionedStream.h"
 
 #include "sys/ProcessResult.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 extern "C" void FUN_0032ca54(u32 result);
 extern "C" void sysFatalBreak();
 

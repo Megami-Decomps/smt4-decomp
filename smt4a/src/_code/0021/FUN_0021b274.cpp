@@ -1,5 +1,5 @@
-/* NON_MATCHING: track/image selection merges branches; camp pointer loaded twice and register allocation differs. */
 #include "camp/CampState.h"
+/* NON_MATCHING: track/image selection merges branches; camp pointer loaded twice and register allocation differs. */
 
 extern "C" {
 extern CampStateA *g_camp;

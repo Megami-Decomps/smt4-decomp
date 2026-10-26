@@ -1,7 +1,7 @@
 /* NON_MATCHING: flag-store folding, two-byte counter clearing and active-slot address decomposition differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "shard/FUN_00298f88.h"
-#include "shard/gameGetFlagBlock.h"
+#include "code/Code0029.h"
+#include "gamedata/GameDataAccess_VariantA.h"
 
 struct ActiveFlagEntrySlotView {
     u16 id;

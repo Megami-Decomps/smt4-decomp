@@ -1,4 +1,4 @@
-/* NON_MATCHING: if-conversion only: retail branches over the two stores (`beq`), built predicates them (`ldrne`/`stmne`) */
+/* NON_MATCHING: if-conversion only: retail branches over the two stores (`beq`), built predicates them (`ldrne`/`stmne`); needs the real class so the compiler emits the vptr store. */
 /* Allocates and initializes an 8-byte object from `heap`, remembering the heap; returns it, or NULL if the allocation failed. */
 #include "common.h"
 

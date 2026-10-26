@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 #define LAZY_STATE_START 0
 #define LAZY_STATE_RUN_ENTRY 1
@@ -51,7 +52,6 @@ s32 FUN_0035d83c(LazyScriptTask *task);
 void FUN_0035d7bc(LazyScriptTask *task);
 void gameDataBlocksReleaseHold(s32 mask);
 void gameDataFlagsClearBits(s32 mask);
-void gameDataBlocksMaskClearBits(s32 mask);
 
 /* Returns 1 when the task has finished (or none exists), otherwise 0. */
 u32 FUN_00229c9c(u32 unused, s32 enabled)

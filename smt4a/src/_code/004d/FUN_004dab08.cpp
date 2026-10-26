@@ -1,7 +1,8 @@
 /* NON_MATCHING: signed filter flags restore shared high-offset base and saved registers; bracket count/selector loads remain unconditional below the zero branch rather than predicated above it. */
 #include "common.h"
 #include <stddef.h>
-#include "util/ComputeCountLimit.h"
+#include "util/BitsAndBytes.h"
+#include "code/Code002a_Smt4a.h"
 
 /* A demon skill-like record as the fusion/search filter reads it. */
 struct FilterRecord {
@@ -57,7 +58,6 @@ extern "C" {
 FilterRecord *FUN_00184310(u32 id);
 s32 slotRecordFindById(u32 id);
 SlotRecord *gameGetSlotRecord(s32 slot);
-s32 FUN_002a4b28(u32 id);
 
 /* Whether the record `recordId` passes the filter, with the two member ids given for the party-slot conditions. */
 s32 FUN_004dab08(RecordFilter *filter, u32 memberA, u32 memberB, u32 recordId)

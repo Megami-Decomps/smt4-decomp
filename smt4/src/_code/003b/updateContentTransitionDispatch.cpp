@@ -20,7 +20,7 @@ struct ContentTransitionRequests {
 extern "C" {
 extern ContentTransitionRequests DAT_0049fa1c;
 extern AocSystem *g_aocSystem;
-u32 FUN_002764a8(AocSystem *);
+u32 aocSelectedRecordIsUnavailable(AocSystem *);
 void slotSetRequest(s32, s32, u32);
 void messageMainFinishWindow();
 u32 FUN_0022b8c0(void *);
@@ -40,7 +40,7 @@ void updateContentTransitionDispatch(ContentTransition *scene)
         scene->state = 12;
         scene->phase = 0;
         DAT_0049fa1c.state12 = 0;
-    } else if (FUN_002764a8(g_aocSystem)) {
+    } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
         scene->state = 14;
         scene->phase = 0;
     } else {

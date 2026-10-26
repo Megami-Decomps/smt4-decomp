@@ -2,6 +2,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 
 /* Ailment modifiers extend past the shared stat[12] prefix; this view avoids changing that boundary. */
 struct BattleAilmentChanceView {
@@ -13,7 +14,6 @@ struct BattleAilmentChanceView {
 extern "C" {
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, u32 id);
 void textFormatBuffer(char *output, const char *format, ...);
-u32 randRange(u32 maximum);
 
 /* Rolls an ailment's luck-adjusted base chance plus the combatant's corresponding modifier. */
 u32 FUN_00245d0c(u32 id, s32 ailment)

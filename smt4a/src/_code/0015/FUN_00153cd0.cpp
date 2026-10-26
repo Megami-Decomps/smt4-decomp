@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp34; /* 0x34: local_34 */
 } param_4_stack;
 
-extern unsigned char LAB_00167e0c; /* 0x167e0c */
+extern unsigned char FUN_00167e0c; /* 0x167e0c */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -79,7 +79,7 @@ void FUN_00153cd0(int *param_1,int param_2,unsigned int param_3,int param_4)
           }
           temp_v0 = FUN_0018a4d0(param_2,temp_v4);
           param_1[temp_v4 + 0x34] = temp_v0;
-          temp_v1 = FUN_001af874(0,&LAB_00167e0c,param_1);
+          temp_v1 = FUN_001af874(0,&FUN_00167e0c,param_1);
           param_1[temp_v4 + 0x1a] = temp_v1;
           if (*pcVar2 == '\x02') {
             FUN_001c7bf0(temp_v1,unaff_r11);

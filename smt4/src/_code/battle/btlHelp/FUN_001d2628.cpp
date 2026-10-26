@@ -1,6 +1,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "code/Code001d_Smt4.h"
 
 struct BtlHelpOwner {
     u32 parent; // 0x00

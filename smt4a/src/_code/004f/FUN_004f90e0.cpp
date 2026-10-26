@@ -1,26 +1,22 @@
-/* NON_MATCHING: retail retains an unused incoming-r1 save and redundant always-true flag updates; reproducing these would require banned dead-code steering. */
+/* NON_MATCHING: loop, roster flag test and the always-1 result match retail; retail also copies the unused second argument (r1) into r6 before the loop, which only shifts register numbers. */
 #include "battle/BtlMainAccess.h"
-#include "romwright_types.h"
+#include "battle/btlMain.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
 extern "C" {
 
-
-/* Supplied declaration required: btlGetMainState. */
-
-
-unsigned int FUN_004f90e0(void)
-
+/* Scans the roster records past the fixed party slots for the active flag; the result is 1 either way. */
+u32 FUN_004f90e0(u32 unused, u32 ignored)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = 0;
-  while (temp_v0 = temp_v0 + 1, temp_v0 < 0x6d) {
-    if (temp_v0 >= 4) {
-      reinterpret_cast<int>(btlGetMainState());
+    u32 result = 1;
+    for (s32 i = 0; i < 109; i++) {
+        if (i >= 4) {
+            if ((btlGetMainState()->roster[i].liveFlags.unk50 & 1) != 0) {
+                result = 1;
+            }
+        }
     }
-  }
-  return 1;
+    return result;
 }
 
 } /* extern "C" */

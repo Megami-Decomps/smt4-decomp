@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0042_Smt4a.h"
 
 extern "C" {
 void nn_cfg_CTR_Initialize(void);

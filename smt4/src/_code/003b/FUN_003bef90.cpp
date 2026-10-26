@@ -1,6 +1,7 @@
 /* NON_MATCHING: final battleFlags read/modify/write uses r1 rather than retail r2; all other instructions agree. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/FlagBitTests.h"
 
 /* Function-local view: these fields extend beyond the canonical recovered slot prefix. */
 struct ReserveSlotSelectionView {
@@ -16,7 +17,6 @@ typedef char ReserveSlotSelectionViewOffsets[
 extern "C" {
 ReserveSlotSelectionView *gameGetSlotTable(void);
 StatBlock *gameGetUnitRecord(s32 slot);
-s32 flagWordTestBit(const void *flags, u32 bit);
 s32 randRange(u32 maximum);
 
 // Choose at most one eligible reserve unit using its encounter probability tier.

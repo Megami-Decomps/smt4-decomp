@@ -3,6 +3,8 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
+#include "map/mapDepart.h"
+#include "code/Code001d_Smt4.h"
 
 extern "C" {
 
@@ -90,7 +92,7 @@ int naviMainStartStateTimer(void);
 int aocFindSupplementalRecordIndex(...);
 int naviRefreshMainBlock(void);
 int FUN_0031d54c(void);
-int FUN_002e0608(...);
+int naviMainSetPosition(...);
 
 int scrLoaderResetWithFlag(...);
 int scrLoaderRelease(...);
@@ -143,7 +145,6 @@ int FUN_00294834(...);
 int FUN_0029ae60(...);
 int dataTable1bOr1cGetRecord(void);
 
-int FUN_001d34a8(...);
 int FUN_00275dc4(void);
 int FUN_00275dec(void);
 int battlePrepareEncounter(void);
@@ -175,7 +176,7 @@ int FUN_0019dde4(...);
 int FUN_001a9104(void);
 int FUN_0020d6b0(void);
 int FUN_0020db10(void);
-int FUN_002764a8(void);
+int aocSelectedRecordIsUnavailable(void);
 int FUN_002765d0(void);
 int mapIfClose(void);
 int mapIfSetMode1(void);
@@ -263,7 +264,6 @@ int FUN_0027d8b4(...);
 int mapClearPendingEntries(void);
 int naviClearObjectBlock(void);
 int FUN_0027d968(void);
-int FUN_0027d98c(void);
 int FUN_0027db24(...);
 int sequenceRequestClearDeferred(void);
 int FUN_00281788(void);
@@ -562,7 +562,7 @@ extern int inputIsQuestMenuPressed(void);
 extern int FUN_00276348(int);
 /* Supplied declaration required: navigationApplyOptionalValue. */
 /* Supplied declaration required: navigationApplyArguments. */
-/* Supplied declaration required: FUN_002764a8. */
+/* Supplied declaration required: aocSelectedRecordIsUnavailable. */
 /* Supplied declaration required: FUN_002765d0. */
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfSetMode1. */
@@ -747,7 +747,7 @@ extern int FUN_002d3b20(void);
 /* Supplied declaration required: mapEnemyEndEligibleStates. */
 extern int mapEnemyIsModeTwo(void);
 /* Supplied declaration required: mapIfDestroyModelSlots. */
-/* Supplied declaration required: FUN_002e0608. */
+/* Supplied declaration required: naviMainSetPosition. */
 /* Supplied declaration required: naviMainSetStateValue. */
 extern int mapEnemyIsInactive(void);
 /* Supplied declaration required: naviUpdateIfAllocated. */
@@ -1670,7 +1670,7 @@ LAB_001b9210:
       return 0;
     }
     temp_v10 = g_aocSystem;
-    FUN_002764a8();
+    aocSelectedRecordIsUnavailable();
     if (temp_v10 != 0) {
       puVar14[9] = 0x20;
       puVar14[10] = 0;
@@ -4400,7 +4400,7 @@ LAB_001bd824:
             DAT_0049f924 = 0xffffffff;
           }
           navigationSetFieldValue(DAT_0049f928);
-          FUN_002e0608(g_lmapScene + 0x1c);
+          naviMainSetPosition(g_lmapScene + 0x1c);
           navigationApplyOptionalValue(1);
           FUN_00277b5c(g_gameState,DAT_0049f920);
           temp_v9 = 0x54;
@@ -5123,7 +5123,7 @@ LAB_001bec78:
           navigationSetArguments(DAT_0049f928);
           navigationApplyArguments(DAT_0049f928,DAT_0049f92c,DAT_0049f924);
           navigationSetFieldValue(DAT_0049f928);
-          FUN_002e0608(&uStack_1c8);
+          naviMainSetPosition(&uStack_1c8);
           DAT_0049f934 = 1;
           DAT_0049f93c = 1;
           puVar14[9] = 0x54;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (230 vs 306 rows); the compiler unrolls the stage-row search by two while retail keeps a straight loop, and retail zero-fills the name buffer with 16 word stores */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "util/FUN_001cd3ec.h"
+#include "code/Code001c.h"
 
 // One BAM entry of a stage row: name, and three u16 position components stored as floats.
 struct StageBam {

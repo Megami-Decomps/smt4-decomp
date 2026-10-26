@@ -10,7 +10,7 @@ int uiDrawScrollingSelectionEntry(...);
 int FUN_0022d9c8(...);
 int FUN_0022daac(...);
 int FUN_0022db94(...);
-int FUN_0022dcac(...);
+int demonIconPanelDrawRow(...);
 int uiRectDrawAtBottomRight(int, int, int);
 int pairCopy(int, float *);
 int FUN_00231bcc(int, int, int);
@@ -35,7 +35,7 @@ extern unsigned int DAT_0049375c; /* 0x49375c */
 /* Supplied declaration required: FUN_0022d9c8. */
 /* Supplied declaration required: FUN_0022daac. */
 /* Supplied declaration required: FUN_0022db94. */
-/* Supplied declaration required: FUN_0022dcac. */
+/* Supplied declaration required: demonIconPanelDrawRow. */
 /* Supplied declaration required: uiRectDrawAtBottomRight. */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
@@ -126,7 +126,7 @@ LAB_0022cd30:
               case 1:
                 temp_v16 = 0.0f;
                 temp_v17 = temp_v12;
-                FUN_0022dcac(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v2,temp_v11);
+                demonIconPanelDrawRow(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v2,temp_v11);
                 temp_v2 = temp_v3;
                 break;
               case 2:
@@ -211,7 +211,7 @@ LAB_0022cd30:
             uiDrawScrollingSelectionEntry(param_1,temp_v2,temp_v12,(int)*(char *)(param_1 + 0x56d));
             temp_v16 = 1.4013e-45f;
             temp_v17 = temp_v12;
-            FUN_0022dcac(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v0,temp_v2);
+            demonIconPanelDrawRow(param_1,*(char *)(param_1 + 0x5a4) == '\0',temp_v0,temp_v2);
             temp_v16 = temp_v12;
             FUN_0022db94(param_1,temp_v0,temp_v2,1);
             temp_v16 = temp_v12;

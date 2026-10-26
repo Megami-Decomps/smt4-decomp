@@ -26,7 +26,7 @@ typedef char ActionRecordALayoutCheck[sizeof(ActionRecordA) == 0x1d0 ? 1 : -1];
 
 extern "C" {
 void qsort(void *base, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
-s32 FUN_003d4ec0(const void *a, const void *b);
+s32 sortCompareWeightDescending(const void *a, const void *b);
 }
 
 // One group of actions that share a key (player-side actions: the group key word; others: the Z position).
@@ -91,7 +91,7 @@ extern "C" void FUN_003e7cc8(ActionStateA *state, u32 flags)
             }
         }
     }
-    qsort(groups, groupCount, sizeof(ActionGroup), FUN_003d4ec0);
+    qsort(groups, groupCount, sizeof(ActionGroup), sortCompareWeightDescending);
 
     for (s32 index = 4; index < 54; index++) {
         ActionRecordA *action = &state->actions[index];

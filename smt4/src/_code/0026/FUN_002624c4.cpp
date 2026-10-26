@@ -49,7 +49,7 @@ s32 devilIsAvailable(FusionPreviewUnit* unit, u16 id);
 void FUN_002b7bca(void* base, s32 count, s32 size, void* compare);
 s32 fusionCandidateMatchesParentFilter(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);
 void FUN_003c9754(FusionPreviewUnit* unit, u32 first, u32 second, u32 product);
-extern u8 LAB_002c6f08;
+extern u8 halfwordKeyEmptyLastCompare;
 // Builds the fusion result of two demons: product, inherited skills and cost.
 FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, FusionResult* result)
 {
@@ -81,7 +81,7 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
         u16 id = unit->skills[i];
         if (id != 0 && (dataTable06Sub1GetRecord(id)->flags & 0x20) == 0) unit->skills[i] = 0;
     }
-    FUN_002b7bca(unit->skills, unit->skillCount, 2, &LAB_002c6f08);
+    FUN_002b7bca(unit->skills, unit->skillCount, 2, &halfwordKeyEmptyLastCompare);
     s32 oldCount = unit->skillCount;
     unit->skillCount = 0;
     for (s32 i = 0; i < oldCount; i++) {

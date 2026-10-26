@@ -1,4 +1,5 @@
 #include "shard/GameGlobals.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
 void FUN_002958f8(s32 handle, s32 enabled);

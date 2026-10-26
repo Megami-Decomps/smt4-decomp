@@ -1,4 +1,5 @@
 #include "sound/SoundParameterCommand.h"
+#include "sound/SoundPlayerPriority_Smt4a.h"
 
 struct SoundObject;
 struct SoundObjectVtbl {

@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail keeps the defaults pointer in ip and pools it before 1.0f; the build keeps it in r0 and pools 1.0f first. */
 #include "common.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 struct StartupVectorDefaults {
     /* 0x00 */ u8 unk00[0x1C];
     /* 0x1C */ f32 unk1C[4];

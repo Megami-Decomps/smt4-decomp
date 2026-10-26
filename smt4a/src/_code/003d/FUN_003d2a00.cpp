@@ -1,5 +1,19 @@
-/* NON_MATCHING: resource slots use indexed access instead of retail's switch and duplicate-search loop is peeled/unrolled. */
+/* NON_MATCHING: the per-slot resource switch now matches retail; remaining: register assignment of the binding index (retail r8, build r7) and the duplicate-search loop (retail compares signed, `gt`, without peeling; the build compares unsigned, `hi`). */
 #include "gfx/MaterialNameSelection.h"
+
+/* The named resource of slot `slot` (0..2) of a material, or NULL for any other slot. */
+static __inline MaterialNamedResource *materialGetResource(const NamedMaterialRecord *material, s32 slot)
+{
+    switch (slot) {
+    case 0:
+        return material->resources[0];
+    case 1:
+        return material->resources[1];
+    case 2:
+        return material->resources[2];
+    }
+    return NULL;
+}
 
 extern "C" {
 extern MaterialNameSelection *DAT_0057f2c4;
@@ -17,7 +31,7 @@ void FUN_003d2a00(const char *pattern)
         const MaterialBindingRecord *binding = &metadata->bindings[index];
         NamedMaterialRecord *material = &metadata->materials[binding->materialIndex];
         for (s32 resourceIndex = 0; resourceIndex < 3; ++resourceIndex) {
-            MaterialNamedResource *resource = material->resources[resourceIndex];
+            MaterialNamedResource *resource = materialGetResource(material, resourceIndex);
             if (resource != NULL && FUN_00102c30(resource->name, pattern) != NULL) {
                 u32 match;
                 for (match = 0; match < selection->count; ++match) {

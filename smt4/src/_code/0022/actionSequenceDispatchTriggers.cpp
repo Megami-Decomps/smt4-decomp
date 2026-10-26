@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match6_ActionController.h"
 
 extern "C" {
-s32 FUN_0034c944(void *animation);
+s32 gaugePairIsWithinLimits(void *animation);
 f32 FUN_00226bc0(void *animation);
 void actionCreateKindFive(s32, s32, s32);
 void FUN_0023c700(ActionController *, s32, s32, s32, s32, s32, f32, f32);
@@ -12,7 +12,7 @@ void FUN_00226a90(ActionController *, s16, s32);
 // Dispatch sequence actions when the animation reaches their trigger frames.
 void actionSequenceDispatchTriggers(ActionController *controller)
 {
-    if (!FUN_0034c944(controller->animation)) {
+    if (!gaugePairIsWithinLimits(controller->animation)) {
         s32 frame = (s32)FUN_00226bc0(controller->animation);
         if (controller->tracks[0].trigger == frame)
             actionCreateKindFive(0, 0, controller->tracks[0].value);
@@ -35,7 +35,7 @@ void actionSequenceDispatchTriggers(ActionController *controller)
             btlReflectSetValuePair(0, 0, events->extraAction, 0, 0);
         FUN_00226a90(controller, (s16)frame, 3);
     }
-    if (FUN_0034c944(controller->animation))
+    if (gaugePairIsWithinLimits(controller->animation))
         controller->state = 13;
 }
 }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: same instruction stream except the zero constant and the 0xfc00 mask swap r8/r9 and the last skillsB upper-six-bits update keeps its result in r2 (extra mov) in retail */
 #include "gamedata/PackedSkillSlot.h"
-#include "util/CalleeContracts.h"
+#include "code/Code002b.h"
 
 /* The persistent unit record the battle unit is built from. */
 struct SourceUnit {

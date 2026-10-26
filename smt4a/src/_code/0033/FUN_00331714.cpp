@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "mapnavi/naviMain.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -37,7 +38,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable08Sub2GetRecord. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
-extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_0020b490. */
 /* Supplied declaration required: resourceTableReleaseHandles. */
 /* Supplied declaration required: bgmReleaseStopped. */

@@ -47,9 +47,6 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_1_stack;
 
-extern unsigned char LAB_00313cb4; /* 0x313cb4 */
-extern unsigned char LAB_00313cbc; /* 0x313cbc */
-extern unsigned char LAB_00314000; /* 0x314000 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
@@ -124,17 +121,17 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
     if (temp_v1 != 0) {
       if (temp_v1 != 1) {
         if (temp_v1 == 2) {
-          sceneRegisterBoxEffect(0,0,&LAB_00314000,0x55,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
+          sceneRegisterBoxEffect(0,0,"NEXT",0x55,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                        (int)psVar5[0xb],(int)psVar5[0xc],0);
         }
       }
       else {
-        sceneRegisterBoxEffect(0,0,&LAB_00313cbc,0x50,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
+        sceneRegisterBoxEffect(0,0,"EXIT",0x50,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                      (int)psVar5[0xb],(int)psVar5[0xc],0);
       }
     }
     else {
-      sceneRegisterBoxEffect(0,0,&LAB_00313cb4,0x4f,0x29,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
+      sceneRegisterBoxEffect(0,0,"PREV",0x4f,0x29,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[10],
                    (int)psVar5[0xb],(int)psVar5[0xc],0);
     }
     FUN_00281b94(0);
@@ -181,7 +178,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         temp_v2 = (int)psVar5[8];
         temp_v8 = 4;
         if (temp_v6 == 0) {
-          sceneRegisterBoxEffect(0,0,&LAB_00314000,0x51,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,temp_v2,0);
+          sceneRegisterBoxEffect(0,0,"NEXT",0x51,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,temp_v2,0);
           FUN_00281b94(0);
           return;
         }
@@ -191,7 +188,7 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
       else {
         temp_v2 = gameDataIsFlagByteSet((int)*psVar5);
         if (temp_v2 != 0) {
-          sceneRegisterBoxEffect(0,0,&LAB_00314000,0x54,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
+          sceneRegisterBoxEffect(0,0,"NEXT",0x54,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                        (int)psVar5[7],(int)psVar5[8],0);
           FUN_00281b94(0);
           return;
@@ -203,12 +200,12 @@ void FUN_00313974(fn_00313974_arg0 *param_1)
         temp_v5 = 0x205;
         temp_v7 = 0x53;
       }
-      sceneRegisterBoxEffect(temp_v5,0,&LAB_00314000,temp_v7,temp_v8,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,
+      sceneRegisterBoxEffect(temp_v5,0,"NEXT",temp_v7,temp_v8,0xffffffff,0,0,0,0,0,0,0,0xd,1,temp_v4,temp_v3,
                    temp_v2,0);
     }
   }
   else {
-    sceneRegisterBoxEffect(0,0,&LAB_00314000,0x4e,0x2a,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
+    sceneRegisterBoxEffect(0,0,"NEXT",0x4e,0x2a,0xffffffff,0,0,0,0,0,0,0,0xd,1,(int)psVar5[6],
                  (int)psVar5[7],(int)psVar5[8],0);
   }
   FUN_00281b94(0);

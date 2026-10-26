@@ -1,9 +1,9 @@
 /* NON_MATCHING: ARMCC merges highlighted/plain draw calls and does not reproduce retail's branch hints or final setter tail call. */
 #include "shard/W6_W6Match7_FontResource.h"
 #include "text/TextDraw.h"
+#include "shard/W6_W6Match2_HelpResources.h"
 
 extern "C" {
-FontGlyphResourceOwner *FUN_0019dc44(u32 index);
 void efctSetSpeed(f32 alpha);
 
 /* Draw a two-byte glyph, substituting the fallback when the font lacks it. */

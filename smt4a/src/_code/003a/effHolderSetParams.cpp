@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W6_W6Match5_TextureAttachment.h"
+#include "code/Code003a_Smt4a.h"
 
 extern "C" {
 

@@ -3,7 +3,7 @@
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
 #include "ui/UiSpriteState.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 namespace {
 struct CommandPanelMasks { u8 prefix[0x20]; u64 blocked; };

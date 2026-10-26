@@ -28,22 +28,13 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned char LAB_0025d44c; /* 0x25d44c */
-extern unsigned char LAB_0025d4a0; /* 0x25d4a0 */
-extern unsigned char LAB_002a27e4; /* 0x2a27e4 */
+extern unsigned char campCecEditCreateEffect; /* 0x25d44c */
+extern unsigned char cecUpdateEditMode; /* 0x25d4a0 */
+extern unsigned char campCecEditDraw; /* 0x2a27e4 */
 extern int FUN_002e1d1c(...); /* 0x2e1d1c */
-extern unsigned char LAB_00318e7c; /* 0x318e7c */
+extern unsigned char FUN_00318e7c; /* 0x318e7c */
 extern int FUN_00318e84(...); /* 0x318e84 */
-extern unsigned char LAB_00342c14; /* 0x342c14 */
-extern unsigned char LAB_00342c2c; /* 0x342c2c */
-extern unsigned char LAB_00342c48; /* 0x342c48 */
-extern unsigned char LAB_00342c68; /* 0x342c68 */
-extern unsigned char LAB_00342c80; /* 0x342c80 */
-extern unsigned char LAB_00342c9c; /* 0x342c9c */
-extern unsigned char LAB_00342cdc; /* 0x342cdc */
-extern unsigned char LAB_00342cf0; /* 0x342cf0 */
-extern unsigned char LAB_00342d08; /* 0x342d08 */
-extern unsigned char LAB_00342e24; /* 0x342e24 */
+extern unsigned char FUN_00342e24; /* 0x342e24 */
 extern int FUN_00359dc4(...); /* 0x359dc4 */
 extern int FUN_0036ce70(...); /* 0x36ce70 */
 extern int FUN_00387bb8(...); /* 0x387bb8 */
@@ -100,14 +91,13 @@ void FUN_0034280c(unsigned char param_1)
   }
   puVar3 = g_campCecEdit;
   sysMemClear();
-  puVar4 = &LAB_00342c14;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_00342c14), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_0025d4a0), 0, 0);
+  asdProcessCreateSimple("CampCecEdit Calc", 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&cecUpdateEditMode), 0, 0);
   *puVar3 = (unsigned int)puVar4;
-  taskCreateDraw(&LAB_00342c2c,0x65,0,0,&LAB_002a27e4,0,0,puVar4);
-  taskCreateDraw(&LAB_00342c48,0xcc,0,0,&LAB_002a27e4,0,0,*puVar3);
-  taskCreateDraw(&LAB_00342c68,0x81,0,0,&LAB_0025d44c,0,0,*puVar3);
-  taskCreateDraw(&LAB_00342c80,0xdd,0,0,&LAB_0025d44c,0,0,*puVar3);
-  taskCreateDraw(&LAB_00342c9c,0xea,0,0,FUN_002e1d1c,0,0,*puVar3);
+  taskCreateDraw("CampCecEdit DrawUpLeft_b",0x65,0,0,&campCecEditDraw,0,0,puVar4);
+  taskCreateDraw("CampCecEdit DrawUpRight_b",0xcc,0,0,&campCecEditDraw,0,0,*puVar3);
+  taskCreateDraw("CampCecEdit DrawUpLeft",0x81,0,0,&campCecEditCreateEffect,0,0,*puVar3);
+  taskCreateDraw("CampCecEdit DrawUpRight",0xdd,0,0,&campCecEditCreateEffect,0,0,*puVar3);
+  taskCreateDraw("CampCecEdit DrawDown",0xea,0,0,FUN_002e1d1c,0,0,*puVar3);
   puVar3[0x3e] = 0xffffffff;
   puVar3[0x3c] = 0xffffffff;
   puVar3[0x3d] = 0;
@@ -139,12 +129,12 @@ void FUN_0034280c(unsigned char param_1)
   *(unsigned short *)((int)puVar3 + 0x10a) = temp_v1;
   *(unsigned char *)((int)puVar3 + 0x10d) = *(unsigned char *)(temp_v2 + 0x27e0e);
   puVar3[0x18] = (unsigned int)FUN_00359dc4;
-  puVar3[0x1a] = (unsigned int)&LAB_00342e24;
+  puVar3[0x1a] = (unsigned int)&FUN_00342e24;
   puVar3[0x19] = (unsigned int)FUN_00318e84;
   puVar3[0x1b] = (unsigned int)FUN_00387d38;
   puVar3[0x1c] = (unsigned int)FUN_00387bb8;
   puVar3[0x1d] = (unsigned int)FUN_0036ce70;
-  puVar3[0x21] = (unsigned int)&LAB_00318e7c;
+  puVar3[0x21] = (unsigned int)&FUN_00318e7c;
   puVar3[0x1e] = (unsigned int)FUN_003aef48;
   puVar3[0x1f] = (unsigned int)stepObjStart;
   puVar3[0x20] = (unsigned int)stepObjBStart;
@@ -189,9 +179,9 @@ void FUN_0034280c(unsigned char param_1)
   campCecDrawPageCreate();
   puVar3[3] = temp_v3;
   characterInfoPanelPopulate();
-  asdLoadFileAsyncSimple(&LAB_00342cdc,puVar3 + 0x14,0);
-  asdLoadFileAsyncSimple(&LAB_00342cf0,puVar3 + 0x15,0);
-  asdLoadFileAsyncSimple(&LAB_00342d08,puVar3 + 0x16,0);
+  asdLoadFileAsyncSimple("camp/CecEdit_scr.bf",puVar3 + 0x14,0);
+  asdLoadFileAsyncSimple("camp/CecEdit_msg.mbm",puVar3 + 0x15,0);
+  asdLoadFileAsyncSimple("camp/CecEdit_one_msg.mbm",puVar3 + 0x16,0);
   temp_v0 = *(unsigned char *)(puVar3[2] + 0x22);
   temp_v4 = (unsigned int)temp_v0;
   FUN_00182054();

@@ -1,5 +1,6 @@
 #include "common.h"
-#include "util/FUN_0015fb68.h"
+#include "code/Code0015.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 

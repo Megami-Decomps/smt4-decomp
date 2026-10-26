@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 #include <stdlib.h>
 #include "event/2dEvent/2dEventTex.h"
-#include "util/FUN_004da77c.h"
+#include "code/Code004d.h"
 
 struct FusionCatalogCriteria {
     u8 unk00[8];

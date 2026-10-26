@@ -1,6 +1,6 @@
 /* NON_MATCHING: scheduling only: same stores and calls, but retail loads g_messageMain first and interleaves the constant moves and the vstr differently. */
 #include "common.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 /* The message window object; only the fields the value popup sets are named. */
 struct MessagePopupWindow {

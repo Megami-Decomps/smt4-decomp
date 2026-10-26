@@ -2,6 +2,7 @@
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
+#include "util/BitsAndBytes.h"
 
 struct FusionAvailability {
     u8 available;
@@ -10,7 +11,6 @@ struct FusionAvailability {
     u16 resultId;
 };
 extern "C" {
-u32 computeCountLimit(void);
 s32 FUN_004da980(UniteWork *, u32, u32);
 s32 entryDefIsAvailable(UniteWork *, u32);
 s32 FUN_004db65c(UniteWork *, u32, u32, u64 *);

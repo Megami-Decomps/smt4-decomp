@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 
 extern "C" {
 

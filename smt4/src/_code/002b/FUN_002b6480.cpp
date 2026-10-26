@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_002b6480.h"
+#include "code/Code002b.h"
 
 extern "C" {
 u32 asdLoadFileAsync(u32 first, u32 second, u32 third, u32 fourth,

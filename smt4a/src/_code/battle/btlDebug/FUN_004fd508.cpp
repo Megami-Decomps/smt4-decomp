@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "battle/btlReflect.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {
 

@@ -51,7 +51,6 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } void_stack;
 
-extern unsigned char LAB_00215490; /* 0x215490 */
 extern int g_saveLoadUI; /* 0x44de2c */
 extern int DAT_0044de30; /* 0x44de30 */
 extern int g_titleScene; /* 0x44ea00 */
@@ -270,7 +269,7 @@ unsigned int FUN_00214a60(void)
           FUN_0025086c(temp_v10 / 10,temp_v31);
           FUN_0025086c(temp_v10 % 10,temp_v32);
           puStack_120 = temp_v32;
-          textFormatBuffer(temp_v27,&LAB_00215490,temp_v28,temp_v33,temp_v30,temp_v31);
+          textFormatBuffer(temp_v27,"%s\x81F%s%s\x81F%s%s",temp_v28,temp_v33,temp_v30,temp_v31);
           temp_v9 = libc_strlen(temp_v27);
           VectorSignedToFloat((int)**(short **)(temp_v23 + 0xc) - (temp_v9 * 9) / 2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);

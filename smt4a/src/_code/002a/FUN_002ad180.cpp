@@ -1,8 +1,8 @@
 /* NON_MATCHING: callback handle and shared draw coordinates recovered; push expression order and job-loop address sharing differ. */
 #include "camp/RenderCtx.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0038.h"
 #include "shard/JobWork.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 namespace {
 /* The event job's work area: the list of jobs to draw and the position they are drawn at. */

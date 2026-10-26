@@ -1,4 +1,4 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: corrected next-dot snapshot, native aligned label copy, and signed animation getter; font-settings ownership, stack layout and saved work/context registers still differ. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"

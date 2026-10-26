@@ -1,4 +1,5 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4a.h"
 
 struct TextureTable;
 struct TextureNode;

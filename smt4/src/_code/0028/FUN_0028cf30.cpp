@@ -1,4 +1,5 @@
 #include "shard/PlayScene.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
 

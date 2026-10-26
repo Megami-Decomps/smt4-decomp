@@ -3,13 +3,13 @@
 #include "shard/JobWork.h"
 #include "shard/W6_W6Match2_GeometryResources.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_VariantA.h"
 
 extern "C" {
-extern u8 LAB_002e11f0; /* item callback */
+extern u8 asdListBoxFreeItem; /* item callback */
 
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(u32 listBox);
-void asdListBoxViewRefresh(void *view);
 char *strncpy(char *dst, const char *src, u32 n);
 
 /* Adds one item per table row (label, kind, value and range) to the list box. */
@@ -32,7 +32,7 @@ void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, s32 count)
         item->type = 0;
         item->id = model->nextItemId;
         model->nextItemId++;
-        asdListAdd(model, item, &LAB_002e11f0);
+        asdListAdd(model, item, &asdListBoxFreeItem);
         asdListBoxMarkDirty(listBox);
         asdListBoxViewRefresh(model->view);
         model->selectedCursor = model->viewCursor;

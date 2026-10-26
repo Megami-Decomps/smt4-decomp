@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_0027d9e8.h"
+#include "code/Code0027.h"
 
 struct IdSlotEntry {
     u32 unk00; // 0x00

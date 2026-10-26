@@ -19,9 +19,10 @@ extern void FUN_00121018(void *work, f32 value);
 /* Updates an active sound scalar and forwards it to the playing object. */
 void FUN_0010edbc(f32 value)
 {
-    if (g_asdSound.active != 0) {
-        g_asdSound.second = value;
-        FUN_00121018(g_asdSound.object, value);
+    SoundRuntimeScalars *asdSoundPtr = &g_asdSound;
+    if (asdSoundPtr->active != 0) {
+        asdSoundPtr->second = value;
+        FUN_00121018(asdSoundPtr->object, value);
     }
 }
 

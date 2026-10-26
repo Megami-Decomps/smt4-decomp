@@ -1,6 +1,5 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
-
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 randNextInRange(u16 range);

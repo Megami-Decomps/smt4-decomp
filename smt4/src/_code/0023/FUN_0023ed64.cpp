@@ -1,6 +1,7 @@
 /* NON_MATCHING: alpha/scale pair transfers, VFP constant registers, and phase-one branch placement differ. */
 #include "ui/SplashAnimationState.h"
-#include "util/CalleeContracts.h"
+#include "code/Code002c.h"
+#include "ui/UiControl.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

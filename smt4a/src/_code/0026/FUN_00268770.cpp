@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "addon/LookupRecord.h"
+#include "code/Code0033.h"
 
 extern "C" {
 
@@ -36,7 +37,6 @@ int FUN_002a4964(...);
 int objectApplyIfUnblocked(...);
 int FUN_0031f208(...);
 int sortMenuAcquire(...);
-int FUN_003343f0(...);
 int useCounterRelease(void);
 
 int FUN_001517b4(...);
@@ -70,8 +70,6 @@ typedef struct {
 } void_stack;
 
 extern unsigned char LAB_0026b0b8; /* 0x26b0b8 */
-extern unsigned char LAB_0026b0d8; /* 0x26b0d8 */
-extern unsigned char LAB_0026b0dc; /* 0x26b0dc */
 extern int FUN_002b29fc(...); /* 0x2b29fc */
 extern int entryRefCompareByKey(...); /* 0x2b2a94 */
 extern int FUN_002ce088(...); /* 0x2ce088 */
@@ -1571,7 +1569,7 @@ LAB_0026adc4:
       temp_v11 = (unsigned int)*(unsigned short *)(temp_v2 + (temp_v14 + temp_v6) * 4 + 0x6e2);
       if (temp_v11 != 0) {
         temp_v11 = (unsigned int)dataTable0cSub1GetText((unsigned short)temp_v11);
-        textFormatBuffer(temp_v17,&LAB_0026b0d8,temp_v11);
+        textFormatBuffer(temp_v17,"%s",temp_v11);
         FUN_0019de98(temp_v17,0xf4f4f4ff);
       }
     }
@@ -1589,7 +1587,7 @@ LAB_0026adc4:
       temp_v13 = *(unsigned short *)(temp_v6 + 0xf48);
       temp_v7 = (unsigned int)FUN_00180114(temp_v13);
       temp_v12 = FUN_0014bf3c(temp_v13,0);
-      textFormatBuffer(temp_v17,&LAB_0026b0dc,temp_v12,temp_v7);
+      textFormatBuffer(temp_v17,"%s  %s",temp_v12,temp_v7);
       puVar16 = temp_v17;
     }
     FUN_0019de98(puVar16,0xf4f4f4ff);

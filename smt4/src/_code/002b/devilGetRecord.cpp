@@ -1,7 +1,7 @@
 #include "gamedata/DevilRecord.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
-#include "shard/devilGetRecord.h"
+#include "gamedata/GameDataAccess_VariantD_DevilRecord.h"
 
 extern "C" {
 extern AocSystem *g_aocSystem;

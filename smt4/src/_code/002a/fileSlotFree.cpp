@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FileSlotFree.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 struct FileSlot {
     u32 unk00;

@@ -34,7 +34,6 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_4_stack;
 
-extern unsigned char LAB_0031b530; /* 0x31b530 */
 extern signed char DAT_0059dbe9; /* 0x59dbe9 */
 extern int DAT_0059dc40; /* 0x59dc40 */
 extern unsigned int DAT_0059dc44; /* 0x59dc44 */
@@ -496,7 +495,7 @@ LAB_0031ad90:
     *(int *)(temp_v11 + 0xc) = temp_v9;
     effMenuListAppend();
   }
-  asdDebugLog(0xa4,0x6e,8,&LAB_0031b530,temp_v30);
+  asdDebugLog(0xa4,0x6e,8,"0%14d",temp_v30);
   temp_v16 = padButtonIsPressed(1);
   if (temp_v16 == 0) {
     FUN_00202178(1);

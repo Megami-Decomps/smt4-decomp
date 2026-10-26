@@ -12,7 +12,7 @@ extern "C" int asdMemFreeNonNull(void *block);
 class Obj42247c : public BibleView {
 public:
     Obj42247c();
-    virtual ~Obj42247c();
+    virtual ~Obj42247c() {}
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
     static void operator delete(void *block) { asdMemFreeNonNull(block); }
     virtual void start() = 0;

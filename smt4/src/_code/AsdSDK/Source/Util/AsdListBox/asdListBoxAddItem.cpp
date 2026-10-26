@@ -3,13 +3,13 @@
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_VariantA.h"
 
 extern "C" {
 extern const char DAT_00409d40[]; /* AsdListBox.cpp: __FILE__ */
 
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(AsdListBox *listBox);
-void asdListBoxViewRefresh(void *view);
 s32 asdListBoxGetCursor(void *view);
 void asdListBoxFreeItem(void *item);
 char *strncpy(char *dst, const char *src, u32 n);

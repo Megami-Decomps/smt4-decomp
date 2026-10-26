@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 extern "C" {
 

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/MemClearWords.h"
+#include "util/MemoryHelpers.h"
 
 extern "C" {
 

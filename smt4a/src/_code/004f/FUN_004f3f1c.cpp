@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail shares the 0x400 flag calculation and branches around the preserve path; compiled code predicates the paths and uses a separate flag-address setup. */
+/* NON_MATCHING: control flow and shared 0x400 flag match retail; retail updates the flags word through a pre-indexed ldr/str writeback (ldr r1,[r0,#1612]!) the build does not produce. */
 #include "common.h"
 
 struct TargetTransition {
@@ -22,11 +22,12 @@ extern "C" void FUN_004f3f1c(TargetTransition* state, u32 target, u32 parameter,
     state->target = target;
     state->step = 0;
     state->parameter = parameter;
+    u32 flags = state->flags | 0x400;
     if (preservePending == 0) {
-        state->flags |= 0x400;
+        state->flags = flags;
     } else {
         state->previous = state->pending;
-        state->flags |= 0x200400;
+        state->flags = flags | 0x200000;
     }
     state->pending = 0.0f;
 }

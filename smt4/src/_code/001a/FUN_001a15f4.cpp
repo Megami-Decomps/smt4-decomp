@@ -1,4 +1,4 @@
-/* NON_MATCHING: guard-return layout now matches; the compiler still schedules the byte load before calculating the bit index. */
+/* NON_MATCHING: guard-return layout now matches; the compiler still schedules the byte load before calculating the bit index (separate byte/bit/bits locals tried: worse). */
 #include "shard/W6_W6Match2_SaveFlags.h"
 
 // Test a saved flag for IDs 1 through 500.

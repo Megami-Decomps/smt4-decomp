@@ -3,7 +3,7 @@
 #include "gamedata/Table00.h"
 #include "gamedata/Table00Lookup.h"
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct DemonPortraitCropA { s32 top, bottom, left, right; };

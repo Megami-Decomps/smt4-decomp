@@ -1,8 +1,7 @@
 /* NON_MATCHING: retail keeps the zero Y component as a literal-pool constant in the length (vmla with a pooled 0.0f) and loads s3 for unk04; recovered code materializes zero with mov/vmov. */
 #include "common.h"
 #include <math.h>
-#include "util/CalleeContracts.h"
-
+#include "code/Code0015.h"
 struct DirectionSourceView {
     u8 unk00[0x04];
     f32 unk04; // 0x04

@@ -2,7 +2,7 @@
 #include "classes/Obj4221fc.h"
 #include "gamedata/TableEntryRef.h"
 #include "nn/Result.h"
-#include "util/FUN_00234624.h"
+#include "code/Code0023.h"
 
 struct Obj4221fcManager {
     u8 unk00[0x18];

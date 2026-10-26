@@ -14,10 +14,11 @@ typedef char MobiclipHeapLayoutCheck[sizeof(MobiclipHeap) == 0x58 &&
 
 extern "C" void nn_fnd_ExpHeapBase_Finalize(MobiclipHeap *);
 extern "C" void asdMemFree(void *);
+extern "C" void *mobiclipHeapGetAllocation(const MobiclipHeap *heap);
 
 static inline void mobiclipFinalizeHeap(MobiclipHeap *heap)
 {
-    void *allocation = heap->allocation;
+    void *allocation = mobiclipHeapGetAllocation(heap);
     nn_fnd_ExpHeapBase_Finalize(heap);
     asdMemFree(allocation);
 }

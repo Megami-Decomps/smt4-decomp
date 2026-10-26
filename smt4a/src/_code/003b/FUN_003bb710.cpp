@@ -1,7 +1,7 @@
 /* NON_MATCHING: Innate-skill aggregate copy grouping, merged-buffer/source addressing and the inherited-skill count loop unrolling differ. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "gamedata/DevilRecordA.h"
-#include "util/CalleeContracts.h"
+#include "util/BitsAndBytes_VariantB.h"
 
 extern "C" {
 extern UniteWork *g_unite;

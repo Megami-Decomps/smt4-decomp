@@ -1,4 +1,4 @@
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00202ea4` (_code @ 0x202ea4, 0xaa0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"

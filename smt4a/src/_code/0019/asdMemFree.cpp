@@ -2,7 +2,7 @@
 #include "classes/AllocatorState.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
-#include "shard/asdMemFree.h"
+#include "util/MemoryHelpers_VariantC.h"
 
 extern "C" {
 

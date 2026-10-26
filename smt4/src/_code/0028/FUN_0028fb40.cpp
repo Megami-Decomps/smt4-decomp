@@ -1,6 +1,6 @@
 /* NON_MATCHING: initial bank load is not predicated; bit-mask register and false-result return branch differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
-#include "util/FUN_0028fb40.h"
+#include "code/Code0028.h"
 
 extern "C" {
 FlagValueStorage *FUN_00282be4(void);

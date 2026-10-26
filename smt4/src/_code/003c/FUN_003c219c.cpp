@@ -1,6 +1,6 @@
-/* NON_MATCHING: cached stat register assignment, weight summation scheduling, and result narrowing differ. */
+/* NON_MATCHING: stat loads (all signed), cap checks interleaved with the weight sum and the result narrowing match retail; only the callee-saved register numbering of the five cached stats is rotated (retail: strength in fp, then r7-r9, sl). */
 #include "gamedata/UnitStats.h"
-#include "util/CalleeContracts.h"
+#include "util/Random.h"
 
 extern "C" {
 void FUN_003eb068(void *);
@@ -13,22 +13,26 @@ u32 FUN_003c219c(StatBlock *unit, u8 *weights)
     FUN_003eb068(updated);
     s16 strength = unit->summary.stats[0];
     updated[0] = strength;
-    u16 dexterity = unit->summary.stats[1];
+    s16 dexterity = unit->summary.stats[1];
     updated[1] = dexterity;
-    u16 magic = unit->summary.stats[2];
+    s16 magic = unit->summary.stats[2];
     updated[2] = magic;
-    u16 agility = unit->summary.stats[3];
+    s16 agility = unit->summary.stats[3];
     updated[3] = agility;
     s16 luck = unit->summary.stats[4];
     updated[4] = luck;
     if (strength >= 999) weights[0] = 0;
+    u32 total = weights[0];
     if (dexterity >= 999) weights[1] = 0;
+    total += weights[1];
     if (magic >= 999) weights[2] = 0;
+    total += weights[2];
     if (agility >= 999) weights[3] = 0;
+    total += weights[3];
     if (luck >= 999) weights[4] = 0;
+    total += weights[4];
 
-    u32 roll = randNextInRange(static_cast<u16>(weights[0] + weights[1] +
-        weights[2] + weights[3] + weights[4] - 1));
+    u32 roll = randNextInRange(static_cast<u16>(total - 1));
     u32 cumulative = weights[0];
     if (weights[0] && cumulative > roll) {
         updated[0] = strength + 1;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail writes the cursor straight into the return slot (strhi/stm/str writeback chain); built if-converts a temporary. */
+/* NON_MATCHING: retail keeps the bounded==0 arm out of line and writes the cursor fields with `str r1, [r0], #4` / writeback chains; armcc here if-converts the zero-skip arm. */
 #include "common.h"
 
 struct SpanSource {
@@ -34,15 +34,17 @@ SpanCursor FUN_0022bc54(SpanSource *source)
         cursor.source = source;
         cursor.position = source->start;
         cursor.remaining = source->length;
-    } else if (skip > source->limit) {
+        return cursor;
+    }
+    if (skip > source->limit) {
         cursor.remaining = skip;
         cursor.source = source;
         cursor.position = source->start + skip;
-    } else {
-        cursor.source = source;
-        cursor.position = source->start + skip;
-        cursor.remaining = source->length + skip;
+        return cursor;
     }
+    cursor.source = source;
+    cursor.position = source->start + skip;
+    cursor.remaining = source->length + skip;
     return cursor;
 }
 

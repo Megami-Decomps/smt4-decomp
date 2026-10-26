@@ -1,9 +1,6 @@
 /* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, r6, lr}. */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
 
 namespace {
 

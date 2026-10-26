@@ -1,10 +1,10 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: native scalar-subobject accessors retain different VFP base calculations and no-op slots; final render-stack scratch registers also differ. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
-#include "util/FUN_002a4878.h"
+#include "util/BitsAndBytes.h"
+#include "code/Code002a.h"
 
 extern "C" {
 

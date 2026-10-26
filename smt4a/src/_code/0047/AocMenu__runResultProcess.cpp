@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail's states return through the shared epilogue with different register assignment (process in r4, g_aocMain in r6), copies the polled five-word result through ldm/stm pairs and tests the 0x66/0x67 kinds with the removed-inline gotos of the original; this build lays the cases out differently. */
 #include "classes/AocMenu.h"
 #include "common.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
 
 struct AocMenuObject;
 

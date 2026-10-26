@@ -3,7 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
-#include "util/FUN_0013def0.h"
+#include "code/Code0013.h"
 
 struct BtlCameraA;
 

@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "battle/btlDebug.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 extern "C" {
 

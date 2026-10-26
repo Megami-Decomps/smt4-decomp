@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
 struct Entry { u8 pad[0x34]; u16 value; u8 rest[0x1A]; };

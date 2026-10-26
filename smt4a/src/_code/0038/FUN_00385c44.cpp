@@ -14,7 +14,7 @@ void btlUiStartCommandSelection(unsigned int, int, signed char, signed char, boo
 int FUN_004a9c84(...);
 int btlFindEntryValue(...);
 int btlSlotSetStoreValue(unsigned int, int, int);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int btlReflectCreateKind44(...);
 
 /* stack frame of param_1: 11 slot(s), 44 byte(s) */
@@ -87,7 +87,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_004a9c84. */
 /* Supplied declaration required: btlFindEntryValue. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 extern unsigned int hasFlag80Or1000(unsigned int, unsigned int *);
 extern int btlUnitGet(unsigned int);
 /* Supplied declaration required: btlReflectCreateKind44. */
@@ -237,11 +237,11 @@ void FUN_00385c44(unsigned int *param_1)
       btlSlotSetStoreValue(temp_v12,0x29,0);
       temp_v8 = btlFindEntryValue(temp_v12,0x24);
       if (0 < temp_v8) {
-        FUN_004c571c(temp_v12,0x24,0xffffffff,0);
+        btlAdjustPropertyClamped(temp_v12,0x24,0xffffffff,0);
       }
       temp_v8 = btlFindEntryValue(temp_v12,0x25);
       if (0 < temp_v8) {
-        FUN_004c571c(temp_v12,0x25,0xffffffff,0);
+        btlAdjustPropertyClamped(temp_v12,0x25,0xffffffff,0);
       }
       puVar20 = param_1;
       FUN_003f0e20(param_1,temp_v12);
@@ -284,7 +284,7 @@ void FUN_00385c44(unsigned int *param_1)
           ((puVar20[1] & DAT_005739a4) == 0 && (*puVar20 & DAT_005739a0) == 0)) &&
          ((-1 < (short)puVar20[2] && (temp_v8 = btlFindEntryValue((int)(short)puVar20[2],0xd), 0 < temp_v8)))
          ) {
-        FUN_004c571c((int)(short)puVar20[2],0xd,0xffffffff,0);
+        btlAdjustPropertyClamped((int)(short)puVar20[2],0xd,0xffffffff,0);
       }
       temp_v7 = temp_v7 + 1;
     } while ((int)temp_v7 < (int)temp_v15);

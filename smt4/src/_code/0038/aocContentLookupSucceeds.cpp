@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/aocContentLookupSucceeds.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 

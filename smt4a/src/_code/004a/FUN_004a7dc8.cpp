@@ -1,5 +1,6 @@
 #include "shard/W5_W5Match4_BattleTransition.h"
 #include "shard/S1ListPanel.h"
+#include "code/Code004a_Smt4a.h"
 
 extern "C" {
 const SpriteInfo *layoutFindTableEntry(const AsdTextureRegion *region, s32 image);

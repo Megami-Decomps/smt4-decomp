@@ -1,7 +1,7 @@
 /* NON_MATCHING: Message-box shared-global addressing and switch-block layout differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/CecSettingsSet.h"
+#include "network/CecControl.h"
 
 extern "C" {
 extern u32 DAT_0043ddb8;

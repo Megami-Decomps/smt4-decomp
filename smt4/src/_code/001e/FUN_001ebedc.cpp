@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ebedc` (_code @ 0x1ebedc, 0x7ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0025_Smt4.h"
 
 extern "C" {
 
@@ -9,13 +10,12 @@ int FUN_002a03d8(...);
 
 int FUN_002595e0(...);
 int cecProcessForward(...);
-int FUN_002597c0(void);
 int FUN_00262f78(void);
 int objectFlagSetBit(...);
 int btlTalkBustUpReleaseAllSlots(void);
 int FUN_0028bf2c(void);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_002954f4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(...);
 int scrScriptProcessStartEntry(...);
 int FUN_0029bbc8(int);
@@ -64,7 +64,7 @@ extern int battleTalkIsBustReady(void);
 /* Supplied declaration required: FUN_0028bf2c. */
 extern unsigned int aocEntryDataById(unsigned char, unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int btlTalkBustUpGetValue(void);
 /* Supplied declaration required: textEncodeFontSlot. */
 extern int randBetween(unsigned int, int);
@@ -129,7 +129,7 @@ unsigned int FUN_001ebedc(int param_1)
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x17);
     temp_v7 = btlTalkBustUpGetValue();
     if (temp_v7 == 0) {
-      FUN_002954f4(*(unsigned short *)(param_1 + 0x126),1);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(param_1 + 0x126),1);
     }
     break;
   case 1:
@@ -357,7 +357,7 @@ LAB_001ec410:
     }
 LAB_001ec4d0:
     temp_v1 = FUN_00262f78();
-    FUN_002954f4(temp_v1,1);
+    btlTalkBustUpSetDemonTexture(temp_v1,1);
     temp_v6 = FUN_00262f78();
     temp_v6 = temp_v6 & 0xffff;
     devilGetRecord();

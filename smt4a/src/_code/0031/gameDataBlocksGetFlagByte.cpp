@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/GameDataBlocksGetFlagByte.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

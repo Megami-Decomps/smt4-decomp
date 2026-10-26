@@ -8,7 +8,7 @@ int nn_os_CriticalSection_Initialize(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
 extern int FUN_0042d1cc(...); /* 0x42d1cc */
-extern unsigned char LAB_0043a2e8; /* 0x43a2e8 */
+extern unsigned char FUN_0043a2e8; /* 0x43a2e8 */
 extern unsigned int DAT_005c0b2c; /* 0x5c0b2c */
 extern unsigned int DAT_005c0b38; /* 0x5c0b38 */
 extern unsigned int DAT_005c0b3c; /* 0x5c0b3c */
@@ -36,7 +36,7 @@ void FUN_0050e684(unsigned int param_1,unsigned int param_2,unsigned int *param_
   DAT_005c0b2c = 0;
   DAT_006463c4 = 0;
   nn_os_CriticalSection_Initialize(&DAT_006463c4,FUN_0042d1cc,0x100000);
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_006463d0,&LAB_0043a2e8,0xc,0x10);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_006463d0,&FUN_0043a2e8,0xc,0x10);
   DAT_00646490 = 0;
   DAT_00646494 = 0;
   DAT_00646498 = 0;

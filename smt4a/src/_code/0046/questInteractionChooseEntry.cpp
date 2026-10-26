@@ -2,8 +2,9 @@
 #include "shard/Shard0046.h"
 #include "gamedata/GameFlags.h"
 #include "shard/W6_W6Match7_QuestInteraction.h"
-#include "util/FUN_0037d6e4.h"
-#include "util/FUN_003a7630.h"
+#include "code/Code0037.h"
+#include "code/Code003a.h"
+#include "code/Code002c_Smt4a.h"
 
 extern "C" {
 void messageSetMode(s32 mode);
@@ -15,7 +16,6 @@ void FUN_003c3e14(void);
 s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);
-s32 FUN_002c2758(u16 index);
 u32 messageWindowIsState1(void);
 
 void questInteractionChooseEntry(QuestInteraction *object)

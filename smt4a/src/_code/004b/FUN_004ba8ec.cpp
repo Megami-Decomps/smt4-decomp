@@ -1,6 +1,5 @@
 /* NON_MATCHING: restored queued-node argument, linker-inlined signed flags getter and frame compare; sprite base still forms before cycle update. */
 #include "shard/S2UiTexLoader.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/Shard004A.h"
 

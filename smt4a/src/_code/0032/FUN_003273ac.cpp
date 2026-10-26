@@ -1,6 +1,6 @@
 /* NON_MATCHING: cached cell/marker-metadata pointers and saved-register allocation differ. */
 #include "shard/W5_W5Match7_FlagBanks.h"
-#include "util/DataTable4CGetEntry.h"
+#include "gamedata/DataTableAccess_VariantF.h"
 
 struct GridMapDefinition {
     u8 unk00[4];

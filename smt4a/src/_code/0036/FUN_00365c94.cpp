@@ -13,7 +13,7 @@ const SceneSpawnRecord *dataTableGetRecord23(u32);
 void navigationSetArguments(s32, s32, f32);
 void naviMainSetRequestTriple(s32, s32, u32);
 void naviMainApplyRequestValue(s32);
-void FUN_00357ab0(LmapObj *);
+void naviMainSetPosition(LmapObj *);
 void naviMainSetRequestValue(s32);
 void FUN_0033e014(s32, s32);
 
@@ -44,7 +44,7 @@ void FUN_00365c94(s32 map, s32 area, u32 point)
     naviMainSetRequestTriple(region->map, region->area, g_gameState.currentObjectId);
     g_gameState.currentObjectId = spawn->key.variant == 0xFF ? ~0u : spawn->key.variant;
     naviMainApplyRequestValue(region->map);
-    FUN_00357ab0(&g_lmapScene->obj);
+    naviMainSetPosition(&g_lmapScene->obj);
     naviMainSetRequestValue(1);
     FUN_0033e014(g_gameState.mode, g_gameState.submode);
     main->unk28 = 0x8A;

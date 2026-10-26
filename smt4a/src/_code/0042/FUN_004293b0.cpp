@@ -1,6 +1,6 @@
 /* NON_MATCHING: descriptor packing/store width, format dispatch and result-bit/global-address scheduling differ. */
 #include "classes/WindowStatus.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0042.h"
 #include <stddef.h>
 
 struct AsyncMapParameters { u32 id; u8 format, flags, storage; };

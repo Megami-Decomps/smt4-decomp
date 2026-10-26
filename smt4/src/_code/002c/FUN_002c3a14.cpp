@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail compares the colour scale and identity matrix with vcmp against a register copy of 1.0 and does not unroll the stack-dirty loop; this version compares equality of the float bit patterns (armcc turns == 1.0f into an integer compare), so the instruction counts differ. The stores, calls and loops are the same. */
 #include "camp/RenderCtx.h"
+#include "code/Code0011_Smt4.h"
 
 namespace {
 /* One combiner stage (24 bytes) of the texture combiner setup. */
@@ -35,7 +36,6 @@ static bool isIdentity(const f32 *m)
 extern "C" {
 void FUN_00126d14(u32 shader);
 void FUN_002b634c(u32 shader, void *colors);
-void modelCmdAppendPacked(u32 a, u32 b, u32 c, u32 d);
 void mathCopyIdentityMatrix(void *matrix);
 void FUN_002bbbc8(RenderCtx *ctx, void *a, void *b, void *matrix);
 void FUN_002bbb74(u32 shader, void *block);

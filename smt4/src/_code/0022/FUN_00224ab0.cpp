@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <math.h>
-#include "util/FUN_002c501c.h"
+#include "code/Code002c.h"
 
 namespace {
 struct BattleDistanceReference {

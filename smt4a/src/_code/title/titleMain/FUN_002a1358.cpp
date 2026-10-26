@@ -1,7 +1,7 @@
 /* NON_MATCHING: the order of the work-block field stores and the zero float register differ from retail (192 vs 198 rows); the title setup is the same. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
-#include "util/CalleeContracts.h"
+#include "addon/AocSystem.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code003f_Smt4a.h"
 
 struct PairedEntryTable {
     u8 unk0000[0x4bc4];

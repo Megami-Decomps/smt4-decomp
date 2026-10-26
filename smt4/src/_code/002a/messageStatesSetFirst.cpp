@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code002a_Smt4.h"
 
 namespace {
 struct MessageState { u8 padding[0xa26]; u8 first; u8 second; };

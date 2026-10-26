@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/AsdLoadFileHasDevice.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 extern "C" s32 libc_strlen(const char *text);
 

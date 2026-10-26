@@ -1,12 +1,12 @@
 /* NON_MATCHING: capacity branches agree, but grid-pointer register allocation differs by one instruction. */
 #include "ui/PartyPanelCapacity.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
+#include "code/Code002a_VariantA.h"
 
 extern "C" {
 extern PartyPanelCapacityViewA *g_partyPanel;
 PartyCapacitySlotsA *gameGetSlotTable();
 void partyPanelSortByMode();
-s32 FUN_002a4894(GridNavigation *grid);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
 void FUN_002a4964(GridNavigation *grid, s32 index);
 void FUN_00203b40(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);

@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: retail keeps item/func/list in r4/r5/r6, the build in r5/r6/r7 */
 #include "AsdSDK/Source/Util/AsdList.h"
 #include "AsdSDK/AsdDebug.h"
-#include "util/AsdListInsert.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 extern "C" {
 

@@ -6,7 +6,7 @@
 extern "C" {
 s32 FUN_001b3214(u32 table);
 AocPackageFile *FUN_001b2bd8(AocSystem *system, s32 type, s32 id, char *path);
-TexTableEntry *asdTMTexTableGetNode(u32 table, u32 id);
+TexTableNamedEntry *asdTMTexTableGetNode(u32 table, u32 id);
 u32 optionalWorkGetValue();
 void sysMemClear(void *buffer, u32 size);
 char *libc_strcpy(char *destination, const char *source);
@@ -14,11 +14,11 @@ char *libc_strcat(char *destination, const char *source);
 u32 libc_strlen(const char *text);
 void FUN_001b32a4(void *data);
 void FUN_001b3008(AocDisplay *display, const char *packagePath, const char *texturePath,
-    s32 offset, u32 flags, void (*callback)(void *), TexTableEntry *entry, u32 size,
+    s32 offset, u32 flags, void (*callback)(void *), TexTableNamedEntry *entry, u32 size,
     AocPackageFile *file);
 extern AocDisplay *g_aocDisplay;
 
-TexTableEntry *FUN_001a6568(AocSystem *system, u32 table, u32 id, u32 mode)
+TexTableNamedEntry *FUN_001a6568(AocSystem *system, u32 table, u32 id, u32 mode)
 {
     char texturePath[128];
     char packagePath[128];
@@ -32,7 +32,7 @@ TexTableEntry *FUN_001a6568(AocSystem *system, u32 table, u32 id, u32 mode)
         return NULL;
     file->texture.completion = 0;
     file->texture.result = 0;
-    TexTableEntry *entry = asdTMTexTableGetNode(table, id);
+    TexTableNamedEntry *entry = asdTMTexTableGetNode(table, id);
     if (entry == NULL)
         return NULL;
     TexTableNode *node = entry->node;

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "mapnavi/naviMain.h"
-#include "util/FUN_003e0024.h"
+#include "code/Code003e.h"
 
 /* A skill record's flag word: the low bits hold the skill's recovery kind. */
 struct RegenSkill {

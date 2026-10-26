@@ -1,7 +1,7 @@
 /* NON_MATCHING: canonical graphics counters now share the retail global base; resource-list subobject bases, owned-part registers, and a few release branches still differ. */
 #include "common.h"
 #include "shard/S1GfxModel.h"
-#include "util/AsdFileRequestRelease.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 struct Allocator;
 struct AllocatorVTable {

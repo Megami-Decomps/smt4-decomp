@@ -1,4 +1,5 @@
 #include "camp/CecMenu.h"
+#include "code/Code0024_Smt4.h"
 
 extern "C" {
 

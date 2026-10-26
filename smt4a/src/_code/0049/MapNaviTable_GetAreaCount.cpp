@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "map/MapSceneAccess_Smt4a.h"
 
 extern "C" {
 

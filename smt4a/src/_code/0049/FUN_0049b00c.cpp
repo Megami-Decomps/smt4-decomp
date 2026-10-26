@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_NumericStepper.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "code/Code0035.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int scrScriptProcessStartEntry(...);
 int FUN_002f0384(...);
 int FUN_003180c4(...);
 int panelSetMode3(...);
-int FUN_00359974(...);
 int gameGlobalsQueueValues(...);
 int FUN_003720e4(...);
 int FUN_00372100(...);

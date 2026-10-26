@@ -1,7 +1,8 @@
 /* NON_MATCHING: layered panel opacity, draw arguments and caption table addressing differ. */
 #include "common.h"
-#include "util/DrawTextAtRelativePosition.h"
+#include "ui/UiControl.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "code/Code002a_Smt4a.h"
 
 namespace {
 struct ProfileEntryDrawView {
@@ -19,10 +20,9 @@ extern "C" {
 extern const u32 DAT_005e1ca8[], DAT_005e1cd0[], DAT_005e1e88[];
 extern const s32 DAT_005e1cf8[];
 extern const ProfileCaptionTable DAT_005e1d20;
-s32 FUN_002a4b28(u16 textId);
 void FUN_004a80d8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style, f32 scale);
 void efctSetSpeed(f32 scale);
-void FUN_004a7a50(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
+void demonIconPanelDrawRow(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
 void FUN_004a7cb0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 fade, f32 scale);
 void FUN_004a7ba0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 fade, f32 scale);
 void FUN_004a7814(ProfileEntryDrawView *panel, u32 first, s32 entry, s32 alternate, s32 fade, u32 second);
@@ -41,7 +41,7 @@ void FUN_004a2a30(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     f32 entryScale = scale * multiplier;
     s32 enabled = panel->disabled == 0;
     efctSetSpeed(entryScale);
-    FUN_004a7a50(panel, enabled, textId, entry, alternate, fade);
+    demonIconPanelDrawRow(panel, enabled, textId, entry, alternate, fade);
     FUN_004a7cb0(panel, textId, entry, alternate, fade, entryScale);
     FUN_004a7ba0(panel, textId, entry, alternate, fade, entryScale);
     efctSetSpeed(entryScale);

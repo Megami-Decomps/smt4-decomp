@@ -1,6 +1,6 @@
 /* NON_MATCHING: the remaining differences are branch layout and register allocation of the state selection (the two `mov r0, #0` stub calls use FUN_00284dbc as the nearest equivalent stub). */
 #include "common.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 
 extern "C" {
 

@@ -42,7 +42,6 @@ void asdFsIsSdCardDetected(void);
 void jyoucyuGetTableEntry(u32 id);
 void aocResetOperationState(AocSystem *system);
 void aocClearDisplayFlag(AocSystem *system);
-void FUN_0027e9c0(void *owner);
 void FUN_0027ea28(void *owner, s32 a, s32 b, s32 c);
 RequestParameters FUN_003887cc(AocSystem *system);
 u8 FUN_003943f8(const void *value);

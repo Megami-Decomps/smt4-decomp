@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code002c_Smt4.h"
 
 namespace { struct Slot { u32 first; u32 active; u32 value; u32 extra; u8 state; u8 tail[3]; }; }
 

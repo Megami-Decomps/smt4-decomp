@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail embeds SVC 0x18, 0x24, and 0x23 for synchronization/handle shutdown; SVC is forbidden by this assignment. */
 #include "romwright_types.h"
+#include "classes/Obj420a1c.h"
 
 extern "C" {
 
 int FUN_001469a8(...);
-int asdMemFree(unsigned int);
 int nn_os_Thread_FinalizeImpl(unsigned int *);
 int FUN_002e3140(void);
 int asdOperatorDelete(int);

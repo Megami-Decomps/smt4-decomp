@@ -1,5 +1,5 @@
 #include "shard/JobWork.h"
-#include "shard/surfaceCopy.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_JobWork.h"
 
 extern "C" {
 

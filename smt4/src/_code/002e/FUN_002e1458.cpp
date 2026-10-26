@@ -1,7 +1,7 @@
 /* NON_MATCHING: error literal loads into r4 then moves to r0; retail loads into r0 then preserves it in r4. */
 #include "sys/ProcessResult.h"
 #include "common.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 s32 FUN_002ad888(void);

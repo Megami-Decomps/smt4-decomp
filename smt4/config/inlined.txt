@@ -31,3 +31,8 @@ aocFindKindRecordById = 0xe3a00000; // 0x248620 (FUN_00248620: add-on record loo
 queuedHandleGetToken = 0xe5900004; // 0x38b438 (FUN_0038b420, after add r0, sp, #4: the by-value handle parameter)
 partyWidgetGetX = 0xe5900040; // FUN_00205a90 0xfc/0x13c (after ldr r0, [r5] / ldr r0, [r6, #1752]); twin of partyWidgetGetCost (+0x44)
 uiSpriteGetMode = 0xe1d005fc; // 0x2e4490 (FUN_002e4464, after add r0, r4, #32); same getter as the smt4a row
+asdListBoxSetCursor = 0xe580101c; // 0x24efb8 (FUN_0024ef90, after add r0, r4, #12; r1 = 0)
+uiStateGetSecondFlag = 0xe1d006d1; // 0x3c2d60 (FUN_003c2d54, after add r0, r0, #16)
+uiStateGetFirstFlag = 0xe1d006d0; // 0x3c2d70 (FUN_003c2d54, after add r0, r4, #16)
+renderCtxSetStereoMode = 0xe5801528; // 0x103dd8 (FUN_00103dd8: mov r1, #2 then the context in r0); twin of smt4a row (field +0x52c there)
+mobiclipHeapGetAllocation = 0xe5900030; // FUN_0017feb4 (six times after ldr r0, =heap; result kept in r4)

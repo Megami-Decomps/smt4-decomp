@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: retail keeps the hoisted zero in r6 and `buffer` in r7; ours swaps them. */
 #include "common.h"
 #include "nn/Result.h"
-#include "util/AsdFatalError.h"
+#include "sys/RuntimeObjects.h"
 
 struct FileObj;
 

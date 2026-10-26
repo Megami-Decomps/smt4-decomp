@@ -1,7 +1,7 @@
 /* NON_MATCHING: allocation, slot setup and the unrolled copy loop match in shape; retail keeps `i * stride` as an in-loop mla and addresses the copy as `(n * i) * 3` after hoisting n = (indices + 2) / 3 behind the count guard, and chooses different registers. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
-#include "util/SlotInit.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {

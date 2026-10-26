@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "util/MemoryHelpers_Smt4a.h"
 
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);

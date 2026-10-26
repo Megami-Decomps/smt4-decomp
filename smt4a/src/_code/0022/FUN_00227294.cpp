@@ -1,7 +1,7 @@
 /* NON_MATCHING: transition-scale address splitting (retail adds 6144 then 520 before the +32 load) differs; the pivoted-draw arguments now match. */
-#include "camp/CampState.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/CampState.h"
 
 struct CampSpritePivot {
     f32 depth;

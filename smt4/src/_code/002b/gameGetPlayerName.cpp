@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/GameGetPlayerName.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

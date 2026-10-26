@@ -1,6 +1,6 @@
 #include "ui/ButtonHelp.h"
 #include "shard/Shard0037.h"
-#include "util/ScreenStartOrClear.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;

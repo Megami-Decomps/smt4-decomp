@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/MathFunctions_Smt4.h"
 
 extern "C" {
 

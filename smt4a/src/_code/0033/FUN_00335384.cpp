@@ -1,6 +1,6 @@
 /* NON_MATCHING: Completion getters fold to direct byte tests, and phase-one constant folding/dispatch scheduling differ. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "shard/uiSpriteSelectAnim.h"
+#include "ui/UiControl.h"
 
 struct SpriteIntroTransitionWork {
     u8 unk000[0x5AC];

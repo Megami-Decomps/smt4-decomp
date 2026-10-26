@@ -1,7 +1,7 @@
 /* NON_MATCHING: the gauge width helper is inlined with different register allocation and the stack argument stores differ from retail (238 vs 231 rows); the gauge drawing is the same. */
 #include "common.h"
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

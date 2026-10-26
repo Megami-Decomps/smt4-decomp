@@ -1,4 +1,4 @@
-#include "util/FUN_00233fcc.h"
+#include "code/Code0023.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN7AocMenu14runLicenseFlowEv` (_code @ 0x38e5f4, 0x48c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"

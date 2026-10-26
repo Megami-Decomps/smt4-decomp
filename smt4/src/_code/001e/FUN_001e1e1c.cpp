@@ -23,11 +23,11 @@ extern unsigned char LAB_001e1fc8; /* 0x1e1fc8 */
 extern unsigned char LAB_001e1fe0; /* 0x1e1fe0 */
 extern unsigned char LAB_001e1ffc; /* 0x1e1ffc */
 extern int FUN_001e4d70(...); /* 0x1e4d70 */
-extern unsigned char LAB_0020f6c0; /* 0x20f6c0 */
-extern unsigned char LAB_002ca064; /* 0x2ca064 */
-extern unsigned char LAB_002ca07c; /* 0x2ca07c */
-extern unsigned char LAB_002e081c; /* 0x2e081c */
-extern unsigned char LAB_002f4b28; /* 0x2f4b28 */
+extern unsigned char campQueryFalse; /* 0x20f6c0 */
+extern unsigned char aocJobEnable; /* 0x2ca064 */
+extern unsigned char FUN_002ca07c; /* 0x2ca07c */
+extern unsigned char noopCallback; /* 0x2e081c */
+extern unsigned char FUN_002f4b28; /* 0x2f4b28 */
 extern unsigned int DAT_004937c4; /* 0x4937c4 */
 extern int DAT_004937c8; /* 0x4937c8 */
 extern unsigned char DAT_004937cc; /* 0x4937cc */
@@ -74,10 +74,10 @@ void FUN_001e1e1c(unsigned int *param_1)
       dataTable19ResolveVariants();
     }
     puVar1 = &LAB_001e1fc8;
-    asdProcessCreateSimple(&LAB_001e1fc8,2,0,0,FUN_001e4d70,&LAB_002ca064,0);
+    asdProcessCreateSimple(&LAB_001e1fc8,2,0,0,FUN_001e4d70,&aocJobEnable,0);
     *param_2 = (unsigned int)puVar1;
-    taskCreateDraw(&LAB_001e1fe0,0x73,0,0,&LAB_0020f6c0,&LAB_002e081c,0,puVar1);
-    taskCreateDraw(&LAB_001e1ffc,0xe6,0,0,&LAB_002ca07c,&LAB_002f4b28,0,*param_2);
+    taskCreateDraw(&LAB_001e1fe0,0x73,0,0,&campQueryFalse,&noopCallback,0,puVar1);
+    taskCreateDraw(&LAB_001e1ffc,0xe6,0,0,&FUN_002ca07c,&FUN_002f4b28,0,*param_2);
     return;
   }
   DAT_004937c4 = *param_1;
@@ -89,7 +89,7 @@ void FUN_001e1e1c(unsigned int *param_1)
     libc_strcpy(&DAT_004937cc,param_1 + 2);
   }
   puVar1 = &LAB_001e1fb8;
-  asdProcessCreateSimple(&LAB_001e1fb8,2,0,0,FUN_0019f3dc,&LAB_002ca064,0);
+  asdProcessCreateSimple(&LAB_001e1fb8,2,0,0,FUN_0019f3dc,&aocJobEnable,0);
   *param_2 = (unsigned int)puVar1;
   return;
 }

@@ -1,7 +1,6 @@
 /* NON_MATCHING: the duration argument MOV is scheduled after color selection instead of before the conditional color moves. */
 #include "event/eventCommand.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 

@@ -13,16 +13,17 @@ extern BtlMainGlobalsA g_btlMain;
 /* The unit's maximum HP: its battle combatant's while a battle (not in phase 29) holds it, else the record's own. */
 s32 FUN_002b4e7c(BtlUnitRecordA *record)
 {
-    BtlMainStateA *state = g_btlMain.state;
+    BtlMainGlobalsA *btlMainPtr = &g_btlMain;
+    BtlMainStateA *state = btlMainPtr->state;
     s32 maxHp = record->maxHp;
 
     if (state != NULL && state->unk0088 != 29) {
         for (s32 i = 0; i < 109; i++) {
             BtlCombatantEntryA *entry = &state->entries[i];
 
-            if ((entry->flags & g_btlMain.combatantMasks.required) != 0 &&
-                (entry->flags & g_btlMain.exclusionMask) == 0 &&
-                (entry->flags & g_btlMain.actorCategories[0]) != 0 && entry->record == record) {
+            if ((entry->flags & btlMainPtr->combatantMasks.required) != 0 &&
+                (entry->flags & btlMainPtr->exclusionMask) == 0 &&
+                (entry->flags & btlMainPtr->actorCategories[0]) != 0 && entry->record == record) {
                 maxHp = entry->maxHp;
                 break;
             }

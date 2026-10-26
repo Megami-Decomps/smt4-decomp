@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "code/Code004f_Smt4a.h"
 
 extern "C" {
 

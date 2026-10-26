@@ -1,6 +1,7 @@
 /* Applies `time` to the owner's model: FUN_0028703c, modelEvaluateFirstScalarChannel, then FUN_002101cc
  * (placed right after, so the last call is a linker NOP). */
 #include "common.h"
+#include "code/Code0021_Smt4.h"
 
 struct ModelOwner {
     /* 0x00 */ u8 unk00[8];

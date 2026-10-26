@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/UnitStats.h"
 #include "shard/Shard004A.h"
+#include "code/Code0029_Smt4.h"
 
 struct CompendiumPreviewHandle { u8 prefix[0x108]; s32 mode; };
 extern "C" {
@@ -12,7 +13,6 @@ void buttonHelpSetPreset(u32 preset);
 void *partyMemberFindById(u16 id);
 void FUN_0029da34(s32 screen, s32 enabled, u16 id, void *unit);
 s32 FUN_0029ce60(u16 id, u32 source, s32 a, s32 specialMode, s32 b);
-void messageBannerInitSelection(s32 enabled, s32 value);
 void messageTargetSetValue(s32 target, s32 mode);
 void unitInitializeFromSavedRecord(u16 id, StatBlock *unit);
 void FUN_00233240(void *timers, s32 index);

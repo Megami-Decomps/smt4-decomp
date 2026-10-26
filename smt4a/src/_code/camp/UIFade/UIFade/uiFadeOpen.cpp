@@ -3,13 +3,13 @@
 #include "camp/UIFade/UIFade.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 typedef void (*VoidFunc)(void);
 
 u32 taskCreateDraw(const char *name, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void uiFadeUpdateAlpha(void);
 void uiFadeJobDraw(void);
 

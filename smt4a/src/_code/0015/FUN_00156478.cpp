@@ -1,8 +1,7 @@
 /* NON_MATCHING: close transition and label arrival match; textRight scroll uses swapped width/position registers. */
 #include "shard/W4_Match3_InfoWindow.h"
 #include "shard/TextureDrawCall.h"
-#include "util/Vec2Fixed.h"
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 
 extern "C" {
 

@@ -1,7 +1,7 @@
 /* NON_MATCHING: success/error block placement and owner/result register assignment differ. */
 #include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 s32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);

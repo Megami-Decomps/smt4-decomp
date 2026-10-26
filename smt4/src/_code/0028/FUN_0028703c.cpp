@@ -9,10 +9,10 @@ extern "C" void FUN_0028703c(ScalarAnimationOwner *owner, f32 time)
     }
     ScalarAnimationChannel *channel = owner->channel;
     if (channel != NULL) {
-        if (time > channel->end) {
-            time = channel->end;
+        if (time > channel->range.end) {
+            time = channel->range.end;
         }
-        f32 value = channel->interpolate(channel->start, channel->end, time, channel->work);
+        f32 value = channel->interpolate(channel->range, time, channel->work);
         channel->previous = channel->current;
         channel->current = value;
         channel->dirty = 1;

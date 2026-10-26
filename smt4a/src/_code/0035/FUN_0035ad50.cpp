@@ -3,10 +3,10 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include <string.h>
 #include "map/lmapMain.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 
 extern "C" {
 void sysMemClear(void *destination, u32 size);
-void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_004bcd90(UnitRecord *unit);
 u16 recordGetScaledMaximum(UnitRecord *unit);
 

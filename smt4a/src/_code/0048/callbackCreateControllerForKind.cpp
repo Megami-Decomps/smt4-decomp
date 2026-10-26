@@ -1,4 +1,5 @@
 #include "sys/CallbackController.h"
+#include "code/Code0048_Smt4a.h"
 extern "C" {
 void* asdOperatorNew(u32);
 

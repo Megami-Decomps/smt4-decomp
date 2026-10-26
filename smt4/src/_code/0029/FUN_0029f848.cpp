@@ -1,6 +1,6 @@
 /* NON_MATCHING: only quotient argument moves differ (retail moves count into r0 before columns into r1); navigation setup and final stores agree. */
 #include "ui/GridNavigation.h"
-#include "util/ColorSetRgba.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 void rowWidgetInit(RowWidget *widget, s32 visible, u32 count);

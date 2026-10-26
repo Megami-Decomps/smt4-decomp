@@ -5,7 +5,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/Table00.h"
 #include "addon/aocMain.h"
-#include "util/AocReadyAndAccepts.h"
+#include "addon/AocSystem.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {

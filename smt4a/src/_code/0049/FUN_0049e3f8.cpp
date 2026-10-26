@@ -1,7 +1,7 @@
 /* NON_MATCHING: the control flow of the row loop and the scissor helpers compile differently */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

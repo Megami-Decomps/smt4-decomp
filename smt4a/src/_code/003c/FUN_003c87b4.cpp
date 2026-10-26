@@ -1,8 +1,8 @@
 /* NON_MATCHING: the final unk19FA read builds the address with two adds instead of reusing the 0x19FA pool literal. */
 #include "common.h"
 #include "ui/MessageMain.h"
-#include "util/ScrGetCommandFrame.h"
-#include "shard/uiSpriteSelectAnim.h"
+#include "script/ScriptArgs.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 

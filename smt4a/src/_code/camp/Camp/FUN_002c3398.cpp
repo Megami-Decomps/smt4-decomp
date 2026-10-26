@@ -9,7 +9,7 @@ int FUN_003344b4(...);
 int obj48Arm(...);
 
 int FUN_0020d934(...);
-int FUN_002304d0(...);
+int partyPanelHasSlotValue(...);
 int scrollOwnerSelectIndex(...);
 int FUN_002a4964(...);
 int FUN_003343f0(...);
@@ -59,11 +59,6 @@ typedef struct {
 extern int campDrawCurrentSubscreen(...); /* 0x202450 */
 extern int FUN_00227418(...); /* 0x227418 */
 extern int FUN_0025ec04(...); /* 0x25ec04 */
-extern unsigned char LAB_002c3794; /* 0x2c3794 */
-extern unsigned char LAB_002c37a4; /* 0x2c37a4 */
-extern unsigned char LAB_002c37b4; /* 0x2c37b4 */
-extern unsigned char LAB_002c37cc; /* 0x2c37cc */
-extern unsigned char LAB_002c37dc; /* 0x2c37dc */
 extern int FUN_003d56dc(...); /* 0x3d56dc */
 extern unsigned char DAT_0052b8bc; /* 0x52b8bc */
 extern unsigned char DAT_0052b970; /* 0x52b970 */
@@ -86,7 +81,7 @@ extern unsigned char DAT_005f1634; /* 0x5f1634 */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_0020d700. */
 /* Supplied declaration required: FUN_0020d934. */
-/* Supplied declaration required: FUN_002304d0. */
+/* Supplied declaration required: partyPanelHasSlotValue. */
 /* Supplied declaration required: campRebuildEnabledFlagList. */
 /* Supplied declaration required: campSelectorRebuildList. */
 /* Supplied declaration required: FUN_0026f7f0. */
@@ -150,15 +145,13 @@ void FUN_002c3398(void)
   sysMemClear();
   clearThreeWords(&g_campState);
   campCommonBgAcquire();
-  puVar3 = &LAB_002c3794;
-  asdProcessCreateSimple(&LAB_002c3794,4,0,0,FUN_003d56dc,0,0);
+  asdProcessCreateSimple("TMD CALC",4,0,0,FUN_003d56dc,0,0);
   *puVar2 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002c37a4,0x7e,0,0,campDrawCurrentSubscreen,0,0,puVar3);
-  taskCreateDraw(&LAB_002c37b4,0xda,0,0,campDrawCurrentSubscreen,0,0,*puVar2);
-  puVar3 = &LAB_002c37cc;
-  taskCreateDraw(&LAB_002c37cc,0xeb,0,0,FUN_00227418,0,0,*puVar2);
+  taskCreateDraw("Camp DrawUpLeft",0x7e,0,0,campDrawCurrentSubscreen,0,0,puVar3);
+  taskCreateDraw("Camp DrawUpRight",0xda,0,0,campDrawCurrentSubscreen,0,0,*puVar2);
+  taskCreateDraw("Camp DDRAW",0xeb,0,0,FUN_00227418,0,0,*puVar2);
   puVar2[2] = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002c37dc,0xe9,0,0,FUN_0025ec04,0,0,*puVar2);
+  taskCreateDraw("Camp DBaseDraw",0xe9,0,0,FUN_0025ec04,0,0,*puVar2);
   puVar2 = g_camp;
   *(unsigned char *)(g_camp + 0x2e) = 0;
   *(unsigned char *)((int)puVar2 + 0xb9) = 3;
@@ -298,7 +291,7 @@ void FUN_002c3398(void)
       temp_v3 = FUN_002a4878();
       temp_v4 = FUN_002a4894(temp_v5);
       temp_v1 = 0;
-      FUN_002304d0(0,temp_v3,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v3,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
       if (temp_v1 == 0) {
         temp_v1 = 0;
         if (*(char *)(temp_v6 + 0x9b4) == '\x04') {
@@ -363,7 +356,7 @@ LAB_002c4664:
       temp_v3 = FUN_002a4878(temp_v6 + 0xd50);
       temp_v4 = FUN_002a4894(temp_v6 + 0xd50);
       temp_v1 = 0;
-      FUN_002304d0(0,temp_v3,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v3,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
       if (temp_v1 == 0) {
         temp_v1 = 0;
         if (*(char *)(temp_v6 + 0x9b4) == '\x04') {

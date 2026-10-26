@@ -12,7 +12,7 @@ void FUN_00247240(EffectTextRequest *request);
 void nodeListOwnerFree(void *owner);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void effMenuAddEntry(void *owner, const char *label, s32 kind, u32 value, s32 flags);
-EffectTextRequest *FUN_0030ed8c(void *owner);
+EffectTextRequest *effMenuCreate(void *owner);
 LinkedItem *linkedFindItemByIndex(LinkedItems *items, s32 index);
 void effResourcePromoteReferences(LinkedItems *items, LinkedItem *item);
 void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement);
@@ -46,7 +46,7 @@ u32 FUN_00242080(u32 flags)
                 effMenuAddEntry(g_effectEditor.textRequest.owner, generalLabel, 8, index, 0);
             }
         }
-        EffectTextRequest *request = FUN_0030ed8c(g_effectEditor.textRequest.owner);
+        EffectTextRequest *request = effMenuCreate(g_effectEditor.textRequest.owner);
         g_effectEditor.textRequest.request = request;
         request->type = 186;
         request->size = 28;

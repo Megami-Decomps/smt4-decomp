@@ -36,11 +36,6 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } void_stack;
 
-extern unsigned char LAB_002c59b4; /* 0x2c59b4 */
-extern unsigned char LAB_002c59d0; /* 0x2c59d0 */
-extern unsigned char LAB_002c5a04; /* 0x2c5a04 */
-extern unsigned char LAB_002c5db0; /* 0x2c5db0 */
-extern unsigned char LAB_002c5dc8; /* 0x2c5dc8 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned char g_mapRndMaze; /* 0x60fc08 */
 extern unsigned char DAT_0060fc18; /* 0x60fc18 */
@@ -205,9 +200,9 @@ void FUN_002c553c(void)
   temp_v7 = lmapGetSpawnIndex();
   if (temp_v7 >= 100) {
     temp_v6 = FUN_003857c8((int)*(float *)(temp_v3 + 0x15c4));
-    textFormatBuffer(temp_v12,&LAB_002c59b4,temp_v6);
+    textFormatBuffer(temp_v12,"map/tokyo/a%02d_07.bam",temp_v6);
     temp_v9 = 0x20;
-    FUN_00178b04(0x20,&LAB_002c59d0,0x862);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x862);
     temp_v7 = 0;
     if (temp_v9 != 0) {
       temp_v7 = modelListInit();
@@ -220,7 +215,7 @@ void FUN_002c553c(void)
     FUN_003fe86c(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
     temp_v9 = 0x20;
-    FUN_00178b04(0x20,&LAB_002c59d0,0x86f);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x86f);
     temp_v7 = 0;
     if (temp_v9 != 0) {
       temp_v7 = modelListInit();
@@ -230,9 +225,9 @@ void FUN_002c553c(void)
     temp_v6 = *(unsigned int *)(DAT_006105d8 + 4);
     FUN_003fe86c(temp_v6,0,2);
     handleRegistryRegisterObject(g_handleRegistry,temp_v6);
-    textFormatBuffer(temp_v12,&LAB_002c5a04);
+    textFormatBuffer(temp_v12,"map/obj/obj_25.bam");
     temp_v9 = 0x20;
-    FUN_00178b04(0x20,&LAB_002c59d0,0x878);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x878);
     temp_v7 = 0;
     if (temp_v9 != 0) {
       temp_v7 = modelListInit();
@@ -256,19 +251,19 @@ void FUN_002c553c(void)
     if (0 < (&DAT_0060ffa4)[temp_v7]) {
       temp_v9 = lmapGetSpawnIndex();
       if (temp_v9 != 0) {
-        textFormatBuffer(temp_v12,&LAB_002c5db0,temp_v7 + 1);
+        textFormatBuffer(temp_v12,"map/mr01/mr01_%02d.bam",temp_v7 + 1);
         if (temp_v9 >= 100) {
           temp_v6 = FUN_003857c8((int)*(float *)(temp_v15 + 0x1c4));
-          textFormatBuffer(temp_v12,&LAB_002c5dc8,temp_v6,temp_v7 + 1);
+          textFormatBuffer(temp_v12,"map/tokyo/a%02d_%02d.bam",temp_v6,temp_v7 + 1);
         }
       }
       else {
-        textFormatBuffer(temp_v12,&LAB_002c5db0,temp_v7 + 1);
+        textFormatBuffer(temp_v12,"map/mr01/mr01_%02d.bam",temp_v7 + 1);
       }
       if (!((temp_v7 == 1 || temp_v7 == 2) || temp_v7 == 3)) {
         if (temp_v7 != 4) {
           temp_v9 = 0x20;
-          FUN_00178b04(0x20,&LAB_002c59d0,0x8dd);
+          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8dd);
           temp_v6 = 0;
           if (temp_v9 != 0) {
             temp_v6 = modelListInit();
@@ -286,7 +281,7 @@ void FUN_002c553c(void)
         }
         else {
           temp_v9 = 0x20;
-          FUN_00178b04(0x20,&LAB_002c59d0,0x8d2);
+          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8d2);
           temp_v6 = 0;
           if (temp_v9 != 0) {
             temp_v6 = modelListInit();
@@ -305,7 +300,7 @@ void FUN_002c553c(void)
       }
       else {
         temp_v9 = 0x20;
-        FUN_00178b04(0x20,&LAB_002c59d0,0x8c4);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x8c4);
         temp_v6 = 0;
         if (temp_v9 != 0) {
           temp_v6 = modelListInit();
@@ -332,7 +327,7 @@ void FUN_002c553c(void)
             if ((&DAT_0060ffa4)[temp_v7] <= temp_v9) goto LAB_002c5d90;
             if (temp_v9 == 0) break;
             temp_v11 = 0x20;
-            FUN_00178b04(0x20,&LAB_002c59d0,0x90b);
+            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapRndMaze.cpp",0x90b);
             temp_v6 = 0;
             if (temp_v11 != 0) {
               temp_v6 = modelListInit();

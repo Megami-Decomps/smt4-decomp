@@ -1,8 +1,7 @@
 /* NON_MATCHING: first scene-update saved registers and animation/model argument evaluation order differ; the recovered reference argument, stereo setter and pending-list snapshot now match retail. */
 #include "camp/RenderCtx.h"
-#include "util/FUN_00145e24.h"
-#include "util/FUN_00145e24.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0014.h"
+#include "code/Code0015.h"
 
 struct SlotOwner {
     /* 0x00 */ u8 unk00[0x10];
@@ -152,7 +151,7 @@ u32 FUN_00146048(void)
     } else {
         FUN_001575cc(g_renderCtx);
     }
-    FUN_00145e24(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
+    effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
     u32 *pendingEnd = g_handleRegistry->pendingEnd;
     for (u32 *pending = g_handleRegistry->pendingBegin; pending != pendingEnd; pending++) {
         holderFlushPending(*pending);

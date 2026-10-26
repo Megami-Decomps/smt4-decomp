@@ -1,51 +1,45 @@
-/* NON_MATCHING: scheduling only: retail moves the two call arguments into r1/r2 before testing the child active byte; built moves them after. */
 #include "common.h"
 
-extern "C" {
-u32 nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo(u32 reader);
-}
-
-/* A sound group child (vtable slot 9 runs its update). */
-class SoundChild {
+/* An object with a vtable; only slot 9 (offset 0x24) is called here. */
+class SoundObject {
 public:
-    virtual void unk00();
-    virtual void unk04();
-    virtual void unk08();
-    virtual void unk0C();
-    virtual void unk10();
-    virtual void unk14();
-    virtual void unk18();
-    virtual void unk1C();
-    virtual void unk20();
-    virtual u32 update(u32 a, u32 b);
+    virtual void slot00();
+    virtual void slot01();
+    virtual void slot02();
+    virtual void slot03();
+    virtual void slot04();
+    virtual void slot05();
+    virtual void slot06();
+    virtual void slot07();
+    virtual void slot08();
+    virtual u32 update(u32 arg0, u32 arg1);
 
-    /* 0x00: vtable pointer */
-    /* 0x04 */ u8 active;
+    u8 enabled;
 };
 
-typedef struct SoundGroup {
-    /* 0x0 */ u8 unk0[4];
-    /* 0x4 */ u32 reader;
-    /* 0x8 */ SoundChild *child;
-} SoundGroup;
+static __inline u32 soundObjectUpdate(SoundObject *object, u32 arg0, u32 arg1)
+{
+    return object->enabled != 0 ? object->update(arg0, arg1) : 0;
+}
 
 extern "C" {
 
-/* Reads the group info and ORs in the child's update result while the child is active. */
-u32 soundGroupUpdate(SoundGroup *group, u32 a, u32 b)
+typedef struct SoundInfoOwner {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ u32 reader;
+    /* 0x08 */ SoundObject *object;
+} SoundInfoOwner;
+
+extern u32 nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo(u32 reader);
+
+/* Reads the wave sound info, merging in the result of the owner's object update when it is enabled. */
+u32 soundGroupUpdate(SoundInfoOwner *owner, u32 arg0, u32 arg1)
 {
-    u32 result = nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo(group->reader);
-    SoundChild *child = group->child;
+    u32 result = nw_snd_internal_SoundArchiveFileReader_ReadSoundGroupInfo(owner->reader);
+    SoundObject *object = owner->object;
 
-    if (child != NULL) {
-        u32 childResult;
-
-        if (child->active == 0) {
-            childResult = 0;
-        } else {
-            childResult = child->update(a, b);
-        }
-        result |= childResult;
+    if (object != NULL) {
+        result |= soundObjectUpdate(object, arg0, arg1);
     }
     return result;
 }

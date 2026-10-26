@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "util/FUN_003ee0c0.h"
+#include "code/Code003e.h"
 /* NON_MATCHING: scripted effect argument scheduling has not matched retail. */
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"

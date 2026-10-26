@@ -207,7 +207,7 @@ code_r0x001dd71c:
     FUN_0032bb74();
     *(int *)(iVar1 + 0x10) = *(int *)(iVar1 + 0x10) + 1;
   case 8:
-    FUN_0017feb4();
+    mobiclipShutdown();
     func_0x00106080();
     func_0x00105ef8();
     FUN_001036fc();

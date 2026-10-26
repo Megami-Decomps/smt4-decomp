@@ -1,6 +1,6 @@
 /* NON_MATCHING: global pointer loads are scheduled differently around the prologue. */
 #include "map/mapGimic.h"
-#include "util/FUN_001cd3ec.h"
+#include "code/Code001c.h"
 
 extern "C" {
 extern MapGimic *g_mapGimic;

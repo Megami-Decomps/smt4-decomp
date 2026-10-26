@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "script/ScriptArgs_Smt4a.h"
 
 struct ScriptProcess004b {
     /* 0x000 */ u8 unk000[0x108];

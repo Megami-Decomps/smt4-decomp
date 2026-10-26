@@ -1,7 +1,7 @@
 /* NON_MATCHING: existing row-ID getter restores ldrh/sxth/uxth, but its clobber set delays mov r2,0; refresh stores also choose swapped scratch registers. */
 #include "common.h"
 #include "bible/bibleDevil.h"
-#include "util/FUN_0029e924.h"
+#include "code/Code0029.h"
 
 /* One animated cursor channel of the screen's widget. */
 struct BibleDevilChannel { u8 unk00[0x8c]; };

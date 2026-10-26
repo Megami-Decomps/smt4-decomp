@@ -1,26 +1,27 @@
-/* NON_MATCHING: branch layout only: built adds a redundant `bne` to the final return after the conditional `moveq r0, #1`; retail falls through */
 #include "common.h"
 
 extern "C" {
 
-typedef struct CampCec {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ struct CampState *state;
-} CampCec;
-
-typedef struct CampState {
+typedef struct CampCecWork {
     /* 0x000 */ u8 unk000[0x140];
-    /* 0x140 */ s32 mode;
-} CampState;
+    /* 0x140 */ s32 state;
+} CampCecWork;
 
-extern CampCec g_campCec;
+extern struct {
+    u8 unk0[4];
+    CampCecWork *work;
+} g_campCec;
 
-/* True while the camp's state exists and is in mode 1. */
+/* True while the camp CEC work exists and is in state 1. */
 u32 FUN_002bfd04(void)
 {
+    CampCecWork *work = g_campCec.work;
     u32 result = 0;
 
-    if (g_campCec.state != NULL && g_campCec.state->mode == 1) {
+    if (work == NULL) {
+        return 0;
+    }
+    if (work->state == 1) {
         result = 1;
     }
     return result;

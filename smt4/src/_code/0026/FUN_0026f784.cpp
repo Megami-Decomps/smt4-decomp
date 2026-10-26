@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0026_Smt4.h"
 
 struct Vec3f {
     f32 x, y, z;

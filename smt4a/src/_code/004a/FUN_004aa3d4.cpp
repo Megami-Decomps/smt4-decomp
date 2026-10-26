@@ -1,9 +1,10 @@
 /* NON_MATCHING: global UI ownership is corrected; attack-label resource accessors and shared case exits still differ. */
 #include "battle/btlUI.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 #include "mapnavi/naviMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "gamedata/UnitStatInitialization.h"
+#include "code/Code0022_Smt4a.h"
 
 extern "C" {
 
@@ -54,7 +55,6 @@ s32 btlScriptUnitHasFlags(u32 unit);
 s32 FUN_001ba3d4(u16 value);
 s32 FUN_002c13d4(s32 value, s32 amount);
 s32 menuStateReset(void);
-s32 FUN_00227af0(char *text);
 s32 menuStateStartSelect(s32 arg);
 
 /* Opens the battle help window of kind `kind` for `value`: formats its label (attack / return /

@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail loads resource->value before starter->key; built loads them the other way round */
 /* Starts the object once: records the resource's value in its first slot, then runs the start callback. */
 #include "common.h"
-#include "util/AocReleaseObjectBufferAndFlag.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -34,7 +34,7 @@ typedef struct Starter {
 extern Resource *asdTMTexTableGetNode(void *owner, u32 key);
 extern u8 resourceIsReady(Resource *resource);
 extern void FUN_003fc294(Starter *starter, u32 arg);
-extern s32 FUN_003fcbe0(Starter *starter);
+extern s32 aocTextureRequestHasNewContent(Starter *starter);
 
 s32 FUN_003fce08(Starter *starter, u32 arg)
 {
@@ -44,7 +44,7 @@ s32 FUN_003fce08(Starter *starter, u32 arg)
         return 0;
     }
     if (starter->started == 0) {
-        if (FUN_003fcbe0(starter) != 0) {
+        if (aocTextureRequestHasNewContent(starter) != 0) {
             aocReleaseObjectBufferAndFlag(starter);
         }
         u32 key = starter->key;

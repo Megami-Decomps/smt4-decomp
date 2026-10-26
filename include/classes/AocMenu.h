@@ -4,7 +4,7 @@
 #include "common.h"
 #include "shard/ScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
-#include "util/FUN_00233fcc.h"
+#include "code/Code0023.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" void asdOperatorDelete(void *block);

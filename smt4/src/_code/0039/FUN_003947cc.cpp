@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail zeroes the 32-byte name buffer twice per iteration (155 rows) and keeps the name pointer in r7 / table cursor in r5 across the search; ours zero-fills once and loads the entry address per iteration (148 rows). */
 #include "battle/BtlMainAccess.h"
+#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 /* An entry of the battle effect name table (0x24 bytes): the effect's file name and up to two sub-effects. */
 struct BtlEffectEntry {
@@ -26,7 +27,6 @@ extern "C" {
 extern BtlEffectEntry s_ef_e_atk01_00436028[];
 extern BtlMainPosition *g_btlMain;
 
-s32 jyoucyuGetTableEntry(u32 index);
 void textFormatBuffer(char *destination, const char *format, ...);
 s32 libc_strcmp(const char *first, const char *second);
 void FUN_002505c0(u32 handle, s32 owner, s32 count, s32 a, s32 b, s32 side, s32 c);

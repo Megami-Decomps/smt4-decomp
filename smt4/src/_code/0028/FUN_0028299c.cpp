@@ -1,6 +1,7 @@
 /* Returns the signed value at +0x194 of the object's current record, or 0 when there is none or FUN_00293230 reports busy. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
 

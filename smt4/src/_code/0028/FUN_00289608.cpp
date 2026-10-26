@@ -1,7 +1,7 @@
 /* NON_MATCHING: built hoists the load of bufferA above the first stores; retail keeps the stores first. */
 #include "common.h"
-#include "util/CalleeContracts.h"
-#include "shard/asdMemFree.h"
+#include "code/Code002c.h"
+#include "util/MemoryHelpers_VariantB.h"
 
 extern "C" {
 

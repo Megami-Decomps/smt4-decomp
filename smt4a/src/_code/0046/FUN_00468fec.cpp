@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00468fec` (_code @ 0x468fec, 0x3cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0021_Smt4a.h"
 
 extern "C" {
 
-int FUN_00214da4(void);
 int messageGetChoiceResult(void);
 int dataTableFindMatching35(void);
 int messageBannerRestartOrClear(void);

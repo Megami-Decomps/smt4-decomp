@@ -1,4 +1,4 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022a5d8` (_code @ 0x22a5d8, 0xcd0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -37,10 +37,7 @@ typedef struct {
     unsigned int sp1A8; /* 0x1a8: local_1a8 */
 } void_stack;
 
-extern unsigned char LAB_0022a9d8; /* 0x22a9d8 */
-extern unsigned char LAB_0022a9e0; /* 0x22a9e0 */
-extern unsigned char LAB_0022b2cc; /* 0x22b2cc */
-extern unsigned char LAB_002b2b24; /* 0x2b2b24 */
+extern unsigned char arrayCompareSignedHalfword; /* 0x2b2b24 */
 extern int DAT_0057f280; /* 0x57f280 */
 extern int g_renderCtx; /* 0x59dbb4 */
 extern signed char g_lmapMain; /* 0x5f1afc */
@@ -152,10 +149,10 @@ unsigned int FUN_0022a5d8(void)
       temp_v6 = asdTMTexTableEntryAt(0x15,0x2a);
       temp_v7 = FUN_00358e28(*(unsigned int *)(temp_v1 + 0x7ec));
       if (temp_v7 != 0) {
-        textFormatBuffer(temp_v17,&LAB_0022a9d8,temp_v7);
+        textFormatBuffer(temp_v17,"%s",temp_v7);
       }
       else {
-        textFormatBuffer(temp_v17,&LAB_0022a9e0);
+        textFormatBuffer(temp_v17,"\x82e\x82\x81\x82\x89\x82\x8c\x82\x85\x82\x84\x81@\x82\x94\x82\x8f\x81@\x82\x92\x82\x85\x82\x94\x82\x92\x82\x89\x82\x85\x82\x96\x82\x85\x81@\x82\x8d\x82\x81\x82\x90\x81@\x82\x8e\x82\x81\x82\x8d\x82\x85");
       }
       puVar4 = temp_v17;
       fontMeasureLineAdvance(puVar4,2);
@@ -181,7 +178,7 @@ unsigned int FUN_0022a5d8(void)
           temp_v3 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758);
           FUN_00261468(temp_v4);
-          textFormatBuffer(temp_v17,&LAB_0022a9d8,temp_v4);
+          textFormatBuffer(temp_v17,"%s",temp_v4);
           temp_v3 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v0 = *(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758);
           if (temp_v0 >= 0x6a) {
@@ -236,7 +233,7 @@ unsigned int FUN_0022a5d8(void)
                           temp_v10 = dataTableGetCount(temp_v10);
                           puVar9 = (unsigned int *)&temp_v12;
                           temp_v12 = romwright_piece_2_2((*(unsigned short *)((unsigned char *)&temp_v12 + 2)),(unsigned short)temp_v0);
-                          libc_bsearch(puVar9,temp_v5,temp_v10,0x68,&LAB_002b2b24);
+                          libc_bsearch(puVar9,temp_v5,temp_v10,0x68,&arrayCompareSignedHalfword);
                           pcVar7 = (char *)((int)puVar9 + 2);
                         }
                       }
@@ -267,7 +264,7 @@ unsigned int FUN_0022a5d8(void)
           else {
             pcVar7 = (char *)gameDataGetPlayerName();
           }
-          textFormatBuffer(temp_v18,&LAB_0022a9d8,pcVar7);
+          textFormatBuffer(temp_v18,"%s",pcVar7);
           if ((g_lmapMain != '\0') &&
              (temp_v3 = resourceRunOperationIfUnblocked(temp_v19),
              *(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758) == DAT_005f1b00)) {
@@ -278,7 +275,7 @@ unsigned int FUN_0022a5d8(void)
           temp_v3 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v3 + temp_v2 + temp_v1 + 0x758);
           tmnlGetEntryText(temp_v4);
-          textFormatBuffer(temp_v17,&LAB_0022a9d8,temp_v4);
+          textFormatBuffer(temp_v17,"%s",temp_v4);
         }
         temp_v3 = asdTMTexTableEntryAt(0x15,6);
         puVar4 = temp_v17;
@@ -358,11 +355,11 @@ unsigned int FUN_0022a5d8(void)
           temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
           FUN_00261468(temp_v4);
-          textFormatBuffer(temp_v17,&LAB_0022b2cc,temp_v4);
+          textFormatBuffer(temp_v17,"%s",temp_v4);
           temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
           const unsigned char* tokenName = textGetNameToken(temp_v4);
-          textFormatBuffer(temp_v18,&LAB_0022b2cc,tokenName);
+          textFormatBuffer(temp_v18,"%s",tokenName);
           if (g_lmapMain != '\0') {
             temp_v8 = resourceRunOperationIfUnblocked(temp_v19);
             if (*(unsigned char *)(temp_v8 + temp_v2 + temp_v1 + 0x758) == DAT_005f1b00) {
@@ -377,12 +374,12 @@ unsigned int FUN_0022a5d8(void)
           temp_v7 = resourceRunOperationIfUnblocked(temp_v19);
           temp_v4 = (unsigned int)*(unsigned char *)(temp_v7 + temp_v2 + temp_v1 + 0x758);
           tmnlGetEntryText(temp_v4);
-          textFormatBuffer(temp_v17,&LAB_0022b2cc,temp_v4);
+          textFormatBuffer(temp_v17,"%s",temp_v4);
         }
       }
       else {
         temp_v10 = gameDataGetPlayerName();
-        textFormatBuffer(temp_v17,&LAB_0022b2cc,temp_v10);
+        textFormatBuffer(temp_v17,"%s",temp_v10);
         if (*(int *)(temp_v1 + 0x744) == 3) {
           temp_v8 = temp_v3;
         }

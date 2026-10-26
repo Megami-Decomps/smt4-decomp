@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the order of the two constant setups at entry differs (retail loads 0 into r6 before 5 into r5). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0029.h"
 #include "gamedata/SaveSlotTableIV.h"
 
 /* The healing counter scene of the quest center: its state and substate words, and the script it runs. */

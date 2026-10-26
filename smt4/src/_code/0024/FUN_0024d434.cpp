@@ -4,7 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
-#include "util/FUN_0027d9e8.h"
+#include "code/Code0027.h"
 
 /* Find the part occupied by a listed member, or -1 when it is absent. */
 static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)

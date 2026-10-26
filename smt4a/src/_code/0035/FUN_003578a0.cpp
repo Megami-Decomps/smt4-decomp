@@ -1,4 +1,4 @@
-/* NON_MATCHING: global count and box base are materialized separately; stack-push, height addition and vertex/palette load scheduling differ. */
+/* NON_MATCHING: prologue, box/count addressing (map pointer) and the in-loop plane height now match retail; the loop body's box-corner load and colour-move scheduling still differs (retail loads minX, minZ, maxZ, maxX before the modulo). */
 #include "camp/RenderCtx.h"
 #include <string.h>
 
@@ -34,14 +34,15 @@ void FUN_003578a0(f32 height)
 {
     u32 colors[12];
     memcpy(colors, DAT_00532240.colors, sizeof(colors));
-    if (DAT_00613178.count != 0) {
+    DebugMapBoxes *map = &DAT_00613178;
+    if (map->count != 0) {
         RenderCtxA *context = g_renderCtx;
         s32 state = FUN_001692ac(5, 1);
         renderStackPush(&context->stackA, state);
         renderCtxSelectTexture(g_renderCtx, 0);
-        f32 planeHeight = height + 100.0f;
-        for (s32 index = 0; index < DAT_00613178.count; ++index) {
-            const DebugMapBox *box = &DAT_00613178.boxes[index];
+        for (s32 index = 0; index < map->count; ++index) {
+            const DebugMapBox *box = &map->boxes[index];
+            f32 planeHeight = height + 100.0f;
             u32 color = colors[index % 12] | 0x70;
             FUN_00280a08(color, color, color, color,
                 box->minimumX, planeHeight, box->minimumZ,

@@ -30,7 +30,6 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_4_stack;
 
-extern unsigned char LAB_003a25c0; /* 0x3a25c0 */
 extern unsigned char LAB_003a2838; /* 0x3a2838 */
 extern unsigned char LAB_003a283c; /* 0x3a283c */
 extern int g_titleScene; /* 0x44ea00 */
@@ -183,7 +182,7 @@ void FUN_003a21b8(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v10 = *(short *)(temp_v4 + 10);
-      textFormatBuffer(temp_v13,&LAB_003a25c0,temp_v7);
+      textFormatBuffer(temp_v13,"%8d",temp_v7);
       drawTextAtRelativePosition(param_1 + 0x380,0,temp_v0 + temp_v9,temp_v10 + temp_v3,0,7,temp_v8,temp_v2,temp_v13);
     }
     else {

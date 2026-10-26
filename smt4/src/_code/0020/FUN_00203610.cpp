@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "code/Code0020_Smt4.h"
 
 extern "C" {
 

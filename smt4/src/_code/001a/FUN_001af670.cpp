@@ -1,6 +1,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanel.h"
+#include "code/Code001a_Smt4.h"
 
 extern "C" {
 u32 dataTable24Sub0GetRecordS90X(u32);

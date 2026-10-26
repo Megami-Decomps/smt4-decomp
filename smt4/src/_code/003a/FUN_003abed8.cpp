@@ -1,6 +1,8 @@
 /* NON_MATCHING: near (197 rows against 205): same control flow and calls; retail keeps the price in r7/menu flag in fp and tests the signed window/holder flag bytes with ldrsb, ours picks r8/sl and ldrb; retail also emits armcc nops around the calls */
 #include "common.h"
-#include "util/FUN_0020349c.h"
+#include "code/Code0020.h"
+#include "code/Code0023.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 
@@ -61,7 +63,6 @@ int libc_strcpy(...);
 int textEncodeFontSlot(...);
 int FUN_0029ede8(...);
 int messageMainSetTargetFlags(s32 flags);
-int FUN_002328b4(void);
 int FUN_0029cc44(...);
 int countdownSetModeFive(void);
 int beginStatusPanelClose(void);

@@ -1,7 +1,14 @@
-/* NON_MATCHING: the debug trace (file/line) now matches; retail zeroes each identity-quaternion component with an integer store and then rewrites w with 1.0f (armcc folds the dead zero stores into a VSTM pair here). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonTex.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include <string.h>
+
+static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
+{
+    PolyVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
 
@@ -29,14 +36,8 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
     u32 *resource;
 
     sysMemClear(obj, 212);
-    obj->rotation0.x = 0;
-    obj->rotation0.y = 0;
-    obj->rotation0.z = 0;
-    obj->rotation0.w = 1.0f;
-    obj->rotation1.x = 0;
-    obj->rotation1.y = 0;
-    obj->rotation1.z = 0;
-    obj->rotation1.w = 1.0f;
+    quaternionSetIdentity(&obj->rotation0);
+    quaternionSetIdentity(&obj->rotation1);
     obj->unk24 = -1;
     obj->scale = 1.0f;
     if (desc != NULL) {
@@ -54,8 +55,11 @@ PolyTexObject *effPolyTexCreate(PolyTexDesc *desc)
                 obj->resource2 = spriteGroupCreateFromFile(resource);
                 break;
             case 4:
-                obj->geom->unk04 = sysGetTableWord(*resource & 0xffff);
-                refCountIncrement(obj->geom->unk04);
+                {
+                    PolyGeom *geom = obj->geom;
+                    geom->unk04 = sysGetTableWord(*resource & 0xffff);
+                    refCountIncrement(geom->unk04);
+                }
                 break;
             case 7:
                 obj->resource7 = effTlpCreate(resource);

@@ -1,6 +1,5 @@
 #include "battle/BattleUnitSlot.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 namespace { struct Stats { u8 padding[0x126]; u16 values[1]; }; struct Unit { u8 padding[0x28]; Stats *stats; }; }
 

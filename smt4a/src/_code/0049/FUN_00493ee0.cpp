@@ -1,7 +1,7 @@
 /* NON_MATCHING: The inlined value helper interchanges r4/r5 for record ids and the two comparison values. */
 #include "gamedata/Table8Record.h"
 #include "addon/AocEntryKind.h"
-#include "shard/dataTable8FindRecord.h"
+#include "gamedata/DataTableAccess_VariantD_Table8Record.h"
 #include "shop/shopMain.h"
 
 struct EquipmentSortConsumable {

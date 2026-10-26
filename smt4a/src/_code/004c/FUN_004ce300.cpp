@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail moves the slot table pointer to r1 and loads the price table through r0/r2; here the loads use r2/r3 (register allocation only). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0034.h"
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {

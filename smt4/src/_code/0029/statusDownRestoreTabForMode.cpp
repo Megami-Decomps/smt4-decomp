@@ -1,4 +1,4 @@
-/* NON_MATCHING: typed global access removes a reload and identical mode-13/default tab tails merge; -O2 candidate. */
+/* NON_MATCHING: the mode-13 and default tab tails are now separate blocks like retail; retail also re-reads g_gameGlobals.data after the stores (typed global access here keeps one copy). */
 #include "shard/GameGlobals.h"
 
 struct StatusTabReset {
@@ -39,7 +39,18 @@ void statusDownRestoreTabForMode()
     } else if (mode == 14) {
         if (tabs->unk12E4 == 0)
             statusDownSwitchTab(0);
-    } else if (mode != 13 && state->unk1E67 == 6) {
+    } else if (mode == 13) {
+        if (tabs->unk12E4 == 0)
+            statusDownSwitchTab(0);
+        if (tabs->unk12E4 == 1)
+            statusDownSwitchTab(1);
+        if (!state->unk12F1) {
+            if (tabs->unk12E4 == 2)
+                statusDownSwitchTab(4);
+            if (tabs->unk12E4 == 3)
+                statusDownSwitchTab(5);
+        }
+    } else if (state->unk1E67 == 6) {
         if (tabs->unk12E4 == 0)
             statusDownSwitchTab(1);
     } else {

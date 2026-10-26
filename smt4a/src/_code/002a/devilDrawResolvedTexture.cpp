@@ -1,5 +1,5 @@
 #include "gamedata/DevilRecordA.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 extern "C" {
 extern u32 g_aocSystem;
 DevilRecordA *FUN_00184310(u32 id);

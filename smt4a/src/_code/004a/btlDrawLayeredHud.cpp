@@ -1,6 +1,6 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);

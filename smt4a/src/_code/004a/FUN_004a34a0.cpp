@@ -1,10 +1,10 @@
 /* NON_MATCHING: validation result-code merging, predicate formation and register lifetimes differ. */
 #include "shard/Shard004A.h"
-#include "shard/FUN_00184310.h"
+#include "code/Code0018_VariantA_DevilRecordA.h"
+#include "code/Code002a_Smt4a.h"
 
 extern "C" {
 u32 FUN_004a8750(u32 id, u32 mode, s32 first, s32 special, s32 second);
-s32 FUN_002a4b28(u32 id);
 u32 FUN_004d05b4();
 s32 FUN_001ba3d4(u32 flag);
 s32 gameStockContainsEntry(u32 id);

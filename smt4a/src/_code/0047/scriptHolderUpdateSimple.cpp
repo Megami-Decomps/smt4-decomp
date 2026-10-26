@@ -2,6 +2,7 @@
 /* Loads the quest script and system images, runs its entry, and finalizes the screen on completion. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code0041_Smt4a.h"
 
 extern "C" {
 ScriptRunState *FUN_00275bc8(void *script, void *images);
@@ -9,7 +10,6 @@ void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 void asdLoadFileAsyncSimple(const char *path, void **destination, u32 flags);
 s32 scrRunOpcodesStub(ScriptRunState *process);
-void FUN_00418070(u32 object, s32 value);
 void optionsClearFlag1(void);
 u32 FUN_003a36b4(void);
 void FUN_004731d8(void);

@@ -1,7 +1,7 @@
 /* NON_MATCHING: slot/cache register roles and early 0x3800 base hoisting differ; signed 0x38CC flag now matches folded byte access. */
 #include "shard/PadState.h"
 #include "shard/W4_Match6_BtlEntry.h"
-#include "shard/gameGetSupportUnitData.h"
+#include "gamedata/GameDataAccess.h"
 
 namespace {
 struct PartyStatusCache {

@@ -29,13 +29,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_1_stack;
 
-extern unsigned char LAB_004a5224; /* 0x4a5224 */
-extern unsigned char LAB_004a523c; /* 0x4a523c */
-extern unsigned char LAB_004a5254; /* 0x4a5254 */
-extern unsigned char LAB_004a6f14; /* 0x4a6f14 */
-extern unsigned char LAB_004a6f3c; /* 0x4a6f3c */
-extern unsigned char LAB_004a7238; /* 0x4a7238 */
-extern unsigned char LAB_004a7588; /* 0x4a7588 */
+extern unsigned char FUN_004a6f14; /* 0x4a6f14 */
+extern unsigned char FUN_004a6f3c; /* 0x4a6f3c */
+extern unsigned char FUN_004a7238; /* 0x4a7238 */
+extern unsigned char FUN_004a7588; /* 0x4a7588 */
 extern unsigned char DAT_0055c86c; /* 0x55c86c */
 extern unsigned char DAT_0055c90c; /* 0x55c90c */
 extern int g_handleRegistry; /* 0x56fcc0 */
@@ -90,14 +87,11 @@ void Obj55c8d0::start()
   asdMemoryAllocTracked(0x100,0x100,0,4,1);
   DAT_0057f0a0 = piVar1;
   *piVar1 = (int)param_1;
-  puVar2 = &LAB_004a5224;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_004a5224), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_004a6f14), reinterpret_cast<AsdProcFunc>(&LAB_004a6f3c), reinterpret_cast<u32>(piVar1));
+  asdProcessCreateSimple("BIBLE ANALYZE CALC", 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&FUN_004a6f14), reinterpret_cast<AsdProcFunc>(&FUN_004a6f3c), reinterpret_cast<u32>(piVar1));
   param_1[1] = (int)puVar2;
-  puVar3 = &LAB_004a523c;
-  taskCreateDraw(&LAB_004a523c,0x71,1,0,&LAB_004a7238,0,DAT_0057f0a0,puVar2);
+  taskCreateDraw("BIBLE ANALYZE UP",0x71,1,0,&FUN_004a7238,0,DAT_0057f0a0,puVar2);
   param_1[2] = (int)puVar3;
-  puVar2 = &LAB_004a5254;
-  taskCreateDraw(&LAB_004a5254,0xea,1,0,&LAB_004a7588,0,DAT_0057f0a0,param_1[1]);
+  taskCreateDraw("BIBLE ANALYZE DOWN",0xea,1,0,&FUN_004a7588,0,DAT_0057f0a0,param_1[1]);
   param_1[3] = (int)puVar2;
   temp_v0 = 0x68;
   if ((char)param_1[0x218] != '\0') {

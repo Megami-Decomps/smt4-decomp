@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps one gameDataBlocksGetStats call and selects the record out of line after it; this build duplicates the call into the kind branches. */
 #include "common.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct StatBlock {
 } StatBlock;
 
 StatResetEntry *dataTable18Sub0GetEntries(void);
-s32 dataTable18Sub0GetCount(void);
 StatBlock *gameDataBlocksGetStats(void);
 
 /* Clears the count and level of the stat record each table-18 entry names. */

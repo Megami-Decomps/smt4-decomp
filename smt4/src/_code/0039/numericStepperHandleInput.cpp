@@ -1,6 +1,7 @@
 /* NON_MATCHING: first wrap test branches BNE/add then B/wrap instead of retail BEQ/wrap then B/add. */
 #include "shard/W6_W6Match7_NumericStepper.h"
-#include "util/FUN_003c2a54.h"
+#include "code/Code003c.h"
+#include "code/Code003c_Smt4.h"
 
 extern "C" {
 s32 ifTouchGetSelectionModeForRegion(s32 key);
@@ -8,7 +9,6 @@ s32 ifTouchIsInitialSelection(s32 key);
 s32 FUN_003c2b44(u32 mode);
 s32 FUN_003c2b14(u32 mode);
 s32 FUN_003c2ae4(u32 mode);
-s32 FUN_003c2ab4(u32 mode);
 void FUN_00233404(void);
 }
 

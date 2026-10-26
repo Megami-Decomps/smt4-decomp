@@ -29,7 +29,7 @@ void FUN_001df6d8()
     FUN_00210194(view->objectA, 480.0f);
     FUN_00210194(view->objectB, 480.0f);
     ScalarAnimationChannel *channel = view->animation->channel;
-    f32 value = channel->interpolate(channel->start, channel->end, 480.0f, channel->work);
+    f32 value = channel->interpolate(channel->range, 480.0f, channel->work);
     channel->previous = channel->current;
     channel->current = value;
     channel->dirty = 1;

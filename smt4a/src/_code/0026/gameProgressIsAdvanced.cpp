@@ -1,6 +1,6 @@
 #include "gamedata/GameData.h"
 #include "shard/W5_W5Match7_SceneState.h"
-#include "util/GameProgressIsAdvanced.h"
+#include "gamedata/GameDataAccess.h"
 
 struct SaveProgressSection {
     u8 unk000[0x7c4]; // 0x000

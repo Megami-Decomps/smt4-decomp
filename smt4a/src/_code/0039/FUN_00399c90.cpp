@@ -1,7 +1,7 @@
 /* NON_MATCHING: simplified filesystem-result filtering, scratch-frame size and loop registers differ. */
 #include "shard/GlobalBlocks.h"
 #include "AsdSDK/AsdMemCopy.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 void rt_aeabi_memclr(void *, u32);

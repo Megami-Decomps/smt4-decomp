@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_0029d644.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -39,10 +39,7 @@ typedef struct {
     unsigned int sp160; /* 0x160: local_160 */
 } void_stack;
 
-extern unsigned char LAB_001a2aa8; /* 0x1a2aa8 */
-extern unsigned char LAB_001a2ab0; /* 0x1a2ab0 */
-extern unsigned char LAB_001a31cc; /* 0x1a31cc */
-extern unsigned char LAB_001f62dc; /* 0x1f62dc */
+extern unsigned char recordCompareSignedValue; /* 0x1f62dc */
 extern int DAT_0043dd24; /* 0x43dd24 */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -137,10 +134,10 @@ unsigned int FUN_001a26dc(void)
     temp_v7 = asdTMTexTableEntryAt(0x1e,0x2a);
     temp_v8 = terminalGetCharacterDisplayName(*(unsigned int *)(temp_v2 + 0x7ec));
     if (temp_v8 != 0) {
-      textFormatBuffer(temp_v11,&LAB_001a2aa8);
+      textFormatBuffer(temp_v11,"%s");
     }
     else {
-      textFormatBuffer(temp_v11,&LAB_001a2ab0);
+      textFormatBuffer(temp_v11,"\x83}\x83b\x83v\x96\xbc\x8e\xe6\x93\xbe\x8e\xb8\x94s");
     }
     puVar6 = temp_v11;
     fontMeasureLineAdvance(puVar6,2);
@@ -188,7 +185,7 @@ unsigned int FUN_001a26dc(void)
             temp_v5 = dataTableGetCount(temp_v5);
             temp_v13[0] = (unsigned short)temp_v0;
             puVar7 = temp_v13;
-            libc_bsearch(puVar7,temp_v6,temp_v5,0x72,&LAB_001f62dc);
+            libc_bsearch(puVar7,temp_v6,temp_v5,0x72,&recordCompareSignedValue);
             puVar7 = puVar7 + 1;
           }
           else {
@@ -200,11 +197,11 @@ unsigned int FUN_001a26dc(void)
           puVar7 = (unsigned short *)(unsigned int)*(unsigned char *)(temp_v8 + temp_v3 + temp_v2 + 0x758);
           tmnlGetEntryText(puVar7);
         }
-        textFormatBuffer(temp_v11,&LAB_001a2aa8,puVar7);
+        textFormatBuffer(temp_v11,"%s",puVar7);
       }
       else {
         temp_v5 = gameDataGetPlayerName();
-        textFormatBuffer(temp_v11,&LAB_001a2aa8,temp_v5);
+        textFormatBuffer(temp_v11,"%s",temp_v5);
         temp_v8 = gameFlagIsSet(0x668);
         if (((temp_v8 != 0) && (temp_v8 = gameFlagIsSet(0x1d7), temp_v8 == 0)) ||
            (temp_v8 = gameFlagIsSet(0x263), temp_v8 != 0)) {
@@ -280,7 +277,7 @@ unsigned int FUN_001a26dc(void)
           temp_v5 = dataTableGetCount(temp_v5);
           temp_v13[0] = (unsigned short)temp_v0;
           puVar7 = temp_v13;
-          libc_bsearch(puVar7,temp_v6,temp_v5,0x72,&LAB_001f62dc);
+          libc_bsearch(puVar7,temp_v6,temp_v5,0x72,&recordCompareSignedValue);
           puVar7 = puVar7 + 1;
         }
         else {
@@ -292,11 +289,11 @@ unsigned int FUN_001a26dc(void)
         puVar7 = (unsigned short *)(unsigned int)*(unsigned char *)(temp_v7 + temp_v4 + temp_v2 + 0x758);
         tmnlGetEntryText(puVar7);
       }
-      textFormatBuffer(temp_v11,&LAB_001a2aa8,puVar7);
+      textFormatBuffer(temp_v11,"%s",puVar7);
     }
     else {
       temp_v5 = gameDataGetPlayerName();
-      textFormatBuffer(temp_v11,&LAB_001a31cc,temp_v5);
+      textFormatBuffer(temp_v11,"%s",temp_v5);
       temp_v4 = gameFlagIsSet(0x668);
       if (((temp_v4 != 0) && (temp_v4 = gameFlagIsSet(0x1d7), temp_v4 == 0)) ||
          (temp_v4 = gameFlagIsSet(0x263), temp_v4 != 0)) {

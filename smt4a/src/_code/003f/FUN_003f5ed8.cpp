@@ -1,8 +1,7 @@
 /* NON_MATCHING: the visible-window loop remains partially unrolled rather than retail's straight-line stores, changing saved registers and the dialog call frame. */
 #include "common.h"
 #include "shard/Shard0031.h"
-#include "util/FUN_002a4894.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 #include "gamedata/FlagsB.h"
 
 extern "C" {

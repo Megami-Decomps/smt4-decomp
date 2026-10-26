@@ -1,10 +1,8 @@
-/* NON_MATCHING: retail zeroes the loop index before calling btlGetMainState (only an index declared ahead of the call reproduces it). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "AsdSDK/Source/Gfx/Effect/effGeometry.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 
@@ -14,12 +12,14 @@ extern "C" {
 u32 FUN_00312730(void)
 {
     s32 show = scrGetArg(0);
+    s32 index = 0;
     BtlMainState *state = btlGetMainState();
 
-    for (s32 i = 0; i < 109; i++) {
-        BtlActionRecord *action = &state->actions[i];
-        if ((action->status & 0x1) && (action->status & 0x80) && (action->status & 0x400) &&
-            (!(action->status & 0x10) || !(action->stateFlags & 2))) {
+    for (; index < 109; index++) {
+        BtlActionRecord *action = &state->actions[index];
+        u32 flags = action->status;
+        if ((flags & 0x1) && (flags & 0x80) && (flags & 0x400) &&
+            (!(flags & 0x10) || !(action->stateFlags & 2))) {
             if (!show) {
                 FUN_002451c4(0, 0, reinterpret_cast<u32>(action), 0, 20, 0);
             } else {

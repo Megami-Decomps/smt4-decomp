@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_ScrollList.h"
+#include "shard/TextureDrawCall.h"
 
 extern "C" {
 
@@ -76,7 +77,6 @@ extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026ab64. */
 /* Supplied declaration required: FUN_0026adb4. */
 /* Supplied declaration required: FUN_0026ae68. */
-extern int FUN_00288498(void);
 /* Supplied declaration required: FUN_00288e68. */
 /* Supplied declaration required: FUN_0029212c. */
 extern int FUN_00293ac0(void);

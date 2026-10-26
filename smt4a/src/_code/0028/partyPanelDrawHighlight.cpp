@@ -1,7 +1,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelState.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 struct PanelSpriteOrigin {
     /* 0x00 */ u8 unk00[8];

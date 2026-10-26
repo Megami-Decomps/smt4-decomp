@@ -1,5 +1,5 @@
 #include "gamedata/DataTable.h"
-#include "util/dataTableFileGetTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 #include "gamedata/DataTableSlots.h"
 
 extern "C" {

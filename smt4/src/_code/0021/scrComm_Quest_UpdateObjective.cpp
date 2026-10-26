@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "ui/MessageMain.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
 
@@ -23,13 +24,12 @@ int FUN_00348a1c(...);
 int eventTexSetFlag(int);
 int scrWorkGetValue(...);
 int scrWorkSetValue(...);
-int FUN_0028784c(unsigned int, int);
 int messageSlotSet(int);
 int scrCommMessageSetMode(...);
 int scrSetResult(...);
 int FUN_002900d0(void);
 int btlTalkBustUpSetUnk2F4(int);
-int FUN_002954f4(unsigned int, int);
+int btlTalkBustUpSetDemonTexture(unsigned int, int);
 int btlTalkBustUpCreate(void);
 int scrResultStopJobAndReleaseUi(void);
 int resultCreate(int);
@@ -78,7 +78,7 @@ extern int scrGetCommandFrame(void);
 extern int FUN_0029022c(void);
 extern unsigned int FUN_002903f0(void);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 /* Supplied declaration required: textEncodeFontSlot. */
 /* Supplied declaration required: btlTalkBustUpCreate. */
 extern unsigned int scrGetArg(unsigned int);
@@ -238,7 +238,7 @@ unsigned int scrComm_Quest_UpdateObjective(void)
         btlTalkBustUpCreate();
       }
       if ((temp_v3 != 0) && (temp_v4 = btlTalkBustUpGetId(), temp_v4 != temp_v3)) {
-        FUN_002954f4(temp_v3 & 0xffff,0);
+        btlTalkBustUpSetDemonTexture(temp_v3 & 0xffff,0);
       }
       btlTalkBustUpSetUnk2F4(1);
     }

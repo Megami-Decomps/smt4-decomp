@@ -32,9 +32,9 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } void_stack;
 
-extern unsigned char LAB_001c0fb0; /* 0x1c0fb0 */
+extern unsigned char FUN_001c0fb0; /* 0x1c0fb0 */
 extern int FUN_001c1014(...); /* 0x1c1014 */
-extern unsigned char LAB_001ec9ac; /* 0x1ec9ac */
+extern unsigned char campCecViewUpdateValue; /* 0x1ec9ac */
 extern int campCecViewDrawCallback(...); /* 0x211580 */
 extern unsigned char LAB_002d77ac; /* 0x2d77ac */
 extern unsigned char LAB_002d77c4; /* 0x2d77c4 */
@@ -98,23 +98,23 @@ void FUN_002d747c(void)
   asdProcessCreateSimple(&LAB_002d77ac,1,0,0);
   *puVar2 = (unsigned int)puVar3;
   temp_v6 = 0;
-  temp_v5 = (romwright_code *)&LAB_001ec9ac;
+  temp_v5 = (romwright_code *)&campCecViewUpdateValue;
   temp_v7 = 0;
   temp_v8 = puVar3;
   taskCreateDraw(&LAB_002d77c4,0x65,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v6 = 0;
-  temp_v5 = (romwright_code *)&LAB_001ec9ac;
+  temp_v5 = (romwright_code *)&campCecViewUpdateValue;
   temp_v7 = 0;
   taskCreateDraw(&LAB_002d77e0,0xcc,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v6 = 0;
-  temp_v5 = (romwright_code *)&LAB_001c0fb0;
+  temp_v5 = (romwright_code *)&FUN_001c0fb0;
   temp_v7 = 0;
   taskCreateDraw(&LAB_002d7800,0x81,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v6 = 0;
-  temp_v5 = (romwright_code *)&LAB_001c0fb0;
+  temp_v5 = (romwright_code *)&FUN_001c0fb0;
   temp_v7 = 0;
   taskCreateDraw(&LAB_002d7818,0xdf,0);
   temp_v8 = (unsigned char *)*puVar2;

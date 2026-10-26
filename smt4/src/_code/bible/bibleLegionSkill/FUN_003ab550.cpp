@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "classes/Obj42242c.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_00233240(...);
 int uiInitializeEightTimerSet(...);
 int FUN_00233670(...);
 int FUN_0029ee6c(...);
-int asdMemAlloc(int, int, int, int, int);
 int taskCreateDraw(...);
 int _ZN9Obj4224489buildListEv(...);
 int spriteTable22Acquire(void);
@@ -30,10 +30,10 @@ typedef struct {
 extern unsigned char LAB_003ab744; /* 0x3ab744 */
 extern unsigned char LAB_003ab760; /* 0x3ab760 */
 extern unsigned char LAB_003ab77c; /* 0x3ab77c */
-extern unsigned char LAB_003ace14; /* 0x3ace14 */
-extern unsigned char LAB_003ace3c; /* 0x3ace3c */
-extern unsigned char LAB_003ad068; /* 0x3ad068 */
-extern unsigned char LAB_003ad368; /* 0x3ad368 */
+extern unsigned char FUN_003ace14; /* 0x3ace14 */
+extern unsigned char uiFreeCallbackContext; /* 0x3ace3c */
+extern unsigned char FUN_003ad068; /* 0x3ad068 */
+extern unsigned char uiCallbackFinishDraw; /* 0x3ad368 */
 extern int *DAT_0043d9f8; /* 0x43d9f8 */
 
 /* Supplied declaration required: entryTableClear. */
@@ -70,13 +70,13 @@ void FUN_003ab550(int *param_1)
   DAT_0043d9f8 = piVar1;
   *piVar1 = (int)param_1;
   puVar2 = &LAB_003ab744;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_003ab744), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_003ace14), reinterpret_cast<AsdProcFunc>(&LAB_003ace3c), reinterpret_cast<u32>(piVar1));
+  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_003ab744), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&FUN_003ace14), reinterpret_cast<AsdProcFunc>(&uiFreeCallbackContext), reinterpret_cast<u32>(piVar1));
   param_1[1] = (int)puVar2;
   puVar3 = &LAB_003ab760;
-  taskCreateDraw(&LAB_003ab760,0x6f,1,0,&LAB_003ad068,0,DAT_0043d9f8,puVar2);
+  taskCreateDraw(&LAB_003ab760,0x6f,1,0,&FUN_003ad068,0,DAT_0043d9f8,puVar2);
   param_1[2] = (int)puVar3;
   puVar2 = &LAB_003ab77c;
-  taskCreateDraw(&LAB_003ab77c,0xe6,1,0,&LAB_003ad368,0,DAT_0043d9f8,param_1[1]);
+  taskCreateDraw(&LAB_003ab77c,0xe6,1,0,&uiCallbackFinishDraw,0,DAT_0043d9f8,param_1[1]);
   param_1[3] = (int)puVar2;
   rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1d);
   uiInitializeEightTimerSet(param_1 + 0x37);

@@ -1,9 +1,9 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004b1a00` (_code @ 0x4b1a00, 0x144c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "addon/LookupRecord.h"
 

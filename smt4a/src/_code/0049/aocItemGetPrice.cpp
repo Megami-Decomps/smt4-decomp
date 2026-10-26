@@ -1,4 +1,5 @@
 #include "common.h"
+#include "addon/AocSystem_Smt4a.h"
 
 #define AOC_PRICE_UNKNOWN 99999999
 #define AOC_ITEM_DISCOUNTED 0x02 /* AocPricedItem.flags: bits 2-9 hold the percentage to charge */

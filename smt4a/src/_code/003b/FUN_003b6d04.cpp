@@ -1,6 +1,5 @@
 /* NON_MATCHING: register allocation only (r5-r9 rotated). Retail addresses the texture array as g_eventEffect+0x1c, likely a separate global of the original unit placed after it. */
 #include "common.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 

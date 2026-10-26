@@ -7,7 +7,7 @@ u32 FUN_002bfdd4();
 u32 FUN_002bfdc4();
 void FUN_0025086c(s32, char *);
 u32 FUN_002be650(u32, s32);
-const char *FUN_002bcfc0(u32, s32);
+const char *textConvertToGlyphPairs(u32, s32);
 void textFormatBuffer(char *, const char *, ...);
 void dialogSetText(const char *);
 void dialogOpen(s32, s32);
@@ -39,13 +39,13 @@ void mapIfShowItemResultMessage(u32 result, u32 item, s32 count)
     {
         u32 entry = FUN_002be650(item, 0);
         FUN_0025086c(count, countText);
-        textFormatBuffer(text, "\x25\x73\x81\x46\x81\x40\x25\x73\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", FUN_002bcfc0(entry, 0), countText);
+        textFormatBuffer(text, "\x25\x73\x81\x46\x81\x40\x25\x73\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(entry, 0), countText);
         break;
     }
     case 4:
     {
         u32 entry = FUN_002be650(item, 0);
-        textFormatBuffer(text, "\x82\x6e\x82\x82\x82\x94\x82\x81\x82\x89\x82\x8e\x82\x85\x82\x84\x81\x40\x82\x94\x82\x88\x82\x85\x81\x40\x82\x8e\x82\x85\x82\x85\x82\x84\x82\x85\x82\x84\x81\x40\x25\x73\x81\x44", FUN_002bcfc0(entry, 0));
+        textFormatBuffer(text, "\x82\x6e\x82\x82\x82\x94\x82\x81\x82\x89\x82\x8e\x82\x85\x82\x84\x81\x40\x82\x94\x82\x88\x82\x85\x81\x40\x82\x8e\x82\x85\x82\x85\x82\x84\x82\x85\x82\x84\x81\x40\x25\x73\x81\x44", textConvertToGlyphPairs(entry, 0));
         message = 0x7a906;
         break;
     }

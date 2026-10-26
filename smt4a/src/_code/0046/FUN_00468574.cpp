@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail loads the second resource pair with two ldr (here an add + ldm) and lowers the mode test to one cmp/cmpne with predicated moves feeding the later branch; the linker-inlined scriptProcessSetMode stores now match. */
 #include "map/PickObjectResources.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0013.h"
 
 extern "C" {
 PickObjectResource *FUN_00275bc8(void *, void *);

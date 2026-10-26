@@ -2,7 +2,7 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W5_W5Match2_TimedState.h"
-#include "util/AocClearDisplayFlag.h"
+#include "addon/AocSystemSmt4a.h"
 
 extern "C" {
 extern QueuedRequestState *g_aocMain;

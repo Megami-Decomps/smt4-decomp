@@ -4,6 +4,17 @@
 #include "map/mapDepart.h"
 #include "test/BustupViewer.h"
 
+static __inline void flagsSetBits(u32 *flags, u32 mask)
+{
+    *flags |= mask;
+}
+
+static __inline void flagsClearBits(u32 *flags, u32 mask)
+{
+    *flags &= mask;
+}
+
+
 struct NaviCategoryTransitionView {
     u8 unk0000[8];
     u32 state;
@@ -49,7 +60,7 @@ void FUN_0048c1c0(NaviCategorySelectionWork *work)
             FUN_00168980(27);
         g_gameState.unk034[0x42F] = 1; // Navigation animation active at 0x463.
         view->state = 1;
-        view->flags |= 0x01000008;
+        flagsSetBits(&view->flags, 0x01000008);
         return;
     case 1: {
         for (s32 index = 0; index < 6; ++index)
@@ -68,7 +79,7 @@ void FUN_0048c1c0(NaviCategorySelectionWork *work)
             g_gameState.unk034[0x42F] = 0;
             g_gameState.navigation.naviMapPending = 0;
             view->state = 2;
-            view->flags |= 2;
+            flagsSetBits(&view->flags, 2);
             msgWindowReset();
         }
         s32 y = vec2GetYInt(cursor);
@@ -78,11 +89,11 @@ void FUN_0048c1c0(NaviCategorySelectionWork *work)
     }
     case 2:
         if (g_gameState.navigation.unk461) {
-            view->flags &= ~8u;
+            flagsClearBits(&view->flags, ~8u);
             sub68OwnerDestroy();
             g_gameState.navigation.unk461 = 0;
         }
-        view->flags &= ~8u;
+        flagsClearBits(&view->flags, ~8u);
         return;
     default:
         return;

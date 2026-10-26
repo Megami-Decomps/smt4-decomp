@@ -1,8 +1,8 @@
 /* NON_MATCHING: state machine matches except armcc cross-jumps the shared "close prompt" tail differently (retail: case 4 branches back into case 3 tail; one row more) and orders the hoisted constants r0/r6 differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "util/CalleeContracts.h"
 #include "addon/LookupRecord.h"
+#include "code/Code0033.h"
 
 namespace {
 // A record of the player's party: skill ids at 0x34, a validity byte per skill at 0x44.
@@ -44,7 +44,6 @@ SaveSlot *saveSlotFindById(u32 id);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageGetChoiceResult(void);
-void FUN_00333dc8(s32 a);
 void obj04Finish(void);
 s32 FUN_003df4a4(u16 skillId);
 s32 partySlotMatchesSelected(void);

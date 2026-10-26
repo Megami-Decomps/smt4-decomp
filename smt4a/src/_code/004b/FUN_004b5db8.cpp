@@ -23,7 +23,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_10_stack;
 
-extern unsigned char LAB_004b6388; /* 0x4b6388 */
 extern unsigned int DAT_00588c4c; /* 0x588c4c */
 extern int DAT_00588c50; /* 0x588c50 */
 
@@ -152,7 +151,7 @@ LAB_004b5ef4:
     }
     FUN_00180310(0,(int)*(short *)(DAT_00588c4c + 8) + (int)*(short *)(temp_v0 + 8) + param_5,
                  (int)*(short *)(temp_v0 + 10) + (int)*(short *)(DAT_00588c4c + 10) + param_6,1,temp_v3,
-                 0x7e,&LAB_004b6388,(unsigned int)*(unsigned short *)(param_3 + 100) + param_9);
+                 0x7e,"%d",(unsigned int)*(unsigned short *)(param_3 + 100) + param_9);
     return;
   case 6:
     if (param_8 == 0) {

@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail uses `movne r1, #1` where armcc emits `movne r0, #1`. */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 

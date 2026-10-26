@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the operand order inside the second 64-bit mask test's two ANDs differs (retail flags-first with an ldm mask load; the build mask-first). */
 #include "battle/BtlMainAccess.h"
-#include "util/CalleeContracts.h"
+#include "battle/BattleHelpers.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"

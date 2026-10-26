@@ -4,7 +4,7 @@ extern "C" {
 u32 scrGetArg(u32 index);
 f32 scriptReadStackValueAsFloat(u32 index);
 s32 eventTexHasMissingValue(void);
-u32 FUN_0039b0f8(u32 id, f32 value, f32 duration);
+u32 eventCreateResourceBattleTexture(u32 id, f32 value, f32 duration);
 void eventTexSetJobParam(u32 job);
 void eventTexStoreHandle(u32 job);
 void scrSetResult(u32 value);
@@ -15,7 +15,7 @@ u32 scrCommStartTextureEffect(void)
     u32 id = scrGetArg(0);
     f32 value = scriptReadStackValueAsFloat(1);
     if (eventTexHasMissingValue()) {
-        u32 job = FUN_0039b0f8(id, value, 15.0f);
+        u32 job = eventCreateResourceBattleTexture(id, value, 15.0f);
         eventTexSetJobParam(job);
         eventTexStoreHandle(job);
         scrSetResult(job);

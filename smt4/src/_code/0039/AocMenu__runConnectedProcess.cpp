@@ -1,4 +1,4 @@
-#include "util/FUN_00233fcc.h"
+#include "code/Code0023.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `_ZN7AocMenu19runConnectedProcessEv` (_code @ 0x3923b0, 0x4d4 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "classes/AocMenu.h"
@@ -33,7 +33,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_00391000(...); /* 0x391000 */
-extern unsigned char LAB_003910b8; /* 0x3910b8 */
+extern unsigned char messageWindowDrawJob; /* 0x3910b8 */
 extern unsigned char LAB_003928a4; /* 0x3928a4 */
 extern int g_aocMain; /* 0x432fc8 */
 
@@ -111,7 +111,7 @@ void AocMenu::runConnectedProcess()
               pcVar5 = "Aoc guide CALC";
               asdProcessCreateSimple("Aoc guide CALC",2,0,0,FUN_00391000,0,param_1);
               *puVar8 = (unsigned int)pcVar5;
-              taskCreateDraw("Aoc guide DOWN",0xe8,1,0,&LAB_003910b8,0,param_1,pcVar5);
+              taskCreateDraw("Aoc guide DOWN",0xe8,1,0,&messageWindowDrawJob,0,param_1,pcVar5);
             }
             param_1[2] = 3;
             *param_1 = *param_1 | 0x10;

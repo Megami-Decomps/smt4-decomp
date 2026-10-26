@@ -1,5 +1,6 @@
 #include "shard/NaviMain.h"
 #include "shard/Shard0049.h"
+#include "code/Code0049_Smt4a.h"
 
 extern "C" {
 extern NaviMainA *g_naviMain;

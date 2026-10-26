@@ -1,8 +1,7 @@
 /* NON_MATCHING: the list sub-object comes from the one-instruction accessor questUiGetList (inlined by armlink, config/inlined.txt) and is passed to resourceRunOperationIfUnblocked; the remaining differences are armcc keeping the list in r7 and the offset in r6 (retail the reverse) plus a nop armcc emits before that call (151 rows against 150). */
 #include "common.h"
 #include "shard/Shard0031.h"
-#include "util/FUN_002a4894.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 
 /* The quest screen's state (observed fields). */
 struct QuestUiLower {

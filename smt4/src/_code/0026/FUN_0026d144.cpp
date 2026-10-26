@@ -3,7 +3,8 @@
 #include "ui/PartyPanelState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "battle/BattleUnitSlot.h"
-#include "util/FUN_002621b4.h"
+#include "code/Code0026.h"
+#include "ui/PartyPanel.h"
 
 namespace {
 struct BtlUnitExtra {
@@ -25,7 +26,6 @@ s32 FUN_0029a924(u16 item);
 s32 FUN_0029a9d4(u16 item, u32 flag);
 s32 FUN_0029efa8(void *selection);
 s32 objectPartRunUnlessLocked(void *selection);
-void FUN_00298d28(s32 first, s32 second);
 void partyWidgetSetValue(PartyPanelWidget *widget, s32 value);
 void partyWidgetSetCost(PartyPanelWidget *widget, s32 cost);
 s32 partyWidgetGetCost(PartyPanelWidget *widget);

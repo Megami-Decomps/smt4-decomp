@@ -2,7 +2,7 @@
 #include "shard/Shard004F.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);

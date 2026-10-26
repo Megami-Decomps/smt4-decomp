@@ -1,36 +1,30 @@
-/* NON_MATCHING: register allocation only: retail keeps the count in r2 and the -1 in r1, armcc here swaps them. */
 #include "common.h"
 
-struct Vertex {
-    /* 0x00 */ s32 index;
-    /* 0x04 */ u8 unk04[0x14];
+struct Obj00315398Entry {
+    s32 value;
+    u8 unk04[0x14];
 };
 
-struct VertexBuffer {
-    /* 0x00 */ Vertex *vertices;
+struct Obj00315398Count {
+    u8 unk00[0x38];
+    s32 count;
 };
 
-struct VertexParams {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ s32 count;
+struct Obj00315398 {
+    u8 unk00[0x3c];
+    Obj00315398Entry **entries;
+    Obj00315398Count *source;
 };
 
-struct VertexOwner {
-    /* 0x00 */ u8 unk00[0x3c];
-    /* 0x3c */ VertexBuffer *buffer;
-    /* 0x40 */ VertexParams *params;
-};
-
-extern "C" {
-
-/* Virtual reset: marks every vertex index unused. */
-void FUN_003b40bc(VertexOwner *owner)
+/* Resets the value of each entry to -1, one per source count. */
+extern "C" void FUN_003b40bc(Obj00315398 *obj)
 {
-    Vertex *vertices = owner->buffer->vertices;
-    s32 count = owner->params->count;
-    for (s32 i = 0; i < count; i++) {
-        vertices[i].index = -1;
+    Obj00315398Entry **handle = obj->entries;
+    Obj00315398Count *source = obj->source;
+    Obj00315398Entry *entries = *handle;
+    s32 count = source->count;
+    s32 i;
+    for (i = 0; i < count; i++) {
+        entries[i].value = -1;
     }
 }
-
-} /* extern "C" */

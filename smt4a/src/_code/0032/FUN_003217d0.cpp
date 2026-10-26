@@ -4,7 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "battle/BtlMainAccess.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 struct DrawRing {
     s32 index;              // 0x00

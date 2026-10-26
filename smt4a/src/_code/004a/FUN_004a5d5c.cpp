@@ -2,7 +2,7 @@
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "event/2dEvent/SmokeFade.h"
-#include "shard/FUN_0023b3b8.h"
+#include "code/Code0023.h"
 
 extern "C" {
 void sysPlaySe(u32 sound);

@@ -2,7 +2,6 @@
 #include "classes/Obj557dcc.h"
 
 extern "C" {
-void resourceListDestroy(void *resources);
 void asdOperatorDelete(void *allocation);
 }
 

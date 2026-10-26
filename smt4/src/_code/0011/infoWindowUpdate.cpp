@@ -1,5 +1,6 @@
 /* NON_MATCHING: timed-close state constants use r1/r0 instead of retail's r2/r1. */
 #include "ui/PartyPanelState.h"
+#include "util/MathFunctions.h"
 extern "C" PartyPanelState *g_partyPanel;
 
 struct InfoWindowUpdateState {
@@ -22,7 +23,6 @@ extern "C" InfoWindowUpdateState *g_infoWin;
 extern "C" s32 FUN_002bf818(TimerSlot *timer);
 extern "C" void timerStart(TimerSlot *timer, s32 animation, s32 flags);
 extern "C" void FUN_002b8ee0(TimerSlot *timer, s32 value);
-extern "C" s32 vec2GetXInt(TimerSlot *timer);
 
 /* Advance opening, scrolling and timed closing of the information window. */
 extern "C" s32 infoWindowUpdate(u32 job)

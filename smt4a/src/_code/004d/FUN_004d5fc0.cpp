@@ -14,7 +14,7 @@ extern f32 DAT_0057150c;
 extern f32 DAT_00571510;
 s32 listBoxItemHasOwner(AsdListBox *list);
 f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
-void FUN_004f43b4(BtlCameraA *camera);
+void transitionResetPosition(BtlCameraA *camera);
 
 // Apply a debug-menu change to camera toggles or scalar/vector parameters.
 void FUN_004d5fc0(CameraDebugMenu *menu, u32 unused, u32 index)
@@ -24,10 +24,10 @@ void FUN_004d5fc0(CameraDebugMenu *menu, u32 unused, u32 index)
         if (listBoxItemHasOwner(menu->list)) {
             if (g_btlCamera->flags & 0x20)
                 return;
-            FUN_004f43b4(g_btlCamera);
+            transitionResetPosition(g_btlCamera);
             return;
         }
-        FUN_004f43b4(g_btlCamera);
+        transitionResetPosition(g_btlCamera);
         g_btlCamera->flags &= ~0x20;
         return;
     case 1:

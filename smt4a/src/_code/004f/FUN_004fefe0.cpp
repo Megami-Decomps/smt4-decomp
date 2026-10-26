@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and loop layout differ (retail keeps the ranges pointer in ip and the group index 0 in r5, tests the key with blt to an increment block) */
+/* NON_MATCHING: loop shape now matches retail; retail keeps the group index in r5 and reloads `ranges[group].first` through it (armcc here folds group 0 and reuses the cached first index). */
 #include "common.h"
 
 struct KeyRange {
@@ -28,15 +28,12 @@ s32 FUN_004fefe0(KeyTable *table, s32 key)
     s32 index = range->first;
     s32 last = range->first - 1 + range->count;
 
-    if (index <= last) {
-        while (table->entries[index].key < key) {
-            index++;
-            if (index > last) {
-                return index;
+    for (; index <= last; index++) {
+        if (table->entries[index].key >= key) {
+            if (table->entries[index].key != key && table->ranges[group].first != index) {
+                index--;
             }
-        }
-        if (table->entries[index].key != key && table->ranges[group].first != index) {
-            index--;
+            return index;
         }
     }
     return index;

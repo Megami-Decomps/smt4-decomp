@@ -2,7 +2,7 @@
 #include "common.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 extern "C" {
 

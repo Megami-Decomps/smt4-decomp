@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation and scheduling differ (menu/loop index swap, mode byte base hoisted into a register in retail, flag materialised as mov #1/moveq #0); logic matches retail. */
 #include "common.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 struct StatRecord {
     u8 unk00[6];

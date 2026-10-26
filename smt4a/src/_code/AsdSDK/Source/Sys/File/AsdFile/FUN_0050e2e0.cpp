@@ -1,33 +1,29 @@
-/* NON_MATCHING: retail retains unused pool word 0x005b3fcc at +0x50 and removed destructor-registration calls as NOPs at +0x1c/+0x30. */
-#include "romwright_types.h"
+/* NON_MATCHING: everything matches retail except that for the last registration retail loads the atexit arguments (r2, r1) after the event's two zero stores; the build loads them first. */
+#include "common.h"
+
+struct ThreadState { u32 state; u8 active; };
+struct AsdFileEvent { u32 first; u32 second; };
 
 extern "C" {
+extern ThreadState DAT_005b3fcc;
+extern u32 g_asdFileMutex;
+extern AsdFileEvent g_asdFileEvent;
+extern u8 entry;
+void _ZN9Obj2fd02aD1Ev(void *object);
+void FUN_0042d340(void *object);
+void FUN_0042cd08(void *object);
+s32 __aeabi_atexit(void *object, void (*destroy)(void *), void *module);
 
-int __aeabi_atexit(unsigned int *, int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned int g_asdFileMutex; /* 0x5b3fc0 */
-extern unsigned int g_asdFileEvent; /* 0x5b3fd4 */
-extern unsigned int DAT_005b3fd8; /* 0x5b3fd8 */
-
-/* Supplied declaration required: __aeabi_atexit. */
-
-
-void FUN_0050e2e0(unsigned int *param_1)
-
+/* Initializes the file module's thread state, mutex and event and registers their finalizers. */
+void FUN_0050e2e0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = 0;
-  *(unsigned char *)(param_1 + 1) = 1;
-  g_asdFileMutex = 0;
-  g_asdFileEvent = 0;
-  DAT_005b3fd8 = 0;
-  __aeabi_atexit(&g_asdFileEvent,0x42cd08,0x100000);
-  return;
+    DAT_005b3fcc.state = 0;
+    DAT_005b3fcc.active = 1;
+    __aeabi_atexit(&DAT_005b3fcc, _ZN9Obj2fd02aD1Ev, &entry);
+    g_asdFileMutex = 0;
+    __aeabi_atexit(&g_asdFileMutex, FUN_0042d340, &entry);
+    g_asdFileEvent.first = 0;
+    g_asdFileEvent.second = 0;
+    __aeabi_atexit(&g_asdFileEvent, FUN_0042cd08, &entry);
 }
-
-} /* extern "C" */
+}

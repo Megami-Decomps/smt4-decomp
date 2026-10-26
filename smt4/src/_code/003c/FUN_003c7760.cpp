@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: when clearing the UI and active flags retail loads the flags word into r1 (and hoists the pool load of DAT_00435d18 between), built uses r0 */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0024.h"
 #include "battle/btlEditor.h"
 
 extern "C" {

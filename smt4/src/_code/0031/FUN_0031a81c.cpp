@@ -1,4 +1,3 @@
-/* NON_MATCHING: same unrolled loop; retail keeps the count in r2 and the -1 constant in r1, this build counts in r1 and puts -1 in r2. */
 #include "common.h"
 
 struct Record {
@@ -25,11 +24,9 @@ extern "C" void FUN_0031a81c(Object *object)
 {
     Records *records = object->records;
     Counts *counts = object->counts;
-    s32 count = counts->count;
     Record *record = records->items;
-    s32 i;
+    s32 count = counts->count;
 
-    for (i = 0; i < count; i++) {
+    for (s32 i = 0; i < count; i++)
         record[i].id = -1;
-    }
 }

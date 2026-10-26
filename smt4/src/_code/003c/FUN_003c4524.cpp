@@ -1,7 +1,7 @@
 /* NON_MATCHING: registers and branches match; retail loads the flags word before the compare of the owner result, the build loads it after. */
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 struct BattleDebugList {
     /* 0x00 */ u8 unk00[0x10];

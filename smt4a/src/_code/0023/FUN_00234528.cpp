@@ -1,6 +1,6 @@
 /* NON_MATCHING: local label snapshot and format buffer have different frame placement; category/state-store scheduling differs. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
 struct PopupSubstitutionNames { const char *names[12]; };
 struct PopupSelectedUnit { u8 prefix[0x12C]; u16 id; };

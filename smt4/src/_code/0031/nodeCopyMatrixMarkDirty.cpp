@@ -1,5 +1,6 @@
 /* Copies the matrix of the object's node at +0x4c and sets bit 11 of its flags (+0x3c in the matrix block). */
 #include "common.h"
+#include "code/Code0031_Smt4.h"
 
 extern "C" {
 

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "shop/shopMain.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ extern int slotIsReady(unsigned int);
 /* Supplied declaration required: npcRoomDestroy. */
 /* Supplied declaration required: FUN_00290d5c. */
 extern unsigned int tableGroupFindEntryIndex(unsigned int, int);
-extern int FUN_00290e78(void);
 extern int messageTargetGetValue(void);
 extern int messageWindowIsState1(void);
 /* Supplied declaration required: bgmFadeOut. */

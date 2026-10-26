@@ -1,7 +1,8 @@
 /* NON_MATCHING: scratch buffer layout and inlined request helper address/register scheduling differ; no unused scratch padding is added. */
 #include "gamedata/PendingResourceRecords.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_00528420[3][0x20];

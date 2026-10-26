@@ -1,6 +1,6 @@
 /* NON_MATCHING: mode branches merge after the second arm rather than placing it after the error return. */
 #include "shard/RomFileOpenState.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" s32 FUN_001883b0(RomOpenFile *file, const char *path, u32 mode);
 #include "sys/ProcessResult.h"

@@ -4,7 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "text/TextDraw.h"
 
 extern "C" {

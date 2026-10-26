@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0014.h"
 
 extern "C" {
 
@@ -27,7 +27,7 @@ typedef struct {
     unsigned int spF4; /* 0xf4: local_f4 */
 } param_3_stack;
 
-extern unsigned char LAB_0047e678; /* 0x47e678 */
+extern unsigned char FUN_0047e678; /* 0x47e678 */
 extern unsigned char LAB_0047ec84; /* 0x47ec84 */
 extern unsigned int DAT_00573cd0; /* 0x573cd0 */
 extern unsigned int DAT_00573cd4; /* 0x573cd4 */
@@ -185,7 +185,7 @@ unsigned char * FUN_0047e690(unsigned int param_1,unsigned int param_2,unsigned 
       else {
         __aeabi_memcpy4(temp_v6,temp_v3,temp_v13 << 2);
       }
-      qsort(temp_v6,temp_v13,4,&LAB_0047e678);
+      qsort(temp_v6,temp_v13,4,&FUN_0047e678);
       temp_v12 = temp_v12 << 2;
       asdOperatorNewD();
       sysMemClear();

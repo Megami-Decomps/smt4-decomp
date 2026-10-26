@@ -2,7 +2,7 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
-#include "util/AsdLoadFileSyncDefault.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 // Battle resource loader: the step counter, its critical section and the resource slots.
 struct BattleLoader {

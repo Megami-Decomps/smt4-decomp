@@ -1,6 +1,7 @@
 /* NON_MATCHING: kind/amount registers swapped (r4/r5) and the first saturating add uses r2/r3 instead of r0/r2 */
 #include "common.h"
 #include "shard/W6_W6Match3_FilterTexture.h"
+#include "code/Code0040_Smt4a.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ typedef struct GameCounters {
 
 GameCounters *gameGetCounters(void);
 s32 scrGetArg(u32 index);
-void FUN_0040a3c8(u32 amount);
 void questCenterAddPoints(u32 amount);
 void gameAddPointsClamped(u32 amount);
 

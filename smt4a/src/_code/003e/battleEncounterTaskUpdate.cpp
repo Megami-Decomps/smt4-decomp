@@ -1,7 +1,7 @@
 /* NON_MATCHING: phase-load fallthrough merging, 64-bit mask scheduling, and switch/body placement differ from retail. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0013.h"
 
 struct EncounterTask {
     /* 0x00 */ u32 state;

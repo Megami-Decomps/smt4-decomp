@@ -1,7 +1,7 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the stream allocation; the stream constructor is inlined there. */
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
-#include "util/AsdLoadFileHasDevice.h"
-#include "util/vcallSlot12IfValid.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 void asdMemFree(void *block);

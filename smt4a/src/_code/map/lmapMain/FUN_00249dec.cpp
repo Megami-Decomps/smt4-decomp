@@ -65,9 +65,6 @@ typedef struct {
     unsigned int spC0; /* 0xc0: local_c0 */
 } void_stack;
 
-extern unsigned char LAB_0024a6ac; /* 0x24a6ac */
-extern unsigned char LAB_0024a6bc; /* 0x24a6bc */
-extern unsigned char LAB_0024ad40; /* 0x24ad40 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned short *g_aocSystem; /* 0x570280 */
 extern int g_lmapView; /* 0x5806a4 */
@@ -348,10 +345,10 @@ joined_r0x00249fd4:
                     DAT_005f174a = 1;
                     DAT_005f174c = 500;
                     if (g_gameState >= 0x65) {
-                      ARM_common_memcpy4_9(&DAT_005f1750,&LAB_0024a6ac);
+                      ARM_common_memcpy4_9(&DAT_005f1750,"e500_01L");
                     }
                     else {
-                      ARM_common_memcpy4_9(&DAT_005f1750,&LAB_0024a6bc);
+                      ARM_common_memcpy4_9(&DAT_005f1750,"e500_01M");
                     }
                   }
                   if (*(short *)(temp_v4 + 0x16) != 0) {
@@ -537,7 +534,7 @@ LAB_0024a684:
           if ((temp_v4 != 0) && (temp_v4 = gameFlagIsSet(0x51), temp_v4 == 0)) {
             DAT_005f1775 = 1;
             DAT_005f174c = 1;
-            ARM_common_memcpy4_9(&DAT_005f1750,&LAB_0024ad40);
+            ARM_common_memcpy4_9(&DAT_005f1750,"e001_006");
           }
           if (DAT_005f1768 == '\0') {
             temp_v1 = *(short *)(temp_v8 + 200);

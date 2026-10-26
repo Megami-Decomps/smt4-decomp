@@ -2,7 +2,7 @@
 #include "gfx/ModelMatrixUpload.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "Model/MoriModelEffect.h"
-#include "shard/gpuCmdWriteCopy.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 void FUN_00177684(u32 program, u32 mode, u32 enabled);

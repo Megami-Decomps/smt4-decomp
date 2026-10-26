@@ -1,8 +1,6 @@
 /* NON_MATCHING: first-frame color branches and the shared completion return are laid out differently. */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 s32 frameTextureGetState(void);

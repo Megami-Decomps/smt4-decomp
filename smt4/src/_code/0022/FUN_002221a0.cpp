@@ -1,4 +1,3 @@
-/* NON_MATCHING: The three-float amplitude copy is split into a scalar load/store and a two-word transfer. */
 #include "event/bustupEvent/BustupCutAnim.h"
 extern "C" {
 s32 scrGetArg(s32);
@@ -12,10 +11,10 @@ extern BustupCutAnim* g_bustupCutAnim;
 u32 FUN_002221a0(void)
 {
     s32 slot = scrGetArg(0);
-    f32 duration = (f32)scrGetArg(1);
+    s32 duration = scrGetArg(1);
     ShakeAmplitudes amplitudes = DAT_0040372c;
     u32 job = bustupShakeStart(&g_bustupCutAnim->shakeX, &g_bustupCutAnim->shakeY,
-                         amplitudes.values[slot], duration);
+                         amplitudes.values[slot], static_cast<f32>(duration));
     if (jobIsValid(job)) {
         jobSetParent(g_bustupCutAnim->job, job);
     }

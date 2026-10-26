@@ -19,7 +19,7 @@ typedef struct {
     unsigned int sp3C; /* 0x3c: local_3c */
 } param_2_stack;
 
-extern unsigned char LAB_002f8dfc; /* 0x2f8dfc */
+extern unsigned char recordCompareFloatKey; /* 0x2f8dfc */
 extern unsigned int DAT_0057a9d0; /* 0x57a9d0 */
 extern unsigned int DAT_0057a9d4; /* 0x57a9d4 */
 extern unsigned int DAT_0057a9d8; /* 0x57a9d8 */
@@ -113,10 +113,10 @@ int FUN_004ab10c(unsigned int param_1,int param_2)
     temp_v6 = temp_v6 + 1;
   } while (temp_v6 < 0x6d);
   if (temp_v11[0] >= 2) {
-    qsort(aiStack_8c0,temp_v11[0],8,&LAB_002f8dfc);
+    qsort(aiStack_8c0,temp_v11[0],8,&recordCompareFloatKey);
   }
   if (temp_v11[1] >= 2) {
-    qsort(temp_v9,temp_v11[1],8,&LAB_002f8dfc);
+    qsort(temp_v9,temp_v11[1],8,&recordCompareFloatKey);
   }
   temp_v2 = 0;
   temp_v6 = 0;

@@ -1,5 +1,6 @@
 #include "shard/Shard004B.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code004b_Smt4a.h"
 
 extern "C" {
 

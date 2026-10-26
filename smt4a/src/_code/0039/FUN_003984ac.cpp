@@ -16,7 +16,7 @@ int FUN_004abba8(...);
 int btlUiIdsRefresh(unsigned int);
 int FUN_004c1114(...);
 int btlSlotSetStoreValue(...);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int btlSelectSourceTriggeredSkill(int, int);
 unsigned int hasFlag80Or1000(unsigned int, unsigned int *);
 int FUN_004fcffc(...);
@@ -86,7 +86,7 @@ extern int FUN_003e4978(void);
 /* Supplied declaration required: FUN_004c1114. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
 extern unsigned int FUN_004c53fc(unsigned int);
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: btlSelectSourceTriggeredSkill. */
 /* Supplied declaration required: hasFlag80Or1000. */
 extern int btlUnitGet(unsigned int);
@@ -209,7 +209,7 @@ LAB_003987dc:
             if (((DAT_00573978 & *puVar10) != 0 || (DAT_0057397c & puVar10[1]) != 0) &&
                ((puVar10[1] & DAT_005739a4) == 0 && (*puVar10 & DAT_005739a0) == 0)) {
               if ((puVar10[0x9d] & 0x10) != 0) {
-                FUN_004c571c((int)(short)puVar10[2],0x22,1,0);
+                btlAdjustPropertyClamped((int)(short)puVar10[2],0x22,1,0);
                 temp_v7 = temp_v6;
                 FUN_004c1114(temp_v6,4);
                 if (temp_v7 != 0) {
@@ -293,49 +293,49 @@ LAB_00398a18:
 LAB_00398c7c:
                   temp_v7 = (int)(short)puVar10[2];
                   if ((puVar10[0x9d] & 0x80) != 0) {
-                    FUN_004c571c(temp_v7,0x1b,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x1b,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1b);
                     btlSlotSetStoreValue(temp_v7,0x1b,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x40) != 0) {
-                    FUN_004c571c(temp_v7,0x1c,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x1c,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1c);
                     btlSlotSetStoreValue(temp_v7,0x1c,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x100) != 0) {
-                    FUN_004c571c(temp_v7,0x1d,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x1d,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1d);
                     btlSlotSetStoreValue(temp_v7,0x1d,temp_v2);
                   }
                   if ((puVar10[0x9d] & 8) != 0) {
-                    FUN_004c571c(temp_v7,0x1e,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x1e,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1e);
                     btlSlotSetStoreValue(temp_v7,0x1e,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x800) != 0) {
-                    FUN_004c571c(temp_v7,0x1f,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x1f,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x1f);
                     btlSlotSetStoreValue(temp_v7,0x1f,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x1000) != 0) {
-                    FUN_004c571c(temp_v7,0x20,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x20,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x20);
                     btlSlotSetStoreValue(temp_v7,0x20,temp_v2);
                   }
                   if ((puVar10[0x9d] & 0x2000) != 0) {
-                    FUN_004c571c(temp_v7,0x21,1,0);
+                    btlAdjustPropertyClamped(temp_v7,0x21,1,0);
                   }
                   else {
                     temp_v2 = FUN_004c53fc(0x21);

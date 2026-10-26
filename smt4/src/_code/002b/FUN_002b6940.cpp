@@ -1,10 +1,10 @@
 /* NON_MATCHING: position register allocation and crop/argument store scheduling differ. */
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "code/Code0014_Smt4.h"
 
 extern "C" {
 extern u32 g_aocSystem;
-void effectSubmitPackageRequest(u32 package, s32 icon, s32 x, s32 y, s32 z);
 void FUN_002b04e8(u32 flags, u32 table, s32 image, PositionedLayoutPosition position, const void *clip);
 
 // Prefer an add-on icon; otherwise crop it from one of the two built-in atlases.

@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_ControllerPose.h"
+#include "code/Code003e_Smt4a.h"
 
 /* A link to a controller; the controller handle is at +4. */
 struct ControllerLink {

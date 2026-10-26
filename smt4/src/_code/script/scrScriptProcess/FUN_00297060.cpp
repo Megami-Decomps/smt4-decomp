@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code0029_Smt4.h"
 
 #define SCRIPT_SECTION_NAMES 0
 #define SCRIPT_SECTION_LABELS 1

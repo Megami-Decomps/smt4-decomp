@@ -1,6 +1,6 @@
 /* NON_MATCHING: instructions match except the saved-register numbering (retail keeps the ready-flag address in r4 and the arguments in r5/r6); armcc here numbers them the other way round. */
 #include "nn/Result.h"
-#include "util/FUN_002c1398.h"
+#include "code/Code002c_Result.h"
 
 extern "C" {
 extern u8 DAT_00471ba8;

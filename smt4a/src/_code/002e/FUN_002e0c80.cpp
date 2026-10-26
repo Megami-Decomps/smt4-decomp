@@ -1,7 +1,7 @@
 /* NON_MATCHING: failure test allocates r0 (retail ands r1 with the arg move hoisted above bpl); success path materializes 0 in r4 before r0 */
 #include "sys/ProcessResult.h"
 #include "nn/Result.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

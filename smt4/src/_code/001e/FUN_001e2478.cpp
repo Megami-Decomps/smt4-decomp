@@ -1,7 +1,7 @@
 /* NON_MATCHING: direction intermediate stores are folded, and scene-position snapshots use integer copies. */
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match2_AocTable23.h"
-#include "shard/dataTableGetRecord23.h"
+#include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;

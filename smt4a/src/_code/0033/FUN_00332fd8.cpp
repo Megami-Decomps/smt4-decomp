@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail addresses the grid fields through block+0xE00 held in a register and keeps constants in different s-registers; the build uses an extra saved register and frame word. Argument decode (position/size vectors, 20 integer arguments) taken from the retail asm. */
 #include "common.h"
 #include "Model/ModelList.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 struct MapPoint {
     f32 x, y, z;

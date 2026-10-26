@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps one indirect call per message type (branch tree, `ldr r1, [r0, #off]; blx r1` in each arm and the zero result in r4); the build merges the arms into a conditional load of the handler and a single call. */
+/* NON_MATCHING: the per-arm calls and the zero result in r4 match (result local live across the calls); retail copies the request pointer to r1 before the push and loads the table into r0 (build: r0 holds the message, r1 the table), and the handler table is a vtable-region reference. */
 #include "common.h"
 
 /* A message handed to the handler table: the first word is its type. */
@@ -24,25 +24,26 @@ extern MessageHandlers DAT_0044e8b0;
 // Dispatches the message in the request to the handler registered for its type.
 u32 FUN_002bd498(HandlerMessage **request)
 {
+    u32 result = 0;
     HandlerMessage *message = *request;
     switch (message->type) {
     case 0x20000002:
         DAT_0044e8b0.onType02(message);
-        break;
+        return result;
     case 0x20000004:
         DAT_0044e8b0.onType04(message);
-        break;
+        return result;
     case 0x20000009:
         DAT_0044e8b0.onType09(message);
-        break;
+        return result;
     case 0x20000011:
         DAT_0044e8b0.onType11(message);
-        break;
+        return result;
     case 0x20000021:
         DAT_0044e8b0.onType21(message);
-        break;
+        return result;
     }
-    return 0;
+    return result;
 }
 
 }

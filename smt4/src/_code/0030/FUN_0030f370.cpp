@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps the resource in r5 and the emitter in r4, loads the buffer into r1 (movne r0, r1) and recomputes header+0x1c late */
 #include "shard/W6_W6Match2_EmitterResources.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
-#include "util/ObjectBufferFree.h"
+#include "util/MemoryHelpers.h"
 
 struct EmitterHeader {
     u8 unk00[0x1c]; // 0x00

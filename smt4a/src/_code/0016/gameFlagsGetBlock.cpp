@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

@@ -1,5 +1,6 @@
-#include "camp/CampState.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/CampState.h"
+#include "code/Code0026_Smt4a.h"
 
 extern "C" {
 extern CampStateA *g_camp;

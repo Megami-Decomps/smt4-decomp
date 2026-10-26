@@ -2,6 +2,7 @@
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 #include <stddef.h>
+#include "code/Code0042.h"
 
 namespace {
 struct AsyncTransferFormat {
@@ -37,7 +38,6 @@ s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 toke
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void rt_memcpy(void *destination, const void *source, u32 size);
 void sysFatalBreak(void);
-s32 FUN_00427e28(u32 *operation, void *packet, u32 flags);
 s32 appletIsExitRequested(void);
 s32 FUN_0015a410(void);
 

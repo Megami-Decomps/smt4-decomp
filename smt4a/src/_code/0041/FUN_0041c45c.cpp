@@ -1,7 +1,7 @@
 /* NON_MATCHING: coordinate-pair loads and cached-state push/pop scheduling differ from retail. */
 #include "gfx/UiControlDraw.h"
 #include "shard/S1ListPanel.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;

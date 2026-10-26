@@ -1,6 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
-#include "shard/flagBitIsSet.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

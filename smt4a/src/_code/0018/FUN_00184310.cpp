@@ -2,7 +2,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DevilRecordA.h"
-#include "shard/FUN_00184310.h"
+#include "code/Code0018_VariantA_DevilRecordA.h"
 
 extern "C" {
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size,

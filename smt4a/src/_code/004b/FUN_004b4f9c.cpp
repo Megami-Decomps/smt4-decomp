@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 
@@ -27,9 +27,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_3_stack;
 
-extern unsigned char LAB_004b53b4; /* 0x4b53b4 */
-extern unsigned char LAB_004b53b8; /* 0x4b53b8 */
-extern unsigned char LAB_004b5bc8; /* 0x4b5bc8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: FUN_00164b5c. */
@@ -66,14 +63,14 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   temp_v4 = asdTMTexTableEntryAt(0x1d,0x87);
   drawSetColorFromRGBA8(0x1a5c72ff);
   FUN_00180310(0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0,0,0x6a,
-               &LAB_004b53b4,*(unsigned int *)(param_1 + 0x75c4));
+               "%d",*(unsigned int *)(param_1 + 0x75c4));
   temp_v4 = asdTMTexTableEntryAt(0x1d,0x88);
   FUN_00180310(0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0,0,0x6a,
-               &LAB_004b53b8);
+               "/");
   temp_v4 = asdTMTexTableEntryAt(0x1d,0x8a);
   drawSetColorFromRGBA8(0xff);
   FUN_00180310(0,*(short *)(temp_v4 + 8) + param_2,*(short *)(temp_v4 + 10) + param_3,0,0,0x6a,
-               &LAB_004b53b4,*(unsigned int *)(param_1 + 0x7558));
+               "%d",*(unsigned int *)(param_1 + 0x7558));
   FUN_00183bb0();
   temp_v4 = gameGetPlayerData();
   piVar14 = (int *)(param_1 + 0x74c0);
@@ -86,12 +83,12 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x95);
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
-               &LAB_004b53b4,(int)temp_v1);
+               "%d",(int)temp_v1);
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x99);
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
-               &LAB_004b53b4,(int)temp_v0);
+               "%d",(int)temp_v0);
   FUN_00183bb0();
   temp_v4 = gameGetPlayerData();
   temp_v11 = (int)*(short *)(temp_v4 + 0x1e);
@@ -103,12 +100,12 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x95);
   FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
-               &LAB_004b53b4,temp_v12);
+               "%d",temp_v12);
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x99);
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0x6a,
-               &LAB_004b53b4,temp_v11);
+               "%d",temp_v11);
   FUN_00183bb0();
   temp_v4 = 0;
   do {
@@ -148,7 +145,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
       drawSetColorFromRGBA8(0x9b9b9bff);
       FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v6 + 8) + param_2,
                    (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,3,0x6a,
-                   &LAB_004b53b4,temp_v12);
+                   "%d",temp_v12);
       FUN_00183bb0();
       temp_v6 = asdTMTexTableEntryAt(0x1d,0xb9);
       temp_v9 = *(short *)(temp_v5 + 10) + param_3;
@@ -164,7 +161,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
       drawSetColorFromRGBA8(temp_v7);
       FUN_00180310(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                    (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_3,1,3,0x6a,
-                   &LAB_004b53b4,temp_v11);
+                   "%d",temp_v11);
       FUN_00183bb0();
       FUN_001835b4(2,0x1d,0xa5,*(short *)(temp_v5 + 8) + param_2,*(short *)(temp_v5 + 10) + param_3,0x6a
                   );
@@ -263,7 +260,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   temp_v4 = asdTMTexTableEntryAt(0x1d,0xb6);
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,1,3,0x6f,
-               &LAB_004b5bc8,temp_v12);
+               "%d",temp_v12);
   temp_v4 = asdTMTexTableEntryAt(0x1d,0xb9);
   if (temp_v12 < temp_v11) {
     temp_v7 = 0x72e027ff;
@@ -274,7 +271,7 @@ void FUN_004b4f9c(int param_1,int param_2,int param_3)
   drawSetColorFromRGBA8(temp_v7);
   FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,1,3,0x6f,
-               &LAB_004b5bc8,temp_v11);
+               "%d",temp_v11);
   FUN_00183bb0();
   drawSetColorFromRGBA8(0xffffffff);
   FUN_001835b4(2,0x1d,0xaf,*(short *)(temp_v5 + 8) + param_2,*(short *)(temp_v5 + 10) + param_3,0x6f);

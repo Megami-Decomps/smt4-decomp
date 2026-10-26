@@ -1,7 +1,15 @@
-/* NON_MATCHING: the debug trace now matches; retail still stores 0 to every rotation word as plain integer stores and then w = 1.0f separately (armcc pairs them into vstmia here). */
+/* NON_MATCHING: only the register of the -1 constant differs (retail mvn r0, ours mvn r1). */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include <string.h>
+
+static __inline void quaternionSetIdentity(EffLightVec4 *quaternion)
+{
+    EffLightVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
 
@@ -17,14 +25,8 @@ EffAsdLight *effAsdLightCopy(EffAsdLight *src)
     EffAsdLight *light = (EffAsdLight *)memAlloc(0x10000, 0x100, 0, 272, 0x10, 1);
 
     memClear(light, 272);
-    light->rotation0.x = 0;
-    light->rotation0.y = 0;
-    light->rotation0.z = 0;
-    light->rotation0.w = 1.0f;
-    light->rotation1.x = 0;
-    light->rotation1.y = 0;
-    light->rotation1.z = 0;
-    light->rotation1.w = 1.0f;
+    quaternionSetIdentity(&light->rotation0);
+    quaternionSetIdentity(&light->rotation1);
     light->unk24 = -1;
     light->scale = 1.0f;
     __aeabi_memcpy4(light->params, src->params, 0xb4);

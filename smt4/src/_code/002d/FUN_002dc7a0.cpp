@@ -21,8 +21,9 @@ static inline s32 compareFusionDemons(u16 first, u16 second)
 extern "C" s32 FUN_002dc7a0(const u16 *first, const u16 *second)
 {
     UniteWork *work = g_unite;
-    s32 order = compareFusionDemons(work->pairListIV.pairs[*first].firstId,
-                                   work->pairListIV.pairs[*second].firstId);
+    u16 firstId = work->pairListIV.pairs[*first].firstId;
+    u16 secondId = work->pairListIV.pairs[*second].firstId;
+    s32 order = compareFusionDemons(firstId, secondId);
     if (order == 0) {
         order = compareFusionDemons(work->pairListIV.pairs[*first].secondId,
                                     work->pairListIV.pairs[*second].secondId);

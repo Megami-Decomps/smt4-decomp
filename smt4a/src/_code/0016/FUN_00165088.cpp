@@ -1,7 +1,7 @@
 /* NON_MATCHING: HUD panel state reset by state id (hide or reset the sprites depending on the open/lock checks); written from the decompilation, branch/tail-call layout not compared with retail */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
-#include "shard/uiSpriteSelectAnim.h"
+#include "ui/UiControl.h"
 
 struct PanelSprite {
     /* 0x00 */ u8 unk00[0x20];

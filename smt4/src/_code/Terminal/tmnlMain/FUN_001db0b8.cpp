@@ -6,6 +6,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "code/Code002a_Smt4.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ s32 questTestPackedFlag(u32 flag);
 void questSetPackedFlag(u32 index, s32 enabled);
 s32 gameFlagIsSet(u32 flag);
 
-void messageStatesSetFirst(u32 state);
 void FUN_00282bfc(u32 first, u32 second);
 u32 taskCreateDraw(const char *name, u16 priority, u32 workSize, void *update, void *draw, void *destroy, void *work, u32 value);
 void FUN_001d99c0(void);

@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match2_RecordValue.h"
-#include "shard/gameRecordCopy.h"
+#include "gamedata/GameDataAccess_VariantB_RecordValue.h"
 
 // Copy one complete saved record when its index is valid.
 extern "C" bool gameRecordCopy(u32 recordIndex, RecordValue* destination)

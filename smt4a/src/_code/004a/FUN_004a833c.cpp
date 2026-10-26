@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the registry in r0 through the search and copies it to r4 only before the append; built moves it up front */
 #include "common.h"
+#include "code/Code002a_Smt4a.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct {
     u16 specialHits;              /* 0xa008 */
 } Registry;
 
-s32 FUN_002a4b28(u32 id);
 
 /* Appends `entry` unless its id is already registered; counts ids that FUN_002a4b28 accepts. */
 void FUN_004a833c(Registry *registry, RegistryEntry *entry)

@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_003f0e20(int, int);
 int FUN_004a9308(...);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int FUN_004c9160(...);
 int FUN_004dd800(...);
 int FUN_004e5c10(...);
@@ -34,7 +34,7 @@ extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004a9308. */
 extern int btlFindEntryValue(int, unsigned int);
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c9160. */
 /* Supplied declaration required: FUN_004dd800. */
 /* Supplied declaration required: FUN_004e5c10. */
@@ -135,7 +135,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
           (temp_v7 & (DAT_0057116c | DAT_00571174)) == 0) {
         FUN_004a9308(g_btlUiBlock,(short)param_2[0xb],0);
       }
-      FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x20,1,0);
+      btlAdjustPropertyClamped((int)*(short *)(param_2[9] + 0x6a),0x20,1,0);
       FUN_004c9160(0x26,param_2[8],0,1);
       FUN_004fd508(temp_v3,param_2,0,param_2[9],1);
     btlCommandExtendAnimationWindow((BtlActorRef*)param_1,(BtlCommand*)param_2,(int)*(short *)(param_2[9] + 0x6a),0,0x1e,0x1e);
@@ -144,7 +144,7 @@ unsigned int FUN_004ed14c(int *param_1,unsigned int *param_2)
   }
   if (((DAT_005711a4 | DAT_005711ac) & ((unsigned int *)param_2[8])[1]) != 0 ||
       ((DAT_005711a8 | DAT_005711a0) & *(unsigned int *)param_2[8]) != 0) {
-    FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x1a,0xffffffff,0);
+    btlAdjustPropertyClamped((int)*(short *)(param_2[9] + 0x6a),0x1a,0xffffffff,0);
     temp_v9 = btlFindEntryValue((int)*(short *)(param_2[9] + 0x6a),0x1a);
     if (temp_v9 == 0) {
       puVar9 = (unsigned int *)param_2[8];

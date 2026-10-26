@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shop/shopMain.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 
@@ -19,11 +20,10 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_2_stack;
 
-extern unsigned char LAB_0049cf3c; /* 0x49cf3c */
+extern unsigned char recordCompareValues; /* 0x49cf3c */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: screenShowMessage. */
-extern int flagValueIsPositiveForward(unsigned int);
 /* Supplied declaration required: cellListAppend. */
 /* Supplied declaration required: FUN_004964e0. */
 extern int flaggedValueHolderGetTotal(int);
@@ -202,7 +202,7 @@ void FUN_00496a0c(int param_1,unsigned int param_2)
       temp_v4 = temp_v4 + 1;
     } while ((int)temp_v4 < 0x7df);
   }
-  qsort(param_1 + 0x8f84,*(unsigned short *)(param_1 + 0x9f84),4,&LAB_0049cf3c);
+  qsort(param_1 + 0x8f84,*(unsigned short *)(param_1 + 0x9f84),4,&recordCompareValues);
   FUN_004cfeb0(param_1 + 0xf00,10,*(unsigned short *)(param_1 + 0x9f84),0,1,1);
   *(unsigned char *)(param_1 + 0xf0d) = 1;
   listCursorSetPage(param_1 + 0xf00,0);

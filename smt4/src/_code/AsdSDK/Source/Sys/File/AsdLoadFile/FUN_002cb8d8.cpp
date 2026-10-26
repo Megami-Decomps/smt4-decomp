@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail frame order is wide path at 0, stream at 0x210, path at 0x228 (here path first), with the constant-1 hoist of its twin FUN_002402c4. Needs _ZTT9Obj420c60 rename applied. */
 #include "classes/Obj420c60.h"
-#include "util/AsdLoadFileHasDevice.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 struct MbState {
     u32 a, b;

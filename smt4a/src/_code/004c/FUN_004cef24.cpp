@@ -3,7 +3,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "event/eventCommand.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 struct GameOverScriptProcess {
     /* 0x000 */ u8 unk000[0x108];

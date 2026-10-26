@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail copies the hit/magic points through VFP registers (vldr/vstmia) and keeps the unit vitals in other registers; this build uses core registers */
 #include "battle/BattleUnitInit.h"
-#include "util/GameProgressIsAdvanced.h"
+#include "gamedata/GameDataAccess.h"
 
 /* An enemy record as the battle reads it when it builds a unit (halfword indexed in the original
    data; only the fields this initializer copies are named). */

@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4a.h"
 
 extern "C" {
 extern AsdGxState g_asdGxState;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: node fields use three scalar stores instead of retail's paired origin store plus global reload; argument scheduling adds one instruction (-O2/-Ospace do not fix it). */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 
 extern "C" {

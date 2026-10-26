@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match6_ActionController.h"
-#include "util/FUN_003397b8.h"
+#include "code/Code0033.h"
 
 extern "C" {
 char *libc_strcpy(char *destination, const char *source);

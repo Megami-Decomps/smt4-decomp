@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "text/TextDraw.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "code/Code0015_Smt4a.h"
 
 /* One message window's work area. */
 struct MessageWindowWork {
@@ -39,7 +40,6 @@ void FUN_00145534(void);
 void asdTextSetDefaultValue(s32 (*callback)(void));
 s32 msgIsSkipInputActive(void);
 void objFlagsSetBits(u32 handle, u32 bits);
-u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay, AsdProcUpdateFunc onUpdate, AsdProcFunc onEnd, u32 work, void *owner);
 
 /* Starts the message system: loads its textures, creates the main, second and third windows and
  * twelve line windows, assigns their layers, starts the draw task and installs the message callbacks. */

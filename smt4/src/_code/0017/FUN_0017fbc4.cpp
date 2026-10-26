@@ -1,4 +1,5 @@
 #include "ui/CommandWindow.h"
+#include "code/Code0017_Smt4.h"
 
 extern "C" {
 

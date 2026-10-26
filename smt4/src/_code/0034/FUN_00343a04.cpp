@@ -1,6 +1,6 @@
 /* Adds `amount` to the saturating halfword counter (+0x1a) of the object gameGetQuestCenterBlock returns, capped at 0xffff. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0034.h"
 
 extern "C" {
 

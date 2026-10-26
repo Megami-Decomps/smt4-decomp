@@ -2,7 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 struct SpriteBankUpdate {
     u8 unk0000[0x20];

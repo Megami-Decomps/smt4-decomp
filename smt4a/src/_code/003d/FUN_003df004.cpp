@@ -1,5 +1,6 @@
 /* NON_MATCHING: Supported-kind result registers, switch block placement and shared remaining-count clamp differ. */
 #include "quest_center/QuestRequirement.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 /* Apocalypse objectives begin at 0x100 rather than the shared IV definition's 0x16C. */
 struct QuestObjectiveDefinitionA {
@@ -17,7 +18,6 @@ QuestObjectiveDefinitionA *FUN_001ad9b4(u32 quest);
 s32 FUN_001ba3d4(u16 item);
 void *gameFindRosterEntry(u32 quest);
 s32 partyFindSlotById(u16 id);
-s32 gameCountersGetWord(u16 counter);
 
 /* Resolves an objective's current/remaining quantity and returns whether its kind is supported. */
 s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress)

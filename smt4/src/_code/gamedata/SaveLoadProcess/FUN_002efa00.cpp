@@ -4,6 +4,7 @@
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gamedata/SaveLoadProcess.h"
+#include "mobiclip_ctrl/MobiclipCtrl.h"
 
 struct SaveFilePayloadIV {
     u32 table[32];
@@ -16,7 +17,6 @@ s32 FUN_001a1d08();
 void FUN_00247af8(s32 operation, s32 flags, u32 slot, void *buffer, u32 size);
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 void *gameDataBlocksGetTable();
-void *configGetSettings();
 void FUN_002ad8b4(void *settings, const void *savedSettings);
 GameSaveData *gameDataBlocksGetSaveData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);

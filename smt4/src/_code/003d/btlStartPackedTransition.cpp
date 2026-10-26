@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail zeros the frame through r1 before saving the previous parameter; armcc uses ip and reorders those stores. */
+/* NON_MATCHING: retail zeros the frame through r1 before saving the previous parameter; armcc uses ip and reorders those stores (frame-before-previous order tried as well). */
 #include "shard/W5_W5Match4_BattleTransition.h"
 
 /* Starts a timed transition, preserving the current packed parameter. */

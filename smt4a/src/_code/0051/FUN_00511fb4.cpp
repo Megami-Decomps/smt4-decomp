@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern unsigned char LAB_0042d1c0; /* 0x42d1c0 */
+extern unsigned char FUN_0042d1c0; /* 0x42d1c0 */
 extern int FUN_0042d1cc(...); /* 0x42d1cc */
 extern unsigned char DAT_0055b40c; /* 0x55b40c */
 extern unsigned char DAT_0055b428; /* 0x55b428 */
@@ -72,7 +72,7 @@ void FUN_00511fb4(unsigned int *param_1)
   DAT_0064602c = &DAT_0055b428;
   DAT_00646070 = 0;
   DAT_00646074 = 0;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_005c0b08,&LAB_0042d1c0,4,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_005c0b08,&FUN_0042d1c0,4,2);
   __aeabi_atexit(0,0x1f3ddc,0x100000);
   return;
 }

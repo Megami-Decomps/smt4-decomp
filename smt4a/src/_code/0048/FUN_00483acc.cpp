@@ -1,42 +1,40 @@
-/* NON_MATCHING: scheduling: retail loads `shared` speculatively (ldrne) before the branch and keeps the decrement temporaries in r1; built loads it after the vtable word */
 #include "common.h"
 
-/* A pooled object: slot 1 of its vtable releases it; `shared` is nonzero when it is not counted as an owner. */
+/* A pooled object: its virtual destructor releases it; `shared` is nonzero when it is not counted as an owner. */
 class PoolObject {
 public:
-    virtual void unk00();
-    virtual void release();
-
-    u32 unk04;
-    s32 shared;     /* 0x08 */
+    virtual ~PoolObject();
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ s32 shared;
 };
 
-typedef struct ObjectPool {
-    /* 0x00 */ u8 unk00[0x10];
-    /* 0x10 */ s32 count;          /* live objects */
-    /* 0x14 */ s32 ownedCount;     /* live objects that are not shared */
-    /* 0x18 */ PoolObject *slots[32];
-} ObjectPool;
+struct ObjectPool {
+    u8 unk00[0x10];
+    s32 count;          // 0x10: live objects
+    s32 ownedCount;     // 0x14: live objects that are not shared
+    PoolObject *slots[32]; // 0x18
+
+    void forget(s32 shared)
+    {
+        if (shared == 0) {
+            ownedCount--;
+        }
+        count--;
+    }
+};
 
 extern "C" {
 
-/* Releases every object in the pool and clears the counts as it goes. */
+// Delete every object in the pool and update the counters.
 void FUN_00483acc(ObjectPool *pool)
 {
-    s32 i;
-
-    for (i = 0; i < 32; i++) {
+    for (s32 i = 0; i < 32; i++) {
         PoolObject *object = pool->slots[i];
-
         if (object != NULL) {
             s32 shared = object->shared;
-
-            object->release();
+            delete object;
             pool->slots[i] = NULL;
-            if (shared == 0) {
-                pool->ownedCount--;
-            }
-            pool->count--;
+            pool->forget(shared);
         }
     }
 }

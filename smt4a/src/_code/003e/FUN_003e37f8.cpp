@@ -3,7 +3,8 @@
 #include "shard/Shard004A.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "event/2dEvent/SmokeFade.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0033.h"
+#include "code/Code002c.h"
 
 /* The shop scene: its mode, substep, the script and the item list. */
 struct ShopScene {
@@ -33,7 +34,6 @@ void FUN_00285774(void);
 s32 messageGetChoiceResult(void);
 void statusDownRestartTransition(void);
 void FUN_002c85b0(s32 arg);
-void FUN_00333dc8(s32 arg);
 void FUN_003e3a20(ShopScene *scene, void *item);
 s32 tableGroupFindEntryIndex(u32 group, const char *name);
 s32 padButtonIsPressed(u32 pad);

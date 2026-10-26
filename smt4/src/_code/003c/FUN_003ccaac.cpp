@@ -35,7 +35,7 @@ int btlReflectInitKind9(...);
 int FUN_00246080(...);
 int FUN_00247478(...);
 int FUN_002505c0(...);
-int FUN_002550d8(...);
+int btlAdjustPropertyClamped(...);
 int btlMainFindEntryByListedId(...);
 int passiveSkillLookupRecord(void);
 int dataTable40FindById(void);
@@ -128,7 +128,7 @@ extern int valueRangeSameSide(int, int);
 /* Supplied declaration required: btlShowListedActionMessage. */
 /* Supplied declaration required: FUN_00227d18. */
 /* Supplied declaration required: FUN_00227d70. */
-extern int FUN_00227dbc(int);
+extern int btlFindEffectValueByNamePrefix(int);
 /* Supplied declaration required: btlEffectFindSlotId. */
 extern int FUN_00227ecc(int, unsigned int);
 /* Supplied declaration required: FUN_00227fac. */
@@ -156,7 +156,7 @@ extern int FUN_00245cc0(void);
 /* Supplied declaration required: FUN_00247478. */
 extern int btlMainFindActiveEntry(int, int);
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_002550d8. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 extern int battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_002551ac. */
 /* Supplied declaration required: FUN_0027df30. */
@@ -574,7 +574,7 @@ LAB_003cd124:
         temp_v8 = FUN_0022810c(DAT_00435d18,1);
         temp_v7 = FUN_0028299c(DAT_00435d18);
         temp_v7 = temp_v7 * (param_11 + temp_v35);
-        FUN_002550d8(temp_v40,1,1,0);
+        btlAdjustPropertyClamped(temp_v40,1,1,0);
         temp_v5 = 4;
         temp_v7 = temp_v7 + temp_v8;
         FUN_00246080(temp_v7,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v63 * 4,4);
@@ -622,7 +622,7 @@ LAB_003cd124:
       temp_v8 = FUN_0022810c(DAT_00435d18,1);
       temp_v7 = FUN_0028299c(DAT_00435d18);
       temp_v14 = param_11 + temp_v35;
-      FUN_002550d8(param_8,1,1,0);
+      btlAdjustPropertyClamped(param_8,1,1,0);
       temp_v5 = 4;
       temp_v8 = temp_v8 + temp_v7 * temp_v14;
       FUN_00246080(temp_v8,0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v43 * 4,4);
@@ -770,7 +770,7 @@ LAB_003cd944:
       if ((temp_v40 < 0x6d) && ((*temp_v49 & 0x40000000) != 0)) {
         temp_v8 = FUN_00293230(*param_1);
         if (temp_v8 == 0) {
-          FUN_002550d8(param_8,1,1,0);
+          btlAdjustPropertyClamped(param_8,1,1,0);
           if ((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v66) & 0x400) == 0) {
             temp_v10 = 2;
           }
@@ -789,7 +789,7 @@ LAB_003cd944:
         temp_v49[1] = temp_v49[1];
       }
       if (((temp_v70 == 0) && ((temp_v49[1] & 1) == 0)) && ((*param_2 & 0x200) == 0)) {
-        FUN_002550d8(param_8,3,1,0,temp_v5,temp_v25);
+        btlAdjustPropertyClamped(param_8,3,1,0,temp_v5,temp_v25);
         temp_v49[1] = temp_v49[1] | 1;
         *temp_v49 = *temp_v49;
       }
@@ -801,7 +801,7 @@ LAB_003cd944:
       temp_v10 = btlEffectFindSlotId(DAT_00435d18);
       temp_v14 = FUN_0022810c(DAT_00435d18,1);
       temp_v14 = temp_v14 + temp_v7;
-      temp_v11 = FUN_00227dbc(DAT_00435d18);
+      temp_v11 = btlFindEffectValueByNamePrefix(DAT_00435d18);
       temp_v11 = temp_v11 + temp_v7;
       temp_v12 = FUN_002280b0(DAT_00435d18);
       temp_v12 = temp_v12 + temp_v7;
@@ -820,7 +820,7 @@ LAB_003cd944:
                                   *(short *)(temp_v13 + temp_v62) * 0x288 + 0x1b6),temp_v32,0,temp_v18,
                    temp_v46,1,temp_v15,temp_v5 + temp_v69,temp_v12,temp_v11,temp_v14,temp_v10,temp_v8,temp_v25,1,0,
                    temp_v26);
-      FUN_002550d8(param_8,2,temp_v4,0);
+      btlAdjustPropertyClamped(param_8,2,temp_v4,0);
       if (temp_v16 == 0) {
         temp_v11 = 3;
         temp_v5 = reinterpret_cast<int>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(param_1)));
@@ -876,7 +876,7 @@ LAB_003cd944:
           temp_v26 = btlEffectFindSlotId(DAT_00435d18);
           temp_v11 = FUN_0022810c(DAT_00435d18,1);
           temp_v11 = temp_v11 + temp_v7;
-          temp_v12 = FUN_00227dbc(DAT_00435d18);
+          temp_v12 = btlFindEffectValueByNamePrefix(DAT_00435d18);
           temp_v12 = temp_v12 + temp_v7;
           temp_v13 = FUN_002280b0(DAT_00435d18);
           temp_v13 = temp_v13 + temp_v7;
@@ -1035,7 +1035,7 @@ LAB_003ce46c:
       temp_v5 = temp_v5 * param_11;
       temp_v26 = btlEffectFindSlotId(DAT_00435d18);
       temp_v7 = FUN_0022810c(DAT_00435d18,1);
-      temp_v8 = FUN_00227dbc(DAT_00435d18);
+      temp_v8 = btlFindEffectValueByNamePrefix(DAT_00435d18);
       FUN_0027df30(0,param_2,*(int *)(*param_1 + 0x1e98) + param_8 * 0x114,0,temp_v42,temp_v34,
                    0xffffffff,temp_v38,temp_v8 + temp_v5,temp_v7 + temp_v5,temp_v26,0,0);
       if (0 < temp_v42) {
@@ -1066,9 +1066,9 @@ LAB_003ce46c:
           goto LAB_003ce96c;
         }
         temp_v26 = btlEffectFindSlotId(DAT_00435d18);
-        temp_v5 = FUN_00227dbc(DAT_00435d18);
+        temp_v5 = btlFindEffectValueByNamePrefix(DAT_00435d18);
         temp_v5 = temp_v5 + temp_v30;
-        temp_v7 = FUN_00227dbc(DAT_00435d18);
+        temp_v7 = btlFindEffectValueByNamePrefix(DAT_00435d18);
         FUN_003dda54(temp_v7 + temp_v30,param_2,temp_v71,
                      *(int *)(*param_1 + 0x1e98) + param_8 * 0x114,temp_v5,temp_v26);
         frameRangeExtend(param_1,param_2,param_8,temp_v30,10,0xf);
@@ -1143,7 +1143,7 @@ LAB_003ce8b0:
            ((*puVar11 & 0x20) != 0)) {
           FUN_0023c638(param_1,param_8,3);
         }
-        temp_v5 = FUN_00227dbc(DAT_00435d18);
+        temp_v5 = btlFindEffectValueByNamePrefix(DAT_00435d18);
         temp_v16 = param_2[7];
         if ((int)param_2[7] < (int)(temp_v5 + temp_v30)) {
           temp_v16 = temp_v5 + temp_v30;
@@ -1186,7 +1186,7 @@ LAB_003ce96c:
     temp_v11 = btlEffectFindSlotId(DAT_00435d18);
     temp_v11 = temp_v11 + temp_v14;
     temp_v12 = FUN_0022810c(DAT_00435d18,1);
-    temp_v13 = FUN_00227dbc(DAT_00435d18);
+    temp_v13 = btlFindEffectValueByNamePrefix(DAT_00435d18);
     FUN_0027df30(temp_v30 + temp_v14,param_2,*(int *)(*param_1 + 0x1e98) + temp_v5 * 4,2,temp_v48,
                  temp_v51,0xffffffff,0,temp_v13 + temp_v14,temp_v12 + temp_v14,temp_v11,0,0);
     if (0 < temp_v48) {

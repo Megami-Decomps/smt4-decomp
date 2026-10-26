@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0014_Smt4.h"
 
 struct WaveArchiveView {
     /* 0x00 */ const u8 *file;

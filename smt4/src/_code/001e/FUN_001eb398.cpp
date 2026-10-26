@@ -1,6 +1,6 @@
 /* NON_MATCHING: global-base loads are scheduled after the frame comparison and command index/base register roles differ. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "script/ScriptArgs.h"
 
 struct CommandEntryView {
     u8 unk00;       // 0x00

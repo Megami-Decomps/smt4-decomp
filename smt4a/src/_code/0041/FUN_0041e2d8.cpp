@@ -1,6 +1,7 @@
 /* NON_MATCHING: scheduling only: retail loads index before shownIndex and indexes selectable as [index, menu+0x2ec]; ours loads shownIndex first and adds menu+index. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0023.h"
+#include "code/Code002c.h"
 #include "gamedata/PlayerDataBlock.h"
 
 extern "C" {

@@ -4,7 +4,8 @@
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "map/mapRndMaze.h"
-#include "util/FUN_0013def0.h"
+#include "code/Code0013.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 
@@ -149,7 +150,6 @@ extern int saveLoadUIHasResult(void);
 /* Supplied declaration required: FUN_003d54f8. */
 /* Supplied declaration required: loadSlotEnsureLoaded. */
 /* Supplied declaration required: aocActivateFileGroupFlags. */
-extern int aocHasType36(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagsSetFlagsFromTaggedGroupEntries. */
 
 

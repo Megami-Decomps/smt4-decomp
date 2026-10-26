@@ -1,7 +1,7 @@
 /* NON_MATCHING: Cursor-animation address/accessor inlining and the two shop-script case tails do not merge as in retail. */
 #include "shard/S2Scene3a.h"
 #include "ui/UiSpriteState.h"
-#include "util/FUN_00230df0.h"
+#include "code/Code0023.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 struct ScriptRunState;

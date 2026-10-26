@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation of the flag mask/index in the loop (retail: index r5, mask r6) and the popup stores (retail uses post-increment `str r2,[r0],#4; str r1,[r0],#16`, the build emits stm and an offset store). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {

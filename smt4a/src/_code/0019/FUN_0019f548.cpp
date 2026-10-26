@@ -1,7 +1,7 @@
 /* NON_MATCHING: saved resource/registry registers, array-field writeback and selection-reset scheduling differ. */
 #include "shard/W4_Match1b_RegisteredHandle.h"
 #include <stddef.h>
-#include "util/ResourceOwnerReleaseAndReset.h"
+#include "sys/RuntimeObjects.h"
 
 struct CameraResourceCleanupView {
     u8 unk000[0x18];

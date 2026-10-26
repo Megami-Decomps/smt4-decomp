@@ -5,9 +5,9 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "battle/btlHelp.h"
+#include "gamedata/DataTableAccess_Smt4.h"
 extern "C" {
 PartyDamageSlotsIV *gameGetSlotTable(void);
-const FusionRecipe *dataTable54FindById(u32 index);
 s32 gameFlagIsSet(u32 flag);
 bool gameRecordCopy(u32 id, RecordValue *record);
 s32 gameCountUnits(void);

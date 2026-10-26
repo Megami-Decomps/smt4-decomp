@@ -6,7 +6,7 @@ extern "C" {
 
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 
-extern unsigned char LAB_0013ba98; /* 0x13ba98 */
+extern unsigned char FUN_0013ba98; /* 0x13ba98 */
 extern unsigned char DAT_00557e68; /* 0x557e68 */
 extern unsigned char *DAT_005b3c5c; /* 0x5b3c5c */
 extern unsigned int DAT_005b3c60; /* 0x5b3c60 */
@@ -33,7 +33,7 @@ void FUN_0050e788(void)
   
   __aeabi_vec_ctor_nocookie_nodtor();
   puVar1 = &DAT_00636e30;
-  __aeabi_vec_ctor_nocookie_nodtor(&DAT_00636e30,&LAB_0013ba98,0x3c,2);
+  __aeabi_vec_ctor_nocookie_nodtor(&DAT_00636e30,&FUN_0013ba98,0x3c,2);
   puVar1[0x20] = 0;
   *(unsigned short *)(puVar1 + 0x21) = 0x8058;
   puVar1[0x22] = 0;

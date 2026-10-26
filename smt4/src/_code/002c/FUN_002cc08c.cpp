@@ -1,6 +1,6 @@
 /* NON_MATCHING: enabled/current-slot load predication, global address reloads, and actor base registers differ. */
 #include "sound/SpatialSoundPlayback.h"
-#include "util/FUN_002bf684.h"
+#include "code/Code002b.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;

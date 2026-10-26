@@ -4,7 +4,7 @@
 #include "font/SearchWin/RunWin.h"
 #include "text/TextDraw.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
-#include "shard/FUN_0019e52c.h"
+#include "code/Code0019.h"
 
 extern "C" {
 void FUN_00183bb0(void);

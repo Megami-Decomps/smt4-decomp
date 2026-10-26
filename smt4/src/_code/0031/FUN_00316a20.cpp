@@ -1,4 +1,4 @@
-/* NON_MATCHING: same loop; retail loads the two links with a writeback ldr and returns before the push on count == 0 (bxls), armcc differs in prologue and register choice. */
+/* NON_MATCHING: the links sub-block pointer (ldr r3,[r0,#60]!) now matches retail; retail also hoists `mov r1,#0` and returns with bxls before the push, the build emits bxeq and a second loop-entry test. */
 #include "common.h"
 
 struct SlotEntry {
@@ -47,8 +47,9 @@ extern u8 DAT_00472560[4];   /* RGBA colour bytes */
 /* Virtual slot: frees every slot entry and paints each vertex with the colour, converted from bytes (/255) twice. */
 void FUN_00316a20(SlotOwner *self)
 {
-    SlotList *list = self->links.list;
-    u32 count = self->links.setup->count;
+    SlotLinks *links = &self->links;
+    SlotList *list = links->list;
+    u32 count = links->setup->count;
     SlotEntry *entry = list->entries;
 
     if (count == 0) {

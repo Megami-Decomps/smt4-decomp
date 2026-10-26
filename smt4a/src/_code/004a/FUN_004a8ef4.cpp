@@ -1,7 +1,7 @@
 /* NON_MATCHING: the sprite grid loops are strength-reduced differently from retail (226 vs 234 rows: retail keeps separate row base registers per grid); the reset sequence is the same. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
-#include "shard/uiSpriteSelectAnim.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 

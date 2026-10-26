@@ -8,7 +8,7 @@ struct StatusSkillMemberView {
 }
 
 extern "C" {
-void FUN_00215b5c(u16 *skills, u8 count);
+void statusReplaceSkills(u16 *skills, u8 count);
 void FUN_0026a978(const u32 *result, s32 selection);
 StatusSkillMemberView *partyMemberFindById(u32 id);
 void rt_memcpy(void *destination, const void *source, u32 size);
@@ -36,7 +36,7 @@ void statusReplaceSkillList(const u16 *skills)
         count = flagCountUnlockedSlots();
     }
     rt_memcpy(selection->skills, skills, count * sizeof(u16));
-    FUN_00215b5c(selection->skills, count);
+    statusReplaceSkills(selection->skills, count);
     u32 result[4] = {0, 0, 0, 0};
     if (selection->memberId > 0 && data->unk1E66 != 6) {
         StatusSkillMemberView *member = partyMemberFindById((u16)selection->memberId);

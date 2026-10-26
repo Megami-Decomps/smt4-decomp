@@ -1,7 +1,6 @@
 /* NON_MATCHING: switch recreates native NOPs, but compiler duplicates the frame-zero epilogue and shares the false predicate exit; retail branches back to a padded shared zero exit. */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 s32 FUN_002e589c();

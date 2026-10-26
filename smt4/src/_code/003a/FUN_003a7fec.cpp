@@ -1,4 +1,4 @@
-/* NON_MATCHING: growth-stat operands and individual packed-skill stores are scheduled differently. */
+/* NON_MATCHING: the skills are now a struct assignment like retail; the array-backed UnitSummarySkills copies through VFP (vldmia) where retail uses core ldm/stm, and the growth-stat load registers differ. */
 #include "gamedata/UnitSummary.h"
 #include "bible/bibleLegionDraw.h"
 
@@ -38,8 +38,7 @@ void FUN_003a7fec(u32 unused, u32 unitId)
         summary.baseStats[3] = unit->cur4;
         summary.stats[4] = unit->summary.stats[4] + growth->stats[4];
         summary.baseStats[4] = unit->cur5;
-        for (u32 word = 0; word < 4; ++word)
-            summary.skills.words[word] = unit->skills.words[word];
+        summary.skills = unit->skills;
         summary.optionBits.bonus = growth->bonus;
         gameDataStoreRecord(unitId, &summary);
     }

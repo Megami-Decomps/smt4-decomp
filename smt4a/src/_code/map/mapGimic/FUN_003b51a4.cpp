@@ -1,6 +1,6 @@
 /* NON_MATCHING: aggregate table addressing folds its prefix into indexed loads; initial register assignment and active-store order differ. */
 #include "shard/W5_W5Match7_SceneState.h"
-#include "util/FUN_0040aa6c.h"
+#include "code/Code0040.h"
 
 struct MapGimicIdentityView {
     u8 unk00[6];

@@ -32,14 +32,14 @@ extern "C" {
 RestorePlayer *gameGetPlayerData(void);
 RestoreUnit *gameGetUnitRecord(s32 unit);
 s32 btlSourceGetMaxHp(RestorePlayer *player);
-s32 FUN_00269bf0(RestoreUnit *unit);
+s32 btlLinkGetMaxHp(RestoreUnit *unit);
 s32 flagWordTestBit(RestoreUnit *unit, u32 bit);
 void objectFlagsClear(RestoreUnit *unit, u32 bits);
 s32 playerPadTestBit(u32 bit);
 void padClearBits(u32 bits);
 s32 FUN_001ad4c0(RestoreEffect *effect);
 s32 FUN_00262260(RestoreEffect *effect, s32 maximum, u32 source);
-u32 FUN_0032b278(RestoreEffect *effect, u16 ailments);
+u32 effectFilterChannelsByCategory(RestoreEffect *effect, u16 ailments);
 
 /* Applies a restore effect to the player (target < 0) or to a party unit. With `preview` set
    nothing is written: the amount that would be restored goes to `amountOut`. Returns 0 when the
@@ -70,7 +70,7 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
         if (reinterpret_cast<s32>(btlGetMainState()) == 0) {
             unitMaximum = unit->maximum;
         } else {
-            unitMaximum = FUN_00269bf0(unit);
+            unitMaximum = btlLinkGetMaxHp(unit);
         }
     }
 
@@ -135,7 +135,7 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
         if (flagWordTestBit(unit, 1)) {
             return 1;
         }
-        u32 cured = FUN_0032b278(effect, unit->ailments);
+        u32 cured = effectFilterChannelsByCategory(effect, unit->ailments);
         if (cured != 0) {
             if (preview == 0) {
                 objectFlagsClear(unit, (u16)cured);
@@ -182,7 +182,7 @@ u32 FUN_00258de0(u32 source, s32 target, RestoreEffect *effect, s32 preview, s32
     if (playerPadTestBit(1)) {
         return 1;
     }
-    u32 cured = FUN_0032b278(effect, player->ailments);
+    u32 cured = effectFilterChannelsByCategory(effect, player->ailments);
     if (cured != 0) {
         if (preview == 0) {
             padClearBits((u16)cured);

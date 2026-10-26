@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "code/Code0019_Smt4a.h"
 
 struct UniformContext {
     u8 unk00000[0x12a42]; // 0x00000

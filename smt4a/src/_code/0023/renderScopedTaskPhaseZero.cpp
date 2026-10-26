@@ -1,7 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
-#include "util/PackNibbles.h"
-
+#include "util/BitsAndBytes.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_00387580(u32, f32);

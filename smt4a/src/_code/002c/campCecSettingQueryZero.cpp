@@ -1,10 +1,16 @@
-/* NON_MATCHING: retail redundantly loads the setting byte and conditionally clears r0 before returning zero. */
 #include "common.h"
+#include "camp/CampCec/CampCecSetting.h"
+
 extern "C" {
+extern CampCecSetting *g_campCecSetting;
 
 /* This settings callback always reports zero. */
 u8 campCecSettingQueryZero(void)
 {
-    return 0;
+    u8 started = g_campCecSetting->started;
+    if (started != 0) {
+        return 0;
+    }
+    return started;
 }
 }

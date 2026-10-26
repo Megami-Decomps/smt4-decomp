@@ -364,19 +364,24 @@ typedef struct CommandOwner4394 {
 } CommandOwner4394;
 
 /* Scalar animation channel updated through its interpolation callback. */
-typedef f32 (*ScalarInterpolation)(f32 start, f32 end, f32 time, void *work);
+/* The two floats a channel interpolates between; passed to the callback as one by-value pair. */
+typedef struct ScalarRange {
+    f32 start;
+    f32 end;
+} ScalarRange;
+typedef f32 (*ScalarInterpolation)(ScalarRange range, f32 time, void *work);
 typedef struct ScalarAnimationChannel {
     /* 0x00 */ u8 unk00[0x38];
     /* 0x38 */ f32 current;
     /* 0x3C */ f32 previous;
     /* 0x40 */ u32 unk40;
-    /* 0x44 */ f32 start;
-    /* 0x48 */ f32 end;
+    /* 0x44 */ ScalarRange range;
     /* 0x4C */ ScalarInterpolation interpolate;
     /* 0x50 */ void *work;
     /* 0x54 */ u32 unk54;
     /* 0x58 */ u8 dirty;
 } ScalarAnimationChannel;
+typedef char ScalarAnimationChannelRangeCheck[offsetof(ScalarAnimationChannel, range) == 0x44 && offsetof(ScalarAnimationChannel, interpolate) == 0x4C ? 1 : -1];
 
 typedef struct ScalarAnimationOwner {
     /* 0x00 */ u8 unk00[0x34];
@@ -395,7 +400,7 @@ static __inline ScalarAnimationChannel *modelPropertyScalarChannel(ModelProperty
 
 static __inline f32 scalarAnimationEnd(const ScalarAnimationChannel *channel)
 {
-    return channel != NULL ? channel->end : 0.0f;
+    return channel != NULL ? channel->range.end : 0.0f;
 }
 
 /* IV's earlier property-node layout places the channel selector eight bytes sooner. */

@@ -6651,3 +6651,46 @@
 0029ee68 mapMainDrawOrdinaryPass inferred [med] "MAP U" draw job, twin of smt4 FUN_001e9508
 002a2c78 campCecViewDrawEffectImage inferred [med] CampCecView draw job that requests the effect image while active
 002ada48 passiveSkillResolveAffinity inferred [high] twin of smt4 passiveSkillResolveAffinity (identical source shape)
+0042d1f4 _ZN12KernelHandleC1Ev inferred size:0xc constructor: handle = 0 (4-byte element of static array DAT_006416a8)
+0042d200 _ZN12KernelHandleD1Ev inferred destructor: svc 0x23 CloseHandle when handle != 0 (returns this)
+00357ab0 naviMainSetPosition inferred [high] twin of smt4 FUN_002e0608
+0040a710 saveFlagBytesSetOneBased inferred [med] twin of smt4 FUN_00343c0c
+002a1fb4 matrixApplyByMode inferred [high] twin of smt4 FUN_0024fcdc
+004c571c btlAdjustPropertyClamped inferred [high] changes a combatant property by delta, clamped to its min/max, unless preview; returns the change
+004d02e0 uiStateHasAnyActiveFlag inferred [med] true when either of the two signed flags of the ui state block is set
+00358918 staffRollDrawMarkers inferred [med] draws the twelve staff-roll markers under a temporary render state
+00249964 lmapInitializeModelChannels inferred [med] initializes the three map model channels, restoring saved values when requested
+004a7a50 demonIconPanelDrawRow inferred [med] draws a demon icon and its stock marker (twin of smt4 FUN_0022dcac)
+00167f44 workCommandArm inferred [med] arms a work command and clears its completion flag (twin smt4 FUN_00126484)
+002b7f18 mapIfReleaseHandle inferred [med] releases the map interface handle and clears its active flag
+00425f18 moviePlayerDestroy inferred [med] stops the player, releases the deblocker and closes the reader thread, returns the player
+0034f784 packedKeyCompareByPrimaryThenSecondary inferred [med] ported twin of smt4 packedKeyCompareByPrimaryThenSecondary (same instruction shape, IDENTICAL after port)
+002322c4 effMiscDraw inferred [med] ported twin of smt4 effMiscDraw (same instruction shape, IDENTICAL after port)
+0023acdc gameSavedFlagSet inferred [med] ported twin of smt4 gameSavedFlagSet (same instruction shape, IDENTICAL after port)
+002a32ec scrComm_Message_ShowTimed inferred [med] ported twin of smt4 scrComm_Message_ShowTimed (same instruction shape, IDENTICAL after port)
+002c1df8 itemVariantReselect inferred [med] ported twin of smt4 itemVariantReselect (same instruction shape, IDENTICAL after port)
+003f0b28 battleSaveCameraVectors inferred [med] ported twin of smt4 battleSaveCameraVectors (same instruction shape, IDENTICAL after port)
+003fcbe0 aocTextureRequestHasNewContent inferred [med] ported twin of smt4 aocTextureRequestHasNewContent (same instruction shape, IDENTICAL after port)
+0048b420 titleScissorApplyOrClearRequests inferred [med] ported twin of smt4 titleScissorApplyOrClearRequests (same instruction shape, IDENTICAL after port)
+004f9d44 btlLookupEffectValue inferred [med] ported twin of smt4 btlLookupEffectValue (same instruction shape, IDENTICAL after port)
+004f43b4 transitionResetPosition inferred [med] ported twin of smt4 transitionResetPosition (same instruction shape, IDENTICAL after port)
+00472e1c aocBoardDrawParameterOverlay inferred [med] ported twin of smt4 aocBoardDrawParameterOverlay (same instruction shape, IDENTICAL after port)
+0019ea00 gpuSubmitDefaultPacket inferred [med] ported twin of smt4 gpuSubmitDefaultPacket (same instruction shape, IDENTICAL after port)
+001acf18 gpuSubmitVectorCommand inferred [med] ported twin of smt4 gpuSubmitVectorCommand (same instruction shape, IDENTICAL after port)
+002ba728 naviMainDrawFade inferred [med] ported twin of smt4 naviMainDrawFade (same instruction shape, IDENTICAL after port)
+002bedac inputTestEnabledRule inferred [med] ported twin of smt4 inputTestEnabledRule (same instruction shape, IDENTICAL after port)
+004fd968 btlReflectQueueMemberAction inferred [med] ported twin of smt4 btlReflectQueueMemberAction (same instruction shape, IDENTICAL after port)
+002cc0c0 partyPanelRefreshItemPreview inferred [med] ported twin of smt4 partyPanelRefreshItemPreview (same instruction shape, IDENTICAL after port)
+00145e24 effectRestoreSavedRenderPairs inferred [med] same call slot as smt4 effectRestoreSavedRenderPairs in ported twins
+0017607c entryListFindById inferred [med] same call slot as smt4 entryListFindById in ported twins
+0039b0f8 eventCreateResourceBattleTexture inferred [med] ported twin of smt4 eventCreateResourceBattleTexture (same instruction shape, IDENTICAL after port)
+0042fd28 cecdDispatchBackendCall inferred [med] twin of smt4 FUN_003594b4
+00430394 cecdDispatchBackendCall2 inferred [med] twin of smt4 FUN_00359984
+0027281c btlEntryHasCategoryThreeSkill inferred [med] twin of smt4 FUN_001d2ac8
+00418870 flagEntrySetValue inferred [high] twin of smt4 flagEntrySetValue
+0037df64 statusCursorIsAtLast inferred [med] twin of smt4 FUN_002f6614
+0037dfb0 statusDownOpenList inferred [med] twin of smt4 FUN_002f6660
+004a3154 shopPurchaseConfirmSelected inferred [med] twin of smt4 FUN_003a7de4
+003e8704 keyedAccumulatorAdd inferred [high] twin of smt4 FUN_003369e0
+002304d0 partyPanelHasSlotValue inferred [med] twin of smt4 FUN_001a7d48
+00471d00 aocSelectedRecordIsUnavailable inferred [med] twin of smt4 FUN_002764a8

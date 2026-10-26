@@ -2,7 +2,7 @@
 #include "gamedata/event/EventSaveData.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
-#include "shard/gameGetFlagBlock.h"
+#include "gamedata/GameDataAccess_VariantA.h"
 
 extern "C" {
 void *asdMemoryAlloc(s32, s32, s32, u32, s32);

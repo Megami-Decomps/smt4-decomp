@@ -3,11 +3,11 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0026.h"
+#include "code/Code0026_Smt4.h"
 
 extern "C" {
 
-int FUN_0026d670(void);
 int FUN_002958f8(...);
 int FUN_0029c4ac(...);
 int FUN_0029c4c8(...);
@@ -29,7 +29,7 @@ int FUN_00293f10(...);
 int FUN_002942c4(unsigned int, int);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_002954f4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
 int gameGlobalsSetSelected(...);
@@ -60,7 +60,7 @@ extern int FUN_00293aac(void);
 /* Supplied declaration required: FUN_002942c4. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
@@ -120,7 +120,7 @@ unsigned int FUN_001dbf34(int param_1)
     scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0xd04),0x16);
     temp_v2 = btlTalkBustUpGetValue();
     if (temp_v2 == 0) {
-      FUN_002954f4(*(unsigned short *)(temp_v3 + 0x46),1);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v3 + 0x46),1);
     }
     __aeabi_memcpy4(param_1 + 0x6e4,temp_v3,0x604);
     *piVar7 = *(int *)(param_1 + 0xd38) + 1;
@@ -301,7 +301,7 @@ unsigned int FUN_001dbf34(int param_1)
       return 0;
     }
     FUN_0028bf2c();
-    FUN_002954f4(*(unsigned short *)(temp_v3 + 0x46),1);
+    btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v3 + 0x46),1);
     *(unsigned char *)(param_1 + 0xd62) = 0;
     FUN_0029e874(1);
     FUN_0029e788();

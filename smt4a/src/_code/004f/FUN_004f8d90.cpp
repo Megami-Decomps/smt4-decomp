@@ -1,7 +1,7 @@
 /* NON_MATCHING: Battle source-model caching is reconstructed; duplicate/free-slot scans and retained work/source pointers allocate different registers and branch joins. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "util/FUN_001cd3ec.h"
+#include "code/Code001c.h"
 
 struct BattleCacheVector {
     f32 x;

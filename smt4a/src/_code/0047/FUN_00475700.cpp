@@ -34,14 +34,6 @@ typedef struct {
     unsigned int sp570; /* 0x570: local_570 */
 } param_1_stack;
 
-extern unsigned char LAB_00475b10; /* 0x475b10 */
-extern unsigned char LAB_00475b20; /* 0x475b20 */
-extern unsigned char LAB_00475b24; /* 0x475b24 */
-extern unsigned char LAB_00475b34; /* 0x475b34 */
-extern unsigned char LAB_00475b44; /* 0x475b44 */
-extern unsigned char LAB_00475b54; /* 0x475b54 */
-extern unsigned char LAB_00475b64; /* 0x475b64 */
-extern unsigned char LAB_00475b70; /* 0x475b70 */
 extern int g_aocMain; /* 0x570260 */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -193,11 +185,11 @@ int * FUN_00475700(int param_1)
     *(unsigned int *)(temp_v0 + 0x45c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x460) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x464) = uStack_64;
-    stringFormatUnbounded(temp_v0 + 0x468,&LAB_00475b20,&LAB_00475b10);
-    stringFormatUnbounded(temp_v0 + 0x4a8,&LAB_00475b20,&LAB_00475b24);
-    stringFormatUnbounded(temp_v0 + 0x4e8,&LAB_00475b20,&LAB_00475b34);
-    stringFormatUnbounded(temp_v0 + 0x528,&LAB_00475b20,&LAB_00475b44);
-    stringFormatUnbounded(temp_v0 + 0x568,&LAB_00475b20,&LAB_00475b54);
+    stringFormatUnbounded(temp_v0 + 0x468,"%s","SET_SALE_INDEX");
+    stringFormatUnbounded(temp_v0 + 0x4a8,"%s","SET_SALE_NEW");
+    stringFormatUnbounded(temp_v0 + 0x4e8,"%s","SET_SALE_PRICE");
+    stringFormatUnbounded(temp_v0 + 0x528,"%s","SET_SALE_ECARD");
+    stringFormatUnbounded(temp_v0 + 0x568,"%s","SET_SALE_CHANGE");
     temp_v14[0] = temp_v0 + 0x368;
     temp_v14[1] = 9;
     if (*(int *)(temp_v0 + 0x364) != 0) {
@@ -205,9 +197,9 @@ int * FUN_00475700(int param_1)
       temp_v15 = *(int *)(temp_v0 + 0x364);
     }
     aocApplicationRecreatePrimaryRequest(reinterpret_cast<AocApplicationRequestView *>(temp_v0));
-    textFormatBuffer(temp_v8,&LAB_00475b64);
-    textFormatBuffer(temp_v9,&LAB_00475b10);
-    textFormatBuffer(temp_v10,&LAB_00475b70);
+    textFormatBuffer(temp_v8,"ascending");
+    textFormatBuffer(temp_v9,"SET_SALE_INDEX");
+    textFormatBuffer(temp_v10,"integer");
     temp_v16 = temp_v8;
     while( 1 ) {
       FUN_0042792c(&temp_v11,*(unsigned int *)(temp_v0 + 0x5a8),*(unsigned int *)(temp_v0 + 0x684),0x40,

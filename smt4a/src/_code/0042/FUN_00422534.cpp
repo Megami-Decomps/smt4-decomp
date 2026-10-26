@@ -1,5 +1,6 @@
-/* NON_MATCHING: ring-buffer logic and 64-bit position arithmetic match; armcc hoists the -1 timeout out of the loop (retail rebuilds it with mov r3/stm each pass), tests the wait result with cmp instead of lsrs #31, and uses ldrd [r4,#8] where retail uses add+ldrd (and the reverse for the produced reload). */
+/* NON_MATCHING: ring-buffer logic and 64-bit position arithmetic match; armcc hoists the -1 timeout out of the loop (retail rebuilds it with mov r3/stm each pass) and uses ldrd [r4,#8] where retail uses add+ldrd (and the reverse for the produced reload). */
 #include "mobiclip_ctrl/S4FsReader.h"
+#include "nn/Result.h"
 #include "shard/W6_W6Match2_LongDivision.h"
 
 extern "C" {
@@ -17,7 +18,7 @@ void FUN_00422534(S4FsReader *reader)
     for (;;) {
         s32 signalled;
         u32 result = FUN_0042cd0c(&signalled, reader->wakeup, 2, 0, 0xffffffff, 0xffffffff);
-        if (result >> 31) {
+        if (nnResultIsFailure(result)) {
             FUN_002e3140(result);
         }
         if (signalled != 0) {

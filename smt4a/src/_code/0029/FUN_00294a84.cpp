@@ -1,6 +1,6 @@
 /* NON_MATCHING: Popup-event selection is reconstructed; state guard lowering and table traversal preserve a different register set. */
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 #include "gamedata/SaveSlotTable.h"
 
 struct PopupState {

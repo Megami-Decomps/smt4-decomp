@@ -48,7 +48,7 @@ struct PackedItem {
 };
 
 extern "C" {
-extern u8 LAB_003a05c4;
+s32 sortCompareKeyPair(const void *left, const void *right);
 
 u16 *FUN_002c0a2c(u8 rank, u32 seed);
 s32 FUN_0028e9d0(u32 flag);
@@ -58,7 +58,7 @@ u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
 s32 FUN_0022f1b8(u32 item);
 s32 aocItemGetPrice(PackedItem *item);
 void FUN_002306f8(PackedItem *item, s32 count, s32 charge);
-void FUN_002b7bca(void *base, u32 count, u32 size, void *compare);
+void FUN_002b7bca(void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 void FUN_00233730(void *list, s32 a, u32 b, s32 c);
 void listCursorSetPage(void *list, s32 page);
 void FUN_00233670(void *p, s32 a, s32 b, s32 c);
@@ -111,7 +111,7 @@ void FUN_003a4210(SaleMenu *menu)
         removed.flags = 0;
         FUN_002306f8(&removed, -owned, 0);
     }
-    FUN_002b7bca(menu->entries, menu->entryCount, 6, &LAB_003a05c4);
+    FUN_002b7bca(menu->entries, menu->entryCount, 6, sortCompareKeyPair);
     FUN_00233730(menu->list, 10, menu->entryCount, 0);
     ((u8 *)menu)[0x9CB5] = 1;
     listCursorSetPage(menu->list, 1);

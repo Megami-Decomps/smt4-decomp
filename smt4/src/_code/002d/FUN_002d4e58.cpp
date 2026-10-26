@@ -1,7 +1,7 @@
 /* NON_MATCHING: Position snapshots reload their first two components through integer registers instead of retaining the retail mixed integer/VFP pair. */
 #include "map/SceneSpawn.h"
 #include "map/lmapMain.h"
-#include "shard/dataTableGetRecord23.h"
+#include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
 extern LmapScene *g_lmapScene;

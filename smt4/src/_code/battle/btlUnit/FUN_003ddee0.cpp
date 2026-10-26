@@ -12,7 +12,7 @@ int FUN_0027da30(...);
 int FUN_0027e3e8(...);
 int btlMainFindEntryByListedId(...);
 int btlGetMainState(...);
-int FUN_003dddd0(...);
+int btlQueueUnitReflectAction25(...);
 
 typedef struct fn_003ddee0_arg2 fn_003ddee0_arg2;
 struct fn_003ddee0_arg2 {
@@ -51,7 +51,7 @@ extern int FUN_0027dab0(unsigned int, int);
 /* Supplied declaration required: FUN_0027e3e8. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: FUN_003dddd0. */
+/* Supplied declaration required: btlQueueUnitReflectAction25. */
 
 
 unsigned int
@@ -174,7 +174,7 @@ FUN_003ddee0(int param_1,unsigned int param_2,fn_003ddee0_arg2 *param_3,int para
         *(fn_003ddee0_arg2 **)(temp_v9 + 0x14) = param_3;
         *(unsigned int *)(temp_v9 + 0x4c) = 0;
         if (param_4 != 9) {
-          FUN_003dddd0();
+          btlQueueUnitReflectAction25();
         }
         else {
           btlReflectQueueMemberAction(param_3->field_0x5c + param_1,param_2,param_3,9);

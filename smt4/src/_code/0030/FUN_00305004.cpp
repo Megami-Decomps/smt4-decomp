@@ -56,7 +56,7 @@ struct ParticleEffect {
 extern "C" {
 u32 FUN_00269694(ParticleDefinition *definition, const void *gradient);
 void matrixInitializeWithScaleAndOffset(void *matrix, const void *scale, const void *offset);
-void FUN_0024fcdc(void *transform, const void *matrix, s32 flag);
+void matrixApplyByMode(void *transform, const void *matrix, s32 flag);
 void FUN_00256a50(ParticleSprite *sprite, u32 frame);
 
 /* Splits an ARGB word into floats scaled by `scale`. */
@@ -93,7 +93,7 @@ void FUN_00305004(ParticleEffect *effect)
         if (emitter->particleCount <= 0)
             continue;
         ParticleSprite *sprite = emitter->sprite;
-        FUN_0024fcdc(sprite->transform, matrix, 0);
+        matrixApplyByMode(sprite->transform, matrix, 0);
 
         Color4 own = colorUnpack(emitter->color, COLOR_SCALE);
         u32 a = (u32)(own.a * effectColor.a * 255.0f);

@@ -18,7 +18,7 @@ int FUN_0026a978(...);
 int FUN_0028bf2c(void);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_002954f4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int textEncodeFontSlot(int, unsigned char [32]);
 int scrScriptProcessStartEntry(...);
 int FUN_00297060(...);
@@ -65,7 +65,7 @@ extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned ch
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 /* Supplied declaration required: textEncodeFontSlot. */
@@ -182,7 +182,7 @@ void FUN_00216e64(int param_1)
         temp_v0 = 1;
       }
       *(unsigned char *)(param_1 + 0xd044) = temp_v0;
-      FUN_002954f4(*(unsigned short *)(temp_v2 + 0x46),0);
+      btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0x46),0);
       btlTalkBustUpSetUnk2F4(1);
       FUN_0029d8f4(temp_v2,0);
       statusReplaceSkillList(temp_v2 + 0x34);
@@ -320,7 +320,7 @@ LAB_002174ac:
       if (temp_v3 != 0) {
         temp_v3 = btlTalkBustUpGetValue();
         if (temp_v3 == 0) {
-          FUN_002954f4(*(unsigned short *)(temp_v2 + 0x46),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v2 + 0x46),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         temp_v2 = *(int *)(temp_v11 + 0x3c6c);

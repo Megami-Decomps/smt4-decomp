@@ -1,7 +1,7 @@
 #include "ui/ScreenWindowTransition.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 extern "C" {
 extern ScreenWindowTransition *g_sWin;
 extern AocSystemA *g_aocSystem;

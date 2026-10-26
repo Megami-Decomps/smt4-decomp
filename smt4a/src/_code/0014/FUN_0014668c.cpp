@@ -1,22 +1,24 @@
-/* NON_MATCHING: reads the CP15 TLS register and issues SVC 0x32; no permitted platform wrappers expose the same request/result contract. */
-/* romwright 0.5.0 decompilation of FUN_0014668c for reference (not compiled; its own view of the boundaries):
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
-unsigned int FUN_0014668c(unsigned int param_1)
+extern "C" {
 
+extern u32 DAT_005b4438; /* service session handle */
+
+/* IPC request 0x0040 with one parameter and a current-process-id translate descriptor (0x20);
+ * returns the transport result, or the service's result word when the transport succeeded. */
+s32 FUN_0014668c(u32 arg)
 {
-  unsigned int uVar1;
-  int iVar2;
-  
-  iVar2 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(iVar2 + 0x80) = &LAB_00400042;
-  *(unsigned int *)(iVar2 + 0x84) = param_1;
-  *(unsigned int *)(iVar2 + 0x88) = 0x20;
-  software_interrupt(0x32);
-  uVar1 = DAT_005b4438;
-  if ((DAT_005b4438 & 0x80000000) == 0) {
-    uVar1 = *(unsigned int *)(iVar2 + 0x84);
-  }
-  return uVar1;
+    nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
+    nn::os::SetIpcWord(cmd, 0, 0x00400042);
+    nn::os::SetIpcWord(cmd, 1, arg);
+    nn::os::SetIpcWord(cmd, 2, 0x20);
+    s32 result = nn::svc::SendSyncRequest(DAT_005b4438);
+    if (nnResultIsSuccess(result)) {
+        result = cmd->words[0];
+    }
+    return result;
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

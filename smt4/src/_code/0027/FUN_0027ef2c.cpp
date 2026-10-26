@@ -1,4 +1,4 @@
-/* NON_MATCHING: The queue counter update and zero-kind state setup are scheduled differently. */
+/* NON_MATCHING: the zero-kind arm is now outlined like retail; only the order of the kind compare against the position stores differs. */
 #include "shard/W8Match1_PositionRequests.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 extern "C" {
@@ -17,13 +17,13 @@ void FUN_0027ef2c(u32 id, s32 kind, f32 x, f32 y, f32 z)
             request->position[1] = y;
             request->position[2] = z;
             request->id = id;
-            if (kind != 0) {
-                request->timer = 0;
-                request->state = 0;
-            } else {
+            if (kind == 0) {
                 SoundActorQueuePosition position = { x, y, z };
                 request->timer = FUN_00291e40(id, position);
                 request->state = 1;
+            } else {
+                request->timer = 0;
+                request->state = 0;
             }
             ++DAT_00448c20->count;
             return;

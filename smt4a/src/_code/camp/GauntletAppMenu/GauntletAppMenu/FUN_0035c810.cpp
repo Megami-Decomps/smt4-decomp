@@ -7,6 +7,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers_Smt4a.h"
 
 typedef void (*GauntletTaskFunc)(void);
 
@@ -24,7 +25,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, GauntletTaskFun
                    void *work, u32 parent);
 s32 gameFlagIsSet(u32 flag);
 void FUN_003dc0c0(GauntletAppMenuWork *menu, s32 mode);
-void loadSlotEnsureLoaded(u32 slot);
 u32 dataTableGetCount(void *section);
 void paramsClearPacket(void *params);
 

@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
-#include "util/btlScriptResolveGroupArg.h"
+#include "battle/BattleHelpers.h"
 
 extern "C" {
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);

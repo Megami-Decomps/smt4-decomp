@@ -223,7 +223,6 @@
 0x00121ffc nw_snd_SoundDataManager_GetRequiredMemSize name
 0x00122170 nw_snd_SoundArchivePlayer_GetRequiredStreamBufferSize name
 0x001221a0 FUN_001221a0 between
-0x001221b4 FUN_001221b4 between
 0x001221c8 nw_snd_internal_BasicSound_IsPause name
 0x001221e0 FUN_001221e0 between
 0x00122224 FUN_00122224 between
@@ -1247,6 +1246,7 @@
 0x0017f89c FUN_0017f89c between
 0x0017f9f4 FUN_0017f9f4 callers
 0x0017fc6c mobiclipInitializeHeaps name
+0x0017feb4 mobiclipShutdown name
 0x001a0f80 mobiclipHeapAllocA name
 0x001c2b14 mobiclipHeapAllocB name
 0x001f36e8 VX2DecoderRelease callers
@@ -1652,8 +1652,8 @@
 0x002bdce0 FUN_002bdce0 between
 0x002bdf94 FUN_002bdf94 between
 0x002be61c libc_sprintf name
-0x002bedb0 FUN_002bedb0 between
-0x002bee04 FUN_002bee04 between
+0x002bedb0 renderCtxPopState between
+0x002bee04 renderStackPushIndexed between
 0x002bef70 nngxBindCmdlist name
 0x002bf0dc nngxGetError name
 0x002bf584 FUN_002bf584 callers
@@ -1792,6 +1792,7 @@
 0x003519b8 movieY2rConfigureAndStart between
 0x00351b28 FUN_00351b28 callers
 0x00351b38 FUN_00351b38 callers
+0x00351b44 FUN_00351b44 between
 0x00351b50 resourceSlotRelease between
 0x00351b70 FUN_00351b70 between
 0x00351b94 FUN_00351b94 between
@@ -2012,7 +2013,7 @@
 0x003593b4 FUN_003593b4 between
 0x00359410 FUN_00359410 between
 0x00359458 FUN_00359458 between
-0x003594b4 FUN_003594b4 between
+0x003594b4 cecdDispatchBackendCall between
 0x003594f0 FUN_003594f0 between
 0x0035952c FUN_0035952c between
 0x003595ac FUN_003595ac between
@@ -2027,7 +2028,7 @@
 0x00359888 FUN_00359888 between
 0x003598d0 FUN_003598d0 between
 0x0035992c FUN_0035992c between
-0x00359984 FUN_00359984 between
+0x00359984 cecdDispatchBackendCall2 between
 0x003599c0 FUN_003599c0 between
 0x00359a18 nn_cec_CTR_Message_NewMessage name
 0x00359a8c nn_cec_CTR_Message_SetExHeader name
@@ -2985,11 +2986,15 @@
 0x003eb02c FUN_003eb02c between
 0x003eb068 FUN_003eb068 between
 0x003eb108 FUN_003eb108 callers
+0x003f57c4 videoResetFilterState callers
+0x003f57dc FUN_003f57dc between
+0x003f57e4 FUN_003f57e4 between
 0x003f5810 FUN_003f5810 callers
 0x003f583c FUN_003f583c between
 0x003f5848 allocatorFreeBlock between
 0x003f5898 FUN_003f5898 between
 0x003f5a80 FUN_003f5a80 between
+0x003f5b9c videoResetSecondaryFilterState callers
 0x003f5bb4 FUN_003f5bb4 between
 0x003f5bdc FUN_003f5bdc callers
 0x003f5c08 FUN_003f5c08 between
@@ -2997,10 +3002,12 @@
 0x003f5c60 FUN_003f5c60 between
 0x003f5d6c mwmofilterApplyFrame name
 0x003f5f5c mwmofilterDeblockerCreate name
+0x003f5fac videoResetDeblockerState callers
 0x003f5fc4 FUN_003f5fc4 callers
 0x003f5ff0 FUN_003f5ff0 callers
 0x003f5ffc mwmofilterDeblockerRelease name
 0x003f603c FUN_003f603c between
+0x003f60a4 FUN_003f60a4 callers
 0x003f60c4 FUN_003f60c4 between
 0x003f60ec FUN_003f60ec callers
 0x003f6130 FUN_003f6130 between
@@ -3017,6 +3024,7 @@
 0x003f65d4 FUN_003f65d4 between
 0x003f65e0 mwmomobiclipDecoderRelease name
 0x003f6630 FUN_003f6630 between
+0x003f6900 videoResetAuxFilterState callers
 0x003f6918 FUN_003f6918 between
 0x003f6a14 FUN_003f6a14 callers
 0x003f6a40 FUN_003f6a40 between

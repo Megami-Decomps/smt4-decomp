@@ -2,12 +2,12 @@
 
 extern "C" {
 
-void FUN_002efe98(const u16 *values, int count);
+void statusDownCopyValues(const u16 *values, int count);
 
-/* Forwards to FUN_002efe98, the function that follows it. */
+/* Forwards to statusDownCopyValues, the function that follows it. */
 void statusDownSetEntries(const u16 *values, int count)
 {
-    FUN_002efe98(values, count);
+    statusDownCopyValues(values, count);
 }
 
 } /* extern "C" */

@@ -1,6 +1,6 @@
 /* NON_MATCHING: entry-field base-register CSE and register allocation differ (retail addresses the 0x28-byte entries from a 0x7800 base with the u64 loaded through a separate address; this build folds the offset into one base) */
 #include "common.h"
-#include "util/actorIsActive.h"
+#include "sys/RuntimeObjects.h"
 
 /* The 16-bit gauge width an icon frame carries. */
 struct GaugeIcon {

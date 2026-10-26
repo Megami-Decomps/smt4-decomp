@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "addon/LookupRecord.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ int FUN_001f3e80(...);
 int fadeObjectResetIfActive(...);
 int efctCallRoutineWithSpeedOverride(...);
 int devilDispatchTextureResource(...);
-int devilIsTextureLoaded(...);
 int FUN_003c2690(...);
 int FUN_003eb200(void);
 int VectorFloatToUnsigned(double, int);
@@ -90,9 +90,6 @@ typedef struct {
     unsigned int sp158; /* 0x158: local_158 */
 } param_5_stack;
 
-extern unsigned char LAB_002af618; /* 0x2af618 */
-extern unsigned char LAB_002af620; /* 0x2af620 */
-extern unsigned char LAB_002afa0c; /* 0x2afa0c */
 extern unsigned char DAT_00573bd8; /* 0x573bd8 */
 extern unsigned char DAT_00573bd9; /* 0x573bd9 */
 extern unsigned char DAT_00573bda; /* 0x573bda */
@@ -488,7 +485,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v49 = -temp_v49;
         }
       }
-      textFormatBuffer(temp_v39,&LAB_002af618,(int)*(short *)(temp_v15 + 0x4206));
+      textFormatBuffer(temp_v39,"%d",(int)*(short *)(temp_v15 + 0x4206));
       temp_v1 = *(short *)(temp_v15 + 0x4210);
       temp_v48 = 0;
       if (temp_v1 != -1) {
@@ -507,7 +504,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v30 = (int)temp_v1;
             temp_v31 = (int)*(short *)(temp_v8 + 0x10);
             temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v8 + 0x62));
-            textFormatBuffer(temp_v32,&LAB_002af620,temp_v12);
+            textFormatBuffer(temp_v32,"%s",temp_v12);
             temp_v48 = heldAmountLessThan(temp_v30,*(unsigned short *)(temp_v8 + 0x62));
           }
         }
@@ -517,7 +514,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v30 = (int)temp_v1;
           temp_v31 = (int)*(short *)(temp_v7 + 0x10);
           temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v7 + 0x62));
-          textFormatBuffer(temp_v32,&LAB_002af620,temp_v12);
+          textFormatBuffer(temp_v32,"%s",temp_v12);
           temp_v48 = (unsigned int)(*(short *)(temp_v7 + 0xe) < temp_v30);
         }
       }
@@ -528,7 +525,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v30 = (int)(short)temp_v8;
         temp_v31 = (int)*(short *)(temp_v13 + 0x1e);
         temp_v12 = gameGetPlayerName();
-        textFormatBuffer(temp_v32,&LAB_002af620,temp_v12);
+        textFormatBuffer(temp_v32,"%s",temp_v12);
         temp_v48 = heldAmountLessThan(temp_v30,0xffffffff);
         if (temp_v7 < 1) {
           reinterpret_cast<int>(btlGetMainState());
@@ -563,14 +560,14 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       if (temp_v29 < 0) {
         temp_v29 = 0;
       }
-      textFormatBuffer(temp_v36,&LAB_002af618,temp_v29);
+      textFormatBuffer(temp_v36,"%d",temp_v29);
       if (temp_v31 < temp_v8) {
         temp_v8 = temp_v31;
       }
       if (temp_v8 < 0) {
         temp_v8 = 0;
       }
-      textFormatBuffer(temp_v40,&LAB_002af618,temp_v8);
+      textFormatBuffer(temp_v40,"%d",temp_v8);
       temp_v13 = asdTMTexTableEntryAt(0xd,0x1c);
       puVar12 = temp_v32;
       fontMeasureLineAdvance(puVar12,1);
@@ -592,7 +589,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       temp_v13 = asdTMTexTableEntryAt(0xd,0x20);
       if (temp_v29 >= 10000) {
         FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
-                     &LAB_002afa0c);
+                     "9999");
       }
       else {
         FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
@@ -602,7 +599,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
       temp_v13 = asdTMTexTableEntryAt(0xd,0x24);
       if (temp_v8 >= 10000) {
         FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,
-                     &LAB_002afa0c);
+                     "9999");
       }
       else {
         FUN_00180310(0,*(short *)(temp_v13 + 8) + temp_v6,*(short *)(temp_v13 + 10) + temp_v5,1,4,0x10,

@@ -1,5 +1,5 @@
 #include "ui/MessageMain.h"
-#include "util/FUN_00230df0.h"
+#include "code/Code0023.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;

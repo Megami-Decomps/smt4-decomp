@@ -1,7 +1,7 @@
 /* NON_MATCHING: saved global/zero registers r6/r7 are exchanged; early inactive return now matches retail. */
 #include "event/2dEvent/SmokeFade.h"
 #include "camp/RenderCtx.h"
-#include "shard/packNibblesAndByte.h"
+#include "util/BitsAndBytes_VariantA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gfx/StereoParallax.h"
 

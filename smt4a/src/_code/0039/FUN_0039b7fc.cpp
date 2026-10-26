@@ -1,6 +1,5 @@
 /* NON_MATCHING: register allocation only (the global base, kind * 3 and the entry pointer land in r7/r5/r4 in retail, r8/r7/r5 here). */
 #include "event/2dEvent/EventEffect.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
 

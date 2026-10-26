@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp2F0; /* 0x2f0: local_2f0 */
 } param_2_stack;
 
-extern unsigned char LAB_0020e93c; /* 0x20e93c */
+extern unsigned char FUN_0020e93c; /* 0x20e93c */
 extern unsigned int DAT_00573848; /* 0x573848 */
 extern unsigned int DAT_0057384c; /* 0x57384c */
 extern unsigned int DAT_0057aa1c; /* 0x57aa1c */
@@ -264,7 +264,7 @@ LAB_003e0a8c:
       temp_v9 = temp_v9 + 1;
     } while (temp_v9 < 0x32);
     FUN_003eba0c(temp_v33,temp_v3 + 0x164);
-    qsort(temp_v18,temp_v4,4,&LAB_0020e93c);
+    qsort(temp_v18,temp_v4,4,&FUN_0020e93c);
     if ((int)temp_v4 < 1) {
       temp_v6 = 0;
     }

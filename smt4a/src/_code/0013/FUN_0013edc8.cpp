@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail sends D and I names back through a second `kind == 'F'` test before the table search; armcc threads them straight to `flags |= 4` here. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0014.h"
+#include "code/Code0015.h"
 
 /* The 28 effect names (7 characters and a terminator each) played without flag 4. */
 struct EffectNameTable {

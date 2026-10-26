@@ -1,21 +1,18 @@
-/* NON_MATCHING: VLDmia color snapshot matches, but float multiply/conversion scheduling and packed-channel register allocation differ; retail reuses S1-S4 and accumulates through R0. */
-#include "common.h"
-
-struct FloatColor {
-    f32 r, g, b, a;
-};
+/* NON_MATCHING: the four loads, products and conversions match; retail issues the four float-to-int conversions ahead of the byte merges (it moves the first two results before converting the last two), armcc here interleaves them. */
+#include "shard/W6_W6Match3_EffectColor.h"
 
 extern "C" {
-extern FloatColor DAT_004ea91c;
+extern EffectColor DAT_004ea91c;
+
+static u32 effectColorPackFrom(EffectColor color)
+{
+    return ((u32)(color.red * 255.0f) << 24) | (((u32)(color.green * 255.0f) & 255) << 16) |
+           (((u32)(color.blue * 255.0f) & 255) << 8) | ((u32)(color.alpha * 255.0f) & 255);
+}
 
 // Packs normalized floating RGBA components into an RRGGBBAA word.
 u32 FUN_00246c28()
 {
-    FloatColor color = DAT_004ea91c;
-    u32 red = static_cast<u32>(color.r * 255.0f);
-    u32 green = static_cast<u32>(color.g * 255.0f);
-    u32 blue = static_cast<u32>(color.b * 255.0f);
-    u32 alpha = static_cast<u32>(color.a * 255.0f);
-    return (red << 24) | ((green & 0xff) << 16) | ((blue & 0xff) << 8) | (alpha & 0xff);
+    return effectColorPackFrom(DAT_004ea91c);
 }
 }

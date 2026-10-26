@@ -1,11 +1,11 @@
 /* NON_MATCHING: source/destination registers swap and memcpy reuses the allocation instead of reloading dataA. */
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
 #include "AsdSDK/AsdDebug.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
 extern const char g_effPartsSourcePath[];
-void rt_memcpy(void* destination, const void* source, u32 size);
 void effBlockCopyDataB(EffBlock* block, const void* data, s32 size, u16 tag);
 
 // Duplicate the block and take ownership of independent copies of both data blobs.

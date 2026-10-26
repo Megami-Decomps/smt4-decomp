@@ -3,7 +3,7 @@
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
 #include "map/mapDepart.h"
-#include "shard/dataTableGetRecord23.h"
+#include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
 extern MapDepartTarget DAT_0049fd14;

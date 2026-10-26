@@ -1,9 +1,9 @@
 /* NON_MATCHING: stack-key addresses are recomputed for the fallback call instead of retained across rank queries. */
 #include "gamedata/ReferencedKindRecord.h"
 #include "gamedata/Table8Type5Lookup.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
-s32 recordKindRank(u32 id);
 s32 FUN_002497f8(const KindComparisonKey *left, const KindComparisonKey *right);
 
 s32 FUN_0030bce8(const u16 *left, const u16 *right)

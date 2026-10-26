@@ -1,4 +1,3 @@
-/* NON_MATCHING: frame base matches; readiness tests combine into conditional LDRB/CMP instead of retail's separate branches. */
 #include "shard/JobWork.h"
 #include "Model/MoriModelShadowMap.h"
 
@@ -25,9 +24,13 @@ bool FUN_0013e9e4(u32 job)
 {
     RenderJobWork *work = (RenderJobWork *)jobGetWork(job);
     RenderJobFrame *frame = &work->frame;
-    if (!frame->ready)
+    if (frame->ready == 0) {
         return false;
-    if (frame->complete && !stateValuesGetBySelector(0) && work->active) {
+    }
+    if (frame->complete == 0) {
+        return false;
+    }
+    if (stateValuesGetBySelector(0) == 0 && work->active != 0) {
         FUN_00157558(g_renderCtx);
         FUN_0014b01c(0);
     }

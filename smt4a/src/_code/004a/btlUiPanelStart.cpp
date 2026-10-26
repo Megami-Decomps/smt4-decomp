@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail recomputes the panel address (add r0,r4,#9216; add r0,r0,#188) for the second call instead of keeping it in a register */
 #include "common.h"
-#include "util/Menu32ModeIsNot5.h"
+#include "ui/UiControl_VariantA.h"
 
 extern "C" {
 

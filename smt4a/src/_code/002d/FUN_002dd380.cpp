@@ -1,4 +1,4 @@
-/* NON_MATCHING: The queue counter update and zero-kind state setup are scheduled differently. */
+/* NON_MATCHING: the zero-kind arm is now outlined like retail; only the order of the kind compare against the position stores differs. */
 #include "shard/W8Match1_PositionRequests.h"
 extern "C" {
 extern PositionRequestPool* DAT_005821a0;
@@ -17,12 +17,12 @@ void FUN_002dd380(u32 id, s32 kind, f32 x, f32 y, f32 z)
             request->position[1] = y;
             request->position[2] = z;
             request->id = id;
-            if (kind != 0) {
-                request->timer = 0;
-                request->state = 0;
-            } else {
+            if (kind == 0) {
                 request->timer = FUN_003d4ed8();
                 request->state = 1;
+            } else {
+                request->timer = 0;
+                request->state = 0;
             }
             ++DAT_005821a0->count;
             return;

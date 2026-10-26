@@ -1,4 +1,3 @@
-/* NON_MATCHING: same loop, but armcc keeps the count in r1 and the -1 in r2 (retail: r2 and r1). */
 #include "common.h"
 
 struct SlotEntry {
@@ -28,8 +27,10 @@ extern "C" {
 /* Virtual slot: marks every entry of the owner's list as unused (id -1). */
 void FUN_003145dc(SlotOwner *self)
 {
-    SlotEntry *entries = self->list->entries;
-    s32 count = self->setup->count;
+    SlotList *list = self->list;
+    SlotSetup *setup = self->setup;
+    SlotEntry *entries = list->entries;
+    s32 count = setup->count;
 
     for (s32 index = 0; index < count; index++) {
         entries[index].id = -1;

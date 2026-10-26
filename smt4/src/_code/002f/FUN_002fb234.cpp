@@ -2,13 +2,13 @@
 #include "map/mapMain.h"
 #include "npc_room/NpcRoom.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "map/MapSceneAccess_Smt4.h"
 
 extern "C" {
 
 void FUN_00277d2c(u32 mapId, u32 areaId);
 void FUN_0027ae90(void);
 void FUN_0027b1b4(void);
-void mapRangeEntriesRun(void);
 void FUN_0027b2b4(u32 mapId, u32 areaId, u32 third, u32 fourth);
 s32 gameFlagIsSet(u32 flag);
 

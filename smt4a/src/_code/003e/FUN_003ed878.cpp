@@ -1,6 +1,6 @@
 /* NON_MATCHING: partner-state branch folding and 64-bit mask load/store grouping differ. */
 #include "battle/btlMain.h"
-#include "util/CalleeContracts.h"
+#include "code/Code004a.h"
 #include "battle/btlPartnerAttack.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnit.h"

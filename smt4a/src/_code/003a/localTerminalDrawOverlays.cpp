@@ -1,6 +1,6 @@
 #include "Terminal/LocaltmnlMain.h"
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 struct LocalTerminalDrawSlot { u32 handle; u8 visible; u8 unk05[7]; };
 struct LocalTerminalDrawState {

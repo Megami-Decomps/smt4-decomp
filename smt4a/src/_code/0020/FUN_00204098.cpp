@@ -11,12 +11,12 @@ extern "C" {
 int FUN_0015f490(...);
 int dataTable25FindById(...);
 int FUN_00168980(...);
-int FUN_0023acdc(...);
+int gameSavedFlagSet(...);
 int statusCommitSelectedSkills(...);
 int FUN_0026cbb8(...);
 int FUN_002a5e7c(...);
 void statusReplaceSkills(const u16 *skills, u8 count);
-int FUN_0037dfb0(...);
+int statusDownOpenList(...);
 int statusDownEnterState3(void);
 int buttonHelpSetMode(...);
 int stateHolderEnterState7(void);
@@ -158,7 +158,6 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } void_stack;
 
-extern unsigned char LAB_0020658c; /* 0x20658c */
 extern int FUN_002f8ba4(...); /* 0x2f8ba4 */
 extern signed char g_engineCleanupOwner; /* 0x588c40 */
 extern signed char DAT_00588c41; /* 0x588c41 */
@@ -216,7 +215,7 @@ extern float __aeabi_ul2f(int, unsigned int);
 /* Supplied declaration required: scrRunOpcodesStub. */
 extern int FUN_0022e750(void);
 /* Supplied declaration required: FUN_0022e774. */
-/* Supplied declaration required: FUN_0023acdc. */
+/* Supplied declaration required: gameSavedFlagSet. */
 /* Supplied declaration required: FUN_0023c384. */
 /* Supplied declaration required: FUN_00240674. */
 extern int *FUN_0025e684(int);
@@ -276,8 +275,8 @@ extern int statusDownGetState(void);
 /* Supplied declaration required: FUN_0037c8e4. */
 extern unsigned int dataTable0aSub0GetValueById(unsigned short);
 extern int stateHolderStateIs8Or10(void);
-extern int FUN_0037df64(void);
-/* Supplied declaration required: FUN_0037dfb0. */
+extern int statusCursorIsAtLast(void);
+/* Supplied declaration required: statusDownOpenList. */
 /* Supplied declaration required: statusDownEnterState3. */
 /* Supplied declaration required: FUN_0037e12c. */
 /* Supplied declaration required: FUN_00387240. */
@@ -1403,7 +1402,7 @@ LAB_00205528:
       }
       pcVar26 = (char *)0x0;
 LAB_00206230:
-      textFormatBuffer(&temp_v49,&LAB_0020658c,pcVar26 + 1);
+      textFormatBuffer(&temp_v49,"battle/DevilMsg/%s.mbm",pcVar26 + 1);
       ppcVar15 = &temp_v49;
       asdLoadFileSyncDefault();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;
@@ -1983,7 +1982,7 @@ joined_r0x002075ac:
           *(int *)(temp_v6 + 0x436c) = temp_v7;
           break;
         }
-        FUN_0023acdc((int)(short)temp_v27);
+        gameSavedFlagSet((int)(short)temp_v27);
         FUN_0022e774();
         temp_v7 = *(int *)(temp_v6 + 0x436c) + 1;
         *(int *)(temp_v6 + 0x436c) = temp_v7;
@@ -1997,7 +1996,7 @@ joined_r0x002075ac:
             btlTalkBustUpSetUnk2F4(1);
           }
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v6 + 0x43ac),8);
-          FUN_0037dfb0(*(unsigned int *)(temp_v6 + 0x75c8),*(unsigned int *)(temp_v6 + 0x75cc));
+          statusDownOpenList(*(unsigned int *)(temp_v6 + 0x75c8),*(unsigned int *)(temp_v6 + 0x75cc));
           *(int *)(temp_v6 + 0x436c) = *(int *)(temp_v6 + 0x436c) + 1;
           *(unsigned int *)(temp_v6 + 0x437c) = 0;
         }
@@ -2009,7 +2008,7 @@ joined_r0x002075ac:
           FUN_001517b4(0,1);
           if ((temp_v7 != 0) || (temp_v7 = statusDownGetState(), temp_v7 != 0)) {
             temp_v7 = statusDownGetCursorPosition();
-            if ((temp_v7 != *(int *)(temp_v6 + 0x75c8)) && (temp_v7 = FUN_0037df64(), temp_v7 == 0)) {
+            if ((temp_v7 != *(int *)(temp_v6 + 0x75c8)) && (temp_v7 = statusCursorIsAtLast(), temp_v7 == 0)) {
               temp_v11 = 0x100020f;
               eventQueueAddUniqueIfValid(temp_v11);
             }
@@ -2371,7 +2370,7 @@ joined_r0x002073c8:
       }
       pcVar26 = (char *)0x0;
 LAB_00207d0c:
-      textFormatBuffer(&temp_v49,&LAB_0020658c,pcVar26 + 1);
+      textFormatBuffer(&temp_v49,"battle/DevilMsg/%s.mbm",pcVar26 + 1);
       ppcVar15 = &temp_v49;
       asdLoadFileSyncDefault();
       *(char ***)(temp_v6 + 0x43b0) = ppcVar15;

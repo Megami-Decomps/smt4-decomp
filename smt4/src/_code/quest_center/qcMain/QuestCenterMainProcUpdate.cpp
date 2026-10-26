@@ -3,6 +3,7 @@
 #include "quest_center/qcMain.h"
 #include "classes/SelectionState.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "AsdSDK/AsdMemUtil.h"
 
 /* The quest center's globals as the update reads them (qcMain.h's QcGlobals is the 8-byte head). */
 struct QcMainState {
@@ -59,7 +60,6 @@ s32 objectFlagBitIsSet(u32 object, u32 bit);
 s32 questIsCompleted(u32 quest);
 void FUN_002a03d8(s32 first, s32 second);
 void FUN_002a6fb8(void);
-void asdMemFreeNonNull(QuestEntry *entry);
 void libc_strcpy(char *destination, const char *source);
 void asdSequenceRequest(u32 kind, const void *argument, u32 size);
 void FUN_0032c69c(void);

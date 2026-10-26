@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail unrolls the 0xFFFF fill by two and keeps panel+0x2400 bases (r7/r8) in registers; the build's loop, constants and register use differ. */
 #include "common.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 /* A sprite widget (0x8C bytes). */
 struct SpriteWidget {

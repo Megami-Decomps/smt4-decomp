@@ -1,9 +1,9 @@
 /* NON_MATCHING: backward-scroll guards are predicated instead of separately branched; total/previousTotal stores merge, and icon-loop registers pair with strd instead of retail's stm sequence. */
 #include "ui/SdCardMenu.h"
-#include "shard/flaggedEntryGetValueA.h"
+#include "gamedata/GameDataAccess_Shard0031.h"
 
 extern "C" {
-s32 FUN_002bedac(u32 id);
+s32 inputTestEnabledRule(u32 id);
 s32 FUN_00228b04(MenuList *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(MenuList *list);
 s32 objectApplyIfUnblocked(MenuList *list);
@@ -14,8 +14,8 @@ void FUN_002f0384(s32 value);
 /* Updates the menu list's scroll position and refreshes the entry icons. */
 void FUN_0041e7c0(SdCardMenu *menu)
 {
-    if (FUN_002bedac(5) != 0 || FUN_002bedac(6) != 0 || FUN_002bedac(4) != 0 || FUN_002bedac(3) != 0 ||
-        FUN_002bedac(0xC) != 0 || FUN_002bedac(0xD) != 0 || FUN_002bedac(0xE) != 0 || FUN_002bedac(0xF) != 0)
+    if (inputTestEnabledRule(5) != 0 || inputTestEnabledRule(6) != 0 || inputTestEnabledRule(4) != 0 || inputTestEnabledRule(3) != 0 ||
+        inputTestEnabledRule(0xC) != 0 || inputTestEnabledRule(0xD) != 0 || inputTestEnabledRule(0xE) != 0 || inputTestEnabledRule(0xF) != 0)
         menu->valid = 0;
     if (FUN_00228b04(&menu->list, 1) != 0) {
         s32 position = resourceRunOperationIfUnblocked(&menu->list);

@@ -1,4 +1,5 @@
 #include "shard/Shard004C.h"
+#include "battle/BattleHelpers_Smt4a.h"
 
 extern "C" {
 

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "map/MapSceneAccess_Smt4.h"
 
 struct RotationController;
 struct RotationTarget {

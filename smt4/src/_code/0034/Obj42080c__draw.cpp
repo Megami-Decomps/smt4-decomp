@@ -1,6 +1,7 @@
 /* NON_MATCHING: Retail instruction scheduling/register allocation differs (158 retail versus 110 compiled rows). */
 #include "classes/Obj42080c.h"
 #include "romwright_types.h"
+#include "code/Code002b_Smt4.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ int FUN_0023b4f4(int *, unsigned char [64], int *, int);
 int titleSceneMultiplyByCameraView(int, unsigned char [64], int);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int forwardRecoveredCallback(void);
-int FUN_002b011c(void);
 int renderCtxSelectTexture(int, unsigned int);
 
 typedef int romwright_code(...);

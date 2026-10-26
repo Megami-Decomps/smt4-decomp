@@ -1,6 +1,6 @@
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/DataTable.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
 
 struct CatalogRecord {
     /* 0x00 */ UnsignedRecordKey32 key;

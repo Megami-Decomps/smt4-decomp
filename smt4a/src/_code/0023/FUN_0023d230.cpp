@@ -2,9 +2,9 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0022_Smt4a.h"
 
 extern "C" {
 
@@ -39,7 +39,6 @@ typedef struct {
     unsigned int sp108; /* 0x108: local_108 */
 } param_3_stack;
 
-extern unsigned char LAB_0023d674; /* 0x23d674 */
 extern unsigned char LAB_0023dcbc; /* 0x23dcbc */
 extern int g_camp; /* 0x57f108 */
 
@@ -57,7 +56,6 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00185e84. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
-extern int FUN_0022a030(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0023d150. */
 extern int FUN_002684d0(unsigned int, int);
 /* Supplied declaration required: FUN_0026ec00. */
@@ -171,11 +169,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     }
     if ((int)temp_v8 < 0) {
       temp_v5 = FUN_003df57c(temp_v9,1);
-      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,"%d",temp_v5);
     }
     else {
       temp_v5 = FUN_004bcbb4(temp_v12,temp_v9);
-      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,"%d",temp_v5);
     }
     FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v2 + 8) + param_1,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,4,0x6f,
@@ -271,11 +269,11 @@ void FUN_0023d230(int param_1,int param_2,int param_3)
     ;
     if ((int)temp_v8 < 0) {
       temp_v5 = FUN_003df57c(temp_v9,1);
-      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,"%d",temp_v5);
     }
     else {
       temp_v5 = FUN_004bcbb4(temp_v12,temp_v9);
-      textFormatBuffer(temp_v11,&LAB_0023d674,temp_v5);
+      textFormatBuffer(temp_v11,"%d",temp_v5);
     }
     FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                  (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,4,0x83,

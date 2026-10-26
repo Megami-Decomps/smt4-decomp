@@ -2,7 +2,7 @@
 #include "common.h"
 #include "status/StatusCamera.h"
 
-#include "util/FUN_0029c43c.h"
+#include "code/Code0029.h"
 /* One item on sale (0x20 bytes). */
 struct ShopListItem {
     /* 0x00 */ u8 unk00[4];

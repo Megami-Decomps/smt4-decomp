@@ -1,4 +1,3 @@
-/* NON_MATCHING: the header/constant pair now stores with the retail STM; only the order of the two incoming-argument saves (retail mov r5, r0 before mov r4, r1) differs. */
 #include "common.h"
 
 struct UniformContext {
@@ -7,13 +6,13 @@ struct UniformContext {
 };
 
 extern "C" {
-u32* FUN_002b7148(UniformContext* context);
+u32* FUN_002b7148(void);
 void FUN_002af390(u32* begin, u32* end);
 
 // Writes one float32 vertex uniform in the GPU's reversed component order.
 void FUN_002b634c(UniformContext* context, const u32 values[4])
 {
-    u32* begin = FUN_002b7148(context);
+    u32* begin = FUN_002b7148();
     u32* command = begin;
     u32 header = context->index | 0x80000000;
     *command++ = header;

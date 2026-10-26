@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0035_Smt4a.h"
 
 struct GeometryOwner {
     u8 unk00[0x50];  // 0x00

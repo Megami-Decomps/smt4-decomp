@@ -27,7 +27,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_10_stack;
 
-extern unsigned char LAB_004b40ec; /* 0x4b40ec */
 extern unsigned int DAT_00588c4c; /* 0x588c4c */
 extern int DAT_00588c50; /* 0x588c50 */
 
@@ -204,7 +203,7 @@ LAB_004b3b88:
     }
     FUN_00180310(0,(int)*(short *)(DAT_00588c4c + 8) + (int)*(short *)(temp_v2 + 8) + param_5,
                  (int)*(short *)(temp_v2 + 10) + (int)*(short *)(DAT_00588c4c + 10) + param_6,1,temp_v7,
-                 0x7e,&LAB_004b40ec,(unsigned int)*(unsigned short *)(temp_v1 + 100) + param_9);
+                 0x7e,"%d",(unsigned int)*(unsigned short *)(temp_v1 + 100) + param_9);
     break;
   case 5:
     FUN_004b42b0(param_1,param_3,*(short *)(temp_v2 + 8) + param_5,*(short *)(temp_v2 + 10) + param_6);

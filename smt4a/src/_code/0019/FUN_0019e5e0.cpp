@@ -5,7 +5,7 @@
 extern "C" {
 extern u32 g_gpuFloat24ExponentTable[256];
 extern u32 DAT_0063f948[256];
-void FUN_001acf18(const u32 *position, const u32 *color, const u32 *coordinates);
+void gpuSubmitVectorCommand(const u32 *position, const u32 *color, const u32 *coordinates);
 }
 
 static __forceinline u32 encodeGpuFloat24(f32 value)
@@ -34,7 +34,7 @@ static __forceinline void submitVertex(u32 x, u32 y, u32 z, u32 u, u32 v, RgbaWo
     packed.second[1] = (color1 >> 8) | (color2 << 16);
     u32 color3 = DAT_0063f948[color.rgba.r];
     packed.second[2] = (color2 >> 16) | (color3 << 8);
-    FUN_001acf18(packed.first, packed.second, packed.coordinates);
+    gpuSubmitVectorCommand(packed.first, packed.second, packed.coordinates);
 }
 
 // Submit a textured, per-corner colored quad at (x, y) of size (width, height) with texture

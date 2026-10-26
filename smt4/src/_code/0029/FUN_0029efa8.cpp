@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 namespace { struct Object { u8 padding[0x62]; u8 disabled; }; }
 

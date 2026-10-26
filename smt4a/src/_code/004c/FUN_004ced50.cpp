@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/Shard0031.h"
 #include "gamedata/PlayerDataBlock.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 extern "C" {
 s32 FUN_003e0024();

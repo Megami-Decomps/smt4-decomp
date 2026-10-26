@@ -2,8 +2,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match3_NameFormStateA.h"
 #include "ui/UiSpriteState.h"
-#include "util/PackNibbles.h"
-
+#include "util/BitsAndBytes.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);

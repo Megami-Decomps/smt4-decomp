@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code004f_Smt4a.h"
 
 struct NameSlot {
     u8 code;            // 0x00

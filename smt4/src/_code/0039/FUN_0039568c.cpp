@@ -1,8 +1,8 @@
 /* NON_MATCHING: global/component base loads, signed modulus and movement VFP multiplication scheduling differ. */
 #include "map/lmapMain.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
-#include "util/MathDistance.h"
-#include "util/CalleeContracts.h"
+#include "util/MathFunctions.h"
+#include "util/Random.h"
 
 struct AmbientMovementTransform {
     u32 unk00;

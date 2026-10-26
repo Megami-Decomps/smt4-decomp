@@ -1,6 +1,6 @@
 /* NON_MATCHING: status flag updates and the byte/bit clear (mvn + and) now match; retail pushes r4-r8 and hoists both the 1 (r7) and the 0 (r6) of the flag-clear loop into registers, ours hoists only the 1. */
 #include "quest_center/QuestRuntime.h"
-#include "shard/FUN_00298f88.h"
+#include "code/Code0029.h"
 
 extern "C" {
 QuestRuntimeFlagBlock *gameGetFlagBlock();

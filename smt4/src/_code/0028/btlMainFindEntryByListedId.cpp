@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
+#include "battle/BattleHelpers_Smt4.h"
 
 extern "C" {
 

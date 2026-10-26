@@ -1,6 +1,6 @@
 /* Calls the object's vtable slot 12 (tail call) when the object exists. */
 #include "common.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

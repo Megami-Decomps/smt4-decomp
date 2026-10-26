@@ -6,7 +6,7 @@
 #include "shard/S1Mover.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
-#include "util/dataTableFileGetTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 
 namespace {
 /* Resource fields overlap the canonical state's byte-aligned padding. */

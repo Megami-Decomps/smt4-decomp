@@ -6,7 +6,7 @@
 extern "C" {
 
 int uiSpriteSetKeyframe(...);
-int FUN_002304d0(...);
+int partyPanelHasSlotValue(...);
 int FUN_002a4878(...);
 int scrollOwnerSelectIndex(...);
 int FUN_002a4964(...);
@@ -26,7 +26,7 @@ void partyPanelRefreshSelectedItemValues(void*, int);
 int FUN_0028c2ec(...);
 int FUN_002ade88(void);
 int FUN_002c8538(int);
-int FUN_002cc0c0(void);
+int partyPanelRefreshItemPreview(void);
 int FUN_002f8288(void);
 int FUN_00333694(...);
 int partyPanelRefreshFilterMarks(void);
@@ -53,7 +53,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: FUN_0020d934. */
 /* Supplied declaration required: gameGetSaveSlotData. */
-/* Supplied declaration required: FUN_002304d0. */
+/* Supplied declaration required: partyPanelHasSlotValue. */
 extern int FUN_0025e684(void);
 /* Supplied declaration required: FUN_0026f3a0. */
 /* Supplied declaration required: partyPanelRefreshSelectedItemValues. */
@@ -65,7 +65,7 @@ extern unsigned int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002ade88. */
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002cb84c. */
-/* Supplied declaration required: FUN_002cc0c0. */
+/* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_002f8288. */
 /* Supplied declaration required: FUN_00333694. */
 /* Supplied declaration required: partyPanelRefreshFilterMarks. */
@@ -380,7 +380,7 @@ LAB_002c4018:
               temp_v2 = temp_v2 + 1;
             } while (temp_v2 < 0x18);
           }
-          FUN_002cc0c0();
+          partyPanelRefreshItemPreview();
         }
         break;
       }
@@ -639,7 +639,7 @@ LAB_002c45c0:
       temp_v7 = FUN_002a4878();
       temp_v8 = FUN_002a4894(temp_v3);
       temp_v2 = 0;
-      FUN_002304d0(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
         temp_v2 = 0;
         if (*(char *)(temp_v0 + 0x9b4) == '\x04') {
@@ -704,7 +704,7 @@ LAB_002c4664:
       temp_v7 = FUN_002a4878(temp_v0 + 0xd50);
       temp_v8 = FUN_002a4894(temp_v0 + 0xd50);
       temp_v2 = 0;
-      FUN_002304d0(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
         temp_v2 = 0;
         if (*(char *)(temp_v0 + 0x9b4) == '\x04') {

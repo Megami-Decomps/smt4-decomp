@@ -23,6 +23,7 @@ struct ResultAndValue {
 
 /* Never returns to the caller's thread. */
 __svc(0x09) void ExitThread(void);
+__svc(0x0a) void SleepThread(u32 nanosecondsLow, u32 nanosecondsHigh);
 __svc(0x0c) s32 SetThreadPriority(u32 thread, s32 priority);
 __svc(0x14) s32 ReleaseMutex(u32 mutex);
 __svc(0x18) s32 SignalEvent(u32 event);

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/AocReadyAndAccepts.h"
+#include "addon/AocSystem.h"
 
 extern "C" {
 

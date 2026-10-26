@@ -44,9 +44,6 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_6_stack;
 
-extern unsigned char LAB_0032de34; /* 0x32de34 */
-extern unsigned char LAB_0032de38; /* 0x32de38 */
-extern unsigned char LAB_0032e200; /* 0x32e200 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -211,10 +208,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
       FUN_001835b4(2,0x2e,0xe,param_4 + temp_v5,param_5,0x73);
       temp_v7 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x10));
       if (*(unsigned short *)(param_2 + 0x36) >= 10) {
-        textFormatBuffer(temp_v19,&LAB_0032de34);
+        textFormatBuffer(temp_v19,"%d");
       }
       else {
-        textFormatBuffer(temp_v19,&LAB_0032de38);
+        textFormatBuffer(temp_v19," %d");
       }
       drawSetColorFromRGBA8(0xffffff00);
       FUN_00180310(0,(int)*(short *)(temp_v7 + 8) + param_4 + temp_v5,*(short *)(temp_v7 + 10) + param_5,0
@@ -315,10 +312,10 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
                    param_5 + temp_v2,0x74);
       temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x27));
       if ((*(short *)(param_2 + 0x62) != 0) && (*(short *)(param_2 + 0x34) != 0)) {
-        textFormatBuffer(temp_v19,&LAB_0032de34);
+        textFormatBuffer(temp_v19,"%d");
       }
       else {
-        textFormatBuffer(temp_v19,&LAB_0032e200);
+        textFormatBuffer(temp_v19,"--");
       }
       drawSetColorFromRGBA8(0x32323200);
       param_4 = (int)temp_v13 + param_4;
@@ -344,7 +341,7 @@ void FUN_0032d61c(unsigned int *param_1,int param_2,float *param_3,int param_4,i
           FUN_00169a1c(*(unsigned short *)(temp_v10 + 0x9c),*(short *)(temp_v5 + 8) + param_4,
                        *(short *)(temp_v5 + 10) + param_5,0x74);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x105));
-          textFormatBuffer(temp_v19,&LAB_0032de34,*(unsigned short *)(param_2 + 0x3a));
+          textFormatBuffer(temp_v19,"%d",*(unsigned short *)(param_2 + 0x3a));
           FUN_00180310(0,*(short *)(temp_v5 + 8) + param_4,*(short *)(temp_v5 + 10) + param_5,0,5,0x74,
                        temp_v19);
           temp_v5 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x2e,0x107));

@@ -1,6 +1,7 @@
 /* NON_MATCHING: Background-reset and alternate-feedback cold blocks are placed differently from retail. */
 #include "map/mapDepart.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "gamedata/GameDataAccess.h"
 
 struct NavigationFeedbackRequest {
     u8 unk00[0xC];
@@ -17,7 +18,6 @@ struct NavigationFeedbackMode {
     s32 mode;
 };
 extern "C" {
-s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void FUN_003b61ec(void);
 void FUN_00183e58(void);

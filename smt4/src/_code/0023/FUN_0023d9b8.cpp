@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation and branch layout differ (retail reuses r8/r9 zeros, shares the cure-mask arrays at sp/sp+4 and merges the two owner branches' tails); logic equivalent. */
 #include "common.h"
-#include "util/BtlHasReserveReplacement.h"
+#include "battle/BattleHelpers_VariantA.h"
 #include "gamedata/UnitRecordAccess.h"
 
 /* Item effect record (accessed fields). */
@@ -32,7 +32,7 @@ enum {
 extern "C" {
 void FUN_0023dc38(u16 *mask, u32 status);
 s32 btlSourceGetMaxHp(s32 unit);
-s32 FUN_00269bf0(s32 unit);
+s32 btlLinkGetMaxHp(s32 unit);
 s32 saveResolvePartySlot(void);
 s32 gameGetPlayerData(void);
 s32 FUN_0033fc50(void);
@@ -82,7 +82,7 @@ u32 FUN_0023d9b8(s32 owner, s32 fromSave, ItemEffect *effect)
         s32 unit = fromSave != 0 ? saveResolvePartySlot() : reinterpret_cast<s32>(gameGetUnitRecord(owner));
         if (unit == 0)
             return 3;
-        if ((needs & NEED_HEAL) != 0 && (*reinterpret_cast<u16 *>(unit + 0x44) & 0x406) == 0 && FUN_00269bf0(unit) != reinterpret_cast<UnitHpView *>(unit)->hp)
+        if ((needs & NEED_HEAL) != 0 && (*reinterpret_cast<u16 *>(unit + 0x44) & 0x406) == 0 && btlLinkGetMaxHp(unit) != reinterpret_cast<UnitHpView *>(unit)->hp)
             applicable = NEED_HEAL;
         if ((needs & NEED_CURE) != 0) {
             cure[0] = 0;

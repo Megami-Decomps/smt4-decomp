@@ -1,5 +1,5 @@
 #include "shard/Shard004A.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 

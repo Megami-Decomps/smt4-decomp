@@ -5,6 +5,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "code/Code0028.h"
 
 extern "C" {
 
@@ -26,9 +27,8 @@ int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
 int btlSourceGetMaxHp(void);
-int FUN_00269bf0(void);
+int btlLinkGetMaxHp(void);
 int FUN_002888a8(...);
-int FUN_00288ddc(...);
 int FUN_0029a17c(...);
 int fontMeasureLineAdvance(...);
 int FUN_002bdf94(...);
@@ -92,7 +92,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Supplied declaration required: FUN_0025765c. */
 /* Supplied declaration required: btlSourceGetMaxHp. */
-/* Supplied declaration required: FUN_00269bf0. */
+/* Supplied declaration required: btlLinkGetMaxHp. */
 /* Supplied declaration required: FUN_0026e6a0. */
 /* Supplied declaration required: messageKindForward. */
 /* Supplied declaration required: FUN_00288844. */
@@ -507,7 +507,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v13 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
           }
           temp_v12 = temp_v13;
-          FUN_00269bf0();
+          btlLinkGetMaxHp();
           temp_v27 = (int)(short)temp_v12;
           temp_v31 = (int)*(short *)(temp_v13 + 0x10);
           temp_v18 = FUN_002bd068(*(unsigned short *)(temp_v13 + 0x46));

@@ -1,5 +1,6 @@
 /* NON_MATCHING: O3 folds completion getters to unsigned loads and removes four NOPs, hoists an offset literal, and changes the final completion-loop registers; candidate -O2. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "map/lmapMain.h"
 
 struct ChainedSpriteWork {
     u8 unk0000[0x3900];
@@ -16,7 +17,6 @@ struct ChainedSpriteWork {
 
 extern "C" {
 s32 FUN_00163aa4(UiAnimatedSprite *sprite, f32 delta);
-void sysPlayVoice(u32 sound);
 
 u32 uiUpdateChainedSpriteRows(ChainedSpriteWork *work)
 {

@@ -1,7 +1,7 @@
 /* NON_MATCHING: counter-bound branches and selected-flag loads differ; retail retains a separate +0x900 base and signed completion accessor. */
 #include "shard/Shard004B.h"
 #include "shard/Shard004A.h"
-#include "util/FUN_004d0058.h"
+#include "code/Code004d.h"
 
 extern "C" {
 void menuSynchronizeFlaggedSelection(void *selection, Menu4C *menu);

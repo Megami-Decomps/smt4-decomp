@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial input-pointer moves and first load use a different register. */
+/* NON_MATCHING: initial input-pointer moves and first load use a different register (the smt4a twin's uninitialised-result form was tried and is worse). */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/UnitRecordAccess.h"
 

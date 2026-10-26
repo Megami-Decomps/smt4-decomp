@@ -1,6 +1,6 @@
 #include "shard/NaviMain.h"
 #include "common.h"
-#include "util/NaviMainQueueRequest.h"
+#include "map/MapSceneAccess.h"
 
 extern "C" {
 extern NaviMainA *g_naviMain;

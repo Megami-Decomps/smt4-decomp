@@ -3,7 +3,7 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
 #include "util/Random.h"
-#include "util/AocFindQuestPayloadById.h"
+#include "addon/AocSystem.h"
 
 struct EncounterTemplateChoice { u16 templateId; u16 weight; };
 struct EncounterTemplateChoices { EncounterTemplateChoice entries[15]; };

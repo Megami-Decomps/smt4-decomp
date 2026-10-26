@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc turns the cell-clear loop into __aeabi_memclr4; retail keeps a plain store loop (unrolled by two). */
+/* NON_MATCHING: armcc turns the cell-clear loop into __aeabi_memclr4 (also with an explicit two-store body); retail keeps a plain store loop unrolled by two with the zero in a register copy. */
 #include "common.h"
 
 struct MapRndMaze {

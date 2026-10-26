@@ -1,5 +1,5 @@
 #include "romwright_types.h"
-#include "shard/nn_os_CriticalSection_Leave.h"
+#include "nn/os/CriticalSectionCalls.h"
 
 extern "C" {
 

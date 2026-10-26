@@ -1,17 +1,22 @@
-/* NON_MATCHING: retail loads and negates the half extents one scalar at a time (ldrd/strd for the positive pair); armcc merges neighbouring pairs into vldmia/vstmia. */
-#include "shard/CenteredQuad.h"
+#include "gfx/TexturedQuad.h"
 
-/* Writes one vertex's position, leaving its other attributes. */
-static __inline void centeredQuadSetPosition(CenteredQuadVertex *vertex, f32 x, f32 y, f32 z)
-{
-    vertex->position = CenteredQuadPosition(x, y, z);
-}
+/* Apocalypse layout: the parameters pointer sits at 0x1c. */
+struct TexturedQuadA {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ TexturedQuadVertex *vertices;
+    /* 0x08 */ u8 unk08[0x14];
+    /* 0x1c */ TexturedQuadParameters *parameters;
+};
 
-// Write the four centered rectangle positions while preserving the other vertex attributes.
-extern "C" void FUN_0041cd5c(CenteredQuad *quad)
+/* Rebuilds a centered quad from its horizontal and vertical half-extents. */
+extern "C" void FUN_0041cd5c(TexturedQuadA *quad)
 {
-    centeredQuadSetPosition(&quad->vertices[0], -quad->dimensions->halfWidth, quad->dimensions->halfHeight, 0.0f);
-    centeredQuadSetPosition(&quad->vertices[1], -quad->dimensions->halfWidth, -quad->dimensions->halfHeight, 0.0f);
-    centeredQuadSetPosition(&quad->vertices[2], quad->dimensions->halfWidth, quad->dimensions->halfHeight, 0.0f);
-    centeredQuadSetPosition(&quad->vertices[3], quad->dimensions->halfWidth, -quad->dimensions->halfHeight, 0.0f);
+    texturedQuadSetPosition(&quad->vertices[0], -quad->parameters->halfWidth,
+                             quad->parameters->halfHeight, 0.0f);
+    texturedQuadSetPosition(&quad->vertices[1], -quad->parameters->halfWidth,
+                             -quad->parameters->halfHeight, 0.0f);
+    texturedQuadSetPosition(&quad->vertices[2], quad->parameters->halfWidth,
+                             quad->parameters->halfHeight, 0.0f);
+    texturedQuadSetPosition(&quad->vertices[3], quad->parameters->halfWidth,
+                             -quad->parameters->halfHeight, 0.0f);
 }

@@ -1,8 +1,8 @@
 /* NON_MATCHING: The offer pair loads as LDM; offer-copy and item-count/final-state registers differ. */
 #include "gamedata/DataTable.h"
 #include "script/scrScriptProcess.h"
-#include "util/CalleeContracts.h"
-#include "util/ScreenStartOrClear.h"
+#include "code/Code0035.h"
+#include "ui/UiControl.h"
 
 struct ItemExchangeOffer {
     u32 key;

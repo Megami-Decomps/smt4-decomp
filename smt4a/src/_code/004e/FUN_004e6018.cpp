@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail loads the 64-bit flag masks with ldm (4-aligned) and tests the skill's usable bits without CSE (tst, then and/cmp); the unit table is indexed through a u32 stride (lsl #2). */
 #include "common.h"
 #include "gamedata/Table04Record.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 extern "C" {
 

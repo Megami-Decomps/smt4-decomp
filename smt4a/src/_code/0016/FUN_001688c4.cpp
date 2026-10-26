@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0016_Smt4a.h"
 
 /* A text glyph cell: control codes 0xf8xx carry parameters in the following cells. */
 struct TextCell {

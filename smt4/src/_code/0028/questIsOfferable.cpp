@@ -1,6 +1,6 @@
 /* NON_MATCHING: questId/record saved registers are swapped (retail r5/r6) and retail predicates `mov r0, questId` before the id >= 0x15e branch. */
 #include "map/mapDepart.h"
-#include "util/QuestGetRuntimeStatus.h"
+#include "quest_center/QuestStatus.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 
 struct QuestAvailabilityRecord {

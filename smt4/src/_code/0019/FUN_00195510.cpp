@@ -1,4 +1,5 @@
 #include "shard/GameDataBlocks.h"
+#include "code/Code0019_Smt4.h"
 
 extern "C" {
 

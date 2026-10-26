@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4.h"
 
 extern "C" {
 

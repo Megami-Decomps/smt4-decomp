@@ -1,6 +1,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/CampCec/CampCecDraw.h"
+#include "camp/CampStateQueries_Smt4a.h"
 
 extern "C" {
 

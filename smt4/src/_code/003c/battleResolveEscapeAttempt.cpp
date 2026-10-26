@@ -4,6 +4,7 @@
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "battle/btlHelp.h"
+#include "battle/btlEditor.h"
 
 struct BattleAction;
 struct BattleRetreatOwner { BtlMainState *script; };
@@ -38,7 +39,6 @@ extern BattleVersionResources *DAT_00435d18;
 extern BtlEvent *g_btlEvent;
 bool FUN_00256940(BtlMain *, const BtlMainState *, s32);
 void btlReflectQueueKind34(s16, u32);
-BattleAction *FUN_00256898(s32, u32);
 u32 FUN_0026beb4(u32, u32, u32, u32, u32);
 s32 FUN_003bf1e4();
 u32 randRange(s32);

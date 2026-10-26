@@ -5,7 +5,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/AsdMemCopy.h"
-#include "util/EffMenuListAppend.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
 
 extern "C" {
 extern Point2 DAT_0059dc7c;

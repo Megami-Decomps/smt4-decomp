@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the flags after the request stores; armcc hoists the load and spills r4. */
 #include "common.h"
 
 struct RequestState {
@@ -11,6 +10,11 @@ struct RequestState {
     /* 0x0b */ u8 complete;
 };
 
+static __inline void requestSetFlag(RequestState *request, u8 flag)
+{
+    request->flags |= flag;
+}
+
 /* Starts a new request if the state machine is not already processing one. */
 extern "C" void requestBeginProcessing(RequestState *request, s8 mode, u32 value)
 {
@@ -20,6 +24,6 @@ extern "C" void requestBeginProcessing(RequestState *request, s8 mode, u32 value
         request->complete = 0;
         request->state = 2;
         request->progress = 0;
-        request->flags |= 1;
+        requestSetFlag(request, 1);
     }
 }

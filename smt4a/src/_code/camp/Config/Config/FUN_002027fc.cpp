@@ -1,9 +1,9 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002027fc` (_code @ 0x2027fc, 0x52c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "camp/RenderCtx.h"
 
 extern "C" {
@@ -33,7 +33,6 @@ typedef struct {
     unsigned int spC0; /* 0xc0: local_c0 */
 } void_stack;
 
-extern unsigned char LAB_00202d28; /* 0x202d28 */
 extern int g_config; /* 0x57f230 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
@@ -188,7 +187,7 @@ void FUN_002027fc(void)
           }
           configDrawRowFrame(*(short *)(temp_v6 + 8) + temp_v7,*(short *)(temp_v6 + 10) + temp_v13,0,0,temp_v3);
         }
-        textFormatBuffer(temp_v18,&LAB_00202d28,
+        textFormatBuffer(temp_v18,"%s",
                      temp_v2 + *(int *)(temp_v0 + temp_v10 * 8 + 0x98) * 0xc + 0x1e);
         temp_v11 = asdTMTexTableEntryAt(0x24,0x74);
         puVar11 = temp_v18;

@@ -2,7 +2,6 @@
 #include "shard/Shard0049.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
 #include "ui/UiSpriteState.h"
-#include "util/CalleeContracts.h"
 #include "event/2dEvent/SmokeFade.h"
 
 struct EquipmentMenuScriptViewA {

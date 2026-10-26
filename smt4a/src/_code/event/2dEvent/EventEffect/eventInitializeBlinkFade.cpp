@@ -3,7 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 struct BlinkFadeWorkA {
     u32 job;

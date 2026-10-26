@@ -24,26 +24,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned char LAB_00139228; /* 0x139228 */
-extern unsigned char LAB_00139234; /* 0x139234 */
-extern unsigned char LAB_00139240; /* 0x139240 */
-extern unsigned char LAB_0013924c; /* 0x13924c */
-extern unsigned char LAB_00139258; /* 0x139258 */
-extern unsigned char LAB_00139264; /* 0x139264 */
-extern unsigned char LAB_00139270; /* 0x139270 */
-extern unsigned char LAB_0013927c; /* 0x13927c */
-extern unsigned char LAB_00139288; /* 0x139288 */
-extern unsigned char LAB_00139294; /* 0x139294 */
-extern unsigned char LAB_001392a0; /* 0x1392a0 */
-extern unsigned char LAB_001392ac; /* 0x1392ac */
-extern unsigned char LAB_001392b8; /* 0x1392b8 */
-extern unsigned char LAB_001392c8; /* 0x1392c8 */
-extern unsigned char LAB_001392d8; /* 0x1392d8 */
-extern unsigned char LAB_001392e8; /* 0x1392e8 */
-extern unsigned char LAB_001393f8; /* 0x1393f8 */
-extern unsigned char LAB_00139404; /* 0x139404 */
-extern unsigned char LAB_00139410; /* 0x139410 */
-extern unsigned char LAB_0013941c; /* 0x13941c */
 extern void frameTexReleaseWork(unsigned int job); /* 0x13c1a0 */
 extern int FUN_0013c660(unsigned int job); /* 0x13c660 */
 extern int FUN_0013c6d4(...); /* 0x13c6d4 */
@@ -128,30 +108,29 @@ void FUN_00138e14(void)
   *(unsigned char *)(puVar2 + 0x513) = 0;
   *(unsigned char *)((int)puVar2 + 0x144d) = 0;
   *(unsigned char *)(puVar2 + 0x525) = 0;
-  puVar4 = &LAB_00139228;
-  asdProcessCreateSimple(&LAB_00139228,0x6c,0,0,renderSurfaceDownsampleJob,frameTexReleaseWork,puVar1);
+  asdProcessCreateSimple("HDRCL",0x6c,0,0,renderSurfaceDownsampleJob,frameTexReleaseWork,puVar1);
   *puVar2 = (unsigned int)puVar4;
-  taskCreateDraw(&LAB_00139234,0xce,0,0,FUN_0013cd7c,0,g_frameTex,puVar4);
-  taskCreateDraw(&LAB_00139240,0x6d,0,0,FUN_0013c660,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_0013924c,0xcf,0,0,FUN_0013c6d4,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139258,0x6f,0,0,FUN_0013cf80,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139264,0xd1,0,0,FUN_0013d030,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139270,0x6e,0,0,FUN_0013c764,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_0013927c,0xd0,0,0,FUN_0013c7dc,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139288,0x7b,0,0,frameTexRenderBackdropOnce,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139294,0xd7,0,0,jobRenderOnce,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392a0,0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392b8,0x7a,0,0,FUN_0013ee80,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392c8,0xd6,0,0,surfaceCaptureUpdate,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392d8,0x87,0,0,FUN_0013e8f8,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392e8,0xe3,0,0,FUN_0013e9e4,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392b8,0x82,0,0,frameTexCaptureSecondVariant,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392c8,0xde,0,0,FUN_00140618,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001393f8,0x7a,0,0,FUN_0013e7c4,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139404,0xd6,0,0,FUN_0013e848,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_00139410,0x7c,0,0,FUN_0013dc70,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_0013941c,0xd8,0,0,frameTexDrawWhenReady,0,g_frameTex,*puVar2);
+  taskCreateDraw("HDRCR",0xce,0,0,FUN_0013cd7c,0,g_frameTex,puVar4);
+  taskCreateDraw("HDRDL",0x6d,0,0,FUN_0013c660,0,g_frameTex,*puVar2);
+  taskCreateDraw("HDRDR",0xcf,0,0,FUN_0013c6d4,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanCL",0x6f,0,0,FUN_0013cf80,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanCR",0xd1,0,0,FUN_0013d030,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanDL",0x6e,0,0,FUN_0013c764,0,g_frameTex,*puVar2);
+  taskCreateDraw("ZanDR",0xd0,0,0,FUN_0013c7dc,0,g_frameTex,*puVar2);
+  taskCreateDraw("CAMPCL",0x7b,0,0,frameTexRenderBackdropOnce,0,g_frameTex,*puVar2);
+  taskCreateDraw("CAMPCR",0xd7,0,0,jobRenderOnce,0,g_frameTex,*puVar2);
+  taskCreateDraw("CAMPDL",0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);
+  taskCreateDraw("CAMPDR",0xcc,0,0,FUN_0013d2dc,0,g_frameTex,*puVar2);
+  taskCreateDraw("ENCEFFCL",0x7a,0,0,FUN_0013ee80,0,g_frameTex,*puVar2);
+  taskCreateDraw("ENCEFFCR",0xd6,0,0,surfaceCaptureUpdate,0,g_frameTex,*puVar2);
+  taskCreateDraw("ENCEFFDL",0x87,0,0,FUN_0013e8f8,0,g_frameTex,*puVar2);
+  taskCreateDraw("ENCEFFDR",0xe3,0,0,FUN_0013e9e4,0,g_frameTex,*puVar2);
+  taskCreateDraw("ENCEFFCL",0x82,0,0,frameTexCaptureSecondVariant,0,g_frameTex,*puVar2);
+  taskCreateDraw("ENCEFFCR",0xde,0,0,FUN_00140618,0,g_frameTex,*puVar2);
+  taskCreateDraw("XFADECL",0x7a,0,0,FUN_0013e7c4,0,g_frameTex,*puVar2);
+  taskCreateDraw("XFADECR",0xd6,0,0,FUN_0013e848,0,g_frameTex,*puVar2);
+  taskCreateDraw("XFADEDL",0x7c,0,0,FUN_0013dc70,0,g_frameTex,*puVar2);
+  taskCreateDraw("XFADEDR",0xd8,0,0,frameTexDrawWhenReady,0,g_frameTex,*puVar2);
   return;
 }
 

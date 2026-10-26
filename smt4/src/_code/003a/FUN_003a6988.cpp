@@ -1,6 +1,6 @@
 /* NON_MATCHING: only register allocation differs (retail keeps the base percentage and a zero constant in extra callee-saved registers, and the first side-unit clamp stores the limit register). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTableIV.h"
 

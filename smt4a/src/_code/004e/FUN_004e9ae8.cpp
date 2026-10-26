@@ -2,7 +2,7 @@
 /* Removes candidates according to their exclusion chance and returns the remaining count. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 extern "C" {
 

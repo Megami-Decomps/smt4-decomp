@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail unrolls the live-skill search and keeps the rebuilt record base in r7 (156 vs 180 rows); the save-entry comparison is the same. */
 #include "common.h"
 #include "map/lmapMain.h"
+#include "shard/W6_W6Match5_EntryCollection.h"
 
 extern "C" {
 
@@ -81,7 +82,6 @@ typedef struct LiveUnit {
 
 void FUN_00184310(u32 id);
 void sysMemClear(void *block, u32 size);
-void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void FUN_004bcd90(RebuiltRecord *record);
 u16 recordGetScaledMaximum(RebuiltRecord *record);
 s32 getUnlockedSlotCount(LiveUnit *unit);

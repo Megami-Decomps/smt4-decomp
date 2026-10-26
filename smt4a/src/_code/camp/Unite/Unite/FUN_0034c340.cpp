@@ -37,7 +37,7 @@ typedef struct {
     unsigned int sp188; /* 0x188: local_188 */
 } param_4_stack;
 
-extern unsigned char LAB_0038e764; /* 0x38e764 */
+extern unsigned char uiComparePriorityKindAndId; /* 0x38e764 */
 
 /* Supplied declaration required: qsort. */
 /* Supplied declaration required: asdMemoryAlloc. */
@@ -241,7 +241,7 @@ void FUN_0034c340(unsigned short *param_1,unsigned int param_2,int param_3,unsig
       temp_v11 = temp_v11 + 1;
     } while (temp_v11 < (int)param_2);
   }
-  qsort(puVar7,param_2,6,&LAB_0038e764);
+  qsort(puVar7,param_2,6,&uiComparePriorityKindAndId);
   if (0 < (int)(param_2 - 1)) {
     puVar12 = puVar7 + -3;
     puVar13 = param_1 + -1;

@@ -1,6 +1,6 @@
-/* NON_MATCHING: Retail push {r4, r5, r6, r7, r8, lr} differs from recovered push {r4, r5, r6, r7, lr}. */
+/* NON_MATCHING: retail keeps the style constant 6 in r5 and the zero for both stack arguments and the later strb in r8 (push {r4-r8}); the build rematerialises both (sibling FUN_002ed4d4's locals do not change it). */
 #include "common.h"
-#include "util/MsgBoxFlagsSetBit7.h"
+#include "ui/UiControl.h"
 
 // Private views of the message state used by this function.
 namespace {
@@ -37,6 +37,11 @@ u32 FUN_002866b4(u32 message, u32 argument, s32 frame,
 u32 scrComm_Message_ShowConfirmAndClear(void)
 {
     MessageStateView* savedState = g_messageMain.unk04;
+    s32 style = 6;
+    u32 first;
+    u32 second;
+    u32 third;
+    u32 result;
 
     bustupCutAnimRequestStopSlots();
     eventTexRequestStopAll();
@@ -46,10 +51,10 @@ u32 scrComm_Message_ShowConfirmAndClear(void)
         currentState->unkA11 = 20;
     }
 
-    u32 message = scrGetCommandOwner();
-    u32 argument = scrGetArg(0);
-    s32 frame = scrGetCommandFrame();
-    u32 result = FUN_002866b4(message, argument, frame, 6, 0, 0);
+    first = scrGetCommandOwner();
+    second = scrGetArg(0);
+    third = scrGetCommandFrame();
+    result = FUN_002866b4(first, second, third, style, 0, 0);
 
     if (scrGetCommandFrame() == 0) {
         msgBoxFlagsSetBit7(reinterpret_cast<void *>(savedState->unk04));
@@ -59,4 +64,5 @@ u32 scrComm_Message_ShowConfirmAndClear(void)
 
     return result;
 }
-}
+
+} /* extern "C" */

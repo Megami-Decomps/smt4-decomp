@@ -1,5 +1,5 @@
 /* NON_MATCHING: near (200 rows against 203): same slot walk, fade/loop state machine, constants and calls from the asm; retail indexes the sound-object table with an unsigned compare (movcs/bcs), keeps the table base in r4 (add r9,r4,#0 and sl = base+256 derived from it) and shares the `object->data` free path as a call-free block, ours takes the base from one literal with signed index compares (a u32 index variant moved the rows to 206) */
-#include "util/FUN_0014375c.h"
+#include "code/Code0014.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned int u32;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc folds both RGB contributions into one common expression and allocates fewer registers than retail; -O2 also differs. */
 #include "common.h"
 
 struct FrameColorUpdateWork {
@@ -14,10 +13,9 @@ void frameTexStartTransition(u32 first, u32 second, u32 third);
 
 void FUN_0040128c(FrameColorUpdateWork *work)
 {
-    const u32 greenBlue = (work->rgb[1] << 16) | (work->rgb[2] << 8);
-    work->packed[2] = greenBlue | (work->alpha[2] | (work->rgb[0] << 24));
-    work->packed[0] = work->alpha[0] | (work->rgb[0] << 24) | greenBlue;
+    work->packed[0] = work->alpha[0] | (work->rgb[0] << 24) | (work->rgb[1] << 16) | (work->rgb[2] << 8);
     work->packed[1] = (work->packed[1] & 0xffffff00) | work->alpha[1];
+    work->packed[2] = work->alpha[2] | (work->rgb[0] << 24) | (work->rgb[1] << 16) | (work->rgb[2] << 8);
     FUN_00348c28(1);
     frameTexStartTransition(work->packed[0], work->packed[1], work->packed[2]);
 }

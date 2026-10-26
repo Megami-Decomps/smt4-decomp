@@ -65,11 +65,6 @@ typedef struct {
     unsigned int spF0; /* 0xf0: local_f0 */
 } param_4_stack;
 
-extern unsigned char LAB_002d9b44; /* 0x2d9b44 */
-extern unsigned char LAB_002d9b74; /* 0x2d9b74 */
-extern unsigned char LAB_002da128; /* 0x2da128 */
-extern unsigned char LAB_002da12c; /* 0x2da12c */
-extern unsigned char LAB_002da760; /* 0x2da760 */
 extern unsigned char LAB_002daba4; /* 0x2daba4 */
 extern unsigned char LAB_002daba8; /* 0x2daba8 */
 extern int g_titleScene; /* 0x44ea00 */
@@ -176,7 +171,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
     FUN_002bf288(2,0x24,0xd0,param_1,param_2,0x65);
     FUN_002bf288(2,0x24,0x4a,param_1,param_2,0x65);
     temp_v4 = asdTMTexTableEntryAt(0x24,0x49);
-    textFormatBuffer(temp_v20,&LAB_002d9b44);
+    textFormatBuffer(temp_v20,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8f\x82\x8e\x81@\x82o\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81F");
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -184,7 +179,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
     temp_v4 = asdTMTexTableEntryAt(0x24,0x4c);
     temp_v5 = FUN_0029dde0();
     FUN_002bdf94(0,(int)&param_1->field_0x0 + (int)*(short *)(temp_v4 + 8),
-                 *(short *)(temp_v4 + 10) + param_2,1,2,0x65,&LAB_002d9b74,temp_v5);
+                 *(short *)(temp_v4 + 10) + param_2,1,2,0x65,"%d",temp_v5);
     if (*(char *)(temp_v3 + 0x34) != '\0') {
       temp_v22 = (unsigned int *)FUN_0029efc0(temp_v21);
       temp_v4 = 0;
@@ -230,7 +225,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             }
             temp_v13 = asdTMTexTableEntryAt(0x24,0xf9);
             temp_v9 = demonGetRaceLabel(*psVar8,0);
-            textFormatBuffer(temp_v20,&LAB_002da12c,temp_v9);
+            textFormatBuffer(temp_v20,"%s",temp_v9);
             puVar13 = temp_v20;
             fontMeasureLineAdvance(puVar13,2);
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2
@@ -242,11 +237,11 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             textDrawString(2,0x7a4c00ff,temp_v20,(int)*(short *)(temp_v3 + 8));
             temp_v13 = asdTMTexTableEntryAt(0x24,0xf8);
             if (temp_v25 != 0) {
-              textFormatBuffer(temp_v20,&LAB_002da128);
+              textFormatBuffer(temp_v20,"\?\?\?");
             }
             else {
               temp_v9 = FUN_002bd068(*psVar8);
-              textFormatBuffer(temp_v20,&LAB_002da12c,temp_v9);
+              textFormatBuffer(temp_v20,"%s",temp_v9);
             }
             VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2
                                 ,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -259,7 +254,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
             FUN_002bdf94(0,(int)&param_1->field_0x0 +
                            (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v13 + 8),
                          (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v13 + 10) + param_2,1,2,
-                         0x6f,&LAB_002da760,*(unsigned char *)((int)psVar8 + 3));
+                         0x6f,"%d",*(unsigned char *)((int)psVar8 + 3));
             FUN_002bed3c();
             temp_v13 = asdTMTexTableEntryAt(0x24,0xf5);
             if (temp_v25 != 0) {
@@ -409,7 +404,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
         FUN_002bdf94(0,(int)&param_1->field_0x0 +
                        (int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8),
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,2,0x83,
-                     &LAB_002da760,*(unsigned char *)((int)psVar8 + 3));
+                     "%d",*(unsigned char *)((int)psVar8 + 3));
         FUN_002bed3c();
         temp_v4 = asdTMTexTableEntryAt(0x24,0xfb);
         if (temp_v25 != 0) {
@@ -548,11 +543,11 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           temp_v5 = 0xffffffff;
           temp_v9 = 0xffffffff;
           if (temp_v25 != 0) {
-            textFormatBuffer(temp_v20,&LAB_002da128);
+            textFormatBuffer(temp_v20,"\?\?\?");
           }
           else {
             temp_v11 = FUN_002bd068(*puVar10);
-            textFormatBuffer(temp_v20,&LAB_002da12c,temp_v11);
+            textFormatBuffer(temp_v20,"%s",temp_v11);
           }
           temp_v6 = FUN_0029dde0();
           if (temp_v6 < *(unsigned char *)((int)puVar10 + 3)) {
@@ -577,7 +572,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           textDrawString(1,temp_v5,temp_v20);
           temp_v4 = asdTMTexTableEntryAt(0x24,0xdd);
           temp_v5 = demonGetRaceLabel(*puVar10,0);
-          textFormatBuffer(temp_v20,&LAB_002da12c,temp_v5);
+          textFormatBuffer(temp_v20,"%s",temp_v5);
           puVar13 = temp_v20;
           fontMeasureLineAdvance(puVar13,2);
           VectorSignedToFloat((int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
@@ -592,7 +587,7 @@ void FUN_002d96d4(fn_002d96d4_arg0 *param_1,int param_2,int param_3,int param_4)
           FUN_002bdf94(0,(int)&param_1->field_0x0 +
                          (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v7 + 8),
                        (int)*(short *)(temp_v7 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,1,2,0x6f
-                       ,&LAB_002d9b74,*(unsigned char *)((int)puVar10 + 3));
+                       ,"%d",*(unsigned char *)((int)puVar10 + 3));
           FUN_002bed3c();
           temp_v13 = temp_v13 + 1;
           temp_v4 = FUN_0028cfbc(temp_v22);

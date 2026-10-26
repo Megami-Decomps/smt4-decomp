@@ -1,6 +1,6 @@
 /* NON_MATCHING: phase-store tail merging and alternate-page flag address formation differ from retail. */
 #include "common.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 struct PageAnimationTrack {
     u8 point[0x8c];

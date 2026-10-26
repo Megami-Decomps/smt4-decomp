@@ -1,6 +1,6 @@
 /* NON_MATCHING: ARMCC predicates opening-loop setup and merges the immediate/deferred pair-setting paths; retail outlines the deferred branch after the closing loop. */
 #include "ui/UiSpriteState.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 struct RowTransitionSprites {
     /* 0x0000 */ u8 unk0000[0x20];

@@ -1,7 +1,7 @@
 /* NON_MATCHING: saved draw arguments, numeric-call stack setup and HP coordinate temporaries use different registers; portrait conversion and cycling marker remainder now follow retail. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/markerKindGetColor.h"
+#include "ui/UiControl.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

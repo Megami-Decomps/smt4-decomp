@@ -35,9 +35,6 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } void_stack;
 
-extern unsigned char LAB_001b77ac; /* 0x1b77ac */
-extern unsigned char LAB_001b77d8; /* 0x1b77d8 */
-extern unsigned char LAB_001b7808; /* 0x1b7808 */
 extern unsigned char LAB_001b79c8; /* 0x1b79c8 */
 extern unsigned char LAB_001b79dc; /* 0x1b79dc */
 extern unsigned char LAB_001b79f4; /* 0x1b79f4 */
@@ -179,8 +176,8 @@ int FUN_001b72e0(unsigned int job)
       }
       temp_v7 = 0;
       if (g_btlUi != '\0') {
-        textDrawString(3,0xffffffff,&LAB_001b77ac);
-        textDrawString(3,0xffffffff,&LAB_001b77d8);
+        textDrawString(3,0xffffffff,"\x96\xa2\x8eg\x97p\x82\xcc\x83f\x81[\x83^\x82\xc8\x82\xcc\x82\xc5\x95\\\x8e\xa6\x82\xc5\x82\xab\x82\xdc\x82\xb9\x82\xf1\x81B");
+        textDrawString(3,0xffffffff,"\x92S\x93\x96\x82\xc9\x8am\x94F\x82\xb5\x82\xc4\x89\xba\x82\xb3\x82\xa2\x81B");
       }
       if (*(int *)(temp_v1 + 0x7e38) == 0xe) {
         temp_v13 = 0x3eaaaaab;
@@ -204,7 +201,7 @@ int FUN_001b72e0(unsigned int job)
         temp_v1 = reinterpret_cast<int>(asdTMTexTableEntryAt(0xe,0x3d));
         VectorSignedToFloat((int)*(short *)(temp_v1 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-        textDrawString(3,0xff,&LAB_001b7808);
+        textDrawString(3,0xff,"\x83e\x83X\x83g\x83\x81\x83b\x83Z\x81[\x83W\x82\xc5\x82\xb7\x81B");
         textFormatBuffer(temp_v9,&LAB_001b79c8,DAT_00439c90);
         textDrawString(2,0xffffffff,temp_v9);
         textFormatBuffer(temp_v9,&LAB_001b79dc,SUB84((double)DAT_00439c94,0),

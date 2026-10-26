@@ -1,21 +1,22 @@
-/* NON_MATCHING: retail indexes the 0x38-byte models from the block start (active at +0xC with writeback, flag at +0x38); with the 4-byte header armcc adds #4 first, and the constant/VFP setup order differs. */
+/* NON_MATCHING: model layout (block offsets 0xC/0x1C, writeback ldrb [r0,#12]!) and control flow match retail; only VFP register numbering of the position saves/radius constants, `mov r0,sp` placement differ (same residue as smt4a FUN_002469d0). */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 
 extern "C" {
 
 /* One deferred map model; the position is its collision circle's center. */
 typedef struct DeferredMapModel {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u8 active;
-    /* 0x09 */ u8 unk09[3];
-    /* 0x0C */ CollisionVector position;
-    /* 0x18 */ u8 unk18[0x1C];
-    /* 0x34 */ s32 pointLike;
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 unk01[3];
+    /* 0x04 */ u8 unk04[0xC];
+    /* 0x10 */ CollisionVector position;
+    /* 0x1C */ u8 unk1C[0x10];
+    /* 0x2C */ s32 pointLike;
+    /* 0x30 */ u8 unk30[8];
 } DeferredMapModel;
 
 typedef struct DeferredMapModels {
-    /* 0x000 */ u32 unk000;
-    /* 0x004 */ DeferredMapModel models[64];
+    /* 0x000 */ u8 unk000[0xC];
+    /* 0x00C */ DeferredMapModel models[64];
 } DeferredMapModels;
 
 extern DeferredMapModels *g_deferredMapModels;
@@ -33,15 +34,16 @@ bool FUN_0027f848(CollisionVector *out, CollisionVector position)
     for (s32 i = 0; i < 64; i++) {
         DeferredMapModel *model = &g_deferredMapModels->models[i];
         if (model->active) {
-            bool hit;
             if (model->pointLike != 0) {
-                hit = mapResolveCircleOverlapXZ(&result, position, 50.0f, model->position, 0.0f);
+                if (mapResolveCircleOverlapXZ(&result, position, 50.0f, model->position, 0.0f)) {
+                    position = result;
+                    moved = true;
+                }
             } else {
-                hit = mapResolveCircleOverlapXZ(&result, position, 50.0f, model->position, 20.0f);
-            }
-            if (hit) {
-                position = result;
-                moved = true;
+                if (mapResolveCircleOverlapXZ(&result, position, 50.0f, model->position, 20.0f)) {
+                    position = result;
+                    moved = true;
+                }
             }
         }
     }

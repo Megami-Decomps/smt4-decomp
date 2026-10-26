@@ -1,7 +1,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlFlagWord.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0024.h"
 #include "battle/BtlMainAccess.h"
 
 extern "C" {

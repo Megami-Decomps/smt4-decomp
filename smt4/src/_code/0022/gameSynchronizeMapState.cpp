@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 extern "C" {
 struct MapModeData { u8 unk00[0x20]; u8 mode; };
 struct MapStateSource { u8 unk00[0x3C]; s16 id; u8 unk3E[0xD22]; MapModeData *data; };

@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "util/CalleeContracts.h"
+#include "battle/BattleHelpers.h"
 
 extern "C" {
 

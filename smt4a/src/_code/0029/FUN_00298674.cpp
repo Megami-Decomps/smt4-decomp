@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "Model/MoriModelShadowMap.h"
 #include "event/2dEvent/EventEffect.h"
-#include "util/skinObjectUpdateMatrices.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;

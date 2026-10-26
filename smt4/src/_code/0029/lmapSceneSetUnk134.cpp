@@ -1,4 +1,5 @@
 #include "map/lmapMain.h"
+#include "map/MapSceneAccess_Smt4.h"
 
 extern "C" {
 

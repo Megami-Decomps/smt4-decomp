@@ -1,6 +1,6 @@
 /* NON_MATCHING: open-result lifetime, resize argument order and constant result materialization differ. */
 #include "shard/RomFileOpenState.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 #include "nn/Result.h"
 
 extern "C" s32 FUN_001883b0(RomOpenFile *file, const char *path, u32 mode);

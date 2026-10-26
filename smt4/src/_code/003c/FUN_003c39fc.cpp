@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the debug battle-flag menu's list setup (title "btl Flag Menu"; items are the flag bits of the battle state and a few counters, the last item is a tail call); armcc here reloads the flag words and orders the shift/mask expressions differently (retail ands then shifts each bit, keeping zero in r7). */
 #include "common.h"
-#include "util/AsdListBoxCreateDefault.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 /* The debug menu (only the list handle). */
 struct BattleFlagMenu {

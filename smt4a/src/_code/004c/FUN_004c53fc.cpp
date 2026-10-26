@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code004c_Smt4a.h"
 
 extern "C" {
 // Categories seven through eleven use the special -3 result.

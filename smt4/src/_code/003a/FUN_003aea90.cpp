@@ -1,4 +1,5 @@
 #include "battle/btlUI.h"
+#include "code/Code003a_Smt4.h"
 
 extern "C" {
 

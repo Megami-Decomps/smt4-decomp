@@ -1,4 +1,4 @@
-#include "util/FUN_00168750.h"
+#include "code/Code0016.h"
 /* NON_MATCHING: retail reloads the DAT_0061978c base (r1) after asdSoundGetObjectCount instead of keeping it in r4, and assigns group/flags to sl/r9 the other way round. */
 #include "sound/VoiceLoadQueue.h"
 #include "kernel/jyoucyuGetTableEntry.h"
@@ -15,7 +15,7 @@ char *libc_strcat(char *destination, const char *source);
 char *libc_strcpy(char *destination, const char *source);
 u32 asdSoundGetObjectCount(void);
 u32 asdLoadFileExists(const char *path);
-void FUN_00167f44(void *file, VoiceLoadRequest *request);
+void workCommandArm(void *file, VoiceLoadRequest *request);
 }
 
 static inline VoiceLoadRequest *voiceLoadRequestAt(u32 index)
@@ -67,6 +67,6 @@ extern "C" u32 FUN_001566a8(u32 group, u32 id, s32 kind, u8 flags, u8 priority,
     request->kind = kind;
     request->priority = priority;
     libc_strcpy(request->path, path);
-    FUN_00168750(reinterpret_cast<u32>(path), 0, 3, reinterpret_cast<u32>(FUN_00167f44), reinterpret_cast<u32>(request));
+    FUN_00168750(reinterpret_cast<u32>(path), 0, 3, reinterpret_cast<u32>(workCommandArm), reinterpret_cast<u32>(request));
     return index;
 }

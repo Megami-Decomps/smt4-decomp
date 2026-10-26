@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: dispatch guard peeling, sprite visibility getter, and mask/register loads differ. */
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"

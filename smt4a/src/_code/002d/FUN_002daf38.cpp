@@ -1,6 +1,6 @@
 /* NON_MATCHING: scene actor teardown register allocation has not matched retail. */
 #include "map/lmapMain.h"
-#include "util/PtrListRemoveClearOwner.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 namespace {
 /* The full cleanup state extends past the shared LmapSceneA prefix. */

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/asdModelGetSlotArray1.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4a.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 extern unsigned int asdModelGetSlotArray3(int);
 /* Supplied declaration required: asdModelSlotClearActive. */
 /* Supplied declaration required: asdOperatorDelete. */
-extern int asdModelGetSlotArray2(int);
 extern unsigned int asdModelGetSlotHandle(int);
 /* Supplied declaration required: FUN_004491fc. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */

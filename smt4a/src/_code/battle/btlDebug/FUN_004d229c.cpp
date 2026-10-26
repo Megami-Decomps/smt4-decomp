@@ -41,7 +41,6 @@ void asdListBoxSetFloatItem(u32 box, s32 index, u32 value, s32 arg);
 void asdListBoxSetToggleItem(u32 box, s32 index, s32 value);
 void asdListBoxSetIntItem(u32 box, s32 index, s32 value, s32 min, s32 max, s32 step);
 
-extern const char LAB_004d25e8[];
 
 // Builds the battle effect debug list box with its toggles and sliders.
 void FUN_004d229c(DebugState* debug, BattleDebugOwner* owner)
@@ -55,7 +54,7 @@ void FUN_004d229c(DebugState* debug, BattleDebugOwner* owner)
     debug->listBox = box;
     asdListBoxAddItems();
     asdListBoxSetByteValue(debug->listBox, 1);
-    jobSetText(debug->listBox, LAB_004d25e8);
+    jobSetText(debug->listBox, "btl Unit Menu");
     asdListBoxSetFloatItem(debug->listBox, 0, 0xffffff01, 0xff);
     asdListBoxSetToggleItem(debug->listBox, 1, (owner->pendingMask & DAT_00571770) != 0);
     asdListBoxSetIntItem(debug->listBox, 2, g_battleEffectSettings.mode, -1, 2, 0);

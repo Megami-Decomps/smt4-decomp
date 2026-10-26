@@ -23,7 +23,7 @@ typedef struct {
     unsigned int sp1F8; /* 0x1f8: local_1f8 */
 } param_2_stack;
 
-extern unsigned char LAB_00241988; /* 0x241988 */
+extern unsigned char FUN_00241988; /* 0x241988 */
 extern int btlSkillCompareBySortKey(...); /* 0x290af8 */
 extern int FUN_002fe144(...); /* 0x2fe144 */
 extern unsigned int DAT_00571150; /* 0x571150 */
@@ -72,7 +72,7 @@ void FUN_004e8668(int *param_1,int param_2)
     puVar2 = puVar2 + 0x102;
     temp_v2 = temp_v2 + 1;
   } while (temp_v4 != 0);
-  qsort(aiStack_1ec,temp_v3,4,&LAB_00241988);
+  qsort(aiStack_1ec,temp_v3,4,&FUN_00241988);
   piVar3 = param_1;
   FUN_004ea200(param_1,param_2,aiStack_1ec,temp_v3,1);
   if (piVar3 == (int *)0x0) {

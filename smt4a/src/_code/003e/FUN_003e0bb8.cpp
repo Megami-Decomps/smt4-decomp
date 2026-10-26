@@ -1,7 +1,7 @@
 /* NON_MATCHING: only request initialization differs: compiler interleaves state=24 between the two argument-clear stores. */
 #include "battle/BattleTransitionRequest.h"
 #include "battle/btlMain.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0013.h"
 
 extern "C" {
 u32 FUN_003e0f94(BattleTransitionRequest *request, const BtlMainStateA *state);

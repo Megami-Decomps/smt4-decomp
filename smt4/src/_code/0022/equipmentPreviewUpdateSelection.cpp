@@ -1,5 +1,6 @@
 /* NON_MATCHING: selected-list address scheduling and cold model-request branch placement differ; -O2 candidate. */
 #include "shard/S2Scene3a.h"
+#include "code/Code0029_Smt4.h"
 
 struct PlayerEquipmentPreview {
     u16 equipment[7];
@@ -9,7 +10,6 @@ extern "C" {
 s32 flaggedValueHolderGetTotal(Scene3aSlotInfo *);
 u32 FUN_003c2d54(Scene3aSlotInfo *);
 void FUN_002996d8(u32);
-s32 FUN_00299fc0();
 s32 contentGetEntryKind(u32);
 void FUN_0029963c(u32, u16);
 const PlayerEquipmentPreview *gameGetPlayerData();

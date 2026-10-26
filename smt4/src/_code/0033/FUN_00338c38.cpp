@@ -3,8 +3,8 @@
 #include "shard/W4_Match6_BtlScript.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "battle/btlMain.h"
-#include "util/CalleeContracts.h"
-#include "util/BtlFindNthActiveSpecialEntry.h"
+#include "code/Code002b.h"
+#include "battle/BattleHelpers.h"
 
 extern "C" {
 

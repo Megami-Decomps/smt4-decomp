@@ -3,7 +3,7 @@
 #include "addon/AocHandleJob.h"
 #include "shard/ScreenTransitionState.h"
 #include "nn/Result.h"
-#include "util/FUN_002ba8f4.h"
+#include "code/Code002b.h"
 
 static inline s32 aocResultLevel(u32 result)
 {

@@ -1,6 +1,11 @@
-/* NON_MATCHING: retail performs a sixteen-iteration empty loop before returning one; compiler eliminates the loop. */
 #include "common.h"
 extern "C" {
-/* This query always succeeds. */
-s32 utilityReturnSuccess(void) { return 1; }
+/* Counts through sixteen empty iterations and reports whether the counter stopped early (it never does). */
+s32 utilityReturnSuccess(void)
+{
+    s32 i;
+    for (i = 0; i < 16; i++) {
+    }
+    return i < 16;
+}
 }

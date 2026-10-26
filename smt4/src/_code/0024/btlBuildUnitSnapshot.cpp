@@ -1,4 +1,5 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "battle/BattleHelpers_Smt4.h"
 
 struct SnapshotVitals {
     s16 maxHp, maxMp;
@@ -55,7 +56,7 @@ void memClear(void *, u32 bytes);
 void __aeabi_memcpy4(void *, const void *, u32 bytes);
 char *libc_strcpy(char *, const char *);
 s32 FUN_00295c60(u16 id, u8 variant);
-s32 FUN_00269bf0(const SnapshotUnitSource *);
+s32 btlLinkGetMaxHp(const SnapshotUnitSource *);
 s32 flagCountUnlockedSlots(const SnapshotUnitSource *);
 const char *FUN_002bd06c(u16 id);
 u32 randomGetUpperSixBits(const SnapshotUnitSource *, u8 index);
@@ -69,7 +70,7 @@ void btlBuildUnitSnapshot(BattleUnitSnapshot *snapshot, const SnapshotUnitSource
     snapshot->experienceRemaining = FUN_00295c60(unit->id, unit->variant) - unit->prefix.experience;
     snapshot->hp = unit->record.hp;
     snapshot->mp = unit->record.mp;
-    snapshot->maxHp = FUN_00269bf0(unit);
+    snapshot->maxHp = btlLinkGetMaxHp(unit);
     snapshot->maxMp = unit->record.maxMp;
     snapshot->status0 = 0;
     snapshot->status1 = 0;

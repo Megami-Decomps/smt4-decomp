@@ -11,7 +11,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned char LAB_0042ce3c; /* 0x42ce3c */
+extern unsigned char _ZN2nn2os15CriticalSectionD1Ev; /* 0x42ce3c */
 extern unsigned int g_appletHomeButtonEvent; /* 0x5b4098 */
 extern unsigned int DAT_005b409c; /* 0x5b409c */
 extern unsigned int g_nnAppletCriticalSection; /* 0x640550 */
@@ -32,7 +32,7 @@ void FUN_0050f44c(unsigned int *param_1)
   g_nnAppletCriticalSection = 0;
   DAT_00640558 = 0xffffffff;
   DAT_00640554 = 0;
-  __aeabi_atexit(&g_nnAppletCriticalSection,&LAB_0042ce3c,0x100000);
+  __aeabi_atexit(&g_nnAppletCriticalSection,&_ZN2nn2os15CriticalSectionD1Ev,0x100000);
   return;
 }
 

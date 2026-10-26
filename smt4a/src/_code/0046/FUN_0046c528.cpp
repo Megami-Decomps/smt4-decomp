@@ -14,7 +14,7 @@ int dataTableFileGetTable(...);
 int FUN_001b315c(...);
 int FUN_001b31ac(void);
 int FUN_001b31e0(void);
-int FUN_002c1df8(unsigned int);
+int itemVariantReselect(unsigned int);
 int asdOperatorNewE(...);
 int FUN_00476e0c(unsigned int);
 int aocTexCtrlInit(...);
@@ -158,7 +158,7 @@ extern unsigned int dataTableGetEntries(unsigned int);
 /* Supplied declaration required: FUN_001b315c. */
 /* Supplied declaration required: FUN_001b31ac. */
 /* Supplied declaration required: FUN_001b31e0. */
-/* Supplied declaration required: FUN_002c1df8. */
+/* Supplied declaration required: itemVariantReselect. */
 /* Supplied declaration required: asdOperatorNewE. */
 /* Supplied declaration required: FUN_00476e0c. */
 /* Supplied declaration required: aocTexCtrlInit. */
@@ -347,7 +347,7 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
                     }
                   }
                   else {
-                    FUN_002c1df8(temp_v14);
+                    itemVariantReselect(temp_v14);
                   }
                 }
                 else {

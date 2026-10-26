@@ -1,13 +1,13 @@
 /* NON_MATCHING: sibling of FUN_0047219c: control flow, calls, the by-reference request ABI and the inlined RequestParameters constructor sequence match; armcc gives every hidden-reference temporary its own stack slot where retail reuses sp+20 and sp+40 (60-byte frame). */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
 extern AocSystemA *g_aocSystem;
 s32 sysLightEventTryWait(AocObjB *event);
-u32 legacyResourceIdRemap(WindowStatusResult *result);
 u32 jyoucyuGetTableEntry(s32 index);
 RequestParameters FUN_001d0ea0(AocSystemA *system, u32 id);
 

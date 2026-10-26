@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two initialising stores are predicated (ldrne/stmne) instead of branched over (beq). */
+/* NON_MATCHING: if-conversion only: retail branches over the two stores (`beq`), built predicates them (`ldrne`/`stmne`); needs the real class so the compiler emits the vptr store. */
 #include "common.h"
 
 extern "C" {

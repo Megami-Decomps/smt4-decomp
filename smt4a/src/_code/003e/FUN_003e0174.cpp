@@ -1,50 +1,48 @@
-/* NON_MATCHING: capacity helper fixes saved bases; clamp zero comparison is conditional and member-state update scratch registers are exchanged. */
-#include "common.h"
-#include "shard/W6_W6Match2_HelpResources.h"
+#include "shard/PadState.h"
+#include "gamedata/PlayerDataBlock.h"
 #include "shard/W6_W6Match8_StatGrowth.h"
-
-struct PartyMemberList {
-    u8 unk00[0x34];
-    u16 ids[8];
-    s8 states[8];
-};
 extern "C" {
-PartyMemberList *gameGetPlayerData();
+}
 
-static __inline s32 partyMemberCapacity(void)
+/* The player block seen through its signed per-slot counts. */
+struct PlayerCountsView {
+    /* 0x00 */ u8 unk00[0x44];
+    /* 0x44 */ s8 counts[8];
+};
+
+extern "C" {
+s32 dataTableCountRecordStages(u32);
+
+static __inline s32 inventoryGetCapacity(void)
 {
     s32 capacity = 4;
-    if ((s32)gameDataFlagTestBit(0x77))
-        capacity = 5;
-    if ((s32)gameDataFlagTestBit(0x78))
-        ++capacity;
-    if ((s32)gameDataFlagTestBit(0x79))
-        ++capacity;
-    if ((s32)gameDataFlagTestBit(0x7a))
-        ++capacity;
+    if (gameDataFlagTestBit(0x77)) ++capacity;
+    if (gameDataFlagTestBit(0x78)) ++capacity;
+    if (gameDataFlagTestBit(0x79)) ++capacity;
+    if (gameDataFlagTestBit(0x7a)) ++capacity;
     if (capacity > 8)
-        return 8;
+        capacity = 8;
     return capacity;
 }
 
-// Increase an existing member's count to its limit, or add it to the first unlocked empty slot.
+// Add one item to the unlocked inventory slots without exceeding its stack limit.
 void FUN_003e0174(u32 id)
 {
-    PartyMemberList *party = gameGetPlayerData();
-    s32 capacity = partyMemberCapacity();
-    for (s32 i = 0; i < capacity; ++i) {
-        if (party->ids[i] == id) {
+    PadState *player = reinterpret_cast<PadState *>(gameGetPlayerData());
+    s32 capacity = inventoryGetCapacity();
+    for (s32 index = 0; index < capacity; ++index) {
+        if (padStateInventoryIds(player)[index] == id) {
             s32 limit = dataTableCountRecordStages(id);
-            s8 state = party->states[i];
-            if (state < limit)
-                party->states[i] = state + 1;
+            PlayerCountsView *view = reinterpret_cast<PlayerCountsView *>(player);
+            if (view->counts[index] < limit)
+                ++view->counts[index];
             return;
         }
     }
-    for (s32 i = 0; i < capacity; ++i) {
-        if (party->ids[i] == 0) {
-            party->ids[i] = (u16)id;
-            party->states[i] = 1;
+    for (s32 index = 0; index < capacity; ++index) {
+        if (padStateInventoryIds(player)[index] == 0) {
+            padStateInventoryIds(player)[index] = static_cast<u16>(id);
+            player->inventoryCounts[index] = 1;
             return;
         }
     }

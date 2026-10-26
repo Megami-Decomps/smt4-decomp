@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/GameFlagEntryGetBit.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

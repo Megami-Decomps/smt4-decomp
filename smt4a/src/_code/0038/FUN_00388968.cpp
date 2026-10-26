@@ -1,12 +1,11 @@
 /* NON_MATCHING: panel tail-flag addressing and sprite initialization registers differ. */
 #include "ui/MessageMain.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
 void FUN_0014e188(void *, s32, s32, void *, s32, f32);
-void uiSpriteSelectAnim(void *, s32);
 
 // Start the designated message-panel animation and wait for its pending flag to clear.
 u8 FUN_00388968(void)

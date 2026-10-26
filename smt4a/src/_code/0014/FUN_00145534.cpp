@@ -1,5 +1,6 @@
 /* NON_MATCHING: message advance, slot refresh and display toggle restored; only the saved registers holding module globals and input flags are exchanged. */
 #include "ui/MessageMain.h"
+#include "code/Code0015.h"
 
 namespace {
 struct MessageInputFlags {
@@ -14,7 +15,6 @@ extern MessageInputFlags DAT_005e2040;
 s32 FUN_001517b4(s32 key, s32 mode);
 s32 slotIsActive(s32 key);
 s32 querySlotHasHandle();
-u32 FUN_00152f44();
 void workCommandRefreshActiveSlots();
 void eventQueueAddUniqueIfValid(u32 event);
 

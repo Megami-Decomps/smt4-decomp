@@ -1,4 +1,5 @@
 #include "battle/btlReflect.h"
+#include "battle/BattleHelpers_Smt4a.h"
 
 extern "C" {
 

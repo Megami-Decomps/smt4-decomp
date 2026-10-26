@@ -18,7 +18,7 @@ extern int FUN_004a2404(...); /* 0x4a2404 */
 extern int FUN_004a24a8(...); /* 0x4a24a8 */
 extern int uiCursorEnterModeNine(...); /* 0x4a2ee0 */
 extern int demonScreenConfirmSaveRefresh(...); /* 0x4a2f8c */
-extern int FUN_004a3154(...); /* 0x4a3154 */
+extern int shopPurchaseConfirmSelected(...); /* 0x4a3154 */
 extern int uiAnimatedPageToggleStep(...); /* 0x4a35e4 */
 extern int screen4AFinish(...); /* 0x4a374c */
 extern int FUN_004a38bc(...); /* 0x4a38bc */
@@ -58,7 +58,7 @@ void Obj55c89c::resetHandlers()
   *(unsigned int *)(param_1 + 0xa88c) = 0;
   *(romwright_code **)(param_1 + 0xa890) = FUN_004a39bc;
   *(unsigned int *)(param_1 + 0xa894) = 0;
-  *(romwright_code **)(param_1 + 0xa898) = FUN_004a3154;
+  *(romwright_code **)(param_1 + 0xa898) = shopPurchaseConfirmSelected;
   *(unsigned int *)(param_1 + 0xa89c) = 0;
   *(romwright_code **)(param_1 + 0xa8a0) = itemMenuDispatchSelectedEntry;
   *(unsigned int *)(param_1 + 0xa8a4) = 0;

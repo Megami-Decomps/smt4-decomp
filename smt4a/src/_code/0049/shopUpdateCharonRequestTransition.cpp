@@ -1,5 +1,6 @@
 /* NON_MATCHING: phase constants hoist into extra registers and switch tails merge differently; -O2 candidate. */
 #include "common.h"
+#include "code/Code0035_Smt4a.h"
 
 struct CharonScript {
     u8 unk00[0x108];
@@ -25,7 +26,6 @@ s32 messageMainIsIdle();
 u32 tableGroupFindEntryIndex(void *, const char *);
 void scrScriptProcessStartEntry(CharonScript *, u32);
 void sysPlaySe(u32);
-void FUN_0035d03c(u32);
 s32 scrRunOpcodesStub(CharonScript *);
 u32 gameDataBlocksGetWord();
 u32 FUN_004d05b4();

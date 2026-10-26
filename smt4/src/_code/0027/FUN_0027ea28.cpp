@@ -1,6 +1,6 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "util/asdTextSetBaseColor.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_AsdText.h"
 
 namespace {
 struct AocEntryPanel {

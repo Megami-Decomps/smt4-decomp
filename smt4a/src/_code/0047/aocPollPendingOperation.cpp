@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match8_AocPoll.h"
 #include "classes/ResourceLookup.h"
 #include "nn/Result.h"
-#include "util/LegacyResourceIdRemap.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 extern AocMain *g_aocMain;

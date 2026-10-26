@@ -2660,7 +2660,7 @@
 0x00175f48 FUN_00175f48 between
 0x00175f54 FUN_00175f54 between
 0x00175f90 FUN_00175f90 between
-0x0017607c FUN_0017607c between
+0x0017607c entryListFindById between
 0x00176124 FUN_00176124 between
 0x0017628c FUN_0017628c between
 0x001762d4 FUN_001762d4 between
@@ -6115,7 +6115,8 @@
 0x0042d164 FUN_0042d164 between
 0x0042d1c0 FUN_0042d1c0 between
 0x0042d1cc FUN_0042d1cc between
-0x0042d200 FUN_0042d200 between
+0x0042d1f4 _ZN12KernelHandleC1Ev between
+0x0042d200 _ZN12KernelHandleD1Ev between
 0x0042d228 FUN_0042d228 between
 0x0042d250 FUN_0042d250 callers
 0x0042d2ec FUN_0042d2ec between
@@ -6151,7 +6152,7 @@
 0x0042fbe4 FUN_0042fbe4 between
 0x0042fc44 nn_cec_CTR_Base64Str2CecTitleId name
 0x0042fcc0 FUN_0042fcc0 between
-0x0042fd28 FUN_0042fd28 between
+0x0042fd28 cecdDispatchBackendCall between
 0x0042fd64 FUN_0042fd64 between
 0x0042fdcc FUN_0042fdcc between
 0x0042fe18 FUN_0042fe18 between
@@ -6172,7 +6173,7 @@
 0x004302b4 FUN_004302b4 between
 0x004302fc FUN_004302fc between
 0x00430358 FUN_00430358 between
-0x00430394 FUN_00430394 between
+0x00430394 cecdDispatchBackendCall2 between
 0x004303d0 resourceDispatch2 between
 0x0043040c FUN_0043040c between
 0x0043048c FUN_0043048c between

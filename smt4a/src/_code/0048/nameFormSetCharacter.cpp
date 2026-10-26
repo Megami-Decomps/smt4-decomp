@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the code in r2 on the no-lookup paths and moves the fallback result back with `mov r2,r4`; built keeps it in r4 throughout. */
 #include "shard/W6_W6Match7_FontResource.h"
+#include "shard/W6_W6Match2_HelpResources.h"
 
 /* The name entry form: two bytes (high, low) per character slot from 0xB0. */
 struct NameForm {
@@ -8,7 +9,6 @@ struct NameForm {
 };
 
 extern "C" {
-FontGlyphResourceOwner *FUN_0019dc44(u32 index);
 
 /* Stores a two-byte character code in a slot of the form, substituting the fallback when the font lacks it. */
 void nameFormSetCharacter(NameForm *form, s32 index, u32 code)

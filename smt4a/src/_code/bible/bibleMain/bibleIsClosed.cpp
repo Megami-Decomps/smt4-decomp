@@ -3,7 +3,6 @@
  * screen is still running, 1 once it is gone. */
 #include "common.h"
 #include "bible/bibleMain.h"
-#include "util/JobFind.h"
 
 extern "C" {
 

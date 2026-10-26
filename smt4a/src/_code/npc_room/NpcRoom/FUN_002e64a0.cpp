@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002e64a0` (_code @ 0x2e64a0, 0x6b4 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
-int FUN_0014afd0(...);
 int jobSetParent(...);
 int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
@@ -38,13 +38,7 @@ typedef struct {
 
 extern int FUN_00214324(...); /* 0x214324 */
 extern int FUN_002394a8(...); /* 0x2394a8 */
-extern unsigned char LAB_00284dbc; /* 0x284dbc */
-extern unsigned char LAB_002e6818; /* 0x2e6818 */
-extern unsigned char LAB_002e682c; /* 0x2e682c */
-extern unsigned char LAB_002e6840; /* 0x2e6840 */
-extern unsigned char LAB_002e6858; /* 0x2e6858 */
-extern unsigned char LAB_002e6b54; /* 0x2e6b54 */
-extern unsigned char LAB_002e6b68; /* 0x2e6b68 */
+extern unsigned char FUN_00284dbc; /* 0x284dbc */
 extern unsigned int *g_npcRoom; /* 0x588124 */
 
 /* Supplied declaration required: FUN_0014afd0. */
@@ -102,12 +96,11 @@ void FUN_002e64a0(unsigned int param_1)
   }
   puVar8 = g_npcRoom;
   sysMemClear();
-  puVar9 = &LAB_002e6818;
-  asdProcessCreateSimple(&LAB_002e6818,4,0,0,FUN_00214324,0,0);
+  asdProcessCreateSimple("NpcRoom Calc",4,0,0,FUN_00214324,0,0);
   *puVar8 = (unsigned int)puVar9;
-  taskCreateDraw(&LAB_002e682c,0x7e,0,0,FUN_002394a8,0,0,puVar9);
-  taskCreateDraw(&LAB_002e6840,0xda,0,0,FUN_002394a8,0,0,*puVar8);
-  taskCreateDraw(&LAB_002e6858,0xea,0,0,&LAB_00284dbc,0,0,*puVar8);
+  taskCreateDraw("NpcRoom UDrawLeft",0x7e,0,0,FUN_002394a8,0,0,puVar9);
+  taskCreateDraw("NpcRoom UDrawRight",0xda,0,0,FUN_002394a8,0,0,*puVar8);
+  taskCreateDraw("NpcRoom DDraw",0xea,0,0,&FUN_00284dbc,0,0,*puVar8);
   loadSlotEnsureLoaded(0x1a);
   puVar21 = (unsigned short *)(puVar8 + 0x40);
   *puVar21 = (unsigned short)param_1;
@@ -237,10 +230,8 @@ LAB_002e6874:
     }
     temp_v9 = temp_v9 + 1;
   } while (temp_v9 < 8);
-  puVar9 = &LAB_002e6b54;
   asdLoadFileSyncDefault();
   puVar8[0x12] = (unsigned int)puVar9;
-  puVar9 = &LAB_002e6b68;
   asdLoadFileSyncDefault();
   puVar8[0x13] = (unsigned int)puVar9;
   FUN_00275bc8();

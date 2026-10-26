@@ -1,7 +1,7 @@
 /* NON_MATCHING: command-menu cursor to (action, argument) mapping; retail loads the blocked-command masks with ldr/ldm pairs instead of ldrd, keeps a 36-byte frame (9 words) and the work pointer in r6, and lowers the switch with a different jump table order */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 
 struct BtlMenuCursor {
     /* 0x00 */ u8 unk00[4];

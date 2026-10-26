@@ -12,7 +12,7 @@ int FUN_003f06b4(...);
 int FUN_003f0e20(...);
 int FUN_004d7a60(...);
 int FUN_004fd3f0(...);
-int FUN_004fd968(...);
+int btlReflectQueueMemberAction(...);
 int FUN_004feb50(...);
 
 typedef struct fn_004fde5c_arg2 fn_004fde5c_arg2;
@@ -57,7 +57,7 @@ extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004d7a60. */
 /* Supplied declaration required: FUN_004fd3f0. */
-/* Supplied declaration required: FUN_004fd968. */
+/* Supplied declaration required: btlReflectQueueMemberAction. */
 /* Supplied declaration required: FUN_004feb50. */
 
 
@@ -199,7 +199,7 @@ FUN_004fde5c(int param_1,unsigned int param_2,fn_004fde5c_arg2 *param_3,int para
     *(fn_004fde5c_arg2 **)(temp_v7 + 0x14) = param_3;
     *(unsigned int *)(temp_v7 + 0x4c) = 0;
     if (param_4 != 9) {
-      FUN_004fd968();
+      btlReflectQueueMemberAction();
     }
     else {
       FUN_004feb50(param_3->field_0x64 + param_1,param_2,param_3,9);

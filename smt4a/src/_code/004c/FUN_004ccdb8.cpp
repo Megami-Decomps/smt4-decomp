@@ -1,6 +1,6 @@
 /* NON_MATCHING: the polynomial now matches (level * 0x6DB * 2 + level * 2); retail outlines the table-lookup arm after the return and numbers the saved registers differently. */
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 struct UnitGrowthCostRecord {
     u8 prefix[6];

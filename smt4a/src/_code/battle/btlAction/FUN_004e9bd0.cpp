@@ -1,7 +1,7 @@
 /* NON_MATCHING: register assignment and the 64-bit target mask tests differ from retail (227 vs 231 rows); the skill usability checks are the same as smt4 FUN_002277d4's. */
 #include "common.h"
 #include "bible/bibleAnalyze.h"
-#include "util/GameProgressIsAdvanced.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

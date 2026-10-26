@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0029_Smt4.h"
 
 namespace { struct Record { u8 padding[7]; u8 flags; }; }
 

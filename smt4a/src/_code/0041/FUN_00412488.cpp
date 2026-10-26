@@ -2,10 +2,10 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/UnitStatInitialization.h"
-#include "util/CalleeContracts.h"
-#include "shard/lcgRandomRange.h"
+#include "code/Code0019.h"
+#include "util/Random.h"
 #include "event/2dEvent/EventEffect.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 extern "C" {
 InitializedUnitStatsA *FUN_003e4d68(u32 slot);
 InitializedUnitStatsA *saveSlotFindSelected(void);

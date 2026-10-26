@@ -1,5 +1,5 @@
 #include "camp/ScriptPanelResources.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);

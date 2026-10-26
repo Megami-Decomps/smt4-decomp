@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleMovementEffects.h"
 #include "gfx/RangeAnimationSelection.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 namespace {
 struct BattleEffectNameRecord { u32 id; char name[1]; };

@@ -2,7 +2,7 @@
 #include "common.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 struct PartnerTopicDialog {
     u8 unk00[0x28];

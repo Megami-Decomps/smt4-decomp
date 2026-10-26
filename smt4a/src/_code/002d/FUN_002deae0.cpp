@@ -2,7 +2,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 s32 FUN_00162ea4(void);

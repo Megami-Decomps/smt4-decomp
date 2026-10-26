@@ -1,5 +1,6 @@
 #include "shard/PlayScene.h"
 #include <stddef.h>
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 const char *FUN_002e38c0(u8 message, s32 alternate);

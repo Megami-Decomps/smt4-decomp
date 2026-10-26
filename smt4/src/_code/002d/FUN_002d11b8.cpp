@@ -1,6 +1,25 @@
-/* NON_MATCHING: frame selection (retail `adds rX, rY, #0` + ldrne, built `cmp` + moveq), the default point stores' pool order and the packed-color reload (retail one vldmia {s1-s4} after the product stores, built vldr + vldmia) differ; the VFP factor copy, product multiply and REV byte getters match. */
+/* NON_MATCHING: retail forms &color (r0) before the first product multiply and packs through `vldmia r0, {s1-s4}`; the build adds the address after the product stores and orders the float-to-byte conversions and REV moves differently (helpers, VFP copy, multiply and frame selection match). */
 #include "shard/W6_W6Match8_ScreenEffect.h"
 #include "gfx/EffectColorMath.h"
+
+static void effectColorAssign(EffectColor *destination, const EffectColor *source)
+{
+    *destination = *source;
+}
+
+static void effectColorScale(const EffectColor *factor, EffectColor *color)
+{
+    color->red *= factor->red;
+    color->green *= factor->green;
+    color->blue *= factor->blue;
+    color->alpha *= factor->alpha;
+}
+
+static u32 effectColorPackFrom(EffectColor color)
+{
+    return ((u32)(color.red * 255.0f) << 24) | (((u32)(color.green * 255.0f) & 255) << 16) |
+           (((u32)(color.blue * 255.0f) & 255) << 8) | ((u32)(color.alpha * 255.0f) & 255);
+}
 
 extern "C" {
 extern EffectColorProductState DAT_004ea81c;
@@ -34,10 +53,10 @@ void FUN_002d11b8(ScreenEffectJob *job)
     }
     u32 color = FUN_00269694(resource->colorCurve, &resource->weight, frame, duration);
     renderCtxSetPackedColor(job->color);
-    effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
+    effectColorAssign(&DAT_004ea81c.factor, &DAT_004ea81c.color);
     renderCtxSetPackedColor(color);
-    effectColorMultiply(&DAT_004ea81c.color, &DAT_004ea81c.color, &DAT_004ea81c.factor);
-    u32 packed = effectColorPack(DAT_004ea81c.color);
+    effectColorScale(&DAT_004ea81c.factor, &DAT_004ea81c.color);
+    u32 packed = effectColorPackFrom(DAT_004ea81c.color);
     output->color.r = __rev(packed) >> 24;
     output->color.g = __rev(packed) >> 16;
     output->color.b = __rev(packed) >> 8;

@@ -2,10 +2,10 @@
 #include "ui/HowToScreen.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
+#include "util/MathFunctions.h"
 extern "C" {
 s32 FUN_001692ac(u32 first, u32 second);
-s32 vec2GetXInt(const UiSpriteState *sprite);
 s32 vec2GetYInt(const UiSpriteState *sprite);
 void FUN_0049d244(HowToScreenWork *screen, s32 x, s32 y, f32 progress);
 void FUN_0049e3f8(HowToScreenWork *screen);

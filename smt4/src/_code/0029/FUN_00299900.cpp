@@ -1,7 +1,7 @@
 /* NON_MATCHING: the zero-based 24-entry jump table now matches (labels 0..8 are explicit); the u16 list loads still fold the low constant into the address add differently (retail keeps it in the LDRH offset). */
 #include "ui/GridNavigation.h"
 #include <stddef.h>
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 /* The camp menu's selectable lists: one grid per list, and the table of entry ids each grid indexes. */
 struct CampLists {

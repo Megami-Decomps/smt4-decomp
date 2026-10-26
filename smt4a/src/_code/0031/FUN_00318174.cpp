@@ -1,5 +1,6 @@
 /* NON_MATCHING: starts a bust-up cut transition to a new entry (picks the side and index from the id, snapshots the running jobs, re-evaluates the new nodes and sets the ease function and offsets); written from the decompilation, the repeated node-refresh loops are merged into a helper and the float constants are not compared with retail */
 #include "common.h"
+#include "event/bustupEvent/BustupSlotControl_Smt4a.h"
 
 #define CUT_ID_SPECIAL 200
 #define CUT_ID_SPLIT 100
@@ -82,7 +83,6 @@ void animationEvaluateCallback(u32 object);
 void faderSetValue(u32 object);
 s32 jobIsValid(u32 job);
 void jobSavePositionSnapshot(u32 job);
-void bustupCutAnimAssignSlot(u32 job, s32 index);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Refreshes every sub-node of a node head, last to first. */

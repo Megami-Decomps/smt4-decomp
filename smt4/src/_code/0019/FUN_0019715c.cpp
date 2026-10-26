@@ -34,8 +34,6 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_2_stack;
 
-extern unsigned char LAB_001976e8; /* 0x1976e8 */
-extern unsigned char LAB_001976f0; /* 0x1976f0 */
 extern int g_camp; /* 0x43da90 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -163,14 +161,14 @@ void FUN_0019715c(int param_1,int param_2)
           }
           temp_v5 = asdTMTexTableEntryAt(0x1d,0x473);
           temp_v11 = FUN_0028fb40(temp_v10);
-          textFormatBuffer(temp_v13,&LAB_001976e8,temp_v11);
+          textFormatBuffer(temp_v13,"%d",temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
                        temp_v13);
           temp_v5 = asdTMTexTableEntryAt(0x1d,0x474);
           FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,1,0x6f,
-                       &LAB_001976f0);
+                       "*");
           temp_v5 = asdTMTexTableEntryAt(0x1d,0x46f);
           itemDrawCategoryBadge((int)(short)temp_v0,
                        (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
@@ -204,14 +202,14 @@ void FUN_0019715c(int param_1,int param_2)
           }
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x47a);
           temp_v11 = FUN_0028fb40(temp_v10);
-          textFormatBuffer(temp_v13,&LAB_001976e8,temp_v11);
+          textFormatBuffer(temp_v13,"%d",temp_v11);
           FUN_002bdf94(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
                        temp_v13);
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x47b);
           FUN_002bdf94(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                        (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,1,0x83,
-                       &LAB_001976f0);
+                       "*");
           FUN_002bf288(2,0x1d,0x475,*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,
                        0x83);
           temp_v8 = asdTMTexTableEntryAt(0x1d,0x476);

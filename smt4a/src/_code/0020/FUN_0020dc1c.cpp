@@ -4,6 +4,8 @@
 #include "gamedata/FlagValueIsPositive.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "code/Code002c.h"
+#include "shard/Shard004A.h"
 
 extern "C" {
 
@@ -30,13 +32,11 @@ void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(int, int, int, int);
 int resourceRunOperationIfUnblocked(...);
 int statusPanelSetOpen(...);
-int FUN_002c8538(int);
 int FUN_002c85b0(int);
 int sysMemClear(int, int);
 int flaggedEntrySetValueA(int, unsigned int);
 int FUN_0031f718(...);
 int FUN_003343c0(...);
-int FUN_003343f0(...);
 int FUN_0033449c(...);
 int FUN_003450d4(...);
 int FUN_00372100(...);

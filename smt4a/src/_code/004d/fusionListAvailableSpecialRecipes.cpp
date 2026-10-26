@@ -1,6 +1,7 @@
 /* NON_MATCHING: save-entry/count stack slots and the ingredient-presence zero scratch register differ. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
-#include "util/CalleeContracts.h"
+#include "util/BitsAndBytes_VariantB.h"
+#include "code/Code002a_Smt4a.h"
 
 struct FusionRecipeEntry {
     u16 id;
@@ -29,7 +30,6 @@ s32 gameFlagIsSet(u32 flag);
 u32 gameDataCopySaveEntry(u32 id, void *out);
 s32 gameSlotTableFindFree();
 FusionSlotRecord *gameGetSlotRecord(s32 slot);
-s32 FUN_002a4b28(u16 id);
 
 u32 fusionListAvailableSpecialRecipes(void *context, u16 *recipes)
 {

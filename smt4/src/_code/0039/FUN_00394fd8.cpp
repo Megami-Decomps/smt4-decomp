@@ -1,7 +1,7 @@
 /* NON_MATCHING: the final 100-bit clear loop now uses retail's 1-based flag id (pool constant 0x79f); armcc strength-reduces the down counter into an up counter (cmp #101) where retail keeps `subs`/bne */
 #include "common.h"
 #include <stddef.h>
-#include "util/RecordPackedValue.h"
+#include "gamedata/GameDataAccess.h"
 
 /* Counts of carried items: seven categories of 0x78 slots (the last is only 0x32 long), starting at item id 0x3d. */
 struct ItemBoxCounts {

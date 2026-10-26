@@ -1,7 +1,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "util/ObjectBufferFree.h"
+#include "util/MemoryHelpers.h"
 
 extern "C" {
 extern const char DAT_00410334[];

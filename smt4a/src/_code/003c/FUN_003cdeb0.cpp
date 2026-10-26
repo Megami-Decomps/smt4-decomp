@@ -2,10 +2,10 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "util/CalleeContracts.h"
+#include "util/BitsAndBytes_VariantB.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 
 /* Position record of an icon in the icon table (only the screen position). */
 struct SlotIconPosition {

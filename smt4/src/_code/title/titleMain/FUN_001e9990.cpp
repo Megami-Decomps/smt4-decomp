@@ -2,6 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "script/scrScriptProcess.h"
+#include "shard/W6_W6Match2_EntrySequence.h"
+#include "code/Code0019_Smt4.h"
 
 extern "C" {
 
@@ -9,7 +11,6 @@ int FUN_0026faa4(void);
 void FUN_0029c2cc(...);
 int sndObjectForwardField8(...);
 
-int FUN_0019213c(void);
 int modelEvaluateFirstScalarChannel(...);
 int aocActivateFileGroupFlags(...);
 int FUN_0026f824(...);
@@ -26,7 +27,6 @@ int asdModelSlotRelease(...);
 int FUN_002b827c(...);
 int ifTouchRegionRemove(void);
 int jobStop(...);
-int asdSequenceRequest(...);
 int titleConfigCreate(void);
 int FUN_0030a9d8(void);
 

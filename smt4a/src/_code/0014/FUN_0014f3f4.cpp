@@ -1,7 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014f3f4` (_code @ 0x14f3f4, 0x11a8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 
@@ -43,7 +43,6 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } void_stack;
 
-extern unsigned char LAB_0014fb38; /* 0x14fb38 */
 extern int DAT_0057f58c; /* 0x57f58c */
 extern int DAT_0057f590; /* 0x57f590 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
@@ -218,7 +217,7 @@ char FUN_0014f3f4(void)
       temp_v11 = asdTMTexTableEntryAt(4,0xabec);
       temp_v20 = *(int *)("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v6 + 8)
       ;
-      textFormatBuffer(&temp_v22,&LAB_0014fb38,
+      textFormatBuffer(&temp_v22,"%s\x81|%s\x81|%s",
                    *(unsigned int *)
                     ("\xe4f8U\xe516U\xe507U\xe525UഗV\xe534U\xe551UഗV\xe4e1Uͼ" + temp_v21 * 4),
                    *(unsigned int *)

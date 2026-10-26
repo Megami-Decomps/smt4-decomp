@@ -23,9 +23,6 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_4_stack;
 
-extern unsigned char LAB_0040b674; /* 0x40b674 */
-extern unsigned char LAB_0040b690; /* 0x40b690 */
-extern unsigned char LAB_0040b6c8; /* 0x40b6c8 */
 
 /* Supplied declaration required: textFormatBuffer. */
 extern int gameGetPlayerData(void);
@@ -60,7 +57,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
           return;
         }
         temp_v0 = FUN_0040b11c(param_1,2,pfVar1->field_0x40,pfVar1->field_0x42,0);
-        textFormatBuffer(temp_v3,&LAB_0040b6c8,pfVar1->field_0x40,pfVar1->field_0x42,temp_v0);
+        textFormatBuffer(temp_v3,"player/pl%02d_%03dlg%d.bam",pfVar1->field_0x40,pfVar1->field_0x42,temp_v0);
       }
     }
     else {
@@ -68,7 +65,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
         return;
       }
       temp_v0 = FUN_0040b11c(param_1,1,pfVar1->field_0x40,pfVar1->field_0x42,0);
-      textFormatBuffer(temp_v3,&LAB_0040b690,pfVar1->field_0x40,pfVar1->field_0x42,temp_v0);
+      textFormatBuffer(temp_v3,"player/pl%02d_%03dbd%d.bam",pfVar1->field_0x40,pfVar1->field_0x42,temp_v0);
     }
   }
   else {
@@ -76,7 +73,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
       return;
     }
     temp_v0 = FUN_0040b11c(param_1,0,pfVar1->field_0x40,pfVar1->field_0x42,0);
-    textFormatBuffer(temp_v3,&LAB_0040b674,pfVar1->field_0x40,pfVar1->field_0x42,temp_v0);
+    textFormatBuffer(temp_v3,"player/pl%02d_%03dhd%d.bam",pfVar1->field_0x40,pfVar1->field_0x42,temp_v0);
   }
   FUN_003e573c(param_1,param_2,temp_v3,param_4);
   if (param_2 != 0) {
@@ -86,14 +83,14 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
       dataTable08Sub2GetRecord();
       temp_v0 = FUN_0040b11c(param_1,0,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
                            param_3);
-      textFormatBuffer(temp_v3,&LAB_0040b674,*(unsigned short *)(temp_v2 + 0x40),
+      textFormatBuffer(temp_v3,"player/pl%02d_%03dhd%d.bam",*(unsigned short *)(temp_v2 + 0x40),
                    *(unsigned short *)(temp_v2 + 0x42),temp_v0);
       FUN_003e573c(param_1,0,temp_v3,param_4);
       temp_v2 = (unsigned int)*(unsigned short *)(temp_v1 + 10);
       dataTable08Sub2GetRecord();
       temp_v0 = FUN_0040b11c(param_1,2,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
                            param_3);
-      textFormatBuffer(temp_v3,&LAB_0040b6c8,*(unsigned short *)(temp_v2 + 0x40),
+      textFormatBuffer(temp_v3,"player/pl%02d_%03dlg%d.bam",*(unsigned short *)(temp_v2 + 0x40),
                    *(unsigned short *)(temp_v2 + 0x42),temp_v0);
       FUN_003e573c(param_1,2,temp_v3,param_4);
       return;
@@ -105,7 +102,7 @@ void FUN_0040b27c(unsigned int param_1,int param_2,fn_0040b27c_arg2 *param_3,uns
     dataTable08Sub2GetRecord();
     temp_v0 = FUN_0040b11c(param_1,1,*(unsigned short *)(temp_v2 + 0x40),*(unsigned short *)(temp_v2 + 0x42),
                          param_3);
-    textFormatBuffer(temp_v3,&LAB_0040b690,*(unsigned short *)(temp_v2 + 0x40),
+    textFormatBuffer(temp_v3,"player/pl%02d_%03dbd%d.bam",*(unsigned short *)(temp_v2 + 0x40),
                  *(unsigned short *)(temp_v2 + 0x42),temp_v0);
     FUN_003e573c(param_1,1,temp_v3,param_4);
   }

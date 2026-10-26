@@ -5,7 +5,7 @@
 #include "addon/aocMain.h"
 #include "gamedata/DevilRecord.h"
 #include "gamedata/SupportUnitRecord.h"
-#include "util/CalleeContracts.h"
+#include "code/Code002b.h"
 
 extern "C" {
 extern AocSystem *g_aocSystem;

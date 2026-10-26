@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable switch rewrite (171 vs 168 rows); register numbering and case-body ordering differ from retail */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 struct MenuList;
 

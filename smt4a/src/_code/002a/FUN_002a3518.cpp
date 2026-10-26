@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail keeps the constant 6 in a callee-saved register across the calls (the built code loads it just before the last call) */
 #include "ui/MessageMain.h"
-#include "util/CalleeContracts.h"
+#include "event/bustupEvent/BustupSlotControl.h"
 #include "script/ScriptArgs.h"
 extern "C" MessageGlobalsA g_messageMain;
 

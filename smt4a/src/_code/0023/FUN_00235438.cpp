@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00235438` (_code @ 0x235438, 0x6cc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -45,7 +46,6 @@ extern int gameGetPlayerData(void);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_001ada74. */
-extern int FUN_001bd100(unsigned int);
 extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_002466a8. */
 /* Supplied declaration required: FUN_00295024. */

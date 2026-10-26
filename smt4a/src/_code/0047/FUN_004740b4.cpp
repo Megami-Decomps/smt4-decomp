@@ -1,7 +1,7 @@
 /* NON_MATCHING: The compiler merges repeated resource guards and omits retail accessor hints. */
 #include "gamedata/TableEntryCache.h"
 #include "gamedata/DataTable.h"
-#include "util/dataTableFileGetTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 extern "C" {
 void* asdOperatorNewE(u32);
 EntryState* __aeabi_vec_ctor_nocookie_nodtor(EntryState*, void (*)(EntryState*), u32, u32);

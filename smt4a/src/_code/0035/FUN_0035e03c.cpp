@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mapnavi/naviMain.h"
 
-#include "util/FUN_002e5c2c.h"
+#include "code/Code002e.h"
 #include "gamedata/PlayerDataBlock.h"
 /* The player's record (only the fields used here). */
 struct EffectPlayer {

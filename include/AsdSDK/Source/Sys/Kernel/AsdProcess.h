@@ -39,7 +39,7 @@ typedef struct AsdProcTimer {
 } AsdProcTimer;
 
 typedef struct AsdProcess {
-    /* 0x00 */ char name[ASD_PROC_NAME_LEN]; /* last byte is always 0 */
+    /* 0x00 */ s8 name[ASD_PROC_NAME_LEN];   /* last byte is always 0 */
     /* 0x18 */ s32 nameSum;                  /* sum of the name's characters */
     /* 0x1c */ u32 flags;
     /* 0x20 */ s32 group;

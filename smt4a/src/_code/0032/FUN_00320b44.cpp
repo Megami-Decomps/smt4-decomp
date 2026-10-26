@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/S1Mover.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 
 extern "C" {
 void idSetFindSubjectIndex(BtlMainStateA *, BattleRosterRecordA *);

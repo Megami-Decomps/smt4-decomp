@@ -1,6 +1,6 @@
 #include "gamedata/GroupedFileTables.h"
 #include "gamedata/GameFlags.h"
-#include "shard/aocActivateFileGroupFlags.h"
+#include "addon/AocSystem_GroupedFileTables.h"
 #include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {

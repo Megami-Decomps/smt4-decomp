@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
+#include "code/Code0025_Smt4.h"
 
 struct MapSoundOwner {
     u8 unk00[0x20];

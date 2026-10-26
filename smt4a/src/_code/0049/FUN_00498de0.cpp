@@ -37,7 +37,7 @@ struct PlayerEquipmentBlock {
 extern "C" {
 void *gameGetPlayerData(void);
 s32 flaggedValueHolderGetTotal(void *holder);
-u32 FUN_004d02e0(void *holder);
+u32 uiStateHasAnyActiveFlag(void *holder);
 void FUN_002f0384(s32 mode);
 void FUN_0038b5fc(s32 kind, u16 id);
 void __aeabi_memcpy4(void *destination, const void *source, s32 bytes);
@@ -51,7 +51,7 @@ void FUN_00498de0(EquipMenu *menu)
     EquipListEntry *list = (EquipListEntry *)menu->lists[menu->tab];
     s32 cursor = flaggedValueHolderGetTotal(menu->holders[menu->tab]);
     u32 id = list[cursor].id;
-    u32 pending = FUN_004d02e0(menu->holders[menu->tab]);
+    u32 pending = uiStateHasAnyActiveFlag(menu->holders[menu->tab]);
     if (!(pending == 0 && menu->lastSelectedId == id)) {
         s32 kind = aocEntryGetKindForward(id);
         if (kind == 4 || aocEntryGetKindForward(id) == 5 || aocEntryGetKindForward(id) == 6) {

@@ -2,7 +2,7 @@
 #include "battle/btlEvent.h"
 #include "battle/BattleEventAssets.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "util/FUN_0022a2c4.h"
+#include "code/Code0022.h"
 
 extern "C" {
 extern void *g_aocSystem;

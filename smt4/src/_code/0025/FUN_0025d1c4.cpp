@@ -49,17 +49,6 @@ typedef struct {
     unsigned int spD0; /* 0xd0: local_d0 */
 } param_1_stack;
 
-extern unsigned char LAB_0025d64c; /* 0x25d64c */
-extern unsigned char LAB_0025d650; /* 0x25d650 */
-extern unsigned char LAB_0025d658; /* 0x25d658 */
-extern unsigned char LAB_0025dca0; /* 0x25dca0 */
-extern unsigned char LAB_0025dca4; /* 0x25dca4 */
-extern unsigned char LAB_0025e0e0; /* 0x25e0e0 */
-extern unsigned char LAB_0025e4d8; /* 0x25e4d8 */
-extern unsigned char LAB_0025e4dc; /* 0x25e4dc */
-extern unsigned char LAB_0025e4e4; /* 0x25e4e4 */
-extern unsigned char LAB_0025e9fc; /* 0x25e9fc */
-extern unsigned char LAB_0025ea00; /* 0x25ea00 */
 extern unsigned char LAB_0025ee5c; /* 0x25ee5c */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -204,7 +193,7 @@ void FUN_0025d1c4(int param_1)
                 if ((*(unsigned int *)(temp_v10 + 0x44a8) & 0x1000) != 0) {
                   temp_v21 = 1;
                   temp_v13 = dataTable16Sub2GetRecordS64((temp_v8 + temp_v16) & 0xff);
-                  textFormatBuffer(temp_v19,&LAB_0025dca4,temp_v13);
+                  textFormatBuffer(temp_v19,"%s",temp_v13);
                 }
                 else {
                   temp_v10 = 0;
@@ -216,7 +205,7 @@ void FUN_0025d1c4(int param_1)
                       if (temp_v14 == temp_v10) {
                         temp_v21 = 1;
                         temp_v13 = dataTable16Sub2GetRecordS64(temp_v15 & 0xff);
-                        textFormatBuffer(temp_v19,&LAB_0025dca4,temp_v13);
+                        textFormatBuffer(temp_v19,"%s",temp_v13);
                         break;
                       }
                       temp_v10 = temp_v10 + 1;
@@ -251,7 +240,7 @@ void FUN_0025d1c4(int param_1)
               temp_v5 = (int)*(short *)(param_1 + (temp_v8 + temp_v16) * 2 + 0x3480);
               temp_v10 = temp_v5;
               FUN_002be650(temp_v5,0);
-              textFormatBuffer(temp_v19,&LAB_0025dca4,temp_v5);
+              textFormatBuffer(temp_v19,"%s",temp_v5);
               temp_v13 = FUN_0028fb40(temp_v10);
               temp_v21 = 0;
               temp_v5 = temp_v10;
@@ -278,11 +267,11 @@ void FUN_0025d1c4(int param_1)
               temp_v10 = asdTMTexTableEntryAt(0x15,0x8a);
               FUN_002bdf94(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                            (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,1,
-                           0x74,&LAB_0025e0e0);
+                           0x74,"*");
               temp_v10 = asdTMTexTableEntryAt(0x15,0x8a);
               FUN_002bdf94(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                            (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,4,
-                           0x49,&LAB_0025dca0,temp_v13);
+                           0x49,"%d",temp_v13);
             }
           }
           else {
@@ -309,7 +298,7 @@ void FUN_0025d1c4(int param_1)
                          (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v14 + 10) + temp_v7,0x49,0,
                          0);
             temp_v13 = aocIndexValueOrDefault(temp_v10);
-            textFormatBuffer(temp_v19,&LAB_0025dca4,temp_v13);
+            textFormatBuffer(temp_v19,"%s",temp_v13);
             temp_v10 = asdTMTexTableEntryAt(0x15,0x8b);
             VectorSignedToFloat((int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -319,7 +308,7 @@ void FUN_0025d1c4(int param_1)
             temp_v10 = asdTMTexTableEntryAt(0x15,0x86);
             FUN_002bdf94(2,(int)*(short *)(temp_v9 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v6,
                          (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,4,
-                         0x49,&LAB_0025dca0,0);
+                         0x49,"%d",0);
           }
         }
         else {
@@ -340,14 +329,14 @@ void FUN_0025d1c4(int param_1)
               if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
                 temp_v5 = (int)(short)temp_v14;
                 temp_v13 = aocIndexValueOrDefault();
-                textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
+                textFormatBuffer(temp_v19,"%s",temp_v13);
                 temp_v13 = FUN_0029a924(temp_v5);
               }
               else {
                 temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + temp_v14 * 2 +
                                        0x341a);
                 temp_v13 = aocIndexValueOrDefault();
-                textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
+                textFormatBuffer(temp_v19,"%s",temp_v13);
                 temp_v13 = FUN_0029a924(temp_v5);
               }
               temp_v10 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 2 + 0x38f4);
@@ -359,10 +348,10 @@ void FUN_0025d1c4(int param_1)
               temp_v15 = (unsigned int)*(unsigned short *)(temp_v10 + 0x46);
               devilGetRecord();
               if (*(char *)(temp_v15 + 10) != '\x01') {
-                textFormatBuffer(temp_v19,&LAB_0025d64c,&LAB_0025d650);
+                textFormatBuffer(temp_v19,"%s","Attack");
               }
               else {
-                textFormatBuffer(temp_v19,&LAB_0025d64c,&LAB_0025d658);
+                textFormatBuffer(temp_v19,"%s","Shoot");
               }
               temp_v13 = 0;
               temp_v21 = 1;
@@ -380,7 +369,7 @@ void FUN_0025d1c4(int param_1)
             temp_v25 = 1;
             if (temp_v10 != 0) {
               if ((temp_v10 == 1) && (temp_v5 = FUN_0025cc54(), temp_v5 != 0)) {
-                textFormatBuffer(temp_v19,&LAB_0025d64c,&LAB_0025d658);
+                textFormatBuffer(temp_v19,"%s","Shoot");
                 temp_v1 = 1;
                 temp_v13 = 0;
                 temp_v21 = 1;
@@ -398,21 +387,21 @@ void FUN_0025d1c4(int param_1)
                 if ((*(unsigned int *)(temp_v14 + 0x44a8) & 0x40) != 0) {
                   temp_v5 = (int)(short)((short)(temp_v10 + temp_v5) + 1);
                   temp_v13 = aocIndexValueOrDefault();
-                  textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
+                  textFormatBuffer(temp_v19,"%s",temp_v13);
                   temp_v13 = FUN_0029a9d4(temp_v5,1);
                 }
                 else {
                   temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 +
                                           (temp_v10 + temp_v5) * 2 + 0x341c);
                   temp_v13 = aocIndexValueOrDefault();
-                  textFormatBuffer(temp_v19,&LAB_0025d64c,temp_v13);
+                  textFormatBuffer(temp_v19,"%s",temp_v13);
                   temp_v13 = FUN_0029a9d4(temp_v5,1);
                 }
                 temp_v21 = FUN_0025cc04(0xffffffff,temp_v5);
               }
             }
             else {
-              textFormatBuffer(temp_v19,&LAB_0025d64c,&LAB_0025d650);
+              textFormatBuffer(temp_v19,"%s","Attack");
               temp_v1 = 1;
               temp_v13 = 0;
               temp_v21 = 1;
@@ -454,7 +443,7 @@ void FUN_0025d1c4(int param_1)
           temp_v10 = asdTMTexTableEntryAt(0x15,0x86);
           FUN_002bdf94(2,(int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v9 + 8) + temp_v6,
                        (int)*(short *)(temp_v9 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v7,1,4,0x49,
-                       &LAB_0025dca0,temp_v13);
+                       "%d",temp_v13);
         }
         efctSetSpeed();
       }
@@ -538,7 +527,7 @@ void FUN_0025d1c4(int param_1)
                 if (temp_v18 == temp_v15) {
                   temp_v21 = 1;
                   temp_v13 = dataTable16Sub2GetRecordS64(temp_v17 & 0xff);
-                  textFormatBuffer(temp_v19,&LAB_0025ea00,temp_v13);
+                  textFormatBuffer(temp_v19,"%s",temp_v13);
                   break;
                 }
                 temp_v18 = temp_v18 + 1;
@@ -549,7 +538,7 @@ void FUN_0025d1c4(int param_1)
           else {
             temp_v21 = 1;
             temp_v13 = dataTable16Sub2GetRecordS64(temp_v15 & 0xff);
-            textFormatBuffer(temp_v19,&LAB_0025ea00,temp_v13);
+            textFormatBuffer(temp_v19,"%s",temp_v13);
           }
           temp_v4 = asdTMTexTableEntryAt(0x15,0xa8);
           if (temp_v23 != 0) {
@@ -586,7 +575,7 @@ void FUN_0025d1c4(int param_1)
         FUN_0028cfd8();
         temp_v5 = temp_v4;
         FUN_002be650(temp_v4,0);
-        textFormatBuffer(temp_v19,&LAB_0025ea00,temp_v4);
+        textFormatBuffer(temp_v19,"%s",temp_v4);
         temp_v13 = FUN_0028fb40(temp_v5);
         FUN_002bf288(2,0x15,0x9d,*(short *)(temp_v3 + 8) + temp_v6,*(short *)(temp_v3 + 10) + temp_v7,0x6f);
         temp_v4 = asdTMTexTableEntryAt(0x15,0xa8);
@@ -622,7 +611,7 @@ void FUN_0025d1c4(int param_1)
         temp_v4 = asdTMTexTableEntryAt(0x15,0xa7);
         FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
-                     &LAB_0025e9fc,temp_v13);
+                     "%d",temp_v13);
       }
     }
     else {
@@ -638,7 +627,7 @@ void FUN_0025d1c4(int param_1)
         temp_v1 = FUN_0028d24c();
       }
       temp_v13 = aocIndexValueOrDefault((int)temp_v1);
-      textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v13);
+      textFormatBuffer(temp_v19,"%s",temp_v13);
       temp_v4 = asdTMTexTableEntryAt(0x15,0xa8);
       if (temp_v23 != 0) {
         VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,
@@ -660,7 +649,7 @@ void FUN_0025d1c4(int param_1)
       temp_v4 = asdTMTexTableEntryAt(0x15,0xa3);
       FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
-                   &LAB_0025e9fc,0);
+                   "%d",0);
     }
   }
   else {
@@ -676,13 +665,13 @@ void FUN_0025d1c4(int param_1)
         if ((*(unsigned int *)(temp_v4 + 0x44a8) & 0x40) != 0) {
           temp_v5 = (int)(short)temp_v15;
           temp_v12 = aocIndexValueOrDefault();
-          textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
+          textFormatBuffer(temp_v19,"%s",temp_v12);
           temp_v12 = FUN_0029a924(temp_v5);
         }
         else {
           temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + temp_v15 * 2 + 0x341a);
           temp_v12 = aocIndexValueOrDefault();
-          textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
+          textFormatBuffer(temp_v19,"%s",temp_v12);
           temp_v12 = FUN_0029a924(temp_v5);
         }
         temp_v4 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 2 + 0x38f4);
@@ -694,10 +683,10 @@ void FUN_0025d1c4(int param_1)
         temp_v15 = (unsigned int)*(unsigned short *)(temp_v4 + 0x46);
         devilGetRecord();
         if (*(char *)(temp_v15 + 10) != '\x01') {
-          textFormatBuffer(temp_v19,&LAB_0025e4d8,&LAB_0025e4dc);
+          textFormatBuffer(temp_v19,"%s","Attack");
         }
         else {
-          textFormatBuffer(temp_v19,&LAB_0025e4d8,&LAB_0025e4e4);
+          textFormatBuffer(temp_v19,"%s","Shoot");
         }
         temp_v12 = 0;
         temp_v21 = 1;
@@ -714,7 +703,7 @@ void FUN_0025d1c4(int param_1)
       temp_v0 = 1;
       if (temp_v15 != 0) {
         if ((temp_v15 == 1) && (temp_v4 = FUN_0025cc54(), temp_v4 != 0)) {
-          textFormatBuffer(temp_v19,&LAB_0025e4d8,&LAB_0025e4e4);
+          textFormatBuffer(temp_v19,"%s","Shoot");
           temp_v1 = 1;
           temp_v12 = 0;
           temp_v21 = 1;
@@ -732,21 +721,21 @@ void FUN_0025d1c4(int param_1)
           if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
             temp_v5 = (int)(short)((short)(temp_v15 + temp_v4) + 1);
             temp_v12 = aocIndexValueOrDefault();
-            textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
+            textFormatBuffer(temp_v19,"%s",temp_v12);
             temp_v12 = FUN_0029a9d4(temp_v5,1);
           }
           else {
             temp_v5 = (int)*(short *)(param_1 + *(int *)(temp_v2 + 0x5c) * 0x10 + (temp_v15 + temp_v4) * 2 +
                                    0x341c);
             temp_v12 = aocIndexValueOrDefault();
-            textFormatBuffer(temp_v19,&LAB_0025e4d8,temp_v12);
+            textFormatBuffer(temp_v19,"%s",temp_v12);
             temp_v12 = FUN_0029a9d4(temp_v5,1);
           }
           temp_v21 = FUN_0025cc04(0xffffffff,temp_v5);
         }
       }
       else {
-        textFormatBuffer(temp_v19,&LAB_0025e4d8,&LAB_0025e4dc);
+        textFormatBuffer(temp_v19,"%s","Attack");
         temp_v1 = 1;
         temp_v12 = 0;
         temp_v21 = 1;
@@ -787,7 +776,7 @@ void FUN_0025d1c4(int param_1)
     temp_v4 = asdTMTexTableEntryAt(0x15,0xa3);
     FUN_002bdf94(2,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v6,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v7,1,4,0x74,
-                 &LAB_0025e9fc,temp_v12);
+                 "%d",temp_v12);
   }
   temp_v3 = FUN_0029ee54(*temp_v20);
   if (temp_v3 >= 7) {

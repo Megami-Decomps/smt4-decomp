@@ -1,4 +1,3 @@
-/* NON_MATCHING: the (short) conversion for the switch is predicated (sxthlt) before the bge in retail; built emits it after the branch */
 #include "common.h"
 #include "gamedata/DataTable.h"
 

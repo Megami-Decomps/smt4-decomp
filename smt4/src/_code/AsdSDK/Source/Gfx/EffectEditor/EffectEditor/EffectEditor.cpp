@@ -1,4 +1,4 @@
-#include "util/EffMenuListAppend.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
 #define EFFECT_EDITOR_STORAGE_DEFINITIONS
 #include "gfx/EffectEditorStorage.h"
 #include "shard/W6_W6Match6_EffectRender.h"
@@ -12,6 +12,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "AsdSDK/AsdMemCopy.h"
 
 
 extern "C" {
@@ -31,7 +32,6 @@ extern EffectRenderGlobals DAT_004ea81c;
 void __aeabi_memcpy4(void *, const void *, u32);
 void randomStateSeed(u32, u32);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
-void *rt_memcpy(void *, const void *, u32);
 EffectSelectionParts *FUN_00246854(EffectSelectionItem *);
 void *resourceResolveHeaderPointer(EffectSelectionBlock *);
 void effPartsSetData(EffectSelectionBlock *, void *, u32, u16);

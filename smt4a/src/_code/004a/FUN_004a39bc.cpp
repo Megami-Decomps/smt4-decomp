@@ -1,5 +1,6 @@
 /* NON_MATCHING: choice initialization block placement, state/zero registers and selected-entry address/narrowing differ. */
 #include "shard/Shard004A.h"
+#include "shop/ShopItemDescription.h"
 
 // A local aligned view avoids adding u16 list entries to Screen4A's odd-address opaque byte region.
 struct BibleSummonConfirmationView {
@@ -17,7 +18,6 @@ typedef char BibleSummonConfirmationOffsets[
 
 extern "C" {
 s32 scrRunOpcodesStub(u32 script);
-s32 messageGetChoiceResult(void);
 u32 FUN_004a8750(u16 id, u8 mode, u32 option, u32 highRank, u32 flags);
 void panelSetMode3(u32 value, s32 option);
 void objBInitBlocks274300(void);

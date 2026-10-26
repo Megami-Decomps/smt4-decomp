@@ -13,4 +13,14 @@ u32 randNextInRange(int limit);
 }
 #endif
 
+
+extern "C" {
+
+u32 lcgRandomRange(s32 limit);
+
+u32 randNextInRange(int limit);
+
+u32 randRange(int range);
+
+} /* extern "C" */
 #endif

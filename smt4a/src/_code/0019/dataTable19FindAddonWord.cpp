@@ -1,4 +1,5 @@
 #include "gamedata/DataTable.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 struct TableRequest {
     u8 unk00[0x26]; // 0x00

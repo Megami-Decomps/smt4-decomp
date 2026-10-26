@@ -27,7 +27,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned char LAB_003da414; /* 0x3da414 */
 extern unsigned char LAB_003da674; /* 0x3da674 */
 extern unsigned char LAB_003da698; /* 0x3da698 */
 extern int DAT_0057f2c4; /* 0x57f2c4 */
@@ -175,7 +174,7 @@ unsigned int FUN_003da030(void)
       temp_v1 = asdTMTexTableEntryAt(0x1a,0x21d);
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v1 + 8) + temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
-      textDrawString(4,0x57d8ffff,&LAB_003da414);
+      textDrawString(4,0x57d8ffff,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8e\x82\x87\x81D\x81D\x81D");
     }
     else if (*(int *)(temp_v3 + 4) >= 4) {
       temp_v2 = vec2GetXInt();
@@ -207,7 +206,7 @@ unsigned int FUN_003da030(void)
       temp_v2 = asdTMTexTableEntryAt(0x1a,0x21d);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
-      textDrawString(4,0x57d8ffff,&LAB_003da414);
+      textDrawString(4,0x57d8ffff,"\x82e\x82\x95\x82\x93\x82\x89\x82\x8e\x82\x87\x81D\x81D\x81D");
       uiDrawRotatingGridHighlights(0x220,*(unsigned int *)(temp_v3 + 0x84));
     }
     temp_v3 = g_renderCtx;

@@ -69,7 +69,7 @@ void *gameGetUnitRecord(s32 index);
 u8 *gameGetSlotTable(void);
 void *dataTable00FindById(u32 id);
 s32 FUN_003be758(UnitSlot *slot);
-void FUN_002550d8(s32 index, s32 mode, s32 arg, s32 zero);
+void btlAdjustPropertyClamped(s32 index, s32 mode, s32 arg, s32 zero);
 
 /* Spawns a unit slot of the given kind (0: party record, 1: table unit, 2: slot-table unit) from `record` at `index`. */
 void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s32 extra)
@@ -161,7 +161,7 @@ void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s
     }
     entry->tableId = slot->tableId;
     entry->index = index;
-    FUN_002550d8(index, 12, FUN_003be758(slot), 0);
+    btlAdjustPropertyClamped(index, 12, FUN_003be758(slot), 0);
 }
 
 } /* extern "C" */

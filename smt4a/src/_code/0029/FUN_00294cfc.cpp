@@ -1,6 +1,7 @@
 /* NON_MATCHING: picks a hint popup for a candidate from the list (level window, not yet known or recent) and records it in the recent list; written from the decompilation and the retail disassembly, loop structure and register allocation not compared with retail */
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
+#include "code/Code002a_Smt4a.h"
 
 struct PopupEntry {
     /* 0x00 */ s32 id;
@@ -63,7 +64,6 @@ s32 gameFlagIsSet(s32 flag);
 s32 randRange(u32 maximum);
 HintCandidates *FUN_004bb80c(u32 owner);
 PlayerView *gameGetPlayerData(void);
-s32 FUN_002a4b28(u32 id);
 HintRecord *dataTable00FindById(u32 id);
 HintRecord *FUN_00184310(u32 id);
 void *FUN_002d8b58(s32 kind, u32 id);

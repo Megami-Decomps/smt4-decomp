@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlUI.h"
 #include "battle/btlGameOver.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0013.h"
 
 struct GameOverEyeTimeline {
     s32 panelFrame, fade0Frame;

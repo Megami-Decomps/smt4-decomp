@@ -1,5 +1,6 @@
 /* NON_MATCHING: title branch placement, reward switch layout, and register allocation differ from retail. */
 #include "common.h"
+#include "bible/bibleDevil.h"
 
 struct RewardSlot {
     u16 type;
@@ -21,7 +22,6 @@ const char *FUN_002bd06c(u32 id);
 char *libc_strcpy(char *destination, const char *source);
 void FUN_002bd158(const char *source, char *destination);
 void textEncodeFontSlot(s32 index, const char *text);
-void FUN_0029ede8(s32 index, u32 value, s32 format, s32 flags);
 
 // Bind a record's title/description and, optionally, its six reward slots to UI text fields.
 void uiBindRecordRewardText(u32 id, s32 showRewards, s32 description)

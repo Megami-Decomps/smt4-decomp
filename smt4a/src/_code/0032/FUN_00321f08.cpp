@@ -2,11 +2,11 @@
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 extern EffMiscKind g_effMiscKinds[];
-void FUN_00145e24(RenderCtxA* context, u32 resource);
+void effectRestoreSavedRenderPairs(RenderCtxA* context, u32 resource);
 void uiSpriteRefreshMode(RenderCtxA* context);
 
 // Run an effect's update phases while preserving the enclosing render mode.
@@ -25,7 +25,7 @@ void FUN_00321f08(EffMiscObject* object)
     if (mode == 3 || mode == 4) {
         uiSpriteRefreshMode(g_renderCtx);
     } else if (mode == 5) {
-        FUN_00145e24(g_renderCtx, resource);
+        effectRestoreSavedRenderPairs(g_renderCtx, resource);
     }
 }
 }

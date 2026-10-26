@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail inlines wait/close SVC instructions; this source calls the real wrappers because syscall intrinsics and assembly are forbidden. */
 #include "shard/W6_W6Match3_ThreadHandleState.h"
+#include "code/Code0042_Smt4a.h"
 
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
@@ -8,7 +9,6 @@ void FUN_002e3140(s32 result);
 s32 FUN_00426204(void);
 s32 FUN_0017fd20(u32 *handle, s32 flags);
 s32 FUN_0042632c(void *buffer);
-s32 FUN_00426264(const void *buffer, u32 *handle);
 s32 resetFlag5891A4And6530(void);
 void FUN_004262e4(u32 *detail);
 

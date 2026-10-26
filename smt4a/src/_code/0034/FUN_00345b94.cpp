@@ -1,6 +1,6 @@
 /* NON_MATCHING: the stereo-mode branch hint and overlay literal-pool ordering differ; render-context wrapper scheduling agrees. */
 #include "camp/RenderCtx.h"
-#include "shard/FUN_00300100.h"
+#include "code/Code0030.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 extern "C" {

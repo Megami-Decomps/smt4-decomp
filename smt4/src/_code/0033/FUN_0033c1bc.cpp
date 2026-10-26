@@ -1,7 +1,7 @@
 /* NON_MATCHING: 171 vs 177 rows: retail calls __aeabi_idivmod for `% count` (unit built -Ospace-style; needs a cflags trial from Main) and keeps the loop counters in different registers */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
-#include "util/MessageKindForward.h"
+#include "ui/UiControl.h"
 
 // Draw-state stack embedded in the title scene.
 struct DrawRing {

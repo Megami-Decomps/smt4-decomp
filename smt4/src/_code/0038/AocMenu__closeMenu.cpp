@@ -2,6 +2,7 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 #include "shard/W5_W5Match2_TimedState.h"
+#include "addon/AocSystem_VariantA.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
@@ -14,7 +15,6 @@ void FUN_00126fb8(void *query);
 void FUN_002b8244(s32 mode);
 void jobOwnerFreeSlotAndStop(void *owner);
 void jobStopAndClearFlags(AocMenu *menu);
-void aocClearDisplayFlag(AocSystem *system);
 void aocReleasePackageOwner(AocSystem *system);
 void aocResetOperationState(AocSystem *system);
 u8 FUN_0026b564(void);

@@ -23,7 +23,7 @@ void staffRollFadeEnterState4(void);
 void staffRollAdvanceState(void);
 void staffRollSetComplete(void);
 void staffRollTickExitTimer(void);
-s32 FUN_00358918(u32 handle);
+s32 staffRollDrawMarkers(u32 handle);
 s32 staffRollDrawSecondaryColumn(u32 handle);
 
 /* Builds the staff roll: loads the credit images, lays out the two columns of lines and starts
@@ -76,8 +76,8 @@ void FUN_0032b688(s32 skipFade)
     work->closing = 0;
 
     work->task = asdProcessCreateSimple((const s8 *)"STAFFROLL C", 4, 0, 0, machineStep, staffRollClose, 0);
-    taskCreateDraw((const s8 *)"STAFFROLL U", 0x7E, 0, 0, FUN_00358918, NULL, 0, work->task);
-    taskCreateDraw((const s8 *)"STAFFROLL UR", 0xDA, 0, 0, FUN_00358918, NULL, 0, work->task);
+    taskCreateDraw((const s8 *)"STAFFROLL U", 0x7E, 0, 0, staffRollDrawMarkers, NULL, 0, work->task);
+    taskCreateDraw((const s8 *)"STAFFROLL UR", 0xDA, 0, 0, staffRollDrawMarkers, NULL, 0, work->task);
     taskCreateDraw((const s8 *)"STAFFROLL DD", 0xEC, 0, 0, staffRollDrawSecondaryColumn, NULL, 0, work->task);
 }
 

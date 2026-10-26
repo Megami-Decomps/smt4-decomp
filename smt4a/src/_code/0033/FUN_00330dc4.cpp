@@ -1,7 +1,6 @@
 /* NON_MATCHING: copied table load order, loop zero-choice branch, and saved-register selection differ. */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 struct ScriptFlagChoices { u32 flags[7]; };
 extern "C" {

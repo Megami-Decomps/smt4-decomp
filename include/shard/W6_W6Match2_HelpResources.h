@@ -74,7 +74,7 @@ u32 dataTableCountRecordStages(u32 id);
 extern "C" {
 #endif
 
-TexTableEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index);
+TexTableNamedEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index);
 
 #ifdef __cplusplus
 }

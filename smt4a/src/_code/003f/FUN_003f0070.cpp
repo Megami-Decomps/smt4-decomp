@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "battle/btlDebug.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 extern "C" {
 s32 FUN_003e4978(void);

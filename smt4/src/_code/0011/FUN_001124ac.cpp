@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
+#include "code/Code0012_Smt4.h"
 
 extern "C" {
 
 int FUN_00122224(void);
 int FUN_00123254(...);
-int FUN_001299f8(void);
 int FUN_00129b00(void);
 int FUN_00129d00(...);
 int FUN_00129d4c(...);
@@ -29,13 +29,13 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_2_stack;
 
-extern unsigned char LAB_00123ab0; /* 0x123ab0 */
+extern unsigned char asdGxAccountCommandBytesAndAdvanceQueue; /* 0x123ab0 */
 extern int sys_PDC0Callback(...); /* 0x123af0 */
 extern int sys_PDC1Callback(...); /* 0x123b34 */
-extern unsigned char LAB_00123b7c; /* 0x123b7c */
-extern unsigned char LAB_00123b80; /* 0x123b80 */
-extern unsigned char LAB_00123b84; /* 0x123b84 */
-extern unsigned char LAB_002b39ec; /* 0x2b39ec */
+extern unsigned char FUN_00123b7c; /* 0x123b7c */
+extern unsigned char FUN_00123b80; /* 0x123b80 */
+extern unsigned char FUN_00123b84; /* 0x123b84 */
+extern unsigned char FUN_002b39ec; /* 0x2b39ec */
 extern unsigned char DAT_00400004; /* 0x400004 */
 extern unsigned char DAT_0040001c; /* 0x40001c */
 extern unsigned char DAT_0040002c; /* 0x40002c */
@@ -208,13 +208,13 @@ unsigned int FUN_001124ac(romwright_code *param_1,romwright_code *param_2)
         FUN_001299f8();
         temp_v0 = FUN_00129d34();
         DAT_004c62a4 = FUN_00129d98();
-        FUN_00129d4c(&LAB_00123b80,0);
-        FUN_00129d4c(&LAB_00123b84,1);
+        FUN_00129d4c(&FUN_00123b80,0);
+        FUN_00129d4c(&FUN_00123b84,1);
         FUN_00129d4c(sys_PDC0Callback,2);
         FUN_00129d4c(sys_PDC1Callback,3);
-        FUN_00129d4c(&LAB_00123b7c,4);
-        FUN_00129d4c(&LAB_00123ab0,5);
-        FUN_00129d4c(&LAB_002b39ec,6);
+        FUN_00129d4c(&FUN_00123b7c,4);
+        FUN_00129d4c(&asdGxAccountCommandBytesAndAdvanceQueue,5);
+        FUN_00129d4c(&FUN_002b39ec,6);
         if (temp_v0 != 0) {
           temp_v9[0] = 0;
           FUN_002ba51c(&DAT_00401000,temp_v9,4);

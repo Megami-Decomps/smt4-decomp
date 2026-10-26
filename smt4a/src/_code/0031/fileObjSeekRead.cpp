@@ -1,7 +1,7 @@
 /* NON_MATCHING: success value: retail builds it in r0 then copies it to r4 (`mov r0, #0; mov r4, r0`); built `mov r4, #0; mov r0, r4`. */
 #include "sys/ProcessResult.h"
 #include "nn/Result.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

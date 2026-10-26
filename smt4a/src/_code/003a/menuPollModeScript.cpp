@@ -1,5 +1,6 @@
 /* NON_MATCHING: the compiler shares the scriptState store between cases, unlike retail's r6 constant and writeback store to the state subobject. */
 #include "common.h"
+#include "battle/btlEvent.h"
 
 struct MenuScriptState {
     /* 0x000 */ u8 unk000[0x350];
@@ -22,7 +23,6 @@ void *FUN_00275bc8(void *script, void *data);
 void scrScriptProcessStartEntry(void *process, s32 entry);
 void sysPlaySe(s32 id);
 void cecProcessCall4(void);
-u32 scrRunOpcodesStub(void *process);
 
 // Start the mode-specific menu script, then advance when it reports completion.
 u32 menuPollModeScript(MenuScriptState *menu)

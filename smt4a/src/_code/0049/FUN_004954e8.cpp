@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0049_Smt4a.h"
 
 struct SubmenuRecord {
     /* 0x00 */ u8 unk00[0x74];

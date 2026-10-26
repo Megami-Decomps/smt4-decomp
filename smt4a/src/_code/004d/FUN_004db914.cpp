@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (212 vs ~206 rows); goto-based early exits and register allocation differ from retail's single result slot */
 #include "common.h"
 #include "gamedata/DataTableSections.h"
+#include "code/Code002a_Smt4a.h"
 
 // Fusion result descriptor (parents, product, cost), as written by the fusion preview.
 struct FusionResult {
@@ -48,7 +49,6 @@ DevilInfo* FUN_00184310(u32 id);
 u32 randRange(u32 range);
 s32 slotRecordFindById(u32 id);
 u32 FUN_0023e32c(u16* first, u16* second, u32 id, u32 level);
-s32 FUN_002a4b28(u32 id);
 u32 uniteFindClosestEligibleCandidate(UniteContext* ctx, u32 race, u32 level, s32 flag);
 SlotTable* gameGetSlotTable(void);
 SlotRecord* gameGetSlotRecord(s32 slot);

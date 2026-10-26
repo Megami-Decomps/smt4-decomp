@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild of the save/load prompt state machine (the draft's call arguments were kept as it read them); armcc here shares the state-store tail and the script-process pointer reload differently. */
 #include "common.h"
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 /* The script process the prompt runs. */
 struct LazyScript {
@@ -26,13 +27,11 @@ extern LazyScript *DAT_005e2110;
 
 void gameDataFlagsClearBits(s32 bits);
 void gameDataBlocksReleaseHold(s32 hold);
-void gameDataBlocksMaskClearBits(s32 bits);
 void sysPlaySe(s32 id);
 s32 scrRunOpcodesStub(LazyScript *script);
 void gameDataBlocksAddFlags(s32 flags);
 void FUN_00275bc8(void);
 void scrScriptProcessStartEntry(LazyScript *script, s32 entry);
-void gameDataAddHomeButtonHold(s32 hold);
 void campCommonBgAcquire(void);
 void FUN_0031ed60(PromptState *state, s32 flag);
 void obj04Finish(void);

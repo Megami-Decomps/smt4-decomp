@@ -1,17 +1,14 @@
 /* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 161 vs built 162 rows, 222 diff lines. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
+#include "util/MemoryHelpers_Smt4a.h"
 
 extern "C" {
 
-void *asdMemoryAllocWithFlags(s32 size, u32 flags);
 char *FUN_00100238(char *str, u32 ch);
 void libc_strcpy(char *dst, const char *src);
 void textFormatBuffer(char *dst, const char *format, ...);
 
-extern char LAB_0013f424[];
-extern char LAB_0013f428[];
-extern char LAB_0013f43c[];
 extern TexTable g_texTable;
 
 /* Loads the TMX file of table entry `idx` if it is not loaded yet: reads it, turns its offsets
@@ -38,7 +35,7 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
             }
         }
         libc_strcpy(header->dirPrefix, dir);
-        textFormatBuffer(path, LAB_0013f428, header->dirPrefix, entry->name, LAB_0013f424);
+        textFormatBuffer(path, "%s%s.%s", header->dirPrefix, entry->name, "ttd");
         mode = (flags & 1) != 0;
         if (flags & 2) {
             mode |= 2;
@@ -95,7 +92,7 @@ TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags)
                 }
             }
             libc_strcpy(header->dirPrefix2, dir);
-            textFormatBuffer(texFile->path, LAB_0013f43c, header->dirPrefix2, (u8 *)tmx + 4);
+            textFormatBuffer(texFile->path, "%s%s/", header->dirPrefix2, (u8 *)tmx + 4);
             entry->file = texFile;
         }
     }

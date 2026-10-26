@@ -1,8 +1,7 @@
 /* NON_MATCHING: independent default-state stores are reordered and process callback arguments use STR plus STM instead of one retail STM. */
 #include "event/NpcTextureWork.h"
 #include "addon/aocMain.h"
-#include "util/FUN_002ae8e4.h"
-#include "util/FUN_002ae8e4.h"
+#include "code/Code002a.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"

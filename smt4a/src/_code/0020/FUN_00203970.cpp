@@ -1,18 +1,17 @@
-/* NON_MATCHING: retail uses mov r3, r0 where the compiled block uses vmov.f32 s8, s2. */
-#include "common.h"
+/* NON_MATCHING: retail evaluates the four colour arguments and the shifted corners right to left (mov r3,r0; mov r2,r3; mov r1,r2) with the constant in s6; the build orders the VFP moves and adds differently. */
+#include "status/StatusCamera.h"
 
-extern "C" void FUN_00280a08(
-    u32 context, u32 context1, u32 context2, u32 context3,
-    f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
-    f32 shiftedX0, f32 shiftedY0, f32 shiftedZ0,
-    f32 shiftedX1, f32 shiftedY1, f32 shiftedZ1);
+extern "C" void FUN_00280a08(u32 color0, u32 color1, u32 color2, u32 color3, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3);
 
-extern "C" void FUN_00203970(
-    u32 context, f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1)
+static __inline void drawQuad(u32 color, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3)
 {
-    FUN_00280a08(
-        context, context, context, context,
-        x0, y0, z0, x1, y1, z1,
-        x0 + 10.0f, y0 + 10.0f, z0,
-        x1 + 10.0f, y1 + 10.0f, z1);
+    FUN_00280a08(color, color, color, color, p0, p1, p2, p3);
+}
+
+extern "C" void FUN_00203970(u32 context, Vec3 start, Vec3 end)
+{
+    Vec3 shiftedStart = { start.x + 10.0f, start.y + 10.0f, start.z };
+    Vec3 shiftedEnd = { end.x + 10.0f, end.y + 10.0f, end.z };
+
+    drawQuad(context, start, end, shiftedStart, shiftedEnd);
 }

@@ -1,28 +1,17 @@
-/* NON_MATCHING: retail computes both field cursors from the unit base and saves only LR. */
-#include "battle/BattleUnitSlot.h"
+#include "shard/W6_W6Match4_UnitPairs.h"
 
-struct UnitCountPair {
-    s32 first;  // 0x00
-    s32 second; // 0x04
-};
+extern "C" {
 
-struct UnitCountTable {
-    u8 unk000[0x5b8]; // 0x000
-    UnitCountPair records[133]; // 0x5b8
-};
-
-
-// Count records with a nonnegative first value and a positive second value.
-extern "C" s32 FUN_004ea5e8(u32 unitId)
+// Count pairs with a nonnegative first value and a positive second value.
+s32 FUN_004ea5e8(void *contextHandle)
 {
-    UnitCountTable* unit = reinterpret_cast<UnitCountTable *>(
-        btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(unitId)));
-    const UnitCountPair* record = unit->records;
+    UnitPairTableA *unit = reinterpret_cast<UnitPairTableA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(contextHandle)));
     s32 count = 0;
-    for (s32 remaining = 133; remaining != 0; --remaining, ++record) {
-        if (record->first >= 0 && record->second > 0) {
+    for (s32 i = 0; i < 133; i++) {
+        if (unit->pairs[i][0] >= 0 && unit->pairs[i][1] > 0) {
             ++count;
         }
     }
     return count;
+}
 }

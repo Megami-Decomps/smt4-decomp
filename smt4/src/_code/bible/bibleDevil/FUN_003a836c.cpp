@@ -2,6 +2,7 @@
 #include "common.h"
 #include "status/StatusCamera.h"
 #include "bible/bibleDevil.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct BibleCursor {
 
 extern BibleCursor DAT_0043d9c8;
 
-s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 void buttonHelpSetPreset(s32 preset);
 void FUN_0022e0fc(BibleDevilIcon *icon, s8 animation);

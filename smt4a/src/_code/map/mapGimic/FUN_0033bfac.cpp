@@ -19,8 +19,6 @@ int FUN_0040aad4(int, int);
 int handleRegistryRegisterObject(unsigned int, unsigned int);
 int VectorSignedToFloat(int, int);
 
-extern unsigned char LAB_0033c4c0; /* 0x33c4c0 */
-extern unsigned char LAB_0033c4d8; /* 0x33c4d8 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern unsigned int g_mapGimic; /* 0x580ca0 */
 
@@ -238,7 +236,7 @@ unsigned int FUN_0033bfac(void)
   FUN_003563fc();
   temp_v2 = g_mapGimic + *(short *)(g_mapGimic + 0xe) * 0x3c;
   *(unsigned short *)(temp_v2 + 0xa6) = *(unsigned short *)(temp_v1 + 2);
-  textFormatBuffer(temp_v9,&LAB_0033c4c0);
+  textFormatBuffer(temp_v9,"map/unit/u%03d.bam");
   temp_v1 = (int)*(short *)(temp_v2 + 0xa6);
   if (temp_v1 != 0x2e) {
     if (temp_v1 != 0x36) {
@@ -249,7 +247,7 @@ unsigned int FUN_0033bfac(void)
                ((temp_v1 == 0x39 || temp_v1 == 0x3a) || temp_v1 == 0x3b)) {
               if (*(char *)(g_mapGimic + temp_v1) != '\0') {
                 temp_v1 = 0x20;
-                FUN_00178b04(0x20,&LAB_0033c4d8,0x214);
+                FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x214);
                 temp_v6 = 0;
                 if (temp_v1 != 0) {
                   temp_v6 = modelListInit();
@@ -262,7 +260,7 @@ unsigned int FUN_0033bfac(void)
                 return 0;
               }
               temp_v1 = 0x20;
-              FUN_00178b04(0x20,&LAB_0033c4d8,0x20d);
+              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x20d);
               temp_v6 = 0;
               if (temp_v1 != 0) {
                 temp_v6 = modelListInit();
@@ -279,14 +277,14 @@ unsigned int FUN_0033bfac(void)
               return 0;
             }
             temp_v1 = 0x20;
-            FUN_00178b04(0x20,&LAB_0033c4d8,0x21d);
+            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x21d);
           }
           else {
             temp_v1 = *(int *)(g_mapGimic + 0x80) + 1;
             *(int *)(g_mapGimic + 0x80) = temp_v1;
             *(int *)(temp_v2 + 200) = temp_v1;
             temp_v1 = 0x20;
-            FUN_00178b04(0x20,&LAB_0033c4d8,0x1fc);
+            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1fc);
           }
           temp_v6 = 0;
           if (temp_v1 != 0) {
@@ -297,7 +295,7 @@ unsigned int FUN_0033bfac(void)
         }
         else {
           temp_v1 = 0x20;
-          FUN_00178b04(0x20,&LAB_0033c4d8,0x1f2);
+          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1f2);
           temp_v6 = 0;
           if (temp_v1 != 0) {
             temp_v6 = modelListInit();
@@ -311,7 +309,7 @@ unsigned int FUN_0033bfac(void)
       else {
         if (*(char *)(g_mapGimic + 0x2c) != '\0') {
           temp_v1 = 0x20;
-          FUN_00178b04(0x20,&LAB_0033c4d8,0x1e5);
+          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1e5);
           temp_v6 = 0;
           if (temp_v1 != 0) {
             temp_v6 = modelListInit();
@@ -328,7 +326,7 @@ unsigned int FUN_0033bfac(void)
           return 0;
         }
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033c4d8,0x1dc);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1dc);
         temp_v6 = 0;
         if (temp_v1 != 0) {
           temp_v6 = modelListInit();
@@ -345,7 +343,7 @@ unsigned int FUN_0033bfac(void)
     else {
       if (*(char *)(g_mapGimic + 0x24) != '\0') {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033c4d8,0x1cc);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1cc);
         temp_v6 = 0;
         if (temp_v1 != 0) {
           temp_v6 = modelListInit();
@@ -361,7 +359,7 @@ unsigned int FUN_0033bfac(void)
         return 0;
       }
       temp_v1 = 0x20;
-      FUN_00178b04(0x20,&LAB_0033c4d8,0x1c3);
+      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1c3);
       temp_v6 = 0;
       if (temp_v1 != 0) {
         temp_v6 = modelListInit();
@@ -378,7 +376,7 @@ unsigned int FUN_0033bfac(void)
   else {
     if (*(char *)(g_mapGimic + 0x1c) != '\0') {
       temp_v1 = 0x20;
-      FUN_00178b04(0x20,&LAB_0033c4d8,0x1b3);
+      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1b3);
       temp_v6 = 0;
       if (temp_v1 != 0) {
         temp_v6 = modelListInit();
@@ -394,7 +392,7 @@ unsigned int FUN_0033bfac(void)
       return 0;
     }
     temp_v1 = 0x20;
-    FUN_00178b04(0x20,&LAB_0033c4d8,0x1aa);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapGimic.cpp",0x1aa);
     temp_v6 = 0;
     if (temp_v1 != 0) {
       temp_v6 = modelListInit();

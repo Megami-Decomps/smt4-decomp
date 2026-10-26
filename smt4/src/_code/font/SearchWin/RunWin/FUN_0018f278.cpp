@@ -4,9 +4,9 @@
 #include "gfx/SpritePartDraw.h"
 #include "gfx/SpritePartDraw.h"
 #include "text/TextDraw.h"
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 #include "gfx/StereoParallax.h"
-#include "shard/packNibblesAndByte.h"
+#include "util/BitsAndBytes_VariantA.h"
 #include "camp/RenderCtx.h"
 
 /* The run window (only the fields read here). */

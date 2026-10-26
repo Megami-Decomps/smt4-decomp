@@ -34,3 +34,10 @@ partyWidgetSetTransitionPending = 0xe5c01027; // FUN_0020b718 (widget reloaded i
 slotTargetOwnerGetHolder = 0xe5900008; // 0x3e54c4 (FUN_003e54b8: on the owner in r0)
 slotTargetHolderGetTarget = 0xe5900004; // 0x3e54c8 (FUN_003e54b8: on the holder in r0; result tested with movs)
 uiSpriteGetOperationMode = 0xe1d005f0; // 0x34efec (FUN_0034efe0: after add r0, r0, #732; r4 keeps the state)
+asdListBoxSetCursor = 0xe580101c; // FUN_003592dc (after add r0, r4, #12; r1 = 0); twin of the smt4 row
+uiStateGetSecondFlag = 0xe1d006d1; // FUN_004d02e0 (after add r0, r0, #16); twin of the smt4 row
+uiStateGetFirstFlag = 0xe1d006d0; // FUN_004d02e0 (after add r0, r4, #16); twin of the smt4 row
+queuedHandleGetToken = 0xe5900004; // 0x473d8c (FUN_00473d74, after add r0, sp, #4: the by-value handle parameter); twin of the smt4 row
+mobiclipHeapGetAllocation = 0xe5900030; // FUN_001f51ac (twin of smt4 FUN_0017feb4)
+partyWidgetGetCost = 0xe5900044; // FUN_002cc0c0 (twin of smt4 partyPanelRefreshItemPreview)
+partyWidgetGetX = 0xe5900040; // FUN_002cc0c0 (twin of smt4 partyPanelRefreshItemPreview)

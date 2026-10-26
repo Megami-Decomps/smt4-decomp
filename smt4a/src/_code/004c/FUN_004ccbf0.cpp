@@ -1,7 +1,7 @@
 /* NON_MATCHING: the polynomial and the clamp match; remaining differences are the table-lookup block (retail places it after the epilogue instead of predicating it) and the literal-pool load order. */
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

@@ -1,7 +1,7 @@
 /* NON_MATCHING: ARMCC schedules save-point stores and global loads in different registers. */
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "map/lmapMain.h"
-#include "util/FUN_002b945c.h"
+#include "code/Code002b.h"
 
 extern "C" {
 extern LmapSceneA* g_lmapScene;

@@ -1,12 +1,9 @@
-/* NON_MATCHING: retail keeps each slot's address in r5 across the release call (add r5,r4,#imm before the test) and holds zero in r6; built folds the slot address into the store. */
+/* NON_MATCHING: slots are now indexed like retail (slot address kept in r5 across the release call); the last slot still folds into a writeback load and the zero constant is materialised through r0 in retail. */
 #include "ui/FrameTex.h"
 
 // The frame work's texture slots past the shared prefix.
 struct FrameTextureSlots : FrameWork {
-    void *slotA;      // 0xFDC
-    u8 unkFE0[4];
-    void *slotC;      // 0xFE4
-    void *slotB;      // 0xFE8
+    void *slots[4];   // 0xFDC: A, unused, C, B
 };
 
 extern "C" {
@@ -14,11 +11,11 @@ extern "C" {
 int asdTextureRelease(void *texture);
 extern FrameTextureSlots *g_frameTex; /* 0x43e278 */
 
-static __inline void frameTextureSlotRelease(void **slot)
+static __inline void frameTextureSlotRelease(FrameTextureSlots *work, s32 index)
 {
-    if (*slot != NULL) {
-        asdTextureRelease(*slot);
-        *slot = NULL;
+    if (work->slots[index] != NULL) {
+        asdTextureRelease(work->slots[index]);
+        work->slots[index] = NULL;
     }
 }
 
@@ -27,9 +24,9 @@ void FUN_002759bc(void)
 {
     FrameTextureSlots *work = g_frameTex;
     work->unkE8C = 0;
-    frameTextureSlotRelease(&work->slotA);
-    frameTextureSlotRelease(&work->slotB);
-    frameTextureSlotRelease(&work->slotC);
+    frameTextureSlotRelease(work, 0);
+    frameTextureSlotRelease(work, 3);
+    frameTextureSlotRelease(work, 2);
 }
 
 } /* extern "C" */

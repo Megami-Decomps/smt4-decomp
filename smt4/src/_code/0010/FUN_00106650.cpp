@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r4, [pc, #140] differs from recovered bne 98. */
+/* NON_MATCHING: the stores and call arguments share registers as in retail; retail loads the state address before the first call, keeps the status byte update in r0 and stores the volume with a post-incrementing `vstmia r0!` before the integer `stm`. */
 #include "common.h"
 #include "shard/W6_W6Match7_SoundInit.h"
 
@@ -29,6 +29,21 @@ void FUN_0010dd80(void);
 void asdSoundDuckSetup(s32 enabled, f32 volume, s32 attack,
                        s32 hold, s32 mode, s32 release);
 s32 fileLoadSync(const char* path, u32* size, u32 flags);
+}
+
+// Records the sound-ducking settings and applies them.
+static __inline void soundDuckConfigure(SoundDuckSettingsView *settings, f32 volume, s32 attack,
+                                        s32 hold, s32 mode, s32 release)
+{
+    settings->unk00 = volume;
+    settings->unk04 = attack;
+    settings->unk08 = hold;
+    settings->unk0c = mode;
+    settings->unk10 = release;
+    asdSoundDuckSetup(1, volume, attack, hold, mode, release);
+}
+
+extern "C" {
 
 // Initialize sound defaults and load the voice-pan table if entry 1 is absent.
 void FUN_00106650(void)
@@ -43,10 +58,7 @@ void FUN_00106650(void)
     DAT_004c5634.unk1e6 = 0;
     asdSoundSetVolumeIfEnabled(1);
 
-    const SoundDuckSettingsView defaults = { 0.7f, 5, 30, 1, 20 };
-    DAT_004c5634.unk1e8 = defaults;
-    asdSoundDuckSetup(1, defaults.unk00, defaults.unk04,
-                      defaults.unk08, defaults.unk0c, defaults.unk10);
+    soundDuckConfigure(&DAT_004c5634.unk1e8, 0.7f, 5, 30, 1, 20);
 
     u32 size = 0;
     if (DAT_004c5634.unk1e0 == 0) {

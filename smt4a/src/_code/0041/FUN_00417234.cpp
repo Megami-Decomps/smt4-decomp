@@ -1,6 +1,8 @@
 /* NON_MATCHING: near (148 rows against 150): the hoisted constants and stm of mode+step now match; retail materialises the nextStep zero with its own `mov r1,#0` (two sites) where ours reuses the hoisted zero, and orders the hoisted zero first in the prologue. */
 #include "common.h"
-#include "util/FUN_00333dc8.h"
+#include "code/Code0033.h"
+#include "code/Code003a.h"
+#include "shop/ShopItemDescription.h"
 
 /* The status-down (cure) menu task (observed fields). */
 struct StatusDownTask {
@@ -27,7 +29,6 @@ void stateHolderEnterState7(void);
 void statusDownEnterStateSeven(void);
 void FUN_003b0744(void);
 s32 messageMainIsIdle(void);
-s32 messageGetChoiceResult(void);
 s32 stateHolderCountMinus1(void);
 s32 stateHolderStateIs8Or10(void);
 u16 stateHolderGetCurrentEntry(void);

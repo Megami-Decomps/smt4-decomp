@@ -19,15 +19,16 @@ void FUN_002bda30(s32 handle, s32 unk);
  * index is out of range or the slot is already in use. */
 s32 asdSoundSlotAActivate(u32 index, s32 heapSize)
 {
+    AsdSoundSystem *asdSoundPtr = &g_asdSound;
     AsdSndSlotA *slot;
     u32 i;
     s32 j;
 
-    if (index >= ASD_SND_SLOT_A_COUNT || g_asdSound.slotsA[index].active != 0) {
+    if (index >= ASD_SND_SLOT_A_COUNT || asdSoundPtr->slotsA[index].active != 0) {
         return 0;
     }
 
-    slot = &g_asdSound.slotsA[index];
+    slot = &asdSoundPtr->slotsA[index];
     if (heapSize != 0) {
         slot->heapBuffer = asdMemoryAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, heapSize, 1);
         nw_snd_SoundHeap_Create(slot, slot->heapBuffer, heapSize);
@@ -48,12 +49,12 @@ s32 asdSoundSlotAActivate(u32 index, s32 heapSize)
         g_asdSoundDuck.active = 1;
     }
 
-    for (i = 0; g_asdSound.slotsA[i].active == 0; i++) {
+    for (i = 0; asdSoundPtr->slotsA[i].active == 0; i++) {
         if (i + 1 >= ASD_SND_SLOT_A_COUNT) {
             return 1;
         }
     }
-    slot = &g_asdSound.slotsA[i];
+    slot = &asdSoundPtr->slotsA[i];
     if (g_asdSoundDuck.flags != 0) {
         for (j = 0; j < 4; j++) {
             if (slot->handles[j] != 0) {

@@ -1,5 +1,6 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "code/Code004b_Smt4a.h"
 
 struct Table02Record {
     u8 data[0x28];

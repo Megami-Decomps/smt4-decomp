@@ -1,5 +1,5 @@
 #include "gfx/StereoParallax.h"
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: instructions, constants and frame match; only the callee-saved register assignment differs (retail keeps the panel in r5 and the title x in r6, so the later x/y/detail values rotate with it; this build puts the panel in r6 and the title x in r5). */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"

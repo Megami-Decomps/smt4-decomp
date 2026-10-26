@@ -8,7 +8,7 @@ extern "C" {
 int padClearBits(...);
 int btlSourceGetMaxHp(...);
 int objectFlagsClear(...);
-int FUN_00269bf0(...);
+int btlLinkGetMaxHp(...);
 int FUN_002e33f4(...);
 int SBORROW4(...);
 
@@ -46,7 +46,7 @@ typedef struct {
 /* Supplied declaration required: padClearBits. */
 /* Supplied declaration required: btlSourceGetMaxHp. */
 /* Supplied declaration required: objectFlagsClear. */
-/* Supplied declaration required: FUN_00269bf0. */
+/* Supplied declaration required: btlLinkGetMaxHp. */
 extern int playerPadTestBit(unsigned int);
 extern int flagWordTestBit(int, unsigned int);
 extern int gameGetUnitRecord(void);
@@ -118,7 +118,7 @@ int FUN_00232b68(fn_00232b68_arg0 *param_1,fn_00232b68_arg1 *param_2,unsigned in
     }
     else {
       temp_v8 = temp_v6;
-      FUN_00269bf0();
+      btlLinkGetMaxHp();
     }
   }
   temp_v2 = (short)temp_v9;

@@ -1,5 +1,6 @@
 /* Matches with --cpu=5TE (requested): this unit was built for the older core. */
 #include "common.h"
+#include "code/Code0040_Smt4a.h"
 
 extern "C" {
 

@@ -39,14 +39,15 @@ void FUN_0010b3c0(void)
     }
     GuestWinWork* work = g_guestWin;
     memClear(work, sizeof(GuestWinAllocationView));
-    work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GuestWin Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(guestWinUpdate), NULL, NULL);
-    taskCreateDraw("GuestWin DrawUpLeft", 0x81, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
+    u32 job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("GuestWin Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(guestWinUpdate), NULL, NULL);
+    work->job = job;
+    taskCreateDraw("GuestWin DrawUpLeft", 0x81, 0, 0, FUN_0011aa94, NULL, NULL, job);
     taskCreateDraw("GuestWin DrawUpRight", 0xDF, 0, 0, FUN_0011aa94, NULL, NULL, work->job);
     work = g_guestWin;
     drawParameterBlockClear(work->unk10);
-    paramsInit(reinterpret_cast<UiResourceParameters *>(work->unk10), DAT_00403964.first, sizeof(DAT_00403964.first),
-        DAT_00403964.second, sizeof(DAT_00403964.second), NULL, 0, NULL, 0,
-        DAT_00403964.geometry, sizeof(DAT_00403964.geometry));
+    paramsInit(reinterpret_cast<UiResourceParameters *>(work->unk10), DAT_00403964.first, 0x18,
+        DAT_00403964.second, 0x18, 0, 0, 0, 0,
+        DAT_00403964.geometry, 0x70);
     FUN_002bd954(work->ui, 14, 0x87, work->unk10, 1, 1.0f);
     spriteStartAnimationByIndex(work->ui, 0);
 }

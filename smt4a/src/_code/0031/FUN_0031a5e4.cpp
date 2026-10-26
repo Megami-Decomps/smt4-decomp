@@ -1,7 +1,7 @@
 /* NON_MATCHING: steps the intro sequence job (touch icon appears, waits for the touch, then plays out); same 204 rows as retail, differs only in the loads of the icon record before ifTouchRegionAdd and one register in the frameB modulo */
 #include "common.h"
-#include "util/FUN_002e07f4.h"
-#include "util/EventQueueAddUnique.h"
+#include "code/Code002e.h"
+#include "sys/RuntimeObjects.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #define INTRO_STATE_APPEAR 0
@@ -36,7 +36,6 @@ IntroWork *jobGetWork(u32 process);
 s32 recordGetModeForId(s32 id);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 height, s32 width);
 void ifTouchRegionRemove(void);
-void slotSetRequest(s32 slot, s32 frames, s32 value);
 
 /* Moves the job to `state` and clears its counters. */
 static __inline void introEnter(IntroWork *work, s32 state)

@@ -1,5 +1,13 @@
-/* NON_MATCHING: retail also loads the allocation's __FILE__/__LINE__ pool constants (unused) and zeroes the quaternions through a shared zero register; the rest matches; retail 76 vs built 59 rows, 78 diff lines. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
+#include "AsdSDK/AsdDebug.h"
+#include <string.h>
+
+static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
+{
+    PolyVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
 
@@ -14,24 +22,16 @@ extern PolyVec4 g_polyDefaultColor;
 PolyObject *effPolyRingCreate(u32 kind, void *params)
 {
     s32 workSize = g_polyRingKinds[kind].workSize;
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonRing.cpp", 724);
     PolyObject *obj = (PolyObject *)memAlloc(0x10000, 0x100, 0, workSize + 0x50, 0x10, 1);
 
     obj->work = obj->workData;
     obj->frame = 0;
     obj->kind = kind;
     obj->unk30 = -1;
-    obj->color.x = g_polyDefaultColor.x;
-    obj->color.y = g_polyDefaultColor.y;
-    obj->color.z = g_polyDefaultColor.z;
-    obj->color.w = g_polyDefaultColor.w;
-    obj->rotation0.x = 0;
-    obj->rotation0.y = 0;
-    obj->rotation0.z = 0;
-    obj->rotation0.w = 1.0f;
-    obj->rotation1.x = 0;
-    obj->rotation1.y = 0;
-    obj->rotation1.z = 0;
-    obj->rotation1.w = 1.0f;
+    obj->color = g_polyDefaultColor;
+    quaternionSetIdentity(&obj->rotation0);
+    quaternionSetIdentity(&obj->rotation1);
     rt_memcpy(obj->work, params, workSize);
     obj->state = g_polyRingKinds[kind].create(params);
     g_polyRingKinds[kind].start(obj);

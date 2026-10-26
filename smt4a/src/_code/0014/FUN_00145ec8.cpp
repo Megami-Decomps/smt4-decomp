@@ -1,4 +1,3 @@
-/* NON_MATCHING: the flag base now matches (header added first); retail builds the mask in a separate register with a register-shift lsl then ands, this build folds it into `ands rX, rY, rZ, lsl rN`. */
 #include "common.h"
 
 struct BitFlagState {
@@ -8,19 +7,18 @@ struct BitFlagState {
 
 extern "C" {
 
-extern const BitFlagState *gameDataBlocksGetStats(void);
+extern BitFlagState *gameDataBlocksGetStats(void);
 
 /* Tests a bit in the second flag word of the game-data block. */
-bool FUN_00145ec8(u32 index)
+s32 FUN_00145ec8(u32 index)
 {
     if (index >= 32) {
-        return false;
+        return 0;
     }
-    const BitFlagState *block = gameDataBlocksGetStats();
-    const u8 *flags = block->flags;
-    u32 byte = index / 8;
-    u32 bit = index % 8;
-    return (flags[byte] & (u8)(1u << bit)) != 0;
+    u8 *bits = gameDataBlocksGetStats()->flags;
+    u8 mask = (u8)(1u << (index & 7));
+    u32 byte = bits[index >> 3];
+    return (mask & byte) != 0;
 }
 
 } /* extern "C" */

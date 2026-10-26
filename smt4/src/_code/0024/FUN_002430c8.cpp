@@ -14,7 +14,7 @@ typedef struct EffectTextResult {
 void nodeListOwnerFree(void *owner);
 void FUN_00247240(EffectTextRequest *request);
 void FUN_002f82ac(EffectTextRequest *request);
-EffectTextRequest *FUN_0030ed8c(void *owner, u32 size);
+EffectTextRequest *effMenuCreate(void *owner, u32 size);
 u32 FUN_00318cac(EffectTextRequest *request);
 u32 formattedTextCopyLabel(EffectTextRequest *request, EffectTextResult *result);
 void FUN_003241c4(EffectTextRequest *request, void *body);
@@ -38,7 +38,7 @@ void FUN_002430c8(u32 unused, u32 size, EffectTextResult *result)
         return;
     }
     g_effectEditor.textRequest.owner = NULL;
-    EffectTextRequest *request = FUN_0030ed8c(NULL, size);
+    EffectTextRequest *request = effMenuCreate(NULL, size);
     g_effectEditor.textRequest.request = request;
     request->type = 0xba;
     request->size = 0x1c;

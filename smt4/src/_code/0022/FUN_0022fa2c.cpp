@@ -1,5 +1,6 @@
 #include "common.h"
 #include "status/StatusCamera.h"
+#include "code/Code0022_Smt4.h"
 
 extern "C" {
 

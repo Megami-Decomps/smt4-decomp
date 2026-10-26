@@ -3,13 +3,13 @@
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 extern MapRandomPopupPrefixA *g_popupState;
 extern GameStateA g_gameState;
 extern s32 DAT_005f1ac0;
 
-s32 gameFlagStateIsOne(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 range);
 

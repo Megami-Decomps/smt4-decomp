@@ -1,6 +1,6 @@
 /* NON_MATCHING: prologue order only: retail copies `selected` to r5 (movs r5, r1) and stores the selected byte after `mov r0, #1`; built stores it before. */
 #include "common.h"
-#include "shard/flaggedEntryGetValueA.h"
+#include "gamedata/GameDataAccess_Shard0031.h"
 
 extern "C" {
 

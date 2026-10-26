@@ -16,8 +16,8 @@ int titleOverlayDraw(int);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
 int vec2GetYInt(...);
-int FUN_002bedb0(...);
-int FUN_002bee04(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_002bf288(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
@@ -56,8 +56,8 @@ extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: vec2GetYInt. */
 extern int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -134,11 +134,11 @@ char FUN_00116a54(void)
     if (*(char *)(temp_v4 + 9) == '\a' || *(char *)(temp_v4 + 9) == '\t') {
       efctSetSpeed();
       temp_v6 = FUN_002c5d80(1,0);
-      FUN_002bee04(g_titleScene,3,temp_v6);
+      renderStackPushIndexed(g_titleScene,3,temp_v6);
       temp_v16 = 0;
       temp_v17 = 6;
       FUN_002bf288(2,0xe,0x106,0);
-      FUN_002bedb0(g_titleScene,3);
+      renderCtxPopState(g_titleScene,3);
       efctSetSpeed();
     }
     titleOverlayDraw(temp_v4);
@@ -154,7 +154,7 @@ char FUN_00116a54(void)
         if ((temp_v8 != 0) || ((*(char *)(temp_v4 + 8) == '\x04' && (*(char *)(temp_v4 + 0x5f) != '\0'))))
         {
           temp_v6 = FUN_002c5d80(1,0);
-          FUN_002bee04(g_titleScene,3,temp_v6);
+          renderStackPushIndexed(g_titleScene,3,temp_v6);
           temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
           temp_v8 = temp_v8 + temp_v5;
           temp_v9 = vec2GetYInt(temp_v4 + 0x2f4);
@@ -176,13 +176,13 @@ char FUN_00116a54(void)
                 temp_v16 = 0;
                 FUN_002bf288(2,0xe,0x116,temp_v5);
                 temp_v6 = packNibblesAndByte(6,1,0);
-                FUN_002bee04(g_titleScene,6,temp_v6);
+                renderStackPushIndexed(g_titleScene,6,temp_v6);
                 efctSetSpeed();
                 temp_v17 = 0x15;
                 temp_v16 = 0;
                 FUN_002bf288(2,0xe,0x117,temp_v8);
                 efctSetSpeed();
-                FUN_002bedb0(g_titleScene,6);
+                renderCtxPopState(g_titleScene,6);
               }
             }
             else {
@@ -204,7 +204,7 @@ char FUN_00116a54(void)
             temp_v17 = 0x15;
             FUN_002bf288(2,0xe,0xde,*(short *)(temp_v10 + 8) + temp_v8);
           }
-          FUN_002bedb0(g_titleScene,3);
+          renderCtxPopState(g_titleScene,3);
         }
         if ((*(unsigned int *)(temp_v4 + 0xc) & 0x20) != 0) goto LAB_00117048;
       }
@@ -215,25 +215,25 @@ char FUN_00116a54(void)
       temp_v8 = vec2GetXInt(temp_v4 + 0x2f4);
       vec2GetYInt(temp_v4 + 0x2f4);
       temp_v6 = FUN_002c5d80(1,0);
-      FUN_002bee04(g_titleScene,3,temp_v6);
+      renderStackPushIndexed(g_titleScene,3,temp_v6);
       efctSetSpeed();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x182,temp_v5);
       temp_v6 = packNibblesAndByte(6,1,0);
-      FUN_002bee04(g_titleScene,6,temp_v6);
+      renderStackPushIndexed(g_titleScene,6,temp_v6);
       efctSetSpeed();
       temp_v16 = (int)*(float *)(temp_v4 + 0xa30);
       temp_v17 = 0x1a;
       FUN_002bf288(2,0xe,0x183,temp_v8 + temp_v5);
-      FUN_002bedb0(g_titleScene,6);
+      renderCtxPopState(g_titleScene,6);
       efctSetSpeed();
       goto LAB_00117044;
     }
     break;
   case 0xc:
     temp_v6 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v6);
+    renderStackPushIndexed(g_titleScene,3,temp_v6);
     efctSetSpeed();
     FUN_002bed3c();
     temp_v14 = 0x3e8a3d71;
@@ -248,7 +248,7 @@ char FUN_00116a54(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
 LAB_00117044:
-    FUN_002bedb0(g_titleScene,3);
+    renderCtxPopState(g_titleScene,3);
   default:
 LAB_00117048:
     if (*(char *)(temp_v4 + 8) == '\0') {
@@ -295,7 +295,7 @@ LAB_00117048:
       temp_v8 = 8;
     }
     temp_v6 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v6);
+    renderStackPushIndexed(g_titleScene,3,temp_v6);
     if (*(char *)(temp_v4 + 8) == '\x01' || *(char *)(temp_v4 + 8) == '\x04') {
       temp_v9 = ifTouchIsActive();
       if (temp_v9 != 0) {
@@ -379,7 +379,7 @@ LAB_00117048:
     return '\0';
   case 0xc:
     temp_v6 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v6);
+    renderStackPushIndexed(g_titleScene,3,temp_v6);
     temp_v12 = 0.27f;
     renderCtxCalculateStereoParallax(g_titleScene);
     temp_v18 = FUN_002b753c(*(unsigned int *)(temp_v4 + 4));
@@ -410,7 +410,7 @@ LAB_00117048:
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
   }
-  FUN_002bedb0(g_titleScene,3);
+  renderCtxPopState(g_titleScene,3);
   return '\0';
 }
 

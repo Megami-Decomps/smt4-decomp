@@ -1,4 +1,5 @@
 #include "romwright_types.h"
+#include "code/Code0049_Smt4a.h"
 
 extern "C" {
 

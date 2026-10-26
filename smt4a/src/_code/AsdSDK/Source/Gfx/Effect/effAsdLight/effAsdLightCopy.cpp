@@ -1,7 +1,15 @@
-/* NON_MATCHING: retail stores the zero components as integer words (str of 0; w is written 0 then 1.0f); the build stores them as float zeros (vstr/vstm) */
+/* NON_MATCHING: only the register of the -1 constant differs (retail mvn r0, ours mvn r1). */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include <string.h>
+
+static __inline void quaternionSetIdentity(EffLightVec4 *quaternion)
+{
+    EffLightVec4 zero = {0, 0, 0, 0};
+    *quaternion = zero;
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
 
@@ -19,14 +27,8 @@ EffAsdLight *effAsdLightCopy(EffAsdLight *src)
     light = (EffAsdLight *)memAlloc(0x10000, 0x100, 0, 288, 0x10, 1);
 
     sysMemClear(light, 288);
-    light->rotation0.x = 0;
-    light->rotation0.y = 0;
-    light->rotation0.z = 0;
-    light->rotation0.w = 1.0f;
-    light->rotation1.x = 0;
-    light->rotation1.y = 0;
-    light->rotation1.z = 0;
-    light->rotation1.w = 1.0f;
+    quaternionSetIdentity(&light->rotation0);
+    quaternionSetIdentity(&light->rotation1);
     light->unk24 = -1;
     light->scale = 1.0f;
     __aeabi_memcpy4(light->params, src->params, 0xb4);

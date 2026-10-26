@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code004b_Smt4a.h"
 struct SoundCueContext {
     /* 0x00 */ u8 unk00[0x3C];
     /* 0x3C */ s16 kind;

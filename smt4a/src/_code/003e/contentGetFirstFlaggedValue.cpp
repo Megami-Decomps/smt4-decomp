@@ -1,6 +1,6 @@
-/* NON_MATCHING: separate 0x7de/0x7df literals and saved-register allocation differ; retail hoists and shares the bounds, candidate optimization flags. */
+/* NON_MATCHING: constants and register allocation match retail (the named count hoists 0x7de and derives 0x7df); retail sets up the call argument before the bounds branch and returns from mid-function, the build places the epilogue last (nop {0}; b). */
 #include "common.h"
-#include "shard/dataTable8FindRecord.h"
+#include "gamedata/DataTableAccess_VariantD_Table8Record.h"
 
 struct ContentFlagsView {
     u8 unk00[0x68];
@@ -12,17 +12,16 @@ u16 FUN_001ba3d4(s32 id);
 
 u32 contentGetFirstFlaggedValue(void)
 {
+    const u32 count = 0x7de;
     u32 result = 0;
-    u32 id = 0;
-    const ContentFlagsView* record;
-    while ((record = (const ContentFlagsView*)dataTable8FindRecord(id)) == NULL ||
-           !(record->flags & 8)) {
-        if (++id >= 0x7df) {
+    for (u32 id = 0; id < count + 1; id++) {
+        const ContentFlagsView *record = (const ContentFlagsView *)dataTable8FindRecord(id);
+        if (record != NULL && (record->flags & 8)) {
+            if (id - 1 < count) {
+                result = FUN_001ba3d4(id);
+            }
             return result;
         }
-    }
-    if (id - 1 < 0x7de) {
-        result = FUN_001ba3d4(id);
     }
     return result;
 }

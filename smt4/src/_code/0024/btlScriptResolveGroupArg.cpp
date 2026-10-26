@@ -1,5 +1,5 @@
 #include "shard/W4_Match6_BtlEntry.h"
-#include "util/btlScriptResolveGroupArg.h"
+#include "battle/BattleHelpers.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
 

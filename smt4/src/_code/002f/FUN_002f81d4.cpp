@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_0024fcdc(void *transform, const TransformMtx44 *matrix, s32 mode);
+void matrixApplyByMode(void *transform, const TransformMtx44 *matrix, s32 mode);
 void FUN_0024fd70(TransformMtx44 *matrix, const TransformVec3 *translation, s32 mode);
 void mathMatrixApplyScale(TransformMtx44 *matrix, const TransformVec3 *scale, s32 mode);
 void FUN_0025009c(TransformRotation *rotation, const void *source);
@@ -37,7 +37,7 @@ void FUN_002f81d4(TransformOwner *owner, const TransformVec3 *translation, const
         TransformVec3 offset = { translation->x, translation->y, translation->z };
         FUN_0024fd70(&matrix, &offset, 2);
     }
-    FUN_0024fcdc(owner->transform, &matrix, 0);
+    matrixApplyByMode(owner->transform, &matrix, 0);
 }
 
 } /* extern "C" */

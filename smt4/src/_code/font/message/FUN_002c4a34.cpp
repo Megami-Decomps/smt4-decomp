@@ -1,7 +1,7 @@
 /* NON_MATCHING: only final paramsInit address/count argument scheduling differs; allocation, text defaults and all jobs match. */
 #include "ui/MessageMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "util/asdTextSetBaseColor.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_AsdText.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"

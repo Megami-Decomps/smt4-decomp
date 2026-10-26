@@ -1,6 +1,6 @@
 /* Script command: opens the quest UI for (quest id, arg) when allowed; returns whether the UI is (now) open. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "script/ScriptArgs.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {

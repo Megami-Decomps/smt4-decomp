@@ -1,5 +1,6 @@
 /* Returns the signed flag byte at +0x2015 of the global session object, or 0 when there is no session. */
 #include "shard/Shard0033.h"
+#include "code/Code0028_Smt4a.h"
 
 extern "C" {
 

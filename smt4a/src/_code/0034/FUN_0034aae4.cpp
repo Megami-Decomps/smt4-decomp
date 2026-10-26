@@ -1,13 +1,12 @@
 /* NON_MATCHING: retail keeps two registers for the quest pointer (a copy in r5 for the release steps, `movs r5, r7`, the original in r7 for jobStop and the free) and the g_uiQuest address in r8; the build coalesces them */
 #include "common.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 
 int jobStop(unsigned int, int);
-int ifTouchRegionRemove(void);
 void asdMemFree(void *allocation);
 int asdTMTexTableReleaseNode(int, int);
 struct ScriptResource;

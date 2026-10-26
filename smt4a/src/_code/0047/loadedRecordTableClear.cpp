@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0047_Smt4a.h"
 
 /* One loaded entry: two allocated buffers and their state flags. */
 struct LoadedRecord {

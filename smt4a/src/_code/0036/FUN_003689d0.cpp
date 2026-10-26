@@ -1,4 +1,5 @@
 #include "addon/aocMain.h"
+#include "code/Code0036_Smt4a.h"
 
 extern "C" {
 

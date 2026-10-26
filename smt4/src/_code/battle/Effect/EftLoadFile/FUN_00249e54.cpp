@@ -14,7 +14,7 @@ int asdMemFree(...);
 int memClear(void);
 int asdMemAlloc(...);
 int effectAllocateSavedRenderRecords(...);
-int FUN_0031bae0(...);
+int effectAllocateSavedEntries(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 int rt_memcpy(...);
@@ -73,7 +73,7 @@ extern int libc_strlen(int);
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: asdMemAlloc. */
 /* Supplied declaration required: effectAllocateSavedRenderRecords. */
-/* Supplied declaration required: FUN_0031bae0. */
+/* Supplied declaration required: effectAllocateSavedEntries. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -504,7 +504,7 @@ LAB_0024a200:
     }
   }
   effectAllocateSavedRenderRecords(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
-  FUN_0031bae0(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
+  effectAllocateSavedEntries(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
   keyedCopyPayload(temp_v49,param_2 + 0x14);
   keyedRecordSetVectorPair0(temp_v49,temp_v47);
   keyedRecordSetVectorPair1(temp_v49,&temp_v23);

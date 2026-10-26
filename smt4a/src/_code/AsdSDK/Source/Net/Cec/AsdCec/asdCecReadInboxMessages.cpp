@@ -2,7 +2,7 @@
 #include "nn/Result.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "AsdSDK/AsdDebug.h"
-#include "shard/asdCecMessageBoxClose.h"
+#include "network/CecControl_AsdCec.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

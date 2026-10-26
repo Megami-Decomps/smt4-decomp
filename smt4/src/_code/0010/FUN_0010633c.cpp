@@ -40,7 +40,7 @@ extern const char DAT_004076bd[];
 s32 jyoucyuGetTableEntry(s32 index);
 u32 asdSoundGetOutputSlotFlag(u32 id);
 s32 FUN_0010c5b0(u32 id, u32 frames);
-s32 FUN_0010d2d4(u32 id, s32 direction, u32 frames);
+s32 asdSoundSetOutputPause(u32 id, s32 direction, u32 frames);
 const char *FUN_0010bf44(u32 cue);
 s32 rt_memcmp(const void *a, const void *b, u32 count);
 u32 soundVolumeSettingGet(void);
@@ -99,12 +99,12 @@ void FUN_0010633c(void)
                         }
                     }
                 } else if (flags & CHANNEL_FADING_OUT) {
-                    if (FUN_0010d2d4(channel->id, 0, channel->fadeFrames) != 0) {
+                    if (asdSoundSetOutputPause(channel->id, 0, channel->fadeFrames) != 0) {
                         channel->flags = (flags & ~CHANNEL_FADING_OUT) | CHANNEL_FADED_OUT;
                         releaseCurrent(channel, partner);
                     }
                 } else if (flags & CHANNEL_RESUMING) {
-                    if (FUN_0010d2d4(channel->id, 1, channel->position) != 0) {
+                    if (asdSoundSetOutputPause(channel->id, 1, channel->position) != 0) {
                         flags &= ~CHANNEL_RESUMING;
                         channel->flags = flags;
                         if (flags & CHANNEL_CROSSFADE)

@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "shard/S1ListPanel.h"
 
 extern "C" {
 
 int FUN_00288e68(void);
-int FUN_0028d1f4(...);
 int FUN_0028f694(...);
 int FUN_0028f870(...);
 int FUN_002b6c34(...);
@@ -27,7 +27,6 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_3_stack;
 
-extern unsigned char LAB_001f3d90; /* 0x1f3d90 */
 extern unsigned char LAB_001f40c0; /* 0x1f40c0 */
 extern unsigned char LAB_001f40f8; /* 0x1f40f8 */
 extern int g_camp; /* 0x43da90 */
@@ -121,7 +120,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
         }
         temp_v2 = asdTMTexTableEntryAt(0x1d,0x45c);
         temp_v8 = FUN_0028d1f4(temp_v10);
-        textFormatBuffer(temp_v9,&LAB_001f3d90,temp_v8);
+        textFormatBuffer(temp_v9,"%d",temp_v8);
         FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,1,8,0x6f,
                      temp_v9);
@@ -200,7 +199,7 @@ void FUN_001f3958(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x1d,0x45e,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,0x83);
   temp_v5 = asdTMTexTableEntryAt(0x1d,0x468);
   temp_v8 = FUN_0028d1f4(temp_v7);
-  textFormatBuffer(temp_v9,&LAB_001f3d90,temp_v8);
+  textFormatBuffer(temp_v9,"%d",temp_v8);
   FUN_002bdf94(0,(int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,
                (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,1,8,0x83,
                temp_v9);

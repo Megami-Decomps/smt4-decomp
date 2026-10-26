@@ -1,7 +1,7 @@
 /* NON_MATCHING: stack-address evaluation order now matches retail (renderCtxPush wrappers); 232 diff lines remain, scheduling/register allocation only. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "gamedata/FlagsB.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 

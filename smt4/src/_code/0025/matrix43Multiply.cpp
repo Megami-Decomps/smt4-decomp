@@ -1,27 +1,22 @@
-#include "common.h"
+#include "shard/W5_W5Match2_PlainData.h"
 
 extern "C" {
 
-/* Row-major 4x4 matrix; only the 3x3 rotation part and the translation row are used. */
-typedef struct Mtx {
-    f32 m[4][4];
-} Mtx;
-
 /* dst = a * b for affine matrices: rotation rows times b's 3x3, translation row also gets b's translation added. */
-void matrix43Multiply(Mtx *dst, Mtx *a, Mtx *b)
+void matrix43Multiply(Matrix44 *dst, const Matrix44 *a, const Matrix44 *b)
 {
-    dst->m[0][0] = a->m[0][0] * b->m[0][0] + a->m[0][1] * b->m[1][0] + a->m[0][2] * b->m[2][0];
-    dst->m[0][1] = a->m[0][0] * b->m[0][1] + a->m[0][1] * b->m[1][1] + a->m[0][2] * b->m[2][1];
-    dst->m[0][2] = a->m[0][0] * b->m[0][2] + a->m[0][1] * b->m[1][2] + a->m[0][2] * b->m[2][2];
-    dst->m[1][0] = a->m[1][0] * b->m[0][0] + a->m[1][1] * b->m[1][0] + a->m[1][2] * b->m[2][0];
-    dst->m[1][1] = a->m[1][0] * b->m[0][1] + a->m[1][1] * b->m[1][1] + a->m[1][2] * b->m[2][1];
-    dst->m[1][2] = a->m[1][0] * b->m[0][2] + a->m[1][1] * b->m[1][2] + a->m[1][2] * b->m[2][2];
-    dst->m[2][0] = a->m[2][0] * b->m[0][0] + a->m[2][1] * b->m[1][0] + a->m[2][2] * b->m[2][0];
-    dst->m[2][1] = a->m[2][0] * b->m[0][1] + a->m[2][1] * b->m[1][1] + a->m[2][2] * b->m[2][1];
-    dst->m[2][2] = a->m[2][0] * b->m[0][2] + a->m[2][1] * b->m[1][2] + a->m[2][2] * b->m[2][2];
-    dst->m[3][0] = b->m[3][0] + a->m[3][0] * b->m[0][0] + a->m[3][1] * b->m[1][0] + a->m[3][2] * b->m[2][0];
-    dst->m[3][1] = b->m[3][1] + a->m[3][0] * b->m[0][1] + a->m[3][1] * b->m[1][1] + a->m[3][2] * b->m[2][1];
-    dst->m[3][2] = b->m[3][2] + a->m[3][0] * b->m[0][2] + a->m[3][1] * b->m[1][2] + a->m[3][2] * b->m[2][2];
+    dst->values[0] = a->values[0] * b->values[0] + a->values[1] * b->values[4] + a->values[2] * b->values[8];
+    dst->values[1] = a->values[0] * b->values[1] + a->values[1] * b->values[5] + a->values[2] * b->values[9];
+    dst->values[2] = a->values[0] * b->values[2] + a->values[1] * b->values[6] + a->values[2] * b->values[10];
+    dst->values[4] = a->values[4] * b->values[0] + a->values[5] * b->values[4] + a->values[6] * b->values[8];
+    dst->values[5] = a->values[4] * b->values[1] + a->values[5] * b->values[5] + a->values[6] * b->values[9];
+    dst->values[6] = a->values[4] * b->values[2] + a->values[5] * b->values[6] + a->values[6] * b->values[10];
+    dst->values[8] = a->values[8] * b->values[0] + a->values[9] * b->values[4] + a->values[10] * b->values[8];
+    dst->values[9] = a->values[8] * b->values[1] + a->values[9] * b->values[5] + a->values[10] * b->values[9];
+    dst->values[10] = a->values[8] * b->values[2] + a->values[9] * b->values[6] + a->values[10] * b->values[10];
+    dst->values[12] = b->values[12] + a->values[12] * b->values[0] + a->values[13] * b->values[4] + a->values[14] * b->values[8];
+    dst->values[13] = b->values[13] + a->values[12] * b->values[1] + a->values[13] * b->values[5] + a->values[14] * b->values[9];
+    dst->values[14] = b->values[14] + a->values[12] * b->values[2] + a->values[13] * b->values[6] + a->values[14] * b->values[10];
 }
 
 } /* extern "C" */

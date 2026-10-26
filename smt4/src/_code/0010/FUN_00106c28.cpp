@@ -1,6 +1,7 @@
 /* NON_MATCHING: lock and archive-state saved registers differ and retail's removed-hook NOPs are absent. */
 #include "common.h"
 #include "shard/W6_W6Match7_SoundInit.h"
+#include "code/Code0010_Smt4.h"
 
 struct ArchiveReferenceState { u32 unk00; u32 references; };
 extern "C" {
@@ -10,7 +11,6 @@ extern const char DAT_00407e1a[];
 extern u8 DAT_004655f8[];
 void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
-u32 FUN_0010f50c();
 u32 FUN_002c1398();
 u32 libc_strlen(const char *text);
 u32 asdModelForwardChecked(void *archive, const char *name, u32 length, u32 flags);

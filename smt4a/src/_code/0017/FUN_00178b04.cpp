@@ -1,11 +1,13 @@
-/* NON_MATCHING: retail uses push {r3, r4, r5, lr} where the compiled block uses push {r3, lr}. */
 #include "common.h"
-#include "shard/W5_W5Match5_GameSaveViews.h"
+#include "AsdSDK/AsdDebug.h"
 
-extern "C" void* asdMemoryAlloc(u32 size, u32 alignment, u32 flags,
-                                u32 memoryType, u32 allocationMode);
+extern "C" {
+void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 fromFront);
 
-extern "C" void* FUN_00178b04(u32 memoryType, u32 unusedFirst, u32 unusedSecond)
+/* Allocates from the default heap after the source-location debug hook. */
+void *FUN_00178b04(u32 size, const char *file, u32 line)
 {
-    return asdMemoryAlloc(0x100, 0x100, 0, memoryType, 1);
+    asdDebugTrace(file, line);
+    return asdMemoryAlloc(256, 256, 0, size, 1);
+}
 }

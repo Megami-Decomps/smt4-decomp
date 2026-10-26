@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: retail keeps the job work in r5 and the zero for the dirty-flag stores in r6; ours swaps them. */
 #include "shard/S1ListPanel.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "shard/JobWork.h"
 extern "C" {
 extern RenderCtxA *g_renderCtx;

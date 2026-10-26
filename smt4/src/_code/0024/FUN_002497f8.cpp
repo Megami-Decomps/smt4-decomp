@@ -1,59 +1,71 @@
-/* NON_MATCHING: category/rank keys are assigned to different callee-saved registers (declaring the four locals in the order rightCategory, leftCategory, rightRank, leftRank at the top matches, but that is declaration-order steering). */
+#include "common.h"
 #include "gamedata/ItemSortRecord.h"
-#include "shard/PassiveSkill.h"
-#include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/DataTable40.h"
 
 extern "C" {
-u32 idIsAbove400(u32 id);
-u32 FUN_0024c5a0(u32 id);
-u32 recordKindRank(u32 id);
-const GameUnitSortRecord* gameGetUnitRecord(u32 index);
 
-// Order by descending category/rank, ascending secondary key, then descending skill/owner ids.
-s32 FUN_002497f8(const SkillListEntry* left, const SkillListEntry* right)
+typedef struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 sortKey;
+} SlotRecord;
+
+typedef struct SortItem {
+    /* 0x00 */ int id;
+    /* 0x04 */ int slot;       /* negative when the item is not in a slot */
+} SortItem;
+
+extern int idIsAbove400(int id);
+extern int FUN_0024c5a0(int id);
+extern int recordKindRank(int id);
+extern SlotRecord *gameGetUnitRecord(int slot);
+
+/* Compare function for sorting items: by two ranks, the data row's order, the id, then the slot's sort key. */
+int FUN_002497f8(SortItem *a, SortItem *b)
 {
-    s32 leftCategory;
-    s32 leftRank;
-    u16 leftKey;
-    if (idIsAbove400(left->skillId) != 0) {
-        leftCategory = 99;
-        leftRank = 99;
-        leftKey = 0;
+    int rankB;
+    int rankA;
+    int subB;
+    int subA;
+    u32 orderB;
+    u32 orderA;
+    u32 slotKeyA;
+    u32 slotKeyB;
+    int diff;
+
+    if (idIsAbove400(a->id) != 0) {
+        rankA = 99;
+        subA = 99;
+        orderA = 0;
     } else {
-        leftCategory = FUN_0024c5a0(left->skillId);
-        leftRank = recordKindRank(left->skillId);
-        leftKey = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(left->skillId))->secondaryKey;
+        rankA = FUN_0024c5a0(a->id);
+        subA = recordKindRank(a->id);
+        orderA = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(a->id))->secondaryKey;
     }
-    s32 rightCategory;
-    s32 rightRank;
-    u16 rightKey;
-    if (idIsAbove400(right->skillId) != 0) {
-        rightCategory = 99;
-        rightRank = 99;
-        rightKey = 0;
+    if (idIsAbove400(b->id) != 0) {
+        rankB = 99;
+        subB = 99;
+        orderB = 0;
     } else {
-        rightCategory = FUN_0024c5a0(right->skillId);
-        rightRank = recordKindRank(right->skillId);
-        rightKey = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(right->skillId))->secondaryKey;
+        rankB = FUN_0024c5a0(b->id);
+        subB = recordKindRank(b->id);
+        orderB = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(b->id))->secondaryKey;
     }
-    s32 difference = rightCategory - leftCategory;
-    if (difference == 0) {
-        difference = rightRank - leftRank;
+    diff = rankB - rankA;
+    if (diff == 0) {
+        diff = subB - subA;
+        if (diff == 0) {
+            diff = orderA - orderB;
+            if (diff == 0) {
+                diff = b->id - a->id;
+                if (diff == 0) {
+                    slotKeyA = (a->slot < 0) ? 0 : gameGetUnitRecord(a->slot)->sortKey;
+                    slotKeyB = (b->slot < 0) ? 0 : gameGetUnitRecord(b->slot)->sortKey;
+                    diff = slotKeyB - slotKeyA;
+                }
+            }
+        }
     }
-    if (difference != 0) {
-        return difference;
-    }
-    difference = leftKey - rightKey;
-    if (difference != 0) {
-        return difference;
-    }
-    difference = (s32)(right->skillId - left->skillId);
-    if (difference != 0) {
-        return difference;
-    }
-    u16 leftOwner = left->unit < 0 ? 0 : gameGetUnitRecord(left->unit)->id;
-    u16 rightOwner = right->unit < 0 ? 0 : gameGetUnitRecord(right->unit)->id;
-    return rightOwner - leftOwner;
+    return diff;
 }
-}
+
+} /* extern "C" */

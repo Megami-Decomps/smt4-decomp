@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "code/Code002c_Smt4.h"
 
 
 extern "C" {

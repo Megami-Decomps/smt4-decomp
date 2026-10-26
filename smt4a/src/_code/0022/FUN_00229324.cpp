@@ -1,16 +1,16 @@
-#include "util/Vec2Fixed.h"
-/* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations and keeps the scene pointer in other registers than retail. */
+#include "util/MathFunctions.h"
+/* NON_MATCHING: readable rebuild from asm of a scene overlay draw (the slide-in banner and the mark sprites inside render states); armcc here orders the render-state operations, keeps the scene pointer and the banner sprite in other registers than retail, and loads the owner global after the push. */
 #include "gfx/RenderStateStack.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 /* The overlay's scene (only the fields the draw reads). */
 struct OverlayScene {
     /* 0x0000 */ u8 unk0000[0x20];
     /* 0x0020 */ f32 position[2];
-    /* 0x0028 */ u8 unk0028[0x8B6];
-    /* 0x08DE */ u8 hidden;
+    /* 0x0028 */ u8 unk0028[0x82C];
+    /* 0x0854 */ u8 banner[0x8B]; /* a sprite: its completion state is the signed byte at +0x8A */
     /* 0x08DF */ u8 unk08DF[0x3A85];
     /* 0x4364 */ s32 state;
     /* 0x4368 */ u8 unk4368[4];
@@ -34,6 +34,7 @@ s32 scriptProcessCreateWhenReady(OverlayScene *scene);
 u32 FUN_001692ac(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 u32 vec2GetYInt(void *vec);
+s32 uiSpriteGetCompletionState(const u8 *sprite);
 void FUN_004b0164(OverlayScene *scene, u32 x, u32 y);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);
@@ -50,7 +51,7 @@ u32 FUN_00229324(void)
     u32 firstState = FUN_001692ac(1, 0);
     renderStackPushCounted(&ctx->stackA, firstState);
     ctx = g_renderCtx;
-    if (scene->state == 13 && scene->step == 5 && scene->hidden == 0) {
+    if (scene->state == 13 && scene->step == 5 && uiSpriteGetCompletionState(scene->banner) == 0) {
         if (scene->timer < 16) {
             s32 offset = scene->timer * -30;
             if (offset < -240)

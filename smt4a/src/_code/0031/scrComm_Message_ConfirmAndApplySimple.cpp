@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/Shard0047.h"
+#include "code/Code0041_Smt4a.h"
 
 extern "C" {
 s32 scrGetCommandFrame();
@@ -11,7 +12,6 @@ s32 dataTableValueOrZero(u32 index);
 void FUN_003dea6c(u32 member, s32 mode, s32 enabled);
 void FUN_001695a0();
 s32 messageForwardDefaultMode(s32 message, s32 mode, u32 frame, s32 style, s32 flags);
-void FUN_00418070(u32 member, s32 mode);
 void partyEntryIsAvailable(u32 member);
 void optionsClearFlag1();
 

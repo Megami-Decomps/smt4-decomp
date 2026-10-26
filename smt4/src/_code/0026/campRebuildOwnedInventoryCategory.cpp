@@ -1,10 +1,10 @@
 /* NON_MATCHING: only the initial category compare is scheduled after `mov r9, r0` and the first literal load (retail compares r0 first; 4 diff lines); the switch already gives retail's r8/r9 allocation. */
 #include "shard/W6_W6Match8_CampInventory.h"
-#include "util/FUN_0028fb40.h"
+#include "code/Code0028.h"
+#include "gamedata/FlagValueIsPositive.h"
 
 extern "C" {
 extern CampInventoryLists *g_camp;
-s32 flagValueIsPositive(u32 id);
 void FUN_0029f848(CampInventoryController *controller, s32 count, s32 rows, s32 arg3, s32 arg4, s32 arg5);
 void FUN_00282f80(s32 category);
 

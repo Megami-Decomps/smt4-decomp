@@ -26,22 +26,6 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } param_1_stack;
 
-extern unsigned char LAB_00292624; /* 0x292624 */
-extern unsigned char LAB_0029263c; /* 0x29263c */
-extern unsigned char LAB_0029264c; /* 0x29264c */
-extern unsigned char LAB_00292650; /* 0x292650 */
-extern unsigned char LAB_00292654; /* 0x292654 */
-extern unsigned char LAB_00292660; /* 0x292660 */
-extern unsigned char LAB_00292668; /* 0x292668 */
-extern unsigned char LAB_00292678; /* 0x292678 */
-extern unsigned char LAB_00292684; /* 0x292684 */
-extern unsigned char LAB_00292690; /* 0x292690 */
-extern unsigned char LAB_0029269c; /* 0x29269c */
-extern unsigned char LAB_002926a8; /* 0x2926a8 */
-extern unsigned char LAB_002926b0; /* 0x2926b0 */
-extern unsigned char LAB_002926b8; /* 0x2926b8 */
-extern unsigned char LAB_002926c0; /* 0x2926c0 */
-extern unsigned char LAB_002926c4; /* 0x2926c4 */
 extern unsigned char LAB_002927fc; /* 0x2927fc */
 extern unsigned char LAB_0029280c; /* 0x29280c */
 extern unsigned char LAB_0029281c; /* 0x29281c */
@@ -137,10 +121,10 @@ void FUN_0029212c(int param_1)
         skillFormatTargetLabel(&temp_v12,(*(unsigned int *)(temp_v6 + 0x28) & 0x1ff) >> 5);
       }
       else if ((*(unsigned char *)(temp_v8 + 0x6a) & 0x80) != 0) {
-        textFormatBuffer(&temp_v12,&LAB_00292624);
+        textFormatBuffer(&temp_v12,"\x82`\x82\x8c\x82\x8c\x81@\x82\x81\x82\x8c\x82\x8c\x82\x89\x82\x85\x82\x93");
       }
       else {
-        textFormatBuffer(&temp_v12,&LAB_0029263c);
+        textFormatBuffer(&temp_v12,"\x82P\x81@\x82\x81\x82\x8c\x82\x8c\x82\x99");
       }
       textEncodeFontSlot(0x24,&temp_v12);
       temp_v4 = recordPackedValue(temp_v5);
@@ -163,7 +147,7 @@ void FUN_0029212c(int param_1)
     else {
       FUN_002907c4(temp_v13,temp_v0 & 0xf);
       FUN_002907c4(temp_v14,*(unsigned char *)(temp_v5 + 0x58) >> 4);
-      textFormatBuffer(&temp_v12,&LAB_0029264c,temp_v13,temp_v14);
+      textFormatBuffer(&temp_v12,"%s\x81`%s",temp_v13,temp_v14);
       textEncodeFontSlot(0x25,&temp_v12);
     }
     btlFormatCategoryLabel(&temp_v12,*(unsigned int *)(temp_v5 + 0x54) >> 0x14);
@@ -171,25 +155,25 @@ void FUN_0029212c(int param_1)
     skillFormatTargetLabel(&temp_v12,*(unsigned char *)(temp_v5 + 0x59));
     textEncodeFontSlot(0x27,&temp_v12);
     if (*(char *)(temp_v5 + 0x5b) == '\0') {
-      textFormatBuffer(&temp_v12,&LAB_00292654);
+      textFormatBuffer(&temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
     }
     if (*(char *)(temp_v5 + 0x5b) == '\x01') {
-      textFormatBuffer(&temp_v12,&LAB_00292660);
+      textFormatBuffer(&temp_v12,"\x82j\x82n");
     }
     if (*(char *)(temp_v5 + 0x5b) == '\x05') {
-      textFormatBuffer(&temp_v12,&LAB_00292668);
+      textFormatBuffer(&temp_v12,"\x82o\x82\x8f\x82\x89\x82\x93\x82\x8f\x82\x8e");
     }
     if (*(char *)(temp_v5 + 0x5b) == '\x06') {
-      textFormatBuffer(&temp_v12,&LAB_00292678);
+      textFormatBuffer(&temp_v12,"\x82o\x82\x81\x82\x8e\x82\x89\x82\x83");
     }
     if (*(char *)(temp_v5 + 0x5b) == '\a') {
-      textFormatBuffer(&temp_v12,&LAB_00292684);
+      textFormatBuffer(&temp_v12,"\x82r\x82\x8c\x82\x85\x82\x85\x82\x90");
     }
     if (*(char *)(temp_v5 + 0x5b) == '\b') {
-      textFormatBuffer(&temp_v12,&LAB_00292690);
+      textFormatBuffer(&temp_v12,"\x82a\x82\x89\x82\x8e\x82\x84");
     }
     if (*(char *)(temp_v5 + 0x5b) == '\t') {
-      textFormatBuffer(&temp_v12,&LAB_0029269c);
+      textFormatBuffer(&temp_v12,"\x82r\x82\x89\x82\x83\x82\x8b");
     }
     temp_v4 = 0x28;
     break;
@@ -208,14 +192,14 @@ void FUN_0029212c(int param_1)
       FUN_002907c4(temp_v18,temp_v11);
       if (temp_v10 != 0) {
         if (temp_v10 >= 1) {
-          textFormatBuffer(&temp_v12,&LAB_002926a8);
+          textFormatBuffer(&temp_v12,"\x81{%s");
         }
         else {
-          textFormatBuffer(&temp_v12,&LAB_002926b8);
+          textFormatBuffer(&temp_v12,"\x81|%s");
         }
       }
       else {
-        textFormatBuffer(&temp_v12,&LAB_002926b0);
+        textFormatBuffer(&temp_v12,"\x81}\x82O");
       }
       textEncodeFontSlot(temp_v8 + 0x24,&temp_v12);
       temp_v8 = temp_v8 + 1;
@@ -267,7 +251,7 @@ void FUN_0029212c(int param_1)
       if ('\0' < temp_v15[temp_v11]) {
         if (0 < temp_v10) {
           temp_v9 = (int)&temp_v12 + temp_v8;
-          textFormatBuffer(temp_v9,&LAB_002926c0);
+          textFormatBuffer(temp_v9,"\x81@");
           temp_v8 = temp_v8 + temp_v9;
         }
         temp_v9 = 0;
@@ -278,7 +262,7 @@ void FUN_0029212c(int param_1)
             temp_v8 = temp_v8 + temp_v7;
             if ((temp_v9 < 0x11) && ('\0' < acStack_c8[temp_v9 + temp_v3 + 0xc9])) {
               temp_v7 = (int)&temp_v12 + temp_v8;
-              textFormatBuffer(temp_v7,&LAB_002926c4);
+              textFormatBuffer(temp_v7,"\x81^");
               temp_v8 = temp_v8 + temp_v7;
             }
             temp_v9 = temp_v9 + 1;
@@ -324,10 +308,10 @@ void FUN_0029212c(int param_1)
     textEncodeFontSlot(0x29,&temp_v12);
     if (*(short *)(temp_v5 + 0x6a) != 0) {
       temp_v4 = aocIndexValueOrDefault();
-      textFormatBuffer(&temp_v12,&LAB_00292650,temp_v4);
+      textFormatBuffer(&temp_v12,"%s",temp_v4);
     }
     else {
-      textFormatBuffer(&temp_v12,&LAB_00292654);
+      textFormatBuffer(&temp_v12,"\x82m\x82\x8f\x82\x8e\x82\x85");
     }
     temp_v4 = 0x2a;
   }

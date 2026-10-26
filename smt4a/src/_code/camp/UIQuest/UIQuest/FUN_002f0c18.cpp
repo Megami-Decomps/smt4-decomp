@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "event/bustupEvent/BustupTex.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -41,13 +42,7 @@ typedef struct {
 
 extern int FUN_00215cb8(...); /* 0x215cb8 */
 extern int FUN_0023b4cc(...); /* 0x23b4cc */
-extern unsigned char LAB_0028587c; /* 0x28587c */
-extern unsigned char LAB_002f1034; /* 0x2f1034 */
-extern unsigned char LAB_002f1048; /* 0x2f1048 */
-extern unsigned char LAB_002f105c; /* 0x2f105c */
-extern unsigned char LAB_002f1074; /* 0x2f1074 */
-extern unsigned char LAB_002f1084; /* 0x2f1084 */
-extern unsigned char LAB_002f10a0; /* 0x2f10a0 */
+extern unsigned char FUN_0028587c; /* 0x28587c */
 extern unsigned char DAT_0052e8ec; /* 0x52e8ec */
 extern unsigned char DAT_0052e97c; /* 0x52e97c */
 extern unsigned char DAT_0052eaa8; /* 0x52eaa8 */
@@ -69,7 +64,6 @@ extern unsigned int *g_uiQuest; /* 0x57f28c */
 extern int gameFlagEntryGetBit(unsigned short, unsigned int);
 extern int gameFlagBlockGet(void);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_001ff724. */
 /* Supplied declaration required: asdLoadFileSyncDefault. */
 /* Supplied declaration required: uiFadeSetVisible. */
@@ -105,18 +99,15 @@ void FUN_002f0c18(void)
   }
   puVar2 = g_uiQuest;
   sysMemClear();
-  puVar3 = &LAB_002f1034;
-  asdProcessCreateSimple(&LAB_002f1034,4,0,0,FUN_00215cb8,0,0);
+  asdProcessCreateSimple("UIQuest Calc",4,0,0,FUN_00215cb8,0,0);
   *puVar2 = (unsigned int)puVar3;
-  taskCreateDraw(&LAB_002f1048,0x81,0,0,FUN_0023b4cc,0,0,puVar3);
-  taskCreateDraw(&LAB_002f105c,0xdd,0,0,FUN_0023b4cc,0,0,*puVar2);
-  taskCreateDraw(&LAB_002f1074,0xea,0,0,&LAB_0028587c,0,0,*puVar2);
+  taskCreateDraw("UIQuest UDrawLeft",0x81,0,0,FUN_0023b4cc,0,0,puVar3);
+  taskCreateDraw("UIQuest UDrawRight",0xdd,0,0,FUN_0023b4cc,0,0,*puVar2);
+  taskCreateDraw("UIQuest DDraw",0xea,0,0,&FUN_0028587c,0,0,*puVar2);
   puVar2 = g_uiQuest;
   uiFadeSetVisible(0);
-  puVar3 = &LAB_002f1084;
   asdLoadFileSyncDefault();
   puVar2[0x23d] = (unsigned int)puVar3;
-  puVar3 = &LAB_002f10a0;
   asdLoadFileSyncDefault();
   puVar2[0x23e] = (unsigned int)puVar3;
   FUN_00275bc8();

@@ -1,7 +1,7 @@
 #include "common.h"
-#include "script/ScriptArgs.h"
 #include "battle/btlMain.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 

@@ -1,6 +1,6 @@
 /* NON_MATCHING: native nn::Result local and named activity-state pointer restore saved registers and final flag store; only first failure predicate uses r1 instead of retail r2. */
 #include "nn/Result.h"
-#include "util/FUN_002c1398.h"
+#include "code/Code002c_Result.h"
 
 extern "C" {
 extern u8 DAT_00471a10;

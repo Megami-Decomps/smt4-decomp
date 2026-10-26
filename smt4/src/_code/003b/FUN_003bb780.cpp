@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation (retail addresses the cursor flags through a base register at menu+0x600 and keeps constants in different registers) */
 #include "shard/S1ListMenu.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_0029e924.h"
+#include "code/Code0029.h"
 
 extern "C" {
 

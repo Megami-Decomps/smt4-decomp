@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 namespace {
 struct RandomPartyTargetMasks { u64 required, excluded; };

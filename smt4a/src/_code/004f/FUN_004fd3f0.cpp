@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {
 void FUN_0047effc(s32, u32, u32);

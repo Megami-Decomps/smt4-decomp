@@ -1,6 +1,6 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 /* A menu entry's draw state: a mode, a selected row and an animation frame. */
 struct MenuEntryDraw {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail homes r0-r3 at entry (push {r0-r3,...}) and reloads the list pointer from its home slot before every call, and sign-extends the three region ids at the call; ours keeps the pointer in a saved register and passes the ids unextended */
 #include "common.h"
 #include "ui/IfTouch.h"
+#include "code/Code001c_Smt4.h"
 
 /* Two halfwords passed together in one register. */
 struct ScrollPoint {
@@ -22,7 +23,6 @@ s32 objectPartRunUnlessLocked(ScrollList *list);
 s32 FUN_0029efa8(ScrollList *list);
 void scrollOwnerSelectIndex(ScrollList *list, s32 value);
 void FUN_0029eb5c(ScrollList *list, s32 value);
-s16 FUN_001c36a0(void);
 void eventQueueAddUnique(u32 event);
 
 /* Handles a touch on a scrolling list: the previous/next controls move one step, a touch on the

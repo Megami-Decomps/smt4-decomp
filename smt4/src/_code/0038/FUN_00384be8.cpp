@@ -17,7 +17,7 @@ int asdLoadFileAsyncSimple(unsigned char [64], unsigned int *, int);
 int scrScriptProcessDestroy(void);
 int libc_strcat(...);
 int buttonHelpSetPreset(int);
-int FUN_002bcfc0(unsigned char [64], unsigned char [140]);
+int textConvertToGlyphPairs(unsigned char [64], unsigned char [140]);
 int textFormatBuffer(...);
 int FUN_002bff50(void);
 int asdMemFree(void);
@@ -51,7 +51,7 @@ extern int messageWindowIsState1(void);
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002bcfc0. */
+/* Supplied declaration required: textConvertToGlyphPairs. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_strcpy. */
 /* Supplied declaration required: FUN_002bff50. */
@@ -102,7 +102,7 @@ void FUN_00384be8(unsigned int *param_1)
       do {
         temp_v4 = dataTable27Sub0GetRecord(param_1 + 8,0);
         libc_strcpy(reinterpret_cast<unsigned int *>(temp_v6), reinterpret_cast<unsigned int *>(temp_v4 + param_1[temp_v2 * 2 + 0x357] * 0x88));
-        FUN_002bcfc0(temp_v6,temp_v8);
+        textConvertToGlyphPairs(temp_v6,temp_v8);
         libc_strcat(puVar6,temp_v8);
         libc_strcat(puVar6,"<br>");
         param_1[param_1[0x368] + 0x364] = temp_v2;

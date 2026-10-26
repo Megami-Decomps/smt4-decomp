@@ -1,6 +1,6 @@
 /* NON_MATCHING: growth parameters initialize with byte/halfword stores rather than retail's packed-register construction and spill layout. */
 #include "common.h"
-#include "shard/flagBitIsSet.h"
+#include "gamedata/GameDataAccess.h"
 
 struct DemonGrowthRecord {
     /* 0x00 */ u16 id;

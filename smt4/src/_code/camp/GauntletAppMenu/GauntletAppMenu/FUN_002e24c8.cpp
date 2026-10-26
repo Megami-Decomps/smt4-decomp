@@ -2,7 +2,7 @@
 /* Creates the Gauntlet app menu: work area, processes, sprites and its resource files. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
-#include "util/AsdLoadFileSyncDefault.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"

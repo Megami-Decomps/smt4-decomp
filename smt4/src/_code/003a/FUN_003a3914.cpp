@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code003a_Smt4.h"
 
 extern "C" {
 

@@ -1,5 +1,5 @@
 #include "shard/Shard0037.h"
-#include "util/SysGetTableWord.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

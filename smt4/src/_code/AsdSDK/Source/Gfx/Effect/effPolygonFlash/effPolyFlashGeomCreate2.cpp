@@ -1,4 +1,3 @@
-/* NON_MATCHING: the geometry table-size stack argument uses r1 instead of retail's r2. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -20,7 +19,8 @@ PolyGeomBlock *effPolyFlashGeomCreate2(PolyParams *params)
     asdDebugTrace(DAT_00410408, 151);
     block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
-    block->data = block->payload;
+    u8 *payload = block->payload;
+    block->data = payload;
     block->self = block;
     block->geom = FUN_00247334(segments & 0xffff, 3, 5, DAT_00473768, 72);
     return block;

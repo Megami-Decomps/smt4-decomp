@@ -1,6 +1,6 @@
 #include "gamedata/DevilModel.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/FUN_00293f10.h"
+#include "code/Code0029.h"
 extern "C" {
 DevilModelOverride* dataTable00FindById(u16);
 

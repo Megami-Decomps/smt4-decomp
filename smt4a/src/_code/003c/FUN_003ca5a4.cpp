@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite of the visibility refresh; the build allocates the registers of the entry scan and of the slot loop differently (retail keeps the list holder in r5, g_lmapMainState in r7 and the visibility table in r9/sl). */
 #include "common.h"
+#include "classes/Obj4209cc.h"
 
 // One record of the 2D data table's sub-table 5: which slot is shown, and the flags that hide or show it.
 struct VisibilityEntry {
@@ -45,7 +46,6 @@ VisibilityEntry *dataTable2DGetEntry(s32 index);
 s32 gameFlagIsSet(s32 flag);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-void *FUN_0040619c(void *source, u32 index);
 void ptrListRemoveClearOwner(u32 registry, void *object);
 void handleRegistryRegisterObject(u32 registry, void *object);
 void FUN_003b5c54(u32 index, s32 visible);

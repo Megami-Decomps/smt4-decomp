@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles; app id arguments inferred; retail keeps the entry-table base in a register across the app loops and orders the special-case checks differently */
 #include "common.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 // App list menu: only the members the state change touches.
 struct AppMenu {

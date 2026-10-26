@@ -1,6 +1,6 @@
 #include "gamedata/DevilRecordA.h"
-#include "util/CalleeContracts.h"
-
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+extern "C" bool asdTMTexTableNodeIsLoaded(u32 table, s32 index);
 struct BaseTextureRecord {
     /* 0x00 */ u8 unk00[2];
     /* 0x02 */ u16 flags;
@@ -11,7 +11,6 @@ struct BaseTextureRecord {
 extern "C" {
 bool gameFlagIsSet(u32 flag);
 const BaseTextureRecord *dataTable00FindById(u32 id);
-bool asdTMTexTableNodeIsLoaded(u32 table, s32 index);
 
 bool devilIsTextureLoaded(s32 id, s32 resolve)
 {

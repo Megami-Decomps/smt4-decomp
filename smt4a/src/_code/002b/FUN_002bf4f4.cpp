@@ -1,4 +1,5 @@
 #include "ui/ButtonHelp.h"
+#include "code/Code002b_Smt4a.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;

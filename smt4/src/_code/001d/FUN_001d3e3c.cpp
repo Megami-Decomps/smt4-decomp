@@ -5,6 +5,7 @@
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match3_MapMarkerModels.h"
 #include "map/mapDepart.h"
+#include "code/Code001d_Smt4.h"
 
 extern "C" {
 
@@ -109,7 +110,6 @@ void animOwnerSetScale(unsigned int, float);
 int FUN_003966a4(...);
 int FUN_00396a98(...);
 
-int FUN_001d34a8(...);
 int mapSelectNearbyDeferredModel(void);
 int FUN_00264794(void);
 int mapTriggerMarkTable23Matches(...);
@@ -139,7 +139,7 @@ int FUN_00266a2c(void);
 int FUN_0027052c(void);
 int FUN_00274798(void);
 int FUN_00275364(void);
-int FUN_002764a8(void);
+int aocSelectedRecordIsUnavailable(void);
 int mapIfClose(void);
 int FUN_00280ccc(void);
 int naviRegisterTransitionsAndRequest(...);
@@ -424,7 +424,7 @@ extern int dataTable2fSub0GetRecord(int);
 extern int FUN_00276264(void);
 /* Supplied declaration required: navigationFinishReadyField. */
 extern int FUN_00276348(unsigned int);
-/* Supplied declaration required: FUN_002764a8. */
+/* Supplied declaration required: aocSelectedRecordIsUnavailable. */
 /* Supplied declaration required: mapIfClose. */
 /* Supplied declaration required: mapIfSetMode1. */
 /* Supplied declaration required: naviMainApplySetting. */
@@ -1021,7 +1021,7 @@ unsigned int FUN_001d3e3c(void)
     }
     else {
       temp_v6 = g_aocSystem;
-      FUN_002764a8();
+      aocSelectedRecordIsUnavailable();
       if (temp_v6 == 0) {
         temp_v0 = DAT_0049fc64;
         if (DAT_0049fc64 == '\0') {

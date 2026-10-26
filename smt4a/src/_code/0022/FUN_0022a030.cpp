@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/Table04Record.h"
+#include "code/Code0022_Smt4a.h"
 
 struct UnitRecord {
     u8 unk00[0x2c];

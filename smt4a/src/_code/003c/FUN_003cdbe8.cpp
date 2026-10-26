@@ -1,6 +1,6 @@
 /* NON_MATCHING: right portrait, duration and left slot occupy different saved registers. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "event/bustupEvent/BustupSlotControl.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {

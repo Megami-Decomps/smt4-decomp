@@ -4220,3 +4220,45 @@
 002ca6f8 soundTestDrawJobUpdate inferred [med] sound-test "ST Draw" job callback that only reaches a removed debug hook and returns 0
 001e9508 mapMainDrawOrdinaryPass inferred [med] "MAP U" draw job: draws the ordinary-map pass with a temporary render state
 0010df80 asdSoundGetOutputSlotFlag inferred [med] flag byte of output slot 0/1 of the sound system, 0 when absent
+002e0608 naviMainSetPosition inferred [high] copies the position into g_naviMain and sets its positionSet flag
+00343c0c saveFlagBytesSetOneBased inferred [med] sets or clears the one-based flag bit in the saved bit array
+002bcfc0 textConvertToGlyphPairs inferred [med] converts a string to two-byte glyph pairs via the table at 0x4095f8, newline becomes F8 01, terminates with two zero bytes
+00212088 statusCountSelectableChoices inferred [med] counts the non-zero entries among the first statusGetAvailableChoiceCount() choice words
+0024fcdc matrixApplyByMode inferred [high] mode 0 copies, 1 = source*dest, 2 = dest*source into destination; twin smt4a FUN_002a1fb4
+0017feb4 mobiclipShutdown inferred [med] finalizes the movie devices and frees the six backing heaps
+002550d8 btlAdjustPropertyClamped inferred [high] twin of smt4a FUN_004c571c: changes a combatant stat by delta, clamped to its min/max, unless preview; returns the change
+0010d2d4 asdSoundSetOutputPause inferred [med] pauses/resumes one of two output sound slots and clears pending flags when the fade is done
+002eb340 btlTargetSelectSetEntry inferred [med] fills a target-select entry and copies the transformed value words
+0022dcac demonIconPanelDrawRow inferred [med] draws a row demon icon and its stored badge (twin of smt4a FUN_004a7a50)
+00126484 workCommandArm inferred [med] arms a work command and clears its completion flag
+002e1b3c gameDataClearSaveRecord inferred [high] twin of smt4a gameDataClearSaveRecord: clears one 76-byte save record (index < 12)
+0034c944 gaugePairIsWithinLimits inferred [med] mode 5: both gauges (when present) have not exceeded their limit
+002dc55c uiSpriteOperationGetCompletion inferred [med] mode 2 with active flag: forwards uiSpriteGetCompletionState, else 1
+003594b4 cecdDispatchBackendCall inferred [med] tail-calls backend by flag, returns 0xE0810BF8 when none
+00359984 cecdDispatchBackendCall2 inferred [med] tail-calls backend by flag
+00215b5c statusReplaceSkills inferred [high] twin of smt4a statusReplaceSkills (same body)
+00253f94 recordGetPercentageScaledBase inferred [high] twin of smt4a recordGetPercentageScaledBase
+00227dbc btlFindEffectValueByNamePrefix inferred [high] twin of smt4a btlFindEffectValueByNamePrefix
+001d2ac8 btlEntryHasCategoryThreeSkill inferred [med] checks equip/devil skill sources for a category-3 skill
+001216cc soundArchiveLoadInfoBlock inferred [high] twin of smt4a soundArchiveLoadInfoBlock
+00121774 soundArchiveLoadStringBlock inferred [med] reads string block like soundArchiveLoadInfoBlock
+002f6614 statusCursorIsAtLast inferred [med] twin of smt4a FUN_0037df64
+002f6660 statusDownOpenList inferred [med] twin of smt4a FUN_0037dfb0
+003a7de4 shopPurchaseConfirmSelected inferred [med] twin of smt4a FUN_004a3154 (pays price, state 2)
+003369e0 keyedAccumulatorAdd inferred [high] twin of smt4a FUN_003e8704
+003c0294 btlHelpFreeEntries inferred [high] twin of smt4a btlHelpFreeEntries
+0033f7f4 saveDataClearValues inferred [high] twin of smt4a saveDataClearValues
+002bedb0 renderCtxPopState inferred [high] twin of smt4a renderCtxPopState
+002bee04 renderStackPushIndexed inferred [high] twin of smt4a renderStackPushIndexed
+001a7d48 partyPanelHasSlotValue inferred [med] twin of smt4a FUN_002304d0
+002efe98 statusDownCopyValues inferred [high] twin of smt4a statusDownCopyValues
+002764a8 aocSelectedRecordIsUnavailable inferred [med] twin of smt4a FUN_00471d00
+003dddd0 btlQueueUnitReflectAction25 inferred [med] twin of smt4a FUN_004feb50 (kind 0x25 vs 0x30)
+002954f4 btlTalkBustUpSetDemonTexture inferred [high] twin of smt4a btlTalkBustUpSetDemonTexture
+0030ed8c effMenuCreate inferred [high] twin of smt4a effMenuCreate
+002c9cac scrSlotRequestByArg inferred [high] twin of smt4a scrSlotRequestByArg
+001b3c34 jyoucyuInitialize inferred [high] twin of smt4a jyoucyuInitialize
+0031bae0 effectAllocateSavedEntries inferred [med] copies up to 64 saved effect entries into the keyed record (sibling of effectAllocateSavedRenderRecords)
+00269bf0 btlLinkGetMaxHp inferred [med] max HP of the active unit linked to a record (flag 8), sibling of btlSourceGetMaxHp
+00312148 btlScriptAnySelectedPositiveStat inferred [high] sibling of btlScriptAnySelectedNegativeStat (stat >= 1)
+0032b278 effectFilterChannelsByCategory inferred [med] sibling of recordFilterMaskByKind (category at +0x38)

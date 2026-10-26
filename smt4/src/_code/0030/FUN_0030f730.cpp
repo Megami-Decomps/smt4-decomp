@@ -1,4 +1,4 @@
-/* NON_MATCHING: bounds palette, quad coordinates and float height restored; registry-base retention and render-stack scheduling differ. */
+/* NON_MATCHING: prologue, list pointer, loop entry and in-loop plane height match retail; the loop body schedules the box-corner loads and colour moves differently (retail loads all four corners before the modulo). */
 #include "camp/RenderCtx.h"
 
 namespace {
@@ -30,22 +30,21 @@ void FUN_00296dc4(u32 color0, u32 color1, u32 color2, u32 color3,
 void FUN_0030f730(f32 height)
 {
     BoundsOverlayPalette palette = DAT_0040490c.palette;
-    if (DAT_004c2424.count != 0) {
+    OverlayBoundsList *list = &DAT_004c2424;
+    if (list->count != 0) {
         RenderCtx *context = g_titleScene;
         u32 state = FUN_002c5d80(5, 1);
         renderStackPush(&context->stackA, state);
         renderCtxSelectTexture(g_titleScene, 0);
-        if (DAT_004c2424.count > 0) {
-            height += 100.0f;
-            for (s32 index = 0; index < DAT_004c2424.count; ++index) {
-                const OverlayBounds *bounds = &DAT_004c2424.bounds[index];
-                u32 color = palette.colors[index % 12] | 0x70;
-                FUN_00296dc4(color, color, color, color,
-                    bounds->minimum[0], height, bounds->minimum[2],
-                    bounds->minimum[0], height, bounds->maximum[2],
-                    bounds->maximum[0], height, bounds->minimum[2],
-                    bounds->maximum[0], height, bounds->maximum[2]);
-            }
+        for (s32 index = 0; index < list->count; ++index) {
+            const OverlayBounds *bounds = &list->bounds[index];
+            f32 planeHeight = height + 100.0f;
+            u32 color = palette.colors[index % 12] | 0x70;
+            FUN_00296dc4(color, color, color, color,
+                bounds->minimum[0], planeHeight, bounds->minimum[2],
+                bounds->minimum[0], planeHeight, bounds->maximum[2],
+                bounds->maximum[0], planeHeight, bounds->minimum[2],
+                bounds->maximum[0], planeHeight, bounds->maximum[2]);
         }
         renderStackPop(&g_titleScene->stackA);
     }

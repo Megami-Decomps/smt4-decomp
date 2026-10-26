@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_002550d8(...);
+int btlAdjustPropertyClamped(...);
 int btlMainFindEntryByListedId(...);
 int dataTable40FindById(void);
 
@@ -56,7 +56,7 @@ struct fn_003bf5a8_arg1 {
 };
 
 extern unsigned short FUN_00245cc0(unsigned int);
-/* Supplied declaration required: FUN_002550d8. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: btlMainFindEntryByListedId. */
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: dataTable40FindById. */
@@ -88,11 +88,11 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
       if (temp_v3 != -6) {
         if (temp_v3 != -7) {
           if (temp_v3 != -9) {
-            temp_v5 = FUN_002550d8(param_1,7,temp_v3,param_3);
+            temp_v5 = btlAdjustPropertyClamped(param_1,7,temp_v3,param_3);
             if (temp_v5 < 0) {
               temp_v5 = -temp_v5;
             }
-            FUN_002550d8(param_1,8,(int)param_2->field_0x32,param_3);
+            btlAdjustPropertyClamped(param_1,8,(int)param_2->field_0x32,param_3);
           }
           else {
             temp_v0 = FUN_00245cc0(7);
@@ -201,12 +201,12 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
       if (temp_v3 != -6) {
         if (temp_v3 != -7) {
           if (param_2->field_0x32 != -9) {
-            temp_v3 = FUN_002550d8(param_1,0xb,temp_v3,param_3);
+            temp_v3 = btlAdjustPropertyClamped(param_1,0xb,temp_v3,param_3);
             if (temp_v3 < 0) {
               temp_v3 = -temp_v3;
             }
             temp_v5 = temp_v5 + temp_v3;
-            FUN_002550d8(param_1,9,(int)param_2->field_0x34,param_3);
+            btlAdjustPropertyClamped(param_1,9,(int)param_2->field_0x34,param_3);
           }
           else {
             temp_v0 = FUN_00245cc0(0xb);
@@ -315,7 +315,7 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
       if (temp_v3 != -6) {
         if (temp_v3 != -7) {
           if (param_2->field_0x32 != -9) {
-            temp_v3 = FUN_002550d8(param_1,10,temp_v3,param_3);
+            temp_v3 = btlAdjustPropertyClamped(param_1,10,temp_v3,param_3);
             if (temp_v3 < 0) {
               temp_v3 = -temp_v3;
             }
@@ -465,42 +465,42 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
     }
   }
   if ((param_2->field_0x38 & 0x8000000) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0xe,(param_2->field_0x38 & 0xfffffff) >> 0x1b,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0xe,(param_2->field_0x38 & 0xfffffff) >> 0x1b,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }
     temp_v5 = temp_v5 + temp_v3;
   }
   if ((param_2->field_0x38 & 0x10000000) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0xf,(param_2->field_0x38 & 0x1fffffff) >> 0x1c,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0xf,(param_2->field_0x38 & 0x1fffffff) >> 0x1c,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }
     temp_v5 = temp_v5 + temp_v3;
   }
   if ((param_2->field_0x38 & 0x80) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0x10,(param_2->field_0x38 & 0xff) >> 7,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0x10,(param_2->field_0x38 & 0xff) >> 7,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }
     temp_v5 = temp_v5 + temp_v3;
   }
   if ((param_2->field_0x38 & 0x100) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0x11,(param_2->field_0x38 & 0x1ff) >> 8,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0x11,(param_2->field_0x38 & 0x1ff) >> 8,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }
     temp_v5 = temp_v5 + temp_v3;
   }
   if ((param_2->field_0x38 & 0x1000000) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0x12,(param_2->field_0x38 & 0x1ffffff) >> 0x18,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0x12,(param_2->field_0x38 & 0x1ffffff) >> 0x18,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }
     temp_v5 = temp_v5 + temp_v3;
   }
   if ((param_2->field_0x38 & 0x2000000) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0x13,(param_2->field_0x38 & 0x3ffffff) >> 0x19,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0x13,(param_2->field_0x38 & 0x3ffffff) >> 0x19,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }
@@ -521,7 +521,7 @@ int FUN_003bf5a8(fn_003bf5a8_arg0 *param_1,fn_003bf5a8_arg1 *param_2,unsigned in
     }
   }
   if ((param_2->field_0x38 & 0x4000000) != 0) {
-    temp_v3 = FUN_002550d8(param_1,0x14,(param_2->field_0x38 & 0x7ffffff) >> 0x1a,param_3);
+    temp_v3 = btlAdjustPropertyClamped(param_1,0x14,(param_2->field_0x38 & 0x7ffffff) >> 0x1a,param_3);
     if (temp_v3 < 0) {
       temp_v3 = -temp_v3;
     }

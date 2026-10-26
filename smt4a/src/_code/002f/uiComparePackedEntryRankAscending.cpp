@@ -1,4 +1,4 @@
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 
 static __inline u32 entrySortPackedRank(const EntrySortData* entry)

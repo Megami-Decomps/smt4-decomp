@@ -21,8 +21,8 @@ extern const u8 DAT_00404c48[];
 extern TitleTextColor DAT_0044cdc8;
 void pairCopy(const Point2 *source, Point2 *destination);
 u32 FUN_002c5d80(u32 mode, u32 flags);
-void FUN_002bee04(RenderCtx *context, s32 stack, u32 state);
-void FUN_002bedb0(RenderCtx *context, s32 stack);
+void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 state);
+void renderCtxPopState(RenderCtx *context, s32 stack);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c(void);
 s32 vec2GetXInt(const UiSpriteState *sprite);
@@ -36,7 +36,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
 {
     Point2 origin;
     pairCopy(&banner->origin, &origin);
-    FUN_002bee04(g_titleScene, 3, FUN_002c5d80(1, 0));
+    renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, 0));
     efctSetSpeed(1.0f);
     FUN_002bed3c();
     FUN_002bf380(2, 28, 28, (s32)((f32)vec2GetXInt((&banner->sprite)) + origin.x), (s32)origin.y, 211);
@@ -48,7 +48,7 @@ void FUN_0039ba2c(TitleBannerView *banner)
     f32 x = (f32)(vec2GetXInt((&banner->sprite)) + info->x) + inset + origin.x;
     f32 y = (f32)info->y + origin.y;
     textDrawString(2, DAT_0044cdc8.color, reinterpret_cast<const char *>(text), x, y, 0.0f, 0.0f, 1.0f);
-    FUN_002bedb0(g_titleScene, 3);
+    renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
     FUN_002bf818((&banner->sprite));
     if (banner->closing && (&banner->sprite)->animationFlags.completed)

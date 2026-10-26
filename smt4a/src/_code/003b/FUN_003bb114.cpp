@@ -1,6 +1,6 @@
 /* NON_MATCHING: register numbering only: retail assigns r4, r7, r6, r5 to the three script arguments and the job work word; the build numbers them r7, r6, r5, r4. */
 #include "ui/SpriteTransition.h"
-#include "shard/bustupCutStartSlotTransition.h"
+#include "event/bustupEvent/BustupSlotControl_BustupCutAnim.h"
 
 extern "C" {
 

@@ -12,8 +12,8 @@ int FUN_00288f78(...);
 int textDrawString(...);
 int textFormatBuffer(unsigned char [128], unsigned char *);
 int FUN_002bed3c(void);
-int FUN_002bedb0(...);
-int FUN_002bee04(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_002bf380(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int libc_strcpy(...);
@@ -50,8 +50,8 @@ extern unsigned int curveEvaluateStandard(int, unsigned int);
 /* Supplied declaration required: FUN_002bed3c. */
 extern unsigned int vec2GetYInt(int);
 extern unsigned int vec2GetXInt(int);
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_002bf380. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
@@ -95,7 +95,7 @@ void FUN_00231dec(int param_1)
   
   temp_v2 = gameGetMapBlock();
   temp_v3 = FUN_002c5d80(5,1);
-  FUN_002bee04(g_titleScene,3,temp_v3);
+  renderStackPushIndexed(g_titleScene,3,temp_v3);
   temp_v18 = param_1 + 0x162;
   VectorSignedToFloat(0x100 - DAT_0044cdd8,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v3 = NaviMain_GetPosX();
@@ -143,12 +143,12 @@ void FUN_00231dec(int param_1)
     textDrawString(2,0xffffffff,temp_v9);
   }
   temp_v3 = packNibblesAndByte(6,1,0);
-  FUN_002bee04(g_titleScene,6,temp_v3);
+  renderStackPushIndexed(g_titleScene,6,temp_v3);
   FUN_00231bcc(param_1 + 0x164,4000,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa1,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa2,0,0,DAT_0044cdd8,1);
   FUN_00231bcc(param_1 + 0x164,0xfa3,0,0,DAT_0044cdd8,1);
-  FUN_002bedb0(g_titleScene,6);
+  renderCtxPopState(g_titleScene,6);
   temp_v9 = 0xfa5;
   do {
     FUN_00231bcc(param_1 + 0x164,temp_v9,0,0,DAT_0044cdd8,1);
@@ -275,7 +275,7 @@ LAB_002323cc:
       }
     }
   }
-  FUN_002bedb0(g_titleScene,3);
+  renderCtxPopState(g_titleScene,3);
   return;
 LAB_002324e4:
   temp_v11 = temp_v11 + 1;

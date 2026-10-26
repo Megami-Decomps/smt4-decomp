@@ -41,7 +41,7 @@ void *jyoucyuGetTableEntry(u32 id);
 s32 FUN_00162ea4(void);
 void asdSoundGetObjectCount(void);
 u32 asdLoadFileExists(const char *path);
-void FUN_00167f44(void *file, VoiceFileSlot *slot);
+void workCommandArm(void *file, VoiceFileSlot *slot);
 void FUN_00168750(const char *path, void **file, u32 flags,
     void (*callback)(void *, VoiceFileSlot *), VoiceFileSlot *slot);
 }
@@ -93,6 +93,6 @@ extern "C" u32 FUN_001628c0(const char *name, u32 volume, u8 category, u8 option
     slot->volume = static_cast<u8>(volume);
     slot->options = options;
     libc_strcpy(slot->path, path);
-    FUN_00168750(path, NULL, 3, FUN_00167f44, slot);
+    FUN_00168750(path, NULL, 3, workCommandArm, slot);
     return index;
 }

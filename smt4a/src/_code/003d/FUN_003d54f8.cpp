@@ -1,15 +1,15 @@
-/* NON_MATCHING: slot base calculation and value-store scheduling differ from retail. */
 #include "common.h"
 
-namespace { struct Slot { u32 first; u32 active; u32 value; u32 unknown; u8 state; u8 tail[3]; }; }
+namespace { struct Slot { f32 scale; u32 active; u32 value; u32 extra; u8 state; u8 padding[3]; }; }
 
 extern "C" {
-/* Reads or updates the requested state. */
+/* Sets the slot's value and state 2, clearing its active word. */
 extern Slot DAT_006357d8[];
 void FUN_003d54f8(u32 index, u32 value)
 {
-    DAT_006357d8[index].value = value;
-    DAT_006357d8[index].active = 0;
-    DAT_006357d8[index].state = 2;
+    Slot *slot = &DAT_006357d8[index];
+slot->active = 0;
+    slot->value = value;
+    slot->state = 2;
 }
 }

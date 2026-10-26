@@ -1,5 +1,6 @@
-/* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the process allocation. */
+/* NON_MATCHING: stripped debug trace, signed name bytes (s8 field) now match retail; group and owner swap callee-saved registers (r6/r7) and the id search uses different scratch registers. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern AsdProcessState g_asdProcess;
@@ -20,6 +21,7 @@ u32 asdProcessCreate(const s8 *name, s32 group, u16 startDelay, u16 endDelay, As
     s32 i;
     u32 id;
 
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Sys\\Kernel\\AsdProcess.cpp", 1040);
     proc = (AsdProcess *)asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AsdProcess), 1);
     if (proc == NULL) {
         return 0;

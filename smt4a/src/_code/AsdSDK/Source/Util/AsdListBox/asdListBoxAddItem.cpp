@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
-#include "util/AsdListBoxViewRefresh.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_VariantA.h"
 
 extern "C" {
 extern const char DAT_0053d960[]; /* AsdListBox.cpp: __FILE__ */

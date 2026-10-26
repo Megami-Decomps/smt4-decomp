@@ -1,4 +1,3 @@
-/* NON_MATCHING: the compiler adds one extra `bne` to the return after `moveq r0,#1` (branch layout of the nested condition); registers otherwise identical. */
 #include "common.h"
 
 extern "C" {
@@ -13,10 +12,16 @@ extern EventEffect *g_eventEffect; /* 0x43dee8 */
 /* Whether the event effect exists and is in state 2. */
 u32 eventEffectIsState2(void)
 {
-    if (g_eventEffect != NULL) {
-        return g_eventEffect->state == 2;
+    EventEffect *effect = g_eventEffect;
+    u32 result = 0;
+
+    if (effect == NULL) {
+        return 0;
     }
-    return 0;
+    if (effect->state == 2) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

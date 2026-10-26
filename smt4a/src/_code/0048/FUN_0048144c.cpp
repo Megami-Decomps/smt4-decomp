@@ -1,6 +1,6 @@
 /* NON_MATCHING: the early-return merging and the two lookup loops use different registers and branch layout (retail keeps the slot table in r5 and re-tests the previous call result for unused stock slots); the checks are the same. */
 #include "common.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 extern "C" {
 

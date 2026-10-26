@@ -1,9 +1,9 @@
 /* NON_MATCHING: process-end callback0x21f2e8 and down-draw callback0x21f300 have no function symbols/units; initializer reconstruction is blocked. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-int asdMemAlloc(...);
 int taskCreateDraw(...);
 int jyoucyuGetTableEntry(...);
 int asdProcessCreateSimple(...);

@@ -1,10 +1,10 @@
 /* NON_MATCHING: position register allocation and crop/argument store scheduling differ. */
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/W5_W5Match7_EntrySort.h"
 
 extern "C" {
 extern u32 g_aocSystem;
-s32 FUN_00191f18(u32 package, s32 icon);
 void FUN_001849bc(u32 flags, u32 table, s32 image, PositionedLayoutPosition position, const void *clip);
 
 // Prefer an add-on icon; otherwise crop it from one of the two built-in atlases.

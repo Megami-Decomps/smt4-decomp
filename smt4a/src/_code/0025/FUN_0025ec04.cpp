@@ -1,5 +1,5 @@
-#include "camp/CampState.h"
 #include "camp/RenderCtx.h"
+#include "camp/CampState.h"
 
 extern "C" {
 extern CampStateA *g_camp;

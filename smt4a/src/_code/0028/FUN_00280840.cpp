@@ -1,7 +1,7 @@
 /* NON_MATCHING: projected-point stack reuse, vector constants and VFP scheduling differ from retail. */
 #include "shard/S1Mover.h"
 #include "gfx/DebugGuides.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 
 extern "C" {
 void FUN_002a1850(Vec3f *out, s32 mode, void *context, const Vec3f *point);

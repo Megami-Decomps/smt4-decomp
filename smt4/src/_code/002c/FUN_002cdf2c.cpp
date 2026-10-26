@@ -1,6 +1,6 @@
 /* NON_MATCHING: the item merge loops and the passive-bonus loop are unrolled/scheduled differently from retail (207 vs 232 rows); the spoils application is the same. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0029.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {

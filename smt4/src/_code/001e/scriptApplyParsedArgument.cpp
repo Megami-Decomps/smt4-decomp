@@ -1,6 +1,5 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 extern "C" {
 const char *scrGetArgString(u32 index);
 u32 FUN_00100bd4(const char *text);

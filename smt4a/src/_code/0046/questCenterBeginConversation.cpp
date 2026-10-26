@@ -2,8 +2,9 @@
 #include "shard/W6_W6Match7_QuestInteraction.h"
 #include "gamedata/GameFlags.h"
 #include "shard/Shard0046.h"
-#include "shard/messageSetMode.h"
-#include "util/FUN_003a7630.h"
+#include "ui/UiControl.h"
+#include "code/Code003a.h"
+#include "code/Code002c_Smt4a.h"
 
 extern "C" {
 void sysPlaySe(s32 id);
@@ -14,7 +15,6 @@ void FUN_003c3e14();
 s32 pickObjStart(QuestInteraction *object, const char *entry);
 Entry40 *dataTable28Type0GetEntry(u32 unused, u32 index);
 u8 gameFlagIsSet(u32 flag);
-s32 FUN_002c2758(u16 index);
 }
 
 // Run pending quest announcements before starting or resuming the conversation.

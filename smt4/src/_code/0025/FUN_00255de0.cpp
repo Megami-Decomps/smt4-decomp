@@ -1,16 +1,22 @@
-/* NON_MATCHING: compiler predicates the bounds swap and schedules random-state loads differently. */
 #include "common.h"
 
 extern "C" u32 g_randState;
 
-// Draw an inclusive random integer, accepting the bounds in either order.
+// Advance the linear congruential generator and reduce its high half modulo `range`.
+static __inline s32 randModulo(s32 range)
+{
+    g_randState = g_randState * 0x41c64e6d + 0x3039;
+    return (s32)(g_randState >> 16) % range;
+}
+
+// Draw an inclusive random integer, accepting the endpoints in either order.
 extern "C" s32 FUN_00255de0(s32 minimum, s32 maximum)
 {
+    s32 upper = maximum;
     if (minimum > maximum) {
-        s32 temp = minimum;
+        upper = minimum;
         minimum = maximum;
-        maximum = temp;
     }
-    g_randState = g_randState * 0x41c64e6du + 0x3039;
-    return (s32)(g_randState >> 16) % (maximum - minimum + 1) + minimum;
+    s32 range = upper - minimum + 1;
+    return randModulo(range) + minimum;
 }

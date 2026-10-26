@@ -1,10 +1,10 @@
 /* NON_MATCHING: pool field addressing and initialization use scalar stores instead of retail's paired stores. */
 #include "sound/VoicePool.h"
+#include "sound/VoiceManagerCalls.h"
 
 extern "C" {
 extern SoundVoicePool DAT_0044d0f8;
 extern u32 DAT_004c40f8;
-u32 FUN_002bd29c(u32 priority, u32 first, u32 second);
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 

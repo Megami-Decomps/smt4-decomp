@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "addon/AocSystem_Smt4.h"
 
 extern "C" {
 

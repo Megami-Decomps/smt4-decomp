@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the two target words in r5/r7 and ORs them once after the early checks, then repeats the slot/player test inside every effect case (jump table layout differs); the build hoists the OR and merges the cases */
 #include "common.h"
+#include "code/Code0033.h"
 
 /* The seven stats the preview tracks, as the current and maximum value of each (0xe bytes each). */
 struct PartyStatPair {
@@ -34,7 +35,6 @@ u32 gameGetPlayerData(void);
 u32 gameGetSlotRecord(s32 slot);
 void statusDisplayBindUnitRecord(u32 record, s32 a, s32 b);
 void objBInitBlock19D0(void *block, s32 value);
-void FUN_0033449c(s32 value);
 void gameGlobalsQueueValues(u32 player, s32 value);
 void FUN_00372100(void *block, s32 value);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);

@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W5_W5Match7_EntrySort.h"
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "gamedata/Table04Record.h"
 
 struct BattleActionDescriptor {

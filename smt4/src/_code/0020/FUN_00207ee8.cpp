@@ -2,7 +2,7 @@
 #include "gfx/CameraVectorScratch.h"
 #include "map/mapDepart.h"
 #include "shard/W5_W5Match2_PlainData.h"
-#include "util/FUN_002c501c.h"
+#include "code/Code002c.h"
 
 extern "C" {
 extern CameraVectorScratch DAT_004ea81c;

@@ -1,4 +1,4 @@
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 /* NON_MATCHING: minimum-one guard still emits an extra conditional branch; percentage accumulator now matches retail multiply operand order. */
 #include "shard/Shard0032.h"
 #include "gamedata/EquipmentValueModifier.h"

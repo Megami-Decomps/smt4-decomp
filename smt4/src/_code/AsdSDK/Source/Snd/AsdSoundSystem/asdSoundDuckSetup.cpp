@@ -1,4 +1,4 @@
-/* NON_MATCHING: clamping and duck-state stores use different registers and instruction scheduling. */
+/* NON_MATCHING: retail loads the duck address before the enable test and compares the level as an integer (vmov ip, s0; cmp ip, #0x3f800000). */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
@@ -9,22 +9,23 @@ extern AsdSndStatus g_asdSoundStatus;
 void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames, u32 unk08, u32 fadeInFrames, u32 fadeOutFrames)
 {
     if (enable != 0) {
-        g_asdSoundDuck.flags |= 1;
-        g_asdSoundDuck.level = level;
+        AsdSndDuck *duck = &g_asdSoundDuck;
+        duck->flags |= 1;
+        duck->level = level;
         if (level <= 0.0f) {
-            g_asdSoundDuck.level = 0.0f;
+            duck->level = 0.0f;
         }
-        if (g_asdSoundDuck.level > 1.0f) {
-            g_asdSoundDuck.level = 1.0f;
+        if (duck->level > 1.0f) {
+            duck->level = 1.0f;
         }
-        g_asdSoundDuck.holdFrames = holdFrames;
-        g_asdSoundDuck.fadeInFrames = fadeInFrames;
-        g_asdSoundDuck.fadeOutFrames = fadeOutFrames;
-        g_asdSoundDuck.unk08 = unk08;
+        duck->holdFrames = holdFrames;
+        duck->fadeInFrames = fadeInFrames;
+        duck->fadeOutFrames = fadeOutFrames;
+        duck->unk08 = unk08;
         if (g_asdSoundStatus.hasStream == 0) {
             return;
         }
-        g_asdSoundDuck.active = 1;
+        duck->active = 1;
     } else {
         g_asdSoundDuck.active = 0;
         g_asdSoundDuck.holdFrames = 0;

@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/PartySlots.h"
 #include <stddef.h>
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 extern "C" {
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);

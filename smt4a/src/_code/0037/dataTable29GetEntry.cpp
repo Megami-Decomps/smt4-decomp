@@ -1,4 +1,5 @@
 #include "shard/Shard0037.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
 

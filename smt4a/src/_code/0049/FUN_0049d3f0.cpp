@@ -3,7 +3,7 @@
 #include "ui/HowToScreen.h"
 #include "text/TextDraw.h"
 #include "ui/UiSpriteState.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 extern const char DAT_0052cf04[]; // event/HowTo/HowTo.mbm

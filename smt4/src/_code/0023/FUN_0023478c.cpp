@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_0023478c.h"
+#include "code/Code0023_VariantB.h"
 
 extern "C" {
 

@@ -34,7 +34,7 @@ enum {
 };
 
 /* A table entry. The slots used by "-N" names lie below +0x604, counted downwards. */
-typedef struct TexTableEntry {
+typedef struct TexTableNamedEntry {
     /* 0x00 */ TexTableFile *file;
     /* 0x04 */ TexTableNode *node;
     union {
@@ -48,6 +48,6 @@ typedef struct TexTableEntry {
     /* 0x10 */ u32 flags;
     /* 0x14 */ u8 unk14[0x5F0];
     /* 0x604 */ TexTableSlot slots[1];
-} TexTableEntry;
+} TexTableNamedEntry;
 
 #endif

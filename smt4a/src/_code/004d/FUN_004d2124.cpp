@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "shard/X14_BtlUiClose.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "battle/btlDebug.h"
 

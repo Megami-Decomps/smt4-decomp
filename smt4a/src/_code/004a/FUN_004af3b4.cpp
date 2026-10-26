@@ -30,8 +30,6 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_4_stack;
 
-extern unsigned char LAB_004af858; /* 0x4af858 */
-extern unsigned char LAB_004af89c; /* 0x4af89c */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
 #define ROMWRIGHT_PIECE_4_4_DEFINED
@@ -367,7 +365,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
       }
     }
     if (*(romwright_code **)temp_v23 != (romwright_code *)0x0) {
-      (**(romwright_code **)temp_v23)(&LAB_004af89c,temp_v0);
+      (**(romwright_code **)temp_v23)("ReadEp: stream %d already disabled\n",temp_v0);
     }
     *(unsigned int *)param_1 = 0;
     *(unsigned int *)((int)param_1 + 4) = 0;
@@ -380,7 +378,7 @@ unsigned int FUN_004af3b4(long long *param_1,int param_2,unsigned int *param_3,u
     return 0x48;
   }
   if (*(romwright_code **)temp_v23 != (romwright_code *)0x0) {
-    (**(romwright_code **)temp_v23)(&LAB_004af858,temp_v0);
+    (**(romwright_code **)temp_v23)("ReadEp: cannot find stream %d\n",temp_v0);
   }
   *(unsigned int *)param_1 = 0;
   *(unsigned int *)((int)param_1 + 4) = 0;

@@ -20,8 +20,13 @@ extern UniteWork *g_unite;
 // Sort fusion pairs by score, then each component's race, descending level and ID.
 s32 FUN_001f6098(const u16 *left, const u16 *right)
 {
+    struct PairScoreView {
+        u8 unk0000[0x78a0];
+        s32 scores[1]; // 0x78a0
+    };
     UniteWork *work = g_unite;
-    s32 difference = work->pairScoresIV.scores[*left] - work->pairScoresIV.scores[*right];
+    const PairScoreView *score = reinterpret_cast<const PairScoreView *>(work);
+    s32 difference = score->scores[*left] - score->scores[*right];
     if (difference == 0) {
         difference = compareFusionComponent(work->pairListIV.pairs[*left].firstId,
                                             work->pairListIV.pairs[*right].firstId);

@@ -1,7 +1,7 @@
 /* NON_MATCHING: candidate member addressing and mask loads differ; retail retains an inlined subobject null guard; -O2 candidate. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 struct RandomTargetFields {
     u8 unk000[0x6e];

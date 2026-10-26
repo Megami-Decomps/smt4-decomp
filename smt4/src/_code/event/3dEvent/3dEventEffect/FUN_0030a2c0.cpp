@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include <string.h>
 #include "AsdSDK/AsdMemAlloc.h"
+#include "event/3dEvent/3dEventEffect.h"
 
 extern "C" {
 extern const char DAT_004035d4[];
@@ -13,7 +14,6 @@ u32 effectJobUpdateSpawn(void);
 void eventWorkRelease(void);
 s32 FUN_002248b8(u32 job);
 void taskCreateDraw(const char *, s32, s32, s32, s32 (*)(u32), s32, void *, u32);
-void asdLoadFileAsyncNoCallback(const char *, const void **, s32, u32);
 
 /* Create an event effect with two draw passes and asynchronously load its definition. */
 u32 FUN_0030a2c0(const char *path, s32 x, s32 y, s32 z)

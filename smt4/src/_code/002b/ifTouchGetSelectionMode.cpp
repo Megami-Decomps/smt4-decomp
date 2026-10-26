@@ -1,4 +1,5 @@
 #include "ui/IfTouch.h"
+#include "ui/UiControl_Smt4.h"
 
 extern "C" {
 

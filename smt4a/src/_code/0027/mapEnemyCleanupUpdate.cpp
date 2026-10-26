@@ -1,6 +1,6 @@
 /* NON_MATCHING: cleanup-loop register allocation and shared teardown branch merging differ from retail. */
 #include "shard/W5_W5Match7_SceneSlots.h"
-#include "util/NaviMainQueueRequest.h"
+#include "map/MapSceneAccess.h"
 
 extern "C" {
 extern void *g_handleRegistry;

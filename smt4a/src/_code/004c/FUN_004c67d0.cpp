@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rebuild of the escape-chance calculation (the draft's lost result of FUN_003eebf4 restored as the sign test the asm makes); retail unrolls the four party slots and keeps the per-unit stat sums in registers, which armcc here emits from a helper over the unit pair. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 extern u64 DAT_005713f0;       /* a unit is present */
@@ -10,7 +11,6 @@ extern u64 DAT_005714c8;       /* the second state always lets the party escape 
 extern u64 DAT_005714d0;       /* the second state never lets the party escape */
 
 s32 gameProgressIsAdvanced(void);
-s32 gameDataBlocksGetTableFlag(void);
 s32 FUN_003eebf4(BtlMainStateA *battle, s32 flag);
 s32 __aeabi_idivmod(s32 a, s32 b);
 

@@ -2,8 +2,7 @@
 #include "common.h"
 #include <math.h>
 #include "battle/btlMain.h"
-#include "util/FUN_002c501c.h"
-#include "util/FUN_002c501c.h"
+#include "code/Code002c.h"
 
 struct Vec3 {
     f32 x, y, z;

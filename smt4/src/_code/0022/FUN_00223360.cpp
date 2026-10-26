@@ -1,3 +1,4 @@
+#include "gamedata/FlagBitTests.h"
 /* NON_MATCHING: reward/passive loops retain different registers and stack spills; first unit record now supplies the final member index and the money guard encloses its linker-inlined bonus query. */
 typedef unsigned char u8;
 typedef signed char s8;
@@ -60,7 +61,6 @@ extern ResultTotals *g_result;      /* 0x44dc20 */
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 PassiveSkill *passiveSkillLookupRecord(u32 skill);
 s32 playerPadTestBit(u32 bit);
-s32 flagWordTestBit(UnitRecord *record, u32 bit);
 UnitRecord *gameGetUnitRecord(s32 member);
 SlotTable *gameGetSlotTable(void);
 PlayerData *gameGetPlayerData(void);

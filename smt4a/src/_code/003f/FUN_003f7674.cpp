@@ -1,7 +1,7 @@
 /* NON_MATCHING: item detail panel draw; the call sequence follows retail (speed is forwarded to every callee) but the kind switch, the sound guard and the saved registers differ */
 #include "common.h"
 #include "text/TextDraw.h"
-#include "shard/FUN_0019e52c.h"
+#include "code/Code0019.h"
 
 /* The item shown in the panel: its kind in the high byte of +2, its name text at +4. */
 struct DetailItem {

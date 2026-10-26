@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the count in r2 and the -1 in r1, armcc here swaps them. */
 #include "common.h"
 
 struct Vertex {
@@ -26,8 +25,10 @@ extern "C" {
 /* Virtual reset: marks every vertex index unused. */
 void FUN_003034c8(VertexOwner *owner)
 {
-    Vertex *vertices = owner->buffer->vertices;
-    s32 count = owner->params->count;
+    VertexBuffer *buffer = owner->buffer;
+    VertexParams *params = owner->params;
+    Vertex *vertices = buffer->vertices;
+    s32 count = params->count;
     for (s32 i = 0; i < count; i++) {
         vertices[i].index = -1;
     }

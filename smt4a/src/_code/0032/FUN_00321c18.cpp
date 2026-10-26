@@ -1,13 +1,10 @@
-/* NON_MATCHING: only the two count loads at entry differ: retail loads b->count through the saved copy of r1 after comparing a->count; the build loads both before the compare. */
 #include "gamedata/DevilRecordA.h"
 
 extern "C" {
 
 /* qsort comparator: orders demon stock entries by level (ascending), then race and ID (descending); empty entries sort last. */
-int FUN_00321c18(const void *left, const void *right)
+int FUN_00321c18(const DevilStock *a, const DevilStock *b)
 {
-    const DevilStock *a = (const DevilStock *)left;
-    const DevilStock *b = (const DevilStock *)right;
     int result;
 
     if (a->count == 0) {

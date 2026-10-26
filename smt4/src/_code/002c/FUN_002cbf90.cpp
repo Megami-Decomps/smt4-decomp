@@ -1,7 +1,7 @@
 /* NON_MATCHING: compiler merges cleanup exits; retail duplicates them and preserves the error code across cleanup. */
 #include "sys/ProcessResult.h"
 #include "common.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 struct ResourceRequest;
 

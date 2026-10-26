@@ -1,7 +1,8 @@
 /* NON_MATCHING: byte-index division is retained in a shifted register instead of retail's deferred ASR; zero/bitmask registers differ. */
 #include "map/MapIfTimer.h"
 #include <stddef.h>
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
+#include "gamedata/GameDataAccess_VariantE.h"
 #include "shard/SaveWork.h"
 
 struct MapAppDiscoveryState {
@@ -17,7 +18,6 @@ extern char DAT_004b7608[];
 extern const char DAT_00404464[];
 u32 FUN_002bfdd4(void);
 s32 appCheckPurchaseRequirements(u32 app);
-s32 gameFlagIsSet(u32 flag);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(s32 layer, u32 entry, u32 first, u32 second, f32 scaleX, f32 scaleY);

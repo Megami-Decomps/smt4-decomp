@@ -2,7 +2,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/SkillFlags.h"
-#include "util/CalleeContracts.h"
 
 extern "C" {
 

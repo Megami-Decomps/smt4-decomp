@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail looks like a scoped critical-section lock (section kept in r5, Leave on every return, result in r4) and merges the availability test into orrs with an ldrsb; ours reloads the section and branches. */
+/* NON_MATCHING: retail routes every exit through shared Leave+`mov r0, r4` tails and keeps the first not-initialised constant in r4; this build duplicates the exits and keeps the constants in r8. */
 #include "common.h"
 
 extern "C" {
@@ -31,30 +31,31 @@ u32 FUN_0024ee68(s32 request)
     u32 result = 0;
 
     if (!DAT_004656ca.initialized && !FUN_00239a54()) {
-        return NET_RESULT_NOT_INITIALIZED;
+        result = NET_RESULT_NOT_INITIALIZED;
+        return result;
     }
-    nn_os_CriticalSection_Enter(g_moduleCriticalSection2);
+    void *section = g_moduleCriticalSection2;
+    nn_os_CriticalSection_Enter(section);
     if (request) {
-        if (!FUN_00239a54() && !DAT_004656ca.available) {
+        if (!(FUN_00239a54() | DAT_004656ca.available)) {
             result = NET_RESULT_NOT_AVAILABLE;
-            nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
+            nn_os_CriticalSection_Leave(section);
             return result;
         }
         result = FUN_003594f0(14);
     }
     if (!DAT_004656ca.connected) {
-        nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
-        return NET_RESULT_NOT_INITIALIZED;
+        result = NET_RESULT_NOT_INITIALIZED;
+        nn_os_CriticalSection_Leave(section);
+        return result;
     }
     if (DAT_004656ca.dirty) {
         result = FUN_0035ae74(0);
-        if (result & NET_RESULT_FAILURE_BIT) {
-            nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
-            return result;
+        if ((s32)(result & NET_RESULT_FAILURE_BIT) >= 0) {
+            DAT_004656ca.dirty = 0;
         }
-        DAT_004656ca.dirty = 0;
     }
-    nn_os_CriticalSection_Leave(g_moduleCriticalSection2);
+    nn_os_CriticalSection_Leave(section);
     return result;
 }
 

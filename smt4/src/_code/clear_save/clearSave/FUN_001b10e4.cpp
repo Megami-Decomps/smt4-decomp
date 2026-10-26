@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/W6_W6Match2_ScrollList.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ extern int screenFadeIsBusy(void);
 extern int jobWorkerPollAndFree(void);
 /* Supplied declaration required: gameRestorePrimaryWorkSave. */
 /* Supplied declaration required: FUN_00287728. */
-extern int FUN_002896bc(void);
 extern unsigned int messageTargetGetValue(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetChoiceResult(void);

@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
-#include "util/CalleeContracts.h"
+#include "code/Code002c.h"
 struct BattleActionHistoryState;
 
 extern "C" {

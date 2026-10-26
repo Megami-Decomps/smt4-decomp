@@ -1,5 +1,6 @@
 /* Marks the linked child of each of the four entries as touched (flags |= 3) and notifies it. */
 #include "common.h"
+#include "code/Code003e_Smt4a.h"
 
 extern "C" {
 

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/packNibblesAndByte.h"
+#include "util/BitsAndBytes_VariantA.h"
 
 extern "C" {
 

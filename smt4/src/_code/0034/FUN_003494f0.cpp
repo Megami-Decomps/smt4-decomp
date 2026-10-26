@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail clears the pair through r2, but this readable reset uses r1. */
+/* NON_MATCHING: retail clears the pair through r2, but this readable reset uses r1 (unused extra arguments do not change the allocation). */
 #include "common.h"
 
 struct PairState {

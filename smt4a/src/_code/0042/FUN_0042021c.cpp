@@ -5,6 +5,7 @@
 #include "network/DataStore/DataStoreMain.h"
 #include "test/BustupViewer.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "code/Code002e.h"
 
 struct SaveLoadBase {
     /* 0x00 */ u8 unk00[2];
@@ -70,7 +71,6 @@ void FUN_00420a2c(SaveLoadUi *ui);
 void FUN_0041e3a0(SaveLoadUi *ui, s32 flag);
 void FUN_0041dbdc(SaveLoadUi *ui, s32 flag);
 void saveMenuCacheSlotHeadersStep(SaveLoadUi *ui);
-s32 FUN_002e07f4(void);
 s32 scrRunOpcodesStub(void *script);
 void scrScriptProcessStartEntry(void *script, s32 index);
 void slotSetRequest(s32 slot, s32 kind, s32 value);

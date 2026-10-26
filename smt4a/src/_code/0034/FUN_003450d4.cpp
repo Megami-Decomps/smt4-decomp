@@ -1,8 +1,8 @@
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 /* NON_MATCHING: packed-coordinate construction and snapshot register lifetimes differ. */
 #include "shard/Shard0031.h"
 #include "ui/TouchRectangleRequest.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 
 extern "C" {
 s32 recordGetModeForId(s32);

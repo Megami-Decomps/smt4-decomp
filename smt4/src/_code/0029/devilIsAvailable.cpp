@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/devilIsAvailable.h"
+#include "gamedata/GameDataAccess_VariantC.h"
 
 /* The devil record fields the availability check reads. */
 struct DevilAvailabilityRecord {

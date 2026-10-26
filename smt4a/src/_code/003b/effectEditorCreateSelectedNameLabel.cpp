@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
 extern EffectSelectionTemplate DAT_0059e9a8;

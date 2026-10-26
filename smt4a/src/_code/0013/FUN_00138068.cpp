@@ -1,7 +1,7 @@
-#include "util/FUN_00145e24.h"
+#include "code/Code0014.h"
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 
 extern "C" {
 
@@ -19,7 +19,7 @@ u32 FUN_00138068(void)
     }
     FUN_001575cc(g_renderCtx);
     if (FUN_00152f54() != 0) {
-        FUN_00145e24(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
+        effectRestoreSavedRenderPairs(g_renderCtx, reinterpret_cast<void *>(FUN_00152f54()));
     }
     return 0;
 }

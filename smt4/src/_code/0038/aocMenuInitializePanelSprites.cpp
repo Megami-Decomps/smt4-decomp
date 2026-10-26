@@ -1,7 +1,7 @@
 /* NON_MATCHING: -O2 candidate; selector snapshot uses scalar word copies instead of LDM/STM, loop/zero scheduling differs, and a native pre-text-create no-op is absent. */
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
-#include "util/asdTextSetBaseColor.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_AsdText.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <string.h>

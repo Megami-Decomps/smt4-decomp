@@ -4,7 +4,7 @@
 #include "gamedata/BattleUnitSkills.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
-#include "util/RecordGetScaledMaximum.h"
+#include "gamedata/GameDataAccess_VariantI.h"
 
 extern "C" {
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);

@@ -1,5 +1,5 @@
 #include "ui/ButtonHelp.h"
-#include "util/FUN_0026f188.h"
+#include "code/Code0026.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;

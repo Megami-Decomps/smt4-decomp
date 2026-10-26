@@ -1,19 +1,9 @@
-/* NON_MATCHING: Texture deleting hook has the correct release/free calls, but the base-vptr load/store is scheduled after the prologue instead of before it. */
-#include "common.h"
+#include "classes/Obj4206f8.h"
 
-struct TextureContentState {
-    /* 0x00 */ const void *vtable;
-};
-extern "C" {
-extern const u32 _ZTV9Obj4206e8[];
-void textureContentRelease(TextureContentState *texture);
-void asdMemFreeNonNull(void *block);
-}
+extern "C" void textureContentRelease(Obj4206f8 *content);
 
-/* Destroy the texture-content base and release its allocation. */
-extern "C" void _ZN9Obj4206f8D0Ev(TextureContentState *texture)
+/* Releases the content's textures. */
+Obj4206f8::~Obj4206f8()
 {
-    texture->vtable = _ZTV9Obj4206e8 + 6;
-    textureContentRelease(texture);
-    asdMemFreeNonNull(texture);
+    textureContentRelease(this);
 }

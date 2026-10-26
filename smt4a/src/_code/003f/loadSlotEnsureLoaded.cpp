@@ -1,5 +1,6 @@
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "gamedata/DataTableSlots.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers_Smt4a.h"
 
 extern "C" {
 

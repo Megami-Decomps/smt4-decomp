@@ -46,7 +46,6 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_3_stack;
 
-extern unsigned char LAB_003fb978; /* 0x3fb978 */
 extern unsigned int g_aocSystem; /* 0x570280 */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -65,7 +64,7 @@ extern int aocRunByName(unsigned int, void *, unsigned int, unsigned int);
 extern int FUN_003598c4(void *, unsigned int);
 extern TexNode* asdTMTexTableActivateImage(int, int);
 /* Supplied declaration required: FUN_003fc294. */
-extern int FUN_003fcbe0(fn_003fb5d4_arg0 *);
+extern int aocTextureRequestHasNewContent(fn_003fb5d4_arg0 *);
 /* Supplied declaration required: aocReleaseObjectBufferAndFlag. */
 
 
@@ -128,7 +127,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
         temp_v3 = FUN_0014afd0(param_1->field_0x8,param_1->field_0xc);
       }
     }
-    temp_v0 = FUN_003fcbe0(param_1);
+    temp_v0 = aocTextureRequestHasNewContent(param_1);
     if (temp_v0 != 0) {
       aocReleaseObjectBufferAndFlag(param_1);
     }
@@ -154,7 +153,7 @@ void FUN_003fb5d4(fn_003fb5d4_arg0 *param_1,unsigned int param_2,int param_3)
     temp_v5[3] = '\0';
     if (*(short *)((int)param_1->field_0x10 + 4) != 0) {
       do {
-        textFormatBuffer(temp_v8,&LAB_003fb978,(void *)((int)param_1->field_0x14 + temp_v3 * 0x20));
+        textFormatBuffer(temp_v8,"battle/devil/%s.bcmdl",(void *)((int)param_1->field_0x14 + temp_v3 * 0x20));
         puVar9 = temp_v8;
         puVar4 = temp_v6;
         temp_v9 = 0;

@@ -2,7 +2,7 @@
  * *patchSlot), the source's physical address, the destination (the word right after the command) and a trigger word.
  * Returns the cursor after the command. */
 #include "common.h"
-#include "shard/gpuCmdWriteCopy.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 u32 asdGxGetPhysicalAddress(const void *address);

@@ -1,6 +1,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effPolygonThunder.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 static void quaternionSetIdentity(PolyVec4 *quaternion)
 {
@@ -11,7 +12,6 @@ static void quaternionSetIdentity(PolyVec4 *quaternion)
 extern "C" {
 
 extern const char DAT_00544c60[]; /* effect source file name (__FILE__) */
-void *memAlloc(int, int, int, int size, int align, int);
 void rt_memcpy(void *dst, const void *src, int size);
 
 extern PolyThunderKind g_polyThunderKinds[];

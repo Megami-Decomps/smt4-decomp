@@ -1,6 +1,6 @@
 /* NON_MATCHING: completion signed load, fallback-name lifetime, and final selected-entry tail call differ. */
 #include "shard/Shard004A.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0033.h"
 
 namespace {
 struct BibleAnalyzeTextGlobals {

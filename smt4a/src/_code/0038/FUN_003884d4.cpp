@@ -5,7 +5,6 @@ extern const FiveChoiceTable DAT_00530a10;
 extern const ChoiceLabelTable DAT_0052fe4c;
 extern MessageGlobalsA g_messageMain;
 extern const u8 LAB_0038870c;
-extern const u8 LAB_00388748;
 s32 scrGetCommandFrame(void);
 s32 scrGetArg(u32 index);
 void scrCommMessageSetMode(s32 mode);
@@ -51,7 +50,7 @@ u32 FUN_003884d4(void)
         u32 argument = scrGetArg(0);
         u32 commandFrame = scrGetCommandFrame();
         FUN_0021bdac(message, argument, commandFrame, 6, 0, 0);
-        asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, &LAB_00388748, &LAB_0038870c);
+        asdTextFormatStream(work->box, 4, 0xffffffff, 0, 3, "%s", &LAB_0038870c);
         msgBoxFlagsSetBit7(work->box);
         work->unk19C4 = 0;
         work->flags |= 0x20;

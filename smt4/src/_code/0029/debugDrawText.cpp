@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match2_TextDrawState.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 extern TextDrawState DAT_00464a70;

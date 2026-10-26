@@ -78,7 +78,7 @@ s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
 void FUN_0022677c(s32 channel, s32 value);
 void FUN_003d54f8(s32 a, s32 b);
-void FUN_0040a710(u32 id, s32 value);
+void saveFlagBytesSetOneBased(u32 id, s32 value);
 void FUN_00408184(s32 a, s32 b);
 
 /* Builds the Apocalypse selection scene: constructs its rectangles, entries and pages, clears its
@@ -178,7 +178,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         u8 *base = (u8 *)scene->pages + page * 0x1002;
         for (s32 i = 0; i < *(u16 *)(base + 0x1000); i++) {
             if (*(u16 *)(base + i * 4 + 2) & 1)
-                FUN_0040a710(*(u16 *)(base + i * 4), 1);
+                saveFlagBytesSetOneBased(*(u16 *)(base + i * 4), 1);
         }
     }
     FUN_00408184(0x1C, 1);

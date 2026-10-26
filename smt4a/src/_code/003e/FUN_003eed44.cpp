@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0019.h"
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;

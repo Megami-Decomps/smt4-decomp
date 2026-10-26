@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
-#include "util/FUN_0013def0.h"
+#include "code/Code0013.h"
 struct ScriptHolder;
 
 extern "C" {
@@ -49,8 +49,6 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } void_stack;
 
-extern unsigned char LAB_00226234; /* 0x226234 */
-extern unsigned char LAB_0022624c; /* 0x22624c */
 extern int g_aocMain; /* 0x570260 */
 extern int g_aocSystem; /* 0x570280 */
 extern unsigned int *g_aocJob; /* 0x57f568 */
@@ -160,8 +158,8 @@ unsigned int FUN_00225ddc(void)
       temp_v2 = DAT_005e1f70;
       puVar2[5] = DAT_005e1f70;
       puVar2[6] = DAT_005e1f74;
-      textFormatBuffer(temp_v6,&LAB_00226234,temp_v2,temp_v2);
-      textFormatBuffer(temp_v7,&LAB_0022624c,puVar2[5],puVar2[5]);
+      textFormatBuffer(temp_v6,"event/e%03d/e%03d.bf",temp_v2,temp_v2);
+      textFormatBuffer(temp_v7,"event/e%03d/e%03d.mbm",puVar2[5],puVar2[5]);
       temp_v3 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;

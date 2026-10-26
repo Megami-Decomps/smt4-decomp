@@ -1,6 +1,7 @@
 /* NON_MATCHING: the dense 36-entry table now matches (explicit labels); retail keeps an extra zero in r9 and saves a larger register set. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "status/StatusCamera.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 extern UniteWork *g_unite;
@@ -18,7 +19,6 @@ void FUN_0029da34(u32 mode, u32 enabled, u32 id, const void *member);
 void buttonHelpShowSkillDetails(u32 id);
 void menuSetModeAndResetTransitions(s32 mode);
 void FUN_002b8454(s32 first, s32 second, s32 third, s32 enabled);
-void FUN_0029c424(s32 enabled);
 void timerStart(void *timer, s32 period, s32 value);
 
 /* Enter a unite-menu state, updating its help, selected member, and transition history. */

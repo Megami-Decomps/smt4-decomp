@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler directly loads saved allocation pointers; retail preserves the getter's r0 result and reloads each heap address. */
 #include "mobiclip_ctrl/MobiclipHeaps.h"
 
 extern "C" {

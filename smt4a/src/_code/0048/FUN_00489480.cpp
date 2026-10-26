@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00489480` (_code @ 0x489480, 0x370 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code004d_Smt4a.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ int rectRecRead(int, int, int *, int *);
 int sub68OwnerGetBlock60(int);
 int naviMainSetValuePair(int, unsigned int **);
 int setFullScreenRect(void);
-int FUN_004d0420(int, int, int, int);
 int NaviMain_GetCurrentMap(...);
 
 /* stack frame of param_1: 5 slot(s), 20 byte(s) */

@@ -1,68 +1,70 @@
-/* NON_MATCHING: only the callee-saved register assignment of the per-entry sort values differs (retail: a in r8/sl/r6, b in r7/r9/r1). */
-#include "shard/W5_W5Match5_GameSaveViews.h"
+#include "common.h"
 #include "gamedata/Table04Record.h"
 
 extern "C" {
 
-/* A demon list entry: its demon id and its party slot (negative when it has none). */
-typedef struct DevilListEntry {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ s32 slot;
-} DevilListEntry;
+typedef struct SlotRecord {
+    /* 0x00 */ u8 unk00[0x62];
+    /* 0x62 */ u16 sortKey;
+} SlotRecord;
 
-s32 idIsAbove400(s32 id);
-s32 itemGetCategorySortOrder(s32 id);
-s32 dataTable04GetCategoryOrder(s32 id);
+typedef struct SortItem {
+    /* 0x00 */ int id;
+    /* 0x04 */ int slot;       /* negative when the item is not in a slot */
+} SortItem;
 
-/* Sort comparator for demon list entries: by itemGetCategorySortOrder, then dataTable04GetCategoryOrder, then descending table 0x04 key,
- * then id, then the party slot's entry id (ids above 400 sort last). */
-s32 FUN_00321a98(DevilListEntry *a, DevilListEntry *b)
+extern int idIsAbove400(int id);
+extern int itemGetCategorySortOrder(int id);
+extern int dataTable04GetCategoryOrder(int id);
+extern SlotRecord *gameGetSlotRecord(int slot);
+
+/* Compare function for sorting items: by two ranks, the data row's order, the id, then the slot's sort key. */
+int FUN_00321a98(SortItem *a, SortItem *b)
 {
-    s32 aFirst;
-    s32 aSecond;
-    u32 aKey;
-    s32 bFirst;
-    s32 bSecond;
-    u32 bKey;
-    s32 diff;
+    int rankB;
+    int rankA;
+    int subB;
+    int subA;
+    u32 orderB;
+    u32 orderA;
+    u32 slotKeyA;
+    u32 slotKeyB;
+    int diff;
 
-    if (idIsAbove400(a->id)) {
-        aFirst = 99;
-        aSecond = 99;
-        aKey = 0;
+    if (idIsAbove400(a->id) != 0) {
+        rankA = 99;
+        subA = 99;
+        orderA = 0;
     } else {
-        aFirst = itemGetCategorySortOrder(a->id);
-        aSecond = dataTable04GetCategoryOrder(a->id);
-        aKey = dataTable04FindById(a->id)->listing.sortKey;
+        rankA = itemGetCategorySortOrder(a->id);
+        subA = dataTable04GetCategoryOrder(a->id);
+        orderA = dataTable04FindById(a->id)->listing.sortKey;
     }
-    if (idIsAbove400(b->id)) {
-        bFirst = 99;
-        bSecond = 99;
-        bKey = 0;
+    if (idIsAbove400(b->id) != 0) {
+        rankB = 99;
+        subB = 99;
+        orderB = 0;
     } else {
-        bFirst = itemGetCategorySortOrder(b->id);
-        bSecond = dataTable04GetCategoryOrder(b->id);
-        bKey = dataTable04FindById(b->id)->listing.sortKey;
+        rankB = itemGetCategorySortOrder(b->id);
+        subB = dataTable04GetCategoryOrder(b->id);
+        orderB = dataTable04FindById(b->id)->listing.sortKey;
     }
-    diff = aFirst - bFirst;
-    if (diff != 0) {
-        return diff;
+    diff = rankA - rankB;
+    if (diff == 0) {
+        diff = subA - subB;
+        if (diff == 0) {
+            diff = orderB - orderA;
+            if (diff == 0) {
+                diff = a->id - b->id;
+                if (diff == 0) {
+                    slotKeyA = (a->slot < 0) ? 0 : gameGetSlotRecord(a->slot)->sortKey;
+                    slotKeyB = (b->slot < 0) ? 0 : gameGetSlotRecord(b->slot)->sortKey;
+                    diff = slotKeyA - slotKeyB;
+                }
+            }
+        }
     }
-    diff = aSecond - bSecond;
-    if (diff != 0) {
-        return diff;
-    }
-    diff = bKey - aKey;
-    if (diff != 0) {
-        return diff;
-    }
-    diff = a->id - b->id;
-    if (diff != 0) {
-        return diff;
-    }
-    u32 aEntry = a->slot < 0 ? 0 : gameGetSlotRecord(a->slot)->entryId;
-    u32 bEntry = b->slot < 0 ? 0 : gameGetSlotRecord(b->slot)->entryId;
-    return aEntry - bEntry;
+    return diff;
 }
 
 } /* extern "C" */

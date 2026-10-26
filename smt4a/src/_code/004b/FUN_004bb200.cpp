@@ -1,7 +1,7 @@
 /* NON_MATCHING: request and transport status mapping recovered; shared resource/string address grouping and result sign test still differ. */
 #include "common.h"
 #include "map/mapHakai.h"
-#include "util/CecSettingsSet.h"
+#include "network/CecControl.h"
 
 struct CecMessageRequest {
     /* 0x00 */ u32 unk00;

@@ -2,7 +2,9 @@
 #include "classes/WindowStatus.h"
 #include "sys/StorageBlockQuery.h"
 #include "nn/Result.h"
+#include "shard/W6_W6Match2_LongDivision.h"
 extern "C" {
+__value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 u32 FUN_0035fd5c(s64*, const StorageQueryRequest*, void*, u32);
 
 WindowStatusResult FUN_003df140(const StorageQueryContext* const* context, u32* blocks)
@@ -18,7 +20,7 @@ WindowStatusResult FUN_003df140(const StorageQueryContext* const* context, u32* 
     }
     if (!nnResultIsFailure(status)) {
         s64 rounded = (bytes + 0x1FFFF) & 0xFFFE0000LL;
-        *blocks = (u32)(rounded / 0x20000);
+        *blocks = (u32)ll_sdiv(rounded, 0x20000).quotient;
     }
     return WindowStatusResult(status);
 }

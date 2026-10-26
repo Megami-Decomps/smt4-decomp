@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
 #include "map/mapDepart.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 /* A 0x8C-byte UI sprite; only the data the initializers below pass around. */
 struct SceneSprite {

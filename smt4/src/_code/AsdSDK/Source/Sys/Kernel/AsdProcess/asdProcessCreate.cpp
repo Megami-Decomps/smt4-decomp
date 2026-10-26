@@ -1,4 +1,4 @@
-/* NON_MATCHING: signed-byte process-name hash is recovered; group, callback and process-id search registers differ. */
+/* NON_MATCHING: signed name bytes (s8 field) match retail; group and owner swap callee-saved registers (r6/r7) and the id search uses different scratch registers. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 
 #include "AsdSDK/AsdDebug.h"

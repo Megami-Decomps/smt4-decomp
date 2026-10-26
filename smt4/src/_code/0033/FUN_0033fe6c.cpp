@@ -42,7 +42,7 @@ PlayerRecord *gameGetPlayerData(void);
 UnitRecord *saveResolvePartySlot(s32 index);
 UnitRecord *gameGetUnitRecord(s32 index);
 s32 btlSourceGetMaxHp(const PlayerRecord *player);
-s32 FUN_00269bf0(const UnitRecord *unit);
+s32 btlLinkGetMaxHp(const UnitRecord *unit);
 void FUN_0023dc38(u16 *mask, s32 kind);
 
 /* Tells whether the effect would change the target: 0 when it would, 3 when it would do nothing. */
@@ -87,7 +87,7 @@ u32 FUN_0033fe6c(s32 index, s32 fromParty, const RecoveryEffect *effect, u32 use
         UnitRecord *unit = fromParty != 0 ? saveResolvePartySlot(index) : gameGetUnitRecord(index);
         if (unit == NULL)
             return 3;
-        if ((wanted & RECOVER_HP) && (unit->status & 0x406) == 0 && FUN_00269bf0(unit) != unit->hp)
+        if ((wanted & RECOVER_HP) && (unit->status & 0x406) == 0 && btlLinkGetMaxHp(unit) != unit->hp)
             changes = RECOVER_HP;
         if ((wanted & RECOVER_MP) && (unit->status & 0x406) == 0 && unit->mp != unit->maxMp)
             changes |= RECOVER_MP;

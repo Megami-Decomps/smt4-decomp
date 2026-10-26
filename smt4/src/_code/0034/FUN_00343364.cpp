@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation: this build hoists the address of the stereo-mode field (one more live register, so the nibble spills to the stack) where retail reloads it from the context base */
 #include "camp/RenderCtx.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0028.h"
 
 extern "C" {
 u32 FUN_002c15ac(u32 mode);

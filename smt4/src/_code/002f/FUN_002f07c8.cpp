@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail's loop-hit exit is `bl scrSetResult; nop; nop; b epilogue` (shared `mov r0,r7` return with r7 = 1) and builds the active-entry result with movne/mov before one shared scrSetResult; the build duplicates the epilogue and keeps the result in r7. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);

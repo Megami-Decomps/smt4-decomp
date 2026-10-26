@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003fa6a4` (_code @ 0x3fa6a4, 0x188 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "network/Common/CTRNetInit.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ extern int FUN_0012bc90(unsigned int *);
 extern int onlineContextGetInstance(void);
 extern int FUN_002e9ff4(int);
 /* Supplied declaration required: _ZN9Obj557c908setStateEj. */
-extern int FUN_00432acc(void);
 /* Supplied declaration required: FUN_00514d48. */
 
 

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_001a7d48(...);
+int partyPanelHasSlotValue(...);
 int FUN_0029378c(...);
 int scrollOwnerSelectIndex(...);
 int FUN_0029eb5c(...);
@@ -39,7 +39,7 @@ typedef struct {
 
 extern int g_partyPanel; /* 0x43dcf0 */
 
-/* Supplied declaration required: FUN_001a7d48. */
+/* Supplied declaration required: partyPanelHasSlotValue. */
 /* Supplied declaration required: FUN_001d13b0. */
 /* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: saveResolvePartySlot. */
@@ -506,7 +506,7 @@ LAB_0028b264:
       temp_v7 = objectPartRunUnlessLocked();
       temp_v8 = FUN_0029efa8(temp_v3);
       temp_v2 = 0;
-      FUN_001a7d48(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
         temp_v2 = 0;
         if (*(char *)(temp_v0 + 0x66c) == '\x04') {
@@ -572,7 +572,7 @@ LAB_0028b308:
       temp_v7 = objectPartRunUnlessLocked();
       temp_v8 = FUN_0029efa8(temp_v3);
       temp_v2 = 0;
-      FUN_001a7d48(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v7,temp_v8,*(unsigned int *)(temp_v0 + 0x2c));
       if (temp_v2 == 0) {
         temp_v2 = 0;
         if (*(char *)(temp_v0 + 0x66c) == '\x04') {

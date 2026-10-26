@@ -1,6 +1,6 @@
 /* NON_MATCHING: scoped visibility and linker speed getter recover frame and tail call; reset-speed constant lifetime and row pointer schedule differ. */
 #include "common.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 extern "C" {
 

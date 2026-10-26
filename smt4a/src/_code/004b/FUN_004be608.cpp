@@ -1,8 +1,7 @@
 /* NON_MATCHING: readable rebuild of the main-partner select menu's state machine (draft args completed from the surrounding calls: the entry index passed to the script start, the destroyed script and the lost return of FUN_001517b4); armcc here shares the state-store tail and the script reload differently. */
 #include "common.h"
 #include "shard/Shard0031.h"
-#include "util/FUN_002a4894.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 
 /* The partner select menu (only the fields the state machine reads). */
 struct PartnerMenuFull {

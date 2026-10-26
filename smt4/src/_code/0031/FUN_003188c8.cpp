@@ -1,6 +1,5 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
-
 extern "C" {
 
 int FUN_00223b0c(void);

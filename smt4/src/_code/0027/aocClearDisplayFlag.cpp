@@ -1,5 +1,5 @@
 #include "addon/aocMain.h"
-#include "util/CalleeContracts.h"
+#include "addon/AocSystemSmt4.h"
 
 extern "C" {
 

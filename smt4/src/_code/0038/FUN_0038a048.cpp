@@ -1,7 +1,7 @@
 /* NON_MATCHING: native array allocation now forwards retail's unset owner word; result-value temporary and copy ABI still differ. */
 #include "addon/AocPackageMountBatch.h"
 #include "AsdSDK/Source/Sys/Mem/AsdOperatorNewB.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 WindowOperationResult FUN_0038b6d8(WindowOperationState *state, const WindowOperationRequest *request);

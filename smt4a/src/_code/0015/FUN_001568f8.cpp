@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the unit base pointer and the id-list base offset (8) into registers and indexes with a register offset; built recomputes addresses per access */
+/* NON_MATCHING: the hoisted unit-table base matches retail; retail also keeps the id-list offset (8) in a register and indexes with a register offset, the build folds it into the ldrsh immediate. */
 #include "common.h"
 
 struct UnitMember {
@@ -18,15 +18,16 @@ extern "C" {
 /* Finds the unit (of 109) whose id list contains `id` and returns its data block (offset 0x164); NULL when none does. */
 u8 *FUN_001568f8(UnitListState *state, s32 id)
 {
+    UnitMember *units = state->units;
     for (s32 unit = 0; unit < 109; unit++) {
         for (s32 i = 0; i < 50; i++) {
-            s32 entry = state->units[unit].ids[i];
+            s32 entry = units[unit].ids[i];
 
             if (entry < 0) {
                 break;
             }
             if (entry == id) {
-                return state->units[unit].data;
+                return units[unit].data;
             }
         }
     }

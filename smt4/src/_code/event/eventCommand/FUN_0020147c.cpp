@@ -1,9 +1,6 @@
 /* NON_MATCHING: instruction scheduling only: retail hoists `mov r1, #10` above the conditional color select and loads 1.0f before `mov r2, #1`. */
 #include "event/eventCommand.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 

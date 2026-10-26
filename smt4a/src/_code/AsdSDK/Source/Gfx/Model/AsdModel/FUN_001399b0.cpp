@@ -1,7 +1,7 @@
 /* NON_MATCHING: the light-array base is not cached separately and the final attachment becomes a tail call. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "shard/S1GfxModel.h"
-#include "util/FUN_001767a4.h"
+#include "code/Code0017.h"
 
 extern "C" {
 struct Triple;

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "camp/PlayLog/PlayLog.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ extern unsigned char DAT_0040317c; /* 0x40317c */
 extern int *g_unite; /* 0x43dd68 */
 
 extern int asdCameraLoadFromFile(unsigned char *);
-extern int FUN_002907a8(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: statusCameraSelectPreset. */
 /* Supplied declaration required: FUN_00297060. */

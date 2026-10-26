@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "util/GameStockContainsEntry.h"
+#include "gamedata/GameDataAccess.h"
 struct RecruitmentMasks {
     u8 prefix[8];
     u64 required;

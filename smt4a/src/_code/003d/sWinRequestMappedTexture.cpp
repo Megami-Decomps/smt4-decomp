@@ -2,12 +2,12 @@
 #include "gamedata/DataTable.h"
 #include "shard/S1AsdTexTable.h"
 #include <stddef.h>
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 extern void* g_sWin;
 extern AocSystemA* g_aocSystem;
-TexTableEntry* textureGetIndexedResource(u32 index);
+TexTableNamedEntry* textureGetIndexedResource(u32 index);
 void* libc_bsearch(const void* key, const void* entries, u32 count, u32 size,
                    s32 (*compare)(const void*, const void*));
 s32 FUN_002321f8(const void* key, const void* record);

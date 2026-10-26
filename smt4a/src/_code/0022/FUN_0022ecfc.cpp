@@ -1,4 +1,4 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0022ecfc` (_code @ 0x22ecfc, 0xa74 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -32,8 +32,6 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } void_stack;
 
-extern unsigned char LAB_0022f064; /* 0x22f064 */
-extern unsigned char LAB_0022f584; /* 0x22f584 */
 extern int g_uiQuest; /* 0x57f28c */
 extern int g_renderCtx; /* 0x59dbb4 */
 
@@ -124,7 +122,7 @@ void FUN_0022ecfc(void)
                        (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0x6f,0,0);
           temp_v5 = asdTMTexTableEntryAt(0x1e,0x9b);
           temp_v7 = FUN_00156850(temp_v11,0);
-          textFormatBuffer(temp_v16,&LAB_0022f064,temp_v7);
+          textFormatBuffer(temp_v16,"%s",temp_v7);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
@@ -237,7 +235,7 @@ void FUN_0022ecfc(void)
                  (temp_v13 || temp_v14) || temp_v15);
     temp_v12 = asdTMTexTableEntryAt(0x1e,0xb2);
     temp_v7 = FUN_00156850(temp_v6,0);
-    textFormatBuffer(temp_v16,&LAB_0022f584,temp_v7);
+    textFormatBuffer(temp_v16,"%s",temp_v7);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v10 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v1,

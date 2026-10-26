@@ -1,7 +1,7 @@
 /* NON_MATCHING: module/range folding, result capture across file cleanup, stack slots and saved registers differ. */
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 #include "nn/Result.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 s32 stringFormatBounded(char *output, u32 size, const char *format, ...);

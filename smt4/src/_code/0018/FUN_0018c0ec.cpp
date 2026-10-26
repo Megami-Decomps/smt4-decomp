@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
+#include "code/Code0020_Smt4.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ int gameSavedFlagSet(...);
 int messageMainFinishWindow(void);
 int FUN_0029bed8(...);
 int FUN_002b827c(...);
-int FUN_002f6660(...);
+int statusDownOpenList(...);
 int FUN_002f6728(void);
 int FUN_0030aacc(void);
 int FUN_0030ab34(...);
@@ -25,7 +26,7 @@ int FUN_00216e64(...);
 int FUN_0029541c(...);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
-int FUN_002954f4(...);
+int btlTalkBustUpSetDemonTexture(...);
 int FUN_0029bd4c(void);
 int FUN_0029bde4(...);
 int unitRecalculateEffectiveStats(...);
@@ -143,7 +144,6 @@ extern int g_result; /* 0x44dc20 */
 /* Supplied declaration required: statusReplaceSkillList. */
 /* Supplied declaration required: FUN_001cea8c. */
 /* Supplied declaration required: mapDepartAdvanceState. */
-extern int FUN_00203610(void);
 /* Supplied declaration required: FUN_00204358. */
 /* Supplied declaration required: FUN_00216e64. */
 /* Supplied declaration required: FUN_00295214. */
@@ -154,7 +154,7 @@ extern int FUN_00295408(void);
 /* Supplied declaration required: FUN_0029541c. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int btlTalkBustUpGetValue(void);
 extern int FUN_00295618(void);
 extern int FUN_0029563c(void);
@@ -251,8 +251,8 @@ extern int statusDownValueGet(void);
 /* Supplied declaration required: statusDownSetEntries. */
 /* Supplied declaration required: statusDownEnterState4. */
 extern int FUN_002f6564(void);
-extern int FUN_002f6614(void);
-/* Supplied declaration required: FUN_002f6660. */
+extern int statusCursorIsAtLast(void);
+/* Supplied declaration required: statusDownOpenList. */
 /* Supplied declaration required: FUN_002f6728. */
 /* Supplied declaration required: mapMainCallIfActive2. */
 /* Supplied declaration required: FUN_0030aacc. */
@@ -1206,7 +1206,7 @@ LAB_0018da7c:
       if (temp_v8 != 0) {
         temp_v8 = btlTalkBustUpGetValue();
         if (temp_v8 == 0) {
-          FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v4 + 0x46),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),7);
@@ -1269,7 +1269,7 @@ joined_r0x0018edf0:
       if (temp_v8 != 0) {
         temp_v8 = btlTalkBustUpGetValue();
         if (temp_v8 == 0) {
-          FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v4 + 0x46),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),5);
@@ -1437,7 +1437,7 @@ joined_r0x0018edf0:
       if (temp_v8 != 0) {
         temp_v8 = btlTalkBustUpGetValue();
         if (temp_v8 == 0) {
-          FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v4 + 0x46),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),5);
@@ -1652,11 +1652,11 @@ joined_r0x0018edf0:
         if (temp_v8 != 0) {
           temp_v8 = btlTalkBustUpGetValue();
           if (temp_v8 == 0) {
-            FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
+            btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v4 + 0x46),1);
             btlTalkBustUpSetUnk2F4(1);
           }
           scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),8);
-          FUN_002f6660(*(unsigned int *)(temp_v2 + 0xd038),*(unsigned int *)(temp_v2 + 0xd03c));
+          statusDownOpenList(*(unsigned int *)(temp_v2 + 0xd038),*(unsigned int *)(temp_v2 + 0xd03c));
           temp_v4 = 0;
           piVar20 = (int *)(temp_v2 + 0x3544);
           *piVar17 = *piVar17 + 1;
@@ -1670,7 +1670,7 @@ joined_r0x0018edf0:
           FUN_002c1658(0,1);
           if ((temp_v4 != 0) || (temp_v4 = statusDownValueGet(), temp_v4 != 0)) {
             temp_v4 = statusDownGetCursorIndex();
-            if ((temp_v4 != *(int *)(temp_v2 + 0xd038)) && (temp_v4 = FUN_002f6614(), temp_v4 == 0)) {
+            if ((temp_v4 != *(int *)(temp_v2 + 0xd038)) && (temp_v4 = statusCursorIsAtLast(), temp_v4 == 0)) {
               temp_v9 = 0x100016e;
               eventQueueAddUniqueIfValid(temp_v9);
               break;
@@ -1838,7 +1838,7 @@ joined_r0x0018edf0:
       if ((temp_v8 != 0) && (temp_v8 = FUN_0029c48c(), temp_v8 != 0)) {
         temp_v8 = btlTalkBustUpGetValue();
         if (temp_v8 == 0) {
-          FUN_002954f4(*(unsigned short *)(temp_v4 + 0x46),1);
+          btlTalkBustUpSetDemonTexture(*(unsigned short *)(temp_v4 + 0x46),1);
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(temp_v2 + 0x3574),0xd);

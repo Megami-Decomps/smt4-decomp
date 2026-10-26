@@ -1,6 +1,6 @@
 /* NON_MATCHING: sound-global addressing, null-handle guard folding and saved VFP/core register allocation differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
-#include "util/FUN_002bf684.h"
+#include "code/Code002b.h"
 
 /* The native BasicSound scalar controls are not described by the archive slot prefix. */
 struct BasicSoundControlView {

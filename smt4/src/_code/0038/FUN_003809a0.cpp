@@ -1,11 +1,10 @@
-/* NON_MATCHING: register allocation and block order: retail passes the object through a copy (r6) to the inlined clear and places the no-heap path after the return; build keeps r4 and falls through. */
+/* NON_MATCHING: retail passes the object through a copy (r6) to the inlined clear, keeps the section in r5 with one shared Leave and places the no-heap exit out of line; build keeps r4 and leaves per arm. */
 #include "common.h"
 #include "shard/S3SoundHeapObj.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 
-void nn_os_CriticalSection_Enter(void *cs);
-void nn_os_CriticalSection_Leave(void *cs);
 void nw_snd_internal_FrameHeap_Clear(u32 *heap);
 void nw_snd_internal_FrameHeap_Destroy(u32 *heap);
 u32 *nw_snd_internal_FrameHeap_FrameHeap_sub_object_3802B0(u32 *heap);
@@ -18,17 +17,14 @@ extern const u8 DAT_00421f5c;  /* vtable */
 /* Clears the frame heap under the lock. */
 static __inline void soundHeapObjClear(SoundHeapObj *self)
 {
-    void *lock = self->lock;
-
-    nn_os_CriticalSection_Enter(lock);
+    ScopedCriticalLock lock(self->lock);
     nw_snd_internal_FrameHeap_Clear(&self->heap);
-    nn_os_CriticalSection_Leave(lock);
 }
 
 /* Releases the frame heap under the lock. */
 static __inline void soundHeapObjDestroyHeap(SoundHeapObj *self)
 {
-    void *lock = self->lock;
+    CriticalSection *lock = reinterpret_cast<CriticalSection *>(self->lock);
 
     nn_os_CriticalSection_Enter(lock);
     if (self->heap != 0) {

@@ -1,6 +1,6 @@
 /* NON_MATCHING: load form of the 64-bit marker flags: retail loads the two words with separate ldr (register r1 base) and both mask words first; the build uses ldm and a different order. */
 #include "common.h"
-#include "util/GameDataGetMarkEntry.h"
+#include "gamedata/GameDataAccess_VariantJ.h"
 
 /* The battle state; only the phase value and the marker flags are named. */
 struct MarkerBattleState {

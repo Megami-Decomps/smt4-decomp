@@ -40,8 +40,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern unsigned char LAB_0024e7b4; /* 0x24e7b4 */
-extern unsigned char LAB_0024e7e0; /* 0x24e7e0 */
 extern signed char g_btlUi; /* 0x57a9b8 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 extern int g_renderCtx; /* 0x59dbb4 */
@@ -179,8 +177,8 @@ unsigned int FUN_0024e31c(void)
       }
       temp_v9 = 0;
       if (g_btlUi != '\0') {
-        textDrawString(3,0xffffffff,&LAB_0024e7b4);
-        textDrawString(3,0xffffffff,&LAB_0024e7e0);
+        textDrawString(3,0xffffffff,"\x96\xa2\x8eg\x97p\x82\xcc\x83f\x81[\x83^\x82\xc8\x82\xcc\x82\xc5\x95\\\x8e\xa6\x82\xc5\x82\xab\x82\xdc\x82\xb9\x82\xf1\x81B");
+        textDrawString(3,0xffffffff,"\x92S\x93\x96\x82\xc9\x8am\x94F\x82\xb5\x82\xc4\x89\xba\x82\xb3\x82\xa2\x81B");
       }
       if (*(int *)(temp_v1 + 0x74a0) != 6) {
         if ((*(int *)(temp_v1 + 0x74a0) == 0x13) &&

@@ -43,7 +43,7 @@ int FUN_004c34e0(...);
 int btlFindEntryValue(...);
 int btlEntryGetSummaryRatio(...);
 float btlGetSummaryPercentFraction(int index);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int btlSelectActionTier(void);
 int FUN_004e5f2c(...);
 int btlEffectFindSlotId(...);
@@ -266,7 +266,7 @@ extern int FUN_003eca48(unsigned int, unsigned short);
 /* Supplied declaration required: btlDowngradeRandomResistance. */
 extern int btlGetPropertyMaximum(void);
 /* Supplied declaration required: FUN_004c53fc. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: battleRecordUnitMaskHistoryEvents. */
 /* Supplied declaration required: FUN_004c5848. */
 /* Supplied declaration required: FUN_004c5ec0. */
@@ -830,7 +830,7 @@ LAB_004e2ab0:
         temp_v5 = FUN_004f9ae4(g_btlAux,1);
         temp_v8 = btlUnitGetSkillValue(g_btlAux);
         temp_v21 = (unsigned int *)(temp_v8 * (param_11 + temp_v52));
-        FUN_004c571c(temp_v81,1,1,0);
+        btlAdjustPropertyClamped(temp_v81,1,1,0);
         temp_v5 = temp_v5 + (int)temp_v21;
         FUN_004fda78(temp_v5 + temp_v12,0,param_2,*(int *)(*param_1 + 0x1ed4) + temp_v102 * 0x10,4,0);
         temp_v8 = btlScriptUnitHasFlags(*param_1);
@@ -1031,7 +1031,7 @@ LAB_004e34b8:
     }
     if (((temp_v107 == 0) && ((temp_v60[1] & DAT_005711dc) == 0 && (*temp_v60 & DAT_005711d8) == 0)
         ) && ((*param_2 & 0x200) == 0)) {
-      FUN_004c571c(param_8,3,1,0);
+      btlAdjustPropertyClamped(param_8,3,1,0);
       temp_v13 = temp_v60[1] | DAT_005711dc;
       *temp_v60 = *temp_v60 | DAT_005711d8;
       temp_v60[1] = temp_v13;
@@ -1078,7 +1078,7 @@ LAB_004e34b8:
     temp_v27 = temp_v6;
     temp_v33 = temp_v8;
     FUN_004fc094(0,param_2,temp_v5 + temp_v49 * 0x10,temp_v5 + temp_v80 * 0x10,temp_v47,puVar9);
-    FUN_004c571c(param_8,2,puVar9,0);
+    btlAdjustPropertyClamped(param_8,2,puVar9,0);
     if (puVar13 == (unsigned int *)0x0) {
       temp_v23 = (unsigned int *)0x3;
       temp_v5 = btlUnitGet(param_1);
@@ -1819,7 +1819,7 @@ LAB_004e4cac:
       temp_v12 = *(int *)(*param_1 + 0x1ed4);
       FUN_003e77cc(reinterpret_cast<BtlMainStateA *>(*param_1),7,(int)*(short *)(temp_v12 + param_8 * 0x1d0 + 0x68),
                    (int)*(short *)(temp_v12 + temp_v30),0x6a);
-      FUN_004c571c(param_8,0x2c,1,0);
+      btlAdjustPropertyClamped(param_8,0x2c,1,0);
     }
   }
   if (param_8 < 0x6d) {

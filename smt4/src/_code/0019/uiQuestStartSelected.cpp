@@ -1,6 +1,6 @@
 /* NON_MATCHING: only the state-change stores differ: retail stores the previous state, then the new one with a writeback (str [r0,#8]; str [r0,#4]!) and the timer through that pointer; the build merges them into stm */
 #include "common.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 extern "C" {
 

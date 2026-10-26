@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int linkHolderApplyFlag(...);
 int FUN_00284ee4(...);
 int FUN_002c39dc(...);
 int rt_aeabi_memclr(...);
-int FUN_00319aec(...);
 int FUN_003c1060(void);
 int FUN_003c1094(...);
 int sysPlayVoice(int);

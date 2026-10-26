@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/btlHelp.h"
+#include "code/Code0024_Smt4.h"
 
 extern "C" {
 
@@ -13,7 +14,7 @@ int FUN_00245cc0(...);
 int FUN_00245d0c(...);
 int FUN_00246d38(...);
 int FUN_00250720(int);
-int FUN_002550d8(...);
+int btlAdjustPropertyClamped(...);
 int FUN_00255180(...);
 int btlReflectQueueKind34(int, unsigned int *);
 int FUN_002569ac(...);
@@ -36,12 +37,11 @@ extern int g_btlUiBlock; /* 0x439ca8 */
 /* Supplied declaration required: FUN_00229a24. */
 /* Supplied declaration required: FUN_00229b10. */
 /* Supplied declaration required: btlReflectCreateKind18. */
-extern int FUN_00245c78(void);
 /* Supplied declaration required: FUN_00245cc0. */
 /* Supplied declaration required: FUN_00245d0c. */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: FUN_00250720. */
-/* Supplied declaration required: FUN_002550d8. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: btlReflectQueueKind34. */
 extern int FUN_00256940(int, int, unsigned int);
@@ -272,7 +272,7 @@ unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
     }
     FUN_002569ac(param_1,*(unsigned int *)(*param_1 + 0x84));
     btlEntryValuesCopy(param_1,param_2);
-    FUN_002550d8((int)*(short *)(param_2[9] + 0x62),0x1d,1,0);
+    btlAdjustPropertyClamped((int)*(short *)(param_2[9] + 0x62),0x1d,1,0);
     temp_v7 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
   }
   *(unsigned char *)(temp_v7 + 9) = 0x1d;

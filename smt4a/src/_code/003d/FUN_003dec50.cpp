@@ -1,9 +1,9 @@
 /* NON_MATCHING: the plain-static search helper now unrolls like retail; the remaining differences are the loop-counter signedness of the unrolled prologue and a copy of the id register. */
 #include "gamedata/ProgressionUnlock.h"
+#include "code/Code002c_Smt4a.h"
 
 extern "C" {
 void gameDataSetStatusFlag(u16 id, s32 enabled);
-s32 FUN_002c2758(u16 id);
 s32 FUN_0041862c(u32 kind);
 
 static const ProgressionUnlockRecord* progressionFindRecord(const ProgressionUnlockRecord* entries, u32 count, u16 id)

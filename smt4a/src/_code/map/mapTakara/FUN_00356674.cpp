@@ -21,7 +21,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } void_stack;
 
-extern unsigned char LAB_00356bcc; /* 0x356bcc */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 #ifndef ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
 #define ROMWRIGHT_STORAGE_s__a_a_00587f08_9_1_DEFINED
@@ -183,12 +182,12 @@ unsigned int FUN_00356674(void)
               if (temp_v1 != 6) {
                 if (temp_v1 == 8) {
                   temp_v1 = 0x20;
-                  FUN_00178b04(0x20,&LAB_00356bcc,0x193);
+                  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x193);
                   goto joined_r0x00356b80;
                 }
                 if (temp_v1 == 9) {
                   temp_v1 = 0x20;
-                  FUN_00178b04(0x20,&LAB_00356bcc,0x19c);
+                  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x19c);
                   goto joined_r0x00356bb0;
                 }
                 if (temp_v1 != 10) {
@@ -199,7 +198,7 @@ unsigned int FUN_00356674(void)
                           if (temp_v1 != 0xf) {
                             if (temp_v1 != 0x10) {
                               temp_v1 = 0x20;
-                              FUN_00178b04(0x20,&LAB_00356bcc,0x1e4);
+                              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1e4);
                               temp_v2 = 0;
                               if (temp_v1 != 0) {
                                 temp_v2 = modelListInit();
@@ -222,7 +221,7 @@ unsigned int FUN_00356674(void)
                             }
                             else {
                               temp_v1 = 0x20;
-                              FUN_00178b04(0x20,&LAB_00356bcc,0x1db);
+                              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1db);
                               temp_v2 = 0;
                               if (temp_v1 != 0) {
                                 temp_v2 = modelListInit();
@@ -246,7 +245,7 @@ unsigned int FUN_00356674(void)
                           }
                           else {
                             temp_v1 = 0x20;
-                            FUN_00178b04(0x20,&LAB_00356bcc,0x1d2);
+                            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1d2);
                             temp_v2 = 0;
                             if (temp_v1 != 0) {
                               temp_v2 = modelListInit();
@@ -270,7 +269,7 @@ unsigned int FUN_00356674(void)
                         }
                         else {
                           temp_v1 = 0x20;
-                          FUN_00178b04(0x20,&LAB_00356bcc,0x1c9);
+                          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1c9);
                           temp_v2 = 0;
                           if (temp_v1 != 0) {
                             temp_v2 = modelListInit();
@@ -294,7 +293,7 @@ unsigned int FUN_00356674(void)
                       }
                       else {
                         temp_v1 = 0x20;
-                        FUN_00178b04(0x20,&LAB_00356bcc,0x1c0);
+                        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1c0);
                         temp_v2 = 0;
                         if (temp_v1 != 0) {
                           temp_v2 = modelListInit();
@@ -316,7 +315,7 @@ unsigned int FUN_00356674(void)
                     }
                     else {
                       temp_v1 = 0x20;
-                      FUN_00178b04(0x20,&LAB_00356bcc,0x1b7);
+                      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1b7);
                       temp_v2 = 0;
                       if (temp_v1 != 0) {
                         temp_v2 = modelListInit();
@@ -338,7 +337,7 @@ unsigned int FUN_00356674(void)
                   }
                   else {
                     temp_v1 = 0x20;
-                    FUN_00178b04(0x20,&LAB_00356bcc,0x1ae);
+                    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1ae);
                     temp_v2 = 0;
                     if (temp_v1 != 0) {
                       temp_v2 = modelListInit();
@@ -360,7 +359,7 @@ unsigned int FUN_00356674(void)
                 }
                 else {
                   temp_v1 = 0x20;
-                  FUN_00178b04(0x20,&LAB_00356bcc,0x1a5);
+                  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x1a5);
                   temp_v2 = 0;
                   if (temp_v1 != 0) {
                     temp_v2 = modelListInit();
@@ -382,7 +381,7 @@ unsigned int FUN_00356674(void)
               }
               else {
                 temp_v1 = 0x20;
-                FUN_00178b04(0x20,&LAB_00356bcc,0x18a);
+                FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x18a);
                 temp_v2 = 0;
                 if (temp_v1 != 0) {
                   temp_v2 = modelListInit();
@@ -404,7 +403,7 @@ unsigned int FUN_00356674(void)
             }
             else {
               temp_v1 = 0x20;
-              FUN_00178b04(0x20,&LAB_00356bcc,0x181);
+              FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x181);
               temp_v2 = 0;
               if (temp_v1 != 0) {
                 temp_v2 = modelListInit();
@@ -425,7 +424,7 @@ unsigned int FUN_00356674(void)
           }
           else {
             temp_v1 = 0x20;
-            FUN_00178b04(0x20,&LAB_00356bcc,0x178);
+            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x178);
 joined_r0x00356bb0:
             temp_v2 = 0;
             if (temp_v1 != 0) {
@@ -447,7 +446,7 @@ joined_r0x00356bb0:
         }
         else {
           temp_v1 = 0x20;
-          FUN_00178b04(0x20,&LAB_00356bcc,0x16f);
+          FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x16f);
 joined_r0x00356b80:
           temp_v2 = 0;
           if (temp_v1 != 0) {
@@ -469,7 +468,7 @@ joined_r0x00356b80:
       }
       else {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_00356bcc,0x166);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x166);
         temp_v2 = 0;
         if (temp_v1 != 0) {
           temp_v2 = modelListInit();
@@ -490,7 +489,7 @@ joined_r0x00356b80:
     }
     else {
       temp_v1 = 0x20;
-      FUN_00178b04(0x20,&LAB_00356bcc,0x15d);
+      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x15d);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = modelListInit();
@@ -510,7 +509,7 @@ joined_r0x00356b80:
   }
   else {
     temp_v1 = 0x20;
-    FUN_00178b04(0x20,&LAB_00356bcc,0x154);
+    FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x154);
     temp_v2 = 0;
     if (temp_v1 != 0) {
       temp_v2 = modelListInit();
@@ -551,7 +550,7 @@ LAB_003572ac:
       *(unsigned char *)(temp_v5 + 0xbd8) = 1;
       *(unsigned int *)(temp_v5 + 0xbdc) = 0;
       *(unsigned char *)(temp_v5 + 0xbd0) = 1;
-      FUN_00178b04(0x20,&LAB_00356bcc,0x276);
+      FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x276);
       temp_v2 = 0;
       if (temp_v1 != 0) {
         temp_v2 = modelListInit();
@@ -656,7 +655,7 @@ LAB_0035755c:
                 *(unsigned int *)(temp_v7 + 0xdc) = 0;
                 temp_v1 = 0x20;
                 *(unsigned char *)(temp_v7 + 0xd8) = 1;
-                FUN_00178b04(0x20,&LAB_00356bcc,0x333);
+                FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapTakara.cpp",0x333);
                 temp_v2 = 0;
                 if (temp_v1 != 0) {
                   temp_v2 = modelListInit();

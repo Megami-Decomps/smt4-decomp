@@ -1,19 +1,19 @@
-/* NON_MATCHING: panel reset inlining and state-switch scheduling differ from retail. */
+/* NON_MATCHING: ported smt4a FUN_002c1664 verbatim; only the scaleStep[0]=0.0f store in the hold branch is scheduled earlier (vstr s17,[r4,#60] before the state stores) than retail's. */
 #include "ui/PanelTransition.h"
-
-extern "C" {
-void FUN_00201714(s32 *parameters, u32 *second, u32 *first, u32 *third,
-                  f32 *scale, f32 *step, f32 *opacity);
-void mathAdvanceClamped(f32 *value, f32 step, f32 target);
-}
 
 static __inline void resetPanelTransition(PanelTransition *transition)
 {
     transition->frame = 0;
     transition->state = 0;
     transition->hold = 0;
-    for (u32 index = 0; index < 8; ++index)
-        transition->parameters[index] = 0;
+    transition->parameters[0] = 0;
+    transition->parameters[1] = 0;
+    transition->parameters[2] = 0;
+    transition->parameters[3] = 0;
+    transition->parameters[4] = 0;
+    transition->parameters[5] = 0;
+    transition->parameters[6] = 0;
+    transition->parameters[7] = 0;
     transition->scale[0] = 0.5f;
     transition->scale[1] = 0.5f;
     transition->scale[2] = 0.5f;
@@ -24,23 +24,31 @@ static __inline void resetPanelTransition(PanelTransition *transition)
     transition->third = 0;
 }
 
-/* Advance the delayed panel animation, optional hold, and clamped fade-out stages. */
-extern "C" void FUN_00200b24(PanelTransition *transition)
+extern "C" {
+void mathAdvanceClamped(f32 *value, f32 step, f32 target);
+void FUN_00201714(s32 *parameters, u32 *second, u32 *first, u32 *third,
+                  f32 *scale, f32 *step, f32 *opacity);
+
+/* Advance the delayed, active, held, and closing phases of a panel transition. */
+void FUN_00200b24(PanelTransition *transition)
 {
     switch (transition->state) {
     case 1:
-        if (transition->frame < transition->delay)
+        if (transition->frame < transition->delay) {
             break;
+        }
         transition->state = 2;
-        /* Fall through to start the animated state immediately. */
+        // Fall through once the delay is exhausted.
     case 2:
         FUN_00201714(transition->parameters, &transition->second, &transition->first,
-                     &transition->third, transition->scale, transition->scaleStep, &transition->opacity);
-        if (transition->frame >= transition->duration) {
-            if (transition->hold == 1)
-                transition->state = 3;
-            else
-                resetPanelTransition(transition);
+                      &transition->third, transition->scale, transition->scaleStep, &transition->opacity);
+        if (transition->frame < transition->duration) {
+            break;
+        }
+        if (transition->hold == 1) {
+            transition->state = 3;
+        } else {
+            resetPanelTransition(transition);
         }
         break;
     case 3:
@@ -49,13 +57,15 @@ extern "C" void FUN_00200b24(PanelTransition *transition)
         mathAdvanceClamped(&transition->scale[0], transition->scaleStep[0], 0.5f);
         mathAdvanceClamped(&transition->scale[1], transition->scaleStep[1], 0.5f);
         mathAdvanceClamped(&transition->scale[2], transition->scaleStep[2], 0.5f);
-        if (transition->frame < transition->duration + 10)
+        if (transition->frame < transition->duration + 10) {
             break;
+        }
         transition->state = 5;
-        /* Fall through to restore the idle defaults. */
+        // Fall through to restore the inactive defaults.
     case 5:
         resetPanelTransition(transition);
         break;
     }
-    transition->frame++;
+    ++transition->frame;
+}
 }

@@ -3,6 +3,7 @@
 #include "gamedata/GameFlags.h"
 #include "camp/CampCec/CampCecSetting.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code002e_Smt4a.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ void cecProcessCall4(void);
 s32 cecProcessForward(void);
 void playerSummaryFill(void);
 void FUN_002f4014(void);
-s32 FUN_002e2014(void);
 void FUN_0034280c(s32 arg);
 void stateAtF4Destroy(void);
 void gameDataBlocksSetFlagBits(u32 flag, s32 value);

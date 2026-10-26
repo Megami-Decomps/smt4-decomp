@@ -1,5 +1,5 @@
 #include "addon/aocMain.h"
-#include "util/AocClearDisplayFlag.h"
+#include "addon/AocSystemSmt4a.h"
 
 extern "C" {
 

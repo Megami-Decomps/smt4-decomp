@@ -2,7 +2,7 @@
 #include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
 #include "nn/fs/ArchiveCreateFile.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 void FUN_00254824(u32 result);

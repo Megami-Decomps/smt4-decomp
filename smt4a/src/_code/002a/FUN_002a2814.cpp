@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail ends the nested test with `moveq r0,#1` only; armcc adds a trailing `bne` to the return. */
 #include "common.h"
 
 extern "C" {
@@ -16,10 +15,16 @@ extern struct {
 /* True while the camp CEC work exists and is in state 12. */
 u32 FUN_002a2814(void)
 {
-    if (g_campCec.work != NULL) {
-        return g_campCec.work->state == 12;
+    CampCecWork *work = g_campCec.work;
+    u32 result = 0;
+
+    if (work == NULL) {
+        return 0;
     }
-    return 0;
+    if (work->state == 12) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

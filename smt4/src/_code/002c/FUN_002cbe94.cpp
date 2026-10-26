@@ -3,7 +3,7 @@
 
 extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
 #include "sys/ProcessResult.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 extern "C" void asdFatalError();
 extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 

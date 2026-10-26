@@ -1,7 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 200 rows); retail hoists the 0x424 literal and keeps the per-row loops as separate counters */
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "util/FUN_0029ee54.h"
+#include "code/Code0029_VariantA.h"
+#include "code/Code0029_VariantB.h"
 
 // One animated row widget (0x8c bytes each).
 struct RowWidget {
@@ -22,7 +23,6 @@ extern "C" {
 void FUN_002b8ee0(void* widget, s32 arg);
 u16 FUN_002b8584(u32 group, u32 index);
 s32 FUN_0029efc0(void* list);
-s32 FUN_0029efa8(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
 u32 FUN_002907a8(void);
 u32 asdTMTexTableEntryAt(u32 group, u32 index);

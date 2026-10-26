@@ -1,6 +1,6 @@
-/* NON_MATCHING: only the first slot-id address/load sequence and its argument registers differ. */
+/* NON_MATCHING: after taking the target slot into a local (as smt4a btlCommandResolveSelectedTarget) only one register differs: the &targets[selection] address add chain uses r3/r3 where retail uses r2 then r3. */
 #include "shard/PlayScene.h"
-#include "util/FUN_002621b4.h"
+#include "code/Code0026.h"
 #include "gamedata/DataTable40.h"
 
 extern "C" {
@@ -36,7 +36,8 @@ u32 FUN_0028cdec(PlayScene *scene)
     };
     if (selection != 0) {
         const PartyView *party = static_cast<const PartyView *>(gameGetSlotTable());
-        FUN_002621b4(scene->unk305C - 1, party->slots[selection - 1], skill[0], &scene->targeting.targets[selection]);
+        s32 target = party->slots[selection - 1];
+        FUN_002621b4(scene->unk305C - 1, target, skill[0], &scene->targeting.targets[selection]);
         party = static_cast<const PartyView *>(gameGetSlotTable());
         if (party->slots[selection - 1] < 0) {
             const SkillView *record = reinterpret_cast<const SkillView *>(dataTable40FindById(skill[0]));

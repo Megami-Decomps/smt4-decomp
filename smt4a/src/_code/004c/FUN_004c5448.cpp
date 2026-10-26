@@ -5,6 +5,7 @@
 #include "gamedata/Table04Record.h"
 #include "gamedata/DevilRecordA.h"
 #include "shard/W9_W9Match7_ModifierLists.h"
+#include "code/Code0019_Smt4a.h"
 struct IdOwner;
 /* Modifier lists lie beyond the common skill-table prefix. */
 union BattleModifierSkillView {
@@ -25,7 +26,6 @@ struct BattleModifierCategoryMasks {
 extern "C" {
 extern BattleModifierCategoryMasks DAT_005713f0;
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
-s32 padGetMappedValue(s32 id);
 s32 FUN_002efc44(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_0034a304(const AttributeModifierLists *record, s32 count, s32 kind);
 s32 FUN_004bd098(IdOwner *owner, u32 id);

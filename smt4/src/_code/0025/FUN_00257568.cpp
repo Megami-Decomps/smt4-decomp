@@ -1,78 +1,71 @@
-/* NON_MATCHING: the inlined key fill keeps the 99/0 constants in fp/r7 and saves r11/r12; retail sets each key register in its branch. */
 #include "common.h"
+#include "gamedata/ItemSortRecord.h"
 #include "gamedata/DataTable40.h"
 
 extern "C" {
 
-typedef struct UnitSortEntry {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ s32 unit; // negative when the entry has no unit
-} UnitSortEntry;
-
-typedef struct UnitSortRecord {
-    /* 0x00 */ u8 unk00[0x2C];
-    /* 0x2C */ u16 order;
-} UnitSortRecord;
-
-typedef struct UnitRecord {
+typedef struct SlotRecord {
     /* 0x00 */ u8 unk00[0x46];
-    /* 0x46 */ u16 level;
-} UnitRecord;
+    /* 0x46 */ u16 sortKey;
+} SlotRecord;
 
-s32 idIsAbove400(s32 id);
-u32 FUN_0024c5a0(u32 id);
-s32 recordKindRank(s32 id);
-UnitRecord *gameGetUnitRecord(s32 unit);
+typedef struct SortItem {
+    /* 0x00 */ int id;
+    /* 0x04 */ int slot;       /* negative when the item is not in a slot */
+} SortItem;
 
-static __inline s32 unitSortLevel(const UnitSortEntry *entry)
+extern int idIsAbove400(int id);
+extern int FUN_0024c5a0(int id);
+extern int recordKindRank(int id);
+extern SlotRecord *gameGetUnitRecord(int slot);
+
+/* Compare function for sorting items: by two ranks, the data row's order, the id, then the slot's sort key. */
+int FUN_00257568(SortItem *a, SortItem *b)
 {
-    if (entry->unit < 0) {
-        return 0;
-    }
-    return gameGetUnitRecord(entry->unit)->level;
-}
+    int rankB;
+    int rankA;
+    int subB;
+    int subA;
+    u32 orderB;
+    u32 orderA;
+    u32 slotKeyA;
+    u32 slotKeyB;
+    int diff;
 
-typedef struct UnitSortKey {
-    s32 kind;
-    s32 rank;
-    s32 order;
-} UnitSortKey;
-
-static __inline void unitSortGetKey(const UnitSortEntry *entry, UnitSortKey *key)
-{
-    if (idIsAbove400(entry->id)) {
-        key->kind = 99;
-        key->rank = 99;
-        key->order = 0;
+    if (idIsAbove400(a->id) != 0) {
+        rankA = 99;
+        subA = 99;
+        orderA = 0;
     } else {
-        key->kind = FUN_0024c5a0(entry->id);
-        key->rank = recordKindRank(entry->id);
-        key->order = reinterpret_cast<UnitSortRecord *>(dataTable40FindById(entry->id))->order;
+        rankA = FUN_0024c5a0(a->id);
+        subA = recordKindRank(a->id);
+        orderA = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(a->id))->secondaryKey;
     }
-}
-
-/* Sort comparator: by kind and rank (ids above 400 last), then descending order, then id, then unit level. */
-s32 FUN_00257568(const UnitSortEntry *a, const UnitSortEntry *b)
-{
-    UnitSortKey keyA;
-    UnitSortKey keyB;
-    s32 diff;
-
-    unitSortGetKey(a, &keyA);
-    unitSortGetKey(b, &keyB);
-    if ((diff = keyA.kind - keyB.kind) != 0) {
-        return diff;
+    if (idIsAbove400(b->id) != 0) {
+        rankB = 99;
+        subB = 99;
+        orderB = 0;
+    } else {
+        rankB = FUN_0024c5a0(b->id);
+        subB = recordKindRank(b->id);
+        orderB = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(b->id))->secondaryKey;
     }
-    if ((diff = keyA.rank - keyB.rank) != 0) {
-        return diff;
+    diff = rankA - rankB;
+    if (diff == 0) {
+        diff = subA - subB;
+        if (diff == 0) {
+            diff = orderB - orderA;
+            if (diff == 0) {
+                diff = a->id - b->id;
+                if (diff == 0) {
+                    slotKeyA = (a->slot < 0) ? 0 : gameGetUnitRecord(a->slot)->sortKey;
+                    slotKeyB = (b->slot < 0) ? 0 : gameGetUnitRecord(b->slot)->sortKey;
+                    diff = slotKeyA - slotKeyB;
+                }
+            }
+        }
     }
-    if ((diff = keyB.order - keyA.order) != 0) {
-        return diff;
-    }
-    if ((diff = a->id - b->id) != 0) {
-        return diff;
-    }
-    return unitSortLevel(a) - unitSortLevel(b);
+    return diff;
 }
 
 } /* extern "C" */

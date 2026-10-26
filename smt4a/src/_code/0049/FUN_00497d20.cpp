@@ -28,9 +28,6 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } param_4_stack;
 
-extern unsigned char LAB_00498394; /* 0x498394 */
-extern unsigned char LAB_0049839c; /* 0x49839c */
-extern unsigned char LAB_004983a0; /* 0x4983a0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
@@ -173,7 +170,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
       }
       temp_v0 = *(short *)(temp_v4 + 8);
       temp_v8 = *(short *)(temp_v4 + 10);
-      textFormatBuffer(temp_v12,&LAB_00498394,temp_v6);
+      textFormatBuffer(temp_v12,"%8d",temp_v6);
       drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v0 + temp_v7,temp_v8 + temp_v3,0,7,temp_v9,temp_v2,temp_v12);
     }
     else {
@@ -213,7 +210,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v0 = *(short *)(temp_v4 + 8);
     temp_v8 = *(short *)(temp_v4 + 10);
-    textFormatBuffer(temp_v12,&LAB_0049839c,temp_v13);
+    textFormatBuffer(temp_v12,"%3d",temp_v13);
     drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v0 + temp_v7,temp_v8 + temp_v3,0,7,temp_v6,temp_v2,temp_v12);
     if (param_3 == 0) {
       temp_v9 = 0x100;
@@ -223,7 +220,7 @@ void FUN_00497d20(int param_1,int param_2,int param_3,int param_4)
     }
     temp_v4 = layoutFindTableEntry(param_1 + 0x3a4,temp_v9);
     drawTextAtRelativePosition(param_1 + 0x3a4,0,*(short *)(temp_v4 + 8) + temp_v7,*(short *)(temp_v4 + 10) + temp_v3,0,7,
-                 temp_v6,temp_v2,&LAB_004983a0);
+                 temp_v6,temp_v2,"*");
     if ((*(char *)(param_1 + 0x20) != '\0') && (temp_v4 = FUN_0049cab8(temp_v1), temp_v4 != 0)) {
       if (param_3 == 0) {
         temp_v6 = 0xd0;

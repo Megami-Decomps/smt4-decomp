@@ -1,11 +1,11 @@
 /* NON_MATCHING: Animation-load scheduling and the state-update STM grouping differ from retail. */
 #include "shard/W4_W4Match2_UiQuest.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0029.h"
+extern "C" s32 FUN_0029ee54(void *cursor);
 
 extern "C" {
 void uiFadeRequestClear(void);
 void FUN_0029eb5c(void *cursor, s32 index);
-s32 FUN_0029ee54(void *cursor);
 void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 start, s32 mode);
 void FUN_002bf810(u32 event);

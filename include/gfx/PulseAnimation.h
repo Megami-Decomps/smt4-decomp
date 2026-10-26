@@ -18,13 +18,17 @@ extern "C" f32 mathInterpolateTimed(s32 duration, s32 frame, f32 start, f32 end)
 static __inline void pulseInterpolate(PulseAnimation *pulse, s32 duration, s32 frame,
                                       f32 start, f32 target)
 {
+    bool atEnd = false;
     pulse->value = mathInterpolateTimed(duration, frame, start, target);
+    if (frame == duration) {
+        atEnd = true;
+    }
     if (start > target) {
-        if (frame == duration || pulse->value <= target) {
+        if (pulse->value <= target || atEnd) {
             pulse->value = target;
         }
     } else {
-        if (frame == duration || pulse->value >= target) {
+        if (pulse->value >= target || atEnd) {
             pulse->value = target;
         }
     }

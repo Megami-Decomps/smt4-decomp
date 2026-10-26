@@ -1,6 +1,6 @@
 /* NON_MATCHING: sentinel-loop setup is not predicated like retail, and the three divisions use different VFP operand registers and load ordering. */
 #include "shard/W6_W6Match7_VectorKey.h"
-#include "util/FUN_002c17c0.h"
+#include "code/Code002c.h"
 
 extern "C" {
 

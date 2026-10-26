@@ -1,6 +1,6 @@
 /* NON_MATCHING: unit-slot address: retail loads the work pointer into r1 and the 0x3c7 stride into r0 (swapped here). */
 #include "common.h"
-#include "util/FUN_0027e3b8.h"
+#include "code/Code0027.h"
 
 extern "C" {
 

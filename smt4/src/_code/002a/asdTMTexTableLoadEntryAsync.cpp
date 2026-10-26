@@ -2,11 +2,11 @@
 #include "shard/W6_W6Match2_HelpResources.h"
 
 extern "C" {
-TexTableEntry *asdTMTexTableCallFileB(s32 table, s32 index);
-TexTableEntry *FUN_002a6114(TexTableEntry *entry, u32 mode);
+TexTableNamedEntry *asdTMTexTableCallFileB(s32 table, s32 index);
+TexTableNamedEntry *FUN_002a6114(TexTableNamedEntry *entry, u32 mode);
 
 /* Gets texture table entry `index` of `table` and starts its asynchronous load. */
-TexTableEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index)
+TexTableNamedEntry *asdTMTexTableLoadEntryAsync(s32 table, s32 index)
 {
     return FUN_002a6114(asdTMTexTableCallFileB(table, index), 0x10000);
 }

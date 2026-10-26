@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code002c_Smt4a.h"
 extern "C" {
 struct DataStatus { u8 unk00[0x27FB8]; u8 flags[1]; };
 struct DataTable { u8 unk00[0x88]; DataStatus status; };

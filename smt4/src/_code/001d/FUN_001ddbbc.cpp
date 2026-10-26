@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction selection/order differs: retail mov r2, #0; compiler mov r3, #0. */
 #include "common.h"
 
 struct StatusDownWork {
@@ -15,14 +14,20 @@ extern "C" {
 extern StatusDownWork *g_statusDown;
 extern void timerStart(void *timer, s32 mode, s32 value);
 
+/* Enters `next`, remembering the previous one and restarting the state counter. */
+static __inline void statusDownEnter(StatusDownWork *work, u32 next)
+{
+    work->counter = 0;
+    work->previous = work->current;
+    work->current = next;
+}
+
 /* Restarts the status-down timer and enters its third update state. */
 void FUN_001ddbbc(void)
 {
     StatusDownWork *work = g_statusDown;
     timerStart(work->timer, 1, 0);
-    g_statusDown->counter = 0;
-    g_statusDown->previous = g_statusDown->current;
-    g_statusDown->current = 1;
+    statusDownEnter(g_statusDown, 1);
     work->state = 3;
 }
 

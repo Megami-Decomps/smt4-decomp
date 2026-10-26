@@ -1,4 +1,5 @@
 #include "common.h"
+#include "ui/UiControl_Smt4a.h"
 
 extern "C" {
 

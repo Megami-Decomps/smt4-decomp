@@ -1,5 +1,6 @@
 #include "addon/aocMain.h"
 #include "gamedata/DataTable.h"
+#include "addon/AocSystem_Smt4.h"
 
 struct ContentRecordKey {
     u8 unk00[0x2a]; // 0x00

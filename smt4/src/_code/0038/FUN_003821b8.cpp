@@ -1,4 +1,3 @@
-/* NON_MATCHING: the compiler adds one extra `bne` to the return after `moveq r0,#4` (branch layout of the nested condition); registers otherwise identical. */
 #include "common.h"
 
 extern "C" {
@@ -18,7 +17,10 @@ u32 FUN_003821b8(StateOwner *owner)
 {
     u32 result = 5;
 
-    if (owner->info != NULL && owner->info->kind == 6) {
+    if (owner->info == NULL) {
+        return 5;
+    }
+    if (owner->info->kind == 6) {
         result = 4;
     }
     return result;

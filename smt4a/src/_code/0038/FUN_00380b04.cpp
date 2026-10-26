@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
-#include "util/BitsAt60Clear.h"
+#include "util/BitsAndBytes_VariantD.h"
 
 extern "C" {
 void bitsAt60Set(SlotRecord *, u16);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0031d54c` (_code @ 0x31d54c, 0x55c bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "map/MapSpawn.h"
 
 extern "C" {
 
@@ -86,7 +87,6 @@ extern int dataTableGetRecord23(void);
 /* Supplied declaration required: lmapSetSceneId. */
 /* Supplied declaration required: FUN_0027fc14. */
 /* Supplied declaration required: naviRegisterTransitionsAndRequest. */
-extern int FUN_00285574(void);
 extern int messageMainGetChoiceResult(void);
 /* Supplied declaration required: FUN_002bf810. */
 /* Supplied declaration required: FUN_002c29d8. */

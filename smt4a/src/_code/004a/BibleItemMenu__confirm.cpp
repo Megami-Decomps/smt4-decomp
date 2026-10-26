@@ -2,6 +2,7 @@
 #include "bible/bibleMain.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "shard/W6_W6Match6_SpritePresetBank.h"
+#include "code/Code002a_Smt4a.h"
 
 /* A compendium list entry: 0x20 bytes with the item id halfword at +4. */
 struct BibleItemEntry {
@@ -44,7 +45,6 @@ void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 u32 slotRecordFindById(u16 id);
 u8 *FUN_00275bc8(u32 a, u32 b);
-s32 FUN_002a4b28(u16 id);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void FUN_0035ad50(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);

@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 extern "C" {
 
@@ -44,11 +44,6 @@ typedef struct {
     unsigned int spE8; /* 0xe8: local_e8 */
 } param_3_stack;
 
-extern unsigned char LAB_003b4cc8; /* 0x3b4cc8 */
-extern unsigned char LAB_003b532c; /* 0x3b532c */
-extern unsigned char LAB_003b56f8; /* 0x3b56f8 */
-extern unsigned char LAB_003b5704; /* 0x3b5704 */
-extern unsigned char LAB_003b5cd8; /* 0x3b5cd8 */
 extern unsigned char LAB_003b5f20; /* 0x3b5f20 */
 extern unsigned char LAB_003b5f24; /* 0x3b5f24 */
 extern int g_titleScene; /* 0x44ea00 */
@@ -146,7 +141,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x28,0xd2,param_2,param_3,0x6a);
   temp_v1 = asdTMTexTableEntryAt(0x28,0xd3);
   temp_v2 = gameGetPlayerName();
-  textFormatBuffer(temp_v10,&LAB_003b4cc8,temp_v2);
+  textFormatBuffer(temp_v10,"%s",temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(3,0xff,temp_v10);
@@ -154,7 +149,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
   FUN_002bf288(2,0x28,0xd5,param_2,param_3,0x6a);
   temp_v1 = asdTMTexTableEntryAt(0x28,0xd6);
   temp_v2 = FUN_002bd068(*(unsigned short *)(temp_v14 + 0x46));
-  textFormatBuffer(temp_v10,&LAB_003b4cc8,temp_v2);
+  textFormatBuffer(temp_v10,"%s",temp_v2);
   VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_3,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
   textDrawString(3,0xff,temp_v10);
@@ -223,7 +218,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
                        1,temp_v17);
           temp_v12 = asdTMTexTableEntryAt(temp_v11,0xdf);
           temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v27 + 0x14));
-          textFormatBuffer(temp_v10,&LAB_003b4cc8,temp_v4);
+          textFormatBuffer(temp_v10,"%s",temp_v4);
           VectorSignedToFloat((int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v12 + 10) +
                               temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)(short)piVar5[2] + temp_v1,
@@ -234,11 +229,11 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           temp_v5 = asdTMTexTableEntryAt(temp_v11,0xe3);
           FUN_002bdf94(1,(int)(short)piVar5[2] + (int)*(short *)(temp_v5 + 8) + temp_v1,
                        (int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,4,
-                       0x79,&LAB_003b532c,temp_v2);
+                       0x79,"%d",temp_v2);
         }
         else {
           temp_v12 = asdTMTexTableEntryAt(temp_v11,0xdf);
-          textFormatBuffer(temp_v10,&LAB_003b5704);
+          textFormatBuffer(temp_v10,"\x81| \x81| \x81|");
           VectorSignedToFloat((int)*(short *)((int)piVar5 + 10) + (int)*(short *)(temp_v12 + 10) +
                               temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)(short)piVar5[2] + temp_v1,
@@ -334,7 +329,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       }
       temp_v5 = asdTMTexTableEntryAt(temp_v11,0xfe);
       temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v3 + 0xd114));
-      textFormatBuffer(temp_v10,&LAB_003b56f8,temp_v4);
+      textFormatBuffer(temp_v10,"%s",temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
@@ -350,11 +345,11 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
       temp_v3 = asdTMTexTableEntryAt(temp_v11,0x102);
       FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0xc9,
-                   &LAB_003b532c,temp_v2);
+                   "%d",temp_v2);
     }
     else {
       temp_v3 = asdTMTexTableEntryAt(temp_v11,0xfe);
-      textFormatBuffer(temp_v10,&LAB_003b5704);
+      textFormatBuffer(temp_v10,"\x81| \x81| \x81|");
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
@@ -409,7 +404,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           }
           temp_v12 = asdTMTexTableEntryAt(temp_v11,0xdf);
           temp_v4 = aocIndexValueOrDefault(*(unsigned short *)(temp_v22 + 0x34));
-          textFormatBuffer(temp_v10,&LAB_003b56f8,temp_v4);
+          textFormatBuffer(temp_v10,"%s",temp_v4);
           VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v12 + 10) + param_3
                               ,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v12 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
@@ -419,7 +414,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
           temp_v5 = asdTMTexTableEntryAt(temp_v11,0xe3);
           FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v5 + 8) + param_2,
                        (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + param_3,1,4,0xab,
-                       &LAB_003b5cd8,temp_v2);
+                       "%d",temp_v2);
         }
         else {
           temp_v12 = asdTMTexTableEntryAt(temp_v11,0xdf);
@@ -535,7 +530,7 @@ void FUN_003b49a0(int param_1,int param_2,int param_3)
     temp_v1 = asdTMTexTableEntryAt(temp_v11,0x102);
     FUN_002bdf94(1,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_2,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_3,1,4,0xc9,
-                 &LAB_003b5cd8,temp_v2);
+                 "%d",temp_v2);
   }
   return;
 }

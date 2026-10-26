@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: retail loads the tick counter into r2 and the 0x708 limit into r3, and the second timer loop counts down in r3; built uses r3/r2 */
 #include "common.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

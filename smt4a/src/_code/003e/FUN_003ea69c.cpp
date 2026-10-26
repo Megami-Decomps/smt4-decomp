@@ -1,6 +1,6 @@
 /* NON_MATCHING: cached stat registers and original attribute-block copy grouping differ; initial flag stores and packed skill-bitfield operations now match structurally. */
 #include "battle/btlUnit.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 #include "shard/PadState.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/PackedSkillSlot.h"

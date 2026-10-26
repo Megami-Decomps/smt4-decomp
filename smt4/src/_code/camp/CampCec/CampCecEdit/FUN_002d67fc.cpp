@@ -28,21 +28,12 @@ typedef struct {
     unsigned int sp28; /* 0x28: local_28 */
 } param_1_stack;
 
-extern unsigned char LAB_001c0e9c; /* 0x1c0e9c */
-extern unsigned char LAB_001c0efc; /* 0x1c0efc */
-extern unsigned char LAB_001ebdb8; /* 0x1ebdb8 */
+extern unsigned char campCecEditUpdateCamera; /* 0x1c0e9c */
+extern unsigned char campCecEditRunState; /* 0x1c0efc */
+extern unsigned char campCecEditDrawSelectedImage; /* 0x1ebdb8 */
 extern int campCecEditDrawContents(...); /* 0x210e38 */
-extern unsigned char LAB_00220d38; /* 0x220d38 */
+extern unsigned char recordQueryModeZero; /* 0x220d38 */
 extern int FUN_00220d58(...); /* 0x220d58 */
-extern unsigned char LAB_002d6c0c; /* 0x2d6c0c */
-extern unsigned char LAB_002d6c24; /* 0x2d6c24 */
-extern unsigned char LAB_002d6c40; /* 0x2d6c40 */
-extern unsigned char LAB_002d6c60; /* 0x2d6c60 */
-extern unsigned char LAB_002d6c78; /* 0x2d6c78 */
-extern unsigned char LAB_002d6c94; /* 0x2d6c94 */
-extern unsigned char LAB_002d6cd0; /* 0x2d6cd0 */
-extern unsigned char LAB_002d6ce4; /* 0x2d6ce4 */
-extern unsigned char LAB_002d6cfc; /* 0x2d6cfc */
 extern int FUN_002d6d44(...); /* 0x2d6d44 */
 extern int FUN_002e1744(...); /* 0x2e1744 */
 extern int FUN_002ec514(...); /* 0x2ec514 */
@@ -95,14 +86,13 @@ void FUN_002d67fc(unsigned char param_1)
   }
   puVar1 = g_campCecEdit;
   memClear();
-  puVar2 = &LAB_002d6c0c;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_002d6c0c), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_001c0efc), 0, 0);
+  asdProcessCreateSimple("CampCecEdit Calc", 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&campCecEditRunState), 0, 0);
   *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_002d6c24,0x65,0,0,&LAB_001ebdb8,0,0,puVar2);
-  taskCreateDraw(&LAB_002d6c40,0xcc,0,0,&LAB_001ebdb8,0,0,*puVar1);
-  taskCreateDraw(&LAB_002d6c60,0x7d,0,0,&LAB_001c0e9c,0,0,*puVar1);
-  taskCreateDraw(&LAB_002d6c78,0xdb,0,0,&LAB_001c0e9c,0,0,*puVar1);
-  taskCreateDraw(&LAB_002d6c94,0xe6,0,0,campCecEditDrawContents,0,0,*puVar1);
+  taskCreateDraw("CampCecEdit DrawUpLeft_b",0x65,0,0,&campCecEditDrawSelectedImage,0,0,puVar2);
+  taskCreateDraw("CampCecEdit DrawUpRight_b",0xcc,0,0,&campCecEditDrawSelectedImage,0,0,*puVar1);
+  taskCreateDraw("CampCecEdit DrawUpLeft",0x7d,0,0,&campCecEditUpdateCamera,0,0,*puVar1);
+  taskCreateDraw("CampCecEdit DrawUpRight",0xdb,0,0,&campCecEditUpdateCamera,0,0,*puVar1);
+  taskCreateDraw("CampCecEdit DrawDown",0xe6,0,0,campCecEditDrawContents,0,0,*puVar1);
   puVar1[0x44] = 0xffffffff;
   puVar1[0x42] = 0xffffffff;
   puVar1[0x43] = 0;
@@ -129,7 +119,7 @@ void FUN_002d67fc(unsigned char param_1)
   puVar1[0x30] = (unsigned int)campCecClassifyRequestedUnit;
   puVar1[0x31] = (unsigned int)FUN_002fc7a0;
   puVar1[0x32] = (unsigned int)FUN_002ec514;
-  puVar1[0x35] = (unsigned int)&LAB_00220d38;
+  puVar1[0x35] = (unsigned int)&recordQueryModeZero;
   puVar1[0x33] = (unsigned int)FUN_003172e0;
   puVar1[0x34] = (unsigned int)FUN_00321af0;
   puVar1[0x56] = 0;
@@ -153,9 +143,9 @@ void FUN_002d67fc(unsigned char param_1)
   campCecDrawPageCreate();
   puVar1[4] = temp_v0;
   characterInfoPanelPopulate();
-  asdLoadFileAsyncSimple(&LAB_002d6cd0,puVar1 + 0x29,0);
-  asdLoadFileAsyncSimple(&LAB_002d6ce4,puVar1 + 0x2a,0);
-  asdLoadFileAsyncSimple(&LAB_002d6cfc,puVar1 + 0x2b,0);
+  asdLoadFileAsyncSimple("camp/CecEdit_scr.bf",puVar1 + 0x29,0);
+  asdLoadFileAsyncSimple("camp/CecEdit_msg.mbm",puVar1 + 0x2a,0);
+  asdLoadFileAsyncSimple("camp/CecEdit_one_msg.mbm",puVar1 + 0x2b,0);
   temp_v0 = asdTextCreate(0);
   puVar1[0x2c] = temp_v0;
   asdTextSetBaseColor(temp_v0,0xff);

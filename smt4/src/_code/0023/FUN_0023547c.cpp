@@ -1,6 +1,6 @@
 /* NON_MATCHING: the state change stores as str timer + add + stm; retail writes stmib with writeback and the timer through it (same as FUN_00223cf0). */
 #include "shard/W4_W4Match2_UiQuest.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 extern "C" {
 

@@ -1,7 +1,7 @@
 /* NON_MATCHING: the four loop-invariant VFP constants receive a different saved-register permutation. */
 #include "map/mapObj.h"
 #include "shard/S1Mover.h"
-#include "util/SaveSlotInfoSet.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 extern MapObjectState *g_mapObj;

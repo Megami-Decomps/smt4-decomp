@@ -18,7 +18,8 @@ extern "C" u32 FUN_004acb54(CircularTransferQueue *queue)
     }
     u32 index = queue->descriptors.readIndex;
     u32 end = index + 1;
-    u32 bytes = queue->descriptors.items[index].payload->size;
+    TransferDescriptor *descriptor = &queue->descriptors.items[index];
+    u32 bytes = descriptor->payload->size;
     u32 position = queue->readPosition + bytes;
     if (position >= queue->capacity) {
         position -= queue->capacity;

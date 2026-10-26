@@ -3,7 +3,9 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0019.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantD.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 struct CharacterInfoPanelA {
@@ -59,7 +61,6 @@ f32 FUN_00168594(const char *text, u32 font, f32 spacing);
 void FUN_0038b3f8(s32 id, u32 kind);
 void FUN_00371c3c(s32 id, u32 kind);
 u16 FUN_0036fcd0(void *item, u32 flags);
-u32 FUN_0019e52c(u16 id);
 u32 requestIdToCode(u32 id);
 void asdTMTexTableReleaseNode(u32 table, u32 code);
 }

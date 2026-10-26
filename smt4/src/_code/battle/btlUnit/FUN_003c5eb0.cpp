@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "battle/btlMain.h"
-#include "util/AsdListBoxCreateDefault.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 extern "C" {
 extern BtlMain* g_btlMain;

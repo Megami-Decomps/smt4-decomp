@@ -4,7 +4,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {
 

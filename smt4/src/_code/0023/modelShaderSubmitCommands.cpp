@@ -1,5 +1,6 @@
 /* NON_MATCHING: header stores merge and attribute loops strength-reduce to pointer/countdown loops; -O2 candidate. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4.h"
 
 struct VertexAttributeBinding {
     u32 enabled;
@@ -20,7 +21,6 @@ void FUN_002bc7f4(u32, u32 **);
 u32 *FUN_0023bba0(ModelShaderCommands *, u32 *);
 u32 *FUN_0023bb00(ModelShaderCommands *, u32 *, const void *);
 void *__aeabi_memcpy4(void *, const void *, u32);
-void asdModelAdvanceCommandCursor(u32);
 }
 
 // Restore each attribute's format and clear any active constant attribute.

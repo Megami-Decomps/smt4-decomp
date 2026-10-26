@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/EventEffect.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ int commonBgStopChildAndReset(void);
 int FUN_00363c58(int);
 int clearFlags310To31F(void);
 int FUN_003b5064(void);
-int FUN_003c91e8(void);
 int FUN_003d54f8(int, int);
 int FUN_004b6bc4(int, int, unsigned int);
 int FUN_004b75d0(void);
@@ -58,8 +58,6 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_1_stack;
 
-extern unsigned char LAB_004b9fdc; /* 0x4b9fdc */
-extern unsigned char LAB_004b9fe4; /* 0x4b9fe4 */
 extern signed char DAT_005f1634; /* 0x5f1634 */
 extern unsigned short DAT_005f1794; /* 0x5f1794 */
 extern unsigned short DAT_005f1796; /* 0x5f1796 */
@@ -307,12 +305,12 @@ void FUN_004b990c(int param_1)
       }
       *(int *)(param_1 + 0x1218) = temp_v6;
       soundResetSpatialState();
-      textFormatBuffer(temp_v9,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x40);
+      textFormatBuffer(temp_v9,"%s%s","mikado/",*(int *)(param_1 + 0x1118) + 0x40);
       if (((*(short *)(*(int *)(param_1 + 0x1118) + 100) != 0) &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)) ||
          ((*(short *)(*(int *)(param_1 + 0x1118) + 0x66) != 0 &&
           (temp_v6 = gameFlagIsSet(), temp_v6 != 0)))) {
-        textFormatBuffer(temp_v10,&LAB_004b9fdc,"mikado/",*(int *)(param_1 + 0x1118) + 0x68);
+        textFormatBuffer(temp_v10,"%s%s","mikado/",*(int *)(param_1 + 0x1118) + 0x68);
         FUN_00407ab0(*(unsigned int *)(param_1 + 0x1218),temp_v9,temp_v10);
       }
       else {
@@ -330,7 +328,7 @@ void FUN_004b990c(int param_1)
           dataTable33TypeCount(puVar7,*(unsigned int *)(*(int *)(param_1 + 0x1118) + 0x60));
           if (0 < (int)puVar7) {
             do {
-              textFormatBuffer(temp_v9,&LAB_004b9fe4,"mikado/",puVar12);
+              textFormatBuffer(temp_v9,"%s%s.bam","mikado/",puVar12);
               moveCameraCtrlCreateEntry(*(unsigned int *)(param_1 + 0x1218),temp_v9,temp_v4);
               puVar12 = puVar12 + 0x20;
               temp_v4 = temp_v4 + 1;

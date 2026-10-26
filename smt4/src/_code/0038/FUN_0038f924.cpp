@@ -1,10 +1,10 @@
 /* NON_MATCHING: callback handle forwarding recovered; render-stack state, text lookup arguments and integer-to-float rendering remain decompiler-shaped. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "code/Code0023_VariantB.h"
 
 extern "C" {
 
-int FUN_0023478c(unsigned int, unsigned int);
 int FUN_002347b8(unsigned int, unsigned int, unsigned char [1024]);
 int textDrawString(int, unsigned int, unsigned char [1024], int);
 int FUN_002bf380(int, int, int, int, int, int);

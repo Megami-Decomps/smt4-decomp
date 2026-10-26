@@ -14,14 +14,7 @@ struct AocTableSearchRecordA {
     /* 0x002 */ u8 unk002[0x132];
 };
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u32 FUN_00471d00(AocSystemA* system);
-
-#ifdef __cplusplus
-}
-#endif
+/* This game's add-on system type. */
+#include "addon/AocLookupSelect.h"
 
 #endif

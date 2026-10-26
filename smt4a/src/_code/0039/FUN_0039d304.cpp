@@ -2,7 +2,6 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 struct BattleEntryFlagsView {
     u8 unk000[0x274]; // 0x000

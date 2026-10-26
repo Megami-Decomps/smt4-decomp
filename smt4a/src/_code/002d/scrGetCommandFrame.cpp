@@ -1,5 +1,5 @@
 #include "script/ScriptVm.h"
-#include "util/ScrGetCommandFrame.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 

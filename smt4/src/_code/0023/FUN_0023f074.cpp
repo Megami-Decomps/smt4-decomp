@@ -3,7 +3,7 @@
 #include "battle/btlEvent.h"
 #include "battle/btlMain.h"
 #include "script/scrScriptProcess.h"
-#include "util/CalleeContracts.h"
+#include "code/Code002c.h"
 extern "C" {
 void FUN_002898e4(void);
 void buttonHelpCreate(void);

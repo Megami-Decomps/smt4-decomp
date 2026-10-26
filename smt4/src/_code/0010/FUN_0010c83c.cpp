@@ -12,7 +12,7 @@ int __aeabi_memcpy4(...);
 int FUN_002bcf10(...);
 int wstrBufferPutChar(...);
 int FUN_002bcf4c(int);
-int FUN_002bcfc0(...);
+int textConvertToGlyphPairs(...);
 int FUN_002bd06c(...);
 int FUN_002bd0f8(...);
 int FUN_002bd158(...);
@@ -27,8 +27,6 @@ typedef struct {
     unsigned int sp130; /* 0x130: local_130 */
 } param_6_stack;
 
-extern unsigned char LAB_0010cc50; /* 0x10cc50 */
-extern unsigned char LAB_0010cc64; /* 0x10cc64 */
 extern unsigned char LAB_0010d0ec; /* 0x10d0ec */
 
 #ifndef ROMWRIGHT_PIECE_1_1_DEFINED
@@ -46,7 +44,7 @@ extern unsigned int demonGetRaceLabel(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_002bcf10. */
 /* Supplied declaration required: wstrBufferPutChar. */
 /* Supplied declaration required: FUN_002bcf4c. */
-/* Supplied declaration required: FUN_002bcfc0. */
+/* Supplied declaration required: textConvertToGlyphPairs. */
 /* Supplied declaration required: FUN_002bd06c. */
 /* Supplied declaration required: FUN_002bd0f8. */
 /* Supplied declaration required: FUN_002bd158. */
@@ -89,7 +87,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       if (param_1 >= 0xf844) {
         if (param_1 == 0xf870) {
           FUN_002bcf4c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-          FUN_002bcfc0();
+          textConvertToGlyphPairs();
           *param_4 = *param_4 + 1;
           wstrBufferPutChar(param_3,param_5,0x12f8,param_6);
           temp_v9 = 0;
@@ -156,10 +154,10 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
               *param_4 = *param_4 + 1;
               return 1;
             }
-            textFormatBuffer(temp_v11,&LAB_0010cc64);
+            textFormatBuffer(temp_v11,"\x81u\x83o\x83O\x81@\x82o\x82b\x82Q\x81v");
           }
           else {
-            textFormatBuffer(temp_v11,&LAB_0010cc50);
+            textFormatBuffer(temp_v11,"\x81u\x83o\x83O\x81@\x82o\x82b\x82P\x81v");
           }
         }
         else {
@@ -169,7 +167,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       }
       else {
         FUN_002bd06c(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-        FUN_002bcfc0();
+        textConvertToGlyphPairs();
       }
       FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
       *param_4 = *param_4 + 1;
@@ -186,7 +184,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       break;
     case 0xf876:
       temp_v6 = aocIndexValueOrDefault(*(unsigned short *)(param_2 + *param_4 * 2 + 2));
-      FUN_002bcfc0(temp_v6,temp_v11);
+      textConvertToGlyphPairs(temp_v6,temp_v11);
       FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
       break;
     case 0xf877:
@@ -254,7 +252,7 @@ FUN_0010c83c(int param_1,int param_2,unsigned int param_3,int *param_4,unsigned 
       *param_4 = temp_v8;
       if (*(short *)(param_2 + temp_v8 * 2) != 0) {
         temp_v6 = dataTableGetNamePayload();
-        FUN_002bcfc0(temp_v6,temp_v11);
+        textConvertToGlyphPairs(temp_v6,temp_v11);
         FUN_002bd0f8(param_3,param_5,temp_v11,param_6);
         return 1;
       }

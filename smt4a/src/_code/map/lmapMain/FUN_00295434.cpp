@@ -1,7 +1,8 @@
 /* NON_MATCHING: the step counter is now read/written as g_gameState+0x4FC with the one store through DAT_005f1af8 (as retail; the block matches). Remaining: retail takes g_lmapPopupMessages as ONE literal pointing at element 4 (r5, others by sub/add) and spills the flags block to the stack (push {r3..}); the extern array gets a literal at the base. Defining the 8-entry table here (its param is a const char* to rodata text) did not change that. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "gamedata/GameDataAccess.h"
 
 struct PopupMessage {
     char text[0x40];    // message resource name
@@ -37,7 +38,6 @@ extern PopupMessage g_lmapPopupMessages[8];
 extern GameStateSteps g_gameState;
 extern s32 DAT_005f1af8;
 
-s32 gameFlagIsSet(s32 flag);
 
 
 // Opens the popup for the message row and marks it as shown.

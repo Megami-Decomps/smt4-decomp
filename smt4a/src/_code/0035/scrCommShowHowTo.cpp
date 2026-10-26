@@ -1,6 +1,5 @@
 /* NON_MATCHING: command-frame local recovers controller load timing; cleanup and job work pointers still coalesce. */
 #include "shard/W5_W5Match6_CallbackController.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "gamedata/DataTableSections.h"
 #include "battle/btlDebug.h"

@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-extern unsigned char LAB_0037b7dc; /* 0x37b7dc */
+extern unsigned char FUN_0037b7dc; /* 0x37b7dc */
 extern unsigned char DAT_00421bdc; /* 0x421bdc */
 extern unsigned char DAT_00421bf0; /* 0x421bf0 */
 extern unsigned char DAT_00421c04; /* 0x421c04 */
@@ -42,7 +42,7 @@ void FUN_003f3f24(int param_1)
   DAT_00472350 = &DAT_00421c04;
   DAT_00472354 = &DAT_00421cb4;
   DAT_00472358 = &DAT_00421cc8;
-  FUN_0037e0a4(&DAT_004ea168,&LAB_0037b7dc,0x100000);
+  FUN_0037e0a4(&DAT_004ea168,&FUN_0037b7dc,0x100000);
   return;
 }
 

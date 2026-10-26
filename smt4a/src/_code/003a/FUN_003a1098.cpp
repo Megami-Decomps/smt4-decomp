@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00145e24(int, unsigned int);
+int effectRestoreSavedRenderPairs(int, unsigned int);
 int FUN_00157558(int);
 int memAlloc(int, int, int, int);
 int renderCtxSelectTexture(...);
@@ -47,7 +47,7 @@ extern unsigned int *DAT_006471b4; /* 0x6471b4 */
 #define ROMWRIGHT_PIECE_4_4_DEFINED
 #define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
 #endif
-/* Supplied declaration required: FUN_00145e24. */
+/* Supplied declaration required: effectRestoreSavedRenderPairs. */
 extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: memAlloc. */
@@ -248,7 +248,7 @@ joined_r0x003a122c:
       FUN_0032c810((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
       temp_v7 = FUN_001c5b4c(temp_v7);
-      FUN_00145e24(g_renderCtx,temp_v7);
+      effectRestoreSavedRenderPairs(g_renderCtx,temp_v7);
       break;
     case 9:
       temp_v15 = param_2[2];

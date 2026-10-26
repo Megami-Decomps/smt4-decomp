@@ -2,7 +2,8 @@
 /* Releases the saved-state buffers: copies them back to their owners, re-arms the pending requests, then frees the buffers. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
-#include "shard/gameFlagIsSet.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ extern u32 g_aocSystem;
 
 void *gameDataBlocksGetTable(void);
 void *configGetSettings(void);
-void *gameDataBlocksGetSaveData(void);
 void __aeabi_memcpy4(void *dest, const void *src, u32 size);
 void wordPairCopy(void *dest, void *src);
 void FUN_00358cbc(void);

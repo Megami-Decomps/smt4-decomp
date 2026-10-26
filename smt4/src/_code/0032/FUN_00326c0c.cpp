@@ -1,6 +1,17 @@
 /* NON_MATCHING: retail writes the 32-bit vertex colours as byte stores through rev/lsr extraction of a register value (an unaligned store; `__packed` stores of the same values still compile to plain str here) and keeps the loop-invariant fade bounds in the stack; this version stores the colour bytes directly. */
 #include "effect/FadeStrip.h"
 
+static __inline void flagsSetBits(u32 *flags, u32 mask)
+{
+    *flags |= mask;
+}
+
+static __inline void flagsClearBits(u32 *flags, u32 mask)
+{
+    *flags &= mask;
+}
+
+
 extern "C" {
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
@@ -17,7 +28,7 @@ extern "C" void FUN_00326c0c(StripOwnerView *owner, StripParameters *params)
     StripGeometry *geometry = owner->geometry;
     StripColor *baseColors = geometry->description->colors;
     StripCoords *baseCoords = geometry->description->coords;
-    geometry->flags |= 0x24;
+    flagsSetBits(&geometry->flags, 0x24);
 
     s32 segments = params->segments;
     u32 vertexCount = segments + 1;

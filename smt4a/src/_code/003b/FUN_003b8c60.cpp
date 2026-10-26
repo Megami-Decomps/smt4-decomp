@@ -4,9 +4,9 @@
 
 extern "C" {
 
-void FUN_004c571c(s32 id, s32 arg1, s32 arg2, s32 arg3);
+void btlAdjustPropertyClamped(s32 id, s32 arg1, s32 arg2, s32 arg3);
 
-/* Runs FUN_004c571c(id, 24, 1, 0) on every battle entry whose mask passes the eligibility presets. */
+/* Runs btlAdjustPropertyClamped(id, 24, 1, 0) on every battle entry whose mask passes the eligibility presets. */
 u32 FUN_003b8c60(void)
 {
     BtlMainStateA *state = btlGetMainState();
@@ -19,7 +19,7 @@ u32 FUN_003b8c60(void)
             && (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0
             && (g_battleMaskPresets.eligibility.required & entry->flags) == 0
             && (entry->flags & g_battleMaskPresets.eligibility.unk10) == 0) {
-            FUN_004c571c(entry->unitIndex, 24, 1, 0);
+            btlAdjustPropertyClamped(entry->unitIndex, 24, 1, 0);
         }
     }
     return 1;

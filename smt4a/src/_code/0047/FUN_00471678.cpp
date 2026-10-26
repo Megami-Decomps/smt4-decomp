@@ -2,7 +2,7 @@
 /* Finds the loaded package containing a selected record and optional populated option. */
 #include "addon/aocMain.h"
 #include "addon/PackageSelection.h"
-#include "util/dataTableFileGetTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 
 extern "C" u32 FUN_00471678(AocSystemA *system, u32 id, s32 option)
 {

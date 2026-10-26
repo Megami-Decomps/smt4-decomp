@@ -3,7 +3,7 @@
 
 extern "C" {
 extern u32 DAT_005b3ce8;
-void FUN_0019ea00();
+void gpuSubmitDefaultPacket();
 void FUN_00186244(u32 first, u32 second, u32 third, u32 fourth,
                   f32 value0, f32 value1, f32 value2, f32 value3,
                   f32 value4, f32 value5, f32 value6, f32 value7, f32 value8);
@@ -26,7 +26,7 @@ void FUN_00167618(u32 first, u32 second, u32 third,
     if (fourth == 0) {
         fourth = DAT_005b3ce8;
     }
-    FUN_0019ea00();
+    gpuSubmitDefaultPacket();
     FUN_00186244(first, second, third, fourth, firstValue, secondValue,
                   thirdValue, fourthValue, 0.0f, 0.0f, 0.0f, 0.0f, lastValue);
     effectSubmitDefaultParameters();

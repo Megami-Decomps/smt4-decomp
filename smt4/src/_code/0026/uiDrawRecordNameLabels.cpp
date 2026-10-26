@@ -15,7 +15,7 @@ struct LabelledRecord {
     s16 message; // 0x48
 };
 extern "C" {
-void FUN_002bcfc0(void *message, char *output);
+void textConvertToGlyphPairs(void *message, char *output);
 void ARM_common_memcpy4_7(char *output, const char *text);
 void __aeabi_memcpy4(void *output, const void *input, u32 bytes);
 }
@@ -28,7 +28,7 @@ extern "C" s32 uiDrawRecordNameLabels(RecordLabels *labels, const LabelledRecord
     char text[64];
     asdTextDrawFormatted(labels->handles[0], 2, -1, 0, 0, record->name);
     if (record->message)
-        FUN_002bcfc0(FUN_002bd06c(record->message), text);
+        textConvertToGlyphPairs(FUN_002bd06c(record->message), text);
     else
         ARM_common_memcpy4_7(text, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(labels->handles[1], 2, -1, 0, 0, text);

@@ -4,7 +4,8 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/FUN_00164b5c.h"
+#include "code/Code0016.h"
+#include "code/Code0026_Smt4a.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ int FUN_00214dc4(void);
 int FUN_0023c8c0(...);
 int FUN_0023d150(...);
 int FUN_0023d230(int, int, int);
-int FUN_0026ec00(...);
 int FUN_0048144c(void);
 int VectorSignedToFloat(...);
 
@@ -35,8 +35,6 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_2_stack;
 
-extern unsigned char LAB_00217bac; /* 0x217bac */
-extern unsigned char LAB_00217ea4; /* 0x217ea4 */
 extern int g_camp; /* 0x57f108 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -182,14 +180,14 @@ void FUN_0021775c(int param_1,int param_2)
         }
         temp_v5 = (int)asdTMTexTableEntryAt(0x14,0x473);
         temp_v11 = FUN_001ba3d4(temp_v10);
-        textFormatBuffer(temp_v13,&LAB_00217bac,temp_v11);
+        textFormatBuffer(temp_v13,"%d",temp_v11);
         FUN_00180310(0,(int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v2,
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,3,0x6f,
                      temp_v13);
         temp_v5 = (int)asdTMTexTableEntryAt(0x14,0x474);
         FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
                      (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v3,1,1,0x6f,
-                     &LAB_00217ea4);
+                     "*");
         temp_v5 = (int)asdTMTexTableEntryAt(0x14,0x46f);
         uiDrawItemCategoryIcon((int)(short)temp_v0,
                      (int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v2,
@@ -227,14 +225,14 @@ void FUN_0021775c(int param_1,int param_2)
         }
         temp_v8 = (int)asdTMTexTableEntryAt(0x14,0x47a);
         temp_v11 = FUN_001ba3d4(temp_v9);
-        textFormatBuffer(temp_v13,&LAB_00217bac,temp_v11);
+        textFormatBuffer(temp_v13,"%d",temp_v11);
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,3,0x83,
                      temp_v13);
         temp_v8 = (int)asdTMTexTableEntryAt(0x14,0x47b);
         FUN_00180310(0,(int)*(short *)(temp_v8 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,
                      (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10) + temp_v3,1,1,0x83,
-                     &LAB_00217ea4);
+                     "*");
         FUN_001835b4(2,0x14,0x475,*(short *)(temp_v1 + 8) + temp_v2,*(short *)(temp_v1 + 10) + temp_v3,0x83)
         ;
         temp_v8 = (int)asdTMTexTableEntryAt(0x14,0x476);

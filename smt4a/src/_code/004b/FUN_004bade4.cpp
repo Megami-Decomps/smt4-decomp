@@ -1,9 +1,9 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: retail hoists the 0x900 and 0xf88 sub-struct bases into registers (r9/sl, 8-byte frame); member layout of the menu object is not recovered. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_ScalarGetters.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 namespace {
 struct SpriteInfo { u8 unk00[8]; s16 x; s16 y; };

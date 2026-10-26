@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match2_ScrollList.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 

@@ -29,7 +29,6 @@ typedef struct {
     unsigned int spB0; /* 0xb0: local_b0 */
 } param_2_stack;
 
-extern unsigned char LAB_00203af4; /* 0x203af4 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -84,7 +83,7 @@ void FUN_002036b8(int param_1,int param_2)
           if (temp_v6 != 0) {
             FUN_002bf288(2,0x24,0x1d3,*(short *)(temp_v4 + 8) + param_1,
                          *(short *)(temp_v4 + 10) + param_2,0x6a);
-            textFormatBuffer(temp_v9,&LAB_00203af4,temp_v6 + 8);
+            textFormatBuffer(temp_v9,"%s",temp_v6 + 8);
             temp_v6 = asdTMTexTableEntryAt(0x24,0x1d5);
             VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v6 + 10) + param_2,
                                 (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -159,7 +158,7 @@ void FUN_002036b8(int param_1,int param_2)
       }
       FUN_002bf288(2,0x24,0x1d6,*(short *)(temp_v8 + 8) + param_1,*(short *)(temp_v8 + 10) + param_2,
                    0x83);
-      textFormatBuffer(temp_v9,&LAB_00203af4,temp_v4 + 8);
+      textFormatBuffer(temp_v9,"%s",temp_v4 + 8);
       temp_v4 = asdTMTexTableEntryAt(0x24,0x1d8);
       VectorSignedToFloat((int)*(short *)(temp_v8 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);

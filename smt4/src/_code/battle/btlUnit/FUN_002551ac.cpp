@@ -12,7 +12,7 @@ int FUN_002267b8(int, unsigned int, int);
 int FUN_002268d0(...);
 
 int FUN_002505c0(...);
-int FUN_002550d8(...);
+int btlAdjustPropertyClamped(...);
 int FUN_0027da30(int, int);
 int btlMainFindEntryByListedId(unsigned int *, int);
 int gameCounterAddSaturating(...);
@@ -49,7 +49,7 @@ extern unsigned char DAT_00439960; /* 0x439960 */
 /* Supplied declaration required: FUN_002268d0. */
 /* Supplied declaration required: btlQueueReflectAction. */
 /* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: FUN_002550d8. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 extern short battleGetEntryHalfword(int, unsigned int);
 /* Supplied declaration required: FUN_0027da30. */
 extern int FUN_0027dab0(unsigned int, int);
@@ -125,7 +125,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
   temp_v18 = puVar5;
   if (temp_v0) {
     if (param_15 == 0) {
-      FUN_002550d8((int)*(short *)(param_3 + 0x62),0,1);
+      btlAdjustPropertyClamped((int)*(short *)(param_3 + 0x62),0,1);
     }
     if (param_12 != 1) {
       if (param_10 != 0) {
@@ -324,7 +324,7 @@ FUN_002551ac(int param_1,unsigned int param_2,int param_3,int param_4,int param_
       temp_v14[1] = 1;
       FUN_003ddee0(temp_v20,param_2,param_3,param_13);
     }
-    FUN_002550d8((int)*(short *)(param_3 + 0x62),1,1,0);
+    btlAdjustPropertyClamped((int)*(short *)(param_3 + 0x62),1,1,0);
     temp_v3 = temp_v24;
     if ((-1 < param_17) && (temp_v22 != 0)) {
       temp_v14[0] = (int)(short)((short)param_17 + temp_v2);

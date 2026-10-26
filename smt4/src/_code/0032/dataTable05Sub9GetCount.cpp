@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 

@@ -11,7 +11,7 @@ int FUN_001849bc(...);
 int areaDiscoveryMarkCell(...);
 int FUN_00487d6c(...);
 int FUN_0048a5e4(...);
-int FUN_0048b420(...);
+int titleScissorApplyOrClearRequests(...);
 int FUN_00490a10(...);
 int FUN_0049177c(...);
 float FUN_00492adc(int);
@@ -62,7 +62,7 @@ extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_00487d6c. */
 /* Supplied declaration required: FUN_0048a5e4. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
-/* Supplied declaration required: FUN_0048b420. */
+/* Supplied declaration required: titleScissorApplyOrClearRequests. */
 /* Supplied declaration required: FUN_00490a10. */
 /* Supplied declaration required: FUN_0049177c. */
 extern unsigned long long *sub68OwnerGetBlock60(int);
@@ -178,7 +178,7 @@ void FUN_00487470(int param_1)
   if ((temp_v2 == 2) || (temp_v2 == 3)) {
     temp_v38 = 1;
   }
-  FUN_0048b420(temp_v42,1);
+  titleScissorApplyOrClearRequests(temp_v42,1);
   temp_v28 = 160.0f;
   temp_v29 = 120.0f;
   temp_v2 = temp_v6;
@@ -443,7 +443,7 @@ LAB_00487744:
     }
     FUN_00492adc(temp_v37);
   }
-  FUN_0048b420(temp_v42,0);
+  titleScissorApplyOrClearRequests(temp_v42,0);
   DAT_00587f20 = 0xf1;
   FUN_0048a5e4(temp_v42);
   FUN_00487d6c(temp_v42);

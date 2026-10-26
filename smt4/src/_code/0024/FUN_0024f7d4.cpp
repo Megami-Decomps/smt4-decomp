@@ -23,7 +23,7 @@ void FUN_0025009c(XformMtx44 *dst, const XformMtx44 *src);
 void matrix44SetIdentity(XformMtx44 *mtx);
 void mathMatrixApplyScale(XformMtx44 *mtx, const XformVec3 *scale, s32 order);
 void FUN_0024fd70(XformMtx44 *mtx, const XformVec3 *translation, s32 order);
-void FUN_0024fcdc(void *transform, const XformMtx44 *mtx, s32 arg);
+void matrixApplyByMode(void *transform, const XformMtx44 *mtx, s32 arg);
 
 /* Sets the object's transform from `base` (identity when NULL), a uniform scale and a translation. */
 void FUN_0024f7d4(XformObject *object, const XformVec3 *translation, const XformMtx44 *base,
@@ -50,7 +50,7 @@ void FUN_0024f7d4(XformObject *object, const XformVec3 *translation, const Xform
         position.z = translation->z;
         FUN_0024fd70(&mtx, &position, 2);
     }
-    FUN_0024fcdc(object->transform, &mtx, 0);
+    matrixApplyByMode(object->transform, &mtx, 0);
 }
 
 } /* extern "C" */

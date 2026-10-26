@@ -3,7 +3,7 @@
 #include "battle/btlEffect.h"
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0028.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: exits now duplicated as in retail; only the error constant's register differs (retail loads it into r0 and copies to r4, this build loads r4 directly). */
 #include "sys/ProcessResult.h"
 #include "common.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 struct ResourceRequest;
 

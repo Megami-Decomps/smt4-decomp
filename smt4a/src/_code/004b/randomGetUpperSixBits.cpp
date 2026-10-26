@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/Random_Smt4a.h"
 extern "C" {
 void affinityResolveUnitSlot(u16 *output,u32 first,u32 second);
 /* Extract the upper six-bit category from the generated packed value. */

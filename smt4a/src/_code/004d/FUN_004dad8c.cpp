@@ -1,6 +1,7 @@
 /* NON_MATCHING: histogram bounds fold into conditional loads and threshold-return branches are simplified. */
 #include "gamedata/GameData.h"
 #include "Model/MoriModelManager.h"
+#include "code/Code002a_Smt4a.h"
 
 struct HistogramSaveRecordA {
     u16 value;
@@ -12,7 +13,6 @@ struct HistogramSaveViewA {
 };
 extern "C" {
 u16 *gameDataGetSmallBlock(void);
-s32 FUN_002a4b28(u32 index);
 void sysMemClear(void *memory, u32 size);
 
 // Find the highest populated record value with enough support in its five-value neighborhood.

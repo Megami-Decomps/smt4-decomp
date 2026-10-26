@@ -1,7 +1,7 @@
 /* NON_MATCHING: only register choice/scheduling of the 64-bit mask test and the 1.0f constant load differ. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
-#include "shard/FUN_00184310.h"
+#include "code/Code0018_VariantA_DevilRecordA.h"
 
 extern "C" {
 

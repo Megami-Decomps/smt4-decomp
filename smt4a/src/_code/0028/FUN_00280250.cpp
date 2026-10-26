@@ -1,7 +1,7 @@
 /* NON_MATCHING: inbox-count load uses r1 instead of r0, avoiding retail's conditional pointer move. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/Result.h"
-#include "shard/asdCecMessageBoxClose.h"
+#include "network/CecControl_AsdCec.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

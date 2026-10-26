@@ -1,7 +1,7 @@
 /* NON_MATCHING: first-stack push count/previous-value register grouping differs; context wrapper fixes third-stack evaluation order. */
 #include "camp/RenderCtx.h"
-#include "util/CalleeContracts.h"
-#include "shard/packNibblesAndByte.h"
+#include "code/Code0028.h"
+#include "util/BitsAndBytes_VariantA.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
 struct TerminalSlot {

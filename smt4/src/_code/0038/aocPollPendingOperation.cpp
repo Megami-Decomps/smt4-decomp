@@ -2,12 +2,12 @@
 #include "shard/W6_W6Match8_AocPoll.h"
 #include "classes/ResourceLookup.h"
 #include "nn/Result.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
 s32 FUN_00394230(void *request, nn::Result *code, u32 *detail);
 WindowStatusResult FUN_0038b25c(ResourceLookup *lookup);
-u32 legacyResourceIdRemap(const WindowStatusResult *result);
 void FUN_002b4810(AocMain *main);
 s32 FUN_0038b44c(AocMain *main);
 s32 FUN_0038b3e8(AocMain *main);

@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/SaveSlotInfoSet.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

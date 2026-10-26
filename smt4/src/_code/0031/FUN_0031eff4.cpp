@@ -1,10 +1,9 @@
 /* NON_MATCHING: loop bound uses one LDRD instead of retail's two scalar loads; remaining instruction sequence matches. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "util/CalleeContracts.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"
-#include "util/btlScriptResolveGroupArg.h"
+#include "battle/BattleHelpers.h"
 
 extern "C" {
 void scrSetResult(s32);

@@ -2,7 +2,7 @@
 #include "nn/snd/Initialization.h"
 #include "nn/Result.h"
 #include "shard/Dspsnd.h"
-#include "util/FUN_002c1398.h"
+#include "code/Code002c_Result.h"
 
 extern "C" {
 extern NnSndInitialization DAT_0044e7c0;

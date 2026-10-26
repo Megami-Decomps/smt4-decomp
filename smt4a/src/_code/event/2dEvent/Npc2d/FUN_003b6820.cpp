@@ -4,7 +4,7 @@
 #include "shard/JobWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 struct AocSystemA;
 extern "C" {
 extern AocSystemA *g_aocSystem;

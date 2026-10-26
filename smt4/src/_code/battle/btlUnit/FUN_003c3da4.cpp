@@ -1,7 +1,7 @@
 /* NON_MATCHING: the color-channel splits and the short-table loads are scheduled differently from retail; the rows set are the same. */
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
-#include "util/AsdListBoxCreateDefault.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 extern "C" {
 extern AsdListBoxEntry DAT_00434a88[];

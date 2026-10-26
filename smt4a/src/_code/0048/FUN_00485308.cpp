@@ -1,11 +1,11 @@
 /* NON_MATCHING: special-mode block placement and copy/zero register scheduling differ. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
+#include "code/Code002b_Smt4a.h"
 
 struct StateSetterSpriteWork;
 extern "C" {
 u32 FUN_00318dc4(void);
-void FUN_002bf4f4(u32 value);
 u32 scrRunOpcodesStub(u32 process);
 s32 messageGetChoiceResult(void);
 u32 messageMainIsIdle(void);

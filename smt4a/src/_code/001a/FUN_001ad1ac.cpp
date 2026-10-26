@@ -1,4 +1,5 @@
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "code/Code001a_Smt4a.h"
 
 struct BustupPlacement {
     u8 unk00[8];  // 0x00

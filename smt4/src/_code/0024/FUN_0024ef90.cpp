@@ -1,17 +1,11 @@
-/* NON_MATCHING: compiler forwards the cleared count and removes redundant cache stores; retail repeatedly computes the embedded source address and reloads each field. */
 #include "common.h"
 #include "shard/JobWork.h"
 
-class ListJobSource {
+struct ListJobSource {
     u8 unk00[0x1c]; // 0x00
     u32 count;       // 0x1c
     u32 first;       // 0x20
     u32 last;        // 0x24
-public:
-    void clearCount() { count = 0; }
-    u32 getCount() const { return count; }
-    u32 getFirst() const { return first; }
-    u32 getLast() const { return last; }
 };
 struct ListJobWork {
     u8 unk00[0x0c];    // 0x00
@@ -26,6 +20,10 @@ struct ListJobWork {
 
 extern "C" {
 void dlistFreeAll(ListJobWork* work);
+void asdListBoxSetCursor(ListJobSource *source, u32 value);
+u32 FUN_002d5718(const ListJobSource *source); /* count */
+u32 FUN_002d5720(const ListJobSource *source); /* last */
+u32 FUN_002cb8d0(const ListJobSource *source); /* first */
 
 // Releases the job's list and resets its cached source endpoints and count.
 void FUN_0024ef90(u32 job)
@@ -36,9 +34,9 @@ void FUN_0024ef90(u32 job)
     work->count = 0;
     work->first = 0;
     work->last = 0;
-    work->source.clearCount();
-    work->count = work->source.getCount();
-    work->last = work->source.getLast();
-    work->first = work->source.getFirst();
+    asdListBoxSetCursor(&work->source, 0);
+    work->count = FUN_002d5718(&work->source);
+    work->last = FUN_002d5720(&work->source);
+    work->first = FUN_002cb8d0(&work->source);
 }
 }

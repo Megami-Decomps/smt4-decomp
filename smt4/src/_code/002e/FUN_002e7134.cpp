@@ -1,8 +1,8 @@
 /* NON_MATCHING: std::remove's find loop compares against a copy of the end in r0 (retail) and the build keeps the end in place; the build also merges the buffer/slot loads into an ldm and needs two more callee-saved registers. */
 #include "gfx/AsdLightSet.h"
 #include <algorithm>
-#include "shard/asdMemFree.h"
-#include "util/ObjectBufferFree.h"
+#include "util/MemoryHelpers_VariantB.h"
+#include "util/MemoryHelpers.h"
 
 extern "C" {
 extern s32 g_asdLightCount;

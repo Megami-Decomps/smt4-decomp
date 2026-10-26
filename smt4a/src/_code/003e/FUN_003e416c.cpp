@@ -1,6 +1,6 @@
 /* NON_MATCHING: Retail add r0, r4, r0, lsr #29 differs from recovered add r1, r4, r0, lsr #29. */
 #include "common.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
 
 struct Entry416cView {
     u8 unk00[0x26]; // 0x00

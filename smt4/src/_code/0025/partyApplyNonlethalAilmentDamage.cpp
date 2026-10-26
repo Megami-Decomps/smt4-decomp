@@ -3,10 +3,10 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 extern "C" {
 PartyDamageUnitIV *gameGetUnitRecord(s32 slot);
-s32 gameCountUnits(void);
 
 // Apply nonlethal percentage damage to party members with the selected ailment.
 void partyApplyNonlethalAilmentDamage(u32 group, u32 ailment, s32 percentage)

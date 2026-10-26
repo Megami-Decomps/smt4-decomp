@@ -1,6 +1,6 @@
 /* NON_MATCHING: StreetPass menu update is complete; switch case joining and initialized/refresh flag block layout differ. */
 #include "common.h"
-#include "util/GameDataBlocksGetFlagByte.h"
+#include "gamedata/GameDataAccess.h"
 
 struct MarkPresenceRecord {
     /* 0x00 */ u8 unk00[0x60];

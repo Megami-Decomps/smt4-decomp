@@ -2,12 +2,12 @@
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
 #include "battle/btlMain.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
+#include "code/Code002a_VariantA.h"
 
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;
 BtlPartyBlockA *gameGetSlotTable();
-s32 FUN_002a4894(GridNavigation *);
 void FUN_00203b40(GridNavigation *, s32, s32, s32, s32, s32);
 void scrollOwnerSelectIndex(GridNavigation *, s32);
 void FUN_002a4964(GridNavigation *, s32);

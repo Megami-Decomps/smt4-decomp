@@ -1,7 +1,7 @@
 /* NON_MATCHING: path-operation return paths share cleanup instead of retaining retail's duplicated epilogues. */
 #include "sys/ProcessResult.h"
 #include "common.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 u32 libc_strlen(const char *text);

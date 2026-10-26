@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (177 vs 166 rows); retail frame is 84 bytes with the label text buffer placed differently and the draw-state helper not inlined the same way */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 // Title/menu scene: the draw-state ring the config screen writes into.
 struct TitleScene {

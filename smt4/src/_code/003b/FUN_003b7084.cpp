@@ -2,7 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 extern "C" {
 
@@ -26,8 +26,6 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_3_stack;
 
-extern unsigned char LAB_003b74ac; /* 0x3b74ac */
-extern unsigned char LAB_003b74b0; /* 0x3b74b0 */
 extern unsigned char LAB_003b7b50; /* 0x3b7b50 */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -62,15 +60,15 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   drawSetColorFromRGBA8(0x7a4c00ff);
   temp_v3 = gameGetPlayerData();
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0,0,0x6a,
-               &LAB_003b74ac,((unsigned int)*(unsigned char *)(temp_v3 + 0x76) - (int)*(char *)(param_1 + 0xd530)) * 5)
+               "%d",((unsigned int)*(unsigned char *)(temp_v3 + 0x76) - (int)*(char *)(param_1 + 0xd530)) * 5)
   ;
   temp_v2 = asdTMTexTableEntryAt(0x28,0x88);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0,0,0x6a,
-               &LAB_003b74b0);
+               "/");
   temp_v2 = asdTMTexTableEntryAt(0x28,0x8a);
   drawSetColorFromRGBA8(0xff);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + param_2,*(short *)(temp_v2 + 10) + param_3,0,0,0x6a,
-               &LAB_003b74ac,*(unsigned int *)(param_1 + 0xcfcc));
+               "%d",*(unsigned int *)(param_1 + 0xcfcc));
   FUN_002bed3c();
   temp_v2 = gameGetPlayerData();
   piVar11 = (int *)(param_1 + 0xcf78);
@@ -83,12 +81,12 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   temp_v3 = asdTMTexTableEntryAt(0x28,0x95);
   FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + param_2,
                (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v2 + 10) + param_3,1,4,0x6a,
-               &LAB_003b74ac,(int)temp_v1);
+               "%d",(int)temp_v1);
   temp_v3 = asdTMTexTableEntryAt(0x28,0x99);
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0x6a,
-               &LAB_003b74ac,(int)temp_v0);
+               "%d",(int)temp_v0);
   FUN_002bed3c();
   temp_v2 = gameGetPlayerData();
   temp_v8 = (int)*(short *)(temp_v2 + 0x1e);
@@ -100,12 +98,12 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   temp_v3 = asdTMTexTableEntryAt(0x28,0x95);
   FUN_002bdf94(0,(int)*(short *)(temp_v2 + 8) + (int)*(short *)(temp_v3 + 8) + param_2,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0x6a,
-               &LAB_003b74ac,temp_v9);
+               "%d",temp_v9);
   temp_v3 = asdTMTexTableEntryAt(0x28,0x99);
   drawSetColorFromRGBA8(0x72e027ff);
   FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v2 + 8) + param_2,
                (int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,4,0x6a,
-               &LAB_003b74ac,temp_v8);
+               "%d",temp_v8);
   FUN_002bed3c();
   temp_v2 = 0;
   do {
@@ -145,7 +143,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
       drawSetColorFromRGBA8(0x5a5a5aff);
       FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                    (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v3 + 10) + param_3,1,3,0x6a,
-                   &LAB_003b74ac,temp_v9);
+                   "%d",temp_v9);
       FUN_002bed3c();
       temp_v4 = asdTMTexTableEntryAt(0x28,0xb9);
       temp_v5 = *(short *)(temp_v3 + 10) + param_3;
@@ -161,7 +159,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
       drawSetColorFromRGBA8(temp_v6);
       FUN_002bdf94(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v4 + 8) + param_2,
                    (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v4 + 10) + param_3,1,3,0x6a,
-                   &LAB_003b74ac,temp_v8);
+                   "%d",temp_v8);
       FUN_002bed3c();
       FUN_002bf288(2,0x28,0xa5,*(short *)(temp_v3 + 8) + param_2,*(short *)(temp_v3 + 10) + param_3,0x6a
                   );

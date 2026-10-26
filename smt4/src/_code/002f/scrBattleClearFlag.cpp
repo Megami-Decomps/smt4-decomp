@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler calls the 64-bit shift helper instead of retail split-register variable shifts. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 
@@ -10,7 +9,8 @@ u32 scrBattleClearFlag(void)
 {
     u32 bit = scrGetArg(0);
     Battle *battle = reinterpret_cast<Battle *>(btlGetMainState());
-    battle->flags &= ~ (1ULL << (bit & 255));
+    u64 *flags = &battle->flags;
+    *flags &= ~(1 << bit);
     return 1;
 }
 }

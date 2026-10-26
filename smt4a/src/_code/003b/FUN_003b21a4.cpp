@@ -2,7 +2,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (206 vs 184 rows); retail keeps the panel base and parallax values in more callee-saved registers and shares the draw-state ring updates differently */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 struct DrawRing {
     s32 index;              // 0x00

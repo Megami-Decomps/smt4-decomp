@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation differs (retail keeps panel in r6 with panel+0xB40 hoisted in r4 across the tab switches and rows loop); logic equivalent. */
 #include "common.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 class PanelWidget {
 public:

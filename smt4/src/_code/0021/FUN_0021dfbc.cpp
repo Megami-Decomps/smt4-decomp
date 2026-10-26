@@ -1,4 +1,4 @@
-/* NON_MATCHING: indexed record addressing and independent state writes replace retail's countdown and paired store. */
+/* NON_MATCHING: the loop now carries retail's separate index and down-counter; retail pairs the state/unk08 stores with stm (r4=6, r5=1) after an add, this build uses strd with a writeback load. */
 #include "map/mapIf.h"
 
 struct MapIfResetState {
@@ -17,7 +17,7 @@ void FUN_0021dfbc()
 {
     MapIfState *state = g_mapIf;
     ((MapIfResetState *)state)->unk17 = 0;
-    for (s32 index = 0; index < 128; ++index) {
+    for (s32 index = 0, left = 128; left != 0; --left, ++index) {
         MapIfRecord *record = &state->records[index];
         if (record->active && record->display.category != 0x1d &&
             record->display.category != 0x26 && record->display.category != 0x1e &&

@@ -1,10 +1,11 @@
-/* NON_MATCHING: retail inlines ClearEvent SVC 0x19; this legal call to the existing kernel wrapper cannot match without forbidden intrinsics. */
+/* NON_MATCHING: retail spills r0-r3 with the stack arguments (push {r0-r3,...}) and keeps the failure test as lsrs r0 / movne r0, r1; register allocation of the 13 arguments differs. */
 #include "common.h"
+#include "nn/svc.h"
+#include "nn/Result.h"
 
 extern "C" {
 void nnResultCheckReport0043aab4();
 u32 serviceQuerySignedByteChecked();
-u32 svcClearEvent(u32 event);
 void FUN_002e3140(u32 result);
 void FUN_0043a718(s32 enabled);
 void FUN_0043a750(s32 format);
@@ -29,8 +30,8 @@ void movieY2rConfigureAndStart(s32 width, s32 height, s32 format, u32 rotation, 
     nnResultCheckReport0043aab4();
     while (serviceQuerySignedByteChecked()) {
     }
-    const u32 result = svcClearEvent(g_y2rTransferEvent);
-    if (static_cast<s32>(result) < 0) {
+    const u32 result = nn::svc::ClearEvent(g_y2rTransferEvent);
+    if (nnResultIsFailure(result)) {
         FUN_002e3140(result);
     }
     FUN_0043a718(1);

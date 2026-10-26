@@ -1,4 +1,4 @@
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 /* NON_MATCHING: compiler rotates the repeated-input loop and removes four branch/NOP rows; -O2 candidate. */
 #include "shard/Shard0031.h"
 

@@ -1,7 +1,7 @@
 /* NON_MATCHING: float24 exponent extraction/table lookup and packing register scheduling differ from retail. */
 #include "shard/W6_W6Match8_GpuDepth.h"
 
-extern "C" void FUN_001acf18(const u32 *first, const u32 *second, const u32 *coordinates);
+extern "C" void gpuSubmitVectorCommand(const u32 *first, const u32 *second, const u32 *coordinates);
 
 /* Pack the two vectors and coordinate pair into the GPU's three-word float24 format. */
 extern "C" void gpuSubmitFloat24Vectors(const f32 *secondVector, f32 x, f32 y, f32 z, f32 u, f32 v)
@@ -26,5 +26,5 @@ extern "C" void gpuSubmitFloat24Vectors(const f32 *secondVector, f32 x, f32 y, f
     packed.second[0] = secondX | (secondY << 24);
     packed.second[1] = (secondY >> 8) | (secondZ << 16);
     packed.second[2] = (secondZ >> 16) | (secondW << 8);
-    FUN_001acf18(packed.first, packed.second, packed.coordinates);
+    gpuSubmitVectorCommand(packed.first, packed.second, packed.coordinates);
 }

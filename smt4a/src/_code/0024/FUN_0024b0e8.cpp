@@ -1,4 +1,4 @@
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 /* NON_MATCHING: only sprite origin/dimension argument load ordering and scratch-register allocation differ. */
 #include "title/titleConfig.h"
 #include "shard/S1ListPanel.h"

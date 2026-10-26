@@ -22,13 +22,14 @@ u32 nn_dsp_CTR_DSP_LoadComponent(s32 session, const u8 *image, u32 size, u16 pro
 
 u32 FUN_0011bf24(void)
 {
-    g_callbackState.image = DAT_004657b8;
-    g_callbackState.imageSize = 0xC20A;
-    g_callbackState.programMask = 0xFF;
-    g_callbackState.dataMask = 0xFF;
-    if (g_callbackState.session != 0 && g_callbackState.loaded == 0) {
-        return nn_dsp_CTR_DSP_LoadComponent(g_callbackState.session, DAT_004657b8, 0xC20A, 0xFF, 0xFF,
-                                            &g_callbackState.loaded);
+    DspComponentState *callbackStatePtr = &g_callbackState;
+    callbackStatePtr->image = DAT_004657b8;
+    callbackStatePtr->imageSize = 0xC20A;
+    callbackStatePtr->programMask = 0xFF;
+    callbackStatePtr->dataMask = 0xFF;
+    if (callbackStatePtr->session != 0 && callbackStatePtr->loaded == 0) {
+        return nn_dsp_CTR_DSP_LoadComponent(callbackStatePtr->session, DAT_004657b8, 0xC20A, 0xFF, 0xFF,
+                                            &callbackStatePtr->loaded);
     }
     return 0xC8A0A7FC;
 }

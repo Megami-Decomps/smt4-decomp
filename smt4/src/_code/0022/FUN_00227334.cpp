@@ -2,8 +2,8 @@
 #include "common.h"
 #include "gamedata/SaveLoadProcess.h"
 
-#include "util/FUN_002009c4.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0020.h"
+#include "code/Code0029_VariantB.h"
 /* The battle command window's state, reached through g_btlUi. */
 struct BtlCommandWindowWork {
     /* 0x0000 */ u8 unk0000[0x5678];

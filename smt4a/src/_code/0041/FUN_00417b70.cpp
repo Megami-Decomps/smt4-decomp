@@ -1,7 +1,8 @@
 /* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result with `cmp r0,#0` before copying it to r4 (hook nop between cmp and branch), and hoists the constant 1 into r6. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-#include "util/CalleeContracts.h"
+#include "code/Code001b.h"
+#include "code/Code003d_Smt4a.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ typedef struct FlagBlock {
 } FlagBlock;
 
 s32 itemDataIsFlagClear(s32 id);
-u32 itemDataGetValue(s32 id);
 s32 FUN_00417e08(s32 id);
 s32 FUN_004bb6d8(u32 id, s32 arg);
 

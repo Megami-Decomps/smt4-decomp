@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `ldr r1, [r0]` where armcc emits `ldr r0, [r0]`. */
 #include "common.h"
 
 extern "C" {
@@ -8,10 +7,16 @@ extern Effect *g_eventEffect;
 
 s32 eventEffectIsStateTwo(void)
 {
-    if (g_eventEffect != NULL) {
-        return g_eventEffect->state == 2;
+    Effect *obj = g_eventEffect;
+    s32 result = 0;
+
+    if (obj == NULL) {
+        return 0;
     }
-    return 0;
+    if (obj->state == 2) {
+        result = 1;
+    }
+    return result;
 }
 
 } /* extern "C" */

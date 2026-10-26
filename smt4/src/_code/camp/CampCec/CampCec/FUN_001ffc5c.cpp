@@ -45,8 +45,8 @@ struct CampCecWork {
 
 extern CampCecWork *g_campCec;   /* 0x43daa8 */
 
-extern u8 LAB_0018b20c;
-extern u8 LAB_00220fa8;
+extern u8 campCecUpdateState;
+extern u8 questQueryFalse;
 
 void campCecDrawDimmingOverlay(void);
 void FUN_002113c0(void);
@@ -93,7 +93,7 @@ void FUN_001ffc5c(void)
     }
     work = g_campCec;
     memClear(work, 0xD7C);
-    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCec Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_0018b20c), 0, 0);
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCec Calc"), 1, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&campCecUpdateState), 0, 0);
     taskCreateDraw("CampCec DrawUpLeft", 0x7D, 0, 0, campCecDrawDimmingOverlay, 0, 0, work->process);
     taskCreateDraw("CampCec DrawUpRight", 0xDB, 0, 0, campCecDrawDimmingOverlay, 0, 0, work->process);
 
@@ -116,7 +116,7 @@ void FUN_001ffc5c(void)
     work->handler[11] = FUN_001ebe10;
     work->handler[12] = FUN_003105f4;
     work->handler[13] = FUN_002ece60;
-    work->handler[15] = (CecHandler)&LAB_00220fa8;
+    work->handler[15] = (CecHandler)&questQueryFalse;
 
     work->availability = 0;
     if (nn_cfg_CTR_IsRestrictP2pCec() != 0) {

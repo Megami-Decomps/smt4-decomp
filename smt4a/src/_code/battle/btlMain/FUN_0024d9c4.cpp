@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0024d9c4` (_code @ 0x24d9c4, 0x910 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0018_Smt4a.h"
 
 extern "C" {
 
 int asdMemoryAllocTracked(int, int, int, int, int);
 int jobIsValid(unsigned int);
-int FUN_00180000(void);
 int asdMemFree(void);
 int scrScriptProcessDestroy(void);
 int __aeabi_memset4(unsigned int *, int, unsigned int);

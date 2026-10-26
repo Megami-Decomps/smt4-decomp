@@ -1,20 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `svcSleepThread` (_code @ 0x1bcd48, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the SDK wrapper is an embedded-assembler body (svc 0x0a; bx lr); the __svc intrinsic of nn/svc.h compiles to a call with push {r4, lr}/pop {r4, pc} around the svc. */
+#include "nn/svc.h"
 
-extern "C" {
-
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int svcSleepThread(unsigned int param_1)
-
+/* Puts the calling thread to sleep for `nanoseconds`. */
+extern "C" void svcSleepThread(s64 nanoseconds)
 {
-/* irregular: 1 native warning(s); review required */
-  software_interrupt(10);
-  return param_1;
+    nn::svc::SleepThread((u32)nanoseconds, (u32)((u64)nanoseconds >> 32));
 }
-
-} /* extern "C" */

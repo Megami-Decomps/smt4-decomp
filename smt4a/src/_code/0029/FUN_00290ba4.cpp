@@ -1,7 +1,7 @@
 /* NON_MATCHING: scheduling only: retail loads the g_btlUi address before calling campCommonBgRelease, built after */
 /* Tears down the session: resets its sub-state, releases its handle, frees the session itself and notifies the owner's window. */
 #include "common.h"
-#include "shard/asdMemFree.h"
+#include "util/MemoryHelpers_VariantC.h"
 
 extern "C" {
 

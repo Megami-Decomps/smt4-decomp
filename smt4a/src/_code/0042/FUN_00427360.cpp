@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps one result register and one shared cleanup tail (the file wrapper's destructor runs once) and a 64-bit running read offset; ours duplicates the tail per return and indexes the offset (157 rows against 154). The module/description range test is also folded differently (cmp #17408, unsigned). */
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 #include "nn/Result.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 /* The archive's content header: 7 default pairs, then a count of extra pairs stored after the header. */
 struct ArchiveContentHeader {

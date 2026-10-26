@@ -1,4 +1,5 @@
 #include "gamedata/DataTable.h"
+#include "gamedata/DataTableAccess_Smt4.h"
 
 extern "C" {
 extern void *g_aocSystem;

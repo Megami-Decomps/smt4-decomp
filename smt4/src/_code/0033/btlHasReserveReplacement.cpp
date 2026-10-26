@@ -1,5 +1,5 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
-#include "shard/btlHasReserveReplacement.h"
+#include "battle/BattleHelpers_BtlUnits.h"
 #include "battle/btlUnit.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/btlMain.h"

@@ -1,6 +1,6 @@
 /* NON_MATCHING: mark bit is captured before the map lookup and candidate counter lifetime matches; bit-address scratch registers and kind-test folding differ. */
 #include "map/mapDepart.h"
-#include "util/FUN_0025b670.h"
+#include "code/Code0025.h"
 
 /* A record of data table 0x2E (section 2): a timed area event. */
 struct AreaEventRecord {

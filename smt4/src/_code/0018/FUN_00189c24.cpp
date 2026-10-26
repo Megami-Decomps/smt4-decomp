@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W5_W5Match7_ScriptUnit.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ extern int g_uiQuest; /* 0x43dd50 */
 /* Supplied declaration required: scrollOwnerSetValue. */
 /* Supplied declaration required: gameGetSavedRecordOrFallback. */
 extern int idIsAtLeast350(unsigned int);
-extern int FUN_00298e00(unsigned int);
 extern int questIsCompleted(unsigned int);
 extern int FUN_00298e40(unsigned int, int, int *);
 extern int FUN_00298f88(unsigned int);

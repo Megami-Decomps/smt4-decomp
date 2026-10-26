@@ -1,6 +1,8 @@
 /* NON_MATCHING: common sysPlaySe block placement, conditional sound move order, and row-load scheduling differ. */
 #include "common.h"
-#include "util/FUN_002c7e24.h"
+#include "code/Code002c.h"
+#include "code/Code0037.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
 
 /* The party panel as the cursor-sound code reads it. */
 struct PartyPanelSounds {
@@ -27,7 +29,6 @@ s8 FUN_0022e714(void);
 s32 campCecHasObject(void);
 s32 FUN_002f1964(void);
 s32 gameFlagIsSet(u32 flag);
-s32 buttonHelpGetEntryValue(u32 id);
 
 /* Plays the sound of the party panel's confirm / cancel / move input and updates the button help. */
 void FUN_0023fc38(void)

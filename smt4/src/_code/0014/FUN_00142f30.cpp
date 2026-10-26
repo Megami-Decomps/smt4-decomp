@@ -11,10 +11,11 @@ void FUN_0014d8c8(AsdCmdBuffer *buffer, u32 first, AsdCmdRecord *entries, u32 se
  * then passes on the command record entries[index]; returns the address of that record's copy target. */
 void *FUN_00142f30(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 unused, u32 third)
 {
+    AsdGfxContext *asdGfxContextPtr = &g_asdGfxContext;
     // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
     struct BufferNode { AsdCmdBuffer buffer; BufferNode *next; };
     AsdCmdRecord *record = &entries[index];
-    BufferNode *node = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
+    BufferNode *node = reinterpret_cast<BufferNode *>(asdGfxContextPtr->bufferRegistry.buckets[handle & 31]);
 
     if (node != NULL) {
         u32 id;
@@ -25,7 +26,7 @@ void *FUN_00142f30(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32
             }
         } while (id != handle && node != NULL);
     }
-    if (g_asdGfxContext.cmdBuffer == &node->buffer) {
+    if (asdGfxContextPtr->cmdBuffer == &node->buffer) {
         node->buffer.writeOffset = g_commandBufferCursor - node->buffer.start;
     }
     FUN_0014d8c8(&node->buffer, first, entries, second, index, third);

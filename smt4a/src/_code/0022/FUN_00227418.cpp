@@ -1,6 +1,6 @@
 /* NON_MATCHING: draws the camp menu's item/skill details area for the current menu id (item description, selection bar, mode hints); written from the decompilation, the id grouping is rebuilt from the goto chain and branch layout not compared with retail */
 #include "camp/RenderCtx.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 
 struct CampDetail {
     /* 0x000 */ u8 unk000[0x1C];

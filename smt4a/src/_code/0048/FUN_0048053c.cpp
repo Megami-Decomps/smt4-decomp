@@ -1,6 +1,6 @@
 /* NON_MATCHING: canonical modifier alignment, seven-halfword bonus extent and unsigned range bounds are restored; zero/one lifetimes, stack slot placement and clamp arithmetic scheduling remain different. */
 #include "shard/W5_W5Match7_EntrySort.h"
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "gamedata/EquipmentUpgradeState.h"
 #include "shard/ItemStackLimit.h"
 

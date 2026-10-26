@@ -1,7 +1,7 @@
 /* NON_MATCHING: adjacent option arrays lose merged-global address arithmetic and copy-buffer registers differ. */
 #include "gfx/EffectEditorStorage.h"
 #include "AsdSDK/EffectEditorSelectionTransfer.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
 extern EffectSelectionContext DAT_0044f858;

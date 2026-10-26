@@ -1,6 +1,7 @@
 /* NON_MATCHING: Retail b 88 differs from recovered pop {r4, pc}. */
 #include "common.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 // Private view of the battle state fields used by this function.
 struct BattleMainView {
@@ -11,7 +12,6 @@ struct BattleMainView {
 extern "C" {
 extern BattleMainView* g_btlMain;
 extern s32 gameFlagIsSet(u32 flag);
-extern s32 flagSelectVariant(void);
 
 // Tests the variant-specific flags and current battle state for eligibility.
 u32 FUN_002b24fc(void)

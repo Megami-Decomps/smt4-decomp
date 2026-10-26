@@ -20,7 +20,7 @@ void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
 int asdTMTexTableLoadTmx(int type, int arg);
 void FUN_0022413c(void);
 void whisperEffectDestroy(void);
-void LAB_00203cfc(void);
+void whisperEffectUpdate(void);
 void LAB_002f6a28(void);
 void LAB_002f6a40(void);
 void LAB_002f6a5c(void);
@@ -93,7 +93,7 @@ void whisperEffectStart(u32 devilId)
     devilGetRecord();
     fx = g_whisperEffect;
     fx->handle = ((u8 *)devilId)[0x32] + 0x100008a;
-    fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_002f6a28), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(LAB_00203cfc), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));
+    fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_002f6a28), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(whisperEffectUpdate), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));
     taskCreateDraw(LAB_002f6a40, 0x7d, 0, 0, FUN_0022413c, 0, fx, fx->task);
     taskCreateDraw(LAB_002f6a5c, 0xdb, 0, 0, FUN_0022413c, 0, g_whisperEffect, g_whisperEffect->task);
     soundChannelStopAll(0);

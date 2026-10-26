@@ -16,3 +16,13 @@ u32 scrGetCommandOwner(void);
 void scrCommMessageSetMode(s32 mode);
 
 } /* extern "C" */
+
+extern "C" {
+
+s32 scrGetArg(s32 index);
+
+u32 scrGetCommandFrame(void);
+
+void scrSetResult(s32 value);
+
+} /* extern "C" */

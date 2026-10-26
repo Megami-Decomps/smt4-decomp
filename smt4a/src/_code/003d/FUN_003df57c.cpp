@@ -1,7 +1,7 @@
 /* NON_MATCHING: equipped-skill scan is not pair-unrolled; saved registers and global/rank reduction block ordering differ. */
 #include "gamedata/Table04Record.h"
 #include "shard/Shard004B.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 ItemRankRecord *gameGetPlayerData(void);

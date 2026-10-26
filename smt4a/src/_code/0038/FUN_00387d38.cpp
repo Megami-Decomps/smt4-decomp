@@ -3,6 +3,7 @@
 #include "shard/Shard0031.h"
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "event/2dEvent/EventEffect.h"
+#include "shard/W6_W6Match3_FormatBuffer.h"
 
 extern "C" {
 PartyStatusSlots *gameGetSlotTable();
@@ -11,7 +12,6 @@ void FUN_003c1060();
 void FUN_00331380(s32 value);
 void sysPlaySe(s32 sound);
 s32 partyPanelExists();
-void campCecSetObjectValue(s32 value);
 void linkHolderApplyFlag(u32 handle, s32 enabled);
 
 u32 FUN_00387d38(CharacterRefreshWork *work)

@@ -4,7 +4,6 @@
 
 extern "C" {
 
-s32 scrGetCommandFrame(void);
 s32 scrWorkGetValue(s32 index);
 int scrWorkSetValue(s32 index, s32 value);
 void *fileSlotGetBuffer(u32 slot);

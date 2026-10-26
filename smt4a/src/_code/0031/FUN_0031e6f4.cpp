@@ -2,7 +2,7 @@
 #include "common.h"
 #include "mapnavi/naviMain.h"
 #include "gamedata/Table04Record.h"
-#include "util/actorIsActive.h"
+#include "sys/RuntimeObjects.h"
 
 #define REWARD_ITEM_SLOTS 6
 #define REWARD_DEMON_SLOTS 0x18

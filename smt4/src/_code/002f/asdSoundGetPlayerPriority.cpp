@@ -1,6 +1,6 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "nw/snd/SoundArchiveQuery.h"
-#include "util/AsdSoundGetPlayerPriority.h"
+#include "sound/SoundPlayerPriority.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;

@@ -17,12 +17,13 @@ void jobStop(void *job, s32 mode);
 static __inline void *memoryDebugStartProcess(const char *name, s32 id, u32 (*update)(),
                                               s32 (*finish)(u32), void *work)
 {
+    MemoryDebugState *allocationAddressRangesPtr = &g_allocationAddressRanges;
     void *process = reinterpret_cast<void *>(asdProcessCreateSimple(reinterpret_cast<const s8 *>(name), id, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(update), reinterpret_cast<AsdProcFunc>(finish), reinterpret_cast<u32>(work)));
     if (process == NULL) {
         return NULL;
     }
     jobSetParent(NULL, process);
-    g_allocationAddressRanges.lastMapProcess = process;
+    allocationAddressRangesPtr->lastMapProcess = process;
     return process;
 }
 

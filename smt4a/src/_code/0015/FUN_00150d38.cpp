@@ -1,6 +1,6 @@
 /* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled (blend mode from the frame texture); written from the decompilation, render-stack scheduling not compared with retail */
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct FrameCopyTex {

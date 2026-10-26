@@ -3,7 +3,7 @@
 #include "shard/SaveWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
-#include "util/MapDepart_InitState.h"
+#include "map/MapSceneAccess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
 // The allocated departure work extends the public prefix.  SaveWork's word at

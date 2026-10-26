@@ -1,6 +1,6 @@
 /* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
 #include "battle/btlTargetSelect.h"
-#include "util/FUN_0027db08.h"
+#include "code/Code0027.h"
 #include "addon/LookupRecord.h"
 
 struct TargetInfoPosition { f32 x, y, z; };

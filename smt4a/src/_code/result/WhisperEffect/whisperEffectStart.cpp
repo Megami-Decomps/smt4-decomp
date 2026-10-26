@@ -4,7 +4,7 @@
 #include "common.h"
 #include "result/WhisperEffect.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 
@@ -20,7 +20,7 @@ void *asdMemoryAlloc(int heap, int align, int arg2, int size, int arg4);
 int asdTMTexTableLoadTmx(int type, int arg);
 void FUN_0031fec0(void);
 void whisperEffectDestroy(void);
-void LAB_002c91d0(void);
+void whisperAdvanceAnimations(void);
 void LAB_0037e4ec(void);
 void LAB_0037e504(void);
 void LAB_0037e520(void);
@@ -93,7 +93,7 @@ void whisperEffectStart(u32 devilId)
     FUN_00184310();
     fx = g_whisperEffect;
     fx->handle = ((u8 *)devilId)[0x3a] + 0x1000097;
-    fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_0037e4ec), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(LAB_002c91d0), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));
+    fx->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>(LAB_0037e4ec), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(whisperAdvanceAnimations), reinterpret_cast<AsdProcFunc>(whisperEffectDestroy), reinterpret_cast<u32>(fx));
     taskCreateDraw(LAB_0037e504, 0x81, 0, 0, FUN_0031fec0, 0, fx, fx->task);
     taskCreateDraw(LAB_0037e520, 0xdd, 0, 0, FUN_0031fec0, 0, g_whisperEffect, g_whisperEffect->task);
     soundChannelStopAll(0);

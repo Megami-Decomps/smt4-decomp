@@ -1,26 +1,42 @@
-/* NON_MATCHING: register allocation only: retail forms the block pointer in r2 first (`add r2, r0, #8192`) and stores the low and high mask words separately (`str r1, [r2, #8]!`, `asr r0, r1, #31`, `str r0, [r2, #4]`); built keeps the pointer in r0 and merges the stores into `stm`. */
 #include "battle/BtlMainAccess.h"
-#include "util/CalleeContracts.h"
-#include "battle/btlUnit.h"
-#include "battle/BattleUnit.h"
+#include "battle/btlScript.h"
+#include "common.h"
 
 extern "C" {
 
+typedef struct UnitCommandPart {
+    /* 0x00 */ u8 unk00[0xbe];
+    /* 0xbe */ u16 value;
+} UnitCommandPart;
 
-extern u32 g_btlScriptUnit;
+typedef struct UnitCommandStats {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ UnitCommandPart part;
+} UnitCommandStats;
 
-u32 scrGetArg(s32 index);
+typedef struct CommandUnit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitCommandStats *stats;
+} CommandUnit;
 
-/* Script command: puts the script unit in mode 12 and sets the battle mask to the argument with bit 17 added. */
+typedef struct CommandState {
+    /* 0x0000 */ u8 unk0000[0x2008];
+    /* 0x2008 */ s64 flags;
+} CommandState;
+
+u32 scrGetArg(u32 index);
+CommandUnit *btlUnitGet(u32 id);
+void btlSelectCandidateEntries(s32 arg);
+
+/* Script command: sets the script unit's value to 12 and the main state's 64-bit flags to script argument 0 | 0x20000 (sign-extended). Returns 1. */
 u32 FUN_003b0b00(void)
 {
     u32 arg = scrGetArg(0);
-    BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->data;
-    data->unk1BE = 12;
-    u32 *words = btlGetMainState()->commandWords;
-    s32 mask = arg | 0x20000;
-    words[2] = mask;
-    words[3] = mask >> 31;
+
+    UnitCommandPart *part = &btlUnitGet(g_btlScriptUnit)->stats->part;
+
+    part->value = 12;
+    reinterpret_cast<CommandState *>(btlGetMainState())->flags = (s32)(arg | 0x20000);
     btlSelectCandidateEntries(1);
     return 1;
 }

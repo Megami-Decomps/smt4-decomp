@@ -26,12 +26,6 @@ typedef struct {
     unsigned long long sp1470; /* 0x1470: local_1470 */
 } param_3_stack;
 
-extern unsigned char LAB_0014f0a8; /* 0x14f0a8 */
-extern unsigned char LAB_0014f0b0; /* 0x14f0b0 */
-extern unsigned char LAB_0014f0bc; /* 0x14f0bc */
-extern unsigned char LAB_0014f0c4; /* 0x14f0c4 */
-extern unsigned char LAB_0014f0cc; /* 0x14f0cc */
-extern unsigned char LAB_0014f0d4; /* 0x14f0d4 */
 extern int *DAT_005b4030; /* 0x5b4030 */
 extern int DAT_005b4040; /* 0x5b4040 */
 
@@ -376,10 +370,10 @@ LAB_0014ed64:
                     (temp_v18 + 0x100,temp_v5,temp_v18 + 0x205,temp_v19 + 1,0xff);
           temp_v1 = VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0a8,DAT_005b4030[9] + DAT_005b4030[8]);
+          FUN_001655fc(temp_v14,temp_v1,"%08x",DAT_005b4030[9] + DAT_005b4030[8]);
           temp_v1 = VectorSignedToFloat(temp_v10 - 0x2f,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0b0,temp_v0);
+          FUN_001655fc(temp_v14,temp_v1,"x%08x",temp_v0);
           temp_v0 = 0;
           temp_v8 = *DAT_005b4030;
           while (temp_v8 != 0) {
@@ -394,20 +388,20 @@ LAB_0014ed64:
           temp_v15 = (double)(temp_v13 * 0.0009765625f * 0.0009765625f);
           temp_v1 = VectorSignedToFloat(temp_v10 - 0x23,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0bc,temp_v0,temp_v15);
+          FUN_001655fc(temp_v14,temp_v1,"%.4fMB",temp_v0,temp_v15);
           temp_v1 = VectorSignedToFloat(temp_v10 - 0x17,(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v14 = VectorSignedToFloat(temp_v7,(unsigned char)(in_fpscr >> 0x16) & 3);
-          FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0c4,DAT_005b4030[6]);
+          FUN_001655fc(temp_v14,temp_v1,"%08d",DAT_005b4030[6]);
           if (temp_v6 != 0) {
             temp_v2 = *(unsigned short *)(temp_v6 - 0x10) - 1;
             temp_v1 = VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v14 = VectorSignedToFloat(temp_v9 + 0x155,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0cc,
+            FUN_001655fc(temp_v14,temp_v1,"A x%08x",
                          (((unsigned int)*(unsigned short *)(temp_v6 - 0x10) - ((temp_v6 + 0x2cU) & temp_v2)) & temp_v2) +
                          temp_v6 + 0x2c,temp_v15);
             temp_v1 = VectorSignedToFloat(temp_v10 - 0x2f,(unsigned char)(in_fpscr >> 0x16) & 3);
             temp_v14 = VectorSignedToFloat(temp_v9 + 0x155,(unsigned char)(in_fpscr >> 0x16) & 3);
-            FUN_001655fc(temp_v14,temp_v1,&LAB_0014f0d4,*(unsigned int *)(temp_v6 - 0x14));
+            FUN_001655fc(temp_v14,temp_v1,"S x%08x",*(unsigned int *)(temp_v6 - 0x14));
           }
           if (temp_v20 != 0) {
             asdMemFree();

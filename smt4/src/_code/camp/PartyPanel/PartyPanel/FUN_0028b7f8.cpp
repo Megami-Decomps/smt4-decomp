@@ -38,12 +38,8 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_001c3fd4(...); /* 0x1c3fd4 */
-extern unsigned char LAB_00212534; /* 0x212534 */
+extern unsigned char digitsNotifyNoop; /* 0x212534 */
 extern int FUN_00212538(...); /* 0x212538 */
-extern unsigned char LAB_0028bbe4; /* 0x28bbe4 */
-extern unsigned char LAB_0028bbf4; /* 0x28bbf4 */
-extern unsigned char LAB_0028bc00; /* 0x28bc00 */
-extern unsigned char LAB_0028bc14; /* 0x28bc14 */
 extern unsigned char DAT_00402a4c; /* 0x402a4c */
 extern unsigned char DAT_00402ab8; /* 0x402ab8 */
 extern unsigned char DAT_00402af4; /* 0x402af4 */
@@ -97,14 +93,12 @@ void FUN_0028b7f8(int param_1)
   memClear();
   temp_v1 = FUN_002a0d0c();
   *(unsigned char *)((int)puVar2 + 0x42) = *(unsigned char *)(temp_v1 + 0x40);
-  puVar4 = &LAB_0028bbe4;
-  asdProcessCreateSimple(&LAB_0028bbe4,1,0,0,FUN_001c3fd4,&LAB_00212534,0);
+  asdProcessCreateSimple("TMD CALC",1,0,0,FUN_001c3fd4,&digitsNotifyNoop,0);
   *puVar2 = (unsigned int)puVar4;
-  puVar5 = &LAB_0028bbf4;
-  taskCreateDraw(&LAB_0028bbf4,0xe6,0,0,FUN_00212538,0,0,puVar4);
+  taskCreateDraw("TMD DDRAW",0xe6,0,0,FUN_00212538,0,0,puVar4);
   puVar2[2] = (unsigned int)puVar5;
-  asdLoadFileAsyncSimple(&LAB_0028bc00,puVar2 + 3,1);
-  asdLoadFileAsyncSimple(&LAB_0028bc14,puVar2 + 4,1);
+  asdLoadFileAsyncSimple("camp/partypanel.mbm",puVar2 + 3,1);
+  asdLoadFileAsyncSimple("camp/partypanel.bf",puVar2 + 4,1);
   FUN_0028c040();
   if (param_1 != 0) {
     FUN_0029e874(1);

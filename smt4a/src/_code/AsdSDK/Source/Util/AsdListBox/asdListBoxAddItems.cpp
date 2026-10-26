@@ -1,15 +1,15 @@
 /* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before each item allocation. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_VariantA.h"
 
 extern "C" {
-extern u8 LAB_00359330; /* item callback */
+extern u8 asdListBoxFreeItem; /* item callback */
 
 AsdListBoxModel *jobGetWork(AsdListBox *listBox);
 void *asdMemoryAllocTracked(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdListAdd(void *list, void *item, void *func);
 AsdListBoxItem *asdListBoxFindItem(AsdListBox *listBox, u32 id);
 void asdListBoxMarkDirty(AsdListBox *listBox);
-void asdListBoxViewRefresh(void *view);
 char *strncpy(char *dst, const char *src, u32 n);
 
 /* Adds one item per table row (label, kind, value and range) to the list box. */
@@ -32,7 +32,7 @@ void asdListBoxAddItems(AsdListBox *listBox, const AsdListBoxEntry *entries, s32
         item->type = 0;
         item->id = model->nextItemId;
         model->nextItemId++;
-        asdListAdd(model, item, &LAB_00359330);
+        asdListAdd(model, item, &asdListBoxFreeItem);
         asdListBoxMarkDirty(listBox);
         asdListBoxViewRefresh(model->view);
         model->selectedCursor = model->viewCursor;

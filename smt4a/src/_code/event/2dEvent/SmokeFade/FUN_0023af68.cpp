@@ -1,7 +1,7 @@
 /* NON_MATCHING: the fade record selection is inlined per phase with different register allocation and the float constants sit in other registers (187 vs 185 rows); the fade logic is the same. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/slotSetRequest.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

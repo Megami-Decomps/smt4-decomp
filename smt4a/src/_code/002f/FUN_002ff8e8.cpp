@@ -1,6 +1,6 @@
 /* NON_MATCHING: only mode 2 swaps the old-state and current-slot address registers. */
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 static __inline void renderCtxSetBlend(RenderCtxA *context, s32 state)
 {

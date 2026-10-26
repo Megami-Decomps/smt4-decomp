@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code003d_Smt4.h"
 
 struct OwnerState {
     /* 0x0000 */ u8 unk00[0x1cf8];

@@ -1,6 +1,7 @@
 #ifndef ASDSDK_SOURCE_NET_CEC_ASDCECPROCESS_H
 #define ASDSDK_SOURCE_NET_CEC_ASDCECPROCESS_H
 
+#include "nn/os/Thread.h"
 #include "shard/W6_W6Match3_ThreadHandleState.h"
 #include <stddef.h>
 
@@ -22,17 +23,14 @@ struct AsdCecInboxState {
 struct AsdCecProcessWork {
     /* 0x000 */ AsdCecInboxState inbox;
     /* 0xd30 */ s32 state;
-    /* 0xd34 */ u32 syncHandle;
-    /* 0xd38 */ u8 stopRequested;
-    /* 0xd39 */ u8 unkD39[3];
-    /* 0xd3c */ u32 unkD3C;
-    /* 0xd40 */ ThreadHandleState thread;
-    /* 0xd48 */ u8 unkD48[0xc];
+    /* 0xd34 */ NnOsThread thread;
+    /* 0xd3c */ u8 unkD3C[0x18];
     /* 0xd54 */ void *buffer;
 };
 
 typedef char AsdCecProcessWorkLayoutCheck[sizeof(AsdCecProcessWork) == 0xd58 &&
-    offsetof(AsdCecProcessWork, thread) == 0xd40 &&
+    offsetof(AsdCecProcessWork, thread) == 0xd34 &&
+    offsetof(AsdCecProcessWork, unkD3C) == 0xd3c &&
     offsetof(AsdCecProcessWork, buffer) == 0xd54 ? 1 : -1];
 
 #endif

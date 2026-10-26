@@ -31,9 +31,6 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_4_stack;
 
-extern unsigned char LAB_00496270; /* 0x496270 */
-extern unsigned char LAB_00496274; /* 0x496274 */
-extern unsigned char LAB_0049627c; /* 0x49627c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -302,7 +299,7 @@ LAB_00495f20:
   }
   temp_v2 = *(short *)(temp_v13 + 8);
   temp_v3 = *(short *)(temp_v13 + 10);
-  textFormatBuffer(temp_v22,&LAB_00496270,temp_v8);
+  textFormatBuffer(temp_v22,"%4d",temp_v8);
   drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v15,temp_v14,temp_v22);
   if (param_2 != 0) {
     temp_v9 = shopGetEntryPrice(param_4);
@@ -316,7 +313,7 @@ LAB_00495f20:
     }
     temp_v2 = *(short *)(temp_v8 + 8);
     temp_v3 = *(short *)(temp_v8 + 10);
-    textFormatBuffer(temp_v22,&LAB_00496274,temp_v9);
+    textFormatBuffer(temp_v22,"%8d",temp_v9);
     drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
   }
   temp_v9 = FUN_001ba3d0(temp_v6);
@@ -335,7 +332,7 @@ LAB_00495f20:
   }
   temp_v2 = *(short *)(temp_v8 + 8);
   temp_v3 = *(short *)(temp_v8 + 10);
-  textFormatBuffer(temp_v22,&LAB_0049627c,temp_v9);
+  textFormatBuffer(temp_v22,"%2d",temp_v9);
   drawTextAtRelativePosition(param_1 + 0x3a4,0,temp_v2 + temp_v16,temp_v3 + temp_v7,0,7,temp_v10,temp_v14,temp_v22);
   return;
 }

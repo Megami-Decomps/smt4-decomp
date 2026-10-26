@@ -33,7 +33,7 @@ int FUN_004f8fa0(...);
 int FUN_004fb4fc(...);
 int btlReflectQueueValueAction(...);
 
-int FUN_0023acdc(...);
+int gameSavedFlagSet(...);
 int dataTable41FindById(void);
 int FUN_003ee0c0(...);
 int FUN_003efb18(...);
@@ -59,7 +59,7 @@ int FUN_002c7bf4(...);
 int FUN_0047eccc(...);
 int FUN_0047f138(...);
 int btlSlotSetStoreValue(...);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 int FUN_004de7a0(...);
 int FUN_004fbeac(...);
 int btlReflectCreateKind15(...);
@@ -168,7 +168,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: FUN_00222488. */
 extern unsigned int gameGetSaveSlotData(int);
-/* Supplied declaration required: FUN_0023acdc. */
+/* Supplied declaration required: gameSavedFlagSet. */
 /* Supplied declaration required: infoWinSetText. */
 /* Supplied declaration required: infoWinSetTimer. */
 /* Supplied declaration required: FUN_002c7bf4. */
@@ -207,7 +207,7 @@ extern unsigned int btlCalcDiscountedMoneyCost(unsigned int);
 extern int btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlSlotSetStoreValue. */
 /* Supplied declaration required: FUN_004c4604. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 extern int valueRangeSameSide(int, int);
 extern int FUN_004c87e0(void);
 /* Supplied declaration required: FUN_004d7a70. */
@@ -244,7 +244,7 @@ extern int FUN_004f80e4(int);
 /* Supplied declaration required: btlStageResetAndClearCameraFlag. */
 /* Supplied declaration required: FUN_004f8fa0. */
 extern int FUN_004f9ae4(int, unsigned int);
-extern int FUN_004f9d44(int);
+extern int btlLookupEffectValue(int);
 extern unsigned int FUN_004fa030(int);
 /* Supplied declaration required: FUN_004fb4fc. */
 /* Supplied declaration required: btlReflectCreateKind25. */
@@ -856,7 +856,7 @@ code_r0x004ef7f0:
           temp_v10 = *(int *)(temp_v20 + 0x2c);
           temp_v7 = (int)(char)(*(char *)(temp_v17 + 0x41) - '\x01');
           if (temp_v7 >= 0x15) {
-            FUN_004c571c((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x17,1,0);
+            btlAdjustPropertyClamped((int)*(short *)(*(int *)(temp_v20 + 0x28) + 0x6a),0x17,1,0);
           }
           else {
             *(unsigned short *)(temp_v10 + 0x152) = *(unsigned short *)(temp_v10 + 0x128);
@@ -1017,12 +1017,12 @@ code_r0x004ef7f0:
     if ((*(char *)(temp_v20 + 0x5a0) == '\x01') && (temp_v21 != 0)) {
       temp_v3 = 0;
       do {
-        temp_v22 = FUN_004f9d44(g_btlAux);
+        temp_v22 = btlLookupEffectValue(g_btlAux);
         if (-1 < temp_v22) {
           temp_v7 = temp_v21 + temp_v3 * 0x16;
           temp_v22 = btlEffectNameHasPrefix(g_btlAux,temp_v7 + 0x108);
           if (temp_v22 != 0) {
-            temp_v22 = FUN_004f9d44(g_btlAux);
+            temp_v22 = btlLookupEffectValue(g_btlAux);
             FUN_004fbd30(temp_v22 + temp_v5,puVar29);
           }
           else if (*(int *)(temp_v20 + 0x598) != 0) {
@@ -1168,7 +1168,7 @@ code_r0x004f054c:
       temp_v18 = uStack_74;
     }
     if ((temp_v17 != 0 && temp_v18 != 0) && -1 < (int)temp_v15) {
-      FUN_0023acdc((int)(short)temp_v18);
+      gameSavedFlagSet((int)(short)temp_v18);
     }
     temp_v3 = 0;
     if ((*(int *)(temp_v20 + 0x574) == 0) &&

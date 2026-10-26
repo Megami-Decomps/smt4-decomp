@@ -38,7 +38,7 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } void_stack;
 
-extern unsigned char LAB_00192824; /* 0x192824 */
+extern unsigned char vectorSetAllOne; /* 0x192824 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -109,7 +109,7 @@ unsigned int FUN_002835f4(void)
     (**(romwright_code **)(temp_v3 + 0x1274))();
     *(unsigned char *)(temp_v3 + 0x1270) = 0;
   }
-  __aeabi_vec_ctor_nocookie_nodtor(&temp_v11,&LAB_00192824,0x10,4);
+  __aeabi_vec_ctor_nocookie_nodtor(&temp_v11,&vectorSetAllOne,0x10,4);
   temp_v11 = 0x3f800000;
   temp_v12 = 0x3f800000;
   temp_v13 = 0x3f800000;

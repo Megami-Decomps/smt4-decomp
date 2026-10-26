@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match1_LightRender.h"
+#include "code/Code0017_Smt4a.h"
 
 extern "C" {
 extern LightCount g_asdLightCount;

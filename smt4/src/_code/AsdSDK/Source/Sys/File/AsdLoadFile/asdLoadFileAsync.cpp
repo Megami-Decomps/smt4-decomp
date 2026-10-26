@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "util/AsdLoadFileHasDevice.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {

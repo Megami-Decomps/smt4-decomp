@@ -1,6 +1,6 @@
 /* NON_MATCHING: path branch layout and allocation/null initialization differ; incoming four-float pose ABI recovered from entry stores. */
 #include "map/mapIf.h"
-#include "util/FUN_0040aa6c.h"
+#include "code/Code0040.h"
 
 namespace {
 struct MapIfSpawnPose { f32 x, y, z, heading; };

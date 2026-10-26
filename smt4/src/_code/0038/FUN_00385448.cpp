@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "ui/ButtonHelp.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
 int scrScriptProcessStartMappedEntry(...);
 int buttonHelpResetSlots(void);
-int FUN_00287704(...);
 int FUN_00296284(...);
 int slotSetRequest(int, int, int);
 int uiSpriteSetImageKeyframe(...);
@@ -22,11 +22,6 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned char LAB_00385854; /* 0x385854 */
-extern unsigned char LAB_00385860; /* 0x385860 */
-extern unsigned char LAB_00385870; /* 0x385870 */
-extern unsigned char LAB_0038587c; /* 0x38587c */
-extern unsigned char LAB_00385898; /* 0x385898 */
 extern unsigned char LAB_00385a6c; /* 0x385a6c */
 extern unsigned char LAB_00385a80; /* 0x385a80 */
 extern unsigned char LAB_00385a90; /* 0x385a90 */
@@ -89,18 +84,18 @@ void FUN_00385448(unsigned int *param_1)
     param_1[0x3ec] = 7;
     temp_v4 = storyModeCanProceed((char)param_1[6]);
     if (temp_v4 != 0) {
-      scrScriptProcessStartMappedEntry(param_1,&LAB_00385854);
+      scrScriptProcessStartMappedEntry(param_1,"qc_N_Route");
     }
     else if ((char)param_1[6] != '\x02') {
       if ((char)param_1[6] != '\x03') {
-        scrScriptProcessStartMappedEntry(param_1,&LAB_00385860);
+        scrScriptProcessStartMappedEntry(param_1,"qc_LookBoard");
       }
       else {
-        scrScriptProcessStartMappedEntry(param_1,&LAB_0038587c);
+        scrScriptProcessStartMappedEntry(param_1,"qc_C_Tokyo");
       }
     }
     else {
-      scrScriptProcessStartMappedEntry(param_1,&LAB_00385870);
+      scrScriptProcessStartMappedEntry(param_1,"qc_L_Tokyo");
     }
     temp_v5 = param_1[2] + 1;
     param_1[2] = temp_v5;
@@ -162,7 +157,7 @@ void FUN_00385448(unsigned int *param_1)
           *(unsigned char *)(param_1 + 0x355) = 0;
           temp_v4 = storyModeCanProceed((char)param_1[6]);
           if (temp_v4 != 0) {
-            scrScriptProcessStartMappedEntry(param_1,&LAB_00385898);
+            scrScriptProcessStartMappedEntry(param_1,"qc_N_RouteReAct");
             param_1[2] = 7;
             return;
           }

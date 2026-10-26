@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail passes live-in r6 as asdOperatorNew's second argument without initializing r6; unit boundary/signature needs recovery. */
 #include "romwright_types.h"
 #include "shard/S2UiTexLoader.h"
+#include "event/2dEvent/EventEffect.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int campButtonHelpLoad(void);
 int campCommonBgAcquire(void);
 int FUN_0031e198(void);
 int campButtonHelpAcquire(void);
-int FUN_003b61ec(void);
 int soundResetSpatialState(void);
 int FUN_004930e4(int);
 void mikadoInitUpdateHandlers(UiScreen*);

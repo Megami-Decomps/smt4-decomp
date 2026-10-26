@@ -6,6 +6,7 @@
 #include "gamedata/SaveLoadProcess.h"
 #include "status/StatusCamera.h"
 #include "font/ComWin/ComWin.h"
+#include "code/Code0017_Smt4.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ int eventQueueAddUnique(...);
 int FUN_002e3378(...);
 int FUN_003ae34c(...);
 
-int FUN_0017fbc4(void);
 int scrRunOpcodesStub(...);
 int FUN_0026beb4(...);
 int FUN_0026c214(void);

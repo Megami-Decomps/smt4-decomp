@@ -1,4 +1,3 @@
-/* NON_MATCHING: payload-address and table-size scratch registers r1/r2 are exchanged. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -20,7 +19,8 @@ PolyGeomBlock *effPolyFlashGeomCreate3(PolyParams *params)
     asdDebugTrace(DAT_00410408, 857);
     block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
-    block->data = block->payload;
+    u8 *payload = block->payload;
+    block->data = payload;
     block->self = block;
     block->geom = FUN_00247334(segments & 0xffff, 12, 13, &DAT_0047377a, 72);
     return block;

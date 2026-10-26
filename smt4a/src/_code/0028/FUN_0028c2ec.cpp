@@ -1,7 +1,7 @@
 /* NON_MATCHING: near-structure (172 rows against 203): same skip test, special-row cases, member/row loops and index maths from the asm; retail has extra armcc nops around calls (inlined stubs) and re-tests `target < 0` before the second special case, with the row pointer reloaded (ldr/rsb/str order) after each FUN_004bcbb4, which ours schedules differently */
 #include "battle/BtlMainAccess.h"
 #include "network/DataStore/DataStoreMain.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 typedef unsigned char u8;
 typedef signed char s8;
 typedef unsigned short u16;

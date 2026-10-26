@@ -33,7 +33,7 @@ typedef struct {
 } param_1_stack;
 
 extern int FUN_0047a1e0(...); /* 0x47a1e0 */
-extern unsigned char LAB_0047a298; /* 0x47a298 */
+extern unsigned char FUN_0047a298; /* 0x47a298 */
 extern unsigned char LAB_0047bc80; /* 0x47bc80 */
 extern int g_aocMain; /* 0x570260 */
 
@@ -111,7 +111,7 @@ void AocMenu::runConnectedProcess()
               pcVar5 = "Aoc guide CALC";
               asdProcessCreateSimple("Aoc guide CALC",4,0,0,FUN_0047a1e0,0,param_1);
               *puVar8 = (unsigned int)pcVar5;
-              taskCreateDraw("Aoc guide DOWN",0xec,1,0,&LAB_0047a298,0,param_1,pcVar5);
+              taskCreateDraw("Aoc guide DOWN",0xec,1,0,&FUN_0047a298,0,param_1,pcVar5);
             }
             param_1[2] = 3;
             *param_1 = *param_1 | 0x10;

@@ -1,6 +1,6 @@
 #include "addon/aocMain.h"
 #include "battle/EnemyDraw/EnemyDraw.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 

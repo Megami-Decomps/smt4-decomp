@@ -1,12 +1,16 @@
-/* NON_MATCHING: retail keeps a stack frame and split address computation; the typed helper is emitted as a leaf. */
 #include "common.h"
+#include "ui/UiSpriteState.h"
 
 struct TargetState {
-    /* 0x000 */ u8 unk00[0x24e];
-    /* 0x24e */ s8 active;
+    /* 0x000 */ u8 unk00[0x1c4];
+    /* 0x1c4 */ UiSpriteState sprite;
 };
-/* Reports whether the target's active byte is set. */
-extern "C" s32 FUN_0031f524(const TargetState *target)
+extern "C" {
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
+
+/* Reports whether the target's sprite has a completion state set. */
+s32 FUN_0031f524(const TargetState *target)
 {
-    return target->active != 0;
+    return uiSpriteGetCompletionState(&target->sprite) != 0;
+}
 }

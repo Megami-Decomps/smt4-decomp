@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: the y/x offset loads use r1/r2/r3 where retail reuses the pool-constant register (r2, r1); the FUN_0029a17c argument loads are scheduled in a different order. */
 #include "camp/RenderCtx.h"
-#include "shard/packNibblesAndByte.h"
+#include "util/BitsAndBytes_VariantA.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 /* A texture-table entry as the draw routine reads it. */

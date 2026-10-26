@@ -1,6 +1,5 @@
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
-
+#include "util/BitsAndBytes.h"
 struct RenderStateScopeWork { u8 prefix[0xC]; u32 state; };
 extern "C" {
 extern RenderCtxA *g_renderCtx;

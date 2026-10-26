@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses push {r4, r5, r6, r7, r8, lr} where the compiled block uses push {r4, r5, r6, lr}. */
+/* NON_MATCHING: control flow now matches (shared return 0, nop/b); retail hoists the constants 0 (r7) and 1 (r1) to the top and so pushes r7/r8. */
 #include "quest_center/qcMain.h"
 extern "C" QcGlobalsA g_qcMain;
 
@@ -19,19 +19,17 @@ u32 FUN_00168d38(u32 parameter)
 
     if (jobFind(work->task) == 0 && work->done != 0) {
         work = g_qcMain.work;
-        if (work == NULL) {
-            return 0;
+        if (work != NULL) {
+            QuestEntry *entry = work->entry;
+            work->done = 1;
+            if (entry != NULL) {
+                scriptPanelRelease(entry);
+                asdOperatorDelete(work->entry);
+                work->entry = NULL;
+            }
+            asdMemFree(g_qcMain.work);
+            g_qcMain.work = NULL;
         }
-
-        QuestEntry *entry = work->entry;
-        work->done = 1;
-        if (entry != NULL) {
-            scriptPanelRelease(entry);
-            asdOperatorDelete(work->entry);
-            work->entry = NULL;
-        }
-        asdMemFree(g_qcMain.work);
-        g_qcMain.work = NULL;
         return 0;
     }
 

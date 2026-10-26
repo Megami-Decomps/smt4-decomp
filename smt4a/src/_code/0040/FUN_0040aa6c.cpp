@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_0040aa6c.h"
+#include "code/Code0040.h"
 struct ResourceOwner { u8 unk00[16]; void *resource; };
 extern "C" {
 void *asdLoadFileSyncNoContext(const char *name,u32 flags,u32 mode,u32 alignment);

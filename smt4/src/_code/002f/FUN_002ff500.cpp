@@ -3,7 +3,7 @@
 #include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"
-#include "util/btlScriptResolveGroupArg.h"
+#include "battle/BattleHelpers.h"
 
 extern "C" {
 u32 scrGetArg(s32 argument);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads both queue words with ldm and keeps the +1/-1 in the flush count, and reloads the preset base before the force-black test. */
+/* NON_MATCHING: retail loads both queue words with ldm (begin, end) and keeps the +1 and -1 as separate adds in the flush count (armcc folds them or emits subgt); the build also adds a nop before the force-black test when it goes through asdGxGetBlackForced. */
 #include "shard/W6_W6Match3_GxPresetResumeState.h"
 
 extern "C" {
@@ -7,6 +7,7 @@ void asdFileWakeWorker(void);
 void asdGxSetTopScreenMode(u32 mode);
 void gxLcdClearForceBlack(void);
 void FUN_00113244(u32 command);
+u8 asdGxGetBlackForced(const GxPresetResumeState *presets);
 
 /* Flush the queued GX commands, wake the file worker, then apply a pending top-screen preset. */
 void FUN_001052d8(void)
@@ -32,7 +33,7 @@ void FUN_001052d8(void)
             break;
         }
     }
-    if (!g_asdGxPresets.forceBlackCleared) {
+    if (!asdGxGetBlackForced(&g_asdGxPresets)) {
         gxLcdClearForceBlack();
         g_asdGxPresets.forceBlackCleared = 1;
     }

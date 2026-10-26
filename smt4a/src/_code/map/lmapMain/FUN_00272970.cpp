@@ -1,7 +1,7 @@
 /* NON_MATCHING: creates and initialises the lmap main state (0x9370 bytes) and starts its calc and draw tasks; written from the decompilation, store order and constant materialisation not compared with retail */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 /* One of the 0x88-byte lmap slots; the first three bytes are cleared here. The last slot of the
  * first array also holds three words that are set separately. */

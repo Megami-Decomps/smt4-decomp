@@ -38,7 +38,7 @@ extern void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha,
 extern void FUN_0022d9c8(RowPanel *panel, s32 kind, s32 index, s32 selected, s32 alpha, s32 color);
 extern void FUN_0022daac(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
 extern void FUN_0022db94(RowPanel *panel, u32 id, s32 index, s32 selected, s32 alpha);
-extern void FUN_0022dcac(RowPanel *panel, s32 a, u32 id, s32 index, s32 selected, s32 alpha);
+extern void demonIconPanelDrawRow(RowPanel *panel, s32 a, u32 id, s32 index, s32 selected, s32 alpha);
 extern void drawTextAtRelativePosition(u8 *layout, s32 a, s32 x, s32 y, s32 b, s32 c, u32 color, s32 alpha, u8 *text);
 extern RowRecord *dataTable00FindById(u16 id);
 extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
@@ -69,7 +69,7 @@ void FUN_003a9df4(RowPanel *panel, s32 index, s32 selected, u32 id)
     if (selected != 0) {
         uiDrawScrollingSelectionEntry(panel, index, alpha, panel->cursor.row);
     }
-    FUN_0022dcac(panel, 1, id, index, selected, alpha);
+    demonIconPanelDrawRow(panel, 1, id, index, selected, alpha);
     FUN_0022db94(panel, id, index, selected, alpha);
     FUN_0022daac(panel, id, index, selected, alpha);
     record = dataTable00FindById(id);

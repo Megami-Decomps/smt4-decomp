@@ -172,6 +172,12 @@ static __inline void renderCtxPushA(RenderCtxA *context, int state)
     renderStackPush(&context->stackA, state);
 }
 
+/* renderCtxPushA through renderStackPushCountedDirect (depth kept in a local, apply condition written out). */
+static __inline void renderCtxPushACountedDirect(RenderCtxA *context, int state)
+{
+    renderStackPushCountedDirect(&context->stackA, state);
+}
+
 /* Pushes the evaluated state on the context's fourth stack (at 0x11EC). */
 static __inline void renderCtxPushD(RenderCtx *context, int state)
 {

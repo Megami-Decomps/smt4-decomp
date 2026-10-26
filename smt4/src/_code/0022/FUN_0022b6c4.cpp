@@ -1,5 +1,6 @@
 /* Resets the per-turn state of the context and arms the notification flag for its current entry. */
 #include "common.h"
+#include "code/Code0022_Smt4.h"
 
 extern "C" {
 

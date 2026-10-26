@@ -1,14 +1,14 @@
 /* NON_MATCHING: remaining native alpha argument and efctSetSpeed float arguments are absent from this draft; large render-stack and draw-expression differences remain. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0028.h"
 #include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
 int FUN_0025765c(...);
 int btlSourceGetMaxHp(int);
-int FUN_00269bf0(int);
+int btlLinkGetMaxHp(int);
 int FUN_002888a8(...);
 void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight);
 int FUN_002bdf94(...);
@@ -66,13 +66,11 @@ typedef struct {
     unsigned int spA0; /* 0xa0: local_a0 */
 } param_3_stack;
 
-extern unsigned char LAB_00251798; /* 0x251798 */
-extern unsigned char LAB_00251c04; /* 0x251c04 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_0025765c. */
 /* Supplied declaration required: btlSourceGetMaxHp. */
-/* Supplied declaration required: FUN_00269bf0. */
+/* Supplied declaration required: btlLinkGetMaxHp. */
 /* Supplied declaration required: FUN_002888a8. */
 extern int isLowThreshold(int, int);
 /* Supplied declaration required: FUN_00288ddc. */
@@ -127,7 +125,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
   if ((int)param_1->field_0x34 < 0) {
     temp_v7 = gameGetPlayerData();
     temp_v2 = gameGetPlayerName();
-    textFormatBuffer(temp_v17,&LAB_00251798,temp_v2);
+    textFormatBuffer(temp_v17,"%s",temp_v2);
     temp_v12 = (unsigned int)*(unsigned char *)(temp_v7 + 0x76);
     temp_v9 = -1;
     temp_v13 = (int)*(short *)(temp_v7 + 0x2c);
@@ -141,13 +139,13 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
     temp_v3 = reinterpret_cast<int>(gameGetUnitRecord((s32)param_1->field_0x34));
     if (temp_v3 != 0) {
       temp_v2 = FUN_002bd068(*(unsigned short *)(temp_v3 + 0x46));
-      textFormatBuffer(temp_v17,&LAB_00251798,temp_v2);
+      textFormatBuffer(temp_v17,"%s",temp_v2);
       temp_v12 = (unsigned int)*(unsigned char *)(temp_v3 + 0x48);
       temp_v13 = (int)*(short *)(temp_v3 + 0x2c);
       temp_v8 = (int)*(short *)(temp_v3 + 0x2a);
       temp_v9 = (int)*(short *)(temp_v3 + 0x46);
       temp_v7 = temp_v3;
-      FUN_00269bf0(temp_v3);
+      btlLinkGetMaxHp(temp_v3);
       temp_v14 = (int)*(short *)(temp_v3 + 0x10);
       temp_v15 = FUN_00288ddc((int)(short)temp_v7,temp_v9);
     }
@@ -238,7 +236,7 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
       else {
         FUN_002bf288(2,0x19,0x3f,param_2,param_3,0x6f);
         drawSetColorFromRGBA8(0x292929ff);
-        textFormatBuffer(temp_v16,&LAB_00251c04,temp_v12);
+        textFormatBuffer(temp_v16,"%d",temp_v12);
         temp_v9 = asdTMTexTableEntryAt(0x19,0x53);
         FUN_002bdf94(1,*(short *)(temp_v9 + 8) + param_2,*(short *)(temp_v9 + 10) + param_3,1,2,0x79,
                      temp_v16);
@@ -312,12 +310,12 @@ void FUN_0025141c(fn_0025141c_arg0 *param_1,int param_2,int param_3)
         temp_v2 = 0x6ef0ffff;
         drawSetColorFromRGBA8(temp_v2);
       }
-      textFormatBuffer(temp_v16,&LAB_00251c04,temp_v8);
+      textFormatBuffer(temp_v16,"%d",temp_v8);
       temp_v7 = asdTMTexTableEntryAt(0x19);
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);
       FUN_002bed3c();
-      textFormatBuffer(temp_v16,&LAB_00251c04,temp_v13);
+      textFormatBuffer(temp_v16,"%d",temp_v13);
       temp_v7 = asdTMTexTableEntryAt(0x19,0x1d);
       FUN_002bdf94(2,*(short *)(temp_v7 + 8) + param_2,*(short *)(temp_v7 + 10) + param_3,1,4,0x79,
                    temp_v16);

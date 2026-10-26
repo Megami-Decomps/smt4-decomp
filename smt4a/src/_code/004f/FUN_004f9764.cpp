@@ -2,7 +2,7 @@
 #include "common.h"
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 /* The effect names of one battle, 0x16 bytes each, after a 0x108 byte header. */
 struct BtlEffectNameTable {

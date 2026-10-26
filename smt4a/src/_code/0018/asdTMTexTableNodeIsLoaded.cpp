@@ -1,7 +1,6 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "util/AsdTMTexTableNodeIsLoaded.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantD.h"
 
 extern "C" {
 

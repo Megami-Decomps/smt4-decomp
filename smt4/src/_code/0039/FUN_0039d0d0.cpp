@@ -9,8 +9,8 @@ int effectSetByteSpeed(...);
 int FUN_002b0750(...);
 int drawSetColorFromRGBA8(...);
 int FUN_002bed3c(void);
-int FUN_002bedb0(...);
-int FUN_002bee04(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_002c0944(...);
 int renderCtxSelectTexture(...);
 int FUN_002c5d80(...);
@@ -38,8 +38,8 @@ extern signed char DAT_0049fd00; /* 0x49fd00 */
 /* Supplied declaration required: FUN_002b0750. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_002bed3c. */
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_002c5d80. */
@@ -63,7 +63,7 @@ void FUN_0039d0d0(int param_1)
   pairCopy(param_1 + 0x164,&temp_v7);
   if (DAT_0049fcfc == 0) {
     temp_v1 = FUN_002c5d80(1);
-    FUN_002bee04(g_titleScene,3,temp_v1);
+    renderStackPushIndexed(g_titleScene,3,temp_v1);
     renderCtxSelectTexture(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < *(int *)(param_1 + 0x121b4)) {
@@ -84,10 +84,10 @@ void FUN_0039d0d0(int param_1)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(int *)(param_1 + 0x121b4));
     }
-    FUN_002bedb0(g_titleScene,3);
+    renderCtxPopState(g_titleScene,3);
   }
   temp_v1 = FUN_002c5d80(3,0);
-  FUN_002bee04(g_titleScene,3,temp_v1);
+  renderStackPushIndexed(g_titleScene,3,temp_v1);
   temp_v3 = 0;
   if (temp_v3 < *(int *)(param_1 + 0x61b0)) {
     do {
@@ -106,10 +106,10 @@ void FUN_0039d0d0(int param_1)
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < *(int *)(param_1 + 0x61b0));
   }
-  FUN_002bedb0(g_titleScene,3);
+  renderCtxPopState(g_titleScene,3);
   if (DAT_0049fd00 != '\0') {
     temp_v1 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v1);
+    renderStackPushIndexed(g_titleScene,3,temp_v1);
     renderCtxSelectTexture(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < *(int *)(param_1 + 0x121b4)) {
@@ -145,10 +145,10 @@ void FUN_0039d0d0(int param_1)
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < *(int *)(param_1 + 0x121b4));
     }
-    FUN_002bedb0(g_titleScene,3);
+    renderCtxPopState(g_titleScene,3);
   }
   temp_v1 = FUN_002c5d80(1,0);
-  FUN_002bee04(g_titleScene,3,temp_v1);
+  renderStackPushIndexed(g_titleScene,3,temp_v1);
   temp_v3 = 0;
   if (temp_v3 < *(int *)(param_1 + 0x5a88)) {
     do {
@@ -168,7 +168,7 @@ void FUN_0039d0d0(int param_1)
     } while (temp_v3 < *(int *)(param_1 + 0x5a88));
   }
   FUN_002bed3c();
-  FUN_002bedb0(g_titleScene,3);
+  renderCtxPopState(g_titleScene,3);
   return;
 }
 

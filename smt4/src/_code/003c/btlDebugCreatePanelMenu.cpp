@@ -1,6 +1,6 @@
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
-#include "util/AsdListBoxCreateDefault.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 extern "C" {
 extern AsdListBoxEntry DAT_00434d48[];

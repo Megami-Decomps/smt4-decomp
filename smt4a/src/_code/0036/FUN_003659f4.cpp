@@ -1,4 +1,4 @@
-/* NON_MATCHING: actor/index and coordinate registers differ; effect-branch placement and VFP scheduling differ. */
+/* NON_MATCHING: block layout and effect-vector setup now match retail (scaled arm first, vector computed before the input-blocked test); remaining: callee-saved/VFP register numbering (retail loop index r4/record r5, x/y/z in s18/s16/s17) and the order of the scaling multiplies. */
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 
@@ -23,15 +23,15 @@ void FUN_003659f4(f32 x, f32 y, f32 z)
             union { f32 value; s32 bits; } distance;
             distance.value = distSpatial(x, y, z, record->position.x, record->position.y, record->position.z);
             if (distance.bits < 0x41200000) {
+                f32 effectX = record->position.x;
+                f32 effectY = y + 120.0f;
+                f32 effectZ = record->position.z;
                 if (!g_gameState.inputBlocked) {
-                    f32 effectX = record->position.x;
-                    f32 effectY = y + 120.0f;
-                    f32 effectZ = record->position.z;
-                    if (record->display.category != 0x31 && record->display.category != 0x30) {
-                        FUN_003d4ed8(0x10002ab, effectX, effectY, effectZ);
-                    } else {
+                    if (record->display.category == 0x31 || record->display.category == 0x30) {
                         FUN_003d4ed8(0x10002ab, effectX * 0.33333334f,
                                      effectY * 0.33333334f, effectZ * 0.33333334f);
+                    } else {
+                        FUN_003d4ed8(0x10002ab, effectX, effectY, effectZ);
                     }
                 }
                 record->state = 7;

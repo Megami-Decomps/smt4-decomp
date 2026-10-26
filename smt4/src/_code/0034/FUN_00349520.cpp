@@ -1,6 +1,6 @@
 /* NON_MATCHING: the stack frame differs (retail 300 bytes with the 40-byte state above the 256-byte tile buffer, built 376) and the tile index arithmetic is scheduled differently (174 vs 185 rows). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 

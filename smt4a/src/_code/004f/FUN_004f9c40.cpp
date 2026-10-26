@@ -1,7 +1,7 @@
 /* NON_MATCHING: assist-slot loop, path buffers and cache-name addresses use different saved registers. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 struct AssistEffectSlot {
     u8 index;

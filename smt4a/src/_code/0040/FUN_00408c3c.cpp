@@ -29,7 +29,6 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern unsigned char LAB_00409014; /* 0x409014 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
@@ -167,7 +166,7 @@ void FUN_00408c3c(int param_1)
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_00180310(0,(int)(*(float *)(param_1 + 0x80) + (float)((unsigned long long)temp_v12 >> 0x20) + temp_v13),
                (int)(*(float *)(param_1 + 0x84) + (float)((unsigned long long)temp_v9 >> 0x20)),1,
-               *(unsigned int *)(param_1 + 0xf0),0x42,&LAB_00409014,*(unsigned int *)(param_1 + 0x28));
+               *(unsigned int *)(param_1 + 0xf0),0x42,"%d",*(unsigned int *)(param_1 + 0x28));
   temp_v13 = (float)VectorSignedToFloat((int)temp_v12,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x88) + (float)((unsigned long long)temp_v12 >> 0x20) + temp_v13
                            ),(unsigned char)(in_fpscr >> 0x16) & 3);

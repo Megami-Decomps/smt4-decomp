@@ -1,6 +1,6 @@
 /* NON_MATCHING: the scratch VFP register for unsigned line-height conversion is s1 instead of retail s2. */
 #include "common.h"
-#include "util/GameGetPlayerName.h"
+#include "gamedata/GameDataAccess.h"
 #include "addon/LookupRecord.h"
 
 struct StatusHelpRecord {

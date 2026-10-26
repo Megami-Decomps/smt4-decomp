@@ -13,9 +13,9 @@ typedef struct {
 
 extern int FUN_0034068c(...); /* 0x34068c */
 extern int objectRegisterPart(...); /* 0x3472c8 */
-extern unsigned char LAB_0034883c; /* 0x34883c */
-extern unsigned char LAB_003494f0; /* 0x3494f0 */
-extern unsigned char LAB_00376968; /* 0x376968 */
+extern unsigned char frameHeapInitializeRange; /* 0x34883c */
+extern unsigned char FUN_003494f0; /* 0x3494f0 */
+extern unsigned char FUN_00376968; /* 0x376968 */
 extern int FUN_00376d14(...); /* 0x376d14 */
 extern unsigned int DAT_00464ff8; /* 0x464ff8 */
 extern unsigned int DAT_00464ffc; /* 0x464ffc */
@@ -45,16 +45,16 @@ void FUN_003f1cb8(unsigned int param_1,unsigned int param_2,unsigned int *param_
   temp_v0 = temp_v0 + 0x278;
   __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_0034068c,0x50,4);
   temp_v0 = temp_v0 + 0x140;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_0034883c,0x3c,2);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&frameHeapInitializeRange,0x3c,2);
   temp_v0 = temp_v0 + 0x78;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_003494f0,0x10,2);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&FUN_003494f0,0x10,2);
   temp_v0 = temp_v0 + 0x20;
   __aeabi_vec_ctor_nocookie_nodtor(temp_v0,objectRegisterPart,0x3c,4);
   temp_v0 = FUN_00377174(temp_v0 + 0xf0);
   temp_v0 = temp_v0 + 0x3c;
   __aeabi_vec_ctor_nocookie_nodtor(temp_v0,FUN_00376d14,0x84,0x10);
   temp_v0 = temp_v0 + 0x840;
-  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&LAB_00376968,4,0x10);
+  __aeabi_vec_ctor_nocookie_nodtor(temp_v0,&FUN_00376968,4,0x10);
   temp_v0 = nw_snd_Sound3DListener_Sound3DListener_sub_object(temp_v0 + 0x100);
   *(unsigned int *)(temp_v0 + 0xf4) = 0;
   *(unsigned int *)(temp_v0 + 0xf8) = 0;

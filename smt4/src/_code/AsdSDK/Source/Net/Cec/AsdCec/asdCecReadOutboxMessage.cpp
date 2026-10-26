@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before the message buffer allocation. */
 #include "nn/Result.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
-#include "shard/asdCecMessageBoxClose.h"
+#include "network/CecControl_AsdCec.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

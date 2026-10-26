@@ -1,7 +1,7 @@
 /* NON_MATCHING: same logic as the other render-state push/pop users; the inlined renderStackPush/Pop helpers schedule their index arithmetic differently and the effect null checks branch differently */
 #include "camp/RenderCtx.h"
 #include "shard/JobWork.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0038.h"
 
 /* A battle effect part that draws a child object through the render state stack. */
 struct EffectChildVtable {

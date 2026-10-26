@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/QcActive_GetField20.h"
+#include "quest_center/QuestStatus.h"
 
 extern "C" {
 

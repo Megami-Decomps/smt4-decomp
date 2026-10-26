@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail explicitly tests eight resistances and uses a larger candidate frame; the loop is partially unrolled and switch cases are ordered differently. */
 #include "common.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 struct BattleResistances {
     /* 0x000 */ u8 unk000[0x2b6];

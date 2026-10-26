@@ -1,5 +1,6 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "code/Code004f_Smt4a.h"
 
 struct SourceEntry {
     s32 id;     // 0x00, negative when the slot is free

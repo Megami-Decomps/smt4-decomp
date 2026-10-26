@@ -137,13 +137,13 @@ typedef struct {
     unsigned int spE0; /* 0xe0: local_e0 */
 } param_1_stack;
 
-extern unsigned char LAB_0014147c; /* 0x14147c */
-extern unsigned char LAB_00151b78; /* 0x151b78 */
-extern unsigned char LAB_00151b88; /* 0x151b88 */
-extern unsigned char LAB_00385b64; /* 0x385b64 */
-extern unsigned char LAB_00385b74; /* 0x385b74 */
-extern unsigned char LAB_003876b0; /* 0x3876b0 */
-extern unsigned char LAB_00387c68; /* 0x387c68 */
+extern unsigned char FUN_0014147c; /* 0x14147c */
+extern unsigned char compareRecordKey; /* 0x151b78 */
+extern unsigned char FUN_00151b88; /* 0x151b88 */
+extern unsigned char FUN_00385b64; /* 0x385b64 */
+extern unsigned char dataCompareUnsignedHalfwordKeys; /* 0x385b74 */
+extern unsigned char FUN_003876b0; /* 0x3876b0 */
+extern unsigned char FUN_00387c68; /* 0x387c68 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
@@ -1016,25 +1016,25 @@ void FUN_00385f74(fn_00385f74_arg0 *param_1)
     } while ((int)temp_v49 < param_1->field_0x310);
   }
   if (param_1->field_0x384 != 0) {
-    FUN_002b7bca(param_1->field_0x388,param_1->field_0x384,0x1b4,&LAB_00385b74);
+    FUN_002b7bca(param_1->field_0x388,param_1->field_0x384,0x1b4,&dataCompareUnsignedHalfwordKeys);
   }
   if (param_1->field_0x35c != 0) {
-    FUN_002b7bca(param_1->field_0x360,param_1->field_0x35c,0x94,&LAB_003876b0);
+    FUN_002b7bca(param_1->field_0x360,param_1->field_0x35c,0x94,&FUN_003876b0);
   }
   if (param_1->field_0x364 != 0) {
-    FUN_002b7bca(param_1->field_0x368,param_1->field_0x364,0xa8,&LAB_00385b64);
+    FUN_002b7bca(param_1->field_0x368,param_1->field_0x364,0xa8,&FUN_00385b64);
   }
   if (param_1->field_0x374 != 0) {
-    FUN_002b7bca(param_1->field_0x378,param_1->field_0x374,0x28,&LAB_00387c68);
+    FUN_002b7bca(param_1->field_0x378,param_1->field_0x374,0x28,&FUN_00387c68);
   }
   if (param_1->field_0x42c != 0) {
-    FUN_002b7bca(param_1->field_0x430,param_1->field_0x42c,0x18,&LAB_0014147c);
+    FUN_002b7bca(param_1->field_0x430,param_1->field_0x42c,0x18,&FUN_0014147c);
   }
   if (param_1->field_0x434 != 0) {
-    FUN_002b7bca(param_1->field_0x438,param_1->field_0x434,0x68,&LAB_00151b88);
+    FUN_002b7bca(param_1->field_0x438,param_1->field_0x434,0x68,&FUN_00151b88);
   }
   if (param_1->field_0x43c != 0) {
-    FUN_002b7bca(param_1->field_0x440,param_1->field_0x43c,0x3c,&LAB_00151b78);
+    FUN_002b7bca(param_1->field_0x440,param_1->field_0x43c,0x3c,&compareRecordKey);
   }
   temp_v2 = 0;
   if (temp_v2 < param_1->field_0x310) {

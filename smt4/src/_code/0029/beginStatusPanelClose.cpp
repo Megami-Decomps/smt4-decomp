@@ -2,6 +2,7 @@
 #include "shard/GameGlobals.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "status/StatusCamera.h"
+#include "map/MapSceneAccess_Smt4.h"
 
 class StatusScreenModel {
 public:
@@ -9,7 +10,6 @@ public:
 };
 extern "C" {
 void nodeOwnerSetTranslations(StatusScreenModel *, const Vec3 *);
-void lmapSceneSetUnk134(s32);
 void statusCameraDestroy();
 void mdlPartsRelease(void *model);
 s32 lmapMainIsRunning();

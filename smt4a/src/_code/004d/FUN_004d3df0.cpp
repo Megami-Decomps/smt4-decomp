@@ -2,7 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern unsigned int DAT_00571634; /* 0x571634 */
 /* Supplied declaration required: btlGetMainState. */
 extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetIntItem. */
-extern unsigned int FUN_0031cfd0(unsigned short);
 /* Supplied declaration required: FUN_0031f0f4. */
 extern int listBoxItemHasOwner(unsigned int, unsigned int);
 /* Supplied declaration required: asdListBoxSetToggleItem. */

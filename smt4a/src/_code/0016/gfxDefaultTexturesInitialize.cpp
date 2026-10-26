@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match7_DefaultTextureWork.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "util/GfxTexture2DCreate.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantB.h"
 
 extern "C" {
 extern DriverTextureAllocate *g_gfxAllocateCallback;

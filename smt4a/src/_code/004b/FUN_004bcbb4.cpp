@@ -3,7 +3,8 @@
 #include "shard/Shard004B.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W9_W9Match7_ModifierLists.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
+#include "code/Code004b_Smt4a.h"
 
 extern "C" {
 s32 gameDataFlagTestBit(u32 bit);

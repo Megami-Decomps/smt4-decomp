@@ -2,11 +2,11 @@
 #include "gamedata/DataTable.h"
 #include "gamedata/GameFlags.h"
 #include <stddef.h>
+#include "addon/AocSystem_Smt4.h"
 
 extern "C" {
 
 s32 gameFlagIsSet(u32 flag);
-void *aocEntryFind(u8 keyA, u8 keyB);
 void *gameDataGetTableEntry(u8 keyA, u8 keyB);
 void FUN_002c0a9c(u32 keyA, u32 keyB, s32 value);
 

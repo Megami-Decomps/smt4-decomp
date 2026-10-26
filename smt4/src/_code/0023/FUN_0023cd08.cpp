@@ -4,7 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
-#include "util/FUN_0027d9e8.h"
+#include "code/Code0027.h"
 
 struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[50]; };
 

@@ -11,7 +11,7 @@ int FUN_002505c0(int, int, int, int, int, int, int);
 int objectFlagsClear(...);
 int rt_memclr(...);
 int __aeabi_memset4(...);
-int FUN_003369e0(int, unsigned int, int);
+int keyedAccumulatorAdd(int, unsigned int, int);
 int objectTotalAdd(int);
 int FUN_00337a34(int);
 int FUN_003390dc(int, int, int);
@@ -38,7 +38,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: rt_memclr. */
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_003369e0. */
+/* Supplied declaration required: keyedAccumulatorAdd. */
 /* Supplied declaration required: objectTotalAdd. */
 /* Supplied declaration required: FUN_00337a34. */
 /* Supplied declaration required: FUN_003390dc. */
@@ -129,7 +129,7 @@ void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
         temp_v2 = puVar6[0x9c];
         do {
           if (puVar6[temp_v2 + 0x96] != 0) {
-            FUN_003369e0(temp_v1,puVar6[temp_v2 + 0x96],1);
+            keyedAccumulatorAdd(temp_v1,puVar6[temp_v2 + 0x96],1);
             puVar6[temp_v2 + 0x96] = 0;
           }
           temp_v2 = temp_v2 - 1;

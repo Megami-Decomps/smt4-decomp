@@ -1,5 +1,6 @@
 /* NON_MATCHING: vector initialization is an explicit loop rather than retail's C++ array-construction helper. */
 #include "common.h"
+#include "util/BitsAndBytes.h"
 
 struct DefaultVector4 {
     /* 0x00 */ f32 x;
@@ -18,7 +19,6 @@ extern u32 DAT_0044ea20[2];
 extern GraphicsVectorDefaults DAT_004d4680;
 extern u32 DAT_004d4914[4];
 void vectorSetAllOne(DefaultVector4 *vector);
-u32 packNibblesAndByte(u32 first, u32 second, u32 byte);
 
 void FUN_003ec998(u32 first, u32 second, u32 *output)
 {

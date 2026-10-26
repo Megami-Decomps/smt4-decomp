@@ -36,15 +36,8 @@ typedef struct {
 } void_stack;
 
 extern int FUN_002bfd94(...); /* 0x2bfd94 */
-extern unsigned char LAB_002c0240; /* 0x2c0240 */
+extern unsigned char FUN_002c0240; /* 0x2c0240 */
 extern int FUN_00343e5c(...); /* 0x343e5c */
-extern unsigned char LAB_0037bbe4; /* 0x37bbe4 */
-extern unsigned char LAB_0037bbfc; /* 0x37bbfc */
-extern unsigned char LAB_0037bc18; /* 0x37bc18 */
-extern unsigned char LAB_0037bc38; /* 0x37bc38 */
-extern unsigned char LAB_0037bc58; /* 0x37bc58 */
-extern unsigned char LAB_0037bc6c; /* 0x37bc6c */
-extern unsigned char LAB_0037bc84; /* 0x37bc84 */
 extern unsigned char DAT_0052c050; /* 0x52c050 */
 extern unsigned char DAT_0052c104; /* 0x52c104 */
 extern unsigned char DAT_0052c254; /* 0x52c254 */
@@ -100,19 +93,18 @@ void FUN_0037b7e4(void)
   }
   puVar2 = g_campCecRanking;
   sysMemClear();
-  puVar3 = &LAB_0037bbe4;
   temp_v7 = 0;
-  asdProcessCreateSimple(&LAB_0037bbe4,3,0,0,&LAB_002c0240,0);
+  asdProcessCreateSimple("CampCecRanking Calc",3,0,0,&FUN_002c0240,0);
   *puVar2 = (unsigned int)puVar3;
   temp_v7 = 0;
   temp_v8 = puVar3;
-  taskCreateDraw(&LAB_0037bbfc,0x7e,0,0,FUN_002bfd94,0);
+  taskCreateDraw("CampCecRanking DrawUpLeft",0x7e,0,0,FUN_002bfd94,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v7 = 0;
-  taskCreateDraw(&LAB_0037bc18,0xda,0,0,FUN_002bfd94,0);
+  taskCreateDraw("CampCecRanking DrawUpRight",0xda,0,0,FUN_002bfd94,0);
   temp_v8 = (unsigned char *)*puVar2;
   temp_v7 = 0;
-  taskCreateDraw(&LAB_0037bc38,0xea,0,0,FUN_00343e5c,0);
+  taskCreateDraw("CampCecRanking DrawDown",0xea,0,0,FUN_00343e5c,0);
   puVar2[1] = 0;
   asdTMTexLoadMainHeap(0x2e,1);
   paramsClearPacket(puVar2 + 0x26);
@@ -134,8 +126,8 @@ void FUN_0037b7e4(void)
     puVar2[temp_v5 + 0x96] = temp_v1;
     temp_v5 = temp_v4;
   } while (temp_v4 < 7);
-  asdLoadFileAsyncSimple(&LAB_0037bc58,puVar2 + 0x2e,0);
-  asdLoadFileAsyncSimple(&LAB_0037bc6c,puVar2 + 0x2f,0);
+  asdLoadFileAsyncSimple("camp/CecMain_scr.bf",puVar2 + 0x2e,0);
+  asdLoadFileAsyncSimple("camp/CecMain_msg.mbm",puVar2 + 0x2f,0);
   puVar2 = g_campCecRanking;
   if (g_campCecRanking != (unsigned int *)0x0) {
     temp_v4 = gameDataBlocksGetSaveData();
@@ -174,7 +166,7 @@ void FUN_0037b7e4(void)
       temp_v2 = (unsigned int)*(unsigned short *)(puVar2 + temp_v5 * 3 + 0x31);
       if (temp_v2 != 0) {
         FUN_00180118();
-        textFormatBuffer(&temp_v7,&LAB_0037bc84,temp_v2);
+        textFormatBuffer(&temp_v7,"%s",temp_v2);
       }
       else {
         rt_aeabi_memclr(&temp_v7,0x80);
@@ -198,7 +190,7 @@ void FUN_0037b7e4(void)
         temp_v4 = FUN_0019e52c(temp_v0);
         if (temp_v4 != 0) {
           FUN_00180118();
-          textFormatBuffer(&temp_v7,&LAB_0037bc84,temp_v4);
+          textFormatBuffer(&temp_v7,"%s",temp_v4);
         }
         else {
           rt_aeabi_memclr(&temp_v7,0x80);

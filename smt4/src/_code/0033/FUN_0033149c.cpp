@@ -34,9 +34,6 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } param_1_stack;
 
-extern unsigned char LAB_00331944; /* 0x331944 */
-extern unsigned char LAB_0033196c; /* 0x33196c */
-extern unsigned char LAB_0033197c; /* 0x33197c */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -98,7 +95,7 @@ void FUN_0033149c(int param_1)
   FUN_002bf288(2,0x1d,0x57f,temp_v0,temp_v1,0x6a);
   temp_v2 = asdTMTexTableEntryAt(0x1d,0x583);
   temp_v3 = FUN_00295cec();
-  textFormatBuffer(temp_v13,&LAB_00331944,temp_v3);
+  textFormatBuffer(temp_v13,"%u",temp_v3);
   FUN_002bdf94(0,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,1,4,0x6a,temp_v13);
   temp_v9 = 0;
   temp_v2 = FUN_0029d644(param_1 + 0x10);
@@ -133,7 +130,7 @@ void FUN_0033149c(int param_1)
               if (temp_v5 == 2) {
                 temp_v11 = 0x5a5a5aff;
                 temp_v12 = 0x787878ff;
-                textFormatBuffer(temp_v13,&LAB_0033197c);
+                textFormatBuffer(temp_v13,"\?\?\?");
               }
             }
             else {
@@ -141,7 +138,7 @@ void FUN_0033149c(int param_1)
               temp_v12 = 0xdc0f14ff;
               temp_v5 = temp_v10;
               dataTable0BGetValueById(temp_v10);
-              textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
+              textFormatBuffer(temp_v13,"%d",temp_v5);
             }
           }
           else {
@@ -149,7 +146,7 @@ void FUN_0033149c(int param_1)
             temp_v11 = 0xff;
             temp_v5 = temp_v10;
             dataTable0BGetValueById(temp_v10);
-            textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
+            textFormatBuffer(temp_v13,"%d",temp_v5);
           }
           temp_v4 = asdTMTexTableEntryAt(0x1d,0x594);
           drawSetColorFromRGBA8(temp_v12);
@@ -233,7 +230,7 @@ void FUN_0033149c(int param_1)
           if (temp_v5 == 2) {
             temp_v11 = 0x787878ff;
             temp_v12 = 0x787878ff;
-            textFormatBuffer(temp_v13,&LAB_0033197c);
+            textFormatBuffer(temp_v13,"\?\?\?");
           }
         }
         else {
@@ -241,7 +238,7 @@ void FUN_0033149c(int param_1)
           temp_v12 = 0xdc0f14ff;
           temp_v5 = temp_v10;
           dataTable0BGetValueById(temp_v10);
-          textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
+          textFormatBuffer(temp_v13,"%d",temp_v5);
         }
       }
       else {
@@ -249,7 +246,7 @@ void FUN_0033149c(int param_1)
         temp_v12 = 0xffffffff;
         temp_v5 = temp_v10;
         dataTable0BGetValueById(temp_v10);
-        textFormatBuffer(temp_v13,&LAB_0033196c,temp_v5);
+        textFormatBuffer(temp_v13,"%d",temp_v5);
       }
       temp_v9 = asdTMTexTableEntryAt(0x1d,0x59d);
       drawSetColorFromRGBA8(temp_v12);

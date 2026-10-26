@@ -2,6 +2,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/JobWork.h"
+#include "code/Code0023_Smt4a.h"
 
 extern "C" {
 
@@ -45,7 +46,6 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern unsigned int FUN_0023b4a4(unsigned int);
 /* Supplied declaration required: __aeabi_memcpy4. */
 
 

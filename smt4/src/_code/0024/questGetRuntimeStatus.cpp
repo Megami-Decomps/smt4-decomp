@@ -1,6 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
-#include "util/QuestGetRuntimeStatus.h"
+#include "quest_center/QuestStatus.h"
 
 extern "C" {
 

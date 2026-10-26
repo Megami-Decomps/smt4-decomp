@@ -2,7 +2,6 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 

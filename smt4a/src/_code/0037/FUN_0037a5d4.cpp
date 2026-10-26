@@ -1,7 +1,7 @@
 /* NON_MATCHING: resumable voice loading uses different saved registers and table/gain load scheduling. */
 #include "shard/GlobalBlocks.h"
 #include <stddef.h>
-#include "util/ScrGetCommandFrame.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern u32 DAT_00588fcc;

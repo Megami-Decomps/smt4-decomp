@@ -3,12 +3,12 @@
 #define SHARD_S1NWGFX_H
 
 #include "common.h"
+#include "nw/gfx/SizeCalculator.h"
 #include <stddef.h>
 
 /* nw::ut::RelativePointer */
 typedef struct RelativePointer {
     /* 0x00 */ s32 offset;
-
 
     void *get() const
     {
@@ -39,13 +39,6 @@ typedef struct ShapeResource {
     /* 0x00 */ u8 unk00[0x30];
     /* 0x30 */ RelativePointer streamList; /* relative pointer to ShapeStreamList */
 } ShapeResource;
-
-/* Running size/alignment of a memory block layout. */
-typedef struct SizeCalculator {
-    /* 0x00 */ u32 size;
-    /* 0x04 */ u32 alignment;
-    /* 0x08 */ u32 maxAlignment;
-} SizeCalculator;
 
 /* Six self-relative vertex buffers share a resource element count. */
 struct VertexBufferStorage {

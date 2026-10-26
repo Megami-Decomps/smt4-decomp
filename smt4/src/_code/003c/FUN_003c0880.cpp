@@ -1,6 +1,6 @@
 /* NON_MATCHING: state publication hoists constant 2 and duplicates the return-zero epilogue instead of retail's shared state-store exit; result-copy and flag-clear scratch allocation also differs. */
 #include "script/scrScriptProcess.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0024.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 
 struct BattleStepContext {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail reaches the quest-center globals (DAT_00588c30 block, +4/+8/+0x10 fields) through one base register and orders the flag-chain tests with shared branch targets; this version loads each global separately. The state machine, calls and stored values are the same. */
 #include "common.h"
 #include "result/WhisperEffect.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 namespace {
 /* The quest center's main block: its state, the active flag and the screen object. */
@@ -27,7 +28,6 @@ extern u32 DAT_005f19fc;
 extern s32 DAT_005f1a50;
 extern u8 DAT_005f1b70;
 extern s32 DAT_005f1b74;
-void *asdOperatorNew(u32 size);
 void asdOperatorDelete(void *block);
 s32 bgmGetStateById(u32 id);
 void FUN_003d4c68(u32 id);

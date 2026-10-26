@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 

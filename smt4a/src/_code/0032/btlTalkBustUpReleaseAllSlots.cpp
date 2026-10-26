@@ -1,5 +1,6 @@
 /* Releases every in-use slot of the manager and clears its active flag. */
 #include "common.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct SlotManager {
 
 extern SlotManager *g_btlTalkBustUp;
 
-extern void uiSpriteSelectAnim(void *sub, s32 arg);
 
 void btlTalkBustUpReleaseAllSlots(void)
 {

@@ -1,16 +1,17 @@
-/* NON_MATCHING: original C++ array constructor helper requires the still-unrecovered base class hierarchy. */
 #include "common.h"
-struct WorkItem { u8 data[4]; };
-struct WorkOwner { u8 unk00[32]; WorkItem items[8]; };
+
 extern "C" {
-WorkOwner *_ZN9Obj421f54C1Ev(WorkOwner *owner);
-void FUN_00376968(WorkItem *item);
-/* Initializes the owner, then constructs its eight embedded work items. */
-WorkOwner *FUN_0034068c(WorkOwner *owner)
+
+u8 *_ZN9Obj421f54C1Ev(u8 *object);
+void FUN_00376968(u8 *item);
+u8 *__aeabi_vec_ctor_nocookie_nodtor(u8 *member, void (*constructor)(u8 *), s32 size, s32 count);
+
+/* Initializes the owner, then constructs its eight embedded work items (0x20 onwards, 4 bytes each); returns the owner. */
+u8 *FUN_0034068c(u8 *owner)
 {
-    owner = _ZN9Obj421f54C1Ev(owner);
-    for (u32 index = 0; index < 8; ++index)
-        FUN_00376968(&owner->items[index]);
-    return owner;
+    u8 *object = _ZN9Obj421f54C1Ev(owner);
+
+    return __aeabi_vec_ctor_nocookie_nodtor(object + 0x20, FUN_00376968, 4, 8) - 0x20;
 }
-}
+
+} /* extern "C" */

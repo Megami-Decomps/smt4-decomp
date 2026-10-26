@@ -1,6 +1,6 @@
 /* NON_MATCHING: part address computation uses r5 instead of r0 before preserving it; shared success block matches. */
 #include "ui/PartyPanelState.h"
-#include "util/FUN_0029efa8.h"
+#include "code/Code0029_VariantB.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;

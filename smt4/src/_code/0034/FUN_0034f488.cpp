@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail clears the cursor with `str r1, [r4, #24]!` + `stm {r0, r5}` (a 64-bit zero at 0x1C?); armcc emits three plain stores of r5. */
 #include "common.h"
 
 /* The heap interface the buffer owner allocates through (nw::os::IAllocator layout). */
@@ -16,9 +15,8 @@ struct FrameBufferSize {
 
 /* Playback position within the frame buffer. */
 struct FrameBufferCursor {
-    /* 0x00 */ u32 frame;
-    /* 0x04 */ u32 unk04;
-    /* 0x08 */ u32 unk08;
+    /* 0x00 */ u64 submitted;
+    /* 0x08 */ u32 position;
 };
 
 struct FrameBufferOwner {
@@ -53,9 +51,8 @@ s32 FUN_0034f488(FrameBufferOwner *owner, u32 unused, const FrameBufferSize *siz
         owner->buffer = NULL;
         return 0;
     }
-    owner->cursor.frame = 0;
-    owner->cursor.unk04 = 0;
-    owner->cursor.unk08 = 0;
+    owner->cursor.submitted = 0;
+    owner->cursor.position = 0;
     return 1;
 }
 

@@ -1,6 +1,5 @@
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
-
+#include "util/BitsAndBytes.h"
 /* The terminal screen: its page and four slots (0xC bytes each). */
 struct TermScreenASlot {
     /* 0x0 */ u32 handle;

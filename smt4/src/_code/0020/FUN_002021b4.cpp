@@ -1,11 +1,11 @@
 /* NON_MATCHING: counter argument lifetimes and saturation stores use different registers. */
 #include "common.h"
 #include "event/2dEvent/Npc2d.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0034.h"
+#include "code/Code0034_Smt4.h"
 
 extern "C" {
 u32 scrGetArg(u32 index);
-void FUN_00343a74(u32 amount);
 void questCenterAddPoints(u32 amount);
 void gameAddPointsClamped(u32 amount);
 

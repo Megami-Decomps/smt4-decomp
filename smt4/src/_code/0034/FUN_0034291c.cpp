@@ -25,7 +25,6 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } param_1_stack;
 
-extern unsigned char LAB_00342c50; /* 0x342c50 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -134,7 +133,7 @@ void FUN_0034291c(int param_1)
   efctSetSpeed();
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_002bdf94(0,(int)(*(float *)(param_1 + 0x80) + temp_v9 + temp_v10),
-               (int)(*(float *)(param_1 + 0x84) + temp_v6),1,2,0x42,&LAB_00342c50,
+               (int)(*(float *)(param_1 + 0x84) + temp_v6),1,2,0x42,"%d",
                *(unsigned int *)(param_1 + 0x28));
   temp_v10 = (float)VectorSignedToFloat(temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat((int)(*(float *)(param_1 + 0x8c) + temp_v6),(unsigned char)(in_fpscr >> 0x16) & 3);

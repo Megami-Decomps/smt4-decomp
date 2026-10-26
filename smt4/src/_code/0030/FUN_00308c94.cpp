@@ -1,29 +1,22 @@
-/* NON_MATCHING: scheduling only: retail loads the array base first and moves the name argument after the pointer bump */
 #include "common.h"
 
 extern "C" {
 
-typedef struct NamedValue {
-    /* 0x00 */ u32 value;
-    /* 0x04 */ char name[0x40];
-} NamedValue;
-
-typedef struct Slot00308c94 {
+typedef struct SaveSlotInfo {
     /* 0x000 */ u8 unk000[0x134];
-    /* 0x134 */ NamedValue named;
-} Slot00308c94;  /* 0x178 */
+    /* 0x134 */ u32 id;
+    /* 0x138 */ char name[0x40];
+} SaveSlotInfo; /* 0x178 bytes */
 
-extern Slot00308c94 DAT_004a1264[];
+extern SaveSlotInfo DAT_004a1264[];
 
 char *libc_strcpy(char *dst, const char *src);
 
 /* Sets slot `index`'s value and name. */
 void FUN_00308c94(s32 index, u32 value, const char *name)
 {
-    NamedValue *named = &DAT_004a1264[index].named;
-
-    named->value = value;
-    libc_strcpy(named->name, name);
+    DAT_004a1264[index].id = value;
+    libc_strcpy(DAT_004a1264[index].name, name);
 }
 
 } /* extern "C" */

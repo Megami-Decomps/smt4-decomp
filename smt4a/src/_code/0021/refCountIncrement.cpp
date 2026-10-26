@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/refCountIncrement.h"
+#include "sys/RuntimeObjects_VariantC.h"
 
 extern "C" {
 

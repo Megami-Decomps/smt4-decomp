@@ -1,6 +1,6 @@
 /* NON_MATCHING: compiler recognizes the result high-bit mask as a signed comparison and removes the retail AND. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
-#include "shard/asdCecMessageBoxClose.h"
+#include "network/CecControl_AsdCec.h"
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 s32 asdCecMessageBoxOpen(AsdCecMessageBox *box,u32 first,u32 second);

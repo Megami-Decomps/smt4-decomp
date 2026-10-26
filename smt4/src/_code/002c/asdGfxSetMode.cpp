@@ -1,5 +1,5 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpersSmt4.h"
 
 extern "C" {
 

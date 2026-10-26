@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "event/2dEvent/Npc2d.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ int FUN_0025981c(void);
 int objectFlagsClear(unsigned int, int);
 int FUN_00262f78(void);
 int FUN_00262f94(void);
-int gameDataBlocksAddFlags(int);
 int FUN_0026b9bc(void);
 int textEncodeFontSlot(int, unsigned int [60]);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);

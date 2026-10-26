@@ -1,5 +1,6 @@
 /* NON_MATCHING: system pointer lifetime matches; duck-global and floating-zero pool entries remain reversed. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "shard/W6_W6Match7_SoundInit.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
@@ -9,7 +10,6 @@ void FUN_001177e0(void);
 void FUN_0010c350(void);
 void FUN_0010bf78(void);
 void sndSystemFinalize(void);
-void sndSystemShutdown(void);
 void FUN_0010fc90(void);
 void asdMemFree(void *block);
 

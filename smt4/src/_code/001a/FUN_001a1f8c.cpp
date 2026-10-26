@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "status/StatusCamera.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 
-int FUN_00295214(...);
 int FUN_0029ee54(...);
 int FUN_0029ee6c(...);
 int FUN_0029efd8(...);
@@ -28,7 +28,7 @@ typedef struct {
     unsigned int spB8; /* 0xb8: local_b8 */
 } void_stack;
 
-extern unsigned char LAB_001f62dc; /* 0x1f62dc */
+extern unsigned char recordCompareSignedValue; /* 0x1f62dc */
 extern int DAT_0043dd24; /* 0x43dd24 */
 
 /* Supplied declaration required: FUN_00220d24. */
@@ -141,7 +141,7 @@ LAB_001a2150:
               temp_v7 = dataTableGetCount(temp_v7);
               puVar13 = temp_v12;
               temp_v12[0] = (unsigned short)temp_v1;
-              libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+              libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
               puVar13 = puVar13 + 0xc;
             }
           }
@@ -193,7 +193,7 @@ LAB_001a2150:
           temp_v7 = dataTableGetCount(temp_v7);
           puVar13 = temp_v12;
           temp_v12[0] = (unsigned short)temp_v1;
-          libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+          libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
           puVar13 = puVar13 + 0xc;
         }
         FUN_0029ee6c(puVar13,0x323232ff);
@@ -211,7 +211,7 @@ LAB_001a2150:
         temp_v7 = dataTableGetCount(temp_v7);
         puVar13 = temp_v12;
         temp_v12[0] = (unsigned short)temp_v1;
-        libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+        libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
         puVar13 = puVar13 + 0xc;
       }
     }
@@ -283,7 +283,7 @@ LAB_001a2150:
           temp_v7 = dataTableGetCount(temp_v7);
           puVar13 = temp_v12;
           temp_v12[0] = (unsigned short)temp_v1;
-          libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+          libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
           puVar13 = puVar13 + 0xc;
         }
         FUN_0029ee6c(puVar13,0x323232ff);
@@ -302,7 +302,7 @@ LAB_001a2150:
       temp_v7 = dataTableGetCount(temp_v7);
       puVar13 = temp_v12;
       temp_v12[0] = (unsigned short)temp_v1;
-      libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&LAB_001f62dc);
+      libc_bsearch(puVar13,temp_v8,temp_v7,0x72,&recordCompareSignedValue);
       puVar13 = puVar13 + 0xc;
     }
     FUN_0029ee6c(puVar13,0x323232ff);

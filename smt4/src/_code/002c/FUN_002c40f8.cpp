@@ -12,3 +12,4 @@ FUN_002c40f8(unsigned int *param_1,unsigned int param_2,unsigned int param_3,uns
 }
 */
 #include "common.h"
+#include "code/Code002c_Smt4.h"

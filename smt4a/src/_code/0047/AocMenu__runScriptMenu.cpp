@@ -2,7 +2,7 @@
 #include "classes/AocMenu.h"
 #include "common.h"
 #include "test/BustupViewer.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
 
 struct AocMenuObject;
 

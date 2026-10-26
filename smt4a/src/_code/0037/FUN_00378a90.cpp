@@ -14,7 +14,6 @@ int FUN_0036bb1c(...);
 int dataTable2CType1Count(void);
 int VectorSignedToFloat(...);
 
-extern unsigned char LAB_00378dc4; /* 0x378dc4 */
 extern int *DAT_00581270; /* 0x581270 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -91,7 +90,7 @@ unsigned int FUN_00378a90(void)
           }
           DAT_00581270[1] = 0;
           piVar3[0x4ae] = 2;
-          textFormatBuffer(temp_v5,&LAB_00378dc4,2);
+          textFormatBuffer(temp_v5,"map/m022/m022_blk%02d.bam",2);
           temp_v1 = asdMdlManagerCreateSecondList(temp_v5,7);
           piVar3[0x4b0] = temp_v1;
           *(unsigned char *)(piVar3 + 0x4af) = 0;
@@ -103,7 +102,7 @@ unsigned int FUN_00378a90(void)
           piVar3 = DAT_00581270;
           piVar7 = DAT_00581270 + temp_v1 * 0xb + 0x445;
           DAT_00581270[temp_v1 * 0xb + 1099] = 1;
-          textFormatBuffer(temp_v5,&LAB_00378dc4,1);
+          textFormatBuffer(temp_v5,"map/m022/m022_blk%02d.bam",1);
           temp_v3 = asdMdlManagerClone(DAT_00581270[0x44d],0);
           piVar3[temp_v1 * 0xb + 0x44d] = temp_v3;
           *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x44c) = 1;
@@ -142,7 +141,7 @@ unsigned int FUN_00378a90(void)
       else {
         DAT_00581270[1] = 0;
         piVar3[1099] = 1;
-        textFormatBuffer(temp_v5,&LAB_00378dc4,1);
+        textFormatBuffer(temp_v5,"map/m022/m022_blk%02d.bam",1);
         temp_v1 = asdMdlManagerCreateSecondList(temp_v5,0x38);
         piVar3[0x44d] = temp_v1;
         *(unsigned char *)(piVar3 + 0x44c) = 0;
@@ -157,7 +156,7 @@ unsigned int FUN_00378a90(void)
         piVar3 = DAT_00581270;
         piVar7 = DAT_00581270 + temp_v1 * 0xb + 0x4a8;
         DAT_00581270[temp_v1 * 0xb + 0x4ae] = 2;
-        textFormatBuffer(temp_v5,&LAB_00378dc4,2);
+        textFormatBuffer(temp_v5,"map/m022/m022_blk%02d.bam",2);
         temp_v3 = asdMdlManagerClone(DAT_00581270[0x4b0],0);
         piVar3[temp_v1 * 0xb + 0x4b0] = temp_v3;
         *(unsigned char *)(piVar3 + temp_v1 * 0xb + 0x4af) = 1;

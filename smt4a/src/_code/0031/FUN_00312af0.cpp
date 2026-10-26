@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the shared pending-clear/return tail after the case-16 content calls (13 and 16 jump to it) and allocates r5=popup state, r6=zero; built merges the tail into case 13 and swaps r5/r6. */
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "code/Code002c_Smt4a.h"
 
 // Pending requests lie beyond the published popup-state prefix.
 struct PopupPendingRequestsViewA {
@@ -14,7 +15,6 @@ void lmapApplyMapAndArea(void);
 void FUN_003b5d1c(void);
 void popupQueueInsertUnique(s32 request);
 s32 FUN_002d8b58(s32 content, s32 option);
-s32 FUN_002c2758(s32 category);
 void FUN_00295108(s32 enabled);
 
 void FUN_00312af0(void)

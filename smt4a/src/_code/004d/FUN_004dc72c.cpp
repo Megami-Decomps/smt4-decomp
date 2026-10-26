@@ -1,6 +1,7 @@
 /* NON_MATCHING: unit-slot address folding ([r0,#9] vs a register offset) and 64-bit mask load forms differ */
 #include "common.h"
 #include "gamedata/Table04Record.h"
+#include "code/Code004a_Smt4a.h"
 
 /* A battle unit's script slot (0x1254 bytes); only the state byte is touched here. */
 struct BtlUnitSlot {
@@ -71,7 +72,6 @@ s32 chainCountIdUnflagged(u32 chain, u32 flag);
 void FUN_004a96b8(u32 ui);
 s32 btlUiIsMenuReady(u32 ui);
 void FUN_004aa7c8(u32 ui);
-void FUN_004a92d0(u32 ui, s32 id, s32 mode);
 s32 btlUiPollWidgetResult(u32 ui);
 void FUN_004a9c40(u32 ui, u16 *command, u16 *argument);
 s32 FUN_004ffcd8(void);

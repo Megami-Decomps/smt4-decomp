@@ -11,7 +11,7 @@ void FUN_002f0c18(s32 value);
 s32 uiQuestIsIdle(void);
 void FUN_002f1554(u32 id);
 void FUN_0034aae4(void);
-void FUN_00418870(u32 first, u32 second);
+void flagEntrySetValue(u32 first, u32 second);
 
 u8 FUN_003b7044(void)
 {
@@ -20,7 +20,7 @@ u8 FUN_003b7044(void)
     s32 result;
 
     if (scrGetCommandFrame() == 0) {
-        FUN_00418870(first, second);
+        flagEntrySetValue(first, second);
         result = FUN_00162ea4();
         if (result != 0) {
             return 1;

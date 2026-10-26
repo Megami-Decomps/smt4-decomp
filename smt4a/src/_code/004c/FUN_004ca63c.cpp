@@ -11,7 +11,7 @@ int FUN_003edaf0(unsigned int *, int);
 int FUN_003f1138(void);
 int FUN_0041a7dc(int);
 int FUN_004c3d00(unsigned int *);
-int FUN_004c571c(int, int, unsigned int *, int);
+int btlAdjustPropertyClamped(int, int, unsigned int *, int);
 int clearTwoWords(int);
 int __aeabi_memcpy4(unsigned int *, int, int);
 
@@ -49,7 +49,7 @@ extern unsigned int *FUN_003e83b4(unsigned int *, int, unsigned int);
 /* Supplied declaration required: FUN_003f1138. */
 /* Supplied declaration required: FUN_0041a7dc. */
 /* Supplied declaration required: FUN_004c3d00. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: clearTwoWords. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -183,7 +183,7 @@ void FUN_004ca63c(unsigned int *param_1,int param_2,int param_3,int param_4,int 
     *(unsigned int *)(temp_v2 + 0x1b8) = in_s2;
   }
   FUN_004c3d00(puVar3);
-  FUN_004c571c(param_4,0xc,puVar3,0);
+  btlAdjustPropertyClamped(param_4,0xc,puVar3,0);
   return;
 }
 

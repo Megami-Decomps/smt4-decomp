@@ -17,14 +17,7 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_5_stack;
 
-extern unsigned char LAB_001b8b7c; /* 0x1b8b7c */
-extern unsigned char LAB_001b8b84; /* 0x1b8b84 */
-extern unsigned char LAB_001b8b8c; /* 0x1b8b8c */
-extern unsigned char LAB_001b8b94; /* 0x1b8b94 */
-extern unsigned char LAB_001b8b9c; /* 0x1b8b9c */
-extern unsigned char LAB_001b8ba4; /* 0x1b8ba4 */
-extern unsigned char LAB_001b8bac; /* 0x1b8bac */
-extern unsigned char LAB_001bd330; /* 0x1bd330 */
+extern unsigned char FUN_001bd330; /* 0x1bd330 */
 
 extern int FUN_001af0d0(unsigned int *, unsigned int);
 /* Supplied declaration required: trackCombinationInitialize. */
@@ -67,7 +60,7 @@ void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
       if (temp_v0 != 0) {
         temp_v1 = objectInitDefaults();
         temp_v1 = temp_v1 + 0xcc;
-        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_001bd330,8,3);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&FUN_001bd330,8,3);
         unaff_r5 = (unsigned int *)(temp_v1 - 0xcc);
         *(unsigned char *)(temp_v1 + 0x18) = 0;
         *(unsigned char *)(temp_v1 + 0x19) = 2;
@@ -102,13 +95,13 @@ void FUN_001b8798(int param_1,int *param_2,int *param_3,int param_4,int param_5)
       if (*(short *)((int)puVar6 + 0x22) != -1) {
         *(unsigned char *)(unaff_r5 + 0x28) = 3;
       }
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x33,&LAB_001b8b7c);
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x35,&LAB_001b8b84);
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x37,&LAB_001b8b8c);
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x39,&LAB_001b8b94);
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x3b,&LAB_001b8b9c);
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x3d,&LAB_001b8ba4);
-      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x3f,&LAB_001b8bac);
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x33,"TexMtx0");
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x35,"TexMtx1");
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x37,"TexMtx2");
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x39,"TexTran");
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x3b,"TexcMap");
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x3d,"MatAmbi");
+      FUN_001c3bb8(unaff_r5,unaff_r5 + 0x3f,"MatDiff");
       puVar3 = unaff_r5;
       FUN_001c398c(unaff_r5,temp_v3);
       temp_v0 = (((int)puVar3 - temp_v3) & 0xfffffffcU) + 8;

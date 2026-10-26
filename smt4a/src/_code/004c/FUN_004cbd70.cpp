@@ -16,14 +16,14 @@ int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int FUN_0019de98(int, unsigned int);
 int scrRunOpcodesStub(...);
-int FUN_0023acdc(int);
+int gameSavedFlagSet(int);
 int scrScriptProcessStartEntry(...);
 int statusDownRestartTransition(void);
 int FUN_00333dc8(...);
 int btlTalkBustUpSetDemonTexture(int, int);
 int obj04Finish(void);
 int btlTalkBustUpSetUnk2F4(int);
-int FUN_0037dfb0(int, int);
+int statusDownOpenList(int, int);
 int countersAddSaturating(int, int);
 int FUN_004bcd90(int);
 
@@ -41,7 +41,7 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_0019de98. */
 extern int gameGetSlotRecord(unsigned int);
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_0023acdc. */
+/* Supplied declaration required: gameSavedFlagSet. */
 extern int FUN_002613f0(unsigned int);
 extern int messageMainIsIdle(void);
 extern int FUN_0026c3a0(void);
@@ -58,8 +58,8 @@ extern int btlTalkBustUpGetValue(void);
 extern int asdSoundIsBankHandleLoaded(unsigned int);
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 extern int statusDownGetState(void);
-extern int FUN_0037df64(void);
-/* Supplied declaration required: FUN_0037dfb0. */
+extern int statusCursorIsAtLast(void);
+/* Supplied declaration required: statusDownOpenList. */
 extern int stateHolderStateIs0x12(void);
 /* Supplied declaration required: statusDownEnterState11. */
 extern int statusDownGetCursorPosition(void);
@@ -185,7 +185,7 @@ LAB_004cbdc8:
         *(unsigned int *)(param_1 + 8) = 100;
         return;
       }
-      FUN_0023acdc((int)*(short *)(temp_v0 + 4));
+      gameSavedFlagSet((int)*(short *)(temp_v0 + 4));
       countersAddSaturating(6,1);
       break;
     case 1:
@@ -201,7 +201,7 @@ LAB_004cbdc8:
           btlTalkBustUpSetUnk2F4(1);
         }
         scrScriptProcessStartEntry(*(unsigned int *)(param_1 + 0x20),8);
-        FUN_0037dfb0(temp_v4,*(unsigned short *)(temp_v0 + 4));
+        statusDownOpenList(temp_v4,*(unsigned short *)(temp_v0 + 4));
         *(int *)(param_1 + 8) = *(int *)(param_1 + 8) + 1;
         *(unsigned int *)(param_1 + 0xc) = 0;
         return;
@@ -230,7 +230,7 @@ LAB_004cbdc8:
         return;
       }
       temp_v0 = statusDownGetCursorPosition();
-      if ((temp_v0 != temp_v4) && (temp_v0 = FUN_0037df64(), temp_v0 == 0)) {
+      if ((temp_v0 != temp_v4) && (temp_v0 = statusCursorIsAtLast(), temp_v0 == 0)) {
         eventQueueAddUniqueIfValid(0x100020f);
         return;
       }

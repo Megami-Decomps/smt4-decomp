@@ -9,7 +9,7 @@ int FUN_001177e0(void);
 int FUN_00119c28(...);
 int FUN_00121030(unsigned char *, unsigned char *, unsigned int, unsigned int);
 int FUN_0012113c(...);
-int FUN_001216cc(unsigned char *, unsigned int, unsigned int);
+int soundArchiveLoadInfoBlock(unsigned char *, unsigned int, unsigned int);
 int FUN_00121824(unsigned char *, unsigned char *);
 int FUN_0012201c(unsigned char *, unsigned char *);
 int asdMemoryAllocAligned(...);
@@ -70,7 +70,7 @@ extern unsigned int DAT_004efd34; /* 0x4efd34 */
 /* Supplied declaration required: FUN_00119c28. */
 /* Supplied declaration required: FUN_00121030. */
 /* Supplied declaration required: FUN_0012113c. */
-/* Supplied declaration required: FUN_001216cc. */
+/* Supplied declaration required: soundArchiveLoadInfoBlock. */
 /* Supplied declaration required: FUN_00121824. */
 /* Supplied declaration required: FUN_0012201c. */
 /* Supplied declaration required: asdMemoryAllocAligned. */
@@ -118,7 +118,7 @@ unsigned int FUN_001096ec(unsigned int param_1,int param_2,unsigned char *param_
   temp_v5 = (unsigned char *)0x1;
   asdMemoryAlloc(0x10000,0x100,0,temp_v1);
   DAT_004e23d0 = temp_v2;
-  FUN_001216cc(&g_asdSound,temp_v2,temp_v1);
+  soundArchiveLoadInfoBlock(&g_asdSound,temp_v2,temp_v1);
   temp_v1 = nw_snd_SoundDataManager_GetRequiredMemSize(&DAT_004e21ac,&g_asdSound);
   temp_v2 = 0x10000;
   temp_v5 = (unsigned char *)0x1;

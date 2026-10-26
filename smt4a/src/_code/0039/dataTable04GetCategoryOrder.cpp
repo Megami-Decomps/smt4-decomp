@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 extern "C" {
 

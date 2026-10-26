@@ -58,7 +58,7 @@ extern TintScratch DAT_006472dc;
 
 u32 FUN_0038136c(TintBlock *block, u32 *colorSource);
 void matrixInitializeWithScaleAndOffset(u8 *matrix, TintEffect *effect, s32 offset, f32 scale);
-void FUN_002a1fb4(u8 *transform, u8 *matrix, s32 flag);
+void matrixApplyByMode(u8 *transform, u8 *matrix, s32 flag);
 void FUN_002b3c9c(TintObject *object, u32 frame);
 
 /* Unpacks the four bytes of a packed colour (high byte first) into 0..1 floats. */
@@ -109,7 +109,7 @@ void FUN_003c7d1c(TintEffect *effect)
             TintPart *part = &list->part[n];
             if (part->ready > 0) {
                 TintObject *object = part->object;
-                FUN_002a1fb4(object->transform, matrix, 0);
+                matrixApplyByMode(object->transform, matrix, 0);
                 unpackColor(part->color, DAT_006472dc.current);
                 copyColor(DAT_006472dc.tint, saved);
                 multiplyColor(DAT_006472dc.current, DAT_006472dc.tint);

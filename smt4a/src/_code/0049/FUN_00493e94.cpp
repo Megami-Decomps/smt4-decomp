@@ -1,26 +1,34 @@
-/* NON_MATCHING: register copy only: retail copies b to r6 before the first rank call */
-/* Compares two ids: by FUN_001ba3d0 key (descending), then by their FUN_0049c9a0 rank. */
 #include "common.h"
 
 extern "C" {
-
 extern s32 FUN_001ba3d0(u16 id);
 extern u16 FUN_0049c9a0(const u16 *id);
+}
 
-s32 FUN_00493e94(const void *first, const void *second)
+extern "C" {
+
+typedef struct SortEntry {
+    /* 0x00 */ u16 id;
+} SortEntry;
+
+
+/* Compare function for sorting entries: by the rank of their id, then by their secondary key. */
+int FUN_00493e94(const SortEntry *a, const SortEntry *b)
 {
-    const u16 *a = static_cast<const u16 *>(first);
-    const u16 *b = static_cast<const u16 *>(second);
-    u16 idA = *a;
-    u16 idB = *b;
-    s32 keyA = FUN_001ba3d0(idA);
-    s32 keyB = FUN_001ba3d0(idB);
-    s32 diff = keyB - keyA;
+    u16 idA = a->id;
+    u16 idB = b->id;
+    int rankA = FUN_001ba3d0(idA);
+    int rankB = FUN_001ba3d0(idB);
+    int diff = rankB - rankA;
 
-    if (diff == 0) {
-        diff = FUN_0049c9a0(a) - FUN_0049c9a0(b);
+    if (diff != 0) {
+        return diff;
     }
-    return diff;
+    const u16 *keyA = reinterpret_cast<const u16 *>(a);
+    const u16 *keyB = reinterpret_cast<const u16 *>(b);
+    u16 orderA = FUN_0049c9a0(keyA);
+    u16 orderB = FUN_0049c9a0(keyB);
+    return orderA - orderB;
 }
 
-}
+} /* extern "C" */

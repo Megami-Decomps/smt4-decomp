@@ -31,8 +31,6 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_3_stack;
 
-extern unsigned char LAB_00241174; /* 0x241174 */
-extern unsigned char LAB_0024160c; /* 0x24160c */
 extern int g_screenStateWork; /* 0x43dd90 */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -160,7 +158,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     FUN_002bf288(2,0x24,0xd8,*(short *)(temp_v3 + 8) + temp_v1,*(short *)(temp_v3 + 10) + temp_v2,0x6a);
     temp_v5 = asdTMTexTableEntryAt(0x24,0xdc);
     temp_v6 = FUN_002bd068(*psVar7);
-    textFormatBuffer(temp_v12,&LAB_00241174,temp_v6);
+    textFormatBuffer(temp_v12,"%s",temp_v6);
     puVar9 = temp_v12;
     fontMeasureLineAdvance(puVar9,1);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
@@ -171,7 +169,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     textDrawString(1,temp_v11,temp_v12);
     temp_v5 = asdTMTexTableEntryAt(0x24,0xdd);
     temp_v11 = demonGetRaceLabel(*psVar7,0);
-    textFormatBuffer(temp_v12,&LAB_00241174,temp_v11);
+    textFormatBuffer(temp_v12,"%s",temp_v11);
     puVar9 = temp_v12;
     fontMeasureLineAdvance(puVar9,2);
     VectorSignedToFloat((int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
@@ -183,7 +181,7 @@ void FUN_00240d88(int param_1,int param_2,int param_3)
     temp_v5 = asdTMTexTableEntryAt(0x24,0xdf);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v3 + 8) + temp_v1,
                  (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,2,0x6f,
-                 &LAB_0024160c,*(unsigned short *)(temp_v14 + 0x16));
+                 "%d",*(unsigned short *)(temp_v14 + 0x16));
     if (temp_v15 != 0) {
       FUN_002bf288(2,0x24,param_1 + 0x215,*(short *)(temp_v3 + 8) + temp_v1,
                    *(short *)(temp_v3 + 10) + temp_v2,0x6f);

@@ -24,8 +24,8 @@ struct RowMenu {
 extern "C" {
 extern u32 g_titleScene;
 u32 FUN_002c5d80(u32 value, bool enabled);
-void FUN_002bee04(u32 scene, u32 slot, u32 value);
-void FUN_002bedb0(u32 scene, u32 slot);
+void renderStackPushIndexed(u32 scene, u32 slot, u32 value);
+void renderCtxPopState(u32 scene, u32 slot);
 SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_002bf380(u32 screen, u32 group, u32 id, s32 x, s32 y, u32 priority);
 f32 FUN_00126830(u8 *view, s32 index);
@@ -38,7 +38,7 @@ void FUN_001189a4(RowMenu *menu)
     static const u32 rowSprites[9] = {0xA8, 0xA9, 0x9C, 0x9D, 0x9E, 0xB0, 0xB1, 0xB2, 0xB3};
     if (menu->state != 1 && menu->state != 5)
         return;
-    FUN_002bee04(g_titleScene, 3, FUN_002c5d80(1, false));
+    renderStackPushIndexed(g_titleScene, 3, FUN_002c5d80(1, false));
     if (menu->mode == 11) {
         u32 sprites[9];
         for (s32 i = 0; i < 9; i++)
@@ -77,11 +77,11 @@ void FUN_001189a4(RowMenu *menu)
                          frame->y + sprite->y, 0x33, 6, i);
         }
     } else {
-        FUN_002bedb0(g_titleScene, 3);
+        renderCtxPopState(g_titleScene, 3);
         return;
     }
     *reinterpret_cast<u32 *>(menu->view + 0xB0) = 0;
     positionStateSet(0.0f, menu->view, 0, 0x646464FF);
-    FUN_002bedb0(g_titleScene, 3);
+    renderCtxPopState(g_titleScene, 3);
 }
 }

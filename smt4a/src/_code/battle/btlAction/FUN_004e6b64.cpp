@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "gamedata/Table04Record.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 /* The action a battle unit is about to use (as FUN_003e8bb0 fills it). */
 struct BattleActionInfo {

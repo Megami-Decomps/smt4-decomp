@@ -1,6 +1,5 @@
-/* NON_MATCHING: branch layout and constants match; only instruction scheduling differs (retail stores mode first and reloads speed after the direction store). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "util/Random.h"
 
 extern "C" {
 
@@ -24,9 +23,9 @@ struct DriftObject {
 /* Starts the drift with a speed chosen by type and a random direction. */
 void FUN_003c1a2c(DriftObject *object, s32 type)
 {
-    object->mode = 15;
     object->active = 1;
     object->unk4C = 0;
+    object->mode = 15;
     switch (type) {
     case 1:
     case 2:
@@ -39,7 +38,11 @@ void FUN_003c1a2c(DriftObject *object, s32 type)
         object->speed = 1.4f;
         break;
     }
-    object->direction = randNextInRange(1) == 0 ? 1.0f : -1.0f;
+    if (randNextInRange(1) == 0) {
+        object->direction = 1.0f;
+    } else {
+        object->direction = -1.0f;
+    }
     object->offset = 0;
     object->baseSpeed = object->speed;
 }

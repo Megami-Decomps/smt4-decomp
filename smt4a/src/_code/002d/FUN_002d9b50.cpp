@@ -62,13 +62,6 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } void_stack;
 
-extern unsigned char LAB_002d9eec; /* 0x2d9eec */
-extern unsigned char LAB_002d9efc; /* 0x2d9efc */
-extern unsigned char LAB_002da77c; /* 0x2da77c */
-extern unsigned char LAB_002dab1c; /* 0x2dab1c */
-extern unsigned char LAB_002dae38; /* 0x2dae38 */
-extern unsigned char LAB_002dae40; /* 0x2dae40 */
-extern unsigned char LAB_002dae54; /* 0x2dae54 */
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
 extern unsigned int g_gameState; /* 0x5f15fc */
@@ -195,7 +188,7 @@ void FUN_002d9b50(void)
         FUN_001bbf0c();
         temp_v11 = FUN_00152f44();
         temp_v1 = FUN_0014af98();
-        FUN_001628c0(&LAB_002d9eec,temp_v1,temp_v11,1);
+        FUN_001628c0("I001019",temp_v1,temp_v11,1);
         temp_v6 = g_lmapScene;
         *(int *)(g_lmapScene + 4) = *(int *)(g_lmapScene + 4) + 1;
         *(unsigned int *)(temp_v6 + 8) = 0;
@@ -240,7 +233,7 @@ void FUN_002d9b50(void)
       case 2:
         temp_v6 = gameFlagIsSet(0x68);
         if (temp_v6 == 0) {
-          mapMainStartEntry(&LAB_002d9efc);
+          mapMainStartEntry("scr_trap_1st_howto");
           *(unsigned int *)(g_lmapScene + 4) = 99;
         }
         temp_v0 = mapTrapGetUnk38();
@@ -468,7 +461,7 @@ LAB_002da3cc:
           *(unsigned int *)(temp_v6 + 0x58) = 0x40400000;
           temp_v11 = FUN_00152f44();
           temp_v1 = FUN_0014af98();
-          FUN_001628c0(&LAB_002da77c,temp_v1,temp_v11,1);
+          FUN_001628c0("I001022",temp_v1,temp_v11,1);
         }
         if (*(int *)(g_lmapScene + 8) >= 6) {
           mapTrapGetUnk3C();
@@ -498,7 +491,7 @@ LAB_002da3cc:
             FUN_0015f858();
             FUN_003180c4(0,temp_v2);
             flagValueSub(temp_v3,1);
-            mapMainStartEntry(&LAB_002dab1c);
+            mapMainStartEntry("scr_trap_faild_1");
           }
           else {
             mapSetSceneState(1);
@@ -621,7 +614,7 @@ LAB_002dad8c:
           sysPlayVoice(0x10000c5);
           temp_v11 = FUN_00152f44();
           temp_v1 = FUN_0014af98();
-          FUN_001628c0(&LAB_002dae38,temp_v1,temp_v11,1);
+          FUN_001628c0("I001023",temp_v1,temp_v11,1);
         }
         if (*(int *)(g_lmapScene + 8) == 7) {
           FUN_002d1f40(4,0x32,0);
@@ -799,11 +792,11 @@ LAB_002dad8c:
           FUN_0015f858(temp_v6,0);
           FUN_003180c4(0,temp_v0);
           flagValueSub(temp_v6,1);
-          mapMainStartEntry(&LAB_002dae40);
+          mapMainStartEntry("scr_trap_faild_3");
           FUN_001681c4();
         }
         else {
-          mapMainStartEntry(&LAB_002dae54);
+          mapMainStartEntry("scr_trap_faild_Warp");
           FUN_001681c4();
         }
         *(unsigned int *)(g_lmapScene + 4) = 10;

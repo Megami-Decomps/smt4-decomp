@@ -1,6 +1,7 @@
 /* NON_MATCHING: steps the save/load confirmation script task (start script by mode, run it, request the save, finish); written from the decompilation, switch layout and state write-back not compared with retail */
 #include "classes/WindowStatus.h"
 #include "sys/ResultReport.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 #define SAVELOAD_STATE_START 0
 #define SAVELOAD_STATE_PROMPT 4
@@ -35,9 +36,7 @@ void FUN_00297060(void);
 s32 FUN_002103dc(u32 id, u32 flag);
 void FUN_00223898(SaveLoadTask *task, s32 flag);
 void gameDataFlagsSet(s32 mask);
-void gameDataFlagsSetBits(s32 mask);
 void gameDataBlocksAddFlags(u32 flags);
-void gameDataFlagsClearAndRefresh(s32 mask);
 void gameDataRemoveHomeButtonHold(s32 mask);
 void FUN_00289880(void);
 void FUN_002898e4(void);

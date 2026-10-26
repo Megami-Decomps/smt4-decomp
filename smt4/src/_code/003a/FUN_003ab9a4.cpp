@@ -1,12 +1,12 @@
 /* NON_MATCHING: error-store merging and confirmation result branch layout differ. */
 #include "common.h"
 #include <stddef.h>
+#include "code/Code0029.h"
 
 extern "C" {
 void messageMainSetTargetFlags(s32 flags);
-void FUN_0029c43c(s32 amount, s32 notify);
 s32 scrRunOpcodesStub(u32 script);
-s32 FUN_00212088(void);
+s32 statusCountSelectableChoices(void);
 u32 gameSlotTableGetHeader(void);
 s32 flaggedValueHolderGetTotal(const void *cursor);
 s32 FUN_00262cb0(u16 id);
@@ -58,7 +58,7 @@ void FUN_003ab9a4(void *context)
         if (FUN_00262cb0(entries[flaggedValueHolderGetTotal(work->cursor)].id)) {
             work->error = 2;
         } else {
-            s32 occupied = FUN_00212088();
+            s32 occupied = statusCountSelectableChoices();
             s32 capacity = statusGetAvailableChoiceCount();
             if (occupied >= capacity)
                 work->error = 5;

@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "bible/bibleAnalyze.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 extern const char DAT_00409d40[];
@@ -13,7 +14,6 @@ void asdListBoxDestroy(u32 handle);
 s32 jobIsValid(void *parent);
 void jobSetParent(void *parent, u32 handle);
 void rowWidgetInit(void *widget, s32 rows, s32 unk);
-void colorSetRgba(void *widget, s32 a, s32 b, s32 c, s32 d);
 
 /* Creates a list box process at (x, y) in `group` and registers it with `parent`. */
 u32 asdListBoxCreate(void *parent, s32 group, s32 x, s32 y, u8 flag)

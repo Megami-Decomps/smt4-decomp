@@ -2,7 +2,7 @@
  * service shut down successfully. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/Result.h"
-#include "util/AsdCecShutdown.h"
+#include "network/CecControl.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code003e_Smt4a.h"
 
 struct IdRecord {
     s16 id;        // 0x00

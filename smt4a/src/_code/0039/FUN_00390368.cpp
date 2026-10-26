@@ -2,10 +2,10 @@
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 #include "gfx/QuaternionWorkspace.h"
 #include <math.h>
+#include "code/Code0051_Smt4a.h"
 
 extern "C" {
 extern QuaternionWorkspace DAT_006471dc;
-f32 shiftRandomNextFraction(u32 stream);
 
 void FUN_00390368(EffObjectParticle *emitter, EffObjectParticleState *particle)
 {

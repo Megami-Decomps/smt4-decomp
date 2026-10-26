@@ -32,7 +32,7 @@ u8 *nw_snd_Sound3DListener_Sound3DListener_sub_object(u8 *part);
 void FUN_00401654(void *element);
 void objectRegisterPart(void *element);
 void FUN_0045bbdc(void *element);
-extern u8 LAB_00417a10, LAB_0045b824;
+extern u8 FUN_00417a10, FUN_0045b824;
 void FUN_003f2cb0(void *object);
 
 // Constructs the global scene object: its base parts, the element arrays and the 3D listener,
@@ -43,11 +43,11 @@ void FUN_0051159c(void)
     object = FUN_0045e798(object + 0x194);
     object = FUN_0045c310(object + 0x118);
     object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x278, FUN_00401654, 0x70, 4);
-    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x1c0, (ElementCtor)&LAB_00417a10, 0x3c, 2);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x1c0, (ElementCtor)&FUN_00417a10, 0x3c, 2);
     object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x80, objectRegisterPart, 0x3c, 4);
     object = FUN_0045c0ac(object + 0xf0);
     object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x3c, FUN_0045bbdc, 0x88, 0x10);
-    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x880, (ElementCtor)&LAB_0045b824, 4, 0x10);
+    object = (u8 *)__aeabi_vec_ctor_nocookie_nodtor(object + 0x880, (ElementCtor)&FUN_0045b824, 4, 0x10);
     object = nw_snd_Sound3DListener_Sound3DListener_sub_object(object + 0x100);
     SceneObject *scene = (SceneObject *)(object - 0x1210);
     scene->tail.unk0c = 0;

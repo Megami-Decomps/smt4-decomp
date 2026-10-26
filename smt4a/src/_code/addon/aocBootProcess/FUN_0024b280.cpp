@@ -2,7 +2,7 @@
 #include "addon/aocBootProcess.h"
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
-#include "util/AocClearDisplayFlag.h"
+#include "addon/AocSystemSmt4a.h"
 
 #define AOC_BOOT_STATE_CHECK 0
 #define AOC_BOOT_STATE_QUERY 1

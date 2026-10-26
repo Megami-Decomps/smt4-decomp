@@ -42,11 +42,6 @@ typedef struct {
     unsigned int sp200; /* 0x200: local_200 */
 } param_7_stack;
 
-extern unsigned char LAB_002a9994; /* 0x2a9994 */
-extern unsigned char LAB_002a99ac; /* 0x2a99ac */
-extern unsigned char LAB_002a99b4; /* 0x2a99b4 */
-extern unsigned char LAB_002a9de8; /* 0x2a9de8 */
-extern unsigned char LAB_002a9e00; /* 0x2a9e00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
@@ -109,12 +104,12 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     FUN_001835b4(2,0x1a,0x16b,param_1,param_2,0x6f);
     FUN_001835b4(2,0x1a,0x16c,param_1,param_2,0x74);
     temp_v1 = asdTMTexTableEntryAt(0x1a,0x168);
-    textFormatBuffer(temp_v7,&LAB_002a99ac,&LAB_002a9994);
+    textFormatBuffer(temp_v7,"%s","\x82h\x82\x8e\x82\x88\x82\x85\x82\x92\x82\x89\x82\x94\x82\x89\x82\x8e\x82\x87");
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0xff,temp_v7);
     temp_v1 = asdTMTexTableEntryAt(0x1a,0x169);
-    textFormatBuffer(temp_v7,&LAB_002a99ac,&LAB_002a99b4);
+    textFormatBuffer(temp_v7,"%s","\x82o\x82\x81\x82\x92\x82\x85\x82\x8e\x82\x94\x81@\x82r\x82\x8b\x82\x89\x82\x8c\x82\x8c\x82\x93");
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(3,0xff,temp_v7);
@@ -148,25 +143,25 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
     }
     temp_v1 = asdTMTexTableEntryAt(0x1a,0x4d);
     temp_v2 = FUN_00180114(*psVar3);
-    textFormatBuffer(temp_v7,&LAB_002a99ac,temp_v2);
+    textFormatBuffer(temp_v7,"%s",temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v7);
     temp_v1 = asdTMTexTableEntryAt(0x1a,0x4e);
     temp_v2 = FUN_0014bf3c(*psVar3,0);
-    textFormatBuffer(temp_v7,&LAB_002a99ac,temp_v2);
+    textFormatBuffer(temp_v7,"%s",temp_v2);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0x57d8ffff,temp_v7);
     if ((unsigned short)psVar3[3] >= 100) {
       temp_v1 = asdTMTexTableEntryAt(0x1a,0x265);
       FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x8d,
-                   &LAB_002a9de8,psVar3[3]);
+                   "%d",psVar3[3]);
     }
     else {
       temp_v1 = asdTMTexTableEntryAt(0x1a,0x51);
       FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x8d,
-                   &LAB_002a9de8,psVar3[3]);
+                   "%d",psVar3[3]);
     }
     temp_v5 = 0;
     temp_v1 = uiSearchPrimary(temp_v0 + 0x8db0);
@@ -238,7 +233,7 @@ void FUN_002a968c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
       FUN_001835b4(2,0x1a,0x171,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,
                    0x65);
       temp_v5 = asdTMTexTableEntryAt(0x1a,0x178);
-      textFormatBuffer(temp_v7,&LAB_002a9e00);
+      textFormatBuffer(temp_v7,"\x82m\x82\x8f\x82\x8e\x82\x85");
       VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + param_2,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v5 + 8) + param_1,

@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc predicates the two stores (ldrne/stmne); retail branches over them (beq) */
+/* NON_MATCHING: if-conversion only: retail branches over the two stores (`beq`), built predicates them (`ldrne`/`stmne`); needs the real class so the compiler emits the vptr store. */
 /* Allocates an 8-byte object from `allocator` and gives it its vtable and the allocator; returns it (NULL if the allocation failed). */
 #include "common.h"
 

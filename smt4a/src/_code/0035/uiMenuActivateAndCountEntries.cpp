@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail uses `mov r3, #1` where armcc emits `mov r1, #1`. */
 #include "common.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 
 extern "C" {
 

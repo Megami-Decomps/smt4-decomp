@@ -2,9 +2,9 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/partyMemberFindById.h"
+#include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match3_RotationY.h"
-#include "util/FUN_0029d644.h"
+#include "code/Code0029.h"
 
 extern "C" {
 
@@ -48,12 +48,6 @@ typedef struct {
     unsigned int spE0; /* 0xe0: local_e0 */
 } param_3_stack;
 
-extern unsigned char LAB_001ef4b8; /* 0x1ef4b8 */
-extern unsigned char LAB_001ef4c8; /* 0x1ef4c8 */
-extern unsigned char LAB_001efd48; /* 0x1efd48 */
-extern unsigned char LAB_001efd54; /* 0x1efd54 */
-extern unsigned char LAB_001f0518; /* 0x1f0518 */
-extern unsigned char LAB_001f051c; /* 0x1f051c */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -150,20 +144,20 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       }
     }
     temp_v7 = FUN_002bd068(*puVar5);
-    textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v7);
+    textFormatBuffer(temp_v19,"%s",temp_v7);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,temp_v16,temp_v19);
     temp_v4 = asdTMTexTableEntryAt(0x24,0x4e);
     temp_v16 = demonGetRaceLabel(*puVar5,0);
-    textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v16);
+    textFormatBuffer(temp_v19,"%s",temp_v16);
     VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xf49800ff,temp_v19);
     temp_v4 = asdTMTexTableEntryAt(0x24,0x51);
     drawSetColorFromRGBA8(temp_v15);
     FUN_002bdf94(0,*(short *)(temp_v4 + 8) + temp_v9,*(short *)(temp_v4 + 10) + temp_v8,1,2,0x6f,
-                 &LAB_001ef4c8,*(unsigned char *)((int)puVar5 + 3));
+                 "%d",*(unsigned char *)((int)puVar5 + 3));
     FUN_002bed3c();
     if (*(char *)(temp_v3 + 0xe0) == '\0') {
       FUN_002bf288(2,0x24,0x1e9,
@@ -215,7 +209,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      0x6f);
         temp_v12 = asdTMTexTableEntryAt(0x24,0x118);
         temp_v15 = FUN_002bd068(*psVar13);
-        textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
+        textFormatBuffer(temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,1);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -226,7 +220,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         textDrawString(1,0xff,temp_v19,(int)*(short *)(temp_v12 + 10));
         temp_v12 = asdTMTexTableEntryAt(0x24,0x119);
         temp_v15 = demonGetRaceLabel(*psVar13,0);
-        textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
+        textFormatBuffer(temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,2);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -247,7 +241,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         drawSetColorFromRGBA8(0xff);
         FUN_002bdf94(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
-                     &LAB_001ef4c8,temp_v5);
+                     "%d",temp_v5);
         FUN_002bed3c();
         temp_v12 = asdTMTexTableEntryAt(0x24,0x115);
         uiDrawDemonIcon((int)*psVar13,
@@ -264,7 +258,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      0x6f);
         temp_v12 = asdTMTexTableEntryAt(0x24,0x118);
         temp_v15 = FUN_002bd068(*psVar13);
-        textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
+        textFormatBuffer(temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,1);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -275,7 +269,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         textDrawString(1,0xff,temp_v19,(int)*(short *)(temp_v11 + 8));
         temp_v12 = asdTMTexTableEntryAt(0x24,0x119);
         temp_v15 = demonGetRaceLabel(*psVar13,0);
-        textFormatBuffer(temp_v19,&LAB_001ef4b8,temp_v15);
+        textFormatBuffer(temp_v19,"%s",temp_v15);
         puVar16 = temp_v19;
         fontMeasureLineAdvance(puVar16,2);
         VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,
@@ -296,7 +290,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         drawSetColorFromRGBA8(0xff);
         FUN_002bdf94(0,(int)*(short *)(temp_v11 + 8) + (int)*(short *)(temp_v12 + 8) + temp_v8,
                      (int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v6,1,2,0x79,
-                     &LAB_001ef4c8,temp_v1);
+                     "%d",temp_v1);
         FUN_002bed3c();
         temp_v10 = asdTMTexTableEntryAt(0x24,0x115);
         uiDrawDemonIcon((int)*psVar13,
@@ -316,7 +310,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         }
         drawSetColorFromRGBA8(temp_v15);
         FUN_002bdf94(0,*(short *)(temp_v10 + 8) + temp_v8,*(short *)(temp_v10 + 10) + temp_v6,1,8,0x79,
-                     &LAB_001efd48,temp_v13);
+                     "%d",temp_v13);
         FUN_002bed3c();
         temp_v4 = temp_v4 + 1;
         temp_v8 = FUN_0029d644((const void *)(temp_v18));
@@ -390,7 +384,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = 0x72e027ff;
       }
       temp_v16 = FUN_002bd068(*psVar13);
-      textFormatBuffer(temp_v19,&LAB_001efd54,temp_v16);
+      textFormatBuffer(temp_v19,"%s",temp_v16);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
@@ -398,7 +392,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       textDrawString(2,temp_v15,temp_v19,(int)*(short *)(temp_v10 + 8));
       temp_v10 = asdTMTexTableEntryAt(0x24,0x13a);
       temp_v15 = demonGetRaceLabel(*psVar13,0);
-      textFormatBuffer(temp_v19,&LAB_001efd54,temp_v15);
+      textFormatBuffer(temp_v19,"%s",temp_v15);
       puVar16 = temp_v19;
       fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
@@ -418,7 +412,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       }
       FUN_002bdf94(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,1,2,0x8d,
-                   &LAB_001efd48,temp_v1);
+                   "%d",temp_v1);
       temp_v11 = asdTMTexTableEntryAt(0x24,0x136);
       uiDrawDemonIcon((int)*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v11 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v8,0x8d,1);
@@ -463,7 +457,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
         temp_v15 = 0x72e027ff;
       }
       temp_v16 = FUN_002bd068(*psVar13);
-      textFormatBuffer(temp_v19,&LAB_001efd54,temp_v16);
+      textFormatBuffer(temp_v19,"%s",temp_v16);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
                           (unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
@@ -471,7 +465,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       textDrawString(2,temp_v15,temp_v19,(int)*(short *)(temp_v10 + 8));
       temp_v10 = asdTMTexTableEntryAt(0x24,0x13a);
       temp_v15 = demonGetRaceLabel(*psVar13,0);
-      textFormatBuffer(temp_v19,&LAB_001f0518,temp_v15);
+      textFormatBuffer(temp_v19,"%s",temp_v15);
       puVar16 = temp_v19;
       fontMeasureLineAdvance(puVar16,2);
       VectorSignedToFloat((int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,
@@ -490,7 +484,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       }
       FUN_002bdf94(0,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v10 + 10) + (int)*(short *)(temp_v13 + 10) + temp_v8,1,2,0x8d,
-                   &LAB_001f051c,temp_v17[0]);
+                   "%d",temp_v17[0]);
       temp_v10 = asdTMTexTableEntryAt(0x24,0x136);
       uiDrawDemonIcon((int)*psVar13,(int)*(short *)(temp_v13 + 8) + (int)*(short *)(temp_v10 + 8) + temp_v9,
                    (int)*(short *)(temp_v13 + 10) + (int)*(short *)(temp_v10 + 10) + temp_v8,0x8d,1);
@@ -534,7 +528,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
       drawSetColorFromRGBA8(temp_v15);
       temp_v3 = asdTMTexTableEntryAt(0x24,0x144);
       FUN_002bdf94(0,*(short *)(temp_v3 + 8) + temp_v9,*(short *)(temp_v3 + 10) + temp_v8,1,8,0x8d,
-                   &LAB_001f051c,temp_v4);
+                   "%d",temp_v4);
       FUN_002bed3c();
     }
     FUN_00290994(temp_v18,temp_v20,temp_v20,0x24,0x23,0x24,0x25,0x1f,0x21,0x20,0x22,

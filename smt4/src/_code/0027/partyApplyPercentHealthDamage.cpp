@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 struct DamagePlayer {
     u8 unk00[0x1c];
@@ -22,7 +23,6 @@ struct DamageUnit {
 };
 extern "C" {
 DamagePlayer *gameGetPlayerData();
-s32 gameCountUnits();
 DamageUnit *gameGetUnitRecord(s32 slot);
 DamageUnit *gameGetSupportUnitData();
 u16 FUN_002903f0();

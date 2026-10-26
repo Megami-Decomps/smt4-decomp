@@ -2,7 +2,8 @@
 #include "common.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-#include "util/FileSlotFree.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 struct ScriptResource;
 
@@ -36,7 +37,6 @@ extern SceneGlobals g_saveLoadUIFlags;
 
 int FUN_002108c0(int arg0, u32 arg1);
 int msgWindowReset(void);
-int gameReleaseDataReference(void);
 int messageMainSetEnabled(int arg);
 int gameGlobalsSetSelected(int arg);
 int FUN_0029ee6c(int arg0, int color);

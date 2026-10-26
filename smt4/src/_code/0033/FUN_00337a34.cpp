@@ -1,10 +1,23 @@
-/* NON_MATCHING: retained-ID scan unrolls; saved state/resource registers and combatant flag stores differ. */
+/* NON_MATCHING: retained-id scan now uses the twin's plain static helper and matches; only the entry-flags clear differs (retail zeroes the two words with `stm {r3, ip}` from two zero registers, the u64 view stores through one register). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 
 extern "C" {
 void FUN_00294f64(BtlLoadedActionResource *resource);
+}
+
+static bool isRetainedResource(const BtlMainState *state, s16 id)
+{
+    for (s32 index = 0; index < 42; ++index) {
+        if (state->actionCleanup.retainedIds[index] == id) {
+            return true;
+        }
+    }
+    return false;
+}
+
+extern "C" {
 
 // Release unretained resources belonging to the selected action and detach its combatant.
 void FUN_00337a34(BtlMainState *state)
@@ -13,19 +26,10 @@ void FUN_00337a34(BtlMainState *state)
         if (state->actionCleanup.selectedResource != NULL) {
             for (s32 index = 0; index < 42; ++index) {
                 BtlLoadedActionResource *resource = state->actionCleanup.resources[index];
-                if (resource != NULL && resource->id == state->actionCleanup.selectedResource->id) {
-                    s16 id = static_cast<s16>(resource->id);
-                    s32 retained = 0;
-                    for (; retained < 42; retained += 2) {
-                        if (state->actionCleanup.retainedIds[retained] == id ||
-                            state->actionCleanup.retainedIds[retained + 1] == id) {
-                            break;
-                        }
-                    }
-                    if (retained == 42) {
-                        FUN_00294f64(resource);
-                        state->actionCleanup.resources[index] = NULL;
-                    }
+                if (resource != NULL && resource->id == state->actionCleanup.selectedResource->id &&
+                    !isRetainedResource(state, (s16)resource->id)) {
+                    FUN_00294f64(resource);
+                    state->actionCleanup.resources[index] = NULL;
                 }
             }
             state->actionCleanup.selectedResource = NULL;

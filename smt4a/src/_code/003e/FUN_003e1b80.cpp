@@ -29,8 +29,6 @@ typedef struct {
     unsigned int sp38; /* 0x38: local_38 */
 } param_3_stack;
 
-extern unsigned char LAB_003e2014; /* 0x3e2014 */
-extern unsigned char LAB_003e2028; /* 0x3e2028 */
 extern unsigned int g_btlActionReflect; /* 0x5712f0 */
 extern int g_btlCamera; /* 0x571508 */
 extern int g_btlAux; /* 0x573808 */
@@ -206,10 +204,10 @@ LAB_003e1f28:
     } while (temp_v7 < 0x36);
     if (param_1[3] == 0) {
       if ((*(unsigned int *)(param_2 + 0x110) & 0x80) != 0) {
-        FUN_004f7b84(g_btlAux,&LAB_003e2014);
+        FUN_004f7b84(g_btlAux,"ef_Ancient_02");
       }
       else {
-        FUN_004f7b84(g_btlAux,&LAB_003e2028);
+        FUN_004f7b84(g_btlAux,"ef_gboss001");
       }
       *(unsigned int *)(g_btlCamera + 0x64c) = *(unsigned int *)(g_btlCamera + 0x64c) | 0x4000;
       param_1[3] = param_1[3] | 2;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: flag-pair load selection and loop register allocation differ from retail. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
-#include "util/BtlUnitGetSkillValue.h"
+#include "battle/BattleHelpers.h"
 
 struct BattleMessageEntry {
     char text[0x10]; /* 0x00 */

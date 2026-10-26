@@ -1,6 +1,6 @@
 /* NON_MATCHING: near (197 rows against 198): same switch cases, calls and constants; retail keeps the stage-mode index in r5 through a conditional move (cmp; movge; blt) where ours uses `subs`, hoists the party count/offset pair loads differently in case 4, copies the camera position as three plain words with swapped r0/r1, and holds the battle block in r8/r4 differently in case 6 */
 #include "battle/BtlMainAccess.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 typedef unsigned char u8;
 typedef unsigned short u16;
 typedef short s16;

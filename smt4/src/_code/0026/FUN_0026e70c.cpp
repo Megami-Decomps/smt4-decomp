@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail merges the end-value return and uses s3 for the interpolation product. */
+/* NON_MATCHING: retail branches beq/bls/blt (duration==0 and the return-start path share the end block; the product lands in s3); armcc emits bne/ble/bls in every control-flow form tried. */
 #include "common.h"
 
 // Interpolate over the duration, retaining the start value before time zero.

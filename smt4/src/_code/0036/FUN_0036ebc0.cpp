@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the destination offset field and the source field as pointers (add r1, r0, #28; ldr r3, [r4, #28]!) while this build folds the self-relative arithmetic into offsets and uses different registers. */
+/* NON_MATCHING: only the followed-offset load differs: retail takes it with a different register (r3) and computes the destination field address before the null tests; everything else (switch order, shared tail, node return) matches. */
 #include "common.h"
 
 extern "C" {
@@ -19,19 +19,31 @@ struct LinkNode {
     /* 0x1C */ s32 offset;
 };
 
-/* Points a self-relative offset field at `target`. */
+/* Points a self-relative offset field at `target` (nothing happens for NULL). */
 static __inline void linkSet(s32 *field, const void *target)
 {
-    *field = (u8 *)target - (u8 *)field;
+    if (target != NULL) {
+        *field = (u8 *)target - (u8 *)field;
+    }
+}
+
+/* The node a self-relative offset field points at, or NULL for a zero offset. */
+static __inline LinkNode *linkResolve(s32 *field)
+{
+    s32 relative = *field;
+    if (relative == 0) {
+        return NULL;
+    }
+    return (LinkNode *)((u8 *)field + relative);
 }
 
 /* Builds a link node that refers to the target of `source`: sources of the plain kinds are the target themselves, a link node
  * contributes the node its own offset points at. */
-void FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
+LinkNode *FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
 {
     LinkNode *node = (LinkNode *)allocator->vtbl->allocate(allocator, sizeof(LinkNode), 4);
     if (node == NULL) {
-        return;
+        return NULL;
     }
     LinkNode *target = NULL;
     node->unk04[0] = 0;
@@ -42,27 +54,26 @@ void FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
     node->unk04[5] = 0;
     node->offset = 0;
     node->type = 0x20000004;
-    if (source->type == 0x20000002) {
-        if (source == NULL) {
-            return;
+    switch (source->type) {
+    case 0x20000009:
+        linkSet(&node->offset, source);
+        return node;
+    case 0x20000004:
+        s32 *field = &source->offset;
+        if (*field != 0) {
+            target = (LinkNode *)((u8 *)field + *field);
         }
-    } else if (source->type == 0x20000004) {
-        if (source->offset != 0) {
-            target = (LinkNode *)((u8 *)&source->offset + source->offset);
-        }
-        if (target != NULL) {
-            linkSet(&node->offset, target);
-        }
-        return;
-    } else {
-        if (source->type != 0x20000009 && source->type != 0x20000011) {
-            return;
-        }
-        if (source == NULL) {
-            return;
-        }
+        linkSet(&node->offset, target);
+        return node;
+    case 0x20000002:
+        linkSet(&node->offset, source);
+        return node;
+    case 0x20000011:
+        linkSet(&node->offset, source);
+        return node;
+    default:
+        return node;
     }
-    linkSet(&node->offset, source);
 }
 
 } /* extern "C" */

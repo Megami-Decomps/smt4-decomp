@@ -1,6 +1,7 @@
 /* NON_MATCHING: logic and by-value vector ABI match; VFP load order of the three vector accumulations, the negated-vector copy (retail uses VLDM/VSTM) and the node pointer reload scheduling differ. */
 #include "common.h"
 #include "nw/math/MTX34.h"
+#include "classes/Obj557b18.h"
 
 /* Three floats; passed to functions by value in VFP registers. */
 struct EffectVec3 {
@@ -62,7 +63,6 @@ struct DriftEffect {
 };
 
 extern "C" {
-void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *source);
 void nn_math_ARMv6_MTX34MultAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *a, const nw::math::MTX34 *b);
 void matrixTranslateColumn(nw::math::MTX34 *result, const EffectVec3 *translation, const nw::math::MTX34 *matrix);
 void nodeSetTranslation(EffectModelOwner *owner, u32 kind, const EffectPlacement *translation);

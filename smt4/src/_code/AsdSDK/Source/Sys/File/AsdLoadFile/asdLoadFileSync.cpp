@@ -1,19 +1,17 @@
 /* NON_MATCHING: stack-frame size, argument register allocation, and path-format literal placement differ from retail. */
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/AsdFileRequestHasFailed.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 extern "C" {
 extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
 void rt_aeabi_memclr(void *buf, u32 size);
-s32 asdLoadFileHasDevice(const char *path);
 s32 asdLoadFileIsPatched(const char *path);
 s32 textFormatBuffer(char *dst, const char *format, ...);
 AsdFileRequest *asdFileQueueRequest(const char *path, u8 flag);
 void asdFileRequestSetHeapKind(AsdFileRequest *request, u8 flags);
 void optionalParameterTrySet(AsdFileRequest *request, u32 priority);
 void asdFileWait(AsdFileRequest *request);
-void asdFileRequestRelease(AsdFileRequest *request);
 
 /* Loads a file synchronously. Returns the buffer (now owned by the caller) and stores its size in
  * *size, or returns 0 when the load failed. */

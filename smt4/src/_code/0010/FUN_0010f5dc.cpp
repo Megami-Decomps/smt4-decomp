@@ -2,7 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "util/PlatformResultCheck.h"
-#include "util/FUN_002c1398.h"
+#include "code/Code002c_Result.h"
 
 /* The user file system mount: its handle and the pointer to itself handed to the file layer. */
 struct FsMount {

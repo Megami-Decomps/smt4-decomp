@@ -1,6 +1,6 @@
 /* NON_MATCHING: the reset flag and the byte clear are scheduled differently (retail zeroes r1 once and reuses it); the tail call then lands at another offset. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0023.h"
 
 struct PanelState {
     /* 0x000 */ u8 unk000[5];

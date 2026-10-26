@@ -1,7 +1,7 @@
 #ifndef SHARD_W8X15_PACKAGELIST_H
 #define SHARD_W8X15_PACKAGELIST_H
 #include "common.h"
-#include "util/dataTableFileGetTable.h"
+#include "gamedata/DataTableAccess_VariantA.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"

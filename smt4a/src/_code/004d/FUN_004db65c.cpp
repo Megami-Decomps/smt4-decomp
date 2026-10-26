@@ -48,7 +48,7 @@ FusionDemonRecord *FUN_00184310(u32 id);
 CompactSortRecord *findSkillMetadataById(u16 id);
 void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
 u32 battleCandidateMatchesSkillFilters(FusionState *state, u32 first, u32 second, u32 demonId);
-s32 uiCompareHalfwordKeys(const void *left, const void *right);
+s32 halfwordKeyEmptyLastCompare(const void *left, const void *right);
 
 /* Builds the result of fusing `first` and `second`: fills `result` and the state's skill list; returns the state or 0. */
 FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, FusionResult *result)
@@ -85,7 +85,7 @@ FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, FusionResul
                         state->skills[i] = 0;
                     }
                 }
-                qsort(state->skills, state->skillCount, 2, uiCompareHalfwordKeys);
+                qsort(state->skills, state->skillCount, 2, halfwordKeyEmptyLastCompare);
                 s32 oldCount = state->skillCount;
                 state->skillCount = 0;
                 for (s32 i = 0; i < oldCount; i++) {

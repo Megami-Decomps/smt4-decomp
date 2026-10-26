@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 
@@ -41,8 +41,6 @@ typedef struct {
     unsigned int sp120; /* 0x120: local_120 */
 } void_stack;
 
-extern unsigned char LAB_0035580c; /* 0x35580c */
-extern unsigned char LAB_00355ef4; /* 0x355ef4 */
 extern int g_mapDepart; /* 0x5806c4 */
 extern int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int DAT_005f16d4; /* 0x5f16d4 */
@@ -121,7 +119,7 @@ void FUN_00355428(void)
       } while (temp_v7 < 0x10b);
       temp_v4 = DAT_005f16d4;
       FUN_003799d0(DAT_005f16d4);
-      textFormatBuffer(temp_v18,&LAB_0035580c,temp_v4);
+      textFormatBuffer(temp_v18,"%s",temp_v4);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)*(short *)(temp_v3 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(3,0xffffffff,temp_v18);
@@ -298,7 +296,7 @@ void FUN_00355428(void)
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1d20);
         FUN_0015f858(temp_v9,0);
-        textFormatBuffer(temp_v18,&LAB_00355ef4,temp_v9);
+        textFormatBuffer(temp_v18,"%s",temp_v9);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v8 + 10),
@@ -380,7 +378,7 @@ LAB_00355f74:
         }
         temp_v9 = (int)*(short *)(temp_v7 + 0x5f1dc8);
         FUN_0015f858(temp_v9,0);
-        textFormatBuffer(temp_v18,&LAB_00355ef4,temp_v9);
+        textFormatBuffer(temp_v18,"%s",temp_v9);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v8 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,8 +1,8 @@
-/* NON_MATCHING: switch dispatch pivots at a different state and merges the completion branches. */
+/* NON_MATCHING: the dispatch (pivot at state 3, empty case 1) now matches retail; retail lays the `return 1` exit for states 0/99 at the end with the other exit, the build returns it inline. */
 #include "map/mapDepart.h"
+#include "event/3dEvent/3dEventEffect.h"
 
 extern "C" {
-void asdLoadFileAsyncNoCallback(const char *path, void **result, s32 flags, s32 priority);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 extern MapDepartWork *g_mapDepartWork;
 
@@ -28,6 +28,8 @@ u32 FUN_002d1ce0()
     case 0:
     case 99:
         return 1;
+    case 1:
+        break;
     case 2:
         if (work->skyId <= 0) {
             work->state = 10;

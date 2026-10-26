@@ -1,6 +1,6 @@
 #include "common.h"
 #include "nn/Result.h"
-#include "util/AsdFatalError.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 extern u32 DAT_0040b88c;

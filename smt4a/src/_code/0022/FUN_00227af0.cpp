@@ -1,6 +1,7 @@
 #include "shard/Shard0033.h"
 #include "shard/PassiveSkill.h"
 #include "gamedata/Table04Record.h"
+#include "code/Code0022_Smt4a.h"
 
 extern "C" {
 extern MenuState *g_menuState;

@@ -28,11 +28,6 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } param_1_stack;
 
-extern unsigned char LAB_00284d30; /* 0x284d30 */
-extern unsigned char LAB_00284d38; /* 0x284d38 */
-extern unsigned char LAB_0028509c; /* 0x28509c */
-extern unsigned char LAB_002850b8; /* 0x2850b8 */
-extern unsigned char LAB_002850c0; /* 0x2850c0 */
 extern unsigned char LAB_00285224; /* 0x285224 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -100,11 +95,11 @@ void FUN_002849a4(int param_1)
       temp_v4 = temp_v2 * 0x44;
       if (*(char *)(temp_v4 + 0x447f54) != '\x01') {
         if (*(char *)(temp_v4 + 0x447f54) != '\x02') {
-          FUN_00263cb8(0,0,&LAB_00284d30,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x447f58),
+          FUN_00263cb8(0,0,"START",0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x447f58),
                        *(unsigned char *)(temp_v4 + 0x447f59),0,0,0,0,0,0xd,1,0,0,0,0);
         }
         else {
-          FUN_00263cb8(0x2400001,0,&LAB_0028509c,0x1b,8,0xffffffff,0,
+          FUN_00263cb8(0x2400001,0,"PEVE",0x1b,8,0xffffffff,0,
                        *(unsigned char *)(temp_v4 + 0x447f58),*(unsigned char *)(temp_v4 + 0x447f59),0,0,0,0,
                        0xd,1,0,0,0,0);
           namedEntryTableSetById(0x2400001,(int)*(short *)(temp_v4 + 0x447f5a),temp_v4 + 0x447f5c);
@@ -112,14 +107,14 @@ void FUN_002849a4(int param_1)
         }
       }
       else {
-        FUN_00263cb8(0,0,&LAB_00284d38,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x447f58),
+        FUN_00263cb8(0,0,"PREV",0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x447f58),
                      *(unsigned char *)(temp_v4 + 0x447f59),0,0,0,0,0,0xd,1,
                      (int)*(char *)(temp_v4 + 0x447f55),(int)*(char *)(temp_v4 + 0x447f56),
                      (int)*(char *)(temp_v4 + 0x447f57),0);
       }
     }
     else {
-      FUN_00263cb8(0,0,&LAB_00284d30,0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
+      FUN_00263cb8(0,0,"START",0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
     }
     if (param_1 == 0) {
       FUN_002671f4(0);
@@ -164,7 +159,7 @@ void FUN_002849a4(int param_1)
     if (temp_v0 != '\x01') {
       if (temp_v0 != '\x02') {
         if (temp_v0 != '\x03') {
-          FUN_00263cb8(0,0,&LAB_002850b8,0x1c,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x447f70),
+          FUN_00263cb8(0,0,"GOAL",0x1c,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x447f70),
                        *(unsigned char *)(temp_v2 + 0x447f71),0,0,0,0,0,0xd,1,0,0,0,0);
         }
         else {
@@ -182,14 +177,14 @@ void FUN_002849a4(int param_1)
       }
     }
     else {
-      FUN_00263cb8(0,0,&LAB_002850c0,3,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x447f70),
+      FUN_00263cb8(0,0,"NEXT",3,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x447f70),
                    *(unsigned char *)(temp_v2 + 0x447f71),0,0,0,0,0,0xd,1,
                    (int)*(char *)(temp_v2 + 0x447f6d),(int)*(char *)(temp_v2 + 0x447f6e),
                    (int)*(char *)(temp_v2 + 0x447f6f),0);
     }
   }
   else {
-    FUN_00263cb8(0,0,&LAB_002850b8,0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
+    FUN_00263cb8(0,0,"GOAL",0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
   }
   if (param_1 != 0) {
     return;

@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail spills the reset flag with `push {r0, ...}` and evaluates the first data-table lookup, then the kind test, before the second lookup in a different block order; ours keeps the flag in sl and merges the count tests (147 rows against 145). */
 #include "common.h"
 #include "event/2dEvent/2dEventTex.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 
 /* Record of data table 0x24 (0x94 bytes). */
 struct UniteTableRecord {

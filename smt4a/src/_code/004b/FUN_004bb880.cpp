@@ -2,7 +2,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include <stddef.h>
-#include "util/GameDataBlocksGetSaveData.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (218 vs 210 rows); retail builds the translate/scale matrices with individual stores and a 16-word copy of the camera matrix, and keeps the scale-derived offsets in float registers */
 #include "common.h"
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "text/TextDraw.h"

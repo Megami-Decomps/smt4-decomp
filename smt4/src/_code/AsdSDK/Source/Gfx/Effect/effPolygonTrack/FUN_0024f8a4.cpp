@@ -2,7 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "shard/asdMemFree.h"
+#include "util/MemoryHelpers_VariantB.h"
 
 /* A per-vertex colour buffer object: `colors` holds four floats per vertex. */
 struct TrackColorBuffer {

@@ -12,7 +12,7 @@ extern "C" {
 void FUN_002b4c30(Matrix44 *matrix, const f32 *rotation);
 void matrix44SetIdentity(Matrix44 *matrix);
 void FUN_002a2048(Matrix44 *matrix, const ModelTransformVector *translation, u32 order);
-void FUN_002a1fb4(Matrix44 *target, const Matrix44 *matrix, u32 flags);
+void matrixApplyByMode(Matrix44 *target, const Matrix44 *matrix, u32 flags);
 
 // Build a target transform from optional rotation, uniform scale, and translation.
 void FUN_003626bc(ModelTransformTarget *target, const ModelTransformVector *translation, const f32 *rotation, f32 scale)
@@ -36,6 +36,6 @@ void FUN_003626bc(ModelTransformTarget *target, const ModelTransformVector *tran
         vector.z = translation->z;
         FUN_002a2048(&matrix, &vector, 2);
     }
-    FUN_002a1fb4(&target->matrix, &matrix, 0);
+    matrixApplyByMode(&target->matrix, &matrix, 0);
 }
 }

@@ -9,8 +9,8 @@ float FUN_00231d2c(int);
 int FUN_00231dec(...);
 int titleScissorApplyOrClearRequests(...);
 int mathDistanceBetweenPoints(void);
-int FUN_002bedb0(...);
-int FUN_002bee04(unsigned int, int, unsigned int);
+int renderCtxPopState(...);
+int renderStackPushIndexed(unsigned int, int, unsigned int);
 int FUN_0039af94(int);
 int FUN_0039cddc(int);
 int FUN_0039d0d0(int);
@@ -39,8 +39,8 @@ extern unsigned char mathHeadingToDirectionCode(int context, float angle);
 extern float *lmapSceneGetObj(void);
 /* Supplied declaration required: mathDistanceBetweenPoints. */
 extern int FUN_00288f78(unsigned int);
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 extern int gameGetMapBlock(void);
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0039af94. */
@@ -166,7 +166,7 @@ LAB_003998fc:
     temp_v11 = *pfVar5;
     temp_v12 = pfVar5[1];
     temp_v4 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v4);
+    renderStackPushIndexed(g_titleScene,3,temp_v4);
     if ((*(unsigned int *)(param_1 + 0x10) & 0x20000) == 0) {
       temp_v1 = 1;
     }
@@ -213,7 +213,7 @@ LAB_003998fc:
     else {
       FUN_00231bcc(param_1 + 0x164,temp_v3 + 0xbb9,(int)temp_v8,(int)temp_v9,0xb,1);
     }
-    FUN_002bedb0(g_titleScene,3);
+    renderCtxPopState(g_titleScene,3);
   }
   titleScissorApplyOrClearRequests(param_1,0);
   (*(int *)((unsigned char *)&DAT_0044cdc8 + 0x10)) = 0xf1;

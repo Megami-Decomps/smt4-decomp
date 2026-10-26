@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTableAccess_Smt4a.h"
 
 struct PairedKeyRecord {
     u16 second; // 0x00

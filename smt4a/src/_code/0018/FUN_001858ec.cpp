@@ -1,5 +1,6 @@
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "code/Code0018_Smt4a.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 struct AllocatorLock {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of a shop/menu choice handler (the draft's lost return of FUN_002c1658 restored as its condition; the two small byte tables it indexes are read as the draft's raw addresses); armcc here shares the result tail and the choice-result reloads differently. */
 #include "common.h"
+#include "code/Code0023_Smt4.h"
 
 /* The choice menu (only the fields the handler reads). */
 struct ChoiceMenu {
@@ -39,7 +40,6 @@ void FUN_00269dc8(void);
 void FUN_00223cf0(void);
 void FUN_002636b0(void);
 void FUN_002f6208(void);
-void FUN_002355ac(s32 flag);
 s32 messageMainGetChoiceResult(void);
 void messageBannerBeginClose(void);
 

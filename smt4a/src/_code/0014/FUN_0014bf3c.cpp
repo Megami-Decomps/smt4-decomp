@@ -1,49 +1,47 @@
-/* NON_MATCHING: the two inlined record lookups now match retail; armcc numbers the entry id/wide copies r5/r6 where retail uses r4/r6 (wide copied before the id byte load). */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/DevilRecordA.h"
+
+struct RaceLabelA {
+    char primary[0x10];
+    char alternate[0x20];
+};
+struct AddonRaceLabelA {
+    u16 id;
+    char text[1];
+};
 
 extern "C" {
 
-typedef struct AocEntry {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 id;
-} AocEntry;
-
 extern u32 g_aocSystem; /* 0x570280 */
 
-extern AocEntry *FUN_00184310(void);
-extern u8 *FUN_0017607c(u32 system, u32 id);
+extern DevilRecordA *FUN_00184310(u32 id);
+extern AddonRaceLabelA *entryListFindById(u32 system, u32 id);
 
-/* The add-on record data + 2 when the system has some for `id`, else the table record for `id`; `wide` selects its second half (+0x10). */
-static __inline u8 *aocRecordData(u32 id, int wide)
+/* The add-on text for `race` when the add-on system has some, else the built-in table's label (`alternate` selects its second half). */
+static __inline const char *findRaceLabel(u32 race, s32 alternate)
 {
-    u8 *result = FUN_0017607c(g_aocSystem, id);
-
-    if (result == NULL) {
-        void *table = dataTableGet(1, 0);
-        u8 *records = (u8 *)dataTableGetEntries(table);
-        u32 count = dataTableGetCount(table);
-
-        if (id < count) {
-            records = records + id * 0x30;
-            if (wide != 0) {
-                return records + 0x10;
-            }
-        }
-        return records;
+    AddonRaceLabelA *addon = entryListFindById(g_aocSystem, race);
+    if (addon != NULL) {
+        return addon->text;
     }
-    return result + 2;
+    void *table = dataTableGet(1, 0);
+    RaceLabelA *labels = (RaceLabelA *)dataTableGetEntries(table);
+    u32 count = dataTableGetCount(table);
+    if (count > race) {
+        return alternate ? labels[race].alternate : labels[race].primary;
+    }
+    return labels->primary;
 }
 
-/* Returns the add-on entry's table record, or the system's own data + 2 when it has some; `wide` selects the record's second half (+0x10). */
-u8 *FUN_0014bf3c(int unused, int wide)
+/* Selects the demon's race label, preferring add-on text over the built-in table. */
+const char *FUN_0014bf3c(u16 id, s32 alternate)
 {
-    AocEntry *entry = FUN_00184310();
-
-    if (entry != NULL) {
-        return aocRecordData(entry->id, wide);
+    DevilRecordA *demon = FUN_00184310(id);
+    if (demon != NULL) {
+        return findRaceLabel(demon->race, alternate);
     }
-    return aocRecordData(0, wide);
+    return findRaceLabel(0, alternate);
 }
 
 } /* extern "C" */

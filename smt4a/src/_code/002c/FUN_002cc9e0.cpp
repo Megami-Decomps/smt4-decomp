@@ -2,7 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "ui/PartyPanelCapacity.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 
 /* One command-menu entry (only the fields read here). */
 struct CommandEntry {

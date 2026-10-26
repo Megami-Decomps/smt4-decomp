@@ -1,26 +1,23 @@
-#include "common.h"
+#include "shard/W5_W5Match2_PlainData.h"
+#include "code/Code0028_Smt4a.h"
 
 extern "C" {
 
-typedef struct Matrix43 {
-    /* 0x00 */ f32 m[16];       /* rows of 4: three rotation rows (columns 0..2) and a translation row at 12 */
-} Matrix43;
-
 /* Multiplies two affine matrices: `out` = `a` * `b` (3x3 part and translation row). */
-void matrix43Multiply(Matrix43 *out, Matrix43 *a, Matrix43 *b)
+void matrix43Multiply(Matrix44 *out, const Matrix44 *a, const Matrix44 *b)
 {
-    out->m[0] = a->m[0] * b->m[0] + a->m[1] * b->m[4] + a->m[2] * b->m[8];
-    out->m[1] = a->m[0] * b->m[1] + a->m[1] * b->m[5] + a->m[2] * b->m[9];
-    out->m[2] = a->m[0] * b->m[2] + a->m[1] * b->m[6] + a->m[2] * b->m[10];
-    out->m[4] = a->m[4] * b->m[0] + a->m[5] * b->m[4] + a->m[6] * b->m[8];
-    out->m[5] = a->m[4] * b->m[1] + a->m[5] * b->m[5] + a->m[6] * b->m[9];
-    out->m[6] = a->m[4] * b->m[2] + a->m[5] * b->m[6] + a->m[6] * b->m[10];
-    out->m[8] = a->m[8] * b->m[0] + a->m[9] * b->m[4] + a->m[10] * b->m[8];
-    out->m[9] = a->m[8] * b->m[1] + a->m[9] * b->m[5] + a->m[10] * b->m[9];
-    out->m[10] = a->m[8] * b->m[2] + a->m[9] * b->m[6] + a->m[10] * b->m[10];
-    out->m[12] = b->m[12] + a->m[12] * b->m[0] + a->m[13] * b->m[4] + a->m[14] * b->m[8];
-    out->m[13] = b->m[13] + a->m[12] * b->m[1] + a->m[13] * b->m[5] + a->m[14] * b->m[9];
-    out->m[14] = b->m[14] + a->m[12] * b->m[2] + a->m[13] * b->m[6] + a->m[14] * b->m[10];
+    out->values[0] = a->values[0] * b->values[0] + a->values[1] * b->values[4] + a->values[2] * b->values[8];
+    out->values[1] = a->values[0] * b->values[1] + a->values[1] * b->values[5] + a->values[2] * b->values[9];
+    out->values[2] = a->values[0] * b->values[2] + a->values[1] * b->values[6] + a->values[2] * b->values[10];
+    out->values[4] = a->values[4] * b->values[0] + a->values[5] * b->values[4] + a->values[6] * b->values[8];
+    out->values[5] = a->values[4] * b->values[1] + a->values[5] * b->values[5] + a->values[6] * b->values[9];
+    out->values[6] = a->values[4] * b->values[2] + a->values[5] * b->values[6] + a->values[6] * b->values[10];
+    out->values[8] = a->values[8] * b->values[0] + a->values[9] * b->values[4] + a->values[10] * b->values[8];
+    out->values[9] = a->values[8] * b->values[1] + a->values[9] * b->values[5] + a->values[10] * b->values[9];
+    out->values[10] = a->values[8] * b->values[2] + a->values[9] * b->values[6] + a->values[10] * b->values[10];
+    out->values[12] = b->values[12] + a->values[12] * b->values[0] + a->values[13] * b->values[4] + a->values[14] * b->values[8];
+    out->values[13] = b->values[13] + a->values[12] * b->values[1] + a->values[13] * b->values[5] + a->values[14] * b->values[9];
+    out->values[14] = b->values[14] + a->values[12] * b->values[2] + a->values[13] * b->values[6] + a->values[14] * b->values[10];
 }
 
 } /* extern "C" */

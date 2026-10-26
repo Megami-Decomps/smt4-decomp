@@ -1,7 +1,6 @@
 /* NON_MATCHING: loop register allocation differs (flags in r6, packet stored as two stm pairs, table reloaded into lr); result-1 spill now matches. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "util/TexTableFindNode.h"
-#include "util/TexTableFindNode.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "gfx/SpritePartDraw.h"
 
 struct SpritePartPlacement {

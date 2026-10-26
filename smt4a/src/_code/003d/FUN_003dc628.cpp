@@ -4,7 +4,8 @@
 #include "gamedata/GameFlags.h"
 #include "camp/UIFade/UIFade.h"
 #include "event/2dEvent/SmokeFade.h"
-#include "util/FUN_0013def0.h"
+#include "code/Code0013.h"
+#include "code/Code0023.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ int FUN_003a5094(void);
 
 int FUN_001517b4(...);
 int campReleaseRegisteredTouchRegions(void);
-int FUN_0023b45c(...);
 int campReleaseSlotTouchRegions(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int campShowSelectedEntryHelp(...);

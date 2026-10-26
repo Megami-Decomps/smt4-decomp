@@ -1,6 +1,6 @@
 /* NON_MATCHING: record and requiredBits trade r5/r6 (register allocation only). */
 #include "common.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 

@@ -1,4 +1,4 @@
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 /* NON_MATCHING: retail uses `mov r8, r0` where armcc emits `mov r6, r0`. */
 #include "shard/W5_W5Match7_EntrySort.h"
 

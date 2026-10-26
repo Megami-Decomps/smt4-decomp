@@ -1,7 +1,7 @@
 /* NON_MATCHING: twin of smt4 FUN_002d508c; readable rewrite compiles (175 vs 165 rows); register allocation and stack frame differ */
 #include "common.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
-#include "shard/gameFlagsGetBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 struct Vec3f {
     f32 x, y, z;

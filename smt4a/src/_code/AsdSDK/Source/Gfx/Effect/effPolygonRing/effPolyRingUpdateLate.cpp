@@ -1,6 +1,6 @@
 /* NON_MATCHING: register allocation only: retail moves obj into r0 before the late-update dispatch and loads the kind from it. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 

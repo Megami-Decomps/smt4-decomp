@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020a760` (_code @ 0x20a760, 0x434 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0020_Smt4a.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_003f5220(...);
 int FUN_001517b4(int, int);
 int eventQueueAddUniqueIfValid(int);
 int uiSpriteSetKeyframe(int, int, int);
-int FUN_0020b718(int, int);
 int useCounterStart(void);
 int FUN_0026fa30(void);
 int FUN_002a4878(...);

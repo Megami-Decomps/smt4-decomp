@@ -8,7 +8,7 @@ struct ContentKindValueRecord {
 
 extern "C" s32 aocEntryGetKind(u32 id);
 extern "C" ContentKindValueRecord *dataTable08Sub2GetRecord(u32 id);
-extern "C" s32 FUN_00253f94(const ContentKindValueRecord *record);
+extern "C" s32 recordGetPercentageScaledBase(const ContentKindValueRecord *record);
 
 /* Select the content record's value according to its downloadable-content kind. */
 extern "C" s32 contentGetKindValue(u32 id)
@@ -28,7 +28,7 @@ extern "C" s32 contentGetKindValue(u32 id)
     default:
         ContentKindValueRecord *record = dataTable08Sub2GetRecord(id);
         if (record != NULL)
-            value = FUN_00253f94(record);
+            value = recordGetPercentageScaledBase(record);
         break;
     }
     return value;

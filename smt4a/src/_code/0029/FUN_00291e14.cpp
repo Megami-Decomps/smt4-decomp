@@ -1,26 +1,16 @@
-/* NON_MATCHING: retail uses ldr r1, [pc, #48] where the compiled block uses ldr r0, [pc, #68]. */
-#include "common.h"
-
-struct BattleMain {
-    u8 unk00[0x45a0];
-    u32 flagsLow;  // 0x45a0
-    u32 flagsHigh; // 0x45a4
-};
+/* NON_MATCHING: g_btlMain is the canonical BtlMainGlobalsA (state pointer + suppressDefeat mask) and the rows now equal retail's 15; only the registers of the 64-bit AND operands differ. */
+#include "battle/btlMain.h"
 
 extern "C" {
-extern BattleMain* g_btlMain;
-extern u32 DAT_00573ae8;
-extern u32 DAT_00573aec;
+extern BtlMainGlobalsA g_btlMain;
 
+/* Tests whether any of the battle state's flags is in the module's suppression mask. */
 u32 FUN_00291e14(void)
 {
-    BattleMain* battle = g_btlMain;
+    BtlMainStateA* battle = g_btlMain.state;
     if (battle == NULL) {
         return 0;
     }
-
-    u32 selectedFlags = (battle->flagsLow & DAT_00573ae8)
-                      | (battle->flagsHigh & DAT_00573aec);
-    return selectedFlags != 0;
+    return (battle->stateFlags64.bits & g_btlMain.suppressDefeat) != 0;
 }
 }

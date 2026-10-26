@@ -4,7 +4,7 @@
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
-#include "util/btlScriptResolveGroupArg.h"
+#include "battle/BattleHelpers.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);

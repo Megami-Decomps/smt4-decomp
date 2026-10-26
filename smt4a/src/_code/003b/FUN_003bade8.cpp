@@ -1,7 +1,7 @@
 /* NON_MATCHING: separate scratch globals prevent retail's shared base; payload assignment calls __aeabi_memcpy4 instead of specialized rt_memcpy_w144. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
 extern s32 DAT_0059e9b4;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: Experience-loop block placement, saved registers, and high-level polynomial lowering differ. */
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 
 extern "C" {

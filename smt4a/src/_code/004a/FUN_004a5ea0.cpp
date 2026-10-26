@@ -1,8 +1,7 @@
-#include "util/DrawTextAtRelativePosition.h"
+#include "ui/UiControl.h"
 /* NON_MATCHING: retail's prologue pushes r0-r3 with the saved registers and reads the entry argument from its pushed slot ([sp+96]) instead of keeping it in a register (frame 76 vs 92); the panel/alternate/textId registers also differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/DrawTextAtRelativePosition.h"
 
 namespace {
 struct ProfileEntryDrawView {
@@ -31,7 +30,7 @@ extern "C" {
 const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 DemonCaptionRecord *dataTable00FindById(u16 id);
 void FUN_004a7dc8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style);
-void FUN_004a7a50(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
+void demonIconPanelDrawRow(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
 void FUN_004a7cb0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 fade, f32 scale);
 void FUN_004a7fb8(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 style, s32 fade, f32 scale);
 void FUN_004a7814(ProfileEntryDrawView *panel, u32 first, s32 entry, s32 alternate, s32 fade, u32 second);
@@ -56,7 +55,7 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     if (alternate != 0) {
         FUN_004a7dc8(panel, entry, fade, panel->style);
     }
-    FUN_004a7a50(panel, 1, textId, entry, alternate, fade);
+    demonIconPanelDrawRow(panel, 1, textId, entry, alternate, fade);
     FUN_004a7cb0(panel, textId, entry, alternate, fade, scale);
     FUN_004a7fb8(panel, textId, entry, alternate, panel->style, fade, scale);
 

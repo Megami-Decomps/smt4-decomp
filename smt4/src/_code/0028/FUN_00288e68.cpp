@@ -18,13 +18,12 @@ s32 compareLookupKey(const void *left, const void *right);
 extern AocSystemView *g_aocSystem; /* 0x433158 */
 
 /* Returns the value of the table 8 type 5 record for `id`: the add-on's record when it has one, else the one found in the table. */
-u16 FUN_00288e68(u32 id)
+u16 FUN_00288e68(u16 id)
 {
-    AocSystemView *system = g_aocSystem;
     Table8Type5Record key;
     Table8Type5Record *record;
     key.id = id;
-    if (system->lookupEnabled == 0 || (record = FUN_002b4504(system, id)) == NULL) {
+    if (g_aocSystem->lookupEnabled == 0 || (record = FUN_002b4504(g_aocSystem, id)) == NULL) {
         void *table = dataTableGet(8, 5);
         record = (Table8Type5Record *)table;
         if (table != NULL) {

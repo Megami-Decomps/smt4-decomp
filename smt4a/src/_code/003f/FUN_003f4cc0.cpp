@@ -24,8 +24,6 @@ typedef struct {
     unsigned int sp68; /* 0x68: local_68 */
 } param_4_stack;
 
-extern unsigned char LAB_003f5208; /* 0x3f5208 */
-extern unsigned char LAB_003f5218; /* 0x3f5218 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
@@ -94,13 +92,13 @@ void FUN_003f4cc0(int param_1,int param_2,int param_3,int param_4)
               temp_v7 = *(unsigned short *)(temp_v5 + 100);
               goto LAB_003f510c;
             }
-            textFormatBuffer(temp_v13,&LAB_003f5218,0);
+            textFormatBuffer(temp_v13,"%d",0);
           }
           else {
             temp_v5 = gameGetPlayerData();
             temp_v7 = *(unsigned short *)(temp_v5 + 0x62);
 LAB_003f510c:
-            textFormatBuffer(temp_v13,&LAB_003f5218,temp_v7);
+            textFormatBuffer(temp_v13,"%d",temp_v7);
             if (temp_v7 >= 100) {
               temp_v11 = 0x6f;
               temp_v10 = param_4;
@@ -131,13 +129,13 @@ LAB_003f510c:
             }
             if (temp_v5 != 0) {
               temp_v3 = FUN_00180114(*(unsigned short *)(temp_v5 + 0x62));
-              textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
+              textFormatBuffer(&temp_v10,"%s",temp_v3);
             }
           }
           else {
             gameGetPlayerData();
             temp_v3 = gameGetPlayerName();
-            textFormatBuffer(&temp_v10,&LAB_003f5208,temp_v3);
+            textFormatBuffer(&temp_v10,"%s",temp_v3);
           }
           temp_v5 = asdTMTexTableEntryAt(0x11);
           fontMeasureLineAdvance(&temp_v10,1);

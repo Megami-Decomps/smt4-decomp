@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "shard/uiSpriteSelectAnim.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const SpriteAnimationCommand *animation);

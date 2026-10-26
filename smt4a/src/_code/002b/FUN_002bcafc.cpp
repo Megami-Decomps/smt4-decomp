@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the map music selection (the draft's lost arguments restored: the slot table row's flags, the sub-area passed to the slot lookup and the lmap spawn index); armcc here reloads the area/sub fields and the game-state pointer differently across the override ladder. */
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
-#include "util/FUN_002b950c.h"
+#include "code/Code002b.h"
 #include "mikado/mikadoMain.h"
 
 /* The game state (only the fields read here). */

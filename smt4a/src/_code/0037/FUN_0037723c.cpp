@@ -1,5 +1,5 @@
 #include "shard/Shard0033.h"
-#include "util/FUN_003799d0.h"
+#include "code/Code0037.h"
 
 struct AreaTimerRecord {
     /* 0x00 */ u8 unk00[0x20];

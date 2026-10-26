@@ -1,5 +1,5 @@
 #include "shard/W5_W5Match7_ScriptUnit.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {
 

@@ -1,6 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (172 vs 173 rows); retail uses a larger callee-saved set (push {r3-r9,lr}) and different register allocation */
 #include "common.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 // Selection state of the animated page UI.
 struct AnimatedPageSelection {

@@ -1,5 +1,5 @@
 #include "battle/BtlMainAccess.h"
-#include "util/FUN_003ee0c0.h"
+#include "code/Code003e.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 

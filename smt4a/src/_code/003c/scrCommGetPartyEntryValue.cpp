@@ -1,4 +1,5 @@
-#include "util/FUN_002a4894.h"
+#include "code/Code002a.h"
+#include "code/Code002a_VariantA.h"
 #include "shard/Shard003C.h"
 #include "shard/Shard0031.h"
 
@@ -20,7 +21,6 @@ typedef struct PartyOwner {
     /* 0x04 */ PartyObj *obj;
 } PartyOwner;
 
-extern s32 FUN_002a4878(u8 *block);
 extern Rec12C *FUN_003e4d68(u32 index);
 extern s32 FUN_0019e52c(u32 value);
 extern void scrSetResult(s32 value);

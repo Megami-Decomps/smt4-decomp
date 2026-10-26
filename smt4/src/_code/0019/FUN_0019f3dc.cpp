@@ -44,8 +44,6 @@ typedef struct {
     unsigned int sp128; /* 0x128: local_128 */
 } void_stack;
 
-extern unsigned char LAB_0019f7d0; /* 0x19f7d0 */
-extern unsigned char LAB_0019f7e8; /* 0x19f7e8 */
 extern int g_aocMain; /* 0x432fc8 */
 extern int g_aocSystem; /* 0x433158 */
 extern unsigned int *g_aocJob; /* 0x43e0d0 */
@@ -152,8 +150,8 @@ unsigned int FUN_0019f3dc(void)
       temp_v1 = DAT_004937c4;
       puVar2[5] = DAT_004937c4;
       puVar2[6] = DAT_004937c8;
-      textFormatBuffer(temp_v7,&LAB_0019f7d0,temp_v1,temp_v1);
-      textFormatBuffer(temp_v8,&LAB_0019f7e8,puVar2[5],puVar2[5]);
+      textFormatBuffer(temp_v7,"event/e%03d/e%03d.bf",temp_v1,temp_v1);
+      textFormatBuffer(temp_v8,"event/e%03d/e%03d.mbm",puVar2[5],puVar2[5]);
       temp_v3 = aocPackageGrantsItem(g_aocSystem,puVar2[5],0);
       if (temp_v3 != 0) {
         temp_v3 = g_aocSystem;

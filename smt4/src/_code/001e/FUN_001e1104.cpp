@@ -1,6 +1,6 @@
 /* NON_MATCHING: scheduling only: retail stores the style word before the active byte (str [600]; strb [606]); built swaps the two stores */
 #include "common.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

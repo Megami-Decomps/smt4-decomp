@@ -1,21 +1,35 @@
-/* NON_MATCHING: the unit's work pointer is loaded into r0 (retail: r1) and the +0x100 base is added before the return constant. */
-#include "shard/W4_W4Match6b_BtlUnitWork.h"
-#include "battle/BattleUnit.h"
+#include "battle/btlScript.h"
+#include "battle/BattleUnitSlot.h"
 
 extern "C" {
 
-extern s32 g_btlScriptUnit;
-extern u16 scrGetArg(s32 index);
+typedef struct UnitSlot {
+    /* 0x00 */ u8 unk00[0xBE];
+    /* 0xBE */ u16 mode;
+    /* 0xC0 */ u16 arg;
+} UnitSlot;
 
-/* Script command: queues command 8 with the argument on the scripted unit. */
+typedef struct UnitData {
+    /* 0x000 */ u8 unk000[0x100];
+    /* 0x100 */ UnitSlot slot;
+} UnitData;
+
+typedef struct Unit {
+    /* 0x00 */ u8 unk00[0x28];
+    /* 0x28 */ UnitData *data;
+} Unit;
+
+s32 scrGetArg(u32 index);
+
+/* Script command: queues command 8 with the script's argument on the script unit's slot. */
 u32 FUN_00372904(void)
 {
-    u16 arg = scrGetArg(0);
-    BtlUnitWork *work = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->work;
+    s32 arg = scrGetArg(0);
+    UnitSlot *slot = &reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->data->slot;
 
-    work->command = 8;
-    work->commandArg = arg;
+    slot->mode = 8;
+    slot->arg = arg;
     return 1;
 }
 
-}
+} /* extern "C" */

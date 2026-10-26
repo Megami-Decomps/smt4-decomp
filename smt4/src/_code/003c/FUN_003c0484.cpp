@@ -3,10 +3,10 @@
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 #include "battle/BtlMainAccess.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 u32 FUN_0022a5d8(u32 message, BtlEntry *entry, u32 context);
-s32 playerPadTestBit(u32 bit);
 
 u32 FUN_003c0484(BtlEntry *entry, u32 ignoredConditions, u32 context)
 {

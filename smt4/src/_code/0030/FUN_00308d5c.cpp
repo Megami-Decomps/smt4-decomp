@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/BattleUnitSlot.h"
+#include "code/Code0024_Smt4.h"
 
 extern "C" {
 
@@ -10,7 +11,7 @@ int FUN_00245d0c(int, int);
 int FUN_00246d38(int, int, int, unsigned int);
 int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
-int FUN_002550d8(...);
+int btlAdjustPropertyClamped(...);
 int FUN_00255180(...);
 int FUN_0027de98(void);
 int FUN_00337c20(...);
@@ -32,13 +33,12 @@ extern int g_btlMainState; /* 0x435d90 */
 extern unsigned int g_btlUiBlock; /* 0x439ca8 */
 
 /* Supplied declaration required: FUN_00245a7c. */
-extern int FUN_00245c78(void);
 extern unsigned int FUN_00245cc0(unsigned int);
 /* Supplied declaration required: FUN_00245d0c. */
 /* Supplied declaration required: FUN_00246d38. */
 /* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: pickerAdvance. */
-/* Supplied declaration required: FUN_002550d8. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_0027de98. */
 extern int jyoucyuGetTableEntry(unsigned int);
@@ -144,28 +144,28 @@ LAB_00308ea4:
 LAB_00308fb8:
               temp_v5 = (int)(short)puVar9[2];
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x80) != 0) {
-                FUN_002550d8(temp_v5,0x16,1,0);
+                btlAdjustPropertyClamped(temp_v5,0x16,1,0);
               }
               else {
                 temp_v3 = FUN_00245cc0(0x16);
                 FUN_00255180(temp_v5,0x16,temp_v3);
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x40) != 0) {
-                FUN_002550d8(temp_v5,0x17,1,0);
+                btlAdjustPropertyClamped(temp_v5,0x17,1,0);
               }
               else {
                 temp_v3 = FUN_00245cc0(0x17);
                 FUN_00255180(temp_v5,0x17,temp_v3);
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 0x100) != 0) {
-                FUN_002550d8(temp_v5,0x18,1,0);
+                btlAdjustPropertyClamped(temp_v5,0x18,1,0);
               }
               else {
                 temp_v3 = FUN_00245cc0(0x18);
                 FUN_00255180(temp_v5,0x18,temp_v3);
               }
               if ((*(unsigned short *)((int)puVar9 + 0x1c6) & 8) != 0) {
-                FUN_002550d8(temp_v5,0x19,1,0);
+                btlAdjustPropertyClamped(temp_v5,0x19,1,0);
               }
               else {
                 temp_v3 = FUN_00245cc0(0x19);

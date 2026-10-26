@@ -1,5 +1,6 @@
 #include "gamedata/DataTable.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "gamedata/DataTableAccess_Smt4.h"
 
 struct Table0BRecord {
     UnsignedRecordKey32 sort; // 0x00, key at 0x20

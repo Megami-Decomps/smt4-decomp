@@ -19,9 +19,7 @@ const char *FUN_00387c78(AocSystem *system, s32 id)
             const AocPackageFileDescription *descriptions = FUN_002ac0f8(package);
             u32 fileCount = FUN_002ac0c4(package);
             for (u32 fileIndex = 0; fileIndex < fileCount; ++fileIndex) {
-                if (descriptions[fileIndex].kind != 0x21)
-                    continue;
-                if (package->fileTable.files[fileIndex].state.available) {
+                if (descriptions[fileIndex].kind == 0x21 && package->fileTable.files[fileIndex].state.available) {
                     void *table = dataTableFileGetTable(package->fileTable.files[fileIndex].data, 1);
                     DisplayNameOverride *records = (DisplayNameOverride *)dataTableGetEntries(table);
                     s32 count = dataTableGetCount(table);

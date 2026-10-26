@@ -31,8 +31,8 @@ typedef struct {
     unsigned int sp808; /* 0x808: local_808 */
 } param_2_stack;
 
-extern unsigned char LAB_0042cb68; /* 0x42cb68 */
-extern unsigned char LAB_0042cbb0; /* 0x42cbb0 */
+extern unsigned char FUN_0042cb68; /* 0x42cb68 */
+extern unsigned char FUN_0042cbb0; /* 0x42cbb0 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
@@ -135,9 +135,9 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   if (param_1[0x16] != 0) {
     param_1[0x16] = 0;
   }
-  __aeabi_vec_ctor_nocookie_nodtor(puVar2,&LAB_0042cbb0,0x70,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar2,&FUN_0042cbb0,0x70,0xc);
   puVar2 = puVar2 + 0x540;
-  __aeabi_vec_ctor_nocookie_nodtor(puVar2,&LAB_0042cb68,0x14,0xc);
+  __aeabi_vec_ctor_nocookie_nodtor(puVar2,&FUN_0042cb68,0x14,0xc);
   *(unsigned int *)(puVar2 + -0x6a0) = 0;
   sysMemClear(puVar2 + -0x69c,0x150);
   temp_v3 = 0;

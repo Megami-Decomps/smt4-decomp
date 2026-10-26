@@ -2,7 +2,8 @@
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 #include <stddef.h>
 #include "event/2dEvent/SmokeFade.h"
-#include "util/CalleeContracts.h"
+#include "code/Code002c.h"
+#include "code/Code002c_Smt4a.h"
 
 struct UnitStatusOpenRequest {
     u16 selection;
@@ -18,7 +19,6 @@ const UnitCategoryRecord *saveSlotFindById(u32);
 void statusPanelSetOpen(s32);
 void FUN_0035da20(const UnitStatusOpenRequest *, u32);
 void statusDownEnterStateOne();
-s32 FUN_002c7cb4();
 void scrScriptProcessStartEntry(u32, s32);
 void FUN_00333dc8(s32);
 s32 scrRunOpcodesStub(u32);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: header addressing now matches; retail loads the flag byte into r1 before building the mask (r3/r2/r0) where the build loads it into r3 after. */
 #include "common.h"
 
 struct BitFlagState {
@@ -7,19 +6,16 @@ struct BitFlagState {
 };
 
 extern "C" {
-
-extern const BitFlagState *gameGetQuestCenterBlock(void);
-
-/* Tests a bit in the second flag word of the game-data block. */
-bool FUN_0010f498(u32 index)
+BitFlagState *gameGetQuestCenterBlock(void);
+/* Test a packed quest-status bit. */
+s32 FUN_0010f498(u32 index)
 {
     if (index >= 32) {
-        return false;
+        return 0;
     }
-    const BitFlagState *block = gameGetQuestCenterBlock();
-    const u8 *flags = block->flags;
+    u8 *bits = gameGetQuestCenterBlock()->flags;
     u8 mask = (u8)(1u << (index & 7));
-    return (flags[index >> 3] & mask) != 0;
+    u32 byte = bits[index >> 3];
+    return (mask & byte) != 0;
 }
-
-} /* extern "C" */
+}

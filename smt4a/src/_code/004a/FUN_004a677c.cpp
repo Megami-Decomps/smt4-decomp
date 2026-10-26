@@ -1,6 +1,6 @@
 /* NON_MATCHING: count and item-base registers swap (r6/r7), and retail re-extends the loaded id with uxth. */
 #include "gamedata/PartySlots.h"
-#include "util/FUN_002a482c.h"
+#include "code/Code002a.h"
 
 /* One row of the menu's devil list. */
 struct DevilListItem {

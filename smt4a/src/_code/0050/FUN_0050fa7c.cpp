@@ -1,7 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0050fa7c` (_code @ 0x50fa7c, 0x2c0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 

@@ -1,7 +1,7 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/PartyPanelState.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;

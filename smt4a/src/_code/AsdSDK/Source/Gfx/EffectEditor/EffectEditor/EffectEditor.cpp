@@ -7,9 +7,11 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include <math.h>
-#include "util/CalleeContracts.h"
 #include "title/titleMain.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
+#include "util/Random_Smt4a.h"
 
 namespace {
 /* The editor's scratch buffer is past the shared menu-state prefix. */
@@ -39,7 +41,6 @@ extern EffectSelectionCatalogEntry *DAT_0059e624[13];
 extern EffectRenderGlobals DAT_006471dc;
 void __aeabi_memcpy4(void *, const void *, u32);
 char *libc_strcpy(char *, const char *);
-void randomStateSeed(u32, u32);
 EffectSelectionItem *linkedFindItemByIndex(void *, s32);
 void *rt_memcpy(void *, const void *, u32);
 EffectSelectionParts *FUN_002b30e4(EffectSelectionItem *);
@@ -251,7 +252,6 @@ void FUN_002ffe14(const EffMenuPosition *position, u32 color,
     const EffMenuMatrix *matrix, u32 resource, f32 scale);
 void FUN_002b3ed8(const EffMenuPosition *first, const EffMenuPosition *second,
     u32 color, u32 resource);
-void effMenuListAppend(EffMenuNode *node, u32 list);
 
 /* NON_MATCHING: aggregate copy shapes and vector temporary allocation differ. */
 // Edit the position vector, then draw its height, ground radius and transformed endpoint.

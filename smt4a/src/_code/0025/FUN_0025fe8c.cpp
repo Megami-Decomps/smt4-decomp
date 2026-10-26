@@ -1,26 +1,27 @@
-/* NON_MATCHING: retail keeps the constant 7 for the last call's fourth argument in r4 across the earlier calls (mov r4, #7 first); built passes it with mov r3, #7 */
 #include "ui/MessageMain.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 
-extern void FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
+extern s32 FUN_0021bdac(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 extern MessageGlobalsA g_messageMain;
 
+static void showMessage(s32 mode)
+{
+    u32 a = scrGetCommandOwner();
+    u32 b = scrGetArg(0);
+    u32 c = scrGetCommandFrame();
+
+    FUN_0021bdac(a, b, c, mode, 0, 0);
+}
+
+/* Script command: puts the message state in display mode 0x15 and shows the first argument with mode 7. */
 void FUN_0025fe8c(void)
 {
-    u32 first;
-    u32 second;
-    u32 third;
-
     if (g_messageMain.state != NULL) {
         g_messageMain.state->displayMode = 0x15;
     }
-    first = scrGetCommandOwner();
-    second = scrGetArg(0);
-    third = scrGetCommandFrame();
-    FUN_0021bdac(first, second, third, 7, 0, 0);
+    showMessage(7);
 }
 
 } /* extern "C" */

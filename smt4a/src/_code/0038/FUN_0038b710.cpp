@@ -1,6 +1,6 @@
 /* NON_MATCHING: The enabled constant stays live in r6, enlarging the save set; final menu-state stores are scheduled differently. */
 #include "shard/W5_W5Match7_UiQuest.h"
-#include "util/CalleeContracts.h"
+#include "code/Code001b.h"
 
 extern "C" {
 void uiSpriteSetKeyframe(void *sprite, u32 keyframe, u32 flags);

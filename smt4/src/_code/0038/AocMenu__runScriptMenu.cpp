@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail returns directly from every state (no shared epilogue), keeps the process in r4 with g_aocMain in r6 and copies the result through two stack records with ldm/stm; this build merges exits and reuses fewer registers. */
 #include "classes/AocMenu.h"
-#include "util/FUN_00233fcc.h"
-#include "util/FUN_00233fcc.h"
+#include "code/Code0023.h"
 #include "common.h"
 
 struct AocMenuObject;

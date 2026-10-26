@@ -1,5 +1,5 @@
 #include "shard/W4_Match1b_RegisteredHandle.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 
 struct HandleRegistryView {
     /* 0x00 */ u8 unk00[0xc];
@@ -23,7 +23,7 @@ extern RenderParameterOverride *DAT_0056fcb8;
 extern RenderCtx *g_renderCtx;
 s32 FUN_00158124(HandleRegistryView *registry);
 void FUN_00157e98(void *target, const void *parameters);
-void FUN_00145e24(RenderCtx *context, u32 value);
+void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
 void holderFlushPending(RegisteredHandle *holder);
 
 u32 FUN_00146314()
@@ -40,7 +40,7 @@ u32 FUN_00146314()
         }
         FUN_00157e98(target, parameters);
     }
-    FUN_00145e24(g_renderCtx, FUN_00152f54());
+    effectRestoreSavedRenderPairs(g_renderCtx, FUN_00152f54());
     RegisteredHandle **end = g_handleRegistry->end;
     for (RegisteredHandle **holder = g_handleRegistry->begin; holder != end; ++holder) {
         holderFlushPending(*holder);

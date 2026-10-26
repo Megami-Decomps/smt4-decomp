@@ -1,5 +1,6 @@
 #include "map/lmapMain.h"
-#include "util/BannerShow.h"
+#include "ui/UiControl.h"
+#include "map/MapSceneAccess.h"
 
 extern "C" {
 

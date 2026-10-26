@@ -1,5 +1,5 @@
 #include "gfx/Texture2D.h"
-#include "shard/gfxTexture2DCreate.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Texture2D.h"
 extern "C" {
 void sysMemClear(void*, u32);
 extern void* (*g_gfxAllocateCallback)(u32, u32, u32, u32);

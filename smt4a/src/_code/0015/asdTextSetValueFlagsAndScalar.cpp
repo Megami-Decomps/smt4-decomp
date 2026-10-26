@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Gfx/Text/TextDefaults.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_Smt4a.h"
 
 struct TextScalarWork {
     /* 0x00 */ u8 unk00[0x50];

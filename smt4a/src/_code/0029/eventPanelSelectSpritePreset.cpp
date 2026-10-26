@@ -1,6 +1,6 @@
 /* NON_MATCHING: initial mode/option stores and final animated-state/delay stores are scheduled differently; -O2 candidate. */
 #include "common.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 struct EventPanelSprite { u8 data[0x8c]; };
 struct EventPanelPresetWork {

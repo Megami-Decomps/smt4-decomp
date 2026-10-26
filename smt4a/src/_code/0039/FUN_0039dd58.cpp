@@ -1,7 +1,5 @@
-/* NON_MATCHING: retail copies the returned pointer into r1 before adding 0x100; built adds straight from r0 */
-#include "common.h"
 #include "battle/BtlMainAccess.h"
-#include "script/ScriptArgs.h"
+#include "common.h"
 
 extern "C" {
 
@@ -10,26 +8,25 @@ typedef struct StatusFlags {
     /* 0x10 */ u16 bits;
 } StatusFlags;
 
-typedef struct BattleActor {
+typedef struct BattleUnit {
     /* 0x000 */ u8 unk000[0x100];
     /* 0x100 */ StatusFlags status;
-} BattleActor;
+} BattleUnit;
 
-extern BattleActor *FUN_001568f8(void *battle, u32 index);
+u32 scrGetArg(u32 index);
+BattleUnit *FUN_001568f8(void *state, u32 unit);
+s32 scrSetResult(s32 value);
 
-static inline bool statusHasBit(StatusFlags *status, u32 bit)
-{
-    return (status->bits & (1 << bit)) != 0;
-}
-
-/* Script command: sets the result to whether bit `argument 1` of the status flags of actor `argument 0` is set. */
+/* Script command: tests bit `arg1` of the status flags of battle unit `arg0`. */
 u32 FUN_0039dd58(void)
 {
-    u32 index = scrGetArg(0);
+    u32 unit = scrGetArg(0);
     u32 bit = scrGetArg(1);
-    BattleActor *actor = FUN_001568f8(btlGetMainState(), index);
+    BattleUnit *target = FUN_001568f8(static_cast<void *>(btlGetMainState()), unit);
 
-    scrSetResult(statusHasBit(&actor->status, bit));
+    u32 mask = 1 << (bit & 0xFF);
+
+    scrSetResult((target->status.bits & mask) != 0);
     return 1;
 }
 

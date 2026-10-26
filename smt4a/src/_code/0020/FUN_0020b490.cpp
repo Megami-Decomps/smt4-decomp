@@ -1,7 +1,8 @@
 /* NON_MATCHING: state-block and touch-region-count base registers r5/r6 are exchanged. */
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0023.h"
+#include "code/Code002c.h"
 #include "gamedata/SaveSlotTable.h"
 
 struct ScriptRunState;

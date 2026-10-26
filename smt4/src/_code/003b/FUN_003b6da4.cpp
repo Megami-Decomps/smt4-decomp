@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail keeps the shown/next slots in stack slots, spills r0-r3 in the prologue and recomputes the cycle target per slot; the marker drawing is the same (180 vs 184 rows). */
 #include "common.h"
 #include "camp/RenderCtx.h"
-#include "util/MessageKindForward.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 

@@ -1,36 +1,43 @@
-/* NON_MATCHING: retail preserves style 7 in r4 across calls; compiler materializes it at the final call. */
 #include "common.h"
-#include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 
-typedef struct MessageWindow {
+typedef struct MessageState {
     /* 0x000 */ u8 unk000[0xA11];
     /* 0xA11 */ u8 mode;
-} MessageWindow;
+} MessageState;
 
-typedef struct MessageOwner {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ MessageWindow *window;
-} MessageOwner;
+typedef struct MessageCommand {
+    /* 0x0 */ u8 unk0[4];
+    /* 0x4 */ MessageState *state;
+} MessageCommand;
 
-extern void FUN_002866b4(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
+u32 scrGetCommandOwner(void);
+u32 scrGetArg(u32 index);
+u32 scrGetCommandFrame(void);
+s32 FUN_002866b4(u32 a, u32 b, u32 c, s32 d, s32 e, s32 f);
 
-extern MessageOwner g_messageMain;
+static void showMessage(MessageCommand *command, s32 state, s32 mode)
+{
+    u32 a;
+    u32 b;
+    u32 c;
+
+    if (command->state != NULL) {
+        command->state->mode = state;
+    }
+    a = scrGetCommandOwner();
+    b = scrGetArg(0);
+    c = scrGetCommandFrame();
+
+    FUN_002866b4(a, b, c, mode, 0, 0);
+}
+
+/* Script command: puts the message state in mode 0x14 and starts FUN_002866b4 with the first argument. */
+extern MessageCommand g_messageMain;
 void FUN_001c2a1c(void)
 {
-    u32 first;
-    u32 second;
-    u32 third;
-
-    if (g_messageMain.window != NULL) {
-        g_messageMain.window->mode = 0x14;
-    }
-    first = scrGetCommandOwner();
-    second = scrGetArg(0);
-    third = scrGetCommandFrame();
-    FUN_002866b4(first, second, third, 7, 0, 0);
+    showMessage(&g_messageMain, 0x14, 7);
 }
 
 } /* extern "C" */

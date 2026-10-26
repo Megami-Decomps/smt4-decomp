@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/EventQueueAddUnique.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 extern s32 g_eventQueueEntries[32];

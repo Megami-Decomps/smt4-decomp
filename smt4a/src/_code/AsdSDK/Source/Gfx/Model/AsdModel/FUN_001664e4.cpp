@@ -2,7 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gfx/CameraMatrixCache.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
+#include "shard/W6_W6Match6_ItemIcon.h"
 
 extern "C" {
 
@@ -53,7 +54,6 @@ extern unsigned char DAT_00636e14; /* 0x636e14 */
 extern int DAT_00636e18; /* 0x636e18 */
 
 /* Supplied declaration required: FUN_00152f54. */
-extern int FUN_001696f4(void);
 /* Supplied declaration required: FUN_00176538. */
 /* Supplied declaration required: FUN_001767a4. */
 /* Supplied declaration required: FUN_00191bec. */

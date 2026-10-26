@@ -31,11 +31,6 @@ typedef struct {
 extern int FUN_0018f660(...); /* 0x18f660 */
 extern int FUN_001a321c(...); /* 0x1a321c */
 extern int FUN_001cdef8(...); /* 0x1cdef8 */
-extern unsigned char LAB_0028c464; /* 0x28c464 */
-extern unsigned char LAB_0028c474; /* 0x28c474 */
-extern unsigned char LAB_0028c48c; /* 0x28c48c */
-extern unsigned char LAB_0028c4a8; /* 0x28c4a8 */
-extern unsigned char LAB_0028c4bc; /* 0x28c4bc */
 extern unsigned char DAT_00407728; /* 0x407728 */
 extern unsigned char DAT_004077dc; /* 0x4077dc */
 extern unsigned char DAT_0040786c; /* 0x40786c */
@@ -72,13 +67,12 @@ void FUN_0028c040(void)
     }
     puVar1 = DAT_0044e144;
     memClear();
-    puVar2 = &LAB_0028c464;
-    asdProcessCreateSimple(&LAB_0028c464,2,0,0,FUN_0018f660,0,0);
+    asdProcessCreateSimple("Status Calc",2,0,0,FUN_0018f660,0,0);
     *puVar1 = (unsigned int)puVar2;
-    taskCreateDraw(&LAB_0028c474,0x65,0,0,FUN_001cdef8,0,0,puVar2);
-    taskCreateDraw(&LAB_0028c48c,0xcc,0,0,FUN_001cdef8,0,0,*puVar1);
-    taskCreateDraw(&LAB_0028c4a8,0x7d,0,0,FUN_001a321c,0,0,*puVar1);
-    taskCreateDraw(&LAB_0028c4bc,0xdb,0,0,FUN_001a321c,0,0,*puVar1);
+    taskCreateDraw("Status DrawBackUpLeft",0x65,0,0,FUN_001cdef8,0,0,puVar2);
+    taskCreateDraw("Status DrawBackUpRight",0xcc,0,0,FUN_001cdef8,0,0,*puVar1);
+    taskCreateDraw("Status DrawUpLeft",0x7d,0,0,FUN_001a321c,0,0,*puVar1);
+    taskCreateDraw("Status DrawUpRight",0xdb,0,0,FUN_001a321c,0,0,*puVar1);
     statusDownCreate();
     puVar1 = DAT_0044e144;
     *(unsigned short *)(DAT_0044e144 + 0x4bf) = 0;

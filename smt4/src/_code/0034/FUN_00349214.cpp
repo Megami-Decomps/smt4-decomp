@@ -1,6 +1,7 @@
 /* NON_MATCHING: VFP register allocation and the jump-table layout of the state switch differ from retail; the draw selection is the same. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ typedef struct ListWork {
 
 extern void *g_titleScene;
 
-f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
 void FUN_0032b4f8(s32 id, s32 tag, s32 subTag);
 
 /* Draws the five rows of the list: each shown row sets its tag, picks its icon id from its kind

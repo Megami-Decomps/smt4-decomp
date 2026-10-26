@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
-#include "util/DataTable9EntryOrZero.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 

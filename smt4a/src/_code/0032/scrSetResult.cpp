@@ -1,6 +1,5 @@
 #include "script/ScriptVm.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrSetResult.h"
 
 extern "C" {
 

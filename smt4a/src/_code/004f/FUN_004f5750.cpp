@@ -1,6 +1,6 @@
 /* NON_MATCHING: near: same shape, 156 rows against 152; register assignment differs (retail keeps the effect id in sl and the free-slot pointer in r9 and ends both loops at one shared `mov r0,#0`). */
 #include "common.h"
-#include "util/EntryIsValid.h"
+#include "gamedata/GameDataAccess.h"
 
 #define EFFECT_LIST_SIZE 50
 #define EFFECT_LIST_ENTRY_READY 4

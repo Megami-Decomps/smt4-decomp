@@ -1,7 +1,6 @@
 /* NON_MATCHING: retail loads the constants 6 and 1 into callee-saved registers before the calls (build materializes them at the last call) and uses a wider register set. */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 

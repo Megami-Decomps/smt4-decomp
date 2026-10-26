@@ -1,6 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
-#include "util/AsdSoundGetPlayerPriority.h"
+#include "sound/SoundPlayerPriority.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
 extern "C" {

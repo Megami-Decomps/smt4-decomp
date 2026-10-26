@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match7_SceneState.h"
+#include "code/Code0048_Smt4a.h"
 
 struct TimedController {
     u32 flags;

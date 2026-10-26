@@ -1,6 +1,6 @@
 /* NON_MATCHING: argument-store scheduling and the shared destination-store tail differ. */
 #include "map/MapDepartTarget.h"
-#include "shard/dataTableGetRecord23.h"
+#include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
 extern MapDepartTarget DAT_0049fd14;

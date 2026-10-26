@@ -2,10 +2,9 @@
 #include "common.h"
 #include "script/scrScriptProcess.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
-#include "util/CalleeContracts.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "event/2dEvent/EventEffect.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 struct UnitScreenReadyViewA {
     u32 unk00;

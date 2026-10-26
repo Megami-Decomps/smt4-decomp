@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match3_NodeEnable.h"
 #include "font/PlaceWin.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "battle/btlHelp.h"
 
 struct Mover;
 extern "C" {
@@ -29,7 +30,6 @@ int textFormatBuffer(...);
 int asdOperatorNew(void);
 int dataTable33GetEntries(void);
 
-int FUN_0022af9c(...);
 int FUN_0022b29c(int, int, unsigned int);
 int FUN_0022b778(void);
 int listScrollToId(int, int);

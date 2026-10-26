@@ -67,7 +67,7 @@ s32 FUN_00240c34(const char *fileName);
 void FUN_003edbd0(BtlStartState *state);
 void FUN_003f0d50(BtlStartState *state);
 void controllerClearVectorState(BtlStartState *state);
-void FUN_003f0b28(BtlStartState *state);
+void battleSaveCameraVectors(BtlStartState *state);
 void words10CopyHighToLow(u32 camera);
 s32 FUN_003e0f94(BtlRequest *request, BtlStartState *state);
 UnitDataBlock *FUN_001568f8(BtlStartState *state, s32 resourceId);
@@ -95,7 +95,7 @@ void FUN_003e1454(BtlRequest *request, BtlStartState *state)
         FUN_003edbd0(state);
         FUN_003f0d50(state);
         controllerClearVectorState(state);
-        FUN_003f0b28(state);
+        battleSaveCameraVectors(state);
         words10CopyHighToLow(g_btlCamera);
         s32 result = FUN_003e0f94(request, state);
         if (result == 1 || result == 2 || result == 5) {

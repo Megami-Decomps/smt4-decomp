@@ -1,4 +1,4 @@
-/* NON_MATCHING: basis-length load grouping, flag guard and shared epilogue differ from retail. */
+/* NON_MATCHING: guard now matches retail semantics (0x10 & ~flags); retail loads each basis row as vldr x + vldmia {y, z} behind a shrink-wrapped push {r4, r5} and bics, which armcc here does not reproduce. */
 #include "shard/W4_Match1b_Node.h"
 
 extern "C" const f32 g_nodeMinimumBasisLengthSquared;
@@ -13,7 +13,7 @@ extern "C" void FUN_0036a474(NodeTransform *transform, s32 useFallback,
                             const NodeTransform *fallback)
 {
     u32 flags = transform->flags;
-    if ((~0x10 & flags) == 0) {
+    if ((0x10 & ~flags) == 0) {
         return;
     }
     if (basisLengthSquared(transform->m[0]) < g_nodeMinimumBasisLengthSquared ||

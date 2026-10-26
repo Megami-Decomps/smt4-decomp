@@ -8,5 +8,11 @@ struct UnitPairTable {
     s32 pairs[133][2]; // 0x5a8
 };
 
+/* Apocalypse: the pair table starts 0x10 bytes later. */
+struct UnitPairTableA {
+    u8 unk000[0x5b8];
+    s32 pairs[133][2]; // 0x5b8
+};
+
 
 #endif

@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the status-ailment infliction roll; armcc here schedules the VFP chance formula (vmla chains on s16-s18) and the two copies of the property switch differently, and retail's 32-byte name buffer is zeroed by eight stores before the per-ailment textFormatBuffer call. */
 #include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4a.h"
 
 /* A battle unit (only the fields read here). */
 struct BattleUnit {
@@ -18,7 +19,6 @@ extern "C" {
 extern AilmentMasks DAT_005713f0;
 
 BattleUnit *FUN_003f0e20(BtlMainStateA *battle, u32 id);
-s32 btlGetPropertyMaximum(s32 property);
 void textFormatBuffer(char *buffer, const char *text);
 u32 lcgRandomRange(u32 limit);
 

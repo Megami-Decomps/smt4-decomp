@@ -1,49 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b64b8` (_code @ 0x2b64b8, 0xe0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "camp/RenderCtx.h"
 
-extern "C" {
+extern "C" RenderCtx *g_titleScene;
 
-typedef int romwright_code(...);
-extern int g_titleScene; /* 0x44ea00 */
-
-
-unsigned int FUN_002b64b8(void)
-
+extern "C" u32 FUN_002b64b8(void)
 {
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int *piVar4;
-  
-  temp_v0 = g_titleScene;
-  piVar4 = (int *)(g_titleScene + 0x130c);
-  temp_v1 = *piVar4;
-  temp_v2 = piVar4[temp_v1 + 2];
-  *piVar4 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1324) != '\0' || temp_v2 != piVar4[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1328))();
-    *(unsigned char *)(temp_v0 + 0x1324) = 0;
-  }
-  temp_v0 = g_titleScene;
-  piVar4 = (int *)(g_titleScene + 0x134c);
-  temp_v1 = *piVar4;
-  temp_v2 = piVar4[temp_v1 + 2];
-  *piVar4 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1364) != '\0' || temp_v2 != piVar4[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1368))();
-    *(unsigned char *)(temp_v0 + 0x1364) = 0;
-  }
-  temp_v0 = g_titleScene;
-  piVar4 = (int *)(g_titleScene + 0x132c);
-  temp_v1 = *piVar4;
-  temp_v2 = piVar4[temp_v1 + 2];
-  *piVar4 = temp_v1 - 1;
-  if (*(char *)(temp_v0 + 0x1344) != '\0' || temp_v2 != piVar4[temp_v1 + 1]) {
-    (**(romwright_code **)(temp_v0 + 0x1348))();
-    *(unsigned char *)(temp_v0 + 0x1344) = 0;
-  }
-  return 1;
-}
+    /* Access view only: this does not describe the allocation's full size. */
+    struct StateStackView {
+        u8 prefix[0x130c];
+        RenderStateStack stacks[3];
+    };
+    typedef char StateStackViewLayoutCheck[
+        offsetof(StateStackView, stacks) == 0x130c &&
+        sizeof(RenderStateStack) == 0x20 &&
+        sizeof(StateStackView) == 0x136c ? 1 : -1];
 
-} /* extern "C" */
+    renderStackPop(&reinterpret_cast<StateStackView *>(g_titleScene)->stacks[0]);
+    renderStackPop(&reinterpret_cast<StateStackView *>(g_titleScene)->stacks[2]);
+    renderStackPop(&reinterpret_cast<StateStackView *>(g_titleScene)->stacks[1]);
+    return 1;
+}

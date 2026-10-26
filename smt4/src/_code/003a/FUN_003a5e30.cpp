@@ -4,7 +4,7 @@
 #include "classes/Obj4223ac.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
-#include "util/FUN_002c58c8.h"
+#include "code/Code002c_VariantA.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 inline void *operator new(unsigned int, void *place) { return place; }
@@ -65,7 +65,7 @@ void questCenterSetFlag(s32 index, s32 value);
 void qcSetPersistentStateFlag(s32 index, s32 value);
 s32 bgmGetStateById(u32 id);
 void soundChannelRequestIfEnabled(u32 id, s32 a, s32 frames);
-void FUN_00343c0c(u32 id, s32 value);
+void saveFlagBytesSetOneBased(u32 id, s32 value);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 
 /* Builds a selection scene: constructs its rectangles, entries and pages, clears its state, creates
@@ -156,7 +156,7 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
         u8 *base = (u8 *)scene->pages + page * 0x1002;
         for (s32 i = 0; i < *(u16 *)(base + 0x1000); i++) {
             if (*(u16 *)(base + i * 4 + 2) & 1)
-                FUN_00343c0c(*(u16 *)(base + i * 4), 1);
+                saveFlagBytesSetOneBased(*(u16 *)(base + i * 4), 1);
         }
     }
     gameCounterAddSaturating(0x1C, 1);

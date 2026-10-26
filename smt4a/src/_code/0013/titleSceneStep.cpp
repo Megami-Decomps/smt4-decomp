@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0015.h"
 
 extern "C" {
 
@@ -11,7 +11,7 @@ typedef struct TitleState0013705c {
 } TitleState0013705c;
 
 s32 FUN_001696f4(void);
-void FUN_00145e24(u32 scene, s32 arg);
+void effectRestoreSavedRenderPairs(u32 scene, s32 arg);
 void FUN_00167eb0(u32 arg);
 
 extern TitleState0013705c g_titleFlags; /* 0x57ffd0 */
@@ -22,7 +22,7 @@ u32 titleSceneStep(void)
 {
     if (FUN_001696f4() == 1 && g_titleFlags.ready != 0) {
         if (FUN_00152f54() != 0) {
-            FUN_00145e24(g_renderCtx, FUN_00152f54());
+            effectRestoreSavedRenderPairs(g_renderCtx, FUN_00152f54());
         }
         if (g_titleFlags.skipped == 0) {
             FUN_00167eb0(g_titleFlags.sceneArg);

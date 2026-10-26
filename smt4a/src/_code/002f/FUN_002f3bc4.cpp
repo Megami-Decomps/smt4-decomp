@@ -1,7 +1,7 @@
 /* NON_MATCHING: packed-result zero test, pair address folding and shared success-return allocation differ from retail. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/Shard0032.h"
-#include "util/CalleeContracts.h"
+#include "util/BitsAndBytes_VariantB.h"
 
 // The packed pair uses a 64-bit allocation unit. Keep this view local so its
 // alignment does not change the published, partial UniteWork layout.

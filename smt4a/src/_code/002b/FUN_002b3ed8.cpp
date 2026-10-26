@@ -2,7 +2,7 @@
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
-#include "util/EffMenuListAppend.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_effMenu.h"
 
 extern "C" {
 void* memAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 blockAlignment, u32 mode);

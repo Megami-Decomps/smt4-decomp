@@ -2,7 +2,7 @@
 #include "addon/aocMain.h"
 #include "classes/AocMenu.h"
 #include "classes/WindowOperation.h"
-#include "util/AocClearDisplayFlag.h"
+#include "addon/AocSystemSmt4a.h"
 
 struct JobOwner;
 struct JobFlagsWork;

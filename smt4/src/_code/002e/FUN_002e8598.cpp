@@ -6,7 +6,7 @@ extern MapIfGlobals g_mapIf;
 u32 FUN_002bfdd4(void);
 void FUN_0025086c(s32 count, char *text);
 void textFormatBuffer(char *output, const char *format, ...);
-const char *FUN_002bcfc0(void *record, s32 variant);
+const char *textConvertToGlyphPairs(void *record, s32 variant);
 void dialogSetText(const char *text);
 void dialogOpen(s32 slot, s32 mode);
 u32 FUN_002bfdc4(void);
@@ -33,7 +33,7 @@ void FUN_002e8598(u32 kind, u32 item, s32 count)
     case 11:
         FUN_0025086c(count, number);
         /* Full-width English: "%s: %s Remaining". */
-        textFormatBuffer(text, "%s\x81\x46\x81\x40%s\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", FUN_002bcfc0(FUN_002bd06c(item), 0), number);
+        textFormatBuffer(text, "%s\x81\x46\x81\x40%s\x81\x40\x82\x71\x82\x85\x82\x8d\x82\x81\x82\x89\x82\x8e\x82\x89\x82\x8e\x82\x87", textConvertToGlyphPairs(FUN_002bd06c(item), 0), number);
         break;
     case 6:
     case 10:

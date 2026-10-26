@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0049_Smt4a.h"
 
 struct ShopEntry {
     /* 0x00 */ u16 id;

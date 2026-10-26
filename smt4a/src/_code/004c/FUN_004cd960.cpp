@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation differs (retail keeps id/kind/variant in r7/r6/r4 across both lookups and reuses sl as zero; the build spills the id); logic equivalent. */
 #include "common.h"
-#include "util/FUN_0015fb68.h"
+#include "code/Code0015.h"
+#include "gamedata/DataTableAccess.h"
 
 /* A table entry of 0x94 bytes (accessed fields). */
 struct TableEntry {

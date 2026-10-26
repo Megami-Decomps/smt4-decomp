@@ -1,15 +1,17 @@
-/* NON_MATCHING: retail uses `ldr r1, [r0, #40]` where armcc emits `ldr r0, [r0, #40]`. */
-#include "shard/W5_W5Match7_ScriptUnit.h"
+#include "battle/BattleUnitSlot.h"
 #include "script/ScriptArgs.h"
 
-extern "C" {
+namespace { struct Stats { u8 padding[0x152]; u16 values[1]; }; struct Unit { u8 padding[0x28]; Stats *stats; }; }
 
-s32 scrCommTestUnitPackedValue(void)
+extern "C" {
+extern u32 g_btlScriptUnit;
+u32 scrCommTestUnitPackedValue(void)
 {
-    s32 slot = scrGetArg(0);
-    ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
-    scrSetResult((unit->data->values[slot] >> 10) == 1);
+    u32 index = scrGetArg(0);
+    Unit *unit = reinterpret_cast<Unit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+    // The per-slot values start at halfword 0xa9 (byte 0x152) of the stats block.
+    const u16 *words = reinterpret_cast<const u16 *>(unit->stats);
+    scrSetResult((words[0xa9 + index] >> 10) == 1);
     return 1;
 }
-
-} /* extern "C" */
+}

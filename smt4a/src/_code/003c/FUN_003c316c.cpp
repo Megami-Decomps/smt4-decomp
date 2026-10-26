@@ -1,5 +1,6 @@
 /* Finds the entry with the given id in the table's entry list; NULL if there is none. */
 #include "shard/W4_W4Match5_DataTable.h"
+#include "code/Code003c_Smt4a.h"
 
 extern "C" {
 

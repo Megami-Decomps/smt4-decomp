@@ -1,4 +1,4 @@
-/* NON_MATCHING: aggregate scale initialization clears all elements before diagonal stores; retail interleaves those stores. */
+/* NON_MATCHING: the scale matrix is now written row-major element by element like retail (rows equal); retail puts it at sp+0 with the combined matrix at sp+48 and zeroes it through a core register. */
 /* Refreshes a model's world matrix from its selected joint or its scale, rotation, and translation. */
 #include "shard/W4_Match1b_Node.h"
 
@@ -46,12 +46,20 @@ void FUN_0016a130(void *object)
         return;
     }
     FUN_0018eb44(&model->scaleTable);
-    Matrix34 scale = {{
-        {model->scale.x, 0.0f, 0.0f, 0.0f},
-        {0.0f, model->scale.y, 0.0f, 0.0f},
-        {0.0f, 0.0f, model->scale.z, 0.0f}
-    }};
+    Matrix34 scale;
     Matrix34 combined;
+    scale.values[0][0] = model->scale.x;
+    scale.values[0][1] = 0.0f;
+    scale.values[0][2] = 0.0f;
+    scale.values[0][3] = 0.0f;
+    scale.values[1][0] = 0.0f;
+    scale.values[1][1] = model->scale.y;
+    scale.values[1][2] = 0.0f;
+    scale.values[1][3] = 0.0f;
+    scale.values[2][0] = 0.0f;
+    scale.values[2][1] = 0.0f;
+    scale.values[2][2] = model->scale.z;
+    scale.values[2][3] = 0.0f;
     nn_math_ARMv6_MTX34MultAsm(&combined, &scale, &model->rotation);
     FUN_0017fc94(&combined, &model->translation, &combined);
     model->world = combined;

@@ -10,7 +10,7 @@ s32 asdLoadFileAsync(const char *path, s32 offset, u32 loadFlags, AsdLoadCallbac
 void FUN_00153068(void *userData);
 
 /* Build the entry's file path (directory + name + extension) and start its asynchronous load. */
-TexTableEntry *FUN_002a6114(TexTableEntry *entry, u32 mode)
+TexTableNamedEntry *FUN_002a6114(TexTableNamedEntry *entry, u32 mode)
 {
     char path[64];
     TexTableFile *file = entry->file;

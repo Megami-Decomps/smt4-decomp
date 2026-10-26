@@ -1,4 +1,5 @@
 #include "battle/btlView.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 

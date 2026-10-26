@@ -1,8 +1,8 @@
 /* NON_MATCHING: body now matches retail except that retail keeps the two key addresses (&leftKey, &rightKey) in r6/r5 across the rank queries (push r4-r6, 16-byte frame); here they are recomputed for the fallback call. */
 #include "gamedata/ReferencedKindRecord.h"
 #include "gamedata/Table8Type5Lookup.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 extern "C" {
-s32 recordKindRank(u32 id);
 s32 FUN_00257568(const KindComparisonKey *left, const KindComparisonKey *right);
 
 /* Rank of a key's kind; ids above 400 rank last. */

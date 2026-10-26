@@ -1,7 +1,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 struct DirectoryEntryDefinition {
     /* 0x00 */ u16 group;

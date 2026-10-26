@@ -1,6 +1,6 @@
 /* NON_MATCHING: Spring of Healing setup/teardown and hard-float arguments are recovered; root/model register allocation and shared epilogues differ. */
 #include "shard/HealingSceneWork.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0013.h"
 
 struct HealingFreeCamera {
     /* 0x00 */ u8 unk00[8];

@@ -7,17 +7,17 @@
 
 extern "C" {
 AocPackageFile *FUN_002a6e7c(AocSystem *system, s32 type, s32 id, char *path);
-TexTableEntry *asdTMTexTableCallFileB(u32 table, u32 id);
+TexTableNamedEntry *asdTMTexTableCallFileB(u32 table, u32 id);
 u32 optionalWorkGetValue();
 char *libc_strcat(char *destination, const char *source);
 u32 libc_strlen(const char *text);
 void FUN_00151cd8(void *data);
 void FUN_00151b98(AocDisplay *display, const char *packagePath, const char *texturePath,
-    s32 offset, u32 flags, void (*callback)(void *), TexTableEntry *entry, u32 size,
+    s32 offset, u32 flags, void (*callback)(void *), TexTableNamedEntry *entry, u32 size,
     AocPackageFile *file);
 extern AocDisplay *g_aocDisplay;
 
-TexTableEntry *FUN_002a5ee4(AocSystem *system, u32 table, u32 id, u32 mode)
+TexTableNamedEntry *FUN_002a5ee4(AocSystem *system, u32 table, u32 id, u32 mode)
 {
     char texturePath[128];
     char packagePath[128];
@@ -31,7 +31,7 @@ TexTableEntry *FUN_002a5ee4(AocSystem *system, u32 table, u32 id, u32 mode)
         return NULL;
     file->texture.completion = 0;
     file->texture.result = 0;
-    TexTableEntry *entry = asdTMTexTableCallFileB(table, id);
+    TexTableNamedEntry *entry = asdTMTexTableCallFileB(table, id);
     if (entry == NULL)
         return NULL;
     TexTableNode *node = entry->node;

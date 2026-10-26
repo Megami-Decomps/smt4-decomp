@@ -1,7 +1,7 @@
 /* NON_MATCHING: instruction/control-flow layout matches, but item ids and first/second priority values trade r4/r5. */
 #include "gamedata/ItemPriorityRecords.h"
 #include "addon/AocEntryKind.h"
-#include "shard/dataTable8FindRecord.h"
+#include "gamedata/DataTableAccess_VariantD_Table8Record.h"
 
 extern "C" {
 ContentItemPriorityRecord *contentEntryFindById2(u32 id);

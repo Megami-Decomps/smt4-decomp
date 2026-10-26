@@ -4,6 +4,7 @@
 #include "ui/ItemListSelection.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "code/Code0033.h"
 
 struct QuestListEntry {
     /* 0x00 */ u8 unk00[4];
@@ -67,7 +68,6 @@ void releaseEntriesB(u32 entries);
 void releaseEntriesA(void *entries);
 void sortMenuAcquire(s32 a, s32 b);
 void useCounterStart(void);
-void FUN_003343f0(u8 value);
 void FUN_0019de98(s32 a, u32 color);
 void sendEvent100020E(void);
 void sendEvent100020F(void);

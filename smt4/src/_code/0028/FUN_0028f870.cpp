@@ -1,7 +1,7 @@
 /* NON_MATCHING: armcc builds the "held" sprite ids with ldrne instead of retail orrne x,x,x asr 9, and hoists the render-state constants (3/0) differently; rest identical */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "util/FUN_0029d644.h"
+#include "code/Code0029.h"
 
 extern "C" {
 

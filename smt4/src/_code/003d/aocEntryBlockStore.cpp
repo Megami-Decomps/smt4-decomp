@@ -1,4 +1,5 @@
 #include "common.h"
+#include "addon/AocSystem_Smt4.h"
 
 extern "C" {
 

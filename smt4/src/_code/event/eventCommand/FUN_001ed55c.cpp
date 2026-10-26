@@ -1,8 +1,6 @@
 /* NON_MATCHING: retail loads r1=10 before the color select and lays out its literal pool as [g_eventCommand, 1.0f] one word closer; built schedules r1 last */
 #include "common.h"
 #include "script/ScriptArgs.h"
-#include "util/ScrGetCommandFrame.h"
-#include "util/ScrGetCommandFrame.h"
 
 extern "C" {
 

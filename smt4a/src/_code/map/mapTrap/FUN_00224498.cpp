@@ -3,7 +3,7 @@
 #include "map/mapDepart.h"
 #include "Model/ModelList.h"
 #include "classes/Obj4209cc.h"
-#include "util/FUN_0040aa6c.h"
+#include "code/Code0040.h"
 
 extern "C" {
 extern MapTrapA *g_mapTrap;

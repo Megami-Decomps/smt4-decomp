@@ -33,11 +33,6 @@ typedef struct {
     unsigned int sp1C8; /* 0x1c8: local_1c8 */
 } param_9_stack;
 
-extern unsigned char LAB_00288ef0; /* 0x288ef0 */
-extern unsigned char LAB_00288efc; /* 0x288efc */
-extern unsigned char LAB_00288f34; /* 0x288f34 */
-extern unsigned char LAB_00289298; /* 0x289298 */
-extern unsigned char LAB_0028929c; /* 0x28929c */
 extern int g_statusDown; /* 0x588fe8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -167,15 +162,15 @@ LAB_00288c34:
   }
   if ((param_7 == 0) || (param_3 != 0)) {
     if (param_6 != 0) {
-      textFormatBuffer(temp_v13,&LAB_00288ef0);
+      textFormatBuffer(temp_v13,"\x81H\x81H\x81H");
     }
     else {
       temp_v6 = FUN_0014bd84(param_3);
-      textFormatBuffer(temp_v13,&LAB_00288f34,temp_v6);
+      textFormatBuffer(temp_v13,"%s",temp_v6);
     }
   }
   else {
-    textFormatBuffer(temp_v13,&LAB_00288efc);
+    textFormatBuffer(temp_v13,"\x82m\x82\x85\x82\x97\x81@\x82\x92\x82\x85\x82\x87\x82\x89\x82\x93\x82\x94\x82\x92\x82\x81\x82\x94\x82\x89\x82\x8f\x82\x8e\x81@\x82\x90\x82\x8f\x82\x93\x82\x93\x82\x89\x82\x82\x82\x8c\x82\x85\x81I");
     temp_v5 = 0x9b9b9bff;
   }
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,
@@ -228,10 +223,10 @@ LAB_00288c34:
         temp_v5 = FUN_002a6a24(param_3);
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
-                     &LAB_00289298,temp_v5);
+                     "%d",temp_v5);
       }
       else {
-        textFormatBuffer(temp_v13,&LAB_0028929c);
+        textFormatBuffer(temp_v13,"---");
         FUN_00180310(0,(int)*(short *)(temp_v1 + 8) + (int)*(short *)(temp_v3 + 8) + param_1,
                      (int)*(short *)(temp_v3 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,1,8,0xc9,
                      temp_v13);
@@ -259,7 +254,7 @@ LAB_00288c34:
       temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x429));
       FUN_00180310(0,(int)*(short *)(temp_v3 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                    (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v3 + 10) + param_2,1,4,0xc9,
-                   &LAB_00289298,temp_v10);
+                   "%d",temp_v10);
     }
   }
   temp_v3 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x12,0x42b));

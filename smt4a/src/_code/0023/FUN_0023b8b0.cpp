@@ -40,8 +40,6 @@ typedef struct {
     unsigned int sp58; /* 0x58: local_58 */
 } void_stack;
 
-extern unsigned char LAB_0023bdb0; /* 0x23bdb0 */
-extern unsigned char LAB_0023bdcc; /* 0x23bdcc */
 extern unsigned char LAB_0023c044; /* 0x23c044 */
 extern int g_unite; /* 0x57f290 */
 extern int g_renderCtx; /* 0x59dbb4 */
@@ -153,7 +151,7 @@ unsigned int FUN_0023b8b0(void)
     efctSetSpeed();
     break;
   case 7:
-    debugDrawText(0xff,&LAB_0023bdb0);
+    debugDrawText(0xff,"\x82r\x82\x85\x82\x81\x82\x92\x82\x83\x82\x88\x82\x89\x82\x8e\x82\x87\x81@");
     break;
   case 0xb:
     temp_v4 = 0;
@@ -202,7 +200,7 @@ unsigned int FUN_0023b8b0(void)
                  temp_v4,(int)*(char *)(temp_v0 + 0x9071),*(int *)(temp_v0 + 0x404) == 0x1e);
     break;
   case 0x1a:
-    debugDrawText(0xff,&LAB_0023bdcc);
+    debugDrawText(0xff,"\x82`\x81@\x82\x86\x82\x95\x82\x93\x82\x89\x82\x8f\x82\x8e\x81@\x82\x85\x82\x92\x82\x92\x82\x8f\x82\x92\x81@\x82\x88\x82\x81\x82\x93\x81@\x82\x8f\x82\x83\x82\x83\x82\x95\x82\x92\x82\x92\x82\x85\x82\x84\x81D");
     break;
   case 0x1b:
     temp_v4 = 0;

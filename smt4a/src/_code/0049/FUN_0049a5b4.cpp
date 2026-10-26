@@ -47,7 +47,7 @@ struct PackedItem {
 };
 
 extern "C" {
-extern u8 LAB_00494398;
+extern u8 sortCompareKeyPair;
 
 void sysMemClear(void *block, u32 bytes);
 u16 *FUN_00145f04(u8 rank, u32 seed);
@@ -110,7 +110,7 @@ void FUN_0049a5b4(SaleMenu *menu)
         removed.flags = 0;
         FUN_0049cd18(&removed, -owned, 0);
     }
-    qsort(menu->entries, menu->entryCount, 6, &LAB_00494398);
+    qsort(menu->entries, menu->entryCount, 6, &sortCompareKeyPair);
     FUN_004cfeb0(menu->list, 10, menu->entryCount, 0);
     ((u8 *)menu)[0x9F95] = 1;
     listCursorSetPage(menu->list, 1);

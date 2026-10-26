@@ -1,4 +1,5 @@
 #include "battle/btlMain.h"
+#include "code/Code0022_Smt4.h"
 extern "C" {
 struct ResetCounterOwner { u8 unk00[0x2F98]; u32 counter; };
 extern BtlMain *g_btlMain;

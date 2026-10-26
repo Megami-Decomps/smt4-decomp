@@ -18,7 +18,7 @@ void FUN_0025009c(RotationMtx *out, void *rotation);
 void matrix43Multiply(Mtx44 *out, Mtx44 *a, RotationMtx *b);
 void matrixCopyFull(Mtx44 *out, Mtx44 *in);
 void FUN_0024fd70(Mtx44 *out, Vec3 *translation, s32 mode);
-void FUN_0024fcdc(void *transform, Mtx44 *matrix, s32 mode);
+void matrixApplyByMode(void *transform, Mtx44 *matrix, s32 mode);
 
 /* Builds a scale * rotation * translation matrix (each part optional) and stores it in the transform at 0x10. */
 void FUN_00246afc(u8 *object, Vec3 *translation, void *rotation, Vec3 *scale)
@@ -48,7 +48,7 @@ void FUN_00246afc(u8 *object, Vec3 *translation, void *rotation, Vec3 *scale)
         vector.z = translation->z;
         FUN_0024fd70(&matrix, &vector, 2);
     }
-    FUN_0024fcdc(object + 0x10, &matrix, 0);
+    matrixApplyByMode(object + 0x10, &matrix, 0);
 }
 
 } /* extern "C" */

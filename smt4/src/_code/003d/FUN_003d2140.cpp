@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "battle/btlEditor.h"
 struct BattleActionHistoryState;
 
 extern "C" {
@@ -25,7 +26,6 @@ int frameRangeExtend(...);
 int FUN_00229c5c(int *, int, int);
 int FUN_00244fb0(...);
 int FUN_00246454(int, unsigned int *, unsigned int *);
-int FUN_00256898(...);
 int FUN_002569ac(...);
 int FUN_0026beb4(...);
 int btlEventSelectTrigger(...);

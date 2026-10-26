@@ -1,7 +1,7 @@
 #include "ui/SpriteIndicator.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/S1ListPanel.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;

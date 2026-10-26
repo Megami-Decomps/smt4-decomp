@@ -1,4 +1,4 @@
-/* NON_MATCHING: the queued-request block (offsets 0x1688..0x169c of the game flag block) is addressed through per-field pool constants in retail, so it keeps only r4-r9; the build CSEs the six field addresses into extra registers (sl/fp) and merges the 0x28/0x2c stores into an stm. FUN_002ba728 is a callback at 0x2ba728 that has no unit/symbol yet. */
+/* NON_MATCHING: the queued-request block (offsets 0x1688..0x169c of the game flag block) is addressed through per-field pool constants in retail, so it keeps only r4-r9; the build CSEs the six field addresses into extra registers (sl/fp) and merges the 0x28/0x2c stores into an stm. naviMainDrawFade is a callback at 0x2ba728 that has no unit/symbol yet. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/NaviMain.h"
@@ -22,7 +22,7 @@ void NaviMain_ResetFlags(u8 *request, u8 mode);
 s32 naviMenuStartIfIdle(u32 handle);
 void naviRequestClose(u32 handle);
 s32 naviMainPollResourcesAndUpdatePanel(u32 handle);
-s32 FUN_002ba728(u32 handle);
+s32 naviMainDrawFade(u32 handle);
 
 // A navigation request saved while the navigation screen was closed (see navigationSetOrQueueRequest).
 struct DeferredNavigationRequest {
@@ -72,7 +72,7 @@ void FUN_003de188(u32 unused, u32 argument)
     navigation->job = asdProcessCreateSimple("NAVI PROC", 4, 0, 0, naviMenuStartIfIdle, naviRequestClose, (u32)navigation);
     navigation->drawTask = taskCreateDraw("NAVI DOWN", 0xe8, 1, 0, naviMainPollResourcesAndUpdatePanel, NULL,
                                           (u32)navigation, (void *)navigation->job);
-    navigation->tasks.fadeTask = taskCreateDraw("NAVI FADE DRAW", 0xea, 0, 0, FUN_002ba728, NULL, 0,
+    navigation->tasks.fadeTask = taskCreateDraw("NAVI FADE DRAW", 0xea, 0, 0, naviMainDrawFade, NULL, 0,
                                           (void *)navigation->job);
     NaviMain_ResetFlags(navigation->slider, 1);
     if (g_naviMain != NULL) {

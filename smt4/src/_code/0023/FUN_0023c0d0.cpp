@@ -1,5 +1,6 @@
 #include "common.h"
 #include "battle/btlMain.h"
+#include "code/Code0023_Smt4.h"
 
 extern "C" {
 

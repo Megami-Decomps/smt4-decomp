@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0023_Smt4.h"
 
 struct ContentTexture {
     /* 0x00 */ u8 unk00[0x18];

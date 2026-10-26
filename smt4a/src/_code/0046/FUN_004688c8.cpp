@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "test/BustupViewer.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "code/Code001b.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
 extern int FUN_001ada74(unsigned int);
 /* Supplied declaration required: partyFindSlotById. */
-extern int FUN_001bd118(unsigned short);
 extern int scrRunOpcodesStub(unsigned int);
 extern int screenFadeIsBusy(void);
 extern int FUN_002a746c(void);

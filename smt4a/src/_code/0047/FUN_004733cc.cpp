@@ -3,7 +3,7 @@
 #include "classes/WindowStatus.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "nn/Result.h"
-#include "util/FUN_004ffd4c.h"
+#include "code/Code004f_VariantA.h"
 
 extern "C" {
 extern AocMain *g_aocMain;

@@ -1,6 +1,7 @@
 /* Applies `scale` to the owner's model: FUN_0029bb14, nodeSetPropertyScale, then modelSetFirstScalarChannelValue
  * (placed right after, so the last call is a linker NOP). */
 #include "common.h"
+#include "code/Code002d_Smt4.h"
 
 struct ModelOwner {
     /* 0x00 */ u8 unk00[8];

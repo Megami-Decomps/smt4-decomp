@@ -2,7 +2,7 @@
 #include "gamedata/AppUnlockState.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/AppPurchaseRecord.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 void FUN_002f0bd8(u32 cost);

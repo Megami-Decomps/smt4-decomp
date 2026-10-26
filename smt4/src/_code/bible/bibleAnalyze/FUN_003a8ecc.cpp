@@ -1,7 +1,6 @@
 /* NON_MATCHING: confirmation signed-byte load, fallback selection and description tail-call differ. */
 #include "common.h"
 #include <stddef.h>
-#include "util/CalleeContracts.h"
 #include "status/StatusCamera.h"
 #include "bible/bibleAnalyze.h"
 

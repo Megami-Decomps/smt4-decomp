@@ -28,8 +28,6 @@ typedef struct {
     unsigned int sp70; /* 0x70: local_70 */
 } param_4_stack;
 
-extern unsigned char LAB_004a657c; /* 0x4a657c */
-extern unsigned char LAB_004a6584; /* 0x4a6584 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -172,7 +170,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v13 = 0xffffffff;
     temp_v15 = *(short *)(temp_v3 + 10) + temp_v2;
-    textFormatBuffer(temp_v14,&LAB_004a657c,temp_v12);
+    textFormatBuffer(temp_v14,"%2d",temp_v12);
     drawTextAtRelativePosition(param_1 + 200,0,temp_v0 + temp_v10,temp_v15,0,7,0xffffffff,temp_v9,temp_v14);
     param_4 = param_4 & 0xffff;
     temp_v6 = 0;
@@ -189,7 +187,7 @@ void FUN_004a6144(int param_1,int param_2,int param_3,unsigned int param_4)
     }
     temp_v0 = *(short *)(temp_v3 + 8);
     temp_v1 = *(short *)(temp_v3 + 10);
-    textFormatBuffer(temp_v14,&LAB_004a6584,temp_v6);
+    textFormatBuffer(temp_v14,"%8d",temp_v6);
     drawTextAtRelativePosition(param_1 + 200,0,temp_v10 + temp_v0,temp_v1 + temp_v2,0,7,temp_v13,temp_v9,temp_v14);
   }
   return;

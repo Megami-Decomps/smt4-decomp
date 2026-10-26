@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail lays the per-kind availability checks out as a goto web (kind 5 locked check first, kind 3 jumping into the shared FUN_0023dcb8 tail) and keeps menu+0x3000 in r5; the equivalent nested ifs compile to a different block order and register assignment. */
 #include "battle/BattleCommandMenu.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 BattleCommandEntry *FUN_00292960(u8 index, int primary);

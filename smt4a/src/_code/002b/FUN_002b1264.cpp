@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail unrolls the six animation-counter resets; this loop remains rolled. */
 #include "battle/ActorCardAnimations.h"
 #include "ui/UiSpriteState.h"
-#include "util/BtlScriptUnitHasFlags.h"
+#include "battle/BattleHelpers_VariantB.h"
 
 extern "C" {
 }

@@ -1,7 +1,7 @@
 /* NON_MATCHING: cleanup coalesces the original owner and resource-view registers. */
 #include "shard/W4_W4Match2_UiQuest.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "util/FileSlotFree.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "camp/UIFade/UIFade.h"
 
 // The touch-region count lies beyond the shared quest-menu prefix.

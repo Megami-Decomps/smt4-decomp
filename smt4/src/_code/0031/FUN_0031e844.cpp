@@ -1,7 +1,7 @@
 /* NON_MATCHING: the 144-byte copy now calls rt_memcpy_w144 like retail; retail reaches DAT_0044f864 and DAT_0044f54c from DAT_0044f858's literal (one base register, so the three scratch globals were defined in one source file), which this unit does not reproduce. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 extern "C" {
 extern s32 DAT_0044f864;

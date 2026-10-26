@@ -1,6 +1,6 @@
 #include "ui/HunterDatabaseWork.h"
 #include "text/TextDraw.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 void asdTMTexTableLoadTmx(u32, u32);

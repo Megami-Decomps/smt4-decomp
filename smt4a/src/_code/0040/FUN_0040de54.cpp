@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match6_BattleCamera.h"
 #include "battle/btlMain.h"
 #include "battle/BattleCommandValue.h"
+#include "code/Code0034.h"
 struct BtlMainStateA;
 struct TransitionView;
 
@@ -181,7 +182,6 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: libc_strlen. */
 /* Supplied declaration required: panelSetMode3. */
 /* Supplied declaration required: buttonHelpGetValue. */
-extern int FUN_0034919c(void);
 extern int panelIsActiveState2(void);
 extern int panelStateIs0(void);
 /* Supplied declaration required: FUN_0037c8e4. */

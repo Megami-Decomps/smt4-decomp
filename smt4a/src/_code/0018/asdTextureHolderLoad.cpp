@@ -1,5 +1,5 @@
 #include "shard/W6_W6Match2_TextureHolder.h"
-#include "shard/asdTextureHolderLoad.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_TextureHolder.h"
 
 extern "C" s32 texIsStexFile(const void* image);
 

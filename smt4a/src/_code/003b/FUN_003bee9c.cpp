@@ -1,39 +1,30 @@
-/* NON_MATCHING: same loop, but armcc keeps the count in r1 and the -1 in r2 (retail: r2 and r1). */
 #include "common.h"
 
-struct SlotEntry {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ u8 unk04[0x1c];
+struct Obj00315398Entry {
+    s32 value;
+    u8 unk04[0x1c];
 };
 
-struct SlotList {
-    /* 0x00 */ SlotEntry *entries;
+struct Obj00315398Count {
+    u8 unk00[0x38];
+    s32 count;
 };
 
-struct SlotSetup {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ s32 count;
+struct Obj00315398 {
+    u8 unk00[0x3c];
+    Obj00315398Entry **entries;
+    Obj00315398Count *source;
 };
 
-struct SlotOwner {
-    /* 0x00 */ u8 unk00[0x3c];
-    /* 0x3C */ SlotList *list;
-    /* 0x40 */ SlotSetup *setup;
-};
-
-typedef char SlotEntrySize[sizeof(SlotEntry) == 32 ? 1 : -1];
-
-extern "C" {
-
-/* Virtual slot: marks every entry of the owner's list as unused (id -1). */
-void FUN_003bee9c(SlotOwner *self)
+/* Resets the value of each entry to -1, one per source count. */
+extern "C" void FUN_003bee9c(Obj00315398 *obj)
 {
-    SlotEntry *entries = self->list->entries;
-    s32 count = self->setup->count;
-
-    for (s32 index = 0; index < count; index++) {
-        entries[index].id = -1;
+    Obj00315398Entry **handle = obj->entries;
+    Obj00315398Count *source = obj->source;
+    Obj00315398Entry *entries = *handle;
+    s32 count = source->count;
+    s32 i;
+    for (i = 0; i < count; i++) {
+        entries[i].value = -1;
     }
 }
-
-} /* extern "C" */

@@ -1,10 +1,11 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0034abe0` (_code @ 0x34abe0, 0x1758 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "event/2dEvent/2dEventTex.h"
 #include "addon/LookupRecord.h"
+#include "camp/CampStateQueries.h"
 
 extern "C" {
 
@@ -93,14 +94,12 @@ extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: FUN_0020caec. */
-extern unsigned int *uniteGetWork(void);
 extern int recordGetModeForId(int);
 extern int resourceRunEmbeddedOperationIfUnblocked(unsigned int *);
 extern int resourceRunOperationIfUnblocked(unsigned int *);
 extern int FUN_002a4878(unsigned int *);
 extern int FUN_002a4894(unsigned int *);
 /* Supplied declaration required: FUN_002a4b28. */
-extern unsigned int computeCountLimit(void);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchSecondary(unsigned int *);
 extern int uiSearchPrimary(unsigned int *);

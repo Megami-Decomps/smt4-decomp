@@ -1,7 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~208 rows); the 15-column glyph table DAT_00532b5c is referenced as an external array, retail inlines the type/advance sequence at two places and pushes r3 differently */
 #include "common.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
-#include "shard/flaggedEntryGetValueA.h"
+#include "gamedata/GameDataAccess_Shard0031.h"
 
 // Two-character slot of the name being typed (high byte first).
 struct NameSlot {

@@ -5,8 +5,8 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
-#include "util/CalleeContracts.h"
-#include "shard/jobSetText.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "sys/RuntimeObjects.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
 /* The debug mask lies beyond the shared three-word global prefix. */
@@ -27,9 +27,7 @@ s32 FUN_002ba870(u32 process);
 s32 lmapJobQueryZero(u32 process);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc end, u32 work, void *owner);
-s32 jobIsValid(u32 job);
 void FUN_003592dc(u32 list);
-void jobStop(u32 job, s32 delay);
 void asdListBoxAddItems(u32 list, const AsdListBoxEntry *items, s32 count);
 void asdListBoxSetByteValue(u32 list, u8 value);
 void FUN_004d48d0(BattleDebugWork *work, BtlMainStateA *battle);

@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "code/Code0023_VariantB.h"
 
 extern "C" {
 
-int FUN_0023478c(...);
 int FUN_002347b8(...);
 int FUN_002ae9ec(...);
 int FUN_002b7d30(int, int);
@@ -35,9 +35,6 @@ typedef struct {
     unsigned int sp250; /* 0x250: local_250 */
 } param_4_stack;
 
-extern unsigned char LAB_00390e10; /* 0x390e10 */
-extern unsigned char LAB_00390e14; /* 0x390e14 */
-extern unsigned char LAB_00390e2c; /* 0x390e2c */
 extern int g_aocMain; /* 0x432fc8 */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -118,10 +115,10 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = temp_v5;
       FUN_0023478c(temp_v5,0xb);
       FUN_002347b8(temp_v5,temp_v4,temp_v13);
-      textFormatBuffer(temp_v12,&LAB_00390e10,temp_v13);
+      textFormatBuffer(temp_v12,"%s",temp_v13);
     }
     else {
-      textFormatBuffer(temp_v12,&LAB_00390e14,temp_v3);
+      textFormatBuffer(temp_v12,"%ls",temp_v3);
     }
     if (*(char *)(temp_v3 + 0x9b3) == '\0') {
       temp_v4 = asdTMTexTableEntryAt(0x3a,0x61);
@@ -150,7 +147,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           temp_v4 = temp_v5;
           FUN_0023478c(temp_v5,0x69);
           FUN_002347b8(temp_v5,temp_v4,temp_v13);
-          textFormatBuffer(temp_v12,&LAB_00390e10,temp_v13);
+          textFormatBuffer(temp_v12,"%s",temp_v13);
         }
         else {
           temp_v13[0] = 0;
@@ -187,7 +184,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
           psVar7[-2] = 0x4481;
           *psVar7 = psVar7[-1];
           psVar7[-1] = temp_v1;
-          textFormatBuffer(temp_v12,&LAB_00390e2c,temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
+          textFormatBuffer(temp_v12,"%ls%s%ls",temp_v5 + 0x5b8,temp_v13,temp_v5 + 0x5f8);
         }
         temp_v5 = curveEvaluateStandard(temp_v12,2);
         temp_v4 = asdTMTexTableEntryAt(0x3a,0x68);

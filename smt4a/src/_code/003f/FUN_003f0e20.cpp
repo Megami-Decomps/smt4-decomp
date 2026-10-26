@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail addresses the id list as record + (8 + j * 2) through a register offset and keeps the loop counters in separate registers; ours uses the [reg, #8] immediate form. */
 #include "common.h"
+#include "code/Code003f_Smt4a.h"
 
 extern "C" {
 

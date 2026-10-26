@@ -1,4 +1,5 @@
 #include "common.h"
+#include "battle/BattleHelpers_Smt4a.h"
 
 extern "C" {
 /* Returns the maximum value accepted by each combatant property. */

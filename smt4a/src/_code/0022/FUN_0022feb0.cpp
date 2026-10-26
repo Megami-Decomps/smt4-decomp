@@ -1,7 +1,7 @@
 /* NON_MATCHING: Counter values and nonzero-index lists are reconstructed; list append/count updates and persistent pointers allocate different registers/frame slots. */
 #include "gamedata/DataTable.h"
 #include "camp/Config/Config.h"
-#include "util/CountersGetB.h"
+#include "gamedata/GameDataAccess.h"
 
 struct CounterListDefinition {
     /* 0x00 */ s16 counter;

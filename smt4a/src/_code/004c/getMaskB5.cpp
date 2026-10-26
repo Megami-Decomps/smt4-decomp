@@ -1,5 +1,5 @@
 #include "shard/Shard004C.h"
-#include "util/GetMaskB5.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

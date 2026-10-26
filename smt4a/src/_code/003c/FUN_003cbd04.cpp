@@ -26,7 +26,6 @@ typedef struct {
     unsigned int sp98; /* 0x98: local_98 */
 } param_7_stack;
 
-extern unsigned char LAB_003cc114; /* 0x3cc114 */
 extern unsigned char LAB_003cc19c; /* 0x3cc19c */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -125,7 +124,7 @@ void FUN_003cbd04(int param_1,int param_2,unsigned int param_3,int param_4,int p
     }
     param_1 = param_1 + (temp_v1 + param_2) * 2;
     temp_v4 = FUN_0014bd84(*(unsigned short *)(param_1 + 0x8b70));
-    textFormatBuffer(temp_v7,&LAB_003cc114,temp_v4);
+    textFormatBuffer(temp_v7,"%s",temp_v4);
     temp_v0 = reinterpret_cast<int>(asdTMTexTableEntryAt(0x1a,0x178));
     VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v0 + 10) + param_6,
                         (unsigned char)(in_fpscr >> 0x16) & 3);

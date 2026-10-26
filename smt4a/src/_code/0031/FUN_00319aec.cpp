@@ -1,4 +1,5 @@
 #include "shard/Shard0031.h"
+#include "code/Code0031_Smt4a.h"
 
 extern "C" {
 

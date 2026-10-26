@@ -1,10 +1,9 @@
 /* NON_MATCHING: register allocation only: argument setup order before FUN_0041f020 and the previous-state temp (r2 vs r0) in the state change */
 #include "common.h"
 #include "gamedata/DataTable.h"
-#include "util/CalleeContracts.h"
 #include "event/2dEvent/SmokeFade.h"
 
-#include "util/FUN_002857dc.h"
+#include "code/Code0028.h"
 #include "StaffRoll/StaffRollMain.h"
 extern "C" {
 

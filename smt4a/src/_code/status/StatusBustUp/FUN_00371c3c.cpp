@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/asdTMTexLoadMainHeap.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 // The portrait ID is past the shared DevilRecordA prefix.  Apocalypse's table
 // override flags and model ID also differ from the SMT IV model override layout.

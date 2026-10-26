@@ -1,6 +1,6 @@
 /* NON_MATCHING: typed input/touch results recovered; control-flow and register allocation differ. */
 #include "status/StatusCamera.h"
-#include "shard/buttonHelpHasEnabledEntryForId.h"
+#include "ui/UiControl.h"
 #include "shard/S1ListPanel.h"
 extern "C" {
 const SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);

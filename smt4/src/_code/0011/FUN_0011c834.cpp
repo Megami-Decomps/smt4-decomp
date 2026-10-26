@@ -1,7 +1,7 @@
 /* NON_MATCHING: only register allocation differs (retail reuses r5 for the refcount pointer and then the success result; built uses r6 for the pointer and r5 for the result) */
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
-#include "util/FUN_002c1398.h"
+#include "code/Code002c_Result.h"
 
 static const char g_ndmServiceName[] = "ndm:u";
 

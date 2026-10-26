@@ -3,8 +3,7 @@
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "shard/jobIsValid.h"
-#include "shard/jobStop.h"
+#include "sys/RuntimeObjects.h"
 
 struct CountAt30;
 struct CountAt5A;

@@ -2,8 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
-#include "util/Vec2Fixed.h"
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -34,7 +33,6 @@ typedef struct {
     unsigned int spF8; /* 0xf8: local_f8 */
 } void_stack;
 
-extern unsigned char LAB_002c0234; /* 0x2c0234 */
 extern int g_campCecRanking; /* 0x57f11c */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -193,7 +191,7 @@ int FUN_002bfd94(void)
             temp_v0 = *(short *)(temp_v9 + 8);
             temp_v1 = *(short *)(temp_v9 + 10);
             drawSetColorFromRGBA8(0xffffffff);
-            textFormatBuffer(temp_v14,&LAB_002c0234,temp_v18);
+            textFormatBuffer(temp_v14,"%d",temp_v18);
             FUN_00180310(6,temp_v4 + temp_v0 + temp_v8,temp_v3 + temp_v1 + temp_v5,1,3,0x65,temp_v14);
             FUN_00183bb0();
           }

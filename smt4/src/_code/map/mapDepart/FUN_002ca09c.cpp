@@ -28,7 +28,6 @@ typedef struct {
     unsigned int sp90; /* 0x90: local_90 */
 } void_stack;
 
-extern unsigned char LAB_002ca4f8; /* 0x2ca4f8 */
 extern int g_mapDepart; /* 0x4475b8 */
 extern int g_titleScene; /* 0x44ea00 */
 extern unsigned char g_gameState; /* 0x49f91c */
@@ -108,7 +107,7 @@ unsigned int FUN_002ca09c(void)
           } while (temp_v9 < 0x10b);
           temp_v3 = (*(unsigned int *)((unsigned char *)&g_gameState + 0xa8));
           FUN_0025b670((*(unsigned int *)((unsigned char *)&g_gameState + 0xa8)));
-          textFormatBuffer(temp_v13,&LAB_002ca4f8,temp_v3);
+          textFormatBuffer(temp_v13,"%s",temp_v3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v2 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
           textDrawString(3,0xffffffff,temp_v13);
@@ -158,7 +157,7 @@ unsigned int FUN_002ca09c(void)
             }
             temp_v7 = (int)*(short *)(temp_v9 + 0x49fd8c);
             FUN_002be650(temp_v7,0);
-            textFormatBuffer(temp_v13,&LAB_002ca4f8,temp_v7);
+            textFormatBuffer(temp_v13,"%s",temp_v7);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
             VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v8 + 10),
                                 (unsigned char)(in_fpscr >> 0x16) & 3);

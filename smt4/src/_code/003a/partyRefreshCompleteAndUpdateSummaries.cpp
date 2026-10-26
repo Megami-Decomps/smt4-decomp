@@ -1,6 +1,5 @@
 /* NON_MATCHING: party-entry base is not hoisted and summary arithmetic/register scheduling differs; -O2 candidate. */
 #include "common.h"
-#include "util/CalleeContracts.h"
 #include "quest_center/qcMain.h"
 #include "bible/bibleLegionDraw.h"
 #include "status/StatusCamera.h"

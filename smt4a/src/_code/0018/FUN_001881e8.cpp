@@ -3,7 +3,7 @@
 #include "gfx/QuaternionWorkspace.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "nw/math/MTX33.h"
-#include "util/LookupNameEntry.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 extern const char DAT_0052607c[];

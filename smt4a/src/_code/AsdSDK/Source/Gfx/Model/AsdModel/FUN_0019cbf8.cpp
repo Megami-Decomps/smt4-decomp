@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019cbf8` (_code @ 0x19cbf8, 0x5e0 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Model/AsdScene.h"
 
 extern "C" {
 
@@ -132,7 +133,6 @@ typedef struct {
 } param_1_stack;
 
 /* Supplied declaration required: asdMemoryAlloc. */
-extern int *asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: FUN_001ac2d4. */
 /* Supplied declaration required: FUN_001ac524. */
 /* Supplied declaration required: FUN_001ad8c4. */

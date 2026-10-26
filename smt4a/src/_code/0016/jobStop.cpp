@@ -1,6 +1,6 @@
 /* NON_MATCHING: handle lookup scheduling and ending-state jump-table formation differ from retail. */
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
-#include "shard/jobStop.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" void asdProcessEnd(AsdProcess *process);
 extern "C" AsdProcessState g_asdProcess;

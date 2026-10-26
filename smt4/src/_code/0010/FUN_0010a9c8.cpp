@@ -19,8 +19,8 @@ int textFormatBuffer(...);
 int FUN_002be650(...);
 int FUN_002bed3c(void);
 int vec2GetXInt(...);
-int FUN_002bedb0(...);
-int FUN_002bee04(...);
+int renderCtxPopState(...);
+int renderStackPushIndexed(...);
 int FUN_002bf380(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
@@ -34,9 +34,6 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } void_stack;
 
-extern unsigned char LAB_0010adb0; /* 0x10adb0 */
-extern unsigned char LAB_0010adb8; /* 0x10adb8 */
-extern unsigned char LAB_0010adbc; /* 0x10adbc */
 extern int DAT_0043e190; /* 0x43e190 */
 extern unsigned int g_titleScene; /* 0x44ea00 */
 
@@ -55,8 +52,8 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: vec2GetXInt. */
-/* Supplied declaration required: FUN_002bedb0. */
-/* Supplied declaration required: FUN_002bee04. */
+/* Supplied declaration required: renderCtxPopState. */
+/* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -88,9 +85,9 @@ unsigned int FUN_0010a9c8(void)
       if (*(char *)(DAT_0043e190 + 8) != '\0') {
         efctSetSpeed();
         temp_v3 = FUN_002c5d80(1,0);
-        FUN_002bee04(g_titleScene,3,temp_v3);
+        renderStackPushIndexed(g_titleScene,3,temp_v3);
         FUN_002bf288(2,0x3a,0x8d,0,0,6);
-        FUN_002bedb0(g_titleScene,3);
+        renderCtxPopState(g_titleScene,3);
         efctSetSpeed();
       }
       titleOverlayDraw(temp_v1);
@@ -101,9 +98,9 @@ unsigned int FUN_0010a9c8(void)
     if (*(char *)(DAT_0043e190 + 8) != '\0') {
       efctSetSpeed();
       temp_v3 = FUN_002c5d80(1,0);
-      FUN_002bee04(g_titleScene,3,temp_v3);
+      renderStackPushIndexed(g_titleScene,3,temp_v3);
       FUN_002bf288(2,0xe,0x101,0,0,6);
-      FUN_002bedb0(g_titleScene,3);
+      renderCtxPopState(g_titleScene,3);
       efctSetSpeed();
     }
     titleOverlayDraw(temp_v1);
@@ -116,14 +113,14 @@ unsigned int FUN_0010a9c8(void)
     temp_v1 = vec2GetXInt(DAT_0043e190 + 0x754);
     temp_v2 = vec2GetYInt(DAT_0043e190 + 0x754);
     temp_v3 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v3);
+    renderStackPushIndexed(g_titleScene,3,temp_v3);
     efctSetSpeed();
     FUN_002bed3c();
     temp_v4 = asdTMTexTableEntryAt(0xe,200);
     FUN_002bf380(2,0xe,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)(DAT_0043e190 + 0x68);
     FUN_002be650(temp_v3,0);
-    textFormatBuffer(temp_v9,&LAB_0010adb0,temp_v3);
+    textFormatBuffer(temp_v9,"%s",temp_v3);
     temp_v5 = asdTMTexTableEntryAt(0xe,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -138,13 +135,13 @@ unsigned int FUN_0010a9c8(void)
     temp_v5 = asdTMTexTableEntryAt(0xe,0xc6);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,1,4,0x10,
-                 &LAB_0010adb8,*(unsigned int *)(DAT_0043e190 + 0x6c));
+                 "%d",*(unsigned int *)(DAT_0043e190 + 0x6c));
     temp_v5 = asdTMTexTableEntryAt(0xe,199);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
-                 &LAB_0010adbc);
+                 "*");
     FUN_002bed3c();
-    FUN_002bedb0(g_titleScene,3);
+    renderCtxPopState(g_titleScene,3);
   }
   temp_v1 = DAT_0043e190;
   if (*(int *)(DAT_0043e190 + 0x8c) != 0) {
@@ -152,7 +149,7 @@ unsigned int FUN_0010a9c8(void)
     temp_v4 = vec2GetXInt();
     temp_v2 = vec2GetYInt(temp_v2);
     temp_v3 = FUN_002c5d80(1,0);
-    FUN_002bee04(g_titleScene,3,temp_v3);
+    renderStackPushIndexed(g_titleScene,3,temp_v3);
     efctSetSpeed();
     FUN_002bed3c();
     temp_v5 = asdTMTexTableEntryAt(0xe,0xc0);
@@ -183,9 +180,9 @@ unsigned int FUN_0010a9c8(void)
     drawSetColorFromRGBA8(0xff);
     FUN_002bdf94(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v4,
                  (int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,0xf,0x10,
-                 &LAB_0010adbc);
+                 "*");
     FUN_002bed3c();
-    FUN_002bedb0(g_titleScene,3);
+    renderCtxPopState(g_titleScene,3);
   }
   return 0;
 }

@@ -1,44 +1,58 @@
-/* NON_MATCHING: Retail ldr r5, [pc, #136] differs from recovered cmp r0, #64. */
+/* NON_MATCHING: ported smt4a FUN_00154e34's structure (weak state, union scale, null-checked setter helper); armcc here branches around the call where retail predicates it (movne r1,#0; blne) and keeps the null test after the vmov s0. */
 #include "common.h"
+#include <stddef.h>
 
-struct SoundVolumeStateView {
-    u8 unk00[0x87C];                 // 0x000
-    void* sounds[4];                 // 0x87C
-    u8 unk88C[0x1BD];                // 0x88C
-    u8 volume;                      // 0xA49
-};
+struct BasicSound;
+extern "C" void nw_snd_internal_BasicSound_SetVolume(BasicSound* sound, u32 frames, f32 volume);
 
-extern "C" {
-extern SoundVolumeStateView DAT_004e26ec;
-void nw_snd_internal_BasicSound_SetVolume(void* sound, f32 volume, s32 frames);
+static inline void soundSetVolume(BasicSound* sound, f32 volume)
+{
+    if (sound != NULL) {
+        nw_snd_internal_BasicSound_SetVolume(sound, 0, volume);
+    }
 }
 
+struct SoundHandle {
+    /* 0x00 */ BasicSound* sound;
+};
+struct SoundVolumeStateView {
+    /* 0x000 */ u8 unk00[0x87C];
+    /* 0x87C */ SoundHandle handles[4];
+    /* 0x88C */ u8 unk88C[0x1BD];
+    /* 0xA49 */ u8 volume;
+};
+union VolumeScale {
+    f32 value;
+    s32 bits;
+};
+typedef char SoundVolumeStateLayoutCheck[sizeof(SoundHandle) == 4 &&
+    offsetof(SoundVolumeStateView, handles) == 0x87C && offsetof(SoundVolumeStateView, volume) == 0xA49 ? 1 : -1];
+
+extern "C" {
+extern __weak SoundVolumeStateView DAT_004e26ec;
+
 // Store the capped volume and apply its normalized gain to each occupied sound slot.
-extern "C" void FUN_0011a324(u32 volume)
+void FUN_0011a324(u32 volume)
 {
-    SoundVolumeStateView* state = &DAT_004e26ec;
-    if (state == 0) {
+    SoundVolumeStateView* system = &DAT_004e26ec;
+    if (system == NULL) {
         return;
     }
-
-    state->volume = (u8)volume;
+    system->volume = (u8)volume;
     if (volume > 64) {
-        state->volume = 64;
+        system->volume = 64;
     }
-
-    f32 gain;
+    VolumeScale scale;
     if (volume == 0) {
-        gain = 0.0f;
+        scale.value = 0.0f;
     } else {
-        gain = 1.0f + ((f32)(u32)state->volume - 64.0f) * (1.0f / 63.5f);
-        if (gain > 1.0f) {
-            gain = 1.0f;
+        scale.value = 1.0f + ((f32)(u32)system->volume - 64.0f) * (2.0f / 127.0f);
+        if (scale.bits > 0x3F800000) {
+            scale.value = 1.0f;
         }
     }
-
     for (u8 index = 0; index < 4; ++index) {
-        if (state->sounds[index] != 0) {
-            nw_snd_internal_BasicSound_SetVolume(state->sounds[index], gain, 0);
-        }
+        soundSetVolume(system->handles[index].sound, scale.value);
     }
+}
 }

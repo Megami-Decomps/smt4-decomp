@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0012_Smt4.h"
 
 struct ByteStatus {
     /* 0x000 */ u8 unk000[0x330];

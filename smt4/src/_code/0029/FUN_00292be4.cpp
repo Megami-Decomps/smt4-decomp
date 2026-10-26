@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 

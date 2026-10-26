@@ -1,5 +1,6 @@
 /* Tail call into the function that follows. */
 #include "common.h"
+#include "code/Code0026_Smt4.h"
 
 extern "C" {
 

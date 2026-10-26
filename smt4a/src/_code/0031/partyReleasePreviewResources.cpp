@@ -1,6 +1,6 @@
 #include "camp/PartyResourceWork.h"
 #include "gamedata/DevilRecordA.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 void asdMemFree(void *);

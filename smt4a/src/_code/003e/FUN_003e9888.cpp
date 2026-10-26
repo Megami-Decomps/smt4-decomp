@@ -1,24 +1,25 @@
-/* NON_MATCHING: retail copies the state pointer to R3 before the two address additions; compiled code updates R0 directly, omitting that MOV. Remaining loop instructions match. */
-#include "battle/btlMain.h"
+#include "common.h"
 
-struct ActionKindSlot {
-    u8 unk00[0x44]; // 0x00
-    s8 kind;         // 0x44
-    u8 unk45[0x0b]; // 0x45
-    u32 flags;       // 0x50
-    u8 unk54[0x17c]; // 0x54
+struct FilteredEntry {
+    u8 unk00[0x44];
+    s8 category; // 0x44
+    u8 unk45[0x0b];
+    u32 flags; // 0x50
+    u8 unk054[0x17c];
+};
+struct EntryFilterOwner {
+    u8 unk0000[0x1ed4];
+    FilteredEntry *entries; // 0x1ed4
 };
 
-// Counts active flagged action slots of the requested kind, excluding the four reserved slots.
-extern "C" s32 FUN_003e9888(BtlMainStateA* state, s32 kind)
+extern "C" s32 FUN_003e9888(const EntryFilterOwner *owner, s32 category)
 {
-    ActionKindSlot* slots = reinterpret_cast<ActionKindSlot*>(state->roster);
     s32 count = 0;
-    for (s32 index = 4; index < 54; ++index) {
-        ActionKindSlot* slot = &slots[index];
-        if ((slot->flags & 1) && (slot->flags & 0x80) && slot->kind == kind) {
+    for (s32 index = 4; index < 0x36; ++index) {
+        const FilteredEntry &entry = owner->entries[index];
+        if ((entry.flags & 1) != 0 && (entry.flags & 0x80) != 0
+                && entry.category == category)
             ++count;
-        }
     }
     return count;
 }

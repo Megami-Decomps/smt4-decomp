@@ -1,7 +1,7 @@
 /* NON_MATCHING: same control flow as retail (shared step increment, duplicated sprite loops, out-of-line else), but the build keeps different values in r5-r8 (retail hoists 0 into r8 and the outgoing sprite pointer into r5) and stores stage/state with strd. */
 #include "map/NaviDisplayTransition.h"
 #include "map/mapDepart.h"
-#include "util/FUN_0039f860.h"
+#include "code/Code0039.h"
 #include "shard/NaviMain_GetCurrentMap.h"
 
 extern "C" {

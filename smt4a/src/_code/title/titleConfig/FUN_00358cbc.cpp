@@ -1,6 +1,6 @@
 /* NON_MATCHING: compiler hoists configuration pointers instead of retail's offset-literal accesses. */
 #include "shard/Shard0031.h"
-#include "util/GameDataBlocksGetSaveData.h"
+#include "gamedata/GameDataAccess.h"
 
 struct TitleConfigState {
     u8 options[4];

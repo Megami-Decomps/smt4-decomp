@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "code/Code002a_Smt4a.h"
 
 // Selection state of the animated page UI.
 struct AnimatedPageSelection {
@@ -41,7 +42,6 @@ extern AnimatedPageSelection g_animatedPageSelection;
 
 s32 flaggedValueHolderGetTotal(void* holder);
 s32 FUN_004a8750(u32 id, u32 page, s32 arg, s32 flag, s32 more);
-s32 FUN_002a4b28(u32 id);
 void panelSetTarget(s32 target, s32 arg);
 void messageSetActiveMode(s32 mode);
 s32 inputIsQuestMenuPressed(void);

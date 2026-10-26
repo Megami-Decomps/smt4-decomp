@@ -10,7 +10,7 @@ int FUN_00287528(unsigned char **);
 int asdTextDrawFormatted(...);
 int libc_strcat(...);
 int FUN_002bcf4c(void);
-int FUN_002bcfc0(...);
+int textConvertToGlyphPairs(...);
 int gameFlagIsSet(int);
 int qcUtilityBuildAndMarkTabList(unsigned int, int, int, int, unsigned int);
 int FUN_00381958(unsigned int, int, unsigned int, int);
@@ -32,7 +32,7 @@ extern int objectFlagBitIsSet(unsigned int, unsigned int);
 /* Supplied declaration required: asdTextDrawFormatted. */
 /* Supplied declaration required: libc_strcat. */
 /* Supplied declaration required: FUN_002bcf4c. */
-/* Supplied declaration required: FUN_002bcfc0. */
+/* Supplied declaration required: textConvertToGlyphPairs. */
 extern unsigned int gameGetPlayerName(void);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: qcUtilityBuildAndMarkTabList. */
@@ -169,7 +169,7 @@ void FUN_00382878(int param_1)
   if ((temp_v5 != 0) && (*(int *)(param_1 + 0x1c) == 0)) {
     puVar10 = (unsigned char *)(temp_v3 + (unsigned int)*(unsigned char *)(temp_v1 + 10) * 0x20 + 0x20);
   }
-  FUN_002bcfc0(puVar10,0);
+  textConvertToGlyphPairs(puVar10,0);
   temp_v9 = puVar10;
   asdTextDrawFormatted(*(unsigned int *)(param_1 + 0x28c),3,0xffffffff,0,0);
   temp_v0 = *(unsigned char *)(temp_v1 + 10);
@@ -196,7 +196,7 @@ void FUN_00382878(int param_1)
     else {
       libc_strcat(temp_v11,&LAB_00382cd0);
     }
-    FUN_002bcfc0(temp_v11,temp_v10);
+    textConvertToGlyphPairs(temp_v11,temp_v10);
     if (temp_v3 != 0) {
       if (temp_v3 != 1) {
         if (temp_v3 == 2) {

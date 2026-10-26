@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 #include "battle/btlEffect.h"
 #include "battle/BattleUnitSlot.h"
-#include "util/FUN_002454c4.h"
+#include "code/Code0024.h"
 extern "C" {
 extern u32 g_btlScriptUnit;
 extern u32 g_btlEvent;

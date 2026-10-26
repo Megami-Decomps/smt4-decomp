@@ -2,7 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
-#include "shard/FUN_0019e52c.h"
+#include "code/Code0019.h"
 
 // Layout rectangle looked up by (group, index).
 struct LayoutEntry {

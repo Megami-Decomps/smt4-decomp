@@ -1,7 +1,7 @@
 /* NON_MATCHING: content-menu update with a second query handler (kind 4) and the 0x66/0x67 result tails; written like FUN_0038e374, block layout and constant registers not compared with retail */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
 
 /* What a status operation reports: a kind byte and four words of detail. */
 struct AocStatusResult {

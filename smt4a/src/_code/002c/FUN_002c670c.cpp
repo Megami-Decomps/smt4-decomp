@@ -30,12 +30,6 @@ typedef struct {
     unsigned int spA8; /* 0xa8: local_a8 */
 } param_1_stack;
 
-extern unsigned char LAB_002c6ae0; /* 0x2c6ae0 */
-extern unsigned char LAB_002c6ae8; /* 0x2c6ae8 */
-extern unsigned char LAB_002c6e4c; /* 0x2c6e4c */
-extern unsigned char LAB_002c6e68; /* 0x2c6e68 */
-extern unsigned char LAB_002c6e70; /* 0x2c6e70 */
-extern unsigned char LAB_002c6fd4; /* 0x2c6fd4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
@@ -114,11 +108,11 @@ void FUN_002c670c(int param_1)
         temp_v4 = temp_v2 * 0x44;
         if (*(char *)(temp_v4 + 0x5814d8) != '\x01') {
           if (*(char *)(temp_v4 + 0x5814d8) != '\x02') {
-            sceneRegisterBoxEffect(0,0,&LAB_002c6ae0,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
+            sceneRegisterBoxEffect(0,0,"START",0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
                          *(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0,0,0xd,1,0,0,0,0);
           }
           else {
-            sceneRegisterBoxEffect(0x2400001,0,&LAB_002c6e4c,0x1b,8,0xffffffff,0,
+            sceneRegisterBoxEffect(0x2400001,0,"PEVE",0x1b,8,0xffffffff,0,
                          *(unsigned char *)(temp_v4 + 0x5814dc),*(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0
                          ,0xd,1,0,0,0,0);
             recordSetValueAndName(0x2400001,(int)*(short *)(temp_v4 + 0x5814de),temp_v4 + 0x5814e0);
@@ -126,14 +120,14 @@ void FUN_002c670c(int param_1)
           }
         }
         else {
-          sceneRegisterBoxEffect(0,0,&LAB_002c6ae8,0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
+          sceneRegisterBoxEffect(0,0,"PREV",0x1b,8,0xffffffff,*(unsigned char *)(temp_v4 + 0x5814dc),
                        *(unsigned char *)(temp_v4 + 0x5814dd),0,0,0,0,0,0xd,1,
                        (int)*(char *)(temp_v4 + 0x5814d9),(int)*(char *)(temp_v4 + 0x5814da),
                        (int)*(char *)(temp_v4 + 0x5814db),0);
         }
       }
       else {
-        sceneRegisterBoxEffect(0,0,&LAB_002c6ae0,0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
+        sceneRegisterBoxEffect(0,0,"START",0x1b,8,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
       }
       if (param_1 == 0) {
         FUN_00281b94(0);
@@ -178,11 +172,11 @@ void FUN_002c670c(int param_1)
       if (temp_v0 != '\x01') {
         if (temp_v0 != '\x02') {
           if (temp_v0 != '\x03') {
-            sceneRegisterBoxEffect(0,0,&LAB_002c6e68,0x1c,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
+            sceneRegisterBoxEffect(0,0,"GOAL",0x1c,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                          *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,0,0,0,0);
           }
           else {
-            sceneRegisterBoxEffect(0x2400002,0,&LAB_002c6fd4,0x4a,4,0xffffffff,
+            sceneRegisterBoxEffect(0x2400002,0,"NEVE",0x4a,4,0xffffffff,
                          *(unsigned char *)(temp_v2 + 0x5814f4),*(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0
                          ,0,0xd,1,0,0,0,0);
             recordSetValueAndName(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
@@ -190,21 +184,21 @@ void FUN_002c670c(int param_1)
           }
         }
         else {
-          sceneRegisterBoxEffect(0x2400002,0,&LAB_002c6fd4,0xc,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
+          sceneRegisterBoxEffect(0x2400002,0,"NEVE",0xc,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                        *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,0,0,0,0);
           recordSetValueAndName(0x2400002,(int)*(short *)(temp_v2 + 0x5814f6),temp_v2 + 0x5814f8);
           FUN_002b7a78(0x2400002,0);
         }
       }
       else {
-        sceneRegisterBoxEffect(0,0,&LAB_002c6e70,3,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
+        sceneRegisterBoxEffect(0,0,"NEXT",3,4,0xffffffff,*(unsigned char *)(temp_v2 + 0x5814f4),
                      *(unsigned char *)(temp_v2 + 0x5814f5),0,0,0,0,0,0xd,1,
                      (int)*(char *)(temp_v2 + 0x5814f1),(int)*(char *)(temp_v2 + 0x5814f2),
                      (int)*(char *)(temp_v2 + 0x5814f3),0);
       }
     }
     else {
-      sceneRegisterBoxEffect(0,0,&LAB_002c6e68,0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
+      sceneRegisterBoxEffect(0,0,"GOAL",0x1c,4,0xffffffff,0,0,0,0,0,0,0,0xd,1,0,0,0,0);
     }
     if (param_1 == 0) {
       FUN_00281b94(0);

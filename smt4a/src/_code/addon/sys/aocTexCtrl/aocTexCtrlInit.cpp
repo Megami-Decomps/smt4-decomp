@@ -1,6 +1,7 @@
 #include "addon/sys/aocTexCtrl.h"
 
 #include "AsdSDK/AsdDebug.h"
+#include "addon/AocSystem_Smt4a.h"
 
 extern "C" {
 

@@ -3,7 +3,7 @@
 extern "C" {
 u32 scrGetArg(u32 index);
 void scrCommMessageSetMode(s32 mode);
-void FUN_0033f7f4(void);
+void saveDataClearValues(void);
 void nameMainCreateJobs(u32 *mode, u32 size);
 void *jobFind(u32 task);
 void asdMemFree(void *memory);
@@ -28,7 +28,7 @@ s32 nameScriptRunEntryScreen(void)
         case 1:
             break;
         case 2:
-            FUN_0033f7f4();
+            saveDataClearValues();
             break;
         }
         nameMainCreateJobs(&mode, sizeof(mode));

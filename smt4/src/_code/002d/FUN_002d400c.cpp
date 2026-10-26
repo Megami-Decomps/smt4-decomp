@@ -1,5 +1,6 @@
 /* NON_MATCHING: stage override selection matches retail; saved game-state/scene-global bases r6/r7 are exchanged. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 struct PlayerData {
@@ -19,7 +20,6 @@ StageRecord *dataTable2eSub0GetRecord(s32 index);
 void asdMdlManagerMarkDestroy(AsdMdlObject *model);
 void asdMdlManagerDestroy(AsdMdlObject *model);
 AsdMdlObject *asdMdlManagerCreateFromSource(void *source, u32 argument, u32 param);
-void FUN_002a0428(AsdMdlObject *model, u32 enabled);
 
 /* Step the scene model swap: pick the stage for the player's map, then release the old model and load the new one. Returns true when idle. */
 u32 FUN_002d400c(void)

@@ -14,7 +14,7 @@ int FUN_00487d6c(...);
 int FUN_004884d8(...);
 int FUN_004888e4(...);
 int FUN_0048a5e4(...);
-int FUN_0048b420(...);
+int titleScissorApplyOrClearRequests(...);
 int FUN_0048d67c(...);
 int FUN_0048d98c(...);
 int FUN_004900e0(...);
@@ -66,7 +66,7 @@ extern int FUN_00384cf4(void);
 /* Supplied declaration required: FUN_004888e4. */
 /* Supplied declaration required: FUN_0048a5e4. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
-/* Supplied declaration required: FUN_0048b420. */
+/* Supplied declaration required: titleScissorApplyOrClearRequests. */
 /* Supplied declaration required: FUN_0048d67c. */
 /* Supplied declaration required: FUN_0048d98c. */
 /* Supplied declaration required: FUN_004900e0. */
@@ -161,7 +161,7 @@ void FUN_00486444(int param_1)
       return;
     }
   }
-  FUN_0048b420(param_1,1);
+  titleScissorApplyOrClearRequests(param_1,1);
   temp_v14 = 0.024f;
   DAT_00587f20 = 0xb;
   piVar12 = (int *)(param_1 + 0x1484);
@@ -343,7 +343,7 @@ LAB_004866c8:
     renderCtxPopState(g_renderCtx,3);
     FUN_00492adc(temp_v3);
   }
-  FUN_0048b420(param_1,0);
+  titleScissorApplyOrClearRequests(param_1,0);
   DAT_00587f20 = 0xf1;
   FUN_0048a5e4(param_1);
   FUN_00487d6c(param_1);

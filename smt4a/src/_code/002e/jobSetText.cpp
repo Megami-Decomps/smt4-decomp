@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/jobSetText.h"
+#include "sys/RuntimeObjects.h"
 extern "C" {
 struct JobTextWork { u8 unk00[0x8C]; char text[256]; };
 JobTextWork *jobGetWork(u32 job);

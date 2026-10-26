@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail emits two nop {0} hints after most calls, tail-calls nothing (returns 0 through r7) and splits the timer loop float arguments into hoisted s16/s17; built tail-calls overlayIsNotBusy/linkHolderApplyFlag and lacks the hints */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/CampCec/CampCecView.h"
 
 struct StatusScene {

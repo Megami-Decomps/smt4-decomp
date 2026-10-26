@@ -1,11 +1,11 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: work/coordinate and zero saved registers differ, and the switch default branch uses a different layout. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/PackNibbles.h"
-#include "util/skinObjectUpdateMatrices.h"
+#include "util/BitsAndBytes.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
 
 struct PositionedMenuDrawWork {
     u8 unk000[0x14];

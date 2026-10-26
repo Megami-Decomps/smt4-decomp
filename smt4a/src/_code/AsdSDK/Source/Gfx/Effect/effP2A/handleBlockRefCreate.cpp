@@ -1,4 +1,3 @@
-/* NON_MATCHING: r4/r5 swapped (retail keeps the resource in r4 and the size in r5) and the tail stores are ordered differently from retail */
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
@@ -18,7 +17,7 @@ SpriteGroupPlayer *handleBlockRefCreate(SpriteResourceHandle *handle)
 
     resource->references++;
     u32 size = sizeof(SpriteGroupPlayer) + resource->stateCapacity * sizeof(SpriteGroupState);
-    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effP2A.cpp", 150);
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effP2A.cpp", 150);
     SpriteGroupPlayer *player = static_cast<SpriteGroupPlayer *>(
         memAlloc(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, size, 16, 1));
     player->states = reinterpret_cast<SpriteGroupState *>(player + 1);

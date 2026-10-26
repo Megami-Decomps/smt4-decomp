@@ -1,6 +1,7 @@
 /* NON_MATCHING: grid selection is predicated, row-offset subtraction folds into the load, and result tails reorder; -O2 candidate. */
 #include "common.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
+#include "code/Code002a_VariantA.h"
 
 struct PartySelectionGrid { u8 data[0x64]; };
 struct PartySelectionObject { u8 unk00[0x34]; s32 slot; };
@@ -30,7 +31,6 @@ struct PartySelectionSlotTable { u8 unk0000[0x1c9f]; s8 indices[1]; };
 struct PartySelectionDemon { u8 unk00[0x62]; s16 id; };
 extern "C" {
 extern PartySelectionScene *g_partyPanel;
-s32 FUN_002a4894(PartySelectionGrid *);
 const PartySelectionSlotTable *gameGetSlotTable();
 const PartySelectionDemon *gameGetSlotRecord(s32);
 const PartySelectionDemon *btlMainGetUnk14();

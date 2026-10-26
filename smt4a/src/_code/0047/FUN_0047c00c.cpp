@@ -3,7 +3,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 

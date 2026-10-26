@@ -1,6 +1,4 @@
-/* NON_MATCHING: flag-byte snapshot recovers retail clear registers; initial index/value save moves are still reversed. */
 #include "common.h"
-#include "shard/gameGetFlagBlock.h"
 
 extern "C" {
 
@@ -15,20 +13,20 @@ typedef struct FlagBlock003490f0 {
     /* 0x200 */ FlagEntry003490f0 entries[1];
 } FlagBlock003490f0;
 
+FlagBlock003490f0 *gameGetFlagBlock(s32 index);
 
 /* Stores a value in flag entry `index`, marking the entry changed when it became non-zero; values below 2 reset it. */
 void flagEntrySetValue(s32 index, u32 value)
 {
-    FlagEntry003490f0 *entry = &reinterpret_cast<FlagBlock003490f0 *>(gameGetFlagBlock())->entries[index];
+    FlagEntry003490f0 *entry = &gameGetFlagBlock(index)->entries[index];
 
     if (entry->value != value && value != 0) {
         entry->flags |= 0x40;
     }
     entry->value = value;
-    if ((value & 0xff) < 2) {
-        u8 flags = entry->flags;
+    if (entry->value < 2) {
+        entry->flags &= ~0x40;
         entry->value = 0;
-        entry->flags = flags & ~0x40;
     }
 }
 

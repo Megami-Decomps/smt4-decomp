@@ -1,5 +1,13 @@
-/* NON_MATCHING: Pool child deletion and update branches use different register allocation. */
+/* NON_MATCHING: one scheduling difference: retail predicates the kind load (ldreq) after the flag test, this build loads it before the test. */
 #include "sys/ObjectPool.h"
+
+static __inline void poolNoteRemoved(ObjectPoolA* pool, s32 kind)
+{
+    if (kind == 0) {
+        --pool->primaryCount;
+    }
+    --pool->count;
+}
 
 // Updates live objects and removes finished objects from the bounded pool.
 extern "C" void FUN_004837ac(ObjectPoolA* pool)
@@ -8,16 +16,13 @@ extern "C" void FUN_004837ac(ObjectPoolA* pool)
         for (s32 index = 0; index < 32; ++index) {
             PoolObjectA* object = pool->objects[index];
             if (object != NULL) {
+                s32 kind = object->kind;
                 if ((object->flags & 1) != 0) {
                     object->vfunc10();
                 } else {
-                    s32 kind = object->kind;
                     object->vfunc04();
                     pool->objects[index] = NULL;
-                    if (kind == 0) {
-                        --pool->primaryCount;
-                    }
-                    --pool->count;
+                    poolNoteRemoved(pool, kind);
                 }
             }
         }

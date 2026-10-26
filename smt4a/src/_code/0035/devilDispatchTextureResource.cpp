@@ -1,7 +1,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 extern "C" {
 const void *FUN_00184310(u32);

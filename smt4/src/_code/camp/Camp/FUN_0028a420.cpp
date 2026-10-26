@@ -12,7 +12,7 @@ int FUN_00292bcc(...);
 int FUN_0029378c(...);
 int FUN_00298d28(...);
 
-int FUN_001a7d48(...);
+int partyPanelHasSlotValue(...);
 int FUN_00262d40(void);
 int campRebuildOwnedInventoryCategory(...);
 int FUN_00282f80(...);
@@ -54,11 +54,7 @@ typedef struct {
 
 extern int FUN_0018b2a4(...); /* 0x18b2a4 */
 extern int FUN_001a012c(...); /* 0x1a012c */
-extern unsigned char LAB_0028a7d8; /* 0x28a7d8 */
-extern unsigned char LAB_0028a7e8; /* 0x28a7e8 */
-extern unsigned char LAB_0028a7f8; /* 0x28a7f8 */
-extern unsigned char LAB_0028a810; /* 0x28a810 */
-extern unsigned char LAB_0032c8d4; /* 0x32c8d4 */
+extern unsigned char FUN_0032c8d4; /* 0x32c8d4 */
 extern unsigned char DAT_00402648; /* 0x402648 */
 extern unsigned char DAT_004026b4; /* 0x4026b4 */
 extern unsigned char DAT_004026e4; /* 0x4026e4 */
@@ -68,7 +64,7 @@ extern unsigned char g_campState; /* 0x493784 */
 extern unsigned char DAT_0049378e; /* 0x49378e */
 extern unsigned char DAT_0049f950; /* 0x49f950 */
 
-/* Supplied declaration required: FUN_001a7d48. */
+/* Supplied declaration required: partyPanelHasSlotValue. */
 extern int FUN_00262cb0(unsigned int);
 /* Supplied declaration required: FUN_00262d40. */
 /* Supplied declaration required: campRebuildOwnedInventoryCategory. */
@@ -136,13 +132,11 @@ void FUN_0028a420(void)
   memClear();
   words3Clear(&g_campState);
   FUN_002898e4();
-  puVar2 = &LAB_0028a7d8;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_0028a7d8), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_0032c8d4), 0, 0);
+  asdProcessCreateSimple("TMD CALC", 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&FUN_0032c8d4), 0, 0);
   *puVar1 = (unsigned int)puVar2;
-  taskCreateDraw(&LAB_0028a7e8,0x7a,0,0,FUN_0018b2a4,0,0,puVar2);
-  taskCreateDraw(&LAB_0028a7f8,0xd8,0,0,FUN_0018b2a4,0,0,*puVar1);
-  puVar2 = &LAB_0028a810;
-  taskCreateDraw(&LAB_0028a810,0xe7,0,0,FUN_001a012c,0,0,*puVar1);
+  taskCreateDraw("Camp DrawUpLeft",0x7a,0,0,FUN_0018b2a4,0,0,puVar2);
+  taskCreateDraw("Camp DrawUpRight",0xd8,0,0,FUN_0018b2a4,0,0,*puVar1);
+  taskCreateDraw("TMD DDRAW",0xe7,0,0,FUN_001a012c,0,0,*puVar1);
   puVar1[2] = (unsigned int)puVar2;
   puVar1 = g_camp;
   *(unsigned char *)(g_camp + 0x2b) = 0;
@@ -257,7 +251,7 @@ void FUN_0028a420(void)
       temp_v2 = objectPartRunUnlessLocked();
       temp_v4 = FUN_0029efa8(temp_v5);
       temp_v0 = 0;
-      FUN_001a7d48(0,temp_v2,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v2,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
       if (temp_v0 == 0) {
         temp_v0 = 0;
         if (*(char *)(temp_v6 + 0x66c) == '\x04') {
@@ -323,7 +317,7 @@ LAB_0028b308:
       temp_v2 = objectPartRunUnlessLocked();
       temp_v4 = FUN_0029efa8(temp_v5);
       temp_v0 = 0;
-      FUN_001a7d48(0,temp_v2,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
+      partyPanelHasSlotValue(0,temp_v2,temp_v4,*(unsigned int *)(temp_v6 + 0x2c));
       if (temp_v0 == 0) {
         temp_v0 = 0;
         if (*(char *)(temp_v6 + 0x66c) == '\x04') {

@@ -1,15 +1,17 @@
-/* NON_MATCHING: retail parameter lifetime, address formation or grouped-store selection differs. */
 #include "common.h"
+#include "classes/WindowStatus.h"
+
+struct AocMain;
 
 extern "C" {
-s32 FUN_001d25dc(u32 *result);
+u8 FUN_001d25dc(WindowStatusResult *result);
+u32 queuedHandleGetToken(WindowStatusResult *handle);
 void FUN_001764f4(u32 result);
 /* Dispatches the queried result when the query succeeds. */
-s32 FUN_00473d74()
+s32 FUN_00473d74(AocMain *main, WindowStatusResult result)
 {
-    u32 result[2];
-    if (FUN_001d25dc(result) != 0) {
-        FUN_001764f4(result[1]);
+    if (FUN_001d25dc(&result) != 0) {
+        FUN_001764f4(queuedHandleGetToken(&result));
         return 1;
     }
     return 0;

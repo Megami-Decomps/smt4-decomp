@@ -1,8 +1,8 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (174 vs 164 rows); register allocation and constant hoisting (0.26f parallax depth, layer ids) differ */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
-#include "util/Vec2Fixed.h"
-#include "util/PackNibbles.h"
+#include "util/MathFunctions.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Draw-state stack embedded in the render context.

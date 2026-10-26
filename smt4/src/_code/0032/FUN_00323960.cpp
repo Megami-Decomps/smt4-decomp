@@ -1,7 +1,7 @@
 /* NON_MATCHING: now written against the real second block DAT_0044f858 (first block = one 0x2e0 entry before it); retail swaps the two table base registers, keeps `sub r1, r5, #736` and reloads the list differently. */
 #include "common.h"
 #include "shard/W6_W6Match2_EffectEditor.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 struct EditorBlock00323960 {
     /* 0x000 */ u8 unk000[0xc];

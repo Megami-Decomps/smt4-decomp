@@ -3,6 +3,8 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
+#include "gamedata/GameDataAccess.h"
+#include "Model/MoriModelResource.h"
 
 extern "C" {
 
@@ -44,14 +46,12 @@ extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169a1c. */
 extern unsigned int recordGetScaledMaximum(int);
-extern int FUN_00177654(void);
 extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_0018152c. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-extern int gameGetOptions(void);
 extern int gameOptionsClassifyMode(void);
 
 

@@ -1,4 +1,5 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "code/Code001f_Smt4.h"
 
 struct SpriteSlot {
     /* 0x00 */ u8 data[0x8C];

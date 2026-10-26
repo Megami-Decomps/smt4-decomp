@@ -3,9 +3,9 @@
 #include "battle/btlMain.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
+#include "util/Random.h"
 
 extern "C" {
-s32 randRange(u32 maximum);
 u32 FUN_002533f4(u32 first, u32 second, s32 mode);
 
 /* Selects a forced or random battle event and assigns it to an available event slot. */

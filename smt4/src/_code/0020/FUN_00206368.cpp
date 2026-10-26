@@ -1,6 +1,6 @@
 /* NON_MATCHING: visibility clearing unrolls into direct byte stores instead of retail's per-sprite accessor loop; alternate branch layout and ID constants differ. */
 #include "ui/SpriteRowList.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 layer);

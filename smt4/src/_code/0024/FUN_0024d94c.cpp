@@ -61,7 +61,7 @@ void __aeabi_memcpy4(void *destination, const void *source, s32 size);
 u32 gameGetPlayerName(void);
 void libc_strcpy(void *destination, u32 source);
 void *dataTable08Sub2GetRecord(u16 skill);
-u16 FUN_00253f94(void);
+u16 recordGetPercentageScaledBase(void);
 void FUN_00253d60(StatGrades *grades, DemonSaveRecord *record);
 
 /* Builds the battle log's snapshot of a party demon from its save record. */
@@ -100,13 +100,13 @@ void FUN_0024d94c(DemonSnapshot *snapshot, DemonSaveRecord *record)
         snapshot->stats.values[6] = 999;
     }
     if (dataTable08Sub2GetRecord(record->skills.values[0]) != NULL) {
-        snapshot->skillEffectA = FUN_00253f94();
+        snapshot->skillEffectA = recordGetPercentageScaledBase();
     }
     if (dataTable08Sub2GetRecord(record->skills.values[1]) != NULL) {
-        snapshot->skillEffectB = FUN_00253f94();
+        snapshot->skillEffectB = recordGetPercentageScaledBase();
     }
     if (dataTable08Sub2GetRecord(record->skills.values[2]) != NULL) {
-        snapshot->skillEffectB = FUN_00253f94() + snapshot->skillEffectB;
+        snapshot->skillEffectB = recordGetPercentageScaledBase() + snapshot->skillEffectB;
     }
     FUN_00253d60(&grades, record);
     snapshot->statGrades[0] = grades.values[0] >> 10;

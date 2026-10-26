@@ -55,7 +55,6 @@ typedef struct {
     unsigned int spC4; /* 0xc4: local_c4 */
 } param_4_stack;
 
-extern unsigned char LAB_004ae5dc; /* 0x4ae5dc */
 
 /* Supplied declaration required: FUN_004ac1fc. */
 /* Supplied declaration required: FUN_004ad228. */
@@ -242,7 +241,7 @@ int FUN_004adf7c(unsigned int *param_1,int param_2,unsigned int *param_3,unsigne
             ppppcVar5[2] = (romwright_code ***)ppppcVar4;
           }
           else {
-            (*(*ppppcVar15[9])[2])(ppppcVar15[9],&LAB_004ae5dc,0x24);
+            (*(*ppppcVar15[9])[2])(ppppcVar15[9],"MoLive::Allocator: not enough memory to allocate %d bytes !!!\n",0x24);
           }
           if (ppppcVar5 == (romwright_code ****)0x0) {
             ppppcVar5 = ppppcVar15 + 1;

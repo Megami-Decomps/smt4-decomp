@@ -24,8 +24,9 @@ extern "C" void FUN_00212224(const IntegerCurve *curve, s32 *frame, s8 *keyIndex
     if (*duration < *frame) {
         *frame = 0;
         *increment = 0;
+        s32 advance = 1;
         if (*keyIndex < 3) {
-            for (s32 advance = 1; *keyIndex + advance < 4; ++advance) {
+            for (; *keyIndex + advance < 4; ++advance) {
                 *duration = curve->keys[*keyIndex + advance].frame - curve->keys[*keyIndex].frame;
                 if (*duration > 0) {
                     *increment = (f32)(curve->keys[*keyIndex + advance].value - curve->keys[*keyIndex].value) /

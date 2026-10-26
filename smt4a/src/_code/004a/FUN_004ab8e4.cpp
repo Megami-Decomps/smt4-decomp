@@ -1,7 +1,7 @@
 /* NON_MATCHING: compiler removes the nonzero portrait guard and uses slot-relative addressing. */
 #include "battle/btlUI.h"
 #include "battle/PortraitPanel.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;

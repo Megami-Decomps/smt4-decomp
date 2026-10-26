@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "code/Code0049_Smt4a.h"
 
 struct ScreenRect {
     f32 x;      // 0x00

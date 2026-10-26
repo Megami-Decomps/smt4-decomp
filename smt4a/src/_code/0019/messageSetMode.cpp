@@ -1,5 +1,5 @@
 #include "common.h"
-#include "shard/messageSetMode.h"
+#include "ui/UiControl.h"
 
 struct MessageState {
     u8 unk00[0x19DA];

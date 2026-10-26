@@ -1,7 +1,7 @@
 /* NON_MATCHING: retail loads the 1.0f/0.0f constants after jobGetWork into s0/s1; built hoists them into callee-saved s16/s17 and branches around the clamp (duplicating the jobGetWork call) */
 #include "common.h"
 #include "shard/JobWork.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0020.h"
 
 extern "C" {
 

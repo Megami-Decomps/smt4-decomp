@@ -1,6 +1,6 @@
 /* NON_MATCHING: jump table now matches; retail reads the filter textures through their own literal (DAT_0057f3e8, not a g_eventEffect offset) and uses bhi for the fade-out test; fade division register choice differs. */
 #include "event/2dEvent/EventFilter.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0020.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

@@ -1,10 +1,10 @@
 /* NON_MATCHING: timeout-description predicate lowering, descriptor stores and retained worker/result registers differ. */
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
+#include "code/Code002b.h"
+#include "sys/ResultReport.h"
 extern "C" {
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(u32 result);
-void FUN_002ba8f4(ThreadHandleState *thread);
 u32 FUN_002bcc60(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
     ThreadEntryPoint entry, const void *argument, void *stackTop, u32 priority, s32 processor, u8 owned);
 void FUN_00158bb4(void *queue);

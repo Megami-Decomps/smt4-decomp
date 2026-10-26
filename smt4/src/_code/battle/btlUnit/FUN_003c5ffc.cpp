@@ -1,4 +1,4 @@
-/* NON_MATCHING: battle debug list box item-changed handler (copies the edited item into the matching debug setting); written from the decompilation, switch lowering not compared with retail */
+/* NON_MATCHING: battle debug list box item-changed handler (copies the edited item into the matching debug setting); the list box is read per case and case 1 calls workSetScalarParameter as retail does; retail loads the destination address before the item value in the direct-store cases and orders the arm blocks without the shared store tail. */
 #include "common.h"
 #include "battle/btlHelp.h"
 
@@ -54,7 +54,18 @@ extern u32 DAT_00493554;
 extern u32 DAT_0049355c;
 
 u32 *asdListBoxGetItemText(u32 box);
+void workSetScalarParameter(BtlMainDebug *work, f32 value);
 s32 listBoxItemHasOwner(u32 box);
+
+static __inline void flagsSetBits(u32 *flags, u32 mask)
+{
+    *flags |= mask;
+}
+
+static __inline void flagsClearBits(u32 *flags, u32 mask)
+{
+    *flags &= ~mask;
+}
 
 static __inline void listBoxStoreText(u32 box, u32 *destination)
 {
@@ -68,106 +79,105 @@ static __inline void listBoxStoreValue(u32 box, u32 item, u32 *destination)
 
 void FUN_003c5ffc(BtlDebugMenu *menu, BtlUnitDebugFlags *unit, u32 index)
 {
-    u32 box = menu->listBox;
     switch (index) {
     case 0:
-        if (listBoxItemHasOwner(box) != 0)
+        if (listBoxItemHasOwner(menu->listBox) != 0)
             g_btlMain->flags |= BTL_MAIN_FLAG_DEBUG_OWNER;
         else
             g_btlMain->flags &= ~BTL_MAIN_FLAG_DEBUG_OWNER;
         break;
     case 1:
-        g_btlMain->debugTarget = *asdListBoxGetItemText(box);
+        workSetScalarParameter(g_btlMain, *reinterpret_cast<f32 *>(asdListBoxGetItemText(menu->listBox)));
         break;
     case 2:
-        if (listBoxItemHasOwner(box) != 0)
-            unit->flags |= BTL_UNIT_FLAG_DEBUG_OWNER;
+        if (listBoxItemHasOwner(menu->listBox) != 0)
+            flagsSetBits(&unit->flags, BTL_UNIT_FLAG_DEBUG_OWNER);
         else
-            unit->flags &= ~BTL_UNIT_FLAG_DEBUG_OWNER;
+            flagsClearBits(&unit->flags, BTL_UNIT_FLAG_DEBUG_OWNER);
         break;
     case 3:
-        DAT_00493554 = *asdListBoxGetItemText(box);
+        DAT_00493554 = *asdListBoxGetItemText(menu->listBox);
         break;
     case 4:
-        DAT_0049355c = *asdListBoxGetItemText(box);
+        DAT_0049355c = *asdListBoxGetItemText(menu->listBox);
         break;
     case 5:
-        listBoxStoreText(box, &DAT_00434310);
+        listBoxStoreText(menu->listBox, &DAT_00434310);
         break;
     case 6:
-        listBoxStoreText(box, &DAT_00434314);
+        listBoxStoreText(menu->listBox, &DAT_00434314);
         break;
     case 7:
-        listBoxStoreText(box, &DAT_00434318);
+        listBoxStoreText(menu->listBox, &DAT_00434318);
         break;
     case 8:
-        listBoxStoreValue(box, index, &DAT_0043431c);
+        listBoxStoreValue(menu->listBox, index, &DAT_0043431c);
         break;
     case 9:
-        listBoxStoreValue(box, index, &DAT_004342d4);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342d4);
         break;
     case 10:
-        listBoxStoreValue(box, index, &DAT_004342d8);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342d8);
         break;
     case 0xb:
-        listBoxStoreText(box, &DAT_00434320);
+        listBoxStoreText(menu->listBox, &DAT_00434320);
         break;
     case 0xc:
-        listBoxStoreValue(box, index, &DAT_00434324);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434324);
         break;
     case 0xd:
-        listBoxStoreValue(box, index, &DAT_004342e0);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342e0);
         break;
     case 0xe:
-        listBoxStoreValue(box, index, &DAT_00434328);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434328);
         break;
     case 0xf:
-        listBoxStoreText(box, &DAT_0043432c);
+        listBoxStoreText(menu->listBox, &DAT_0043432c);
         break;
     case 0x10:
-        listBoxStoreValue(box, index, &DAT_00434330);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434330);
         break;
     case 0x11:
-        listBoxStoreValue(box, index, &DAT_004342e4);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342e4);
         break;
     case 0x12:
-        listBoxStoreValue(box, index, &DAT_00434334);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434334);
         break;
     case 0x13:
-        listBoxStoreValue(box, index, &DAT_00434338);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434338);
         break;
     case 0x14:
-        listBoxStoreValue(box, index, &DAT_004342e8);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342e8);
         break;
     case 0x15:
-        listBoxStoreValue(box, index, &DAT_0043433c);
+        listBoxStoreValue(menu->listBox, index, &DAT_0043433c);
         break;
     case 0x16:
-        listBoxStoreValue(box, index, &DAT_00434340);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434340);
         break;
     case 0x17:
-        listBoxStoreValue(box, index, &DAT_004342ec);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342ec);
         break;
     case 0x18:
-        listBoxStoreValue(box, index, &DAT_00434344);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434344);
         break;
     case 0x19:
-        listBoxStoreValue(box, index, &DAT_00434348);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434348);
         break;
     case 0x1a:
-        listBoxStoreValue(box, index, &DAT_0043434c);
+        listBoxStoreValue(menu->listBox, index, &DAT_0043434c);
         break;
     case 0x1b:
-        listBoxStoreValue(box, index, &DAT_00434350);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434350);
         break;
     case 0x1c:
-        listBoxStoreValue(box, index, &DAT_00434354);
+        listBoxStoreValue(menu->listBox, index, &DAT_00434354);
         break;
     case 0x1d:
-        listBoxStoreValue(box, index, &DAT_00439cec);
+        listBoxStoreValue(menu->listBox, index, &DAT_00439cec);
         break;
     case 0x1e:
-        listBoxStoreValue(box, index, &DAT_004342f0);
+        listBoxStoreValue(menu->listBox, index, &DAT_004342f0);
         break;
     default:
         break;

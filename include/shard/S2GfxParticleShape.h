@@ -3,13 +3,7 @@
 #define S2_GFX_PARTICLE_SHAPE_H
 
 #include "common.h"
-
-/* Accumulates the size and alignment a set of allocations needs. */
-typedef struct SizeCalculator {
-    /* 0x00 */ u32 size;
-    /* 0x04 */ u32 alignment;     /* alignment currently in force */
-    /* 0x08 */ u32 maxAlignment;  /* largest alignment seen */
-} SizeCalculator;
+#include "nw/gfx/SizeCalculator.h"
 
 /* A self-relative pointer: the offset is from the field's own address; 0 means NULL. */
 typedef struct RelativeOffset {

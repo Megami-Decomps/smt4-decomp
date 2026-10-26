@@ -1,7 +1,9 @@
 /* NON_MATCHING: state, previous-state and frame stores exchange registers and instruction order. */
 #include "gamedata/SavedUnitSelection.h"
 #include "network/DataStore/DataStoreMain.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0023.h"
+#include "code/Code002c.h"
+#include "code/Code0033.h"
 
 extern "C" {
 extern void *g_handleRegistry;
@@ -9,7 +11,6 @@ extern s8 g_saveLoadUIBase;
 void FUN_002f0384(s32 enabled);
 void FUN_0041dcc0(SavedUnitSelection *editor);
 s32 byte1IsZero();
-void FUN_0033449c(s32 enabled);
 void FUN_0023b45c(s32 enabled);
 UnitRecord *gameGetPlayerData();
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);

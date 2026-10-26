@@ -1,4 +1,4 @@
-/* NON_MATCHING: instruction-identical except the name-length test: retail compares with `cmp r0, #1; bhi`, built `cmp r0, #2; bcs` (same condition). */
+/* NON_MATCHING: retail does not predicate the name test (`cmp r0,#1; bhi` skips the ldrb); armcc emits ldrbls/cmpls for every && / nested / early-return form tried (smt4a twin predicates). */
 #include "common.h"
 
 extern "C" {
@@ -26,9 +26,12 @@ u32 FUN_00290248(u32 id)
 
     u32 result;
 
-    if (length < 2 && record->name[0] == '0') {
-        result = 0;
-    } else if (record->flagIndex == 0) {
+    if (length <= 1) {
+        if (record->name[0] == '0') {
+            return 0;
+        }
+    }
+    if (record->flagIndex == 0) {
         result = 1;
     } else {
         result = (gameGetFlagBlock(record->flagIndex)->flags[id * 4] & 4) >> 2;

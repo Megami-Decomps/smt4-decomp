@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses a writeback flags pointer and a conditional branch rather than predicated flag updates. */
+/* NON_MATCHING: only the flags word is addressed `[r0, #1588]` where retail uses the writeback form `ldr r1, [r0, #1588]!` and `[r0]` for both stores. */
 #include "common.h"
 
 struct ScalarTransition {
@@ -21,11 +21,12 @@ extern "C" void FUN_0023cb70(ScalarTransition* transition, u32 first, u32 second
     transition->first = first;
     transition->counter = 0;
     transition->second = second;
+    u32 flags = transition->flags | 0x400;
     if (preserve == 0) {
-        transition->flags |= 0x400;
+        transition->flags = flags;
     } else {
         transition->previous = transition->current;
-        transition->flags |= 0x200400;
+        transition->flags = flags | 0x200000;
     }
     transition->current = 0.0f;
 }

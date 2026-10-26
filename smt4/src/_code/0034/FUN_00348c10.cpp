@@ -3,7 +3,7 @@
 #include "quest_center/QuestRequirement.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 #include "shard/SaveWork.h"
-#include "shard/gameGetFlagBlock.h"
+#include "gamedata/GameDataAccess_VariantA.h"
 
 extern "C" {
 s32 table1bOr1cGetRecordValue(u32 quest);

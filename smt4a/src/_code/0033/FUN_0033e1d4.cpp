@@ -1,7 +1,7 @@
 /* NON_MATCHING: phase-two test direction and shared zero-return epilogue merging differ. */
 #include "map/mapDepart.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
-#include "util/ClearByte.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 extern MapDepartExtraA *DAT_00581280;

@@ -10,7 +10,7 @@
 
 extern "C" {
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
-u32 FUN_0027281c(BtlCombatantEntryA *unit);
+u32 btlEntryHasCategoryThreeSkill(BtlCombatantEntryA *unit);
 s32 btlResolveEntryChoice(s32 choice);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
@@ -70,7 +70,7 @@ u32 FUN_0038c888(void)
     }
     if (btlGetMainState()->unk4cd1 != 0) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
-        if (entry != NULL && entry->id == id && FUN_0027281c(entry) != 0) {
+        if (entry != NULL && entry->id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

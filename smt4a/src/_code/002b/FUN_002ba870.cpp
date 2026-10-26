@@ -1,6 +1,5 @@
 /* NON_MATCHING: compiler merges the two selected-item drawing cases unlike retail. */
 #include "common.h"
-#include "util/CalleeContracts.h"
 #include "shard/JobWork.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 

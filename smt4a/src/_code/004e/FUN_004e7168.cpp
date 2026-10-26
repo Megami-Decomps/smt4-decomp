@@ -1,6 +1,6 @@
 /* NON_MATCHING: instruction scheduling and register allocation differ - retail forms the unit record's priority address as record+0x200 (+122) and keeps the u64 masks in ldm pairs on different registers; the logic is otherwise identical. */
 #include "common.h"
-#include "util/BtlUnitClearRecordFields.h"
+#include "battle/BattleHelpers.h"
 
 namespace {
 /* One actor's record from the unit table. */

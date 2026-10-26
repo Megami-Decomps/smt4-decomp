@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 extern "C" {
 extern const char *DAT_004651e8[4];

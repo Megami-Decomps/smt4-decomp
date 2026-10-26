@@ -46,7 +46,7 @@ int btlTalkBustUpReleaseAllSlots(void);
 int FUN_0028bf2c(void);
 int FUN_0028cb40(...);
 int btlTalkBustUpSetUnk2F4(int);
-int FUN_002954f4(int, int);
+int btlTalkBustUpSetDemonTexture(int, int);
 int dataTable00FindById(void);
 int FUN_002c1658(...);
 int FUN_00318c5c(...);
@@ -67,7 +67,7 @@ int FUN_0028c040(void);
 int gameGlobalsSetSelected(int);
 int spriteStartAnimationByIndex(int, int);
 int FUN_002bf818(...);
-int FUN_002dc55c(void);
+int uiSpriteOperationGetCompletion(void);
 int targetStateClear(unsigned int);
 int FUN_0033d0f0(unsigned int);
 int FUN_0033d2a8(unsigned int, unsigned int *, unsigned int);
@@ -136,7 +136,7 @@ extern int FUN_0028c600(int);
 extern int FUN_00293230(void);
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
-/* Supplied declaration required: FUN_002954f4. */
+/* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int FUN_00295618(void);
 /* Supplied declaration required: gameGlobalsSetSelected. */
 /* Supplied declaration required: FUN_002a0cc8. */
@@ -164,7 +164,7 @@ extern int FUN_002d0298(int);
 extern int partyPanelGetState(void);
 extern unsigned int partyPanelGetValue(void);
 extern int FUN_002dc3ec(int);
-/* Supplied declaration required: FUN_002dc55c. */
+/* Supplied declaration required: uiSpriteOperationGetCompletion. */
 extern int FUN_002e4354(void);
 extern int FUN_002f25c4(void);
 extern int btlTalkBustUpIsUnk2F8(unsigned int);
@@ -309,7 +309,7 @@ int FUN_0019e138(unsigned int job)
     break;
   case 2:
     temp_v4 = temp_v0 + 0x2200;
-    FUN_002dc55c();
+    uiSpriteOperationGetCompletion();
     if (temp_v4 != 0) {
       *(unsigned int *)(temp_v0 + 0x7e38) = 0;
     }
@@ -405,7 +405,7 @@ int FUN_0019e138(unsigned int job)
         else {
           g_btlUi = 0;
           FUN_0028bf2c();
-          FUN_002954f4(*puVar7,1);
+          btlTalkBustUpSetDemonTexture(*puVar7,1);
           btlTalkBustUpSetUnk2F4(1);
           temp_v12 = reinterpret_cast<int>(btlGetMainState());
           if ((*(unsigned int *)(temp_v12 + 0x44a8) & 0x40000) != 0) {

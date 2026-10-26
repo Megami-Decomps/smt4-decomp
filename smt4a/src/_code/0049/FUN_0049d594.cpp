@@ -1,4 +1,4 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: explicit states restore the retail jump table and named selection values restore field-load order; outgoing image arguments and speed/layer scheduling still differ. */
 #include "ui/UiSpriteState.h"
 #include "shard/TextureDrawCall.h"

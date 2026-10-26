@@ -1,9 +1,9 @@
 /* NON_MATCHING: redundant global-pointer and flag reloads are folded, with a shared epilogue. */
 #include "ui/PartyPanelState.h"
+#include "shard/W4_Match1b_RegisteredHandle.h"
 
 extern "C" {
 void FUN_002b8454(u32 entry, u32 value, u32 subvalue, u32 enabled);
-u32 buttonHelpGetEntryValue(u32 entry);
 extern PartyPanelState *g_partyPanel;
 
 void FUN_002579bc(s32 mode)

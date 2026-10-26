@@ -1,7 +1,7 @@
 /* NON_MATCHING: Record-flag writeback addressing and saved-register allocation differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/FUN_00267144.h"
+#include "code/Code0026.h"
 
 extern "C" {
 u8 *gameGetMapBlock(void);

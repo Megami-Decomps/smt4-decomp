@@ -12,7 +12,7 @@ int recordGetScaledMaximum(...);
 int dataTable04FindById(void);
 int FUN_003f0e20(...);
 int FUN_004c53fc(...);
-int FUN_004c571c(...);
+int btlAdjustPropertyClamped(...);
 
 typedef struct fn_004c6edc_arg0 fn_004c6edc_arg0;
 typedef struct fn_004c6edc_arg1 fn_004c6edc_arg1;
@@ -103,7 +103,7 @@ extern int FUN_003ea278(unsigned int *, unsigned int *);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: recordSetClampedCurrent. */
 /* Supplied declaration required: FUN_004c53fc. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 
 
 int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned int param_3)
@@ -148,7 +148,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         if (temp_v1 != -6) {
           if (temp_v1 != -7) {
             if (temp_v1 != -9) {
-              temp_v6 = FUN_004c571c(param_1,7,temp_v1,param_3);
+              temp_v6 = btlAdjustPropertyClamped(param_1,7,temp_v1,param_3);
               if (temp_v6 < 0) {
                 temp_v6 = -temp_v6;
               }
@@ -236,7 +236,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         }
       }
     }
-    FUN_004c571c(param_1,0x2d,1,0);
+    btlAdjustPropertyClamped(param_1,0x2d,1,0);
   }
   if ((param_2->field_0x32 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
@@ -254,7 +254,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         if (temp_v1 != -6) {
           if (temp_v1 != -7) {
             if (temp_v1 != -9) {
-              temp_v1 = FUN_004c571c(param_1,8,temp_v1,param_3);
+              temp_v1 = btlAdjustPropertyClamped(param_1,8,temp_v1,param_3);
               if (temp_v1 < 0) {
                 temp_v1 = -temp_v1;
               }
@@ -339,7 +339,7 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         }
       }
     }
-    FUN_004c571c(param_1,0x2e,1,0);
+    btlAdjustPropertyClamped(param_1,0x2e,1,0);
   }
   if ((param_2->field_0x35 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
@@ -357,12 +357,12 @@ int FUN_004c6edc(fn_004c6edc_arg0 *param_1,fn_004c6edc_arg1 *param_2,unsigned in
         if (temp_v1 != -6) {
           if (temp_v1 != -7) {
             if (temp_v1 != -9) {
-              temp_v1 = FUN_004c571c(param_1,0xb,temp_v1,param_3);
+              temp_v1 = btlAdjustPropertyClamped(param_1,0xb,temp_v1,param_3);
               if (temp_v1 < 0) {
                 temp_v1 = -temp_v1;
               }
               temp_v6 = temp_v6 + temp_v1;
-              FUN_004c571c(param_1,9,(int)param_2->field_0x35,param_3);
+              btlAdjustPropertyClamped(param_1,9,(int)param_2->field_0x35,param_3);
             }
             else {
               temp_v4 = FUN_004c53fc(0xb);
@@ -484,8 +484,8 @@ joined_r0x004c7570:
         }
       }
     }
-    FUN_004c571c(param_1,0x2f,1,0);
-    FUN_004c571c(param_1,0x31,1,0);
+    btlAdjustPropertyClamped(param_1,0x2f,1,0);
+    btlAdjustPropertyClamped(param_1,0x31,1,0);
   }
   if ((param_2->field_0x34 != '\0') && (temp_v1 = FUN_003ea278(puVar2,puVar3), temp_v1 == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
@@ -503,7 +503,7 @@ joined_r0x004c7570:
         if (temp_v1 != -6) {
           if (temp_v1 != -7) {
             if (param_2->field_0x35 != -9) {
-              temp_v1 = FUN_004c571c(param_1,10,temp_v1,param_3);
+              temp_v1 = btlAdjustPropertyClamped(param_1,10,temp_v1,param_3);
               if (temp_v1 < 0) {
                 temp_v1 = -temp_v1;
               }
@@ -588,7 +588,7 @@ joined_r0x004c7570:
         }
       }
     }
-    FUN_004c571c(param_1,0x30,1,0);
+    btlAdjustPropertyClamped(param_1,0x30,1,0);
   }
   if ((param_2->field_0x38 & 1) != 0) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
@@ -670,63 +670,63 @@ joined_r0x004c7570:
     }
   }
   if ((param_2->field_0x3c & 0x800000) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0xe,(param_2->field_0x3c & 0xffffff) >> 0x17,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0xe,(param_2->field_0x3c & 0xffffff) >> 0x17,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x3c & 0x1000000) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0xf,(param_2->field_0x3c & 0x1ffffff) >> 0x18,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0xf,(param_2->field_0x3c & 0x1ffffff) >> 0x18,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x3c & 0x80) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x10,(param_2->field_0x3c & 0xff) >> 7,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x10,(param_2->field_0x3c & 0xff) >> 7,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x3c & 0x100) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x11,(param_2->field_0x3c & 0x1ff) >> 8,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x11,(param_2->field_0x3c & 0x1ff) >> 8,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x3c & 0x2000000) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x13,(param_2->field_0x3c & 0x3ffffff) >> 0x19,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x13,(param_2->field_0x3c & 0x3ffffff) >> 0x19,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x3c & 0x100000) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x14,(param_2->field_0x3c & 0x1fffff) >> 0x14,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x14,(param_2->field_0x3c & 0x1fffff) >> 0x14,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x3c & 0x200000) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x15,(param_2->field_0x3c & 0x3fffff) >> 0x15,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x15,(param_2->field_0x3c & 0x3fffff) >> 0x15,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x38 & 0x20) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x18,(param_2->field_0x38 & 0x3f) >> 5,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x18,(param_2->field_0x38 & 0x3f) >> 5,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x38 & 0x40) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x19,(param_2->field_0x38 & 0x7f) >> 6,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x19,(param_2->field_0x38 & 0x7f) >> 6,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
@@ -747,7 +747,7 @@ joined_r0x004c7570:
     }
   }
   if ((param_2->field_0x3c & 0x400000) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x16,(param_2->field_0x3c & 0x7fffff) >> 0x16,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x16,(param_2->field_0x3c & 0x7fffff) >> 0x16,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
@@ -788,35 +788,35 @@ joined_r0x004c7570:
     *(short *)(puVar3 + 0xcd) = param_2->field_0x42;
   }
   if ((char)param_2->field_0x38 < '\0') {
-    temp_v7 = FUN_004c571c(param_1,0x27,param_2->field_0x38 >> 7,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x27,param_2->field_0x38 >> 7,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x39 & 1) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x28,param_2->field_0x39 & 1,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x28,param_2->field_0x39 & 1,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x39 & 2) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x29,(param_2->field_0x39 & 3) >> 1,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x29,(param_2->field_0x39 & 3) >> 1,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x39 & 4) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x2a,(param_2->field_0x39 & 7) >> 2,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x2a,(param_2->field_0x39 & 7) >> 2,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }
     temp_v6 = temp_v6 + temp_v7;
   }
   if ((param_2->field_0x39 & 8) != 0) {
-    temp_v7 = FUN_004c571c(param_1,0x2b,(param_2->field_0x39 & 0xf) >> 3,param_3);
+    temp_v7 = btlAdjustPropertyClamped(param_1,0x2b,(param_2->field_0x39 & 0xf) >> 3,param_3);
     if (temp_v7 < 0) {
       temp_v7 = -temp_v7;
     }

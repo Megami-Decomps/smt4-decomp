@@ -1,6 +1,6 @@
 /* NON_MATCHING: result-value copy ABI and array allocator's extra argument differ. */
 #include "addon/AocPackageMountBatch.h"
-#include "util/ByteIsAtLeast100.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 void *asdOperatorNewE(u32 bytes);

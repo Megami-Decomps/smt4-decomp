@@ -1,23 +1,27 @@
-/* NON_MATCHING: retail evaluates the signed state through a rebased receiver and saves that receiver; armcc folds the equality test to an unsigned halfword load without a frame. */
 #include "common.h"
 
-struct GuardedState {
-    s32 getState() const { return state; }
-    u8 unk00[0x50];
-    s16 state; // 0x50
-    u8 unk52[2];
-    u8 enabled; // 0x54
+struct SpriteOperation {
+    /* 0x00 */ u8 padding[0x50];
+    /* 0x50 */ s16 mode;
+    /* 0x52 */ u8 reserved[2];
+    /* 0x54 */ u8 active;
 };
-struct GuardedStateOwner {
-    u8 unk00[0x2dc];
-    GuardedState state; // 0x2dc
-};
-extern "C" s32 uiSpriteGetCompletionState(GuardedState *state);
 
-// Delegate the query only while state three is enabled.
-extern "C" s32 FUN_0039ebcc(GuardedStateOwner *owner)
+struct SpriteOperationOwner {
+    /* 0x000 */ u8 padding[0x2dc];
+    /* 0x2dc */ SpriteOperation operation;
+};
+
+extern "C" {
+u32 uiSpriteGetCompletionState(SpriteOperation *operation);
+s32 uiSpriteGetOperationMode(SpriteOperation *operation);
+
+/* Uses the completion state of an active mode-three operation; otherwise reports 1. */
+u32 FUN_0039ebcc(SpriteOperationOwner *owner)
 {
-    if (owner->state.getState() == 3 && owner->state.enabled)
-        return uiSpriteGetCompletionState(&owner->state);
+    if (uiSpriteGetOperationMode(&owner->operation) == 3 && owner->operation.active != 0) {
+        return uiSpriteGetCompletionState(&owner->operation);
+    }
     return 1;
+}
 }

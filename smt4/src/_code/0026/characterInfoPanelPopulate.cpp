@@ -1,6 +1,6 @@
 /* NON_MATCHING: panel/record register allocation, equipment-label zero caching, and preview-reset branch sharing differ from retail. */
 #include "common.h"
-#include "shard/FUN_00293f10.h"
+#include "code/Code0029.h"
 #include "addon/LookupRecord.h"
 
 struct CharacterInfoPanel {
@@ -39,7 +39,7 @@ void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 void asdTextDrawFormatted(void *label, u32 font, u32 color, s32 x, s32 y, const char *format, ...);
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_002be650(u32 id, u32 flags);
-void FUN_002bcfc0(const char *source, char *destination);
+void textConvertToGlyphPairs(const char *source, char *destination);
 void ARM_common_memcpy4_7(char *destination, const char *source);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
@@ -54,7 +54,7 @@ extern const char DAT_00402898[];
 static __forceinline void setCharacterEquipmentLabel(CharacterInfoPanel *panel, const CharacterInfoRecord *record, u32 slot, char *buffer)
 {
     if (record->equipment[slot]) {
-        FUN_002bcfc0(FUN_002be650(record->equipment[slot], 0), buffer);
+        textConvertToGlyphPairs(FUN_002be650(record->equipment[slot], 0), buffer);
         asdTextDrawFormatted(panel->equipmentLabels[slot], 2, -1u, 0, 0, buffer);
         panel->equipmentIds[slot] = record->equipment[slot];
     } else {
@@ -99,13 +99,13 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     setCharacterEquipmentLabel(panel, record, 6, buffer);
 
     if (record->demon)
-        FUN_002bcfc0(reinterpret_cast<const char *>(FUN_002bd06c(record->demon)), buffer);
+        textConvertToGlyphPairs(reinterpret_cast<const char *>(FUN_002bd06c(record->demon)), buffer);
     else
         ARM_common_memcpy4_7(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);
     panel->demonNameWidth = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
     if (record->demon)
-        FUN_002bcfc0(demonGetRaceLabel(record->demon, 0), buffer);
+        textConvertToGlyphPairs(demonGetRaceLabel(record->demon, 0), buffer);
     else
         FUN_002a7c80(buffer, "\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->race, 2, -1u, 0, 0, buffer);
@@ -113,7 +113,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
 
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot]) {
-            FUN_002bcfc0(aocIndexValueOrDefault(record->skills[slot]), buffer);
+            textConvertToGlyphPairs(aocIndexValueOrDefault(record->skills[slot]), buffer);
             asdTextDrawFormatted(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_0028f4b4(buffer, 1, 0.0f);
         } else {

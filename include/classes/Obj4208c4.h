@@ -14,6 +14,7 @@ public:
     }
     virtual ~Obj4208c4();
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    static void operator delete(void *block);
     /* 0x04 */ void **kind4Animations;
     /* 0x08 */ void **kind5Animations;
     /* 0x0C */ void **kind6Animations;

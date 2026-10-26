@@ -3,9 +3,10 @@
 #include "title/titleConfig.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0031.h"
-#include "util/CalleeContracts.h"
+#include "camp/CampStateQueries.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "ui/UiControl_Smt4a.h"
 
 extern "C" {
 
@@ -38,7 +39,6 @@ void fillTwoWordsWithByte(void *destination, u32 value);
 void sysPlaySe(s32 sound);
 void FUN_0019de98(s32 channel, u32 color);
 GameDataBlock *gameDataBlocksGetSaveData(void);
-u32 categoryGetThresholdIndex(u8 value);
 u32 findByteThresholdTier(u8 value);
 u32 thresholdIndexFind(u8 value);
 void wordPairCopy(void *destination, const void *source);

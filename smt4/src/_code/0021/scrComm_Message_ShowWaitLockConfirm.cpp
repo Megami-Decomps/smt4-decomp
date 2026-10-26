@@ -2,11 +2,9 @@
 #include "ui/MessageMain.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
-#include "util/ScrGetCommandFrame.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
-s32 FUN_0028660c();
 void FUN_002866b4(u32 context, u32 message, s32 frame, s32 mode, bool wait, u32 flags);
 extern MessageGlobals g_messageMain;
 

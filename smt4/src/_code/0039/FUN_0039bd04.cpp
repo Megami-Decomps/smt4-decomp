@@ -33,13 +33,13 @@ extern s32 DAT_0044cdc8;   /* frames per ring step */
 extern u32 DAT_0044cdd0;   /* caption colour */
 
 u32 FUN_002c5d80(u32 slot, u32 flags);
-void FUN_002bee04(RenderCtx *context, s32 stack, u32 value);
+void renderStackPushIndexed(RenderCtx *context, s32 stack, u32 value);
 void efctSetSpeed(f32 speed);
 void FUN_002bed3c(void);
 s32 vec2GetXInt(void *state);
 void FUN_002bf380(u32 layer, u32 bank, u32 sprite, s32 x, s32 y, u32 flags);
 LoadingSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
-s32 FUN_002bedb0(RenderCtx *context, s32 stack);
+s32 renderCtxPopState(RenderCtx *context, s32 stack);
 void FUN_002bf818(void *state);
 
 /* Draws the title loading ring: the backdrop, nine dots with the current and the opposite pair
@@ -47,7 +47,7 @@ void FUN_002bf818(void *state);
 void FUN_0039bd04(TitleLoadingScene *scene)
 {
     u32 slot = FUN_002c5d80(1, 0);
-    FUN_002bee04(g_titleScene, 3, slot);
+    renderStackPushIndexed(g_titleScene, 3, slot);
     efctSetSpeed(1.0f);
     FUN_002bed3c();
     void *origin = scene->cursor;
@@ -78,7 +78,7 @@ void FUN_0039bd04(TitleLoadingScene *scene)
     LoadingSpriteFrame *caption = asdTMTexTableEntryAt(0x1C, 0x1120);
     char text[0x1B] = "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44";
     textDrawString(4, DAT_0044cdd0, text, (f32)(vec2GetXInt(origin) - 0xE + caption->x), (f32)caption->y, 0.0f, 0.0f, 1.0f);
-    FUN_002bedb0(g_titleScene, 3);
+    renderCtxPopState(g_titleScene, 3);
     efctSetSpeed(1.0f);
     FUN_002bf818(origin);
     if (scene->requested != 0 && scene->cursor[0x8A] != 0)

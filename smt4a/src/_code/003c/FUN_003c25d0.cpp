@@ -1,7 +1,7 @@
 /* NON_MATCHING: compiler folds the preset field address into the pool and combines its two mask loads. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "util/CalleeContracts.h"
+#include "code/Code004a.h"
 
 struct BtlCombatantEntryA {
     u32 flags[2]; // 0x00

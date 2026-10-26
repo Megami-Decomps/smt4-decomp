@@ -31,7 +31,7 @@ typedef struct {
     unsigned int spE8; /* 0xe8: local_e8 */
 } param_6_stack;
 
-extern unsigned char LAB_00141adc; /* 0x141adc */
+extern unsigned char vectorSetAllOne; /* 0x141adc */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: jobGetScalarValue. */
@@ -105,7 +105,7 @@ void drawEffectResourceWithColors(unsigned int param_1,unsigned int param_2,unsi
     return;
   }
   if (param_6 != 0 && temp_v1 != 0) {
-    __aeabi_vec_ctor_nocookie_nodtor(&temp_v4,&LAB_00141adc,0x10,4);
+    __aeabi_vec_ctor_nocookie_nodtor(&temp_v4,&vectorSetAllOne,0x10,4);
     temp_v1 = *(int *)(temp_v0 + 0xc);
     temp_v4 = *(unsigned int *)(temp_v1 + 0x10);
     uStack_c4 = *(unsigned int *)(temp_v1 + 0x14);

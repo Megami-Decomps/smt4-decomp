@@ -1,16 +1,17 @@
-/* NON_MATCHING: C-form vtable restoration loads the address after the push and adds a move; retail's deleting destructor loads its vtable before saving registers. */
-#include "shard/VObject.h"
+#include "classes/Obj4208c4.h"
 
 extern "C" {
-extern const u32 _ZTV9Obj4208c4[];
-void objectPoolDestroy(VObject *object);
+void objectPoolDestroy(Obj4208c4 *object);
 int asdMemFreeNonNull(void *block);
 }
 
-/* Restore the pool's vtable, destroy its lists, and release the allocation. */
-extern "C" void _ZN9Obj4208c4D0Ev(VObject *object)
+inline void Obj4208c4::operator delete(void *block)
 {
-    object->vtbl = _ZTV9Obj4208c4 + 2;
-    objectPoolDestroy(object);
-    asdMemFreeNonNull(object);
+    asdMemFreeNonNull(block);
+}
+
+/* Destroys the animation lists the pool owns. */
+Obj4208c4::~Obj4208c4()
+{
+    objectPoolDestroy(this);
 }

@@ -2,8 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/SmokeFade.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0035.h"
+#include "code/Code0033.h"
+#include "code/Code0023.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
+#include "code/Code002c.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "code/Code0022_Smt4a.h"
 
 extern "C" {
 
@@ -15,7 +20,6 @@ int FUN_00319aec(...);
 int statusDisplayBindUnitRecord(...);
 int FUN_003343c0(...);
 int objBInitBlock19D0(void);
-int FUN_0033449c(...);
 int FUN_0038b3f8(...);
 int FUN_0038b548(...);
 int sysPlayVoice(...);
@@ -43,9 +47,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 /* Supplied declaration required: FUN_00215bd0. */
 extern int scrRunOpcodesStub(unsigned int);
-extern int FUN_0022e750(void);
 /* Supplied declaration required: FUN_0022e774. */
-extern int FUN_0023b3b8(void);
 /* Supplied declaration required: FUN_0023b45c. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int FUN_002857b8(void);

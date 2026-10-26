@@ -2,11 +2,11 @@
 #include "classes/Obj55c89c.h"
 #include "romwright_types.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 int taskCreateDraw(...);
-int asdMemoryAllocTracked(int, int, int, int, int);
 int FUN_0019de98(...);
 int FUN_002c8550(...);
 int FUN_0034a9c4(...);
@@ -30,13 +30,10 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_1_stack;
 
-extern unsigned char LAB_004a2e94; /* 0x4a2e94 */
-extern unsigned char LAB_004a2eac; /* 0x4a2eac */
-extern unsigned char LAB_004a2ec0; /* 0x4a2ec0 */
-extern unsigned char LAB_004a6e54; /* 0x4a6e54 */
-extern unsigned char LAB_004a6e7c; /* 0x4a6e7c */
-extern unsigned char LAB_004a6f64; /* 0x4a6f64 */
-extern unsigned char LAB_004a7260; /* 0x4a7260 */
+extern unsigned char FUN_004a6e54; /* 0x4a6e54 */
+extern unsigned char animatedPageSelectionRelease; /* 0x4a6e7c */
+extern unsigned char FUN_004a6f64; /* 0x4a6f64 */
+extern unsigned char FUN_004a7260; /* 0x4a7260 */
 extern unsigned char DAT_0055c90c; /* 0x55c90c */
 extern int *g_animatedPageSelection; /* 0x57f0b4 */
 extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
@@ -89,14 +86,11 @@ void Obj55c89c::start()
   asdMemoryAllocTracked(0x100,0x100,0,4,1);
   g_animatedPageSelection = piVar1;
   *piVar1 = (int)param_1;
-  puVar2 = &LAB_004a2e94;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_004a2e94), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&LAB_004a6e54), reinterpret_cast<AsdProcFunc>(&LAB_004a6e7c), reinterpret_cast<u32>(piVar1));
+  asdProcessCreateSimple("BIBLE DEVIL CALC", 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&FUN_004a6e54), reinterpret_cast<AsdProcFunc>(&animatedPageSelectionRelease), reinterpret_cast<u32>(piVar1));
   param_1[1] = (int)puVar2;
-  puVar3 = &LAB_004a2eac;
-  taskCreateDraw(&LAB_004a2eac,0x71,1,0,&LAB_004a6f64,0,g_animatedPageSelection,puVar2);
+  taskCreateDraw("BIBLE DEVIL UP",0x71,1,0,&FUN_004a6f64,0,g_animatedPageSelection,puVar2);
   param_1[2] = (int)puVar3;
-  puVar2 = &LAB_004a2ec0;
-  taskCreateDraw(&LAB_004a2ec0,0xea,1,0,&LAB_004a7260,0,g_animatedPageSelection,param_1[1]);
+  taskCreateDraw("BIBLE DEVIL DOWN",0xea,1,0,&FUN_004a7260,0,g_animatedPageSelection,param_1[1]);
   param_1[3] = (int)puVar2;
   rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x14);
   temp_v0 = 0x68;

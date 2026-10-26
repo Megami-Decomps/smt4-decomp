@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "code/Code0028_Smt4a.h"
 
 extern "C" {
 

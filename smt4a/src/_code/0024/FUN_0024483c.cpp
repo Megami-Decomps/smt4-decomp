@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail multiplies index*25 before loading g_eplSlots (r0 reused); built loads g_eplSlots into r2 first. */
 #include "common.h"
+#include "classes/Obj557dcc.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct EplSlots {
 
 extern EplSlots *g_eplSlots;
 
-extern void resourceListDestroy(void *resource);
 extern void asdMemFree(void *resource);
 
 /* Frees the two resources of effect slot `index` and clears the slot's dirty byte. */

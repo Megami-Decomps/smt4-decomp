@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "util/Random.h"
 #include "gamedata/DataTable.h"
 #include "util/Random.h"
 

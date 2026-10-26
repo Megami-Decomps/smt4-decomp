@@ -1,6 +1,6 @@
 /* NON_MATCHING: pending-slot accessor matches; state/counter stores remain reversed in steps 4 and 5. */
 #include "common.h"
-#include "util/LoadSlotRequestAsync.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 #include "battle/btlDebug.h"
 
 extern "C" {

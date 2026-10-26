@@ -1,7 +1,8 @@
 /* NON_MATCHING: register swap only: retail keeps id in r4 and the record in r5 (reusing r4 for record+0x100 later); ours swaps them. */
 #include "shard/W5_W5Match7_DataRecord.h"
 #include "shard/W5_W5Match7_SceneState.h"
-#include "util/GameFlagEntryGetBit.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ extern "C" {
 #define GAME_FLAG_ITEMS_LOCKED 0x560
 
 s32 FUN_003df390(void);
-s32 gameFlagIsSet(u32 flag);
 
 /* Returns whether item `id` is currently usable. */
 u32 FUN_003de75c(u32 id)

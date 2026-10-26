@@ -1,16 +1,16 @@
 /* NON_MATCHING: The embedded-entry pointer is retained rather than recomputed; getter/setter registers differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "shard/flaggedEntryGetValueA.h"
+#include "gamedata/GameDataAccess_Shard0031.h"
+#include "gamedata/GameDataAccess_VariantH_Shard0031.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(FlaggedEntry *entry);
 s32 resourceRunEmbeddedOperationIfUnblocked(FlaggedEntry *entry);
-s32 flaggedEntryGetValueB(FlaggedEntry *entry);
 s32 scrollOwnerSetValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
-s32 flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
 
 void FUN_004d01f8(ResourceValueCyclePrefixA *state)
 {

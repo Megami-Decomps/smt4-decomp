@@ -9,7 +9,7 @@ struct NpcRoomOccupantNameIV {
 extern "C" {
 extern NpcRoomA *g_npcRoom;
 char *libc_strcpy(char *destination, const char *source);
-void FUN_002bcfc0(const char *source, char *destination);
+void textConvertToGlyphPairs(const char *source, char *destination);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void messageMainRequestBanner();
 void FUN_0025921c(const char *text, u32 parameter);
@@ -26,7 +26,7 @@ void FUN_002feadc()
             (const NpcRoomOccupantNameIV *)room->occupants[room->displayEntries[index].occupantIndex];
         if (occupant) {
             libc_strcpy(name, occupant->name);
-            FUN_002bcfc0(name, converted);
+            textConvertToGlyphPairs(name, converted);
             length += textFormatBuffer(text + length, "%s<br>", converted);
         }
     }

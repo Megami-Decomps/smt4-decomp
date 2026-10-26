@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail caches id >> 3 in r5 across the bitset tests and updates both bitsets through writeback pointers; control flow matches */
 #include "common.h"
-#include "util/dataFindKeyedRecordWithOverrides.h"
+#include "gamedata/DataTableAccess.h"
 
 extern "C" {
 

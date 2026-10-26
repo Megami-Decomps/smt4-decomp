@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail tail-merges the two call arms (one `bl FUN_00168750` after per-arm argument setup) and hoists no common setup; armcc here emits the hoisted prefix and trailing hint nops. */
 #include "common.h"
-#include "util/LoadSlotRequestAsync.h"
+#include "AsdSDK/Source/Sys/File/AsdFileHelpers.h"
 
 extern "C" {
 

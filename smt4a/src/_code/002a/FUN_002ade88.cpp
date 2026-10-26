@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ade88` (_code @ 0x2ade88, 0x490 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code002a_Smt4a.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ extern int slotRecordFindById(unsigned int);
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: __aeabi_memset4. */
-extern int FUN_002a4b28(unsigned short);
 /* Supplied declaration required: FUN_004da344. */
 
 

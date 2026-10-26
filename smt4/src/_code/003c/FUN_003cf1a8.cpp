@@ -1,7 +1,7 @@
 /* NON_MATCHING: register allocation only: retail keeps the random pick in r3 across the btlUnitGet call (armcc knew its register use) and the index array base in r5; the build saves them in r5/r6 (frame 440 vs 436). */
 #include "battle/BattleUnitSlot.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
-#include "util/CalleeContracts.h"
+#include "util/Random.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 

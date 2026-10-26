@@ -1,4 +1,4 @@
-#include "util/DataTable08Sub2GetRecord.h"
+#include "gamedata/DataTableAccess_VariantE_EntrySort.h"
 #include "shard/W5_W5Match7_EntrySort.h"
 
 // Sort entry IDs by descending category, then ascending tie key.

@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation and branch layout differ (the two quest kinds share counters in retail) */
 #include "common.h"
-#include "shard/FUN_00287800.h"
+#include "code/Code0028.h"
+#include "code/Code0028_Smt4.h"
 
 /* One reward line of a quest: the item and how many (0 = not granted). */
 struct QuestRewardEntry {
@@ -36,7 +37,6 @@ s32 table1bOr1cGetRecordValue(u16 quest);
 s32 FUN_00287874(u16 quest);
 s32 questPassesAvailabilityConditions(u16 quest);
 s32 FUN_00298e40(u16 quest, s32 index, QuestRewardEntry *entry);
-void FUN_0028784c(u16 quest, s32 mode);
 void mapIfShowItemResultMessage(s32 message, u32 item, u32 amount);
 void FUN_002e8598(s32 message, u32 item);
 

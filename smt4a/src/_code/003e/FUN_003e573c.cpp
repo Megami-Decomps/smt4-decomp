@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail keeps both `table + index * 0x5c` (r6) and the slot address (r4 = r6 + 0x1c) live and addresses some fields from each; branch layout differs accordingly. */
 #include "common.h"
-#include "util/FUN_001cd3ec.h"
+#include "code/Code001c.h"
 
 struct NamedResourceObject {
     /* 0x0 */ u8 unk0[4];

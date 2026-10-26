@@ -27,7 +27,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned char LAB_0033dc04; /* 0x33dc04 */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int g_mapHakai; /* 0x581038 */
 
@@ -75,7 +74,7 @@ unsigned int FUN_0033d6c0(void)
     else {
       if (*(int *)(g_mapHakai + 0x59c) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033dc04,0xf5);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0xf5);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
@@ -90,7 +89,7 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5a0) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033dc04,0xff);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0xff);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
@@ -105,7 +104,7 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5a4) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033dc04,0x109);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x109);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
@@ -120,7 +119,7 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5a8) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033dc04,0x113);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x113);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
@@ -135,7 +134,7 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5b0) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033dc04,0x122);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x122);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
@@ -150,7 +149,7 @@ unsigned int FUN_0033d6c0(void)
       }
       if (*(int *)(g_mapHakai + 0x5b4) != 0) {
         temp_v1 = 0x20;
-        FUN_00178b04(0x20,&LAB_0033dc04,299);
+        FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",299);
         temp_v4 = 0;
         if (temp_v1 != 0) {
           temp_v4 = modelListInit();
@@ -211,7 +210,7 @@ LAB_0033dd20:
           *(short **)(temp_v2 + 0x80) = psVar5;
           if (temp_v5[*(short *)(temp_v2 + 0xac)] != 0) {
             temp_v1 = 0x20;
-            FUN_00178b04(0x20,&LAB_0033dc04,0x1bb);
+            FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapHakai.cpp",0x1bb);
             if (temp_v1 == 0) {
               temp_v4 = 0;
             }

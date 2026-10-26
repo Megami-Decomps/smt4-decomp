@@ -1,5 +1,6 @@
-/* NON_MATCHING: native result construction uses different saved registers and omits retail's removed-hook NOPs. */
+/* NON_MATCHING: native result construction keeps `result` in r1 across the later checks and uses different saved registers; retail also lays out the first failure test with a NOP. */
 #include "classes/WindowStatus.h"
+#include "nn/Result.h"
 
 extern "C" {
 u32 FUN_00427bf0(u64 handle);
@@ -11,14 +12,14 @@ WindowStatusResult FUN_005003b4(const u64 *handle, void *buffer, u32 size)
     if (*handle == 0)
         return WindowStatusResult(0xe0a13882);
     u32 result = FUN_00427bf0(*handle);
-    if ((s32)result < 0)
+    if (nnResultIsFailure(result))
         return WindowStatusResult(result);
     result = ipcRequest04Forward(1, *handle, buffer, size);
     if (result == 0xd880803b)
         return WindowStatusResult(0xd8813889);
     if (result == 0xd900803e)
         return WindowStatusResult(0xd8e1389b);
-    if ((s32)result < 0)
+    if (nnResultIsFailure(result))
         return WindowStatusResult(result);
     return WindowStatusResult(0);
 }

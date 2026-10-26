@@ -23,7 +23,7 @@ struct RenderTargetPair {
 
 void FUN_00154d68(u32 color, u32 depth, u32 width, u32 height);
 void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
-void FUN_0037a99c(s32 a, s32 b, Color4 color);
+void FUN_0037a99c(u32 a, u32 b, Color4 color, f32 value);
 
 /* Binds the render target, sets its viewport (clamped to 1023x1016) and clears it with `color` (white if NULL). */
 void FUN_0037aa68(RenderTargetPair *target, const Color4 *color)
@@ -42,7 +42,7 @@ void FUN_0037aa68(RenderTargetPair *target, const Color4 *color)
     }
     FUN_00154180(0, 0, width, height);
     if (color != NULL) {
-        FUN_0037a99c(0, 7, *color);
+        FUN_0037a99c(0, 7, *color, 0.0f);
         return;
     }
     Color4 white;
@@ -50,7 +50,7 @@ void FUN_0037aa68(RenderTargetPair *target, const Color4 *color)
     white.g = 1.0f;
     white.b = 1.0f;
     white.a = 1.0f;
-    FUN_0037a99c(0, 7, white);
+    FUN_0037a99c(0, 7, white, 0.0f);
 }
 
 } /* extern "C" */

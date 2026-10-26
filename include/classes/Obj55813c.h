@@ -2,7 +2,7 @@
 #define CLASSES_OBJ55813C_H
 
 #include "common.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" void sysFatalBreak(void);
 

@@ -1,6 +1,6 @@
 /* NON_MATCHING: initial registration branch layout and zero/one constant registers differ; -O2 candidate. */
 #include "ui/MessageMain.h"
-#include "util/FUN_00370ecc.h"
+#include "code/Code0037.h"
 extern "C" MessageGlobalsA g_messageMain;
 
 struct DemonBannerSprite { u8 data[0x8c]; };

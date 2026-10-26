@@ -5,12 +5,12 @@
 extern "C" {
 
 int FUN_00238d3c(int, int);
-int FUN_00359984(unsigned int, unsigned int, unsigned int, unsigned int);
+int cecdDispatchBackendCall2(unsigned int, unsigned int, unsigned int, unsigned int);
 
 extern unsigned char g_asdCecModuleFlags; /* 0x4656d0 */
 
 /* Supplied declaration required: FUN_00238d3c. */
-/* Supplied declaration required: FUN_00359984. */
+/* Supplied declaration required: cecdDispatchBackendCall2. */
 
 
 void FUN_00358af0(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
@@ -20,11 +20,11 @@ void FUN_00358af0(unsigned int param_1,unsigned int param_2,unsigned int param_3
 /* irregular: 2 native warning(s); review required */
   int temp_v0;
   
-  temp_v0 = FUN_00359984(param_2,param_3,param_4,param_5);
+  temp_v0 = cecdDispatchBackendCall2(param_2,param_3,param_4,param_5);
   if ((temp_v0 < 0) && (temp_v0 == -0x375ef410)) {
     FUN_00238d3c(1,0);
     (*(unsigned char *)((unsigned char *)&g_asdCecModuleFlags + 0x1)) = 1;
-    FUN_00359984(param_2,param_3,param_4,param_5);
+    cecdDispatchBackendCall2(param_2,param_3,param_4,param_5);
   }
   return;
 }

@@ -1,6 +1,6 @@
 /* NON_MATCHING: return-value spill and draw-parameter frame size differ, shifting placement/modulo registers; anchor behavior matches. */
 #include "gfx/CompositeSpriteDraw.h"
-#include "shard/FUN_00164b5c.h"
+#include "code/Code0016.h"
 
 extern "C" {
 TexSprite *texTableFindNode(u32 bank, u32 node);

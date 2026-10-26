@@ -1,7 +1,8 @@
 /* NON_MATCHING: all retail operations match except the 1.0f load is scheduled two instructions too early before the combatant voice call. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0014.h"
+#include "code/Code0015.h"
 
 struct BattleSoundIdentity {
     /* 0x00 */ u16 kind;

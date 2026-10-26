@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "code/Code0019_Smt4.h"
 
 extern "C" {
 

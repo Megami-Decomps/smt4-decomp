@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "code/Code002c.h"
 
 extern "C" {
 
@@ -49,7 +50,6 @@ void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int FUN_002a5cf4(void);
 int FUN_002a7b74(void);
 int bibleOpenMode2(...);
-int FUN_002c8538(...);
 int FUN_002e738c(int);
 int FUN_002f0c18(void);
 int FUN_00319b10(void);

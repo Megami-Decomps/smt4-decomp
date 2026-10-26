@@ -29,7 +29,6 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } void_stack;
 
-extern unsigned char LAB_001a06b0; /* 0x1a06b0 */
 extern int g_camp; /* 0x43da90 */
 extern int g_titleScene; /* 0x44ea00 */
 
@@ -196,7 +195,7 @@ LAB_001a03b8:
                               (unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v8 + 8) + temp_v2,
                               (unsigned char)(in_fpscr >> 0x16) & 3);
-          textDrawString(2,0xff,&LAB_001a06b0,(int)*(short *)(temp_v8 + 10));
+          textDrawString(2,0xff,"\x81|\x81|\x81|",(int)*(short *)(temp_v8 + 10));
         }
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 7);

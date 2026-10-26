@@ -5,6 +5,7 @@
 #include "sys/Task.h"
 #include "AsdSDK/AsdDebug.h"
 #include "battle/btlEditor.h"
+#include "battle/BattleHelpers_Smt4a.h"
 
 extern "C" {
 u32 taskCreateDraw(const char* name, u32 priority, u32 size, u32 flags,
@@ -14,7 +15,6 @@ void FUN_002984d4(void* work);
 void FUN_003285dc(void* work);
 void btlEditorUpdate(void* work);
 s32 FUN_004f2708(BtlCameraA* camera, BtlMainStateA* battle, u32 option);
-void btlQueueDuplicateSuppressedAction(u32 first, u32 second, u32 third);
 void FUN_004aa780(void* work, u32 enabled);
 extern BtlCameraA* g_btlCamera;
 extern void* g_btlUiBlock;

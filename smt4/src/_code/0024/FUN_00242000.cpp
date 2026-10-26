@@ -1,4 +1,5 @@
 #include "common.h"
+#include "code/Code0024_Smt4.h"
 
 struct MenuEntry {
     u16 id;          // 0x00

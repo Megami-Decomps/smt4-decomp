@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002326b4` (_code @ 0x2326b4, 0x644 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
 int asdTMTexTableLoadSprites(int);
-int FUN_0014afd0(int, int);
 int FUN_00178b04(...);
 int asdLoadFileSyncDefault(void);
 int mapFilterLoad(void);
@@ -17,23 +17,6 @@ int FUN_0037b150(void);
 int FUN_0040aa6c(...);
 int FUN_0040aad4(...);
 
-extern unsigned char LAB_00232a70; /* 0x232a70 */
-extern unsigned char LAB_00232a8c; /* 0x232a8c */
-extern unsigned char LAB_00232aa8; /* 0x232aa8 */
-extern unsigned char LAB_00232ad8; /* 0x232ad8 */
-extern unsigned char LAB_00232af0; /* 0x232af0 */
-extern unsigned char LAB_00232b08; /* 0x232b08 */
-extern unsigned char LAB_00232b24; /* 0x232b24 */
-extern unsigned char LAB_00232b40; /* 0x232b40 */
-extern unsigned char LAB_00232b60; /* 0x232b60 */
-extern unsigned char LAB_00232b7c; /* 0x232b7c */
-extern unsigned char LAB_00232b94; /* 0x232b94 */
-extern unsigned char LAB_00232bb0; /* 0x232bb0 */
-extern unsigned char LAB_00232bc8; /* 0x232bc8 */
-extern unsigned char LAB_00232cf8; /* 0x232cf8 */
-extern unsigned char LAB_00232d10; /* 0x232d10 */
-extern unsigned char LAB_00232d28; /* 0x232d28 */
-extern unsigned char LAB_00232d40; /* 0x232d40 */
 extern unsigned char *DAT_005f1b08; /* 0x5f1b08 */
 extern unsigned char *DAT_005f1b0c; /* 0x5f1b0c */
 extern unsigned int DAT_005f1b10; /* 0x5f1b10 */
@@ -84,160 +67,158 @@ void FUN_002326b4(void)
   asdTMTexTableLoadSprites(0x13);
   FUN_0014afd0(0x13,3);
   FUN_0014afd0(0x13,4);
-  puVar1 = &LAB_00232a70;
   asdLoadFileSyncDefault();
-  puVar2 = &LAB_00232a8c;
   DAT_005f1b08 = puVar1;
   asdLoadFileSyncDefault();
   temp_v0 = 0x20;
   DAT_005f1b0c = puVar2;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x279);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x279);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b10 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232ad8);
+  textFormatBuffer(temp_v2,"map/all/damage.bam");
   FUN_0040aa6c(DAT_005f1b10,temp_v2);
   FUN_0040aad4(DAT_005f1b10,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x27f);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x27f);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b14 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232af0);
+  textFormatBuffer(temp_v2,"player_arms/arm00.bam");
   FUN_0040aa6c(DAT_005f1b14,temp_v2);
   FUN_0040aad4(DAT_005f1b14,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x284);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x284);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b18 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232b08);
+  textFormatBuffer(temp_v2,"player_arms/arm01.bam");
   FUN_0040aa6c(DAT_005f1b18,temp_v2);
   FUN_0040aad4(DAT_005f1b18,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x289);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x289);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b1c = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232b24);
+  textFormatBuffer(temp_v2,"player_arms/arm02.bam");
   FUN_0040aa6c(DAT_005f1b1c,temp_v2);
   FUN_0040aad4(DAT_005f1b1c,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x28e);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x28e);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b20 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232b40);
+  textFormatBuffer(temp_v2,"player_arms/arm03.bam");
   FUN_0040aa6c(DAT_005f1b20,temp_v2);
   FUN_0040aad4(DAT_005f1b20,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x293);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x293);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b2c = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232af0);
+  textFormatBuffer(temp_v2,"player_arms/arm00.bam");
   FUN_0040aa6c(DAT_005f1b2c,temp_v2);
   FUN_0040aad4(DAT_005f1b2c,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x299);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x299);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b24 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232b60);
+  textFormatBuffer(temp_v2,"map/all/pl_ring_in.bam");
   FUN_0040aa6c(DAT_005f1b24,temp_v2);
   FUN_0040aad4(DAT_005f1b24,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x29e);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x29e);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b28 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232b7c);
+  textFormatBuffer(temp_v2,"map/all/pl_ring_out.bam");
   FUN_0040aa6c(DAT_005f1b28,temp_v2);
   FUN_0040aad4(DAT_005f1b28,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2a4);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2a4);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b30 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232b94);
+  textFormatBuffer(temp_v2,"map/all/area_next.bam");
   FUN_0040aa6c(DAT_005f1b30,temp_v2);
   FUN_0040aad4(DAT_005f1b30,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2a9);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2a9);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b34 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232bb0);
+  textFormatBuffer(temp_v2,"map/all/ar_hit.bam");
   FUN_0040aa6c(DAT_005f1b34,temp_v2);
   FUN_0040aad4(DAT_005f1b34,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2af);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2af);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b38 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232bc8);
+  textFormatBuffer(temp_v2,"map/all/area_next_s.bam");
   FUN_0040aa6c(DAT_005f1b38,temp_v2);
   FUN_0040aad4(DAT_005f1b38,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2d2);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2d2);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b4c = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232cf8);
+  textFormatBuffer(temp_v2,"map/all/navarre.bam");
   FUN_0040aa6c(DAT_005f1b4c,temp_v2);
   FUN_0040aad4(DAT_005f1b4c,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2eb);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2eb);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b60 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232d10);
+  textFormatBuffer(temp_v2,"map/all/estm.bam");
   FUN_0040aa6c(DAT_005f1b60,temp_v2);
   FUN_0040aad4(DAT_005f1b60,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2f1);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2f1);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b64 = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232d28);
+  textFormatBuffer(temp_v2,"map/all/lestm.bam");
   FUN_0040aa6c(DAT_005f1b64,temp_v2);
   FUN_0040aad4(DAT_005f1b64,0);
   temp_v0 = 0x20;
-  FUN_00178b04(0x20,&LAB_00232aa8,0x2fe);
+  FUN_00178b04(0x20,"c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\mapCommon.cpp",0x2fe);
   temp_v1 = 0;
   if (temp_v0 != 0) {
     temp_v1 = modelListInit();
   }
   DAT_005f1b6c = temp_v1;
-  textFormatBuffer(temp_v2,&LAB_00232d40);
+  textFormatBuffer(temp_v2,"map/all/jade_knife.bam");
   FUN_0040aa6c(DAT_005f1b6c,temp_v2);
   FUN_0040aad4(DAT_005f1b6c,0);
   FUN_00244220();

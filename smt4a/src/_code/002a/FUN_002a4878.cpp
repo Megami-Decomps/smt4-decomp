@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/FUN_002a4878.h"
+#include "code/Code002a.h"
 
 extern "C" {
 struct Object { u8 unk00[0x28]; u8 child; u8 unk29[0x39]; u8 blocked; };

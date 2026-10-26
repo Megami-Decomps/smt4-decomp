@@ -3,7 +3,7 @@
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/Table00.h"
 #include "camp/UnitComparison.h"
-#include "shard/campFillUnitComparison.h"
+#include "camp/CampStateQueries_UnitComparison.h"
 #include "ui/ItemListSelection.h"
 #include "gamedata/Table00Lookup.h"
 

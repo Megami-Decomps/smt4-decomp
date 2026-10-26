@@ -1,4 +1,5 @@
 #include "shard/FileQueueRequest.h"
+#include "addon/AocSystem_Smt4a.h"
 
 struct AocDisplay;
 

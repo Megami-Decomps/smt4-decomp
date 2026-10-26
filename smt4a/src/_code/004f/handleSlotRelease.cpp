@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
+#include "code/Code004f_Smt4a.h"
 
 extern "C" {
 

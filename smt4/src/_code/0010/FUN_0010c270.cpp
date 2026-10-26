@@ -1,4 +1,4 @@
-/* NON_MATCHING: list traversal is outlined differently and neighbor pointers are reloaded during unlinking. */
+/* NON_MATCHING: retail peels the first list-node test and keeps the critical-section pointer in r6 across the free calls; list walk and unlink otherwise match. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
@@ -9,17 +9,7 @@ void sndVoiceFree(u32 voice);
 void asdMemFree(void *memory);
 }
 
-static inline bool asdContainsWaveVoice(AsdSndWaveVoice *voice)
-{
-    for (AsdSndWaveVoice *item = static_cast<AsdSndWaveVoice *>(g_asdSoundStatus.objects);
-         item; item = item->link.next) {
-        if (item == voice) {
-            return true;
-        }
-    }
-    return false;
-}
-
+/* Removes the voice from the status's object list when it is registered there. */
 static inline void asdUnlinkWaveVoice(AsdSndWaveVoice *voice)
 {
     for (AsdSndWaveVoice *item = static_cast<AsdSndWaveVoice *>(g_asdSoundStatus.objects);
@@ -36,10 +26,10 @@ static inline void asdUnlinkWaveVoice(AsdSndWaveVoice *voice)
                     static_cast<AsdSndWaveVoice *>(g_asdSoundStatus.objects)->link.prev = NULL;
                 }
             }
+            --g_asdSoundStatus.objectCount;
             break;
         }
     }
-    --g_asdSoundStatus.objectCount;
 }
 
 extern "C" void FUN_0010c270(AsdSndWaveVoice *voice)
@@ -48,9 +38,7 @@ extern "C" void FUN_0010c270(AsdSndWaveVoice *voice)
         return;
     }
     nn_os_CriticalSection_Enter(g_asdSoundStatus.unk08);
-    if (asdContainsWaveVoice(voice)) {
-        asdUnlinkWaveVoice(voice);
-    }
+    asdUnlinkWaveVoice(voice);
     if (voice->data) {
         asdMemFree(voice->data);
     }

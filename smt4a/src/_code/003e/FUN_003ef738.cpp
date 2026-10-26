@@ -1,6 +1,6 @@
 /* NON_MATCHING: logic and instruction mix agree; armcc places the shared `return 0` block after the kind tests in retail but after the last handler here (one extra branch). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0019.h"
 #include "gamedata/Table04Record.h"
 #include "battle/BattleUnit.h"
 

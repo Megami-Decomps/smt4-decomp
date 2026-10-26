@@ -1,6 +1,7 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "code/Code0041_Smt4a.h"
 
 extern "C" {
 

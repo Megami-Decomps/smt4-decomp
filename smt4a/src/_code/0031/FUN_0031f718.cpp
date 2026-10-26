@@ -5,6 +5,7 @@
 #include "gamedata/UnitPresentationInfo.h"
 #include <string.h>
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
@@ -14,7 +15,6 @@ void unitRecordBuild(s32, UnitRecord *);
 void FUN_0026fd50(UnitPresentationInfo *, UnitRecord *, s32, u32);
 Table00Record *dataTable00FindById(u16);
 s32 FUN_002b4dcc(UnitRecord *);
-s32 gameProgressIsAdvanced();
 void FUN_0034dae0(UnitPresentationInfo *, s32);
 
 /* Build the player's or selected demon's presentation and update selection eligibility. */

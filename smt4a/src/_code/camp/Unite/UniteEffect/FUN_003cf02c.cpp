@@ -3,7 +3,8 @@
 #include "romwright_types.h"
 #include "gfx/CameraMotion.h"
 #include "camp/Unite/UniteEffect.h"
-#include "shard/uiSpriteSelectAnim.h"
+#include "ui/UiControl.h"
+#include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
 
@@ -95,7 +96,6 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001fc348. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0022677c. */
-extern int FUN_0026c3a0(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 /* Supplied declaration required: uniteCameraInitialize. */
 /* Supplied declaration required: FUN_002c8894. */

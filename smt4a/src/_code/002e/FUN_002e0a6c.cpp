@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match1_PositionedStream.h"
 
 #include "sys/ProcessResult.h"
-#include "util/vcallSlot12IfValid.h"
+#include "sys/RuntimeObjects.h"
 extern "C" void sysFatalBreak();
 
 static __inline u32 fileRecordResult(u32 result)

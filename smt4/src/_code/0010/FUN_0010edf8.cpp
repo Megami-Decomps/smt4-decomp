@@ -12,11 +12,11 @@ struct MessageControlFlags {
 extern "C" {
 extern MessageGlobals g_messageMain;
 extern MessageControlFlags DAT_0049381c;
-s32 FUN_002c1658(u32, u32);
+s32 FUN_002c1658(s32 button, s32 mode);
 s32 querySlotHasHandle(void);
 u32 FUN_002bfdd4(void);
 void workCommandRefreshActiveSlots(void);
-void eventQueueAddUniqueIfValid(u32);
+void eventQueueAddUniqueIfValid(s32 event);
 
 u32 FUN_0010edf8(u32 box)
 {

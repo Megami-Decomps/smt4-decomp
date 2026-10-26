@@ -2,11 +2,11 @@
 #include "ui/ButtonHelp.h"
 #include <stddef.h>
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;
 void *rt_memcpy(void *destination, const void *source, u32 size);
-s32 fontMeasureLineAdvance(const char *text, s32 font);
 }
 
 static inline u32 buttonHelpNormalTextStyle(ButtonHelpWorkA *work)

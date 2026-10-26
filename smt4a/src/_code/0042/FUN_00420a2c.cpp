@@ -1,4 +1,4 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: native depth getter and grouped snapshots now agree; owner/index saved registers and header destination base still differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/TextureDrawCall.h"

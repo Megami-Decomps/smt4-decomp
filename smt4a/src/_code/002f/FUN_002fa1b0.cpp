@@ -1,9 +1,8 @@
 /* NON_MATCHING: register allocation and spill: retail keeps x/y in fp/r5, spills the offset x to [sp+8] and has a 0x24-byte frame (icon id slots at sp+12/sp+20); here x/y live in sl/r6 with no spill. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "util/Vec2Fixed.h"
-#include "util/Vec2Fixed.h"
-#include "util/PackNibbles.h"
+#include "util/MathFunctions.h"
+#include "util/BitsAndBytes.h"
 
 /* A status icon panel's position vector (0x24 bytes); the scale sits at 0x20. */
 struct IconPanelPosition {

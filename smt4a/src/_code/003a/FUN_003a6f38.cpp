@@ -3,7 +3,6 @@
 #include "shard/JobWork.h"
 
 extern "C" {
-s32 scrGetCommandFrame();
 void FUN_0019d96c(void* work, s32 enabled, s32 duration);
 
 static inline void startJobWorkCommand(u32 job, s32 enabled, s32 duration)

@@ -1,9 +1,9 @@
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess_VariantG.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 
-s32 gameFlagIsSet(u32 id);
 
 /* Returns the limit 99, or 999 when gameFlagIsSet reports 0x534 unlocked. */
 s32 gameGetUnlockedCountLimit(void)

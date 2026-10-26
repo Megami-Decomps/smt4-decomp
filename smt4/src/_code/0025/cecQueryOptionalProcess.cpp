@@ -1,4 +1,5 @@
 #include "shard/W5_W5Match2_StatusQuery.h"
+#include "code/Code0025_Smt4.h"
 extern "C" {
 extern CecProcessView *g_cecProcess;
 u32 FUN_003bbc7c(void *process);

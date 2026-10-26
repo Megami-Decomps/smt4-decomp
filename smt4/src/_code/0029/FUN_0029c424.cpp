@@ -1,4 +1,5 @@
 #include "status/StatusDown.h"
+#include "code/Code0029_Smt4.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;

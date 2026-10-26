@@ -3,7 +3,7 @@
 #include "romwright_types.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 #include "map/mapRndMaze.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 

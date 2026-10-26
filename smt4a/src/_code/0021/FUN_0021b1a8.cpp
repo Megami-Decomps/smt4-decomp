@@ -1,6 +1,7 @@
 #include "common.h"
-#include "util/FUN_002a4894.h"
+#include "code/Code002a_VariantA.h"
 #include "shard/Shard0031.h"
+#include "code/Code0021_Smt4a.h"
 
 extern "C" {
 

@@ -54,7 +54,7 @@ typedef struct {
     unsigned int sp1C28; /* 0x1c28: local_1c28 */
 } param_1_stack;
 
-extern unsigned char LAB_00394160; /* 0x394160 */
+extern unsigned char _ZN14Obj422214OwnerC1Ev; /* 0x394160 */
 extern int g_aocMain; /* 0x432fc8 */
 
 /* Supplied declaration required: FUN_00234170. */
@@ -245,7 +245,7 @@ int FUN_0038d598(int param_1)
     puVar5 = puVar4 + 2;
     *puVar4 = 0x9c8;
     puVar4[1] = temp_v9;
-    __aeabi_vec_ctor_nocookie_nodtor(puVar5,&LAB_00394160,0x9c8,temp_v9);
+    __aeabi_vec_ctor_nocookie_nodtor(puVar5,&_ZN14Obj422214OwnerC1Ev,0x9c8,temp_v9);
   }
   *(unsigned int **)(temp_v7 + 0x688) = puVar5;
   temp_v32 = 0;

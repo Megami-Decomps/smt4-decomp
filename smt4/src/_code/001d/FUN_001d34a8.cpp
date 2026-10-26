@@ -1,5 +1,6 @@
 #include "map/MapIfTimer.h"
 #include "map/mapDepart.h"
+#include "code/Code001d_Smt4.h"
 
 extern "C" {
 

@@ -1,8 +1,9 @@
-/* NON_MATCHING: aggregate copy retains flags and loads handle.token at SP+12; retail copies five registers, reloads flags, and addresses token via SP+8 then field4. */
+/* NON_MATCHING: armcc forms the flags address (owner + 1876) once and keeps it in r5 for the final store, so allocation of r5/r6 and the branch targets differ; retail reloads through [r4,#1876]. */
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
 
 extern "C" {
 u8 FUN_001d25dc(QueuedRequestHandle* handle);
+u32 slotTargetHolderGetTarget(const QueuedRequestHandle* handle);
 u32 jyoucyuGetTableEntry(s32 index);
 
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState* owner, const RequestParameters* parameters, QueuedRequestHandle handle)
@@ -12,7 +13,7 @@ u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(Que
     }
     if ((owner->state.flags & 8) == 0) {
         owner->state.parameters = *parameters;
-        owner->token = handle.token;
+        owner->token = slotTargetHolderGetTarget(&handle);
         owner->state.flags |= 9;
         jyoucyuGetTableEntry(0);
     }

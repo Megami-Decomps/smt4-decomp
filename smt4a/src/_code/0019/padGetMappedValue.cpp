@@ -1,4 +1,5 @@
 #include "shard/PadState.h"
+#include "code/Code0019_Smt4a.h"
 
 struct PadMappingView {
     u8 unk00[0x34];

@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
-#include "util/CalleeContracts.h"
+#include "gamedata/GameDataAccess.h"
 
 struct AuxiliaryResourceView {
     u8 unk0000[0x2E20];

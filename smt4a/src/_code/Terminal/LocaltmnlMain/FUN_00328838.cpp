@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gfx/CameraAnimationApply.h"
 #include "title/titleMain.h"
+#include "code/Code0013_Smt4a.h"
 
 extern "C" {
 
@@ -38,7 +39,6 @@ int resourceOwnerReleaseAll(void);
 int VectorFloatToUnsigned(double, int);
 
 int textFormatBuffer(...);
-int FUN_0013cab8(...);
 int FUN_001517b4(...);
 int asdLoadFileSyncNoContext(...);
 int sysPlaySe(...);

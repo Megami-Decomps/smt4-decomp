@@ -1,7 +1,7 @@
-/* NON_MATCHING: canonical stack-C wrapper matches its push; stack-A previous/count register grouping still differs. */
+/* NON_MATCHING: stack C matches through renderStackPushCounted (like smt4a terminalDrawActiveSlotHandles' counted pushes); stack A has retail's push body but retail evaluates FUN_002c5d80 before the stack address (add r4,#4096/#588 after the bl). */
 #include "camp/RenderCtx.h"
-#include "util/CalleeContracts.h"
-#include "shard/packNibblesAndByte.h"
+#include "code/Code0028.h"
+#include "util/BitsAndBytes.h"
 
 /* The terminal's four slots (0xC bytes each); only the handle and its in-use flag are used here. */
 struct TerminalSlot {
@@ -29,8 +29,10 @@ u32 FUN_001fe23c(void)
 {
     TerminalScreen *screen = g_tmnl;
     if ((u32)(screen->page - 1) < 98) {
-        renderCtxPushC(g_titleScene, FUN_002865c0(6, 0.0f));
-        renderCtxPushA(g_titleScene, FUN_002c5d80(1, 0));
+        RenderCtx *context = g_titleScene;
+        s32 state = FUN_002865c0(6, 0.0f);
+        renderStackPushCounted(&context->additional.stackC, state);
+        renderStackPush(&g_titleScene->stackA, FUN_002c5d80(1, 0));
         renderCtxPushB(g_titleScene, packNibblesAndByte(6, 1, 0));
         for (s32 i = 0; i < 4; ++i) {
             if (screen->slots[i].inUse != 0) {

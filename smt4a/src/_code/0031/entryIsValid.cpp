@@ -1,5 +1,5 @@
 #include "shard/Shard0031.h"
-#include "util/EntryIsValid.h"
+#include "gamedata/GameDataAccess.h"
 
 extern "C" {
 

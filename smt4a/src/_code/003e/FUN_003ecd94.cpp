@@ -1,5 +1,5 @@
 #include "battle/btlMain.h"
-#include "util/FUN_003ecd94.h"
+#include "code/Code003e.h"
 
 extern "C" {
 

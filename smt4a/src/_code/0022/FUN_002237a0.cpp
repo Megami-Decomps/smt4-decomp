@@ -1,8 +1,8 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002237a0` (_code @ 0x2237a0, 0x800 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
-#include "util/CalleeContracts.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0014.h"
+#include "code/Code0015.h"
 
 extern "C" {
 
@@ -86,7 +86,7 @@ LAB_002238e8:
       }
     }
     temp_v2 = popupHasActiveValue();
-    if (temp_v2 != 0) {
+    if (temp_v2) {
       temp_v3 = -0x3c;
     }
     if (g_popupState[1] <= temp_v3 + 0x5a) break;

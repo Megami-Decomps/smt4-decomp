@@ -1,4 +1,5 @@
 #include "shard/W4_W4Match6b_GameDataBlock.h"
+#include "gamedata/GameDataAccess_Smt4a.h"
 
 extern "C" {
 

@@ -31,7 +31,7 @@ int FUN_00308d5c(...);
 int FUN_0033a670(...);
 int FUN_0033b3c4(...);
 int FUN_00348c10(...);
-int FUN_003c0294(void);
+int btlHelpFreeEntries(void);
 int FUN_003d9be4(...);
 
 int FUN_001d2628(...);
@@ -42,7 +42,7 @@ int FUN_0021ae40(...);
 int btlUiRefreshSlotRanks(...);
 int pickerAdvance(...);
 int FUN_00254f58(...);
-int FUN_002550d8(...);
+int btlAdjustPropertyClamped(...);
 int battleGetEntryHalfword(...);
 int FUN_00255180(...);
 int FUN_002551ac(...);
@@ -137,7 +137,7 @@ extern int gameDataEntryGetLevel(short);
 /* Supplied declaration required: btlUiRefreshSlotRanks. */
 /* Supplied declaration required: pickerAdvance. */
 /* Supplied declaration required: FUN_00254f58. */
-/* Supplied declaration required: FUN_002550d8. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: battleGetEntryHalfword. */
 /* Supplied declaration required: FUN_00255180. */
 /* Supplied declaration required: FUN_002551ac. */
@@ -193,7 +193,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_003bef18. */
 /* Supplied declaration required: FUN_003bef90. */
 extern int FUN_003bf0a4(void);
-/* Supplied declaration required: FUN_003c0294. */
+/* Supplied declaration required: btlHelpFreeEntries. */
 /* Supplied declaration required: FUN_003c7c84. */
 /* Supplied declaration required: FUN_003c7f20. */
 /* Supplied declaration required: FUN_003c8428. */
@@ -515,11 +515,11 @@ void FUN_001fc6e8(unsigned int param_1)
         FUN_00255180(temp_v10,0x13,0);
         temp_v3 = battleGetEntryHalfword(temp_v10,0x1b);
         if (0 < temp_v3) {
-          FUN_002550d8(temp_v10,0x1b,0xffffffff,0);
+          btlAdjustPropertyClamped(temp_v10,0x1b,0xffffffff,0);
         }
         temp_v3 = battleGetEntryHalfword(temp_v10,0x1c);
         if (0 < temp_v3) {
-          FUN_002550d8(temp_v10,0x1c,0xffffffff,0);
+          btlAdjustPropertyClamped(temp_v10,0x1c,0xffffffff,0);
         }
         temp_v10 = temp_v10 + 1;
       } while ((int)temp_v10 < (int)temp_v9);
@@ -529,7 +529,7 @@ void FUN_001fc6e8(unsigned int param_1)
         puVar16 = (unsigned int *)(*(int *)(temp_v4 + 0x1fc0) + temp_v6 * 0x288);
         if (((((*puVar16 & 1) != 0) && ((*puVar16 & 0x40) == 0)) && (-1 < (short)puVar16[2])) &&
            (temp_v3 = battleGetEntryHalfword((int)(short)puVar16[2],0xd), 0 < temp_v3)) {
-          FUN_002550d8((int)(short)puVar16[2],0xd,0xffffffff,0);
+          btlAdjustPropertyClamped((int)(short)puVar16[2],0xd,0xffffffff,0);
         }
         temp_v6 = temp_v6 + 1;
       } while ((int)temp_v6 < (int)temp_v9);
@@ -842,7 +842,7 @@ LAB_001fd348:
       case 10:
       case 0xb:
         if ((*(unsigned int *)(temp_v4 + 0xe0) & 0x800000) == 0) {
-          FUN_003c0294();
+          btlHelpFreeEntries();
           FUN_001f8290(temp_v4);
           temp_v4 = g_mapDepartWork;
           if (DAT_0049fb9c != 1) {

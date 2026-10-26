@@ -2,7 +2,7 @@
 /* Starts a ready character-panel script and advances the panel's slide/fade transition. */
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
-#include "util/FUN_0026f188.h"
+#include "code/Code0026.h"
 
 extern "C" {
 u32 FUN_0026f784(void *link);

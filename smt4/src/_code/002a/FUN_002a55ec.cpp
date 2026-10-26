@@ -35,7 +35,7 @@ extern "C" void FUN_002a55ec(ModelPropertyController *controller, s32 index, f32
             ? scalarAnimationEnd(modelPropertyScalarChannel(controller->node, 0)) : 0.0f;
         if (time > end)
             time = end;
-        f32 value = channel->interpolate(channel->start, channel->end, time, channel->work);
+        f32 value = channel->interpolate(channel->range, time, channel->work);
         channel->previous = channel->current;
         channel->current = value;
         channel->dirty = 1;

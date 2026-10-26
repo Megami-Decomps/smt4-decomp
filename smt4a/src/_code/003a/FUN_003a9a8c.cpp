@@ -4,7 +4,6 @@
 #include "gamedata/DataTable.h"
 #include "battle/BtlTables.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 s32 randRange(u32 maximum);

@@ -1,6 +1,6 @@
 /* NON_MATCHING: the restored cursor's store address goes to r0 instead of r3 (register allocation only). */
 #include "common.h"
-#include "util/TouchLayoutRebuildRegions.h"
+#include "ui/UiControl.h"
 #include "quest_center/qcMain.h"
 
 extern "C" {

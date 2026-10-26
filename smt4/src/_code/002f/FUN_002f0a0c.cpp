@@ -1,9 +1,9 @@
 /* NON_MATCHING: range reload uses one LDRD instead of retail's separate count/first LDRs. */
 #include "battle/EntryStats.h"
 #include "util/SlotRangeSelect.h"
-#include "script/ScriptArgs.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);

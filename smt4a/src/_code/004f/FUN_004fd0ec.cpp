@@ -1,9 +1,9 @@
 /* NON_MATCHING: prior-action traversal preload, saved registers and scalar store ordering differ from retail. */
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
 
-extern "C" s16 btlFindEntryValue(s32 memberId, u32 field);
 
 /* Queue a target action, using its member id when a matching target action already exists. */
 extern "C" ReflectAction *FUN_004fd0ec(s32 actor, s32 secondary, u32 options, BtlActionRecord *target,

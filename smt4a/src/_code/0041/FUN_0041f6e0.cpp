@@ -1,6 +1,7 @@
 /* NON_MATCHING: in state 0 retail builds the slot address (add r0,r4,r5 lsl #7; add r0,#108) after moving the table pointer into r1; built forms it first in r3 (state 1 matches). */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0023.h"
+#include "code/Code002c.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {

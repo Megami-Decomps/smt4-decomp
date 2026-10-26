@@ -3,13 +3,13 @@
 #include "classes/Obj4221a4.h"
 #include "gfx/SpriteTextureRect.h"
 #include "shard/W6_W6Match1_TouchRegionOwner.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern const u32 DAT_0044cf78[3];
 extern const u32 DAT_0044cf84[3];
 extern const u32 DAT_0044cf90[3];
 u32 recordCompareKind(const Obj422594 *owner);
-SpriteTextureRect *asdTMTexTableEntryAt(u32 group, u32 id);
 void touchRegisterFirstRegion(Obj422594 *owner, s32 x, s32 y, s32 width, s32 height);
 void touchRegisterSecondRegion(Obj422594 *owner, s32 x, s32 y, s32 width, s32 height);
 void FUN_002346ac(TouchRegionOwner *owner, s32 x, s32 y, s32 width, s32 height);

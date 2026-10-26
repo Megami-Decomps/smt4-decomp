@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail is a hand-written ARM routine (size-specialised straight-line copies for up to 8 bytes, alignment fix-ups and a pld-prefetching ldm/stm block loop) that armcc cannot produce from C; this is the equivalent forward copy that, like retail, returns the advanced destination (low word) and source (high word) pointers. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "util/MemoryHelpers.h"
 
 extern "C" {
 

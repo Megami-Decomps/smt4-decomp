@@ -2,8 +2,8 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
-#include "util/CalleeContracts.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "code/Code0015.h"
+#include "sys/RuntimeObjects.h"
 
 extern "C" {
 

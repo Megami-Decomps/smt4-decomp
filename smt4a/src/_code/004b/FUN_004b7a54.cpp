@@ -1,6 +1,7 @@
 #include "camp/ScriptPanelResources.h"
 #include "map/mapDepart.h"
 #include "camp/Camp.h"
+#include "code/Code004b_Smt4a.h"
 extern "C" {
 extern GameStateA g_gameState;
 void asdMemFree(void *memory);

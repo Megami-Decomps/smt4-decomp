@@ -4,7 +4,7 @@
 #include "common.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "event/2dEvent/EventEffect.h"
-#include "util/FUN_00187168.h"
+#include "code/Code0018.h"
 
 /* A party slot as the picker reads it. */
 struct PartySlot {

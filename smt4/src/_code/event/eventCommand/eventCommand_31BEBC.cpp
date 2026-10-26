@@ -2,7 +2,7 @@
 #include "event/EventTaskBuffer.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
-#include "shard/scrGetArg.h"
+#include "script/ScriptArgs.h"
 #include "script/ScriptArgs.h"
 
 extern "C" {

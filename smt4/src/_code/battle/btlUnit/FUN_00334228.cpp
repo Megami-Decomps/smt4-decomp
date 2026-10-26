@@ -33,7 +33,7 @@ typedef struct {
     unsigned int sp238; /* 0x238: local_238 */
 } param_2_stack;
 
-extern unsigned char LAB_001921c8; /* 0x1921c8 */
+extern unsigned char FUN_001921c8; /* 0x1921c8 */
 extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
 /* Supplied declaration required: FUN_00240520. */
@@ -239,7 +239,7 @@ LAB_003343b0:
       temp_v7 = temp_v7 + 1;
     } while (temp_v7 < 0x32);
     FUN_00337f98(temp_v29,temp_v4 + 0xcc);
-    FUN_002b7bca(&temp_v15,temp_v6,4,&LAB_001921c8);
+    FUN_002b7bca(&temp_v15,temp_v6,4,&FUN_001921c8);
     temp_v7 = 0;
     if (temp_v7 < temp_v6) {
       do {

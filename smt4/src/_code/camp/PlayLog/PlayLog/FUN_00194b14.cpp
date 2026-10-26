@@ -1,6 +1,6 @@
 /* NON_MATCHING: draws the camp play log list rows (cursor frame, entry name and its value as text, number or play time h/m); written from the decompilation, argument evaluation and the float conversions of the text positions not compared with retail */
 #include "gamedata/DataTable.h"
-#include "util/FUN_0029d644.h"
+#include "code/Code0029.h"
 
 struct PlayLogFrame {
     /* 0x00 */ u8 unk00[8];

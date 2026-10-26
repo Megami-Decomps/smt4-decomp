@@ -1,5 +1,6 @@
 #include "common.h"
 #include <stddef.h>
+#include "code/Code0048_Smt4a.h"
 
 /* Counts of carried items: seven categories of 0x78 slots (the last is only 0x32 long), starting at item id 0x3d. */
 struct ItemBoxCounts {

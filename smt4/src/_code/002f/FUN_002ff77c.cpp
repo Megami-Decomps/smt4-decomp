@@ -30,7 +30,7 @@ extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
 extern ItemRecord *dataTable40FindById(u16 id);
 extern DevilRecord *devilGetRecord(u16 id);
-extern u32 FUN_001d2ac8(const BtlEntry *entry);
+extern u32 btlEntryHasCategoryThreeSkill(const BtlEntry *entry);
 extern u32 scrGetArg(u32 index);
 extern int scrSetResult(s32 value);
 
@@ -83,7 +83,7 @@ u32 FUN_002ff77c(void)
     }
     if (btlGetMainState()->hasActiveEntry != 0) {
         entry = btlMainFindActiveEntry(btlGetMainState());
-        if (entry != NULL && entry->id == id && FUN_001d2ac8(entry) != 0) {
+        if (entry != NULL && entry->id == id && btlEntryHasCategoryThreeSkill(entry) != 0) {
             scrSetResult(1);
             return 1;
         }

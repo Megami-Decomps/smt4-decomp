@@ -1,48 +1,31 @@
-/* NON_MATCHING: Retail instruction scheduling/register allocation differs (36 retail versus 36 compiled rows). */
-#include "classes/Obj55c89c.h"
-#include "romwright_types.h"
-#include "util/skinObjectUpdateMatrices.h"
+/* Callback-table view of the Bible menu object: its selected-entry index, state word and member-callback table. */
+#include "common.h"
+
+struct CallbackSelectionWorkA {
+    typedef void (CallbackSelectionWorkA::*Callback)();
+    u8 unk0000[0x14]; // 0x0000
+    s32 selection; // 0x0014
+    u8 unk0018[0x838]; // 0x0018
+    s32 state; // 0x0850
+    u8 unk0854[0xa124]; // 0x0854
+    Callback callbacks[1]; // 0xA978: trailing member-callback table
+};
 
 extern "C" {
+void FUN_00183bb0(void);
+void renderCtxResetColorScale(void*);
+void skinObjectUpdateMatrices(void*);
+extern void* g_renderCtx;
 
-int renderCtxResetColorScale(unsigned int);
-int FUN_00183bb0(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern unsigned int g_renderCtx; /* 0x59dbb4 */
-
-/* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_00183bb0. */
-
-
-} /* extern "C" */
-
-void Obj55c89c::render()
-
+// Commits the current selection, invokes its member callback, and refreshes the scene.
+void _ZN9Obj55c89c6renderEv(CallbackSelectionWorkA* work)
 {
-    int param_1 = (int)this;
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  romwright_code *pcVar2;
-  
-  FUN_00183bb0();
-  *(unsigned int *)(param_1 + 0x850) = 0x1f;
-  temp_v0 = param_1 + *(int *)(param_1 + 0x14) * 8;
-  pcVar2 = *(romwright_code **)(temp_v0 + 0xa978);
-  if ((pcVar2 != (romwright_code *)0x0) ||
-     (((*(unsigned int *)(temp_v0 + 0xa97c) & 1) != 0 && (*(unsigned int *)(temp_v0 + 0xa97c) != 0)))) {
-    if ((*(unsigned int *)(temp_v0 + 0xa97c) & 1) != 0) {
-      pcVar2 = *(romwright_code **)((unsigned char *)pcVar2 + *(int *)(param_1 + ((int)*(unsigned int *)(temp_v0 + 0xa97c) >> 1)));
+    FUN_00183bb0();
+    work->state = 0x1F;
+    if (work->callbacks[work->selection] != NULL) {
+        (work->*work->callbacks[work->selection])();
     }
-    (*pcVar2)();
-  }
-  skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
-  renderCtxResetColorScale(g_renderCtx);
-  return;
+    skinObjectUpdateMatrices(g_renderCtx);
+    renderCtxResetColorScale(g_renderCtx);
 }
-
+}

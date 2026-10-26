@@ -4,7 +4,7 @@
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "shard/W6_W6Match8_GpuDepth.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 

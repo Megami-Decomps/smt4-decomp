@@ -2,7 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
-#include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 

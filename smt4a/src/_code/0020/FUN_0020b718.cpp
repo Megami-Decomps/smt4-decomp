@@ -1,6 +1,7 @@
 #include "ui/PartyPanelState.h"
 #include "map/mapRndMaze.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "code/Code0020_Smt4a.h"
 
 namespace {
 /* Demon availability extends past PartyPanelStateA's canonical prefix. */

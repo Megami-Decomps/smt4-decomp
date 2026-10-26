@@ -1,4 +1,4 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00214dc4` (_code @ 0x214dc4, 0x47c bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
@@ -30,8 +30,6 @@ typedef struct {
     unsigned int spC8; /* 0xc8: local_c8 */
 } void_stack;
 
-extern unsigned char LAB_00215170; /* 0x215170 */
-extern unsigned char LAB_00215178; /* 0x215178 */
 extern unsigned char LAB_00215248; /* 0x215248 */
 extern int g_playLog; /* 0x57f278 */
 
@@ -110,7 +108,7 @@ void FUN_00214dc4(void)
       temp_v5 = dataTableGetCount(temp_v4);
       if ((temp_v9 < temp_v5) && (temp_v3 = temp_v3 + temp_v9 * 0x40, temp_v3 != 0)) {
         temp_v6 = asdTMTexTableEntryAt(0x25,0x13);
-        textFormatBuffer(temp_v10,&LAB_00215170,temp_v3 + 2);
+        textFormatBuffer(temp_v10,"%s",temp_v3 + 2);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v6 + 10),
                             (unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v6 + 8) + (int)*(short *)(temp_v2 + 8) + temp_v1,
@@ -123,14 +121,14 @@ void FUN_00214dc4(void)
             FUN_002c0940(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v7 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
-            textFormatBuffer(temp_v10,&LAB_00215178,temp_v11,temp_v3 + 0x37);
+            textFormatBuffer(temp_v10,"%s\x81@%s",temp_v11,temp_v3 + 0x37);
           }
           else {
             temp_v3 = resourceRunOperationIfUnblocked(temp_v0 + 0x2dc);
             FUN_002c0940(temp_v11,
                          *(unsigned int *)
                           (temp_v0 + *(short *)(temp_v0 + (temp_v3 + temp_v8) * 2 + 0x424) * 4 + 0x35c));
-            textFormatBuffer(temp_v10,&LAB_00215170,temp_v11);
+            textFormatBuffer(temp_v10,"%s",temp_v11);
           }
         }
         else {

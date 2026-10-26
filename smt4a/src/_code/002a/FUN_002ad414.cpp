@@ -16,14 +16,6 @@ typedef struct {
     unsigned int spD8; /* 0xd8: local_d8 */
 } param_4_stack;
 
-extern unsigned char LAB_002ad8c0; /* 0x2ad8c0 */
-extern unsigned char LAB_002ad8e4; /* 0x2ad8e4 */
-extern unsigned char LAB_002ad8f0; /* 0x2ad8f0 */
-extern unsigned char LAB_002ad914; /* 0x2ad914 */
-extern unsigned char LAB_002ad918; /* 0x2ad918 */
-extern unsigned char LAB_002ad940; /* 0x2ad940 */
-extern unsigned char LAB_002ad950; /* 0x2ad950 */
-extern unsigned char LAB_002ad974; /* 0x2ad974 */
 extern unsigned char LAB_002ada1c; /* 0x2ada1c */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -153,10 +145,10 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   *param_4 = '\0';
   if (temp_v5 != 0) {
     if (temp_v5 >= 8) {
-      libc_strcat(param_4,&LAB_002ad8c0);
+      libc_strcat(param_4,"\x82m\x82\x95\x82\x8c\x82\x8c\x81@\x82`\x82\x8c\x82\x8c\x81@\x82`\x82\x89\x82\x8c\x82\x8d\x82\x85\x82\x8e\x82\x94\x82\x93");
     }
     else {
-      libc_strcat(param_4,&LAB_002ad8e4);
+      libc_strcat(param_4,"\x82m\x82\x95\x82\x8c\x82\x8c: ");
       temp_v3 = 0;
       if (0 < temp_v5) {
         while( 1 ) {
@@ -189,7 +181,7 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
           temp_v3 = temp_v3 + 1;
           if (temp_v5 <= temp_v3) break;
           if (temp_v3 != 0) {
-            libc_strcat(param_4,&LAB_002ad8f0);
+            libc_strcat(param_4,"\x81^");
           }
         }
       }
@@ -197,13 +189,13 @@ void FUN_002ad414(int param_1,int param_2,unsigned int param_3,char *param_4)
   }
   if (temp_v7 != 0) {
     if (*param_4 != '\0') {
-      libc_strcat(param_4,&LAB_002ad914);
+      libc_strcat(param_4,", ");
     }
     if (temp_v6 >= 8) {
-      libc_strcat(param_4,&LAB_002ad918);
+      libc_strcat(param_4,"\x82q\x82\x85\x82\x93\x82\x89\x82\x93\x82\x94\x81@\x82`\x82\x8c\x82\x8c\x81@\x82`\x82\x89\x82\x8c\x82\x8d\x82\x85\x82\x8e\x82\x94\x82\x93");
     }
     else {
-      libc_strcat(param_4,&LAB_002ad940);
+      libc_strcat(param_4,"\x82q\x82\x85\x82\x93\x82\x89\x82\x93\x82\x94: ");
       temp_v3 = 0;
       if (0 < temp_v7) {
 LAB_002ad77c:
@@ -240,7 +232,7 @@ LAB_002ad7c8:
         temp_v3 = temp_v3 + 1;
         if (temp_v3 < temp_v7) {
           if (temp_v3 != 0) {
-            libc_strcat(param_4,&LAB_002ad8f0);
+            libc_strcat(param_4,"\x81^");
           }
           goto LAB_002ad77c;
         }
@@ -249,13 +241,13 @@ LAB_002ad7c8:
   }
   if (temp_v6 != 0) {
     if (*param_4 != '\0') {
-      libc_strcat(param_4,&LAB_002ad914);
+      libc_strcat(param_4,", ");
     }
     if (temp_v6 >= 8) {
-      libc_strcat(param_4,&LAB_002ad950);
+      libc_strcat(param_4,"\x82v\x82\x85\x82\x81\x82\x8b\x81@\x82\x94\x82\x8f\x81@\x82`\x82\x89\x82\x8c\x82\x8d\x82\x85\x82\x8e\x82\x94\x82\x93");
     }
     else {
-      libc_strcat(param_4,&LAB_002ad974);
+      libc_strcat(param_4,"\x82v\x82\x85\x82\x81\x82\x8b: ");
       temp_v3 = 0;
       if (0 < temp_v6) {
 LAB_002ad880:
@@ -292,7 +284,7 @@ LAB_002ad990:
         temp_v3 = temp_v3 + 1;
         if (temp_v3 < temp_v6) {
           if (temp_v3 != 0) {
-            libc_strcat(param_4,&LAB_002ad8f0);
+            libc_strcat(param_4,"\x81^");
           }
           goto LAB_002ad880;
         }

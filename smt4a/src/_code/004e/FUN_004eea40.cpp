@@ -485,7 +485,7 @@ LAB_004ef7f0:
         uVar20 = param_2[10];
         iVar6 = (int)(char)(*(char *)(uVar17 + 0x41) - '\x01');
         if (iVar6 >= 0x15) {
-          FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x17,1,0);
+          btlAdjustPropertyClamped((int)*(short *)(param_2[9] + 0x6a),0x17,1,0);
         }
         else {
           *(unsigned short *)(uVar20 + 0x152) = *(unsigned short *)(uVar20 + 0x128);
@@ -642,12 +642,12 @@ LAB_004ef7f0:
   if (((char)param_2[0x167] == '\x01') && (iVar22 != 0)) {
     iVar29 = 0;
     do {
-      iVar23 = FUN_004f9d44(DAT_00573808);
+      iVar23 = btlLookupEffectValue(DAT_00573808);
       if (-1 < iVar23) {
         iVar6 = iVar22 + iVar29 * 0x16;
         iVar23 = btlEffectNameHasPrefix(DAT_00573808,iVar6 + 0x108);
         if (iVar23 != 0) {
-          iVar23 = FUN_004f9d44(DAT_00573808);
+          iVar23 = btlLookupEffectValue(DAT_00573808);
           func_0x004fbd30(iVar23 + iVar4,puVar25);
         }
         else if (param_2[0x165] != 0) {
@@ -791,7 +791,7 @@ LAB_004f054c:
     uVar20 = uStack_74;
   }
   if ((uVar17 != 0 && uVar20 != 0) && -1 < (int)uVar16) {
-    FUN_0023acdc((int)(short)uVar20);
+    gameSavedFlagSet((int)(short)uVar20);
   }
   iVar29 = 0;
   if ((param_2[0x15c] == 0) &&

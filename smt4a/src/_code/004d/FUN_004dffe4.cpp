@@ -2,7 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
-#include "shard/lcgRandomRange.h"
+#include "util/Random.h"
 
 namespace {
 struct BattleTargetSelectionView {

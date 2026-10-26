@@ -1,7 +1,7 @@
 #include "battle/EntryStats.h"
-#include "script/ScriptArgs.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);

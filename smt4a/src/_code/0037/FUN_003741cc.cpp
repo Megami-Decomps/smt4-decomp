@@ -1,8 +1,8 @@
-#include "util/Vec2Fixed.h"
+#include "util/MathFunctions.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 struct SaveSlotMarkerAnchorA {
     u8 unk00[8];

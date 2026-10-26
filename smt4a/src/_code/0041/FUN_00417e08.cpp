@@ -1,7 +1,7 @@
 /* NON_MATCHING: close: retail reloads the flag byte and clears bit 7 and the low bits of the second byte in a separate read-modify-write after the bit-6 update; built folds them into the same register. Also the literal pool order of 0x15E and the roster slot address computation differ */
 #include "gamedata/RosterView.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
-#include "util/CalleeContracts.h"
+#include "code/Code001b.h"
 #include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {

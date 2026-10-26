@@ -18,7 +18,7 @@ struct BattleEntry {
 }
 
 extern "C" {
-void FUN_002550d8(s32 id, s32 a, s32 b, s32 c);
+void btlAdjustPropertyClamped(s32 id, s32 a, s32 b, s32 c);
 void *btlMainFindEntryByListedId(void *state, s32 id);
 
 void FUN_002268d0(s32 frame, s32 delay, u32 actor, SkillRecord *skill, s32 first, s32 second, s32 mode, s32 arg, f32 speed);
@@ -40,7 +40,7 @@ u32 FUN_0027df30(s32 frame, u32 actor, SkillRecord *skill, u32 unused4, u32 unus
     f32 effectSpeed = speed.value;
     s32 isReflect = skill->id < 0x6d;
     if (isReflect) {
-        FUN_002550d8(skill->id, 1, 1, 0);
+        btlAdjustPropertyClamped(skill->id, 1, 1, 0);
     }
     s16 preFrame = (s16)preDelay + (s16)frame;
     if (preDelay >= 0) {

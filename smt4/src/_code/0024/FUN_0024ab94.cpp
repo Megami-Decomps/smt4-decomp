@@ -3,7 +3,7 @@
 
 extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
 #include "sys/ProcessResult.h"
-#include "util/pathBuildWide.h"
+#include "sys/FilePaths.h"
 
 static __inline s32 romFileOpen(RomOpenFile *file, const char *path, u32 mode)
 {

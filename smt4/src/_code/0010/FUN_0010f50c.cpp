@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "code/Code0010_Smt4.h"
 
 struct CriticalSection;
 

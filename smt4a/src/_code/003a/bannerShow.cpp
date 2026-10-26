@@ -1,5 +1,5 @@
 #include "common.h"
-#include "util/BannerShow.h"
+#include "ui/UiControl.h"
 
 extern "C" {
 
@@ -20,7 +20,6 @@ typedef struct Globals {
 
 extern Globals g_messageMain;
 
-int uiSpriteSelectAnim(void *window, int arg);
 int pairSetFirstResetSecond(void *window, int arg);
 int FUN_0014e188(void *window, int arg1, u32 arg2, void *text, float scale, int arg5);
 

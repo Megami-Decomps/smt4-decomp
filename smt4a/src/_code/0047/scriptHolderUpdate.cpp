@@ -1,6 +1,7 @@
 /* NON_MATCHING: process setter call recovered; switch cases merge state stores into different tails. */
 #include "shard/Shard0047.h"
 #include "script/scrScriptProcess.h"
+#include "code/Code0041_Smt4a.h"
 extern "C" {
 void sysPlaySe(u32 sound);
 void asdLoadFileAsyncSimple(const char *path, void **buffer, s32 flags);
@@ -9,7 +10,6 @@ u32 scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 u32 scrRunOpcodesStub(ScriptRunState *process);
 void scriptProcessSetMode(ScriptRunState *process, s32 mode);
 s32 partyEntryFlagsBit1();
-void FUN_00418070(u32 owner, s32 state);
 void optionsClearFlag1();
 u32 FUN_003a36b4(void);
 s32 gameBlockByte27E98Is1To3();

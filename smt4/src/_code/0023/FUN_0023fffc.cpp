@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (175 vs 168 rows); register allocation and frame size (12 vs 16 bytes) differ */
 #include "common.h"
 #include "shard/W6_W6Match2_ScrollList.h"
+#include "code/Code002c_Smt4.h"
 
 // Saved battle block: a header with a four-digit ASCII version and the payload.
 struct BattleSaveBlock {
@@ -59,7 +60,6 @@ s32 pairedEntryTableContains(BattleMain* battle, u16 id);
 void FUN_002505c0(s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 void frameTexApplyMode(s32 mode);
 SideRecord* FUN_0027da30(BattleMain* battle, s32 id);
-void FUN_002c29d8(s32 a, s32 b, s32 c);
 s32 FUN_002c2a04(s32 a);
 void FUN_00339e38(BattleMain* battle);
 void FUN_0033a01c(BattleMain* battle);

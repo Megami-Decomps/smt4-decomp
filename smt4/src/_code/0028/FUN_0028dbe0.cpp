@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/UnitRecordAccess.h"
+#include "code/Code0028_Smt4.h"
 
 extern "C" {
 

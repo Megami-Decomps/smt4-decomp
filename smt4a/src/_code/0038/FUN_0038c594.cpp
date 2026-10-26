@@ -1,35 +1,35 @@
-/* NON_MATCHING: the selection range's stack slots and loads differ; entries base/product registers are swapped in the entry address (the active-entry byte already folds with the s8 flag). */
 #include "battle/BtlMainAccess.h"
-#include "util/CalleeContracts.h"
+#include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
 
 extern "C" {
-s32 scrGetArg(s32 index);
+s32 scrGetArg(s32 argument);
+u32 btlResolveEntryChoice(s32 choice);
 void scrSetResult(s32 result);
-BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
+BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *battle);
 
-u32 FUN_0038c594()
+/* Test the selected encoded affinity on eligible group entries and the active special entry. */
+u32 FUN_0038c594(void)
 {
-    struct Selection { s32 first; s32 count; } selection;
-    s32 property = scrGetArg(0);
-    u32 choice = btlResolveEntryChoice(scrGetArg(1));
-    FUN_00301a08(choice, &selection.first, &selection.count);
-    for (s32 index = selection.first; index < selection.first + selection.count; ++index) {
-        BtlMainStateA *state = btlGetMainState();
-        BtlCombatantEntryA *entry = &state->entries[index];
-        if ((entry->flags & g_btlCandidateMasks.unavailable) == 0 &&
-            (entry->flags & g_btlCandidateMasks.required) != 0 &&
-            (entry->flags & g_btlCandidateMasks.excluded) == 0 &&
-            (entry->encodedStats.values[property] >> 10) == 3) {
+    s32 affinity = scrGetArg(0);
+    u32 group = btlResolveEntryChoice(scrGetArg(1));
+    s32 first, count;
+    FUN_00301a08(group, &first, &count);
+    for (s32 i = first; i < first + count; ++i) {
+        BtlCombatantEntryA *entry = &btlGetMainState()->entries[i];
+        if (!(g_btlCandidateMasks.unavailable & entry->flags) &&
+            (g_btlCandidateMasks.required & entry->flags) &&
+            !(entry->flags & g_btlCandidateMasks.excluded) &&
+            entry->encodedStats.values[affinity] >> 10 == 3) {
             scrSetResult(1);
             return 1;
         }
     }
-    if (btlGetMainState()->unk4cd1 != 0) {
+    if (btlGetMainState()->unk4cd1) {
         BtlCombatantEntryA *entry = FUN_003eaf20(btlGetMainState());
-        if (entry != NULL && (entry->encodedStats.values[property] >> 10) == 3) {
+        if (entry && entry->encodedStats.values[affinity] >> 10 == 3) {
             scrSetResult(1);
             return 1;
         }

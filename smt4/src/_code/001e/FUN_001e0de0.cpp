@@ -1,6 +1,6 @@
 /* NON_MATCHING: starts a scroll of the sprite list pool by `delta` entries with `count` rows moving; written from the decompilation, the sprite address arithmetic and loop shapes not compared with retail */
 #include "common.h"
-#include "util/pairSetFirstResetSecond.h"
+#include "sys/RuntimeObjects.h"
 
 struct ListSprite {
     /* 0x00 */ u8 data[0x8C];

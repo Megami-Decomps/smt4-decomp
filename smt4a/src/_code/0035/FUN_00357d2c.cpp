@@ -1,8 +1,8 @@
 /* NON_MATCHING: candidate/request registers differ, and the alternate-search return adds a branch-to-next NOP. */
 #include "common.h"
 #include "ui/MessageMain.h"
-#include "shard/FUN_003e4e4c.h"
-#include "util/FUN_00187168.h"
+#include "code/Code003e.h"
+#include "code/Code0018.h"
 
 struct SaveSlotView {
     u8 unk00[0x12c];

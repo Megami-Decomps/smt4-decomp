@@ -1,6 +1,7 @@
 /* NON_MATCHING: native mutable second-sprite update receiver recovered; first/second sprite saved registers and address-binding schedule differ. */
 #include "common.h"
 #include "ui/UiSpriteState.h"
+#include "util/MathFunctions.h"
 
 struct PartOwner {
     u8 unk000[0xa4];
@@ -15,7 +16,6 @@ extern "C" {
 
 s32 FUN_002b8ee0(UiSpriteState *part, s32 value);
 s32 FUN_002bf818(UiSpriteState *part);
-s32 vec2GetXInt(const UiSpriteState *part);
 s8 uiSpriteGetCompletionState(const UiSpriteState *part);
 void messageOwnerSetState(PartOwner *owner, s32 mode);
 

@@ -3,9 +3,9 @@
 #include "shard/Shard0034.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTableIV.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 extern "C" {
 PartyDamageUnitIV *gameGetUnitRecord(u32 slot);
-s32 gameCountUnits(void);
 
 /* Restore eligible party members and clear their ailments. */
 void FUN_00249b18(u32 group, s32 revive)

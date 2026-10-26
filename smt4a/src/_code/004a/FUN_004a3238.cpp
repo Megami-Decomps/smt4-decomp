@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail reads the window variant as add-immediates plus a displaced ldrsb and anchors the three case-5 tables (cf8/d20/d48) on one pool word (d20 +- 0x28); ours loads separate pool words, so case 0 shrinks and the switch offsets shift. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
-#include "util/DrawTextAtRelativePosition.h"
-#include "util/DrawTextAtRelativePosition.h"
+#include "ui/UiControl.h"
+#include "code/Code002a_Smt4a.h"
 
 /* Style block of an entry window. */
 struct EntryStyle {
@@ -30,10 +30,9 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
-s32 FUN_002a4b28(u32 text);
 void FUN_002e7284(void *textArea, u32 x, u32 y, u32 color, EntryLabel *label);
 void FUN_004a7814(EntryWindow *window, u32 first, s32 index, s32 enabled, u32 color, u32 second);
-void FUN_004a7a50(EntryWindow *window, s32 flag, u32 text, s32 index, s32 enabled, u32 color);
+void demonIconPanelDrawRow(EntryWindow *window, s32 flag, u32 text, s32 index, s32 enabled, u32 color);
 void FUN_004a7ba0(EntryWindow *window, u32 text, s32 index, s32 enabled, u32 color, f32 scale);
 void FUN_004a7cb0(EntryWindow *window, u32 text, s32 index, s32 enabled, u32 color, f32 scale);
 void FUN_004a80d8(EntryWindow *window, s32 index, u32 color, s32 variant, f32 scale);
@@ -69,7 +68,7 @@ void FUN_004a3238(EntryWindow *window, s32 index, u32 mode, s32 enabled, u32 tex
         bool visible = window->hidden == 0;
 
         efctSetSpeed(scale * textScale);
-        FUN_004a7a50(window, visible, text, index, enabled, color);
+        demonIconPanelDrawRow(window, visible, text, index, enabled, color);
         efctSetSpeed(1.0f);
         return;
     }

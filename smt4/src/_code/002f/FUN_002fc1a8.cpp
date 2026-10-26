@@ -1,11 +1,11 @@
 /* NON_MATCHING: retail loads the flag address (ldr r7) before `sub sp, #260`; built emits it after the sub */
 #include "common.h"
+#include "shard/W6_W6Match2_TextureHolder.h"
 
 extern "C" {
 
 s32 textFormatBuffer(char *output, const char *format, ...);
 u32 asdLoadFileSync(const char *path, u32 a, u32 b, u32 c);
-void *asdEffectTextureCreate(const void *image);
 void asdMemFree(void *block);
 
 extern u8 g_effectTexturesLoaded; /* 0x4640e8 */

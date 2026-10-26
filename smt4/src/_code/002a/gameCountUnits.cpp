@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/GameDataAccess_Smt4.h"
 
 namespace { /* units[i] is the entry index of the i-th party member, -1 when the position is empty. */
 struct Slots { u8 padding[0x90f0]; s8 units[24]; }; }

@@ -3,8 +3,9 @@
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
 #include "network/DataStore/DataStoreMain.h"
-#include "util/CalleeContracts.h"
-#include "util/CalleeContracts.h"
+#include "code/Code0023.h"
+#include "code/Code002c.h"
+#include "code/Code002a_Smt4a.h"
 
 extern "C" {
 
@@ -50,7 +51,6 @@ extern unsigned int configGetSettings(void);
 extern unsigned int gameDataBlocksGetTable(void);
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageGetChoiceResult(void);
-extern int FUN_002a6464(void);
 /* Supplied declaration required: FUN_002c8538. */
 /* Supplied declaration required: FUN_002c9104. */
 /* Supplied declaration required: libc_strcpy. */

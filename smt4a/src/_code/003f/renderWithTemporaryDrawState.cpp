@@ -1,5 +1,5 @@
 #include "camp/RenderCtx.h"
-#include "util/PackNibbles.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;

@@ -16,7 +16,7 @@ typedef struct {
     unsigned int sp48; /* 0x48: local_48 */
 } param_6_stack;
 
-extern unsigned char LAB_0045b50c; /* 0x45b50c */
+extern unsigned char FUN_0045b50c; /* 0x45b50c */
 
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern int setMinus1ReturnPtr(unsigned short *);
@@ -84,7 +84,7 @@ void FUN_005078e4(int *param_1,unsigned int param_2,int *param_3,int param_4,int
         temp_v1 = setMinus1ReturnPtr(puVar2 + 0x18);
         *(unsigned char *)(temp_v1 + 0x94) = temp_v0;
         temp_v1 = temp_v1 + 0x98;
-        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_0045b50c,0x18,3);
+        __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&FUN_0045b50c,0x18,3);
         temp_v1 = temp_v1 + 0x48;
         __aeabi_vec_ctor_nocookie_nodtor(temp_v1,setMinus1ReturnPtr,4,3);
         *(unsigned int *)(temp_v1 + 0xc) = unaff_r5;

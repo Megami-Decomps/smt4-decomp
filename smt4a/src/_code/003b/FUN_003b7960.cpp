@@ -1,9 +1,8 @@
 /* NON_MATCHING: initial scissor-stack addressing/flush registers and blend-address scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "util/Vec2Fixed.h"
-#include "util/Vec2Fixed.h"
-#include "util/PackNibbles.h"
+#include "util/MathFunctions.h"
+#include "util/BitsAndBytes.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {

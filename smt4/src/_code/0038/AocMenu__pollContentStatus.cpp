@@ -1,7 +1,6 @@
-#include "util/FUN_00233fcc.h"
+#include "code/Code0023.h"
 /* NON_MATCHING: block layout of the 0x66/default tails, the constants 3/5 in r5/r6 (swapped) and the remap sign test (retail: lsrs #31; here cmp #0). */
 #include "classes/AocMenu.h"
-#include "util/FUN_00233fcc.h"
 #include "addon/aocMain.h"
 
 /* A result code and its description. */

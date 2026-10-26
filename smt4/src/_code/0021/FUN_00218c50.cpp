@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/BtlMainAccess.h"
+#include "util/BitsAndBytes.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 extern int vec2GetXInt(int);
-extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
 void FUN_00218c50(int param_1)

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "code/Code0049_Smt4a.h"
 
 /* A rectangle (position and size) followed by an effect parameter word. */
 struct EffectRect {

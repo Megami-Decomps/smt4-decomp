@@ -59,7 +59,6 @@ typedef struct {
     unsigned int sp78; /* 0x78: local_78 */
 } void_stack;
 
-extern unsigned char LAB_00296d2c; /* 0x296d2c */
 extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 extern int *g_lmapScene; /* 0x581288 */
 extern signed char DAT_005f1614; /* 0x5f1614 */
@@ -367,7 +366,7 @@ LAB_00296958:
       temp_v1 = linkHolderCallFirst(piVar13[0x6a]);
       if (temp_v1 != 2) {
         linkHolderCopyWords(g_lmapScene[0x6a],&temp_v11);
-        FUN_003fda64(*(unsigned int *)(*(int *)(g_lmapScene[0x6a] + 8) + 4),&LAB_00296d2c,temp_v14)
+        FUN_003fda64(*(unsigned int *)(*(int *)(g_lmapScene[0x6a] + 8) + 4),"Bip01",temp_v14)
         ;
         temp_v11 = temp_v15;
         temp_v12 = temp_v16;

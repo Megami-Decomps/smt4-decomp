@@ -3,7 +3,7 @@
 #include "battle/btlAction.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
-#include "util/FUN_0023fae0.h"
+#include "code/Code0023.h"
 
 extern "C" {
 void FUN_0023f410(BtlMainState *state, s32 group, s32 keepFlag, s32 keepFlag58);

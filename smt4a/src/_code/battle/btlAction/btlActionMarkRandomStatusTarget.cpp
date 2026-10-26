@@ -1,6 +1,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/BattleHelpers_Smt4a.h"
 
 extern "C" {
 extern u64 g_btlTargetableMask;

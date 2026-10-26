@@ -1,5 +1,8 @@
-/* NON_MATCHING: only the address of the local value differs: retail builds it in r3 (mov r3, sp; mov r0, r3) before the call; built uses r0 directly. */
 #include "common.h"
+#include "code/Code0027.h"
+#include "code/Code0034_Smt4a.h"
+extern "C" {
+}
 
 struct TargetWordsView {
     u32 unk00; // 0x00
@@ -7,12 +10,12 @@ struct TargetWordsView {
 };
 
 struct TargetValueView {
-    TargetWordsView unk00; // 0x00
+    TargetWordsView words; // 0x00
     u32 unk08; // 0x08
 };
 
 struct TargetEntryView {
-    TargetWordsView unk00; // 0x00
+    TargetWordsView words; // 0x00
     u8 unk08; // 0x08
     u8 unk09; // 0x09
     u8 unk0A; // 0x0A
@@ -36,10 +39,10 @@ struct TargetSelectView {
 extern "C" {
 extern TargetSelectView* g_btlTargetSelect;
 u8 FUN_0026264c(u32 value);
-u32 obj80Select(u32 index);
-s32 FUN_002a1850(TargetValueView* value, s32 mode, u32 context);
+s32 FUN_002a1850(TargetValueView* value, s32 mode, u32 context,
+                 const TargetValueView* source);
 
-// Populate a target entry and copy the leading record of its transformed value.
+// Populate a target entry and copy the first two words of its transformed value.
 void FUN_00368d74(s32 entryIndex, const TargetValueView* source, u32 target,
                   u8 field09, u8 field0A, u8 field0B, u8 field0C,
                   u8 field0D, u8 field0E)
@@ -58,8 +61,8 @@ void FUN_00368d74(s32 entryIndex, const TargetValueView* source, u32 target,
 
         u32 context = obj80Select(0);
         TargetValueView value = *source;
-        FUN_002a1850(&value, 0, context);
-        entry->unk00 = value.unk00;
+        FUN_002a1850(&value, 0, context, &value);
+        entry->words = value.words;
     }
 }
 }

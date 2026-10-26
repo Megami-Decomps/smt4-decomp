@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc adds a branch to the next instruction after the conditional move; retail falls through */
 #include "common.h"
 
 extern "C" {
@@ -19,7 +18,10 @@ u32 FUN_00468858(ModeOwner *owner)
     ModeInfo *info = owner->info;
     u32 result = 5;
 
-    if (info != NULL && info->type == 6) {
+    if (info == NULL) {
+        return 5;
+    }
+    if (info->type == 6) {
         result = 4;
     }
     return result;

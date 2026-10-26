@@ -2,7 +2,6 @@
 #include "common.h"
 #include "event/2dEvent/Npc2d.h"
 #include "script/ScriptArgs.h"
-#include "shard/scrGetArg.h"
 
 extern "C" {
 

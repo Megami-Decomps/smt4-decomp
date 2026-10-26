@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_0023acdc(s16 skill);
+void gameSavedFlagSet(s16 skill);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
 s32 nkmGrowthLearnRandomSkill(u32 record);
 void scrSetResult(s32 result);
@@ -22,7 +22,7 @@ u32 scrCommGrantRandomSkill(void)
     }
     s32 skill = nkmGrowthLearnRandomSkill(record);
     if (skill > 0) {
-        FUN_0023acdc(skill);
+        gameSavedFlagSet(skill);
     }
     scrSetResult(skill);
     return 1;

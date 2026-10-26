@@ -4,7 +4,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
 #include "Model/MoriModelShadowMap.h"
-#include "util/skinObjectUpdateMatrices.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers_VariantC.h"
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;

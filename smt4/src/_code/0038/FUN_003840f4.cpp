@@ -3,6 +3,7 @@
 #include "classes/FloatState.h"
 #include <new>
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemUtil.h"
 struct Mover;
 
 struct QuestModelState {
@@ -60,7 +61,6 @@ struct QuestCounterScene {
 extern "C" {
 void nodeOwnerSetEnabled(NodeEnableOwner *owner, s32 enabled);
 void textFormatBuffer(char *out, const char *format, ...);
-void memClear(void *block, u32 size);
 QuestModel *asdMdlManagerCreateLoaded(const char *path, s32 flags);
 void FUN_002a0428(QuestModel *model, s32 flag);
 void FUN_002a09b4(const char *path, s32 flag);

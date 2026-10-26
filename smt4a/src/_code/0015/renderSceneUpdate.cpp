@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail uses a separate model-slot address point and retains a fixed-zero debug-dispatch test whose original hook is unknown. */
 #include "common.h"
-#include "util/SceneTraverserVisit.h"
+#include "AsdSDK/Source/Gfx/AsdGfxHelpers.h"
 
 struct RenderSceneOwner {
     /* 0x00 */ u32 unk00;

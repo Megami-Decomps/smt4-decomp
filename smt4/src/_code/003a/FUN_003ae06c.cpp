@@ -1,6 +1,7 @@
 /* NON_MATCHING: The message request uses one subobject pointer instead of retail's separately cached large-offset field addresses. */
 #include "battle/btlUI.h"
 #include "gamedata/SaveLoadProcess.h"
+#include "gamedata/DataTableAccess_Smt4.h"
 
 namespace {
 struct BattleMessageRequest {
@@ -14,7 +15,6 @@ struct BattleMessageRequest {
 }
 extern "C" {
 extern BtlUiGlobals g_btlUi;
-const char *dataTable0BFindById(u32 id);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void communicationBeginTransition(s32 mode);
 

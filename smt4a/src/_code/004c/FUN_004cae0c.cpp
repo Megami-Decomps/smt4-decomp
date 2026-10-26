@@ -1,33 +1,32 @@
-/* NON_MATCHING: compiler places the shared flags-store epilogue after the immediate-update branch instead of before it. */
 #include "common.h"
 
-struct DeferredByteState {
-    u8 unk00[0x50];
-    u32 flags; // 0x50
-    u8 unk54[0x18];
-    u32 value; // 0x6c
-    u8 unk70[0x10];
-    s32 pending; // 0x80
-    u32 progress; // 0x84
-    u32 unk88;
-    u32 target; // 0x8c
-    u32 previous; // 0x90
+/* The Apocalypse fade work: the colour and the alpha fade fields sit 8 bytes later than in the shared view. */
+struct ColorFadeWorkA {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 flags;
+    /* 0x54 */ u8 unk54[0x18];
+    /* 0x6c */ u32 color;
+    /* 0x70 */ u8 unk70[0x10];
+    /* 0x80 */ s32 alphaDuration;
+    /* 0x84 */ u32 alphaElapsed;
+    /* 0x88 */ u32 unk88;
+    /* 0x8c */ u32 target;
+    /* 0x90 */ u32 start;
 };
 
-// Capture a byte transition, applying it immediately when no transition is pending.
-extern "C" void FUN_004cae0c(void *, void *opaqueState, s32 pending, u32 target)
+// Start an alpha fade, or apply the alpha immediately when duration is zero.
+extern "C" void FUN_004cae0c(u32, ColorFadeWorkA* work, s32 duration, u32 alpha)
 {
-    DeferredByteState *state = static_cast<DeferredByteState *>(opaqueState);
-    state->progress = 0;
-    state->pending = pending;
-    state->target = target & 0xff;
-    u32 flags = state->flags;
-    if (pending != 0)
-        flags |= 0x2000;
-    state->previous = state->value & 0xff;
-    if (pending == 0) {
+    work->alphaElapsed = 0;
+    work->alphaDuration = duration;
+    work->target = alpha & 0xff;
+    u32 flags = work->flags;
+    work->start = work->color & 0xff;
+    if (duration == 0) {
         flags &= ~0x2000u;
-        state->value = (state->value & ~0xffu) | (target & 0xff);
+        work->color = (work->color & 0xffffff00) | (alpha & 0xff);
+    } else {
+        flags |= 0x2000;
     }
-    state->flags = flags;
+    work->flags = flags;
 }

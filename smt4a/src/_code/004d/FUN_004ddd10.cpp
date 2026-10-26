@@ -1,16 +1,16 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004ddd10` (_code @ 0x4ddd10, 0x658 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code003f_Smt4a.h"
 
 extern "C" {
 
 int dataTable04FindById(void);
 int FUN_003e8bb0(unsigned char [4], int, unsigned int);
 int btlResetSlot(int, int, int);
-int FUN_003f2aac(...);
 int FUN_004ab8e4(unsigned int);
 int btlSlotSetStoreValue(int, int, int);
-int FUN_004c571c(int, int, int, int);
+int btlAdjustPropertyClamped(int, int, int, int);
 int FUN_004c6b8c(unsigned int, int);
 int FUN_004f64f4(int);
 int FUN_004f95cc(void);
@@ -53,7 +53,7 @@ extern int chainCountIdUnflagged(unsigned int, unsigned int *);
 extern int FUN_004ab8bc(unsigned int);
 /* Supplied declaration required: FUN_004ab8e4. */
 /* Supplied declaration required: btlSlotSetStoreValue. */
-/* Supplied declaration required: FUN_004c571c. */
+/* Supplied declaration required: btlAdjustPropertyClamped. */
 /* Supplied declaration required: FUN_004c6b8c. */
 /* Supplied declaration required: FUN_004f64f4. */
 extern int FUN_004f8264(void);
@@ -188,7 +188,7 @@ unsigned int FUN_004ddd10(int *param_1,unsigned int *param_2)
             btlSlotSetStoreValue((int)*(short *)(param_2[9] + 0x6a),0x12,0);
           }
           else {
-            FUN_004c571c((int)*(short *)(param_2[9] + 0x6a),0x12,1,0);
+            btlAdjustPropertyClamped((int)*(short *)(param_2[9] + 0x6a),0x12,1,0);
           }
         }
         if (temp_v6) {

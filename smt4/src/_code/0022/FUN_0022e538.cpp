@@ -1,9 +1,9 @@
 /* NON_MATCHING: touch-bound geometry retains an extra saved register and uses different intermediate arithmetic scheduling. */
 /* Builds the two touch regions from the selected page's frame and button rectangles. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
-void *asdTMTexTableEntryAt(u32 table, u32 id);
 u32 ifTouchRegionAdd(s16 x, s16 y, s16 width, s16 height);
 
 void FUN_0022e538(void *object)

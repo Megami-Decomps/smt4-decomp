@@ -1,6 +1,5 @@
 #include "common.h"
 #include "script/ScriptArgs.h"
-
 struct UniteView {
     /* 0x0000 */ u8 unk0000[0x6c78];
     /* 0x6C78 */ s32 value;

@@ -1,6 +1,6 @@
 /* NON_MATCHING: retail defines the record, its saved header and the page tables in this unit and addresses g_effectEditorSettings and DAT_0059e738 relative to their neighbours (`sub r0, r1, #0x160`, `sub r1, r0, #0x120`); extern globals need their own literals. */
 #include "gfx/EffectEditorStorage.h"
-#include "shard/linkedFindItemByIndex.h"
+#include "AsdSDK/Source/Util/AsdListHelpers_LinkedItems.h"
 
 /* One line of an editor parameter page. */
 struct EffectEditorPageItem {

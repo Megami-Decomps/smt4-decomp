@@ -34,7 +34,7 @@ int FUN_003fe86c(...);
 int itemTableClear(...);
 int FUN_0045adc0(...);
 int FUN_0049fc88(...);
-int FUN_002b7f18(...);
+int mapIfReleaseHandle(...);
 int mapInterfaceUnregisterHandle(...);
 
 int FUN_0015f858(...);
@@ -430,7 +430,7 @@ extern int inputIsQuestMenuPressed(void);
 extern int FUN_004d0584(void);
 extern unsigned int slots4FGetActiveValue(void);
 /* Supplied declaration required: FUN_0050d8e4. */
-/* Supplied declaration required: FUN_002b7f18. */
+/* Supplied declaration required: mapIfReleaseHandle. */
 /* Supplied declaration required: mapInterfaceUnregisterHandle. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 /* Supplied declaration required: __aeabi_memcpy4. */
@@ -5323,7 +5323,7 @@ LAB_002dad8c:
     case 5:
       fStack_20 = temp_v35;
       fStack_1c = temp_v37;
-      FUN_002b7f18();
+      mapIfReleaseHandle();
       piVar18 = g_lmapScene;
       g_lmapScene[0x15] = 0;
       piVar18[0x16] = 0;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00135c30` (_code @ 0x135c30, 0xfc8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "code/Code0013_Smt4a.h"
 
 extern "C" {
 
-int FUN_00137848(...);
 int FUN_00137f94(...);
 int appletReplySleepQueryAllow(...);
 int FUN_00138a08(...);
