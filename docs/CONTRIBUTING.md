@@ -137,6 +137,10 @@ Every match must be one a programmer could have written for a reason.
 - **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
   armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
   so write the call:
+  - **a call to a real empty function** (a unit whose whole body is `bx lr`; ~150 per game): armlink's
+    `--inline` replaces every `bl` to it with a NOP, so the image never calls one. `build.py` does the
+    same. If retail keeps values in caller-saved registers across such a NOP, the callee was in the
+    same `--multifile` run: ask Main for `multifile` with that empty unit;
   - **a call to a `__weak` function the release build didn't link**: mostly the engine's debug hook,
     called with `__FILE__` and `__LINE__` (retail still loads the file name into r0, the line into
     r1). Write `asdDebugTrace(DAT_00409c64, 172);` with `include/AsdSDK/AsdDebug.h` when retail
