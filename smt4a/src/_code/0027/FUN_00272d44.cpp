@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail addresses g_gameState through `add r0, r5, #0`, keeps the flag in r4/record in r5, and shares one `return 0` tail; register allocation and block order differ. */
+/* NON_MATCHING: getter ldr r0,[r0,#4] (game-state submode) compiled in the same multifile run (r1 live across it); getter not in image. */
 #include "map/mapDepart.h"
 #include "gamedata/FlagBitTests.h"
 

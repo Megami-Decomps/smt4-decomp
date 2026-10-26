@@ -65,7 +65,7 @@ void screen4AEnter(StatusScreen* screen);
 void uniteCreatePreviewModel(void);
 void sortMenuAcquire(s32 a, s32 b);
 void useCounterStart(void);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 
 #define SCREEN_BYTE(screen, offset) (*(reinterpret_cast<u8*>(screen) + (offset)))
 #define SCREEN_HALF(screen, offset) (*reinterpret_cast<s16*>(reinterpret_cast<u8*>(screen) + (offset)))
@@ -153,7 +153,7 @@ void FUN_004a41d8(StatusScreen* screen)
         FUN_003343f0(1);
         screen->state = 7;
         screen->stateArg = 0;
-        FUN_0019de98(0, 0xf4f4f4ff);
+        buttonHelpSetText(0, 0xf4f4f4ff);
         sendEvent100020E();
         return;
     }

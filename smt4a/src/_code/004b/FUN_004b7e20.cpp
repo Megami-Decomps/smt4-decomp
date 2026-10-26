@@ -9,7 +9,7 @@ int FUN_004b726c(...);
 
 int textFormatBuffer(unsigned char [32], unsigned char *, int);
 int sysPlaySe(...);
-int FUN_0019de98(int, unsigned int);
+int buttonHelpSetText(int, unsigned int);
 int messageSetMode(...);
 int dialogOpen(...);
 int dialogClose(int);
@@ -34,7 +34,7 @@ extern int DAT_0058800c; /* 0x58800c */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
@@ -107,7 +107,7 @@ void FUN_004b7e20(int param_1)
                   *(unsigned char *)(param_1 + 0xa88) = 1;
                 }
                 sysPlaySe(0x92);
-                FUN_0019de98(0,0xf4f4f4ff);
+                buttonHelpSetText(0,0xf4f4f4ff);
                 temp_v2 = 0x1e;
               }
               else {

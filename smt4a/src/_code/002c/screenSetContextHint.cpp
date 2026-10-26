@@ -1,7 +1,7 @@
 #include "common.h"
 extern "C" {
 s32 textFormatBuffer(char *buffer, const char *format, ...);
-void FUN_0019de98(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 void screenSetColor670(u32 color, s32 row, s32 first, s32 length);
 const char *requestSubmitScrLookup(u8 index, s32 alternate);
 
@@ -29,7 +29,7 @@ void screenSetContextHint(void *owner, s32 kind, s32 alternate)
     if (kind == 9) {
         char buffer[128];
         textFormatBuffer(buffer, text, work->amount);
-        FUN_0019de98(buffer, 0xF4F4F4FF);
+        buttonHelpSetText(buffer, 0xF4F4F4FF);
         s32 length;
         if (work->amount >= 100)
             length = 5;
@@ -39,7 +39,7 @@ void screenSetContextHint(void *owner, s32 kind, s32 alternate)
             length = 3;
         screenSetColor670(0x48C722FF, 1, 18, length);
     } else {
-        FUN_0019de98(text, 0xF4F4F4FF);
+        buttonHelpSetText(text, 0xF4F4F4FF);
     }
 }
 }

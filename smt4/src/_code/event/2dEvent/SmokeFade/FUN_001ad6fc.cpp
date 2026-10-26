@@ -1,4 +1,4 @@
-/* NON_MATCHING: the image loop now matches retail (images base kept in a local, table read indexed, node through the element pointer); the three-case phase switch still compiles to a compare chain instead of retail's jump table, and register allocation of the saved state/images pointers differs. */
+/* NON_MATCHING: the phase switch now builds retail's jump table (labels 3 and 4 fall out to the default, as in retail) and the images base is shared; the saved registers still differ (retail: state r4, loop index r5, loaded count r6, images r7; built has them rotated). */
 #include "event/2dEvent/SmokeFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -32,10 +32,9 @@ static __inline SmokeFadeRow *smokeFadeGetRow()
     return rows + DAT_0043df28.state->first;
 }
 
-static __inline bool smokeFadeImagesLoaded()
+static __inline bool smokeFadeImagesLoaded(SmokeFadeImage *images)
 {
     s32 loaded = 0;
-    SmokeFadeImage *images = DAT_0043df28.images;
     for (s32 i = 0; i < 2; ++i) {
         if (asdTMTexTableNodeIsLoaded(images[i].table, images[i].node))
             loaded++;
@@ -45,14 +44,15 @@ static __inline bool smokeFadeImagesLoaded()
 
 extern "C" u32 FUN_001ad6fc(u32 job)
 {
+    SmokeFadeImage *images = DAT_0043df28.images;
     SmokeFadeState *fade = DAT_0043df28.state;
-    if (smokeFadeImagesLoaded() && fade->file != NULL && FUN_002c1d5c() != 0) {
+    if (smokeFadeImagesLoaded(images) && fade->file != NULL && FUN_002c1d5c() != 0) {
         fade->active = 0;
         fade->phase = 3;
     }
     switch (fade->phase) {
     case 0: {
-        if (!smokeFadeImagesLoaded() || fade->file == NULL)
+        if (!smokeFadeImagesLoaded(images) || fade->file == NULL)
             return 0;
         SmokeFadeRow *row = smokeFadeGetRow();
         if (fade->second != 0) {
@@ -93,6 +93,9 @@ extern "C" u32 FUN_001ad6fc(u32 job)
             return 0;
         break;
     }
+    case 3:
+    case 4:
+        return 0;
     default:
         return 0;
     }

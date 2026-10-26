@@ -4,7 +4,7 @@
 
 extern "C" {
 
-extern int FUN_00199f84(int, int);
+extern int nn_math_ARMv6_MTX34InverseAsm(int, int);
 extern unsigned int *FUN_001a1e28(void);
 
 
@@ -22,7 +22,7 @@ int nw_gfx_TransformNode_InverseWorldMatrix(int param_1)
   unsigned int temp_v7;
   
   if (*(char *)(param_1 + 300) == '\0') {
-    temp_v0 = FUN_00199f84(param_1 + 0xfc,param_1 + 0x8c);
+    temp_v0 = nn_math_ARMv6_MTX34InverseAsm(param_1 + 0xfc,param_1 + 0x8c);
     if (temp_v0 == 0) {
       puVar2 = (unsigned int *)FUN_001a1e28();
       temp_v1 = puVar2[1];

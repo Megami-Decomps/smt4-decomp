@@ -12,11 +12,17 @@ extern const char DAT_0052fdd8[];
 extern const char DAT_0052fdc0[];
 extern const char DAT_0052fda8[];
 struct SearchWindowResources {
-    u8 first[0x24];
-    u8 second[0x24];
-    u8 fifth[0x70];
+    u32 first[9];
+    u32 second[9];
+    u32 fifth[28];
 };
-extern const SearchWindowResources DAT_0052fcb4;
+
+/* The search window's resource parameter tables (0x52fcb4 in the image). */
+static const SearchWindowResources DAT_0052fcb4 = {
+    {0x00000000, 0x00000000, 0x00000000, 0x0000014A, 0x00000000, 0x00000008, 0x00000000, 0x0000FEB6, 0x00000004},
+    {0x3F800000, 0x3F800000, 0x00000000, 0x3F800000, 0x00000000, 0x00000004, 0x00000000, 0x00000000, 0x00000000},
+    {0x00000001, 0x00000000, 0xFFFFFFFDu, 0x00000000, 0x00000000, 0xFFFFFFFDu, 0x00000000, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0x00000000, 0x00000002, 0x00000000, 0xFFFFFFFDu, 0x00000001, 0x00000000, 0xFFFFFFFDu, 0x00000000, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0xFFFFFFFFu, 0x00000000, 0xFFFFFFFFu, 0x00000000}
+};
 u32 FUN_0023a9a0(void *work);
 u32 FUN_0023a5f8(void *work);
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);

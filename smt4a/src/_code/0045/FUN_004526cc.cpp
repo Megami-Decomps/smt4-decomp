@@ -1,61 +1,51 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004526cc` (_code @ 0x4526cc, 0xb0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the unwrapped data pointer in a separate register (r1 via movne) and spills the argument to r3 before the offset load; the resolved wrapper target is built into r4 here. */
+#include "shard/S1NwGfx.h"
 
 extern "C" {
 
-int FUN_001caea8(int);
-int FUN_001cb08c(int);
-int FUN_001cb1e8(int);
-int FUN_0045092c(void);
+/* The data a resource refers to: a type signature, and for wrappers a nested relative pointer at 0x1C. */
+typedef struct BinaryResourceData {
+    /* 0x00 */ u32 type;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ RelativePointer inner;
+} BinaryResourceData;
 
-/* Supplied declaration required: FUN_001caea8. */
-/* Supplied declaration required: FUN_001cb08c. */
-/* Supplied declaration required: FUN_001cb1e8. */
-/* Supplied declaration required: FUN_0045092c. */
+/* A resource block that refers to its data through a self-relative pointer. */
+typedef struct BinaryResource {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ RelativePointer data;
+} BinaryResource;
 
+u32 FUN_0045092c(u32 arg);
+void FUN_001caea8(BinaryResource *resource);
+void FUN_001cb08c(BinaryResource *resource);
+void FUN_001cb1e8(BinaryResource *resource);
 
-int FUN_004526cc(int param_1,int param_2)
-
+/* Runs FUN_0045092c and, when it succeeds, finishes setting up the resource by its data type. */
+u32 FUN_004526cc(BinaryResource *resource, u32 arg)
 {
-/* irregular: 4 native warning(s); review required */
-  int temp_v0;
-  int *piVar2;
-  int *piVar3;
-  
-  temp_v0 = *(int *)(param_1 + 8);
-  if (temp_v0 != 0) {
-    piVar2 = (int *)(temp_v0 + param_1 + 8);
-  }
-  else {
-    piVar2 = (int *)0x0;
-  }
-  FUN_0045092c();
-  if (-1 < param_2) {
-    piVar3 = piVar2;
-    if (*piVar2 == 0x20000004) {
-      temp_v0 = piVar2[7];
-      piVar3 = (int *)0x0;
-      if (temp_v0 != 0) {
-        piVar3 = (int *)(temp_v0 + (int)(piVar2 + 7));
-      }
+    BinaryResourceData *data = static_cast<BinaryResourceData *>(resource->data.get());
+    u32 result = FUN_0045092c(arg);
+
+    if ((s32)(result & 0x80000000) < 0) {
+        return result;
     }
-    temp_v0 = *piVar3;
-    if (temp_v0 != 0x20000009) {
-      if (temp_v0 != 0x20000011) {
-        if (temp_v0 == 0x20000021) {
-          FUN_001cb1e8(param_1);
-        }
-      }
-      else {
-        FUN_001cb08c(param_1);
-      }
+    BinaryResourceData *target = data;
+    if (data->type == 0x20000004) {
+        target = static_cast<BinaryResourceData *>(data->inner.get());
     }
-    else {
-      FUN_001caea8(param_1);
+    switch (target->type) {
+    case 0x20000011:
+        FUN_001cb08c(resource);
+        break;
+    case 0x20000009:
+        FUN_001caea8(resource);
+        break;
+    case 0x20000021:
+        FUN_001cb1e8(resource);
+        break;
     }
-  }
-  return param_2;
+    return result;
 }
 
 } /* extern "C" */

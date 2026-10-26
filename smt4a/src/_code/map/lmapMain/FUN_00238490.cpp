@@ -105,7 +105,7 @@ extern float DAT_0064c080; /* 0x64c080 */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
-extern int FUN_00199f84(unsigned char *, int);
+extern int nn_math_ARMv6_MTX34InverseAsm(unsigned char *, int);
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: FUN_0019e3d0. */
@@ -276,7 +276,7 @@ void FUN_00238490(int param_1)
   temp_v16 = 0.0f;
   temp_v15 = 1.0f;
   if ((*(unsigned char *)(param_1 + 0x130) & 0x20) != 0) {
-    temp_v2 = FUN_00199f84(temp_v66,*(int *)(g_renderCtx + 0x6fc) + 0x38);
+    temp_v2 = nn_math_ARMv6_MTX34InverseAsm(temp_v66,*(int *)(g_renderCtx + 0x6fc) + 0x38);
     if (temp_v2 == 0) {
       if (((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0) && (temp_v2 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity), temp_v2 != 0)) {
         _ZZN2nw4math5MTX348IdentityEvE8identity = temp_v15;

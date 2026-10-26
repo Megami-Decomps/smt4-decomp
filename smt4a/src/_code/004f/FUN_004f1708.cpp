@@ -1,5 +1,26 @@
-/* NON_MATCHING: retail 58 vs built 43 rows; compiler combines interpolation multiply/add instructions unlike retail's separate operations. */
+/* NON_MATCHING: 60 vs 58 rows; separate vector subtract/scale/add helpers now keep the VFP operations unfused, but retail loads and subtracts the first delta z-first and schedules the multiplies in another order. */
 #include "shard/W5_W5Match8_CameraTransition.h"
+
+static __inline void vectorSubtract(W5Match8Vec3 *result, const W5Match8Vec3 *left, const W5Match8Vec3 *right)
+{
+    result->x = left->x - right->x;
+    result->y = left->y - right->y;
+    result->z = left->z - right->z;
+}
+
+static __inline void vectorScale(W5Match8Vec3 *result, const W5Match8Vec3 *vector, f32 scale)
+{
+    result->x = vector->x * scale;
+    result->y = vector->y * scale;
+    result->z = vector->z * scale;
+}
+
+static __inline void vectorAdd(W5Match8Vec3 *result, const W5Match8Vec3 *left, const W5Match8Vec3 *right)
+{
+    result->x = left->x + right->x;
+    result->y = left->y + right->y;
+    result->z = left->z + right->z;
+}
 
 extern "C" {
 f32 FUN_003d4dd4(u32 mode, u32 duration, u32 frame);
@@ -21,11 +42,13 @@ void FUN_004f1708(void *camera)
     };
     SecondaryPositionView *state = static_cast<SecondaryPositionView *>(camera);
     f32 progress = FUN_003d4dd4(state->mode, state->duration, state->frame);
-    state->progress.x = g_cameraAlternateProgressStart.x + (state->target.x - g_cameraAlternateProgressStart.x) * progress;
-    state->progress.y = g_cameraAlternateProgressStart.y + (state->target.y - g_cameraAlternateProgressStart.y) * progress;
-    state->progress.z = g_cameraAlternateProgressStart.z + (state->target.z - g_cameraAlternateProgressStart.z) * progress;
-    state->progress.x -= (state->source.x - state->current.x) * progress;
-    state->progress.y -= (state->source.y - state->current.y) * progress;
-    state->progress.z -= (state->source.z - state->current.z) * progress;
+    W5Match8Vec3 first;
+    vectorSubtract(&first, &state->target, &g_cameraAlternateProgressStart);
+    W5Match8Vec3 second;
+    vectorSubtract(&second, &state->source, &state->current);
+    vectorScale(&first, &first, progress);
+    vectorScale(&second, &second, progress);
+    vectorAdd(&state->progress, &g_cameraAlternateProgressStart, &first);
+    vectorSubtract(&state->progress, &state->progress, &second);
 }
 }

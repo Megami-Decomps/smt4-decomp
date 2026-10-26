@@ -10,7 +10,7 @@ int FUN_00184c4c(...);
 int camSetMatrixA(...);
 int FUN_001a1ee0(...);
 int FUN_001b4a00(...);
-int mathMatrixTranslateLocal(...);
+int nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(...);
 int FUN_001b63b0(...);
 int FUN_001bc460(...);
 int FUN_001bced4(...);
@@ -117,7 +117,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b4a00. */
-/* Supplied declaration required: mathMatrixTranslateLocal. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_001bc460. */
 /* Supplied declaration required: FUN_001bced4. */
@@ -224,7 +224,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
   temp_v45 = temp_v20;
   fStack_8c = temp_v21;
   fStack_88 = temp_v22;
-  mathMatrixTranslateLocal(temp_v30,temp_v30,&temp_v42);
+  nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(temp_v30,temp_v30,&temp_v42);
   FUN_001b4a00(temp_v30,&temp_v45);
   camSetMatrixA(g_renderCtx,temp_v30);
   temp_v3 = pfVar4->field_0x8;

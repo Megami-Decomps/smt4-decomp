@@ -11,8 +11,8 @@ int gfxResolveTimedTextureFrame(unsigned int, double, unsigned char [16]);
 int forwardRecoveredCallback(...);
 int FUN_0028c92c(...);
 int gfxQuaternionWorkspaceBuildMatrix(...);
-int FUN_002a34e8(...);
-int mathMatrixTranslateLocal(...);
+int nn_math_ARMv6_MTX34AddTranslateAsm(...);
+int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(...);
 int FUN_002aff70(...);
 int FUN_002b011c(...);
 int phaseCosInterpolate(...);
@@ -118,8 +118,8 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: forwardRecoveredCallback. */
 /* Supplied declaration required: FUN_0028c92c. */
 /* Supplied declaration required: gfxQuaternionWorkspaceBuildMatrix. */
-/* Supplied declaration required: FUN_002a34e8. */
-/* Supplied declaration required: mathMatrixTranslateLocal. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_2A3504. */
 /* Supplied declaration required: FUN_002aff70. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: phaseCosInterpolate. */
@@ -224,8 +224,8 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
   temp_v45 = temp_v20;
   fStack_8c = temp_v21;
   fStack_88 = temp_v22;
-  mathMatrixTranslateLocal(temp_v30,temp_v30,&temp_v42);
-  FUN_002a34e8(temp_v30,&temp_v45);
+  nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(temp_v30,temp_v30,&temp_v42);
+  nn_math_ARMv6_MTX34AddTranslateAsm(temp_v30,&temp_v45);
   cameraSetViewMatrix(g_titleScene,temp_v30);
   temp_v3 = pfVar4->field_0x8;
   if (param_1->field_0xc == 7) {

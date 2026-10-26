@@ -4,7 +4,7 @@
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
-extern const void* DAT_0056fd38;
+extern const void* g_tmnlEntries;
 extern const u8 DAT_0056df38[][60];
 u32 FUN_001692ac(u32 mode, u32 options);
 
@@ -16,7 +16,7 @@ u32 FUN_003161b4(void)
         u8 unk0A[6];
         u32 state;
     };
-    const TerminalView* work = static_cast<const TerminalView*>(DAT_0056fd38);
+    const TerminalView* work = static_cast<const TerminalView*>(g_tmnlEntries);
     if (work->state - 1 >= 17) {
         return 1;
     }

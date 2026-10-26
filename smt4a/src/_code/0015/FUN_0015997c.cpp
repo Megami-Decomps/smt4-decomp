@@ -1,42 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015997c` (_code @ 0x15997c, 0x7c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only register allocation differs (retail reuses r5 for the refcount pointer and then the success result; built uses r6 for the pointer and r5 for the result) */
+#include "nn/Result.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
+
+static const char g_ndmServiceName[] = "ndm:u";
 
 extern "C" {
 
-int FUN_0016f864(void);
+extern u8 g_moduleCriticalSection7[];        /* 0x4e6cd0: nn::os::CriticalSection */
+extern s32 DAT_005c0ac4;     /* 0x471b10 */
+extern u32 g_ipcServiceSessionHandle[];    /* 0x472ad8 */
 
-extern int DAT_005c0ac4; /* 0x5c0ac4 */
-extern unsigned int DAT_005c14c0; /* 0x5c14c0 */
-extern unsigned int g_moduleCriticalSection7; /* 0x6430f4 */
+void FUN_0016f864(void);
+u32 libc_strlen(const char *text);
+s32 FUN_0016f988(u32 *session, const char *name, u32 length, u32 flags);
 
-/* Supplied declaration required: FUN_0016f864. */
-extern int FUN_0016f988(unsigned int *, char *, unsigned int, unsigned int);
-extern unsigned int libc_strlen(char *);
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-int FUN_0015997c(void)
-
+/* Opens the "ndm:u" service session on the first reference; returns the failure result or 0. */
+s32 FUN_0015997c(void)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection7);
-  if (DAT_005c0ac4 == 0) {
-    FUN_0016f864();
-    temp_v0 = libc_strlen("ndm:u");
-    temp_v1 = FUN_0016f988(&DAT_005c14c0,"ndm:u",temp_v0,0);
-    if (temp_v1 < 0) {
-      nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection7);
-      return temp_v1;
+    ScopedCriticalLock guard(g_moduleCriticalSection7);
+
+    if (DAT_005c0ac4 == 0) {
+        FUN_0016f864();
+        s32 result = FUN_0016f988(g_ipcServiceSessionHandle, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
+        if (nnResultIsFailure(result)) {
+            return result;
+        }
     }
-  }
-  DAT_005c0ac4 = DAT_005c0ac4 + 1;
-  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection7);
-  return 0;
+    DAT_005c0ac4++;
+    s32 success = 0;
+    return success;
 }
 
 } /* extern "C" */

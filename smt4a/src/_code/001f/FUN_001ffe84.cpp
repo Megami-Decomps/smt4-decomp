@@ -8,7 +8,7 @@ extern "C" {
 
 int ifTouchRegionRemove(void);
 int sysPlaySe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int campResetScreen(void);
 int FUN_00228b04(...);
 int FUN_002b5c88(void);
@@ -58,7 +58,7 @@ extern unsigned short ifTouchGetButtonHelpValue(void);
 extern int gameGetPlayerData(void);
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
@@ -392,7 +392,7 @@ void FUN_001ffe84(void)
           FUN_0031f208(0xf);
           FUN_0031f208(0x11);
           FUN_0031f208(3);
-          FUN_0019de98(0,0xf4f4f4ff);
+          buttonHelpSetText(0,0xf4f4f4ff);
           temp_v2 = ifTouchGetButtonHelpValue();
           *(unsigned short *)(temp_v8 + 0x3a) = temp_v2;
           campChangeState(0x2b);

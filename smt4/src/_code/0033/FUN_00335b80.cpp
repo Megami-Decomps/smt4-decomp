@@ -6,8 +6,8 @@
 extern "C" {
 
 int renderCtxCallB(...);
-int FUN_002a34e8(...);
-int mathMatrixTranslateLocal(...);
+int nn_math_ARMv6_MTX34AddTranslateAsm(...);
+int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
 int asdTMTexTableEntryAt(...);
@@ -46,8 +46,8 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: renderCtxCallB. */
-/* Supplied declaration required: FUN_002a34e8. */
-/* Supplied declaration required: mathMatrixTranslateLocal. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_2A3504. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -156,8 +156,8 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v17 = 0;
     temp_v9[5] = temp_v9[0];
     temp_v14 = temp_v6;
-    mathMatrixTranslateLocal(temp_v9,temp_v9,&temp_v19);
-    FUN_002a34e8(temp_v9,&temp_v21);
+    nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(temp_v9,temp_v9,&temp_v19);
+    nn_math_ARMv6_MTX34AddTranslateAsm(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
     temp_v1 = asdTMTexTableEntryAt(0x2d,2000);
     temp_v8 = 0.3f;
@@ -186,8 +186,8 @@ unsigned int FUN_00335b80(int *param_1)
     uStack_4c = 0x3f800000;
     temp_v9[5] = temp_v9[0];
     temp_v14 = temp_v6;
-    mathMatrixTranslateLocal(temp_v9,temp_v9,&temp_v19);
-    FUN_002a34e8(temp_v9,&temp_v21);
+    nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(temp_v9,temp_v9,&temp_v19);
+    nn_math_ARMv6_MTX34AddTranslateAsm(temp_v9,&temp_v21);
     renderCtxCallB(temp_v9);
     temp_v1 = asdTMTexTableEntryAt(0x2d,0x7d1);
     renderCtxCalculateStereoParallax(g_titleScene);

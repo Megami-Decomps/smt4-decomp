@@ -12,13 +12,13 @@ static inline void normalizeBasis(f32 *axis)
 }
 
 extern "C" {
-void FUN_002a81a8(ScaleMatrix *matrix, u32 object);
+void nn_math_ARMv6_MTX34InverseAsm(ScaleMatrix *matrix, u32 object);
 
 /* Extract translation and normalized basis columns, reversing the forward axis. */
 void FUN_0013afbc(u32 object, f32 *position, f32 *basis)
 {
     ScaleMatrix matrix;
-    FUN_002a81a8(&matrix, object);
+    nn_math_ARMv6_MTX34InverseAsm(&matrix, object);
     position[0] = matrix.values[0][3];
     position[1] = matrix.values[1][3];
     position[2] = matrix.values[2][3];

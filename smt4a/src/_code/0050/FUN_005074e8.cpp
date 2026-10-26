@@ -4,7 +4,7 @@
 
 extern "C" {
 SkeletonBufferBlock FUN_0045b4d0(SkeletonBufferCursor *cursor, u32 bytes, u32 alignment);
-void FUN_00199f84(SkeletonMatrix34 *destination, const SkeletonMatrix34 *source);
+void nn_math_ARMv6_MTX34InverseAsm(SkeletonMatrix34 *destination, const SkeletonMatrix34 *source);
 void FUN_00193c08(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance);
 
 SkeletonBufferBlock FUN_005074e8(SkeletonInstanceResource *resource, SkeletonInstanceBuffers *instance,
@@ -36,7 +36,7 @@ SkeletonBufferBlock FUN_005074e8(SkeletonInstanceResource *resource, SkeletonIns
     while (joint != end) {
         SkeletonJointResource *source = &resource->joints[index];
         *joint = source->id;
-        FUN_00199f84(&instance->localMatrices[index], &source->localMatrix);
+        nn_math_ARMv6_MTX34InverseAsm(&instance->localMatrices[index], &source->localMatrix);
         ++joint;
         ++index;
         if (source->flags & 0x70000)

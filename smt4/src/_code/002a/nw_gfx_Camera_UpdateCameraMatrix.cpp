@@ -26,7 +26,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int *_ZN2nw4math5MTX448IdentityEv(void);
-extern int FUN_002a81a8(int, int);
+extern int nn_math_ARMv6_MTX34InverseAsm(int, int);
 /* Supplied declaration required: FUN_002ac94c. */
 
 
@@ -95,7 +95,7 @@ void nw_gfx_Camera_UpdateCameraMatrix(int param_1)
     temp_v0 = FUN_002ac94c();
     (**(romwright_code **)(*piVar5 + 0xc))(piVar5,param_1 + 0x148,temp_v0,&temp_v41);
   }
-  temp_v1 = FUN_002a81a8(param_1 + 0x178,param_1 + 0x148);
+  temp_v1 = nn_math_ARMv6_MTX34InverseAsm(param_1 + 0x178,param_1 + 0x148);
   if (temp_v1 == 0) {
     puVar3 = (unsigned int *)FUN_002ac94c();
     temp_v0 = puVar3[1];

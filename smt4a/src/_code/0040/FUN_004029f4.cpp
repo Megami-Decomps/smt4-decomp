@@ -3,7 +3,7 @@
 extern "C" {
 
 void sysPlaySe(u32 seId);
-void FUN_0019de98(s32 screen, u32 color);
+void buttonHelpSetText(s32 screen, u32 color);
 s32 FUN_002ebce4(void);
 void screenStartOrClear(u32 screen, s32 clear);
 
@@ -45,7 +45,7 @@ void FUN_004029f4(ModeSwitcher *self, u32 mode, u8 subMode)
     case 0:
     case 1:
     case 8:
-        FUN_0019de98(0, fadeColor);
+        buttonHelpSetText(0, fadeColor);
         return;
     }
     sysPlaySe(se);

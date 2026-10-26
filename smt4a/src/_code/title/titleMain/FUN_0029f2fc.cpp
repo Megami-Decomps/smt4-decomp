@@ -48,7 +48,7 @@ int soundChannelRequestIfEnabled(...);
 
 int asdTMTexTableLoadTmx(int, int);
 int FUN_001517b4(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int asdTMTexLoadMainHeap(int, int);
 int slotSetRequest(...);
 int FUN_0022258c(...);
@@ -97,7 +97,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: dataTableGet. */
 extern unsigned int gameFlagIsSet(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: asdTMTexLoadMainHeap. */
 /* Supplied declaration required: slotSetRequest. */
 extern int bgmGetStateById(unsigned int);
@@ -483,7 +483,7 @@ LAB_0029fb00:
       temp_v6 = 2;
     }
     else {
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       puVar4[0x23] = 0x1d;
       gameFlagSetValue(0x81d, 1, 1);
       temp_v6 = gameFlagIsSet(0x81d);
@@ -582,7 +582,7 @@ LAB_0029fb00:
       dataTableGet(0x3a,0);
       temp_v5 = dataTableGetEntries();
       textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
-      FUN_0019de98(&temp_v13,0xf4f4f4ff);
+      buttonHelpSetText(&temp_v13,0xf4f4f4ff);
       if (*(char *)(puVar5 + 0xf) != '\0') {
         commonBgReset();
       }
@@ -703,7 +703,7 @@ LAB_0029fb00:
     dataTableGet(0x3a,0);
     temp_v5 = dataTableGetEntries();
     textFormatBuffer(&temp_v13,temp_v5 + temp_v7 * 100 + 0x14,&LAB_0029ff54);
-    FUN_0019de98(&temp_v13,0xf4f4f4ff);
+    buttonHelpSetText(&temp_v13,0xf4f4f4ff);
     if (((*(char *)((int)puVar4 + 0x3f) != '\0') || (temp_v5 = FUN_002e1a18(1), temp_v5 != 0)) ||
        (temp_v5 = padButtonIsPressed(0), temp_v5 != 0)) {
       puVar5 = DAT_00589170;

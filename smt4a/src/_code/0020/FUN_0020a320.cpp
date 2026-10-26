@@ -6,7 +6,7 @@
 extern "C" {
 
 int uiSpriteSetImageKeyframe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_0020ad6c(...);
 int FUN_002cc9e0(int, int);
 
@@ -15,7 +15,7 @@ extern unsigned int DAT_00573bcc; /* 0x573bcc */
 
 /* Supplied declaration required: btlGetMainState. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0020ad6c. */
 extern int objectApplyIfUnblocked(void);
 /* Supplied declaration required: FUN_002cc9e0. */
@@ -147,7 +147,7 @@ unsigned int FUN_0020a320(int param_1)
       temp_v0 = temp_v0 + 1;
     } while (temp_v0 < 6);
   }
-  FUN_0019de98(0,0xf4f4f4ff);
+  buttonHelpSetText(0,0xf4f4f4ff);
   return 1;
 }
 

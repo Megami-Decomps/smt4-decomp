@@ -33,7 +33,7 @@ extern f32 vec2GetSpeed(const void *animation);
 extern f32 jobGetScalarValue(void);
 extern SpriteInfo *asdTMTexTableEntryAt(u32, u32);
 extern void FUN_00164b5c(s32, s32, u32, s32, s32, s32);
-extern void FUN_0019de98(s32, u32);
+extern void buttonHelpSetText(s32, u32);
 extern s32 rangeGetMinimumLimit(SlotMenu *);
 extern s32 FUN_0031d174(SlotMenu *);
 extern void FUN_004ba354(SlotMenu *, s32, s32, s32, s32);
@@ -78,7 +78,7 @@ void FUN_004bade4(SlotMenu *menu)
             FUN_004ba354(menu, FUN_0031d174(menu), total, 0, 0x24);
             color = 0;
         }
-        FUN_0019de98(color, 0xf4f4f4ff);
+        buttonHelpSetText(color, 0xf4f4f4ff);
         efctSetSpeed(savedSpeed);
     }
 }

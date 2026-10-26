@@ -1,9 +1,14 @@
-/* NON_MATCHING: target/up vector copies are ldm/stm pairs here but ldr+ldrd in retail for the eye, the distance terms schedule differently, and the VFP constants are allocated differently */
+/* NON_MATCHING: 249 vs 255 rows; retail reorders the incoming eye/target registers, copies target/up with different ldm/ldr forms, schedules the distance terms differently and allocates the VFP constants differently. */
 #include "AsdSDK/Source/Gfx/Camera/AsdCamera.h"
 #include <math.h>
 
 using nw::math::MTX34;
 using nw::math::MTX44;
+
+static __inline void copyVector(AsdCameraVec3 *destination, const AsdCameraVec3 *source)
+{
+    *destination = *source;
+}
 
 extern "C" {
 void FUN_0014f0dc(void *owner);
@@ -22,12 +27,12 @@ void FUN_004f112c(void *owner, AsdCamera *camera, const AsdCameraVec3 *eye, cons
                   const AsdCameraVec3 *up, const AsdCameraVec3 *rotation)
 {
     if (rotation->z == 0.0f) {
-        FUN_0014f0dc(static_cast<u8 *>(owner) + 0x58);
+        FUN_0014f0dc(static_cast<u8 *>(owner) + 0x6c);
         return;
     }
-    camera->eye = *eye;
-    camera->target = *target;
-    camera->up = *up;
+    copyVector(&camera->eye, eye);
+    copyVector(&camera->target, target);
+    copyVector(&camera->up, up);
     camera->unk001 = 0;
     if ((camera->eye.x - camera->target.x) * (camera->eye.x - camera->target.x) +
             (camera->eye.y - camera->target.y) * (camera->eye.y - camera->target.y) +

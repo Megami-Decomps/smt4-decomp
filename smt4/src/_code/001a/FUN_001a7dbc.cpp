@@ -1,4 +1,4 @@
-/* NON_MATCHING: the two learned-bit set sequences (mode 0/3 and mode 1) are emitted in swapped forms (and/add/ldrb register assignment); slot is s8 (fixes the slot-store scheduling). */
+/* NON_MATCHING: mode 1's learned-bit set now matches (`(1 << n) | byte`); the mode 0/3 set still gets the and/ldrb registers swapped (retail and r2 / ldrb r0). Slot is s8 (fixes the slot-store scheduling). */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/GameDataBlocks.h"
@@ -130,7 +130,7 @@ void FUN_001a7dbc(UnitRecord *unit, s8 slot, u32 id, s32 mode)
             unit->resist[i] = copy.resist[i];
         unit->extra30 = copy.extra30;
         unit->unk601 = (static_cast<u32>(copy.flags) << 26) >> 28;
-        unit->learnedBits[record->learnIndex >> 3] |= 1 << (record->learnIndex & 7);
+        unit->learnedBits[record->learnIndex >> 3] = (1 << (record->learnIndex & 7)) | unit->learnedBits[record->learnIndex >> 3];
         break;
     }
     }

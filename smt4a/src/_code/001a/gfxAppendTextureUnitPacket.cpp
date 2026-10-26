@@ -1,4 +1,4 @@
-/* NON_MATCHING: command/default copies agree, but cursor/root register lifetimes give a three-register frame116 versus retail four-register frame112; O2 may change allocation. */
+/* NON_MATCHING: same structure and row count as retail (single `destination` result, VFP + core copy of the packet); retail hoists the defaults literal above the push and keeps `destination` in r4 (four-register frame112, six-register ldm for the tail words), armcc uses three registers (frame116). */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 extern "C" void FUN_001b4128(const void*, u32, u32);
@@ -43,15 +43,18 @@ extern "C" u32* gfxAppendTextureUnitPacket(void*, u32* destination, const AsdTex
         packet.format = texture->image.hardwareFormat;
         if (destination != NULL) {
             *reinterpret_cast<TextureCommandPacket*>(destination) = packet;
-            return destination + sizeof(packet) / sizeof(u32);
+            destination += sizeof(packet) / sizeof(u32);
+        } else {
+            FUN_001b4128(&packet, sizeof(packet), 1);
         }
     } else {
         packet = TextureCommandPacket();
         if (destination != NULL) {
             *reinterpret_cast<TextureCommandPacket*>(destination) = packet;
-            return destination + sizeof(packet) / sizeof(u32);
+            destination += sizeof(packet) / sizeof(u32);
+        } else {
+            FUN_001b4128(&packet, sizeof(packet), 1);
         }
     }
-    FUN_001b4128(&packet, sizeof(packet), 1);
-    return NULL;
+    return destination;
 }

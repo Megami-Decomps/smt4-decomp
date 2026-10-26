@@ -3,7 +3,7 @@
 extern "C" {
 s32 idIsAtLeast350(u32 id);
 s32 gameFlagEntryGetBit(u32 id, u32 flag);
-s32 FUN_001ada74(u32 id);
+s32 goalConditionsSatisfied(u32 id);
 
 // Test whether an unlocked, usable item exists in the selected display category.
 u32 itemCategoryHasUsableEntry(const void *work)
@@ -41,7 +41,7 @@ u32 itemCategoryHasUsableEntry(const void *work)
                 continue;
             }
         }
-        if (FUN_001ada74(id) != 0) {
+        if (goalConditionsSatisfied(id) != 0) {
             found = 1;
             break;
         }

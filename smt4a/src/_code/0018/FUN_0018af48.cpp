@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00199f84(float *, unsigned int);
+int nn_math_ARMv6_MTX34InverseAsm(float *, unsigned int);
 
 /* stack frame of param_3: 12 slot(s), 48 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-/* Supplied declaration required: FUN_00199f84. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34InverseAsm. */
 
 
 void FUN_0018af48(unsigned int param_1,unsigned int *param_2,float *param_3)
@@ -54,7 +54,7 @@ void FUN_0018af48(unsigned int param_1,unsigned int *param_2,float *param_3)
   float temp_v14;
   unsigned int temp_v15;
   
-  FUN_00199f84(&temp_v4,param_1);
+  nn_math_ARMv6_MTX34InverseAsm(&temp_v4,param_1);
   *param_2 = temp_v7;
   param_2[1] = temp_v11;
   param_2[2] = temp_v15;

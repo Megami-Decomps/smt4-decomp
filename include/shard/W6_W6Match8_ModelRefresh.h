@@ -46,6 +46,13 @@ struct ModelRefreshState {
     u8 nodesDirty;         /* 0xea */
     u8 stateDirty;         /* 0xeb */
     u8 textureDirty;       /* 0xec */
+
+    bool hasFlags(u32 mask) const
+    {
+        if ((mask & ~flags) == 0)
+            return true;
+        return false;
+    }
 };
 
 #endif

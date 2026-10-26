@@ -68,12 +68,13 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
     if (scene->selection.count == 0)
         return;
 
-    s32 first = FUN_0029e924(&scene->selection);
-    s32 visible = rangeLimitMin(&scene->selection);
+    struct { s32 first, visible; } range;
+    range.first = FUN_0029e924(&scene->selection);
+    range.visible = rangeLimitMin(&scene->selection);
     ComparisonMenuEntry *entries = scene->entries;
-    for (s32 row = 0; row < visible; ++row) {
+    for (s32 row = 0; row < range.visible; ++row) {
         if (scene->mode != 2 || flaggedEntryGetValueByState(&scene->selection) != row)
-            FUN_003a9df4(scene, row, 0, entries[first + row].value);
+            FUN_003a9df4(scene, row, 0, entries[range.first + row].value);
     }
     if (scene->selection.count > 0 && scene->mode == 2) {
         s32 selected = flaggedValueHolderGetTotal(&scene->selection);

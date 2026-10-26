@@ -15,7 +15,7 @@ int flagValueSub(...);
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int uiSpriteSetImageKeyframe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int campChangeState(...);
 int FUN_0021b274(...);
 int FUN_00228b04(int, int);
@@ -46,7 +46,7 @@ extern int g_camp; /* 0x57f108 */
 extern unsigned short ifTouchGetButtonHelpValue(void);
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0021b274. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -151,7 +151,7 @@ void FUN_003daf0c(int param_1)
           FUN_0031f208(0x10);
           FUN_0031f208(3);
         }
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         temp_v1 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v1;
         campChangeState(0x2b);

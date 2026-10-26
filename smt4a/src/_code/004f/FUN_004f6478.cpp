@@ -1,4 +1,3 @@
-/* NON_MATCHING: only r0/r1 swapped in the slot address computation (base load vs offset) */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 
@@ -29,7 +28,8 @@ s32 libc_strcmp(const char *a, const char *b);
 s32 FUN_004f6478(EffectBattleState *state)
 {
     btlGetMainState();
-    if (btlScriptUnitHasFlags() != 0) {
+    s32 hasFlags = btlScriptUnitHasFlags();
+    if (hasFlags != 0) {
         return -1;
     }
     s32 result = 30;

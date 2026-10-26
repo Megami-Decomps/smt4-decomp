@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the stores in source order with the loop unrolled by two; this build hoists the constants and runs a count-down loop (possible flag difference). */
+/* NON_MATCHING: retail keeps the stores in source order (unk004/unk008 as one stm) and unrolls the clearing loop by two; this build hoists the constants and does not unroll (the local slot pointer already restores the count-up loop). */
 #include "shard/W8_X20_Obj351878.h"
 
 extern "C" {
@@ -24,8 +24,9 @@ void FUN_00425e74(Obj351878 *obj)
     obj->unk2E8 = 0;
     obj->unk484 = 0;
     for (s32 i = 0; i < 8; i++) {
+        Obj351878Slot *slot = &obj->slots[i];
         obj->unk2EC[i] = 0;
-        obj->slots[i].unk00 = 0;
+        slot->unk00 = 0;
     }
     obj->unk488 = 0;
     obj->unk48C = 0;

@@ -6,7 +6,7 @@
 extern "C" {
 
 // Check whether this linked demon or any of its requirements is registered.
-u16 FUN_0029e9cc(u32 id)
+u16 FUN_0029e9cc(u16 id)
 {
     if (id > 0x500) {
         return 0;

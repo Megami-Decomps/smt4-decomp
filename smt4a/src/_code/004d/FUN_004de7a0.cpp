@@ -1,4 +1,4 @@
-/* NON_MATCHING: highest-score scans become pointer/countdown loops, and armcc hoists the score-array base ahead of rank selection. */
+/* NON_MATCHING: only the allocation inside the two highest-score scan loops differs (retail keeps the best score in r1 and the best index in r2; the build uses r2/r3 with the score temporary in r1). */
 #include "gamedata/RankedSelection.h"
 
 extern "C" {
@@ -11,7 +11,8 @@ static inline s32 selectHighestScore(const SelectionScoreWork *work, SelectionRe
     u32 highest = 0;
     s32 selected = -1;
     for (s32 index = 0; index < count; ++index) {
-        u32 score = work->scores[index].score;
+        const SelectionScore *entry = &work->scores[index];
+        u32 score = entry->score;
         if (score >= highest) {
             highest = score;
             selected = index;
@@ -26,20 +27,19 @@ static inline s32 selectHighestScore(const SelectionScoreWork *work, SelectionRe
 extern "C" s32 FUN_004de7a0(void *owner, const SelectionScoreWork *work, SelectionResult *results, s32 count)
 {
     s32 roll = lcgRandomRange(99);
+    s32 result = 0;
     if (count >= 3) {
-        if (roll < 30) {
-            return FUN_004e7b7c(owner, work, results, count, 3);
-        }
-        if (roll < 65) {
-            return FUN_004e7b7c(owner, work, results, count, 2);
-        }
-        return selectHighestScore(work, results, count);
+        if (roll < 30)
+            result = FUN_004e7b7c(owner, work, results, count, 3);
+        else if (roll < 65)
+            result = FUN_004e7b7c(owner, work, results, count, 2);
+        else
+            result = selectHighestScore(work, results, count);
+    } else if (count == 2) {
+        if (roll < 40)
+            result = FUN_004e7b7c(owner, work, results, count, 2);
+        else
+            result = selectHighestScore(work, results, count);
     }
-    if (count == 2) {
-        if (roll < 40) {
-            return FUN_004e7b7c(owner, work, results, count, 2);
-        }
-        return selectHighestScore(work, results, count);
-    }
-    return 0;
+    return result;
 }

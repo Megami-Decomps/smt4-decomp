@@ -1,22 +1,27 @@
-/* NON_MATCHING: formatter callback at 0x1008b9 has no function symbol; cannot invent a callback. */
-/* romwright 0.5.0 decompilation of FUN_002b23bc for reference (not compiled; its own view of the boundaries):
-
-unsigned int FUN_002b23bc(int param_1,int param_2,unsigned int param_3,unsigned int param_4)
-
-{
-  int local_18;
-  int local_14;
-  
-  local_14 = param_1;
-  if (param_2 != 0) {
-    local_14 = (param_1 + param_2) - 1;
-  }
-  local_18 = param_1;
-  FUN_002c683e(param_3,&local_18,param_4,&LAB_001008b9);
-  if (param_2 != 0) {
-    libcFormatAppendByte(0,&local_18);
-  }
-  return param_3;
-}
-*/
+/* NON_MATCHING: retail is C-runtime Thumb code built with different flags (pc-relative callback address via `ldr; add pc`, movs/pop {r2,r3,...} frame); source recovered, needs cflags (e.g. --apcs=/ropi) from Main. */
 #include "common.h"
+
+struct FormatBoundedOutput {
+    u8 *cursor;
+    u8 *end;
+};
+
+extern "C" {
+void formatWriteBoundedByte(u8 value, FormatBoundedOutput *output);
+u32 FUN_002c683e(u32 format, FormatBoundedOutput *output, u32 arguments, void (*writeByte)(u8, FormatBoundedOutput *));
+void libcFormatAppendByte(u8 value, u8 **cursor);
+
+/* Formats into a buffer of `size` bytes (a bounded snprintf) and terminates the string when there is room. */
+u32 FUN_002b23bc(u8 *buffer, s32 size, u32 format, u32 arguments)
+{
+    FormatBoundedOutput output;
+    output.cursor = buffer;
+    output.end = buffer;
+    if (size != 0)
+        output.end = buffer + size - 1;
+    FUN_002c683e(format, &output, arguments, formatWriteBoundedByte);
+    if (size != 0)
+        libcFormatAppendByte(0, &output.cursor);
+    return format;
+}
+}

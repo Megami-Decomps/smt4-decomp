@@ -111,7 +111,7 @@ s32 QuestCenterMainProcUpdate(u32 handle)
             }
             for (u32 i = 0; i < 3; i++) {
                 const QcStartSequence *row = &DAT_0044dbb0[i];
-                if (row->kind != kind || (row->area != -1 && row->area != g_qcMain.area)) {
+                if (row->kind != kind || (row->area != -1 && g_qcMain.area != row->area)) {
                     continue;
                 }
                 if (row->requiredFlag != 0) {

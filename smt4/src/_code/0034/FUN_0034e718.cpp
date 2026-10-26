@@ -46,8 +46,8 @@ extern "C" void FUN_0034e718()
                 stream->buffers[stream->writeIndex].data = data;
                 u32 samples = FUN_00360060(bytes, 1, stream->channels);
                 stream->submittedSamples = stream->submittedSamples + samples;
-                stream->buffers[stream->writeIndex].sampleCount = samples;
                 stream->buffers[stream->writeIndex].looping = 0;
+                stream->buffers[stream->writeIndex].sampleCount = samples;
                 FUN_001565e4(stream->voice, &stream->buffers[stream->writeIndex]);
                 ++stream->queued;
                 ++stream->writeIndex;

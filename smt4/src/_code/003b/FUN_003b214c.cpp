@@ -1,4 +1,4 @@
-/* NON_MATCHING: cached left-child successor restores the retail loop; four pointer comparison operands and one parent-right register differ. */
+/* NON_MATCHING: only the peeled first parent-right compare uses r2 in retail (the loop's own compare uses r1); the build uses r1 for both. */
 #include "common.h"
 
 struct ResourceTreeValue {
@@ -30,7 +30,7 @@ bool FUN_003b214c(ResourceTreeOwner *owner)
     ResourceReadinessTree *tree = &owner->tree;
     bool ready = true;
     ResourceTreeNode *node = tree->sentinel->left;
-    while (node != tree->sentinel) {
+    for (ResourceTreeNode *end = tree->sentinel; node != end; end = tree->sentinel) {
         if (!FUN_003afac0(node->value->resource)) {
             ready = false;
         }
@@ -42,9 +42,11 @@ bool FUN_003b214c(ResourceTreeOwner *owner)
             } while (successor);
         } else {
             ResourceTreeNode *parent = node->parent;
-            while (node == parent->right) {
+            ResourceTreeNode *right = parent->right;
+            while (node == right) {
                 node = parent;
                 parent = parent->parent;
+                right = parent->right;
             }
             if (node->right != parent) {
                 node = parent;

@@ -61,7 +61,7 @@ unsigned int FUN_002a0b58(void)
         iVar2 = FUN_002a4894(iVar2 + 0xf0);
         FUN_00187180(0x3a,1);
         iVar4 = FUN_00192798();
-        FUN_0019de98(iVar4 + (iVar3 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
+        buttonHelpSetText(iVar4 + (iVar3 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
         func_0x0024b0e8();
         uVar8 = *(unsigned int *)(iVar6 + 0x154);
         FUN_00275bc8(uVar8,*(unsigned int *)(iVar6 + 0x158));
@@ -212,7 +212,7 @@ code_r0x002a0ee4:
         iVar2 = FUN_002a4894(iVar2 + 0xf0);
         FUN_00187180(0x3a,1);
         iVar3 = FUN_00192798();
-        FUN_0019de98(iVar3 + (iVar6 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
+        buttonHelpSetText(iVar3 + (iVar6 + iVar2) * 0x94 + 0x14,0xf4f4f4ff);
         func_0x0024b0e8();
       }
       else {
@@ -228,7 +228,7 @@ code_r0x002a0ee4:
             iVar6 = FUN_002a4894(iVar6 + 0xf0);
             FUN_00187180(0x3a,1);
             iVar3 = FUN_00192798();
-            FUN_0019de98(iVar3 + (iVar2 + iVar6) * 0x94 + 0x14,0xf4f4f4ff);
+            buttonHelpSetText(iVar3 + (iVar2 + iVar6) * 0x94 + 0x14,0xf4f4f4ff);
             func_0x0024b0e8();
             return 0;
           }

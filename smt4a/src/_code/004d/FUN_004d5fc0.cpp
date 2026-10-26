@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of the predicated orr/bic pair in case 2 differs (retail emits orrne before biceq). */
 #include "battle/btlCamera.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 
@@ -36,11 +35,12 @@ void FUN_004d5fc0(CameraDebugMenu *menu, u32 unused, u32 index)
             g_btlCamera->flags &= ~0x40;
         return;
     case 2:
-        if (!listBoxItemHasOwner(menu->list)) {
+        if (listBoxItemHasOwner(menu->list))
+            g_btlCamera->flags |= 0x80;
+        else {
             g_btlCamera->flags &= ~0x80;
             return;
         }
-        g_btlCamera->flags |= 0x80;
         return;
     case 3:
         DAT_0057150c = *asdListBoxGetFloatValuePtr(menu->list, index);

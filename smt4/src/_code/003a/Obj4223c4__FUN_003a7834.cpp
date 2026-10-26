@@ -1,0 +1,54 @@
+#include "common.h"
+#include "classes/Obj4223c4.h"
+#include "status/StatusCamera.h"
+
+extern "C" {
+
+typedef struct Cursor {
+    /* 0x00 */ u8 unk00[0x8A];
+    /* 0x8A */ s8 enabled;
+} Cursor;
+
+typedef struct Pair {
+    s32 first;
+    s32 second;
+} Pair;
+
+typedef struct Menu {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ Pair state;
+    /* 0x1C */ u8 unk1C[0xAC];
+    /* 0xC8 */ u8 layout[0x34];
+    /* 0xFC */ Cursor cursor;
+} Menu;
+
+s8 uiSpriteGetCompletionState(const Cursor *cursor);
+int buttonHelpIsNotActive(void);
+int pointConvertToFloat(void *layout, u32 a, u32 b);
+int FUN_0029d960(Menu *menu);
+int FUN_002b8ee0(Cursor *cursor, int arg);
+u32 vec2GetYInt(Cursor *cursor);
+u32 vec2GetXInt(Cursor *cursor);
+
+/* Refreshes the menu layout from its cursor; if the cursor is enabled and buttonHelpIsNotActive allows it, switches the menu to state (2, 0) and refreshes again. */
+}
+
+void Obj4223c4::FUN_003a7834()
+{
+    Menu * menu = reinterpret_cast<Menu *>(this);
+    Cursor *cursor = &menu->cursor;
+    u32 width;
+    u32 height;
+
+    FUN_002b8ee0(cursor, 0);
+    width = vec2GetYInt(cursor);
+    height = vec2GetXInt(cursor);
+    pointConvertToFloat(menu->layout, height, width);
+    if (uiSpriteGetCompletionState(cursor) != 0 && buttonHelpIsNotActive() != 0) {
+        FUN_002a0cc8(0);
+        menu->state.first = 2;
+        menu->state.second = 0;
+        pointConvertToFloat(menu->layout, 0, 0);
+        FUN_0029d960(menu);
+    }
+}

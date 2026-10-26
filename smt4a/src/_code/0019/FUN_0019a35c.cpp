@@ -1,11 +1,8 @@
-/* NON_MATCHING: retail is an ARM svc #9 system-call veneer; inline assembly and __svc are forbidden for this assignment. */
-/* romwright 0.5.0 decompilation of FUN_0019a35c for reference (not compiled; its own view of the boundaries):
+/* NON_MATCHING: the SDK wrapper is hand-written (svc 9; bx lr); the __svc intrinsic call compiles with push {r4, lr}/pop {r4, pc} around the svc */
+#include "nn/svc.h"
 
-void FUN_0019a35c(void)
-
+/* Ends the calling thread. */
+extern "C" void FUN_0019a35c(void)
 {
-  software_interrupt(9);
-  return;
+    nn::svc::ExitThread();
 }
-*/
-#include "common.h"

@@ -7,9 +7,14 @@ extern "C" void FUN_001a6fbc(BasisScaleTransform *transform)
 {
     for (s32 column = 0; column < 3; ++column) {
         BasisScaleVector *axis = &transform->normalized[column];
-        axis->x = transform->basis[0][column];
-        axis->y = transform->basis[1][column];
-        axis->z = transform->basis[2][column];
+        const f32 *basisColumn = &transform->basis[0][column];
+        f32 *out = &transform->normalized[column].x;
+        f32 basisX = basisColumn[0];
+        f32 basisY = basisColumn[3];
+        f32 basisZ = basisColumn[6];
+        out[0] = basisX;
+        out[1] = basisY;
+        out[2] = basisZ;
         f32 x = axis->x;
         if (x == 0.0f && axis->y == 0.0f && axis->z == 0.0f)
             return;

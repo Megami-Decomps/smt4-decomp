@@ -1,4 +1,4 @@
-/* NON_MATCHING: the padding words are now stored as constants (stm) and the saved-register set matches retail; the global/cursor pointers are allocated to different registers (retail ip/r4, build r4/r5). */
+/* NON_MATCHING: Retail mov r7, #0 differs from recovered mov r8, #0. */
 #include "common.h"
 
 struct CommandBufferStateView {
@@ -20,11 +20,6 @@ struct GfxContextView {
     u32 unk16C; // 0x16C
 };
 
-struct CommandPaddingView {
-    u32 unk00; // 0x00
-    u32 unk04; // 0x04
-};
-
 extern "C" {
 extern GfxContextView g_asdGfxContext;
 extern u32* g_commandBufferCursor;
@@ -43,9 +38,8 @@ void FUN_001376d8(u32* commandOffset, u32* commandSize,
 
     if ((usedBytes & 8) != 0 &&
         reinterpret_cast<u32>(cursor) < g_commandBufferEnd) {
-        CommandPaddingView* padding = reinterpret_cast<CommandPaddingView*>(cursor);
-        padding->unk00 = 0;
-        padding->unk04 = 0x0008025E;
+        cursor[0] = 0;
+        cursor[1] = 0x0008025E;
         g_commandBufferCursor = cursor + 2;
     }
 

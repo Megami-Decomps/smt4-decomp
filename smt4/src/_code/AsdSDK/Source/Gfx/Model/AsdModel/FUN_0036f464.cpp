@@ -20,7 +20,7 @@ struct ModelResource {
     u32 unk24;
     s32 materialCount;      // 0x28
     u32 materialOffset;     // 0x2c
-    s32 shaderCount;        // 0x30
+    u32 shaderCount;        // 0x30
     u32 shaderOffset;       // 0x34
     u32 runtimeSet;         // 0x38
     void* runtimeCache;     // 0x3c
@@ -78,7 +78,7 @@ u32 FUN_0036f464(Allocator* allocator, ModelResource* resource, u32 unused, s32 
 
     if (allocator == NULL) allocator = DAT_00471c40;
     res->allocator = allocator;
-    for (s32 i = 0; i < res->shaderCount; i++) {
+    for (u32 i = 0; i < res->shaderCount; i++) {
         reinterpret_cast<ModelResource**>(relocate(res, res->shaderOffset, 0x34))[i] = resource;
     }
 

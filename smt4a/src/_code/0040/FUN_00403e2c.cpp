@@ -34,7 +34,7 @@ void FUN_00163aa4(void *scroll, f32 amount);
 s32 eventQueueAddUniqueIfValid(u32 event);
 void uiSpriteSetKeyframe(void *sprite, s32 key, s32 arg);
 void uiSpriteSetImageKeyframe(void *sprite, s32 key, s32 arg);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void FUN_00212724(void);
 void FUN_00228b04(void *list, s32 arg);
 void useCounterStart(void);
@@ -84,7 +84,7 @@ void FUN_00403e2c(ListMenu *menu)
         FUN_0031f208(52);
         FUN_0031f208(27);
         useCounterStart();
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         eventQueueAddUniqueIfValid(0x0100020E);
         FUN_004029f4(menu, 8, 0);
     }

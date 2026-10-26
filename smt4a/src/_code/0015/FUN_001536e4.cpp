@@ -32,7 +32,7 @@ void FUN_001536e4(void *owner)
                 return;
             }
             value -= (value / static_cast<f32>(channel.rampFrames)) *
-                     static_cast<f32>(channel.frame - (channel.rampFrames + channel.holdFrames));
+                     static_cast<f32>(channel.frame - (channel.holdFrames + channel.rampFrames));
         }
         channel.value = value;
         ++channel.frame;

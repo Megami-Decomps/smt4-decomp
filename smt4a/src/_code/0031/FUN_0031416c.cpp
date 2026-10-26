@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016b034(unsigned int, int);
+int itemGroupHasEnabledItem(unsigned int, int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_00235bfc(int);
@@ -46,7 +46,7 @@ extern float DAT_00610af4; /* 0x610af4 */
 extern float DAT_00610af8; /* 0x610af8 */
 extern float DAT_00610afc; /* 0x610afc */
 
-/* Supplied declaration required: FUN_0016b034. */
+/* Supplied declaration required: itemGroupHasEnabledItem. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_00235bfc. */
@@ -96,7 +96,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
     *(unsigned int *)(temp_v1 + 0x48) = 0x3da3d70a;
     *(unsigned int *)(temp_v1 + 0x4c) = 0xbcf5c28f;
     *(unsigned int *)(temp_v1 + 0x50) = 0xbd23d70a;
-    FUN_0016b034(temp_v2,temp_v3);
+    itemGroupHasEnabledItem(temp_v2,temp_v3);
   }
   else {
     temp_v5 = (int)DAT_00610a78;
@@ -120,7 +120,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
     *(float *)(temp_v1 + 0x48) = temp_v6;
     *(unsigned int *)(temp_v1 + 0x4c) = in_s1;
     *(float *)(temp_v1 + 0x50) = temp_v7;
-    FUN_0016b034(temp_v2,temp_v3);
+    itemGroupHasEnabledItem(temp_v2,temp_v3);
   }
   temp_v0 = resourceNameGroupFindIndex(temp_v2,&LAB_00314534);
   temp_v3 = (int)temp_v0;
@@ -138,7 +138,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
     *(unsigned char *)(temp_v1 + 0x45) = 0xce;
     *(unsigned char *)(temp_v1 + 0x46) = 0x9e;
     *(unsigned char *)(temp_v1 + 0x47) = 0xff;
-    FUN_0016b034(temp_v2,temp_v3);
+    itemGroupHasEnabledItem(temp_v2,temp_v3);
   }
   else {
     temp_v5 = (int)DAT_00610aa8;
@@ -159,7 +159,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
     *(char *)(temp_v1 + 0x45) = (char)temp_v4;
     *(char *)(temp_v1 + 0x46) = (char)temp_v5;
     *(unsigned char *)(temp_v1 + 0x47) = 0xff;
-    FUN_0016b034(temp_v2,temp_v3);
+    itemGroupHasEnabledItem(temp_v2,temp_v3);
   }
   temp_v0 = resourceNameGroupFindIndex(temp_v2,&LAB_00314544);
   temp_v1 = (int)temp_v0;
@@ -181,7 +181,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
       *(float *)(temp_v3 + 0x48) = temp_v6;
       *(unsigned int *)(temp_v3 + 0x4c) = in_s1;
       *(float *)(temp_v3 + 0x50) = temp_v7;
-      FUN_0016b034(temp_v2,temp_v1);
+      itemGroupHasEnabledItem(temp_v2,temp_v1);
     }
     else {
       temp_v5 = (int)DAT_00610ad8;
@@ -205,7 +205,7 @@ void FUN_0031416c(int param_1,int param_2,int param_3)
       *(float *)(temp_v3 + 0x48) = temp_v6;
       *(unsigned int *)(temp_v3 + 0x4c) = in_s1;
       *(float *)(temp_v3 + 0x50) = temp_v7;
-      FUN_0016b034(temp_v2,temp_v1);
+      itemGroupHasEnabledItem(temp_v2,temp_v1);
     }
   }
   FUN_00235bfc(0);

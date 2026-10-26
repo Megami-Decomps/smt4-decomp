@@ -1,4 +1,4 @@
-/* NON_MATCHING: texture-resource field addressing and scan/copy register scheduling differ. */
+/* NON_MATCHING: only the prologue differs: retail loads the TXOB magic before the size guard (build: conditionally after it) and keeps the copy temporaries in r0 (build: r2). */
 #include "test/MotouchiTexture.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -13,7 +13,7 @@ void FUN_0017fa3c(MotouchiTexture *texture, const u32 *data, u32 size)
     texture->target = 0xde1;
     texture->unk08 = 0;
     texture->unk0c = 0;
-    for (u32 offset = 0; offset < size; offset += sizeof(u32), ++data) {
+    for (u32 offset = 0; size > offset; offset += sizeof(u32), ++data) {
         if (*data != 0x424f5854)
             continue;
         const MotouchiTextureResource *resource = reinterpret_cast<const MotouchiTextureResource *>(data);

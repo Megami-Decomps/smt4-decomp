@@ -101,8 +101,8 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     resultReportIfFailed(thread, DAT_0044d0f8.threadStack, 0x1000);
     u32 argument = 0;
     ThreadFunctorTable table;
-    table.argumentSize = 4;
     table.copyArgument = FUN_00123c88;
+    table.argumentSize = 4;
     table.destroyArgument = FUN_00123cb4;
     table.invoke = FUN_00123ca4;
     s32 result = FUN_002bcc60(DAT_0044d128, &table, FUN_0034e718, &argument,

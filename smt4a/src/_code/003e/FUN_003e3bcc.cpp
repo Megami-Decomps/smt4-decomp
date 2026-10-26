@@ -6,7 +6,7 @@ extern "C" {
 
 int sysPlaySe(...);
 int FUN_00180118(unsigned int);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_0022e774(void);
 int FUN_0023b45c(...);
 int scrScriptProcessStartEntry(...);
@@ -60,7 +60,7 @@ extern unsigned char LAB_003e400c; /* 0x3e400c */
 
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00180118. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int slotRecordFindById(unsigned short);
 extern unsigned int *gameGetSlotTable(void);
 extern int scrRunOpcodesStub(unsigned int);
@@ -259,7 +259,7 @@ void FUN_003e3bcc(fn_003e3bcc_arg0 *param_1)
     FUN_003343f0(0);
     FUN_00333dc8(0);
     FUN_002c8538(0);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     temp_v0 = 99;
   }
   else {

@@ -1,4 +1,5 @@
-/* NON_MATCHING: Canonical vector fields use VFP zero stores; retail clears weights redundantly, and allocation/pointer scheduling differs. */
+/* NON_MATCHING: only scheduling differs: the initial-parameters pointer add lands in r2 instead of r1 and `mov fp, #0` is hoisted above the pointer stores. */
+#include <string.h>
 #include "shard/W5_W5Match2_EffectBehaviorQuery.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Effect/EffectBehaviorBlock.h"
@@ -14,14 +15,16 @@ EffectBehaviorBlock *FUN_002b2d74(s32 type, s32 count, const EffectBehaviorParam
     s32 parameterSize = DAT_005c1d60[type].storage.parameterSize;
     s32 valueCount = count * (source->rows * source->columns) + count;
     s32 valueBytes = valueCount * 0x28;
-    s32 size = DAT_005c1d60[type].storage.elementSize * count + valueBytes + parameterSize * 2 + 0x30;
+    s32 elementBytes = DAT_005c1d60[type].storage.elementSize * count;
+    s32 size = elementBytes + valueBytes + parameterSize * 2 + 0x30;
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effBehavior.cpp", 0x1093);
     EffectBehaviorBlock *behavior = (EffectBehaviorBlock *)memAlloc(0x10000, 0x100, 0, size, 0x10, 1);
     u8 *values = (u8 *)(behavior + 1);
     EffectBehaviorParameters *parameters = (EffectBehaviorParameters *)(values + valueBytes);
+    EffectBehaviorParameters *initialParameters = (EffectBehaviorParameters *)((u8 *)parameters + parameterSize);
     behavior->elements = values;
-    behavior->initialParameters = (EffectBehaviorParameters *)((u8 *)parameters + parameterSize);
-    behavior->workspace = (u8 *)behavior->initialParameters + parameterSize;
+    behavior->initialParameters = initialParameters;
+    behavior->workspace = (u8 *)initialParameters + parameterSize;
     behavior->parameters = parameters;
     behavior->type = type;
     behavior->count = count;
@@ -33,13 +36,9 @@ EffectBehaviorBlock *FUN_002b2d74(s32 type, s32 count, const EffectBehaviorParam
     rt_memcpy(parameters, source, parameterSize);
     rt_memcpy(behavior->initialParameters, source, parameterSize);
     parameters = behavior->parameters;
-    parameters->vectors[0].x = 0.0f;
-    parameters->vectors[0].y = 0.0f;
-    parameters->vectors[0].z = 0.0f;
+    memset(&parameters->vectors[0], 0, sizeof(EffectBehaviorVector));
     parameters->vectors[0].w = 1.0f;
-    parameters->vectors[1].x = 0.0f;
-    parameters->vectors[1].y = 0.0f;
-    parameters->vectors[1].z = 0.0f;
+    memset(&parameters->vectors[1], 0, sizeof(EffectBehaviorVector));
     parameters->vectors[1].w = 1.0f;
     if (parameters->enabled != 0) {
         behavior->flags |= 1;

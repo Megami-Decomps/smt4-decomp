@@ -1,292 +1,231 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d3df0` (_code @ 0x4d3df0, 0x83c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: structure, jump table and callees match; only the 64-bit flag-mask tests/updates differ in register choice and pair-load form (ldm/ldrd/ldr vs retail), and the case 10/11 toggles store the flag words in a different order. */
+#include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
-#include "romwright_types.h"
-#include "AsdSDK/Source/Util/AsdListHelpers.h"
-#include "code/Code0031_Smt4a.h"
+#include "gamedata/BattleUnitSkills.h"
+#include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "shard/X14_BtlUiClose.h"
+#include "battle/btlDebug.h"
 
-extern "C" {
-
-int asdListBoxSetIntItem(...);
-int FUN_0031f0f4(...);
-int asdListBoxSetToggleItem(...);
-int asdListBoxSetFloatItem(...);
-int btlSlotSetStoreValue(...);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned int DAT_00571618; /* 0x571618 */
-extern unsigned int DAT_0057161c; /* 0x57161c */
-extern unsigned int DAT_00571628; /* 0x571628 */
-extern unsigned int DAT_0057162c; /* 0x57162c */
-extern unsigned int DAT_00571630; /* 0x571630 */
-extern unsigned int DAT_00571634; /* 0x571634 */
-
-/* Supplied declaration required: btlGetMainState. */
-extern unsigned int *asdListBoxGetIntValuePtr(unsigned int, unsigned int);
-/* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: FUN_0031f0f4. */
-extern int listBoxItemHasOwner(unsigned int, unsigned int);
-/* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: asdListBoxSetFloatItem. */
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-extern unsigned int *FUN_003e83b4(unsigned int, unsigned int, unsigned int);
-extern unsigned int btlFindEntryValue(int, unsigned int);
-/* Supplied declaration required: btlSlotSetStoreValue. */
-
-
-void FUN_004d3df0(int param_1,unsigned int param_2)
-
-{
-/* irregular: 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  unsigned int *puVar3;
-  unsigned int temp_v1;
-  int temp_v2;
-  unsigned int *puVar6;
-  unsigned int *puVar7;
-  unsigned int temp_v3;
-  
-  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
-  puVar2 = (unsigned int *)FUN_003e83b4(param_2,*(unsigned int *)(param_1 + 0x1c),1);
-  puVar7 = (unsigned int *)0x0;
-  if (puVar2 != (unsigned int *)0x0) {
-    puVar7 = puVar2 + 0x96;
-  }
-  switch(temp_v0) {
-  case 0:
-    puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    *(unsigned int *)(param_1 + 0x1c) = *puVar6;
-    temp_v0 = reinterpret_cast<int>(btlGetMainState());
-    puVar2 = (unsigned int *)FUN_003e83b4(temp_v0,*(unsigned int *)(param_1 + 0x1c),1);
-    if (puVar2 != (unsigned int *)0x0) {
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),1,puVar2[0x96],1,9999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),2,puVar2[0x97],1,9999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),3,puVar2[0x98],0,9999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),4,puVar2[0x99],1,9999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),5,(int)(short)puVar2[0x9a],1,999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),6,(int)*(short *)((int)puVar2 + 0x26a),1,999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),7,(int)(short)puVar2[0x9b],1,999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,(int)*(short *)((int)puVar2 + 0x26e),1,999,0);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),9,(int)(short)puVar2[0x9c],1,999,0);
-      asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),10,
-                   (DAT_00571628 & *puVar2) != 0 || (puVar2[1] & DAT_0057162c) != 0);
-      asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xb,
-                   (*puVar2 & DAT_00571630) != 0 || (puVar2[1] & DAT_00571634) != 0);
-      if (!((*puVar2 & DAT_00571618) == 0 && (DAT_0057161c & puVar2[1]) == 0)) {
-        temp_v0 = FUN_0031cfd0(*(unsigned short *)((int)puVar2 + 0x166));
-        temp_v3 = *(unsigned int *)(param_1 + 0x10);
-      }
-      else {
-        temp_v3 = *(unsigned int *)(param_1 + 0x10);
-        temp_v0 = 0;
-      }
-      asdListBoxSetIntItem(temp_v3,0xc,temp_v0,0,100,0);
-      if ((-1 < (short)puVar2[2]) &&
-         ((*puVar2 & DAT_00571618) != 0 || (puVar2[1] & DAT_0057161c) != 0)) {
-        reinterpret_cast<int>(btlGetMainState());
-        asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xd,0xffffffce,0x32);
-        asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xe,0xffffffce,0x32);
-      }
-      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],7);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x10,temp_v0,0xfffffffd,3,0);
-      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],8);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x11,temp_v0,0xfffffffd,3,0);
-      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],10);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x12,temp_v0,0xfffffffd,3,0);
-      temp_v0 = btlFindEntryValue((int)(short)puVar2[2],9);
-      asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x13,temp_v0,0xfffffffd,3,0);
-    }
-    break;
-  case 1:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      temp_v1 = *puVar3;
-      *puVar7 = temp_v1;
-      if (puVar2[0xfe] != 0) {
-        *(short *)(puVar2[0xfe] + 0x2a) = (short)temp_v1;
-      }
-      if (puVar2[0xff] != 0) {
-        *(short *)(puVar2[0xff] + 0x2a) = (short)*puVar7;
-      }
-      if (puVar2[0x100] != 0) {
-        *(short *)(puVar2[0x100] + 0x2a) = (short)*puVar7;
-      }
-      return;
-    }
-    break;
-  case 2:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar2 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      puVar7[1] = *puVar2;
-      return;
-    }
-    break;
-  case 3:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar3 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      temp_v1 = *puVar3;
-      puVar7[2] = temp_v1;
-      if (puVar2[0xfe] != 0) {
-        *(short *)(puVar2[0xfe] + 0x2c) = (short)temp_v1;
-      }
-      if (puVar2[0xff] != 0) {
-        *(short *)(puVar2[0xff] + 0x2c) = (short)puVar7[2];
-      }
-      if (puVar2[0x100] != 0) {
-        *(short *)(puVar2[0x100] + 0x2c) = (short)puVar7[2];
-      }
-      return;
-    }
-    break;
-  case 4:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar2 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      puVar7[3] = *puVar2;
-      return;
-    }
-    break;
-  case 5:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(short *)(puVar7 + 4) = (short)*puVar6;
-      return;
-    }
-    break;
-  case 6:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(short *)((int)puVar7 + 0x12) = (short)*puVar6;
-      return;
-    }
-    break;
-  case 7:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(short *)(puVar7 + 5) = (short)*puVar6;
-      return;
-    }
-    break;
-  case 8:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(short *)((int)puVar7 + 0x16) = (short)*puVar6;
-      return;
-    }
-    break;
-  case 9:
-    if (puVar7 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(short *)(puVar7 + 6) = (short)*puVar6;
-      return;
-    }
-    break;
-  case 10:
-    if (puVar2 != (unsigned int *)0x0) {
-      temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      temp_v1 = DAT_0057162c;
-      if (temp_v2 != 0) {
-        temp_v1 = DAT_00571628 | *puVar2;
-        puVar2[1] = DAT_0057162c | puVar2[1];
-        *puVar2 = temp_v1;
-        return;
-      }
-      *puVar2 = *puVar2 & ~DAT_00571628;
-      temp_v1 = puVar2[1] & ~temp_v1;
-      puVar2[1] = temp_v1;
-      return;
-    }
-    break;
-  case 0xb:
-    if (puVar2 != (unsigned int *)0x0) {
-      temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      temp_v1 = DAT_00571634;
-      if (temp_v2 == 0) {
-        temp_v1 = ~DAT_00571634;
-        *puVar2 = *puVar2 & ~DAT_00571630;
-        puVar2[1] = puVar2[1] & temp_v1;
-        return;
-      }
-      *puVar2 = DAT_00571630 | *puVar2;
-      temp_v1 = puVar2[1] | temp_v1;
-      puVar2[1] = temp_v1;
-      return;
-    }
-    break;
-  case 0xc:
-    if ((puVar2 != (unsigned int *)0x0) &&
-       ((puVar2[1] & DAT_0057161c) != 0 || (DAT_00571618 & *puVar2) != 0)) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      FUN_0031f0f4(*(unsigned short *)((int)puVar2 + 0x166),*puVar6);
-      return;
-    }
-    break;
-  case 0xd:
-    if (((puVar2 != (unsigned int *)0x0) && (-1 < (short)puVar2[2])) &&
-       ((puVar2[1] & DAT_0057161c) != 0 || (*puVar2 & DAT_00571618) != 0)) {
-      temp_v2 = reinterpret_cast<int>(btlGetMainState());
-      temp_v1 = puVar2[2];
-      temp_v2 = *(int *)(temp_v2 + 0x1ed4);
-      puVar6 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(unsigned int *)(temp_v2 + (short)temp_v1 * 0x1d0 + 0x1b0) = *puVar6;
-      return;
-    }
-    break;
-  case 0xe:
-    if (((puVar2 != (unsigned int *)0x0) && (-1 < (short)puVar2[2])) &&
-       ((DAT_0057161c & puVar2[1]) != 0 || (*puVar2 & DAT_00571618) != 0)) {
-      temp_v2 = reinterpret_cast<int>(btlGetMainState());
-      temp_v1 = puVar2[2];
-      temp_v2 = *(int *)(temp_v2 + 0x1ed4);
-      puVar6 = (unsigned int *)asdListBoxGetFloatValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      *(unsigned int *)(temp_v2 + (short)temp_v1 * 0x1d0 + 0x1b4) = *puVar6;
-      return;
-    }
-    break;
-  case 0xf:
-    if (puVar2 != (unsigned int *)0x0) {
-      puVar7 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      puVar2[0x57] = *puVar7;
-      return;
-    }
-    break;
-  case 0x10:
-    if (puVar2 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),7,*puVar6);
-      return;
-    }
-    break;
-  case 0x11:
-    if (puVar2 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),8,*puVar6);
-      return;
-    }
-    break;
-  case 0x12:
-    if (puVar2 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),10,*puVar6);
-      return;
-    }
-    break;
-  case 0x13:
-    if (puVar2 != (unsigned int *)0x0) {
-      puVar6 = (unsigned int *)asdListBoxGetIntValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v0);
-      temp_v0 = *puVar6;
-      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),9,temp_v0);
-      btlSlotSetStoreValue((int)*(short *)((int)puVar2 + 0x6e),0xb,temp_v0);
-      return;
-    }
-  }
-  return;
+namespace {
+// The battle debug editor's work area.
+struct CombatantEditor {
+    u8 unk00[0x10];
+    u32 listBox;       // 0x10
+    u8 unk14[8];
+    u32 entryIndex;    // 0x1c
+};
+// The combatant's vitals and parameters, which start at its hp.
+struct CombatantVitals {
+    s32 hp;
+    s32 maxHp;
+    s32 mp;
+    s32 maxMp;
+    s16 parameter[5];
+};
+// The vitals the unit records mirror.
+struct UnitRecordVitals {
+    u8 unk00[0x2a];
+    s16 hp;
+    s16 mp;
+};
+// A word of the combatant's block that the editor sets directly.
+struct CombatantEditableWord {
+    u8 unk00[0x15c];
+    s32 value;
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern BtlUiCloseState DAT_005715f8;
+u32 asdListBoxGetSelectedItemId(u32 listBox);
+s32 *asdListBoxGetIntValuePtr(u32 listBox, u32 id);
+f32 *asdListBoxGetFloatValuePtr(u32 listBox, u32 id);
+s32 listBoxItemHasOwner(u32 listBox, u32 id);
+void asdListBoxSetToggleItem(u32 listBox, s32 id, s32 value);
+void asdListBoxSetFloatItem(u32 listBox, u32 id, s32 minimum, s32 maximum, f32 value);
+BtlCombatantEntryA *FUN_003e83b4(BtlMainStateA *state, s32 index, s32 matches);
+u16 FUN_0031cfd0(u32 index);
+s32 FUN_0031f0f4(u32 index, s32 value);
+s32 btlFindEntryValue(s32 id, u32 index);
+void btlSlotSetStoreValue(u32 key, s32 index, u32 value);
+
+// Apply the edited item of the combatant editor to the selected combatant, or refill the list when the selection changes.
+void FUN_004d3df0(CombatantEditor *editor, BtlMainStateA *battle)
+{
+    u32 selected = asdListBoxGetSelectedItemId(editor->listBox);
+    BtlCombatantEntryA *entry = FUN_003e83b4(battle, editor->entryIndex, 1);
+    CombatantVitals *vitals = NULL;
+    if (entry != NULL)
+        vitals = reinterpret_cast<CombatantVitals *>(&entry->hp);
+    switch (selected) {
+    case 0:
+        editor->entryIndex = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+        entry = FUN_003e83b4(btlGetMainState(), editor->entryIndex, 1);
+        if (entry != NULL) {
+            vitals = reinterpret_cast<CombatantVitals *>(&entry->hp);
+            asdListBoxSetIntItem(editor->listBox, 1, vitals->hp, 1, 9999, 0);
+            asdListBoxSetIntItem(editor->listBox, 2, vitals->maxHp, 1, 9999, 0);
+            asdListBoxSetIntItem(editor->listBox, 3, vitals->mp, 0, 9999, 0);
+            asdListBoxSetIntItem(editor->listBox, 4, vitals->maxMp, 1, 9999, 0);
+            asdListBoxSetIntItem(editor->listBox, 5, vitals->parameter[0], 1, 999, 0);
+            asdListBoxSetIntItem(editor->listBox, 6, vitals->parameter[1], 1, 999, 0);
+            asdListBoxSetIntItem(editor->listBox, 7, vitals->parameter[2], 1, 999, 0);
+            asdListBoxSetIntItem(editor->listBox, 8, vitals->parameter[3], 1, 999, 0);
+            asdListBoxSetIntItem(editor->listBox, 9, vitals->parameter[4], 1, 999, 0);
+            asdListBoxSetToggleItem(editor->listBox, 10, (entry->flags & DAT_005715f8.toggleMaskA) != 0);
+            asdListBoxSetToggleItem(editor->listBox, 11, (entry->flags & DAT_005715f8.toggleMaskB) != 0);
+            if ((entry->flags & DAT_005715f8.editableMask) != 0)
+                asdListBoxSetIntItem(editor->listBox, 12, FUN_0031cfd0(entry->id), 0, 100, 0);
+            else
+                asdListBoxSetIntItem(editor->listBox, 12, 0, 0, 100, 0);
+            if (entry->unitIndex >= 0 && (DAT_005715f8.editableMask & entry->flags) != 0) {
+                BattleRosterRecordA *record = &btlGetMainState()->roster[entry->unitIndex];
+                asdListBoxSetFloatItem(editor->listBox, 13, -50, 50, record->spriteOffset.x);
+                asdListBoxSetFloatItem(editor->listBox, 14, -50, 50, record->spriteOffset.y);
+            }
+            asdListBoxSetIntItem(editor->listBox, 16, btlFindEntryValue(entry->unitIndex, 7), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 17, btlFindEntryValue(entry->unitIndex, 8), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 18, btlFindEntryValue(entry->unitIndex, 10), -3, 3, 0);
+            asdListBoxSetIntItem(editor->listBox, 19, btlFindEntryValue(entry->unitIndex, 9), -3, 3, 0);
+        }
+        break;
+    case 1:
+        if (vitals != NULL) {
+            vitals->hp = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            if (entry->record != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->record)->hp = vitals->hp;
+            if (entry->secondaryRecord != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->secondaryRecord)->hp = vitals->hp;
+            if (entry->specialMaximum.record != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->specialMaximum.record)->hp = vitals->hp;
+            return;
+        }
+        break;
+    case 2:
+        if (vitals != NULL) {
+            vitals->maxHp = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 3:
+        if (vitals != NULL) {
+            vitals->mp = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            if (entry->record != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->record)->mp = vitals->mp;
+            if (entry->secondaryRecord != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->secondaryRecord)->mp = vitals->mp;
+            if (entry->specialMaximum.record != NULL)
+                reinterpret_cast<UnitRecordVitals *>(entry->specialMaximum.record)->mp = vitals->mp;
+            return;
+        }
+        break;
+    case 4:
+        if (vitals != NULL) {
+            vitals->maxMp = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 5:
+        if (vitals != NULL) {
+            vitals->parameter[0] = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 6:
+        if (vitals != NULL) {
+            vitals->parameter[1] = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 7:
+        if (vitals != NULL) {
+            vitals->parameter[2] = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 8:
+        if (vitals != NULL) {
+            vitals->parameter[3] = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 9:
+        if (NULL != vitals) {
+            vitals->parameter[4] = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 10:
+        if (entry != NULL) {
+            if (listBoxItemHasOwner(editor->listBox, selected))
+                entry->flags |= DAT_005715f8.toggleMaskA;
+            else
+                entry->flags = ~DAT_005715f8.toggleMaskA & entry->flags;
+            return;
+        }
+        break;
+    case 11:
+        if (entry != NULL) {
+            if (listBoxItemHasOwner(editor->listBox, selected))
+                entry->flags |= DAT_005715f8.toggleMaskB;
+            else
+                entry->flags = ~DAT_005715f8.toggleMaskB & entry->flags;
+            return;
+        }
+        break;
+    case 12:
+        if (entry != NULL && (entry->flags & DAT_005715f8.editableMask) != 0) {
+            FUN_0031f0f4(entry->id, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            return;
+        }
+        break;
+    case 13:
+        if (entry != NULL && entry->unitIndex >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
+            BattleRosterRecordA *record = &btlGetMainState()->roster[entry->unitIndex];
+            record->spriteOffset.x = *asdListBoxGetFloatValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 14:
+        if (entry != NULL && entry->unitIndex >= 0 && (entry->flags & DAT_005715f8.editableMask) != 0) {
+            BattleRosterRecordA *record = &btlGetMainState()->roster[entry->unitIndex];
+            record->spriteOffset.y = *asdListBoxGetFloatValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 15:
+        if (entry != NULL) {
+            reinterpret_cast<CombatantEditableWord *>(entry)->value = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            return;
+        }
+        break;
+    case 16:
+        if (entry != NULL) {
+            btlSlotSetStoreValue(entry->indexView.selectionIndex, 7, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            return;
+        }
+        break;
+    case 17:
+        if (entry != NULL) {
+            btlSlotSetStoreValue(entry->indexView.selectionIndex, 8, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            return;
+        }
+        break;
+    case 18:
+        if (entry != NULL) {
+            btlSlotSetStoreValue(entry->indexView.selectionIndex, 10, *asdListBoxGetIntValuePtr(editor->listBox, selected));
+            return;
+        }
+        break;
+    case 19:
+        if (entry != NULL) {
+            u32 value = *asdListBoxGetIntValuePtr(editor->listBox, selected);
+            btlSlotSetStoreValue(entry->indexView.selectionIndex, 9, value);
+            btlSlotSetStoreValue(entry->indexView.selectionIndex, 11, value);
+            return;
+        }
+        break;
+    }
+}
+}

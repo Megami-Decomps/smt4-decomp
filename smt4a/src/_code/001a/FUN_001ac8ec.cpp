@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail evaluates the handler call's vector argument (add r1, sp, #16) before the null test and then conditionally executes the call (ldrne/blxne), copies the 4th vector component back from the scratch memory, and keeps the globals in r8/r9; ours branches around the call and uses r6/r7. */
+/* NON_MATCHING: the two scratch vectors now share the function scope like retail (36-byte frame matches); retail still evaluates the handler call's vector argument (add r1, sp, #16) before the null test and then conditionally executes the call (ldrne/blxne), copies the 4th vector component back from the scratch memory, and keeps the globals in r8/r9; ours branches around the call and uses r6/r7. */
 #include "common.h"
 
 struct Vec4 {
@@ -98,6 +98,8 @@ void FUN_001ac8ec(EmitterSet *set, f32 deltaTime)
 {
     f32 scaledTime = set->timeScale * deltaTime;
     Particle *particle;
+    Vec4 color;
+    Vec4 position;
 
     set->time = deltaTime;
     for (particle = set->first; particle != NULL; particle = particle->next) {
@@ -111,7 +113,6 @@ void FUN_001ac8ec(EmitterSet *set, f32 deltaTime)
                 g_handlerTable[particle->emitter->type].plain(particle->emitter->handle, factor);
             }
         } else {
-            Vec4 color;
             f32 factor;
 
             DAT_006471dc.first = particle->color;
@@ -126,8 +127,6 @@ void FUN_001ac8ec(EmitterSet *set, f32 deltaTime)
             }
         }
         if ((particle->flags & PARTICLE_HAS_OFFSET) != 0) {
-            Vec4 position;
-
             DAT_006471dc.first = set->offset;
             DAT_006471dc.second = set->origin;
             add(DAT_006471dc.first, DAT_006471dc.second);

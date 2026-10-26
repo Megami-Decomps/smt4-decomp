@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the packed result as a plain u64 (ldm) in the owned-demon comparison and as bitfield words elsewhere, and lays the 24-slot loop differently; prologue, callee contracts and the 64-bit compare shape match. */
+/* NON_MATCHING: only the load form of the packed 64-bit result differs: retail reads it with ldm in the owned-demon compare and ldr/ldr elsewhere, the build uses ldr/ldr and ldrd; prologue, callee contracts, the 24-slot search loop and the 64-bit compare match. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "gamedata/SaveSlotTable.h"
@@ -52,13 +52,18 @@ u8 FUN_004da344(UniteWork *work, u32 first, u32 second, s32 special, FusionAvail
         if (output != NULL)
             output->reason = 2;
     }
-    for (s32 i = 0; i < 24; ++i) {
-        if (stock->slots[i] >= 0 && (u64)gameGetSlotRecord(stock->slots[i])->entryId == result.resultIdentifier) {
-            available = 0;
-            if (output != NULL)
-                output->reason = 3;
-            break;
+    s32 slot;
+    for (slot = 0; slot < 24; ++slot) {
+        if (stock->slots[slot] >= 0) {
+            u64 owned = gameGetSlotRecord(stock->slots[slot])->entryId;
+            if (owned == result.resultIdentifier)
+                break;
         }
+    }
+    if (slot < 24) {
+        available = 0;
+        if (output != NULL)
+            output->reason = 3;
     }
     if (output != NULL) {
         if (FUN_004da980(work, first, second) == 5 || !entryDefIsAvailable(work, result.resultIdentifier))

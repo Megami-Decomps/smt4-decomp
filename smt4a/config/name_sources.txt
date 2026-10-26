@@ -6733,3 +6733,49 @@
 004d0c4c partySlotsCompact inferred [high] shifts occupied party slots down over empty (-1) entries, preserving order
 004d0cd4 partyFindFirstUnusedEntry inferred [med] counts ordered party slots, if below the table count returns the first entry whose check returns 0
 004e5b5c btlActionMarkRandomTargetableUnit inferred [high] collects targetable combatant indices, filters via FUN_004e9ae8, marks one random pick in the acting unit's targeted flags
+0056fd38 g_tmnlEntries evidence size:0x528 22 entries of 0x3c bytes (twin of smt4 g_tmnlEntries); retail FUN_0026edbc pool words name DAT_0056fd38/fe38/ff38/570038/570138 (0x100 steps) and the table ends at g_aocMain 0x570260 = 0x56fd38+22*0x3c; starts right after g_tmnl 0x56fd30 (8 bytes)
+004a4c74 _ZN9Obj55c8d012FUN_004a4c74Ev evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a4d70 _ZN9Obj55c8d012FUN_004a4d70Ev evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a677c _ZN9Obj55c8d012FUN_004a677cEv evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a66c4 _ZN9Obj55c8d026itemListMenuWaitUseCounterEv evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a4658 _ZN9Obj55c8d012FUN_004a4658Ev evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a527c _ZN9Obj55c8d012FUN_004a527cEv evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a5328 _ZN9Obj55c8d012FUN_004a5328Ev evidence member state handler installed by Obj55c8d0::resetHandlers (ptmf tables, constdata copies)
+004a2404 _ZN9Obj55c89c12FUN_004a2404Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a2064 _ZN9Obj55c89c12FUN_004a2064Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a39bc _ZN9Obj55c89c12FUN_004a39bcEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a3154 _ZN9Obj55c89c27shopPurchaseConfirmSelectedEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a18ec _ZN9Obj55c89c29itemMenuDispatchSelectedEntryEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a374c _ZN9Obj55c89c14screen4AFinishEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a40f4 _ZN9Obj55c89c12FUN_004a40f4Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a38bc _ZN9Obj55c89c12FUN_004a38bcEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a2f8c _ZN9Obj55c89c29demonScreenConfirmSaveRefreshEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a35e4 _ZN9Obj55c89c24uiAnimatedPageToggleStepEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a15a0 _ZN9Obj55c89c12FUN_004a15a0Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a2ee0 _ZN9Obj55c89c21uiCursorEnterModeNineEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a321c _ZN9Obj55c89c12FUN_004a321cEv evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a24a8 _ZN9Obj55c92012FUN_004a24a8Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a24a4 _ZN9Obj55c92012FUN_004a24a4Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a4090 _ZN9Obj55c92012FUN_004a4090Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a4094 _ZN9Obj55c92012FUN_004a4094Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a4098 _ZN9Obj55c92012FUN_004a4098Ev evidence member state handler installed by Obj55c89c::resetHandlers (ptmf tables)
+004a2238 _ZN9Obj55c89c7confirmEv evidence BibleItemMenu is a view of Obj55c89c (same 0x860/0x861 fields); handlers[0] of its ptmf table is this method
+004a5328 _ZN9Obj55c8d015enableKindEightEv inferred [high] sets enabled, kind 8, value 0 (twin of smt4 Obj4223f8::enableKindEight)
+005b3ff0 g_asdGxNewListId inferred size:0x4 [high] second word of the Gx state block (asdGxCommandListSetNewListId stores it, asdGxCommandListCreate reads it); twin of smt4
+005b3ff4 g_asdGxListDepth inferred size:0x4 [high] third word of the Gx state block: depth of the begun-command-list stack; twin of smt4
+001b4a20 nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20 inferred [med] twin of the smt4 routine
+00199f84 nn_math_ARMv6_MTX34InverseAsm inferred [med] twin of smt4 FUN_002a81a8
+005265b4 g_uiPacketPrograms evidence size:0xb80 FUN_0015f258 passes four adjacent blobs (0x5265b4 len 0x114, 0x5266c8 len 0xcc, 0x526794 len 0x54, 0x5267e8 len 0x94c) = one contiguous object of 0xb80 bytes; retail derives all four addresses from one literal with sub #84/#204/#276
+001ada74 goalConditionsSatisfied inferred [med] returns whether every condition of goal id (counter/party/roster/slot/flag checks) is satisfied
+0019de98 buttonHelpSetText inferred [high] sets the button-help color and splits the text at its newline into two display lines
+004dab08 fusionRecordPassesFilter inferred [med] checks a demon/skill record against id/category/bracket/party-slot filter conditions
+0032ecac gameDataToggleFlagIsSet inferred [high] tests one bit of the save data toggle-flag bank at +0x282fc
+0032ef0c gameDataToggleFlagSet inferred [high] sets or clears one bit of the same toggle-flag bank
+00154e34 soundApplyVolumeToSlots inferred [high] twin of smt4 FUN_0011a324
+0026edbc tmnlFindSlotForItem inferred [high] twin of smt4 FUN_001d04a4
+002b9520 soundActorQueueStartPending inferred [med] starts sounds of active non-positional entries lacking a handle once the queue's pending flag is set
+002ae554 partyStatusSetSlotLabel inferred [med] sets a party-status slot's label id/kind, initialising its colour from the unit index on first show, then refreshes it
+002bcafc mapSelectRoomMusic inferred [high] picks the BGM of the current map room (slot table + story-flag overrides) and starts it when the previous track stopped
+002b1264 actorCardAnimationReset inferred [med] resets one actor card's animation channels and selects its default sprite animations
+002b14c8 itemListScreenInit inferred [med] initialises the list screen: clears row state, sets its sprite resource packets and creates the icon/column/button sprites
+0016b034 itemGroupHasEnabledItem inferred [high] reports whether any item of the selected group is enabled

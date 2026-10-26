@@ -56342,13 +56342,13 @@
       "target_path": "orig/target/_code/0015/FUN_00154d68.o"
     },
     {
-      "base_path": "build/obj/_code/0015/FUN_00154e34.o",
+      "base_path": "build/obj/_code/0015/soundApplyVolumeToSlots.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00154e34",
+            "name": "soundApplyVolumeToSlots",
             "size": 148,
             "vram": "0x154e34"
           }
@@ -56356,10 +56356,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0015/FUN_00154e34.cpp"
+        "source_path": "src/_code/0015/soundApplyVolumeToSlots.cpp"
       },
-      "name": "_code/0015/FUN_00154e34",
-      "target_path": "orig/target/_code/0015/FUN_00154e34.o"
+      "name": "_code/0015/soundApplyVolumeToSlots",
+      "target_path": "orig/target/_code/0015/soundApplyVolumeToSlots.o"
     },
     {
       "base_path": "build/obj/_code/0015/FUN_00154edc.o",
@@ -65100,13 +65100,13 @@
       "target_path": "orig/target/_code/0016/FUN_0016ae94.o"
     },
     {
-      "base_path": "build/obj/_code/0016/FUN_0016b034.o",
+      "base_path": "build/obj/_code/0016/itemGroupHasEnabledItem.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0016b034",
+            "name": "itemGroupHasEnabledItem",
             "size": 68,
             "vram": "0x16b034"
           }
@@ -65114,10 +65114,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0016/FUN_0016b034.cpp"
+        "source_path": "src/_code/0016/itemGroupHasEnabledItem.cpp"
       },
-      "name": "_code/0016/FUN_0016b034",
-      "target_path": "orig/target/_code/0016/FUN_0016b034.o"
+      "name": "_code/0016/itemGroupHasEnabledItem",
+      "target_path": "orig/target/_code/0016/itemGroupHasEnabledItem.o"
     },
     {
       "base_path": "build/obj/_code/0016/FUN_0016b078.o",
@@ -81714,13 +81714,13 @@
       "target_path": "orig/target/_code/0019/nn_math_ARMv6_MTX34MultAsm.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_00199f84.o",
+      "base_path": "build/obj/_code/0019/nn_math_ARMv6_MTX34InverseAsm.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_00199f84",
+            "name": "nn_math_ARMv6_MTX34InverseAsm",
             "size": 280,
             "vram": "0x199f84"
           }
@@ -81728,10 +81728,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_00199f84.cpp"
+        "source_path": "src/_code/0019/nn_math_ARMv6_MTX34InverseAsm.cpp"
       },
-      "name": "_code/0019/FUN_00199f84",
-      "target_path": "orig/target/_code/0019/FUN_00199f84.o"
+      "name": "_code/0019/nn_math_ARMv6_MTX34InverseAsm",
+      "target_path": "orig/target/_code/0019/nn_math_ARMv6_MTX34InverseAsm.o"
     },
     {
       "base_path": "build/obj/_code/0019/nn_math_ARMv6_VEC3TransformAsm_2AD44C.o",
@@ -83064,13 +83064,13 @@
       "target_path": "orig/target/_code/AsdSDK/Source/Gfx/Text/AsdText/asdTextDispatchRegisteredCommand.o"
     },
     {
-      "base_path": "build/obj/_code/0019/FUN_0019de98.o",
+      "base_path": "build/obj/_code/0019/buttonHelpSetText.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0019de98",
+            "name": "buttonHelpSetText",
             "size": 312,
             "vram": "0x19de98"
           }
@@ -83078,10 +83078,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0019/FUN_0019de98.cpp"
+        "source_path": "src/_code/0019/buttonHelpSetText.cpp"
       },
-      "name": "_code/0019/FUN_0019de98",
-      "target_path": "orig/target/_code/0019/FUN_0019de98.o"
+      "name": "_code/0019/buttonHelpSetText",
+      "target_path": "orig/target/_code/0019/buttonHelpSetText.o"
     },
     {
       "base_path": "build/obj/_code/0019/keyedRecordCompare.o",
@@ -90291,13 +90291,13 @@
       "target_path": "orig/target/_code/001a/FUN_001ad9b4.o"
     },
     {
-      "base_path": "build/obj/_code/001a/FUN_001ada74.o",
+      "base_path": "build/obj/_code/001a/goalConditionsSatisfied.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_001ada74",
+            "name": "goalConditionsSatisfied",
             "size": 680,
             "vram": "0x1ada74"
           }
@@ -90305,10 +90305,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001a/FUN_001ada74.cpp"
+        "source_path": "src/_code/001a/goalConditionsSatisfied.cpp"
       },
-      "name": "_code/001a/FUN_001ada74",
-      "target_path": "orig/target/_code/001a/FUN_001ada74.o"
+      "name": "_code/001a/goalConditionsSatisfied",
+      "target_path": "orig/target/_code/001a/goalConditionsSatisfied.o"
     },
     {
       "base_path": "build/obj/_code/001a/FUN_001add1c.o",
@@ -93511,13 +93511,13 @@
       "target_path": "orig/target/_code/001b/FUN_001b4a00.o"
     },
     {
-      "base_path": "build/obj/_code/001b/mathMatrixTranslateLocal.o",
+      "base_path": "build/obj/_code/001b/nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "mathMatrixTranslateLocal",
+            "name": "nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20",
             "size": 56,
             "vram": "0x1b4a20"
           }
@@ -93525,10 +93525,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/001b/mathMatrixTranslateLocal.cpp"
+        "source_path": "src/_code/001b/nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20.cpp"
       },
-      "name": "_code/001b/mathMatrixTranslateLocal",
-      "target_path": "orig/target/_code/001b/mathMatrixTranslateLocal.o"
+      "name": "_code/001b/nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20",
+      "target_path": "orig/target/_code/001b/nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20.o"
     },
     {
       "base_path": "build/obj/_code/001b/FUN_001b4a58.o",
@@ -120754,13 +120754,13 @@
       "target_path": "orig/target/_code/0026/FUN_0026ec00.o"
     },
     {
-      "base_path": "build/obj/_code/Terminal/tmnlMain/FUN_0026edbc.o",
+      "base_path": "build/obj/_code/Terminal/tmnlMain/tmnlFindSlotForItem.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0026edbc",
+            "name": "tmnlFindSlotForItem",
             "size": 756,
             "vram": "0x26edbc"
           }
@@ -120769,10 +120769,10 @@
           "_code",
           "Terminal/tmnlMain"
         ],
-        "source_path": "src/_code/Terminal/tmnlMain/FUN_0026edbc.cpp"
+        "source_path": "src/_code/Terminal/tmnlMain/tmnlFindSlotForItem.cpp"
       },
-      "name": "_code/Terminal/tmnlMain/FUN_0026edbc",
-      "target_path": "orig/target/_code/Terminal/tmnlMain/FUN_0026edbc.o"
+      "name": "_code/Terminal/tmnlMain/tmnlFindSlotForItem",
+      "target_path": "orig/target/_code/Terminal/tmnlMain/tmnlFindSlotForItem.o"
     },
     {
       "base_path": "build/obj/_code/0026/campReleaseSlotTouchRegions.o",
@@ -131377,13 +131377,13 @@
       "target_path": "orig/target/_code/002a/FUN_002ae468.o"
     },
     {
-      "base_path": "build/obj/_code/002a/FUN_002ae554.o",
+      "base_path": "build/obj/_code/002a/partyStatusSetSlotLabel.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002ae554",
+            "name": "partyStatusSetSlotLabel",
             "size": 112,
             "vram": "0x2ae554"
           }
@@ -131391,10 +131391,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002a/FUN_002ae554.cpp"
+        "source_path": "src/_code/002a/partyStatusSetSlotLabel.cpp"
       },
-      "name": "_code/002a/FUN_002ae554",
-      "target_path": "orig/target/_code/002a/FUN_002ae554.o"
+      "name": "_code/002a/partyStatusSetSlotLabel",
+      "target_path": "orig/target/_code/002a/partyStatusSetSlotLabel.o"
     },
     {
       "base_path": "build/obj/_code/battle/btlDebug/FUN_002ae5cc.o",
@@ -131418,13 +131418,13 @@
       "target_path": "orig/target/_code/battle/btlDebug/FUN_002ae5cc.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b1264.o",
+      "base_path": "build/obj/_code/002b/actorCardAnimationReset.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002b1264",
+            "name": "actorCardAnimationReset",
             "size": 192,
             "vram": "0x2b1264"
           }
@@ -131432,10 +131432,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002b1264.cpp"
+        "source_path": "src/_code/002b/actorCardAnimationReset.cpp"
       },
-      "name": "_code/002b/FUN_002b1264",
-      "target_path": "orig/target/_code/002b/FUN_002b1264.o"
+      "name": "_code/002b/actorCardAnimationReset",
+      "target_path": "orig/target/_code/002b/actorCardAnimationReset.o"
     },
     {
       "base_path": "build/obj/_code/002b/partySelectionExpandMask.o",
@@ -131458,13 +131458,13 @@
       "target_path": "orig/target/_code/002b/partySelectionExpandMask.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b14c8.o",
+      "base_path": "build/obj/_code/002b/itemListScreenInit.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002b14c8",
+            "name": "itemListScreenInit",
             "size": 860,
             "vram": "0x2b14c8"
           }
@@ -131472,10 +131472,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002b14c8.cpp"
+        "source_path": "src/_code/002b/itemListScreenInit.cpp"
       },
-      "name": "_code/002b/FUN_002b14c8",
-      "target_path": "orig/target/_code/002b/FUN_002b14c8.o"
+      "name": "_code/002b/itemListScreenInit",
+      "target_path": "orig/target/_code/002b/itemListScreenInit.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002b1838.o",
@@ -133432,13 +133432,13 @@
       "target_path": "orig/target/_code/002b/FUN_002b950c.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002b9520.o",
+      "base_path": "build/obj/_code/002b/soundActorQueueStartPending.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002b9520",
+            "name": "soundActorQueueStartPending",
             "size": 144,
             "vram": "0x2b9520"
           }
@@ -133446,10 +133446,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002b9520.cpp"
+        "source_path": "src/_code/002b/soundActorQueueStartPending.cpp"
       },
-      "name": "_code/002b/FUN_002b9520",
-      "target_path": "orig/target/_code/002b/FUN_002b9520.o"
+      "name": "_code/002b/soundActorQueueStartPending",
+      "target_path": "orig/target/_code/002b/soundActorQueueStartPending.o"
     },
     {
       "base_path": "build/obj/_code/002b/mapTableStepWave.o",
@@ -133873,13 +133873,13 @@
       "target_path": "orig/target/_code/002b/FUN_002bc62c.o"
     },
     {
-      "base_path": "build/obj/_code/002b/FUN_002bcafc.o",
+      "base_path": "build/obj/_code/002b/mapSelectRoomMusic.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_002bcafc",
+            "name": "mapSelectRoomMusic",
             "size": 896,
             "vram": "0x2bcafc"
           }
@@ -133887,10 +133887,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/002b/FUN_002bcafc.cpp"
+        "source_path": "src/_code/002b/mapSelectRoomMusic.cpp"
       },
-      "name": "_code/002b/FUN_002bcafc",
-      "target_path": "orig/target/_code/002b/FUN_002bcafc.o"
+      "name": "_code/002b/mapSelectRoomMusic",
+      "target_path": "orig/target/_code/002b/mapSelectRoomMusic.o"
     },
     {
       "base_path": "build/obj/_code/002b/FUN_002bceb0.o",
@@ -193321,13 +193321,13 @@
       "target_path": "orig/target/_code/0032/dataTableGetEntryValue.o"
     },
     {
-      "base_path": "build/obj/_code/0032/FUN_0032ecac.o",
+      "base_path": "build/obj/_code/0032/gameDataToggleFlagIsSet.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0032ecac",
+            "name": "gameDataToggleFlagIsSet",
             "size": 60,
             "vram": "0x32ecac"
           }
@@ -193335,10 +193335,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0032/FUN_0032ecac.cpp"
+        "source_path": "src/_code/0032/gameDataToggleFlagIsSet.cpp"
       },
-      "name": "_code/0032/FUN_0032ecac",
-      "target_path": "orig/target/_code/0032/FUN_0032ecac.o"
+      "name": "_code/0032/gameDataToggleFlagIsSet",
+      "target_path": "orig/target/_code/0032/gameDataToggleFlagIsSet.o"
     },
     {
       "base_path": "build/obj/_code/0032/dataTable4AGetEntry2C.o",
@@ -193381,13 +193381,13 @@
       "target_path": "orig/target/_code/0032/progressConditionsUpdateUnlocks.o"
     },
     {
-      "base_path": "build/obj/_code/0032/FUN_0032ef0c.o",
+      "base_path": "build/obj/_code/0032/gameDataToggleFlagSet.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0032ef0c",
+            "name": "gameDataToggleFlagSet",
             "size": 80,
             "vram": "0x32ef0c"
           }
@@ -193395,10 +193395,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0032/FUN_0032ef0c.cpp"
+        "source_path": "src/_code/0032/gameDataToggleFlagSet.cpp"
       },
-      "name": "_code/0032/FUN_0032ef0c",
-      "target_path": "orig/target/_code/0032/FUN_0032ef0c.o"
+      "name": "_code/0032/gameDataToggleFlagSet",
+      "target_path": "orig/target/_code/0032/gameDataToggleFlagSet.o"
     },
     {
       "base_path": "build/obj/_code/0032/FUN_0032ef5c.o",
@@ -312897,13 +312897,13 @@
       "target_path": "orig/target/_code/004a/Obj55c89c__render.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a15a0.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a15a0.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a15a0",
+            "name": "_ZN9Obj55c89c12FUN_004a15a0Ev",
             "size": 280,
             "vram": "0x4a15a0"
           }
@@ -312911,10 +312911,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a15a0.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a15a0.cpp"
       },
-      "name": "_code/004a/FUN_004a15a0",
-      "target_path": "orig/target/_code/004a/FUN_004a15a0.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a15a0",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a15a0.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a16bc.o",
@@ -312937,13 +312937,13 @@
       "target_path": "orig/target/_code/004a/FUN_004a16bc.o"
     },
     {
-      "base_path": "build/obj/_code/004a/itemMenuDispatchSelectedEntry.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__itemMenuDispatchSelectedEntry.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "itemMenuDispatchSelectedEntry",
+            "name": "_ZN9Obj55c89c29itemMenuDispatchSelectedEntryEv",
             "size": 108,
             "vram": "0x4a18ec"
           }
@@ -312951,10 +312951,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/itemMenuDispatchSelectedEntry.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__itemMenuDispatchSelectedEntry.cpp"
       },
-      "name": "_code/004a/itemMenuDispatchSelectedEntry",
-      "target_path": "orig/target/_code/004a/itemMenuDispatchSelectedEntry.o"
+      "name": "_code/004a/Obj55c89c__itemMenuDispatchSelectedEntry",
+      "target_path": "orig/target/_code/004a/Obj55c89c__itemMenuDispatchSelectedEntry.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a1958.o",
@@ -313037,13 +313037,13 @@
       "target_path": "orig/target/_code/004a/FUN_004a1db4.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a2064.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a2064.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a2064",
+            "name": "_ZN9Obj55c89c12FUN_004a2064Ev",
             "size": 468,
             "vram": "0x4a2064"
           }
@@ -313051,19 +313051,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a2064.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a2064.cpp"
       },
-      "name": "_code/004a/FUN_004a2064",
-      "target_path": "orig/target/_code/004a/FUN_004a2064.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a2064",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a2064.o"
     },
     {
-      "base_path": "build/obj/_code/004a/BibleItemMenu__confirm.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__confirm.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "_ZN13BibleItemMenu7confirmEv",
+            "name": "_ZN9Obj55c89c7confirmEv",
             "size": 456,
             "vram": "0x4a2238"
           }
@@ -313071,19 +313071,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/BibleItemMenu__confirm.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__confirm.cpp"
       },
-      "name": "_code/004a/BibleItemMenu__confirm",
-      "target_path": "orig/target/_code/004a/BibleItemMenu__confirm.o"
+      "name": "_code/004a/Obj55c89c__confirm",
+      "target_path": "orig/target/_code/004a/Obj55c89c__confirm.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a2404.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a2404.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a2404",
+            "name": "_ZN9Obj55c89c12FUN_004a2404Ev",
             "size": 152,
             "vram": "0x4a2404"
           }
@@ -313091,19 +313091,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a2404.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a2404.cpp"
       },
-      "name": "_code/004a/FUN_004a2404",
-      "target_path": "orig/target/_code/004a/FUN_004a2404.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a2404",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a2404.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a24a4.o",
+      "base_path": "build/obj/_code/004a/Obj55c920__FUN_004a24a4.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a24a4",
+            "name": "_ZN9Obj55c92012FUN_004a24a4Ev",
             "size": 4,
             "vram": "0x4a24a4"
           }
@@ -313111,19 +313111,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a24a4.cpp"
+        "source_path": "src/_code/004a/Obj55c920__FUN_004a24a4.cpp"
       },
-      "name": "_code/004a/FUN_004a24a4",
-      "target_path": "orig/target/_code/004a/FUN_004a24a4.o"
+      "name": "_code/004a/Obj55c920__FUN_004a24a4",
+      "target_path": "orig/target/_code/004a/Obj55c920__FUN_004a24a4.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a24a8.o",
+      "base_path": "build/obj/_code/004a/Obj55c920__FUN_004a24a8.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a24a8",
+            "name": "_ZN9Obj55c92012FUN_004a24a8Ev",
             "size": 1416,
             "vram": "0x4a24a8"
           }
@@ -313131,10 +313131,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a24a8.cpp"
+        "source_path": "src/_code/004a/Obj55c920__FUN_004a24a8.cpp"
       },
-      "name": "_code/004a/FUN_004a24a8",
-      "target_path": "orig/target/_code/004a/FUN_004a24a8.o"
+      "name": "_code/004a/Obj55c920__FUN_004a24a8",
+      "target_path": "orig/target/_code/004a/Obj55c920__FUN_004a24a8.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a2a30.o",
@@ -313178,13 +313178,13 @@
       "target_path": "orig/target/_code/bible/bibleDevil/Obj55c89c__start.o"
     },
     {
-      "base_path": "build/obj/_code/004a/uiCursorEnterModeNine.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__uiCursorEnterModeNine.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "uiCursorEnterModeNine",
+            "name": "_ZN9Obj55c89c21uiCursorEnterModeNineEv",
             "size": 164,
             "vram": "0x4a2ee0"
           }
@@ -313192,19 +313192,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/uiCursorEnterModeNine.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__uiCursorEnterModeNine.cpp"
       },
-      "name": "_code/004a/uiCursorEnterModeNine",
-      "target_path": "orig/target/_code/004a/uiCursorEnterModeNine.o"
+      "name": "_code/004a/Obj55c89c__uiCursorEnterModeNine",
+      "target_path": "orig/target/_code/004a/Obj55c89c__uiCursorEnterModeNine.o"
     },
     {
-      "base_path": "build/obj/_code/004a/demonScreenConfirmSaveRefresh.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__demonScreenConfirmSaveRefresh.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "demonScreenConfirmSaveRefresh",
+            "name": "_ZN9Obj55c89c29demonScreenConfirmSaveRefreshEv",
             "size": 456,
             "vram": "0x4a2f8c"
           }
@@ -313212,19 +313212,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/demonScreenConfirmSaveRefresh.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__demonScreenConfirmSaveRefresh.cpp"
       },
-      "name": "_code/004a/demonScreenConfirmSaveRefresh",
-      "target_path": "orig/target/_code/004a/demonScreenConfirmSaveRefresh.o"
+      "name": "_code/004a/Obj55c89c__demonScreenConfirmSaveRefresh",
+      "target_path": "orig/target/_code/004a/Obj55c89c__demonScreenConfirmSaveRefresh.o"
     },
     {
-      "base_path": "build/obj/_code/004a/shopPurchaseConfirmSelected.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__shopPurchaseConfirmSelected.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "shopPurchaseConfirmSelected",
+            "name": "_ZN9Obj55c89c27shopPurchaseConfirmSelectedEv",
             "size": 200,
             "vram": "0x4a3154"
           }
@@ -313232,19 +313232,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/shopPurchaseConfirmSelected.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__shopPurchaseConfirmSelected.cpp"
       },
-      "name": "_code/004a/shopPurchaseConfirmSelected",
-      "target_path": "orig/target/_code/004a/shopPurchaseConfirmSelected.o"
+      "name": "_code/004a/Obj55c89c__shopPurchaseConfirmSelected",
+      "target_path": "orig/target/_code/004a/Obj55c89c__shopPurchaseConfirmSelected.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a321c.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a321c.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a321c",
+            "name": "_ZN9Obj55c89c12FUN_004a321cEv",
             "size": 28,
             "vram": "0x4a321c"
           }
@@ -313252,10 +313252,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a321c.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a321c.cpp"
       },
-      "name": "_code/004a/FUN_004a321c",
-      "target_path": "orig/target/_code/004a/FUN_004a321c.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a321c",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a321c.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a3238.o",
@@ -313298,13 +313298,13 @@
       "target_path": "orig/target/_code/004a/FUN_004a34a0.o"
     },
     {
-      "base_path": "build/obj/_code/004a/uiAnimatedPageToggleStep.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__uiAnimatedPageToggleStep.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "uiAnimatedPageToggleStep",
+            "name": "_ZN9Obj55c89c24uiAnimatedPageToggleStepEv",
             "size": 352,
             "vram": "0x4a35e4"
           }
@@ -313312,19 +313312,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/uiAnimatedPageToggleStep.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__uiAnimatedPageToggleStep.cpp"
       },
-      "name": "_code/004a/uiAnimatedPageToggleStep",
-      "target_path": "orig/target/_code/004a/uiAnimatedPageToggleStep.o"
+      "name": "_code/004a/Obj55c89c__uiAnimatedPageToggleStep",
+      "target_path": "orig/target/_code/004a/Obj55c89c__uiAnimatedPageToggleStep.o"
     },
     {
-      "base_path": "build/obj/_code/004a/screen4AFinish.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__screen4AFinish.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "screen4AFinish",
+            "name": "_ZN9Obj55c89c14screen4AFinishEv",
             "size": 80,
             "vram": "0x4a374c"
           }
@@ -313332,10 +313332,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/screen4AFinish.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__screen4AFinish.cpp"
       },
-      "name": "_code/004a/screen4AFinish",
-      "target_path": "orig/target/_code/004a/screen4AFinish.o"
+      "name": "_code/004a/Obj55c89c__screen4AFinish",
+      "target_path": "orig/target/_code/004a/Obj55c89c__screen4AFinish.o"
     },
     {
       "base_path": "build/obj/_code/004a/demonRefreshSavedSnapshot.o",
@@ -313358,13 +313358,13 @@
       "target_path": "orig/target/_code/004a/demonRefreshSavedSnapshot.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a38bc.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a38bc.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a38bc",
+            "name": "_ZN9Obj55c89c12FUN_004a38bcEv",
             "size": 248,
             "vram": "0x4a38bc"
           }
@@ -313372,19 +313372,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a38bc.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a38bc.cpp"
       },
-      "name": "_code/004a/FUN_004a38bc",
-      "target_path": "orig/target/_code/004a/FUN_004a38bc.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a38bc",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a38bc.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a39bc.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a39bc.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a39bc",
+            "name": "_ZN9Obj55c89c12FUN_004a39bcEv",
             "size": 392,
             "vram": "0x4a39bc"
           }
@@ -313392,10 +313392,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a39bc.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a39bc.cpp"
       },
-      "name": "_code/004a/FUN_004a39bc",
-      "target_path": "orig/target/_code/004a/FUN_004a39bc.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a39bc",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a39bc.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a3b48.o",
@@ -313438,13 +313438,13 @@
       "target_path": "orig/target/_code/004a/FUN_004a3e04.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a4090.o",
+      "base_path": "build/obj/_code/004a/Obj55c920__FUN_004a4090.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a4090",
+            "name": "_ZN9Obj55c92012FUN_004a4090Ev",
             "size": 4,
             "vram": "0x4a4090"
           }
@@ -313452,19 +313452,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a4090.cpp"
+        "source_path": "src/_code/004a/Obj55c920__FUN_004a4090.cpp"
       },
-      "name": "_code/004a/FUN_004a4090",
-      "target_path": "orig/target/_code/004a/FUN_004a4090.o"
+      "name": "_code/004a/Obj55c920__FUN_004a4090",
+      "target_path": "orig/target/_code/004a/Obj55c920__FUN_004a4090.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a4094.o",
+      "base_path": "build/obj/_code/004a/Obj55c920__FUN_004a4094.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a4094",
+            "name": "_ZN9Obj55c92012FUN_004a4094Ev",
             "size": 4,
             "vram": "0x4a4094"
           }
@@ -313472,19 +313472,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a4094.cpp"
+        "source_path": "src/_code/004a/Obj55c920__FUN_004a4094.cpp"
       },
-      "name": "_code/004a/FUN_004a4094",
-      "target_path": "orig/target/_code/004a/FUN_004a4094.o"
+      "name": "_code/004a/Obj55c920__FUN_004a4094",
+      "target_path": "orig/target/_code/004a/Obj55c920__FUN_004a4094.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a4098.o",
+      "base_path": "build/obj/_code/004a/Obj55c920__FUN_004a4098.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a4098",
+            "name": "_ZN9Obj55c92012FUN_004a4098Ev",
             "size": 4,
             "vram": "0x4a4098"
           }
@@ -313492,10 +313492,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a4098.cpp"
+        "source_path": "src/_code/004a/Obj55c920__FUN_004a4098.cpp"
       },
-      "name": "_code/004a/FUN_004a4098",
-      "target_path": "orig/target/_code/004a/FUN_004a4098.o"
+      "name": "_code/004a/Obj55c920__FUN_004a4098",
+      "target_path": "orig/target/_code/004a/Obj55c920__FUN_004a4098.o"
     },
     {
       "base_path": "build/obj/_code/004a/menuDispatchSelectedHandler.o",
@@ -313518,13 +313518,13 @@
       "target_path": "orig/target/_code/004a/menuDispatchSelectedHandler.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a40f4.o",
+      "base_path": "build/obj/_code/004a/Obj55c89c__FUN_004a40f4.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a40f4",
+            "name": "_ZN9Obj55c89c12FUN_004a40f4Ev",
             "size": 220,
             "vram": "0x4a40f4"
           }
@@ -313532,10 +313532,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a40f4.cpp"
+        "source_path": "src/_code/004a/Obj55c89c__FUN_004a40f4.cpp"
       },
-      "name": "_code/004a/FUN_004a40f4",
-      "target_path": "orig/target/_code/004a/FUN_004a40f4.o"
+      "name": "_code/004a/Obj55c89c__FUN_004a40f4",
+      "target_path": "orig/target/_code/004a/Obj55c89c__FUN_004a40f4.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a41d8.o",
@@ -313658,13 +313658,13 @@
       "target_path": "orig/target/_code/004a/Obj55c8d0__render.o"
     },
     {
-      "base_path": "build/obj/_code/bible/bibleAnalyze/FUN_004a4658.o",
+      "base_path": "build/obj/_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4658.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a4658",
+            "name": "_ZN9Obj55c8d012FUN_004a4658Ev",
             "size": 464,
             "vram": "0x4a4658"
           }
@@ -313673,10 +313673,10 @@
           "_code",
           "bible/bibleAnalyze"
         ],
-        "source_path": "src/_code/bible/bibleAnalyze/FUN_004a4658.cpp"
+        "source_path": "src/_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4658.cpp"
       },
-      "name": "_code/bible/bibleAnalyze/FUN_004a4658",
-      "target_path": "orig/target/_code/bible/bibleAnalyze/FUN_004a4658.o"
+      "name": "_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4658",
+      "target_path": "orig/target/_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4658.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a4848.o",
@@ -313759,13 +313759,13 @@
       "target_path": "orig/target/_code/004a/Obj55c8d0__resetHandlers.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a4c74.o",
+      "base_path": "build/obj/_code/004a/Obj55c8d0__FUN_004a4c74.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a4c74",
+            "name": "_ZN9Obj55c8d012FUN_004a4c74Ev",
             "size": 248,
             "vram": "0x4a4c74"
           }
@@ -313773,19 +313773,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a4c74.cpp"
+        "source_path": "src/_code/004a/Obj55c8d0__FUN_004a4c74.cpp"
       },
-      "name": "_code/004a/FUN_004a4c74",
-      "target_path": "orig/target/_code/004a/FUN_004a4c74.o"
+      "name": "_code/004a/Obj55c8d0__FUN_004a4c74",
+      "target_path": "orig/target/_code/004a/Obj55c8d0__FUN_004a4c74.o"
     },
     {
-      "base_path": "build/obj/_code/bible/bibleAnalyze/FUN_004a4d70.o",
+      "base_path": "build/obj/_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4d70.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a4d70",
+            "name": "_ZN9Obj55c8d012FUN_004a4d70Ev",
             "size": 276,
             "vram": "0x4a4d70"
           }
@@ -313794,10 +313794,10 @@
           "_code",
           "bible/bibleAnalyze"
         ],
-        "source_path": "src/_code/bible/bibleAnalyze/FUN_004a4d70.cpp"
+        "source_path": "src/_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4d70.cpp"
       },
-      "name": "_code/bible/bibleAnalyze/FUN_004a4d70",
-      "target_path": "orig/target/_code/bible/bibleAnalyze/FUN_004a4d70.o"
+      "name": "_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4d70",
+      "target_path": "orig/target/_code/bible/bibleAnalyze/Obj55c8d0__FUN_004a4d70.o"
     },
     {
       "base_path": "build/obj/_code/bible/bibleAnalyze/Obj55c8d0__start.o",
@@ -313821,13 +313821,13 @@
       "target_path": "orig/target/_code/bible/bibleAnalyze/Obj55c8d0__start.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a527c.o",
+      "base_path": "build/obj/_code/004a/Obj55c8d0__FUN_004a527c.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a527c",
+            "name": "_ZN9Obj55c8d012FUN_004a527cEv",
             "size": 164,
             "vram": "0x4a527c"
           }
@@ -313835,19 +313835,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a527c.cpp"
+        "source_path": "src/_code/004a/Obj55c8d0__FUN_004a527c.cpp"
       },
-      "name": "_code/004a/FUN_004a527c",
-      "target_path": "orig/target/_code/004a/FUN_004a527c.o"
+      "name": "_code/004a/Obj55c8d0__FUN_004a527c",
+      "target_path": "orig/target/_code/004a/Obj55c8d0__FUN_004a527c.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a5328.o",
+      "base_path": "build/obj/_code/004a/Obj55c8d0__enableKindEight.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a5328",
+            "name": "_ZN9Obj55c8d015enableKindEightEv",
             "size": 28,
             "vram": "0x4a5328"
           }
@@ -313855,10 +313855,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a5328.cpp"
+        "source_path": "src/_code/004a/Obj55c8d0__enableKindEight.cpp"
       },
-      "name": "_code/004a/FUN_004a5328",
-      "target_path": "orig/target/_code/004a/FUN_004a5328.o"
+      "name": "_code/004a/Obj55c8d0__enableKindEight",
+      "target_path": "orig/target/_code/004a/Obj55c8d0__enableKindEight.o"
     },
     {
       "base_path": "build/obj/_code/004a/FUN_004a5344.o",
@@ -314042,13 +314042,13 @@
       "target_path": "orig/target/_code/004a/bibleViewUnusedHook.o"
     },
     {
-      "base_path": "build/obj/_code/004a/itemListMenuWaitUseCounter.o",
+      "base_path": "build/obj/_code/004a/Obj55c8d0__itemListMenuWaitUseCounter.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "itemListMenuWaitUseCounter",
+            "name": "_ZN9Obj55c8d026itemListMenuWaitUseCounterEv",
             "size": 180,
             "vram": "0x4a66c4"
           }
@@ -314056,19 +314056,19 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/itemListMenuWaitUseCounter.cpp"
+        "source_path": "src/_code/004a/Obj55c8d0__itemListMenuWaitUseCounter.cpp"
       },
-      "name": "_code/004a/itemListMenuWaitUseCounter",
-      "target_path": "orig/target/_code/004a/itemListMenuWaitUseCounter.o"
+      "name": "_code/004a/Obj55c8d0__itemListMenuWaitUseCounter",
+      "target_path": "orig/target/_code/004a/Obj55c8d0__itemListMenuWaitUseCounter.o"
     },
     {
-      "base_path": "build/obj/_code/004a/FUN_004a677c.o",
+      "base_path": "build/obj/_code/004a/Obj55c8d0__FUN_004a677c.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004a677c",
+            "name": "_ZN9Obj55c8d012FUN_004a677cEv",
             "size": 172,
             "vram": "0x4a677c"
           }
@@ -314076,10 +314076,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004a/FUN_004a677c.cpp"
+        "source_path": "src/_code/004a/Obj55c8d0__FUN_004a677c.cpp"
       },
-      "name": "_code/004a/FUN_004a677c",
-      "target_path": "orig/target/_code/004a/FUN_004a677c.o"
+      "name": "_code/004a/Obj55c8d0__FUN_004a677c",
+      "target_path": "orig/target/_code/004a/Obj55c8d0__FUN_004a677c.o"
     },
     {
       "base_path": "build/obj/_code/004a/callbackInvokeBoundMethod.o",
@@ -327928,13 +327928,13 @@
       "target_path": "orig/target/_code/004d/recSet16E.o"
     },
     {
-      "base_path": "build/obj/_code/004d/FUN_004dab08.o",
+      "base_path": "build/obj/_code/004d/fusionRecordPassesFilter.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_004dab08",
+            "name": "fusionRecordPassesFilter",
             "size": 644,
             "vram": "0x4dab08"
           }
@@ -327942,10 +327942,10 @@
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/004d/FUN_004dab08.cpp"
+        "source_path": "src/_code/004d/fusionRecordPassesFilter.cpp"
       },
-      "name": "_code/004d/FUN_004dab08",
-      "target_path": "orig/target/_code/004d/FUN_004dab08.o"
+      "name": "_code/004d/fusionRecordPassesFilter",
+      "target_path": "orig/target/_code/004d/fusionRecordPassesFilter.o"
     },
     {
       "base_path": "build/obj/_code/004d/FUN_004dad8c.o",

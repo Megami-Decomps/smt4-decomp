@@ -4323,3 +4323,58 @@
 00120dc4 soundSourceQueueReadyRequest inferred [med] queues a type 0x33 sound request when the source reports ready
 00351bb8 objectGetCategoryTwo inferred [med] constant-2 category getter (vtable slot); armlink inlines it at direct callers such as FUN_001325c4
 00328c90 scrCommResultSetCurrentUnitTableValue inferred [med] script command: looks up a table value for the current result-screen party entry and sets it as the result
+0046505c g_asdGxNewListId inferred size:0x4 [high] second word of the Gx state block: the nngx command list new AsdGxCommandLists start with (asdGxCommandListSetNewListId stores it, asdGxCommandListCreate reads it)
+00465060 g_asdGxListDepth inferred size:0x4 [high] third word of the Gx state block: depth of the begun-command-list stack (asdGxCommandListBegin ++, End --)
+0014dcb8 _ZN9Obj420f4cD1Ev evidence destructor registered via __aeabi_atexit for each Obj420f4c heap (static in FUN_001392fc and the three heaps in unitHeapModuleInitialize)
+00355f8c _ZN20UnitHeapModuleRecordC1Ev evidence constructor passed to __aeabi_vec_ctor_nocookie_nodtor(DAT_004d43e0, ctor, 16, 32): 32 records of 16 bytes
+00432cf8 g_tmnlEntries evidence size:0x2d0 20 entries of 0x24 bytes (FUN_001d04a4 indexes [0..19].id; next symbol g_aocMain 0x432fc8 = 0x432cf8+0x2d0); retail pool words name DAT_00432df8/DAT_00432ef8 where build gives DAT_00432cf8+0x100/+0x200 (unsized object); FUN_001d04a4 is otherwise a 171/171-row match with 4 reloc-name diff lines only
+0022c5ec _ZN9Obj422540D1Ev evidence the shared class Obj422540 (include/classes/Obj422540.h, base of Obj4224b0/d4/f8/1c): its destructor at 0x22c5ec is already defined by unit NodePoolOwner__dtor_NodePoolOwner.cpp as Obj422540::~Obj422540; the retail name is the twin of smt4a _ZN9Obj422540D1Ev; the 4 derived D1 (Obj4224b0/d4/f8/42251c) call it
+003a8dac _ZN9Obj4223f89enterListEv evidence member handler of Obj4223f8 installed in its state-handler ptmf table (resetHandlers constdata copies)
+003a8ecc _ZN9Obj4223f823followCursorAndDescribeEv evidence member handler of Obj4223f8 installed in its state-handler ptmf table (resetHandlers constdata copies)
+003aa510 _ZN9Obj4223f812updateBrowseEv evidence member handler of Obj4223f8 installed in its state-handler ptmf table (resetHandlers constdata copies)
+003a9394 _ZN9Obj4223f823updatePointerTransitionEv evidence member handler of Obj4223f8 installed in its state-handler ptmf table (resetHandlers constdata copies)
+003a9424 _ZN9Obj4223f815enableKindEightEv evidence member handler of Obj4223f8 installed in its state-handler ptmf table (resetHandlers constdata copies)
+0022c988 _ZN9Obj42247c22finishUseCounterMotionEv evidence base-class handler (Obj42247c) installed in Obj4223f8 handlers[3] ptmf; finishes the use counter
+003a76b8 _ZN9Obj4223c412FUN_003a76b8Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7834 _ZN9Obj4223c412FUN_003a7834Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7530 _ZN9Obj4223c435devilListUpdatePreviewAndVisibilityEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a8240 _ZN9Obj4223c412FUN_003a8240Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7de4 _ZN9Obj4223c427shopPurchaseConfirmSelectedEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7f98 _ZN9Obj4223c412FUN_003a7f98Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a836c _ZN9Obj4223c412FUN_003a836cEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a80f4 _ZN9Obj4223c428bibleApplyConfirmedSelectionEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7be4 _ZN9Obj4223c438partyRefreshCompleteAndUpdateSummariesEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a6e68 _ZN9Obj4223c412FUN_003a6e68Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7b54 _ZN9Obj4223c412FUN_003a7b54Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a7eac _ZN9Obj4223c412FUN_003a7eacEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+0022cba4 _ZN9Obj42247c12FUN_0022cba4Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a8308 _ZN9Obj42247c12FUN_003a8308Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a830c _ZN9Obj42247c12FUN_003a830cEv evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+003a8310 _ZN9Obj42247c12FUN_003a8310Ev evidence member state handler installed by Obj4223c4::resetHandlers (ptmf tables, constdata copies)
+0022cba8 _ZN9Obj42247c12FUN_0022cba8Ev evidence base-class handler installed in Obj4223c4 leaveHandlers (ptmf tables)
+003a7eac _ZN9Obj4223c417enableKindThirteenEv inferred [high] sets enabled, kind 13, value 0
+0022cba8 _ZN9Obj42247c8drawListEv inferred [med] base-class list draw routine that the c4 leave-handler forwarders (FUN_003a8308/830c/8310/22cba4) call
+003a7eac _ZN9Obj4223c418enableKindThirteenEv inferred [high] correction: the length prefix of enableKindThirteen is 18
+003abad4 _ZN9Obj42244812FUN_003abad4Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab0b4 _ZN9Obj42244822bibleScreenStartScriptEv evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab348 _ZN9Obj42244812FUN_003ab348Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003abed8 _ZN9Obj42244812FUN_003abed8Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003abe00 _ZN9Obj42244824menuUpdateCollectionSortEv evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab9a4 _ZN9Obj42244812FUN_003ab9a4Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003aae38 _ZN9Obj42244820itemMenuTakeSelectedEv evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab7a0 _ZN9Obj42244823sceneScriptDoneSetStateEv evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab128 _ZN9Obj42244812FUN_003ab128Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab7c8 _ZN9Obj42244812FUN_003ab7c8Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab948 _ZN9Obj42244812FUN_003ab948Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab3dc _ZN9Obj42247c12FUN_003ab3dcEv evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003abd84 _ZN9Obj42247c12FUN_003abd84Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+003ab3d8 _ZN9Obj42247c12FUN_003ab3d8Ev evidence member state handler installed by the Obj422448 constructor (ptmf tables)
+002a34e8 nn_math_ARMv6_MTX34AddTranslateAsm inferred [med] hand-written VFP asm: copies a 3x4 matrix and adds a VEC3 to its translation column (vldm s0-s11, 3x vadd, vstm)
+002a3504 nn_math_ARMv6_MTX34MultTranslateAsm_2A3504 inferred [med] hand-written VFP asm: M * translation(t) (translation column += 3x3 * t, vmla chain); same routine as nn_math_ARMv6_MTX34MultTranslateAsm
+002a81a8 nn_math_ARMv6_MTX34InverseAsm inferred [med] hand-written VFP asm: determinant of the 3x3 part, zero test, then the inverse
+0011a324 soundApplyVolumeToSlots inferred [high] stores the capped master volume and applies its normalized gain to each occupied sound slot
+00385ccc dataSetFindRequestedFileByKey inferred [med] returns the requested file of the first type-3 data row whose key matches, across every loaded package
+002628fc objectReleaseIfSet inferred [high] byte-identical to smt4a objectReleaseIfSet: if (object != NULL) call vtable slot 1 (release); callers FUN_00356d70 and others
+00387c78 aocFindDisplayNameOverrideText inferred [med] returns the text of the first display-name override record whose id matches, searching the type-0x21 table files of every loaded add-on package
+001008b8 formatWriteBoundedByte inferred [high] appends a byte to a bounded output buffer (cursor,end)
+001d04a4 tmnlFindSlotForItem inferred [high] finds the list slot whose entry id belongs to terminal item

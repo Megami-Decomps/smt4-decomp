@@ -37,7 +37,7 @@ void fillThreeWordsWithByte(void *words, u32 value);
 void FUN_002c85b0(s32 mode);
 void FUN_0033440c(u32 value);
 void FUN_00333f6c(void);
-void FUN_0019de98(s32 layer, u32 color);
+void buttonHelpSetText(s32 layer, u32 color);
 void messageMainSetFlag(s32 enabled);
 
 void FUN_00420b70(SaveLoadControllerA *work)
@@ -94,7 +94,7 @@ void FUN_00420b70(SaveLoadControllerA *work)
     FUN_002c85b0(0);
     FUN_0033440c(-1);
     FUN_00333f6c();
-    FUN_0019de98(0, 0xf4f4f4ff);
+    buttonHelpSetText(0, 0xf4f4f4ff);
     messageMainSetFlag(1);
 }
 }

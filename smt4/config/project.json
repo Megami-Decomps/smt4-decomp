@@ -375,6 +375,16 @@
       "thumb": true
     },
     {
+      "address": "0x1008b8",
+      "function": "formatWriteBoundedByte",
+      "module": "_code",
+      "object": "build/obj/_code/0010/formatWriteBoundedByte.o",
+      "size": 16,
+      "source": "src/_code/0010/formatWriteBoundedByte.cpp",
+      "target": "orig/target/_code/0010/formatWriteBoundedByte.o",
+      "thumb": true
+    },
+    {
       "address": "0x1008c8",
       "function": "FUN_001008c8",
       "module": "_code",
@@ -2656,7 +2666,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.o",
       "size": 20,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListFlip.o",
       "thumb": false
     },
@@ -2780,7 +2790,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.o",
       "size": 36,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBindBack.o",
       "thumb": false
     },
@@ -3142,7 +3152,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.o",
       "size": 36,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetLists.o",
       "thumb": false
     },
@@ -3427,7 +3437,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.o",
       "size": 12,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListSetNewListId.o",
       "thumb": false
     },
@@ -4890,12 +4900,12 @@
     },
     {
       "address": "0x11a324",
-      "function": "FUN_0011a324",
+      "function": "soundApplyVolumeToSlots",
       "module": "_code",
-      "object": "build/obj/_code/0011/FUN_0011a324.o",
+      "object": "build/obj/_code/0011/soundApplyVolumeToSlots.o",
       "size": 148,
-      "source": "src/_code/0011/FUN_0011a324.cpp",
-      "target": "orig/target/_code/0011/FUN_0011a324.o",
+      "source": "src/_code/0011/soundApplyVolumeToSlots.cpp",
+      "target": "orig/target/_code/0011/soundApplyVolumeToSlots.o",
       "thumb": false
     },
     {
@@ -14445,12 +14455,12 @@
     },
     {
       "address": "0x14dcb8",
-      "function": "FUN_0014dcb8",
+      "function": "_ZN9Obj420f4cD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_0014dcb8.o",
+      "object": "build/obj/_code/0014/Obj420f4c__dtor_Obj420f4c.o",
       "size": 28,
-      "source": "src/_code/0014/FUN_0014dcb8.cpp",
-      "target": "orig/target/_code/0014/FUN_0014dcb8.o",
+      "source": "src/_code/0014/Obj420f4c__dtor_Obj420f4c.cpp",
+      "target": "orig/target/_code/0014/Obj420f4c__dtor_Obj420f4c.o",
       "thumb": false
     },
     {
@@ -23501,12 +23511,12 @@
     {
       "address": "0x1d04a4",
       "file": "Terminal/tmnlMain",
-      "function": "FUN_001d04a4",
+      "function": "tmnlFindSlotForItem",
       "module": "_code",
-      "object": "build/obj/_code/Terminal/tmnlMain/FUN_001d04a4.o",
+      "object": "build/obj/_code/Terminal/tmnlMain/tmnlFindSlotForItem.o",
       "size": 672,
-      "source": "src/_code/Terminal/tmnlMain/FUN_001d04a4.cpp",
-      "target": "orig/target/_code/Terminal/tmnlMain/FUN_001d04a4.o",
+      "source": "src/_code/Terminal/tmnlMain/tmnlFindSlotForItem.cpp",
+      "target": "orig/target/_code/Terminal/tmnlMain/tmnlFindSlotForItem.o",
       "thumb": false
     },
     {
@@ -33892,12 +33902,12 @@
     },
     {
       "address": "0x22c5ec",
-      "function": "_ZN13NodePoolOwnerD1Ev",
+      "function": "_ZN9Obj422540D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0022/NodePoolOwner__dtor_NodePoolOwner.o",
+      "object": "build/obj/_code/0022/Obj422540__dtor_Obj422540.o",
       "size": 484,
-      "source": "src/_code/0022/NodePoolOwner__dtor_NodePoolOwner.cpp",
-      "target": "orig/target/_code/0022/NodePoolOwner__dtor_NodePoolOwner.o",
+      "source": "src/_code/0022/Obj422540__dtor_Obj422540.cpp",
+      "target": "orig/target/_code/0022/Obj422540__dtor_Obj422540.o",
       "thumb": false
     },
     {
@@ -33932,12 +33942,12 @@
     },
     {
       "address": "0x22c988",
-      "function": "FUN_0022c988",
+      "function": "_ZN9Obj42247c22finishUseCounterMotionEv",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022c988.o",
+      "object": "build/obj/_code/0022/Obj42247c__finishUseCounterMotion.o",
       "size": 108,
-      "source": "src/_code/0022/FUN_0022c988.cpp",
-      "target": "orig/target/_code/0022/FUN_0022c988.o",
+      "source": "src/_code/0022/Obj42247c__finishUseCounterMotion.cpp",
+      "target": "orig/target/_code/0022/Obj42247c__finishUseCounterMotion.o",
       "thumb": false
     },
     {
@@ -33972,23 +33982,23 @@
     },
     {
       "address": "0x22cba4",
-      "function": "FUN_0022cba4",
+      "function": "_ZN9Obj42247c12FUN_0022cba4Ev",
       "module": "_code",
-      "object": "build/obj/_code/0022/FUN_0022cba4.o",
+      "object": "build/obj/_code/0022/Obj42247c__FUN_0022cba4.o",
       "size": 4,
-      "source": "src/_code/0022/FUN_0022cba4.cpp",
-      "target": "orig/target/_code/0022/FUN_0022cba4.o",
+      "source": "src/_code/0022/Obj42247c__FUN_0022cba4.cpp",
+      "target": "orig/target/_code/0022/Obj42247c__FUN_0022cba4.o",
       "thumb": false
     },
     {
       "address": "0x22cba8",
       "file": "bible/bibleDevil",
-      "function": "FUN_0022cba8",
+      "function": "_ZN9Obj42247c8drawListEv",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleDevil/FUN_0022cba8.o",
+      "object": "build/obj/_code/bible/bibleDevil/Obj42247c__drawList.o",
       "size": 1488,
-      "source": "src/_code/bible/bibleDevil/FUN_0022cba8.cpp",
-      "target": "orig/target/_code/bible/bibleDevil/FUN_0022cba8.o",
+      "source": "src/_code/bible/bibleDevil/Obj42247c__drawList.cpp",
+      "target": "orig/target/_code/bible/bibleDevil/Obj42247c__drawList.o",
       "thumb": false
     },
     {
@@ -42882,12 +42892,12 @@
     },
     {
       "address": "0x2628fc",
-      "function": "FUN_002628fc",
+      "function": "objectReleaseIfSet",
       "module": "_code",
-      "object": "build/obj/_code/0026/FUN_002628fc.o",
+      "object": "build/obj/_code/0026/objectReleaseIfSet.o",
       "size": 24,
-      "source": "src/_code/0026/FUN_002628fc.cpp",
-      "target": "orig/target/_code/0026/FUN_002628fc.o",
+      "source": "src/_code/0026/objectReleaseIfSet.cpp",
+      "target": "orig/target/_code/0026/objectReleaseIfSet.o",
       "thumb": false
     },
     {
@@ -52805,22 +52815,22 @@
     },
     {
       "address": "0x2a34e8",
-      "function": "FUN_002a34e8",
+      "function": "nn_math_ARMv6_MTX34AddTranslateAsm",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a34e8.o",
+      "object": "build/obj/_code/002a/nn_math_ARMv6_MTX34AddTranslateAsm.o",
       "size": 28,
-      "source": "src/_code/002a/FUN_002a34e8.cpp",
-      "target": "orig/target/_code/002a/FUN_002a34e8.o",
+      "source": "src/_code/002a/nn_math_ARMv6_MTX34AddTranslateAsm.cpp",
+      "target": "orig/target/_code/002a/nn_math_ARMv6_MTX34AddTranslateAsm.o",
       "thumb": false
     },
     {
       "address": "0x2a3504",
-      "function": "mathMatrixTranslateLocal",
+      "function": "nn_math_ARMv6_MTX34MultTranslateAsm_2A3504",
       "module": "_code",
-      "object": "build/obj/_code/002a/mathMatrixTranslateLocal.o",
+      "object": "build/obj/_code/002a/nn_math_ARMv6_MTX34MultTranslateAsm_2A3504.o",
       "size": 56,
-      "source": "src/_code/002a/mathMatrixTranslateLocal.cpp",
-      "target": "orig/target/_code/002a/mathMatrixTranslateLocal.o",
+      "source": "src/_code/002a/nn_math_ARMv6_MTX34MultTranslateAsm_2A3504.cpp",
+      "target": "orig/target/_code/002a/nn_math_ARMv6_MTX34MultTranslateAsm_2A3504.o",
       "thumb": false
     },
     {
@@ -53766,12 +53776,12 @@
     },
     {
       "address": "0x2a81a8",
-      "function": "FUN_002a81a8",
+      "function": "nn_math_ARMv6_MTX34InverseAsm",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a81a8.o",
+      "object": "build/obj/_code/002a/nn_math_ARMv6_MTX34InverseAsm.o",
       "size": 280,
-      "source": "src/_code/002a/FUN_002a81a8.cpp",
-      "target": "orig/target/_code/002a/FUN_002a81a8.o",
+      "source": "src/_code/002a/nn_math_ARMv6_MTX34InverseAsm.cpp",
+      "target": "orig/target/_code/002a/nn_math_ARMv6_MTX34InverseAsm.o",
       "thumb": false
     },
     {
@@ -54194,7 +54204,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.o",
       "size": 72,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListStartRecord.o",
       "thumb": false
     },
@@ -60466,7 +60476,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.o",
       "size": 172,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListBegin.o",
       "thumb": false
     },
@@ -60841,7 +60851,7 @@
       "module": "_code",
       "object": "build/obj/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.o",
       "size": 60,
-      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.cpp",
+      "source": "src/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList.cpp",
       "target": "orig/target/_code/AsdSDK/Source/Sys/Gx/AsdGxCommandList/asdGxCommandListCreate.o",
       "thumb": false
     },
@@ -84632,12 +84642,12 @@
     },
     {
       "address": "0x355f8c",
-      "function": "FUN_00355f8c",
+      "function": "_ZN20UnitHeapModuleRecordC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00355f8c.o",
+      "object": "build/obj/_code/0035/UnitHeapModuleRecord__UnitHeapModuleRecord.o",
       "size": 20,
-      "source": "src/_code/0035/FUN_00355f8c.cpp",
-      "target": "orig/target/_code/0035/FUN_00355f8c.o",
+      "source": "src/_code/0035/UnitHeapModuleRecord__UnitHeapModuleRecord.cpp",
+      "target": "orig/target/_code/0035/UnitHeapModuleRecord__UnitHeapModuleRecord.o",
       "thumb": false
     },
     {
@@ -94605,12 +94615,12 @@
     },
     {
       "address": "0x385ccc",
-      "function": "FUN_00385ccc",
+      "function": "dataSetFindRequestedFileByKey",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00385ccc.o",
+      "object": "build/obj/_code/0038/dataSetFindRequestedFileByKey.o",
       "size": 188,
-      "source": "src/_code/0038/FUN_00385ccc.cpp",
-      "target": "orig/target/_code/0038/FUN_00385ccc.o",
+      "source": "src/_code/0038/dataSetFindRequestedFileByKey.cpp",
+      "target": "orig/target/_code/0038/dataSetFindRequestedFileByKey.o",
       "thumb": false
     },
     {
@@ -94755,12 +94765,12 @@
     },
     {
       "address": "0x387c78",
-      "function": "FUN_00387c78",
+      "function": "aocFindDisplayNameOverrideText",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_00387c78.o",
+      "object": "build/obj/_code/0038/aocFindDisplayNameOverrideText.o",
       "size": 360,
-      "source": "src/_code/0038/FUN_00387c78.cpp",
-      "target": "orig/target/_code/0038/FUN_00387c78.o",
+      "source": "src/_code/0038/aocFindDisplayNameOverrideText.cpp",
+      "target": "orig/target/_code/0038/aocFindDisplayNameOverrideText.o",
       "thumb": false
     },
     {
@@ -98602,12 +98612,12 @@
     },
     {
       "address": "0x3a6e68",
-      "function": "FUN_003a6e68",
+      "function": "_ZN9Obj4223c412FUN_003a6e68Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a6e68.o",
+      "object": "build/obj/_code/003a/Obj4223c4__FUN_003a6e68.o",
       "size": 276,
-      "source": "src/_code/003a/FUN_003a6e68.cpp",
-      "target": "orig/target/_code/003a/FUN_003a6e68.o",
+      "source": "src/_code/003a/Obj4223c4__FUN_003a6e68.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__FUN_003a6e68.o",
       "thumb": false
     },
     {
@@ -98644,33 +98654,33 @@
     },
     {
       "address": "0x3a7530",
-      "function": "devilListUpdatePreviewAndVisibility",
+      "function": "_ZN9Obj4223c435devilListUpdatePreviewAndVisibilityEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/devilListUpdatePreviewAndVisibility.o",
+      "object": "build/obj/_code/003a/Obj4223c4__devilListUpdatePreviewAndVisibility.o",
       "size": 392,
-      "source": "src/_code/003a/devilListUpdatePreviewAndVisibility.cpp",
-      "target": "orig/target/_code/003a/devilListUpdatePreviewAndVisibility.o",
+      "source": "src/_code/003a/Obj4223c4__devilListUpdatePreviewAndVisibility.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__devilListUpdatePreviewAndVisibility.o",
       "thumb": false
     },
     {
       "address": "0x3a76b8",
       "file": "bible/bibleDevil",
-      "function": "FUN_003a76b8",
+      "function": "_ZN9Obj4223c412FUN_003a76b8Ev",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleDevil/FUN_003a76b8.o",
+      "object": "build/obj/_code/bible/bibleDevil/Obj4223c4__FUN_003a76b8.o",
       "size": 376,
-      "source": "src/_code/bible/bibleDevil/FUN_003a76b8.cpp",
-      "target": "orig/target/_code/bible/bibleDevil/FUN_003a76b8.o",
+      "source": "src/_code/bible/bibleDevil/Obj4223c4__FUN_003a76b8.cpp",
+      "target": "orig/target/_code/bible/bibleDevil/Obj4223c4__FUN_003a76b8.o",
       "thumb": false
     },
     {
       "address": "0x3a7834",
-      "function": "FUN_003a7834",
+      "function": "_ZN9Obj4223c412FUN_003a7834Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a7834.o",
+      "object": "build/obj/_code/003a/Obj4223c4__FUN_003a7834.o",
       "size": 136,
-      "source": "src/_code/003a/FUN_003a7834.cpp",
-      "target": "orig/target/_code/003a/FUN_003a7834.o",
+      "source": "src/_code/003a/Obj4223c4__FUN_003a7834.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__FUN_003a7834.o",
       "thumb": false
     },
     {
@@ -98686,42 +98696,42 @@
     },
     {
       "address": "0x3a7b54",
-      "function": "FUN_003a7b54",
+      "function": "_ZN9Obj4223c412FUN_003a7b54Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a7b54.o",
+      "object": "build/obj/_code/003a/Obj4223c4__FUN_003a7b54.o",
       "size": 144,
-      "source": "src/_code/003a/FUN_003a7b54.cpp",
-      "target": "orig/target/_code/003a/FUN_003a7b54.o",
+      "source": "src/_code/003a/Obj4223c4__FUN_003a7b54.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__FUN_003a7b54.o",
       "thumb": false
     },
     {
       "address": "0x3a7be4",
-      "function": "partyRefreshCompleteAndUpdateSummaries",
+      "function": "_ZN9Obj4223c438partyRefreshCompleteAndUpdateSummariesEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/partyRefreshCompleteAndUpdateSummaries.o",
+      "object": "build/obj/_code/003a/Obj4223c4__partyRefreshCompleteAndUpdateSummaries.o",
       "size": 508,
-      "source": "src/_code/003a/partyRefreshCompleteAndUpdateSummaries.cpp",
-      "target": "orig/target/_code/003a/partyRefreshCompleteAndUpdateSummaries.o",
+      "source": "src/_code/003a/Obj4223c4__partyRefreshCompleteAndUpdateSummaries.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__partyRefreshCompleteAndUpdateSummaries.o",
       "thumb": false
     },
     {
       "address": "0x3a7de4",
-      "function": "shopPurchaseConfirmSelected",
+      "function": "_ZN9Obj4223c427shopPurchaseConfirmSelectedEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/shopPurchaseConfirmSelected.o",
+      "object": "build/obj/_code/003a/Obj4223c4__shopPurchaseConfirmSelected.o",
       "size": 200,
-      "source": "src/_code/003a/shopPurchaseConfirmSelected.cpp",
-      "target": "orig/target/_code/003a/shopPurchaseConfirmSelected.o",
+      "source": "src/_code/003a/Obj4223c4__shopPurchaseConfirmSelected.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__shopPurchaseConfirmSelected.o",
       "thumb": false
     },
     {
       "address": "0x3a7eac",
-      "function": "FUN_003a7eac",
+      "function": "_ZN9Obj4223c418enableKindThirteenEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a7eac.o",
+      "object": "build/obj/_code/003a/Obj4223c4__enableKindThirteen.o",
       "size": 28,
-      "source": "src/_code/003a/FUN_003a7eac.cpp",
-      "target": "orig/target/_code/003a/FUN_003a7eac.o",
+      "source": "src/_code/003a/Obj4223c4__enableKindThirteen.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__enableKindThirteen.o",
       "thumb": false
     },
     {
@@ -98746,12 +98756,12 @@
     },
     {
       "address": "0x3a7f98",
-      "function": "FUN_003a7f98",
+      "function": "_ZN9Obj4223c412FUN_003a7f98Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a7f98.o",
+      "object": "build/obj/_code/003a/Obj4223c4__FUN_003a7f98.o",
       "size": 80,
-      "source": "src/_code/003a/FUN_003a7f98.cpp",
-      "target": "orig/target/_code/003a/FUN_003a7f98.o",
+      "source": "src/_code/003a/Obj4223c4__FUN_003a7f98.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__FUN_003a7f98.o",
       "thumb": false
     },
     {
@@ -98767,52 +98777,52 @@
     {
       "address": "0x3a80f4",
       "file": "bible/bibleDevil",
-      "function": "bibleApplyConfirmedSelection",
+      "function": "_ZN9Obj4223c428bibleApplyConfirmedSelectionEv",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleDevil/bibleApplyConfirmedSelection.o",
+      "object": "build/obj/_code/bible/bibleDevil/Obj4223c4__bibleApplyConfirmedSelection.o",
       "size": 324,
-      "source": "src/_code/bible/bibleDevil/bibleApplyConfirmedSelection.cpp",
-      "target": "orig/target/_code/bible/bibleDevil/bibleApplyConfirmedSelection.o",
+      "source": "src/_code/bible/bibleDevil/Obj4223c4__bibleApplyConfirmedSelection.cpp",
+      "target": "orig/target/_code/bible/bibleDevil/Obj4223c4__bibleApplyConfirmedSelection.o",
       "thumb": false
     },
     {
       "address": "0x3a8240",
-      "function": "FUN_003a8240",
+      "function": "_ZN9Obj4223c412FUN_003a8240Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a8240.o",
+      "object": "build/obj/_code/003a/Obj4223c4__FUN_003a8240.o",
       "size": 200,
-      "source": "src/_code/003a/FUN_003a8240.cpp",
-      "target": "orig/target/_code/003a/FUN_003a8240.o",
+      "source": "src/_code/003a/Obj4223c4__FUN_003a8240.cpp",
+      "target": "orig/target/_code/003a/Obj4223c4__FUN_003a8240.o",
       "thumb": false
     },
     {
       "address": "0x3a8308",
-      "function": "FUN_003a8308",
+      "function": "_ZN9Obj42247c12FUN_003a8308Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a8308.o",
+      "object": "build/obj/_code/003a/Obj42247c__FUN_003a8308.o",
       "size": 4,
-      "source": "src/_code/003a/FUN_003a8308.cpp",
-      "target": "orig/target/_code/003a/FUN_003a8308.o",
+      "source": "src/_code/003a/Obj42247c__FUN_003a8308.cpp",
+      "target": "orig/target/_code/003a/Obj42247c__FUN_003a8308.o",
       "thumb": false
     },
     {
       "address": "0x3a830c",
-      "function": "FUN_003a830c",
+      "function": "_ZN9Obj42247c12FUN_003a830cEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a830c.o",
+      "object": "build/obj/_code/003a/Obj42247c__FUN_003a830c.o",
       "size": 4,
-      "source": "src/_code/003a/FUN_003a830c.cpp",
-      "target": "orig/target/_code/003a/FUN_003a830c.o",
+      "source": "src/_code/003a/Obj42247c__FUN_003a830c.cpp",
+      "target": "orig/target/_code/003a/Obj42247c__FUN_003a830c.o",
       "thumb": false
     },
     {
       "address": "0x3a8310",
-      "function": "FUN_003a8310",
+      "function": "_ZN9Obj42247c12FUN_003a8310Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a8310.o",
+      "object": "build/obj/_code/003a/Obj42247c__FUN_003a8310.o",
       "size": 4,
-      "source": "src/_code/003a/FUN_003a8310.cpp",
-      "target": "orig/target/_code/003a/FUN_003a8310.o",
+      "source": "src/_code/003a/Obj42247c__FUN_003a8310.cpp",
+      "target": "orig/target/_code/003a/Obj42247c__FUN_003a8310.o",
       "thumb": false
     },
     {
@@ -98828,12 +98838,12 @@
     {
       "address": "0x3a836c",
       "file": "bible/bibleDevil",
-      "function": "FUN_003a836c",
+      "function": "_ZN9Obj4223c412FUN_003a836cEv",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleDevil/FUN_003a836c.o",
+      "object": "build/obj/_code/bible/bibleDevil/Obj4223c4__FUN_003a836c.o",
       "size": 220,
-      "source": "src/_code/bible/bibleDevil/FUN_003a836c.cpp",
-      "target": "orig/target/_code/bible/bibleDevil/FUN_003a836c.o",
+      "source": "src/_code/bible/bibleDevil/Obj4223c4__FUN_003a836c.cpp",
+      "target": "orig/target/_code/bible/bibleDevil/Obj4223c4__FUN_003a836c.o",
       "thumb": false
     },
     {
@@ -98944,23 +98954,23 @@
     },
     {
       "address": "0x3a8dac",
-      "function": "FUN_003a8dac",
+      "function": "_ZN9Obj4223f89enterListEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a8dac.o",
+      "object": "build/obj/_code/003a/Obj4223f8__enterList.o",
       "size": 288,
-      "source": "src/_code/003a/FUN_003a8dac.cpp",
-      "target": "orig/target/_code/003a/FUN_003a8dac.o",
+      "source": "src/_code/003a/Obj4223f8__enterList.cpp",
+      "target": "orig/target/_code/003a/Obj4223f8__enterList.o",
       "thumb": false
     },
     {
       "address": "0x3a8ecc",
       "file": "bible/bibleAnalyze",
-      "function": "FUN_003a8ecc",
+      "function": "_ZN9Obj4223f823followCursorAndDescribeEv",
       "module": "_code",
-      "object": "build/obj/_code/bible/bibleAnalyze/FUN_003a8ecc.o",
+      "object": "build/obj/_code/bible/bibleAnalyze/Obj4223f8__followCursorAndDescribe.o",
       "size": 260,
-      "source": "src/_code/bible/bibleAnalyze/FUN_003a8ecc.cpp",
-      "target": "orig/target/_code/bible/bibleAnalyze/FUN_003a8ecc.o",
+      "source": "src/_code/bible/bibleAnalyze/Obj4223f8__followCursorAndDescribe.cpp",
+      "target": "orig/target/_code/bible/bibleAnalyze/Obj4223f8__followCursorAndDescribe.o",
       "thumb": false
     },
     {
@@ -98976,22 +98986,22 @@
     },
     {
       "address": "0x3a9394",
-      "function": "FUN_003a9394",
+      "function": "_ZN9Obj4223f823updatePointerTransitionEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a9394.o",
+      "object": "build/obj/_code/003a/Obj4223f8__updatePointerTransition.o",
       "size": 144,
-      "source": "src/_code/003a/FUN_003a9394.cpp",
-      "target": "orig/target/_code/003a/FUN_003a9394.o",
+      "source": "src/_code/003a/Obj4223f8__updatePointerTransition.cpp",
+      "target": "orig/target/_code/003a/Obj4223f8__updatePointerTransition.o",
       "thumb": false
     },
     {
       "address": "0x3a9424",
-      "function": "FUN_003a9424",
+      "function": "_ZN9Obj4223f815enableKindEightEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a9424.o",
+      "object": "build/obj/_code/003a/Obj4223f8__enableKindEight.o",
       "size": 28,
-      "source": "src/_code/003a/FUN_003a9424.cpp",
-      "target": "orig/target/_code/003a/FUN_003a9424.o",
+      "source": "src/_code/003a/Obj4223f8__enableKindEight.cpp",
+      "target": "orig/target/_code/003a/Obj4223f8__enableKindEight.o",
       "thumb": false
     },
     {
@@ -99067,12 +99077,12 @@
     },
     {
       "address": "0x3aa510",
-      "function": "FUN_003aa510",
+      "function": "_ZN9Obj4223f812updateBrowseEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003aa510.o",
+      "object": "build/obj/_code/003a/Obj4223f8__updateBrowse.o",
       "size": 616,
-      "source": "src/_code/003a/FUN_003aa510.cpp",
-      "target": "orig/target/_code/003a/FUN_003aa510.o",
+      "source": "src/_code/003a/Obj4223f8__updateBrowse.cpp",
+      "target": "orig/target/_code/003a/Obj4223f8__updateBrowse.o",
       "thumb": false
     },
     {
@@ -99321,12 +99331,12 @@
     },
     {
       "address": "0x3aae38",
-      "function": "itemMenuTakeSelected",
+      "function": "_ZN9Obj42244820itemMenuTakeSelectedEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/itemMenuTakeSelected.o",
+      "object": "build/obj/_code/003a/Obj422448__itemMenuTakeSelected.o",
       "size": 120,
-      "source": "src/_code/003a/itemMenuTakeSelected.cpp",
-      "target": "orig/target/_code/003a/itemMenuTakeSelected.o",
+      "source": "src/_code/003a/Obj422448__itemMenuTakeSelected.cpp",
+      "target": "orig/target/_code/003a/Obj422448__itemMenuTakeSelected.o",
       "thumb": false
     },
     {
@@ -99351,52 +99361,52 @@
     },
     {
       "address": "0x3ab0b4",
-      "function": "bibleScreenStartScript",
+      "function": "_ZN9Obj42244822bibleScreenStartScriptEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/bibleScreenStartScript.o",
+      "object": "build/obj/_code/003a/Obj422448__bibleScreenStartScript.o",
       "size": 116,
-      "source": "src/_code/003a/bibleScreenStartScript.cpp",
-      "target": "orig/target/_code/003a/bibleScreenStartScript.o",
+      "source": "src/_code/003a/Obj422448__bibleScreenStartScript.cpp",
+      "target": "orig/target/_code/003a/Obj422448__bibleScreenStartScript.o",
       "thumb": false
     },
     {
       "address": "0x3ab128",
-      "function": "FUN_003ab128",
+      "function": "_ZN9Obj42244812FUN_003ab128Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab128.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003ab128.o",
       "size": 540,
-      "source": "src/_code/003a/FUN_003ab128.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab128.o",
+      "source": "src/_code/003a/Obj422448__FUN_003ab128.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003ab128.o",
       "thumb": false
     },
     {
       "address": "0x3ab348",
-      "function": "FUN_003ab348",
+      "function": "_ZN9Obj42244812FUN_003ab348Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab348.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003ab348.o",
       "size": 144,
-      "source": "src/_code/003a/FUN_003ab348.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab348.o",
+      "source": "src/_code/003a/Obj422448__FUN_003ab348.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003ab348.o",
       "thumb": false
     },
     {
       "address": "0x3ab3d8",
-      "function": "FUN_003ab3d8",
+      "function": "_ZN9Obj42247c12FUN_003ab3d8Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab3d8.o",
+      "object": "build/obj/_code/003a/Obj42247c__FUN_003ab3d8.o",
       "size": 4,
-      "source": "src/_code/003a/FUN_003ab3d8.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab3d8.o",
+      "source": "src/_code/003a/Obj42247c__FUN_003ab3d8.cpp",
+      "target": "orig/target/_code/003a/Obj42247c__FUN_003ab3d8.o",
       "thumb": false
     },
     {
       "address": "0x3ab3dc",
-      "function": "FUN_003ab3dc",
+      "function": "_ZN9Obj42247c12FUN_003ab3dcEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab3dc.o",
+      "object": "build/obj/_code/003a/Obj42247c__FUN_003ab3dc.o",
       "size": 360,
-      "source": "src/_code/003a/FUN_003ab3dc.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab3dc.o",
+      "source": "src/_code/003a/Obj42247c__FUN_003ab3dc.cpp",
+      "target": "orig/target/_code/003a/Obj42247c__FUN_003ab3dc.o",
       "thumb": false
     },
     {
@@ -99412,22 +99422,22 @@
     },
     {
       "address": "0x3ab7a0",
-      "function": "sceneScriptDoneSetState",
+      "function": "_ZN9Obj42244823sceneScriptDoneSetStateEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/sceneScriptDoneSetState.o",
+      "object": "build/obj/_code/003a/Obj422448__sceneScriptDoneSetState.o",
       "size": 40,
-      "source": "src/_code/003a/sceneScriptDoneSetState.cpp",
-      "target": "orig/target/_code/003a/sceneScriptDoneSetState.o",
+      "source": "src/_code/003a/Obj422448__sceneScriptDoneSetState.cpp",
+      "target": "orig/target/_code/003a/Obj422448__sceneScriptDoneSetState.o",
       "thumb": false
     },
     {
       "address": "0x3ab7c8",
-      "function": "FUN_003ab7c8",
+      "function": "_ZN9Obj42244812FUN_003ab7c8Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab7c8.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003ab7c8.o",
       "size": 124,
-      "source": "src/_code/003a/FUN_003ab7c8.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab7c8.o",
+      "source": "src/_code/003a/Obj422448__FUN_003ab7c8.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003ab7c8.o",
       "thumb": false
     },
     {
@@ -99442,32 +99452,32 @@
     },
     {
       "address": "0x3ab948",
-      "function": "FUN_003ab948",
+      "function": "_ZN9Obj42244812FUN_003ab948Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab948.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003ab948.o",
       "size": 92,
-      "source": "src/_code/003a/FUN_003ab948.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab948.o",
+      "source": "src/_code/003a/Obj422448__FUN_003ab948.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003ab948.o",
       "thumb": false
     },
     {
       "address": "0x3ab9a4",
-      "function": "FUN_003ab9a4",
+      "function": "_ZN9Obj42244812FUN_003ab9a4Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003ab9a4.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003ab9a4.o",
       "size": 304,
-      "source": "src/_code/003a/FUN_003ab9a4.cpp",
-      "target": "orig/target/_code/003a/FUN_003ab9a4.o",
+      "source": "src/_code/003a/Obj422448__FUN_003ab9a4.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003ab9a4.o",
       "thumb": false
     },
     {
       "address": "0x3abad4",
-      "function": "FUN_003abad4",
+      "function": "_ZN9Obj42244812FUN_003abad4Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003abad4.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003abad4.o",
       "size": 20,
-      "source": "src/_code/003a/FUN_003abad4.cpp",
-      "target": "orig/target/_code/003a/FUN_003abad4.o",
+      "source": "src/_code/003a/Obj422448__FUN_003abad4.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003abad4.o",
       "thumb": false
     },
     {
@@ -99482,12 +99492,12 @@
     },
     {
       "address": "0x3abd84",
-      "function": "FUN_003abd84",
+      "function": "_ZN9Obj42247c12FUN_003abd84Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003abd84.o",
+      "object": "build/obj/_code/003a/Obj42247c__FUN_003abd84.o",
       "size": 4,
-      "source": "src/_code/003a/FUN_003abd84.cpp",
-      "target": "orig/target/_code/003a/FUN_003abd84.o",
+      "source": "src/_code/003a/Obj42247c__FUN_003abd84.cpp",
+      "target": "orig/target/_code/003a/Obj42247c__FUN_003abd84.o",
       "thumb": false
     },
     {
@@ -99512,22 +99522,22 @@
     },
     {
       "address": "0x3abe00",
-      "function": "menuUpdateCollectionSort",
+      "function": "_ZN9Obj42244824menuUpdateCollectionSortEv",
       "module": "_code",
-      "object": "build/obj/_code/003a/menuUpdateCollectionSort.o",
+      "object": "build/obj/_code/003a/Obj422448__menuUpdateCollectionSort.o",
       "size": 212,
-      "source": "src/_code/003a/menuUpdateCollectionSort.cpp",
-      "target": "orig/target/_code/003a/menuUpdateCollectionSort.o",
+      "source": "src/_code/003a/Obj422448__menuUpdateCollectionSort.cpp",
+      "target": "orig/target/_code/003a/Obj422448__menuUpdateCollectionSort.o",
       "thumb": false
     },
     {
       "address": "0x3abed8",
-      "function": "FUN_003abed8",
+      "function": "_ZN9Obj42244812FUN_003abed8Ev",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003abed8.o",
+      "object": "build/obj/_code/003a/Obj422448__FUN_003abed8.o",
       "size": 816,
-      "source": "src/_code/003a/FUN_003abed8.cpp",
-      "target": "orig/target/_code/003a/FUN_003abed8.o",
+      "source": "src/_code/003a/Obj422448__FUN_003abed8.cpp",
+      "target": "orig/target/_code/003a/Obj422448__FUN_003abed8.o",
       "thumb": false
     },
     {

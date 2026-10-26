@@ -1,26 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0019a300` (_code @ 0x19a300, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail is the SDK hand-written svc wrapper (push {r0}; svc; ldr r2,[sp]; str r1,[r2]); armcc keeps the out pointer in r4 and pushes r4/lr instead */
+#include "nn/svc.h"
 
 extern "C" {
 
-int software_interrupt(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-void FUN_0019a300(unsigned int *param_1,unsigned int param_2)
-
+/* Connects to the named port through svc 0x2d and stores the session handle in *out. */
+s32 FUN_0019a300(u32 *out, const char *name)
 {
-/* irregular: 1 native warning(s); review required */
-  software_interrupt(0x2d);
-  *param_1 = param_2;
-  return;
+    nn::svc::ResultAndValue r = nn::svc::ConnectToPortRaw((u32)out, name);
+    *out = r.value;
+    return r.result;
 }
 
 } /* extern "C" */

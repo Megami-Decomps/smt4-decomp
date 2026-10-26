@@ -1,44 +1,53 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00451e34` (_code @ 0x451e34, 0x6c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: link resolution now has retail's shape; only the register choice differs (retail keeps the zero in r3 and the offset in ip, built swaps them) */
+#include "shard/S1NwGfx.h"
 
 extern "C" {
 
-int FUN_004504d8(unsigned int *, int, unsigned int);
+struct ObjectLink {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ s32 busy;
+    /* 0x1c */ u32 pending;
+};
 
-/* Supplied declaration required: FUN_004504d8. */
+struct ObjectBase {
+    /* 0x00 */ u32 typeBits;
+    /* 0x04 */ u8 unk04[0x28];
+    /* 0x2c */ ObjectBase *owner;
+    /* 0x30 */ u32 mode;
+    /* 0x34 */ u8 unk34[4];
+    /* 0x38 */ RelativePointer link;
+};
 
-
-void FUN_00451e34(unsigned int *param_1)
-
+static ObjectBase *objectCast(ObjectBase *object, u32 requiredBits)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  unsigned int *puVar2;
-  unsigned int temp_v1;
-  
-  if ((param_1 == (unsigned int *)0x0) || (puVar2 = param_1, (~*param_1 & 0x20000021) != 0)) {
-    puVar2 = (unsigned int *)0x0;
-  }
-  if (puVar2[0xb] == 0) {
-    puVar2[0xb] = (unsigned int)param_1;
-    if (puVar2[0xe] != 0) {
-      temp_v0 = (int)puVar2 + puVar2[0xe] + 0x38;
+    if (object != NULL && (~object->typeBits & requiredBits) == 0) {
+        return object;
     }
-    else {
-      temp_v0 = 0;
+    return NULL;
+}
+
+void FUN_004504d8(ObjectBase *object, ObjectLink *link, u32 mode);
+
+/* Binds the object to itself as owner (once, when it has all the required type bits) and starts it through its link, or flags the link pending if it is busy. */
+void FUN_00451e34(ObjectBase *object)
+{
+    ObjectBase *self = objectCast(object, 0x20000021);
+    ObjectLink *link;
+    u32 mode;
+
+    if (self->owner == NULL) {
+        self->owner = object;
+        link = static_cast<ObjectLink *>(self->link.get());
+        mode = self->mode;
+        if (link->busy == 0) {
+            if (mode == 0) {
+                mode = 0x2010000;
+            }
+            FUN_004504d8(object, link, mode);
+            return;
+        }
+        link->pending = 0;
     }
-    temp_v1 = puVar2[0xc];
-    if (*(int *)(temp_v0 + 0x18) == 0) {
-      if (temp_v1 == 0) {
-        temp_v1 = 0x2010000;
-      }
-      FUN_004504d8(param_1,temp_v0,temp_v1);
-      return;
-    }
-    *(unsigned int *)(temp_v0 + 0x1c) = 0;
-  }
-  return;
 }
 
 } /* extern "C" */

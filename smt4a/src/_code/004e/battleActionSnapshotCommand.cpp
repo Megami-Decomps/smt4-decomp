@@ -1,4 +1,4 @@
-/* NON_MATCHING: action-slot and history-index registers/scheduling differ; the no-unit path duplicates the return instead of branching to the shared epilogue. Ospace candidate. */
+/* NON_MATCHING: instruction count and control flow match (105 rows, one shared return); the action-slot address scheduling and the history-index register assignment differ. */
 #include "battle/btlAction.h"
 #include "battle/btlUnit.h"
 
@@ -63,25 +63,25 @@ u32 battleActionSnapshotCommand(BattleCommandOwner *owner, BattleCommandSource *
         owner->battle->pending.command = 0;
         owner->battle->pending.argument = 0;
         owner->battle->pending.reserved = 0;
-        return 1;
-    }
-    owner->battle->pending.unit = source->id;
-    owner->battle->pending.command = unitCommandState(source)->current.command;
-    owner->battle->pending.argument = unitCommandState(source)->current.argument0;
-    owner->battle->pending.reserved = 0;
-    unitCommandState(source)->previous.command = unitCommandState(source)->current.command;
-    unitCommandState(source)->previous.argument0 = unitCommandState(source)->current.argument0;
-    unitCommandState(source)->previous.argument1 = unitCommandState(source)->current.argument1;
-    unitCommandState(source)->previous.argument2 = unitCommandState(source)->current.argument2;
-    s32 index = unitCommandState(source)->next;
-    if (index < 10) {
-        unitCommandState(source)->history[index].command = unitCommandState(source)->current.command;
-        unitCommandState(source)->history[index].argument0 = unitCommandState(source)->current.argument0;
-        unitCommandState(source)->history[index].argument1 = unitCommandState(source)->current.argument1;
-        unitCommandState(source)->history[index].argument2 = unitCommandState(source)->current.argument2;
-    }
-    if (++unitCommandState(source)->next > 9) {
-        unitCommandState(source)->next = 0;
+    } else {
+        owner->battle->pending.unit = source->id;
+        owner->battle->pending.command = unitCommandState(source)->current.command;
+        owner->battle->pending.argument = unitCommandState(source)->current.argument0;
+        owner->battle->pending.reserved = 0;
+        unitCommandState(source)->previous.command = unitCommandState(source)->current.command;
+        unitCommandState(source)->previous.argument0 = unitCommandState(source)->current.argument0;
+        unitCommandState(source)->previous.argument1 = unitCommandState(source)->current.argument1;
+        unitCommandState(source)->previous.argument2 = unitCommandState(source)->current.argument2;
+        s32 index = unitCommandState(source)->next;
+        if (index < 10) {
+            unitCommandState(source)->history[index].command = unitCommandState(source)->current.command;
+            unitCommandState(source)->history[index].argument0 = unitCommandState(source)->current.argument0;
+            unitCommandState(source)->history[index].argument1 = unitCommandState(source)->current.argument1;
+            unitCommandState(source)->history[index].argument2 = unitCommandState(source)->current.argument2;
+        }
+        if (++unitCommandState(source)->next > 9) {
+            unitCommandState(source)->next = 0;
+        }
     }
     return 1;
 }

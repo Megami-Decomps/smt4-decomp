@@ -51,7 +51,7 @@ void FUN_0019f888(MoriModelEffect* effect)
     effect->keys.clear();
     s32 entryCount = asdAtbcGetEntryCount(table);
     effect->keyCount = 0;
-    for (s32 entry = 0; entry < entryCount; entry++) {
+    for (s32 entry = 0; entryCount > entry; entry++) {
         AtbcCursor* cursor = static_cast<AtbcCursor*>(FUN_001ad70c(table, entry));
         u32 index = cursor->first;
         u32 key = 0xffffffff;

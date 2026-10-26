@@ -1,25 +1,35 @@
-/* NON_MATCHING: key tests now `> -1` (cmn/ble as retail); retail reloads sprite->animation before every channel (push {r4,r5,lr}), ours keeps it in a register across the channel resets. */
+/* NON_MATCHING: compiler hoists animation/key pointers across channel stores and uses r6 rather than lr for sequence scanning. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
-extern "C" void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s16 key, s8 mode);
+extern "C" void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s32 key, s32 mode);
 
-/* Select a command stream and reset each animation channel it supplies. */
+static inline SpriteSequenceEntry *findSpriteSequence(SpriteAnimationResource *resource, s16 sequence)
+{
+    s32 group = 0;
+    for (u32 index = 0; index < resource->sequenceBytes / sizeof(SpriteSequenceEntry); ++index) {
+        if (group == sequence)
+            return &resource->sequence[index];
+        if (resource->sequence[index].value == -1)
+            ++group;
+    }
+    return NULL;
+}
+
+/* Activate an animation command and initialize its selected playback channels. */
 extern "C" void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const SpriteAnimationCommand *animation)
 {
     sprite->animation = animation;
-    if (animation == NULL) {
+    if (animation == NULL)
         return;
-    }
     sprite->animationFrame = 0;
     sprite->animationLoop = 0;
     sprite->animationTime = 0;
     sprite->animationStep = 0;
     sprite->running = 1;
-    if (animation->positionKey > -1) {
+    if (animation->positionKey > -1)
         uiSpriteSetKeyframe(sprite, (s16)animation->positionKey, animation->positionMode);
-    }
     if (sprite->animation->frameKey > -1) {
-        s16 key = (s16)sprite->animation->frameKey;
+        s16 key = sprite->animation->frameKey;
         s8 mode = sprite->animation->frameMode;
         if (sprite->frameKeys != NULL) {
             sprite->frameKey = key;
@@ -27,11 +37,12 @@ extern "C" void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const Sp
             sprite->completed[1] = 0;
             sprite->finished = 0;
             sprite->frameMode = mode;
-            sprite->frameValue = mode == 0 ? sprite->frameKeys[key].first : sprite->frameKeys[key].second;
+            const SpriteValueKey *value = &sprite->frameKeys[sprite->frameKey];
+            sprite->frameValue = mode == 0 ? value->first : value->second;
         }
     }
     if (sprite->animation->colorKey > -1) {
-        s16 key = (s16)sprite->animation->colorKey;
+        s16 key = sprite->animation->colorKey;
         s8 mode = sprite->animation->colorMode;
         if (sprite->colorKeys != NULL) {
             sprite->colorKey = key;
@@ -39,33 +50,22 @@ extern "C" void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const Sp
             sprite->completed[2] = 0;
             sprite->finished = 0;
             sprite->colorMode = mode;
-            u32 color = mode == 0 ? sprite->colorKeys[key].first : sprite->colorKeys[key].second;
+            const SpriteValueKey *value = &sprite->colorKeys[sprite->colorKey];
+            u32 color = mode == 0 ? value->first : value->second;
             sprite->colors[0] = color;
             sprite->colors[1] = color;
             sprite->colors[2] = color;
         }
     }
     if (sprite->animation->sequence > -1) {
-        SpriteSequenceEntry *sequence = NULL;
-        s32 group = 0;
-        u32 count = sprite->resource->sequenceBytes >> 2;
-        for (u32 index = 0; index < count; ++index) {
-            if (group == (s16)sprite->animation->sequence) {
-                sequence = &sprite->resource->sequence[index];
-                break;
-            }
-            if (sprite->resource->sequence[index].value == -1) {
-                ++group;
-            }
-        }
-        sprite->sequence = sequence;
-        if (sequence != NULL) {
+        sprite->sequence = findSpriteSequence(sprite->resource, (s16)sprite->animation->sequence);
+        if (sprite->sequence != NULL) {
             sprite->sequenceFrame = 0;
             sprite->sequenceCount = 0;
             sprite->completed[3] = 0;
             sprite->finished = 0;
-            sprite->sequenceValue = sequence->value;
-            sprite->sequenceSentinel = 0xFFFFFFFF;
+            sprite->sequenceValue = sprite->sequence->value;
+            sprite->sequenceSentinel = -1u;
         }
     }
 }

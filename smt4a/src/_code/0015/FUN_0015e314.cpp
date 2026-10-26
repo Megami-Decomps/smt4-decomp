@@ -45,7 +45,7 @@ u32 FUN_0015e314(ObjectCounterTableOwner *owner, u32 resource, void *buffer, u32
 
     owner->counters = (ObjectCounterTable *)buffer;
     owner->counters->count = FUN_00194f94(resource);
-    for (u32 i = 0; i < owner->counters->count; ++i)
+    for (u32 i = 0; owner->counters->count > i; ++i)
         owner->counters->values[i] = 0;
     FUN_00300154(&owner->binding, resource);
     ObjectCounterCommandQueue *queue = objectCommandQueueGet();

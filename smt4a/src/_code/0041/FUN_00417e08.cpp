@@ -7,7 +7,7 @@
 extern "C" {
 
 s32 FUN_001bd118(u32 id);
-s32 FUN_001ada74(u32 id);
+s32 goalConditionsSatisfied(u32 id);
 void FUN_004bb6d8(u32 flag, s32 value);
 void clearTwoWords(void *words);
 void clearThreeWords(void *words);
@@ -37,7 +37,7 @@ u32 FUN_00417e08(u16 id)
     }
     entry->cleared = 0;
     entry->flagsB &= ~0x3D;
-    if (kind == 10 && FUN_001ada74(id) != 0) {
+    if (kind == 10 && goalConditionsSatisfied(id) != 0) {
         entry->flagsB |= 0x20;
     }
     if (FUN_001bd100(id) != 0) {

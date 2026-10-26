@@ -19,7 +19,7 @@ extern GameStateView g_gameState;
 
 
 int FUN_001ad9b4(void);
-int FUN_001ada74(...);
+int goalConditionsSatisfied(...);
 int FUN_002466a8(void);
 int FUN_00295024(void);
 int FUN_00295108(...);
@@ -58,7 +58,7 @@ extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_001ada74. */
+/* Supplied declaration required: goalConditionsSatisfied. */
 extern int FUN_001bd118(unsigned int);
 /* Supplied declaration required: FUN_002466a8. */
 /* Supplied declaration required: FUN_00295024. */
@@ -338,7 +338,7 @@ LAB_002358f0:
             }
             if (temp_v12) {
               temp_v2 = FUN_001bd118(temp_v10);
-              if ((temp_v2 == 10) && (temp_v2 = FUN_001ada74(temp_v10), temp_v2 != 0)) {
+              if ((temp_v2 == 10) && (temp_v2 = goalConditionsSatisfied(temp_v10), temp_v2 != 0)) {
                 FUN_00417b70(temp_v10);
                 temp_v17 = 99;
               }
@@ -353,7 +353,7 @@ LAB_002358f0:
       }
       else if (temp_v17 != 1) {
         temp_v7 = partyEntryFlagsBit3(temp_v10);
-        temp_v11 = FUN_001ada74(temp_v10);
+        temp_v11 = goalConditionsSatisfied(temp_v10);
         if ((temp_v11 & ~temp_v7) == 0) goto LAB_002358f0;
         FUN_003deea4(temp_v10);
         temp_v17 = 5;

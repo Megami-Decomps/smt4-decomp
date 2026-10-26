@@ -12,7 +12,7 @@ int FUN_0037e1b0(...);
 
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_0020b908(...);
 int FUN_00228b04(int, int);
 int uniteStartOrQueueRequest(int);
@@ -46,7 +46,7 @@ typedef struct {
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: ifTouchRegionRemove. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0020b908. */
 /* Supplied declaration required: FUN_00228b04. */
 /* Supplied declaration required: FUN_0023b45c. */
@@ -243,7 +243,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
         skillHelpUpdateAttributeAndTarget();
         return temp_v15;
       }
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       return temp_v15;
     }
   }
@@ -365,7 +365,7 @@ unsigned int FUN_003c9354(int param_1,unsigned int param_2,unsigned int *param_3
       FUN_0037e1b0((int)*(char *)(param_1 + 0x6830),temp_v4);
       FUN_002c8550(1);
       if (!temp_v2) {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
       }
     }
     else {

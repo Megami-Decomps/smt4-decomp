@@ -1,4 +1,3 @@
-/* NON_MATCHING: rectangle copy uses one STM instead of retail's STM plus scalar store; one matrix load schedules differently. */
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -26,7 +25,8 @@ void FUN_002ffe14(const EffMenuPosition *position, u32 color,
     entry->color = color;
     entry->resource = resource;
     effMenuListAppend(entry, 1);
-    if (displayIsStereoActive() != 0) {
+    s32 stereoActive = displayIsStereoActive();
+    if (stereoActive != 0) {
         asdDebugTrace(DAT_0053d0d8, 701);
         EffMenuMatrixNode *second = static_cast<EffMenuMatrixNode *>(memAlloc(0x10000, 0x100, 0, 0x68, 16, 1));
         __aeabi_memcpy4(second, entry, sizeof(*entry));

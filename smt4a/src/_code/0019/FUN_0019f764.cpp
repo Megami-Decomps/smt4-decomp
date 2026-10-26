@@ -1,4 +1,4 @@
-/* NON_MATCHING: the force flag is now read through the 0x11F4 offset register (s8 field); retail still loads format, then the size pair with ldm (via ip), then address, where armcc loads the pair last with ldrd; the flag store also lands earlier. */
+/* NON_MATCHING: only the flag store: retail stores forceUpdate = 0 (r0) before loading the mode byte; armcc hoists the mode load above the store and uses r1 for the zero. */
 #include "common.h"
 #include <stddef.h>
 #include "shard/W6_W6Match2_HelpResources.h"
@@ -33,12 +33,16 @@ void FUN_001ac64c(TextureSize size, u32 format, u32 address);
 /* Binds a texture (skipped if unchanged and not forced) and selects the mode. */
 void FUN_0019f764(TextureState *state, TextureDesc *texture, u32 mode)
 {
-    if ((state->forceUpdate != 0 || state->texture != texture) && (state->texture = texture, texture != NULL)) {
-        FUN_001ac64c(texture->size, texture->format, texture->address);
-        state->mode = 3;
+    if (state->forceUpdate != 0 || state->texture != texture) {
+        state->texture = texture;
+        if (texture != NULL) {
+            TextureSize size = texture->size;
+            FUN_001ac64c(size, texture->format, texture->address);
+            state->mode = 3;
+        }
     }
     state->forceUpdate = 0;
-    if (state->mode != mode) {
+    if (mode != state->mode) {
         dataSubmitSelectedPresetBlock(mode);
         state->mode = mode;
     }

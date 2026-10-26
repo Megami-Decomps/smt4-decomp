@@ -4,7 +4,7 @@ extern "C" {
 void FUN_00144564(f32 duration);
 void FUN_00144a54(f32 duration);
 void FUN_00145048(f32 duration);
-void FUN_00154e34(u32 volume);
+void soundApplyVolumeToSlots(u32 volume);
 void FUN_00151340(u32 resource);
 void asdSoundSelectCurrentSlot(u32 slot);
 void sysMemClear(void *buffer, u32 size);
@@ -26,7 +26,7 @@ void soundInitializePersistentSlots(void)
         FUN_00144564(200.0f);
         FUN_00144a54(800.0f);
         FUN_00145048(250.0f);
-        FUN_00154e34(g_soundVolumeSetting.volume);
+        soundApplyVolumeToSlots(g_soundVolumeSetting.volume);
         sysMemClear(g_eventQueueEntries, sizeof(g_eventQueueEntries));
         jyoucyuGetTableEntry(1);
     }

@@ -9,7 +9,7 @@
 extern "C" {
 
 int sysPlaySe(int);
-int FUN_0019de98(int, unsigned int);
+int buttonHelpSetText(int, unsigned int);
 int messageSetMode(int);
 int FUN_001ad9b4(void);
 int partyFindSlotById(int);
@@ -54,12 +54,12 @@ extern unsigned char LAB_00468e88; /* 0x468e88 */
 extern int engineCleanupIsDone(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_001695a0. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: messageSetMode. */
 extern int idIsAtLeast350(unsigned int);
 extern int gameFlagEntryGetBit(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001ada74(unsigned int);
+extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: partyFindSlotById. */
 extern int scrRunOpcodesStub(unsigned int);
 extern int screenFadeIsBusy(void);
@@ -145,11 +145,11 @@ void FUN_004688c8(unsigned int *param_1)
         }
         else {
 LAB_004689f8:
-          temp_v2 = FUN_001ada74(temp_v4);
+          temp_v2 = goalConditionsSatisfied(temp_v4);
           if (temp_v2 != 0) {
             if (param_1[2] != 0xb) {
               sysPlaySe(0xa5);
-              FUN_0019de98(0,0xf4f4f4ff);
+              buttonHelpSetText(0,0xf4f4f4ff);
               messageSetMode(1);
               pickObjStart(param_1,&LAB_00468d60);
               temp_v4 = param_1[2] + 1;

@@ -7,7 +7,7 @@
 extern "C" {
 
 int taskCreateDraw(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_002c8550(...);
 int FUN_0034a9c4(...);
 int fusionReleaseRegisteredHandle(void);
@@ -42,7 +42,7 @@ extern unsigned int DAT_0057f0b8; /* 0x57f0b8 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_002c8550. */
 /* Supplied declaration required: FUN_0034a9c4. */
 /* Supplied declaration required: fusionReleaseRegisteredHandle. */
@@ -122,7 +122,7 @@ void Obj55c89c::start()
   }
   FUN_004d05c4(param_1 + 0x206,0x14,0x40e,temp_v0);
   *(unsigned char *)(param_1 + 0x20a) = 1;
-  FUN_0019de98(0,0xf4f4f4ff);
+  buttonHelpSetText(0,0xf4f4f4ff);
   param_1[5] = 0;
   param_1[6] = 0;
   fusionReleaseRegisteredHandle();

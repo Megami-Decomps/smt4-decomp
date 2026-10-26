@@ -123,7 +123,7 @@ int ifTouchRegionRemove(void);
 int FUN_001643b4(...);
 int asdTMTexTableEntryAt(...);
 int FUN_00183f58(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_00228b04(...);
 int FUN_00231574(void);
 int resourceRunOperationIfUnblocked(...);
@@ -230,7 +230,7 @@ extern unsigned short recordGetScaledMaximum(int);
 /* Supplied declaration required: gameFlagIsSet. */
 /* Supplied declaration required: dataTableGetCount. */
 /* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -897,7 +897,7 @@ unsigned int FUN_001f5294(void)
       else {
         temp_v5 = 0;
       }
-      FUN_0019de98(temp_v5,0xf4f4f4ff);
+      buttonHelpSetText(temp_v5,0xf4f4f4ff);
     }
     temp_v12 = *(char *)((int)piVar3 + 0x252);
     FUN_00163aa4(piVar3 + 0x72);
@@ -1051,11 +1051,11 @@ unsigned int FUN_001f5294(void)
           temp_v7 = dataTableGetCount(temp_v15);
           if (temp_v7 <= temp_v10) {
             temp_v5 = 0;
-            FUN_0019de98(temp_v5,0xf4f4f4ff);
+            buttonHelpSetText(temp_v5,0xf4f4f4ff);
           }
           else {
             temp_v5 = temp_v5 + temp_v10 * 0x94 + 0x44;
-            FUN_0019de98(temp_v5,0xf4f4f4ff);
+            buttonHelpSetText(temp_v5,0xf4f4f4ff);
           }
         }
         else {
@@ -1074,7 +1074,7 @@ unsigned int FUN_001f5294(void)
             else {
               temp_v5 = temp_v5 + temp_v10 * 0x94 + 0x44;
             }
-            FUN_0019de98(temp_v5,0xf4f4f4ff);
+            buttonHelpSetText(temp_v5,0xf4f4f4ff);
           }
           else {
             temp_v5 = 0;
@@ -1705,7 +1705,7 @@ LAB_001f732c:
         skillHelpUpdateAttributeAndTarget(*(unsigned short *)((int)piVar3 + (temp_v5 + temp_v4) * 2 + 0xfb6));
       }
       else {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
       }
     }
     piVar3[0xff] = piVar3[0xff] + 1;
@@ -2611,7 +2611,7 @@ LAB_001f8d58:
     FUN_003343c0(0);
     FUN_002c8550(9);
     statusPanelSetOpen(0);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     piVar3[0x103] = 0x13;
     FUN_0020b908(0x24,0);
     temp_v15 = 0x100020e;

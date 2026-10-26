@@ -14,8 +14,10 @@ void FUN_001ad5ec(RenderVectorOverride *override, u32 source, Vector4 *output)
     if (override->flags & 0x60) {
         f32 direction[3];
         FUN_001b4abc(source, direction);
-        f32 pitch = 0.0f;
-        if (!(override->flags & 0x40)) {
+        f32 pitch;
+        if (override->flags & 0x40) {
+            pitch = 0.0f;
+        } else {
             pitch = FUN_001bbde0(-direction[1]);
         }
         f32 yaw = FUN_001b640c(direction[0], direction[2]);

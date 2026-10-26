@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc reverses global-register allocation and folds the zero case into conditional stores. */
+/* NON_MATCHING: named bank pointer restores shared flag-array base; global registers and bank-address evaluation timing still differ. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 
 extern "C" {
@@ -10,8 +10,9 @@ extern void FUN_00125250(void);
 /* Enables lighting when either light bank has active entries or its enable flag set. */
 void FUN_00115c74(void)
 {
-    if (g_asdLightCount.count > 0 || (g_gfxSettings.flags[0] & 1) != 0 ||
-        g_asdLightCount.secondaryCount > 0 || (g_gfxSettings.flags[1] & 1) != 0) {
+    const u32 *flags = g_gfxSettings.flags;
+    if (g_asdLightCount.count > 0 || (flags[0] & 1) != 0 ||
+        g_asdLightCount.secondaryCount > 0 || (flags[1] & 1) != 0) {
         g_gfxSettings.enabled = 1;
         FUN_00125250();
     } else {

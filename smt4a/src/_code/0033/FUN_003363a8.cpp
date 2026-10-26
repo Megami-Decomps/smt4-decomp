@@ -13,7 +13,7 @@ extern CommandPanelMasks DAT_00573b88;
 s32 ifTouchGetButtonHelpValue();
 void sysPlaySe(u32 sound);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
-void FUN_0019de98(s32 layer, u32 color);
+void buttonHelpSetText(s32 layer, u32 color);
 void FUN_0020acd8(BtlUiObjCA *panel, u32 selection, u32 mode);
 void FUN_0020ad6c(BtlUiObjCA *panel, s32 state, s32 enabled);
 void FUN_0021a9e8(BtlUiObjCA *panel);
@@ -56,7 +56,7 @@ void FUN_003363a8(BtlUiObjCA *panel, u32 selection, s8 first, u32 second)
     }
     if (btlScriptUnitHasFlags(btlGetMainState()) != 0 ||
         (btlGetMainState()->stateFlags64.bits & DAT_00573b88.blocked) != 0) {
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         FUN_0020ad6c(panel, 0x28, 1);
         if (ifTouchGetButtonHelpValue() != 0x3F && btlScriptUnitHasFlags(btlGetMainState()) != 0)
             sysPlaySe(0x3F);

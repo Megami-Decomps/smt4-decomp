@@ -1,5 +1,5 @@
-/* NON_MATCHING: the checked-cast head now matches; retail keeps the null link (0 in r3, shared with the pending clear) after the self-relative link offset test where built drops the null branch and re-materialises zero */
-#include "common.h"
+/* NON_MATCHING: link resolution now has retail's shape; only the register choice differs (retail keeps the zero in r3 and the offset in ip, built swaps them) */
+#include "shard/S1NwGfx.h"
 
 extern "C" {
 
@@ -15,10 +15,10 @@ struct ObjectBase {
     /* 0x2c */ ObjectBase *owner;
     /* 0x30 */ u32 mode;
     /* 0x34 */ u8 unk34[4];
-    /* 0x38 */ s32 linkOffset;
+    /* 0x38 */ RelativePointer link;
 };
 
-static __inline ObjectBase *objectCast(ObjectBase *object, u32 requiredBits)
+static ObjectBase *objectCast(ObjectBase *object, u32 requiredBits)
 {
     if (object != NULL && (~object->typeBits & requiredBits) == 0) {
         return object;
@@ -37,11 +37,7 @@ void FUN_0036f70c(ObjectBase *object)
 
     if (self->owner == NULL) {
         self->owner = object;
-        if (self->linkOffset != 0) {
-            link = (ObjectLink *)((u8 *)&self->linkOffset + self->linkOffset);
-        } else {
-            link = NULL;
-        }
+        link = static_cast<ObjectLink *>(self->link.get());
         mode = self->mode;
         if (link->busy == 0) {
             if (mode == 0) {

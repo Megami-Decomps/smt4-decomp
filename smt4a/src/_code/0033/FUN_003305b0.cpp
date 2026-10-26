@@ -1,4 +1,4 @@
-/* NON_MATCHING: register assignment (frame/result in r6/r7 swapped) and retail evaluates the register arguments before the two stack zeros */
+/* NON_MATCHING: register assignment only (frame/result in r6/r7 swapped, argument registers loaded in another order); the stack zeros now follow the register arguments. */
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
@@ -16,7 +16,8 @@ s32 FUN_003305b0(void)
     s32 result = 1;
 
     for (s32 i = 0; g_battleSlotCount > i; i++) {
-        u32 value = FUN_0021bdac(state->infoWindow, i, frame, 13, 0, 0);
+        s32 window = state->infoWindow;
+        u32 value = FUN_0021bdac(window, i, frame, 13, 0, 0);
 
         if (value != 1) {
             result = value;

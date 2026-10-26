@@ -1,4 +1,4 @@
-/* NON_MATCHING: action camera masks and record lookups restored; 64-bit mask loads, early-return sharing and register allocation differ. */
+/* NON_MATCHING: instruction count matches (95 rows); retail shares one function-end return for every early exit, and the 64-bit mask loads and register allocation differ. */
 #include "battle/btlAction.h"
 #include "battle/btlUnit.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -50,7 +50,7 @@ void FUN_004e69e8(BtlMainStateA **owner, BtlUnitA *unit, s32 forced)
         return;
     for (s16 index = 4; index < 0x36; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
-        if (entry != NULL && (entry->flags & g_btlAction.targetableMask) != 0 &&
+        if ((entry->flags & g_btlAction.targetableMask) != 0 &&
             (g_btlAction.interaction.excludedMask & entry->flags) == 0 && entry->selection.marked != 0)
             return;
     }

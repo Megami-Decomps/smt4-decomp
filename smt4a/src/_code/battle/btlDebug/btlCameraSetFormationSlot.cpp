@@ -52,7 +52,7 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle
     case 3:
         camera->formation.position.x = 12.0f;
         battleVectorCopy(&formation->offset, &DAT_005e1554);
-        if (battle->stateFlags64.bits & masks->wideFormation)
+        if (masks->wideFormation & battle->stateFlags64.bits)
             formation->offset.x = 1.5f;
         break;
     default:

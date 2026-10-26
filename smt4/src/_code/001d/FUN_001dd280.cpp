@@ -58,7 +58,7 @@ unsigned int FUN_001dd280(void)
         }
       }
       iVar6 = *(int *)(iVar1 + 0x5c);
-      FUN_002628fc(*(unsigned int *)(iVar6 + 4));
+      objectReleaseIfSet(*(unsigned int *)(iVar6 + 4));
       *(unsigned int *)(iVar6 + 4) = 0;
       iVar6 = *(int *)(iVar1 + 0x60) * 0x228;
       FUN_00262888();
@@ -94,7 +94,7 @@ unsigned int FUN_001dd280(void)
         }
       }
       iVar6 = *(int *)(iVar1 + 0x5c);
-      FUN_002628fc(*(unsigned int *)(iVar6 + 4));
+      objectReleaseIfSet(*(unsigned int *)(iVar6 + 4));
       *(unsigned int *)(iVar6 + 4) = 0;
       if (*(int **)(iVar1 + 0x5c) != (int *)0x0) {
         (**(code **)(**(int **)(iVar1 + 0x5c) + 4))();

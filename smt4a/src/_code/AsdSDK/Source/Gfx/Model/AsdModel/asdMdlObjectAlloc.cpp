@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the 0.0f offset constant lands in s1 instead of reusing s0. */
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
@@ -59,14 +58,11 @@ AsdModel *asdMdlObjectAlloc(void)
     model->unk64[0] = 0;
     model->unk64[1] = 0;
     model->unk64[2] = 0;
-    model->color[0] = 1.0f;
-    model->color[1] = 1.0f;
-    model->color[2] = 1.0f;
-    model->color[3] = 1.0f;
+    for (s32 i = 0; i < 4; i++) {
+        model->color[i] = 1.0f;
+    }
     model->unk90 = 0;
-    model->offset[2] = 0.0f;
-    model->offset[1] = 0.0f;
-    model->offset[0] = 0.0f;
+    model->offset[0] = model->offset[1] = model->offset[2] = 0.0f;
     asdListAdd(DAT_00636ec8, model, 0);
     g_gfxSettings.modelCount++;
     return model;

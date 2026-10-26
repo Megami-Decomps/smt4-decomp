@@ -2985,6 +2985,7 @@
 0x00199d58 _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_ name
 0x00199e6c nn_math_ARMv6_VEC3TransformAsm_2A87B4 name
 0x00199ea0 nn_math_ARMv6_MTX34MultAsm name
+0x00199f84 nn_math_ARMv6_MTX34InverseAsm name
 0x0019a0a0 nn_math_ARMv6_VEC3TransformAsm_2AD44C name
 0x0019a0dc FUN_0019a0dc between
 0x0019a258 nn_math_ARMv6_MTX34ToMTX33Asm name
@@ -3372,6 +3373,7 @@
 0x001b48d4 frem between
 0x001b49fc FUN_001b49fc callers
 0x001b4a00 FUN_001b4a00 between
+0x001b4a20 nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20 name
 0x001b4a58 FUN_001b4a58 between
 0x001b4a74 FUN_001b4a74 between
 0x001b4a90 __aeabi_memset4 name

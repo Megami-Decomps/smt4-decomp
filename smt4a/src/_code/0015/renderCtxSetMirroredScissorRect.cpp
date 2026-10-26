@@ -29,7 +29,7 @@ extern "C" s32 renderCtxSetMirroredScissorRect(s32 x, s32 y, s32 width, s32 heig
         }
         break;
     }
-    s32 minimumX = maximumX - (x + width) + 1;
+    s32 minimumX = maximumX - (width + x) + 1;
     s32 endX = maximumX - x;
     if (minimumX < 0)
         minimumX = 0;

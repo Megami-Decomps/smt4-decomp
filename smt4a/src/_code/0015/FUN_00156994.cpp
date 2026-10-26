@@ -61,7 +61,7 @@ void FUN_0017efa4(void *flags, void *out, s32 mode);
 void FUN_0017f87c(AnimBinding *anim, void *states, void *bindings, void *trackKind, f32 time);
 void trackAdvance(AnimTrackState *track, f32 dt);
 void FUN_001881c8(void);
-void FUN_00199f84(void *dest, void *source);
+void nn_math_ARMv6_MTX34InverseAsm(void *dest, void *source);
 void nn_math_ARMv6_MTX34CopyAsm(void *dest, const void *source);
 void nn_math_ARMv6_MTX34InvTransposeAsm(void *dest, const void *source);
 void nn_math_ARMv6_MTX34MultAsm(void *dest, const void *first, const void *second);
@@ -109,7 +109,7 @@ void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
         nn_math_ARMv6_MTX34InvTransposeAsm(model->normalWorld, model->normalMatrix);
         nn_math_ARMv6_MTX34MultAsm(model->normalWorld, model->worldMatrix, model->normalWorld);
     }
-    FUN_00199f84(scratch, outMatrix);
+    nn_math_ARMv6_MTX34InverseAsm(scratch, outMatrix);
     if (model->unk0E4[0] & 1)
         FUN_0017352c(model->unk0E4, outMatrix, scratch);
     nn_math_ARMv6_MTX34CopyAsm(model->worldMatrix, outMatrix);

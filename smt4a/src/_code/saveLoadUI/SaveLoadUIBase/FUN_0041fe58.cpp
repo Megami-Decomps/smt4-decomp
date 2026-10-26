@@ -93,7 +93,7 @@ void FUN_0041f020(SaveLoadUI *ui, s32 arg);
 void FUN_00203b40(void *list, s32 count, s32 rows, s32 columns, s32 a, s32 b);
 void flaggedEntrySetValueA(void *list, s32 value);
 void scrollOwnerSetValue(void *list, s32 value);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 
 /* Opens the save/load screen: snapshots the game data, config and save data, starts loading its
  * files and sprites, sets up the five slots and the cursor from the saved one, and enters the
@@ -168,7 +168,7 @@ void FUN_0041fe58(SaveLoadUI *ui, s32 isLoad, u8 option)
     FUN_00203b40(ui->list, 5, 2, 1, 1, 1);
     flaggedEntrySetValueA(ui->list, range);
     scrollOwnerSetValue(ui->list, top);
-    FUN_0019de98(0, 0xF4F4F4FF);
+    buttonHelpSetText(0, 0xF4F4F4FF);
     u8 stage = ui->stage;
 
     ui->step = 0;

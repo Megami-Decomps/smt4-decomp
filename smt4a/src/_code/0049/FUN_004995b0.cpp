@@ -11,7 +11,7 @@ int statsSetFlag(...);
 
 int FUN_00148bb8(...);
 int FUN_00163aa4(unsigned int *);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int scrRunOpcodesStub(...);
 int messageWindowIsState1(...);
 int obj04Finish(void);
@@ -40,7 +40,7 @@ extern unsigned int vec2GetXInt(unsigned int *);
 extern unsigned int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int messageMainGetValue(void);
@@ -88,12 +88,12 @@ void FUN_004995b0(unsigned int *param_1)
         if (temp_v3 != 0) {
           temp_v3 = messageMainGetValue();
           temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803] + 4);
-          FUN_0019de98(temp_v3 + 0x40,0xf4f4f4ff);
+          buttonHelpSetText(temp_v3 + 0x40,0xf4f4f4ff);
         }
         temp_v3 = panelIsMissingOrFlagClear();
         if (temp_v3 != 0) {
           obj04Finish();
-          FUN_0019de98(0,0xf4f4f4ff);
+          buttonHelpSetText(0,0xf4f4f4ff);
           temp_v3 = messageGetChoiceResult();
           if (temp_v3 != -1) {
             param_1[0x2d0] = param_1[temp_v3 + 0x5803];
@@ -131,12 +131,12 @@ void FUN_004995b0(unsigned int *param_1)
         if (temp_v3 != 0) {
           temp_v3 = messageMainGetValue();
           temp_v3 = dataTable17Type0GetEntry(temp_v5,param_1[temp_v3 + 0x5803]);
-          FUN_0019de98(temp_v3 + 0x40,0xf4f4f4ff);
+          buttonHelpSetText(temp_v3 + 0x40,0xf4f4f4ff);
         }
         temp_v3 = panelIsMissingOrFlagClear();
         if (temp_v3 != 0) {
           obj04Finish();
-          FUN_0019de98(0,0xf4f4f4ff);
+          buttonHelpSetText(0,0xf4f4f4ff);
           temp_v3 = messageGetChoiceResult();
           if (temp_v3 == -1) {
             messageDismissNumericBanner(1);

@@ -1,5 +1,9 @@
-/* NON_MATCHING: The final vector copy uses r1-r3 rather than retail's r0-r2; all other instructions match. */
 #include "battle/btlCamera.h"
+
+static __inline void copyVector(BtlCameraVector3 *destination, const BtlCameraVector3 *source)
+{
+    *destination = *source;
+}
 
 extern "C" {
 f32 FUN_003d4dd4(s32 mode, s32 duration, s32 frame);
@@ -17,7 +21,7 @@ void FUN_004f1edc(BtlCameraA *work)
     work->position.z = work->span.from.z + delta.z * factor;
     ++work->settleState;
     if (static_cast<s32>(work->settleState) > static_cast<s32>(work->settleMode)) {
-        work->position = work->span.to;
+        copyVector(&work->position, &work->span.to);
         work->flags &= ~0x80000u;
     }
 }

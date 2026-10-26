@@ -73,7 +73,7 @@ unsigned int FUN_00342e24(int param_1)
     *(unsigned char *)(param_1 + 0x20) = 0;
     *(unsigned int *)(param_1 + 0x30) = 0;
     *(unsigned char *)(param_1 + 0x34) = 0;
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     *(unsigned int *)(param_1 + 0xec) = 3;
     *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
     *(unsigned int *)(param_1 + 0x44) = 0;
@@ -200,7 +200,7 @@ code_r0x00343274:
     *(unsigned char *)(param_1 + 0x20) = 0;
     *(unsigned int *)(param_1 + 0x30) = 0;
     *(unsigned char *)(param_1 + 0x34) = 0;
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     *(unsigned int *)(param_1 + 0xec) = 3;
     *(unsigned int *)(param_1 + 0xe8) = 0xffffffff;
     *(unsigned int *)(param_1 + 0x44) = 0;

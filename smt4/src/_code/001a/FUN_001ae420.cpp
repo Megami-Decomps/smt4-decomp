@@ -24,9 +24,9 @@ u32 FUN_001ae420(VxDecoder *decoder, u32 width, u32 height, u32 bufferCount,
             return 0;
         }
         state->decodedFrames = 0;
-        state->tables[0] = DAT_0040bc5c[0];
-        state->tables[1] = DAT_0040bc5c[1];
-        state->tables[2] = DAT_0040bc5c[2];
+        for (s32 i = 0; i < 3; i++) {
+            state->tables[i] = DAT_0040bc5c[i];
+        }
         state->width = width;
         state->height = height;
         decoder->stride = 1024;

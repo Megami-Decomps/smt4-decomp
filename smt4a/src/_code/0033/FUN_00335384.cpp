@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase-one `++phase` folds to the constant 2 (retail adds 1 to the loaded switch value) and the dispatch/constant scheduling differs; getters match. */
+/* NON_MATCHING: phase-one `++phase` folds to the constant 2 (retail adds 1 to the loaded switch value) and the sprite-pointer base add is scheduled after the first move; the case 2/3 shared completion block matches. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "ui/UiControl.h"
 
@@ -40,13 +40,13 @@ u32 FUN_00335384(SpriteIntroTransitionWork *work)
         FUN_00163aa4(&work->sprites[3], 1.0f);
         FUN_00163aa4(&work->sprites[4], 1.0f);
         FUN_00163aa4(&work->sprites[5], 1.0f);
-        if (uiAnimatedSpriteIsFinished(&work->sprites[2]) &&
-            uiAnimatedSpriteIsFinished(&work->sprites[3]) && uiAnimatedSpriteIsFinished(&work->sprites[4])) {
-            uiSpriteSelectAnim(&work->sprites[4], 9);
-            ++work->phase;
-            result = 1;
+        if (!(uiAnimatedSpriteIsFinished(&work->sprites[2]) &&
+              uiAnimatedSpriteIsFinished(&work->sprites[3]) && uiAnimatedSpriteIsFinished(&work->sprites[4]))) {
+            break;
         }
-        break;
+        uiSpriteSelectAnim(&work->sprites[4], 9);
+        ++work->phase;
+        /* The finished intro keeps reporting completion in phase 3. */
     case 3:
         result = 1;
         break;

@@ -20,7 +20,7 @@ struct PartyPanelView {
     u32 flags;
 };
 
-extern "C" void FUN_0019de98(const char *text, u32 color);
+extern "C" void buttonHelpSetText(const char *text, u32 color);
 
 /* Shows line `line` of table 0x39 when the table has it. */
 static __inline void showHelpLine(u32 line)
@@ -29,7 +29,7 @@ static __inline void showHelpLine(u32 line)
     HelpLine *entry = help.at(line);
 
     if (entry != NULL) {
-        FUN_0019de98(entry->text, 0xF4F4F4FF);
+        buttonHelpSetText(entry->text, 0xF4F4F4FF);
     }
 }
 

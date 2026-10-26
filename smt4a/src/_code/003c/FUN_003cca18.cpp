@@ -44,7 +44,7 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle, co
 s32 FUN_00228b04(FlaggedEntry *entry, s32 mode);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *entry);
 void skillHelpUpdateAttributeAndTarget(u32 id);
-void FUN_0019de98(u32 mode, u32 color);
+void buttonHelpSetText(u32 mode, u32 color);
 u32 FUN_001517b4(u32 button, u32 mode);
 void unitRecordBuild(u32 id, UnitRecord *record);
 void FUN_0020b908(u32 channel, u32 mode);
@@ -60,7 +60,7 @@ u32 FUN_003cca18(UniteWork *work, s8 blocked, u32 *selected)
         if (id != 0) {
             skillHelpUpdateAttributeAndTarget(id);
         } else {
-            FUN_0019de98(0, 0xF4F4F4FF);
+            buttonHelpSetText(0, 0xF4F4F4FF);
         }
     } else if ((FUN_001517b4(0, 1) | static_cast<s32>(blocked)) != 0) {
         input->accepted = 1;

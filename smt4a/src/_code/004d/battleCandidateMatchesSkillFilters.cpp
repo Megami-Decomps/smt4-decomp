@@ -1,4 +1,3 @@
-/* NON_MATCHING: the category loop's zero-skill branch reuses the pop-only return (1bc) where retail targets the mov r0,#0 return (1b8); everything else matches. */
 #include "common.h"
 #include "shard/W6_W6Match6_CompactSortRecord.h"
 
@@ -31,16 +30,18 @@ u32 battleCandidateMatchesSkillFilters(const BattleSkillFilter *filter, u32, u32
         if (!libc_bsearch(&filter->skill, filter->skills, filter->skillCount, sizeof(u16), halfwordKeyEmptyLastCompare))
             return 0;
     } else if (filter->requireCategory) {
-        s32 i = 0;
-        while (true) {
+        bool found = false;
+        for (s32 i = 0; i < 24; ++i) {
             u16 skill = filter->skills[i];
             if (!skill)
-                return 0;
-            if (filter->category == findSkillMetadataById(skill)->category)
                 break;
-            if (++i >= 24)
-                return 0;
+            if (filter->category == findSkillMetadataById(skill)->category) {
+                found = true;
+                break;
+            }
         }
+        if (!found)
+            return 0;
     }
     if (filter->requireElement) {
         u32 element = filter->element;

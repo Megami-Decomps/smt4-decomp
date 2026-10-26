@@ -1,4 +1,4 @@
-/* NON_MATCHING: tree walk and teardown order match; retail keeps a zero in sl from function entry and uses it for the null results of every offset lookup, where armcc loads immediate #0 there and hoists the zero later. */
+/* NON_MATCHING: tree walk, teardown order and the zero kept in sl for the null results now match (offsets use the canonical RelativePointer); remaining diffs: retail adds the offset first (addne rX, offset, base), loads entry pointers into different registers, and writes the group's flags with ldr/str where built uses a writeback load and stm. */
 #include "gfx/ResourceReleaseTree.h"
 #include "AsdSDK/AsdMemUtil.h"
 

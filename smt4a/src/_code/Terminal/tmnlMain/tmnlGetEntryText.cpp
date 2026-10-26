@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0026edbc(TmnlWorkA *work, int id);
+int tmnlFindSlotForItem(TmnlWorkA *work, int id);
 extern int gameDataGetPlayerName(void);
 
 extern TmnlWorkA *g_tmnl;
@@ -19,7 +19,7 @@ int tmnlGetEntryText(int id)
     if (id == 0x3e) {
         return gameDataGetPlayerName();
     }
-    index = FUN_0026edbc(g_tmnl, id);
+    index = tmnlFindSlotForItem(g_tmnl, id);
     return g_tmnl->items[index] + 7;
 }
 

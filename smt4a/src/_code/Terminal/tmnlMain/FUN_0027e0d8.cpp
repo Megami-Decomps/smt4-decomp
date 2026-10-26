@@ -45,7 +45,7 @@ int FUN_0021b6ec(...);
 int scrRunOpcodesStub(...);
 int useCounterStart(void);
 int touchMenuClose(void);
-int FUN_0026edbc(...);
+int tmnlFindSlotForItem(...);
 int msgWindowReset(void);
 int FUN_002bf4f4(...);
 int sortMenuAcquire(...);
@@ -207,7 +207,7 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: useCounterStart. */
 extern unsigned int gameDataGetPlayerName(void);
 /* Supplied declaration required: touchMenuClose. */
-/* Supplied declaration required: FUN_0026edbc. */
+/* Supplied declaration required: tmnlFindSlotForItem. */
 /* Supplied declaration required: FUN_00275bc8. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int screenFadeIsBusy(void);
@@ -667,7 +667,7 @@ LAB_0027edcc:
         temp_v7 = useCounterGetCurrentValue();
         if (temp_v7 != 0x69) {
           puVar8 = puVar3;
-          FUN_0026edbc(puVar3,temp_v7);
+          tmnlFindSlotForItem(puVar3,temp_v7);
           puVar3[3] = (unsigned int)puVar8;
           if (*(short *)puVar3[(int)puVar8 + 0x16a] >= 0xc9) {
             temp_v4 = gameDataGetPlayerName();

@@ -50,7 +50,7 @@ extern "C" {
 
 extern u32 *g_handleRegistry; /* 0x56fcc0 */
 
-extern void FUN_0019de98(u32 a, u32 color);
+extern void buttonHelpSetText(u32 a, u32 color);
 extern void placeWinRelease(void);
 extern void FUN_001add1c(u8 *text);
 extern void FUN_001a6500(u8 *text);
@@ -84,7 +84,7 @@ void scriptPanelRelease(ScriptPanel *panel)
 {
     s32 i;
 
-    FUN_0019de98(0, 0xf4f4f4ff);
+    buttonHelpSetText(0, 0xf4f4f4ff);
     placeWinRelease();
     FUN_001add1c(panel->text);
     FUN_001a6500(panel->text);

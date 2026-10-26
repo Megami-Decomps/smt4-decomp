@@ -24,7 +24,7 @@ extern "C" {
 extern const char DAT_00533214[]; /* "npcShop_Few_HaveSkill", shared script-entry name. */
 s32 eventQueueAddUniqueIfValid(u32 event);
 void sysPlaySe(u32 id);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void FUN_00215bd0(void);
 void FUN_0022e774(void);
 void FUN_0023b45c(s32 arg);
@@ -117,7 +117,7 @@ extern "C" void FUN_003e37f8(ShopScene *scene)
         FUN_003343f0(0);
         FUN_00333dc8(0);
         FUN_002c8538(0);
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         next = 99;
         break;
     case 99:

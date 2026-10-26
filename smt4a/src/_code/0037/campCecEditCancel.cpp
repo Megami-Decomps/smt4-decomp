@@ -14,7 +14,7 @@ struct CecEdit {
 };
 extern CecEdit *g_campCecEdit;
 void sysPlaySe(s32 sound);
-void FUN_0019de98(s32 index, u32 color);
+void buttonHelpSetText(s32 index, u32 color);
 
 void campCecEditCancel(void)
 {
@@ -25,7 +25,7 @@ void campCecEditCancel(void)
         edit->mode = 2;
         edit->counter = 0;
         sysPlaySe(228);
-        FUN_0019de98(0, 0xf4f4f4ff);
+        buttonHelpSetText(0, 0xf4f4f4ff);
     }
 }
 

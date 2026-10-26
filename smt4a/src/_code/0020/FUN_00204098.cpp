@@ -30,7 +30,7 @@ int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 
 int sysPlaySe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_0022e774(void);
 int scrScriptProcessStartEntry(...);
 int FUN_002a6894(...);
@@ -200,7 +200,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern char *dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
 extern float __aeabi_ul2f(int, unsigned int);
@@ -1552,7 +1552,7 @@ LAB_00206230:
         }
       }
       else {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         temp_v0 = *(char *)((int)*(char *)(temp_v16 + 0x442c) + temp_v6 + 0x74c4);
         if (temp_v0 != '\0') {
           FUN_0022e774();
@@ -1741,7 +1741,7 @@ joined_r0x002075ac:
         if (temp_v27 == 0) break;
       }
       obj04Finish();
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       FUN_003a62e8(temp_v7);
       if (*(char *)(temp_v16 + 0x4579) != '\0') {
         FUN_0020b490(temp_v6,0x10);
@@ -1870,7 +1870,7 @@ joined_r0x002075ac:
           FUN_002a5e7c(*(unsigned short *)(temp_v13 + 0x62));
           *(unsigned char *)(temp_v6 + 0x7f2c) = 0;
         }
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         if (*(int *)(temp_v6 + 0x4368) != 0xd) {
           FUN_003a62e8(temp_v13);
           if (*(char *)(temp_v7 + 0x4579) != '\0') {
@@ -2488,7 +2488,7 @@ LAB_00207d0c:
         temp_v16 = temp_v16 + 1;
       }
       if (0 >= temp_v16) {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         temp_v0 = *(char *)((int)*(char *)(temp_v7 + 0x442c) + temp_v6 + 0x74c4);
         if (temp_v0 != '\0') {
           FUN_0022e774();
@@ -2725,7 +2725,7 @@ LAB_00207d0c:
         if (temp_v7 == 0) break;
       }
       obj04Finish();
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       statusDownRestartTransition();
       temp_v7 = roundObjFinish(temp_v6);
       if (temp_v7 != 0) {

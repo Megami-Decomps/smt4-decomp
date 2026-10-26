@@ -22,7 +22,7 @@ Table21Entry *FUN_002e26c4(u32 id);
 extern "C" {
 #endif
 
-u8 FUN_002e2b38(void);
+bool FUN_002e2b38(void);
 
 #ifdef __cplusplus
 }

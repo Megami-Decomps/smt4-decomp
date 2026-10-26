@@ -1,17 +1,17 @@
-/* NON_MATCHING: feature checks use TST instead of BICS, Y/Z VFP registers are swapped, and final uniform-header scheduling/pool ordering differ. */
+/* NON_MATCHING: feature checks are BICS now (member hasFlags); remaining: Y/Z VFP registers are swapped, the direction components are one vldmia instead of three scalar loads, and the final uniform-header store (stm + add vs stmia!) and pool ordering differ. */
 #include "shard/W6_W6Match8_LightUniforms.h"
 
 extern "C" void shaderEmitLightVectors(ShaderLightContext *context)
 {
     ShaderLightSource *light = context->light;
-    if (light != NULL && (context->node->features->flags & 4) == 4) {
+    if (light != NULL && context->node->features->hasFlags(4)) {
         ShaderLightResource *resource = light->resource;
         shaderLightEmitVector(0x16, resource->first);
         shaderLightEmitVector(0x17, resource->second);
         f32 x = resource->direction.x;
         f32 y = resource->direction.y;
         f32 z = resource->direction.z;
-        if ((resource->flags & 2) == 2 && light->hasTransform) {
+        if (resource->hasFlags(2) && light->hasTransform) {
             const ShaderLightMatrix *matrix = light->getMatrix();
             f32 directionX = resource->direction.x;
             f32 directionY = resource->direction.y;

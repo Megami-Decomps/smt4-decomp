@@ -128,7 +128,7 @@ int FUN_00163aa4(...);
 int FUN_001643b4(...);
 int sysPlaySe(...);
 int asdTMTexTableEntryAt(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_0020d700(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(...);
@@ -187,7 +187,7 @@ extern unsigned int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: dataTable8FindRecord. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: dataTableFree. */
 /* Supplied declaration required: slotSetRequest. */
@@ -522,7 +522,7 @@ unsigned int FUN_003d56dc(void)
           temp_v10 = FUN_0035a094();
           if (temp_v10 == 0) {
             temp_v6 = dataTable15Sub0FindEntry(temp_v4);
-            FUN_0019de98(temp_v6,0xf4f4f4ff);
+            buttonHelpSetText(temp_v6,0xf4f4f4ff);
           }
           if (temp_v4 == 0x2f) {
             screenSetColor670(0x48c722ff,1,0x12,0x15);
@@ -671,7 +671,7 @@ unsigned int FUN_003d56dc(void)
       puVar2[9] = 6;
       campChangeState(2);
     }
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     if (puVar2[10] != 0x22) {
       FUN_003da8f4((int)*(char *)(puVar2 + 0x29),
                    (int)*(char *)((int)puVar2 + *(char *)(puVar2 + 0x29) + 0xa7));
@@ -1882,7 +1882,7 @@ LAB_003d801c:
       temp_v2 = FUN_0036d134();
       *(unsigned char *)((int)puVar12 + 0x32b6) = temp_v2;
       campSetSpriteAnimationPreset(2,1,0xffffffff,0);
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       temp_v4 = 1;
       campChangeState(temp_v4);
       break;
@@ -1975,7 +1975,7 @@ LAB_003d801c:
       FUN_0020d700();
       puVar2[9] = 6;
       campSetSpriteAnimationPreset(2,1,0xffffffff,0);
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       campChangeState(1);
       campCecSetObjectValue(0);
     }

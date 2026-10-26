@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the zero return into r0 first, so the work pointer and constants land one register higher (r1/r2/r4/r5) and each case returns on its own. */
+/* NON_MATCHING: only the global-pointer and constant-1 registers are swapped (retail r2/r3, build r3/r2). */
 #include "common.h"
 
 extern "C" {
@@ -27,18 +27,11 @@ extern ModelPlacementWork *g_mapModelWork;
 s32 FUN_0019dd38(void)
 {
     ModelPlacement *placement;
+    s32 result = 0;
 
     switch (g_mapModelWork->state) {
     case 0:
     case 1:
-        break;
-    case 3:
-        placement = &g_mapModelWork->placement;
-        if (++g_mapModelWork->counter > 30) {
-            placement->active = 0;
-            g_mapModelWork->state = 1;
-            g_mapModelWork->counter = 0;
-        }
         break;
     case 2:
         placement = &g_mapModelWork->placement;
@@ -53,8 +46,16 @@ s32 FUN_0019dd38(void)
             g_mapModelWork->counter = 0;
         }
         break;
+    case 3:
+        placement = &g_mapModelWork->placement;
+        if (++g_mapModelWork->counter > 30) {
+            placement->active = 0;
+            g_mapModelWork->state = 1;
+            g_mapModelWork->counter = 0;
+        }
+        break;
     }
-    return 0;
+    return result;
 }
 
 } /* extern "C" */

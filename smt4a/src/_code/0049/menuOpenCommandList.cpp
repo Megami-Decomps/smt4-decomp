@@ -17,7 +17,7 @@ void sortMenuAcquire(s32 menu, s32 a);
 void FUN_0031f208(s32 item);
 void useCounterStart(void);
 void sysPlaySe(s32 se);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 
 /* Opens the menu's command list (a shorter one in mode 8), plays the open sound and moves to step 10. */
 void menuOpenCommandList(MenuState *state)
@@ -41,7 +41,7 @@ void menuOpenCommandList(MenuState *state)
     }
     useCounterStart();
     sysPlaySe(5);
-    FUN_0019de98(0, 0xf4f4f4ff);
+    buttonHelpSetText(0, 0xf4f4f4ff);
     state->returnStep = state->step;
     state->timer = 0;
     state->step = 10;

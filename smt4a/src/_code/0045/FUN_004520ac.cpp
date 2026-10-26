@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler folds child-pointer/tag validation into shorter branches and rematerializes return zero; retail keeps explicit null conversion/checks and preserves zero in R4. */
+/* NON_MATCHING: zero result now kept in r4 like retail; built folds the relative-pointer null test into `addsne` and uses r0 for temporaries (retail resolves the child with addne/moveq and a separate cmp, keeping the context in r0). */
 #include "shard/S1NwGfx.h"
 
 struct TaggedResource {
@@ -14,6 +14,7 @@ void FUN_00451a70(ResourceContext* context, TaggedResource* resource);
 // Applies a tagged child block from a valid parent resource.
 u32 FUN_004520ac(ResourceContext* context, TaggedResource* resource)
 {
+    u32 result = 0;
     if (resource != NULL && (~resource->tag & 0x80000001)) {
         resource = NULL;
     }
@@ -24,6 +25,6 @@ u32 FUN_004520ac(ResourceContext* context, TaggedResource* resource)
     if (child != NULL) {
         FUN_00451a70(context, child);
     }
-    return 0;
+    return result;
 }
 }

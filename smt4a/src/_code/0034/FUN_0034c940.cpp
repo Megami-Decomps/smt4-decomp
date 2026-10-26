@@ -14,7 +14,7 @@ u32 FUN_0034a9ac(void);
 void statusPanelSetOpen(s32 open);
 void FUN_0037c8e4(s32 first, s32 second);
 void panelSetTarget(s32 offset, s32 frame);
-void FUN_0019de98(s32 first, u32 color);
+void buttonHelpSetText(s32 first, u32 color);
 void FUN_0020b908(s32 first, s32 second);
 
 // Select a fusion pair, preserve its list view and activate the status/confirmation panels.
@@ -75,7 +75,7 @@ void FUN_0034c940(s32 selection)
         FUN_0037c8e4(1, 0);
         panelSetTarget(-work->panelOffset, 0);
     }
-    FUN_0019de98(0, 0xf4f4f4ff);
+    buttonHelpSetText(0, 0xf4f4f4ff);
     FUN_002c8550(8);
     FUN_0020b908(0x13, 1);
 }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only at the start: retail keeps `mov r0,#12` before loading bufferA, built hoists the load */
 /* Resets the object to state 12 with the given flag, frees its three buffers, then enters state 13 and pokes the two device slots that are in mode 3. */
 #include "common.h"
 #include "code/Code0013.h"
@@ -41,7 +40,8 @@ void FUN_0047e430(Object *obj, u8 flag)
         campButtonHelpAcquire(obj->flag);
     }
     obj->state = 13;
-    if (FUN_0013def0(0) == 3) {
+    s32 firstState = FUN_0013def0(0);
+    if (firstState == 3) {
         FUN_003d54f8(0, 5);
     }
     if (FUN_0013def0(1) == 3) {

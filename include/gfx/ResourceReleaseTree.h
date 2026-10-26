@@ -4,6 +4,7 @@
 #define GFX_RESOURCERELEASETREE_H
 
 #include "common.h"
+#include "shard/S1NwGfx.h"
 
 /* The object a group's resources were registered with; slot 3 releases a registration. */
 class ResourceRegistry {
@@ -14,15 +15,11 @@ public:
 };
 
 /* A 32-bit offset from its own address to its target; 0 means none. */
-struct SelfOffset {
-    s32 offset;
-};
+typedef RelativePointer SelfOffset;
 
 template <class T> static T *offsetTarget(SelfOffset *slot)
 {
-    u8 *base = (u8 *)slot;
-    s32 offset = slot->offset;
-    return offset != 0 ? (T *)(base + offset) : (T *)0;
+    return static_cast<T *>(slot->get());
 }
 
 /* One loaded resource. */

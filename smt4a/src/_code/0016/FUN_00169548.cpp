@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses add r2, r1, #1280 where the compiled block uses ldr r2, [pc, #28]. */
+/* NON_MATCHING: only register assignment differs: retail forms the tail pointer (add r2, r1, #1280) before the enabled store and keeps the zero in r3. */
 #include "common.h"
 
 struct ButtonHelpTail {
@@ -26,10 +26,11 @@ void FUN_001a90e0(u8* state);
 void FUN_00169548(s32 enabled)
 {
     ButtonHelpState* state = g_buttonHelp.state;
+    ButtonHelpTail* tail = &state->tail;
     state->tail.enabled = (u8)enabled;
     if (enabled != 0) {
         state->tail.counter = 0;
-        state->tail.timer = 0;
+        tail->timer = 0;
         FUN_001a90e0(state->tail.resetState);
     }
 }

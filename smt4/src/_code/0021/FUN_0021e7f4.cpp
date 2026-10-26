@@ -26,7 +26,7 @@ typedef char MapRewardSetSizeCheck[sizeof(MapRewardSet) == 0x20 ? 1 : -1];
 extern "C" {
 extern MapStateSlots *g_mapStateSlots;
 extern AocSystem *g_aocSystem;
-MapRewardSet *FUN_00387c78(AocSystem *system, u32 id);
+MapRewardSet *aocFindDisplayNameOverrideText(AocSystem *system, u32 id);
 s32 FUN_0028fb40(u16 id);
 void FUN_00295a18(u16 id, s32 amount);
 
@@ -39,7 +39,7 @@ u16 FUN_0021e7f4(u32 group, s32 award)
         return 0;
     }
     const u32 id = index->id;
-    MapRewardSet *rewards = FUN_00387c78(g_aocSystem, id);
+    MapRewardSet *rewards = aocFindDisplayNameOverrideText(g_aocSystem, id);
     if (rewards == NULL) {
         DataTableView<MapRewardSet> defaults(0x20, 1);
         rewards = defaults.at(id);

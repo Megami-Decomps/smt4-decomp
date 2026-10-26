@@ -21,7 +21,7 @@ void clearFlags310To31F();
 u16 FUN_00372140();
 u16 uiQuestRunEnabledAction();
 void buttonHelpBeginExit(s32);
-void FUN_0019de98(s32, u32);
+void buttonHelpSetText(s32, u32);
 void FUN_0037c8e4(s32, s32);
 void panelSetTarget(s32, s32);
 void messageMainSetTargetFlags(s32);
@@ -81,7 +81,7 @@ void FUN_00468e98(PickObjectResources *owner)
     }
     if (action) {
         work->action = action;
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         buttonHelpBeginExit(1);
         work->state = 12;
         work->phase = 0;

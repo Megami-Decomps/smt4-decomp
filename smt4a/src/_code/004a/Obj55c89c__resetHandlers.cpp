@@ -1,111 +1,38 @@
-/* NON_MATCHING: Retail instruction scheduling/register allocation differs (117 retail versus 202 compiled rows). */
 #include "classes/Obj55c89c.h"
-#include "romwright_types.h"
-
-extern "C" {
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int FUN_004a15a0(...); /* 0x4a15a0 */
-extern int itemMenuDispatchSelectedEntry(...); /* 0x4a18ec */
-extern int FUN_004a2064(...); /* 0x4a2064 */
-extern int _ZN13BibleItemMenu7confirmEv(...); /* 0x4a2238 */
-extern int FUN_004a2404(...); /* 0x4a2404 */
-extern int FUN_004a24a8(...); /* 0x4a24a8 */
-extern int uiCursorEnterModeNine(...); /* 0x4a2ee0 */
-extern int demonScreenConfirmSaveRefresh(...); /* 0x4a2f8c */
-extern int shopPurchaseConfirmSelected(...); /* 0x4a3154 */
-extern int uiAnimatedPageToggleStep(...); /* 0x4a35e4 */
-extern int screen4AFinish(...); /* 0x4a374c */
-extern int FUN_004a38bc(...); /* 0x4a38bc */
-extern int FUN_004a39bc(...); /* 0x4a39bc */
-extern int FUN_004a40f4(...); /* 0x4a40f4 */
-
-
-} /* extern "C" */
 
 void Obj55c89c::resetHandlers()
-
 {
-    int param_1 = (int)this;
-/* irregular: 14 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v0 = 0;
-  temp_v1 = 0x10;
-  do {
-    temp_v2 = param_1 + temp_v0 * 8;
-    *(unsigned int *)(temp_v2 + 0xa878) = 0;
-    *(unsigned int *)(temp_v2 + 0xa87c) = 0;
-    temp_v1 = temp_v1 - 1;
-    temp_v0 = temp_v0 + 1;
-    *(unsigned int *)(temp_v2 + 0xa8f8) = 0;
-    *(unsigned int *)(temp_v2 + 0xa8fc) = 0;
-    *(unsigned int *)(temp_v2 + 0xa978) = 0;
-    *(unsigned int *)(temp_v2 + 0xa97c) = 0;
-  } while (temp_v1 != 0);
-  *(romwright_code **)(param_1 + 0xa878) = _ZN13BibleItemMenu7confirmEv;
-  *(unsigned int *)(param_1 + 0xa87c) = 0;
-  *(romwright_code **)(param_1 + 0xa880) = FUN_004a2404;
-  *(unsigned int *)(param_1 + 0xa884) = 0;
-  *(romwright_code **)(param_1 + 0xa888) = FUN_004a2064;
-  *(unsigned int *)(param_1 + 0xa88c) = 0;
-  *(romwright_code **)(param_1 + 0xa890) = FUN_004a39bc;
-  *(unsigned int *)(param_1 + 0xa894) = 0;
-  *(romwright_code **)(param_1 + 0xa898) = shopPurchaseConfirmSelected;
-  *(unsigned int *)(param_1 + 0xa89c) = 0;
-  *(romwright_code **)(param_1 + 0xa8a0) = itemMenuDispatchSelectedEntry;
-  *(unsigned int *)(param_1 + 0xa8a4) = 0;
-  *(romwright_code **)(param_1 + 0xa8a8) = screen4AFinish;
-  *(unsigned int *)(param_1 + 0xa8ac) = 0;
-  *(romwright_code **)(param_1 + 0xa8b0) = FUN_004a40f4;
-  *(unsigned int *)(param_1 + 0xa8b4) = 0;
-  *(romwright_code **)(param_1 + 0xa8b8) = FUN_004a38bc;
-  *(unsigned int *)(param_1 + 0xa8bc) = 0;
-  *(romwright_code **)(param_1 + 0xa8c0) = demonScreenConfirmSaveRefresh;
-  *(unsigned int *)(param_1 + 0xa8c4) = 0;
-  *(romwright_code **)(param_1 + 0xa8c8) = uiAnimatedPageToggleStep;
-  *(unsigned int *)(param_1 + 0xa8cc) = 0;
-  *(romwright_code **)(param_1 + 0xa8d0) = FUN_004a2064;
-  *(unsigned int *)(param_1 + 0xa8d4) = 0;
-  *(romwright_code **)(param_1 + 0xa8d8) = FUN_004a15a0;
-  *(unsigned int *)(param_1 + 0xa8dc) = 0;
-  *(romwright_code **)(param_1 + 0xa8e0) = uiCursorEnterModeNine;
-  *(unsigned int *)(param_1 + 0xa8e4) = 0;
-  *(unsigned int *)(param_1 + 0xa8e8) = 0x4a321c;
-  *(unsigned int *)(param_1 + 0xa8ec) = 0;
-  *(romwright_code **)(param_1 + 0xa980) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa984) = 0;
-  *(romwright_code **)(param_1 + 0xa988) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa98c) = 0;
-  *(unsigned int *)(param_1 + 0xa990) = 0x4a4098;
-  *(unsigned int *)(param_1 + 0xa994) = 0;
-  *(unsigned int *)(param_1 + 0xa998) = 0x4a4098;
-  *(unsigned int *)(param_1 + 0xa99c) = 0;
-  *(unsigned int *)(param_1 + 0xa9a0) = 0x4a4098;
-  *(unsigned int *)(param_1 + 0xa9a4) = 0;
-  *(unsigned int *)(param_1 + 0xa9a8) = 0x4a4090;
-  *(unsigned int *)(param_1 + 0xa9ac) = 0;
-  *(romwright_code **)(param_1 + 0xa9b0) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa9b4) = 0;
-  *(unsigned int *)(param_1 + 0xa9b8) = 0x4a4094;
-  *(unsigned int *)(param_1 + 0xa9bc) = 0;
-  *(romwright_code **)(param_1 + 0xa9d0) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa9d4) = 0;
-  *(romwright_code **)(param_1 + 0xa9d8) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa9dc) = 0;
-  *(romwright_code **)(param_1 + 0xa9e0) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa9e4) = 0;
-  *(unsigned int *)(param_1 + 0xa9c0) = 0x4a24a4;
-  *(unsigned int *)(param_1 + 0xa9c4) = 0;
-  *(romwright_code **)(param_1 + 0xa9c8) = FUN_004a24a8;
-  *(unsigned int *)(param_1 + 0xa9cc) = 0;
-  return;
+    for (s32 i = 0; i < 16; ++i) {
+        handlers[i] = NULL;
+        enterHandlers[i] = NULL;
+        leaveHandlers[i] = NULL;
+    }
+    handlers[0] = &Obj55c89c::confirm;
+    handlers[1] = &Obj55c89c::FUN_004a2404;
+    handlers[2] = &Obj55c89c::FUN_004a2064;
+    handlers[3] = &Obj55c89c::FUN_004a39bc;
+    handlers[4] = &Obj55c89c::shopPurchaseConfirmSelected;
+    handlers[5] = &Obj55c89c::itemMenuDispatchSelectedEntry;
+    handlers[6] = &Obj55c89c::screen4AFinish;
+    handlers[7] = &Obj55c89c::FUN_004a40f4;
+    handlers[8] = &Obj55c89c::FUN_004a38bc;
+    handlers[9] = &Obj55c89c::demonScreenConfirmSaveRefresh;
+    handlers[10] = &Obj55c89c::uiAnimatedPageToggleStep;
+    handlers[11] = &Obj55c89c::FUN_004a2064;
+    handlers[12] = &Obj55c89c::FUN_004a15a0;
+    handlers[13] = &Obj55c89c::uiCursorEnterModeNine;
+    handlers[14] = &Obj55c89c::FUN_004a321c;
+    leaveHandlers[1] = &Obj55c920::FUN_004a24a8;
+    leaveHandlers[2] = &Obj55c920::FUN_004a24a8;
+    leaveHandlers[3] = &Obj55c920::FUN_004a4098;
+    leaveHandlers[4] = &Obj55c920::FUN_004a4098;
+    leaveHandlers[5] = &Obj55c920::FUN_004a4098;
+    leaveHandlers[6] = &Obj55c920::FUN_004a4090;
+    leaveHandlers[7] = &Obj55c920::FUN_004a24a8;
+    leaveHandlers[8] = &Obj55c920::FUN_004a4094;
+    leaveHandlers[11] = &Obj55c920::FUN_004a24a8;
+    leaveHandlers[12] = &Obj55c920::FUN_004a24a8;
+    leaveHandlers[13] = &Obj55c920::FUN_004a24a8;
+    leaveHandlers[9] = &Obj55c920::FUN_004a24a4;
+    leaveHandlers[10] = &Obj55c920::FUN_004a24a8;
 }
-

@@ -8,7 +8,7 @@ int CONCAT44(...);
 int renderCtxSelectTexture(...);
 int mtx44Copy(float *, unsigned int *);
 int FUN_0019a0fc(...);
-int mathMatrixTranslateLocal(float *, float *, int *);
+int nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(float *, float *, int *);
 int FUN_001d3de0(...);
 int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(...);
@@ -110,7 +110,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
-/* Supplied declaration required: mathMatrixTranslateLocal. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20. */
 /* Supplied declaration required: FUN_001d3de0. */
 /* Supplied declaration required: FUN_002371b0. */
 extern int __cxa_guard_acquire(unsigned int *);
@@ -304,7 +304,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
       DAT_0064c0c0 = _ZZN2nw4math5MTX448IdentityEvE8identity;
     }
     mtx44Copy(&temp_v20,&_ZZN2nw4math5MTX448IdentityEvE8identity);
-    mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v49);
+    nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(&temp_v20,&temp_v20,&temp_v49);
     FUN_001d3de0(&temp_v20,&temp_v20,temp_v52);
     FUN_0019a0fc(&temp_v20,&temp_v20,&temp_v32);
     renderCtxSelectTexture(g_renderCtx,*(unsigned int *)((int)param_1->field_0x14 + 0x18));

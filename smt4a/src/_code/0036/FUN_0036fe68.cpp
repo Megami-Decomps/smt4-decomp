@@ -35,7 +35,7 @@ void FUN_00234b30(void);
 void FUN_002737a8(void);
 void FUN_0023534c(void);
 void FUN_00297c3c(void);
-void FUN_002b9520(void);
+void soundActorQueueStartPending(void);
 void sub68OwnerCall3(void);
 void resourceTableReleaseHandles(void);
 void mapRecordResumePoint(void);
@@ -127,7 +127,7 @@ u32 FUN_0036fe68(void)
         FUN_002c23cc(1);
         DAT_005f1600.loading = 0;
         sub68OwnerCall3();
-        FUN_002b9520();
+        soundActorQueueStartPending();
         mapEnvironmentSelectPreset(DAT_005f1600.scene);
         FUN_00297c3c();
         FUN_0023534c();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: ranked target collection uses different saved registers and stack-array addressing. */
+/* NON_MATCHING: instruction count and control flow match (58 rows); retail loads the mask pair through a pre-indexed ldr! base, materializes the marking constant 1 before the final branch and addresses the byte as [index, base]. */
 /* Marks the requested descending-HP rank among eligible combatants as a target. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -26,13 +26,16 @@ void FUN_004e7d20(BtlMainStateA **owner, s32 rank)
             ++count;
         }
     }
+    u8 *targets;
+    s32 index;
     if (count >= rank) {
         qsort(entries, count, sizeof(*entries), callbackCompareDescendingState);
-        TargetView *target = (TargetView *)btlUnitGet(owner);
-        target->targets[entries[rank - 1].index] = 1;
+        targets = ((TargetView *)btlUnitGet(owner))->targets;
+        index = entries[rank - 1].index;
     } else {
-        TargetView *target = (TargetView *)btlUnitGet(owner);
-        target->targets[entries[0].index] = 1;
+        targets = ((TargetView *)btlUnitGet(owner))->targets;
+        index = entries[0].index;
     }
+    targets[index] = 1;
 }
 }

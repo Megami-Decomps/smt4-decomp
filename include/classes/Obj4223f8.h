@@ -21,6 +21,11 @@ public:
     /* State handler: the highlighted entry changed (refreshes cursor, help line and detail text). */
     void confirmSelection();
     void resetHandlers();
+    void enterList();
+    void followCursorAndDescribe();
+    void updateBrowse();
+    void updatePointerTransition();
+    void enableKindEight();
 
     /* 0x5A4 */ u8 flag5A4;
     /* 0x5A5 */ u8 unk5A5[0xA5B2 - 0x5A5];
@@ -28,15 +33,19 @@ public:
     /* 0xA5B4 */ u32 value;
     /* 0xA5B8 */ u8 flagA5B8;
     /* 0xA5B9 */ u8 unkA5B9[0xA6C0 - 0xA5B9];
-    /* 0xA6C0 */ Handler handlers[3][9];
+    typedef s32 (Obj4223f8::*EnterHandler)();
+    typedef bool (Obj4223f8::*LeaveHandler)();
+    /* 0xA6C0 */ Handler handlers[9];
+    /* 0xA708 */ EnterHandler enterHandlers[9];
+    /* 0xA750 */ LeaveHandler leaveHandlers[9];
 };
 
 typedef char Obj4223f8Layout[
     offsetof(Obj4223f8, flag5A4) == 0x5A4 &&
     offsetof(Obj4223f8, value) == 0xA5B4 &&
-    offsetof(Obj4223f8, handlers[0]) == 0xA6C0 &&
-    offsetof(Obj4223f8, handlers[1]) == 0xA708 &&
-    offsetof(Obj4223f8, handlers[2]) == 0xA750 &&
+    offsetof(Obj4223f8, handlers) == 0xA6C0 &&
+    offsetof(Obj4223f8, enterHandlers) == 0xA708 &&
+    offsetof(Obj4223f8, leaveHandlers) == 0xA750 &&
     sizeof(Obj4223f8) == 0xA798 ? 1 : -1];
 
 #endif

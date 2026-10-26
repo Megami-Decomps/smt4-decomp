@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler peels the first row and unrolls the remaining search loop. */
 #include "shard/W4_Match6_DataSet.h"
 #include <stddef.h>
 
@@ -21,14 +20,11 @@ u32 FUN_0046c0f8(DataSet *set, u32 key)
         if (FUN_001b315c(entry)) {
             const KeyedDataRowView *rows = (const KeyedDataRowView *)FUN_001b31ac(entry);
             u32 count = FUN_001b31e0(entry);
-            u32 row = 0;
-            if (row < count) {
-                do {
-                    if (rows[row].type == 3 && rows[row].key == key && entry->files[row].status.requested != 0) {
-                        return entry->files[row].file;
-                    }
-                    ++row;
-                } while (row < count);
+            for (u32 row = 0; row < count; ++row) {
+                const KeyedDataRowView *candidate = &rows[row];
+                if (candidate->type == 3 && candidate->key == key && entry->files[row].status.requested != 0) {
+                    return entry->files[row].file;
+                }
             }
         }
     }

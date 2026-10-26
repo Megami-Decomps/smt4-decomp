@@ -11,7 +11,7 @@ extern "C" {
 int asdSequenceRequest(...);
 int jobStop(...);
 int sysPlaySe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int uiAdjustIntegerFromRepeat(...);
 int slotSetRequest(...);
 int FUN_00261a28(...);
@@ -37,7 +37,7 @@ extern int padButtonIsPressed(unsigned int);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int gameGetSlotTable(void);
 extern unsigned int gameSlotTableFindFree(void);
 /* Supplied declaration required: uiAdjustIntegerFromRepeat. */
@@ -158,7 +158,7 @@ unsigned int FUN_00241058(void)
     else {
       temp_v0 = temp_v0 + temp_v2 * 0x50;
     }
-    FUN_0019de98(temp_v0,0xf4f4f4ff);
+    buttonHelpSetText(temp_v0,0xf4f4f4ff);
     break;
   case 6:
     temp_v5 = scrRunOpcodesStub(*(unsigned int *)(temp_v0 + 0x90));
@@ -231,11 +231,11 @@ unsigned int FUN_00241058(void)
     temp_v3 = dataTableGetCount(temp_v4);
     if (temp_v2 < temp_v3) {
       temp_v0 = temp_v0 + temp_v2 * 0x50;
-      FUN_0019de98(temp_v0,0xf4f4f4ff);
+      buttonHelpSetText(temp_v0,0xf4f4f4ff);
       break;
     }
     temp_v0 = 0;
-    FUN_0019de98(temp_v0,0xf4f4f4ff);
+    buttonHelpSetText(temp_v0,0xf4f4f4ff);
     break;
   case 9:
     temp_v5 = FUN_002ef9f0();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected scaled-magnitude helper's fourth divisor argument; emitter release/reset grouping, ring-index scratch registers and VFP constant lifetimes differ. */
+/* NON_MATCHING: the emitter release is a helper and (finding, not kept: naming the node origin in a function-level `f32 origin = 0.0f` hoists it into s16 at entry exactly like retail and leaves only two scheduling ties — a steering temporary, so it needs Main's ruling); the remaining diffs are: retail reloads the spilled stack-argument address before the nine zero stores (build: after six) and issues the -25 constant before the smull of the ring-index modulo. */
 #include "common.h"
 #include "camp/ButtonHelp/ButtonHelp.h"
 
@@ -58,25 +58,34 @@ f32 FUN_0029118c(s32 mode, u32 numerator, u32 denominator);
 void FUN_00291340(void *params, void *a, void *b, void *c, void *d);
 void FUN_00291060(void *params, void *a, void *b, void *c, void *d, void *e, void *f, void *g);
 
+/* Clears the emitter's nodes and counters, detaches it from its owner and releases it. */
+static __inline void particleEmitterRelease(ParticleEmitter *emitter)
+{
+    s32 i = 0;
+
+    if (emitter != NULL) {
+        for (; i < EMITTER_RING; i++)
+            nodeTreeReleaseItemClearOwner(emitter->nodes[i]);
+        emitter->frame = 0;
+        emitter->spawnA = 0;
+        emitter->spawnB = 0;
+        emitter->spawnC = 0;
+        if (emitter->owner != NULL)
+            *emitter->owner = 0;
+        nodeTreeReleaseItem(emitter);
+    }
+}
+
 /* Advances a particle emitter by one frame: spawns the particles due this frame into its ring of
  * nodes, or at the end of its duration restarts it (while repeats remain) or releases it. */
 void FUN_00193130(ParticleEmitter *emitter)
 {
+
     if (emitter->duration == emitter->frame) {
         emitter->repeats--;
         emitter->frame = 0;
         if (emitter->repeats <= 0) {
-            if (emitter != NULL) {
-                for (s32 i = 0; i < EMITTER_RING; i++)
-                    nodeTreeReleaseItemClearOwner(emitter->nodes[i]);
-                emitter->frame = 0;
-                emitter->spawnA = 0;
-                emitter->spawnB = 0;
-                emitter->spawnC = 0;
-                if (emitter->owner != NULL)
-                    *emitter->owner = 0;
-                nodeTreeReleaseItem(emitter);
-            }
+            particleEmitterRelease(emitter);
         } else {
             for (s32 i = 0; i < 9; i++)
                 ((u32 *)emitter)[i] = 0;

@@ -68,7 +68,7 @@ void releaseEntriesB(u32 entries);
 void releaseEntriesA(void *entries);
 void sortMenuAcquire(s32 a, s32 b);
 void useCounterStart(void);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void sendEvent100020E(void);
 void sendEvent100020F(void);
 void FUN_0022e774(void);
@@ -145,14 +145,14 @@ void FUN_004a580c(QuestMenu *menu)
         FUN_003343f0(1);
         menu->state = 3;
         menu->stateTimer = 0;
-        FUN_0019de98(0, QUEST_COLOR_FADE);
+        buttonHelpSetText(0, QUEST_COLOR_FADE);
         sendEvent100020E();
         return;
     }
     FUN_0022e774();
     if (menu->tabsActive == 0)
         FUN_00212724();
-    FUN_0019de98(0, QUEST_COLOR_FADE);
+    buttonHelpSetText(0, QUEST_COLOR_FADE);
     uiSpriteBankApplyPreset((u8 *)menu + 0xDC, 1);
     FUN_003343f0(1);
     menu->state = 6;

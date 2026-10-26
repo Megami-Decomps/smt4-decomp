@@ -20,7 +20,7 @@ typedef struct {
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: gameFlagBlockGet. */
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001ada74(unsigned short);
+extern int goalConditionsSatisfied(unsigned short);
 
 
 void FUN_0041817c(unsigned short *param_1,int param_2)
@@ -85,7 +85,7 @@ void FUN_0041817c(unsigned short *param_1,int param_2)
       if (((((char)puVar4[3] == '\x01') && (puVar4[0x80] == 2)) && (puVar4[0x81] != 0)) &&
          ((temp_v0 = *puVar4, temp_v4 = gameFlagBlockGet(),
           (*(unsigned char *)(temp_v4 + (unsigned int)temp_v0 * 4 + 0x2a0) & 8) == 0 &&
-          (temp_v4 = FUN_001ada74(*puVar4), temp_v4 != 0)))) {
+          (temp_v4 = goalConditionsSatisfied(*puVar4), temp_v4 != 0)))) {
         *(unsigned short *)(temp_v3 + 0x1098) = puVar4[0x81];
 LAB_004182e8:
         temp_v3 = gameFlagBlockGet();
@@ -137,7 +137,7 @@ LAB_004182e8:
       if (((((char)puVar4[3] == '\x01') && (puVar4[0x80] == 2)) && (puVar4[0x81] != 0)) &&
          ((temp_v0 = *puVar4, temp_v3 = gameFlagBlockGet(),
           (*(unsigned char *)(temp_v3 + (unsigned int)temp_v0 * 4 + 0x2a0) & 8) == 0 &&
-          (temp_v3 = FUN_001ada74(*puVar4), temp_v3 != 0)))) {
+          (temp_v3 = goalConditionsSatisfied(*puVar4), temp_v3 != 0)))) {
         *(unsigned short *)(temp_v4 + 0x1098) = puVar4[0x81];
 LAB_0041844c:
         temp_v3 = gameFlagBlockGet();

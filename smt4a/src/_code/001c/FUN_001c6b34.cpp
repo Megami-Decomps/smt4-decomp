@@ -1,70 +1,38 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c6b34` (_code @ 0x1c6b34, 0xd8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the first padded run and the stores match retail; in the second and third runs the loop counter and the fill pointer swap r0/r3 (and the 30 is set before the 15). */
+#include "common.h"
 
-extern "C" {
+#define GPU_COMMAND_FILLER 0xead0fead
 
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_3_stack;
-
-
-int * FUN_001c6b34(int *param_1,int param_2,int param_3)
-
+/* Pads a command run with `count` filler words (the cursor advances by an even number of words). */
+static __inline u32 *gpuCommandPad(u32 *cursor, u32 count)
 {
-  int *piVar1;
-  int temp_v0;
-  
-  if (param_2 != 0) {
-    param_3 = 0x300;
-  }
-  else {
-    param_3 = param_3 << 8;
-  }
-  *param_1 = param_3;
-  param_1[1] = 0x2025e;
-  param_1[2] = 0;
-  temp_v0 = 5;
-  param_1[3] = 0x900251;
-  piVar1 = param_1 + 3;
-  do {
-    temp_v0 = temp_v0 - 1;
-    piVar1[1] = -0x152f0153;
-    piVar1 = piVar1 + 2;
-    *piVar1 = -0x152f0153;
-  } while (temp_v0 != 0);
-  param_1[0xe] = 0;
-  param_1[0xf] = 0x1d00200;
-  temp_v0 = 0xf;
-  piVar1 = param_1 + 0xf;
-  do {
-    temp_v0 = temp_v0 - 1;
-    piVar1[1] = -0x152f0153;
-    piVar1 = piVar1 + 2;
-    *piVar1 = -0x152f0153;
-  } while (temp_v0 != 0);
-  if (param_2 == 0) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 2;
-  }
-  param_1[0x2e] = temp_v0;
-  param_1[0x2f] = 0x10229;
-  param_1[0x30] = 0;
-  param_1[0x31] = 0x1d00200;
-  temp_v0 = 0xf;
-  piVar1 = param_1 + 0x31;
-  do {
-    temp_v0 = temp_v0 - 1;
-    piVar1[1] = -0x152f0153;
-    piVar1 = piVar1 + 2;
-    *piVar1 = -0x152f0153;
-  } while (temp_v0 != 0);
-  param_1[0x50] = param_2;
-  param_1[0x51] = 0x10244;
-  return param_1 + 0x52;
+    u32 *fill = cursor;
+    for (u32 i = 0; i < count / 2; i++) {
+        fill[0] = GPU_COMMAND_FILLER;
+        fill[1] = GPU_COMMAND_FILLER;
+        fill += 2;
+    }
+    return cursor + (count - (count & 1));
 }
 
-} /* extern "C" */
+/* Builds a GPU command run in `commands`: headers and filler-padded blocks; returns the end of the run. */
+extern "C" u32 *FUN_001c6b34(u32 *commands, u32 mode, u32 value)
+{
+    u32 *cursor = commands;
+    *cursor++ = mode != 0 ? 0x300 : value << 8;
+    *cursor++ = 0x2025e;
+    *cursor++ = 0;
+    *cursor++ = 0x900251;
+    cursor = gpuCommandPad(cursor, 10);
+    *cursor++ = 0;
+    *cursor++ = 0x1d00200;
+    cursor = gpuCommandPad(cursor, 30);
+    *cursor++ = mode != 0 ? 2 : 0;
+    *cursor++ = 0x10229;
+    *cursor++ = 0;
+    *cursor++ = 0x1d00200;
+    cursor = gpuCommandPad(cursor, 30);
+    *cursor++ = mode;
+    *cursor++ = 0x10244;
+    return cursor;
+}

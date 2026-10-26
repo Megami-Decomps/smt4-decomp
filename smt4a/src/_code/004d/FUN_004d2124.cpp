@@ -29,26 +29,10 @@ void FUN_004d2124(BattleDebugPanelWork *work, BtlMainStateA *battle)
     asdListBoxAddItems(work->panelJob, DAT_00572a80, 5);
     asdListBoxSetByteValue(work->panelJob, 1);
     jobSetText(work->panelJob, DAT_005280e8);
-    // These masks extend beyond the published module-state prefix; keep that shared type's extent intact.
-    struct TalkDebugMaskView {
-        u8 unk00[0x98];
-        u64 talkAll;
-        u64 bustup;
-        u8 unkA8[0x20];
-        u64 messageWindow;
-        u8 unkD0[8];
-        u64 talkBeginningLife;
-    };
-    typedef char TalkDebugMaskOffsetCheck[
-        offsetof(TalkDebugMaskView, talkAll) == 0x98 &&
-        offsetof(TalkDebugMaskView, bustup) == 0xA0 &&
-        offsetof(TalkDebugMaskView, messageWindow) == 0xC8 &&
-        offsetof(TalkDebugMaskView, talkBeginningLife) == 0xD8 ? 1 : -1];
-    TalkDebugMaskView *masks = (TalkDebugMaskView *)&DAT_005715f8;
-    asdListBoxSetToggleItem(work->panelJob, 0, (masks->talkAll & battle->markerMasks.bits) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & masks->bustup) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 0, (DAT_005715f8.talkAll & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 1, (battle->markerMasks.bits & DAT_005715f8.bustup) != 0);
     asdListBoxSetIntItem(work->panelJob, 2, battle->negotiation.bustupIndex, 0, 600, 0);
-    asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & masks->messageWindow) != 0);
-    asdListBoxSetToggleItem(work->panelJob, 4, (masks->talkBeginningLife & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 3, (battle->stateFlags64.bits & DAT_005715f8.messageWindow) != 0);
+    asdListBoxSetToggleItem(work->panelJob, 4, (battle->markerMasks.bits & DAT_005715f8.talkBeginningLife) != 0);
 }
 }

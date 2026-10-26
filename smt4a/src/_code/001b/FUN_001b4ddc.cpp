@@ -46,9 +46,9 @@ void FUN_001b4ddc(PolyDefaultsLocalView *record)
     memset(&record->unk50, 0, sizeof(record->unk50));
     record->unk50.unk0C = 1.0f;
 
+    record->unk20 = g_polyDefaultColor;
     record->unk60 = 1.0f;
     record->unk74 = 1.0f;
-    record->unk20 = g_polyDefaultColor;
     record->unk64 = -1;
     record->unk68 = 0x80;
 }

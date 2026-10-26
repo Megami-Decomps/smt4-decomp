@@ -1,4 +1,4 @@
-/* NON_MATCHING: scalar rectangle loads replace retail's four-float aggregate load and reorder VFP conversions. */
+/* NON_MATCHING: the rectangle copy and rows now match retail; only the VFP registers of the snapped sums/conversions differ (retail writes the sums over s0 and converts in place). */
 #include "classes/SelectionState.h"
 #include "text/TextDraw.h"
 
@@ -8,8 +8,9 @@ extern "C" f32 drawTextAtSnappedRectangle(const SelectionRectangle *rectangle, u
                                           const char *text, f32 x, f32 y, f32 depth, f32 spacing,
                                           f32 opacity)
 {
+    SelectionRectangle bounds = *rectangle;
     return textDrawString(layer, color, text,
-                        (f32)(s32)(rectangle->x + rectangle->width + x),
-                        (f32)(s32)(rectangle->y + rectangle->height + y),
+                        (f32)(s32)(bounds.x + bounds.width + x),
+                        (f32)(s32)(bounds.y + bounds.height + y),
                         depth, spacing, opacity);
 }

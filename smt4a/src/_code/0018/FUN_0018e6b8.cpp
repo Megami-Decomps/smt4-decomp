@@ -1,119 +1,106 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018e6b8` (_code @ 0x18e6b8, 0x1ec bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: the stores, constants and the cursor room/advance tests match; retail is a leaf without lr (r4-fp only: global cursor address in fp, zero in r6, word index in r4, slot in r7, no hoisted stream-list address) and reloads the stream list by writeback, while this build keeps the global cursor address in lr, hoists the list address in r9 and allocates the rest in another order. */
+#include "shard/S1NwGfx.h"
+
+// A region of the command buffer with its own write cursor; a null cursor means the global one.
+struct CommandRegion {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u8 *end;
+    /* 0x08 */ u8 *cursor;
+};
+
+// One vertex attribute stream of a shape.
+struct VertexAttributeStream {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 flags;           // 1: no register, 2: occupies several components
+    /* 0x0C */ u8 unk0c[0x1c];
+    /* 0x28 */ s32 componentCount;
+};
+
+// The part of a shape resource that lists its attribute streams.
+struct ShapeAttributeView {
+    /* 0x00 */ u8 unk00[0x38];
+    /* 0x38 */ s32 attributeCount;
+    /* 0x3C */ RelativePointer attributes; // relative pointer to `attributeCount` relative pointers to VertexAttributeStream
+};
 
 extern "C" {
+extern u8 *g_commandBufferCursor;
+extern u8 *g_commandBufferEnd;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern int g_commandBufferCursor; /* 0x5b40e0 */
-extern unsigned int g_commandBufferEnd; /* 0x5b40e4 */
-
-
-int FUN_0018e6b8(int param_1,int param_2)
-
+// Appends the vertex-attribute setup commands for `shape` (buffer layout, one register per stream and the
+// per-component source selectors) to the command buffer; returns the size in bytes. The cursor only moves
+// when the commands fit.
+// The write cursor of `region`, or the global one for a region without its own.
+static __inline u8 *regionCursor(const CommandRegion *region)
 {
-  int *piVar1;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int *piVar9;
-  
-  temp_v0 = 0;
-  temp_v4 = 0;
-  temp_v2 = 0;
-  temp_v5 = *(int *)(param_2 + 0x38);
-  temp_v1 = *(int *)(param_1 + 8);
-  if (*(int *)(param_1 + 8) == 0) {
-    temp_v1 = g_commandBufferCursor;
-  }
-  temp_v3 = 0;
-  if (temp_v3 < temp_v5) {
-    do {
-      if (*(int *)(param_2 + 0x3c) != 0) {
-        temp_v6 = param_2 + 0x3c + *(int *)(param_2 + 0x3c);
-      }
-      else {
-        temp_v6 = 0;
-      }
-      piVar9 = (int *)(temp_v6 + temp_v3 * 4);
-      temp_v6 = *piVar9;
-      if (temp_v6 != 0) {
-        temp_v6 = (int)piVar9 + temp_v6;
-      }
-      else {
-        temp_v6 = 0;
-      }
-      if ((*(unsigned int *)(temp_v6 + 8) & 1) != 0) {
-        temp_v0 = temp_v0 + 1;
-      }
-      else {
-        if ((*(unsigned int *)(temp_v6 + 8) & 2) != 0) {
-          *(unsigned int *)(temp_v1 + temp_v2 * 4) = 0;
-          *(unsigned int *)(temp_v1 + temp_v2 * 4 + 4) = ((temp_v4 * 3 + 0x205U) & 0xffff) | 0xf0000;
-          temp_v0 = temp_v0 + *(int *)(temp_v6 + 0x28);
-        }
-        else {
-          *(unsigned int *)(temp_v1 + temp_v2 * 4) = 0;
-          temp_v0 = temp_v0 + 1;
-          *(unsigned int *)(temp_v1 + temp_v2 * 4 + 4) = ((temp_v4 * 3 + 0x205U) & 0xffff) | 0xf0000;
-        }
-        temp_v2 = temp_v2 + 2;
-        temp_v4 = temp_v4 + 1;
-      }
-      temp_v3 = temp_v3 + 1;
-    } while (temp_v3 < temp_v5);
-  }
-  *(unsigned int *)(temp_v1 + temp_v2 * 4) = 0x76543210;
-  *(unsigned int *)(temp_v1 + (temp_v2 + 1) * 4) = 0x801f02bb;
-  *(unsigned int *)(temp_v1 + (temp_v2 + 2) * 4) = 0xba98;
-  *(unsigned int *)(temp_v1 + (temp_v2 + 3) * 4) = 0;
-  *(unsigned int *)(temp_v1 + (temp_v2 + 4) * 4) =
-       ((1 << (temp_v0 & 0xff)) * 0x10000 - 0x20000U) | (temp_v0 * 0x10000000 + 0xf0000000);
-  temp_v4 = temp_v2 + 6;
-  *(unsigned int *)(temp_v1 + (temp_v2 + 5) * 4) = 0xf0202;
-  temp_v2 = temp_v0 - 1;
-  if (0 < temp_v2) {
-    temp_v5 = 1;
-    piVar9 = (int *)(temp_v1 + temp_v4 * 4);
-    do {
-      temp_v2 = temp_v2 - 1;
-      piVar9[2] = 0;
-      piVar9[1] = -0x7fc0fdce;
-      piVar9[3] = 0;
-      piVar9[4] = 0;
-      piVar1 = piVar9 + 5;
-      *piVar9 = temp_v5;
-      temp_v5 = temp_v5 + 1;
-      piVar9 = piVar9 + 6;
-      *piVar1 = 0;
-    } while (temp_v2 != 0);
-    temp_v4 = (temp_v4 + temp_v0 * 6) - 6;
-  }
-  temp_v1 = *(int *)(param_1 + 8);
-  temp_v4 = temp_v4 * 4;
-  if (temp_v1 != 0) {
-    if (*(unsigned int *)(param_1 + 4) < (unsigned int)(temp_v1 + temp_v4)) {
-      return temp_v4;
-    }
-  }
-  else if (g_commandBufferEnd < (unsigned int)(g_commandBufferCursor + temp_v4)) {
-    return temp_v4;
-  }
-  if (temp_v1 != 0) {
-    *(int *)(param_1 + 8) = temp_v4 + temp_v1;
-  }
-  else {
-    g_commandBufferCursor = g_commandBufferCursor + temp_v4;
-  }
-  return temp_v4;
+    return region->cursor != NULL ? region->cursor : g_commandBufferCursor;
 }
 
-} /* extern "C" */
+// Whether `bytes` more commands fit in `region`.
+static __inline bool regionHasRoom(const CommandRegion *region, s32 bytes)
+{
+    if (region->cursor != NULL) {
+        return region->end >= region->cursor + bytes;
+    }
+    return g_commandBufferEnd >= g_commandBufferCursor + bytes;
+}
+
+// Moves the write cursor of `region` (or the global one) past `bytes`.
+static __inline void regionAdvance(CommandRegion *region, s32 bytes)
+{
+    if (region->cursor != NULL) {
+        region->cursor += bytes;
+    } else {
+        g_commandBufferCursor += bytes;
+    }
+}
+
+s32 FUN_0018e6b8(CommandRegion *region, ShapeAttributeView *shape)
+{
+    s32 componentTotal = 0;
+    s32 slot = 0;
+    s32 word = 0;
+    u32 *words = reinterpret_cast<u32 *>(regionCursor(region));
+    s32 count = shape->attributeCount;
+    for (s32 i = 0; i < count; ++i) {
+        RelativePointer *streams = static_cast<RelativePointer *>(shape->attributes.get());
+        VertexAttributeStream *stream = static_cast<VertexAttributeStream *>(streams[i].get());
+        u32 flags = stream->flags;
+        if (flags & 1) {
+            componentTotal += 1;
+        } else if (flags & 2) {
+            words[word] = 0;
+            words[word + 1] = ((slot * 3 + 0x205) & 0xffff) | 0xf0000;
+            componentTotal += stream->componentCount;
+            word += 2;
+            slot += 1;
+        } else {
+            words[word] = 0;
+            words[word + 1] = ((slot * 3 + 0x205) & 0xffff) | 0xf0000;
+            componentTotal += 1;
+            word += 2;
+            slot += 1;
+        }
+    }
+    words[word++] = 0x76543210;
+    words[word++] = 0x801f02bb;
+    words[word++] = 0xba98;
+    words[word++] = 0;
+    words[word++] = (((1 << componentTotal) - 2) << 16) | ((componentTotal - 1) << 28);
+    words[word++] = 0xf0202;
+    for (s32 i = 1; i < componentTotal; ++i) {
+        words[word] = i;
+        words[word + 1] = 0x803f0232;
+        words[word + 2] = 0;
+        words[word + 3] = 0;
+        words[word + 4] = 0;
+        words[word + 5] = 0;
+        word += 6;
+    }
+    s32 bytes = word * 4;
+    if (regionHasRoom(region, bytes)) {
+        regionAdvance(region, bytes);
+    }
+    return bytes;
+}
+}

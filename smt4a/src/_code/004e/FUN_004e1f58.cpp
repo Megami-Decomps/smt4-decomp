@@ -1,4 +1,4 @@
-/* NON_MATCHING: duplicate search is pair-unrolled, roster base addresses are hoisted and flag tests are combined differently; 109 versus retail 90 instructions, -O2 candidate. */
+/* NON_MATCHING: instruction count and control flow match (90 rows); the retained-roster entry address is formed differently (retail adds the 0x2418 constant from a register to the scaled index, the build folds it into the base pointer) and the subject index copy and unsigned loop-exit branch differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
@@ -10,19 +10,19 @@ s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *reco
 // Retain one identity/pose snapshot per eligible roster model, without duplicating existing entries.
 void FUN_004e1f58(BtlMainGlobalsA *globals, const BattleActionUnit *action, s32 alternate)
 {
+    const u8 *selectedUnits = action->selectedUnits;
     for (s32 rosterIndex = 0; rosterIndex < 133; ++rosterIndex) {
         BtlMainStateA *battle = globals->state;
         BattleRosterRecordA *record = &battle->roster[rosterIndex];
         s32 unitIndex = record->combatant.combatantIndex;
-        if (unitIndex < 0 || (!alternate && !action->selectedUnits[unitIndex]))
+        if (unitIndex < 0 || (!alternate && !selectedUnits[unitIndex]))
             continue;
-        u32 flags = record->liveFlags.unk50;
-        if (!(flags & 1) || !(flags & 0x80))
+        if (!(record->liveFlags.unk50 & 1) || !(record->liveFlags.unk50 & 0x80))
             continue;
         if (alternate) {
-            if (!(flags & 0x8000))
+            if (!(record->liveFlags.unk50 & 0x8000))
                 continue;
-        } else if (!(flags & 0x400)) {
+        } else if (!(record->liveFlags.unk50 & 0x400)) {
             continue;
         }
         if (record->liveFlags.unk10C & 2)
@@ -35,7 +35,7 @@ void FUN_004e1f58(BtlMainGlobalsA *globals, const BattleActionUnit *action, s32 
             subjectIndex = 0;
         s32 id = subject->appearance.ids[subjectIndex];
         BattleRetainedRosterEntry *entries = globals->state->retainedRoster.entries;
-        s32 existing;
+        u32 existing;
         for (existing = 0; existing < 109; ++existing) {
             if (entries[existing].id == id && record->modelMatch.key == entries[existing].key)
                 break;

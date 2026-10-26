@@ -20,7 +20,7 @@ int asdTMTexTableEntryAt(int, int);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
 int dataTableGet(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int gameDataBlocksGetTableFlag(void);
 int stateModeDispatch(...);
 int scrRunOpcodesStub(...);
@@ -57,7 +57,7 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: dataTableGet. */
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: gameDataBlocksGetTableFlag. */
 /* Supplied declaration required: stateModeDispatch. */
 /* Supplied declaration required: scrRunOpcodesStub. */
@@ -184,7 +184,7 @@ void FUN_00202ea4(void)
       else {
         temp_v7 = temp_v7 + temp_v10 * 0x44;
       }
-      FUN_0019de98(temp_v7,0xf4f4f4ff);
+      buttonHelpSetText(temp_v7,0xf4f4f4ff);
       temp_v7 = g_config;
       *(unsigned int *)(g_config + 100) = 2;
       *(unsigned int *)(temp_v7 + 0x68) = 0;
@@ -211,7 +211,7 @@ void FUN_00202ea4(void)
       if (temp_v10 < temp_v5) {
         temp_v11 = temp_v7 + temp_v10 * 0x44;
       }
-      FUN_0019de98(temp_v11,0xf4f4f4ff);
+      buttonHelpSetText(temp_v11,0xf4f4f4ff);
       return;
     }
     temp_v6 = 0;
@@ -222,7 +222,7 @@ void FUN_00202ea4(void)
       if (temp_v6 != 0) {
         eventQueueAddUniqueIfValid(0x100020f);
         messageMainSetFlag(1);
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         uiSpriteSetKeyframe(temp_v7 + 0xe8,1,0);
         uiSpriteSetImageKeyframe(temp_v7 + 0xe8,1,0);
         temp_v6 = 0;

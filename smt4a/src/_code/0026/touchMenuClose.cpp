@@ -5,7 +5,7 @@ extern "C" {
 extern Obj7ECRef g_useCounter;
 
 void ifTouchRegionRemove(void);
-void FUN_0019de98(void *target, u32 color);
+void buttonHelpSetText(void *target, u32 color);
 void buttonHelpSetHelpState(s32 mode);
 void buttonHelpSetMode(s32 mode);
 
@@ -47,7 +47,7 @@ void touchMenuClose(void)
         if (panel->fadeOut != 0) {
             buttonHelpSetHelpState(1);
         } else {
-            FUN_0019de98(object->panel.fadeTarget, 0xF4F4F4FF);
+            buttonHelpSetText(object->panel.fadeTarget, 0xF4F4F4FF);
         }
         object->panel.fadePending = 0;
     } else {

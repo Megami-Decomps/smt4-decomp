@@ -1,4 +1,4 @@
-/* NON_MATCHING: not matched; the mesh loop and the inlined type-chain walks are laid out differently (154 rows against 152). The null `node` dereference after the flag test mirrors retail. */
+/* NON_MATCHING: not matched (153 rows against 152): retail spills the object argument to a 56-byte frame (its address is taken), the mesh loop and the inlined type-chain walks are laid out differently. The null `node` dereference after the flag test mirrors retail. */
 #include "common.h"
 
 /* Runtime type information as the engine's dynamic casts see it: a chain of base types. */
@@ -10,7 +10,6 @@ struct TypeInfo {
 class TypedObject {
 public:
     virtual ~TypedObject();
-    virtual void reserved();
     virtual const TypeInfo *getTypeInfo();
 };
 
@@ -57,12 +56,13 @@ struct GfxSettingsView {
     /* 0x01 */ u8 enabled;
     /* 0x02 */ u8 unk02[0x5E];
     /* 0x60 */ f32 shadowDepth;
+    /* 0x64 */ u8 unk64[0x1C];
+    /* 0x80 */ void *modelData;     /* the loaded graphics file */
 };
 
 extern "C" {
 
 extern GfxSettingsView g_gfxSettings;
-extern s32 DAT_005b3c74;
 extern TypeInfo DAT_005c0f18;
 extern TypeInfo DAT_005c0f34;
 
@@ -94,7 +94,7 @@ u32 FUN_001acca0(TypedObject *object)
     ShadowModel *model;
     s32 i;
 
-    if (g_gfxSettings.enabled == 0 || DAT_005b3c74 == 0) {
+    if (g_gfxSettings.enabled == 0 || g_gfxSettings.modelData == NULL) {
         return 0;
     }
     model = (ShadowModel *)castTo(object, &DAT_005c0f18);

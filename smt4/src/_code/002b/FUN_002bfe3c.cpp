@@ -15,7 +15,7 @@ extern "C" {
 void nn_math_ARMv6_MTX34InvTransposeAsm(RelativeMatrix34 *output, const RelativeMatrix34 *input);
 void nn_math_ARMv6_MTX34MultAsm(RelativeMatrix34 *output, const RelativeMatrix34 *left, const RelativeMatrix34 *right);
 void nn_math_ARMv6_MTX34CopyAsm(RelativeMatrix34 *output, const RelativeMatrix34 *input);
-void FUN_002a81a8(RelativeMatrix34 *output, const RelativeMatrix34 *input);
+void nn_math_ARMv6_MTX34InverseAsm(RelativeMatrix34 *output, const RelativeMatrix34 *input);
 void FUN_002b77f4(RelativeMatrix34 *output, const RelativeMatrix34 *input);
 
 // Apply a matrix relative to the node, optionally using its inverse transpose.
@@ -31,7 +31,7 @@ void FUN_002bfe3c(RelativeMatrixNode *node, const RelativeMatrix34 *matrix, s32 
         RelativeMatrix34 transform;
         RelativeMatrix34 adjustment;
         RelativeMatrix34 combined;
-        FUN_002a81a8(&transform, &node->transform);
+        nn_math_ARMv6_MTX34InverseAsm(&transform, &node->transform);
         FUN_002b77f4(&adjustment, &transform);
         nn_math_ARMv6_MTX34MultAsm(&combined, &transform, &adjustment);
         nn_math_ARMv6_MTX34MultAsm(&node->result, matrix, &combined);

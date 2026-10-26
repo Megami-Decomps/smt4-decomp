@@ -21,6 +21,13 @@ struct ShaderLightResource {
     f32 first[4];      /* 0xb8 */
     f32 second[4];     /* 0xc8 */
     ShaderLightVector4 direction; /* 0xd8 */
+
+    bool hasFlags(u32 mask) const
+    {
+        if ((mask & ~flags) == 0)
+            return true;
+        return false;
+    }
 };
 
 // Only the virtual matrix accessor at slot 0x14 is used here.
@@ -42,6 +49,13 @@ struct ShaderLightFeatures {
     u8 unk04[0x64];
     s32 registerCount; /* 0x68 */
     s32 registerBase;  /* 0x6c: first light register; lights count downwards */
+
+    bool hasFlags(u32 mask) const
+    {
+        if ((mask & ~flags) == 0)
+            return true;
+        return false;
+    }
 };
 struct ShaderLightNode {
     u8 unk00[8];

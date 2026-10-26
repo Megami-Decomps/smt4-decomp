@@ -10,7 +10,7 @@ int uiPointerHitsRect(...);
 int FUN_00167c14(...);
 int sysPlaySe(...);
 int msgWindowReset(void);
-int FUN_0032ef0c(...);
+int gameDataToggleFlagSet(...);
 int FUN_00344bc8(...);
 int controllerApplyPreset(...);
 int screenStartOrClear(...);
@@ -42,8 +42,8 @@ extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: campCecSetObjectValue. */
 extern unsigned int overlayGetStatusScene(void);
 extern unsigned int dataTableGetEntryValue(void);
-extern int FUN_0032ecac(void);
-/* Supplied declaration required: FUN_0032ef0c. */
+extern int gameDataToggleFlagIsSet(void);
+/* Supplied declaration required: gameDataToggleFlagSet. */
 /* Supplied declaration required: FUN_00344bc8. */
 /* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
@@ -528,12 +528,12 @@ LAB_003af720:
   }
   if (*(int *)(param_1 + 0x14c) == 2) {
     temp_v4 = FUN_00344bc8(temp_v7);
-    if ((-1 < temp_v7) && (temp_v1 = FUN_0032ecac(), temp_v1 != 0)) {
-      FUN_0032ef0c(temp_v4,0);
+    if ((-1 < temp_v7) && (temp_v1 = gameDataToggleFlagIsSet(), temp_v1 != 0)) {
+      gameDataToggleFlagSet(temp_v4,0);
     }
     temp_v4 = FUN_00344bc8(temp_v10);
-    if ((-1 < temp_v10) && (temp_v1 = FUN_0032ecac(), temp_v1 != 0)) {
-      FUN_0032ef0c(temp_v4,0);
+    if ((-1 < temp_v10) && (temp_v1 = gameDataToggleFlagIsSet(), temp_v1 != 0)) {
+      gameDataToggleFlagSet(temp_v4,0);
     }
   }
   *(int *)(param_1 + 400) = *(int *)(param_1 + 400) + 1;

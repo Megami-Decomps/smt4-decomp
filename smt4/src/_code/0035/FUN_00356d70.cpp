@@ -3,7 +3,7 @@
 #include "common.h"
 
 extern "C" {
-void FUN_002628fc(void *resource);
+void objectReleaseIfSet(void *resource);
 void asdMemFreeNonNull(void *memory);
 }
 
@@ -15,7 +15,7 @@ struct OwnedRecord {
 extern "C" void FUN_00356d70(OwnedRecord *record)
 {
     void **slot = &record->resource;
-    FUN_002628fc(*slot);
+    objectReleaseIfSet(*slot);
     *slot = NULL;
     asdMemFreeNonNull(record);
 }

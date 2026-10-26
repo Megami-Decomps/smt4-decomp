@@ -14,8 +14,29 @@ public:
     virtual void render();
     void resetHandlers();
 
+    typedef void (Obj55c89c::*Handler)();
+    typedef s32 (Obj55c89c::*EnterHandler)();
+    typedef void (Obj55c920::*LeaveHandler)();
+    void confirm();
+    void FUN_004a2404();
+    void FUN_004a2064();
+    void FUN_004a39bc();
+    void shopPurchaseConfirmSelected();
+    void itemMenuDispatchSelectedEntry();
+    void screen4AFinish();
+    void FUN_004a40f4();
+    void FUN_004a38bc();
+    void demonScreenConfirmSaveRefresh();
+    void uiAnimatedPageToggleStep();
+    void FUN_004a15a0();
+    void uiCursorEnterModeNine();
+    void FUN_004a321c();
+
     /* 0x0860 */ u8 mode;
-    /* 0x0861 */ u8 unk861[0xa197];
+    /* 0x0861 */ u8 unk861[0xa878 - 0x861];
+    /* 0xA878 */ Handler handlers[16];
+    /* 0xA8F8 */ EnterHandler enterHandlers[16];
+    /* 0xA978 */ LeaveHandler leaveHandlers[16];
 };
 
 /* Callback-table view shared by the menu's state-dispatch implementation. */

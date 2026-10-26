@@ -17,7 +17,7 @@ int sysPlaySe(...);
 int gameGetPlayerData(void);
 int asdTMTexTableEntryAt(int, int);
 int uiSpriteSetKeyframe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int dialogOpen(...);
 int FUN_00228b04(...);
 int scrScriptProcessStartEntry(...);
@@ -59,7 +59,7 @@ extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: messageSetMode. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: dialogClose. */
@@ -194,7 +194,7 @@ void FUN_002c9a8c(int param_1)
     }
     temp_v19 = 0;
 LAB_002c9da8:
-    FUN_0019de98(temp_v19,0xf4f4f4ff);
+    buttonHelpSetText(temp_v19,0xf4f4f4ff);
     *(int *)(param_1 + 0x436c) = *(int *)(param_1 + 0x436c) + 1;
     break;
   case 3:
@@ -271,7 +271,7 @@ LAB_002c9da8:
       }
       temp_v19 = 0;
 LAB_002ca008:
-      FUN_0019de98(temp_v19,0xf4f4f4ff);
+      buttonHelpSetText(temp_v19,0xf4f4f4ff);
     }
     temp_v19 = FUN_002a4894(temp_v20);
     if (temp_v19 != temp_v24) {
@@ -294,7 +294,7 @@ LAB_002ca008:
       }
       temp_v19 = 0;
 LAB_002ca0e0:
-      FUN_0019de98(temp_v19,0xf4f4f4ff);
+      buttonHelpSetText(temp_v19,0xf4f4f4ff);
       temp_v19 = FUN_002a4894(temp_v20);
       if (temp_v19 != temp_v24) {
         eventQueueAddUniqueIfValid(0x100020d);
@@ -434,7 +434,7 @@ LAB_002ca354:
       }
       temp_v19 = 0;
 LAB_002ca524:
-      FUN_0019de98(temp_v19,0xf4f4f4ff);
+      buttonHelpSetText(temp_v19,0xf4f4f4ff);
       psVar24 = (short *)0x0;
       temp_v16 = FUN_002a4894(temp_v20);
       switch(temp_v16) {
@@ -475,7 +475,7 @@ LAB_002ca524:
     }
     temp_v19 = FUN_00163aa4(temp_v19);
     if (temp_v19 != 0) {
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       temp_v19 = infoWinHasValue();
       if (temp_v19 != 0) {
         dialogClose(1);

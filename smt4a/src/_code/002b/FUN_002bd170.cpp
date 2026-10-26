@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reads the two game-state words through two pointer copies (add r0, r1, #0; separate ldr) instead of one ldrd/base */
+/* NON_MATCHING: getter ldr r0,[r0,#4] (game-state submode) compiled in the same multifile run (r1 live across it); getter not in image. */
 #include "common.h"
 
 struct GameModeState {
@@ -6,11 +6,16 @@ struct GameModeState {
     s32 submode;  // 0x04
 };
 
+struct LmapBlock {
+    u8 unk00[0x20];  // 0x00
+    u8 busyA;        // 0x20
+    u8 unk21[0x97];  // 0x21
+    u8 busyB;        // 0xB8
+};
+
 struct LmapView {
-    u8 unk000[0x220];  // 0x000
-    u8 busyA;          // 0x220
-    u8 unk221[0x97];   // 0x221
-    u8 busyB;          // 0x2B8
+    u8 unk000[0x200];  // 0x000
+    LmapBlock block;   // 0x200
 };
 
 extern "C" {
@@ -35,8 +40,11 @@ s32 FUN_002bd170(void)
     } else {
         return 0;
     }
-    if (g_lmapView != NULL && g_lmapView->busyA == 0 && g_lmapView->busyB == 0) {
-        FUN_003a2904(0, 0);
+    if (g_lmapView != NULL) {
+        LmapBlock *block = &g_lmapView->block;
+        if (block->busyA == 0 && block->busyB == 0) {
+            FUN_003a2904(0, 0);
+        }
     }
     return 0;
 }

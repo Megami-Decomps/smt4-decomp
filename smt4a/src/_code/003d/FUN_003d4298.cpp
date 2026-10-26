@@ -4,7 +4,7 @@
 extern "C" {
 extern const PhaseTrigEntry DAT_00536d14[];
 void FUN_001d3e14(f32 *, const PhaseVector *);
-void mathMatrixTranslateLocal(f32 *, const f32 *, const PhaseVector *);
+void nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(f32 *, const f32 *, const PhaseVector *);
 void FUN_001b4a00(f32 *, const PhaseVector *, const f32 *);
 
 /* Build a rotation by `angle` about the point (x, y), scaled by `scale` around it. */
@@ -33,7 +33,7 @@ void FUN_003d4298(f32 *matrix, f32 x, f32 y, f32 scale, f32 angle)
     matrix[9] = xRotation.sine * yRotation.cosine;
     matrix[10] = xRotation.cosine * yRotation.cosine;
     FUN_001d3e14(matrix, &scaling);
-    mathMatrixTranslateLocal(matrix, matrix, &inverseOrigin);
+    nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(matrix, matrix, &inverseOrigin);
     FUN_001b4a00(matrix, &origin, matrix);
 }
 }

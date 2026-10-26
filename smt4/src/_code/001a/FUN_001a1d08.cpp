@@ -1,4 +1,4 @@
-/* NON_MATCHING: event-script state machine; draft shape, fall-through between cases 0/3/6 and the shared tail is written as in the compiler's switch, register allocation not compared */
+/* NON_MATCHING: structure and calls match retail; the nn wait-result test (lsl #22 compare vs lsl/lsr/sub), the `mov r3,#0` argument of FUN_00309a60 (armcc reuses r2) and the sp-slot stm grouping of FUN_002c40f8's stack arguments differ. */
 #include "nn/Result.h"
 #include "common.h"
 #include "sys/ResultReport.h"
@@ -51,13 +51,13 @@ s32 FUN_00223898(EventRequest *request, s32 kind);
 s32 scrScriptProcessStartEntry(void *process, s32 entry);
 ScriptProcessState *FUN_00297060(void);
 void scrScriptProcessDestroy(void *process);
-void FUN_002c40f8(u32 *result, s32 *request, s32 a, s32 b, s32 c, s32 d);
+u32 FUN_002c40f8(u32 *signalledCount, s32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 void asdMemFree(void *block);
 void gameDataFlagsClear(s32 flag);
 void gameDataFlagsClearAndRefresh(s32 flag);
 void gameDataRemoveHomeButtonHold(s32 flag);
 void FUN_002e2f14(EventRequest *request);
-void FUN_00309a60(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f);
+void FUN_00309a60(u32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g);
 s32 scrRunOpcodesStub(void *process);
 u32 FUN_001c0954(u32 id, u32 arg);
 
@@ -79,9 +79,9 @@ u32 FUN_001a1d08(void)
     u32 next;
     switch (request->state) {
     case EVENT_START:
-        if (request->file == 1) {
+        if (g_saveLoadThread.request->file == 1) {
             u32 sound = FUN_001c0954(0xFF2AE, 0);
-            FUN_00309a60(sound, 6, 0xFF2AE, 0, 6, 0);
+            FUN_00309a60(sound, 6, 0xFF2AE, 0, 6, 0, g_saveLoadThread.unk08);
         }
         /* fall through */
     case EVENT_INTRO_DONE:
@@ -93,12 +93,12 @@ u32 FUN_001a1d08(void)
         return 0;
     case EVENT_FADE:
         if (request->fadeId != 0) {
-            u32 result;
+            u32 signalledCount;
             s32 id = request->fadeId;
-            FUN_002c40f8(&result, &id, 1, 0, 0, 0);
-            if ((s32)nnResultIsFailure(result))
+            u32 result = FUN_002c40f8(&signalledCount, &id, 1, 0, 0, 0);
+            if (nnResultIsFailure(result))
                 FUN_002c526c(result);
-            if ((result & 0x3FF) == 0x3FE) {
+            if (!nnResultDescriptionIsNot(result, 0x3FE)) {
                 request->frames++;
                 return 0;
             }

@@ -6,8 +6,8 @@ extern "C" {
 
 int FUN_0026e70c(void);
 int renderCtxCallB(float *);
-int FUN_002a34e8(float *, float *);
-int mathMatrixTranslateLocal(float *, float *, float *);
+int nn_math_ARMv6_MTX34AddTranslateAsm(float *, float *);
+int nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(float *, float *, float *);
 int FUN_002ae038(...);
 int FUN_002ae9ec(...);
 int FUN_002b64b8(void);
@@ -78,8 +78,8 @@ extern int g_titleScene; /* 0x44ea00 */
 extern unsigned int FUN_0026e6a0(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: FUN_0026e70c. */
 /* Supplied declaration required: renderCtxCallB. */
-/* Supplied declaration required: FUN_002a34e8. */
-/* Supplied declaration required: mathMatrixTranslateLocal. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34AddTranslateAsm. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34MultTranslateAsm_2A3504. */
 /* Supplied declaration required: FUN_002ae038. */
 /* Supplied declaration required: FUN_002ae9ec. */
 /* Supplied declaration required: FUN_002b64b8. */
@@ -187,8 +187,8 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
             temp_v18 = temp_v13;
             temp_v32 = temp_v12;
             temp_v34 = temp_v12;
-            mathMatrixTranslateLocal(&temp_v13,&temp_v13,&temp_v31);
-            FUN_002a34e8(&temp_v13,&temp_v33);
+            nn_math_ARMv6_MTX34MultTranslateAsm_2A3504(&temp_v13,&temp_v13,&temp_v31);
+            nn_math_ARMv6_MTX34AddTranslateAsm(&temp_v13,&temp_v33);
             renderCtxCallB(&temp_v13);
           }
           asdTMTexTableEntryAt(0x32,0xc);

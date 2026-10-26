@@ -29,7 +29,7 @@ s32 loadSlotIsLoaded(u32);
 void loadSlotRequestAsync(u32, u32);
 void campButtonHelpAcquire();
 void campButtonHelpRelease();
-void FUN_0019de98(s32, u32);
+void buttonHelpSetText(s32, u32);
 void scrScriptProcessDestroy(void *);
 void asdMemFree(void *);
 void dataTableFree(u32);
@@ -66,7 +66,7 @@ u32 FUN_003ca3d0()
     if (work && work->state != 0 && work->state != 8)
         return 0;
     if (work) {
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         campButtonHelpRelease();
         if (work->process) {
             scrScriptProcessDestroy(work->process);

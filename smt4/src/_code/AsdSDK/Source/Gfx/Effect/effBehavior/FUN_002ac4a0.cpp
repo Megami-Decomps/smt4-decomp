@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocator vtable loads are scheduled early and the archive signature copy uses reversed operand registers. */
+/* NON_MATCHING: only the inlined 4-byte archive signature copy differs (retail loads the source address into r1 and the destination into r0 before the `mov r2, #1` of the next call). */
 #include "shard/S3SoundArchiveLoader.h"
 #include "shard/W6_W6Match3_WaveArchiveReader.h"
 #include <string.h>
@@ -42,12 +42,14 @@ void FUN_002ac4a0(SoundArchiveLoader *loader, u32 archiveId, WaveArchiveBufferAl
         return;
 
     u32 headerBytes = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(file);
-    u8 *converted = static_cast<u8 *>(allocator->allocate(headerBytes + info.waveCount * 4 + 4));
+    u32 convertedBytes = headerBytes + info.waveCount * 4 + 4;
+    u8 *converted = static_cast<u8 *>(allocator->allocate(convertedBytes));
     if (converted == NULL)
         return;
 
     rt_memcpy(converted, file, headerBytes);
-    memcpy(converted + headerBytes, DAT_004148c4, 4);
+    u8 *signature = converted + headerBytes;
+    memcpy(signature, DAT_004148c4, 4);
     WaveArchiveReader destination;
     FUN_002a7ac4(&destination, converted, 1);
     FUN_00150f34(&destination);

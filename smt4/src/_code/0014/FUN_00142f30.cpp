@@ -5,11 +5,11 @@ extern "C" {
 extern AsdGfxContext g_asdGfxContext;
 extern u8 *g_commandBufferCursor;
 
-void FUN_0014d8c8(AsdCmdBuffer *buffer, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 third);
+void FUN_0014d8c8(AsdCmdBuffer *buffer, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 *third);
 
 /* Finds the command buffer named `handle`, records how much of it has been written when it is the active one,
  * then passes on the command record entries[index]; returns the address of that record's copy target. */
-void *FUN_00142f30(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 unused, u32 third)
+void *FUN_00142f30(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32 index, u32 unused, u32 *third)
 {
     AsdGfxContext *asdGfxContextPtr = &g_asdGfxContext;
     // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.

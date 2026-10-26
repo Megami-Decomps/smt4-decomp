@@ -1,4 +1,4 @@
-/* NON_MATCHING: control flow matches (single exit through eor r0, r0, #1); only the register allocation differs: retail keeps zero in r6 and &g_bible in r5, built swaps them (`!bibleIsRunning()` fixes the registers but splits the exit). */
+/* NON_MATCHING: the registers match (zero r6, &g_bible r5); only the exit blocks differ: retail sets r0 = 1 once before both branches that share the final eor, build puts it in a separate block (`mov r0, #1; b`) and loads 0 for the fall-through exit. */
 /* The same shutdown poll as biblePollShutdown with the result inverted: returns 0 while the bible
  * screen is still running, 1 once it is gone. */
 #include "common.h"
@@ -38,7 +38,8 @@ static __inline u32 bibleIsRunning(void)
 
 u32 bibleIsClosed(void)
 {
-    return bibleIsRunning() ^ 1;
+    bool running = bibleIsRunning() != 0;
+    return !running;
 }
 
 } /* extern "C" */

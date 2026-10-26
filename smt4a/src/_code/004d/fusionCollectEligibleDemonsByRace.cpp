@@ -1,4 +1,4 @@
-/* NON_MATCHING: -O3 duplicates the selected-race branch and changes the counted rule loop; -O2 may preserve the retail control flow. */
+/* NON_MATCHING: retail tests the devil flag first (second flag load predicated) and anchors every field on selection+0x100, and counts the rule loop with ne (the build reads the race flag first and uses gt). Row counts and the control flow match. */
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_FusionSelection.h"
@@ -20,11 +20,11 @@ void sysMemClear(void *memory, u32 size);
 FusionCandidateRange *gameDataGetSmallBlock(void);
 s32 FUN_002a4b28(u16 id);
 
-s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, u16 *outIds)
+s32 fusionCollectEligibleDemonsByRace(const FusionRaceSelection *selection, s16 *outIds)
 {
     s32 count = 0;
     s8 hasDevil = selection->hasDevil;
-    if (hasDevil || selection->hasRace) {
+    if (selection->hasRace || hasDevil) {
         u8 allowedRaces[0x44];
         sysMemClear(allowedRaces, sizeof(allowedRaces));
         u32 race;

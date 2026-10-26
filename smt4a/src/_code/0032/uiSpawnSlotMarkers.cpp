@@ -16,7 +16,7 @@ typedef struct UiOrigin {
 
 extern UiPos *asdTMTexTableEntryAt(int table, int index);
 extern int FUN_00344bc8(int slot);
-extern int FUN_0032ecac(void);
+extern int gameDataToggleFlagIsSet(void);
 extern int FUN_00164b5c(int a, int b, int c, int x, int y, int d);
 
 /* Spawns the marker for each of the eleven slots below `count` (except `skip`) when `enabled` is 1 and the slot check passes. */
@@ -31,7 +31,7 @@ void uiSpawnSlotMarkers(UiOrigin *origin, int count, int firstSlot, int slotBase
 
         if (count > i && i != skip && enabled == 1) {
             FUN_00344bc8(slotBase + (i + firstSlot));
-            if (FUN_0032ecac() != 0) {
+            if (gameDataToggleFlagIsSet() != 0) {
                 UiPos *marker = asdTMTexTableEntryAt(0x14, 0x58E);
 
                 FUN_00164b5c(2, 0x14, 7, slotPos->x + marker->x + originX, slotPos->y + marker->y + originY, 0xC);

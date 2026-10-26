@@ -1,4 +1,4 @@
-/* NON_MATCHING: restored four-argument random-range call; ring index registers, cleanup owner register, and floating constant hoisting differ. */
+/* NON_MATCHING: the emitter release is a helper and (finding, not kept: a function-level `f32 origin = 0.0f` for the node origin hoists it at entry like retail and leaves only scheduling ties — a steering temporary, needs Main's ruling); remaining: 0.0f constant hoisting, spilled stack-argument reload, ring-index modulo constants. */
 #include "common.h"
 
 /* A spawned particle node (only the fields the emitter sets). */
@@ -59,25 +59,34 @@ f32 FUN_00283328(s32 mode, u32 numerator, u32 denominator);
 void FUN_0034a16c(void *params, void *a, void *b, void *c, void *d);
 void FUN_0035cc80(void *params, void *a, void *b, void *c, void *d, void *e, void *f, void *g);
 
+/* Clears the emitter's nodes and counters, detaches it from its owner and releases it. */
+static __inline void particleEmitterRelease(ParticleEmitter *emitter)
+{
+    s32 i = 0;
+
+    if (emitter != NULL) {
+        for (; i < EMITTER_RING; i++)
+            nodeTreeReleaseItemClearOwner(emitter->nodes[i]);
+        emitter->frame = 0;
+        emitter->spawnA = 0;
+        emitter->spawnB = 0;
+        emitter->spawnC = 0;
+        if (emitter->owner != NULL)
+            *emitter->owner = 0;
+        nodeTreeReleaseItem(emitter);
+    }
+}
+
 /* Advances a particle emitter by one frame: spawns the particles due this frame into its ring of
  * nodes, or at the end of its duration restarts it (while repeats remain) or releases it. */
 void FUN_00213020(ParticleEmitter *emitter)
 {
+
     if (emitter->duration == emitter->frame) {
         emitter->repeats--;
         emitter->frame = 0;
         if (emitter->repeats <= 0) {
-            if (emitter != NULL) {
-                for (s32 i = 0; i < EMITTER_RING; i++)
-                    nodeTreeReleaseItemClearOwner(emitter->nodes[i]);
-                emitter->frame = 0;
-                emitter->spawnA = 0;
-                emitter->spawnB = 0;
-                emitter->spawnC = 0;
-                if (emitter->owner != NULL)
-                    *emitter->owner = 0;
-                nodeTreeReleaseItem(emitter);
-            }
+            particleEmitterRelease(emitter);
         } else {
             for (s32 i = 0; i < 9; i++)
                 ((u32 *)emitter)[i] = 0;

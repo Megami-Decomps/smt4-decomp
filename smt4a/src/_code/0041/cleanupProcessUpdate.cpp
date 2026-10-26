@@ -31,7 +31,7 @@ void sysPlaySe(u32 sound);
 void FUN_0022e774(void);
 void statusDownRestartTransition(void);
 s32 aocDataBlockHasEntries(void);
-void FUN_0019de98(u32 first, u32 color);
+void buttonHelpSetText(u32 first, u32 color);
 }
 
 /* Drive the script and asynchronous cleanup phases until the process can finish. */
@@ -82,7 +82,7 @@ extern "C" s32 cleanupProcessUpdate(CleanupProcessState *process)
                 break;
             process->stage = 3;
         case 3:
-            FUN_0019de98(0, 0xf4f4f4ff);
+            buttonHelpSetText(0, 0xf4f4f4ff);
             process->timer = 0;
             process->state = 7;
             process->stage = 0;

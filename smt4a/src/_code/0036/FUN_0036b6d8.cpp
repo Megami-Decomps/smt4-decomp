@@ -20,7 +20,7 @@ void objBMarkAndInit20D4(void);
 void stateHolderMarkAndInit2588(void);
 void campButtonHelpAcquire(void);
 void sysPlaySe(s32 id);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 
 /* Create the Arousal Skill scene process and its state, then load its resources and start it. */
 void FUN_0036b6d8(s32 mode, u32 id)
@@ -60,7 +60,7 @@ void FUN_0036b6d8(s32 mode, u32 id)
     stateHolderMarkAndInit2588();
     campButtonHelpAcquire();
     sysPlaySe(244);
-    FUN_0019de98(0, 0xF4F4F4FF);
+    buttonHelpSetText(0, 0xF4F4F4FF);
     scene->unk10 = 0;
     scene->state = 1;
     scene->unk0C = 0;

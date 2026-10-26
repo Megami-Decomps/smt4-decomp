@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag-test form, basis alias reloads and floating normalization/cross-product scheduling differ. */
+/* NON_MATCHING: the guard (NodeTransform::hasFlags -> mov/bics) now matches; basis alias reloads and floating normalization/cross-product scheduling differ. */
 #include "shard/W4_Match1b_Node.h"
 #include <math.h>
 
@@ -7,7 +7,7 @@ extern "C" f32 g_nodeMinimumBasisLengthSquared;
 /* Rebuild an orthonormal node basis unless the node preserves its supplied basis. */
 extern "C" u32 FUN_0036a33c(NodeTransform *transform)
 {
-    if (!(transform->flags & 0x10)) {
+    if (!transform->hasFlags(0x10)) {
         f32 (*m)[4] = transform->m;
         f32 x = m[0][1] * m[1][2] - m[0][2] * m[1][1];
         f32 y = m[0][2] * m[1][0] - m[0][0] * m[1][2];

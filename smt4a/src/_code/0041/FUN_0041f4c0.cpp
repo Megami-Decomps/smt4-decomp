@@ -34,7 +34,7 @@ s32 byteTripleGetV0(void);
 void FUN_0041e58c(ModeScreen *screen);
 void FUN_0041f020(ModeScreen *screen, s32 arg);
 void FUN_002f0384(s32 arg);
-void FUN_0019de98(void *target, u32 color);
+void buttonHelpSetText(void *target, u32 color);
 
 /* Switches to `state`/`subState`, remembering the state left and restarting the timer. */
 static void modeScreenSetState(ModeScreen *screen, u8 state, u8 subState)
@@ -67,7 +67,7 @@ void FUN_0041f4c0(ModeScreen *screen)
     }
     index = screen->entryIndex;
     ModeScreenEntry *entries = static_cast<ModeScreenEntry *>(dataTableGetEntries(dataTableGet(0x3d, 0)));
-    FUN_0019de98(entries[index].colorTarget, 0xf4f4f4ff);
+    buttonHelpSetText(entries[index].colorTarget, 0xf4f4f4ff);
     modeScreenSetState(screen, 13, 4);
 }
 

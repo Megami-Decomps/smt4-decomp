@@ -1,3 +1,4 @@
+/* NON_MATCHING: retail copies the second slot (mov r6, r4) and holds the first rank in r4; this matches byte-for-byte only with FUN_00230f44 declared as returning s16 (grouped s16 ranks), which contradicts its u16 definition. */
 #include "common.h"
 
 struct ItemSlot;

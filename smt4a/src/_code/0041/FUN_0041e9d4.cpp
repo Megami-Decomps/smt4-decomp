@@ -19,7 +19,7 @@ struct SaveLoadResultFlagsViewA {
 extern "C" {
 extern SaveLoadResultFlagsViewA g_saveLoadUIBase;
 void ifTouchRegionRemove();
-void FUN_0019de98(s32, u32);
+void buttonHelpSetText(s32, u32);
 void scrScriptProcessStartEntry(void *, u32);
 
 void FUN_0041e9d4(SaveLoadControllerA *work)
@@ -37,7 +37,7 @@ void FUN_0041e9d4(SaveLoadControllerA *work)
         eventQueueAddUnique(0x100020F);
         return;
     }
-    FUN_0019de98(0, 0xF4F4F4FF);
+    buttonHelpSetText(0, 0xF4F4F4FF);
     eventQueueAddUnique(0x100020E);
     work->busy = 1;
     SaveLoadScriptEntryViewA *script = reinterpret_cast<SaveLoadScriptEntryViewA *>(work);

@@ -12,7 +12,11 @@ typedef struct RelativePointer {
 
     void *get() const
     {
-        return offset != 0 ? (void *)((u8 *)this + offset) : NULL;
+        s32 relative = offset;
+        if (relative != 0) {
+            return (void *)((u8 *)this + relative);
+        }
+        return NULL;
     }
 
     void set(void *target)
@@ -55,10 +59,18 @@ struct VertexBufferResource {
     /* 0x34 */ u8 unk34[4];
     /* 0x38 */ RelativePointer streams[6];
 
+    bool hasFlags(u32 mask) const
+    {
+        if ((mask & ~flags) == 0) {
+            return true;
+        }
+        return false;
+    }
+
     static VertexBufferResource *cast(void *object)
     {
         VertexBufferResource *resource = (VertexBufferResource *)object;
-        return resource != NULL && (resource->flags & 0x20000009) == 0x20000009 ? resource : NULL;
+        return resource != NULL && resource->hasFlags(0x20000009) ? resource : NULL;
     }
 
     VertexBufferStorage *stream(u8 index)

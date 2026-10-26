@@ -7,8 +7,9 @@ extern "C" {
 /* Copies or updates the stored values. */
 void wordPairCopy(WordPair *destination, const WordPair *source)
 {
+    u32 first = source->first;
     u32 second = source->second;
-    destination->first = source->first;
+    destination->first = first;
     destination->second = second;
 }
 }

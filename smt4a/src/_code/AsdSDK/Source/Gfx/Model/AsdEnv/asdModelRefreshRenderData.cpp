@@ -16,7 +16,7 @@ void FUN_001c95c0(ModelRefreshState *state);
 // Refresh changed material/node bindings and emit the aggregate material color command.
 void asdModelRefreshRenderData(ModelRefreshState *state)
 {
-    if ((state->flags & 4) == 0) {
+    if (!state->hasFlags(4)) {
         ModelRefreshProperties *properties = state->resource->properties;
         FUN_001ca474(state->binding, properties->binding);
         if (state->materialsDirty) {

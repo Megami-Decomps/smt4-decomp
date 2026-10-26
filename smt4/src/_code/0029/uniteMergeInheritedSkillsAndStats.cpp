@@ -1,4 +1,4 @@
-/* NON_MATCHING: optional-parent flag setup, the two-parent unrolled trait loop and saturating-count additions use different registers from retail. */
+/* NON_MATCHING: only the optional third parent's saturating count increment swaps the index/value registers (r2/r1 instead of r1/r2). */
 #include "common.h"
 
 struct UnitInheritanceRecord {
@@ -19,7 +19,9 @@ extern "C" void unitRecalculateEffectiveStats(UnitInheritanceRecord *record);
 // Merge inherited traits and saturating ancestor counts, then rebuild the result's stats.
 extern "C" void uniteMergeInheritedSkillsAndStats(void *, const UnitInheritanceRecord *first, const UnitInheritanceRecord *second, const UnitInheritanceRecord *third, UnitInheritanceRecord *result)
 {
-    bool hasThird = third != NULL;
+    bool hasThird = true;
+    if (third == NULL)
+        hasThird = false;
     if (hasThird) {
         for (s32 i = 0; i < 64; ++i) {
             result->traits[i] = first->traits[i];
@@ -35,7 +37,8 @@ extern "C" void uniteMergeInheritedSkillsAndStats(void *, const UnitInheritanceR
     bitsetSetBit(result, devilGetRecord(result->id)->skill);
     if (hasThird) {
         for (s32 i = 0; i < 0x500; ++i) {
-            s32 total = first->ancestors[i] + second->ancestors[i] + third->ancestors[i];
+            s32 total = first->ancestors[i] + second->ancestors[i];
+            total += third->ancestors[i];
             if (total > 255)
                 total = 255;
             result->ancestors[i] = total;

@@ -26,9 +26,8 @@ f32 FUN_001a1ee0(f32 x)
     u16 index = (u32)phase;
     f32 fraction = phase - (f32)index;
     const WaveEntry *entry = &DAT_00536d14[index & 0xff];
-    if (x < 0.0f)
-        return -(entry->base + fraction * entry->slope);
-    return entry->base + fraction * entry->slope;
+    f32 wave = entry->base + fraction * entry->slope;
+    return x < 0.0f ? -wave : wave;
 }
 
 } /* extern "C" */

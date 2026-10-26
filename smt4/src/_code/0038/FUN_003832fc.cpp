@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the pose id (i + 1) behind a count > 0 guard and keeps the search loop rotated with the flag-load predicated (ldrhgt); ours tests the count at the loop head and loads the forbidden flag unconditionally; compare-operand load order differs. */
+/* NON_MATCHING: retail hoists the pose id (i + 1) behind a count > 0 guard and keeps the search loop rotated with the flag-load predicated (ldrhgt); ours tests the count at the loop head and loads the forbidden flag unconditionally; the rank compare has retail's register assignment but its two operands reversed (cmp r1, r0 vs cmp r0, r1). */
 #include "common.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
@@ -80,7 +80,7 @@ void FUN_003832fc(HunterCompany *company)
     records = dataTable27Sub0GetRecord(company->table, 0);
     for (s32 i = 0; i < dataTable27Sub0GetCount(company->table); i++) {
         record = &records[i];
-        if (record->rank != company->rank) {
+        if (company->rank != record->rank) {
             continue;
         }
         if (record->requiredFlag != 0 && gameFlagIsSet(record->requiredFlag) == 0) {

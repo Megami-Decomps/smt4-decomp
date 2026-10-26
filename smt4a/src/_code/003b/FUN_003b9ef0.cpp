@@ -9,7 +9,7 @@ int FUN_002750d8(...);
 int sysPlayVoice(...);
 
 int FUN_00272f54(void);
-int FUN_002bcafc(void);
+int mapSelectRoomMusic(void);
 int navigationSetArguments(...);
 int FUN_00303460(...);
 int blockResetAxis(unsigned int);
@@ -80,7 +80,7 @@ extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_00272f54. */
 /* Supplied declaration required: FUN_002750d8. */
 extern int messageGetChoiceResult(void);
-/* Supplied declaration required: FUN_002bcafc. */
+/* Supplied declaration required: mapSelectRoomMusic. */
 /* Supplied declaration required: navigationSetArguments. */
 /* Supplied declaration required: FUN_00303460. */
 /* Supplied declaration required: blockResetAxis. */
@@ -271,7 +271,7 @@ void FUN_003b9ef0(unsigned int param_1,unsigned int param_2,int param_3)
       *(unsigned int *)(temp_v2 + 0x28) = 0x15;
       *(unsigned int *)(temp_v2 + 0x2c) = 0;
       FUN_003b5d20();
-      FUN_002bcafc();
+      mapSelectRoomMusic();
       temp_v2 = FUN_0013def0(0);
       if (temp_v2 == 3) {
         FUN_0013cab8(0,10,0xff);

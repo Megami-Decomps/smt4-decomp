@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the saved-register numbers of the row offset/top pair (retail sl/r7, built r7/sl) differ. */
+/* NON_MATCHING: the two saved registers match retail; only the operand order of the final `add` (retail sl + r7, built r7 + sl) differs. */
 #include "shard/W6_W6Match2_ScrollList.h"
 
 extern "C" {
@@ -18,7 +18,7 @@ extern "C" void FUN_001c3600(ScrollSelectionOwner* owner)
         s32 count = owner->entryCount;
         s32 lastColumn = (count - 1) % columns;
         s32 lastRow = (count - 1) / columns;
-        if (count <= (rowOffset + rowTop) * columns + column) {
+        if (count <= (rowTop + rowOffset) * columns + column) {
             scrollListSetSelection(&owner->primary, lastRow);
             scrollListSetSelection(&owner->list, lastColumn);
         }

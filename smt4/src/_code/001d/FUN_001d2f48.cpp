@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero and scratch registers are exchanged; enemy state/timer stores do not combine into STM. */
+/* NON_MATCHING: state/timer now combine into STM through a state-transition helper; only the zero register copy for the loop index (retail `mov r1, ip`) and an address/scratch register choice differ. */
 #include "common.h"
 
 struct DepartureGameState {
@@ -34,6 +34,12 @@ struct DepartingEnemyTable {
     /* 0x303C */ s32 activeCount;
 };
 
+static __inline void departingEnemyStartState(DepartingEnemy *enemy, s32 state)
+{
+    enemy->state = state;
+    enemy->timer = 0;
+}
+
 extern "C" {
 
 extern DepartureGameState g_gameState;
@@ -62,9 +68,8 @@ void FUN_001d2f48(void)
         DepartingEnemy *enemy = &table->enemies[index];
         if (enemy->active != 0 && enemy->kind != 0 && enemy->kind < 11 &&
             enemy->locked == 0 && enemy->state == 16) {
+            departingEnemyStartState(enemy, 11);
             --table->activeCount;
-            enemy->state = 11;
-            enemy->timer = 0;
         }
     }
 }

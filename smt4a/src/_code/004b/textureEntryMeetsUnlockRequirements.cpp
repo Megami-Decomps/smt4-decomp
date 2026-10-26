@@ -8,7 +8,7 @@ struct UnlockLevelRequirementView { u8 unk00[0x120]; s16 level; };
 extern "C" {
 UnlockSpriteEntryView *FUN_004bb80c(s32 index);
 s32 partyEntryFlagsBit3(u16 id);
-s32 FUN_001ada74(u16 id);
+s32 goalConditionsSatisfied(u16 id);
 s32 FUN_001ba3d4(u32 index);
 s32 FUN_003df390(u16 id);
 UnlockLevelRequirementView *FUN_001ad9b4(u16 id);
@@ -19,7 +19,7 @@ s32 textureEntryMeetsUnlockRequirements(u32 index)
     UnlockSpriteEntryView *entry = FUN_004bb80c(index);
     if (partyEntryFlagsBit3(entry->id) != 0)
         return 0;
-    if (FUN_001ada74(entry->id) != 0)
+    if (goalConditionsSatisfied(entry->id) != 0)
         return 0;
     if (entry->id == 0x8D) {
         if (FUN_001ba3d4(0x3A) >= 10) {

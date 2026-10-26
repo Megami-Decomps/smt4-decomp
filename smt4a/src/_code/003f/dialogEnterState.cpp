@@ -17,7 +17,7 @@ typedef struct Dialog {
 } Dialog;
 
 extern int sysPlaySe(u32 se);
-extern int FUN_0019de98(int a, u32 color);
+extern int buttonHelpSetText(int a, u32 color);
 extern int FUN_002ebce4(void);
 extern int screenStartOrClear(u32 screen, u32 start);
 
@@ -34,7 +34,7 @@ void dialogEnterState(Dialog *dialog, u32 state, u32 arg)
     case 0:
     case 1:
         sysPlaySe(0xFC);
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         return;
     case 4:
     case 5:

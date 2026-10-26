@@ -1,25 +1,29 @@
-/* NON_MATCHING: float register allocation: retail keeps the result in s0 (from in s16, delta in s17), built keeps both from and to live in s16/s17; compare operand order also differs */
+/* NON_MATCHING: only the in-place vmul/vdiv register of the angle computation differs. */
 #include "common.h"
 
 extern "C" {
 
-f32 mathInterpolatePackedTable(u32 angle);
+f32 mathInterpolatePackedTable(u16 angle);
 
-/* Interpolates from `from` to `to` by progress/duration through an angle table (0 to `from` at progress <= 0, `to` at the end or without a duration). */
-f32 FUN_001241a8(f32 from, f32 to, f32 duration, f32 progress)
+/* Eases from `from` to `to` over `duration`: 0 duration returns `to`, a time at or below 0 returns `from`,
+ * and in between a sine curve (angle in 1/65536 turns) weights the two. */
+f32 FUN_001241a8(f32 from, f32 to, f32 duration, f32 time)
 {
-    f32 result = to;
-
-    if (duration != 0.0f) {
-        if (progress <= 0.0f) {
-            result = from;
-        } else if (progress < duration) {
-            f32 delta = result - from;
-            f32 factor = mathInterpolatePackedTable((u32)(progress * 16384.0f / duration + 49152.0f) & 0xFFFF);
-            result = (factor + 1.0f) * delta + from;
-        }
+    if (duration == 0.0f) {
+        return to;
     }
-    return result;
+    if (time <= 0.0f) {
+        return from;
+    }
+    if (time >= duration) {
+        return to;
+    }
+    f32 delta = to - from;
+    u16 angle = (u16)(time * 16384.0f / duration + 49152.0f);
+    f32 weight = mathInterpolatePackedTable(angle) + 1.0f;
+    f32 offset = weight * delta;
+
+    return offset + from;
 }
 
 } /* extern "C" */

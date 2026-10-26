@@ -36,9 +36,7 @@ QueuedRecord *FUN_001ba0c8(RecordRing *ring, const QueuedRecord *record)
     if (ring->readIndex == ring->writeIndex) {
         stored = &ring->records[ring->writeIndex];
         nnnstdMemCpy(stored, record, sizeof(QueuedRecord));
-        s32 pushed = ring->writeIndex;
-        ring->writeIndex = pushed + 1;
-        ring->lastIndex = pushed;
+        ring->lastIndex = ring->writeIndex++;
         if (ring->writeIndex >= 96) {
             ring->writeIndex = 0;
         }
@@ -46,8 +44,7 @@ QueuedRecord *FUN_001ba0c8(RecordRing *ring, const QueuedRecord *record)
         QueuedRecord *previous = &ring->records[ring->lastIndex];
         stored = &ring->records[ring->writeIndex];
         nnnstdMemCpy(stored, record, sizeof(QueuedRecord));
-        ring->lastIndex = ring->writeIndex;
-        ring->writeIndex++;
+        ring->lastIndex = ring->writeIndex++;
         if (ring->writeIndex >= 96) {
             ring->writeIndex = 0;
         }

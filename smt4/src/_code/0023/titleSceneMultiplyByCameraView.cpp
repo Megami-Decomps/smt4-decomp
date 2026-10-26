@@ -17,7 +17,7 @@ extern "C" {
 
 extern TitleSceneView *g_titleScene;
 
-s32 FUN_002a81a8(MTX34 *out, const void *source);
+s32 nn_math_ARMv6_MTX34InverseAsm(MTX34 *out, const void *source);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *destination, const MTX34 *source);
 void nn_math_ARMv6_MTX44MultAsm(Matrix44Rows *destination, const Matrix44Rows *left, const Matrix44Rows *right);
 
@@ -27,7 +27,7 @@ void titleSceneMultiplyByCameraView(u32 unused, Matrix44Rows *destination, const
     u8 *camera = g_titleScene->camera;
     if (camera != NULL) {
         MTX34 view;
-        if (FUN_002a81a8(&view, camera + 0x38) == 0) {
+        if (nn_math_ARMv6_MTX34InverseAsm(&view, camera + 0x38) == 0) {
             nn_math_ARMv6_MTX34CopyAsm(&view, &MTX34::Identity());
         }
         Matrix44Rows matrix;

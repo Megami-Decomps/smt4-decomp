@@ -1,4 +1,3 @@
-/* NON_MATCHING: final selected-quest reset scheduling differs; native draw defaults now reproduce the retail table relocation. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "quest_center/QuestRuntime.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -89,8 +88,8 @@ void FUN_00381b8c(QuestCenterScreenStateIV *work)
     work->second = 0;
     work->first = 0;
     work->selection = 0;
-    work->selectedQuest = -1;
     work->counter = 0;
+    work->selectedQuest = -1;
     work->active = 0;
     asdTMTexTableLoadSprites(0x31);
     asdTMTexTableLoadEntryAsync(0x31, 0);

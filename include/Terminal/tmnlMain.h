@@ -35,7 +35,7 @@ typedef struct TmnlWork {
     /* 0x588 */ u32 unk588;
     /* 0x58C */ u32 unk58C;
     /* 0x590 */ u8 unk590[4];
-    /* 0x594 */ s32 items[2];               /* entry values, indexed by FUN_001d04a4 */
+    /* 0x594 */ s32 items[2];               /* entry values, indexed by tmnlFindSlotForItem */
 } TmnlWork;
 typedef char TmnlWorkLayoutCheck[sizeof(TmnlWork) == 0x59C ? 1 : -1];
 
@@ -44,7 +44,7 @@ typedef struct TmnlWorkA {
     /* 0x00 */ u32 task;                   /* the terminal task's handle */
     /* 0x04 */ u8 done;                    /* the task has finished; the work area may be freed */
     /* 0x05 */ u8 unk05[0x5A3];
-    /* 0x5A8 */ s32 items[2];               /* entry values, indexed by FUN_0026edbc */
+    /* 0x5A8 */ s32 items[2];               /* entry values, indexed by tmnlFindSlotForItem */
 } TmnlWorkA;
 
 /* Apocalypse: the terminal's globals. */

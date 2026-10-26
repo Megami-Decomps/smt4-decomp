@@ -52,7 +52,7 @@ void statusDisplayBindUnitRecord(SlotRecordId *record, u32 a, u32 b, u32 c);
 void statusPanelSetOpen(s32 open);
 s32 soundChannelRequestIfEnabled(s32 a, s32 b, s32 c);
 void FUN_0022e774(void);
-void FUN_0019de98(u32 a, u32 color);
+void buttonHelpSetText(u32 a, u32 color);
 void sysPlaySe(u32 id);
 extern const char DAT_0052c7c0[];
 
@@ -107,7 +107,7 @@ void FUN_004cbb38(TalkScene *scene)
     statusPanelSetOpen(1);
     soundChannelRequestIfEnabled(0x0100002D, 0, 60);
     FUN_0022e774();
-    FUN_0019de98(0, 0xF4F4F4FF);
+    buttonHelpSetText(0, 0xF4F4F4FF);
     if (pair->pairedId != 0 && pair->unk04 != 0) {
         sysPlaySe(106);
         scene->timer = 0;

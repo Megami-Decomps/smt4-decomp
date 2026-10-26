@@ -19,7 +19,7 @@ extern "C" s32 FUN_004250dc(void *player, s32 index)
         MoviePacketStream streams[MOVIE_SYNC_ENTRIES];
         u32 handles[MOVIE_SYNC_ENTRIES];
         s32 current;
-        u8 prepared;
+        s8 prepared;
         u8 unk54D[3];
         u32 flags;
     };

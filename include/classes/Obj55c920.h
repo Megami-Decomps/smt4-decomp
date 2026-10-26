@@ -19,6 +19,11 @@ public:
     virtual void unk14() = 0;
     virtual void render() = 0;
     virtual s32 isReady();
+    void FUN_004a24a8();
+    void FUN_004a24a4();
+    void FUN_004a4090();
+    void FUN_004a4094();
+    void FUN_004a4098();
     virtual void openScreen();
     virtual s32 isScreenReady() const;
     virtual void closeScreen();

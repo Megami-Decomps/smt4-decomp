@@ -22,6 +22,6 @@ void FUN_002648e8(Timer *timer);
 
 void entryListCollectMatches(EntryList *list);
 
-void FUN_002628fc(Object *object);
+void objectReleaseIfSet(Object *object);
 
 } /* extern "C" */

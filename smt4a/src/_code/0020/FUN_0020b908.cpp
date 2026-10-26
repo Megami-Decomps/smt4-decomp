@@ -7,7 +7,7 @@ extern "C" {
 int sysPlaySe(...);
 int FUN_00183f58(int, int, int, int);
 int FUN_00184b90(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_002bf4f4(void);
 int FUN_002c8550(int);
 int FUN_0032d0c8(...);
@@ -25,7 +25,7 @@ extern int g_unite; /* 0x57f290 */
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 extern unsigned int dataTableGetCount(unsigned int);
 extern int dataTableGetEntries(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern unsigned char *slotRecordFindById(unsigned int);
 extern int resourceRunOperationIfUnblocked(void);
 extern int FUN_002a4894(int);
@@ -67,7 +67,7 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     if (temp_v3 >= 2) {
       temp_v4 = temp_v1 + 0x55;
     }
-    FUN_0019de98(temp_v4,0xf4f4f4ff);
+    buttonHelpSetText(temp_v4,0xf4f4f4ff);
     break;
   case 0xd:
     sysPlaySe(0x56);
@@ -150,11 +150,11 @@ void FUN_0020b908(unsigned int param_1,int param_2)
     if (temp_v3 >= 2) {
       temp_v4 = temp_v1 + 0x55;
     }
-    FUN_0019de98(temp_v4,0xf4f4f4ff);
+    buttonHelpSetText(temp_v4,0xf4f4f4ff);
     break;
   case 0x1c:
     sysPlaySe(0x5c);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     *(unsigned char *)(temp_v0 + 0x9070) = 1;
     break;
   case 0x24:

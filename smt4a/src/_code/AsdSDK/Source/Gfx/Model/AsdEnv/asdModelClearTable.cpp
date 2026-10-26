@@ -1,17 +1,20 @@
-/* NON_MATCHING: armcc turns this zeroing loop into a tail call to __aeabi_memclr4; retail keeps an explicit 24-iteration store loop */
-#include "common.h"
+/* NON_MATCHING: the loop stays a plain 24-iteration store loop like retail (slots are default-constructed bindings), but the index and the zero swap r0/r1 and the zero is copied (mov r1, r0) instead of materialised twice. */
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+
+struct EnvironmentBinding {
+    const AsdEnvironmentCommands *commands;
+    EnvironmentBinding() : commands(NULL) {}
+};
 
 extern "C" {
 
-extern u32 DAT_00646598[0x18];
+extern EnvironmentBinding DAT_00646598[0x18];
 
-/* Clears the 24-entry table. */
+/* Clears the 24-entry table of bound environment command blocks. */
 void asdModelClearTable(void)
 {
-    s32 i;
-
-    for (i = 0; i < 0x18; i++) {
-        DAT_00646598[i] = 0;
+    for (s32 i = 0; i < 0x18; i++) {
+        DAT_00646598[i] = EnvironmentBinding();
     }
 }
 

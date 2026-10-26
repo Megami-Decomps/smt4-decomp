@@ -7,9 +7,9 @@ static const char g_ndmServiceName[] = "ndm:u";
 
 extern "C" {
 
-extern u8 g_ndmLock[];        /* 0x4e6cd0: nn::os::CriticalSection */
-extern s32 g_ndmRefCount;     /* 0x471b10 */
-extern u32 g_ndmSession[];    /* 0x472ad8 */
+extern u8 g_moduleCriticalSection3[];        /* 0x4e6cd0: nn::os::CriticalSection */
+extern s32 DAT_00471b10;     /* 0x471b10 */
+extern u32 DAT_00472ad8[];    /* 0x472ad8 */
 
 u32 libc_strlen(const char *text);
 s32 asdModelForwardChecked(u32 *session, const char *name, u32 length, u32 flags);
@@ -17,16 +17,16 @@ s32 asdModelForwardChecked(u32 *session, const char *name, u32 length, u32 flags
 /* Opens the "ndm:u" service session on the first reference; returns the failure result or 0. */
 s32 FUN_0011c834(void)
 {
-    ScopedCriticalLock guard(g_ndmLock);
+    ScopedCriticalLock guard(g_moduleCriticalSection3);
 
-    if (g_ndmRefCount == 0) {
+    if (DAT_00471b10 == 0) {
         FUN_002c1398();
-        s32 result = asdModelForwardChecked(g_ndmSession, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
+        s32 result = asdModelForwardChecked(DAT_00472ad8, g_ndmServiceName, libc_strlen(g_ndmServiceName), 0);
         if (nnResultIsFailure(result)) {
             return result;
         }
     }
-    g_ndmRefCount++;
+    DAT_00471b10++;
     s32 success = 0;
     return success;
 }

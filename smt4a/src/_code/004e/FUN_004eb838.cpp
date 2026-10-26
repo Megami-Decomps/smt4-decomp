@@ -24,24 +24,29 @@ extern BtlActionGlobals g_btlAction;
 bool isEntryUsable(BtlEvent *event);
 void *FUN_004d7a70(BtlEvent *event, s32 kind, s32 selectionIndex, u32 flags);
 
+static __inline void setScriptState(ScriptStateOwnerView **owner, u8 state)
+{
+    static_cast<ScriptUnitStateView *>(g_btlAction.data)[(*owner)->index].state = state;
+}
+
 void FUN_004eb838(ScriptStateOwnerView **owner, BtlUnitA *unit)
 {
     if (!isEntryUsable(g_btlEvent)) {
         s32 selection = ((BtlCombatantEntryA *)unit->params)->indexView.selectionIndex;
         if ((s16)unit->data->unk1BE != 11) {
             if (FUN_004d7a70(g_btlEvent, 3, selection, 0) != 0) {
-                ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 0x1a;
+                setScriptState(owner, 0x1a);
                 return;
             }
         } else if (FUN_004d7a70(g_btlEvent, 7, selection, 0) != 0) {
-            ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 0x1a;
+            setScriptState(owner, 0x1a);
             return;
         }
     }
     if ((s16)unit->data->unk1BE == 13) {
-        ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 9;
+        setScriptState(owner, 9);
         return;
     }
-    ((ScriptUnitStateView *)g_btlAction.data)[(*owner)->index].state = 11;
+    setScriptState(owner, 11);
 }
 }

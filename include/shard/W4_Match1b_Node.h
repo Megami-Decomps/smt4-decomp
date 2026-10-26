@@ -16,6 +16,14 @@ typedef struct NodeTransform {
     /* 0x00 */ f32 m[3][4];     /* column 3 is the translation */
     /* 0x30 */ NodeVec3 scale;
     /* 0x3C */ u32 flags;
+
+    bool hasFlags(u32 mask) const
+    {
+        if ((mask & ~flags) == 0) {
+            return true;
+        }
+        return false;
+    }
 } NodeTransform;
 
 /* The object a node owner points at: the transform sits at 0x4c. */

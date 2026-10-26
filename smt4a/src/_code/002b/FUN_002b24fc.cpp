@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail b 88 differs from recovered pop {r4, pc}. */
+/* NON_MATCHING: retail returns 0 from the variant-1 guard through a branch to the shared `mov r0,#0; pop` (b 88); the build pops directly with r0 already 0. */
 #include "common.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
 #include "gamedata/GameDataAccess_Smt4a.h"
@@ -11,37 +11,37 @@ struct BattleMainView {
 
 extern "C" {
 extern BattleMainView* g_btlMain;
-extern s32 gameFlagIsSet(u32 flag);
+extern bool gameFlagIsSet(u32 flag);
 
 // Tests the variant-specific flags and current battle state for eligibility.
-u32 FUN_002b24fc(void)
+bool FUN_002b24fc(void)
 {
-    if (gameFlagIsSet(0x4F8) != 0) {
-        return 0;
+    if (gameFlagIsSet(0x4F8)) {
+        return false;
     }
 
     switch (flagSelectVariant()) {
     case 1:
-        if (FUN_002e2b38() == 0) {
-            return 0;
+        if (!FUN_002e2b38()) {
+            return false;
         }
         break;
     case 2:
-        if (gameFlagIsSet(0x4DB) != 0) {
-            return 1;
+        if (gameFlagIsSet(0x4DB)) {
+            return true;
         }
         break;
     default:
-        return 0;
+        return false;
     }
 
     BattleMainView* battle = g_btlMain;
     if (battle != 0) {
-        if (gameFlagIsSet(0x1FD) != 0 || battle->unkAC == 1) {
-            return 1;
+        if (gameFlagIsSet(0x1FD) || battle->unkAC == 1) {
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 } // extern "C"

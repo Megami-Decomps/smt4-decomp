@@ -26,7 +26,7 @@ typedef struct ShopMain {
 extern u32 DAT_005f1990;
 
 s32 sysPlaySe(s32 id);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
 void panelSetTarget(s32 offset, s32 frame);
@@ -114,7 +114,7 @@ void FUN_00494a34(ShopMain *shop)
         shop->step = 0;
         FUN_0049a5b4(shop);
         sysPlaySe(0x77);
-        FUN_0019de98(0, 0x323232FF);
+        buttonHelpSetText(0, 0x323232FF);
         DAT_005f1990 = 0;
     }
 }

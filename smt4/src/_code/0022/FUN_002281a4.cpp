@@ -1,4 +1,3 @@
-/* NON_MATCHING: only r0/r1 are swapped in the entry address computation (retail index in r0, base in r1). */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 
@@ -27,7 +26,8 @@ s32 FUN_002281a4(EffectTable *table)
     s32 i;
 
     btlGetMainState();
-    if (FUN_00293230() != 0) {
+    s32 busy = FUN_00293230();
+    if (busy != 0) {
         return -1;
     }
     result = 30;

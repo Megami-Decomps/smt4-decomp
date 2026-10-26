@@ -35,7 +35,7 @@ int sysPlaySe(...);
 int FUN_00183e58(void);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
-int FUN_0019de98(int, unsigned int);
+int buttonHelpSetText(int, unsigned int);
 int messageSetMode(int);
 int scrRunOpcodesStub(...);
 int FUN_0022e774(void);
@@ -90,7 +90,7 @@ extern int gameGetPlayerData(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: messageSetMode. */
 extern int gameGetSlotRecord(int);
 /* Supplied declaration required: dialogOpen. */
@@ -590,7 +590,7 @@ LAB_0026e1e4:
         *(unsigned int *)(param_1 + 0x436c) = *(unsigned int *)(param_1 + 0x4370);
       }
       else {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         uiSpriteSetKeyframe(param_1 + 0xac,1,0);
         *(unsigned int *)(param_1 + 0x436c) = 0x65;
         if (*(int *)(param_1 + 0x4370) == 4) {

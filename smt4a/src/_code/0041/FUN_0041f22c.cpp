@@ -49,7 +49,7 @@ struct SelectScreen {
 extern "C" {
 s32 padButtonIsPressed(s32 button);
 void eventQueueAddUnique(u32 event);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 void FUN_0023b45c(s32 value);
 s32 FUN_002e1a18(s32 value);
 void FUN_002f0384(s32 value);
@@ -115,7 +115,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
         FUN_0038b5fc(2, screen->ids.idC);
         FUN_0038b5fc(0, screen->ids.idA);
         screen->openRequested = 1;
-        FUN_0019de98(0, 0xF4F4F4FF);
+        buttonHelpSetText(0, 0xF4F4F4FF);
         u8 previous = screen->state;
         screen->state = 5;
         screen->previousState = previous;

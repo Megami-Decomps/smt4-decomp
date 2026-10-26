@@ -37,7 +37,7 @@ Task1ab7dc *FUN_001ab7dc(u32 arg0, const void *data, const void *params, u32 arg
 {
     Task1ab7dc *task = taskCreate(FUN_00193440, 0, 0, 0, 0, sizeof(Task1ab7dc), 3, 0, 0);
     if (task != NULL) {
-        reinterpret_cast<int>(memClear(task, sizeof(Task1ab7dc)));
+        memClear(task, sizeof(Task1ab7dc));
         __aeabi_memcpy4(task->data, data, sizeof(task->data));
         __aeabi_memcpy4(task->params, params, sizeof(task->params));
         task->unk21C = arg3;

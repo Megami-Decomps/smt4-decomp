@@ -8,7 +8,7 @@ struct NameEntry {
     /* 0x07 */ char name[0x3c - 7];
 };
 
-extern NameEntry DAT_0056fd38[22];
+extern NameEntry g_tmnlEntries[22];
 
 const char *gameDataGetPlayerName(s32 id);
 
@@ -20,7 +20,7 @@ const char *FUN_00358e28(s32 id)
     if (id > 200) {
         return gameDataGetPlayerName(id);
     }
-    NameEntry *entries = DAT_0056fd38;
+    NameEntry *entries = g_tmnlEntries;
     for (i = 0; i < 22; i++) {
         if (entries[i].id == id) {
             return entries[i].name;

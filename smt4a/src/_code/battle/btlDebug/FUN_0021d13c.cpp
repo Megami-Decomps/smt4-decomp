@@ -38,7 +38,7 @@ int FUN_00167458(...);
 int sysPlaySe(...);
 int asdTMTexTableEntryAt(...);
 int dataTable8FindRecord(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int gameGetSlotRecord(...);
 int FUN_0020acd8(...);
 int FUN_0021a6c8(...);
@@ -156,7 +156,7 @@ extern short vec2GetYInt(int *);
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: dataTable8FindRecord. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -1632,7 +1632,7 @@ LAB_0021f708:
     break;
   case 0x1c:
     if (*piVar21 < 9) goto LAB_00220474;
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     FUN_0020ad6c(param_1,0x1d,0);
     break;
   case 0x1f:

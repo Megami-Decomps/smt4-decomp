@@ -17,19 +17,20 @@ extern void asdTMTexTableReleaseNode(u32 node);
 extern void FUN_001b2d54(u32 system, u32 node, s32 handle);
 
 /* Releases the slot's texture node and handle and marks the slot inactive. */
-void aocSlotRelease(AocSlot *slot)
+static void aocSlotReleaseActive(AocSlot *slot)
 {
-    if (slot == NULL) {
-        return;
-    }
-    if (slot->handle == -1) {
-        return;
-    }
     if (slot->active != 0) {
         asdTMTexTableReleaseNode(slot->node);
         FUN_001b2d54(g_aocSystem, slot->node, slot->handle);
         slot->handle = -1;
         slot->active = 0;
+    }
+}
+
+void aocSlotRelease(AocSlot *slot)
+{
+    if (slot != NULL && slot->handle != -1) {
+        aocSlotReleaseActive(slot);
     }
 }
 

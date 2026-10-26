@@ -6,7 +6,7 @@ extern StatusDownStateA *g_statusDown;
 s32 FUN_0035db94();
 void FUN_00230b9c(u32 direction, u32 selection, s32 mode);
 void ifTouchRegionRemove();
-void FUN_0019de98(s32 channel, u32 color);
+void buttonHelpSetText(s32 channel, u32 color);
 void __aeabi_memset4(void *destination, s32 size, s32 value);
 
 // Change status tabs, clear their touch regions, and schedule the corresponding page state.
@@ -46,6 +46,6 @@ void statusDownSwitchTab(u32 tab)
         screen->unk520 = 0x18;
     else if (tab == 6)
         screen->unk520 = 0x1f;
-    FUN_0019de98(0, 0xf4f4f4ff);
+    buttonHelpSetText(0, 0xf4f4f4ff);
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reaches the heap pointer as base + 0x1000 then #0x318 (this loads 0x1318 from the pool) and gives the zero constant and the result swapped registers. */
+/* NON_MATCHING: the heap pointer now comes from base + 0x1000 as in retail; only the zero constant and the result copy are in swapped registers (retail r6/r8, built r8/r6). */
 #include "shard/S2SoundLoader.h"
 
 namespace {
@@ -40,7 +40,7 @@ s32 FUN_001753d4(SoundLoader *loader, u32 id, void *heap, u32 flags, u32 blockSi
 s32 FUN_00151340(u32 soundId)
 {
     AsdSoundSystemLoadView *system = &g_asdSoundSystem;
-    void *heap = system->heaps.loadHeap;
+    void *heap = g_asdSoundSystem.heaps.loadHeap;
     s32 result = 0;
     SoundInfo sound;
     PlayerInfo player = {0, 0};

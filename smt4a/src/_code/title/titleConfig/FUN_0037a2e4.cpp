@@ -37,7 +37,7 @@ void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 restart);
 void FUN_00203b40(void *cursor, s32 a, s32 b, s32 c, s32 d, s32 e);
 void fillTwoWordsWithByte(void *destination, u32 value);
 void sysPlaySe(s32 sound);
-void FUN_0019de98(s32 channel, u32 color);
+void buttonHelpSetText(s32 channel, u32 color);
 GameDataBlock *gameDataBlocksGetSaveData(void);
 u32 findByteThresholdTier(u8 value);
 u32 thresholdIndexFind(u8 value);
@@ -67,7 +67,7 @@ void FUN_0037a2e4(void)
     asdLoadFileAsyncSimple("camp/config.bf", reinterpret_cast<u32 *>(&config->dataA), 0);
     asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&config->dataB), 0);
     sysPlaySe(0x9b);
-    FUN_0019de98(0, 0xf4f4f4ff);
+    buttonHelpSetText(0, 0xf4f4f4ff);
     if (campIsState85() != 0) {
         GameDataBlock *save = gameDataBlocksGetSaveData();
         if (save->unk27E94[0] != 0) {

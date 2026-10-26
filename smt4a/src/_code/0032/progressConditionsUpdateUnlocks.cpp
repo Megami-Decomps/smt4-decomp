@@ -1,4 +1,4 @@
-/* NON_MATCHING: B-counter switch calls do not tail-merge, and save-byte addressing/register lifetimes differ; optimization flags may explain this. */
+/* NON_MATCHING: retail tail-merges the twelve countersGetB calls (each case only sets r0, one shared bl) and keeps the minimum compare after the switch; armcc here emits one call per case. The save-byte pointer and bit index now match. */
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
 #include "gamedata/GameDataAccess_VariantG.h"
@@ -24,9 +24,11 @@ void progressConditionsUpdateUnlocks()
     s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
     for (s32 index = 0; index < count; ++index) {
         s32 byte = index / 8;
+        s32 bit = index % 8;
         GameBlock2830C *save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
-        u32 mask = 1u << (index % 8);
-        if (save->unlocks.earned[byte] & mask)
+        u8 *earned = &save->unlocks.earned[byte];
+        u32 bits = *earned;
+        if (bits & (1u << bit))
             continue;
         ProgressUnlockCondition *entries = static_cast<ProgressUnlockCondition *>(
             dataTableGetEntries(dataTableGet(0x4a, 0)));
@@ -64,9 +66,9 @@ void progressConditionsUpdateUnlocks()
         }
         if (allowed) {
             save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
-            save->unlocks.earned[byte] |= mask;
+            save->unlocks.earned[byte] |= 1u << bit;
             save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
-            save->unlocks.pending[byte] |= mask;
+            save->unlocks.pending[byte] |= 1u << bit;
         }
     }
 }

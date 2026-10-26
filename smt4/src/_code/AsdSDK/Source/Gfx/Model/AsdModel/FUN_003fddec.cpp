@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002255c0(int **, int, int);
 int FUN_00225a14(unsigned int, int, unsigned int, int);
-int FUN_002a81a8(...);
+int nn_math_ARMv6_MTX34InverseAsm(...);
 int FUN_002b77f4(...);
 int nn_math_ARMv6_MTX34CopyAsm(...);
 int nn_math_ARMv6_MTX34InvTransposeAsm(unsigned char [48], int *);
@@ -46,7 +46,7 @@ typedef struct {
 
 /* Supplied declaration required: FUN_002255c0. */
 /* Supplied declaration required: FUN_00225a14. */
-/* Supplied declaration required: FUN_002a81a8. */
+/* Supplied declaration required: nn_math_ARMv6_MTX34InverseAsm. */
 /* Supplied declaration required: FUN_002b77f4. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
@@ -144,7 +144,7 @@ LAB_003fde4c:
           nn_math_ARMv6_MTX34CopyAsm(piVar6 + 0x6f,param_7 + 0x148);
         }
         else {
-          FUN_002a81a8(temp_v12,piVar6 + 0x23);
+          nn_math_ARMv6_MTX34InverseAsm(temp_v12,piVar6 + 0x23);
           FUN_002b77f4(temp_v17,temp_v12);
           nn_math_ARMv6_MTX34MultAsm(temp_v22,temp_v12,temp_v17);
           nn_math_ARMv6_MTX34MultAsm(piVar6 + 0x6f,param_7 + 0x148,temp_v22);
@@ -216,7 +216,7 @@ LAB_003fde4c:
           nn_math_ARMv6_MTX34CopyAsm(piVar6 + 0x6f,param_7 + 0x148);
         }
         else {
-          FUN_002a81a8(temp_v30,piVar6 + 0x23);
+          nn_math_ARMv6_MTX34InverseAsm(temp_v30,piVar6 + 0x23);
           FUN_002b77f4(temp_v23,temp_v30);
           nn_math_ARMv6_MTX34MultAsm(temp_v31,temp_v30,temp_v23);
           nn_math_ARMv6_MTX34MultAsm(piVar6 + 0x6f,param_7 + 0x148,temp_v31);

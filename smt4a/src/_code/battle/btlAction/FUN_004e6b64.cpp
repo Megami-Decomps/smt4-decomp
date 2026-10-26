@@ -103,7 +103,7 @@ void FUN_004e6b64(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate 
             s32 slot = context->battle->roster[target].combatant.combatantIndex;
             if (slot >= 0) {
                 BtlCombatantEntryA *unit = &context->battle->entries[slot];
-                if (unit != NULL && (unit->flags & DAT_00571188))
+                if (unit->flags & DAT_00571188)
                     guarding = true;
             }
             out[count].id = (s16)target;

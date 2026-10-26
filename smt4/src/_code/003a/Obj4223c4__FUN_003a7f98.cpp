@@ -1,0 +1,37 @@
+#include "common.h"
+#include "classes/Obj4223c4.h"
+#include "status/StatusCamera.h"
+
+extern "C" {
+
+int messageMainSetTargetFlags(int a);
+int buttonHelpGetMode(void);
+int buttonHelpSetPreset(void);
+extern int scrRunOpcodesStub(u32 value);
+
+typedef struct Scene {
+    /* 0x0000 */ u8 unk0000[0x14];
+    /* 0x0014 */ u32 unk14;
+    /* 0x0018 */ u32 unk18;
+    /* 0x001C */ u8 unk1C[0x584];
+    /* 0x05A0 */ u32 unk5A0;
+    /* 0x05A4 */ u8 unk5A4[0xA00C];
+    /* 0xA5B0 */ u8 unkA5B0;
+} Scene;
+
+}
+
+void Obj4223c4::FUN_003a7f98()
+{
+    Scene * scene = reinterpret_cast<Scene *>(this);
+    if (scrRunOpcodesStub(scene->unk5A0) == 2) {
+        messageMainSetTargetFlags(0);
+        FUN_002a0cc8(0);
+        scene->unk18 = 0;
+        scene->unk14 = 2;
+        scene->unkA5B0 = 0;
+        buttonHelpGetMode();
+        buttonHelpSetPreset();
+        return;
+    }
+}

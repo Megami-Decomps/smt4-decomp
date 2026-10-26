@@ -1,4 +1,4 @@
-/* NON_MATCHING: the pool shift and clear loops compile plainly (230 rows) where retail unrolls them by two (235 rows); the swap logic and the repeated paired-id checks are the same. */
+/* NON_MATCHING: slot scan, countdown duplicate scan, unrolled shift/clear loops and the self tail call match retail; retail additionally spills the swapped flag and slot (strd) and addresses dirty[slot] through the literal 0xd2d0, so registers and 11 rows differ. */
 #include "common.h"
 
 extern "C" {
@@ -30,7 +30,8 @@ s32 recordContainsPairedId(u32 record, u16 skill);
 /* Removes the entry equal to pool[0] from the rest of the pool (it moved to the front). */
 static void poolDropDuplicate(SkillSlots *slots)
 {
-    for (s32 i = 0; i < 7; i++) {
+    s32 i = 0;
+    for (s32 remaining = 7; remaining != 0; --remaining, ++i) {
         if (slots->pool[1 + i] == slots->pool[0]) {
             slots->pool[1 + i] = 0;
             FUN_002b7bca(slots->pool, 8, 2, FUN_002c6e64);
@@ -43,15 +44,10 @@ static void poolDropDuplicate(SkillSlots *slots)
  * instead, the pool is shifted to make room for the displaced one, and the counters are fixed up. */
 void FUN_001c8a7c(SkillSlots *slots, u32 record, SkillSource *source, s32 swapIndex)
 {
-    for (;;) {
-        s32 slot = 0;
-
-        while (!(slots->active[slot] != 0 && swapIndex != -1 && slot != swapIndex &&
-                 slots->active[slot] == source->skills[swapIndex])) {
-            slot++;
-            if (slot >= 8) {
-                return;
-            }
+    for (s32 slot = 0; slot < 8; slot++) {
+        if (!(slots->active[slot] != 0 && swapIndex != -1 && slot != swapIndex &&
+              slots->active[slot] == source->skills[swapIndex])) {
+            continue;
         }
         u16 replaced = slots->active[slot];
 
@@ -75,7 +71,6 @@ void FUN_001c8a7c(SkillSlots *slots, u32 record, SkillSource *source, s32 swapIn
             slots->pool[0] = 0;
             FUN_002b7bca(slots->pool, 8, 2, FUN_002c6e64);
         }
-        swapIndex = slot;
         if (FUN_0026b738(replaced) == 0 || recordContainsPairedId(record, source->skills[slot]) != 0) {
             if (FUN_0026b738(replaced) == 0 && recordContainsPairedId(record, source->skills[slot]) != 0) {
                 slots->passiveCount++;
@@ -91,6 +86,8 @@ void FUN_001c8a7c(SkillSlots *slots, u32 record, SkillSource *source, s32 swapIn
             slots->poolCount--;
             slots->passiveFlag[slot] = 0;
         }
+        FUN_001c8a7c(slots, record, source, slot);
+        return;
     }
 }
 

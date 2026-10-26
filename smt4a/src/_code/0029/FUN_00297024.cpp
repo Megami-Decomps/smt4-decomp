@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016b034(unsigned int, int);
+int itemGroupHasEnabledItem(unsigned int, int);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
 int FUN_0033f42c(void);
@@ -62,7 +62,7 @@ extern float DAT_00610afc; /* 0x610afc */
 extern float DAT_00610b00; /* 0x610b00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0016b034. */
+/* Supplied declaration required: itemGroupHasEnabledItem. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
 /* Supplied declaration required: FUN_0033f42c. */
@@ -401,7 +401,7 @@ void FUN_00297024(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(float *)(temp_v17 + 0x48) = temp_v34;
   *(unsigned int *)(temp_v17 + 0x4c) = in_s1;
   *(float *)(temp_v17 + 0x50) = temp_v18;
-  FUN_0016b034(temp_v16,(int)temp_v15);
+  itemGroupHasEnabledItem(temp_v16,(int)temp_v15);
   temp_v15 = resourceNameGroupFindIndex(temp_v16,&LAB_00297958);
   temp_v17 = sceneFindRecordByName(temp_v16,(int)temp_v15,&LAB_00297958);
   temp_v22 = (int)DAT_00610aa8;
@@ -422,7 +422,7 @@ void FUN_00297024(int param_1,unsigned int param_2,unsigned int param_3,unsigned
   *(char *)(temp_v17 + 0x45) = (char)temp_v22;
   *(char *)(temp_v17 + 0x46) = (char)temp_v20;
   *(unsigned char *)(temp_v17 + 0x47) = 0xff;
-  FUN_0016b034(temp_v16,(int)temp_v15);
+  itemGroupHasEnabledItem(temp_v16,(int)temp_v15);
   temp_v15 = resourceNameGroupFindIndex(temp_v16,&LAB_00297968);
   temp_v17 = (int)temp_v15;
   if (-1 < temp_v17) {
@@ -445,7 +445,7 @@ void FUN_00297024(int param_1,unsigned int param_2,unsigned int param_3,unsigned
     *(char *)(temp_v20 + 0x45) = (char)temp_v23;
     *(char *)(temp_v20 + 0x46) = (char)temp_v22;
     *(unsigned char *)(temp_v20 + 0x47) = 0xff;
-    FUN_0016b034(temp_v16,temp_v17);
+    itemGroupHasEnabledItem(temp_v16,temp_v17);
   }
   FUN_0033f42c();
   return;

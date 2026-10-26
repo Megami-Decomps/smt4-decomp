@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail keeps the 0.0/1.0 constants in s19/s18 and from/to in s17/s16 (vpush d8-d9) with the state compares ahead of the frame store; armcc here allocates only d8 and reorders the loads. */
 #include "common.h"
 
 /* A 0..1 fader: 0 = off, 1 = fading in, 2 = fading out, 3 = on. */
@@ -15,15 +14,17 @@ extern "C" {
 
 extern Fader DAT_004d9758[2];
 
-f32 mathInterpolateTimed(s32 duration, u32 frame, f32 from, f32 to);
+f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
 
 /* Step both faders by one frame. */
 void FUN_00102438(void)
 {
+    /* Declared outside the loop: the interpolation endpoints stay set from the previous fader (the
+     * original left them uninitialised for the states that skip the fade). */
+    f32 from;
+    f32 to;
     for (u8 i = 0; i < 2; ++i) {
         Fader *fader = &DAT_004d9758[i];
-        f32 from;
-        f32 to;
         u8 state = fader->state;
         s32 frame = ++fader->frame;
         if (state == 2) {
@@ -40,10 +41,10 @@ void FUN_00102438(void)
             continue;
         }
         if (fader->duration <= frame) {
-            if (fader->state == 2) {
+            if (state == 2) {
                 fader->frame = 0;
                 fader->state = 0;
-            } else if (fader->state == 1) {
+            } else if (state == 1) {
                 fader->frame = 0;
                 fader->state = 3;
             }

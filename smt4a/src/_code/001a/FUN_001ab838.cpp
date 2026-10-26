@@ -1,26 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ab838` (_code @ 0x1ab838, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: supervisor-call wrapper (hand-written SDK assembly: push {r0}; svc 0x35; ldr r2,[sp]; str r1,[r2]); armcc __svc calls keep the output pointer in r4 (push {r4, lr}) instead. */
+#include "nn/svc.h"
 
-extern "C" {
-
-int software_interrupt(int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_2_stack;
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-void FUN_001ab838(unsigned int *param_1,unsigned int param_2)
-
+/* Reads the thread's id (svc 0x35) into *threadId and returns the result code. */
+extern "C" s32 FUN_001ab838(u32 *threadId, u32 thread)
 {
-/* irregular: 1 native warning(s); review required */
-  software_interrupt(0x35);
-  *param_1 = param_2;
-  return;
+    nn::svc::ResultAndValue response = nn::svc::GetThreadIdRaw(0, thread);
+    *threadId = response.value;
+    return response.result;
 }
-
-} /* extern "C" */

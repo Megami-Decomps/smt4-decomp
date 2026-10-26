@@ -24,6 +24,15 @@ public:
     virtual void openScreen();
     virtual s32 isScreenReady() const;
     virtual void closeScreen();
+    void finishUseCounterMotion();
+    void drawList();
+    void FUN_003ab3dc();
+    void FUN_003abd84();
+    void FUN_003ab3d8();
+    void FUN_0022cba4();
+    void FUN_003a8308();
+    void FUN_003a830c();
+    void FUN_003a8310();
 
     /* 0x004 */ u8 unk004[0x10];
     /* 0x014 */ u32 step;              /* index into the derived class's state handler tables */

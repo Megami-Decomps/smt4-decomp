@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc peels the first loop pass (nine saved registers); retail keeps one plain do-while body (seven). */
+/* NON_MATCHING: loop shape now matches retail; remaining diffs: retail keeps zero/-8 constants as copies (mov r5,r3; mvn r7,#7) and tests `written < size` signed. */
 #include "common.h"
 
 extern "C" {
@@ -7,7 +7,7 @@ extern const char DAT_0053d2e8[][2];     /* two-byte code of each single-byte ch
 
 /* Converts `text` to two-byte character codes in `out` (default buffer and 0x100 bytes when not given):
  * double-byte characters are copied, a newline becomes F8 01, others go through the code table. */
-char *FUN_001654f8(const char *text, char *out, s32 size)
+char *FUN_001654f8(const char *text, char *out, u32 size)
 {
     s32 written = 0;
     s32 read = 0;

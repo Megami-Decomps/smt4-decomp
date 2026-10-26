@@ -34,7 +34,7 @@ struct FusionState {
 extern "C" {
 PairedKeyRecord *dataTable1fFindPairedKey(u32 first, u32 second);
 u32 entryDefIsAvailable(FusionState *state, u16 id);
-s32 FUN_004dab08(FusionState *state, u32 first, u32 second, u32 id);
+s32 fusionRecordPassesFilter(FusionState *state, u32 first, u32 second, u32 id);
 FusionDemonRecord *FUN_00184310(u32 id);
 CompactSortRecord *findSkillMetadataById(u16 id);
 void qsort(void *elements, u32 count, u32 elementSize, s32 (*compare)(const void *, const void *));
@@ -58,7 +58,7 @@ FusionState *FUN_004db65c(FusionState *state, u32 first, u32 second, PackedIdent
         result->resultIdentifier = record->value;
         if (demonId != 0 && entryDefIsAvailable(state, demonId) != 0) {
             found = 0;
-            if (FUN_004dab08(state, first, second, demonId) != 0) {
+            if (fusionRecordPassesFilter(state, first, second, demonId) != 0) {
                 result->cost = 0;
                 FusionDemonRecord *demon = FUN_00184310(demonId);
                 for (s32 i = 0; i < 8; i++) {

@@ -61,7 +61,7 @@ u32 FUN_0034dddc(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
     nn_os_CriticalSection_Initialize(reader->lock);
 
     u32 handle = 0;
-    s32 result = FUN_002b5820(&handle, 0);
+    u32 result = FUN_002b5820(&handle, 0);
     if (!nnResultIsFailure(result)) {
         reader->dataEvent = handle;
         result = 0;
@@ -89,8 +89,8 @@ u32 FUN_0034dddc(S4FsReader *reader, S4StreamSource *source, S4Allocator *alloca
     resultReportIfFailed(DAT_0044d130.stack, DAT_0044d130.memory, 0x1000);
 
     ReaderStartContext context;
-    context.reader = reader;
     context.descriptor.argumentSize = sizeof(reader);
+    context.reader = reader;
     context.descriptor.callbacks[0] = FUN_003f6ed4;
     context.descriptor.callbacks[1] = FUN_003f6ff8;
     context.descriptor.callbacks[2] = FUN_003f6f8c;

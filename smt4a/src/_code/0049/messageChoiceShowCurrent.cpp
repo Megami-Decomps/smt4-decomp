@@ -26,7 +26,7 @@ struct MessageChoiceOwner {
 
 extern "C" {
 void screenShowMessage(u32 message);
-void FUN_0019de98(s32 mode, u32 color);
+void buttonHelpSetText(s32 mode, u32 color);
 
 // Show the current group's selected message, or draw the empty-state background.
 void messageChoiceShowCurrent(MessageChoiceOwner *owner)
@@ -38,6 +38,6 @@ void messageChoiceShowCurrent(MessageChoiceOwner *owner)
         screenShowMessage(messages->entries[selected].message);
         return;
     }
-    FUN_0019de98(0, 0x323232ff);
+    buttonHelpSetText(0, 0x323232ff);
 }
 }

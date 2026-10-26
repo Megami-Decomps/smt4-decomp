@@ -9,7 +9,7 @@ int FUN_00182084(void);
 int buttonHelpBeginExit(...);
 int FUN_00183f58(...);
 int ifTouchDecrementTimer(void);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_002bf4f4(int);
 int buttonHelpSetSelectedId(int);
 int flaggedValueHolderGetTotal(unsigned int *);
@@ -26,7 +26,7 @@ extern int g_aocMain; /* 0x570260 */
 /* Supplied declaration required: buttonHelpBeginExit. */
 /* Supplied declaration required: FUN_00183f58. */
 /* Supplied declaration required: ifTouchDecrementTimer. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_002bf4f4. */
 /* Supplied declaration required: buttonHelpSetSelectedId. */
 extern int countOwnerIsValidIndex(int, unsigned int);
@@ -97,7 +97,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
         FUN_00183f58(4,0xf,0x4f,0);
         FUN_00183f58(5,0,0);
         FUN_002bf4f4(1);
-        FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
+        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
         return;
       }
       temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
@@ -106,34 +106,34 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
         FUN_00183f58(4,0xc,0x4c,0);
         FUN_00183f58(5,0,0);
         FUN_002bf4f4(1);
-        FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
+        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
         return;
       }
       if (temp_v2 == 1) {
         FUN_00183f58(4,0xd,0x4d,0);
         FUN_00183f58(5,0,0);
         FUN_002bf4f4(1);
-        FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
+        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
         return;
       }
       if (temp_v2 == 2) {
         FUN_00183f58(4,0xe,0x4e,0);
         FUN_00183f58(5,0,0);
         FUN_002bf4f4(1);
-        FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
+        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
         return;
       }
       if (temp_v2 != 3) {
         FUN_00183f58(5,0,0);
         FUN_002bf4f4(1);
-        FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
+        buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
         return;
       }
     }
     FUN_00183f58(4,0x11,0);
     FUN_00183f58(5,0,0);
     FUN_002bf4f4(1);
-    FUN_0019de98(param_1 + 0x44c,0xf4f4f4ff);
+    buttonHelpSetText(param_1 + 0x44c,0xf4f4f4ff);
     return;
   case 3:
     *param_1 = *param_1 | 0x100000;
@@ -153,7 +153,7 @@ void FUN_00477d10(unsigned int *param_1,unsigned int param_2,int param_3)
     FUN_00183f58(4,0x10,0x4f,1);
     FUN_00183f58(5,0,0,1);
     FUN_002bf4f4(0);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     return;
   case 4:
     *param_1 = *param_1 | 0x100000;

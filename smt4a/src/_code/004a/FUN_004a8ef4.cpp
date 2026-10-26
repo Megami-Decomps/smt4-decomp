@@ -28,7 +28,7 @@ extern u8 DAT_0052ad3c[];
 extern u8 DAT_0052ae44[];
 extern u8 DAT_0052af04[];
 
-void FUN_002b14c8(void *state);
+void itemListScreenInit(void *state);
 void FUN_002cdad4(void *state);
 void FUN_0021c45c(void *state, BtlOwner *owner);
 void paramsClearPacket(void *packet);
@@ -52,7 +52,7 @@ void FUN_004a8ef4(void *unused, BtlOwner *owner)
     *(u32 *)BTL_UI(ui, 0x74A4) = 0;
     *BTL_UI(ui, 0x7505) = 0;
     *BTL_UI(ui, 0x7506) = 0;
-    FUN_002b14c8(ui + 8);
+    itemListScreenInit(ui + 8);
     FUN_002cdad4(BTL_UI(ui, 0x24BC));
     FUN_0021c45c(BTL_UI(ui, 0x28C4), owner);
     ui = (u8 *)g_btlUi.block;

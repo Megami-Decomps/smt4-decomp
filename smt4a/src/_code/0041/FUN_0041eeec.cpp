@@ -10,7 +10,7 @@ void FUN_002f0384(s32 enabled);
 void FUN_0041de6c(SaveLoadControllerA* controller);
 void ptrListRemoveClearOwner(void* registry, u32 handle);
 void FUN_0022e774(void);
-void FUN_0019de98(void* color, u32 rgba);
+void buttonHelpSetText(void* color, u32 rgba);
 void FUN_0041f020(SaveLoadControllerA* controller, s32 enabled);
 
 static inline void saveLoadTransition(SaveLoadControllerA *controller, u8 state, u8 nextState)
@@ -43,7 +43,7 @@ void FUN_0041eeec(SaveLoadControllerA* controller)
         s32 colorIndex = controller->colorIndex;
         void* section = dataTableGet(0x3D, 0);
         SaveLoadColorRecordA* colors = static_cast<SaveLoadColorRecordA*>(dataTableGetEntries(section));
-        FUN_0019de98(colors[colorIndex].color, 0xF4F4F4FF);
+        buttonHelpSetText(colors[colorIndex].color, 0xF4F4F4FF);
         saveLoadTransition(controller, 4, 0);
         controller->pending = 0;
         controller->confirmed = 0;

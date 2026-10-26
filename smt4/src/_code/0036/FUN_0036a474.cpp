@@ -1,4 +1,4 @@
-/* NON_MATCHING: guard now matches retail semantics (0x10 & ~flags); retail loads each basis row as vldr x + vldmia {y, z} behind a shrink-wrapped push {r4, r5} and bics, which armcc here does not reproduce. */
+/* NON_MATCHING: the guard (NodeTransform::hasFlags -> mov/bics) now matches retail; retail then returns with `bxeq lr` ahead of a shrink-wrapped push {r4, r5} and loads each basis row as vldr x + vldmia {y, z} (first row), vldmia ip! (second) and three vldr (third), which armcc here does not reproduce. */
 #include "shard/W4_Match1b_Node.h"
 
 extern "C" const f32 g_nodeMinimumBasisLengthSquared;
@@ -12,10 +12,10 @@ static __inline f32 basisLengthSquared(const f32 *row)
 extern "C" void FUN_0036a474(NodeTransform *transform, s32 useFallback,
                             const NodeTransform *fallback)
 {
-    u32 flags = transform->flags;
-    if ((0x10 & ~flags) == 0) {
+    if (transform->hasFlags(0x10)) {
         return;
     }
+    u32 flags = transform->flags;
     if (basisLengthSquared(transform->m[0]) < g_nodeMinimumBasisLengthSquared ||
         basisLengthSquared(transform->m[1]) < g_nodeMinimumBasisLengthSquared ||
         basisLengthSquared(transform->m[2]) < g_nodeMinimumBasisLengthSquared) {

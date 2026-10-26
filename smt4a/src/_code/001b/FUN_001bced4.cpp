@@ -43,14 +43,18 @@ void FUN_001bced4(ViewMtx44 *out)
     bool fixed = false;
     RenderCamera *camera;
 
-    if (g_renderCtx->cameraKind == 3) {
+    switch (g_renderCtx->cameraKind) {
+    case 3:
         camera = &g_renderCtx->camera;
         fixed = true;
-    } else if (g_renderCtx->cameraKind == 4) {
+        break;
+    case 4:
         camera = FUN_001c5bd8(g_renderCtx);
         fixed = true;
-    } else {
+        break;
+    default:
         camera = FUN_001c5b4c(eye);
+        break;
     }
 
     const ViewMtx34 *view;

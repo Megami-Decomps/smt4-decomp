@@ -34,7 +34,7 @@ int FUN_004bd6b0(...);
 int FUN_004d0d70(void);
 
 int FUN_00184310(void);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int slotRecordFindById(...);
 int menuStateStartConfirm(void);
 int scrRunOpcodesStub(...);
@@ -149,7 +149,7 @@ extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: slotRecordFindById. */
 /* Supplied declaration required: gameGetSlotRecord. */
 /* Supplied declaration required: gameGetSlotTable. */
@@ -2227,7 +2227,7 @@ LAB_002661cc:
                     statusDownRestartTransition();
                     FUN_00285800();
                     FUN_00230ac0(4,0xffffffff,0);
-                    FUN_0019de98(0,0xf4f4f4ff);
+                    buttonHelpSetText(0,0xf4f4f4ff);
                     FUN_0023fc38();
                     temp_v4 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),1);
                     if (temp_v4 != 0) {
@@ -2940,7 +2940,7 @@ LAB_0026700c:
     }
     *(unsigned int *)(temp_v14 + 0xa00) = 0;
     __aeabi_memset4(temp_v14 + 0x9c4,0x3c,0xffffffff);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     temp_v14 = *(int *)(temp_v1 + 0x20);
     if (temp_v14 != 0x10) {
       if ((temp_v14 != 0xb && temp_v14 != 0x13) && temp_v14 != 0x19) {
@@ -3122,7 +3122,7 @@ LAB_0026700c:
         statusDownRestartTransition();
         FUN_00285800();
         FUN_00230ac0(4,0xffffffff,0);
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         FUN_0023fc38();
         temp_v4 = scrScriptProcessStartEntry(*(unsigned int *)(temp_v1 + 0x14),1);
         if (temp_v4 != 0) {

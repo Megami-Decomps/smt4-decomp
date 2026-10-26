@@ -57,7 +57,7 @@ u32 FUN_001cffd0(SkillPicker *picker)
                 score -= 1.0f;
         }
         if (best < 0 || score > bestScore ||
-            (score == bestScore && picker->candidates[i] <= picker->candidates[best])) {
+            (bestScore == score && picker->candidates[i] <= picker->candidates[best])) {
             best = i;
             bestScore = score;
         }

@@ -5,7 +5,7 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_001ad9b4(void);
 int FUN_00212724(void);
 int useCounterStart(void);
@@ -50,7 +50,7 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_001ad9b4. */
 /* Supplied declaration required: FUN_00212724. */
 /* Supplied declaration required: FUN_00228b04. */
@@ -292,7 +292,7 @@ LAB_0023f080:
               FUN_001517b4(9,1);
               if (temp_v3 != 0) {
                 eventQueueAddUniqueIfValid(0x100020e);
-                FUN_0019de98(0,0xf4f4f4ff);
+                buttonHelpSetText(0,0xf4f4f4ff);
                 sortMenuAcquire(0xe,0);
                 FUN_0031f208(0x22);
                 FUN_0031f208(0x21);

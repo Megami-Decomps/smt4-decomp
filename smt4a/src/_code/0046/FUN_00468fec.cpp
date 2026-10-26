@@ -19,7 +19,7 @@ int FUN_003fe86c(int, int);
 extern unsigned char DAT_005333bb; /* 0x5333bb */
 
 extern int gameFlagIsSet(unsigned int);
-extern unsigned int FUN_0019de98(unsigned int, unsigned int);
+extern unsigned int buttonHelpSetText(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00214da4. */
 extern int scrRunOpcodesStub(unsigned int);
 extern int messageMainGetValue(void);
@@ -65,7 +65,7 @@ void FUN_00468fec(unsigned int *param_1)
         }
       }
       temp_v2 = dataTable28Type1GetEntry((int)param_1 + 0x19,temp_v4);
-      temp_v3 = FUN_0019de98(temp_v2,0xf4f4f4ff);
+      temp_v3 = buttonHelpSetText(temp_v2,0xf4f4f4ff);
       if (temp_v0 != -1) {
         temp_v3 = (unsigned int)(unsigned char)param_1[6];
       }

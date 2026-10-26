@@ -1,30 +1,22 @@
-/* NON_MATCHING: only the schedule of the two byte-3 loads differs (retail loads the word first and reads the byte through the saved source pointer). */
+/* NON_MATCHING: same loads and ALU ops as retail; retail keeps the size in r0 (copying the source pointer to r1 first), armcc keeps it in r1. */
 #include "common.h"
 
-/* The LZ header word: the byte at +3 is merged into the loaded word separately (retail's bic/orr). */
-union LzWord {
-    u32 value;
-    struct {
-        u32 low : 24;
-        u32 high : 8;
-    } parts;
-};
+static __inline u32 readLzWord(const u8 *source)
+{
+    return (u32)source[0] | ((u32)source[1] << 8) |
+           ((u32)source[2] << 16) | ((u32)source[3] << 24);
+}
 
 extern "C" {
 
 /* Returns the advertised output size of a compressed block: the 24-bit size in the first word, or the full word that follows when that is zero. */
 u32 FUN_001aeecc(const u8 *source)
 {
-    LzWord word;
-    word.value = *(const u32 *)source;
-    word.parts.high = source[3];
-    u32 size = word.value >> 8;
-    if (size == 0) {
-        word.value = *(const u32 *)(source + 4);
-        word.parts.high = source[7];
-        size = word.value;
+    u32 size = readLzWord(source) >> 8;
+    if (size != 0) {
+        return size;
     }
-    return size;
+    return readLzWord(source + 4);
 }
 
 } /* extern "C" */

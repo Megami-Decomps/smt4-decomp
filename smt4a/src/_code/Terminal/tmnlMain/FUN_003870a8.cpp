@@ -25,7 +25,7 @@ extern "C" void FUN_003870a8(void *terminal)
     typedef char LayoutCheck[sizeof(DestinationRecord) == 0x3c &&
         offsetof(DestinationListView, destinations) == 0x5a8 &&
         offsetof(DestinationListView, count) == 0x600 ? 1 : -1];
-    extern DestinationRecord DAT_0056fd38[22];
+    extern DestinationRecord g_tmnlEntries[22];
     DestinationListView *work = static_cast<DestinationListView *>(terminal);
     work->count = 0;
     for (s32 index = 0; index < 22; ++index)
@@ -33,17 +33,17 @@ extern "C" void FUN_003870a8(void *terminal)
     if (work->showLocked) {
         for (s32 index = 0; index < 22; ++index) {
             if (work->currentDestination != index &&
-                DAT_0056fd38[work->currentDestination].group == DAT_0056fd38[index].group) {
-                work->destinations[work->count] = &DAT_0056fd38[index];
+                g_tmnlEntries[work->currentDestination].group == g_tmnlEntries[index].group) {
+                work->destinations[work->count] = &g_tmnlEntries[index];
                 ++work->count;
             }
         }
     } else {
         for (u32 index = 0; index < 22; ++index) {
             if (work->currentDestination != index &&
-                DAT_0056fd38[work->currentDestination].group == DAT_0056fd38[index].group &&
+                g_tmnlEntries[work->currentDestination].group == g_tmnlEntries[index].group &&
                 questTestPackedFlag(index)) {
-                work->destinations[work->count] = &DAT_0056fd38[index];
+                work->destinations[work->count] = &g_tmnlEntries[index];
                 ++work->count;
             }
         }

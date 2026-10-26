@@ -10,7 +10,7 @@ int FUN_00163aa4(...);
 int eventQueueAddUniqueIfValid(...);
 int ifTouchRegionRemove(void);
 int FUN_001643b4(int, int);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_00228b04(int, int);
 int objectApplyIfUnblocked(...);
 int buttonHelpSetHelpState(int);
@@ -33,7 +33,7 @@ extern int DAT_0057f280; /* 0x57f280 */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: FUN_001643b4. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_00228b04. */
 extern unsigned int mapGetDisplayName(unsigned char);
 extern int resourceRunOperationIfUnblocked(int);
@@ -117,7 +117,7 @@ unsigned int FUN_0022a0a0(void)
           temp_v6 = resourceRunOperationIfUnblocked(temp_v5);
           temp_v4 = FUN_002a4894(temp_v5);
           temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v4 + temp_v6 + temp_v0 + 0x758));
-          FUN_0019de98(temp_v7,0xf4f4f4ff);
+          buttonHelpSetText(temp_v7,0xf4f4f4ff);
           temp_v6 = objectApplyIfUnblocked(temp_v5);
           temp_v4 = uiSearchPrimary(temp_v5);
           if (temp_v4 < temp_v6) {
@@ -199,7 +199,7 @@ unsigned int FUN_0022a0a0(void)
                 buttonHelpSetHelpState(1);
               }
               else {
-                FUN_0019de98(temp_v8 + 0x7f6,0xf4f4f4ff);
+                buttonHelpSetText(temp_v8 + 0x7f6,0xf4f4f4ff);
               }
               *(unsigned char *)(temp_v8 + 0x7f4) = 0;
             }
@@ -217,7 +217,7 @@ unsigned int FUN_0022a0a0(void)
     temp_v9 = resourceRunOperationIfUnblocked(temp_v8);
     temp_v8 = FUN_002a4894(temp_v8);
     temp_v7 = mapGetDisplayName(*(unsigned char *)(temp_v8 + temp_v9 + temp_v0 + 0x758));
-    FUN_0019de98(temp_v7,0xf4f4f4ff);
+    buttonHelpSetText(temp_v7,0xf4f4f4ff);
     break;
   case 3:
     FUN_00163aa4(DAT_0057f280 + 0x5a0);

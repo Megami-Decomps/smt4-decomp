@@ -147,7 +147,10 @@ class Game:
         headers = list((self.dir / "include").rglob("*.h")) + list((ROOT / "include").rglob("*.h"))
         for path in (list((self.dir / "src").rglob("*.cpp")) + headers) if everything else ():
             text = path.read_text(encoding="utf-8")
-            changed = everything.sub(lambda m: mapping[m[1]], text)
+            # A mangled C++ name is not something source can spell: a function that becomes a member keeps
+            # its plain name in sources (the member declaration, its definition, its callers), which the
+            # person renaming it migrates by hand.
+            changed = everything.sub(lambda m: m[1] if mapping[m[1]].startswith("_Z") else mapping[m[1]], text)
             if changed != text:
                 path.write_text(changed, encoding="utf-8", newline="\n")
         if self.functions_renamed:

@@ -3,7 +3,7 @@
 
 extern "C" {
 extern const PhaseTrigEntry DAT_00536d14[];
-void mathMatrixTranslateLocal(f32 *, const f32 *, const PhaseVector *);
+void nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(f32 *, const f32 *, const PhaseVector *);
 void FUN_001b4a00(f32 *, const PhaseVector *, const f32 *);
 
 // Build the inverse planar rotation and translate around the requested origin.
@@ -30,7 +30,7 @@ void mathMatrixBuildInversePlanarTransform(f32 *matrix, f32 angle, f32 x, f32 y)
     matrix[5] = xRotation.cosine * zRotation.cosine + xRotation.sine * zRotation.sine * yRotation.sine;
     matrix[9] = xRotation.sine * yRotation.cosine;
     matrix[10] = xRotation.cosine * yRotation.cosine;
-    mathMatrixTranslateLocal(matrix, matrix, &inverseOrigin);
+    nn_math_ARMv6_MTX34MultTranslateAsm_1B4A20(matrix, matrix, &inverseOrigin);
     FUN_001b4a00(matrix, &origin, matrix);
 }
 }

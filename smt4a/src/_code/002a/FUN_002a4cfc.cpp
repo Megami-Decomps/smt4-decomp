@@ -36,7 +36,7 @@ int messageMainStartMenuAnimationIfEnabled(void);
 int loadSlotEnsureLoaded(...);
 
 int uiSpriteSetImageKeyframe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int slotSetRequest(int, int, int);
 int configOpen(...);
 int campChangeState(...);
@@ -72,7 +72,7 @@ extern int g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: slotSetRequest. */
 /* Supplied declaration required: configOpen. */
@@ -321,7 +321,7 @@ void FUN_002a4cfc(void)
     temp_v1 = FUN_0035c810();
     *(unsigned int *)(temp_v3 + 0xc) = temp_v1;
     FUN_002a5cf4();
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     campChangeState(0x25);
     return;
   case 0x1d:

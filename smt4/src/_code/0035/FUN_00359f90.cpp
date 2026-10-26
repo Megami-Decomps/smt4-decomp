@@ -1,3 +1,4 @@
+/* NON_MATCHING: the two limit bytes load in the opposite order (retail loads byte 0x2C into r4 first, then 0x2D into r5). */
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
@@ -35,8 +36,8 @@ u8 FUN_00359f90(void)
         nn_os_CriticalSection_Leave(&g_moduleCriticalSection1);
         return 0;
     }
-    u32 limitLow = DAT_0042f000.limit[0];
     u32 limitHigh = DAT_0042f000.limit[1];
+    u32 limitLow = DAT_0042f000.limit[0];
     nn_os_CriticalSection_Leave(&g_moduleCriticalSection1);
     u32 limit = limitLow | (limitHigh << 8);
     return info.value >= limit;

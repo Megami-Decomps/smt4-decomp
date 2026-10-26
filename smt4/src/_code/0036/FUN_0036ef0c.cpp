@@ -1,34 +1,25 @@
-/* NON_MATCHING: relative-pointer loads fold together and virtual release calls use different saved registers. */
+/* NON_MATCHING: retail reloads *owner after resolving the block and keeps the allocator in r5 (virtual release calls take it from r0); built caches *owner and folds the block resolve differently. */
 #include "classes/AsdAllocatorObject.h"
+#include "shard/S1NwGfx.h"
 
 struct RelativeAllocationBlock {
     /* 0x00 */ u8 unk00[0xc];
-    /* 0x0c */ s32 dataOffset;
+    /* 0x0c */ RelativePointer data;
     /* 0x10 */ AsdAllocatorObject *allocator;
-
-    void *data()
-    {
-        return dataOffset ? (u8 *)&dataOffset + dataOffset : NULL;
-    }
 };
 struct RelativeAllocationOwner {
     /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ s32 blockOffset;
-
-    RelativeAllocationBlock *block()
-    {
-        return blockOffset ? (RelativeAllocationBlock *)((u8 *)&blockOffset + blockOffset) : NULL;
-    }
+    /* 0x38 */ RelativePointer block;
 };
 
 extern "C" {
 void FUN_0036ef0c(RelativeAllocationOwner **owner)
 {
-    AsdAllocatorObject *allocator = (*owner)->block()->allocator;
+    AsdAllocatorObject *allocator = static_cast<RelativeAllocationBlock *>((*owner)->block.get())->allocator;
     if (*owner) {
-        RelativeAllocationBlock *block = (*owner)->block();
+        RelativeAllocationBlock *block = static_cast<RelativeAllocationBlock *>((*owner)->block.get());
         if (block) {
-            void *data = block->data();
+            void *data = block->data.get();
             if (data) {
                 allocator->release(data);
             }

@@ -86,7 +86,7 @@ void releaseEntriesB(u32 entries);
 void releaseEntriesA(void *entries);
 void ifTouchRegionRemove(void);
 void menuOpenCommandList(ShopMainWork *work);
-void FUN_0019de98(s32 a, u32 color);
+void buttonHelpSetText(s32 a, u32 color);
 
 /* Updates the shop item list: waits for the intro script, then handles the item filter, moving
  * between tabs, opening the menu or the command list, and the confirmation sounds. */
@@ -95,7 +95,7 @@ void FUN_00499fdc(ShopMainWork *work)
     if (work->step != 0) {
         if (work->step == 1 && scrRunOpcodesStub(work->script) == 2) {
             work->setState(5);
-            FUN_0019de98(0, 0xF4F4F4FF);
+            buttonHelpSetText(0, 0xF4F4F4FF);
             messageMainSetFlag(1);
         }
         return;

@@ -14,7 +14,7 @@ int FUN_004bd6b0(...);
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
-int FUN_0019de98(int, unsigned int);
+int buttonHelpSetText(int, unsigned int);
 int scrRunOpcodesStub(...);
 int gameSavedFlagSet(int);
 int scrScriptProcessStartEntry(...);
@@ -38,7 +38,7 @@ typedef struct {
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int gameGetSlotRecord(unsigned int);
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: gameSavedFlagSet. */
@@ -113,7 +113,7 @@ LAB_004cbdc8:
         }
         FUN_00333dc8(0);
         FUN_004bcd90(temp_v1);
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         if ((*(short *)(temp_v1 + 0x62) == 0x114) && (temp_v1 = gameFlagIsSet(0x4d7), temp_v1 == 0)) {
           gameFlagSetValue(0x4d7, 1, 1);
         }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: built hoists the load of bufferA above the first stores; retail keeps the stores first. */
 #include "common.h"
 #include "code/Code002c.h"
 #include "util/MemoryHelpers_VariantB.h"
@@ -42,7 +41,8 @@ void FUN_00289608(Task *task, u8 flag)
         buttonHelpCreate();
     }
     task->phase = 12;
-    if (FUN_002c2a04(0) == 3) {
+    s32 firstState = FUN_002c2a04(0);
+    if (firstState == 3) {
         FUN_002a03d8(0, 5);
     }
     if (FUN_002c2a04(1) == 3) {

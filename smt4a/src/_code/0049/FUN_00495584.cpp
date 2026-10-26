@@ -8,7 +8,7 @@ void *lmapSceneGetScript();
 void FUN_003e5858(void *script);
 s32 fourPtrsAllNull(void *script);
 void uiSpriteBankApplyPreset(SpritePresetBank *, s32 preset);
-void FUN_0019de98(s32 channel, u32 color);
+void buttonHelpSetText(s32 channel, u32 color);
 void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
 s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
@@ -37,7 +37,7 @@ void FUN_00495584(Obj536044 *scene)
     if (state->substate == 0) {
         uiSpriteBankApplyPreset(&state->bank, 1);
         state->substate = 1;
-        FUN_0019de98(0, 0x323232ff);
+        buttonHelpSetText(0, 0x323232ff);
         return;
     }
     if (state->substate != 1) {

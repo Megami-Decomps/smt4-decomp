@@ -8,7 +8,7 @@ extern const char g_asdModelContainerAtbcMagic[];
 extern const char g_asdModelContainerAbchMagic[];
 extern const char DAT_0053d1a0[];
 s32 rt_memcmp(const void *left, const void *right, u32 bytes);
-void *FUN_001ad70c(const AsdAtbcHeader *container, u32 index)
+void *FUN_001ad70c(const AsdAtbcHeader *container, s32 index)
 {
     void *payload; // Retail leaves the failure result uninitialized.
     if (rt_memcmp(container, g_asdModelContainerAtbcMagic, 4) == 0 ||

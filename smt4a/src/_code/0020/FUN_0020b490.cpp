@@ -10,7 +10,7 @@ extern "C" {
 s32 ifTouchRegionRemove(void);
 void sysPlaySe(u16 sound);
 void FUN_00168980(s32 mode);
-void FUN_0019de98(s32 target, u32 color);
+void buttonHelpSetText(s32 target, u32 color);
 void scrScriptProcessStartEntry(ScriptRunState *script, s32 entry);
 void statusDownSwitchTab(u8 value);
 void FUN_002c8538(u8 value);
@@ -63,7 +63,7 @@ void FUN_0020b490(EngineUnits *result, s32 mode)
     case 20: sound = 0x67; break;
     }
     if (sound >= 0) {
-        FUN_0019de98(0, 0xf4f4f4ff);
+        buttonHelpSetText(0, 0xf4f4f4ff);
         sysPlaySe(static_cast<u16>(sound));
     }
     if (work->mode == 23) {

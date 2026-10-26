@@ -21,7 +21,7 @@ u8 *FUN_001568f8(UnitListState *state, s32 id)
     UnitMember *units = state->units;
     for (s32 unit = 0; unit < 109; unit++) {
         for (s32 i = 0; i < 50; i++) {
-            s32 entry = units[unit].ids[i];
+            u32 entry = units[unit].ids[i];
 
             if (entry < 0) {
                 break;

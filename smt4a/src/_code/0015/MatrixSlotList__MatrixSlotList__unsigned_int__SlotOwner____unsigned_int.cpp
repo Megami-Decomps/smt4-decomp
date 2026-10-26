@@ -17,7 +17,7 @@ struct SlotState {
 };
 
 extern "C" {
-u8 FUN_0016b034(SlotOwner *owner, u32 index);
+u8 itemGroupHasEnabledItem(SlotOwner *owner, u32 index);
 }
 
 struct SlotCursor {
@@ -50,6 +50,6 @@ MatrixSlotList::MatrixSlotList(u32 a, SlotOwner *owner, u32 c)
     unk10 = (u8 *)owner + 16;
     matrices.reserve(1024);
     for (s32 i = 0; i < 8; i++) {
-        slots[i] = FUN_0016b034(owner, i);
+        slots[i] = itemGroupHasEnabledItem(owner, i);
     }
 }

@@ -49,7 +49,7 @@ int FUN_00163aa4(int);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
 int gameFlagIsSet(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int campChangeState(...);
 int FUN_00215bd0(void);
 int FUN_0026f7f0(void);
@@ -88,7 +88,7 @@ extern int ifTouchGetSelectedRegion(void);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: gameFlagIsSet. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int uniteStateIsDone(void);
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0020d700. */
@@ -252,7 +252,7 @@ void FUN_003dc628(void)
                        (int)*(char *)(*(char *)(temp_v9 + 0xa4) + temp_v18));
   if ((temp_v5 == 0x35) && (temp_v5 = gameDataBlocksGetSelectedValue(), *(int *)(temp_v9 + 0x33bc) != temp_v5)) {
     temp_v6 = dataTable15Sub0FindEntry(0x35);
-    FUN_0019de98(temp_v6,0xf4f4f4ff);
+    buttonHelpSetText(temp_v6,0xf4f4f4ff);
     *(int *)(temp_v9 + 0x33bc) = temp_v5;
   }
   temp_v5 = objIsNotInState0xF();
@@ -612,7 +612,7 @@ LAB_003dcd84:
               }
               else {
                 campReleaseRegisteredTouchRegions();
-                FUN_0019de98(0,0xf4f4f4ff);
+                buttonHelpSetText(0,0xf4f4f4ff);
                 campSetSpriteAnimationPreset(2,3,0xffffffff,0);
                 *(unsigned int *)(temp_v9 + 0x1c) = *(unsigned int *)(temp_v9 + 0x24);
               }
@@ -878,7 +878,7 @@ LAB_003dda0c:
                     temp_v6 = FUN_002a4878(temp_v9 + 0x40);
                     temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
                     temp_v6 = dataTable15Sub0FindEntry();
-                    FUN_0019de98(temp_v6,0xf4f4f4ff);
+                    buttonHelpSetText(temp_v6,0xf4f4f4ff);
                     if (temp_v5 == 0x2f) {
                       screenSetColor670(0x48c722ff,1,0x12,0x15);
                     }
@@ -916,7 +916,7 @@ LAB_003dda0c:
                   temp_v6 = FUN_002a4878(temp_v9 + 0x40);
                   temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
                   temp_v6 = dataTable15Sub0FindEntry();
-                  FUN_0019de98(temp_v6,0xf4f4f4ff);
+                  buttonHelpSetText(temp_v6,0xf4f4f4ff);
                   if (temp_v5 == 0x2f) {
                     screenSetColor670(0x48c722ff,1,0x12,0x15);
                   }
@@ -952,7 +952,7 @@ LAB_003ddbfc:
               temp_v6 = FUN_002a4878(temp_v9 + 0x40);
               temp_v5 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
               temp_v6 = dataTable15Sub0FindEntry();
-              FUN_0019de98(temp_v6,0xf4f4f4ff);
+              buttonHelpSetText(temp_v6,0xf4f4f4ff);
               if (temp_v5 == 0x2f) {
                 screenSetColor670(0x48c722ff,1,0x12,0x15);
               }
@@ -978,7 +978,7 @@ LAB_003ddd08:
         temp_v6 = FUN_002a4878(temp_v9 + 0x40);
         temp_v9 = FUN_003da8f4((int)*(char *)(temp_v9 + 0xa4),temp_v6);
         temp_v6 = dataTable15Sub0FindEntry();
-        FUN_0019de98(temp_v6,0xf4f4f4ff);
+        buttonHelpSetText(temp_v6,0xf4f4f4ff);
         if (temp_v9 == 0x2f) {
           screenSetColor670(0x48c722ff,1,0x12,0x15);
         }

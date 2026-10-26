@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial owner/result register lifetimes and draw-task result store differ. */
 #include "shard/X14_EngineUnits.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -36,14 +35,13 @@ void resultCreate(s32 mode)
     if (g_engineCleanupOwner.instance == NULL) {
         campCommonBgAcquire();
         asdDebugTrace(DAT_00533cf4, 6766);
-        ResultAllocation *allocation = static_cast<ResultAllocation *>(
+        g_engineCleanupOwner.instance = static_cast<EngineUnits *>(
             asdMemoryAllocTracked(0x100, 0x100, 0, 0x7f58, 1));
-        EngineUnits *result = &allocation->result;
-        g_engineCleanupOwner.instance = result;
+        EngineUnits *result = g_engineCleanupOwner.instance;
         result->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00533ce8), 4, 0, 0, FUN_00204098, FUN_00267bf0, 0);
         taskCreateDraw(DAT_00533cd4, 0x85, 0, 0, FUN_00229324, NULL, 0, reinterpret_cast<void *>(result->job));
         taskCreateDraw(DAT_00533cc0, 0xe1, 0, 0, FUN_00229324, NULL, 0, reinterpret_cast<void *>(result->job));
-        allocation->drawTask = taskCreateDraw(DAT_00533cb0, 0xea, 0, 0,
+        reinterpret_cast<ResultAllocation *>(result)->drawTask = taskCreateDraw(DAT_00533cb0, 0xea, 0, 0,
             FUN_00267c70, NULL, 0, reinterpret_cast<void *>(result->job));
         FUN_004b6390(result);
         result->exitMode = mode;

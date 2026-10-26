@@ -19,7 +19,8 @@ extern "C" void FUN_001b14dc(Obj1b14dc *buffer, Obj1b14dcRange *range)
     u8 *cursor = buffer->cursor;
     u32 offset = (((u32)(cursor - buffer->begin)) & ~3u) + 8;
     if ((offset & 15) != 0) {
-        s32 padWords = 4 - ((offset >> 2) & 3);
+        u32 misalignedWords = (offset >> 2) & 3;
+        s32 padWords = 4 - misalignedWords;
         if (padWords > 0) {
             for (s32 i = 0; i < padWords; i++) {
                 ((u32 *)cursor)[i] = 0;
@@ -27,9 +28,10 @@ extern "C" void FUN_001b14dc(Obj1b14dc *buffer, Obj1b14dcRange *range)
             cursor += padWords * 4;
         }
     }
-    buffer->cursor = reinterpret_cast<u8 *>(FUN_001af0d0(reinterpret_cast<u32 *>(cursor), 1));
+    u8 *end = reinterpret_cast<u8 *>(FUN_001af0d0(reinterpret_cast<u32 *>(cursor), 1));
+    buffer->cursor = end;
     u8 *begin = buffer->begin;
-    range->words = (buffer->cursor - begin) >> 2;
+    range->words = (end - begin) >> 2;
     range->start = begin;
     buffer->begin = buffer->cursor;
 }

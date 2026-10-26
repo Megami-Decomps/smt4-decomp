@@ -40,7 +40,7 @@ s32 FUN_00284dbc(u32 id); /* a `mov r0, #0` stub armlink inlines */
 void *dataTableGet(u32 table, u32 section);
 void *dataTableGetEntries(void *section);
 u32 dataTableGetCount(void *section);
-void FUN_0019de98(const char *text, u32 color);
+void buttonHelpSetText(const char *text, u32 color);
 
 /* Picks the description line (an entry of table 0x34) for the selected quest or party entry and
  * shows it: the state depends on the entry's flags, bits and kind. */
@@ -104,7 +104,7 @@ void FUN_003d474c(void)
     u32 count = dataTableGetCount(table);
     const char *line = state < count ? (const char *)(entries + state * 0x60 + 1) : NULL;
 
-    FUN_0019de98(line, 0xF4F4F4FF);
+    buttonHelpSetText(line, 0xF4F4F4FF);
 }
 
 }

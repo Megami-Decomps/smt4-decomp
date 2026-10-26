@@ -27,15 +27,17 @@ extern "C" void FUN_001aec9c(const u8 *source, u8 *destination)
             if (count > remaining)
                 count = remaining;
             remaining -= count;
-            while (count-- != 0)
+            do {
                 *destination++ = value;
+            } while (--count != 0);
         } else {
             ++count;
             if (count > remaining)
                 count = remaining;
             remaining -= count;
-            while (count-- != 0)
+            do {
                 *destination++ = *source++;
+            } while (--count != 0);
         }
     } while (remaining != 0);
 }

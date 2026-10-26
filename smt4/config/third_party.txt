@@ -25,6 +25,7 @@
 0x0010083c FUN_0010083c linker
 0x00100888 FUN_00100888 linker
 0x00100890 FUN_00100890 between
+0x001008b8 formatWriteBoundedByte between
 0x001008c8 FUN_001008c8 between
 0x0010095c isAsciiDigit between
 0x0010096c FUN_0010096c linker
@@ -795,7 +796,7 @@
 0x0014dbb0 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Enqueue name
 0x0014dc7c FUN_0014dc7c between
 0x0014dcac FUN_0014dcac between
-0x0014dcb8 FUN_0014dcb8 between
+0x0014dcb8 _ZN9Obj420f4cD1Ev between
 0x0014dcd8 FUN_0014dcd8 between
 0x0014de50 FUN_0014de50 between
 0x0014e648 FUN_0014e648 between
@@ -1413,6 +1414,8 @@
 0x002a3178 FUN_002a3178 between
 0x002a3188 slistPushFront between
 0x002a3198 nn_os_TransferMemoryBlock_Finalize name
+0x002a34e8 nn_math_ARMv6_MTX34AddTranslateAsm name
+0x002a3504 nn_math_ARMv6_MTX34MultTranslateAsm_2A3504 name
 0x002a3dfc nw_gfx_res_ResGraphicsFile_Cleanup name
 0x002a42e8 FUN_002a42e8 callers
 0x002a4360 ARM_fpclassifyf between
@@ -1448,6 +1451,7 @@
 0x002a808c FUN_002a808c between
 0x002a818c FUN_002a818c between
 0x002a8198 FUN_002a8198 between
+0x002a81a8 nn_math_ARMv6_MTX34InverseAsm name
 0x002a82c4 nn_snd_CTR_Dspsnd_EnableAuxBus name
 0x002a8330 nn_snd_CTR_Dspsnd_SetAuxReturnVolume name
 0x002a83a0 nn_snd_CTR_Dspsnd_SetMasterVolume name
@@ -1910,7 +1914,7 @@
 0x00355e5c vcallSlot0With3 between
 0x00355eac nn_fs_CTR_MPCore_detail_UserFileSystem_TrySetPriorityForFile name
 0x00355ecc FUN_00355ecc between
-0x00355f8c FUN_00355f8c between
+0x00355f8c _ZN20UnitHeapModuleRecordC1Ev between
 0x00355fa0 FUN_00355fa0 between
 0x00356010 FUN_00356010 between
 0x0035606c FUN_0035606c between

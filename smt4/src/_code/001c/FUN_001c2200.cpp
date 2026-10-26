@@ -79,7 +79,7 @@ void FUN_001c2200(u32 owner)
         quad->planeD = normal.x * v0.x + normal.y * v0.y + normal.z * v0.z;
         quad->center.x = (v0.x + v1.x + v2.x + v3.x) * 0.25f;
         quad->center.y = (v0.y + v1.y + v2.y + v3.y) * 0.25f;
-        quad->center.z = (v0.z + v1.z + v2.z + v3.z) * 0.25f;
+        quad->center.z = (v1.z + v0.z + v2.z + v3.z) * 0.25f;
         quad->corner[0] = v0;
         quad->corner[3] = v3;
         quad->corner[2] = v2;

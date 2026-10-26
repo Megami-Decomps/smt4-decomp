@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int ptrListRemoveClearOwner(...);
 int campChangeState(...);
 int FUN_0021b274(...);
@@ -82,7 +82,7 @@ extern unsigned short ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: gameGetPlayerData. */
 extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: ptrListRemoveClearOwner. */
 /* Supplied declaration required: campChangeState. */
 /* Supplied declaration required: FUN_0021b274. */
@@ -528,7 +528,7 @@ void FUN_001fdde8(int param_1)
           FUN_0031f208(3);
         }
         *(unsigned char *)(temp_v5 + 0x3d) = 1;
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         temp_v2 = ifTouchGetButtonHelpValue();
         *(unsigned short *)(temp_v5 + 0x3a) = temp_v2;
         campChangeState(0x2b);

@@ -8,7 +8,7 @@ extern "C" {
 int FUN_001517b4(...);
 int eventQueueAddUniqueIfValid(...);
 int sysPlaySe(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_00228b04(int, int);
 int scrScriptProcessStartEntry(unsigned int);
 int scrollOwnerSelectIndex(int, int);
@@ -37,7 +37,7 @@ extern unsigned char LAB_004bee70; /* 0x4bee70 */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: sysPlaySe. */
 extern int FUN_00187168(void);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern unsigned int FUN_0019e52c(unsigned short);
 /* Supplied declaration required: FUN_00228b04. */
 extern int FUN_0022e714(void);
@@ -200,7 +200,7 @@ void FUN_004bea0c(int param_1)
   }
   else {
     *(unsigned int *)(param_1 + 0xc) = 4;
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     *(unsigned int *)(param_1 + 0x344) = 3;
     temp_v4 = FUN_0035db94();
     if (temp_v4 < 0) {

@@ -13,7 +13,7 @@ void sysMemClear(void *memory, u32 size);
 void asdTMTexTableLoadSprites(u32 id);
 void loadSlotEnsureLoaded(u32 id);
 void sysPlaySe(u32 id);
-void FUN_0019de98(u32 index, u32 color);
+void buttonHelpSetText(u32 index, u32 color);
 void FUN_003d05a4(ConfigWorkA *config, u32 parent);
 
 // Open the options screen, acquiring only texture resources it must own.
@@ -40,7 +40,7 @@ void configOpen(u32 parent, u8 mode)
     asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&config->heapB), 0);
     loadSlotEnsureLoaded(0x36);
     sysPlaySe(5);
-    FUN_0019de98(0, 0xF4F4F4FF);
+    buttonHelpSetText(0, 0xF4F4F4FF);
     FUN_003d05a4(config, parent);
     config = g_config;
     config->state = 0;

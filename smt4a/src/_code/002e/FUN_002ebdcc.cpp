@@ -70,7 +70,7 @@ extern int dataTableValueOrZero(unsigned int);
 /* Supplied declaration required: FUN_00180118. */
 extern int gameGetOptions(void);
 /* Supplied declaration required: FUN_001ad9b4. */
-extern int FUN_001ada74(unsigned int);
+extern int goalConditionsSatisfied(unsigned int);
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: FUN_002292ac. */
 extern unsigned int scrGetArg(unsigned int);
@@ -148,7 +148,7 @@ unsigned int FUN_002ebdcc(void)
     scrWorkSetValue(0);
     temp_v4 = temp_v1;
     FUN_001ad9b4();
-    temp_v2 = FUN_001ada74(temp_v1);
+    temp_v2 = goalConditionsSatisfied(temp_v1);
     if (temp_v2 != 0) {
       if (*(char *)(temp_v4 + 6) != '\0') {
         if (*(char *)(temp_v4 + 6) != '\x04') {

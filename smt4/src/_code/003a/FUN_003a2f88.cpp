@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the two coordinate-offset saved registers (x/y in r6/r7) are swapped. */
 #include "camp/RenderCtx.h"
 struct SceneArrowDrawWork {
     u8 unk00[0x10];
@@ -38,21 +37,22 @@ void FUN_003a2f88(SceneArrowDrawWork *work)
         FUN_003a37dc(work);
         if (placeWinGetValue()) {
             s32 depth = 13;
-            s32 x = FUN_001dd8f0();
-            s32 y = FUN_001dd910();
+            struct { s32 x, y; } offset;
+            offset.x = FUN_001dd8f0();
+            offset.y = FUN_001dd910();
             ArrowSpritePositions positions = DAT_00407540;
             u32 position = 0;
             if (work->firstArrow) {
                 const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
-                s32 arrowX = origin->x + x;
-                s32 arrowY = origin->y + y;
+                s32 arrowX = origin->x + offset.x;
+                s32 arrowY = origin->y + offset.y;
                 FUN_002bf380(2, 0x2B, 6, arrowX, arrowY, depth);
                 ++position;
             }
             if (work->secondArrow) {
                 const SpriteOriginView *origin = reinterpret_cast<const SpriteOriginView *>(asdTMTexTableEntryAt(0x2B, positions.ids[position]));
-                s32 arrowX = origin->x + x;
-                s32 arrowY = origin->y + y;
+                s32 arrowX = origin->x + offset.x;
+                s32 arrowY = origin->y + offset.y;
                 FUN_002bf380(2, 0x2B, 7, arrowX, arrowY, depth);
             }
         }

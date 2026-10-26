@@ -1,4 +1,4 @@
-/* NON_MATCHING: logic recovered; retail re-materialises each zero store and re-reads the placement pointers with a different register scheme (22 rows more), the party panel struct is a local view. */
+/* NON_MATCHING: the party-slot loop and the inlined slotPlacementSet* setters match retail; in the reserve loop armcc folds the first slot-pointer load into a write-back (`ldr r0,[r6,#1752]!`) where retail forms the base and the slot pointer separately, which swaps r6/r7 there. */
 #include "common.h"
 
 namespace {
@@ -29,7 +29,7 @@ struct PartyPanel {
     u8 unk30[0x12];
     s8 transitionMode;      // 0x42
     u8 unk43[0x629];
-    s8 state;               // 0x66C
+    u8 state;               // 0x66C
     u8 unk66D[0x5B];
     SlotPlacement *placements[28]; // 0x6C8: leader, 3 party slots, 24 reserve slots
     ReserveRecord reserve[24];     // 0x738
@@ -55,6 +55,14 @@ void FUN_0029378c(SlotPlacement *placement, u32 arg);
 UnitRecord *gameGetUnitRecord(s32 id);
 s32 FUN_00295d7c(void);
 void FUN_0026c9c0(void);
+void slotPlacementSetEmpty(SlotPlacement *placement, u8 value);
+void slotPlacementSetUnitId(SlotPlacement *placement, s32 value);
+void slotPlacementSetFlagA(SlotPlacement *placement, s32 value);
+void slotPlacementSetFlagB(SlotPlacement *placement, s32 value);
+void slotPlacementSetFlagC(SlotPlacement *placement, s32 value);
+void slotPlacementSetUnk25(SlotPlacement *placement, u8 value);
+void slotPlacementSetUnk26(SlotPlacement *placement, u8 value);
+void slotPlacementSetUnk27(SlotPlacement *placement, u8 value);
 void FUN_002e36f8(void);
 
 /* Reset the party panel's placements: the leader, the three party slots and the reserve list. */
@@ -64,41 +72,53 @@ void FUN_001d13b0(void)
     SlotTable *slots = gameGetSlotTable();
     FUN_0029378c(panel->placements[0], 0);
     slotPlacementStartTransition(panel->placements[0], panel->transitionMode == 1);
-    panel->placements[0]->unk25 = 0;
-    panel->placements[0]->unk26 = 0;
-    panel->placements[0]->unk27 = 0;
+    slotPlacementSetUnk25(panel->placements[0], 0);
+    slotPlacementSetUnk26(panel->placements[0], 0);
+    slotPlacementSetUnk27(panel->placements[0], 0);
     for (s32 i = 0; i < 3; i++) {
+        FUN_0029378c(panel->placements[1 + i], panel->transitionArg);
+        slotPlacementStartTransition(panel->placements[1 + i], panel->transitionMode == 1);
+        slotPlacementSetSlot(panel->placements[1 + i], i + 1);
         SlotPlacement **placement = &panel->placements[1 + i];
-        FUN_0029378c(*placement, panel->transitionArg);
-        slotPlacementStartTransition(*placement, panel->transitionMode == 1);
-        slotPlacementSetSlot(*placement, i + 1);
         if (slots->unitId[i] < 0) {
-            (*placement)->empty = 1;
+            slotPlacementSetEmpty(panel->placements[1 + i], 1);
         } else {
-            (*placement)->empty = 0;
-            (*placement)->unitId = slots->unitId[i];
+            slotPlacementSetEmpty(panel->placements[1 + i], 0);
+            slotPlacementSetUnitId(*placement, slots->unitId[i]);
         }
-        (*placement)->unk25 = 0;
-        (*placement)->unk26 = 0;
-        (*placement)->unk27 = 0;
+        slotPlacementSetUnk25(panel->placements[1 + i], 0);
+        slotPlacementSetUnk26(*placement, 0);
+        slotPlacementSetUnk27(*placement, 0);
     }
     for (s32 i = 0; i < 24; i++) {
+        FUN_0029378c(panel->placements[4 + i], panel->transitionArg);
+        slotPlacementStartTransition(panel->placements[4 + i], panel->transitionMode == 1);
         SlotPlacement **placement = &panel->placements[4 + i];
-        FUN_0029378c(*placement, panel->transitionArg);
-        slotPlacementStartTransition(*placement, panel->transitionMode == 1);
         slotPlacementSetSlot(*placement, i + 4);
-        (*placement)->unk25 = 0;
-        (*placement)->unk26 = 0;
-        (*placement)->unk27 = 0;
+        slotPlacementSetUnk25(*placement, 0);
+        slotPlacementSetUnk26(*placement, 0);
+        slotPlacementSetUnk27(*placement, 0);
         if (panel->reserve[i].unitId < 0) {
-            (*placement)->empty = 1;
+            slotPlacementSetEmpty(panel->placements[4 + i], 1);
         } else {
-            (*placement)->empty = 0;
-            (*placement)->unitId = panel->reserve[i].unitId;
+            slotPlacementSetEmpty(panel->placements[4 + i], 0);
+            slotPlacementSetUnitId(*placement, panel->reserve[i].unitId);
             UnitRecord *unit = gameGetUnitRecord(panel->reserve[i].unitId);
-            (*placement)->flagA = FUN_00295d7c() != 0;
-            (*placement)->flagB = (unit->flags & 0x400) != 0;
-            (*placement)->flagC = (unit->flags & 4) != 0;
+            slotPlacementSetFlagA(panel->placements[4 + i], FUN_00295d7c() != 0);
+            s32 flagB;
+            if (unit->flags & 0x400) {
+                flagB = 1;
+            } else {
+                flagB = 0;
+            }
+            slotPlacementSetFlagB(panel->placements[4 + i], flagB);
+            s32 flagC;
+            if (unit->flags & 4) {
+                flagC = 1;
+            } else {
+                flagC = 0;
+            }
+            slotPlacementSetFlagC(panel->placements[4 + i], flagC);
         }
     }
     if (panel->state == 10) {

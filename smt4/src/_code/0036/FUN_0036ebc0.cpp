@@ -34,7 +34,7 @@ static __inline LinkNode *linkResolve(s32 *field)
     if (relative == 0) {
         return NULL;
     }
-    return (LinkNode *)((u8 *)field + relative);
+    return (LinkNode *)(relative + (u8 *)field);
 }
 
 /* Builds a link node that refers to the target of `source`: sources of the plain kinds are the target themselves, a link node
@@ -59,10 +59,7 @@ LinkNode *FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
         linkSet(&node->offset, source);
         return node;
     case 0x20000004:
-        s32 *field = &source->offset;
-        if (*field != 0) {
-            target = (LinkNode *)((u8 *)field + *field);
-        }
+        target = linkResolve(&source->offset);
         linkSet(&node->offset, target);
         return node;
     case 0x20000002:

@@ -44,7 +44,7 @@ s32 FUN_002cc9e0(SkillMenuWork *work, s32 arg);
 void screenShowMessage(u32 id);
 s32 gameDataFlagTestBit(u32 bit);
 u32 FUN_002f8e14(u32 index);
-void FUN_0019de98(u32 text, u32 color);
+void buttonHelpSetText(u32 text, u32 color);
 u32 halfTableGet(HelpBattleView *state, u32 index);
 HelpRecordView *btlMainGetUnk14(void);
 HelpRecordView *gameGetSlotRecord(void);
@@ -76,7 +76,7 @@ void FUN_00270104(SkillMenuWork *work)
                 for (s32 i = 0; i < 3; i++) {
                     if (gameDataFlagTestBit(flagIds[i]) != 0) {
                         if (shown == (s32)index) {
-                            FUN_0019de98(FUN_002f8e14(helpIds[i] & 0xFF), 0xF4F4F4FF);
+                            buttonHelpSetText(FUN_002f8e14(helpIds[i] & 0xFF), 0xF4F4F4FF);
                             return;
                         }
                         shown++;

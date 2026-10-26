@@ -26,10 +26,10 @@ void FUN_001db658(s32 count, u32 firstColor, u32 secondColor, f32 x, f32 y, f32 
         FUN_00263028(firstColor, secondColor, drawStart, drawEnd, scale);
         offsetX += spacing;
     }
-    offsetX = (f32)first * spacing;
+    offsetX = (f32)spacing * first;
     for (s32 i = 0; i < count; ++i) {
         Vec3f start = {offsetX + x, y, offsetZ + z};
-        Vec3f end = {offsetX + (f32)(count - 1) * spacing + x, y, offsetZ + z};
+        Vec3f end = {offsetX + (f32)(count - 1) * spacing + x, y, z + offsetZ};
         Vec3f screenStart, screenEnd;
         FUN_002630e0(&screenStart, 0, context, &start);
         FUN_002630e0(&screenEnd, 0, context, &end);

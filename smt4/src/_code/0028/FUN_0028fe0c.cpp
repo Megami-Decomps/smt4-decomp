@@ -6,7 +6,7 @@
 extern "C" {
 extern AocSystem *g_aocSystem;
 void uiBindRecordRewardText(s32 quest, s32 mode, s32 enabled);
-u32 FUN_00385ccc(AocSystem *system, s32 quest);
+u32 dataSetFindRequestedFileByKey(AocSystem *system, s32 quest);
 void textFormatBuffer(char *output, const char *format, ...);
 u32 asdLoadFileSyncDefault(const char *path);
 void asdTextDrawDirectoryEntry(u32 text, s32 font, s32 mode, s32 x, s32 y, u32 directory, s32 index);
@@ -22,7 +22,7 @@ void FUN_0028fe0c(u16 quest, u32 state)
     UiQuest *menu = g_uiQuest;
     if (quest != 0) {
         uiBindRecordRewardText(quest, 1, 1);
-        u32 directory = FUN_00385ccc(g_aocSystem, quest);
+        u32 directory = dataSetFindRequestedFileByKey(g_aocSystem, quest);
         if (directory != 0) {
             menu->panel.entryDirectory = directory;
             menu->panel.entryOwnership.borrowed = 1;

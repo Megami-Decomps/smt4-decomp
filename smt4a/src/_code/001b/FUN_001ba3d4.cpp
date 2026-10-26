@@ -1,4 +1,4 @@
-/* NON_MATCHING: only one extra beq in the bit-test arm (retail returns straight after the ands/movne). */
+/* NON_MATCHING: only the order of `movne r0,#0` / `ldrheq` differs in the halfword-or-zero tail (a switch gives that order but adds a `beq` after the bit test). */
 #include "shard/W5_W5Match7_FlagBanks.h"
 #include "shard/ItemStackLimit.h"
 
@@ -29,17 +29,12 @@ u16 FUN_001ba3d4(s32 id)
         default: data = NULL; break;
         }
         id -= range->firstId;
-        switch (range->width) {
-        case 1:
-            return reinterpret_cast<u16 *>(data)[id];
-        case 0: {
+        if (range->width == 0) {
             const u8 *flag = &data[id / 8];
             const s32 bit = id % 8;
             return (*flag & (1u << bit)) != 0;
         }
-        default:
-            return 0;
-        }
+        return range->width != 1 ? 0 : reinterpret_cast<u16 *>(data)[id];
     }
     return 0;
 }

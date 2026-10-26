@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail walks the twelve register records with post-incremented stores (str [r0], #20 then #4) and loads the constants 2/14 in swapped registers; this build addresses the records by offset. */
+/* NON_MATCHING: retail merges the list header stores as `str [0]` + `stm {[1],[2]}` and walks the twelve register records with post-incremented stores (str [r0], #20 then #4); this build addresses the records by offset and merges the first stores differently. */
 #include "shard/W6_W6Match7_CombinerState.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -20,14 +20,14 @@ u32 *FUN_0034dc10(void)
     FUN_002b612c(&combiner);
     nn_gr_CTR_Combiner_Stage_SetupPrimaryModulateTexture0(&combiner.stages[0]);
     CombinerStage &stage = combiner.stages[1];
-    stage.color.function = 2;
     stage.color.sources[1] = 0x0e;
+    stage.color.function = 2;
     stage.constantColor.r = 0;
     stage.constantColor.g = 0;
     stage.constantColor.b = 0;
     u32 *list = nn_gr_CTR_Combiner_MakeCommand(&combiner, commands);
-    list[0] = 0;
     list[1] = 0xf0201;
+    list[0] = 0;
     list[2] = 0;
     list[3] = 0xf0202;
     u32 *block = list + 4;

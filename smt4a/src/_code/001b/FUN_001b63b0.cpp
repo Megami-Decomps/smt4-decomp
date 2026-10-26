@@ -16,17 +16,13 @@ f32 FUN_001b4030(f32 value, f32 divisor);
 // Interpolate the absolute input through the periodic 256-sample lookup table.
 f32 FUN_001b63b0(f32 value)
 {
-    union {
-        f32 value;
-        s32 bits;
-    } magnitude;
-    magnitude.value = fabsf(value);
-    if (magnitude.bits >= 0x47800000) {
-        magnitude.value = FUN_001b4030(magnitude.value, 65536.0f);
+    f32 phase = fabsf(value);
+    if (*(s32 *)&phase >= 0x47800000) {
+        phase = FUN_001b4030(phase, 65536.0f);
     }
-    u32 integral = (u32)magnitude.value & 0xffff;
-    const InterpolationSample* sample = &DAT_00536d14[integral & 0xff];
-    f32 fraction = magnitude.value - (f32)integral;
-    return fraction * sample->slope + sample->value;
+    u16 index = (u32)phase;
+    const InterpolationSample *sample = &DAT_00536d14[index & 0xff];
+    f32 fraction = phase - (f32)index;
+    return sample->value + fraction * sample->slope;
 }
 }

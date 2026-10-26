@@ -1,61 +1,53 @@
-/* NON_MATCHING: the default-table path is a second copy with zero block/table locals (compares fold away) like retail; retail joins both paths before the final table/entries calls where this build duplicates them, and loads the key fields into swapped registers. */
+/* NON_MATCHING: inlined resolver merges fallback tail and exchanges block/table saved registers; explicit variant selection now matches zero/one materialization. */
 #include "gamedata/NamedVariantTable.h"
-#include "gamedata/DataTable.h"
 
 extern "C" {
-extern NamedVariantTableKey DAT_00439d20[455];
+extern const NamedVariantTableKey DAT_00439d20[527];
 s32 libc_strcmp(const char *left, const char *right);
-void *fileSlotGetBuffer(u32 slot);
-u32 binFileGetValue(const void *file);
+void *fileSlotGetBuffer(u32 table);
+u32 binFileGetValue(void *file);
 void *FUN_0024ba44(void *file, u32 block);
-u32 tbcrBlockGetPayload(const void *block);
+u32 tbcrBlockGetPayload(void *block);
 void *dataTableFileGetTable(void *block, u32 table);
+NamedVariantTableEntry *dataTableGetEntries(void *table);
 }
 
-static __inline const NamedVariantTableKey *findVariantKey(const char *name)
+static inline NamedVariantTableEntry *namedVariantResolve(u32 blockIndex, u32 tableIndex)
+{
+    void *file = fileSlotGetBuffer(7);
+    if (binFileGetValue(file) <= blockIndex)
+        blockIndex = 0;
+    void *block = FUN_0024ba44(file, blockIndex);
+    if (tbcrBlockGetPayload(block) <= tableIndex)
+        tableIndex = 0;
+    return dataTableGetEntries(dataTableFileGetTable(block, tableIndex));
+}
+
+static inline const NamedVariantTableKey *namedVariantFind(const char *name)
 {
     const NamedVariantTableKey *key = DAT_00439d20;
-    for (s32 index = 0; index < 455; ++index, ++key) {
-        if (libc_strcmp(name, key->name) == 0) {
+    for (s32 index = 0; index < 527; ++index, ++key) {
+        if (libc_strcmp(name, key->name) == 0)
             return key;
-        }
     }
     return NULL;
 }
 
-// Select a named table's first or second variant, falling back to the default table.
-extern "C" NamedVariantTableEntry *FUN_002470a8(s32 alternate, const char *name, s32 invert)
+extern "C" {
+// Resolve a named table section, falling back to section zero, then select either variant.
+NamedVariantTableEntry *FUN_002470a8(s32 variant, const char *name, s32 invert)
 {
-    const NamedVariantTableKey *key = findVariantKey(name);
+    const NamedVariantTableKey *key = namedVariantFind(name);
     NamedVariantTableEntry *entries;
-    if (key != NULL) {
-        u32 blockIndex = key->block;
-        u32 tableIndex = key->table;
-        void *file = fileSlotGetBuffer(7);
-        if (binFileGetValue(file) <= blockIndex) {
-            blockIndex = 0;
-        }
-        void *block = FUN_0024ba44(file, blockIndex);
-        if (tbcrBlockGetPayload(block) <= tableIndex) {
-            tableIndex = 0;
-        }
-        entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, tableIndex)));
-    } else {
-        u32 blockIndex = 0;
-        u32 tableIndex = 0;
-        void *file = fileSlotGetBuffer(7);
-        if (binFileGetValue(file) <= blockIndex) {
-            blockIndex = 0;
-        }
-        void *block = FUN_0024ba44(file, blockIndex);
-        if (tbcrBlockGetPayload(block) <= tableIndex) {
-            tableIndex = 0;
-        }
-        entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, tableIndex)));
-    }
-    u32 variant = alternate != 0;
-    if (invert != 0) {
-        variant = 1 - variant;
-    }
-    return entries + variant;
+    if (key)
+        entries = namedVariantResolve(key->block, key->table);
+    else
+        entries = namedVariantResolve(0, 0);
+    u32 selected = 0;
+    if (variant)
+        selected = 1;
+    if (invert)
+        selected = 1 - selected;
+    return entries + selected;
+}
 }

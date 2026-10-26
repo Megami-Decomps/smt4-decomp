@@ -37,7 +37,7 @@ __softfp Task1ab6f4 *FUN_001ab6f4(u32 arg0, const void *data, const void *params
 {
     Task1ab6f4 *task = taskCreate(FUN_00193130, 0, 0, 0, 0, sizeof(Task1ab6f4), 3, 0, 0);
     if (task != NULL) {
-        reinterpret_cast<int>(memClear(task, sizeof(Task1ab6f4)));
+        memClear(task, sizeof(Task1ab6f4));
         __aeabi_memcpy4(task->data, data, sizeof(task->data));
         __aeabi_memcpy4(task->params, params, sizeof(task->params));
         task->unk21C = arg3;

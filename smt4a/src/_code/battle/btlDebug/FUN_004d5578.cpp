@@ -1,124 +1,98 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d5578` (_code @ 0x4d5578, 0x4f0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the item-2 marker-mask test differs: retail keeps the mask pool pointer in r2 and the bits pointer in r0 with and(bits,mask) operand order; the build uses r1/r2 (and ldrd for the bits when written bits-first). Everything else matches. */
+#include "battle/DebugPanel.h"
+#include "battle/btlCamera.h"
+#include "battle/btlMain.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "shard/X14_BtlUiClose.h"
+#include "battle/btlDebug.h"
 
 extern "C" {
+extern BtlCameraA *g_btlCamera;
+extern BtlUiCloseState DAT_005715f8;
+extern const AsdListBoxEntry DAT_00573300[31];
+extern f32 DAT_005e1554[3];
+extern f32 DAT_00571570;
+extern f32 DAT_00571574;
+extern f32 DAT_00571578;
+extern s32 DAT_0057157c;
+extern s32 DAT_00571514;
+extern s32 DAT_00571518;
+extern f32 DAT_00571580;
+extern s32 DAT_00571584;
+extern s32 DAT_00571520;
+extern s32 DAT_00571588;
+extern f32 DAT_0057158c;
+extern s32 DAT_00571590;
+extern s32 DAT_00571524;
+extern s32 DAT_00571594;
+extern s32 DAT_00571598;
+extern s32 DAT_00571528;
+extern s32 DAT_0057159c;
+extern s32 DAT_005715a0;
+extern s32 DAT_0057152c;
+extern s32 DAT_005715a4;
+extern s32 DAT_005715a8;
+extern s32 DAT_005715ac;
+extern s32 DAT_005715b0;
+extern s32 DAT_005715b4;
+extern s32 DAT_0057aa10;
+extern s32 DAT_00571530;
+s32 jobIsValid(u32 job);
+void FUN_003592dc(u32 job);
+void jobStop(u32 job, s32 mode);
+void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
+void jobSetText(u32 job, const char *text);
+void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
+void asdListBoxSetFloatItem(u32 job, u32 item, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetByteValue(u32 list, u8 value);
 
-int jobStop(unsigned int, int);
-int asdListBoxCreateDefaultFlags(unsigned int, int, int);
-int jobSetText(unsigned int, unsigned char *);
-int asdListBoxSetIntItem(...);
-int asdListBoxSetByteValue(unsigned int, int);
-int asdListBoxAddItems(void);
-int asdListBoxSetToggleItem(...);
-int asdListBoxSetFloatItem(...);
-int FUN_003592dc(unsigned int);
-
-typedef struct fn_004d5578_arg1 fn_004d5578_arg1;
-struct fn_004d5578_arg1 {
-    unsigned char pad_0x0[0x80];
-    undefined4 field_0x80; /* +0x80 */
-    unsigned char pad_0x84[0x4524];
-    uint field_0x45a8; /* +0x45a8 */
-    uint field_0x45ac; /* +0x45ac */
-};
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char LAB_004d5988; /* 0x4d5988 */
-extern int g_btlCamera; /* 0x571508 */
-extern unsigned int DAT_00571514; /* 0x571514 */
-extern unsigned int DAT_00571518; /* 0x571518 */
-extern unsigned int DAT_00571520; /* 0x571520 */
-extern unsigned int DAT_00571524; /* 0x571524 */
-extern unsigned int DAT_00571528; /* 0x571528 */
-extern unsigned int DAT_0057152c; /* 0x57152c */
-extern unsigned int DAT_00571530; /* 0x571530 */
-extern unsigned int DAT_0057157c; /* 0x57157c */
-extern unsigned int DAT_00571584; /* 0x571584 */
-extern unsigned int DAT_00571588; /* 0x571588 */
-extern unsigned int DAT_00571590; /* 0x571590 */
-extern unsigned int DAT_00571594; /* 0x571594 */
-extern unsigned int DAT_00571598; /* 0x571598 */
-extern unsigned int DAT_0057159c; /* 0x57159c */
-extern unsigned int DAT_005715a0; /* 0x5715a0 */
-extern unsigned int DAT_005715a4; /* 0x5715a4 */
-extern unsigned int DAT_005715a8; /* 0x5715a8 */
-extern unsigned int DAT_005715ac; /* 0x5715ac */
-extern unsigned int DAT_005715b0; /* 0x5715b0 */
-extern unsigned int DAT_005715b4; /* 0x5715b4 */
-extern unsigned int DAT_00571718; /* 0x571718 */
-extern unsigned int DAT_0057171c; /* 0x57171c */
-extern unsigned int DAT_0057aa10; /* 0x57aa10 */
-
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
-/* Supplied declaration required: jobSetText. */
-/* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: asdListBoxSetFloatItem. */
-/* Supplied declaration required: FUN_003592dc. */
-
-
-void FUN_004d5578(int param_1,fn_004d5578_arg1 *param_2)
-
+// Recreate the attack-camera debug controls from the camera's flags and the debug parameters.
+void FUN_004d5578(BattleDebugPanelWork *work, BtlMainStateA *battle)
 {
-/* irregular: 9 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = jobIsValid(*(unsigned int *)(param_1 + 0x10));
-  if (temp_v0 != 0) {
-    FUN_003592dc(*(unsigned int *)(param_1 + 0x10));
-    jobStop(*(unsigned int *)(param_1 + 0x10),0);
-  }
-  temp_v1 = param_2->field_0x80;
-  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
-  *(unsigned int *)(param_1 + 0x10) = temp_v1;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d5988);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0,(*(unsigned int *)(g_btlCamera + 0x64c) & 0x100) >> 8);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),1,0xfffffff6,10);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),2,
-               (param_2->field_0x45ac & DAT_0057171c) != 0 ||
-               (param_2->field_0x45a8 & DAT_00571718) != 0);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),3,0xffffff9c,100);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),4,0xffffff9c,100);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),5,0xffffff9c,100);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),6,0xffffff9c,100);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),7,0xffffffce,200);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),8,DAT_0057157c,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),9,DAT_00571514,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),10,DAT_00571518,0,2,0);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xb,0xffffffa6,0x5a);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xc,DAT_00571584,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,DAT_00571520,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xe,DAT_00571588,0,2,0);
-  asdListBoxSetFloatItem(*(unsigned int *)(param_1 + 0x10),0xf,0xffffffa6,0x5a);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x10,DAT_00571590,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x11,DAT_00571524,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x12,DAT_00571594,0,2,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x13,DAT_00571598,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x14,DAT_00571528,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x15,DAT_0057159c,0,2,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x16,DAT_005715a0,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x17,DAT_0057152c,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x18,DAT_005715a4,0,2,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x19,DAT_005715a8,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1a,DAT_005715ac,0xffffffff,100,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1b,DAT_005715b0,0,2,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1c,DAT_005715b4,0,999,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1d,DAT_0057aa10,0,99,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1e,DAT_00571530,0,99,0);
-  return;
+    // The effect value lies beyond the published prefix of the shared camera type.
+    struct CameraEffectView {
+        u8 unk000[0x578];
+        f32 value;
+    };
+    if (jobIsValid(work->panelJob)) {
+        FUN_003592dc(work->panelJob);
+        jobStop(work->panelJob, 0);
+    }
+    work->panelJob = asdListBoxCreateDefaultFlags(battle->uiJobs.menuJob, 0x75, 0, 0);
+    asdListBoxAddItems(work->panelJob, DAT_00573300, 31);
+    asdListBoxSetByteValue(work->panelJob, 1);
+    jobSetText(work->panelJob, "Attack Camera Menu");
+    asdListBoxSetToggleItem(work->panelJob, 0, (g_btlCamera->flags & 0x100) >> 8);
+    asdListBoxSetFloatItem(work->panelJob, 1, -10, 10, reinterpret_cast<CameraEffectView *>(g_btlCamera)->value);
+    asdListBoxSetToggleItem(work->panelJob, 2, (DAT_005715f8.markerMask & battle->markerMasks.bits) != 0);
+    asdListBoxSetFloatItem(work->panelJob, 3, -100, 100, DAT_005e1554[0]);
+    asdListBoxSetFloatItem(work->panelJob, 4, -100, 100, DAT_005e1554[2]);
+    asdListBoxSetFloatItem(work->panelJob, 5, -100, 100, DAT_00571570);
+    asdListBoxSetFloatItem(work->panelJob, 6, -100, 100, DAT_00571574);
+    asdListBoxSetFloatItem(work->panelJob, 7, -50, 200, DAT_00571578);
+    asdListBoxSetIntItem(work->panelJob, 8, DAT_0057157c, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 9, DAT_00571514, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 10, DAT_00571518, 0, 2, 0);
+    asdListBoxSetFloatItem(work->panelJob, 11, -90, 90, DAT_00571580);
+    asdListBoxSetIntItem(work->panelJob, 12, DAT_00571584, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 13, DAT_00571520, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 14, DAT_00571588, 0, 2, 0);
+    asdListBoxSetFloatItem(work->panelJob, 15, -90, 90, DAT_0057158c);
+    asdListBoxSetIntItem(work->panelJob, 16, DAT_00571590, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 17, DAT_00571524, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 18, DAT_00571594, 0, 2, 0);
+    asdListBoxSetIntItem(work->panelJob, 19, DAT_00571598, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 20, DAT_00571528, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 21, DAT_0057159c, 0, 2, 0);
+    asdListBoxSetIntItem(work->panelJob, 22, DAT_005715a0, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 23, DAT_0057152c, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 24, DAT_005715a4, 0, 2, 0);
+    asdListBoxSetIntItem(work->panelJob, 25, DAT_005715a8, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 26, DAT_005715ac, -1, 100, 0);
+    asdListBoxSetIntItem(work->panelJob, 27, DAT_005715b0, 0, 2, 0);
+    asdListBoxSetIntItem(work->panelJob, 28, DAT_005715b4, 0, 999, 0);
+    asdListBoxSetIntItem(work->panelJob, 29, DAT_0057aa10, 0, 99, 0);
+    asdListBoxSetIntItem(work->panelJob, 30, DAT_00571530, 0, 99, 0);
 }
-
-} /* extern "C" */
+}

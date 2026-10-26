@@ -42,7 +42,7 @@ int asdSequenceRequest(...);
 int useCounterSelectMode2(void);
 
 int scrRunOpcodesStub(...);
-int FUN_001d04a4(...);
+int tmnlFindSlotForItem(...);
 int FUN_0027f94c(...);
 int FUN_00282bfc(...);
 int FUN_00287030(...);
@@ -118,7 +118,7 @@ extern unsigned char LAB_001da2c8; /* 0x1da2c8 */
 extern unsigned char DAT_003ff040; /* 0x3ff040 */
 extern unsigned char DAT_004207d8; /* 0x4207d8 */
 extern unsigned int *g_tmnl; /* 0x432ce0 */
-extern unsigned short DAT_00432cf8; /* 0x432cf8 */
+extern unsigned short g_tmnlEntries; /* 0x432cf8 */
 extern char s_Mikado_00432cfe[7]; /* 0x432cfe */
 extern unsigned int g_gameState; /* 0x49f91c */
 extern unsigned int DAT_0049f920; /* 0x49f920 */
@@ -126,7 +126,7 @@ extern unsigned int DAT_0049f920; /* 0x49f920 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: asdMdlManagerMarkDestroy. */
 /* Supplied declaration required: scrRunOpcodesStub. */
-/* Supplied declaration required: FUN_001d04a4. */
+/* Supplied declaration required: tmnlFindSlotForItem. */
 /* Supplied declaration required: gameStateClearFlag. */
 /* Supplied declaration required: FUN_0020ffe8. */
 extern int FUN_0025a030(unsigned int);
@@ -636,7 +636,7 @@ LAB_001da638:
             temp_v6 = useCounterGetCurrentValue();
             if (temp_v6 != 0x4b) {
               puVar7 = puVar2;
-              FUN_001d04a4(puVar2,temp_v6);
+              tmnlFindSlotForItem(puVar2,temp_v6);
               puVar2[3] = (unsigned int)puVar7;
               if (*(short *)puVar2[(int)puVar7 + 0x165] >= 0xc9) {
                 temp_v3 = gameDataGetPlayerName();
@@ -872,7 +872,7 @@ LAB_001da638:
             else {
               gameStateClearFlag();
               temp_v6 = (unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x24;
-              temp_v0 = (&DAT_00432cf8)[(unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x12];
+              temp_v0 = (&g_tmnlEntries)[(unsigned int)*(unsigned char *)((int)puVar2 + 9) * 0x12];
               if (temp_v0 >= 200) {
                 temp_v7[0] = temp_v0 - 200;
                 temp_v7[1] = 5;
@@ -952,7 +952,7 @@ LAB_001da638:
       puVar2[7] = (int)*(char *)(puVar2[temp_v6 + 0x165] + 2);
       temp_v2 = 0;
       do {
-        if (&DAT_00432cf8 + temp_v2 * 0x12 == (unsigned short *)puVar2[temp_v6 + 0x165]) {
+        if (&g_tmnlEntries + temp_v2 * 0x12 == (unsigned short *)puVar2[temp_v6 + 0x165]) {
           *(char *)((int)puVar2 + 9) = (char)temp_v2;
           break;
         }

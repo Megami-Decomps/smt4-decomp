@@ -30,7 +30,7 @@ struct EquipmentMenu {
 };
 extern "C" {
 u32 scrRunOpcodesStub(u32);
-void FUN_0019de98(u32, u32);
+void buttonHelpSetText(u32, u32);
 u32 panelSetTarget(u32, u8);
 u32 FUN_004954e8(EquipmentMenu *);
 void messageChoiceShowCurrent(EquipmentMenu *);
@@ -55,7 +55,7 @@ void itemMenuHandleSelectionInput(EquipmentMenu *menu)
 {
     if (menu->phase != 0) {
         if (menu->phase == 1 && scrRunOpcodesStub(menu->process) == 2) {
-            FUN_0019de98(0, 0xf4f4f4ff);
+            buttonHelpSetText(0, 0xf4f4f4ff);
             menu->previousState = menu->state;
             menu->state = 5;
             menu->phase = 0;

@@ -12,7 +12,7 @@ int sendEvent1000210(void);
 
 int ifTouchRegionRemove(void);
 int uiSpriteBankApplyPreset(int, int);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int scrRunOpcodesStub(unsigned int);
 int scrScriptProcessStartEntry(unsigned int, unsigned int);
 int panelSetTarget(int);
@@ -44,7 +44,7 @@ extern unsigned int g_handleRegistry; /* 0x56fcc0 */
 /* Supplied declaration required: ifTouchRegionRemove. */
 /* Supplied declaration required: uiSpriteBankApplyPreset. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: scrRunOpcodesStub. */
 /* Supplied declaration required: scrScriptProcessStartEntry. */
 extern int recordGetModeForId(int);
@@ -196,7 +196,7 @@ LAB_0049be70:
             scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
             shopStartSelectionScript(param_1,1);
             *(unsigned int *)(param_1 + 8) = 3;
-            FUN_0019de98(0,0xf4f4f4ff);
+            buttonHelpSetText(0,0xf4f4f4ff);
           }
           *(unsigned char *)(param_1 + 0x16045) = 0;
           break;
@@ -222,7 +222,7 @@ LAB_0049be70:
             scrRunOpcodesStub(*(unsigned int *)(param_1 + 0x18c));
             shopStartSelectionScript(param_1,2);
             *(unsigned int *)(param_1 + 8) = 4;
-            FUN_0019de98(0,0xf4f4f4ff);
+            buttonHelpSetText(0,0xf4f4f4ff);
           }
           *(unsigned char *)(param_1 + 0x16044) = 0;
         }

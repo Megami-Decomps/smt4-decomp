@@ -41,7 +41,7 @@ unsigned int FUN_002364fc(unsigned int param_1,int param_2)
       FUN_001f4908(0,10,0xff);
       FUN_001f4908(1,10,0xff);
       *(unsigned int *)(iVar2 + 8) = 2;
-      FUN_0019de98(0,0xf4f4f4ff);
+      buttonHelpSetText(0,0xf4f4f4ff);
       FUN_003d2d6c(0xf);
       return 0;
     }

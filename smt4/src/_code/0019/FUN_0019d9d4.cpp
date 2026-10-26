@@ -1,4 +1,4 @@
-/* NON_MATCHING: Zero-depth VFP register preservation and state-stack pointer registers differ. */
+/* NON_MATCHING: retail keeps the 0.0f depth in s16 across the calls (vpush {d8}; vldr s16 at entry; finding, not kept: naming it in a function-level `f32 depth = 0.0f` reproduces that, a steering temporary needing Main's ruling), loads the colour word into r1 and its byte 3 through r0, and copies the colour into r3,r2,r1,r0 in a chain after the vldmia. */
 #include "common.h"
 #include "camp/RenderCtx.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
@@ -11,12 +11,8 @@ void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
 
 void FUN_0019d9d4(const RectangleDrawInputPrefixIV *input)
 {
-    const u32 packedColor = input->color;
-    const u8 lastByte = reinterpret_cast<const u8 *>(input)[3];
-    const u32 color = ((packedColor & 0xFFu) << 24)
-                    | ((packedColor & 0xFF00u) << 8)
-                    | ((packedColor & 0xFF0000u) >> 8)
-                    | lastByte;
+    const u8 *channels = reinterpret_cast<const u8 *>(&input->color);
+    const u32 color = (channels[0] << 24) | (channels[1] << 16) | (channels[2] << 8) | channels[3];
 
     renderCtxSelectTexture(g_titleScene, 0);
     RenderCtx *context = g_titleScene;

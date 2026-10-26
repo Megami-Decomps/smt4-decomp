@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail peels the first draw-callback allocation and pass initialization; typed two-pass loop and descriptor stores use different scheduling/registers; -O2 candidate. */
+/* NON_MATCHING: both callback allocations (trace lines 215 and 221) are written as retail has them; retail additionally peels the first iteration of this two-pass loop (entry jumps past the `i == 0` test, array slot 0 addressed directly) and schedules the descriptor stores differently. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
@@ -59,12 +59,21 @@ void btlUnitInitializeDrawJobs(BattleUnitDrawWork *work)
     }
     DAT_00439ce0.owner = owner;
     for (s32 i = 0; i < 2; ++i) {
-        if (i == 1)
+        BattleUnitDrawCallback *callback;
+        if (i == 0) {
+            asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlUnit.cpp", 215);
+            callback = (BattleUnitDrawCallback *)asdMemoryAlloc(0x10000, 0x100, 0, sizeof(BattleUnitDrawCallback), 1);
+            if (callback) {
+                callback->vtable = &DAT_00420774;
+                callback->owner = DAT_00439ce0.owner;
+            }
+        } else {
             asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlUnit.cpp", 221);
-        BattleUnitDrawCallback *callback = (BattleUnitDrawCallback *)asdMemoryAlloc(0x10000, 0x100, 0, sizeof(BattleUnitDrawCallback), 1);
-        if (callback) {
-            callback->vtable = i == 0 ? &DAT_00420774 : &DAT_004208ec;
-            callback->owner = DAT_00439ce0.owner;
+            callback = (BattleUnitDrawCallback *)asdMemoryAlloc(0x10000, 0x100, 0, sizeof(BattleUnitDrawCallback), 1);
+            if (callback) {
+                callback->vtable = &DAT_004208ec;
+                callback->owner = DAT_00439ce0.owner;
+            }
         }
         DAT_0049356c[i].callback = callback;
         BattleUnitDrawDescription description;

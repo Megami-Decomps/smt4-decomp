@@ -10,7 +10,7 @@ extern "C" {
 int FUN_00480da8(void);
 
 int textFormatBuffer(...);
-int FUN_0019de98(...);
+int buttonHelpSetText(...);
 int FUN_00275bc8(void);
 int FUN_002a4878(...);
 int statusDownRestartTransition(void);
@@ -96,7 +96,7 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 /* Supplied declaration required: FUN_00203b40. */
 extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_00228b04. */
@@ -1244,7 +1244,7 @@ LAB_00269f7c:
     if (temp_v6 == 0) {
       obj04Finish();
     }
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     statusDownRestartTransition();
     *(unsigned int *)(temp_v2 + 0x249c) = 0;
     break;
@@ -1268,7 +1268,7 @@ LAB_00269f7c:
           if (temp_v6 == 0) {
             obj04Finish();
           }
-          FUN_0019de98(0,0xf4f4f4ff);
+          buttonHelpSetText(0,0xf4f4f4ff);
           statusDownRestartTransition();
           break;
         }
@@ -1293,7 +1293,7 @@ LAB_00269f7c:
         if (temp_v6 == 0) {
           obj04Finish();
         }
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
         statusDownRestartTransition();
       }
     }
@@ -1356,7 +1356,7 @@ LAB_00269f7c:
     if (temp_v6 == 0) {
       obj04Finish();
     }
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     statusDownRestartTransition();
     break;
   case 0x1f:
@@ -1396,7 +1396,7 @@ LAB_00269f7c:
         skillHelpUpdateAttributeAndTarget(temp_v4);
       }
       else {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
       }
       if (*(char *)(temp_v6 + 0x24f0) != '\0') {
         temp_v6 = ifTouchGetButtonHelpValue();
@@ -1425,7 +1425,7 @@ LAB_00269f7c:
         skillHelpUpdateAttributeAndTarget(temp_v4);
       }
       else {
-        FUN_0019de98(0,0xf4f4f4ff);
+        buttonHelpSetText(0,0xf4f4f4ff);
       }
       if (*(char *)(temp_v6 + 0x24f0) == '\0') {
         temp_v6 = ifTouchGetButtonHelpValue();
@@ -1524,7 +1524,7 @@ LAB_0026adc4:
     }
     if (temp_v16) {
       textFormatBuffer(temp_v17,&LAB_0026b0b8);
-      FUN_0019de98(temp_v17,0xf4f4f4ff);
+      buttonHelpSetText(temp_v17,0xf4f4f4ff);
     }
     else {
       skillHelpUpdateAttributeAndTarget(temp_v11);
@@ -1561,7 +1561,7 @@ LAB_0026adc4:
   if (*(int *)(temp_v2 + 0x518) == 0x14) {
     if (temp_v16) {
       textFormatBuffer(temp_v17,&LAB_0026b0b8);
-      FUN_0019de98(temp_v17,0xf4f4f4ff);
+      buttonHelpSetText(temp_v17,0xf4f4f4ff);
     }
     else {
       temp_v6 = resourceRunOperationIfUnblocked();
@@ -1570,7 +1570,7 @@ LAB_0026adc4:
       if (temp_v11 != 0) {
         temp_v11 = (unsigned int)dataTable0cSub1GetText((unsigned short)temp_v11);
         textFormatBuffer(temp_v17,"%s",temp_v11);
-        FUN_0019de98(temp_v17,0xf4f4f4ff);
+        buttonHelpSetText(temp_v17,0xf4f4f4ff);
       }
     }
   }
@@ -1590,7 +1590,7 @@ LAB_0026adc4:
       textFormatBuffer(temp_v17,"%s  %s",temp_v12,temp_v7);
       puVar16 = temp_v17;
     }
-    FUN_0019de98(puVar16,0xf4f4f4ff);
+    buttonHelpSetText(puVar16,0xf4f4f4ff);
   }
   temp_v6 = *(int *)(temp_v2 + 0x518);
   if (((temp_v6 != 0x19 && temp_v6 != 0x1a) && (temp_v6 != 0x1b && temp_v6 != 0x1c)) &&
@@ -1625,7 +1625,7 @@ LAB_0026adc4:
       }
     }
   }
-  FUN_0019de98(0,0xf4f4f4ff);
+  buttonHelpSetText(0,0xf4f4f4ff);
   *(int *)(temp_v2 + 0x524) = *(int *)(temp_v2 + 0x524) + 1;
   return 0;
 }

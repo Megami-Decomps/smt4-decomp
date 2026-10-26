@@ -4,7 +4,7 @@
 extern "C" {
 
 int sysPlaySe(...);
-int FUN_0019de98(int, unsigned int);
+int buttonHelpSetText(int, unsigned int);
 int screenStartOrClear(...);
 
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -13,7 +13,7 @@ typedef struct {
 } param_3_stack;
 
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_0019de98. */
+/* Supplied declaration required: buttonHelpSetText. */
 extern int FUN_002ebce4(void);
 /* Supplied declaration required: screenStartOrClear. */
 
@@ -31,11 +31,11 @@ void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3)
   switch(param_2) {
   case 0:
     sysPlaySe(*(unsigned int *)(param_1 + 0x46c) & 0xffff);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     break;
   case 2:
     sysPlaySe(0x106);
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     break;
   case 3:
     sysPlaySe(0x106);
@@ -57,14 +57,14 @@ void FUN_0049d140(int param_1,unsigned int param_2,unsigned char param_3)
     screenStartOrClear(*(unsigned int *)(param_1 + 0xc),1);
     break;
   case 10:
-    FUN_0019de98(0,0xf4f4f4ff);
+    buttonHelpSetText(0,0xf4f4f4ff);
     return;
   }
   temp_v1 = FUN_002ebce4();
   if (temp_v1 != 0) {
     return;
   }
-  FUN_0019de98(0,0xf4f4f4ff);
+  buttonHelpSetText(0,0xf4f4f4ff);
   return;
 }
 
