@@ -77,7 +77,7 @@ void FUN_0016bad8(MatrixSlotList *list);
 void FUN_00157520(MatrixSlotList *list);
 void FUN_0016d304(ModelSlot *model);
 void FUN_00157268(MatrixSlotList *list);
-void FUN_001582a8(CallbackSlot *reference, u32 value);
+u32 callbackSlotInvokeOrPassThrough(CallbackSlot *reference, u32 value);
 u8 refValueIsSet(s32 *valueRef);
 void gfxCommandSetFlushCursor(ModelSlot *model);
 void objectListsClearActive(SlotOwner *owner);
@@ -132,7 +132,7 @@ u32 FUN_00146048(void)
         manager = g_handleRegistry;
         if (manager->reference != NULL && refValueIsSet(reinterpret_cast<s32 *>(manager->reference))) {
             u32 value = *DAT_0056fcbc->firstValue;
-            FUN_001582a8(manager->reference, value);
+            callbackSlotInvokeOrPassThrough(manager->reference, value);
         }
         manager = g_handleRegistry;
         gfxCommandSetFlushCursor(manager->model);

@@ -1,8 +1,8 @@
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
-void *dataTable40FindById(u32 id);
 s32 FUN_0029a924(u32 id);
 
 /* Compares two ids by their FUN_0029a924 value; ids that are zero or have no record compare equal (0). */

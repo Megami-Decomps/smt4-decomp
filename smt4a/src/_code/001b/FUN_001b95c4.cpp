@@ -1,14 +1,20 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_001b23cc's literal pool; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_001b95c4 for reference (not compiled; its own view of the boundaries):
-
-void FUN_001b95c4(unsigned int *param_1)
-
-{
-  *param_1 = 0;
-  param_1[1] = 0;
-  param_1[2] = 0;
-  *(unsigned char *)(param_1 + 3) = 0;
-  return;
-}
-*/
 #include "common.h"
+
+extern "C" {
+
+typedef struct Obj {
+    /* 0x0 */ u32 unk0;
+    /* 0x4 */ u32 unk4;
+    /* 0x8 */ u32 unk8;
+    /* 0xC */ u8 unkC;
+} Obj;
+
+void FUN_001b95c4(Obj *obj)
+{
+    obj->unk0 = 0;
+    obj->unk4 = 0;
+    obj->unk8 = 0;
+    obj->unkC = 0;
+}
+
+} /* extern "C" */

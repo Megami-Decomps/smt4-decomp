@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Row-major 4x4 matrix.
 struct Mtx44 {
@@ -12,12 +13,6 @@ struct Mtx44 {
 
 // Sprite placement record: x/y at +8/+10; the second record also carries a pointer to
 // a widths table at +12.
-struct SpriteRect {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-    s16* extra;             // 0x0c
-};
 
 // Item count badge: caption text, the item icon and the badge's pop-in animation.
 struct ItemBadge {
@@ -43,7 +38,6 @@ extern u8* g_renderCtx;
 
 s32 fontMeasureLineAdvance(const char* text, s32 font);
 void skinObjectUpdateMatrices(u8* ctx);
-SpriteRect* asdTMTexTableEntryAt(s32 group, s32 index);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
 const Mtx44* _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(Mtx44* dst, const Mtx44* src);
@@ -53,17 +47,17 @@ void camSetMatrixA(u8* ctx, const Mtx44* matrix);
 
 // Draws an item badge: the caption centred in `frame`, the category icon and the count
 // (two digits once it reaches ten), the count part scaled around its anchor while it pops in.
-void FUN_00165778(ItemBadge* badge, SpriteRect* frame)
+void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
 {
     s32 captionWidth = fontMeasureLineAdvance(badge->caption, 4);
-    s32 left = (*frame->extra - captionWidth) / 2;
+    s32 left = (frame->placement->width - captionWidth) / 2;
     textDrawString(4, -1, badge->caption, (f32)left, 6.0f, 0.57f, 0.0f, badge->textAlpha);
     uiDrawItemCategoryIcon(badge->category, left - 13, 8, 121, 0);
     skinObjectUpdateMatrices(g_renderCtx);
 
-    SpriteRect* rect = asdTMTexTableEntryAt(8, 427);
+    TextureTableEntryIV* rect = asdTMTexTableEntryAt(8, 427);
     FUN_001835b4(2, 8, 424, rect->x + vec2GetXInt(badge->anchor), rect->y, 101);
-    SpriteRect* countRect = asdTMTexTableEntryAt(8, 426);
+    TextureTableEntryIV* countRect = asdTMTexTableEntryAt(8, 426);
     if (badge->mode != 3) {
         FUN_00180310(6, rect->x + countRect->x + vec2GetXInt(badge->anchor), rect->y + countRect->y, 1, 2, 121, "%d", badge->count);
         return;

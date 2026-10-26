@@ -6,13 +6,13 @@
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "event/bustupEvent/BustupTex.h"
 
 struct TexNode;
 extern "C" {
 void *asdMemoryAllocTracked(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 s32 FUN_00162ea4();
 bool aocRunByName(u32 system, u32 table, u32 node, s32 checked);
-TexNode *FUN_0014afd0(s32 table, s32 node);
 s32 FUN_002897cc(u32 handle);
 void FUN_0034da3c(u32 handle);
 extern u32 g_aocSystem;

@@ -5,7 +5,7 @@ extern "C" {
 u32 FUN_00514018(void* backend, u32 stream, u32* count);
 u32 FUN_00514088(void* backend, u32 stream, void** data, u32* size,
                  u32* flags, u64* timestamp);
-u32 FUN_00514284(void* backend, u32 stream);
+u32 resourceQueryLoadStatus(void* backend, u32 stream);
 
 /* Feed queued packets, retaining filter state when the consumer cannot accept one. */
 void moviePumpCurrentStreamPackets(MoviePacketPump* pump)
@@ -43,7 +43,7 @@ void moviePumpCurrentStreamPackets(MoviePacketPump* pump)
             return;
         }
         pump->packet.prepared = 0;
-        FUN_00514284(reinterpret_cast<void*>(*pump->sync.backend),
+        resourceQueryLoadStatus(reinterpret_cast<void*>(*pump->sync.backend),
                      pump->packet.handles[pump->packet.current]);
         --remaining;
     }

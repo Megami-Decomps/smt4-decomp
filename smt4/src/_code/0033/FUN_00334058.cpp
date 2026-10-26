@@ -1,4 +1,3 @@
-/* NON_MATCHING: capacity helper restores saved-register allocation; post-clamp zero comparison is predicated LE instead of unconditional. */
 #include "shard/PadState.h"
 #include "util/CalleeContracts.h"
 #include "gamedata/PlayerDataBlock.h"
@@ -14,7 +13,7 @@ static __inline s32 inventoryGetCapacity(void)
     if (flagBitIsSet(0x79)) ++capacity;
     if (flagBitIsSet(0x7a)) ++capacity;
     if (capacity > 8)
-        return 8;
+        capacity = 8;
     return capacity;
 }
 

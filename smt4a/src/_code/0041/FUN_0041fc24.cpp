@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "util/CalleeContracts.h"
+#include "util/GameDataBlocksGetSaveData.h"
 
 extern "C" {
 void FUN_0023b45c(s32 enabled);
@@ -11,7 +12,6 @@ void FUN_0033449c(s32 value);
 void FUN_0034aac8(u8 value);
 void gameGlobalsQueueValues(void *player, s32 mode);
 void __aeabi_memcpy4(void *output, const void *input, u32 size);
-void *gameDataBlocksGetSaveData(void);
 
 // Apply the highlighted save profile to the player preview and global name/options.
 void FUN_0041fc24(void *context)
@@ -76,7 +76,7 @@ void FUN_0041fc24(void *context)
         player->experience = profile->experience;
         libc_strcpy(player->name, profile->name);
         player->id = profile->id;
-        libc_strcpy(static_cast<SaveNameView *>(gameDataBlocksGetSaveData())->playerName, profile->name);
+        libc_strcpy(reinterpret_cast<SaveNameView *>(gameDataBlocksGetSaveData())->playerName, profile->name);
         gameGlobalsQueueValues(work->player, 0);
         FUN_0033440c(work->profiles[work->appliedSlot].category);
         profile = &work->profiles[work->appliedSlot];

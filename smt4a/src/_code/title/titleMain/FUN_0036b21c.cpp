@@ -5,6 +5,7 @@
 #include "title/titleMain.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
 #include "Model/MoriModelShadowMap.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* A title-screen sprite: position, opacity and the texture frame it shows. */
 struct TitleSprite {
@@ -31,10 +32,6 @@ struct TitleTextureSize {
     /* 0x02 */ s16 height;
 };
 
-struct TitleTextureEntry {
-    /* 0x00 */ u8 unk00[0xc];
-    /* 0x0c */ TitleTextureSize *size;
-};
 
 typedef char TitleScreenViewLayoutCheck[sizeof(TitleSprite) == 0x38 &&
     offsetof(TitleScreenView, sprites) == 0x10c && sizeof(TitleScreenView) == 0x25c ? 1 : -1];
@@ -42,7 +39,6 @@ typedef char TitleScreenViewLayoutCheck[sizeof(TitleSprite) == 0x38 &&
 extern "C" {
 
 u32 FUN_001692ac(u32 value, bool enabled);
-TitleTextureEntry *asdTMTexTableEntryAt(u32 texture, u32 frame);
 void efctSetSpeed(f32 alpha);
 void FUN_0034dc3c(void *menu);
 u32 packNibblesAndByte(s32 a, s32 b, u32 byte);
@@ -76,7 +72,7 @@ static __inline void titleDrawSprite(TitleSprite *sprite, u32 order)
 u32 FUN_0036b21c(void)
 {
     TitleScreenView *title = (TitleScreenView *)g_titleMain.title;
-    TitleTextureEntry *entry;
+    TextureTableEntryIV *entry;
     TitleSprite *sprite;
     TitleSprite *last;
     s32 width;
@@ -94,8 +90,8 @@ u32 FUN_0036b21c(void)
     titleDrawSprite(&title->sprites[2], 0x10);
     entry = asdTMTexTableEntryAt(0x2a, 3);
     last = &title->sprites[5];
-    width = entry->size->width;
-    height = entry->size->height;
+    width = entry->placement->width;
+    height = entry->placement->height;
     if (titleSpriteIsVisible(last)) {
         s32 offset = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 

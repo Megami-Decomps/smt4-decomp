@@ -6,6 +6,8 @@
 #define ASDSDK_SOURCE_GFX_ASDTEXMANAGER_ASDTMTEXTABLE_H
 
 #include "common.h"
+#include <stddef.h>
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
 
 /* First 0x104 bytes of the list file, kept as the table header. */
 typedef struct TexTableHeader {

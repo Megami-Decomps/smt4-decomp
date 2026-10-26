@@ -15,7 +15,7 @@ struct AnimatedSlot {
 
 extern "C" {
 f32 asdAnimGetTrackLastFrame(SlotAnimation *animation, s32 track);
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 
 /* Sets each animated slot's starting frame: 0, a random multiple of 4, or a random frame of its
  * animation, wrapped to the animation's length. */
@@ -30,10 +30,10 @@ void animSlotsSetStartFrames(AnimatedSlot *slots, s32 count, s32 mode, SlotAnima
                 slot->frame = 0;
                 break;
             case 1:
-                slot->frame = FUN_00184964(0, 4) << 2;
+                slot->frame = randBetween(0, 4) << 2;
                 break;
             case 2:
-                slot->frame = FUN_00184964(0, lastFrame);
+                slot->frame = randBetween(0, lastFrame);
                 break;
             }
             if (slot->frame >= lastFrame) {

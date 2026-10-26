@@ -1,4 +1,5 @@
 #include "map/mapIf.h"
+#include "event/bustupEvent/BustupTex.h"
 
 namespace {
 struct MapIfSpawnPose { f32 x, y, z, heading; };
@@ -17,7 +18,6 @@ void controllerSetRotationEulerDegrees(u32 handle, f32 x, f32 y, f32 z);
 void controllerSetPosition(u32 handle, f32 x, f32 y, f32 z);
 void controllerSetPosition(u32 handle, f32 x, f32 y, f32 z);
 void FUN_003fe86c(u32 handle, s32 first, s32 second, f32 x, f32 y);
-void FUN_0014afd0(s32 first, s32 second);
 
 // Create the map's lmap fast model at the supplied position and heading.
 void FUN_002d88e0(MapIfSpawnPose pose)

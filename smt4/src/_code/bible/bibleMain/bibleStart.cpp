@@ -3,13 +3,13 @@
 #include "common.h"
 #include "bible/bibleMain.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 typedef void (*VoidFunc)(void);
 
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
-void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 u32 jyoucyuGetTableEntry(int index);               /* heap handle `index` */
 void LAB_001e4734(void);
 void LAB_0020ed68(void);

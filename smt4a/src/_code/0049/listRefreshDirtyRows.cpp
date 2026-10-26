@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 class ListRangeRenderer {
 public:
@@ -32,7 +33,6 @@ struct ListRefreshState {
 
 extern "C" {
 void FUN_0049339c(void *transition, s32 steps, s32 start, s32 end, u32 argument);
-s32 FUN_002a482c(ListRange *);
 s32 rangeGetMinimumLimit(ListRange *);
 s32 FUN_0031d174(ListRange *);
 u32 flaggedValueHolderGetTotal(ListRange *);

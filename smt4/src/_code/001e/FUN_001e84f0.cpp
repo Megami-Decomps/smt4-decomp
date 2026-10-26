@@ -193,7 +193,7 @@ LAB_001e867c:
         iVar8 = (int)*(short *)(iVar4 + 0x1dc);
         switch(*(short *)(iVar4 + 0x1dc)) {
         case 1:
-          FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x60));
+          renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x60));
           iVar8 = ((int)*(short *)(iVar4 + 0x1f8) / 2) % 4;
           if (iVar8 == 0) {
             in_d9 = CONCAT44(fVar3,fVar3);
@@ -215,7 +215,7 @@ LAB_001e867c:
           FUN_002ba1e0(uVar6,uVar6,uVar6,uVar6,fStack_4e0,fVar14);
           break;
         case 2:
-          FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x68));
+          renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x68));
           iVar8 = *(int *)(iVar4 + 0x254);
           if (iVar8 != 0) {
             fStack_4e0 = fVar9;
@@ -228,7 +228,7 @@ LAB_001e867c:
             fStack_4dc = fVar9;
             FUN_002ba1e0(iVar8,iVar8,iVar8,iVar8,fVar9,fVar3);
           }
-          FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x354));
+          renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x354));
           uVar6 = *(unsigned int *)(iVar4 + 0x250);
           in_s0 = *(float *)(iVar4 + 0x260);
           fVar14 = fVar3;
@@ -237,7 +237,7 @@ LAB_001e867c:
           FUN_002ba1e0(uVar6,uVar6,uVar6,uVar6,fStack_4e0,fVar14);
           break;
         case 3:
-          FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x4c));
+          renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x4c));
           uVar6 = *(unsigned int *)(iVar4 + 0x250);
           in_s0 = *(float *)(iVar4 + 0x260);
           fStack_4e0 = fVar9;
@@ -256,13 +256,13 @@ LAB_001e867c:
           }
           if ((bVar22 && iVar8 != 0x3c23d70a) &&
               iVar20 < 0 == (bVar22 && SBORROW4(iVar8,0x3c23d70a))) {
-            FUN_002c1b64(DAT_0044ea00);
+            renderCtxSelectTexture(DAT_0044ea00);
             fStack_4e0 = *(float *)(iVar4 + 0x350);
             fStack_4dc = fVar9;
             FUN_002ba1e0(0xffffffff,0xffffffff,0xffffffff,0xffffffff,fStack_4e0,fVar3);
           }
 LAB_001e8b24:
-          FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x358));
+          renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x358));
           uVar6 = *(unsigned int *)(iVar4 + 0x250);
           in_s0 = *(float *)(iVar4 + 0x260);
           fStack_4e0 = fVar9;
@@ -275,12 +275,12 @@ LAB_001e8b24:
         case 0xc:
           if (DAT_0049fb46 != 0) {
             if (*(int *)(iVar4 + 0x35c) != 0) {
-              FUN_002c1b64(DAT_0044ea00);
+              renderCtxSelectTexture(DAT_0044ea00);
               fStack_4e0 = fVar9;
               fStack_4dc = fVar9;
               FUN_002ba1e0(0xffffffff,0xffffffff,0xffffffff,0xffffffff,fVar9,fVar3);
             }
-            FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x358));
+            renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x358));
             uVar6 = *(unsigned int *)(iVar4 + 0x250);
             in_s0 = *(float *)(iVar4 + 0x260);
             fStack_4e0 = fVar9;
@@ -305,7 +305,7 @@ joined_r0x001e8f60:
               (**(code **)(iVar20 + 0x12c8))();
               *(unsigned char *)(iVar20 + 0x12c4) = 0;
             }
-            FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x88));
+            renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x88));
             uVar6 = *(unsigned int *)(iVar4 + 0x250);
             fStack_4e0 = fVar9;
             fStack_4dc = fVar9;
@@ -323,7 +323,7 @@ joined_r0x001e8f60:
         case 4:
         case 0xd:
 LAB_001e8a6c:
-          FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x354));
+          renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x354));
           uVar6 = *(unsigned int *)(iVar4 + 0x250);
           in_s0 = *(float *)(iVar4 + 0x260);
           fStack_4e0 = fVar9;
@@ -345,7 +345,7 @@ LAB_001e8a6c:
                 (**(code **)(iVar20 + 0x12c8))();
                 *(unsigned char *)(iVar20 + 0x12c4) = 0;
               }
-              FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x88));
+              renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x88));
               uVar6 = *(unsigned int *)(iVar4 + 0x250);
               in_s0 = *(float *)(iVar4 + 800);
               fStack_4e0 = fVar9;
@@ -371,12 +371,12 @@ LAB_001e8a6c:
               }
               if ((bVar22 && uVar5 != 0x3c23d70a) &&
                   iVar8 < 0 == (bVar22 && SBORROW4(uVar5,0x3c23d70a))) {
-                FUN_002c1b64(DAT_0044ea00);
+                renderCtxSelectTexture(DAT_0044ea00);
                 fStack_4e0 = *(float *)(iVar4 + 0x350);
                 fStack_4dc = fVar9;
                 FUN_002ba1e0(0xffffffff,0xffffffff,0xffffffff,0xffffffff,fStack_4e0,fVar3);
               }
-              FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x358));
+              renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(iVar4 + 0x358));
               uVar6 = *(unsigned int *)(iVar4 + 0x250);
               in_s0 = *(float *)(iVar4 + 0x260);
               fStack_4e0 = fVar9;
@@ -401,7 +401,7 @@ LAB_001e8a6c:
               (**(code **)(iVar20 + 0x12c8))();
               *(unsigned char *)(iVar20 + 0x12c4) = 0;
             }
-            FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x88));
+            renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x88));
             uVar6 = *(unsigned int *)(iVar4 + 0x250);
             in_s0 = *(float *)(iVar4 + 800);
             fStack_4e0 = fVar9;
@@ -466,10 +466,10 @@ LAB_001e8a6c:
         FUN_0025a1fc(pcVar17);
         if (0x3c23d70a < *(int *)(iVar18 + 0x1bc)) {
           if (DAT_0049f91c < 100) {
-            FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x20));
+            renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x20));
           }
           else {
-            FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x74));
+            renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x74));
           }
           fStack_4e0 = *(float *)(iVar18 + 0x1bc);
           in_s0 = *(float *)(iVar18 + 0xfc);
@@ -479,7 +479,7 @@ LAB_001e8a6c:
       }
       if (((*(char *)(iVar18 + 0x20) != '\0') && (DAT_0049f934 == '\0')) &&
          (*(int *)(pcVar17 + 0x14) < 0x22)) {
-        FUN_002c1b64(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x18));
+        renderCtxSelectTexture(DAT_0044ea00,*(unsigned int *)(DAT_00447a7c + 0x18));
         uVar33 = CONCAT44(*(unsigned int *)(iVar18 + 0x2c),fVar3);
         uVar35 = *(unsigned long long *)(iVar18 + 0x24);
         fVar36 = 130.0f;

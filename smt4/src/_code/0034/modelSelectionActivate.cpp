@@ -91,7 +91,7 @@ struct ModelParameters {
 extern WordVector3* FUN_002a86a4(SceneNode*);
 extern void FUN_002cbaf8(SceneNode*, int);
 extern void sysFlagsSetBits(u32);
-extern float FUN_00155650(void*, float, float, float);
+extern float mathClampFloat(void*, float, float, float);
 extern int FUN_0024530c(SceneNode*, Animation*);
 extern SceneNode* asdModelGetSlotArray0(int);
 extern int nw_gfx_SceneNode_IsCircularReference(SceneNode*, SceneNode*);
@@ -148,7 +148,7 @@ void modelSelectionActivate(ModelSelection* selection, int modelIndex, int anima
         }
 
         animation = *animationSlot;
-        animation->evaluator = FUN_00155650;
+        animation->evaluator = mathClampFloat;
         animation->dirty = 1;
 
         animation = *animationSlot;

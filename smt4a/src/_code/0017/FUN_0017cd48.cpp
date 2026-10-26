@@ -1,37 +1,25 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0017cd48` (_code @ 0x17cd48, 0x64 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Allocates a cleared 0x28-byte record from the graphics allocator; returns NULL when there is no allocator or it fails. */
+#include "gfx/HandleRegistry.h"
 
 extern "C" {
+extern GfxHandleAllocator g_gfxAllocateCallback;
 
-typedef int romwright_code(...);
-extern romwright_code *g_gfxAllocateCallback; /* 0x58918c */
+/* A zero-initialised graphics record. */
+struct GfxRecord {
+    /* 0x00 */ u32 words[10];
+};
 
-
-unsigned int * FUN_0017cd48(void)
-
+GfxRecord *FUN_0017cd48(void)
 {
-  unsigned int *puVar1;
-  
-  if (g_gfxAllocateCallback == (romwright_code *)0x0) {
-    puVar1 = (unsigned int *)0x0;
-  }
-  else {
-    puVar1 = (unsigned int *)(*g_gfxAllocateCallback)(0x10000,0x100,0,0x28);
-    if (puVar1 != (unsigned int *)0x0) {
-      *puVar1 = 0;
-      puVar1[1] = 0;
-      puVar1[2] = 0;
-      puVar1[3] = 0;
-      puVar1[4] = 0;
-      puVar1[5] = 0;
-      puVar1[6] = 0;
-      puVar1[7] = 0;
-      puVar1[8] = 0;
-      puVar1[9] = 0;
+    if (g_gfxAllocateCallback.allocate != NULL) {
+        GfxRecord *record = (GfxRecord *)g_gfxAllocateCallback.allocate(0x10000, 0x100, 0, sizeof(GfxRecord));
+        if (record != NULL) {
+            for (s32 i = 0; i < 10; i++) {
+                record->words[i] = 0;
+            }
+        }
+        return record;
     }
-  }
-  return puVar1;
+    return NULL;
 }
-
-} /* extern "C" */
+}

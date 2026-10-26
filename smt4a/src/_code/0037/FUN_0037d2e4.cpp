@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `beq 24` where armcc emits `beq 18`. */
 #include "common.h"
 
 extern "C" {
@@ -11,10 +10,10 @@ void scrSetResult(s32 result);
 s32 FUN_0037d2e4(void)
 {
     s32 result;
-    if (scrGetArg(0)) {
-        result = FUN_003dfd44();
-    } else {
+    if (scrGetArg(0) == 0) {
         result = FUN_003dfe88();
+    } else {
+        result = FUN_003dfd44();
     }
     scrSetResult(result);
     return 1;

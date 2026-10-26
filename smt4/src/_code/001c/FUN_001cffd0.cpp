@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rebuild of the skill candidate pick; retail keeps the best score in s17 and the running score in s16, with the 1.0 and 0.01 constants in s18/s19 loaded under the first loop test, which armcc here schedules differently. */
 #include "common.h"
+#include "gamedata/SkillFlags.h"
+#include "gamedata/DataTable40.h"
 
 /* A skill-learning candidate pool: pick the best candidate and move it to the chosen list. */
 struct SkillPicker {
@@ -15,16 +17,8 @@ struct SkillPicker {
     /* 0x2C */ u8 wantedKind;
 };
 
-struct SkillRecord06 {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 element;
-    /* 0x03 */ u8 power;            /* low five bits */
-};
-
 extern "C" {
 s32 idMapLookup(u32 id);
-SkillRecord06 *dataTable06Sub1GetRecord(u16 id);
-void *dataTable40FindById(u32 id);
 void *passiveSkillLookupRecord(u32 id);
 s32 FUN_0026a604(void *passive, void *skill);
 
@@ -41,8 +35,8 @@ u32 FUN_001cffd0(SkillPicker *picker)
             continue;
         dataTable06Sub1GetRecord(picker->candidates[i]);
         u32 skill = picker->candidates[i];
-        SkillRecord06 *record = dataTable06Sub1GetRecord(skill);
-        f32 power = (f32)(record->power & 0x1F);
+        SkillFlagsRecord *record = dataTable06Sub1GetRecord(skill);
+        f32 power = (f32)(record->flags & 0x1F);
         f32 score = power + power * 0.01f;
         s32 kind = idMapLookup(skill);
         if (picker->wantedKind == kind)
@@ -59,7 +53,7 @@ u32 FUN_001cffd0(SkillPicker *picker)
         for (s32 j = 0; j < picker->chosenCount; j++) {
             if (idMapLookup(picker->chosen[j]) == kind)
                 score -= 1.0f;
-            if (record->element == dataTable06Sub1GetRecord(picker->chosen[j])->element)
+            if (record->category == dataTable06Sub1GetRecord(picker->chosen[j])->category)
                 score -= 1.0f;
         }
         if (best < 0 || score > bestScore ||

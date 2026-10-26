@@ -2,6 +2,7 @@
 #include "shop/shopMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 // Resource and audio handles lie past the shared creation prefix; retain that prefix's extent.
 struct ShopResourceSetupViewIV {
@@ -24,7 +25,6 @@ void FUN_002898e4(void);
 void FUN_00289880(void);
 void buttonHelpAcquireResources(void);
 void buttonHelpCreate(void);
-void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void FUN_002c58c8(u32 table, u32 variant);
 u32 FUN_002fdff4(u32 resource);
 u32 FUN_00285e44(u32 sound, u32 option, u32 flags);
@@ -44,7 +44,7 @@ void FUN_003a169c(ShopCreateWork *shop)
     FUN_00289880();
     buttonHelpAcquireResources();
     buttonHelpCreate();
-    asdLoadFileAsyncSimple(DAT_004075c0, &resources->script, 0);
+    asdLoadFileAsyncSimple(DAT_004075c0, reinterpret_cast<u32 *>(&resources->script), 0);
     asdTMTexTableLoadSprites(43);
     FUN_002c58c8(43, 0);
     u32 resource = 0;
@@ -67,7 +67,7 @@ void FUN_003a169c(ShopCreateWork *shop)
             messages = DAT_00407600;
             resource = 90;
         }
-        asdLoadFileAsyncSimple(messages, &resources->messages, 0);
+        asdLoadFileAsyncSimple(messages, reinterpret_cast<u32 *>(&resources->messages), 0);
     } else if (shop->unk14 == 1) {
         const char *messages;
         if (shop->result == 9) {
@@ -86,7 +86,7 @@ void FUN_003a169c(ShopCreateWork *shop)
             messages = DAT_00407630;
             resource = 91;
         }
-        asdLoadFileAsyncSimple(messages, &resources->messages, 0);
+        asdLoadFileAsyncSimple(messages, reinterpret_cast<u32 *>(&resources->messages), 0);
     }
     resources->messageHandle = FUN_002fdff4(resource);
     if (sound) {

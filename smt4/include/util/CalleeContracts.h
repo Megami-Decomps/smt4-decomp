@@ -6,7 +6,6 @@
 extern "C" {
 
 u32 FUN_002865c0(u32 kind, f32 value);
-void *dataTable06Sub1GetRecord(u16 id);
 u8 FUN_002c2a04(int index);
 s32 asdModelForwardChecked(u32 handle, u32 arg, s32 level, u32 extra);
 u32 scrGetCommandFrame(void);
@@ -14,7 +13,6 @@ u32 FUN_00298f88(u32 id);
 u8 flagBitIsSet(u32 bit);
 int FUN_002ae8e4(u32 a, u32 file, u32 id, u32 value);
 u32 randNextInRange(int limit);
-void asdCecMessageBoxClose(int a);
 void dataTable1bOr1cGetRecord(unsigned short param_1);
 u32 osVirtToPhysAddress(u32 address);
 f32 *mathMatrixApplyScale(f32 *m, const f32 *scale, int mode);

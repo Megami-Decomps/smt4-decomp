@@ -8,7 +8,6 @@
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 void asdMemFree(void *);
-const SkillFlagsRecord *dataTable06Sub1GetRecord(u16);
 s32 randNextInRange(u32);
 void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
 s32 dataCompareUnsignedHalfwordKeysDescending(const void *, const void *);

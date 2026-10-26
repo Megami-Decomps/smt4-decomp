@@ -1,2 +1,22 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4731e8; not written yet. */
 #include "common.h"
+
+struct Token00434484 {
+    u8 unk00[8];
+    u8 type;
+    u8 unk09;
+    u16 sub;
+};
+
+struct Lexer00434484 {
+    u8 unk00[0x10];
+    s32 position;
+};
+
+/* Lexer action: emits a token of type 0, subtype 10 and advances the position. */
+extern "C" s32 FUN_0035b7d0(Lexer00434484 *lexer, Token00434484 **token)
+{
+    (*token)->type = 0;
+    (*token)->sub = 10;
+    lexer->position++;
+    return 0;
+}

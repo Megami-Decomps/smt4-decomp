@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps `value` in r6 from the start, loads the table through &owner->table, and ends with a plain call instead of the tail call. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "util/BtlScriptUnitHasFlags.h"
 
 /* A named bonus entry: up to four follow the table header. */
 struct NamedBonus {
@@ -28,7 +29,6 @@ extern "C" {
 
 extern BtlEffectState g_btlEffect;
 
-s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
 s32 libc_strcmp(const char *a, const char *b);
 s32 FUN_004f59b0(NamedBonusOwner *owner);
 

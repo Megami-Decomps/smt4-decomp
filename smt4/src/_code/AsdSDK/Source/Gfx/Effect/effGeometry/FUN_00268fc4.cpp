@@ -2,6 +2,7 @@
 #include "classes/EffGeomRecord.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct EffGeomTintRgb { u32 value[3]; };
 
@@ -43,7 +44,6 @@ extern "C" {
 extern const char DAT_00414954[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Gfx\\Effect\\effGeometry.cpp": __FILE__ */
 extern EffGeomDefaultTint DAT_004737f8;
 
-void *memAlloc(int, int, int, s32 size, int align, int);
 EffGeomBuffer *effGeomBufferCreate(u32 vertexCount, u32 flags, s32 arg);
 void recordPrepareActive(EffGeomRecord *record, u32 first, u32 second, u32 third);
 

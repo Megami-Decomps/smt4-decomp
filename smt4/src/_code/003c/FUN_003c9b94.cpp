@@ -1,4 +1,4 @@
-/* NON_MATCHING: Fusion dispatch uses conditional branches rather than a jump table; paired bitfield stores differ. */
+/* NON_MATCHING: jump table now matches (explicit case 0); register assignment of the parameters, a stray sxth on the second id and the paired bitfield stores differ. */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W5_W5Match2_UniteWork.h"
@@ -8,7 +8,7 @@ struct LeveledLists;
 
 extern "C" {
 u32 FUN_003c8c2c();
-u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, s16 secondId,
+u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
                  UnitePairEntryIV *output);
 u32 FUN_003c911c(LeveledLists *owner, u16 firstId, u16 secondId,
                  UnitePairEntryIV *output);
@@ -20,6 +20,8 @@ u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
 {
     u32 accepted = 0;
     switch (FUN_003c8c2c()) {
+    case 0:
+        break;
     case 1:
         accepted = FUN_003c8ffc(owner, firstId, secondId, output);
         break;

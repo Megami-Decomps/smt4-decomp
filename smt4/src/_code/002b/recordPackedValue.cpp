@@ -19,14 +19,14 @@ typedef struct Record2002b8dc0 {
     /* 0x9a */ u16 packed;      /* value in bits 2-6 */
 } Record2002b8dc0;
 
-Info002b8dc0 *FUN_002b4748(void);
+Info002b8dc0 *itemCategoryFindByItemId(void);
 Record1002b8dc0 *dataTable08Sub1GetRecord(u32 id);
 Record2002b8dc0 *dataTable08Sub2GetRecord(u32 id);
 
 /* Level-like value of record `id` for the current info: 1 for type 0, 0 for types above 1, otherwise read from the record's packed field (999 when it holds none). */
 u32 recordPackedValue(u32 id)
 {
-    Info002b8dc0 *info = FUN_002b4748();
+    Info002b8dc0 *info = itemCategoryFindByItemId();
     Record1002b8dc0 *record1;
     Record2002b8dc0 *record2;
 

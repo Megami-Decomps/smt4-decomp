@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "util/FUN_002b945c.h"
+#include "shard/gameFlagsGetBlock.h"
 
 /* The game state fields the scene-advance step touches. */
 struct SceneAdvanceState {
@@ -48,7 +49,6 @@ extern "C" {
 extern SceneAdvanceState g_gameState;
 extern MapSelection g_mapSelection;
 extern s32 DAT_005f1ca4;
-FlagsBlock *gameFlagsGetBlock(void);
 u32 gameDataTableGetFlag(void);
 void sectionValueSetClamped(s32 value);
 void gameValueBlockSet(s32 index, s32 value);
@@ -65,7 +65,7 @@ s32 dataTable23Type1CountWithAoc(void);
 /* Advance the scene step requested in the flags block: finish it, or start the next scene. */
 void FUN_002d2000(void)
 {
-    FlagsBlock *flags = gameFlagsGetBlock();
+    FlagsBlock *flags = reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock());
     s32 request = flags->stepRequest;
     if (request != 0) {
         flags->stepRequest = 0;
@@ -76,8 +76,8 @@ void FUN_002d2000(void)
             case 3:
             case 5:
                 if (FUN_001ba570() == 0) {
-                    gameFlagsGetBlock()->level = 0;
-                    gameFlagsGetBlock()->unk1C = 0;
+                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = 0;
+                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->unk1C = 0;
                 }
             }
         } else {
@@ -115,7 +115,7 @@ void FUN_002d2000(void)
                     }
                     DAT_005f1ca4 = found;
                     g_gameState.unk454 = -1;
-                    gameFlagsGetBlock()->level = g_gameState.nextSceneId + 100;
+                    reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock())->level = g_gameState.nextSceneId + 100;
                     FUN_002b945c(g_gameState.nextSceneId);
                     g_gameState.progressEnabled = 1;
                 }

@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "script/scrScriptProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct Event3dOpeningWork {
     u32 process;
@@ -31,7 +32,6 @@ extern const char DAT_004036f8[];
 extern const char DAT_004036e0[];
 extern const char DAT_004036c8[];
 extern char DAT_004036b0[];
-void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 void FUN_002c2044(ManagedCameraIV *camera, s32 enabled);
 void FUN_002c159c(ManagedCameraIV *camera, f32 first, f32 second);
 void FUN_002c1edc(ManagedCameraIV *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);

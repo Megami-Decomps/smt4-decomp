@@ -1,10 +1,10 @@
 /* NON_MATCHING: zero constants and saved arguments use different registers, changing text-buffer setup and return scheduling. */
 #include "ui/MessageMain.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;
 u32 scrGetArg(u32 index);
-u32 *gameGetSlotTable(void);
 int pairSetFirstResetSecond(void *pair, s32 value);
 int FUN_002bd954(void *widget, s32 kind, u32 selection, void *text, s32 capacity, f32 scale);
 int spriteStartAnimationByIndex(void *widget, s32 mode);
@@ -16,7 +16,7 @@ u32 FUN_00321b9c(void)
     MessagePanel *panel = g_messageMain.banner;
     g_messageMain.banner->unk7D = 1;
     panel->unk7C = 1;
-    u32 slot = *gameGetSlotTable();
+    u32 slot = gameGetSlotTable()->money;
     panel->unk6C = slot;
     panel->unk78 = slot;
     panel->unk7F = 0;

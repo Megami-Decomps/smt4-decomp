@@ -3,9 +3,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W5_W5Match7_BattleMask.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32);
 void targetStartIndexWithFlag2(u32, u32);
 
 u32 FUN_003cc4e4(void)

@@ -5,7 +5,7 @@ extern "C" {
 
 f32 resourceGetSampleFloat(const BurstTrack *owner);
 f32 asdAnimGetTrackLastFrame(const BurstTrack *animation, s32 track);
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 
 /* Fills `out` with up to `max` particles for the emitter's groups, spaced along the track matching the emitter key.
  * Returns the number of particles written. */
@@ -75,9 +75,9 @@ s32 FUN_0038aa84(BurstParticle *out, s32 max, const BurstEmitter *emitter, Burst
                                 if (emitter->frameMode == 0) {
                                     out->frame = 0;
                                 } else if (emitter->frameMode == 1) {
-                                    out->frame = FUN_00184964(0, 4) << 2;
+                                    out->frame = randBetween(0, 4) << 2;
                                 } else if (emitter->frameMode == 2) {
-                                    out->frame = FUN_00184964(0, limit);
+                                    out->frame = randBetween(0, limit);
                                 }
                                 if (limit <= out->frame) {
                                     out->frame = out->frame % limit;

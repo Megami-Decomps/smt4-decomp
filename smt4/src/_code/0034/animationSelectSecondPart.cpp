@@ -1,4 +1,4 @@
-/* NON_MATCHING: binding load is hoisted before the mode write and zero is reused across part stores; retail reloads/re-materializes it. Candidate O2. */
+/* NON_MATCHING: binding load is hoisted before the mode write and zero is reused across part stores; retail reloads/re-materializes it. */
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
 extern "C" void animationResetTracks(AnimationVisualState*, s32, s32);

@@ -1,11 +1,11 @@
 #include "map/mapEpl.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 extern MapEpl *g_mapEpl;
 extern const char DAT_0040442c[];
-void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 
 /* Allocates the EPL table and clears its state and all entries. */
 void MapEpl_InitState(void)

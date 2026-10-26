@@ -1,5 +1,6 @@
 #include "common.h"
 #include "nn/Result.h"
+#include "util/PlatformResultCheck.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
@@ -23,18 +24,12 @@ extern SettingsBlock DAT_0056c000;
 s32 FUN_00189738(void *out, u32 size, u32 operation);
 s32 FUN_0042a44c(void *object);
 
-static __inline void checkSystemQuery(s32 result, u32 site)
-{
-    if (nnResultIsFailure(result))
-        FUN_0016e800(result, site);
-}
-
 /* True when a value read from the system is within the stored limit. */
 u8 FUN_004310c0(void)
 {
     SystemInfo info;
     s32 result = FUN_00189738(&info, 4, 0xD0000);
-    checkSystemQuery(result, __current_pc());
+    checkPlatformResult(result, __current_pc());
     nn_os_CriticalSection_Enter(&g_moduleCriticalSection5);
     s32 status = FUN_0042a44c(&DAT_0056a000);
     if ((s32)(status & 0x80000000) < 0) {

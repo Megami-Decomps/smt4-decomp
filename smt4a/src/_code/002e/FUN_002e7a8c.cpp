@@ -8,7 +8,7 @@ extern "C" {
 int textFormatBuffer(...);
 int FUN_0014e314(...);
 int renderCtxResetColorScale(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(...);
 int FUN_00180310(...);
 int drawSetColorFromRGBA8(...);
@@ -59,7 +59,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00180310. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
@@ -780,7 +780,7 @@ LAB_002e90ec:
         }
       }
     }
-    FUN_0016c4b8(g_renderCtx,0);
+    renderCtxSelectTexture(g_renderCtx,0);
     temp_v5 = VectorFloatToUnsigned(temp_v19 * 255.0f,3);
     FUN_0014e314(temp_v5,temp_v5);
     temp_v3 = g_renderCtx;

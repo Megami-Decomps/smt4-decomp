@@ -21,7 +21,7 @@ extern RenderCtx* g_titleScene;
 void FUN_002598f0(u32 text, s32 x, s32 y, u32 parameter, f32 scale);
 void asdTextDrawDirectoryEntry(u32 text, u32 a, s32 b, u32 c, u32 d, u32 e, s32 f);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, u32 enabled);
-void FUN_002bd82c(u32 text, u32 color);
+void asdTextSetBaseColor(u32 text, u32 color);
 void FUN_002bf380(u32 kind, u32 table, u32 sprite, s32 x, s32 y, u32 parameter);
 SpriteInfo* asdTMTexTableEntryAt(u32 table, u32 id);
 
@@ -42,8 +42,8 @@ void FUN_002ec2e0(u32 text, u32 param2, s32 param3, s32 param4, s32 row, u32 spr
     LayoutEntryView* label = reinterpret_cast<LayoutEntryView*>(asdTMTexTableEntryAt(0x39, 0xE4));
     FUN_002bf288(2, 0x39, 0xE3, origin->x, origin->y, 0xD);
     asdTextDrawDirectoryEntry(text, 3, -1, 0, 3, param2, param3 + row + param4);
-    FUN_002bd82c(text, 0xFFFFFFFF);
+    asdTextSetBaseColor(text, 0xFFFFFFFF);
     FUN_002598f0(text, origin->x + label->x, origin->y + label->y, 0x15, 1.0f);
-    FUN_002bd82c(text, 0x320202FF);
+    asdTextSetBaseColor(text, 0x320202FF);
 }
 }

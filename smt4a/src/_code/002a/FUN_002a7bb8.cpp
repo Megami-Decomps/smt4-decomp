@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_0014bf3c(...);
 int textDrawString(...);
 int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
-int FUN_00180114(...);
 int FUN_00180310(...);
 int FUN_0018152c(...);
 int asdTMTexTableEntryAt(...);
@@ -65,7 +65,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180114. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -157,7 +156,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v18 = 0x57d8ffff;
     }
   }
-  temp_v7 = FUN_00180114(*puVar5);
+  temp_v7 = (int)FUN_00180114(*puVar5);
   textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v7);
   VectorSignedToFloat(*(short *)(temp_v4 + 10) + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(short *)(temp_v4 + 8) + temp_v9,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -226,7 +225,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       FUN_001835b4(2,0x1a,0x113,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,0x6a
                   );
       temp_v12 = asdTMTexTableEntryAt(0x1a,0x118);
-      temp_v17 = FUN_00180114(*psVar13);
+      temp_v17 = (int)FUN_00180114(*psVar13);
       textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v17);
       puVar16 = temp_v20;
       fontMeasureLineAdvance(puVar16,1);
@@ -285,7 +284,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       FUN_001835b4(2,0x1a,0x113,*(short *)(temp_v11 + 8) + temp_v8,*(short *)(temp_v11 + 10) + temp_v6,0x6a
                   );
       temp_v12 = asdTMTexTableEntryAt(0x1a,0x118);
-      temp_v17 = FUN_00180114(*psVar13);
+      temp_v17 = (int)FUN_00180114(*psVar13);
       textFormatBuffer(temp_v20,&LAB_002a80f4,temp_v17);
       puVar16 = temp_v20;
       fontMeasureLineAdvance(puVar16,1);
@@ -449,7 +448,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   else {
     temp_v17 = 0xf5ff9fff;
   }
-  temp_v18 = FUN_00180114(*psVar13);
+  temp_v18 = (int)FUN_00180114(*psVar13);
   textFormatBuffer(temp_v20,&LAB_002a8fec,temp_v18);
   VectorSignedToFloat((int)*(short *)(temp_v11 + 10) + (int)*(short *)(temp_v12 + 10) + temp_v8,
                       (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -538,7 +537,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
   else {
     temp_v17 = 0xf5ff9fff;
   }
-  temp_v18 = FUN_00180114(*psVar13);
+  temp_v18 = (int)FUN_00180114(*psVar13);
   textFormatBuffer(temp_v20,&LAB_002a8fec,temp_v18);
   VectorSignedToFloat((int)*(short *)(temp_v14 + 10) + (int)*(short *)(temp_v11 + 10) + temp_v8,
                       (unsigned char)(in_fpscr >> 0x16) & 3);

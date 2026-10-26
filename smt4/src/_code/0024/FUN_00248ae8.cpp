@@ -12,8 +12,7 @@ void asdModelCommandBlockRelease();
 void FUN_00248ae8(s32 synchronize)
 {
     struct CachedRenderView {
-        TitleScene prefix;
-        u8 unk52C[0x11EC - sizeof(TitleScene)];
+        u8 unk000[0x11EC];
         RenderStateStack states[6];
     };
     typedef char CachedRenderViewOffsetCheck[offsetof(CachedRenderView, states) == 0x11EC ? 1 : -1];

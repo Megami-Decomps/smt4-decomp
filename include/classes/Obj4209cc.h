@@ -2,11 +2,11 @@
 #define CLASSES_OBJ4209CC_H
 
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 }
 

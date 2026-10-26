@@ -1,7 +1,6 @@
 #include "gamedata/SkillFlags.h"
 
 extern "C" {
-SkillFlagsRecord *dataTable06Sub1GetRecord(u32 skillId);
 s32 randNextInRange(u32 maximum);
 
 /* Chooses a random nonempty slot whose skill has the required metadata flag. */

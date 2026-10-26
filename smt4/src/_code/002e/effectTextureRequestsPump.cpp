@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler selects compare-chain dispatch instead of the retail jump table and merges different state-store tails. */
+/* NON_MATCHING: the four-entry jump table now matches (explicit case 4 label); retail hoists the state constants 1 and 4 into r7/r8 and shares its epilogue differently (retail 92 vs built 93 rows). */
 #include "gfx/NamedTextureCache.h"
 
 
@@ -53,6 +53,8 @@ void effectTextureRequestsPump()
             }
         }
         break;
+    case 4:
+        return;
     default:
         return;
     }

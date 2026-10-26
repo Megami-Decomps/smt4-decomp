@@ -1,6 +1,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 struct DirectoryEntryDefinition {
     /* 0x00 */ u16 group;
@@ -64,7 +65,6 @@ void eventQueueAddUniqueIfValid(u32 id);
 void uiSpriteSelectAnim(void *sprite, s32 anim);
 s32 ifTouchGetSelectionMode(void);
 void asdTMTexTableReleaseNode(u32 table, s32 node);
-void asdTMTexLoadMainHeap(u32 table, s32 node);
 
 void FUN_00203b40(void *flags, u32 height, s32, s32, s32, s32);
 void FUN_00212724(void);

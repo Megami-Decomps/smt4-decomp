@@ -67,7 +67,7 @@ void releaseEntriesB(u32 entries);
 void releaseEntriesA(void *entries);
 void sortMenuAcquire(s32 a, s32 b);
 void useCounterStart(void);
-void FUN_003343f0(s32 value);
+void FUN_003343f0(u8 value);
 void FUN_0019de98(s32 a, u32 color);
 void sendEvent100020E(void);
 void sendEvent100020F(void);

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 
@@ -30,7 +31,6 @@ extern unsigned char LAB_003b74b0; /* 0x3b74b0 */
 extern unsigned char LAB_003b7b50; /* 0x3b7b50 */
 extern int g_titleScene; /* 0x44ea00 */
 
-extern int FUN_0029efa8(int);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_002bdf94. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -109,7 +109,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
   FUN_002bed3c();
   temp_v2 = 0;
   do {
-    temp_v3 = FUN_0029efa8(param_1 + 0xcfd4);
+    temp_v3 = FUN_0029efa8((const void *)(param_1 + 0xcfd4));
     if (temp_v3 != temp_v2) {
       switch(temp_v2) {
       case 0:
@@ -170,7 +170,7 @@ void FUN_003b7084(int param_1,int param_2,int param_3)
     }
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 5);
-  temp_v2 = FUN_0029efa8(param_1 + 0xcfd4);
+  temp_v2 = FUN_0029efa8((const void *)(param_1 + 0xcfd4));
   temp_v3 = asdTMTexTableEntryAt(0x28,temp_v2 + 0xba);
   switch(temp_v2) {
   case 0:

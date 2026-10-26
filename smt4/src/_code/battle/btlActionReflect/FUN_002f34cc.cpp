@@ -1,5 +1,6 @@
 #include "battle/btlReflect.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct BtlReflect {
 /* The reflect effect's work block: owner plus two cleared words. */
 
 void *taskCreateDraw(const char *name, int type, int a, int b, void (*calc)(u32), void (*destroy)(), void *arg, void *value);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void FUN_0030fa74(void);
 void FUN_002eb5b4(u32 job);
 extern ReflectContext *g_btlActionReflect;

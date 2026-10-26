@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* Pushes the evaluated state on the title scene's first stack. */
 static __inline void titleScenePushFirst(RenderCtxA *scene, s32 state)
@@ -42,17 +43,11 @@ struct RunWin {
     /* 0xC4 */ u8 label[1];
 };
 
-struct LayoutPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 extern "C" {
 extern RunWin *DAT_0057f584;
 
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_00183bb0(void);
 s32 vec2GetXInt(void *vec);
 s32 vec2GetYInt(void *vec);
@@ -78,7 +73,7 @@ u8 FUN_0023a5f8(void)
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         FUN_00164b5c(2, 8, 0x15, x, y, 102);
         titleScenePopSecond(g_renderCtx);
-        LayoutPoint *labelPoint = asdTMTexTableEntryAt(8, 0x16F);
+        TextureTableEntryIV *labelPoint = asdTMTexTableEntryAt(8, 0x16F);
         textDrawString(4, 0x57D8FFFF, (const char *)win->label, (f32)(labelPoint->x + x), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);
         s32 step = win->frame / 5;
@@ -89,7 +84,7 @@ u8 FUN_0023a5f8(void)
         for (s32 row = 0; row < 3; row++) {
             for (s32 column = 0; column < 3; column++) {
                 s32 index = row * 3 + column;
-                LayoutPoint *dot = asdTMTexTableEntryAt(8, 0x170 + index);
+                TextureTableEntryIV *dot = asdTMTexTableEntryAt(8, 0x170 + index);
                 if (lit == index || lit2 == index)
                     FUN_001835b4(2, 8, 0x155, dot->x + x, dot->y, 111);
                 else if (litPrevious == index || lit2Previous == index)

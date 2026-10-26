@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -38,7 +39,6 @@ extern int gameFlagIsSet(void);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int FUN_00291e14(void);
-extern int FUN_002a4878(int);
 extern int FUN_002b24fc(void);
 extern unsigned int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_002cc228. */
@@ -87,7 +87,7 @@ void FUN_0028f740(int param_1)
   FUN_001835b4(2,0xd,0xdb,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
   FUN_001835b4(2,0xd,0xdc,temp_v3 + temp_v5,temp_v6 + temp_v7,0x29);
   efctSetSpeed();
-  temp_v3 = FUN_002a4878(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
+  temp_v3 = FUN_002a4878((void *)(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc));
   temp_v8 = widgetSubCallIfVisible(param_1 + *(int *)(param_1 + 0x3890) * 100 + 0x38bc);
   temp_v5 = 0;
   if (temp_v5 < (int)temp_v8) {

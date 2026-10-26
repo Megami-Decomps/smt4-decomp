@@ -1,12 +1,12 @@
 /* NON_MATCHING: payload-size arithmetic, allocation setup and geometry/texture register allocation differ from retail. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 extern const char DAT_00544ba8[];
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
 void textureSlotReplace(PolyGeom *geom, void *texture);
 u32 sysGetTableWord(int id);

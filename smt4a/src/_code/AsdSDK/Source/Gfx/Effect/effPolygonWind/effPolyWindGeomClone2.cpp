@@ -1,12 +1,12 @@
 /* NON_MATCHING: side clamp matches; work/size and new-block registers differ, and geometry result is stored without retail's r1 copy. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonWind.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 extern const char DAT_00544cd8[];
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_002ff43c(PolyGeom *src);
 void FUN_003cb24c(PolyWindBlock *block, PolyWindParams *params);
 

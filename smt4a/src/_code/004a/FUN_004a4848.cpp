@@ -5,6 +5,7 @@
 #include "camp/UnitComparison.h"
 #include "shard/campFillUnitComparison.h"
 #include "ui/ItemListSelection.h"
+#include "gamedata/Table00Lookup.h"
 
 namespace {
 struct InventoryCursorState {
@@ -40,7 +41,6 @@ extern "C" {
 void releaseEntriesB(InventoryWidget *widget);
 void releaseEntriesA(InventoryHelpList *help);
 void slotPoolResetTrackedState(InventoryListView *list);
-Table00Record *dataTable00FindById(u32 id);
 s32 FUN_0026264c(u16 id);
 void inventoryListAppend(InventoryListView *list, const CampUnitComparison *record);
 void FUN_004cfeb0(InventoryCursorState *cursor, s32 visible, s32 count, s32 first, s32 mode, s32 enabled);

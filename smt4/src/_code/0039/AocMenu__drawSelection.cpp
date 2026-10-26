@@ -38,7 +38,7 @@ void FUN_003909d0(SelectionScreen *screen, s32 row, s32 index, s32 selected);
 void FUN_002332e8(NumberPanelWork *panel, s32 first, s32 second);
 void FUN_00290994(u32 sprite, s32 a, s32 b, s32 c, s32 d, s32 e, s32 f, s32 g, s32 h, s32 i, s32 j, s32 value,
                   s32 first, s32 second, s32 size, s32 k);
-void FUN_002c198c(RenderCtx *context);
+void renderCtxApplyTransforms(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the selection screen: its frame, the visible rows and the number panel's scroll bar. */
@@ -73,7 +73,7 @@ void AocMenu::drawSelection()
     renderStackPop(&g_titleScene->stackA);
     FUN_002bed3c();
     efctSetSpeed(1.0f);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 

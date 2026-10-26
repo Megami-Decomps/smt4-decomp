@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail dispatches states 0..3 through a jump table; armcc emits a comparison chain for the reconstructed no-op state zero. */
 #include "common.h"
 
 struct EventTransition {
@@ -37,6 +36,8 @@ extern "C" s32 FUN_001ad180()
             work->active = 0;
             work->state = 4;
         }
+        break;
+    case 4:
         break;
     }
     ++work->elapsed;

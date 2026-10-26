@@ -71,6 +71,8 @@ void asdMdlManagerDestroy(AsdMdlObject *obj);
 
 extern "C" {
 void FUN_0029c4c8(u8 value);
+/* Clears the model's initialized flag and registers its node with scene node collection `group`. */
+void FUN_002a0428(AsdMdlObject *model, u32 group);
 }
 
 extern "C" {

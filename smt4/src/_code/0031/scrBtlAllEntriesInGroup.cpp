@@ -3,11 +3,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern u32 scrGetArg(u32 index);
-extern int scrSetResult(s32 value);
 
 /* Script command: 0 if some present, active, unblocked entry is not in script group `arg` (its bit in groupMask clear), else 1. */
 u32 scrBtlAllEntriesInGroup(void)

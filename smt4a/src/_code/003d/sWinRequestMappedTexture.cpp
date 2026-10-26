@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "shard/S1AsdTexTable.h"
 #include <stddef.h>
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 extern void* g_sWin;
@@ -12,7 +13,6 @@ void* libc_bsearch(const void* key, const void* entries, u32 count, u32 size,
 s32 FUN_002321f8(const void* key, const void* record);
 u32 aocRunByName(AocSystemA* system, u32 slot, s32 resource, u32 flags);
 void FUN_001a6568(AocSystemA* system, u32 slot, s32 resource, u32 heap);
-void asdTMTexLoadMainHeap(u32 slot, s32 resource);
 
 // Queue a window texture selected by id, preferring its downloadable resource when present.
 void sWinRequestMappedTexture(s32 id, u32 options)
@@ -64,6 +64,6 @@ void sWinRequestMappedTexture(s32 id, u32 options)
     if (aocRunByName(g_aocSystem, 52, resource, 1) != 0) {
         return FUN_001a6568(g_aocSystem, 52, resource, 0x10000);
     }
-    return asdTMTexLoadMainHeap(52, resource);
+    asdTMTexLoadMainHeap(52, resource);
 }
 }

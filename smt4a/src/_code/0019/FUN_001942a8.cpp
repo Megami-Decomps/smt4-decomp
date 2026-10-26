@@ -1,4 +1,4 @@
-/* NON_MATCHING: O3 coalesces middle-block loads and tail-calls the final append; O2 fixes the loads but still tail-calls instead of retail BL/POP. */
+/* NON_MATCHING: retail loads each (word count, data) pair with two separate ldr (count first); the build merges the pair into one ldm. Call shape (bl/pop) now matches. */
 #include "common.h"
 
 struct CommandWords {
@@ -19,15 +19,20 @@ struct CommandWordSource {
 
 extern "C" {
 void FUN_001a063c(u32* destination, const u32* words, u32 bytes);
+}
 
-void FUN_001942a8(const CommandWordSource* source, u32* destination)
+static void appendWords(u32* destination, u32 wordCount, const u32* data)
 {
-    FUN_001a063c(destination, source->prefix.data, source->prefix.wordCount * sizeof(u32));
+    FUN_001a063c(destination, data, wordCount * sizeof(u32));
+}
+
+extern "C" void FUN_001942a8(const CommandWordSource* source, u32* destination)
+{
+    appendWords(destination, source->prefix.wordCount, source->prefix.data);
     const CommandWordBlock* begin = source->blocks;
     const CommandWordBlock* end = begin + source->blockCount;
     if (begin != end) {
-        FUN_001a063c(destination, begin->words.data, begin->words.wordCount * sizeof(u32));
+        appendWords(destination, begin->words.wordCount, begin->words.data);
     }
-    FUN_001a063c(destination, source->suffix.data, source->suffix.wordCount * sizeof(u32));
-}
+    appendWords(destination, source->suffix.wordCount, source->suffix.data);
 }

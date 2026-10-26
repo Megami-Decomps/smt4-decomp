@@ -18,12 +18,12 @@ void FUN_0022d9c8(void *owner, s32 value, s32 index, s32 alternateLayout,
     TextLayoutEntryPrefixIV *position;
     TextLayoutEntryPrefixIV *offset;
 
-    if (alternateLayout != 0) {
-        position = FUN_002bf4f0(context, index + 0x42F);
-        offset = FUN_002bf4f0(context, 0x497);
-    } else {
+    if (!(alternateLayout != 0)) {
         position = FUN_002bf4f0(context, index + 0x40E);
         offset = FUN_002bf4f0(context, 0x489);
+    } else {
+        position = FUN_002bf4f0(context, index + 0x42F);
+        offset = FUN_002bf4f0(context, 0x497);
     }
 
     const s32 x = static_cast<s32>(position->x) + offset->x;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation: retail spills the slot pointer, spawn index and list pointer around the inlined spawn block (three more stack slots, extra live registers) */
 #include "common.h"
+#include "gamedata/Table00Lookup.h"
 
 /* A resource the enemy slot owns or only references. */
 class EnemyResource {
@@ -75,18 +76,12 @@ struct EnemyAreaSelection {
     /* 0x86 */ s16 area;
 };
 
-/* The first words of a data-table row. */
-struct EnemyKindRow {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u16 flags;
-};
 
 extern "C" {
 extern EnemySpawnList *g_mapEnemy;
 extern u32 *g_handleRegistry;
 extern EnemyAreaSelection DAT_005f17fc;
 void ptrListRemoveClearOwner(u32 *registry, u32 *owner);
-const EnemyKindRow *dataTable00FindById(u16 id);
 u16 FUN_004bb870(s32 index);
 }
 
@@ -137,7 +132,7 @@ static __inline void enemySlotSpawn(EnemySpawnSlot *slot, s32 state, s32 *spawnC
             enemySlotReleaseResource(slot);
             slot->spawnId = group->ids[index];
             slot->recordId = group->records[index];
-            slot->kindFlags = dataTable00FindById((u16)slot->recordId)->flags & 0x7fff;
+            slot->kindFlags = dataTable00FindById((u16)slot->recordId)->level & 0x7fff;
             s32 variant = FUN_004bb870(slot->spawnId);
             if (variant != 0) {
                 slot->unk17b = (u8)variant;

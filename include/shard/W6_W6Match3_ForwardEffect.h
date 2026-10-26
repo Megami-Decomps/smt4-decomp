@@ -31,7 +31,7 @@ u32 FUN_0025bed8(GroupedFileTables *owner, s32 kind, u32 tableIndex);
 extern "C" {
 #endif
 
-void *asdListBoxCreateDefault(u32 first,u32 second,u32 third,u32 fourth);
+u32 asdListBoxCreateDefault(u32 first,u32 second,u32 third,u32 fourth);
 
 #ifdef __cplusplus
 }

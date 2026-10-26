@@ -8,7 +8,6 @@ extern MapIfGlobals g_mapIf;
 extern GameState g_gameState;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
-void FUN_002a0428(AsdMdlObject *model, u32 enabled);
 void nodeSetTranslation(AsdMdlNode *node, u32 mode, const f32 *position);
 void FUN_0028c618(AsdMdlNode *node, u32 mode, f32 x, f32 y, f32 z);
 

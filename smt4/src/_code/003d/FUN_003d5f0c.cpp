@@ -4,9 +4,10 @@
 /* Starts the vector transition and resets its progress. */
 extern "C" void FUN_003d5f0c(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z)
 {
-    state->secondaryElapsed.z = 0.0f;
-    state->secondaryElapsed.y = 0.0f;
-    state->secondaryElapsed.x = 0.0f;
+    BattleVector3 *elapsed = &state->secondaryElapsed;
+    elapsed->z = 0.0f;
+    elapsed->y = 0.0f;
+    elapsed->x = 0.0f;
     state->destination.x = x;
     state->destination.y = y;
     state->destination.z = z;

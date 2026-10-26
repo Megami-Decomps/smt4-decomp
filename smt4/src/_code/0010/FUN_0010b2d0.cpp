@@ -27,7 +27,7 @@ extern RenderCtx *g_titleScene;
 
 s32 surfaceCopy(JobSurface *dest, JobSurface *src);
 s32 FUN_002bfadc(s32 arg, JobSurface *surface);
-s32 FUN_002bff10(s32 arg);
+s32 stateValuesGetBySelector(s32 arg);
 
 /* Title job step: once idle and ready, renders the scene into the surface at half size and marks it captured. */
 s32 FUN_0010b2d0(u32 job)
@@ -35,7 +35,7 @@ s32 FUN_0010b2d0(u32 job)
     TitleWork *work = (TitleWork *)jobGetWork(job);
     TitleState *state;
 
-    if (FUN_002bff10(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         work->state.busy = 1;
     } else if (work->state.active != 0) {
         state = &work->state;

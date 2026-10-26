@@ -1,5 +1,6 @@
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "util/AsdListBoxCreateDefault.h"
 
 extern "C" {
 extern AsdListBoxEntry DAT_00434d48[];
@@ -11,7 +12,6 @@ extern u8 DAT_00435e03;
 extern u32 DAT_00435e04;
 extern f32 DAT_00435e08;
 extern f32 DAT_00435e20;
-u32 asdListBoxCreateDefault(u32 parent, u32 priority, u32 flags, u32 option);
 void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry* entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u8 value);
 void jobSetText(u32 job, const char* text);

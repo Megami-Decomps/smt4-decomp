@@ -22,10 +22,10 @@ void FUN_00408274(u32 owner, u32 flag, s32 enabled)
         storage = FUN_002c2710();
         bits = storage->enabled;
         bits += owner >> 3;
-        mask = (u8)(1 << (owner & 7)) | *bits;
+        mask = (u8)(1 << (owner & 7));
+        *bits |= mask;
     } else {
-        mask = *bits & ~mask;
+        *bits &= ~mask;
     }
-    *bits = mask;
 }
 }

@@ -2,10 +2,10 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(int, int, int, s32 size, int);
 void tripleClear(u32 *list);
 void asdMemFree(void *block);
 void LAB_0010dd0c(void);

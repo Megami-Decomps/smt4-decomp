@@ -1,14 +1,14 @@
 /* NON_MATCHING: retail selects side values before storing; conditional-store tail sharing and saved-register allocation differ. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/EquipmentTable.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
-EquipmentTableRecord *dataTable40FindById(u32 id);
 
 // Decode the equipment target mode into target side and target scope.
 void FUN_003d0bec(u32 unused, const BtlEntry *entry, u32 itemId, u32 *side, u32 *scope)
 {
-    EquipmentTableRecord *item = dataTable40FindById(itemId);
+    EquipmentTableRecord *item = reinterpret_cast<EquipmentTableRecord *>(dataTable40FindById(itemId));
     if (item == NULL)
         return;
     // A word overlay on EquipmentTableRecord's unaligned padding would shift its layout.

@@ -2,6 +2,7 @@
 #include "battle/BattleMovementEffects.h"
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 extern BtlEffectGlobals g_btlEffect;
@@ -12,7 +13,6 @@ void asdMemFree(void *);
 void textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
 char *FUN_00100d60(char *, s32);
-u32 findRecordByKey(const char *);
 void __aeabi_memcpy4(void *, const void *, u32);
 u32 keyedRecordRegisterName(const char *);
 u32 FUN_003478dc(u32, const void *);

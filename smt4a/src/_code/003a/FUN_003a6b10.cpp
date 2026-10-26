@@ -1,5 +1,6 @@
 /* NON_MATCHING: scheduling only: same stores and calls, but retail loads g_messageMain first and interleaves the constant moves and the vstr differently. */
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 /* The message window object; only the fields the value popup sets are named. */
 struct MessagePopupWindow {
@@ -24,7 +25,6 @@ extern "C" {
 
 extern MessagePopupWindow *g_messageMain[4]; /* 0x57f588 */
 void FUN_0014e188(u8 *record, u32 value0, u32 value4, const u8 *source, u16 value38, f32 value20);
-void pairSetFirstResetSecond(u8 *sprite, s32 second);
 void uiSpriteSelectAnim(u8 *sprite, s32 anim);
 
 /* Shows the value popup on message window 2 with `value` and its float form, and starts its sprite animation. */

@@ -2,11 +2,11 @@
 #define CLASSES_OBJ420794_H
 
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "classes/Obj420794Resources.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 int bufferHandleRelease(u32 handle);
 }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads the 64-bit flag masks with ldm (4-aligned) and tests the skill's usable bits without CSE (tst, then and/cmp); the unit table is indexed through a u32 stride (lsl #2). */
 #include "common.h"
 #include "gamedata/Table04Record.h"
+#include "shard/lcgRandomRange.h"
 
 extern "C" {
 
@@ -66,7 +67,6 @@ struct BtlActionMasks {
 
 #define BTL_ACTION_AI_DONE 0x8000
 
-s32 lcgRandomRange(u32 limit);
 s32 source4CCopyHalves(u32 set, u16 *out);
 void qsort(void *base, s32 count, s32 size, s32 (*compare)(const void *, const void *));
 s32 compareHalfwordsDescending(const u16 *left, const u16 *right);

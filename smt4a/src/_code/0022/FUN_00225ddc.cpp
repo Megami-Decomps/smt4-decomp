@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "util/FUN_0013def0.h"
 struct ScriptHolder;
 
 extern "C" {
@@ -69,7 +70,6 @@ extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
 #endif
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
-extern int FUN_0013def0(unsigned int);
 extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: jobSetIntensity. */
@@ -172,11 +172,11 @@ unsigned int FUN_00225ddc(void)
         puVar2[0xd] = temp_v3;
         if (puVar2[0xb] == 0 || temp_v3 == 0) {
           puVar2[2] = 0x5f;
-          temp_v3 = FUN_0013def0(0);
+          temp_v3 = (int)FUN_0013def0(0);
           if (temp_v3 == 3) {
             FUN_003d54f8(0,5);
           }
-          temp_v3 = FUN_0013def0(1);
+          temp_v3 = (int)FUN_0013def0(1);
           if (temp_v3 == 3) {
             FUN_003d54f8(1,5);
           }
@@ -230,8 +230,8 @@ unsigned int FUN_00225ddc(void)
       temp_v2 = 1;
     }
     else {
-      temp_v3 = FUN_0013def0(0);
-      if (((temp_v3 != 3) || (temp_v3 = FUN_0013def0(1), temp_v3 != 3)) &&
+      temp_v3 = (int)FUN_0013def0(0);
+      if (((temp_v3 != 3) || (temp_v3 = (int)FUN_0013def0(1), temp_v3 != 3)) &&
          (temp_v3 = getByteTableAValue(), temp_v3 != 0)) {
         byteTableASetValue(0);
       }

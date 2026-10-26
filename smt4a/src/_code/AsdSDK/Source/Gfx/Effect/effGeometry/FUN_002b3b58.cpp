@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "util/SlotInit.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -22,7 +23,6 @@ typedef struct GeomObject {
     /* 0x54 */ u32 flags;
 } GeomObject;
 
-void *memAlloc(int, int, int, int size, int align, int);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 GeomSlot *slotReset(void *memory);
 

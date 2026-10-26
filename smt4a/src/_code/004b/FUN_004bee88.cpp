@@ -27,9 +27,8 @@ typedef struct PartnerLayout {
     /* 0x0C */ s16 *size;               /* width, height */
 } PartnerLayout;
 
-extern u8 *g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 
-void FUN_00157558(u8 *context);
 s32 FUN_001692ac(s32 a, s32 b);
 PartnerUnitView *FUN_003e4d68(u16 index);
 PartnerLayout *asdTMTexTableEntryAt(u32 group, u32 id);
@@ -38,15 +37,15 @@ void uiDrawSelectedSpriteIndicator(PartnerScreenView *screen, s32 x, s32 y, f32 
 void efctSetSpeed(f32 speed);
 void textFormatBuffer(void *buffer, const char *format);
 s32 fontMeasureLineAdvance(void *text, u32 kind);
-void skinObjectUpdateMatrices(u8 *context);
-void renderCtxResetColorScale(u8 *context);
+void skinObjectUpdateMatrices(RenderCtxA *context);
+void renderCtxResetColorScale(RenderCtxA *context);
 
 /* Draws the partner screen at (`x`, `y`) with fade `scale`: the partner slots (or the "no
  * partners" notice), the frame parts and the selection mark, inside a pushed render state. */
 void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
 {
     FUN_00157558(g_renderCtx);
-    renderStackPush((RenderStateStack *)(g_renderCtx + 0x1258), FUN_001692ac(1, 0));
+    renderStackPush(&g_renderCtx->stackA, FUN_001692ac(1, 0));
     s32 shown = 0;
 
     for (s32 i = 0; i < 12; i++) {
@@ -90,7 +89,7 @@ void FUN_004bee88(PartnerScreenView *screen, s32 x, s32 y, f32 scale)
         FUN_001835b4(2, 0x11, 0xAB, mark->x + x, mark->y + y, 0x97);
         efctSetSpeed(1.0f);
     }
-    renderStackPop((RenderStateStack *)(g_renderCtx + 0x1258));
+    renderStackPop(&g_renderCtx->stackA);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
 }

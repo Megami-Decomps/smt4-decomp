@@ -2,14 +2,8 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* A placed sprite frame: offset and a pointer to its size words. */
-struct UiSpriteFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;
-};
 
 extern "C" {
 extern void *g_renderCtx;
@@ -17,7 +11,6 @@ extern void *g_renderCtx;
 f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
-UiSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 u32 FUN_00180114(u32 id);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_0018152c(u32 id, s32 x, s32 y, u32 flags, u32 arg);
@@ -45,7 +38,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
 
     textFormatBuffer(label, "%s", FUN_00180114(0x31F));
     stereo = (s32)renderCtxCalculateStereoParallax(g_renderCtx, BADGE_STEREO_SCALE);
-    UiSpriteFrame *frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1C);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1C);
     s32 frameX = frame->x + x + stereo;
     s32 frameY = frame->y + y;
     FUN_001835b4(2, BADGE_BANK, 0xC13, frameX, frameY, BADGE_FLAGS);
@@ -65,7 +58,7 @@ void FUN_002ca878(f32 speed, s32 x, s32 y)
     FUN_00183bb0();
 
     frame = asdTMTexTableEntryAt(BADGE_BANK, 0xC1F);
-    s32 labelX = frame->x + (frame->size[0] - fontMeasureLineAdvance(label, 2)) / 2 + x + stereo;
+    s32 labelX = frame->x + (frame->placement->width - fontMeasureLineAdvance(label, 2)) / 2 + x + stereo;
     textDrawString(2, 0xFF, label, (f32)labelX, (f32)(frame->y + y), 1.0f, 0.0f, speed);
     efctSetSpeed(savedSpeed);
 }

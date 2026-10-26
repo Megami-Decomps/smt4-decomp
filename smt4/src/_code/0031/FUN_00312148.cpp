@@ -3,14 +3,14 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
+#include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
 
-struct EntryRange { u32 first; u32 count; };
+struct EntryRange { s32 first; s32 count; };
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern void FUN_002499fc(s32 group, u32 *first, u32 *count);
 extern s32 scrGetArg(s32 index);
 
 /* Script command: 1 if an absent-flag, active, unblocked entry in the range (or the active entry) has a positive stat of the requested kind. */
@@ -31,7 +31,7 @@ u32 FUN_00312148(void)
     }
     s32 group = scrGetArg(1);
     FUN_002499fc(btlScriptResolveGroupArg(group), &range.first, &range.count);
-    for (i = range.first; i < (s32)(range.first + range.count); i++) {
+    for (i = range.first; i < range.first + range.count; i++) {
         entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&

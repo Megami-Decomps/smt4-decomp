@@ -1,55 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001762d4` (_code @ 0x1762d4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
+typedef struct IdEntry {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 id;
+    /* 0x22 */ u8 unk22[0x1A];
+} IdEntry;
 
+typedef struct IdEntryTable {
+    /* 0x000 */ u8 unk000[0x3C0];
+    /* 0x3C0 */ s32 count;
+    /* 0x3C4 */ IdEntry *entries;
+} IdEntryTable;
 
-int FUN_001762d4(int param_1,unsigned int param_2)
-
+/* Return the entry with the given id, or NULL. */
+IdEntry *FUN_001762d4(IdEntryTable *table, u32 id)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int unaff_r5;
-  unsigned int temp_v2;
-  
-  temp_v2 = *(unsigned int *)(param_1 + 0x3c0);
-  if ((int)temp_v2 < 1) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = temp_v2 & 1;
-    if (temp_v0 != 0) {
-      unaff_r5 = *(int *)(param_1 + 0x3c4);
-    }
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      do {
-        if (*(unsigned short *)(unaff_r5 + temp_v1 * 0x3c + 0x20) == param_2) {
-          return unaff_r5 + temp_v1 * 0x3c;
+    for (s32 i = 0; i < table->count; i++) {
+        if (table->entries[i].id == id) {
+            return &table->entries[i];
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)temp_v0);
     }
-  }
-  if ((int)temp_v0 < (int)temp_v2) {
-    temp_v1 = *(int *)(param_1 + 0x3c4);
-    do {
-      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x3c + 0x20) == param_2) {
-        return temp_v1 + temp_v0 * 0x3c;
-      }
-      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x3c + 0x5c) == param_2) {
-        return temp_v1 + temp_v0 * 0x3c + 0x3c;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while ((int)temp_v0 < (int)temp_v2);
-  }
-  return 0;
+    return NULL;
 }
 
 } /* extern "C" */

@@ -3,9 +3,9 @@
 #include "shard/Shard004B.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W9_W9Match7_ModifierLists.h"
+#include "util/dataFindKeyedRecordWithOverrides.h"
 
 extern "C" {
-const PassiveSkillRecord *dataFindKeyedRecordWithOverrides(u32 id);
 s32 gameDataFlagTestBit(u32 bit);
 s32 FUN_0034a304(const AttributeModifierLists *record, s32 rank, s32 kind);
 
@@ -17,13 +17,13 @@ s32 FUN_004bcbb4(const ItemRankRecord *holder, u32 skillId)
         s32 baseCost = record->cost.baseCost;
         s32 reduction = 0;
         if (gameDataFlagTestBit(12))
-            reduction = dataFindKeyedRecordWithOverrides(12)->affinity;
+            reduction = ((const PassiveSkillRecord *)dataFindKeyedRecordWithOverrides(12))->affinity;
         if (gameDataFlagTestBit(13))
-            reduction += dataFindKeyedRecordWithOverrides(13)->affinity;
+            reduction += ((const PassiveSkillRecord *)dataFindKeyedRecordWithOverrides(13))->affinity;
         if (gameDataFlagTestBit(14))
-            reduction += dataFindKeyedRecordWithOverrides(14)->affinity;
+            reduction += ((const PassiveSkillRecord *)dataFindKeyedRecordWithOverrides(14))->affinity;
         if (gameDataFlagTestBit(15))
-            reduction += dataFindKeyedRecordWithOverrides(15)->affinity;
+            reduction += ((const PassiveSkillRecord *)dataFindKeyedRecordWithOverrides(15))->affinity;
         s32 rank = 0;
         if (holder) {
             for (s32 index = 0; index < 8; ++index) {

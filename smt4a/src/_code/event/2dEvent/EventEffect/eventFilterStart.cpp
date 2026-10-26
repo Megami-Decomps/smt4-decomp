@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 struct EventFilterWork {
     u32 job;
@@ -25,7 +26,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 owner,
     u32 (*draw)(void *), void (*destroy)(void *), void *work, u32 process);
 void *textureGetIndexedResource(u32 index);
 void asdTMTexTableLoadTmx(u32 table, s32 flags);
-void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 void eventFilterStart(u32 kind)
 {

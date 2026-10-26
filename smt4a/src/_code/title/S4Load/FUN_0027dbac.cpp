@@ -9,7 +9,6 @@ void efctSetSpeed(f32 alpha);
 void FUN_00183bb0(void);
 void rt_aeabi_memclr(void* memory, u32 size);
 void drawSetColorFromRGBA8(u32 color);
-void FUN_0016c4b8(void* context, const void* selection);
 void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 depth);
 SpriteInfo* asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00164168(const void* text, s32 x, s32 y, s32 fade, u32 start, s32 length, f32 scale);
@@ -39,7 +38,7 @@ u32 FUN_0027dbac(void)
     case 2:
         drawSetColorFromRGBA8(0xFF);
         efctSetSpeed(0.5f);
-        FUN_0016c4b8(g_renderCtx, NULL);
+        renderCtxSelectTexture(g_renderCtx, NULL);
         screenDrawShadedRect(0, 0, 400, 240, 101);
         FUN_00183bb0();
         efctSetSpeed(1.0f);
@@ -50,7 +49,7 @@ u32 FUN_0027dbac(void)
     case 21: case 22: case 23: case 24: case 25: case 26:
     case 27: case 28: case 29: case 30:
         drawSetColorFromRGBA8(0xFF);
-        FUN_0016c4b8(g_renderCtx, NULL);
+        renderCtxSelectTexture(g_renderCtx, NULL);
         screenDrawShadedRect(0, 0, 400, 240, 101);
         FUN_00183bb0();
         break;

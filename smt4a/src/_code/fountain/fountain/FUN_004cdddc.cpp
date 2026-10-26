@@ -5,6 +5,7 @@
 #include "status/StatusCamera.h"
 #include "shard/Shard0040.h"
 #include "title/titleMain.h"
+#include "util/FUN_001cd3ec.h"
 
 namespace {
 struct FountainInitializationView {
@@ -36,7 +37,6 @@ extern "C" {
 extern LockedObj *g_handleRegistry;
 void *FUN_00178b04(u32 bytes, const char *file, u32 line);
 ModelList *modelListInit(ModelList *list);
-void FUN_001cd3ec(ModelList *list, const char *name);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void resourceOwnerLoadNamed(LockedObj *owner, const char *name);
 u8 FUN_0040af60(LockedObj *owner);

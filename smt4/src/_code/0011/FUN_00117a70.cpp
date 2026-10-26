@@ -1,15 +1,7 @@
 /* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
 #include "camp/RenderCtx.h"
 #include "shard/packNibblesAndByte.h"
-
-struct FrameSurface {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-    /* 0x1C */ u8 unk1C[0x20];
-    /* 0x3C */ s32 filterX;
-    /* 0x40 */ s32 filterY;
-};
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct FrameTexQuad {
     /* 0x00 */ f32 x[4];
@@ -28,7 +20,7 @@ struct FrameTex {
     /* 0x0EC8 */ s32 blendMode;        /* 0 normal, 1 additive, 2 subtractive */
     /* 0x0ECC */ u8 filtered;
     /* 0x0ECD */ u8 unk0ECD[0x10F];
-    /* 0x0FDC */ FrameSurface *surface;
+    /* 0x0FDC */ AsdTexture *surface;
 };
 
 #define FRAME_TEX_WIDTH_HALF 240.0f
@@ -39,10 +31,9 @@ extern "C" {
 extern FrameTex *g_frameTex;
 extern RenderCtx *g_titleScene;
 
-s32 FUN_002bff10(s32 selector);
+s32 stateValuesGetBySelector(s32 selector);
 s32 FUN_002c5d80(u32 a, u32 b);
 f32 FUN_002b99b8(f32 base, f32 exponent);
-void FUN_002c1b64(RenderCtx *context, FrameSurface *surface);
 void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3,
                   f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
                   f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
@@ -56,7 +47,7 @@ void FUN_00117a70(s32 wide)
     if (tex->fullWidth == 0 && wide != 0)
         extentU = FRAME_TEX_WIDTH_FULL;
 
-    s32 selector = FUN_002bff10(0);
+    s32 selector = stateValuesGetBySelector(0);
     s32 level = tex->downscale;
     if (selector == 0 && level > 1) {
         level = level - 1;
@@ -69,9 +60,9 @@ void FUN_00117a70(s32 wide)
         extentU = extentU / scale;
     }
 
-    FrameSurface *surface = tex->surface;
-    f32 width = (f32)surface->width;
-    f32 height = (f32)surface->height;
+    AsdTexture *surface = tex->surface;
+    f32 width = (f32)surface->dimensions.width;
+    f32 height = (f32)surface->dimensions.height;
     if (tex->filtered != 0) {
         surface->filterX = 1;
         surface->filterY = 1;
@@ -100,7 +91,7 @@ void FUN_00117a70(s32 wide)
         renderStackSet(&context->stackB, state);
         break;
     }
-    FUN_002c1b64(g_titleScene, surface);
+    renderCtxSelectTexture(g_titleScene, surface);
     u32 color = tex->color;
     f32 z = tex->depth;
     FUN_002ba1e0(color, color, color, color,

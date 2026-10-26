@@ -14,7 +14,9 @@ f32 FUN_001241a8(f32 from, f32 to, f32 duration, f32 progress)
         if (progress <= 0.0f) {
             result = from;
         } else if (progress < duration) {
-            result = (to - from) * (mathInterpolatePackedTable((u32)(progress * 16384.0f / duration + 49152.0f) & 0xFFFF) + 1.0f) + from;
+            f32 delta = result - from;
+            f32 factor = mathInterpolatePackedTable((u32)(progress * 16384.0f / duration + 49152.0f) & 0xFFFF);
+            result = (factor + 1.0f) * delta + from;
         }
     }
     return result;

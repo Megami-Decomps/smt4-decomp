@@ -1,6 +1,7 @@
 /* NON_MATCHING: exact 92-row control/instruction sequence except work base R7 and +0x100 view R8 are swapped from retail; alternate allocation/optimization candidate. */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/UnitRecordAccess.h"
 
 namespace {
 struct RequestedUnitWork {
@@ -26,7 +27,6 @@ struct RequestedUnitSlots {
 extern "C" {
 s32 partyPanelGetRequestedUnitId();
 u8* gameGetSlotTable();
-RequestedUnitRecord* gameGetUnitRecord(u32 index);
 void FUN_002579bc(s32 index);
 
 s32 campCecClassifyRequestedUnit(void* context)
@@ -39,9 +39,9 @@ s32 campCecClassifyRequestedUnit(void* context)
         RequestedUnitSlots* slots = reinterpret_cast<RequestedUnitSlots*>(gameGetSlotTable());
         for (s32 i = 0; i < 3; ++i) {
             if (slots->active[i] >= 0
-                && gameGetUnitRecord(slots->active[i])->id == work->requestedId
-                && !flagWordTestBit(gameGetUnitRecord(slots->active[i]), 10)
-                && !flagWordTestBit(gameGetUnitRecord(slots->active[i]), 1)) {
+                && static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->active[i]))->id == work->requestedId
+                && !flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->active[i])), 10)
+                && !flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->active[i])), 1)) {
                 work->status = 5;
                 break;
             }
@@ -49,9 +49,9 @@ s32 campCecClassifyRequestedUnit(void* context)
         if (work->status == -1) {
             for (s32 i = 0; i < 24; ++i) {
                 if (slots->reserve[i] >= 0
-                    && gameGetUnitRecord(slots->reserve[i])->id == work->requestedId
-                    && (flagWordTestBit(gameGetUnitRecord(slots->reserve[i]), 10)
-                        || flagWordTestBit(gameGetUnitRecord(slots->reserve[i]), 1))) {
+                    && static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->reserve[i]))->id == work->requestedId
+                    && (flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->reserve[i])), 10)
+                        || flagWordTestBit(static_cast<RequestedUnitRecord *>(gameGetUnitRecord(slots->reserve[i])), 1))) {
                     work->status = 2;
                     break;
                 }

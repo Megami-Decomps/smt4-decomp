@@ -1,10 +1,21 @@
-/* NON_MATCHING: two retail weak cleanup calls were NOPed out; their missing class/callee identities prevent reconstructing the resource release/destructor sequence. */
 #include "common.h"
+#include "AsdSDK/AsdDebugHooks.h"
+
+/* The window's owned allocation: the object is released through the sub-object at 0x4F0. */
+struct PlaceWindowResource {
+    u8 unk0000[0x4F0]; // 0x0000
+    u8 sub[1];         // 0x04F0
+};
 
 struct PlaceWindow {
     u8 unk0000[0x1218]; // 0x0000
-    void* resource;    // 0x1218
+    PlaceWindowResource* resource; // 0x1218
 };
+
+static __inline PlaceWindowResource *placeWindowResourceFromSub(void *sub)
+{
+    return (PlaceWindowResource *)((u8 *)sub - 0x4F0);
+}
 
 extern "C" {
 void FUN_004b7a54(PlaceWindow* window);
@@ -17,8 +28,9 @@ void FUN_0019e290(PlaceWindow* window)
 {
     FUN_004b7a54(window);
     owner4DDestroy(window);
+    asdDebugHookPtr(window->resource);
     if (window->resource != NULL) {
-        asdOperatorDelete(window->resource);
+        asdOperatorDelete(placeWindowResourceFromSub(asdDebugHookPass(&window->resource->sub)));
     }
     window->resource = NULL;
     placeWinRelease();

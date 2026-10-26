@@ -41,10 +41,8 @@ f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 s32 FUN_002c5d80(s32 a, s32 b);
-void FUN_002c1b64(RenderCtx *context, s32 arg);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
 SlotLayout *asdTMTexTableEntryAt(u32 group, u32 id);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the eight-slot picker: the frame parts, then for each slot its marker, the selected
@@ -61,7 +59,7 @@ void FUN_00398ba8(SlotPicker *picker)
     RenderCtx *context = g_renderCtx;
     s32 state = FUN_002c5d80(1, 0);
     renderStackPushCountedDirect(&context->stackA, state);
-    FUN_002c1b64(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     FUN_002bf288(2, 0x2E, 0, parallax, 0, 0xB);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     FUN_002bf288(2, 0x2E, 1, parallax, 0, 0xB);
@@ -97,7 +95,7 @@ void FUN_00398ba8(SlotPicker *picker)
     }
     efctSetSpeed(1.0f);
     renderStackPop(&g_renderCtx->stackA);
-    FUN_002c198c(g_renderCtx);
+    renderCtxApplyTransforms(g_renderCtx);
     FUN_002c18e4(g_renderCtx);
 }
 

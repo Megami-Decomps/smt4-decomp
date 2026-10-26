@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_BattleDebug.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "battle/btlMain.h"
+#include "util/AsdListBoxCreateDefault.h"
 
 extern "C" {
 extern BtlMain* g_btlMain;
@@ -9,7 +10,6 @@ extern AsdListBoxEntry DAT_00435be8[];
 extern const char DAT_004004f8[];
 extern f32 DAT_004342cc;
 extern f32 DAT_004342d0;
-u32 asdListBoxCreateDefault(u32 parent, u32 priority, u32 flags, u32 option);
 void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry* entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u8 value);
 void jobSetText(u32 job, const char* text);

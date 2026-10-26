@@ -6,6 +6,7 @@
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 extern "C" {
 
@@ -61,7 +62,6 @@ void paramsClearPacket(void *packet);
 
 void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
 void FUN_00230b9c(s32 a, s32 b);
-void uiSpriteSelectAnim(void *sprite, u32 anim);
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 flag);
 void uiSpriteInitializeState(void *sprite, u32 group, s32 id, u32 size, void *owner, u32 anim, f32 scale);
 u32 spriteHandleCreate(u32 kind);

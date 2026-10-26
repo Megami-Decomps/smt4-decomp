@@ -1,8 +1,8 @@
 /* NON_MATCHING: initial input-pointer moves and first load use a different register. */
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-GameUnitSortRecord *gameGetUnitRecord(s32 index);
 s32 comparePartyUnitsByRankRaceAndId(const s32 *left, const s32 *right);
 
 // Sort valid party slots by race, then by the standard rank/race/id order.
@@ -15,8 +15,8 @@ s32 FUN_001b18f0(const s32 *left, const s32 *right)
     } else if (*right < 0) {
         result = -1;
     } else {
-        GameUnitSortRecord *leftUnit = gameGetUnitRecord(*left);
-        GameUnitSortRecord *rightUnit = gameGetUnitRecord(*right);
+        GameUnitSortRecord *leftUnit = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
+        GameUnitSortRecord *rightUnit = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
         DevilSortRecord *leftDevil = devilGetRecord(leftUnit->id);
         DevilSortRecord *rightDevil = devilGetRecord(rightUnit->id);
         result = leftDevil->race - rightDevil->race;

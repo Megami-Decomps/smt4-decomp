@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler hoists configuration pointers instead of retail's offset-literal accesses. */
 #include "shard/Shard0031.h"
+#include "util/GameDataBlocksGetSaveData.h"
 
 struct TitleConfigState {
     u8 options[4];
@@ -8,12 +9,11 @@ struct TitleConfigState {
 
 extern "C" {
 extern TitleConfigState DAT_00588fc0;
-GameDataBlock *gameDataBlocksGetSaveData(void);
 
 // Exchange the four title options with saved data, preferring unsaved local changes.
 void FUN_00358cbc(void)
 {
-    GameDataBlock *save = gameDataBlocksGetSaveData();
+    GameDataBlock *save = reinterpret_cast<GameDataBlock *>(gameDataBlocksGetSaveData());
     if (save == NULL)
         return;
     u8 *options = reinterpret_cast<u8 *>(&save->unk27E90);

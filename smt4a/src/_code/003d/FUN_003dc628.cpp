@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "camp/UIFade/UIFade.h"
 #include "event/2dEvent/SmokeFade.h"
+#include "util/FUN_0013def0.h"
 
 extern "C" {
 
@@ -79,7 +80,6 @@ extern int DAT_0057f0c8; /* 0x57f0c8 */
 extern int g_camp; /* 0x57f108 */
 extern int g_campCecEdit; /* 0x57f118 */
 
-extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: FUN_001517b4. */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
@@ -204,7 +204,7 @@ void FUN_003dc628(void)
   FUN_00163aa4(g_camp + 0xd74);
   FUN_00163aa4(temp_v9 + 0xe00);
   temp_v5 = uniteStateIsDone();
-  if ((temp_v5 == 0) && (temp_v5 = FUN_0013def0(0), temp_v5 != 0)) {
+  if ((temp_v5 == 0) && (temp_v5 = (int)FUN_0013def0(0), temp_v5 != 0)) {
     return;
   }
   temp_v5 = uniteStateIsDone();

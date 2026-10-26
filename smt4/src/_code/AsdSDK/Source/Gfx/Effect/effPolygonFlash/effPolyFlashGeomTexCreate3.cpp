@@ -1,9 +1,11 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 85 vs built 79 rows, 91 diff lines. */
+/* NON_MATCHING: the debug trace and size hoist now match; retail keeps the new block in r0 through the header stores and moves it to r5 afterwards (here r5 first), and its literal pool has an extra word. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 
+extern const char DAT_00410408[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00247334(u32 count, int w, int h, u8 *table, int tableSize);
 void textureSlotReplace(PolyGeom *geom, void *texture);
@@ -14,7 +16,9 @@ extern u8 DAT_004737c2;
 PolyGeomBlock *effPolyFlashGeomTexCreate3(PolyParams *params, void *texture)
 {
     PolyGeom *geom;
-    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, params->segments * 0x20 + 0x10, 0x10, 1);
+    u32 size = params->segments * 0x20;
+    asdDebugTrace(DAT_00410408, 2893);
+    PolyGeomBlock *block = (PolyGeomBlock *)memAlloc(0x10000, 0x100, 0, size + 0x10, 0x10, 1);
 
     block->data = block->payload;
     block->self = block;

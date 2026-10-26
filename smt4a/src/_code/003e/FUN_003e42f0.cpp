@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail caches id >> 3 in r5 across the bitset tests and updates both bitsets through writeback pointers; control flow matches */
 #include "common.h"
+#include "util/dataFindKeyedRecordWithOverrides.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct AreaBits {
 s32 gameFlagIsSet(u32 flag);
 AreaBits *gameDataBlockGetArea28350(void);
 u8 *gameDataBlockGetArea2D68(void);
-s32 dataFindKeyedRecordWithOverrides(u32 id);
 s32 FUN_003e4230(u32 id);
 
 /* Whether bit `id` of a bitset is set. */
@@ -40,7 +40,7 @@ u32 FUN_003e42f0(void)
             if (bitsetTest(gameDataBlockGetArea28350()->marked, id)) {
                 return 1;
             }
-        } else if (dataFindKeyedRecordWithOverrides(id) != 0 &&
+        } else if ((s32)dataFindKeyedRecordWithOverrides(id) != 0 &&
                    (bitsetTest(gameDataBlockGetArea2D68(), id) || FUN_003e4230(id) != 2)) {
             bitsetSet(gameDataBlockGetArea28350()->known, id);
             bitsetSet(gameDataBlockGetArea28350()->marked, id);

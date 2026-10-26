@@ -1,6 +1,7 @@
 /* NON_MATCHING: Battle source-model caching is reconstructed; duplicate/free-slot scans and retained work/source pointers allocate different registers and branch joins. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "util/FUN_001cd3ec.h"
 
 struct BattleCacheVector {
     f32 x;
@@ -40,7 +41,6 @@ void sysMemClear(void *buffer, u32 size);
 void textFormatBuffer(char *destination, const char *format, ...);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 BattleCacheModel *modelListInit(BattleCacheModel *model);
-void FUN_001cd3ec(BattleCacheModel *model, const char *name);
 extern const char DAT_005284d8[];
 extern const char DAT_00528500[];
 }

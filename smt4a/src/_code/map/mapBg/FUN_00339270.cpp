@@ -1,12 +1,12 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00339270` (_code @ 0x339270, 0x5bc bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/FUN_001cd3ec.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
 int FUN_00178b04(int, unsigned char *, int);
-int FUN_001cd3ec(unsigned int, unsigned char [132]);
 int FUN_0040a908(unsigned int, int);
 int FUN_0040a918(unsigned int, int);
 
@@ -24,7 +24,6 @@ extern int g_mapDepartWork; /* 0x58069c */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: FUN_00178b04. */
 extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: FUN_001cd3ec. */
 /* Supplied declaration required: FUN_0040a908. */
 /* Supplied declaration required: FUN_0040a918. */
 extern int FUN_0040ab8c(unsigned int);
@@ -70,7 +69,7 @@ unsigned int FUN_00339270(void)
       temp_v1 = g_mapDepartWork;
       *(unsigned int *)(g_mapDepartWork + 0x10) = temp_v2;
       textFormatBuffer(temp_v4,&LAB_003396ac,*(unsigned int *)(temp_v1 + 0x1c));
-      FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0x10),temp_v4);
+      FUN_001cd3ec((void *)(*(unsigned int *)(g_mapDepartWork + 0x10)),(const char *)temp_v4);
       *(short *)(g_mapDepartWork + 0x18) = *(short *)(g_mapDepartWork + 0x18) + 1;
       return 0;
     }
@@ -137,7 +136,7 @@ unsigned int FUN_00339270(void)
       textFormatBuffer(temp_v4,&LAB_003396c8,0x2b,0x2b,1);
     }
   }
-  FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0xc),temp_v4);
+  FUN_001cd3ec((void *)(*(unsigned int *)(g_mapDepartWork + 0xc)),(const char *)temp_v4);
   temp_v1 = 0x20;
   FUN_00178b04(0x20,&LAB_00339680,0x528);
   temp_v2 = 0;
@@ -163,7 +162,7 @@ unsigned int FUN_00339270(void)
       (textFormatBuffer(temp_v4,&LAB_003396e8,0x27,0x27,0x12),
       *(short *)(g_mapDepartWork + 0x20) == 0x27)))) {
     if (*(short *)(g_mapDepartWork + 0x22) != 5) {
-      FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v4);
+      FUN_001cd3ec((void *)(*(unsigned int *)(g_mapDepartWork + 0x14)),(const char *)temp_v4);
       FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x14),0x10000);
       FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x14),0x20000);
       *(short *)(g_mapDepartWork + 0x18) = *(short *)(g_mapDepartWork + 0x18) + 1;
@@ -177,7 +176,7 @@ unsigned int FUN_00339270(void)
   if (*(short *)(g_mapDepartWork + 0x20) == 0x2d || *(short *)(g_mapDepartWork + 0x20) == 0x2e) {
     textFormatBuffer(temp_v4,&LAB_003396e8,0x2b,0x2b,1);
   }
-  FUN_001cd3ec(*(unsigned int *)(g_mapDepartWork + 0x14),temp_v4);
+  FUN_001cd3ec((void *)(*(unsigned int *)(g_mapDepartWork + 0x14)),(const char *)temp_v4);
   FUN_0040a908(*(unsigned int *)(g_mapDepartWork + 0x14),0x10000);
   FUN_0040a918(*(unsigned int *)(g_mapDepartWork + 0x14),0x20000);
   *(short *)(g_mapDepartWork + 0x18) = *(short *)(g_mapDepartWork + 0x18) + 1;

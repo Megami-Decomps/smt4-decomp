@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail repeats fallback record lookups through comparator stages that this source expresses as separate helpers. */
 /* Orders valid unit slots by demon priority/race, slot rank, then descending demon ID. */
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
-GameUnitSortRecord *gameGetUnitRecord(s32 index);
 s32 devilSortCompareUnitRankRaceId(const s32 *left, const s32 *right);
 
 static inline s32 compareRaceThenRank(const s32 *left, const s32 *right)
@@ -14,8 +14,8 @@ static inline s32 compareRaceThenRank(const s32 *left, const s32 *right)
     } else if (*right < 0) {
         result = -1;
     } else {
-        GameUnitSortRecord *first = gameGetUnitRecord(*left);
-        GameUnitSortRecord *second = gameGetUnitRecord(*right);
+        GameUnitSortRecord *first = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
+        GameUnitSortRecord *second = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
         DevilSortRecord *firstDemon = devilGetRecord(first->id);
         DevilSortRecord *secondDemon = devilGetRecord(second->id);
         result = secondDemon->race - firstDemon->race;
@@ -42,8 +42,8 @@ s32 FUN_002072f0(const s32 *left, const s32 *right)
             u8 unk04;
             u8 priority;
         };
-        GameUnitSortRecord *first = gameGetUnitRecord(*left);
-        GameUnitSortRecord *second = gameGetUnitRecord(*right);
+        GameUnitSortRecord *first = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
+        GameUnitSortRecord *second = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
         DevilPriorityView *firstDemon = (DevilPriorityView *)devilGetRecord(first->id);
         DevilPriorityView *secondDemon = (DevilPriorityView *)devilGetRecord(second->id);
         order = (s32)secondDemon->priority - firstDemon->priority;

@@ -12,7 +12,7 @@ int FUN_00157558(int);
 int textDrawString(...);
 int efctSetSpeed(...);
 float FUN_00168594(const char *, unsigned int, float);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_00183bb0(void);
 int dataTableGet(int, int);
 int FUN_002027fc(void);
@@ -37,7 +37,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00168594. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: dataTableGet. */
@@ -206,7 +206,7 @@ unsigned int FUN_0032b0d4(void)
       }
     }
     else {
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       FUN_0014e314(0xff,0xff,0xff);
     }
   }

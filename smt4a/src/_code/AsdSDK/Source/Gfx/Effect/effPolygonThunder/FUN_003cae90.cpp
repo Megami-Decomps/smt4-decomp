@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the three colours' rgb and alpha parts in stack slots (96-byte frame) and recomputes the ramp from spilled values; ours keeps them in registers (80-byte frame, 159 rows against 204). The ramp is only recomputed on step 0 and odd steps, as retail does. */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Effect/effPolygonThunderBolt.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The three vertex colours of one strip step (0x14 bytes, unaligned in the geometry buffer): the last
  * two repeat the first two. */
@@ -26,7 +27,6 @@ struct ThunderBoltTinyBlock {
 };
 
 extern "C" {
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00350d90(u32 segments, u8 *table, int w, int tableSize);
 
 extern u8 DAT_005c1eec;

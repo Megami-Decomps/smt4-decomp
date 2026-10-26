@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
+#include "util/FUN_0027d9e8.h"
 
 struct BattleMemberResources {
     u16 unk00;
@@ -19,7 +20,6 @@ s32 entryContainsIdentifier(BtlMainState *state, u32 id);
 u32 FUN_00294090(u32 id, s32 mode);
 void resourceSlotsInsert(BtlMainState *state, u32 handle);
 void entryAddUniqueIdentifier(BtlMainState *state, s16 id);
-u32 FUN_0027d9e8(BtlMainState *state, u32 id);
 s32 nkdwHeaderParse(u32 handle);
 void aocHandleButtons(u32 handle, u32 mode);
 s32 FUN_00294fe0(u32 handle);
@@ -61,7 +61,7 @@ void battleActionPollMemberResources(BtlMainState *state, BtlActionRecord *actio
         if (index < 0)
             index = 0;
         BattleMemberResources *resources = FUN_0027da30(state, action->memberId);
-        u32 handle = FUN_0027d9e8(state, resources->identifiers[index]);
+        u32 handle = (u32)FUN_0027d9e8(state, resources->identifiers[index]);
         bool ready = true;
         if (!(action->flags & 0x100)) {
             if (nkdwHeaderParse(handle)) {

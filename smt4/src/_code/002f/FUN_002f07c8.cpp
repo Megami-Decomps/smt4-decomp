@@ -3,11 +3,11 @@
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(s32 group, u32 *first, u32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 // Whether the special active battle entry belongs to the group bit `flag`.
@@ -27,10 +27,10 @@ u32 FUN_002f07c8(void)
 {
     s32 flag = scrGetArg(0);
     s32 group = btlScriptResolveGroupArg(scrGetArg(1));
-    u32 first;
-    u32 count;
+    s32 first;
+    s32 count;
     FUN_002499fc(group, &first, &count);
-    for (s32 index = first; index < (s32)(count + first); ++index) {
+    for (s32 index = first; index < count + first; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if ((entry->flags & 0x10) == 0 && (entry->flags & 1) != 0 &&
             (entry->flags & 0x40) == 0 && (entry->groupMask & (1 << flag)) != 0) {

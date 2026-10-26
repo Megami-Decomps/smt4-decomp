@@ -5,11 +5,11 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "battle/BattleUnitSlot.h"
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
-GameUnitSortRecord *gameGetUnitRecord(s32 slot);
 u32 FUN_00246d38(s32 actor, u32 unit, BtlActionRecord *target, u32 mask);
 u32 FUN_00246e24(s32 actor, u32 unit, BtlActionRecord *target, u32 mask, s32 clearStatus);
 void objectFlagsClear(GameUnitSortRecord *unit, u16 mask);
@@ -30,7 +30,7 @@ u32 FUN_002f7e10(void)
         else
             FUN_00246d38(0, actor, record, 1 << bit);
     } else {
-        GameUnitSortRecord *unit = gameGetUnitRecord(target - 109);
+        GameUnitSortRecord *unit = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(target - 109));
         if (enabled != 0) {
             objectFlagSetBit(unit, bit);
             if (bit != 4 && flagWordTestBit(unit, 4))

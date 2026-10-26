@@ -1,9 +1,9 @@
 #include "shard/Shard0037.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
 extern void asdTMTexTableLoadSprites(s32 id);
-extern void asdTMTexLoadMainHeap(s32 id, s32 value);
 
 void texEntrySpritesLoad(void)
 {

@@ -1,4 +1,5 @@
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct BtlEventTask001e2240 {
 
 s32 jobIsValid(u32 handle);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(void), void (*destroy)(void), void *owner, u32 id);
-void *asdMemAlloc(s32 size, s32 alignment, s32 a, s32 b, s32 c);
 s32 libc_strcmp(const char *a, const char *b);
 s32 libc_strlen(const char *s);
 void btlEventUpdateCurrentWork(void);

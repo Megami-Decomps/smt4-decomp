@@ -1,9 +1,9 @@
 #include "common.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
 void asdTMTexTableLoadTmx(s32 table, s32 flag);
-void asdTMTexLoadMainHeap(s32 table, s32 index);
 extern s8 DAT_0057f250;
 
 /* Counts one more user of texture table 7: the first user (count 0 or less) loads it and runs asdTMTexLoadMainHeap on its six entries. */

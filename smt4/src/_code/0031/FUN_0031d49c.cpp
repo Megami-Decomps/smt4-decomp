@@ -36,12 +36,13 @@ extern BudgetState g_gameState;
 
 void FUN_0031d49c(void)
 {
-    s32 limit = DAT_0049fb1c.limit;
-    s32 budget = limit - (g_deferredMapModels->count +
-                          (mapCountActiveEntries() + g_mapStateSlots->count + g_mapObj->count) / 3);
+    MapBudget *limits = &DAT_0049fb1c;
+    s32 limit = limits->limit;
+    s32 used = (mapCountActiveEntries() + (g_mapStateSlots->count + g_mapObj->count)) / 3;
+    s32 budget = limit - (used + g_deferredMapModels->count);
 
-    if (budget < DAT_0049fb1c.minimum) {
-        budget = DAT_0049fb1c.minimum;
+    if (budget < limits->minimum) {
+        budget = limits->minimum;
     }
     g_gameState.entryBudget = budget;
 }

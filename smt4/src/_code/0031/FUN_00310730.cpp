@@ -1,11 +1,11 @@
-/* NON_MATCHING: retail keeps a separate zero register for unk7F and loads 11/the text buffer address in a different order; logic matches. */
+/* NON_MATCHING: retail is messageBannerInitSelection(0, 0) inlined from the same source file, with the mode value (0 for unk7F) kept in its own register r5 and 11 loaded before the text buffer address; a duplicated static inline (inlined, extern or static) folds the mode away and keeps the 0 in one register. */
 #include "ui/MessageMain.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;
 
 u32 scrGetArg(u32 index);
-u32 *gameGetSlotTable(void);
 void FUN_002bd954(void *record, u32 value0, u32 value4, const void *source, u16 value38, f32 value20);
 void pairSetFirstResetSecond(void *pair, s32 first);
 void spriteStartAnimationByIndex(void *widget, s32 mode);
@@ -19,7 +19,7 @@ u32 FUN_00310730(void)
 
     panel->unk7D = 1;
     panel->unk7C = 1;
-    slot = *gameGetSlotTable();
+    slot = gameGetSlotTable()->money;
     panel->unk6C = slot;
     panel->unk78 = slot;
     panel->unk7F = 0;

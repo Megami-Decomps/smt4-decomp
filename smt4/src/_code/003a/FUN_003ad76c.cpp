@@ -1,5 +1,6 @@
 /* NON_MATCHING: initialises the battle UI block (sprite pools, four timer set, draw parameters, 16 skill tabs, 12 card rows, detail object); written from the decompilation, the draw-parameter chunk addresses and loop shapes not compared with retail */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "font/ComWin/ComWin.h"
 
 struct BtlUiSprite {
     /* 0x00 */ u8 data[0x8C];
@@ -82,7 +83,6 @@ void FUN_00199b9c(void *detail, BtlSetupSource *source);
 void drawParameterBlockClear(UiResourceParameters *resources);
 
 void FUN_002bd954(BtlUiSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, s32 flags, f32 speed);
-void spriteStartAnimationByIndex(BtlUiSprite *sprite, s32 animation);
 void uiSpriteSetImageKeyframe(BtlUiSprite *sprite, s32 keyframe, s32 flag);
 void *asdOperatorNew(u32 size, BtlSetupSource *owner);
 void *FUN_0033d3e4(void *memory);
@@ -110,16 +110,15 @@ void FUN_003ad76c(void *unused, BtlSetupSource *source)
                NULL, 0, DAT_00401c6c, 0x5B0);
 
     for (s32 i = 0; i < 16; i++) {
-        BtlSkillTab *tab = &block->tabs[i];
-        tab->visible = 0;
+        block->tabs[i].visible = 0;
         for (s32 j = 0; j < 5; j++) {
-            FUN_002bd954(&tab->entries[j], 0xD, 2000, resources, 0xF1, 1.0f);
-            spriteStartAnimationByIndex(&tab->entries[j], 3);
+            FUN_002bd954(&block->tabs[i].entries[j], 0xD, 2000, resources, 0xF1, 1.0f);
+            spriteStartAnimationByIndex(&block->tabs[i].entries[j], 3);
         }
-        FUN_002bd954(&tab->header, 0x15, 1000, resources, 0xF1, 1.0f);
-        spriteStartAnimationByIndex(&tab->header, 9);
-        FUN_002bd954(&tab->footer, 0x15, 0x3EA, resources, 0xF1, 1.0f);
-        spriteStartAnimationByIndex(&tab->footer, 9);
+        FUN_002bd954(&block->tabs[i].header, 0x15, 1000, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&block->tabs[i].header, 9);
+        FUN_002bd954(&block->tabs[i].footer, 0x15, 0x3EA, resources, 0xF1, 1.0f);
+        spriteStartAnimationByIndex(&block->tabs[i].footer, 9);
 
         BtlCommandRow *row = &block->commands[i];
         row->enabled = 0;

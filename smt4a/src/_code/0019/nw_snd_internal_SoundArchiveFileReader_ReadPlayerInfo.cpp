@@ -1,32 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo` (_code @ 0x194ff4, 0x30 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Reads the player info of this archive reference's key into `out` (id, second value); returns 1 if it exists. */
+#include "nw/snd/SoundArchiveQuery.h"
 
 extern "C" {
 
-int FUN_001a8c20(void);
+typedef struct PlayerInfo {
+    /* 0x00 */ u32 id;
+} PlayerInfo;
 
-/* Supplied declaration required: FUN_001a8c20. */
-extern unsigned int *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo(unsigned int);
+typedef struct PlayerParams {
+    /* 0x00 */ u32 id;
+    /* 0x04 */ u32 unk04;
+} PlayerParams;
 
+extern PlayerInfo *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo(void *infoBlock);
+extern u32 FUN_001a8c20(PlayerInfo *info);
 
-unsigned char nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(int param_1,unsigned int param_2,unsigned int *param_3)
-
+u8 nw_snd_internal_SoundArchiveFileReader_ReadPlayerInfo(SoundArchiveRef *ref, u32 unused, PlayerParams *out)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned char temp_v0;
-  
-  puVar1 = (unsigned int *)
-           nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo
-                     (*(unsigned int *)(param_1 + 0x3c));
-  temp_v0 = puVar1 != (unsigned int *)0x0;
-  if (temp_v0) {
-    *param_3 = *puVar1;
-    FUN_001a8c20();
-    param_3[1] = (unsigned int)puVar1;
-  }
-  return temp_v0;
+    PlayerInfo *info = nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetPlayerInfo(ref->infoBlock);
+
+    if (info != NULL) {
+        out->id = info->id;
+        out->unk04 = FUN_001a8c20(info);
+        return 1;
+    }
+    return 0;
 }
 
-} /* extern "C" */
+}

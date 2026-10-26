@@ -1,7 +1,6 @@
 #include "title/titleMain.h"
 
 extern "C" TitleScene *g_titleScene;
-extern "C" void renderCtxSelectStereoLayout(void *data);
 extern "C" void FUN_002d7d84(void);
 
 /* Update the title scene's callback data and finish the title operation. */

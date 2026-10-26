@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the slot count before storing the released flag; this build stores first. */
 #include "common.h"
 
 struct ResourceSlot27581c {
@@ -29,8 +28,9 @@ void FUN_002877d4(u32 handle);
 void FUN_0027581c(void)
 {
     if (DAT_00448c20->loaded && !DAT_00448c20->released) {
+        s32 i;
         DAT_00448c20->released = 1;
-        for (s32 i = 0; i < DAT_00448c20->count; i++) {
+        for (i = 0; i < DAT_00448c20->count; i++) {
             ResourceSlot27581c *slot = &DAT_00448c20->slots[i];
             if (slot->active) {
                 if (slot->kind == 0) {

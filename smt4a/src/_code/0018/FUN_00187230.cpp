@@ -30,7 +30,7 @@ struct ShaderLightState {
 };
 
 extern "C" {
-void FUN_0019cb50(f32 *destination, const f32 *matrix, const f32 *source);
+void matrix34RotateVector(f32 *destination, const f32 *matrix, const f32 *source);
 f32 FUN_001b63b0(f32 angle);
 
 /* Rows of a 3x4 matrix applied to a point, and to a direction (no translation). */
@@ -145,8 +145,8 @@ void FUN_00187230(u8 *state, const f32 *viewA, const f32 *viewB)
         } while (i < lights->lightCount);
     }
     if (state[0x6a9] != 0) {
-        FUN_0019cb50(reinterpret_cast<f32 *>(state + 0x6e0), viewA, reinterpret_cast<f32 *>(state + 0x6d0));
-        FUN_0019cb50(reinterpret_cast<f32 *>(state + 0x6f0), viewB, reinterpret_cast<f32 *>(state + 0x6d0));
+        matrix34RotateVector(reinterpret_cast<f32 *>(state + 0x6e0), viewA, reinterpret_cast<f32 *>(state + 0x6d0));
+        matrix34RotateVector(reinterpret_cast<f32 *>(state + 0x6f0), viewB, reinterpret_cast<f32 *>(state + 0x6d0));
         *reinterpret_cast<u32 *>(state + 0x6ec) = *reinterpret_cast<u32 *>(state + 0x6dc);
         *reinterpret_cast<u32 *>(state + 0x6fc) = *reinterpret_cast<u32 *>(state + 0x6dc);
     }

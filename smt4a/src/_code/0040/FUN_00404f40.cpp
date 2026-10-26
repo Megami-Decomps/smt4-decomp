@@ -1,16 +1,8 @@
 /* NON_MATCHING: readable rebuild of the party member card draw; armcc here keeps the offset pairs and the 0.5664f speed in different registers (retail holds the speed in s16 and the VFP conversions in d8/d9 across the calls), and the layout positions come from calls the draft passed through unchanged. */
 #include "common.h"
+#include "addon/PackageSelection.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
-
-/* A party card record (only the fields the draw reads). */
-struct CardRecord {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 kind;       /* 2..0x12 even: the highlighted frame kinds */
-    /* 0x06 */ u16 hasBadge;
-    /* 0x08 */ u8 unk08[8];
-    /* 0x10 */ char name[1];
-};
 
 /* A layout point (position in pixels). */
 struct CardPoint {
@@ -20,7 +12,6 @@ struct CardPoint {
 };
 
 extern "C" {
-CardRecord *FUN_0039b984(u16 id);
 void sysMemClear(void *block, s32 bytes);
 void efctSetSpeed(f32 speed);
 u32 FUN_004038e0(u32 effect, u16 kind);
@@ -37,13 +28,13 @@ void efctPlayVariantSet(u32 effect, s32 x, s32 y, s32 sprite, u32 a, u32 b);
 void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32 arg6, u32 font)
 {
     u8 text[128];
-    CardRecord *card = FUN_0039b984(cardId);
+    PackageSelectableRecord *card = contentFindRecordById(cardId);
     if (card == NULL)
         return;
     sysMemClear(text, 0x80);
     efctSetSpeed(speed);
-    u32 frameSprite = FUN_004038e0(effect, card->kind);
-    switch (card->kind) {
+    u32 frameSprite = FUN_004038e0(effect, card->content.kind);
+    switch (card->content.kind) {
     case 2: case 4: case 6: case 8: case 10: case 12: case 14: case 16: case 18: {
         drawSetColorFromRGBA8(0x57D8FFFF);
         CardPoint *shadow = asdTMTexTableEntryAt(0x32, 0x97);
@@ -67,8 +58,8 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
     CardPoint *namePoint = asdTMTexTableEntryAt(0x32, 0x98);
     s16 nameX = namePoint->x;
     s16 nameY = namePoint->y;
-    const char *name = card->name;
-    if (libc_strcmp(card->name, "<pc 0>") == 0) {
+    const char *name = card->content.name;
+    if (libc_strcmp(card->content.name, "<pc 0>") == 0) {
         gameGetPlayerData();
         name = gameGetPlayerName();
     }
@@ -76,7 +67,7 @@ void FUN_00404f40(u32 effect, u16 cardId, s32 x, s32 y, f32 speed, u32 arg5, u32
     textDrawString(3, font, (const char *)text, (f32)(nameX + x), (f32)(nameY + y), 0.56640625f, 0.0f, speed);
     CardPoint *badge = asdTMTexTableEntryAt(0x32, 0x99);
     efctPlayVariantSet(effect, badge->x + x, badge->y + y, 0x79, arg5, arg6);
-    if (card->hasBadge != 0) {
+    if (card->content.badge != 0) {
         efctSetSpeed(speed);
         CardPoint *mark = asdTMTexTableEntryAt(0x32, 0x9A);
         x += mark->x;

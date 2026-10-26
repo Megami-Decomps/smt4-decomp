@@ -1,4 +1,3 @@
-/* NON_MATCHING: constant store uses r0 rather than retail's r1 and reorders the pointer load. */
 #include "common.h"
 
 namespace {
@@ -11,9 +10,14 @@ struct MapDepartState {
 extern "C" {
 extern MapDepartState *g_mapDepart;
 
+static __inline void mapDepartSetEnabled(MapDepartState *state, u8 enabled)
+{
+    state->enabled = enabled;
+}
+
 /* Enables the map departure state. */
 void mapDepartEnable(void)
 {
-    g_mapDepart->enabled = 1;
+    mapDepartSetEnabled(g_mapDepart, 1);
 }
 }

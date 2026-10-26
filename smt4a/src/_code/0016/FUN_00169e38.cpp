@@ -1,17 +1,11 @@
 /* NON_MATCHING: logic matches retail; armcc lays out the digit-2/digit-5 comma blocks and the zero case in a different order and emits strd for the glyph args */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* A sprite of an image bank: where it sits. */
-struct BankSprite {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
-BankSprite *asdTMTexTableEntryAt(s32 bank, s32 sprite);
 void FUN_00183bb0(void);
 void drawSetColorFromRGBA8(u32 packed);
 s32 __aeabi_idivmod(s32 numerator, s32 denominator);
@@ -19,7 +13,7 @@ s32 __aeabi_idivmod(s32 numerator, s32 denominator);
 /* Draws `value` as digits with thousands marks at (x, y); with `signed` the number is coloured by sign and prefixed with +/-. */
 void FUN_00169e38(s32 value, s32 x, s32 y, s32 signedDisplay)
 {
-    BankSprite *sprite = NULL;
+    TextureTableEntryIV *sprite = NULL;
     s32 digit = 0;
     s32 firstDigit = -1;
     s32 remaining = value;

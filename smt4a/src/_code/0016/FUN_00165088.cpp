@@ -1,6 +1,7 @@
 /* NON_MATCHING: HUD panel state reset by state id (hide or reset the sprites depending on the open/lock checks); written from the decompilation, branch/tail-call layout not compared with retail */
 #include "common.h"
 #include "StaffRoll/StaffRollMain.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 struct PanelSprite {
     /* 0x00 */ u8 unk00[0x20];
@@ -36,7 +37,6 @@ struct PanelWork {
 extern "C" {
 s32 FUN_001517b4(s32 a, s32 b);
 void uiSpriteSetImageKeyframe(PanelSprite *sprite, s32 keyframe, s32 flag);
-void uiSpriteSelectAnim(PanelSprite *sprite, s32 animation);
 void workSetStateByte(PanelSprite *sprite, s32 value);
 
 /* Closes the panel parts that belong to the state; when the panel may stay open the sprites are

@@ -18,7 +18,7 @@ struct Filter4PolySource : Obj42080cRect {
 extern "C" {
 extern const char DAT_0052730c[];
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
-void FUN_00415310(Obj42080c *filter);
+void texturedQuadSetCentered(Obj42080c *filter);
 u32 _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(void *dest, u32 source);
 void btlFilterLoadTexture(Obj42080c *filter, u32 flags, u32 textureIndex);
@@ -38,7 +38,7 @@ Obj42080c *FUN_004151b0(Filter4PolySource *source, u32 flags, s32 fading)
     filter->setRect(source);
     asdDebugTrace(DAT_0052730c, 49);
     filter->setBuffer(asdMemoryAlloc(0x100, 0x100, 0, 0x50, 1));
-    FUN_00415310(filter);
+    texturedQuadSetCentered(filter);
     filter->refreshTextureCoordinates();
     mtx44Copy(filter->matrixSlot(), _ZN2nw4math5MTX448IdentityEv());
     btlFilterLoadTexture(filter, flags, source->textureId);

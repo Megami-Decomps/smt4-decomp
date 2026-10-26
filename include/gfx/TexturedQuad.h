@@ -21,7 +21,8 @@ struct TexturedQuad {
     /* 0x60 */ TexturedQuadParameters *parameters;
 };
 
-static __inline void texturedQuadSetPosition(TexturedQuadVertex *vertex, f32 x, f32 y, f32 z)
+/* Plain static (not __inline): armcc auto-inlines it with right-to-left argument evaluation. */
+static void texturedQuadSetPosition(TexturedQuadVertex *vertex, f32 x, f32 y, f32 z)
 {
     vertex->x = x;
     vertex->y = y;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: fixed-camera vector setup, constant scheduling, and the final helper epilogue differ. */
+/* NON_MATCHING: the look-at vector setup now matches (plain static setCameraVector); retail loads the last three projection constants after mov r1,#1 where the build loads them before. */
 /* Configures the fixed map camera's look-at vectors, projection, and transition state. */
 #include "map/MapCameraWork.h"
 #include "script/scrScriptProcess.h"
@@ -14,7 +14,7 @@ void FUN_002c1e30(FixedCamera *camera, u32 enabled, f32 fieldOfView,
     f32 nearDistance, f32 farDistance, f32 aspectRatio);
 }
 
-static inline void setCameraVector(MapVector &vector, f32 x, f32 y, f32 z)
+static void setCameraVector(MapVector &vector, f32 x, f32 y, f32 z)
 {
     vector.x = x;
     vector.y = y;

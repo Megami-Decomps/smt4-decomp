@@ -1,25 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00442280` (_code @ 0x442280, 0x34 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
+
+struct CriticalSection;
 
 extern "C" {
 
-extern int DAT_005c0a94; /* 0x5c0a94 */
-extern unsigned int g_moduleCriticalSection8; /* 0x62d2a4 */
+extern CriticalSection g_moduleCriticalSection8;
+extern void *DAT_005c0a94;
 
-extern void nn_os_CriticalSection_Enter(unsigned int);
-extern void nn_os_CriticalSection_Leave(unsigned int);
-
-
-unsigned char FUN_00442280(void)
-
+/* Reads the shared work-pointer status while holding its critical section. */
+bool FUN_00442280(void)
 {
-  unsigned char temp_v0;
-  
-  nn_os_CriticalSection_Enter((unsigned int)&g_moduleCriticalSection8);
-  temp_v0 = DAT_005c0a94 != 0;
-  nn_os_CriticalSection_Leave((unsigned int)&g_moduleCriticalSection8);
-  return temp_v0;
+    ScopedCriticalLock lock(g_moduleCriticalSection8);
+    return DAT_005c0a94 != NULL;
 }
 
 } /* extern "C" */

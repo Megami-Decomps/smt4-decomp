@@ -8,7 +8,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(...);
 int effectApplyFiveComponentsWithDefaults(void);
 int FUN_0037aa68(void *, int *);
@@ -63,7 +63,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: effectApplyFiveComponentsWithDefaults. */
 /* Supplied declaration required: FUN_0037aa68. */
@@ -294,7 +294,7 @@ void FUN_00402290(fn_00402290_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x12d4))();
     *(unsigned char *)(temp_v0 + 0x12d0) = 0;
   }
-  FUN_0016c4b8(g_renderCtx,0);
+  renderCtxSelectTexture(g_renderCtx,0);
   effectApplyFiveComponentsWithDefaults();
   temp_v0 = g_renderCtx;
   piVar5 = (int *)(g_renderCtx + 0x1298);

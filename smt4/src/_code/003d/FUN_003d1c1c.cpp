@@ -4,6 +4,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "AsdSDK/AsdDebugHooks.h"
+#include "gamedata/DataTable40.h"
 
 struct BtlSkill;
 extern "C" {
@@ -18,7 +19,6 @@ s32 btlAuxAreResourcesReady(void *auxiliary);
 void nameEntriesRegisterVerNamesThenContinue(void *auxiliary);
 void FUN_00339eec(ActionStateChannelOwner *owner);
 s32 modelOwnerResetPlayerIfReady(ActionStateChannelOwner *owner);
-BtlSkill *dataTable40FindById(s32 skill);
 void FUN_003398e4(ActionStateChannelOwner *owner);
 s32 FUN_0033ac58(ActionStateChannelOwner *owner);
 void FUN_003392cc(ActionStateChannelOwner *owner);

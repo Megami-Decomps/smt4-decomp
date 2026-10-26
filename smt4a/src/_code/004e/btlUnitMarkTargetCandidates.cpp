@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail preserves the reference in r3 across btlUnitGet; this declaration requires a saved register, and mask loads schedule differently. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 struct BattleTargetWork {
     /* 0x00 */ u8 unk00[0x38];
@@ -19,12 +20,11 @@ struct BattleActionMasks {
 
 extern "C" {
 extern BattleActionMasks g_btlAction;
-BattleTargetWork *btlUnitGet(BtlMainStateA **reference);
 
 // Mark the battle slots permitted by the requested target-selection mode.
 void btlUnitMarkTargetCandidates(BtlMainStateA **reference, s32 group, s32 mode)
 {
-    BattleTargetWork *work = btlUnitGet(reference);
+    BattleTargetWork *work = reinterpret_cast<BattleTargetWork *>(btlUnitGet(reference));
     if (mode == 2) {
         const u64 alternateRequired = g_btlAction.alternateRequired;
         const u64 alternateUnavailable = g_btlAction.alternateUnavailable;

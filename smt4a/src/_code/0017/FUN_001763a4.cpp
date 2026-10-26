@@ -1,55 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001763a4` (_code @ 0x1763a4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct KeyedEntry30 {
+    /* 0x00 */ u8 unk00[0x20];
+    /* 0x20 */ u16 key;
+    /* 0x22 */ u8 unk22[0xE];
+};
+
+struct KeyedEntryList {
+    /* 0x000 */ u8 unk000[0x3CC];
+    /* 0x3CC */ s32 count;
+    /* 0x3D0 */ KeyedEntry30 *entries;
+};
 
 extern "C" {
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-
-int FUN_001763a4(int param_1,unsigned int param_2)
-
+/* The list entry whose key is `key`, or NULL. */
+KeyedEntry30 *FUN_001763a4(KeyedEntryList *list, u32 key)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  int unaff_r5;
-  unsigned int temp_v2;
-  
-  temp_v2 = *(unsigned int *)(param_1 + 0x3cc);
-  if ((int)temp_v2 < 1) {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = temp_v2 & 1;
-    if (temp_v0 != 0) {
-      unaff_r5 = *(int *)(param_1 + 0x3d0);
-    }
-    temp_v1 = 0;
-    if (temp_v0 != 0) {
-      do {
-        if (*(unsigned short *)(unaff_r5 + temp_v1 * 0x30 + 0x20) == param_2) {
-          return unaff_r5 + temp_v1 * 0x30;
+    for (s32 i = 0; i < list->count; i++) {
+        if (list->entries[i].key == key) {
+            return &list->entries[i];
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (int)temp_v0);
     }
-  }
-  if ((int)temp_v0 < (int)temp_v2) {
-    temp_v1 = *(int *)(param_1 + 0x3d0);
-    do {
-      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x30 + 0x20) == param_2) {
-        return temp_v1 + temp_v0 * 0x30;
-      }
-      if (*(unsigned short *)(temp_v1 + temp_v0 * 0x30 + 0x50) == param_2) {
-        return temp_v1 + temp_v0 * 0x30 + 0x30;
-      }
-      temp_v0 = temp_v0 + 2;
-    } while ((int)temp_v0 < (int)temp_v2);
-  }
-  return 0;
+    return NULL;
 }
 
 } /* extern "C" */

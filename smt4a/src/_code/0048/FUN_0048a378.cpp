@@ -1,5 +1,6 @@
 /* NON_MATCHING: Background-reset and alternate-feedback cold blocks are placed differently from retail. */
 #include "map/mapDepart.h"
+#include "shard/gameFlagsGetBlock.h"
 
 struct NavigationFeedbackRequest {
     u8 unk00[0xC];
@@ -16,7 +17,6 @@ struct NavigationFeedbackMode {
     s32 mode;
 };
 extern "C" {
-NavigationFeedbackMode *gameFlagsGetBlock(void);
 s32 gameFlagIsSet(u32 flag);
 void commonBgReset(void);
 void FUN_003b61ec(void);
@@ -29,7 +29,7 @@ extern NavigationFeedbackFlags DAT_005f19fc;
 /* Refreshes map background state and chooses navigation feedback after tearing down button help. */
 void FUN_0048a378(NavigationFeedbackRequest *request)
 {
-    NavigationFeedbackMode *settings = gameFlagsGetBlock();
+    NavigationFeedbackMode *settings = reinterpret_cast<NavigationFeedbackMode *>(gameFlagsGetBlock());
     if (g_gameState.mapFlags.unk295 != 0) {
         g_gameState.mapFlags.unk295 = 0;
         if (gameFlagIsSet(0x49A) != 0) {

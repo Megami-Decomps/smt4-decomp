@@ -1,10 +1,10 @@
 /* NON_MATCHING: panel initialization constants and register allocation differ. */
 #include "ui/MessageMain.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
 u32 scrGetArg(u32);
-const u32 *gameGetSlotTable(void);
 void FUN_0014e188(void *, s32, s32, void *, s32, f32);
 void pairSetFirstResetSecond(void *, s32);
 void uiSpriteSelectAnim(void *, s32);
@@ -16,7 +16,7 @@ u32 FUN_003a69c0(void)
     MessagePanelA *panel = g_messageMain.panel;
     panel->unk8E = 1;
     panel->state = 1;
-    u32 slot = *gameGetSlotTable();
+    u32 slot = gameGetSlotTable()->money;
     panel->unk7C = slot;
     panel->unk88 = slot;
     panel->unk91 = 0;

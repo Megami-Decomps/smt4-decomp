@@ -5,6 +5,7 @@
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 struct DemonIconRecord {
     DevilSortRecord key;
@@ -38,7 +39,6 @@ struct DemonIconRect {
 
 extern "C" {
 extern AocSystem* g_aocSystem;
-const DemonIconDefinition* dataTable00FindById(u16 id);
 BtlUnitLink* partyMemberFindById(u32 id);
 void drawSetColorFromRGBA8(u32 color);
 void effectSubmitPackageRequest(AocSystem* system, u32 image, s32 x, s32 y, u32 style);
@@ -54,7 +54,7 @@ void uiDrawDemonIcon(u32 demon, s32 x, s32 y, u32 style, s32 highlight)
     }
 
     const DemonIconRecord* record = (const DemonIconRecord*)devilGetRecord((u16)demon);
-    const DemonIconDefinition* definition = dataTable00FindById((u16)demon);
+    const DemonIconDefinition* definition = reinterpret_cast<const DemonIconDefinition*>(dataTable00FindById((u16)demon));
     if ((definition->flags & 1) != 0) {
         FUN_002bf288(2, 0x25, 2000, x, y, style);
         return;

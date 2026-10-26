@@ -1,8 +1,8 @@
 #include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
-void *dataTable40FindById(s32 id);
 s32 FUN_001ee498(void *unit);
 
 /* Returns 1 when the owner's leader slot (flag 0x10) or any member slot holds a unit (kind 2 or 3) that passes FUN_001ee498. */

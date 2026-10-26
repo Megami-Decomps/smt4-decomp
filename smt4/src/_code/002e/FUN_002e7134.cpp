@@ -2,10 +2,10 @@
 #include "gfx/AsdLightSet.h"
 #include <algorithm>
 #include "shard/asdMemFree.h"
+#include "util/ObjectBufferFree.h"
 
 extern "C" {
 extern s32 g_asdLightCount;
-void objectBufferFree(AsdLightBuffer *buffer);
 u32 asdLightSelectActive(s32 kind);
 }
 

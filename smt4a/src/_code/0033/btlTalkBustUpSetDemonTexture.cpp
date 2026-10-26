@@ -1,9 +1,9 @@
 #include "common.h"
 #include "gamedata/DevilRecordA.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
-s32 FUN_0014afd0(s32 group, u32 node);
 const void *dataTable00FindById(u32 id);
 s32 FUN_001a6568(u32 system, s32 group, u32 node, s32 flags);
 s32 asdTMTexLoadMainHeap(s32 group, u32 node);

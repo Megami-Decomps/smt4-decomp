@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 /* The loader's globals in Apocalypse: the worker's stack memory and mapping follow the stop flag. */
 struct AsdFileWorker {
@@ -21,7 +22,6 @@ void *FUN_00178b04(u32 size, const char *file, u32 line);
 void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 size);
 s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), void *argument,
                  u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_002e3140(s32 result);
 void FUN_0014b66c(void *argument);
 void copyValueIfDestination(void);
 void FUN_00100326(void);

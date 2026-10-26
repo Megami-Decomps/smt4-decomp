@@ -1,14 +1,18 @@
-/* NON_MATCHING: Reverb parameter store grouping and shared global-anchor addressing differ. */
+/* NON_MATCHING: retail stores the three integer values as one stm (+ the table pointer from the same address register) and pushes r3-r9; built splits the stores. Fixed here: the table-entry test (return when present), buffer slot 1 and same-file reverb data. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
 
+struct SoundReverbEffect {
+    u8 unk00[0x110];
+};
+
 extern "C" {
 extern const char DAT_004076c8[];
-extern SoundReverbEffect DAT_004c54f4;
-extern SoundReverbParameters DAT_004c5604;
-extern void *g_soundEffectBuffers[];
+SoundReverbEffect DAT_004c54f4;
+SoundReverbParameters DAT_004c5604;
+extern void *g_soundEffectBuffers[2];
 s32 nw_snd_FxReverb_SetParam(SoundReverbEffect *effect,
                              const SoundReverbParameters *parameters);
 u32 nw_snd_FxReverb_GetRequiredMemSize(SoundReverbEffect *effect);
@@ -19,7 +23,7 @@ s32 FUN_00120dc4(u32 bus, SoundReverbEffect *effect);
 
 void FUN_00109580(void)
 {
-    if (jyoucyuGetTableEntry(1) == NULL)
+    if (jyoucyuGetTableEntry(1) != NULL)
         return;
     DAT_004c5604.integerParameters[0] = 90;
     DAT_004c5604.integerParameters[1] = 1200;
@@ -37,8 +41,7 @@ void FUN_00109580(void)
     nw_snd_FxReverb_SetParam(&DAT_004c54f4, &DAT_004c5604);
     u32 requiredSize = nw_snd_FxReverb_GetRequiredMemSize(&DAT_004c54f4);
     asdDebugTrace(DAT_004076c8, 108);
-    void *buffer = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
-    g_soundEffectBuffers[11] = buffer;
+    void *buffer = g_soundEffectBuffers[1] = asdMemoryAlloc(0x10000, 0x100, 0, requiredSize, 1);
     nw_snd_FxReverb_AssignWorkBuffer(&DAT_004c54f4, buffer, requiredSize);
     FUN_00120dc4(1, &DAT_004c54f4);
 }

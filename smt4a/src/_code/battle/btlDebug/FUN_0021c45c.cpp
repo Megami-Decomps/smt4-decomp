@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "battle/btlDebug.h"
+#include "util/FUN_00187168.h"
 
 extern "C" {
 
@@ -58,7 +59,6 @@ extern unsigned int DAT_005e1560; /* 0x5e1560 */
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-extern int FUN_00187168(void);
 /* Supplied declaration required: FUN_0019e330. */
 /* Supplied declaration required: gameGetSlotRecord. */
 extern int gameGetSlotTable(void);
@@ -277,7 +277,7 @@ void FUN_0021c45c(int param_1,int param_2)
   temp_v7 = 0;
   do {
     temp_v1 = FUN_003e4d68(temp_v7 & 0xffff);
-    temp_v5 = FUN_00187168();
+    temp_v5 = FUN_00187168((const void *)temp_v1);
     if (temp_v5 != 0) {
       temp_v3 = (unsigned int)*(unsigned short *)(temp_v1 + 0x62);
       FUN_00184310();

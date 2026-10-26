@@ -1,4 +1,3 @@
-/* NON_MATCHING: division/remainder arithmetic is scheduled after the save-data getter, eliminating retail's saved index registers. */
 #include "common.h"
 
 struct SavedFlagBlock {
@@ -9,10 +8,16 @@ struct SavedFlagBlock {
 extern "C" {
 SavedFlagBlock *gameDataBlocksGetSaveData(void);
 
+static __inline bool savedFlagBitIsSet(s32 byte, s32 bit)
+{
+    u8 *flag = &gameDataBlocksGetSaveData()->flags[byte];
+    return (*flag & (1u << bit)) != 0;
+}
+
 u32 FUN_0036d134(void)
 {
     for (s32 bit = 0; bit < 0x80; ++bit) {
-        if ((gameDataBlocksGetSaveData()->flags[bit / 8] & (1u << (bit % 8))) != 0)
+        if (savedFlagBitIsSet(bit / 8, bit % 8))
             return 1;
     }
     return 0;

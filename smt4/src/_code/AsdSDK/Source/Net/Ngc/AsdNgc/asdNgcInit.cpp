@@ -1,13 +1,13 @@
 #include "AsdSDK/Source/Net/Ngc/AsdNgc.h"
 #include "AsdSDK/AsdDebug.h"
 #include "classes/Obj420fa4.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern AsdNgc g_asdNgc;
 extern void *g_textScannerModuleState; /* work buffer */
 
 void nn_cfg_CTR_Initialize(void);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 u32 FUN_0010fd38(void *work, void *buffer);
 
 /* Brings up nn::ngc with a 64 KB work buffer; returns 1 when the bad-word check is usable. */

@@ -1,22 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00146eb0` (_code @ 0x146eb0, 0x10 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct HidParameters {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 value;
+};
 
 extern "C" {
 
-int FUN_00159468(...);
+extern HidParameters DAT_0053f52c;
+extern u32 g_nnHidServiceHandle;
+extern s32 FUN_00159468(u32 *handle, u32 value);
 
-extern unsigned char g_nnHidServiceHandle; /* 0x643098 */
-
-/* Supplied declaration required: FUN_00159468. */
-
-
-void FUN_00146eb0(void)
-
+/* Applies the stored HID service parameter. */
+s32 FUN_00146eb0(void)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_00159468(&g_nnHidServiceHandle,"hid:USER");
-  return;
+    return FUN_00159468(&g_nnHidServiceHandle, DAT_0053f52c.value);
 }
 
 } /* extern "C" */

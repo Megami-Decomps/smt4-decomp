@@ -1,9 +1,9 @@
 /* NON_MATCHING: first-frame and resumed-frame wait branches are laid out differently. */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32);
 s32 scrGetCommandFrame(void);
 s32 FUN_002c1d5c(void);
 void FUN_00282bfc(u32, u32);

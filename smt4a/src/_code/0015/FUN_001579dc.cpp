@@ -1,6 +1,4 @@
-/* NON_MATCHING: retail copies the command cursor to r5 and passes r5 (mov r1, r5); built passes r0 directly */
 #include "shard/W6_W6Match5_ShaderBinding.h"
-#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 extern "C" {
 
@@ -18,8 +16,10 @@ typedef struct {
     ShaderBindSymbol uMaterialColor; /* 0x12a40 */
 } ModelShader;
 
+u32 asdGxGetCommandCursor(void);
 void FUN_00158a40(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
-u32 FUN_00177e6c(NativeShaderPrefix *shader, u32 cursor);
+u32 *FUN_00177e6c(NativeShaderPrefix *shader, u32 *cursor);
+void asdModelCommitCommandRange(u32 begin, u32 end);
 void FUN_0016c744(ModelShader *owner);
 
 extern const char DAT_00544d50[]; /* "uMatrix" */
@@ -30,7 +30,7 @@ s32 FUN_001579dc(ModelShader *owner, const void *binary, u32 unused, s32 size)
 {
 
     u32 begin;
-    u32 end;
+    u32 *end;
 
     asdGxGetCommandCursor();
     FUN_00158a40(&owner->shader, binary, size, -1);
@@ -41,9 +41,10 @@ s32 FUN_001579dc(ModelShader *owner, const void *binary, u32 unused, s32 size)
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aTexCoord, "aTexCoord");
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMatrix, DAT_00544d50);
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->uMaterialColor, DAT_00544d40);
-    begin = asdGxGetCommandCursor();
-    end = FUN_00177e6c(&owner->shader, begin);
-    asdModelCommitCommandRange(begin, end);
+    u32 *cursor = reinterpret_cast<u32 *>(asdGxGetCommandCursor());
+    begin = reinterpret_cast<u32>(cursor);
+    end = FUN_00177e6c(&owner->shader, cursor);
+    asdModelCommitCommandRange(begin, reinterpret_cast<u32>(end));
     FUN_0016c744(owner);
     return 1;
 }

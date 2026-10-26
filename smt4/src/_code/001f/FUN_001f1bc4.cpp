@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029ee54.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ extern int uniteGetWork(void);
 extern unsigned int dataTable24Sub0GetRecordS90X(int);
 /* Supplied declaration required: FUN_0029a17c. */
 extern int ifTouchGetSelectionModeForRegion(int);
-extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: textDrawString. */
@@ -93,7 +93,7 @@ void FUN_001f1bc4(int param_1,int param_2)
                 (((int)(temp_v5 + ((unsigned int)(temp_v5 >> 0x1f) >> 0x1e)) >> 2) * temp_v8 >> 0xc);
       }
       FUN_002bf288(2,0x24,0xb1,param_1 + temp_v10,param_2 + temp_v5,0x9c);
-      temp_v8 = FUN_0029ee54(temp_v13);
+      temp_v8 = FUN_0029ee54((const void *)(temp_v13));
       temp_v6 = temp_v3 + temp_v11;
       if (temp_v6 < temp_v8) {
         temp_v7 = asdTMTexTableEntryAt(0x24,0xb2);

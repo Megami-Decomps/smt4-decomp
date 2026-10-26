@@ -25,7 +25,6 @@ extern DebugMapBoxes DAT_00613178;
 extern const DebugMapBoxPalette DAT_00532240;
 extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(u32 kind, u32 enabled);
-void FUN_0016c4b8(RenderCtxA *context, u32 mode);
 void FUN_00280a08(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor,
     f32 firstX, f32 firstY, f32 firstZ, f32 secondX, f32 secondY, f32 secondZ,
     f32 thirdX, f32 thirdY, f32 thirdZ, f32 fourthX, f32 fourthY, f32 fourthZ);
@@ -39,7 +38,7 @@ void FUN_003578a0(f32 height)
         RenderCtxA *context = g_renderCtx;
         s32 state = FUN_001692ac(5, 1);
         renderStackPush(&context->stackA, state);
-        FUN_0016c4b8(g_renderCtx, 0);
+        renderCtxSelectTexture(g_renderCtx, 0);
         f32 planeHeight = height + 100.0f;
         for (s32 index = 0; index < DAT_00613178.count; ++index) {
             const DebugMapBox *box = &DAT_00613178.boxes[index];

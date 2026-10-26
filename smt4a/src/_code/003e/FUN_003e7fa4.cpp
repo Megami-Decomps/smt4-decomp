@@ -1,5 +1,6 @@
 /* NON_MATCHING: structure, calls, constants and instruction count match; remaining differences are register assignment and scheduling: retail keeps zero in r8, the actor slot id in r1 compared as `cmp slot, id`, the height constant in s0 loaded after the data table lookup and the lift in s16 (this build uses s17/s16), reads the data file through a literal offset (`ldr r0, [pc]; ldr r0, [r0, r5]`) instead of `add; ldr`, and joins the slot search at one clamp. */
 #include "gamedata/DataTable.h"
+#include "gamedata/Table00Lookup.h"
 
 struct BattleVec3 {
     f32 x, y, z;
@@ -48,10 +49,6 @@ struct BattlePositionRecord {
     u8 unk14[0x24];
 };
 
-struct BattleActorData {
-    u8 unk00[0xa2];
-    u8 height;           // 0xa2: 0 tall, 1 average, 2 low
-};
 
 struct EnemyDrawObject;
 
@@ -60,7 +57,6 @@ BattleRosterEntry* FUN_001568f8(BattleWorldView* world, s32 index);
 BattleSlotList* FUN_003f0e20(BattleWorldView* world, s32 slotId);
 void* dataTableFileGetTable(void* file, u32 section);
 BattleVec3* FUN_00348ee8(void* anchor);
-BattleActorData* dataTable00FindById(u16 id);
 EnemyDrawObject* stateEntryFindById(BattleWorldView* world, s32 id);
 void enemyDrawCalcVerticalOffset(EnemyDrawObject* object, BattleVec3* offset, f32 scale);
 
@@ -119,7 +115,7 @@ BattleVec3 FUN_003e7fa4(BattleWorldView* world, s32 index, s32 force)
             position = *FUN_00348ee8(world->anchor);
             position.z += lift;
             f32 height = 0.0f;
-            switch (dataTable00FindById(FUN_001568f8(world, index)->id)->height) {
+            switch (dataTable00FindById(FUN_001568f8(world, index)->id)->height.value) {
             case 0:
                 height = 15.0f;
                 break;

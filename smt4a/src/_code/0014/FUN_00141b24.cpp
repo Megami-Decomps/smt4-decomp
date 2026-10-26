@@ -71,22 +71,21 @@ void FUN_00141b24(void)
     g_soundHandleList.count = 0;
 
     for (s32 i = 0; i < 4; i++) {
-        AsdSndSlotA *slot = &g_asdSoundSlotsA[i];
-        if (slot->active != 0) {
+        if (g_asdSoundSlotsA[i].active != 0) {
             for (s32 h = 0; h < 4; h++) {
-                if (slot->handles[h] != 0) {
-                    asdSoundObjectStop(slot->handles[h], 0);
-                    nw_snd_SoundHandle_DetachSound(&slot->handles[h]);
+                if (g_asdSoundSlotsA[i].handles[h] != 0) {
+                    asdSoundObjectStop(g_asdSoundSlotsA[i].handles[h], 0);
+                    nw_snd_SoundHandle_DetachSound(&g_asdSoundSlotsA[i].handles[h]);
                 }
             }
-            if (slot->hasHeap != 0) {
-                nw_snd_SoundHeap_Destroy(slot->heap);
-                asdMemFree(slot->heapBuffer);
-                slot->savedState = 0;
-                slot->hasHeap = 0;
+            if (g_asdSoundSlotsA[i].hasHeap != 0) {
+                nw_snd_SoundHeap_Destroy(g_asdSoundSlotsA[i].heap);
+                asdMemFree(g_asdSoundSlotsA[i].heapBuffer);
+                g_asdSoundSlotsA[i].savedState = 0;
+                g_asdSoundSlotsA[i].hasHeap = 0;
             }
-            slot->active = 0;
-            slot->volume = ASD_SND_VOLUME_DEFAULT;
+            g_asdSoundSlotsA[i].active = 0;
+            g_asdSoundSlotsA[i].volume = ASD_SND_VOLUME_DEFAULT;
         }
     }
 }

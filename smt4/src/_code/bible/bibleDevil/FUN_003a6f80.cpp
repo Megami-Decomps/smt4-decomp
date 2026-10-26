@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ void FUN_0029cc44(s32 arg);
 void ifTouchRegionClearAll(u32 regions);
 void FUN_00233818(void *panel);
 s32 flaggedValueHolderGetTotal(void *cursor);
-u32 FUN_002bd06c(u32 id);
 void textEncodeFontSlot(s32 slot, void *buffer);
 u32 demonGetRaceLabel(u32 id, u32 arg);
 void scrScriptProcessStartEntry(u32 script, s32 entry);
@@ -94,7 +94,7 @@ void FUN_003a6f80(DevilListInput *work)
     if (select != 0) {
         u32 id = work->rows[flaggedValueHolderGetTotal(work->cursor)].id;
 
-        libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>(FUN_002bd06c(id)));
+        libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>((u32)FUN_002bd06c(id)));
         textEncodeFontSlot(8, record);
         libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>(demonGetRaceLabel(id, 1)));
         textEncodeFontSlot(0x10, record);

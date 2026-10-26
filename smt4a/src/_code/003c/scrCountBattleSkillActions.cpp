@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "util/SlotRangeSelect.h"
+#include "script/ScriptArgs.h"
 
 struct BattleCountAction { s16 unk00, type, id, unk06; };
 struct BattleCountActions {
@@ -12,7 +13,6 @@ struct BattleCountActions {
     BattleCountAction choices[10];
 };
 extern "C" {
-s32 scrGetArg(u32);
 s32 btlResolveEntryChoice(s32);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 s32 FUN_003249c0(BtlCombatantEntryA *, s32);

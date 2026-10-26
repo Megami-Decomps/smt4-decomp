@@ -2,11 +2,11 @@
 #include "battle/btlUI.h"
 #include "battle/PortraitPanel.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 void sysMemClear(void *memory, u32 size);
 void FUN_00371c3c(s16 portrait, s32 kind);
-BattlePortraitLayout *asdTMTexTableEntryAt(u32 table, u32 index);
 
 // Reset the two battle portrait slots and prepare their offscreen slide-in positions.
 void FUN_004ab8e4(void)
@@ -35,7 +35,7 @@ void FUN_004ab8e4(void)
             slot->requested = 1;
         }
     }
-    BattlePortraitLayout *layout = asdTMTexTableEntryAt(13, 3024);
+    TextureTableEntryIV *layout = asdTMTexTableEntryAt(13, 3024);
     panel->slots[0].state = 0;
     panel->slots[0].x = layout->y + 256;
     panel->slots[0].targetX = layout->x - 267;

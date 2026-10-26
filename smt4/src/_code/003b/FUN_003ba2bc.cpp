@@ -1,5 +1,4 @@
-/* NON_MATCHING: armcc keeps the constant 2 in a saved r5 (push r4-r6), loads the second resource
- * pair with ldm and stores step/stepTimer separately; retail rematerializes 2 and uses strd */
+/* NON_MATCHING: retail loads the second resource pair with two ldr and stores step/stepTimer (2, 0) with one strd; armcc here uses ldm (after two adds) and an add + stm. The linker-inlined scriptProcessSetMode now matches the mode stores. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 
@@ -37,6 +36,7 @@ s32 spriteTable2aIsLoaded(void *sprites);
 Unk3ba2bcPart *FUN_00297060(void *resourceA, void *resourceB);
 void FUN_002bd808(void *a, void *b);
 void mikadoLoadSceneResources(Unk3ba2bcOwner *owner);
+void scriptProcessSetMode(Unk3ba2bcPart *part, s32 mode);
 void buttonHelpSelectByProgress(Unk3ba2bcOwner *owner);
 
 /* Once everything is loaded, builds both parts and, if a start is pending, starts the owner. */
@@ -49,9 +49,9 @@ void FUN_003ba2bc(Unk3ba2bcOwner *owner)
         return;
     }
     owner->firstPart = FUN_00297060(owner->firstResourceA, owner->firstResourceB);
-    owner->firstPart->mode = 2;
+    scriptProcessSetMode(owner->firstPart, 2);
     owner->secondPart = FUN_00297060(owner->secondResourceA, owner->secondResourceB);
-    owner->secondPart->mode = 2;
+    scriptProcessSetMode(owner->secondPart, 2);
     if (owner->flags & UNK3BA2BC_FLAG_PENDING) {
         FUN_002bd808(owner->unk03C, owner->unk042);
         mikadoLoadSceneResources(owner);

@@ -25,7 +25,7 @@ int vec2GetYInt(...);
 int FUN_00165b08(void);
 int efctSetSpeed(void);
 float FUN_00168594(const char *, unsigned int, float);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_0017ffa8(int, int, int, int);
@@ -75,7 +75,7 @@ extern int entryListCurrentIsUsable(unsigned int);
 extern int FUN_001688c4(unsigned int);
 extern int gameGetIndexedSlotMember(unsigned int);
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_0017ffa8. */
@@ -245,7 +245,7 @@ char FUN_0014f3f4(void)
     return temp_v0;
   }
   temp_v6 = asdTMTexTableGetNode(8,0);
-  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(temp_v6 + 8));
+  renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(temp_v6 + 8));
   FUN_00157558(g_renderCtx);
   switch(*(unsigned char *)(temp_v5 + 9)) {
   case 0:
@@ -461,7 +461,7 @@ LAB_0014fe60:
         temp_v20 = (int)((unsigned long long)temp_v17 >> 0x20);
         temp_v23 = 0x3eccccce;
         temp_v21 = temp_v20;
-        FUN_0016c4b8(g_renderCtx,0);
+        renderCtxSelectTexture(g_renderCtx,0);
         VectorSignedToFloat((int)*(short *)(temp_v12 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v12 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v12 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);

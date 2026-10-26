@@ -32,12 +32,12 @@ void FUN_0023c9e8(u32, s32 kind, u32 id, s32 x, s32 y)
     s16 anchorY = sprite->y;
     const SpriteInfo *reference = asdTMTexTableEntryAt(0x15, 0x416);
     s32 centerX, centerY;
-    if (reference->size) {
-        centerX = reference->x + reference->size[0] / 2;
-        centerY = reference->y + reference->size[1] / 2;
-    } else {
+    if (!reference->size) {
         centerX = reference->x + ((reference->bounds.width & 0x7fff) >> 1);
         centerY = reference->y + ((reference->bounds.height & 0x7fff) >> 1);
+    } else {
+        centerX = reference->x + reference->size[0] / 2;
+        centerY = reference->y + reference->size[1] / 2;
     }
     const SpriteInfo *origin = asdTMTexTableEntryAt(0x15, 0x71);
     FUN_00289fa8(ui, id, 0, (f32)((anchorX - centerX) + (origin->x + x)),

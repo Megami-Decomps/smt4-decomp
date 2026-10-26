@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction scheduling only: retail loads pc, code and depth separately; armcc here merges pc and depth into one ldm. */
 #include "script/ScriptVm.h"
 
 extern "C" {

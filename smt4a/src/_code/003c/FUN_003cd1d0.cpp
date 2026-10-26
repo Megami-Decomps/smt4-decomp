@@ -1,40 +1,23 @@
-/* NON_MATCHING: instruction-identical; retail's literal pool holds two extra unreferenced words (0x634bc0) before the g_effectEditorSettings word that all three uses load. */
+#include "shard/W6_W6Match5_IndexedRecord.h"
 #include "gfx/EffectEditorStorage.h"
 extern "C" {
 
-typedef struct Owner {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s32 offset;
-    /* 0x10 */ u8 unk10[4];
-    /* 0x14 */ u32 table;
-} Owner;
+IndexedRecordBuffer *linkedFindItemByIndex(IndexedRecordList *, s32);
+void __aeabi_memcpy4(void *, const void *, u32);
+u32 FUN_003c0780(EffectEditorSnapshot *, s32);
+extern IndexedRecordSelection DAT_0059e9a8;
 
-typedef struct Child {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s32 offset;
-} Child;
-
-
-
-void *linkedFindItemByIndex(u32 table, s32 index);
-void __aeabi_memcpy4(void *dest, const void *src, u32 size);
-u32 FUN_003c0780(EffectEditorSnapshot *record, s32 arg);
-
-/* Runs FUN_003c0780 on a scratch copy of the table record for (owner, child) and writes the record back;
- * returns its result with bit 23 set when bit 0 is. */
-u32 FUN_003cd1d0(Owner *owner, Child *child)
+// Edit an indexed record through scratch storage and mark flagged results.
+u32 FUN_003cd1d0(void)
 {
-    s32 base = owner->offset;
-    void *record = linkedFindItemByIndex(owner->table, child->offset + base);
-    u32 result;
-
-    __aeabi_memcpy4(&g_effectEditorSettings, record, 0x90);
-    result = FUN_003c0780(&g_effectEditorSettings.snapshot, 1);
-    __aeabi_memcpy4(record, &g_effectEditorSettings, 0x90);
-    if (result & 1) {
+    IndexedRecordBuffer *record = linkedFindItemByIndex(
+        static_cast<IndexedRecordList *>(g_effectEditor.selection.list),
+        DAT_0059e9a8.index + g_effectEditor.selection.index);
+    __aeabi_memcpy4(&g_effectEditorSettings, record, sizeof(IndexedRecordBuffer));
+    u32 result = FUN_003c0780(&g_effectEditorSettings.snapshot, 1);
+    __aeabi_memcpy4(record, &g_effectEditorSettings, sizeof(IndexedRecordBuffer));
+    if ((result & 1) != 0)
         result |= 0x800000;
-    }
     return result;
 }
-
-} /* extern "C" */
+}

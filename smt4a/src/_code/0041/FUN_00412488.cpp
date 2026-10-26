@@ -5,9 +5,9 @@
 #include "util/CalleeContracts.h"
 #include "shard/lcgRandomRange.h"
 #include "event/2dEvent/EventEffect.h"
+#include "util/FUN_00187168.h"
 extern "C" {
 InitializedUnitStatsA *FUN_003e4d68(u32 slot);
-s32 FUN_00187168(InitializedUnitStatsA *unit);
 InitializedUnitStatsA *saveSlotFindSelected(void);
 void FUN_003f1b3c(BtlMainStateA *state, u32 message, s32 kind, u32 *text, u32 *color);
 void FUN_0047f4cc(u32 color, f32 red, f32 green, f32 blue);

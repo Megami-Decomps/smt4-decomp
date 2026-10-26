@@ -1,4 +1,4 @@
-/* NON_MATCHING: the help-state mask base uses r2 instead of retail ip, with different stack argument grouping. */
+/* NON_MATCHING: retail loads the 64-bit state flags with ldm (two words) and reaches the command word through an add #8192 base; built uses ldrd and a literal. */
 /* Starts a battle help action unless the current state suppresses help messages. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
@@ -13,14 +13,16 @@ u32 FUN_004c9474(void *owner, s32 mode, s32 id, u32 value)
 {
     BtlMainStateA *state = btlGetMainState();
     u64 flags = state->stateFlags64.bits;
-    if ((flags & ((u64)g_btlHelp.blockedStates[0] | ((u64)g_btlHelp.blockedStates[1] << 32))) == 0 &&
-        (flags & ((u64)g_btlHelp.blockedTransitions[0] | ((u64)g_btlHelp.blockedTransitions[1] << 32))) == 0) {
-        if (mode != 0) {
-            return FUN_00200a68(5, (s16)id, owner, state->commandMessage.command.currentCommand,
-                                mode, value, 7, 0);
-        }
-        return FUN_004c8e30(owner, 0, value);
+    u32 low = (u32)flags;
+    u32 high = (u32)(flags >> 32);
+    if (((g_btlHelp.blockedStates[0] & low) | (g_btlHelp.blockedStates[1] & high)) != 0 ||
+        ((low & g_btlHelp.blockedTransitions[0]) | (high & g_btlHelp.blockedTransitions[1])) != 0) {
+        return 0;
     }
-    return 0;
+    if (mode != 0) {
+        return FUN_00200a68(5, (s16)id, owner, state->commandMessage.command.currentCommand,
+                            mode, value, 7, 0);
+    }
+    return FUN_004c8e30(owner, 0, value);
 }
 }

@@ -1,20 +1,24 @@
-/* NON_MATCHING: retail issues `cmp enabled, #0` right after the bit-index `and`; armcc schedules it after the flag-byte load. */
-#include "common.h"
-#include "quest_center/qcMain.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
-extern "C" QcFlagBlock *gameGetQuestCenterBlock();
+extern "C" {
+    u8 *gameGetQuestCenterBlock(void);
+}
 
-// Update one of the 32 persistent quest bits.
-extern "C" void QcMain_SetFlag(u32 bit, s32 enabled)
+
+/* Update one of the stats block's additional 32 flags. */
+extern "C" void QcMain_SetFlag(u32 index, s32 enabled)
 {
-    if (bit >= 32)
+    if (index >= 32) {
         return;
-    QcFlagBlock *block = gameGetQuestCenterBlock();
-    u8 mask = 1 << (bit & 7);
-    u8 *flags = block->questFlags;
-    u8 *flag = &flags[bit >> 3];
-    if (enabled)
+    }
+    StatsAdditionalFlagView *stats = reinterpret_cast<StatsAdditionalFlagView *>(gameGetQuestCenterBlock());
+    u8 *bank = stats->flags;
+    u8 mask = 1 << (index & 7);
+    if (enabled) {
+        u8 *flag = &bank[index >> 3];
         *flag |= mask;
-    else
+    } else {
+        u8 *flag = &bank[index >> 3];
         *flag &= ~mask;
+    }
 }

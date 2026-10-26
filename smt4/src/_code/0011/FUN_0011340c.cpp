@@ -11,7 +11,7 @@ int FUN_002ba1e0(unsigned int);
 int FUN_002bf288(int, int, int, int, int, int, int, double);
 int FUN_002bf380(int, int, int, int, unsigned int, int);
 int efctSetSpeed(void);
-int FUN_002c1b64(int);
+int renderCtxSelectTexture(int);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
@@ -37,7 +37,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: FUN_002bf288. */
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -109,7 +109,7 @@ void FUN_0011340c(unsigned int param_1)
     VectorSignedToFloat(*(unsigned int *)(temp_v5 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v5 + 0x40) = 1;
     temp_v8 = (temp_v9 / temp_v7) / temp_v8;
-    FUN_002c1b64(g_titleScene);
+    renderCtxSelectTexture(g_titleScene);
     FUN_002ba1e0(0xffffffff);
     efctSetSpeed();
     FUN_002bf288(2,0x1d,2000,(int)temp_v6,0,0xb,temp_v10,temp_v8);

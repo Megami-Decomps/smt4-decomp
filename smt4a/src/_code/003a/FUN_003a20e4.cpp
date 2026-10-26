@@ -18,7 +18,7 @@ extern "C" {
 
 void *resourceResolveHeaderPointer(ResourceDesc *resource);
 void *resourceResolveDataPointer(ResourceDesc *resource);
-TrackObject *FUN_003a1ef4(void *header);
+TrackObject *effEmitterCreateSmall(void *header);
 void polygonTrackRebuildResources(TrackObject *track, u32 count, void *header);
 void objectBufferFree(void *buffer);
 void *FUN_002b2d74(u32 count, u32 first, void *header);
@@ -28,7 +28,7 @@ void effHolderSetParams(TrackObject *track, u32 count, void *data);
 TrackObject *FUN_003a20e4(ResourceDesc *resource)
 {
     u8 *header = (u8 *)resourceResolveHeaderPointer(resource);
-    TrackObject *track = FUN_003a1ef4(header + 0x1C);
+    TrackObject *track = effEmitterCreateSmall(header + 0x1C);
     void *data;
 
     polygonTrackRebuildResources(track, resource->count, header);

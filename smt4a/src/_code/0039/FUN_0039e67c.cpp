@@ -3,9 +3,9 @@
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(u32);
 void FUN_003f2638(BtlMainStateA *, s32, BattleRosterRecordA *, s32);
 }
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (215 vs 200 rows); retail hoists the 0x424 literal and keeps the per-row loops as separate counters */
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "util/FUN_0029ee54.h"
 
 // One animated row widget (0x8c bytes each).
 struct RowWidget {
@@ -20,7 +21,6 @@ extern "C" {
 
 void FUN_002b8ee0(void* widget, s32 arg);
 u16 FUN_002b8584(u32 group, u32 index);
-s32 FUN_0029ee54(void* list);
 s32 FUN_0029efc0(void* list);
 s32 FUN_0029efa8(void* list);
 s32 FUN_0029efd8(void* list, s32 arg);
@@ -55,8 +55,8 @@ void FUN_0019514c(u8** screenRef)
         }
         break;
     case 1: {
-        s32 count = FUN_0029ee54(list);
-        for (s32 i = 0; i < count; i = i + 1, count = FUN_0029ee54(list)) {
+        s32 count = (s32)FUN_0029ee54(list);
+        for (s32 i = 0; i < count; i = i + 1, count = (s32)FUN_0029ee54(list)) {
             u32 id = reinterpret_cast<s16*>(screen + 0x424)[i];
             void *table = dataTableGet(0x37, 0);
             TableRecord* entries = static_cast<TableRecord*>(dataTableGetEntries(table));
@@ -71,10 +71,10 @@ void FUN_0019514c(u8** screenRef)
             *reinterpret_cast<s16*>(screen + 0x34a), &flags, 0, 0);
         if (handled == 0) {
             if (FUN_0029efd8(list, 0) != 0) {
-                if (FUN_0029ee54(list) > 5) {
+                if ((s32)FUN_0029ee54(list) > 5) {
                     while (FUN_0029efc0(list) == previous) {
                         if (FUN_0029efc0(list) != 0 && FUN_0029efa8(list) == 0) break;
-                        if (FUN_0029efc0(list) == FUN_0029ee54(list) - 5 && FUN_0029efa8(list) == 4) break;
+                        if (FUN_0029efc0(list) == (s32)FUN_0029ee54(list) - 5 && FUN_0029efa8(list) == 4) break;
                         FUN_0029efd8(list, 0);
                     }
                 }

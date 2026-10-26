@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation differs (retail keeps panel in r6 with panel+0xB40 hoisted in r4 across the tab switches and rows loop); logic equivalent. */
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 class PanelWidget {
 public:
@@ -18,7 +19,6 @@ struct ListPanel {
 
 extern "C" {
 u16 *gameGetPlayerData(void);
-s32 FUN_002a482c(void *list);
 s32 FUN_0031d174(void *list);
 void FUN_0049339c(void *rect, u32 style, s32 a, s32 b, u32 context);
 void FUN_0049368c(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: module/range folding, result capture across file cleanup, stack slots and saved registers differ. */
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 #include "nn/Result.h"
+#include "util/vcallSlot12IfValid.h"
 
 extern "C" {
 s32 stringFormatBounded(char *output, u32 size, const char *format, ...);
@@ -8,7 +9,6 @@ u32 multibyteToUtf16(u16 *output, const char *input, u32 count);
 s32 wstrlenU16(const u16 *text);
 s32 archiveTryOpenFile(void **file, u32 archiveFirst, u32 archiveSecond, const ArchiveIconPath *path, u32 mode);
 s32 nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(u32 *readSize, void *file, s64 offset, void *output, u32 size);
-void vcallSlot12IfValid(void *object);
 }
 
 inline ArchiveIconFile::ArchiveIconFile() : object(NULL)
@@ -18,7 +18,7 @@ inline ArchiveIconFile::ArchiveIconFile() : object(NULL)
 inline ArchiveIconFile::~ArchiveIconFile()
 {
     if (object != NULL) {
-        vcallSlot12IfValid(object);
+        vcallSlot12IfValid((u32)(object));
     }
 }
 

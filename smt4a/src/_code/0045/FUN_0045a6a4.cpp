@@ -32,7 +32,7 @@ typedef struct {
     unsigned int sp160; /* 0x160: local_160 */
 } param_3_stack;
 
-extern unsigned char LAB_0045b30c; /* 0x45b30c */
+extern unsigned char FUN_0045b30c; /* 0x45b30c */
 extern int setFourMinus1(...); /* 0x45b510 */
 
 #ifndef ROMWRIGHT_PIECE_3_1_DEFINED
@@ -99,7 +99,7 @@ void FUN_0045a6a4(int *param_1,unsigned int *param_2,int *param_3)
       *puVar13 = 0;
       puVar13[1] = 0;
       puVar4 = puVar13 + 2;
-      __aeabi_vec_ctor_nocookie_nodtor(puVar4,&LAB_0045b30c,0x20,2);
+      __aeabi_vec_ctor_nocookie_nodtor(puVar4,&FUN_0045b30c,0x20,2);
       puVar4[0x10] = 0;
       puVar4[0x12] = 0;
       puVar4[0x13] = 0;

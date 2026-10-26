@@ -1,11 +1,11 @@
 /* NON_MATCHING: built keeps the constant 1 in a callee-saved register across the calls (and orders the two selector results differently); retail re-materialises it */
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 
 void uiQuestLoadResources(void);
 s32 FUN_0029efc0(void *selector);
-s32 FUN_0029efa8(void *selector);
 void FUN_0028fe0c(u32 id, s32 arg);
 void timerStart(void *timer, s32 a, s32 b);
 

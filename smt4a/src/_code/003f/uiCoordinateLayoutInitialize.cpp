@@ -1,6 +1,6 @@
 /* NON_MATCHING: -O2 candidate; two coordinate-conversion scratch registers/schedules and final zero/4.0f register lifetimes differ. */
-#include "shard/S1ListPanel.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct UiCoordinatePair {
     Point2 first;
@@ -25,30 +25,29 @@ struct UiCoordinateLayout {
     f32 offsetZ;
 };
 extern "C" {
-u16 *asdTMTexTableEntryAt(u32 group, s32 index);
 void sysMemClear(void *memory, u32 size);
 }
 
-static __inline const SpriteInfo *layoutSprite(s32 index)
+static __inline const TextureTableEntryIV *layoutSprite(s32 index)
 {
-    return (const SpriteInfo *)asdTMTexTableEntryAt(12, index);
+    return asdTMTexTableEntryAt(12, index);
 }
 
 extern "C" void uiCoordinateLayoutInitialize(UiCoordinateLayout *layout)
 {
     for (s32 i = 0; i < 5; ++i) {
-        const SpriteInfo *first = layoutSprite(0x8f + i);
+        const TextureTableEntryIV *first = layoutSprite(0x8f + i);
         layout->pairs[i].first.x = (f32)first->x;
         layout->pairs[i].first.y = (f32)first->y;
-        const SpriteInfo *second = layoutSprite(0x94 + i);
+        const TextureTableEntryIV *second = layoutSprite(0x94 + i);
         layout->pairs[i].second.x = (f32)second->x;
         layout->pairs[i].second.y = (f32)second->y;
     }
-    const SpriteInfo *header = layoutSprite(0x61);
+    const TextureTableEntryIV *header = layoutSprite(0x61);
     layout->header.x = (f32)header->x;
     layout->header.y = (f32)header->y;
     for (s32 i = 0; i < 3; ++i) {
-        const SpriteInfo *sprite = layoutSprite(100 - i);
+        const TextureTableEntryIV *sprite = layoutSprite(100 - i);
         layout->anchors[i].x = (f32)sprite->x;
         layout->anchors[i].y = (f32)sprite->y;
     }
@@ -56,7 +55,7 @@ extern "C" void uiCoordinateLayoutInitialize(UiCoordinateLayout *layout)
     layout->reflected.x = (layout->anchors[2].x - layout->anchors[1].x)
                        + layout->anchors[2].x;
     for (s32 i = 0; i < 4; ++i) {
-        const SpriteInfo *sprite = layoutSprite(0x65 + i);
+        const TextureTableEntryIV *sprite = layoutSprite(0x65 + i);
         layout->footer[i].x = (f32)sprite->x;
         layout->footer[i].y = (f32)sprite->y;
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail predicates the capacity load and the zeroed total on the owner check (ldrbne/movne); this build branches first. */
 #include "common.h"
 #include "status/StatusCamera.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct AppCostRecord {
     /* 0x38 */ s32 cost;
 } AppCostRecord;
 
-AppSlotOwner *dataTable40FindById(u32 id);
 AppCostRecord *appCostRecordFindById(u16 id);
 s32 flagBitIsSet(u32 bit);
 
@@ -22,7 +22,7 @@ s32 flagBitIsSet(u32 bit);
  * when `id` has no record. */
 s32 FUN_0029a924(u32 id)
 {
-    AppSlotOwner *owner = dataTable40FindById(id);
+    AppSlotOwner *owner = reinterpret_cast<AppSlotOwner *>(dataTable40FindById(id));
     if (owner != NULL) {
         s32 capacity = owner->capacity;
         s32 used = 0;

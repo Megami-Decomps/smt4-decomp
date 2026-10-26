@@ -10,7 +10,7 @@ int mtxMakeTranslation(...);
 int FUN_002b2144(...);
 int FUN_002ba1e0(...);
 int mtx44Copy(float *, unsigned int);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX33CopyAsm(...);
 int nn_math_ARMv6_MTX34CopyAsm(...);
@@ -110,7 +110,7 @@ extern int FUN_002a81a8(unsigned char *, int);
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX33CopyAsm. */
@@ -502,7 +502,7 @@ void FUN_001aad64(int param_1)
     ;
     pfVar4 = pfVar4 + 3;
   } while (temp_v11 < 4);
-  FUN_002c1b64(g_titleScene,*(unsigned int *)(param_1 + 300));
+  renderCtxSelectTexture(g_titleScene,*(unsigned int *)(param_1 + 300));
   temp_v18 = temp_v15;
   temp_v19 = temp_v16;
   temp_v20 = temp_v15;

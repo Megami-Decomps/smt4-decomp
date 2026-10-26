@@ -1,8 +1,17 @@
-/* NON_MATCHING: retail also loads the allocation's __FILE__/__LINE__ pool constants (unused) and zeroes the quaternions through a shared zero register; the rest matches; retail 61 vs built 61 rows, 77 diff lines. */
+/* NON_MATCHING: the debug trace and identity quaternions now match retail; retail copies the default color with an ldm of three words plus one ldr/str (integer) interleaved with the quaternion stores, here word-by-word. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
+#include "AsdSDK/AsdDebug.h"
+#include <string.h>
+
+static void quaternionSetIdentity(PolyVec4 *quaternion)
+{
+    memset(quaternion, 0, sizeof(*quaternion));
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
 
+extern const char DAT_00544ba8[]; /* effect source file name (__FILE__) */
 void *memAlloc(int, int, int, int size, int align, int);
 void rt_memcpy(void *dst, const void *src, int size);
 
@@ -14,6 +23,7 @@ extern PolyVec4 g_polyDefaultColor;
 PolyObject *effPolyFlashCreate(u32 kind, void *params, s32 arg)
 {
     s32 workSize = g_polyFlashKinds[kind].workSize;
+    asdDebugTrace(DAT_00544ba8, 3409);
     PolyObject *obj = (PolyObject *)memAlloc(0x10000, 0x100, 0, workSize + 0x50, 0x10, 1);
 
     obj->unk30 = -1;
@@ -24,14 +34,8 @@ PolyObject *effPolyFlashCreate(u32 kind, void *params, s32 arg)
     obj->color.y = g_polyDefaultColor.y;
     obj->color.z = g_polyDefaultColor.z;
     obj->color.w = g_polyDefaultColor.w;
-    obj->rotation0.x = 0;
-    obj->rotation0.y = 0;
-    obj->rotation0.z = 0;
-    obj->rotation0.w = 1.0f;
-    obj->rotation1.x = 0;
-    obj->rotation1.y = 0;
-    obj->rotation1.z = 0;
-    obj->rotation1.w = 1.0f;
+    quaternionSetIdentity(&obj->rotation0);
+    quaternionSetIdentity(&obj->rotation1);
     rt_memcpy(obj->work, params, workSize);
     obj->state = g_polyFlashKinds[kind].create(params, arg);
     g_polyFlashKinds[kind].start(obj);

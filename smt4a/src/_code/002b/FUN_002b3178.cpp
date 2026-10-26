@@ -13,7 +13,6 @@ struct RadialGradientWork {
 };
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 s32 FUN_001692ac(s32 first, s32 second);
 void FUN_00186940(void);
 f32 FUN_001b63b0(f32 angle);
@@ -29,7 +28,7 @@ void FUN_002b3178(RadialGradientWork *work)
     u32 color = (packed << 24) | (((packed >> 8) & 0xFF) << 16) |
                 (((packed >> 16) & 0xFF) << 8) | alpha;
     u32 rimColor = color & ~0xFF;
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     RenderCtxA *context = g_renderCtx;
     renderCtxPushA(context, FUN_001692ac(1, 0));
     f32 width = work->lastX - work->firstX;

@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match2_EmitterResources.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/Shard0035.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct PolygonTrackArguments {
     u32 format;
@@ -28,7 +29,6 @@ extern u8 DAT_005c1130[4];
 extern u8 DAT_005c1eb0[], DAT_005c1f8e[];
 void block6Free(Block6 *block);
 void asdMemFree(void *memory);
-void *memAlloc(u32 pool, u32 kind, u32 flags, u32 bytes, u32 alignment, s32 enabled);
 void sysMemClear(void *memory, u32 bytes);
 Block6 *FUN_00390164(u32 count, u32 format, const u8 *data, u32 kind, u32 stride);
 Block6 *FUN_00337f9c(u32 count, u32 first, u32 second, u32 third, const u8 *data, u32 stride);

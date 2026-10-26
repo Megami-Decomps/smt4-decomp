@@ -4,6 +4,7 @@
 #include "shard/JobWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 struct AocSystemA;
 extern "C" {
 extern AocSystemA *g_aocSystem;
@@ -15,7 +16,6 @@ void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tr
 void sysMemClear(void *memory, u32 size);
 s32 FUN_00162ea4();
 s32 aocRunByName(AocSystemA *system, u32 table, u32 file, s32 mode);
-void asdTMTexLoadMainHeap(u32 table, u32 file);
 void FUN_002897cc(JobWork *job);
 void FUN_0034da3c(JobWork *job);
 

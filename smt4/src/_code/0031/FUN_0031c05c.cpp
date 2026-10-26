@@ -1,5 +1,6 @@
 /* NON_MATCHING: compiler merges the two enable calls; retail retains distinct branches and two alignment NOPs. */
 #include "common.h"
+#include "script/ScriptArgs.h"
 
 struct BustupCutState {
     u8 unk000[0x630]; // 0x000
@@ -8,7 +9,6 @@ struct BustupCutState {
 
 extern "C" {
 extern BustupCutState* g_bustupCutAnim;
-s32 scrGetArg(u32 index);
 void FUN_002b7160(u32 job, u8 enabled);
 
 // Apply the script argument to the current bust-up animation job's enable byte.

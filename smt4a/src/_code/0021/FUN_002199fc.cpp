@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ extern unsigned int FUN_0014bf3c(short, unsigned int);
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -146,7 +146,7 @@ void FUN_002199fc(int param_1,int param_2,int param_3)
     FUN_00164b5c(2,0x1a,0xc,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v8,0x6a);
     FUN_001835b4(2,0x1a,0xd8,*(short *)(temp_v2 + 8) + temp_v1,*(short *)(temp_v2 + 10) + temp_v8,0x6a);
     temp_v3 = asdTMTexTableEntryAt(0x1a,0xdc);
-    temp_v4 = FUN_00180114(*psVar5);
+    temp_v4 = (unsigned int)FUN_00180114(*psVar5);
     textFormatBuffer(temp_v12,&LAB_00219e04,temp_v4);
     puVar7 = temp_v12;
     fontMeasureLineAdvance(puVar7,1);

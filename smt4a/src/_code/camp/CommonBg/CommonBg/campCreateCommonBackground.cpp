@@ -1,6 +1,7 @@
 #include "camp/CommonBg.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;
@@ -8,7 +9,6 @@ void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 u32 spriteHandleCreate(u32);
 void asdTextFormatStream(u32, s32, u32, s32, s32, const char *);
 void asdTMTexTableLoadSprites(u32);
-void FUN_0014afd0(u32, s32);
 s32 FUN_0031a5e4(u32 process);
 s32 FUN_0036dff4(u32 process);
 void ref208Destroy(u32 process);

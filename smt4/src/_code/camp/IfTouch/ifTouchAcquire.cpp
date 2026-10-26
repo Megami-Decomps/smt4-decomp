@@ -1,9 +1,9 @@
 #include "ui/IfTouch.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 kind);
 void memClear(void *buffer, u32 size);
 s32 FUN_00107d28(u32 process);
 void FUN_0010a2f4(u32 process);

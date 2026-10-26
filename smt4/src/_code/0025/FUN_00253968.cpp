@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/TrigF32.h"
 #include "shard/SaveWork.h"
+#include "gamedata/PlayerDataBlock.h"
 
 /* The map block's flag at +0xDC0 gates the approach-marker check. */
 struct MapBlockView {
@@ -39,7 +40,6 @@ extern "C" {
 extern GameState g_gameState;
 extern MapSceneView *g_lmapScene;
 extern EncounterTriggerState DAT_0049fa1c;
-PlayerLevelView *gameGetPlayerData(void);
 f32 mathDistanceBetweenPoints(MapVector from, MapVector to);
 f32 mathPositionHeadingDegrees(MapVector from, MapVector to);
 f32 mathAbsHeadingErrorToPoint(MapVector from, f32 heading, MapVector to);
@@ -55,7 +55,7 @@ static __inline bool isSourceApproaching(const MapVector &position)
 u32 FUN_00253968(MapEnemyEncounterView *enemy)
 {
     MapBlockView *mapBlock = reinterpret_cast<MapBlockView *>(gameGetMapBlock());
-    PlayerLevelView *player = gameGetPlayerData();
+    PlayerLevelView *player = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData());
     EncounterTriggerState *trigger = &DAT_0049fa1c;
     if (trigger->sourceActive != 0 && trigger->sourceKind != 0) {
         bool approaching = isSourceApproaching(enemy->position);

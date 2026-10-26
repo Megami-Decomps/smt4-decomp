@@ -3,6 +3,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 
 extern "C" {
 
@@ -17,9 +18,9 @@ typedef struct DevilRecord {
 } DevilRecord;
 
 typedef struct EntrySpan {
-    u32 count;
+    s32 count;
     s32 unk4;
-    u32 first;
+    s32 first;
     s32 unkC[3];
 } EntrySpan;
 
@@ -27,7 +28,6 @@ typedef struct EntrySpan {
 
 extern BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 extern s32 btlScriptResolveGroupArg(s32 group);
-extern void FUN_002499fc(s32 kind, u32 *first, u32 *count);
 extern ItemRecord *dataTable40FindById(u16 id);
 extern DevilRecord *devilGetRecord(u16 id);
 extern u32 FUN_001d2ac8(const BtlEntry *entry);
@@ -45,7 +45,7 @@ u32 FUN_002ff77c(void)
     ItemRecord *item;
 
     FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(1)), &span.first, &span.count);
-    for (i = span.first; i < static_cast<s32>(span.first + span.count); i++) {
+    for (i = span.first; i < span.first + span.count; i++) {
         entry = &btlGetMainState()->entries[i];
 
         if ((entry->flags & BTL_ENTRY_FLAG_PRESENT) == 0 && (entry->flags & BTL_ENTRY_FLAG_ACTIVE) != 0 &&

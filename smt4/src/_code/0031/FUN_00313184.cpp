@@ -1,6 +1,7 @@
 /* NON_MATCHING: operand pointer registers and the subs/subseq equality chain differ; the saved-register set and first-id argument now match. */
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
+#include "gamedata/DataTable40.h"
 
 struct CategoryEntryRecord {
     u8 unk00[0x2c];
@@ -11,7 +12,6 @@ struct CategoryOperand {
     u32 flags;
 };
 extern "C" {
-CategoryEntryRecord *dataTable40FindById(u32 id);
 s32 idIsAbove400(u32 id);
 s32 FUN_0024c52c(u32 id);
 void FUN_002497f8(CategoryOperand *first, CategoryOperand *second);
@@ -32,7 +32,7 @@ void FUN_00313184(const u16 *first, const u16 *second)
         firstSubtype = 0;
     } else {
         firstCategory = FUN_0024c52c(firstOperand->id);
-        firstSubtype = dataTable40FindById(firstOperand->id)->subtype;
+        firstSubtype = reinterpret_cast<CategoryEntryRecord *>(dataTable40FindById(firstOperand->id))->subtype;
     }
     s32 secondCategory;
     u16 secondSubtype;
@@ -41,7 +41,7 @@ void FUN_00313184(const u16 *first, const u16 *second)
         secondSubtype = 0;
     } else {
         secondCategory = FUN_0024c52c(secondOperand->id);
-        secondSubtype = dataTable40FindById(secondOperand->id)->subtype;
+        secondSubtype = reinterpret_cast<CategoryEntryRecord *>(dataTable40FindById(secondOperand->id))->subtype;
     }
     if (firstCategory == secondCategory && firstSubtype == secondSubtype)
         FUN_002497f8(firstOperand, secondOperand);

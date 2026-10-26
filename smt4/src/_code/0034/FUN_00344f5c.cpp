@@ -60,7 +60,7 @@ int FUN_003c1a2c(...);
 int FUN_003d6420(...);
 int FUN_003d6644(...);
 int FUN_003d6df0(...);
-int FUN_003d6f98(...);
+int transitionClearAxisVectors(...);
 int FUN_003d86a0(...);
 int FUN_003de758(...);
 
@@ -188,7 +188,7 @@ extern int btlSlotsGetMaxValue(int);
 /* Supplied declaration required: FUN_003d6420. */
 /* Supplied declaration required: FUN_003d6644. */
 /* Supplied declaration required: FUN_003d6df0. */
-/* Supplied declaration required: FUN_003d6f98. */
+/* Supplied declaration required: transitionClearAxisVectors. */
 extern int cameraTestDefaultPose(int);
 /* Supplied declaration required: FUN_003d86a0. */
 /* Supplied declaration required: workAdoptGlobalHandle. */
@@ -723,7 +723,7 @@ LAB_00345938:
     }
     break;
   case '\x19':
-    FUN_003d6f98(g_btlMain);
+    transitionClearAxisVectors(g_btlMain);
     break;
   case '\x1a':
     temp_v5 = param_1[2];

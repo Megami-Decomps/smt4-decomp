@@ -12,14 +12,14 @@ struct ArchiveOpenWork {
     u32 sizeHigh; // 0x18
 };
 extern "C" {
-void FUN_002e0e04(const char *path, void *convertedPath, u32 mode);
+void pathBuildWide(const char *path, void *convertedPath, u32 mode);
 s32 FUN_001883b0(void *archive, void *convertedPath, u32 mode);
 
 // Convert a path, reset archive bookkeeping and open it using the requested access mode.
 s32 FUN_002bee0c(ArchiveOpenWork *work, const char *path, s32 mode)
 {
     u8 convertedPath[500];
-    FUN_002e0e04(path, convertedPath, 1);
+    pathBuildWide(path, convertedPath, 1);
     if (path) {
         work->sizeLow = 0;
         work->sizeHigh = 0;

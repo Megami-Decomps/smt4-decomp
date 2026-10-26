@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 struct AuxiliaryResourceView {
     u8 unk0000[0x2E20];
@@ -16,7 +17,6 @@ void asdMemFree(void* memory);
 s32 textFormatBuffer(char* destination, const char* format, ...);
 char* libc_strcpy(char* destination, const char* source);
 char* FUN_00100d60(char* text, s32 character);
-u32 findRecordByKey(const char* name);
 
 // Reset the auxiliary effect slots and enqueue uncached files from the fixed effect-name table.
 u32 FUN_004f741c(BtlAuxA* auxiliary)

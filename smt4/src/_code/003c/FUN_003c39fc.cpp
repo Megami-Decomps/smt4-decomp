@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the debug battle-flag menu's list setup (title "btl Flag Menu"; items are the flag bits of the battle state and a few counters, the last item is a tail call); armcc here reloads the flag words and orders the shift/mask expressions differently (retail ands then shifts each bit, keeping zero in r7). */
 #include "common.h"
+#include "util/AsdListBoxCreateDefault.h"
 
 /* The debug menu (only the list handle). */
 struct BattleFlagMenu {
@@ -11,7 +12,6 @@ extern "C" {
 extern u32 DAT_004346e8[];
 extern s32 DAT_00439ad4;
 
-u32 asdListBoxCreateDefault(u32 owner, s32 id, s32 flag);
 void asdListBoxAddItems(u32 list, const u32 *names, s32 count);
 void asdListBoxSetByteValue(u32 list, s32 value);
 void jobSetText(u32 list, const char *text);
@@ -22,7 +22,7 @@ s32 *gameGetSlotTable(void);
 /* Fills the debug list with the battle state's flag bits and counters. */
 void FUN_003c39fc(BattleFlagMenu *menu, u8 *state)
 {
-    menu->list = asdListBoxCreateDefault(*(u32 *)(state + 0x5C), 0x73, 0);
+    menu->list = asdListBoxCreateDefault(*(u32 *)(state + 0x5C), 0x73, 0, 0);
     asdListBoxAddItems(menu->list, DAT_004346e8, 29);
     asdListBoxSetByteValue(menu->list, 1);
     jobSetText(menu->list, "btl Flag Menu");

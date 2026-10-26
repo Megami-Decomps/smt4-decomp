@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "util/CalleeContracts.h"
+#include "addon/LookupRecord.h"
 
 namespace {
 // A record of the player's party: skill ids at 0x34, a validity byte per skill at 0x44.

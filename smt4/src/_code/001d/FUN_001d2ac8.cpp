@@ -2,9 +2,9 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/Table04Record.h"
 #include "gamedata/DevilRecord.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
-Table04Record *dataTable40FindById(u32);
 }
 
 static inline bool isCategoryThreeSkill(u16 id)

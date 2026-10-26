@@ -1,10 +1,10 @@
 #include "addon/SceneResource.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern SceneResourceWork *g_sceneResourceWork;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 mode);
 void FUN_00282bfc(s32 channel, s32 value);
 void FUN_001b4fe8(u32 job);
 s32 FUN_0020ece4(u32 job);

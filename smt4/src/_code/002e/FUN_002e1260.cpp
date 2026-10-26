@@ -26,7 +26,7 @@ struct AnimationPolicyOwner {
     /* 0x30 */ u8 unk30[0x38];
     /* 0x68 */ s32 count;
 };
-extern "C" void FUN_00155650();
+extern "C" void mathClampFloat();
 extern "C" void nw_anim_PlayPolicy_Loop();
 static inline AnimationPolicyState *animationPolicyTableGet(AnimationPolicyTable *table, s32 column, s32 row)
 {
@@ -43,7 +43,7 @@ extern "C" void FUN_002e1260(AnimationPolicyOwner *owner, s32 loop)
             AnimationPolicyState *state = animationPolicyTableGet(model->table, 0, model->row);
             if (state != NULL) {
                 state->enabled = 1;
-                state->policy = loop == 0 ? FUN_00155650 : nw_anim_PlayPolicy_Loop;
+                state->policy = loop == 0 ? mathClampFloat : nw_anim_PlayPolicy_Loop;
             }
         }
     }

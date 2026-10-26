@@ -1,6 +1,7 @@
 #include "common.h"
 #include "nn/Result.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
+#include "util/PlatformResultCheck.h"
 
 extern "C" {
 
@@ -22,18 +23,12 @@ extern SettingsBlock DAT_0042f000;
 s32 FUN_0013a170(void *out, u32 size, u32 operation);
 s32 FUN_0035511c(void *object);
 
-static __inline void checkSystemQuery(s32 result, u32 site)
-{
-    if (nnResultIsFailure(result))
-        FUN_002bbb2c(result, site);
-}
-
 /* True when a value read from the system is within the stored limit. */
 u8 FUN_00359f90(void)
 {
     SystemInfo info;
     s32 result = FUN_0013a170(&info, 4, 0xD0000);
-    checkSystemQuery(result, __current_pc());
+    checkPlatformResult(result, __current_pc());
     nn_os_CriticalSection_Enter(&g_moduleCriticalSection1);
     s32 status = FUN_0035511c(&DAT_0042d000);
     if ((s32)(status & 0x80000000) < 0) {

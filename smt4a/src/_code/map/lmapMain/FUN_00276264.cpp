@@ -84,7 +84,7 @@ int FUN_00341fa4(...);
 int sub68OwnerCall3(void);
 int sub68OwnerCall4(void);
 int clearFlags310To31F(void);
-int FUN_00379be8(void);
+int naviMainEnterState4IfActive(void);
 int helpResourcesRelease(...);
 int lmapApplyMapAndArea(void);
 int uiPlayGatedActionFeedback(void);
@@ -536,7 +536,7 @@ extern int FUN_00356380(void);
 /* Supplied declaration required: FUN_00378000. */
 /* Supplied declaration required: mapEnvironmentSelectPreset. */
 /* Supplied declaration required: dataTableGetRecord23. */
-/* Supplied declaration required: FUN_00379be8. */
+/* Supplied declaration required: naviMainEnterState4IfActive. */
 /* Supplied declaration required: FUN_00379d58. */
 /* Supplied declaration required: helpResourcesRelease. */
 /* Supplied declaration required: FUN_003847d4. */
@@ -2217,7 +2217,7 @@ LAB_00278774:
       DAT_005f185c = 1;
       objectE0ResetFlags1040();
       frameTransitionSetMode(1);
-      FUN_00379be8();
+      naviMainEnterState4IfActive();
     }
     puVar19 = g_lmapMainState;
     if (puVar2[4] == 6) {

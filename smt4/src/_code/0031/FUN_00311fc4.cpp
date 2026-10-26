@@ -3,9 +3,9 @@
 #include "shard/W5_W5Match7_ScriptUnit.h"
 #include "gamedata/Table04Record.h"
 #include "gamedata/DevilRecord.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
-Table04Record *dataTable40FindById(u32 skill);
 
 // Check equipped and default demon skills for the requested encoded category.
 u32 FUN_00311fc4()

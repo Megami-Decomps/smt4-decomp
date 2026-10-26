@@ -1,8 +1,8 @@
 #include "battle/btlReflect.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void* asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 mode);
 
 // Allocate and append a cleared reflection action for the requested actor pair.
 ReflectAction* btlQueueReflectAction(ReflectContext* context, s32 actor, s32 secondary, u32 options)

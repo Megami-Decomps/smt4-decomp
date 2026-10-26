@@ -12,8 +12,8 @@ int FUN_0028c92c(...);
 int FUN_002ad314(...);
 int FUN_002aff70(...);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c1b64(unsigned int, unsigned int);
+int renderCtxApplyTransforms(...);
+int renderCtxSelectTexture(unsigned int, unsigned int);
 int modelApplyChangedCachedVector(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44MultAsm(...);
@@ -140,8 +140,8 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002ad314. */
 /* Supplied declaration required: FUN_002aff70. */
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: modelApplyChangedCachedVector. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
@@ -236,7 +236,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
   float temp_v70;
   float temp_v71 [9];
   
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   temp_v7 = param_1->field_0x4;
   if (param_1->field_0x60 < param_1->field_0x4) {
     temp_v7 = param_1->field_0x60;
@@ -263,7 +263,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
     temp_v33 = (unsigned int *)&param_1->field_0x40;
     iStack_134 = 0;
   }
-  FUN_002c1b64(g_titleScene,*(unsigned int *)&param_1[1].field_0x8);
+  renderCtxSelectTexture(g_titleScene,*(unsigned int *)&param_1[1].field_0x8);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x67,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x66,(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorUnsignedToFloat((unsigned int)param_1->field_0x65,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -392,7 +392,7 @@ void FUN_001f6b74(fn_001f6b74_arg0 *param_1)
     } while (temp_v10 < temp_v7);
   }
   FUN_002c18e4(g_titleScene);
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   return;
 }
 

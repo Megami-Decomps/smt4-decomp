@@ -2,13 +2,8 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* A placed sprite frame: offset of the sprite relative to its parent. */
-struct GridSpriteFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 struct GridDetailView {
     /* 0x0000 */ u8 unk0000[0x438];
@@ -22,7 +17,6 @@ struct GridDetailView {
 extern "C" {
 void textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, u32 flags, const char *format, u32 value);
-GridSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 void FUN_00185e84(s32 id, s32 x, s32 y, u32 flags, s32 a, s32 b);
 void largeGridDrawButtonStrip(GridDetailView *view, s32 x, s32 y, s32 slot, f32 speed);
 void statDrawClampedDelta(void *owner, s32 id, s32 x, s32 y, u32 flags, s32 arg);
@@ -42,7 +36,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
 {
     char text[84];
     s32 slot = FUN_002a4894(view->cursor);
-    GridSpriteFrame *frame = asdTMTexTableEntryAt(0x1A, slot + 0x23C);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x1A, slot + 0x23C);
     s32 button = FUN_002a4894(view->cursor) + 0x20;
     largeGridDrawButtonStrip(view, frame->x + x, frame->y + y, button, speed);
 
@@ -55,14 +49,14 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         if (mode == 1 || mode == 2 || mode == 6)
             color = GRID_COLOR_SPECIAL;
         textFormatBuffer(text, "%s", FUN_0014bd84(entry));
-        GridSpriteFrame *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
+        TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
         textDrawString(2, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 0.0f, speed);
-        GridSpriteFrame *icon = asdTMTexTableEntryAt(0x1A, 0x1A1);
+        TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1A, 0x1A1);
         FUN_00185e84(entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0, 0);
         if (recordContainsPairedId(owner, entry) == 0)
             FUN_004bd6b0(owner, entry, slot);
         statDrawClampedDelta(owner, entry, frame->x + icon->x + x, icon->y + frame->y + y, 0x74, 0);
-        GridSpriteFrame *value = asdTMTexTableEntryAt(0x1A, 0x1A6);
+        TextureTableEntryIV *value = asdTMTexTableEntryAt(0x1A, 0x1A6);
         u32 amount = FUN_004bcbb4(owner, entry);
         FUN_00180310(1, frame->x + value->x + x, value->y + frame->y + y, 1, 4, 0x79, "%d", amount);
     } else {
@@ -70,7 +64,7 @@ void FUN_003cce74(GridDetailView *view, void *owner, s32 x, s32 y, f32 speed)
         if (mode == 1 || mode == 2 || mode == 6)
             color = GRID_COLOR_SPECIAL;
         textFormatBuffer(text, "\x81\x7C \x81\x7C \x81\x7C");
-        GridSpriteFrame *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
+        TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1A, 0x1A2);
         textDrawString(3, color, text, (f32)(frame->x + label->x + x), (f32)(frame->y + label->y + y), 0.0f, 0.0f, speed);
     }
 }

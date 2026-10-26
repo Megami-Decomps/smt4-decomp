@@ -1,14 +1,14 @@
 /* Tail call into the function that follows. */
 #include "common.h"
-#include "util/CalleeContracts.h"
+#include "util/FUN_001cd3ec.h"
 
 extern "C" {
 
-void asdLoadFileAsyncWrap(void *a, u8 *b, u32 c, u32 d);
+void asdLoadFileAsyncWrap(const char *name, u8 *slot, u32 c, u32 d);
 
-void FUN_001cd3ec(u8 *a, void *b)
+void FUN_001cd3ec(void *model, const char *name)
 {
-    asdLoadFileAsyncWrap(b, a + 16, 1, 128);
+    asdLoadFileAsyncWrap(name, static_cast<u8 *>(model) + 16, 1, 128);
 }
 
 }

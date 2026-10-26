@@ -273,7 +273,7 @@ void asdLightActivate(s32 index);
 extern "C" {
 #endif
 
-void memCopy(void *src, void *dst, int size);
+void memCopy(const void *src, void *dst, int size);
 
 #ifdef __cplusplus
 }

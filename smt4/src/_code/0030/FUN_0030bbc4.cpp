@@ -1,10 +1,10 @@
 /* NON_MATCHING: register allocation: retail writes the unit pointer back into the base register (ldr r2, [r0, r2, lsl #3]!) with the flags in r2; this build keeps the pointer in r2 and the flags in r0 */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 
-extern u32 scrGetArg(s32 index);
 
 /* Script command: flags every active, visible unit with the argument's id (units 4..53) with 0x400000; returns 1. */
 u32 FUN_0030bbc4(void)

@@ -1,25 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002b6480` (_code @ 0x2b6480, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "util/FUN_002b6480.h"
 
 extern "C" {
+u32 asdLoadFileAsync(u32 first, u32 second, u32 third, u32 fourth,
+                 u32 fifth, u32 mode);
 
-int asdLoadFileAsync(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} void_stack;
-
-/* Supplied declaration required: asdLoadFileAsync. */
-
-
-void FUN_002b6480(void)
-
+u32 FUN_002b6480(u32 first, u32 second, u32 third, u32 fourth,
+                 u32 fifth)
 {
-/* irregular: 1 native warning(s); review required */
-  asdLoadFileAsync();
-  return;
+    return asdLoadFileAsync(first, second, third, fourth, fifth, 4);
 }
-
-} /* extern "C" */
+}

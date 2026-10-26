@@ -4,17 +4,17 @@
 #include "util/SlotRangeSelect.h"
 #include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
+#include "util/btlScriptResolveGroupArg.h"
 
 extern "C" {
 s32 scrGetArg(s32 index);
-u32 btlScriptResolveGroupArg(s32 group);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 /* Test whether the requested battle group contains a unit at or below the HP percentage. */
 u32 FUN_002dbc94()
 {
     s32 percentage = scrGetArg(0);
-    u32 group = btlScriptResolveGroupArg(scrGetArg(1));
+    u32 group = (u32)btlScriptResolveGroupArg(scrGetArg(1));
     s32 indices[4];
     s32 count;
     FUN_002499fc(group, indices, &count);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses vmov s0, r0 where the compiled block uses vldr s0, [r4, #12]. */
+/* NON_MATCHING: retail loads scale, converts the sample value in s0/s1, then loads the bias; the built code loads the bias before the conversion. */
 #include "shard/W5_W5Match5_TwinRecords.h"
 
 using namespace SampleRange;

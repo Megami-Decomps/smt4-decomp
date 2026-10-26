@@ -52,7 +52,7 @@ int FUN_004bd17c(...);
 int dispatchIfFound(...);
 int bitsAt60Clear(...);
 int FUN_004d0d70(void);
-int FUN_004dbdf8(...);
+int contentCountAvailableDemons(...);
 int SBORROW4(...);
 
 int uiSpriteSelectAnim(...);
@@ -397,7 +397,7 @@ extern int FUN_004dad8c(int);
 /* Supplied declaration required: fusionClassifyRecipeAvailability. */
 /* Supplied declaration required: fusionListAvailableSpecialRecipes. */
 extern int FUN_004db65c(int, unsigned short, unsigned short, int *);
-/* Supplied declaration required: FUN_004dbdf8. */
+/* Supplied declaration required: contentCountAvailableDemons. */
 /* Supplied declaration required: wordAt1B0Clear. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -3039,7 +3039,7 @@ LAB_001f9868:
       }
       FUN_00408184(0x26,1);
       temp_v4 = *piVar19;
-      FUN_004dbdf8(temp_v4,piVar19 + 0x23df);
+      contentCountAvailableDemons(temp_v4,piVar19 + 0x23df);
       countersRaiseA(4,temp_v4);
       FUN_002a6894(temp_v5);
       FUN_00334694((short)piVar3[0x148e]);

@@ -5,9 +5,9 @@
 
 extern "C" {
 
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_0019e3d0(unsigned int);
-int FUN_001a1ea8(unsigned int);
+int mathInterpolatePackedTable(unsigned int);
 int FUN_002c0fc4(void);
 int FUN_003578a0(void);
 int FUN_00377c60(void);
@@ -36,9 +36,9 @@ extern int DAT_005f1c00; /* 0x5f1c00 */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
-/* Supplied declaration required: FUN_001a1ea8. */
+/* Supplied declaration required: mathInterpolatePackedTable. */
 /* Supplied declaration required: FUN_002c0fc4. */
 /* Supplied declaration required: FUN_003578a0. */
 /* Supplied declaration required: FUN_00377c60. */
@@ -82,7 +82,7 @@ unsigned int FUN_002bc62c(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    FUN_0016c4b8(g_renderCtx,0);
+    renderCtxSelectTexture(g_renderCtx,0);
     FUN_002c0fc4();
     temp_v3 = g_renderCtx;
     piVar7 = (int *)(g_renderCtx + 0x1258);
@@ -106,7 +106,7 @@ unsigned int FUN_002bc62c(void)
       (**(romwright_code **)(temp_v3 + 0x1274))();
       *(unsigned char *)(temp_v3 + 0x1270) = 0;
     }
-    FUN_0016c4b8(g_renderCtx,0);
+    renderCtxSelectTexture(g_renderCtx,0);
     FUN_00377c60();
     temp_v3 = g_renderCtx;
     piVar7 = (int *)(g_renderCtx + 0x1258);
@@ -129,7 +129,7 @@ unsigned int FUN_002bc62c(void)
     }
     temp_v6 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = VectorFloatToUnsigned(temp_v6 * 2184.5f,3);
-    FUN_001a1ea8(temp_v7 & 0xffff);
+    mathInterpolatePackedTable(temp_v7 & 0xffff);
     temp_v1 = g_renderCtx;
     temp_v0 = FUN_001692ac(5,0);
     piVar7 = (int *)(temp_v1 + 0x1258);
@@ -184,7 +184,7 @@ unsigned int FUN_002bc62c(void)
     *(float *)(temp_v3 + 0xe8) = temp_v6;
     temp_v7 = *(unsigned int *)(temp_v3 + 0xe4);
     temp_v2 = asdTMTexTableGetHeaderValue(8,2);
-    FUN_0016c4b8(g_renderCtx,temp_v2);
+    renderCtxSelectTexture(g_renderCtx,temp_v2);
     temp_v1 = g_renderCtx;
     temp_v3 = packNibblesAndByte(6, 7, 0);
     piVar7 = (int *)(temp_v1 + 0x12b8);

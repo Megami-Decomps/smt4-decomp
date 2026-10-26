@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_00409724[]; /* "c:\\SMT4\\XRD686\\sdds4\\Patch\\AsdSDK\\Source\\Snd\\AsdSoundSystem.cpp": __FILE__ */
@@ -9,7 +10,6 @@ extern u8 DAT_004e315c; /* nn::os::CriticalSection guarding the sound layer */
 
 void nn_os_CriticalSection_Enter(void *lock);
 void nn_os_CriticalSection_Leave(void *lock);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdMemoryAllocAligned(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront);
 u32 soundBlockGetPayloadEnd(const void *data);
 void FUN_00129020(const void *data);

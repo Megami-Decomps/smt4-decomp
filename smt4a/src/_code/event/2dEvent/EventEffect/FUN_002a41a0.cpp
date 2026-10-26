@@ -1,10 +1,11 @@
-/* NON_MATCHING: switch uses comparison tree rather than retail jump table; fade arithmetic scheduling differs. */
+/* NON_MATCHING: jump table now matches; retail reads the filter textures through their own literal (DAT_0057f3e8, not a g_eventEffect offset) and uses bhi for the fade-out test; fade division register choice differs. */
 #include "event/2dEvent/EventFilter.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
+extern EventFilterTexture DAT_0057f3e8[6];
 f32 FUN_001bbf0c(f32);
 
 // Advance the filter's texture loading, fade-in, pulse and fade-out phases.
@@ -14,9 +15,11 @@ u32 FUN_002a41a0(void)
     switch (work->state) {
     case 0:
         if (work->texture < 6 && asdTMTexTableNodeIsLoaded(
-                g_eventEffect.filterTextures[work->texture].table,
-                g_eventEffect.filterTextures[work->texture].node))
+                DAT_0057f3e8[work->texture].table,
+                DAT_0057f3e8[work->texture].node))
             work->state = 1;
+        break;
+    case 1:
         break;
     case 2:
         if (work->duration > 0 && FUN_00203d74() == 0) {
@@ -37,7 +40,7 @@ u32 FUN_002a41a0(void)
     case 4:
         if (work->duration > 0 && FUN_00203d74() == 0) {
             work->opacity = (f32)(work->duration - work->frame) / (f32)work->duration;
-            if (work->opacity > 0.0f)
+            if (!(work->opacity <= 0.0f))
                 break;
         }
         work->state = 5;

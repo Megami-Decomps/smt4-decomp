@@ -4,7 +4,6 @@
 
 struct Source4C;
 extern "C" {
-Table04ExtraRecord *dataTable41FindById(u32 skill);
 Source4C *FUN_003f0e20(BtlMainStateA *battle, u32 unit);
 void source4CCopyHalves(Source4C *source, u16 *skills);
 s32 lcgRandomRange(u32 maximum);

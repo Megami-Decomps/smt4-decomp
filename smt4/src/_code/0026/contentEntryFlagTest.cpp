@@ -1,5 +1,6 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
@@ -20,7 +21,6 @@ typedef s32 Compare0026a794(const Entry0026a794 *a, const Entry0026a794 *b);
 typedef struct AocSystem0026a794 AocSystem0026a794;
 
 Entry0026a794 *recordTableFindById(AocSystem0026a794 *aoc, u32 id);
-Record0026a794 *dataTable40FindById(u32 id);
 void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
 Entry0026a794 *libc_bsearch(const Entry0026a794 *key, const Entry0026a794 *base, u32 count, u32 size, Compare0026a794 *compare);
@@ -55,7 +55,7 @@ u32 contentEntryFlagTest(u32 id)
             return ~(entry->flags >> 30) & 1;
         }
     } else {
-        record = dataTable40FindById(id);
+        record = reinterpret_cast<Record0026a794 *>(dataTable40FindById(id));
         if (record != NULL) {
             return (record->flags >> 31) + 1;
         }

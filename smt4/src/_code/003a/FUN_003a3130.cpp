@@ -1,5 +1,6 @@
 /* NON_MATCHING: same state machine; armcc hoists the constants 5 and 2 into callee-saved registers (push r4-r8) where retail keeps only 5 in r5 and loads 2 inline, so frame, register numbers and tail merging differ. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct ScriptProcess {
     /* 0x000 */ u8 unk000[0x108];
@@ -33,7 +34,6 @@ u32 gameSlotTableGetHeader(void);
 void slotSetRequest(s32 slot, s32 kind, s32 value);
 s32 screenFadeIsBusy(void);
 void FUN_0029cc44(s32 value);
-void asdLoadFileAsyncSimple(const char *path, void *destination, s32 flags);
 ScriptProcess *FUN_00297060(void *file, u32 owner);
 }
 
@@ -72,8 +72,8 @@ extern "C" void FUN_003a3130(ShopExit *exit)
         }
         break;
     case 2:
-        asdLoadFileAsyncSimple("battle/Result.bf", &exit->resultData, 0);
-        asdLoadFileAsyncSimple("battle/ResultMsg.mbm", &exit->resultMessages, 0);
+        asdLoadFileAsyncSimple("battle/Result.bf", reinterpret_cast<u32 *>(&exit->resultData), 0);
+        asdLoadFileAsyncSimple("battle/ResultMsg.mbm", reinterpret_cast<u32 *>(&exit->resultMessages), 0);
         exit->state = 3;
         break;
     case 3:

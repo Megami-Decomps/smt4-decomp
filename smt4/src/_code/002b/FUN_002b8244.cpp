@@ -1,19 +1,28 @@
-/* NON_MATCHING: compiler schedules the prologue, loads and argument setup differently from retail. */
+/* NON_MATCHING: retail forms state+0x400 once for the timer store (add r2,r1,#1024; strh [r2,#188]) and keeps zero in r3; the build addresses the timer through a pool-literal offset register. */
 #include "common.h"
 
-namespace { struct Help { u8 padding[0x4b8]; u16 counter; u8 reserved[2]; u16 duration; u8 unused[9]; u8 mode; }; struct Owner { u8 padding[0x44]; Help *help; }; }
+namespace {
+struct ButtonHelpState {
+    u8 unk000[0x4B8];
+    u32 counter;        // 0x4B8
+    u16 timer;          // 0x4BC
+    u8 resetState[9];   // 0x4BE
+    u8 enabled;         // 0x4C7
+};
+struct ButtonHelpGlobal { u32 unk00; ButtonHelpState *state; };
+}
 
 extern "C" {
-extern Owner *g_buttonHelp;
-void FUN_002ae028(void *context);
-void FUN_002b8244(u32 mode)
+extern ButtonHelpGlobal g_buttonHelp;
+void FUN_002ae028(u8 *state);
+void FUN_002b8244(s32 enabled)
 {
-    Help *help = g_buttonHelp->help;
-    help->mode = mode;
-    if (mode != 0) {
-        help->counter = 0;
-        help->duration = 400;
-        FUN_002ae028((u8 *)help + 0x400);
+    ButtonHelpState *state = g_buttonHelp.state;
+    state->enabled = (u8)enabled;
+    if (enabled != 0) {
+        state->counter = 0;
+        state->timer = 0;
+        FUN_002ae028(state->resetState);
     }
 }
 }

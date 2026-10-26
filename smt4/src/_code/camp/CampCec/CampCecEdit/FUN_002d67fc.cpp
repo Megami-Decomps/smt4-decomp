@@ -13,7 +13,7 @@ int asdLoadFileAsyncSimple(...);
 int gameGetUnitRecord(...);
 int buttonHelpSetPreset(...);
 int positionStateSet(...);
-int FUN_002bd82c(...);
+int asdTextSetBaseColor(...);
 int rt_aeabi_memclr(...);
 int memClear(void);
 int asdMemAlloc(int, int, int, int, int);
@@ -65,7 +65,7 @@ extern int gameGetSlotTable(void);
 extern unsigned int gameGetPlayerData(void);
 /* Supplied declaration required: buttonHelpSetPreset. */
 /* Supplied declaration required: positionStateSet. */
-/* Supplied declaration required: FUN_002bd82c. */
+/* Supplied declaration required: asdTextSetBaseColor. */
 extern unsigned int asdTextCreate(unsigned int);
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: memClear. */
@@ -158,7 +158,7 @@ void FUN_002d67fc(unsigned char param_1)
   asdLoadFileAsyncSimple(&LAB_002d6cfc,puVar1 + 0x2b,0);
   temp_v0 = asdTextCreate(0);
   puVar1[0x2c] = temp_v0;
-  FUN_002bd82c(temp_v0,0xff);
+  asdTextSetBaseColor(temp_v0,0xff);
   positionStateSet(puVar1[0x2c],0,0x646464ff);
   buttonHelpSetPreset(0xb1);
   temp_v4 = 0;

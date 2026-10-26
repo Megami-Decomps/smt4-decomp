@@ -1,13 +1,19 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0037e0a4's literal pool; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_003f732c for reference (not compiled; its own view of the boundaries):
-
-void FUN_003f732c(unsigned int *param_1)
-
-{
-  param_1[1] = param_1 + 1;
-  *param_1 = 0;
-  param_1[2] = param_1 + 1;
-  return;
-}
-*/
 #include "common.h"
+
+struct ValueLink {
+    ValueLink *next;
+};
+
+struct LinkedValue {
+    /* 0x00 */ u32 value;
+    /* 0x04 */ ValueLink head;
+    /* 0x08 */ ValueLink *tail;
+};
+
+/* Clears the value and initializes the empty chain's two links. */
+extern "C" void FUN_003f732c(LinkedValue *value)
+{
+    value->head.next = &value->head;
+    value->value = 0;
+    value->tail = &value->head;
+}

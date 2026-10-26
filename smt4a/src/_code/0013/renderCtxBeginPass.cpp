@@ -8,7 +8,6 @@ extern "C" {
 int FUN_0017dd80(void);
 int renderTargetClear(int a, int b);
 int FUN_00144ab4(int arg);
-int FUN_00157558(RenderCtxA *ctx);
 int FUN_001575cc(RenderCtxA *ctx);
 
 extern s8 g_titleFlags[];

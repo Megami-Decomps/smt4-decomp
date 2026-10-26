@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -46,7 +47,6 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00164b5c. */
 extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
-extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -187,7 +187,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
         FUN_001835b4(2,0x1a,0x69,*(short *)(temp_v2 + 8) + param_1,*(short *)(temp_v2 + 10) + param_2,
                      0xc9);
         temp_v4 = asdTMTexTableEntryAt(0x1a,0x6e);
-        temp_v6 = FUN_00180114(*puVar6);
+        temp_v6 = (unsigned int)FUN_00180114(*puVar6);
         textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v4 + 10) + param_2,
                             (unsigned char)(in_fpscr >> 0x16) & 3);
@@ -318,7 +318,7 @@ void FUN_002aa56c(int param_1,int param_2,unsigned int param_3,int param_4,unsig
                (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v1 + 8) + param_1,
                (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,0xe2);
   temp_v1 = asdTMTexTableEntryAt(0x1a,0x83);
-  temp_v6 = FUN_00180114(*puVar6);
+  temp_v6 = (unsigned int)FUN_00180114(*puVar6);
   textFormatBuffer(temp_v9,&LAB_002aaf78,temp_v6);
   temp_v2 = (int)*(short *)(temp_v1 + 8);
   VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v1 + 10) + param_2,

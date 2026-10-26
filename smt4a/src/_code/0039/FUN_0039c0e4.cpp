@@ -3,12 +3,12 @@
 #include "gfx/SecondaryResourceWork.h"
 #include "shard/W5_W5Match7_ResourceHandles.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 void ifTouchRegionRemove(void);
 void asdTMTexTableReleaseNode(s32, s32);
 void scrScriptProcessDestroy(void *);
-void asdMemFree(void *);
 void jobStop(u32, s32);
 void asdOperatorDelete(void *);
 
@@ -16,12 +16,12 @@ void asdOperatorDelete(void *);
 void FUN_0039c0e4(void)
 {
     SecondaryResourceWork *work = (SecondaryResourceWork *)g_engineResourceHandles.secondary;
-    for (s32 i = 0; i < work->touchRegionCount; ++i) {
+    for (s32 i = 0; i < work->touchRegionCount; i++) {
         ifTouchRegionRemove();
     }
     asdMemFreeSlot(reinterpret_cast<void **>(work->memorySlot));
     work->memorySlot = 0;
-    for (s32 i = 0; i < 2; ++i) {
+    for (s32 i = 0; i < 2; i++) {
         asdTMTexTableReleaseNode(0x31, i);
     }
     asdTMTexTableFreeEntry(0x31);

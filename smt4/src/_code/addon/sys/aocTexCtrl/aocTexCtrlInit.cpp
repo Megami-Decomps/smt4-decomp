@@ -1,10 +1,10 @@
 #include "addon/sys/aocTexCtrl.h"
 
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
 void FUN_003934d0(AocTexCtrl *ctrl);
 
 /* Allocates the controller's state block on first use and clears it. */

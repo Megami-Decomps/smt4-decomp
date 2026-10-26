@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail ldr r5, [pc, #128] differs from recovered ldr r5, [pc, #96]. */
 #include "common.h"
 
 namespace {
@@ -29,10 +28,11 @@ extern "C" void FUN_003856f8(u32 mode)
         return;
     }
 
+    s32 flagSet = gameFlagIsSet(0x4c9);
     f32 amount = 0.0f;
-    if (gameFlagIsSet(0x4c9) != 0 && FUN_002e5db4() == 0) {
-        mode = 3;
-        amount = 10.0f;
+    if (flagSet != 0 && FUN_002e5db4() == 0) {
+        FUN_003fd7c0(g_lmapScene->unk18C->unk04, 3, 2, 10.0f);
+        return;
     }
 
     FUN_003fd7c0(g_lmapScene->unk18C->unk04, mode, 2, amount);

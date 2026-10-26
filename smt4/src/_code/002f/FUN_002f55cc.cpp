@@ -18,7 +18,7 @@ extern u8 DAT_004651e8;
 FileResult FUN_0024ab94(FileObject *file, s32 path, u32 mode);
 FileResult FUN_001ff93c(FileObject *file);
 FileResult FUN_002cbfe8(FileObject *file);
-FileResult FUN_001ffaf0(void);
+FileResult requestSubmitRecordById(void);
 FileResult FUN_002cbe94(FileObject *file, s32 path, u32 size);
 FileResult FUN_00220330(FileObject *file);
 FileResult FUN_002e1380(void);
@@ -64,7 +64,7 @@ u32 FUN_002f55cc(s32 media, s32 path, u32 buffer, u32 size)
         result = FUN_002cbfe8(&file);
         break;
     case 3:
-        result = FUN_001ffaf0();
+        result = requestSubmitRecordById();
         break;
     }
     if (isRetryable(result) || nnResultIsFailure(result)) {

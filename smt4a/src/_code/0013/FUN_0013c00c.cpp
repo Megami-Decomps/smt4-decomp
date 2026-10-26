@@ -6,7 +6,6 @@ extern "C" {
 extern W6Match3SlotState DAT_006357d8[2];
 extern RenderCtxA *g_renderCtx;
 u32 FUN_001692ac(u32 kind, bool enabled);
-void FUN_0016c4b8(RenderCtxA *context, void *preset);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_0014e314(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
@@ -24,7 +23,7 @@ void FUN_0013c00c(s32 index)
         color = (color & 0xFFFFFF00) | alpha;
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, FUN_001692ac(1, false));
-        FUN_0016c4b8(g_renderCtx, NULL);
+        renderCtxSelectTexture(g_renderCtx, NULL);
         f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_renderCtx->stereoMode));
         f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode));
         FUN_0014e314(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);

@@ -1,20 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a2164` (_code @ 0x2a2164, 0x10 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct LinkListNode {
+    LinkListNode* previous; // 0x00
+    LinkListNode* next;     // 0x04
+};
+
+struct LinkListImpl {
+    u32 count;             // 0x00
+    LinkListNode sentinel; // 0x04
+};
+
+struct ListEntry {
+    u32 unk00;             // 0x00
+    LinkListNode node;      // 0x04
+};
 
 extern "C" {
+LinkListNode* nw_ut_internal_LinkListImpl_insert(
+    LinkListImpl* list, LinkListNode* position, LinkListNode* node);
 
-int nw_ut_internal_LinkListImpl_insert(int, int, int);
-
-/* Supplied declaration required: nw_ut_internal_LinkListImpl_insert. */
-
-
-void FUN_002a2164(int param_1,int param_2)
-
+// Insert `e` into the list before `position`.
+static LinkListNode* listInsert(LinkListImpl* list, LinkListNode* position, ListEntry* e)
 {
-/* irregular: 1 native warning(s); review required */
-  nw_ut_internal_LinkListImpl_insert(param_1,param_1 + 4,param_2 + 4);
-  return;
+    return nw_ut_internal_LinkListImpl_insert(list, position, &e->node);
 }
-
-} /* extern "C" */
+void FUN_002a2164(LinkListImpl* list, ListEntry* entry)
+{
+    listInsert(list, &list->sentinel, entry);
+}
+}

@@ -1,5 +1,5 @@
-/* NON_MATCHING: retail allocation sites retain source-file/line diagnostic setup and NOPs. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 u32 FUN_001aeecc(const u8 *source);
@@ -19,14 +19,18 @@ u8 *FUN_001ba204(u8 *source, u32 flags, u32 argument)
         if (size != 0) {
             if (flags & 1) {
                 if (flags & 2) {
+                    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 492);
                     output = asdMemoryAllocAligned(0x10000, 0x100, 0, size, argument, 0);
                 } else {
+                    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 496);
                     output = asdMemoryAllocAligned(0x10000, 0x100, 0, size, argument, 1);
                 }
             } else {
                 if (flags & 2) {
+                    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 503);
                     output = asdMemoryAllocAligned(0x100, 0x100, 0, size, argument, 0);
                 } else {
+                    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 507);
                     output = asdMemoryAllocAligned(0x100, 0x100, 0, size, argument, 1);
                 }
             }

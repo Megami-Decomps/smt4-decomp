@@ -5,7 +5,7 @@ struct BattleCameraSnapshot;
 extern "C" {
 void __aeabi_memcpy4(void* destination, const void* source, u32 size);
 void FUN_003f0c78(BtlMainStateA* battle);
-void FUN_003f0b80(const BattleCameraSnapshot* snapshot);
+void battleRestoreCameraVectors(const BattleCameraSnapshot* snapshot);
 
 // Load the camera snapshot and the bounded combatant cache from a versioned file.
 void FUN_004f5144(const BattleRosterCacheConfig* config, BtlMainStateA* battle,
@@ -33,6 +33,6 @@ void FUN_004f5144(const BattleRosterCacheConfig* config, BtlMainStateA* battle,
     }
     __aeabi_memcpy4(battle->rosterCache.entries, payload, count * sizeof(BattleRosterCacheEntry));
     FUN_003f0c78(battle);
-    FUN_003f0b80(reinterpret_cast<const BattleCameraSnapshot*>(battle));
+    battleRestoreCameraVectors(reinterpret_cast<const BattleCameraSnapshot*>(battle));
 }
 }

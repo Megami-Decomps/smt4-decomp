@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003291dc` (_code @ 0x3291e0, 0x978 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 
@@ -67,7 +68,6 @@ extern int useCounterIsFinished(void);
 /* Supplied declaration required: FUN_0029eb5c. */
 /* Supplied declaration required: FUN_0029ede8. */
 extern int FUN_0029ee54(int);
-extern int FUN_0029efa8(int);
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: FUN_0029efd8. */
 /* Supplied declaration required: uiScrollHandleActionsOrTouch. */
@@ -152,7 +152,7 @@ unsigned int FUN_003291dc(int *param_1)
           temp_v6 = 0xa0;
           uiPointerHitsRect(0xa0,0x30,200,0x20,2);
           if (temp_v6 != 0) {
-            temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
+            temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
             temp_v6 = temp_v4 - 1;
             if (temp_v4 - 1 < 0) {
               temp_v6 = 0;
@@ -164,7 +164,7 @@ unsigned int FUN_003291dc(int *param_1)
             if (temp_v6 == 0) {
               return 0;
             }
-            temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
+            temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
             temp_v2 = FUN_0029ee54(temp_v7 + 0x10);
             temp_v6 = temp_v4 + 1;
             if (temp_v2 <= temp_v4 + 1) {
@@ -226,7 +226,7 @@ unsigned int FUN_003291dc(int *param_1)
       return 0;
     }
     temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
-    temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
+    temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
     temp_v6 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
     temp_v6 = appTryPurchase(temp_v6,0,0);
     if (temp_v6 == 0) {
@@ -296,7 +296,7 @@ unsigned int FUN_003291dc(int *param_1)
     FUN_002c1658(0,1);
     if (temp_v6 != 0 || temp_v12[0] != '\0') {
       temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
-      temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
+      temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
       temp_v4 = *(int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74);
       temp_v6 = appTryPurchase(temp_v4,0,1);
       if (temp_v6 == 0) {
@@ -361,7 +361,7 @@ unsigned int FUN_003291dc(int *param_1)
       }
       else {
         temp_v6 = FUN_0029efc0(temp_v7 + 0x10);
-        temp_v4 = FUN_0029efa8(temp_v7 + 0x10);
+        temp_v4 = FUN_0029efa8((const void *)(temp_v7 + 0x10));
         appTryPurchase(*(unsigned int *)(temp_v7 + (temp_v4 + temp_v6) * 4 + 0x74),0,0);
         eventQueueAddUnique(0x100025c);
         FUN_00248738(temp_v7,5);

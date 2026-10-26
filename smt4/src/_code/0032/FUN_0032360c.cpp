@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail walks the offset tables with the three arguments saved in r4-r6, rebuilds the self-relative pointers inline per step and keeps the UV transform in s-registers across the walk; this build recomputes them in a different order (about 250 diff lines). */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* Resolves a self-relative offset field of the model resource format (0 = absent). */
 static __inline void *resolveOffset(const s32 *field)
@@ -94,7 +95,6 @@ struct TextureSource {
 };
 
 extern "C" {
-void FUN_002c2424(void *data, u32 size);
 void FUN_003409f8(TextureSource *source, f32 *scale, f32 *offset);
 void nw_gfx_res_ResTextureMapper_SetTexture(void **mapper, u32 texture);
 
@@ -137,7 +137,7 @@ void FUN_0032360c(ResModelOwner *owner, TextureSource *source, UvTextureRequests
                             uv[0] += transform.offsetU;
                             uv[1] += transform.offsetV;
                         }
-                        FUN_002c2424(resolveOffset(&block->dataOffset), block->dataSize);
+                        FUN_002c2424((u32)(resolveOffset(&block->dataOffset)), block->dataSize);
                     }
                     break;
                 }

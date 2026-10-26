@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Gfx/Effect/EffectBounds.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
 
 struct EffectTargetConfigurationViewIV {
     u8 unk00[4];
@@ -27,7 +28,6 @@ static inline s32 effectTargetNextSize(u16 dimension)
 
 extern "C" {
 TextureUploadResourcePrefixIV *FUN_002d5a08(s32 width, s32 height, u32 parameter, u32 format, u32 type, u32 depthFormat, u32 flags);
-MemoryAllocator *asdMemoryGetAllocatorA(void);
 TextureObject *FUN_0036ec8c(const TextureCreateInfoIV *info, MemoryAllocator *allocator);
 void FUN_002bd498(TextureObject **object, MemoryAllocator *allocator, u32 flags);
 void FUN_003407d0(EffectBoundsSource *source, const EffectTargetConfigurationViewIV *configuration);
@@ -57,7 +57,7 @@ void FUN_00340ad4(EffectBoundsSource *source, u32 parameter, u32 flags, const Ef
     }
     TextureBindingPrefixIV *binding = (TextureBindingPrefixIV *)source;
     binding->resource = FUN_002d5a08(width, height, parameter, 0x1908, 0x8033, 0x81A5, flags);
-    MemoryAllocator *allocator = asdMemoryGetAllocatorA();
+    MemoryAllocator *allocator = reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA());
     TextureCreateInfoIV info;
     info.unk08 = 0;
     info.unk0C = 0x02020000;
@@ -68,7 +68,7 @@ void FUN_00340ad4(EffectBoundsSource *source, u32 parameter, u32 flags, const Ef
     info.width = binding->resource->texture->dimensions.width;
     info.height = binding->resource->texture->dimensions.height;
     binding->object = FUN_0036ec8c(&info, allocator);
-    FUN_002bd498(&binding->object, asdMemoryGetAllocatorA(), 0);
+    FUN_002bd498(&binding->object, reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA()), 0);
     FUN_003407d0(source, configuration);
 }
 }

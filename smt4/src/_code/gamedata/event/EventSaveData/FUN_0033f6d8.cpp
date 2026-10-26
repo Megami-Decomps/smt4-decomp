@@ -2,16 +2,16 @@
 #include "gamedata/event/EventSaveData.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/gameGetFlagBlock.h"
 
 extern "C" {
-GameSaveData *gameGetFlagBlock(void);
 void *asdMemoryAlloc(s32, s32, s32, u32, s32);
 void *rt_memcpy(void *, const void *, u32);
 
 // Allocate a snapshot of the event save-data block.
 EventSaveData *FUN_0033f6d8(void)
 {
-    GameSaveData *save = gameGetFlagBlock();
+    GameSaveData *save = reinterpret_cast<GameSaveData *>(gameGetFlagBlock());
     u32 size = sizeof(EventSaveData);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\event\\EventSaveData.cpp", 0x79);
     EventSaveData *snapshot = (EventSaveData *)asdMemoryAlloc(

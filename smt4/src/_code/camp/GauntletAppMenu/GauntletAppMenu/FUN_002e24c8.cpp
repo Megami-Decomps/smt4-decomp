@@ -7,6 +7,7 @@
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "bible/bibleAnalyze.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
 
@@ -16,9 +17,6 @@ u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 argument, void
 s32 gameFlagIsSet(u32 flag);
 void FUN_00248738(GauntletAppMenuWork *menu, s32 mode);
 s32 fileSlotLoad(s32 id);
-u32 dataTableGet(u32 table, u32 index);
-const void *dataTableGetEntries(void);
-u32 dataTableGetCount(u32 table);
 void drawParameterBlockClear(u8 *block);
 
 void FUN_002bd954(GauntletSprite *sprite, s32 group, s32 id, u8 *params, f32 scale, s32 layer);
@@ -65,8 +63,8 @@ u32 FUN_002e24c8(void)
     }
     FUN_00248738(menu, 0);
     fileSlotLoad(13);
-    u32 table = dataTableGet(13, 0);
-    menu->list.table = dataTableGetEntries();
+    void *table = dataTableGet(13, 0);
+    menu->list.table = dataTableGetEntries(table);
     menu->list.tableCount = dataTableGetCount(table);
     drawParameterBlockClear(menu->list.params);
     paramsInit(reinterpret_cast<UiResourceParameters *>(menu->list.params), DAT_004028f0.first, 0x24, DAT_004028f0.second, 0x30, NULL, 0, NULL, 0,

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BattleTiming.h"
+#include "shard/lcgRandomRange.h"
 
 extern "C" {
 
@@ -39,7 +40,6 @@ extern unsigned int DAT_00571174; /* 0x571174 */
 extern unsigned int g_btlUiBlock; /* 0x57a9c8 */
 
 extern int randRange(unsigned int);
-extern int lcgRandomRange(unsigned int);
 /* Supplied declaration required: dataTable04FindById. */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_004a9308. */

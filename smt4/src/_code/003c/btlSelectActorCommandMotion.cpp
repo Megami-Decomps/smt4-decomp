@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 struct BtlTurnState {
     /* 0x0000 */ u8 unk0000[0xe0];
@@ -32,7 +33,6 @@ struct BtlSkillRecord {
 
 extern "C" {
 BtlItemRecord *dataTable08Sub1GetRecord(s32 id);
-BtlSkillRecord *dataTable40FindById(s32 id);
 
 /* Picks the actor's motion: 1 when forced, 22 under flag 0x4000000, else the commanded skill's motion when above 1. */
 void btlSelectActorCommandMotion(BtlTurnState **state, BtlTurnActor *actor, s32 forced)
@@ -77,7 +77,7 @@ void btlSelectActorCommandMotion(BtlTurnState **state, BtlTurnActor *actor, s32 
         return;
     }
     if (skillId > 0) {
-        skill = dataTable40FindById(skillId);
+        skill = reinterpret_cast<BtlSkillRecord *>(dataTable40FindById(skillId));
         if (skill != NULL && skill->motion != 1 && skill->motion != 0) {
             actor->motion = skill->motion;
         }

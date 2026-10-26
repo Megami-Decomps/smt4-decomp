@@ -1,10 +1,10 @@
 /* NON_MATCHING: debug trace and allocation now match; retail zeroes the two rotation vectors with integer stores (str r1) before writing w = 1.0f, the build stores float zeros through VFP and merges them into vstm. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonTex.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, int size);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
 void *resourceResolveHeaderPointer(PolyTexDesc *desc);

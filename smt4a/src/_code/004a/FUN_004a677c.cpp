@@ -1,5 +1,6 @@
 /* NON_MATCHING: count and item-base registers swap (r6/r7), and retail re-extends the loaded id with uxth. */
 #include "gamedata/PartySlots.h"
+#include "util/FUN_002a482c.h"
 
 /* One row of the menu's devil list. */
 struct DevilListItem {
@@ -27,7 +28,6 @@ void FUN_004a580c(DevilListMenu *menu);
 void FUN_004a5d5c(DevilListMenu *menu);
 void words4At20Clear(PartySlots *party);
 s32 rangeGetMinimumLimit(u8 *range);
-u32 FUN_002a482c(u8 *range);
 void partyIdsActivateEntry(PartySlots *party, u32 id);
 void FUN_004a6cfc(PartySlots *party);
 u32 shopListItemGetId(const DevilListItem *item);

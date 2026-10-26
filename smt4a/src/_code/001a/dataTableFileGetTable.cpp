@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/dataTableFileGetTable.h"
 
 extern "C" {
 
@@ -17,8 +18,9 @@ typedef struct DataTableFile {
 } DataTableFile;
 
 /* Returns table `index` of a table file, or NULL if the file or the table header is invalid. */
-DataTable *dataTableFileGetTable(DataTableFile *file, u32 index)
+void *dataTableFileGetTable(u32 address, u32 index)
 {
+    DataTableFile *file = reinterpret_cast<DataTableFile *>(address);
     DataTable *table;
     u32 *offsets;
 

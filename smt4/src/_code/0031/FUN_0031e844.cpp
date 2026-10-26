@@ -1,12 +1,13 @@
-/* NON_MATCHING: separate scratch globals prevent retail's shared base; payload assignment calls __aeabi_memcpy4 instead of specialized rt_memcpy_w144. */
+/* NON_MATCHING: the 144-byte copy now calls rt_memcpy_w144 like retail; retail reaches DAT_0044f864 and DAT_0044f54c from DAT_0044f858's literal (one base register, so the three scratch globals were defined in one source file), which this unit does not reproduce. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 #include "shard/W5_W5Match2_LinkedItems.h"
+#include "shard/linkedFindItemByIndex.h"
 
 extern "C" {
 extern s32 DAT_0044f864;
 extern u32 DAT_0044f54c;
 extern EffectSelectionTemplate DAT_0044f858;
-LinkedItem* linkedFindItemByIndex(LinkedItems* list, s32 index);
+void rt_memcpy_w144(void* destination, const void* source);
 LinkedItem* effPartCloneAfter(LinkedItems* list, LinkedItem* after);
 
 // Duplicate the selected effect part and select the scratch template.
@@ -18,7 +19,7 @@ u32 FUN_0031e844(void)
     LinkedItem* copy = effPartCloneAfter(
         static_cast<LinkedItems*>(g_effectEditor.selection.list), selected);
     DAT_0044f54c = 0;
-    copy->data = selected->data;
+    rt_memcpy_w144(&copy->data, &selected->data);
     g_effectEditor.selection.object = &DAT_0044f858;
     return 0;
 }

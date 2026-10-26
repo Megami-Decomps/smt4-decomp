@@ -6,6 +6,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct NpcPortraitVariantRecord {
     u16 texture;
@@ -19,7 +20,6 @@ extern const s8 DAT_00403570[];
 s32 gameFlagIsSet(u32 flag);
 NpcTextureSource *dataTable25FindById(u32 npc);
 const NpcPortraitVariantRecord *aocContentGetIndexedRecord(const NpcTextureSource *source, u32 variant);
-void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 mode);
 void FUN_002c58c8(s32 table, s32 node);

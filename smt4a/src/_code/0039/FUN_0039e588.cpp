@@ -3,11 +3,11 @@
 #include "battle/btlUnit.h"
 #include "battle/btlScript.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 extern const u64 g_battleMaskPresets[];
 u32 scrGetArg(u32 index);
-BtlUnitA* btlUnitGet(u32 index);
 
 // Store a script-unit value when the requested marked reserve entry exists.
 u32 FUN_0039e588(void)
@@ -28,7 +28,7 @@ u32 FUN_0039e588(void)
         if ((entry->flags & active) != 0 && (entry->flags & g_battleMaskPresets[3]) == 0 &&
             (entry->flags & g_battleMaskPresets[1]) != 0 && entry->selection.marked != 0 &&
             entry->id == id) {
-            reinterpret_cast<ScriptUnitValueView*>(btlUnitGet(g_btlScriptUnit))->targetValue = value;
+            reinterpret_cast<ScriptUnitValueView*>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit))))->targetValue = value;
             break;
         }
     }

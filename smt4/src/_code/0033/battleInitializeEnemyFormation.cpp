@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainGlobals.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 struct DevilDefinition;
 struct BattleEnemyFormation {
@@ -35,7 +36,6 @@ struct BattleEnemyRuntimeView {
 
 extern "C" {
 void FUN_0027dc24(BtlMainState *state, BattleEnemyFormation *formation, s32 mode);
-const DevilDefinition *dataTable00FindById(u16 id);
 void FUN_0023ebc8(BtlMainState *state, u8 *payload, const DevilDefinition *definition);
 void FUN_00255e38(BtlMainState *state, u8 *payload, s32 kind, s32 slot, s32 flags);
 void sequenceRequestDeferEx(u32 sequence, const void *parameters);
@@ -73,14 +73,14 @@ extern "C" void battleInitializeEnemyFormation(BtlMainState *state)
     formation->scaleY = 1.0f;
     FUN_0027dc24(state, battleEnemyFormation(state), 1);
     if (g_btlMainState.enemyOverride > 0) {
-        const DevilDefinition *definition = dataTable00FindById(g_btlMainState.enemyOverride);
+        const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(dataTable00FindById(g_btlMainState.enemyOverride));
         BtlEntry temporary;
         FUN_0023ebc8(state, battleUnitPayload(&temporary), definition);
         FUN_00255e38(state, battleUnitPayload(&temporary), 1, 4, 0);
     } else {
         for (u16 index = 0; index < 6; ++index) {
             if (battleEnemyFormation(state)->ids[index] != 0) {
-                const DevilDefinition *definition = dataTable00FindById(battleEnemyFormation(state)->ids[index]);
+                const DevilDefinition *definition = reinterpret_cast<const DevilDefinition *>(dataTable00FindById(battleEnemyFormation(state)->ids[index]));
                 if (definition != NULL) {
                     BtlEntry temporary;
                     FUN_0023ebc8(state, battleUnitPayload(&temporary), definition);

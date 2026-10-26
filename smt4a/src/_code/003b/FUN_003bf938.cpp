@@ -1,6 +1,7 @@
 /* NON_MATCHING: closing-animation loop peels its initial bound check, and the inlined replacement search adds a join NOP. */
 #include "ui/MessageMain.h"
 #include "shard/W6_W6Match1_PartySlot.h"
+#include "util/FUN_00187168.h"
 
 extern "C" {
 extern MessageGlobalsA g_messageMain;
@@ -9,7 +10,6 @@ void uiSpriteSelectAnim(void *sprite, s32 animation);
 void FUN_004bd410(u16 id);
 PartySlotA *saveSlotFindSelected(void);
 PartySlotA *FUN_003e4d68(u16 index);
-s32 FUN_00187168(PartySlotA *unit);
 void FUN_003e4e4c(u16 id);
 }
 

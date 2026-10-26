@@ -4,8 +4,8 @@
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "battle/BtlMainAccess.h"
 #include "util/SlotRangeSelect.h"
+#include "script/ScriptArgs.h"
 extern "C" {
-u32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
 s32 btlResolveEntryChoice(s32 choice);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);

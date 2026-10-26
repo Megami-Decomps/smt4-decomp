@@ -5,6 +5,7 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -14,14 +15,6 @@ typedef struct IconTableEntry {
     s16 texture;
 } IconTableEntry;
 
-/* A texture layout record (only the fields read here). */
-typedef struct TextureLayout {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 width;               /* bit 15 is a flag */
-    /* 0x06 */ u16 height;
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} TextureLayout;
 
 /* The item window (only the fields used here). */
 typedef struct ItemWindow {
@@ -45,7 +38,6 @@ extern u8 *g_renderCtx;
 
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 FUN_002321f8(const void *a, const void *b);
-TextureLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 FUN_001692ac(s32 a, s32 b);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *motion);
@@ -76,12 +68,12 @@ u32 FUN_003d02bc(void)
         return 0;
     }
     s32 texture = findIconTexture(window->item) * 1000;
-    TextureLayout *icon = asdTMTexTableEntryAt(0x34, texture);
+    TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x34, texture);
 
     renderCtxPushA(reinterpret_cast<RenderCtxA *>(g_renderCtx), FUN_001692ac(1, 0));
     u32 width = (u32)((f32)(icon->width & 0x7FFF) * window->scaleX);
     u32 height = (u32)((f32)(icon->height & 0x7FFF) * window->scaleY);
-    TextureLayout *frame = asdTMTexTableEntryAt(0x27, 13);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x27, 13);
     s32 x = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f) + (frame->x - (s32)(width >> 1)) + window->offsetX;
     s32 y = frame->y - (s32)(height >> 1);
 

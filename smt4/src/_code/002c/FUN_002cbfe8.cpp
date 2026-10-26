@@ -1,9 +1,9 @@
 /* NON_MATCHING: success/error block placement and owner/result register assignment differ. */
 #include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
+#include "util/pathBuildWide.h"
 
 extern "C" {
-s32 FUN_00254884(const void *path, u8 *normalized, u32 encoding);
 s32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);
 
 // Normalize a path, initialize the supported file mode and report the resulting status.
@@ -11,7 +11,7 @@ s32 FUN_002cbfe8(RomFileOpenState *state, const void *path, s32 mode)
 {
     s32 result = static_cast<s32>(0xe7e3ffffu);
     u8 normalized[496];
-    if (!FUN_00254884(path, normalized, 2)) {
+    if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 2)) {
         result = static_cast<s32>(0xe0e046bcu);
         FUN_002c3510(result);
         return result;

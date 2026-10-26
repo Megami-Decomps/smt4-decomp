@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail predicates the tail/prev stores separately (strne/streq) and bumps the count before storing the new tail; this build merges the node->prev store and stores the tail first */
+/* NON_MATCHING: retail predicates the tail/prev stores separately (strne/streq) and bumps the count before storing the new tail with a writeback store; this build merges the node->prev store and stores the tail first */
 #include "common.h"
 
 extern "C" {

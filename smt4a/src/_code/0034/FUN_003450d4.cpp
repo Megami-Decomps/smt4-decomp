@@ -2,6 +2,7 @@
 /* NON_MATCHING: packed-coordinate construction and snapshot register lifetimes differ. */
 #include "shard/Shard0031.h"
 #include "ui/TouchRectangleRequest.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 s32 recordGetModeForId(s32);
@@ -9,7 +10,6 @@ s32 uiSearchPrimary(const FlaggedEntry *);
 s32 uiSearchSecondary(const FlaggedEntry *);
 s32 resourceRunEmbeddedOperationIfUnblocked(const FlaggedEntry *);
 s32 resourceRunOperationIfUnblocked(const FlaggedEntry *);
-s32 FUN_002a4878(const FlaggedEntry *);
 void flaggedEntrySetValueA(FlaggedEntry *, s32);
 void flaggedEntrySetValueB(FlaggedEntry *, s32);
 u32 FUN_002e2848(FlaggedEntry *, u32, u32, u32, u32, u32, s32, s32);

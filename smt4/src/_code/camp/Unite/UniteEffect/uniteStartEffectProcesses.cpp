@@ -2,10 +2,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern UniteEffectWork *g_screenStateWork;
-void *asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void FUN_00329b70(void);
 void FUN_00330ac8(void);
 void FUN_0032ae80(void);

@@ -5,6 +5,7 @@
 #include "battle/btlUnit.h"
 #include "battle/btlScript.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
+#include "battle/BattleUnit.h"
 
 // These mask fields extend beyond the shared candidate-mask prefix.
 struct CandidateCommandMasksView {
@@ -22,17 +23,16 @@ typedef char PendingCommandViewsCheck[offsetof(CandidateCommandMasksView, requir
 
 extern "C" {
 s32 scrGetArg(u32 index);
-BtlUnitA *btlUnitGet(u32 index);
 
 
 u32 FUN_0035e9fc()
 {
     s32 command = scrGetArg(0);
-    BtlUnitDataA *data = btlUnitGet(g_btlScriptUnit)->data;
+    BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->data;
     data->unk1BE = 2;
     ((PendingCommandDataView *)data)->argument = (u16)command;
     if (data->unk02 == 0x323 && command == 0x80) {
-        ++btlUnitGet(g_btlScriptUnit)->params[0xed];
+        ++reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params[0xed];
     }
     u64 flags = btlGetMainState()->stateFlags64.bits;
     const CandidateCommandMasksView *masks = (const CandidateCommandMasksView *)&g_btlCandidateMasks;

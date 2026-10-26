@@ -72,7 +72,6 @@ void FUN_002bf380(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 mode);
 void uiDrawDirectoryRows(void *list, u32 left, u32 top, s32 firstRow, u32 rowCount, u32 columnWidth);
 void FUN_00309ec8(void *list, s32 a, s32 b, u32 first, u32 second, u32 third, u32 rowHeight, u32 rowCount, s32 visibleRows);
 void FUN_002ec2e0(u32 left, u32 top, u32 rowCount, u32 columnWidth, u32 scrollTop, u32 knob, u32 scrollHeight);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the camp CEC edit screen: the header panel and then the scrolling list with its rows. */
@@ -114,7 +113,7 @@ u32 campCecEditDrawContents(void)
                          work->scrollTop, work->scrollKnob, work->scrollHeight);
         }
         renderStackPop(&g_titleScene->stackA);
-        FUN_002c198c(g_titleScene);
+        renderCtxApplyTransforms(g_titleScene);
         FUN_002c18e4(g_titleScene);
     }
     return 0;

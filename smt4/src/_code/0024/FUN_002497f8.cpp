@@ -2,12 +2,12 @@
 #include "gamedata/ItemSortRecord.h"
 #include "shard/PassiveSkill.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 u32 idIsAbove400(u32 id);
 u32 FUN_0024c5a0(u32 id);
 u32 recordKindRank(u32 id);
-const ItemSortRecord* dataTable40FindById(u32 id);
 const GameUnitSortRecord* gameGetUnitRecord(u32 index);
 
 // Order by descending category/rank, ascending secondary key, then descending skill/owner ids.
@@ -23,7 +23,7 @@ s32 FUN_002497f8(const SkillListEntry* left, const SkillListEntry* right)
     } else {
         leftCategory = FUN_0024c5a0(left->skillId);
         leftRank = recordKindRank(left->skillId);
-        leftKey = dataTable40FindById(left->skillId)->secondaryKey;
+        leftKey = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(left->skillId))->secondaryKey;
     }
     s32 rightCategory;
     s32 rightRank;
@@ -35,7 +35,7 @@ s32 FUN_002497f8(const SkillListEntry* left, const SkillListEntry* right)
     } else {
         rightCategory = FUN_0024c5a0(right->skillId);
         rightRank = recordKindRank(right->skillId);
-        rightKey = dataTable40FindById(right->skillId)->secondaryKey;
+        rightKey = reinterpret_cast<const ItemSortRecord *>(dataTable40FindById(right->skillId))->secondaryKey;
     }
     s32 difference = rightCategory - leftCategory;
     if (difference == 0) {

@@ -1,8 +1,8 @@
 #include "shard/W6_W6Match3_EffectColor.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
-extern void *g_renderCtx;
-void FUN_0016c4b8(void *context, s32 mode);
+extern RenderCtxA *g_renderCtx;
 void FUN_00167618(const EffectColor *topLeft, const EffectColor *topRight,
                   const EffectColor *bottomLeft, const EffectColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -15,7 +15,7 @@ void gfxDrawSolidRectangle(s32 left, s32 top, s32 right, s32 bottom, u32 color)
     channels.green = 1.0f;
     channels.blue = 1.0f;
     channels.alpha = 1.0f;
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     for (s32 channel = 0; channel < 4; ++channel) {
         f32 value = (color & 255) * 0.003921569f;
         switch (channel) {

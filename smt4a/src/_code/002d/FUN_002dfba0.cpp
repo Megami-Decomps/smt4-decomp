@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_0019e3d0(...);
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
@@ -74,7 +74,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -342,7 +342,7 @@ void FUN_002dfba0(void)
     temp_v32 = temp_v32 + temp_v13;
     temp_v33 = temp_v33 + temp_v18;
     temp_v34 = temp_v34 + temp_v14;
-    FUN_0016c4b8(g_renderCtx,*(unsigned int *)(DAT_00581040 + 0x5c));
+    renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(DAT_00581040 + 0x5c));
     FUN_0019e3d0(temp_v5);
   }
   return;

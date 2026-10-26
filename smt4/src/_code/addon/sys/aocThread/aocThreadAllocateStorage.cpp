@@ -1,10 +1,10 @@
 #include "addon/sys/aocThread.h"
 #include "AsdSDK/AsdDebug.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 void *memAlloc(u32 size, u32 alignment, u32 region, u32 heap, u32 pageSize, u32 flags);
 void *asdOperatorNew(u32 size, u32 heap);
-void resultReportIfFailed(AocThreadHandle *handle, void *stack, u32 heap);
 
 /* Allocates the addon thread's stack and zero-initialized handle storage. */
 void aocThreadAllocateStorage(AocThread *thread, u32 heap)

@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ extern int btlCanSelectReservePartyMember(unsigned int *);
 extern int FUN_003ff888(void);
 extern int FUN_004c6b8c(int, int);
 extern int halfTable152TopIs2(unsigned int *, unsigned int);
-extern int btlUnitGet(unsigned int);
 
 
 /* WARNING: Removing unreachable block (ram,0x003ffdc8) */
@@ -188,7 +188,7 @@ unsigned int FUN_003ff998(unsigned int *param_1,fn_003ff998_arg1 *param_2)
       temp_v12 = temp_v3 & 0x7f;
       temp_v2 = param_2->field_0x20;
       if (param_2->field_0x86 == 6) {
-        temp_v4 = btlUnitGet(g_btlScriptUnit);
+        temp_v4 = (int)btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
         temp_v5 = 0;
         if (temp_v4 != 0) {
           temp_v5 = *(int *)(temp_v4 + 0x20);

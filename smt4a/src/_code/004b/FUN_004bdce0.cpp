@@ -3,6 +3,7 @@
 #include "shard/S3UiLookup.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "text/TextDraw.h"
+#include "addon/LookupRecord.h"
 
 struct BattleRosterLabelMode {
     u8 unk00[4];
@@ -12,7 +13,6 @@ extern "C" {
 extern const char DAT_0052d838[];
 UiTextMetrics *asdTMTexTableEntryAt(u32 texture, u32 frame);
 BattleRosterRecordA *FUN_003e4d68(u32 id);
-const char *FUN_00180114(u16 id);
 void textFormatBuffer(char *output, const char *format, ...);
 s32 fontMeasureLineAdvance(const char *text, s32 font);
 
@@ -30,7 +30,7 @@ void FUN_004bdce0(Obj25C *owner, s32 x, s32 y, f32 alpha)
                 labelAlpha = dimAlpha;
             }
             char text[64];
-            textFormatBuffer(text, DAT_0052d838, FUN_00180114(record->label.nameId));
+            textFormatBuffer(text, DAT_0052d838, reinterpret_cast<const char *>(FUN_00180114(record->label.nameId)));
             UiTextMetrics *placement = asdTMTexTableEntryAt(0x11, visible + 0xAE);
             s32 width = fontMeasureLineAdvance(text, 1);
             s32 labelX = origin->x + (placement->x + (placement->dimensions[0] - width) / 2 + x);

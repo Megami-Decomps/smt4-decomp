@@ -2,10 +2,10 @@
 #include "common.h"
 #include "ui/MessageMain.h"
 #include "util/ScrGetCommandFrame.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 extern "C" {
 
-void uiSpriteSelectAnim(u8 *sprite, s32 animation);
 
 extern MessageGlobalsA g_messageMain;
 

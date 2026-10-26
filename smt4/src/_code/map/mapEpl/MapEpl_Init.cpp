@@ -1,6 +1,7 @@
 /* NON_MATCHING: free-slot sentinel lifetime, path/file-size stack slots and position conversion/store grouping differ. */
 #include "map/mapEpl.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct MapEffectPlacementRecord {
     s8 map;
@@ -15,7 +16,6 @@ typedef char MapEffectPlacementRecordSize[sizeof(MapEffectPlacementRecord) == 0x
 extern "C" {
 extern MapEpl *g_mapEpl;
 extern const char DAT_0040442c[];
-void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void *asdLoadFileSync(const char *path, u32 *size, u32 heap, u32 alignment);
 void *FUN_002a4e98(void *data);

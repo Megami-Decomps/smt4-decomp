@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int efctSetSpeed(void);
 int FUN_00180310(...);
 int FUN_0018152c(...);
-int asdTMTexTableEntryAt(...);
 int drawSetColorFromRGBA8(...);
 int FUN_00185dd4(...);
 int gameGetSlotRecord(...);
@@ -37,7 +37,6 @@ extern int DAT_00588c50; /* 0x588c50 */
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185dd4. */
 extern int markerKindGetColor(int);
@@ -63,7 +62,7 @@ void FUN_004b3a4c(int param_1,unsigned int param_2,int param_3,int param_4,int p
   unsigned long long temp_v9;
   
   temp_v1 = gameGetSlotRecord(param_3);
-  temp_v9 = asdTMTexTableEntryAt(0x1d,param_4 + 0x68);
+  temp_v9 = (int)asdTMTexTableEntryAt(0x1d,param_4 + 0x68);
   temp_v4 = (unsigned int)((unsigned long long)temp_v9 >> 0x20);
   temp_v2 = (int)temp_v9;
   switch(param_2) {
@@ -179,11 +178,11 @@ LAB_004b3b88:
   case 4:
     temp_v7 = 2;
     if ((int)((unsigned int)*(unsigned short *)(temp_v1 + 100) + param_9) >= 100) {
-      DAT_00588c4c = asdTMTexTableEntryAt(0x1d,0x177);
+      DAT_00588c4c = (int)asdTMTexTableEntryAt(0x1d,0x177);
       temp_v7 = 3;
     }
     else {
-      DAT_00588c4c = asdTMTexTableEntryAt(0x1d,0x66);
+      DAT_00588c4c = (int)asdTMTexTableEntryAt(0x1d,0x66);
     }
     temp_v8 = param_9 == 0;
     temp_v6 = param_9;

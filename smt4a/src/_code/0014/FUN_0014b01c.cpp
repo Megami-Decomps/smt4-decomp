@@ -8,7 +8,7 @@ extern "C" {
 int asdTMTexTableGetHeaderValue(...);
 int FUN_00157558(int);
 int FUN_0016242c(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int skinObjectUpdateMatrices(int);
 int camSetMatrixA(int, unsigned char [108]);
 int mtx44Copy(unsigned char [108], unsigned int *);
@@ -56,7 +56,7 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_0016242c. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: mtx44Copy. */
@@ -217,7 +217,7 @@ void FUN_0014b01c(int param_1)
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v3 + 0x40) = 1;
-  FUN_0016c4b8(g_renderCtx);
+  renderCtxSelectTexture(g_renderCtx);
   FUN_0019e3d0(temp_v4 | 0xffffff00);
   temp_v3 = g_renderCtx;
   temp_v0 = packNibblesAndByte(6, 1, 0);
@@ -231,7 +231,7 @@ void FUN_0014b01c(int param_1)
   temp_v4 = DAT_0057f668 | 0xffffff00;
   temp_v3 = asdTMTexTableGetHeaderValue(3,2);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_0016c4b8(g_renderCtx,temp_v3);
+  renderCtxSelectTexture(g_renderCtx,temp_v3);
   FUN_0019e3d0(temp_v4);
   if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v3 != 0)) {
     _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v7;
@@ -255,7 +255,7 @@ void FUN_0014b01c(int param_1)
   camSetMatrixA(g_renderCtx,temp_v8);
   temp_v3 = asdTMTexTableGetHeaderValue(3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_0016c4b8(g_renderCtx,temp_v3);
+  renderCtxSelectTexture(g_renderCtx,temp_v3);
   temp_v4 = DAT_0057f670 | 0xffffff00;
   FUN_0019e3d0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v6,0x40700000,0x40c80000,0x40700000);
   skinObjectUpdateMatrices(g_renderCtx);

@@ -21,7 +21,8 @@ static __inline const SpriteAnimationCommand *spriteFindGroup(const SpriteAnimat
     return NULL;
 }
 
-extern "C" void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 group)
+extern "C" void uiSpriteSelectAnim(void *object, s32 group)
 {
+    SpritePlaybackView *sprite = static_cast<SpritePlaybackView *>(object);
     uiSpriteSetAnimationCommand(sprite, spriteFindGroup(sprite->resource, group));
 }

@@ -1,6 +1,8 @@
 /* NON_MATCHING: the target loops and the scope switch are laid out differently from retail (built 236 rows vs 228); the usability checks are the same. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BattleUnit.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
@@ -16,14 +18,14 @@ typedef struct SkillRecord {
     u8 specialCheck;                 /* 0x45 */
 } SkillRecord;
 
-typedef struct BattleUnit {
+typedef struct BtlUnitStatus {
     u8 unk00[0x274];
     u16 status;                      /* 0x274 */
-} BattleUnit;
+} BtlUnitStatus;
 
 typedef struct BtlUnitSlot {
     u8 unk00[0x20];
-    BattleUnit *unit;                /* 0x20 */
+    BtlUnitStatus *unit;             /* 0x20 */
 } BtlUnitSlot;
 
 /* A battle unit as the skill checks see it: two flag words first. */
@@ -32,11 +34,6 @@ typedef struct BtlTarget {
     u32 flagsHi;
     u8 unk08[0x400];
 } BtlTarget;
-
-typedef struct SlotTable {
-    u8 unk0000[0x1CA3];
-    u8 partyCount;                   /* 0x1CA3 */
-} SlotTable;
 
 extern u32 g_btlScriptUnit;
 extern u32 g_maskStatusLo;           /* 0x573c90 */
@@ -48,8 +45,6 @@ extern u32 g_maskExcludeHi;          /* 0x573cac */
 extern u32 g_maskBlockedLo;          /* 0x573cb8 */
 extern u32 g_maskBlockedHi;          /* 0x573cbc */
 
-BtlUnitSlot *btlUnitGet(u32 id);
-SlotTable *gameGetSlotTable(void);
 s32 FUN_003ff998(void *target, SkillRecord *skill, s32 flag);
 s32 FUN_00400564(s32 index, s32 arg, SkillRecord *skill);
 
@@ -70,8 +65,8 @@ u32 FUN_004009d0(s32 id, s32 flag)
         return 2;
     }
     BtlMainStateA *state = btlGetMainState();
-    BtlUnitSlot *slot = btlUnitGet(g_btlScriptUnit);
-    BattleUnit *unit = slot != NULL ? slot->unit : NULL;
+    BtlUnitSlot *slot = reinterpret_cast<BtlUnitSlot *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
+    BtlUnitStatus *unit = slot != NULL ? slot->unit : NULL;
 
     if (slot != NULL && unit != NULL) {
         if (flag == 0 && (unit->status & 0x2000) != 0) {
@@ -159,16 +154,16 @@ u32 FUN_004009d0(s32 id, s32 flag)
         }
     }
     if (checkSelf) {
-        slot = btlUnitGet(g_btlScriptUnit);
+        slot = reinterpret_cast<BtlUnitSlot *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         unit = slot != NULL ? slot->unit : NULL;
         if (slot != NULL && unit != NULL && FUN_003ff998(unit, skill, 1) == 0) {
             return 0;
         }
     }
     if (checkParty) {
-        SlotTable *table = gameGetSlotTable();
+        SaveSlotTable *table = gameGetSlotTable();
 
-        for (s32 i = -1; i < (s32)table->partyCount; i++) {
+        for (s32 i = -1; i < (s32)table->count; i++) {
             if (FUN_00400564(i, 0, skill) == 0) {
                 return 0;
             }

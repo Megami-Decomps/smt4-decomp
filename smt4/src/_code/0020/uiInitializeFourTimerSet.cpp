@@ -33,12 +33,12 @@ void spriteStartAnimationByIndex(TimerSlot *timer, s32 animation);
 void timerStart(TimerSlot *timer, s32 animation, s32 flags);
 }
 
-static __inline void uiTimerSetMode(TimerSlot *timer, u16 mode)
+static void uiTimerSetMode(TimerSlot *timer, u16 mode)
 {
     reinterpret_cast<UiTimerSettings *>(timer)->mode = mode;
 }
 
-static __inline void uiTimerSetEnabled(TimerSlot *timer, u8 enabled)
+static void uiTimerSetEnabled(TimerSlot *timer, u8 enabled)
 {
     reinterpret_cast<UiTimerSettings *>(timer)->enabled = enabled;
 }

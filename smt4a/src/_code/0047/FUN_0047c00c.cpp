@@ -4,13 +4,9 @@
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "util/PackNibbles.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 
-struct LayoutPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 /* One sprite of the panel table (12 bytes). */
 struct PanelSprite {
@@ -38,7 +34,6 @@ void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 u32 FUN_001692ac(s32 a, s32 b);
 s32 textureGetIndexedResource(s32 index);
-LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void skinObjectUpdateMatrices(RenderCtxA *ctx);
 void renderCtxResetColorScale(RenderCtxA *ctx);
 
@@ -66,7 +61,7 @@ void FUN_0047c00c(StateScene *scene)
     for (s32 i = 0; i < 24; i++) {
         if (DAT_00526314[i].sprite >= 0) {
             efctSetSpeed(DAT_00526314[i].alpha);
-            LayoutPoint *point = asdTMTexTableEntryAt(20, DAT_00526314[i].point);
+            TextureTableEntryIV *point = asdTMTexTableEntryAt(20, DAT_00526314[i].point);
             FUN_001835b4(2, 20, DAT_00526314[i].sprite, point->x + x, point->y, 11);
         }
     }

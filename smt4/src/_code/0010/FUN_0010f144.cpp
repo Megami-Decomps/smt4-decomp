@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0011b468(...);
 int FUN_0011b498(unsigned int, unsigned int, int, int);
-int FUN_002bbe30(...);
+int mathCopyIdentityMatrix(...);
 int FUN_002bbf8c(void);
 int FUN_002c1e30(...);
 int FUN_002c1edc(...);
@@ -32,7 +32,7 @@ extern unsigned int FUN_0011a1a8(unsigned int);
 /* Supplied declaration required: FUN_0011b468. */
 /* Supplied declaration required: FUN_0011b498. */
 extern unsigned int FUN_0011b588(void);
-/* Supplied declaration required: FUN_002bbe30. */
+/* Supplied declaration required: mathCopyIdentityMatrix. */
 /* Supplied declaration required: FUN_002bbf8c. */
 extern unsigned int FUN_002c15ac(unsigned int);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
@@ -123,7 +123,7 @@ void FUN_0010f144(int param_1)
   FUN_002c2044(temp_v1,1);
   FUN_002c1edc(temp_v1,&temp_v6,&temp_v11,&temp_v8);
   FUN_002c1e30(temp_v1,1);
-  FUN_002bbe30(param_1 + 0x5b4);
+  mathCopyIdentityMatrix(param_1 + 0x5b4);
   temp_v4 = 0;
   do {
     FUN_0011b468(param_1 + temp_v4 * 0x20 + 0x11ec,temp_v4 & 0xff);

@@ -11,7 +11,6 @@ s32 FUN_002c1d5c(void);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_002a09b4(const char *file, s32 bank);
 s32 modelHasLoadedAttachment(AsdMdlObject *model);
-void FUN_002a0428(AsdMdlObject *model, s32 enabled);
 void nodeSetTranslation3f(AsdMdlNode *node, s32 mode, f32 x, f32 y, f32 z);
 void animPlayerSetLoopPolicy(AsdMdlNode *node, s32 loop);
 void FUN_002a04f0(s32 bank);

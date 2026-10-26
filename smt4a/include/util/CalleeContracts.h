@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 #include "shard/Block61a470.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* Canonical prototypes of small helpers whose definitions take only primitive types; the definitions
  * include this header so callers and callee cannot drift apart. */
@@ -20,7 +21,6 @@ u32 effGetFrameStep(void);
 u32 asdGxGetPhysicalAddress(u32 address);
 void FUN_0023b45c(s32 flag);
 bool devilIsTextureLoaded(s32 id, s32 resolve);
-void *memAlloc(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra);
 u32 FUN_00387580(u32 kind, f32 value);
 s32 arrayContainsU16(const u16 *values, s32 count, u32 value);
 u32 FUN_00152f54(void);
@@ -38,9 +38,6 @@ u8 FUN_0034919c(void);
 
 
 
-void FUN_001cd3ec(u8 *a, void *b);
-
-void FUN_0039b984(s32 id);
 
 void FUN_002c8538(u8 value);
 
@@ -49,16 +46,6 @@ void FUN_001ba3d0(void);
 f32 *asdListBoxGetFloatValuePtr(u32 listBox, s32 id);
 
 } /* extern "C" */
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-u32 FUN_00180114(unsigned arg0);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {
@@ -194,7 +181,6 @@ u8 aocHasType36(u32 a, u32 b);
 extern "C" {
 #endif
 
-void asdCecMessageBoxClose(int box);
 
 #ifdef __cplusplus
 }
@@ -284,7 +270,7 @@ void deblockerHandleRelease(u32 *handle);
 extern "C" {
 #endif
 
-u32 findRecordByKey(u32 id);
+u32 findRecordByKey(const char *key);
 
 #ifdef __cplusplus
 }

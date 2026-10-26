@@ -1,12 +1,12 @@
 /* NON_MATCHING: scheduling only: retail loads the 1.0f scale before the panel stores and keeps the panel in r0 before `return 1`. */
 #include "ui/MessageMain.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
 extern MessageGlobalsA g_messageMain;
 
 u32 scrGetArg(u32 index);
-u32 *gameGetSlotTable(void);
 void FUN_0014e188(u8 *sprite, s32 anim, s32 frame, u8 *source, f32 scale, s32 layer);
 void pairSetFirstResetSecond(u8 *pair, s32 first);
 void uiSpriteSelectAnim(u8 *sprite, s32 anim);
@@ -19,7 +19,7 @@ static __inline void messagePanelOpen(u8 mode)
 
     panel->unk8E = 1;
     panel->state = 1;
-    slot = *gameGetSlotTable();
+    slot = gameGetSlotTable()->money;
     panel->unk7C = slot;
     panel->unk88 = slot;
     panel->unk91 = mode;

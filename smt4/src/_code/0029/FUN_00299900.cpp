@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail's jump table starts at 0 (no `sub r0, r0, #9`) and the u16 list loads keep the low constant in the LDRH offset (add #0x1d00; ldrh [r0,#0xb4]) where this build adds the whole constant before the load. */
+/* NON_MATCHING: the zero-based 24-entry jump table now matches (labels 0..8 are explicit); the u16 list loads still fold the low constant into the address add differently (retail keeps it in the LDRH offset). */
 #include "ui/GridNavigation.h"
 #include <stddef.h>
+#include "util/FUN_0029efa8.h"
 
 /* The camp menu's selectable lists: one grid per list, and the table of entry ids each grid indexes. */
 struct CampLists {
@@ -32,7 +33,6 @@ typedef char CampListsOffsets[
 extern "C" {
 extern CampLists *g_camp;
 u32 FUN_0029efc0(const GridNavigation *grid);
-u32 FUN_0029efa8(const GridNavigation *grid);
 void buttonHelpShowSkillDetails(u32 id);
 void FUN_0029212c(u32 id);
 u32 FUN_00288e68(void);
@@ -50,6 +50,8 @@ void FUN_00299900(u32 list)
 {
     CampLists *camp = g_camp;
     switch (list) {
+    case 0: case 1: case 2: case 3: case 4: case 5: case 6: case 7: case 8:
+        break;
     case 9:
         buttonHelpShowSkillDetails(camp->skills[selectedIndex(&camp->grids[3])].id);
         break;

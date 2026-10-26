@@ -67,7 +67,7 @@ int mapModelMarkDestroy(void);
 int mapEnemyStopRequest(void);
 int mapEnemyRestartIdleEntries(void);
 int mapEnemyEndEligibleStates(void);
-int FUN_002dfe64(void);
+int mapIfDestroyModelSlots(void);
 int eventQueueAddSelected(void);
 
 int FUN_001a8cf8(void);
@@ -87,7 +87,7 @@ int FUN_002878e4(void);
 int FUN_00289574(...);
 int slotSetRequest(...);
 int naviMainStartStateTimer(void);
-int FUN_002fb330(...);
+int aocFindSupplementalRecordIndex(...);
 int naviRefreshMainBlock(void);
 int FUN_0031d54c(void);
 int FUN_002e0608(...);
@@ -696,7 +696,7 @@ extern int FUN_002eb134(void);
 extern int FUN_002f400c(void);
 extern unsigned short FUN_002faf78(void);
 /* Supplied declaration required: gameMapBitSet. */
-/* Supplied declaration required: FUN_002fb330. */
+/* Supplied declaration required: aocFindSupplementalRecordIndex. */
 /* Supplied declaration required: naviRefreshMainBlock. */
 /* Supplied declaration required: FUN_003079b4. */
 extern int dataTableFindFirstPermittedRecordIndex(int);
@@ -746,7 +746,7 @@ extern int FUN_002d3b20(void);
 /* Supplied declaration required: FUN_002d3e88. */
 /* Supplied declaration required: mapEnemyEndEligibleStates. */
 extern int mapEnemyIsModeTwo(void);
-/* Supplied declaration required: FUN_002dfe64. */
+/* Supplied declaration required: mapIfDestroyModelSlots. */
 /* Supplied declaration required: FUN_002e0608. */
 /* Supplied declaration required: naviMainSetStateValue. */
 extern int mapEnemyIsInactive(void);
@@ -4089,7 +4089,7 @@ joined_r0x001bce40:
     mapPerFrameUpdate();
     mapDepartSetTarget(0xffffffff,0xffffffff);
     DAT_0049f970 = 0;
-    FUN_002fb330(DAT_0049f958);
+    aocFindSupplementalRecordIndex(DAT_0049f958);
     temp_v9 = FUN_002c9b90();
     temp_v16 = tableGroupFindEntryIndex(puVar14[0x13],temp_v9 + 4);
     puVar14[0x2d] = temp_v16;
@@ -5177,7 +5177,7 @@ LAB_001bec78:
     mapDepartUpdateHandles();
     mdlManagerMarkAllDestroy();
     modelGroupsMarkActiveDestroy();
-    FUN_002dfe64();
+    mapIfDestroyModelSlots();
     asdModelSlotRelease(0);
     FUN_001a9574();
     temp_v9 = puVar14[9] + 1;
@@ -5609,7 +5609,7 @@ joined_r0x001bfcb4:
     mapDepartUpdateHandles();
     mdlManagerMarkAllDestroy();
     modelGroupsMarkActiveDestroy();
-    FUN_002dfe64();
+    mapIfDestroyModelSlots();
     NaviMain_Destroy();
     DAT_0049fb45 = 0;
     DAT_0049fba0 = '\0';

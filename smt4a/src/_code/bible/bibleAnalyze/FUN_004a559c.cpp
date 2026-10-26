@@ -1,5 +1,6 @@
 /* NON_MATCHING: VFP argument setup (the sliding-offset float and the text position) and the pool-constant loads are scheduled differently; the draw sequence is the same. */
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 extern "C" {
 
@@ -52,7 +53,6 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 AnalyzeTextBox *layoutFindTableEntry(void *panel, u32 id);
 s32 curveEvaluateStandard(const char *text, s32 mode);
 void drawTextAtSnappedRectangle(void *panel, s32 a, s32 b, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
-s32 FUN_002a482c(void *list);
 s32 FUN_0031d174(void *list);
 void FUN_004a6144(AnalyzeWork *work, s32 index, s32 selected, s32 id);
 void owner4ASetSizeAndCall(AnalyzeWork *work, s32 step);

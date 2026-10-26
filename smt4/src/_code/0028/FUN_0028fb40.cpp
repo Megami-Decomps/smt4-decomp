@@ -4,12 +4,12 @@
 
 extern "C" {
 FlagValueStorage *FUN_00282be4(void);
-const FlagValueRange *FUN_002b4748(s32 id);
+const FlagValueRange *itemCategoryFindByItemId(s32 id);
 
 // Read either a packed boolean or a halfword from the range's saved flag bank.
 u16 FUN_0028fb40(s32 id)
 {
-    const FlagValueRange *range = FUN_002b4748(id);
+    const FlagValueRange *range = itemCategoryFindByItemId(id);
     if (range == NULL) {
         return 0;
     }

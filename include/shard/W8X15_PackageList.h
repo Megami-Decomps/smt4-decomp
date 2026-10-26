@@ -1,6 +1,7 @@
 #ifndef SHARD_W8X15_PACKAGELIST_H
 #define SHARD_W8X15_PACKAGELIST_H
 #include "common.h"
+#include "util/dataTableFileGetTable.h"
 #include <stddef.h>
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
@@ -45,7 +46,6 @@ extern "C" {
 s32 FUN_002ac12c(PackageEntry *entry);
 char (*FUN_002ac0f8(PackageEntry *entry))[0x40];
 u32 FUN_002ac0c4(PackageEntry *entry);
-void *dataTableFileGetTable(u32 fileId, u32 flags);
 }
 
 #ifdef __cplusplus

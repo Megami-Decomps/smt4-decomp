@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00191830(unsigned int, unsigned int, int *, unsigned int *, unsigned int, int *, int, int, int, int);
-int FUN_002c1b64(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int VectorUnsignedToFloat(unsigned int, int);
 
 typedef int romwright_code(...);
@@ -31,7 +31,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00191830. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
 
@@ -131,7 +131,7 @@ LAB_0023e0e4:
                 *(unsigned char *)(temp_v3 + 0x12c4) = 0;
               }
             }
-            FUN_002c1b64(g_titleScene,
+            renderCtxSelectTexture(g_titleScene,
                          *(unsigned int *)
                           (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(puVar8 + 9) * 0x20 + 0x18));
             VectorUnsignedToFloat((unsigned int)*(unsigned short *)(puVar8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

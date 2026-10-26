@@ -2,12 +2,12 @@
 #include "nn/Result.h"
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "AsdSDK/AsdDebug.h"
+#include "shard/asdCecMessageBoxClose.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 
 s32 asdCecMessageBoxOpen(AsdCecMessageBox *box, u32 unk00, u32 unk04);
-void asdCecMessageBoxClose(AsdCecMessageBox *box);
 void FUN_0042f318(AsdCecMessageBox *box, s32 unk);
 void FUN_0042e388(AsdCecMessageBox *box, s32 kind, AsdCecMessageId *id);
 void _ZN12CecMessageIdC1Ev(AsdCecMessageId *id);

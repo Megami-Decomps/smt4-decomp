@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
+#include "util/GameDataBlocksGetSaveData.h"
 
 struct RankingScriptProcess {
     /* 0x000 */ u8 unk000[0x108];
@@ -30,7 +31,6 @@ extern RankingTransitionWork *g_campCecRanking;
 RankingScriptProcess *FUN_00275bc8(void *heapA, void *heapB);
 void uiSpriteSetKeyframe(void *sprite, u32 frame, u32 option);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 option);
-RankingSavedState *gameDataBlocksGetSaveData();
 void sysPlaySe(u32 sound);
 void scrScriptProcessStartEntry(RankingScriptProcess *process, u32 entry);
 s32 scrRunOpcodesStub(RankingScriptProcess *process);
@@ -54,7 +54,7 @@ extern "C" s32 FUN_002c0240()
         work->process->state = 2;
         uiSpriteSetKeyframe(work->sprite, 13, 0);
         uiSpriteSetImageKeyframe(work->sprite, 21, 0);
-        if ((gameDataBlocksGetSaveData()->flags & 0x3ff) == 0) {
+        if ((reinterpret_cast<RankingSavedState *>(gameDataBlocksGetSaveData())->flags & 0x3ff) == 0) {
             sysPlaySe(160);
             scrScriptProcessStartEntry(work->process, 33);
             work->state = 1;

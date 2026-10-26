@@ -1,5 +1,6 @@
 /* NON_MATCHING: scheduling only: retail stores the style word before the active byte (str [600]; strb [606]); built swaps the two stores */
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct Panel {
     /* 0x25E */ u8 active;
 } Panel;
 
-extern void pairSetFirstResetSecond(void *anim, s32 value);
 extern void pairSetSecondResetFirst(void *anim, s32 value);
 extern void spriteStartAnimationByIndex(void *anim, s32 value);
 extern void timerStart(void *timer, s32 a, s32 b);

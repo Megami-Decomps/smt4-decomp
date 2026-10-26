@@ -2,6 +2,7 @@
 #include "gamedata/Table04Record.h"
 #include "shard/Shard004B.h"
 #include "status/StatusCamera.h"
+#include "gamedata/DataTable40.h"
 
 namespace {
 struct SkillCostDiscountView {
@@ -23,7 +24,6 @@ static __inline u8 findLearnedSkillRank(const ItemRankRecord *player, u32 skillI
 }
 
 extern "C" {
-Table04Record *dataTable40FindById(u32 skillId);
 s32 FUN_00283ebc(Table04Record *skill, s32 rank, u32 modifier);
 s32 flagBitIsSet(u32 flag);
 SkillCostDiscountView *appCostRecordFindById(u16 id);

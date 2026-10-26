@@ -1,6 +1,7 @@
 /* NON_MATCHING: item detail panel draw; the call sequence follows retail (speed is forwarded to every callee) but the kind switch, the sound guard and the saved registers differ */
 #include "common.h"
 #include "text/TextDraw.h"
+#include "shard/FUN_0019e52c.h"
 
 /* The item shown in the panel: its kind in the high byte of +2, its name text at +4. */
 struct DetailItem {
@@ -28,7 +29,6 @@ void efctSetSpeed(f32 speed);
 DetailSpriteFrame *asdTMTexTableEntryAt(u32 bank, u32 sprite);
 s32 fontMeasureLineAdvance(const char *text, s32 mode);
 f32 renderCtxCalculateStereoParallax(void *context, f32 scale);
-void FUN_0019e52c(u32 soundId);
 void FUN_003f533c(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 value, u32 a, u32 b, u32 c, u32 color, u32 flags, f32 speed);
 void uiDrawStereoKindIcon(DetailPanel *panel, s32 x, s32 y, u32 layer, u32 kind, u32 sprite, f32 speed);
 void FUN_003f707c(DetailPanel *panel, s32 x, s32 y, u32 a, u32 b, u32 c, u32 d, u32 e, f32 speed);

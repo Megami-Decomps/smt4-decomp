@@ -4,12 +4,12 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "Model/MoriModelShadowMap.h"
 #include "event/2dEvent/EventEffect.h"
+#include "util/skinObjectUpdateMatrices.h"
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 u32 FUN_001692ac(u32, u32);
 void FUN_0028cb88(BtlUiObjCA *);
-void skinObjectUpdateMatrices(RenderCtxA *);
 void renderCtxResetColorScale(RenderCtxA *);
 
 u32 FUN_00298674(void)
@@ -30,7 +30,7 @@ u32 FUN_00298674(void)
             if (FUN_00284e94())
                 FUN_0028cb88(&ui->objC);
             renderStackPop(&g_renderCtx->stackA);
-            skinObjectUpdateMatrices(g_renderCtx);
+            skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
             renderCtxResetColorScale(g_renderCtx);
             return 0;
         }

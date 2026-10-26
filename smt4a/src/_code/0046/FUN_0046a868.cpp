@@ -19,7 +19,6 @@ void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 kind, u32 arg);
 void FUN_0046868c(TitleOverlayA *overlay);
-void FUN_0016c4b8(RenderCtxA *ctx, u32 handle);
 u32 asdGxPresetsGetByKind(u32 kind);
 u32 asdGxPresetsGetHeightByKind(u32 kind);
 void FUN_0014e314(u32 a, u32 b, u32 c, u32 d, f32 e, f32 f, f32 g, f32 h, f32 i);
@@ -44,7 +43,7 @@ void FUN_0046a868(TitleOverlayA *overlay)
         u8 alpha = (u8)(u32)(overlay->fade * 192.0f);
 
         renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
-        FUN_0016c4b8(g_renderCtx, 0);
+        renderCtxSelectTexture(g_renderCtx, 0);
         f32 preset = (f32)asdGxPresetsGetByKind(g_renderCtx->stereoMode);
         f32 height = (f32)asdGxPresetsGetHeightByKind(g_renderCtx->stereoMode);
         FUN_0014e314(alpha, alpha, alpha, alpha, 0.0f, 0.0f, height, preset, 0.0f);

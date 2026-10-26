@@ -1,5 +1,6 @@
 /* NON_MATCHING: final fallback actor-command addressing differs; actor setter/accessor variants do not reproduce retail scheduling. */
 #include "battle/btlAction.h"
+#include "gamedata/DataTable40.h"
 
 struct AlternateActionBattle {
     u8 unk0000[0x84];
@@ -38,7 +39,6 @@ extern BtlActionGlobals g_btlAction;
 extern void *g_btlUiBlock;
 s32 randRange(u32);
 void FUN_0022abe0(AlternateActionActor *, u16 *);
-const AlternateActionSkill *dataTable40FindById(u32);
 void FUN_002b7bca(void *, s32, s32, s32 (*)(const void *, const void *));
 s32 FUN_00333670(const void *, const void *);
 s32 halfwordKeyDescendingCompare(const void *, const void *);
@@ -56,7 +56,7 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
         FUN_0022abe0(choice->actor, skills);
         for (s32 i = 0; i < 9; ++i) {
             if (skills[i]) {
-                const AlternateActionSkill *skill = dataTable40FindById(skills[i]);
+                const AlternateActionSkill *skill = reinterpret_cast<const AlternateActionSkill *>(dataTable40FindById(skills[i]));
                 if (skill && skill->kind.bits.target != 0 && skill->kind.bits.target != 1)
                     ++count;
                 else
@@ -71,7 +71,7 @@ u32 btlChooseAlternateSkillOrFallback(AlternateActionContext *context, Alternate
             choice->command->type = 2;
             choice->command->skill = skills[index];
             choice->flags |= 0x8000;
-            const AlternateActionSkill *skill = dataTable40FindById(skills[index]);
+            const AlternateActionSkill *skill = reinterpret_cast<const AlternateActionSkill *>(dataTable40FindById(skills[index]));
             if (skill->kind.bits.category == 4)
                 btlUnitSetParam(context, 15, 0);
             else

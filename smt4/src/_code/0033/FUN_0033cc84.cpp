@@ -9,7 +9,7 @@ int FUN_00247f0c(void);
 int FUN_002b7638(int *);
 int FUN_002bc0e0(void);
 int efctSetSpeed(void);
-int FUN_002c1b64(unsigned int, int);
+int renderCtxSelectTexture(unsigned int, int);
 int FUN_0033c72c(...);
 int VectorSignedToFloat(...);
 
@@ -30,7 +30,7 @@ extern unsigned int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002b7638. */
 /* Supplied declaration required: FUN_002bc0e0. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0033c72c. */
 
 
@@ -59,7 +59,7 @@ void FUN_0033cc84(int param_1)
     temp_v10 = 0;
     temp_v11 = *(float *)(param_1 + 0x398) * 0.25f * (1.0f - *(float *)(param_1 + 0x394) * 0.25f) * 0.5f
     ;
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     FUN_002b7638(&temp_v8);
     FUN_002bc0e0();
     efctSetSpeed();

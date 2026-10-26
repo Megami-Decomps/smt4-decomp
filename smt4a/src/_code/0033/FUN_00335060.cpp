@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the save list (selected slot first, then the other slots, then the optional extra rows and the footer); written from the decompilation, render-stack push scheduling not compared with retail */
 #include "camp/RenderCtx.h"
+#include "util/FUN_00187168.h"
 
 struct SaveRowSprite {
     /* 0x00 */ u8 data[0x8C];
@@ -38,7 +39,6 @@ void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 SaveRowFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 SaveSlotEntry *FUN_00187068(s32 index);
-s32 FUN_00187168(void);
 s32 gameFlagIsSet(u32 flag);
 s32 flagSelectVariant(void);
 s32 vec2GetXInt(SaveRowSprite *sprite);
@@ -62,7 +62,7 @@ void FUN_00335060(SaveListWork *work)
 
     for (s32 slot = 0; slot < SAVE_LIST_SLOT_COUNT; slot++) {
         SaveSlotEntry *entry = FUN_00187068(slot);
-        if (FUN_00187168() != 0) {
+        if (FUN_00187168(entry) != 0) {
             SaveRowSprite *sprite = &work->rows[row];
             s32 x = vec2GetXInt(sprite);
             s32 y = vec2GetYInt(sprite);

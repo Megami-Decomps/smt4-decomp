@@ -1,5 +1,6 @@
 /* NON_MATCHING: growth-parameter initialization uses byte/halfword stores instead of retail's packed register construction. */
 #include "common.h"
+#include "gamedata/DataTable.h"
 
 struct LevelGrowthTableEntry {
     /* 0x00 */ u8 unk00[5];
@@ -36,9 +37,6 @@ struct LevelGrowthUnit {
     /* 0x76 */ u8 level;
 };
 
-extern "C" void *dataTableGet(u32 table, u32 subtable);
-extern "C" u32 dataTableGetCount(void *table);
-extern "C" LevelGrowthTableEntry *dataTableGetEntries(void *table);
 extern "C" u32 FUN_003c219c(LevelGrowthStats *stats, LevelGrowthParameters *parameters, u32 flags);
 extern "C" void FUN_0026e630(u32 value);
 extern "C" void FUN_00299370(u32 value);
@@ -50,7 +48,7 @@ extern "C" void unitApplyLevelGrowth(LevelGrowthUnit *unit, s32 levels, bool gro
         return;
     void *table = dataTableGet(9, 0);
     dataTableGetCount(table);
-    LevelGrowthTableEntry *entry = dataTableGetEntries(table);
+    LevelGrowthTableEntry *entry = static_cast<LevelGrowthTableEntry *>(dataTableGetEntries(table));
     LevelGrowthParameters parameters = {
         {entry->weights[0], entry->weights[1], entry->weights[2], entry->weights[3], entry->weights[4]},
         0, entry->baseHp, entry->baseMp, entry->hpGrowth, entry->mpGrowth, 0, 0

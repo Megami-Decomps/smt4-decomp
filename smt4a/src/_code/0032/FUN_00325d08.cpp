@@ -84,7 +84,7 @@ extern signed char DAT_005f1c48; /* 0x5f1c48 */
 /* Supplied declaration required: soundVolumeSettingGet. */
 /* Supplied declaration required: FUN_0014af98. */
 extern int gameFlagsGetBlock(void);
-extern int FUN_00184964(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -506,7 +506,7 @@ LAB_00326fcc:
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v3 = FUN_00184964(0,1);
+              temp_v3 = randBetween(0,1);
               if (*(int *)(g_lmapScene + 0x1d0) != 10) {
                 FUN_0014af98();
                 soundVolumeSettingSet();
@@ -548,7 +548,7 @@ LAB_00326870:
             *(unsigned short *)(g_lmapScene + 0x19c) = 1;
             FUN_001bc124();
             FUN_001bbf0c();
-            temp_v3 = FUN_00184964(0,1);
+            temp_v3 = randBetween(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
               soundVolumeSettingSet();
@@ -573,7 +573,7 @@ LAB_003267fc:
             *(unsigned short *)(g_lmapScene + 0x19c) = 1;
             FUN_001bc124();
             FUN_001bbf0c();
-            temp_v3 = FUN_00184964(0,1);
+            temp_v3 = randBetween(0,1);
             if (*(int *)(g_lmapScene + 0x1d0) != 10) {
               FUN_0014af98();
               soundVolumeSettingSet();
@@ -604,7 +604,7 @@ LAB_003268e4:
           *(unsigned short *)(g_lmapScene + 0x19c) = 1;
           FUN_001bc124();
           FUN_001bbf0c();
-          temp_v3 = FUN_00184964(0,1);
+          temp_v3 = randBetween(0,1);
           if (*(int *)(g_lmapScene + 0x1d0) != 10) {
             FUN_0014af98();
             soundVolumeSettingSet();

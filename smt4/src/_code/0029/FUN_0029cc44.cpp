@@ -1,9 +1,9 @@
 /* NON_MATCHING: counter clamps are folded into branched stores and the widget's global pointer reload is eliminated; 103 vs 102 instructions. */
 #include "ui/MessageMain.h"
+#include "font/ComWin/ComWin.h"
 
 extern "C" {
 extern MessageGlobals g_messageMain;
-void spriteStartAnimationByIndex(void *widget, u32 animation);
 void titleOverlaySetModeAnimation(void *overlay, u32 mode);
 }
 namespace {

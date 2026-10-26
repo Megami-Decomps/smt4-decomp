@@ -15,7 +15,7 @@ typedef struct {
 } param_2_stack;
 
 /* Supplied declaration required: FUN_0016cd18. */
-extern int FUN_0016ceb8(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+extern int fsArchiveGetWorkspaceSize(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 
 
 void FUN_00159a08(int param_1,unsigned int param_2)
@@ -25,7 +25,7 @@ void FUN_00159a08(int param_1,unsigned int param_2)
   int temp_v0;
   unsigned int temp_v1;
   
-  temp_v0 = FUN_0016ceb8(0,param_2,0x10302,0x400db,0,1,1);
+  temp_v0 = fsArchiveGetWorkspaceSize(0,param_2,0x10302,0x400db,0,1,1);
   if (temp_v0 < 0x801) {
     temp_v1 = 0;
     FUN_0016cd18("ngword:",0,0x10302,0x400db,0,1,1,*(unsigned int *)(param_1 + 0x28),0x800,0);

@@ -55,7 +55,7 @@ void FUN_002b75ec(u32 sprite, s32 x, s32 y, s32 a, s32 b, s32 c);
 void textDrawString(s32 a, u32 icon, void *object, f32 x, f32 y);
 LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_002c18e4(TitleScene *scene);
-void FUN_002c198c(TitleScene *scene);
+void renderCtxApplyTransforms(TitleScene *scene);
 void renderCtxSelectStereoLayout(TitleScene *scene);
 s32 FUN_002c5d80(s32 a, s32 b);
 u32 vec2GetXInt(void *vec);
@@ -99,7 +99,7 @@ u8 FUN_002109cc(void)
             }
         }
         renderStackPop(&g_titleScene->stack);
-        FUN_002c198c(g_titleScene);
+        renderCtxApplyTransforms(g_titleScene);
         FUN_002c18e4(g_titleScene);
     }
     return 0;

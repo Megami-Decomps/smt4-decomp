@@ -3,6 +3,7 @@
 #include <stddef.h>
 #include <string.h>
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 /* An entry the party setup wrote: a flag word and the demon id. */
 struct PartyEntry {
@@ -45,7 +46,6 @@ typedef char PartyWorldLayout[offsetof(PartyWorld, flags) == 0x44A8 && offsetof(
 
 extern "C" {
 
-DemonRecord *dataTable00FindById(u32 id);
 PartyRecord *saveGetIndexedMapValue(s32 index);
 PartyObject *FUN_00294090(s32 id, s32 arg);
 
@@ -81,7 +81,7 @@ void FUN_003398e4(PartyWorld *world)
             } else if (i == 3) {
                 world->defaults[3] = 0x83;
             }
-            ids[i] = dataTable00FindById((u16)world->defaults[i])->slot;
+            ids[i] = reinterpret_cast<DemonRecord *>(dataTable00FindById((u16)world->defaults[i]))->slot;
         }
         world->selectedCount = selected;
     } else {
@@ -92,7 +92,7 @@ void FUN_003398e4(PartyWorld *world)
 
             if (record->demonId != 0) {
                 world->defaults[selected] = record->demonId;
-                ids[selected] = dataTable00FindById(record->demonId)->slot;
+                ids[selected] = reinterpret_cast<DemonRecord *>(dataTable00FindById(record->demonId))->slot;
                 selected++;
             }
         } while (selected < 4 && ++j < 12);

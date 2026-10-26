@@ -3,19 +3,19 @@
 #include "battle/btlMain.h"
 #include "script/ScriptArgs.h"
 #include "battle/BtlMainAccess.h"
+#include "util/SlotRangeSelect.h"
 extern "C" {
 s32 scrGetArg(s32 index);
 s32 btlScriptResolveGroupArg(s32 group);
-void FUN_002499fc(s32 group, u32 *range, u32 *count);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
 
 // Test whether a selected combatant has either alternate pending effect.
 u32 FUN_00327a24(void)
 {
-    u32 first;
-    u32 count;
+    s32 first;
+    s32 count;
     FUN_002499fc(btlScriptResolveGroupArg(scrGetArg(0)), &first, &count);
-    for (s32 index = first; index < (s32)(first + count); ++index) {
+    for (s32 index = first; index < first + count; ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];
         if (!(entry->flags & BTL_ENTRY_FLAG_PRESENT) &&
             (entry->flags & BTL_ENTRY_FLAG_ACTIVE) &&

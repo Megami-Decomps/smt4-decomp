@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains intermediate zero-flags and unclamped-row stores absent from direct initialization. */
+/* NON_MATCHING: store set now equals retail (zero flags first, unclamped then clamped visibleRows); only store scheduling and the zero register (ip vs r3) differ. */
 #include "common.h"
 
 struct RowWidget {
@@ -19,6 +19,7 @@ extern "C" {
 void rowWidgetInit(RowWidget *widget, s32 rows, u32 parameter)
 {
     widget->parameter = parameter;
+    widget->flags = 0;
     widget->unk04 = 0;
     widget->unk08 = 0;
     widget->unk0c = 0;
@@ -26,7 +27,10 @@ void rowWidgetInit(RowWidget *widget, s32 rows, u32 parameter)
     widget->rowCount = rows;
     widget->mode = 2;
     widget->unk24 = 0;
-    widget->visibleRows = rows > 0 ? rows : 0;
+    widget->visibleRows = rows;
+    if (widget->visibleRows <= 0) {
+        widget->visibleRows = 0;
+    }
     widget->flags = 6;
 }
 }

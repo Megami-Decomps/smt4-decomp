@@ -6,11 +6,11 @@ extern "C" {
 
 int FUN_00237d78(void);
 int FUN_00238aac(int *, int);
-int FUN_003f72b4(int *, int, unsigned int);
+int variantCopy(int *, int, unsigned int);
 
 /* Supplied declaration required: FUN_00237d78. */
 /* Supplied declaration required: FUN_00238aac. */
-/* Supplied declaration required: FUN_003f72b4. */
+/* Supplied declaration required: variantCopy. */
 
 
 unsigned int FUN_0035e090(unsigned int *param_1,int *param_2)
@@ -44,7 +44,7 @@ unsigned int FUN_0035e090(unsigned int *param_1,int *param_2)
             *piVar3 = (int)piVar2;
             *(int **)(*piVar2 + 4) = piVar2;
             piVar2 = piVar2 + 2;
-            FUN_003f72b4(piVar2,temp_v1 + 8,*param_1);
+            variantCopy(piVar2,temp_v1 + 8,*param_1);
             if (piVar2 == (int *)0x0) {
               return 0;
             }

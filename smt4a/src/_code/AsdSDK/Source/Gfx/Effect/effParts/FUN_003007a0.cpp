@@ -2,11 +2,11 @@
 #include "AsdSDK/Source/Gfx/Effect/effParts.h"
 
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char g_effPartsSourcePath[]; /* "c:\SMT4F\SMT4F\AsdSDK\Source\Gfx\Effect\effParts.cpp": __FILE__ */
 
-void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, s32 size);
 void FUN_001b4ddc(EffPart *part);
 

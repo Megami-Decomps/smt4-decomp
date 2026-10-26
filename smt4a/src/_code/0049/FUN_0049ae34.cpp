@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc lowers the three active states to comparisons rather than retail's five-entry jump table and allocates the menu/state base registers oppositely. */
+/* NON_MATCHING: the five-entry jump table now matches (labels 0 and 2 are explicit); the case bodies and saved-register allocation still differ (retail 87 vs built 111 rows). */
 #include "shard/Shard0049.h"
 #include "addon/AocEntryKind.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -21,6 +21,9 @@ extern EquipmentMenuReadyState *DAT_0057f578;
 extern "C" void FUN_0049ae34(EquipmentMenuState *menu)
 {
     switch (menu->state) {
+    case 0:
+    case 2:
+        break;
     case 1:
         if (FUN_0023b3d0()) {
             FUN_0031f718(-1, 0);

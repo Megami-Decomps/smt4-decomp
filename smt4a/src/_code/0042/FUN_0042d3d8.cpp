@@ -25,7 +25,7 @@ extern unsigned int g_moduleCriticalSection6; /* 0x6426b4 */
 /* Supplied declaration required: FUN_002e3140. */
 extern int FUN_0042fbd4(void);
 /* Supplied declaration required: FUN_0042fd28. */
-extern unsigned int FUN_0042ff1c(unsigned int *);
+extern unsigned int resourceDispatch(unsigned int *);
 extern int FUN_00430394(unsigned int);
 extern int svcRequestChannelByIndex(unsigned int);
 extern void nn_os_CriticalSection_Enter(unsigned int);
@@ -72,7 +72,7 @@ int FUN_0042d3d8(int param_1,int param_2)
     else {
       temp_v0 = 0;
       temp_v6 = 0;
-      temp_v2 = FUN_0042ff1c(&temp_v6);
+      temp_v2 = resourceDispatch(&temp_v6);
       temp_v4 = 0;
       if ((temp_v2 & 0x80000000) == 0) {
         temp_v4 = temp_v6;

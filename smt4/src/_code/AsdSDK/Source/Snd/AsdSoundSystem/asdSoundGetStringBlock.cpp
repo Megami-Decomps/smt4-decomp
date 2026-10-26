@@ -2,12 +2,12 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
+#include "util/FUN_002bf684.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
 extern void *DAT_004e23e0; /* g_asdSound.stringBlock, as the allocation path reads it back */
 
-s32 FUN_002bf684(void *archive);
 u32 nw_snd_internal_SoundArchiveFile_FileHeader_GetStringBlockSize(void *header);
 void *asdMemoryAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void FUN_00121774(void *archive, void *buffer, u32 size);

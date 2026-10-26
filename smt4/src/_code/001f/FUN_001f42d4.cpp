@@ -33,7 +33,6 @@ s32 jobGetStatus(u32 job);
 s32 FUN_00285584(u32 job, s32 x, s32 y);
 s32 FUN_002c5d80(u32 first, u32 second);
 s32 packNibblesAndByte(u32 high, u32 low, u32 byte);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the title scene's jobs with the three render stacks pushed. */
@@ -61,7 +60,7 @@ s32 FUN_001f42d4(u32 job)
     renderStackPop(&g_titleScene->stackB);
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->additional.stackC);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return 0;
 }

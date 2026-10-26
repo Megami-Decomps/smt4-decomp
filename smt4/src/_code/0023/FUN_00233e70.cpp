@@ -16,7 +16,7 @@ static inline s32 aocResultLevel(u32 result)
 extern "C" {
 extern AocMain *g_aocMain;
 u32 legacyResourceIdRemap(WindowStatusResult *result);
-void FUN_0038b420(AocMain *main, u32 low, u32 high);
+s32 FUN_0038b420(AocMain *main, WindowStatusResult result);
 u32 FUN_002a1200(const u32 *result);
 u32 FUN_002a116c(const u32 *result);
 s32 queryResultFailureOnly(const u32 *object);
@@ -37,7 +37,7 @@ void FUN_00233e70(ScreenTransitionState *transition, u32 unused, u32 nextState)
     FUN_002ba8f4(&main->objA);
     if (legacyResourceIdRemap(&work->result.handle) == 0xC9413891)
         return;
-    FUN_0038b420(g_aocMain, work->result.handle.code, work->result.handle.description);
+    FUN_0038b420(g_aocMain, work->result.handle);
     if (FUN_002a1200(&work->result.handle.code)) {
         transition->flags = 4;
         transition->phase = 0;

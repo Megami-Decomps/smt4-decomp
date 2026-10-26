@@ -49,7 +49,6 @@ s32 FUN_002c5d80(u32 kind, u8 enabled);
 s32 flagsPackFourBooleans(u8 first, u8 second, u8 third, u8 fourth);
 u32 FUN_003deab0(LogoObject *logo, s32 mode);
 void FUN_0023e024(LogoObject *logo, u32 handle, f32 *position, s32 color, s32 mode, f32 scale);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the title logo under a flat orthographic projection the size of the screen, with the
@@ -98,7 +97,7 @@ void FUN_00258618(TitleLogoRequest *request)
     renderStackPop(&g_titleScene->additional.stackC);
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->stackB);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 

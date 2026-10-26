@@ -38,15 +38,14 @@ void FUN_00234cd8(MoverTargets *mover, s32 slot, s32 snap)
     }
     mover->frame = 0;
     mover->active = 1;
-    if (slot != 0) {
-        MovedPart *source = mover->parts[slot];
-        mover->finalPosition.x = source->x;
-        mover->finalPosition.y = source->y;
-        mover->finalPosition.z = source->z;
-        mover->finalPositionB = *FUN_002a86a4(mover->parts[slot]);
-    } else {
+    if (slot == 0) {
         mover->finalPosition = mover->homePosition;
         mover->finalPositionB = mover->homePositionB;
+    } else {
+        mover->finalPosition.x = mover->parts[slot]->x;
+        mover->finalPosition.y = mover->parts[slot]->y;
+        mover->finalPosition.z = mover->parts[slot]->z;
+        mover->finalPositionB = *FUN_002a86a4(mover->parts[slot]);
     }
     mover->velocity.x = (mover->finalPosition.x - mover->position.x) * 0.1f;
     mover->velocity.y = (mover->finalPosition.y - mover->position.y) * 0.1f;

@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_00157558(int);
 int FUN_00164168(...);
 int efctSetSpeed(void);
 int renderPopStateStacks(void);
@@ -23,7 +23,6 @@ typedef struct {
 extern int g_infoWin; /* 0x57f574 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: FUN_00164168. */
 extern int btlMainIsRunning(void);
 extern int vec2GetXInt(int);
@@ -64,7 +63,7 @@ char FUN_00155ca8(void)
   if (temp_v10 || temp_v0 == '\0') {
     return temp_v0;
   }
-  FUN_00157558(g_renderCtx);
+  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
   temp_v3 = g_renderCtx;
   temp_v2 = FUN_001692ac(1,0);
   piVar11 = (int *)(temp_v3 + 0x1258);

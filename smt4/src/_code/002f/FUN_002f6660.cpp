@@ -1,5 +1,6 @@
 /* NON_MATCHING: status and its list pointer swap callee-saved registers (r5/r4 instead of retail's r4/r5). */
 #include "common.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 
@@ -24,7 +25,6 @@ extern StatusDown *g_statusDown;
 
 s32 FUN_0029ee54(void *list);
 void FUN_0029f848(void *list, s32 count, s32 a, s32 b, s32 c, s32 d);
-void FUN_0029eb5c(void *list, s32 index);
 void ifTouchRegionRemove(void);
 void *__aeabi_memset4(void *dest, s32 size, s32 value);
 void FUN_0026ae68(void);
@@ -39,7 +39,7 @@ void FUN_002f6660(u32 first, u32 second)
     status->unk544 = first;
     status->unk540 = second;
     FUN_0029f848(list, FUN_0029ee54(list) + 1, 9, 1, 0, 1);
-    FUN_0029eb5c(list, FUN_0029ee54(list) - 1);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(list), FUN_0029ee54(list) - 1);
     status->unk410 = 1;
     current = g_statusDown;
     for (s32 i = 0; i < current->regionCount; i++) {

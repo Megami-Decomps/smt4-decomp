@@ -1,5 +1,6 @@
 /* NON_MATCHING: path branch layout and allocation/null initialization differ; incoming four-float pose ABI recovered from entry stores. */
 #include "map/mapIf.h"
+#include "util/FUN_0040aa6c.h"
 
 namespace {
 struct MapIfSpawnPose { f32 x, y, z, heading; };
@@ -11,7 +12,6 @@ extern void *g_handleRegistry;
 s32 textFormatBuffer(char *output, const char *format, ...);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 MapIfResource *modelListInit(void *memory);
-void FUN_0040aa6c(MapIfResource *, const char *path);
 void FUN_0040aad4(MapIfResource *, s32 mode);
 void handleRegistryRegisterObject(void *registry, u32 handle);
 void controllerSetDestination(u32 handle, const f32 *position);

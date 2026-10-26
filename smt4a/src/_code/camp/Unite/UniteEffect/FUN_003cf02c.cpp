@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gfx/CameraMotion.h"
 #include "camp/Unite/UniteEffect.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ int FUN_0040a244(...);
 int FUN_001517b4(...);
 int sysPlaySe(...);
 int FUN_00180118(...);
-int uiSpriteSelectAnim(...);
 int ptrListRemoveClearOwner(...);
 int FUN_001fc348(...);
 int FUN_0022677c(...);
@@ -87,7 +87,6 @@ extern unsigned int FUN_0014bf3c(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00178b04. */
 /* Supplied declaration required: FUN_00180118. */
 extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
-/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: scrScriptProcessDestroy. */
 /* Supplied declaration required: FUN_0019eb14. */
@@ -504,7 +503,7 @@ LAB_003cf9bc:
         temp_v3 = 6;
         *(int *)(temp_v2 + 8) = temp_v10;
         do {
-          uiSpriteSelectAnim(temp_v2 + temp_v3 * 0x8c + 0x360,1);
+          uiSpriteSelectAnim((void *)(temp_v2 + temp_v3 * 0x8c + 0x360),1);
           temp_v3 = temp_v3 + 1;
         } while (temp_v3 < 10);
       }
@@ -518,7 +517,7 @@ LAB_003cf9bc:
       temp_v3 = 0;
       do {
         if (*(int *)(temp_v2 + 8) == temp_v10 + temp_v3 * 4) {
-          uiSpriteSelectAnim(temp_v2 + temp_v3 * 0x8c + 0x6a8,0);
+          uiSpriteSelectAnim((void *)(temp_v2 + temp_v3 * 0x8c + 0x6a8),0);
         }
         temp_v3 = temp_v3 + 1;
       } while (temp_v3 < 4);

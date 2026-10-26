@@ -1,19 +1,19 @@
 /* NON_MATCHING: retail has a stripped debug call (file/line setup + nop) before each item allocation. */
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "shard/JobWork.h"
+#include "shard/W6_W6Match2_GeometryResources.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern u8 LAB_002e11f0; /* item callback */
 
-AsdListBoxModel *jobGetWork(AsdListBox *listBox);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdListAdd(void *list, void *item, void *func);
-AsdListBoxItem *asdListBoxFindItem(AsdListBox *listBox, u32 id);
-void asdListBoxMarkDirty(AsdListBox *listBox);
+void asdListBoxMarkDirty(u32 listBox);
 void asdListBoxViewRefresh(void *view);
 char *strncpy(char *dst, const char *src, u32 n);
 
 /* Adds one item per table row (label, kind, value and range) to the list box. */
-void asdListBoxAddItems(AsdListBox *listBox, const AsdListBoxEntry *entries, s32 count)
+void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, s32 count)
 {
     s32 i;
     const AsdListBoxEntry *entry;
@@ -26,7 +26,7 @@ void asdListBoxAddItems(AsdListBox *listBox, const AsdListBoxEntry *entries, s32
         entry = &entries[i];
 
         /* The new item starts as a plain labelled row. */
-        model = jobGetWork(listBox);
+        model = reinterpret_cast<AsdListBoxModel *>(jobGetWork(listBox));
         item = (AsdListBoxItem *)asdMemAlloc(0x100, 0x100, 0, sizeof(AsdListBoxItem), 1);
         strncpy(item->label, entry->label, ASD_LISTBOX_PATH_LEN);
         item->type = 0;

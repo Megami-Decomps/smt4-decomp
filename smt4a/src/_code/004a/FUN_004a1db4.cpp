@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles (172 vs 173 rows); retail uses a larger callee-saved set (push {r3-r9,lr}) and different register allocation */
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 // Selection state of the animated page UI.
 struct AnimatedPageSelection {
@@ -41,7 +42,6 @@ void FUN_0037c8e4(s32 a, s32 b);
 s32 FUN_002a4b28(u16 id);
 void panelSetTarget(s32 target, s32 arg);
 void messageSetActiveMode(s32 mode);
-s32 FUN_002a482c(void* list);
 s32 FUN_0031d174(void* list);
 s32 statusDownGetMode(void);
 s32 inputIsQuestConfirmPressed(void);

@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "util/FUN_003ee0c0.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int FUN_004fcde0(...);
 int infoWinSetText(unsigned int, unsigned int);
 int uiNavigatorStart(int, int, int, int, int);
 int stateFinishIfPresent(int);
-int FUN_003ee0c0(int);
 int FUN_003f0e20(...);
 int FUN_003f1b3c(int, unsigned int, unsigned int, unsigned int *, int *);
 int FUN_0047f4cc(int);
@@ -71,7 +71,6 @@ extern int dialogIsActive(void);
 /* Supplied declaration required: stateFinishIfPresent. */
 extern int FUN_003eb1cc(int);
 extern unsigned int contentGetFirstFlaggedValue(void);
-/* Supplied declaration required: FUN_003ee0c0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_003f1b3c. */
 extern int chainCountIdUnflagged(unsigned int);
@@ -217,7 +216,7 @@ unsigned int FUN_004e05d4(int *param_1,unsigned int *param_2)
     temp_v2 = temp_v2 + 1;
   } while (temp_v2 < 0x6d);
   *(unsigned int *)(*param_1 + 0x4cf0) = 0;
-  FUN_003ee0c0(*param_1);
+  FUN_003ee0c0((void *)(*param_1));
   if ((param_2[0xc] == 5) && ((*(unsigned short *)(param_2[10] + 0x110) & 0x10) == 0)) {
     puVar7 = (unsigned int *)param_2[8];
     temp_v4 = ~DAT_0057115c;

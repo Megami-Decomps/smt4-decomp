@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00157558(int);
 int efctSetSpeed(void);
-int FUN_0016c4b8(int);
+int renderCtxSelectTexture(int);
 int FUN_001835b4(...);
 int renderCtxCalculateStereoParallax(int);
 int FUN_0019e3d0(unsigned int);
@@ -31,7 +31,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: efctSetSpeed. */
 extern int mapMainIsIdle(void);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: FUN_001835b4. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -101,7 +101,7 @@ void FUN_0014aa9c(unsigned int param_1)
       VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
       *(unsigned int *)(temp_v6 + 0x40) = 1;
-      FUN_0016c4b8(g_renderCtx);
+      renderCtxSelectTexture(g_renderCtx);
       FUN_0019e3d0(0xffffffff);
     }
     efctSetSpeed();

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail preserves a nullable record-helper result; the direct payload search folds its exits. */
+/* NON_MATCHING: retail unrolls the search by two and its three exits share one nullable derived-to-base style tail (cmp r0,#0; addne r0,r0,#4); the direct payload search folds its exits. Tried: base-class record with early return (unrolled, per-exit checks), found-pointer break and inline finder (no unroll). */
 #include "gamedata/X14_Table21.h"
 
 /* Find the payload belonging to an ID in the first section of table 21. */

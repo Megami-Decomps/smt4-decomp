@@ -19,7 +19,7 @@ BtlMainStateA *jobGetWork(u32 job);
 s32 idSetFindSubjectIndex(BtlMainStateA *battle, const BattleRosterRecordA *record);
 BattleMotionSubject *FUN_001568f8(BtlMainStateA *battle, s32 group);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
-u32 FUN_00184964(u32 minimum, u32 maximum);
+u32 randBetween(u32 minimum, u32 maximum);
 void *stateEntryFindById(BtlMainStateA *battle, s32 id);
 f32 asdAnimGetTrackLastFrame(void *animation, u32 track);
 s32 btlScriptUnitHasFlags(void);
@@ -61,7 +61,7 @@ u32 battleRosterMotionUpdate(u32 job)
             ++motion.pulseFrame;
             if ((subject->appearance.flags & 3) != 0 && motion.pulseFrame >= motion.pulseDuration) {
                 FUN_003f0e20(battle, motion.group);
-                motion.pulseDuration = FUN_00184964(2, 6) * 30;
+                motion.pulseDuration = randBetween(2, 6) * 30;
                 motion.pulseFrame = 0;
             }
         }

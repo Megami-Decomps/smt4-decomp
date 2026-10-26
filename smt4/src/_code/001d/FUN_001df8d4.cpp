@@ -1,5 +1,7 @@
 /* NON_MATCHING: readable rebuild from asm of the learn-order picker; armcc here keeps the best score/rank in different registers and orders the float compares (retail: vcmpe then vcmp on s17/s16 with 0.01f in s19 and 1.0f in s18). */
 #include "common.h"
+#include "gamedata/SkillFlags.h"
+#include "gamedata/DataTable40.h"
 
 /* The skill learn picker. */
 struct SkillPicker {
@@ -17,17 +19,8 @@ struct SkillPicker {
     /* 0x30 */ s32 rankByType[8];
 };
 
-/* A skill type record (only the fields read here). */
-struct SkillTypeRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 type;
-    /* 0x03 */ u8 power;   /* low 5 bits */
-};
-
 extern "C" {
 s32 idMapLookup(u32 id);
-SkillTypeRecord *dataTable06Sub1GetRecord(u16 id);
-void *dataTable40FindById(u32 id);
 void *passiveSkillLookupRecord(u32 id);
 s32 FUN_0026a604(void *passive, void *skill);
 
@@ -44,8 +37,8 @@ u32 FUN_001df8d4(SkillPicker *picker)
         u32 id = picker->candidates[i];
         if (id == 0 || idMapLookup(id) == 6)
             continue;
-        SkillTypeRecord *record = dataTable06Sub1GetRecord(id);
-        f32 power = (f32)(record->power & 31);
+        SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);
+        f32 power = (f32)(record->flags & 31);
         f32 score = power + power * 0.01f;
         s32 element = idMapLookup(id);
         if (picker->preferredElement == element)
@@ -62,10 +55,10 @@ u32 FUN_001df8d4(SkillPicker *picker)
         for (s32 k = 0; k < picker->chosenCount; k++) {
             if (idMapLookup(picker->chosen[k]) == element)
                 score -= 1.0f;
-            if (dataTable06Sub1GetRecord(picker->chosen[k])->type == record->type)
+            if (dataTable06Sub1GetRecord(picker->chosen[k])->category == record->category)
                 score -= 1.0f;
         }
-        s32 rank = picker->rankByType[record->type];
+        s32 rank = picker->rankByType[record->category];
         if (best < 0) {
             bestScore = score;
             best = i;

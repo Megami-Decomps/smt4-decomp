@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Net/Cec/AsdCecProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match3_OnlineValueCompletion.h"
+#include "sys/ResultReport.h"
 
 struct CecProcess;
 typedef void (*CecThreadEntry)(CecProcess*);
@@ -29,7 +30,6 @@ void FUN_0028196c(CecProcess* process);
 s32 FUN_002fb0d4(ThreadHandleState* thread, const CecThreadCallDescriptor* descriptor,
                  CecThreadEntry entry, CecProcess* const* argument, void* stackTop,
                  u32 priority, s32 processor, u32 flags);
-void FUN_002e3140(s32 result);
 
 // Initialize inbox accounting, allocate its worker stack, and start the CEC thread.
 void FUN_0035af44(CecProcess* process)

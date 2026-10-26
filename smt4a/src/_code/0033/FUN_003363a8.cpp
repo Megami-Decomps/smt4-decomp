@@ -3,13 +3,13 @@
 #include "battle/btlUI.h"
 #include "battle/btlMain.h"
 #include "ui/UiSpriteState.h"
+#include "util/BtlScriptUnitHasFlags.h"
 
 namespace {
 struct CommandPanelMasks { u8 prefix[0x20]; u64 blocked; };
 }
 extern "C" {
 extern CommandPanelMasks DAT_00573b88;
-s32 btlScriptUnitHasFlags(BtlMainStateA *state);
 s32 ifTouchGetButtonHelpValue();
 void sysPlaySe(u32 sound);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);

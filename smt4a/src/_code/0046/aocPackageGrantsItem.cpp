@@ -10,7 +10,7 @@ struct AocItemRowView {
 
 extern "C" {
 extern u32 g_aocMain;
-s32 FUN_001b3148(u32 aoc);
+s32 objHasFlagBit16(u32 aoc);
 s32 FUN_001b315c(DataEntry *entry);
 const DataRow *FUN_001b31ac(DataEntry *entry);
 u32 FUN_001b31e0(DataEntry *entry);
@@ -18,7 +18,7 @@ u32 FUN_001b31e0(DataEntry *entry);
 // Report whether a mounted content package grants the item (optionally only while content is available).
 s32 aocPackageGrantsItem(DataSet *system, u32 itemId, s32 checkAvailable)
 {
-    if (checkAvailable && !FUN_001b3148(g_aocMain)) {
+    if (checkAvailable && !objHasFlagBit16(g_aocMain)) {
         return 0;
     }
     for (s32 package = 0; package < system->entryCount; ++package) {

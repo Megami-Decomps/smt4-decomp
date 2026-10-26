@@ -1,4 +1,3 @@
-/* NON_MATCHING: one load form: retail loads the excluded mask pair with ldm {r3, ip} (after add r3, r6, #24); the build uses two ldr into different registers. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -6,6 +5,11 @@
 extern "C" {
 
 void FUN_004c3db4(BtlCombatantEntryA *entry);
+
+static __inline bool battleMaskIntersects(u64 mask, u64 flags)
+{
+    return (mask & flags) != 0;
+}
 
 /* Runs FUN_004c3db4 for every battle entry that is eligible, not excluded and has the required mask bits. */
 u32 FUN_003cc460(void)
@@ -16,7 +20,7 @@ u32 FUN_003cc460(void)
         BtlCombatantEntryA *entry = &battle->entries[i];
 
         if ((g_battleMaskPresets.eligibility.active & entry->flags) != 0 &&
-            (g_battleMaskPresets.eligibility.excluded & entry->flags) == 0 &&
+            !battleMaskIntersects(g_battleMaskPresets.eligibility.excluded, entry->flags) &&
             (entry->flags & g_battleMaskPresets.eligibility.required) != 0) {
             FUN_004c3db4(entry);
         }

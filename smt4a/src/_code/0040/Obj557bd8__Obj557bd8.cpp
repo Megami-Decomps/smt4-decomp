@@ -1,7 +1,7 @@
 /* NON_MATCHING: only the two packed-color computations differ: retail loads the RGBA floats with scalar vldr (b/a as a vldm pair in the first) and a different scheduling. */
 #include "common.h"
 #include "classes/Obj557bd8.h"
-#include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct ColorRecord {
     /* 0x00 */ u8 unk00[0x10];
@@ -15,7 +15,6 @@ struct TexHeader {
 
 extern "C" {
 s32 textFormatBuffer(char *output, const char *format, ...);
-SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 id);
 TexHeader *asdTMTexTableGetHeaderValue(u32 group, s32 index);
 }
 
@@ -43,7 +42,7 @@ Obj557bd8::Obj557bd8()
     slotState[6] = 0;
     slotState[7] = 0;
 
-    SpriteInfo *sprite = asdTMTexTableEntryAt(12, 70);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(12, 70);
     iconPos[0][0] = sprite->x;
     iconPos[0][1] = sprite->y;
     sprite = asdTMTexTableEntryAt(12, 71);
@@ -59,11 +58,11 @@ Obj557bd8::Obj557bd8()
     frameSize[1][0] = sprite->x;
     frameSize[1][1] = sprite->y;
     frameSize[0][1] = frameSize[1][1];
-    barWidth = sprite->size[0];
-    const ColorRecord *color = (const ColorRecord *)asdTMTexTableEntryAt(12, 107)->size;
+    barWidth = sprite->placement->width;
+    const ColorRecord *color = (const ColorRecord *)asdTMTexTableEntryAt(12, 107)->placement;
     colorA = ((u32)(color->r * 255.0f) << 24) | ((u32)(color->g * 255.0f) << 16) | ((u32)(color->b * 255.0f) << 8) |
              (u32)(color->a * 255.0f);
-    color = (const ColorRecord *)asdTMTexTableEntryAt(12, 110)->size;
+    color = (const ColorRecord *)asdTMTexTableEntryAt(12, 110)->placement;
     colorB = ((u32)(color->r * 255.0f) << 24) | ((u32)(color->g * 255.0f) << 16) | ((u32)(color->b * 255.0f) << 8) |
              (u32)(color->a * 255.0f);
     asdTMTexTableGetHeaderValue(12, 3)->mode = 3;

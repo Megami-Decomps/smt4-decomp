@@ -1,12 +1,18 @@
-/* NON_MATCHING: retail stores the zero components as integer words (str of 0; w is written 0 then 1.0f); the build stores them as float zeros (vstr/vstm) */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include <string.h>
+
+static void quaternionSetIdentity(EffLightVec4 *quaternion)
+{
+    memset(quaternion, 0, sizeof(*quaternion));
+    quaternion->w = 1.0f;
+}
 
 extern "C" {
 
 extern const char DAT_005449b4[];
 
-void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, s32 size);
 void *resourceResolveHeaderPointer(EffAsdLightDesc *desc);
 void rt_memcpy(void *dst, const void *src, s32 size);
@@ -25,14 +31,8 @@ EffAsdLight *effAsdLightCreateFromDesc(EffAsdLightDesc *desc)
     light = (EffAsdLight *)memAlloc(0x10000, 0x100, 0, 0x120, 0x10, 1);
 
     sysMemClear(light, 0x120);
-    light->rotation0.x = 0;
-    light->rotation0.y = 0;
-    light->rotation0.z = 0;
-    light->rotation0.w = 1.0f;
-    light->rotation1.x = 0;
-    light->rotation1.y = 0;
-    light->rotation1.z = 0;
-    light->rotation1.w = 1.0f;
+    quaternionSetIdentity(&light->rotation0);
+    quaternionSetIdentity(&light->rotation1);
     light->unk24 = -1;
     light->scale = 1.0f;
     if (desc != NULL) {

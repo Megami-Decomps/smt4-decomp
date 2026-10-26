@@ -1,4 +1,4 @@
-/* NON_MATCHING: same arithmetic; retail ends each arm with its own pop (the zero-size arm placed second, loading all four fields before the stores), armcc here joins the arms with a branch. */
+/* NON_MATCHING: same arithmetic and arm layout; retail loads the rectangle's x/y after the size test and groups the size loads. */
 #include "common.h"
 
 extern "C" {
@@ -28,14 +28,14 @@ void FUN_00295eb0(CenterTarget *target, void *owner, u32 id)
     UiRect *rect = asdTMTexTableEntryAt(owner, id);
     s16 *size = rect->size;
 
-    if (size != NULL) {
-        s32 centerX = rect->x + size[0] / 2;
-        s32 centerY = rect->y + size[1] / 2;
+    if (size == NULL) {
+        s32 centerX = rect->x + ((rect->width & 0x7FFF) >> 1);
+        s32 centerY = rect->y + ((rect->height & 0x7FFF) >> 1);
         target->centerX = centerX;
         target->centerY = centerY;
     } else {
-        s32 centerX = rect->x + ((rect->width & 0x7FFF) >> 1);
-        s32 centerY = rect->y + ((rect->height & 0x7FFF) >> 1);
+        s32 centerX = rect->x + size[0] / 2;
+        s32 centerY = rect->y + size[1] / 2;
         target->centerX = centerX;
         target->centerY = centerY;
     }

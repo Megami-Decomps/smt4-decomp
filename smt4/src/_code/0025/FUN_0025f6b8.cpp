@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -102,7 +103,6 @@ extern int btlActorIsDown(unsigned int);
 /* Supplied declaration required: FUN_00293f10. */
 /* Supplied declaration required: FUN_0029a17c. */
 /* Supplied declaration required: fadeObjectResetIfActive. */
-extern int gameGetUnitRecord(int);
 /* Supplied declaration required: categoryGetColor. */
 /* Supplied declaration required: pairSetHalves. */
 extern int gameGetPlayerData(void);
@@ -504,7 +504,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
             *(unsigned short *)(temp_v16 + 0x38e0) = *(unsigned short *)(temp_v12 + 0x392c);
           }
           else {
-            temp_v13 = gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4));
+            temp_v13 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
           }
           temp_v12 = temp_v13;
           FUN_00269bf0();
@@ -660,7 +660,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v9 = 0;
         if (temp_v15 != 0) {
           if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-            temp_v7 = gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4));
+            temp_v7 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
             temp_v9 = (unsigned int)*(unsigned short *)(temp_v7 + 0x44);
           }
         }
@@ -705,7 +705,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v2 = 0;
           if (temp_v15 != 0) {
             if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-              temp_v13 = gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4));
+              temp_v13 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
               temp_v2 = *(unsigned short *)(temp_v13 + 0x44);
             }
           }
@@ -836,7 +836,7 @@ void FUN_0025f6b8(int param_1,int param_2,int param_3,int param_4,int param_5)
         temp_v9 = 0;
         if (temp_v15 != 0) {
           if (-1 < *(short *)(temp_v16 + 0x38f4)) {
-            temp_v12 = gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4));
+            temp_v12 = reinterpret_cast<int>(gameGetUnitRecord((int)*(short *)(temp_v16 + 0x38f4)));
             temp_v9 = (unsigned int)*(unsigned short *)(temp_v12 + 0x44);
           }
         }

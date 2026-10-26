@@ -20,7 +20,6 @@ typedef char TitleRadialGradientOffsets[offsetof(TitleRadialGradient, block) == 
 
 extern "C" {
 extern RenderCtx *g_titleScene;
-void FUN_002c1b64(RenderCtx *, u32);
 s32 FUN_002c5d80(u32, u32);
 void FUN_002573d8(void);
 void effectSpawnPositionDefault(RgbaWord, f32, f32, f32);
@@ -47,7 +46,7 @@ void FUN_001f67ec(const TitleRadialGradient *gradient)
     centerColor.word = titleGradientColorWord(&block->color);
     RgbaWord edgeColor;
     edgeColor.word = centerColor.word & ~0xFFu;
-    FUN_002c1b64(g_titleScene, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     RenderCtx *context = g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 0));
     f32 centerX = block->first.x + (block->last.x - block->first.x) * 0.5f;

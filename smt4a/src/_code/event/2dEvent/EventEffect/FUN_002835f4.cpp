@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00157558(int);
 int FUN_001640cc(...);
 int efctSetSpeed(void);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
@@ -49,7 +49,7 @@ extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: efctSetSpeed. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableEntryAt(unsigned int, int);
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
@@ -221,7 +221,7 @@ unsigned int FUN_002835f4(void)
   renderCtxCalculateStereoParallax(g_renderCtx,temp_v8,temp_v9,temp_v10);
   temp_v3 = *(int *)(temp_v0 + 0x24) * 0x10;
   temp_v4 = asdTMTexTableGetHeaderValue(*(unsigned int *)(temp_v3 + 0x57f43c),*(unsigned int *)(temp_v3 + 0x57f440));
-  FUN_0016c4b8(g_renderCtx,temp_v4);
+  renderCtxSelectTexture(g_renderCtx,temp_v4);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x30),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v0 + 0x34),(unsigned char)(in_fpscr >> 0x16) & 3);
   FUN_001640cc(&temp_v11,&temp_v15,&temp_v19,&temp_v23);

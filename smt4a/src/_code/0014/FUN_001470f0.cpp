@@ -1,34 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001470f0` (_code @ 0x1470f0, 0x2c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
-extern "C" {
+extern "C" u32 DAT_005c0a80;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern unsigned char LAB_00210000; /* 0x210000 */
-extern unsigned int DAT_005c0a80; /* 0x5c0a80 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_001470f0(void)
-
+/* Sends a parameterless request to the service. */
+extern "C" s32 FUN_001470f0(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned char **)(temp_v1 + 0x80) = &LAB_00210000;
-  software_interrupt(0x32);
-  temp_v0 = DAT_005c0a80;
-  if ((DAT_005c0a80 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    nn::os::SetIpcWord(command, 0, 0x210000);
+    s32 result = nn::svc::SendSyncRequest(DAT_005c0a80);
+    if (nnResultIsSuccess(result)) {
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */

@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -14,12 +15,6 @@ struct MapDepartView {
     /* 0x54 */ s32 slide;               /* 0..4: how far the panel has slid in */
 };
 
-/* A layout entry of a UI table: the offset of one element. */
-struct LayoutEntry {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-};
 }
 
 extern "C" {
@@ -29,7 +24,6 @@ void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 void FUN_00355428(void);
 void FUN_00164b5c(u32 layer, u32 table, u32 entry, s32 x, s32 y, u32 slot);
-LayoutEntry *asdTMTexTableEntryAt(u32 table, u32 entry);
 void textFormatBuffer(char *buffer, const char *format, ...);
 
 /* Draws the departure screen's panels under a temporary render-state preset; state 14 slides the
@@ -64,10 +58,10 @@ u32 FUN_00329a90(void)
                 offset = 0.0f;
             }
             FUN_00164b5c(2, 19, 30, (s32)offset, 0, 11);
-            LayoutEntry *panel = asdTMTexTableEntryAt(19, 0x1105);
+            TextureTableEntryIV *panel = asdTMTexTableEntryAt(19, 0x1105);
             asdTMTexTableEntryAt(19, 0x110d);
-            LayoutEntry *counter = asdTMTexTableEntryAt(19, 0x1101);
-            LayoutEntry *frame = asdTMTexTableEntryAt(19, 0x1100);
+            TextureTableEntryIV *counter = asdTMTexTableEntryAt(19, 0x1101);
+            TextureTableEntryIV *frame = asdTMTexTableEntryAt(19, 0x1100);
             asdTMTexTableEntryAt(19, 0x1104);
             asdTMTexTableEntryAt(19, 0x1102);
             asdTMTexTableEntryAt(19, 0x1103);

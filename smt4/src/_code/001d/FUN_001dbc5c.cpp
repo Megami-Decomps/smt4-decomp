@@ -2,11 +2,13 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
-/* A loaded texture the title scene can bind (handle at +8). */
+/* A loaded texture the title scene can bind (the AsdTexture at +8). */
 struct TitleTexture {
     /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u32 handle;
+    /* 0x08 */ AsdTexture *texture;
 };
 
 /* The title scene's fading overlay job, as its draw step reads it. */
@@ -41,11 +43,10 @@ struct TitleFadeWork {
 
 extern "C" {
 
-extern u32 g_titleScene;
+extern RenderCtx *g_titleScene;
 
 TitleFadeWork *jobGetWork(void);
 s32 FUN_002c1d5c(void);
-void FUN_002c1b64(u32 scene, u32 texture);
 void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3, f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
                   f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3, f32 u0, f32 v0, f32 u1, f32 v1,
                   f32 u2, f32 v2, f32 u3, f32 v3);
@@ -67,7 +68,7 @@ static inline void drawOverlayQuad(TitleTexture *texture, u32 color, f32 x, f32 
     f32 top = y + halfHeight;
     f32 bottom = y - halfHeight;
 
-    FUN_002c1b64(g_titleScene, texture->handle);
+    renderCtxSelectTexture(g_titleScene, texture->texture);
     FUN_002ba1e0(color, color, color, color, left, top, z, left, bottom, z, right, top, z, right,
                  bottom, z, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f);
 }

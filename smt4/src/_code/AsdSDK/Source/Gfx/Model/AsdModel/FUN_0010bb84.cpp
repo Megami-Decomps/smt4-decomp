@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the screen fade start; retail computes the fade rate with the three loads interleaved before the request is built and keeps the vector grow path (allocatorWordVectorPush, inlined) in a different register assignment than armcc here. */
 #include "classes/AllocatorWordVector.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 /* The fade settings inside g_gfxSettings. */
 struct GfxFadeSettings {
@@ -45,7 +46,6 @@ extern AllocatorWordVector DAT_004dae60;
 extern FadeMirror *DAT_00472950;
 extern FadeMirror *DAT_00472958;
 
-u32 asdMemoryGetDefaultAllocator(void);
 u32 FUN_00120584(const FadeRequest *request, u32 allocator);
 void FUN_002bd498(u32 *handle, u32 allocator, s32 arg);
 u32 FUN_0011f8b8(u32 allocator, u32 handle);
@@ -62,7 +62,7 @@ void FUN_0010bb84(u32 color, u32 flags)
         return;
     bool cullBack = g_gfxSettings.mode != 2;
     g_gfxSettings.color = color;
-    u32 allocator = asdMemoryGetDefaultAllocator();
+    u32 allocator = (u32)asdMemoryGetDefaultAllocator();
     FadeRequest request;
     request.unk0C = 0;
     request.unk18 = 0;
@@ -71,10 +71,13 @@ void FUN_0010bb84(u32 color, u32 flags)
     request.colorCopy = g_gfxSettings.color;
     request.flags = flags | 0x2000000;
     request.cullBack = cullBack;
-    request.rate = (g_gfxSettings.depth * g_gfxSettings.nearValue) / (g_gfxSettings.farValue - g_gfxSettings.nearValue);
+    f32 nearValue = g_gfxSettings.nearValue;
+    f32 depth = g_gfxSettings.depth;
+    f32 farValue = g_gfxSettings.farValue;
+    request.rate = (depth * nearValue) / (farValue - nearValue);
     g_gfxSettings.handle = FUN_00120584(&request, allocator);
-    FUN_002bd498(&g_gfxSettings.handle, asdMemoryGetDefaultAllocator(), 0);
-    u32 object = FUN_0011f8b8(asdMemoryGetDefaultAllocator(), g_gfxSettings.handle);
+    FUN_002bd498(&g_gfxSettings.handle, (u32)asdMemoryGetDefaultAllocator(), 0);
+    u32 object = FUN_0011f8b8((u32)asdMemoryGetDefaultAllocator(), g_gfxSettings.handle);
     if (allocatorWordVectorPush(&DAT_004dae60, object)) {
         if (DAT_00472950 != NULL)
             DAT_00472950->value = *DAT_004dae60.begin;

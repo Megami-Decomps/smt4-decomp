@@ -3,7 +3,7 @@
 
 extern "C" {
 void nnResultCheckReport0043aab4();
-u32 FUN_0043a794();
+u32 serviceQuerySignedByteChecked();
 u32 svcClearEvent(u32 event);
 void FUN_002e3140(u32 result);
 void FUN_0043a718(s32 enabled);
@@ -27,7 +27,7 @@ void movieY2rConfigureAndStart(s32 width, s32 height, s32 format, u32 rotation, 
                   u32 output, u32 outputGap)
 {
     nnResultCheckReport0043aab4();
-    while (FUN_0043a794()) {
+    while (serviceQuerySignedByteChecked()) {
     }
     const u32 result = svcClearEvent(g_y2rTransferEvent);
     if (static_cast<s32>(result) < 0) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~208 rows); the 15-column glyph table DAT_00532b5c is referenced as an external array, retail inlines the type/advance sequence at two places and pushes r3 differently */
 #include "common.h"
 #include "shard/W5_W5Match7_FlagBanks.h"
+#include "shard/flaggedEntryGetValueA.h"
 
 // Two-character slot of the name being typed (high byte first).
 struct NameSlot {
@@ -48,7 +49,6 @@ s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestMenuPressed(void);
 s32 FUN_004d0584(void);
 s32 FUN_0048408c(NameEntryScreen* screen, s32 page, s32 column, s32 row);
-s32 flaggedEntryGetValueA(void* entry);
 s32 flaggedEntryGetValueB(void* entry);
 void flaggedEntrySetValueB(void* entry, s32 value);
 s32 FUN_00228b04(void* entry, s32 direction);
@@ -125,7 +125,7 @@ void FUN_00483d34(NameEntryScreen* screen)
     if (screen->tabsActive != 0) {
         s32 tab = FUN_00228b04(screen->pageCursor, 0);
         FUN_00228b04(screen->gridCursor, 0);
-        if (flaggedEntryGetValueA(screen->gridCursor) != 6) {
+        if (flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(screen->gridCursor)) != 6) {
             screen->tabsActive = 0;
             s32 value = flaggedEntryGetValueB(screen->pageCursor) * 5;
             if (value >= 15) value = 14;
@@ -135,12 +135,12 @@ void FUN_00483d34(NameEntryScreen* screen)
             eventQueueAddUniqueIfValid(0x0100020d);
         }
         screen->column = flaggedEntryGetValueB(screen->gridCursor);
-        screen->row = flaggedEntryGetValueA(screen->gridCursor);
+        screen->row = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(screen->gridCursor));
         return;
     }
     FUN_00228b04(screen->gridCursor, 1);
     screen->column = flaggedEntryGetValueB(screen->gridCursor);
-    screen->row = flaggedEntryGetValueA(screen->gridCursor);
+    screen->row = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(screen->gridCursor));
     if (screen->row == 6) {
         screen->tabsActive = 1;
         flaggedEntrySetValueB(screen->pageCursor, screen->column / 5);

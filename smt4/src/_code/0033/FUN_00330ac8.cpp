@@ -11,7 +11,7 @@ int vec2GetXInt(...);
 int FUN_002bf380(int, int, int, unsigned int, unsigned int, int);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(int);
 int uiDrawRotatingLoadingGrid(...);
 int SBORROW4(int, int);
@@ -34,7 +34,7 @@ extern unsigned int vec2GetYInt(int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -191,7 +191,7 @@ unsigned int FUN_00330ac8(void)
     (**(romwright_code **)(temp_v1 + 0x1268))();
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   FUN_002c18e4(g_titleScene);
   return 0;
 }

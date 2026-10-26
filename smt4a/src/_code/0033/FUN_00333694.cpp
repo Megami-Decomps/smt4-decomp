@@ -3,6 +3,7 @@
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/PlayerDataBlock.h"
 
 /* A skill record of data table 4. */
 struct SkillCostRecord {
@@ -12,7 +13,6 @@ struct SkillCostRecord {
 
 extern "C" {
 s32 FUN_0028809c(s32 slot, u32 target, SkillCostRecord *skill, s32 preview, s32 mode);
-PlayerData *gameGetPlayerData(void);
 PlayerData *gameGetSlotRecord(s32 slot);
 s32 FUN_003df57c(u32 cost, s32 mode);
 s32 FUN_004bcbb4(const ItemRankRecord *unit, u32 cost);
@@ -28,7 +28,7 @@ s32 FUN_00333694(s32 slot, u32 target, u32 id, s32 preview)
     s32 result = FUN_0028809c(slot, target, skill, preview, 0);
     if (result == 0 && preview == 0) {
         if (slot < 0) {
-            PlayerData *player = gameGetPlayerData();
+            PlayerData *player = reinterpret_cast<PlayerData *>(gameGetPlayerData());
             player->unk2C -= FUN_003df57c(skill->cost, 1);
             if (player->unk2C < 0) {
                 player->unk2C = 0;

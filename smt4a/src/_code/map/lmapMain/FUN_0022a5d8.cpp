@@ -3,6 +3,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int FUN_00344cd0(...);
 
 int textFormatBuffer(...);
 int libc_bsearch(...);
-int FUN_00157558(int);
 int textDrawString(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
@@ -53,7 +53,6 @@ extern unsigned int DAT_005f1b00; /* 0x5f1b00 */
 #endif
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: libc_bsearch. */
-/* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 extern unsigned int vec2GetYInt(int);
@@ -117,7 +116,7 @@ unsigned int FUN_0022a5d8(void)
   temp_v1 = DAT_0057f280;
   temp_v10 = 0;
   if (*(int *)(DAT_0057f280 + 0x744) != 0) {
-    FUN_00157558(g_renderCtx);
+    FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
     temp_v8 = g_renderCtx;
     temp_v2 = FUN_001692ac(1,0);
     piVar14 = (int *)(temp_v8 + 0x1258);

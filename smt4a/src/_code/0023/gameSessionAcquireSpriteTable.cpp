@@ -1,11 +1,11 @@
 #include "shard/Shard0033.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
 extern ObjBRef g_gameGlobals;
 
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 index);
 
 /* Counts one more user of table 0x12: the first user (depth 0 or less) prepares it and runs FUN_0014afd0 on its three entries. */
 void gameSessionAcquireSpriteTable(void)

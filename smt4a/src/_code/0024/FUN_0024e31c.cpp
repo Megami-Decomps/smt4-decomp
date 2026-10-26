@@ -3,10 +3,10 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_00157558(int);
 int textDrawString(...);
 int FUN_001634b4(int);
 int FUN_00164034(...);
@@ -15,7 +15,6 @@ int efctSetSpeed(void);
 int renderPopStateStacks(void);
 int FUN_00168e00(...);
 int renderCtxResetColorScale(...);
-int FUN_0016c4b8(...);
 int skinObjectUpdateMatrices(...);
 int pairSetHalves(int, int, int);
 int renderCtxCalculateStereoParallax(...);
@@ -48,7 +47,6 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_001634b4. */
 /* Supplied declaration required: FUN_00164034. */
@@ -59,7 +57,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c4b8. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 
 /* Supplied declaration required: pairSetHalves. */
@@ -116,7 +113,7 @@ unsigned int FUN_0024e31c(void)
       temp_v5 = temp_v5 + 1;
     } while (temp_v5 < 5);
     if (temp_v6 >= 11) {
-      FUN_00157558(g_renderCtx);
+      FUN_00157558((RenderCtxA *)g_renderCtx);
       temp_v6 = g_renderCtx;
       temp_v5 = FUN_001692ac(1,0);
       piVar6 = (int *)(temp_v6 + 0x1258);
@@ -188,7 +185,7 @@ unsigned int FUN_0024e31c(void)
       if (*(int *)(temp_v1 + 0x74a0) != 6) {
         if ((*(int *)(temp_v1 + 0x74a0) == 0x13) &&
            (*(int *)(temp_v1 + 0x12fd0) != 0 && *(int *)(temp_v1 + 0x12fd0) != 8)) {
-          FUN_0016c4b8(g_renderCtx,0);
+          renderCtxSelectTexture((RenderCtxA *)g_renderCtx,0);
           temp_v13 = *(unsigned int *)(temp_v1 + 0x13014);
           temp_v10 = temp_v9;
           temp_v11 = temp_v9;

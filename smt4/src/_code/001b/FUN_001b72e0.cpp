@@ -16,8 +16,8 @@ int textDrawString(...);
 int textFormatBuffer(...);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c1b64(...);
+int renderCtxApplyTransforms(...);
+int renderCtxSelectTexture(...);
 int renderCtxSelectStereoLayout(int);
 int titleDrawLogo(int);
 int FUN_0033cc84(unsigned int);
@@ -63,8 +63,8 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -187,7 +187,7 @@ int FUN_001b72e0(unsigned int job)
         temp_v10 = temp_v7;
         temp_v11 = temp_v7;
         temp_v12 = temp_v7;
-        FUN_002c1b64(g_titleScene,0);
+        renderCtxSelectTexture(g_titleScene,0);
         FUN_002b7638(&temp_v10);
         temp_v6 = DAT_00439c94;
         renderCtxCalculateStereoParallax(g_titleScene);
@@ -234,7 +234,7 @@ int FUN_001b72e0(unsigned int job)
         (**(romwright_code **)(temp_v1 + 0x12c8))();
         *(unsigned char *)(temp_v1 + 0x12c4) = 0;
       }
-      FUN_002c198c(g_titleScene);
+      renderCtxApplyTransforms(g_titleScene);
       FUN_002c18e4(g_titleScene);
       return 0;
     }

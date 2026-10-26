@@ -1,4 +1,5 @@
 #include "shard/Shard004A.h"
+#include "util/FUN_002a482c.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct Owner4A {
     /* 0x84C */ Slot4Obj *object;
 } Owner4A;
 extern u32 FUN_0031d174(u8 *block);
-extern u32 FUN_002a482c(u8 *block);
 extern void size40Set(Slot4Obj *object, u32 a, u32 b);
 
 void owner4ASetSizeAndCall(Owner4A *obj, u32 arg)

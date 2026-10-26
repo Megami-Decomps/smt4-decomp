@@ -2,10 +2,10 @@
 #include "shard/Shard0041.h"
 #include "gamedata/EntrySortRecord.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
 u32 FUN_001bd100(u32 id);
-EntrySortRecord *FUN_001ad9b4(u32 id);
 void FUN_004bb6d8(u32 flag, u32 value);
 
 // Deactivate a party record and remove its selected-role references.
@@ -21,7 +21,7 @@ u8 FUN_00417a60(u32 id)
         entry->bits &= ~4;
         entry->flags = (entry->flags & ~2) | 0x1C;
         if (FUN_001bd100(id)) {
-            if (FUN_001ad9b4(id)->category == 1) {
+            if (reinterpret_cast<EntrySortRecord *>(FUN_001ad9b4(id))->category == 1) {
                 RoleSlotsView *roles = reinterpret_cast<RoleSlotsView *>(block);
                 for (s32 index = 0; index < 4; ++index) {
                     if (roles->slots[index].id == id)

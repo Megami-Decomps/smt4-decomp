@@ -1,9 +1,9 @@
 /* NON_MATCHING: enabled/current-slot load predication, global address reloads, and actor base registers differ. */
 #include "sound/SpatialSoundPlayback.h"
+#include "util/FUN_002bf684.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_002bf684(AsdSoundSystem *);
 s32 FUN_00141fd0(AsdSoundSystem *, u32);
 s32 asd3dSoundActorIsPlaying(u32);
 bool asdSndEnsureCurrentSlotData(u32);

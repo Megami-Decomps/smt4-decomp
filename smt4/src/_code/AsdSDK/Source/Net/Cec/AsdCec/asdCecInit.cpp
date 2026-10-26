@@ -1,12 +1,12 @@
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 
 void asdMemFreeNonNull(void *work);
 void asdMemFree(void *block);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdOperatorNew(u32 size, ...);
 void *_ZN12CecMessageIdC1Ev(void *self);
 AsdCecMessageBox *_ZN9Obj420e4cC1Ej(AsdCecMessageBox *self, int unk);

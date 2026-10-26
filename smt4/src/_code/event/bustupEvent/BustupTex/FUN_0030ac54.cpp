@@ -6,6 +6,7 @@
 #include "util/FUN_002ae8e4.h"
 #include "util/FUN_002ae8e4.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 extern "C" {
 extern AocSystem *g_aocSystem;
 extern const char DAT_004037b0[];
@@ -13,7 +14,6 @@ extern const char DAT_004037a0[];
 s32 gameFlagIsSet(u32 flag);
 void *dataTable25FindById(u32 id);
 s32 aocContentGetIndexedRecord(void *definition, s32 enabled);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
 u32 FUN_002c58c8(s32 table, s32 node);

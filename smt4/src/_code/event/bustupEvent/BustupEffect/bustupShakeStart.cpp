@@ -2,12 +2,12 @@
 #include "event/bustupEvent/BustupShake.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include <string.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 
 extern "C" {
 
 s32 FUN_002c1d5c(void);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 randomOffsetJobUpdate(u32 job);
 void jobFreeWork(u32 job);
 

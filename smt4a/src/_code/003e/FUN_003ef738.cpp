@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
 #include "gamedata/Table04Record.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 
@@ -39,12 +40,11 @@ extern u32 g_btlUiBlock;
 
 s32 FUN_00184310(u32 id);
 s32 FUN_004aba3c(u32 block);
-BtlUnit *btlUnitGet(u32 unit);
 
 /* Whether the script unit's character is of the given kind. */
 static __inline bool scriptUnitIsKind(s32 kind)
 {
-    BtlUnit *unit = btlUnitGet(g_btlScriptUnit);
+    BtlUnit *unit = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
 
     return unit != NULL && unit->owner != NULL && unit->owner->character != NULL &&
         FUN_0019acdc(unit->owner->character->id, 0) == kind;
@@ -60,7 +60,7 @@ s32 FUN_003ef738(void)
         return 0;
     }
     if (FUN_004aba3c(g_btlUiBlock) == -1) {
-        UnitStats *stats = btlUnitGet(g_btlScriptUnit)->stats;
+        UnitStats *stats = reinterpret_cast<BtlUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->stats;
 
         if (stats->mode != 2) {
             return 0;

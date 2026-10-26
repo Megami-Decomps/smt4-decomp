@@ -1,6 +1,7 @@
 #include "battle/btlUI.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct BattleUiTaskOwner {
     u32 process;
@@ -9,7 +10,6 @@ struct BattleUiTaskOwner {
 };
 extern "C" {
 void FUN_002898e4(void);
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 u32 taskCreateDraw(const char *, s32, u16, u16, AsdProcUpdateFunc, AsdProcFunc, void *, u32);
 void FUN_003ad76c(BtlUi *, BattleUiTaskOwner *);
 s32 FUN_0019e138(u32 job);

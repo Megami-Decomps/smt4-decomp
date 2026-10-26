@@ -6,6 +6,7 @@
 #include "gamedata/Table00.h"
 #include "gamedata/Table04Record.h"
 #include "util/SlotRangeSelect.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *state);
@@ -13,7 +14,6 @@ u32 FUN_0027281c(BtlCombatantEntryA *unit);
 s32 btlResolveEntryChoice(s32 choice);
 s32 scrGetArg(s32 index);
 void scrSetResult(s32 result);
-Table00Record *dataTable00FindById(u32 id);
 }
 
 /* Whether any of the unit's skill sources lists a category-three skill. */

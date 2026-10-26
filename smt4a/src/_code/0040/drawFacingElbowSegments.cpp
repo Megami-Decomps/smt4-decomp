@@ -1,6 +1,7 @@
 /* NON_MATCHING: endpoint load hoisting and floating-point register scheduling differ from retail. */
 #include "common.h"
 #include <math.h>
+#include "camp/RenderCtx.h"
 
 struct SegmentPoint {
     f32 x;
@@ -13,15 +14,14 @@ struct SegmentStyle {
 };
 
 extern "C" {
-extern void *g_renderCtx;
-void FUN_0016c4b8(void *context, s32 mode);
+extern RenderCtxA *g_renderCtx;
 void FUN_0034111c(u32 colorA, u32 colorB, f32 x0, f32 y0, f32 x1, f32 y1, f32 alpha, f32 scale);
 
 // Draw two joined segments with the elbow offset toward the facing side.
 void drawFacingElbowSegments(const SegmentStyle *style, const SegmentPoint *start,
                   const SegmentPoint *end, u32 color, s32 transparency)
 {
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     f32 x = end->x;
     f32 y = end->y;
     f32 offsetX = 0.0f;

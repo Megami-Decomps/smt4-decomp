@@ -1,5 +1,6 @@
 /* NON_MATCHING: 173 vs 160 rows: twin of smt4 FUN_0033c1bc; retail also keeps a float argument in s16 (vpush {d8}) that it forwards to the icon calls, which this signature does not model */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Draw-state stack embedded in the title scene.
 struct DrawRing {
@@ -29,12 +30,6 @@ struct StatusStrip {
     s32 member;             // 0x34: unit index, negative for the player
 };
 
-struct LayoutEntry {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-    s16* size;              // 0x0c
-};
 
 struct UnitStatus {
     u8 unk00[0x60];
@@ -50,7 +45,6 @@ extern "C" {
 
 extern RenderCtx* g_renderCtx;
 
-LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
 PlayerStatus* gameGetPlayerData(void);
@@ -74,7 +68,7 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
 {
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
-    LayoutEntry* layout = asdTMTexTableEntryAt(0x11, slot);
+    TextureTableEntryIV* layout = asdTMTexTableEntryAt(0x11, slot);
     s32 count = 0;
     s16 current = 0;
     s16 following = 0;
@@ -110,7 +104,7 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
             }
         }
         setDrawState(3);
-        FUN_0035ae58(strip->originX + layout->x, strip->originY + layout->y, layout->size[0], layout->size[1], 1);
+        FUN_0035ae58(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
         s32 shift = (strip->scroll - 0x14) * -3;
         effectDispatchSelector(current, layout->x + shift + x, layout->y + y, 0x7e);
         effectDispatchSelector(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);

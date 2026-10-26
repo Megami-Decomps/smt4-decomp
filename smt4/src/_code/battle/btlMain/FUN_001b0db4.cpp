@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "common.h"
 #include "gamedata/DataTable.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 /* The battle start request: a short form (one word) or the 18-byte form carrying the camera/party setup. */
@@ -54,7 +55,6 @@ struct BtlMainGlobals {
 
 extern "C" {
 extern BtlMainGlobals g_btlMainState;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 owner);
 void *gameGetSlotTable(void);

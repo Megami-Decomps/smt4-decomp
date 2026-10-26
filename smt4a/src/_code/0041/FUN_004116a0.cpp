@@ -4,6 +4,7 @@
 #include "common.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "event/2dEvent/EventEffect.h"
+#include "util/FUN_00187168.h"
 
 /* A party slot as the picker reads it. */
 struct PartySlot {
@@ -34,7 +35,6 @@ void asdMemFree(void *block);
 void FUN_004f85c8(u32 aux, s32 value);
 void FUN_004abe2c(u32 ui, s32 a, s32 b, s32 c, s32 d, s32 e);
 PartySlot *FUN_003e4d68(u32 index);
-s32 FUN_00187168(PartySlot *slot);
 PartySlot *saveSlotFindSelected(void);
 s32 lcgRandomRange(s32 limit);
 void FUN_003f1b3c(BtlMainStateA *battle, u32 voice, s32 kind, u32 *text, u32 *colorSet);

@@ -1,6 +1,7 @@
 #include "npc_room/NpcRoomDebug.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // The three handles extend beyond the public debug-work prefix.
 struct NpcRoomDebugWorkView {
@@ -11,7 +12,6 @@ struct NpcRoomDebugWorkView {
 
 extern "C" {
 extern NpcRoomDebug *g_npcRoomDebug;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 u32 taskCreateDraw(const char *name, u32 priority, u32, u32, AsdProcFunc start, AsdProcUpdateFunc update, AsdProcFunc end, u32 parent);
 void FUN_001ed6ac(u32 handle);
 void npcRoomDebugDrawStartId(u32 handle);

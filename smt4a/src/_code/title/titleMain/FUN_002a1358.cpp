@@ -4,6 +4,7 @@
 #include "util/CalleeContracts.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -48,7 +49,6 @@ extern u32 g_aocSystem;
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 void wordTripleClear(u32 *triple);
 s32 jyoucyuGetLevel(void);
-u8 *asdTMTexTableEntryAt(u32 group, u32 id);
 void campButtonHelpAcquire(void);
 void campCommonBgAcquire(void);
 
@@ -62,10 +62,10 @@ void FUN_0032b0d4(void *process);
 /* Reads the screen position of layout record `id` of group 9 into `position`. */
 static __inline void readButtonPosition(f32 *position, u32 id)
 {
-    u8 *layout = asdTMTexTableEntryAt(9, id);
+    const TextureTableEntryIV *layout = asdTMTexTableEntryAt(9, id);
 
-    position[0] = (f32) * (s16 *)(layout + 8);
-    position[1] = (f32) * (s16 *)(layout + 10);
+    position[0] = (f32)layout->x;
+    position[1] = (f32)layout->y;
 }
 
 /* Creates the title screen: clears its work block, reads the button positions when the game is

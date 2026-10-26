@@ -18,7 +18,7 @@ int FUN_002b011c(...);
 int phaseCosInterpolate(...);
 int FUN_002b70cc(...);
 int cameraSetViewMatrix(...);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX44TransposeAsm(...);
@@ -125,7 +125,7 @@ extern float DAT_004ea998; /* 0x4ea998 */
 /* Supplied declaration required: phaseCosInterpolate. */
 /* Supplied declaration required: FUN_002b70cc. */
 /* Supplied declaration required: cameraSetViewMatrix. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44TransposeAsm. */
 
 
@@ -312,7 +312,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             DAT_004ea974 = temp_v1;
             if ((temp_v0 & 0xff) != 0) {
               gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_002c1b64(g_titleScene,temp_v29);
+              renderCtxSelectTexture(g_titleScene,temp_v29);
               phaseCosInterpolate();
               FUN_002b70cc();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
@@ -359,7 +359,7 @@ void FUN_002c7d18(fn_002c7d18_arg0 *param_1)
             DAT_004ea938 = temp_v4;
             if ((temp_v0 & 0xff) != 0) {
               gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_002c1b64(g_titleScene,temp_v29);
+              renderCtxSelectTexture(g_titleScene,temp_v29);
               phaseCosInterpolate();
               FUN_002b70cc();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;

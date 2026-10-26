@@ -1,11 +1,13 @@
 /* NON_MATCHING: only final paramsInit address/count argument scheduling differs; allocation, text defaults and all jobs match. */
 #include "ui/MessageMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "util/asdTextSetBaseColor.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 // The parameter block at 0xa4 lies in padding beginning at the unaligned offset 0x36
@@ -36,10 +38,8 @@ typedef char MessageInitializationOffsetsCheck[sizeof(MessageInitializationView)
 
 extern "C" {
 extern const u8 DAT_00403df8[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void FUN_002bc0e0(void);
 AsdText *asdTextCreate(u32 flags);
-void FUN_002bd82c(AsdText *text, u32 color);
 void asdTextSetValueFlagsAndScalar(AsdText *text, u32 value, u32 flags, f32 scalar);
 void positionStateSet(AsdText *text, u32 first, u32 second, f32 scalar);
 s32 FUN_00114474(u32 handle);
@@ -59,7 +59,7 @@ MessageWork *FUN_002c4a34(void)
     work->displayMode = 20;
     FUN_002bc0e0();
     work->text = asdTextCreate(0);
-    FUN_002bd82c(work->text, 0x320202FF);
+    asdTextSetBaseColor(work->text, 0x320202FF);
     asdTextSetValueFlagsAndScalar(work->text, 3, ~0u, 0.0f);
     positionStateSet(work->text, 0, 0x646464FF, 0.0f);
     work->state = 0;

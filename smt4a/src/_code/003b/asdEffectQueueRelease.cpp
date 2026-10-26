@@ -1,32 +1,25 @@
-/* NON_MATCHING: deferred release table base/result registers and prologue load order differ from retail. */
 #include "common.h"
 
-struct DeferredEffectRelease {
-    u32 mode; // 0x00
+struct DeferredResource {
+    s32 framesRemaining; // 0x00
     u32 handle; // 0x04
 };
 
 extern "C" {
-extern DeferredEffectRelease g_deferredEffectReleases[64];
+extern DeferredResource g_deferredEffectReleases[64];
 
-static __inline DeferredEffectRelease *findReleaseSlot()
+// Queue a resource handle for destruction after the requested number of frames.
+void asdEffectQueueRelease(u32 handle, s32 frames)
 {
-    DeferredEffectRelease *freeEntry = NULL;
-    for (s32 index = 0; index < 64; ++index) {
-        DeferredEffectRelease *entry = &g_deferredEffectReleases[index];
-        if (entry->handle == 0) {
-            freeEntry = entry;
+    DeferredResource *slot = NULL;
+    for (s32 i = 0; i < 64; ++i) {
+        DeferredResource *candidate = &g_deferredEffectReleases[i];
+        if (candidate->handle == 0) {
+            slot = candidate;
             break;
         }
     }
-    return freeEntry;
-}
-
-// Queue an effect handle for deferred release.
-void asdEffectQueueRelease(u32 handle, u32 mode)
-{
-    DeferredEffectRelease *entry = findReleaseSlot();
-    entry->handle = handle;
-    entry->mode = mode;
+    slot->handle = handle;
+    slot->framesRemaining = frames;
 }
 }

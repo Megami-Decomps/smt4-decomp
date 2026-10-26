@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -44,7 +45,6 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-extern unsigned int FUN_00180114(unsigned short);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 extern int asdTMTexTableEntryAt(unsigned int, int);
@@ -158,7 +158,7 @@ void FUN_00165b08(void)
       FUN_00180310(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       FUN_00183bb0();
       rt_aeabi_memclr(temp_v17,0x40);
-      temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
+      temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
       textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49);
       puVar8 = temp_v17;
@@ -220,7 +220,7 @@ LAB_00165eec:
       FUN_00180310(0,temp_v0 + temp_v4,temp_v1 + temp_v5,1,3,0xce,temp_v18);
       FUN_00183bb0();
       rt_aeabi_memclr(temp_v17,0x40);
-      temp_v2 = FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
+      temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v3 + 0x62));
       textFormatBuffer(temp_v17,&DAT_00530b54,temp_v2);
       temp_v3 = asdTMTexTableEntryAt(0x14,temp_v10 + 0xc49);
       puVar8 = temp_v17;

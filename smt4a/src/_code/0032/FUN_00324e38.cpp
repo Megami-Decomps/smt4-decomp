@@ -3,7 +3,7 @@
 
 extern "C" {
 extern u32 DAT_005806c0;
-s32 FUN_00184964(s32, s32);
+s32 randBetween(s32, s32);
 void FUN_003d4ed8(u32, f32, f32, f32);
 
 /* Alternate a regional map effect and scatter it near the scene position. */
@@ -17,9 +17,9 @@ void FUN_00324e38(s32 variant)
     DAT_005806c0 = (DAT_005806c0 + 1) & 1;
     MapVector position = g_lmapScene->position;
     position.y += 140.0f;
-    position.y += (f32)FUN_00184964(-10, 10);
-    position.x += (f32)FUN_00184964(-15, 15);
-    position.z += (f32)FUN_00184964(-15, 15);
+    position.y += (f32)randBetween(-10, 10);
+    position.x += (f32)randBetween(-15, 15);
+    position.z += (f32)randBetween(-15, 15);
     if (variant == 0) {
         DAT_005806c0 = 0;
     } else if (variant == 1) {

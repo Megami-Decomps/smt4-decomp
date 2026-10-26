@@ -25,23 +25,24 @@ extern MapIfFadeOwner *g_mapIf; /* 0x58103c */
 /* Starts (or, with zero duration, stops) the map interface fade: `duration` in tenths of a second is kept in frames. */
 void FUN_00325998(s32 id, s32 duration)
 {
+    MapIfFadeOwner *mapIf = g_mapIf;
     if (duration == 0) {
-        g_mapIf->fade.active = 0;
+        mapIf->fade.active = 0;
         return;
     }
-    g_mapIf->fade.active = 1;
+    mapIf->fade.active = 1;
     if (id == 0) {
         id = -1;
     }
-    g_mapIf->fade.id = id;
+    mapIf->fade.id = id;
     s16 frames = duration * 10;
-    g_mapIf->fade.frames = frames;
-    g_mapIf->fade.offset[0] = 0.0f;
-    g_mapIf->fade.offset[1] = 0.0f;
-    g_mapIf->fade.offset[2] = 0.0f;
+    mapIf->fade.frames = frames;
+    mapIf->fade.offset[0] = 0.0f;
+    mapIf->fade.offset[1] = 0.0f;
+    mapIf->fade.offset[2] = 0.0f;
     s16 step = frames * 4 / 10;
-    g_mapIf->fade.step = step;
-    g_mapIf->fade.stepCopy = step;
+    mapIf->fade.step = step;
+    mapIf->fade.stepCopy = step;
 }
 
 } /* extern "C" */

@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int mtx44Copy(float *, unsigned int);
 int FUN_0019a0fc(...);
 int FUN_0019e3d0(...);
@@ -103,7 +103,7 @@ extern float DAT_0064c080; /* 0x64c080 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 extern int FUN_00199f84(unsigned char *, int);
 /* Supplied declaration required: mtx44Copy. */
@@ -502,7 +502,7 @@ void FUN_00238490(int param_1)
     ;
     pfVar4 = pfVar4 + 3;
   } while (temp_v11 < 4);
-  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_1 + 300));
+  renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(param_1 + 300));
   temp_v18 = temp_v15;
   temp_v19 = temp_v16;
   temp_v20 = temp_v15;

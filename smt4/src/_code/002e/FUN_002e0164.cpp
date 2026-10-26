@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler splits the sparse cases; retail uses one zero-based jump table through category 60. */
 #include "common.h"
 
 // These categories belong to the exceptional group; all others use the default group.
@@ -12,7 +11,13 @@ extern "C" u32 FUN_002e0164(u32 category)
     case 0x34: case 0x35: case 0x36: case 0x37:
     case 0x3C:
         return 0;
-    default:
-        return 1;
+    /* The remaining categories 0..60 are all listed, which makes armcc build one zero-based table. */
+    case 0x00: case 0x01: case 0x02: case 0x03: case 0x04: case 0x05: case 0x06: case 0x07:
+    case 0x08: case 0x09: case 0x0A: case 0x0B: case 0x0C: case 0x0D: case 0x0F: case 0x10:
+    case 0x12: case 0x13: case 0x15: case 0x18: case 0x1A: case 0x1B: case 0x1C: case 0x1D:
+    case 0x1E: case 0x20: case 0x21: case 0x22: case 0x23: case 0x24: case 0x27: case 0x29:
+    case 0x2A: case 0x2B: case 0x2C: case 0x2D: case 0x38: case 0x39: case 0x3A: case 0x3B:
+        break;
     }
+    return 1;
 }

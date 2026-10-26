@@ -1,6 +1,7 @@
 /* NON_MATCHING: unit/denominator register retention replaces retail spills/reloads; inner-loop limit and minimum-experience branch lowering differ, possibly under alternate optimization. */
 #include "shard/PadState.h"
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/PlayerDataBlock.h"
 
 struct ExperienceResult {
     u8 unk0000[0x35b4];
@@ -29,7 +30,6 @@ struct ExperienceSkill {
 extern "C" {
 extern ExperienceResult *g_result;
 u8 *gameGetSlotTable();
-PadState *gameGetPlayerData();
 u16 dataTable09Sub3GetRecord(s32, s32);
 u8 playerPadTestBit(u32);
 ExperienceUnit *gameGetUnitRecord(u32);
@@ -40,7 +40,7 @@ void resultAddExperienceReward(const s32 *reward)
 {
     ExperienceResult *result = g_result;
     ExperienceParty *party = (ExperienceParty *)gameGetSlotTable();
-    PadState *player = gameGetPlayerData();
+    PadState *player = reinterpret_cast<PadState *>(gameGetPlayerData());
     s32 base = reward[0];
     s32 level = reward[1];
     s32 playerExperience = base * dataTable09Sub3GetRecord(player->unk76, level) / 100;

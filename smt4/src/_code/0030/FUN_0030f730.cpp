@@ -22,7 +22,6 @@ extern const BoundsPaletteStorage DAT_0040490c;
 extern OverlayBoundsList DAT_004c2424;
 extern RenderCtx *g_titleScene;
 u32 FUN_002c5d80(u32 mode, u32 option);
-void FUN_002c1b64(RenderCtx *context, u32 mode);
 void FUN_00296dc4(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3);
@@ -35,7 +34,7 @@ void FUN_0030f730(f32 height)
         RenderCtx *context = g_titleScene;
         u32 state = FUN_002c5d80(5, 1);
         renderStackPush(&context->stackA, state);
-        FUN_002c1b64(g_titleScene, 0);
+        renderCtxSelectTexture(g_titleScene, 0);
         if (DAT_004c2424.count > 0) {
             height += 100.0f;
             for (s32 index = 0; index < DAT_004c2424.count; ++index) {

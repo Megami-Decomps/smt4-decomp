@@ -49,7 +49,7 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
     unaff_r11 = 0;
   }
   iVar1 = asdTMTexTableEntryAt(0x39,0x75);
-  FUN_002bd82c(*param_1,unaff_r11);
+  asdTextSetBaseColor(*param_1,unaff_r11);
   FUN_002598f0(*param_1,*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
   if ((*(unsigned char *)(param_2 + 0x20) & 2) != 0) {
     iVar1 = asdTMTexTableEntryAt(0x39,0x76);
@@ -59,11 +59,11 @@ void FUN_001eb874(unsigned int *param_1,int param_2,float *param_3,int param_4,i
     else {
       uVar5 = 0xf33700;
     }
-    FUN_002bd82c(param_1[2],uVar5);
+    asdTextSetBaseColor(param_1[2],uVar5);
     FUN_002598f0(param_1[2],*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
   }
   iVar1 = asdTMTexTableEntryAt(0x39,0x77);
-  FUN_002bd82c(param_1[1],unaff_r10);
+  asdTextSetBaseColor(param_1[1],unaff_r10);
   FUN_002598f0(param_1[1],*(short *)(iVar1 + 8) + param_4,*(short *)(iVar1 + 10) + param_5,0x70);
   FUN_002bf288(2,0x39,0x5a,param_4,param_5,0x70);
   uVar2 = (unsigned int)*(unsigned short *)(iStack_54 + 0x10);

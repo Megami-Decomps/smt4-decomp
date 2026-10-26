@@ -8,7 +8,7 @@ int FUN_00281e34(void);
 int FUN_00282390(void);
 int FUN_0028250c(void);
 int FUN_002ba1e0(...);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(...);
@@ -76,7 +76,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_00282390. */
 /* Supplied declaration required: FUN_0028250c. */
 /* Supplied declaration required: FUN_002ba1e0. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int gameGetMapBlock(void);
 extern int lmapMainIsAtLeastHalf(void);
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -334,7 +334,7 @@ void FUN_0020f6c8(void)
   temp_v32 = temp_v32 + temp_v13;
   temp_v33 = temp_v33 + temp_v18;
   temp_v34 = temp_v34 + temp_v14;
-  FUN_002c1b64(g_titleScene,*(unsigned int *)(DAT_00447a7c + 0x58));
+  renderCtxSelectTexture(g_titleScene,*(unsigned int *)(DAT_00447a7c + 0x58));
   FUN_002ba1e0(temp_v4);
   return;
 }

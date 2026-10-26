@@ -2,13 +2,13 @@
 #include "gfx/MoveCameraCtrl.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "title/titleMain.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
 extern "C" {
 extern void *g_handleRegistry;
 extern const char DAT_0053295c[];
 void *FUN_00178b04(u32 size, const char *source, u32 line);
 MoveCameraResource *_ZN9Obj557af8C1EPK21AsdAnimCameraResource(MoveCameraResource *resource, void *data);
-void asdCameraInitializeDefaults(ManagedCamera *camera, s32 enabled);
 void uiSetFloatPair(ManagedCamera *camera, f32 distance, f32 scale);
 void FUN_0014f0dc(ManagedCamera *camera, const Vec3f *eye, const Vec3f *target, const Vec3f *up);
 void FUN_001523b8(ManagedCamera *camera, u32 pivot, f32 fieldOfView, f32 nearClip, f32 farClip, f32 aspect);
@@ -29,7 +29,7 @@ void FUN_00407110(MoveCameraCtrlWork *work, const char *name)
     work->resource = resource;
     work->frameCount = resource->track->frameCount;
     work->auxiliaryCount = resource->track->auxiliaryCount;
-    asdCameraInitializeDefaults(&work->camera, 1);
+    asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(&work->camera), 1);
     work->eye.x = 0.0f;
     work->eye.y = 0.0f;
     work->eye.z = 0.0f;

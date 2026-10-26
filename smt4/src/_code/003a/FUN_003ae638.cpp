@@ -13,8 +13,9 @@ extern "C" u32 FUN_003ae638(u32 unused, s32 row)
     if (ui->objD.availability.rows[row].active) {
         return 1;
     }
+    BtlUiAvailabilityCellRow *cellRow = &ui->objD.availabilityCells.rows[row];
     for (s32 index = 0; index < ui->objD.availabilityCounts.counts[row]; ++index) {
-        if (ui->objD.availabilityCells.rows[row].cells[index].active) {
+        if (cellRow->cells[index].active) {
             return 1;
         }
     }

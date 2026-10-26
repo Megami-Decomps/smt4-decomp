@@ -4,6 +4,7 @@
 #include "map/mapDepart.h"
 #include <stddef.h>
 #include "title/titleMain.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
 struct LocalCamera;
 
@@ -11,7 +12,6 @@ extern "C" {
 extern LmapExtraGlobalsA DAT_005806a0;
 extern LocalCamera g_localCamera;
 
-void asdCameraInitializeDefaults(LocalCamera *, s32);
 void FUN_0014f0dc(LocalCamera *, const MapVector *, const MapVector *,
                   const MapVector *);
 void FUN_001523b8(LocalCamera *, s32, f32, f32, f32, f32);
@@ -50,7 +50,7 @@ void FUN_00303710(void)
     DAT_005806a0.extra->camera.savedTarget = DAT_005806a0.extra->camera.target;
     DAT_005806a0.extra->camera.savedEye = DAT_005806a0.extra->camera.eye;
 
-    asdCameraInitializeDefaults(&g_localCamera, 1);
+    asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(&g_localCamera), 1);
     FUN_0014f0dc(&g_localCamera,
                  &DAT_005806a0.extra->camera.eye,
                  &DAT_005806a0.extra->camera.target,

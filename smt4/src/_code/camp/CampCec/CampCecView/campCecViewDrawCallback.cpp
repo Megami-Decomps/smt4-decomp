@@ -32,7 +32,6 @@ extern CampCecView *g_campCecView;
 extern RenderCtx *g_titleScene;
 void renderCtxSelectStereoLayout(RenderCtx *);
 s32 FUN_002c5d80(u32, u32);
-void FUN_002c198c(RenderCtx *);
 u32 FUN_0025981c();
 CecViewSavedRecord *saveGetIndexedMapValue(u32);
 u16 *asdTMTexTableEntryAt(u32, s32);
@@ -68,7 +67,7 @@ u32 campCecViewDrawCallback()
     FUN_002ec0fc(&fields->widgets[3], 0, 0, flags & 1, (flags & 2) >> 1, (flags & 4) >> 2,
                  fields->selected, fields->first, fields->count);
     renderStackPop(&g_titleScene->stackA);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     return 0;
 }
 }

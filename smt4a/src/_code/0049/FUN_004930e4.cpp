@@ -1,5 +1,6 @@
 #include "common.h"
 #include "shard/NaviMain.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct ModeLock {
 
 extern ModeLock DAT_00587fdc;
 
-extern void FUN_0014afd0(s32 group, s32 index);
 
 /* Enters a mode scope: the outermost entry records `mode` and, for modes 0x65-0x67, starts the matching group-0x13 item. */
 void FUN_004930e4(s32 mode)

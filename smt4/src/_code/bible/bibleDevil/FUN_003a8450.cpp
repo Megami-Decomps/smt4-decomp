@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
 #include "bible/bibleDevil.h"
+#include "addon/LookupRecord.h"
 
 /* One list entry (0x20 bytes at +0x5A8 of the view, indexed by the cursor). */
 struct DevilEntry {
@@ -52,7 +53,6 @@ void FUN_0029cc44(s32 flag);
 void ifTouchRegionClearAll(u32 region);
 void FUN_00233818(SelectedRow *row);
 s32 demonPurchaseValidate(DevilView *view, u32 devil);
-void FUN_002bd06c(u32 devil);
 void textEncodeFontSlot(s32 slot, char *text);
 u32 demonGetRaceLabel(u16 devil, u32 flag);
 void scrScriptProcessStartEntry(u32 script, s32 entry);

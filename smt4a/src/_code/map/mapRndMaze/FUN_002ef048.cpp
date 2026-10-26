@@ -1,6 +1,7 @@
 /* NON_MATCHING: duplicate retail trigonometric evaluations are absent; VFP scheduling and marker addressing differ. */
 #include "map/mapRndMaze.h"
 #include "Model/ModelList.h"
+#include "util/FUN_0040aa6c.h"
 
 extern "C" {
 extern MapRndMazeA g_mapRndMaze;
@@ -12,7 +13,6 @@ f32 FUN_001bc124(f32 radians);
 f32 FUN_001bbf0c(f32 radians);
 void *FUN_00178b04(u32 size, const char *file, s32 line);
 ModelList *modelListInit(ModelList *model);
-void FUN_0040aa6c(ModelList *model, const char *name);
 void FUN_0040aad4(ModelList *model, s32 mode);
 void handleRegistryRegisterObject(void *registry, MoriModelBody *controller);
 void controllerSetDestination(MoriModelBody *controller, const f32 position[3]);

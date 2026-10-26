@@ -1,11 +1,11 @@
 /* NON_MATCHING: backward-scroll guards are predicated instead of separately branched; total/previousTotal stores merge, and icon-loop registers pair with strd instead of retail's stm sequence. */
 #include "ui/SdCardMenu.h"
+#include "shard/flaggedEntryGetValueA.h"
 
 extern "C" {
 s32 FUN_002bedac(u32 id);
 s32 FUN_00228b04(MenuList *list, s32 mode);
 s32 resourceRunOperationIfUnblocked(MenuList *list);
-s32 flaggedEntryGetValueA(MenuList *list);
 s32 objectApplyIfUnblocked(MenuList *list);
 void scrollOwnerSetValue(MenuList *list, s32 position);
 void flaggedEntrySetValueA(MenuList *list, s32 value);
@@ -19,7 +19,7 @@ void FUN_0041e7c0(SdCardMenu *menu)
         menu->valid = 0;
     if (FUN_00228b04(&menu->list, 1) != 0) {
         s32 position = resourceRunOperationIfUnblocked(&menu->list);
-        s32 value = flaggedEntryGetValueA(&menu->list);
+        s32 value = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(&menu->list));
         s32 span = objectApplyIfUnblocked(&menu->list);
         s32 offset = menu->offset;
         s32 total = position + value + offset;
@@ -37,7 +37,7 @@ void FUN_0041e7c0(SdCardMenu *menu)
             }
         }
         menu->listPosition = resourceRunOperationIfUnblocked(&menu->list);
-        s32 listValue = flaggedEntryGetValueA(&menu->list);
+        s32 listValue = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(&menu->list));
         menu->listValue = listValue;
         menu->previousTotal = menu->total;
         menu->total = listValue + menu->listPosition + menu->offset;

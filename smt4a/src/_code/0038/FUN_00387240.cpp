@@ -1,17 +1,9 @@
 /* NON_MATCHING: same arithmetic; retail ends each arm with its own pop (the zero-size arm placed second, loading all four fields before the stores), armcc here joins the arms with a branch. */
 #include "common.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* A UI rectangle: width/height (top bit is a flag) at 4/6, origin at 8/10, and an optional size override pair at 0xC. */
-struct UiRect {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u16 width;
-    /* 0x06 */ u16 height;
-    /* 0x08 */ u16 x;
-    /* 0x0A */ u16 y;
-    /* 0x0C */ s16 *size;
-};
 
 /* The target object: a center point at 0x18. */
 struct CenterTarget {
@@ -20,17 +12,16 @@ struct CenterTarget {
     /* 0x1A */ s16 centerY;
 };
 
-UiRect *asdTMTexTableEntryAt(void *owner, u32 id);
 
 /* Stores the center of the looked-up rectangle (its size override if present) in the target. */
-void FUN_00387240(CenterTarget *target, void *owner, u32 id)
+void FUN_00387240(CenterTarget *target, u32 file, s32 id)
 {
-    UiRect *rect = asdTMTexTableEntryAt(owner, id);
-    s16 *size = rect->size;
+    TextureTableEntryIV *rect = asdTMTexTableEntryAt(file, id);
+    TexturePlacementPrefixIV *size = rect->placement;
 
     if (size != NULL) {
-        s32 centerX = rect->x + size[0] / 2;
-        s32 centerY = rect->y + size[1] / 2;
+        s32 centerX = rect->x + size->width / 2;
+        s32 centerY = rect->y + size->height / 2;
         target->centerX = centerX;
         target->centerY = centerY;
     } else {

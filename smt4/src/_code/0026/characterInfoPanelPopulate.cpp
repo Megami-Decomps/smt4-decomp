@@ -1,6 +1,7 @@
 /* NON_MATCHING: panel/record register allocation, equipment-label zero caching, and preview-reset branch sharing differ from retail. */
 #include "common.h"
 #include "shard/FUN_00293f10.h"
+#include "addon/LookupRecord.h"
 
 struct CharacterInfoPanel {
     void *title, *name;
@@ -39,7 +40,6 @@ void asdTextDrawFormatted(void *label, u32 font, u32 color, s32 x, s32 y, const 
 const char *fileSectionGetData(void *file, u32 entry, u32 table);
 const char *FUN_002be650(u32 id, u32 flags);
 void FUN_002bcfc0(const char *source, char *destination);
-const char *FUN_002bd06c(u32 demon);
 void ARM_common_memcpy4_7(char *destination, const char *source);
 const char *demonGetRaceLabel(u32 demon, u32 flags);
 void FUN_002a7c80(char *destination, const char *source);
@@ -99,7 +99,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanel *panel, const Char
     setCharacterEquipmentLabel(panel, record, 6, buffer);
 
     if (record->demon)
-        FUN_002bcfc0(FUN_002bd06c(record->demon), buffer);
+        FUN_002bcfc0(reinterpret_cast<const char *>(FUN_002bd06c(record->demon)), buffer);
     else
         ARM_common_memcpy4_7(buffer, "\x81\x7c\x81\x7c\x81\x7c");
     asdTextDrawFormatted(panel->demonName, 1, -1u, 0, 0, buffer);

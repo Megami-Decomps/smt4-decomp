@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct CampNotice {
     /* 0x0000 */ u8 unk0000[0x1AB4];
@@ -10,11 +11,6 @@ struct CampNotice {
     /* 0x32B0 */ u8 flags[7];       /* one new-entry flag per camp menu */
 };
 
-struct IconFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 #define CAMP_NOTICE_HEADER 0x14
 #define CAMP_NOTICE_ICON 0x5B0
@@ -27,7 +23,6 @@ extern CampNotice *g_camp;
 extern RenderCtxA *g_renderCtx;
 
 s32 gameFlagIsSet(u32 flag);
-IconFrame *asdTMTexTableEntryAt(u32 table, u32 index);
 f32 jobGetScalarValue(void);
 void efctSetSpeed(f32 speed);
 
@@ -80,12 +75,12 @@ void FUN_0026e8b8(s32 menu, s32 x, s32 y, u32 flags, s32 plain)
         return;
 
     if (plain != 0) {
-        IconFrame *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_PLAIN);
+        TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_PLAIN);
         FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
         return;
     }
 
-    IconFrame *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(CAMP_NOTICE_HEADER, CAMP_NOTICE_FRAME_ANIMATED);
     FUN_001835b4(2, CAMP_NOTICE_HEADER, CAMP_NOTICE_ICON, frame->x + x, frame->y + y, flags);
     u32 active = jobGetScalarValue() != 0.0f;
     efctSetSpeed(g_camp->iconSpeed * (f32)active);

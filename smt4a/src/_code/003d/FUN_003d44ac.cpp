@@ -1,6 +1,7 @@
 /* NON_MATCHING: register choice only: retail stores the three floats through the incoming r0 and loads the tail-called FUN_00387240's base/constant in r0/r1 (here r4 and r1/r0) */
 #include "common.h"
 #include <stddef.h>
+#include "util/pairSetFirstResetSecond.h"
 
 /* One UI sprite instance, 0x8C bytes. */
 struct LayoutSprite {
@@ -38,7 +39,6 @@ extern "C" {
 
 void FUN_0014e188(LayoutSprite *sprite, s32 group, s32 image, void *owner, s32 flags, f32 scale);
 void uiSpriteSelectAnim(LayoutSprite *sprite, s32 anim);
-void pairSetFirstResetSecond(LayoutSprite *sprite, s32 value);
 void FUN_00387240(LayoutSprite *sprite, s32 group, s32 value);
 void uiGetLayoutPointDifference(LayoutSprite *sprite, s32 group, s32 first, s32 second);
 void FUN_0036b63c(LayoutSprite *sprite, u8 value);

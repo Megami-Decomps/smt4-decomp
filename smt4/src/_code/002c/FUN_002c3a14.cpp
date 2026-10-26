@@ -36,7 +36,7 @@ extern "C" {
 void FUN_00126d14(u32 shader);
 void FUN_002b634c(u32 shader, void *colors);
 void modelCmdAppendPacked(u32 a, u32 b, u32 c, u32 d);
-void FUN_002bbe30(void *matrix);
+void mathCopyIdentityMatrix(void *matrix);
 void FUN_002bbbc8(RenderCtx *ctx, void *a, void *b, void *matrix);
 void FUN_002bbb74(u32 shader, void *block);
 void FUN_002b612c(CombinerStage *stages);
@@ -76,8 +76,8 @@ void FUN_002c3a14(RenderCtx *ctx)
         modelCmdAppendPacked(0, 0, 0, 0);
     }
     if (ctxByte(ctx, 0x5b0) != 0 || !isIdentity(&ctxFloat(ctx, 0x530))) {
-        FUN_002bbe30(reinterpret_cast<u8 *>(ctx) + 0x530);
-        FUN_002bbe30(reinterpret_cast<u8 *>(ctx) + 0x570);
+        mathCopyIdentityMatrix(reinterpret_cast<u8 *>(ctx) + 0x530);
+        mathCopyIdentityMatrix(reinterpret_cast<u8 *>(ctx) + 0x570);
         FUN_002bbbc8(ctx, reinterpret_cast<u8 *>(ctx) + 0x114c, reinterpret_cast<u8 *>(ctx) + 0x110c,
                      reinterpret_cast<u8 *>(ctx) + 0x530);
         FUN_002bbb74(ctxWord(ctx, 0x52c), reinterpret_cast<u8 *>(ctx) + 0x118c);

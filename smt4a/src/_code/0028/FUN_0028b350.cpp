@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match8_TextHistory.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ int FUN_001517b4(...);
 int uiApplyIndexedPanelSpriteSizes(...);
 int pairSetSecondResetFirst(...);
 int uiSpriteSelectAnim(...);
-int pairSetFirstResetSecond(...);
 int sentinelLookupGetValue(void);
 int FUN_0019e330(...);
 int FUN_00202188(...);
@@ -43,7 +43,6 @@ extern unsigned short g_battleSlotCount; /* 0x5e2058 */
 extern int slotIsActive(unsigned int);
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: sentinelLookupGetValue. */
 /* Supplied declaration required: FUN_0019e330. */
@@ -90,7 +89,7 @@ void FUN_0028b350(int param_1,int param_2)
   default:
     return;
   case 1:
-    pairSetFirstResetSecond(param_1 + 0x1b4,2000);
+    pairSetFirstResetSecond((void *)(param_1 + 0x1b4),2000);
     temp_v6 = 9;
     FUN_001517b4(9,2);
     if ((temp_v6 != 0) || (temp_v6 = slotIsActive(6), temp_v6 != 0)) {
@@ -100,7 +99,7 @@ void FUN_0028b350(int param_1,int param_2)
       uiSpriteSelectAnim(param_1 + 0x1b4,0);
     }
     FUN_00387240(param_1 + 0x1b4,8,0x7d4);
-    pairSetFirstResetSecond(param_1 + 0x3e4,7);
+    pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
     uiSpriteSelectAnim(param_1 + 0x3e4,4);
     FUN_00387240(param_1 + 0x3e4,8,0x47);
     return;
@@ -116,7 +115,7 @@ void FUN_0028b350(int param_1,int param_2)
     FUN_00202188(*(unsigned int *)(param_1 + 4),0,0,0x10,0xffffffff);
     temp_v0 = *(unsigned short *)(*(int *)(param_1 + 4) + 0x48);
     *(unsigned int *)(*(int *)(param_1 + 4) + 0x10) = temp_v11;
-    pairSetFirstResetSecond(param_1 + 0x1b4,2000);
+    pairSetFirstResetSecond((void *)(param_1 + 0x1b4),2000);
     FUN_00387240(param_1 + 0x1b4,8,0x7d4);
     if (temp_v0 < 3) {
       pairSetSecondResetFirst(param_1 + 0x2cc,0x1f);
@@ -143,7 +142,7 @@ void FUN_0028b350(int param_1,int param_2)
       uiSpriteSelectAnim(param_1 + 0x1b4,0);
       uiSpriteSelectAnim(param_1 + 0x2cc,1);
     }
-    pairSetFirstResetSecond(param_1 + 0x3e4,7);
+    pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
     uiSpriteSelectAnim(param_1 + 0x3e4,4);
     FUN_00387240(param_1 + 0x3e4,8,0x47);
     if (param_2 != 3) {
@@ -154,36 +153,36 @@ void FUN_0028b350(int param_1,int param_2)
               if (param_2 != 0x13) {
                 return;
               }
-              pairSetFirstResetSecond(param_1 + 0x240,0x7dd);
+              pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7dd);
               FUN_0019e330(param_1 + 0x240,1,0);
               uiGetLayoutPointDifference(param_1 + 0x240,8,0x7e0,0x7dd);
             }
             else {
-              pairSetFirstResetSecond(param_1 + 0x240,0x7d2);
+              pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7d2);
               FUN_0019e330(param_1 + 0x240,1,0);
               uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d6,0x7d2);
             }
           }
           else {
-            pairSetFirstResetSecond(param_1 + 0x240,0x7de);
+            pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7de);
             FUN_0019e330(param_1 + 0x240,1,0);
             uiGetLayoutPointDifference(param_1 + 0x240,8,0x7e1,0x7de);
           }
         }
         else {
-          pairSetFirstResetSecond(param_1 + 0x240,0x7d3);
+          pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7d3);
           FUN_0019e330(param_1 + 0x240,1,0);
           uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d7,0x7d3);
         }
       }
       else {
-        pairSetFirstResetSecond(param_1 + 0x240,0x7dc);
+        pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7dc);
         FUN_0019e330(param_1 + 0x240,1,0);
         uiGetLayoutPointDifference(param_1 + 0x240,8,0x7df,0x7dc);
       }
     }
     else {
-      pairSetFirstResetSecond(param_1 + 0x240,0x7d1);
+      pairSetFirstResetSecond((void *)(param_1 + 0x240),0x7d1);
       FUN_0019e330(param_1 + 0x240,1,0);
       uiGetLayoutPointDifference(param_1 + 0x240,8,0x7d5,0x7d1);
     }
@@ -202,7 +201,7 @@ void FUN_0028b350(int param_1,int param_2)
     FUN_00387240(param_1 + 0x1b4,8,0x111);
     *(unsigned char *)(param_1 + 0x1f0) = 1;
     *(unsigned short *)(param_1 + 0x1ee) = 2;
-    pairSetFirstResetSecond(param_1 + 0x3e4,7);
+    pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
     uiSpriteSelectAnim(param_1 + 0x3e4,4);
     FUN_00387240(param_1 + 0x3e4,8,0x47);
     return;
@@ -222,7 +221,7 @@ joined_r0x0028baa4:
       if (temp_v7 == 0) {
         uiSpriteSelectAnim(param_1 + 0x1b4,3);
         uiSpriteSelectAnim(temp_v6,3);
-        pairSetFirstResetSecond(param_1 + 0x3e4,7);
+        pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
         uiSpriteSelectAnim(param_1 + 0x3e4,4);
         FUN_00387240(param_1 + 0x3e4,8,0x47);
         return;
@@ -261,7 +260,7 @@ joined_r0x0028baa4:
     uiSpriteSelectAnim(param_1 + 0x1b4,6);
     pairSetSecondResetFirst(param_1 + 0x358,0xf);
     uiSpriteSelectAnim(param_1 + 0x358,6);
-    pairSetFirstResetSecond(param_1 + 0x470,0xc);
+    pairSetFirstResetSecond((void *)(param_1 + 0x470),0xc);
     uiSpriteSelectAnim(param_1 + 0x470,9);
     pairSetSecondResetFirst(temp_v7,0x1a);
     uiSpriteSelectAnim(temp_v7,4);
@@ -380,7 +379,7 @@ LAB_0028bd98:
       *(unsigned char *)(param_1 + temp_v6 + 0x37) = 0;
       temp_v7 = param_1 + temp_v6 * 0x8c + 0x588;
       FUN_0014e188(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
-      pairSetFirstResetSecond(temp_v7,0x8b);
+      pairSetFirstResetSecond((void *)(temp_v7),0x8b);
       uiSpriteSetImageKeyframe(temp_v7,4,0);
       FUN_0019e330(temp_v7,6,0);
       FUN_00387240(temp_v7,8,temp_v14[temp_v6] + 0x8f);
@@ -411,7 +410,7 @@ LAB_0028bd98:
     temp_v2 = *(short *)(param_1 + 0x56);
     temp_v7 = param_1 + temp_v2 * 0x8c + 0x844;
     FUN_0014e188(temp_v7,8,0xffffffff,param_1 + 0x194,0xb);
-    pairSetFirstResetSecond(temp_v7,0x8b);
+    pairSetFirstResetSecond((void *)(temp_v7),0x8b);
     uiSpriteSetImageKeyframe(temp_v7,4,0);
     FUN_0019e330(temp_v7,6,0);
     FUN_00387240(temp_v7,8,temp_v6 + temp_v2);
@@ -427,7 +426,7 @@ LAB_0028bd98:
   }
   *(unsigned char *)(param_1 + 0x239) = 1;
   *(unsigned char *)(param_1 + 0x581) = 1;
-  pairSetFirstResetSecond(param_1 + 0x3e4,7);
+  pairSetFirstResetSecond((void *)(param_1 + 0x3e4),7);
   uiSpriteSelectAnim(param_1 + 0x3e4,4);
   FUN_00387240(param_1 + 0x3e4,8,0x47);
   return;

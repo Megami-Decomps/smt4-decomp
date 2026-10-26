@@ -1,12 +1,12 @@
 /* NON_MATCHING: quantity/count increment registers, controller address scheduling and final cursor-clamp arithmetic differ from retail. */
 #include "status/StatusDown.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 extern StatusDownStateA *g_statusDown;
 void sysMemClear(void *memory, u32 size);
 void FUN_00203b40(void *controller, s32 count, s32 rows, s32 columns, s32 arg4, s32 arg5);
-void FUN_002a4964(void *controller, s32 row);
 void scrollOwnerSelectIndex(void *controller, s32 column);
 void FUN_003d4104(void);
 
@@ -35,10 +35,10 @@ void statusDownRebuildOwnedDemonList(const u8 *quantities)
         u16 row = (count - 1) / 4;
         state->inventory.row = row;
         state->inventory.column = count - row * 4 - 1;
-        FUN_002a4964(controller, row);
+        FUN_002a4964(reinterpret_cast<ScrollSelection *>(controller), row);
         scrollOwnerSelectIndex(controller, state->inventory.column);
     } else {
-        FUN_002a4964(controller, state->inventory.row);
+        FUN_002a4964(reinterpret_cast<ScrollSelection *>(controller), state->inventory.row);
         scrollOwnerSelectIndex(controller, state->inventory.column);
     }
     FUN_003d4104();

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `cmp r0, #12` where armcc emits `cmp r0, #12`. */
 #include "common.h"
 
 extern "C" {
@@ -9,10 +8,7 @@ SlotTable *gameGetSlotTable(void);
 
 Slot *FUN_003e4d68(u32 index)
 {
-    if (index >= 12) {
-        return NULL;
-    }
-    return &gameGetSlotTable()->slots[index];
+    return index < 12 ? &gameGetSlotTable()->slots[index] : NULL;
 }
 
 } /* extern "C" */

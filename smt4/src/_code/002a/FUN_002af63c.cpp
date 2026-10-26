@@ -13,7 +13,7 @@ int FUN_002b76d0(...);
 int cameraSetViewMatrix(...);
 int renderCtxCalculateStereoParallax(...);
 int efctSetSpeed(void);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -83,7 +83,7 @@ extern unsigned int DAT_004d4914; /* 0x4d4914 */
 /* Supplied declaration required: cameraSetViewMatrix. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 
 
@@ -404,7 +404,7 @@ LAB_002af7a0:
           temp_v16 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           param_3[1] = (int)(temp_v16 + temp_v15);
         }
-        FUN_002c1b64(g_titleScene,0);
+        renderCtxSelectTexture(g_titleScene,0);
         VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);

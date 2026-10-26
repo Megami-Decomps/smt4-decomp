@@ -6,7 +6,6 @@
 extern "C" {
 extern EventEffectGlobalsA g_eventEffect;
 s32 FUN_001692ac(s32 mode, s32 flags);
-void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 void FUN_00164034(const EffectQuadParameters *first, const EffectQuadParameters *second, const EffectQuadParameters *third, const EffectQuadParameters *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
@@ -29,7 +28,7 @@ u32 FUN_00261254(void)
     parameters.u = 0.0f;
     parameters.v = 0.0f;
     parameters.color = color;
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     FUN_00164034(&parameters, &parameters, &parameters, &parameters, 0.0f, 0.0f, 400.0f, 240.0f, 0.21484375f);
     FUN_00183bb0();
     efctSetSpeed(1.0f);

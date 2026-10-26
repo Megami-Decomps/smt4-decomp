@@ -1,6 +1,7 @@
 /* NON_MATCHING: mask test and branch layout differ (retail loads each u64 mask pair with ldm/ldrd from the g_btlMain base and tests the halves separately) */
 #include "common.h"
 #include "shard/BattleFlagMasks.h"
+#include "gamedata/Table00Lookup.h"
 
 /* The battle state (only the fields this decision reads and writes). */
 struct EscapeBattle {
@@ -34,12 +35,6 @@ struct EscapeSaveSlot {
     /* 0x60 */ u16 flags;
 };
 
-/* An enemy's data record (only the levels). */
-struct EscapeEnemyRecord {
-    /* 0x00 */ u8 unk00[0x12];
-    /* 0x12 */ u16 levelA;
-    /* 0x14 */ u16 levelB;
-};
 
 /* A demon model record (only the kind). */
 struct EscapeModel {
@@ -56,7 +51,6 @@ extern "C" {
 s32 lcgRandomRange(s32 range);
 EscapePlayer *gameGetPlayerData(void);
 EscapeModel *FUN_00184310(u32 id);
-EscapeEnemyRecord *dataTable00FindById(u16 id);
 EscapeSlotTable *gameGetSlotTable(void);
 s32 gameDataBlocksGetTableFlag(void);
 EscapeSaveSlot *gameGetSaveSlotData(s32 slot);
@@ -141,7 +135,7 @@ void FUN_003ef1e4(EscapeBattle *battle, s32 forced)
     }
     for (s32 i = 0; i < 6; i++) {
         if (battle->enemies[i] != 0) {
-            EscapeEnemyRecord *record = dataTable00FindById(battle->enemies[i] & 0xffff);
+            Table00Record *record = dataTable00FindById(battle->enemies[i] & 0xffff);
             if (record != NULL) {
                 f32 power = (f32)(u32)(record->levelB + record->levelA);
                 if (power > enemyPower) {

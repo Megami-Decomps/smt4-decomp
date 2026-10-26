@@ -1,4 +1,5 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "util/AsdListBoxCreateDefault.h"
 
 /* The battle manager's debug settings (observed fields): a position, then the integer settings. */
 struct BattleStageSettings {
@@ -24,7 +25,6 @@ struct BattleStageMenuOwner {
 extern "C" {
 extern BattleStageSettings *DAT_004398d4;
 extern AsdListBoxEntry DAT_004351a8[];
-u32 asdListBoxCreateDefault(u32 parent, u32 priority, u32 flags, u32 option);
 void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u8 value);
 void jobSetText(u32 job, const char *text);

@@ -1,13 +1,13 @@
 #include "gamedata/SaveLoadProcessState.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct SaveProcessHeader {
     /* 0x00 */ u8 unk00[3];
     /* 0x03 */ u8 option;
 };
 extern "C" {
-void *asdMemAlloc(u32 heap, u32 tag, u32 mode, u32 size, u32 flags);
 void gameDataBlocksAddFlags(u32 flags);
 void gameDataFlagsSetBits(u32 flags);
 void gameDataFlagsSet(u32 flags);

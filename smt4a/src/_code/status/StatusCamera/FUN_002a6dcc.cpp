@@ -2,6 +2,7 @@
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdDebug.h"
 #include "title/titleMain.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
 struct StatusCameraRegistryView {
     u8 prefix[0xC];
@@ -13,7 +14,6 @@ extern StatusCameraRegistryView *g_handleRegistry;
 void *asdMemoryAllocTracked(u32, u32, u32, u32, u32);
 void sysMemClear(void *, u32);
 void FUN_00154180(s32, s32, s32, s32);
-void asdCameraInitializeDefaults(StatusCameraWorkA *, s32);
 void FUN_0014f0dc(StatusCameraWorkA *, const Vec3 *, const Vec3 *, const Vec3 *);
 void FUN_001523b8(StatusCameraWorkA *, s32, f32, f32, f32, f32);
 void asdCameraRegister(StatusCameraWorkA *);
@@ -42,7 +42,7 @@ void FUN_002a6dcc(const Vec3 *eye, const Vec3 *direction, const Vec3 *auxiliary,
     target.y += camera->dir.y * camera->dist;
     target.z += camera->dir.z * camera->dist;
     FUN_00154180(200, 0, 200, 240);
-    asdCameraInitializeDefaults(camera, 1);
+    asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(camera), 1);
     FUN_0014f0dc(camera, &camera->eye, &target, &up);
     FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
     FUN_0036b824(reinterpret_cast<u32>(camera));

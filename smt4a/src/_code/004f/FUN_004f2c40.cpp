@@ -127,7 +127,7 @@ static float romwright_sqrt_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: uiSetFloatPair. */
 /* Supplied declaration required: FUN_0014f0dc. */
-extern unsigned int FUN_00184964(unsigned int, unsigned int);
+extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001aff14. */
@@ -256,14 +256,14 @@ unsigned int FUN_004f2c40(float *param_1)
           temp_v2 = temp_v10;
         }
       }
-      temp_v1 = FUN_00184964(0xffffff9c,100);
+      temp_v1 = randBetween(0xffffff9c,100);
       in_s0 = 0.01f;
       temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v5 = temp_v2 * temp_v4 * 0.01f;
-      temp_v1 = FUN_00184964(0xffffff9c,100);
+      temp_v1 = randBetween(0xffffff9c,100);
       temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v7 = temp_v2 * temp_v4 * in_s0;
-      temp_v1 = FUN_00184964(0xffffff9c,100);
+      temp_v1 = randBetween(0xffffff9c,100);
       temp_v4 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       in_s0 = temp_v2 * temp_v4 * in_s0;
       param_1[0x1ad] = in_s0;

@@ -1,6 +1,5 @@
 #include "common.h"
-
-struct TextureNode;
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 TextureNode *asdTMTexTableGetNode(u32 table, u32 index);

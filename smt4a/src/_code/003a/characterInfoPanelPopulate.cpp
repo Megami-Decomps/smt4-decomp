@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/Text/AsdText.h"
 
 struct CharacterInfoPanelA {
     void *title, *name;
@@ -53,7 +54,6 @@ const char *FUN_00180118(u32 demon);
 void ARM_common_memcpy4_7(char *destination, const char *source);
 const char *FUN_0014bf3c(u32 demon, u32 flags);
 void FUN_001a90f0(char *destination, const char *source);
-const char *FUN_0014bd84(u32 skill);
 void textFormatBuffer(char *destination, const char *format, ...);
 f32 FUN_00168594(const char *text, u32 font, f32 spacing);
 void FUN_0038b3f8(s32 id, u32 kind);
@@ -127,7 +127,7 @@ extern "C" void characterInfoPanelPopulate(CharacterInfoPanelA *panel, const Cha
     panel->raceWidth = (s32)FUN_00168594(buffer, 2, 0.0f);
     for (s32 slot = 0; slot < 8; ++slot) {
         if (record->skills[slot] && record->owner) {
-            FUN_001654f8(FUN_0014bd84(record->skills[slot]), buffer, 0);
+            FUN_001654f8(reinterpret_cast<const char *>(FUN_0014bd84(record->skills[slot])), buffer, 0);
             asdTextFormatStream(panel->skillLabels[slot], 1, -1u, 0, 0, buffer);
             panel->skillWidths[slot] = (s32)FUN_00168594(buffer, 1, 0.0f);
         } else {

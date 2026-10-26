@@ -1,5 +1,6 @@
 /* NON_MATCHING: bitfield stores into the result and register allocation of the skill-gathering loops differ from retail. */
 #include "common.h"
+#include "gamedata/SkillFlags.h"
 
 // Result descriptor of a fusion: the two parent ids, the product and its summed cost.
 struct FusionResult {
@@ -31,11 +32,6 @@ struct FusionDevilRecord {
     u16 skills[8];  // 0x3c
 };
 
-struct SkillRecordView {
-    u8 unk00[3];
-    u8 flags;       // 0x03
-};
-
 // Demon being assembled by the fusion preview.
 struct FusionPreviewUnit {
     u8 unk00[0x146];
@@ -49,7 +45,6 @@ extern "C" {
 
 PairedKeyRecord* dataTable1fFindPairedKey(u16 first, u16 second);
 FusionDevilRecord* devilGetRecord(u16 id);
-SkillRecordView* dataTable06Sub1GetRecord(u16 id);
 s32 devilIsAvailable(FusionPreviewUnit* unit, u16 id);
 void FUN_002b7bca(void* base, s32 count, s32 size, void* compare);
 s32 fusionCandidateMatchesParentFilter(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);

@@ -1,40 +1,56 @@
-/* NON_MATCHING: switch default placement, dispatch register, and constructor-case ordering differ. */
 #include "common.h"
-
-struct BattleFilter;
+#include "shard/W6_W6Match3_RotationY.h"
 
 extern "C" {
-extern const u8 DAT_00570df0[];
-extern const u8 DAT_00570e30[];
-extern const u8 DAT_00570e7c[];
-extern const u8 DAT_00570ebc[];
-extern const u8 DAT_00570efc[];
-extern const u8 DAT_00570f58[];
-extern const u8 DAT_00570f98[];
-extern const u8 DAT_00570fd8[];
-extern const u8 DAT_00571018[];
-extern const u8 DAT_00571058[];
-extern const u8 DAT_00571098[];
-BattleFilter *FUN_004151b0(const void *configuration, u32 resource, s32 mode);
-BattleFilter *FUN_00415be0(const void *configuration, u32 resource, s32 mode);
-BattleFilter *FUN_0041cbac(const void *configuration, u32 resource, s32 mode);
-BattleFilter *FUN_0041d6bc(const void *configuration, u32 resource, s32 mode);
 
-BattleFilter *FUN_002282c8(u32 kind, u32 resource, s32 mode)
+extern u32 DAT_00570df0, DAT_00570e30, DAT_00570e7c, DAT_00570ebc, DAT_00570efc, DAT_00570f58,
+    DAT_00570f98, DAT_00570fd8, DAT_00571018, DAT_00571058, DAT_00571098;
+
+u32 *FUN_004151b0(u32 *table, u32 arg1, u32 arg2);
+u32 *FUN_00415be0(u32 *table, u32 arg1, u32 arg2);
+u32 *FUN_0041cbac(u32 *table, u32 arg1, u32 arg2);
+u32 *FUN_0041d6bc(u32 *table, u32 arg1, u32 arg2);
+
+// Initializes the table of the given kind (0-10) and returns it; NULL for an unknown kind.
+u32 *FUN_002282c8(u32 kind, u32 arg1, u32 arg2)
 {
+    u32 *table = NULL;
     switch (kind) {
-    case 0: return FUN_004151b0(DAT_00570df0, resource, mode);
-    case 1: return FUN_00415be0(DAT_00570e30, resource, mode);
-    case 2: return FUN_0041cbac(DAT_00570e7c, resource, mode);
-    case 3: return FUN_004151b0(DAT_00570ebc, resource, mode);
-    case 4: return FUN_0041d6bc(DAT_00570efc, resource, mode);
-    case 5: return FUN_004151b0(DAT_00570f58, resource, mode);
-    case 6: return FUN_004151b0(DAT_00570f98, resource, mode);
-    case 7: return FUN_004151b0(DAT_00570fd8, resource, mode);
-    case 8: return FUN_004151b0(DAT_00571018, resource, mode);
-    case 9: return FUN_004151b0(DAT_00571058, resource, mode);
-    case 10: return FUN_004151b0(DAT_00571098, resource, mode);
-    default: return NULL;
+    case 0:
+        table = FUN_004151b0(&DAT_00570df0, arg1, arg2);
+        break;
+    case 1:
+        table = FUN_00415be0(&DAT_00570e30, arg1, arg2);
+        break;
+    case 2:
+        table = FUN_0041cbac(&DAT_00570e7c, arg1, arg2);
+        break;
+    case 3:
+        table = FUN_004151b0(&DAT_00570ebc, arg1, arg2);
+        break;
+    case 4:
+        table = FUN_0041d6bc(&DAT_00570efc, arg1, arg2);
+        break;
+    case 5:
+        table = FUN_004151b0(&DAT_00570f58, arg1, arg2);
+        break;
+    case 6:
+        table = FUN_004151b0(&DAT_00570f98, arg1, arg2);
+        break;
+    case 7:
+        table = FUN_004151b0(&DAT_00570fd8, arg1, arg2);
+        break;
+    case 8:
+        table = FUN_004151b0(&DAT_00571018, arg1, arg2);
+        break;
+    case 9:
+        table = FUN_004151b0(&DAT_00571058, arg1, arg2);
+        break;
+    case 10:
+        table = FUN_004151b0(&DAT_00571098, arg1, arg2);
+        break;
     }
+    return table;
 }
+
 }

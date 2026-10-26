@@ -74,7 +74,7 @@ extern int ifTouchIsInitialSelection(int);
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: memClear. */
-extern int FUN_0039411c(int);
+extern int statusDecodeActivityState(int);
 /* Supplied declaration required: FUN_003c2d84. */
 /* Supplied declaration required: recordResetIndex. */
 /* Supplied declaration required: _ZN13ObjBase3c2ef07vfunc0cEv. */
@@ -249,7 +249,7 @@ LAB_003907d0:
             return;
           }
           temp_v2 = flaggedValueHolderGetTotal(param_1 + 0x90);
-          temp_v2 = FUN_0039411c(puVar1[0x19e] + temp_v2 * 0x9c8);
+          temp_v2 = statusDecodeActivityState(puVar1[0x19e] + temp_v2 * 0x9c8);
           if (temp_v2 == 0) goto LAB_00390634;
           if (temp_v2 == 1) goto LAB_00390684;
           if (temp_v2 == 2) goto LAB_003906d4;

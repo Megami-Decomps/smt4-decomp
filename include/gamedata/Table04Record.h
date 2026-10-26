@@ -65,18 +65,35 @@ struct Table04Record {
     /* 0x74 */ u8 unk74[0x12];
     /* 0x86 */ u16 unk86;
 };
+/* A record of data table 4, section 1 (0x48 bytes; smt4a skill records): `id` at 0x20 is the key of
+ * dataTable41FindById(). */
 struct Table04ExtraRecord {
     /* 0x00 */ u8 unk00[0x20];
     /* 0x20 */ u16 id;
     union {
         /* 0x22 */ u8 unk22[0x22];
         struct {
+            /* 0x22 */ u16 level;
+            /* 0x24 */ u8 hpPercentTens;
+            /* 0x25 */ u8 mpPercentTens;
+            /* 0x26 */ u8 holdChance;  /* percent */
+            /* 0x27 */ u8 chance;      /* percent */
+            /* 0x28 */ u8 statBonus[5];
+        } stats;
+        struct {
             u8 unk22[0x12];
             /* 0x34 */ s16 triggeredSkill;
             /* 0x36 */ s16 triggerChance;
         } trigger;
     };
-    /* 0x44 */ s32 flags;
+    union {
+        /* 0x44 */ s32 flags;
+        /* 0x44 */ u32 affinity;
+        struct {
+            u32 tier : 2;
+            u32 reserved : 30;
+        } actionTier;
+    };
 };
 typedef char Table04RecordOffsets[offsetof(Table04Record, properties) == 0x28 &&
     offsetof(Table04Record, flags) == 0x3C ? 1 : -1];
@@ -106,6 +123,8 @@ extern "C" {
 #endif
 /* Finds the record with `id`: the add-on content's override first, else a search of data table 4. */
 Table04Record *dataTable04FindById(u32 id);
+/* Finds the record of data table 4/1 with `id`: the add-on content's override first, else a search of the table. */
+Table04ExtraRecord *dataTable41FindById(u32 id);
 #ifdef __cplusplus
 }
 #endif

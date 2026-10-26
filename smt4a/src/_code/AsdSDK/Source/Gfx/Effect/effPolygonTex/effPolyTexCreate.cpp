@@ -1,10 +1,10 @@
 /* NON_MATCHING: the debug trace (file/line) now matches; retail zeroes each identity-quaternion component with an integer store and then rewrites w with 1.0f (armcc folds the dead zero stores into a VSTM pair here). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonTex.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, int size);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
 void *resourceResolveHeaderPointer(PolyTexDesc *desc);

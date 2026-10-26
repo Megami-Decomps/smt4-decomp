@@ -52,7 +52,7 @@ u32 FUN_002bcddc(u16 id, u32 arg);
 void textFormatBuffer(char* out, const char* format, ...);
 void effectRenderTransformedInstance(void* vec, f32 amount);
 u32 packNibblesAndByte(u32 a, u32 b, u32 c);
-void FUN_002c198c(TitleScene* scene);
+void renderCtxApplyTransforms(TitleScene* scene);
 void FUN_002c18e4(TitleScene* scene);
 
 struct SpriteRect {
@@ -138,7 +138,7 @@ u32 FUN_001ad9f0(void)
     }
     ringPop(&g_titleScene->stateRing);
     ringReplace(&g_titleScene->blendRing, packNibblesAndByte(6, 7, 0));
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return 0;
 }

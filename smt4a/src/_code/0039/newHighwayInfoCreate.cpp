@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 struct HighwayInfo {
     /* 0x000 */ u32 process;
@@ -36,7 +37,6 @@ void FUN_0035d080(void *);
 void engineResourceSetSecondaryValue(void *);
 void taskCreateDraw(const char *, s32, s32, s32, HighwayCallback, void *, void *, u32);
 void asdTMTexTableLoadTmx(s32 table, s32 flags);
-void asdTMTexLoadMainHeap(s32 table, s32 index);
 u32 spriteHandleCreate(u32 flags);
 void positionStateSet(u32 sprite, s32 mode, u32 color, f32 value);
 void FUN_003f84e8(HighwayInfo *);

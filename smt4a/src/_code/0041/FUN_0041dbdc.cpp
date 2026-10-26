@@ -1,5 +1,6 @@
 /* NON_MATCHING: prologue order only: retail copies `selected` to r5 (movs r5, r1) and stores the selected byte after `mov r0, #1`; built stores it before. */
 #include "common.h"
+#include "shard/flaggedEntryGetValueA.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ s32 sysPlaySe(u32 id);
 s32 FUN_0041f020(Menu *menu, s32 selected);
 s32 __aeabi_memcpy4(void *dest, void *src, s32 size);
 s32 resourceRunOperationIfUnblocked(Entry *entry);
-s32 flaggedEntryGetValueA(Entry *entry);
 s32 FUN_0041fc24(Menu *menu);
 s32 FUN_0041e2d8(Menu *menu);
 
@@ -58,7 +58,7 @@ void FUN_0041dbdc(Menu *menu, s32 selected)
         __aeabi_memcpy4(&menu->current, &menu->entryA, 100);
     }
     menu->extra = resourceRunOperationIfUnblocked(&menu->current);
-    menu->value = flaggedEntryGetValueA(&menu->current);
+    menu->value = flaggedEntryGetValueA(reinterpret_cast<FlaggedEntry *>(&menu->current));
     menu->prevTotal = menu->total;
     menu->total = menu->value + menu->extra + menu->bonus;
     FUN_0041fc24(menu);

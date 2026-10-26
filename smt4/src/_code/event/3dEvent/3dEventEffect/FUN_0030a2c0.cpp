@@ -1,13 +1,14 @@
-/* NON_MATCHING: initialization uses a small byte-clear helper and position conversions use different VFP transfers. */
+/* NON_MATCHING: only the translation destination address uses r5 instead of retail r9 (same as the Apocalypse twin event3dEventEffectCreate). */
 #include "event/EventEplEffect.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include <string.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_004035d4[];
 extern const char DAT_004035c4[];
 extern const char DAT_004035b0[];
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 u32 effectJobUpdateSpawn(void);
 void eventWorkRelease(void);
 s32 FUN_002248b8(u32 job);
@@ -19,14 +20,7 @@ u32 FUN_0030a2c0(const char *path, s32 x, s32 y, s32 z)
 {
     asdDebugTrace(DAT_004035d4, 112);
     EventEplEffectWork *work = (EventEplEffectWork *)asdMemAlloc(0x100, 0x100, 0, sizeof(EventEplEffectWork), 1);
-    work->job = 0;
-    work->phase = 0;
-    work->pending = NULL;
-    work->current = NULL;
-    work->started = 0;
-    for (s32 i = 0; i < 7; ++i) work->unk11[i] = 0;
-    work->resource = 0;
-    for (s32 i = 0; i < 4; ++i) work->translation[i] = 0.0f;
+    memset(work, 0, sizeof(EventEplEffectWork));
     work->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_004035c4), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(effectJobUpdateSpawn), reinterpret_cast<AsdProcFunc>(eventWorkRelease), reinterpret_cast<u32>(work));
     taskCreateDraw(DAT_004035b0, 0x75, 0, 0, FUN_002248b8, 0, work, work->job);
     taskCreateDraw(DAT_004035b0, 0xD3, 0, 0, FUN_002248b8, 0, work, work->job);

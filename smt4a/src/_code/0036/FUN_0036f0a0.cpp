@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler emits a phase comparison chain instead of the retail jump table, changing phase-four liveness and epilogue sharing. */
+/* NON_MATCHING: the four-entry jump table now matches (explicit case 4 label); retail hoists the state constants 1 and 4 into r7/r8 and shares its epilogue differently (retail 92 vs built 93 rows). */
 #include "gfx/NamedTextureCache.h"
 
 
@@ -53,6 +53,8 @@ void FUN_0036f0a0(void)
             }
         }
         break;
+    case 4:
+        return;
     default:
         return;
     }

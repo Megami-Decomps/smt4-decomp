@@ -2,11 +2,11 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/JobWork.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_00409d40[]; /* AsdListBox.cpp: __FILE__ */
 
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void *asdListAdd(void *list, void *item, void *func);
 void asdListBoxMarkDirty(AsdListBox *listBox);
 void asdListBoxViewRefresh(void *view);

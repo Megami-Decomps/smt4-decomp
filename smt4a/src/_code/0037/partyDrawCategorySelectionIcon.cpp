@@ -1,6 +1,7 @@
 /* NON_MATCHING: category switch case order and shared high-ID/highlight branch placement differ from retail. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/W5_W5Match7_DataRecord.h"
 
 struct PartyCategoryRecord {
     u8 unk00[6];
@@ -10,7 +11,6 @@ struct PartyCategoryRecord {
 extern "C" {
 s32 partyEntryFlagsBit3(s32 id);
 s32 idIsAtLeast350(s32 id);
-PartyCategoryRecord *FUN_001ad9b4(s32 id);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_0017ffa8(s32 layer, u32 group, u32 sprite, u32 x, u32 y, u32 flags);
 void FUN_00183bb0();
@@ -25,7 +25,7 @@ void partyDrawCategorySelectionIcon(s32 id, u32 x, u32 y, u32 flags)
     } else if (idIsAtLeast350(id)) {
         sprite = highlighted ? 0x41b : 0x41a;
     } else {
-        switch (FUN_001ad9b4(id)->category) {
+        switch (reinterpret_cast<PartyCategoryRecord *>(FUN_001ad9b4(id))->category) {
         case 0:
             sprite = highlighted ? 0x40a : 0x403;
             break;

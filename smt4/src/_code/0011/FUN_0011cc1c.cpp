@@ -2,13 +2,13 @@
 #include "nn/snd/Initialization.h"
 #include "nn/Result.h"
 #include "shard/Dspsnd.h"
+#include "util/FUN_002c1398.h"
 
 extern "C" {
 extern NnSndInitialization DAT_0044e7c0;
 extern NnSndMasterManager g_nnSndMasterManager;
 extern NnSndVoiceManager g_nnSndVoiceManager;
 extern DspsndState g_dspsndState;
-s32 FUN_002c1398(void);
 s32 FUN_00129214(DspsndState *state, u32 mode);
 void FUN_00146e40(NnSndMasterManager *manager);
 void FUN_00128e20(NnSndMasterManager *manager);
@@ -26,7 +26,7 @@ s32 FUN_0011cc1c(void)
     if (DAT_0044e7c0.initialized != 0) {
         return 0x0820ABF9;
     }
-    s32 result = FUN_002c1398();
+    s32 result = (s32)FUN_002c1398();
     if (nnResultIsFailure(result)) {
         return result;
     }

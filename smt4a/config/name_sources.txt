@@ -6599,3 +6599,55 @@
 00212880 scrOpLogicalNot inferred [high] script opcode: pops a number and pushes 1 if zero else 0
 00141850 workRangeSetLowerBound inferred [med] sets the lower bound when value is below the limit, returns whether it did
 00328200 naviQuestConfirmAvailable inferred [med] navigation screen up, flags set and quest-confirm input pressed
+0016c4b8 renderCtxSelectTexture inferred [high] twin of smt4 FUN_002c1b64
+0039b984 contentFindRecordById inferred [med] returns the add-on content's override record or the data-table-0x45 record (PackageSelectableRecord) for an id
+002e0e04 pathBuildWide inferred [med] prefixes the input path with archive root 0-3 and widens it into a 248-char (496 byte) buffer; returns 0 when too long; twin of smt4 FUN_00254884
+0038a538 eventEffectDestroySlot inferred [high] releases the slot textures, stops the job, frees the effect and clears its slot
+00249a08 resourceTableReleaseHandles inferred [med] once after load releases every active slot handle
+003cc614 scrSetSelectedRecordId inferred [med] script result = selected record id or direct record id
+0014166c processDispatchFinishedNodes inferred [high] twin of smt4 processDispatchFinishedNodes (both IDENTICAL)
+00148c30 dataTableFindCategoryVariant inferred [high] twin of smt4 dataTableFindCategoryVariant (both IDENTICAL)
+00159e24 sndMasterFinalize inferred [high] twin of smt4 sndMasterFinalize (both IDENTICAL)
+00161b8c asdGxAccountCommandBytesAndAdvanceQueue inferred [high] twin of smt4 asdGxAccountCommandBytesAndAdvanceQueue (both IDENTICAL)
+0016ceb8 fsArchiveGetWorkspaceSize inferred [high] twin of smt4 fsArchiveGetWorkspaceSize (both IDENTICAL)
+00178a54 indexedResourceQuery inferred [high] twin of smt4 indexedResourceQuery (both IDENTICAL)
+001a8db0 asdWaveArchiveHasExpectedBlock inferred [high] twin of smt4 asdWaveArchiveHasExpectedBlock (both IDENTICAL)
+001bdadc dspFxSetReverb inferred [high] twin of smt4 dspFxSetReverb (both IDENTICAL)
+0043c2d4 stringFormatUnbounded inferred [high] twin of smt4 stringFormatUnbounded (both IDENTICAL)
+00514284 resourceQueryLoadStatus inferred [high] twin of smt4 resourceQueryLoadStatus (both IDENTICAL)
+003a1ef4 effEmitterCreateSmall inferred [high] twin of smt4 effEmitterCreateSmall (both IDENTICAL)
+001b2d88 packageFindRecordByName inferred [high] twin of smt4 packageFindRecordByName (both IDENTICAL)
+001b3148 objHasFlagBit16 inferred [high] twin of smt4 objHasFlagBit16 (both IDENTICAL)
+001b2ca4 packageFindFileRefByName inferred [high] twin of smt4 packageFindFileRefByName (both IDENTICAL)
+001a1ea8 mathInterpolatePackedTable inferred [high] twin of smt4 mathInterpolatePackedTable (both IDENTICAL)
+0015a568 appletUnlockAndSleepIfShellClosed inferred [high] twin of smt4 appletUnlockAndSleepIfShellClosed (both IDENTICAL)
+0037658c effPartCloneAfter inferred [high] twin of smt4 effPartCloneAfter (both IDENTICAL)
+003a9cac scrBtlSelectRandomCategoryEntry inferred [high] twin of smt4 scrBtlSelectRandomCategoryEntry (both IDENTICAL)
+0043a560 serviceCloseInitializedHandle inferred [high] twin of smt4 serviceCloseInitializedHandle (both IDENTICAL)
+0043a794 serviceQuerySignedByteChecked inferred [high] twin of smt4 serviceQuerySignedByteChecked (both IDENTICAL)
+0043a7e8 conversionReplaceEventHandle inferred [high] twin of smt4 conversionReplaceEventHandle (both IDENTICAL)
+004527a8 resourceReleaseRelativeMember inferred [high] twin of smt4 resourceReleaseRelativeMember (both IDENTICAL)
+00466fdc sndHeapAlloc inferred [high] twin of smt4 sndHeapAlloc (both IDENTICAL)
+00470b60 aocQueueType0c inferred [high] twin of smt4 aocQueueType0c (both IDENTICAL)
+00161d74 callbackListInitialize inferred [med] sig-matched twin of smt4 callbackListInitialize (both IDENTICAL, same code)
+00184964 randBetween inferred [med] sig-matched twin of smt4 randBetween (both IDENTICAL, same code)
+001b95b0 workStateClear inferred [med] sig-matched twin of smt4 workStateClear (both IDENTICAL, same code)
+002f8dfc recordCompareFloatKey inferred [med] sig-matched twin of smt4 recordCompareFloatKey (both IDENTICAL, same code)
+00389cf0 effectAllocateSavedRenderRecords inferred [med] sig-matched twin of smt4 effectAllocateSavedRenderRecords (both IDENTICAL, same code)
+0042d2fc sndMasterManagerApply inferred [med] sig-matched twin of smt4 sndMasterManagerApply (both IDENTICAL, same code)
+0042ff1c resourceDispatch inferred [med] sig-matched twin of smt4 resourceDispatch (both IDENTICAL, same code)
+001582a8 callbackSlotInvokeOrPassThrough inferred [med] calls slot callback(value) else returns value
+004dbdf8 contentCountAvailableDemons inferred [med] counts unlocked content demons passing save/availability checks
+00415310 texturedQuadSetCentered inferred [high] rebuilds a centred quad from half-extents
+0013b4ac handleRegistryCreate inferred [high] creates g_handleRegistry (Obj557c48) once
+0019cb50 matrix34RotateVector inferred [high] applies the 3x4 matrix linear part to a vec3
+004f26cc cameraResetTransitionVectors inferred [med] clears both camera transition vectors and the rotation flag
+003f0b80 battleRestoreCameraVectors inferred [med] restores the saved vector pair and value into g_btlCamera
+0013ef3c surfaceCaptureUpdate inferred [med] job update: captures the surface once when requested and not suppressed/blocked
+003eacb4 battleReleaseRetiredUnitResources inferred [med] releases unretained resources of the retired unit and clears its roster/combatant flags
+00379be8 naviMainEnterState4IfActive inferred [high] twin of naviMainEnterState6IfActive
+003e87a8 battleApplyOptionOverrides inferred [med] applies battle option overrides and rebuilds the player temporary combatant
+0032affc soundTestDrawJobUpdate inferred [med] sound-test "ST D" job callback, twin of smt4 FUN_002ca6f8
+0029ee68 mapMainDrawOrdinaryPass inferred [med] "MAP U" draw job, twin of smt4 FUN_001e9508
+002a2c78 campCecViewDrawEffectImage inferred [med] CampCecView draw job that requests the effect image while active
+002ada48 passiveSkillResolveAffinity inferred [high] twin of smt4 passiveSkillResolveAffinity (identical source shape)

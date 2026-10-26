@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned char DAT_00420b78; /* 0x420b78 */
 
 extern int FUN_001ff93c(unsigned char **);
-extern int FUN_001ffaf0(void);
+extern int requestSubmitRecordById(void);
 /* Supplied declaration required: fileOwnerCloseA. */
 /* Supplied declaration required: fileOwnerCloseB. */
 /* Supplied declaration required: fileOwnerCloseC. */
@@ -59,7 +59,7 @@ unsigned int FUN_002d5e44(int param_1,unsigned int param_2)
     if (param_1 != 1) {
       if (param_1 != 2) {
         if (param_1 == 3) {
-          temp_v0 = FUN_001ffaf0();
+          temp_v0 = requestSubmitRecordById();
         }
       }
       else {

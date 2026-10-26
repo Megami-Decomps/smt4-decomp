@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "script/ScriptArgs.h"
 
 // The value at 0x160 lies inside an unaligned padding union in the shared combatant view.
 struct ScriptCombatantValueView {
@@ -9,7 +10,6 @@ struct ScriptCombatantValueView {
     u8 unk008[0x158];
     u32 value; // 0x160
 };
-extern "C" u32 scrGetArg(u32 index);
 
 // Set a script-controlled value on the first eligible enemy with the requested unit id.
 extern "C" u32 FUN_003a98c4()

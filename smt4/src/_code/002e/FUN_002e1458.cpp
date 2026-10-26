@@ -1,9 +1,9 @@
 /* NON_MATCHING: error literal loads into r4 then moves to r0; retail loads into r0 then preserves it in r4. */
 #include "sys/ProcessResult.h"
 #include "common.h"
+#include "util/pathBuildWide.h"
 
 extern "C" {
-s32 FUN_00254884(const char *path, u16 *converted, s32 kind);
 s32 FUN_002ad888(void);
 u32 FUN_002a84e8(const u16 *path);
 
@@ -11,7 +11,7 @@ u32 FUN_002a84e8(const u16 *path);
 u32 FUN_002e1458(const char *path)
 {
     u16 converted[248];
-    if (FUN_00254884(path, converted, 2) != 0) {
+    if (pathBuildWide(path, reinterpret_cast<s16 *>(converted), 2) != 0) {
         FUN_002ad888();
         u32 result = FUN_002a84e8(converted);
         FUN_002c3510(result);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: per-step recovery of the party's HP while walking (a percentage from the active flags, +2 more for one player id, applied to the player and, for the strongest flag, to the party slots; then a 2% bonus for slots that know skill 0x1c6); written from the decompilation, the slot-record getter's argument was lost and is assumed to be the slot id byte, and the skill scan covers the 8 stored skills (the ninth word the decompiler reads is zero) */
 #include "common.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 #define WALK_HEAL_SKIP_FLAG 2
 #define WALK_FLAG_STRONG_A 0x6B
@@ -45,7 +46,6 @@ WalkPlayerData *gameGetPlayerData(void);
 s32 FUN_0018416c(u16 id);
 WalkSlotRecord *gameGetSlotRecord(s32 slot);
 s8 *gameGetSlotTable(void);
-s32 gameDataFlagTestBit(u32 flag);
 
 /* The record's maximum HP, boosted by 25% when its boost id is active. */
 static __inline s32 walkMaxHp(WalkSlotRecord *record)
@@ -94,9 +94,9 @@ void FUN_004a0524(void)
     if ((gameGetPlayerData()->flags & WALK_HEAL_SKIP_FLAG) != 0)
         return;
 
-    if (gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0 || gameDataFlagTestBit(WALK_FLAG_STRONG_B) != 0)
+    if ((s32)gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0 || (s32)gameDataFlagTestBit(WALK_FLAG_STRONG_B) != 0)
         percent = WALK_PERCENT_STRONG;
-    else if (gameDataFlagTestBit(WALK_FLAG_WEAK) != 0)
+    else if ((s32)gameDataFlagTestBit(WALK_FLAG_WEAK) != 0)
         percent = WALK_PERCENT_WEAK;
 
     s32 playerPercent = percent;
@@ -120,7 +120,7 @@ void FUN_004a0524(void)
         player->hp = hp;
     }
 
-    if (percent != 0 && gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0) {
+    if (percent != 0 && (s32)gameDataFlagTestBit(WALK_FLAG_STRONG_A) != 0) {
         s8 *table = gameGetSlotTable();
         for (s32 slot = 0; slot < WALK_PARTY_SLOTS; slot++) {
             WalkSlotRecord *record;

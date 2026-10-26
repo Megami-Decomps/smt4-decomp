@@ -2,6 +2,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct BattleLiveVitals {
     /* 0x00 */ u8 unk00[0xe8];
@@ -14,7 +15,6 @@ struct BattleLiveVitals {
 extern "C" {
 BattleLiveVitals *FUN_0027da30(BtlMainState *, s32 id);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32 id);
-BtlEquip *gameGetUnitRecord(s32 id);
 
 static __inline void addClampedVital(s16 *value, s16 maximum, s32 amount)
 {
@@ -51,7 +51,7 @@ void btlAddClampedVital(s32 id, s32 kind, s32 amount)
         }
         return;
     }
-    BtlEquip *unit = gameGetUnitRecord(id - BTL_ENTRY_COUNT);
+    BtlEquip *unit = static_cast<BtlEquip *>(gameGetUnitRecord(id - BTL_ENTRY_COUNT));
     if (kind == 0)
         addClampedVital(&unit->hp, unit->maxHp, amount);
     else if (kind == 1)

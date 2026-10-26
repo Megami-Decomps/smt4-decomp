@@ -44,10 +44,6 @@ extern "C" void FUN_00394978(Object *object)
     u32 count = info->count;
     Record *record = mesh->records;
     u32 i;
-
-    if (count == 0) {
-        return;
-    }
     for (i = 0; i < count; i++) {
         Vertex *vertex = &mesh->geometry->vertices[(u16)i];
         const f32 scale = 1.0f / 255.0f;

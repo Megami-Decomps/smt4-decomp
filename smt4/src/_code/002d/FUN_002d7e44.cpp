@@ -6,7 +6,6 @@
 extern "C" {
 extern TitleScene *g_titleScene;
 u32 FUN_002c5d80(u32 mode, u32 option);
-void FUN_002c1b64(TitleScene *scene, s32 layer);
 s32 effMenuGetFlag();
 void effMenuCallHandler(s32 mode, u32 enabled);
 void FUN_001db658(s32 count, u32 colorA, u32 colorB, f32 x, f32 y, f32 z, f32 height);
@@ -19,15 +18,15 @@ void FUN_002d7e44()
         u8 prefix[0x78];
         s32 debugBackdrop;
     };
-    RenderCtx *scene = reinterpret_cast<RenderCtx *>(g_titleScene);
+    RenderCtx *scene = g_titleScene;
     u32 state = FUN_002c5d80(1, 1);
     renderCtxPushA(scene, state);
-    FUN_002c1b64(g_titleScene, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     u32 enabled = 1;
-    if (effMenuGetFlag() != 0 && g_titleScene->unk528 == 0)
+    if (effMenuGetFlag() != 0 && g_titleScene->stereoMode == 0)
         enabled = 0;
     effMenuCallHandler(0, enabled);
-    renderStackPop(&reinterpret_cast<RenderCtx *>(g_titleScene)->stackA);
+    renderStackPop(&g_titleScene->stackA);
     if (reinterpret_cast<EditorDrawView *>(&g_effectEditor)->debugBackdrop != 0)
         FUN_001db658(30, 0x606060FF, 0x909090FF, 0.0f, 0.0f, 0.0f, 17.5f);
 }

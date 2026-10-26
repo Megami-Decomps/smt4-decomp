@@ -37,11 +37,11 @@ void FUN_0023534c(void);
 void FUN_00297c3c(void);
 void FUN_002b9520(void);
 void sub68OwnerCall3(void);
-void FUN_00249a08(void);
+void resourceTableReleaseHandles(void);
 void mapRecordResumePoint(void);
 void FUN_002c2358(void);
 void FUN_002235f4(void);
-void FUN_00379be8(void);
+void naviMainEnterState4IfActive(void);
 void frameTransitionSetMode(s32 arg);
 void objectE0ResetFlags1040(void);
 void FUN_0037a078(void);
@@ -97,7 +97,7 @@ u32 FUN_0036fe68(void)
             FUN_002c2610();
             objectE0ResetFlags1040();
             frameTransitionSetMode(1);
-            FUN_00379be8();
+            naviMainEnterState4IfActive();
         }
         if (DAT_005806b4.frame == 0xB) {
             DAT_005f1600.loading = 1;
@@ -115,7 +115,7 @@ u32 FUN_0036fe68(void)
         if (DAT_005806b4.frame >= 0xD && naviMainIsActive() != 0) {
             FUN_002c2358();
             mapRecordResumePoint();
-            FUN_00249a08();
+            resourceTableReleaseHandles();
             FUN_002c3398(0);
             FUN_0031416c(200, 200, 200, 0x82, 0x82, 0x82, 0x1E, 0x1E, 0x1E, 0x96, 0x96, 0x96);
             DAT_005806b4.frame = 100;

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int FUN_00186940(void);
 int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(int *);
@@ -39,7 +39,7 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_00186940. */
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
@@ -103,7 +103,7 @@ void Obj42083c::draw()
   temp_v12 = 0x3f800000;
   temp_v14 = *(float *)(*(int *)(param_1 + 0x60) + 0xc) * *(float *)(*(int *)(param_1 + 0x14) + 8);
   temp_v13 = 0x3f800000;
-  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
+  renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
   FUN_00409e78(param_1,&temp_v19,param_1 + 0x18);
   temp_v0 = 0;
   if (temp_v0 < **(int **)(param_1 + 0x60) + 1) {

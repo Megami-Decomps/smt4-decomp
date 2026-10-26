@@ -1,9 +1,9 @@
 /* NON_MATCHING: zero-value lifetimes and candidate-cursor address scheduling differ; the search receives its cursor argument. */
 #include "skill/SkillSlotScreen.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 s32 scrollOwnerSetValue(void *cursor, s32 value);
-s32 FUN_002a4964(void *cursor, s32 value);
 s32 objectApplyIfUnblocked(void *cursor);
 s32 uiSearchPrimary(const void *cursor);
 s32 flaggedEntrySetValueA(void *cursor, s32 value);
@@ -27,10 +27,10 @@ void FUN_00359a08(SkillSlotScreen *screen)
     }
     if (emptySlot < objectApplyIfUnblocked(screen->slotCursor)) {
         scrollOwnerSetValue(screen->slotCursor, 0);
-        FUN_002a4964(screen->slotCursor, emptySlot);
+        FUN_002a4964(reinterpret_cast<ScrollSelection *>(screen->slotCursor), emptySlot);
     } else {
         scrollOwnerSetValue(screen->slotCursor, 0);
-        FUN_002a4964(screen->slotCursor, 0);
+        FUN_002a4964(reinterpret_cast<ScrollSelection *>(screen->slotCursor), 0);
     }
 
     s32 index = 0;

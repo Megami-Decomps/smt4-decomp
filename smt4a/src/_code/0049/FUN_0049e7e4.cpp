@@ -3,13 +3,13 @@
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "gfx/StereoParallax.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 extern RenderCtxScissorA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
-SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 id);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void renderPopStateStacks(void);
 s32 objectApplyIfUnblocked(void *scrollBar);   /* total entries */
@@ -28,13 +28,13 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
     FUN_001835b4(2, 0x33, 0x12, x, y, 0xC9);
 
     s32 thumbOffset = 0;
-    SpriteInfo *track = asdTMTexTableEntryAt(0x33, 0x13);
+    TextureTableEntryIV *track = asdTMTexTableEntryAt(0x33, 0x13);
     s32 thumbHeight;
 
     if (objectApplyIfUnblocked(scrollBar) <= uiSearchPrimary(scrollBar)) {
-        thumbHeight = track->size[1];
+        thumbHeight = track->placement->height;
     } else {
-        f32 pixelsPerEntry = (f32)track->size[1] / (f32)objectApplyIfUnblocked(scrollBar);
+        f32 pixelsPerEntry = (f32)track->placement->height / (f32)objectApplyIfUnblocked(scrollBar);
 
         thumbHeight = (s32)((f32)uiSearchPrimary(scrollBar) * pixelsPerEntry);
         if (thumbHeight < 1) {
@@ -42,14 +42,14 @@ void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
         }
         thumbOffset = (s32)((f32)resourceRunOperationIfUnblocked(scrollBar) * pixelsPerEntry);
         if (resourceRunOperationIfUnblocked(scrollBar) + uiSearchPrimary(scrollBar) == objectApplyIfUnblocked(scrollBar)
-            && thumbOffset + thumbHeight < track->size[1]) {
-            thumbOffset = track->size[1] - thumbHeight;
+            && thumbOffset + thumbHeight < track->placement->height) {
+            thumbOffset = track->placement->height - thumbHeight;
         }
     }
 
     bool suspended = renderCtxSuspendScissor(g_renderCtx);
 
-    FUN_00168e00(track->x + x, track->y + y + thumbOffset, track->size[0], thumbHeight);
+    FUN_00168e00(track->x + x, track->y + y + thumbOffset, track->placement->width, thumbHeight);
     FUN_001835b4(2, 0x33, 0x13, x, y, 0xCE);
     if (suspended) {
         renderCtxResumeScissor(g_renderCtx);

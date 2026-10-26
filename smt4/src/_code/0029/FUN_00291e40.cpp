@@ -1,4 +1,3 @@
-/* NON_MATCHING: position-by-value frame recovered; only position setter's slot argument uses selected r6 instead of loop slot r4. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 #include "util/AsdSoundGetPlayerPriority.h"
@@ -22,8 +21,7 @@ u32 FUN_00291e40(u32 sound, SoundActorQueuePosition position)
     if (jyoucyuGetTableEntry(1) == 0 && FUN_002c1d5c() == 0) {
         for (s32 slot = 0; slot < 16; ++slot) {
             if (asd3dSoundActorIsPlaying(slot) == 0) {
-                selected = slot;
-                FUN_002cc1c0(slot, &position);
+                FUN_002cc1c0(selected = slot, &position);
                 if (sound - 0x0100006C <= 255) {
                     FUN_002ebc68(sound, selected);
                     selected += 100000;

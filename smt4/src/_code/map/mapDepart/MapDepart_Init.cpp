@@ -4,6 +4,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "util/MapDepart_InitState.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // The allocated departure work extends the public prefix.  SaveWork's word at
 // 0x24 lies inside two-byte-aligned padding, so neither shared layout is enlarged.
@@ -33,7 +34,6 @@ typedef char MapDepartureInitLayout[sizeof(MapDepartureInitView) == 0x80 &&
 extern "C" {
 extern MapDepart *g_mapDepart;
 extern GameState g_gameState;
-void *asdMemAlloc(s32 heap, s32 category, s32 flags, u32 bytes, s32 count);
 s32 FUN_001e553c(u32 process);
 void mapDepartEnable(u32 process);
 s32 scrCommWaitStateAction(u32 process);

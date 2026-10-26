@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
@@ -79,7 +80,6 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 void wordPairCopy(void *destination, const void *source);
 s32 gameFlagIsSet(u32 flag);
 void asdTMTexTableLoadSprites(u32 table);
-void asdTMTexLoadMainHeap(u32 table, u32 arg);
 void loadSlotRequestAsync(u32 slot, u32 arg);
 void FUN_003f86f0(void);
 void sysMemClear(void *block, u32 size);

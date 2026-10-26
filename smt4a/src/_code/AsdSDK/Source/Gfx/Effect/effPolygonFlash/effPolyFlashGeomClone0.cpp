@@ -1,12 +1,12 @@
 /* NON_MATCHING: register allocation only: retail keeps srcBlock in r4 and params in r6 (one ldm of the two fields) and the block in r5; the built code swaps them */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 extern const char DAT_00544ba8[]; /* __FILE__ of effPolygonFlash.cpp */
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00271d28(PolyGeom *src);
 
 /* Clones a polygon effect's geometry block and gives each segment alternating texture coordinates. */

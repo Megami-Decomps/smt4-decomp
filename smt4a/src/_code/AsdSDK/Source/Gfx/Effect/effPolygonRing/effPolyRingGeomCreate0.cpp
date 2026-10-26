@@ -1,4 +1,5 @@
-/* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 114 vs built 85 rows, 138 diff lines. */
+/* NON_MATCHING: debug trace (effPolygonRing.cpp line 503) now matches; the quad-color loop differs from retail (retail 99 vs built 89 rows). */
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/Effect/effPolygonRing.h"
 
 extern "C" {
@@ -12,6 +13,7 @@ extern u8 DAT_005c1ec8;
  * vertices from the parameter block. Returns a block holding just the geometry pointer. */
 PolyGeom **effPolyRingGeomCreate0(PolyParams *params)
 {
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Effect\\effPolygonRing.cpp", 503);
     PolyGeom **block = (PolyGeom **)memAlloc(0x10000, 0x100, 0, 4, 0x10, 1);
     u32 segments = params->segments;
     PolyGeom *geom;
@@ -20,7 +22,7 @@ PolyGeom **effPolyRingGeomCreate0(PolyParams *params)
     u32 colorA, colorB, colorC;
     u32 i;
 
-    if (segments < 4) {
+    if (segments <= 3) {
         segments = 3;
     }
     params->segments = segments;

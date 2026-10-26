@@ -1,12 +1,12 @@
 /* NON_MATCHING: local label snapshot and format buffer have different frame placement; category/state-store scheduling differs. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/SaveSlotTable.h"
 struct PopupSubstitutionNames { const char *names[12]; };
 struct PopupSelectedUnit { u8 prefix[0x12C]; u16 id; };
 extern "C" {
 extern void *g_popupState;
 extern PopupSubstitutionNames DAT_00531a98;
-PopupSelectedUnit *saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 maximum);
 const char *FUN_002d8b58(s32 category, s32 id);
@@ -31,7 +31,7 @@ u32 FUN_00234528(s32 action, s32 count)
     PopupFormattingView *work = static_cast<PopupFormattingView *>(g_popupState);
     if (work->state != 0)
         return 0;
-    PopupSelectedUnit *unit = saveSlotFindSelected();
+    PopupSelectedUnit *unit = reinterpret_cast<PopupSelectedUnit *>(saveSlotFindSelected());
     if (unit == NULL)
         return 0;
     if (gameFlagIsSet(0x8D) && !gameFlagIsSet(0xC2) && unit->id == 0xB1)

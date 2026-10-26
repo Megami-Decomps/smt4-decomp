@@ -4,14 +4,14 @@
 
 extern "C" {
 
-int FUN_002a6acc(int, int [2], int, int);
+int dateConvertDaysToCalendar(int, int [2], int, int);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
     unsigned int sp8; /* 0x8: local_8 */
 } param_1_stack;
 
-/* Supplied declaration required: FUN_002a6acc. */
+/* Supplied declaration required: dateConvertDaysToCalendar. */
 extern int ll_sdiv(int, int, unsigned int, unsigned int);
 
 
@@ -26,7 +26,7 @@ int nn_fnd_DateTime_GetMonth(unsigned int *param_1)
   temp_v1[0] = in_r3;
   temp_v0 = ll_sdiv(*param_1 + 0x7cfc8400,param_1[1] + 0x395f + (unsigned int)(0x83037bff < *param_1),86400000
                   ,0);
-  FUN_002a6acc(0,temp_v1,0,temp_v0 - 0xb2407);
+  dateConvertDaysToCalendar(0,temp_v1,0,temp_v0 - 0xb2407);
   return temp_v1[0];
 }
 

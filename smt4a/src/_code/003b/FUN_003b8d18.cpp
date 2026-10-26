@@ -6,10 +6,9 @@
 #include "battle/BtlTables.h"
 #include "gamedata/Table00.h"
 #include "gamedata/Table00Lookup.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
-void scrSetResult(u32 result);
 void sysMemClear(void *memory, u32 size);
 s32 randRange(u32 maximum);
 

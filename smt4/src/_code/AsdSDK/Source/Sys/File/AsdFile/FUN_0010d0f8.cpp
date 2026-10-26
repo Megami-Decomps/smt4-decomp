@@ -5,6 +5,7 @@
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 extern AsdFileGlobals g_asdFile;
@@ -12,10 +13,8 @@ extern const char DAT_00409764[];
 extern u8 g_asdFileThread[]; /* the worker thread's handle and joined flag */
 
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
-void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 size);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), void *argument,
                  u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_002c526c(s32 result);
 void asdFileThreadMain(void *argument);
 void FUN_00123c88(void);
 void FUN_00123ca4(void);

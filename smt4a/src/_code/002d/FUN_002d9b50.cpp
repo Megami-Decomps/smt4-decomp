@@ -96,7 +96,7 @@ extern unsigned int FUN_00152f44(void);
 extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
-extern int FUN_00184964(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -288,7 +288,7 @@ void FUN_002d9b50(void)
                 *(unsigned short *)(g_lmapScene + 0x19c) = 1;
                 FUN_001bc124();
                 FUN_001bbf0c();
-                temp_v6 = FUN_00184964(0,1);
+                temp_v6 = randBetween(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
                 sysPlayVoice(temp_v6 + 0x10002de);
@@ -312,7 +312,7 @@ void FUN_002d9b50(void)
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v6 = FUN_00184964(0,1);
+              temp_v6 = randBetween(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v6 + 0x10002e2);
@@ -338,7 +338,7 @@ void FUN_002d9b50(void)
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v6 = FUN_00184964(0,1);
+              temp_v6 = randBetween(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v6 + 0x10002e0);
@@ -396,7 +396,7 @@ LAB_002da3cc:
               *(unsigned short *)(g_lmapScene + 0x19c) = 1;
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v6 = FUN_00184964(0,1);
+              temp_v6 = randBetween(0,1);
               FUN_0014af98();
               soundVolumeSettingSet();
               sysPlayVoice(temp_v6 + 0x10002dc);

@@ -12,7 +12,7 @@ struct ShakeParticle {
 };
 
 extern "C" {
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 
 // Advances the particle one frame: picks a new random velocity (opposing the old direction when it is moving), fades
 // the amplitude out over the last three frames of its life and clears it once the lifetime is over.
@@ -46,10 +46,10 @@ void FUN_003d8f24(ShakeParticle *particle)
             amplitudeY = (f32)remaining * amplitudeY * 0.25f;
         }
     }
-    f32 magnitudeX = (f32)FUN_00184964((s32)(amplitudeX * 0.5f * 100.0f), (s32)(amplitudeX * 100.0f)) * 0.01f;
-    f32 magnitudeY = (f32)FUN_00184964((s32)(amplitudeY * 0.5f * 100.0f), (s32)(amplitudeY * 100.0f)) * 0.01f;
-    s32 randomX = FUN_00184964(0, 1) * 2 - 1;
-    s32 randomY = FUN_00184964(0, 1) * 2 - 1;
+    f32 magnitudeX = (f32)randBetween((s32)(amplitudeX * 0.5f * 100.0f), (s32)(amplitudeX * 100.0f)) * 0.01f;
+    f32 magnitudeY = (f32)randBetween((s32)(amplitudeY * 0.5f * 100.0f), (s32)(amplitudeY * 100.0f)) * 0.01f;
+    s32 randomX = randBetween(0, 1) * 2 - 1;
+    s32 randomY = randBetween(0, 1) * 2 - 1;
     f32 oldX = particle->velocityX;
     f32 oldY = particle->velocityY;
     s32 keepX = oldX > zero ? 1 : -1;
@@ -57,7 +57,7 @@ void FUN_003d8f24(ShakeParticle *particle)
     if (oldX == zero && oldY == zero) {
         particle->velocityX = magnitudeX * (f32)randomX;
         particle->velocityY = magnitudeY * (f32)randomY;
-    } else if (oldX != zero && (oldY == zero || FUN_00184964(0, 1) != 0)) {
+    } else if (oldX != zero && (oldY == zero || randBetween(0, 1) != 0)) {
         particle->velocityX = magnitudeX * (f32)keepX;
         particle->velocityY = magnitudeY * (f32)randomY;
     } else {

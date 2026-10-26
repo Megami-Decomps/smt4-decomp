@@ -3,6 +3,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct PopupState {
     u32 state;
@@ -30,7 +31,6 @@ extern PopupState *g_popupState;
 extern GameStatePopupView g_gameState;
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 maximum);
-void *saveSlotFindSelected(void);
 s32 FUN_00480c28(void);
 u32 FUN_002d8b58(u32 kind);
 
@@ -85,7 +85,7 @@ void FUN_00246128(void)
             g_gameState.giftCounter = 0;
         }
     }
-    SlotView *slot = (SlotView *)saveSlotFindSelected();
+    SlotView *slot = (SlotView *)reinterpret_cast<void *>(saveSlotFindSelected());
     if (slot != NULL && (gameFlagIsSet(0x8D) == 0 || gameFlagIsSet(0xC2) != 0 || slot->id != 0xB1) &&
         (gameFlagIsSet(0x1A2) == 0 || randRange(99) + 1 > 50)) {
         s32 count = giftTableCount();

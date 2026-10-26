@@ -20,7 +20,7 @@ void frameTexApplyMode(s32 mode);
 void FUN_00338458(BtlMainState *context);
 void FUN_0033a144(BtlMainState *context);
 void FUN_00338424(BtlMainState *context);
-void FUN_00339de0(BtlMainState *context);
+void battleSaveCameraVectors(BtlMainState *context);
 void vec3CopyFromOffsetC(void *main);
 void *FUN_0027da30(BtlMainState *context, s32 id);
 s32 pairedEntryTableContains(BtlMainState *context, u16 id);
@@ -65,7 +65,7 @@ void FUN_0023f500(BattleEncounterQuery *query, BtlMainState *context)
         FUN_00338458(context);
         FUN_0033a144(context);
         FUN_00338424(context);
-        FUN_00339de0(context);
+        battleSaveCameraVectors(context);
         vec3CopyFromOffsetC(g_btlMain);
         if (context->encounterControl.blocked == 0 && ((context->encounter.flags & 0x2000000) || (context->battleFlags & 2))) {
             s32 i;

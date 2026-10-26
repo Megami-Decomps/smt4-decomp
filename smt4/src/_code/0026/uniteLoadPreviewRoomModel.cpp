@@ -11,7 +11,6 @@ struct UniteModelPlayback : AsdMdlNode {
 extern "C" {
 f32 sndObjectForwardField8(void *sound);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, s32 bank);
-void FUN_002a0428(AsdMdlObject *model, s32 enabled);
 void FUN_0029bb14(AsdMdlNode *node, f32 frame);
 void FUN_00210194(AsdMdlObject *model, f32 value);
 extern UniteWorkIV *g_unite;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: result-value copy ABI and array allocator's extra argument differ. */
 #include "addon/AocPackageMountBatch.h"
+#include "util/ByteIsAtLeast100.h"
 
 extern "C" {
 void *asdOperatorNewE(u32 bytes);
 WindowOperationResult FUN_0047402c(WindowOperationState *state, const WindowOperationRequest *request);
-u8 byteIsAtLeast100(const WindowOperationResult *result);
 }
 
 inline void *Obj4221d4::operator new[](u32 bytes) throw()
@@ -21,7 +21,7 @@ extern "C" void FUN_00471adc(AocPackageMountBatch *batch)
         WindowOperationResult operation = FUN_0047402c(
             (WindowOperationState *)&batch->packages[index],
             (const WindowOperationRequest *)&batch->entries[index]);
-        if (byteIsAtLeast100(&operation)) {
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&operation))) {
             result = operation;
             break;
         }

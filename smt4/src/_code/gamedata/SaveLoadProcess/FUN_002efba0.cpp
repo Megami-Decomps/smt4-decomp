@@ -3,6 +3,8 @@
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
 #include "gamedata/SaveLoadProcess.h"
+#include "shard/JobWork.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct SaveFilePayloadIV {
     u32 table[32];
@@ -19,10 +21,8 @@ typedef char SaveWriterPayloadLayoutCheck[
     offsetof(SaveWriteBodyPrefix, mode) == 2 && sizeof(SaveWriteBodyPrefix) == 4 ? 1 : -1];
 
 extern "C" {
-SaveLoadProcessWork24 *jobGetWork(u32 process);
 s32 FUN_001a1d08(void);
 void asdMemFree(void *memory);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void titleConfigStoreOptions(void);
 GameSaveData *gameDataBlocksGetSaveData(void);
 const void *gameDataBlocksGetTable(void);
@@ -37,7 +37,7 @@ extern SaveByteSettings g_byteSettings;
 // Build a complete save image, submit it, and publish the asynchronous write result.
 s32 FUN_002efba0(u32 process)
 {
-    SaveLoadProcessWork24 *work = jobGetWork(process);
+    SaveLoadProcessWork24 *work = reinterpret_cast<SaveLoadProcessWork24 *>(jobGetWork(process));
     switch (work->state) {
     case 0: {
         work->bufferSize = sizeof(SaveFilePayloadIV);

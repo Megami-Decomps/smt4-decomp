@@ -2,11 +2,11 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "gamedata/SourceMetadata.h"
 #include "bible/bibleAnalyze.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(const BtlCombatantEntryA *, u16 *);
-SourceMetadataFlags *dataTable41FindById(u32);
 s32 FUN_003ec77c(BtlMainStateA *);
 s32 lcgRandomRange(u32);
 
@@ -32,14 +32,14 @@ s32 btlSelectSourceTriggeredSkill(u32 id, s32 randomize)
     s32 chanceMultiplier = 1;
     for (s32 i = 0; i < 9; ++i) {
         if (sources[i]) {
-            SourceMetadataFlags *metadata = dataTable41FindById(sources[i]);
+            SourceMetadataFlags *metadata = reinterpret_cast<SourceMetadataFlags *>(dataTable41FindById(sources[i]));
             if (metadata != NULL && (metadata->flags & 4))
                 chanceMultiplier = 2;
         }
     }
     for (s32 i = 0; i < 9; ++i) {
         if (sources[i]) {
-            SourceMetadataFlags *metadata = dataTable41FindById(sources[i]);
+            SourceMetadataFlags *metadata = reinterpret_cast<SourceMetadataFlags *>(dataTable41FindById(sources[i]));
             if (metadata != NULL && metadata->trigger.skill != 0 &&
                 !FUN_003ec77c(state)) {
                 s32 chance = metadata->trigger.chance;

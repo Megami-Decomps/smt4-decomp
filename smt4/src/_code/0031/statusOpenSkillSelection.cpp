@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail retains an unreachable zero-ID iterator guard; readable fixed-range iteration omits it, and selector/state registers differ. */
 #include "common.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 struct StatusSkillSelection {
     u8 unk0000[0x28];
@@ -19,6 +20,14 @@ struct StatusSkillSelection {
     u16 selectedId;       /* 0x2380 */
 };
 
+/* Switches the screen to a new state, remembering the old one. */
+static __inline void statusSkillSelectionEnter(StatusSkillSelection *screen, s32 next)
+{
+    screen->phase = 0;
+    screen->previousState = screen->state;
+    screen->state = next;
+}
+
 extern "C" {
 extern StatusSkillSelection *g_statusDown;
 s32 FUN_00262cb0(u16 id);
@@ -28,7 +37,6 @@ void buttonHelpSetPreset(s32 preset);
 void timerStart(void *timer, s32 running, s32 initial);
 s32 statusGetAvailableChoiceCount();
 void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32, s32);
-void FUN_0029eb5c(void *selector, s32 index);
 
 // Gather enabled status skills and open the selector at the first unavailable slot.
 void statusOpenSkillSelection(u16 selectedId, u8 mode)
@@ -54,12 +62,9 @@ void statusOpenSkillSelection(u16 selectedId, u8 mode)
         screen->nextState = 25;
     } else {
         FUN_0029f848(screen->selector, statusGetAvailableChoiceCount(), 9, 1, 1, 1);
-        FUN_0029eb5c(screen->selector, count);
+        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(screen->selector), count);
         screen->nextState = 22;
     }
-    screen = g_statusDown;
-    screen->phase = 0;
-    screen->previousState = screen->state;
-    screen->state = 1;
+    statusSkillSelectionEnter(g_statusDown, 1);
 }
 }

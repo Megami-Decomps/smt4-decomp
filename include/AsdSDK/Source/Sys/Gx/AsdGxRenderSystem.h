@@ -8,6 +8,7 @@
 
 #include "common.h"
 #include <stddef.h>
+#include "AsdSDK/AsdMemAlloc.h"
 
 #define ASD_GL_TEXTURE_2D 0xde1
 #define ASD_GL_UNSIGNED_SHORT 0x1403
@@ -63,10 +64,6 @@ typedef char AsdGxDrawCommandOffsetsCheck[
 
 extern "C" {
 s32 textureGetIndexedResource(u32 index);
-}
-
-extern "C" {
-void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
 }
 
 #endif

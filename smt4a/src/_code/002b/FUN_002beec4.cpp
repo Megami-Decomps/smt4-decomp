@@ -2,9 +2,9 @@
 #include "shard/W6_W6Match1_PositionedStream.h"
 
 #include "sys/ProcessResult.h"
+#include "util/vcallSlot12IfValid.h"
 extern "C" void FUN_0032ca54(u32 result);
 extern "C" void sysFatalBreak();
-extern "C" void vcallSlot12IfValid(u32 handle);
 
 static __inline u32 fileRecordResult(u32 result)
 {

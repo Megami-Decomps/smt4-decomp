@@ -5,6 +5,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "font/ComWin/ComWin.h"
 
 extern "C" {
 void comWindowProcessUpdate(void *task);
@@ -13,7 +14,6 @@ void taskCreateDraw(const char *name, s32 priority, s32 mode, s32 flags, void (*
 void drawParameterBlockClear(UiResourceParameters *packet);
 
 void uiSpriteInitializeState(UiSpriteState *sprite, s32 bank, s32 image, s32 animation, UiResourceParameters *packet, s32 flags, f32 scale);
-void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 image);
 extern const u8 DAT_0040384c[];
 
 // Create the command window's update/draw tasks and initialize both upper-screen sprites.

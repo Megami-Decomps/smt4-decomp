@@ -8,7 +8,6 @@ extern "C" {
 
 int efctSetSpeed(f32 alpha);
 int renderCtxResetColorScale(RenderCtxA *ctx);
-int FUN_00157558(RenderCtxA *ctx);
 int FUN_001692ac(u32 a, u32 b);
 
 extern UIFadeGlobals g_uiFade;

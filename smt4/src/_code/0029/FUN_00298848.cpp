@@ -1,9 +1,9 @@
 /* NON_MATCHING: skill-property tests and party-slot scan branches are laid out differently. */
 #include "gamedata/Table04Record.h"
 #include "shard/Shard0031.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
-Table04Record *dataTable40FindById(s32);
 s32 FUN_0026c464(void *, s32, s32);
 s32 FUN_0026c654(void *, s32, s32, s32);
 SlotTable *gameGetSlotTable(void);

@@ -2,9 +2,9 @@
 /* NON_MATCHING: world-vector copy formation, projected-coordinate VFP scheduling and stack slots differ. */
 #include "map/NpcDummyBindings.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/S1ListPanel.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct ProjectedNpcMarker {
@@ -25,7 +25,6 @@ typedef char ProjectedNpcMarkerLayoutCheck[sizeof(ProjectedNpcMarker) == 10 &&
 struct RenderCtxA;
 extern "C" {
 extern RenderCtxA *g_renderCtx;
-SpriteInfo *asdTMTexTableEntryAt(u32 group, s32 sprite);
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *, const f32 *world);
 f32 messageGetActiveValue(u32 channel);
 void efctSetSpeed(f32 opacity);
@@ -38,9 +37,9 @@ void FUN_0046868c(NpcDummyBindings *owner, u32, s32)
         ProjectedNpcMarker markers[4];
     };
     const MarkerView *view = reinterpret_cast<const MarkerView *>(owner);
-    SpriteInfo *sprite = asdTMTexTableEntryAt(8, 0x18D);
-    s32 width = sprite->size[0];
-    s32 height = sprite->size[1];
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x18D);
+    s32 width = sprite->placement->width;
+    s32 height = sprite->placement->height;
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.31f);
     for (u32 index = 0; index < 4; ++index) {
         const ProjectedNpcMarker &marker = view->markers[index];

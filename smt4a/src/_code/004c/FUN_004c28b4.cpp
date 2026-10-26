@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/Table04Record.h"
 
 /* A skill record: its rate at +0x40 and packed class/grade bits at +0x44. */
 struct SkillRateRecord {
@@ -23,7 +24,6 @@ extern "C" {
 extern u64 DAT_00571408;
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, s32 group);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
-SkillRateRecord *dataTable41FindById(u32 skillId);
 void FUN_003e8bb0(SkillInfo *info, BtlMainStateA *battle, BtlCombatantEntryA *entry);
 s32 FUN_004bd098(u32 owner, s32 skillId);
 
@@ -36,7 +36,7 @@ f32 FUN_004c28b4(s32 group, s32 kind)
     source4CCopyHalves(entry, skills);
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            SkillRateRecord *record = dataTable41FindById(skills[i]);
+            SkillRateRecord *record = reinterpret_cast<SkillRateRecord *>(dataTable41FindById(skills[i]));
             if (record != NULL) {
                 u32 bits = record->bits;
                 bool applies;
@@ -72,7 +72,7 @@ f32 FUN_004c28b4(s32 group, s32 kind)
     }
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            SkillRateRecord *record = dataTable41FindById(skills[i]);
+            SkillRateRecord *record = reinterpret_cast<SkillRateRecord *>(dataTable41FindById(skills[i]));
             f32 value = 0.0f;
             if (record != NULL)
                 value = record->rate;

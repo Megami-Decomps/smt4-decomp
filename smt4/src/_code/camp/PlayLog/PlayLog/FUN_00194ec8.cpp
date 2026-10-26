@@ -3,6 +3,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "camp/PlayLog/PlayLog.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ typedef struct PlayLogScreen {
 extern PlayLogScreen *g_playLog; /* 0x43dd08 */
 extern const u8 DAT_00402d04[];
 
-extern void *asdMemAlloc(u32, u32, u32, u32, u32);
 extern void memClear(void *memory, u32 size);
 extern void asdTMTexTableLoadSprites(s32 table);
 extern void asdTMTexTableLoadEntryAsync(s32 table, s32 index);

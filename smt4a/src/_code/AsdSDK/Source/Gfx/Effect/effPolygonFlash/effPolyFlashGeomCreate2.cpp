@@ -1,10 +1,10 @@
 /* NON_MATCHING: only temp registers differ after the allocation (retail uses r1/r2 swapped and copies the geometry result through r1). */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_002b3b58(s32 count, s32 w, s32 h, const s16 *table, u16 tag);
 extern const s16 DAT_005c1f28[];
 

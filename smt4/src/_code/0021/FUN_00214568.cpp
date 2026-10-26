@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (217 vs 201 rows); retail also inlines a percent-bonus step on the gold whose percentage is constant 0 (folded away), and orders registers differently */
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/PlayerDataBlock.h"
 
 // Battle reward summary handed to the result screen (only the fields used here).
 struct RewardInput {
@@ -56,7 +57,6 @@ extern "C" {
 extern ResultData* g_result;
 
 SlotTable* gameGetSlotTable(void);
-PlayerData* gameGetPlayerData(void);
 u16 dataTable09Sub3GetRecord(s32 a, s32 b);
 s32 playerPadTestBit(s32 bit);
 UnitRecord* gameGetUnitRecord(s32 slot);
@@ -69,7 +69,7 @@ void FUN_00214568(RewardInput* reward)
 {
     ResultData* result = g_result;
     SlotTable* slotTable = gameGetSlotTable();
-    PlayerData* player = gameGetPlayerData();
+    PlayerData* player = reinterpret_cast<PlayerData *>(gameGetPlayerData());
     result->unkd641 = reward->unk3c;
     result->unkd642 = reward->unk3d;
     result->gold += reward->gold;

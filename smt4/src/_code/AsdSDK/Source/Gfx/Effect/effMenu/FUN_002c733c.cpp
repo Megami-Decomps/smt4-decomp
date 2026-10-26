@@ -6,7 +6,6 @@ extern "C" {
 extern TitleScene *g_titleScene;
 extern f32 DAT_004724cc[2];
 s32 FUN_002c5d80(u32 first, u32 second);
-void FUN_002c1b64(void *context, u32 state);
 void FUN_002c0944(u32 firstColor, u32 secondColor, u32 thirdColor, u32 fourthColor, f32 x, f32 y, f32 width, f32 height, f32 depth);
 }
 
@@ -24,11 +23,11 @@ void FUN_002c733c(s32 x, s32 y, s32 width, s32 height, u32 firstColor, u32 secon
     s32 pixelY = (s32)((f32)y + DAT_004724cc[1]);
     firstColor = menuReverseColorBytes(firstColor);
     secondColor = menuReverseColorBytes(secondColor);
-    RenderCtx *context = (RenderCtx *)g_titleScene;
+    RenderCtx *context = g_titleScene;
     renderCtxPushA(context, FUN_002c5d80(1, 1));
-    FUN_002c1b64(g_titleScene, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     FUN_002c0944(firstColor, firstColor, secondColor, secondColor,
         (f32)pixelX, (f32)pixelY, (f32)width, (f32)height, 0.0f);
-    renderStackPop(&((RenderCtx *)g_titleScene)->stackA);
+    renderStackPop(&g_titleScene->stackA);
 }
 }

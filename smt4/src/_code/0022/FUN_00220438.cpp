@@ -1,11 +1,11 @@
 /* NON_MATCHING: exits now duplicated as in retail; only the error constant's register differs (retail loads it into r0 and copies to r4, this build loads r4 directly). */
 #include "sys/ProcessResult.h"
 #include "common.h"
+#include "util/pathBuildWide.h"
 
 struct ResourceRequest;
 
 extern "C" {
-s32 FUN_00254884(const ResourceRequest* request, u8* scratch, s32 mode);
 void FUN_002ad888();
 u32 FUN_002a84e8(u8* scratch);
 
@@ -20,7 +20,7 @@ static __inline u32 recordProcessResult(u32 result)
 u32 FUN_00220438(const ResourceRequest* request)
 {
     u8 scratch[496];
-    if (FUN_00254884(request, scratch, 1) != 0) {
+    if (pathBuildWide(reinterpret_cast<const char *>(request), reinterpret_cast<s16 *>(scratch), 1) != 0) {
         FUN_002ad888();
         return recordProcessResult(FUN_002a84e8(scratch));
     }

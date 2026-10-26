@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include <stddef.h>
+#include "util/AsdListBoxCreateDefault.h"
 
 struct BattleCameraMenuOwner {
     u8 prefix[0x10];
@@ -30,7 +31,6 @@ extern u32 DAT_0043431c, DAT_004342d4, DAT_004342d8, DAT_00434324, DAT_004342e0;
 extern u32 DAT_00434328, DAT_00434330, DAT_004342e4, DAT_00434334, DAT_00434338;
 extern u32 DAT_004342e8, DAT_0043433c, DAT_00434340, DAT_004342ec, DAT_00434344;
 extern u32 DAT_00434348, DAT_0043434c, DAT_00434350, DAT_00434354, DAT_00439cec, DAT_004342f0;
-AsdListBox *asdListBoxCreateDefault(u32 parent, u32 priority, u32 flags, u32 option);
 void asdListBoxAddItems(AsdListBox *, const AsdListBoxEntry *, s32 count);
 void asdListBoxSetByteValue(AsdListBox *, s32 value);
 void jobSetText(AsdListBox *, const char *);
@@ -41,7 +41,7 @@ void asdListBoxSetItemMode3(AsdListBox *, u32 index, u32 value, u32 minimum, u32
 /* Build the attack-camera debugging menu from the active camera parameters. */
 void btlDebugCreateAttackCameraMenu(BattleCameraMenuOwner *owner, BattleCameraMenuContext *context)
 {
-    owner->menu = asdListBoxCreateDefault(context->parent, 0x73, 0, 0);
+    owner->menu = reinterpret_cast<AsdListBox *>(asdListBoxCreateDefault(context->parent, 0x73, 0, 0));
     asdListBoxAddItems(owner->menu, DAT_00435808, 31);
     asdListBoxSetByteValue(owner->menu, 1);
     jobSetText(owner->menu, "Attack Camera Menu");

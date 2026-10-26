@@ -1,17 +1,17 @@
 /* NON_MATCHING: Position snapshots reload their first two components through integer registers instead of retaining the retail mixed integer/VFP pair. */
 #include "map/SceneSpawn.h"
 #include "map/lmapMain.h"
+#include "shard/dataTableGetRecord23.h"
 
 extern "C" {
 extern LmapScene *g_lmapScene;
 extern SceneViewHeading *DAT_004474f4;
 u32 FUN_0027d7b0(void);
-SceneSpawnRecord *dataTableGetRecord23(u32 index);
 
 /* Restores the spawn position, both position snapshots, and the scene and view headings. */
 void FUN_002d4e58(void)
 {
-    SceneSpawnRecord *record = dataTableGetRecord23(FUN_0027d7b0());
+    SceneSpawnRecord *record = reinterpret_cast<SceneSpawnRecord *>(dataTableGetRecord23(FUN_0027d7b0()));
     LmapScene *scene = g_lmapScene;
     scene->transform.position[0] = static_cast<f32>(record->x);
     scene->transform.position[1] = static_cast<f32>(record->y);

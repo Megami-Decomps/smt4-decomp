@@ -1,57 +1,12 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00188a34` (_code @ 0x188a34, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
 
+__declspec(noreturn) __weak void FUN_00188a34_hook(int a, int b, int c);
 
-/* WARNING: Removing unreachable block (ram,0x00188a48) */
-/* WARNING: Removing unreachable block (ram,0x00188ad0) */
-
-unsigned int * FUN_00188a34(unsigned int *param_1)
-
+void FUN_00188a34(int a)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int *puVar1;
-  int temp_v0;
-  
-  *param_1 = 0x300;
-  param_1[1] = 0x2025e;
-  param_1[2] = 0;
-  temp_v0 = 5;
-  param_1[3] = 0x900251;
-  puVar1 = param_1 + 3;
-  do {
-    temp_v0 = temp_v0 - 1;
-    puVar1[1] = 0xead0fead;
-    puVar1 = puVar1 + 2;
-    *puVar1 = 0xead0fead;
-  } while (temp_v0 != 0);
-  param_1[0xe] = 0;
-  param_1[0xf] = 0x1d00200;
-  temp_v0 = 0xf;
-  puVar1 = param_1 + 0xf;
-  do {
-    temp_v0 = temp_v0 - 1;
-    puVar1[1] = 0xead0fead;
-    puVar1 = puVar1 + 2;
-    *puVar1 = 0xead0fead;
-  } while (temp_v0 != 0);
-  param_1[0x2e] = 0;
-  param_1[0x2f] = 0x10229;
-  param_1[0x30] = 0;
-  param_1[0x31] = 0x1d00200;
-  temp_v0 = 0xf;
-  puVar1 = param_1 + 0x31;
-  do {
-    temp_v0 = temp_v0 - 1;
-    puVar1[1] = 0xead0fead;
-    puVar1 = puVar1 + 2;
-    *puVar1 = 0xead0fead;
-  } while (temp_v0 != 0);
-  param_1[0x50] = 0;
-  param_1[0x51] = 0x10244;
-  return param_1 + 0x52;
+    FUN_00188a34_hook(a, 0, 3);
 }
 
 } /* extern "C" */

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 struct PartnerTopicDialog {
     u8 unk00[0x28];
@@ -30,7 +31,6 @@ extern "C" {
 void rt_memclr(void *, u32);
 void __aeabi_memset4(void *, u32, s32);
 void asdTMTexTableLoadTmx(u32, u32);
-void asdTMTexLoadMainHeap(u32, s32);
 u32 spriteHandleCreate(u32);
 void positionStateSet(u32, u32, u32, f32);
 void FUN_003f84e8(PartnerTopicDialog *);

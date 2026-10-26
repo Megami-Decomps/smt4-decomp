@@ -18,7 +18,7 @@ struct SelfOffset {
     s32 offset;
 };
 
-template <class T> static inline T *offsetTarget(SelfOffset *slot)
+template <class T> static T *offsetTarget(SelfOffset *slot)
 {
     u8 *base = (u8 *)slot;
     s32 offset = slot->offset;

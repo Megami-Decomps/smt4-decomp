@@ -4,15 +4,10 @@
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* A layout record (only the fields read here). */
-typedef struct QuestLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} QuestLayout;
 
 /* The quest UI work block (only the fields used here, by their offsets). */
 typedef struct QuestUi {
@@ -38,7 +33,6 @@ s32 vec2GetYInt(void *vector);
 f32 vec2GetSpeed(const void *vector);
 void efctSetSpeed(f32 speed);
 void uiFadeDraw(u32 id);
-QuestLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void partyDrawCategorySelectionIcon(u16 category, s32 x, s32 y, u32 tag);
 u32 FUN_00156850(u16 category, s32 arg);
 void textFormatBuffer(void *buffer, const char *format, u32 value);
@@ -112,10 +106,10 @@ u32 FUN_0023b4cc(void)
         FUN_001835b4(2, 0x1E, 0x58, x, y, 0x97);
         FUN_001835b4(2, 0x1E, 0x59, x, y, 0x97);
         FUN_001835b4(2, 0x1E, 0x51, x, y, 0xA1);
-        QuestLayout *icon = asdTMTexTableEntryAt(0x1E, 0x54);
+        TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x1E, 0x54);
 
         partyDrawCategorySelectionIcon(category, icon->x + x, icon->y + y, 0xA6);
-        QuestLayout *label = asdTMTexTableEntryAt(0x1E, 0x55);
+        TextureTableEntryIV *label = asdTMTexTableEntryAt(0x1E, 0x55);
         char text[64];
 
         textFormatBuffer(text, "%s", FUN_00156850(category, 0));

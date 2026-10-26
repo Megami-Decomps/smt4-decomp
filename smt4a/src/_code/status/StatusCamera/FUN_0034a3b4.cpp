@@ -2,13 +2,13 @@
 #include "status/StatusCamera.h"
 #include <stddef.h>
 #include "title/titleMain.h"
+#include "shard/W6_W6Match3_EffectColor.h"
 
 extern "C" {
 extern StatusCameraWorkA *g_statusCamera;
 extern void *g_handleRegistry;
 void sysMemClear(void *memory, u32 size);
 void FUN_00154180(s32 x, s32 y, s32 width, s32 height);
-void asdCameraInitializeDefaults(StatusCameraWorkA *camera, s32 mode);
 void FUN_0014f0dc(StatusCameraWorkA *camera, const Vec3 *eye, const Vec3 *target, const Vec3 *up);
 void FUN_001523b8(StatusCameraWorkA *camera, s32 mode, f32 fov, f32 nearClip, f32 farClip, f32 aspect);
 void uiSetFloatPair(StatusCameraWorkA *camera, f32 first, f32 second);
@@ -38,7 +38,7 @@ void FUN_0034a3b4(void)
         target.y += camera->dir.y * camera->dist;
         target.z += camera->dir.z * camera->dist;
         FUN_00154180(200, 0, 200, 240);
-        asdCameraInitializeDefaults(camera, 1);
+        asdCameraInitializeDefaults(reinterpret_cast<AsdCamera *>(camera), 1);
         FUN_0014f0dc(camera, &camera->eye, &target, &up);
         FUN_001523b8(camera, 1, camera->lens.fov, camera->lens.nearClip, camera->lens.farClip, 1.6666666f);
         FUN_0036b824(reinterpret_cast<u32>(camera));

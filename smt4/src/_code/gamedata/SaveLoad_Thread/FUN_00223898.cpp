@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 struct ThreadArgTraits {
@@ -28,10 +29,8 @@ struct SaveLoadThreadWork {
 
 s32 FUN_002c52dc(u32 *out, u32 initialCount, u32 maxCount);
 s32 FUN_002c5254(u32 *out, u32 semaphore, u32 releaseCount);
-void FUN_002c526c(s32 result);
 s32 FUN_002cbe5c(s32 result);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
-void resultReportIfFailed(void *stackInfo, void *memory, u32 size);
 s32 FUN_002bcc60(void *thread, const ThreadArgTraits *traits, void (*entry)(void *), ThreadBoundArgs *args,
                  u32 stackTop, u32 priority, s32 core, u32 detached);
 void FUN_003f6e84(const void *, void *);

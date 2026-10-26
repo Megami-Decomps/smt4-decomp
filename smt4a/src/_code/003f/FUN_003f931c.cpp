@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail hoists the row-independent math into s16..s23 differently and shares the row draw call across the three layout cases (this version merges the two column-count cases into one); the same calls and floats. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "camp/RenderCtx.h"
 
 namespace {
 /* One row of the list (0x60 bytes). */
@@ -48,8 +49,7 @@ struct FixedRect {
 }
 
 extern "C" {
-extern void *g_renderCtx;
-void FUN_0016c4b8(void *context, void *preset);
+extern RenderCtxA *g_renderCtx;
 void FUN_00164034(PanelColor *topLeft, PanelColor *topRight, PanelColor *bottomLeft, PanelColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_001692d4(void);
@@ -71,7 +71,7 @@ void FUN_003f931c(PanelWork *panel)
     color.g = 0.0f;
     color.b = 0.0f;
     color.a = fade->fadeAlpha * 0.25f * fadeOut * 0.7f;
-    FUN_0016c4b8(g_renderCtx, NULL);
+    renderCtxSelectTexture(g_renderCtx, NULL);
     FUN_00164034(&color, &color, &color, &color, 0.0f, 0.0f, 400.0f, 240.0f, 0.87109375f);
     FUN_001692d4();
     efctSetSpeed(fadeOut);

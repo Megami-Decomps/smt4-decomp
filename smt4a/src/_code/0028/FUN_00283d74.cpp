@@ -30,7 +30,7 @@ extern const char DAT_005311fc[];
 void FUN_0022838c(void);
 NewGameSlotTable *gameGetSlotTable(void);
 void flagValueAdd(s32 flag, s32 amount);
-void *gameGetPlayerData(void);
+u8 *gameGetPlayerData(void);
 void sysMemClear(void *block, u32 size);
 char *strncpy(char *destination, const char *source, u32 count);
 void FUN_004ccf78(s32 arg);

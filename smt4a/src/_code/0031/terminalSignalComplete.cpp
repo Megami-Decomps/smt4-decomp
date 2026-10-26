@@ -1,4 +1,3 @@
-/* NON_MATCHING: flag store allocates the pointer/value registers in reverse order. */
 #include "common.h"
 
 struct TerminalCallbackState {
@@ -6,10 +5,15 @@ struct TerminalCallbackState {
     /* 0x04 */ u8 complete;
 };
 
+static void terminalSetComplete(TerminalCallbackState *state, u8 complete)
+{
+    state->complete = complete;
+}
+
 extern "C" TerminalCallbackState *g_tmnl;
 
 /* Signal completion to the terminal task. */
 extern "C" void terminalSignalComplete(void)
 {
-    g_tmnl->complete = true;
+    terminalSetComplete(g_tmnl, true);
 }

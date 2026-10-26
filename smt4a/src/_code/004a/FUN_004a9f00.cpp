@@ -1,10 +1,9 @@
 /* NON_MATCHING: the zero-depth VFP constant is loaded two instructions earlier than retail. */
 #include "battle/btlUI.h"
-#include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-SpriteInfo *asdTMTexTableEntryAt(u32, u32);
 void FUN_00336aec(BtlUiObjCA *, u32, s32, u32, u32, s32);
 void FUN_004a9588(BtlUiA *, u32, u32, u32, u32, s32, f32, f32, f32);
 }
@@ -20,7 +19,7 @@ extern "C" void FUN_004a9f00(u32, s32 category, u32 text, u32 color,
     else if (category == 2) frame = 0x40C;
     else if (category == 3) frame = 0x415;
     else if (category == 4) frame = 0x41F;
-    const SpriteInfo *sprite = asdTMTexTableEntryAt(13, frame);
+    const TextureTableEntryIV *sprite = asdTMTexTableEntryAt(13, frame);
     FUN_004a9588(ui, text, color, style, value, 0,
                  f32(sprite->x + x + 39), f32(sprite->y + y + 17), 0.0f);
 }

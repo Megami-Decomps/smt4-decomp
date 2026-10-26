@@ -8,7 +8,7 @@ int titleSceneMultiplyByCameraView(int, float *, int);
 int gpuSubmitFloatVectorsOrDefault(int *);
 int FUN_002573d8(void);
 int forwardRecoveredCallback(void);
-int FUN_002c1b64(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 21 slot(s), 84 byte(s) */
@@ -42,7 +42,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
 /* Supplied declaration required: FUN_002573d8. */
 /* Supplied declaration required: forwardRecoveredCallback. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 
 
@@ -103,7 +103,7 @@ void Obj42083c::draw()
   temp_v12 = 0x3f800000;
   temp_v14 = *(float *)(*(int *)(param_1 + 0x60) + 0xc) * *(float *)(*(int *)(param_1 + 0x14) + 8);
   temp_v13 = 0x3f800000;
-  FUN_002c1b64(g_titleScene,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
+  renderCtxSelectTexture(g_titleScene,*(unsigned int *)(*(int *)(param_1 + 8) + 8));
   titleSceneMultiplyByCameraView(param_1,&temp_v19,param_1 + 0x18);
   temp_v0 = 0;
   if (temp_v0 < **(int **)(param_1 + 0x60) + 1) {

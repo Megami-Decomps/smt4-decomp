@@ -18,11 +18,8 @@ struct FrameCompletionView {
     JobSurface *surface; // 0xfdc
 };
 
-struct Screen2c39a4;
-
 extern "C" {
 extern TitleScene *g_titleScene;
-void renderCtxSelectStereoLayout(Screen2c39a4 *screen);
 void FUN_00117da4(s32 mode);
 
 // Refresh the title layout and process the prepared frame surface once its gates permit.
@@ -32,7 +29,7 @@ s32 FUN_001081b0(u32 job)
     const FrameReadinessView &flags = work->flags;
     if (flags.active && flags.ready && flags.surfaceReady &&
         work->surface != NULL && !work->blocked) {
-        renderCtxSelectStereoLayout(reinterpret_cast<Screen2c39a4 *>(g_titleScene));
+        renderCtxSelectStereoLayout(g_titleScene);
         FUN_00117da4(1);
         return 0;
     }

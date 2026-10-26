@@ -2,6 +2,7 @@
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 /* Two skill references packed into one 64-bit word. */
 struct PackedSkillPair {
@@ -40,13 +41,8 @@ struct UnitSkillView {
     /* 0x44 */ u8 unk44[2];
     /* 0x46 */ u16 id;
 };
-struct SlotTableView {
-    /* 0x0000 */ u8 unk0000[0x90F0];
-    /* 0x90F0 */ s8 units[0x18];
-};
 
 extern "C" {
-SlotTableView *gameGetSlotTable(void);
 UnitSkillView *gameGetUnitRecord(s32 index);
 
 /* Appends a non-empty skill to the output (when one is given) and counts it. */
@@ -77,11 +73,11 @@ s32 FUN_00205568(u16 *out, const SkillSourceView *source, const PackedSkillPair 
         count = appendSkill(out, count, pair->second);
     }
     count = appendSkill(out, count, player->lastSkill);
-    SlotTableView *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     for (s32 slot = 0; slot < 24; slot++) {
-        if (slots->units[slot] < 0)
+        if (slots->stock[slot] < 0)
             break;
-        UnitSkillView *unit = gameGetUnitRecord(slots->units[slot]);
+        UnitSkillView *unit = gameGetUnitRecord(slots->stock[slot]);
         if (covered != NULL && ((covered->first == (u64)unit->id && covered->firstKind == 1) ||
                                 (covered->second == (u64)unit->id && covered->secondKind == 1)))
             continue;

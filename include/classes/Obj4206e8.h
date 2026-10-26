@@ -2,11 +2,8 @@
 #define CLASSES_OBJ4206E8_H
 
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
-
-extern "C" {
-int asdMemFree(void *block);
-}
 
 /* One of the three buffers an Obj4206e8 owns: a model-manager handle and a memory block. */
 class Obj4206e8Slot {

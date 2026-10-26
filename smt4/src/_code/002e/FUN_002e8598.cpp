@@ -1,11 +1,11 @@
 /* NON_MATCHING: only entry instruction scheduling and the switch-index versus sound-flags scratch registers differ. */
 #include "map/mapIf.h"
+#include "addon/LookupRecord.h"
 extern "C" {
 extern MapIfGlobals g_mapIf;
 u32 FUN_002bfdd4(void);
 void FUN_0025086c(s32 count, char *text);
 void textFormatBuffer(char *output, const char *format, ...);
-void *FUN_002bd06c(u32 item);
 const char *FUN_002bcfc0(void *record, s32 variant);
 void dialogSetText(const char *text);
 void dialogOpen(s32 slot, s32 mode);

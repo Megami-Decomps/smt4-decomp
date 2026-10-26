@@ -1,12 +1,12 @@
+#include "shard/JobWork.h"
 #include "shard/W6_W6Match5_EffectLineJob.h"
 
 extern "C" {
-void *jobGetWork(u32 job);
 
 // Advance an effect-line job's lifetime only while the effect is ready.
 s32 effLineJobUpdate(u32 job)
 {
-    EffectLineJobWork *work = static_cast<EffectLineJobWork *>(jobGetWork(job));
+    EffectLineJobWork *work = reinterpret_cast<EffectLineJobWork *>(jobGetWork(job));
     work->object->update();
     if (work->object->isReady()) {
         work->elapsed += 1.0f;

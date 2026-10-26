@@ -2,6 +2,7 @@
 #include "gamedata/FusionCandidateFilter.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "gamedata/PackedSkillSlot.h"
+#include "gamedata/SkillFlags.h"
 
 namespace {
 struct FusionSkillFilterView {
@@ -20,10 +21,8 @@ struct FusionSkillFilterView {
     u8 padding176[2];
     u32 count;
 };
-struct SkillCategoryRecord { u16 id; u8 category; };
 }
 extern "C" {
-const SkillCategoryRecord *dataTable06Sub1GetRecord(u16 id);
 s32 halfwordKeyEmptyLastCompare(const void *first, const void *second);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size,
                   s32 (*compare)(const void *, const void *));

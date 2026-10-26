@@ -1,4 +1,4 @@
-/* NON_MATCHING: debug menu values and toggles recovered; one extra saved pointer and flag-result register allocation differ. */
+/* NON_MATCHING: registers and branches match; retail loads the flags word before the compare of the owner result, the build loads it after. */
 #include "battle/btlMain.h"
 #include "battle/btlHelp.h"
 #include "util/CalleeContracts.h"
@@ -23,30 +23,37 @@ void FUN_003c4524(BattleDebugList* menu, BtlMainState* battle)
     };
     BattleDebugState* state = reinterpret_cast<BattleDebugState*>(battle);
     u32 selected = asdListBoxGetSelectedItemId(menu->list);
-    u32 flags;
+    u32 *flags = &state->flags;
     switch (selected) {
     case 0:
-        flags = listBoxItemHasOwner(menu->list, selected) ?
-                state->flags | 0x1000 : state->flags & ~0x1000;
+        if (listBoxItemHasOwner(menu->list, selected))
+            *flags |= 0x1000;
+        else
+            *flags &= ~0x1000;
         break;
     case 1:
-        flags = listBoxItemHasOwner(menu->list, selected) ?
-                state->flags | 0x2000 : state->flags & ~0x2000;
+        if (listBoxItemHasOwner(menu->list, selected))
+            *flags |= 0x2000;
+        else
+            *flags &= ~0x2000;
         break;
     case 2:
         state->command = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->list), selected);
-        return;
+        break;
     case 3:
-        flags = listBoxItemHasOwner(menu->list, selected) ?
-                state->flags | 0x40000 : state->flags & ~0x40000;
+        if (listBoxItemHasOwner(menu->list, selected))
+            *flags |= 0x40000;
+        else
+            *flags &= ~0x40000;
         break;
     case 4:
-        flags = listBoxItemHasOwner(menu->list, selected) ?
-                state->flags | 0x200000 : state->flags & ~0x200000;
+        if (listBoxItemHasOwner(menu->list, selected))
+            *flags |= 0x200000;
+        else
+            *flags &= ~0x200000;
         break;
     default:
-        return;
+        break;
     }
-    state->flags = flags;
 }
 }

@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "camp/RenderCtx.h"
 #include "util/PackNibbles.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int vec2GetYInt(int);
 extern int asdTMTexTableEntryAt(unsigned int, int);
-extern int FUN_002a4878(int);
 
 
 void FUN_00336574(int param_1,int param_2)
@@ -65,7 +65,7 @@ void FUN_00336574(int param_1,int param_2)
       } while (temp_v6 < 4);
     }
     else {
-      temp_v6 = FUN_002a4878(param_1 + 0x3bdc);
+      temp_v6 = FUN_002a4878((void *)(param_1 + 0x3bdc));
       temp_v2 = asdTMTexTableEntryAt(0xd,temp_v6 + 0x52);
       renderCtxSetB(reinterpret_cast<RenderCtxA *>(g_renderCtx), packNibblesAndByte(6, 1, 0));
       efctSetSpeed(opacity);

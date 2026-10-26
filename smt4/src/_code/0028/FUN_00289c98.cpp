@@ -1,11 +1,11 @@
 /* NON_MATCHING: global/zero saved registers and the selection-array address scratch register differ. */
 #include "ui/ButtonHelp.h"
+#include "font/ComWin/ComWin.h"
 
 extern "C" {
 
 extern ButtonHelpGlobals g_buttonHelp;
 
-void spriteStartAnimationByIndex(ButtonHelpDisplayUnit *part, s32 hidden);
 void ifTouchDecrementTimer(void);
 void timerStart(ButtonHelpDisplayUnit *part, s32 kind, s32 arg);
 void FUN_002a9fdc(ButtonHelpDisplayUnit *part, s32 arg1, s32 arg2);

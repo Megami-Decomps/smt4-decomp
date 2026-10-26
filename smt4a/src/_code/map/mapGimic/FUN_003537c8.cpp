@@ -1,12 +1,12 @@
 /* NON_MATCHING: global pointer loads are scheduled differently around the prologue. */
 #include "map/mapGimic.h"
+#include "util/FUN_001cd3ec.h"
 
 extern "C" {
 extern MapGimic *g_mapGimic;
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 MapGimicObj *modelListInit(MapGimicObj *storage);
-void FUN_001cd3ec(MapGimicObj *model, const char *path);
 void FUN_0040a908(MapGimicObj *model, u32 flags);
 void FUN_0040a918(MapGimicObj *model, u32 flags);
 

@@ -1,10 +1,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include <stdarg.h>
 #include "AsdSDK/asdTextDrawFormatted.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void asdMemFree(void *ptr);
 u32 libc_strlen(const void *text);
 s32 FUN_002b23bc(s8 *buffer, u32 size, const char *format, va_list args);

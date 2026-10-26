@@ -5,6 +5,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
 #include "util/PackNibbles.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -68,7 +69,6 @@ extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: statusDownDrawIndicatorPairs. */
 extern int FUN_0026264c(unsigned short);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
-extern int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 extern unsigned short *FUN_002c7e24(void);
 extern int FUN_002c7e3c(void);
@@ -336,7 +336,7 @@ LAB_0026b644:
     temp_v23 = temp_v11;
     temp_v2 = resourceRunOperationIfUnblocked();
     temp_v10 = FUN_002a4894(temp_v11);
-    temp_v11 = FUN_002a4878(temp_v11);
+    temp_v11 = FUN_002a4878((void *)(temp_v11));
     efctSetSpeed();
     FUN_00164b5c(2,0x12,0x10,temp_v0,temp_v1,0xb3);
     statusDownDrawIndicatorPairs(temp_v0,temp_v1);
@@ -414,7 +414,7 @@ LAB_0026b644:
     } while (temp_v11 < 9);
     efctSetSpeed();
     if ((*(int *)(temp_v4 + 0x518) == 0x16) && (0 < *(short *)(temp_v24 + 0x4a))) {
-      temp_v11 = FUN_002a4878(temp_v23);
+      temp_v11 = FUN_002a4878((void *)(temp_v23));
       temp_v2 = FUN_002a4894(temp_v23);
       temp_v2 = asdTMTexTableEntryAt(0x12,temp_v11 + temp_v2 * 4 + 0x4ae);
       efctSetSpeed();

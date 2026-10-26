@@ -7,7 +7,7 @@ extern "C" {
 
 int FUN_00167618(...);
 int efctSetSpeed(void);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int quadSetOrderedVectors(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_0019ac70(int *, unsigned int);
@@ -73,7 +73,7 @@ extern unsigned int DAT_00630754; /* 0x630754 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_00167618. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: quadSetOrderedVectors. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: FUN_0019ac70. */
@@ -401,7 +401,7 @@ LAB_0047cf80:
           temp_v11 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           param_3[1] = (int)(temp_v11 + temp_v15);
         }
-        FUN_0016c4b8(g_renderCtx,0);
+        renderCtxSelectTexture(g_renderCtx,0);
         VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail retains slot-selector validation and shared result register; inline field selection differs. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "util/FUN_002bf684.h"
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_002bf684(AsdSoundSystem *system);
 s32 FUN_00141fd0(AsdSoundSystem *system, s32 sound);
 void FUN_002bda30(s32 handle, s32 frames);
 u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 sound, void *parameters);

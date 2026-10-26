@@ -24,7 +24,7 @@ extern unsigned char LAB_00111398; /* 0x111398 */
 extern int FUN_00121e5c(unsigned int job); /* 0x121e5c */
 
 extern int FUN_0011b918(int);
-extern int FUN_0011b930(int);
+extern int clearU64(int);
 /* Supplied declaration required: aocThreadAllocateStorage. */
 extern int FUN_00121fa0(int);
 extern int FUN_00121fb4(int);
@@ -57,7 +57,7 @@ unsigned int * FUN_00111184(int param_1)
   unsigned int *temp_v4;
   
   ppcVar3 = &temp_v3;
-  temp_v0 = FUN_0011b930(param_1 + 0x20);
+  temp_v0 = clearU64(param_1 + 0x20);
   temp_v0 = FUN_0011b918(temp_v0 + 8);
   temp_v0 = FUN_002ba8e4(temp_v0 + 0x54);
   temp_v0 = clearWord(temp_v0 + 4);

@@ -1,10 +1,10 @@
 #include "shard/Shard003B.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 u32 requestIdToCode(s32 request);
 void asdTMTexTableReleaseNode(u32 table, u32 node);
-void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 void gfxAdvanceTextureRequestQueue(ResSet* resources, s32 activeRequest)
 {

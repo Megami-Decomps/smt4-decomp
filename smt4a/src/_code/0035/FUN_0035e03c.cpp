@@ -3,6 +3,7 @@
 #include "mapnavi/naviMain.h"
 
 #include "util/FUN_002e5c2c.h"
+#include "gamedata/PlayerDataBlock.h"
 /* The player's record (only the fields used here). */
 struct EffectPlayer {
     /* 0x00 */ u8 unk00[0x2c];
@@ -49,7 +50,6 @@ struct EffectSkill {
 
 extern "C" {
 extern s32 g_gameState;
-EffectPlayer *gameGetPlayerData(void);
 EffectUnit *gameGetSlotRecord(s32 slot);
 u32 randRange(u32 range);
 EffectSkill *dataTable41FindById(u16 id);
@@ -72,7 +72,7 @@ u32 FUN_0035e03c(s32 target, ItemEffect *effect, s32 check, s32 preview)
     EffectPlayer *player = NULL;
     EffectUnit *unit = NULL;
     if (target < 0) {
-        player = gameGetPlayerData();
+        player = reinterpret_cast<EffectPlayer *>(gameGetPlayerData());
     } else {
         unit = gameGetSlotRecord(target);
         if (unit == NULL) {

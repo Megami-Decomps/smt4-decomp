@@ -1,6 +1,7 @@
 /* NON_MATCHING: index-count lifetimes and loop strength reduction differ, causing argument homing and different inner-loop registers. */
 #include "shard/W6_W6Match2_GeometryResources.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* Draw flags are beyond the common GeometryResources prefix. */
 struct RepeatedGeometryResourceView {
@@ -11,7 +12,6 @@ struct RepeatedGeometryResourceView {
 
 extern "C" {
 extern const char DAT_0054baf8[];
-void *memAlloc(s32 heap, s32 category, s32 flags, s32 bytes, s32 alignment, s32 count);
 void *FUN_00178b04(s32 bytes, const char *file, s32 line);
 OwnedBufferPair *slotReset(OwnedBufferPair *buffers);
 void slotInit(OwnedBufferPair *buffers, s32 format, s32 indexCount, s32 vertexCount);

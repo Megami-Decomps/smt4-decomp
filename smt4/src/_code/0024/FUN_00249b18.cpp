@@ -2,9 +2,9 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "shard/Shard0034.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTableIV.h"
 extern "C" {
 PartyDamageUnitIV *gameGetUnitRecord(u32 slot);
-PartyDamageSlotsIV *gameGetSlotTable(void);
 s32 gameCountUnits(void);
 
 /* Restore eligible party members and clear their ailments. */

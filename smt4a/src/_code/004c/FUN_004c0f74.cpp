@@ -34,7 +34,6 @@ typedef char CombatantAffinityPreviewLayout[sizeof(CombatantAffinityPreview) == 
 
 extern "C" {
 CombatantAffinityPreview FUN_003e8bb0(BtlMainStateA *battle, BtlCombatantEntryA *entry);
-Table04ExtraRecord *dataTable41FindById(u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skills);
 s32 FUN_004bd098(u32 source, s32 skill);
 void kindIdStore(u32 kind, u32 *value);

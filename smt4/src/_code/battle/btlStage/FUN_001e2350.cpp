@@ -1,4 +1,4 @@
-/* NON_MATCHING: sentinel/global-store register allocation and description-argument scheduling differ. */
+/* NON_MATCHING: the -1 selection store goes through the stage register (r5) in retail and the FUN_0027dc24 arguments are set up in descending register order; otherwise identical. */
 #include "battle/btlMain.h"
 #include "battle/btlStage.h"
 #include "AsdSDK/AsdDebug.h"
@@ -33,11 +33,10 @@ void FUN_001e2350(BtlMainState* battle)
     setup->job = taskCreateDraw("btlStage Calc", 2, 0, 0,
                                 btlStageRunWork, FUN_0021eda8, battle, battle->job);
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\btlStage.cpp", 577);
-    BtlStage* stage = static_cast<BtlStage*>(asdMemAlloc(0x100, 0x100, 0, 0xC4, 1));
-    g_btlStage.stage = stage;
-    stage->setup.parameters[2] = 0.0f;
-    stage->setup.parameters[1] = 0.0f;
-    stage->setup.parameters[0] = 0.0f;
+    BtlStage* stage = g_btlStage.stage = static_cast<BtlStage*>(asdMemAlloc(0x100, 0x100, 0, 0xC4, 1));
+    for (s32 i = 2; i >= 0; --i) {
+        stage->setup.parameters[i] = 0.0f;
+    }
     stage->setup.selection = -1;
     if (setup->identifiers.stageId < 0 || setup->identifiers.stageVariant < 0) {
         FUN_0027dc24(battle, setup->description, 0);

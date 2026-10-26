@@ -3,14 +3,9 @@
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
 #include "gamedata/FlagsB.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
-/* A layout record: its position at +8/+10. */
-struct LayoutRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0a */ s16 y;
-};
 
 /* An entry of the list (0x34 bytes): a flags halfword and a packed kind/value halfword. */
 struct ListEntry {
@@ -34,7 +29,6 @@ struct ListMenu {
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 void efctSetSpeed(f32 speed);
-LayoutRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_003f7164(ListMenu *menu, ListEntry *entry, s32 index, u32 kind, s32 x, s32 y, u32 slot, f32 speed);
 void FUN_003f6424(ListMenu *menu, ListEntry *entry, u32 kind, s32 x, s32 y, u32 slot);
 void FUN_00344cd0(void *frame, s32 x, s32 y, u32 group, u32 a, u32 b, u32 c, u32 d, u32 e, u32 f, u32 g,
@@ -59,7 +53,7 @@ void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
         ListEntry *entry = &menu->entries[entryIndex];
         u32 kind = (entry->kindAndValue >> 8) == 10 ? 0 : (entry->kindAndValue & 0xff);
         if (menu->cursor == slot) {
-            LayoutRecord *record = asdTMTexTableEntryAt(0x31, slot + 0x91);
+            TextureTableEntryIV *record = asdTMTexTableEntryAt(0x31, slot + 0x91);
             s32 frameX = record->x + x;
             s32 frameY = record->y + y;
             efctSetSpeed(*reinterpret_cast<f32 *>(base + 0x330 + 0x20) * speed);
@@ -83,7 +77,7 @@ void FUN_003f66dc(ListMenu *menu, s32 x, s32 y, f32 speed)
                 }
             }
         } else {
-            LayoutRecord *record = asdTMTexTableEntryAt(0x31, slot + 0x88);
+            TextureTableEntryIV *record = asdTMTexTableEntryAt(0x31, slot + 0x88);
             s32 iconX = record->x + x;
             s32 iconY = record->y + y;
             FUN_003f6424(menu, entry, kind, iconX, iconY, 0x8d);

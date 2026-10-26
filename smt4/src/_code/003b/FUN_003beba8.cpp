@@ -1,6 +1,7 @@
 /* NON_MATCHING: float register allocation differs (retail keeps scale in s16, power in s17) and the 0x44a0 flag word is addressed through a separate add. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BattleBalanceRow.h"
 
 // Combatant record: only the fields the damage formula reads.
 struct BattleCombatant {
@@ -35,7 +36,6 @@ void selectionCopySupportedValue(u32 id, u32* out);
 u32* dataTable40FindById(s32 id);
 s32 playerGetSkillRank(s32 id);
 s32 FUN_00283ebc(u32* record, s32 rank, s32 mode);
-f32* FUN_0023ea94(void);
 
 // Computes a damage amount for an attack by `attackerId` on `defenderId` from
 // the attacker's stats, the party's skill rank bonus and the defender's affinity.
@@ -81,14 +81,14 @@ s32 FUN_003beba8(s32 partyId, s32 mode, s32 attackerId, s32 defenderId, f32 powe
     if ((main->battleFlags & 0x40000) == 0) {
         if (attacker->flags & 4) {
             if (defender->flags & 4) {
-                adjust = FUN_0023ea94()[0];
+                adjust = FUN_0023ea94()->scale0;
             } else {
-                adjust = FUN_0023ea94()[2];
+                adjust = FUN_0023ea94()->scale2;
             }
         } else if (defender->flags & 4) {
-            adjust = FUN_0023ea94()[0];
+            adjust = FUN_0023ea94()->scale0;
         } else {
-            adjust = FUN_0023ea94()[2];
+            adjust = FUN_0023ea94()->scale2;
         }
         damage = adjust * damage;
     }

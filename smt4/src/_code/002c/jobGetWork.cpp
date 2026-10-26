@@ -1,4 +1,6 @@
+#include "shard/JobWork.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/JobWork.h"
 
 extern "C" AsdProcessState g_asdProcess;
 
@@ -14,8 +16,8 @@ static __inline AsdProcess* findProcess(u32 handle)
 }
 
 // Return a live job's work address, or zero when its handle is absent.
-extern "C" u32 jobGetWork(u32 handle)
+extern "C" JobWork* jobGetWork(u32 handle)
 {
     AsdProcess* process = findProcess(handle);
-    return process != NULL ? process->unk48 : 0;
+    return process != NULL ? (JobWork*)process->unk48 : NULL;
 }

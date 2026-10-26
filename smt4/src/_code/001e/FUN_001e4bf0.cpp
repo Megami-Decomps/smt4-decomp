@@ -7,7 +7,6 @@
 extern "C" {
 void FUN_001e071c(BtlUiObjC *);
 void FUN_002c18e4(RenderCtx *);
-void FUN_002c198c(RenderCtx *);
 void renderCtxSelectStereoLayout(RenderCtx *);
 extern RenderCtx *g_titleScene;
 extern BtlUiGlobals g_btlUi;
@@ -33,7 +32,7 @@ s32 FUN_001e4bf0(u32 job)
             if (FUN_0028a318())
                 FUN_001e071c(&ui->objC);
             renderStackPop(&g_titleScene->stackA);
-            FUN_002c198c(g_titleScene);
+            renderCtxApplyTransforms(g_titleScene);
             FUN_002c18e4(g_titleScene);
             return 0;
         }

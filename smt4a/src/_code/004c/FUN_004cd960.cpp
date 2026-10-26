@@ -28,7 +28,7 @@ extern "C" {
 TableEntry *dataTable18Sub0GetEntries(void);
 RollState *FUN_00145f04(u8 kind, u32 id, u16 variant);
 s32 FUN_00148bb8(u32 id, u8 kind);
-u16 *FUN_00148c30(u8 kind, u32 id, u16 variant);
+u16 *dataTableFindCategoryVariant(u8 kind, u32 id, u16 variant);
 s32 randRange(u32 maximum);
 
 /* Roll every table entry's pending result: count down active results and draw new ones from the chance rows. */
@@ -66,7 +66,7 @@ void FUN_004cd960(void)
             continue;
         }
         state->countdown &= ~0x1F;
-        u16 *table = FUN_00148c30(kind, id, variant);
+        u16 *table = dataTableFindCategoryVariant(kind, id, variant);
         u16 result = state->current;
         u16 *row = table + level * 3;
         u32 chance = row[3];

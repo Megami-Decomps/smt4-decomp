@@ -1,10 +1,10 @@
 #include "map/mapIf.h"
 #include "common.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
 void asdTMTexTableLoadTmx(s32 table, s32 flag);
-void FUN_0014afd0(s32 table, s32 index);
 
 extern MapIfGlobalsA g_mapIf;
 

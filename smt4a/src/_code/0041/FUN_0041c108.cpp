@@ -3,12 +3,8 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/FUN_00164b5c.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct SlotSprite {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 /* A rotating marker ring: the animation phase and the highlighted slot. */
 struct MarkerRing {
@@ -22,7 +18,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(s32 first, s32 second);
 void FUN_00183bb0(void);
-SlotSprite *asdTMTexTableEntryAt(u32 group, u32 image);
 
 // Draw the marker ring: nine slot sprites, then the highlight pairs that rotate around it.
 void FUN_0041c108(MarkerRing *ring)
@@ -34,7 +29,7 @@ void FUN_0041c108(MarkerRing *ring)
     asdTMTexTableEntryAt(43, ring->image);
     FUN_00164b5c(2, 43, ring->image, 0, 0, 211);
     for (s32 i = 0; i < 9; i++) {
-        SlotSprite *slot = asdTMTexTableEntryAt(43, i + 98);
+        TextureTableEntryIV *slot = asdTMTexTableEntryAt(43, i + 98);
         positions[i][0] = slot->x;
         positions[i][1] = slot->y;
         FUN_001835b4(2, 43, 95, slot->x, slot->y, 211);

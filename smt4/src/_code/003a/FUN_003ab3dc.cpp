@@ -1,6 +1,7 @@
 /* NON_MATCHING: depth-aware contents renderer restores native calls and row-table access; initial depth capture/copy still differs. */
 #include "common.h"
 #include <stddef.h>
+#include "util/FUN_0029e924.h"
 
 namespace {
 struct SkillListRow {
@@ -28,7 +29,6 @@ typedef char SkillListRenderOffsets[offsetof(SkillListRenderView, cursor) == 0x2
 extern "C" {
 void uiRectDrawAtBottomRight(void *render, s32 kind, s32 x, s32 y, s32 depth);
 void FUN_00231bcc(void *render, s32 sprite, s32 x, s32 y, s32 depth, s32 flags);
-s32 FUN_0029e924(void *cursor);
 s32 rangeLimitMin(void *cursor);
 u32 flaggedEntryGetValueByState(void *cursor);
 s32 flaggedValueHolderGetTotal(void *cursor);

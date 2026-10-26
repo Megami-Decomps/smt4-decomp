@@ -137,13 +137,13 @@ typedef struct {
     unsigned int spE4; /* 0xe4: local_e4 */
 } param_1_stack;
 
-extern unsigned char LAB_00191f58; /* 0x191f58 */
-extern unsigned char LAB_001b9fc4; /* 0x1b9fc4 */
-extern unsigned char LAB_001b9fd4; /* 0x1b9fd4 */
-extern unsigned char LAB_0046be40; /* 0x46be40 */
-extern unsigned char LAB_0046be50; /* 0x46be50 */
-extern unsigned char LAB_0046dd28; /* 0x46dd28 */
-extern unsigned char LAB_0046e448; /* 0x46e448 */
+extern unsigned char FUN_00191f58; /* 0x191f58 */
+extern unsigned char FUN_001b9fc4; /* 0x1b9fc4 */
+extern unsigned char dataCompareRecordKeys; /* 0x1b9fd4 */
+extern unsigned char FUN_0046be40; /* 0x46be40 */
+extern unsigned char FUN_0046be50; /* 0x46be50 */
+extern unsigned char halfwordKeyAscendingCompare; /* 0x46dd28 */
+extern unsigned char FUN_0046e448; /* 0x46e448 */
 
 #ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
@@ -1034,25 +1034,25 @@ void FUN_0046c528(fn_0046c528_arg0 *param_1)
     } while ((int)temp_v46 < param_1->field_0x310);
   }
   if (param_1->field_0x384 != 0) {
-    qsort(param_1->field_0x388,param_1->field_0x384,0x134,&LAB_0046be50);
+    qsort(param_1->field_0x388,param_1->field_0x384,0x134,&FUN_0046be50);
   }
   if (param_1->field_0x35c != 0) {
-    qsort(param_1->field_0x360,param_1->field_0x35c,0xb4,&LAB_0046dd28);
+    qsort(param_1->field_0x360,param_1->field_0x35c,0xb4,&halfwordKeyAscendingCompare);
   }
   if (param_1->field_0x364 != 0) {
-    qsort(param_1->field_0x368,param_1->field_0x364,0xa8,&LAB_0046be40);
+    qsort(param_1->field_0x368,param_1->field_0x364,0xa8,&FUN_0046be40);
   }
   if (param_1->field_0x374 != 0) {
-    qsort(param_1->field_0x378,param_1->field_0x374,0x28,&LAB_0046e448);
+    qsort(param_1->field_0x378,param_1->field_0x374,0x28,&FUN_0046e448);
   }
   if (param_1->field_0x42c != 0) {
-    qsort(param_1->field_0x430,param_1->field_0x42c,0x20,&LAB_00191f58);
+    qsort(param_1->field_0x430,param_1->field_0x42c,0x20,&FUN_00191f58);
   }
   if (param_1->field_0x434 != 0) {
-    qsort(param_1->field_0x438,param_1->field_0x434,0x88,&LAB_001b9fd4);
+    qsort(param_1->field_0x438,param_1->field_0x434,0x88,&dataCompareRecordKeys);
   }
   if (param_1->field_0x43c != 0) {
-    qsort(param_1->field_0x440,param_1->field_0x43c,0x48,&LAB_001b9fc4);
+    qsort(param_1->field_0x440,param_1->field_0x43c,0x48,&FUN_001b9fc4);
   }
   temp_v2 = 0;
   if (temp_v2 < param_1->field_0x310) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: record and requiredBits trade r5/r6 (register allocation only). */
 #include "common.h"
+#include "util/dataFindKeyedRecordWithOverrides.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct PlayerLevelData {
     /* 0x62 */ u16 level;
 } PlayerLevelData;
 
-ShopRecord *dataFindKeyedRecordWithOverrides(u32 id);
 PlayerLevelData *gameGetPlayerData(void);
 s32 gameFlagIsSet(u16 flag);
 u8 *gameDataBlockGetArea2D68(void);
@@ -25,7 +25,7 @@ u32 FUN_002e5c2c(void);
 
 static __inline u32 shopRecordGetPrice(u32 id)
 {
-    ShopRecord *record = dataFindKeyedRecordWithOverrides(id);
+    ShopRecord *record = (ShopRecord *)dataFindKeyedRecordWithOverrides(id);
 
     return record != NULL ? record->price : 0;
 }
@@ -33,7 +33,7 @@ static __inline u32 shopRecordGetPrice(u32 id)
 /* Shop availability: 2 when the entry is locked, 1 when it costs more than the player has, 0 otherwise. */
 u8 FUN_003e4230(u32 id)
 {
-    ShopRecord *record = dataFindKeyedRecordWithOverrides(id);
+    ShopRecord *record = (ShopRecord *)dataFindKeyedRecordWithOverrides(id);
     s32 i;
     u32 price;
     u32 money;

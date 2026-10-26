@@ -2,6 +2,8 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "event/eventCommand.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 struct GameOverScriptProcess {
     /* 0x000 */ u8 unk000[0x108];
@@ -21,9 +23,7 @@ struct GameOverTransition {
 };
 
 extern "C" {
-void asdLoadFileAsyncSimple(const char* path, void** destination, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 flags);
-void asdTMTexLoadMainHeap(u32 table, u32 index);
 void asdTMTexTableReleaseNode(u32 table, u32 index);
 s32 campButtonHelpIsActive(void);
 GameOverScriptProcess* FUN_00275bc8(void* script, void* messages);
@@ -41,8 +41,8 @@ extern "C" u32 FUN_004cef24(GameOverTransition* transition)
 {
     switch (transition->state) {
     case 0:
-        asdLoadFileAsyncSimple(DAT_00530edc, &transition->scriptData, 0);
-        asdLoadFileAsyncSimple(DAT_00530ebc, &transition->messageData, 0);
+        asdLoadFileAsyncSimple(DAT_00530edc, reinterpret_cast<u32 *>(&transition->scriptData), 0);
+        asdLoadFileAsyncSimple(DAT_00530ebc, reinterpret_cast<u32 *>(&transition->messageData), 0);
         asdTMTexTableLoadTmx(0x22, 0);
         for (s32 index = 1; index < 7; ++index) {
             asdTMTexLoadMainHeap(0x22, index);

@@ -3,6 +3,7 @@
 #include "util/CalleeContracts.h"
 #include "battle/btlPartnerAttack.h"
 #include "battle/btlUnit.h"
+#include "battle/BattleUnit.h"
 
 // The queued command lies beyond the published BtlMainStateA extent.
 struct BattleTransitionStateView {
@@ -22,7 +23,6 @@ extern BtlPartnerAttackA* g_btlPartnerAttack;
 extern u32 g_btlScriptUnit;
 extern void* g_btlUiBlock;
 BattleTransitionSource* FUN_003eaf20(BtlMainStateA* battle);
-BtlUnitA* btlUnitGet(u32 id);
 s32 hasFlag80Or1000(u32 id, BtlUnitA* unit);
 
 // Begin the next partner-attack phase or queue the current unit's transition command.
@@ -44,12 +44,12 @@ u32 FUN_003ed878(BattleTransitionStateView* state)
         if (flags & g_btlMain.transition.mask)
             return 0;
         state->command = FUN_003eaf20(&state->battle)->command;
-        BtlUnitA* unit = btlUnitGet(g_btlScriptUnit);
+        BtlUnitA* unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         u32 special = 0;
         if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, unit))
             special = 1;
         FUN_004abba8(g_btlUiBlock, special ^ 1);
-        unit = btlUnitGet(g_btlScriptUnit);
+        unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit != NULL)
             hasFlag80Or1000(g_btlScriptUnit, unit);
         state->battle.stateFlags64.bits |= g_btlMain.transition.mask;

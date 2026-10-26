@@ -1,9 +1,9 @@
 #include "common.h"
+#include "camp/RenderCtx.h"
 extern "C" {
 extern struct { void *active; struct { u8 unk00[0x7C]; void *value; } *work; } g_mapIf;
-extern void *g_renderCtx;
-void FUN_0016c4b8(void *context, void *value);
+extern RenderCtxA *g_renderCtx;
 void mapRenderApplySecondary(void) {
-    if (g_mapIf.active) FUN_0016c4b8(g_renderCtx, g_mapIf.work->value);
+    if (g_mapIf.active) renderCtxSelectTexture(g_renderCtx, reinterpret_cast<AsdTexture *>(g_mapIf.work->value));
 }
 }

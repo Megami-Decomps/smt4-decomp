@@ -1,4 +1,3 @@
-/* NON_MATCHING: same stores; the pc and code-pointer loads for the label lookup come out in swapped registers (r3/r2 in retail, r2/r3 here). */
 #include "script/ScriptVm.h"
 
 /* Script opcode: calls the function the operand names, pushing the return address. */

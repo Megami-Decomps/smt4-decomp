@@ -4,7 +4,7 @@
 #include "nn/fs/ArchiveCreateFile.h"
 
 extern "C" {
-void *FUN_002e0e04(u32 id, u8 *buffer, s32 mode);
+void *pathBuildWide(u32 id, u8 *buffer, s32 mode);
 u32 FUN_001886bc();
 s32 FUN_001883b0(RomOpenFile *file, u8 *buffer, s32 mode);
 
@@ -19,7 +19,7 @@ s32 FUN_00359608(RomFileOpenState *owner, u32 id, u32 size)
 {
     u8 buffer[496];
     s32 result;
-    if (FUN_002e0e04(id, buffer, 2) == NULL) {
+    if (pathBuildWide(id, buffer, 2) == NULL) {
         result = 0xE0E046BC;
         FUN_0013ebd8(result);
         return result;

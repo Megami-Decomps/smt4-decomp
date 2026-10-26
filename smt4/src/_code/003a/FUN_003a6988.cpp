@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/CalleeContracts.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 struct StepPlayerData {
     /* 0x00 */ u8 unk00[0x0C];
@@ -28,14 +29,8 @@ struct StepUnitRecord {
     /* 0x44 */ u16 flags;
 };
 
-/* The save's slot table: the three side slots at 0x9108 (-1 = empty). */
-struct StepSlotTable {
-    /* 0x0000 */ u8 unk0000[0x9108];
-    /* 0x9108 */ s8 side[3];
-};
 
 extern "C" {
-StepSlotTable *gameGetSlotTable(void);
 StepUnitRecord *gameGetUnitRecord(s32 slot);
 
 /* A percentage of max, never negative. */
@@ -71,7 +66,7 @@ static __inline void unitHealMpPercent(StepUnitRecord *unit, s32 percent)
 /* Heals every usable side unit by the percentage. */
 static __inline void healSideUnitsMp(s32 percent, s32 count)
 {
-    const s8 *side = gameGetSlotTable()->side;
+    const s8 *side = gameGetSlotTable()->active;
     for (s32 i = 0; i < count; ++i) {
         if (side[i] >= 0) {
             StepUnitRecord *unit = gameGetUnitRecord(side[i]);
@@ -84,7 +79,7 @@ static __inline void healSideUnitsMp(s32 percent, s32 count)
 /* Heals the usable side units that know the regeneration skill. */
 static __inline void healRegenSkillUnitsMp(s32 percent, s32 count)
 {
-    const s8 *side = gameGetSlotTable()->side;
+    const s8 *side = gameGetSlotTable()->active;
     for (s32 i = 0; i < count; ++i) {
         if (side[i] >= 0) {
             StepUnitRecord *unit = gameGetUnitRecord(side[i]);

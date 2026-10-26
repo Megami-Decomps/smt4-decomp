@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct EventBattleTextureWork {
     u32 id;
@@ -28,7 +29,6 @@ struct EventBattleTextureRecord {
 };
 
 extern "C" {
-void *asdMemAlloc(s32 pool, s32 alignment, s32 flags, u32 size, s32 clear);
 EventBattleTextureRecord *dataTable00FindById(u16 id);
 s32 FUN_002c1d5c(void);
 u32 FUN_00294090(s32 textureId, s32 flags);

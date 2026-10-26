@@ -2,11 +2,11 @@
 #include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
 #include "AsdSDK/AsdSceneFog.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 struct SceneLight;
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
-AsdAllocatorObject *asdMemoryGetDefaultAllocator();
 AsdSceneLightObject *_ZN9Obj4210946createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
 AsdSceneLightObject *_ZN9Obj4212e86createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
 u32 nw_ut_FloatColor_ToPicaU32(const f32 *);
@@ -44,7 +44,7 @@ void FUN_0010e614()
         ambient->object = NULL;
         ambient->parameters = NULL;
         ambient->id = -1;
-        AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
+        AsdAllocatorObject *allocator = reinterpret_cast<AsdAllocatorObject *>(asdMemoryGetDefaultAllocator());
         AsdSceneLightDescription description;
         description.enabled = 1;
         description.updateEnabled = 1;
@@ -67,7 +67,7 @@ void FUN_0010e614()
         hemisphere->object = NULL;
         hemisphere->parameters = NULL;
         hemisphere->id = -1;
-        allocator = asdMemoryGetDefaultAllocator();
+        allocator = reinterpret_cast<AsdAllocatorObject *>(asdMemoryGetDefaultAllocator());
         description.enabled = 1;
         description.updateEnabled = 1;
         description.unk04 = 0;

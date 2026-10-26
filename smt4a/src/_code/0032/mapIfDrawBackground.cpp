@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_0016c4b8(u32 a, MapIfWidget *widget);
+void renderCtxSelectTexture(u32 a, MapIfWidget *widget);
 
 extern MapIfGlobalsA g_mapIf;
 extern u32 g_renderCtx;
@@ -14,10 +14,10 @@ void mapIfDrawBackground(void)
         return;
     }
     if (g_gameState >= 100) {
-        FUN_0016c4b8(g_renderCtx, g_mapIf.widgets->widget[0x29]);
+        renderCtxSelectTexture(g_renderCtx, g_mapIf.widgets->widget[0x29]);
         return;
     }
-    FUN_0016c4b8(g_renderCtx, g_mapIf.widgets->widget[0x20]);
+    renderCtxSelectTexture(g_renderCtx, g_mapIf.widgets->widget[0x20]);
 }
 
 } /* extern "C" */

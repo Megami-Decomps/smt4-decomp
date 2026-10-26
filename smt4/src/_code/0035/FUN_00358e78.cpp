@@ -1,32 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00358e78` (_code @ 0x358e78, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Dispatches to the active backend (primary, else secondary); returns 0xE0810BF8 when neither is enabled. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00359134(unsigned int);
-int FUN_003595ac(void);
+extern s32 g_nnCecdHandle;
+extern s32 DAT_0047384c;
 
-extern int g_nnCecdHandle; /* 0x473848 */
-extern int DAT_0047384c; /* 0x47384c */
+extern u32 FUN_00359134(u32 arg);
+extern u32 FUN_003595ac(void);
 
-/* Supplied declaration required: FUN_00359134. */
-/* Supplied declaration required: FUN_003595ac. */
-
-
-void FUN_00358e78(unsigned int param_1)
-
+u32 FUN_00358e78(u32 arg)
 {
-/* irregular: 2 native warning(s); review required */
-  if (DAT_0047384c != 0) {
-    FUN_003595ac();
-    return;
-  }
-  if (g_nnCecdHandle != 0) {
-    FUN_00359134(param_1);
-    return;
-  }
-  return;
+    if (DAT_0047384c != 0) {
+        return FUN_003595ac();
+    }
+    if (g_nnCecdHandle != 0) {
+        return FUN_00359134(arg);
+    }
+    return 0xE0810BF8;
 }
 
-} /* extern "C" */
+}

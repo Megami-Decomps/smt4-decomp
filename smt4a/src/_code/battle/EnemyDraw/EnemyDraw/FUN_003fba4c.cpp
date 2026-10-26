@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int mtx44Copy(float *, unsigned int *);
 int FUN_0019a0fc(...);
 int mathMatrixTranslateLocal(float *, float *, int *);
@@ -107,7 +107,7 @@ static float romwright_fabs_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
 /* Supplied declaration required: mathMatrixTranslateLocal. */
@@ -307,7 +307,7 @@ void FUN_003fba4c(fn_003fba4c_arg0 *param_1,int param_2,int param_3,unsigned int
     mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v49);
     FUN_001d3de0(&temp_v20,&temp_v20,temp_v52);
     FUN_0019a0fc(&temp_v20,&temp_v20,&temp_v32);
-    FUN_0016c4b8(g_renderCtx,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
+    renderCtxSelectTexture(g_renderCtx,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
     temp_v4 = g_renderCtx;
     temp_v5 = unaff_r6 * 0x58 + 0x54;
     piVar8 = (int *)(g_renderCtx + 0x12b8);

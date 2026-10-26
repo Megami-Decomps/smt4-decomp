@@ -22,7 +22,7 @@ u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc end, u32 work, u32 owner);
 s32 soundTestActionMenuUpdate(u32 handle);
 void workRequest(u32 handle);
-s32 FUN_0032affc(u32 handle);
+s32 soundTestDrawJobUpdate(u32 handle);
 void FUN_0037a114(u32 handle);
 
 /* Creates the sound test: its work block, the control process and the draw task under it. */
@@ -38,7 +38,7 @@ void FUN_002a0a38(void)
     work->selection = 0;
     work->requested = 0;
     work->job = asdProcessCreateSimple((const s8 *)"ST C", 4, 0, 0, soundTestActionMenuUpdate, workRequest, 0);
-    taskCreateDraw((const s8 *)"ST D", 0xEA, 0, 0, FUN_0032affc, FUN_0037a114, 0, work->job);
+    taskCreateDraw((const s8 *)"ST D", 0xEA, 0, 0, soundTestDrawJobUpdate, FUN_0037a114, 0, work->job);
 }
 
 } /* extern "C" */

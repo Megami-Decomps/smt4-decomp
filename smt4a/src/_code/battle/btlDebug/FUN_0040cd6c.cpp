@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_00184964(int, int);
+int randBetween(int, int);
 int FUN_003e7fa4(unsigned int *, int, int);
 int FUN_003f0e20(unsigned int *, int);
 int FUN_004a94a8(void);
@@ -70,7 +70,7 @@ extern short DAT_0057a682; /* 0x57a682 */
 extern int g_btlUiBlock; /* 0x57a9c8 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00184964. */
+/* Supplied declaration required: randBetween. */
 /* Supplied declaration required: FUN_003e7fa4. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004a94a8. */
@@ -121,19 +121,19 @@ void FUN_0040cd6c(unsigned int param_1,fn_0040cd6c_arg1 *param_2)
         temp_v10 = 0.01f;
         temp_v11 = 0;
         if (!((DAT_00571330 & *puVar4) == 0 && (DAT_00571334 & puVar4[1]) == 0)) {
-          temp_v3 = FUN_00184964((int)DAT_0057a66c,(int)DAT_0057a66e);
+          temp_v3 = randBetween((int)DAT_0057a66c,(int)DAT_0057a66e);
           temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x30) = temp_v9 * temp_v10;
-          temp_v3 = FUN_00184964((int)DAT_0057a670,(int)DAT_0057a672);
+          temp_v3 = randBetween((int)DAT_0057a670,(int)DAT_0057a672);
           temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x34) = temp_v9 * temp_v10;
           *(unsigned int *)((int)param_2->field_0x14 + 0x38) = temp_v11;
         }
         else {
-          temp_v3 = FUN_00184964((int)DAT_0057a664,(int)DAT_0057a666);
+          temp_v3 = randBetween((int)DAT_0057a664,(int)DAT_0057a666);
           temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x30) = temp_v9 * temp_v10;
-          temp_v3 = FUN_00184964((int)DAT_0057a668,(int)DAT_0057a66a);
+          temp_v3 = randBetween((int)DAT_0057a668,(int)DAT_0057a66a);
           temp_v9 = (float)VectorSignedToFloat(temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
           *(float *)((int)param_2->field_0x14 + 0x34) = temp_v9 * temp_v10;
           *(unsigned int *)((int)param_2->field_0x14 + 0x38) = temp_v11;
@@ -187,12 +187,12 @@ void FUN_0040cd6c(unsigned int param_1,fn_0040cd6c_arg1 *param_2)
       temp_v8 = 0;
       if (0 < param_2->field_0x24) {
         if (temp_v4 != 4) {
-          temp_v0 = FUN_00184964((int)DAT_0057a674,(int)DAT_0057a676);
-          temp_v1 = FUN_00184964((int)DAT_0057a678,(int)DAT_0057a67a);
+          temp_v0 = randBetween((int)DAT_0057a674,(int)DAT_0057a676);
+          temp_v1 = randBetween((int)DAT_0057a678,(int)DAT_0057a67a);
         }
         else {
-          temp_v0 = FUN_00184964((int)DAT_0057a67c,(int)DAT_0057a67e);
-          temp_v1 = FUN_00184964((int)DAT_0057a680,(int)DAT_0057a682);
+          temp_v0 = randBetween((int)DAT_0057a67c,(int)DAT_0057a67e);
+          temp_v1 = randBetween((int)DAT_0057a680,(int)DAT_0057a682);
         }
         temp_v8 = (int)temp_v1;
         temp_v7 = (int)temp_v0;

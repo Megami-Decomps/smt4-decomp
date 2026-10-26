@@ -1,6 +1,7 @@
 /* NON_MATCHING: option argument reload/scratch allocation and two-float projection copies differ; -O2 candidate. */
 #include "battle/btlTargetSelect.h"
 #include "util/FUN_0027db08.h"
+#include "addon/LookupRecord.h"
 
 struct TargetInfoPosition { f32 x, y, z; };
 struct TargetInfoProjection { f32 x, y; };
@@ -39,7 +40,6 @@ static __inline TargetInfoPanel *targetInfoPanel(BtlTargetSelect *selection)
 extern "C" {
 extern BtlTargetSelect *g_btlTargetSelect;
 const TargetInfoDefinition *dataTable00FindById(u32);
-const char *FUN_002bd06c(u32);
 const char *demonGetRaceLabel(u32, u32);
 u8 FUN_0029e9cc(u32);
 void textFormatBuffer(char *, const char *, ...);
@@ -50,7 +50,7 @@ void btlTargetSelectSetInfoPanel(const TargetInfoPosition *position, u32 id, u32
 {
     BtlTargetSelect *selection = g_btlTargetSelect;
     const TargetInfoDefinition *definition = dataTable00FindById(id);
-    const char *name = FUN_002bd06c(id);
+    const char *name = reinterpret_cast<const char *>(FUN_002bd06c(id));
     textFormatBuffer(targetInfoPanel(selection)->name, "%s", name);
     const char *category = demonGetRaceLabel(id, 0);
     textFormatBuffer(targetInfoPanel(selection)->categoryName, "%s", category);

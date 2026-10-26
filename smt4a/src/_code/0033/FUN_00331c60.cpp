@@ -1,6 +1,8 @@
 /* NON_MATCHING: register allocation differs: retail spills the member record and keeps the item loop base/limit (r5/r6) in registers and loads the divide-by-100 reciprocal later; logic matches. */
 #include "common.h"
 #include "mapnavi/naviMain.h"
+#include "gamedata/Table04Record.h"
+#include "util/actorIsActive.h"
 
 /* Battle reward input: base experience and the enemy level it came from. */
 struct RewardSource {
@@ -43,10 +45,8 @@ void gameGetPlayerData(void);
 s32 FUN_0022fd80(s32 experience, s32 level);
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 bitsAt60Test(SlotRecord *record, u32 bit);
-ItemRecord *dataTable41FindById(u32 id);
 s32 dataTable9Type3GetClamped(u32 growthType, s32 level);
 void *FUN_003e503c(u32 index);
-s32 actorIsActive(void *actor);
 s32 partySlotMatchesSelected(void *actor);
 
 /* Distribute the battle's experience to the pool and to every party member that is in the fight. */
@@ -69,7 +69,7 @@ void FUN_00331c60(RewardSource *source)
         f32 multiplier = 1.0f;
         for (s32 i = 0; i < 8; i++) {
             if (member->itemIds[i] != 0) {
-                ItemRecord *item = dataTable41FindById(member->itemIds[i]);
+                ItemRecord *item = reinterpret_cast<ItemRecord *>(dataTable41FindById(member->itemIds[i]));
                 if (item != 0 && item->experienceRate != 0)
                     multiplier = item->experienceRate * 0.01f * multiplier;
             }

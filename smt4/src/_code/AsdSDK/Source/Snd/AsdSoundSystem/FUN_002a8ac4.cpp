@@ -11,7 +11,7 @@ int FUN_002b70cc(void);
 int cameraSetViewMatrix(...);
 int renderCtxCalculateStereoParallax(...);
 int FUN_002c1ac8(...);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -54,7 +54,7 @@ extern int __cxa_guard_acquire(unsigned int *);
 extern unsigned int FUN_002c15ac(unsigned int);
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
 /* Supplied declaration required: FUN_002c1ac8. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 
 
 unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int param_3)
@@ -219,7 +219,7 @@ unsigned int FUN_002a8ac4(unsigned short *param_1,unsigned int *param_2,int para
   temp_v12 = (float)VectorSignedToFloat(0x100 - param_2[3],(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v20 = CONCAT44(temp_v12 * 0.00390625f,temp_v19);
   if ((temp_v6 & 0x40000000) == 0) {
-    FUN_002c1b64(g_titleScene,*(unsigned int *)(param_3 + 8),temp_v8);
+    renderCtxSelectTexture(g_titleScene,*(unsigned int *)(param_3 + 8),temp_v8);
   }
   puVar13 = (unsigned int *)0x0;
   puVar14 = (unsigned int *)0x0;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: capacity helper fixes saved bases; clamp zero comparison is conditional and member-state update scratch registers are exchanged. */
 #include "common.h"
 #include "shard/W6_W6Match2_HelpResources.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 struct PartyMemberList {
     u8 unk00[0x34];
@@ -9,18 +10,17 @@ struct PartyMemberList {
 };
 extern "C" {
 PartyMemberList *gameGetPlayerData();
-s32 gameDataFlagTestBit(u32 flag);
 
 static __inline s32 partyMemberCapacity(void)
 {
     s32 capacity = 4;
-    if (gameDataFlagTestBit(0x77))
+    if ((s32)gameDataFlagTestBit(0x77))
         capacity = 5;
-    if (gameDataFlagTestBit(0x78))
+    if ((s32)gameDataFlagTestBit(0x78))
         ++capacity;
-    if (gameDataFlagTestBit(0x79))
+    if ((s32)gameDataFlagTestBit(0x79))
         ++capacity;
-    if (gameDataFlagTestBit(0x7a))
+    if ((s32)gameDataFlagTestBit(0x7a))
         ++capacity;
     if (capacity > 8)
         return 8;

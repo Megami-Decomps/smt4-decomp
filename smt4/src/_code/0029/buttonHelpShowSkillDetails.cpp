@@ -3,12 +3,12 @@
 #include "shard/PassiveSkill.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 extern ButtonHelpGlobals g_buttonHelp;
 RelativeDirectory *FUN_002b47ec(void);
 s32 idIsAbove400(s32 id);
-void *dataTable40FindById(u32 id);
 void btlFormatCategoryLabel(char *buffer, u32 category);
 void textEncodeFontSlot(s32 slot, const u8 *text);
 void skillFormatTargetLabel(char *buffer, s32 target);

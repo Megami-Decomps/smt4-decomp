@@ -2,11 +2,11 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/CalleeContracts.h"
+#include "util/skinObjectUpdateMatrices.h"
 
 extern "C" {
 
 int renderCtxResetColorScale(int);
-int skinObjectUpdateMatrices(int);
 int FUN_001a1ee0(void);
 int FUN_001b63b0(void);
 int FUN_003fba4c(unsigned int, int, unsigned int, float *, int, int);
@@ -43,7 +43,6 @@ static float romwright_sqrt_4(float value)
 /* Supplied declaration required: FUN_00152f54. */
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_001a1ee0. */
 /* Supplied declaration required: FUN_001b63b0. */
 /* Supplied declaration required: FUN_003fba4c. */
@@ -160,7 +159,7 @@ LAB_003d2950:
     (**(romwright_code **)(temp_v1 + 0x1274))();
     *(unsigned char *)(temp_v1 + 0x1270) = 0;
   }
-  skinObjectUpdateMatrices(g_renderCtx);
+  skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
   renderCtxResetColorScale(g_renderCtx);
   return 0;
 }

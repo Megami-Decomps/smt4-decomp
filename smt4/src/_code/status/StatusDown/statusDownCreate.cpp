@@ -4,6 +4,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* A 0x8C-byte UI sprite; only the field this initializer writes is named. */
 struct StatusSprite {
@@ -65,7 +66,6 @@ static const s32 sKeysFifth[77] = {
 
 extern "C" {
 extern StatusDownWork *g_statusDown;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
     AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, void *owner);
 s32 FUN_001ca748(u32 handle);
@@ -73,7 +73,7 @@ s32 FUN_001cca14(u32 handle);
 void drawParameterBlockClear(UiResourceParameters *packet);
 
 void FUN_002bd954(StatusSprite *sprite, u32 group, u32 image, UiResourceParameters *owner, u16 id, f32 scale);
-void FUN_002bd82c(u32 text, u32 value);
+void asdTextSetBaseColor(u32 text, u32 value);
 void timerStart(StatusSprite *sprite, s32 id, s32 arg);
 void spriteStartAnimationByIndex(StatusSprite *sprite, s32 index);
 void uiSpriteInitializeState(StatusSprite *sprite, u32 group, s32 image, s32 kind,
@@ -116,7 +116,7 @@ void statusDownCreate(void)
     spriteStartAnimationByIndex(&status->sprites[6], 2);
     spriteSetLayer(&status->sprites[6], 2);
     status->memorySlot = asdTextCreate(0);
-    FUN_002bd82c(status->memorySlot, 0xff);
+    asdTextSetBaseColor(status->memorySlot, 0xff);
     positionStateSet(status->memorySlot, 0, 0x646464ff, 0.0f);
     __aeabi_memset4(status->slots, 0x29, -1);
     status->unk2392 = 1;

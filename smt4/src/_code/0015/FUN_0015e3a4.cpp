@@ -1,11 +1,15 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0015d240; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_0015e3a4 for reference (not compiled; its own view of the boundaries):
+#include "shard/Dspsnd.h"
 
-void FUN_0015e3a4(unsigned int *param_1,unsigned int param_2)
+extern "C" {
 
+extern DspsndState g_dspsndState;
+
+u8 nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(DspsndState *state, u8 channel, u32 param);
+
+/* Sets the ADPCM parameter of the channel whose index `channel` points to. */
+u8 FUN_0015e3a4(u32 *channel, u32 param)
 {
-  FUN_00156570(&DAT_004e6f64,*param_1 & 0xff,param_2);
-  return;
+    return nn_snd_CTR_Dspsnd_SetChannelAdpcmParam(&g_dspsndState, *channel, param);
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

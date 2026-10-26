@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ typedef struct Record {
     /* 0x28 */ u32 unk28High : 23;
 } Record;
 
-Record *dataTable40FindById(u32 id);
 
 /* Maps an id's record kind to a rank: kinds 0, 2 and 7 give 1, kind 6 gives 2, kind 4 gives 3, others 0; id 0 gives 99. */
 u32 recordKindRank(u32 id)
@@ -20,7 +20,7 @@ u32 recordKindRank(u32 id)
     if (id == 0) {
         return 99;
     }
-    record = dataTable40FindById(id);
+    record = reinterpret_cast<Record *>(dataTable40FindById(id));
     rank = 0;
     switch (record->kind) {
     case 0:

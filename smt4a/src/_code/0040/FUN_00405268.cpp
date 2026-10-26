@@ -1,12 +1,7 @@
 /* NON_MATCHING: ARMCC folds sprite-field addresses and merges transition tails differently; retail also retains extra branches in its animation-variant selection. */
 #include "ui/UiSpriteState.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
-
-struct ContentTextureDescriptor {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u16 table;
-    /* 0x08 */ u16 node;
-};
+#include "addon/PackageSelection.h"
 
 struct ContentListState {
     /* 0x000 */ u8 unk000[4];
@@ -27,7 +22,7 @@ struct ContentListState {
     /* 0x264 */ UiSpriteState thirdSprite;
     /* 0x2F0 */ u8 unk2F0[0x118];
     /* 0x408 */ u16 itemIds[0x12E];
-    /* 0x664 */ ContentTextureDescriptor* texture;
+    /* 0x664 */ PackageSelectableRecord* texture;
     /* 0x668 */ u8 firstFlag;
     /* 0x669 */ u8 secondFlag;
 };
@@ -46,7 +41,6 @@ s32 useCounterIsFinished(void);
 void useCounterRelease(void);
 s32 useCounterGetCurrentValue(void);
 void sortOwnerRun(ContentListState* list);
-ContentTextureDescriptor* FUN_0039b984(u32 id);
 }
 
 // Drive content-list initialization, texture ownership, and sprite transitions.
@@ -65,8 +59,8 @@ extern "C" u32 FUN_00405268(ContentListState* list)
         FUN_00403e2c(list);
         break;
     case 4: {
-        u16 table = list->texture->table;
-        u16 node = list->texture->node;
+        u16 table = list->texture->content.table;
+        u16 node = list->texture->content.node;
         if (table != 0) {
             if (!textureGetIndexedResource(table) ||
                 !asdTMTexTableNodeIsLoaded(table, node)) {
@@ -81,8 +75,8 @@ extern "C" u32 FUN_00405268(ContentListState* list)
             break;
         }
         if (list->secondSprite.mode != 1) {
-            u16 table = list->texture->table;
-            u16 node = list->texture->node;
+            u16 table = list->texture->content.table;
+            u16 node = list->texture->content.node;
             if (table != 0 &&
                 (!textureGetIndexedResource(table) ||
                  !asdTMTexTableNodeIsLoaded(table, node)) &&
@@ -91,7 +85,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
                 break;
             }
         } else if (list->ownsTextureNode) {
-            asdTMTexTableReleaseNode(list->texture->table, list->texture->node);
+            asdTMTexTableReleaseNode(list->texture->content.table, list->texture->content.node);
             if (list->ownsTextureTable) {
                 asdTMTexTableFreeEntry(0x32);
                 list->ownsTextureTable = 0;
@@ -125,7 +119,7 @@ extern "C" u32 FUN_00405268(ContentListState* list)
             FUN_004029f4(list, 3, 0);
         } else if (useCounterGetCurrentValue() != 0x69) {
             sortOwnerRun(list);
-            list->texture = FUN_0039b984(list->itemIds[list->selection + list->scroll]);
+            list->texture = contentFindRecordById(list->itemIds[list->selection + list->scroll]);
         }
         break;
     }

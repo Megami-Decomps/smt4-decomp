@@ -1,86 +1,53 @@
-/* NON_MATCHING: map owner global is restored; branch layout and unreachable retail literal decoding differ. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail lays the 0x11/99 arm and the shared 99 arm out of line (separate calls to FUN_0027b2b4); built selects the last two arguments with conditional moves. */
+#include "map/mapMain.h"
 #include "npc_room/NpcRoom.h"
+#include "AsdSDK/AsdDebugHooks.h"
 
 extern "C" {
 
-int FUN_00277d2c(unsigned int, unsigned int);
-int FUN_0027ae90(void);
-int FUN_0027b1b4(void);
-int mapRangeEntriesRun(void);
-int FUN_0027b2b4(...);
+void FUN_00277d2c(u32 mapId, u32 areaId);
+void FUN_0027ae90(void);
+void FUN_0027b1b4(void);
+void mapRangeEntriesRun(void);
+void FUN_0027b2b4(u32 mapId, u32 areaId, u32 third, u32 fourth);
+s32 gameFlagIsSet(u32 flag);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
+extern MapMain *g_mapMain;
 
-/* Supplied declaration required: FUN_00277d2c. */
-/* Supplied declaration required: mapGimicUpdateVisualBounds. */
-/* Supplied declaration required: FUN_0027ae90. */
-/* Supplied declaration required: FUN_0027b1b4. */
-/* Supplied declaration required: mapRangeEntriesRun. */
-/* Supplied declaration required: FUN_0027b2b4. */
-extern int gameFlagIsSet(unsigned int);
-
-
-extern int g_mapMain;
+/* Rebuilds the map's range entries and gimic bounds after a map change, with the special markers of maps 0x11 and 5. */
 void FUN_002fb234(void)
-
 {
-/* irregular: 1 unstructured edge(s); 1 goto(s); 7 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned char temp_v6;
-  
-  temp_v5 = g_mapMain;
-  if (temp_v5 == 0) {
-    return;
-  }
-  mapCollisionRelease();
-  if (*(int *)(temp_v5 + 0x2c) == 0x11) {
-    if (*(int *)(temp_v5 + 0x30) != 1) goto LAB_002fb2cc;
-    temp_v0 = gameFlagIsSet(0xc6);
-    if ((temp_v0 != 0) && (temp_v0 = gameFlagIsSet(0x108), temp_v0 == 0)) {
-      FUN_0027b2b4(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30),
-                   *(unsigned int *)(temp_v5 + 0x2c),99);
-      mapRangeEntriesRun();
-      FUN_0027b1b4();
-      FUN_0027ae90();
-      mapGimicUpdateVisualBounds();
-      FUN_00277d2c(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30));
-      return;
+    MapMain *map = g_mapMain;
+    if (map == NULL) {
+        return;
     }
-  }
-  temp_v0 = *(int *)(temp_v5 + 0x2c);
-  temp_v6 = temp_v0 != 5;
-  if (!temp_v6) {
-    temp_v0 = *(int *)(temp_v5 + 0x30);
-  }
-  if ((temp_v6 || temp_v0 != 1) || (temp_v0 = gameFlagIsSet(0x719), temp_v0 != 0)) {
-LAB_002fb2cc:
-    temp_v4 = 0;
-    temp_v1 = *(unsigned int *)(temp_v5 + 0x2c);
-    temp_v2 = *(unsigned int *)(temp_v5 + 0x30);
-    temp_v3 = 0;
-  }
-  else {
-    temp_v1 = *(unsigned int *)(temp_v5 + 0x2c);
-    temp_v2 = *(unsigned int *)(temp_v5 + 0x30);
-    temp_v4 = 99;
-    temp_v3 = temp_v1;
-  }
-  FUN_0027b2b4(temp_v1,temp_v2,temp_v3,temp_v4);
-  mapRangeEntriesRun();
-  FUN_0027b1b4();
-  FUN_0027ae90();
-  mapGimicUpdateVisualBounds();
-  FUN_00277d2c(*(unsigned int *)(temp_v5 + 0x2c),*(unsigned int *)(temp_v5 + 0x30));
-  return;
+    mapCollisionRelease();
+    if (map->mapId == 0x11 && map->areaId == 1 && gameFlagIsSet(0xc6) && !gameFlagIsSet(0x108)) {
+        FUN_0027b2b4(map->mapId, map->areaId, map->mapId, 99);
+    } else {
+        u32 third;
+        u32 fourth;
+        if (map->mapId == 5 && map->areaId == 1 && !gameFlagIsSet(0x719)) {
+            third = map->mapId;
+            fourth = 99;
+        } else {
+            third = 0;
+            fourth = 0;
+        }
+        FUN_0027b2b4(map->mapId, map->areaId, third, fourth);
+    }
+    asdDebugHookVoid();
+    mapRangeEntriesRun();
+    asdDebugHookVoid();
+    asdDebugHookVoid();
+    FUN_0027b1b4();
+    asdDebugHookVoid();
+    asdDebugHookVoid();
+    FUN_0027ae90();
+    asdDebugHookVoid();
+    asdDebugHookVoid();
+    mapGimicUpdateVisualBounds();
+    FUN_00277d2c(map->mapId, map->areaId);
 }
 
 } /* extern "C" */

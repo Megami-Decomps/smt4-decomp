@@ -4,6 +4,7 @@
 #include "gamedata/Table04Record.h"
 #include <stddef.h>
 #include "battle/BtlMainAccess.h"
+#include "gamedata/DataTable40.h"
 
 namespace {
 struct BattleActionDefinition {
@@ -24,7 +25,6 @@ typedef char BattleActionDefinitionOffsetsCheck[sizeof(BattleActionDefinition) =
 
 extern "C" {
 BattleActionDefinition *dataTable08Sub1GetRecord(u16 id);
-Table04Record *dataTable40FindById(u32 skillId);
 s32 FUN_0033fe6c(s32 side, s32 mode, BattleActionDefinition *action, s32 enabled);
 s32 FUN_0023d9b8(s32 side, s32 mode, Table04Record *skill);
 

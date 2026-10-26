@@ -32,7 +32,7 @@ s32 FUN_001b2e78(void *system, u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 
 extern void *g_aocSystem;
-extern const u8 LAB_001ac8dc;  /* table 4 entry comparison */
+s32 FUN_001ac8dc(const void *left, const void *right);  /* table 4 entry comparison */
 
 /* Number of used slots (up to 9) of data table 4 entry `id`, negated when `positive` is 0.
  * Returns 0 for an unknown id; add-on ids (> 400) are only looked up. */
@@ -45,7 +45,7 @@ s32 FUN_0035e460(u32 id, s32 positive)
             AocTableEntry key;
 
             key.id = id;
-            libc_bsearch(&key, entries, dataTableGetCount(table), sizeof(AocTableEntry), (s32 (*)(const void *, const void *))&LAB_001ac8dc);
+            libc_bsearch(&key, entries, dataTableGetCount(table), sizeof(AocTableEntry), FUN_001ac8dc);
         }
     } else {
         AocItemEntry *entry = (AocItemEntry *)dataTable04FindById(id);

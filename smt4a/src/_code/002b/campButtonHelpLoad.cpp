@@ -1,4 +1,5 @@
 #include "common.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
@@ -13,7 +14,6 @@ struct ButtonHelpState {
 extern ButtonHelpState g_buttonHelp;
 
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 arg);
 void FUN_00318794(void);
 void *asdLoadFileSyncDefault(const char *path);
 

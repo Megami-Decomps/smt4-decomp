@@ -12,7 +12,7 @@ int renderCtxCalculateStereoParallax(...);
 int FUN_002bed3c(void);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -52,7 +52,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -167,7 +167,7 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v5 = (float)VectorSignedToFloat((int)temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v8 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,2000,(int)(temp_v5 + temp_v8 * 0.5f),-(int)*(short *)(temp_v1 + 10),6);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     efctSetSpeed();
     efctSetSpeed();
     temp_v9[0] = param_1[0xd];
@@ -194,7 +194,7 @@ unsigned int FUN_00335b80(int *param_1)
     temp_v8 = (float)VectorSignedToFloat((int)temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v4 = (float)VectorSignedToFloat(-(int)*(short *)(temp_v1 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_002bf288(2,0x2d,0x7d1,(int)(temp_v8 + temp_v4 * temp_v7),-(int)*(short *)(temp_v1 + 10),6);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     efctSetSpeed();
     temp_v1 = g_titleScene;
     piVar5 = (int *)(g_titleScene + 0x12ac);

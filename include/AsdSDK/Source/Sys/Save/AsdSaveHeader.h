@@ -30,7 +30,7 @@ typedef char AsdSaveHeaderSizeCheck[sizeof(AsdSaveHeader) == ASD_SAVE_HEADER_SIZ
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void memCopy(const void *src, const void *dst, int size);
+void memCopy(const void *src, void *dst, int size);
 #ifdef __cplusplus
 }
 #endif

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps a zero in r7 for the null-guard return and timer store; built folds the guards differently (4 vs 6 saved regs) */
+/* NON_MATCHING: with a result local the saved-register set (r4-r8) matches retail; retail materializes the zero from the loop counter (mov r7,r4) after the guard, selects the demon pointer with moveq/cmpne, and returns the zero inline. */
 #include "common.h"
 
 extern "C" {
@@ -48,22 +48,18 @@ static s32 callbackFindSlot(CallbackDemon *demon)
 s32 FUN_0032fb18(CallbackDemon *demon)
 {
     CallbackWork *work = g_callbackWork;
-    s32 slot;
+    s32 result = 0;
 
-    if (work == NULL) {
-        return 0;
+    if (work != NULL && demon != NULL) {
+        s32 slot = callbackFindSlot(demon);
+        if (slot >= 0) {
+            work->slot = slot;
+            work->timer = 0;
+            work->state = 3;
+            result = 1;
+        }
     }
-    if (demon == NULL) {
-        return 0;
-    }
-    slot = callbackFindSlot(demon);
-    if (slot < 0) {
-        return 0;
-    }
-    work->slot = slot;
-    work->timer = 0;
-    work->state = 3;
-    return 1;
+    return result;
 }
 
 } /* extern "C" */

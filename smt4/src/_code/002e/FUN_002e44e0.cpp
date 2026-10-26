@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the comparator's tail differs: retail keeps the second key's order in r1 and the difference in r0 (built swaps them) */
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct SortKey {
 
 s32 idIsAbove400(u32 id);
 s32 FUN_0024c52c(u32 id);
-ItemData *dataTable40FindById(u32 id);
 void FUN_00257568(SortKey *a, SortKey *b);
 
 /* Orders two keys by rank, then by descending item order (ids above 400 rank 99 with order 0). */
@@ -33,14 +33,14 @@ static s32 sortKeyCompare(const SortKey *a, const SortKey *b)
         orderA = 0;
     } else {
         rankA = FUN_0024c52c(a->id);
-        orderA = dataTable40FindById(a->id)->order;
+        orderA = reinterpret_cast<ItemData *>(dataTable40FindById(a->id))->order;
     }
     if (idIsAbove400(b->id)) {
         rankB = 99;
         orderB = 0;
     } else {
         rankB = FUN_0024c52c(b->id);
-        orderB = dataTable40FindById(b->id)->order;
+        orderB = reinterpret_cast<ItemData *>(dataTable40FindById(b->id))->order;
     }
     s32 diff = rankA - rankB;
 

@@ -17,7 +17,7 @@ void FUN_00183f58(s32 a, s32 b, s32 c, s32 d);
 s32 gameFlagIsSet(u32 flag);
 s32 sub68OwnerCall2(void);
 void sub68OwnerCall3(void);
-void FUN_00379be8(void);
+void naviMainEnterState4IfActive(void);
 void FUN_003b61ec(void);
 void commonBgReset(void);
 s32 FUN_004a0404(void);
@@ -30,7 +30,7 @@ void FUN_003a2278(s32 open)
         if (g_gameState.menuOpen)
             return;
         g_gameState.menuOpen = 1;
-        FUN_00379be8();
+        naviMainEnterState4IfActive();
         FUN_003b61ec();
         sysPlaySe(0x92);
         return;

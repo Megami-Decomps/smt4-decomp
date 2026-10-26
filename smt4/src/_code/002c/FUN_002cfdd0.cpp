@@ -4,10 +4,10 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
-#include "shard/gameGetSlotTable.h"
+#include "gamedata/SaveSlotTableIV.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-s32 scrGetArg(u32 index);
 void FUN_0024b888(s32 first, s32 second, s32 third, s32 stockIndex, s32 actionIndex, s32 enabled);
 
 u32 FUN_002cfdd0(void)
@@ -19,21 +19,15 @@ u32 FUN_002cfdd0(void)
         u8 unk1E9C[0x128];
         s16 activeCount;
     };
-    struct PartyView {
-        u8 unk0000[0x90F0];
-        s8 stock[24];
-        s8 active[3];
-        u8 count;
-    };
     s32 id = scrGetArg(0);
     BattlePartyView *state = (BattlePartyView *)btlGetMainState();
     if (id >= 109 && state->activeCount < 4) {
         for (s32 slot = 0; slot < 4; ++slot) {
             u32 status = state->actions[slot].status;
             if ((status & 1) == 0 && (status & 0x80) == 0) {
-                PartyView *party = (PartyView *)gameGetSlotTable();
+                SaveSlotTableIV *party = gameGetSlotTable();
                 s32 stockIndex = -1;
-                for (s32 i = 0; i < party->count; ++i) {
+                for (s32 i = 0; i < party->stockCount; ++i) {
                     if (party->stock[i] == id - 109) {
                         stockIndex = i;
                         break;

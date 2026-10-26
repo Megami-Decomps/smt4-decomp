@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 /* The map departure screen's state (the part drawn here). */
@@ -15,12 +16,6 @@ struct MapDepartView {
     /* 0x494 */ s32 counter;            /* 20.12 fixed point */
 };
 
-/* A layout entry of a UI table: the offset of one element. */
-struct LayoutEntry {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-};
 }
 
 extern "C" {
@@ -30,7 +25,6 @@ void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 s32 vec2GetXInt(const void *vector);
 s32 vec2GetYInt(const void *vector);
-LayoutEntry *asdTMTexTableEntryAt(u32 table, u32 entry);
 void FUN_002c0940(u8 text[64], s32 value);
 f32 FUN_00168594(u8 text[64], u32 style, f32 scale);
 
@@ -48,7 +42,7 @@ u32 FUN_003581bc(void)
             s32 x = vec2GetXInt(depart->position);
             s32 y = vec2GetYInt(depart->position);
             depart = g_mapDepart;
-            LayoutEntry *panel = asdTMTexTableEntryAt(29, 202);
+            TextureTableEntryIV *panel = asdTMTexTableEntryAt(29, 202);
             FUN_001835b4(2, 29, 194, panel->x + x, panel->y + y, 101);
             FUN_001835b4(2, 29, 195, panel->x + x, panel->y + y, 106);
             FUN_001835b4(2, 29, 196, panel->x + x, panel->y + y, 111);
@@ -58,7 +52,7 @@ u32 FUN_003581bc(void)
             if (counter > 9999) {
                 counter = 9999;
             }
-            LayoutEntry *digits = asdTMTexTableEntryAt(29, 203);
+            TextureTableEntryIV *digits = asdTMTexTableEntryAt(29, 203);
             u8 text[64];
             FUN_002c0940(text, counter);
             f32 width = FUN_00168594(text, 3, 1.0f);

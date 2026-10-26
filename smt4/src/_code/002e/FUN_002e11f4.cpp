@@ -22,7 +22,7 @@ void FUN_002e11f4(AnimOwner *owner, s32 loop)
         AnimPlayPolicy policy;
 
         if (loop == 0) {
-            policy = FUN_00155650;
+            policy = mathClampFloat;
         } else {
             policy = nw_anim_PlayPolicy_Loop;
         }

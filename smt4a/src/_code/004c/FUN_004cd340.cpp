@@ -1,4 +1,4 @@
-/* NON_MATCHING: capped-weight/load scheduling and saved stat registers differ; compiler removes result narrowing. */
+/* NON_MATCHING: saved stat registers (retail keeps stat 0 in sl, the others in r6-r9) and the interleaved weight-sum loads differ. */
 #include "gamedata/UnitStats.h"
 
 extern "C" {
@@ -10,16 +10,11 @@ u32 FUN_004cd340(StatBlock *unit, u8 *weights)
 {
     s16 stats[5];
     clearWordAndByte(stats);
-    s16 strength = static_cast<s16>(unit->summary.stats[0]);
-    stats[0] = strength;
-    s16 dexterity = static_cast<s16>(unit->summary.stats[1]);
-    stats[1] = dexterity;
-    s16 magic = static_cast<s16>(unit->summary.stats[2]);
-    stats[2] = magic;
-    s16 agility = static_cast<s16>(unit->summary.stats[3]);
-    stats[3] = agility;
-    s16 luck = static_cast<s16>(unit->summary.stats[4]);
-    stats[4] = luck;
+    s16 strength = stats[0] = static_cast<s16>(unit->summary.stats[0]);
+    s16 dexterity = stats[1] = static_cast<s16>(unit->summary.stats[1]);
+    s16 magic = stats[2] = static_cast<s16>(unit->summary.stats[2]);
+    s16 agility = stats[3] = static_cast<s16>(unit->summary.stats[3]);
+    s16 luck = stats[4] = static_cast<s16>(unit->summary.stats[4]);
     if (strength >= 999) weights[0] = 0;
     if (dexterity >= 999) weights[1] = 0;
     if (magic >= 999) weights[2] = 0;

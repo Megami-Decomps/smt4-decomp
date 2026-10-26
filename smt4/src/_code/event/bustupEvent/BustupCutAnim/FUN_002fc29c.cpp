@@ -3,6 +3,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "event/bustupEvent/BustupCutAnim.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 struct BustupVec3 {
@@ -61,7 +62,6 @@ struct BustupCutGlobal {
 
 extern "C" {
 extern BustupCutGlobal g_bustupCutAnim;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void memClear(void *data, u32 size);
 void FUN_002c2044(void *camera, s32 flag);
 void FUN_002c159c(void *camera);

@@ -31,7 +31,6 @@ extern "C" {
 extern PopupState* g_popupState;
 extern s32 g_gameState;
 
-SaveSlot* saveSlotFindSelected(void);
 s32 gameFlagIsSet(s32 flag);
 s32 randRange(s32 range);
 s32 FUN_003e0024(void);
@@ -47,7 +46,7 @@ void FUN_00234880(void)
 {
     FUN_00152f44();
     if (g_popupState->state != 0) return;
-    SaveSlot* slot = saveSlotFindSelected();
+    SaveSlot* slot = reinterpret_cast<SaveSlot*>(saveSlotFindSelected());
     if (slot == NULL) return;
 
     bool special = false;

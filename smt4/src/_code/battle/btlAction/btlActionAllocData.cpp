@@ -1,9 +1,9 @@
 #include "battle/btlAction.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
 
 extern BtlActionGlobals g_btlAction;
 

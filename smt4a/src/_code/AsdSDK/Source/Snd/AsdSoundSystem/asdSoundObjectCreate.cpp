@@ -34,11 +34,11 @@ static inline void removeSoundObject(AsdSndStatusApoc *status, AsdSndObject *sou
             if (next != NULL) {
                 next->prev = previous;
             }
-        } else if (next != NULL) {
+        } else if (next == NULL) {
+            status->objects = NULL;
+        } else {
             next->prev = NULL;
             status->objects = next;
-        } else {
-            status->objects = NULL;
         }
     }
     --status->objectCount;

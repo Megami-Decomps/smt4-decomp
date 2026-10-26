@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 namespace {
 struct BattleTextureResourceRecord {
@@ -10,7 +11,6 @@ struct BattleTextureResourceRecord {
 };
 }
 extern "C" {
-void *asdMemAlloc(s32 pool, s32 alignment, s32 flags, u32 bytes, s32 clear);
 BattleTextureResourceRecord *dataTable25FindById(u32 id);
 s32 FUN_002c1d5c();
 u32 FUN_00294090(s32 textureId, s32 flags);

@@ -29,7 +29,7 @@ typedef struct TexBindDesc {
     /* 0x00 */ u32 words[0xF];
 } TexBindDesc;
 
-TexBindHandle *FUN_001b2ca4(u32 owner, u32 kind, u32 texture);
+TexBindHandle *packageFindFileRefByName(u32 owner, u32 kind, u32 texture);
 u32 asdTMTexTableGetNode(s32 table, u32 texture);
 __softfp void FUN_001ab8e0(TexBindDesc *desc, u32 source, u32 a, u32 b, f32 scale);
 void FUN_0019b770(TexBindItem *item, TexBindDesc *desc, u32 node, s32 flags);
@@ -48,7 +48,7 @@ __softfp void texBindBindTableNode(u32 owner, u32 unused, u32 source, s32 table,
     if (table == 0x19) {
         kind = 0x3B;
     }
-    TexBindHandle *handle = FUN_001b2ca4(owner, kind, texture);
+    TexBindHandle *handle = packageFindFileRefByName(owner, kind, texture);
     TexBindModel **model = handle != NULL ? handle->model : NULL;
     u32 node = asdTMTexTableGetNode(table, texture);
     TexBindDesc desc;

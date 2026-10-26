@@ -10,6 +10,13 @@ struct Image004190a8 {
     /* 0x1c */ s32 height;
 };
 
+static __inline void swapBytes(u8 *first, u8 *second)
+{
+    u8 temp = *first;
+    *first = *second;
+    *second = temp;
+}
+
 extern "C" {
 
 /* Swaps the first and third byte of every pixel of the image (red and blue). Returns 1. */
@@ -23,15 +30,14 @@ s32 FUN_004190a8(Image004190a8 *image)
         bytesPerPixel = 3;
     else if (image->format == 0x6758)
         bytesPerPixel = 2;
+    else if (image->format == 0x6756)
+        bytesPerPixel = 1;
     else
         bytesPerPixel = 1;
 
-    s32 total = image->width * image->height * bytesPerPixel;
+        s32 total = image->width * image->height * bytesPerPixel;
     for (s32 i = 0; i < total; i += bytesPerPixel) {
-        u8 first = image->pixels[i];
-        u8 third = image->pixels[i + 2];
-        image->pixels[i] = third;
-        image->pixels[i + 2] = first;
+        swapBytes(&image->pixels[i + 2], &image->pixels[i]);
     }
     return 1;
 }

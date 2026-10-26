@@ -1,6 +1,8 @@
 /* NON_MATCHING: adds a battle's rewards to the result tally (money, item drops by id, experience for the party and for each demon slot with the reduced share for non-participants); written from the decompilation, the float/int share arithmetic and slot lookups are approximated and not compared with retail */
 #include "common.h"
 #include "mapnavi/naviMain.h"
+#include "gamedata/Table04Record.h"
+#include "util/actorIsActive.h"
 
 #define REWARD_ITEM_SLOTS 6
 #define REWARD_DEMON_SLOTS 0x18
@@ -55,11 +57,9 @@ SlotTable *gameGetSlotTable(void);
 void gameGetPlayerData(void);
 DemonRecord *gameGetSlotRecord(void);
 s32 FUN_0022fd80(s32 experience, u32 flag);
-SkillRecord *dataTable41FindById(u32 id);
 s32 bitsAt60Test(DemonRecord *record, u32 bit);
 s32 dataTable9Type3GetClamped(u16 type, u32 flag);
 DemonRecord *FUN_003e503c(u32 slot);
-s32 actorIsActive(void);
 s32 partySlotMatchesSelected(u32 slot);
 
 /* Experience share of `base` for the slot's growth type, at least 1 when there is any base. */
@@ -114,7 +114,7 @@ void FUN_0031e6f4(BattleRewards *rewards)
         for (s32 s = 0; s < 8; s++) {
             u32 skill = current->skills[s];
             if (skill != 0) {
-                SkillRecord *skillRecord = dataTable41FindById(skill);
+                SkillRecord *skillRecord = reinterpret_cast<SkillRecord *>(dataTable41FindById(skill));
                 if (skillRecord != NULL && skillRecord->bonus != 0)
                     skillScale = (f32)skillRecord->bonus * REWARD_SKILL_SCALE * skillScale;
             }
@@ -131,7 +131,7 @@ void FUN_0031e6f4(BattleRewards *rewards)
     for (u32 slot = 0; (s32)slot < REWARD_PARTY_SLOTS; slot++) {
         u32 index = slot & 0xFFFF;
         DemonRecord *partyRecord = FUN_003e503c(index);
-        if (actorIsActive() == 0)
+        if (actorIsActive(partyRecord) == 0)
             continue;
         s32 selected = partySlotMatchesSelected(index);
         u32 share = (u32)(experience * dataTable9Type3GetClamped(partyRecord->growthType, 0)) / 100;

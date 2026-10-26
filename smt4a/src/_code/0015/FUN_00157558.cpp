@@ -1,5 +1,5 @@
 #include "common.h"
-#include "Model/MoriModelShadowMap.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 

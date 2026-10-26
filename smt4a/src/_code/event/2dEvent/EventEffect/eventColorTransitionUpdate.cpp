@@ -15,7 +15,7 @@ struct EventColorTransition {
 struct TextureSlot { u32 table, index; u8 unk08[8]; };
 extern "C" {
 extern TextureSlot DAT_0057f43c[4];
-void FUN_0038a538(u32);
+void eventEffectDestroySlot(u32);
 
 s32 eventColorTransitionUpdate(u32 job)
 {
@@ -67,7 +67,7 @@ s32 eventColorTransitionUpdate(u32 job)
             effect->green = 0.0f;
             effect->blue = 1.0f;
             effect->alpha = 1.0f;
-            FUN_0038a538(effect->event);
+            eventEffectDestroySlot(effect->event);
         }
         if (effect->pulseEnabled && effect->frame > 3 && effect->frame <= 5)
             effect->pulse = (f32)(effect->frame - 3) * 0.5f;

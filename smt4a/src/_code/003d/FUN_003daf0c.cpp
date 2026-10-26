@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
 #include "util/CalleeContracts.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -54,7 +55,6 @@ extern unsigned int asdTMTexTableEntryAt(unsigned int, unsigned int);
 extern int messageMainIsIdle(void);
 /* Supplied declaration required: campShowSelectedEntryHelp. */
 extern int resourceRunOperationIfUnblocked(int);
-extern unsigned int FUN_002a4878(int);
 extern int FUN_002a4894(int);
 extern int messageGetChoiceResult(void);
 /* Supplied declaration required: campTouchRegionsRemoveGroup. */
@@ -111,7 +111,7 @@ void FUN_003daf0c(int param_1)
     FUN_003450d4(temp_v7,temp_v2,temp_v5 + 0x1b3e,(int)*(short *)(temp_v5 + 0x1b34),
                  (int)*(short *)(temp_v5 + 0x1b36),(int)*(short *)(temp_v5 + 0x1b38),temp_v8,0,1);
     if ((temp_v6 != 0) || (temp_v6 = temp_v7, FUN_00228b04(temp_v7,1), temp_v6 != 0)) {
-      temp_v2 = FUN_002a4878(temp_v5 + 0x40);
+      temp_v2 = FUN_002a4878((void *)(temp_v5 + 0x40));
       FUN_003da8f4((int)*(char *)(temp_v5 + 0xa4),temp_v2);
       campShowSelectedEntryHelp();
       return;

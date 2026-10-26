@@ -2,12 +2,12 @@
 /* NON_MATCHING: digit/coordinate saved registers and formatted-text stack argument scheduling differ. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern RenderCtxA* g_renderCtx;
 void efctSetSpeed(f32 speed);
 void drawSetColorFromRGBA8(u32 color);
-SpriteInfo* asdTMTexTableEntryAt(u32 table, u32 id);
 void FUN_00180310(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,
     const char* format, ...);
 
@@ -17,7 +17,7 @@ void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, u32 number,
     s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
     efctSetSpeed(speed);
     drawSetColorFromRGBA8(color);
-    SpriteInfo* sprite = asdTMTexTableEntryAt(0x31, iconLayout);
+    TextureTableEntryIV* sprite = asdTMTexTableEntryAt(0x31, iconLayout);
     s32 iconX = sprite->x + (x + parallax);
     s32 iconY = sprite->y + y;
     if (alternate) {

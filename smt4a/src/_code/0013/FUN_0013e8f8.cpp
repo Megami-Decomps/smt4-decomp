@@ -1,6 +1,7 @@
 /* NON_MATCHING: the flag tests now match; retail clears the g_frameTex bytes through a pooled 0x1414 register offset, this source gets add/add pairs. */
 #include "common.h"
 #include "shard/JobWork.h"
+#include "camp/RenderCtx.h"
 
 /* Frame texture fade state (Apocalypse layout). */
 struct FrameTexFade {
@@ -25,9 +26,8 @@ struct FrameTexFade {
 
 extern "C" {
 extern FrameTexFade *g_frameTex;
-extern u32 g_renderCtx;
+extern RenderCtxA *g_renderCtx;
 
-void FUN_00157558(u32 renderCtx);
 void FUN_0014b01c(s32 value);
 
 /* Job update: advances the frame texture's fade in or out, clearing it once a fade-out ends. */

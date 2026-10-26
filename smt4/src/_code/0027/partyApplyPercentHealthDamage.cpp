@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 struct DamagePlayer {
     u8 unk00[0x1c];
@@ -19,15 +20,9 @@ struct DamageUnit {
     u8 unk2c[0x18];
     u16 flags; // 0x44
 };
-struct DamageSlots {
-    u8 unk0000[0x90f0];
-    s8 active[24]; // 0x90f0
-    s8 reserve[3]; // 0x9108
-};
 extern "C" {
 DamagePlayer *gameGetPlayerData();
 s32 gameCountUnits();
-DamageSlots *gameGetSlotTable();
 DamageUnit *gameGetUnitRecord(s32 slot);
 DamageUnit *gameGetSupportUnitData();
 u16 FUN_002903f0();
@@ -70,10 +65,10 @@ extern "C" void partyApplyPercentHealthDamage(s32 group, s32 percentage)
     const s8 *slots = NULL;
     if (group == 0 || group == 1) {
         count = gameCountUnits();
-        slots = gameGetSlotTable()->active;
+        slots = gameGetSlotTable()->stock;
     } else if (group == 2 || group == 3) {
         count = 3;
-        slots = gameGetSlotTable()->reserve;
+        slots = gameGetSlotTable()->active;
     }
     if (slots) {
         for (s32 i = 0; i < count; ++i) {

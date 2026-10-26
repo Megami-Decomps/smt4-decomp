@@ -7,12 +7,7 @@
 #include "util/Vec2Fixed.h"
 #include "gfx/StereoParallax.h"
 #include "shard/packNibblesAndByte.h"
-
-/* The title scene (its second state stack lives at 0x12AC). */
-struct TitleScene {
-    /* 0x0000 */ u8 unk0000[0x12AC];
-    /* 0x12AC */ RenderStateStack secondStack;
-};
+#include "camp/RenderCtx.h"
 
 /* The run window (only the fields read here). */
 struct RunWin {
@@ -36,9 +31,8 @@ struct LayoutPoint {
 
 extern "C" {
 extern RunWin *g_runWin;
-extern TitleScene *g_titleScene;
+extern RenderCtx *g_titleScene;
 
-void renderCtxSelectStereoLayout(TitleScene *scene);
 LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_002bed3c(void);
 s32 vec2GetYInt(void *vec);
@@ -56,12 +50,12 @@ u8 FUN_0018f278(void)
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         FUN_002bf380(2, 14, 19, x, y, 110);
-        TitleScene *scene = g_titleScene;
+        RenderCtx *scene = g_titleScene;
         s32 state = packNibblesAndByte(6, 1, 0);
-        renderStackPushCountedDirect(&scene->secondStack, state);
+        renderStackPushCountedDirect(&scene->stackB, state);
         FUN_002bf288(2, 14, 0x150, x, 0, 111);
         FUN_002bf288(2, 14, 0x151, x, 0, 111);
-        renderStackPop(&g_titleScene->secondStack);
+        renderStackPop(&g_titleScene->stackB);
         LayoutPoint *labelPoint = asdTMTexTableEntryAt(14, 0x153);
         textDrawString(4, 0xF49800FF, reinterpret_cast<const char *>(win->label), (f32)(labelPoint->x + (x - 14)), (f32)(labelPoint->y + y), 0.56640625f, 0.0f,
                      win->alpha);

@@ -24,7 +24,7 @@ typedef struct PlayLogWorkA {
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-void *asdTMTexLoadMainHeap(u32 table, u32 index);
+struct TextureNode *asdTMTexLoadMainHeap(u32 table, u32 index);
 #ifdef __cplusplus
 }
 #endif

@@ -1,23 +1,27 @@
-/* NON_MATCHING: bsearch argument setup scheduling: retail loads the comparator literal after the entries pointer and sets the stride last; ours loads the literal first. */
 #include "addon/aocMain.h"
 #include "addon/LookupRecord.h"
 #include "gamedata/DataTable.h"
 
 extern "C" {
-extern AocSystemA *g_aocSystem;
+extern AocSystem *g_aocSystem;
 s32 lookupRecordCompareIds(const void *first, const void *second);
 void *libc_bsearch(const void *key, u32 count, const void *entries, u32 stride,
                    s32 (*compare)(const void *, const void *));
 
+static __inline AocLookupRecord *aocLookupSearch(const AocLookupRecord *key, u32 count, AocLookupRecord *entries,
+                                                 s32 (*compare)(const void *, const void *))
+{
+    return static_cast<AocLookupRecord *>(libc_bsearch(key, count, entries, sizeof(AocLookupRecord), compare));
+}
+
 // Prefer add-on table data, falling back to the base table's first entry for invalid IDs.
-Table01Record *FUN_00180118(u16 id)
+Table01Record *FUN_00180118(u32 id)
 {
     if (g_aocSystem->lookup.enabled) {
         AocLookupRecord key;
         key.id = id;
-        AocLookupRecord *entry = static_cast<AocLookupRecord *>(
-            libc_bsearch(&key, g_aocSystem->lookup.count, g_aocSystem->lookup.entries,
-                         sizeof(AocLookupRecord), lookupRecordCompareIds));
+        AocLookupRecord *entry = aocLookupSearch(&key, g_aocSystem->lookup.count, g_aocSystem->lookup.entries,
+                                                    lookupRecordCompareIds);
         if (entry != NULL)
             return &entry->record;
     }

@@ -7,7 +7,6 @@
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 u32 FUN_001692ac(u32 state, u32 flags);
-void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 u32 asdGxPresetsGetByKind(u32 target);
 u32 asdGxPresetsGetHeightByKind(u32 target);
 void FUN_0014e314(u32 topLeft, u32 topRight, u32 bottomLeft, u32 bottomRight,
@@ -26,7 +25,7 @@ u32 uiFadeQuadDrawJob(u32 job)
         }
         color = (color & 0xffffff00) | alpha;
         renderCtxPushA(context, FUN_001692ac(1, 0));
-        FUN_0016c4b8(g_renderCtx, 0);
+        renderCtxSelectTexture(g_renderCtx, 0);
         f32 height = static_cast<f32>(asdGxPresetsGetByKind(g_renderCtx->unk052C));
         f32 width = static_cast<f32>(asdGxPresetsGetHeightByKind(g_renderCtx->unk052C));
         FUN_0014e314(color, color, color, color, 0.0f, 0.0f, width, height, 0.0f);

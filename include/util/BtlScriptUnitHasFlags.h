@@ -7,8 +7,10 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-/* Canonical declaration (matches the definition). */
-s32 btlScriptUnitHasFlags(void);
+struct BtlMainStateA;
+/* Whether the current script unit has flag 0x80 or 0x1000. The callers pass the battle state, which the
+ * function itself does not read. */
+s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
 #ifdef __cplusplus
 }
 #endif

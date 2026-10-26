@@ -4,10 +4,9 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "shard/W5_W5Match7_BattleMask.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
-void scrSetResult(u32 result);
 
 u32 FUN_003b892c(void)
 {

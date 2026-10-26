@@ -1,5 +1,6 @@
 /* NON_MATCHING: near: same logic, 153 rows against 151; retail interleaves the four total sums with the slot lookup (ldm of three counters), keeps the old follow-up on the stack and the table copy at sp+24, so scheduling/frame size differ. */
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 #define CARD_PLAYER_COUNT 24
 #define CARD_SLOT_COUNT 4
@@ -54,8 +55,7 @@ extern "C" {
 extern const s32 DAT_00530e50[CARD_PLAYER_COUNT];
 
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
-s32 FUN_00184964(s32 first, s32 second);
-void pairSetFirstResetSecond(void *pair);
+s32 randBetween(s32 first, s32 second);
 
 /* Sum of one counter over every slot. */
 static __inline s32 cardCounterTotal(const CardTable *table, s32 counter)
@@ -98,7 +98,7 @@ void FUN_00169b30(CardOwner *owner, s32 player)
     if (slot->counter[1] < table->slotLimit1 && total1 < table->totalLimit1) {
         table->pick[player] = 1;
         slot->counter[1]++;
-        pickValue = FUN_00184964(0, 3) + 0x7ED;
+        pickValue = randBetween(0, 3) + 0x7ED;
     } else if (slot->counter[2] < table->slotLimit2 && total2 < table->totalLimit2) {
         table->pick[player] = 2;
         pickValue = 0x7F1;
@@ -110,7 +110,7 @@ void FUN_00169b30(CardOwner *owner, s32 player)
     }
     slot->counter[oldPick]--;
     table->pickValue[player] = pickValue;
-    pairSetFirstResetSecond((u8 *)owner + player * 0x8C + 0x54);
+    pairSetFirstResetSecond((u8 *)owner + player * 0x8C + 0x54, pickValue);
     record = &table->record[player];
     if (slot->counter[3] < 1 && total3 < 2) {
         followUp = 0;
@@ -121,14 +121,14 @@ void FUN_00169b30(CardOwner *owner, s32 player)
         followUp = 2;
         table->followUp[player] = followUp;
     } else {
-        record->value = table->pick[player] == 2 ? table->value2Held : FUN_00184964(table->randomLow, table->randomHigh);
+        record->value = table->pick[player] == 2 ? table->value2Held : randBetween(table->randomLow, table->randomHigh);
         followUp = 1;
         table->followUp[player] = followUp;
     }
     slot->counter[followUp + 3]++;
     slot->counter[oldFollowUp + 3]--;
-    record->first = FUN_00184964(table->firstArgB, table->firstArgA);
-    record->second = FUN_00184964(table->secondArgB, table->secondArgA);
+    record->first = randBetween(table->firstArgB, table->firstArgA);
+    record->second = randBetween(table->secondArgB, table->secondArgA);
     record->progress = 0.0f;
     record->reserved = 0;
 }

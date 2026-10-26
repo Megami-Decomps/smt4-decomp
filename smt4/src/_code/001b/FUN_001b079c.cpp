@@ -3,6 +3,7 @@
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "status/StatusCamera.h"
 #include "gamedata/FlagBitTests.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 /* The filter menu's per-category id lists, each indexed by entry (entry 0 is "don't specify"). */
 struct FilterMenu {
@@ -38,7 +39,6 @@ struct StockUnit {
 };
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(void);
 StockUnit *gameGetUnitRecord(s32 slot);
 void uiFormatIndexedDisplayName(FilterMenu *menu, s32 kind, s32 index, char *label);
 

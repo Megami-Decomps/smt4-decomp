@@ -2,13 +2,13 @@
 #include "map/lmapMain.h"
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
+#include "shard/dataTableGetRecord23.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
 extern GameState g_gameState;
 u32 FUN_0027d7b0(s32 map, u32 destination, u32 flags);
-const SceneSpawnRecord *dataTableGetRecord23(u32 index);
 void mapDepartSetTarget(s32 group, s32 map, s32 target);
 void mapCollisionRelease(void);
 void FUN_0027b2b4(s32 map, u32 destination, s32 group, s32 target);
@@ -22,7 +22,7 @@ void FUN_002d1b94(u32 destination, u32 flags)
 {
     LmapMainState *state = g_lmapMainState;
     u32 index = FUN_0027d7b0(state->unk40, destination, flags);
-    const SceneSpawnRecord *spawn = dataTableGetRecord23(index);
+    const SceneSpawnRecord *spawn = reinterpret_cast<const SceneSpawnRecord *>(dataTableGetRecord23(index));
     const MapDepartTargetRecord *target = reinterpret_cast<const MapDepartTargetRecord *>(spawn);
     mapDepartSetTarget(target->group, target->map, target->target);
     state->unk48 = destination;

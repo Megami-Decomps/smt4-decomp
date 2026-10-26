@@ -1,12 +1,11 @@
 /* NON_MATCHING: retail creates extra color-argument copies and a 188-byte frame versus 76 bytes here; the original color value/temporary ABI is unrecovered. */
-#include "shard/S1ListPanel.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
 #include "gfx/SpriteVertexColors.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 
 extern "C" {
-SpriteInfo *asdTMTexTableEntryAt(u32, s32);
 f32 jobGetScalarValue();
 void efctSetSpeed(f32);
 void FUN_00183bb0();
@@ -18,19 +17,19 @@ void FUN_00185dd4(u32, u32, s32, u32, u32, u32, u32, u32);
 
 void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer, s32 alpha, s32 useColors)
 {
-    SpriteInfo *sprite = asdTMTexTableEntryAt(0x13, spriteId);
-    ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x13, spriteId);
+    ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
     u32 width, height;
     if (extension != NULL && extension->mode == 1) {
         width = extension->width;
         height = extension->height;
     } else {
-        width = sprite->bounds.width & 0x7fff;
-        height = sprite->bounds.height & 0x7fff;
+        width = sprite->width & 0x7fff;
+        height = sprite->height & 0x7fff;
     }
     f32 previousAlpha = jobGetScalarValue();
     sprite = asdTMTexTableEntryAt(0x13, spriteId);
-    extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
+    extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
     if (extension != NULL && extension->mode == 1) {
         FUN_00185dd4(2, 0x13, spriteId, x, y, width, height, layer);
         return;
@@ -38,10 +37,10 @@ void uiDrawSpriteWithOptionalVertexColors(s32 spriteId, s32 x, s32 y, u32 layer,
     if (useColors && extension != NULL) {
         QuadVector colors[4];
         __aeabi_vec_ctor_nocookie_nodtor(colors, vectorSetAllOne, sizeof(QuadVector), 4);
-        colors[0] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[0];
-        colors[1] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[1];
-        colors[2] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[2];
-        colors[3] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[3];
+        colors[0] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[0];
+        colors[1] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[1];
+        colors[2] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[2];
+        colors[3] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[3];
         quadSetOrderedVectors(&colors[0], &colors[1], &colors[2], &colors[3], 0, 0);
     }
     efctSetSpeed((f32)alpha * (1.0f / 255.0f));

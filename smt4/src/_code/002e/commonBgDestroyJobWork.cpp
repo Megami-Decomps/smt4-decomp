@@ -1,4 +1,5 @@
 #include "shard/Sys43dc20.h"
+#include "shard/JobWork.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
@@ -7,17 +8,15 @@ int asdMemFreeSlot(u32 value);
 int asdTMTexTableReleaseNode(int table, int index);
 int asdMemFree(void *ptr);
 
-typedef struct JobWork {
+struct CommonBgJobWork {
     /* 0x00 */ u8 unk00[0xC];
     /* 0x0C */ u32 unk0C;
     /* 0x10 */ u32 unk10;
-} JobWork;
-
-extern u32 jobGetWork(u32 handle);
+};
 
 void commonBgDestroyJobWork(u32 handle)
 {
-    JobWork *work = reinterpret_cast<JobWork *>(jobGetWork(handle));
+    CommonBgJobWork *work = reinterpret_cast<CommonBgJobWork *>(jobGetWork(handle));
 
     asdMemFreeSlot(work->unk0C);
     asdMemFreeSlot(work->unk10);

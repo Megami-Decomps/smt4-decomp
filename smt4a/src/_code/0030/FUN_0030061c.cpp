@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail hoists the -1 'no handler' length into a callee-saved register (mvnne r7) before the loop; built re-materialises it (mvneq). */
 #include "shard/Resource.h"
 
 struct TimelineNode {
@@ -18,7 +17,7 @@ struct TimelineOwner {
 extern "C" {
 
 // Duration reported by the resource type's handler, -1 when it has none.
-static __inline s32 resourceDuration(Resource *resource)
+static s32 resourceDuration(Resource *resource)
 {
     s32 (*duration)(void *) = g_handlerTable[resource->type].timeline.duration;
     if (duration == NULL) {

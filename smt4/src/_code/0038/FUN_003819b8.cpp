@@ -1,6 +1,7 @@
 /* NON_MATCHING: retry-loop branch layout and final mask/result register allocation differ. */
 #include "common.h"
 #include <stddef.h>
+#include "util/Random.h"
 
 struct RandomChoiceStateView {
     u8 unk00[8];
@@ -11,7 +12,6 @@ struct RandomChoiceStateView {
 typedef char RandomChoicePreviousOffset[offsetof(RandomChoiceStateView, previousChoice) == 0xa ? 1 : -1];
 
 extern "C" {
-s32 randNextInRange(u32);
 
 /* Exhaust all four choices before restarting, without repeating the previous choice. */
 u32 FUN_003819b8(RandomChoiceStateView *state)

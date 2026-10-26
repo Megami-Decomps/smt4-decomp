@@ -2,18 +2,18 @@
 #include "gfx/CameraVectorScratch.h"
 #include "map/mapDepart.h"
 #include "shard/W5_W5Match2_PlainData.h"
+#include "util/FUN_002c501c.h"
 
 extern "C" {
 extern CameraVectorScratch DAT_004ea81c;
 extern Vector4 DAT_00472550;
-void *FUN_002c501c(void);
 void FUN_002630e0(f32 *screen, s32 display, void *camera, const MapVector *world);
 
 // Projects the camera scratch direction to screen space and stores it back (w cleared),
 // keeping the previous direction in DAT_00472550.
 void FUN_00207ee8(void)
 {
-    void *camera = FUN_002c501c();
+    void *camera = reinterpret_cast<void *>(FUN_002c501c());
     Vector4 screen;
 
     DAT_00472550 = DAT_004ea81c.direction;

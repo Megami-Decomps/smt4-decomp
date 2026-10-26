@@ -1,8 +1,8 @@
 #include "camp/ScriptPanelResources.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);
-void asdTMTexLoadMainHeap(u32 table, u32 node);
 void *asdLoadFileSyncDefault(const char *path);
 void asdLoadFileAsyncSimple(const char *path, void **output, s32 mode);
 ScriptProcess *FUN_00275bc8(void *script, void *messages);

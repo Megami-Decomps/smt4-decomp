@@ -1,5 +1,6 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char g_asdProcessSourcePath[];
@@ -7,7 +8,6 @@ extern AsdProcessState g_asdProcess;
 extern u8 g_asdProcessGroupEnabled[0x200]; /* group enable flags */
 
 void __aeabi_memset4(void *buf, int size, int value);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 
 /* Sets up the scheduler for `groupCount` process groups, all enabled. */
 void asdProcessInit(s32 groupCount)

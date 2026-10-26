@@ -1,6 +1,7 @@
 /* NON_MATCHING: the sprite grid loops are strength-reduced differently from retail (226 vs 234 rows: retail keeps separate row base registers per grid); the reset sequence is the same. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "common.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ void FUN_0021c45c(void *state, BtlOwner *owner);
 void paramsClearPacket(void *packet);
 
 void FUN_0014e188(void *sprite, u32 group, u32 id, void *owner, u32 flag, f32 scale);
-void uiSpriteSelectAnim(void *sprite, u32 anim);
 void uiSpriteSetImageKeyframe(void *sprite, u32 frame, u32 flag);
 void *asdOperatorNew(u32 size, BtlOwner *allocator);
 void *FUN_003f9ab0(void *object);

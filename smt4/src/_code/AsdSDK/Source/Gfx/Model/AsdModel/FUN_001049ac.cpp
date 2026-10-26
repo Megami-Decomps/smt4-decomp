@@ -1,5 +1,6 @@
 /* NON_MATCHING: loads the shadow model and shader (graphics files), builds the shadow scene object and its three helper objects; written from the decompilation, the nw::gfx builder/RTTI inlining is approximated and the helper objects' vtables (unnamed classes) and the allocation trace calls (source path AsdModel.cpp) are not reproduced */
 #include "common.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
 
 struct NwTypeInfo {
     NwTypeInfo *parent;
@@ -79,7 +80,6 @@ extern ShadowHelperC *DAT_00472958;
 
 void FUN_0010bb84(void);
 u32 asdMemoryGetDefaultAllocator(void);
-u32 asdMemoryGetAllocatorA(void);
 s32 fileLoadSync(const char *path, u32 size, u32 flags);
 u32 libc_strlen(const char *text);
 s32 nw_ut_ResDicPatricia_Get(s32 *dictionary, const char *name, u32 length);
@@ -121,7 +121,7 @@ void FUN_001049ac(void)
         if (entry != 0)
             modelResource = relativeTarget(reinterpret_cast<s32 *>(entry + 0xC));
     }
-    nw_gfx_res_ResModel_Setup(&modelResource, asdMemoryGetAllocatorA(), DAT_00464b5c);
+    nw_gfx_res_ResModel_Setup(&modelResource, (u32)asdMemoryGetAllocatorA(), DAT_00464b5c);
 
     NwSceneBuilderArgs args;
     args.model = modelResource;
@@ -134,7 +134,7 @@ void FUN_001049ac(void)
     args.unk1C = 4;
     args.unk20 = 0;
     args.unk24 = 1;
-    NwObject *scene = nwObjectCast(nw_gfx_SceneBuilder_CreateObject(&args, asdMemoryGetDefaultAllocator(), asdMemoryGetAllocatorA()), DAT_0044e858);
+    NwObject *scene = nwObjectCast(nw_gfx_SceneBuilder_CreateObject(&args, asdMemoryGetDefaultAllocator(), (u32)asdMemoryGetAllocatorA()), DAT_0044e858);
     DAT_00464b44 = nwObjectCast(scene, DAT_00472180);
 
     s32 shaderFile = fileLoadSync("nwgfx_ShadowShader.bcsdr", 0, 1);

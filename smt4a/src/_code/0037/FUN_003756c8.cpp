@@ -1,11 +1,11 @@
 /* NON_MATCHING: all sound-selection branches agree; initial battle flags/masks load ordering and flag-id register differ. */
 #include "battle/btlMain.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
 void sysPlaySe(u32 id);
 s32 gameFlagIsSet(u32 id);
-s32 gameDataFlagTestBit(u32 id);
 
 void FUN_003756c8(s32 alternate)
 {
@@ -18,7 +18,7 @@ void FUN_003756c8(s32 alternate)
             sysPlaySe(0xe6);
             return;
         }
-        if (gameDataFlagTestBit(0x10)) {
+        if ((s32)gameDataFlagTestBit(0x10)) {
             sysPlaySe(0xb5);
             return;
         }
@@ -29,8 +29,8 @@ void FUN_003756c8(s32 alternate)
         sysPlaySe(0xe7);
         return;
     }
-    if (gameDataFlagTestBit(0x10)) {
-        if (gameDataFlagTestBit(0x7f)) {
+    if ((s32)gameDataFlagTestBit(0x10)) {
+        if ((s32)gameDataFlagTestBit(0x7f)) {
             if (alternate) {
                 sysPlaySe(0x36);
                 return;
@@ -45,7 +45,7 @@ void FUN_003756c8(s32 alternate)
         sysPlaySe(0xae);
         return;
     }
-    if (gameDataFlagTestBit(0x7f)) {
+    if ((s32)gameDataFlagTestBit(0x7f)) {
         if (alternate) {
             sysPlaySe(0x38);
             return;

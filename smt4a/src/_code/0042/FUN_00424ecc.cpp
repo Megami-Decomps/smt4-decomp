@@ -15,7 +15,7 @@ extern "C" {
 s32 readInnerWord6(u32 file, u32 *value);
 void FUN_00514018(u32 file, u32 index, u32 *exists);
 u32 FUN_00514088(u32 file, u32 index, u32 **data, u32 *size, u8 *unknown, u8 *key);
-void FUN_00514284(u32 file, u32 index);
+void resourceQueryLoadStatus(u32 file, u32 index);
 void rt_memcpy(void *destination, const void *source, u32 bytes);
 
 /* Loads the data of every kind-2 record the table has not read yet: copies its header, allocates the
@@ -65,7 +65,7 @@ void FUN_00424ecc(RecordLoader *table)
                 return;
             }
             rt_memcpy(table->payloads[i].body, data, size);
-            FUN_00514284(*table->file, table->kind2Source[i]);
+            resourceQueryLoadStatus(*table->file, table->kind2Source[i]);
             for (s32 j = 0; j < table->kind0Count; j++) {
                 RecordKind0 *kind0 = &table->kind0[j];
                 if (table->kind0Source[j] == table->kind2[i].word && kind0 != NULL && kind0->words[1] < 2 &&

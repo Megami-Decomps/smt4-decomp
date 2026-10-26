@@ -2,6 +2,7 @@
 #include "common.h"
 #include "ui/MessageMain.h"
 #include "shard/FUN_003e4e4c.h"
+#include "util/FUN_00187168.h"
 
 struct SaveSlotView {
     u8 unk00[0x12c];
@@ -12,7 +13,6 @@ extern "C" {
 u32 scrGetArg(u32 index);
 SaveSlotView* saveSlotFindSelected(void);
 SaveSlotView* FUN_003e4d68(u16 index);
-s32 FUN_00187168(SaveSlotView* slot);
 
 static __inline s32 findEligibleAlternate(u32 requestedValue)
 {

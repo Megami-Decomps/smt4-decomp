@@ -4,6 +4,7 @@
 #include "shard/Shard0032.h"
 #include "gamedata/DevilRecordA.h"
 #include "gamedata/SaveSlotTable.h"
+#include "addon/LookupRecord.h"
 
 struct PartyComparisonTable : PartyStatusSlots {
     s8 count;
@@ -27,7 +28,6 @@ static inline UnitRecord *findComparisonPartyUnit(u32 id)
 }
 
 extern "C" {
-Table01Record *FUN_00180118(u16);
 void FUN_0035ad50(u32, UnitRecord *);
 s32 recordGetScaledMaximum(const UnitRecord *);
 

@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_00348e88(u16 flag);
-SavedCounterRange *FUN_002b4748(u32 flag);
+SavedCounterRange *itemCategoryFindByItemId(u32 flag);
 SavedCounterBanks *FUN_00282be4();
 u32 recordPackedValue(u32 flag);
 }
@@ -14,7 +14,7 @@ extern "C" void FUN_00295a18(u32 flag, u32 amount)
     if (amount == 0)
         return;
     FUN_00348e88((u16)flag);
-    SavedCounterRange *range = FUN_002b4748(flag);
+    SavedCounterRange *range = itemCategoryFindByItemId(flag);
     if (range == NULL)
         return;
     u8 bankIndex = range->bank;

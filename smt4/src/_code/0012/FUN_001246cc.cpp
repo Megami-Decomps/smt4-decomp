@@ -20,21 +20,21 @@ AllocationHeader *FUN_001246cc(void *payload)
              (header->size - header->alignment)) + sizeof(AllocationHeader);
     }
     AllocationLink *link = &header->link;
-    if (link->previous) {
-        if (!link->next) {
-            DAT_00465120.usage->tail = link->previous;
-            link->previous->next = NULL;
-        } else {
-            link->previous->next = link->next;
-            link->next->previous = link->previous;
-        }
-    } else {
+    if (!(link->previous)) {
         if (link->next) {
             DAT_00465120.usage->head = link->next;
             link->next->previous = NULL;
         } else {
             DAT_00465120.usage->tail = NULL;
             DAT_00465120.usage->head = NULL;
+        }
+    } else {
+        if (!link->next) {
+            DAT_00465120.usage->tail = link->previous;
+            link->previous->next = NULL;
+        } else {
+            link->previous->next = link->next;
+            link->next->previous = link->previous;
         }
     }
     if (DAT_00465120.usage->cursor == link) {

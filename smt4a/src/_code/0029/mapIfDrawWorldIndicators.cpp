@@ -206,7 +206,7 @@ joined_r0x0029d98c:
         iVar11 = (int)*(short *)(iVar4 + 0x1e8);
         switch(*(short *)(iVar4 + 0x1e8)) {
         case 1:
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x74));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x74));
           iVar11 = ((int)*(short *)(iVar4 + 0x204) / 2) % 4;
           if (iVar11 == 0) {
             in_d9 = CONCAT44(fVar24,fVar24);
@@ -231,7 +231,7 @@ joined_r0x0029d98c:
           FUN_0019e3d0(uVar26,uVar26,uVar26,uVar26);
           break;
         case 2:
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x80));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x80));
           iVar11 = *(int *)(iVar4 + 0x260);
           if (iVar11 != 0) {
             fStack_508 = fVar23;
@@ -248,7 +248,7 @@ joined_r0x0029d98c:
             fStack_4fc = fVar23;
             FUN_0019e3d0(iVar11,iVar11);
           }
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(iVar4 + 0x360));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(iVar4 + 0x360));
           uVar26 = *(unsigned int *)(iVar4 + 0x25c);
           in_s0 = *(float *)(iVar4 + 0x26c);
           in_s1 = *(float *)(iVar4 + 0x270);
@@ -260,7 +260,7 @@ joined_r0x0029d98c:
           FUN_0019e3d0(uVar26,uVar26,uVar26,uVar26);
           break;
         case 3:
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x50));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x50));
           uVar26 = *(unsigned int *)(iVar4 + 0x25c);
           in_s0 = *(float *)(iVar4 + 0x26c);
           in_s1 = *(float *)(iVar4 + 0x270);
@@ -274,7 +274,7 @@ joined_r0x0029d98c:
         case 4:
         case 0xd:
 LAB_0029ddd8:
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(iVar4 + 0x360));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(iVar4 + 0x360));
           uVar26 = *(unsigned int *)(iVar4 + 0x25c);
           in_s0 = *(float *)(iVar4 + 0x26c);
           in_s1 = *(float *)(iVar4 + 0x270);
@@ -298,7 +298,7 @@ LAB_0029ddd8:
           if ((bVar20 && iVar11 != 0x3c23d70a) &&
               iVar15 < 0 == (bVar20 && SBORROW4(iVar11,0x3c23d70a))) {
 LAB_0029de44:
-            FUN_0016c4b8(DAT_0059dbb4);
+            renderCtxSelectTexture(DAT_0059dbb4);
             fStack_508 = *(float *)(iVar4 + 0x35c);
             fStack_504 = fVar24;
             fStack_500 = fStack_508;
@@ -306,7 +306,7 @@ LAB_0029de44:
             FUN_0019e3d0(0xffffffff,0xffffffff,0xffffffff);
           }
 LAB_0029de90:
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(iVar4 + 0x364));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(iVar4 + 0x364));
           uVar26 = *(unsigned int *)(iVar4 + 0x25c);
           in_s0 = *(float *)(iVar4 + 0x26c);
           in_s1 = *(float *)(iVar4 + 0x270);
@@ -323,7 +323,7 @@ LAB_0029de90:
         case 0xc:
           if (DAT_005f185a != 0) {
             if (*(int *)(iVar4 + 0x368) != 0) {
-              FUN_0016c4b8(DAT_0059dbb4);
+              renderCtxSelectTexture(DAT_0059dbb4);
               fStack_508 = fVar23;
               fStack_504 = fVar24;
               fStack_500 = fVar23;
@@ -351,7 +351,7 @@ joined_r0x0029e2d8:
             (**(code **)(iVar15 + 0x12d4))();
             *(unsigned char *)(iVar15 + 0x12d0) = 0;
           }
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0xa4));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0xa4));
           uVar26 = *(unsigned int *)(iVar4 + 0x25c);
           fStack_508 = fVar23;
           fStack_504 = fVar24;
@@ -383,7 +383,7 @@ joined_r0x0029e2d8:
                 (**(code **)(iVar15 + 0x12d4))();
                 *(unsigned char *)(iVar15 + 0x12d0) = 0;
               }
-              FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0xa4));
+              renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0xa4));
               uVar26 = *(unsigned int *)(iVar4 + 0x25c);
               in_s0 = *(float *)(iVar4 + 0x32c);
               in_s1 = *(float *)(iVar4 + 0x330);
@@ -433,7 +433,7 @@ joined_r0x0029e2d8:
                 (**(code **)(iVar15 + 0x12d4))();
                 *(unsigned char *)(iVar15 + 0x12d0) = 0;
               }
-              FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0xa4));
+              renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0xa4));
               uVar26 = *(unsigned int *)(iVar4 + 0x25c);
               in_s0 = *(float *)(iVar4 + 0x32c);
               in_s1 = *(float *)(iVar4 + 0x330);
@@ -550,7 +550,7 @@ joined_r0x0029e2d8:
             *(short *)(iVar17 + 0x74) = *(short *)(iVar17 + 0x74) + 1;
           }
           if (0x3c23d70a < *(int *)(iVar17 + 0x1c8)) {
-            FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x30));
+            renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x30));
             fStack_508 = *(float *)(iVar17 + 0x1c8);
             in_s0 = *(float *)(iVar17 + 0x108);
             fStack_504 = fVar24;
@@ -717,7 +717,7 @@ joined_r0x0029e2d8:
           *(short *)(iVar17 + 0x74) = *(short *)(iVar17 + 0x74) + 1;
         }
         if (0x3c23d70a < *(int *)(iVar17 + 0x1c8)) {
-          FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x30));
+          renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x30));
           fStack_508 = *(float *)(iVar17 + 0x1c8);
           in_s0 = *(float *)(iVar17 + 0x108);
           fStack_504 = fVar24;
@@ -728,7 +728,7 @@ joined_r0x0029e2d8:
       }
       if (((*(char *)(iVar17 + 0x24) != '\0') && (DAT_005f1614 == '\0')) &&
          (*(int *)(pcVar16 + 0x14) < 0x2d)) {
-        FUN_0016c4b8(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x18));
+        renderCtxSelectTexture(DAT_0059dbb4,*(unsigned int *)(DAT_00581040 + 0x18));
         fVar27 = *(float *)(iVar17 + 0x2c);
         uVar28 = CONCAT44(*(unsigned int *)(iVar17 + 0x28),*(unsigned int *)(iVar17 + 0x30));
         fVar33 = 130.0f;

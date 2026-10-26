@@ -3,6 +3,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_ScalarGetters.h"
+#include "util/FUN_002a482c.h"
 
 namespace {
 struct SpriteInfo { u8 unk00[8]; s16 x; s16 y; };
@@ -33,7 +34,6 @@ extern f32 jobGetScalarValue(void);
 extern SpriteInfo *asdTMTexTableEntryAt(u32, u32);
 extern void FUN_00164b5c(s32, s32, u32, s32, s32, s32);
 extern void FUN_0019de98(s32, u32);
-extern s32 FUN_002a482c(SlotMenu *);
 extern s32 rangeGetMinimumLimit(SlotMenu *);
 extern s32 FUN_0031d174(SlotMenu *);
 extern void FUN_004ba354(SlotMenu *, s32, s32, s32, s32);

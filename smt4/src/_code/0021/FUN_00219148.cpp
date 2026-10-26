@@ -1,5 +1,6 @@
 /* NON_MATCHING: in the unit-key compare retail copies `a` to r6 and computes a's unit key in r4; built keeps `a` in r4 and the key in r6. */
 #include "shard/PassiveSkill.h"
+#include "gamedata/DataTable40.h"
 
 /* The unit record field the skill list sorts by. */
 struct SkillSortUnitRecord {
@@ -10,7 +11,6 @@ struct SkillSortUnitRecord {
 extern "C" {
 
 bool idIsAbove400(u32 id);
-const ActiveSkillRecord *dataTable40FindById(u32 id);
 const SkillSortUnitRecord *gameGetUnitRecord(s32 unit);
 s32 FUN_00257568(const SkillListEntry *a, const SkillListEntry *b);
 
@@ -20,7 +20,7 @@ static u16 skillSortKey(const SkillListEntry *entry)
     if (idIsAbove400(entry->skillId)) {
         return passiveSkillLookupRecord(entry->skillId)->sortKey;
     }
-    return dataTable40FindById(entry->skillId)->sortKey;
+    return reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(entry->skillId))->sortKey;
 }
 
 /* The holding unit's sort key, 0 without a unit. */

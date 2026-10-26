@@ -1,17 +1,19 @@
-/* NON_MATCHING: scheduling only: retail loads the button-help preset constant 0xDD between the flag-word address and its ldr/orr/str. */
 #include "battle/BtlMainAccess.h"
 
 extern "C" {
 
 extern void buttonHelpSetPreset(s32 preset);
 
+static __inline void btlShowHelpPreset(BtlMainState *state, s32 preset)
+{
+    state->battleFlags |= 0x100000;
+    buttonHelpSetPreset(preset);
+}
+
 /* Script command: sets battle flag 0x100000 and shows button help preset 0xDD; returns 1. */
 s32 FUN_002e407c(void)
 {
-    BtlMainState *state = btlGetMainState();
-
-    state->battleFlags |= 0x100000;
-    buttonHelpSetPreset(0xDD);
+    btlShowHelpPreset(btlGetMainState(), 0xDD);
     return 1;
 }
 

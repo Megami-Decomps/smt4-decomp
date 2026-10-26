@@ -1,6 +1,7 @@
 /* NON_MATCHING: skill clearing becomes memclr, shared-loop pointer setup and sort-key bitfield packing differ; -O2 candidate. */
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "gamedata/SkillFlags.h"
 
 struct FusionSkillWork {
     u8 unk0000[0x9020];
@@ -18,10 +19,6 @@ struct FusionSkillDefinition {
     u8 unk00[0x3c];
     u16 skills[8];
 };
-struct FusionSkillRecord {
-    u8 unk00[3];
-    u8 flags;
-};
 struct FusionSkillSortKey {
     u32 first : 15;
     u32 second : 15;
@@ -33,7 +30,6 @@ struct FusionSkillSortKey {
 extern "C" {
 extern UniteWork *g_unite;
 const FusionSkillDefinition *devilGetRecord(u32);
-const FusionSkillRecord *dataTable06Sub1GetRecord(u32);
 void FUN_0029f848(void *, s32, s32, s32, s32, s32);
 void FUN_0029b130(u16 *, s32, const FusionSkillSortKey *, u32);
 }

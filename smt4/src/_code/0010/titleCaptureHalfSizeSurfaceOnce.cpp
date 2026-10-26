@@ -30,7 +30,7 @@ typedef struct TitleWork {
 
 extern u32 g_titleScene;
 
-extern s32 FUN_002bff10(s32 arg);
+extern s32 stateValuesGetBySelector(s32 arg);
 extern void renderCtxSelectStereoLayout(u32 scene);
 extern u8 FUN_002bfadc(s32 arg, Surface *surface);
 extern void surfaceCopy(Surface *dst, Surface *src);
@@ -40,7 +40,7 @@ s32 titleCaptureHalfSizeSurfaceOnce(u32 job)
 {
     TitleWork *work = (TitleWork *)jobGetWork(job);
 
-    if (FUN_002bff10(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         work->state.unk65 = 1;
     } else {
         TitleState *state = &work->state;

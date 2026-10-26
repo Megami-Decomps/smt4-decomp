@@ -1,8 +1,8 @@
 /* NON_MATCHING: the 64-bit flag mask uses different registers from retail. */
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32 index);
 void scrSetResult(s32);
 
 // Return whether the selected battle script flag is set.

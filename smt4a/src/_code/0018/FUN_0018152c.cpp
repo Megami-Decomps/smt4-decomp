@@ -2,6 +2,7 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W5_W5Match7_EntrySort.h"
+#include "gamedata/Table00Lookup.h"
 
 /* The icon sheet cell to draw: source x range, then y range. */
 struct IconRect {
@@ -16,10 +17,6 @@ struct IconRecord {
     /* 0x9C */ u16 icon;
 };
 
-struct IconFlagsRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u16 flags;
-};
 
 struct SlotRecord {
     /* 0x00 */ u8 unk00[0x60];
@@ -32,7 +29,6 @@ s32 gameFlagIsSet(u32 flag);
 void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority);
 void FUN_001849bc(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 priority, const IconRect *rect);
 IconRecord *FUN_00184310(u16 id);
-IconFlagsRecord *dataTable00FindById(u16 id);
 SlotRecord *slotRecordFindById(u16 id);
 u32 markerKindGetColor(s32 kind);
 void drawSetColorFromRGBA8(u32 color);
@@ -60,7 +56,7 @@ void FUN_0018152c(s32 id, s32 x, s32 y, s32 z, s32 tint)
         return;
     }
     IconRecord *record = FUN_00184310((u16)id);
-    if ((dataTable00FindById((u16)id)->flags & 0x8000) != 0) {
+    if ((dataTable00FindById((u16)id)->level & 0x8000) != 0) {
         FUN_001835b4(2, 27, 2000, x, y, z);
         return;
     }

@@ -1,9 +1,9 @@
 /* NON_MATCHING: instructions match except the saved-register numbering (retail keeps the ready-flag address in r4 and the arguments in r5/r6); armcc here numbers them the other way round. */
 #include "nn/Result.h"
+#include "util/FUN_002c1398.h"
 
 extern "C" {
 extern u8 DAT_00471ba8;
-s32 FUN_002c1398();
 void asdFatalError();
 u32 libc_strlen(const char *text);
 s32 asdModelForwardChecked(u32 *handle, const char *name, u32 length, u32 flags);
@@ -15,7 +15,7 @@ bool FUN_003603f8(u32 *handle, const char *name)
     if (DAT_00471ba8) {
         return true;
     }
-    if (nnResultIsFailure(FUN_002c1398())) {
+    if (nnResultIsFailure((s32)FUN_002c1398())) {
         asdFatalError();
     }
     s32 result = asdModelForwardChecked(handle, name, libc_strlen(name), 1);

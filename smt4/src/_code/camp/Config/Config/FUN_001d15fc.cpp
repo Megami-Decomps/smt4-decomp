@@ -1,4 +1,4 @@
-/* NON_MATCHING: the flag tests and table value get r4/r6 instead of r6/r7, and the shared count store sits after the else block. */
+/* NON_MATCHING: only the saved registers of the flag-id temporaries differ (retail keeps them in r6/r7, the build in r4/r6); the button arms and tail now match. */
 #include "common.h"
 
 extern "C" {
@@ -56,15 +56,15 @@ void FUN_001d15fc(void)
     dataTableGetCount(table);
     UiRect *frame = asdTMTexTableEntryAt(0x2f, 0x20);
     u16 count;
-    if (config->extraButton != 0) {
+    if (config->extraButton == 0) {
+        config->regionX[0] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x42));
+        config->regionX[1] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x43));
+        count = config->regionCount + 2;
+    } else {
         config->regionX[0] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x44));
         config->regionX[1] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x45));
         config->regionX[2] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x46));
         count = config->regionCount + 3;
-    } else {
-        config->regionX[0] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x42));
-        config->regionX[1] = addButtonRegion(frame, asdTMTexTableEntryAt(0x2f, 0x43));
-        count = config->regionCount + 2;
     }
     config->regionCount = count;
 }

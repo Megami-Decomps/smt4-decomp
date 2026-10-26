@@ -17,7 +17,7 @@ u32 titleSceneReset(void)
 
     FUN_002c35b0(0);
     scene = g_titleScene;
-    scene->unk528 = 0;
+    scene->stereoMode = 0;
     FUN_002bdb44();
     FUN_002c3530(0, 0);
     FUN_002c3a14(g_titleScene);

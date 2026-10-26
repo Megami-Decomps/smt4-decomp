@@ -10,7 +10,7 @@ struct Obj420990DrawContext {
 };
 extern "C" {
 extern Obj420990DrawContext *g_titleScene;
-void FUN_002c1b64(void *context, u32 texture);
+void renderCtxSelectTexture(void *context, u32 texture);
 u32 FUN_002c5d80(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_0023b4f4(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
@@ -21,7 +21,7 @@ void forwardRecoveredCallback();
 
 void Obj420990::draw()
 {
-    FUN_002c1b64(g_titleScene, ((FilterDrawTexture *)handles[0].handle)->handle);
+    renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)handles[0].handle)->handle);
     g_titleScene->blend.push(rects->blendA);
     g_titleScene->projection.push(FUN_002c5d80(1, 0));
     f32 color[4] = {1, 1, 1, ((FilterDrawChild *)child)->alpha};
@@ -40,7 +40,7 @@ void Obj420990::draw()
             points[vertex][2], vertices()[vertex].u, vertices()[vertex].v);
     }
     forwardRecoveredCallback();
-    FUN_002c1b64(g_titleScene, ((FilterDrawTexture *)handles[1].handle)->handle);
+    renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)handles[1].handle)->handle);
     g_titleScene->blend.replace(rects->blendB);
     titleSceneMultiplyByCameraView(this, matrix, &handles[1]);
     FUN_0023b4f4(&points[4][0], matrix, &points[4][0], 4);

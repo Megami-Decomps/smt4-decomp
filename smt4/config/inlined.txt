@@ -28,3 +28,6 @@ shopResultGetText = 0xe2800e17; // 0x2591f0 (shopFormatCommandResult, on shopGet
 nnResultIsFailureBool = 0xe1a00fa0; // 0x38bce0 (Obj4221e4, on legacyResourceIdRemap's r0; caller tests teq r0,#1)
 uiSpriteGetOperationMode = 0xe1d005f0; // 0x28be90 (FUN_0028be84: after add r0, r0, #452; r4 keeps the state)
 aocFindKindRecordById = 0xe3a00000; // 0x248620 (FUN_00248620: add-on record lookup stubbed in IV; smt4a implements it at 0x471bc8; the other return-0 functions belong to unrelated subsystems)
+queuedHandleGetToken = 0xe5900004; // 0x38b438 (FUN_0038b420, after add r0, sp, #4: the by-value handle parameter)
+partyWidgetGetX = 0xe5900040; // FUN_00205a90 0xfc/0x13c (after ldr r0, [r5] / ldr r0, [r6, #1752]); twin of partyWidgetGetCost (+0x44)
+uiSpriteGetMode = 0xe1d005fc; // 0x2e4490 (FUN_002e4464, after add r0, r4, #32); same getter as the smt4a row

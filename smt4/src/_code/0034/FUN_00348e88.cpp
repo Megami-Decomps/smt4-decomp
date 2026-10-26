@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads the goal's required count into r0 after copying the item-count result to r9; the build loads it into r1 before the copy. */
 /* Marks active item-count quest goals and records whether this gain reaches their target. */
 #include "shard/SaveWork.h"
+#include "shard/gameGetFlagBlock.h"
 
 struct QuestItemGoal {
     s16 kind;
@@ -24,14 +25,13 @@ struct QuestItemFlagBanks {
     QuestItemFlags quests[400];
 };
 extern "C" {
-QuestItemFlagBanks *gameGetFlagBlock(void);
 static __inline QuestItemFlags *questGetFlags(u16 quest)
 {
-    return &gameGetFlagBlock()->quests[quest];
+    return &reinterpret_cast<QuestItemFlagBanks *>(gameGetFlagBlock())->quests[quest];
 }
 static __inline void questMarkChanged(u16 quest)
 {
-    gameGetFlagBlock()->quests[quest].changed |= 2;
+    reinterpret_cast<QuestItemFlagBanks *>(gameGetFlagBlock())->quests[quest].changed |= 2;
 }
 u32 FUN_0028fb40(u32 item);
 QuestItemGoalRecord *dataTable1bOr1cGetRecord(u16 quest);

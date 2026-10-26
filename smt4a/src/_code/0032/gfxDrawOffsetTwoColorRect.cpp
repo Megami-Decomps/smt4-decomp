@@ -18,7 +18,6 @@ extern "C" {
 extern RenderCtxA* g_renderCtx;
 extern DrawOffset g_uiDrawOffset;
 u32 FUN_001692ac(u32 value, bool enabled);
-void FUN_0016c4b8(RenderCtxA*, s32);
 void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
                  f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -33,7 +32,7 @@ void gfxDrawOffsetTwoColorRect(s32 x, s32 y, s32 width, s32 height, u32 firstCol
     const u32 second = swapColorBytes(secondColor);
     const u32 state = FUN_001692ac(1, true);
     renderStackPush(&context->stackA, state);
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     FUN_0014e314(first, first, second, second,
                  static_cast<f32>(screenX), static_cast<f32>(screenY),
                  static_cast<f32>(width), static_cast<f32>(height), 0.0f);

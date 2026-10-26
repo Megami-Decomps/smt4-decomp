@@ -1,13 +1,12 @@
 /* NON_MATCHING: amount and X saved registers are exchanged, and one icon-call argument move is scheduled differently. */
-#include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 u32 requestKindToId(u32 kind);
 s32 textFormatBuffer(char *output, const char *format, ...);
 void FUN_0017ffa8(u32 screen, u32 table, s32 index, u32 x, u32 y, u32 layer);
 void drawSetColorFromRGBA8(u32 color);
-const SpriteInfo *asdTMTexTableEntryAt(u32 table, s32 index);
 void FUN_00180310(u32 screen, s32 x, s32 y, s32 mode, s32 font, s32 layer,
                   const char *format, ...);
 void FUN_00183bb0();
@@ -34,7 +33,7 @@ void drawParameterChangeBadge(u32 kind, s32 amount, s32 x, s32 y, s32 layer)
     FUN_001835b4(2, 11, 0x3f5, x, y, layer);
     FUN_0017ffa8(2, 11, icon, x, y, layer);
     drawSetColorFromRGBA8(color);
-    const SpriteInfo *info = asdTMTexTableEntryAt(11, 0x402);
+    const TextureTableEntryIV *info = asdTMTexTableEntryAt(11, 0x402);
     FUN_00180310(2, info->x + x, info->y + y, 0, 1, layer + 1, sign);
     info = asdTMTexTableEntryAt(11, 0x401);
     if (amount < 0) {

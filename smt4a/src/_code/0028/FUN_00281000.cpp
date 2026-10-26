@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses vstr s0, [r0] where the compiled block uses vstr s0, [r0]. */
+/* NON_MATCHING: store scheduling only: retail stores the value, first mode, second mode and then the two conditional extras; armcc keeps source order. */
 #include "common.h"
 
 struct ValueSettings {

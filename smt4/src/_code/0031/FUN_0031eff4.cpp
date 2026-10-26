@@ -4,18 +4,18 @@
 #include "util/CalleeContracts.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"
+#include "util/btlScriptResolveGroupArg.h"
 
 extern "C" {
 void scrSetResult(s32);
 s32 scrGetArg(s32);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *);
-u32 btlScriptResolveGroupArg(s32);
 
 // Report whether the selected group or active entry has either pending effect.
 u32 FUN_0031eff4(void)
 {
     u32 first, count;
-    u32 group = btlScriptResolveGroupArg(scrGetArg(0));
+    u32 group = (u32)btlScriptResolveGroupArg(scrGetArg(0));
     FUN_002499fc(group, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
     for (s32 index = first; index < static_cast<s32>(count + first); ++index) {
         BtlEntry *entry = &btlGetMainState()->entries[index];

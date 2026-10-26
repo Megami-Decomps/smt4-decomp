@@ -1,4 +1,3 @@
-/* NON_MATCHING: the clear-bit result is built with tst plus conditional moves as retail, but armcc orders movne r0, #0 before moveq r0, #1 where retail has moveq first. */
 #include "common.h"
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
@@ -8,10 +7,10 @@ extern "C" {
 u32 FUN_002f6d00(void)
 {
     s32 result;
-    if (btlGetMainState()->battleFlags & 2)
-        result = 0;
-    else
+    if (!(btlGetMainState()->battleFlags & 2))
         result = 1;
+    else
+        result = 0;
     scrSetResult(result);
     return 1;
 }

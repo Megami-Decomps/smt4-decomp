@@ -2,6 +2,7 @@
 #include "ui/PartyPanelState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 /* The exclusion byte follows the shared widget prefix. */
 struct PartyPanelExclusionWidgetView { PartyPanelWidget widget; u8 excluded; };
@@ -11,7 +12,6 @@ static void setWidgetExcluded(PartyPanelWidget *widget, u8 excluded)
 }
 extern "C" {
 extern PartyPanelState *g_partyPanel;
-PartyDamageSlotsIV *gameGetSlotTable();
 const StatBlock *partyMemberFindById(u16);
 const StatBlock *gameGetUnitRecord(s32);
 void __aeabi_memset4(void *, u32, s32);
@@ -19,7 +19,7 @@ void __aeabi_memset4(void *, u32, s32);
 void FUN_002e36f8()
 {
     PartyPanelState *panel = g_partyPanel;
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     for (s32 i = 0; i < 4; ++i) {
         panel->availability.activeSlots[i] = 0;
         setWidgetExcluded(panel->characters[i], 0);

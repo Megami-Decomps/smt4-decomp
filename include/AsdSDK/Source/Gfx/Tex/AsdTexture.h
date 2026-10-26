@@ -42,8 +42,14 @@ typedef struct AsdTexture {
         } image;
     };
     /* 0x38 */ u32 unk38;       /* 2 when created */
-    /* 0x3C */ u32 unk3c;
-    /* 0x40 */ u32 unk40;
+    /* 0x3C */ union {
+        u32 unk3c;
+        s32 filterX;         /* 1: filtered (set by the frame texture draw) */
+    };
+    /* 0x40 */ union {
+        u32 unk40;
+        s32 filterY;
+    };
     /* 0x44 */ union {
         u32 unk44;
         void *auxiliaryData;

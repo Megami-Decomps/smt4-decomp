@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite (171 vs 172 rows) matches except callee-saved register numbering: retail reuses the dead argument register r1 (sl) as the copy pointer */
 #include "common.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct SlotTable {
     u8 unk0000[0x9108];
@@ -22,7 +23,6 @@ extern "C" {
 
 void __aeabi_memcpy4(void* dst, const void* src, u32 size);
 SlotTable* gameGetSlotTable(void);
-UnitRecord* gameGetUnitRecord(u32 id);
 void FUN_0029bbc8(u8 id);
 void FUN_0029c1c8(u32 id, u32 a, u32 b);
 void FUN_0029bde4(UnitRecord* record);
@@ -46,7 +46,7 @@ u32 FUN_0033bb94(UnitRecord* source, u32 arg, u16* outSkills)
     else if (table->party[2] == id) partyIndex = 2;
     FUN_0029bbc8(source->id);
     FUN_0029c1c8(id, arg, 0);
-    UnitRecord* record = gameGetUnitRecord(id);
+    UnitRecord* record = static_cast<UnitRecord *>(gameGetUnitRecord(id));
     if (partyIndex >= 0) table->party[partyIndex] = record->id;
     for (s32 i = 0; i < 0x40; i++) {
         record->learned[i] |= copy.learned[i];

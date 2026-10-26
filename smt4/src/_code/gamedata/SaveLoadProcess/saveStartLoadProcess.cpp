@@ -2,10 +2,10 @@
 #include "gamedata/SaveLoadProcessState.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern SaveByteSettings g_byteSettings;
-void *asdMemAlloc(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void gameDataBlocksAddFlags(u32 flags);
 void gameDataFlagsSetBits(u32 flags);
 void gameDataFlagsSet(u32 flags);

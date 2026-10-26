@@ -1,9 +1,9 @@
 #include "battle/btlGameOver.h"
 #include "shard/GameDataBlocks.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void *asdMemAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 u32 taskCreateDraw(const char *name, s32 priority, s32 flags, s32 workSize,
                    s32 (*run)(u32), void (*destroy)(u32), void *work, u32 parent);
 s32 FUN_0020ef14(u32 job);

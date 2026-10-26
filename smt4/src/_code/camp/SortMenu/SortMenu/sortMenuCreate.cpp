@@ -6,6 +6,7 @@
 #include <string.h>
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "font/ComWin/ComWin.h"
 
 /* The sort menu's image, scale, and animation parameter tables are compiled together. */
 struct SortMenuParameterData { u32 first[6], second[9], third[42]; };
@@ -32,7 +33,6 @@ void drawParameterBlockClear(UiResourceParameters *);
 
 void FUN_002bd954(SortMenuSprite *, u32, u32, UiResourceParameters *, u32, f32);
 void uiSpriteSetImageKeyframe(SortMenuSprite *, u32, u32);
-void spriteStartAnimationByIndex(SortMenuSprite *, u32);
 void timerStart(SortMenuSprite *, u32, u32);
 
 void sortMenuCreate(u32 owner, u8 option)

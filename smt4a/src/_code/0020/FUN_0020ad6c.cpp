@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int dataTable00FindById(void);
 int __aeabi_memset4(int, int, unsigned int);
 int FUN_00203b40(int, int, int, int, int, int);
 int FUN_00270104(void);
-int FUN_002a4878(int);
 int widgetSubCallIfVisible(...);
 int screenSetContextHint(int, unsigned int, int);
 int buttonHelpGetValue(void);
@@ -34,7 +34,6 @@ extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: __aeabi_memset4. */
 /* Supplied declaration required: FUN_00203b40. */
 /* Supplied declaration required: FUN_00270104. */
-/* Supplied declaration required: FUN_002a4878. */
 /* Supplied declaration required: widgetSubCallIfVisible. */
 extern int objectApplyIfUnblocked(unsigned int);
 /* Supplied declaration required: screenSetContextHint. */
@@ -97,7 +96,7 @@ void FUN_0020ad6c(int param_1,int param_2,int param_3)
     if (((!(param_2 == 9 || param_2 == 8)) && (!(param_2 == 0xb || param_2 == 10))) &&
        (!(param_2 == 0xd || param_2 == 0xc))) {
       if (param_2 == 1) {
-        FUN_002a4878(param_1 + *piVar8 * 100 + 0x38bc);
+        FUN_002a4878((void *)(param_1 + *piVar8 * 100 + 0x38bc));
         FUN_003756c8();
       }
     }

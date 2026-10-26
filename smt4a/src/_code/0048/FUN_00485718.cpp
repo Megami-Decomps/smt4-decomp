@@ -41,7 +41,6 @@ void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
 void FUN_00183bb0(void);
 s32 FUN_001692ac(s32 a, s32 b);
-void FUN_0016c4b8(RenderCtxA *context, s32 arg);
 SlotLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -60,7 +59,7 @@ void FUN_00485718(SlotPicker *picker)
     RenderCtxA *context = g_renderCtx;
     s32 state = FUN_001692ac(1, 0);
     renderStackPushCountedDirect(&context->stackA, state);
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     FUN_001835b4(2, 0x23, 0, parallax, 0, 0xB);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     FUN_001835b4(2, 0x23, 1, parallax, 0, 0xB);

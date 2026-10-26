@@ -1,6 +1,7 @@
 /* NON_MATCHING: flag-store folding, two-byte counter clearing and active-slot address decomposition differ. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/FUN_00298f88.h"
+#include "shard/gameGetFlagBlock.h"
 
 struct ActiveFlagEntrySlotView {
     u16 id;
@@ -17,14 +18,13 @@ typedef char ActiveFlagBlockViewOffsetsCheck[offsetof(ActiveFlagBlockView, slots
     offsetof(ActiveFlagBlockView, primaryCounters) == 0x87A ? 1 : -1];
 
 extern "C" {
-GameFlagBlockPrefixIV *gameGetFlagBlock(void);
 s32 table1bOr1cGetRecordValue(u32 id);
 void words3Clear(void *words);
 void FUN_0023ddbc(u32 flag, s32 value);
 
 u32 FUN_0028eeb8(u32 id)
 {
-    GameFlagBlockPrefixIV *flags = gameGetFlagBlock();
+    GameFlagBlockPrefixIV *flags = reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock());
     GameFlagEntryIV *entry = &((GameFlagEntryIV *)flags->unk200)[id];
     ActiveFlagBlockView *block = (ActiveFlagBlockView *)gameGetFlagBlock();
     if (!(entry->flags & 1) && id < 0x15e)
@@ -59,7 +59,7 @@ u32 FUN_0028eeb8(u32 id)
         block->primaryCounters[5] = 0;
         block->primaryCounter = 0;
         for (u32 flag = 0x500; flag < 0x520; ++flag) {
-            GameFlagBlockPrefixIV *current = gameGetFlagBlock();
+            GameFlagBlockPrefixIV *current = reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock());
             FUN_0023ddbc(flag, 0);
             current->packedFlags[flag >> 3] &= ~(1u << (flag & 7));
         }

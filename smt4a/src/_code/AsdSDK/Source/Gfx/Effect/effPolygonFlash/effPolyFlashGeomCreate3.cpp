@@ -1,10 +1,10 @@
 /* NON_MATCHING: only two scratch registers differ (retail: block->payload address in r1 and the constant 72 in r2; built: the other way round) */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_002b3b58(u32 count, int w, int h, u8 *table, int tableSize);
 extern u8 DAT_005c1f3a;
 

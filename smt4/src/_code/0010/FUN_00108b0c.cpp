@@ -17,10 +17,10 @@ typedef struct JobWork {
 } JobWork;
 
 extern JobWork *jobGetWork(void);
-extern int FUN_002bff10(u32 arg);
+extern int stateValuesGetBySelector(u32 arg);
 extern int FUN_0011340c(u32 arg);
 
-/* Closes the panel when it is shown and ready, the check FUN_002bff10 passes and a close was requested. */
+/* Closes the panel when it is shown and ready, the check stateValuesGetBySelector passes and a close was requested. */
 u8 FUN_00108b0c(void)
 {
     JobWork *work = jobGetWork();
@@ -31,7 +31,7 @@ u8 FUN_00108b0c(void)
     if (work->panel.ready == 0) {
         return 0;
     }
-    if (FUN_002bff10(0) == 0 && work->closeRequested != 0) {
+    if (stateValuesGetBySelector(0) == 0 && work->closeRequested != 0) {
         FUN_0011340c(0);
     }
     return 0;

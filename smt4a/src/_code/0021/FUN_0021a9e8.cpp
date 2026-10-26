@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "gamedata/FlagValueIsPositive.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int FUN_00203b40(...);
 int FUN_0020d3d4(int);
 int FUN_0023f788(int);
 int scrollOwnerSelectIndex(...);
-int FUN_002a4964(...);
 int sysMemClear(...);
 int FUN_004c67d0(void);
 
@@ -37,7 +37,6 @@ extern int gameGetSlotRecord(void);
 /* Supplied declaration required: FUN_0023f788. */
 extern int btlMainGetUnk14(void);
 /* Supplied declaration required: scrollOwnerSelectIndex. */
-/* Supplied declaration required: FUN_002a4964. */
 /* Supplied declaration required: sysMemClear. */
 extern int FUN_0047fbb4(unsigned int);
 extern int FUN_0047fd9c(unsigned int);
@@ -81,16 +80,16 @@ void FUN_0021a9e8(int param_1)
       }
       if (temp_v7 && temp_v3 != 0) {
         FUN_00203b40(temp_v6,0x191,6,1,1,1);
-        FUN_002a4964(temp_v6,DAT_00573b8c + 2);
+        FUN_002a4964(reinterpret_cast<ScrollSelection *>(temp_v6),DAT_00573b8c + 2);
       }
       else {
         FUN_00203b40(temp_v6,400,6,1,1,1);
-        FUN_002a4964(temp_v6,DAT_00573b8c + 1);
+        FUN_002a4964(reinterpret_cast<ScrollSelection *>(temp_v6),DAT_00573b8c + 1);
       }
     }
     else {
       FUN_00203b40(temp_v6,400,6,1,1,1);
-      FUN_002a4964(temp_v6,DAT_00573b8c + 1);
+      FUN_002a4964(reinterpret_cast<ScrollSelection *>(temp_v6),DAT_00573b8c + 1);
     }
   }
   else {
@@ -166,7 +165,7 @@ void FUN_0021a9e8(int param_1)
        (*(unsigned int *)(temp_v1 + 0x45a8) & DAT_00573bc8) == 0)) {
     temp_v1 = reinterpret_cast<int>(btlGetMainState());
     FUN_00203b40(temp_v2,(int)*(short *)(temp_v1 + 0xe0),6,1,1,1);
-    FUN_002a4964(temp_v2,DAT_00573b90);
+    FUN_002a4964(reinterpret_cast<ScrollSelection *>(temp_v2),DAT_00573b90);
   }
   else {
     FUN_00203b40(temp_v2,1,6,1,0,1);

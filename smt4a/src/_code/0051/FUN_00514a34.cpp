@@ -1,13 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0031ed60's literal pool; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_00514a34 for reference (not compiled; its own view of the boundaries):
-
-void FUN_00514a34(unsigned int *param_1,unsigned int *param_2)
-
-{
-  if (param_2 != (unsigned int *)0x0) {
-    *param_2 = *param_1;
-  }
-  return;
-}
-*/
 #include "common.h"
+
+extern "C" {
+
+/* Copies a stored word when an output pointer is supplied. */
+void FUN_00514a34(const u32 *value, u32 *output)
+{
+    if (output != NULL) {
+        *output = *value;
+    }
+}
+
+} /* extern "C" */

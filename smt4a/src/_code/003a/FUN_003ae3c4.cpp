@@ -2,7 +2,6 @@
 #include "shard/W5_W5Match7_FlagBanks.h"
 
 extern "C" {
-FlagWorkBanks *gameFlagsGetBlock();
 s32 lmapGetSpawnIndex();
 void sceneRegisterBoxEffect(u32, u32, const char *, u32,
                             u32, s32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32, u32,

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "battle/BtlMainAccess.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int FUN_002630e0(unsigned int *, int, unsigned int);
 int FUN_00295eb0(...);
 int FUN_002963ec(...);
 int uiSpriteSetImageKeyframe(int, int, int);
-int pairSetFirstResetSecond(int, unsigned int);
 int spriteStartAnimationByIndex(...);
 int FUN_002bf818(int);
 int FUN_003adca8(int, int, unsigned int);
@@ -28,7 +28,6 @@ extern int FUN_00293230(void);
 /* Supplied declaration required: FUN_00295eb0. */
 /* Supplied declaration required: FUN_002963ec. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern unsigned int FUN_002c501c(void);
@@ -221,7 +220,7 @@ LAB_00206088:
           }
         }
         temp_v4 = temp_v3 + 0xbf4c;
-        pairSetFirstResetSecond(temp_v4,temp_v5);
+        pairSetFirstResetSecond((void *)(temp_v4),temp_v5);
         FUN_00295eb0(temp_v4,0x15,0x416);
         FUN_002963ec(temp_v4,(int)(short)(int)*(float *)(temp_v3 + 0xbfd8),
                      (int)(short)(int)*(float *)(temp_v3 + 0xbfdc));

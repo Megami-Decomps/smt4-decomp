@@ -5,6 +5,7 @@
 #include "util/CalleeContracts.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "event/2dEvent/EventEffect.h"
+#include "util/FUN_00187168.h"
 
 struct UnitScreenReadyViewA {
     u32 unk00;
@@ -33,7 +34,6 @@ void __aeabi_memset4(void* destination, u32 size, u32 value);
 void ifTouchRegionRemove(void);
 void ifTouchResetRecord(void);
 UnitCategoryRecord* FUN_003e4d68(u16 unit);
-s32 FUN_00187168(const UnitCategoryRecord* unit);
 u16 FUN_001643b4(u32 table, s32 region);
 void statusPanelSetOpen(s32 opened);
 

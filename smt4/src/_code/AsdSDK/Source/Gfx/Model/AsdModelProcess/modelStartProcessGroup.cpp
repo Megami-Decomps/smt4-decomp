@@ -1,11 +1,11 @@
 #include "AsdSDK/Source/Gfx/Model/AsdModelProcess.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_00409440[];
 extern u32 g_asdModelProcess;
-void* asdMemAlloc(u32 heap, u32 alignClass, u32 flags, u32 size, u32 fromFront);
 void asdMemFree(void* memory);
 void asdProcessSetAuxiliaryCallback(u32 process, AsdProcFunc callback);
 u32 asdMdlManagerStart(u32 priority);

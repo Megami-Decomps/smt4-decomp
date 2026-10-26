@@ -26,7 +26,7 @@ typedef char LmapIdleVoiceOffsetsCheck[
 extern "C" {
 extern LmapSceneA *g_lmapScene;
 extern const LmapIdleVoiceTables DAT_00532018;
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 void FUN_002d1f40(s32 duration, s32 first, s32 second);
 void FUN_003d2158(u32 voice, s32 mode);
 void lmapClearExtraFlag(void);
@@ -43,7 +43,7 @@ void FUN_00385578(void)
     case 0:
         break;
     case 1: {
-        s32 delay = delays[FUN_00184964(0, 5)];
+        s32 delay = delays[randBetween(0, 5)];
         scene = reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene);
         scene->phase = 2;
         scene->duration = delay;
@@ -53,7 +53,7 @@ void FUN_00385578(void)
     case 2:
         if ((scene->scene.mainState == 1 || scene->scene.mainState == 3) &&
             ++scene->frame >= scene->duration) {
-            s32 duration = durations[FUN_00184964(0, 5)];
+            s32 duration = durations[randBetween(0, 5)];
             reinterpret_cast<LmapIdleVoiceScene *>(g_lmapScene)->duration = duration;
             FUN_002d1f40(duration, 40, 10);
             u32 voice = sysPlayVoice(0x0100009E);

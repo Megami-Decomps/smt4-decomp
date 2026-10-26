@@ -2,6 +2,7 @@
 
 #include "shard/W6_W6Match5_EffectLineJob.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_00403754[];
@@ -9,7 +10,6 @@ extern const char DAT_00403748[];
 extern const char DAT_00403738[];
 s32 scrGetArg(s32 index);
 s32 FUN_002c1d5c(void);
-void *asdMemAlloc(u32 size, u32 alignment, u32 heap, u32 tag, u32 flags);
 BustupEffectLineObject *FUN_00246644(u32 effect, u32 layer, u32 mode);
 s32 effLineJobUpdate(u32 job);
 void jobWorkFreeWork(u32 job);

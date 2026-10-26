@@ -59,7 +59,7 @@ void quadSetOrderedVectors(
     const Vector4 &first, const Vector4 &second,
     const Vector4 &third, const Vector4 &fourth,
     s32 argument4, s32 argument5);
-void FUN_002c198c(TitleScene* scene);
+void renderCtxApplyTransforms(TitleScene* scene);
 void FUN_002c18e4(TitleScene* scene);
 }
 
@@ -228,7 +228,7 @@ extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float ho
 
     quadSetOrderedVectors(Vector4(1.0f), Vector4(1.0f), Vector4(1.0f), Vector4(1.0f), 0, 1);
 
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 }

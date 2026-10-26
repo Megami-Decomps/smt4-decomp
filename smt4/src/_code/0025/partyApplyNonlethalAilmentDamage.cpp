@@ -2,9 +2,9 @@
 #include "shard/PadState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(void);
 PartyDamageUnitIV *gameGetUnitRecord(s32 slot);
 s32 gameCountUnits(void);
 

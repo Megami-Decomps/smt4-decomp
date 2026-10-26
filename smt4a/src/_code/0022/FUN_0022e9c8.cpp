@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -29,7 +30,6 @@ extern unsigned char g_gameGlobals; /* 0x588fd0 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: efctSetSpeed. */
-extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: unitGetStereoScreenPosition. */
 extern int FUN_0026264c(unsigned short);
 extern unsigned int FUN_003a6f84(unsigned int);
@@ -68,14 +68,14 @@ void FUN_0022e9c8(void)
     FUN_001835b4(2,0x12,0x119,temp_v11,temp_v12[0],0xdd);
     FUN_001835b4(2,0x12,0x11a,temp_v11,temp_v12[0],0xdd);
     FUN_001835b4(2,0x12,0x11b,temp_v11,temp_v12[0],0xdd);
-    temp_v3 = asdTMTexTableEntryAt(0x12,0x11c);
-    temp_v4 = asdTMTexTableEntryAt(0x12,0x11d);
+    temp_v3 = (int)asdTMTexTableEntryAt(0x12,0x11c);
+    temp_v4 = (int)asdTMTexTableEntryAt(0x12,0x11d);
     temp_v10 = (int)*(short *)(temp_v3 + 8);
     temp_v1 = **(short **)(temp_v3 + 0xc);
     temp_v13 = (int)*(short *)(temp_v3 + 10);
     if (temp_v0 >= 11) {
       temp_v2 = **(short **)(temp_v4 + 0xc);
-      temp_v10 = asdTMTexTableEntryAt(0x12,0x11e);
+      temp_v10 = (int)asdTMTexTableEntryAt(0x12,0x11e);
       temp_v10 = (int)((int)**(short **)(temp_v10 + 0xc) -
                     (((int)temp_v2 + (int)temp_v1) * (unsigned int)temp_v0 - (int)temp_v2)) / 2;
     }
@@ -108,7 +108,7 @@ void FUN_0022e9c8(void)
       FUN_001835b4(2,0x12,0x11f,temp_v11,temp_v12[0],0xdd);
       FUN_001835b4(2,0x12,0x120,temp_v11,temp_v12[0],0xdd);
       FUN_001835b4(2,0x12,0x121,temp_v11,temp_v12[0],0xdd);
-      temp_v7 = asdTMTexTableEntryAt(0x12,0x122);
+      temp_v7 = (int)asdTMTexTableEntryAt(0x12,0x122);
       VectorSignedToFloat(temp_v12[0] + *(short *)(temp_v7 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(temp_v11 + *(short *)(temp_v7 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0xffffffff,&LAB_0022ecd0);

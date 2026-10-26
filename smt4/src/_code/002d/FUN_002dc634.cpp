@@ -1,6 +1,7 @@
 /* NON_MATCHING: structure and calls match; armcc schedules the sort-key stores differently (retail stores each key's id and 0 separately and interleaves them with the second record load) and allocates r4/r6 differently */
 #include "common.h"
 #include "gamedata/Table8Type5Lookup.h"
+#include "gamedata/DataTable40.h"
 
 struct PassiveSkillRecord {
     /* 0x00 */ u8 unk00[0x22];
@@ -26,7 +27,6 @@ struct SkillSortKey {
 extern "C" {
 s32 idIsAbove400(u32 id);
 PassiveSkillRecord *passiveSkillLookupRecord(u32 id);
-SkillRecord *dataTable40FindById(u32 id);
 UnitRecord *gameGetUnitRecord(s32 unit);
 s32 FUN_00257568(SkillSortKey *first, SkillSortKey *second);
 
@@ -36,7 +36,7 @@ static inline s32 skillSortValue(SkillSortKey *key)
     if (idIsAbove400(key->skillId) != 0) {
         return passiveSkillLookupRecord(key->skillId)->sortKey;
     }
-    return dataTable40FindById(key->skillId)->sortKey;
+    return reinterpret_cast<SkillRecord *>(dataTable40FindById(key->skillId))->sortKey;
 }
 
 /* The sort key of the unit the skill belongs to; 0 without one. */

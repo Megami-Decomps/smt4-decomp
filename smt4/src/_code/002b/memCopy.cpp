@@ -3,9 +3,9 @@
 
 extern "C" {
 
-int rt_memcpy(void *dst, void *src, int size);
+int rt_memcpy(void *dst, const void *src, int size);
 
-void memCopy(void *src, void *dst, int size)
+void memCopy(const void *src, void *dst, int size)
 {
     rt_memcpy(dst, src, size);
 }

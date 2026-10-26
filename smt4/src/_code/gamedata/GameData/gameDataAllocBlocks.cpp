@@ -1,6 +1,6 @@
-/* NON_MATCHING: retail evaluates a (file, line) pair for each allocation (debug-allocation macro arguments) before the call; nothing uses it */
 /* Allocates the game data's work blocks, the first time it is called. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 #include "gamedata/GameData.h"
 
 extern "C" {
@@ -12,8 +12,11 @@ extern GameDataBlocks g_gameDataBlocks;
 void gameDataAllocBlocks(void)
 {
     if (g_gameDataBlocks.saveBlock == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\GameData.cpp", 61);
         g_gameDataBlocks.saveBlock = (GameSaveData *)asdMemoryAlloc(0x100, 0x100, 0, 0x24db0, 1);
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\GameData.cpp", 62);
         g_gameDataBlocks.workBlock = (GameDataAux *)asdMemoryAlloc(0x100, 0x100, 0, 0x24d28, 1);
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\GameData.cpp", 63);
         g_gameDataBlocks.smallBlock = (u16 *)asdMemoryAlloc(0x100, 0x100, 0, 0xc, 1);
     }
 }

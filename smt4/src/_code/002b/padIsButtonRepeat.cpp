@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail places the hold-counter load after the return block; the compiler inlines that path before timing checks and shares the epilogue. */
 #include "common.h"
 
 struct PadRepeatConfig {
@@ -19,12 +18,12 @@ u32 padIsButtonRepeat(u32 button)
         return 0;
 
     u32 heldFrames;
-    if (DAT_004650a0.flags & 1) {
-        heldFrames = 0;
-    } else {
+    if (!(DAT_004650a0.flags & 1)) {
         heldFrames = DAT_004e3c58[button];
         if (heldFrames == 1)
             return 1;
+    } else {
+        heldFrames = 0;
     }
     if (heldFrames <= DAT_004650a0.delay)
         return 0;

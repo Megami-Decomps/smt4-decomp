@@ -12,7 +12,7 @@ int renderCtxCalculateStereoParallax(int);
 int FUN_002bed3c(void);
 int efctSetSpeed(void);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -39,7 +39,7 @@ extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -270,7 +270,7 @@ unsigned int FUN_0022413c(void)
     }
     FUN_002bed3c();
     efctSetSpeed();
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
   }
   return 0;

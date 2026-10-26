@@ -1,9 +1,9 @@
 /* NON_MATCHING: native nn::Result local and named activity-state pointer restore saved registers and final flag store; only first failure predicate uses r1 instead of retail r2. */
 #include "nn/Result.h"
+#include "util/FUN_002c1398.h"
 
 extern "C" {
 extern u8 DAT_00471a10;
-s32 FUN_002c1398();
 u32 libc_strlen(const char* text);
 s32 asdModelForwardChecked(u32 context, const char* text, u32 length, u32 flags);
 
@@ -15,7 +15,7 @@ s32 FUN_0010feb4(u32 context, const char* text)
     if (*active != 0) {
         status = (s32)0xe0a0d3f9;
     } else {
-        status = FUN_002c1398();
+        status = (s32)FUN_002c1398();
         if (!nnResultIsFailure(status)) {
             u32 length = libc_strlen(text);
             status = asdModelForwardChecked(context, text, length, 0);

@@ -5,8 +5,8 @@
 extern "C" {
 
 int FUN_002c18e4(u32 handle);
-int FUN_002c198c(u32 handle);
-int FUN_002c1b64(u32 handle, int arg);
+int renderCtxApplyTransforms(u32 handle);
+int renderCtxSelectTexture(u32 handle, int arg);
 int FUN_0033149c(GauntletAppMenuWork *menu);
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;
@@ -16,9 +16,9 @@ u32 gauntletAppMenuExit(void)
 {
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
 
-    FUN_002c1b64(g_titleScene, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     FUN_0033149c(menu);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return 0;
 }

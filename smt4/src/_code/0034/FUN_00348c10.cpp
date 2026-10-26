@@ -3,10 +3,10 @@
 #include "quest_center/QuestRequirement.h"
 #include "shard/W6_W6Match5_SecondarySort.h"
 #include "shard/SaveWork.h"
+#include "shard/gameGetFlagBlock.h"
 
 extern "C" {
 s32 table1bOr1cGetRecordValue(u32 quest);
-QuestRuntimeFlagBlock *gameGetFlagBlock(void);
 SaveWork *gameGetMapBlock(void);
 
 void FUN_00348c10(u16 itemId, s32 change)
@@ -51,7 +51,7 @@ void FUN_00348c10(u16 itemId, s32 change)
                     if (!incomplete)
                         return;
                 }
-                gameGetFlagBlock()->quests[selected].stateFlags |= 2;
+                reinterpret_cast<QuestRuntimeFlagBlock *>(gameGetFlagBlock())->quests[selected].stateFlags |= 2;
                 return;
             }
         }
@@ -85,7 +85,7 @@ void FUN_00348c10(u16 itemId, s32 change)
                     if (!incomplete)
                         break;
                 }
-                gameGetFlagBlock()->quests[questId].stateFlags |= 2;
+                reinterpret_cast<QuestRuntimeFlagBlock *>(gameGetFlagBlock())->quests[questId].stateFlags |= 2;
                 break;
             }
         }

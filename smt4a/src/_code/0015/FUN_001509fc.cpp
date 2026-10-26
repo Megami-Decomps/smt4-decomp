@@ -1,15 +1,7 @@
 /* NON_MATCHING: frame texture quad draw; retail reaches the flag/blend fields through a second base register (tex + 0xF00), keeps the filter flag in one compare and divides in a different register order */
 #include "camp/RenderCtx.h"
 #include "util/PackNibbles.h"
-
-struct FrameSurface {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-    /* 0x1C */ u8 unk1C[0x20];
-    /* 0x3C */ s32 filterX;
-    /* 0x40 */ s32 filterY;
-};
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct FrameTexQuad {
     /* 0x00 */ f32 x[4];
@@ -28,7 +20,7 @@ struct FrameTex {
     /* 0x0FE0 */ s32 blendMode;        /* 0 normal, 1 additive, 2 subtractive */
     /* 0x0FE4 */ u8 filtered;
     /* 0x0FE5 */ u8 unk0FE5[0x4AB];
-    /* 0x1490 */ FrameSurface *surface;
+    /* 0x1490 */ AsdTexture *surface;
 };
 
 #define FRAME_TEX_WIDTH_HALF 240.0f
@@ -42,7 +34,6 @@ extern RenderCtxA *g_renderCtx;
 s32 stateValuesGetBySelector(u32 selector);
 s32 FUN_001692ac(u32 a, u32 b);
 f32 FUN_001a9698(f32 base, f32 exponent);
-void FUN_0016c4b8(RenderCtxA *context, FrameSurface *surface);
 void FUN_0019e3d0(u32 c0, u32 c1, u32 c2, u32 c3,
                   f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
                   f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
@@ -69,13 +60,13 @@ void FUN_001509fc(s32 wide)
         extentU = extentU / scale;
     }
 
-    FrameSurface *surface = tex->surface;
+    AsdTexture *surface = tex->surface;
     if (tex->filtered != 0) {
         surface->filterX = 1;
         surface->filterY = 1;
     }
-    f32 width = (f32)surface->width;
-    f32 height = (f32)surface->height;
+    f32 width = (f32)surface->dimensions.width;
+    f32 height = (f32)surface->dimensions.height;
     if (tex->filtered == 0) {
         surface->filterX = 0;
         surface->filterY = 0;
@@ -101,7 +92,7 @@ void FUN_001509fc(s32 wide)
         renderStackSet(&context->stackB, state);
         break;
     }
-    FUN_0016c4b8(g_renderCtx, surface);
+    renderCtxSelectTexture(g_renderCtx, surface);
     u32 color = tex->color;
     f32 z = tex->depth;
     FUN_0019e3d0(color, color, color, color,

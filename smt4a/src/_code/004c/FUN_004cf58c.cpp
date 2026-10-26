@@ -1,5 +1,6 @@
 /* NON_MATCHING: float stereo-offset round trips recovered; VFP destinations and first render-stack pop allocation still differ. */
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // A sprite effect owner (observed fields).
 struct StereoSpriteEffect {
@@ -14,7 +15,6 @@ extern RenderCtxA *g_renderCtx;
 
 void efctSetSpeed(f32 speed);
 s32 FUN_001692ac(u32 first, u32 second);
-void asdTMTexTableEntryAt(u32 group, u32 image);
 void FUN_001835b4(s32 layer, s32 group, s32 image, s32 x, s32 y, s32 color);
 void FUN_00183bb0(void);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *context, f32 depth);

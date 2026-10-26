@@ -3,6 +3,7 @@
 #include "gamedata/DataTable.h"
 #include "util/CalleeContracts.h"
 #include "mapnavi/naviMain.h"
+#include "gamedata/SaveSlotTable.h"
 
 struct StatusEventRecord {
     u32 id;
@@ -36,7 +37,6 @@ struct GameStateView {
 extern "C" {
 extern GameStateView g_gameState;
 extern StatusPopupState *g_popupState;
-s32 saveSlotFindSelected(void);
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(s32 max);
 char *FUN_002d8b58(u32 kind, u32 id);
@@ -56,7 +56,7 @@ u32 FUN_0020ecd4(void)
         }
     }
     if (g_popupState->state == 0) {
-        SaveSlotView *slot = (SaveSlotView *)saveSlotFindSelected();
+        SaveSlotView *slot = (SaveSlotView *)(s32)saveSlotFindSelected();
         if (slot == 0)
             return 0;
         if ((gameFlagIsSet(0x1A2) == 0 || randRange(99) + 1 > 50) &&

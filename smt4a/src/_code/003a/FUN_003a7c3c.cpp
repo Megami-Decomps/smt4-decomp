@@ -1,10 +1,10 @@
 /* NON_MATCHING: quest/id-list saved registers differ, and menu-state stores combine into STRD rather than retail's individual stores. */
 #include "shard/W5_W5Match7_UiQuest.h"
 #include "util/CalleeContracts.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 s32 objectApplyIfUnblocked(void *cursor);
-void FUN_002a4964(void *cursor, s32 selection);
 void uiQuestSpritesCreate(void);
 void FUN_003d498c(u32 quest, s32 mode);
 void uiSpriteSetKeyframe(void *sprite, s32 sequence, s32 mode);
@@ -24,7 +24,7 @@ void FUN_003a7c3c(u32 quest)
     work->unk93E = 1;
     for (s32 index = 0; index < objectApplyIfUnblocked(cursor); ++index) {
         if (ids[index] == quest) {
-            FUN_002a4964(cursor, index);
+            FUN_002a4964(reinterpret_cast<ScrollSelection *>(cursor), index);
             break;
         }
     }

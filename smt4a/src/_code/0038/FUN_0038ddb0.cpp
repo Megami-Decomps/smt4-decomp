@@ -1,11 +1,11 @@
 /* NON_MATCHING: status removal and feedback branches are laid out in a different order. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 s32 scrGetArg(s32 index);
-u32 btlUnitGet(u32 unit);
 u32 FUN_004bf9a0(u32 category);
 u32 FUN_004c8340(s32 unit, u32 options, u32 slot, s32 mode, s32 fallback);
 void FUN_004fda78(s32 actor, s32 secondary, u32 options, void *target, s32 value, u16 extraId);
@@ -20,7 +20,7 @@ u32 FUN_0038ddb0(void)
     u32 status = scrGetArg(0);
     s32 apply = scrGetArg(1);
     s32 checkResistance = scrGetArg(2);
-    u32 options = btlUnitGet(g_btlScriptUnit);
+    u32 options = (u32)btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     BtlMainStateA *battle = btlGetMainState();
     if (apply) {
         if (checkResistance &&

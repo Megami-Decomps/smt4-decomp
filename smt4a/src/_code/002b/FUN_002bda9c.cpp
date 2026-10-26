@@ -9,7 +9,7 @@ int textFormatBuffer(...);
 int jobGetWork(...);
 int padButtonIsPressed(...);
 int FUN_00167618(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_00182884(...);
 int FUN_002be8d0(void);
 int asdListBoxFindItem(...);
@@ -64,7 +64,7 @@ extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: padButtonIsPressed. */
 /* Supplied declaration required: FUN_00167618. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_00182884. */
 /* Supplied declaration required: FUN_002be8d0. */
 extern int libc_strlen(void);
@@ -180,7 +180,7 @@ LAB_002be87c:
       temp_v16 = 1.0f;
       temp_v17 = 1.0f;
       temp_v18 = 1.0f;
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       temp_v13 = 0.003921569f;
       temp_v3 = *(unsigned int *)("ჿတ胿肀⃿₀胿" + (unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10);
       temp_v15 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -225,7 +225,7 @@ LAB_002be87c:
         temp_v16 = temp_v10;
         temp_v17 = temp_v10;
         temp_v18 = temp_v10;
-        FUN_0016c4b8(g_renderCtx,0);
+        renderCtxSelectTexture(g_renderCtx,0);
         temp_v1 = piVar2[0x17];
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

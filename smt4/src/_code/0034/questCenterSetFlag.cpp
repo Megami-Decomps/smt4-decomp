@@ -1,20 +1,23 @@
-/* NON_MATCHING: enabled is compared after the byte load rather than before retail's mask-shift sequence. */
-#include "shard/GameDataBlocks.h"
+#include "shard/W4_W4Match6b_GameDataBlock.h"
 
-extern "C" QuestCenterFlagView *gameGetQuestCenterBlock(void);
+extern "C" {
+    u8 *gameGetQuestCenterBlock(void);
+}
 
-/* Update one of the quest-center block's 32 flags. */
+
+// Set or clear a flag in the second 32-bit stats bank.
 extern "C" void questCenterSetFlag(u32 index, s32 enabled)
 {
-    if (index >= 32) {
+    if (index >= 32)
         return;
-    }
-    u8 *flags = gameGetQuestCenterBlock()->flags;
-    u8 mask = (u8)(1 << (index & 7));
-    u8 *flag = &flags[index >> 3];
+    StatsLeadingFlagView *stats = reinterpret_cast<StatsLeadingFlagView *>(gameGetQuestCenterBlock());
+    u8 *bank = stats->second;
+    u8 mask = 1 << (index & 7);
     if (enabled) {
+        u8 *flag = &bank[index >> 3];
         *flag |= mask;
     } else {
+        u8 *flag = &bank[index >> 3];
         *flag &= ~mask;
     }
 }

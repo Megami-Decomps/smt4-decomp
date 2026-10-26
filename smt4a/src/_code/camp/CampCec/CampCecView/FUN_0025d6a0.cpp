@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0025d6a0` (_code @ 0x25d6a0, 0xfd8 bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int VectorSignedToFloat(...);
 
 int uiPointerHitsRect(...);
 int FUN_00182054(void);
-int asdTMTexTableEntryAt(...);
 int linkHolderApplyFlag(...);
 int FUN_002e1c94(...);
 int FUN_002e207c(...);
@@ -49,7 +49,6 @@ extern int slotIsActive(unsigned int);
 extern int padButtonRepeat(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
 /* Supplied declaration required: FUN_00182054. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: linkHolderApplyFlag. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: FUN_002e1c94. */
@@ -416,7 +415,7 @@ LAB_0025dd50:
         temp_v8 = *(int *)(temp_v0 + 0x114);
         temp_v9 = -1;
         *(unsigned int *)(temp_v0 + 300) = 0;
-        temp_v1 = asdTMTexTableEntryAt(0x2e,0x42);
+        temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x42);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -428,7 +427,7 @@ LAB_0025dd50:
           temp_v6 = *(unsigned int *)(temp_v0 + 300) | 1;
         }
         *(unsigned int *)(temp_v0 + 300) = temp_v6;
-        temp_v1 = asdTMTexTableEntryAt(0x2e,0x43);
+        temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x43);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -440,7 +439,7 @@ LAB_0025dd50:
           temp_v6 = *(unsigned int *)(temp_v0 + 300) & 0xfffffffd;
         }
         *(unsigned int *)(temp_v0 + 300) = temp_v6;
-        temp_v1 = asdTMTexTableEntryAt(0x2e,0x41);
+        temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x41);
         temp_v17[0] = 0;
         temp_v3 = (int)*(short *)(temp_v1 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -455,7 +454,7 @@ LAB_0025dd50:
         *(unsigned int *)(temp_v0 + 300) = temp_v6;
         do {
           if (temp_v1 < *(int *)(temp_v0 + 0x120)) {
-            temp_v3 = asdTMTexTableEntryAt(0x2e,temp_v1 + 0x96);
+            temp_v3 = (int)asdTMTexTableEntryAt(0x2e,temp_v1 + 0x96);
             temp_v17[0] = 0;
             temp_v4 = (int)*(short *)(temp_v3 + 8);
             uiPointerHitsRect(temp_v4,(int)*(short *)(temp_v3 + 10),(int)**(short **)(temp_v3 + 0xc),
@@ -548,7 +547,7 @@ LAB_0025dd50:
                 temp_v5 = *(int *)(temp_v0 + 0x114);
                 temp_v3 = *(int *)(temp_v0 + 0x118);
                 FUN_00167c14(temp_v17 + 1,temp_v17,0);
-                temp_v9 = asdTMTexTableEntryAt(0x2e,0x41);
+                temp_v9 = (int)asdTMTexTableEntryAt(0x2e,0x41);
                 temp_v17[0] = temp_v17[0] - *(short *)(temp_v9 + 10);
                 temp_v4 = *(int *)(temp_v9 + 0xc);
                 temp_v9 = *(int *)(temp_v0 + 0x120);

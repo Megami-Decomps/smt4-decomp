@@ -14,7 +14,7 @@ int recordClearWideHandle(...);
 int FUN_0042792c(...);
 int FUN_00427c38(int *, unsigned char [1024], int);
 int FUN_00427ff4(...);
-int FUN_0043c2d4(...);
+int stringFormatUnbounded(...);
 void aocApplicationRecreatePrimaryRequest(AocApplicationRequestView *app);
 int FUN_00473980(...);
 int FUN_00474d0c(void);
@@ -55,7 +55,7 @@ extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_0042792c. */
 /* Supplied declaration required: FUN_00427c38. */
 /* Supplied declaration required: FUN_00427ff4. */
-/* Supplied declaration required: FUN_0043c2d4. */
+/* Supplied declaration required: stringFormatUnbounded. */
 /* Supplied declaration required: aocApplicationRecreatePrimaryRequest. */
 /* Supplied declaration required: FUN_00473980. */
 /* Supplied declaration required: FUN_00474d0c. */
@@ -193,11 +193,11 @@ int * FUN_00475700(int param_1)
     *(unsigned int *)(temp_v0 + 0x45c) = uStack_6c;
     *(unsigned int *)(temp_v0 + 0x460) = uStack_68;
     *(unsigned int *)(temp_v0 + 0x464) = uStack_64;
-    FUN_0043c2d4(temp_v0 + 0x468,&LAB_00475b20,&LAB_00475b10);
-    FUN_0043c2d4(temp_v0 + 0x4a8,&LAB_00475b20,&LAB_00475b24);
-    FUN_0043c2d4(temp_v0 + 0x4e8,&LAB_00475b20,&LAB_00475b34);
-    FUN_0043c2d4(temp_v0 + 0x528,&LAB_00475b20,&LAB_00475b44);
-    FUN_0043c2d4(temp_v0 + 0x568,&LAB_00475b20,&LAB_00475b54);
+    stringFormatUnbounded(temp_v0 + 0x468,&LAB_00475b20,&LAB_00475b10);
+    stringFormatUnbounded(temp_v0 + 0x4a8,&LAB_00475b20,&LAB_00475b24);
+    stringFormatUnbounded(temp_v0 + 0x4e8,&LAB_00475b20,&LAB_00475b34);
+    stringFormatUnbounded(temp_v0 + 0x528,&LAB_00475b20,&LAB_00475b44);
+    stringFormatUnbounded(temp_v0 + 0x568,&LAB_00475b20,&LAB_00475b54);
     temp_v14[0] = temp_v0 + 0x368;
     temp_v14[1] = 9;
     if (*(int *)(temp_v0 + 0x364) != 0) {

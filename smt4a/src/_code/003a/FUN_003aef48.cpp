@@ -2,13 +2,13 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/W6_W6Match3_FormatBuffer.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
 int uiPointerHitsRect(...);
 int FUN_00167c14(...);
 int sysPlaySe(...);
-int asdTMTexTableEntryAt(...);
 int msgWindowReset(void);
 int FUN_0032ef0c(...);
 int FUN_00344bc8(...);
@@ -37,7 +37,6 @@ extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_00167c14. */
 /* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: msgWindowReset. */
 extern int FUN_002e1a18(unsigned int);
 /* Supplied declaration required: campCecSetObjectValue. */
@@ -100,7 +99,7 @@ unsigned int FUN_003aef48(int param_1)
   temp_v1 = param_1;
   FUN_00387ad8(param_1,1);
   if (temp_v1 != 0) {
-    temp_v1 = asdTMTexTableEntryAt(0x2e,0x42);
+    temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x42);
     temp_v17 = 0;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
     uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -112,7 +111,7 @@ unsigned int FUN_003aef48(int param_1)
       temp_v2 = *(unsigned int *)(param_1 + 0x11c) & 0xfffffffe;
     }
     *(unsigned int *)(param_1 + 0x11c) = temp_v2;
-    temp_v1 = asdTMTexTableEntryAt(0x2e,0x43);
+    temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x43);
     temp_v17 = 0;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
     uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -124,7 +123,7 @@ unsigned int FUN_003aef48(int param_1)
       temp_v2 = *(unsigned int *)(param_1 + 0x11c) & 0xfffffffd;
     }
     *(unsigned int *)(param_1 + 0x11c) = temp_v2;
-    temp_v1 = asdTMTexTableEntryAt(0x2e,0x41);
+    temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x41);
     temp_v17 = 0;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
     uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -139,7 +138,7 @@ unsigned int FUN_003aef48(int param_1)
     *(unsigned int *)(param_1 + 0x11c) = temp_v2;
     do {
       if (temp_v1 < *(int *)(param_1 + 0x124)) {
-        temp_v11 = asdTMTexTableEntryAt(0x2e,temp_v1 + 0xd1);
+        temp_v11 = (int)asdTMTexTableEntryAt(0x2e,temp_v1 + 0xd1);
         temp_v17 = 0;
         temp_v3 = (int)*(short *)(temp_v11 + 8);
         uiPointerHitsRect(temp_v3,(int)*(short *)(temp_v11 + 10),(int)**(short **)(temp_v11 + 0xc),
@@ -175,7 +174,7 @@ unsigned int FUN_003aef48(int param_1)
         *(unsigned int *)(param_1 + 0x13c) = 0;
       }
     }
-    temp_v1 = asdTMTexTableEntryAt(0x2e,*(int *)(param_1 + 0x128) + 0xe6);
+    temp_v1 = (int)asdTMTexTableEntryAt(0x2e,*(int *)(param_1 + 0x128) + 0xe6);
     temp_v17 = 3;
     temp_v11 = (int)*(short *)(temp_v1 + 8);
     uiPointerHitsRect(temp_v11,(int)*(short *)(temp_v1 + 10),(int)**(short **)(temp_v1 + 0xc),
@@ -243,7 +242,7 @@ unsigned int FUN_003aef48(int param_1)
     else if ((temp_v2 & 4) != 0) {
       temp_v11 = *(int *)(param_1 + 0x128);
       FUN_00167c14(temp_v23,&temp_v17,0);
-      temp_v1 = asdTMTexTableEntryAt(0x2e,0x41);
+      temp_v1 = (int)asdTMTexTableEntryAt(0x2e,0x41);
       temp_v17 = temp_v17 - *(short *)(temp_v1 + 10);
       temp_v6 = *(int *)(param_1 + 0x124);
       temp_v16 = (float)VectorSignedToFloat(temp_v17,(unsigned char)(in_fpscr >> 0x16) & 3);

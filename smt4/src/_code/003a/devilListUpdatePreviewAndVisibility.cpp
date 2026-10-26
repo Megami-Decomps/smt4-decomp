@@ -1,5 +1,6 @@
 /* NON_MATCHING: ID loads fuse their halfword conversions and preview flags are not base-hoisted, changing saved registers, stack alignment and final visibility tail call. */
 #include "common.h"
+#include "util/FUN_0029e924.h"
 
 struct DevilListEntry {
     u32 unk00;
@@ -26,7 +27,6 @@ struct DevilListWork {
 extern "C" {
 s32 flaggedValueHolderGetTotal(void *cursor);
 s32 rangeLimitMin(void *cursor);
-s32 FUN_0029e924(void *cursor);
 void uiOwnerUpdateAnimationChannels(DevilListWork *work);
 void unitInitializeFromSavedRecord(u16 id, void *record);
 void FUN_0029da34(s32 screen, s32 mode, u16 id, const void *record);
@@ -63,10 +63,10 @@ void devilListUpdatePreviewAndVisibility(DevilListWork *work)
                 FUN_0029da34(0, 1, id, temporaryRecord);
             }
         }
-        if (work->previewEnabled) {
-            FUN_003a6f80(work);
-        } else {
+        if (!(work->previewEnabled)) {
             FUN_003a8450(work);
+        } else {
+            FUN_003a6f80(work);
         }
     }
     FUN_0022de74(work);

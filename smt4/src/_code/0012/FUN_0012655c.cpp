@@ -1,5 +1,6 @@
 /* NON_MATCHING: sound-global addressing, null-handle guard folding and saved VFP/core register allocation differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "util/FUN_002bf684.h"
 
 /* The native BasicSound scalar controls are not described by the archive slot prefix. */
 struct BasicSoundControlView {
@@ -10,7 +11,6 @@ struct BasicSoundControlView {
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_002bf684(AsdSoundSystem *sound);
 s32 FUN_00141fd0(AsdSoundSystem *sound, u32 soundId);
 bool asdSndEnsureCurrentSlotData(u32 soundId);
 u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, u32 soundId, const void *info);

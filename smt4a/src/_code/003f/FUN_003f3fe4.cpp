@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "util/CalleeContracts.h"
 #include "util/PackNibbles.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -138,7 +139,7 @@ void FUN_003f3fe4(fn_003f3fe4_arg0 *param_1,int param_2,int param_3)
       temp_v1 = btlMainGetUnk14();
     }
     if (temp_v1 != 0) {
-      temp_v2 = FUN_00180114(*(unsigned short *)(temp_v1 + 0x62));
+      temp_v2 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v1 + 0x62));
       textFormatBuffer(temp_v16,&LAB_003f436c,temp_v2);
       temp_v10 = (int)*(short *)(temp_v1 + 0x62);
       temp_v12 = (unsigned int)*(unsigned short *)(temp_v1 + 100);

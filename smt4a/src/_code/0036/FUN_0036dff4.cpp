@@ -3,13 +3,13 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 
-int FUN_00157558(int);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
 int FUN_0018098c(...);
@@ -35,7 +35,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_00157558. */
 extern int jobGetWork(unsigned int process);
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
@@ -74,7 +73,7 @@ int FUN_0036dff4(unsigned int process)
   float temp_v12;
   
   temp_v0 = jobGetWork(process);
-  FUN_00157558(g_renderCtx);
+  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
   temp_v3 = g_renderCtx;
   temp_v1 = FUN_001692ac(1,0);
   piVar7 = (int *)(temp_v3 + 0x1258);

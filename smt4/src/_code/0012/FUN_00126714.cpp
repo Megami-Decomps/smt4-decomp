@@ -1,19 +1,13 @@
 #include "common.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 
-typedef struct JobWork {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ u32 unk3C;
-} JobWork;
-
-JobWork *jobGetWork(void);
-
-u32 FUN_00126714(void)
+u32 FUN_00126714(u32 handle)
 {
-    JobWork *work = jobGetWork();
+    JobWork *work = jobGetWork(handle);
 
-    return work->unk3C;
+    return work->unk003C;
 }
 
 } /* extern "C" */

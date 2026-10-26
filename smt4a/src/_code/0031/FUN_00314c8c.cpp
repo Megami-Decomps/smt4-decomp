@@ -19,12 +19,15 @@ u32 FUN_00314c8c(void)
     if (scrGetCommandFrame() != 0) {
         if (!FUN_00163e84(0)) {
             if (FUN_00162ea4())
-                return FUN_00212204(0);
+                FUN_00212204(0);
             return 0;
         }
-    } else if (static_cast<u32>(scrGetArg(0)) < 2) {
-        FUN_003d54f8(0, duration);
-        return 0;
+    } else {
+        s32 channel = scrGetArg(0);
+        if (channel == 0 || channel == 1) {
+            FUN_003d54f8(0, duration);
+            return 0;
+        }
     }
     return 1;
 }

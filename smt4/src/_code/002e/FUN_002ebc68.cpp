@@ -1,9 +1,9 @@
 /* NON_MATCHING: global sound-system addresses reload instead of staying saved; actor base and early-return register allocation differ. */
 #include "sound/SpatialSoundPlayback.h"
+#include "util/FUN_002bf684.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_002bf684(AsdSoundSystem *);
 s32 FUN_00141fd0(AsdSoundSystem *, u32);
 s32 asd3dSoundActorIsPlaying(u32);
 s32 FUN_001388dc(u32);

@@ -58,7 +58,7 @@ void FUN_00191260(void *queue);
 u32 FUN_001911a4(void *queue, u32 value);
 void FUN_00161d8c(void *bucket);
 void FUN_00161da4(void *bucket);
-void FUN_00161d74(void *bucket);
+void callbackListInitialize(void *bucket);
 }
 
 /* Sorts the list by priority (base priority plus layer, clamped to 0-127) with one bucket per priority. */
@@ -94,7 +94,7 @@ extern "C" void FUN_00147c10(ObjectGroup *group)
     }
     sortByPriority<FUN_00161d8c>(&group->first);
     sortByPriority<FUN_00161da4>(&group->second);
-    sortByPriority<FUN_00161d74>(&group->third);
+    sortByPriority<callbackListInitialize>(&group->third);
     void *queue = objectCommandQueueGet();
     FUN_00191260(queue);
     FUN_001911a4(queue, 0);

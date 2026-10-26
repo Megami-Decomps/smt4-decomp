@@ -13,10 +13,11 @@ BtlHelpEntryA *FUN_00200a68(u32 kind, u16 message, u32 object, u32 command,
 u32 FUN_004c8cb0(u32 object, s32 index, u8 option)
 {
     BtlMainStateA* battle = btlGetMainState();
-    if ((((u64)g_btlHelp.blockedStates[0] | ((u64)g_btlHelp.blockedStates[1] << 32)) &
-         battle->stateFlags64.bits) != 0 ||
-        (battle->stateFlags64.bits &
-         ((u64)g_btlHelp.blockedTransitions[0] | ((u64)g_btlHelp.blockedTransitions[1] << 32))) != 0) {
+    u64 flags = battle->stateFlags64.bits;
+    u32 low = (u32)flags;
+    u32 high = (u32)(flags >> 32);
+    if (((g_btlHelp.blockedStates[0] & low) | (g_btlHelp.blockedStates[1] & high)) != 0 ||
+        ((low & g_btlHelp.blockedTransitions[0]) | (high & g_btlHelp.blockedTransitions[1])) != 0) {
         return 0;
     }
     // This command lies beyond the shared command-message subrecord's recovered end.

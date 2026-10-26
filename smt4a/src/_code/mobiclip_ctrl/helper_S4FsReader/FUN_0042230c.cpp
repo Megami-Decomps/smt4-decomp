@@ -4,6 +4,8 @@
 #include "AsdSDK/AsdDebug.h"
 #include "nn/svc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemAlloc.h"
+#include "sys/ResultReport.h"
 
 /* The reader thread's stack block: the memory and the allocator object that describes it. */
 struct S4ThreadStack {
@@ -30,11 +32,9 @@ extern "C" {
 extern const char DAT_00532ab8[]; /* "c:\\SMT4F\\SMT4F\\mobiclip_ctrl\\helper_S4FsReader.cpp": __FILE__ */
 extern S4ThreadStackBlock DAT_005880f8;
 
-void *memAlloc(int, int, int, s32 size, int align, int);
 void resultReportIfFailed(S4ThreadStack *stack, void *memory, u32 size);
 void nn_os_CriticalSection_Initialize(void *lock);
 s32 FUN_0017fd20(u32 *handle, u32 resetType); /* creates an event */
-void FUN_002e3140(s32 result);                /* throws a fatal error */
 s32 FUN_002fb0d4(u32 *thread, const S4ThreadHooks *hooks, void (*entry)(void *), void *argument, u32 stackTop, u32 alignment, s32 priority, s32 affinity);
 void FUN_00422534(void *reader);
 void FUN_00514a74(void);

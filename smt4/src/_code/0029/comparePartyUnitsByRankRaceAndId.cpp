@@ -1,8 +1,8 @@
 /* NON_MATCHING: retail copies the first input pointer to r2 before the prologue; this equivalent comparator loads through r0 directly. */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
+#include "gamedata/UnitRecordAccess.h"
 
-extern "C" GameUnitSortRecord *gameGetUnitRecord(s32 index);
 
 // Put invalid units last; sort valid units by descending rank, race and ID.
 extern "C" s32 comparePartyUnitsByRankRaceAndId(const s32 *left, const s32 *right)
@@ -15,8 +15,8 @@ extern "C" s32 comparePartyUnitsByRankRaceAndId(const s32 *left, const s32 *righ
     }
     if (*right < 0)
         return -1;
-    GameUnitSortRecord *first = gameGetUnitRecord(*left);
-    GameUnitSortRecord *second = gameGetUnitRecord(*right);
+    GameUnitSortRecord *first = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*left));
+    GameUnitSortRecord *second = static_cast<GameUnitSortRecord *>(gameGetUnitRecord(*right));
     difference = second->rank - first->rank;
     if (difference != 0)
         return difference;

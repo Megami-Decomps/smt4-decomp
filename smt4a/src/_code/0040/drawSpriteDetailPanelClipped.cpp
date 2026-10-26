@@ -3,10 +3,10 @@
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/SpriteDetailPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern RenderCtxScissorA* g_renderCtx;
-SpriteInfo* asdTMTexTableEntryAt(u32 group, s32 sprite);
 u32 FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 void FUN_00404dd0(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
@@ -15,17 +15,17 @@ u32 renderPopStateStacks(void);
 void drawSpriteDetailPanelClipped(SpriteDetailPanel* panel, s32 x, s32 y, f32 speed)
 {
     const s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    const SpriteInfo* border = asdTMTexTableEntryAt(0x32, 0x37);
+    const TextureTableEntryIV* border = asdTMTexTableEntryAt(0x32, 0x37);
     const s32 clipX = parallax + border->x;
     const s32 clipY = border->y;
-    const s32 clipWidth = border->size[0];
-    const s32 clipHeight = border->size[1];
+    const s32 clipWidth = border->placement->width;
+    const s32 clipHeight = border->placement->height;
     const bool suspended = renderCtxSuspendScissor(g_renderCtx);
     FUN_00168e00(clipX, clipY, clipWidth, clipHeight);
 
     if (panel->spriteGroup == 1) {
         efctSetSpeed(speed);
-        const SpriteInfo* image = asdTMTexTableEntryAt(0x32, 0x38);
+        const TextureTableEntryIV* image = asdTMTexTableEntryAt(0x32, 0x38);
         const s32 screenX = x + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
         FUN_001835b4(2, panel->spriteGroup, panel->spriteId * 1000,
                      panel->anchor->x + image->x + screenX,

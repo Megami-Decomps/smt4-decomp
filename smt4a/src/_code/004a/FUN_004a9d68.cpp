@@ -2,6 +2,7 @@
 #include "battle/btlUI.h"
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "util/CalleeContracts.h"
+#include "util/BtlScriptUnitHasFlags.h"
 
 static inline u32 findActionSlot(BtlUiA *ui)
 {
@@ -15,7 +16,6 @@ static inline u32 findActionSlot(BtlUiA *ui)
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
-s32 btlScriptUnitHasFlags(u32 owner);
 void uiSpriteSelectAnim(SpritePlaybackView *sprite, s32 animation);
 
 // Reserve a projected effect slot and synchronize the owner's completion-mask bit.
@@ -41,7 +41,7 @@ u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
     slot->acceleration[0] = slot->acceleration[1] = slot->acceleration[2] = 0.0f;
     slot->ownerFlags = reinterpret_cast<u32 *>(ownerFlags);
     *ownerFlags &= ~globals->completionMask;
-    if (btlScriptUnitHasFlags(ui->owner)) {
+    if (btlScriptUnitHasFlags(reinterpret_cast<const BtlMainStateA *>(ui->owner))) {
         slot->active = 0;
         slot->state = 5;
         *reinterpret_cast<u64 *>(slot->ownerFlags) |= globals->completionMask;

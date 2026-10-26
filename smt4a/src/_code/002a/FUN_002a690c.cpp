@@ -4,10 +4,10 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
 s32 FUN_0028809c(s32 source, s32 target, const ActiveSkillRecord *skill, s32 preview, s32 flags);
-BtlEquip *gameGetPlayerData();
 BtlEquip *gameGetSlotRecord(s32 index);
 SlotTable *gameGetSlotTable();
 s32 FUN_003df57c(u32 costParameter, s32 mode);
@@ -32,7 +32,7 @@ u32 FUN_002a690c(s32 source, u32 skillId, s32 preview)
         if (applied != 0) {
             if (preview == 0) {
                 if (source < 0) {
-                    BtlEquip *unit = gameGetPlayerData();
+                    BtlEquip *unit = reinterpret_cast<BtlEquip *>(gameGetPlayerData());
                     unit->mp -= FUN_003df57c(skill->cost.costParameter, 1);
                     if (unit->mp < 0)
                         unit->mp = 0;

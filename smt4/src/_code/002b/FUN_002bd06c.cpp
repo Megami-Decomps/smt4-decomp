@@ -15,7 +15,7 @@ static __inline AocLookupRecord *aocLookupSearch(const AocLookupRecord *key, u32
 }
 
 // Prefer add-on table data, falling back to the base table's first entry for invalid IDs.
-Table01Record *FUN_002bd06c(u16 id)
+Table01Record *FUN_002bd06c(u32 id)
 {
     if (g_aocSystem->lookup.enabled) {
         AocLookupRecord key;

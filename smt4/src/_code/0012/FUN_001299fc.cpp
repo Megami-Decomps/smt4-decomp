@@ -1,6 +1,7 @@
 /* NON_MATCHING: GPU initialization global-address grouping and zero-store scheduling differ. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "util/FUN_002c1398.h"
 
 extern "C" {
 extern NngxInitializationPrefixIV g_nngxState;
@@ -12,7 +13,6 @@ extern NngxCommandPrefixIV DAT_00431c40;
 
 void nn_os_CriticalSection_Enter(u32 *criticalSection);
 void nn_os_CriticalSection_Leave(u32 *criticalSection);
-void FUN_002c1398(void);
 void FUN_0013b218(NngxCommandPrefixIV *commandState);
 u32 libc_strlen(const char *text);
 void asdModelForwardChecked(u32 *destination, const char *source,

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "shard/FUN_0019e52c.h"
 
 // Layout rectangle looked up by (group, index).
 struct LayoutEntry {
@@ -26,7 +27,6 @@ extern "C" {
 
 void efctSetSpeed(f32 speed);
 LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
-u32 FUN_0019e52c(u32 slot);
 IconInfo* FUN_00184310(u32 code);
 void FUN_00169a1c(s32 sprite, s32 x, s32 y, s32 z);
 const char* FUN_003f74a8(u32 id, PanelRecord* record);

@@ -90,7 +90,7 @@ u8 *gameFlagBlockGet(void);
 extern "C" {
 #endif
 
-u8 byteIsAtLeast100(u8 *valueRef);
+u8 byteIsAtLeast100(const u8 *valueRef);
 
 #ifdef __cplusplus
 }

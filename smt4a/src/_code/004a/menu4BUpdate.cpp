@@ -1,4 +1,5 @@
 #include "shard/Shard004A.h"
+#include "util/FUN_002a482c.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ extern s32 gameGetMode(void);
 extern u8 statusDownGetFlag(void);
 extern s32 FUN_0035db94(void);
 extern void uiSpriteBankApplyPreset(u8 *block, s16 page);
-extern u32 FUN_002a482c(u8 *block);
 extern u32 FUN_0031d174(u8 *block);
 extern s32 statusDownGetMode(void);
 extern void FUN_004d01f8(u8 *block);

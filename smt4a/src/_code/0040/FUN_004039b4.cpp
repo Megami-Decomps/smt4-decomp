@@ -9,20 +9,20 @@ typedef struct SortRecord {
     /* 0x04 */ u16 order;
 } SortRecord;
 
-SortRecord *FUN_0039b984(u32 id);
+SortRecord *contentFindRecordById(u32 id);
 
 /* Comparator over pointers to record IDs: sorts by order, then by id; unknown records sort as 999. */
 int FUN_004039b4(const u16 *left, const u16 *right)
 {
-    SortRecord *a = FUN_0039b984(*left);
-    SortRecord *b = FUN_0039b984(*right);
+    SortRecord *a = contentFindRecordById(*left);
+    SortRecord *b = contentFindRecordById(*right);
     int orderA = a != NULL ? a->order : 999;
     int orderB = b != NULL ? b->order : 999;
     int result = orderA - orderB;
 
     if (result == 0) {
-        a = FUN_0039b984(*left);
-        b = FUN_0039b984(*right);
+        a = contentFindRecordById(*left);
+        b = contentFindRecordById(*right);
         int idA = a != NULL ? a->id : 999;
         int idB = b != NULL ? b->id : 999;
         result = idA - idB;

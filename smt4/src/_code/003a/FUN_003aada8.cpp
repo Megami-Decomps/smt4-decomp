@@ -1,5 +1,6 @@
 /* NON_MATCHING: Retail ldr r1, [pc, #100] differs from recovered add r1, r0, #42496. */
 #include "common.h"
+#include "camp/RenderCtx.h"
 
 struct TitleSceneLocalView {
     u8 unk00[0x14];                 // 0x0000
@@ -11,10 +12,9 @@ struct TitleSceneLocalView {
 };
 
 extern "C" {
-extern u32 g_titleScene;
+extern RenderCtx *g_titleScene;
 void FUN_002bed3c(TitleSceneLocalView* scene);
-void FUN_002c198c(u32 scene);
-void FUN_002c18e4(u32 scene);
+void FUN_002c18e4(RenderCtx *scene);
 
 // Set the scene state, invoke its selected member callback, and update the title scene.
 void FUN_003aada8(TitleSceneLocalView* scene)
@@ -27,7 +27,7 @@ void FUN_003aada8(TitleSceneLocalView* scene)
         (scene->*callback)();
     }
 
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 }

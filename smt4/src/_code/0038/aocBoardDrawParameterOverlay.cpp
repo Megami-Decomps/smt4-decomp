@@ -19,7 +19,6 @@ s32 FUN_002c5d80(u32 preset, u32 index);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *animation);
 void FUN_002bed3c(void);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 // Draw the enabled overlay at the owner's animation speed and restore render state.
@@ -38,7 +37,7 @@ u32 aocBoardDrawParameterOverlay(u32 job)
     efctSetSpeed(1.0f);
     renderStackPop(&g_titleScene->stackA);
     FUN_002bed3c();
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return 0;
 }

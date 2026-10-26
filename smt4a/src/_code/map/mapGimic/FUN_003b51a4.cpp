@@ -1,5 +1,6 @@
 /* NON_MATCHING: aggregate table addressing folds its prefix into indexed loads; initial register assignment and active-store order differ. */
 #include "shard/W5_W5Match7_SceneState.h"
+#include "util/FUN_0040aa6c.h"
 
 struct MapGimicIdentityView {
     u8 unk00[6];
@@ -34,7 +35,6 @@ extern const char DAT_00531a78[];
 s32 gameFlagIsSet(s32 flag);
 void *FUN_00178b04(u32 bytes, const char *file, s32 line);
 MapGimicResource *modelListInit(void *memory);
-void FUN_0040aa6c(MapGimicResource *resource, const char *name);
 void FUN_0040aad4(MapGimicResource *resource, s32 index);
 void controllerSetDestination(void *controller, const MapVector *position);
 void controllerSetRotationEulerDegrees(void *controller, f32 x, f32 y, f32 z);

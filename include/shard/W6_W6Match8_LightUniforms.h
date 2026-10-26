@@ -78,7 +78,7 @@ static __inline void shaderLightEmitVector(u32 index, const f32 *vector)
 extern "C" {
 #endif
 
-u8 byteIsAtLeast100(u8 *value);
+u8 byteIsAtLeast100(const u8 *value);
 
 #ifdef __cplusplus
 }

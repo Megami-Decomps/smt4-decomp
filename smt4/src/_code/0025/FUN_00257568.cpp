@@ -1,5 +1,6 @@
 /* NON_MATCHING: the inlined key fill keeps the 99/0 constants in fp/r7 and saves r11/r12; retail sets each key register in its branch. */
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct UnitRecord {
 s32 idIsAbove400(s32 id);
 u32 FUN_0024c5a0(u32 id);
 s32 recordKindRank(s32 id);
-UnitSortRecord *dataTable40FindById(u32 id);
 UnitRecord *gameGetUnitRecord(s32 unit);
 
 static __inline s32 unitSortLevel(const UnitSortEntry *entry)
@@ -47,7 +47,7 @@ static __inline void unitSortGetKey(const UnitSortEntry *entry, UnitSortKey *key
     } else {
         key->kind = FUN_0024c5a0(entry->id);
         key->rank = recordKindRank(entry->id);
-        key->order = dataTable40FindById(entry->id)->order;
+        key->order = reinterpret_cast<UnitSortRecord *>(dataTable40FindById(entry->id))->order;
     }
 }
 

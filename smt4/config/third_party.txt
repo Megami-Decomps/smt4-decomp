@@ -117,7 +117,7 @@
 0x0011b6c8 FUN_0011b6c8 callers
 0x0011b788 FUN_0011b788 callers
 0x0011b918 FUN_0011b918 between
-0x0011b930 FUN_0011b930 between
+0x0011b930 clearU64 between
 0x0011b940 FUN_0011b940 callers
 0x0011b9b0 FUN_0011b9b0 between
 0x0011bb34 FUN_0011bb34 between
@@ -616,7 +616,7 @@
 0x00144228 FUN_00144228 callers
 0x0014486c nw_snd_internal_TaskManager_Initialize name
 0x00144890 nn_os_detail_BlockingQueueBase_nn_os_CriticalSection_Initialize name
-0x0014490c FUN_0014490c between
+0x0014490c valueChainInit between
 0x00144924 FUN_00144924 between
 0x0014493c _ZSt16__insertion_sortIP11KeyedRecord15KeyedRecordLessEvT_S3_T0_ name
 0x00144f44 nn_os_Thread_ThreadStart name
@@ -842,7 +842,7 @@
 0x00150b5c nw_gfx_ParticleCollection_Clear name
 0x00150ed8 nw_snd_internal_DriverCommandManager_ProcessCommand name
 0x00150f24 FUN_00150f24 between
-0x00150f84 FUN_00150f84 between
+0x00150f84 wordsFlagClear between
 0x00150f9c lcgRandomHigh16 between
 0x00150fc8 FUN_00150fc8 between
 0x00150ff4 FUN_00150ff4 between
@@ -852,7 +852,7 @@
 0x00151374 nw_snd_internal_driver_VoiceManager_UpdateAllVoices name
 0x00151400 FUN_00151400 callers
 0x00151500 nw_anim_PlayPolicy_Loop name
-0x00151b78 FUN_00151b78 between
+0x00151b78 compareRecordKey between
 0x00151b88 FUN_00151b88 between
 0x00151b98 FUN_00151b98 between
 0x00151cd8 FUN_00151cd8 between
@@ -917,7 +917,7 @@
 0x00155124 FUN_00155124 callers
 0x001552fc FUN_001552fc callers
 0x00155634 FUN_00155634 callers
-0x00155650 FUN_00155650 between
+0x00155650 mathClampFloat between
 0x00155678 nw_gfx_TransformNode_InverseWorldMatrix name
 0x001556d8 FUN_001556d8 between
 0x001557e8 nw_snd_internal_WaveArchiveFile_FileHeader_GetInfoBlock name
@@ -1306,7 +1306,7 @@
 0x00238170 FUN_00238170 between
 0x002381a4 FUN_002381a4 between
 0x002387f8 FUN_002387f8 between
-0x00238998 FUN_00238998 between
+0x00238998 idChainMatchSequence between
 0x00238a50 idListFind between
 0x00238aac FUN_00238aac between
 0x00238bec FUN_00238bec between
@@ -1524,7 +1524,7 @@
 0x002b4504 FUN_002b4504 between
 0x002b45e8 dataTable08Sub2GetRecord between
 0x002b46f8 libc_bsearch name
-0x002b4748 FUN_002b4748 between
+0x002b4748 itemCategoryFindByItemId between
 0x002b47bc fileSectionGetData between
 0x002b47ec FUN_002b47ec between
 0x002b47f4 fileSlotGetBuffer between
@@ -1630,7 +1630,7 @@
 0x002bbb5c gameGetQuestCenterBlock between
 0x002bbb74 FUN_002bbb74 between
 0x002bbbc8 FUN_002bbbc8 between
-0x002bbe30 FUN_002bbe30 between
+0x002bbe30 mathCopyIdentityMatrix between
 0x002bbed0 nn_math_ARMv6_MTX44PivotC_FAST name
 0x002bcbb0 nw_snd_internal_BasicSound_SetVolume name
 0x002bcc14 nw_snd_SoundStartable_StartSound name
@@ -1669,7 +1669,7 @@
 0x002bfe20 FUN_002bfe20 between
 0x002bfedc nn_math_ARMv6_MTX34CopyAsm name
 0x002bfefc __cxa_guard_acquire name
-0x002bff10 FUN_002bff10 between
+0x002bff10 stateValuesGetBySelector between
 0x002bff38 FUN_002bff38 between
 0x002bffd8 FUN_002bffd8 between
 0x002c00b4 nw_gfx_SceneNode_AttachChild name
@@ -1762,9 +1762,9 @@
 0x0034f758 soundResetPairState between
 0x0034f768 mobiclipDecoderSetSources name
 0x0034f780 _ZN9Obj420a2c14releaseSourcesEv callers
-0x0034f7ec FUN_0034f7ec between
+0x0034f7ec callbackResetStateCountAndPending between
 0x0034f800 FUN_0034f800 between
-0x0034f8e8 FUN_0034f8e8 between
+0x0034f8e8 uiCreateRequestObject between
 0x0034f98c FUN_0034f98c between
 0x0034f9c8 FUN_0034f9c8 between
 0x0034fa04 movieSyncDrainSourcePositions callers
@@ -1792,7 +1792,7 @@
 0x003519b8 movieY2rConfigureAndStart between
 0x00351b28 FUN_00351b28 callers
 0x00351b38 FUN_00351b38 callers
-0x00351b50 FUN_00351b50 between
+0x00351b50 resourceSlotRelease between
 0x00351b70 FUN_00351b70 between
 0x00351b94 FUN_00351b94 between
 0x00351bb8 FUN_00351bb8 between
@@ -1813,7 +1813,7 @@
 0x00351f7c FUN_00351f7c between
 0x00351fb8 FUN_00351fb8 between
 0x00352008 FUN_00352008 between
-0x00352078 FUN_00352078 between
+0x00352078 ipcRequest04Forward between
 0x00352098 FUN_00352098 between
 0x003520b8 FUN_003520b8 between
 0x003520d8 FUN_003520d8 between
@@ -1847,7 +1847,7 @@
 0x0035335e FUN_0035335e between
 0x00353368 FUN_00353368 between
 0x00353550 FUN_00353550 between
-0x003535d8 FUN_003535d8 between
+0x003535d8 windowGetOperationFailure between
 0x003535f0 FUN_003535f0 between
 0x0035361c FUN_0035361c between
 0x003536a8 FUN_003536a8 between
@@ -1879,7 +1879,7 @@
 0x00354c60 FUN_00354c60 between
 0x00354ce0 FUN_00354ce0 between
 0x00354d0c FUN_00354d0c between
-0x00354d38 FUN_00354d38 between
+0x00354d38 fileHolderTryRead between
 0x00354d40 FUN_00354d40 between
 0x00354d54 handleRequestSubmit between
 0x00354dac FUN_00354dac between
@@ -1906,7 +1906,7 @@
 0x00355d68 archiveTryOpenFile between
 0x00355db0 FUN_00355db0 between
 0x00355dd0 FUN_00355dd0 between
-0x00355e5c FUN_00355e5c between
+0x00355e5c vcallSlot0With3 between
 0x00355eac nn_fs_CTR_MPCore_detail_UserFileSystem_TrySetPriorityForFile name
 0x00355ecc FUN_00355ecc between
 0x00355f8c FUN_00355f8c between
@@ -2104,9 +2104,9 @@
 0x0035bb54 FUN_0035bb54 between
 0x0035bd7c FUN_0035bd7c between
 0x0035bdbc FUN_0035bdbc between
-0x0035bdfc FUN_0035bdfc between
+0x0035bdfc halfSourceNext between
 0x0035be30 FUN_0035be30 between
-0x0035be38 FUN_0035be38 between
+0x0035be38 lexerReadHexDigits between
 0x0035bf18 FUN_0035bf18 between
 0x0035bf58 FUN_0035bf58 between
 0x0035bf98 FUN_0035bf98 between
@@ -2613,7 +2613,7 @@
 0x0037dfe0 FUN_0037dfe0 between
 0x0037dfe4 FUN_0037dfe4 between
 0x0037e05c nw_snd_internal_driver_ChannelManager_Alloc name
-0x0037e094 FUN_0037e094 between
+0x0037e094 wordByteClear between
 0x0037e0a4 FUN_0037e0a4 between
 0x0037e1e8 FUN_0037e1e8 between
 0x0037e210 FUN_0037e210 between
@@ -2973,7 +2973,7 @@
 0x003eace8 FUN_003eace8 between
 0x003ead14 FUN_003ead14 between
 0x003ead20 FUN_003ead20 between
-0x003ead80 FUN_003ead80 between
+0x003ead80 slistPushFrontIfNotNull between
 0x003ead94 FUN_003ead94 between
 0x003eade8 FUN_003eade8 between
 0x003eae34 FUN_003eae34 between
@@ -3073,7 +3073,7 @@
 0x003f7150 FUN_003f7150 between
 0x003f7168 FUN_003f7168 between
 0x003f718c FUN_003f718c between
-0x003f72b4 FUN_003f72b4 between
+0x003f72b4 variantCopy between
 0x003f72d0 FUN_003f72d0 between
 0x003f72e8 FUN_003f72e8 between
 0x003f7300 _ZN9Obj420fd06notifyEv between

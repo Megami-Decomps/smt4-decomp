@@ -2,6 +2,7 @@
 #include "battle/ActionKindSelection.h"
 #include "battle/btlAction.h"
 #include "battle/btlMain.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 struct BattleEvent;
@@ -9,7 +10,6 @@ extern BattleEvent *g_btlEvent;
 extern BtlActionGlobals g_btlAction;
 s32 FUN_0027e3b8(BattleEvent *);
 s32 btlEventSelectTrigger(BattleEvent *, s32, s32, s32);
-const void *dataTable40FindById(s32);
 void battleSetActionKind(BtlMainState **);
 
 static __inline void battleSetSelectedActionThreadKind(s32 index, u8 kind)

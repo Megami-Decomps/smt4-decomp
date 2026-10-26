@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite from retail call sites compiles (173 vs ~180 rows); scenario copy loops and register allocation differ from retail */
 #include "gamedata/DataTable.h"
+#include "gamedata/UnitRecordAccess.h"
 
 // Row of the debug scenario table (0x74 bytes): the state the game is set to.
 struct ScenarioRow {
@@ -67,7 +68,6 @@ void __aeabi_memset4(void* block, u32 size, s32 value);
 void FUN_00333ef8(s32 kind, char* name, u16* look);
 void FUN_00334058(u32 id);
 u8 gameSlotFindByCategory(UnitRecord* record);
-UnitRecord* gameGetUnitRecord(s32 index);
 SlotTable* gameGetSlotTable(void);
 void *dataTableFileGetTable(void *file, s32 arg);
 PlayerData* gameGetPlayerData(void);
@@ -119,8 +119,8 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     for (s32 i = 0; i < 3; i++) {
         if (scenario->partyIds[i] == 0) continue;
         for (s32 slot = 0; slot < slots->slotLimit; slot++) {
-            if (gameGetUnitRecord(slot)->id == scenario->partyIds[i]) {
-                slots->party[partyCount] = gameSlotFindByCategory(gameGetUnitRecord(slot));
+            if (static_cast<UnitRecord *>(gameGetUnitRecord(slot))->id == scenario->partyIds[i]) {
+                slots->party[partyCount] = gameSlotFindByCategory(static_cast<UnitRecord *>(gameGetUnitRecord(slot)));
                 partyCount++;
                 break;
             }

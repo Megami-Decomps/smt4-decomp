@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int FUN_0019e3d0(...);
 int FUN_001aff14(int *, int);
 int FUN_0020cb74(...);
@@ -86,7 +86,7 @@ extern unsigned int DAT_0064c080; /* 0x64c080 */
 #endif
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int, int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001aff14. */
 /* Supplied declaration required: FUN_0020cb74. */
@@ -233,7 +233,7 @@ LAB_003fade8:
                   *(unsigned char *)(temp_v2 + 0x12d0) = 0;
                 }
               }
-              FUN_0016c4b8(g_renderCtx,
+              renderCtxSelectTexture(g_renderCtx,
                            *(unsigned int *)
                             (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18));
               if (!(*(char *)((int)pfVar7 + 0x25) == '\0' || param_5 == 3)) {

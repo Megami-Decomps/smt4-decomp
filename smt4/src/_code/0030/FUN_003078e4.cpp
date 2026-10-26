@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail exits with bxls before pushing registers and uses r0/r1 differently; armcc here pushes first. */
+/* NON_MATCHING: retail exits with bxls before pushing registers (shrink-wrapped empty-count guard) and uses r0/r1 differently; armcc here pushes first. The owner's group/params pair is now a sub-block so the writeback load matches. */
 #include "common.h"
 
 struct Vec4 {
@@ -25,10 +25,14 @@ struct GroupParams {
     /* 0x38 */ u32 count;
 };
 
+struct GroupRefs {
+    /* 0x00 */ VertexGroup *group;
+    /* 0x04 */ GroupParams *params;
+};
+
 struct GroupOwner {
     /* 0x00 */ u8 unk00[0x3c];
-    /* 0x3c */ VertexGroup *group;
-    /* 0x40 */ GroupParams *params;
+    /* 0x3c */ GroupRefs refs;
 };
 
 extern "C" {
@@ -38,8 +42,9 @@ extern u8 DAT_00472560[4];
 /* Virtual reset: gives every colour the default RGBA (scaled to 0..1) and marks every vertex index unused. */
 void FUN_003078e4(GroupOwner *owner)
 {
-    VertexGroup *group = owner->group;
-    u32 count = owner->params->count;
+    GroupRefs *refs = &owner->refs;
+    VertexGroup *group = refs->group;
+    u32 count = refs->params->count;
     Vertex *vertex = group->vertices;
     for (u32 i = 0; i < count; i++) {
         Vec4 *color = &group->table->colors[(u16)i];

@@ -11,7 +11,7 @@ int asdOperatorDelete(...);
 int sysMemClear(...);
 int FUN_003e8704(...);
 int FUN_003e8794(...);
-int FUN_003eacb4(...);
+int battleReleaseRetiredUnitResources(...);
 int FUN_003ef978(...);
 int btlSelectMode4D74(...);
 int countersAddSaturating(...);
@@ -74,7 +74,7 @@ extern int gameGetSlotTable(void);
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_003e8704. */
 /* Supplied declaration required: FUN_003e8794. */
-/* Supplied declaration required: FUN_003eacb4. */
+/* Supplied declaration required: battleReleaseRetiredUnitResources. */
 /* Supplied declaration required: FUN_003ef978. */
 /* Supplied declaration required: btlSelectMode4D74. */
 /* Supplied declaration required: countersAddSaturating. */
@@ -116,7 +116,7 @@ void FUN_004c9d04(fn_004c9d04_arg0 *param_1,unsigned int param_2,unsigned int pa
   temp_v6 = *puVar13;
   temp_v7 = puVar13[1];
   if ((DAT_0057aa70 & temp_v6) != 0 || (DAT_0057aa74 & temp_v7) != 0) {
-    FUN_003eacb4(temp_v5);
+    battleReleaseRetiredUnitResources(temp_v5);
     return;
   }
   if ((temp_v7 & DAT_0057aa34) != 0 || (temp_v6 & DAT_0057aa30) != 0) {

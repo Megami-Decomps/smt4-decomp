@@ -2,6 +2,7 @@
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/Shard0031.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "util/FUN_00187168.h"
 
 extern "C" {
 s32 FUN_003e0024();
@@ -13,7 +14,6 @@ SlotTable *gameGetSlotTable();
 PartySlotA *gameGetSlotRecord(s32 slot);
 s32 recordGetScaledMaximum(PartySlotA *unit);
 PartySlotA *FUN_003e4d68(u16 slot);
-s32 FUN_00187168(PartySlotA *unit);
 
 // Check whether the player, stored party, or support roster needs HP/MP/status recovery.
 u32 FUN_004ced50()

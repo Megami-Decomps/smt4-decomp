@@ -12,7 +12,7 @@ int campDrawPartyComparisonIndicators(...);
 int FUN_0025f6b8(...);
 int FUN_002bed3c(...);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
 int FUN_002dc120(...);
 int FUN_002f1558(...);
@@ -50,7 +50,7 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0025f6b8. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002dc120. */
@@ -245,7 +245,7 @@ LAB_001e076c:
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   FUN_002c18e4(g_titleScene);
   return;
 }

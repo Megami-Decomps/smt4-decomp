@@ -2,9 +2,9 @@
 /* Removes candidates according to their exclusion chance and returns the remaining count. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/lcgRandomRange.h"
 
 extern "C" {
-s32 lcgRandomRange(u32 maximum);
 
 s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *indices, s32 count, s32 force)
 {
@@ -14,7 +14,7 @@ s32 FUN_004e9ae8(BtlMainStateA **owner, s32 *indices, s32 count, s32 force)
     u8 changed = 0;
     for (s32 i = 0; i < count; ++i) {
         s32 chance = btlFindEntryNonzeroRecordValue((*owner)->entries[indices[i]].unitIndex);
-        if (chance != 0 && (force != 0 || lcgRandomRange(99) <= chance)) {
+        if (chance != 0 && (force != 0 || (s32)lcgRandomRange(99) <= chance)) {
             indices[i] = -1;
             changed = 1;
         }

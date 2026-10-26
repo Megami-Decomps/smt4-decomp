@@ -2,6 +2,7 @@
 #include "camp/CampState.h"
 #include "gamedata/SelectedUnitQuery.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
+#include "util/FUN_002a4894.h"
 struct PlayerData;
 
 namespace {
@@ -33,7 +34,6 @@ extern "C" {
 extern CampStateA *g_camp;
 s32 objectApplyIfUnblocked(void *selector);
 s32 resourceRunOperationIfUnblocked(void *selector);
-s32 FUN_002a4894(void *selector);
 void sysMemClear(void *memory, u32 bytes);
 PlayerData *gameGetPlayerData();
 u32 markerKindGetColor(s16 status);

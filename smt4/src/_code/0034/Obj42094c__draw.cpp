@@ -10,7 +10,7 @@ struct Obj42094cDrawContext {
 };
 extern "C" {
 extern Obj42094cDrawContext *g_titleScene;
-void FUN_002c1b64(void *context, u32 texture);
+void renderCtxSelectTexture(void *context, u32 texture);
 u32 FUN_002c5d80(u32 mode, u32 value);
 void titleSceneMultiplyByCameraView(void *filter, f32 *matrix, const void *motion);
 void FUN_002b011c();
@@ -21,7 +21,7 @@ void forwardRecoveredCallback();
 void Obj42094c::draw()
 {
     Filter4PolyView *filter = (Filter4PolyView *)this;
-    FUN_002c1b64(g_titleScene, ((FilterDrawTexture *)filter->texture)->handle);
+    renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)filter->texture)->handle);
     g_titleScene->blend.push(filter->config->blendMode);
     g_titleScene->projection.push(FUN_002c5d80(1, 0));
     f32 color[4] = {1, 1, 1, ((FilterDrawChild *)filter->child)->alpha};

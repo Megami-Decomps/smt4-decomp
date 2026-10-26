@@ -2,10 +2,10 @@
 #include "sys/ProcessResult.h"
 #include "shard/RomFileOpenState.h"
 #include "nn/fs/ArchiveCreateFile.h"
+#include "util/pathBuildWide.h"
 
 extern "C" {
 void FUN_00254824(u32 result);
-s32 FUN_00254884(const void *path, u8 *normalized, u32 encoding);
 void *FUN_002ad888(void);
 u32 FUN_002bb5a4(RomOpenFile *file, const u8 *path, u32 mode);
 void asdFatalError(void);
@@ -15,7 +15,7 @@ void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 u32 FUN_00220330(RomFileOpenState *state, const void *path, u32 size)
 {
     u8 normalized[496];
-    if (!FUN_00254884(path, normalized, 1)) {
+    if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 1)) {
         u32 result = 0xe0e046bc;
         FUN_002c3510(result);
         return result;

@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/ObjectBufferFree.h"
 
 extern "C" {
 
@@ -9,9 +10,9 @@ typedef struct Obj {
     /* 0x28 */ u32 buffer;
 } Obj;
 
-void objectBufferFree(Obj *obj)
+void objectBufferFree(void *object)
 {
-    asdMemFree(obj->buffer);
+    asdMemFree(static_cast<Obj *>(object)->buffer);
 }
 
 } /* extern "C" */

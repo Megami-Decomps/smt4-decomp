@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ int efctSetSpeed(void);
 int FUN_00169e38(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(unsigned int, int, unsigned int);
-int asdTMTexTableEntryAt(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int renderCtxCalculateStereoParallax(...);
@@ -36,7 +36,6 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_00169e38. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 extern int gameFlagIsSet(unsigned int);
@@ -80,23 +79,23 @@ void FUN_00164490(int param_1)
     efctSetSpeed();
     FUN_00183bb0();
     if (param_1 != 0) {
-      temp_v4 = asdTMTexTableEntryAt(8,0x94);
+      temp_v4 = (int)asdTMTexTableEntryAt(8,0x94);
       temp_v12 = 0.26f;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v2 = temp_v2 + (int)temp_v12;
     }
     else {
-      temp_v4 = asdTMTexTableEntryAt(8,0xc0);
+      temp_v4 = (int)asdTMTexTableEntryAt(8,0xc0);
     }
     FUN_00164b5c(2,8,0,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
     FUN_00169e38(*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x7c),*(short *)(temp_v4 + 8) + temp_v2,
                  *(short *)(temp_v4 + 10) + temp_v3,0);
     if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x92) != '\0') {
       if (param_1 != 0) {
-        temp_v4 = asdTMTexTableEntryAt(8,0x100);
+        temp_v4 = (int)asdTMTexTableEntryAt(8,0x100);
       }
       else {
-        temp_v4 = asdTMTexTableEntryAt(8,0x11f);
+        temp_v4 = (int)asdTMTexTableEntryAt(8,0x11f);
       }
       FUN_00164b5c(2,8,0xc,*(short *)(temp_v4 + 8) + temp_v2,*(short *)(temp_v4 + 10) + temp_v3,0xb);
       if (*(char *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x8c) != '\0') {
@@ -111,7 +110,7 @@ void FUN_00164490(int param_1)
         drawSetColorFromRGBA8(temp_v5);
         temp_v4 = 0;
         do {
-          temp_v6 = asdTMTexTableEntryAt(8,temp_v4 + 0x5c);
+          temp_v6 = (int)asdTMTexTableEntryAt(8,temp_v4 + 0x5c);
           FUN_001835b4(2,7,0xe,(int)*(short *)(temp_v6 + 8) + temp_v0 + temp_v2,
                        (int)*(short *)(temp_v6 + 10) + temp_v3 + temp_v1,0x10);
           temp_v4 = temp_v4 + 1;
@@ -132,7 +131,7 @@ void FUN_00164490(int param_1)
       temp_v12 = temp_v14;
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v13 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v4 = asdTMTexTableEntryAt(8,0x100);
+      temp_v4 = (int)asdTMTexTableEntryAt(8,0x100);
       FUN_00164b5c(2,8,0x16,(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
                    *(short *)(temp_v4 + 10) + temp_v3,0xb);
       FUN_00169e38(-*(int *)(temp_v2 + 0x168),(int)*(short *)(temp_v4 + 8) + (int)(temp_v14 + temp_v13),
@@ -144,7 +143,7 @@ void FUN_00164490(int param_1)
       temp_v3 = vec2GetYInt(temp_v2 + 0xb00);
       renderCtxCalculateStereoParallax(g_renderCtx);
       temp_v14 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-      temp_v4 = asdTMTexTableEntryAt(8,0x100);
+      temp_v4 = (int)asdTMTexTableEntryAt(8,0x100);
       FUN_00164b5c(2,8,0x17,(int)*(short *)(temp_v4 + 8) + (int)(temp_v12 + temp_v14),
                    *(short *)(temp_v4 + 10) + temp_v3,0xb);
       temp_v6 = (int)*(short *)(temp_v4 + 8);
@@ -180,19 +179,19 @@ void FUN_00164490(int param_1)
               temp_v4 = temp_v10;
             }
             temp_v7 = __aeabi_idivmod(temp_v6,temp_v9);
-            temp_v8 = asdTMTexTableEntryAt(8,100 - temp_v10);
+            temp_v8 = (int)asdTMTexTableEntryAt(8,100 - temp_v10);
             FUN_001835b4(2,7,temp_v7,*(short *)(temp_v8 + 8) + temp_v11,*(short *)(temp_v8 + 10) + temp_v3,
                          0x10);
             temp_v6 = temp_v6 - temp_v9 * temp_v7;
             if (temp_v10 != 2) {
               if (temp_v10 == 5) {
-                temp_v7 = asdTMTexTableEntryAt(8,0x66);
+                temp_v7 = (int)asdTMTexTableEntryAt(8,0x66);
                 FUN_001835b4(2,7,0xc,*(short *)(temp_v7 + 8) + temp_v11,*(short *)(temp_v7 + 10) + temp_v3,
                              0x10);
               }
             }
             else {
-              temp_v7 = asdTMTexTableEntryAt(8,0x67);
+              temp_v7 = (int)asdTMTexTableEntryAt(8,0x67);
               FUN_001835b4(2,7,0xc,*(short *)(temp_v7 + 8) + temp_v11,*(short *)(temp_v7 + 10) + temp_v3,
                            0x10);
             }
@@ -202,7 +201,7 @@ void FUN_00164490(int param_1)
         } while (temp_v9 != 0);
       }
       else {
-        temp_v2 = asdTMTexTableEntryAt(8,0x5c);
+        temp_v2 = (int)asdTMTexTableEntryAt(8,0x5c);
         FUN_001835b4(2,7,0,*(short *)(temp_v2 + 8) + temp_v11,*(short *)(temp_v2 + 10) + temp_v3,0x10);
       }
       FUN_00183bb0();

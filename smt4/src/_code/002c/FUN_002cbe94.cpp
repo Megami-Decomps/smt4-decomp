@@ -1,9 +1,9 @@
 /* NON_MATCHING: open-result lifetime, resize argument order and constant result materialization differ. */
 #include "shard/RomFileOpenState.h"
 
-extern "C" s32 FUN_00254884(const char *path, char *resolvedPath, s32 flags);
 extern "C" s32 FUN_002bb5a4(RomOpenFile *file, const char *path, u32 mode);
 #include "sys/ProcessResult.h"
+#include "util/pathBuildWide.h"
 extern "C" void asdFatalError();
 extern "C" void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
@@ -17,7 +17,7 @@ static __inline u32 fileRecordResult(u32 result)
 extern "C" s32 FUN_002cbe94(RomFileOpenState *state, const char *path, u32 size)
 {
     char resolvedPath[500];
-    if (!FUN_00254884(path, resolvedPath, 0))
+    if (!pathBuildWide(path, reinterpret_cast<s16 *>(resolvedPath), 0))
         return fileRecordResult(0xe0e046bc);
     romOpenFileInitialize(&state->file);
     s32 result = FUN_002bb5a4(&state->file, resolvedPath, 6);

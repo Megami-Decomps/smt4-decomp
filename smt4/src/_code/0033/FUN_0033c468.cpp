@@ -3,6 +3,7 @@
 #include "shard/PadState.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/UnitRecordAccess.h"
 
 /* The cycle fields occupy unaligned-union padding, and the blink fields extend the shared prefix. */
 struct AnimatedSlotPlacementView {
@@ -21,7 +22,6 @@ struct AnimatedSlotPlacementView {
 };
 
 extern "C" {
-PartyDamageUnitIV *gameGetUnitRecord(s32 index);
 void slotPlacementGetPosition(const SlotPlacement *placement, s32 *x, s32 *y);
 
 void FUN_0033c468(AnimatedSlotPlacementView *placement)
@@ -32,7 +32,7 @@ void FUN_0033c468(AnimatedSlotPlacementView *placement)
         if (placement->unitIndex < 0)
             ailments = reinterpret_cast<PadState *>(gameGetPlayerData())->unk72;
         else
-            ailments = gameGetUnitRecord(placement->unitIndex)->ailments;
+            ailments = static_cast<PartyDamageUnitIV *>(gameGetUnitRecord(placement->unitIndex))->ailments;
         s32 count = 0;
         for (s32 bit = 1; bit <= 10; ++bit)
             if (ailments & (1 << bit))

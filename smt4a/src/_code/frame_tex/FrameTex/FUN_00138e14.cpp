@@ -64,7 +64,7 @@ extern int FUN_0013e848(unsigned int job); /* 0x13e848 */
 extern int FUN_0013e8f8(...); /* 0x13e8f8 */
 extern int FUN_0013e9e4(...); /* 0x13e9e4 */
 extern int FUN_0013ee80(...); /* 0x13ee80 */
-extern unsigned int FUN_0013ef3c(unsigned int process); /* 0x13ef3c */
+extern unsigned int surfaceCaptureUpdate(unsigned int process); /* 0x13ef3c */
 extern int frameTexCaptureSecondVariant(unsigned int job); /* 0x14055c */
 extern int FUN_00140618(unsigned int job); /* 0x140618 */
 extern unsigned char DAT_00530cfc; /* 0x530cfc */
@@ -143,7 +143,7 @@ void FUN_00138e14(void)
   taskCreateDraw(&LAB_001392a0,0x65,0,0,panelUpdateAnimatedScale,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392ac,0xcc,0,0,FUN_0013d2dc,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392b8,0x7a,0,0,FUN_0013ee80,0,g_frameTex,*puVar2);
-  taskCreateDraw(&LAB_001392c8,0xd6,0,0,FUN_0013ef3c,0,g_frameTex,*puVar2);
+  taskCreateDraw(&LAB_001392c8,0xd6,0,0,surfaceCaptureUpdate,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392d8,0x87,0,0,FUN_0013e8f8,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392e8,0xe3,0,0,FUN_0013e9e4,0,g_frameTex,*puVar2);
   taskCreateDraw(&LAB_001392b8,0x82,0,0,frameTexCaptureSecondVariant,0,g_frameTex,*puVar2);

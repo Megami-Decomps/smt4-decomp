@@ -20,10 +20,11 @@ u32 FUN_0039d87c(void)
     s32 group = btlResolveEntryChoice(scrGetArg(1));
     u32 candidates[109];
     s32 candidateCount = 0;
-    u32 first, count;
-    FUN_00301a08(group, reinterpret_cast<s32 *>(&first), reinterpret_cast<s32 *>(&count));
-    for (s32 index = first; index < (s32)(first + count); ++index) {
-        BtlCombatantEntryA *entry = &btlGetMainState()->entries[index];
+    s32 first, count;
+    FUN_00301a08(group, &first, &count);
+    for (s32 index = first; index < count + first; ++index) {
+        BtlMainStateA *state = btlGetMainState();
+        BtlCombatantEntryA *entry = &state->entries[index];
         u64 flags = entry->flags;
         if ((flags & g_btlCandidateMasks.unavailable) == 0 &&
             (flags & g_btlCandidateMasks.required) != 0 &&

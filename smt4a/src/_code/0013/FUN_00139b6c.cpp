@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation only: retail loads the tick counter into r2 and the 0x708 limit into r3, and the second timer loop counts down in r3; built uses r3/r2 */
 #include "common.h"
+#include "shard/gameFlagsGetBlock.h"
 
 extern "C" {
 
@@ -22,12 +23,11 @@ typedef struct GameState {
 
 extern GameState g_gameState;
 
-extern FlagsBlock *gameFlagsGetBlock(void);
 
 /* Counts one frame; every TIMER_PERIOD frames the coarse timers tick down, and the fine ones every frame. */
 void FUN_00139b6c(void)
 {
-    FlagsBlock *flags = gameFlagsGetBlock();
+    FlagsBlock *flags = reinterpret_cast<FlagsBlock *>(gameFlagsGetBlock());
     s32 i;
 
     if (++g_gameState.ticks > TIMER_PERIOD) {

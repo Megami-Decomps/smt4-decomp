@@ -1,2 +1,16 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x59dad0; not written yet. */
 #include "common.h"
+
+struct Slot1c {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ s32 value;
+};
+
+extern "C" {
+
+/* Virtual reset: clears the word at offset 0x1c. */
+void FUN_00452470(Slot1c *self)
+{
+    self->value = 0;
+}
+
+} /* extern "C" */

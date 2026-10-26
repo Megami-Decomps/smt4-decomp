@@ -15,14 +15,15 @@ void FUN_0026adb4(void)
 {
     StatusSelectionWork* work = g_statusDown;
     for (s32 i = 0; i < 8; ++i) {
-        if (work->pending[i] != 0 && work->pending[i] == work->selected[0]) {
+        u16 pending = work->pending[i];
+        if (pending != 0 && pending == (u16)work->selected[0]) {
             work->pending[i] = 0;
         }
     }
     work->selected[0] = 0;
     for (s32 pass = 0; pass < 7; ++pass) {
         for (s32 i = 0; i < 7 - pass; ++i) {
-            if (work->selected[pass + i] == 0 && work->selected[pass + i + 1] != 0) {
+            if ((u16)work->selected[pass + i] == 0 && (u16)work->selected[pass + i + 1] != 0) {
                 work->selected[pass + i] = work->selected[pass + i + 1];
                 work->selected[pass + i + 1] = 0;
             }

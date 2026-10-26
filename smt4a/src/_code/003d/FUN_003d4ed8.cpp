@@ -1,4 +1,3 @@
-/* NON_MATCHING: one position-setter argument move uses r6 rather than retail r4; all other instructions match. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
@@ -21,8 +20,7 @@ s32 FUN_003d4ed8(u32 sound, BattleVector3 position)
     if (!jyoucyuGetTableEntry(1) && !FUN_00162ea4()) {
         for (s32 channel = 0; channel < 16; ++channel) {
             if (!asd3dSoundActorIsPlaying(channel)) {
-                result = channel;
-                FUN_0032cc8c(channel, &position);
+                FUN_0032cc8c(result = channel, &position);
                 if (sound - 0x100007c <= 0x190) {
                     FUN_0036bca0(sound, result);
                     result += 100000;

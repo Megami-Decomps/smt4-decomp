@@ -1,5 +1,6 @@
 /* First-reference hook for the table: preloads resources and registers its 0x68-byte entries on the first call. */
 #include "common.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
@@ -7,7 +8,6 @@ extern s8 g_useCounter[2];  /* [1]: reference count */
 
 extern void qsort(void *entries, u32 count, s32 entrySize, void *callback);
 extern void asdTMTexTableLoadSprites(s32 id);
-extern void FUN_0014afd0(s32 id, s32 arg);
 extern void *dataTableGet(s32 group, s32 id);
 extern u32 dataTableGetCount(void *table);
 extern void *dataTableGetEntries(void);

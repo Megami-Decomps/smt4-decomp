@@ -1,6 +1,7 @@
 /* NON_MATCHING: mask operand registers differ and the shared HP-zero store is folded into the opposite branch. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/PlayerDataBlock.h"
 
 /* Action flags extend beyond the shared BtlUnitRecordA prefix. */
 struct BattleActionFlagRecordView {
@@ -14,7 +15,6 @@ struct BattleActionFlagRecordView {
 extern "C" {
 extern BtlMainGlobalsA g_btlMain;
 void flagsClearActionBits(u16 *flags);
-BattleActionFlagRecordView *gameGetPlayerData(void);
 BattleActionFlagRecordView *gameGetSlotRecord(s32 index);
 BtlPartyBlockA *gameGetSlotTable(void);
 
@@ -43,7 +43,7 @@ void FUN_003f135c(BtlMainStateA *battle)
     BtlPartyBlockA *party = gameGetSlotTable();
     for (s32 i = -1; i < party->count; ++i) {
         if (i < 0) {
-            flagsClearActionBits(&gameGetPlayerData()->playerFlags);
+            flagsClearActionBits(&reinterpret_cast<BattleActionFlagRecordView *>(gameGetPlayerData())->playerFlags);
         } else {
             BattleActionFlagRecordView *record = gameGetSlotRecord(i);
             if (record)

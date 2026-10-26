@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "util/AsdLoadFileHasDevice.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_00409814[]; /* __FILE__ */
@@ -12,7 +13,6 @@ extern s8 g_asdLoadFileUseRawPaths; /* 1: use paths exactly as given */
 
 s32 asdLoadFileIsPatched(const char *path);
 s32 textFormatBuffer(char *dst, const char *format, ...);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 AsdFileRequest *FUN_00155cb0(const char *path, u8 flag, void (*callback)(void *), void *job);
 void asdFileFinalizeCompletion(void *job);
 void asdFileRequestSetHeapKind(u32 handle, u8 flags);

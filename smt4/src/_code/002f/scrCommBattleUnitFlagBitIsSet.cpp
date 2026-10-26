@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "gamedata/FlagBitTests.h"
 #include "script/ScriptArgs.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct MainEntry002f7cc4 {
 } MainEntry002f7cc4;
 
 MainEntry002f7cc4 *btlMainFindEntryByListedId(void *state, s32 id);
-void *gameGetUnitRecord(s32 index);
 
 extern u32 g_btlScriptUnit; /* 0x43427c */
 

@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation of the flag mask/index in the loop (retail: index r5, mask r6) and the popup stores (retail uses post-increment `str r2,[r0],#4; str r1,[r0],#16`, the build emits stm and an offset store). */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "shard/W6_W6Match8_StatGrowth.h"
 
 extern "C" {
 
@@ -25,7 +26,6 @@ extern int textFormatBuffer(u8 *dst, u8 *src);
 extern FlagBlock *gameFlagsGetBlock(void);
 extern int gameFlagIsSet(u32 flag);
 extern int FUN_003e4230(u32 id);
-extern int gameDataFlagTestBit(u32 id);
 
 /* Marks every id 1-0x8C whose data flag is set (or whose check does not return 2) as seen; when something new was marked outside a popup, opens popup type 0x18. */
 void FUN_00353b00(int popupOpen)
@@ -40,7 +40,7 @@ void FUN_00353b00(int popupOpen)
         int mask = 1 << ((int)id % 8);
 
         if ((block->seen[(int)id / 8] & mask) == 0) {
-            if (gameDataFlagTestBit(id) != 0) {
+            if ((int)gameDataFlagTestBit(id) != 0) {
                 gameFlagsGetBlock()->seen[(int)id / 8] |= mask;
             } else if (FUN_003e4230(id) != 2) {
                 gameFlagsGetBlock()->seen[(int)id / 8] |= mask;

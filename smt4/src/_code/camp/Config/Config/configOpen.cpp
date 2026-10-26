@@ -1,21 +1,20 @@
-/* NON_MATCHING: the task callbacks are local code labels (LAB_*) that are not decompiled, so their addresses are built differently */
+/* NON_MATCHING: stripped debug trace and the mode switch shape now match retail; remaining differences are register choice (retail keeps the constant 1 in r7), FUN_0029f848's stack arguments (two str vs stm) and literal pool order. */
 /* Opens the Config screen: allocates and clears its work area, acquires its resources and picks
  * the initial selection from the story flags. */
 #include "common.h"
+#include "AsdSDK/AsdDebug.h"
 #include "camp/Config/Config.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 int fileSlotLoad(int id);
-int asdLoadFileAsyncSimple(void (*fn)(void), void **out, int arg);
 int FUN_0029f848(ConfigWork *config, u32 value, int a, int b, int c, int d);
 int asdTMTexTableLoadEntryAsync(int type, int index);
 int dataTableGetEntries(void);
 int memClear(void *ptr, int size);                  /* zero a block */
-void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 int asdTMTexTableLoadSprites(int type);
-void LAB_0018b954(void);
-void LAB_0018b964(void);
 
 extern ConfigWork *g_config;
 
@@ -31,6 +30,7 @@ void configOpen(void)
     int selection;
 
     if (g_config == NULL) {
+        asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\camp\\Config\\Config.cpp", 639);
         g_config = (ConfigWork *)asdMemAlloc(0x100, 0x100, 0, 0xbc, 1);
     }
     config = g_config;
@@ -39,8 +39,8 @@ void configOpen(void)
     config->flag = 0;
     asdTMTexTableLoadSprites(0x2f);
     asdTMTexTableLoadEntryAsync(0x2f, 0);
-    asdLoadFileAsyncSimple(LAB_0018b954, &config->heapA, 0);
-    asdLoadFileAsyncSimple(LAB_0018b964, &config->heapB, 0);
+    asdLoadFileAsyncSimple("camp/config.bf", reinterpret_cast<u32 *>(&config->heapA), 0);
+    asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&config->heapB), 0);
     fileSlotLoad(0x36);
     value = dataTableGet(0x36, 0);
     dataTableGetEntries();
@@ -49,14 +49,23 @@ void configOpen(void)
     mode = FUN_002973ec();
     selection = 1;
     if (gameFlagIsSet(0x555) != 0 && gameFlagIsSet(0x557) != 0) {
-        if (mode == 1) {
+        switch (mode) {
+        case 0:
+            break;
+        case 1:
             selection = 0;
-        } else if (mode == 2) {
+            break;
+        case 2:
             selection = 2;
+            break;
         }
     } else if (gameFlagIsSet(0x557) != 0) {
-        if (mode == 1) {
+        switch (mode) {
+        case 0:
+            break;
+        case 1:
             selection = 0;
+            break;
         }
     } else if (gameFlagIsSet(0x555) != 0 && mode == 0) {
         selection = 0;

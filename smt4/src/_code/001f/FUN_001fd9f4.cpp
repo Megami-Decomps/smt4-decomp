@@ -7,7 +7,7 @@ extern "C" {
 int FUN_002005ec(void);
 int mathInterpolatePackedTable(unsigned int);
 int FUN_002ba1e0(unsigned int);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int FUN_002e0460(void);
 int FUN_002f3904(void);
 int FUN_002f484c(void);
@@ -36,7 +36,7 @@ extern int DAT_0049fca0; /* 0x49fca0 */
 /* Supplied declaration required: FUN_002005ec. */
 /* Supplied declaration required: mathInterpolatePackedTable. */
 /* Supplied declaration required: FUN_002ba1e0. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -82,7 +82,7 @@ unsigned int FUN_001fd9f4(void)
       (**(romwright_code **)(temp_v3 + 0x1268))();
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     FUN_002005ec();
     temp_v3 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x124c);
@@ -106,7 +106,7 @@ unsigned int FUN_001fd9f4(void)
       (**(romwright_code **)(temp_v3 + 0x1268))();
       *(unsigned char *)(temp_v3 + 0x1264) = 0;
     }
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     FUN_002f3904();
     temp_v3 = g_titleScene;
     piVar7 = (int *)(g_titleScene + 0x124c);
@@ -184,7 +184,7 @@ unsigned int FUN_001fd9f4(void)
     *(float *)(temp_v3 + 0xe8) = temp_v6;
     temp_v7 = *(unsigned int *)(temp_v3 + 0xe4);
     temp_v2 = asdTMTexTableGetNodeTexture(0xe,2);
-    FUN_002c1b64(g_titleScene,temp_v2);
+    renderCtxSelectTexture(g_titleScene,temp_v2);
     temp_v1 = g_titleScene;
     temp_v3 = packNibblesAndByte(6,7,0);
     piVar7 = (int *)(temp_v1 + 0x12ac);

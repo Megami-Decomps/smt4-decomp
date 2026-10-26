@@ -32,7 +32,7 @@ typedef struct SlotRecordStats {
 
 extern SelectionScreenHolder g_engineCleanupOwner;
 
-void scrSetResult(u32 value);
+void scrSetResult(s32 value);
 SlotRecordStats *gameGetSlotRecord(s32 slot);
 u8 flagAt4IsClearOrMissing(void);
 u32 uiSelectedRecordGetSecond(void);

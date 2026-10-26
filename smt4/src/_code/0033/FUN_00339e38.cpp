@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler reuses the battle-state pointer; retail reloads it between vector/value copies. */
 #include "common.h"
 
 struct BattleViewVector {
@@ -21,12 +20,17 @@ struct BattleViewTarget {
 
 extern "C" BattleViewTarget* g_btlMain;
 
+static void vectorCopy(BattleViewVector *destination, const BattleViewVector *source)
+{
+    *destination = *source;
+}
+
 // Copy the two view vectors and associated value into the current battle state.
 extern "C" void FUN_00339e38(const BattleViewSource* source)
 {
     if (g_btlMain != NULL) {
-        g_btlMain->first = source->first;
-        g_btlMain->second = source->second;
+        vectorCopy(&g_btlMain->first, &source->first);
+        vectorCopy(&g_btlMain->second, &source->second);
         g_btlMain->value = source->value;
     }
 }

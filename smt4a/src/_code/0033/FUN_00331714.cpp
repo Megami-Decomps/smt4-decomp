@@ -8,7 +8,7 @@ extern "C" {
 int gameGetPlayerData(void);
 int dataTable08Sub2GetRecord(void);
 int FUN_0020b490(int, int);
-int FUN_00249a08(void);
+int resourceTableReleaseHandles(void);
 int bgmReleaseStopped(void);
 int FUN_002c8778(int);
 int FUN_002f0c18(void);
@@ -39,7 +39,7 @@ extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 extern int FUN_001bd100(unsigned short);
 /* Supplied declaration required: FUN_0020b490. */
-/* Supplied declaration required: FUN_00249a08. */
+/* Supplied declaration required: resourceTableReleaseHandles. */
 /* Supplied declaration required: bgmReleaseStopped. */
 /* Supplied declaration required: FUN_002c8778. */
 /* Supplied declaration required: FUN_002f0c18. */
@@ -98,7 +98,7 @@ void FUN_00331714(int param_1)
   if ((temp_v5 != 0) || (temp_v5 = lmapMainIsRunning(), temp_v5 != 0)) {
     bgmReleaseStopped();
     soundChannelStopAll(0xf);
-    FUN_00249a08();
+    resourceTableReleaseHandles();
   }
   else {
     temp_v5 = FUN_003ddfd8();

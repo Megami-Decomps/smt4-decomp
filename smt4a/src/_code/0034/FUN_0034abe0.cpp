@@ -4,6 +4,7 @@
 #include "util/PackNibbles.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ int FUN_0014bf3c(...);
 int textDrawString(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_00180114(...);
 int FUN_00180310(...);
 int asdTMTexTableEntryAt(...);
 int FUN_001835b4(...);
@@ -83,7 +83,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 extern int vec2GetXInt(unsigned int *);
 extern int vec2GetYInt(unsigned int *);
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_00180114. */
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -286,7 +285,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
         }
         else {
           temp_v11 = 0xffffffff;
-          temp_v10 = FUN_00180114(*puVar7);
+          temp_v10 = (int)FUN_00180114(*puVar7);
           textFormatBuffer(temp_v13,&LAB_0034b684,temp_v10);
         }
         temp_v10 = 0xffffffff;
@@ -456,7 +455,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
           textFormatBuffer(temp_v13,&LAB_0034b680);
         }
         else {
-          temp_v5 = FUN_00180114(*psVar6);
+          temp_v5 = (int)FUN_00180114(*psVar6);
           textFormatBuffer(temp_v13,&LAB_0034b684,temp_v5);
         }
         VectorSignedToFloat((int)*(short *)(temp_v2 + 10) + (int)*(short *)(temp_v8 + 10) + param_2,
@@ -628,7 +627,7 @@ void FUN_0034abe0(fn_0034abe0_arg0 *param_1,int param_2,int param_3,int param_4)
     textFormatBuffer(temp_v13,&LAB_0034c1c4);
   }
   else {
-    temp_v5 = FUN_00180114(*psVar6);
+    temp_v5 = (int)FUN_00180114(*psVar6);
     textFormatBuffer(temp_v13,&LAB_0034c1c0,temp_v5);
   }
   VectorSignedToFloat((int)*(short *)(temp_v1 + 10) + (int)*(short *)(temp_v2 + 10) + param_2,

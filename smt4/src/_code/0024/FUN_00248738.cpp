@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite compiles; app id arguments inferred; retail keeps the entry-table base in a register across the app loops and orders the special-case checks differently */
 #include "common.h"
+#include "util/FUN_0029efa8.h"
 
 // App list menu: only the members the state change touches.
 struct AppMenu {
@@ -33,7 +34,6 @@ void ifTouchRegionRemove(s32 index);
 void timerStart(void* timer, s32 a, s32 b);
 void spriteStartAnimationByIndex(void* sprite, s32 index);
 s32 flagBitIsSet(u32 bit);
-s32 FUN_0029efa8(void* list);
 
 static void addEntry(AppMenu* menu, u32 app)
 {

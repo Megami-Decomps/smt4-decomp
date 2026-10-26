@@ -2,6 +2,7 @@
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include <stddef.h>
+#include "util/GameDataBlocksGetSaveData.h"
 
 extern "C" {
 
@@ -18,7 +19,6 @@ typedef struct SaveData {
     /* 0x2158E */ SaveEntry entries[1];
 } SaveData;
 
-extern SaveData *gameDataBlocksGetSaveData(void);
 
 extern s32 FUN_00148d68(u32 a, u32 b, s32 c);
 
@@ -28,7 +28,7 @@ void FUN_004bb880(void)
     void *table = dataTableGet(2, 3);
     u8 *pairs = static_cast<u8 *>(dataTableGetEntries(table));
     s32 count = dataTableGetCount(table);
-    SaveData *save = gameDataBlocksGetSaveData();
+    SaveData *save = reinterpret_cast<SaveData *>(gameDataBlocksGetSaveData());
     s32 i;
 
     for (i = 0; i < count; i++) {

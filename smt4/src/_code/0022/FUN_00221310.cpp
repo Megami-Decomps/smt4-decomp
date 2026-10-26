@@ -1,6 +1,7 @@
 /* NON_MATCHING: restored s32(u32 handle) task callback and forwarded jobGetWork handle; icon rectangle argument scheduling and frameB modulo scratch register differ (204 rows each). */
 #include "common.h"
 #include "shard/W6_W6Match2_ScrollList.h"
+#include "shard/JobWork.h"
 
 #define INTRO_STATE_APPEAR 0
 #define INTRO_STATE_WAIT_TOUCH 1
@@ -36,7 +37,6 @@ struct IntroIconRecord {
 };
 
 extern "C" {
-u32 jobGetWork(u32 handle);
 void eventQueueAddUnique(u32 event);
 IntroIconRecord *asdTMTexTableEntryAt(u32 table, s32 index);
 s32 ifTouchGetSelectionModeForRegion(s32 id);

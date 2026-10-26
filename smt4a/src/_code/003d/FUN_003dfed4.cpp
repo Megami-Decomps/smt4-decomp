@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail argument packing or conditional store scheduling differs. */
+/* NON_MATCHING: retail returns straight into the shared pop after `movle r0,#1`; the build adds a `bgt` to a separate epilogue. */
 #include "common.h"
 #include "gamedata/Table04Record.h"
 
@@ -14,7 +14,8 @@ s32 FUN_003dfed4(u32 id, u32 index)
     EntryData *entry = (EntryData *)dataTable04FindById(id);
     if (!entry)
         return 0;
-    s32 remaining = entry->maximum - FUN_002efc44(entry, index, 4);
+    s32 maximum = entry->maximum;
+    s32 remaining = maximum - FUN_002efc44(entry, index, 4);
     return remaining > 0 ? remaining : 1;
 }
 }

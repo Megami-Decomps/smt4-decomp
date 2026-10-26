@@ -5,7 +5,6 @@
 
 extern "C" {
 extern TitleScene* g_titleScene;
-void FUN_002c1b64(TitleScene* scene, s32 mode);
 void FUN_002d5900(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
                   f32 endX, f32 endY, f32 opacity, f32 width);
 
@@ -13,7 +12,7 @@ void FUN_002d5900(u32 firstColor, u32 secondColor, f32 startX, f32 startY,
 void FUN_00342e5c(const RoutedConnectorState* state, const f32* start, const f32* end,
                   u32 color, s32 fade)
 {
-    FUN_002c1b64(g_titleScene, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     f32 bendX;
     f32 pixelOffset = 0.0f;
     f32 bendY = end[1];

@@ -5,6 +5,7 @@
 #include "ui/UiSpriteState.h"
 #include "Model/MoriModelShadowMap.h"
 #include "util/PackNibbles.h"
+#include "util/skinObjectUpdateMatrices.h"
 
 struct PositionedMenuDrawWork {
     u8 unk000[0x14];
@@ -18,7 +19,6 @@ s32 vec2GetYInt(const UiSpriteState *position);
 void FUN_003f66dc(PositionedMenuDrawWork *work, s32 x, s32 y, f32 speed);
 void efctSetSpeed(f32 speed);
 f32 vec2GetSpeed(const void *object);
-void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)
@@ -47,7 +47,7 @@ s32 FUN_003f7f90(PositionedMenuDrawWork *work, s32 value)
     renderStackPop(&context->stackA);
     context = g_renderCtx;
     renderCtxSetB(context, packNibblesAndByte(6, 7, 0));
-    skinObjectUpdateMatrices(g_renderCtx);
+    skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
     renderCtxResetColorScale(g_renderCtx);
     return 0;
 }

@@ -3,7 +3,6 @@
 #include "gamedata/SkillFlags.h"
 
 extern "C" {
-SkillFlagsRecord* dataTable06Sub1GetRecord(u32 id);
 s32 saveIsRecordValueBounded(u16 id);
 s32 flagBitIsSet(u32 flag);
 s32 randNextInRange(u32 maximum);

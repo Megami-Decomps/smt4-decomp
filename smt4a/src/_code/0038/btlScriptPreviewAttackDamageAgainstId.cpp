@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W5_W5Match7_BattleMask.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "gamedata/Table00Lookup.h"
 
 union BattleAttackPreview {
     u32 words[13];
@@ -19,7 +20,6 @@ union BattleAttackPreview {
 extern "C" {
 s32 scrGetArg(u32 index);
 void scrSetResult(s32 value);
-void *dataTable00FindById(u16 id);
 void FUN_003e8bb0(BattleAttackPreview *out, BtlMainStateA *battle, BtlCombatantEntryA *attacker);
 void kindIdStore(u32 kind, u32 *out);
 s32 FUN_004c58e0(void *context, s32 variant, s32 attacker, s32 target,

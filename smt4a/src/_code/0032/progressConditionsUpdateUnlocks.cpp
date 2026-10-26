@@ -1,6 +1,7 @@
 /* NON_MATCHING: B-counter switch calls do not tail-merge, and save-byte addressing/register lifetimes differ; optimization flags may explain this. */
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
+#include "util/GameDataBlocksGetSaveData.h"
 
 struct ProgressUnlockCondition {
     u8 unk00[0x22];
@@ -11,7 +12,6 @@ struct ProgressUnlockCondition {
 
 extern "C" {
 void countersRecordPlayerMaxima();
-GameBlock2830C *gameDataBlocksGetSaveData();
 u32 gameFlagIsSet(u32);
 u32 countersGetA(s32);
 u32 countersGetB(s32);
@@ -24,7 +24,7 @@ void progressConditionsUpdateUnlocks()
     s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
     for (s32 index = 0; index < count; ++index) {
         s32 byte = index / 8;
-        GameBlock2830C *save = gameDataBlocksGetSaveData();
+        GameBlock2830C *save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
         u32 mask = 1u << (index % 8);
         if (save->unlocks.earned[byte] & mask)
             continue;
@@ -63,9 +63,9 @@ void progressConditionsUpdateUnlocks()
                 continue;
         }
         if (allowed) {
-            save = gameDataBlocksGetSaveData();
+            save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
             save->unlocks.earned[byte] |= mask;
-            save = gameDataBlocksGetSaveData();
+            save = reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData());
             save->unlocks.pending[byte] |= mask;
         }
     }

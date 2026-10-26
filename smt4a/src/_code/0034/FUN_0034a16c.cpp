@@ -11,9 +11,8 @@ extern "C" void FUN_0034a16c(const EffectIntegerKeySource *source, s32 *index,
     for (s32 distance = 1; *index + distance < 4; ++distance) {
         *duration = source->keys[*index + distance].frame - source->keys[*index].frame;
         if (*duration > 0) {
-            const EffectIntegerKey *current = &source->keys[*index];
-            s32 frames = source->keys[*index + distance].frame - current->frame;
-            *step = (f32)current->value / (f32)frames;
+            s32 frames = source->keys[*index + distance].frame - (source->keys[*index]).frame;
+            *step = (f32)(source->keys[*index]).value / (f32)frames;
             *value = (f32)source->keys[*index].value;
             *index += distance;
             return;

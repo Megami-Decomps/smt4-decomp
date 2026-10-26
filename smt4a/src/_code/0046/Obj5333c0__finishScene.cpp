@@ -1,9 +1,28 @@
-/* NON_MATCHING: same three stores; retail bumps the scene pointer with a post-incremented str and writes state/substate with one stm after loading the 19 late, armcc keeps the pointer and orders the constants differently. */
-#include "classes/Obj5333c0.h"
+#include "common.h"
 
-void Obj5333c0::finishScene()
+extern "C" {
+
+struct CommandSlot {
+    /* 0x0 */ u32 kind;
+    /* 0x4 */ u32 value;
+};
+
+struct CommandRecord {
+    /* 0x0 */ u32 flags;
+    /* 0x4 */ CommandSlot command;
+};
+
+static inline void commandSet(CommandSlot *slot, u32 kind, u32 value)
 {
-    flags |= 1;
-    state = 19;
-    substate = 0;
+    CommandSlot command = { kind, value };
+    *slot = command;
 }
+
+/* Virtual slot: marks the record (flags, kind, value) active as command kind 19 with no value. */
+void _ZN9Obj5333c011finishSceneEv(CommandRecord *record)
+{
+    record->flags |= 1;
+    commandSet(&record->command, 19, 0);
+}
+
+} /* extern "C" */

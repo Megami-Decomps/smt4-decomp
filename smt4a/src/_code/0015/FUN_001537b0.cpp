@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_0019e3d0(int, int, int, int, int, int, int, double);
 int FUN_001a9698(void);
 int VectorSignedToFloat(...);
@@ -25,7 +25,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int stateValuesGetBySelector(unsigned int);
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a9698. */
 
@@ -93,7 +93,7 @@ void FUN_001537b0(void)
       (**(romwright_code **)(temp_v1 + 0x12d4))();
       *(unsigned char *)(temp_v1 + 0x12d0) = 0;
     }
-    FUN_0016c4b8(g_renderCtx,temp_v6);
+    renderCtxSelectTexture(g_renderCtx,temp_v6);
     temp_v4 = *(unsigned int *)(temp_v0 + 0xfe8);
     FUN_0019e3d0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v9,temp_v9,temp_v9,temp_v7);
   }
@@ -104,7 +104,7 @@ void FUN_001537b0(void)
     VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = temp_v8 / temp_v7;
-    FUN_0016c4b8(g_renderCtx);
+    renderCtxSelectTexture(g_renderCtx);
     temp_v6 = g_renderCtx;
     temp_v1 = packNibblesAndByte(6, 7, 0);
     piVar6 = (int *)(temp_v6 + 0x12b8);
@@ -134,7 +134,7 @@ void FUN_001537b0(void)
     VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (temp_v8 / temp_v10) / temp_v7;
-    FUN_0016c4b8(g_renderCtx,temp_v6);
+    renderCtxSelectTexture(g_renderCtx,temp_v6);
     temp_v4 = *(unsigned int *)(temp_v0 + 0xff0);
     FUN_0019e3d0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v9,temp_v9,temp_v9,temp_v7);
   }

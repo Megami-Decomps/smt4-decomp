@@ -3,10 +3,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "script/scrScriptProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern StatusCameraWork *g_statusCamera;
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void FUN_002bc644(s32, s32, s32, s32);
 void FUN_002c2044(StatusCameraWork *, u32);
 void FUN_002c1edc(StatusCameraWork *, const Vec3 *, const Vec3 *, const Vec3 *);

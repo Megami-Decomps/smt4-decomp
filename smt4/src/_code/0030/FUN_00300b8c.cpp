@@ -1,12 +1,19 @@
-/* NON_MATCHING: compiler predicates the second-byte comparison instead of branching. */
 #include "common.h"
 
-/* Compares two-byte keys lexicographically. */
-extern "C" s32 FUN_00300b8c(const u8 *left, const u8 *right)
+extern "C" {
+
+struct SortEntry {
+    /* 0x00 */ u8 priority;
+    /* 0x01 */ u8 key;
+};
+
+s32 FUN_00300b8c(const SortEntry *left, const SortEntry *right)
 {
-    s32 difference = left[0] - right[0];
-    if (difference != 0) {
-        return difference;
+    s32 order = left->priority - right->priority;
+    if (order == 0) {
+        order = left->key - right->key;
     }
-    return left[1] - right[1];
+    return order;
 }
+
+} /* extern "C" */

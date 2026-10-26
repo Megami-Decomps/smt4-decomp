@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 struct TaggedDispatch {
     u8 tag; // 0x00
@@ -9,8 +10,9 @@ extern "C" s32 resourceRunOperationIfUnblocked(u32 *payload);
 extern "C" s32 resourceRunEmbeddedOperationIfUnblocked(u32 *payload);
 
 // Dispatch the tagged payload to its specialized handler.
-extern "C" s32 FUN_002a482c(TaggedDispatch *object)
+extern "C" s32 FUN_002a482c(const void *selection)
 {
+    TaggedDispatch *object = static_cast<TaggedDispatch *>(const_cast<void *>(selection));
     if (object->tag != 1)
         return resourceRunOperationIfUnblocked(&object->payload);
     return resourceRunEmbeddedOperationIfUnblocked(&object->payload);

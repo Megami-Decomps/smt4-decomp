@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/PassiveSkill.h"
+#include "gamedata/Table04Record.h"
 
 /* Battle state flag masks: the mask whose bits make passive rolls always succeed at 0xA8. */
 struct BtlPassiveFlagMasks {
@@ -18,7 +19,6 @@ extern BtlPassiveFlagMasks DAT_005713f0;
 
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *skillIds);
-const PassiveSkillRecord *dataTable41FindById(u32 id);
 s32 lcgRandomRange(s32 max);
 
 /* Rolls the listed unit's passive skills in order and returns the first one whose chance hits
@@ -35,9 +35,9 @@ u16 FUN_004c14c8(u32 listedId)
     result = 0;
     for (i = 0; i < 9; i++) {
         if (skillIds[i] != 0) {
-            const PassiveSkillRecord *record = dataTable41FindById(skillIds[i]);
+            const Table04ExtraRecord *record = dataTable41FindById(skillIds[i]);
             s32 chance;
-            if (record != NULL && (chance = record->holdChance) != 0) {
+            if (record != NULL && (chance = record->stats.holdChance) != 0) {
                 s32 roll = lcgRandomRange(99);
                 if (state->stateFlags64.bits & DAT_005713f0.passiveAlways) {
                     roll = 0;

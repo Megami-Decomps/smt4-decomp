@@ -1,5 +1,6 @@
 /* NON_MATCHING: Completion getters fold to direct byte tests, and phase-one constant folding/dispatch scheduling differ. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 struct SpriteIntroTransitionWork {
     u8 unk000[0x5AC];
@@ -13,7 +14,6 @@ typedef char SpriteIntroTransitionOffsetsCheck[
     offsetof(SpriteIntroTransitionWork, timer) == 0xD4C ? 1 : -1];
 extern "C" {
 void FUN_00163aa4(UiAnimatedSprite *sprite, f32 speed);
-void uiSpriteSelectAnim(UiAnimatedSprite *sprite, s32 animation);
 
 /* Finishes the first two sprites, waits seventeen frames, then starts the remaining intro group. */
 u32 FUN_00335384(SpriteIntroTransitionWork *work)

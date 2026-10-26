@@ -5,6 +5,7 @@
 #include "util/CalleeContracts.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "util/FUN_002a4894.h"
 
 /* Position record of an icon in the icon table (only the screen position). */
 struct SlotIconPosition {
@@ -29,7 +30,6 @@ struct SlotListScreen {
 
 extern "C" {
 s32 resourceRunOperationIfUnblocked(u32 *cursor);
-s32 FUN_002a4894(u32 *cursor);
 void efctSetSpeed(f32 speed);
 void largeGridDrawButtonStrip(SlotListScreen *screen, s32 x, s32 y, s32 row, f32 scale);
 s32 recordGetModeForId(s32 id);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: animation-key iteration and layer/line interpolation use different VFP and loop registers. */
 #include "result/WhisperEffect.h"
+#include "shard/JobWork.h"
 #include <stddef.h>
 
 typedef char CheckWhisperParticleSize[sizeof(WhisperParticleAnimation) == 0x20 ? 1 : -1];
@@ -7,7 +8,6 @@ typedef char CheckWhisperLineSize[sizeof(WhisperLineAnimation) == 0x34 ? 1 : -1]
 typedef char CheckWhisperLinesOffset[offsetof(WhisperAnimationView, lines) == 0xb4 ? 1 : -1];
 typedef char CheckWhisperViewSize[sizeof(WhisperAnimationView) == 0x1b8 ? 1 : -1];
 
-extern "C" WhisperAnimationView *jobGetWork(u32 job);
 extern "C" f32 FUN_0025cb1c();
 extern "C" s32 asdTMTexTableNodeIsLoaded(u32 table, u32 node);
 
@@ -56,7 +56,7 @@ static __inline void updateWhisperLine(WhisperLineAnimation *line)
 // Animate the result-screen whisper layers, keyframed lines and final fade-out.
 extern "C" u32 whisperAdvanceAnimations(u32 job)
 {
-    WhisperAnimationView *effect = jobGetWork(job);
+    WhisperAnimationView *effect = (WhisperAnimationView *)jobGetWork(job);
     if (effect->state == 2 || effect->state == 1) {
         for (u32 i = 0; i < 2; ++i) {
             WhisperParticleAnimation *particle = &effect->particles[i];

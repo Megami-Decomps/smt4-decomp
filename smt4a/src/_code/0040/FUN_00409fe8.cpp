@@ -21,7 +21,7 @@ void textFormatBuffer(char *buffer, const char *format, ...);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 void FUN_003fc1b0(Obj557b08 *model, s32 id);
 void FUN_003fcd20(Obj557b08 *model);
-void FUN_00470b60(u32 system, s32 id, void **handle, const char *path);
+void aocQueueType0c(u32 system, s32 id, void **handle, const char *path);
 s32 FUN_00470b18(u32 system, s32 id, s32 flag);
 void FUN_004713ec(u32 system, s32 id, void **handle, const char *path);
 
@@ -65,7 +65,7 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
             model->kind = 2;
             model->index = -id;
             if (FUN_004705ec(g_aocSystem, -id, 1) != 0) {
-                FUN_00470b60(g_aocSystem, -id, &model->handle, path);
+                aocQueueType0c(g_aocSystem, -id, &model->handle, path);
                 return model;
             }
         } else {

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <stddef.h>
+#include "util/pairSetFirstResetSecond.h"
 
 struct SpriteBankUpdate {
     u8 unk0000[0x20];
@@ -17,7 +18,6 @@ struct SpriteBankUpdate {
 };
 typedef char CheckSpriteBankCounts[offsetof(SpriteBankUpdate, active) == 0x218c ? 1 : -1];
 extern "C" void spriteStartAnimationByIndex(UiAnimatedSprite *sprite, s32 key);
-extern "C" void pairSetFirstResetSecond(UiAnimatedSprite *sprite, s32 value);
 
 // Apply count changes and refresh active and departing sprite rows.
 extern "C" void FUN_00225238(SpriteBankUpdate *bank, s32 added, s32 removed)

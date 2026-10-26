@@ -1,4 +1,3 @@
-/* NON_MATCHING: range-call argument scheduling and queued-event subobject base addressing differ from retail. */
 #include "gfx/RangeAnimationSelection.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -19,13 +18,18 @@ void FUN_004f6254(RangeAnimationOwner *work, s16 frame, s32 mode);
 void FUN_004fa414(RangeAnimationOwner *work)
 {
     // These last two range pairs extend beyond the published preset prefix.
+    struct EventFrame {
+        s16 argument, frame, value;
+    };
+    struct EventFrames {
+        EventFrame first, second;
+        s16 pairFrame, pairValue;
+    };
     struct EventParametersView {
         u8 prefix00[8];
         u8 flags;
         u8 padding09[3];
-        s16 firstArgument, firstFrame, firstValue;
-        s16 secondArgument, secondFrame, secondValue;
-        s16 pairFrame, pairValue;
+        EventFrames frames;
         u8 padding1C[0x6C];
         s16 firstRangeStart, firstRangeEnd;
         u8 padding8C[4];
@@ -33,7 +37,7 @@ void FUN_004fa414(RangeAnimationOwner *work)
     };
     typedef char EventParametersOffsetsCheck[
         offsetof(EventParametersView, flags) == 8 &&
-        offsetof(EventParametersView, firstArgument) == 0xC &&
+        offsetof(EventParametersView, frames) == 0xC &&
         offsetof(EventParametersView, firstRangeStart) == 0x88 &&
         offsetof(EventParametersView, secondRangeStart) == 0x90 &&
         sizeof(EventParametersView) == 0x94 ? 1 : -1];
@@ -46,25 +50,26 @@ void FUN_004fa414(RangeAnimationOwner *work)
         const s16 *timings = parameters->flags & 1 ?
             work->animation.events.timings + 4 : work->animation.events.timings + 8;
         if (timings[2] == frame) {
-            s32 index = work->animation.events.roster->combatant.parameterIndex;
-            FUN_004f5238(work, index, index, 6, 1, 3, 0, 1, 0,
+            FUN_004f5238(work, work->animation.events.roster->combatant.parameterIndex,
+                         work->animation.events.roster->combatant.parameterIndex, 6, 1, 3, 0, 1, 0,
                          (f32)parameters->firstRangeStart, (f32)parameters->firstRangeEnd);
         }
         if (timings[3] == frame) {
-            parameters = (EventParametersView *)work->animation.presets;
-            s32 index = work->animation.events.roster->combatant.parameterIndex;
-            FUN_004f5238(work, index, index, 6, 2, 3, 0, 1, 0,
-                         (f32)parameters->secondRangeStart, (f32)parameters->secondRangeEnd);
+            FUN_004f5238(work, work->animation.events.roster->combatant.parameterIndex,
+                         work->animation.events.roster->combatant.parameterIndex, 6, 2, 3, 0, 1, 0,
+                         (f32)((EventParametersView *)work->animation.presets)->secondRangeStart,
+                         (f32)((EventParametersView *)work->animation.presets)->secondRangeEnd);
         }
         parameters = (EventParametersView *)work->animation.presets;
-        if (parameters->firstFrame == frame)
-            btlReflectQueuePairedParameters(0, 0, parameters->firstValue, 10,
-                work->animation.events.roster, parameters->firstArgument, 0, 0, ~0u);
-        if (parameters->secondFrame == frame)
-            btlReflectQueuePairedParameters(0, 0, parameters->secondValue, 9,
-                work->animation.events.roster, parameters->secondArgument, 0, 0, ~0u);
-        if (parameters->pairFrame == frame)
-            btlReflectSetValuePair(0, 0, parameters->pairValue, 0, 0);
+        EventFrames *frames = &parameters->frames;
+        if (frames->first.frame == frame)
+            btlReflectQueuePairedParameters(0, 0, frames->first.value, 10,
+                work->animation.events.roster, frames->first.argument, 0, 0, ~0u);
+        if (frames->second.frame == frame)
+            btlReflectQueuePairedParameters(0, 0, frames->second.value, 9,
+                work->animation.events.roster, frames->second.argument, 0, 0, ~0u);
+        if (frames->pairFrame == frame)
+            btlReflectSetValuePair(0, 0, frames->pairValue, 0, 0);
         FUN_004f6254(work, (s16)frame, 3);
     }
     if (animationVisualIsComplete(work->animation.events.visual))

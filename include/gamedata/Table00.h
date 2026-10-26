@@ -11,7 +11,15 @@ struct Table00Choice {
 
 struct Table00Record {
     /* 0x00 */ u16 id;
-    /* 0x02 */ u8 unk02[0x14];
+    union {
+        /* 0x02 */ u16 level;           /* bit 15 is a flag */
+        /* 0x02 */ u8 unk02[2];
+    };
+    /* 0x04 */ s32 maxHp;
+    /* 0x08 */ s32 maxMp;
+    /* 0x0C */ u8 unk0C[6];
+    /* 0x12 */ u16 levelA;
+    /* 0x14 */ u16 levelB;
     /* 0x16 */ u16 flags;
     union {
         /* 0x18 */ u8 unk18[0x48];
@@ -51,9 +59,21 @@ struct Table00Record {
             u8 prefix[6];
             /* 0x8C */ s16 resourceId;
         } battleTexture;
+        struct {
+            /* 0x86 */ u16 id;
+        } successor;
+        struct {
+            /* 0x86 */ u8 unk86BeforeHeight[0x1C];
+            /* 0xA2 */ u8 value;           /* 0 tall, 1 average, 2 low */
+        } height;
     };
 };
 
+typedef char Table00RecordFieldsCheck[
+    offsetof(Table00Record, level) == 2 && offsetof(Table00Record, maxHp) == 4 &&
+    offsetof(Table00Record, maxMp) == 8 && offsetof(Table00Record, levelA) == 0x12 &&
+    offsetof(Table00Record, levelB) == 0x14 && offsetof(Table00Record, flags) == 0x16 &&
+    offsetof(Table00Record, successor.id) == 0x86 && offsetof(Table00Record, height.value) == 0xA2 ? 1 : -1];
 typedef char Table00RecordSizeCheck[sizeof(Table00Record) == 0xA8 ? 1 : -1];
 typedef char Table00SkillListOffsetCheck[offsetof(Table00Record, skillList.ids) == 0x50 ? 1 : -1];
 typedef char Table00CopiedIdsOffsetCheck[offsetof(Table00Record, copiedIds.ids) == 0x48 ? 1 : -1];

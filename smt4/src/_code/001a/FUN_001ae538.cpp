@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029ee54.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ extern int g_camp; /* 0x43da90 */
 
 /* Supplied declaration required: FUN_00283f80. */
 /* Supplied declaration required: FUN_0028f870. */
-extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
 /* Supplied declaration required: gameGetPlayerData. */
@@ -159,7 +159,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
     if (((temp_v7[temp_v1] != 0x12 && temp_v7[temp_v1] != 0x13) ||
         (temp_v2 = gameFlagIsSet(0x410), temp_v2 != 0)) &&
-       (temp_v2 = FUN_0029ee54(temp_v3 + temp_v1 * 100 + 0x2a4), 0 < temp_v2)) {
+       (temp_v2 = FUN_0029ee54((const void *)(temp_v3 + temp_v1 * 100 + 0x2a4)), 0 < temp_v2)) {
       FUN_002bf288(2,0x1d,0x4f8,temp_v8,param_3,0x6a);
       FUN_002bf288(2,0x1d,temp_v1 + 0x4fa,temp_v8,param_3,0x6a);
       break;
@@ -174,7 +174,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
     }
     if (((temp_v7[temp_v4] != 0x12 && temp_v7[temp_v4] != 0x13) ||
         (temp_v5 = gameFlagIsSet(0x410), temp_v5 != 0)) &&
-       (temp_v5 = FUN_0029ee54(temp_v3 + temp_v4 * 100 + 0x2a4), 0 < temp_v5)) {
+       (temp_v5 = FUN_0029ee54((const void *)(temp_v3 + temp_v4 * 100 + 0x2a4)), 0 < temp_v5)) {
       FUN_002bf288(2,0x1d,0x4f9,temp_v8,param_3,0x6a);
       FUN_002bf288(2,0x1d,temp_v4 + 0x501,temp_v8,param_3,0x6a);
       break;
@@ -186,7 +186,7 @@ void FUN_001ae538(int param_1,unsigned int param_2,unsigned int param_3,int para
   temp_v3 = 0;
   do {
     temp_v1 = FUN_0029efc0(temp_v9);
-    temp_v4 = FUN_0029ee54(temp_v9);
+    temp_v4 = FUN_0029ee54((const void *)(temp_v9));
     if (temp_v4 <= temp_v1 + temp_v3) break;
     temp_v1 = FUN_0029efc0(temp_v9);
     FUN_00283f80(temp_v10,temp_v3 + 2,*(unsigned short *)(temp_v6 + (temp_v1 + temp_v3) * 2),temp_v11,param_3);

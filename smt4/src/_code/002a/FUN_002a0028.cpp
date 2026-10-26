@@ -1,6 +1,7 @@
 /* NON_MATCHING: unite list sizing and region rebuild are recovered; getter/base registers, invalid-region constant materialization, and count-loop layout differ. */
 #include "shard/W6_W6Match3_ScrollSelection.h"
 #include "status/StatusCamera.h"
+#include "util/FUN_0029ee54.h"
 
 struct UniteTouchWork {
     /* 0x000 */ u8 unk000[0x438];
@@ -26,7 +27,6 @@ s32 FUN_0029efc0(const ScrollSelection *selection);
 s32 FUN_0029efa8(const ScrollSelection *selection);
 void FUN_0029f848(ScrollSelection *selection, u32 count, u32 visible, u32 option, u32 first, u32 second);
 void FUN_0029eb5c(ScrollSelection *selection, s32 index);
-s32 FUN_0029ee54(const ScrollSelection *selection);
 void ifTouchRegionRemove();
 u16 FUN_002b8584(u32 table, u32 index);
 }
@@ -61,7 +61,7 @@ extern "C" void FUN_002a0028(s32 refreshRegions)
         ifTouchRegionRemove();
         ifTouchRegionRemove();
         ifTouchRegionRemove();
-        for (s32 index = 0; index < 8 && index < FUN_0029ee54(selection); ++index)
+        for (s32 index = 0; index < 8 && index < (s32)FUN_0029ee54(selection); ++index)
             work->itemRegions[index] = FUN_002b8584(36, index + 0xa9);
         work->confirmRegion = FUN_002b8584(36, 0x1f0);
         work->previousRegion = FUN_002b8584(36, 0x1ee);

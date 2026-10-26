@@ -3,6 +3,7 @@
 #include "shard/JobWork.h"
 #include "bible/bibleDevil.h"
 #include "shard/demonGetRaceLabel.h"
+#include "util/Random.h"
 
 namespace {
 /* A demon record: only the fields the filter reads. */
@@ -32,7 +33,6 @@ u32 scrWorkGetValue(u32 slot);
 void scrWorkSetValue(u32 slot, u32 value);
 void jyoucyuGetTableEntry(s32 index);
 DevilRecord *devilGetRecord(u32 id);
-u32 randNextInRange(u32 maximum);
 u32 partyFindFreeStockSlot(void);
 void FUN_0029c1c8(u32 id, u32 a, u32 b);
 u32 FUN_00252190(u32 id, s32 a, s32 b);

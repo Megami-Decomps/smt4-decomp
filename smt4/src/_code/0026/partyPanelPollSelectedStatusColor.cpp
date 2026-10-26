@@ -1,6 +1,7 @@
 /* NON_MATCHING: default optimization combines repeated slot/source loads and omits retail inline-getter hints (95/81 rows, six versus eight saved GPRs); O2 candidate. */
 #include "ui/PartyPanelState.h"
 #include "shard/W4_Match6_BtlEntry.h"
+#include "gamedata/UnitRecordAccess.h"
 
 namespace {
 struct PartyStatusWidget {
@@ -19,7 +20,6 @@ extern "C" {
 extern PartyPanelState *g_partyPanel;
 void FUN_0033c468(PartyPanelWidget* widget);
 u16* FUN_0029acb0();
-PartyStatusUnit* gameGetUnitRecord(u32 index);
 s32 FUN_0028dbe0(PartyPanelWidget* widget);
 }
 
@@ -38,7 +38,7 @@ inline void pollStatusColor(PartyPanelWidget* const& widget, u32& color)
         if (*selectedId < 0 && FUN_0028dbe0(widget) != -1) {
             color = FUN_0028dbe0(widget);
         }
-    } else if (gameGetUnitRecord(widgetSource(widget))->id == *selectedId
+    } else if (static_cast<PartyStatusUnit *>(gameGetUnitRecord(widgetSource(widget)))->id == *selectedId
                && FUN_0028dbe0(widget) != -1) {
         color = FUN_0028dbe0(widget);
     }

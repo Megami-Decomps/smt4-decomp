@@ -1,5 +1,6 @@
 /* NON_MATCHING: entry ID (ldrsh) loads before the other-table word instead of after it. */
 #include "common.h"
+#include "util/dataTableFileGetTable.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct TableEntry {
 } TableEntry;                        /* 0x28 */
 
 s32 tbcrBlockGetPayload(void *file);
-void *dataTableFileGetTable(void *file, u32 index);
 TableEntry *dataTableGetEntries(void *table);
 u32 dataTableGetCount(void *table);
 
@@ -21,7 +21,7 @@ u32 dataTableGetCount(void *table);
 void FUN_002c1df8(void *file)
 {
     u32 tableCount = tbcrBlockGetPayload(file);
-    void *table = dataTableFileGetTable(file, 0);
+    void *table = dataTableFileGetTable((u32)(file), 0);
     TableEntry *entry = dataTableGetEntries(table);
     u32 count = dataTableGetCount(table);
     u32 i;
@@ -32,7 +32,7 @@ void FUN_002c1df8(void *file)
             continue;
         }
         for (j = 1; j < tableCount; j++) {
-            if (*(s32 *)dataTableGetEntries(dataTableFileGetTable(file, j)) == entry->id) {
+            if (*(s32 *)dataTableGetEntries(dataTableFileGetTable((u32)(file), j)) == entry->id) {
                 entry->fileIndex = j;
                 break;
             }

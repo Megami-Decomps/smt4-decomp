@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(unsigned int, double);
-int FUN_0016c4b8(unsigned int, unsigned int);
+int renderCtxSelectTexture(unsigned int, unsigned int);
 int FUN_0019e3d0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
 int FUN_0050d8e4(void);
 int VectorFloatToUnsigned(double, int);
@@ -68,7 +68,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_0050d8e4. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
@@ -129,7 +129,7 @@ void FUN_002443e4(void)
   float temp_v43;
   float temp_v44;
   
-  FUN_0016c4b8(g_renderCtx,*g_activeTextureSlot);
+  renderCtxSelectTexture(g_renderCtx,*g_activeTextureSlot);
   temp_v1 = 0;
   temp_v17 = 57.32484f;
   temp_v18 = 0x3f360b61;

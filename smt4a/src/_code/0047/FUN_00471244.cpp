@@ -37,7 +37,7 @@ typedef struct PlacementRecord {
     /* 0x04 */ PlacementOwner *owner;
 } PlacementRecord;
 
-PlacementRecord *FUN_001b2ca4(u32 a, s32 kind, u32 key);
+PlacementRecord *packageFindFileRefByName(u32 a, s32 kind, u32 key);
 void spriteDrawFromTextureTable(u32 handle, u32 target, s32 mode, u32 key, s32 id, s32 x, s32 y, s32 z);
 
 /* Returns the list's group with the id, or NULL. */
@@ -56,7 +56,7 @@ static PlacementGroup *placementFindGroup(PlacementList *list, s32 id)
 /* Places every entry of the group `id`, offset by (x, y, z); returns 0 when the record or group is missing. */
 u32 FUN_00471244(u32 a, u32 unused, u32 target, u32 key, s32 id, s32 x, s32 y, s32 z)
 {
-    PlacementRecord *record = FUN_001b2ca4(a, 0x17, key);
+    PlacementRecord *record = packageFindFileRefByName(a, 0x17, key);
     PlacementOwner *owner;
     PlacementGroup *group;
     s32 i;

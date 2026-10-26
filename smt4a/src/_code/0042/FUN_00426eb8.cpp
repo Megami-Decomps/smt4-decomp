@@ -4,7 +4,7 @@ extern "C" {
 
 const char *lookupTable5B47A0(u32 index);
 const char *lookupTable5B47D0(u32 index);
-s32 FUN_0043c2d4(char *buffer, const char *format, ...);
+s32 stringFormatUnbounded(char *buffer, const char *format, ...);
 void rt_memcpy(void *dest, const void *src, u32 size);
 
 /* The message label format of an entry field. */
@@ -34,7 +34,7 @@ void FUN_00426eb8(char *label, u32 field, u32 groupIndex, u32 itemIndex)
 {
     char buffer[0x44];
 
-    FUN_0043c2d4(buffer, labelFormat(field), lookupTable5B47D0(groupIndex),
+    stringFormatUnbounded(buffer, labelFormat(field), lookupTable5B47D0(groupIndex),
                  lookupTable5B47A0(itemIndex));
     rt_memcpy(label, buffer, 0x40);
 }

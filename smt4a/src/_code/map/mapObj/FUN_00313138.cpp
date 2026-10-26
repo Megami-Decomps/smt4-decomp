@@ -1,6 +1,7 @@
 /* NON_MATCHING: the free-slot search and the 99/11 state store compile differently (retail keeps the scan counter in r0 with a trailing sxth and conditional strh/beq exits; here it is split over compare/move pairs), the loop bound is re-read in the opposite operand order and the caller-saved scheduling of the record/work pointers differs. */
 #include "Model/ModelList.h"
 #include "shard/W9_W9Match7_EnemyModelSources.h"
+#include "util/FUN_001cd3ec.h"
 
 /* A record of the map object table (data table 45): its key, kind, position and name. */
 struct MapObjRecord {
@@ -57,7 +58,6 @@ MapObjRecord *mapObjGetCombinedEntry(s32 index);
 void textFormatBuffer(char *, const char *, ...);
 void *FUN_00178b04(u32, const char *, u32);
 ModelList *modelListInit(ModelList *);
-void FUN_001cd3ec(ModelList *model, const char *name);
 u8 FUN_0040ab8c(ModelList *model);
 void FUN_0040aad4(ModelList *model, u32 mode);
 void handleRegistryRegisterObject(void *, void *);

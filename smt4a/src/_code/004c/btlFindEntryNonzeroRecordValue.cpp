@@ -1,6 +1,7 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "battle/btlMain.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -10,7 +11,6 @@ typedef struct IdRecord {
     /* 0x3C */ s16 value;
 } IdRecord;
 
-IdRecord *dataTable41FindById(u32 id);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *battle, u32 id);
 void source4CCopyHalves(BtlCombatantEntryA *entry, u16 *output);
 
@@ -23,7 +23,7 @@ s32 btlFindEntryNonzeroRecordValue(u32 id)
     source4CCopyHalves(entry, ids);
     for (s32 i = 0; i < 9; i++) {
         if (ids[i] != 0) {
-            IdRecord *record = dataTable41FindById(ids[i]);
+            IdRecord *record = reinterpret_cast<IdRecord *>(dataTable41FindById(ids[i]));
             s32 value = record != NULL ? record->value : 0;
             if (value != 0) {
                 return value;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: creates and initialises the lmap main state (0x9370 bytes) and starts its calc and draw tasks; written from the decompilation, store order and constant materialisation not compared with retail */
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/gameFlagsGetBlock.h"
 
 /* One of the 0x88-byte lmap slots; the first three bytes are cleared here. The last slot of the
  * first array also holds three words that are set separately. */
@@ -140,7 +141,6 @@ extern u8 DAT_005f161d;
 extern u8 DAT_005f185b;
 
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
-LmapGameBlock *gameFlagsGetBlock(void);
 void FUN_002c23cc(s32 value);
 void FUN_00482ab0(void *object);
 void FUN_002442ac(void);
@@ -156,7 +156,7 @@ void FUN_00272970(void)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\map\\lmapMain.cpp", 732);
     LmapMainState *state = static_cast<LmapMainState *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(LmapMainState), 1));
     g_lmapMainState = state;
-    LmapGameBlock *gameBlock = gameFlagsGetBlock();
+    LmapGameBlock *gameBlock = reinterpret_cast<LmapGameBlock *>(gameFlagsGetBlock());
     FUN_002c23cc(1);
     state->unk09 = 0;
     state->unk0A = 0;

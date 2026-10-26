@@ -1,6 +1,7 @@
 /* NON_MATCHING: register assignment and the order of the builder-struct stores differ from retail (186 vs 184 rows); the camera creation logic is the same. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
 
 extern "C" {
 
@@ -100,14 +101,13 @@ extern const TypeInfo DAT_0044e820;
 
 void *asdMemoryAlloc(u32 size, u32 alignment, u32 a, u32 b, u32 c);
 Allocator *asdMemoryGetDefaultAllocator(void);
-u32 asdMemoryGetAllocatorA(void);
 SceneObject *nw_gfx_SceneBuilder_CreateObject(SceneBuilderParams *params, Allocator *allocator, u32 allocatorA);
 AnimatedCamera *_ZN9Obj42111cC1Ej(void *memory, Allocator *allocator);
 void FUN_002a5960(AnimatedCamera *camera, CameraAnimParams *params, u32 lengthBits, u32 flags, s32 loop);
 s32 FUN_0024530c(CameraScene *scene, AnimatedCamera *camera);
 
 /* Walks the object's type chain looking for `wanted`; returns the object when found, else null. */
-static __inline SceneObject *castTo(SceneObject *object, const TypeInfo *wanted)
+static SceneObject *castTo(SceneObject *object, const TypeInfo *wanted)
 {
     if (object != NULL) {
         for (const TypeInfo *type = object->vtable->typeInfo(object); type != NULL; type = type->parent) {
@@ -147,7 +147,7 @@ CameraSet *asdCameraCreateFromResource(u8 *resource)
         params.unk20 = 0;
         params.flag2 = 1;
         SceneObject *created = nw_gfx_SceneBuilder_CreateObject(&params, asdMemoryGetDefaultAllocator(),
-                                                               asdMemoryGetAllocatorA());
+                                                               (u32)asdMemoryGetAllocatorA());
         SceneObject *object = castTo(created, &DAT_0044e858);
         CameraScene *scene = (CameraScene *)castTo(object, &DAT_0044e820);
 

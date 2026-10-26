@@ -3,6 +3,7 @@
 #include "nn/svc.h"
 #include "nn/Result.h"
 #include "camp/PlayLog/PlayLog.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // Fusion (unite) screen object: only the members its teardown touches.
 struct UniteScreen {
@@ -38,7 +39,6 @@ void FUN_002c526c(s32 result);
 void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(s32 object);
 void asdMemFreeNonNull(s32 object);
-void asdMemFree(s32 object);
 void gameCounterAddSaturating(s32 counter, s32 amount);
 s32 lmapSceneGetScript(void);
 s32 lmapMainIsRunning(void);
@@ -88,7 +88,7 @@ void FUN_00223dcc(void)
         asdMemFreeNonNull(stack);
     }
     screen->stack = 0;
-    asdMemFree(screen->threadBuffer);
+    asdMemFree((void *)(screen->threadBuffer));
     screen->threadBuffer = 0;
 
     gameCounterAddSaturating(0x25, FUN_002907a8() - screen->startTime);
@@ -111,14 +111,14 @@ void FUN_00223dcc(void)
         if (screen->pendingIds[i] != 0) FUN_002958f8((s16)screen->pendingIds[i], 1);
     }
     scrScriptProcessDestroy(screen->scriptProcess);
-    asdMemFree((s32)screen->scratchB);
-    asdMemFree((s32)screen->scratchA);
+    asdMemFree((void *)((s32)screen->scratchB));
+    asdMemFree((void *)((s32)screen->scratchA));
     if (screen->buffer != NULL) {
         asdMemFreeNonNull((s32)bufferArrayFree(screen->buffer));
     }
     screen->buffer = NULL;
     jobStop(screen->job, 0);
-    asdMemFree((s32)screen);
+    asdMemFree((void *)((s32)screen));
     g_unite = NULL;
     fileSlotFree(0x24);
     fileSlotFree(0x22);

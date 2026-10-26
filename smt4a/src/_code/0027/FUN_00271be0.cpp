@@ -1,11 +1,11 @@
 /* NON_MATCHING: after the clear, -1/0 land in r2/r1 instead of r1/r0 and the work pointer is built in r3 before the copy (retail builds it in r0). */
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern const char DAT_005449ec[]; /* __FILE__ */
 
-void *memAlloc(int, int, int, int size, int align, int);
 void rt_memclr(void *block, s32 size);
 void rt_memcpy(void *dest, const void *src, u32 size);
 

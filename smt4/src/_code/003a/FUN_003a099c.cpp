@@ -18,7 +18,6 @@ u32 tableGroupFindEntryIndex(void *resource, const char *name);
 void scrScriptProcessStartEntry(ScriptRunState *process, s32 entry);
 s32 scrRunOpcodesStub(ScriptRunState *process);
 s32 modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
-void FUN_002a0428(void *manager, s32 value);
 void nodeSetTranslation3f(void *node, s32 relative, f32 x, f32 y, f32 z);
 
 void FUN_003a099c(Scene3a *scene)
@@ -100,7 +99,7 @@ void FUN_003a099c(Scene3a *scene)
     if (scene->modelManager != NULL &&
         modelHasLoadedAttachment(reinterpret_cast<const ModelBoneAttachmentRoot *>(scene->modelManager)) != 0 &&
         ((PreviewManagerView *)scene->modelManager)->node->state < 0) {
-        FUN_002a0428(scene->modelManager, 1);
+        FUN_002a0428(reinterpret_cast<AsdMdlObject *>(scene->modelManager), 1);
         nodeSetTranslation3f(((PreviewManagerView *)scene->modelManager)->node, 0, 0.0f, -32000.0f, 0.0f);
     }
 }

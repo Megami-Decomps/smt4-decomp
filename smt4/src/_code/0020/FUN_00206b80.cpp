@@ -1,9 +1,9 @@
 /* NON_MATCHING: finished/active sprite accessors fold into owner-relative byte accesses instead of retail's separate accessor address calculations. */
 #include "ui/SpriteTransitionGroup.h"
+#include "font/ComWin/ComWin.h"
 
 extern "C" {
 s32 FUN_002bf818(SpriteTransitionMember *sprite);
-void spriteStartAnimationByIndex(SpriteTransitionMember *sprite, s32 sequence);
 
 // Advance the four-sprite transition and return to idle after its paired exit animation.
 void FUN_00206b80(SpriteTransitionGroup *group)

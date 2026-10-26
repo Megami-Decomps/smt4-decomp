@@ -1,4 +1,3 @@
-/* NON_MATCHING: same code, but armcc allocates the tag-base and stack-depth registers the other way round (ip/r3 swapped). */
 #include "script/ScriptVm.h"
 
 extern "C" {

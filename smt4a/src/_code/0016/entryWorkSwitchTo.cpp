@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "event/bustupEvent/BustupTex.h"
 
 struct EntryWork {
     /* 0x00 */ u8 reserved00[0x0c];
@@ -24,7 +25,6 @@ EntryWork *jobGetWork(void *job);
 u16 *dataTable19FindAddonWord(void *table, u32 index);
 s32 FUN_00162ea4(void);
 s32 aocRunByName(u32 system, u32 kind, u32 entryId, u32 flags);
-void FUN_0014afd0(u32 kind, u32 entryId);
 
 void entryWorkSwitchTo(void *job, u32 index, s32 setPending)
 {

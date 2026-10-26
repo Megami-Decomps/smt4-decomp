@@ -3,6 +3,7 @@
 #include "battle/btlUnit.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 struct PartyReserveMasks {
     u8 unk00[8];
@@ -19,7 +20,6 @@ extern "C" {
 extern PartyReserveMasks DAT_00573c90;
 extern u32 g_btlScriptUnit;
 s32 gameFlagIsSet(u32 flag);
-BtlUnitA *btlUnitGet(u32 unit);
 PartyReserveSlots *gameGetSlotTable();
 
 // Check whether the enabled reserve-party feature has another eligible slot for this combatant.
@@ -31,7 +31,7 @@ u32 btlCanSelectReservePartyMember(const BtlCombatantEntryA *entry)
     if (entry != NULL) {
         u64 flags = entry->flags;
         if ((DAT_00573c90.primary & flags) != 0) {
-            BtlCombatantEntryA *active = reinterpret_cast<BtlCombatantEntryA *>(btlUnitGet(g_btlScriptUnit)->params);
+            BtlCombatantEntryA *active = reinterpret_cast<BtlCombatantEntryA *>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params);
             if (active != NULL && (active->flags & DAT_00573c90.primary) != 0) {
                 PartyReserveSlots *party = gameGetSlotTable();
                 for (s32 index = 0; index < party->count; ++index) {

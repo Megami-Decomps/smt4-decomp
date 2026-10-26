@@ -2,10 +2,10 @@
 #include "ui/PartyPanelState.h"
 #include "gamedata/UnitStats.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;
-const PartyDamageSlotsIV *gameGetSlotTable();
 const StatBlock *gameGetUnitRecord(s32 index);
 const StatBlock *partyMemberFindById(u32 id);
 void __aeabi_memset4(void *destination, u32 size, s32 value);
@@ -18,7 +18,7 @@ void FUN_0026c9c0()
         u8 reset;
     };
     PartyPanelState *work = g_partyPanel;
-    const PartyDamageSlotsIV *slots = gameGetSlotTable();
+    const SaveSlotTableIV *slots = gameGetSlotTable();
     __aeabi_memset4(work->availability.activeSlots, sizeof(work->availability.activeSlots), 1);
     for (s32 index = 0; index < 3; ++index) {
         work->characters[index + 1]->transitionPending = 0;

@@ -2,11 +2,11 @@
 #define CLASSES_OBJ42072C_H
 
 #include "common.h"
+#include "AsdSDK/AsdMemAlloc.h"
 #include "classes/EffGeomRecord.h"
 #include <stddef.h>
 
 extern "C" {
-int asdMemFree(void *block);
 int asdMemFreeNonNull(void *block);
 }
 

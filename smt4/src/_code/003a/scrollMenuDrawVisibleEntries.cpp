@@ -1,5 +1,6 @@
 /* NON_MATCHING: visibility-point stack slots are reversed, signed/unsigned bit tests share one vmov, and row-base scheduling differs. */
 #include "shard/W6_W6Match2_OffsetPosition2D.h"
+#include "util/FUN_0029e924.h"
 
 struct ComparisonMenuPoint {
     f32 x, y;
@@ -35,7 +36,6 @@ void pairCopy(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
 void uiMenuAnchorGetOffset(const ComparisonMenuAnchor *, ComparisonMenuPoint *);
 void uiRectDrawAtBottomRight(const ComparisonMenuAnchor *, u32, s32, s32, u32);
 void FUN_00231bcc(const ComparisonMenuAnchor *, u32, s32, s32, u32, u32);
-s32 FUN_0029e924(ComparisonMenuSelection *);
 s32 rangeLimitMin(ComparisonMenuSelection *);
 s32 flaggedValueHolderGetTotal(ComparisonMenuSelection *);
 u32 flaggedEntryGetValueByState(ComparisonMenuSelection *);

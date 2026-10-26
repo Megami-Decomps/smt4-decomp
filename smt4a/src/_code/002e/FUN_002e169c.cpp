@@ -1,31 +1,13 @@
 #include "util/Vec2Fixed.h"
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (211 vs ~205 rows); retail loads the render-context pointer before the ring-push value call and spills differently */
 #include "common.h"
+#include "camp/RenderCtx.h"
+#include "Model/MoriModelShadowMap.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
-
-// Render-state stack: the current entry is slots[index]; the flush callback runs when the
-// value changed (or a flush is already pending).
-struct DrawStateRing {
-    s32 index;              // 0x00
-    u32 unk04;
-    u32 slots[4];           // 0x08
-    u8 dirty;               // 0x18
-    u8 pad19[3];
-    void (*flush)(void);    // 0x1c
-};
-
-struct RenderCtx {
-    u8 unk0000[0x1258];
-    DrawStateRing stateRing;    // 0x1258
-};
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Sprite placement record: x/y of the label (halfwords at +8/+10).
-struct SpriteRect {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-};
 
 // Button-help overlay: the two prompts (confirm/cancel icons) with their fade states.
 struct ButtonHelp {
@@ -64,41 +46,15 @@ struct ButtonHelpHolder {
 extern "C" {
 
 extern ButtonHelpHolder g_buttonHelp;
-extern RenderCtx* g_renderCtx;
 
-void FUN_00157558(RenderCtx* ctx);
 u32 FUN_001692ac(u32 a, u32 b);
 void FUN_0020bd54(void);
 void fadeObjectResetIfActive(void* fade);
 s32 vec2GetYInt(void* vec);
-SpriteRect* asdTMTexTableEntryAt(s32 group, s32 index);
 void FUN_00164168(u32 iconSet, s32 x, s32 y, s32 a, f32 scale, s32 b, s32 c);
 void FUN_002acfc8(void* label, s32 x, s32 y);
-void skinObjectUpdateMatrices(RenderCtx* ctx);
-void renderCtxResetColorScale(RenderCtx* ctx);
-
-static void ringPush(DrawStateRing* ring, u32 value)
-{
-    s32 index = ring->index;
-    u32 previous = ring->slots[index];
-    ring->index = index + 1;
-    ring->slots[index + 1] = value;
-    if (ring->dirty != 0 || previous != value) {
-        ring->flush();
-        ring->dirty = 0;
-    }
-}
-
-static void ringPop(DrawStateRing* ring)
-{
-    s32 index = ring->index;
-    u32 previous = ring->slots[index];
-    ring->index = index - 1;
-    if (ring->dirty != 0 || previous != ring->slots[index - 1]) {
-        ring->flush();
-        ring->dirty = 0;
-    }
-}
+void skinObjectUpdateMatrices(RenderCtxA* ctx);
+void renderCtxResetColorScale(RenderCtxA* ctx);
 
 // Draws the button-help overlay (confirm/cancel prompts) while the owning menu is in one of
 // its first four states.
@@ -108,7 +64,7 @@ u8 FUN_002e169c(void)
     if (help->visible == 0) return 0;
 
     FUN_00157558(g_renderCtx);
-    ringPush(&g_renderCtx->stateRing, FUN_001692ac(1, 0));
+    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
     if (help->state == 0 || help->state == 1 || help->state == 2 || help->state == 3) {
         FUN_0020bd54();
         if (help->shown != 0) {
@@ -126,7 +82,7 @@ u8 FUN_002e169c(void)
                 FUN_001835b4(2, 10, 164, x, y, 16);
             }
             if (help->shown != 0 && help->enabled != 0 && help->fadeBits >= 0x3f800000) {
-                SpriteRect* rect = asdTMTexTableEntryAt(10, 29);
+                TextureTableEntryIV* rect = asdTMTexTableEntryAt(10, 29);
                 if (help->useIconSet != 0) {
                     FUN_00164168(help->iconSet, rect->x, rect->y, 21, 1.0f, 6, 0);
                 } else if (help->useIcons != 0) {
@@ -145,7 +101,7 @@ u8 FUN_002e169c(void)
             }
         }
     }
-    ringPop(&g_renderCtx->stateRing);
+    renderStackPop(&g_renderCtx->stackA);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);
     return 0;

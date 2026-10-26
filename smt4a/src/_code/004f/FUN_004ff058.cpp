@@ -6,7 +6,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int FUN_0020cb74(unsigned int, unsigned int, int *, unsigned int *, unsigned int, int *, int, int, int, int);
 int VectorUnsignedToFloat(unsigned int, int);
 
@@ -32,7 +32,7 @@ typedef struct {
 extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0020cb74. */
 
 
@@ -135,7 +135,7 @@ LAB_004ff118:
                 *(unsigned char *)(temp_v3 + 0x12d0) = 0;
               }
             }
-            FUN_0016c4b8(g_renderCtx,
+            renderCtxSelectTexture(g_renderCtx,
                          *(unsigned int *)
                           (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(puVar8 + 9) * 0x20 + 0x18));
             VectorUnsignedToFloat((unsigned int)*(unsigned short *)(puVar8 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);

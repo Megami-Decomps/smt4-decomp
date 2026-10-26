@@ -7,37 +7,30 @@
 #include "util/Vec2Fixed.h"
 #include "gfx/StereoParallax.h"
 #include "shard/packNibblesAndByte.h"
-
-/* The title scene (its state stacks live at 0x124C and 0x12AC). */
-struct TitleScene {
-    /* 0x0000 */ u8 unk0000[0x124C];
-    /* 0x124C */ RenderStateStack firstStack;
-    /* 0x126C */ u8 unk126C[0x40];
-    /* 0x12AC */ RenderStateStack secondStack;
-};
+#include "camp/RenderCtx.h"
 
 /* Pushes the evaluated state on the title scene's first stack. */
-static __inline void titleScenePushFirst(TitleScene *scene, s32 state)
+static __inline void titleScenePushFirst(RenderCtx *scene, s32 state)
 {
-    renderStackPushCounted(&scene->firstStack, state);
+    renderStackPushCounted(&scene->stackA, state);
 }
 
 /* Pushes the evaluated state on the title scene's second stack. */
-static __inline void titleScenePushSecond(TitleScene *scene, s32 state)
+static __inline void titleScenePushSecond(RenderCtx *scene, s32 state)
 {
-    renderStackPushCounted(&scene->secondStack, state);
+    renderStackPushCounted(&scene->stackB, state);
 }
 
 /* Pops the title scene's first stack. */
-static __inline void titleScenePopFirst(TitleScene *scene)
+static __inline void titleScenePopFirst(RenderCtx *scene)
 {
-    renderStackPop(&scene->firstStack);
+    renderStackPop(&scene->stackA);
 }
 
 /* Pops the title scene's second stack. */
-static __inline void titleScenePopSecond(TitleScene *scene)
+static __inline void titleScenePopSecond(RenderCtx *scene)
 {
-    renderStackPop(&scene->secondStack);
+    renderStackPop(&scene->stackB);
 }
 
 /* The run window (only the fields read here). */
@@ -62,9 +55,8 @@ struct LayoutPoint {
 
 extern "C" {
 extern RunWin *DAT_0043e170;
-extern TitleScene *g_titleScene;
+extern RenderCtx *g_titleScene;
 
-void renderCtxSelectStereoLayout(TitleScene *scene);
 LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_002bed3c(void);
 s32 vec2GetYInt(void *vec);
@@ -78,13 +70,13 @@ u8 FUN_001acdd8(void)
     RunWin *win = DAT_0043e170;
     if (win->active != 0 && win->visible != 0) {
         renderCtxSelectStereoLayout(g_titleScene);
-        TitleScene *first = g_titleScene;
+        RenderCtx *first = g_titleScene;
         titleScenePushFirst(first, FUN_002c5d80(1, 0));
         s32 x = vec2GetXInt(win->anchor) + (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.27f);
         s32 y = vec2GetYInt(win->anchor);
         efctSetSpeed(win->alpha);
         FUN_002bf380(2, 14, 0x14, x, y, 101);
-        TitleScene *scene = g_titleScene;
+        RenderCtx *scene = g_titleScene;
         titleScenePushSecond(scene, packNibblesAndByte(6, 1, 0));
         FUN_002bf380(2, 14, 0x15, x, y, 102);
         titleScenePopSecond(g_titleScene);

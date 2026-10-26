@@ -4,6 +4,7 @@
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 struct BtlUnit;
 
@@ -11,7 +12,6 @@ struct BtlUnit;
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 scrGetArg(u32 index);
 u32 FUN_002463e8(u32 status);
 u32 FUN_00246134(s32 entryId, u32 resistance, s32 mode, s32 option);
 u32 FUN_00246080(s16 priority, s16 mode, BtlUnit* source,

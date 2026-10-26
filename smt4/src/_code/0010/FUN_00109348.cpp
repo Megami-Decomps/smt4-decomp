@@ -29,7 +29,6 @@ extern TitleScene *g_titleScene;
 
 int surfaceCopy(Unit *a, Unit *b);
 u8 FUN_002bfadc(int arg, Unit *unit);
-int renderCtxSelectStereoLayout(TitleScene *arg);
 
 /* Script command: if the overlay is shown and not yet applied, resizes the unit through FUN_002bfadc/surfaceCopy (halving its size, the flag takes FUN_002bfadc's result) and marks it applied. */
 u32 FUN_00109348(u32 job)

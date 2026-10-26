@@ -9,6 +9,8 @@
 #include "shard/S1GfxModel.h"
 #include "shard/TextureDrawPayload.h"
 
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTableEntry.h"
+
 /* Apocalypse task work allocated by FUN_0031ba34.
  * Descriptive field meanings are provisional; the allocation size is explicit. */
 struct SpatialTaskWorkA {
@@ -862,28 +864,6 @@ typedef char SequentialAnimationPrefixAOffsetsCheck[
     offsetof(SequentialAnimationPrefixA, textureId) == 0x1020 &&
     sizeof(SequentialAnimationPrefixA) == 0x1024 ? 1 : -1];
 
-/* Observed prefix only; sizeof is not a recovered placement-record stride. */
-struct TexturePlacementPrefixIV {
-    /* 0x00 */ s16 x;
-    /* 0x02 */ s16 y;
-    /* 0x04 */ u16 mode;
-    /* 0x06 */ u8 unk06[6];
-    /* 0x0C */ u8 flags;
-};
-
-/* The indexing arithmetic establishes this table's 0x14-byte stride. */
-struct TextureTableEntryIV {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ TexturePlacementPrefixIV *placement;
-    /* 0x10 */ u8 unk10[4];
-};
-
-/* Observed file prefix, not a claim about the full file object's extent. */
-struct TextureTableFilePrefixIV {
-    /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ TextureTableEntryIV **entries;
-};
-
 /* Only the initialized request prefix is recovered. Bytes 0x1C..0x2B
  * are intentionally left indeterminate. The 0x40-byte stack allocation
  * does not establish the request's full extent. */
@@ -902,22 +882,6 @@ struct TextureDrawRequestPrefixIV {
 typedef char TextureDrawPayloadIVLayoutCheck[
     sizeof(TextureDrawPayloadIV) == 8 &&
     offsetof(TextureDrawPayloadIV, words) == 0 ? 1 : -1];
-typedef char TexturePlacementPrefixIVLayoutCheck[
-    sizeof(TexturePlacementPrefixIV) == 0xE &&
-    offsetof(TexturePlacementPrefixIV, x) == 0 &&
-    offsetof(TexturePlacementPrefixIV, y) == 2 &&
-    offsetof(TexturePlacementPrefixIV, mode) == 4 &&
-    offsetof(TexturePlacementPrefixIV, unk06) == 6 &&
-    offsetof(TexturePlacementPrefixIV, flags) == 0xC ? 1 : -1];
-typedef char TextureTableEntryIVLayoutCheck[
-    sizeof(TextureTableEntryIV) == 0x14 &&
-    offsetof(TextureTableEntryIV, unk00) == 0 &&
-    offsetof(TextureTableEntryIV, placement) == 0xC &&
-    offsetof(TextureTableEntryIV, unk10) == 0x10 ? 1 : -1];
-typedef char TextureTableFilePrefixIVLayoutCheck[
-    sizeof(TextureTableFilePrefixIV) == 8 &&
-    offsetof(TextureTableFilePrefixIV, unk00) == 0 &&
-    offsetof(TextureTableFilePrefixIV, entries) == 4 ? 1 : -1];
 typedef char TextureDrawRequestPrefixIVLayoutCheck[
     sizeof(TextureDrawRequestPrefixIV) == 0x30 &&
     offsetof(TextureDrawRequestPrefixIV, flags) == 0 &&

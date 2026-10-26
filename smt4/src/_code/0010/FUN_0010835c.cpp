@@ -6,7 +6,7 @@
 extern "C" {
 extern RenderCtx *g_titleScene;
 u8 FUN_002bfadc(u32 screen, JobSurface *surface);
-s32 FUN_002bff10(u32 screen);
+s32 stateValuesGetBySelector(u32 screen);
 void surfaceCopy(JobSurface *source, JobSurface *destination);
 
 s32 FUN_0010835c(u32 job)
@@ -30,7 +30,7 @@ s32 FUN_0010835c(u32 job)
     work->source->width = 512;
     work->source->height = 512;
     work->frame.unkE94 = FUN_002bfadc(0, work->source);
-    s32 ready = FUN_002bff10(0);
+    s32 ready = stateValuesGetBySelector(0);
     s32 passes = (s32)work->frame.unkE90;
     if (!ready && passes > 1) {
         --passes;

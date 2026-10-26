@@ -1,11 +1,11 @@
 /* NON_MATCHING: Retail instruction scheduling/register allocation differs (36 retail versus 36 compiled rows). */
 #include "classes/Obj55c89c.h"
 #include "romwright_types.h"
+#include "util/skinObjectUpdateMatrices.h"
 
 extern "C" {
 
 int renderCtxResetColorScale(unsigned int);
-int skinObjectUpdateMatrices(unsigned int);
 int FUN_00183bb0(void);
 
 typedef int romwright_code(...);
@@ -17,7 +17,6 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
 
 
@@ -42,7 +41,7 @@ void Obj55c89c::render()
     }
     (*pcVar2)();
   }
-  skinObjectUpdateMatrices(g_renderCtx);
+  skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
   renderCtxResetColorScale(g_renderCtx);
   return;
 }

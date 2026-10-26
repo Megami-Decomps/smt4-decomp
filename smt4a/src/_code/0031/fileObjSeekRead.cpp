@@ -1,6 +1,7 @@
 /* NON_MATCHING: success value: retail builds it in r0 then copies it to r4 (`mov r0, #0; mov r4, r0`); built `mov r4, #0; mov r0, r4`. */
 #include "sys/ProcessResult.h"
 #include "nn/Result.h"
+#include "util/vcallSlot12IfValid.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct FileObj {
 } FileObj;
 
 extern void sysFatalBreak(void);
-extern void vcallSlot12IfValid(u32 handle);
 
 /* Seeks to `offset` and reads `size` bytes into `buffer`; on failure closes the handle and returns the error. */
 s32 fileObjSeekRead(FileObj *file, u32 offset, u32 buffer, u32 size)

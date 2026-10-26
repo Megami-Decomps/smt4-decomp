@@ -30,20 +30,19 @@ void FUN_002d26a4(void)
     s32 i;
 
     for (i = 0; i < 64; i++) {
-        SparkleSet *set = g_activeTextureSlot;
 
-        if (set->life[i] > 0) {
+        if (g_activeTextureSlot->life[i] > 0) {
             s32 life;
 
-            set->size[i] += 3.0f;
-            set->position[i].y += 1.5f;
-            life = set->life[i];
+            g_activeTextureSlot->size[i] += 3.0f;
+            g_activeTextureSlot->position[i].y += 1.5f;
+            life = g_activeTextureSlot->life[i];
             if (life > 10) {
-                set->color[i] = 0xc0b0a000;
+                g_activeTextureSlot->color[i] = 0xc0b0a000;
             } else {
-                set->color[i] = table.alpha[life] | 0xc0b0a000;
+                g_activeTextureSlot->color[i] = table.alpha[life] | 0xc0b0a000;
             }
-            set->life[i] = life - 1;
+            g_activeTextureSlot->life[i] = life - 1;
         }
     }
 }

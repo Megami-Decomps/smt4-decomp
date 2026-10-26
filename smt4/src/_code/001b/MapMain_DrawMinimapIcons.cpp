@@ -7,7 +7,7 @@ extern "C" {
 int CONCAT44(unsigned int, double);
 int FUN_00281e34(void);
 int FUN_002ba1e0(unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
-int FUN_002c1b64(unsigned int, unsigned int);
+int renderCtxSelectTexture(unsigned int, unsigned int);
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_VEC3TransformAsm_2AD44C(float *, float *, float *);
@@ -70,7 +70,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_00281e34. */
 /* Supplied declaration required: FUN_002ba1e0. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: nn_math_ARMv6_VEC3TransformAsm_2AD44C. */
 
 
@@ -129,7 +129,7 @@ void MapMain_DrawMinimapIcons(void)
   float temp_v43;
   float temp_v44;
   
-  FUN_002c1b64(g_titleScene,*g_activeTextureSlot);
+  renderCtxSelectTexture(g_titleScene,*g_activeTextureSlot);
   temp_v1 = 0;
   temp_v17 = 57.32484f;
   temp_v18 = 0x3f360b61;

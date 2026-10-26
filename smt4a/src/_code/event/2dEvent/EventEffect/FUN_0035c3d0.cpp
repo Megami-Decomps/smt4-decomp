@@ -2,6 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 /* One slash effect of the 2D event layer (0x38 bytes). */
 struct EventSlash {
@@ -47,7 +48,6 @@ s32 eventColorTransitionUpdate(u32 handle);
 s32 FUN_002835f4(u32 handle);
 void *textureGetIndexedResource(u32 table);
 void asdTMTexTableLoadTmx(u32 table, u32 arg);
-void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 /* Starts a slash effect in a free slot: allocates its work, creates its calc process and its two
  * draw tasks (left and right) and makes sure the textures of its set are loading. Returns the

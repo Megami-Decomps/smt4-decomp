@@ -47,7 +47,6 @@ extern "C" {
 extern MapInterface *g_mapIf;
 
 s32 FUN_001692ac(u32 a, u32 b);
-void FUN_0016c4b8(RenderCtxA *context, void *surface);
 void FUN_0014e314(u32 first, u32 second, u32 third, u32 fourth,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
 void FUN_002371b0(void);
@@ -67,7 +66,7 @@ s32 FUN_00315d34(u32 handle)
         s32 state = FUN_001692ac(5, 1);
         renderCtxPushA(context, state);
         FUN_00157558(g_renderCtx);
-        FUN_0016c4b8(g_renderCtx, NULL);
+        renderCtxSelectTexture(g_renderCtx, NULL);
         FUN_0014e314(overlay, overlay, overlay, overlay, 0.0f, 0.0f, 400.0f, 240.0f, 0.0f);
         FUN_002371b0();
         renderStackPop(&g_renderCtx->stackA);

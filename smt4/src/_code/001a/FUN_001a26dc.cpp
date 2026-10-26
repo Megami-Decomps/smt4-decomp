@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029d644.h"
 
 extern "C" {
 
@@ -10,7 +11,7 @@ int FUN_0029a17c(...);
 int vec2GetYInt(...);
 int vec2GetXInt(...);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 
 int gameDataGetPlayerName(void);
 int libc_bsearch(...);
@@ -49,7 +50,6 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: gameDataGetPlayerName. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029ee54(int);
 extern int FUN_0029efa8(int);
@@ -68,7 +68,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 extern unsigned int dataTableGetEntries(void);
 extern unsigned int dataTableGet(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int terminalGetCharacterDisplayName(unsigned int);
@@ -341,7 +341,7 @@ unsigned int FUN_001a26dc(void)
     }
   }
   temp_v4 = FUN_0029ee54(temp_v12);
-  temp_v3 = FUN_0029d644(temp_v12);
+  temp_v3 = FUN_0029d644((const void *)(temp_v12));
   if (temp_v3 < temp_v4) {
     efctSetSpeed();
     temp_v10 = vec2GetYInt(temp_v2 + 0x6b8);
@@ -360,7 +360,7 @@ unsigned int FUN_001a26dc(void)
     (**(romwright_code **)(temp_v2 + 0x1268))();
     *(unsigned char *)(temp_v2 + 0x1264) = 0;
   }
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   FUN_002c18e4(g_titleScene);
   return 0;
 }

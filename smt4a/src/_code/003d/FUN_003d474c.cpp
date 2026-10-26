@@ -1,5 +1,6 @@
 /* NON_MATCHING: the remaining differences are branch layout and register allocation of the state selection (the two `mov r0, #0` stub calls use FUN_00284dbc as the nearest equivalent stub). */
 #include "common.h"
+#include "util/FUN_002a4894.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ typedef struct QuestRecord {
 extern QuestScreen *g_uiQuest;
 
 s32 resourceRunOperationIfUnblocked(void *list);
-s32 FUN_002a4894(void *list);
 s32 partyEntryFlagsBit1(u32 id);
 s32 partyEntryFlagsBit3(u32 id);
 s32 partyEntryBitsBit4(u32 id);

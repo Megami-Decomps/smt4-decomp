@@ -20,7 +20,6 @@ u32 jobGetWork(u32 handle);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 void FUN_00157558(RenderCtxA *context);
-void FUN_0016c4b8(RenderCtxA *context, void *preset);
 u32 FUN_001692ac(u32 kind, bool enabled);
 void mobiclipRenderCurrentScreen(void);
 void FUN_00167618(const f32 *topLeft, const f32 *topRight, const f32 *bottomLeft, const f32 *bottomRight, f32 x, f32 y,
@@ -44,7 +43,7 @@ u32 FUN_002c3038(u32 handle)
             color[1] = 0.0f;
             color[2] = 0.0f;
             color[3] = 1.0f;
-            FUN_0016c4b8(g_renderCtx, NULL);
+            renderCtxSelectTexture(g_renderCtx, NULL);
             FUN_00167618(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
         }
         if (work->fade != 0.0f) {
@@ -56,7 +55,7 @@ u32 FUN_002c3038(u32 handle)
             FUN_00157558(g_renderCtx);
             renderCtxPushA(g_renderCtx, FUN_001692ac(1, false));
             color[3] = work->fade;
-            FUN_0016c4b8(g_renderCtx, NULL);
+            renderCtxSelectTexture(g_renderCtx, NULL);
             FUN_00167618(color, color, color, color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9375f);
             renderStackPop(&g_renderCtx->stackA);
         }

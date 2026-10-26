@@ -2,9 +2,9 @@
 #include "battle/BtlMainAccess.h"
 #include "script/ScriptArgs.h"
 #include "util/SlotRangeSelect.h"
+#include "util/btlScriptResolveGroupArg.h"
 
 extern "C" {
-u32 btlScriptResolveGroupArg(s32 group);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 static inline bool valueKindIsZeroOrTwo(u16 value)
@@ -16,7 +16,7 @@ static inline bool valueKindIsZeroOrTwo(u16 value)
 u32 FUN_002f7528(void)
 {
     s32 valueIndex = scrGetArg(0);
-    u32 group = btlScriptResolveGroupArg(scrGetArg(1));
+    u32 group = (u32)btlScriptResolveGroupArg(scrGetArg(1));
     s32 start;
     s32 count;
     FUN_002499fc(group, &start, &count);

@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/BattleMovementEffects.h"
 #include "gfx/RangeAnimationSelection.h"
+#include "util/CalleeContracts.h"
 
 namespace {
 struct BattleEffectNameRecord { u32 id; char name[1]; };
@@ -13,7 +14,6 @@ void sysMemClear(void *memory, u32 size);
 void asdMemFree(void *memory);
 s32 textFormatBuffer(char *destination, const char *format, ...);
 char *FUN_00100d60(char *text, u32 character);
-s32 findRecordByKey(const char *key);
 void asdLoadFileAsyncSimple(const char *path, char **output, u32 flags);
 extern const char DAT_005284c0[];
 

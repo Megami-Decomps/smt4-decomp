@@ -1,5 +1,6 @@
 /* NON_MATCHING: scoped visibility and linker speed getter recover frame and tail call; reset-speed constant lifetime and row pointer schedule differ. */
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 extern "C" {
 
@@ -45,7 +46,6 @@ void words2Copy(void *panel, PanelPair *out);
 void pairAt8Get(void *panel, PanelPair *out);
 void FUN_004935c8(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
 void FUN_00493518(void *panel, s32 id, s32 a, s32 b, u32 style, f32 scale);
-s32 FUN_002a482c(void *list);
 s32 rangeGetMinimumLimit(void *list);
 s32 FUN_0031d174(void *list);
 s32 flaggedValueHolderGetTotal(void *list);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the camp menu's item/skill details area for the current menu id (item description, selection bar, mode hints); written from the decompilation, the id grouping is rebuilt from the goto chain and branch layout not compared with retail */
 #include "camp/RenderCtx.h"
+#include "util/FUN_002a4878.h"
 
 struct CampDetail {
     /* 0x000 */ u8 unk000[0x1C];
@@ -31,7 +32,6 @@ extern RenderCtxA *g_renderCtx;
 
 void FUN_00157558(RenderCtxA *context);
 s32 FUN_001692ac(u32 a, u32 b);
-u32 FUN_002a4878(void *list);
 s32 FUN_003da8f4(s32 cursor, u32 value);
 void FUN_0021775c(s32 item, u32 mode);
 void FUN_00217f14(void);

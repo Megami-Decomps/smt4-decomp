@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail 54 vs built 55 rows; model-slot pointer addressing and destruction branch layout differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 void asdMdlManagerMarkDestroy(void *);
-void asdLoadFileAsyncSimple(const char *, void **, s32);
 s32 libc_strcmp(const char *, const char *);
 char *strncpy(char *, const char *, u32);
 
@@ -42,7 +42,7 @@ void FUN_0023f2e4(void *owner, s32 index, const char *name, u16 id)
         }
     } else {
         if (state->blocked == 0 && state->asyncEnabled != 0) {
-            asdLoadFileAsyncSimple(name, &slot->request, 1);
+            asdLoadFileAsyncSimple(name, reinterpret_cast<u32 *>(&slot->request), 1);
             slot->state = 4;
             return;
         }

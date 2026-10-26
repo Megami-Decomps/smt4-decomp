@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail stores cursor/mode with a writeback str pair (no stm) and copies the zero register into the loop counter. */
 #include "common.h"
+#include "font/ComWin/ComWin.h"
 
 struct PanelSlot {
     u8 unk00[0x8c];
@@ -19,7 +20,6 @@ struct PanelList {
 
 extern "C" {
 
-void spriteStartAnimationByIndex(void *slot, s32 size);
 
 // Reset the list state and initialise both per-slot records of every slot.
 void FUN_00218be0(PanelList *list)

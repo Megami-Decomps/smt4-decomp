@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_0027d9e8.h"
 
 struct IdSlotEntry {
     u32 unk00; // 0x00
@@ -10,8 +11,9 @@ struct IdSlots {
 };
 
 // Finds a populated slot whose entry has the requested ID.
-extern "C" IdSlotEntry* FUN_0027d9e8(const IdSlots* slots, s32 id)
+extern "C" void *FUN_0027d9e8(const void *handle, s32 id)
 {
+    const IdSlots *slots = static_cast<const IdSlots *>(handle);
     for (s32 i = 0; i < 42; ++i) {
         if (slots->entries[i] != NULL && slots->entries[i]->id == id) {
             return slots->entries[i];

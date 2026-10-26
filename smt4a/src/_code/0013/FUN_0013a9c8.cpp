@@ -7,7 +7,7 @@ void FUN_00145084(u32);
 void FUN_001640cc(const EffectColor *, const EffectColor *, const EffectColor *, const EffectColor *,
                   f32, f32, f32, f32, f32, f32, f32, f32, f32);
 void renderCtxResetColorScale(void *);
-void FUN_0016c4b8(void *, u32);
+void renderCtxSelectTexture(void *, u32);
 void skinObjectUpdateMatrices(void *);
 extern void *g_renderCtx;
 u32 asdTMTexTableGetHeaderValue(u32, u32);
@@ -30,7 +30,7 @@ u32 FUN_0013a9c8(void)
             color.alpha = (f32)(g_titleFlags.overlay.frame - 2) * 0.05f;
         if (0.0f < color.alpha) {
             u32 texture = asdTMTexTableGetHeaderValue(33, 0);
-            FUN_0016c4b8(g_renderCtx, texture);
+            renderCtxSelectTexture(g_renderCtx, texture);
             FUN_001640cc(&color, &color, &color, &color,
                          88.0f, 128.0f, 64.0f, 64.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f);
             skinObjectUpdateMatrices(g_renderCtx);

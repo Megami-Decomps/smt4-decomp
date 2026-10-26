@@ -3,7 +3,6 @@
 #include "common.h"
 #include "ui/PartyPanelCapacity.h"
 #include "util/FUN_002a4878.h"
-#include "util/FUN_002a4878.h"
 
 /* One command-menu entry (only the fields read here). */
 struct CommandEntry {
@@ -112,7 +111,7 @@ u32 FUN_002cc9e0(CommandWork *work, s32 inBattle)
             continue;
         if ((entry->attributes & 1) && FUN_00291e14() != 0)
             continue;
-        if (FUN_002a4878(reinterpret_cast<const Object *>(work->lists + work->selected * 100)) == count)
+        if (FUN_002a4878(reinterpret_cast<Object *>(work->lists + work->selected * 100)) == count)
             break;
         count++;
     }

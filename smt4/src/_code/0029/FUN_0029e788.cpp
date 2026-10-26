@@ -1,5 +1,6 @@
 /* NON_MATCHING: menu-reset offset-pool reuse and register scheduling differ. */
 #include "shard/Shard0033.h"
+#include "font/ComWin/ComWin.h"
 
 // IV's three initial headers and menu controls differ from the Apocalypse session view.
 struct MenuSessionResetViewIV {
@@ -34,7 +35,6 @@ typedef char MenuSessionResetOffsetsCheck[offsetof(MenuSessionResetViewIV, first
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
-void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 index);
 void timerStart(UiSpriteState *sprite, s32 duration, u32 flags);
 
 void FUN_0029e788()

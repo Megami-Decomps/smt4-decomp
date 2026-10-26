@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match2_RecordValue.h"
 #include "util/Random.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct FusionLevelDefinition {
     DevilSortRecord sort;
@@ -27,7 +28,6 @@ extern "C" {
 bool gameRecordCopy(u32, RecordValue *);
 u32 gameFlagIsSet(u32);
 u8 *gameGetSlotTable();
-FusionLevelUnit *gameGetUnitRecord(u32);
 
 u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, u32 level)
 {
@@ -62,7 +62,7 @@ u32 uniteChooseAvailableDevilAtLevel(u32 firstId, u32 secondId, u32 previousId, 
         for (slot = 0; slot < 24; ++slot) {
             if ((u32)party->slots[slot] < 24) {
                 FusionLevelParty *currentParty = (FusionLevelParty *)gameGetSlotTable();
-                FusionLevelUnit *unit = gameGetUnitRecord(currentParty->slots[slot]);
+                FusionLevelUnit *unit = static_cast<FusionLevelUnit *>(gameGetUnitRecord(currentParty->slots[slot]));
                 if (unit->id == candidate->id) {
                     break;
                 }

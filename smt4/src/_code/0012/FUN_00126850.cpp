@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail retains redundant sound-type/gain-cap paths; volume-call predication and global bases differ. */
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "util/FUN_002bf684.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-s32 FUN_002bf684(void *archive);
 u32 FUN_00141fd0(void *archive, s32 id);
 s32 FUN_001388dc(s32 id);
 u32 nw_snd_SoundStartable_StartSound(void *player, s32 *handle, s32 id, u32 flags);

@@ -1,18 +1,18 @@
-/* NON_MATCHING: retail retains unused pool words 0x0044ea80/0x0044f858; the initial index-load order also differs. */
 #include "shard/W6_W6Match5_IndexedRecord.h"
 #include "gfx/EffectEditorStorage.h"
-
 extern "C" {
 
 IndexedRecordBuffer *linkedFindItemByIndex(IndexedRecordList *, s32);
 void __aeabi_memcpy4(void *, const void *, u32);
 u32 FUN_003224c0(EffectEditorSnapshot *, s32);
+extern IndexedRecordSelection DAT_0044f858;
 
 // Edit an indexed record through scratch storage and mark flagged results.
-u32 FUN_00328a28(IndexedRecordSource *source, const IndexedRecordSelection *selection)
+u32 FUN_00328a28(void)
 {
-    IndexedRecordBuffer *record = linkedFindItemByIndex(source->records,
-                                            selection->index + source->baseIndex);
+    IndexedRecordBuffer *record = linkedFindItemByIndex(
+        static_cast<IndexedRecordList *>(g_effectEditor.selection.list),
+        DAT_0044f858.index + g_effectEditor.selection.index);
     __aeabi_memcpy4(&g_effectEditorSettings, record, sizeof(IndexedRecordBuffer));
     u32 result = FUN_003224c0(&g_effectEditorSettings.snapshot, 1);
     __aeabi_memcpy4(record, &g_effectEditorSettings, sizeof(IndexedRecordBuffer));

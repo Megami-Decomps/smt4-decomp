@@ -1,12 +1,12 @@
 /* NON_MATCHING: the state change stores as add+stm with the timer first; retail writes stmib with writeback and the timer through it. */
 #include "shard/W4_W4Match2_UiQuest.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 
 void uiQuestLoadResources(void);
 void FUN_0028fe0c(u16 id, s32 mode);
 void FUN_00290d5c(s32 sound);
-s32 FUN_0029efa8(void *cursor);
 s32 FUN_0029efc0(void *cursor);
 void timerStart(void *timer, s32 a, s32 b);
 

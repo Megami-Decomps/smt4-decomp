@@ -4,6 +4,7 @@
 #include "font/SearchWin/RunWin.h"
 #include "text/TextDraw.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "shard/FUN_0019e52c.h"
 
 extern "C" {
 void FUN_00183bb0(void);
@@ -13,7 +14,6 @@ const MessageDrawPosition *asdTMTexTableEntryAt(u32 group, u32 index);
 const SaveSlotPortraitResource *FUN_00184310(u32 portrait);
 void FUN_00169a1c(u32 image, s32 x, s32 y, s32 depth);
 u32 FUN_0036fcd0(void *unit, u32 mode);
-u32 FUN_0019e52c(u32 id);
 void drawSetColorFromRGBA8(u32 color);
 void textFormatBuffer(char *destination, const char *format, ...);
 void FUN_00180310(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);

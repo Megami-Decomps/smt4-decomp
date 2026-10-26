@@ -18,7 +18,7 @@ struct CameraBlendState {
     CameraBlendValues source;
 };
 
-inline void setCameraVector(W5Match8Vec3& vector, f32 x, f32 y, f32 z)
+void setCameraVector(W5Match8Vec3& vector, f32 x, f32 y, f32 z)
 {
     vector.x = x;
     vector.y = y;

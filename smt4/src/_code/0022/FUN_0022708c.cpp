@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail builds each vector address (owner + 0x3060/0x3068) in its own register; the vector stores fold into r0 offsets here. */
 #include "common.h"
 
 class ScreenEffect {
@@ -42,7 +41,7 @@ extern "C" {
 
 void asdMemoryFreeLockedAlt(void *block);
 
-static __inline void vec2Set(Vec2f *v, f32 x, f32 y)
+static void vec2Set(Vec2f *v, f32 x, f32 y)
 {
     v->y = y;
     v->x = x;

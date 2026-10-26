@@ -14,8 +14,10 @@ u32 FUN_004c9160(u32 object, s32 mode, u32 resource, u32 option)
 {
     BtlMainStateA* battle = btlGetMainState();
     u64 flags = battle->stateFlags64.bits;
-    if ((flags & ((u64)g_btlHelp.blockedStates[0] | ((u64)g_btlHelp.blockedStates[1] << 32))) != 0 ||
-        (flags & ((u64)g_btlHelp.blockedTransitions[0] | ((u64)g_btlHelp.blockedTransitions[1] << 32))) != 0) {
+    u32 low = (u32)flags;
+    u32 high = (u32)(flags >> 32);
+    if (((g_btlHelp.blockedStates[0] & low) | (g_btlHelp.blockedStates[1] & high)) != 0 ||
+        ((low & g_btlHelp.blockedTransitions[0]) | (high & g_btlHelp.blockedTransitions[1])) != 0) {
         return 0;
     }
     if (mode != 0) {

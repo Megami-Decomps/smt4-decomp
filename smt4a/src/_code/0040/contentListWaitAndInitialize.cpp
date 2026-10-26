@@ -2,6 +2,7 @@
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "addon/PackageSelection.h"
 
 struct ContentListScroller { u8 data[0x6c]; };
 struct ContentListScreen {
@@ -36,7 +37,6 @@ s32 aocCountTableRecords(AocSystemA *);
 void FUN_00403b84(ContentListScreen *);
 void FUN_00203b40(ContentListScroller *, void *, s32, s32, s32, s32);
 u16 FUN_001643b4(u32, s32);
-u32 FUN_0039b984(u16);
 void sortOwnerRun(ContentListScreen *);
 void FUN_00202400();
 void FUN_004029f4(ContentListScreen *, s32, s32);
@@ -80,7 +80,7 @@ void contentListWaitAndInitialize(ContentListScreen *screen)
     screen->nextTouch = FUN_001643b4(0x32, 0x8d);
     screen->backTouch = FUN_001643b4(0x32, 0x8b);
     screen->touchCount += 3;
-    screen->selected = FUN_0039b984(screen->selectedId);
+    screen->selected = reinterpret_cast<u32>(contentFindRecordById(screen->selectedId));
     sortOwnerRun(screen);
     FUN_00202400();
     FUN_004029f4(screen, 2, 3);

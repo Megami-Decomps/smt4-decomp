@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002a9244` (_code @ 0x2a9244, 0x5ec bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 extern "C" {
 
@@ -112,7 +113,6 @@ typedef struct {
 /* Supplied declaration required: modelSelectPrimaryMotion. */
 /* Supplied declaration required: FUN_002a5960. */
 /* Supplied declaration required: _ZN9Obj42111cC1Ej. */
-extern int *asdMemoryGetDefaultAllocator(void);
 /* Supplied declaration required: asdMemoryAlloc. */
 
 
@@ -262,7 +262,7 @@ void FUN_002a9244(fn_002a9244_arg0 *param_1)
         temp_v6 = **(int **)&param_1->field_0x54;
         temp_v7 = temp_v1;
         temp_v8 = temp_v1;
-        piVar3 = (int *)asdMemoryGetDefaultAllocator();
+        piVar3 = (int *)reinterpret_cast<int *>(asdMemoryGetDefaultAllocator());
         piVar5 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar5 != (int *)0x0) {
           _ZN9Obj42111cC1Ej(piVar5,piVar3);
@@ -331,7 +331,7 @@ void FUN_002a9244(fn_002a9244_arg0 *param_1)
         temp_v6 = *(int *)param_1->field_0x64;
         temp_v7 = temp_v1;
         temp_v8 = temp_v1;
-        piVar3 = (int *)asdMemoryGetDefaultAllocator();
+        piVar3 = (int *)reinterpret_cast<int *>(asdMemoryGetDefaultAllocator());
         piVar5 = (int *)(**(romwright_code **)(*piVar3 + 8))(piVar3,0x74,4);
         if (piVar5 != (int *)0x0) {
           _ZN9Obj42111cC1Ej(piVar5,piVar3);

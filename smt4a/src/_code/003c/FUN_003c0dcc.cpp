@@ -7,7 +7,6 @@ extern AocSystemA *g_aocSystem;
 void *dataTableGet(s32 table, s32 section);
 s32 gameFlagIsSet(u32 flag);
 s32 aocCountTableRecords(AocSystemA *system);
-PackageSelectableRecord *FUN_0039b984(u16 id);
 s32 tableFlagBit0(s32 index);
 s32 tableFlagBit1(s32 index);
 s32 tableFlagBit2(s32 index);
@@ -32,7 +31,7 @@ u32 FUN_003c0dcc()
     for (s32 index = 0; index < 300; ++index) {
         if (visited >= count)
             break;
-        PackageSelectableRecord *record = FUN_0039b984(static_cast<u16>(index));
+        PackageSelectableRecord *record = contentFindRecordById(static_cast<u16>(index));
         if (record == NULL)
             continue;
         ++visited;

@@ -1,13 +1,8 @@
 /* NON_MATCHING: readable rebuild of the menu frame effect draw; the remaining differences are the integer/float register split around the efct speed saves (retail keeps the speed in s16 and 1/256 alpha in s17 across the calls). */
 #include "common.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* A menu layout slot as asdTMTexTableEntryAt reports it: offsets of its parts. */
-struct LayoutRect {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 /* The menu object (only the fields the frame draw reads). */
 struct FrameMenu {
@@ -22,7 +17,6 @@ struct FrameMenu {
 extern "C" {
 void FUN_00164b5c(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha);
 void efctSetSpeed(f32 speed);
-LayoutRect *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_001835b4(s32 a, s32 b, s32 c, s32 x, s32 y, s32 alpha, ...);
 void FUN_00183bb0(void);
 s32 FUN_002e5d88(u16 id);
@@ -33,7 +27,7 @@ s32 FUN_002e5d88(u16 id);
 void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha)
 {
     efctSetSpeed(menu->speed);
-    LayoutRect *base;
+    TextureTableEntryIV *base;
     s32 x;
     s32 y;
     if (style != 0) {
@@ -61,8 +55,8 @@ void FUN_004ba354(FrameMenu *menu, s32 slot, s32 itemIndex, s32 style, s32 alpha
     }
     f32 fade = (f32)(0x100 - alpha) * (1.0f / 256.0f);
 
-    LayoutRect *icon;
-    LayoutRect *offset;
+    TextureTableEntryIV *icon;
+    TextureTableEntryIV *offset;
     u32 mode;
     u32 mask;
     if (style != 0) {

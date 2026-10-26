@@ -150,6 +150,7 @@ def inlined_bodies():
     """{name: instruction} of the ARM functions armlink inlines (`--inline`): one instruction that
     doesn't address pc, then `bx lr`. The retail code never calls one: each `bl` to it is that
     instruction (an SDK svc wrapper's `svc`, a getter's `ldr`, a setter's `vstr`, `mov r0, #0`).
+    An empty function (a lone `bx lr`) is inlined as a NOP: the image never calls one.
     A NOP body is called, not inlined. Their bytes come from the retail target objects, and for the
     ones armlink then removed as unreferenced (no copy left in the image) from
     `config/inlined.txt`: `<symbol> = 0x<instruction>; // <call sites>`."""
@@ -159,12 +160,17 @@ def inlined_bodies():
         _INLINED = {}
         for unit in PROJECT["units"]:
             target = ROOT / unit["target"]
-            if unit.get("thumb") or unit["size"] != 8 or not target.exists():
+            if unit.get("thumb") or unit["size"] not in (4, 8) or not target.exists():
                 continue
             data = target.read_bytes()
             sections, _symbols = read_elf(data)
             body = next((s for s in sections if s["name"] == ".text"), None)
-            if body is None or body["size"] < 8:
+            if body is None or body["size"] < unit["size"]:
+                continue
+            if unit["size"] == 4:
+                # An empty function (`bx lr`): armlink's --inline leaves a NOP where it was called.
+                if struct.unpack_from("<I", data, body["offset"])[0] == 0xE12FFF1E:
+                    _INLINED[unit["function"]] = 0xE1A00000
                 continue
             word, ret = struct.unpack_from("<II", data, body["offset"])
             svc = word >> 24 & 0xF == 0xF

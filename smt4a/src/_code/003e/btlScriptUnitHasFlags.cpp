@@ -5,7 +5,7 @@ extern "C" {
 
 u32 hasFlag80Or1000(u32 id, u32 *flags);
 
-s32 btlScriptUnitHasFlags(void)
+s32 btlScriptUnitHasFlags(const BtlMainStateA *)
 {
     ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     if (unit == NULL) {

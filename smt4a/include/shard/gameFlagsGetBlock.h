@@ -3,11 +3,14 @@
 
 #include "common.h"
 
+struct FlagWorkBanks;
+
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-u8 *gameFlagsGetBlock(void);
+/* The flag banks of the game-data table; callers view them as the sub-structure they use. */
+struct FlagWorkBanks *gameFlagsGetBlock(void);
 
 #ifdef __cplusplus
 }

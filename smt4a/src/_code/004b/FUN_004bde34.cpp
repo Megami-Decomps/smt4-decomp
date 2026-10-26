@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/markerKindGetColor.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,11 +16,6 @@ typedef struct PartnerCardUnit {
     /* 0x64 */ u16 level;
 } PartnerCardUnit;
 
-typedef struct PartnerCardLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} PartnerCardLayout;
 
 /* The partner screen (only the fields used here, by their offsets). */
 typedef struct PartnerCardScreen {
@@ -33,7 +29,6 @@ typedef struct PartnerCardScreen {
 
 s32 FUN_002b4dcc(PartnerCardUnit *unit);
 void efctSetSpeed(f32 speed);
-PartnerCardLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 void FUN_00180310(u32 a, s32 x, s32 y, u32 b, u32 c, u32 tag, const char *format, s32 value);
 void FUN_00183788(s32 hp, s32 maxHp, u32 a, u32 b, u32 group, u32 id0, u32 id1, u32 id2, u32 id3, s32 x, s32 y, u32 tag,
                   u32 c);
@@ -66,14 +61,14 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     FUN_001835b4(2, 0x11, 0x99, x, y, 0x6F);
     FUN_001835b4(2, 0x11, 0x9A, x, y, 0x6F);
     FUN_001835b4(2, 0x11, 0x98, x, y, 0x6F);
-    PartnerCardLayout *levelBox = asdTMTexTableEntryAt(0x11, 0x9D);
+    TextureTableEntryIV *levelBox = asdTMTexTableEntryAt(0x11, 0x9D);
 
     FUN_00180310(0, levelBox->x + x, levelBox->y + y, 1, 3, 0x79, "%d", level);
     efctSetSpeed(scale);
     FUN_001835b4(2, 0x11, 0x9E, x, y, 0x6F);
     FUN_001835b4(2, 0x11, 0x77, x, y, 0x79);
     FUN_00183788(hp, maxHp, 0, 0, 0x11, 0x9F, 0xA2, 0xA0, 0xA1, x, y, 0x74, 0);
-    PartnerCardLayout *hpBox = asdTMTexTableEntryAt(0x11, 0xAA);
+    TextureTableEntryIV *hpBox = asdTMTexTableEntryAt(0x11, 0xAA);
     s32 hpX = hpBox->x + x;
     s32 hpY = hpBox->y + y;
 
@@ -83,7 +78,7 @@ void FUN_004bde34(PartnerCardScreen *screen, PartnerCardUnit *unit, s32 slot, s3
     efctSetSpeed(scale);
     FUN_00180310(10, hpX, hpY, 1, 4, 0x79, "%d", hp);
     FUN_00183bb0();
-    PartnerCardLayout *markerBox = asdTMTexTableEntryAt(0x11, 0xAC);
+    TextureTableEntryIV *markerBox = asdTMTexTableEntryAt(0x11, 0xAC);
     s32 markerX = markerBox->x + x;
     s32 markerY = markerBox->y + y;
     u32 color = 0xFFFFFFFF;

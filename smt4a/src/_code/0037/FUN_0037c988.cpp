@@ -2,6 +2,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "util/FUN_002a4894.h"
 
 /* A pair of screen coordinates. */
 struct ScreenOffset {
@@ -42,7 +43,6 @@ void FUN_003b6354(SlotScreen *screen, s32 slot, s32 mode, u32 argument, f32 scal
 void FUN_003c33e8(SlotScreen *screen, s32 slot, u32 argument, u32 flags, f32 scale, s32 x, s32 y);
 void FUN_003cce74(SlotScreen *screen, u32 argument, s32 x, s32 y, f32 scale);
 s32 resourceRunOperationIfUnblocked(u32 *cursor);
-s32 FUN_002a4894(u32 *cursor);
 void efctSetSpeed(f32 speed);
 
 /* Draws the eight slot icons of the slot screen: locked slots are blanked, unlocked ones get

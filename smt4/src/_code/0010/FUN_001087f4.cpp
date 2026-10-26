@@ -5,7 +5,7 @@
 
 extern "C" {
 u32 FUN_002bfadc(s32 mode, TitleJobSurface *surface);
-s32 FUN_002bff10(void);
+s32 stateValuesGetBySelector(void);
 extern void *g_titleScene;
 
 // Refresh the title overlay's render surface once its source is ready.
@@ -13,7 +13,7 @@ s32 FUN_001087f4(u32 job)
 {
     TitleJobWork *work = (TitleJobWork *)jobGetWork(job);
     work->overlayUpdated = 0;
-    if (FUN_002bff10() == 0 && work->unkEDC && work->unkEDD && work->unkFDC != NULL &&
+    if (stateValuesGetBySelector() == 0 && work->unkEDC && work->unkEDD && work->unkFDC != NULL &&
         !work->unkFD8 && !work->overlayShown) {
         renderCtxSelectStereoLayout(reinterpret_cast<RenderCtx *>(g_titleScene));
         work->overlaySurface->width = 512;

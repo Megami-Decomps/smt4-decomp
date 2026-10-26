@@ -10,7 +10,7 @@ int FUN_0025090c(int, int, int, unsigned char [144]);
 int forwardRecoveredCallback(void);
 int textDrawString(int, unsigned int, unsigned char [144]);
 int FUN_002c0944(unsigned int);
-int FUN_002c1b64(int, int);
+int renderCtxSelectTexture(int, int);
 int renderCtxSelectStereoLayout(int);
 int findKeyedRecord(int, int);
 int VectorSignedToFloat(int, int);
@@ -32,7 +32,7 @@ extern int dataTable2eSub2GetRecord(int);
 /* Supplied declaration required: textDrawString. */
 extern unsigned long long asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c0944. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 /* Supplied declaration required: findKeyedRecord. */
@@ -72,7 +72,7 @@ unsigned int FUN_0021ef10(void)
       *(unsigned char *)(temp_v4 + 0x1264) = 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     FUN_002c0944(temp_v6);
     forwardRecoveredCallback();
     temp_v4 = g_titleScene;

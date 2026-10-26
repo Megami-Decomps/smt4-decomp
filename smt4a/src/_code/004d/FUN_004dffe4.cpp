@@ -2,6 +2,7 @@
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "shard/lcgRandomRange.h"
 
 namespace {
 struct BattleTargetSelectionView {
@@ -10,7 +11,6 @@ struct BattleTargetSelectionView {
 }
 extern "C" {
 extern BtlActionGlobals g_btlAction;
-s32 lcgRandomRange(u16 limit);
 void FUN_004e5b5c(BattleTargetSelectionView *context);
 void FUN_004e6ed8(BattleTargetSelectionView *context, s32 mode);
 void FUN_004e7d20(BattleTargetSelectionView *context, s32 count);
@@ -18,13 +18,13 @@ void FUN_004e7d20(BattleTargetSelectionView *context, s32 count);
 /* Probabilistically filter eligible combatants, then choose a one-, two- or three-target action. */
 void FUN_004dffe4(BattleTargetSelectionView *context)
 {
-    s32 roll = lcgRandomRange(99);
+    s32 roll = (s32)lcgRandomRange(99);
     s32 remaining = 0;
     for (s32 index = 0; index < 109; ++index) {
         BtlCombatantEntryA *entry = &context->battle->entries[index];
         if ((entry->flags & g_btlAction.clearedFlags.mask) != 0) {
             s32 chance = btlFindEntryNonzeroRecordValue(entry->unitIndex);
-            if (chance > 0 && lcgRandomRange(99) > chance)
+            if (chance > 0 && (s32)lcgRandomRange(99) > chance)
                 context->battle->entries[index].flags &= ~g_btlAction.clearedFlags.mask;
             else
                 remaining++;

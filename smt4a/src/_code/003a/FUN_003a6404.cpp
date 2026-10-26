@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail's kind-to-row switches are jump tables starting at 0 (built subtracts the first case) and the colour interpolation is scheduled differently (211 vs 229 rows); the gradient colour lookup is the same. */
+/* NON_MATCHING: the first kind-to-row jump table now matches (labels 0 and 1 explicit); the later row selections and the colour interpolation are scheduled differently (retail 229 vs built 212 rows). */
 #include "common.h"
 
 extern "C" {
@@ -31,6 +31,7 @@ s32 FUN_003a6404(s32 kind, s32 level)
         row = 11;
     } else if (kind < 12) {
         switch (kind) {
+        case 0: case 1: break;
         case 2: row = 1; break;
         case 3: row = 2; break;
         case 4: row = 3; break;

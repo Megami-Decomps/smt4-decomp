@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/Shard004B.h"
+#include "gamedata/SaveSlotTable.h"
 
 static inline s32 clampVital(s32 value, s32 maximum)
 {
@@ -19,7 +20,6 @@ extern "C" {
 BattleCombatantStatusKey *FUN_001568f8(BtlMainStateA *state, s32 id);
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *state, s32 id);
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
-ScaledRecordValues *saveSlotFindSelected();
 s32 recordGetScaledMaximum(const ScaledRecordValues *record);
 
 void FUN_004c80f0(s32 id, s32 kind, s32 delta)
@@ -51,7 +51,7 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
             reinterpret_cast<ScaledRecordValues *>(entry->secondaryRecord)->current = vitals->hp;
             reinterpret_cast<ScaledRecordValues *>(entry->secondaryRecord)->secondaryCurrent = vitals->mp;
         } else if (entry->specialMaximum.record) {
-            ScaledRecordValues *selected = saveSlotFindSelected();
+            ScaledRecordValues *selected = reinterpret_cast<ScaledRecordValues *>(saveSlotFindSelected());
             if (!selected) {
                 return;
             }

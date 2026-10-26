@@ -1,6 +1,7 @@
-/* NON_MATCHING: retail places the else computation out of line after the shared scrSetResult tail and does not fold the slot offset (0x3654) into one add */
+/* NON_MATCHING: entry (mov r0,#0), slot-pointer arithmetic and arm placement now match retail; armcc still emits three compiler nop hints around the shared scrSetResult call and a different tail layout. */
 #include "common.h"
-#include "shard/scrGetArg.h"
+#include "script/ScriptArgs.h"
+#include "gamedata/UnitRecordAccess.h"
 
 struct ResultSlot {
     s8 unitId;        // 0x000
@@ -26,17 +27,20 @@ extern "C" {
 
 extern ResultScreen *g_result;
 
-void scrSetResult(u32 value);
-UnitRecordView *gameGetUnitRecord(s32 unitId);
 
-/* Script command (called with r0 = 0, which reaches scrGetArg unchanged): returns the pending result value (arg != 0) or the selected unit's value at the current index; 0 without a result screen. */
-s32 FUN_003245b8(u32 argIndex)
+/* Script command: returns the pending result value (arg != 0) or the selected unit's value at the current index; 0 without a result screen. */
+s32 FUN_003245b8(void)
 {
-    s32 which = scrGetArg(argIndex);
+    s32 which = scrGetArg(0);
 
     if (g_result != NULL) {
-        u32 value = which != 0 ? g_result->pendingValue
-                               : gameGetUnitRecord(g_result->slots[g_result->selected].unitId)->values[g_result->valueIndex];
+        u32 value;
+        if (which == 0) {
+            ResultSlot *slot = &g_result->slots[g_result->selected];
+            value = static_cast<UnitRecordView *>(gameGetUnitRecord(slot->unitId))->values[g_result->valueIndex];
+        } else {
+            value = g_result->pendingValue;
+        }
 
         scrSetResult(value);
     } else {

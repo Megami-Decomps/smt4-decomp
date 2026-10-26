@@ -19,7 +19,7 @@ extern int FUN_00145ec8(void);
 extern unsigned short *FUN_00145f04(char, unsigned int, short);
 extern int gameTestFlagBit32(unsigned int);
 /* Supplied declaration required: FUN_00148bb8. */
-extern unsigned short *FUN_00148c30(char, unsigned int, short);
+extern unsigned short *dataTableFindCategoryVariant(char, unsigned int, short);
 extern unsigned int randRange(unsigned int);
 extern int FUN_0015fb68(void);
 /* Supplied declaration required: dataTable18Sub0GetCount. */
@@ -87,7 +87,7 @@ void FUN_0013bb34(int param_1)
       }
       else {
         *(unsigned char *)((int)puVar6 + 3) = temp_v2 & 0xe0;
-        puVar7 = (unsigned short *)FUN_00148c30(temp_v0,temp_v4,temp_v12);
+        puVar7 = (unsigned short *)dataTableFindCategoryVariant(temp_v0,temp_v4,temp_v12);
         temp_v13 = *puVar6;
         temp_v7 = (unsigned int)puVar7[temp_v6 * 3 + 3];
         if ((-temp_v5 & temp_v7) == 0) {

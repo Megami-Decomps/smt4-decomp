@@ -3,11 +3,11 @@
 #include "status/StatusBustUp.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern StatusBustUpResources DAT_0044e158;
 void asdTMTexTableLoadTmx(u32 table, u32 node);
-void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 void rt_memclr(void *block, u32 size);
 
 /* Takes a reference on the bust-up resources, loading the textures and allocating the work

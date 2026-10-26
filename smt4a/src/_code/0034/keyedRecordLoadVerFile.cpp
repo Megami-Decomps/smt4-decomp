@@ -1,9 +1,9 @@
 #include "common.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 s32 FUN_003478dc(s32 index, const char *data);
 s32 keyedRecordRegisterName(const char *name);
-s32 findRecordByKey(const char *name);
 const char *FUN_00100d60(const char *text, u32 character);
 void asdMemFree(void *allocation);
 char *asdLoadFileSyncDefault(const char *path);

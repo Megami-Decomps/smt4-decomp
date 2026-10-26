@@ -24,10 +24,9 @@ extern "C" void FUN_001ee2bc(EffectResourceKeyTrack *track,
             track->keys[track->index + distance].value -= (s32)adjustment;
         }
         s32 nextIndex = track->index + distance;
-        const EffectResourceKey *previous = &track->keys[track->index];
         const EffectResourceKey *next = &track->keys[nextIndex];
-        f32 duration = (f32)(next->frame - previous->frame);
-        f32 difference = (f32)(next->value - previous->value);
+        f32 duration = (f32)(next->frame - track->keys[track->index].frame);
+        f32 difference = (f32)(next->value - track->keys[track->index].value);
         track->step = difference / duration;
         track->target = (f32)next->value;
         track->index = nextIndex;

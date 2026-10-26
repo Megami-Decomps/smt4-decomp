@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/AsdListBoxCreateDefault.h"
 
 #define TALK_CTRL_ITEM_COUNT 26
 
@@ -20,7 +21,6 @@ extern "C" {
 
 extern const char *DAT_00435448[];
 
-u32 asdListBoxCreateDefault(u32 parent, s32 id, s32 flags, s32 extra);
 void asdListBoxAddItems(u32 list, const char **names, s32 count);
 void asdListBoxSetByteValue(u32 list, s32 value);
 void jobSetText(u32 list, const char *text);

@@ -72,8 +72,8 @@ struct ScriptVmProcess {
     /* 0xEC */ ScriptVmValue *floatVariables; /* values of the float variables */
 };
 
-/* Pushes a tagged value. */
-static __inline void scriptVmPush(ScriptVmProcess *process, u8 tag, u32 value)
+/* Pushes a tagged value. Plain static (not __inline): armcc auto-inlines it with right-to-left argument evaluation, which the opcodes' load order shows. */
+static void scriptVmPush(ScriptVmProcess *process, u8 tag, u32 value)
 {
     process->tags[process->depth] = tag;
     process->values[process->depth].u = value;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: factored grid flow emits 91 rather than 113 rows; selector/output addresses stay live and the frame is 12 rather than 8 bytes. */
 #include "common.h"
 #include "network/DataStore/DataStoreMain.h"
+#include "util/FUN_002a4878.h"
 
 struct Pair40;
 struct PanelValuePair {
@@ -31,7 +32,6 @@ struct PanelSlotOwners {
 extern "C" {
 extern PanelValueView* g_partyPanel;
 void* gameGetSlotTable(void);
-s32 FUN_002a4878(void* selector);
 s32 FUN_002a4894(void* selector);
 u32 btlItemComputeValues(u32 owner, u32 itemId, u32* first, u32* second);
 void pair40Set(Pair40* object, u32 first, u32 second);

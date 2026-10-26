@@ -1,35 +1,30 @@
-/* NON_MATCHING: same unrolled loop; retail keeps the count in r2 and the -1 constant in r1, this build counts in r1 and puts -1 in r2. */
 #include "common.h"
 
-struct Record {
-    /* 0x00 */ s32 id;
-    /* 0x04 */ u8 unk04[40];
+struct Obj00315398Entry {
+    s32 value;
+    u8 unk04[0x28];
 };
 
-struct Records {
-    /* 0x00 */ Record *items;
+struct Obj00315398Count {
+    u8 unk00[0x38];
+    s32 count;
 };
 
-struct Counts {
-    /* 0x00 */ u8 unk00[0x38];
-    /* 0x38 */ s32 count;
+struct Obj00315398 {
+    u8 unk00[0x3c];
+    Obj00315398Entry **entries;
+    Obj00315398Count *source;
 };
 
-struct Object {
-    /* 0x00 */ u8 unk00[0x3C];
-    /* 0x3C */ Records *records;
-    /* 0x40 */ Counts *counts;
-};
-
-extern "C" void FUN_002f985c(Object *object)
+/* Resets the value of each entry to -1, one per source count. */
+extern "C" void FUN_002f985c(Obj00315398 *obj)
 {
-    Records *records = object->records;
-    Counts *counts = object->counts;
-    s32 count = counts->count;
-    Record *record = records->items;
+    Obj00315398Entry **handle = obj->entries;
+    Obj00315398Count *source = obj->source;
+    Obj00315398Entry *entries = *handle;
+    s32 count = source->count;
     s32 i;
-
     for (i = 0; i < count; i++) {
-        record[i].id = -1;
+        entries[i].value = -1;
     }
 }

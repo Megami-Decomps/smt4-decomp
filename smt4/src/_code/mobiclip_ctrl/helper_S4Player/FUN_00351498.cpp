@@ -3,11 +3,11 @@
 #include "mobiclip_ctrl/MoviePlayerInitialization.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "sys/ResultReport.h"
 extern "C" {
 extern void *DAT_0044d158;
 extern ThreadStackStorage *DAT_0044d15c;
 void *memAlloc(u32 heap, u32 alignment, u32 mode, u32 bytes, u32 pageSize, u32 flags);
-void resultReportIfFailed(ThreadStackStorage *stack, void *memory, u32 bytes);
 void mwmofilterDeblockerInit(void *queue);
 void nn_os_LightEvent_Initialize(void *event, bool manualReset);
 void nn_os_CriticalSection_Initialize(void *section);
@@ -18,7 +18,6 @@ void FUN_003f6ffc(void);
 void FUN_003f6f98(void);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *),
     const void *argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_002c526c(s32 error);
 
 u32 FUN_00351498(MoviePlayerInitialization *player, void *fileBackend, void *reader,
     void *decoder, void *output, void *consumer)

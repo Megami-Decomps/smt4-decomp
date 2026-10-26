@@ -1,9 +1,9 @@
 #include "ui/HunterDatabaseWork.h"
 #include "text/TextDraw.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 void asdTMTexTableLoadTmx(u32, u32);
-void asdTMTexLoadMainHeap(u32, s32);
 void asdLoadFileAsyncSimple(const char *, u32 *, u32);
 void FUN_004029f4(HunterDatabaseWork *, s32, s32);
 void FUN_00405c94(HunterDatabaseWork *);

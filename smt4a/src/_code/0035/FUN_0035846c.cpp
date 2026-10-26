@@ -17,16 +17,17 @@ extern LmapSnapshotView *g_lmapView;
 
 void FUN_0035846c()
 {
+    MapMainA *mapMain = g_mapMain;
     if (g_gameState.mapFlags.snapshot.skipTransitionSnapshot == 0) {
         g_gameState.transitionActive = 1;
-        g_gameState.sourceMap = g_mapMain->transition.mapId;
-        g_gameState.sourceArea = g_mapMain->transition.areaId;
+        g_gameState.sourceMap = mapMain->transition.mapId;
+        g_gameState.sourceArea = mapMain->transition.areaId;
         g_gameState.sourceObjectId = g_gameState.currentObjectId;
         memcpy(&g_gameState.sourcePosition, g_lmapScene->transform.position, sizeof(MapVector));
         g_gameState.sourceHeading = g_lmapScene->transform.headingDegrees;
         g_gameState.sourceHeadingCopy = g_lmapView->value;
-        g_gameState.destinationMap = g_mapMain->transition.mapId;
-        g_gameState.destinationArea = g_mapMain->transition.areaId;
+        g_gameState.destinationMap = mapMain->transition.mapId;
+        g_gameState.destinationArea = mapMain->transition.areaId;
         memcpy(&g_gameState.destinationPosition, g_lmapScene->transform.position, sizeof(MapVector));
         g_gameState.destinationHeading = g_lmapScene->transform.headingDegrees;
         g_gameState.destinationHeadingCopy = g_lmapView->value;

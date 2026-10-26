@@ -15,7 +15,7 @@ int FUN_002b70cc(void);
 int FUN_002b76d0(...);
 int renderCtxCalculateStereoParallax(...);
 int efctSetSpeed(void);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int __aeabi_vec_ctor_nocookie_nodtor(...);
 int renderStatePush(double);
 int VectorSignedToFloat(...);
@@ -81,7 +81,7 @@ extern int asdSoundGetOption2(void);
 /* Supplied declaration required: FUN_002b76d0. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 extern float packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int FUN_002cc22c(void);
@@ -398,7 +398,7 @@ LAB_00393954:
           temp_v8 = (float)VectorSignedToFloat(param_3[1],(unsigned char)(in_fpscr >> 0x16) & 3);
           param_3[1] = (int)(temp_v8 + temp_v15);
         }
-        FUN_002c1b64(g_titleScene,0);
+        renderCtxSelectTexture(g_titleScene,0);
         VectorUnsignedToFloat(param_3[6],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorUnsignedToFloat(param_3[5],(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(param_3[2],(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -9,7 +10,6 @@ int vec2GetXInt(...);
 int vec2GetYInt(...);
 int efctSetSpeed(void);
 int FUN_0026e8b8(...);
-int FUN_002a4878(...);
 int FUN_0032ef5c(...);
 
 typedef int romwright_code(...);
@@ -44,7 +44,6 @@ extern int idListAnyValid(unsigned int);
 extern int uniteNotBusy(void);
 /* Supplied declaration required: FUN_0026e8b8. */
 extern int recordGetModeForId(int);
-/* Supplied declaration required: FUN_002a4878. */
 extern int uniteRequestGet(void);
 extern unsigned int widgetSubCallIfVisible(int);
 extern unsigned int FUN_002e26c4(unsigned int);
@@ -118,7 +117,7 @@ void FUN_00217f14(void)
         temp_v1 = vec2GetXInt(temp_v11);
         temp_v2 = vec2GetYInt(temp_v11);
         efctSetSpeed();
-        temp_v5 = FUN_002a4878(temp_v0 + 0x40);
+        temp_v5 = FUN_002a4878((void *)(temp_v0 + 0x40));
         temp_v13 = temp_v5 == temp_v10;
         if (temp_v13) {
           temp_v5 = (unsigned int)*(unsigned char *)(temp_v0 + 0xb9);
@@ -158,7 +157,7 @@ void FUN_00217f14(void)
         temp_v10 = temp_v10 + 1;
       } while ((int)temp_v10 < (int)temp_v4);
     }
-    temp_v1 = FUN_002a4878(temp_v0 + 0x40);
+    temp_v1 = FUN_002a4878((void *)(temp_v0 + 0x40));
     temp_v5 = (unsigned int)*(unsigned char *)(temp_v0 + 0xb9);
     temp_v10 = temp_v5;
     if (temp_v5 == 3) {
@@ -181,7 +180,7 @@ void FUN_00217f14(void)
           temp_v1 = vec2GetXInt();
           temp_v7 = vec2GetYInt(temp_v0 + 0xd74);
         }
-        temp_v3 = FUN_002a4878(temp_v0 + 0x40);
+        temp_v3 = FUN_002a4878((void *)(temp_v0 + 0x40));
         temp_v3 = FUN_003da8f4((int)*(char *)(temp_v0 + 0xa4),temp_v3);
         if ((temp_v4 & 1) == 0) {
           temp_v9 = 8 - temp_v4;
@@ -191,7 +190,7 @@ void FUN_00217f14(void)
           temp_v9 = 7 - temp_v4;
           temp_v12 = 0x1b;
         }
-        temp_v8 = FUN_002a4878(temp_v0 + 0x40);
+        temp_v8 = FUN_002a4878((void *)(temp_v0 + 0x40));
         temp_v9 = asdTMTexTableEntryAt(0x14,temp_v8 + temp_v12 + temp_v9 / 2);
         efctSetSpeed();
         temp_v7 = temp_v2 + temp_v7;

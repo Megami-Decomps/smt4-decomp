@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "camp/PartyPanel/PartyPanel.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int asdOperatorNew(...);
 int asdMemoryAllocTracked(...);
-int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int gameGetSlotTable(...);
 int FUN_00203b40(...);
@@ -57,7 +57,6 @@ extern unsigned int *g_partyPanel; /* 0x57f268 */
 /* Supplied declaration required: taskCreateDraw. */
 /* Supplied declaration required: asdOperatorNew. */
 /* Supplied declaration required: asdMemoryAllocTracked. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: gameGetSlotTable. */
 /* Supplied declaration required: FUN_00203b40. */

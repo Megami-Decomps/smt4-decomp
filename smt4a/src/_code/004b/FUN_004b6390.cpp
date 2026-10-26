@@ -2,12 +2,12 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "shard/uiSpriteSelectAnim.h"
 
 extern "C" {
 
 int FUN_0014e188(...);
 
-int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int asdTMTexLoadMainHeap(int, int);
 int asdLoadFileAsyncSimple(...);
@@ -39,7 +39,6 @@ extern unsigned char DAT_00533768; /* 0x533768 */
 
 /* Supplied declaration required: FUN_0014e188. */
 /* Supplied declaration required: paramsInit. */
-/* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
@@ -161,9 +160,9 @@ void FUN_004b6390(int param_1)
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 8);
   FUN_0014e188(param_1 + 0x50c,0x1d,0,param_1,1);
-  uiSpriteSelectAnim(param_1 + 0x50c,5);
+  uiSpriteSelectAnim((void *)(param_1 + 0x50c),5);
   FUN_0014e188(param_1 + 0x598,0x1d,0,param_1,1);
-  uiSpriteSelectAnim(param_1 + 0x598,0xe);
+  uiSpriteSelectAnim((void *)(param_1 + 0x598),0xe);
   FUN_0014e188(param_1 + 0x624,0x1d,0,param_1,1);
   uiSpriteSetKeyframe(param_1 + 0x624,0);
   FUN_0014e188(param_1 + 0x6b0,0x1d,0,param_1,1);
@@ -172,24 +171,24 @@ void FUN_004b6390(int param_1)
   FUN_0036b644(param_1 + 0x73c,0);
   FUN_0014e188(param_1 + 0x7c8,0x1d,1000,param_1,0x65);
   FUN_0014e188(param_1 + 0x854,0x1d,1000,param_1,0x65);
-  uiSpriteSelectAnim(param_1 + 0x854,6);
+  uiSpriteSelectAnim((void *)(param_1 + 0x854),6);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v2 + 0x8e0,0x1d,0,param_1,1);
-    uiSpriteSelectAnim(temp_v2 + 0x8e0,0);
+    uiSpriteSelectAnim((void *)(temp_v2 + 0x8e0),0);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 0x10);
   *(unsigned int *)(param_1 + 0x43ec) = 0;
   FUN_0014e188(param_1 + 0x40a8,0x1d,0x160,param_1,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x40a8,0xb);
+  uiSpriteSelectAnim((void *)(param_1 + 0x40a8),0xb);
   FUN_0014e188(param_1 + 0x4134,0x1d,0x160,param_1,0xc9);
-  uiSpriteSelectAnim(param_1 + 0x4134,0xc);
+  uiSpriteSelectAnim((void *)(param_1 + 0x4134),0xc);
   temp_v1 = 0;
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c + 0x41c0;
     FUN_0014e188(temp_v2,0x1d,temp_v1 + 0x161,param_1,(int)(short)((short)temp_v1 + 0xca));
-    uiSpriteSelectAnim(temp_v2,0xd);
+    uiSpriteSelectAnim((void *)(temp_v2),0xd);
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 3);
   temp_v1 = 0;
@@ -212,7 +211,7 @@ void FUN_004b6390(int param_1)
     do {
       temp_v0 = param_1 + (temp_v1 * 7 + temp_v2 + 0x20) * 0x8c;
       FUN_0014e188(temp_v0 + 0x20,7,0x80c,param_1,0x97);
-      uiSpriteSelectAnim(temp_v0 + 0x20,1);
+      uiSpriteSelectAnim((void *)(temp_v0 + 0x20),1);
       temp_v2 = temp_v2 + 1;
     } while (temp_v2 < 7);
     temp_v1 = temp_v1 + 1;
@@ -221,9 +220,9 @@ void FUN_004b6390(int param_1)
   do {
     temp_v2 = param_1 + temp_v1 * 0x8c;
     FUN_0014e188(temp_v2 + 0x3900,0x1d,0x3e,param_1,0x6a);
-    uiSpriteSelectAnim(temp_v2 + 0x3900,9);
+    uiSpriteSelectAnim((void *)(temp_v2 + 0x3900),9);
     FUN_0014e188(temp_v2 + 0x3cd4,0x1d,0x119,param_1,0xf1);
-    uiSpriteSelectAnim(temp_v2 + 0x3cd4,10);
+    uiSpriteSelectAnim((void *)(temp_v2 + 0x3cd4),10);
     *(unsigned short *)(temp_v2 + 0x3d0e) = 2;
     temp_v1 = temp_v1 + 1;
   } while (temp_v1 < 6);

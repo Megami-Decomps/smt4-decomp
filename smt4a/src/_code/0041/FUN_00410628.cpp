@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
+#include "util/FUN_0013def0.h"
 
 struct BtlCameraA;
 
@@ -78,7 +79,6 @@ extern unsigned int g_btlStageModel; /* 0x57a4f8 */
 #define romwright_zext_4_8(value) ((unsigned long long)(unsigned int)(value))
 #endif
 /* Supplied declaration required: asdLoadFileWithSize. */
-extern int FUN_0013def0(unsigned int);
 extern int lcgRandomRange(unsigned int);
 extern int FUN_00163e84(unsigned int);
 extern int padButtonIsPressed(unsigned int);
@@ -155,7 +155,7 @@ void FUN_00410628(int param_1)
     if (temp_v3 == 0) {
       return;
     }
-    temp_v3 = FUN_0013def0(0);
+    temp_v3 = (int)FUN_0013def0(0);
     if (temp_v3 != 0) {
       FUN_003d54f8(0,10);
     }

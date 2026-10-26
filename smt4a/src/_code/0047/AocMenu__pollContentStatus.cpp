@@ -1,6 +1,7 @@
 /* NON_MATCHING: block layout of the 0x66/default tails, the constants 3/5 in r5/r6 (swapped) and the remap sign test (retail: lsrs #31; here cmp #0). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "util/ByteIsAtLeast100.h"
 
 /* A result code and its description. */
 struct AocPollCode {
@@ -45,7 +46,6 @@ void timeInitializeActiveState(AocPollResult *result);
 void FUN_0047bc90(AocPollMenu *menu, AocPollResult *result);
 void FUN_00473980(AocPollCode *result, AocMain *main);
 s32 isEmptyString(const AocPollResult *result);
-s32 byteIsAtLeast100(const AocPollResult *result);
 u32 legacyResourceIdRemap(const AocPollCode *result);
 
 /* Per-frame update of the content-status menu: starts its two status operations, polls them and reports the result. */
@@ -80,7 +80,7 @@ void AocMenu::pollContentStatus()
             menu->step = 2;
             return;
         }
-        if (byteIsAtLeast100(&result) == 0) {
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
             return;
         }
         if (result.kind == 0x66) {
@@ -104,7 +104,7 @@ void AocMenu::pollContentStatus()
             menu->step = 4;
             return;
         }
-        if (byteIsAtLeast100(&result) == 0) {
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0) {
             return;
         }
         if (result.kind == 0x66) {

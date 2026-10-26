@@ -12,8 +12,8 @@ int drawSetColorFromRGBA8(...);
 int textFormatBuffer(...);
 int FUN_002c0944(...);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c1b64(...);
+int renderCtxApplyTransforms(...);
+int renderCtxSelectTexture(...);
 int VectorFloatToUnsigned(...);
 int VectorSignedToFloat(...);
 
@@ -74,8 +74,8 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_002c0944. */
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -750,7 +750,7 @@ unsigned int FUN_00212538(void)
         }
       }
     }
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     temp_v4 = VectorFloatToUnsigned(temp_v13 * 255.0f,3);
     FUN_002c0944(temp_v4,temp_v4);
     temp_v2 = g_titleScene;
@@ -786,7 +786,7 @@ LAB_00213b6c:
     (**(romwright_code **)(temp_v1 + 0x1268))();
     *(unsigned char *)(temp_v1 + 0x1264) = 0;
   }
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   FUN_002c18e4(g_titleScene);
   return 0;
 }

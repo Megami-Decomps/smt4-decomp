@@ -31,7 +31,7 @@ extern int aocIsEntryIndexValid(int, unsigned int);
 /* Supplied declaration required: FUN_002ae5e0. */
 /* Supplied declaration required: FUN_002b8454. */
 /* Supplied declaration required: buttonHelpSetPreset. */
-extern int FUN_0039411c(int);
+extern int statusDecodeActivityState(int);
 
 
 void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
@@ -101,7 +101,7 @@ void FUN_0023392c(unsigned int *param_1,unsigned int param_2,int param_3)
         return;
       }
       temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x90);
-      temp_v2 = FUN_0039411c(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
+      temp_v2 = statusDecodeActivityState(*(int *)(temp_v2 + 0x678) + temp_v1 * 0x9c8);
       if (temp_v2 == 0) {
         FUN_002b8454(4,0xc,0x4c,0);
         FUN_002b8454(5,0,0);

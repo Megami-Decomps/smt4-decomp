@@ -21,9 +21,9 @@ extern u32 g_titleScene;
 
 void FUN_001137fc(s32 arg);
 void renderCtxSelectStereoLayout(u32 scene);
-s32 FUN_002bff10(s32 arg);
+s32 stateValuesGetBySelector(s32 arg);
 
-/* When both flags are set, FUN_002bff10 is idle and the work is ready, runs the title scene step. Returns 0. */
+/* When both flags are set, stateValuesGetBySelector is idle and the work is ready, runs the title scene step. Returns 0. */
 u8 FUN_0010a110(u32 job)
 {
     TitleWork *work = (TitleWork *)jobGetWork(job);
@@ -35,7 +35,7 @@ u8 FUN_0010a110(u32 job)
     if (flags->flagB == 0) {
         return 0;
     }
-    if (FUN_002bff10(0) == 0 && work->ready != 0) {
+    if (stateValuesGetBySelector(0) == 0 && work->ready != 0) {
         renderCtxSelectStereoLayout(g_titleScene);
         FUN_001137fc(0);
     }

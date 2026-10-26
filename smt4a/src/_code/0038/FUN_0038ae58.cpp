@@ -5,7 +5,7 @@ extern "C" {
 extern GameStateA g_gameState;
 s32 scrGetArg(s32 index);
 u32 gameFlagIsSet(u32 flag);
-void FUN_00379be8(void);
+void naviMainEnterState4IfActive(void);
 void FUN_003b61ec(void);
 void commonBgReset(void);
 void sub68OwnerCall3(void);
@@ -18,7 +18,7 @@ u32 FUN_0038ae58(void)
     if (enabled != 0) {
         if (g_gameState.mapFlags.unk295 == 0) {
             g_gameState.mapFlags.unk295 = 1;
-            FUN_00379be8();
+            naviMainEnterState4IfActive();
             FUN_003b61ec();
             sysPlaySe(0x92);
         }

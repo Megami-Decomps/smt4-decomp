@@ -9,7 +9,7 @@ extern "C" {
 typedef struct DrawPacket {
     /* 0x00 */ u16 flags;      /* 0x100: draw with state 5 instead of 1, 0x200: only the handle */
     /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ u32 handle;
+    /* 0x04 */ AsdTexture *texture;
     /* 0x08 */ u32 object;
     /* 0x0C */ u32 aux;
     /* 0x10 */ f32 matrix[16];
@@ -21,14 +21,12 @@ extern RenderCtx *g_titleScene;
 
 s32 FUN_002c5d80(u32 kind, u32 arg);
 void FUN_001f6b74(u32 aux);
-void FUN_002c1b64(RenderCtx *ctx, u32 handle);
 void camSetMatrixB(RenderCtx *ctx, const f32 *matrix);
 void modelApplyChangedCachedVector(RenderCtx *ctx, f32 a, f32 b, f32 c, f32 d);
 void renderCtxSelectBlendPreset(u32 mode);
 void FUN_00347198(u32 object);
 void FUN_0034724c(u32 object);
 void FUN_002c18e4(RenderCtx *ctx);
-void FUN_002c198c(RenderCtx *ctx);
 
 /* Draws one packet under a pushed render state (5 or 1 by its flags): sets its camera matrix and
  * color, runs the draw and pops the state. */
@@ -45,7 +43,7 @@ void FUN_00256a50(DrawPacket *packet, u32 mode)
         FUN_001f6b74(packet->aux);
         renderStackPop(&g_titleScene->stackA);
     } else {
-        FUN_002c1b64(g_titleScene, packet->handle);
+        renderCtxSelectTexture(g_titleScene, packet->texture);
 
         f32 matrix[16];
         for (s32 i = 0; i < 16; i++) {
@@ -70,7 +68,7 @@ void FUN_00256a50(DrawPacket *packet, u32 mode)
         }
         FUN_0034724c(packet->object);
         FUN_002c18e4(g_titleScene);
-        FUN_002c198c(g_titleScene);
+        renderCtxApplyTransforms(g_titleScene);
         renderStackPop(&g_titleScene->stackA);
     }
 }

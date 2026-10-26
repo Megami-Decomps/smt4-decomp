@@ -1,5 +1,6 @@
 /* NON_MATCHING: block layout only: retail places the group 2 body before the final all-loaded check, ours after it; every instruction and the debug-hook NOP match */
 #include "AsdSDK/AsdDebugHooks.h"
+#include "event/bustupEvent/BustupTex.h"
 
 /* Which of the three resident resource groups are loaded. */
 struct JyoucyuLoaded {
@@ -28,7 +29,6 @@ void dataTableReloadLocked(void);
 void dataTableResolveEntryVariants(void);
 void asdTMTexTableLoadTmx(s32 table, s32 mode);
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 mode);
 void tmSpriteTableAcquire(void);
 void asdMTeXLoadTableEntries(void);
 void texTableRefAcquire(void);

@@ -1,5 +1,6 @@
-/* NON_MATCHING: same flow as retail; retail copies the slot's equipment words as one 16-byte struct copy (ldm/stm), keeps a zero u16 in r6 for the unused flags argument, pushes r0-r2 as spilled arguments and keeps the result pointer in r8; the build copies halfwords and allocates r6-r9 differently. */
+/* NON_MATCHING: the 16-byte equipment copy (ldm/stm) now matches; retail still pushes r0-r2 as spilled arguments, keeps a zero u16 in r6 for the unused flags argument and the result pointer in r8, so the register allocation differs. */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 // A skill or card record (the fields this function reads).
 struct SkillRecord {
@@ -23,12 +24,17 @@ struct PlayerView {
     s16 level;  // 0x24
 };
 
+// The eight equipped-piece ids of a slot, copied as one block.
+struct EquipWords {
+    u32 words[4];
+};
+
 // A party slot record.
 struct SlotView {
     u8 unk00[0x16];
     s16 level;      // 0x16
     u8 unk18[0x1c];
-    u16 words[8];   // 0x34
+    EquipWords equipment;   // 0x34
 };
 
 extern "C" {
@@ -39,7 +45,6 @@ SlotView *gameGetSlotRecord(s32 slot);
 void playerGetWords(u16 *words, s32 count);
 u32 padGetMappedValue(u16 button);
 void *FUN_002efc44(SkillRecord *skill, u32 value, s32 flag);
-EquipmentEntry *dataTable41FindById(u32 id);
 s32 mathApplyReductionMultiplier(s32 value, void *source, u32 flags, f32 multiplier);
 s32 FUN_004c6c8c(s32 level, void *source, u32 flags, s32 value, f32 effect, f32 first, f32 second, f32 third);
 
@@ -63,20 +68,13 @@ s32 FUN_0023e6d8(SkillRecord *skill, s32 value, s32 slot)
             return 0;
         }
         level = record->level;
-        words[0] = record->words[0];
-        words[1] = record->words[1];
-        words[2] = record->words[2];
-        words[3] = record->words[3];
-        words[4] = record->words[4];
-        words[5] = record->words[5];
-        words[6] = record->words[6];
-        words[7] = record->words[7];
+        *reinterpret_cast<EquipWords *>(words) = record->equipment;
     }
 
     s32 bonusIndex = 0;
     for (s32 i = 0; i < 9; i++) {
         if (words[i] != 0) {
-            EquipmentEntry *entry = dataTable41FindById(words[i]);
+            EquipmentEntry *entry = reinterpret_cast<EquipmentEntry *>(dataTable41FindById(words[i]));
             if (entry != NULL && ((entry->info >> 11) & 0x1f) == 25) {
                 u32 rank = (entry->info >> 16) & 0xf;
                 if (rank == 5) {

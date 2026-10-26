@@ -1,13 +1,13 @@
 /* NON_MATCHING: unroll matches; retail hoists the fourth entry's load above the compares and keeps an unused 9999 literal. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlEffect.h"
+#include "util/BtlScriptUnitHasFlags.h"
 extern "C" {
-s32 btlScriptUnitHasFlags(void*);
 
 // Returns the largest nonnegative selection metric, or its fallback when none is positive.
 s32 FUN_004f59b0(BtlEffectOwnerA* owner)
 {
-    if (owner->slots == NULL || btlScriptUnitHasFlags(static_cast<void *>(btlGetMainState())) != 0) {
+    if (owner->slots == NULL || btlScriptUnitHasFlags(reinterpret_cast<const BtlMainStateA *>(static_cast<void *>(btlGetMainState()))) != 0) {
         return -1;
     }
     BtlEffectSlotBlock* metrics = owner->slots;

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps one result register and one shared cleanup tail (the file wrapper's destructor runs once) and a 64-bit running read offset; ours duplicates the tail per return and indexes the offset (157 rows against 154). The module/description range test is also folded differently (cmp #17408, unsigned). */
 #include "shard/W6_W6Match7_ArchiveIcon.h"
 #include "nn/Result.h"
+#include "util/vcallSlot12IfValid.h"
 
 /* The archive's content header: 7 default pairs, then a count of extra pairs stored after the header. */
 struct ArchiveContentHeader {
@@ -23,7 +24,6 @@ u32 multibyteToUtf16(u16 *output, const char *input, u32 count);
 s32 wstrlenU16(const u16 *text);
 s32 archiveTryOpenFile(void **file, u32 archiveFirst, u32 archiveSecond, const ArchiveIconPath *path, u32 mode);
 s32 nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile(u32 *readSize, void *file, s64 offset, void *output, u32 size);
-void vcallSlot12IfValid(void *object);
 s32 FUN_00430f98(void);
 s32 FUN_0043126c(void);
 }
@@ -35,7 +35,7 @@ inline ArchiveIconFile::ArchiveIconFile() : object(NULL)
 inline ArchiveIconFile::~ArchiveIconFile()
 {
     if (object != NULL) {
-        vcallSlot12IfValid(object);
+        vcallSlot12IfValid((u32)(object));
     }
 }
 

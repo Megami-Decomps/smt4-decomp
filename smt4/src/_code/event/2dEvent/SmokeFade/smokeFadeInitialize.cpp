@@ -3,11 +3,11 @@
 #include <string.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern SmokeFadeState *DAT_0043df28;
 extern SmokeFadeImage DAT_0043df40[2];
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 s32 FUN_001ad6fc(u32);
 s32 FUN_001ad4f4(u32);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);

@@ -1,5 +1,4 @@
 #include "gfx/StereoParallax.h"
-/* NON_MATCHING: fallback-size block is placed inline rather than out of line; coordinate arithmetic scheduling differs. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 
@@ -28,17 +27,17 @@ void FUN_00404dd0(CenteredSpriteWork *work, s32 x, s32 y, f32 speed)
     SpriteInfo *reference = asdTMTexTableEntryAt(0x32, 0x35);
     SpriteInfo *sprite = asdTMTexTableEntryAt(work->group, work->index * 1000);
     s32 dx, dy;
-    if (sprite->size) {
-        dx = (reference->size[0] - sprite->size[0]) / 2;
-        dy = (reference->size[1] - sprite->size[1]) / 2;
-    } else {
+    if (!sprite->size) {
         dx = (reference->size[0] - (sprite->bounds.width & 0x7fff)) / 2;
         dy = (reference->size[1] - (sprite->bounds.height & 0x7fff)) / 2;
+    } else {
+        dx = (reference->size[0] - sprite->size[0]) / 2;
+        dy = (reference->size[1] - sprite->size[1]) / 2;
     }
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
-    FUN_001835b4(2, work->group, work->index * 1000,
-                  reference->x + x + parallax + dx + work->offsets->x,
-                  reference->y + work->offsets->y + y + dy, 0x65);
+    s32 drawX = reference->x + x + parallax + dx + work->offsets->x;
+    s32 drawY = reference->y + work->offsets->y + y + dy;
+    FUN_001835b4(2, work->group, work->index * 1000, drawX, drawY, 0x65);
     efctSetSpeed(1.0f);
 }
 }

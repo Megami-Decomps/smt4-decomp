@@ -1,12 +1,12 @@
 /* NON_MATCHING: native title-config global receiver and callback view recovered; masked sprite dimension/position loads and saved-pointer moves differ. */
 #include "shard/S1ListPanel.h"
 #include "title/titleConfig.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
 void ifTouchRegionRemove(void);
 void memFill8(void *, u32 value);
-s32 FUN_0029efa8(void *selection);
 SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 width, s32 height);
 }

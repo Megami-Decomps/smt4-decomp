@@ -1,14 +1,9 @@
 /* NON_MATCHING: register allocation and compare layout only - retail keeps the cost in s0 and the running score in s16, branches to the take path with a shared tail, and loads the kind bytes in the opposite register order; the logic and calls are identical. */
 #include "common.h"
+#include "gamedata/SkillFlags.h"
+#include "gamedata/DataTable40.h"
 
 namespace {
-/* A record of the skill table (dataTable06Sub1). */
-struct SkillCostRecord {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ u8 kind;
-    /* 0x03 */ u8 flags;         /* bits 0-4: cost */
-};
-
 /* The skill inheritance picker's work: the candidate skills, the passive skills that may follow them and
    the skills already chosen. */
 struct SkillPicker {
@@ -26,9 +21,7 @@ struct SkillPicker {
 }
 
 extern "C" {
-SkillCostRecord *dataTable06Sub1GetRecord(u16 id);
 s32 idMapLookup(u32 id);
-void *dataTable40FindById(u32 id);
 void *passiveSkillLookupRecord(u32 id);
 s32 FUN_0026a604(void *passive, void *match);
 
@@ -45,7 +38,7 @@ u32 FUN_001d01f8(SkillPicker *picker)
         }
         dataTable06Sub1GetRecord(picker->candidates[i]);
         u32 id = picker->candidates[i];
-        SkillCostRecord *record = dataTable06Sub1GetRecord(id);
+        SkillFlagsRecord *record = dataTable06Sub1GetRecord(id);
         f32 cost = (f32)(u32)(record->flags & 0x1f);
         f32 score = cost;
         score += cost * 0.01f;
@@ -66,7 +59,7 @@ u32 FUN_001d01f8(SkillPicker *picker)
             if (idMapLookup(picker->chosen[j]) == element) {
                 score -= 1.0f;
             }
-            if (dataTable06Sub1GetRecord(picker->chosen[j])->kind == record->kind) {
+            if (dataTable06Sub1GetRecord(picker->chosen[j])->category == record->category) {
                 score -= 1.0f;
             }
         }

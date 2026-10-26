@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite from retail disassembly compiles (230 vs 306 rows); the compiler unrolls the stage-row search by two while retail keeps a straight loop, and retail zero-fills the name buffer with 16 word stores */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "util/FUN_001cd3ec.h"
 
 // One BAM entry of a stage row: name, and three u16 position components stored as floats.
 struct StageBam {
@@ -57,7 +58,6 @@ void FUN_0040ae70(ResourceOwner* owner, s32 arg);
 void FUN_0040afe0(ResourceOwner* owner, s32 a, s32 b);
 void* FUN_00178b04(u32 size, const char* file, u32 line);
 void* modelListInit(void* memory);
-void FUN_001cd3ec(void* list, const char* name);
 
 // Finds the stage table row for the given ids.
 static inline StageRow* findStageRow(BtlStageModel* model)

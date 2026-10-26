@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rewrite of the model draw job (push a render state, draw the prebuilt shape or the posed batch, pop); the matrix copy matches retail, but the build merges the pop tails and interleaves the vmov/vcvt of the four colour bytes and the stack-entry address computation differently. */
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 // A 4x4 camera matrix, row-major.
 struct CameraMatrix {
@@ -9,7 +10,7 @@ struct CameraMatrix {
 struct ModelDrawJob {
     /* 0x00 */ u16 flags;       // 0x100: second render state, 0x200: draw the prebuilt shape
     /* 0x02 */ u8 unk02[2];
-    /* 0x04 */ u32 cameraParameter;
+    /* 0x04 */ AsdTexture *texture;
     /* 0x08 */ u32 primitiveSource;
     /* 0x0C */ u32 shape;
     /* 0x10 */ CameraMatrix placement;   // the rows' fourth column is ignored
@@ -22,7 +23,6 @@ extern RenderCtxA *g_renderCtx;
 
 s32 FUN_001692ac(u32 first, u32 second);
 void FUN_002b358c(u32 shape);
-void FUN_0016c4b8(RenderCtxA *context, u32 parameter);
 void camSetMatrixB(RenderCtxA *context, CameraMatrix *matrix);
 void FUN_00409c60(RenderCtxA *context, u32 third, u32 second, u32 first, f32 firstScale, f32 secondScale, f32 thirdScale,
                   f32 fourthScale);
@@ -44,7 +44,7 @@ void FUN_002b3c9c(ModelDrawJob *job, u32 argument)
         FUN_002b358c(job->shape);
         renderStackPop(&g_renderCtx->stackA);
     } else {
-        FUN_0016c4b8(g_renderCtx, job->cameraParameter);
+        renderCtxSelectTexture(g_renderCtx, job->texture);
         CameraMatrix matrix = job->placement;
         matrix.m[0][3] = 0.0f;
         matrix.m[1][3] = 0.0f;

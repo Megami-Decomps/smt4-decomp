@@ -47,7 +47,7 @@ void *FUN_0014162c(AocRecordSystem *system, u32 id);
 void *FUN_001317c8(AocRecordSystem *system, u32 id);
 void *FUN_00131898(AocRecordSystem *system, u32 id);
 void *FUN_002b4504(AocRecordSystem *system, u32 id);
-int FUN_002b4748(void);
+int itemCategoryFindByItemId(void);
 void *dataTable08Sub1GetRecord(u32 id);
 void *dataTable08Sub2GetRecord(u32 id);
 void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, int (*compare)(const void *, const void *));
@@ -135,7 +135,7 @@ u8 *FUN_002be650(u32 id, int payload)
     if (id == 0) {
         return NULL;
     }
-    info = FUN_002b4748();
+    info = itemCategoryFindByItemId();
     mode = 0;
     if (info != 0) {
         mode = *(u8 *)(info + 8);

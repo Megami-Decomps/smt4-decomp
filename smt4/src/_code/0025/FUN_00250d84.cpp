@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match2_SaveFlags.h"
 
 extern "C" {
-SavedCounterRange *FUN_002b4748(u32 flag);
+SavedCounterRange *itemCategoryFindByItemId(u32 flag);
 SavedCounterBanks *FUN_00282be4();
 }
 
@@ -11,7 +11,7 @@ extern "C" void FUN_00250d84(u32 flag, u32 amount)
 {
     if (amount == 0)
         return;
-    SavedCounterRange *range = FUN_002b4748(flag);
+    SavedCounterRange *range = itemCategoryFindByItemId(flag);
     if (range == NULL)
         return;
     u8 bankIndex = range->bank;

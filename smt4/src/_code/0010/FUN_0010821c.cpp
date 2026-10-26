@@ -4,12 +4,11 @@
 extern "C" {
 
 int FUN_00117da4(int);
-int renderCtxSelectStereoLayout(TitleScene *);
 
 extern TitleScene *g_titleScene; /* 0x44ea00 */
 
 /* Supplied declaration required: FUN_00117da4. */
-extern int FUN_002bff10(unsigned int);
+extern int stateValuesGetBySelector(unsigned int);
 extern int jobGetWork(void);
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 
@@ -25,7 +24,7 @@ int FUN_0010821c(void)
   int temp_v4;
   
   temp_v0 = jobGetWork();
-  temp_v4 = FUN_002bff10(0);
+  temp_v4 = stateValuesGetBySelector(0);
   if (((temp_v4 == 0) && (pb = (char *)(temp_v0 + 0xe00), *(char *)(temp_v0 + 0xedc) != '\0')) && (*(char *)(pb + 0xdd) != '\0')) {
     temp_v2 = *(char *)(pb + 0xe6) == '\0';
     temp_v1 = 0;

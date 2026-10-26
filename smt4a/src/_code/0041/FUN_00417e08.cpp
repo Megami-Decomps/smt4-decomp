@@ -2,12 +2,12 @@
 #include "gamedata/RosterView.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "util/CalleeContracts.h"
+#include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
 
 s32 FUN_001bd118(u32 id);
 s32 FUN_001ada74(u32 id);
-u8 *FUN_001ad9b4(u32 id);
 void FUN_004bb6d8(u32 flag, s32 value);
 void clearTwoWords(void *words);
 void clearThreeWords(void *words);
@@ -53,7 +53,7 @@ u32 FUN_00417e08(u16 id)
     } else if (kind != 0 && kind != 10 && kind != 2 && kind != 11) {
         for (i = 1; i < 20; i++) {
             if (roster->stock[i].id != 0) {
-                u8 *record = FUN_001ad9b4(roster->stock[i].id);
+                u8 *record = reinterpret_cast<u8 *>(FUN_001ad9b4(roster->stock[i].id));
 
                 if (record != NULL && record[6] == 6) {
                     clearThreeWords(&roster->stock[i]);

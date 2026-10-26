@@ -83,16 +83,15 @@ void FUN_0039af94(MapMarkerScreen *screen)
     pairCopy(screen->originPair, origin);
 
     for (u32 i = 0; i < MARKER_COUNT; i++) {
-        MapMarkerEntry *entry = &screen->entries[i];
-        if (entry->map == 0 || NaviMain_GetCurrentMap(navi) != entry->map)
+        if (screen->entries[i].map == 0 || NaviMain_GetCurrentMap(navi) != screen->entries[i].map)
             continue;
 
         bool full = block->layout == MARKER_LAYOUT_FULL;
-        MapMarkerView *slot = &screen->slots[entry->slot];
+        MapMarkerView *slot = &screen->slots[screen->entries[i].slot];
         s16 slotX = full ? (s16)(f32)slot->x : (s16)((f32)slot->x * 0.5f);
         s16 slotY = full ? (s16)(f32)slot->y : (s16)((f32)slot->y * 0.5f);
-        f32 markerX = (f32)(s16)(s32)((f32)slotX + (f32)entry->x * scale);
-        f32 markerY = (f32)(s16)(s32)((f32)slotY + (f32)entry->y * scale);
+        f32 markerX = (f32)(s16)(s32)((f32)slotX + (f32)screen->entries[i].x * scale);
+        f32 markerY = (f32)(s16)(s32)((f32)slotY + (f32)screen->entries[i].y * scale);
         markerX = (f32)(s16)(s32)(markerX - offset);
         markerY = (f32)(s16)(s32)(markerY - offset);
 
@@ -106,9 +105,9 @@ void FUN_0039af94(MapMarkerScreen *screen)
         s32 drawY = (s32)(markerY - ((f32)viewShiftY - 120.0f));
 
         if ((flags & MARKER_FLAG_FIXED) == 0)
-            entry->active = (NaviMain_GetCurrentMap(navi) == entry->map && entry->key == *(s8 *)screen->entries) ? 1 : 0;
+            screen->entries[i].active = (NaviMain_GetCurrentMap(navi) == screen->entries[i].map && screen->entries[i].key == *(s8 *)screen->entries) ? 1 : 0;
 
-        if (entry->active != 0) {
+        if (screen->entries[i].active != 0) {
             efctSetSpeed(1.0f);
             RenderCtx *context = g_titleScene;
             s32 state = FUN_002c5d80(1, 0);

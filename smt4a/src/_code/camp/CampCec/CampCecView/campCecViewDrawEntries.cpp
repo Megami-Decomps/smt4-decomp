@@ -3,6 +3,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/Shard0032.h"
 #include "Model/MoriModelShadowMap.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct CecViewRow { u32 data[5]; };
 struct CecViewDrawState {
@@ -29,14 +30,12 @@ struct CecViewMarkEntry {
     u8 unk21[0x3f];
     u16 count;
 };
-struct CecViewPosition { u8 unk00[8]; s16 x, y; };
 extern "C" {
 extern CampCecViewA *g_campCecView;
 s32 FUN_001692ac(u32, u32);
 u32 gameDataBlocksGetWord27E90();
 void uiDrawNumberFrame(u32 *, s32, s32, u32, u32);
 const CecViewMarkEntry *gameDataGetMarkEntry(s32);
-const CecViewPosition *asdTMTexTableEntryAt(u32, s32);
 void saveSlotDrawSummary(u32, const CecViewMarkEntry *, CecViewRow *, s32, s32, u32);
 void FUN_00359c78(u32 *, s32, s32);
 void FUN_0036c91c(u32 *, s32, s32, u32, u32, u32, s32, s32, u32);
@@ -55,7 +54,7 @@ u32 campCecViewDrawEntries()
         const CecViewMarkEntry *entry = gameDataGetMarkEntry(draw->top + i);
         bool empty = entry->count == 0;
         bool selected = draw->selected == draw->top + i;
-        const CecViewPosition *position = asdTMTexTableEntryAt(46, i + 150);
+        const TextureTableEntryIV *position = asdTMTexTableEntryAt(46, i + 150);
         s32 y = position->y;
         s32 x = position->x;
         saveSlotDrawSummary(view->handle[i], entry, &draw->rowWork.rows[i], x, y, empty);

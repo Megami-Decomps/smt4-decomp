@@ -1,5 +1,6 @@
 /* NON_MATCHING: battle unit action timing setup; float chain and the shared hit-type branch (retail jumps back into the first case) are written plainly and not compared with retail */
 #include "common.h"
+#include "util/FUN_0027d9e8.h"
 
 /* The camera/animation parameters of the action camera, read from the battle main state. */
 struct BtlCameraState {
@@ -56,7 +57,6 @@ extern BtlCameraState *g_btlMain;
 extern s32 DAT_00439ce8;     /* debug override of the camera kind, negative: none */
 extern u32 DAT_00439cf8;     /* action tint colour */
 
-u32 FUN_0027d9e8(void *unit, u32 trackId);
 void FUN_0027da30(void *unit, s32 animation);
 s32 FUN_0027dab0(void *unit, BtlUnitAction *action);
 s32 btlFindNthActiveSpecialEntry(void *unit, s32 arg);
@@ -133,7 +133,7 @@ void FUN_003c0ae0(u8 *unit, BtlUnitAction *action)
         if (track < 0)
             track = 0;
         FUN_0027da30(unit, action->animation);
-        u32 trackId = FUN_0027d9e8(unit, *(u32 *)(unit + track * 4 + 0xC));
+        u32 trackId = (u32)FUN_0027d9e8(unit, *(u32 *)(unit + track * 4 + 0xC));
         asdAnimGetTrackLastFrame(trackId, 0);
         action->delay = randNextInRange(((s32)frames - 1U) & 0xFFFF);
     }

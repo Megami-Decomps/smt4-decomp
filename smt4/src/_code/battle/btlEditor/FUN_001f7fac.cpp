@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include "map/mapDepart.h"
 #include "battle/btlEditor.h"
+#include "AsdSDK/AsdMemAlloc.h"
 struct BtlUi;
 /* The allocated session extends beyond the shared EnemyEditorWork prefix. */
 struct EditorSessionState {
@@ -31,7 +32,6 @@ u32 jobDispatchOptionalOwner(u32 job);
 u32 battleEditorRunForJob(u32 job);
 void FUN_002c9edc(u32 job);
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, u32 (*update)(u32), void (*end)(u32), void *work, u32 parent);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_00256940(BtlMainState *battle, BtlMainState *owner, u32 enabled);
 void btlReflectQueueKind34(s32 mode, s32 index);
 

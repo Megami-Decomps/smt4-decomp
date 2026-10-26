@@ -2,11 +2,11 @@
 #include "status/StatusDown.h"
 #include "gamedata/DevilRecord.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 extern StatusDownState *g_statusDown;
 void FUN_0029f848(GridNavigation *navigation, s32 count, s32 rows, s32 columns, s32 firstPolicy, s32 secondPolicy);
-void FUN_0029eb5c(GridNavigation *navigation, s32 row);
 void scrollOwnerSelectIndex(GridNavigation *navigation, s32 column);
 void statusInventorySort();
 
@@ -34,10 +34,10 @@ void FUN_001ee8b4(const u8 *quantities)
     if (count > 0 && status->inventory.column + status->inventory.row * 4 >= count) {
         status->inventory.row = (count - 1) / 4;
         status->inventory.column = status->inventory.count - status->inventory.row * 4 - 1;
-        FUN_0029eb5c(navigation, status->inventory.row);
+        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(navigation), status->inventory.row);
         scrollOwnerSelectIndex(navigation, status->inventory.column);
     } else {
-        FUN_0029eb5c(navigation, status->inventory.row);
+        FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(navigation), status->inventory.row);
         scrollOwnerSelectIndex(navigation, status->inventory.column);
     }
     statusInventorySort();

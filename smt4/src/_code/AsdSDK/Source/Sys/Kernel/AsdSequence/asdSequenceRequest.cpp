@@ -1,12 +1,12 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdSequence.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern AsdSequence g_asdSequence;
 extern const char g_asdSequenceSourcePath[]; /* __FILE__ of AsdSequence.cpp */
 
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void rt_memcpy(void *dst, const void *src, u32 size);
 
 /* Requests a switch to `state`, with a copy of `size` bytes of `arg` (if any) for its enter

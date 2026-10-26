@@ -11,7 +11,7 @@ int forwardRecoveredCallback(void);
 int mathMatrixTranslateLocal(float *, float *, int *);
 int FUN_002b011c(void);
 int mtx44Copy(float *, unsigned int *);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorFloatToUnsigned(...);
 int VectorUnsignedToFloat(unsigned int, int);
 int nn_math_ARMv6_MTX44MultAsm(...);
@@ -115,7 +115,7 @@ static float romwright_fabs_4(float value)
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
 
@@ -306,7 +306,7 @@ void FUN_0033e160(fn_0033e160_arg0 *param_1,int param_2,int param_3,unsigned int
     mathMatrixTranslateLocal(&temp_v20,&temp_v20,&temp_v50);
     matrixScaleColumnsAlt(&temp_v20,&temp_v20,temp_v53);
     nn_math_ARMv6_MTX44MultAsm(&temp_v20,&temp_v20,&temp_v32);
-    FUN_002c1b64(g_titleScene,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
+    renderCtxSelectTexture(g_titleScene,*(unsigned int *)((int)param_1->field_0x14 + 0x18));
     temp_v5 = g_titleScene;
     temp_v6 = unaff_r6 * 0x58 + 0x54;
     piVar9 = (int *)(g_titleScene + 0x12ac);

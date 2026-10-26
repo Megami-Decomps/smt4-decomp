@@ -1,6 +1,7 @@
 /* NON_MATCHING: narrowed-id/entry/default-value registers, level-load order and final comparison orientation differ from retail. */
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ typedef s32 Compare002829d4(const UnsignedRecordKey32 *a, const UnsignedRecordKe
 void *dataTableGet(s32 table, s32 slot);
 u32 dataTableGetCount(void *table);
 Entry002829d4 *libc_bsearch(const Entry002829d4 *key, const Entry002829d4 *base, u32 count, u32 size, Compare002829d4 *compare);
-PlayerData002829d4 *gameGetPlayerData(void);
 s32 gameFlagIsSet(u32 flag);
 u8 *gameDataGetFlagBits(void);
 u32 FUN_00295cec(void);
@@ -54,7 +54,7 @@ u8 appCheckPurchaseRequirements(u32 id)
     if (entry == NULL) {
         return 2;
     }
-    if (entry->minLevel > gameGetPlayerData()->level) {
+    if (entry->minLevel > reinterpret_cast<PlayerData002829d4 *>(gameGetPlayerData())->level) {
         return 2;
     }
     for (i = 0; i < 3; i++) {

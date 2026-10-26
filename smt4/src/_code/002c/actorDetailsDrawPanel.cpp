@@ -21,7 +21,7 @@ void FUN_002b64b8(void);
 void textFormatBuffer(char *destination, const char *format, ...);
 void drawSetColorFromRGBA8(u32 color);
 void FUN_002bdf94(s32 layer, s32 x, s32 y, s32 z, s32 scale, s32 depth, const char *format, ...);
-void FUN_002bd82c(void *text, u32 color);
+void asdTextSetBaseColor(void *text, u32 color);
 void FUN_002598f0(void *text, s32 x, s32 y, s32 depth);
 void itemDrawCategoryBadge(s32 skill, s32 x, s32 y, s32 depth, s32 mode);
 
@@ -82,7 +82,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         if (record->values[index] == 0) {
             inset -= 4;
         }
-        FUN_002bd82c(texts->values[index], 0xFFFFFF00);
+        asdTextSetBaseColor(texts->values[index], 0xFFFFFF00);
         FUN_002598f0(texts->values[index], row->position.x + x + inset + offset,
                       row->position.y + y + cell->position.y, 0x72);
     }
@@ -103,7 +103,7 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
             itemDrawCategoryBadge(texts->skillIds[index], position->position.x + rowX + offset,
                           position->position.y + rowY, 0x72, 0);
             position = asdTMTexTableEntryAt(0x39, 0xAB);
-            FUN_002bd82c(texts->skills[index], 0);
+            asdTextSetBaseColor(texts->skills[index], 0);
             FUN_002598f0(texts->skills[index], offset + rowX + position->position.x,
                           position->position.y + rowY, 0x72);
         }
@@ -123,22 +123,22 @@ void actorDetailsDrawPanel(const ActorDetailsTextObjectsIV *texts, const ActorDe
         nameColor = record->style == 0 ? 0x00F33700 : 0x00840000;
     }
     position = asdTMTexTableEntryAt(0x39, 8);
-    FUN_002bd82c(texts->name, nameColor);
+    asdTextSetBaseColor(texts->name, nameColor);
     FUN_002598f0(texts->name, position->position.x + x + offset, position->position.y + y, 0x72);
     position = asdTMTexTableEntryAt(0x39, 9);
-    FUN_002bd82c(texts->secondaryName, labelColor);
+    asdTextSetBaseColor(texts->secondaryName, labelColor);
     FUN_002598f0(texts->secondaryName, position->position.x + x + offset, position->position.y + y, 0x72);
     position = asdTMTexTableEntryAt(0x39, 10);
-    FUN_002bd82c(texts->thirdLabel, labelColor);
+    asdTextSetBaseColor(texts->thirdLabel, labelColor);
     FUN_002598f0(texts->thirdLabel, position->position.x + x + offset, position->position.y + y, 0x72);
     offset = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.3f);
     position = asdTMTexTableEntryAt(0x39, 0x24);
-    FUN_002bd82c(texts->centeredValue, valueColor);
+    asdTextSetBaseColor(texts->centeredValue, valueColor);
     FUN_002598f0(texts->centeredValue,
         x + position->position.x + (position->size->width - texts->centeredWidth) / 2 + offset,
         y + position->position.y, 0x74);
     position = asdTMTexTableEntryAt(0x39, 0x25);
-    FUN_002bd82c(texts->rightAlignedValue, valueColor);
+    asdTextSetBaseColor(texts->rightAlignedValue, valueColor);
     FUN_002598f0(texts->rightAlignedValue,
         x + position->size->width - texts->rightAlignedWidth + position->position.x + offset,
         y + position->position.y, 0x74);

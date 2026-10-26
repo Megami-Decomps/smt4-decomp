@@ -9,8 +9,9 @@ void asdCecReadInboxMessages(u32 box, s32 count, AsdCecInboxBatch *batch, u32 fl
 
 void FUN_0028196c(AsdCecProcessWork *work)
 {
+    void *lock = work->inbox.lock;
     for (;;) {
-        nn_os_CriticalSection_Enter(work->inbox.lock);
+        nn_os_CriticalSection_Enter(lock);
         if (work->inbox.producedBatches - work->inbox.consumedBatches < 32) {
             AsdCecInboxBatch *batch = &work->inbox.batches[work->inbox.producedBatches & 31];
             s32 count = asdCecInboxGetMessageCount();
@@ -21,11 +22,11 @@ void FUN_0028196c(AsdCecProcessWork *work)
             ++work->inbox.producedBatches;
             work->inbox.receivedCount += count;
             if (work->inbox.receivedCount >= work->inbox.requestedCount) {
-                nn_os_CriticalSection_Leave(work->inbox.lock);
+                nn_os_CriticalSection_Leave(lock);
                 return;
             }
         }
-        nn_os_CriticalSection_Leave(work->inbox.lock);
+        nn_os_CriticalSection_Leave(lock);
     }
 }
 }

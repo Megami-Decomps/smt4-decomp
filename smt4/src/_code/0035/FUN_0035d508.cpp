@@ -1,2 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x472b98; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Returns the constant four. */
+s32 FUN_0035d508(void)
+{
+    return 4;
+}
+
+} /* extern "C" */

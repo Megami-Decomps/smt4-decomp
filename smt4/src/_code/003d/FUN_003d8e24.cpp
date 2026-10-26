@@ -5,7 +5,6 @@
 extern "C" {
 extern TitleScene *g_titleScene;
 s32 padIsButtonPressed(u32 button);
-void FUN_002c1b64(TitleScene *scene, s32 layer);
 void FUN_002c0944(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 z);
 
@@ -17,7 +16,7 @@ u32 FUN_003d8e24(DebugGuidesWork *work)
         if (work->mode >= 3)
             work->mode = 0;
     }
-    FUN_002c1b64(g_titleScene, 0);
+    renderCtxSelectTexture(g_titleScene, 0);
     switch (work->mode) {
     case 1:
         FUN_002c0944(0xFF7F, 0xFF7F, 0xFF7F, 0xFF7F,

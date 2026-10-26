@@ -1,7 +1,7 @@
 #include "shard/W6_W6Match2_EmitterResources.h"
 
 extern "C" {
-ResourceEmitter* FUN_003a1ef4(void* data);
+ResourceEmitter* effEmitterCreateSmall(void* data);
 void polygonTrackRebuildResources(ResourceEmitter* emitter, u32 id, const EmitterArguments* arguments);
 void objectBufferFree(void* buffer);
 void* FUN_002b2d74(u16 id, u32 key, void* data);
@@ -10,7 +10,7 @@ void* FUN_002b2d74(u16 id, u32 key, void* data);
 ResourceEmitter* effEmitterCreateResourceBuffer(EmitterResourceRequest* request)
 {
     void* data = request->source->data;
-    ResourceEmitter* emitter = FUN_003a1ef4(data);
+    ResourceEmitter* emitter = effEmitterCreateSmall(data);
     polygonTrackRebuildResources(emitter, request->source->id, &request->arguments);
     u32 id = request->source->id;
     if (emitter->buffer != NULL) {

@@ -1,10 +1,10 @@
 #include "common.h"
-#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "util/ByteIsAtLeast100.h"
 
 extern "C" {
 
 /* Returns whether the referenced byte is at least 100. */
-u8 byteIsAtLeast100(u8 *valueRef)
+u8 byteIsAtLeast100(const u8 *valueRef)
 {
     return *valueRef >= 100;
 }

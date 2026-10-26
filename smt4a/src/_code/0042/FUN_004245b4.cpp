@@ -8,7 +8,7 @@ int FUN_00513f84(unsigned int, unsigned int);
 int readInnerWord6(unsigned int, int *);
 int FUN_00514018(unsigned int, unsigned int, unsigned int *);
 int FUN_00514088(unsigned int, unsigned int, unsigned int *, int [3], int [3]);
-int FUN_00514284(unsigned int, unsigned int);
+int resourceQueryLoadStatus(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 12 slot(s), 48 byte(s) */
@@ -31,7 +31,7 @@ typedef struct {
 /* Supplied declaration required: readInnerWord6. */
 /* Supplied declaration required: FUN_00514018. */
 /* Supplied declaration required: FUN_00514088. */
-/* Supplied declaration required: FUN_00514284. */
+/* Supplied declaration required: resourceQueryLoadStatus. */
 
 
 void FUN_004245b4(int param_1)
@@ -104,7 +104,7 @@ void FUN_004245b4(int param_1)
           }
           if ((!(temp_v1 != 4 || temp_v2 != 1)) && (*(int *)(temp_v3 + 0x474) == *(int *)(temp_v3 + 0x47c)))
           {
-            FUN_00514284(**(unsigned int **)(param_1 + 0x18),
+            resourceQueryLoadStatus(**(unsigned int **)(param_1 + 0x18),
                          *(unsigned int *)(param_1 + *(int *)(temp_v3 + 0x46c) * 4 + 0x44c));
             if (-1 < *(int *)(param_1 + 0x548)) {
               FUN_00513f84(**(unsigned int **)(param_1 + 0x18),
@@ -117,7 +117,7 @@ void FUN_004245b4(int param_1)
             temp_v2 = temp_v0 + (*(int *)(temp_v3 + 0x474) % 0x10) * 8;
             *(unsigned int *)(temp_v2 + 0x30) = temp_v7;
             *(unsigned int *)(temp_v2 + 0x34) = uStack_6c;
-            FUN_00514284(**(unsigned int **)(param_1 + 0x18),
+            resourceQueryLoadStatus(**(unsigned int **)(param_1 + 0x18),
                          *(unsigned int *)(param_1 + *(int *)(temp_v3 + 0x46c) * 4 + 0x44c));
             *(int *)(temp_v3 + 0x474) = *(int *)(temp_v3 + 0x474) + 1;
             *(unsigned int *)(param_1 + 0x554) = temp_v6 + *(int *)(param_1 + 0x554);

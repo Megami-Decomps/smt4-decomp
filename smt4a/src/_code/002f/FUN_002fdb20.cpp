@@ -1,43 +1,49 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002fdb20` (_code @ 0x2fdb20, 0xcc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/W6_W6Match5_SecondarySort.h"
 
 extern "C" {
-
-int FUN_001ad9b4(void);
-
-/* Supplied declaration required: FUN_001ad9b4. */
-extern unsigned int partyEntryFlagsBit3(unsigned short);
-
-
-void FUN_002fdb20(unsigned short *param_1,unsigned short *param_2)
-
-{
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v0 = partyEntryFlagsBit3(*param_1);
-  temp_v1 = partyEntryFlagsBit3(*param_2);
-  if (((temp_v0 & ~temp_v1) == 0) && ((temp_v1 & ~temp_v0) == 0)) {
-    temp_v0 = (unsigned int)*param_1;
-    FUN_001ad9b4();
-    temp_v1 = (unsigned int)*param_2;
-    FUN_001ad9b4();
-    if ((temp_v0 != 0) && (temp_v1 != 0)) {
-      if (*(char *)(temp_v0 + 6) != '\x06') {
-        if (*(char *)(temp_v1 + 6) == '\x06') {
-          return;
-        }
-      }
-      else if (*(char *)(temp_v1 + 6) != '\x06') {
-        return;
-      }
-      FUN_001ad9b4();
-      FUN_001ad9b4();
-    }
-  }
-  return;
+    extern "C" SecondarySortRecord *FUN_001ad9b4(u16);
 }
 
-} /* extern "C" */
+extern "C" u32 partyEntryFlagsBit3(u16 id);
+
+static __inline s32 compareQuestOrder(const u16* left, const u16* right)
+{
+    SecondarySortRecord* a = FUN_001ad9b4(*left);
+    SecondarySortRecord* b = FUN_001ad9b4(*right);
+    s32 result = 0;
+    if (a != NULL && b != NULL) {
+        result = b->classification.order - a->classification.order;
+    }
+    return result;
+}
+
+// Sort quests by completion status, special category, then descending display order.
+extern "C" s32 FUN_002fdb20(const u16* left, const u16* right)
+{
+    u32 completedLeft = partyEntryFlagsBit3(*left);
+    s32 result = 0;
+    u32 completedRight = partyEntryFlagsBit3(*right);
+    if ((completedRight & ~completedLeft) != 0) {
+        result = 1;
+    }
+    if ((completedLeft & ~completedRight) != 0) {
+        result = -1;
+    } else if (result == 0) {
+        SecondarySortRecord* a = FUN_001ad9b4(*left);
+        SecondarySortRecord* b = FUN_001ad9b4(*right);
+        if (a == NULL) {
+            return 0;
+        }
+        if (b == NULL) {
+            return 0;
+        }
+        if (a->classification.kind != 6 && b->classification.kind == 6) {
+            result = 1;
+        } else if (a->classification.kind == 6 && b->classification.kind != 6) {
+            result = -1;
+        } else {
+            result = compareQuestOrder(left, right);
+        }
+    }
+    return result;
+}

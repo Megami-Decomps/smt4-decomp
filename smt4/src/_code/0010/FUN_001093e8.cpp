@@ -17,7 +17,7 @@ typedef struct Overlay {
     /* 0x2A */ u8 flag;
     /* 0x2B */ u8 unk2B;
     /* 0x2C */ u8 applied;
-    /* 0x2D */ u8 pending;      /* set when FUN_002bff10 reports something to do */
+    /* 0x2D */ u8 pending;      /* set when stateValuesGetBySelector reports something to do */
 } Overlay;
 
 typedef struct Context {
@@ -31,16 +31,15 @@ extern TitleScene *g_titleScene;
 
 int surfaceCopy(Unit *a, Unit *b);
 u8 FUN_002bfadc(int arg, Unit *unit);
-int FUN_002bff10(int arg);
-int renderCtxSelectStereoLayout(TitleScene *arg);
+int stateValuesGetBySelector(int arg);
 
-/* Script command: if FUN_002bff10 reports work, marks the overlay pending; otherwise, when the overlay is shown, not applied and not pending, resizes the unit (halving it) and marks it applied. Returns 0. */
+/* Script command: if stateValuesGetBySelector reports work, marks the overlay pending; otherwise, when the overlay is shown, not applied and not pending, resizes the unit (halving it) and marks it applied. Returns 0. */
 u32 FUN_001093e8(u32 job)
 {
     Context *context = (Context *)jobGetWork(job);
     Overlay *overlay;
 
-    if (FUN_002bff10(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         context->overlay.pending = 1;
     } else {
         overlay = &context->overlay;

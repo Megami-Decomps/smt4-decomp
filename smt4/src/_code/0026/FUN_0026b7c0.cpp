@@ -1,10 +1,10 @@
 /* NON_MATCHING: protagonist branch placement and preview pointer/value store registers differ; final value/cost loads combine into LDRD instead of accessor calls' retained loads/NOPs. */
 #include "ui/PartyPanel.h"
 #include <stddef.h>
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 extern PartyPanel *g_partyPanel;
-void *gameGetSlotTable(void);
 s32 FUN_0029a924(u16 action);
 s32 FUN_0029a9d4(u16 action, u32 mode);
 s32 FUN_002621b4(u32 user, s32 target, u32 action, s32 *result);
@@ -25,17 +25,16 @@ void FUN_0026b7c0(void)
         PreviewValue *stock[24];
         StockSlot stockSlots[24];
     };
-    struct PartySlotView { u8 prefix[0x9108]; s8 units[3]; };
     typedef char PartyActionViewOffsets[
         offsetof(PartyActionView, protagonistActive) == 0x678 &&
         offsetof(PartyActionView, protagonist) == 0x6C8 &&
         offsetof(PartyActionView, stockSlots) == 0x738 ? 1 : -1];
     PartyActionView *panel = reinterpret_cast<PartyActionView *>(g_partyPanel);
-    const PartySlotView *slots = static_cast<const PartySlotView *>(gameGetSlotTable());
+    const SaveSlotTableIV *slots = gameGetSlotTable();
     s32 result = 0;
     if (panel->user >= 0) {
         for (s32 index = 0; index < 3; ++index) {
-            if (slots->units[index] == panel->user)
+            if (slots->active[index] == panel->user)
                 panel->party[index]->cost = -FUN_0029a924(panel->action);
         }
         for (s32 index = 0; index < 24; ++index) {
@@ -50,8 +49,8 @@ void FUN_0026b7c0(void)
         panel->protagonist->value = result;
     }
     for (s32 index = 0; index < 3; ++index) {
-        if (slots->units[index] >= 0) {
-            FUN_002621b4(panel->user, slots->units[index], panel->action, &result);
+        if (slots->active[index] >= 0) {
+            FUN_002621b4(panel->user, slots->active[index], panel->action, &result);
             panel->party[index]->value = result;
         }
     }

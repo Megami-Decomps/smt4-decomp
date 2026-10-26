@@ -1,4 +1,4 @@
-/* NON_MATCHING: switch default-result initialization and inlined roster-sum loop registers differ. */
+/* NON_MATCHING: roster-sum loop saved registers (total/index) are swapped and the zero result is not hoisted above the prologue. */
 #include "common.h"
 
 extern "C" {
@@ -10,9 +10,8 @@ extern u32 DAT_0057f7a8[11];
 s32 FUN_001ba3d4(u32 id);
 }
 
-static __inline s32 sumMemberValues(const u32 *members)
+static s32 addMemberValues(s32 total, const u32 *members)
 {
-    s32 total = 0;
     for (s32 i = 0; i < 11; ++i)
         total += FUN_001ba3d4(members[i]);
     return total;
@@ -21,12 +20,14 @@ static __inline s32 sumMemberValues(const u32 *members)
 // Sum the eleven member values in the requested roster category.
 extern "C" s32 FUN_00480738(s32 category)
 {
+    s32 total = 0;
     switch (category) {
-    case 1: return sumMemberValues(DAT_0057f6f8);
-    case 2: return sumMemberValues(DAT_0057f724);
-    case 3: return sumMemberValues(DAT_0057f750);
-    case 4: return sumMemberValues(DAT_0057f77c);
-    case 5: return sumMemberValues(DAT_0057f7a8);
+    case 1: total = addMemberValues(total, DAT_0057f6f8); break;
+    case 2: total = addMemberValues(total, DAT_0057f724); break;
+    case 3: total = addMemberValues(total, DAT_0057f750); break;
+    case 4: total = addMemberValues(total, DAT_0057f77c); break;
+    case 5: total = addMemberValues(total, DAT_0057f7a8); break;
     default: return 0;
     }
+    return total;
 }

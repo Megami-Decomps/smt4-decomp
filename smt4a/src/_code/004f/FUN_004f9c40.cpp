@@ -1,6 +1,7 @@
 /* NON_MATCHING: assist-slot loop, path buffers and cache-name addresses use different saved registers. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 struct AssistEffectSlot {
     u8 index;
@@ -19,7 +20,6 @@ void asdMemFree(void *memory);
 void textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *output, const char *input);
 const char *FUN_00100d60(const char *text, u32 character);
-u32 findRecordByKey(const char *name);
 
 // Reset the two assist-effect slots and asynchronously load resources absent from the effect cache.
 u32 FUN_004f9c40(AssistEffectOwner *owner)

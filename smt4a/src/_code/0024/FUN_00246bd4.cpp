@@ -118,7 +118,7 @@ int __aeabi_memcpy4(...);
 
 int CONCAT44(...);
 int gameFlagsGetBlock(...);
-int FUN_00184964(...);
+int randBetween(...);
 int FUN_001bbf0c(...);
 int FUN_001bc124(...);
 int FUN_002469d0(...);
@@ -305,7 +305,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_001681c4. */
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: FUN_00178b04. */
-/* Supplied declaration required: FUN_00184964. */
+/* Supplied declaration required: randBetween. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -730,7 +730,7 @@ LAB_002b82a8:
       temp_v12 = *piVar10;
       *piVar10 = temp_v12 + 1;
       if ((temp_v12 + 1 >= 901) && (piVar18[0x9d] == 0)) {
-        temp_v12 = FUN_00184964(0,9);
+        temp_v12 = randBetween(0,9);
         piVar18 = g_lmapScene;
         piVar10 = (int *)(temp_v6 + 0x151c);
         g_lmapScene[0x9d] = (unsigned int)(unsigned char)s______________________00581290[temp_v12 + *piVar10 * 10];
@@ -1624,7 +1624,7 @@ LAB_00326fcc:
                 *(unsigned short *)(g_lmapScene + 0x67) = 1;
                 FUN_001bc124();
                 FUN_001bbf0c();
-                temp_v32 = FUN_00184964(0,1);
+                temp_v32 = randBetween(0,1);
                 if (g_lmapScene[0x74] != 10) {
                   FUN_0014af98();
                   soundVolumeSettingSet();
@@ -1665,7 +1665,7 @@ LAB_00326870:
               *(unsigned short *)(g_lmapScene + 0x67) = 1;
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v32 = FUN_00184964(0,1);
+              temp_v32 = randBetween(0,1);
               if (g_lmapScene[0x74] != 10) {
                 FUN_0014af98();
                 soundVolumeSettingSet();
@@ -1690,7 +1690,7 @@ LAB_003267fc:
               *(unsigned short *)(g_lmapScene + 0x67) = 1;
               FUN_001bc124();
               FUN_001bbf0c();
-              temp_v32 = FUN_00184964(0,1);
+              temp_v32 = randBetween(0,1);
               if (g_lmapScene[0x74] != 10) {
                 FUN_0014af98();
                 soundVolumeSettingSet();
@@ -1721,7 +1721,7 @@ LAB_003268e4:
             *(unsigned short *)(g_lmapScene + 0x67) = 1;
             FUN_001bc124();
             FUN_001bbf0c();
-            temp_v32 = FUN_00184964(0,1);
+            temp_v32 = randBetween(0,1);
             if (g_lmapScene[0x74] != 10) {
               FUN_0014af98();
               soundVolumeSettingSet();
@@ -4647,7 +4647,7 @@ joined_r0x00248750:
                   *(unsigned short *)(g_lmapScene + 0x67) = 1;
                   FUN_001bc124();
                   FUN_001bbf0c();
-                  uStack_60 = FUN_00184964(0,1);
+                  uStack_60 = randBetween(0,1);
                   FUN_0014af98();
                   soundVolumeSettingSet();
                   sysPlayVoice(uStack_60 + 0x10002e2);
@@ -4687,7 +4687,7 @@ LAB_002da1e4:
                 *(unsigned short *)(g_lmapScene + 0x67) = 1;
                 FUN_001bc124();
                 FUN_001bbf0c();
-                uStack_60 = FUN_00184964(0,1);
+                uStack_60 = randBetween(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
                 sysPlayVoice(uStack_60 + 0x10002e0);
@@ -4709,7 +4709,7 @@ LAB_002da2b0:
                   *(unsigned short *)(g_lmapScene + 0x67) = 1;
                   FUN_001bc124();
                   FUN_001bbf0c();
-                  uStack_60 = FUN_00184964(0,1);
+                  uStack_60 = randBetween(0,1);
                   FUN_0014af98();
                   soundVolumeSettingSet();
                   sysPlayVoice(uStack_60 + 0x10002de);
@@ -4757,7 +4757,7 @@ LAB_002da3cc:
                 *(unsigned short *)(g_lmapScene + 0x67) = 1;
                 FUN_001bc124();
                 FUN_001bbf0c();
-                uStack_60 = FUN_00184964(0,1);
+                uStack_60 = randBetween(0,1);
                 FUN_0014af98();
                 soundVolumeSettingSet();
                 sysPlayVoice(uStack_60 + 0x10002dc);
@@ -5201,7 +5201,7 @@ LAB_002dad8c:
       FUN_003d4ed8(0x1000224);
       FUN_001bc124();
       FUN_001bbf0c();
-      temp_v32 = FUN_00184964(0,1);
+      temp_v32 = randBetween(0,1);
       if (temp_v32 == 0) {
         FUN_0014af98();
         soundVolumeSettingSet();

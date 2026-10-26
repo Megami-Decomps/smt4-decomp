@@ -34,7 +34,7 @@ extern "C" {
 
 extern const u32 DAT_00530df0[24];
 
-s32 FUN_00184964(s32 low, s32 high);
+s32 randBetween(s32 low, s32 high);
 void sysMemClear(void* data, u32 size);
 
 // Picks `count` distinct values in [0, range] into `out`.
@@ -42,7 +42,7 @@ static inline void pickDistinct(u32* out, s32 count, s32 range)
 {
     u8 used[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
     for (s32 i = 0; i < count; ) {
-        s32 pick = FUN_00184964(0, range);
+        s32 pick = randBetween(0, range);
         if (used[pick] == 0) {
             used[pick] = 1;
             out[i++] = pick;
@@ -62,7 +62,7 @@ void FUN_003b7b4c(u8* screen)
     u32 thresholdA[4][6];
     u32 thresholdB[4][6];
     for (s32 g = 0; g < 4; g++) {
-        groupLimit[g] = FUN_00184964(2, 3);
+        groupLimit[g] = randBetween(2, 3);
         pickDistinct(thresholdA[g], 6, 5);
         pickDistinct(thresholdB[g], 6, 9);
     }
@@ -79,7 +79,7 @@ void FUN_003b7b4c(u8* screen)
         u32 value;
         if ((s32)groupLimit[g] >= (s32)limit) {
             state = 1;
-            value = FUN_00184964(0, 3) + 2029;
+            value = randBetween(0, 3) + 2029;
         } else if ((s32)groupLimit[g] + 1 >= (s32)limit) {
             state = 2;
             value = 2033;
@@ -98,7 +98,7 @@ void FUN_003b7b4c(u8* screen)
                 block->cells[i].id = block->idNineNormal;
                 block->kind[i] = 2;
             } else {
-                block->cells[i].id = FUN_00184964(block->idRangeLow, block->idRangeHigh);
+                block->cells[i].id = randBetween(block->idRangeLow, block->idRangeHigh);
                 block->kind[i] = 1;
             }
         } else if (state == 2) {
@@ -117,8 +117,8 @@ void FUN_003b7b4c(u8* screen)
             block->cells[i].id = 1;
         }
         block->counts[g][3 + block->kind[i]]++;
-        block->cells[i].rollA = FUN_00184964(block->rollMaxA, block->rollMinA);
-        block->cells[i].rollB = FUN_00184964(block->rollMaxB, block->rollMinB);
+        block->cells[i].rollA = randBetween(block->rollMaxA, block->rollMinA);
+        block->cells[i].rollB = randBetween(block->rollMaxB, block->rollMinB);
         used[g]++;
     }
 }

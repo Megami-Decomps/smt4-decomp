@@ -1,10 +1,10 @@
 /* NON_MATCHING: default light colors, direction and native object creation restored; color-field bases and VFP store grouping differ. */
 #include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 extern "C" {
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
-AsdAllocatorObject *asdMemoryGetDefaultAllocator();
 AsdSceneLightObject *_ZN9Obj4211586createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *description, AsdAllocatorObject *allocator);
 u32 nw_ut_FloatColor_ToPicaU32(const f32 *color);
 
@@ -27,7 +27,7 @@ AsdSceneLight *FUN_00118d50()
     light->object = NULL;
     light->id = -1;
     light->parameters = NULL;
-    AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
+    AsdAllocatorObject *allocator = reinterpret_cast<AsdAllocatorObject *>(asdMemoryGetDefaultAllocator());
     AsdSceneLightDescription description;
     description.enabled = 1;
     description.updateEnabled = 1;

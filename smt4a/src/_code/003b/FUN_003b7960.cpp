@@ -4,6 +4,7 @@
 #include "util/Vec2Fixed.h"
 #include "util/Vec2Fixed.h"
 #include "util/PackNibbles.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct MaskedSpriteWidget {
@@ -16,7 +17,6 @@ typedef char MaskedSpriteWidgetPositionCheck[
 
 extern "C" {
 extern RenderCtxScissorA *g_renderCtx;
-SpriteInfo *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void FUN_00168e00(s32 x, s32 y, s32 width, s32 height);
 s32 vec2GetYInt(const void *position);
 void renderPopStateStacks();
@@ -24,7 +24,7 @@ void renderPopStateStacks();
 void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
                   u32 foreground, u32 background)
 {
-    SpriteInfo *frame = asdTMTexTableEntryAt(0x12, 0x6E);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(0x12, 0x6E);
     FUN_001835b4(2, 0x12, background, x, y, 0xDD);
     RenderCtxScissorA *context = g_renderCtx;
     bool scissored = false;
@@ -32,7 +32,7 @@ void FUN_003b7960(const MaskedSpriteWidget *widget, s32 x, s32 y,
         renderStackSet(&context->scissor, 0);
         scissored = true;
     }
-    FUN_00168e00(frame->x + x, frame->y + y, frame->size[0], frame->size[1]);
+    FUN_00168e00(frame->x + x, frame->y + y, frame->placement->width, frame->placement->height);
     renderCtxSetB(g_renderCtx, packNibblesAndByte(6, 1, 0));
     s32 targetY = vec2GetYInt(widget->position) + y;
     s32 targetX = vec2GetXInt(widget->position) + x;

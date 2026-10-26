@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail tail-calls the removed hook (pop {..., lr}; b hook -> nop); armcc compiles a call to a __weak function as bl + pop pc */
 #include "common.h"
 
 extern "C" {
@@ -12,8 +11,8 @@ typedef struct FileReader {
 } FileReader;
 
 void FUN_00140f3c(void *stream);
-/* A debug hook armlink removed; retail calls it as a tail call (the epilogue's pop lr, then b). */
-__weak void FUN_0014047c_hook(void *object);
+/* The function placed right after this one: reinitialises the reader (a tail call, so armlink NOPs the branch). */
+void FUN_001404c4(FileReader *reader);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
 /* Closes the file and its stream if they are open. */
@@ -27,7 +26,7 @@ void FUN_0014047c(FileReader *reader)
         FUN_00140f3c(reader->stream);
         reader->opened = 0;
     }
-    FUN_0014047c_hook(reader);
+    FUN_001404c4(reader);
 }
 
 } /* extern "C" */

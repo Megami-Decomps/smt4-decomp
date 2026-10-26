@@ -1,4 +1,3 @@
-/* NON_MATCHING: zero-flag reply block is placed before the common return rather than after it. */
 #include "common.h"
 
 extern "C" {
@@ -13,13 +12,11 @@ u32 appletProcessSleepQuery(void)
 {
     u32 result = 0;
     if (FUN_00110138()) {
-        if (DAT_00465198 != 0) {
-            if (nn_os_CriticalSection_TryEnter(g_nnAppletCriticalSection)) {
-                result = 2;
-            }
-        } else {
+        if (DAT_00465198 == 0) {
             nn_applet_CTR_ReplySleepQuery(0);
             result = 1;
+        } else if (nn_os_CriticalSection_TryEnter(g_nnAppletCriticalSection)) {
+            result = 2;
         }
     }
     return result;

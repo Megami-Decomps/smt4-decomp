@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_UniteWork.h"
+#include "util/FUN_0029ee54.h"
 
 extern "C" {
 
@@ -73,7 +74,6 @@ extern unsigned long long statusGetAvailableChoiceCount(void);
 extern unsigned short *FUN_0029acb0(void);
 extern int objectPartRunUnlessLocked(int);
 extern int FUN_0029e9cc(unsigned short);
-extern int FUN_0029ee54(int);
 /* Supplied declaration required: FUN_0029efa8. */
 /* Supplied declaration required: FUN_0029efc0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
@@ -562,7 +562,7 @@ LAB_001cdb08:
     if (!(temp_v13 == 0x18 || temp_v13 == 0x1b)) {
       if ((temp_v13 != 0x16 && temp_v13 != 0x17) && temp_v13 != 0x1a) {
         temp_v12 = FUN_0029efa8(temp_v19);
-        temp_v7 = FUN_0029ee54(temp_v19);
+        temp_v7 = FUN_0029ee54((const void *)(temp_v19));
         if (temp_v12 == temp_v7 - 1) goto LAB_001cdd1c;
       }
       temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);
@@ -624,7 +624,7 @@ LAB_001cdd1c:
     }
     else {
       temp_v12 = FUN_0029efa8(temp_v19);
-      temp_v13 = FUN_0029ee54(temp_v19);
+      temp_v13 = FUN_0029ee54((const void *)(temp_v19));
       if (temp_v13 - 1 == temp_v12) {
         temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x2380);
         FUN_00288e68(temp_v8);

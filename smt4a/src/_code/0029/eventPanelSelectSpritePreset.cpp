@@ -1,5 +1,6 @@
 /* NON_MATCHING: initial mode/option stores and final animated-state/delay stores are scheduled differently; -O2 candidate. */
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 struct EventPanelSprite { u8 data[0x8c]; };
 struct EventPanelPresetWork {
@@ -10,7 +11,6 @@ struct EventPanelPresetWork {
     u32 delay;
 };
 extern "C" {
-void pairSetFirstResetSecond(EventPanelSprite *, u32);
 void pairSetSecondResetFirst(EventPanelSprite *, u32);
 void uiSpriteSelectAnim(EventPanelSprite *, u32);
 void uiSpriteSetKeyframe(EventPanelSprite *, u32, u32);

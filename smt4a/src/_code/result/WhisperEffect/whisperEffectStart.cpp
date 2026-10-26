@@ -4,15 +4,15 @@
 #include "common.h"
 #include "result/WhisperEffect.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
 typedef void (*VoidFunc)(void);
 
-int FUN_00184964(int low, int high);                    /* random integer in [low, high] */
+int randBetween(int low, int high);                    /* random integer in [low, high] */
 int soundChannelStopAll(int id);
 int soundChannelRequestIfEnabled(u32 handle, int arg1, int arg2);
-int asdTMTexLoadMainHeap(int type, int index);
 int FUN_00184310(void);
 int sysMemClear(void *ptr, int size);                  /* zero a block */
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, void *work, u32 parent);
@@ -83,10 +83,10 @@ void whisperEffectStart(u32 devilId)
     fx->lines[4].textB = DAT_00588de8;
     fx->lines[4].name = s________________00588df8;
 
-    fx->phaseA = (f32)FUN_00184964(0, 0xff);
-    fx->phaseB = (f32)FUN_00184964(0, 0xff);
+    fx->phaseA = (f32)randBetween(0, 0xff);
+    fx->phaseB = (f32)randBetween(0, 0xff);
     for (i = 0; i < 5; i++) {
-        fx->lines[i].pick = FUN_00184964(0, fx->lines[i].count - 1);
+        fx->lines[i].pick = randBetween(0, fx->lines[i].count - 1);
     }
 
     devilId &= 0xffff;

@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail hoists the name address above the second memClear and keeps sp+0x80 and the path address in fp/r6 (as in smt4a FUN_004f84ec); built recomputes them */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -27,7 +28,6 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *FUN_002522e0(const char *string, s32 c);
 s32 keyedRecordFindByName(const char *name);
-void asdLoadFileAsyncSimple(const char *path, void **data, s32 a);
 
 /* Resets both flash effect slots and starts loading each effect file that no record provides yet. */
 u32 FUN_003dba3c(FlashEffects *effects)
@@ -52,7 +52,7 @@ u32 FUN_003dba3c(FlashEffects *effects)
         libc_strcpy(path, formatted);
         libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
-            asdLoadFileAsyncSimple(path, &slot->data, 0);
+            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 0);
             slot->flags |= 1;
         }
     }

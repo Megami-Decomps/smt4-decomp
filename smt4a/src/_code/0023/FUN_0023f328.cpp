@@ -1,5 +1,6 @@
 /* NON_MATCHING: the per-slot array addressing is rebuilt from different base registers in retail and the early-return paths merge differently; the slot refresh logic is the same. */
 #include "common.h"
+#include "util/FUN_00187168.h"
 
 extern "C" {
 
@@ -43,7 +44,6 @@ typedef struct SlotTable {
 
 s32 saveSlotFindSelected(void);
 SlotRecord *gameGetPlayerData(void);
-s32 FUN_00187168(SlotRecord *record);
 SlotRecord *gameGetSlotRecord(s32 index);
 SlotTable *gameGetSlotTable(void);
 SlotRecord *btlMainGetUnk14(void);

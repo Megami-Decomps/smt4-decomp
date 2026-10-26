@@ -4,10 +4,10 @@
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
-s32 scrGetArg(u32);
 void FUN_00250720(BtlMainState *);
 u32 FUN_002551ac(s32, u32, BtlActionRecord *, s32, s32, s32, s32, s32, s32,
     s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s32, s16, s32, u32, u32, s32);

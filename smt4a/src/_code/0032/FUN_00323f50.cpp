@@ -5,7 +5,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_00184c4c(...);
 int camSetMatrixA(...);
 int FUN_001a1ee0(...);
@@ -112,7 +112,7 @@ extern float DAT_00647358; /* 0x647358 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_00184c4c. */
 /* Supplied declaration required: camSetMatrixA. */
 /* Supplied declaration required: FUN_001a1ee0. */
@@ -312,7 +312,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
             DAT_00647334 = temp_v1;
             if ((temp_v0 & 0xff) != 0) {
               gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_0016c4b8(g_renderCtx,temp_v29);
+              renderCtxSelectTexture(g_renderCtx,temp_v29);
               FUN_001b63b0();
               FUN_001a1ee0();
               temp_v18 = (unsigned long long)(unsigned int)temp_v12 << 0x20;
@@ -359,7 +359,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
             DAT_006472f8 = temp_v4;
             if ((temp_v0 & 0xff) != 0) {
               gfxResolveTimedTextureFrame(*(unsigned int *)&param_1->field_0x48,pfVar3[4],temp_v28);
-              FUN_0016c4b8(g_renderCtx,temp_v29);
+              renderCtxSelectTexture(g_renderCtx,temp_v29);
               FUN_001b63b0();
               FUN_001a1ee0();
               temp_v18 = (unsigned long long)(unsigned int)temp_v19 << 0x20;

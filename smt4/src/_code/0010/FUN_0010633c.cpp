@@ -38,7 +38,7 @@ extern TitleConfig g_titleConfigModeFlag;
 extern const char DAT_004076bd[];
 
 s32 jyoucyuGetTableEntry(s32 index);
-u32 FUN_0010df80(u32 id);
+u32 asdSoundGetOutputSlotFlag(u32 id);
 s32 FUN_0010c5b0(u32 id, u32 frames);
 s32 FUN_0010d2d4(u32 id, s32 direction, u32 frames);
 const char *FUN_0010bf44(u32 cue);
@@ -72,7 +72,7 @@ void FUN_0010633c(void)
         u32 flags = channel->flags;
         if (flags & CHANNEL_ACTIVE) {
             if (flags & CHANNEL_STARTED) {
-                u32 state = FUN_0010df80(channel->id);
+                u32 state = asdSoundGetOutputSlotFlag(channel->id);
                 flags = channel->flags;
                 if (flags & CHANNEL_LOADING) {
                     if (!(state & 0x20))

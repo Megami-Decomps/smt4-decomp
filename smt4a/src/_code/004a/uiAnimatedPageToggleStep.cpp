@@ -1,5 +1,6 @@
 /* NON_MATCHING: phase-store tail merging and alternate-page flag address formation differ from retail. */
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 struct PageAnimationTrack {
     u8 point[0x8c];
@@ -31,7 +32,6 @@ void pointConvertToFloat(void *point, s32 x, s32 y);
 void uiSpriteBankApplyPreset(void *animation);
 s32 objectGetIndexedSignedFlag(void *animation, s32 track);
 void FUN_004a1958(AnimatedPage *page);
-s32 FUN_002a482c(void *selector);
 void FUN_004a3e04(AnimatedPage *page);
 void FUN_0032cfe0(AnimatedPage *page);
 

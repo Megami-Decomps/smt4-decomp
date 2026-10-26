@@ -17,8 +17,8 @@ typedef struct {
 } param_2_stack;
 
 extern int FUN_001d9634(...); /* 0x1d9634 */
-extern unsigned char LAB_001fe200; /* 0x1fe200 */
-extern unsigned char LAB_0021f2e8; /* 0x21f2e8 */
+extern unsigned char shopMainDrawDown; /* 0x1fe200 */
+extern unsigned char shopMainUpdateChild; /* 0x21f2e8 */
 extern unsigned char LAB_0021f300; /* 0x21f300 */
 extern unsigned int *g_shop; /* 0x44e050 */
 
@@ -62,10 +62,10 @@ LAB_001d3c90:
     puVar1[2] = 1;
   }
   pcVar2 = "ShopMainProc";
-  asdProcessCreateSimple("ShopMainProc",2,0,0,FUN_001d9634,&LAB_0021f2e8,puVar1);
+  asdProcessCreateSimple("ShopMainProc",2,0,0,FUN_001d9634,&shopMainUpdateChild,puVar1);
   *puVar1 = (unsigned int)pcVar2;
-  taskCreateDraw("ShopMainDrawUp",0x65,1,0,&LAB_001fe200,0,g_shop,pcVar2);
-  taskCreateDraw("ShopMainDrawUp",0xcc,1,0,&LAB_001fe200,0,g_shop,*puVar1);
+  taskCreateDraw("ShopMainDrawUp",0x65,1,0,&shopMainDrawDown,0,g_shop,pcVar2);
+  taskCreateDraw("ShopMainDrawUp",0xcc,1,0,&shopMainDrawDown,0,g_shop,*puVar1);
   taskCreateDraw("ShopMainDrawDown",0xe7,1,0,&LAB_0021f300,0,g_shop,*puVar1);
   return;
 }

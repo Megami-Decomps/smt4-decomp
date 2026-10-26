@@ -1,7 +1,7 @@
+#include "shard/JobWork.h"
 #include "shard/W6_W6Match3_ListBoxSelection.h"
 
 extern "C" {
-u32 jobGetWork(u32 job);
 
 u32 asdListBoxGetSelectedItemId(u32 job)
 {

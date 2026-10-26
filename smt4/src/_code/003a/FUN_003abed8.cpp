@@ -63,7 +63,7 @@ int FUN_0029ede8(...);
 int messageMainSetTargetFlags(s32 flags);
 int FUN_002328b4(void);
 int FUN_0029cc44(...);
-int FUN_003ac468(void);
+int countdownSetModeFive(void);
 int beginStatusPanelClose(void);
 int FUN_0029ee6c(...);
 int sortMenuCreate(...);
@@ -118,7 +118,7 @@ void FUN_003abed8(SkillShopScreen *screen)
         FUN_002328b4();
     } else if (menuPressed != 0) {
         FUN_0029cc44(1);
-        FUN_003ac468();
+        countdownSetModeFive();
         beginStatusPanelClose();
         FUN_0029ee6c(0, 0x323232FF);
         screen->state = 10;

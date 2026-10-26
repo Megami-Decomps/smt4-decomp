@@ -2,11 +2,11 @@
 /* Tests the selected skill target or each occupied party slot according to its targeting mode. */
 #include "gamedata/Table04Record.h"
 #include "shard/Shard0031.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 s32 FUN_002a690c(s32 target, s32 skill, s32 query);
 s32 FUN_00333694(s32 target, s32 slot, s32 skill, s32 query);
-SlotTable *gameGetSlotTable(void);
 
 u32 FUN_002684d0(s32 skillId, s32 target)
 {
@@ -20,13 +20,13 @@ u32 FUN_002684d0(s32 skillId, s32 target)
         if (scope == 3 || scope == 8) {
             return FUN_002a690c(target, skillId, 1) == 0;
         }
-        SlotTable *party = gameGetSlotTable();
+        SaveSlotTable *party = gameGetSlotTable();
         for (s32 i = -1; i < 24; ++i) {
             s32 result;
             if (i < 0) {
                 result = FUN_00333694(target, -1, skillId, 1);
             } else {
-                s32 slot = party->slots[i];
+                s32 slot = party->party[i];
                 if (slot < 0) {
                     continue;
                 }

@@ -2,6 +2,7 @@
 /* Resets the object to state 12 with the given flag, frees its three buffers, then enters state 13 and pokes the two device slots that are in mode 3. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -15,7 +16,6 @@ typedef struct Object {
     /* 0x14 */ void *bufferC;
 } Object;
 
-extern void asdMemFree(void *buffer);
 extern void scrScriptProcessDestroy(void *buffer);
 extern void campButtonHelpAcquire(u8 flag);
 extern void FUN_003d54f8(s32 slot, s32 mode);

@@ -12,7 +12,7 @@ int messageDismissNumericBanner(void);
 int messageMainStartMenuAnimationIfEnabled(void);
 
 int FUN_00184310(void);
-int FUN_00184964(...);
+int randBetween(...);
 int __aeabi_memset4(...);
 int FUN_00280250(void);
 int FUN_002a17d4(...);
@@ -76,7 +76,7 @@ extern int g_campCecRecv; /* 0x57f128 */
 /* Supplied declaration required: sysPlaySe. */
 extern int itemGetStackLimit(short);
 /* Supplied declaration required: FUN_00184310. */
-/* Supplied declaration required: FUN_00184964. */
+/* Supplied declaration required: randBetween. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: messageSetMode. */
 extern int gameGetSlotTable(void);
@@ -465,7 +465,7 @@ joined_r0x003a5980:
                   psVar7 = (short *)dataTable4AGetEntry8(temp_v8);
                   if ((psVar7 != (short *)0x0) &&
                      (__aeabi_idivmod(temp_v13,(int)*psVar7), temp_v10 == 0)) {
-                    temp_v11 = FUN_00184964((int)psVar7[2],(int)psVar7[3]);
+                    temp_v11 = randBetween((int)psVar7[2],(int)psVar7[3]);
                     if (psVar7[1] != 1) {
                       if (psVar7[1] == 0) {
                         *(int *)(param_1 + 0x3cc) = temp_v11 + *(int *)(param_1 + 0x3cc);
@@ -528,7 +528,7 @@ joined_r0x003a5980:
             do {
               do {
                 if (temp_v8 >= 2) {
-                  temp_v11 = FUN_00184964(0,temp_v8 - 1);
+                  temp_v11 = randBetween(0,temp_v8 - 1);
                 }
                 temp_v4 = temp_v15[temp_v11];
               } while (temp_v4 == 0xffffffff);
@@ -557,7 +557,7 @@ joined_r0x003a5980:
         temp_v8 = 0;
         if (temp_v8 < temp_v2) {
           do {
-            temp_v9 = FUN_00184964(0,4);
+            temp_v9 = randBetween(0,4);
             switch(temp_v9) {
             case 0:
               *(short *)(param_1 + 0xe0) = *(short *)(param_1 + 0xe0) + 1;
@@ -648,7 +648,7 @@ LAB_003a5cfc:
                 temp_v3 = temp_v3 + 1;
               } while (temp_v3 < 5);
               if (temp_v12 != 0) {
-                temp_v3 = FUN_00184964(0,temp_v12 - 1);
+                temp_v3 = randBetween(0,temp_v12 - 1);
                 temp_v11 = g_campCecRecv;
                 if (asStack_194[temp_v3] != 0) {
                   *(short *)(g_campCecRecv + *(int *)(g_campCecRecv + 0x3c0) * 2 + 0x368) =

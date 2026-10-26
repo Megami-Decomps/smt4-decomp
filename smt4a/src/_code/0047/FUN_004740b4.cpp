@@ -1,8 +1,8 @@
 /* NON_MATCHING: The compiler merges repeated resource guards and omits retail accessor hints. */
 #include "gamedata/TableEntryCache.h"
 #include "gamedata/DataTable.h"
+#include "util/dataTableFileGetTable.h"
 extern "C" {
-void* dataTableFileGetTable(void*, u32);
 void* asdOperatorNewE(u32);
 EntryState* __aeabi_vec_ctor_nocookie_nodtor(EntryState*, void (*)(EntryState*), u32, u32);
 
@@ -10,10 +10,10 @@ EntryState* __aeabi_vec_ctor_nocookie_nodtor(EntryState*, void (*)(EntryState*),
 void FUN_004740b4(TableEntryCache* cache)
 {
     if (cache->source.enabled != 0 && cache->source.resource != NULL) {
-        dataTableGetEntries(dataTableFileGetTable(cache->source.resource, 0));
+        dataTableGetEntries(dataTableFileGetTable((u32)(cache->source.resource), 0));
     }
     if (cache->source.enabled != 0 && cache->source.resource != NULL) {
-        u32 count = dataTableGetCount(dataTableFileGetTable(cache->source.resource, 0));
+        u32 count = dataTableGetCount(dataTableFileGetTable((u32)(cache->source.resource), 0));
         if (count != 0) {
             EntryState* states = (EntryState*)asdOperatorNewE(count * sizeof(EntryState));
             if (states != NULL) {

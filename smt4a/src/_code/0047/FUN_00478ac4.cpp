@@ -6,16 +6,10 @@
 #include "text/TextDraw.h"
 #include "shard/JobWork.h"
 #include "addon/aocApplication.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* A layout record (only the fields read here). */
-typedef struct LoadingLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;               /* width, height */
-} LoadingLayout;
 
 /* The job work area (only the fields read here). */
 typedef struct LoadingWork {
@@ -30,7 +24,6 @@ s32 FUN_001692ac(s32 a, s32 b);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
 void FUN_00473754(u8 *aoc, s32 text, u8 buffer[1024]);
 s32 curveEvaluateStandard(u8 *buffer, u32 kind);
-LoadingLayout *asdTMTexTableEntryAt(u32 group, u32 id);
 
 /* Draws the loading message with its spinning marker: the message text for the current index,
  * centred in its frame, and a 3x3 grid of dots where the lit pair rotates every five frames.
@@ -50,8 +43,8 @@ s32 FUN_00478ac4(u32 job)
 
     FUN_00473754(aoc, body, text);
     s32 width = curveEvaluateStandard(text, 3);
-    LoadingLayout *frameLayout = asdTMTexTableEntryAt(0x2F, 0x2D);
-    s32 left = (frameLayout->x + (frameLayout->size[0] >> 1) - (width >> 1)) - 9;
+    TextureTableEntryIV *frameLayout = asdTMTexTableEntryAt(0x2F, 0x2D);
+    s32 left = (frameLayout->x + (frameLayout->placement->width >> 1) - (width >> 1)) - 9;
 
     textDrawString(3, 0x57D8FFFF, (const char *)text, (f32)left, (f32)frameLayout->y, 0.5f, 0.0f, 1.0f);
     s32 step = frame / 5;
@@ -63,8 +56,8 @@ s32 FUN_00478ac4(u32 job)
     for (s32 row = 0; row < 3; row++) {
         for (s32 column = 0; column < 3; column++) {
             u32 index = row * 3 + column;
-            LoadingLayout *origin = asdTMTexTableEntryAt(0x2F, 0x31);
-            LoadingLayout *dot = asdTMTexTableEntryAt(0x2F, index + 0x31);
+            TextureTableEntryIV *origin = asdTMTexTableEntryAt(0x2F, 0x31);
+            TextureTableEntryIV *dot = asdTMTexTableEntryAt(0x2F, index + 0x31);
             s32 x = (dot->x - origin->x) + left + width + 4;
 
             if (index == first || index == second) {

@@ -3,13 +3,13 @@
 #include "common.h"
 #include "camp/UIFade/UIFade.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 typedef void (*VoidFunc)(void);
 
 u32 taskCreateDraw(VoidFunc fn, int priority, int arg2, int arg3, VoidFunc cb, int arg5, int arg6, u32 parent);
-void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 void LAB_001908e8(void);
 void LAB_001a6d6c(void);
 void LAB_002035dc(void);

@@ -8,7 +8,6 @@ void FUN_002bed3c(void);
 s32 FUN_002c5d80(u32 kind, u32 mode);
 s32 jobIsValid(u32 job);
 void FUN_00285584(u32 job, u32 mode, u32 flags);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 // Draw both live title jobs with a temporary render-state override.
@@ -39,7 +38,7 @@ void FUN_003a37dc(TitleJobWork *work)
         FUN_00285584(draw->secondJob, 0, 0);
     }
     renderStackPop(&g_titleScene->stackA);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 }

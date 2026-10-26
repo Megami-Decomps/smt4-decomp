@@ -1,10 +1,10 @@
 #include "addon/aocMain.h"
 #include "battle/EnemyDraw/EnemyDraw.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
 void resourceApplyNodeFlag(u32 a, u32 b);
-void asdTMTexLoadMainHeap(u32 a, u32 b);
 void FUN_001a6568(u32 system, u32 a, u32 b, s32 flags);
 void* asdTMTexNodeSetMode(s32 a, s32 b);
 s32 aocRunByName(u32 system, u32 a, u32 b, u32 c);

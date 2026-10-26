@@ -1,16 +1,10 @@
 /* NON_MATCHING: initial guaranteed flag, saved unit/flags registers and final boolean branch layout differ. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
-
-struct BattleChanceModifiersView {
-    u8 unk00[0x14];
-    f32 partyMultiplier;
-    f32 enemyMultiplier;
-};
+#include "battle/BattleBalanceRow.h"
 
 extern "C" {
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
-BattleChanceModifiersView *FUN_0023ea94();
 s32 randRange(u32);
 
 /* Roll a unit-dependent chance, increasing it for enemies below forty percent HP. */

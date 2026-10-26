@@ -1,9 +1,8 @@
 #include "gamedata/DataTable.h"
+#include "util/dataTableFileGetTable.h"
 #include "gamedata/DataTableSlots.h"
 
 extern "C" {
-
-void *dataTableFileGetTable(void *file, u32 index);
 
 /* Looks up section `section` of the loaded file of table slot `table` (NULL data when out of range). */
 void *dataTableGet(int table, int section)
@@ -15,7 +14,7 @@ void *dataTableGet(int table, int section)
     } else {
         file = 0;
     }
-    return dataTableFileGetTable(file, section);
+    return dataTableFileGetTable(reinterpret_cast<u32>(file), section);
 }
 
 } /* extern "C" */

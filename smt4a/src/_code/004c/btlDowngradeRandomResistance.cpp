@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail explicitly tests eight resistances and uses a larger candidate frame; the loop is partially unrolled and switch cases are ordered differently. */
 #include "common.h"
+#include "shard/lcgRandomRange.h"
 
 struct BattleResistances {
     /* 0x000 */ u8 unk000[0x2b6];
@@ -7,7 +8,6 @@ struct BattleResistances {
 };
 
 extern "C" {
-s32 lcgRandomRange(u16 maximum);
 
 // Downgrade one randomly selected elemental resistance that is not already a weakness.
 s32 btlDowngradeRandomResistance(BattleResistances *resistances)

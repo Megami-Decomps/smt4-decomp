@@ -1,12 +1,12 @@
-/* NON_MATCHING: saved row/column register allocation and shared fixed-capacity branch/restore-tail placement differ. */
+/* NON_MATCHING: branch layout improved by testing the toggle negated (fixed-capacity arm first); remaining: saved row/column register allocation. */
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
 #include "battle/btlMain.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 extern PartyPanelStateA *g_partyPanel;
 BtlPartyBlockA *gameGetSlotTable();
-s32 FUN_002a4878(GridNavigation *);
 s32 FUN_002a4894(GridNavigation *);
 void FUN_00203b40(GridNavigation *, s32, s32, s32, s32, s32);
 void scrollOwnerSelectIndex(GridNavigation *, s32);
@@ -44,12 +44,12 @@ void FUN_0026fa30()
     if (count < 12) {
         FUN_00203b40(&grids->primary, count, rows, 4, 1, 1);
         FUN_00203b40(&grids->secondary, party->count + 4, rows + 1, 4, 1, 1);
-    } else if (panel->toggle) {
-        FUN_00203b40(&grids->primary, gameGetSlotTable()->count - 12, 3, 4, 1, 1);
-        FUN_00203b40(&grids->secondary, gameGetSlotTable()->count - 8, 4, 4, 1, 1);
-    } else {
+    } else if (!panel->toggle) {
         FUN_00203b40(&grids->primary, 12, 3, 4, 1, 1);
         FUN_00203b40(&grids->secondary, 16, 4, 4, 1, 1);
+    } else {
+        FUN_00203b40(&grids->primary, gameGetSlotTable()->count - 12, 3, 4, 1, 1);
+        FUN_00203b40(&grids->secondary, gameGetSlotTable()->count - 8, 4, 4, 1, 1);
     }
     scrollOwnerSelectIndex(&grids->primary, primaryColumn);
     FUN_002a4964(&grids->primary, primaryRow);

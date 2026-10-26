@@ -1,4 +1,4 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_00178a54; not written yet. */
+/* NON_MATCHING: found outside every function: branched to by indexedResourceQuery; not written yet. */
 /* romwright 0.5.0 decompilation of FUN_00194b74 for reference (not compiled; its own view of the boundaries):
 
 int FUN_00194b74(int param_1,int param_2)

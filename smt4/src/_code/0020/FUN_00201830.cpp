@@ -21,11 +21,9 @@ extern "C" {
 extern RenderCtx *g_titleScene;
 
 DebugListWork *jobGetWork(void);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 void renderCtxSelectStereoLayout(RenderCtx *context);
 s32 FUN_002c5d80(u32 mode, u32 option);
-void FUN_002c1b64(RenderCtx *context, s32 mode);
 void FUN_0032accc(void);
 void FUN_002b76d0(const EffectColor *first, const EffectColor *second, const EffectColor *third,
                   const EffectColor *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -39,7 +37,7 @@ u32 FUN_00201830(void)
     DebugListWork *work = jobGetWork();
 
     if (work->listMode != 1) {
-        FUN_002c198c(g_titleScene);
+        renderCtxApplyTransforms(g_titleScene);
         renderCtxSelectStereoLayout(g_titleScene);
         FUN_0032accc();
         if (work->fade != 0.0f) {
@@ -55,7 +53,7 @@ u32 FUN_00201830(void)
             color.green = 1.0f;
             color.blue = 1.0f;
             color.alpha = work->fade;
-            FUN_002c1b64(g_titleScene, 0);
+            renderCtxSelectTexture(g_titleScene, 0);
             FUN_002b76d0(&color, &color, &color, &color, 0.0f, 0.0f, 400.0f, 240.0f, 0.9570312f);
             renderStackPop(&g_titleScene->stackA);
         }
@@ -67,7 +65,7 @@ u32 FUN_00201830(void)
         if (work->itemCount < DEBUG_LIST_ROWS) {
             rows = work->itemCount;
             if (rows < 1) {
-                FUN_002c198c(g_titleScene);
+                renderCtxApplyTransforms(g_titleScene);
                 FUN_002c18e4(g_titleScene);
                 return 0;
             }
@@ -86,7 +84,7 @@ u32 FUN_00201830(void)
             textDrawString(2, color, text, 20.0f, (f32)(i * 14), 0.1f, 1.0f, 1.0f);
         }
     }
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
     return 0;
 }

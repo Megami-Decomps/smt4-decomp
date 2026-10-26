@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail runs an empty counting loop over the slots that falls off the end without a return value when the flag byte is clear; the conditional/predicated shape and the return path differ here. */
+/* NON_MATCHING: retail runs an empty counting loop over the slots that falls off the end without a return value when the flag byte is clear (r0 keeps the pool pointer); retail keeps the pool pointer in r0 and branches, the build predicates. */
 #include "common.h"
 
 struct Pool {

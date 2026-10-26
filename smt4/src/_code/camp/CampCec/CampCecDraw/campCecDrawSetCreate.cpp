@@ -2,10 +2,10 @@
 #include "common.h"
 #include "camp/CampCec/CampCecDraw.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(int heap, int align, int arg2, int size, int arg4);
 extern u32 asdTextCreate(u32 type);
 
 CampCecDrawSet *campCecDrawSetCreate(void)

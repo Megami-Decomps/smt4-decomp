@@ -1,9 +1,9 @@
 #include "common.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
 void asdTMTexTableLoadSprites(s32 table);
-void FUN_0014afd0(s32 table, s32 index);
 
 typedef struct Global57f208 {
     /* 0x00 */ u8 unk00;

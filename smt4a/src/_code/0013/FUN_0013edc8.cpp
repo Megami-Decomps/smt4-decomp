@@ -35,12 +35,10 @@ static __inline bool effectNameHasPrefix(s8 kind)
 u32 FUN_0013edc8(const char *name)
 {
     EffectNameTable table;
-    u32 flags;
-    s8 kind;
 
     __aeabi_memcpy4(&table, &DAT_00530b5c, sizeof(table));
-    flags = FUN_00152f44();
-    kind = name[0];
+    u32 flags = FUN_00152f44();
+    s8 kind = name[0];
 
     if (effectNameHasPrefix(kind)) {
         if (kind != 'F' || !effectNameIsListed(name, &table)) {

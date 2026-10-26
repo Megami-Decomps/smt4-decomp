@@ -1,11 +1,12 @@
-/* NON_MATCHING: the retail build has stripped debug calls (file/line setup + nop) before each allocation. */
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/File/AsdFileHashPack.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 void *FUN_001858ec(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront, const char *tag);
 void asdMemorySetReleaseCallback(void *buffer, const void *callback, void *worker);
-extern u8 LAB_0019eab0;
+void FUN_0019eab0(void *object, void *worker); /* releases the buffer from the worker's slot list */
+extern const char DAT_0053d484[]; /* the source file path (__FILE__) */
 
 /* The file worker's thread state; only its flag word is used here. */
 typedef struct AsdFileWorker {
@@ -19,22 +20,21 @@ void *asdFileAllocBuffer(AsdFileWorker *worker, AsdFileRequest *request)
 {
     void *buffer;
 
-    switch (request->heapKind) {
-    case 0x10:
+    if (request->heapKind == 0x10) {
+        asdDebugTrace(DAT_0053d484, 482);
         buffer = FUN_001858ec(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 0, request->path);
-        break;
-    case 1:
+    } else if (request->heapKind == 1) {
+        asdDebugTrace(DAT_0053d484, 486);
         buffer = FUN_001858ec(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 1, request->path);
-        break;
-    case 0x11:
+    } else if (request->heapKind == 0x11) {
+        asdDebugTrace(DAT_0053d484, 490);
         buffer = FUN_001858ec(ASD_HEAP_EXTRA, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 0, request->path);
-        break;
-    default:
+    } else {
+        asdDebugTrace(DAT_0053d484, 494);
         buffer = FUN_001858ec(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 1, request->path);
-        break;
     }
     if ((worker->flags & 1) != 0) {
-        asdMemorySetReleaseCallback(buffer, &LAB_0019eab0, worker);
+        asdMemorySetReleaseCallback(buffer, (const void *)FUN_0019eab0, worker);
     }
     return buffer;
 }

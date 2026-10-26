@@ -10,12 +10,12 @@ extern Global5b408c DAT_005b408c;
 extern u8 g_appletHomeButtonEvent[];
 extern u8 g_nnAppletCriticalSection[];
 
-void FUN_0015a568(void);
+void appletUnlockAndSleepIfShellClosed(void);
 void nn_os_LightEvent_ClearSignal(u8 *object);
 u8 nn_applet_CTR_IsExpectedToProcessHomeButton(void);
 u8 nn_os_CriticalSection_TryEnter(void *section);
 
-/* Home-button handling: returns 0 when the application is not expected to process the button; with the held flag set, 2 or 3 depending on whether the critical section could be entered; otherwise 1 after FUN_0015a568. */
+/* Home-button handling: returns 0 when the application is not expected to process the button; with the held flag set, 2 or 3 depending on whether the critical section could be entered; otherwise 1 after appletUnlockAndSleepIfShellClosed. */
 u32 appletProcessHomeButton(void)
 {
     u8 expected;
@@ -29,7 +29,7 @@ u32 appletProcessHomeButton(void)
             expected = nn_os_CriticalSection_TryEnter(g_nnAppletCriticalSection);
             result = (expected == 0) ? 2 : 3;
         } else {
-            FUN_0015a568();
+            appletUnlockAndSleepIfShellClosed();
             result = 1;
         }
     }

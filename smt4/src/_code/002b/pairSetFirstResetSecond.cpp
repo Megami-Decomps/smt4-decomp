@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
@@ -8,8 +9,9 @@ typedef struct Obj {
     /* 0x8 */ u32 unk8;
 } Obj;
 
-void pairSetFirstResetSecond(Obj *obj, u32 value)
+void pairSetFirstResetSecond(void *handle, u32 value)
 {
+    Obj *obj = static_cast<Obj *>(handle);
     obj->unk4 = value;
     obj->unk8 = 0xffffffff;
 }

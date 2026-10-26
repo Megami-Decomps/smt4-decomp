@@ -12,7 +12,6 @@ s32 FUN_002c5d80(s32 first, s32 second);
 void efctSetSpeed(f32 alpha);
 f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value);
 void FUN_002bf380(s32 layer, s32 group, s32 image, s32 depth, u32 flags, s32 mode);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draw a selected image pair with the supplied alpha and temporary render state. */
@@ -32,7 +31,7 @@ void messageDrawSelectedImagePair(const MessageImageSelector *owner, const f32 *
     depth = (s32)renderCtxCalculateStereoParallax(g_titleScene, 0.33f);
     FUN_002bf288(2, 0x39, images.pairs[owner->selection].second, depth, 0, 12);
     renderStackPop(&g_titleScene->stackA);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 }

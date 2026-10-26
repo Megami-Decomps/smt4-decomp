@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/btlEffect.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 /* The effect names of one battle, 0x16 bytes each, after a 0x108 byte header. */
 struct BtlEffectNameTable {
@@ -47,7 +48,6 @@ char *libc_strcpy(char *dest, const char *src);
 void textFormatBuffer(char *buffer, const char *format, ...);
 void sysMemClear(void *buffer, u32 bytes);
 char *FUN_00100d60(const char *text, s32 character);
-s32 findRecordByKey(const char *key);
 void btlCameraFinishTransition(BtlEffectWork *work);
 u32 FUN_002282c8(u32 effect, u32 a, u32 b);
 

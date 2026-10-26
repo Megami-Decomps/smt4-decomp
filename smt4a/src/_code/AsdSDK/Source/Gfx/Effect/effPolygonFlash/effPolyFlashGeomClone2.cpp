@@ -1,6 +1,7 @@
 /* NON_MATCHING: the debug trace (string, line, nop) and size/clamp shapes now match retail; what remains is register allocation (retail keeps the effect object's fields in r4/r6 via a writeback load and the new block in r5; armcc swaps them) and the geometry result being reused in r1. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The effect object that embeds the clone source at 0x3C. */
 struct PolyCloneOwner {
@@ -12,7 +13,6 @@ extern "C" {
 
 extern const char DAT_00544ba8[];
 
-void *memAlloc(int, int, int, int size, int align, int);
 PolyGeom *FUN_00271d28(PolyGeom *src);
 
 /* Clones the geometry block of a polygon object, clamping its unk70 to at least 1, and gives each segment alternating texture coordinates. */

@@ -1,16 +1,12 @@
 /* NON_MATCHING: skill-array zero scheduling, battle mask loads and tier flag updates differ; -O2 candidate. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
+#include "gamedata/Table04Record.h"
 
 struct ActionTierUnit {
     u64 flags;
     u8 unk008[0xcc];
     s32 specialCounter; // 0xd4
-};
-struct ActionTierSkill {
-    u8 unk00[0x44];
-    u32 tier : 2;
-    u32 reserved : 30;
 };
 struct ActionTierBattleFlags {
     u8 unk0000[0x45a8];
@@ -31,7 +27,6 @@ s32 btlAnyEventFilterMatches(BtlMainStateA *, ActionTierUnit *, u32);
 s32 lcgRandomRange(u32);
 s32 gameFlagIsSet(u32);
 void source4CCopyHalves(ActionTierUnit *, u16 *);
-const ActionTierSkill *dataTable41FindById(u32);
 
 u32 btlSelectActionTier(u32 unitId)
 {
@@ -52,10 +47,10 @@ u32 btlSelectActionTier(u32 unitId)
         for (s32 i = 0; i < 9; ++i) {
             if (!skills[i])
                 continue;
-            const ActionTierSkill *skill = dataTable41FindById(skills[i]);
-            if (skill && tier < skill->tier) {
-                if (!btlAnyEventFilterMatches(btlGetMainState(), unit, skill->tier))
-                    tier = skill->tier;
+            const Table04ExtraRecord *skill = dataTable41FindById(skills[i]);
+            if (skill && tier < skill->actionTier.tier) {
+                if (!btlAnyEventFilterMatches(btlGetMainState(), unit, skill->actionTier.tier))
+                    tier = skill->actionTier.tier;
             }
         }
         if (!tier)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler hoists the binding load before the state write and changes temporary registers/constant scheduling. Candidate O2. */
+/* NON_MATCHING: compiler hoists the binding load before the state write and changes temporary registers/constant scheduling. */
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
 extern "C" void animationResetTracks(AnimationVisualState* state, s32 track, s32 mode);

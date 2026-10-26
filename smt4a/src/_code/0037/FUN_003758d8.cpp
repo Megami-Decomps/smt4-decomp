@@ -8,11 +8,6 @@ struct UnitSortEntry {
     /* 0x04 */ s32 slot;
 };
 
-struct UnitHighRecord {
-    /* 0x00 */ u8 unk00[0x22];
-    /* 0x22 */ u16 level;
-};
-
 struct UnitLowRecord {
     /* 0x00 */ u8 unk00[0x24];
     /* 0x24 */ u16 level;
@@ -25,14 +20,13 @@ struct UnitSlotRecord {
 
 extern "C" {
 s32 idIsAbove400(s32 id);
-UnitHighRecord *dataTable41FindById(s32 id);
 UnitSlotRecord *gameGetSlotRecord(s32 slot);
 s32 FUN_003811ec(const UnitSortEntry *a, const UnitSortEntry *b);
 
 static __inline u32 unitSortLevel(const UnitSortEntry *entry)
 {
     if (idIsAbove400(entry->id)) {
-        return dataTable41FindById(entry->id)->level;
+        return dataTable41FindById(entry->id)->stats.level;
     }
     return ((UnitLowRecord *)dataTable04FindById(entry->id))->level;
 }

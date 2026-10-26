@@ -1,11 +1,11 @@
 #include "shard/GameDataBlocks.h"
-#include "shard/gameGetSlotTable.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 
-u8 *gameGetSlotTable(void)
+SaveSlotTableIV *gameGetSlotTable(void)
 {
-    return (u8 *)g_gameDataBlocks.saveBlock + 0x8c;
+    return (SaveSlotTableIV *)((u8 *)g_gameDataBlocks.saveBlock + 0x8c);
 }
 
 } /* extern "C" */

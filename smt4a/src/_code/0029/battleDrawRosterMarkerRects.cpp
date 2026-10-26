@@ -14,7 +14,6 @@ struct BattleMarkerLookup {
 extern "C" {
 extern BattleEffectGlobals g_battleEffectSettings;
 extern RenderCtxA *g_renderCtx;
-void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 BattleMarkerLookup *FUN_001568f8(BtlMainStateA *state, s16 group);
 BattleFrameSprite *stateEntryFindById(BtlMainStateA *state, s32 id);
 void FUN_0014e314(u32 color0, u32 color1, u32 color2, u32 color3,
@@ -43,7 +42,7 @@ extern "C" u32 battleDrawRosterMarkerRects(u32 job)
         state->drawCounters.markerTimer -= 30;
     }
     if (g_battleEffectSettings.markerMask & battleMarkerMask(state)) {
-        FUN_0016c4b8(g_renderCtx, 0);
+        renderCtxSelectTexture(g_renderCtx, 0);
         for (s32 group = 0; group < 3; ++group) {
             for (s32 index = 4; index < 54; ++index) {
                 BattleRosterRecordA *record = battleRosterAt(state, index);

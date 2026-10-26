@@ -1,5 +1,6 @@
 /* NON_MATCHING: entry-field base-register CSE and register allocation differ (retail addresses the 0x28-byte entries from a 0x7800 base with the u64 loaded through a separate address; this build folds the offset into one base) */
 #include "common.h"
+#include "util/actorIsActive.h"
 
 /* The 16-bit gauge width an icon frame carries. */
 struct GaugeIcon {
@@ -46,7 +47,6 @@ GaugeIcon *asdTMTexTableEntryAt(u32 table, u32 sprite);
 PartyMemberRecord *gameGetPlayerData(void);
 PartyMemberRecord *gameGetSlotRecord(s32 slot);
 PartyMemberRecord *FUN_003e503c(u16 index);
-s32 actorIsActive(PartyMemberRecord *record);
 s32 partySlotMatchesSelected(PartyMemberRecord *record);
 u32 FUN_004ccbf0(s32 level);
 u32 FUN_004ccdb8(u16 expCurve, s32 level, s32 expBonus);

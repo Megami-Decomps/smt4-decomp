@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct BtlHelpOwner {
     u32 parent; // 0x00
@@ -16,7 +17,6 @@ s32 jobIsValid(u32 job);
 u32 taskCreateDraw(const char *name, s32 priority, u32 workSize, u32 flags, void (*update)(), void (*destroy)(), void *owner, u32 parent);
 void FUN_001b5498();
 void btlHelpFreeNodeListAndStopJob();
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 track);
 extern BtlHelpList *DAT_00435d78;
 
 // Start the help calculation job and initialize its entry list if it is not running.

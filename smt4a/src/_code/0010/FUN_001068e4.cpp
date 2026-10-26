@@ -48,7 +48,7 @@ extern int DAT_005949dc; /* 0x5949dc */
 
 /* Supplied declaration required: FUN_00106a5c. */
 /* Supplied declaration required: FUN_0016cd18. */
-extern int FUN_0016ceb8(unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int);
+extern int fsArchiveGetWorkspaceSize(unsigned int, unsigned int *, unsigned int, unsigned int, unsigned int);
 extern int FUN_001a0380(unsigned int);
 extern unsigned int rt_malloc(void);
 /* Supplied declaration required: asdOperatorDeleteArray. */
@@ -128,7 +128,7 @@ int FUN_001068e4(int param_1,int param_2,int param_3,int *param_4)
 LAB_001069c6:
     temp_v4 = 1;
     temp_v3 = param_4;
-    temp_v2 = FUN_0016ceb8(0,(unsigned int *)&temp_v5,0x10602,0x4009b,0);
+    temp_v2 = fsArchiveGetWorkspaceSize(0,(unsigned int *)&temp_v5,0x10602,0x4009b,0);
     temp_v5 = rt_malloc();
     temp_v7 = 0;
     temp_v4 = 1;

@@ -5,6 +5,7 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 
 /* The storage that owns the worker thread's stack (nn::os::ThreadStackStorage). */
@@ -47,7 +48,6 @@ extern "C" {
 extern const char DAT_00528898[]; /* the source file name for the allocation trace */
 
 void nn_os_CriticalSection_Initialize(void *section);
-void *memAlloc(s32 heap, s32 alignment, s32 flags, s32 size, s32 stackAlignment, s32 clear);
 s32 resultReportIfFailed(WorkerStack *stack, void *memory, u32 size);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 FUN_002fb0d4(WorkerThread *thread, const ThreadArgumentDescriptor *descriptor,

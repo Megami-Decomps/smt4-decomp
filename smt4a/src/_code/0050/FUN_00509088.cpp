@@ -1,32 +1,34 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00509088` (_code @ 0x509088, 0x4c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Copies the 3D parameters of the sound with this archive reference's key into `out`; returns 1 if it exists. */
+#include "nw/snd/SoundArchiveQuery.h"
 
 extern "C" {
 
-int nw_snd_internal_SoundArchiveFile_SoundInfo_GetSound3DInfo(void);
+typedef struct Sound3DInfo {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u32 unk04;
+    /* 0x08 */ u8 unk08;
+    /* 0x09 */ u8 unk09;
+} Sound3DInfo;
 
-extern unsigned int *nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(unsigned int);
-/* Supplied declaration required: nw_snd_internal_SoundArchiveFile_SoundInfo_GetSound3DInfo. */
+extern Sound3DInfo *nw_snd_internal_SoundArchiveFile_SoundInfo_GetSound3DInfo(SoundInfo *info);
 
-
-void FUN_00509088(int param_1,unsigned int param_2,unsigned int *param_3)
-
+u8 FUN_00509088(SoundArchiveRef *ref, u32 unused, Sound3DInfo *out)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int *puVar1;
-  
-  puVar1 = (unsigned int *)
-           nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo
-                     (*(unsigned int *)(param_1 + 0x3c));
-  if ((puVar1 != (unsigned int *)0x0) &&
-     (nw_snd_internal_SoundArchiveFile_SoundInfo_GetSound3DInfo(), puVar1 != (unsigned int *)0x0)) {
-    *param_3 = *puVar1;
-    param_3[1] = puVar1[1];
-    *(unsigned char *)(param_3 + 2) = *(unsigned char *)(puVar1 + 2);
-    *(unsigned char *)((int)param_3 + 9) = *(unsigned char *)((int)puVar1 + 9);
-  }
-  return;
+    SoundInfo *info = nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundInfo(ref->infoBlock);
+    Sound3DInfo *src;
+
+    if (info == NULL) {
+        return 0;
+    }
+    src = nw_snd_internal_SoundArchiveFile_SoundInfo_GetSound3DInfo(info);
+    if (src == NULL) {
+        return 0;
+    }
+    out->unk00 = src->unk00;
+    out->unk04 = src->unk04;
+    out->unk08 = src->unk08;
+    out->unk09 = src->unk09;
+    return 1;
 }
 
-} /* extern "C" */
+}

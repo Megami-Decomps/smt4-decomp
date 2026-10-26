@@ -75,7 +75,7 @@ int driftObjectStart(...);
 int uiStartRangeAnimationFromTable(...);
 void btlCameraSetFormationSlot(BattleActionCamera *, BtlMainStateA *, int);
 int flags64CSetTarget(...);
-int FUN_004f26cc(...);
+int cameraResetTransitionVectors(...);
 int FUN_004f41b0(...);
 int FUN_004fb4fc(...);
 int btlQueueDuplicateSuppressedAction(...);
@@ -258,7 +258,7 @@ extern int animationIsReferencedClipComplete(unsigned int);
 /* Supplied declaration required: uiStartRangeAnimationFromTable. */
 /* Supplied declaration required: btlCameraSetFormationSlot. */
 /* Supplied declaration required: flags64CSetTarget. */
-/* Supplied declaration required: FUN_004f26cc. */
+/* Supplied declaration required: cameraResetTransitionVectors. */
 extern int FUN_004f2708(int, int, unsigned int);
 extern int btlCameraHasDefaultParameters(int);
 /* Supplied declaration required: FUN_004f41b0. */
@@ -955,7 +955,7 @@ joined_r0x0040ec14:
     }
     break;
   case '\"':
-    FUN_004f26cc(g_btlCamera);
+    cameraResetTransitionVectors(g_btlCamera);
     break;
   case '#':
     temp_v3 = param_1[2];

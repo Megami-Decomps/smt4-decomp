@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include "battle/btlHelp.h"
+#include "util/Random.h"
 
 /* The per-race level lists: the table of level bounds at 0x104 and the race index at 0x33. */
 struct LevelLists {
@@ -28,7 +29,6 @@ struct UnitRecordView {
 UnitRecordView *gameGetUnitRecord(s32 index);
 PartySlotsView *gameGetSlotTable(void);
 s32 partyMemberFindById(u32 id);
-u32 randNextInRange(u32 limit);
 s32 dataTableChooseWeightedId(void);
 u32 FUN_003c9b94(LevelLists *lists, u16 first, u16 second, UnitePairEntryIV *entry);
 

@@ -1,30 +1,28 @@
-/* NON_MATCHING: real font virtual interface for glyph check at slot0x44 is not recovered; cannot replace it with a raw-vtable call or invented padding methods. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps the code in r2 on the no-lookup paths and moves the fallback result back with `mov r2,r4`; built keeps it in r4 throughout. */
+#include "shard/W6_W6Match7_FontResource.h"
+
+/* The name entry form: two bytes (high, low) per character slot from 0xB0. */
+struct NameForm {
+    /* 0x00 */ u8 unk00[0xB0];
+    /* 0xB0 */ u8 glyphs[1][2];
+};
 
 extern "C" {
+FontGlyphResourceOwner *FUN_0019dc44(u32 index);
 
-typedef int romwright_code(...);
-extern int FUN_0019dc44(unsigned int);
-
-
-void nameFormSetCharacter(int param_1,int param_2,unsigned int param_3)
-
+/* Stores a two-byte character code in a slot of the form, substituting the fallback when the font lacks it. */
+void nameFormSetCharacter(NameForm *form, s32 index, u32 code)
 {
-  int temp_v0;
-  
-  if (param_3 != 0xffffffff) {
-    if (param_3 != 0) {
-      temp_v0 = FUN_0019dc44(3);
-      temp_v0 = (**(romwright_code **)(**(int **)(temp_v0 + 8) + 0x44))(*(int **)(temp_v0 + 8),param_3 & 0xffff);
-      if (temp_v0 == 0) {
-        param_3 = 0xffff8140;
-      }
+    if (code != 0xFFFFFFFF) {
+        if (code != 0) {
+            FontGlyphResourceOwner *resource = FUN_0019dc44(3);
+            FontGlyphLookup *font = resource->font;
+            if (!font->vtable->hasGlyph(font, (u16)code)) {
+                code = 0xFFFF8140;
+            }
+        }
+        form->glyphs[index][1] = (u8)code;
+        form->glyphs[index][0] = (u8)(code >> 8);
     }
-    param_1 = param_1 + param_2 * 2;
-    *(char *)(param_1 + 0xb1) = (char)param_3;
-    *(char *)(param_1 + 0xb0) = (char)(param_3 >> 8);
-  }
-  return;
 }
-
-} /* extern "C" */
+}

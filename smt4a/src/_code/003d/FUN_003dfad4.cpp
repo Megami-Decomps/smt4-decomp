@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail initialises the 21 slots in a one-per-iteration loop that reloads each halfword before storing 100; armcc unrolls the bitfield stores by two. */
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 namespace {
 /* A demon's elemental response: the resistance id and its affinity state. */
@@ -8,14 +9,9 @@ struct AffinitySlot {
     u16 state : 6;
 };
 
-struct PassiveSkillAffinity {
-    /* 0x00 */ u8 unk00[0x44];
-    /* 0x44 */ u32 affinity;
-};
 }
 
 extern "C" {
-const PassiveSkillAffinity *dataTable41FindById(u32 id);
 u32 affinityShouldReplaceState(s32 current, s32 incoming);
 void FUN_0047ffd4(u32 devilId, AffinitySlot *slots);
 
@@ -38,7 +34,7 @@ static __inline u32 resolvePassiveAffinity(const u16 *skills, u8 kind)
         if (!skills[i]) {
             continue;
         }
-        const PassiveSkillAffinity *skill = dataTable41FindById(skills[i]);
+        const Table04ExtraRecord *skill = dataTable41FindById(skills[i]);
         if (!skill) {
             continue;
         }

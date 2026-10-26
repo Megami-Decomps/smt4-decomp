@@ -13,7 +13,7 @@ int FUN_002b76d0(...);
 int textFormatBuffer(...);
 int padIsButtonPressed(...);
 int jobGetWork(...);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int SBORROW4(unsigned int, int);
 int SUB84(double, int);
 int VectorSignedToFloat(...);
@@ -68,7 +68,7 @@ extern int padIsButtonRepeat(unsigned int);
 /* Supplied declaration required: padIsButtonPressed. */
 /* Supplied declaration required: jobGetWork. */
 extern int FUN_002c15fc(unsigned int);
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int libc_strlen(void);
 
 
@@ -180,7 +180,7 @@ LAB_001ff420:
       temp_v16 = 1.0f;
       temp_v17 = 1.0f;
       temp_v18 = 1.0f;
-      FUN_002c1b64(g_titleScene,0);
+      renderCtxSelectTexture(g_titleScene,0);
       temp_v13 = 0.003921569f;
       temp_v3 = *(unsigned int *)((unsigned int)*(unsigned char *)(piVar2 + 0xf) * 0x10 + 0x409cf0);
       temp_v15 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -225,7 +225,7 @@ LAB_001ff420:
         temp_v16 = temp_v10;
         temp_v17 = temp_v10;
         temp_v18 = temp_v10;
-        FUN_002c1b64(g_titleScene,0);
+        renderCtxSelectTexture(g_titleScene,0);
         temp_v1 = piVar2[0x17];
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);

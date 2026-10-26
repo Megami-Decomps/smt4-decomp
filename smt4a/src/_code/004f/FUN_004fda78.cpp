@@ -4,10 +4,10 @@
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "util/BtlScriptUnitHasFlags.h"
 
 extern "C" {
 
-s32 btlScriptUnitHasFlags(const BtlMainStateA *state);
 
 ReflectAction *FUN_004fda78(s32 actor, s32 secondary, u32 options,
                           BattleRosterMotionA *target, s32 value, u16 extraId)

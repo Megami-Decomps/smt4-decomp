@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail defines the record, its saved header and the page tables in this unit and addresses g_effectEditorSettings and DAT_0059e738 relative to their neighbours (`sub r0, r1, #0x160`, `sub r1, r0, #0x120`); extern globals need their own literals. */
 #include "gfx/EffectEditorStorage.h"
+#include "shard/linkedFindItemByIndex.h"
 
 /* One line of an editor parameter page. */
 struct EffectEditorPageItem {
@@ -22,15 +23,13 @@ extern EffectSelectionContext DAT_0059e9a8;
 extern EffectEditorPageCursor DAT_0059e858;
 extern EffectEditorPageItem DAT_0059e738[3];
 extern EffectEditorPageItem DAT_0059e780[9];
-void *linkedFindItemByIndex(void *list, s32 index);
 void *__aeabi_memcpy4(void *destination, const void *source, u32 size);
 
 /* Reloads the selected effect record over its saved header and picks the parameter page for its
  * kind (flag 2: the three-line page, else the nine-line page), keeping the cursor in range. */
 void *FUN_003c8a2c(void *arg)
 {
-    void *item = linkedFindItemByIndex(g_effectEditor.selection.list,
-                                       DAT_0059e9a8.index + g_effectEditor.selection.index);
+    void *item = linkedFindItemByIndex(reinterpret_cast<const LinkedItems *>(g_effectEditor.selection.list), DAT_0059e9a8.index + g_effectEditor.selection.index);
     __aeabi_memcpy4(&g_effectEditorSettings, item, sizeof(g_effectEditorSettings));
     __aeabi_memcpy4(&g_effectEditorSettings, &g_effectEditorSavedSnapshot, sizeof(g_effectEditorSavedSnapshot));
     if (g_effectEditorSettings.record.flags & 2) {

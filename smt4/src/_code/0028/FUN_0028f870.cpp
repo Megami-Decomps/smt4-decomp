@@ -1,6 +1,7 @@
 /* NON_MATCHING: armcc builds the "held" sprite ids with ldrne instead of retail orrne x,x,x asr 9, and hoists the render-state constants (3/0) differently; rest identical */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029d644.h"
 
 extern "C" {
 
@@ -39,7 +40,6 @@ extern TitleSceneWork *g_titleScene;  /* 0x44ea00 */
 
 s32 ifTouchGetSelectionModeForRegion(s32 region);
 s32 FUN_0029ee54(u32 list);
-s32 FUN_0029d644(u32 list);
 s32 FUN_0029efc0(u32 list);
 BankSprite *asdTMTexTableEntryAt(s32 bank, s32 sprite);
 void FUN_0029a17c(s32 x, s32 y, s32 width, s32 height, s32 flag);
@@ -100,7 +100,7 @@ void FUN_0028f870(u32 list, s32 x, s32 y, s32 wide)
     } else {
         track = asdTMTexTableEntryAt(0x1d, 0x424);
     }
-    s32 thumbHeight = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * FUN_0029d644(list) >> 12;
+    s32 thumbHeight = __aeabi_idivmod(track->cell[1] << 12, FUN_0029ee54(list)) * (s32)FUN_0029d644((const void *)(list)) >> 12;
     if (thumbHeight < 1) {
         thumbHeight = 1;
     }

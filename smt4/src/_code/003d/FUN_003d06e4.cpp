@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail inlines the candidate loop three times (frame 468 bytes, units found by a pointer walk with the flag test first); this version shares one helper so the frame, the unit scan and register allocation differ. The calls and their arguments are the same. */
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 namespace {
 /* The battle state block: only the pointer to the unit table (109 units of 0x288 bytes) is read. */
@@ -43,7 +44,6 @@ s32 unitCompareByPriorityValue(const void *a, const void *b);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_003d10a0(BattleBlock **block, AiState *state, AiUnit **units, s32 count, s32 mode);
 void FUN_0022abe0(u32 *environment, u16 *skills);
-SkillInfo *dataTable40FindById(u32 id);
 s32 FUN_0029a9d4(u32 id, s32 arg);
 s32 FUN_0029a924(u32 id);
 s32 FUN_002277d4(BattleBlock **block, AiState *state, SkillInfo *info, AiUnit **units, s32 count, s32 a, s32 b);
@@ -55,7 +55,7 @@ static s32 tryCandidates(BattleBlock **block, AiState *state, u16 *skills, AiUni
 {
     for (s32 i = 0; i < 9; i++) {
         if (skills[i] != 0) {
-            SkillInfo *info = dataTable40FindById(skills[i]);
+            SkillInfo *info = reinterpret_cast<SkillInfo *>(dataTable40FindById(skills[i]));
             if (info != NULL) {
                 s32 cost;
                 if ((*state->environment & 2) != 0) {

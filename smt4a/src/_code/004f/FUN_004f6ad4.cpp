@@ -1,6 +1,7 @@
 /* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
 #include "battle/BtlEffectLoad.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ char *libc_strcpy(char *destination, const char *source);
 void sysMemClear(void *buffer, s32 size);
 void textFormatBuffer(char *buffer, const char *format, ...);
 char *FUN_00100d60(char *text, s32 character);
-s32 findRecordByKey(const char *key);
 void btlCameraFinishTransition(BtlEffectWorkA *work);
 u32 FUN_002282c8(u32 first, u32 second, u32 third);
 

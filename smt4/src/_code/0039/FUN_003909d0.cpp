@@ -14,7 +14,7 @@ int textFormatBuffer(...);
 int FUN_002bf380(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
-int FUN_002c1b64(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int memClear(...);
 int mathInterpolateTimed(...);
 int VectorSignedToFloat(...);
@@ -53,7 +53,7 @@ extern int aocIsEntryIndexValid(int, int);
 /* Supplied declaration required: FUN_002bf380. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: memClear. */
 /* Supplied declaration required: mathInterpolateTimed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -107,7 +107,7 @@ void FUN_003909d0(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = asdTMTexTableEntryAt(0x3a,0x5f);
       temp_v1 = *(short *)(temp_v4 + 8);
       temp_v2 = *(short *)(temp_v4 + 10);
-      FUN_002c1b64(g_titleScene,*(unsigned int *)(temp_v3 + 0x9c4));
+      renderCtxSelectTexture(g_titleScene,*(unsigned int *)(temp_v3 + 0x9c4));
       temp_v4 = temp_v9 + temp_v2;
       temp_v6 = temp_v10 + temp_v1;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

@@ -1,10 +1,11 @@
 #include "common.h"
+#include "gamedata/SaveSlotTable.h"
 
 extern "C" {
 
 typedef struct Table {
     /* 0x0000 */ u8 unk0000[0x8C];
-    /* 0x008C */ u8 member8C[1];
+    /* 0x008C */ SaveSlotTable slotTable;
 } Table;
 
 typedef struct GameDataBlocksView {
@@ -13,10 +14,10 @@ typedef struct GameDataBlocksView {
 } GameDataBlocksView;
 extern GameDataBlocksView g_gameDataBlocks;
 
-/* Returns the address of the member at 0x8C of the game-data table. */
-u8 *gameGetSlotTable(void)
+/* Returns the slot table inside the game-data table (the table plus 0x8C). */
+SaveSlotTable *gameGetSlotTable(void)
 {
-    return g_gameDataBlocks.table->member8C;
+    return &g_gameDataBlocks.table->slotTable;
 }
 
 } /* extern "C" */

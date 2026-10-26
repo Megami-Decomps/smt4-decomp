@@ -1,4 +1,4 @@
-/* Records a failed check (a key and the address it was detected at) in the global fault record, then runs the fault handler. */
+/* Records a failed check (a key and the address it was detected at; `failed` is the caller's failure bit, unused here) in the global fault record, then runs the fault handler. */
 #include "common.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
@@ -13,7 +13,7 @@ struct FaultRecord {
 extern FaultRecord DAT_0062d200;
 void FUN_00189a80(FaultRecord *record);
 
-void FUN_0016e800(u32 key, u32 address)
+void FUN_0016e800(s32 key, u32 address, u32 failed)
 {
     FaultRecord *record = &DAT_0062d200;
     record->unk01 = 0;

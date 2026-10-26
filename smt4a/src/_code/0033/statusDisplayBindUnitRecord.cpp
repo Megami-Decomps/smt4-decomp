@@ -1,18 +1,12 @@
 /* NON_MATCHING: argument/pane live ranges change register allocation, permission handling folds into BIC/early stores, and the final option-byte address is folded; candidate -O2. */
 #include "shard/Shard0033.h"
+#include "gamedata/Table00Lookup.h"
 
 struct StatusUnitRecord {
     u8 unk00[0x34];
     u32 skillPairs[4];
     u8 unk44[0x1e];
     u16 id;
-};
-struct StatusBaseRecord {
-    u32 unk00;
-    s32 maxHp;
-    s32 maxMp;
-    u8 unk0c[0xa];
-    u16 flags;
 };
 struct StatusDisplayPane {
     u8 unk00[8];
@@ -52,7 +46,6 @@ s32 btlMainIsRunning();
 s32 FUN_00291e14();
 void FUN_0026fd50(StatusDisplayPane *pane, StatusUnitRecord *record, s32 mode, const u32 *parameters);
 void FUN_0034dae0(StatusDisplayPane *pane, u16 id);
-const StatusBaseRecord *dataTable00FindById(u16 id);
 s32 FUN_002b4dcc(StatusUnitRecord *record);
 }
 
@@ -89,7 +82,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
         if (gameProgressIsAdvanced()) {
             FUN_0034dae0(pane, record->id);
         } else {
-            const StatusBaseRecord *base = dataTable00FindById(record->id);
+            const Table00Record *base = dataTable00FindById(record->id);
             if (base != NULL) {
                 pane->maxHp = base->maxHp;
                 pane->maxMp = base->maxMp;
@@ -107,7 +100,7 @@ extern "C" void statusDisplayBindUnitRecord(StatusUnitRecord *record, s32 useBas
     flags->changed = 0;
     u8 allowOption = 1;
     if (static_cast<s16>(record->id) >= 0) {
-        const StatusBaseRecord *base = dataTable00FindById(record->id);
+        const Table00Record *base = dataTable00FindById(record->id);
         if (base == NULL) {
             allowOption = 0;
         } else {

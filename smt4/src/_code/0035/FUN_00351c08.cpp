@@ -1,70 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00351c08` (_code @ 0x351c08, 0xc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+void nn_cfg_CTR_Initialize(void);
+bool FUN_00359f90(void);
+void FUN_001467a4(void);
+u32 FUN_00351ce8(void *output, const void *input);
 
-int FUN_001467a4(void);
-int FUN_0023a244(void);
-int FUN_00351e54(int, int);
-unsigned int FUN_00352008(unsigned int, unsigned int, unsigned char, unsigned char);
-int FUN_00359f90(void);
-
-extern signed char g_archiveModuleState; /* 0x44e348 */
-
-extern int FUN_0011c834(void);
-/* Supplied declaration required: FUN_001467a4. */
-/* Supplied declaration required: FUN_0023a244. */
-extern int FUN_00351dfc(int, unsigned int);
-/* Supplied declaration required: FUN_00351e54. */
-extern int FUN_00351ef0(int, unsigned int *);
-/* Supplied declaration required: FUN_00359f90. */
-extern int FUN_0035adf0(unsigned int);
-extern void nn_cfg_CTR_Initialize(void);
-
-
-int FUN_00351c08(int param_1,unsigned int *param_2,unsigned int param_3,unsigned int param_4)
-
+/* Initialize the configuration service and reject unavailable or missing inputs. */
+u32 FUN_00351c08(void *output, const void *input)
 {
-/* irregular: 5 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1 [2];
-  
-  if (param_2 == (unsigned int *)0x0) {
-    return -0x1fbf6001;
-  }
-  temp_v0 = param_1;
-  nn_cfg_CTR_Initialize();
-  FUN_00359f90();
-  FUN_001467a4();
-  if (temp_v0 != 0) {
-    temp_v1[0] = param_4;
-    temp_v0 = FUN_00351ef0(param_1,temp_v1);
-    if (-1 < temp_v0) {
-      if ((temp_v1[0] & 0xff) != 0) {
-        FUN_00351e54(param_1,param_1);
-      }
-      else {
-        temp_v0 = 0;
-        if ((g_archiveModuleState == '\0') && (temp_v0 = FUN_0011c834(), -1 < temp_v0)) {
-          temp_v0 = FUN_0035adf0(1);
-          if (temp_v0 >= 0) {
-            g_archiveModuleState = '\x01';
-          }
-          else {
-            FUN_0023a244();
-          }
-        }
-        if (temp_v0 < 0) {
-          return temp_v0;
-        }
-        FUN_00352008(param_1,param_1,0,0);
-      }
-      temp_v0 = FUN_00351dfc(param_1,*param_2);
+    if (input == NULL) {
+        return 0xE0409FFF;
     }
-    return temp_v0;
-  }
-  return -0x36df607c;
+    nn_cfg_CTR_Initialize();
+    bool available = FUN_00359f90();
+    FUN_001467a4();
+    if (!available) {
+        return 0xC9209F84;
+    }
+    return FUN_00351ce8(output, input);
 }
-
-} /* extern "C" */
+}

@@ -1,6 +1,7 @@
 /* NON_MATCHING: stack-buffer lifetime and outgoing text arguments use different saved registers and strd grouping from retail. */
 #include "common.h"
 #include "AsdSDK/asdTextDrawFormatted.h"
+#include "addon/LookupRecord.h"
 
 struct RecordLabels {
     u32 handles[3]; // 0x00
@@ -14,7 +15,6 @@ struct LabelledRecord {
     s16 message; // 0x48
 };
 extern "C" {
-void *FUN_002bd06c(u16 message);
 void FUN_002bcfc0(void *message, char *output);
 void ARM_common_memcpy4_7(char *output, const char *text);
 void __aeabi_memcpy4(void *output, const void *input, u32 bytes);

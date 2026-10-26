@@ -1,6 +1,7 @@
 /* NON_MATCHING: content-menu update with a second query handler (kind 4) and the 0x66/0x67 result tails; written like FUN_0038e374, block layout and constant registers not compared with retail */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "util/ByteIsAtLeast100.h"
 
 /* What a status operation reports: a kind byte and four words of detail. */
 struct AocStatusResult {
@@ -56,7 +57,6 @@ AocQueryHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
 void timeInitializeActiveState(AocStatusResult *result);
 void FUN_0047bc90(AocQueryMenu *menu, AocStatusResult *result);
 s32 strIsEmpty(const AocStatusResult *result);
-s32 byteIsAtLeast100(const AocStatusResult *result);
 s32 flaggedValueHolderGetTotal(void *holder);
 
 #define AOC_RESULT_RETRY 0x66
@@ -89,7 +89,7 @@ void AocMenu::runQueryProcess()
             }
             return;
         }
-        if (byteIsAtLeast100(&result) == 0)
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&result)) == 0)
             return;
         if (result.kind == AOC_RESULT_RETRY) {
             AocStatusResult copy = result;

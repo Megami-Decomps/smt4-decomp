@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable switch rewrite (171 vs 168 rows); register numbering and case-body ordering differ from retail */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "util/FUN_0029efa8.h"
 
 struct MenuList;
 
@@ -28,7 +29,6 @@ extern "C" {
 
 u32 FUN_00297ca4(CommandMenu* menu, u32 arg);
 s32 FUN_0029efc0(void* list);
-s32 FUN_0029efa8(void* list);
 s32 flagBitIsSet(s32 bit);
 s32 gameFlagIsSet(u32 flag);
 PlayerData* gameGetPlayerData(void);

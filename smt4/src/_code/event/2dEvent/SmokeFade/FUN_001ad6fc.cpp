@@ -42,7 +42,7 @@ static __inline bool smokeFadeImagesLoaded()
     return loaded == 2;
 }
 
-extern "C" u32 FUN_001ad6fc(void)
+extern "C" u32 FUN_001ad6fc(u32 job)
 {
     SmokeFadeState *fade = DAT_0043df28.state;
     if (smokeFadeImagesLoaded() && fade->file != NULL && FUN_002c1d5c() != 0) {

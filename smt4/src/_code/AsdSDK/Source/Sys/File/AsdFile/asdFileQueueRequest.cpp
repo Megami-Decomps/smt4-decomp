@@ -1,5 +1,6 @@
 /* NON_MATCHING: the retail build has a stripped debug call (file/line setup + nop) before the request allocation. */
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern AsdFileGlobals g_asdFile;
@@ -8,7 +9,6 @@ extern u32 g_asdFileMutex;             /* mutex guarding the list */
 s32 FUN_002c40f8(s32 *index, u32 *handles, s32 count, s32 waitAll, s64 timeout);
 s32 FUN_002c5254(s32 *out, u32 handle);
 void FUN_002c526c(void);
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void memClear(void *buf, u32 size);
 s32 libc_strlen(const char *s);
 s32 libc_strcmp(const char *a, const char *b);

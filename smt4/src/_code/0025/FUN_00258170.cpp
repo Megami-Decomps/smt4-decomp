@@ -1,5 +1,6 @@
 /* NON_MATCHING: the retail unit inlines the NintendoWare resource accessors (relative-offset link resolution with null checks) with its own register scheduling; this version resolves the same links through one helper and a pointer-chasing helper, so the instruction count and allocation differ. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 namespace {
 /* Resource data stores most links as 32-bit offsets relative to the link itself (0 = none). */
@@ -35,7 +36,6 @@ struct ScreenStateWork {
 extern "C" {
 extern ScreenStateWork *g_screenStateWork;
 void FUN_003409f8(void *context, u8 buffer[16], f32 *offset);
-void FUN_002c2424(void *data, u32 size);
 void nw_gfx_res_ResTextureMapper_SetTexture(u32 **mapper, u32 texture);
 
 /* Applies the screen's scroll to the model data it draws with: every selected attribute of the selected
@@ -89,7 +89,7 @@ void FUN_00258170(u8 *context)
                         vertex[0] = u + offset[0];
                         vertex[1] = v + offset[1];
                     }
-                    FUN_002c2424(vertexData, node[5]);
+                    FUN_002c2424((u32)(vertexData), node[5]);
                 }
                 break;
             }

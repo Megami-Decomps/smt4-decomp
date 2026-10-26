@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/S1Mover.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -30,21 +31,9 @@ typedef struct BtlUiGlobals {
     /* 0x10 */ BtlUiNumberBlock *block;
 } BtlUiGlobals;
 
-/* The sprite record whose first image's height is read to keep the popup on screen. */
-typedef struct BtlUiImage {
-    /* 0x00 */ u8 unk00[2];
-    /* 0x02 */ s16 height;
-} BtlUiImage;
-
-typedef struct BtlUiSprite {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ BtlUiImage *image;
-} BtlUiSprite;
-
 extern BtlUiGlobals g_btlUi;
 
 void FUN_002a1850(Vec3f *position, s32 arg, u32 value);
-BtlUiSprite *asdTMTexTableEntryAt(u32 kind, u32 index);
 u32 FUN_004aaff0(u32 handle, s32 slot);
 void uiSpriteSelectAnim(void *sprite, s32 anim);
 void FUN_00387240(void *sprite, u32 kind, u32 index);
@@ -60,7 +49,7 @@ void FUN_004a9740(u32 handle, s32 slot, s32 number, u32 unused, Vec3f position, 
 
     if (anchored != 0) {
         FUN_002a1850(&position, 0, FUN_00152f54());
-        f32 maxY = 240.0f - (f32)(asdTMTexTableEntryAt(13, 0x41A)->image->height << 1);
+        f32 maxY = 240.0f - (f32)(asdTMTexTableEntryAt(13, 0x41A)->placement->height << 1);
 
         if (position.y > maxY) {
             position.y = maxY;

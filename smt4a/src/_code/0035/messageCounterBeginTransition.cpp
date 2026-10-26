@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler places the shared return after the direct-delta path instead of before it; in-memory O2 also differs. */
 #include "ui/MessageMain.h"
 extern "C" MessageGlobalsA g_messageMain;
 
@@ -19,18 +18,18 @@ s32 FUN_00480c28(void);
 u32 messageCounterBeginTransition(u32 value, s32 useTotal)
 {
     MessageCounterTransition *transition = (MessageCounterTransition *)g_messageMain.panel;
-    if (useTotal != 0) {
-        s32 total = FUN_00480c28();
-        transition->duration = value;
+    if (useTotal == 0) {
+        transition->duration = 20;
         transition->state = 3;
-        transition->remaining = value;
-        transition->delta = total - transition->currentValue;
+        transition->remaining = 20;
+        transition->delta = value;
         return 1;
     }
-    transition->duration = 20;
+    s32 total = FUN_00480c28();
+    transition->duration = value;
     transition->state = 3;
-    transition->remaining = 20;
-    transition->delta = value;
+    transition->remaining = value;
+    transition->delta = total - transition->currentValue;
     return 1;
 }
 }

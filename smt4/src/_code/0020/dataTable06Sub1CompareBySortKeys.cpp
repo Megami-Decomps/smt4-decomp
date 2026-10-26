@@ -1,21 +1,15 @@
 #include "common.h"
-
-struct Table06Sub1SortKeys {
-    u16 id;
-    u8 secondary;
-    u8 flags;
-};
+#include "gamedata/SkillFlags.h"
 
 extern "C" {
-Table06Sub1SortKeys* dataTable06Sub1GetRecord(u32 id);
 
 s32 dataTable06Sub1CompareBySortKeys(const u16* leftId, const u16* rightId)
 {
-    const Table06Sub1SortKeys* left = dataTable06Sub1GetRecord(*leftId);
-    const Table06Sub1SortKeys* right = dataTable06Sub1GetRecord(*rightId);
+    const SkillFlagsRecord* left = dataTable06Sub1GetRecord(*leftId);
+    const SkillFlagsRecord* right = dataTable06Sub1GetRecord(*rightId);
     s32 difference = (right->flags & 0x1f) - (left->flags & 0x1f);
     if (difference == 0) {
-        difference = left->secondary - right->secondary;
+        difference = left->category - right->category;
         if (difference == 0) {
             difference = left->id - right->id;
         }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail addresses each marker as panel + i*16 with the fields at +4..+0x13 (no folded +4 base) and keeps the constants 0x41/2 in registers across the loop (179 vs 181 rows). */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "gfx/StereoParallax.h"
 
 extern "C" {
 
@@ -28,7 +29,6 @@ typedef struct MarkerPanel {
 
 extern u32 g_renderCtx;
 
-f32 renderCtxCalculateStereoParallax(u32 context, f32 depth);
 void FUN_003d3020(u32 id, s32 a, s32 b, f32 x, f32 y, f32 scaleX, f32 scaleY);
 
 /* Draws the five map markers of the panel: the marker body, an icon picked from its kind and
@@ -36,7 +36,7 @@ void FUN_003d3020(u32 id, s32 a, s32 b, f32 x, f32 y, f32 scaleX, f32 scaleY);
  * the stereo parallax. */
 void FUN_00418960(MarkerPanel *panel)
 {
-    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.7f);
+    s32 parallax = (s32)renderCtxCalculateStereoParallax((void *)(g_renderCtx), 0.7f);
 
     for (s32 i = 0; i < 5; i++) {
         MapMarker *marker = &panel->markers[i];

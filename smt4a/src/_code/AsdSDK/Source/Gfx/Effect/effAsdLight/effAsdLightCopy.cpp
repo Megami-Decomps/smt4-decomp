@@ -1,12 +1,12 @@
 /* NON_MATCHING: retail stores the zero components as integer words (str of 0; w is written 0 then 1.0f); the build stores them as float zeros (vstr/vstm) */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 extern const char DAT_005449b4[];
 
-void *memAlloc(int, int, int, int size, int align, int);
 void sysMemClear(void *block, s32 size);
 void __aeabi_memcpy4(void *dst, const void *src, s32 size);
 

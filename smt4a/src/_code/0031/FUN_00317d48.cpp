@@ -1,11 +1,11 @@
 /* NON_MATCHING: result/sign-test register allocation and zero-value lifetime differ from retail. */
 #include "sys/ProcessResult.h"
+#include "util/pathBuildWide.h"
 #include "shard/RomFileOpenState.h"
 #include "nn/fs/ArchiveCreateFile.h"
 
 extern "C" {
 void FUN_0032ca54(u32 result);
-s32 FUN_002e0e04(const void *path, u8 *normalized, u32 encoding);
 void *FUN_001886bc(void);
 u32 FUN_001883b0(RomOpenFile *file, const u8 *path, u32 mode);
 void sysFatalBreak(void);
@@ -15,7 +15,7 @@ void vcallSlot12IfValid(u32 handle);
 u32 FUN_00317d48(RomFileOpenState *state, const void *path, u32 size)
 {
     u8 normalized[496];
-    if (!FUN_002e0e04(path, normalized, 1)) {
+    if (!pathBuildWide(static_cast<const char *>(path), reinterpret_cast<s16 *>(normalized), 1)) {
         u32 result = 0xe0e046bc;
         FUN_0013ebd8(result);
         return result;

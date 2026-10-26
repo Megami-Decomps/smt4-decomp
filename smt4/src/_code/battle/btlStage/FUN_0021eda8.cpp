@@ -4,6 +4,7 @@
 #include "nn/Result.h"
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/JobWork.h"
 
 /* The work area of the job that owns the stage. */
 struct StageJobWork {
@@ -21,7 +22,6 @@ struct StackRegion : AddressSpaceRegion {
 extern "C" {
 extern BtlStageGlobals g_btlStage;
 
-u32 jobGetWork(u32 handle);
 s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void FUN_002c3f5c(AddressSpaceRegion *region);

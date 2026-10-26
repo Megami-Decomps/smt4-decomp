@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail spills the incoming float and the stack arguments to different frame slots and keeps 0.26f/0.15625f/1.0f in s17-s19; the formatted-title sequence and draw calls are the same. */
 #include "common.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -10,12 +11,6 @@ typedef struct NoticeWork {
     /* 0x0C */ u8 restored;
 } NoticeWork;
 
-/* A layout record: a position at 8 and 10. */
-typedef struct NoticeLayout {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-} NoticeLayout;
 
 extern void *g_renderCtx;
 
@@ -23,7 +18,6 @@ s32 textFormatBuffer(char *buffer, const char *format, ...);
 void FUN_003f707c(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, s32 d, s32 e, f32 speed);
 f32 renderCtxCalculateStereoParallax(void *ctx, f32 depth);
 void efctSetSpeed(f32 speed);
-NoticeLayout *asdTMTexTableEntryAt(u32 kind, u32 index);
 void fontMeasureLineAdvance(const char *text, s32 mode);
 void FUN_003f757c(NoticeWork *work, s32 x, s32 y, s32 a, const char *text, s32 b, s32 c, s32 d, s32 e, f32 speed);
 void uiDrawStereoKindIcon(NoticeWork *work, s32 x, s32 y, s32 a, s32 b, s32 c, f32 speed);
@@ -52,7 +46,7 @@ void FUN_003f78f8(NoticeWork *work, s32 x, s32 y, f32 speed)
     s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
 
     efctSetSpeed(speed);
-    NoticeLayout *layout = asdTMTexTableEntryAt(0x31, 0xF1);
+    TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x31, 0xF1);
 
     fontMeasureLineAdvance(tag, 3);
     textDrawString(3, 0xFF, tag, (f32)(layout->x + x + parallax), (f32)(layout->y + y), 0.15625f, 1.0f, speed);

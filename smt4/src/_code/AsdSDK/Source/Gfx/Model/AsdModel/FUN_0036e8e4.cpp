@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail loads 0x2010000 once into a register and lays the memory-type tests out as a decision tree around it (`sub ip, kind, r3; beq; bge` then `cmp ip, #0x10000; cmpne ip, #0x20000`) with the bodies after the tests, keeps NULL in fp and carries the block index in a pre-indexed ldr; this build tests the types as an if chain and allocates registers differently (a switch over the same four types gives another tree). */
 #include "classes/AsdAllocatorObject.h"
 #include "shard/S1NwGfx.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 // One vertex data block of a model resource.
 struct VertexDataBlock {
@@ -28,7 +29,6 @@ struct VertexDataList {
 extern "C" {
 extern AsdAllocatorObject *DAT_00471c40;
 extern void *(*g_gfxAllocateCallback)(u32 memoryType, u32 flags, void *tag, u32 size);
-void FUN_002c2424(void *memory, u32 size);
 void FUN_002a666c(void *source, void *destination, u32 size);
 void nnnstdMemCpy(void *destination, const void *source, u32 size);
 
@@ -61,7 +61,7 @@ void FUN_0036e8e4(VertexDataList **resource, AsdAllocatorObject *allocator)
         void *tag = results[i];
         u32 kind = memoryType & 0xffff0000;
         if (kind == 0x2010000) {
-            FUN_002c2424(block->source.get(), size);
+            FUN_002c2424((u32)(block->source.get()), size);
         } else if (kind > 0x2010000) {
             if (kind == 0x2020000 || kind == 0x2030000) {
                 u32 pool = memoryType & 0x30000;
@@ -73,7 +73,7 @@ void FUN_0036e8e4(VertexDataList **resource, AsdAllocatorObject *allocator)
         } else if (kind == 0x1010000) {
             void *memory = g_gfxAllocateCallback(0x10000, 0x102, tag, size);
             nnnstdMemCpy(memory, block->source.get(), size);
-            FUN_002c2424(memory, size);
+            FUN_002c2424((u32)(memory), size);
             block->deviceMemory = memory;
             block->deviceMemoryType = 0x10000;
         }

@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-extern "C" f32 FUN_00155650(f32 lower, f32 upper, f32 value);
+extern "C" f32 mathClampFloat(f32 lower, f32 upper, f32 value);
 extern "C" const struct Obj421460Policy DAT_00422058;
 extern "C" const struct Obj421460Easing DAT_0042208c;
 
@@ -40,7 +40,7 @@ public:
         unk40 = 1.0f;
         rangeStart = 0.0f;
         rangeEnd = 1.0f;
-        clamp = FUN_00155650;
+        clamp = mathClampFloat;
         unk50 = 0;
         unk54 = 0;
         enabled = 1;

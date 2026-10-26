@@ -3,16 +3,16 @@
 #include "map/MapDepartTarget.h"
 #include "map/SceneSpawn.h"
 #include "map/mapDepart.h"
+#include "shard/dataTableGetRecord23.h"
 
 extern "C" {
 extern MapDepartTarget DAT_0049fd14;
 SaveWork *gameGetMapBlock(void);
 s32 dataTable23Type1CountWithAoc(void);
-const SceneSpawnRecord *dataTableGetRecord23(s32);
 static __inline s32 findSpawnDestination(s32 map, s32 area, u32 entrance)
 {
     for (s32 i = 0; i < dataTable23Type1CountWithAoc(); ++i) {
-        const SceneSpawnRecord *record = dataTableGetRecord23(i);
+        const SceneSpawnRecord *record = reinterpret_cast<const SceneSpawnRecord *>(dataTableGetRecord23(i));
         if (record->key.map == map && record->key.area == area && record->key.unk02 == entrance)
             return record->key.variant == 0xFF ? -1 : record->key.variant;
     }

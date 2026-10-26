@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the constants 0 (r9) and the divide-by-100 multiplier (r8) above the loop test and keeps the loop's exit test at the top (b back); the build tests at the bottom */
+/* NON_MATCHING: loop shape (test at top, unconditional back branch) and the step computation from the running level now match; retail additionally hoists the constant 0 into r9 (push r4-sl) above the loop, the build materializes it inside. */
 #include "common.h"
 #include "gamedata/DataTable.h"
 
@@ -16,7 +16,7 @@ void *dataTableGet(s32 table, s32 slot);
 s32 devilLevelUpsAffordable(u32 devilId, s32 level, u32 *exp)
 {
     s32 cur = level;
-    s32 step = level - devilGetRecord(devilId)->baseLevel + 1;
+    s32 step = cur - devilGetRecord(devilId)->baseLevel + 1;
     u32 percent;
 
     if (step <= 0) {
@@ -27,7 +27,10 @@ s32 devilLevelUpsAffordable(u32 devilId, s32 level, u32 *exp)
         }
         percent = ((u16 *)reinterpret_cast<u8 *>(dataTableGetEntries(dataTableGet(9, 2))))[step - 1];
     }
-    while (cur != 99) {
+    for (;;) {
+        if (cur == 99) {
+            break;
+        }
         u32 *entries = (u32 *)reinterpret_cast<u8 *>(dataTableGetEntries(dataTableGet(9, 1)));
         u32 need = cur < 99 ? entries[cur - 1] : 0;
         u32 cost = need * percent / 100;

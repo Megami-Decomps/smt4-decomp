@@ -1,7 +1,7 @@
 /* NON_MATCHING: native animation-alpha getters restored; frame-glyph lifetime and base-coordinate saved registers still differ. */
 #include "ui/AnimatedDigitPanel.h"
 #include "shard/TextureDrawCall.h"
-#include "shard/renderCtxCalculateStereoParallax.h"
+#include "gfx/StereoParallax.h"
 #include "util/CalleeContracts.h"
 #include "camp/RenderCtx.h"
 

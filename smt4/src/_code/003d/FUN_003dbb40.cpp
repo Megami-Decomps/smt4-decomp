@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the FUN_002522e0 call differs (retail sets the path pointer first). */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 namespace {
 struct LoadedFile {
@@ -30,7 +31,6 @@ void textFormatBuffer(char *buffer, const char *format, const char *arg);
 char *libc_strcpy(char *dst, const char *src);
 char *FUN_002522e0(const char *string, s32 character);
 s32 keyedRecordFindByName(const char *name);
-void asdLoadFileAsyncSimple(const char *path, void **data, s32 flags);
 
 /* Reset the owner's file slot to the formatted path and start loading it unless it is already registered. */
 s32 FUN_003dbb40(LoadedFileOwner *owner)
@@ -54,7 +54,7 @@ s32 FUN_003dbb40(LoadedFileOwner *owner)
     char *fullPath = path;
     libc_strcpy(file->name, FUN_002522e0(fullPath, '/') + 1);
     if (keyedRecordFindByName(file->name) == 0xff) {
-        asdLoadFileAsyncSimple(fullPath, &file->data, 0);
+        asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&file->data), 0);
         file->flags |= 1;
     }
     return 1;

@@ -1,10 +1,10 @@
 /* NON_MATCHING: compiler folds retail's redundant literal-21-to-kind-five comparison (retail keeps `mov r0,#21; cmp r0,#21; moveq r0,#5`). */
 #include "common.h"
 #include "shard/W6_W6Match1_PositionedStream.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
 u32 scrGetCommandOwner(void);
-u32 scrGetArg(u32 index);
 u32 scrGetCommandFrame(void);
 u32 FUN_0021bdac(u32 context, s32 argument, s32 frame, s32 kind, s32 enabled, u32 flags);
 

@@ -185,7 +185,7 @@ code_r0x0032e870:
         iVar11 = 0;
         do {
           iVar13 = 0;
-          iVar6 = FUN_00184964(0,iVar3 - 1);
+          iVar6 = randBetween(0,iVar3 - 1);
           iVar7 = 0;
           do {
             if (aiStack_48[iVar7] == iVar6) goto code_r0x0032e99c;

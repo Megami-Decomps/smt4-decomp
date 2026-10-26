@@ -1,9 +1,9 @@
 #include "common.h"
-#include "shard/W6_W6Match8_LightUniforms.h"
+#include "util/ByteIsAtLeast100.h"
 
 extern "C" {
 
-u8 byteIsAtLeast100(u8 *value)
+u8 byteIsAtLeast100(const u8 *value)
 {
     return *value >= 100;
 }

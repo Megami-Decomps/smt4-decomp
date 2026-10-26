@@ -1,11 +1,11 @@
 /* NON_MATCHING: inbox-count load uses r1 instead of r0, avoiding retail's conditional pointer move. */
 #include "AsdSDK/Source/Net/Cec/AsdCec.h"
 #include "nn/Result.h"
+#include "shard/asdCecMessageBoxClose.h"
 
 extern "C" {
 extern AsdCecGlobals g_asdCec;
 s32 asdCecMessageBoxOpen(AsdCecMessageBox *, u32, u32);
-void asdCecMessageBoxClose(AsdCecMessageBox *);
 
 // Keep the inbox open only when it contains at least one message.
 u8 FUN_00280250(void)

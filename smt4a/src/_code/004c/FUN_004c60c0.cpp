@@ -8,7 +8,6 @@ struct Source4C;
 extern "C" {
 Source4C *FUN_003f0e20(BtlMainStateA *, u32);
 void source4CCopyHalves(Source4C *, u16 *);
-const Table04ExtraRecord *dataTable41FindById(u32);
 
 u32 FUN_004c60c0(u32 unitId, u32 property)
 {

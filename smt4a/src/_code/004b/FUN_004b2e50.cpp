@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "util/actorIsActive.h"
 
 extern "C" {
 
@@ -45,7 +46,6 @@ extern int vec2GetYInt(int);
 extern int gameGetSlotRecord(void);
 extern int gameGetSlotTable(void);
 /* Supplied declaration required: FUN_0035ae58. */
-extern int actorIsActive(void);
 extern int partySlotMatchesSelected(void);
 /* Supplied declaration required: FUN_003e503c. */
 /* Supplied declaration required: FUN_004b3a4c. */
@@ -117,8 +117,7 @@ void FUN_004b2e50(int param_1,int param_2,int param_3)
   temp_v9 = 0;
   do {
     acStack_58[temp_v9] = '\0';
-    FUN_003e503c(temp_v9 & 0xffff);
-    temp_v1 = actorIsActive();
+    temp_v1 = actorIsActive((void *)FUN_003e503c(temp_v9 & 0xffff));
     if (temp_v1 != 0) {
       acStack_58[temp_v9] = '\x01';
     }

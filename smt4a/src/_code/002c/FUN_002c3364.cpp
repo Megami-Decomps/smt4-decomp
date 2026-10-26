@@ -1,9 +1,9 @@
 #include "common.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
 void asdTMTexTableLoadSprites(s32 table);
-void asdTMTexLoadMainHeap(s32 table, s32 index);
 void loadSlotEnsureLoaded(s32 id);
 
 /* Prepares table 0x11, runs asdTMTexLoadMainHeap on its three entries and calls loadSlotEnsureLoaded(0x39). */

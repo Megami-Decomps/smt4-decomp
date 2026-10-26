@@ -36,18 +36,20 @@ typedef struct FadeJob {
 } FadeJob;
 
 extern RenderCtx *g_titleScene;
-FadeJob *jobGetWork(void);
+FadeJob *jobGetWork(u32 handle);
 void FUN_001a79a8(FadeJob *job);
 s32 FUN_002c5d80(u32 slot, u32 flags);
 void FUN_0033e160(u32 handle, s32 zero, s32 level, u8 *params, u32 color, u32 flag, FadeVec2 origin);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the fade job with temporary title-scene render states, when it has no pending request and is active. */
-u32 FUN_001e023c(void)
+u32 FUN_001e023c(u32 handle)
 {
-    FadeJob *job = jobGetWork();
-    if (job->pending == 0 && job->active != 0) {
+    FadeJob *job = jobGetWork(handle);
+    if (job->pending != 0) {
+        return 0;
+    }
+    if (job->active != 0) {
         if (job->initialized == 0) {
             FUN_001a79a8(job);
             job->initialized = 1;
@@ -63,7 +65,7 @@ u32 FUN_001e023c(void)
         FUN_0033e160(job->handle, 0, (s32)job->level, job->params, color, 0, job->origin);
         renderStackPop(&g_titleScene->additional.stackC);
         renderStackPop(&g_titleScene->stackA);
-        FUN_002c198c(g_titleScene);
+        renderCtxApplyTransforms(g_titleScene);
         FUN_002c18e4(g_titleScene);
     }
     return 0;

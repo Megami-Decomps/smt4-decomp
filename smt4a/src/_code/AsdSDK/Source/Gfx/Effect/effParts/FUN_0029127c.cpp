@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdLoadFileSyncDefault.h"
 #include "AsdSDK/Source/Gfx/Effect/effPartsBlock.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -60,7 +61,6 @@ typedef struct EffPartsFile {
     /* 0x88 */ u32 nodesOffset;
 } EffPartsFile;
 
-void *memAlloc(int heap, int alignClass, int unk08, u32 size, int align, int fromFront);
 void sysMemClear(void *block, s32 size);
 void FUN_001b4ddc(void *part);
 EffPartNode *FUN_003007a0(void);

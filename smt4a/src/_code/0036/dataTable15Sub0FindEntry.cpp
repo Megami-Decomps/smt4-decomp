@@ -7,7 +7,7 @@ struct StatusDescriptionRecord {
     char text[96];
 };
 
-static __inline StatusDescriptionRecord *findStatusDescriptionRecord(u32 id)
+static StatusDescriptionRecord *findStatusDescriptionRecord(u32 id)
 {
     void *table = dataTableGet(0x15, 0);
     StatusDescriptionRecord *records = (StatusDescriptionRecord *)dataTableGetEntries(table);

@@ -5,11 +5,11 @@ struct ResourceState {
     /* 0x0d */ s8 value;
 };
 extern "C" {
-ResourceState *FUN_001b2ca4(u32 id, u32 kind, u32 index);
+ResourceState *packageFindFileRefByName(u32 id, u32 kind, u32 index);
 /* Returns the resource value or zero if lookup fails. */
 s32 FUN_004706e8(u32 id, u32 index)
 {
-    ResourceState *resource = FUN_001b2ca4(id, 12, index);
+    ResourceState *resource = packageFindFileRefByName(id, 12, index);
     return resource ? resource->value : 0;
 }
 }

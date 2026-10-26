@@ -1,6 +1,7 @@
 #include "shard/W4_Match6_BtlEntry.h"
 #include "gamedata/Table04Record.h"
 #include "shard/W6_W6Match2_RankedTableRecord.h"
+#include "gamedata/DataTable40.h"
 
 struct BattleItemSkillRecordView {
     u8 unk00[0x62];
@@ -8,7 +9,6 @@ struct BattleItemSkillRecordView {
 };
 
 extern "C" {
-Table04Record *dataTable40FindById(s32 id);
 BattleItemSkillRecordView *dataTable08Sub1GetRecord(s32 id);
 }
 

@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "shard/lcgRandomRange.h"
 
 namespace {
 struct RandomPartyTargetMasks { u64 required, excluded; };
@@ -10,7 +11,6 @@ struct RandomPartyTargetMasks { u64 required, excluded; };
 extern "C" {
 extern RandomPartyTargetMasks DAT_00573c58;
 void __aeabi_memset4(void *memory, u32 bytes, s32 value);
-u32 lcgRandomRange(u16 upperBound);
 void FUN_004fdb18(s32 first, s32 second, BattleRosterRecordA *target, u32 effect, s32 mode);
 
 /* Independently select eligible party members, guaranteeing at least one target if any exist. */

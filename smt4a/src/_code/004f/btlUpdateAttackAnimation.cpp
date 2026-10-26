@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler hoists cue selection into flag branches and schedules target/stack operands differently; alternate optimization may fix the two extra rows. */
+/* NON_MATCHING: current/previous frame registers allocate r1/r0 instead of retail's r0/r1 (cascading into the cue-offset select registers); range-call arguments, loop count compare and stack setup match. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match2_AnimationVisualState.h"
 
@@ -63,19 +63,21 @@ void btlUpdateAttackAnimation(BtlAuxA *battle)
             step->previousFrame = 0;
         }
         BattleAnimationResource *resource = step->resource;
-        s16 frame = (s16)(step->loopLength * step->loopCount + current);
+        s32 loops = step->loopCount;
+        s16 frame = (s16)(step->loopLength * loops + current);
         if ((resource->flags & 1) && step->timing->endFrame <= frame &&
             !(step->flags & 0x2000)) {
             step->flags |= 0x2000;
         }
-        if (!(resource->flags & 1) && step->loopCount != 0) {
+        if (!(resource->flags & 1) && loops != 0) {
             step->flags |= 0x1000;
         }
-        BattleAnimationCue *cue = (resource->flags & 1) ?
-            &step->timing->looping : &step->timing->normal;
+        BattleAnimationCue *cue = &step->timing->looping;
+        if (!(resource->flags & 1)) {
+            cue = &step->timing->normal;
+        }
         if (cue->frame == frame) {
-            s32 target = step->target->index;
-            FUN_004f5238(battle, target, target, 6, 0, 3, 0, 1, 0,
+            FUN_004f5238(battle, step->target->index, step->target->index, 6, 0, 3, 0, 1, 0,
                          (f32)resource->x, (f32)resource->y);
         }
         FUN_004f6254(battle, frame, 2);

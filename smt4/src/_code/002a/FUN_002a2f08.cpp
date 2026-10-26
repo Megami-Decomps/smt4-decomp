@@ -17,13 +17,7 @@ FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request
     if (nnResultIsFailure(result))
         FUN_002c526c(result);
     FileQueueRequest *inserted;
-    if (queue->readIndex == queue->writeIndex) {
-        inserted = &queue->requests[queue->writeIndex];
-        nnnstdMemCpy(inserted, request, sizeof(*inserted));
-        queue->tailIndex = queue->writeIndex++;
-        if (queue->writeIndex >= 96)
-            queue->writeIndex = 0;
-    } else {
+    if (queue->readIndex != queue->writeIndex) {
         FileQueueRequest *previous = &queue->requests[queue->tailIndex];
         inserted = &queue->requests[queue->writeIndex];
         nnnstdMemCpy(inserted, request, sizeof(*inserted));
@@ -32,6 +26,12 @@ FileQueueRequest *FUN_002a2f08(FileQueue *queue, const FileQueueRequest *request
         if (queue->writeIndex >= 96)
             queue->writeIndex = 0;
         previous->next = inserted;
+    } else {
+        inserted = &queue->requests[queue->writeIndex];
+        nnnstdMemCpy(inserted, request, sizeof(*inserted));
+        queue->tailIndex = queue->writeIndex++;
+        if (queue->writeIndex >= 96)
+            queue->writeIndex = 0;
     }
     u32 previousCount;
     result = FUN_002c5254(&previousCount, *semaphore, 1);

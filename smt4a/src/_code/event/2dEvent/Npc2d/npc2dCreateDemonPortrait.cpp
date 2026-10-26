@@ -4,14 +4,10 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "shard/W6_W6Match8_NpcTextureEffect.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "gamedata/Table00Lookup.h"
 
-struct NpcPortraitRecordView {
-    u8 unk00[0x8c];
-    s16 portraitId;
-};
 extern "C" {
 void sysMemClear(void *memory, u32 size);
-const NpcPortraitRecordView *dataTable00FindById(u16 id);
 s32 FUN_00162ea4();
 NpcPortraitResource *FUN_00409fe8(s32 portraitId, s32 mode, s32 enabled);
 s32 FUN_002897cc(u32 handle);
@@ -37,7 +33,7 @@ u32 npc2dCreateDemonPortrait(u32 id, u32 option, s32 x, s32 y, f32 alpha)
     for (s32 i = 0; i < 6; ++i) {
         work->unk70[i] = 0;
     }
-    work->portraitId = dataTable00FindById((u16)id)->portraitId;
+    work->portraitId = dataTable00FindById((u16)id)->battleTexture.resourceId;
     if (FUN_00162ea4()) {
         work->resourceState = 1;
     } else {

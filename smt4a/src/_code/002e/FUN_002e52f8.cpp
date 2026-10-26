@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail loads the 1.0f/0.0f constants after jobGetWork into s0/s1; built hoists them into callee-saved s16/s17 and branches around the clamp (duplicating the jobGetWork call) */
 #include "common.h"
+#include "shard/JobWork.h"
 #include "util/CalleeContracts.h"
 
 extern "C" {
@@ -15,7 +16,6 @@ struct JobStepWork {
 };
 
 s32 scrGetArg(u32 index);
-JobStepWork *jobGetWork(u32 job);
 
 /* Script command: sets the job's start/step pair from a division count (capped at 4 when FUN_00203d74 is set). */
 u32 FUN_002e52f8(void)
@@ -26,7 +26,7 @@ u32 FUN_002e52f8(void)
     if (FUN_00203d74() != 0 && divisions > 4) {
         divisions = 4;
     }
-    JobStepWork *work = jobGetWork(job);
+    JobStepWork *work = (JobStepWork *)jobGetWork(job);
     if (divisions == 0) {
         work->range = Vec2(1.0f, 0.0f);
     } else {

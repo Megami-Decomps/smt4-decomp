@@ -17,7 +17,7 @@ typedef struct SaveStreamOwner {
     /* 0x08 */ SaveStream stream;
 } SaveStreamOwner;
 
-void *FUN_00254884(u32 id, u8 *buffer, s32 flags);
+void *pathBuildWide(u32 id, u8 *buffer, s32 flags);
 s32 FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
 
 static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
@@ -35,7 +35,7 @@ s32 FUN_001ff93c(SaveStreamOwner *owner, u32 id, s32 mode)
     u8 buffer[500];
     s32 result;
 
-    if (FUN_00254884(id, buffer, 1) == NULL) {
+    if (pathBuildWide(id, buffer, 1) == NULL) {
         result = 0xE0E046BC;
         FUN_002c3510(result);
         return result;

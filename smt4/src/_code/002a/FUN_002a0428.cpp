@@ -1,19 +1,14 @@
 #include "common.h"
+#include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
 
 int sceneNodeCollectionRegisterGroup(u32 a, u32 b);
 
-typedef struct Obj {
-    /* 0x0 */ u32 flags;
-    /* 0x4 */ u32 unk4;
-    /* 0x8 */ u32 unk8;
-} Obj;
-
-void FUN_002a0428(Obj *obj, u32 value)
+void FUN_002a0428(AsdMdlObject *model, u32 group)
 {
-    obj->flags = obj->flags & 0xffdfffff;
-    sceneNodeCollectionRegisterGroup(obj->unk8, value);
+    model->flags = model->flags & 0xffdfffff;
+    sceneNodeCollectionRegisterGroup(reinterpret_cast<u32>(model->node), group);
 }
 
 } /* extern "C" */

@@ -20,7 +20,6 @@ extern RenderCtxA *g_renderCtx;
 extern DebugSpatialBoundsQueue DAT_00611874;
 extern const DebugBoundsPalette DAT_00532240;
 u32 FUN_001692ac(u32, u32);
-void FUN_0016c4b8(RenderCtxA *, u32);
 void FUN_00280a08(u32, u32, u32, u32,
                  f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32, f32);
 
@@ -30,7 +29,7 @@ void FUN_00379a48(f32 height)
     if (DAT_00611874.count) {
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, FUN_001692ac(5, 1));
-        FUN_0016c4b8(g_renderCtx, 0);
+        renderCtxSelectTexture(g_renderCtx, 0);
         for (s32 index = 0; index < DAT_00611874.count; ++index) {
             const DebugSpatialBounds *bounds = &DAT_00611874.bounds[index];
             u32 color = palette.colors[index % 12] | 0x70;

@@ -1,34 +1,8 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00351f40` (_code @ 0x351f40, 0x38 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 extern "C" {
-
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern int DAT_004655f8; /* 0x4655f8 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_00351f40(unsigned int *param_1)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0xa0000;
-  software_interrupt(0x32);
-  temp_v0 = DAT_004655f8;
-  if (-1 < DAT_004655f8) {
-    *param_1 = *(unsigned int *)(temp_v1 + 0x88);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+extern u32 DAT_004655f8;
+/* Sends service command 10. */
+s32 FUN_00351f40(u32 *output) {nn::os::IpcCommandBuffer *command=nn::os::GetIpcCommandBuffer();nn::os::SetIpcWord(command, 0, 655360);s32 result=nn::svc::SendSyncRequest(DAT_004655f8);if (nnResultIsSuccess(result)){*output=command->words[1];result=command->words[0];}return result;}
 }
-
-} /* extern "C" */

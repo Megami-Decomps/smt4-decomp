@@ -15,9 +15,9 @@ typedef struct GameDataBlocksView {
 extern GameDataBlocksView g_gameDataBlocks;
 
 /* Returns the address of the member at 0x3E74 of the game-data table. */
-u8 *gameFlagsGetBlock(void)
+FlagWorkBanks *gameFlagsGetBlock(void)
 {
-    return g_gameDataBlocks.table->member3E74;
+    return reinterpret_cast<FlagWorkBanks *>(g_gameDataBlocks.table->member3E74);
 }
 
 } /* extern "C" */

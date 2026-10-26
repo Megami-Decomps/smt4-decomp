@@ -5,10 +5,10 @@
 extern "C" {
 
 int CONCAT44(double, double);
-int FUN_001fb4ec(void);
+int mapTableStepWave(void);
 int FUN_002aa18c(unsigned int);
 int FUN_002c0944(...);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -63,10 +63,10 @@ extern int DAT_0049fcb0; /* 0x49fcb0 */
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001fb4ec. */
+/* Supplied declaration required: mapTableStepWave. */
 /* Supplied declaration required: FUN_002aa18c. */
 /* Supplied declaration required: FUN_002c0944. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -126,7 +126,7 @@ void FUN_001fb5c4(void)
   if (DAT_00448c70 == 0) {
     return;
   }
-  FUN_001fb4ec();
+  mapTableStepWave();
   temp_v3 = g_titleScene;
   if (((int)DAT_00448c78 < 0x3f800000) &&
      (DAT_00448c78 = 1.0f / DAT_00448c7c + DAT_00448c78, (int)DAT_00448c78 >= 0x3f800001)) {
@@ -189,12 +189,12 @@ void FUN_001fb5c4(void)
       else if ((int)temp_v2 >= 0x100) {
         temp_v2 = 0xff;
       }
-      FUN_002c1b64(g_titleScene);
+      renderCtxSelectTexture(g_titleScene);
       FUN_002aa18c(temp_v2 | 0xffffff00);
     }
   }
   else {
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     temp_v43 = 0;
     temp_v3 = 2;
     while( 1 ) {

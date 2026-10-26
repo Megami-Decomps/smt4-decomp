@@ -22,7 +22,7 @@ u32 renderCtxBeginPass(void)
 
         FUN_002c35b0(1);
         scene = g_titleScene;
-        scene->unk528 = 1;
+        scene->stereoMode = 1;
         FUN_002bdb44();
         FUN_002c3530(1, 0);
         FUN_002c3a14(g_titleScene);

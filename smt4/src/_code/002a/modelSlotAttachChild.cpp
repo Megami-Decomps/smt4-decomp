@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail branches around the policy stores (strb before str, constant loaded inside the arm); the build predicates them and hoists the constant (policy symbol FUN_00155650 now correct) */
+/* NON_MATCHING: retail branches around the policy stores (strb before str, constant loaded inside the arm); the build predicates them and hoists the constant (policy symbol mathClampFloat now correct) */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/EffectEditor/EffectEditor.h"
 
@@ -25,7 +25,7 @@ void FUN_002cbaf8(u32 node, s32 index);
 void nw_gfx_SceneNode_AttachChild(u32 parent, u32 child);
 void FUN_00244d98(s32 index);
 
-extern PlayPolicy002a043c FUN_00155650;
+extern PlayPolicy002a043c mathClampFloat;
 
 /* Attaches the owner's child to model slot 0 or 1, sets the matching system flag and the player's default policy. */
 void modelSlotAttachChild(Owner002a043c *owner, s32 index)
@@ -40,7 +40,7 @@ void modelSlotAttachChild(Owner002a043c *owner, s32 index)
         player = owner->player;
         if (player != NULL) {
             player->policySet = 1;
-            player->policy = FUN_00155650;
+            player->policy = mathClampFloat;
         }
         FUN_00244d98(0);
         return;
@@ -51,7 +51,7 @@ void modelSlotAttachChild(Owner002a043c *owner, s32 index)
         player = owner->player;
         if (player != NULL) {
             player->policySet = 1;
-            player->policy = FUN_00155650;
+            player->policy = mathClampFloat;
         }
         FUN_00244d98(1);
     }

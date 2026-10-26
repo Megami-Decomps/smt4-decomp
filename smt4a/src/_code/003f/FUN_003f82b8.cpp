@@ -2,12 +2,8 @@
 /* NON_MATCHING: logic and call sequence match; retail keeps one more value live (constant 201 hoisted into r11 and x held in r6), so its register assignment and 12-byte frame differ from the build. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-struct SpriteFrame {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 struct RenderCtx;
 
@@ -32,7 +28,6 @@ s32 vec2GetXInt(const void *position);
 s32 vec2GetYInt(const void *position);
 f32 vec2GetSpeed(const void *position);
 void efctSetSpeed(f32 speed);
-SpriteFrame *asdTMTexTableEntryAt(u32 group, s32 sprite);
 void FUN_003f5b14(void *owner, s32 y, u32 color, s32 firstX, s32 secondX, f32 alpha);
 void FUN_003f5d94(void *owner, s32 x, s32 y, f32 alpha);
 void FUN_003f6e24(void *owner, s32 x, s32 y, f32 alpha);
@@ -75,7 +70,7 @@ void FUN_003f82b8(CampStatusScreen *screen)
         for (s32 i = 0; i < 8; i++) {
             s32 value = screen->scroll + i - screen->scrollBase;
             if (value >= 0) {
-                SpriteFrame *frame = asdTMTexTableEntryAt(49, 252 + i);
+                TextureTableEntryIV *frame = asdTMTexTableEntryAt(49, 252 + i);
                 FUN_00164168(screen->panel, frame->x + baseX + parallax, frame->y + y, 201, 6, value, speed);
             }
         }

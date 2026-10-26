@@ -1,5 +1,6 @@
 /* NON_MATCHING: register assignment only (151 rows each, every instruction and the schedule agree): retail keeps the owner in r7 and the list index in r5, the anchor in sl and the list base in fp; ours has owner r5, list r7, anchor fp and base sl. */
 #include "camp/RenderCtx.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #define SELECTOR_SLOT_COUNT 13
 
@@ -16,13 +17,6 @@ struct SelectorData {
     /* 0x60 */ u16 enabledMask;     /* bit i + 1 set: entry i is available */
 };
 
-/* Screen anchor of the selector, from asdTMTexTableEntryAt. */
-struct SelectorAnchor {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;           /* width, height */
-};
 
 /* The render context past its camp-era members: the stack the selector switches while drawing. */
 struct RenderCtxSelector {
@@ -34,7 +28,6 @@ extern "C" {
 
 extern RenderCtxSelector *g_renderCtx;
 
-SelectorAnchor *asdTMTexTableEntryAt(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
 void effectDispatchSelector(s16 entry, s32 x, s32 y, s32 kind, f32 scale);
 void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
@@ -43,7 +36,7 @@ void FUN_0035ae58(s32 x, s32 y, s32 width, s32 height, s32 flag);
  * past 20 frames, it also draws the next entry, sliding the pair together over a highlighted backdrop. */
 void FUN_004bda84(f32 scale, SelectorOwner *owner, SelectorData *data, s32 list, s32 x, s32 y)
 {
-    SelectorAnchor *anchor = asdTMTexTableEntryAt(0x11, 0x12);
+    TextureTableEntryIV *anchor = asdTMTexTableEntryAt(0x11, 0x12);
     s32 current = 0;
     s32 next = 0;
     u16 mask = data->enabledMask;
@@ -75,7 +68,7 @@ void FUN_004bda84(f32 scale, SelectorOwner *owner, SelectorData *data, s32 list,
             }
         }
         renderStackSet(&g_renderCtx->stack, 3);
-        FUN_0035ae58(anchor->x, anchor->y, anchor->size[0], anchor->size[1], 1);
+        FUN_0035ae58(anchor->x, anchor->y, anchor->placement->width, anchor->placement->height, 1);
         shift = (owner->pulse[list] - 20) * -3;
         nextShift = shift + 13;
         effectDispatchSelector(current, anchor->x + (shift + x), anchor->y + y, 0x7E, 1.0f);

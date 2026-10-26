@@ -1,14 +1,11 @@
 /* Tail call into the function that follows. */
-#include "common.h"
-#include "util/CalleeContracts.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
-void FUN_00180118(void);
-
-u32 FUN_00180114(unsigned arg0)
+Table01Record *FUN_00180114(u32 id)
 {
-    FUN_00180118();
+    return FUN_00180118(id);
 }
 
 }

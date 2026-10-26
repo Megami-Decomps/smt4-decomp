@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler folds the contiguous switch cases into a range test; retail uses a 12-entry jump table. */
 #include "common.h"
 
 extern "C" {
@@ -7,6 +6,8 @@ s32 FUN_00245cc0(u32 category)
 {
     s32 result = 0;
     switch (category) {
+    case 0: case 1: case 2: case 3: case 4: case 5: case 6:
+        break;
     case 7:
     case 8:
     case 9:

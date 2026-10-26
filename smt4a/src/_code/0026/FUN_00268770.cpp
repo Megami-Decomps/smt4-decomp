@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -92,7 +93,6 @@ extern int FUN_00167458(int, unsigned int);
 extern int ifTouchGetButtonHelpValue(void);
 /* Supplied declaration required: sysPlaySe. */
 /* Supplied declaration required: eventQueueAddUnique. */
-extern unsigned int FUN_00180114(unsigned short, short);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
@@ -1587,7 +1587,7 @@ LAB_0026adc4:
     }
     else {
       temp_v13 = *(unsigned short *)(temp_v6 + 0xf48);
-      temp_v7 = FUN_00180114(temp_v13,temp_v4);
+      temp_v7 = (unsigned int)FUN_00180114(temp_v13);
       temp_v12 = FUN_0014bf3c(temp_v13,0);
       textFormatBuffer(temp_v17,&LAB_0026b0dc,temp_v12,temp_v7);
       puVar16 = temp_v17;

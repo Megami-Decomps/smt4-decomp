@@ -4,9 +4,9 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
 s32 infoWindowUpdate(u32 job);
 s32 infoWinDraw(u32 job);
 u32 taskCreateDraw(const s8 *name, s32 priority, u16 startDelay, u16 endDelay,
@@ -16,7 +16,7 @@ void drawParameterBlockClear(UiResourceParameters *parameters);
 void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 id, UiResourceParameters *parameters, s32 flags, f32 scale);
 void timerStart(UiSpriteState *sprite, s32 mode, s32 frame);
 void *asdTextCreate(u32 flags);
-void FUN_002bd82c(void *text, u32 color);
+void asdTextSetBaseColor(void *text, u32 color);
 void positionStateSet(void *text, u32 mode, u32 color, f32 position);
 extern const u8 DAT_00403a04[];
 
@@ -51,7 +51,7 @@ void infoWindowCreate()
     timerStart(&setup->label, 2, 0);
     void *text = asdTextCreate(0);
     work->text = text;
-    FUN_002bd82c(text, 0xFFFFFFFF);
+    asdTextSetBaseColor(text, 0xFFFFFFFF);
     positionStateSet(work->text, 0, 0x646464FF, 0.0f);
     work->timer = 30;
 }

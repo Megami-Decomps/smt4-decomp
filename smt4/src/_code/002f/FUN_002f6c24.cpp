@@ -3,6 +3,7 @@
 #include "battle/btlMain.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 // Keep the unit prefix local: btlUnit.h imports a conflicting, shorter BtlMainState definition.
 struct ScriptCommandDataView {
@@ -26,7 +27,6 @@ static inline bool battleEntryCanBeTarget(u32 flags)
 }
 extern "C" {
 extern u32 g_btlScriptUnit;
-u32 scrGetArg(u32 argument);
 
 // Install the two scripted actions and mark up to two available enemy entries as targets.
 u32 FUN_002f6c24()

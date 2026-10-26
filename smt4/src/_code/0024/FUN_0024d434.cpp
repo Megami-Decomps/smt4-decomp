@@ -4,6 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
+#include "util/FUN_0027d9e8.h"
 
 /* Find the part occupied by a listed member, or -1 when it is absent. */
 static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
@@ -18,7 +19,6 @@ static inline s32 findBattleMemberPart(const BtlEntry *entry, s16 id)
 extern "C" {
 struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[50]; };
 BattleAnchorSource *FUN_0027da30(BtlMainState *state, s32 index);
-const EnemyDrawOffsetOwner *FUN_0027d9e8(BtlMainState *state, u32 part);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *state, s32 member);
 const BattleVector3 *FUN_002d8cc8(void *arrangement);
 Table00Record *dataTable00FindById(u32 id);
@@ -41,7 +41,7 @@ BattleVector3 FUN_0024d434(BtlMainState *state, s32 index, s32 forceEnemy)
         if (part < 0)
             part = 0;
         BattleAnchorSource *source = FUN_0027da30(state, index);
-        const EnemyDrawOffsetOwner *owner = FUN_0027d9e8(state, source->parts[part]);
+        const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(FUN_0027d9e8(state, source->parts[part]));
         ActionAnchorView *anchor = (ActionAnchorView *)action;
         btlEnemyDrawCalcVerticalOffset(owner, &position, anchor->scale);
         position.x += anchor->position.x;

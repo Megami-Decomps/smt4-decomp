@@ -1,8 +1,8 @@
 #include "shard/PassiveSkill.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
-const PassiveSkillRecord *dataTable41FindById(u32 id);
 
 void source4CCopyHalves(void *unit, u16 *skills);
 
@@ -17,7 +17,7 @@ s32 FUN_004c3d00(void *unit)
         source4CCopyHalves(unit, skills);
         for (s32 i = 0; i < 9; i++) {
             if (skills[i] != 0) {
-                const PassiveSkillRecord *record = dataTable41FindById(skills[i]);
+                const PassiveSkillRecord *record = reinterpret_cast<const PassiveSkillRecord *>(dataTable41FindById(skills[i]));
 
                 if (record != NULL) {
                     total += record->weighting.weight;

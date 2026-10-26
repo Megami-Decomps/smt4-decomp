@@ -1,9 +1,9 @@
 #include "battle/btlAIScript.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(int heap, int alignClass, int unk08, u32 size, int fromFront);
 void asdMemFree(void *block);
 void scrScriptProcessDestroy(void *process);
 u32 taskCreateDraw(const char *name, s32 priority, s32 a, s32 b, void (*update)(u32), void (*draw)(u32), void *owner, u32 id);

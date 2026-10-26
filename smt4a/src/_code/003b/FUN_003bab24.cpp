@@ -3,14 +3,8 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match5_CommonBackground.h"
 #include "Model/MoriModelShadowMap.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* Sprite description returned by asdTMTexTableEntryAt. */
-struct SpriteInfo {
-    u8 unk00[8];
-    s16 x;
-    s16 y;
-    s16 *size;
-};
 
 /* Draw arguments of the pivoted sprite call. */
 struct OverlayPivot {
@@ -35,7 +29,6 @@ extern "C" {
 s32 FUN_001692ac(u32 kind, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 screen, u32 table, u32 frame, s32 x, s32 y, u32 priority);
-const SpriteInfo *asdTMTexTableEntryAt(u32 table, u32 frame);
 void FUN_0032cdc8(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags, const OverlayPivot *pivot);
 void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
@@ -46,9 +39,9 @@ static void drawOverlay(CommonBackgroundOverlay *overlay)
     s32 x = overlay->x;
     efctSetSpeed(overlay->fade);
     FUN_00164b5c(2, 9, 3, x, y, 11);
-    const SpriteInfo *info = asdTMTexTableEntryAt(9, 0x35);
+    const TextureTableEntryIV *info = asdTMTexTableEntryAt(9, 0x35);
     OverlayPivot pivot = {64.0f, 1, 1};
-    FUN_0032cdc8(2, 9, 0x34, info->x + x + info->size[0] / 2, y + info->size[1] / 2 + info->y, 11, &pivot);
+    FUN_0032cdc8(2, 9, 0x34, info->x + x + info->placement->width / 2, y + info->placement->height / 2 + info->y, 11, &pivot);
     efctSetSpeed(1.0f);
 }
 

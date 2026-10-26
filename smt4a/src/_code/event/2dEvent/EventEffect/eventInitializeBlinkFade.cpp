@@ -3,6 +3,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 struct BlinkFadeWorkA {
     u32 job;
@@ -29,7 +30,6 @@ u32 taskCreateDraw(const char *name, s32 priority, u32 stack, u32 options,
                    u32 (*callback)(void), u32 context, u32 parameter, u32 parent);
 void *textureGetIndexedResource(u32 table);
 void asdTMTexTableLoadTmx(u32 table, u32 options);
-void asdTMTexLoadMainHeap(u32 table, u32 node);
 
 // Allocate the blink-fade controller, install its calculation/draw tasks and load textures.
 void eventInitializeBlinkFade(void)

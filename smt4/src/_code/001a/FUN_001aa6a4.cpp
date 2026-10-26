@@ -12,7 +12,7 @@ int FUN_002b2144(...);
 int cameraSetViewMatrix(...);
 int FUN_002ba1e0(...);
 int mtx44Copy(unsigned char [72], unsigned int);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [48], float *);
 int nn_math_ARMv6_MTX34InvTransposeAsm(unsigned char [68], unsigned char [48]);
@@ -74,7 +74,7 @@ extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34InvTransposeAsm. */
@@ -355,7 +355,7 @@ void FUN_001aa6a4(int param_1)
     nn_math_ARMv6_MTX44MultAsm(temp_v18,temp_v18,temp_v30);
   }
   cameraSetViewMatrix(g_titleScene,temp_v18);
-  FUN_002c1b64(g_titleScene,*(unsigned int *)(param_1 + 300));
+  renderCtxSelectTexture(g_titleScene,*(unsigned int *)(param_1 + 300));
   temp_v14 = temp_v10;
   temp_v15 = temp_v11;
   temp_v16 = temp_v10;

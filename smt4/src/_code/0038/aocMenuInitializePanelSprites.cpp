@@ -1,6 +1,7 @@
 /* NON_MATCHING: -O2 candidate; selector snapshot uses scalar word copies instead of LDM/STM, loop/zero scheduling differs, and a native pre-text-create no-op is absent. */
 #include "addon/aocMain.h"
 #include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "util/asdTextSetBaseColor.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include <string.h>
@@ -43,7 +44,6 @@ void uiSpriteSetImageKeyframe(UiAnimatedSprite *sprite, s32 keyframe, s32 restar
 void FUN_00295eb0(UiAnimatedSprite *sprite, u32 group, u32 id);
 void FUN_002ba78c(AocPanelList *list);
 AsdText *asdTextCreate(u32 flags);
-void FUN_002bd82c(AsdText *text, u32 color);
 void positionStateSet(AsdText *text, u32 first, u32 second, f32 scale);
 void uiInitializeEightTimerSet(void *selection);
 
@@ -66,7 +66,7 @@ void aocMenuInitializePanelSprites(void *context)
     work->list.flag415 = 0;
     ((AocPanelMainView *)g_aocMain)->flagb81 = 0;
     work->text = asdTextCreate(0);
-    FUN_002bd82c(work->text, 0x320202ff);
+    asdTextSetBaseColor(work->text, 0x320202ff);
     positionStateSet(work->text, 0, 0x646464ff, 0.0f);
     uiInitializeEightTimerSet(work->selectionState);
 }

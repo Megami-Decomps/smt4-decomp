@@ -8,8 +8,8 @@ int FUN_001c08ec(void);
 int flagsPackFourBooleans(...);
 int FUN_0023e024(...);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
-int FUN_002c1b64(...);
+int renderCtxApplyTransforms(...);
+int renderCtxSelectTexture(...);
 int FUN_002f5288(void *, int *);
 int packNibbleFields(...);
 int FUN_00343324(int, float *, int);
@@ -62,8 +62,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Supplied declaration required: FUN_0023e024. */
 extern int FUN_002865c0(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002f5288. */
@@ -266,7 +266,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  FUN_002c1b64(g_titleScene,0);
+  renderCtxSelectTexture(g_titleScene,0);
   FUN_001c08ec();
   temp_v0 = g_titleScene;
   piVar5 = (int *)(g_titleScene + 0x128c);
@@ -313,7 +313,7 @@ void FUN_00340c90(fn_00340c90_arg0 *param_1)
     (**(romwright_code **)(temp_v0 + 0x12c8))();
     *(unsigned char *)(temp_v0 + 0x12c4) = 0;
   }
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   FUN_002c18e4(g_titleScene);
   return;
 }

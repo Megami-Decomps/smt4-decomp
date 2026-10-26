@@ -18,10 +18,18 @@ struct ObjectBase {
     /* 0x38 */ s32 linkOffset;
 };
 
-static __inline ObjectBase *objectCast(ObjectBase *object, u32 requiredBits)
+static ObjectBase *objectCast(ObjectBase *object, u32 requiredBits)
 {
     if (object != NULL && (~object->typeBits & requiredBits) == 0) {
         return object;
+    }
+    return NULL;
+}
+
+static ObjectLink *objectGetLink(ObjectBase *object)
+{
+    if (object->linkOffset != 0) {
+        return (ObjectLink *)((u8 *)&object->linkOffset + object->linkOffset);
     }
     return NULL;
 }
@@ -37,11 +45,7 @@ void FUN_0036f830(ObjectBase *object)
 
     if (self->owner == NULL) {
         self->owner = object;
-        if (self->linkOffset != 0) {
-            link = (ObjectLink *)((u8 *)&self->linkOffset + self->linkOffset);
-        } else {
-            link = NULL;
-        }
+        link = objectGetLink(self);
         mode = self->mode;
         if (link->busy == 0) {
             if (mode == 0) {

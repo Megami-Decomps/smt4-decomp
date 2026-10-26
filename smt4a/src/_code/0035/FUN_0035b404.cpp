@@ -2,6 +2,7 @@
 #include "npc_shop/DevilMarket.h"
 #include "util/CalleeContracts.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 extern DevilMarketWork *DAT_0058812c;
@@ -13,7 +14,6 @@ void *asdOperatorNew(u32 size);
 s32 scrTransitionUpdate(void);
 s32 FUN_0036edf4(void);
 u32 taskCreateDraw(const char *, s32, u16, u16, s32 (*)(void), void (*)(u32), u32, u32);
-void asdLoadFileAsyncSimple(const char *name, void **destination, u32 flags);
 s32 loadSlotIsLoaded(u32 slot);
 void loadSlotRequestAsync(u32 slot, u32 flags);
 void campButtonHelpAcquire(void);
@@ -34,8 +34,8 @@ void FUN_0035b404(u32 argument)
     work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_00533250), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(scrTransitionUpdate), NULL, 0);
     taskCreateDraw(DAT_00533240, 235, 0, 0, FUN_0036edf4, NULL, 0, work->process);
     work->argument = argument;
-    asdLoadFileAsyncSimple(DAT_005331dc, &work->messages, 0);
-    asdLoadFileAsyncSimple(DAT_005331b8, &work->scriptFile, 0);
+    asdLoadFileAsyncSimple(DAT_005331dc, reinterpret_cast<u32 *>(&work->messages), 0);
+    asdLoadFileAsyncSimple(DAT_005331b8, reinterpret_cast<u32 *>(&work->scriptFile), 0);
     work->ownsLoadSlot = 0;
     if (!loadSlotIsLoaded(79)) {
         loadSlotRequestAsync(79, 0);

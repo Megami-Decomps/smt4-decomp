@@ -1,8 +1,10 @@
-/* NON_MATCHING: global matrix addresses fold into large offsets, changing base registers and VFP load scheduling; 107 vs 106 instructions, no stack matrix copy. */
+/* NON_MATCHING: base registers, offsets and instruction count match; only the VFP multiply/load scheduling of three early loads differs. */
 #include "shard/W8Match1_MatrixRotation.h"
 namespace {
-inline void premultiply(Matrix44 &right, const Matrix44 &left)
+void premultiply(const Matrix44 *leftMatrix, Matrix44 *rightMatrix)
 {
+    const Matrix44 &left = *leftMatrix;
+    Matrix44 &right = *rightMatrix;
     Matrix44 result = {{
         left.values[0]*right.values[0] + left.values[4]*right.values[1] + left.values[8]*right.values[2] + left.values[12]*right.values[3],
         left.values[1]*right.values[0] + left.values[5]*right.values[1] + left.values[9]*right.values[2] + left.values[13]*right.values[3],
@@ -34,6 +36,6 @@ void FUN_005145f4()
     struct MatrixCompositionView { MatrixRotationWork work; Matrix44 transform; };
     typedef char MatrixCompositionOffset[offsetof(MatrixCompositionView, transform) == 0x180 ? 1 : -1];
     MatrixCompositionView *view = reinterpret_cast<MatrixCompositionView *>(&DAT_006471dc);
-    premultiply(view->work.rotation, view->transform);
+    premultiply(&view->transform, &view->work.rotation);
 }
 }

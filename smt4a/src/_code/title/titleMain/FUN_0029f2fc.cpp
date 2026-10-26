@@ -4,6 +4,7 @@
 #include "gamedata/GameFlags.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "map/mapRndMaze.h"
+#include "util/FUN_0013def0.h"
 
 extern "C" {
 
@@ -79,7 +80,6 @@ extern int g_mapSelection; /* 0x5f1c98 */
 /* Supplied declaration required: ARM_common_memcpy4_9. */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: asdSequenceRequest. */
-extern int FUN_0013def0(unsigned int);
 /* Supplied declaration required: asdTMTexTableLoadTmx. */
 extern int gameDataBlocksGetSaveData(void);
 /* Supplied declaration required: FUN_001517b4. */
@@ -193,11 +193,11 @@ unsigned int FUN_0029f2fc(void)
     asdTMTexLoadMainHeap(0x2a,7);
     asdTMTexLoadMainHeap(0x2a,8);
     texEntrySpritesLoad();
-    temp_v5 = FUN_0013def0(0);
+    temp_v5 = (int)FUN_0013def0(0);
     if (temp_v5 != 3) {
       FUN_0022677c(0,0xff);
     }
-    temp_v5 = FUN_0013def0(1);
+    temp_v5 = (int)FUN_0013def0(1);
     if (temp_v5 != 3) {
       FUN_0022677c(1,0xff);
     }
@@ -622,8 +622,8 @@ LAB_0029fb00:
     break;
   case 10:
     *(unsigned char *)((int)DAT_00589170 + 99) = 0;
-    temp_v5 = FUN_0013def0(0);
-    if ((temp_v5 != 2) && (temp_v5 = FUN_0013def0(0), temp_v5 != 0)) {
+    temp_v5 = (int)FUN_0013def0(0);
+    if ((temp_v5 != 2) && (temp_v5 = (int)FUN_0013def0(0), temp_v5 != 0)) {
       FUN_003d54f8(0,10);
     }
     FUN_003d54f8(1,10);

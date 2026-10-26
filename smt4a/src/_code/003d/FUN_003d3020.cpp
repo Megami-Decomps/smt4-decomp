@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_001640cc(float *);
-int FUN_0016c4b8(unsigned int, unsigned int);
+int renderCtxSelectTexture(unsigned int, unsigned int);
 int FUN_002371b0(void);
 int gpuSubmitFloatVectorsOrDefault(float *);
 int FUN_0032c808(void);
@@ -64,7 +64,7 @@ static float romwright_fabs_4(float value)
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 extern unsigned int asdTMTexTableGetHeaderValue(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001640cc. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, int, unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
 /* Supplied declaration required: gpuSubmitFloatVectorsOrDefault. */
@@ -172,7 +172,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
   temp_v24 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v24 = temp_v24 * 0.003921569f;
   temp_v2 = asdTMTexTableGetHeaderValue(0xc,3);
-  FUN_0016c4b8(g_renderCtx,temp_v2);
+  renderCtxSelectTexture(g_renderCtx,temp_v2);
   VectorSignedToFloat(0x100 - param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v13 = temp_v25[2];
   FUN_001640cc(&temp_v21);
@@ -182,7 +182,7 @@ void FUN_003d3020(int param_1,int param_2,int param_3)
   temp_v22 = temp_v19;
   temp_v23 = temp_v19;
   temp_v1 = asdTMTexTableGetHeaderValue(0xc,2);
-  FUN_0016c4b8(g_renderCtx,temp_v1);
+  renderCtxSelectTexture(g_renderCtx,temp_v1);
   temp_v25[0] = -42.0f;
   temp_v25[1] = -42.0f;
   temp_v27 = temp_v25[2];

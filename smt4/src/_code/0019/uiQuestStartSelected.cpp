@@ -1,5 +1,6 @@
 /* NON_MATCHING: only the state-change stores differ: retail stores the previous state, then the new one with a writeback (str [r0,#8]; str [r0,#4]!) and the timer through that pointer; the build merges them into stm */
 #include "common.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ void gameGetOptionProgressStatus(void);
 void buttonHelpSetPreset(s32 preset);
 void spriteStartAnimationByIndex(u8 *panel, s32 value);
 s32 scrScriptProcessStartEntry(u32 script, s32 entry);
-s32 FUN_0029efa8(u8 *list);
 s32 FUN_0029efc0(u8 *list);
 
 extern UiQuest00199024 *g_uiQuest; /* 0x43dd50 */

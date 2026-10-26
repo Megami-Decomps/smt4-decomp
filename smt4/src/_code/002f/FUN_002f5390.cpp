@@ -34,7 +34,7 @@ extern StreamTemplate DAT_00420b20;
 u32 FUN_0024ab94(LocalStream *stream, u32 name, u32 mode);
 u32 FUN_001ff93c(LocalStream *stream);
 u32 FUN_002cbfe8(LocalStream *stream);
-u32 FUN_001ffaf0(LocalStream *stream);
+u32 requestSubmitRecordById(LocalStream *stream);
 u32 FUN_002102ec(LocalStream *stream, u32 offset, u32 buffer, u32 size);
 u32 FUN_001ff9f4(LocalStream *stream);
 u32 fileOwnerCloseA(LocalStream *stream);
@@ -60,20 +60,20 @@ u32 FUN_002f5390(s32 kind, u32 name, u32 buffer, u32 size)
         result = FUN_001ff93c(&stream);
     } else if (kind == 2) {
         result = FUN_002cbfe8(&stream);
-    } else if (kind == 3) {
-        result = FUN_001ffaf0(&stream);
-    } else {
+    } else if (!(kind == 3)) {
         result = STREAM_ERROR;
+    } else {
+        result = requestSubmitRecordById(&stream);
     }
     if (!resultFailed(result)) {
         if (kind == 0) {
             result = FUN_002102ec(&stream, 0, buffer, size);
         } else if (kind == 1) {
             result = FUN_001ff9f4(&stream);
-        } else if (kind == 3) {
-            result = FUN_001ffb70((PositionedStream *)&stream, 0, (void *)buffer, size);
-        } else {
+        } else if (!(kind == 3)) {
             result = STREAM_ERROR;
+        } else {
+            result = FUN_001ffb70((PositionedStream *)&stream, 0, (void *)buffer, size);
         }
         if (resultFailed(result)) {
             if (kind == 0) {

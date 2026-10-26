@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail addresses the grid fields through block+0xE00 held in a register and keeps constants in different s-registers; the build uses an extra saved register and frame word. Argument decode (position/size vectors, 20 integer arguments) taken from the retail asm. */
 #include "common.h"
 #include "Model/ModelList.h"
+#include "shard/gameFlagsGetBlock.h"
 
 struct MapPoint {
     f32 x, y, z;
@@ -22,7 +23,6 @@ struct MapFlagsBlock {
 };
 
 extern "C" {
-MapFlagsBlock *gameFlagsGetBlock(void);
 s32 FUN_002393cc(s32 scene);
 f32 mathPositionHeadingDegrees(MapPoint from, MapPoint to);
 f32 calcHeadingRoundedToCardinalDirection(f32 heading);
@@ -35,7 +35,7 @@ void sceneRegisterBoxEffect(s32 a, s32 b, const char *name, s32 c, s32 d, s32 e,
 /* Place the fountain box effect in front of the map target, facing along the rounded cardinal heading. */
 void FUN_00332fd8(void)
 {
-    MapFlagsBlock *block = gameFlagsGetBlock();
+    MapFlagsBlock *block = reinterpret_cast<MapFlagsBlock *>(gameFlagsGetBlock());
     if (block->effectActive == 0)
         return;
     s32 gridX = block->gridX;

@@ -3,7 +3,7 @@
 
 extern "C" {
 typedef f32 (*AnimationPolicy)(void *context, f32 start, f32 end, f32 frame);
-f32 FUN_00155650(void *context, f32 start, f32 end, f32 frame);
+f32 mathClampFloat(void *context, f32 start, f32 end, f32 frame);
 f32 nw_anim_PlayPolicy_Loop(void *context, f32 start, f32 end, f32 frame);
 }
 
@@ -91,7 +91,7 @@ void FUN_00263988(ModelSwitcher *switcher, s32 motion)
     case 0: {
         FUN_002e1230(switcher->models[switcher->modelIndex], 0);
         AnimationPlayer *player = switcher->slots[switcher->current]->player;
-        player->policy = FUN_00155650;
+        player->policy = mathClampFloat;
         player->dirty = 1;
         asdModelSlotSetTint(0, 0, TintColor(1.0f, 1.0f, 1.0f, 1.0f));
         asdModelSlotSetColor(0, 0, 0.3f, 0.3f, 0.3f);
@@ -100,7 +100,7 @@ void FUN_00263988(ModelSwitcher *switcher, s32 motion)
     case 1: {
         FUN_002e1230(switcher->models[switcher->modelIndex], 0);
         AnimationPlayer *player = switcher->slots[switcher->current]->player;
-        player->policy = FUN_00155650;
+        player->policy = mathClampFloat;
         player->dirty = 1;
         asdModelSlotSetTint(0, 0, TintColor(0.6f, 0.6f, 0.6f, 1.0f));
         asdModelSlotSetColor(0, 0, 0.1f, 0.1f, 0.1f);

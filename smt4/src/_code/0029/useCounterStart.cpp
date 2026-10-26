@@ -2,10 +2,10 @@
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
 #include "status/StatusCamera.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 void uiSpriteSetImageKeyframe(UiSpriteState *, s32, s32);
-void FUN_0029eb5c(void *);
 s32 FUN_0028d594(void);
 s32 buttonHelpGetSecondaryState(void);
 const char *buttonHelpGetLayoutEntry(u32);
@@ -37,7 +37,7 @@ void useCounterStart(void)
         s32 count = work->count;
         for (s32 index = 0; index < count; ++index) {
             if (work->values[index] == (*value & 0x7f)) {
-                FUN_0029eb5c(work->selection);
+                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(work->selection), index);
                 break;
             }
         }

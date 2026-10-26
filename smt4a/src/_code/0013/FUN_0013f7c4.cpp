@@ -4,6 +4,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -23,7 +24,6 @@ int FUN_001678a8(int);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int FUN_00180310(...);
-int asdTMTexTableEntryAt(...);
 int FUN_00183bb0(void);
 int drawSetColorFromRGBA8(...);
 int VectorSignedToFloat(...);
@@ -60,7 +60,6 @@ extern unsigned int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 
@@ -121,27 +120,27 @@ unsigned int FUN_0013f7c4(void)
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
     FUN_00183bb0();
-    temp_v4 = asdTMTexTableEntryAt(8,200);
+    temp_v4 = (int)asdTMTexTableEntryAt(8,200);
     FUN_00164b5c(2,8,10,*(short *)(temp_v4 + 8) + temp_v1,*(short *)(temp_v4 + 10) + temp_v2,0xb);
     temp_v3 = *(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x78);
     FUN_0015f858(temp_v3,0);
     textFormatBuffer(temp_v9,&LAB_0013fbb4,temp_v3);
-    temp_v5 = asdTMTexTableEntryAt(8,0xc2);
+    temp_v5 = (int)asdTMTexTableEntryAt(8,0xc2);
     VectorSignedToFloat((int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                         (unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v9,(int)*(short *)(temp_v4 + 8));
-    temp_v5 = asdTMTexTableEntryAt(8,0xc1);
+    temp_v5 = (int)asdTMTexTableEntryAt(8,0xc1);
     uiDrawItemCategoryIcon((int)(short)*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x78),
                  (int)*(short *)(temp_v4 + 8) + (int)*(short *)(temp_v5 + 8) + temp_v1,
                  (int)*(short *)(temp_v5 + 10) + (int)*(short *)(temp_v4 + 10) + temp_v2,0x10,0);
     drawSetColorFromRGBA8(0xffffffff);
-    temp_v5 = asdTMTexTableEntryAt(8,0xc6);
+    temp_v5 = (int)asdTMTexTableEntryAt(8,0xc6);
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,1,4,0x10,
                  &LAB_0013fbbc,*(unsigned int *)((*(int *)((unsigned char *)&g_messageMain + 0x8)) + 0x7c));
-    temp_v5 = asdTMTexTableEntryAt(8,199);
+    temp_v5 = (int)asdTMTexTableEntryAt(8,199);
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v4 + 8) + temp_v1,
                  (int)*(short *)(temp_v4 + 10) + (int)*(short *)(temp_v5 + 10) + temp_v2,0,1,0x10,
                  &LAB_0013fbc0);
@@ -157,7 +156,7 @@ unsigned int FUN_0013f7c4(void)
     renderStackPushIndexed(g_renderCtx,3,temp_v3);
     efctSetSpeed();
     FUN_00183bb0();
-    temp_v5 = asdTMTexTableEntryAt(8,0xc0);
+    temp_v5 = (int)asdTMTexTableEntryAt(8,0xc0);
     FUN_00164b5c(2,8,0x11,*(short *)(temp_v5 + 8) + temp_v2,*(short *)(temp_v5 + 10) + temp_v4,0xb);
     FUN_00169e38(*(unsigned short *)(temp_v1 + 0x15c),*(short *)(temp_v5 + 8) + temp_v2,
                  *(short *)(temp_v5 + 10) + temp_v4,0);
@@ -177,10 +176,10 @@ unsigned int FUN_0013f7c4(void)
       temp_v6 = temp_v6 / 10;
     } while (temp_v6 != 0);
     if (temp_v1 >= 0) {
-      temp_v1 = asdTMTexTableEntryAt(8,0x65 - temp_v1);
+      temp_v1 = (int)asdTMTexTableEntryAt(8,0x65 - temp_v1);
     }
     else {
-      temp_v1 = asdTMTexTableEntryAt(8,0x5d);
+      temp_v1 = (int)asdTMTexTableEntryAt(8,0x5d);
     }
     drawSetColorFromRGBA8(0xff);
     FUN_00180310(0,(int)*(short *)(temp_v5 + 8) + (int)*(short *)(temp_v1 + 8) + temp_v2,

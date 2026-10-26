@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the values in caller-saved VFP registers across the angle-difference call (needs multifile mathAngleDeltaDegrees), and uses s1 for the 0.0 constant. */
+/* NON_MATCHING: retail uses s1 for the 0.0 constant; the build uses s2. */
 #include "common.h"
 
 extern "C" f32 mathAngleDeltaDegrees(f32, f32);

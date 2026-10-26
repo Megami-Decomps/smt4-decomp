@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc lowers the four-state switch to a comparison chain; retail uses a four-entry jump table. */
 #include "font/SearchWin/RunWin.h"
 
 extern "C" {
@@ -32,6 +31,8 @@ extern "C" s32 FUN_00208984(void)
             work->active = 0;
             work->state = 4;
         }
+        break;
+    case 4:
         break;
     }
     ++work->counter;

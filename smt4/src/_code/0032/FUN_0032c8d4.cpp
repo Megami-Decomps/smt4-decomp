@@ -724,7 +724,7 @@ code_r0x0032d518:
           FUN_002c1658();
           if (iVar7 != 0) {
             campReleaseScreenTouchRegions(puVar17 + 0x90);
-            FUN_003ac468();
+            countdownSetModeFive();
             puVar17[7] = puVar17[7] + 1;
             uVar18 = 0x100016e;
           }

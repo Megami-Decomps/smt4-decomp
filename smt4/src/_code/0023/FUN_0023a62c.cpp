@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail 62 vs built 62 rows; texture-field store ordering and saved integer/VFP register allocation differ. */
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
 AsdTexture *asdTextureCreate(s32);
 f32 FUN_002a66e0(u32, u32, u32 *);
-u32 FUN_002c2424(const void *, u32);
 u32 osVirtToPhysAddress(const void *);
 
 __softfp void FUN_0023a62c(AsdTextureRegion *region, s32 textureWidth, s32 textureHeight,
@@ -25,7 +25,7 @@ __softfp void FUN_0023a62c(AsdTextureRegion *region, s32 textureWidth, s32 textu
     f32 bytesPerPixel = FUN_002a66e0(format, type, &region->texture->image.hardwareFormat);
     u32 bytes = static_cast<u32>(static_cast<f32>(region->texture->dimensions.width *
                                                region->texture->dimensions.height) * bytesPerPixel);
-    FUN_002c2424(region->texture->storage.pixels, bytes);
+    FUN_002c2424((u32)(region->texture->storage.pixels), bytes);
     region->texture->image.physicalAddress = osVirtToPhysAddress(region->texture->storage.pixels);
     region->scale = 1.0f;
     region->flags[0] = 0;

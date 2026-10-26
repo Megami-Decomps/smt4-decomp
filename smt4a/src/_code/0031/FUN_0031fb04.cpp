@@ -6,6 +6,7 @@
 #include <stddef.h>
 #include "camp/Config/Config.h"
 #include "gamedata/DataTableSections.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 /* The memory mapped for the loader thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -74,7 +75,6 @@ s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void FUN_002e3140(s32 result, bool failed);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
-void asdMemFree(void *block);
 void FUN_00408184(s32 id, s32 value);
 void resourceOwnerReleaseAndReset(u32 registry);
 void uniteCameraDestroy(void);

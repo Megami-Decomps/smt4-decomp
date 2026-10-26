@@ -5,7 +5,7 @@
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
 
 extern "C" {
-s32 jyoucyuGetTableEntry(u32 index);
+u32 jyoucyuGetTableEntry(s32 index);
 void FUN_00143800(void);
 void asdSoundDuckSetup(f32 level, s32 enable, u32 holdFrames,
                        u32 mode, u32 fadeInFrames, u32 fadeOutFrames);

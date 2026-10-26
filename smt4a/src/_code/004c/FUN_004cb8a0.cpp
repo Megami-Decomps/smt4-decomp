@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero uses a core register rather than retail's VFP register, with different global aliasing and store scheduling. */
+/* NON_MATCHING: progress/counter are floats now (vstr of s0 matches); retail reads the reset flag from the global's address and the transition values through a second pointer copy (add r1,r2,#0), keeps the shared stores before the branch tail and returns inline. */
 #include "shard/W6_W6Match7_BattleEffects.h"
 
 struct TransitionGlobals {
@@ -16,9 +16,9 @@ struct TransitionView {
     u32 first; // 0xb0
     u8 unkb4[0x10];
     u32 second; // 0xc4
-    u32 counter; // 0xc8
+    f32 counter; // 0xc8
     u8 unkcc[0x30];
-    u32 progress; // 0xfc
+    f32 progress; // 0xfc
     u32 target; // 0x100
 };
 
@@ -36,14 +36,14 @@ void FUN_004cb8a0(TransitionView *state)
         state->first = first;
         state->second = second;
         state->state = 2;
-        state->progress = 0;
-        state->counter = 0;
+        state->progress = 0.0f;
+        state->counter = 0.0f;
     } else if (state->state != 2) {
         state->target = second;
         state->first = first;
         state->second = second;
         state->state = 2;
-        state->progress = 0;
+        state->progress = 0.0f;
     }
 }
 }

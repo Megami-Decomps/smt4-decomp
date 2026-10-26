@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
@@ -9,8 +10,9 @@ typedef struct Pair {
 } Pair;
 
 /* Sets the first word to `first` and the second to -1. */
-void pairSetFirstResetSecond(Pair *object, u32 first)
+void pairSetFirstResetSecond(void *handle, u32 first)
 {
+    Pair *object = static_cast<Pair *>(handle);
     object->first = first;
     object->second = 0xFFFFFFFF;
 }

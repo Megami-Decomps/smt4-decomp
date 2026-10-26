@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00178a54(unsigned int, unsigned int);
+int indexedResourceQuery(unsigned int, unsigned int);
 
 typedef int romwright_code(...);
 /* stack frame of param_3: 1 slot(s), 4 byte(s) */
@@ -12,7 +12,7 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_00178a54. */
+/* Supplied declaration required: indexedResourceQuery. */
 
 
 void FUN_0015fe40(int param_1,unsigned int param_2,unsigned int param_3)
@@ -30,7 +30,7 @@ void FUN_0015fe40(int param_1,unsigned int param_2,unsigned int param_3)
      ) {
     return;
   }
-  FUN_00178a54(*(unsigned int *)(param_1 + 4),param_2);
+  indexedResourceQuery(*(unsigned int *)(param_1 + 4),param_2);
   return;
 }
 

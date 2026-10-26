@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail push {r4, r5, r6, r7, r8, r9} differs from recovered ldr ip, [pc, #148]. */
+/* NON_MATCHING: the padding words are now stored as constants (stm) and the saved-register set matches retail; the global/cursor pointers are allocated to different registers (retail ip/r4, build r4/r5). */
 #include "common.h"
 
 struct CommandBufferStateView {
@@ -43,8 +43,9 @@ void FUN_001376d8(u32* commandOffset, u32* commandSize,
 
     if ((usedBytes & 8) != 0 &&
         reinterpret_cast<u32>(cursor) < g_commandBufferEnd) {
-        const CommandPaddingView padding = { 0, 0x0008025E };
-        *reinterpret_cast<CommandPaddingView*>(cursor) = padding;
+        CommandPaddingView* padding = reinterpret_cast<CommandPaddingView*>(cursor);
+        padding->unk00 = 0;
+        padding->unk04 = 0x0008025E;
         g_commandBufferCursor = cursor + 2;
     }
 

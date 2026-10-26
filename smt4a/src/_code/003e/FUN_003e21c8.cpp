@@ -64,7 +64,7 @@ extern void *g_btlCamera;            /* 0x571508 */
 
 void __aeabi_memcpy4(void *dest, const void *src, u32 bytes);
 void FUN_003f0c78(EncounterContextA *context);
-void FUN_003f0b80(EncounterContextA *context);
+void battleRestoreCameraVectors(EncounterContextA *context);
 void words10CopyHighToLow(void *camera);
 s32 FUN_003e0f94(BattleEncounterQuery *query, EncounterContextA *context);
 void FUN_003e0bb8(BattleEncounterQuery *query, EncounterContextA *context);
@@ -114,7 +114,7 @@ void FUN_003e21c8(BattleEncounterQuery *query, EncounterContextA *context)
         __aeabi_memcpy4(context->recordTable, data, count * 0x18);
     }
     FUN_003f0c78(context);
-    FUN_003f0b80(context);
+    battleRestoreCameraVectors(context);
     words10CopyHighToLow(g_btlCamera);
     result = FUN_003e0f94(query, context);
     if (result == 1 || result == 2 || result == 5) {

@@ -1,5 +1,6 @@
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // Private view of the fields used by this routine.
 struct BattleCameraOwnerView {
@@ -16,7 +17,6 @@ void scrDestroyActive();
 void* taskCreateDraw(const char* name, s32 priority, s32 arg2, s32 arg3,
                      void (*update)(), void (*destroy)(),
                      BattleCameraOwnerView* owner, u32 ownerValue);
-void* asdMemAlloc(u32 size, u32 alignment, u32 flags, u32 tag, u32 count);
 void FUN_003d5830(void* storage, BattleCameraOwnerView* owner);
 
 // Create the camera draw task, allocate shared storage if needed, then initialize it.

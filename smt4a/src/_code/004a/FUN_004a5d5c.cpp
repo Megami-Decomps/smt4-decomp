@@ -1,4 +1,4 @@
-/* NON_MATCHING: selected preview and sound behavior restored; owner subobject bases, register allocation and clear-panel tail placement differ. */
+/* NON_MATCHING: block pointer and mode swap saved registers (r7/r8) and the clear-panel tail is placed after the selection sounds instead of before the special-sound arm. */
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -48,7 +48,7 @@ void FUN_004a5d5c(ItemListSelectionOwner *owner)
     CachedPreviewView *cache = reinterpret_cast<CachedPreviewView *>(owner);
     PreviewBlock *block = &work->block;
     if (block->entries[0].count != 0) {
-        PreviewEntry *entries = block->entries;
+        PreviewEntry *entries = work->block.entries;
         u32 id = entries[flaggedValueHolderGetTotal(work->cursor)].id;
         if (entries[flaggedValueHolderGetTotal(work->cursor)].enabled == 0)
             id = 0;

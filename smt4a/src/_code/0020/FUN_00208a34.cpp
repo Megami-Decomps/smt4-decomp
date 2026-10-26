@@ -1,6 +1,7 @@
 #include "ui/ScreenWindowTransition.h"
 #include "gamedata/DataTable.h"
 #include "addon/aocMain.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 extern "C" {
 extern ScreenWindowTransition *g_sWin;
 extern AocSystemA *g_aocSystem;
@@ -10,7 +11,6 @@ s32 FUN_002321f8(const void *key, const void *entry);
 void *libc_bsearch(const void *key, const void *entries, u32 count, u32 size, s32 (*compare)(const void *, const void *));
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 enabled);
 void FUN_001a6568(AocSystemA *system, s32 table, s32 node, u32 heap);
-void asdTMTexLoadMainHeap(s32 table, s32 node);
 
 /* Select a new screen-window skin, loading its texture from base or add-on content. */
 void FUN_00208a34(s32 window, u32 flags)

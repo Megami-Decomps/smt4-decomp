@@ -1,11 +1,26 @@
-/* NON_MATCHING: retail emits 'ldr r1, [pc, #44]'; compiler emits 'ldr r2, [pc, #44]' at the first differing instruction. */
+/* NON_MATCHING: both fields live behind g_gameGlobals.work (single global now); retail loads the pointer twice (no CSE) and addresses the 0x2018 byte as register + literal. */
 #include "common.h"
+
+namespace {
+struct MessageWork {
+    u8 unk0000[0x1383];
+    u8 flag;
+    u8 unk1384[0x2018 - 0x1384];
+    u8 kind;
+};
+struct GlobalsWithWork {
+    u32 unk00;
+    MessageWork *work;
+};
+}
+
 extern "C" {
-extern struct { u8 unk00[0x1383]; u8 flag; } *g_videoGlobals;
-extern struct { u32 reserved; struct { u8 unk00[0x2018]; u32 kind; } *work; } g_messageState;
-void FUN_002c85b0(u32 value) {
-    g_videoGlobals->flag = value == 8;
+extern GlobalsWithWork g_gameGlobals;
+
+void FUN_002c85b0(u32 value)
+{
+    g_gameGlobals.work->flag = value == 8;
     if (value == 8) value = 3;
-    g_messageState.work->kind = value;
+    g_gameGlobals.work->kind = value;
 }
 }

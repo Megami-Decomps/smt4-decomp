@@ -338,7 +338,8 @@ struct ScalarDirtyWork {
     /* 0x00 */ u8 unk00[0x64];
     /* 0x64 */ f32 previous;
     /* 0x68 */ f32 value;
-    /* 0x6C */ u32 flags;
+    /* 0x6C */ u16 flags;
+    /* 0x6E */ u8 unk6E[2];
 };
 
 struct VectorDefaultsState {

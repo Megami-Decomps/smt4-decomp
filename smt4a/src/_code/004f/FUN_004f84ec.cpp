@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the order of `mov r1, #47` against `mov r0, r5` before the FUN_00100d60 call differs (retail sets the path pointer first). */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 
@@ -31,7 +32,6 @@ void asdMemFree(void *block);
 s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *FUN_00100d60(const char *string, s32 c);
-s32 findRecordByKey(const char *name);
 
 /* Resets the owner's effect slot to "ef_d_niyari" and starts loading its file unless a record already provides it. */
 u32 FUN_004f84ec(EffectOwner *owner)

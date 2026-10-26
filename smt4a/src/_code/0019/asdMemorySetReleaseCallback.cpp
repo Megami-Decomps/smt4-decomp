@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler merges cached region bases into LDM and changes the saved allocation/guard registers; O2 has the same difference. */
+/* NON_MATCHING: only the registers of the two range-end sums differ (retail adds into r5/ip, the build reuses the loaded size register). */
 #include "common.h"
 
 struct AllocationCallbackHeader {
@@ -25,11 +25,11 @@ extern "C" AllocationAddressRanges g_allocationAddressRanges;
 // Only ordinary allocations have the prefix/header that can hold a release callback.
 extern "C" u32 asdMemorySetReleaseCallback(void* allocation, const void* callback, void* argument)
 {
-    u32 address = (u32)allocation;
-    u32 firstBase = g_allocationAddressRanges.firstBase;
-    u32 secondBase = g_allocationAddressRanges.secondBase;
-    if ((firstBase <= address && address <= firstBase + g_allocationAddressRanges.firstSize) ||
-        (secondBase <= address && address <= secondBase + g_allocationAddressRanges.secondSize)) {
+    const AllocationAddressRanges* ranges = &g_allocationAddressRanges;
+    u32 firstBase = ranges->firstBase;
+    u32 secondBase = ranges->secondBase;
+    if ((firstBase <= (u32)allocation && (u32)allocation <= firstBase + ranges->firstSize) ||
+        (secondBase <= (u32)allocation && (u32)allocation <= secondBase + ranges->secondSize)) {
         return 0;
     }
     AllocationPrefix* prefix = (AllocationPrefix*)allocation - 1;

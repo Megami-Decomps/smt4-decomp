@@ -1,10 +1,10 @@
 /* NON_MATCHING: retail wraps the allocator call in an inlined debug trace (file/line pool loads and a nop) that plain source cannot express, which shifts register use and scheduling; retail 155 vs built 148 rows, 194 diff lines. */
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
-void *asdMemAlloc(int, int, int, s32 size, int);
 void *fileLoadSync(char *path, u8 *size, u32 flags);
 TexFile *asdTMTexTableLoadTmx(s32 idx, u32 flags);
 char *FUN_0010024c(char *str, u32 ch);

@@ -1,13 +1,13 @@
 /* NON_MATCHING: retail keeps the constant 6 in a callee-saved register across the calls (the built code loads it just before the last call) */
 #include "ui/MessageMain.h"
 #include "util/CalleeContracts.h"
+#include "script/ScriptArgs.h"
 extern "C" MessageGlobalsA g_messageMain;
 
 extern "C" {
 
 void eventTexRequestStopAll(void);
 u32 scrGetCommandOwner(void);
-s32 scrGetArg(...);
 u32 scrGetCommandFrame(void);
 void FUN_0021bdac(u32 a, u32 b, u32 frame, u8 state, s32 wait, s32 flags);
 

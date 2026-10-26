@@ -6,7 +6,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_001640cc(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int renderCtxCalculateStereoParallax(...);
 int camSetMatrixA(...);
 int FUN_0019ac70(...);
@@ -51,7 +51,7 @@ extern float DAT_0064c01c; /* 0x64c01c */
 #endif
 /* Supplied declaration required: FUN_001640cc. */
 extern unsigned int asdGxPresetsGetByKind(unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern unsigned int asdGxPresetsGetHeightByKind(unsigned int);
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
 /* Supplied declaration required: camSetMatrixA. */
@@ -233,7 +233,7 @@ unsigned int FUN_0019b770(unsigned short *param_1,unsigned int *param_2,int para
   temp_v11 = (float)VectorSignedToFloat(0x100 - param_2[3],(unsigned char)(in_fpscr >> 0x16) & 3);
   temp_v19 = CONCAT44(temp_v11 * 0.00390625f,temp_v18);
   if ((temp_v5 & 0x40000000) == 0 && param_4 == 0) {
-    FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_3 + 8),temp_v6,temp_v8);
+    renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(param_3 + 8),temp_v6,temp_v8);
   }
   puVar12 = (unsigned int *)0x0;
   temp_v21 = (unsigned int *)0x0;

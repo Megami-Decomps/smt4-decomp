@@ -1,5 +1,5 @@
 #include "camp/RenderCtx.h"
-#include "shard/renderCtxCalculateStereoParallax.h"
+#include "gfx/StereoParallax.h"
 
 extern "C" {
 s32 FUN_002c5210(void);
@@ -7,8 +7,9 @@ u32 FUN_002c15ac(u32 index);
 f32 nn_ulcd_CTR_StereoCamera_GetParallax(void *camera, f32 value);
 
 // Transform and clamp a stereo depth before applying the active eye's parallax scale.
-f32 renderCtxCalculateStereoParallax(RenderCtx *context, f32 value)
+f32 renderCtxCalculateStereoParallax(void *handle, f32 value)
 {
+    RenderCtx *context = static_cast<RenderCtx *>(handle);
     f32 result = 0.0f;
     s32 mode = context->stereoMode;
     if (mode == 2 || FUN_002c5210() != 1) {

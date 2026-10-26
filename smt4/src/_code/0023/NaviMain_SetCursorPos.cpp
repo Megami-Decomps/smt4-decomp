@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler emits separate cursor-coordinate loads instead of retail LDM. */
+/* NON_MATCHING: compiler emits separate cursor-coordinate loads (member-wise copy) or ldrd/strd (struct copy) instead of retail's ldm followed by two str. */
 #include "common.h"
 extern "C" {
 struct CursorPoint { u32 x,y; };

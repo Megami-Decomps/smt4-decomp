@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail emits 'mov r1, r0'; compiler emits 'mov r1, r0' at the first differing instruction. */
+/* NON_MATCHING: retail loads g_messageMain's work pointer into r0 right after the owner call and again just before the call (the global is read through a reloaded base); the build hoists it through r2/ip. */
 #include "common.h"
 extern "C" {
 extern struct {

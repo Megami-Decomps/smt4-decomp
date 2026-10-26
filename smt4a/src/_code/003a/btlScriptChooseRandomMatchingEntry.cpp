@@ -10,7 +10,7 @@ s32 scrGetArg(s32 index);
 s32 FUN_002b54a0(BtlCombatantEntryA *, u32 condition);
 BtlCombatantEntryA *FUN_003eaf20(BtlMainStateA *);
 u32 randRange(u16 maximum);
-void scrSetResult(u32 result);
+void scrSetResult(s32 result);
 
 // Pick a random battle entry satisfying the current masks and script-supplied condition.
 u32 btlScriptChooseRandomMatchingEntry(void)

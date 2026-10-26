@@ -1,23 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035ae94` (_code @ 0x35ae94, 0x1c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* Returns the result of the following function for 1 << n, or an error code if n is out of range. */
+#include "common.h"
 
 extern "C" {
 
-int FUN_00128d24(int);
+u32 FUN_00128d24(u32 mask);
 
-/* Supplied declaration required: FUN_00128d24. */
-
-
-void FUN_0035ae94(unsigned int param_1)
-
+u32 FUN_0035ae94(u32 n)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 < 4) {
-    FUN_00128d24(1 << (param_1 & 0xff));
-    return;
-  }
-  return;
+    if (n >= 4) {
+        return 0xd8e06bed;
+    }
+    return FUN_00128d24(1 << n);
 }
 
-} /* extern "C" */
+}

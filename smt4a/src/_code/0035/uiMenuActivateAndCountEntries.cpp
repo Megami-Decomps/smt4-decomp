@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail uses `mov r3, #1` where armcc emits `mov r1, #1`. */
 #include "common.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
+#include "util/FUN_002a4878.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ struct MenuState {
     /* 0x38b4 */ u8 unk38b4[8];
     /* 0x38bc */ MenuItem items[1];
 };
-s32 FUN_002a4878(MenuItem *item);
 void FUN_003756c8(s32 enabled);
 void FUN_0020ad6c(MenuState *menu, s32 kind, s32 enabled);
 

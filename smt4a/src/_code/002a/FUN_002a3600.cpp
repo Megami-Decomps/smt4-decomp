@@ -4,6 +4,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/W6_W6Match7_QuadVectors.h"
 #include "Model/MoriModelShadowMap.h"
+#include "util/skinObjectUpdateMatrices.h"
 
 extern "C" {
 extern CommonBgGlobals g_commonBg;
@@ -11,7 +12,6 @@ s32 FUN_001692ac(s32 enabled, s32 mode);
 void FUN_00164b5c(u32 screen, u32 table, u32 image, s32 x, s32 y, u32 flags);
 void quadSetOrderedVectors(const QuadVector *first, const QuadVector *second,
     const QuadVector *third, const QuadVector *fourth, s32 mode, s32 enabled);
-void skinObjectUpdateMatrices(RenderCtxA *context);
 void renderCtxResetColorScale(RenderCtxA *context);
 
 s32 FUN_002a3600()
@@ -37,7 +37,7 @@ s32 FUN_002a3600()
             FUN_00164b5c(2, 9, 0, 0, 0, 1);
         }
         renderStackPop(&g_renderCtx->stackA);
-        skinObjectUpdateMatrices(g_renderCtx);
+        skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
         renderCtxResetColorScale(g_renderCtx);
     }
     return 0;

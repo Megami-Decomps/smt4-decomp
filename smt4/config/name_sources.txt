@@ -4172,3 +4172,51 @@
 002e44a8 btlTalkBustupMatchesDevil inferred [med] true when the devil record's bust-up id equals the current talk bust-up's devil id
 00298d98 gameGetSavedRecordOrFallback inferred [med] returns the game-data block record for index 0/1, otherwise the supplied fallback
 0023a1f8 queryFailureResultOrZero inferred [med] returns the failure result of queryResultFailureOnly, 0 on success
+002c1b64 renderCtxSelectTexture inferred [high] applies an AsdTexture (width/height/format/address) as the context's selected texture when it changed, then switches the texture binding on/off; twin of smt4a FUN_0016c4b8
+002c198c renderCtxApplyTransforms inferred [med] rebuilds dirty/non-identity transform matrices of the render context and applies the combined matrix
+002bd82c asdTextSetBaseColor inferred [high] stores color with the low byte cleared into AsdText.color (default color)
+00254884 pathBuildWide inferred [med] twin of smt4a FUN_002e0e04
+002a6acc dateConvertDaysToCalendar inferred [high] epoch day count to Gregorian year/month/day outputs
+0017fa28 packBytesToBigEndianHalfword inferred [high] ((high<<8)&0xFF00)|(low&0xFF)
+002ca6e0 callbackStateEnable inferred [med] sets DAT_0044e110->enabled = 1
+00155650 mathClampFloat inferred [high] twin of smt4a mathClampFloat (both IDENTICAL)
+00238998 idChainMatchSequence inferred [high] twin of smt4a idChainMatchSequence (both IDENTICAL)
+002b4748 itemCategoryFindByItemId inferred [high] twin of smt4a itemCategoryFindByItemId (both IDENTICAL)
+002bbe30 mathCopyIdentityMatrix inferred [high] twin of smt4a mathCopyIdentityMatrix (both IDENTICAL)
+002bff10 stateValuesGetBySelector inferred [high] twin of smt4a stateValuesGetBySelector (both IDENTICAL)
+002cda20 keyedRecordFindPart inferred [high] twin of smt4a keyedRecordFindPart (both IDENTICAL)
+002d042c sortEntryComparePriorityThenKeys inferred [high] twin of smt4a sortEntryComparePriorityThenKeys (both IDENTICAL)
+002fb330 aocFindSupplementalRecordIndex inferred [high] twin of smt4a aocFindSupplementalRecordIndex (both IDENTICAL)
+002fc5f8 bustupConfigureSlotTransition inferred [high] twin of smt4a bustupConfigureSlotTransition (both IDENTICAL)
+0034f7ec callbackResetStateCountAndPending inferred [high] twin of smt4a callbackResetStateCountAndPending (both IDENTICAL)
+0034f8e8 uiCreateRequestObject inferred [high] twin of smt4a uiCreateRequestObject (both IDENTICAL)
+00351b50 resourceSlotRelease inferred [high] twin of smt4a resourceSlotRelease (both IDENTICAL)
+00352078 ipcRequest04Forward inferred [high] twin of smt4a ipcRequest04Forward (both IDENTICAL)
+003535d8 windowGetOperationFailure inferred [high] twin of smt4a windowGetOperationFailure (both IDENTICAL)
+00354d38 fileHolderTryRead inferred [high] twin of smt4a fileHolderTryRead (both IDENTICAL)
+00355e5c vcallSlot0With3 inferred [high] twin of smt4a vcallSlot0With3 (both IDENTICAL)
+0035be38 lexerReadHexDigits inferred [high] twin of smt4a lexerReadHexDigits (both IDENTICAL)
+0039411c statusDecodeActivityState inferred [high] twin of smt4a statusDecodeActivityState (both IDENTICAL)
+003ead80 slistPushFrontIfNotNull inferred [high] twin of smt4a slistPushFrontIfNotNull (both IDENTICAL)
+003f72b4 variantCopy inferred [high] twin of smt4a variantCopy (both IDENTICAL)
+0011b930 clearU64 inferred [med] sig-matched twin of smt4a clearU64 (both IDENTICAL, same code)
+0014490c valueChainInit inferred [med] sig-matched twin of smt4a valueChainInit (both IDENTICAL, same code)
+00150f84 wordsFlagClear inferred [med] sig-matched twin of smt4a wordsFlagClear (both IDENTICAL, same code)
+00151b78 compareRecordKey inferred [med] sig-matched twin of smt4a compareRecordKey (both IDENTICAL, same code)
+001fb4ec mapTableStepWave inferred [med] sig-matched twin of smt4a mapTableStepWave (both IDENTICAL, same code)
+002d0520 uiCompareBytePriorityAndKey inferred [med] sig-matched twin of smt4a uiCompareBytePriorityAndKey (both IDENTICAL, same code)
+0035bdfc halfSourceNext inferred [med] sig-matched twin of smt4a halfSourceNext (both IDENTICAL, same code)
+0037e094 wordByteClear inferred [med] sig-matched twin of smt4a wordByteClear (both IDENTICAL, same code)
+003d6f98 transitionClearAxisVectors inferred [med] zeroes both axis vectors and clears update flag
+002dfe64 mapIfDestroyModelSlots inferred [med] marks both map model-slot managers destroyed and clears active
+003ac468 countdownSetModeFive inferred [high] g_countdown.state->mode = 5
+0010f7b8 requestForwardKindFive inferred [med] forwards request with options {5,0,0}
+001ffaf0 requestSubmitRecordById inferred [med] loads id record into scratch buffer, clears owner request words, submits with mode 2 for kind 1 else 1
+0034791c texturedQuadSetCentered inferred [high] rebuilds a centred quad from half-extents (twin of smt4a FUN_00415310)
+003d88a0 transitionResetPosition inferred [med] clears the transition position vector and frame, sets update flag
+00205a90 partyPanelRefreshItemPreview inferred [med] refreshes item preview values for character/demon widgets then positions selection marker
+00339de0 battleSaveCameraVectors inferred [med] copies the battle main vector pair and value into the owner snapshot
+002dcf9c packedKeyCompareByPrimaryThenSecondary inferred [med] orders packed 64-bit keys by descending 15-bit primary then ascending secondary
+002ca6f8 soundTestDrawJobUpdate inferred [med] sound-test "ST Draw" job callback that only reaches a removed debug hook and returns 0
+001e9508 mapMainDrawOrdinaryPass inferred [med] "MAP U" draw job: draws the ordinary-map pass with a temporary render state
+0010df80 asdSoundGetOutputSlotFlag inferred [med] flag byte of output slot 0/1 of the sound system, 0 when absent

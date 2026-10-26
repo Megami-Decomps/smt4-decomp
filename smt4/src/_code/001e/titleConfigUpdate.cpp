@@ -2,6 +2,7 @@
 #include "title/titleConfig.h"
 #include "font/SearchWin/RunWin.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 extern "C" {
 extern TitleConfigCallbackView *g_titleConfig;
@@ -37,7 +38,6 @@ void workCommandRefreshActiveSlots(void);
 u32 FUN_002bfdc4(void);
 void FUN_002bfc24(u32 player, u32 sound, u32 bank, u32 priority);
 s32 FUN_0029efd8(void *cursor, u32 enabled);
-void FUN_0029eb5c(void *cursor, s32 selection);
 void scrScriptProcessStartEntry(void *process, u32 entry);
 void timerStart(void *window, s32 period, s32 value);
 void FUN_002ad8b4(TitleConfigValues *values, const void *saved);
@@ -147,7 +147,7 @@ u32 titleConfigUpdate(void)
         for (s32 index = 0; index < 3; ++index) {
             if (index != current && ifTouchGetSelectionModeForRegion(work->buttons[index]) == 6) {
                 eventQueueAddUnique(0x100016C);
-                FUN_0029eb5c(work->cursor, index);
+                FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(work->cursor), index);
                 selected = FUN_0029efc0(g_titleConfig->cursor);
                 selected += FUN_0029efa8(g_titleConfig->cursor);
                 const TitleConfigHelpEntry *help = dataTableGetEntries(dataTableGet(0x3A, 1));

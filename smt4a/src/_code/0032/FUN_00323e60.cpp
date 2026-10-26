@@ -6,7 +6,7 @@
 #include "util/CalleeContracts.h"
 
 extern "C" {
-EffEmitter *FUN_003a1ef4(EffEmitterDesc *descriptor);
+EffEmitter *effEmitterCreateSmall(EffEmitterDesc *descriptor);
 EffEmitter *effEmitterAllocate(u32 count);
 void polygonTrackRebuildResources(ResourceEmitter *emitter, u32 id, const EmitterArguments *arguments);
 void objectBufferFree(void *buffer);
@@ -28,7 +28,7 @@ static __inline EffParticleParam *requestParameter(EmitterResourceRequest *reque
 EffEmitter *FUN_00323e60(EmitterResourceRequest *request)
 {
     EffEmitterDesc *descriptor = (EffEmitterDesc *)request->source->data;
-    EffEmitter *emitter = FUN_003a1ef4(descriptor);
+    EffEmitter *emitter = effEmitterCreateSmall(descriptor);
     polygonTrackRebuildResources((ResourceEmitter *)emitter, request->source->id, &request->arguments);
     u32 kind = request->source->id;
     if (emitter->particle.buffer != NULL) {

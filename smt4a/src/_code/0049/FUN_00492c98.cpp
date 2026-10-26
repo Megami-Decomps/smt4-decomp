@@ -1,12 +1,11 @@
 /* NON_MATCHING: retail passes nontrivial quad-color values through four extra stack copies; the current pointer contract omits those copies. */
-#include "shard/S1ListPanel.h"
 #include "gfx/SpriteVertexColors.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 f32 jobGetScalarValue();
 void efctSetSpeed(f32 scale);
-SpriteInfo *asdTMTexTableEntryAt(u32 table, s32 index);
 void FUN_00185dd4(u32 flags, u32 table, s32 index, u32 second, u32 third,
     u32 firstExtra, u32 secondExtra, u32 fourth);
 void vectorSetAllOne(QuadVector *value);
@@ -20,8 +19,8 @@ void FUN_00492c98(u32 flags, u32 table, s32 index, u32 second, u32 third,
     u32 firstExtra, u32 secondExtra, u32 fourth, s32 useColors)
 {
     f32 previousScale = jobGetScalarValue();
-    SpriteInfo *sprite = asdTMTexTableEntryAt(table, index);
-    ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->size);
+    TextureTableEntryIV *sprite = asdTMTexTableEntryAt(table, index);
+    ItemSpriteExtension *extension = reinterpret_cast<ItemSpriteExtension *>(sprite->placement);
     if (extension != NULL && extension->mode == 1) {
         FUN_00185dd4(flags, table, index, second, third, firstExtra, secondExtra, fourth);
         return;
@@ -29,12 +28,12 @@ void FUN_00492c98(u32 flags, u32 table, s32 index, u32 second, u32 third,
     if (useColors && extension != NULL) {
         QuadVector colors[4];
         __aeabi_vec_ctor_nocookie_nodtor(colors, vectorSetAllOne, sizeof(QuadVector), 4);
-        colors[0] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[0];
-        colors[1] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[1];
-        colors[2] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[2];
-        colors[3] = reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colors[3];
+        colors[0] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[0];
+        colors[1] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[1];
+        colors[2] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[2];
+        colors[3] = reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colors[3];
         quadSetOrderedVectors(&colors[0], &colors[1], &colors[2], &colors[3], 0, 0);
-        efctSetSpeed(reinterpret_cast<ItemSpriteExtension *>(sprite->size)->colorScale);
+        efctSetSpeed(reinterpret_cast<ItemSpriteExtension *>(sprite->placement)->colorScale);
     }
     texTableRecordCallExtended(flags, table, index, second, third, firstExtra, secondExtra, fourth);
     efctSetSpeed(previousScale);

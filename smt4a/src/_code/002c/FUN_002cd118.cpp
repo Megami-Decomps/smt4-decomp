@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail unrolls the 0xFFFF fill by two and keeps panel+0x2400 bases (r7/r8) in registers; the build's loop, constants and register use differ. */
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 /* A sprite widget (0x8C bytes). */
 struct SpriteWidget {
@@ -18,7 +19,6 @@ struct StatusPanel {
 
 extern "C" {
 void uiSpriteSelectAnim(SpriteWidget *widget, s32 animation);
-void pairSetFirstResetSecond(SpriteWidget *widget, s32 value);
 s32 FUN_00291e14(void);
 
 /* Reset the party panel's rows and set each row's sprites for the current display variant. */

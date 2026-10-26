@@ -1,4 +1,4 @@
-/* NON_MATCHING: the four-way switch on the value type is compiled as a compare chain; retail uses a jump table (and shares the int-to-float conversion of cases 0 and 2, loading 0.0f first). */
+/* NON_MATCHING: jump table and shared conversions now match; the tag byte is loaded as [slot, tags] in retail but [tags, slot] here. */
 #include "script/ScriptVm.h"
 
 extern "C" {
@@ -9,19 +9,25 @@ f32 scrPopFloat(ScriptVmProcess *process)
 {
     u8 *tags = process->tags;
     s32 slot = --process->depth;
+    f32 result = 0.0f;
 
     switch (tags[slot]) {
     case SCRIPT_VM_TAG_INT:
-        return (f32)process->values[slot].i;
+        result = (f32)process->values[slot].i;
+        break;
     case SCRIPT_VM_TAG_FLOAT:
-        return process->values[slot].f;
+        result = process->values[slot].f;
+        break;
     case SCRIPT_VM_TAG_INT_VAR:
-        return (f32)g_scrIntVars[process->values[slot].i];
+        result = (f32)g_scrIntVars[process->values[slot].i];
+        break;
     case SCRIPT_VM_TAG_FLOAT_VAR:
-        return g_scrFloatVars[process->values[slot].i];
-    default:
-        return 0.0f;
+        result = g_scrFloatVars[process->values[slot].i];
+        break;
+    case 4:
+        break;
     }
+    return result;
 }
 
 } /* extern "C" */

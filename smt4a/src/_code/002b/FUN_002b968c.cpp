@@ -7,7 +7,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_0014e314(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int FUN_0019af70(unsigned int);
 int mapTableStepWave(void);
 int VectorSignedToFloat(...);
@@ -66,7 +66,7 @@ extern int DAT_005f1c10; /* 0x5f1c10 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e314. */
 extern int FUN_001692ac(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0019af70. */
 /* Supplied declaration required: mapTableStepWave. */
 
@@ -189,12 +189,12 @@ void FUN_002b968c(void)
       else if ((int)temp_v2 >= 0x100) {
         temp_v2 = 0xff;
       }
-      FUN_0016c4b8(g_renderCtx);
+      renderCtxSelectTexture(g_renderCtx);
       FUN_0019af70(temp_v2 | 0xffffff00);
     }
   }
   else {
-    FUN_0016c4b8(g_renderCtx,0);
+    renderCtxSelectTexture(g_renderCtx,0);
     temp_v43 = 0;
     temp_v3 = 2;
     while( 1 ) {

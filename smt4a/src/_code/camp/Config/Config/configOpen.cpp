@@ -4,13 +4,13 @@
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 #include "AsdSDK/Source/Sys/Gx/AsdGxRenderSystem.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 extern ConfigWorkA *g_config;
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 tracked);
 void sysMemClear(void *memory, u32 size);
 void asdTMTexTableLoadSprites(u32 id);
-void asdTMTexLoadMainHeap(u32 id, u32 node);
 void loadSlotEnsureLoaded(u32 id);
 void sysPlaySe(u32 id);
 void FUN_0019de98(u32 index, u32 color);

@@ -3,6 +3,7 @@
 #include "battle/btlAIScript.h"
 #include "script/scrScriptProcess.h"
 #include "quest_center/qcCtrl.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct BtlMainStateA;
 extern "C" {
@@ -10,7 +11,6 @@ void asdMemFree(void *data);
 void scrScriptProcessDestroy(void *process);
 ScriptRunState *FUN_00275bc8(void *data, s32 mode);
 void scrScriptProcessStartEntry(void *process, s32 entry);
-void asdLoadFileAsyncSimple(const char *path, void **data, s32 mode);
 s32 scrRunOpcodesStub(void *process);
 s32 FUN_003efb18(BtlMainStateA *battle);
 extern BtlAiScriptAocSystem *g_aocSystem;
@@ -26,7 +26,7 @@ s32 FUN_003e688c(BtlAiScript *runner)
             aocQueueType1d(reinterpret_cast<u32>(g_aocSystem), g_aocSystem->aiDemonId, reinterpret_cast<u32>(&runner->data), reinterpret_cast<u32>(runner->path));
             g_aocSystem->aiDemonId = -1;
         } else {
-            asdLoadFileAsyncSimple(runner->path, &runner->data, 0);
+            asdLoadFileAsyncSimple(runner->path, reinterpret_cast<u32 *>(&runner->data), 0);
         }
         if (FUN_003efb18(btlGetMainState()) == 0) {
             runner->unk0C = 2;

@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00145e24(int, unsigned int);
 int FUN_00157558(int);
 int memAlloc(int, int, int, int);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int asdMemFree(void);
 int FUN_002371b0(void);
 int effectSubmitDefaultVectors(void);
@@ -52,7 +52,7 @@ extern unsigned int FUN_00152f54(void);
 /* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: memAlloc. */
 extern int FUN_001692ac(unsigned int);
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: asdMemFree. */
 extern unsigned int FUN_001c5b4c(unsigned int);
 /* Supplied declaration required: FUN_002371b0. */
@@ -214,7 +214,7 @@ joined_r0x003a122c:
         (**(romwright_code **)(temp_v2 + 0x1274))();
         *(unsigned char *)(temp_v2 + 0x1270) = 0;
       }
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       VectorSignedToFloat((int)((unsigned long long)temp_v13 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)((unsigned long long)temp_v12 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -243,7 +243,7 @@ joined_r0x003a122c:
       temp_v4 = FUN_001c5b4c(temp_v7);
       FUN_002a1850(&temp_v15,0,temp_v4);
       FUN_002a1850(&temp_v18,0,temp_v4,&temp_v18);
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       FUN_00157558(g_renderCtx);
       FUN_0032c810((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
@@ -257,7 +257,7 @@ joined_r0x003a122c:
       temp_v7 = FUN_00152f54();
       FUN_002a1850(&temp_v15,0,temp_v7,param_2 + 2);
       temp_v17 = 0;
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       FUN_0032c808();
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
@@ -290,7 +290,7 @@ joined_r0x003a122c:
       }
       VectorSignedToFloat(*puVar11,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(puVar11[1] + 0xea,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_0016c4b8(g_renderCtx,temp_v7,puVar11[1] + 0xea);
+      renderCtxSelectTexture(g_renderCtx,temp_v7,puVar11[1] + 0xea);
       temp_v0 = *(short *)(puVar11 + 0x11);
       if (temp_v0 != 1) {
         if (temp_v0 != 2) {
@@ -309,7 +309,7 @@ joined_r0x003a122c:
     case 0xc:
       temp_v7 = param_2[6];
       temp_v12 = *(unsigned long long *)(param_2 + 2);
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       temp_v15 = 0xffffffff;
       temp_v16 = 0xff64646;
       FUN_003762c0((int)(float)temp_v12,(int)(float)((unsigned long long)temp_v12 >> 0x20),0x80);
@@ -317,9 +317,9 @@ joined_r0x003a122c:
       temp_v16 = 0xff000000;
       FUN_003762c0((int)((float)temp_v12 + 48.0f),(int)((float)((unsigned long long)temp_v12 >> 0x20) + 48.0f),0x20
                   );
-      FUN_0016c4b8(g_renderCtx,temp_v7);
+      renderCtxSelectTexture(g_renderCtx,temp_v7);
       effectSubmitDefaultVectors();
-      FUN_0016c4b8(g_renderCtx,0);
+      renderCtxSelectTexture(g_renderCtx,0);
       FUN_0032c810(0xffffffff);
       FUN_0032c810(0xffffffff);
       FUN_0032c810(0xff0000ff);

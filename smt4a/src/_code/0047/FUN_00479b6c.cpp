@@ -11,7 +11,7 @@ int textDrawString(...);
 int mathInterpolateTimed(...);
 int FUN_00164b5c(...);
 int efctSetSpeed(void);
-int FUN_0016c4b8(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int FUN_0017ffa8(...);
 int asdTMTexTableEntryAt(...);
 int effectSubmitDefaultVectors(int, int);
@@ -49,7 +49,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: mathInterpolateTimed. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_0017ffa8. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: effectSubmitDefaultVectors. */
@@ -107,7 +107,7 @@ void FUN_00479b6c(int param_1,int param_2,int param_3,int param_4)
       temp_v4 = asdTMTexTableEntryAt(0x2f,0x5f);
       temp_v1 = *(short *)(temp_v4 + 8);
       temp_v2 = *(short *)(temp_v4 + 10);
-      FUN_0016c4b8(g_renderCtx,*(unsigned int *)(temp_v3 + 0x9c4));
+      renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(temp_v3 + 0x9c4));
       temp_v4 = temp_v8 + temp_v2;
       temp_v6 = temp_v9 + temp_v1;
       VectorSignedToFloat(temp_v4,(unsigned char)(in_fpscr >> 0x16) & 3);

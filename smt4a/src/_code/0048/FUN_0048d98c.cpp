@@ -9,7 +9,7 @@ int FUN_00183bb0(void);
 
 int FUN_0014e314(...);
 int FUN_001692ac(...);
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int renderCtxPopState(...);
 int renderStackPushIndexed(...);
 int drawSetColorFromRGBA8(...);
@@ -40,7 +40,7 @@ extern unsigned char DAT_00616ee4; /* 0x616ee4 */
 /* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0014e314. */
 /* Supplied declaration required: FUN_001692ac. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxPopState. */
 /* Supplied declaration required: renderStackPushIndexed. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -109,7 +109,7 @@ void FUN_0048d98c(int param_1)
           (**(romwright_code **)(temp_v4 + 0x1274))();
           *(unsigned char *)(temp_v4 + 0x1270) = 0;
         }
-        FUN_0016c4b8(g_renderCtx,0);
+        renderCtxSelectTexture(g_renderCtx,0);
         temp_v12 = 0;
         temp_v4 = temp_v16;
         temp_v2 = temp_v16;
@@ -204,7 +204,7 @@ void FUN_0048d98c(int param_1)
   if (DAT_005f1c60 != '\0') {
     temp_v12 = FUN_001692ac(1,0);
     renderStackPushIndexed(g_renderCtx,3,temp_v12);
-    FUN_0016c4b8(g_renderCtx,0);
+    renderCtxSelectTexture(g_renderCtx,0);
     temp_v6 = 0;
     if (0 < *piVar9) {
 LAB_0048ddd4:

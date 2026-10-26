@@ -3,15 +3,15 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "event/2dEvent/2dEventTex.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "shard/FUN_00164b5c.h"
 
 extern "C" {
 
 int textFormatBuffer(unsigned char [64], unsigned char *);
 int textDrawString(...);
-int FUN_00164b5c(int, int, int, int, int, int);
 int efctSetSpeed(void);
 int FUN_00180310(...);
-int asdTMTexTableEntryAt(...);
 int uiDrawDataEntryRow(...);
 int FUN_0022f9c8(...);
 int FUN_0023dcec(...);
@@ -37,10 +37,8 @@ extern unsigned char LAB_00285f24; /* 0x285f24 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: textDrawString. */
-/* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00180310. */
-/* Supplied declaration required: asdTMTexTableEntryAt. */
 extern int uniteGetWork(void);
 /* Supplied declaration required: uiDrawDataEntryRow. */
 /* Supplied declaration required: FUN_0022f9c8. */
@@ -89,14 +87,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     efctSetSpeed();
     FUN_00164b5c(2,0x1a,1,param_1,param_2,0x65);
     FUN_001835b4(2,0x1a,0x8a,param_1,param_2,0x65);
-    temp_v1 = asdTMTexTableEntryAt(0x1a,0x49);
+    temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x49);
     textFormatBuffer(temp_v11,&LAB_00285eec);
     VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
     textDrawString(2,0xffffffff,temp_v11);
     temp_v2 = computeCountLimit();
     if (temp_v2 >= 999) {
-      temp_v1 = asdTMTexTableEntryAt(0x1a,0x279);
+      temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x279);
       textFormatBuffer(temp_v11,&LAB_00285f14);
       VectorSignedToFloat(*(short *)(temp_v1 + 10) + param_2,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(*(short *)(temp_v1 + 8) + param_1,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -106,14 +104,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
       temp_v2 = computeCountLimit();
       if (temp_v2 >= 100) {
         FUN_001835b4(2,0x1a,0x4a,param_1,param_2,0x65);
-        temp_v1 = asdTMTexTableEntryAt(0x1a,0x253);
+        temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x253);
         temp_v3 = computeCountLimit();
         FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,3,0x65,
                      &LAB_00285f24,temp_v3);
       }
       else {
         FUN_001835b4(2,0x1a,0x4a,param_1,param_2,0x65);
-        temp_v1 = asdTMTexTableEntryAt(0x1a,0x4c);
+        temp_v1 = (int)asdTMTexTableEntryAt(0x1a,0x4c);
         temp_v3 = computeCountLimit();
         FUN_00180310(0,*(short *)(temp_v1 + 8) + param_1,*(short *)(temp_v1 + 10) + param_2,1,2,0x65,
                      &LAB_00285f24,temp_v3);
@@ -131,14 +129,14 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
           if (*(int *)(temp_v0 + temp_v5 * 4 + 0x927c) < 0) break;
           efctSetSpeed();
           temp_v6 = dataTableGetEntry24Byte1(temp_v5);
-          temp_v7 = asdTMTexTableEntryAt(0x1a,temp_v9 + 0xa9);
+          temp_v7 = (int)asdTMTexTableEntryAt(0x1a,temp_v9 + 0xa9);
           if (temp_v15 != 0) {
             if (temp_v15 != 1) {
               if (temp_v15 == 2) {
                 if ((4 >= *(int *)(temp_v0 + 0x3fc)) &&
                    (temp_v10 = FUN_002a4894(temp_v1), temp_v9 > temp_v10)) {
                   temp_v10 = FUN_002a4894(temp_v1);
-                  temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v10 + 0xa9);
+                  temp_v8 = (int)asdTMTexTableEntryAt(0x1a,temp_v10 + 0xa9);
                   temp_v10 = ((int)*(short *)(temp_v8 + 8) - (int)*(short *)(temp_v7 + 8)) * 0x1000;
                   temp_v10 = (int)*(short *)(temp_v7 + 8) +
                            (((int)(temp_v10 + ((unsigned int)(temp_v10 >> 0x1f) >> 0x1e)) >> 2) *
@@ -157,7 +155,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
             else if ((*(int *)(temp_v0 + 0x3fc) < 5) &&
                     (temp_v10 = FUN_002a4894(temp_v1), temp_v10 < temp_v9)) {
               temp_v10 = FUN_002a4894(temp_v1);
-              temp_v8 = asdTMTexTableEntryAt(0x1a,temp_v10 + 0xa9);
+              temp_v8 = (int)asdTMTexTableEntryAt(0x1a,temp_v10 + 0xa9);
               temp_v10 = ((int)*(short *)(temp_v7 + 8) - (int)*(short *)(temp_v8 + 8)) * 0x1000;
               temp_v10 = (int)*(short *)(temp_v8 + 8) +
                        (((int)(temp_v10 + ((unsigned int)(temp_v10 >> 0x1f) >> 0x1e)) >> 2) *
@@ -215,7 +213,7 @@ void FUN_00285b58(int param_1,int param_2,int param_3)
     if (temp_v4 == 0) {
       temp_v4 = dataTableGetEntry24Byte1(temp_v10);
       temp_v1 = FUN_002a4894(temp_v1);
-      temp_v1 = asdTMTexTableEntryAt(0x1a,temp_v1 + 0xa9);
+      temp_v1 = (int)asdTMTexTableEntryAt(0x1a,temp_v1 + 0xa9);
       if (temp_v4 != 0) {
         if (temp_v4 != 1) {
           if (temp_v4 == 2) {

@@ -1,5 +1,6 @@
 /* NON_MATCHING: armcc merges the three battle-flag tests into one `tst #324` where retail keeps tst/tsteq/tsteq, shares the table-40 lookup between the unit kinds differently, and uses r6 instead of r7 for the zero constant (retail also saves r3 and r8/r9). */
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 #define BTL_FLAG_SKIP_BGM_KIND 0x00000004ull
 #define BTL_FLAG_FIXED_ENCOUNTER 0x00000040ull
@@ -87,7 +88,6 @@ extern u32 DAT_00435d18;
 
 void FUN_002569ac(BtlMainState **battle, u32 value);
 void btlEntryValuesCopy(BtlMainState **battle, BtlSetupEntry *entry);
-Table40Record *dataTable40FindById(s32 id);
 Table08Record *dataTable08Sub1GetRecord(s32 id);
 void entryInvalidateStateTable(BtlMainState *state);
 void entryTableInvalidate(u32 table);
@@ -106,7 +106,7 @@ void bgmSwitchCurrent(BtlMainState *state, u32 musicId);
 static inline void chooseMusicKind(BtlSetupEntry *entry, s32 id)
 {
     if (id > 0) {
-        Table40Record *record = dataTable40FindById(id);
+        Table40Record *record = reinterpret_cast<Table40Record *>(dataTable40FindById(id));
         u32 kind = 0;
 
         if (record != NULL) {

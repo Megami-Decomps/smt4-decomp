@@ -3,6 +3,7 @@
 #include "shard/TextureDrawCall.h"
 #include "util/Vec2Fixed.h"
 #include "util/PackNibbles.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 // Draw-state stack embedded in the render context.
 struct DrawRing {
@@ -19,11 +20,6 @@ struct RenderCtx {
     DrawRing ring;          // 0x12b8
 };
 
-struct LayoutEntry {
-    u8 unk00[8];
-    s16 x;                  // 0x08
-    s16 y;                  // 0x0a
-};
 
 // UI sprite header: only the animation scale read here.
 struct UiSprite {
@@ -47,7 +43,6 @@ extern RenderCtx* g_renderCtx;
 s32 vec2GetYInt(void* sprite);
 f32 renderCtxCalculateStereoParallax(RenderCtx* ctx, f32 depth);
 void efctSetSpeed(f32 speed);
-LayoutEntry* asdTMTexTableEntryAt(u32 group, u32 index);
 void* saveSlotFindSelected(void);
 
 static void setDrawState(s32 value)
@@ -78,13 +73,13 @@ void FUN_0037e8a4(SaveSlotHud* hud, f32 alpha)
 
     s32 cardX = vec2GetXInt(cardSprite);
     s32 cardY = vec2GetYInt(cardSprite);
-    LayoutEntry* frame = asdTMTexTableEntryAt(0x14, 0xbd9);
+    TextureTableEntryIV* frame = asdTMTexTableEntryAt(0x14, 0xbd9);
     s32 frameX = cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f) + frame->x;
     s32 frameY = frame->y + cardY;
     setDrawState(packNibblesAndByte(6, 1, 0));
     for (s32 i = 0; i < 3; i++) FUN_001835b4(2, 0x14, 0xbe2 + i, frameX, frameY, 0xbf);
 
-    LayoutEntry* marker = asdTMTexTableEntryAt(0x14, 0xc16);
+    TextureTableEntryIV* marker = asdTMTexTableEntryAt(0x14, 0xc16);
     s32 markerX = marker->x + cardX + (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.26f);
     s32 markerY = marker->y + cardY;
     efctSetSpeed(hud->haloSprite.scale * alpha);

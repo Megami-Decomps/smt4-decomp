@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation and scheduling differ (menu/loop index swap, mode byte base hoisted into a register in retail, flag materialised as mov #1/moveq #0); logic matches retail. */
 #include "common.h"
+#include "util/FUN_002a482c.h"
 
 struct StatRecord {
     u8 unk00[6];
@@ -13,7 +14,6 @@ struct SpriteOffset {
 };
 
 extern "C" {
-s32 FUN_002a482c(void *list);
 s32 rangeGetMinimumLimit(void *list);
 StatRecord *FUN_00184310(u32 id);
 SpriteOffset *layoutFindTableEntry(void *sprites, s32 index);

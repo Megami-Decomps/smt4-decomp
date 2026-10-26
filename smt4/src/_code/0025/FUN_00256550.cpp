@@ -9,7 +9,6 @@ extern EnemyExtraModelLimits DAT_0049fb1c;
 extern EnemyExtraModelSource DAT_00448ca8[];
 void textFormatBuffer(char *buffer, const char *format, ...);
 AsdMdlObject *asdMdlManagerCreateLoaded(const char *path, u32 flags);
-void FUN_002a0428(AsdMdlObject *model, s32 enabled);
 
 /* Lazily create an extra enemy model, respecting the configured live-model limit. */
 s32 FUN_00256550(u32 index)

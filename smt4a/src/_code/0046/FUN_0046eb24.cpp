@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail package-count switch uses a different dispatch layout. */
 #include "shard/W8X15_PackageList.h"
+#include "util/dataTableFileGetTable.h"
 
 extern "C" {
 s32 FUN_001b315c(PackageEntry *);

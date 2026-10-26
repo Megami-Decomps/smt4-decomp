@@ -5,6 +5,7 @@
 #include "gamedata/DevilRecord.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/PlayerDataBlock.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 struct SlotWorld;
 struct UnitRecordIn;
@@ -12,7 +13,6 @@ struct SavedUnitRecord;
 
 extern "C" {
 void FUN_0033adf8(BtlPartyInitializationStateIV *world, u32 row);
-PartyDamageSlotsIV *gameGetSlotTable();
 void btlInitializePlayerUnitData(u32 world, BtlUnitData *data, const PlayerInitialRecordIV *player);
 void FUN_00255e38(SlotWorld *world, UnitRecordIn *record, s32 kind, s32 index, s32 extra);
 SavedUnitRecord *saveResolvePartySlot(u32 slot);
@@ -26,7 +26,7 @@ void FUN_003370ac(BtlPartyInitializationStateIV *world)
     if (world->resetRequested != 0) {
         FUN_0033adf8(world, world->resetRequested);
     }
-    PartyDamageSlotsIV *slots = gameGetSlotTable();
+    SaveSlotTableIV *slots = gameGetSlotTable();
     const PlayerInitialRecordIV *player = reinterpret_cast<const PlayerInitialRecordIV *>(gameGetPlayerData());
     BtlEntryInitializationIV entry;
     btlInitializePlayerUnitData((u32)world, reinterpret_cast<BtlUnitData *>(&entry.unit), player);

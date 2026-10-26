@@ -25,7 +25,6 @@ s32 arrayContainsU16(const u16 *, s32, u16);
 void rt_memclr(void *, u32);
 s32 devilCompareTablePriority(const void *, const void *);
 void FUN_002b7bca(void *, u32, u32, s32 (*)(const void *, const void *));
-const SkillFlagsRecord *dataTable06Sub1GetRecord(u16);
 s32 FUN_001a15f4(s16);
 extern const u32 DAT_004032e8[];
 

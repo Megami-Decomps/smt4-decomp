@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 #include "gamedata/Table04Record.h"
+#include "shard/lcgRandomRange.h"
 
 /* The action a battle unit is about to use (as FUN_003e8bb0 fills it). */
 struct BattleActionInfo {
@@ -51,7 +52,6 @@ extern u64 DAT_00571260;
 void FUN_003e8bb0(BattleActionInfo *info, BtlMainStateA *battle, u64 *unitFlags);
 s32 FUN_004e83ac(EnemyAiContext *context, EnemyTurnWork *work, s32 target);
 s32 FUN_004de7a0(EnemyAiContext *context, EnemyTurnWork *work, TargetCandidate *candidates, s32 count);
-s32 lcgRandomRange(u32 limit);
 
 /* Fills `out` (0x85 id/weight pairs, ids -1 when unused) with the targets the enemy may pick this
  * turn: one weighted pick for a single-target action, or every allowed target weighted by the

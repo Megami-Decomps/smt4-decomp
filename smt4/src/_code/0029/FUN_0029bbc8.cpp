@@ -2,17 +2,17 @@
 #include "common.h"
 #include "gamedata/UnitStats.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
 StatBlock *gameGetUnitRecord(u32);
-PartyDamageSlotsIV *gameGetSlotTable(void);
 
 // Remove a unit from both party lists and compact the stock list.
 u32 FUN_0029bbc8(u32 unitIndex)
 {
     if (unitIndex < 24) {
         gameGetUnitRecord(unitIndex)->id = 0;
-        PartyDamageSlotsIV *slots = gameGetSlotTable();
+        SaveSlotTableIV *slots = gameGetSlotTable();
         if (slots->active[0] == unitIndex)
             slots->active[0] = -1;
         else if (slots->active[1] == unitIndex)

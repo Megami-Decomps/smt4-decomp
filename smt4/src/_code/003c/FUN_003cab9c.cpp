@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail keeps the result 1 in r6 and returns through one shared exit, reads the action kind with ldrsh and dispatches phases 0/1/2/5 through a different branch tree; this build returns from each path and uses ldrh. */
 #include "common.h"
 #include "battle/btlUnit.h"
+#include "gamedata/DataTable40.h"
 
 /* The record of a combatant's chosen action: its id is at 0x62. */
 struct TurnRecord {
@@ -64,7 +65,6 @@ void slotResetIdle(TurnOwner *owner, s32 slot, u32 value);
 s32 FUN_003dc504(void);
 void FUN_003da010(void *resources);
 void FUN_003dcaac(void *resources, u32 value);
-DataTable40Record *dataTable40FindById(s32 id);
 void btlTargetSetFlag10(TurnOwner *owner, s32 targetId, s32 primary);
 
 /* Drives the action's animation phases; returns 1 when the action is over and its script command is set. */
@@ -113,7 +113,7 @@ u32 FUN_003cab9c(TurnOwner *owner, TurnWork *work)
     case 0xb:
     case 0xc:
         if (work->actor->kind == 2) {
-            DataTable40Record *skill = dataTable40FindById(work->actor->skill);
+            DataTable40Record *skill = reinterpret_cast<DataTable40Record *>(dataTable40FindById(work->actor->skill));
             if (skill != 0 && skill->flag != 0) {
                 if ((owner->state->stateFlags & 0x40) != 0) {
                     work->flags |= 0x80;

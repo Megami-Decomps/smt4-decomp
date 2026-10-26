@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 struct EntryRecordView {
     u8 unk00[0x2c]; // 0x00
@@ -8,7 +9,6 @@ struct EntryRecordView {
 extern "C" {
 s32 idIsAbove400(s32 id);
 s32 FUN_0024c52c(s32 id);
-EntryRecordView *dataTable40FindById(s32 id);
 s32 FUN_00257568(s32 *left, s32 *right);
 
 // Compare classification and descending record fields, delegating ties.
@@ -21,7 +21,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         leftField = 0;
     } else {
         leftClass = FUN_0024c52c(*left);
-        leftField = dataTable40FindById(*left)->unk2C;
+        leftField = reinterpret_cast<EntryRecordView *>(dataTable40FindById(*left))->unk2C;
     }
 
     s32 rightClass;
@@ -31,7 +31,7 @@ s32 entryCompareClassThenDescendingValue(s32 *left, s32 *right)
         rightField = 0;
     } else {
         rightClass = FUN_0024c52c(*right);
-        rightField = dataTable40FindById(*right)->unk2C;
+        rightField = reinterpret_cast<EntryRecordView *>(dataTable40FindById(*right))->unk2C;
     }
 
     s32 difference = leftClass - rightClass;

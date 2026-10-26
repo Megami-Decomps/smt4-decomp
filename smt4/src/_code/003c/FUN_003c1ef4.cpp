@@ -1,9 +1,9 @@
 /* NON_MATCHING: Retail retains packed growth-parameter assembly and signed MP division; scalar fields fold them away. */
 #include "gamedata/PlayerInitialization.h"
 #include "gamedata/DataTable.h"
+#include "gamedata/PlayerDataBlock.h"
 
 extern "C" {
-PlayerInitialRecordIV *gameGetPlayerData(void);
 void FUN_00299370(s32 mode);
 
 /* Resets player advancement and initial attributes, computes base HP/MP, then restores both. */
@@ -15,7 +15,7 @@ void FUN_003c1ef4(void)
         /* 0x30 */ u32 experience;
     };
     typedef char PlayerExperienceOffsetCheck[offsetof(PlayerExperienceView, experience) == 0x30 ? 1 : -1];
-    PlayerInitialRecordIV *player = gameGetPlayerData();
+    PlayerInitialRecordIV *player = reinterpret_cast<PlayerInitialRecordIV *>(gameGetPlayerData());
     player->enabled = 1;
     ((PlayerExperienceView *)player)->experience = 0;
     player->advancement.points = 0;

@@ -22,11 +22,14 @@ typedef struct JobWork {
     /* 0x0008 */ JobSurface *surface;
     /* 0x000C */ u8 unk000C[0x25];
     /* 0x0031 */ u8 unk0031;
-    /* 0x0032 */ u8 unk0032[0xA];
+    /* 0x0032 */ u8 unk0032[6];
+    /* 0x0038 */ u32 unk0038;
     /* 0x003C */ u32 unk003C;
     /* 0x0040 */ u8 unk0040[0x4C];
     /* 0x008C */ u8 unk008C;
-    /* 0x008D */ u8 unk008D[0x2B];
+    /* 0x008D */ u8 unk008D[7];
+    /* 0x0094 */ u8 unk0094;
+    /* 0x0095 */ u8 unk0095[0x23];
     /* 0x00B8 */ u8 unk00B8;
     /* 0x00B9 */ u8 unk00B9[0xF3B];
     /* 0x0FF4 */ u8 captureEnabled;

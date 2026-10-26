@@ -1,11 +1,11 @@
 /* NON_MATCHING: Retail keeps the input object in r0 across render callbacks; the draft spills the owner and schedules color reset differently. */
 #include "romwright_types.h"
 #include "classes/Obj55c8d0.h"
+#include "util/skinObjectUpdateMatrices.h"
 
 extern "C" {
 
 int renderCtxResetColorScale(...);
-int skinObjectUpdateMatrices(...);
 int FUN_00183bb0(...);
 int FUN_004a5344(...);
 int FUN_004a559c(...);
@@ -34,7 +34,6 @@ typedef struct {
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
 
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: FUN_004a5344. */
 /* Supplied declaration required: FUN_004a559c. */
@@ -57,7 +56,7 @@ void Obj55c8d0::render()
       *(unsigned int *)&param_1->field_0x850 = 0x1f;
       FUN_004a5344(param_1);
     }
-    skinObjectUpdateMatrices(g_renderCtx);
+    skinObjectUpdateMatrices(reinterpret_cast<SkinObject *>(g_renderCtx));
     renderCtxResetColorScale(g_renderCtx);
     return;
   }

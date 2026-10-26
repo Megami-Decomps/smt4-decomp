@@ -1,4 +1,4 @@
-/* NON_MATCHING: counter-product registers differ and the frequency copy uses LDRD/STRD instead of retail's two-register LDM/STM. */
+/* NON_MATCHING: counter-product registers differ and the frequency copy uses LDRD/STRD instead of retail's two-register LDM/STM (a two-u32 struct copy also gives LDRD). */
 #include "common.h"
 
 extern "C" {

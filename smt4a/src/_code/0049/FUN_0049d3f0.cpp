@@ -3,6 +3,7 @@
 #include "ui/HowToScreen.h"
 #include "text/TextDraw.h"
 #include "ui/UiSpriteState.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 extern const char DAT_0052cf04[]; // event/HowTo/HowTo.mbm
@@ -13,7 +14,6 @@ u32 spriteHandleCreate(u32 argument);
 void FUN_0049dd74(HowToScreenWork *work);
 void asdLoadFileAsyncSimple(const char *path, void **result, u32 flags);
 void asdTMTexTableLoadTmx(u32 table, u32 mode);
-void asdTMTexLoadMainHeap(u32 table, u32 mode);
 void paramsClearPacket(UiResourceParameters *parameters);
 
 void FUN_0014e188(UiSpriteState *sprite, u32 table, u32 argument, UiResourceParameters *parameters, u32 order, f32 scale);

@@ -1,5 +1,6 @@
 /* NON_MATCHING: the stack slot layout and the compare-branch/store ordering differ (retail keeps the stat pair and its comparison copy in different frame slots, and reloads the work-area bytes through a shared base); the logic is the same. */
 #include "shard/GameGlobals.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
@@ -15,11 +16,6 @@ typedef struct StatDisplayTable {
     /* 0x44 */ StatDisplayRow rows[1]; /* the table's rows (0x8C bytes each) */
 } StatDisplayTable;
 
-/* A sprite record: its Y offset is read. */
-typedef struct StatSprite {
-    /* 0x00 */ u8 unk00[0xA];
-    /* 0x0A */ s16 yOffset;
-} StatSprite;
 
 /* The work area of the list the stat rows belong to (only the fields read here). */
 typedef struct StatListWork {
@@ -48,7 +44,6 @@ void efctSetSpeed(f32 speed);
 void FUN_002f752c(StatListWork *work, s32 *value, s32 *extra, s32 entry, s32 compare);
 void statRowDrawValue(StatListWork *work, s32 entry, s32 x, s32 y, s32 value, s32 difference);
 s32 FUN_0026264c(u32 selection);
-StatSprite *asdTMTexTableEntryAt(s32 kind, s32 index);
 void FUN_003c4250(StatListWork *work, s32 x, s32 y, s32 value, ...);
 void FUN_003b7960(StatListWork *work, s32 x, s32 y, s32 iconA, s32 iconB);
 void FUN_00183bb0(void);
@@ -84,14 +79,14 @@ void FUN_00334e1c(StatListWork *work, s32 entry)
     statRowDrawValue(work, entry, position.first, position.second, stat.first, valueDifference);
     if (work->mode != 14 && (work->mode != 7 || FUN_0026264c(work->selection) != 0) && work->mode != 16) {
         f32 outerSpeed = jobGetScalarValue();
-        StatSprite *sprite = asdTMTexTableEntryAt(18, entry + STAT_SPRITE_BASE);
+        TextureTableEntryIV *sprite = asdTMTexTableEntryAt(18, entry + STAT_SPRITE_BASE);
 
         if (stat.first < 200) {
-            FUN_003c4250(work, position.first, sprite->yOffset + position.second, stat.first, stat.second, extraDifference);
+            FUN_003c4250(work, position.first, sprite->y + position.second, stat.first, stat.second, extraDifference);
         } else if (stat.first == 999) {
-            FUN_003b7960(work, position.first, sprite->yOffset + position.second, 117, 116);
+            FUN_003b7960(work, position.first, sprite->y + position.second, 117, 116);
         } else {
-            FUN_003b7960(work, position.first, sprite->yOffset + position.second, 115, 114);
+            FUN_003b7960(work, position.first, sprite->y + position.second, 115, 114);
         }
         efctSetSpeed(outerSpeed);
     }

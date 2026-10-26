@@ -2,10 +2,10 @@
 #include "gamedata/Table04Record.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
 s32 FUN_00258de0(s32 user, s32 target, Table04Record *skill, s32 preview, s32 mode);
-Table04Record *dataTable40FindById(u32 skill);
 s32 FUN_0029a924(u32 skill);
 s32 FUN_0029a9d4(u32 skill, s32 mode);
 BtlEquip *gameGetUnitRecord(s32 index);

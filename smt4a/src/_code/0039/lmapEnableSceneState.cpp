@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses `ldrb r0, [r0, #1121]` where armcc emits `different generated sequence`. */
+/* NON_MATCHING: retail loads g_gameState+0x461 (ldrb, result unused) before the tail call, with no frame; a linker-inlined getter call would leave a push/pop, a plain dead read is dropped. */
 #include "common.h"
 
 extern "C" {

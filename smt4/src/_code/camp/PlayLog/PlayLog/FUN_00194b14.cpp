@@ -1,5 +1,6 @@
 /* NON_MATCHING: draws the camp play log list rows (cursor frame, entry name and its value as text, number or play time h/m); written from the decompilation, argument evaluation and the float conversions of the text positions not compared with retail */
 #include "gamedata/DataTable.h"
+#include "util/FUN_0029d644.h"
 
 struct PlayLogFrame {
     /* 0x00 */ u8 unk00[8];
@@ -43,7 +44,6 @@ struct PlayLogView {
 extern "C" {
 extern PlayLogView *g_playLog;
 
-s32 FUN_0029d644(void *list);
 s32 FUN_0029efc0(void *list);
 void FUN_00290994(void *list, s32 x, s32 a, s32 table, s32 s0, s32 s1, s32 s2, s32 s3, s32 s4, s32 s5, s32 s6,
                   s32 barC, s32 barA, s32 barB, s32 flags, s32 extra);
@@ -58,11 +58,11 @@ s32 fontMeasureLineAdvance(const char *text, u32 font);
 void FUN_00194b14(void)
 {
     PlayLogView *log = g_playLog;
-    for (s32 row = 0; row < FUN_0029d644(log->list); row++) {
+    for (s32 row = 0; row < (s32)FUN_0029d644(log->list); row++) {
         s32 x = vec2GetXInt(&log->rows[row]);
         if (row == 0)
             FUN_002bf380(2, PLAYLOG_FONT_TABLE, 0, x, 0, 0xB);
-        if (FUN_0029d644(log->list) - 1 == row) {
+        if ((s32)FUN_0029d644(log->list) - 1 == row) {
             FUN_00290994(log->list, x, 0, PLAYLOG_FONT_TABLE, 7, 8, 9, 3, 5, 4, 6, log->barC, log->barA, log->barB, 0xB, 0);
         }
         PlayLogFrame *frame = asdTMTexTableEntryAt(PLAYLOG_FONT_TABLE, row + 0x15);

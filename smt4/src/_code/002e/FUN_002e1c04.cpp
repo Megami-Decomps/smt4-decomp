@@ -11,7 +11,6 @@ void requestDispatch(void *request);
 void FUN_0028186c(EffectNode *node);
 void layoutApplyForState(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
-void FUN_002c198c(RenderCtx *context);
 u32 FUN_002c501c(void);
 s32 FUN_002c5d80(u32 first, u32 second);
 void effectRestoreSavedRenderPairs(RenderCtx *context, u32 value);
@@ -38,7 +37,7 @@ void FUN_002e1c04(void)
         requestDispatch(reinterpret_cast<void *>(g_effectEditor.dispatch.cachedEvent));
     }
     FUN_002c18e4(g_titleScene);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     renderStackPop(&g_titleScene->depthStacks.stackD);
     renderStackPop(&g_titleScene->stackA);
     renderStackPop(&g_titleScene->stackB);

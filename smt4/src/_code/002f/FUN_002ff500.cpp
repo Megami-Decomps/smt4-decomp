@@ -3,11 +3,11 @@
 #include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"
 #include "battle/BtlMainAccess.h"
+#include "util/btlScriptResolveGroupArg.h"
 
 extern "C" {
 u32 scrGetArg(s32 argument);
 s32 scrSetResult(s32 result);
-u32 btlScriptResolveGroupArg(u32 group);
 BtlEntry *btlMainFindActiveEntry(BtlMainState *battle);
 
 /* Test a requested entry ID's group bit, including the special active entry. */
@@ -15,7 +15,7 @@ u32 FUN_002ff500(void)
 {
     u32 id = scrGetArg(0);
     u32 bit = scrGetArg(1);
-    u32 group = btlScriptResolveGroupArg(scrGetArg(2));
+    u32 group = (u32)btlScriptResolveGroupArg(scrGetArg(2));
     s32 first, count;
     FUN_002499fc(group, &first, &count);
     for (s32 i = first; i < first + count; ++i) {

@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the order of the two constant setups at entry differs (retail loads 0 into r6 before 5 into r5). */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 /* The healing counter scene of the quest center: its state and substate words, and the script it runs. */
 struct HealingScene199 {
@@ -19,7 +20,6 @@ void messageMainSetTargetFlags(s32 flags);
 s32 scrRunOpcodesStub(u32 script);
 s32 messageMainGetChoiceResult(void);
 s32 messageMainTargetIsClear(void);
-const s32 *gameGetSlotTable(void);
 s32 FUN_0029cc44(s32 value);
 void partyMoneyAddForward(s32 amount);
 s32 questCenterGetHealingFee(void);
@@ -39,7 +39,7 @@ extern "C" void FUN_00381e04(HealingScene199 *scene)
         if (scrRunOpcodesStub(*scene->script) == 2) {
             s32 choice = messageMainGetChoiceResult();
             if (choice == 0) {
-                if (*gameGetSlotTable() < questCenterGetHealingFee()) {
+                if (gameGetSlotTable()->money < questCenterGetHealingFee()) {
                     scrScriptProcessStartMappedEntry(scene, "qc_HealingNoMoney");
                     FUN_0029cc44(0);
                     buttonHelpSetPreset(0xa3);

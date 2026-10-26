@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_002b99b8(void);
 int FUN_002ba1e0(int, int, int, int, int, int, int, double);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -24,8 +24,8 @@ extern int g_titleScene; /* 0x44ea00 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_002b99b8. */
 /* Supplied declaration required: FUN_002ba1e0. */
-extern int FUN_002bff10(unsigned int);
-/* Supplied declaration required: FUN_002c1b64. */
+extern int stateValuesGetBySelector(unsigned int);
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 
@@ -52,7 +52,7 @@ void FUN_001192c8(void)
   temp_v0 = g_frameTex;
   temp_v7 = 400.0f;
   temp_v8 = temp_v7;
-  temp_v1 = FUN_002bff10(0);
+  temp_v1 = stateValuesGetBySelector(0);
   temp_v6 = g_titleScene;
   temp_v5 = *(int *)(temp_v0 + 0xe90);
   if (((temp_v1 == 0) && (temp_v5 >= 2)) && (temp_v5 = temp_v5 - 1, temp_v5 < 1)) {
@@ -93,7 +93,7 @@ void FUN_001192c8(void)
       (**(romwright_code **)(temp_v1 + 0x12c8))();
       *(unsigned char *)(temp_v1 + 0x12c4) = 0;
     }
-    FUN_002c1b64(g_titleScene,temp_v6);
+    renderCtxSelectTexture(g_titleScene,temp_v6);
     temp_v4 = *(unsigned int *)(temp_v0 + 0xed0);
     FUN_002ba1e0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v9,temp_v9,temp_v9,temp_v7);
   }
@@ -104,7 +104,7 @@ void FUN_001192c8(void)
     VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (float)VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = temp_v8 / temp_v7;
-    FUN_002c1b64(g_titleScene);
+    renderCtxSelectTexture(g_titleScene);
     temp_v6 = g_titleScene;
     temp_v1 = packNibblesAndByte(6,7,0);
     piVar6 = (int *)(temp_v6 + 0x12ac);
@@ -134,7 +134,7 @@ void FUN_001192c8(void)
     *(unsigned int *)(temp_v6 + 0x40) = 1;
     VectorSignedToFloat(*(unsigned int *)(temp_v6 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v7 = (temp_v8 / temp_v10) / temp_v7;
-    FUN_002c1b64(g_titleScene,temp_v6);
+    renderCtxSelectTexture(g_titleScene,temp_v6);
     temp_v4 = *(unsigned int *)(temp_v0 + 0xed8);
     FUN_002ba1e0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v9,temp_v9,temp_v9,temp_v7);
   }

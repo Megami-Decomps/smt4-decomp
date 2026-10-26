@@ -62,7 +62,7 @@ extern int DAT_005702f0; /* 0x5702f0 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-extern int FUN_00184964(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN2nw4math5MTX448IdentityEv. */
 /* Supplied declaration required: mtx44Copy. */
 /* Supplied declaration required: FUN_0019a0fc. */
@@ -218,7 +218,7 @@ void FUN_00260158(float *param_1)
           }
         }
         else {
-          temp_v6 = FUN_00184964(0,8);
+          temp_v6 = randBetween(0,8);
           unaff_r6 = temp_v6 * -0x2d;
         }
       }

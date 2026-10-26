@@ -1,5 +1,6 @@
 /* NON_MATCHING: register-only: retail keeps the record-list global in r7 and the constant 1 in r8 (built swapped), and its find-free-record loop and record address use r2 where built uses r3. */
 #include "gfx/EngineRecordList.h"
+#include "util/FUN_0040aa6c.h"
 
 struct HandleRegistry;
 extern "C" {
@@ -8,7 +9,6 @@ extern HandleRegistry *g_handleRegistry;
 void *gameFlagsGetBlock(void);
 EngineRecordModelList *FUN_00178b04(u32 bytes, const char *file, s32 line);
 EngineRecordModelList *modelListInit(EngineRecordModelList *models);
-void FUN_0040aa6c(EngineRecordModelList *models, const char *path);
 void FUN_0040aad4(EngineRecordModelList *models, s32 index);
 void handleRegistryRegisterObject(HandleRegistry *registry, u32 handle);
 

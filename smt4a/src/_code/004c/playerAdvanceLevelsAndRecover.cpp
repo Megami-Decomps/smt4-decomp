@@ -1,10 +1,8 @@
 /* NON_MATCHING: growth-recipe aggregate construction/copy and HP/MP update register allocation differ from retail. */
 #include "shard/Shard0034.h"
+#include "gamedata/DataTable.h"
 
 extern "C" {
-const void *dataTableGet(u32 table, u32 group);
-u32 dataTableGetCount(const void *table);
-const PlayerGrowthEntry *dataTableGetEntries(const void *table);
 s32 FUN_003e0154(void);
 s32 FUN_003e0164(void);
 u32 gameGetUnlockedCountLimit(void);
@@ -19,9 +17,9 @@ void playerAdvanceLevelsAndRecover(PlayerData *player, s32 levels, s32 growStats
     if (levels < 1) {
         return;
     }
-    const void *table = dataTableGet(9, 0);
+    void *table = dataTableGet(9, 0);
     dataTableGetCount(table);
-    const PlayerGrowthEntry *entry = dataTableGetEntries(table);
+    const PlayerGrowthEntry *entry = static_cast<const PlayerGrowthEntry *>(dataTableGetEntries(table));
     PlayerGrowthRecipe recipe = playerGrowthRecipeFromEntry(entry);
     s32 previousHp = FUN_003e0154();
     s32 previousMp = FUN_003e0164();

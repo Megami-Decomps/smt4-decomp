@@ -1,15 +1,7 @@
 /* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled (blend mode from the frame texture); written from the decompilation, render-stack scheduling not compared with retail */
 #include "camp/RenderCtx.h"
 #include "shard/packNibblesAndByte.h"
-
-struct FrameCopySurface {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-    /* 0x1C */ u8 unk1C[0x20];
-    /* 0x3C */ s32 filterX;
-    /* 0x40 */ s32 filterY;
-};
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct FrameCopyTex {
     /* 0x000 */ u8 unk000[0xEE8];
@@ -21,10 +13,10 @@ struct FrameCopyTex {
     /* 0xF18 */ s32 blendMode;           /* 0 normal, 1 additive, 2 subtractive */
     /* 0xF1C */ u8 filtered;
     /* 0xF1D */ u8 unkF1D[3];
-    /* 0xF20 */ FrameCopySurface *primary;
-    /* 0xF24 */ FrameCopySurface *secondary;
+    /* 0xF20 */ AsdTexture *primary;
+    /* 0xF24 */ AsdTexture *secondary;
     /* 0xF28 */ u8 unkF28[0xB4];
-    /* 0xFDC */ FrameCopySurface *work;
+    /* 0xFDC */ AsdTexture *work;
 };
 
 #define FRAME_COPY_SIZE 0x200
@@ -35,10 +27,9 @@ extern "C" {
 extern FrameCopyTex *g_frameTex;
 extern RenderCtx *g_titleScene;
 
-void surfaceCopy(FrameCopySurface *source, FrameCopySurface *destination);
+void surfaceCopy(AsdTexture *source, AsdTexture *destination);
 f32 FUN_002b99b8(f32 base, f32 exponent);
 s32 FUN_002c5d80(u32 a, u32 b);
-void FUN_002c1b64(RenderCtx *context, FrameCopySurface *surface);
 void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3, f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
                   f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3, f32 u0, f32 v0, f32 u1, f32 v1,
                   f32 u2, f32 v2, f32 u3, f32 v3);
@@ -46,23 +37,23 @@ void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3, f32 x0, f32 y0, f32 z0, f32 x1
 void FUN_00117da4(s32 usePrimary)
 {
     FrameCopyTex *tex = g_frameTex;
-    FrameCopySurface **source = usePrimary != 0 ? &tex->primary : &tex->secondary;
-    (*source)->width = FRAME_COPY_SIZE;
-    (*source)->height = FRAME_COPY_SIZE;
-    tex->work->width = (*source)->width;
-    tex->work->height = (*source)->height;
+    AsdTexture **source = usePrimary != 0 ? &tex->primary : &tex->secondary;
+    (*source)->dimensions.width = FRAME_COPY_SIZE;
+    (*source)->dimensions.height = FRAME_COPY_SIZE;
+    tex->work->dimensions.width = (*source)->dimensions.width;
+    tex->work->dimensions.height = (*source)->dimensions.height;
     surfaceCopy(*source, tex->work);
-    tex->work->width >>= 1;
-    tex->work->height >>= 1;
+    tex->work->dimensions.width >>= 1;
+    tex->work->dimensions.height >>= 1;
 
-    FrameCopySurface *work = tex->work;
+    AsdTexture *work = tex->work;
     f32 scale = FUN_002b99b8(2.0f, 1.0f);
-    f32 width = (f32)work->width;
+    f32 width = (f32)work->dimensions.width;
     if (tex->filtered != 0) {
         work->filterX = 1;
         work->filterY = 1;
     }
-    f32 height = (f32)work->height;
+    f32 height = (f32)work->dimensions.height;
     if (tex->filtered == 0) {
         work->filterX = 0;
         work->filterY = 0;
@@ -88,7 +79,7 @@ void FUN_00117da4(s32 usePrimary)
         renderStackSet(&context->stackB, state);
         break;
     }
-    FUN_002c1b64(g_titleScene, work);
+    renderCtxSelectTexture(g_titleScene, work);
     u32 color = tex->color;
     f32 z = tex->depth;
     FUN_002ba1e0(color, color, color, color,

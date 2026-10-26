@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00238998(...);
+int idChainMatchSequence(...);
 
 typedef struct fn_0035c11c_arg2 fn_0035c11c_arg2;
 struct fn_0035c11c_arg2 {
@@ -20,7 +20,7 @@ typedef struct {
     unsigned int sp18; /* 0x18: local_18 */
 } param_4_stack;
 
-/* Supplied declaration required: FUN_00238998. */
+/* Supplied declaration required: idChainMatchSequence. */
 extern unsigned int wstrlenU16(fn_0035c11c_arg2 *);
 
 
@@ -57,7 +57,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
         if (temp_v1 != temp_v4) {
           return 2;
         }
-        temp_v2 = FUN_00238998(param_1,&temp_v7,0);
+        temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
       }
       else {
         if (*(char *)(temp_v2 + 10) != '\x01') {
@@ -69,7 +69,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
         if (temp_v1 != temp_v4) {
           return 2;
         }
-        temp_v2 = FUN_00238998(param_1,&temp_v7,0);
+        temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
       }
     }
     else {
@@ -85,7 +85,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
       if (temp_v1 < temp_v4) {
         return 2;
       }
-      temp_v2 = FUN_00238998(param_1,&temp_v7,0);
+      temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
     }
   }
   else if (temp_v0 != '\a') {
@@ -112,7 +112,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
       if (temp_v1 != temp_v4) {
         return 2;
       }
-      temp_v2 = FUN_00238998(param_1,&temp_v7,0);
+      temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
     }
     else {
       if (temp_v4 == 0) {
@@ -127,7 +127,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
       if (temp_v1 != temp_v4) {
         return 2;
       }
-      temp_v2 = FUN_00238998(param_1,&temp_v7,0);
+      temp_v2 = idChainMatchSequence(param_1,&temp_v7,0);
     }
   }
   else {
@@ -156,7 +156,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
         }
         do {
           temp_v7 = temp_v5;
-          temp_v3 = FUN_00238998(param_1,&temp_v7,temp_v2,temp_v4);
+          temp_v3 = idChainMatchSequence(param_1,&temp_v7,temp_v2,temp_v4);
           if (temp_v3 != 0) {
             return 1;
           }
@@ -176,7 +176,7 @@ unsigned int FUN_0035c11c(unsigned int *param_1,int param_2,fn_0035c11c_arg2 *pa
       return 2;
     }
     temp_v7 = temp_v5;
-    temp_v2 = FUN_00238998(param_1,&temp_v7,temp_v1 - temp_v4);
+    temp_v2 = idChainMatchSequence(param_1,&temp_v7,temp_v1 - temp_v4);
   }
   if (temp_v2 == 0) {
     return 2;

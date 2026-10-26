@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 #include "gamedata/PartySlots.h"
 #include <stddef.h>
+#include "util/FUN_002a482c.h"
 
 extern "C" {
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 s32 rangeGetMinimumLimit(const FlaggedValueHolder *);
-s32 FUN_002a482c(const FlaggedValueHolder *);
 void uiOpenStartAnimations(void *);
 void FUN_0035ad50(u32, UnitRecord *);
 UnitRecord *slotRecordFindById(u32);

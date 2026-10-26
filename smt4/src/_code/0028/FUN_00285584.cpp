@@ -18,7 +18,7 @@ int FUN_002bf288(...);
 int FUN_002bf380(...);
 int asdTMTexTableEntryAt(int, int);
 int efctSetSpeed(void);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int FUN_0033d3f8(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
@@ -92,7 +92,7 @@ extern int FUN_002b8660(void);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int *jobGetWork(void);
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 extern int FUN_002c1d5c(void);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_0033d3f8. */
@@ -262,7 +262,7 @@ void FUN_00285584(fn_00285584_arg0 *param_1,int param_2,int param_3)
             *(unsigned char *)(temp_v1 + 0x12c4) = 0;
           }
           if (temp_v12 < (float)piVar2[10]) {
-            FUN_002c198c(g_titleScene);
+            renderCtxApplyTransforms(g_titleScene);
           }
         }
         else {

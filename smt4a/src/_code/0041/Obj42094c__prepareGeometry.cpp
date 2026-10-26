@@ -1,7 +1,7 @@
 /* NON_MATCHING: particle state and floating-point operations are recovered; VFP register and paired-store scheduling still differ. */
 #include "classes/Obj42094c.h"
 extern "C" {
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 u32 randRange(u32 limit);
 f32 FUN_001a1ee0(f32 phase);
 f32 FUN_001b63b0(f32 phase);
@@ -15,7 +15,7 @@ void Obj42094c::prepareGeometry()
         Filter4PolyMotion *motion = &filter->motions[i];
         ++motion->frame;
         if (motion->frame % filter->config->period == 0) {
-            f32 fraction = (f32)FUN_00184964(-32767, 32768) * (1.0f / 32768.0f);
+            f32 fraction = (f32)randBetween(-32767, 32768) * (1.0f / 32768.0f);
             f32 minimum = filter->config->minimumSpeed;
             f32 speed = minimum + (filter->config->maximumSpeed - minimum) * fraction;
             f32 phase = (f32)randRange(65535) * (1.0f / 65536.0f) * 256.0f;

@@ -7,11 +7,11 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 extern "C" {
 extern AocSystem *g_aocSystem;
 extern const char DAT_0040357c[];
 extern const char DAT_00403570[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(AocSystem *system, s32 table, s32 node, s32 enabled);
 void FUN_002c58c8(s32 table, s32 node);

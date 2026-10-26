@@ -2317,7 +2317,7 @@
 0x001481e4 FUN_001481e4 between
 0x001482c0 FUN_001482c0 between
 0x00148bb8 FUN_00148bb8 between
-0x00148c30 FUN_00148c30 between
+0x00148c30 dataTableFindCategoryVariant between
 0x00148d68 FUN_00148d68 between
 0x00148f48 FUN_00148f48 between
 0x00149090 FUN_00149090 between
@@ -2369,7 +2369,7 @@
 0x00159a08 FUN_00159a08 between
 0x00159aa4 FUN_00159aa4 between
 0x00159e18 FUN_00159e18 between
-0x00159e24 FUN_00159e24 between
+0x00159e24 sndMasterFinalize between
 0x00159e68 FUN_00159e68 between
 0x00159f64 FUN_00159f64 between
 0x00159fa0 FUN_00159fa0 callers
@@ -2396,7 +2396,7 @@
 0x0015a4e0 FUN_0015a4e0 between
 0x0015a52c FUN_0015a52c between
 0x0015a53c nn_applet_CTR_detail_UnlockTransition name
-0x0015a568 FUN_0015a568 between
+0x0015a568 appletUnlockAndSleepIfShellClosed between
 0x0015a584 nn_applet_CTR_detail_SleepIfShellClosed name
 0x0015a5b0 FUN_0015a5b0 between
 0x0015a5c0 FUN_0015a5c0 between
@@ -2462,19 +2462,6 @@
 0x001615a8 nngxGetVramEndAddr name
 0x00161ab0 nnosAddressSpaceManagerInitialize name
 0x00161b14 addressBlockInit callers
-0x00161b8c FUN_00161b8c between
-0x00161bcc sys_PDC0Callback between
-0x00161c10 sys_PDC1Callback between
-0x00161c58 FUN_00161c58 between
-0x00161c5c FUN_00161c5c between
-0x00161c60 FUN_00161c60 between
-0x00161c64 FUN_00161c64 between
-0x00161d54 FUN_00161d54 between
-0x00161d64 FUN_00161d64 between
-0x00161d70 FUN_00161d70 between
-0x00161d74 FUN_00161d74 between
-0x00161d8c FUN_00161d8c between
-0x00161da4 FUN_00161da4 between
 0x00161dbc _ZSt16__introsort_loopIPP10SortObjecti14SortObjectLessEvT_S4_T0_T1_ name
 0x00162234 nn_math_ARMv6_MTX34InvTransposeAsm name
 0x00162330 FUN_00162330 between
@@ -2494,7 +2481,7 @@
 0x0016cdd8 FUN_0016cdd8 between
 0x0016ce28 FUN_0016ce28 between
 0x0016ce68 FUN_0016ce68 between
-0x0016ceb8 FUN_0016ceb8 between
+0x0016ceb8 fsArchiveGetWorkspaceSize between
 0x0016ced0 nn_fs_CTR_MPCore_detail_UserFileSystem_TryReadFile name
 0x0016cf30 FUN_0016cf30 between
 0x0016d090 FUN_0016d090 callers
@@ -2697,7 +2684,7 @@
 0x001785f0 FUN_001785f0 between
 0x001786c0 nw_snd_internal_SoundArchiveLoader_IsWaveSoundDataLoaded name
 0x001788b8 FUN_001788b8 between
-0x00178a54 FUN_00178a54 between
+0x00178a54 indexedResourceQuery between
 0x00178a90 nw_snd_internal_SoundArchiveFileReader_ReadSoundInfo name
 0x00178b38 gfxTextureStorageUnbind between
 0x00178bc8 FUN_00178bc8 callers
@@ -3079,7 +3066,7 @@
 0x001a1b2c nn_snd_CTR_Dspsnd_SetSurroundSpeakerPosition name
 0x001a1b84 nn_math_ARMv6_MTX44FrustumC_FAST name
 0x001a1e28 FUN_001a1e28 between
-0x001a1ea8 FUN_001a1ea8 between
+0x001a1ea8 mathInterpolatePackedTable between
 0x001a1f5c FUN_001a1f5c between
 0x001a1f60 FUN_001a1f60 between
 0x001a1fb4 FUN_001a1fb4 between
@@ -3216,10 +3203,6 @@
 0x001a8cb8 FUN_001a8cb8 between
 0x001a8d1c FUN_001a8d1c between
 0x001a8d28 nw_snd_internal_SoundArchiveFile_InfoBlockBody_GetSoundArchivePlayerInfo name
-0x001a8d34 FUN_001a8d34 between
-0x001a8d40 FUN_001a8d40 between
-0x001a8d98 optionalWordGetValue between
-0x001a8db0 FUN_001a8db0 between
 0x001a8dec nw_snd_internal_SoundArchiveFileReader_ReadBankInfo name
 0x001a8e14 FUN_001a8e14 between
 0x001a8e24 nw_snd_internal_SoundArchiveFileReader_ReadWaveSoundInfo name
@@ -3334,13 +3317,13 @@
 0x001b23cc FUN_001b23cc between
 0x001b24c0 FUN_001b24c0 callers
 0x001b2bd8 FUN_001b2bd8 between
-0x001b2ca4 FUN_001b2ca4 between
-0x001b2d88 FUN_001b2d88 between
+0x001b2ca4 packageFindFileRefByName between
+0x001b2d88 packageFindRecordByName between
 0x001b2e34 FUN_001b2e34 between
 0x001b2e78 FUN_001b2e78 between
 0x001b2ebc FUN_001b2ebc between
 0x001b3008 FUN_001b3008 between
-0x001b3148 FUN_001b3148 between
+0x001b3148 objHasFlagBit16 between
 0x001b315c FUN_001b315c between
 0x001b31ac FUN_001b31ac between
 0x001b31e0 FUN_001b31e0 between
@@ -3427,7 +3410,7 @@
 0x001b6ae0 FUN_001b6ae0 callers
 0x001b6bcc FUN_001b6bcc callers
 0x001b8e48 FUN_001b8e48 callers
-0x001b95b0 FUN_001b95b0 between
+0x001b95b0 workStateClear between
 0x001b95c4 FUN_001b95c4 between
 0x001b95dc FUN_001b95dc between
 0x001b9624 FUN_001b9624 callers
@@ -3475,7 +3458,7 @@
 0x001bda0c FUN_001bda0c between
 0x001bda40 dspDelayApplyUpdate between
 0x001bdaa8 FUN_001bdaa8 between
-0x001bdadc FUN_001bdadc between
+0x001bdadc dspFxSetReverb between
 0x001bdbac nn_snd_CTR_Voice_EnableBiquadFilter name
 0x001bdbcc nn_snd_CTR_Voice_SetMonoFilterCoefficients name
 0x001bdc58 nn_snd_CTR_Dspsnd_SetChannelMix name
@@ -4868,7 +4851,7 @@
 0x002f8d6c FUN_002f8d6c library
 0x002f8d9c FUN_002f8d9c library
 0x002f8da8 FUN_002f8da8 library
-0x002f8dfc FUN_002f8dfc between
+0x002f8dfc recordCompareFloatKey between
 0x002f8e14 FUN_002f8e14 between
 0x002f8e58 FUN_002f8e58 library
 0x002f8edc FUN_002f8edc between
@@ -6136,7 +6119,7 @@
 0x0042d228 FUN_0042d228 between
 0x0042d250 FUN_0042d250 callers
 0x0042d2ec FUN_0042d2ec between
-0x0042d2fc FUN_0042d2fc between
+0x0042d2fc sndMasterManagerApply between
 0x0042d30c FUN_0042d30c between
 0x0042d328 FUN_0042d328 between
 0x0042d32c FUN_0042d32c between
@@ -6175,7 +6158,7 @@
 0x0042fe3c FUN_0042fe3c between
 0x0042fe78 nn_cec_CTR_detail_InitializeCecControl name
 0x0042feb4 FUN_0042feb4 between
-0x0042ff1c FUN_0042ff1c between
+0x0042ff1c resourceDispatch between
 0x0042ff58 FUN_0042ff58 between
 0x0042ffd8 FUN_0042ffd8 between
 0x00430014 FUN_00430014 between
@@ -6428,7 +6411,7 @@
 0x0043a338 FUN_0043a338 between
 0x0043a3f0 FUN_0043a3f0 between
 0x0043a4a8 FUN_0043a4a8 between
-0x0043a560 FUN_0043a560 between
+0x0043a560 serviceCloseInitializedHandle between
 0x0043a59c FUN_0043a59c between
 0x0043a654 FUN_0043a654 between
 0x0043a670 FUN_0043a670 between
@@ -6436,10 +6419,10 @@
 0x0043a734 nnResultCheckReport0043aab4 between
 0x0043a750 FUN_0043a750 between
 0x0043a76c FUN_0043a76c between
-0x0043a794 FUN_0043a794 between
+0x0043a794 serviceQuerySignedByteChecked between
 0x0043a7b0 FUN_0043a7b0 between
 0x0043a7cc FUN_0043a7cc between
-0x0043a7e8 FUN_0043a7e8 between
+0x0043a7e8 conversionReplaceEventHandle between
 0x0043a828 FUN_0043a828 between
 0x0043a844 FUN_0043a844 between
 0x0043a860 FUN_0043a860 between
@@ -6509,7 +6492,7 @@
 0x0043c2a8 clearBlock10808 between
 0x0043c2b4 FUN_0043c2b4 between
 0x0043c2c4 FUN_0043c2c4 between
-0x0043c2d4 FUN_0043c2d4 between
+0x0043c2d4 stringFormatUnbounded between
 0x0043c2f4 stringFormatBounded between
 0x0043c310 FUN_0043c310 between
 0x0043c32c FUN_0043c32c between
@@ -6806,7 +6789,7 @@
 0x00452624 FUN_00452624 between
 0x004526cc FUN_004526cc between
 0x0045277c FUN_0045277c between
-0x004527a8 FUN_004527a8 between
+0x004527a8 resourceReleaseRelativeMember between
 0x004527d0 FUN_004527d0 between
 0x004528cc FUN_004528cc between
 0x004529a0 FUN_004529a0 callers
@@ -7150,7 +7133,7 @@
 0x00466f0c FUN_00466f0c between
 0x00466f6c FUN_00466f6c between
 0x00466f98 FUN_00466f98 between
-0x00466fdc FUN_00466fdc between
+0x00466fdc sndHeapAlloc between
 0x00467040 FUN_00467040 between
 0x00467080 FUN_00467080 between
 0x004670a4 FUN_004670a4 between
@@ -7192,7 +7175,7 @@
 0x00470974 FUN_00470974 between
 0x00470a44 dataSetRecordAt between
 0x00470b18 FUN_00470b18 between
-0x00470b60 FUN_00470b60 between
+0x00470b60 aocQueueType0c between
 0x00470bdc FUN_00470bdc between
 0x00470ce0 aocFindTable22Record between
 0x00470e48 FUN_00470e48 between
@@ -7569,7 +7552,7 @@
 0x00514018 FUN_00514018 between
 0x00514088 FUN_00514088 between
 0x0051415c FUN_0051415c between
-0x00514284 FUN_00514284 between
+0x00514284 resourceQueryLoadStatus between
 0x005142c4 FUN_005142c4 between
 0x005143ac FUN_005143ac between
 0x0051440c libc_snprintf name

@@ -2,11 +2,11 @@
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "shard/W6_W6Match5_UnitCategory.h"
 #include "battle/btlDebug.h"
+#include "util/FUN_00187168.h"
 
 extern "C" {
 s32 FUN_003e4978(void);
 PartySlotA *FUN_003e4d68(u16 slot);
-s32 FUN_00187168(PartySlotA *slot);
 s32 partySlotMatchesSelected(PartySlotA *slot);
 PartySlotA *saveSlotFindSelected(void);
 s32 lcgRandomRange(u16 maximum);

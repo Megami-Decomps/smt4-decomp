@@ -1,6 +1,7 @@
 /* NON_MATCHING: availability constant lifetime, saved registers and resource-dispatch block placement differ. */
 #include "battle/ActionKindSelection.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
+#include "gamedata/DataTable40.h"
 
 struct BtlMainState;
 struct BattleResourceOwner;
@@ -15,7 +16,6 @@ struct BattleItemResourceView { u8 unk00[0x62]; u16 resourceId; };
 extern "C" {
 extern BattleResourceOwner *DAT_00435d18;
 BattleActionDescription FUN_00247478(BtlMainState *, BtlEntry *);
-BattleResourceLookupView *dataTable40FindById(u32);
 BattleItemResourceView *dataTable08Sub1GetRecord(u32);
 void aocEntryBlockStore(BattleResourceOwner *, u32, u32, s32, u32);
 void objectSetResultFromLookup(BattleResourceOwner *, u32, u32, u32);
@@ -47,7 +47,7 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         }
         resourceId = itemResource;
     }
-    u32 category = (dataTable40FindById(resourceId)->attributes >> 5) & 0xF;
+    u32 category = (reinterpret_cast<BattleResourceLookupView *>(dataTable40FindById(resourceId))->attributes >> 5) & 0xF;
     bool normal = true;
     if (category == 2 || category == 3 || category == 4)
         normal = false;

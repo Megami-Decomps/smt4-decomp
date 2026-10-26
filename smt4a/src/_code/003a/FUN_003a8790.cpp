@@ -4,19 +4,19 @@
 #include "gamedata/Table00.h"
 #include "gamedata/Table04Record.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 const Table00Record *dataTable00FindById(u32);
 void scrSetResult(u32);
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32);
-BtlUnitA *btlUnitGet(u32);
 
 // Check both persistent skill lists and the demon's innate list for the requested category.
 u32 FUN_003a8790(void)
 {
     u32 category = scrGetArg(0);
-    BtlCombatantEntryA *entry = reinterpret_cast<BtlCombatantEntryA *>(btlUnitGet(g_btlScriptUnit)->params);
+    BtlCombatantEntryA *entry = reinterpret_cast<BtlCombatantEntryA *>(reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->params);
     if (entry->record) {
         for (s32 index = 0; index < 8; ++index) {
             const Table04Record *skill = dataTable04FindById(entry->record->skills[index]);

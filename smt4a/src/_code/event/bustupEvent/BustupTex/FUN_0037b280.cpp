@@ -7,6 +7,7 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "event/bustupEvent/BustupTex.h"
 
 // The animation vectors follow the established texture-work prefix.
 struct BustupTextureCreateWorkA {
@@ -21,7 +22,6 @@ extern AocSystemA* g_aocSystem;
 void* asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 size, u32 option);
 s32 FUN_00162ea4(void);
 s32 aocRunByName(AocSystemA* system, s32 table, s32 node, u32 option);
-u32 FUN_0014afd0(s32 table, s32 node);
 void FUN_0026c568(void* work);
 void asdMTeXReleaseJobContext(void* work);
 
@@ -49,7 +49,7 @@ void FUN_0037b280(s32 portrait)
             if (aocRunByName(g_aocSystem, work->texture.table, work->texture.node, 1)) {
                 work->texture.texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->texture.table, work->texture.node, 0x10000);
             } else {
-                work->texture.texture = FUN_0014afd0(work->texture.table, work->texture.node);
+                work->texture.texture = reinterpret_cast<u32>(FUN_0014afd0(work->texture.table, work->texture.node));
             }
         }
         work->texture.deferred = 0;

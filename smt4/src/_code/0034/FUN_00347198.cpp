@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps each flag/mask pair as `tst; tstne` with conditionally executed loads and `blne`, computing the size in r0 first; armcc here branches around each call and fuses the first test into `and; tst`. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 /* A dynamic mesh: per-attribute vertex arrays and an index array, enabled by flags. */
 struct DynamicMesh {
@@ -20,7 +21,6 @@ struct DynamicMesh {
 
 extern "C" {
 
-void FUN_002c2424(void *data, u32 size);
 
 /* Flush the attribute arrays selected by mask (and present in the mesh) to memory. */
 void FUN_00347198(DynamicMesh *mesh, u32 mask)
@@ -29,19 +29,19 @@ void FUN_00347198(DynamicMesh *mesh, u32 mask)
         return;
     }
     if ((mesh->flags & 0x1) && (mask & 0x1)) {
-        FUN_002c2424(mesh->positions, mesh->vertexCount * 12);
+        FUN_002c2424((u32)(mesh->positions), mesh->vertexCount * 12);
     }
     if ((mesh->flags & 0x2) && (mask & 0x2)) {
-        FUN_002c2424(mesh->colors, mesh->vertexCount * 16);
+        FUN_002c2424((u32)(mesh->colors), mesh->vertexCount * 16);
     }
     if ((mesh->flags & 0x20) && (mask & 0x20)) {
-        FUN_002c2424(mesh->packed, mesh->vertexCount * 4);
+        FUN_002c2424((u32)(mesh->packed), mesh->vertexCount * 4);
     }
     if ((mesh->flags & 0x4) && (mask & 0x4)) {
-        FUN_002c2424(mesh->texCoords, mesh->vertexCount * 8);
+        FUN_002c2424((u32)(mesh->texCoords), mesh->vertexCount * 8);
     }
     if ((mesh->flags & 0x80) && (mask & 0x80)) {
-        FUN_002c2424(mesh->indices, mesh->indexCount * 2);
+        FUN_002c2424((u32)(mesh->indices), mesh->indexCount * 2);
     }
 }
 

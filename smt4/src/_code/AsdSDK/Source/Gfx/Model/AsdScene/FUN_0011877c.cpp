@@ -1,10 +1,10 @@
 /* NON_MATCHING: initializer stores, VFP constant scheduling and light-parameter groups use different registers. */
 #include "AsdSDK/Source/Gfx/Model/AsdSceneLight.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 extern "C" {
 void *asdMemoryAlloc(u32, u32, u32, u32, u32);
-AsdAllocatorObject *asdMemoryGetDefaultAllocator(void);
 AsdSceneLightObject *_ZN9Obj4210586createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
 
 // Allocate a point light with default color, position, attenuation and cone parameters.
@@ -15,7 +15,7 @@ AsdSceneLight *FUN_0011877c(void)
     light->object = NULL;
     light->id = -1;
     light->parameters = NULL;
-    AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
+    AsdAllocatorObject *allocator = reinterpret_cast<AsdAllocatorObject *>(asdMemoryGetDefaultAllocator());
     AsdSceneLightDescription description;
     description.enabled = 1;
     description.updateEnabled = 1;

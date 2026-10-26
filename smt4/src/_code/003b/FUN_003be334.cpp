@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild from asm of the battle damage/value estimate for a skill or an item-like record; armcc here orders the local action-info block and the spilled arguments differently (retail pushes r0-r3 and d0 and reloads the stack arguments), and the 0.01f/25% scaling and the random bonus are scheduled differently. */
 #include "battle/BtlMainAccess.h"
+#include "gamedata/DataTable40.h"
 
 /* The skill record (only the fields read here). */
 struct SkillRecord {
@@ -48,7 +49,6 @@ struct UnitRecord {
 };
 
 extern "C" {
-SkillRecord *dataTable40FindById(s32 id);
 ValueRecord *dataTable08Sub1GetRecord(s32 id);
 BattleEntry *btlMainFindEntryByListedId(BtlMainState *battle, s32 id);
 void FUN_00247478(ActionInfo *info, BtlMainState *battle, BattleEntry *entry);
@@ -64,7 +64,7 @@ s32 randRange(u32 limit);
 s32 FUN_003be334(s32 wantDamage, s32 skillId, u32 unused, s32 recordId, f32 multiplier, s32 attacker, s32 target)
 {
     BtlMainState *battle = btlGetMainState();
-    SkillRecord *skill = dataTable40FindById(skillId);
+    SkillRecord *skill = reinterpret_cast<SkillRecord *>(dataTable40FindById(skillId));
     ValueRecord *record = dataTable08Sub1GetRecord(recordId);
     BattleEntry *attackerEntry = btlMainFindEntryByListedId(battle, attacker);
     BattleEntry *targetEntry = btlMainFindEntryByListedId(battle, target);

@@ -4,13 +4,13 @@
 #include "gamedata/Table00Lookup.h"
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 #include "util/CalleeContracts.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct DemonPortraitCropA { s32 top, bottom, left, right; };
 extern "C" {
 extern u32 g_aocSystem;
 bool gameFlagIsSet(u32 flag);
 s32 recordPrepareLinkedOwner(u32 package, u32 table, s32 image);
-u16 *asdTMTexTableEntryAt(u32 table, s32 image);
 void FUN_001849bc(u32 flags, u32 table, s32 image, PositionedLayoutPosition position, const void *crop);
 void FUN_00471a04(u32 package, s32 id, u32 flags, s32 image, s32 x, s32 y, s32 z,
                   s32 clipX, s32 clipY, s32 clipWidth, s32 clipHeight);
@@ -47,11 +47,11 @@ void FUN_003bb50c(s32 id, s32 x, s32 y, s32 z, s32 resolve,
             FUN_00471a04(g_aocSystem, id, 2, image, x, y, z, clipX, clipY, clipWidth, clipHeight);
         } else {
             s32 sprite = image * 1000 + 1;
-            const u16 *origin = asdTMTexTableEntryAt(table, sprite);
+            const TextureTableEntryIV *origin = asdTMTexTableEntryAt(table, sprite);
             DemonPortraitCropA crop;
-            crop.left = origin[0] + (clipX - x);
+            crop.left = origin->originX + (clipX - x);
             crop.right = crop.left + clipWidth;
-            crop.top = origin[1] + (clipY - y);
+            crop.top = origin->originY + (clipY - y);
             crop.bottom = crop.top + clipHeight;
             PositionedLayoutPosition destination = { clipX, clipY, z };
             FUN_001849bc(2, table, sprite, destination, &crop);

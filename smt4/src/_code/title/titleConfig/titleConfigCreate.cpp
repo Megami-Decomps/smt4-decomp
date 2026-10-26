@@ -3,6 +3,8 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct TitleConfigWordPair { u32 first, second; };
 union TitleConfigAudioSettings {
@@ -36,7 +38,6 @@ extern "C" {
 extern TitleConfigCreateWork *g_titleConfig;
 extern const u8 DAT_00407dd6[];
 extern TitleConfigAudioSettings g_titleConfigValues;
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 u32 taskCreateDraw(const char *name, s32 priority, s32 screen, u32 flags,
                     s32 (*draw)(void), void (*end)(void), void *work, u32 parent);
 s32 titleConfigUpdate(void);
@@ -49,7 +50,6 @@ void FUN_002bd954(SpritePlaybackView *sprite, s32 kind, s32 count,
 void timerStart(SpritePlaybackView *sprite, s32 key, s32 mode);
 void FUN_0029f848(void *selector, s32 count, s32 rows, s32 wrap, s32 first, s32 enabled);
 void memFill8(void *destination, u32 value);
-void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 void buttonHelpSetPreset(s32 preset);
 void FUN_0029ee6c(s32 first, u32 color);
 u32 bgmVolumeToStep(u8 volume);
@@ -75,8 +75,8 @@ extern "C" void titleConfigCreate(void)
     work->countA = 0;
     memFill8(&work->handles, -1u);
     work->countB = 0;
-    asdLoadFileAsyncSimple("camp/config.bf", &work->scriptData, 0);
-    asdLoadFileAsyncSimple("camp/config.mbm", &work->modelData, 0);
+    asdLoadFileAsyncSimple("camp/config.bf", reinterpret_cast<u32 *>(&work->scriptData), 0);
+    asdLoadFileAsyncSimple("camp/config.mbm", reinterpret_cast<u32 *>(&work->modelData), 0);
     buttonHelpSetPreset(0x99);
     FUN_0029ee6c(0, 0x323232ff);
     work->musicStep = bgmVolumeToStep(g_titleConfigValues.values.music);

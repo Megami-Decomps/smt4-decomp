@@ -3,6 +3,7 @@
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "shop/shopMain.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 
@@ -34,7 +35,6 @@ typedef struct Screen {
 } Screen;
 
 extern void uiSpriteSelectAnim(void *widget, s32 arg);
-extern void asdTMTexLoadMainHeap(s32 group, s32 id);
 extern void FUN_00203b40(void *panel, u32 arg, s32 a, s32 b, s32 c, s32 d);
 extern void flagsSetOrClearBit(void *panel, s32 arg);
 extern s32 textureGetIndexedResource(s32 id);

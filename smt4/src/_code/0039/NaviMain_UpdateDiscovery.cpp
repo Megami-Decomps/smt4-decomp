@@ -8,7 +8,7 @@ int pairCopy(...);
 int FUN_00231dec(...);
 int FUN_002bed3c(void);
 int FUN_002c18e4(...);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(...);
 int FUN_003996c8(void);
 int FUN_00399d0c(...);
@@ -55,7 +55,7 @@ extern int FUN_002b8694(void);
 /* Supplied declaration required: FUN_002bed3c. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c18e4. */
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 /* Supplied declaration required: FUN_003996c8. */
 /* Supplied declaration required: FUN_00399d0c. */
@@ -321,7 +321,7 @@ LAB_0039f450:
         FUN_00231dec(param_1);
         DAT_0044cdd8 = DAT_0044cdd8 + 1;
       }
-      FUN_002c198c(g_titleScene);
+      renderCtxApplyTransforms(g_titleScene);
       FUN_002c18e4(g_titleScene);
       if ((*(char *)(param_1 + 0x9ec) != '\0') && (*(char *)(param_1 + 0x9ee) == '\0')) {
         FUN_0039bd04(param_1);

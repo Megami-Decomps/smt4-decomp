@@ -4,12 +4,12 @@
 #include "battle/BattleMessageMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 extern u32 g_btlScriptUnit;
 u32 scrGetArg(u32 index);
-void *btlUnitGet(u32 id);
 u32 FUN_004bf9a0(u32 status);
 u32 FUN_004c8340(s32 source, s32 target, u32 status, s32 mode, s32 flags);
 void FUN_004fda78(s32 mode, s32 flags, void *source, BattleRosterRecordA *target,
@@ -24,7 +24,7 @@ u32 FUN_0039e338()
     u32 status = scrGetArg(0);
     s32 enable = scrGetArg(1);
     s32 checkResponse = scrGetArg(2);
-    void *source = btlUnitGet(g_btlScriptUnit);
+    void *source = btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit));
     BtlMainStateA *state = btlGetMainState();
     u32 mask = 1u << status;
     for (s32 index = 0; index < 4; ++index) {

@@ -3,11 +3,6 @@
 
 extern "C" BattleVector3 DAT_00493530;
 
-static __inline void battleVectorCopy(BattleVector3 *destination, const BattleVector3 *source)
-{
-    *destination = *source;
-}
-
 /* Starts the vector transition and resets its progress. */
 extern "C" void FUN_003d7244(BattleVectorTransition *state, s32 target, s32 mode, f32 x, f32 y, f32 z)
 {

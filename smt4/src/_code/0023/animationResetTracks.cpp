@@ -4,7 +4,7 @@ extern "C" {
 typedef f32 (*AnimationPolicy)(void *context, f32 start, f32 end, f32 frame);
 struct AnimationState { u8 unk00[0x38]; f32 frame; f32 previous; f32 speed; f32 start; f32 end; AnimationPolicy policy; void *context; u8 unk54[4]; u8 dirty; };
 struct AnimationOwner { u8 unk00[12]; AnimationState *primary[3]; AnimationState *secondary[3]; };
-f32 FUN_00155650(void *context, f32 start, f32 end, f32 frame);
+f32 mathClampFloat(void *context, f32 start, f32 end, f32 frame);
 f32 nw_anim_PlayPolicy_Loop(void *context, f32 start, f32 end, f32 frame);
 static __inline void resetAnimation(AnimationState *state)
 {
@@ -20,14 +20,14 @@ void animationResetTracks(AnimationOwner *owner, u32 index, s32 loop)
     if (state != NULL) {
         resetAnimation(state);
         owner->primary[index]->speed = 1.0f;
-        owner->primary[index]->policy = loop ? nw_anim_PlayPolicy_Loop : FUN_00155650;
+        owner->primary[index]->policy = loop ? nw_anim_PlayPolicy_Loop : mathClampFloat;
         owner->primary[index]->dirty = 1;
     }
     state = owner->secondary[index];
     if (state != NULL) {
         resetAnimation(state);
         owner->secondary[index]->speed = 1.0f;
-        owner->secondary[index]->policy = loop ? nw_anim_PlayPolicy_Loop : FUN_00155650;
+        owner->secondary[index]->policy = loop ? nw_anim_PlayPolicy_Loop : mathClampFloat;
         owner->secondary[index]->dirty = 1;
     }
 }

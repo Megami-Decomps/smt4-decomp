@@ -3,7 +3,7 @@
 #include "script/ScriptArgs.h"
 
 extern "C" {
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 
 // Pick an ordinal among the set bits in two script masks, then return its bit index.
 u32 FUN_0038dc84(void)
@@ -24,7 +24,7 @@ u32 FUN_0038dc84(void)
             ++count;
         }
     }
-    s32 ordinal = FUN_00184964(0, count - 1);
+    s32 ordinal = randBetween(0, count - 1);
     s32 seen = 0;
     s32 result = 0;
     for (s32 bit = 0; bit < 32; ++bit) {

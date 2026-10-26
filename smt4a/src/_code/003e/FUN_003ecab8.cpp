@@ -6,6 +6,7 @@
 #include "shard/S1Mover.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/Table00.h"
+#include "util/dataTableFileGetTable.h"
 
 namespace {
 /* Resource fields overlap the canonical state's byte-aligned padding. */
@@ -50,7 +51,6 @@ typedef char BattlePositionQueryOffsets[
 }
 extern "C" {
 BattleAppearancePositionView *FUN_001568f8(BtlMainStateA *state, s32 index);
-void *dataTableFileGetTable(void *file, u32 table);
 BattleGroupPositionMembersView *FUN_003f0e20(BtlMainStateA *state, s16 group);
 EnemyDrawOffsetOwner *stateEntryFindById(BtlMainStateA *state, u32 id);
 void btlEnemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *owner, BattleVector3 *output, f32 scale);
@@ -66,7 +66,7 @@ Vec3f FUN_003ecab8(BtlMainStateA *state, s32 index, s32 forceAttachment)
         u16 id = FUN_001568f8(state, index)->id;
         const BattleOverridePositionRecord *selected = NULL;
         if (resources->overrides != NULL) {
-            void *table = dataTableFileGetTable(resources->overrides, 0);
+            void *table = dataTableFileGetTable((u32)(resources->overrides), 0);
             const BattleOverridePositionRecord *entries = static_cast<const BattleOverridePositionRecord *>(dataTableGetEntries(table));
             s32 count = static_cast<s32>(dataTableGetCount(table));
             for (s32 entry = 0; entry < count; ++entry) {

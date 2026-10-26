@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps the formatted-buffer address in fp and the path address in r6 (pointer locals) and reserves 4 more stack bytes (260); name pointer now matches. */
 #include "common.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -26,7 +27,6 @@ s32 textFormatBuffer(char *output, const char *format, ...);
 char *libc_strcpy(char *dest, const char *src);
 char *FUN_002522e0(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
-void asdLoadFileAsyncSimple(const char *path, void **data, u32 flags);
 
 /* Resets the five battle effect slots and starts loading each effect file not already registered. */
 u32 FUN_003dadd8(BattleEffectOwner *owner)
@@ -50,7 +50,7 @@ u32 FUN_003dadd8(BattleEffectOwner *owner)
         libc_strcpy(path, formatted);
         libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
-            asdLoadFileAsyncSimple(path, &slot->data, 0);
+            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 0);
             slot->flags |= 1;
         }
     }

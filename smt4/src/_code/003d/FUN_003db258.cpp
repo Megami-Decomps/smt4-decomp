@@ -1,8 +1,8 @@
 /* NON_MATCHING: filename buffers start eight bytes later; flags/name addressing and saved path register differ. */
 #include "gfx/VersionedTextureRequest.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
-void asdLoadFileAsyncSimple(const char *, const char **, u32);
 void textFormatBuffer(char *, const char *, ...);
 char *libc_strcpy(char *, const char *);
 void asdMemFree(const void *);
@@ -31,7 +31,7 @@ u32 FUN_003db258(VersionedTextureOwner *owner, const char *effect)
     char *basename = FUN_002522e0(path, '/');
     libc_strcpy(request->name, basename + 1);
     if (keyedRecordFindByName(request->name) == 0xff) {
-        asdLoadFileAsyncSimple(path, &request->format, 0);
+        asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&request->format), 0);
         request->flags |= 1;
     }
     return 1;

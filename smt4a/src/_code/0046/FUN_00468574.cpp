@@ -1,4 +1,4 @@
-/* NON_MATCHING: resource setup register reuse, adjacent pointer loads, and mode dispatch lowering differ. */
+/* NON_MATCHING: retail loads the second resource pair with two ldr (here an add + ldm) and lowers the mode test to one cmp/cmpne with predicated moves feeding the later branch; the linker-inlined scriptProcessSetMode stores now match. */
 #include "map/PickObjectResources.h"
 #include "util/CalleeContracts.h"
 
@@ -11,6 +11,7 @@ void FUN_003c3e14(void);
 void sysPlaySe(s32);
 void pickObjStart(PickObjectResources *, const char *);
 void FUN_003d54f8(s32, s32);
+void scriptProcessSetMode(PickObjectResource *process, s32 mode);
 
 /* Wait for both resource pairs, instantiate them, then select the initial state. */
 void FUN_00468574(PickObjectResources *work)
@@ -18,9 +19,9 @@ void FUN_00468574(PickObjectResources *work)
     if (work->primaryData != NULL && work->primaryInfo != NULL &&
         work->secondaryData != NULL && work->secondaryInfo != NULL) {
         work->primary = FUN_00275bc8(work->primaryData, work->primaryInfo);
-        work->primary->state = 2;
+        scriptProcessSetMode(work->primary, 2);
         work->secondary = FUN_00275bc8(work->secondaryData, work->secondaryInfo);
-        work->secondary->state = 2;
+        scriptProcessSetMode(work->secondary, 2);
         if (gameFlagIsSet(0x467)) {
             FUN_003c1060();
             messageSetMode(1);

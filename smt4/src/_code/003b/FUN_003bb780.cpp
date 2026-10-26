@@ -1,6 +1,7 @@
 /* NON_MATCHING: register allocation (retail addresses the cursor flags through a base register at menu+0x600 and keeps constants in different registers) */
 #include "shard/S1ListMenu.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029e924.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ void FUN_002bf380(s32 layer, s32 group, s32 id, s32 x, s32 y, s32 size);
 f32 *asdTMTexTableEntryAt(s32 group, s32 id);
 void efctSetSpeed(f32 alpha);
 f32 vec2GetSpeed(const void *animation);
-s32 FUN_0029e924(ListMenu *menu);
 s32 rangeLimitMin(ListMenu *menu);
 u32 flaggedEntryGetValueByState(ListMenu *menu);
 u32 flaggedValueHolderGetTotal(ListMenu *menu);

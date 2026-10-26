@@ -1,6 +1,7 @@
 /* NON_MATCHING: twin of smt4 FUN_002d508c; readable rewrite compiles (175 vs 165 rows); register allocation and stack frame differ */
 #include "common.h"
 #include "shard/W6_W6Match2_TitleCommand.h"
+#include "shard/gameFlagsGetBlock.h"
 
 struct Vec3f {
     f32 x, y, z;
@@ -39,7 +40,6 @@ extern s8 DAT_005f1614;
 extern s8 DAT_005f1bc4;
 extern s8 DAT_005f1c48;
 
-GameFlagsBlock* gameFlagsGetBlock(void);
 void FUN_00317af8(f32* stickX, f32* stickY, s32 arg);
 void FUN_0033f9f4(void);
 f32 FUN_0050d8e4(f32 y, f32 x);
@@ -51,7 +51,7 @@ s32 FUN_0036d5e0(Vec3f* candidate, Vec3f* previous);
 // turns to the stick direction and advances in one or two collision-checked steps.
 void FUN_0033feb8(PlayerController* player)
 {
-    GameFlagsBlock* block = gameFlagsGetBlock();
+    GameFlagsBlock* block = reinterpret_cast<GameFlagsBlock *>(gameFlagsGetBlock());
     f32 speedScale = 1.0f;
     s32 blocked = 0;
     if (DAT_005f1bc4 != 0 || DAT_005f1614 != 0) {

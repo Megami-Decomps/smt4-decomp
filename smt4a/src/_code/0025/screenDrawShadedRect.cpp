@@ -5,7 +5,6 @@ extern "C" {
 
 extern RenderCtxA *g_renderCtx;
 extern QuadVectorState DAT_006306f8;
-void FUN_0016c4b8(RenderCtxA *context, s32 mode);
 void FUN_00167618(const QuadVector *first, const QuadVector *second, const QuadVector *third,
                   const QuadVector *fourth, f32 x, f32 y, f32 width, f32 height, f32 depth);
 
@@ -24,7 +23,7 @@ void screenDrawShadedRect(s32 x, s32 y, s32 width, s32 height, s32 fade)
         third = &DAT_006306f8.corners[2];
         fourth = &DAT_006306f8.corners[3];
     }
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     FUN_00167618(first, second, third, fourth, (f32)x, (f32)y, (f32)width, (f32)height,
                  (f32)(0x100 - fade) / 256.0f);
 }

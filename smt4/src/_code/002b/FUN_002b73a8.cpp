@@ -1,5 +1,5 @@
 #include "common.h"
-extern "C" void* asdMemAlloc(u32, u32, u32, u32, u32);
+#include "AsdSDK/AsdMemAlloc.h"
 
 // Selects the allocation arena and initialization policy from the request flags.
 extern "C" void* FUN_002b73a8(u32 size, u32 flags)

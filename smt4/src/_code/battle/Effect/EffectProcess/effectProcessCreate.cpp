@@ -3,10 +3,10 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern EffectProcess *g_effectProcessActive;
-void *asdMemAlloc(u32, u32, u32, u32, u32);
 void taskInitLists();
 void textureCacheReset(u32);
 void FUN_00317a90();

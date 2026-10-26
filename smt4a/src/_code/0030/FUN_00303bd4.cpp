@@ -4,7 +4,7 @@
 
 extern "C" {
 void* sysMemClear(void* destination, u32 size);
-u32 FUN_00184964(u32 first, u32 last);
+u32 randBetween(u32 first, u32 last);
 const void* aocRecordLookup83(u16 id);
 
 u16 FUN_00303bd4(s32 mode)
@@ -22,7 +22,7 @@ u16 FUN_00303bd4(s32 mode)
         return 0;
     }
     if (mode == 1) {
-        return candidates[FUN_00184964(0, count - 1)];
+        return candidates[randBetween(0, count - 1)];
     }
     if (mode == 2 || mode == 3) {
         // Both release paths keep index zero; their discarded record comparison selects nothing.

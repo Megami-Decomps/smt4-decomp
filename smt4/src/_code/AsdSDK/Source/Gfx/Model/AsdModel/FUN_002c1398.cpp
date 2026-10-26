@@ -1,5 +1,5 @@
 #include "common.h"
-#include "nn/Result.h"
+#include "util/FUN_002c1398.h"
 #include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {

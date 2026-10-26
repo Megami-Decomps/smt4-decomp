@@ -9,8 +9,8 @@ int cameraSetViewMatrix(int, unsigned char [108]);
 int FUN_002b99b8(void);
 int FUN_002ba1e0(...);
 int mtx44Copy(unsigned char [108], unsigned int *);
-int FUN_002c198c(int);
-int FUN_002c1b64(...);
+int renderCtxApplyTransforms(int);
+int renderCtxSelectTexture(...);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 
@@ -56,8 +56,8 @@ extern unsigned int DAT_004efdd8; /* 0x4efdd8 */
 /* Supplied declaration required: FUN_002ba1e0. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c198c. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int asdTMTexTableGetNodeTexture(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
@@ -216,7 +216,7 @@ void FUN_001137fc(int param_1)
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x14),(unsigned char)(in_fpscr >> 0x16) & 3);
   VectorSignedToFloat(*(unsigned int *)(temp_v3 + 0x18),(unsigned char)(in_fpscr >> 0x16) & 3);
   *(unsigned int *)(temp_v3 + 0x40) = 1;
-  FUN_002c1b64(g_titleScene);
+  renderCtxSelectTexture(g_titleScene);
   FUN_002ba1e0(temp_v4 | 0xffffff00);
   temp_v3 = g_titleScene;
   temp_v0 = packNibblesAndByte(6,1,0);
@@ -230,7 +230,7 @@ void FUN_001137fc(int param_1)
   temp_v4 = DAT_0043e284 | 0xffffff00;
   temp_v3 = asdTMTexTableGetNodeTexture(5,2);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_002c1b64(g_titleScene,temp_v3);
+  renderCtxSelectTexture(g_titleScene,temp_v3);
   FUN_002ba1e0(temp_v4);
   if (((_ZGVZN2nw4math5MTX448IdentityEvE8identity & 1) == 0) && (temp_v3 = __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity), temp_v3 != 0)) {
     _ZZN2nw4math5MTX448IdentityEvE8identity = temp_v7;
@@ -254,10 +254,10 @@ void FUN_001137fc(int param_1)
   cameraSetViewMatrix(g_titleScene,temp_v8);
   temp_v3 = asdTMTexTableGetNodeTexture(5,3);
   *(unsigned int *)(temp_v3 + 0x38) = 2;
-  FUN_002c1b64(g_titleScene,temp_v3);
+  renderCtxSelectTexture(g_titleScene,temp_v3);
   temp_v4 = DAT_0043e28c | 0xffffff00;
   FUN_002ba1e0(temp_v4,temp_v4,temp_v4,temp_v4,temp_v6,0x40700000,0x40c80000,0x40700000);
-  FUN_002c198c(g_titleScene);
+  renderCtxApplyTransforms(g_titleScene);
   temp_v3 = g_titleScene;
   piVar5 = (int *)(g_titleScene + 0x12ac);
   temp_v0 = *piVar5;

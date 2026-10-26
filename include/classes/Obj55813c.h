@@ -2,9 +2,9 @@
 #define CLASSES_OBJ55813C_H
 
 #include "common.h"
+#include "util/vcallSlot12IfValid.h"
 
 extern "C" void sysFatalBreak(void);
-extern "C" void vcallSlot12IfValid(u32 handle);
 
 class Obj55813cFile;
 extern "C" s32 FUN_001883b0(Obj55813cFile *file, const wchar_t *path, s32 mode);

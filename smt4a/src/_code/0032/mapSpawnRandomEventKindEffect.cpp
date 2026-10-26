@@ -4,16 +4,16 @@
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
-s32 FUN_00184964(s32 minimum, s32 maximum);
+s32 randBetween(s32 minimum, s32 maximum);
 s32 FUN_003d4ed8(u32 sound, BattleVector3 position);
 
 // Scatter one of four event-kind sounds around the current map position.
 void mapSpawnRandomEventKindEffect()
 {
     BattleVector3 position = { g_lmapScene->position.x, g_lmapScene->position.y, g_lmapScene->position.z };
-    position.x += FUN_00184964(-20, 20);
-    position.z += FUN_00184964(-20, 20);
-    u32 variant = FUN_00184964(0, 100) & 3;
+    position.x += randBetween(-20, 20);
+    position.z += randBetween(-20, 20);
+    u32 variant = randBetween(0, 100) & 3;
     switch (g_gameState.eventKind) {
     case 0:
         FUN_003d4ed8(variant + 0x10002ac, position);

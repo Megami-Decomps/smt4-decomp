@@ -2,11 +2,11 @@
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
 
 extern "C" {
 TextureUploadResourcePrefixIV *FUN_002d5a08(u32 source, u32 sourceInfo,
     u32 extent, u32 format, u32 pixelType, u32 internalFormat, u32 options);
-MemoryAllocator *asdMemoryGetAllocatorA(void);
 TextureObject *FUN_0036ec8c(const TextureCreateInfoIV *info,
     MemoryAllocator *allocator);
 void FUN_002bd498(TextureObject **object, MemoryAllocator *allocator, u32 flags);
@@ -17,7 +17,7 @@ void FUN_00343e5c(TextureBindingPrefixIV *binding, u32 extent,
     binding->resource = FUN_002d5a08(source, sourceInfo, extent,
         0x1908, 0x8033, 0x81a5, options);
 
-    MemoryAllocator *allocator = asdMemoryGetAllocatorA();
+    MemoryAllocator *allocator = reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA());
     TextureCreateInfoIV info;
     info.height = 0;
     info.width = 0;
@@ -34,7 +34,7 @@ void FUN_00343e5c(TextureBindingPrefixIV *binding, u32 extent,
     info.height = binding->resource->texture->dimensions.height;
 
     binding->object = FUN_0036ec8c(&info, allocator);
-    allocator = asdMemoryGetAllocatorA();
+    allocator = reinterpret_cast<MemoryAllocator *>(asdMemoryGetAllocatorA());
     FUN_002bd498(&binding->object, allocator, 0);
 }
 }

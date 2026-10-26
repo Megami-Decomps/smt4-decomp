@@ -1,6 +1,7 @@
 /* NON_MATCHING: command-menu cursor to (action, argument) mapping; retail loads the blocked-command masks with ldr/ldm pairs instead of ldrd, keeps a 36-byte frame (9 words) and the work pointer in r6, and lowers the switch with a different jump table order */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "util/FUN_002a4894.h"
 
 struct BtlMenuCursor {
     /* 0x00 */ u8 unk00[4];
@@ -50,7 +51,6 @@ PlayerCommandState *gameGetPlayerData(void);
 s32 gameFlagIsSet(u32 flag);
 s32 gameDataFlagTestBit(u32 bit);
 s32 resourceRunOperationIfUnblocked(BtlMenuCursor *cursor);
-s32 FUN_002a4894(BtlMenuCursor *cursor);
 u32 FUN_002cc9e0(BtlMenuWork *work, u32 mode);
 
 /* Maps the highlighted command to (action, argument). */

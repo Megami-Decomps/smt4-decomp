@@ -4,6 +4,7 @@
 #include "shard/TextureDrawCall.h"
 #include "shard/partyMemberFindById.h"
 #include "shard/W6_W6Match3_RotationY.h"
+#include "util/FUN_0029d644.h"
 
 extern "C" {
 
@@ -61,7 +62,6 @@ extern int uniteGetWork(void);
 /* Supplied declaration required: gameRecordCopy. */
 /* Supplied declaration required: FUN_00290994. */
 /* Supplied declaration required: FUN_0029a17c. */
-extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern unsigned int FUN_0029dde0(void);
 /* Supplied declaration required: FUN_0029e6f0. */
@@ -195,7 +195,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
     temp_v18 = temp_v2 + 0x6c7c;
     temp_v9 = FUN_0029efc0();
     temp_v4 = 0;
-    temp_v8 = FUN_0029d644(temp_v2 + 0x6c7c);
+    temp_v8 = FUN_0029d644((const void *)(temp_v2 + 0x6c7c));
     if (0 < temp_v8) {
       do {
         temp_v6 = temp_v21;
@@ -319,7 +319,7 @@ void FUN_001eef8c(int param_1,int param_2,int param_3)
                      &LAB_001efd48,temp_v13);
         FUN_002bed3c();
         temp_v4 = temp_v4 + 1;
-        temp_v8 = FUN_0029d644(temp_v18);
+        temp_v8 = FUN_0029d644((const void *)(temp_v18));
       } while (temp_v4 < temp_v8);
     }
     temp_v4 = FUN_0029efc0(temp_v18);

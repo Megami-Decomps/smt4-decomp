@@ -2,10 +2,10 @@
 #include "title/titleMain.h"
 #include "title/TitleJobWork.h"
 #include "camp/RenderCtx.h"
+#include "shard/JobWork.h"
 
 extern "C" {
 extern TitleScene *g_titleScene;
-u32 jobGetWork(u32 job);
 u32 FUN_002bfadc(u32 mode, TitleJobSurface *surface);
 
 /* Resizes the title job's surface when both overlays are hidden. */

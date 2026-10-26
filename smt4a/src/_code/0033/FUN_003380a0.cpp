@@ -5,7 +5,7 @@
 extern "C" {
 
 int renderCtxResetColorScale(int);
-int FUN_0016c4b8(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int skinObjectUpdateMatrices(int);
 int sysMemClear(unsigned char *, int);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char *, unsigned char *, int, int);
@@ -37,7 +37,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 extern int FUN_001692ac(unsigned int, unsigned int);
 /* Supplied declaration required: renderCtxResetColorScale. */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
@@ -86,7 +86,7 @@ void FUN_003380a0(unsigned int *param_1,unsigned int param_2)
   unsigned int temp_v17;
   unsigned char temp_v18;
   
-  FUN_0016c4b8(g_renderCtx,param_1[5]);
+  renderCtxSelectTexture(g_renderCtx,param_1[5]);
   temp_v8 = param_1[6];
   uStack_804 = param_1[7];
   uStack_800 = param_1[8];

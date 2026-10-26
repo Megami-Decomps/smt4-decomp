@@ -17,7 +17,8 @@ static inline SpriteAnimationCommand *findSpriteCommand(SpriteAnimationResource 
 }
 
 /* Starts the sprite's `index`th animation command. */
-extern "C" void spriteStartAnimationByIndex(SpritePlaybackView *sprite, s32 index)
+extern "C" void spriteStartAnimationByIndex(void *object, s32 index)
 {
+    SpritePlaybackView *sprite = static_cast<SpritePlaybackView *>(object);
     spriteStartAnimation(sprite, findSpriteCommand(sprite->resource, index));
 }

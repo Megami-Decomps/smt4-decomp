@@ -1,4 +1,4 @@
-/* NON_MATCHING: actor/options saved registers are reversed; the null-name return joins a different epilogue. */
+/* NON_MATCHING: actor/options saved registers are swapped (retail actor=sl, options=r4); tail otherwise matches. */
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
 #include "battle/btlDebug.h"
@@ -36,10 +36,7 @@ ReflectAction* FUN_004fdcd8(s32 actor, u32 options, u32 first, s32 target,
     reinterpret_cast<FloatPayloadView*>(action)->second = 0.0f;
     action->parameter = 0;
     action->word50 = 1;
-    if (!name) {
-        return action;
-    }
-    if (!libc_strcmp("Dead_12", name) || !libc_strcmp("Dead_13", name)) {
+    if (name && (!libc_strcmp("Dead_12", name) || !libc_strcmp("Dead_13", name))) {
         action->specialDeath.enabled = 1;
     }
     return action;

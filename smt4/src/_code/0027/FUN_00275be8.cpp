@@ -2,6 +2,7 @@
 #include "ui/FrameTex.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
+#include "font/ComWin/ComWin.h"
 
 namespace {
 struct TiledFrameView {
@@ -25,7 +26,6 @@ extern "C" {
 extern FrameWork *g_frameTex;
 void FUN_002bd954(UiSpriteState *sprite, s32 group, s32 image, UiResourceParameters *parameters, s32 flags, f32 scale);
 void uiSpriteSetImageKeyframe(UiSpriteState *sprite, s32 key, s32 mode);
-void spriteStartAnimationByIndex(UiSpriteState *sprite, s32 enabled);
 void FUN_002a9fdc(UiSpriteState *sprite, s32 key, s32 mode);
 void FUN_00295eb0(UiSpriteState *sprite, s32 group, s32 image);
 void FUN_002bf810(u32 sound);

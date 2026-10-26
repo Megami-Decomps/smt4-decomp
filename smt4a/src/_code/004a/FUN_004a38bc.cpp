@@ -1,4 +1,5 @@
 #include "shard/Shard0031.h"
+#include "util/FUN_002a482c.h"
 
 struct PreviewMenuWindow { u8 kind; u8 unk01[3]; s32 minimum, maximum; u32 unk0c; FlaggedEntry entry; };
 struct PreviewMenuEntry { s16 previewState; u16 unk02, option; u8 unk06[0x1a]; };
@@ -19,7 +20,6 @@ s32 messageGetChoiceResult();
 u32 flaggedValueHolderGetTotal(const PreviewMenuWindow *window);
 void demonRefreshSavedSnapshot(PreviewMenuWork *work, u16 option);
 s32 FUN_0031d174(PreviewMenuWindow *window);
-s32 FUN_002a482c(PreviewMenuWindow *window);
 void FUN_004a1958(PreviewMenuWork *work);
 void setListWindow(PreviewMenuWindow *window, s32 first, s32 second);
 u32 buttonHelpGetValue();

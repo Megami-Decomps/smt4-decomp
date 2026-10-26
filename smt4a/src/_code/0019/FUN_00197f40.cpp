@@ -1,13 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_001b1998's literal pool; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_00197f40 for reference (not compiled; its own view of the boundaries):
+#include "shard/W5_W5Match1_RecordKeys.h"
 
-void FUN_00197f40(unsigned int *param_1)
+extern "C" {
 
+/* Initializes an empty circular callback list. */
+void FUN_00197f40(CallbackList *list)
 {
-  param_1[1] = param_1 + 1;
-  *param_1 = 0;
-  param_1[2] = param_1 + 1;
-  return;
+    list->sentinel.next = &list->sentinel;
+    list->count = 0;
+    list->sentinel.previous = &list->sentinel;
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

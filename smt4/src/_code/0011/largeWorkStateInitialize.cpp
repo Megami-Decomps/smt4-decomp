@@ -27,14 +27,14 @@ struct LargeWorkState {
 };
 
 extern "C" {
-void *FUN_0011b930(void *base);
+void *clearU64(void *base);
 WorkResult *_ZN18WindowStatusResultC1Ev(WorkResult *);
 WorkResult *_ZN18WindowStatusResultC1Ej(WorkResult *, u32 code);
 
 // Initialize the large work block's base, result state, parameters and value slots.
 void largeWorkStateInitialize(LargeWorkState *state)
 {
-    FUN_0011b930(state->base);
+    clearU64(state->base);
     state->enabled = 1;
     _ZN18WindowStatusResultC1Ev(&state->result);
     state->mode = 0;

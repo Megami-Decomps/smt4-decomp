@@ -1,6 +1,7 @@
 /* NON_MATCHING: same operations and call order as retail; retail keeps the 0.0f term in s22, the attacker/target ids in r6/r8 and the skill bonus in r8 across the attack-info copy, and moves base/rate with one vmov.f64; the build allocates r6-r9/fp and s17-s21 differently. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
+#include "battle/BattleBalanceRow.h"
 
 // A combatant entry of the battle state (the part this formula reads).
 struct BattleEntryView {
@@ -31,7 +32,6 @@ void selectionCopySupportedValue(u16 value, u32 *output);
 void *dataTable40FindById(void *player);
 u32 playerGetSkillRank(void *player);
 s32 FUN_00283ebc(void *record, u32 rank, s32 flag);
-f32 *FUN_0023ea94(void);
 
 // Damage of an attack by `attackerId` on `targetId`: the level-scaled base power through the combatants' stat
 // factors, the attack's power percent, the skill bonus and the target's resistance for the attack.
@@ -68,14 +68,14 @@ s32 FUN_003be918(void *player, s32 attackerId, s32 targetId, s32 first, f32 base
     if ((state->battleFlags & 0x40000) == 0) {
         if (attacker->flags & 4) {
             if ((target->flags & 4) != 0) {
-                damage = *FUN_0023ea94() * damage;
+                damage = FUN_0023ea94()->scale0 * damage;
             } else {
-                damage = FUN_0023ea94()[2] * damage;
+                damage = FUN_0023ea94()->scale2 * damage;
             }
         } else if ((target->flags & 4) != 0) {
-            damage = *FUN_0023ea94() * damage;
+            damage = FUN_0023ea94()->scale0 * damage;
         } else {
-            damage = FUN_0023ea94()[2] * damage;
+            damage = FUN_0023ea94()->scale2 * damage;
         }
     }
     u32 resistance = info.resistance[target->resistanceSlot];

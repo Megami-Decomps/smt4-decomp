@@ -18,11 +18,10 @@ typedef struct Context {
 extern TitleScene *g_titleScene;
 
 int FUN_001132fc(int arg);
-int FUN_002bff10(int arg);
-int renderCtxSelectStereoLayout(TitleScene *arg);
+int stateValuesGetBySelector(int arg);
 Context *jobGetWork(void);
 
-/* Script command: if the panel is shown and enabled and FUN_002bff10 reports nothing pending, runs renderCtxSelectStereoLayout/FUN_001132fc. Always returns 0. */
+/* Script command: if the panel is shown and enabled and stateValuesGetBySelector reports nothing pending, runs renderCtxSelectStereoLayout/FUN_001132fc. Always returns 0. */
 u8 FUN_00109520(void)
 {
     Panel *panel = &jobGetWork()->panel;
@@ -33,7 +32,7 @@ u8 FUN_00109520(void)
     if (panel->enabled == 0) {
         return 0;
     }
-    if (FUN_002bff10(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         return 0;
     }
     renderCtxSelectStereoLayout(g_titleScene);

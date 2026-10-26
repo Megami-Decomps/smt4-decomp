@@ -6,7 +6,7 @@ extern "C" {
 
 int renderCtxResetColorScale(u32 handle);
 int skinObjectUpdateMatrices(u32 handle);
-int FUN_0016c4b8(u32 handle, int arg);
+int renderCtxSelectTexture(u32 handle, int arg);
 int FUN_003db56c(GauntletAppMenuWork *menu);
 
 extern GauntletAppMenuWork *g_gauntletAppMenu;
@@ -16,7 +16,7 @@ u32 gauntletAppMenuExit(void)
 {
     GauntletAppMenuWork *menu = g_gauntletAppMenu;
 
-    FUN_0016c4b8(g_renderCtx, 0);
+    renderCtxSelectTexture(g_renderCtx, 0);
     FUN_003db56c(menu);
     skinObjectUpdateMatrices(g_renderCtx);
     renderCtxResetColorScale(g_renderCtx);

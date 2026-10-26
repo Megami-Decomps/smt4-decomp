@@ -1,6 +1,7 @@
 #include "shard/W5_W5Match2_StatusQuery.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct CecProcessChild {
     const void* vtable; // 0x00
@@ -9,7 +10,6 @@ struct CecProcessChild {
 
 extern "C" {
 extern CecProcessView* g_cecProcess;
-void* asdMemAlloc(s32 heap, s32 alignment, s32 mode, u32 size, s32 fromFront);
 void* asdOperatorNew(u32 size, void* owner);
 CecProcessChild* _ZN9Obj420a1cC1Ev(CecProcessChild* child);
 

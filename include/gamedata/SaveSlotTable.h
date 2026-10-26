@@ -31,6 +31,8 @@ extern "C" {
 #endif
 /* Returns the slot table inside the game-data table (the table plus 0x8C). */
 SaveSlotTable *gameGetSlotTable(void);
+/* The slot whose id is the table's preferred id, or NULL when none is selected or none matches. */
+PartySlotA *saveSlotFindSelected(void);
 #ifdef __cplusplus
 }
 #endif

@@ -1,4 +1,3 @@
-/* NON_MATCHING: state transitions match, but armcc emits a compare chain rather than retail's four-entry jump table. */
 #include "common.h"
 
 struct WindowTransitionProcess {
@@ -40,6 +39,8 @@ extern "C" s32 FUN_0023a9a0(void *context)
             work->active = 0;
             work->state = 4;
         }
+        break;
+    case 4:
         break;
     }
     ++work->timer;

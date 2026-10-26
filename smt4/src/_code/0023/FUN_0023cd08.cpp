@@ -4,6 +4,7 @@
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_EnemyDrawOffset.h"
 #include "gamedata/Table00.h"
+#include "util/FUN_0027d9e8.h"
 
 struct BattleAnchorSource { u16 flags; u16 id; u32 unk04; u32 unk08; u32 parts[50]; };
 
@@ -19,7 +20,6 @@ static inline s32 findAnchorMember(const BtlEntry *entry, s16 id)
 extern "C" {
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 BattleAnchorSource *FUN_0027da30(BtlMainState *, s32);
-const EnemyDrawOffsetOwner *FUN_0027d9e8(BtlMainState *, u32);
 void enemyDrawCalcVerticalOffset(const EnemyDrawOffsetOwner *, BattleVector3 *, f32);
 const BattleVector3 *FUN_002d8c3c(void *);
 Table00Record *dataTable00FindById(u32);
@@ -34,7 +34,7 @@ BattleVector3 FUN_0023cd08(BtlMainState *state, s32 index, s32 forceEnemy)
         if (part < 0)
             part = 0;
         BattleAnchorSource *source = FUN_0027da30(state, index);
-        const EnemyDrawOffsetOwner *owner = FUN_0027d9e8(state, source->parts[part]);
+        const EnemyDrawOffsetOwner *owner = reinterpret_cast<const EnemyDrawOffsetOwner *>(FUN_0027d9e8(state, source->parts[part]));
         enemyDrawCalcVerticalOffset(owner, &position, action->geometry.scale);
         position.x += action->geometry.position[0];
         position.y += action->geometry.position[1];

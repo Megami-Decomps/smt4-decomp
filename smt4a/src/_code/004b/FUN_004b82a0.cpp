@@ -1,5 +1,6 @@
-/* NON_MATCHING: register assignment of the payload pointer and constants differs from retail (187 vs 188 rows); the request selection is the same as smt4 FUN_003b92b4. */
+/* NON_MATCHING: armcc keeps the payload address in a spare register (sl) across the request arms, retail rebuilds sp each time and pushes one register fewer; the request selection is the same as smt4 FUN_003b92b4. */
 #include "common.h"
+#include "shard/W5_W5Match7_DataRecord.h"
 
 extern "C" {
 
@@ -45,6 +46,16 @@ typedef struct EndingName {
     char text[9];
 } EndingName;
 
+/* Sequence request payload: a leading id, a value, and a name/extra area. */
+typedef struct SequencePayload {
+    u32 id;
+    s32 value;
+    union {
+        char text[28];
+        u32 words[7];
+    } name;
+} SequencePayload;
+
 extern SceneGameState g_gameState;
 extern s32 g_mapSelection;
 
@@ -59,7 +70,6 @@ void *FUN_004186e0(void);
 s32 FUN_001bd118(void);
 SceneRecord *menu4CGetCurrentEntry(void *sprites);
 void FUN_004b7a08(SceneWork *work);
-u8 *FUN_001ad9b4(void *entry);
 void FUN_00270c58(u32 id);
 void obj04Finish(void);
 
@@ -67,7 +77,8 @@ void obj04Finish(void);
  * message window and marks the transition done. */
 void FUN_004b82a0(SceneWork *work)
 {
-    u32 payload[8];
+    SequencePayload payload;
+
 
     if (menu4CReleaseSlots(work->sprites) == 0) {
         return;
@@ -75,64 +86,64 @@ void FUN_004b82a0(SceneWork *work)
     u32 flags = work->flags;
 
     if ((flags & 0x1000000) != 0) {
-        payload[0] = work->record->id;
-        asdSequenceRequest(10, payload, 4);
+        payload.id = work->record->id;
+        asdSequenceRequest(10, &payload, 4);
     } else if ((flags & 0x2000000) != 0) {
-        payload[0] = work->record->id + 100;
-        asdSequenceRequest(10, payload, 4);
+        payload.id = work->record->id + 100;
+        asdSequenceRequest(10, &payload, 4);
     } else if ((flags & 0x8000000) != 0) {
-        *(u16 *)payload = work->record->id;
-        asdSequenceRequest(0x12, payload, 2);
+        *(u16 *)&payload.id = work->record->id;
+        asdSequenceRequest(0x12, &payload, 2);
         FUN_003d54f8(0, 10);
         FUN_003d54f8(1, 10);
     } else if ((flags & 0x4000000) != 0) {
-        payload[0] = work->record->id;
-        payload[1] = 0;
-        payload[2] = 0;
-        asdSequenceRequest(16, payload, 12);
+        payload.id = work->record->id;
+        payload.value = 0;
+        payload.name.words[0] = 0;
+        asdSequenceRequest(16, &payload, 12);
     } else if ((flags & 0x200000) != 0) {
         gameDataCopySaveToWork();
-        payload[0] = work->record->id40;
-        payload[1] = -1;
-        libc_strcpy((char *)&payload[2], work->record->name);
-        asdSequenceRequest(4, payload, 32);
+        payload.id = work->record->id40;
+        payload.value = -1;
+        libc_strcpy(payload.name.text, work->record->name);
+        asdSequenceRequest(4, &payload, 32);
     } else if ((flags & 0x40000) != 0) {
         gameDataCopySaveToWork();
-        payload[0] = g_gameState.saveId;
-        payload[1] = -1;
-        libc_strcpy((char *)&payload[2], g_gameState.saveName);
-        asdSequenceRequest(4, payload, 32);
+        payload.id = g_gameState.saveId;
+        payload.value = -1;
+        libc_strcpy(payload.name.text, g_gameState.saveName);
+        asdSequenceRequest(4, &payload, 32);
     } else if ((flags & 0x800000) != 0) {
-        payload[0] = work->record->id;
-        asdSequenceRequest(13, payload, 4);
+        payload.id = work->record->id;
+        asdSequenceRequest(13, &payload, 4);
     } else if ((flags & 0x20000000) != 0) {
-        payload[0] = 0;
-        asdSequenceRequest(20, payload, 4);
+        payload.id = 0;
+        asdSequenceRequest(20, &payload, 4);
     } else if (work->requestEvent6 != 0) {
         asdSequenceRequest(6, NULL, 0);
     } else if (work->requestEvent8 != 0) {
         asdSequenceRequest(8, NULL, 0);
     } else if (work->requestCounter != 0) {
-        payload[0] = g_mapSelection - 200;
-        asdSequenceRequest(14, payload, 4);
+        payload.id = g_mapSelection - 200;
+        asdSequenceRequest(14, &payload, 4);
     } else if (work->returnToMap != 0) {
         void *entry = FUN_004186e0();
 
         if (entry != NULL && FUN_001bd118() == 6) {
             work->record = menu4CGetCurrentEntry(work->sprites);
             FUN_004b7a08(work);
-            FUN_00270c58(*(u16 *)(FUN_001ad9b4(entry) + 0xD4));
+            FUN_00270c58(*(u16 *)(reinterpret_cast<u8 *>(FUN_001ad9b4((u32)(entry))) + 0xD4));
         }
     } else if (work->requestEnding != 0) {
         bgmReleaseStopped();
         soundChannelStopAll(15);
         g_gameState.endingRequested = 1;
-        payload[0] = 1;
-        payload[1] = -1;
+        payload.id = 1;
+        payload.value = -1;
         static const EndingName ending = {"e001_000"};
 
-        *(EndingName *)&payload[2] = ending;
-        asdSequenceRequest(4, payload, 32);
+        *(EndingName *)payload.name.text = ending;
+        asdSequenceRequest(4, &payload, 32);
     }
     if ((work->flags & 0x40) != 0) {
         work->flags &= ~0x40;

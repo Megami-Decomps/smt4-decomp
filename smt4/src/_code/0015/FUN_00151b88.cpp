@@ -1,10 +1,11 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_0014ca60's literal pool; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_00151b88 for reference (not compiled; its own view of the boundaries):
+#include "shard/W5_W5Match5_RecordKeys.h"
 
-int FUN_00151b88(int param_1,int param_2)
+extern "C" {
 
+/* Compares record keys for sorting. */
+s32 FUN_00151b88(const RecordSortEntry *left, const RecordSortEntry *right)
 {
-  return (unsigned int)*(unsigned short *)(param_1 + 0x20) - (unsigned int)*(unsigned short *)(param_2 + 0x20);
+    return left->key - right->key;
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

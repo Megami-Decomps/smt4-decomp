@@ -2,6 +2,7 @@
 #include "classes/AocMenu.h"
 #include "common.h"
 #include "test/BustupViewer.h"
+#include "util/ByteIsAtLeast100.h"
 
 struct AocMenuObject;
 
@@ -57,7 +58,6 @@ s32 tableGroupFindEntryIndex(void *table, const char *name);
 void scrScriptProcessStartEntry(void *script, s32 entry);
 void scrRunOpcodesStub(void *script);
 s32 isEmptyString(u32 *record);
-u8 byteIsAtLeast100(u32 *record);
 void jobFlagsWorkStop(AocMenuProcess *process);
 void obj04Finish(void);
 u32 flaggedValueHolderGetTotal(void *holder);
@@ -102,7 +102,7 @@ void AocMenu::runScriptMenu()
             jobFlagsWorkStop(process);
             obj04Finish();
             process->phase = 3;
-        } else if (byteIsAtLeast100(record.words) != 0) {
+        } else if (byteIsAtLeast100(reinterpret_cast<const u8 *>(record.words)) != 0) {
             jobFlagsWorkStop(process);
             obj04Finish();
             process->phase = 9999;

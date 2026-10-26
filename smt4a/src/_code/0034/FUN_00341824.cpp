@@ -2,6 +2,7 @@
 #include "sys/ProcessResult.h"
 #include "common.h"
 #include "nn/Result.h"
+#include "util/vcallSlot12IfValid.h"
 
 struct FileView;
 
@@ -21,7 +22,6 @@ struct FileView {
 
 extern "C" {
 void sysFatalBreak(void);
-void vcallSlot12IfValid(u32 handle);
 
 // Positions the file, transfers data, and releases a valid handle on failure.
 s32 FUN_00341824(FileView* file, u32 offset, void* buffer, u32 size)

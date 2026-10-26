@@ -1,6 +1,7 @@
 /* NON_MATCHING: readable rewrite compiles (210 vs 201 rows); free-call arguments inferred; retail uses a smaller callee-saved set and inlines the slot-release checks differently */
 #include "common.h"
 #include "nn/svc.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 // Battle main state, indexed by 32-bit word; only the members released here are named.
 enum BattleWord {
@@ -33,7 +34,6 @@ void FUN_002c526c(void);
 void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(u32 object);
 void asdMemFreeNonNull(u32 object);
-void asdMemFree(u32 object);
 void mdlPartsRelease(void *model);
 void FUN_00338fb0(BattleMainState* state);
 void FUN_00337a34(BattleMainState* state);
@@ -53,7 +53,7 @@ struct BattleVirtual {
 static void freeSlot(u32* slot)
 {
     if (*slot != 0) {
-        asdMemFree(*slot);
+        asdMemFree((void *)(*slot));
         *slot = 0;
     }
 }
@@ -120,11 +120,11 @@ void FUN_0020f04c(void)
     freeSlot(&w[0x7a6]);
     freeSlot(&w[0x7ef]);
     if (DAT_00435d94 != 0) {
-        asdMemFree(DAT_00435d94);
+        asdMemFree((void *)(DAT_00435d94));
         DAT_00435d94 = 0;
     }
     if (DAT_00435d98 != 0) {
-        asdMemFree(DAT_00435d98);
+        asdMemFree((void *)(DAT_00435d98));
         DAT_00435d98 = 0;
     }
     for (s32 i = 0; i < 0x2a; i++) {
@@ -138,7 +138,7 @@ void FUN_0020f04c(void)
     infoWinStartTimer(1);
     if (jobIsValid(w[BTL_WORD_JOB])) jobStop(w[BTL_WORD_JOB], 0);
     if (g_btlMainState != NULL) {
-        asdMemFree(reinterpret_cast<u32>(g_btlMainState));
+        asdMemFree((void *)(reinterpret_cast<u32>(g_btlMainState)));
         g_btlMainState = NULL;
     }
 }

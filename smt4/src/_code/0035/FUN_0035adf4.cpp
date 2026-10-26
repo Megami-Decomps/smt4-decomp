@@ -1,26 +1,22 @@
-/* NON_MATCHING: retail reads the thread-local storage with `mrc` and issues `svc 0x32` (SendSyncRequest) inline: this version calls placeholder functions instead. */
-#include "common.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 extern "C" {
 
 extern u32 DAT_00472ad8; /* service session handle */
 
-extern u32 *coproc_movefrom_User_R_Thread_and_Process_ID(void); /* the thread-local storage pointer */
-extern u32 svcSendSyncRequest(u32 handle);                      /* svc 0x32 */
-
-/* Sends IPC command 0x10042 (one argument and the constant 32) on the session; returns the result
- * code, or the first reply word on success. */
-u32 FUN_0035adf4(u32 arg)
+/* IPC request 0x0001 with one parameter and a current-process-id translate descriptor (0x20);
+ * returns the transport result, or the service's result word when the transport succeeded. */
+s32 FUN_0035adf4(u32 arg)
 {
-    u32 *cmdBuf = coproc_movefrom_User_R_Thread_and_Process_ID() + 0x80 / 4;
-    u32 result;
-
-    cmdBuf[0] = 0x10042;
-    cmdBuf[1] = arg;
-    cmdBuf[2] = 32;
-    result = svcSendSyncRequest(DAT_00472ad8);
-    if ((s32)(result & 0x80000000) >= 0) {
-        result = cmdBuf[1];
+    nn::os::IpcCommandBuffer *cmd = nn::os::GetIpcCommandBuffer();
+    nn::os::SetIpcWord(cmd, 0, 0x00010042);
+    nn::os::SetIpcWord(cmd, 1, arg);
+    nn::os::SetIpcWord(cmd, 2, 0x20);
+    s32 result = nn::svc::SendSyncRequest(DAT_00472ad8);
+    if (nnResultIsSuccess(result)) {
+        result = cmd->words[0];
     }
     return result;
 }

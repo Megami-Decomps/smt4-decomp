@@ -13,7 +13,7 @@ int FUN_00263028(...);
 int FUN_002630e0(...);
 int FUN_002b011c(void);
 int FUN_002b7d30(void);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int memAlloc(int, int, int, int);
 int renderCtxSelectStereoLayout(int);
 int asdMemFree(void);
@@ -56,7 +56,7 @@ extern unsigned int asdCameraValueGet(unsigned int);
 /* Supplied declaration required: FUN_002630e0. */
 /* Supplied declaration required: FUN_002b011c. */
 /* Supplied declaration required: FUN_002b7d30. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: memAlloc. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 /* Supplied declaration required: asdMemFree. */
@@ -213,7 +213,7 @@ joined_r0x0030e620:
         (**(romwright_code **)(temp_v2 + 0x1268))();
         *(unsigned char *)(temp_v2 + 0x1264) = 0;
       }
-      FUN_002c1b64(g_titleScene,0);
+      renderCtxSelectTexture(g_titleScene,0);
       VectorSignedToFloat((int)((unsigned long long)temp_v13 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)temp_v13,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat((int)((unsigned long long)temp_v12 >> 0x20),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -242,7 +242,7 @@ joined_r0x0030e620:
       temp_v4 = asdCameraValueGet(temp_v7);
       FUN_002630e0(&temp_v15,0,temp_v4);
       FUN_002630e0(&temp_v18,0,temp_v4,&temp_v18);
-      FUN_002c1b64(g_titleScene,0);
+      renderCtxSelectTexture(g_titleScene,0);
       renderCtxSelectStereoLayout(g_titleScene);
       FUN_00263028((temp_v3 << 0x18) | (((temp_v3 & 0xffff) >> 8) << 0x10) |
                    (((temp_v3 & 0xffffff) >> 0x10) << 8) | (temp_v3 >> 0x18));
@@ -256,7 +256,7 @@ joined_r0x0030e620:
       temp_v7 = FUN_002c501c();
       FUN_002630e0(&temp_v15,0,temp_v7,param_2 + 2);
       temp_v17 = 0;
-      FUN_002c1b64(g_titleScene,0);
+      renderCtxSelectTexture(g_titleScene,0);
       FUN_002b011c();
       effectSpawnPositionDefault(0xffffffff);
       effectSpawnPositionDefault(0xffffffff);
@@ -289,7 +289,7 @@ joined_r0x0030e620:
       }
       VectorSignedToFloat(*puVar11,(unsigned char)(in_fpscr >> 0x16) & 3);
       VectorSignedToFloat(puVar11[1] + 0xea,(unsigned char)(in_fpscr >> 0x16) & 3);
-      FUN_002c1b64(g_titleScene,temp_v7,puVar11[1] + 0xea);
+      renderCtxSelectTexture(g_titleScene,temp_v7,puVar11[1] + 0xea);
       temp_v0 = *(short *)(puVar11 + 0x11);
       if (temp_v0 != 1) {
         if (temp_v0 != 2) {
@@ -308,7 +308,7 @@ joined_r0x0030e620:
     case 0xc: {
       temp_v7 = param_2[6];
       const MenuDrawPoint point = *reinterpret_cast<const MenuDrawPoint *>(param_2 + 2);
-      FUN_002c1b64(g_titleScene,0);
+      renderCtxSelectTexture(g_titleScene,0);
       temp_v15 = 0xffffffff;
       temp_v16 = 0xff64646;
       menuDrawRectangle(static_cast<s32>(point.x),static_cast<s32>(point.y),0x80,0x80,temp_v15,temp_v16);
@@ -316,9 +316,9 @@ joined_r0x0030e620:
       temp_v16 = 0xff000000;
       menuDrawRectangle(static_cast<s32>(point.x + 48.0f),static_cast<s32>(point.y + 48.0f),
                   0x20,0x20,temp_v15,temp_v16);
-      FUN_002c1b64(g_titleScene,temp_v7);
+      renderCtxSelectTexture(g_titleScene,temp_v7);
       FUN_002b7d30();
-      FUN_002c1b64(g_titleScene,0);
+      renderCtxSelectTexture(g_titleScene,0);
       FUN_00263028(0xffffffff);
       FUN_00263028(0xffffffff);
       FUN_00263028(0xff0000ff);

@@ -1,4 +1,3 @@
-/* NON_MATCHING: same code, but retail loads the cursor and stack depth together (ldm) and allocates other registers. */
 #include "script/ScriptVm.h"
 
 extern "C" {

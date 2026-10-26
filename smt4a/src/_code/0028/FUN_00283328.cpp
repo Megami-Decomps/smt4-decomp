@@ -3,7 +3,7 @@
 
 extern "C" {
 
-s32 FUN_00184964(u32 low, u32 high);
+s32 randBetween(u32 low, u32 high);
 
 /* The ratio numerator/denominator, negated for mode 1 and randomly for mode 2; 0 for other modes. */
 f32 FUN_00283328(s32 mode, u32 numerator, u32 denominator)
@@ -17,7 +17,7 @@ f32 FUN_00283328(s32 mode, u32 numerator, u32 denominator)
         ratio = -((f32)numerator / (f32)denominator);
         break;
     case 2: {
-        s8 positive = FUN_00184964(0, 1);
+        s8 positive = randBetween(0, 1);
         if (positive) {
             ratio = (f32)numerator / (f32)denominator;
         } else {

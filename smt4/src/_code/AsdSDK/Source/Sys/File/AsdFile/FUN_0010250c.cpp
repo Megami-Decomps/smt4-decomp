@@ -12,7 +12,7 @@ extern u8 g_asdFileEvent[];
 void FUN_0010f5dc(void);
 void *asdMemoryAlloc(u32 bytes, u32 alignment, u32 flags, u32 heap, u32 clear);
 void romPathForward(u32 first, u32 second, void *buffer, u32 size, u32 mode);
-u32 FUN_0010f7b8(u32 first, u32 second, u32 mode);
+u32 requestForwardKindFive(u32 first, u32 second, u32 mode);
 u32 FUN_0010f698(const char *device, u32 first, u32 second, void *buffer, u32 size, u32 mode);
 void asdFatalError(void);
 u32 FUN_002c52dc(u32 *handle, u32 initial, u32 maximum);
@@ -32,7 +32,7 @@ void FUN_0010250c(void)
     void *romBuffer = asdMemoryAlloc(0x100, 0x100, 0, romSize, 1);
     g_asdFile.entries = (AsdFileEntry *)romBuffer;
     romPathForward(16, 16, romBuffer, romSize, 1);
-    u32 patchSize = FUN_0010f7b8(16, 16, 1);
+    u32 patchSize = requestForwardKindFive(16, 16, 1);
     asdDebugTrace("c:\\SMT4\\RXD686\\sdds4\\Patch\\AsdSDK\\Source\\Sys\\File\\AsdFile.cpp", 0x122);
     g_asdFile.bufferB = asdMemoryAlloc(0x100, 0x100, 0, patchSize, 1);
     u32 result = FUN_0010f698("patch:", 16, 16, g_asdFile.bufferB, patchSize, 1);

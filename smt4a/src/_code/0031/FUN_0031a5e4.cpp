@@ -2,6 +2,7 @@
 #include "common.h"
 #include "util/FUN_002e07f4.h"
 #include "util/EventQueueAddUnique.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 #define INTRO_STATE_APPEAR 0
 #define INTRO_STATE_WAIT_TOUCH 1
@@ -29,16 +30,9 @@ struct IntroIconSize {
     s16 height;
 };
 
-struct IntroIconRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ IntroIconSize *size;
-};
 
 extern "C" {
 IntroWork *jobGetWork(u32 process);
-IntroIconRecord *asdTMTexTableEntryAt(u32 table, u32 index);
 s32 recordGetModeForId(s32 id);
 s32 ifTouchRegionAdd(s32 x, s32 y, s32 height, s32 width);
 void ifTouchRegionRemove(void);
@@ -68,9 +62,9 @@ s32 FUN_0031a5e4(u32 process)
         }
         if (work->timer == 5) {
             introEnter(work, INTRO_STATE_WAIT_TOUCH);
-            IntroIconRecord *icon = asdTMTexTableEntryAt(0x22, 0x11);
+            TextureTableEntryIV *icon = asdTMTexTableEntryAt(0x22, 0x11);
             work->touchId = ifTouchRegionAdd((s16)(icon->x - 0x10), (s16)(icon->y - 0x10),
-                                             (s16)(icon->size->height + 0x20), (s16)(icon->size->width + 0x20));
+                                             (s16)(icon->placement->height + 0x20), (s16)(icon->placement->width + 0x20));
         }
         break;
     case INTRO_STATE_WAIT_TOUCH: {

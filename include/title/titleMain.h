@@ -4,6 +4,7 @@
 
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
+#include "camp/RenderCtx.h"
 #include <stddef.h>
 
 /* The title screen's block, kept by a module global. */
@@ -37,11 +38,9 @@ typedef struct TitleMainGlobals {
     /* 0x04 */ TitleMain *title;
 } TitleMainGlobals;
 
-/* The scene block most title/event/map modules share through DAT_0044ea00 (Shin Megami Tensei IV). */
-typedef struct TitleScene {
-    /* 0x000 */ u8 unk000[0x528];
-    /* 0x528 */ s32 unk528;
-} TitleScene;
+/* The scene block most title/event/map modules share through DAT_0044ea00 (Shin Megami Tensei IV):
+ * the draw context. */
+typedef RenderCtx TitleScene;
 
 /* The title's debug background object. */
 typedef struct TitleDbgBgObj {

@@ -1,9 +1,9 @@
 /* NON_MATCHING: flag clearing now uses the retail BIC forms (complement masks); remaining: retail pushes r4-sl hoisting two separate zero registers and the 1 for the flag-clear loop, and shares the `return 1` tail with the flag-4 test (no predicated movne). */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "shard/gameGetFlagBlock.h"
 
 extern "C" {
-GameFlagBlockPrefixIV *gameGetFlagBlock(void);
 s32 FUN_0023ddbc(u32 flagIndex, s32 value);
 }
 
@@ -22,14 +22,14 @@ extern "C" u32 FUN_00348a1c(u32 entryIndex)
         GameFlagEntryIV *activeEntry = reinterpret_cast<GameFlagEntryIV *>(
             reinterpret_cast<u8 *>(gameGetFlagBlock()) + entryIndex * 4u + 0x200u);
         if ((activeEntry->flags & 2u) != 0) {
-            if (gameGetFlagBlock()->selectedEntryIndex != entryIndex) {
+            if (reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock())->selectedEntryIndex != entryIndex) {
                 activeEntry->flags &= ~0x6u;
             } else {
                 activeEntry->flags &= ~0x6u;
                 activeEntry->flags &= ~0x40u;
-                gameGetFlagBlock()->selectedEntryIndex = 0;
+                reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock())->selectedEntryIndex = 0;
                 for (u32 flagIndex = 0x500; flagIndex < 0x520; ++flagIndex) {
-                    GameFlagBlockPrefixIV *block = gameGetFlagBlock();
+                    GameFlagBlockPrefixIV *block = reinterpret_cast<GameFlagBlockPrefixIV *>(gameGetFlagBlock());
                     FUN_0023ddbc(flagIndex, 0);
                     block->packedFlags[flagIndex >> 3] &= ~(1u << (flagIndex & 7u));
                 }

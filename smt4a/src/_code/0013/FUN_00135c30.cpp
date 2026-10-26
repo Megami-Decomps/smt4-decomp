@@ -15,7 +15,7 @@ int titleSelectMovieResource(...);
 int FUN_0013b7e0(...);
 int FUN_0013b8f8(...);
 int FUN_0015a410(...);
-int FUN_0015a568(...);
+int appletUnlockAndSleepIfShellClosed(...);
 int FUN_0015a5c0(...);
 int appletIsExitRequested(...);
 int FUN_001703b0(...);
@@ -101,7 +101,7 @@ int FUN_0013a324(...);
 int asdGxPresetVectorSet(...);
 int asdGxPresetRequest(...);
 int asdMemorySetUseAllocatorA(...);
-int FUN_0013b4ac(...);
+int handleRegistryCreate(...);
 int FUN_0013b5c8(...);
 int sysInitializeServices(...);
 int FUN_0013b790(...);
@@ -361,7 +361,7 @@ extern unsigned int FUN_0013a608(unsigned int);
 extern unsigned int FUN_0013af10(void);
 /* Supplied declaration required: FUN_0013b244. */
 /* Supplied declaration required: FUN_0013b3d0. */
-/* Supplied declaration required: FUN_0013b4ac. */
+/* Supplied declaration required: handleRegistryCreate. */
 /* Supplied declaration required: titleConfigApplyTarget. */
 /* Supplied declaration required: asdGxLoadMaterialShader. */
 /* Supplied declaration required: FUN_0013b5c8. */
@@ -384,7 +384,7 @@ extern int FUN_0013bdb8(unsigned int);
 /* Supplied declaration required: asdProcessCreateSimple. */
 /* Supplied declaration required: asdGxCommandListCreate. */
 /* Supplied declaration required: FUN_0015a410. */
-/* Supplied declaration required: FUN_0015a568. */
+/* Supplied declaration required: appletUnlockAndSleepIfShellClosed. */
 /* Supplied declaration required: FUN_0015a5c0. */
 /* Supplied declaration required: appletIsExitRequested. */
 /* Supplied declaration required: FUN_00161a10. */
@@ -524,7 +524,7 @@ void FUN_00135c30(void)
   asdLoadFileSyncNoContext(&LAB_0013605c,0,1,0x80);
   gfxSetupResGraphicsFile();
   temp_v3 = FUN_0013a608(1);
-  FUN_0013b4ac();
+  handleRegistryCreate();
   asdGxCommandListCreate();
   DAT_0057ffd8 = temp_v3;
   asdGxCommandListCreate();
@@ -828,7 +828,7 @@ LAB_00136430:
       if (!(temp_v2 == 1 || temp_v2 == 2)) {
         if (temp_v2 == 3) {
           if (DAT_0057ffd2 != '\0') {
-            FUN_0015a568();
+            appletUnlockAndSleepIfShellClosed();
             temp_v3 = temp_v9;
           }
           else {

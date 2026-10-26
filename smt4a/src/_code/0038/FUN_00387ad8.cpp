@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail tests faded & slid inside each branch, hoists the constant 1 into r7 and re-reads done before returning; ours tests once after the branches (8-byte frame vs 4). */
+/* NON_MATCHING: branch layout only: retail shares the frame increment between the two arms and ends with a single conditional move for the result; the build lays the done store out inline in the opening arm. */
 #include "common.h"
 
 extern "C" {
@@ -18,21 +18,24 @@ u32 FUN_002e1c94(void *fade, s32 mode, s32 frame, f32 from, f32 to);
 /* Steps the window's slide and fade in (`opening`) or out; returns whether the animation is done. */
 bool FUN_00387ad8(SlideFadeWindow *window, s32 opening)
 {
-    u32 slid;
-    u32 faded;
     bool finished = false;
 
     if (opening) {
-        slid = FUN_00318e08(window->slide, 4, 30, 0, window->frame);
-        faded = FUN_002e1c94(window->fade, 4, window->frame, 0.0f, 1.0f);
+        u32 slid = FUN_00318e08(window->slide, 4, 30, 0, window->frame);
+        u32 faded = FUN_002e1c94(window->fade, 4, window->frame, 0.0f, 1.0f);
+        if (faded & slid) {
+            window->done = 1;
+        } else {
+            window->frame++;
+        }
     } else {
-        slid = FUN_00318e08(window->slide, 3, 0, -30, window->frame);
-        faded = FUN_002e1c94(window->fade, 3, window->frame, 1.0f, 0.0f);
-    }
-    if (faded & slid) {
-        window->done = 1;
-    } else {
-        window->frame++;
+        u32 slid = FUN_00318e08(window->slide, 3, 0, -30, window->frame);
+        u32 faded = FUN_002e1c94(window->fade, 3, window->frame, 1.0f, 0.0f);
+        if (faded & slid) {
+            window->done = 1;
+        } else {
+            window->frame++;
+        }
     }
     if (window->done == 1) {
         finished = true;

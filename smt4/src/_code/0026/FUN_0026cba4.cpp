@@ -1,4 +1,4 @@
-/* NON_MATCHING: close: all five stat arms and calls match; built hoists the isUnit|variant OR above the early checks (retail tests isUnit and variant separately, then ORs in place after the record check) */
+/* NON_MATCHING: early guards, the unit/player arm placement and the isUnit|variant test now match retail; remaining: isUnit/variant saved registers are swapped (r6/r5) and retail places the item-flag-clear tail (FUN_0029c4c8(0)) at the end of the function. */
 #include "gamedata/PlayerInitialization.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -50,8 +50,16 @@ void FUN_0026cba4(s32 id, s32 isUnit, s32 variant)
     u32 item = panel->item;
     ItemRecord *record;
 
-    if (item == 0 || (id < 0 && !(isUnit == 0 && variant == 0))) {
+    if (item == 0) {
         return;
+    }
+    if (id < 0) {
+        if (isUnit != 0) {
+            return;
+        }
+        if (variant != 0) {
+            return;
+        }
     }
     record = dataTable08Sub1GetRecord(item);
     if ((record->flags & 2) == 0) {
@@ -59,10 +67,10 @@ void FUN_0026cba4(s32 id, s32 isUnit, s32 variant)
         return;
     }
     isUnit |= variant;
-    if (isUnit != 0) {
-        __aeabi_memcpy4(&panel->unit, gameGetUnitRecord(id), 0x604);
-    } else {
+    if (isUnit == 0) {
         __aeabi_memcpy4(&panel->player, gameGetPlayerData(), 0x8C);
+    } else {
+        __aeabi_memcpy4(&panel->unit, gameGetUnitRecord(id), 0x604);
     }
     switch (record->kind) {
     case 0x1F:

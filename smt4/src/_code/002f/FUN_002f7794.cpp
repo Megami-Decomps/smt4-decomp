@@ -4,13 +4,13 @@
 #include "battle/btlAction.h"
 #include "battle/BattleUnitSlot.h"
 #include "battle/BtlMainAccess.h"
+#include "script/ScriptArgs.h"
 
 struct BattleActionView {
     u8 prefix[0x1E98];
     BtlActionRecord *actions;
 };
 extern "C" {
-s32 scrGetArg(u32);
 BtlEntry *btlMainFindEntryByListedId(BtlMainState *, s32);
 void FUN_0027df30(s32, u32, BtlActionRecord *, s32, s32, s32, s32, u32,
                  s32, s32, s32, s32, s32);

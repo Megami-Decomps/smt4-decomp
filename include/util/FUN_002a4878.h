@@ -8,7 +8,7 @@
 extern "C" {
 #endif
 /* Canonical declaration (matches the definition). */
-s32 FUN_002a4878(const void *object);
+s32 FUN_002a4878(void *object);
 #ifdef __cplusplus
 }
 #endif

@@ -2,6 +2,7 @@
 #include "shard/NaviMain.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern NaviMain *g_naviMain;
@@ -10,7 +11,6 @@ extern const char DAT_00404ca8[];
 extern const char DAT_00404cb8[];
 extern const char DAT_00404cc4[];
 
-void *asdMemAlloc(u32 bytes, u32 alignment, u32 flags, u32 size, u32 clear);
 void NaviMain_InitInstance(void *instance);
 void FUN_002898e4(void);
 s32 gameFlagIsSet(u32 flag);

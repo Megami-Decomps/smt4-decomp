@@ -4,16 +4,10 @@
 #include "camp/RenderCtx.h"
 #include "util/CalleeContracts.h"
 #include "camp/GauntletAppMenu/GauntletAppMenu.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 
-/* A layout record (only the fields read here): its position and a pointer to a size pair. */
-typedef struct LayoutRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-    /* 0x0C */ s16 *size;               /* width, height */
-} LayoutRecord;
 
 /* The party panel's work area (only the fields used here). */
 typedef struct PartyPopup {
@@ -38,7 +32,6 @@ typedef struct PartyPopup {
 
 extern u8 *g_renderCtx;
 
-LayoutRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 vec2GetXInt(const void *vector);
 void efctSetSpeed(f32 speed);
 void FUN_00164b5c(u32 a, u32 b, u32 id, s32 x, s32 y, u32 tag);
@@ -52,7 +45,7 @@ void FUN_0034ea70(PartyPopup *popup)
     if (popup->active == 0) {
         return;
     }
-    LayoutRecord *frame = asdTMTexTableEntryAt(13, 0x1DE);
+    TextureTableEntryIV *frame = asdTMTexTableEntryAt(13, 0x1DE);
     s32 x = popup->x;
     s32 y = popup->y;
     s32 limit = popup->mode == 1 ? 14 : 11;
@@ -60,10 +53,10 @@ void FUN_0034ea70(PartyPopup *popup)
 
     if (popup->phase < 7) {
         speed = 0.0f;
-        y += frame->size[1];
+        y += frame->placement->height;
     } else if (popup->phase < limit) {
         if (popup->mode != 1) {
-            s32 height = frame->size[1];
+            s32 height = frame->placement->height;
 
             speed = (f32)(popup->phase - 7) * 0.25f;
             y += (height / 4) * (7 - popup->phase) + height;
@@ -78,7 +71,7 @@ void FUN_0034ea70(PartyPopup *popup)
             if (step > 7) {
                 step = 7;
             }
-            width = frame->size[0] / 2;
+            width = frame->placement->width / 2;
             speed = (f32)step * (1.0f / 7.0f);
             x += width - (width / 7) * step;
         }
@@ -88,10 +81,10 @@ void FUN_0034ea70(PartyPopup *popup)
     }
     efctSetSpeed(speed);
     FUN_001835b4(2, 13, 0x1E0, x, y, 0x51);
-    LayoutRecord *window = asdTMTexTableEntryAt(13, 0x1DD);
+    TextureTableEntryIV *window = asdTMTexTableEntryAt(13, 0x1DD);
 
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 3);
-    FUN_0035ae58(window->x + x, window->y + y, window->size[0], window->size[1] + y, 1);
+    FUN_0035ae58(window->x + x, window->y + y, window->placement->width, window->placement->height + y, 1);
     devilDispatchTextureResource(popup->textureId, frame->x + x, frame->y + y, 0x15, 1);
     renderStackSet((RenderStateStack *)(g_renderCtx + 0x1318), 0);
     FUN_00164b5c(2, 13, 13, x, y, 0x56);

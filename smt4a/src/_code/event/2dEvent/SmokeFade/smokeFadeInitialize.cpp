@@ -3,6 +3,7 @@
 #include <string.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "shard/asdTMTexLoadMainHeap.h"
 
 extern "C" {
 extern SmokeFadeState *g_smokeFadeState;
@@ -13,7 +14,6 @@ void smokeFadeDrawCallback(u32);
 u32 taskCreateDraw(const char *, s32, s32, s32, void (*)(u32), void *, void *, u32);
 void *textureGetIndexedResource(u32);
 void asdTMTexTableLoadTmx(u32, s32);
-void asdTMTexLoadMainHeap(u32, u32);
 void asdLoadFileAsyncSimple(const char *, void **, s32);
 
 // Create the smoke-fade jobs and request the two textures and transition table.

@@ -2,6 +2,7 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "addon/aocBootProcess.h"
 #include "addon/aocMain.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 #define AOC_MAIN_FLAGS_BOOT_MASK 0x70 /* AocMain.flags bits the boot process starts from clear */
 
@@ -10,7 +11,6 @@ extern "C" {
 extern AocBootGlobals g_aocBoot;
 extern AocMain *g_aocMain;
 
-void *asdMemAlloc(s32 heap, s32 align, s32 a, s32 size, s32 flag);
 void FUN_002ba78c(void *dialog);
 s32 aocBootUpdate(u32 handle);
 void aocBootDestroy(u32 handle);

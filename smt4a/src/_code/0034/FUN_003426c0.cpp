@@ -1,7 +1,7 @@
 /* NON_MATCHING: directory rows restored; backing sprite y/flags stack arguments use separate stores instead of the retail strd. */
-#include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
 struct DirectoryListPlacement {
@@ -11,7 +11,6 @@ struct DirectoryListPlacement {
 };
 }
 extern "C" {
-SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
 const char *FUN_0035aa90(s32 index);
 void asdTextFormatStream(u32 text, s32 layer, u32 color, s32 flags, s32 mode, const char *value);
 void asdTextDrawDirectoryEntry(u32 text, s32 layer, u32 color, s32 flags, s32 mode, u32 directory, s32 index);
@@ -22,9 +21,9 @@ void FUN_003426c0(const DirectoryListPlacement *placement, u32 text, u32 directo
 {
     s32 x = placement->x;
     s32 y = placement->y;
-    SpriteInfo *anchor = asdTMTexTableEntryAt(0x2E, 0xCF);
+    TextureTableEntryIV *anchor = asdTMTexTableEntryAt(0x2E, 0xCF);
     for (s32 row = 0; row < 11; ++row) {
-        SpriteInfo *position = asdTMTexTableEntryAt(0x2E, row + 0xD1);
+        TextureTableEntryIV *position = asdTMTexTableEntryAt(0x2E, row + 0xD1);
         if (count <= row)
             continue;
         switch (kind) {

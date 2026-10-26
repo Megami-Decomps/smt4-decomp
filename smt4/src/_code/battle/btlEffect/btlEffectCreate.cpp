@@ -1,5 +1,6 @@
 #include "battle/btlEffect.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -8,7 +9,6 @@ extern BtlEffectGlobals g_btlEffect;
 u32 taskCreateDraw(const char *name, s32 group, s32 startDelay, s32 endDelay, s32 (*update)(void), void (*end)(u32), void *work, u32 parent);
 u32 effectProcessCreate(u8 keepScene);
 void jobSetParent(u32 job, u32 parent);
-void *asdMemAlloc(u32 heap, u32 alignment, u32 flags, u32 size, u32 clear);
 void FUN_003d971c(void *block, BtlEffectJob *work);
 s32 btlEffectDispatchCurrentJob(void);
 void btlEffectDestroy(u32 job);

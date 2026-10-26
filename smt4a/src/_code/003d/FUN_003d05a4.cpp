@@ -1,6 +1,7 @@
 /* NON_MATCHING: sprite scale/restart arguments and signed initial-choice switch are corrected; initial-selection flag-query control flow and same-file animation-table addressing remain. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 struct MenuSprite {
     /* 0x00 */ u8 data[0x8C];
@@ -37,7 +38,6 @@ extern const u8 DAT_0052c884;
 
 s32 gameFlagIsSet(s32 flag);
 void FUN_00203b40(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
-void FUN_002a4964(ChoiceMenuWork *work, s32 selected);
 
 void FUN_0014e188(MenuSprite *sprite, s32 kind, s32 id, UiResourceParameters *resources, u16 flag, f32 scale);
 void uiSpriteSetKeyframe(MenuSprite *sprite, s32 keyframe, s32 restart);
@@ -102,7 +102,7 @@ void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
     work->selected = selected;
 
     FUN_00203b40(work, count, count, 1, 0, 1);
-    FUN_002a4964(work, work->selected);
+    FUN_002a4964(reinterpret_cast<ScrollSelection *>(work), work->selected);
     paramsClearPacket(&work->resources);
     paramsInit(&work->resources, &DAT_0052c83c, 0x18, &DAT_0052c854, 0x30, NULL, 0, NULL, 0, &DAT_0052c884, 0x70);
     FUN_0014e188(&work->header, 0x24, 0x57, &work->resources, 1, 1.0f);

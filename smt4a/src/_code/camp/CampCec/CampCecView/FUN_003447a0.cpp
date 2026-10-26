@@ -52,7 +52,7 @@ extern "C" {
 
 extern CecViewWork *g_campCecView;
 
-void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 enabled);
+void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void sysMemClear(void *memory, u32 size);
 void taskCreateDraw(const char *name, s32 layer, u32 a, u32 b, void *callback, u32 c, u32 d, u32 parent);
 void sysPlaySe(u32 id);
@@ -69,7 +69,7 @@ void characterInfoPanelPopulate(u32 page, CecMarkEntry *entry, u32 flag);
 u32 campCecDrawPageCreate(void);
 u32 overlayGetStatusScene(void);
 void FUN_0025d6a0(void);
-void FUN_002a2c78(void);
+u32 campCecViewDrawEffectImage(u32 job);
 void campCecViewCreateEffect(void);
 void campCecViewDrawEntries(void);
 
@@ -87,8 +87,8 @@ void FUN_003447a0(void)
     view = g_campCecView;
     sysMemClear(view, sizeof(CecViewWork));
     view->task = asdProcessCreateSimple(reinterpret_cast<const s8 *>("CampCecView Calc"), 3, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_0025d6a0), 0, 0);
-    taskCreateDraw("CampCecView DrawUpLeft_b", 0x65, 0, 0, (void *)FUN_002a2c78, 0, 0, view->task);
-    taskCreateDraw("CampCecView DrawUpRight_b", 0xCC, 0, 0, (void *)FUN_002a2c78, 0, 0, view->task);
+    taskCreateDraw("CampCecView DrawUpLeft_b", 0x65, 0, 0, (void *)campCecViewDrawEffectImage, 0, 0, view->task);
+    taskCreateDraw("CampCecView DrawUpRight_b", 0xCC, 0, 0, (void *)campCecViewDrawEffectImage, 0, 0, view->task);
     taskCreateDraw("CampCecView DrawUpLeft", 0x86, 0, 0, (void *)campCecViewCreateEffect, 0, 0, view->task);
     taskCreateDraw("CampCecView DrawUpRight", 0xE2, 0, 0, (void *)campCecViewCreateEffect, 0, 0, view->task);
     taskCreateDraw("CampCecView DrawDown", 0xEA, 0, 0, (void *)campCecViewDrawEntries, 0, 0, view->task);

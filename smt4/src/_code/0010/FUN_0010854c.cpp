@@ -23,7 +23,7 @@ typedef char FrameCopyLayoutCheck[
     offsetof(FrameCopyWork, second) == 0xFE4 &&
     offsetof(FrameCopyWork, third) == 0xFE8 && sizeof(FrameCopyWork) == 0xFEC ? 1 : -1];
 
-s32 FUN_002bff10(u32 arg);
+s32 stateValuesGetBySelector(u32 arg);
 s32 FUN_002bfadc(u32 arg, JobSurface *surface);
 void surfaceCopy(JobSurface *src, JobSurface *dst);
 
@@ -34,7 +34,7 @@ s32 FUN_0010854c(u32 job)
 {
     FrameCopyWork *work = (FrameCopyWork *)jobGetWork(job);
     work->flags.surfaceReady = 0;
-    if (FUN_002bff10(0) != 0) {
+    if (stateValuesGetBySelector(0) != 0) {
         return 0;
     }
     FrameReadyFlags *flags = &work->flags;
@@ -52,7 +52,7 @@ s32 FUN_0010854c(u32 job)
     work->frame.surface->width = 0x200;
     work->frame.surface->height = 0x200;
     reinterpret_cast<FrameCopyControlView *>(&work->flags)->result = FUN_002bfadc(0, work->frame.surface);
-    s32 skipped = FUN_002bff10(0);
+    s32 skipped = stateValuesGetBySelector(0);
     s32 levels = reinterpret_cast<FrameCopyControlView *>(&work->flags)->levels;
     if (skipped == 0 && levels > 1) {
         levels--;

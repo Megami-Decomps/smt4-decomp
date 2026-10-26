@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0016c4b8(...);
+int renderCtxSelectTexture(...);
 int camSetMatrixA(...);
 int mtx44Copy(unsigned char [72], unsigned int);
 int FUN_0019a0fc(...);
@@ -65,7 +65,7 @@ extern float DAT_0064c07c; /* 0x64c07c */
 extern float DAT_0064c080; /* 0x64c080 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_0016c4b8. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: camSetMatrixA. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mtx44Copy. */
@@ -355,7 +355,7 @@ void FUN_00237dd0(int param_1)
     FUN_0019a0fc(temp_v18,temp_v18,temp_v30);
   }
   camSetMatrixA(g_renderCtx,temp_v18);
-  FUN_0016c4b8(g_renderCtx,*(unsigned int *)(param_1 + 300));
+  renderCtxSelectTexture(g_renderCtx,*(unsigned int *)(param_1 + 300));
   temp_v14 = temp_v10;
   temp_v15 = temp_v11;
   temp_v16 = temp_v10;

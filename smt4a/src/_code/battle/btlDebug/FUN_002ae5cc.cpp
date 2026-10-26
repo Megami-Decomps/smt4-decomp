@@ -3,6 +3,7 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -116,7 +117,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 extern unsigned int recordGetScaledMaximum(int);
-extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: FUN_0018152c. */
@@ -506,7 +506,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
             temp_v1 = FUN_002b4dcc(temp_v8);
             temp_v30 = (int)temp_v1;
             temp_v31 = (int)*(short *)(temp_v8 + 0x10);
-            temp_v12 = FUN_00180114(*(unsigned short *)(temp_v8 + 0x62));
+            temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v8 + 0x62));
             textFormatBuffer(temp_v32,&LAB_002af620,temp_v12);
             temp_v48 = heldAmountLessThan(temp_v30,*(unsigned short *)(temp_v8 + 0x62));
           }
@@ -516,7 +516,7 @@ void FUN_002ae5cc(int param_1,int param_2,int param_3,int param_4,int param_5)
           temp_v1 = FUN_002b4dcc();
           temp_v30 = (int)temp_v1;
           temp_v31 = (int)*(short *)(temp_v7 + 0x10);
-          temp_v12 = FUN_00180114(*(unsigned short *)(temp_v7 + 0x62));
+          temp_v12 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v7 + 0x62));
           textFormatBuffer(temp_v32,&LAB_002af620,temp_v12);
           temp_v48 = (unsigned int)(*(short *)(temp_v7 + 0xe) < temp_v30);
         }

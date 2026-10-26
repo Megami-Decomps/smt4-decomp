@@ -58,16 +58,6 @@ SlotSortInfo *FUN_00184310(u16 entryId);
 extern "C" {
 #endif
 
-void FUN_0016e800(u32 key, u32 address);
-
-#ifdef __cplusplus
-}
-#endif
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void* FUN_00178b04(u32 memoryType, u32 unusedFirst, u32 unusedSecond);
 
 #ifdef __cplusplus

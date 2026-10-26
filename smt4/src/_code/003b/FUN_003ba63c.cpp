@@ -14,7 +14,6 @@ void renderCtxSelectStereoLayout(RenderCtx *context);
 void FUN_002bed3c(void);
 u32 FUN_002c5d80(u32 slot, u32 flags);
 void FUN_003bb77c(void *view);
-void FUN_002c198c(RenderCtx *context);
 void FUN_002c18e4(RenderCtx *context);
 
 /* Draws the view at 0x9C under render state FUN_002c5d80(1, 0) once the work reaches state 3 (nothing in state 0x11). */
@@ -30,7 +29,7 @@ void FUN_003ba63c(StateDrawWork *work)
         FUN_003bb77c(work->view);
     }
     renderStackPop(&g_titleScene->stackA);
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     FUN_002c18e4(g_titleScene);
 }
 

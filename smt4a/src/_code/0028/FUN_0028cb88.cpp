@@ -2,10 +2,10 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "util/PackNibbles.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
-int FUN_00157558(int);
 int renderCtxResetColorScale(...);
 int skinObjectUpdateMatrices(...);
 int FUN_00183bb0(void);
@@ -26,7 +26,6 @@ typedef struct {
 
 extern int g_renderCtx; /* 0x59dbb4 */
 
-/* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: renderCtxResetColorScale. */
 /* Supplied declaration required: skinObjectUpdateMatrices. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -50,7 +49,7 @@ void FUN_0028cb88(int param_1)
   int *piVar4;
   int *piVar5;
   
-  FUN_00157558(g_renderCtx);
+  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
   FUN_00183bb0();
   piVar5 = (int *)(param_1 + 0x387c);
   if (*piVar5 == 6) {

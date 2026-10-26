@@ -1,4 +1,5 @@
 #include "common.h"
+#include "util/FUN_003ee0c0.h"
 
 extern "C" {
 
@@ -48,8 +49,9 @@ static __inline void slotStateReset(SlotState *state)
 }
 
 /* Gives every slot the default id and clears its velocity. */
-void FUN_003ee0c0(SlotManager *manager)
+void FUN_003ee0c0(void *handle)
 {
+    SlotManager *manager = static_cast<SlotManager *>(handle);
     s16 id = FUN_004c53fc(1);
 
     for (s32 i = 0; i < SLOT_COUNT; i++) {

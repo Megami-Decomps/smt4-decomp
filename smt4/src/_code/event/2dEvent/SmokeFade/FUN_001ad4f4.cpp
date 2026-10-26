@@ -3,6 +3,7 @@
 #include "camp/RenderCtx.h"
 #include "shard/packNibblesAndByte.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
+#include "gfx/StereoParallax.h"
 
 extern "C" {
 extern SmokeFadeState *DAT_0043df28;
@@ -12,7 +13,6 @@ void FUN_002bed3c();
 u32 FUN_002c5d80(u32 value, bool enabled);
 void efctSetSpeed(f32 speed);
 void FUN_002bf288(u32 flags, u32 table, s32 entry, u32 argument, TextureDrawPayloadIV payload);
-void renderCtxCalculateStereoParallax(RenderCtx *context, f32 depth);
 
 s32 FUN_001ad4f4(u32)
 {

@@ -2,6 +2,7 @@
 /* Reads from a file. In result-recording mode the result is stored in the file and the call reports success; otherwise a
  * failure is fatal. Returns 1 on success. */
 #include "nn/Result.h"
+#include "util/PlatformResultCheck.h"
 #include "shard/W5_W5Match5_GameSaveViews.h"
 
 extern "C" {
@@ -14,13 +15,6 @@ struct FileHandle {
 
 s32 nn_fs_detail_FileBase_TryRead(void *file, s32 *bytesRead, void *buffer, u32 size);
 
-static inline void throwFatalIfFailed(s32 result, u32 address)
-{
-    if (nnResultIsFailure(result)) {
-        FUN_0016e800(result, address);
-    }
-}
-
 s32 FUN_00174a00(FileHandle *file, void *buffer, u32 size, s32 *bytesRead)
 {
     if (file->recordResult != 0) {
@@ -29,7 +23,7 @@ s32 FUN_00174a00(FileHandle *file, void *buffer, u32 size, s32 *bytesRead)
     }
     s32 count;
     s32 result = nn_fs_detail_FileBase_TryRead(file->base, &count, buffer, size);
-    throwFatalIfFailed(result, __current_pc());
+    checkPlatformResult(result, __current_pc());
     *bytesRead = count;
     return 1;
 }

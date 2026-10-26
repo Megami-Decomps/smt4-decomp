@@ -1,6 +1,7 @@
 /* NON_MATCHING: failure test allocates r0 (retail ands r1 with the arg move hoisted above bpl); success path materializes 0 in r4 before r0 */
 #include "sys/ProcessResult.h"
 #include "nn/Result.h"
+#include "util/vcallSlot12IfValid.h"
 
 extern "C" {
 
@@ -21,7 +22,6 @@ typedef struct FileReader {
 
 void FUN_0032ca54(s32 result);
 void sysFatalBreak(void);
-void vcallSlot12IfValid(u32 handle);
 
 /* Reads size bytes at offset into buffer; on failure reports the result and closes the file. */
 s32 FUN_002e0c80(FileReader *reader, u32 offset, void *buffer, u32 size)

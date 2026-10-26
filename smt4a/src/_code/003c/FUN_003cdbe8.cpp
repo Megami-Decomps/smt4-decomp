@@ -1,9 +1,9 @@
 /* NON_MATCHING: right portrait, duration and left slot occupy different saved registers. */
 #include "common.h"
 #include "util/CalleeContracts.h"
+#include "script/ScriptArgs.h"
 
 extern "C" {
-u32 scrGetArg(u32);
 s32 bustupCutAnimFindSlot(u32);
 void bustupCutAnimSetPlacement(u32, s32, s32, s32, s32);
 

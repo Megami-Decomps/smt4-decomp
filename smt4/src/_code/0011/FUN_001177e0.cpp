@@ -1,9 +1,9 @@
 /* NON_MATCHING: retail preserves an additional 3D-ready test and different selector/alias scheduling. */
 #include "AsdSDK/Source/Snd/AsdSoundShutdown.h"
+#include "util/FUN_002bf684.h"
 
 extern "C" {
 extern AsdSoundSystem g_asdSound;
-u8 FUN_002bf684(const void *archive);
 void FUN_002bda30(s32 sound, s32 fadeFrames);
 void nw_snd_SoundHandle_DetachSound(s32 *handle);
 void FUN_00126770(u32 first, u32 second);

@@ -1,19 +1,13 @@
 /* NON_MATCHING: VFP register assignment and the packing of the vertex colour differ (retail loads the half-size with one vldmia into s17/s18 and keeps the shift in s19/s16); same loads, conversions and the two FUN_0019e3d0 quads. */
 #include "camp/RenderCtx.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 namespace {
-/* A loaded texture object: only its pixel size is read. */
-struct QuadTexture {
-    /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 width;
-    /* 0x18 */ s32 height;
-};
-
 /* A texture slot; the object it points at is at +8. */
 struct QuadTextureSlot {
     /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ QuadTexture *texture;
+    /* 0x08 */ AsdTexture *texture;
 };
 
 /* The job's work block as the quad drawer reads it. */
@@ -54,7 +48,6 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 QuadWork *jobGetWork(void);
 s32 FUN_00162ea4(void);
-void FUN_0016c4b8(RenderCtxA *context, void *texture);
 void FUN_0019e3d0(u32 color0, u32 color1, u32 color2, u32 color3,
     f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
     f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3,
@@ -86,13 +79,13 @@ void FUN_00281428(f32 offsetX, f32 offsetY)
         alpha = work->alpha * 0.5f;
     }
     if (asdTMTexTableNodeIsLoaded(work->table, work->node) != 0) {
-        QuadTexture *texture = work->slot->texture;
-        halfWidth *= (f32)texture->width * 0.001953125f;
-        halfHeight *= (f32)texture->height * 0.001953125f;
+        AsdTexture *texture = work->slot->texture;
+        halfWidth *= (f32)texture->dimensions.width * 0.001953125f;
+        halfHeight *= (f32)texture->dimensions.height * 0.001953125f;
         u32 high = (u32)(alpha * 255.0f);
         u32 low = (u32)(work->fade * 255.0f);
         u32 color = (high << 24) | (high << 16) | (high << 8) | low;
-        FUN_0016c4b8(g_renderCtx, work->slot->texture);
+        renderCtxSelectTexture(g_renderCtx, work->slot->texture);
         FUN_0019e3d0(color, color, color, color,
             centerX - halfWidth, centerY + halfHeight, depth,
             centerX - halfWidth, centerY - halfHeight, depth,
@@ -111,7 +104,7 @@ void FUN_00281428(f32 offsetX, f32 offsetY)
         u32 high = (u32)(alpha * 255.0f);
         u32 low = (u32)(overlayFade * 255.0f);
         u32 color = (high << 24) | (high << 16) | (high << 8) | low;
-        FUN_0016c4b8(g_renderCtx, work->overlaySlot->texture);
+        renderCtxSelectTexture(g_renderCtx, work->overlaySlot->texture);
         FUN_0019e3d0(color, color, color, color,
             centerX - halfWidth, centerY + halfHeight, depth,
             centerX - halfWidth, centerY - halfHeight, depth,

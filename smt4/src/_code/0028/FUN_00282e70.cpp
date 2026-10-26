@@ -1,10 +1,10 @@
 /* NON_MATCHING: part address computation uses r5 instead of r0 before preserving it; shared success block matches. */
 #include "ui/PartyPanelState.h"
+#include "util/FUN_0029efa8.h"
 
 extern "C" {
 extern PartyPanelState *g_partyPanel;
 s32 objectPartRunUnlessLocked(void *part);
-s32 FUN_0029efa8(void *part);
 
 
 static __inline bool partyPanelPartReady(void *part)

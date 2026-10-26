@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -16,7 +17,6 @@ int asdMemoryAllocTracked(...);
 int uiSpriteSelectAnim(...);
 int uiSpriteSetKeyframe(...);
 int uiSpriteSetImageKeyframe(...);
-int asdLoadFileAsyncSimple(...);
 int sysMemClear(...);
 int FUN_0034a544(...);
 int FUN_003e4140(...);
@@ -41,8 +41,6 @@ extern unsigned char LAB_002c82a0; /* 0x2c82a0 */
 extern unsigned char LAB_002c82bc; /* 0x2c82bc */
 extern unsigned char LAB_002c82d0; /* 0x2c82d0 */
 extern unsigned char LAB_002c82e4; /* 0x2c82e4 */
-extern unsigned char LAB_002c82f0; /* 0x2c82f0 */
-extern unsigned char LAB_002c8308; /* 0x2c8308 */
 extern unsigned char DAT_005362a8; /* 0x5362a8 */
 extern unsigned char DAT_0053638c; /* 0x53638c */
 extern unsigned char DAT_00536458; /* 0x536458 */
@@ -62,7 +60,6 @@ extern unsigned int spriteHandleCreate(unsigned int);
 /* Supplied declaration required: uiSpriteSelectAnim. */
 /* Supplied declaration required: uiSpriteSetKeyframe. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
-/* Supplied declaration required: asdLoadFileAsyncSimple. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: FUN_0034a544. */
 /* Supplied declaration required: FUN_003e4140. */
@@ -120,8 +117,8 @@ void FUN_002c7e6c(void)
     asdLoadFileAsyncSimple("status/status.tbb",puVar1 + 0x833,0);
     puVar5 = DAT_00588fd4;
     if (DAT_00588fd4[0x82f] == 0) {
-      asdLoadFileAsyncSimple(&LAB_002c82f0,DAT_00588fd4 + 0x82f,0);
-      asdLoadFileAsyncSimple(&LAB_002c8308,puVar5 + 0x82e,0);
+      asdLoadFileAsyncSimple("camp/PartnerData.tbb",DAT_00588fd4 + 0x82f,0);
+      asdLoadFileAsyncSimple("camp/partnerDescriptionMsg.mbm",puVar5 + 0x82e,0);
     }
     puVar5 = DAT_00588fd4;
     temp_v0 = spriteHandleCreate(0);

@@ -90,7 +90,7 @@ void mapGimmickResetControllers(void);
 void mapMainRequest(u32 handle);
 s32 FUN_0024f4ac(u32 handle);
 void noopCallback(u32 handle);
-void FUN_0029ee68(u32 handle);
+void mapMainDrawOrdinaryPass(u32 handle);
 void FUN_002bd170(u32 handle);
 void FUN_00358550(u32 handle);
 void FUN_00358734(u32 handle);
@@ -163,7 +163,7 @@ void FUN_00246720(void)
     map->handleRegistry = g_handleRegistry;
     map->freeOnEnd = 0;
     map->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MAP C"), 4, 0, 0, (AsdProcUpdateFunc)FUN_0024f4ac, mapMainRequest, 0);
-    map->drawJob = taskCreateDraw("MAP U", 113, 0, 0, (AsdProcUpdateFunc)FUN_0029ee68, noopCallback, 0, (void *)map->job);
+    map->drawJob = taskCreateDraw("MAP U", 113, 0, 0, (AsdProcUpdateFunc)mapMainDrawOrdinaryPass, noopCallback, 0, (void *)map->job);
     taskCreateDraw("MAP EL", 119, 0, 0, (AsdProcUpdateFunc)FUN_00358550, NULL, 0, (void *)map->job);
     taskCreateDraw("MAP ER", 211, 0, 0, (AsdProcUpdateFunc)FUN_00358734, NULL, 0, (void *)map->job);
     taskCreateDraw("MAP EXT", 104, 0, 0, (AsdProcUpdateFunc)FUN_002bd170, noopCallback, 0, (void *)map->job);

@@ -1,6 +1,7 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0021f6e4` (_code @ 0x21f6e4, 0xae0 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/asdMemoryGetAllocatorA.h"
 
 extern "C" {
 
@@ -62,7 +63,6 @@ extern int asdModelGetSlotArray2(fn_0021f6e4_arg1 *);
 extern int asdModelGetSlotArray1(fn_0021f6e4_arg1 *);
 /* Supplied declaration required: FUN_002af294. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
-extern unsigned int asdMemoryGetAllocatorA(void);
 extern short libc_strlen(int);
 /* Supplied declaration required: nw_gfx_SceneBuilder_CreateObject. */
 /* Supplied declaration required: nw_gfx_SceneHelper_ResolveReferenceImpl. */
@@ -157,7 +157,7 @@ void FUN_0021f6e4(int *param_1,fn_0021f6e4_arg1 *param_2)
         temp_v8 = 0;
       }
       temp_v3 = asdMemoryGetDefaultAllocator();
-      temp_v4 = asdMemoryGetAllocatorA();
+      temp_v4 = (unsigned int)asdMemoryGetAllocatorA();
       temp_v16 = 1;
       temp_v18 = 0;
       temp_v19 = 0;
@@ -387,7 +387,7 @@ LAB_0021fb58:
         temp_v8 = 0;
       }
       temp_v3 = asdMemoryGetDefaultAllocator();
-      temp_v4 = asdMemoryGetAllocatorA();
+      temp_v4 = (unsigned int)asdMemoryGetAllocatorA();
       temp_v16 = 1;
       temp_v17 = 8;
       uStack_64 = 4;
@@ -558,7 +558,7 @@ LAB_0021ff80:;
       else {
         temp_v6 = 0;
       }
-      temp_v3 = asdMemoryGetAllocatorA();
+      temp_v3 = (unsigned int)asdMemoryGetAllocatorA();
       temp_v4 = asdMemoryGetDefaultAllocator();
       temp_v21 = romwright_piece_3_1((((unsigned int)(temp_v21) >> 8) & 0xffffffU),1);
       temp_v24 = 0;

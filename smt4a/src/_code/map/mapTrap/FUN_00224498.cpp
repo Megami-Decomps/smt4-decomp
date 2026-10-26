@@ -3,6 +3,7 @@
 #include "map/mapDepart.h"
 #include "Model/ModelList.h"
 #include "classes/Obj4209cc.h"
+#include "util/FUN_0040aa6c.h"
 
 extern "C" {
 extern MapTrapA *g_mapTrap;
@@ -11,7 +12,6 @@ extern void *g_handleRegistry;
 void mapTrapClearState();
 void *FUN_00178b04(u32 size, const char *source, s32 line);
 ModelList *modelListInit(ModelList *model);
-void FUN_0040aa6c(ModelList *model, const char *path);
 void FUN_0040aad4(ModelList *model, s32 index);
 void handleRegistryRegisterObject(void *registry, ModelResourceItem *model);
 }

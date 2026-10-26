@@ -1,6 +1,7 @@
 /* NON_MATCHING: the inlined flag clear folds the byte index into scaled ldrb/strb and keeps 0 as an immediate; retail computes id>>3 and ~(1<<bit) in registers (same issue as gameFlagSetValue). */
 #include "common.h"
 #include "gamedata/GameFlags.h"
+#include "shard/gameGetFlagBlock.h"
 
 extern "C" {
 
@@ -15,12 +16,11 @@ typedef struct GameFlagBlock29016c {
     /* 0x840 */ u16 activeEntry;
 } GameFlagBlock29016c;
 
-GameFlagBlock29016c *gameGetFlagBlock(void);
 void FUN_0023ddbc(u32 id, s32 value);
 
 static inline void gameFlagWrite(u32 id, u32 value)
 {
-    u8 *bits = gameGetFlagBlock()->bits;
+    u8 *bits = reinterpret_cast<GameFlagBlock29016c *>(gameGetFlagBlock())->bits;
     FUN_0023ddbc(id, value);
     u32 byte = id >> 3;
     u32 bit = id & 7;
@@ -35,11 +35,11 @@ static inline void gameFlagWrite(u32 id, u32 value)
 // returns 1 when something was cleared.
 u32 FUN_0029016c(u32 index, s32 force)
 {
-    GameFlagEntry29016c *entry = &gameGetFlagBlock()->entries[index];
+    GameFlagEntry29016c *entry = &reinterpret_cast<GameFlagBlock29016c *>(gameGetFlagBlock())->entries[index];
     if (entry->flags & 2) {
-        if (gameGetFlagBlock()->activeEntry == index) {
+        if (reinterpret_cast<GameFlagBlock29016c *>(gameGetFlagBlock())->activeEntry == index) {
             entry->flags &= ~0x46;
-            gameGetFlagBlock()->activeEntry = 0;
+            reinterpret_cast<GameFlagBlock29016c *>(gameGetFlagBlock())->activeEntry = 0;
             for (u32 id = 0x500; id < 0x520; id++) {
                 gameFlagWrite(id, 0);
             }

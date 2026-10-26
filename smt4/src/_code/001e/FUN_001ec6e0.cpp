@@ -3,6 +3,7 @@
 #include "camp/CampCec/CampCecView.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/asdTMTexTableLoadSprites.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 struct CecLoader {
     /* 0x000 */ u8 unk000[0xCEC];
@@ -43,7 +44,6 @@ void FUN_002597c0(void);
 u32 FUN_00259800(void);
 void btlTalkBustUpCreate(void);
 void fileSlotLoad(s32 slot);
-void asdLoadFileAsyncSimple(const char *path, void **destination, s32 flags);
 void asdTMTexTableLoadEntryAsync(s32 type, s32 index);
 void threadSleepDuration(s64 nanoseconds);
 void FUN_002bd2b4(void *block, u32 a, u32 b, u32 c);
@@ -62,10 +62,10 @@ void FUN_001ec6e0(CecLoader *loader)
             cecProcessStart();
             fileSlotLoad(0x25);
             btlTalkBustUpCreate();
-            asdLoadFileAsyncSimple("camp/CecItemTable.tbl", &loader->itemTable, 0);
-            asdLoadFileAsyncSimple("camp/CecUnionTable.tbl", &loader->unionTable, 0);
-            asdLoadFileAsyncSimple("camp/CecMain_scr.bf", &loader->script, 0);
-            asdLoadFileAsyncSimple("camp/CecMain_msg.mbm", &loader->messages, 0);
+            asdLoadFileAsyncSimple("camp/CecItemTable.tbl", reinterpret_cast<u32 *>(&loader->itemTable), 0);
+            asdLoadFileAsyncSimple("camp/CecUnionTable.tbl", reinterpret_cast<u32 *>(&loader->unionTable), 0);
+            asdLoadFileAsyncSimple("camp/CecMain_scr.bf", reinterpret_cast<u32 *>(&loader->script), 0);
+            asdLoadFileAsyncSimple("camp/CecMain_msg.mbm", reinterpret_cast<u32 *>(&loader->messages), 0);
             asdTMTexTableLoadSprites(0x39);
             asdTMTexTableLoadEntryAsync(0x39, 0);
             CecPageKey key;

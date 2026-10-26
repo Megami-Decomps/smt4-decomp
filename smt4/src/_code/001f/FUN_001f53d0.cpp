@@ -1,10 +1,10 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001f53d0` (_code @ 0x1f53d0, 0xac8 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
-int pairSetFirstResetSecond(...);
 int spriteStartAnimationByIndex(...);
 int FUN_002bf818(...);
 int SBORROW4(unsigned int, int);
@@ -16,7 +16,6 @@ typedef struct {
 } param_1_stack;
 
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
-/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 
@@ -129,7 +128,7 @@ void FUN_001f53d0(int param_1)
       do {
         temp_v6 = (*(short *)(param_1 + 0x218c) - temp_v9) - 1;
         temp_v3 = param_1 + temp_v6 * 0x8c;
-        pairSetFirstResetSecond(temp_v3 + 0x598,6);
+        pairSetFirstResetSecond((void *)(temp_v3 + 0x598),6);
         spriteStartAnimationByIndex(temp_v3 + 0x598,1);
         spriteStartAnimationByIndex(temp_v3 + 0xb10,6);
         spriteStartAnimationByIndex(temp_v3 + 0x1088,4);
@@ -314,7 +313,7 @@ LAB_001f5adc:
       temp_v9 = 0;
       do {
         temp_v3 = param_1 + ((*(short *)(param_1 + 0x218c) - temp_v9) - 1) * 0x8c;
-        pairSetFirstResetSecond(temp_v3 + 0x598,6);
+        pairSetFirstResetSecond((void *)(temp_v3 + 0x598),6);
         spriteStartAnimationByIndex(temp_v3 + 0x598,1);
         spriteStartAnimationByIndex(temp_v3 + 0xb10,6);
         spriteStartAnimationByIndex(temp_v3 + 0x1088,4);
@@ -398,12 +397,12 @@ LAB_001f5adc:
             if (*(int *)(param_1 + 0x2184) == 0) {
               temp_v6 = 4000;
             }
-            pairSetFirstResetSecond(param_1 + temp_v9 * 0x8c + 0x20,temp_v6);
+            pairSetFirstResetSecond((void *)(param_1 + temp_v9 * 0x8c + 0x20),temp_v6);
           }
         }
         else if (temp_v2 == 0xf) {
           temp_v6 = (unsigned int)(*(int *)(param_1 + 0x2184) != 0);
-          pairSetFirstResetSecond(param_1 + temp_v9 * 0x8c + 0x20,temp_v6);
+          pairSetFirstResetSecond((void *)(param_1 + temp_v9 * 0x8c + 0x20),temp_v6);
         }
         FUN_002bf818(param_1 + temp_v9 * 0x8c + 0x1600);
       }

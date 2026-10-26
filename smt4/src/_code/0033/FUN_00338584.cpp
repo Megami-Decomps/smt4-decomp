@@ -3,11 +3,11 @@
 #include "battle/btlMain.h"
 #include "gamedata/DevilRecord.h"
 #include "shard/PadState.h"
+#include "shard/W6_W6Match3_NameFormState.h"
 
 extern "C" {
 s32 playerPadTestBit(u32);
 s32 gameFlagIsSet(u32);
-DevilRecord *dataTable00FindById(u32);
 PadState *gameGetPlayerData();
 s32 randRange(u32);
 
@@ -25,7 +25,7 @@ u32 FUN_00338584(BtlMainState *state)
         if ((entry->flags & 1) && !(entry->flags & 0x40) && (entry->flags & 0x10)) {
             if (entry == NULL)
                 return 0;
-            DevilRecord *metadata = dataTable00FindById(entry->id);
+            DevilRecord *metadata = reinterpret_cast<DevilRecord *>(dataTable00FindById(entry->id));
             if (metadata->links.linkFlags & 0x10)
                 return 0;
             if ((entry->flags & 0x100000) || (entry->flags & 0x10000000))

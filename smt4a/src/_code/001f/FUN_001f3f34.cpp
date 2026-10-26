@@ -4,11 +4,11 @@
 
 extern "C" {
 
-int FUN_001a1ea8(unsigned int);
+int mathInterpolatePackedTable(unsigned int);
 int VectorFloatToUnsigned(double, int);
 
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_001a1ea8. */
+/* Supplied declaration required: mathInterpolatePackedTable. */
 
 
 void FUN_001f3f34(void)
@@ -21,7 +21,7 @@ void FUN_001f3f34(void)
   
   if (((in_s2 != 0.0f) && (0.0f < in_s3)) && (in_s3 < in_s2)) {
     temp_v0 = VectorFloatToUnsigned((in_s3 * 16384.0f) / in_s2,3);
-    FUN_001a1ea8(temp_v0 & 0xffff);
+    mathInterpolatePackedTable(temp_v0 & 0xffff);
   }
   return;
 }

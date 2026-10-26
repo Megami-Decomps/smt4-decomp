@@ -2,6 +2,7 @@
 #include "battle/BtlMainAccess.h"
 #include "util/CalleeContracts.h"
 #include "battle/btlUnit.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 
@@ -9,13 +10,12 @@ extern "C" {
 extern u32 g_btlScriptUnit;
 
 u32 scrGetArg(s32 index);
-BtlUnitA *btlUnitGet(u32 id);
 
 /* Script command: puts the script unit in mode 12 and sets the battle mask to the argument with bit 17 added. */
 u32 FUN_003b0b00(void)
 {
     u32 arg = scrGetArg(0);
-    BtlUnitDataA *data = btlUnitGet(g_btlScriptUnit)->data;
+    BtlUnitDataA *data = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)))->data;
     data->unk1BE = 12;
     u32 *words = btlGetMainState()->commandWords;
     s32 mask = arg | 0x20000;

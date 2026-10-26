@@ -1,9 +1,14 @@
-/* NON_MATCHING: identity-quaternion zero-store scheduling and return-value register allocation differ. */
 #include "AsdSDK/Source/Gfx/Effect/effAsdLight.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
 #include "gfx/LightRegistry.h"
 #include "AsdSDK/AsdMemUtil.h"
+
+static void quaternionSetIdentity(EffLightVec4 *quaternion)
+{
+    memset(quaternion, 0, sizeof(*quaternion));
+    quaternion->w = 1.0f;
+}
 
 struct AsdAmbientLight;
 struct AsdModelGroupLink;
@@ -43,12 +48,10 @@ EffAsdLight* FUN_002dcfe0(const EffAsdLightDesc* resource)
     LightWork* light = static_cast<LightWork*>(
         memAlloc(0x10000, 0x100, 0, sizeof(LightWork), 0x10, 1));
     reinterpret_cast<int>(memClear(light, sizeof(LightWork)));
-    memset(&light->rotation0, 0, sizeof(light->rotation0));
-    light->rotation0.w = 1.0f;
-    memset(&light->rotation1, 0, sizeof(light->rotation1));
-    light->rotation1.w = 1.0f;
-    light->scale = 1.0f;
+    quaternionSetIdentity(&light->rotation0);
+    quaternionSetIdentity(&light->rotation1);
     light->group = -1;
+    light->scale = 1.0f;
     if (!resource) {
         return reinterpret_cast<EffAsdLight*>(light);
     }

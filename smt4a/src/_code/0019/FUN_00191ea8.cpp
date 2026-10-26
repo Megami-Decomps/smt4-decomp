@@ -17,7 +17,7 @@ struct Request {
 
 extern "C" {
 
-RecordList *FUN_001b2ca4(u32 id, u32 kind, u32 variant);
+RecordList *packageFindFileRefByName(u32 id, u32 kind, u32 variant);
 void FUN_001ab8e0(Request *request, s32 mode, u32 a, u32 b, u32 value);
 void FUN_0019b770(u32 target, Request *request, void *source, s32 flags);
 
@@ -25,7 +25,7 @@ void FUN_0019b770(u32 target, Request *request, void *source, s32 flags);
 void FUN_00191ea8(u32 id, u32 variant, u32 a, u32 b, u32 value)
 {
     Request request;
-    RecordList *list = FUN_001b2ca4(id, 0x1a, variant);
+    RecordList *list = packageFindFileRefByName(id, 0x1a, variant);
     RecordNode ***first = (RecordNode ***)list;
     if (list != NULL) {
         first = list->first;

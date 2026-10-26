@@ -8,6 +8,8 @@ extern "C" {
 
 /* Reports the failed result `result`: ignored levels return, others are reported and end in the fatal error handler. */
 void FUN_002c526c(u32 result);
+/* Maps/reports the thread stack memory of `stack`: reports the failed result of the mapping. */
+void resultReportIfFailed(void *stack, void *memory, u32 size);
 
 } /* extern "C" */
 

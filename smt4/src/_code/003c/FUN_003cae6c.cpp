@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail re-evaluates the unit table address (g_btlAction+4, then index * 0xf1c) at every store and keeps the 64-bit mask halves in different registers; the control flow and calls are the same. */
 #include "common.h"
+#include "gamedata/DataTable40.h"
 
 namespace {
 /* The battle state block: its flags, the acting unit's index and a pair of words the target pick leaves. */
@@ -70,7 +71,6 @@ extern u32 g_btlUiBlock;
 s32 FUN_003af084(u32 block);
 void btlUiCopyStatePairs(u32 block, char *valid, u64 *mask, u64 *pair);
 SkillRecord *dataTable08Sub1GetRecord(s32 id);
-SkillInfo *dataTable40FindById(s32 id);
 s32 FUN_0033a2c4(BattleBlock *block, s32 index);
 s32 playerPadTestBit(u32 bit);
 void FUN_00247478(CommandInfo *info, BattleBlock *block, u32 *environment);
@@ -141,11 +141,11 @@ u32 FUN_003cae6c(BattleBlock **block, CommandState *state)
         markChosenTargets(state, mask);
     } else {
         if (kind == 2 || kind == 3) {
-            info = dataTable40FindById(selection->value);
+            info = reinterpret_cast<SkillInfo *>(dataTable40FindById(selection->value));
         } else if (kind == 8) {
             SkillRecord *record = dataTable08Sub1GetRecord(selection->value);
             if (record->linkedSkill != 0) {
-                info = dataTable40FindById(record->linkedSkill);
+                info = reinterpret_cast<SkillInfo *>(dataTable40FindById(record->linkedSkill));
             }
         }
         if (info != NULL && info->kind == 7) {

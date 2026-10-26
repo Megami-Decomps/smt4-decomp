@@ -1,4 +1,4 @@
-/* NON_MATCHING: bit-index registers and enabled-test scheduling differ from retail. */
+/* NON_MATCHING: only the scheduling of the enabled test (cmp) and the save-base add differs from retail. */
 #include "common.h"
 
 struct SaveToggleFlags {
@@ -12,14 +12,14 @@ extern "C" SaveToggleFlags* gameDataBlocksGetSaveData();
 extern "C" void FUN_0032ef0c(s32 flagIndex, s32 enabled)
 {
     s32 byteIndex = flagIndex / 8;
+    s32 bit = flagIndex % 8;
     SaveToggleFlags* save = gameDataBlocksGetSaveData();
     u8* byte = &save->flags[byteIndex];
-    u32 mask = 1u << (flagIndex % 8);
     u32 bits = *byte;
     if (enabled != 0) {
-        bits |= mask;
+        bits |= 1 << bit;
     } else {
-        bits &= ~mask;
+        bits &= ~(1 << bit);
     }
     *byte = bits;
 }

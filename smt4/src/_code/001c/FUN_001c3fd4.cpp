@@ -5,11 +5,12 @@
 #include "AsdSDK/AsdMemUtil.h"
 #include "gamedata/SaveLoadProcess.h"
 #include "status/StatusCamera.h"
+#include "font/ComWin/ComWin.h"
 
 extern "C" {
 
 int partyPanelResetCursor(void);
-int FUN_00205a90(void);
+int partyPanelRefreshItemPreview(void);
 int FUN_0026b7c0(void);
 int FUN_0026b9bc(void);
 int partyPanelSortEntries(void);
@@ -21,7 +22,6 @@ int FUN_0029c1c8(...);
 int unitRecalculateEffectiveStats(...);
 int useCounterRelease(void);
 int eventQueueAddUnique(...);
-int spriteStartAnimationByIndex(...);
 int FUN_002e3378(...);
 int FUN_003ae34c(...);
 
@@ -123,7 +123,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 /* Supplied declaration required: FUN_001d1828. */
 extern int FUN_002015a4(void);
 /* Supplied declaration required: partyPanelResetCursor. */
-/* Supplied declaration required: FUN_00205a90. */
+/* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026b9bc. */
 /* Supplied declaration required: partyPanelSortEntries. */
@@ -233,7 +233,6 @@ extern int ifTouchGetSelectionMode(void);
 /* Supplied declaration required: devilGetRecord. */
 /* Supplied declaration required: eventQueueAddUniqueIfValid. */
 /* Supplied declaration required: timerStart. */
-/* Supplied declaration required: spriteStartAnimationByIndex. */
 /* Supplied declaration required: FUN_002bf818. */
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_002c1658. */
@@ -2196,8 +2195,8 @@ LAB_001c7720:
         FUN_00295eb0(temp_v1 + 0x554,0x19,temp_v4 + 0x31);
         FUN_00295eb0(temp_v1 + 0x5e0,0x19,temp_v4 + 0x31);
       }
-      spriteStartAnimationByIndex(temp_v1 + 0x554,3);
-      spriteStartAnimationByIndex(temp_v1 + 0x5e0,4);
+      spriteStartAnimationByIndex((void *)(temp_v1 + 0x554),3);
+      spriteStartAnimationByIndex((void *)(temp_v1 + 0x5e0),4);
       eventQueueAddUnique(0x10001e1);
     }
     break;
@@ -2610,7 +2609,7 @@ LAB_001c7c50:
           }
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < 0x18);
-        FUN_00205a90();
+        partyPanelRefreshItemPreview();
         temp_v14 = 1;
         temp_v7 = 10;
       }

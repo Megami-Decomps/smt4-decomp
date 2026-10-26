@@ -1,32 +1,38 @@
-/* NON_MATCHING: retail rebuilds packed color through byte-reversal accessors; packed-color instructions differ. */
-#include "gfx/EffectPrimitiveWork.h"
+#include "gfx/RenderSubmission.h"
+
 extern "C" {
-u32 FUN_00269694(const void *curve, const u32 *baseColor, u32 frame, u32 duration);
+void FUN_00246afc(RenderSubmissionPacket *, const f32 *, const f32 *, const f32 *);
+void FUN_00246bd4();
 void asdSetNormalizedColorRgba(u32 color);
-void FUN_00246bd4(void);
-u32 FUN_00246c28(void);
-void FUN_00246afc(EffectPrimitive *primitive, const f32 *translation, const f32 *rotation, const f32 *scale);
-void FUN_00256a50(EffectPrimitive *primitive, u32 flags);
+void FUN_00256a50(RenderSubmissionPacket *, u32 mode);
+u32 FUN_00269694(RenderSubmissionOwner *, const u32 *color, u32 frame, u32 duration);
+u32 FUN_00246c28();
 extern EffectColorProductState DAT_004ea81c;
 
-/* Update a live effect primitive's transform, interpolated color, and render flags. */
-void FUN_0032128c(EffectPrimitiveWork *work)
+// Apply the current owner color, transform and depth mode to an effect submission.
+void FUN_0032128c(RenderSubmission *submission)
 {
-    EffectPrimitiveEmitter *emitter = work->emitter;
-    EffectPrimitive *primitive = work->handle->primitive;
-    if (emitter->duration < work->frame && emitter->duration != 0)
+    RenderSubmissionOwner *owner = submission->owner;
+    RenderSubmissionPacket *packet = submission->resource->packet;
+    if (submission->frame > owner->frame && owner->frame != 0)
         return;
-    u32 color = FUN_00269694(emitter->colorCurve, &emitter->color, work->frame, emitter->duration);
-    asdSetNormalizedColorRgba(work->color);
+    u32 ownerColor = FUN_00269694(owner, &owner->color, submission->frame, owner->frame);
+    asdSetNormalizedColorRgba(submission->color);
     effectColorCopy(&DAT_004ea81c.color, &DAT_004ea81c.factor);
-    asdSetNormalizedColorRgba(color);
+    asdSetNormalizedColorRgba(ownerColor);
     FUN_00246bd4();
-    primitive->color = FUN_00246c28();
-    FUN_00246afc(primitive, work->translation, work->rotation, work->scale);
-    if (emitter->enabled)
-        primitive->flags |= 0x100;
+    u32 color = FUN_00246c28();
+    RenderSubmissionColor packed;
+    packed.channels.red = __rev(color) >> 24;
+    packed.channels.green = __rev(color) >> 16;
+    packed.channels.blue = __rev(color) >> 8;
+    packed.channels.alpha = __rev(color);
+    packet->color = packed.value;
+    FUN_00246afc(packet, submission->position, submission->rotation, submission->scale);
+    if (owner->depthEnabled)
+        packet->flags |= 0x100;
     else
-        primitive->flags &= ~0x100;
-    FUN_00256a50(primitive, emitter->renderFlags & 0xffff);
+        packet->flags &= ~0x100;
+    FUN_00256a50(packet, static_cast<u16>(owner->drawMode));
 }
 }

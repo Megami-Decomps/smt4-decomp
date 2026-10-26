@@ -11,7 +11,7 @@ struct ColoredRectangle {
 
 extern "C" {
 extern u32 g_renderCtx;
-void FUN_0016c4b8(u32 scene, s32 mode);
+void renderCtxSelectTexture(u32 scene, s32 mode);
 void FUN_00167618(const EffectColor *topLeft, const EffectColor *topRight,
                   const EffectColor *bottomLeft, const EffectColor *bottomRight,
                   f32 x, f32 y, f32 width, f32 height, f32 depth);
@@ -36,7 +36,7 @@ void FUN_001522a0(const ColoredRectangle *rectangles, u32 count)
             }
             packed >>= 8;
         }
-        FUN_0016c4b8(g_renderCtx, 0);
+        renderCtxSelectTexture(g_renderCtx, 0);
         f32 x = rectangles[i].left;
         f32 y = rectangles[i].top;
         f32 width = rectangles[i].right - x;

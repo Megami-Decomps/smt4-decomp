@@ -41,7 +41,7 @@ void useCounterStart(void);
 void FUN_0031f208(s32 id);
 void sortMenuAcquire(s32 id, s32 arg);
 s32 FUN_003450d4(void *list, u32 handle, void *area, s32 x, s32 y, s32 w, u8 *flag, s32 a, s32 b);
-u32 FUN_0039b984(void);
+u32 contentFindRecordById(void);
 void FUN_004029f4(ListMenu *menu, s32 a, s32 b);
 void FUN_00404974(ListMenu *menu);
 s32 ifTouchGetSelectionMode(void);
@@ -59,7 +59,7 @@ void FUN_00403e2c(ListMenu *menu)
     menu->cursor = resourceRunOperationIfUnblocked(menu->list);
     menu->pageCount = FUN_002a4894(menu->list);
     menu->selectedId = menu->ids[menu->pageCount + menu->cursor];
-    ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = FUN_0039b984();
+    ((ListMenuTail *)((u8 *)menu + 0x664))->selectedCopy = contentFindRecordById();
     u8 touched = 0;
     s32 mode = ifTouchGetSelectionMode();
     u32 handle = asdTMTexTableEntryAt(50, 139);

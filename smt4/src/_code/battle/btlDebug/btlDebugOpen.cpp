@@ -6,14 +6,14 @@
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Util/AsdListBox.h"
 #include "map/mapDepart.h"
+#include "util/AsdListBoxCreateDefault.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-void *asdMemAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, s32 kind);
 u32 taskCreateDraw(const s8 *name, s32 group, u16 startDelay, u16 endDelay,
                    AsdProcUpdateFunc update, AsdProcFunc destroy, u32 work, u32 parent);
 s32 FUN_001fc5c0(u32 handle);
 s32 lmapJobQueryZero(u32 handle);
-u32 asdListBoxCreateDefault(u32 parent, s32 group, u32 first, u32 second);
 void asdListBoxAddItems(AsdListBox *list, const AsdListBoxEntry *entries, s32 count);
 void asdListBoxSetByteValue(u32 list, s32 enabled);
 void jobSetText(u32 job, const char *text);

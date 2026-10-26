@@ -1,6 +1,7 @@
-/* NON_MATCHING: column result registers, argument stores and fixed-capacity cold branch placement differ. */
+/* NON_MATCHING: branch layout now matches retail (fixed-capacity arm placed before the unlocked-slot arm); remaining: column results held in swapped saved registers (r7/r8) and the two stack-argument stores scheduled before the capacity load. */
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 struct SlotTable;
 /* Capacity is beyond the shared slot-table prefix. */
 struct PartyCapacityView {
@@ -14,7 +15,6 @@ s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 FUN_0029efa8(const GridNavigation *grid);
 void FUN_0029f848(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
-void FUN_0029eb5c(GridNavigation *grid, s32 index);
 void FUN_001c3600(GridNavigation *grid);
 
 void FUN_002937e0(void)
@@ -32,19 +32,19 @@ void FUN_002937e0(void)
     if (capacity < 12) {
         FUN_0029f848(&panel->capacityGrids.base, capacity, rows, 4, 1, 1);
         FUN_0029f848(&panel->capacityGrids.expanded, party->capacity + 4, rows + 1, 4, 1, 1);
-    } else if (panel->unk2C) {
+    } else if (!panel->unk2C) {
+        FUN_0029f848(&panel->capacityGrids.base, 12, 3, 4, 1, 1);
+        FUN_0029f848(&panel->capacityGrids.expanded, 16, 4, 4, 1, 1);
+    } else {
         party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
         FUN_0029f848(&panel->capacityGrids.base, party->capacity - 12, 3, 4, 1, 1);
         party = reinterpret_cast<const PartyCapacityView *>(gameGetSlotTable());
         FUN_0029f848(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
-    } else {
-        FUN_0029f848(&panel->capacityGrids.base, 12, 3, 4, 1, 1);
-        FUN_0029f848(&panel->capacityGrids.expanded, 16, 4, 4, 1, 1);
     }
     scrollOwnerSelectIndex(&panel->capacityGrids.base, firstRow);
-    FUN_0029eb5c(&panel->capacityGrids.base, firstColumn);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);
     scrollOwnerSelectIndex(&panel->capacityGrids.expanded, secondRow);
-    FUN_0029eb5c(&panel->capacityGrids.expanded, secondColumn);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.expanded), secondColumn);
     FUN_001c3600(&panel->capacityGrids.base);
     FUN_001c3600(&panel->capacityGrids.expanded);
 }

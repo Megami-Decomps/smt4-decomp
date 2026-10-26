@@ -1,5 +1,6 @@
 /* NON_MATCHING: starts a scroll of the sprite list pool by `delta` entries with `count` rows moving; written from the decompilation, the sprite address arithmetic and loop shapes not compared with retail */
 #include "common.h"
+#include "util/pairSetFirstResetSecond.h"
 
 struct ListSprite {
     /* 0x00 */ u8 data[0x8C];
@@ -24,7 +25,6 @@ struct ListPool {
 #define LIST_SCROLL_SOUND 0x1000173
 
 extern "C" {
-void pairSetFirstResetSecond(ListSprite *sprite, u32 value);
 void spriteStartAnimationByIndex(ListSprite *sprite, s32 animation);
 void FUN_002bf810(u32 sound);
 

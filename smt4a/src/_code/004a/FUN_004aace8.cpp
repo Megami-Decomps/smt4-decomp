@@ -1,10 +1,9 @@
 /* NON_MATCHING: center-dimension fallback is laid out before the widget query instead of out of line; coordinate registers and normal-slot float tail differ. */
 #include "battle/btlUI.h"
-#include "shard/S1ListPanel.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
-SpriteInfo *asdTMTexTableEntryAt(s32 group, s32 sprite);
 s32 FUN_0035fa18(BtlUiObjCA *widget);
 void FUN_004aa0b0(BtlUiA *ui, u32 alternate, u32 mode, f32 x, f32 y, f32 depth);
 
@@ -22,7 +21,7 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
         sprite = 0x415;
     else if (slot == 4)
         sprite = 0x1CC;
-    const SpriteInfo *layout = asdTMTexTableEntryAt(13, sprite);
+    const TextureTableEntryIV *layout = asdTMTexTableEntryAt(13, sprite);
     if (slot != 4) {
         FUN_004aa0b0(ui, alternate, 0, static_cast<f32>(layout->x + (x + 39)),
                      static_cast<f32>((y + 17) + layout->y) + (alternate ? 0.0f : -2.0f), 0.0f);
@@ -32,12 +31,12 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
     s32 anchorY = layout->y;
     layout = asdTMTexTableEntryAt(13, 0x416);
     s32 centerOffsetX, centerOffsetY;
-    if (layout->size) {
-        centerOffsetX = -(layout->x + layout->size[0] / 2);
-        centerOffsetY = -(layout->y + layout->size[1] / 2);
+    if (layout->placement) {
+        centerOffsetX = -(layout->x + layout->placement->width / 2);
+        centerOffsetY = -(layout->y + layout->placement->height / 2);
     } else {
-        centerOffsetX = -(layout->x + ((layout->bounds.width & 0x7FFF) >> 1));
-        centerOffsetY = -(layout->y + ((layout->bounds.height & 0x7FFF) >> 1));
+        centerOffsetX = -(layout->x + ((layout->width & 0x7FFF) >> 1));
+        centerOffsetY = -(layout->y + ((layout->height & 0x7FFF) >> 1));
     }
     if (FUN_0035fa18(&ui->objC))
         layout = asdTMTexTableEntryAt(13, 0x71);

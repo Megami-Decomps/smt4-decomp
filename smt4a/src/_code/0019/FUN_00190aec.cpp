@@ -23,7 +23,7 @@ typedef struct {
 /* Supplied declaration required: slotTableReplace. */
 /* Supplied declaration required: FUN_001a5e84. */
 extern int FUN_001a8930(int, unsigned int, unsigned int *);
-extern int FUN_001a8db0(unsigned char *);
+extern int asdWaveArchiveHasExpectedBlock(unsigned char *);
 /* Supplied declaration required: FUN_001b1e88. */
 extern int nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(unsigned int);
 /* Supplied declaration required: rt_memcpy. */
@@ -54,7 +54,7 @@ void FUN_00190aec(int *param_1,unsigned int param_2,int *param_3)
   if (temp_v1 != 0 && temp_v0 != '\0') {
     temp_v2 = (**(romwright_code **)(*param_1 + 0x10))(param_1,temp_v5);
     FUN_001a5e84(temp_v8,temp_v2,0);
-    temp_v1 = FUN_001a8db0(temp_v8);
+    temp_v1 = asdWaveArchiveHasExpectedBlock(temp_v8);
     if (temp_v1 == 0) {
       temp_v1 = nw_snd_internal_WaveArchiveFile_FileHeader_GetFileBlockOffset(temp_v2);
       temp_v3 = (**(romwright_code **)(*param_3 + 8))(param_3,temp_v1 + temp_v6 * 4 + 4);

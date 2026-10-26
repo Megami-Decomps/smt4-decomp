@@ -3,6 +3,7 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W6_W6Match6_ItemIcon.h"
+#include "addon/LookupRecord.h"
 
 extern "C" {
 
@@ -76,7 +77,6 @@ extern int vec2GetYInt(int);
 /* Supplied declaration required: effectDispatchSelector. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
-extern unsigned int FUN_00180114(unsigned short);
 extern int gameGetPlayerData(void);
 /* Supplied declaration required: FUN_00180310. */
 /* Supplied declaration required: asdTMTexTableEntryAt. */
@@ -349,7 +349,7 @@ LAB_004b07c8:
     if (acStack_fc[temp_v4] != '\0') {
       if (temp_v4 != 0) {
         temp_v13 = gameGetSlotRecord((int)*(char *)(temp_v3 + temp_v4 + 0x1c9f));
-        temp_v8 = FUN_00180114(*(unsigned short *)(temp_v13 + 0x62));
+        temp_v8 = (unsigned int)FUN_00180114(*(unsigned short *)(temp_v13 + 0x62));
         textFormatBuffer(temp_v31,&LAB_004b0b24,temp_v8);
       }
       else {

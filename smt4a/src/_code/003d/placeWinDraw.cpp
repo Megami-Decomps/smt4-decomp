@@ -2,15 +2,12 @@
 #include "camp/RenderCtx.h"
 #include "Model/MoriModelShadowMap.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 struct PlaceWindowPosition {
     f32 x, y;
 };
 
-struct PlaceWindowSpritePosition {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x, y;
-};
 
 struct PlaceWindow {
     /* 0x00 */ u8 unk00[8];
@@ -30,7 +27,6 @@ s32 vec2GetXInt(const PlaceWindowPosition *);
 s32 vec2GetYInt(const PlaceWindowPosition *);
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32 offset);
 void FUN_00164b5c(s32 layer, u32 group, u32 sprite, s32 x, s32 y, s32 priority);
-PlaceWindowSpritePosition *asdTMTexTableEntryAt(u32 group, u32 sprite);
 void FUN_00183bb0(void);
 void efctSetSpeed(f32 speed);
 
@@ -46,7 +42,7 @@ u8 placeWinDraw(void)
         s32 translatedX = x + static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.25f));
         s32 y = vec2GetYInt(&window->position);
         FUN_00164b5c(2, 8, 0xe, translatedX, y, 0x65);
-        PlaceWindowSpritePosition *sprite = asdTMTexTableEntryAt(8, 0x10b);
+        TextureTableEntryIV *sprite = asdTMTexTableEntryAt(8, 0x10b);
         textDrawString(3, 0xffffffff, (const char *)window->text,
                       static_cast<f32>(sprite->x + translatedX),
                       static_cast<f32>(sprite->y + y), 0.56640625f, 0.0f, 1.0f);

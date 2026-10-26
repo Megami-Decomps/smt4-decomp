@@ -4,6 +4,7 @@
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
+#include "event/bustupEvent/BustupTex.h"
 
 namespace {
 struct BustupTextureDefinition {
@@ -23,7 +24,6 @@ void *asdMemoryAllocTracked(s32 heap, s32 alignment, u32 flags, u32 bytes, s32 f
 void sysMemClear(void *memory, u32 bytes);
 s32 FUN_00162ea4();
 s32 aocRunByName(AocSystemA *system, s32 table, s32 node, u32 mode);
-u32 FUN_0014afd0(s32 table, s32 node);
 void FUN_0026c568(void *work);
 void asdMTeXReleaseJobContext(void *work);
 
@@ -56,7 +56,7 @@ void FUN_0039c840(u32 id, s32 useDefinition)
             if (aocRunByName(g_aocSystem, work->table, work->node, 1))
                 work->texture = aocLoadTextureNode(reinterpret_cast<u32>(g_aocSystem), work->table, work->node, 0x10000);
             else
-                work->texture = FUN_0014afd0(work->table, work->node);
+                work->texture = reinterpret_cast<u32>(FUN_0014afd0(work->table, work->node));
         }
         work->deferred = 0;
     }

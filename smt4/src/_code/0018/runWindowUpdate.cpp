@@ -1,4 +1,3 @@
-/* NON_MATCHING: the state switch lowers to comparisons rather than retail's jump table. */
 #include "font/SearchWin/RunWin.h"
 
 extern "C" {
@@ -30,6 +29,8 @@ s32 runWindowUpdate(void *)
             work->active = 0;
             work->state = 4;
         }
+        break;
+    case 4:
         break;
     }
     ++work->counter;

@@ -1,13 +1,13 @@
 /* NON_MATCHING: romwright 0.5.0 decompilation of `asdModelSlotRelease` (_code @ 0x2a72c0, 0x480 bytes) from smt4_v1.2.0.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
 int asdModelSlotClearActive(int);
 int FUN_001569d8(unsigned int, unsigned int, unsigned char *);
 int asdMemFreeNonNull(unsigned int);
-int asdMemFree(...);
 int nw_gfx_res_ResGraphicsFile_Cleanup(unsigned int *[2]);
 
 typedef int romwright_code(...);
@@ -29,7 +29,6 @@ extern unsigned int asdModelGetSlotRecord(int);
 extern int asdModelGetSlotArray2(int);
 extern int asdModelGetSlotArray1(int);
 /* Supplied declaration required: asdMemFreeNonNull. */
-/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Cleanup. */
 
 
@@ -98,7 +97,7 @@ void asdModelSlotRelease(int param_1)
   }
   *(unsigned int *)(temp_v0 + 0x4dace8) = *(unsigned int *)(temp_v0 + 0x4dace4);
   asdMemFreeNonNull(*(unsigned int *)(temp_v8 * 4 + 0x464aa4));
-  asdMemFree(*(unsigned int *)(temp_v8 * 4 + 0x464a9c));
+  asdMemFree((void *)(*(unsigned int *)(temp_v8 * 4 + 0x464a9c)));
   *(unsigned int *)(temp_v8 * 4 + 0x464a9c) = 0;
   asdModelSlotClearActive(temp_v8);
   temp_v0 = temp_v8;
@@ -115,7 +114,7 @@ void asdModelSlotRelease(int param_1)
       *temp_v7[0] = 0;
     }
     if (*(int *)(&g_asdModelBanks + temp_v4 + 0x4c) != 0) {
-      asdMemFree();
+      asdMemFree((void *)(*(int *)(&g_asdModelBanks + temp_v4 + 0x4c)));
     }
     temp_v4 = temp_v1 * 4 + temp_v0 * 0x284;
     puVar9 = *(unsigned int **)(&g_asdModelBanks + temp_v4 + 0x264);
@@ -133,7 +132,7 @@ void asdModelSlotRelease(int param_1)
       *temp_v7[0] = 0;
     }
     if (*(int *)(&DAT_004d9d88 + temp_v4 + 0x4c) != 0) {
-      asdMemFree();
+      asdMemFree((void *)(*(int *)(&DAT_004d9d88 + temp_v4 + 0x4c)));
     }
     temp_v4 = temp_v1 * 4 + temp_v0 * 0x284;
     puVar9 = *(unsigned int **)(&DAT_004d9d88 + temp_v4 + 0x264);
@@ -151,7 +150,7 @@ void asdModelSlotRelease(int param_1)
       *temp_v7[0] = 0;
     }
     if (*(int *)(temp_v4 + 0x4c) != 0) {
-      asdMemFree();
+      asdMemFree((void *)(*(int *)(temp_v4 + 0x4c)));
     }
     temp_v4 = temp_v5 + temp_v1 * 4;
     puVar9 = *(unsigned int **)(temp_v4 + 0x264);
@@ -168,7 +167,7 @@ void asdModelSlotRelease(int param_1)
       *(unsigned int *)(temp_v4 + 0x44) = 0;
     }
     if (*(int *)(temp_v4 + 0x4c) != 0) {
-      asdMemFree();
+      asdMemFree((void *)(*(int *)(temp_v4 + 0x4c)));
     }
     temp_v4 = temp_v6 + temp_v1 * 4;
     puVar9 = *(unsigned int **)(temp_v4 + 0x264);

@@ -1,12 +1,11 @@
 /* NON_MATCHING: session and option registers differ, and the record-flag test lowers to BIC rather than TST. */
 #include "shard/Shard0033.h"
-#include "gamedata/DevilRecord.h"
+#include "gamedata/Table00Lookup.h"
 
 extern "C" {
 extern ObjBRef g_gameGlobals;
 void FUN_0035ad50(u32 id, void *record);
 void FUN_0026fd50(void *display, const void *record, u32 mode, u32 options);
-DevilRecord *dataTable00FindById(u32 id);
 
 // Load a character into the session display and update whether it can be selected.
 void FUN_0034a9c4(u32 id, u32 options)
@@ -20,11 +19,11 @@ void FUN_0034a9c4(u32 id, u32 options)
     FUN_0026fd50(session->block1390, record, 0, options);
     session->unk20B0 = 1;
     if ((s16)id >= 0) {
-        DevilRecord *devil = dataTable00FindById(id & 0xffff);
+        Table00Record *devil = dataTable00FindById(id & 0xffff);
         if (devil == NULL)
             allowed = false;
         else {
-            allowed = !(devil->links.linkFlags & 0x400);
+            allowed = !(devil->flags & 0x400);
             if (g_gameGlobals.instance && g_gameGlobals.instance->unk2017 == 17)
                 allowed = false;
         }

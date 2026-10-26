@@ -3,13 +3,13 @@
 #include "battle/BtlMainAccess.h"
 #include "romwright_types.h"
 #include "util/CalleeContracts.h"
+#include "util/pairSetFirstResetSecond.h"
 
 extern "C" {
 
 int FUN_00163aa4(int);
 int pairSetSecondResetFirst(int, int);
 int uiSpriteSelectAnim(...);
-int pairSetFirstResetSecond(int, unsigned int);
 int uiSpriteSetImageKeyframe(int, int, int);
 int FUN_002a1850(unsigned int *, int, unsigned int);
 int FUN_00358e94(...);
@@ -33,7 +33,6 @@ extern int g_btlUiBlock; /* 0x57a9c8 */
 /* Supplied declaration required: FUN_00163aa4. */
 /* Supplied declaration required: pairSetSecondResetFirst. */
 /* Supplied declaration required: uiSpriteSelectAnim. */
-/* Supplied declaration required: pairSetFirstResetSecond. */
 /* Supplied declaration required: uiSpriteSetImageKeyframe. */
 /* Supplied declaration required: FUN_002a1850. */
 /* Supplied declaration required: FUN_00358e94. */
@@ -208,7 +207,7 @@ LAB_002cc760:
           else if (temp_v1 == '\x03') {
             temp_v3 = 0x3f1;
           }
-          pairSetFirstResetSecond(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4,temp_v3);
+          pairSetFirstResetSecond((void *)(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4),temp_v3);
         }
         else {
           pairSetSecondResetFirst(g_btlUiBlock + temp_v7 * 0xa0 + 0xb5b4,0xf);

@@ -4,11 +4,11 @@
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
 #include "util/PackNibbles.h"
+#include "camp/RenderCtx.h"
 
 extern "C" {
 
 int textFormatBuffer(...);
-int FUN_00157558(int);
 int textDrawString(...);
 int FUN_00164b5c(int, int, int, unsigned int, unsigned int, int);
 int vec2GetYInt(int);
@@ -39,7 +39,6 @@ extern int g_renderCtx; /* 0x59dbb4 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_00157558. */
 /* Supplied declaration required: textDrawString. */
 /* Supplied declaration required: FUN_00164b5c. */
 /* Supplied declaration required: vec2GetXInt. */
@@ -91,7 +90,7 @@ void FUN_002027fc(void)
   if (g_config == 0) {
     return;
   }
-  FUN_00157558(g_renderCtx);
+  FUN_00157558(reinterpret_cast<RenderCtxA *>(g_renderCtx));
   temp_v5 = g_renderCtx;
   temp_v1 = FUN_001692ac(1,0);
   piVar15 = (int *)(temp_v5 + 0x1258);

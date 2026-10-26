@@ -7,12 +7,12 @@
 #include "util/FUN_002ae8e4.h"
 #include "util/FUN_002ae8e4.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 extern void *g_aocSystem;
 extern const char DAT_004037b0[];
 extern const char DAT_004037a0[];
-void *asdMemAlloc(u32 heap, u32 alignment, u32 options, u32 size, u32 clear);
 s32 FUN_002c1d5c(void);
 s32 aocRunByName(void *system, s32 table, s32 node, u32 operation);
 u32 FUN_002c58c8(s32 table, s32 node);

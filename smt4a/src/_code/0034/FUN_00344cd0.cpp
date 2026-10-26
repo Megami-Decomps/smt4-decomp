@@ -1,21 +1,14 @@
 /* NON_MATCHING: retail re-queries the widget's counts at each use (the total is fetched twice, the shown count twice) and keeps the clip stack address in r7/fp differently; the draw sequence, ratios and clip-stack settings are the same. */
 #include "camp/RenderCtx.h"
 #include "shard/TextureDrawCall.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 namespace {
-/* A layout record: position at +8/+10 and the size pair through the pointer at +0xc. */
-struct LayoutRecord {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0a */ s16 y;
-    /* 0x0c */ s16 *size;                /* [0]: width, [1]: height */
-};
 }
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 recordGetModeForId(s32 id);
-LayoutRecord *asdTMTexTableEntryAt(u32 group, u32 id);
 s32 widgetSubCallIfVisible(void *widget);
 s32 uiSearchSecondary(void *widget);
 s32 resourceRunEmbeddedOperationIfUnblocked(void *widget);
@@ -43,48 +36,48 @@ void FUN_00344cd0(void *widget, s32 x, s32 y, u32 group, u32 backId, u32 thumbId
     FUN_001835b4(2, group, sideId, x, y, depth);
     FUN_001835b4(2, group, cornerId, x, y, depth);
     s32 offset = 0;
-    LayoutRecord *record = asdTMTexTableEntryAt(group, thumbId);
+    TextureTableEntryIV *record = asdTMTexTableEntryAt(group, thumbId);
     RenderStateStack *clipStack = reinterpret_cast<RenderStateStack *>(reinterpret_cast<u8 *>(g_renderCtx) + 0x1318);
     if (vertical != 0) {
         s32 total = widgetSubCallIfVisible(widget);
         s32 shown = uiSearchSecondary(widget);
         s32 length;
         if (shown >= total) {
-            length = record->size[0];
+            length = record->placement->width;
         } else {
-            f32 ratio = (f32)record->size[0] / (f32)total;
+            f32 ratio = (f32)record->placement->width / (f32)total;
             length = (s32)((f32)shown * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)resourceRunEmbeddedOperationIfUnblocked(widget) * ratio);
             if (resourceRunEmbeddedOperationIfUnblocked(widget) + uiSearchSecondary(widget) == widgetSubCallIfVisible(widget) &&
-                offset + length < record->size[0]) {
-                offset = record->size[0] - length;
+                offset + length < record->placement->width) {
+                offset = record->placement->width - length;
             }
         }
         renderStackSet(clipStack, 3);
-        FUN_0035ae58(record->x + x + offset, record->y + y, length, record->size[1], 1);
+        FUN_0035ae58(record->x + x + offset, record->y + y, length, record->placement->height, 1);
     } else {
         s32 total = objectApplyIfUnblocked(widget);
         s32 shown = uiSearchPrimary(widget);
         s32 length;
         if (shown >= total) {
-            length = record->size[1];
+            length = record->placement->height;
         } else {
-            f32 ratio = (f32)record->size[1] / (f32)total;
+            f32 ratio = (f32)record->placement->height / (f32)total;
             length = (s32)((f32)shown * ratio);
             if (length < 1) {
                 length = 1;
             }
             offset = (s32)((f32)resourceRunOperationIfUnblocked(widget) * ratio);
             if (resourceRunOperationIfUnblocked(widget) + uiSearchPrimary(widget) == objectApplyIfUnblocked(widget) &&
-                offset + length < record->size[1]) {
-                offset = record->size[1] - length;
+                offset + length < record->placement->height) {
+                offset = record->placement->height - length;
             }
         }
         renderStackSet(clipStack, 3);
-        FUN_0035ae58(record->x + x, y + offset + record->y, record->size[0], length, 1);
+        FUN_0035ae58(record->x + x, y + offset + record->y, record->placement->width, length, 1);
     }
     if (modeC != 0) {
         thumbId = coverId;

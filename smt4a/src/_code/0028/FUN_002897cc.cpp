@@ -75,7 +75,7 @@ extern int FUN_00162ea4(void);
 /* Supplied declaration required: jobStop. */
 extern unsigned long long jobGetWork(void);
 /* Supplied declaration required: eventQueueAddUnique. */
-extern int FUN_00184964(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: aocLoadTextureNode. */
 /* Supplied declaration required: asdTMTexTableReleaseNode. */
 extern int aocRunByName(unsigned int, unsigned int, unsigned int, unsigned int);
@@ -169,7 +169,7 @@ unsigned int FUN_002897cc(fn_002897cc_arg0 *param_1)
       return 0;
     }
     *(unsigned int *)(temp_v1 + 0xc) = 0;
-    temp_v2 = FUN_00184964(0,4);
+    temp_v2 = randBetween(0,4);
     temp_v10 = VectorSignedToFloat(temp_v2 << 2,(unsigned char)(in_fpscr >> 0x16) & 3);
     *(unsigned int *)(temp_v1 + 0x5c) = temp_v10;
     return 0;

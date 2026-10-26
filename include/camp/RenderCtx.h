@@ -39,8 +39,10 @@ typedef struct RenderCtx {
         } cameraSelection;
         struct {
             u8 unk052C[0xCB8];
-            /* 0x11E4 */ u32 selectedPreset; /* preset block FUN_002c1b64 keeps applied */
-            /* 0x11E8 */ u8 unk11E8[4];
+            /* 0x11E4 */ struct AsdTexture *selectedTexture; /* texture renderCtxSelectTexture keeps applied */
+            /* 0x11E8 */ s8 selectedTextureDirty;            /* forces the texture to be applied again */
+            /* 0x11E9 */ u8 selectedTextureState;            /* 0/1: texture bound, 3: just applied */
+            /* 0x11EA */ u8 unk11EA[2];
             /* 0x11EC */ RenderStateStack stackD;
             /* 0x120C */ RenderStateStack stackE;
             /* 0x122C */ RenderStateStack stackF;
@@ -110,8 +112,10 @@ typedef struct RenderCtxA {
         } display;
         struct {
             u8 unk0700[0xAF0];
-            /* 0x11F0 */ void *selectedPreset; /* preset block FUN_0016c4b8 keeps applied */
-            /* 0x11F4 */ u8 unk11F4[4];
+            /* 0x11F0 */ struct AsdTexture *selectedTexture; /* texture renderCtxSelectTexture keeps applied */
+            /* 0x11F4 */ s8 selectedTextureDirty;            /* forces the texture to be applied again */
+            /* 0x11F5 */ u8 selectedTextureState;            /* 0/1: texture bound, 3: just applied */
+            /* 0x11F6 */ u8 unk11F6[2];
             /* 0x11F8 */ RenderStateStack stackD;
             /* 0x1218 */ RenderStateStack stackE;
             /* 0x1238 */ RenderStateStack stackF;
@@ -234,6 +238,31 @@ static __inline void renderCtxPushG(RenderCtx *context, int state)
 #ifdef __cplusplus
 extern "C" void renderCtxSelectStereoLayout(RenderCtx *context);
 #endif
+
+/* Rebuilds the context's dirty or non-identity transform matrices and applies the combined matrix. */
+#ifdef __cplusplus
+extern "C" void renderCtxApplyTransforms(RenderCtx *context);
+#endif
+
+/* Applies `texture` (NULL: none) when it differs from the context's selected texture or a reload
+ * is pending, and switches the texture binding on or off. */
+#ifdef __cplusplus
+/* renderCtxSelectTexture: per-game context type, declared in <game>/include/camp/RenderCtxSelect.h. */
+#include "camp/RenderCtxSelect.h"
+#endif
+
+/* Switches the draw context to the display area for its stereo mode and records the area shown. */
+#ifdef __cplusplus
+extern "C" void FUN_00157558(RenderCtxA *context);
+#endif
+
+typedef char RenderCtxSelectedTextureOffsetCheck[
+    offsetof(RenderCtx, depthStacks.selectedTexture) == 0x11E4 &&
+    offsetof(RenderCtx, depthStacks.selectedTextureDirty) == 0x11E8 &&
+    offsetof(RenderCtx, depthStacks.selectedTextureState) == 0x11E9 &&
+    offsetof(RenderCtxA, depthStacks.selectedTexture) == 0x11F0 &&
+    offsetof(RenderCtxA, depthStacks.selectedTextureDirty) == 0x11F4 &&
+    offsetof(RenderCtxA, depthStacks.selectedTextureState) == 0x11F5 ? 1 : -1];
 
 
 extern "C" {

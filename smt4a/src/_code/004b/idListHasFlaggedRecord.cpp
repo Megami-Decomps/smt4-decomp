@@ -1,4 +1,5 @@
 #include "common.h"
+#include "gamedata/Table04Record.h"
 
 extern "C" {
 
@@ -12,7 +13,6 @@ typedef struct IdList {
     /* 0x34 */ u16 ids[8];
 } IdList;
 
-extern Record *dataTable41FindById(u32 id);
 
 /* True when any of the list's ids names a record whose flag is set. */
 s32 idListHasFlaggedRecord(IdList *list)
@@ -21,7 +21,7 @@ s32 idListHasFlaggedRecord(IdList *list)
 
     for (i = 0; i < 8; i++) {
         if (list->ids[i] != 0) {
-            Record *record = dataTable41FindById(list->ids[i]);
+            Record *record = reinterpret_cast<Record *>(dataTable41FindById(list->ids[i]));
 
             if (record != NULL && record->flag != 0) {
                 return 1;

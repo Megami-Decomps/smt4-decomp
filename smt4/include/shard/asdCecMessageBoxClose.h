@@ -2,12 +2,14 @@
 #define SHARD_ASDCECMESSAGEBOXCLOSE_H
 
 #include "common.h"
+#include "AsdSDK/Source/Net/Cec/AsdCec.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-void asdCecMessageBoxClose(int a);
+/* Closes the message box (tail call into the function that follows it). */
+void asdCecMessageBoxClose(AsdCecMessageBox *box);
 
 #ifdef __cplusplus
 }

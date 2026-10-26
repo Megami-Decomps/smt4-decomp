@@ -2,9 +2,9 @@
 #include "gamedata/AppUnlockState.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/AppPurchaseRecord.h"
+#include "util/dataFindKeyedRecordWithOverrides.h"
 
 extern "C" {
-const AppPurchaseSortRecord *dataFindKeyedRecordWithOverrides(u32 id);
 void FUN_002f0bd8(u32 cost);
 void updateUnlockedEntryCount();
 
@@ -27,7 +27,7 @@ u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
         state->unlocked[byte] |= mask;
         state->newlyUnlocked[byte] |= mask;
         updateUnlockedEntryCount();
-        const AppPurchaseSortRecord *cost = dataFindKeyedRecordWithOverrides(id);
+        const AppPurchaseSortRecord *cost = (const AppPurchaseSortRecord *)dataFindKeyedRecordWithOverrides(id);
         FUN_002f0bd8(cost != NULL ? cost->primaryKey : 0);
         // The category extends past the shared sorting prefix.
         struct CatalogView {
@@ -36,7 +36,7 @@ u32 FUN_003e45bc(u32 id, s32 ignoreRequirements, s32 preview)
             u8 unk23[7];
             u16 category;
         };
-        const CatalogView *record = reinterpret_cast<const CatalogView *>(dataFindKeyedRecordWithOverrides(id));
+        const CatalogView *record = reinterpret_cast<const CatalogView *>((const AppPurchaseSortRecord *)dataFindKeyedRecordWithOverrides(id));
         if (record->type == 0) {
             ++state->categoryCounts[record->category & 0x3f];
         }

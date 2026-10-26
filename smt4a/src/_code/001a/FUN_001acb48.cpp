@@ -26,28 +26,27 @@ void FUN_001b4eb8(EffectTimelinePart *part, const f32 *origin);
 // Rotate the part's local position and propagate the composed rotation to its children.
 void FUN_001acb48(EffectTimelinePart *part, const RotationQuaternion *rotation)
 {
-    EffectRotationWorkspace *workspace = &DAT_006471dc;
-    workspace->base.rotation = *rotation;
-    part->transform.rotation = workspace->base.rotation;
-    RotationQuaternion parentRotation = workspace->base.rotation;
+    DAT_006471dc.base.rotation = *rotation;
+    part->transform.rotation = DAT_006471dc.base.rotation;
+    RotationQuaternion parentRotation = DAT_006471dc.base.rotation;
     FUN_001bc460();
-    memcpy(&workspace->base.rotation, part->transform.localPosition, sizeof(RotationQuaternion));
-    f32 x = workspace->base.rotation.x;
-    f32 y = workspace->base.rotation.y;
-    f32 z = workspace->base.rotation.z;
+    memcpy(&DAT_006471dc.base.rotation, part->transform.localPosition, sizeof(RotationQuaternion));
+    f32 x = DAT_006471dc.base.rotation.x;
+    f32 y = DAT_006471dc.base.rotation.y;
+    f32 z = DAT_006471dc.base.rotation.z;
     RotationQuaternion rotatedPosition = {
-        x * workspace->matrix[0][0] + y * workspace->matrix[1][0] + z * workspace->matrix[2][0],
-        x * workspace->matrix[0][1] + y * workspace->matrix[1][1] + z * workspace->matrix[2][1],
-        x * workspace->matrix[0][2] + y * workspace->matrix[1][2] + z * workspace->matrix[2][2],
-        x * workspace->matrix[0][3] + y * workspace->matrix[1][3] + z * workspace->matrix[2][3]
+        x * DAT_006471dc.matrix[0][0] + y * DAT_006471dc.matrix[1][0] + z * DAT_006471dc.matrix[2][0],
+        x * DAT_006471dc.matrix[0][1] + y * DAT_006471dc.matrix[1][1] + z * DAT_006471dc.matrix[2][1],
+        x * DAT_006471dc.matrix[0][2] + y * DAT_006471dc.matrix[1][2] + z * DAT_006471dc.matrix[2][2],
+        x * DAT_006471dc.matrix[0][3] + y * DAT_006471dc.matrix[1][3] + z * DAT_006471dc.matrix[2][3]
     };
-    workspace->base.rotation = rotatedPosition;
-    memcpy(part->transform.position, &workspace->base.rotation, sizeof(RotationQuaternion));
+    DAT_006471dc.base.rotation = rotatedPosition;
+    memcpy(part->transform.position, &DAT_006471dc.base.rotation, sizeof(RotationQuaternion));
     for (EffectTimelinePart *child = part->children; child != NULL; child = child->next) {
-        workspace->base.rotation = child->transform.rotation;
-        workspace->factor = parentRotation;
+        DAT_006471dc.base.rotation = child->transform.rotation;
+        DAT_006471dc.factor = parentRotation;
         FUN_001bc3e4();
-        RotationQuaternion composed = workspace->base.rotation;
+        RotationQuaternion composed = DAT_006471dc.base.rotation;
         ApplyEffectRotation apply = reinterpret_cast<ApplyEffectRotation>(
             g_handlerTable[child->block->type].callback24);
         if (apply != NULL)

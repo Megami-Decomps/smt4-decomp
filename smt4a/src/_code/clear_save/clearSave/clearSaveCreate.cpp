@@ -2,6 +2,7 @@
 #include "script/scrScriptProcess.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 extern ClearSaveWorkA *g_clearSave;
@@ -13,7 +14,6 @@ void campButtonHelpAcquire();
 void FUN_003b61ec();
 void *asdLoadFileSyncDefault(const char *path);
 ScriptRunState *FUN_00275bc8(void *scriptFile, void *messageFile);
-void FUN_0014afd0(s32 table, s32 entry);
 void FUN_0022677c(s32 screen, s32 alpha);
 u32 FUN_00241058();
 u32 FUN_00290688();

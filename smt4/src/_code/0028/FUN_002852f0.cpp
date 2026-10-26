@@ -40,8 +40,8 @@ struct MazeGenState {
 };
 
 extern "C" {
-u16 randNextInRange(u16 range);
 extern MazeGenState DAT_004bce8c;
+u16 randNextInRange(u16 range);
 
 /* Lays out the maze grid: walls on the border and on even rows/columns, then picks the four exit cells. */
 void FUN_002852f0(s32 keepSize)

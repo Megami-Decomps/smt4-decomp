@@ -6,6 +6,12 @@
 
 struct BattleVector3 { f32 x, y, z; };
 
+/* Copies through pointers: armcc then reloads the globals that surround the copy, and moves the vector with vldmia/vstmia. */
+static __inline void battleVectorCopy(BattleVector3 *destination, const BattleVector3 *source)
+{
+    *destination = *source;
+}
+
 struct BattleVectorTransition {
     union {
         /* 0x000 */ u8 unk000[0x5ac];

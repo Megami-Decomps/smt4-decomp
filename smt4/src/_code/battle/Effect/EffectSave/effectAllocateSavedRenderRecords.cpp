@@ -1,4 +1,3 @@
-/* NON_MATCHING: keyed-record address calculation and allocation-size multiplication use different registers and scheduling from retail. */
 #include "common.h"
 #include "shard/W6_W6Match7_KeyedRecordStorage.h"
 #include "AsdSDK/AsdDebug.h"
@@ -13,13 +12,11 @@ extern "C" void effectAllocateSavedRenderRecords(s32 slot, const SavedEffectReco
 {
     if (count > 16)
         return;
-    KeyedRecordStorage *storage = &g_keyedRecords[slot];
     if (count > 0) {
         asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\battle\\Effect\\EffectSave.c", 189);
-        u32 bytes = count * sizeof(SavedEffectRecord);
-        void *copy = asdMemoryAlloc(0x100, 0x100, 0, bytes, 1);
-        storage->effectSave.records = copy;
-        __aeabi_memcpy4(copy, records, bytes);
+        void *copy = asdMemoryAlloc(0x100, 0x100, 0, count * sizeof(SavedEffectRecord), 1);
+        g_keyedRecords[slot].effectSave.records = copy;
+        __aeabi_memcpy4(copy, records, count * sizeof(SavedEffectRecord));
     }
-    storage->effectSave.count = count;
+    g_keyedRecords[slot].effectSave.count = count;
 }

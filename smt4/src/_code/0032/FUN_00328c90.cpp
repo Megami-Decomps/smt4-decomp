@@ -1,6 +1,7 @@
 /* NON_MATCHING: instructions identical to retail; the retail literal pool carries one extra unreferenced word ahead of 0xcf78. */
 #include "common.h"
 #include "AsdSDK/Source/Snd/AsdSoundSystem.h"
+#include "gamedata/UnitRecordAccess.h"
 
 extern "C" {
 
@@ -17,7 +18,6 @@ typedef struct Party {
 } Party;
 
 int scrSetResult(int value);
-u16 *gameGetUnitRecord(int id);
 
 /* Script command: looks up a value for the current party entry (from gameGetUnitRecord's table at FUN_00295408()) and passes it to scrSetResult. */
 u32 FUN_00328c90(Party **partyPtr)
@@ -26,7 +26,7 @@ u32 FUN_00328c90(Party **partyPtr)
 
     if (party != NULL) {
         PartyEntry *entry = &party->entries[party->current];
-        u8 *table = (u8 *)gameGetUnitRecord(entry->id);
+        u8 *table = (u8 *)static_cast<u16 *>(gameGetUnitRecord(entry->id));
         int index = FUN_00295408();
 
         scrSetResult(*(u16 *)(table + index * 2 + 0x34));

@@ -3,6 +3,7 @@
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
+#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
 /* The menu work block (only the fields the spinner uses). */
 struct SpinnerWork {
@@ -14,11 +15,6 @@ struct SpinnerWork {
     /* 0x12D8 */ s32 phase;
 };
 
-struct LayoutPoint {
-    /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ s16 x;
-    /* 0x0A */ s16 y;
-};
 
 /* The shared text settings (font at 0x08, the spinner tick length at 0x04). */
 struct UiTextFontSettings {
@@ -42,7 +38,6 @@ void renderCtxPopState(u32 context, s32 index);
 void efctSetSpeed(f32 speed);
 void FUN_00183bb0(void);
 void FUN_00164b5c(s32 a, s32 b, s32 sprite, s32 x, s32 y, s32 order);
-LayoutPoint *asdTMTexTableEntryAt(s32 group, s32 part);
 void FUN_00163aa4(void *anchor, f32 alpha);
 s8 uiSpriteGetCompletionState(const void *animation);
 void __aeabi_memcpy4(void *destination, const void *source, u32 bytes);
@@ -64,7 +59,7 @@ void FUN_0048b514(SpinnerWork *work)
     work->phase &= 7;
     s32 next = (work->phase + 1) & 7;
     for (s32 i = 0; i < 9; i++) {
-        LayoutPoint *point = asdTMTexTableEntryAt(19, 0x1124 + i);
+        TextureTableEntryIV *point = asdTMTexTableEntryAt(19, 0x1124 + i);
         points[i].x = (f32)point->x;
         points[i].y = (f32)point->y;
         FUN_001835b4(1, 19, 0x1121, vec2GetXInt(anchor) + point->x, point->y, 6);
@@ -75,7 +70,7 @@ void FUN_0048b514(SpinnerWork *work)
     s32 oppositeNext = (opposite + 1) & 7;
     FUN_001835b4(1, 19, 0x1123, (s32)((f32)vec2GetXInt(anchor) + points[opposite].x), (s32)points[opposite].y, 6);
     FUN_001835b4(1, 19, 0x1122, (s32)((f32)vec2GetXInt(anchor) + points[oppositeNext].x), (s32)points[oppositeNext].y, 6);
-    LayoutPoint *label = asdTMTexTableEntryAt(19, 0x1120);
+    TextureTableEntryIV *label = asdTMTexTableEntryAt(19, 0x1120);
     char text[27];
     __aeabi_memcpy4(text, "\x82\x60\x82\x83\x82\x94\x82\x89\x82\x96\x82\x81\x82\x94\x82\x89\x82\x8E\x82\x87\x81\x44\x81\x44\x81\x44", sizeof(text));
     textDrawString(4, g_uiTextFontSettings.font, text, (f32)(vec2GetXInt(anchor) - 20 + label->x), (f32)label->y, 0.0f,

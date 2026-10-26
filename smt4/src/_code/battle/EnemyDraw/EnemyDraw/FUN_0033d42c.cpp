@@ -7,7 +7,7 @@ extern "C" {
 int FUN_00191830(...);
 int FUN_002929d8(int *, int);
 int FUN_002ba1e0(...);
-int FUN_002c1b64(int, unsigned int);
+int renderCtxSelectTexture(int, unsigned int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 int nn_math_ARMv6_MTX34CopyAsm(unsigned char [84], unsigned int *);
@@ -87,7 +87,7 @@ extern unsigned int DAT_004efd98; /* 0x4efd98 */
 /* Supplied declaration required: FUN_002929d8. */
 /* Supplied declaration required: FUN_002ba1e0. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int, int);
 /* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
 /* Supplied declaration required: nn_math_ARMv6_MTX34MultAsm. */
@@ -226,7 +226,7 @@ LAB_0033d500:
                   *(unsigned char *)(temp_v2 + 0x12c4) = 0;
                 }
               }
-              FUN_002c1b64(g_titleScene,
+              renderCtxSelectTexture(g_titleScene,
                            *(unsigned int *)
                             (*(int *)(param_1 + 0x14) + (unsigned int)*(unsigned char *)(pfVar7 + 9) * 0x20 + 0x18));
               if (!(*(char *)((int)pfVar7 + 0x25) == '\0' || param_5 == 3)) {

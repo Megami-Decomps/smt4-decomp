@@ -75,7 +75,7 @@ extern int DAT_005f1c64; /* 0x5f1c64 */
 extern int gameFlagsGetBlock(void);
 extern int padButtonRepeat(unsigned int);
 extern int padButtonIsPressed(unsigned int);
-extern int FUN_00184964(unsigned int, unsigned int);
+extern int randBetween(unsigned int, unsigned int);
 extern int gameFlagIsSet(unsigned int);
 /* Supplied declaration required: FUN_001bbf0c. */
 /* Supplied declaration required: FUN_001bc124. */
@@ -288,7 +288,7 @@ void FUN_002b81ec(void)
         temp_v6 = *piVar11;
         *piVar11 = temp_v6 + 1;
         if ((temp_v6 + 1 >= 901) && (*(int *)(temp_v5 + 0x274) == 0)) {
-          temp_v6 = FUN_00184964(0,9);
+          temp_v6 = randBetween(0,9);
           temp_v5 = g_lmapScene;
           piVar11 = (int *)(temp_v2 + 0x151c);
           *(unsigned int *)(g_lmapScene + 0x274) =

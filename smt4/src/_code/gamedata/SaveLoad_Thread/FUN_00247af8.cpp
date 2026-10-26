@@ -2,12 +2,12 @@
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "shard/Sys43e310.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 extern const char DAT_00404290[];
 extern const char DAT_004042ac[];
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 clear);
-void asdLoadFileAsyncSimple(const char *name, void **output, u32 flags);
 
 // Initialize a save/load request and start loading its interface resources.
 void FUN_00247af8(u8 kind, u32 file, u32 slot, void *payload, u32 size)
@@ -36,9 +36,9 @@ void FUN_00247af8(u8 kind, u32 file, u32 slot, void *payload, u32 size)
     request->unk58 = 0;
     request->messageFile = NULL;
     request->modelFile = NULL;
-    asdLoadFileAsyncSimple(DAT_00404290, &request->messageFile, 0);
+    asdLoadFileAsyncSimple(DAT_00404290, reinterpret_cast<u32 *>(&request->messageFile), 0);
     if (request->modelFile == NULL) {
-        asdLoadFileAsyncSimple(DAT_004042ac, &request->modelFile, 0);
+        asdLoadFileAsyncSimple(DAT_004042ac, reinterpret_cast<u32 *>(&request->modelFile), 0);
     }
     thread->result = -1;
     thread->firstState = 0;

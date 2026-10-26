@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses mov r2, r1 where the compiled block uses add r2, r1, #4. */
 #include "common.h"
 
 struct LinkListNode {
@@ -20,8 +19,13 @@ extern "C" {
 LinkListNode* nw_ut_internal_LinkListImpl_insert(
     LinkListImpl* list, LinkListNode* position, LinkListNode* node);
 
+// Insert `e` into the list before `position`.
+static LinkListNode* listInsert(LinkListImpl* list, LinkListNode* position, ListEntry* e)
+{
+    return nw_ut_internal_LinkListImpl_insert(list, position, &e->node);
+}
 void FUN_001cc6c0(LinkListImpl* list, ListEntry* entry)
 {
-    nw_ut_internal_LinkListImpl_insert(list, &list->sentinel, &entry->node);
+    listInsert(list, &list->sentinel, entry);
 }
 }

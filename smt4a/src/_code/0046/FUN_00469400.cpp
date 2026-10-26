@@ -44,7 +44,7 @@ extern unsigned char LAB_00469d00; /* 0x469d00 */
 
 /* Supplied declaration required: textFormatBuffer. */
 /* Supplied declaration required: qsort. */
-extern unsigned int FUN_00184964(unsigned int, unsigned int);
+extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: gameFlagIsSet. */
 extern int FUN_003f86c0(int);
 /* Supplied declaration required: resourceObjectSetNamedFlag. */
@@ -203,7 +203,7 @@ LAB_00469530:
           }
         }
         else {
-          temp_v9 = FUN_00184964(1,2);
+          temp_v9 = randBetween(1,2);
         }
 LAB_00469668:
         textFormatBuffer(&temp_v14,&LAB_00469948,temp_v5 + 1,temp_v9);

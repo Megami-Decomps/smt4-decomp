@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "gamedata/GameFlags.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
 
@@ -33,7 +34,6 @@ int scrScriptProcessDestroy(void);
 int buttonHelpSetPreset(int);
 int textFormatBuffer(...);
 int FUN_002bff50(void);
-int asdMemFree(void);
 int eventTexReleaseJobs(void);
 int bustupCutAnimStopJob(void);
 int eventCommandStop(void);
@@ -101,7 +101,6 @@ extern int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_002bff50. */
 extern int FUN_002c1d5c(void);
 extern int FUN_002c2a04(unsigned int);
-/* Supplied declaration required: asdMemFree. */
 /* Supplied declaration required: jobStop. */
 /* Supplied declaration required: asdSequenceRequest. */
 extern unsigned int asdLoadFileSyncDefault(unsigned char *);
@@ -255,11 +254,11 @@ unsigned int FUN_0019f3dc(void)
           puVar2[0xc] = 0;
         }
         if (puVar2[0xb] != 0) {
-          asdMemFree();
+          asdMemFree((void *)puVar2[0xb]);
           puVar2[0xb] = 0;
         }
         if (puVar2[0xd] != 0) {
-          asdMemFree();
+          asdMemFree((void *)puVar2[0xd]);
           puVar2[0xd] = 0;
         }
         puVar2[2] = 99;
@@ -289,13 +288,13 @@ unsigned int FUN_0019f3dc(void)
     }
     puVar2[2] = temp_v1;
     if (puVar2[0xb] != 0) {
-      asdMemFree();
+      asdMemFree((void *)puVar2[0xb]);
       puVar2[0xb] = 0;
     }
     if (puVar2[0xd] == 0) {
       return 0;
     }
-    asdMemFree();
+    asdMemFree((void *)puVar2[0xd]);
     puVar2[0xd] = 0;
     return 0;
   }

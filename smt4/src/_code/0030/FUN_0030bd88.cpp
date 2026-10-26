@@ -2,9 +2,9 @@
 #include "shard/PassiveSkill.h"
 #include "gamedata/UnitStats.h"
 #include "gamedata/Table8Type5Lookup.h"
+#include "gamedata/DataTable40.h"
 
 extern "C" {
-const ActiveSkillRecord *dataTable40FindById(u32 skillId);
 const StatBlock *gameGetUnitRecord(s32 unit);
 s32 idIsAbove400(u32 id);
 s32 FUN_002497f8(const SkillListEntry *left, const SkillListEntry *right);
@@ -13,9 +13,9 @@ s32 FUN_002497f8(const SkillListEntry *left, const SkillListEntry *right);
 static inline s32 skillComparePriorityAndHolder(const SkillListEntry *left, const SkillListEntry *right)
 {
     u16 leftPriority = idIsAbove400(left->skillId) ?
-        passiveSkillLookupRecord(left->skillId)->sortKey : dataTable40FindById(left->skillId)->sortKey;
+        passiveSkillLookupRecord(left->skillId)->sortKey : reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(left->skillId))->sortKey;
     u16 rightPriority = idIsAbove400(right->skillId) ?
-        passiveSkillLookupRecord(right->skillId)->sortKey : dataTable40FindById(right->skillId)->sortKey;
+        passiveSkillLookupRecord(right->skillId)->sortKey : reinterpret_cast<const ActiveSkillRecord *>(dataTable40FindById(right->skillId))->sortKey;
     s32 result = rightPriority - leftPriority;
     if (!result) {
         u16 leftHolder = left->unit < 0 ? 0 : gameGetUnitRecord(left->unit)->id;

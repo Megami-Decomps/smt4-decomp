@@ -20,7 +20,7 @@ struct TextTag {
 extern "C" {
 extern TextTag g_sentinelLookupEntries[];
 
-u32 FUN_0017fa28(s32 low, s32 high);
+u32 packBytesToBigEndianHalfword(s32 low, s32 high);
 u32 libc_strlen(const char *text);
 s32 libc_strncmp(const char *a, const char *b, u32 count);
 
@@ -33,7 +33,7 @@ s32 FUN_001eb584(const char *source, u16 *destination, s32 measureOnly)
     s32 out = 0;
 
     for (;;) {
-        u32 code = FUN_0017fa28(source[in + 1], source[in]);
+        u32 code = packBytesToBigEndianHalfword(source[in + 1], source[in]);
         if (code == TEXT_END) {
             if (!measureOnly)
                 destination[out] = TEXT_END;
@@ -106,7 +106,7 @@ s32 FUN_001eb584(const char *source, u16 *destination, s32 measureOnly)
                 }
             }
             for (s32 i = 0; i < args; i++) {
-                u16 word = FUN_0017fa28(source[in + 1], source[in]);
+                u16 word = packBytesToBigEndianHalfword(source[in + 1], source[in]);
                 if (!measureOnly)
                     destination[written] = word;
                 written++;

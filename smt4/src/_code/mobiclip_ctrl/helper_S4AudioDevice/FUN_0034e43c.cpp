@@ -4,6 +4,7 @@
 #include "nn/Result.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "sys/ResultReport.h"
 
 /* The audio device's allocator interface: slot 0 allocates. */
 class AudioAllocator {
@@ -53,10 +54,8 @@ void FUN_0011cc1c();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
 void nn_os_CriticalSection_Initialize(void *section);
 void *memAlloc(u32 heap, u32 type, u32 flags, u32 bytes, u32 alignment, u32 clear);
-void resultReportIfFailed(AudioThreadWork *thread, void *stack, u32 size);
 s32 FUN_002bcc60(void *thread, ThreadFunctorTable *table, void (*entry)(), void *argument, u32 stackTop, s32 priority,
                  s32 core, s32 flag);
-void FUN_002c526c(s32 result);
 void FUN_0034e718();
 void FUN_00123c88();
 void FUN_00123cb4();

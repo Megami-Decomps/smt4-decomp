@@ -1,5 +1,6 @@
 /* NON_MATCHING: the early-return merging and the two lookup loops use different registers and branch layout (retail keeps the slot table in r5 and re-tests the previous call result for unused stock slots); the checks are the same. */
 #include "common.h"
+#include "util/FUN_00187168.h"
 
 extern "C" {
 
@@ -32,7 +33,6 @@ typedef struct StockSlots {
 
 Table8Record *dataTable8FindRecord(s32 id);
 PartyMember *FUN_003e4d68(u16 index);
-s32 FUN_00187168(PartyMember *member);
 s32 FUN_004ccbf0(u16 key);
 s32 FUN_00287790(s32 member, Table8Record *record, s32 a, s32 b, s32 c);
 StockSlots *gameGetSlotTable(void);

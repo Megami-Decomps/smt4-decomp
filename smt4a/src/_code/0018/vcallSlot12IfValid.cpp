@@ -1,5 +1,6 @@
 /* Calls the object's vtable slot 12 (tail call) when the object exists. */
 #include "common.h"
+#include "util/vcallSlot12IfValid.h"
 
 extern "C" {
 
@@ -14,8 +15,9 @@ struct Object {
     const ObjectVtbl *vtbl; /* 0x00 */
 };
 
-void vcallSlot12IfValid(Object *self)
+void vcallSlot12IfValid(u32 handle)
 {
+    Object *self = reinterpret_cast<Object *>(handle);
     if (self != NULL) {
         self->vtbl->method(self);
     }

@@ -2,6 +2,7 @@
 #include "shard/Shard004F.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
+#include "util/CalleeContracts.h"
 
 extern "C" {
 void textFormatBuffer(char *output, const char *format, ...);
@@ -9,7 +10,6 @@ void asdMemFree(void *);
 char *libc_strcpy(char *output, const char *input);
 void sysMemClear(void *memory, u32 size);
 char *FUN_00100d60(const char *text, s32 character);
-s32 findRecordByKey(const char *name);
 extern const char DAT_005284c0[];
 
 // Reset the effect file state and load a named effect unless it is already cached.

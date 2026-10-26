@@ -1,5 +1,6 @@
 /* NON_MATCHING: retail keeps both `table + index * 0x5c` (r6) and the slot address (r4 = r6 + 0x1c) live and addresses some fields from each; branch layout differs accordingly. */
 #include "common.h"
+#include "util/FUN_001cd3ec.h"
 
 struct NamedResourceObject {
     /* 0x0 */ u8 unk0[4];
@@ -35,7 +36,6 @@ s32 FUN_0040ab8c(NamedResourceHandle *handle);
 s32 libc_strcmp(const char *a, const char *b);
 char *strncpy(char *destination, const char *source, u32 count);
 void ptrListRemoveClearOwner(void *list, NamedResourceObject *object);
-void FUN_001cd3ec(NamedResourceHandle *handle, const char *name);
 
 /* Points slot `index` at the resource `name` of kind `kind`: an open slot showing another name
  * releases its object, an idle table opens it directly (state 4), otherwise it is queued (state 5). */

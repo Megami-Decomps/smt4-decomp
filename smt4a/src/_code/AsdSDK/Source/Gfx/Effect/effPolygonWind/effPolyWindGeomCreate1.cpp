@@ -31,10 +31,10 @@ PolyWindBlock *effPolyWindGeomCreate1(PolyWindParams *params, void *texture)
     sides = sides > 3 ? sides : 3;
     params->sides = sides;
     block->geom = FUN_00390164(params->segments, sides & 0xffff, &DAT_005c1ec8, 4, 0x4c);
-    if (texture != NULL) {
-        asdTextureHolderLoad(block->geom, texture);
-    } else {
+    if (texture == NULL) {
         refSlotAssign(block->geom, sysGetTableWord(20));
+    } else {
+        asdTextureHolderLoad(block->geom, texture);
     }
     FUN_003c82d8(block, params);
     return block;

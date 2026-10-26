@@ -1,12 +1,12 @@
 /* NON_MATCHING: direction intermediate stores are folded, and scene-position snapshots use integer copies. */
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match2_AocTable23.h"
+#include "shard/dataTableGetRecord23.h"
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
 u32 FUN_0027d7b0(s32 map, s32 group, u32 point);
-const Table23Record *dataTableGetRecord23(u32 key);
 f32 mathDistanceBetweenPoints(MapVector first, MapVector second);
 
 // Move the map scene from its current position or a named waypoint toward another waypoint.
@@ -32,7 +32,7 @@ void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoi
     MovementView *work = reinterpret_cast<MovementView *>(g_lmapMainState);
     if (startGroup != 0) {
         const WaypointView *point = reinterpret_cast<const WaypointView *>(
-            dataTableGetRecord23(FUN_0027d7b0(work->map, startGroup, startPoint)));
+            reinterpret_cast<const Table23Record *>(dataTableGetRecord23(FUN_0027d7b0(work->map, startGroup, startPoint))));
         work->start.x = point->x;
         work->start.y = point->y;
         work->start.z = point->z;
@@ -40,7 +40,7 @@ void FUN_001e2478(s32 startGroup, u32 startPoint, s32 targetGroup, u32 targetPoi
         work->start = *reinterpret_cast<const MapVector *>(g_lmapScene->transform.position);
     }
     const WaypointView *target = reinterpret_cast<const WaypointView *>(
-        dataTableGetRecord23(FUN_0027d7b0(work->map, targetGroup, targetPoint)));
+        reinterpret_cast<const Table23Record *>(dataTableGetRecord23(FUN_0027d7b0(work->map, targetGroup, targetPoint))));
     work->target.x = target->x;
     work->target.y = target->y;
     work->target.z = target->z;

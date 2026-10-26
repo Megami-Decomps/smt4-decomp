@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail's states return through the shared epilogue with different register assignment (process in r4, g_aocMain in r6), copies the polled five-word result through ldm/stm pairs and tests the 0x66/0x67 kinds with the removed-inline gotos of the original; this build lays the cases out differently. */
 #include "classes/AocMenu.h"
 #include "common.h"
+#include "util/ByteIsAtLeast100.h"
 
 struct AocMenuObject;
 
@@ -54,7 +55,6 @@ void *windowCreateStatusOperation(AocMenuObject *object, s32 kind);
 void FUN_00473980(AocMenuProcess *process, const AocResult *request);
 AocResult FUN_0047bc90(AocGlobals *aoc);
 s32 strIsEmpty(u32 *record);
-u8 byteIsAtLeast100(u32 *record);
 s32 legacyResourceIdRemap(const AocResult *record);
 u32 flaggedValueHolderGetTotal(void *holder);
 
@@ -81,7 +81,7 @@ void AocMenu::runResultProcess()
             process->phase = 2;
             return;
         }
-        if (byteIsAtLeast100(record.words) != 0) {
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(record.words)) != 0) {
             if ((record.words[0] & 0xff) == 0x66) {
                 AocResult request = record;
                 FUN_00473980(process, &request);
@@ -123,7 +123,7 @@ void AocMenu::runResultProcess()
             }
             return;
         }
-        if (byteIsAtLeast100(record.words) != 0) {
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(record.words)) != 0) {
             if ((record.words[0] & 0xff) == 0x66) {
                 AocResult request = record;
                 FUN_00473980(process, &request);

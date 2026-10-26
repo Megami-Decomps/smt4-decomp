@@ -333,15 +333,6 @@ void FUN_0029c4ac(u8 value);
 }
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-void FUN_0029eb5c(ScrollSelection* list, s32 index);
-
-#ifdef __cplusplus
-}
-#endif
 
 #ifdef __cplusplus
 extern "C" {

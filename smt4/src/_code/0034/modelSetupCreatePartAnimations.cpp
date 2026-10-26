@@ -190,7 +190,7 @@ extern AnimationVTable DAT_00421468;
 extern AnimationVTable DAT_00421570;
 extern unsigned char DAT_00422058[];
 extern unsigned char DAT_0042208c[];
-f32 FUN_00155650(void *context, f32 start, f32 end, f32 frame);
+f32 mathClampFloat(void *context, f32 start, f32 end, f32 frame);
 f32 nw_anim_PlayPolicy_Loop(void *context, f32 start, f32 end, f32 frame);
 extern u64 _ZGVZN2nw4math5MTX348IdentityEvE8identity;
 extern Matrix34 _ZZN2nw4math5MTX348IdentityEvE8identity;
@@ -352,7 +352,7 @@ static __inline Animation *createPrimary(AnimationResource *resource,
     animation->speed = 1.0f;
     animation->startFrame = 0.0f;
     animation->endFrame = 1.0f;
-    animation->playPolicy = FUN_00155650;
+    animation->playPolicy = mathClampFloat;
     animation->reserved80 = 0;
     animation->resource = 0;
     animation->enabled = 1;
@@ -374,7 +374,7 @@ static __inline Animation *createPrimary(AnimationResource *resource,
     animation->previousFrame = 0.0f;
     animation->frame = 0.0f;
     if (resource->playMode == 0)
-        animation->playPolicy = FUN_00155650;
+        animation->playPolicy = mathClampFloat;
     else if (resource->playMode == 1)
         animation->playPolicy = nw_anim_PlayPolicy_Loop;
     animation->enabled = 1;

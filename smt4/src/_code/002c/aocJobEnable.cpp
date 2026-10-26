@@ -1,4 +1,3 @@
-/* NON_MATCHING: constant store uses r0 rather than retail's r1 and reorders the pointer load. */
 #include "common.h"
 
 namespace {
@@ -8,12 +7,17 @@ struct AocJobState {
 };
 }
 
+static void aocJobSetEnabled(AocJobState *job, u8 enabled)
+{
+    job->enabled = enabled;
+}
+
 extern "C" {
 extern AocJobState *g_aocJob;
 
 /* Enables the add-on content job state. */
 void aocJobEnable(void)
 {
-    g_aocJob->enabled = 1;
+    aocJobSetEnabled(g_aocJob, 1);
 }
 }

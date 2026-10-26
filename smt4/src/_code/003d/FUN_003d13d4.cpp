@@ -66,7 +66,7 @@ u32 FUN_003d13d4(BattleContext *context, ActionWork *work, u32 a, u32 b, f32 sca
         } else {
             s32 seen = 0;
             for (s32 bit = 0; bit < 64; bit++) {
-                if (context->side->targetMask & ((u64)1 << bit)) {
+                if (context->side->targetMask & (1 << bit)) {
                     if (count > seen) {
                         seen = (s8)(seen + 1);
                     } else {

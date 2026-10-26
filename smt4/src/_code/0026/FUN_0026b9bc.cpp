@@ -1,6 +1,7 @@
 /* NON_MATCHING: only register allocation differs (retail spills the expanded-grid pointer to the stack and keeps the first row/column in r7/fp; build spills the first row). */
 #include "ui/PartyPanelState.h"
 #include "ui/GridNavigation.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
 
 /* Stock slots and capacity beyond the shared slot-table prefix. */
 struct PartyStockView {
@@ -17,7 +18,6 @@ s32 objectPartRunUnlessLocked(GridNavigation *grid);
 s32 FUN_0029efa8(const GridNavigation *grid);
 void FUN_0029f848(GridNavigation *grid, s32 count, s32 visibleRows, s32 columns, s32 wrap, s32 alternateKeys);
 void scrollOwnerSelectIndex(GridNavigation *grid, s32 index);
-void FUN_0029eb5c(GridNavigation *grid, s32 index);
 void partyPanelSortEntries(void);
 
 /* Counts the filled stock slots, copies them into the panel's entry list and lays out the four capacity grids. */
@@ -55,9 +55,9 @@ void FUN_0026b9bc(void)
         FUN_0029f848(&panel->capacityGrids.expanded, party->capacity - 8, 4, 4, 1, 1);
     }
     scrollOwnerSelectIndex(&panel->capacityGrids.base, firstRow);
-    FUN_0029eb5c(&panel->capacityGrids.base, firstColumn);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.base), firstColumn);
     scrollOwnerSelectIndex(&panel->capacityGrids.expanded, secondRow);
-    FUN_0029eb5c(&panel->capacityGrids.expanded, secondColumn);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(&panel->capacityGrids.expanded), secondColumn);
 
     GridNavigation *base2 = &panel->capacityGrids.secondary;
     GridNavigation *expanded2 = &panel->capacityGrids.secondaryExpanded;
@@ -68,9 +68,9 @@ void FUN_0026b9bc(void)
     FUN_0029f848(base2, party->capacity, rows, 4, 1, 1);
     FUN_0029f848(expanded2, party->capacity + 4, rows + 1, 4, 1, 1);
     scrollOwnerSelectIndex(base2, firstRow);
-    FUN_0029eb5c(base2, firstColumn);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(base2), firstColumn);
     scrollOwnerSelectIndex(expanded2, secondRow);
-    FUN_0029eb5c(expanded2, secondColumn);
+    FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(expanded2), secondColumn);
 }
 
 } /* extern "C" */

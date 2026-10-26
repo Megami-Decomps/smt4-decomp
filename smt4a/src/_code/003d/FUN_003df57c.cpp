@@ -1,11 +1,11 @@
 /* NON_MATCHING: equipped-skill scan is not pair-unrolled; saved registers and global/rank reduction block ordering differ. */
 #include "gamedata/Table04Record.h"
 #include "shard/Shard004B.h"
+#include "util/dataFindKeyedRecordWithOverrides.h"
 
 extern "C" {
 ItemRankRecord *gameGetPlayerData(void);
 s32 gameDataFlagTestBit(u32 flag);
-const void *dataFindKeyedRecordWithOverrides(u32 id);
 s32 FUN_002efc44(const Table04Record *record, s32 rank, s32 kind);
 }
 
@@ -24,7 +24,7 @@ static inline s32 skillCostBonus(u32 flag)
     // The modifier value lies beyond the keyed-record prefix exposed by lookup helpers.
     struct ModifierView { u8 unk00[0x38]; s32 reduction; };
     typedef char ModifierOffsetCheck[offsetof(ModifierView, reduction) == 0x38 ? 1 : -1];
-    return ((const ModifierView *)dataFindKeyedRecordWithOverrides(flag))->reduction;
+    return ((const ModifierView *)(const void *)dataFindKeyedRecordWithOverrides(flag))->reduction;
 }
 
 // Calculate a skill's cost after equipped-skill rank or unlocked global cost reductions.

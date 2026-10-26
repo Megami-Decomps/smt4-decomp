@@ -1,6 +1,7 @@
 /* NON_MATCHING: identical instruction sequence to retail except for register numbering (retail keeps the result in r6, the reward record in r7 and the loop counter in r1; the build uses r8/r6/r2 and reorders the parameter moves). */
 #include "gamedata/DataTable.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "gamedata/PlayerDataBlock.h"
 
 // One roll slot of a drop table entry: the item and its weight.
 struct DropSlot {
@@ -60,7 +61,6 @@ extern "C" {
 extern AocDropSource *g_aocSystem;
 
 s32 randRange(u16 maximum);
-PlayerLevelView *gameGetPlayerData(void);
 u32 gameGetUnlockedCountLimit(void);
 u32 FUN_004ccbf0(u32 level);
 EncounterRecord *FUN_001ad9b4(s32 index);
@@ -126,7 +126,7 @@ void FUN_003df168(RewardResult *result, s32 index)
     if (record->percent == 0) {
         result->value = record->base;
     } else {
-        PlayerLevelView *player = gameGetPlayerData();
+        PlayerLevelView *player = reinterpret_cast<PlayerLevelView *>(gameGetPlayerData());
         u32 scaled;
         if (gameGetUnlockedCountLimit() > player->level) {
             scaled = FUN_004ccbf0(player->level);

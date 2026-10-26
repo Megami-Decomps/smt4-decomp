@@ -5,12 +5,12 @@
 #include "battle/BattleMessageMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
+#include "battle/BattleUnit.h"
 
 extern "C" {
 extern u32 g_btlScriptUnit;
 extern BattleMessageFlagMasks g_btlMessageFlagMasks;
 s32 scrGetArg(u32 index);
-BtlUnitA *btlUnitGet(u32 id);
 void FUN_004fb798(s32 mode, BtlUnitA *unit, u32 effect, BattleRosterRecordA *target, s32 first,
     s32 hp, s32 mp, u32 color, u32 flags, s32 start, s32 end, s32 kind, s32 third, s32 fourth, s32 enabled);
 void FUN_004fb43c(s32 delay, BtlUnitA *unit, u32 effect, s32 first, s32 second, s32 third, s32 fourth);
@@ -20,7 +20,7 @@ u32 FUN_00380c48(void)
     s32 hpPercent = scrGetArg(0);
     s32 mpPercent = scrGetArg(1);
     s32 show = scrGetArg(2);
-    BtlUnitA *unit = btlUnitGet(g_btlScriptUnit);
+    BtlUnitA *unit = reinterpret_cast<BtlUnitA *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
     u32 flags = 0;
     if (show > 0)
         flags = 0x3BE0;

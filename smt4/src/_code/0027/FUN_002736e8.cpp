@@ -1,6 +1,7 @@
 /* NON_MATCHING: retail shares one state store between states 0 and 1 (case 0 branches to case 1's store); armcc merges case 1 into case 2's store. The process mode store uses the inlined scriptProcessSetMode. */
 #include "common.h"
 #include "shard/W6_W6Match1_BgmRequestChannel.h"
+#include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
 extern "C" {
 
@@ -19,7 +20,6 @@ typedef struct QuestScriptRun {
     /* 0x14 */ ScriptProcess *process;
 } QuestScriptRun;
 
-void asdLoadFileAsyncSimple(const char *path, void **data, s32 a);
 ScriptProcess *FUN_00297060(void *script, void *messages);
 void scrScriptProcessStartEntry(ScriptProcess *process, s32 entry);
 void scriptProcessSetMode(ScriptProcess *process, s32 mode);
@@ -33,8 +33,8 @@ u32 FUN_002736e8(QuestScriptRun *run)
 {
     switch (run->state) {
     case 0:
-        asdLoadFileAsyncSimple("event/quest/QuestScr.bf", &run->script, 0);
-        asdLoadFileAsyncSimple("event/quest/QuestSys.mbm", &run->messages, 0);
+        asdLoadFileAsyncSimple("event/quest/QuestScr.bf", reinterpret_cast<u32 *>(&run->script), 0);
+        asdLoadFileAsyncSimple("event/quest/QuestSys.mbm", reinterpret_cast<u32 *>(&run->messages), 0);
         run->state = 1;
         break;
     case 1:

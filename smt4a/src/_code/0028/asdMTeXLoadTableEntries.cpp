@@ -1,9 +1,9 @@
 #include "common.h"
+#include "event/bustupEvent/BustupTex.h"
 
 extern "C" {
 
 void asdTMTexTableLoadTmx(s32 table, s32 flag);
-void FUN_0014afd0(s32 table, s32 index);
 
 /* Loads texture table 0x1B and runs FUN_0014afd0 on each of its 0x12 entries. */
 void asdMTeXLoadTableEntries(void)

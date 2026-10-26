@@ -2,9 +2,9 @@
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlReflect.h"
+#include "util/BtlScriptUnitHasFlags.h"
 
 extern "C" {
-s32 btlScriptUnitHasFlags(BtlMainStateA *);
 void FUN_0047effc(s32, u32, u32);
 
 

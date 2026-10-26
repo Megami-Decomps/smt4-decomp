@@ -1,5 +1,6 @@
 /* NON_MATCHING: creates the model scene cameras (two default dynamic cameras, the lens camera chosen by the lens mode, a look-at camera) and attaches them to the scene roots; written from the decompilation and the retail disassembly, the inlined shared-resource release and vector set-up are not compared with retail */
 #include "common.h"
+#include "AsdSDK/asdMemoryGetDefaultAllocator.h"
 
 struct NwResource;
 
@@ -67,7 +68,6 @@ extern NwVec2 DAT_00464b3c;         /* lens x, y */
 extern u32 g_asdModelSlotArray0;
 extern u32 DAT_00464ba0;
 
-u32 asdMemoryGetDefaultAllocator(void);
 NwCamera *FUN_002c05f4(u32 allocator, const NwVec3 *eye, const NwVec3 *target, u32 flags, NwVec2 lens, f32 near);
 NwCamera *FUN_00119e54(u32 allocator, const NwVec3 *eye, const NwVec3 *target, const NwVec3 *up, u8 mode,
                        NwVec2 lens, f32 near);
@@ -110,7 +110,7 @@ void FUN_001079d8(void)
     NwVec2 defaultLens = { 1.0f, 5000.0f };
     const f32 lensNear = 0.66f;
 
-    u32 allocator = asdMemoryGetDefaultAllocator();
+    u32 allocator = (u32)asdMemoryGetDefaultAllocator();
     DAT_00464b10 = (u32)FUN_002c05f4(allocator, &eye, &target, 0, defaultLens, lensNear);
     DAT_00464b14 = modelDefaultCamera(allocator);
     DAT_00464b18 = modelDefaultCamera(allocator);
@@ -119,7 +119,7 @@ void FUN_001079d8(void)
     if (DAT_00464af4 == MODEL_CAMERA_LENS_ORTHOGRAPHIC) {
         eye.set(20.0f, 15.0f, 20.0f);
         target.set(0.0f, 10.0f, 0.0f);
-        NwCamera *camera = FUN_002c05f4(asdMemoryGetDefaultAllocator(), &eye, &target, 0, DAT_00464b3c, lensNear);
+        NwCamera *camera = FUN_002c05f4((u32)asdMemoryGetDefaultAllocator(), &eye, &target, 0, DAT_00464b3c, lensNear);
         DAT_00464b34 = camera;
         camera->distance = 1.0f / DAT_00464b3c.y;
         drawableSetRectangle(camera, DAT_00464b3c, 1.6666666f);
@@ -127,14 +127,14 @@ void FUN_001079d8(void)
         eye.set(20.0f, 15.0f, 20.0f);
         target.set(0.0f, 10.0f, 0.0f);
         NwVec3 up(0.0f, 0.0f, 0.0f);
-        DAT_00464b34 = FUN_00119e54(asdMemoryGetDefaultAllocator(), &eye, &target, &up, DAT_00464af4,
+        DAT_00464b34 = FUN_00119e54((u32)asdMemoryGetDefaultAllocator(), &eye, &target, &up, DAT_00464af4,
                                     DAT_00464b3c, 0.0f);
     }
     nw_gfx_SceneNode_AttachChild(g_asdModelSlotArray0, (u32)DAT_00464b34);
 
     eye.set(20.0f, 15.0f, 20.0f);
     target.set(0.0f, 10.0f, 0.0f);
-    DAT_00464b1c = FUN_002c05f4(asdMemoryGetDefaultAllocator(), &eye, &target, 0, defaultLens, lensNear);
+    DAT_00464b1c = FUN_002c05f4((u32)asdMemoryGetDefaultAllocator(), &eye, &target, 0, defaultLens, lensNear);
     nw_gfx_SceneNode_AttachChild(DAT_00464ba0, (u32)DAT_00464b1c);
 }
 

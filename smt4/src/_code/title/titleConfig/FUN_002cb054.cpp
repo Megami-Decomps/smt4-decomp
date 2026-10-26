@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 #include "shard/TextureDrawCall.h"
+#include "util/FUN_0029d644.h"
 
 extern "C" {
 
@@ -44,7 +45,6 @@ extern int g_titleConfig; /* 0x44e2d0 */
 extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0029d644(int);
 extern int ifTouchGetSelectionModeForRegion(int);
 extern int FUN_0029efa8(int);
 extern int FUN_0029efc0(int);
@@ -121,7 +121,7 @@ unsigned int FUN_002cb054(void)
   temp_v28 = FUN_0029efa8(temp_v1 + 0xe8);
   temp_v28 = temp_v28 + temp_v4;
   temp_v8 = 0;
-  temp_v4 = FUN_0029d644(temp_v1 + 0xe8);
+  temp_v4 = FUN_0029d644((const void *)(temp_v1 + 0xe8));
   if (0 < temp_v4) {
     do {
       temp_v10 = 0;
@@ -275,7 +275,7 @@ unsigned int FUN_002cb054(void)
                      0x29);
       }
       temp_v8 = temp_v8 + 1;
-      temp_v4 = FUN_0029d644(temp_v1 + 0xe8);
+      temp_v4 = FUN_0029d644((const void *)(temp_v1 + 0xe8));
     } while (temp_v8 < temp_v4);
   }
   return 0;

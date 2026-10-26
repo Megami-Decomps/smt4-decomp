@@ -12,7 +12,7 @@ int FUN_002bed3c(void);
 int FUN_002bedb0(...);
 int FUN_002bee04(...);
 int FUN_002c0944(...);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int FUN_002c5d80(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -41,7 +41,7 @@ extern signed char DAT_0049fd00; /* 0x49fd00 */
 /* Supplied declaration required: FUN_002bedb0. */
 /* Supplied declaration required: FUN_002bee04. */
 /* Supplied declaration required: FUN_002c0944. */
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: FUN_002c5d80. */
 
 
@@ -64,7 +64,7 @@ void FUN_0039d0d0(int param_1)
   if (DAT_0049fcfc == 0) {
     temp_v1 = FUN_002c5d80(1);
     FUN_002bee04(g_titleScene,3,temp_v1);
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < *(int *)(param_1 + 0x121b4)) {
       do {
@@ -110,7 +110,7 @@ void FUN_0039d0d0(int param_1)
   if (DAT_0049fd00 != '\0') {
     temp_v1 = FUN_002c5d80(1,0);
     FUN_002bee04(g_titleScene,3,temp_v1);
-    FUN_002c1b64(g_titleScene,0);
+    renderCtxSelectTexture(g_titleScene,0);
     temp_v3 = 0;
     if (temp_v3 < *(int *)(param_1 + 0x121b4)) {
       do {

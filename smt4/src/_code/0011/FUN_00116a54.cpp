@@ -8,7 +8,7 @@ int FUN_00124c60(...);
 int FUN_002b75ec(...);
 int FUN_002b7638(...);
 int effectRenderTransformedInstance(...);
-int FUN_002bd82c(...);
+int asdTextSetBaseColor(...);
 int SBORROW4(...);
 
 int FUN_00124d24(int);
@@ -21,7 +21,7 @@ int FUN_002bee04(...);
 int FUN_002bf288(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
-int FUN_002c1b64(...);
+int renderCtxSelectTexture(...);
 int renderCtxSelectStereoLayout(unsigned int);
 int VectorSignedToFloat(...);
 
@@ -52,7 +52,7 @@ extern int FUN_002b753c(unsigned int);
 extern int asdTMTexTableCallFileB(unsigned int, unsigned int);
 /* Supplied declaration required: effectRenderTransformedInstance. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
-/* Supplied declaration required: FUN_002bd82c. */
+/* Supplied declaration required: asdTextSetBaseColor. */
 /* Supplied declaration required: FUN_002bed3c. */
 /* Supplied declaration required: vec2GetYInt. */
 extern int vec2GetXInt(int);
@@ -62,7 +62,7 @@ extern int vec2GetXInt(int);
 /* Supplied declaration required: asdTMTexTableEntryAt. */
 /* Supplied declaration required: efctSetSpeed. */
 extern int jobGetWork(void);
-/* Supplied declaration required: FUN_002c1b64. */
+/* Supplied declaration required: renderCtxSelectTexture. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern unsigned int FUN_002c5d80(unsigned int, unsigned int);
 extern unsigned int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -111,7 +111,7 @@ char FUN_00116a54(void)
     return temp_v0;
   }
   temp_v5 = asdTMTexTableCallFileB(0xe,0);
-  FUN_002c1b64(g_titleScene,*(unsigned int *)(temp_v5 + 8));
+  renderCtxSelectTexture(g_titleScene,*(unsigned int *)(temp_v5 + 8));
   renderCtxSelectStereoLayout(g_titleScene);
   switch(*(unsigned char *)(temp_v4 + 9)) {
   case 0:
@@ -307,7 +307,7 @@ LAB_00117048:
         temp_v17 = 0;
         temp_v18 = 0x3f800000;
         temp_v19 = 0x3eccccce;
-        FUN_002c1b64(g_titleScene,0);
+        renderCtxSelectTexture(g_titleScene,0);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 10),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)*(short *)(temp_v9 + 8),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat((int)(*(short **)(temp_v9 + 0xc))[1],(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -346,7 +346,7 @@ LAB_00117048:
         VectorSignedToFloat((int)**(short **)(temp_v9 + 0xc),(unsigned char)(in_fpscr >> 0x16) & 3);
         FUN_002b7638(&temp_v16);
       }
-      FUN_002bd82c(*(unsigned int *)(temp_v4 + 4),*(unsigned int *)(temp_v4 + 0x10));
+      asdTextSetBaseColor(*(unsigned int *)(temp_v4 + 4),*(unsigned int *)(temp_v4 + 0x10));
       temp_v9 = 0;
       if (temp_v8 != 0) {
         temp_v14 = 0x3e8a3d7100000000;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: armcc keeps the resident work pointer in r1 rather than retail's r0. */
 #include "common.h"
 
 extern "C" {
@@ -9,10 +8,15 @@ struct ResidentWork {
 };
 extern ResidentWork *g_jyoucyu;
 
+static __inline void residentWorkSetRequested(ResidentWork *work, u8 requested)
+{
+    work->requested = requested;
+}
+
 /* Set the resident work's request flag. */
 void jyoucyuRequest(void)
 {
-    g_jyoucyu->requested = 1;
+    residentWorkSetRequested(g_jyoucyu, 1);
 }
 
 }

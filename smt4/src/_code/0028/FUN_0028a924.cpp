@@ -12,7 +12,7 @@ int FUN_0029eb5c(...);
 int timerStart(...);
 
 int FUN_001d13b0(void);
-int FUN_00205a90(void);
+int partyPanelRefreshItemPreview(void);
 int saveResolvePartySlot(...);
 int FUN_0026b7c0(void);
 int FUN_0026c654(...);
@@ -41,7 +41,7 @@ extern int g_partyPanel; /* 0x43dcf0 */
 
 /* Supplied declaration required: FUN_001a7d48. */
 /* Supplied declaration required: FUN_001d13b0. */
-/* Supplied declaration required: FUN_00205a90. */
+/* Supplied declaration required: partyPanelRefreshItemPreview. */
 /* Supplied declaration required: saveResolvePartySlot. */
 /* Supplied declaration required: FUN_0026b7c0. */
 /* Supplied declaration required: FUN_0026c654. */
@@ -303,7 +303,7 @@ LAB_0028ad80:
               }
               temp_v2 = temp_v2 + 1;
             } while (temp_v2 < 0x18);
-            FUN_00205a90();
+            partyPanelRefreshItemPreview();
           }
           else {
             temp_v9 = -1;

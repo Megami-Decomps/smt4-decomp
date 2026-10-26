@@ -1,13 +1,7 @@
 /* NON_MATCHING: logic matches; armcc re-rolls the eight devil skill copies into a loop (retail is straight-line) and allocates rank/bucket/count registers differently. */
 #include "common.h"
 #include "gamedata/DevilRecord.h"
-
-/* A skill (data table 6, sub 1): bit 7 of the flags byte marks it learnable, the low bits are its rank. */
-struct SkillRankRecord {
-    /* 0x00 */ u16 id;
-    /* 0x02 */ u8 unk02;
-    /* 0x03 */ u8 flags;
-};
+#include "gamedata/SkillFlags.h"
 
 /* Table 14 record: rank id and the odds (percent) of shifting the rank. */
 struct RankShiftRecord {
@@ -20,7 +14,6 @@ struct SkillSet {
 };
 
 extern "C" {
-SkillRankRecord *dataTable06Sub1GetRecord(u16 id);
 RankShiftRecord *dataTable14Sub0GetRecord(u8 rank);
 u32 randNextInRange(int limit);
 u8 flagBitIsSet(u32 bit);
@@ -93,7 +86,7 @@ u32 FUN_0033be90(const SkillSet *current, s32 slot, u16 devilId)
 
     s32 candidates = 0;
     for (u16 id = 1; id <= 500; id++) {
-        SkillRankRecord *skill = dataTable06Sub1GetRecord(id);
+        SkillFlagsRecord *skill = dataTable06Sub1GetRecord(id);
         if (isNewSkillOfRank(skill->flags, skill->id, rank, known)) {
             candidates++;
         }
@@ -103,7 +96,7 @@ u32 FUN_0033be90(const SkillSet *current, s32 slot, u16 devilId)
     }
     s32 pick = randNextInRange((u16)(candidates - 1));
     for (u16 id = 1; id <= 500; id++) {
-        SkillRankRecord *skill = dataTable06Sub1GetRecord(id);
+        SkillFlagsRecord *skill = dataTable06Sub1GetRecord(id);
         u16 skillId = skill->id;
         if (isNewSkillOfRank(skill->flags, skillId, rank, known) && --pick == 0) {
             return skillId;

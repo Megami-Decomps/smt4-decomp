@@ -1,8 +1,8 @@
 /* NON_MATCHING: 64-bit output clears use stm, one mask accumulation groups loads differently and the last active-slot byte uses a different base; 102 instructions each. */
 #include "shard/W7_W7Match2_PartyDamage.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 extern "C" {
-PartyDamageSlotsIV *gameGetSlotTable(s32 selection);
 void FUN_0028cb40(void *work, u16 *kind, s16 *index);
 
 // Resolve selected party positions to the battle target mask and return the current command index.
@@ -21,7 +21,7 @@ u32 FUN_001f4f14(void *work, u64 *targets, s64 *commandIndex)
         return 0;
     *targets = 0;
     *commandIndex = 0;
-    const PartyDamageSlotsIV *slots = gameGetSlotTable(selected);
+    const SaveSlotTableIV *slots = gameGetSlotTable();
     if (selection->selection == 9999) {
         if (selection->selected[0])
             ++*targets;

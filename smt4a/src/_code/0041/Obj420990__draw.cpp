@@ -10,7 +10,7 @@ struct Obj420990DrawContext {
 };
 extern "C" {
 extern Obj420990DrawContext *g_renderCtx;
-void FUN_0016c4b8(void *context, u32 texture);
+void renderCtxSelectTexture(void *context, u32 texture);
 u32 FUN_001692ac(u32 mode, u32 value);
 void FUN_00409e78(void *filter, f32 *matrix, const void *motion);
 void FUN_0043b6c0(f32 *vertices, const f32 *matrix, f32 *output, u32 count);
@@ -21,7 +21,7 @@ void FUN_002371b0();
 
 void Obj420990::draw()
 {
-    FUN_0016c4b8(g_renderCtx, ((FilterDrawTexture *)handles[0].handle)->handle);
+    renderCtxSelectTexture(g_renderCtx, ((FilterDrawTexture *)handles[0].handle)->handle);
     g_renderCtx->blend.push(rects->blendA);
     g_renderCtx->projection.push(FUN_001692ac(1, 0));
     f32 color[4] = {1, 1, 1, ((FilterDrawChild *)child)->alpha};
@@ -40,7 +40,7 @@ void Obj420990::draw()
             points[vertex][2], vertices()[vertex].u, vertices()[vertex].v);
     }
     FUN_002371b0();
-    FUN_0016c4b8(g_renderCtx, ((FilterDrawTexture *)handles[1].handle)->handle);
+    renderCtxSelectTexture(g_renderCtx, ((FilterDrawTexture *)handles[1].handle)->handle);
     g_renderCtx->blend.replace(rects->blendB);
     FUN_00409e78(this, matrix, &handles[1]);
     FUN_0043b6c0(&points[4][0], matrix, &points[4][0], 4);

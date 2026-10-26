@@ -2,6 +2,7 @@
 #include "common.h"
 #include "shard/W5_W5Match2_UniteWork.h"
 #include <stddef.h>
+#include "gamedata/SkillFlags.h"
 
 extern "C" {
 
@@ -55,11 +56,6 @@ struct DevilRecordView {
     u16 skills[8];           // 0x3c
 };
 
-struct SkillRecordView {
-    u8 unknown00[3];         // 0x00
-    u8 flags;                // 0x03
-};
-
 extern UniteStateView* g_unite;
 
 extern "C" {
@@ -77,7 +73,6 @@ void FUN_0029c1c8(void* object, u32 id, int mode);
 void uniteMergeInheritedSkillsAndStats(void* context, PartyMemberView* first,
                  PartyMemberView* second, int mode, PartyMemberView* result);
 DevilRecordView* devilGetRecord(u32 id);
-SkillRecordView* dataTable06Sub1GetRecord(u32 id);
 int arrayContainsU16(const u16* values, int count, u32 value);
 int dataTable06ComparePriority(const void* left, const void* right);
 void FUN_002b7bca(void* base, int count, int elementSize,

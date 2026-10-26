@@ -2,13 +2,13 @@
 #include "shard/W6_W6Match8_SpriteTextureResource.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdDebug.h"
+#include "AsdSDK/AsdMemAlloc.h"
 
 struct SpriteResourceHandle {
     SpriteTextureResource *resource;
 };
 
 extern "C" {
-void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, s32 kind);
 void spriteGroupPlayerSelect(SpriteGroupPlayer *player, s32 group);
 
 // Create a player for a sprite resource: one state per group slot the resource reserved, playing group zero.

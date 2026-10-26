@@ -1,5 +1,6 @@
 /* NON_MATCHING: selected-state predicate layout and list/indicator register allocation differ. */
 #include "shard/Shard0049.h"
+#include "util/FUN_002a482c.h"
 
 namespace {
 struct EquipmentListIndicator;
@@ -18,7 +19,6 @@ extern "C" {
 void FUN_0049339c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color);
 void FUN_0049368c(const AsdTextureRegion *region, u32 image, s32 x, s32 y, u32 color, u32 flags);
 void FUN_00494574(EquipmentMenuState *work, s32 page);
-s32 FUN_002a482c(EquipmentMenuCursor *cursor);
 s32 rangeGetMinimumLimit(EquipmentMenuCursor *cursor);
 s32 FUN_0031d174(EquipmentMenuCursor *cursor);
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *holder);

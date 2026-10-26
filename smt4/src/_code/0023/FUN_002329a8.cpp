@@ -19,7 +19,6 @@ struct ModelCloneOwner {
 };
 extern "C" {
 AsdMdlObject *asdMdlManagerClone(u32 source, u32 flags);
-void FUN_002a0428(AsdMdlObject *model, u32 enabled);
 void nodeSetTranslation(AsdMdlNode *node, s32 index, const Vec3f *translation);
 void FUN_0028c618(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);
 void nodeSetScale(AsdMdlNode *node, s32 index, f32 x, f32 y, f32 z);

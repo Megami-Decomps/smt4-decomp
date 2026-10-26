@@ -1,12 +1,12 @@
 /* NON_MATCHING: control flow, calls, the by-reference request ABI and the inlined RequestParameters constructor sequence (strb, member ctor, owner recovered with `sub r4, r0, #4`, ldrd/strd) match; armcc gives every hidden-reference temporary its own stack slot (88-byte frame) where retail reuses sp+20 and sp+40 (64 bytes), and splits the submitTokenRequest argument copy into ldm pieces. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match1_QueuedRequestToken.h"
+#include "util/ByteIsAtLeast100.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
 extern AocSystemA *g_aocSystem;
 s32 sysLightEventTryWait(AocObjB *event);
-s32 byteIsAtLeast100(RequestParameters *request);
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 u32 jyoucyuGetTableEntry(s32 index);
 
@@ -25,7 +25,7 @@ u32 FUN_0047219c(void)
         request.kind = 200;
     } else {
         request = g_aocSystem->getPendingRequest();
-        if (byteIsAtLeast100(&request) == 0) {
+        if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&request)) == 0) {
             return 1;
         }
     }

@@ -16,7 +16,7 @@ int textDrawString(...);
 int FUN_002bf380(...);
 int efctSetSpeed(void);
 int mtx44Copy(...);
-int FUN_002c198c(...);
+int renderCtxApplyTransforms(...);
 int renderCtxSelectStereoLayout(int);
 int VectorSignedToFloat(...);
 int nn_math_ARMv6_MTX44MultAsm(unsigned char [84], unsigned char [84], int *);
@@ -77,7 +77,7 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: mtx44Copy. */
 extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: FUN_002c198c. */
+/* Supplied declaration required: renderCtxApplyTransforms. */
 /* Supplied declaration required: renderCtxSelectStereoLayout. */
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
@@ -295,7 +295,7 @@ unsigned int FUN_0011a434(void)
         FUN_002b6b8c(*(unsigned short *)(temp_v0 + 0x18),temp_v2 - 0xd,8,0x79);
       }
     }
-    FUN_002c198c(g_titleScene);
+    renderCtxApplyTransforms(g_titleScene);
     efctSetSpeed();
     temp_v0 = g_titleScene;
     piVar6 = (int *)(g_titleScene + 0x124c);

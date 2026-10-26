@@ -1,4 +1,3 @@
-/* NON_MATCHING: four-tier response switch becomes comparisons instead of retail's jump table, moving its common comparator block; O2 candidate. */
 #include "common.h"
 
 namespace {
@@ -28,22 +27,7 @@ u32 passiveSkillResolveAffinity(const u16* skills, u32 kind)
         if (((affinity >> 6) & 0x1F) != 5) {
             continue;
         }
-        if (affinity & 0xF0000) {
-            if (((affinity >> 11) & 0x1F) != kind) {
-                continue;
-            }
-            s32 incoming;
-            switch ((affinity >> 16) & 0xF) {
-            case 1: incoming = 5; break;
-            case 2: incoming = 1; break;
-            case 3: incoming = 3; break;
-            case 4: incoming = 4; break;
-            default: incoming = 0; break;
-            }
-            if (affinityShouldReplaceState(best, incoming)) {
-                best = incoming;
-            }
-        } else {
+        if ((affinity & 0xF0000) == 0) {
             switch (kind) {
             case 6:
             case 7:
@@ -67,6 +51,18 @@ u32 passiveSkillResolveAffinity(const u16* skills, u32 kind)
             case 0x10:
                 if (affinity & 0x20000000) return 1;
                 break;
+            }
+        } else if (((affinity >> 11) & 0x1F) == kind) {
+            s32 incoming = 0;
+            switch ((affinity >> 16) & 0xF) {
+            case 0: break;
+            case 1: incoming = 5; break;
+            case 2: incoming = 1; break;
+            case 3: incoming = 3; break;
+            case 4: incoming = 4; break;
+            }
+            if (affinityShouldReplaceState(best, incoming)) {
+                best = incoming;
             }
         }
     }
