@@ -1,4 +1,4 @@
-/* NON_MATCHING: category-array address formation and shared unlink epilogue placement differ; 73 built versus 71 retail rows. */
+/* NON_MATCHING: category address formation now matches (usage pointer + index, immediate offset); register numbering of the size/usage temporaries and the shared unlink epilogue placement differ. */
 #include "sys/AllocationTracking.h"
 
 extern "C" {
@@ -16,11 +16,12 @@ AllocationHeaderA *FUN_0017fe8c(void *payload)
     usage->bytes -= header->size;
     if ((header->tag & 0xFF) < 8) {
         u32 category = FUN_0019c40c(header);
-        g_allocationAddressRanges.usage->categoryBytes[category] -= header->size;
+        AllocationUsage *bytesUsage = g_allocationAddressRanges.usage;
+        bytesUsage->categoryBytes[category] -= header->size;
         category = FUN_0019c40c(header);
-        g_allocationAddressRanges.usage->categoryPayloadBytes[category] =
-            (g_allocationAddressRanges.usage->categoryPayloadBytes[category] -
-             (header->size - header->alignment)) + 0x40;
+        AllocationUsage *payloadUsage = g_allocationAddressRanges.usage;
+        payloadUsage->categoryPayloadBytes[category] =
+            (payloadUsage->categoryPayloadBytes[category] - (header->size - header->alignment)) + 0x40;
     }
     AllocationLink *link = &header->link;
     if (link->previous) {

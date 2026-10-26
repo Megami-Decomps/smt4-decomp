@@ -41,14 +41,22 @@ u32 FUN_0048408c(NameConfirmationWork *work)
     if (!work->enabled)
         return 0;
     if (flaggedEntryGetValueB(&work->actions) == 1) {
-        if (work->cursor < 1)
-            return 1;
-        --work->cursor;
-    } else if (flaggedEntryGetValueB(&work->actions) == 2) {
-        if (work->cursor >= 7)
-            return 1;
-        ++work->cursor;
-    } else if (flaggedEntryGetValueB(&work->actions) == 3) {
+        if (work->cursor > 0) {
+            --work->cursor;
+            if (!work->silent)
+                sendEvent100020D();
+        }
+        return 1;
+    }
+    if (flaggedEntryGetValueB(&work->actions) == 2) {
+        if (work->cursor < 7) {
+            ++work->cursor;
+            if (!work->silent)
+                sendEvent100020D();
+        }
+        return 1;
+    }
+    if (flaggedEntryGetValueB(&work->actions) == 3) {
         s32 index = 0;
         while (index < 8 && (nameIsSpace(work, index) || nameIsEmpty(work, index)))
             ++index;
@@ -65,11 +73,7 @@ u32 FUN_0048408c(NameConfirmationWork *work)
         stateSetterEnterState(work, 4);
         sendEvent100020E();
         return 1;
-    } else {
-        return 0;
     }
-    if (!work->silent)
-        sendEvent100020D();
-    return 1;
+    return 0;
 }
 }

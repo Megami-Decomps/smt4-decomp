@@ -1,14 +1,20 @@
-/* NON_MATCHING: retail reads the rectangle through copies of this (mov r0, r4 between each ldrsh) and lays out the 16 call arguments differently; the optimizer here reorders them. */
+/* NON_MATCHING: the rectangle reads now match (windowRegionGet* linker-inlined getters); only the scheduling of the constant call arguments differs. */
 #include "classes/Obj4221a4.h"
+
+extern "C" {
+s16 windowRegionGetWidth(const Obj4221a4 *window);
+s16 windowRegionGetLeft(const Obj4221a4 *window);
+s16 windowRegionGetTop(const Obj4221a4 *window);
+}
 
 extern "C" void FUN_00290994(void *screen, int x, int y, int table, int a, int b, int c, int d, int e, int f, int g, int width, int left, int top, u32 arg, int h);
 
 /* Draws the parts of the window; with no window set up the rectangle is -1. */
 void Obj4221a4::vfunc10(u32 arg)
 {
-    int width = region.getWidth();
-    int left = region.getLeft();
-    int top = region.getTop();
+    int width = windowRegionGetWidth(this);
+    int left = windowRegionGetLeft(this);
+    int top = windowRegionGetTop(this);
 
     if (!ready) {
         width = -1;

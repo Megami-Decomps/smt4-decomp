@@ -3,6 +3,23 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x32];
+    unsigned char f005f162e; /* 0x032 */
+    u8 pad033[0x7d];
+    unsigned int f005f16ac; /* 0x0b0 */
+    unsigned int f005f16b0; /* 0x0b4 */
+    unsigned int f005f16b4; /* 0x0b8 */
+    unsigned int f005f16b8; /* 0x0bc */
+    unsigned int f005f16bc; /* 0x0c0 */
+    u8 pad0c4[0xc];
+    float f005f16cc; /* 0x0d0 */
+    u8 pad0d4[0x18a];
+    unsigned char f005f185a; /* 0x25e */
+};
+extern GameStateView g_gameState;
+
 
 int slotSetRequest(...);
 int mapIfReleaseResource(void);
@@ -33,14 +50,14 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f162e; /* 0x5f162e */
-extern unsigned int DAT_005f16ac; /* 0x5f16ac */
-extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
-extern unsigned int DAT_005f16b4; /* 0x5f16b4 */
-extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
-extern unsigned int DAT_005f16bc; /* 0x5f16bc */
-extern float DAT_005f16cc; /* 0x5f16cc */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
+
+
+
+
+
+
+
+
 
 /* Supplied declaration required: soundVolumeSettingSet. */
 extern unsigned int soundVolumeSettingGet(void);
@@ -108,7 +125,7 @@ void FUN_0033e590(void)
             if (temp_v2 != 1) {
               if (temp_v2 == 2) {
                 *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-                FUN_00233e10(1,DAT_005f16ac);
+                FUN_00233e10(1,g_gameState.f005f16ac);
                 temp_v2 = FUN_004d0584();
                 temp_v1 = g_lmapScene;
                 if (temp_v2 != 0) {
@@ -125,7 +142,7 @@ void FUN_0033e590(void)
                     temp_v1 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 0x54) = 0;
                     *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
-                    FUN_00233e10(0,DAT_005f16ac);
+                    FUN_00233e10(0,g_gameState.f005f16ac);
                     mapIfReleaseSlot4();
                     temp_v1 = g_lmapScene;
                     *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -136,7 +153,7 @@ void FUN_0033e590(void)
             }
             else {
               *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-              FUN_00233e10(1,DAT_005f16ac);
+              FUN_00233e10(1,g_gameState.f005f16ac);
               temp_v1 = g_lmapScene;
               if (*(int *)(g_lmapScene + 8) >= 3) {
                 temp_v2 = *(int *)(g_lmapScene + 4);
@@ -153,24 +170,24 @@ void FUN_0033e590(void)
           *(unsigned int *)(g_lmapScene + 0x54) = 0;
           *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
           *(unsigned char *)(temp_v1 + 0x6c) = 0;
-          temp_v5 = DAT_005f16b8;
-          temp_v0 = DAT_005f16b4;
-          *(unsigned int *)(temp_v1 + 0x28) = DAT_005f16b0;
+          temp_v5 = g_gameState.f005f16b8;
+          temp_v0 = g_gameState.f005f16b4;
+          *(unsigned int *)(temp_v1 + 0x28) = g_gameState.f005f16b0;
           *(unsigned int *)(temp_v1 + 0x2c) = temp_v0;
           *(unsigned int *)(temp_v1 + 0x30) = temp_v5;
-          temp_v3 = DAT_005f16cc * 0.017453292f;
+          temp_v3 = g_gameState.f005f16cc * 0.017453292f;
           FUN_001bc124();
           temp_v6 = 25.0f;
           *(float *)(g_lmapScene + 0x28) = *(float *)(g_lmapScene + 0x28) + temp_v3 * 25.0f;
-          temp_v4 = DAT_005f16cc * temp_v4;
+          temp_v4 = g_gameState.f005f16cc * temp_v4;
           FUN_001bbf0c();
           temp_v1 = g_lmapScene;
           *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v4 * temp_v6;
-          *(unsigned int *)(temp_v1 + 0x50) = DAT_005f16bc;
+          *(unsigned int *)(temp_v1 + 0x50) = g_gameState.f005f16bc;
           FUN_00303460(0xd);
           *(unsigned int *)(g_lmapView + 0xb0) = 1;
           sysPlaySe(0xdc);
-          FUN_00233e10(1,DAT_005f16ac);
+          FUN_00233e10(1,g_gameState.f005f16ac);
           mapIfShowActionMarker();
           temp_v1 = g_lmapScene;
           temp_v2 = *(int *)(temp_v1 + 4);
@@ -203,7 +220,7 @@ void FUN_0033e590(void)
             return;
           }
           FUN_0033abd4();
-          switch(DAT_005f162e) {
+          switch(g_gameState.f005f162e) {
           case 0:
             temp_v5 = 0x10002c4;
             FUN_003d4ed8(temp_v5);
@@ -244,7 +261,7 @@ LAB_0033e908:
         }
       }
       else {
-        DAT_005f185a = 0;
+        g_gameState.f005f185a = 0;
         *(unsigned int *)(g_lmapView + 0xc) = 1;
         *(unsigned int *)(temp_v1 + 0x54) = 0x15;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
@@ -294,7 +311,7 @@ LAB_0033e908:
         temp_v1 = g_lmapScene;
         *(unsigned int *)(g_lmapScene + 0x54) = 0;
         *(unsigned int *)(temp_v1 + 0x58) = temp_v5;
-        FUN_00233e10(0,DAT_005f16ac);
+        FUN_00233e10(0,g_gameState.f005f16ac);
         mapIfReleaseSlot4();
         temp_v2 = *(int *)(g_lmapScene + 4);
         temp_v1 = g_lmapScene;

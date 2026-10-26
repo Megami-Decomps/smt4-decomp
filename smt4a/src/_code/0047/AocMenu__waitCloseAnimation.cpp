@@ -8,7 +8,6 @@ void flagObjAdvance(void *);
 void FUN_0047306c(void *, u32, u32, u32);
 void jobOwnerFreeSlotAndStop(void *);
 void FUN_00477d10(ScreenTransitionState *, s32, u32);
-TimedState *timeInitializeActiveState(TimedState *);
 s32 FUN_002e1a18(u32);
 s8 uiSpriteGetCompletionState(const void *record);
 
@@ -17,8 +16,7 @@ void AocMenu::waitCloseAnimation()
 {
     ScreenTransitionState * transition = reinterpret_cast<ScreenTransitionState *>(this);
     SceneWindowWork *view = reinterpret_cast<SceneWindowWork *>(this);
-    TimedState time;
-    timeInitializeActiveState(&time);
+    RequestParameters time;
     void *animation = &view->dialogJob;
     switch (transition->phase) {
     case 0:

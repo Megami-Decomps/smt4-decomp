@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite compiles (172 vs 185 rows); retail unrolls the selection loops and keeps constants in different registers */
+/* NON_MATCHING: the selection masks now use int shifts sign-extended into the 64-bit mask (no __aeabi_llsl); retail keeps the present-flag loop rolled with a signed counter and tests bits 2|0x20 apart from 0x10, and unrolls the selection loop. */
 #include "common.h"
 
 // Candidate party member for the battle formation: slot index, rank and race.
@@ -55,9 +55,11 @@ void asdMemFreeIfNotNull(void* block);
 // slots present, ranks the eligible members and records the chosen ones.
 void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
 {
-    for (s32 i = 0; i < 4; i++) {
+    for (u32 i = 0; i < 4; i++) {
         u32 flags = *reinterpret_cast<u32*>((*formation)->units + i * 0x288);
-        if ((flags & 2) == 0 && (flags & 0x20) == 0 && (flags & 0x10) == 0) setup->present[i] = 1;
+        if ((flags & 2) != 0 || (flags & 0x20) != 0) continue;
+        if ((flags & 0x10) != 0) continue;
+        setup->present[i] = 1;
     }
     __aeabi_memset4(&(*formation)->selected, 3, -1);
 
@@ -90,18 +92,18 @@ void FUN_003d0d1c(BattleFormation** formation, BattleSetup* setup)
             next = count & 1;
             if (next == 1) {
                 BattleFormation* f = *formation;
-                u64 bit = 1ull << ((candidates[0].slot + 1) & 0xff);
+                u64 bit = 1 << (candidates[0].slot + 1);
                 f->selectedMask |= bit;
                 (*formation)->selected[0] = candidates[0].slot + 1;
             }
         }
         for (; next < (s32)count; next += 2) {
             BattleFormation* f = *formation;
-            u64 bitA = 1ull << ((candidates[next].slot + 1) & 0xff);
+            u64 bitA = 1 << (candidates[next].slot + 1);
             f->selectedMask |= bitA;
             (*formation)->selected[next] = candidates[next].slot + 1;
             f = *formation;
-            u64 bitB = 1ull << ((candidates[next + 1].slot + 1) & 0xff);
+            u64 bitB = 1 << (candidates[next + 1].slot + 1);
             f->selectedMask |= bitB;
             (*formation)->selected[next + 1] = candidates[next + 1].slot + 1;
         }

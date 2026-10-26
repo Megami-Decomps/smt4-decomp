@@ -35,14 +35,19 @@ typedef char EnemyMotionEntryAOffsetsCheck[sizeof(EnemyMotionEntryA) == 0x188 &&
     offsetof(EnemyMotionEntryA, kind) == 0x17c ? 1 : -1];
 extern "C" {
 extern EnemyMotionStateA *g_mapEnemy;
-extern EnemyMotionSelection DAT_005f17fc;
+// The motion selection lies inside g_gameState.
+struct GameStateMotionView {
+    u8 unk000[0x200];
+    EnemyMotionSelection motion;
+};
+extern GameStateMotionView g_gameState;
 const EnemyMotionRecord *FUN_003a315c(s32 id);
 void FUN_00377acc(EnemyMotionEntryA *entry, s32 id, s32 mode);
 
 void FUN_002b621c()
 {
     EnemyMotionStateA *state = g_mapEnemy;
-    const EnemyMotionRecord *record = FUN_003a315c(DAT_005f17fc.id);
+    const EnemyMotionRecord *record = FUN_003a315c(g_gameState.motion.id);
     for (s32 index = 0; index < 40; ++index) {
         EnemyMotionEntryA *entry = &state->entries[index];
         if (entry->active != 0 && entry->kind != 0 && entry->kind < 11 && entry->state == 2) {
@@ -68,7 +73,7 @@ void FUN_002b621c()
             entry->heading = entry->startHeading;
             entry->state = 26;
             entry->elapsed = 0;
-            FUN_00377acc(entry, DAT_005f17fc.id, 3);
+            FUN_00377acc(entry, g_gameState.motion.id, 3);
             return;
         }
     }

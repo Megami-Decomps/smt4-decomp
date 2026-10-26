@@ -32,13 +32,13 @@ u32 FUN_002826dc(const f32 *position, f32 *resolved, s32 strict, s32 tall)
             planes = g_mapCollision.quads;
             count = g_mapCollision.quadCount;
             radius = 25.0f;
-        } else if (pass == 2) {
-            planes = g_mapCollision.second;
-            count = g_mapCollision.segmentCounts[0];
-            radius = tall != 0 ? 60.0f : 50.0f;
-        } else {
+        } else if (pass != 2) {
             planes = g_mapCollision.unk24;
             count = g_mapCollision.segmentCounts[1];
+            radius = tall != 0 ? 60.0f : 50.0f;
+        } else {
+            planes = g_mapCollision.second;
+            count = g_mapCollision.segmentCounts[0];
             radius = tall != 0 ? 60.0f : 50.0f;
         }
         for (s32 i = 0; i < count; i++, planes++) {
@@ -61,20 +61,7 @@ u32 FUN_002826dc(const f32 *position, f32 *resolved, s32 strict, s32 tall)
             f32 py = y - planes->normal.y * distance;
             f32 pz = z - planes->normal.z * distance;
 
-            if (planes->enabled != 1) {
-                if (distance < 0.0f) {
-                    continue;
-                }
-                if (reach < magnitude) {
-                    reach = magnitude;
-                }
-                x = px + planes->normal.x * reach;
-                y = py + planes->normal.y * reach;
-                z = pz + planes->normal.z * reach;
-                if (strict == 0) {
-                    result = 1;
-                }
-            } else {
+            if (planes->enabled == 1) {
                 if (closest > -1 && reach < magnitude) {
                     reach = magnitude;
                 }
@@ -85,6 +72,19 @@ u32 FUN_002826dc(const f32 *position, f32 *resolved, s32 strict, s32 tall)
                     closest = i;
                 }
                 if (strict != 0) {
+                    result = 1;
+                }
+            } else {
+                if (distance < 0.0f) {
+                    continue;
+                }
+                if (reach < magnitude) {
+                    reach = magnitude;
+                }
+                x = px + planes->normal.x * reach;
+                y = py + planes->normal.y * reach;
+                z = pz + planes->normal.z * reach;
+                if (strict == 0) {
                     result = 1;
                 }
             }

@@ -250,7 +250,11 @@ void FUN_0028dcf4(int param_1,int param_2)
           do {
             temp_v8 = (unsigned int)*(unsigned short *)(*piVar10 + temp_v5 * 0x20);
             if (temp_v8 == unaff_r11) break;
-            if (temp_v8 != 0xf813) {
+            if (temp_v8 == 0xf813) {
+LAB_0028e528:
+              sentinelLookupGetValue();
+              temp_v5 = temp_v5 + temp_v8;
+            } else {
               if (temp_v4 == temp_v1) break;
               temp_v6 = FUN_002ae424(temp_v8);
               if (temp_v6 != 0) {
@@ -260,11 +264,6 @@ void FUN_0028dcf4(int param_1,int param_2)
                 }
                 temp_v4 = temp_v4 + 1;
               }
-            }
-            else {
-LAB_0028e528:
-              sentinelLookupGetValue();
-              temp_v5 = temp_v5 + temp_v8;
             }
             temp_v5 = temp_v5 + 1;
           } while (temp_v5 < piVar10[3] + 999);

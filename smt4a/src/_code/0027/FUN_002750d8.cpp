@@ -3,6 +3,18 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x110];
+    float f005f170c; /* 0x110 */
+    float f005f1710; /* 0x114 */
+    unsigned int f005f1714; /* 0x118 */
+    float f005f1718; /* 0x11c */
+    float f005f171c; /* 0x120 */
+    float f005f1720; /* 0x124 */
+};
+extern GameStateView g_gameState;
+
 
 int CONCAT44(...);
 int FUN_001bbf0c(void);
@@ -24,12 +36,12 @@ typedef struct {
 
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
-extern float DAT_005f170c; /* 0x5f170c */
-extern float DAT_005f1710; /* 0x5f1710 */
-extern unsigned int DAT_005f1714; /* 0x5f1714 */
-extern float DAT_005f1718; /* 0x5f1718 */
-extern float DAT_005f171c; /* 0x5f171c */
-extern float DAT_005f1720; /* 0x5f1720 */
+
+
+
+
+
+
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
@@ -100,15 +112,15 @@ void FUN_002750d8(int param_1,int param_2)
     temp_v11 = 180.0f;
     *(unsigned char *)(DAT_00581280 + 0xf40) = 1;
     temp_v12 = 0x3c8efa3543c80000;
-    DAT_005f170c = *(float *)(temp_v0 + 0x1c);
-    DAT_005f1710 = *(float *)(temp_v0 + 0x20) + 100.0f;
-    DAT_005f1714 = *(unsigned int *)(temp_v0 + 0x24);
+    g_gameState.f005f170c = *(float *)(temp_v0 + 0x1c);
+    g_gameState.f005f1710 = *(float *)(temp_v0 + 0x20) + 100.0f;
+    g_gameState.f005f1714 = *(unsigned int *)(temp_v0 + 0x24);
     if (*(short *)(temp_v0 + 0x10) != 2) {
       temp_v3 = temp_v6 * 0.017453292f;
       temp_v9 = temp_v3;
       FUN_001bc124();
-      DAT_005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v3 * (float)temp_v12;
-      DAT_005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
+      g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v3 * (float)temp_v12;
+      g_gameState.f005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
       FUN_001bbf0c();
       temp_v14 = *(float *)(temp_v0 + 0x24) + temp_v9 * (float)temp_v12;
     }
@@ -127,20 +139,20 @@ void FUN_002750d8(int param_1,int param_2)
       temp_v9 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = temp_v9 * (float)((unsigned long long)temp_v12 >> 0x20);
       FUN_001bc124();
-      DAT_005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v9 * (float)temp_v12;
-      DAT_005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
+      g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v9 * (float)temp_v12;
+      g_gameState.f005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
       temp_v9 = (float)VectorSignedToFloat(temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v9 = temp_v9 * (float)((unsigned long long)temp_v12 >> 0x20);
       FUN_001bbf0c();
       temp_v14 = *(float *)(temp_v0 + 0x24) + temp_v9 * (float)temp_v12;
     }
-    DAT_005f1720 = temp_v14;
+    g_gameState.f005f1720 = temp_v14;
     if (*(int *)(temp_v0 + 0x3c) != 0) {
-      temp_v15 = DAT_005f170c;
-      fStack_60 = DAT_005f1710;
-      uStack_5c = DAT_005f1714;
-      temp_v13 = DAT_005f1718;
-      fStack_6c = DAT_005f171c;
+      temp_v15 = g_gameState.f005f170c;
+      fStack_60 = g_gameState.f005f1710;
+      uStack_5c = g_gameState.f005f1714;
+      temp_v13 = g_gameState.f005f1718;
+      fStack_6c = g_gameState.f005f171c;
       pfVar1 = &temp_v13;
       FUN_00330108(pfVar1,&temp_v15,temp_v16);
       if (pfVar1 == (float *)0xffffffff) {
@@ -165,16 +177,16 @@ void FUN_002750d8(int param_1,int param_2)
         temp_v6 = temp_v6 * (float)((unsigned long long)temp_v12 >> 0x20);
         temp_v4 = temp_v6;
         FUN_001bc124();
-        DAT_005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v6 * (float)temp_v12;
+        g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v6 * (float)temp_v12;
         FUN_001bbf0c();
         temp_v14 = *(float *)(temp_v0 + 0x24) + temp_v4 * (float)temp_v12;
-        temp_v15 = DAT_005f170c;
-        fStack_60 = DAT_005f1710;
-        uStack_5c = DAT_005f1714;
-        temp_v13 = DAT_005f1718;
-        fStack_6c = DAT_005f171c;
+        temp_v15 = g_gameState.f005f170c;
+        fStack_60 = g_gameState.f005f1710;
+        uStack_5c = g_gameState.f005f1714;
+        temp_v13 = g_gameState.f005f1718;
+        fStack_6c = g_gameState.f005f171c;
         pfVar1 = &temp_v13;
-        DAT_005f1720 = temp_v14;
+        g_gameState.f005f1720 = temp_v14;
         FUN_00330108(pfVar1,&temp_v15,temp_v16);
         if (pfVar1 == (float *)0xffffffff) {
           *(int *)(temp_v0 + 0x28) = (int)temp_v5;
@@ -197,10 +209,10 @@ void FUN_002750d8(int param_1,int param_2)
         temp_v4 = temp_v6;
         FUN_001bc124();
         temp_v11 = (float)temp_v12;
-        DAT_005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v6 * temp_v11;
-        DAT_005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
+        g_gameState.f005f1718 = *(float *)(temp_v0 + 0x1c) + temp_v6 * temp_v11;
+        g_gameState.f005f171c = *(float *)(temp_v0 + 0x20) + temp_v10;
         FUN_001bbf0c();
-        DAT_005f1720 = *(float *)(temp_v0 + 0x24) + temp_v4 * temp_v11;
+        g_gameState.f005f1720 = *(float *)(temp_v0 + 0x24) + temp_v4 * temp_v11;
       }
       else {
         temp_v1 = *(int *)(temp_v0 + 0x1c);
@@ -217,12 +229,12 @@ void FUN_002750d8(int param_1,int param_2)
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);
         temp_v4 = temp_v4 * (float)((unsigned long long)temp_v12 >> 0x20);
         FUN_001bc124();
-        DAT_005f1718 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
-        DAT_005f171c = *(float *)(g_lmapScene + 0x1c) + temp_v10;
+        g_gameState.f005f1718 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
+        g_gameState.f005f171c = *(float *)(g_lmapScene + 0x1c) + temp_v10;
         temp_v4 = (float)VectorSignedToFloat(temp_v0,(unsigned char)(temp_v2 >> 0x16) & 3);
         temp_v4 = temp_v4 * (float)((unsigned long long)temp_v12 >> 0x20);
         FUN_001bbf0c();
-        DAT_005f1720 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
+        g_gameState.f005f1720 = *(float *)(g_lmapScene + 0x1c) + temp_v4 * (float)temp_v12;
       }
     }
   }

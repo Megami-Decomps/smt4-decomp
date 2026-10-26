@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail preserves the original level in another saved register and schedules polynomial arithmetic differently. */
+/* NON_MATCHING: the polynomial now matches (level * 1755 * 2 + level * 2); retail zeroes the base register before the first limit check, keeps the level in a second saved register and caps the polynomial in a temporary before assigning it. */
 #include "common.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/DataTable.h"
@@ -16,12 +16,12 @@ u32 FUN_004cc8d8(u32 id, s32 level)
     const u32 *requirements = (const u32 *)dataTableGetEntries(dataTableGet(9, 1));
     u32 base = 0;
     if (level < gameGetUnlockedCountLimit()) {
-        if (level >= 99) {
-            base = level * level * 3 + (u32)(level * level * level) / 100 + level * 3512 + 99526;
+        if (level < 99) {
+            base = requirements[level - 1];
+        } else {
+            base = level * level * 3 + (u32)(level * level * level) / 100 + level * 1755 * 2 + level * 2 + 99526;
             if (base > 999999)
                 base = 999999;
-        } else {
-            base = requirements[level - 1];
         }
     }
     s32 distance = level - FUN_00184310(id)->level + 1;

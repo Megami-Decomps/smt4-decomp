@@ -1,20 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
+
+struct NnosAddressSpaceManager;
 
 extern "C" {
+extern NnosAddressSpaceManager g_nnosAddressSpaceManager;
+s32 FUN_0042cea0(NnosAddressSpaceManager *manager, u32 address, u32 size);
 
-int FUN_0042cea0(unsigned char *, unsigned int, unsigned int);
-
-extern unsigned char g_nnosAddressSpaceManager; /* 0x643310 */
-
-/* Supplied declaration required: FUN_0042cea0. */
-
-
-void FUN_0042d32c(unsigned int param_1,unsigned int param_2)
-
+void FUN_0042d32c(u32 address, u32 size)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0042cea0(&g_nnosAddressSpaceManager,param_1,param_2);
-  return;
+    FUN_0042cea0(&g_nnosAddressSpaceManager, address, size);
 }
-
-} /* extern "C" */
+}

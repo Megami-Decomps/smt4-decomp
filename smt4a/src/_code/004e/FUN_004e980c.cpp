@@ -101,7 +101,7 @@ void FUN_004e980c(PickOwner *owner, u8 *flags)
         for (s32 i = 0; i < picks; i++) {
             PickState *state = owner->state;
 
-            state->chosenMask |= (u64)1 << (candidates[i].slot + 1);
+            state->chosenMask |= 1 << (candidates[i].slot + 1);
             owner->state->order[i] = candidates[i].slot + 1;
         }
     }

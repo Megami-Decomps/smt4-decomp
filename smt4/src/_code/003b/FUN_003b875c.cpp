@@ -4,6 +4,13 @@
 #include "shard/W6_W6Match3_NodeEnable.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x100];
+    unsigned char f0049fa1c; /* 0x100 */
+};
+extern GameStateView g_gameState;
+
 
 int modelSetVisible(unsigned int, int);
 int uiClampScrollOffset(int, int);
@@ -22,7 +29,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_1_stack;
 
-extern unsigned char DAT_0049fa1c; /* 0x49fa1c */
+
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 extern int FUN_0022b238(int);
@@ -129,7 +136,7 @@ void FUN_003b875c(int param_1)
     }
   }
   else if ((temp_v6 & 0x40000000) == 0) {
-    if ((*(short *)((unsigned char *)&DAT_0049fa1c + 0x64)) != 0) {
+    if ((*(short *)((unsigned char *)&g_gameState.f0049fa1c + 0x64)) != 0) {
       *(unsigned int *)(param_1 + 0x28) = 8;
       *(unsigned int *)(param_1 + 0x2c) = 0;
       return;

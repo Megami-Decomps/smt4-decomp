@@ -1,4 +1,4 @@
-/* NON_MATCHING: the input-rule walk uses indexed addressing and a different disabled-rule branch layout. */
+/* NON_MATCHING: the rule walk now steps pointers like retail; retail reads pollSucceeded once into r5 before the loop (the field is hoisted) and shares one literal base for the held-state and frame-counter globals (DAT_004e3c58-48), ours reloads it per rule and keeps separate literals. */
 #include "common.h"
 
 struct PadReader;
@@ -29,18 +29,20 @@ void FUN_00107934()
 {
     DAT_004650a0.pollSucceeded =
         FUN_0011c6cc(DAT_004650a0.reader, &DAT_004e3c28) != 0;
-    for (u32 index = 0; index < 31; ++index) {
+    const InputRule *rule = DAT_00409ab0;
+    u32 *frames = DAT_004e3c58;
+    for (s32 remaining = 31; remaining != 0; --remaining, ++rule, ++frames) {
         u32 buttons = 0;
-        if (DAT_00409ab0[index].disabled == 0) {
+        if (rule->disabled == 0) {
             if (DAT_004650a0.pollSucceeded <= 0) {
                 continue;
             }
             buttons = DAT_004e3c28.held;
         }
-        if ((buttons & DAT_00409ab0[index].mask) == 0) {
-            DAT_004e3c58[index] = 0;
+        if ((buttons & rule->mask) != 0) {
+            ++*frames;
         } else {
-            ++DAT_004e3c58[index];
+            *frames = 0;
         }
     }
 }

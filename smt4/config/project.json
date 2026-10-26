@@ -6787,12 +6787,12 @@
     },
     {
       "address": "0x123b88",
-      "function": "FUN_00123b88",
+      "function": "gfxReleaseEntryBlocks",
       "module": "_code",
-      "object": "build/obj/_code/0012/FUN_00123b88.o",
+      "object": "build/obj/_code/0012/gfxReleaseEntryBlocks.o",
       "size": 228,
-      "source": "src/_code/0012/FUN_00123b88.cpp",
-      "target": "orig/target/_code/0012/FUN_00123b88.o",
+      "source": "src/_code/0012/gfxReleaseEntryBlocks.cpp",
+      "target": "orig/target/_code/0012/gfxReleaseEntryBlocks.o",
       "thumb": false
     },
     {
@@ -20665,12 +20665,12 @@
     },
     {
       "address": "0x1954b0",
-      "function": "FUN_001954b0",
+      "function": "asdMdlBanksReset",
       "module": "_code",
-      "object": "build/obj/_code/0019/FUN_001954b0.o",
+      "object": "build/obj/_code/0019/asdMdlBanksReset.o",
       "size": 92,
-      "source": "src/_code/0019/FUN_001954b0.cpp",
-      "target": "orig/target/_code/0019/FUN_001954b0.o",
+      "source": "src/_code/0019/asdMdlBanksReset.cpp",
+      "target": "orig/target/_code/0019/asdMdlBanksReset.o",
       "thumb": false
     },
     {
@@ -35344,12 +35344,12 @@
     },
     {
       "address": "0x2340e4",
-      "function": "timeInitializeActiveState",
+      "function": "_ZN17RequestParametersC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0023/timeInitializeActiveState.o",
+      "object": "build/obj/_code/0023/RequestParameters__RequestParameters.o",
       "size": 64,
-      "source": "src/_code/0023/timeInitializeActiveState.cpp",
-      "target": "orig/target/_code/0023/timeInitializeActiveState.o",
+      "source": "src/_code/0023/RequestParameters__RequestParameters.cpp",
+      "target": "orig/target/_code/0023/RequestParameters__RequestParameters.o",
       "thumb": false
     },
     {
@@ -61060,12 +61060,12 @@
     },
     {
       "address": "0x2c66cc",
-      "function": "rt_vec_dtor",
+      "function": "__aeabi_vec_dtor",
       "module": "_code",
-      "object": "build/obj/_code/002c/rt_vec_dtor.o",
+      "object": "build/obj/_code/002c/__aeabi_vec_dtor.o",
       "size": 34,
-      "source": "src/_code/002c/rt_vec_dtor.cpp",
-      "target": "orig/target/_code/002c/rt_vec_dtor.o",
+      "source": "src/_code/002c/__aeabi_vec_dtor.cpp",
+      "target": "orig/target/_code/002c/__aeabi_vec_dtor.o",
       "thumb": true
     },
     {
@@ -79894,22 +79894,22 @@
     },
     {
       "address": "0x33b5a0",
-      "function": "FUN_0033b5a0",
+      "function": "_ZN18SceneCameraElementC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_0033b5a0.o",
+      "object": "build/obj/_code/0033/SceneCameraElement__SceneCameraElement.o",
       "size": 28,
-      "source": "src/_code/0033/FUN_0033b5a0.cpp",
-      "target": "orig/target/_code/0033/FUN_0033b5a0.o",
+      "source": "src/_code/0033/SceneCameraElement__SceneCameraElement.cpp",
+      "target": "orig/target/_code/0033/SceneCameraElement__SceneCameraElement.o",
       "thumb": false
     },
     {
       "address": "0x33b5bc",
-      "function": "FUN_0033b5bc",
+      "function": "_ZN18SceneCameraElementD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_0033b5bc.o",
+      "object": "build/obj/_code/0033/SceneCameraElement__dtor_SceneCameraElement.o",
       "size": 28,
-      "source": "src/_code/0033/FUN_0033b5bc.cpp",
-      "target": "orig/target/_code/0033/FUN_0033b5bc.o",
+      "source": "src/_code/0033/SceneCameraElement__dtor_SceneCameraElement.cpp",
+      "target": "orig/target/_code/0033/SceneCameraElement__dtor_SceneCameraElement.o",
       "thumb": false
     },
     {
@@ -81549,12 +81549,12 @@
     },
     {
       "address": "0x348784",
-      "function": "vecContainerDestroy",
+      "function": "_ZN22SceneCameraElementPairD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0034/vecContainerDestroy.o",
+      "object": "build/obj/_code/0034/SceneCameraElementPair__dtor_SceneCameraElementPair.o",
       "size": 36,
-      "source": "src/_code/0034/vecContainerDestroy.cpp",
-      "target": "orig/target/_code/0034/vecContainerDestroy.o",
+      "source": "src/_code/0034/SceneCameraElementPair__dtor_SceneCameraElementPair.cpp",
+      "target": "orig/target/_code/0034/SceneCameraElementPair__dtor_SceneCameraElementPair.o",
       "thumb": false
     },
     {
@@ -85292,22 +85292,22 @@
     },
     {
       "address": "0x357728",
-      "function": "nn_os_Thread_Thread_sub_object",
+      "function": "_ZN10NnOsThreadD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0035/nn_os_Thread_Thread_sub_object.o",
+      "object": "build/obj/_code/0035/NnOsThread__dtor_NnOsThread.o",
       "size": 44,
-      "source": "src/_code/0035/nn_os_Thread_Thread_sub_object.cpp",
-      "target": "orig/target/_code/0035/nn_os_Thread_Thread_sub_object.o",
+      "source": "src/_code/0035/NnOsThread__dtor_NnOsThread.cpp",
+      "target": "orig/target/_code/0035/NnOsThread__dtor_NnOsThread.o",
       "thumb": false
     },
     {
       "address": "0x357754",
-      "function": "FUN_00357754",
+      "function": "_ZN10NnOsHandleD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00357754.o",
+      "object": "build/obj/_code/0035/NnOsHandle__dtor_NnOsHandle.o",
       "size": 40,
-      "source": "src/_code/0035/FUN_00357754.cpp",
-      "target": "orig/target/_code/0035/FUN_00357754.o",
+      "source": "src/_code/0035/NnOsHandle__dtor_NnOsHandle.cpp",
+      "target": "orig/target/_code/0035/NnOsHandle__dtor_NnOsHandle.o",
       "thumb": false
     },
     {
@@ -87662,12 +87662,12 @@
     },
     {
       "address": "0x360264",
-      "function": "listDetachAllNodes",
+      "function": "_ZN11AsdNodeListD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0036/listDetachAllNodes.o",
+      "object": "build/obj/_code/0036/AsdNodeList__dtor_AsdNodeList.o",
       "size": 48,
-      "source": "src/_code/0036/listDetachAllNodes.cpp",
-      "target": "orig/target/_code/0036/listDetachAllNodes.o",
+      "source": "src/_code/0036/AsdNodeList__dtor_AsdNodeList.cpp",
+      "target": "orig/target/_code/0036/AsdNodeList__dtor_AsdNodeList.o",
       "thumb": false
     },
     {
@@ -96089,12 +96089,12 @@
     },
     {
       "address": "0x393340",
-      "function": "FUN_00393340",
+      "function": "_ZN7AocMenuC1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0039/FUN_00393340.o",
+      "object": "build/obj/_code/0039/AocMenu__AocMenu.o",
       "size": 136,
-      "source": "src/_code/0039/FUN_00393340.cpp",
-      "target": "orig/target/_code/0039/FUN_00393340.o",
+      "source": "src/_code/0039/AocMenu__AocMenu.cpp",
+      "target": "orig/target/_code/0039/AocMenu__AocMenu.o",
       "thumb": false
     },
     {

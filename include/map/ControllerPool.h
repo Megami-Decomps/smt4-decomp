@@ -70,18 +70,4 @@ typedef char ControllerLifecycleLayoutCheck[sizeof(ControllerVtable) == 0xc &&
     sizeof(ControllerPool) == 0xa0 ? 1 : -1];
 
 
-/* The two controller classes this pool creates (0xa4 and 0xbc bytes); both begin with a Controller. */
-class ControllerFirstKind : public Controller {
-public:
-    ControllerFirstKind();
-    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
-    u8 unk78[0xa4 - 0x78];
-};
-class ControllerSecondKind : public Controller {
-public:
-    ControllerSecondKind();
-    static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
-    u8 unk78[0xbc - 0x78];
-};
-
 #endif

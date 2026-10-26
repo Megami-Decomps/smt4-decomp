@@ -1,4 +1,4 @@
-/* NON_MATCHING: the null checks on the name come out as `cmp; beq` with the argument moved afterwards, where retail tests the argument register itself (`movs r0, r6`) and loads the table field after the test; the frame setup and the hoisted slot base register differ accordingly */
+/* NON_MATCHING: null-check/branch shapes now match retail; remaining: the frame setup (retail `sub sp` after the table load), `work`/`path` held in a second register (`mov r6,r8` / `mov r6,sp`) where the build keeps them, and the hoisted slot base register */
 #include "battle/BtlEffectLoad.h"
 
 extern "C" {
@@ -20,6 +20,28 @@ void FUN_002276f8(BtlEffectWork *work);
 u32 FUN_00246644(u32 first, u32 second, u32 third);
 void asdLoadFileAsyncSimple(const char *path, void **resource, s32 mode);
 
+static __inline bool isIgnoredName(const char *name)
+{
+    return name != NULL && libc_strcmp(name, g_btlEffect.ignoredName) == 0;
+}
+
+static __inline bool isIgnoredNameB(const char *name)
+{
+    return name != NULL && libc_strcmp(name, g_btlEffect.ignoredNameB) == 0;
+}
+
+static __inline bool hasIgnoredPrefix(const char *name)
+{
+    return name != NULL && libc_strncmp(name, g_btlEffect.ignoredPrefix, libc_strlen(g_btlEffect.ignoredPrefix)) == 0;
+}
+
+static __inline void selectNumberedEffect(BtlEffectWork *work, s32 number)
+{
+    FUN_002276f8(work);
+    work->numberedEffect = FUN_00246644(number & 0xff, 7, 0);
+    work->numberedIndex = number;
+}
+
 /* Resolves the effects a battle unit asks for: names the battle ignores are skipped, numbered ones
  * select the numbered effect, any other name has its effect file loaded into the unit's slot. */
 u32 FUN_003db7dc(BtlEffectWork *work)
@@ -33,11 +55,9 @@ u32 FUN_003db7dc(BtlEffectWork *work)
         char file[128];
 
         if (libc_strlen(name) != 0 && libc_strcmp(name, "0") != 0) {
-            if (libc_strcmp(DAT_0040090c, name) != 0 && (name == NULL || libc_strcmp(name, g_btlEffect.ignoredName) != 0)) {
-                if (name != NULL) {
-                    if (libc_strncmp(name, g_btlEffect.ignoredPrefix, libc_strlen(g_btlEffect.ignoredPrefix)) == 0) {
-                        continue;
-                    }
+            if (libc_strcmp(DAT_0040090c, name) != 0 && !isIgnoredName(name)) {
+                if (hasIgnoredPrefix(name)) {
+                    continue;
                 }
                 if (name != NULL) {
                     if (libc_strncmp(name, g_btlEffect.numberedPrefix, libc_strlen(g_btlEffect.numberedPrefix)) == 0) {
@@ -45,9 +65,7 @@ u32 FUN_003db7dc(BtlEffectWork *work)
                         for (s32 n = 0; n < 11; n++) {
                             textFormatBuffer(file, DAT_00400904, g_btlEffect.numberedPrefix, n);
                             if (libc_strcmp(file, name) == 0) {
-                                FUN_002276f8(work);
-                                work->numberedEffect = FUN_00246644(n & 0xff, 7, 0);
-                                work->numberedIndex = n;
+                                selectNumberedEffect(work, n);
                                 found = true;
                                 break;
                             }
@@ -57,7 +75,7 @@ u32 FUN_003db7dc(BtlEffectWork *work)
                         }
                     }
                 }
-                if (name == NULL || libc_strcmp(name, g_btlEffect.ignoredNameB) != 0) {
+                if (!isIgnoredNameB(name)) {
                     memClear(path, 0x80);
                     memClear(file, 0x80);
                     textFormatBuffer(file, DAT_004008c4, name);

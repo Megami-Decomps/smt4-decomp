@@ -7,7 +7,7 @@ extern "C" {
 /* A party record (only the fields read here): its id is the halfword at 0x12C and its flags the word at 0x130. */
 typedef struct PartnerUnit {
     /* 0x000 */ u8 unk000[0x12C];
-    /* 0x12C */ s16 id;
+    /* 0x12C */ u16 id;
     /* 0x12E */ u8 unk12e[2];
     /* 0x130 */ u32 flags;
 } PartnerUnit;
@@ -66,7 +66,7 @@ void FUN_004bd794(PartnerScreen *screen, u8 mode)
     screen->mode = mode;
     fillThreeWordsWithByte(screen->fill, 1);
     s32 count = 0;
-    s16 selectedId = 0;
+    u16 selectedId = 0;
     PartnerUnit *selected = saveSlotFindSelected();
 
     if (selected != NULL) {

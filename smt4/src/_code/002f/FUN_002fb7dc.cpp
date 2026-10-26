@@ -1,4 +1,4 @@
-/* NON_MATCHING: state dispatch uses comparisons instead of a jump table; vector registers differ. */
+/* NON_MATCHING: jump table now matches (labels 0..5); the vector copies use ldm/stm where retail uses ldrd/strd and the map ternaries share a zero register differently. */
 #include "map/lmapMain.h"
 
 extern "C" {
@@ -72,6 +72,9 @@ u32 FUN_002fb7dc()
         break;
     case 2:
         FUN_002d508c(g_lmapMainState);
+        break;
+    case 3:
+    case 4:
         break;
     case 5:
         transition->distance = 200.0f;

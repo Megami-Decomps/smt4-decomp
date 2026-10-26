@@ -1,4 +1,4 @@
-/* NON_MATCHING: aggregate clip copying and argument stores differ from retail's scalar sequence. */
+/* NON_MATCHING: member-wise clip copy and sprite lookup now match; only the scheduling of the sprite index arithmetic against the argument stores differs. */
 #include "shard/S1ListPanel.h"
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 #include <stddef.h>
@@ -45,6 +45,7 @@ void FUN_002b04e8(u32 flags, u32 table, s32 image, PositionedLayoutPosition posi
                   const SpriteClipRectangle *clip)
 {
     SpriteFileView *file = asdTMTexTableCallFileA(table, image);
+    SpriteImageView *sprite = &(*file->images)[image % 1000];
     SpriteDrawArguments arguments;
     arguments.flags = flags;
     arguments.position = position;
@@ -55,10 +56,13 @@ void FUN_002b04e8(u32 flags, u32 table, s32 image, PositionedLayoutPosition posi
     arguments.scaleY = 1;
     if (clip != 0) {
         arguments.flags |= 0x28000;
-        arguments.clip = *clip;
-        arguments.height = clip->bottom - clip->top;
-        arguments.width = clip->right - clip->left;
+        arguments.clip.left = clip->left;
+        arguments.clip.right = clip->right;
+        arguments.clip.top = clip->top;
+        arguments.clip.bottom = clip->bottom;
+        arguments.height = arguments.clip.bottom - arguments.clip.top;
+        arguments.width = arguments.clip.right - arguments.clip.left;
     }
-    FUN_002af63c(file, &(*file->images)[image % 1000], &arguments);
+    FUN_002af63c(file, sprite, &arguments);
 }
 }

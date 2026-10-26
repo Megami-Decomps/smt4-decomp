@@ -18,7 +18,7 @@ BtlEntry *btlFindFirstActiveUnit(BtlMainState *);
 void FUN_0023c154(BtlMainState *, s32, s32, s32, ActionKindSelection *);
 }
 
-static void setPendingAction(BtlMainState *battle, s8 kind)
+static void setPendingAction(BtlMainState *battle, u8 kind)
 {
     static_cast<ActionStateChannel *>(g_btlAction.data)[battle->actionState.index].pending = kind;
 }

@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00215904(void);
+int mapRndMazeResetHandles(void);
 int sysMemClear(unsigned char *, int);
 
 extern unsigned int g_gameState; /* 0x5f15fc */
@@ -423,7 +423,7 @@ extern unsigned int DAT_005f1ca0; /* 0x5f1ca0 */
 extern unsigned int DAT_005f1ca4; /* 0x5f1ca4 */
 
 extern int gameFlagsGetBlock(unsigned int *);
-/* Supplied declaration required: FUN_00215904. */
+/* Supplied declaration required: mapRndMazeResetHandles. */
 /* Supplied declaration required: sysMemClear. */
 extern unsigned long long FUN_00324f74(int);
 
@@ -816,7 +816,7 @@ void FUN_00363c58(int param_1)
   DAT_005f1c84 = temp_v3;
   DAT_005f1c88 = temp_v3;
   DAT_005f1c8c = temp_v3;
-  FUN_00215904();
+  mapRndMazeResetHandles();
   DAT_005f1a9c = 0;
   DAT_005f1aca = 0;
   DAT_005f1c92 = 0;

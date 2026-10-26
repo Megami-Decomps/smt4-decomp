@@ -12,8 +12,8 @@ extern "C" void FUN_003409f8(const EffectBoundsSource *source, f32 *scale, f32 *
         offset[1] = 0.0f;
         return;
     }
-    EffectBoundsCustomSize *size = source->custom->size;
     EffectBoundsImage *image = source->binding->image;
+    EffectBoundsCustomSize *size = source->custom->size;
     f32 imageWidth = (f32)size->width;
     f32 imageHeight = (f32)size->height;
     f32 width = (f32)image->width + fabsf(source->marginX) * 2.0f;

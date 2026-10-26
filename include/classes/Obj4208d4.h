@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-extern "C" int asdMemFreeNonNull(void *block);
+extern "C" void asdMemFreeNonNull(void *block);
 
 struct Obj4208d4Vec2 {
     f32 x, y;

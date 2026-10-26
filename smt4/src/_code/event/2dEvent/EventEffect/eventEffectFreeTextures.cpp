@@ -1,4 +1,4 @@
-/* NON_MATCHING: texture-array addressing, paired loads, and release-loop registers differ. */
+/* NON_MATCHING: addressing, loads and call shapes now match retail; only callee-saved register numbering differs (retail: effect r7, textures r9, per-loop pointers r5/r6). */
 #include "event/2dEvent/EventEffectIV.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -14,23 +14,22 @@ void eventEffectFreeTextures(void)
 {
     EventEffectGlobalsIV *eventEffectPtr = &g_eventEffect;
     EventEffectWorkIV *effect = eventEffectPtr->effect;
+    EventFilterTexture *textures = eventEffectPtr->textures;
     for (s32 index = 0; index < 2; ++index) {
-        EventFilterTexture *texture = &eventEffectPtr->textures[index];
-        if (texture->requested) {
-            if (asdTMTexTableNodeIsLoaded(texture->table, texture->node)) {
-                asdTMTexTableReleaseNode(texture->table, texture->node);
+        if (textures[index].requested) {
+            if (asdTMTexTableNodeIsLoaded(textures[index].table, textures[index].node)) {
+                asdTMTexTableReleaseNode(textures[index].table, textures[index].node);
             }
-            texture->requested = 0;
+            textures[index].requested = 0;
         }
     }
     for (s32 index = 0; index < 2; ++index) {
-        EventFilterTexture *texture = &eventEffectPtr->textures[index];
         // The byte following node ownership tracks the table entry's reference.
-        if (texture->unk09[0]) {
-            if (textureGetIndexedResource(texture->table) != NULL) {
-                asdTMTexTableFreeEntry(texture->table);
+        if (textures[index].unk09[0]) {
+            if (textureGetIndexedResource(textures[index].table) != NULL) {
+                asdTMTexTableFreeEntry(textures[index].table);
             }
-            texture->unk09[0] = 0;
+            textures[index].unk09[0] = 0;
         }
     }
     jobStop(effect->job, 0);

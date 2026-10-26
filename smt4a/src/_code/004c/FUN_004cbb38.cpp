@@ -59,13 +59,14 @@ extern const char DAT_0052c7c0[];
 /* The slot holding the pair's record (and the pair's id or flag), or -1. */
 static inline s32 findPairSlot(const SavedPair *pair)
 {
-    for (s32 i = 0; i < 24; i++) {
+    s32 i;
+    for (i = 0; i < 24; i++) {
         SlotRecordId *record = gameGetSlotRecord(i);
         if (record != NULL && record->id == pair->recordId) {
             if (i >= 0 && (recordContainsPairedId(record, pair->pairedId) != 0 || pair->flag != 0)) {
                 return i;
             }
-            return -1;
+            break;
         }
     }
     return -1;

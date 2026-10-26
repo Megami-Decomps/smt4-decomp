@@ -88,7 +88,7 @@ typedef struct {
     unsigned int sp80; /* 0x80: local_80 */
 } param_3_stack;
 
-extern signed char DAT_00435de0; /* 0x435de0 */
+extern signed char g_partyMenuListState; /* 0x435de0 */
 extern signed char DAT_00435de1; /* 0x435de1 */
 extern unsigned int DAT_00435de4; /* 0x435de4 */
 extern int DAT_00435de8; /* 0x435de8 */
@@ -242,7 +242,7 @@ void FUN_0019a4f4(int param_1,unsigned int param_2,unsigned int param_3)
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
   temp_v33 = (char *)(param_1 + 0x3218);
   if ((*(unsigned int *)(temp_v5 + 0x44a8) & 0x40) != 0) {
-    if (DAT_00435de0 == '\0') {
+    if (g_partyMenuListState == '\0') {
       if ((*(int *)(param_1 + 0x305c) == 0) && (temp_v5 = gameFlagIsSet(0x410), temp_v5 != 0)) {
         temp_v6 = gameGetPlayerData();
         temp_v19 = *(short *)(temp_v6 + 2) != 0;
@@ -265,10 +265,10 @@ void FUN_0019a4f4(int param_1,unsigned int param_2,unsigned int param_3)
       FUN_0029eb5c(temp_v33,DAT_00435de8 + 1);
     }
 LAB_0019a5e0:
-    DAT_00435de0 = 1;
+    g_partyMenuListState = 1;
   }
   else {
-    if (DAT_00435de0 != '\0') {
+    if (g_partyMenuListState != '\0') {
       if (*(int *)(param_1 + 0x305c) != 0) {
         temp_v7 = param_1 + *(int *)(param_1 + 0x305c) * 0x10;
         temp_v5 = 1;
@@ -338,7 +338,7 @@ LAB_0019a5e0:
       param_3 = 6;
       FUN_0029f848(temp_v33,temp_v5,6,1);
     }
-    DAT_00435de0 = 0;
+    g_partyMenuListState = 0;
   }
   temp_v5 = reinterpret_cast<int>(btlGetMainState());
   temp_v34 = param_1 + 0x3344;

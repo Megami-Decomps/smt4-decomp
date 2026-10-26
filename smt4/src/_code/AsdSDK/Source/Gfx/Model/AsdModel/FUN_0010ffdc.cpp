@@ -17,8 +17,8 @@ typedef struct RegisterInfo {
     u32 unused;   /* 0xc */
 } RegisterInfo;
 
-extern u32 *DAT_00471b94;
-extern u32 DAT_00471b9c;
+extern u32 *g_modelWorkHandle;
+extern u32 g_modelWorkThread;
 extern u8 DAT_004e9db8;
 extern u8 FUN_00123cb0;
 extern u8 LAB_00123c78;
@@ -30,7 +30,7 @@ extern u32 FUN_002bcc60(u32 *dst, CallbackList *callbacks, void *main, void **co
 extern void FUN_002c526c(void);
 extern void FUN_0011cd24(void);
 
-/* Fetches DAT_00471b94, then registers the callbacks for DAT_00471b9c. */
+/* Fetches g_modelWorkHandle, then registers the callbacks for g_modelWorkThread. */
 s32 FUN_0010ffdc(void)
 {
     u32 *value = NULL;
@@ -40,7 +40,7 @@ s32 FUN_0010ffdc(void)
     RegisterInfo info;
 
     if ((s32)(result & 0x80000000) >= 0) {
-        DAT_00471b94 = value;
+        g_modelWorkHandle = value;
     }
     if ((s32)(result & 0x80000000) >= 0) {
         context = (void *)FUN_0011cd24;
@@ -52,7 +52,7 @@ s32 FUN_0010ffdc(void)
         info.id = 0x5109d500;
         info.priority = -2;
         info.unused = 0;
-        if (FUN_002bcc60(&DAT_00471b9c, &callbacks, &FUN_00123cb0, &context, info) < 0) {
+        if (FUN_002bcc60(&g_modelWorkThread, &callbacks, &FUN_00123cb0, &context, info) < 0) {
             FUN_002c526c();
         }
     }

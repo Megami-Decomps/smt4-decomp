@@ -1,12 +1,10 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+extern u8 DAT_004def48[];
 
-
-int FUN_002bcf10(int param_1)
-
+u8 *FUN_002bcf10(s32 index)
 {
-  return param_1 * 0x60 + 0x4def48;
+    return &DAT_004def48[index * 0x60];
 }
-
-} /* extern "C" */
+}

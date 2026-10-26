@@ -3,6 +3,13 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x3b8];
+    float f005f19b4; /* 0x3b8 */
+};
+extern GameStateView g_gameState;
+
 
 int VectorFloatToUnsigned(double, int);
 int VectorUnsignedToFloat(unsigned int, int);
@@ -51,7 +58,7 @@ extern unsigned int DAT_00536d18; /* 0x536d18 */
 extern unsigned int DAT_00536d1c; /* 0x536d1c */
 extern unsigned int DAT_00536d20; /* 0x536d20 */
 extern int g_lmapScene; /* 0x581288 */
-extern float DAT_005f19b4; /* 0x5f19b4 */
+
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_FABS_4_DEFINED
@@ -164,11 +171,11 @@ unsigned int FUN_00367fac(void)
     temp_v30 = temp_v16 * temp_v13 * temp_v14 - temp_v15 * temp_v11;
     temp_v26 = temp_v15 * temp_v13 + temp_v16 * temp_v11 * temp_v14;
     temp_v29 = temp_v16 * temp_v11 + temp_v15 * temp_v13 * temp_v14;
-    temp_v7 = DAT_005f19b4 * -0.5f;
+    temp_v7 = g_gameState.f005f19b4 * -0.5f;
     temp_v27 = 0;
     temp_v31 = 0;
     temp_v35 = 0;
-    temp_v11 = DAT_005f19b4;
+    temp_v11 = g_gameState.f005f19b4;
     temp_v21 = temp_v7;
     temp_v22 = temp_v17;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(afStack_140,&temp_v24,&temp_v21);

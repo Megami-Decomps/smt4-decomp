@@ -1,4 +1,4 @@
-/* NON_MATCHING: the 7th argument (4th word on the stack; the 6th is unused) is passed through VFP (vldr/vstr) in the build but through r7 (ldr, stm sp, {r5, r7}) in retail; the hash chain walk and the rest match. */
+/* NON_MATCHING: the 7th argument (4th word on the stack; the 6th is unused) is passed through VFP (vldr/vstr) in the build but through r7 (ldr, stm sp, {r5, r7}) in retail, which also keeps the loop id in r8; the hash chain walk and the copy-target address now match. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 extern "C" {
@@ -13,7 +13,7 @@ void *FUN_00196068(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32
 {
     // The linked-list pointer follows the shared buffer prefix; do not grow that prefix.
     struct BufferNode { AsdCmdBuffer buffer; BufferNode *next; };
-    AsdCmdRecord *record = &entries[index];
+    void *target = &entries[index].unk10;
     BufferNode *node = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
 
     if (node != NULL) {
@@ -29,7 +29,7 @@ void *FUN_00196068(u32 handle, u32 first, AsdCmdRecord *entries, u32 second, s32
         node->buffer.writeOffset = g_commandBufferCursor - node->buffer.start;
     }
     FUN_001a9f08(&node->buffer, first, entries, second, index, third);
-    return &record->unk10;
+    return target;
 }
 
 } /* extern "C" */

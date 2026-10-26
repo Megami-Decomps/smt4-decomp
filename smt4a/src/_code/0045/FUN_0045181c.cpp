@@ -1,42 +1,48 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0045181c` (_code @ 0x45181c, 0x74 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of a raw draft; retail lays out the flag-2 arm inline with the epilogue and the shared release call after the other arm (call block cross-jumped, &storage->block in r5); the build orders the blocks differently. */
+#include "common.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
 
-extern "C" {
-
-typedef int romwright_code(...);
-extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
-
-
-void FUN_0045181c(int *param_1)
-
-{
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  
-  temp_v2 = *param_1;
-  if ((*(unsigned int *)(temp_v2 + 8) & 1) == 0) {
-    temp_v1 = *(int *)(temp_v2 + 0xc);
-    if ((*(unsigned int *)(temp_v2 + 8) & 2) != 0) {
-      if (temp_v1 == 0) {
-        return;
-      }
-      temp_v0 = *(int *)(temp_v2 + 0x20);
-    }
-    else {
-      if (temp_v1 == 0) {
-        return;
-      }
-      temp_v0 = *(int *)(temp_v2 + 0x20);
-    }
-    if (temp_v0 != 0) {
-      (*g_gfxReleaseCallback)(temp_v0,0x102,temp_v1,*(unsigned int *)(temp_v2 + 0x1c));
-      *(unsigned int *)(temp_v2 + 0x1c) = 0;
-    }
-    *(unsigned int *)(temp_v2 + 0xc) = 0;
-  }
-  return;
+namespace {
+struct ReleasableStorage {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ u32 flags;
+    /* 0x0C */ u32 address;
+    /* 0x10 */ u8 unk10[0xc];
+    /* 0x1C */ void *block;
+    /* 0x20 */ u32 kind;
+};
+struct ReleasableHandle {
+    ReleasableStorage *storage;
+};
 }
 
-} /* extern "C" */
+extern "C" {
+extern DriverTextureRelease *g_gfxReleaseCallback;
+
+static __inline void driverReleaseBlock(u32 kind, u32 address, void **block)
+{
+    g_gfxReleaseCallback(kind, 0x102, address, *block);
+    *block = NULL;
+}
+
+// Hand a storage block back to the driver unless the storage is flagged as externally owned.
+void FUN_0045181c(ReleasableHandle *handle)
+{
+    ReleasableStorage *storage = handle->storage;
+    if ((storage->flags & 1) == 0) {
+        u32 address = storage->address;
+        if ((storage->flags & 2) == 0) {
+            if (address == 0)
+                return;
+            if (storage->kind != 0)
+                driverReleaseBlock(storage->kind, address, &storage->block);
+        } else {
+            if (address == 0)
+                return;
+            if (storage->kind != 0)
+                driverReleaseBlock(storage->kind, address, &storage->block);
+        }
+        storage->address = 0;
+    }
+}
+}

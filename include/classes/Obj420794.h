@@ -7,7 +7,7 @@
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 extern "C" {
-int asdMemFreeNonNull(void *block);
+void asdMemFreeNonNull(void *block);
 int bufferHandleRelease(u32 handle);
 }
 

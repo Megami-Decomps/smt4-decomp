@@ -84,7 +84,9 @@ void FUN_00195af0(void)
     if (state->flags & 0x200)
         state->secondaryActive = state->secondaryBound != 0;
     layout->invalid = 0;
-    if (state->baseBound != 0) {
+    if (state->baseBound == 0) {
+        FUN_001aa030(0x10);
+    } else {
         if (DAT_005b4430->baseBuffer != NULL) {
             VertexSource *source = DAT_005b4430->baseBuffer->source;
             layout->baseAddress = FUN_001a2634(source->address);
@@ -93,8 +95,6 @@ void FUN_00195af0(void)
             layout->invalid = 1;
             FUN_001aa030(0x10);
         }
-    } else {
-        FUN_001aa030(0x10);
     }
     for (s32 i = 0; i < 16; i++) {
         if (attributes[i].enabled != 0) {

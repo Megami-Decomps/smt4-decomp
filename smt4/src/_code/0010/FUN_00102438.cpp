@@ -15,7 +15,7 @@ extern "C" {
 
 extern Fader DAT_004d9758[2];
 
-f32 mathInterpolateTimed(s32 duration, s32 frame, f32 from, f32 to);
+f32 mathInterpolateTimed(s32 duration, u32 frame, f32 from, f32 to);
 
 /* Step both faders by one frame. */
 void FUN_00102438(void)
@@ -39,9 +39,7 @@ void FUN_00102438(void)
             fader->value = 1.0f;
             continue;
         }
-        if (fader->duration > frame) {
-            fader->value = mathInterpolateTimed(fader->duration, frame, from, to);
-        } else {
+        if (fader->duration <= frame) {
             if (fader->state == 2) {
                 fader->frame = 0;
                 fader->state = 0;
@@ -50,6 +48,8 @@ void FUN_00102438(void)
                 fader->state = 3;
             }
             fader->value = to;
+        } else {
+            fader->value = mathInterpolateTimed(fader->duration, frame, from, to);
         }
     }
 }

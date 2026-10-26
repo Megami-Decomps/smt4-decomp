@@ -1,29 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00129084` (_code @ 0x129084, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/snd/Initialization.h"
+#include "shard/Dspsnd.h"
 
 extern "C" {
-
-extern unsigned char DAT_0044e7c0; /* 0x44e7c0 */
-extern unsigned char DAT_0044e7c1; /* 0x44e7c1 */
-extern unsigned char DAT_0044e7c2; /* 0x44e7c2 */
-extern unsigned char DAT_0044e7c8; /* 0x44e7c8 */
-extern unsigned char g_dspsndState; /* 0x4e6f64 */
-
-extern void nn_os_LightEvent_Initialize(unsigned int, unsigned char);
-extern void nn_snd_CTR_Dspsnd_Finalize(unsigned int, unsigned char);
-
+extern NnSndInitialization DAT_0044e7c0;
+extern DspsndState g_dspsndState;
+void nn_os_LightEvent_Initialize(void *event, s32 autoClear);
+void nn_snd_CTR_Dspsnd_Finalize(DspsndState *state, s32 flag);
 
 void FUN_00129084(void)
-
 {
-  if ((DAT_0044e7c0 & ~DAT_0044e7c1) != 0) {
-    nn_os_LightEvent_Initialize((unsigned int)&DAT_0044e7c8,1);
-    DAT_0044e7c2 = 1;
-    nn_snd_CTR_Dspsnd_Finalize((unsigned int)&g_dspsndState,1);
-    DAT_0044e7c1 = 1;
-  }
-  return;
+    if (((s8)DAT_0044e7c0.initialized & ~(s8)DAT_0044e7c0.unk01) != 0) {
+        nn_os_LightEvent_Initialize((u8 *)&DAT_0044e7c0 + 8, 1);
+        DAT_0044e7c0.unk02 = 1;
+        nn_snd_CTR_Dspsnd_Finalize(&g_dspsndState, 1);
+        DAT_0044e7c0.unk01 = 1;
+    }
 }
-
-} /* extern "C" */
+}

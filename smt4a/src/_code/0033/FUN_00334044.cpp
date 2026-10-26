@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses different session-field base adjustments and shares its constant-return tails differently. */
+/* NON_MATCHING: unk1381 is an s8 (retail splits its offset as +4864/[129]); the constant-return tails (mov r0,#3 shared by three branches) are laid out differently. */
 #include "shard/Shard0033.h"
 
 extern "C" {

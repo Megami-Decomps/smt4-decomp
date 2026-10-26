@@ -32,6 +32,7 @@ void FUN_0026c214(void)
     s32 a = FUN_00282e70();
     s32 b = FUN_00282ccc();
     u32 preset;
+    bool apply = true;
 
     if (a != 0) {
         if (plain) {
@@ -45,7 +46,6 @@ void FUN_0026c214(void)
         } else {
             preset = panel->unk42 != 0 ? 0x1C : 0x1B;
         }
-        buttonHelpSetPreset(preset);
     } else if (b < 0) {
         if (plain) {
             if (panel->panelState != PARTY_MODE_DIALOG) {
@@ -58,14 +58,12 @@ void FUN_0026c214(void)
         } else {
             preset = panel->unk42 != 0 ? 0x26 : 0x25;
         }
-        buttonHelpSetPreset(preset);
     } else if (plain) {
         if (panel->panelState != PARTY_MODE_DIALOG) {
             preset = panel->unk42 != 0 ? 0x24 : 0x23;
         } else {
             preset = panel->unk42 != 0 ? 0xB6 : 0xB5;
         }
-        buttonHelpSetPreset(preset);
     } else {
         if (panel->panelState != PARTY_MODE_FIELD) {
             preset = panel->unk42 != 0 ? 0x22 : 0x21;
@@ -74,17 +72,19 @@ void FUN_0026c214(void)
         }
         buttonHelpSetPreset(preset);
         if (FUN_0029dfa8() != 0 && campCecIsActive() != 0) {
-            buttonHelpSetPreset(panel->unk42 == 0 ? 0xE3 : 0xCC);
+            preset = panel->unk42 == 0 ? 0xE3 : 0xCC;
+        } else {
+            apply = false;
         }
+    }
+    if (apply) {
+        buttonHelpSetPreset(preset);
     }
     if (panel->unk17F0 != 0) {
         FUN_002b8454(3, 0x12, 0, 1);
-        return;
+    } else if (buttonHelpGetEntryValue(3) == 0) {
+        FUN_002b8454(3, 3, 0xB, 1);
     }
-    if (buttonHelpGetEntryValue(3) != 0) {
-        return;
-    }
-    FUN_002b8454(3, 3, 0xB, 1);
 }
 
 } /* extern "C" */

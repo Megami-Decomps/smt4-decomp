@@ -1,4 +1,4 @@
-/* NON_MATCHING: checksum byte swaps and 64-bit byte assembly use different registers and instruction ordering. */
+/* NON_MATCHING: the halfword swaps now compile to rev16 as in retail; the 64-bit byte assembly and the checksum scheduling use different registers and ordering (retail also saves lr and delays the rev16). */
 #include "common.h"
 
 struct PackedHeaderValue {
@@ -9,7 +9,10 @@ struct PackedHeaderValue {
 static __inline u16 readBigEndianHalfword(const u8 *data)
 {
     u16 value = *(const u16 *)data;
-    return (u16)((value << 8) | (value >> 8));
+    // Halfword byte swap: armcc folds this mask pattern into rev16.
+    u32 v = value;
+    v = ((v & 0x00ff00ffu) << 8) | ((v & 0xff00ff00u) >> 8);
+    return (u16)v;
 }
 
 extern "C" {

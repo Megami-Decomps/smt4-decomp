@@ -28,7 +28,10 @@ f32 FUN_001a1ee0(f32 x)
     const WaveEntry *entry = &DAT_00536d14[index & 0xff];
     f32 result = entry->base + fraction * entry->slope;
 
-    return x < 0.0f ? -result : result;
+    if (x < 0.0f) {
+        result = -result;
+    }
+    return result;
 }
 
 } /* extern "C" */

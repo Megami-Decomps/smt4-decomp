@@ -105,7 +105,6 @@ extern "C" {
 extern AocSystem *g_aocSystem;
 Table03Record *aocFindTable03RecordByKey(AocSystem *system, u32 index);
 s32 libc_strcmp(const char *a, const char *b);
-
 /* Initialize sprite descriptor `sprite` from record `index` of table 03; the bank and page
    given here replace the record's own when it does not set both. */
 void FUN_003bc248(SpriteDescriptor *sprite, s32 index, u8 bank, u8 page)
@@ -192,11 +191,11 @@ void FUN_003bc248(SpriteDescriptor *sprite, s32 index, u8 bank, u8 page)
     } else {
         sprite->limits[0] = 0;
     }
-    if (record->limits[1] != 0) {
+    if (record->limits[1] == 0) {
+        sprite->limits[1] = 0;
+    } else {
         sprite->limits[1] = record->limits[1];
         sprite->flags.hasLimits = 1;
-    } else {
-        sprite->limits[1] = 0;
     }
     if (record->limits[2] != 0) {
         sprite->limits[2] = record->limits[2];

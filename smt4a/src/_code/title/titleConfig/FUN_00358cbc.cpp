@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler hoists configuration pointers instead of retail's offset-literal accesses. */
+/* NON_MATCHING: the save bytes are now indexed with literal offsets as in retail (one pool constant plus derived offsets); only register numbering and the else-arm scheduling differ. */
 #include "shard/Shard0031.h"
 #include "gamedata/GameDataAccess.h"
 
@@ -16,25 +16,26 @@ void FUN_00358cbc(void)
     GameDataBlock *save = reinterpret_cast<GameDataBlock *>(gameDataBlocksGetSaveData());
     if (save == NULL)
         return;
-    u8 *options = reinterpret_cast<u8 *>(&save->unk27E90);
+    // The option bytes at 0x27E90..0x27E93 and their flag at 0x27E94 lie in the save block's unnamed tail.
+    u8 *bytes = reinterpret_cast<u8 *>(save);
     if (DAT_00588fc0.dirty != 0) {
-        options[0] = DAT_00588fc0.options[0];
-        options[1] = DAT_00588fc0.options[1];
-        options[2] = DAT_00588fc0.options[2];
-        options[3] = DAT_00588fc0.options[3];
-        save->unk27E94[0] = 1;
+        bytes[0x27E90] = DAT_00588fc0.options[0];
+        bytes[0x27E91] = DAT_00588fc0.options[1];
+        bytes[0x27E92] = DAT_00588fc0.options[2];
+        bytes[0x27E93] = DAT_00588fc0.options[3];
+        bytes[0x27E94] = 1;
         DAT_00588fc0.dirty = 0;
-    } else if (save->unk27E94[0] != 0) {
-        DAT_00588fc0.options[0] = options[0];
-        DAT_00588fc0.options[1] = options[1];
-        DAT_00588fc0.options[2] = options[2];
-        DAT_00588fc0.options[3] = options[3];
+    } else if (bytes[0x27E94] != 0) {
+        DAT_00588fc0.options[0] = bytes[0x27E90];
+        DAT_00588fc0.options[1] = bytes[0x27E91];
+        DAT_00588fc0.options[2] = bytes[0x27E92];
+        DAT_00588fc0.options[3] = bytes[0x27E93];
     } else {
-        options[0] = DAT_00588fc0.options[0];
-        options[1] = DAT_00588fc0.options[1];
-        options[2] = DAT_00588fc0.options[2];
-        options[3] = DAT_00588fc0.options[3];
-        save->unk27E94[0] = 1;
+        bytes[0x27E90] = DAT_00588fc0.options[0];
+        bytes[0x27E91] = DAT_00588fc0.options[1];
+        bytes[0x27E92] = DAT_00588fc0.options[2];
+        bytes[0x27E93] = DAT_00588fc0.options[3];
+        bytes[0x27E94] = 1;
     }
 }
 }

@@ -82,7 +82,7 @@ extern "C" {
 extern BtlActionTable g_btlAction;
 extern u32 g_btlUiBlock;
 Table8Row *dataTable8FindRecord(s32 id);
-s32 FUN_003f0e94(BtlActingState *battle, s32 index);
+s32 btlFindSelectionIndexByLookupKey(BtlActingState *battle, s32 index);
 void FUN_003e8bb0(BtlTargetInfo *info, BtlActingState *battle, u64 *mask);
 void FUN_004ab80c(u32 ui, u8 *confirmed, u64 *selected, u64 *extra);
 void btlUIClearWorkTables(u32 ui);
@@ -202,7 +202,7 @@ scanTargets:
             continue;
         }
         if (index != 0) {
-            s32 slot = FUN_003f0e94(task->battle, index - 1);
+            s32 slot = btlFindSelectionIndexByLookupKey(task->battle, index - 1);
             if (slot < 0) {
                 slot = index + 0x6c;
             }

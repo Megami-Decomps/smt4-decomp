@@ -1,4 +1,4 @@
-/* NON_MATCHING: transition clear remains a pair-unrolled loop and the default-definition branch lacks retail's discarded flag load; 103 vs 104 instructions. */
+/* NON_MATCHING: the transition clear is now fully unrolled like retail; the default-definition branch is out of line in retail and reads (and discards) definition->flags at +0x27. */
 #include "event/bustupEvent/BustupTextureWork.h"
 #include "addon/aocMain.h"
 #include "AsdSDK/AsdDebug.h"
@@ -64,8 +64,12 @@ void FUN_0039c840(u32 id, s32 useDefinition)
     work->active = 0;
     work->visible = 1;
     work->frame = 0.0f;
-    for (s32 index = 0; index < 6; ++index)
-        allocation->transition[index] = 0.0f;
+    allocation->transition[0] = 0.0f;
+    allocation->transition[1] = 0.0f;
+    allocation->transition[2] = 0.0f;
+    allocation->transition[3] = 0.0f;
+    allocation->transition[4] = 0.0f;
+    allocation->transition[5] = 0.0f;
     asdProcessCreateSimple(reinterpret_cast<const s8 *>(DAT_0052f76c), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_0026c568), reinterpret_cast<AsdProcFunc>(asdMTeXReleaseJobContext), reinterpret_cast<u32>(allocation));
 }
 }

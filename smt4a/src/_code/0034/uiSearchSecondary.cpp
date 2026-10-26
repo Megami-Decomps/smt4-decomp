@@ -7,14 +7,14 @@ struct SearchState {
     /* 0x28 */ u8 secondary[0x3a];
     /* 0x62 */ u8 disabled;
 };
-s32 FUN_00387554(void *state);
+s32 objectGetLengthField(void *state);
 
 s32 uiSearchSecondary(SearchState *state)
 {
     if (state->disabled != 0) {
         return 0;
     }
-    return FUN_00387554(state->secondary);
+    return objectGetLengthField(state->secondary);
 }
 
 } /* extern "C" */

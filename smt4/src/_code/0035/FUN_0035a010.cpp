@@ -1,20 +1,13 @@
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+extern u32 DAT_00465768[];
 
-
-unsigned int FUN_0035a010(unsigned int param_1)
-
+u32 FUN_0035a010(u32 index)
 {
-  unsigned int temp_v0;
-  
-  if (param_1 < 7) {
-    temp_v0 = *(unsigned int *)(param_1 * 4 + 0x465768);
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (index < 7) {
+        return DAT_00465768[index];
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

@@ -1,13 +1,10 @@
-#include "romwright_types.h"
-#include "shard/W6_W6Match2_EffectEditor.h"
+#include "common.h"
 
 extern "C" {
+extern u32 DAT_004d96f0[];
 
-
-unsigned int FUN_0024c3c8(int param_1)
-
+u32 FUN_0024c3c8(s32 index)
 {
-  return *(unsigned int *)(param_1 * 4 + 0x4d96f0);
+    return DAT_004d96f0[index];
 }
-
-} /* extern "C" */
+}

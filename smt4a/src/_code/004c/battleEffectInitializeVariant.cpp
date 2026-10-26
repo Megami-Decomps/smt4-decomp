@@ -1,4 +1,4 @@
-/* NON_MATCHING: variant constants/registers and shared-store block placement differ; actor-table base loads and final render-flag update use different registers. */
+/* NON_MATCHING: retail places the header-variant compare chain first and shares the three variant stores with the settings chain; the build lays the complex arm first and keeps hoisted constants in different registers. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleEffects.h"
@@ -36,30 +36,33 @@ void battleEffectInitializeVariant(BtlMainStateA *battle, BattleEffectSetup *eff
     effect->flags = flags;
     if (!(flags & 0x10)) {
         if (!(flags & 0x8000)) {
-            if (g_battleEffectSettings.variant < 0) {
+            s32 forced = g_battleEffectSettings.variant;
+            if (forced < 0) {
                 s8 variant = reinterpret_cast<BattleEffectMainHeader *>(battle)->variant;
-                if (variant >= 0) {
+                if (variant < 0) {
+                    if (FUN_003eebf4(battle, 1) < 0) {
+                        effect->variant = 0;
+                    } else {
+                        s32 index = FUN_003eebf4(battle, 1);
+                        BattleEffectActorInfo *info = dataTable00FindById(battle->entries[index].id);
+                        if (info->variant == 1 || info->variant == 3) {
+                            effect->variant = 1;
+                        } else {
+                            effect->variant = 0;
+                        }
+                    }
+                } else {
                     switch (variant) {
                     case 0: effect->variant = 1; break;
                     case 1: effect->variant = 0; break;
                     case 2: effect->variant = 2; break;
                     }
-                } else if (FUN_003eebf4(battle, 1) < 0) {
-                    effect->variant = 0;
-                } else {
-                    s32 index = FUN_003eebf4(battle, 1);
-                    BattleEffectActorInfo *info = dataTable00FindById(battle->entries[index].id);
-                    if (info->variant == 1 || info->variant == 3) {
-                        effect->variant = 1;
-                    } else {
-                        effect->variant = 0;
-                    }
                 }
-            } else if (g_battleEffectSettings.variant == 0) {
+            } else if (forced == 0) {
                 effect->variant = 0;
-            } else if (g_battleEffectSettings.variant == 1) {
+            } else if (forced == 1) {
                 effect->variant = 1;
-            } else if (g_battleEffectSettings.variant == 2) {
+            } else if (forced == 2) {
                 effect->variant = 2;
             }
             effect->position[0] = 0.0f;

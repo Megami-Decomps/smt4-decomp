@@ -25,8 +25,8 @@ static __inline ModelRegistryLink *modelRegistryGetLink(ModelRegistryEntry *entr
 
 extern "C" {
 
-extern u32 *DAT_00471b94;
-extern ModelRegistryLink *DAT_00471b98;
+extern u32 *g_modelWorkHandle;
+extern ModelRegistryLink *g_modelWorkList;
 
 s32 FUN_002c40f8(s32 *index, u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
 s32 FUN_00129684(u32 *key);
@@ -39,16 +39,16 @@ __declspec(noreturn) void FUN_0011cd24(void)
     for (;;) {
         u32 key;
         s32 index;
-        u32 handle = *DAT_00471b94;
-        if ((u32)FUN_002c40f8(&index, &handle, 1, 0, 0xffffffff, 0xffffffff) >> 31) {
+        u32 handle = *g_modelWorkHandle;
+        if (nnResultIsFailure(FUN_002c40f8(&index, &handle, 1, 0, 0xffffffff, 0xffffffff))) {
             FUN_002c526c();
         }
         s32 result = FUN_00129684(&key);
         if (nnResultIsSuccess(result)) {
             ModelRegistryEntry *entry = NULL;
-            if (DAT_00471b98 != NULL) {
-                ModelRegistryEntry *end = modelRegistryGetEntry(DAT_00471b98->next);
-                entry = modelRegistryGetEntry(DAT_00471b98);
+            if (g_modelWorkList != NULL) {
+                ModelRegistryEntry *end = modelRegistryGetEntry(g_modelWorkList->next);
+                entry = modelRegistryGetEntry(g_modelWorkList);
                 while (entry != NULL && entry->parameter != key) {
                     if (entry == end) {
                         entry = NULL;
@@ -62,7 +62,7 @@ __declspec(noreturn) void FUN_0011cd24(void)
             }
             result = 0;
         }
-        if ((u32)result >> 31) {
+        if (nnResultIsFailure(result)) {
             asdFatalError();
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: animation metadata reloads, signed-key branches, and channel-reset register allocation differ. */
+/* NON_MATCHING: key tests now `> -1` (cmn/ble as retail); retail reloads sprite->animation before every channel (push {r4,r5,lr}), ours keeps it in a register across the channel resets. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 extern "C" void uiSpriteSetKeyframe(SpritePlaybackView *sprite, s16 key, s8 mode);
@@ -15,10 +15,10 @@ extern "C" void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const Sp
     sprite->animationTime = 0;
     sprite->animationStep = 0;
     sprite->running = 1;
-    if (animation->positionKey >= 0) {
+    if (animation->positionKey > -1) {
         uiSpriteSetKeyframe(sprite, (s16)animation->positionKey, animation->positionMode);
     }
-    if (sprite->animation->frameKey >= 0) {
+    if (sprite->animation->frameKey > -1) {
         s16 key = (s16)sprite->animation->frameKey;
         s8 mode = sprite->animation->frameMode;
         if (sprite->frameKeys != NULL) {
@@ -30,7 +30,7 @@ extern "C" void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const Sp
             sprite->frameValue = mode == 0 ? sprite->frameKeys[key].first : sprite->frameKeys[key].second;
         }
     }
-    if (sprite->animation->colorKey >= 0) {
+    if (sprite->animation->colorKey > -1) {
         s16 key = (s16)sprite->animation->colorKey;
         s8 mode = sprite->animation->colorMode;
         if (sprite->colorKeys != NULL) {
@@ -45,7 +45,7 @@ extern "C" void uiSpriteSetAnimationCommand(SpritePlaybackView *sprite, const Sp
             sprite->colors[2] = color;
         }
     }
-    if (sprite->animation->sequence >= 0) {
+    if (sprite->animation->sequence > -1) {
         SpriteSequenceEntry *sequence = NULL;
         s32 group = 0;
         u32 count = sprite->resource->sequenceBytes >> 2;

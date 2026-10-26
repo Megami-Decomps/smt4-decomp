@@ -18,13 +18,13 @@ static __inline ModelRegistryLink *modelRegistryGetLink(ModelRegistryEntry *entr
 }
 
 extern "C" {
-extern ModelRegistryLink *DAT_00471b98;
+extern ModelRegistryLink *g_modelWorkList;
 
 // Retain the model parameter and insert its node into the circular registry.
 u32 FUN_00129584(ModelRegistryEntry *entry, u32 parameter)
 {
     entry->parameter = parameter;
-    ModelRegistryLink *head = DAT_00471b98;
+    ModelRegistryLink *head = g_modelWorkList;
     ModelRegistryLink *node = modelRegistryGetLink(entry);
     if (head != NULL) {
         node->previous = head;
@@ -34,7 +34,7 @@ u32 FUN_00129584(ModelRegistryEntry *entry, u32 parameter)
         return 0;
     }
     entry->link.next = entry->link.previous = modelRegistryGetLink(entry);
-    DAT_00471b98 = modelRegistryGetLink(entry);
+    g_modelWorkList = modelRegistryGetLink(entry);
     return 0;
 }
 }

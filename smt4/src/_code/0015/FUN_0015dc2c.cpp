@@ -1,4 +1,4 @@
-/* NON_MATCHING: failure-exit sharing and package-call argument scheduling differ. */
+/* NON_MATCHING: failure exit is duplicated after the scan loop (armcc tail-duplicates the 0-result tail call); retail branches every failure path to one shared exit. */
 #include "addon/aocMain.h"
 #include "addon/AocPackage.h"
 
@@ -17,9 +17,6 @@ void FUN_0015dc2c(void *output, AocSystem *system, const char *path)
         s32 length = libc_strlen(path);
         if (length > 8) {
             length = 8;
-        } else if (length <= 0) {
-            _ZN21WindowOperationResultC1Eh(output, 0);
-            return;
         }
         for (s32 index = 0; index < length; ++index) {
             s8 character = static_cast<s8>(path[index]);

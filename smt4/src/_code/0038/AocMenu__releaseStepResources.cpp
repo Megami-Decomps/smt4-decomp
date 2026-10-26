@@ -12,7 +12,6 @@ void ifTouchRegionClearAll(void *window);
 void jobStopAndClearFlags(void *owner);
 void jobOwnerFreeSlotAndStop(u32 *job);
 void scrScriptProcessDestroy(void *script);
-void asdMemFreeSlot(u32 slot);
 void asdTMTexTableReleaseNode(s32 entry, s32 node);
 void asdMemFree(void *memory);
 void jobStop(u32 job, s32 mode);
@@ -61,7 +60,7 @@ void AocMenu::releaseStepResources()
         work->unk0000 &= ~0x3000u;
         jobStop(work->unk17A0, 0);
     }
-    asdMemFreeSlot(work->unk1C30);
+    asdMemFreeSlot(reinterpret_cast<void **>(work->unk1C30));
     work->unk1C30 = 0;
     if (scene->resources.script != NULL) {
         scrScriptProcessDestroy(scene->resources.script);

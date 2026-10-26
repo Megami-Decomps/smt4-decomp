@@ -1,19 +1,26 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00237d78` (_code @ 0x237d78, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: store scheduling/register reuse differs (retail keeps the flag in r1 and reuses it for the sentinel address). */
+#include "common.h"
+
+struct SentinelNode {
+    SentinelNode *next;
+    SentinelNode *prev;
+};
+
+struct SentinelList {
+    u32 unk00;
+    u8 enabled;
+    u8 unk05[3];
+    SentinelNode sentinel;
+    u32 count;
+};
 
 extern "C" {
-
-
-void FUN_00237d78(unsigned int *param_1)
-
+void FUN_00237d78(SentinelList *list)
 {
-  *param_1 = 0;
-  *(unsigned char *)(param_1 + 1) = 1;
-  param_1[2] = (unsigned int)(param_1 + 2);
-  param_1[4] = 0;
-  param_1[3] = (unsigned int)(param_1 + 2);
-  return;
+    list->unk00 = 0;
+    list->enabled = 1;
+    list->sentinel.next = &list->sentinel;
+    list->count = 0;
+    list->sentinel.prev = &list->sentinel;
 }
-
-} /* extern "C" */
+}

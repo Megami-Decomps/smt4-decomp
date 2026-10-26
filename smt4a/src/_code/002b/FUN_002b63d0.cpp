@@ -1,12 +1,13 @@
-/* NON_MATCHING: warp id now read from its owning block (DAT_005f17fc + 0x88) and the snapshot copy is a Vec3 assignment, rows equal retail; remaining: retail loads the id sign-extended and the enemy-state pointer before the test. */
+/* NON_MATCHING: only the warp-id load differs: retail loads the halfword sign-extended (ldrsh), the build zero-extends (ldrh) for the != 0 test; the id now comes from g_gameState+0x288 (pool anchor matches). */
 #include "common.h"
 
 extern "C" {
+// The warp id field of g_gameState.
 struct WarpGlobals {
-    u8 unk00[0x88];
-    s16 warpId; // 0x88
+    u8 unk000[0x288];
+    s16 warpId; // 0x288
 };
-extern WarpGlobals DAT_005f17fc;
+extern WarpGlobals g_gameState;
 struct WarpVec3 {
     f32 x, y, z;
 };
@@ -43,7 +44,7 @@ void FUN_002b63d0(void)
     };
     extern EnemyWarpStateView *g_mapEnemy;
     EnemyWarpStateView *state = g_mapEnemy;
-    if (DAT_005f17fc.warpId != 0) {
+    if (g_gameState.warpId != 0) {
         const WarpPoint *point = static_cast<const WarpPoint *>(FUN_003c316c());
         if (point != NULL) {
             for (s32 index = 0; index < 40; ++index) {
@@ -57,7 +58,7 @@ void FUN_002b63d0(void)
                     entry->snapshot = entry->position;
                     entry->state = 28;
                     entry->elapsed = 0;
-                    FUN_00377acc(entry, DAT_005f17fc.warpId, 4);
+                    FUN_00377acc(entry, g_gameState.warpId, 4);
                     return;
                 }
             }

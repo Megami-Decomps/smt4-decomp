@@ -22,7 +22,10 @@ extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
     for (;;) {
         u32 flags = *source++;
         for (s32 bit = 0; bit < 8; ++bit, flags <<= 1) {
-            if (flags & 0x80) {
+            if (!(flags & 0x80)) {
+                *destination++ = *source++;
+                --remaining;
+            } else {
                 u32 first = *source;
                 u32 length = first >> 4;
                 if (!extended) {
@@ -50,9 +53,6 @@ extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
                     destination[index] = reference[index];
                 }
                 destination += length;
-            } else {
-                *destination++ = *source++;
-                --remaining;
             }
             if (remaining == 0) {
                 return;

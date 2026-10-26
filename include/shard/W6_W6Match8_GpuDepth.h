@@ -49,14 +49,14 @@ static __inline u32 gpuDepthEncodeUnorm24(f32 depth)
 {
     GpuFloatEncoding encoding;
     encoding.value = depth;
-    if (depth > 0.0f && ((encoding.bits >> 23) & 0xff) != 255) {
-        encoding.value = depth * 16777216.0f;
-        if (encoding.signedBits < 0x4b800000) {
-            return static_cast<u32>(encoding.value);
-        }
-        return 0xffffff;
+    if (depth <= 0.0f || encoding.ieee.exponent == 255) {
+        return 0;
     }
-    return 0;
+    encoding.value = depth * 16777216.0f;
+    if (encoding.signedBits < 0x4b800000) {
+        return static_cast<u32>(encoding.value);
+    }
+    return 0xffffff;
 }
 
 /* Filled by the startup float24 lookup-table initializer. */

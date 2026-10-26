@@ -7,7 +7,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 
 extern "C" {
-int asdMemFreeNonNull(void *block);
+void asdMemFreeNonNull(void *block);
 }
 
 struct ModelResourceItem;

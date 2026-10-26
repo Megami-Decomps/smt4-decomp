@@ -1,4 +1,4 @@
-/* NON_MATCHING: zero/exponent branches initialize an extra register and command-header constants are not folded like retail. */
+/* NON_MATCHING: the 16-bit half-extent encodes now match retail; the 23-bit inverse encodes extract the fraction before the zero test (retail extracts it per path), the float conversions land in swapped VFP registers, and the command-header constants are not folded like retail. */
 #include "gfx/ViewportEncoding.h"
 
 extern "C" {

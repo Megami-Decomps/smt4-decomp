@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the route pointer in r0 and copies the direction using paired loads; this source reloads r0 for the call. */
+/* NON_MATCHING: retail copies the direction with ldrd/stm (an 8-aligned vector type) and loads the direction pointer before the position copy. */
 #include "shard/S1Mover.h"
 
 struct RouteNode {
@@ -42,12 +42,10 @@ extern "C" {
 void FUN_00407598(RouteController *route);
 void controllerSetDestination(u32 controller, const Vec3f *position);
 
-// Select an interior route node and restore the actor's saved position when requested.
-void FUN_004080bc(RouteController *route, s32 index, s32 mode)
+/* Makes `index` the selected node and takes its position and direction when it is on the route. */
+static __inline void routeSelectNode(RouteController *route, s32 index, s32 mode)
 {
-    route->elapsed = 0;
-    route->active = 0;
-    if (index >= 0 && index != route->nodeCount && index <= route->nodeCount) {
+    if (index >= 0 && route->nodeCount > index) {
         route->selectedNode = index;
         route->mode = mode;
         RouteNode *node = route->resource->table->nodes[index];
@@ -55,6 +53,14 @@ void FUN_004080bc(RouteController *route, s32 index, s32 mode)
         route->direction = *node->direction;
         FUN_00407598(route);
     }
+}
+
+// Select an interior route node and restore the actor's saved position when requested.
+void FUN_004080bc(RouteController *route, s32 index, s32 mode)
+{
+    route->elapsed = 0;
+    route->active = 0;
+    routeSelectNode(route, index, mode);
     if (route->restorePosition) {
         route->currentPosition = route->savedPosition;
         controllerSetDestination(route->actor->controller, &route->currentPosition);

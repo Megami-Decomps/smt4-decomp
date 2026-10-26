@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps &formatted (sp+128) in a saved register for the whole loop and so spills `name` to the buffer's stack slot; ours recomputes the address and keeps `name` in r7 (143 rows against 146). */
+/* NON_MATCHING: retail keeps &formatted (sp+128) in saved sl for the whole loop and spills the inlined reference search's `name` to the stack slot at sp+128 (reused after formatted); ours keeps name in fp and recomputes the address (147 rows against 150). */
 #include "common.h"
 
 /* One effect slot of the battle effect set (0x8C bytes). */
@@ -41,6 +41,21 @@ static inline bool nameIs(const char *name, const char *text)
     return name != NULL && libc_strcmp(name, text) == 0;
 }
 
+/* Index of the reference effect whose name starts `name`, or -1. */
+static s32 findReferenceEffect(const char *name)
+{
+    if (name != NULL) {
+        for (s32 k = 0; k < 11; k++) {
+            const char *reference = DAT_00528220 + k * 32;
+
+            if (libc_strncmp(name, reference, libc_strlen(reference)) == 0) {
+                return k;
+            }
+        }
+    }
+    return -1;
+}
+
 /* Resolves the four effect names of the battle effect set: a name that is not a plain effect file
  * takes the id of the matching reference effect, or a VER script name is registered as a key. */
 void FUN_004f8790(BtlEffectWork *work)
@@ -80,18 +95,10 @@ void FUN_004f8790(BtlEffectWork *work)
         if (libc_strlen(path) == 0) {
             continue;
         }
-        if (name != NULL) {
-            for (k = 0; k < 11; k++) {
-                const char *reference = DAT_00528220 + k * 32;
-
-                if (libc_strncmp(name, reference, libc_strlen(reference)) == 0) {
-                    break;
-                }
-            }
-            if (k < 11) {
-                work->active[i].id = work->references[k].id;
-                continue;
-            }
+        k = findReferenceEffect(name);
+        if (k >= 0) {
+            work->active[i].id = work->references[k].id;
+            continue;
         }
         entry = &work->active[i];
         script = entry->script;

@@ -1,25 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0042fe18` (_code @ 0x42fe18, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+extern s32 g_nnCecdHandle;
+s32 svcCloseHandle(s32 handle);
 
-int svcCloseHandle(int);
-
-extern int g_nnCecdHandle; /* 0x5c1fc4 */
-
-/* Supplied declaration required: svcCloseHandle. */
-
-
-void FUN_0042fe18(void)
-
+s32 FUN_0042fe18(void)
 {
-/* irregular: 1 native warning(s); review required */
-  if (g_nnCecdHandle != 0) {
-    svcCloseHandle(g_nnCecdHandle);
-    return;
-  }
-  return;
+    if (g_nnCecdHandle != 0) {
+        return svcCloseHandle(g_nnCecdHandle);
+    }
+    return 0xE0810BF8;
 }
-
-} /* extern "C" */
+}

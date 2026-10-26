@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains the filename/header pointers and error constants across helper calls, using more callee-saved registers. */
+/* NON_MATCHING: retail keeps the -1/0 result constants, &filename/&header and the payload size (VFP s16) in saved registers across the helper calls; ours rematerialises them and pushes fewer registers. */
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "shard/Sys43e310.h"
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
@@ -29,16 +29,18 @@ void FUN_002d8e74(u32 context)
     textFormatBuffer(filename, "sdds4game%d.sav", thread->request->slot);
     void *payload = thread->request->payload;
     u32 size = thread->request->payloadSize;
-    s32 result = -1;
     if (FUN_002d5e44(0, filename) != 0) {
         if (asdSaveReadBlock(file, filename, &header, payload, size) != 0) {
             return;
         }
         if (FUN_00214950(context, filename) == 1) {
-            result = 6;
+            thread->result = 6;
+        } else {
+            thread->result = -1;
         }
+    } else {
+        thread->result = -1;
     }
-    thread->result = result;
     thread->busy = 0;
 }
 }

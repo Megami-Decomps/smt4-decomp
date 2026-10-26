@@ -1,4 +1,4 @@
-/* NON_MATCHING: reflected-action payload stores use different saved registers and writeback grouping. */
+/* NON_MATCHING: call/store structure and the actor halfword narrowing match retail (actor is an s32 narrowed at the call); retail also keeps the constants 1 and 38 in callee-saved registers (r9, fp) and reads checkStatus from the stack at its use, so the saved-register assignment differs. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlReflect.h"
 #include "battle/btlMain.h"
@@ -10,7 +10,7 @@ extern "C" {
 BtlCombatantEntryA *FUN_003f0e20(BtlMainStateA *, s32);
 }
 
-extern "C" u32 FUN_004fdb18(s16 actor, u32 options, BattleRosterRecordA *target,
+extern "C" u32 FUN_004fdb18(s32 actor, u32 options, BattleRosterRecordA *target,
                              u32 parameter, s32 checkStatus)
 {
     s16 nextActor = actor + 1;
@@ -22,7 +22,7 @@ extern "C" u32 FUN_004fdb18(s16 actor, u32 options, BattleRosterRecordA *target,
     action->kind = 9;
     action->target = reinterpret_cast<u32>(target);
     action->value = parameter;
-    action = btlQueueReflectAction(g_btlActionReflect, actor, 0, options);
+    action = btlQueueReflectAction(g_btlActionReflect, static_cast<s16>(actor), 0, options);
     action->kind = 38;
     action->target = reinterpret_cast<u32>(target);
     action->value = 1;

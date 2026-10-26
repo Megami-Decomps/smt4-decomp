@@ -3,6 +3,22 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x33];
+    unsigned char f005f162f; /* 0x033 */
+    u8 pad034[0x1];
+    unsigned char f005f1631; /* 0x035 */
+    u8 pad036[0x7a];
+    unsigned int f005f16ac; /* 0x0b0 */
+    unsigned int f005f16b0; /* 0x0b4 */
+    unsigned int f005f16b4; /* 0x0b8 */
+    unsigned int f005f16b8; /* 0x0bc */
+    u8 pad0c0[0x19e];
+    unsigned char f005f185a; /* 0x25e */
+};
+extern GameStateView g_gameState;
+
 
 int mathVec3Dot(void);
 
@@ -31,13 +47,13 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f162f; /* 0x5f162f */
-extern unsigned char DAT_005f1631; /* 0x5f1631 */
-extern unsigned int DAT_005f16ac; /* 0x5f16ac */
-extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
-extern unsigned int DAT_005f16b4; /* 0x5f16b4 */
-extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
+
+
+
+
+
+
+
 extern int DAT_006160dc; /* 0x6160dc */
 
 #ifndef ROMWRIGHT_PIECE_4_4_DEFINED
@@ -136,7 +152,7 @@ void FUN_00327964(void)
           if (temp_v4 != 0) {
             if (temp_v4 == 1) {
               *(int *)(temp_v3 + 8) = *(int *)(temp_v3 + 8) + 1;
-              FUN_00233e10(1,DAT_005f16ac);
+              FUN_00233e10(1,g_gameState.f005f16ac);
               temp_v3 = g_lmapScene;
               if (*(int *)(g_lmapScene + 8) >= 3) {
                 temp_v4 = *(int *)(g_lmapScene + 4);
@@ -152,14 +168,14 @@ void FUN_00327964(void)
             *(unsigned int *)(temp_v3 + 0x58) = 0x40400000;
             *(unsigned char *)(temp_v3 + 0x6c) = 0;
             distSpatial();
-            temp_v5 = DAT_005f16b8;
-            temp_v12 = DAT_005f16b4;
+            temp_v5 = g_gameState.f005f16b8;
+            temp_v12 = g_gameState.f005f16b4;
             temp_v3 = g_lmapScene;
             temp_v8 = 0.017453292f;
             temp_v14 = 100.0f;
             temp_v16 = 0x41f00000;
             temp_v13 = 180.0f;
-            *(unsigned int *)(g_lmapScene + 0x118) = DAT_005f16b0;
+            *(unsigned int *)(g_lmapScene + 0x118) = g_gameState.f005f16b0;
             *(unsigned int *)(temp_v3 + 0x11c) = temp_v12;
             *(unsigned int *)(temp_v3 + 0x120) = temp_v5;
             if ((int)temp_v7 < 0x42700000) {
@@ -199,7 +215,7 @@ void FUN_00327964(void)
             FUN_00303460(10);
             *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
             sysPlaySe(0xdd);
-            FUN_00233e10(1,DAT_005f16ac);
+            FUN_00233e10(1,g_gameState.f005f16ac);
             mapIfSpawnManholeAction();
             temp_v3 = g_lmapScene;
             temp_v4 = *(int *)(temp_v3 + 4);
@@ -218,7 +234,7 @@ void FUN_00327964(void)
           }
         }
         else {
-          DAT_005f185a = 0;
+          g_gameState.f005f185a = 0;
           *(unsigned int *)(temp_v3 + 0x54) = 8;
           *(unsigned int *)(temp_v3 + 0x58) = 0x40a00000;
           temp_v4 = *(int *)(temp_v3 + 4);
@@ -228,7 +244,7 @@ void FUN_00327964(void)
       }
       else {
         *(int *)(temp_v3 + 8) = *(int *)(temp_v3 + 8) + 1;
-        FUN_00233e10(1,DAT_005f16ac);
+        FUN_00233e10(1,g_gameState.f005f16ac);
         temp_v4 = FUN_004d0584();
         temp_v3 = g_lmapScene;
         if (temp_v4 != 0) {
@@ -245,7 +261,7 @@ void FUN_00327964(void)
             temp_v3 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 0x54) = 0;
             *(unsigned int *)(temp_v3 + 0x58) = temp_v12;
-            FUN_00233e10(0,DAT_005f16ac);
+            FUN_00233e10(0,g_gameState.f005f16ac);
             mapIfReleaseSlot1();
             temp_v3 = g_lmapScene;
             *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -347,8 +363,8 @@ LAB_00327dc8:
   uStack_24 = uStack_20;
   uStack_20 = uStack_1c;
   temp_v15 = (unsigned long long)temp_v1;
-  DAT_005f162f = 0xff;
-  DAT_005f1631 = 0xff;
+  g_gameState.f005f162f = 0xff;
+  g_gameState.f005f1631 = 0xff;
   if (0 < DAT_006160dc) {
     temp_v15 = 0;
   }
@@ -383,18 +399,18 @@ LAB_00327dc8:
         }
         temp_v7 = (float)temp_v10;
         mathVec3Dot();
-        temp_v2 = DAT_005f162f;
+        temp_v2 = g_gameState.f005f162f;
         if (temp_v7 < (float)temp_v17) goto LAB_00328050;
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
       temp_v0 = (unsigned char)*(unsigned short *)(temp_v4 + 0x614d96);
       temp_v2 = temp_v0;
       if (*(short *)(temp_v4 + 0x614d94) != 0) {
-        temp_v2 = DAT_005f162f;
-        DAT_005f1631 = temp_v0;
+        temp_v2 = g_gameState.f005f162f;
+        g_gameState.f005f1631 = temp_v0;
       }
 LAB_00328050:
-      DAT_005f162f = temp_v2;
+      g_gameState.f005f162f = temp_v2;
       temp_v3 = temp_v3 + 1;
     } while (temp_v3 < DAT_006160dc);
   }

@@ -111,10 +111,10 @@ void FUN_00497290(ShopScreen *shop)
                 FUN_003fd7b4(model, 0.0f, -32000.0f, 0.0f);
             }
         }
-        if (shop->tab != 3) {
-            gameSetStatusCameraHeightMode(shop->tab == 5 ? 2 : 0);
-        } else {
+        if (shop->tab == 3) {
             gameSetStatusCameraHeightMode(1);
+        } else {
+            gameSetStatusCameraHeightMode(shop->tab == 5 ? 2 : 0);
         }
     }
     FUN_004954e8(shop);

@@ -4,6 +4,15 @@
 #include "util/BitsAndBytes.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x460];
+    signed char f005f1a5c; /* 0x460 */
+    u8 pad461[0x1];
+    signed char f005f1a5e; /* 0x462 */
+};
+extern GameStateView g_gameState;
+
 
 int textDrawString(...);
 int FUN_00164b5c(int, int, int, int, int, int);
@@ -42,8 +51,8 @@ typedef struct {
 
 extern int DAT_00587f20; /* 0x587f20 */
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
-extern signed char DAT_005f1a5e; /* 0x5f1a5e */
+
+
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textDrawString. */
@@ -118,7 +127,7 @@ void FUN_0048a5e4(int param_1)
   lmapSceneGetObj(temp_v19);
   temp_v16 = 0.0f;
   temp_v15 = 0.0f;
-  if (DAT_005f1a5e != '\0') {
+  if (g_gameState.f005f1a5e != '\0') {
     temp_v3 = naviMainGetRequestedMap(temp_v19);
     temp_v2 = FUN_00492c70(temp_v19);
   }
@@ -131,7 +140,7 @@ void FUN_0048a5e4(int param_1)
   temp_v9 = param_1 + 0x205ac;
   if ((*(unsigned int *)(param_1 + 0x10) & 0x20) == 0) {
     if (*(char *)(param_1 + 0xc) != '\0') {
-      if (DAT_005f1a5e != '\0') {
+      if (g_gameState.f005f1a5e != '\0') {
         temp_v2 = naviMainGetRequestedMap();
         temp_v3 = FUN_00492c70(temp_v19);
       }
@@ -139,7 +148,7 @@ void FUN_0048a5e4(int param_1)
         temp_v2 = NaviMain_GetCurrentMap(temp_v19);
         temp_v3 = naviMainSelectPair(temp_v19);
       }
-      if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
+      if ((g_gameState.f005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
         FUN_003849cc(temp_v2,temp_v3,1,temp_v17,0xffffffff);
         libc_strcpy(temp_v9,temp_v17);
       }
@@ -150,7 +159,7 @@ void FUN_0048a5e4(int param_1)
     }
     else {
       temp_v4 = mapRegionLookupValue((int)(short)temp_v2);
-      temp_v5 = (int)DAT_005f1a5e;
+      temp_v5 = (int)g_gameState.f005f1a5e;
       if (temp_v5 != 0) {
         VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20638),(unsigned char)(in_fpscr >> 0x16) & 3);
         VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2063c),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -159,7 +168,7 @@ void FUN_0048a5e4(int param_1)
           VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2064c),(unsigned char)(in_fpscr >> 0x16) & 3);
         }
       }
-      else if (DAT_005f1a5c != '\0') {
+      else if (g_gameState.f005f1a5c != '\0') {
         if (*(char *)(param_1 + 0x20634) != '\0') {
           VectorSignedToFloat(*(unsigned int *)(param_1 + 0x20648),(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorSignedToFloat(*(unsigned int *)(param_1 + 0x2064c),(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -188,7 +197,7 @@ void FUN_0048a5e4(int param_1)
                                         (int)**(short **)(temp_v5 + 0xc) / 2,
                                         (unsigned char)(in_fpscr >> 0x16) & 3);
     VectorSignedToFloat((int)(temp_v11 - temp_v14 * 0.5f),(unsigned char)(in_fpscr >> 0x16) & 3);
-    if (DAT_005f1a5e != '\0') {
+    if (g_gameState.f005f1a5e != '\0') {
       VectorSignedToFloat((int)(temp_v13 + temp_v16),(unsigned char)(in_fpscr >> 0x16) & 3);
       textDrawString(2,0x2bdaffff,temp_v9);
     }
@@ -315,7 +324,7 @@ LAB_0048ae60:
             }
           }
         }
-        if (((DAT_005f1a5e != '\0') && (temp_v7 = FUN_00384cf4(), temp_v7 == 0)) &&
+        if (((g_gameState.f005f1a5e != '\0') && (temp_v7 = FUN_00384cf4(), temp_v7 == 0)) &&
            ((temp_v8 < 2 || (temp_v8 == 3 || temp_v8 == 4)))) {
           *(unsigned char *)(temp_v9 + 0x2062c) = 0;
         }
@@ -356,7 +365,7 @@ LAB_0048ae60:
       temp_v2 = vec2GetYInt(param_1 + 0xc40);
       temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
       temp_v13 = temp_v13 + temp_v16;
-      if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
+      if ((g_gameState.f005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
         FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
       }
       else {
@@ -389,7 +398,7 @@ LAB_0048ae60:
     temp_v2 = vec2GetYInt(temp_v5);
     temp_v13 = (float)VectorSignedToFloat(temp_v2,(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v13 = temp_v13 + temp_v16;
-    if ((DAT_005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
+    if ((g_gameState.f005f1a5e == '\0') || (temp_v5 = FUN_00384cf4(), temp_v5 != 0)) {
       FUN_0049325c(temp_v9,(int)temp_v11,(int)temp_v13,DAT_00587f20,1);
     }
     else {

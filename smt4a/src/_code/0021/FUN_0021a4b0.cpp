@@ -21,6 +21,14 @@ void FUN_00359974(s32 type, u32 message, s32 argument, s32 flags);
 void sysPlaySe(s32 sound);
 void FUN_003d474c();
 
+
+static __inline void uiQuestEnterMenuState(UiQuestApoc *quest, u32 next)
+{
+    quest->previousMenuState = quest->menuState;
+    quest->menuState = next;
+    quest->menuTimer = 0;
+}
+
 // Accept the highlighted quest and enter its normal or special-script confirmation flow.
 void FUN_0021a4b0()
 {
@@ -57,9 +65,6 @@ void FUN_0021a4b0()
     }
     sysPlaySe(0xa0);
     FUN_003d474c();
-    quest = g_uiQuest;
-    quest->previousMenuState = quest->menuState;
-    quest->menuState = 12;
-    quest->menuTimer = 0;
+    uiQuestEnterMenuState(g_uiQuest, 12);
 }
 }

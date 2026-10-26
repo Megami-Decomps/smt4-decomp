@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail unit includes a stray trailing "mov r0, #0" after its return/literal pool; readable dispatch also lowers to a switch table rather than the retail compare chain. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W4_Match1b_RegisteredHandle.h"
 
@@ -42,20 +41,47 @@ void lmapApplyAreaHandleVisibility(void)
 {
     LmapHandleMain *map = g_lmapMainState;
     if (g_gameState.mode == 0x65) {
-        switch (g_gameState.submode) {
-        case 1: FUN_003cb948(DAT_0058024c); return;
-        case 2: FUN_003cb948(DAT_0058029c); return;
-        case 3: FUN_003cb948(DAT_005802ec); return;
-        case 4: FUN_003cb948(DAT_0058033c); return;
-        case 5: FUN_003cb948(DAT_0058038c); return;
-        case 6: FUN_003cb948(DAT_005803dc); return;
-        case 7: FUN_003cb948(DAT_0058042c); return;
-        case 8: FUN_003cb948(DAT_0058047c); return;
-        case 9: FUN_003cb948(DAT_005804cc); return;
+        s32 submode = g_gameState.submode;
+        if (submode == 1) {
+            FUN_003cb948(DAT_0058024c);
+            return;
+        }
+        if (submode == 2) {
+            FUN_003cb948(DAT_0058029c);
+            return;
+        }
+        if (submode == 3) {
+            FUN_003cb948(DAT_005802ec);
+            return;
+        }
+        if (submode == 4) {
+            FUN_003cb948(DAT_0058033c);
+            return;
+        }
+        if (submode == 5) {
+            FUN_003cb948(DAT_0058038c);
+            return;
+        }
+        if (submode == 6) {
+            FUN_003cb948(DAT_005803dc);
+            return;
+        }
+        if (submode == 7) {
+            FUN_003cb948(DAT_0058042c);
+            return;
+        }
+        if (submode == 8) {
+            FUN_003cb948(DAT_0058047c);
+            return;
+        }
+        if (submode == 9) {
+            FUN_003cb948(DAT_005804cc);
+            return;
         }
     }
-    for (u32 index = 0; index < map->handles->table->count; ++index) {
-        RegisteredHandle *handle = FUN_0040619c(map->handles->table, index);
+    LmapHandleTable *table;
+    for (u32 index = 0; table = map->handles->table, index < table->count; ++index) {
+        RegisteredHandle *handle = FUN_0040619c(table, index);
         handleRegistryRegisterObject(g_handleRegistry, handle);
         if (g_lmapMainState != NULL &&
             g_lmapMainState->registrations[index].registered == 0) {

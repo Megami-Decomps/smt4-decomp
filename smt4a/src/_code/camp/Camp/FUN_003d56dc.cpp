@@ -6,6 +6,15 @@
 #include "camp/CampCec/CampCecView.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x38];
+    unsigned char f005f1634; /* 0x038 */
+    u8 pad039[0x3ba];
+    unsigned char f005f19ef; /* 0x3f3 */
+};
+extern GameStateView g_gameState;
+
 
 int jobStop(...);
 int asdMemFree(...);
@@ -155,8 +164,8 @@ extern signed char DAT_005e1eb4; /* 0x5e1eb4 */
 extern unsigned short DAT_005e1eb6; /* 0x5e1eb6 */
 extern unsigned short DAT_005e1eb8; /* 0x5e1eb8 */
 extern unsigned char DAT_005e1eba; /* 0x5e1eba */
-extern unsigned char DAT_005f1634; /* 0x5f1634 */
-extern unsigned char DAT_005f19ef; /* 0x5f19ef */
+
+
 
 /* Supplied declaration required: FUN_0014afa8. */
 /* Supplied declaration required: FUN_001517b4. */
@@ -1682,7 +1691,7 @@ joined_r0x003d7c38:
       temp_v4 = saveLoadUIHasResult();
       if (temp_v4 != 0) {
         DAT_005e1eba = 1;
-        DAT_005f1634 = 1;
+        g_gameState.f005f1634 = 1;
         temp_v4 = 0x55;
         campChangeState(temp_v4);
         break;
@@ -2089,7 +2098,7 @@ LAB_003d801c:
     slotSetRequest(0,10,0xff);
     slotSetRequest(1,10,0xff);
     campChangeState(0x4f);
-    DAT_005f19ef = 1;
+    g_gameState.f005f19ef = 1;
     break;
   case 0x4f:
     temp_v4 = FUN_002e07f4();

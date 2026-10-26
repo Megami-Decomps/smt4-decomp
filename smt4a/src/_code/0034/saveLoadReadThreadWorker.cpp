@@ -38,12 +38,12 @@ void saveLoadReadThreadWorker(u32 context)
     thread->flags.unk01 = 1;
     s32 archive = thread->request->archive;
     s32 slot = thread->request->slot;
-    if (archive != 1) {
-        rt_aeabi_memclr(DAT_005e2114, sizeof(DAT_005e2114));
-        textFormatBuffer(DAT_005e2114, DAT_00531000, slot);
-    } else {
+    if (archive == 1) {
         rt_aeabi_memclr(DAT_005e2114, sizeof(DAT_005e2114));
         textFormatBuffer(DAT_005e2114, g_saveFilenamePrefixedFormat, DAT_00530ff8, slot);
+    } else {
+        rt_aeabi_memclr(DAT_005e2114, sizeof(DAT_005e2114));
+        textFormatBuffer(DAT_005e2114, DAT_00531000, slot);
     }
     libc_strcpy(filename, DAT_005e2114);
     SaveReadRequest *request = thread->request;

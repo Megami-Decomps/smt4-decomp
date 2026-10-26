@@ -1,38 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00430768` (_code @ 0x430768, 0x40 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
+#include "nn/os/IpcStaticBuffer.h"
 
 extern "C" {
+extern u32 DAT_005c1fc8;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern unsigned int DAT_005c1fc8; /* 0x5c1fc8 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_00430768(unsigned int param_1,unsigned int param_2,int param_3,unsigned int param_4)
-
+u32 FUN_00430768(u32 first, u32 second, s32 third, u32 fourth)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x900c2;
-  *(unsigned int *)(temp_v1 + 0x84) = param_1;
-  *(int *)(temp_v1 + 0x88) = param_3;
-  *(unsigned int *)(temp_v1 + 0x8c) = param_4;
-  *(unsigned int *)(temp_v1 + 0x90) = (param_3 << 4) | 10;
-  *(unsigned int *)(temp_v1 + 0x94) = param_2;
-  software_interrupt(0x32);
-  temp_v0 = DAT_005c1fc8;
-  if ((DAT_005c1fc8 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x000900C2;
+    command->words[0] = first;
+    command->words[1] = third;
+    command->words[2] = fourth;
+    command->words[3] = ipcMappedBufferDescriptor(third, 10);
+    command->words[4] = second;
+    s32 result = nn::svc::SendSyncRequest(DAT_005c1fc8);
+    if ((s32)(result & 0x80000000) >= 0) {
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

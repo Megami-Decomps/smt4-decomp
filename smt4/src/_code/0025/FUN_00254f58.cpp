@@ -43,7 +43,7 @@ void FUN_00254f58(BtlMainState *owner)
     }
     s32 end = first + count;
     s32 entries = 0;
-    for (s32 i = first; i < end; ++i) {
+    for (s32 i = first; end > i; ++i) {
         if ((work->units[i].flags & 1) && !(work->units[i].flags & 0x40)) {
             work->order[entries] = work->units[i].selectionIndex;
             ((BtlEntry *)&work->units[i])->speedBonus = 0;

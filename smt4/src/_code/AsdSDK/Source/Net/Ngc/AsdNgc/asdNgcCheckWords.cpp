@@ -1,4 +1,4 @@
-/* NON_MATCHING: result-array clearing is unrolled differently, changing stack allocation and subsequent register allocation. */
+/* NON_MATCHING: word count, input copy loop and library result test now match retail; remaining: retail reaches the result array through its own literal (g_asdNgc+0x1000 as a separate object) while the build derives it from the g_asdNgc base, which shifts the frame and register allocation. */
 #include "AsdSDK/Source/Net/Ngc/AsdNgc.h"
 
 extern "C" {
@@ -26,7 +26,8 @@ u32 *asdNgcCheckWords(const u32 *words, s32 count)
     if (count > ASD_NGC_MAX_WORDS) {
         n = ASD_NGC_MAX_WORDS;
     } else {
-        n = count;
+        s32 unused = ASD_NGC_MAX_WORDS - count;
+        n = ASD_NGC_MAX_WORDS - unused;
         if (n == 0) {
             return NULL;
         }
@@ -39,10 +40,10 @@ u32 *asdNgcCheckWords(const u32 *words, s32 count)
         g_asdNgc.result[i] = 0;
     }
     for (i = 0; i < n; i++) {
-        g_asdNgc.input[i] = words[i];
+        g_asdNgc.input[i] = g_asdNgc.words[i];
     }
 
-    if (FUN_0035edac(g_asdNgc.work, results, 1, g_asdNgc.input, n) < 0) {
+    if ((s32)(FUN_0035edac(g_asdNgc.work, results, 1, g_asdNgc.input, n) & 0x80000000) < 0) {
         g_asdNgc.status |= ASD_NGC_FAILED;
         return NULL;
     }

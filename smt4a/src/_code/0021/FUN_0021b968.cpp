@@ -1,4 +1,4 @@
-/* NON_MATCHING: reserve-loop index and pending-marker addressing allocate different registers and omit two retail instructions; 59 built versus 61 retail rows. */
+/* NON_MATCHING: reserve scan now matches; retail reads the pending marker through a pool-loaded offset (ldrb [r0, r4]) and recomputes its address for the store, the build shares one address; unit/slot registers swap. */
 #include "shard/X14_EngineUnits.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
@@ -10,7 +10,8 @@ extern "C" void FUN_0021b968(EngineUnits *units, s32 slot, u32 handle, s32 anima
     SaveSlotTable *table = gameGetSlotTable();
     s32 reserve;
     for (reserve = 0; reserve < 3; ++reserve) {
-        if (table->reserve[reserve] >= 0 && table->reserve[reserve] == table->party[slot]) {
+        s32 member = table->reserve[reserve];
+        if (member >= 0 && member == table->party[slot]) {
             break;
         }
     }

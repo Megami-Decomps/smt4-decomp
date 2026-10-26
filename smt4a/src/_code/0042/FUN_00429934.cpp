@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler does not hoist the metadata-key literal and places the found-property branch in a cold tail. */
+/* NON_MATCHING: the found-property branch is placed in a cold tail (retail lays it out between the loop and the memcpy); registers shift with it. */
 #include "common.h"
 #include <string.h>
 
@@ -25,8 +25,9 @@ extern "C" void FUN_00429934(char *output, const ResourceMetadataOwner *owner)
     char value[64] = {0};
     ResourceMetadataTable *metadata = owner->metadata;
     u32 count = metadata->count;
+    const char *key = "sys.ECardTypeCode";
     for (u32 i = 0; i < count; ++i) {
-        if (libc_strncmp(metadata->entries[i].key, "sys.ECardTypeCode", sizeof(value)) == 0) {
+        if (libc_strncmp(metadata->entries[i].key, key, sizeof(value)) == 0) {
             const char *source = metadata->entries[i].value;
             if (source != NULL) {
                 strncpy(value, source, sizeof(value));

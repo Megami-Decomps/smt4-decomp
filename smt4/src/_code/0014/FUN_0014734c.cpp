@@ -1,16 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0014734c` (_code @ 0x14734c, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mid-flow mov r0, r0 (nop) in a leaf with no lr save; not a removed call, cause unknown. */
+#include "classes/Obj68Flags.h"
 
-extern "C" {
-
-
-void FUN_0014734c(int param_1,unsigned short param_2)
-
+static void setBlockMode(Obj68Block *block, u16 mode)
 {
-  *(unsigned short *)(*(int *)(param_1 + 0x68) + 0x1e) =
-       ((param_2 & 3) << 2) | (*(unsigned short *)(*(int *)(param_1 + 0x68) + 0x1e) & 0xfff3);
-  return;
+    block->modes = ((mode << 2) & 0xC) | (block->modes & 0xFFF3);
 }
 
-} /* extern "C" */
+extern "C" {
+void FUN_0014734c(Obj68 *object, u16 mode)
+{
+    setBlockMode(object->block, mode);
+}
+}

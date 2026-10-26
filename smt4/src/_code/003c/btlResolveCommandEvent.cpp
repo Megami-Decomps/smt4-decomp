@@ -1,4 +1,4 @@
-/* NON_MATCHING: mode branch order, maximum-value operand allocation and enemy-count registers differ; -O2 candidate. */
+/* NON_MATCHING: only register allocation differs (the maximum update keeps the field value in r1, flag read-modify-writes use r2, enemy-count loop registers). */
 #include "shard/W4_Match6_BtlEntry.h"
 
 struct CommandEventBattle {
@@ -41,13 +41,16 @@ void btlResolveCommandEvent(CommandEventContext *context, CommandEventChoice *ch
         if (battle->maximum <= value)
             battle->maximum = value;
     }
-    s32 mode = context->battle->mode;
-    if (mode == 3) {
+    switch (context->battle->mode) {
+    case 1:
+        break;
+    case 2:
+        context->battle->flags |= 0x400000;
+        break;
+    case 3:
         choice->command->type = 4;
         return;
     }
-    if (mode == 2)
-        context->battle->flags |= 0x400000;
     bool queueEffect = false;
     u32 effect = 0;
     if (context->battle->mode == 1) {

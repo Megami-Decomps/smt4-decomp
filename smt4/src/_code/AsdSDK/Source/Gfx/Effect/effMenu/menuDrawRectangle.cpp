@@ -1,4 +1,4 @@
-/* NON_MATCHING: MPCore emits REV/BIC for colors instead of retail shifts/masks; FP addition and stack scheduling/registers differ. */
+/* NON_MATCHING: colour unpacking now uses retail's shifts/masks hoisted ahead of the alpha test; remaining: argument/stack-argument register assignment (retail ldm of both stack arguments) and the FP addition operand order. */
 #include "shard/W6_W6Match7_MenuRectangle.h"
 #include "camp/RenderCtx.h"
 #include "shard/Shard0036.h"
@@ -16,11 +16,9 @@ void FUN_0021025c(u32 color0, u32 color1, u32 color2, u32 color3,
                   f32 x, f32 y, f32 width, f32 height, f32 depth, f32 lineWidth);
 }
 
-static inline u32 packMenuColor(const Rgba &color)
+static inline u32 packMenuColor(u32 r, u32 g, u32 b, u32 a)
 {
-    return (static_cast<u32>(color.r) << 24) |
-           (static_cast<u32>(color.g) << 16) |
-           (static_cast<u32>(color.b) << 8) | color.a;
+    return (r << 24) | (g << 16) | (b << 8) | a;
 }
 
 extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
@@ -34,16 +32,18 @@ extern "C" void menuDrawRectangle(s32 x, s32 y, s32 width, s32 height,
     renderCtxSelectTexture(g_titleScene, NULL);
     RgbaWord fill;
     fill.word = fillColor;
-    if (fill.rgba.a != 0) {
-        u32 color = packMenuColor(fill.rgba);
+    u32 fillR = fill.rgba.r, fillG = fill.rgba.g, fillB = fill.rgba.b, fillA = fill.rgba.a;
+    if (fillA != 0) {
+        u32 color = packMenuColor(fillR, fillG, fillB, fillA);
         FUN_002c0944(color, color, color, color,
                      static_cast<f32>(adjustedX), static_cast<f32>(adjustedY),
                      static_cast<f32>(width), static_cast<f32>(height), 0.0f);
     }
     RgbaWord outline;
     outline.word = outlineColor;
-    if (outline.rgba.a != 0) {
-        u32 color = packMenuColor(outline.rgba);
+    u32 outR = outline.rgba.r, outG = outline.rgba.g, outB = outline.rgba.b, outA = outline.rgba.a;
+    if (outA != 0) {
+        u32 color = packMenuColor(outR, outG, outB, outA);
         FUN_0021025c(color, color, color, color,
                      static_cast<f32>(adjustedX), static_cast<f32>(adjustedY),
                      static_cast<f32>(width), static_cast<f32>(height), 0.0f, 1.0f);

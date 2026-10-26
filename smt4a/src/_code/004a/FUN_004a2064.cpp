@@ -58,7 +58,13 @@ void FUN_004a2064(void *work)
         uiOpenStartAnimations(menu);
         s16 selected = rows[flaggedValueHolderGetTotal(&menu->range)].id;
         if (selected != previous) {
-            if (menu->savedList != 0) {
+            if (menu->savedList == 0) {
+                FUN_0035ad50((u16)selected, &unit);
+                if (FUN_002a4b28((u16)selected))
+                    FUN_0032d0c8(0, 1, (u16)selected, &unit);
+                else
+                    FUN_0032d0c8(0, 2, (u16)selected, &unit);
+            } else {
                 selected = rows[flaggedValueHolderGetTotal(&menu->range)].id;
                 if (menu->sourceKind != 1) {
                     FUN_0035ad50((u16)selected, &unit);
@@ -67,12 +73,6 @@ void FUN_004a2064(void *work)
                     UnitRecord *saved = slotRecordFindById((u16)selected);
                     FUN_0032d0c8(0, 1, (u16)selected, saved);
                 }
-            } else {
-                FUN_0035ad50((u16)selected, &unit);
-                if (FUN_002a4b28((u16)selected))
-                    FUN_0032d0c8(0, 1, (u16)selected, &unit);
-                else
-                    FUN_0032d0c8(0, 2, (u16)selected, &unit);
             }
         }
         if (menu->savedList)

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail also stores zeros into the unit's 0x1C/0x1E words and copies words 0xE/0x10 to 0x2A/0x2C after the recalculation (dead stores that are left out here), and schedules the field copies and comparisons differently (about 130 diff lines). */
+/* NON_MATCHING: only the operand order of the skill compare in the unrolled search differs (retail `cmp skill,fresh`, ours `cmp fresh,skill`); 179 rows each. */
 #include "common.h"
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
@@ -36,9 +36,13 @@ struct FreshUnit {
     /* 0x000 */ s16 hp;
     /* 0x002 */ s16 mp;
     /* 0x004 */ s16 stats[5];
-    /* 0x00E */ u8 unk00E[0x12];
+    /* 0x00E */ u16 unk00E;
+    /* 0x010 */ u16 unk010;
+    /* 0x012 */ u8 unk012[0xA];
+    /* 0x01C */ u16 cleared[2];
     /* 0x020 */ u16 extra[5];
-    /* 0x02A */ u8 unk02A[6];
+    /* 0x02A */ u16 copy[2];
+    /* 0x02E */ u8 unk02E[2];
     /* 0x030 */ u32 experience;
     /* 0x034 */ u16 skills[8];
     /* 0x044 */ u8 unk044[2];
@@ -73,42 +77,52 @@ void bitsetSetBit(void *owner, u32 bit);
 void unitRecalculateEffectiveStats(FreshUnit *unit);
 s32 flagCountUnlockedSlots(SavedUnit *unit);
 
+/* Builds the unit a demon id starts as (the same sequence as unitInitializeFromSavedRecord). */
+static void initializeFreshUnit(u16 id, FreshUnit *unit)
+{
+    DevilBitSource *devil = devilGetRecord(id);
+    DemonBaseRecord base;
+    gameRecordCopy(id, &base);
+    memClear(unit, 0x604);
+    unit->id = id;
+    unit->level = base.level;
+    unit->hp = base.hp;
+    unit->mp = base.mp;
+    unit->stats[0] = base.stat1;
+    unit->stats[2] = base.stat3;
+    unit->stats[3] = base.stat4;
+    unit->stats[4] = base.stat5;
+    unit->stats[1] = base.stat2;
+    unit->cleared[0] = 0;
+    unit->cleared[1] = 0;
+    unit->extra[0] = base.stat6;
+    unit->extra[2] = base.stat8;
+    unit->extra[3] = base.stat9;
+    unit->extra[4] = base.stat10;
+    unit->extra[1] = base.stat7;
+    for (u32 i = 0; i < 8; ++i) {
+        unit->skills[i] = base.skills[i];
+    }
+    unit->experience = base.experience;
+    unit->growthType = (base.flags >> 2) & 0xF;
+    bitsetSetBit(unit, devil->bit);
+    unitRecalculateEffectiveStats(unit);
+    unit->copy[0] = unit->unk00E;
+    unit->copy[1] = unit->unk010;
+}
+
 /* Whether the saved unit is what its demon would be when freshly summoned: same level, experience and stats, and
  * every skill it knows among the skills of the fresh unit. */
 u32 FUN_002cd37c(SavedUnit *saved)
 {
-    u32 id = saved->id;
+    u16 id = saved->id;
     u32 matches = 1;
     u8 scratch[0x38];
     if (!gameRecordCopy(id, scratch)) {
         return 0;
     }
-    DevilBitSource *devil = devilGetRecord(id);
-    DemonBaseRecord base;
-    gameRecordCopy(id, &base);
     FreshUnit fresh;
-    memClear(&fresh, 0x604);
-    fresh.id = id;
-    fresh.level = base.level;
-    fresh.hp = base.hp;
-    fresh.mp = base.mp;
-    fresh.stats[0] = base.stat1;
-    fresh.stats[1] = base.stat2;
-    fresh.stats[2] = base.stat3;
-    fresh.stats[3] = base.stat4;
-    fresh.stats[4] = base.stat5;
-    fresh.extra[0] = base.stat6;
-    fresh.extra[1] = base.stat7;
-    fresh.extra[2] = base.stat8;
-    fresh.extra[3] = base.stat9;
-    fresh.extra[4] = base.stat10;
-    for (s32 i = 0; i < 8; i++) {
-        fresh.skills[i] = base.skills[i];
-    }
-    fresh.growthType = (base.flags >> 2) & 0xF;
-    fresh.experience = base.experience;
-    bitsetSetBit(&fresh, devil->bit);
-    unitRecalculateEffectiveStats(&fresh);
+    initializeFreshUnit(id, &fresh);
     if (fresh.level != saved->level || fresh.experience != saved->experience) {
         matches = 0;
     }
@@ -118,10 +132,20 @@ u32 FUN_002cd37c(SavedUnit *saved)
     if (fresh.mp != saved->mp) {
         matches = 0;
     }
-    for (s32 i = 0; i < 5; i++) {
-        if (saved->stats[i] + saved->statBonus[i] != fresh.stats[i]) {
-            matches = 0;
-        }
+    if (saved->stats[0] + saved->statBonus[0] != fresh.stats[0]) {
+        matches = 0;
+    }
+    if (saved->stats[1] + saved->statBonus[1] != fresh.stats[1]) {
+        matches = 0;
+    }
+    if (saved->stats[2] + saved->statBonus[2] != fresh.stats[2]) {
+        matches = 0;
+    }
+    if (saved->stats[3] + saved->statBonus[3] != fresh.stats[3]) {
+        matches = 0;
+    }
+    if (saved->stats[4] + saved->statBonus[4] != fresh.stats[4]) {
+        matches = 0;
     }
     s32 slots = flagCountUnlockedSlots(saved);
     for (s32 i = 0; i < slots; i++) {
@@ -134,7 +158,8 @@ u32 FUN_002cd37c(SavedUnit *saved)
                 }
             }
             if (k == slots) {
-                return 0;
+                matches = 0;
+                break;
             }
         }
     }

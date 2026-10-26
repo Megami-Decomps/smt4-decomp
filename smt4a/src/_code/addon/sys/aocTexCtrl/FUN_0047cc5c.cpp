@@ -1,4 +1,4 @@
-/* NON_MATCHING: bulk header copy grouping, cached header pointer and row allocation/link scheduling differ. */
+/* NON_MATCHING: header copy and cached header pointer now follow retail's reloads; saved-register assignment (retail keeps `control` in fp) and the row allocation/link scheduling still differ. */
 #include "addon/sys/aocTexCtrl.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -44,12 +44,12 @@ void FUN_0047cc5c(AocTexCtrl *control, const AocTexturePackageHeader *const *sou
         control->state = static_cast<AocTexState *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocTexturePackageView), 1));
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\addon\\sys\\aocTexCtrl.cpp", 904);
         AocTexturePackageHeader *copy = static_cast<AocTexturePackageHeader *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocTexturePackageHeader), 1));
-        AocTexturePackageView *package = reinterpret_cast<AocTexturePackageView *>(control->state);
-        package->header = copy;
+        reinterpret_cast<AocTexturePackageView *>(control->state)->header = copy;
         *copy = *header;
+        AocTexturePackageHeader *stored = reinterpret_cast<AocTexturePackageView *>(control->state)->header;
         const u8 *cursor = reinterpret_cast<const u8 *>(*source + 1);
         AocTexturePackageRow *previous = NULL;
-        for (s32 i = 0; i < copy->info.rowCount; ++i) {
+        for (s32 i = 0; i < stored->info.rowCount; ++i) {
             const PackedAocTextureRow *input = reinterpret_cast<const PackedAocTextureRow *>(cursor);
             asdDebugTrace(DAT_005271bc, 97);
             AocTexturePackageRow *row = static_cast<AocTexturePackageRow *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(AocTexturePackageRow), 1));

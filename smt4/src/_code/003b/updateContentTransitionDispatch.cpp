@@ -18,7 +18,12 @@ struct ContentTransitionRequests {
     u16 state12, state13;
 };
 extern "C" {
-extern ContentTransitionRequests DAT_0049fa1c;
+// The transition request flags lie inside g_gameState.
+struct GameStateTransitionView {
+    u8 unk000[0x100];
+    ContentTransitionRequests requests;
+};
+extern GameStateTransitionView g_gameState;
 extern AocSystem *g_aocSystem;
 u32 aocSelectedRecordIsUnavailable(AocSystem *);
 void slotSetRequest(s32, s32, u32);
@@ -32,14 +37,14 @@ void FUN_00341a3c(u32);
 void updateContentTransitionDispatch(ContentTransition *scene)
 {
     ContentTransitionUpdate *update = (ContentTransitionUpdate *)scene;
-    if (DAT_0049fa1c.state13) {
+    if (g_gameState.requests.state13) {
         scene->state = 13;
         scene->phase = 0;
-        DAT_0049fa1c.state13 = 0;
-    } else if (DAT_0049fa1c.state12) {
+        g_gameState.requests.state13 = 0;
+    } else if (g_gameState.requests.state12) {
         scene->state = 12;
         scene->phase = 0;
-        DAT_0049fa1c.state12 = 0;
+        g_gameState.requests.state12 = 0;
     } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
         scene->state = 14;
         scene->phase = 0;

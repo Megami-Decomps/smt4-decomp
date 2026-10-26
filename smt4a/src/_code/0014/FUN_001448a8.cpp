@@ -1,4 +1,4 @@
-/* NON_MATCHING: free-slot search remains a loop rather than unrolled tests; global-base reuse and float setup differ. */
+/* NON_MATCHING: free-slot search now unrolled as retail; retail keeps &g_asdSoundSystem in saved registers (r7/sl) for both the slot-pointer load and the archive calls, ours reloads the pool word, and the final -1 exit differs. */
 #include "sound/AuxiliaryPlayback.h"
 #include "sound/SoundHandlePlayback.h"
 
@@ -12,11 +12,16 @@ typedef char SecondaryPlaybackSystemSlotOffset[
 
 static inline s32 secondaryFindFreeSoundSlot(AsdSndSlotA *slots)
 {
-    for (s32 index = 0; index < 4; ++index) {
-        if (!slots->handles[index])
-            return index;
-    }
-    return -1;
+    s32 index = -1;
+    if (!slots->handles[0])
+        index = 0;
+    else if (!slots->handles[1])
+        index = 1;
+    else if (!slots->handles[2])
+        index = 2;
+    else if (!slots->handles[3])
+        index = 3;
+    return index;
 }
 
 extern "C" {

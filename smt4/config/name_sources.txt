@@ -4268,3 +4268,25 @@
 00275f8c mapCompleteActiveAndPendingGroups inferred [med] sets the completed-group bit of the active and pending group ids and clears their live state
 0033a2c4 btlFindEntrySelectionByKey inferred [med] returns selectionIndex of first battle entry whose lookup key (+0xd4) equals key, else -1
 003b0cf4 moLivePlayerReleaseIdleStreams inferred [high] smt4 twin of smt4a MoLivePlayer::releaseIdleStreams: clears active flag of used streams, erases idle ones
+00357754 _ZN10NnOsHandleD1Ev inferred NnOsHandle destructor (CloseHandle if handle!=0); smt4a has the same name; atexit target in FUN_003ec728 for the global at 0x471b94
+00357728 _ZN9NnOsThreadD1Ev inferred NnOsThread destructor: nn_os_Thread_FinalizeImpl then handle close; atexit target for the NnOsThread at 0x471b9c
+00360264 _ZN11AsdNodeListD1Ev inferred destructor of a one-pointer list head: detaches all nodes (atexit target for global 0x471b98 in FUN_003ec728); I will rewrite listDetachAllNodes.cpp as AsdNodeList::~AsdNodeList
+004e9ba8 g_modelWorkCriticalSection inferred size:0xc nn::os::CriticalSection constructed in FUN_003ec728 (nn_os_CriticalSection_Initialize + atexit CriticalSection dtor)
+00471b94 g_modelWorkHandle inferred size:0x4 NnOsHandle (str 0 then atexit FUN_00357754)
+00471b98 g_modelWorkList inferred size:0x4 AsdNodeList head (str 0, atexit listDetachAllNodes)
+00471b9c g_modelWorkThread inferred size:0x8 NnOsThread (handle 0, joined 1 at +4; atexit nn_os_Thread_Thread_sub_object)
+00357728 _ZN10NnOsThreadD1Ev inferred my rename had the wrong length prefix: class NnOsThread is 10 chars
+002340e4 _ZN10TimedStateC1Ev evidence default constructor of TimedState (0x14-byte struct, returns this; FUN_00393340 chains its return into the next member constructor like _ZN14SelectionFlagsC1Ev; ~12 callers use it on a local object)
+002340e4 _ZN17RequestParametersC1Ev evidence body = RequestParameters() (kind=1, result=WindowStatusResult(0)); locals AocResult/AocPollResult/TimedState are all RequestParameters
+00393340 _ZN7AocMenuC1Ev evidence twin of smt4a _ZN7AocMenuC1Ev (IDENTICAL shape: RequestParameters x2, SelectionFlags, Obj4221a4 member construction then initializeStepCallbacks)
+00435de0 g_partyMenuListState inferred size:0x10 object: s8 flag at +0, s8 +1, u32 +4, s32 +8, s32 +0xc; retail FUN_00199424/FUN_0019a4f4 reach +8/+0xc through one base register (r7)
+0033b5a0 _ZN18SceneCameraElementC1Ev evidence ctor of the 0x544-byte camera element: forwards to FloatState ctor at +0x4dc, returns this (used by FUN_003ed6c0 vec ctor)
+0033b5bc _ZN18SceneCameraElementD1Ev evidence dtor of the same element (rt_vec_dtor callback in vecContainerDestroy): FloatState dtor NOPed at +0x4dc, returns this
+00348784 _ZN23SceneCameraElementPairD1Ev evidence destructor of the {u32 cookie; SceneCameraElement items[2]} container registered via __aeabi_atexit in FUN_003ed6c0
+0044ea68 g_asdCameraModuleCounters evidence size:0x8 two zeroed words stored with stm right after g_asdCamera state init (same module-state/counters shape as g_cameraModuleCounters)
+004d4924 g_sceneCameraDefaults evidence size:0xab0 position(0,100,1280) offset(0,0,0) up(0,1,0) then SceneCameraElementPair at +0x24
+00348784 _ZN22SceneCameraElementPairD1Ev evidence mangled length typo (SceneCameraElementPair is 22 chars) — SceneCameraElementC1/D1 already IDENTICAL as real class methods
+004d4948 g_sceneCameraElements evidence size:0xa8c SceneCameraElementPair (u32 cookie + 2x0x544 elements) constructed via __aeabi_vec_ctor_nocookie_nodtor(base+0x28) and registered with atexit(pair dtor) in FUN_003ed6c0
+002c66cc __aeabi_vec_dtor evidence ARM C++ ABI array destructor helper (armcc emits calls to __aeabi_vec_dtor)
+001954b0 asdMdlBanksReset inferred [high] sets every bank manager and model manager slot of the six model banks to NULL (companion of asdMdlBanksDestroyAll)
+00123b88 gfxReleaseEntryBlocks inferred [high] twin of smt4a FUN_00161c64

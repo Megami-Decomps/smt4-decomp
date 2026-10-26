@@ -61,6 +61,15 @@ def read_symbols(path):
     return functions
 
 
+def read_numbers(path):
+    """The values of `config/numbers.txt` (`0x<value> // evidence` per line): literal-pool words that
+    are numbers, not addresses, although they fall inside a data section (a status code, a mask)."""
+    if not Path(path).exists():
+        return set()
+    return {int(line.split("//")[0], 16) for line in Path(path).read_text(encoding="utf-8").splitlines()
+            if line.split("//")[0].strip()}
+
+
 def read_objects(path):
     """Every `type:object` line of a symbol file: {address: name}. A named global: a literal-pool
     word holding exactly its address is a relocation to that name instead of `DAT_<address>`."""
@@ -486,7 +495,7 @@ def build_object(name, code, thumb, relocs, pools, attributes, local_symbols=Non
 # --------------------------------------------------------------------------
 
 class Module:
-    def __init__(self, program, functions, data_regions, objects=None, object_sizes=None):
+    def __init__(self, program, functions, data_regions, objects=None, object_sizes=None, numbers=None):
         self.program = program
         self.functions = functions                            # {address: (name, size, thumb)}
         self.names = {a: f[0] for a, f in functions.items()}
@@ -495,6 +504,7 @@ class Module:
         self.thumb = {a for a, f in functions.items() if f[2]}
         self.starts = sorted(functions)
         self.data = data_regions                              # [(start, end)] of the non-executable sections
+        self.numbers = numbers or set()                       # pool words that are numbers, not addresses
 
     def resolve(self, value):
         """The symbol a literal-pool word names: a function (a Thumb one by its address with the low bit
@@ -502,7 +512,7 @@ class Module:
         function = value & ~1 if value & 1 and (value & ~1) in self.thumb else value
         if function in self.names:
             return self.names[function]
-        if any(start <= value < end for start, end in self.data):
+        if value not in self.numbers and any(start <= value < end for start, end in self.data):
             return self.objects.get(value, f"DAT_{value:08x}")
         return None
 
@@ -610,7 +620,8 @@ def main():
         functions = read_symbols(ROOT / module["symbols"])
         data = [(int(s["start"], 16), int(s["start"], 16) + int(s["size"], 16))
                 for s in module["sections"] if "x" not in s["permissions"]]
-        built = Module(program, functions, data, read_objects(ROOT / module["symbols"]), read_object_sizes(ROOT / module["symbols"]))
+        built = Module(program, functions, data, read_objects(ROOT / module["symbols"]), read_object_sizes(ROOT / module["symbols"]),
+                       read_numbers((ROOT / module["symbols"]).parent / "numbers.txt"))
         for unit in units:
             address = int(unit["address"], 16)
             if address not in functions:

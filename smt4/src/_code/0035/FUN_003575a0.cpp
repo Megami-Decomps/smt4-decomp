@@ -1,26 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003575a0` (_code @ 0x3575a0, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/os/HandleSlot.h"
+
+struct TransferMemoryOwner {
+    u8 unk00[0x14];
+    HandleSlot slot;
+};
 
 extern "C" {
+void nn_os_TransferMemoryBlock_Finalize(TransferMemoryOwner *owner);
 
-int nn_os_TransferMemoryBlock_Finalize(void);
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: nn_os_TransferMemoryBlock_Finalize. */
-
-
-int FUN_003575a0(int param_1)
-
+TransferMemoryOwner *FUN_003575a0(TransferMemoryOwner *owner)
 {
-/* irregular: 2 native warning(s); review required */
-  nn_os_TransferMemoryBlock_Finalize();
-  if (*(int *)(param_1 + 0x14) != 0) {
-    software_interrupt(0x23);
-    *(int *)(param_1 + 0x14) = 0;
-  }
-  return param_1;
+    nn_os_TransferMemoryBlock_Finalize(owner);
+    HandleSlot *slot = closeSlot(&owner->slot);
+    return (TransferMemoryOwner *)((u8 *)slot - 0x14);
 }
-
-} /* extern "C" */
+}

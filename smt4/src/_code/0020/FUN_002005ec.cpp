@@ -3,6 +3,13 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x34c];
+    int f0049fc68; /* 0x34c */
+};
+extern GameStateView g_gameState;
+
 
 int rectangleForwardExpandedAlt(...);
 int FUN_00296dc4(unsigned char *, unsigned char *);
@@ -26,7 +33,7 @@ extern unsigned char DAT_0049e45c; /* 0x49e45c */
 extern unsigned char DAT_0049e65c; /* 0x49e65c */
 extern unsigned char DAT_0049e7dc; /* 0x49e7dc */
 extern unsigned char DAT_0049e87c; /* 0x49e87c */
-extern int DAT_0049fc68; /* 0x49fc68 */
+
 
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
 #define ROMWRIGHT_SQRT_4_DEFINED
@@ -63,8 +70,8 @@ void FUN_002005ec(void)
   if (DAT_00446fec != 0) {
     do {
       temp_v2 = DAT_00447000 + temp_v1 * 0xa8;
-      if (DAT_0049fc68 != 1) {
-        if (DAT_0049fc68 != 2) {
+      if (g_gameState.f0049fc68 != 1) {
+        if (g_gameState.f0049fc68 != 2) {
           temp_v0 = (&DAT_0049e45c)[temp_v1];
         }
         else {
@@ -88,8 +95,8 @@ LAB_002006a4:
   if (temp_v1 < DAT_00446ff0) {
     do {
       temp_v2 = DAT_00447004 + temp_v1 * 0xa8;
-      if (DAT_0049fc68 != 1) {
-        if (DAT_0049fc68 != 2) {
+      if (g_gameState.f0049fc68 != 1) {
+        if (g_gameState.f0049fc68 != 2) {
           temp_v0 = (&DAT_0049e65c)[temp_v1];
         }
         else {
@@ -113,8 +120,8 @@ LAB_00200760:
   if (temp_v1 < DAT_00446ff4) {
     do {
       temp_v2 = DAT_00447008 + temp_v1 * 0xa8;
-      if (DAT_0049fc68 != 1) {
-        if (DAT_0049fc68 != 2) {
+      if (g_gameState.f0049fc68 != 1) {
+        if (g_gameState.f0049fc68 != 2) {
           temp_v0 = (&DAT_0049e7dc)[temp_v1];
         }
         else {
@@ -142,8 +149,8 @@ LAB_00200824:
   if (temp_v1 < DAT_00446ff8) {
     do {
       temp_v2 = DAT_0044700c + temp_v1 * 0xa8;
-      if (DAT_0049fc68 != 1) {
-        if (DAT_0049fc68 != 2) {
+      if (g_gameState.f0049fc68 != 1) {
+        if (g_gameState.f0049fc68 != 2) {
           temp_v0 = (&DAT_0049e87c)[temp_v1];
         }
         else {

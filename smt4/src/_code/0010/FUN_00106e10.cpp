@@ -1,29 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00106e10` (_code @ 0x106e10, 0x48 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern const char *const DAT_004090cc[];
+extern u32 DAT_00471b64;
 
-extern int DAT_00471b64; /* 0x471b64 */
+u32 libc_strlen(const char *text);
+s32 asdModelForwardChecked(u32 *handle, const char *name, u32 nameLength, u32 flags);
 
-extern int asdModelForwardChecked(unsigned int *, unsigned int, unsigned int, unsigned int);
-extern unsigned int libc_strlen(unsigned int);
-
-
-int FUN_00106e10(void)
-
+// Opens the shared named resource once; returns the open failure, or 0 when it is (or already was) open.
+s32 FUN_00106e10(void)
 {
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  if (DAT_00471b64 == 0) {
-    temp_v0 = libc_strlen(0x425d76);
-    temp_v1 = asdModelForwardChecked((unsigned int *)&DAT_00471b64,0x425d76,temp_v0,0);
-    if (temp_v1 < 0) {
-      return temp_v1;
+    const char *name = DAT_004090cc[1];
+    u32 opened = DAT_00471b64;
+    if (opened == 0) {
+        s32 result = asdModelForwardChecked(&DAT_00471b64, name, libc_strlen(name), 0);
+        if (nnResultIsFailure(result)) {
+            return result;
+        }
     }
-  }
-  return 0;
+    return 0;
 }
-
-} /* extern "C" */
+}

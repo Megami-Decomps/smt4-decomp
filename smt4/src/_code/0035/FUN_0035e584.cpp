@@ -1,20 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035e584` (_code @ 0x35e584, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable body; retail stores sequentially with r2=0/r1=&list[1]; build merges into stm. */
+#include "common.h"
+
+struct SentinelList {
+    u32 unk00;
+    SentinelList *selfA;
+    SentinelList *selfB;
+    u32 unk0C;
+    u32 unk10;
+    u32 unk14;
+};
 
 extern "C" {
-
-
-void FUN_0035e584(unsigned int *param_1)
-
+void FUN_0035e584(SentinelList *list)
 {
-  *param_1 = 0;
-  param_1[1] = (unsigned int)(param_1 + 1);
-  param_1[3] = 0;
-  param_1[2] = (unsigned int)(param_1 + 1);
-  param_1[4] = 0;
-  param_1[5] = 0;
-  return;
+    list->unk00 = 0;
+    list->selfA = reinterpret_cast<SentinelList *>(&list->selfA);
+    list->unk0C = 0;
+    list->selfB = reinterpret_cast<SentinelList *>(&list->selfA);
+    list->unk10 = 0;
+    list->unk14 = 0;
 }
-
-} /* extern "C" */
+}

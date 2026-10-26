@@ -1,8 +1,9 @@
-/* NON_MATCHING: allocation debug hooks are absent; candidate-reset loop and 64-bit mask scheduling differ. */
+/* NON_MATCHING: retail ORs the 64-bit initialised mask into the state flags with two word loads/stores (build uses ldrd/strd) and counts the slot loop down differently. */
 #include "battle/btlEncount.h"
 #include "battle/btlMain.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdDebug.h"
 
 extern "C" {
 extern BtlEncounterGlobalsA g_btlEncount;
@@ -17,13 +18,12 @@ void FUN_002e5924(s32 state);
 // Create the encounter job, reset its candidate slots and queue the initial encounter state.
 void FUN_002cf698(BtlMainStateA *battle)
 {
-    // The retail allocation and extra global mask extend beyond the shared prefix views.
+    // The retail allocation extends beyond the shared work prefix.
     struct EncounterWork { BtlEncount base; u32 pending; };
-    struct EncounterGlobalsView { BtlEncounterGlobalsA base; u64 initializedMask; };
-    typedef char EncounterLocalViewOffsets[
-        sizeof(EncounterWork) == 0x14 && offsetof(EncounterGlobalsView, initializedMask) == 0x60 ? 1 : -1];
+    typedef char EncounterLocalViewOffsets[sizeof(EncounterWork) == 0x14 ? 1 : -1];
     battle->encounterTask.job = taskCreateDraw(reinterpret_cast<const s8 *>("btlEncount Calc"), 4, 0, 0,
         btlEncounterUpdateFromJob, btlEncountDestroy, reinterpret_cast<u32>(battle), reinterpret_cast<void *>(battle->job));
+    asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\btlEncount.cpp", 2177);
     EncounterWork *work = static_cast<EncounterWork *>(asdMemoryAllocTracked(0x100, 0x100, 0, sizeof(EncounterWork), 1));
     g_btlEncount.work = &work->base;
     work->base.state = 0;
@@ -34,19 +34,17 @@ void FUN_002cf698(BtlMainStateA *battle)
         work->base.data = NULL;
     }
     for (s32 index = 0; index < 50; ++index) {
-        BattleEncounterSlotA *entry = &battle->encounterSlots.entries[index];
-        entry->id = -1;
-        entry->category = -1;
-        entry->listedId = -1;
+        battle->encounterSlots.entries[index].id = -1;
+        battle->encounterSlots.entries[index].category = -1;
+        battle->encounterSlots.entries[index].listedId = -1;
     }
     FUN_00408184(2, 1);
     if (battle->encounterGate.disabled == 0 && battle->encounterSelection.id >= 0 &&
         !(battle->encounter.statusFlags & 0x2000000)) {
-        const EncounterGlobalsView *globals = reinterpret_cast<const EncounterGlobalsView *>(&g_btlEncount);
-        if (!(g_btlEncount.initialStateMask & battle->stateFlags64.bits) &&
-            !(battle->stateFlags64.bits & globals->initializedMask)) {
+        if (!(battle->stateFlags64.bits & g_btlEncount.initialStateMask) &&
+            !(g_btlEncount.initializedMask & battle->stateFlags64.bits)) {
             FUN_002e5924(2);
-            battle->stateFlags64.bits |= globals->initializedMask;
+            battle->stateFlags64.bits |= g_btlEncount.initializedMask;
         }
     }
 }

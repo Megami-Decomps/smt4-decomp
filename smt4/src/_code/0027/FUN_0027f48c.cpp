@@ -3,6 +3,14 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x3d0];
+    int f0049fcec; /* 0x3d0 */
+    int f0049fcf0; /* 0x3d4 */
+};
+extern GameStateView g_gameState;
+
 
 int CONCAT44(...);
 int collisionTestProjectedSpherePlanes(float *, int, int, int);
@@ -27,8 +35,8 @@ extern unsigned char DAT_0049e45c; /* 0x49e45c */
 extern unsigned char DAT_0049e65c; /* 0x49e65c */
 extern unsigned char DAT_0049e7dc; /* 0x49e7dc */
 extern unsigned char DAT_0049e87c; /* 0x49e87c */
-extern int DAT_0049fcec; /* 0x49fcec */
-extern int DAT_0049fcf0; /* 0x49fcf0 */
+
+
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -86,8 +94,8 @@ unsigned int FUN_0027f48c(float *param_1,float *param_2)
   temp_v15 = *(unsigned long long *)param_1;
   temp_v20 = param_1[2];
   temp_v11 = CONCAT44(temp_v20,temp_v10);
-  DAT_0049fcec = -1;
-  DAT_0049fcf0 = -1;
+  g_gameState.f0049fcec = -1;
+  g_gameState.f0049fcf0 = -1;
   if (0 < (int)DAT_00446fec) {
     puVar1 = (unsigned char *)0x49e45b;
     if ((DAT_00446fec & 1) != 0) {
@@ -187,8 +195,8 @@ LAB_0027f630:
               }
             }
             else {
-              DAT_0049fcec = temp_v0;
-              DAT_0049fcf0 = temp_v2;
+              g_gameState.f0049fcec = temp_v0;
+              g_gameState.f0049fcf0 = temp_v2;
               if (temp_v0 == 0) {
                 puVar1 = &DAT_0049e45c;
                 puVar1[temp_v2] = 1;

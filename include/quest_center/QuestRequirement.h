@@ -2,7 +2,7 @@
 #define QUEST_CENTER_QUESTREQUIREMENT_H
 #include "common.h"
 #include <stddef.h>
-struct QuestRequirement { s16 kind; u16 id; s32 count; };
+struct QuestRequirement { u16 kind; u16 id; s32 count; };
 struct QuestRequirementDefinition {
     u8 prefix[6];
     u8 kind;

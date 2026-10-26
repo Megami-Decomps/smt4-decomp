@@ -1,23 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003564c0` (_code @ 0x3564c0, 0x28 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/os/HandleSlot.h"
+
+struct HandleOwner4 {
+    u32 unk00;
+    HandleSlot slot;
+};
 
 extern "C" {
-
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_003564c0(int param_1)
-
+HandleOwner4 *FUN_003564c0(HandleOwner4 *owner)
 {
-/* irregular: 1 native warning(s); review required */
-  if (*(int *)(param_1 + 4) != 0) {
-    software_interrupt(0x23);
-    *(unsigned int *)(param_1 + 4) = 0;
-  }
-  return param_1;
+    HandleSlot *slot = closeSlot(&owner->slot);
+    return (HandleOwner4 *)((u8 *)slot - 4);
 }
-
-} /* extern "C" */
+}

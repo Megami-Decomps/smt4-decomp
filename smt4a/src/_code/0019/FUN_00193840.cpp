@@ -11,7 +11,8 @@ void FUN_00193840(void *, u32 **commands, const ShaderUniformSelection *selectio
                   ShaderUniformRecord **records)
 {
     for (u32 index = 0; index < 8; ++index) {
-        ShaderUniformData *data = (*records)[selection->index].vertex[index];
+        ShaderUniformRecord *record = &(*records)[selection->index];
+        ShaderUniformData *data = record->vertex[index];
         if (data != NULL) {
             u64 header = (static_cast<u64>(DAT_0053ccc8.vertexHeader) << 32) |
                 (((index & 0xFF) << 8) + 0x800);
@@ -19,7 +20,7 @@ void FUN_00193840(void *, u32 **commands, const ShaderUniformSelection *selectio
             *commands += 2;
             FUN_001a063c(commands, data->data, data->wordCount << 2);
         }
-        data = (*records)[selection->index].geometry[index];
+        data = record->geometry[index];
         if (data != NULL) {
             u64 header = (static_cast<u64>(DAT_0053ccc8.geometryHeader) << 32) |
                 (((index & 0xFF) << 8) + 0x1000);

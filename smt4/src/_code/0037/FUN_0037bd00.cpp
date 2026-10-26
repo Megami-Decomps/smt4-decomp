@@ -1,16 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0037bd00` (_code @ 0x37bd00, 0x18 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mid-flow mov r0, r0 (nop) in a leaf with no lr save; not a removed call, cause unknown. */
+#include "common.h"
+
+struct Pair4 {
+    u32 first;
+    u32 second;
+};
+
+struct Holder4 {
+    u32 unk00;
+    Pair4 pair;
+};
 
 extern "C" {
-
-
-void FUN_0037bd00(int param_1)
-
+void FUN_0037bd00(Holder4 *holder)
 {
-  *(unsigned int *)(param_1 + 4) = 0;
-  *(unsigned int *)(param_1 + 8) = 0;
-  return;
+    Pair4 *pair = &holder->pair;
+    pair->first = 0;
+    pair->second = 0;
 }
-
-} /* extern "C" */
+}

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Availability-row and cell address formation and paired-loop registers differ. */
+/* NON_MATCHING: the availability row now matches (flag at +0x4C of a 0xA0-byte row, add #0xB600); retail hoists slot*640 out of the unrolled cell loop and keeps slot*5 in r5, the build indexes (slot*32 + i)*20. */
 #include "common.h"
 #include "battle/btlUI.h"
 
@@ -11,14 +11,13 @@ u32 FUN_004aa1e8(u32 unused, s32 slot)
     if (ui == 0)
         return 0;
 
-    if (ui->objD.availability.rows[slot].active != 0)
+    const BtlUiAvailabilityRowA *row = &ui->objD.availability.rows[slot];
+    if (row->active != 0)
         return 1;
 
     const s32 count = ui->availabilityCounts.counts[slot];
-    const BtlUiAvailabilityCell *cells =
-        ui->availabilityCells.cells + slot * 32;
     for (s32 i = 0; i < count; ++i) {
-        if (cells[i].active != 0)
+        if (ui->availabilityCells.cells[slot * 32 + i].active != 0)
             return 1;
     }
     return 0;

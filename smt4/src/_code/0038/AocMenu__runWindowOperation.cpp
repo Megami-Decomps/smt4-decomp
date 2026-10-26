@@ -3,22 +3,13 @@
 #include "classes/AocMenu.h"
 #include "classes/Obj422594.h"
 
-/* What the window operation reports (five words; the first byte is the result code). */
-struct InputEvent {
-    union {
-        u32 code;
-        u8 kind;
-    };
-    u32 data[4];
-};
-
 /* A window operation object: slot 1 releases it, slot 3 hands out its pending event. */
 class WindowOperation {
 public:
     virtual void slot0();
     virtual void release();
     virtual void slot2();
-    virtual InputEvent getEvent();
+    virtual RequestParameters getEvent();
 };
 
 namespace {
@@ -40,13 +31,12 @@ struct AocBlock {
 
 extern "C" {
 extern AocBlock *g_aocMain;
-void timeInitializeActiveState(InputEvent *event);
-s32 strIsEmpty(InputEvent *event);
-s32 byteIsAtLeast100(InputEvent *event);
+s32 strIsEmpty(RequestParameters *event);
+s32 byteIsAtLeast100(RequestParameters *event);
 void jobStopAndClearFlags(u32 *job);
 void FUN_00233db8(u32 *job, s32 mode);
 void FUN_0023392c(u32 *job, s32 a, s32 b);
-void FUN_00234124(u32 *job, InputEvent *event);
+void FUN_00234124(u32 *job, RequestParameters *event);
 s32 FUN_0026b564(void);
 void ifTouchRegionClearAll(u32 *regions);
 void FUN_00233818(u32 *entries);
@@ -64,8 +54,7 @@ void FUN_00233670(u32 *entries, u32 group, u32 id, s32 value);
 void AocMenu::runWindowOperation()
 {
     u32 * job = reinterpret_cast<u32 *>(this);
-    InputEvent event;
-    timeInitializeActiveState(&event);
+    RequestParameters event;
     AocBlock *aoc = g_aocMain;
     WindowOperation *operation = reinterpret_cast<WindowOperation *>(job[0x82]);
     switch (job[2]) {
@@ -85,7 +74,8 @@ void AocMenu::runWindowOperation()
         return;
     case 2:
         if ((job[0] & 0x200) != 0) {
-            event = operation->getEvent();
+            RequestParameters polled = operation->getEvent();
+            event = polled;
             if (strIsEmpty(&event) != 0) {
                 job[2] = 3;
             } else if (byteIsAtLeast100(&event) != 0) {
@@ -96,11 +86,11 @@ void AocMenu::runWindowOperation()
                 }
                 if (event.kind != 0x67) {
                     job[2] = 9999;
-                    job[0x84] = event.code;
-                    job[0x85] = event.data[0];
-                    job[0x86] = event.data[1];
-                    job[0x87] = event.data[2];
-                    job[0x88] = event.data[3];
+                    job[0x84] = event.word(0);
+                    job[0x85] = event.word(1);
+                    job[0x86] = event.word(2);
+                    job[0x87] = event.word(3);
+                    job[0x88] = event.word(4);
                     return;
                 }
                 WindowOperation *current = reinterpret_cast<WindowOperation *>(job[0x82]);
@@ -122,8 +112,9 @@ void AocMenu::runWindowOperation()
         job[0x82] = reinterpret_cast<u32>(job + 0x83);
         FUN_00233db8(job, 1);
         return;
-    case 4:
-        event = operation->getEvent();
+    case 4: {
+        RequestParameters polled = operation->getEvent();
+        event = polled;
         if (strIsEmpty(&event) != 0) {
             jobStopAndClearFlags(job);
             WindowOperation *current;
@@ -162,13 +153,14 @@ void AocMenu::runWindowOperation()
         if (byteIsAtLeast100(&event) != 0) {
             jobStopAndClearFlags(job);
             job[2] = 9999;
-            job[0x84] = event.code;
-            job[0x85] = event.data[0];
-            job[0x86] = event.data[1];
-            job[0x87] = event.data[2];
-            job[0x88] = event.data[3];
+            job[0x84] = event.word(0);
+            job[0x85] = event.word(1);
+            job[0x86] = event.word(2);
+            job[0x87] = event.word(3);
+            job[0x88] = event.word(4);
         }
         return;
+    }
     case 9999:
         FUN_00233e70(job, 5, 3);
         return;

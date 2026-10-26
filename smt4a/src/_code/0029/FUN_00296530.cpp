@@ -28,7 +28,7 @@ int FUN_003fd924(...);
 int animationSelectClip(...);
 int controllerSetRotationEulerDegrees(...);
 int FUN_003fe86c(...);
-int FUN_0040b730(int, int, int);
+int playerLoadOutfitPartModel(int, int, int);
 int playerModelLoadByIndex(int, unsigned int, int, int);
 
 #ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
@@ -99,7 +99,7 @@ extern int FUN_002e5db4(void);
 /* Supplied declaration required: controllerSetRotationEulerDegrees. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: handleRegistryRegisterObject. */
-/* Supplied declaration required: FUN_0040b730. */
+/* Supplied declaration required: playerLoadOutfitPartModel. */
 /* Supplied declaration required: playerModelLoadByIndex. */
 extern int FUN_004ffba8(int);
 
@@ -161,17 +161,17 @@ void FUN_00296530(void)
     piVar13 = g_lmapScene;
     if ((short)g_lmapScene[0x72] != *(short *)(temp_v2 + 6)) {
       *(short *)(g_lmapScene + 0x72) = *(short *)(temp_v2 + 6);
-      FUN_0040b730(piVar13[0x6a],0,7);
+      playerLoadOutfitPartModel(piVar13[0x6a],0,7);
     }
     piVar13 = g_lmapScene;
     if (*(short *)((int)g_lmapScene + 0x1ca) != *(short *)(temp_v2 + 8)) {
       *(short *)((int)g_lmapScene + 0x1ca) = *(short *)(temp_v2 + 8);
-      FUN_0040b730(piVar13[0x6a],1,7);
+      playerLoadOutfitPartModel(piVar13[0x6a],1,7);
     }
     piVar13 = g_lmapScene;
     if ((short)g_lmapScene[0x73] != *(short *)(temp_v2 + 10)) {
       *(short *)(g_lmapScene + 0x73) = *(short *)(temp_v2 + 10);
-      FUN_0040b730(piVar13[0x6a],2,7);
+      playerLoadOutfitPartModel(piVar13[0x6a],2,7);
     }
   }
   FUN_003e5858(g_lmapScene[0x6a]);

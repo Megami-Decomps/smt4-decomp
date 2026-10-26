@@ -4,6 +4,16 @@
 #include "shard/W6_W6Match1_EnemyPosition.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x21];
+    signed char f005f161d; /* 0x021 */
+    u8 pad022[0x472];
+    float f005f1a90; /* 0x494 */
+    float f005f1a94; /* 0x498 */
+};
+extern GameStateView g_gameState;
+
 
 void FUN_00297f00(int value, int count);
 
@@ -71,9 +81,9 @@ extern signed char DAT_005f0d24; /* 0x5f0d24 */
 extern int DAT_005f0d28; /* 0x5f0d28 */
 extern int DAT_005f0d38; /* 0x5f0d38 */
 extern unsigned int DAT_005f0d3c; /* 0x5f0d3c */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern float DAT_005f1a90; /* 0x5f1a90 */
-extern float DAT_005f1a94; /* 0x5f1a94 */
+
+
+
 extern int DAT_005f1c64; /* 0x5f1c64 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -230,7 +240,7 @@ LAB_00222b78:
       }
       temp_v5 = *(float *)(g_lmapScene + 0x1c);
       distSpatial();
-      if (DAT_005f1a94 >= temp_v5) {
+      if (g_gameState.f005f1a94 >= temp_v5) {
         temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
         if (temp_v1 != 2) {
           return;
@@ -342,7 +352,7 @@ LAB_00222b78:
       DAT_005f0c9c = DAT_005f0c9c + temp_v6 * (temp_v5 - DAT_005f0cbc);
       DAT_005f0cbc = (float)temp_v12;
       distSpatial();
-      if (DAT_005f1a90 <= temp_v8) {
+      if (g_gameState.f005f1a90 <= temp_v8) {
         return;
       }
       temp_v1 = linkHolderCallFirst(*(unsigned int *)(g_lmapScene + 0x1a8));
@@ -559,7 +569,7 @@ LAB_00222b88:
       DAT_005f0ca4 = 0;
       DAT_005f0d28 = 0xf;
     }
-    if (DAT_005f161d == '\0') {
+    if (g_gameState.f005f161d == '\0') {
       DAT_005f0ca8 = DAT_005f0d38;
       DAT_005f0d28 = 0xf;
       DAT_005f0ce8 = 0;

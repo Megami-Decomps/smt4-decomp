@@ -22,35 +22,26 @@ void dataTableFileGetTable(void *file, s32 index);
 TableEntry *dataTableGetEntries(void);
 u32 dataTableGetCount(void);
 
-static void *tableOwnerFile(TableOwner *owner)
-{
-    return owner->loaded ? owner->file : NULL;
-}
-
 /* Return 0 when any used entry of the owner's table has no data yet, else 1. */
 s32 FUN_0038ba40(TableOwner *owner)
 {
-    void *file;
     TableEntry *entries;
     u32 count;
-    u32 i;
 
     if (owner->entries == NULL) {
         return 1;
     }
-    file = tableOwnerFile(owner);
-    if (file != NULL) {
-        dataTableFileGetTable(file, 0);
+    if (owner->loaded && owner->file != NULL) {
+        dataTableFileGetTable(owner->file, 0);
         dataTableGetEntries();
     }
-    file = tableOwnerFile(owner);
-    if (file == NULL) {
+    if (!owner->loaded || owner->file == NULL) {
         return 1;
     }
-    dataTableFileGetTable(file, 0);
+    dataTableFileGetTable(owner->file, 0);
     count = dataTableGetCount();
     entries = count != 0 ? owner->entries : NULL;
-    for (i = 0; i < count; i++) {
+    for (u32 i = 0; i < count; i++) {
         if (entries[i].used && entries[i].data == NULL) {
             return 0;
         }

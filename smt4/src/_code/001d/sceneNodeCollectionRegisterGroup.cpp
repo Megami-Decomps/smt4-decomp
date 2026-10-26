@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc merges the two asdLightActivate calls and hoists the zero for the trailing stores; we duplicate the call */
+/* NON_MATCHING: the asdLightActivate calls now merge; retail keeps group in r6 and a zero in r7 hoisted to entry so the lastGroup/unk14 stores form one strd (r6,r7), ours allocates group in r4 and the zero late (no strd). */
 #include "common.h"
 #include "shard/W6_W6Match7_SceneAttachment.h"
 
@@ -31,13 +31,13 @@ void sceneNodeCollectionRegisterGroup(SceneGroupSlot *collection, s32 group)
     if (group == 1) {
         root = (&sceneGroup1Root)[0];
     } else if (group == 2) {
-        asdLightActivate(0);
         root = (&sceneGroup2Root)[0];
+        asdLightActivate(0);
     } else if (group == 4) {
         root = (&sceneGroup1Root)[1];
     } else if (group == 5) {
-        asdLightActivate(1);
         root = (&sceneGroup2Root)[1];
+        asdLightActivate(1);
     } else {
         return;
     }

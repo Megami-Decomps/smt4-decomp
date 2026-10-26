@@ -1,13 +1,9 @@
-/* NON_MATCHING: Command pairs use a shared constant table, and cursor/zero registers and saved-register allocation differ. */
+/* NON_MATCHING: the command words are now stored as literals like retail (no constant table); retail merges each word pair into one stm with the zero/one constants hoisted into ip/r6 and pushes r7/r8, where this build emits separate stores. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
 struct CommandSegmentLink {
     u32 header[2];
     u32 commandCount;
-};
-struct CommandSegmentPair {
-    u32 value;
-    u32 header;
 };
 extern "C" {
 extern AsdGfxContext g_asdGfxContext;
@@ -32,24 +28,24 @@ void FUN_0017d43c(void)
     } else {
         buffer->writeOffset = used + 32;
         if ((u32)cursor < g_commandBufferEnd) {
-            const CommandSegmentPair padding = {0, 0x8025E};
-            *(CommandSegmentPair *)cursor = padding;
+            cursor[0] = 0;
+            cursor[1] = 0x8025E;
             g_commandBufferCursor = cursor + 2;
         }
     }
     if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
-        const CommandSegmentPair flush = {1, 0xF0111};
-        *(CommandSegmentPair *)g_commandBufferCursor = flush;
+        g_commandBufferCursor[0] = 1;
+        g_commandBufferCursor[1] = 0xF0111;
         g_commandBufferCursor += 2;
     }
     if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
-        const CommandSegmentPair invalidate = {1, 0xF0110};
-        *(CommandSegmentPair *)g_commandBufferCursor = invalidate;
+        g_commandBufferCursor[0] = 1;
+        g_commandBufferCursor[1] = 0xF0110;
         g_commandBufferCursor += 2;
     }
     if ((u32)g_commandBufferCursor < g_commandBufferEnd) {
-        const CommandSegmentPair marker = {0x12345678, 0xF0010};
-        *(CommandSegmentPair *)g_commandBufferCursor = marker;
+        g_commandBufferCursor[0] = 0x12345678;
+        g_commandBufferCursor[1] = 0xF0010;
         g_commandBufferCursor += 2;
     }
     AsdCmdRecord *entry = &buffer->entries[buffer->listCount];

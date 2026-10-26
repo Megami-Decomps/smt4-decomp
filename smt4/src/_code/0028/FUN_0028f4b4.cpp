@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reserves 60 frame bytes versus 44; registry registers and missing-glyph loop block placement differ. */
+/* NON_MATCHING: same rows as retail; the stack frame differs (retail 60 bytes: reader at sp+0, glyph at sp+32; ours 44: reader at sp+4, glyph at sp+16, so the 20 bytes of call-live local slots are missing) plus a register swap around the font-record lookup. */
 #include "font/FontStringReader.h"
 extern "C" {
 extern FontRecordPool DAT_00464a70;
@@ -24,13 +24,13 @@ f32 FUN_0028f4b4(const char *text, u32 fontIndex, f32 spacing)
     s32 length = libc_strlen(text);
     s32 character = reader.next();
     while (static_cast<const char *>(reader.state) - text <= length) {
-        if (font->vtable->hasGlyph(font, character)) {
+        if (!font->vtable->hasGlyph(font, character)) {
+            character = reader.next();
+            width += static_cast<f32>(static_cast<s8>(glyph.widths.charWidth));
+        } else {
             font->vtable->glyph.getGlyph(font, &glyph, character);
             width += static_cast<f32>(static_cast<s8>(glyph.widths.charWidth)) + spacing;
             character = reader.next();
-        } else {
-            character = reader.next();
-            width += static_cast<f32>(static_cast<s8>(glyph.widths.charWidth));
         }
     }
     if (minimum < width)

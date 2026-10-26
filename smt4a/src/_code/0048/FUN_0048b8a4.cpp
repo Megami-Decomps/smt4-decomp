@@ -1,4 +1,4 @@
-/* NON_MATCHING: auxiliary flag address hoisting, phase-two placement and one-frame VFP constant lifetime differ. */
+/* NON_MATCHING: the completion flag now reads through uiSpriteGetCompletionState (matches retail); the phase-0 flag/timer stores merge into stm and the scene pointer is formed later than in retail, and the VFP constant lifetime differs. */
 #include "ui/NaviCategorySelection.h"
 #include "ui/UiSpriteState.h"
 #include "shard/W5_W5Match2_ScalarArguments.h"
@@ -15,6 +15,7 @@ void pointConvertToFloat(FloatPoint *, s32, s32);
 u32 NaviMain_GetCurrentMap();
 u32 naviGetActiveStateValue(void *);
 void naviMainSetCurrentMap(void *, u32);
+s8 uiSpriteGetCompletionState(const UiSpriteState *sprite);
 
 void FUN_0048b8a4(NaviCategorySelectionWork *owner)
 {
@@ -49,7 +50,7 @@ void FUN_0048b8a4(NaviCategorySelectionWork *owner)
         work->phase = 1;
         work->timer = 0;
         u32 map = NaviMain_GetCurrentMap();
-        if (map != naviGetActiveStateValue(&work->scene)) {
+        if (naviGetActiveStateValue(&work->scene) != map) {
             map = naviGetActiveStateValue(&work->scene);
             naviMainSetCurrentMap(&work->scene, map);
             FUN_00492ac8(reinterpret_cast<u32>(&work->scene), 0);
@@ -63,12 +64,12 @@ void FUN_0048b8a4(NaviCategorySelectionWork *owner)
         s32 y = vec2GetYInt(&work->motion);
         s32 x = vec2GetXInt(&work->motion);
         pointConvertToFloat(&work->scene.position, x, y);
-        if (!work->auxiliary.animationFlags.completed)
+        if (!uiSpriteGetCompletionState(&work->auxiliary))
             FUN_00163aa4(&work->auxiliary, 1.0f);
         return;
     }
     case 2:
-        if (!work->auxiliary.animationFlags.completed)
+        if (!uiSpriteGetCompletionState(&work->auxiliary))
             FUN_00163aa4(&work->auxiliary, 1.0f);
         work->state = 2;
         work->phase = 0;

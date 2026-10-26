@@ -1,6 +1,7 @@
 /* NON_MATCHING: only resource-pointer load scheduling around exit-state byte stores differs. */
 #include "addon/SceneResource.h"
 #include "ui/SceneWindowWork.h"
+#include "classes/AocMenu.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
 
@@ -9,8 +10,6 @@ extern SceneResourceWork *g_sceneResourceWork;
 void FUN_002898e4();
 void buttonHelpAcquireResources();
 void buttonHelpCreate();
-void *asdOperatorNew(u32);
-SceneWindowWork *FUN_00393340(SceneWindowWork *);
 void FUN_00296fec();
 void FUN_00392e74(SceneResource *);
 void FUN_002a03d8(u32, u32);
@@ -30,9 +29,9 @@ u32 FUN_001b4fe8()
         buttonHelpAcquireResources();
         buttonHelpCreate();
         // The allocation extends beyond the recovered SceneWindowWork prefix.
-        SceneWindowWork *resource = static_cast<SceneWindowWork *>(asdOperatorNew(0x2434));
+        AocMenu *resource = static_cast<AocMenu *>(asdOperatorNew(0x2434));
         if (resource)
-            resource = FUN_00393340(resource);
+            resource = new (resource) AocMenu;
         work->resource = reinterpret_cast<SceneResource *>(resource);
         FUN_00296fec();
         work->state.pending = 1;

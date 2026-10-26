@@ -1,14 +1,9 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `mulU32ToU64` (_code @ 0x30fbe0, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail copies the second operand (mov r2, r1) before umull; the build issues umull on the argument registers directly. */
+#include "common.h"
 
 extern "C" {
-
-
-long long mulU32ToU64(unsigned int param_1,unsigned int param_2)
-
+u64 mulU32ToU64(u32 a, u32 b)
 {
-  return (unsigned long long)param_1 * (unsigned long long)param_2;
+    return (u64)a * (u64)b;
 }
-
-} /* extern "C" */
+}

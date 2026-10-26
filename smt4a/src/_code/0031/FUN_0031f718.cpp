@@ -62,12 +62,12 @@ void FUN_0031f718(s32 id, s32 useBaseStats, u32 flags)
     session->unk20B0 = 1;
     if (id >= 0) {
         Table00Record *record = dataTable00FindById((u16)id);
-        if (record == NULL) {
-            allowed = false;
-        } else {
+        if (record != NULL) {
             allowed = !(record->flags & 0x400);
             if (g_gameGlobals.instance != NULL && g_gameGlobals.instance->unk2017 == 17)
                 allowed = false;
+        } else {
+            allowed = false;
         }
     }
     session->sessionEligibility.allowed = allowed;

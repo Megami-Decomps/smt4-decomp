@@ -232,11 +232,10 @@ void FUN_001f20b4(int param_1,int param_2,unsigned int param_3,int param_4,unsig
           temp_v4 = ifTouchGetSelectionModeForRegion(param_5);
           temp_v5 = *(short *)(temp_v6 + 10) + param_2;
           temp_v7 = *(short *)(temp_v6 + 8) + param_1;
-          if (!((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6)) {
-            FUN_002bf288(2,0x24,0x7a,temp_v7,temp_v5,0xc9);
-          }
-          else {
+          if (!(!((temp_v4 == 1 || temp_v4 == 2) || temp_v4 == 6))) {
             FUN_002bf288(2,0x24,0x7b,temp_v7,temp_v5,0xc9);
+          } else {
+            FUN_002bf288(2,0x24,0x7a,temp_v7,temp_v5,0xc9);
           }
           FUN_002bf288(2,0x24,0x7d,*(short *)(temp_v6 + 8) + param_1,*(short *)(temp_v6 + 10) + param_2,
                        0xc9);

@@ -32,8 +32,8 @@ struct SelectScreen {
     u8 unk2FC[4];
     struct {
         u8 unk00[0xC];
-        u8 locked;          // 0x30C
-        u8 unk0D[0x143];
+        s8 locked;          // 0x30C
+        u8 unk0D[0x13F];
     } panel;                // 0x300
     u8 confirmHeld;         // 0x44C
     u8 cancelHeld;          // 0x44D
@@ -78,7 +78,7 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
                 FUN_003343f0(1);
             }
         }
-        if (!skip && screen->panel.locked == 0 && screen->opened == 0 &&
+        if (!skip && screen->panel.locked == 0 && 0 == screen->opened &&
             screen->entryFlags[screen->selected] != 0) {
             FUN_002f0384(1);
             screen->opened = 1;
@@ -89,10 +89,9 @@ extern "C" void FUN_0041f22c(SelectScreen *screen)
     if (screen->pulseTimer < 1) {
         screen->pulseTimer = 30;
         screen->pulse = 1.0f;
-        screen->pulse = screen->pulse - 0.06666667f;
-    } else if (screen->pulseTimer >= 16) {
-        screen->pulse = screen->pulse - 0.06666667f;
     }
+    if (screen->pulseTimer > 15)
+        screen->pulse = screen->pulse - 0.06666667f;
     if (screen->pulseTimer < 15)
         screen->pulse = screen->pulse + 0.06666667f;
     screen->reserved6EC = 0;

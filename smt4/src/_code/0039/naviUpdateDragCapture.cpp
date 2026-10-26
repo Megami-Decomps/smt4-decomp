@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler reuses the command argument stack slots for pointer coordinates and keeps the held-frame branch inline rather than after capture. */
+/* NON_MATCHING: only the scheduling of the 0.0f constant load and one VFP register choice in the capture block differ. */
 #include "shard/W5_W5Match7_SceneState.h"
 #include "AsdSDK/TexTableEntryRange.h"
 
@@ -30,22 +30,11 @@ CursorPoint *NaviMain_GetCursorPos(void *cursorData);
 // Capture the initial drag position and track whether the pointer remains held.
 u32 naviUpdateDragCapture(NavigationDrag *drag)
 {
+    s32 a, b, c, d;
+    s32 x, y;
     if (!(drag->flags & 0x2000000)) {
-        s32 a, b, c, d;
         FUN_00231434(0x1c, 0xfa4, &a, &b, &c, &d);
-        if (!effectForwardModeOne(a, b, c, d) || g_gameState.inputBlocked) {
-            if (drag->flags & 0x10000) {
-                if (!FUN_002319c0() || g_gameState.inputBlocked) {
-                    drag->flags &= ~0x20000;
-                } else {
-                    if (drag->heldFrames < 0xffff)
-                        ++drag->heldFrames;
-                    if (drag->heldFrames > 0)
-                        drag->flags |= 0x20000;
-                }
-            }
-        } else {
-            s32 x, y;
+        if (effectForwardModeOne(a, b, c, d) && !g_gameState.inputBlocked) {
             FUN_003c2e0c(&x, &y);
             drag->flags |= 0x10000;
             drag->previous.x = x;
@@ -60,6 +49,17 @@ u32 naviUpdateDragCapture(NavigationDrag *drag)
             drag->velocity.y = 0.0f;
             drag->unk054 = 0;
             drag->heldFrames = 0;
+        } else {
+            if (drag->flags & 0x10000) {
+                if (!FUN_002319c0() || g_gameState.inputBlocked) {
+                    drag->flags &= ~0x20000;
+                } else {
+                    if (drag->heldFrames < 0xffff)
+                        ++drag->heldFrames;
+                    if (drag->heldFrames > 0)
+                        drag->flags |= 0x20000;
+                }
+            }
         }
     }
     return 0;

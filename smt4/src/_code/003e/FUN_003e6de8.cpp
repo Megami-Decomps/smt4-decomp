@@ -1,24 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e6de8` (_code @ 0x3e6de8, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail emits the early return before the push (cmp; moveq r0, #0; bxeq lr; push {r4, lr}); the build pushes first. */
+#include "common.h"
+
+struct StreamInfoHolder {
+    u8 unk00[4];
+    u32 present;
+    u32 *infoBlockBody;
+};
 
 extern "C" {
+u32 *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetTrackInfoTable(u32 *infoBlockBody);
 
-extern unsigned int *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetTrackInfoTable(unsigned int);
-
-
-unsigned int FUN_003e6de8(int param_1)
-
+u32 FUN_003e6de8(StreamInfoHolder *holder)
 {
-  unsigned int *puVar1;
-  
-  if (*(int *)(param_1 + 4) != 0) {
-    puVar1 = (unsigned int *)
-             nw_snd_internal_StreamSoundFile_InfoBlockBody_GetTrackInfoTable
-                       (*(unsigned int *)(param_1 + 8));
-    return *puVar1;
-  }
-  return 0;
+    if (holder->present != 0) {
+        return *nw_snd_internal_StreamSoundFile_InfoBlockBody_GetTrackInfoTable(holder->infoBlockBody);
+    }
+    return 0;
 }
-
-} /* extern "C" */
+}

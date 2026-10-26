@@ -1,7 +1,12 @@
-/* NON_MATCHING: ARMCC caches vector components and uses core-register copies instead of retail's VFP reloads. */
+/* NON_MATCHING: the target copy is now a VFP vldm/vstm as in retail; ARMCC still caches vector components and stores the origin separately instead of retail's vstm of the three view values. */
 #include "gfx/CameraVectorScratch.h"
 #include "shard/W5_W5Match2_PlainData.h"
 #include <math.h>
+
+static __inline void vector4Copy(const Vector4 *source, Vector4 *destination)
+{
+    *destination = *source;
+}
 
 extern "C" {
 extern CameraVectorScratch DAT_004ea81c;
@@ -12,7 +17,7 @@ void FUN_002075d0(const Vector4* target, Vector4* output)
 {
     Matrix44 view;
     FUN_0028c92c(&view);
-    DAT_004ea81c.direction = *target;
+    vector4Copy(target, &DAT_004ea81c.direction);
     DAT_004ea81c.origin.x = view.values[3];
     DAT_004ea81c.origin.y = view.values[7];
     DAT_004ea81c.origin.z = view.values[11];

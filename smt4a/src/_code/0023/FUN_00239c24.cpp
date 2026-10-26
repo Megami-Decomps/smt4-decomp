@@ -3,6 +3,13 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x8];
+    int f005f1604; /* 0x008 */
+};
+extern GameStateView g_gameState;
+
 
 int randRange(...);
 int FUN_001bbf0c(void);
@@ -30,7 +37,7 @@ typedef struct {
     unsigned int sp50; /* 0x50: local_50 */
 } void_stack;
 
-extern int DAT_005f1604; /* 0x5f1604 */
+
 extern unsigned char DAT_0060fec8; /* 0x60fec8 */
 extern int DAT_0060ff88; /* 0x60ff88 */
 extern int DAT_0060ff94; /* 0x60ff94 */
@@ -184,8 +191,8 @@ void FUN_00239c24(void)
         *(char *)(temp_v3 + 0x3a) = (char)*(short *)(temp_v5 + 0x5814d4);
         *(char *)(temp_v3 + 0x3b) = (char)*(unsigned short *)(temp_v5 + 0x5814d6);
       }
-      DAT_005f1604 = (unsigned int)*(short *)(temp_v5 + 0x5814c8);
-      naviMainSetFlagsAndActivate(DAT_005f1604 & 0xff,0,0,0,0,0);
+      g_gameState.f005f1604 = (unsigned int)*(short *)(temp_v5 + 0x5814c8);
+      naviMainSetFlagsAndActivate(g_gameState.f005f1604 & 0xff,0,0,0,0,0);
     }
     else {
       FUN_002edf08();

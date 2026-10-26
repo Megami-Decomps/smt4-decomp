@@ -30,6 +30,8 @@ PartnerAttackEntries::PartnerAttackEntries()
         entry->unkAC = 0;
     }
     paramsClearPacket(&parameters);
-    paramsInit(&parameters, DAT_00529ac0 - 0x54 - 0xcc - 0x114, 0x114, DAT_00529ac0 - 0x54 - 0xcc, 0xcc,
-               DAT_00529ac0 - 0x54, 0x54, NULL, 0, DAT_00529ac0, 0x94c);
+    const u8 *third = DAT_00529ac0 - 0x54;
+    const u8 *second = third - 0xcc;
+    const u8 *first = second - 0x114;
+    paramsInit(&parameters, first, 0x114, second, 0xcc, third, 0x54, NULL, 0, DAT_00529ac0, 0x94c);
 }

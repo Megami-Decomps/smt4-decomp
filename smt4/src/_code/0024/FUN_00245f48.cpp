@@ -39,7 +39,10 @@ float FUN_00245f48(float x)
     }
 
     lo = hi;
-    if ((in.u << 1) > 0x7e000000u) {
+    if (!((in.u << 1) > 0x7e000000u)) {
+        t = x * x;
+        y = x;
+    } else {
         t = (1.0f - fabsf(x)) * 0.5f;
         y = FUN_003f6d64(t);
         if (in.u & 0x80000000u) {
@@ -51,9 +54,6 @@ float FUN_00245f48(float x)
             lo = 0.0004838268f;
         }
         y = y * -2.0f;
-    } else {
-        t = x * x;
-        y = x;
     }
     return (lo + y) + (y * t) * (0.16666673f + t * (0.07498761f + t * (0.045020215f + t * (0.026433362f + t * 0.038328305f)))) + hi;
 }

@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int rt_vec_dtor(...);
+int __aeabi_vec_dtor(...);
 int nw_snd_internal_ExternalSoundPlayer_Finalize(...);
 
 extern int nw_snd_internal_ExternalSoundPlayer_ExternalSoundPlayer_sub_object_37B9C8(...); /* 0x37b9c8 */
 extern unsigned char DAT_004218f8; /* 0x4218f8 */
 
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 /* Supplied declaration required: nw_snd_internal_ExternalSoundPlayer_Finalize. */
 
 
@@ -34,7 +34,7 @@ unsigned int * FUN_00376880(unsigned int *param_1)
     param_1[0x14] = 0;
     param_1[0x12] = 0x3f800000;
   }
-  rt_vec_dtor(param_1 + 2,nw_snd_internal_ExternalSoundPlayer_ExternalSoundPlayer_sub_object_37B9C8
+  __aeabi_vec_dtor(param_1 + 2,nw_snd_internal_ExternalSoundPlayer_ExternalSoundPlayer_sub_object_37B9C8
                ,0x10,4);
   return param_1;
 }

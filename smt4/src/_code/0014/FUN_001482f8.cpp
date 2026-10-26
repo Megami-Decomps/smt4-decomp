@@ -1,42 +1,28 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001482f8` (_code @ 0x1482f8, 0x50 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable IPC stub; retail loads the two stack arguments with one ldm into core registers and merges words 0..5 into one stm, the build loads the last argument through a VFP register. */
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
+#include "nn/os/IpcStaticBuffer.h"
 
 extern "C" {
+extern u32 DAT_004656b0;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern unsigned int DAT_004656b0; /* 0x4656b0 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_001482f8(unsigned int param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4,
-                 int param_5,unsigned int param_6)
-
+u32 FUN_001482f8(u32 first, u32 second, u32 third, u32 fourth, s32 fifth, u32 sixth)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0xc0104;
-  *(unsigned int *)(temp_v1 + 0x84) = param_1;
-  *(unsigned int *)(temp_v1 + 0x88) = param_2;
-  *(unsigned int *)(temp_v1 + 0x8c) = param_3;
-  *(int *)(temp_v1 + 0x90) = param_5;
-  *(unsigned int *)(temp_v1 + 0x94) = 0;
-  *(unsigned int *)(temp_v1 + 0x98) = param_6;
-  *(unsigned int *)(temp_v1 + 0x9c) = (param_5 << 0xe) | 2;
-  *(unsigned int *)(temp_v1 + 0xa0) = param_4;
-  software_interrupt(0x32);
-  temp_v0 = DAT_004656b0;
-  if ((DAT_004656b0 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x000C0104;
+    command->words[0] = first;
+    command->words[1] = second;
+    command->words[2] = third;
+    command->words[3] = fifth;
+    command->words[4] = 0;
+    command->words[5] = sixth;
+    command->words[6] = ipcStaticBufferDescriptor(fifth, 0);
+    command->words[7] = fourth;
+    s32 result = nn::svc::SendSyncRequest(DAT_004656b0);
+    if ((s32)(result & 0x80000000) >= 0) {
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

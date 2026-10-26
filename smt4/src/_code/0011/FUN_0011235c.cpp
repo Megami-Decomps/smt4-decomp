@@ -6,7 +6,7 @@ extern "C" {
 extern void (*g_gfxReleaseCallback)(u32 heap, u32 alignment, u32 flags, void *block);
 extern TextureBindingState *g_textureBindingState;
 extern TextureBindingBuckets *DAT_004655f0;
-void FUN_00123b88(TextureBindingNode *node);
+void gfxReleaseEntryBlocks(TextureBindingNode *node);
 
 // Release every cached binding and its owned resource before clearing the hash table.
 void FUN_0011235c()
@@ -21,7 +21,7 @@ void FUN_0011235c()
             switch (node->kind) {
             case 0:
                 if (node->resource != NULL) {
-                    FUN_00123b88(node);
+                    gfxReleaseEntryBlocks(node);
                     if (g_gfxReleaseCallback == NULL)
                         break;
                     g_gfxReleaseCallback(0x10000, 0x100, 0, node->resource);

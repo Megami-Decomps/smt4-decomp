@@ -15,7 +15,8 @@ f32 FUN_002355fc(ScalarAnimationNode *node, f32 frame)
         ScalarAnimationNode *first = node->first.get();
         ScalarAnimationNode *second = node->second.get();
         f32 firstValue = FUN_002355fc(first, frame);
-        return firstValue + FUN_002355fc(second, frame);
+        f32 secondValue = FUN_002355fc(second, frame);
+        return firstValue + secondValue;
     }
     if (flags & 2)
         return node->constant;

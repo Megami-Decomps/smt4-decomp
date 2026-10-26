@@ -1,19 +1,16 @@
-#include "romwright_types.h"
+#include "common.h"
+
+struct ObjFUN_0045f724 {
+    u8 unk00[0xC8];
+    f32 value;
+};
 
 extern "C" {
-
-
-void FUN_0045f724(int param_1)
-
+void FUN_0045f724(ObjFUN_0045f724 *object, f32 value)
 {
-/* irregular: irregular input(s): in_s0; 1 native warning(s); review required */
-  float in_s0;
-  
-  if (in_s0 < 0.0f) {
-    in_s0 = 0.0f;
-  }
-  *(float *)(param_1 + 200) = in_s0;
-  return;
+    if (value < 0.0f) {
+        value = 0.0f;
+    }
+    object->value = value;
 }
-
-} /* extern "C" */
+}

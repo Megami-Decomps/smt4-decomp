@@ -5,13 +5,13 @@
 extern "C" {
 
 int FUN_002b4e74(void);
-int rt_vec_dtor(int, unsigned char *, int, int);
+int __aeabi_vec_dtor(int, unsigned char *, int, int);
 
 extern unsigned char LAB_0014851c; /* 0x14851c */
 
 extern int FUN_0014dcac(unsigned int);
 /* Supplied declaration required: FUN_002b4e74. */
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 
 
 int FUN_00140820(unsigned int param_1)
@@ -22,7 +22,7 @@ int FUN_00140820(unsigned int param_1)
   
   FUN_002b4e74();
   temp_v0 = FUN_0014dcac(param_1);
-  rt_vec_dtor(temp_v0 - 0x38,&LAB_0014851c,0xc,3);
+  __aeabi_vec_dtor(temp_v0 - 0x38,&LAB_0014851c,0xc,3);
   return temp_v0 - 0x38;
 }
 

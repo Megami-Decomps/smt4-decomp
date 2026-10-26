@@ -1,10 +1,9 @@
-/* NON_MATCHING: destination selection is correct; global-base reuse and shared tail-call layout differ. */
+/* NON_MATCHING: now through g_gameState.jump.request.first; retail keeps the first-branch test in r0 (reloading the game-state literal afterwards) and reaches the request word through a second literal, the build keeps one base. */
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 
 extern "C" {
 extern GameState g_gameState;
-extern s32 DAT_0049fd14;
 
 // Select the destination sequence, preserving map return data when needed.
 void FUN_002faf88(void)
@@ -28,17 +27,18 @@ void FUN_002faf88(void)
             g_gameState.unk314 = g_gameState.unk330Scalar;
         }
     } else {
-        if (DAT_0049fd14 == -1) {
+        s32 requestedMap = (s32)g_gameState.jump.request.first;
+        if (requestedMap == -1) {
             sequenceArgument = 3;
             asdSequenceRequest(14, &sequenceArgument, sizeof(sequenceArgument));
             return;
         }
-        if (DAT_0049fd14 >= 200) {
-            sequenceArgument = DAT_0049fd14 - 200;
+        if (requestedMap >= 200) {
+            sequenceArgument = requestedMap - 200;
             asdSequenceRequest(14, &sequenceArgument, sizeof(sequenceArgument));
             return;
         }
-        if (DAT_0049fd14 < 100) {
+        if (requestedMap < 100) {
             asdSequenceRequest(6, NULL, 0);
             return;
         }

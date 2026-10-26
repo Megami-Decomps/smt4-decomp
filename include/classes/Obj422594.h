@@ -7,8 +7,7 @@
 #include "classes/Obj422594Delete.h"
 
 extern "C" {
-int asdMemFreeNonNull(void *block);
-int ifTouchRegionRemove(void);
+void ifTouchRegionRemove(void);
 }
 
 struct Obj422594Pair {

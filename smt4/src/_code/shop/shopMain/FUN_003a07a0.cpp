@@ -1,4 +1,3 @@
-/* NON_MATCHING: availability guard is predicated, alternate-page blocks move inline, and paired index loads differ. */
 #include "shop/shopMain.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
@@ -38,30 +37,43 @@ void FUN_003a07a0(ShopWork *shop, s32 state)
     };
     // Drawing fields and category pages extend beyond the public ShopWork prefix.
     ShopDecorationView *work = reinterpret_cast<ShopDecorationView *>(shop);
-    if (((work->mode != 0 && work->mode != 1) || state != 7) &&
-        (work->page != 0 ||
-         (!work->restricted && work->result != 8 && gameFlagIsSet(0x410)) ||
-         work->mode == 1)) {
+    if (work->mode == 0) {
+        if (state == 7) {
+            return;
+        }
+    } else if (work->mode == 1) {
+        if (state == 7) {
+            return;
+        }
+    }
+    if (work->page != 0 ||
+        (!work->restricted && work->result != 8 && gameFlagIsSet(0x410)) ||
+        work->mode == 1) {
         u32 color = work->color;
         FUN_00231bcc(&work->region, 0x65, 0, 0, color, 1);
         FUN_00231bcc(&work->region, 0x66, 0, 0, color, 1);
-        ShopDecorationPair selection;
-        if (work->mode != 1) {
-            selection = DAT_0044df98[work->page];
-        } else {
-            selection = DAT_0044dfd0.pages[work->page];
+        s32 firstIndex;
+        s32 secondIndex;
+        if (work->mode == 1) {
+            firstIndex = DAT_0044dfd0.pages[work->page].first;
+            secondIndex = DAT_0044dfd0.pages[work->page].second;
             if (work->page == 0 &&
                 (work->restricted || work->result == 8 || !gameFlagIsSet(0x410))) {
-                selection = DAT_0044dfd0.lockedFirst;
+                firstIndex = DAT_0044dfd0.lockedFirst.first;
+                secondIndex = DAT_0044dfd0.lockedFirst.second;
             } else if (work->page == 3 &&
                 (work->restricted || work->result == 8 || !gameFlagIsSet(0x410))) {
-                selection = DAT_0044dfd0.lockedFourth;
+                firstIndex = DAT_0044dfd0.lockedFourth.first;
+                secondIndex = DAT_0044dfd0.lockedFourth.second;
             }
+        } else {
+            firstIndex = DAT_0044df98[work->page].first;
+            secondIndex = DAT_0044df98[work->page].second;
         }
         ShopImageGroup first = DAT_004074a4.first;
         ShopImageGroup second = DAT_004074a4.second;
-        FUN_00231bcc(&work->region, first.images[selection.first], 0, 0, color, 1);
-        FUN_00231bcc(&work->region, second.images[selection.second], 0, 0, color, 1);
+        FUN_00231bcc(&work->region, first.images[firstIndex], 0, 0, color, 1);
+        FUN_00231bcc(&work->region, second.images[secondIndex], 0, 0, color, 1);
     }
 }
 }

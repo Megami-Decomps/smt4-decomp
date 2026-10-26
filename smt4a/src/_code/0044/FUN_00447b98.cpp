@@ -1,28 +1,17 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00447b98` (_code @ 0x447b98, 0x1c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct Holder8 {
+    u8 unk00[8];
+    u8 *object;
+};
 
 extern "C" {
+void FUN_00515cec(u8 *object, u32 *value);
 
-int FUN_00515cec(int, unsigned int [2]);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_00515cec. */
-
-
-void FUN_00447b98(int param_1,unsigned int param_2)
-
+void FUN_00447b98(Holder8 *holder, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned int temp_v0 [2];
-  
-  temp_v0[0] = param_2;
-  FUN_00515cec(*(int *)(param_1 + 8) + 8,temp_v0);
-  return;
+    u8 *object = holder->object + 8;
+    u32 local = value;
+    FUN_00515cec(object, &local);
 }
-
-} /* extern "C" */
+}

@@ -7,6 +7,8 @@ struct Obj422380Node {
     /* 0x00 */ Obj422380Node *next;
     /* 0x04 */ Obj422380Node *prev;
     /* 0x08 */ Obj422380Node *parent;
+
+    explicit Obj422380Node(Obj422380Node *self) : next(self), prev(self), parent(self) {}
 };
 
 /* A tree-like container (vtable at 0x422380; named after it until its real name is known) whose

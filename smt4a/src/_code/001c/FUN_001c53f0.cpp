@@ -1,20 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001c53f0` (_code @ 0x1c53f0, 0xc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail saves the destination in the stack-arg slot (push {r0, lr}; pop {r0, pc}), the build keeps it in r4. */
+#include "AsdSDK/AsdMemCopy.h"
 
 extern "C" {
-
-int rt_memcpy(void);
-
-/* Supplied declaration required: rt_memcpy. */
-
-
-unsigned int FUN_001c53f0(unsigned int param_1)
-
+void *FUN_001c53f0(void *destination, const void *source, u32 bytes)
 {
-/* irregular: 1 native warning(s); review required */
-  rt_memcpy();
-  return param_1;
+    rt_memcpy(destination, source, bytes);
+    return destination;
 }
-
-} /* extern "C" */
+}

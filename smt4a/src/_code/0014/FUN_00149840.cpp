@@ -1,18 +1,10 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00149840` (_code @ 0x149840, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "shard/Block61a470.h"
 
 extern "C" {
-
-extern unsigned char g_asdGfxContext; /* 0x61a470 */
-
-
-void FUN_00149840(unsigned int param_1,unsigned int param_2)
-
+void FUN_00149840(u32 first, u32 second)
 {
-  *(unsigned int *)((*(int *)((unsigned char *)&g_asdGfxContext + 0x124)) * 4 + 0x61a5a4) = param_1;
-  *(unsigned int *)((*(int *)((unsigned char *)&g_asdGfxContext + 0x124)) * 4 + 0x61a5b0) = param_2;
-  return;
+    u32 *base = (u32 *)&g_asdGfxContext;
+    base[g_asdGfxContext.state + 0x4D] = first;
+    base[g_asdGfxContext.state + 0x50] = second;
 }
-
-} /* extern "C" */
+}

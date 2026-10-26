@@ -7,6 +7,7 @@ extern struct {
 } *g_naviMain;
 void FUN_00486328(void *,u32,u32,u32,u32,u32);
 void FUN_003281c4(u32 first,u32 second,u32 third,u32 fourth) {
-    if(g_naviMain) FUN_00486328(&g_naviMain->widget,first,1,second,third,fourth);
+    if (g_naviMain == NULL) return;
+    FUN_00486328(&g_naviMain->widget,first,1,second,third,fourth);
 }
 }

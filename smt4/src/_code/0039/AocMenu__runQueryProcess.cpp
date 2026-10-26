@@ -3,19 +3,12 @@
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
 
-/* What a status operation reports: a kind byte and four words of detail. */
-struct AocStatusResult {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 unk01[3];
-    /* 0x04 */ u32 detail[4];
-};
-
 /* The query operation the menu is polling (its deleting destructor is vtable slot 1). */
 class AocQueryHandler {
 public:
     virtual ~AocQueryHandler();
     virtual void vfunc08();
-    virtual AocStatusResult poll();
+    virtual RequestParameters poll();
 };
 
 /* A queried slot record: the 16-bit value read for a slot (+0x9AA of each 0x9C8-byte record). */
@@ -44,7 +37,7 @@ struct AocQueryMenu {
     /* 0x010 */ u8 unk010[0x1F8];
     /* 0x208 */ AocQueryHandler *handler;
     /* 0x20C */ u8 handlerStorage[4];
-    /* 0x210 */ AocStatusResult result;
+    /* 0x210 */ RequestParameters result;
     /* 0x224 */ u8 unk224[0x1C];
     /* 0x240 */ u8 slotHolder[0x74];
 };
@@ -53,10 +46,9 @@ extern "C" {
 extern AocSlotTable *g_aocMain;
 
 void FUN_00233e70(AocQueryMenu *menu, s32 first, s32 second);
-void timeInitializeActiveState(AocStatusResult *result);
-void FUN_00234124(AocQueryMenu *menu, AocStatusResult *result);
-s32 strIsEmpty(const AocStatusResult *result);
-s32 byteIsAtLeast100(const AocStatusResult *result);
+void FUN_00234124(AocQueryMenu *menu, RequestParameters *result);
+s32 strIsEmpty(const RequestParameters *result);
+s32 byteIsAtLeast100(const RequestParameters *result);
 s32 flaggedValueHolderGetTotal(void *holder);
 
 #define AOC_RESULT_RETRY 0x66
@@ -67,14 +59,13 @@ s32 flaggedValueHolderGetTotal(void *holder);
 void AocMenu::runQueryProcess()
 {
     AocQueryMenu * menu = reinterpret_cast<AocQueryMenu *>(this);
-    AocStatusResult result;
-    timeInitializeActiveState(&result);
+    RequestParameters result;
     AocSlotTable *aocMain = g_aocMain;
 
     switch (menu->step) {
     case 3:
     case 1: {
-        AocStatusResult polled = menu->handler->poll();
+        RequestParameters polled = menu->handler->poll();
         result = polled;
         if (strIsEmpty(&result) != 0) {
             if (menu->step == 3) {
@@ -92,7 +83,7 @@ void AocMenu::runQueryProcess()
         if (byteIsAtLeast100(&result) == 0)
             return;
         if (result.kind == AOC_RESULT_RETRY) {
-            AocStatusResult copy = result;
+            RequestParameters copy = result;
             FUN_00234124(menu, &copy);
             return;
         }

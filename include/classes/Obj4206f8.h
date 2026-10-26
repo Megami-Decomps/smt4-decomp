@@ -5,7 +5,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
-int asdMemFreeNonNull(void *block);
+void asdMemFreeNonNull(void *block);
 }
 
 /* A cached texture/model resource (vtable at 0x4206f8, named after it until its real name is

@@ -38,7 +38,7 @@ struct FontGlyphLookupVTable {
             void (*getGlyph)(FontGlyphLookup *font, NwFontGlyph *glyph, s32 character); // 0x40
         } glyph;
     };
-    /* 0x44 */ bool (*hasGlyph)(FontGlyphLookup *font, u16 code);
+    /* 0x44 */ bool (*hasGlyph)(FontGlyphLookup *font, u32 code);
 };
 struct FontGlyphLookup {
     /* 0x00 */ FontGlyphLookupVTable *vtable;

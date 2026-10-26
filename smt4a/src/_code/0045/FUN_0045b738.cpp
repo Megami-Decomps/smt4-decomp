@@ -4,13 +4,13 @@
 
 extern "C" {
 
-int rt_vec_dtor(...);
+int __aeabi_vec_dtor(...);
 int FUN_0046135c(...);
 
 extern int FUN_004613d4(...); /* 0x4613d4 */
 extern unsigned char DAT_0055bd14; /* 0x55bd14 */
 
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 /* Supplied declaration required: FUN_0046135c. */
 
 
@@ -35,7 +35,7 @@ unsigned int * FUN_0045b738(unsigned int *param_1)
     param_1[0x14] = 0;
     param_1[0x15] = 0;
   }
-  rt_vec_dtor(param_1 + 2,FUN_004613d4,0x10,4);
+  __aeabi_vec_dtor(param_1 + 2,FUN_004613d4,0x10,4);
   return param_1;
 }
 

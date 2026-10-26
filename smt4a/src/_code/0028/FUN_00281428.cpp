@@ -108,7 +108,7 @@ void FUN_00281428(f32 offsetX, f32 offsetY)
         FUN_0019e3d0(color, color, color, color,
             centerX - halfWidth, centerY + halfHeight, depth,
             centerX - halfWidth, centerY - halfHeight, depth,
-            centerX + halfWidth, centerY + halfHeight, depth,
+            centerX + halfWidth, halfHeight + centerY, depth,
             centerX + halfWidth, centerY - halfHeight, depth,
             0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 1.0f);
     }

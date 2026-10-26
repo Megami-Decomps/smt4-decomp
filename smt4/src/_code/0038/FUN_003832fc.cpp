@@ -1,4 +1,4 @@
-/* NON_MATCHING: duplicate-id scan: retail jumps from the inner loop straight to the outer loop's increment and does not unroll it; armcc unrolls this form */
+/* NON_MATCHING: retail hoists the pose id (i + 1) behind a count > 0 guard and keeps the search loop rotated with the flag-load predicated (ldrhgt); ours tests the count at the loop head and loads the forbidden flag unconditionally; compare-operand load order differs. */
 #include "common.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
@@ -53,13 +53,23 @@ extern s32 randBetween(s32 low, s32 high);
 extern s32 textFormatBuffer(u8 *destination, const char *format, ...);
 extern void FUN_0031e2bc(u32 text, u8 *name, s32 flag);
 
+/* Whether a record with this record's id has already been picked. */
+static __inline s32 hunterPickContains(const HunterCompany *company, const HunterRecord *record)
+{
+    for (s32 index = 0; index < company->pickCount; index++) {
+        if ((u32)company->picks[index].id == record->id) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 /* Picks up to six hunter-company records matching the current rank, sorts them by id and names their slots. */
 void FUN_003832fc(HunterCompany *company)
 {
     u8 name[64];
     HunterRecord *records;
     HunterRecord *record;
-    s32 i;
     s32 j;
     s32 pose;
 
@@ -68,7 +78,7 @@ void FUN_003832fc(HunterCompany *company)
         return;
     }
     records = dataTable27Sub0GetRecord(company->table, 0);
-    for (i = 0; i < dataTable27Sub0GetCount(company->table); i++) {
+    for (s32 i = 0; i < dataTable27Sub0GetCount(company->table); i++) {
         record = &records[i];
         if (record->rank != company->rank) {
             continue;
@@ -79,12 +89,7 @@ void FUN_003832fc(HunterCompany *company)
         if (record->forbiddenFlag != 0 && gameFlagIsSet(record->forbiddenFlag) != 0) {
             continue;
         }
-        for (j = 0; j < company->pickCount; j++) {
-            if ((u32)company->picks[j].id == record->id) {
-                break;
-            }
-        }
-        if (j < company->pickCount) {
+        if (hunterPickContains(company, record)) {
             continue;
         }
         company->picks[company->pickCount].recordIndex = i;
@@ -96,11 +101,8 @@ void FUN_003832fc(HunterCompany *company)
     }
     FUN_002b7bca(company->picks, company->pickCount, sizeof(HunterPick), sortCompareEntryKey);
     if (company->randomizePoses == 1) {
-        for (i = 0; i < 6; i++) {
-            for (j = 0; j < company->pickCount; j++) {
-                if (company->picks[j].id == i + 1) {
-                    break;
-                }
+        for (u32 i = 0; i < 6; i++) {
+            for (j = 0; j < company->pickCount && company->picks[j].id != i + 1; j++) {
             }
             if (j < company->pickCount) {
                 record = dataTable27Sub0GetRecord(company->table, company->picks[j].recordIndex);

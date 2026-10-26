@@ -46,8 +46,11 @@ s32 FUN_003ff888(void);
 u32 FUN_00400564(s32 slot, s32 fromSave, EffectDefinition *effect)
 {
     u32 result = 0;
-    u32 wanted = (effect->healing & 0xfff) != 0;
     u32 useful = 0;
+    u32 wanted = 0;
+    if ((effect->healing & 0xfff) != 0) {
+        wanted = 1;
+    }
     if ((effect->condition & 0x7f) != 0) {
         wanted |= 4;
     }

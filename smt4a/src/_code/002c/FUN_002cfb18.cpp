@@ -3,6 +3,14 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x20];
+    signed char f005f161c; /* 0x020 */
+    signed char f005f161d; /* 0x021 */
+};
+extern GameStateView g_gameState;
+
 
 int FUN_0019e3d0(...);
 int distSpatial(void);
@@ -57,8 +65,8 @@ extern float DAT_005f0c98; /* 0x5f0c98 */
 extern float DAT_005f0c9c; /* 0x5f0c9c */
 extern int DAT_005f0ca8; /* 0x5f0ca8 */
 extern int DAT_005f0d2c; /* 0x5f0d2c */
-extern signed char DAT_005f161c; /* 0x5f161c */
-extern signed char DAT_005f161d; /* 0x5f161d */
+
+
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -140,7 +148,7 @@ void FUN_002cfb18(void)
   unsigned int temp_v46;
   
   temp_v1 = gameFlagIsSet(0x4d0);
-  if ((((temp_v1 != 0) && (DAT_005f161c == '\0')) && (DAT_005f161d == '\0')) &&
+  if ((((temp_v1 != 0) && (g_gameState.f005f161c == '\0')) && (g_gameState.f005f161d == '\0')) &&
      ((DAT_005f0ca8 == 8 || (DAT_005f0ca8 == 9)))) {
     temp_v20 = DAT_005f0c98 + 220.0f;
     temp_v1 = *(int *)(g_lmapScene + 0x1c);

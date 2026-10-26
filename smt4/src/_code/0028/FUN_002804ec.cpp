@@ -3,6 +3,22 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x30];
+    unsigned char f0049f94c; /* 0x030 */
+    u8 pad031[0x1];
+    unsigned char f0049f94e; /* 0x032 */
+    u8 pad033[0x1e1];
+    int f0049fb30; /* 0x214 */
+    u8 pad218[0xc];
+    unsigned short f0049fb40; /* 0x224 */
+    u8 pad226[0x1e];
+    unsigned short f0049fb60; /* 0x244 */
+    unsigned short f0049fb62; /* 0x246 */
+};
+extern GameStateView g_gameState;
+
 
 int collisionTestProjectedSpherePlanes(...);
 int mapFlagSlotsRetireByKey(int);
@@ -16,12 +32,12 @@ typedef struct {
 
 extern unsigned char g_mapCollision; /* 0x446fe8 */
 extern int DAT_00446ffc; /* 0x446ffc */
-extern unsigned char DAT_0049f94c; /* 0x49f94c */
-extern unsigned char DAT_0049f94e; /* 0x49f94e */
-extern int DAT_0049fb30; /* 0x49fb30 */
-extern unsigned short DAT_0049fb40; /* 0x49fb40 */
-extern unsigned short DAT_0049fb60; /* 0x49fb60 */
-extern unsigned short DAT_0049fb62; /* 0x49fb62 */
+
+
+
+
+
+
 
 #ifndef ROMWRIGHT_FABS_4_DEFINED
 #define ROMWRIGHT_FABS_4_DEFINED
@@ -63,15 +79,15 @@ unsigned int FUN_002804ec(float *param_1)
   temp_v8 = 45.0f;
   temp_v9 = *param_1;
   temp_v10 = *(unsigned long long *)(param_1 + 1);
-  DAT_0049fb40 = 0;
+  g_gameState.f0049fb40 = 0;
   if (0 < DAT_00446ffc) {
     in_d10 = 0;
   }
-  DAT_0049f94c = 0xff;
+  g_gameState.f0049f94c = 0xff;
   if (0 < DAT_00446ffc) {
     unaff_r11 = 0x49e85c;
   }
-  DAT_0049f94e = 0xff;
+  g_gameState.f0049f94e = 0xff;
   if (0 < DAT_00446ffc) {
     do {
       if (*(char *)(temp_v4 + 8) != '\0') {
@@ -94,7 +110,7 @@ unsigned int FUN_002804ec(float *param_1)
                             (float)in_d10 <= temp_v11[0])))) {
                           mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
                           FUN_002878fc((int)*(short *)(temp_v4 + 6));
-                          DAT_0049fb62 = *(unsigned short *)(temp_v4 + 10);
+                          g_gameState.f0049fb62 = *(unsigned short *)(temp_v4 + 10);
                           temp_v6 = temp_v6 | 0x2000;
                         }
                       }
@@ -104,7 +120,7 @@ unsigned int FUN_002804ec(float *param_1)
                               (float)in_d10 <= temp_v11[0])) {
                         mapFlagSlotsRetireByKey((int)*(short *)(temp_v4 + 6));
                         FUN_002878fc((int)*(short *)(temp_v4 + 6));
-                        DAT_0049fb60 = *(unsigned short *)(temp_v4 + 10);
+                        g_gameState.f0049fb60 = *(unsigned short *)(temp_v4 + 10);
                         temp_v6 = temp_v6 | 0x800;
                       }
                     }
@@ -113,27 +129,27 @@ unsigned int FUN_002804ec(float *param_1)
                                           (int)*(char *)(temp_v4 + 5),temp_v4),
                             (float)in_d10 <= temp_v11[0])) {
                       temp_v6 = temp_v6 | 0x400;
-                      DAT_0049f94e = (unsigned char)*(unsigned short *)(temp_v4 + 10);
+                      g_gameState.f0049f94e = (unsigned char)*(unsigned short *)(temp_v4 + 10);
                     }
                   }
                   else if ((((temp_v6 & 0x200) == 0) && (temp_v7 < temp_v8)) &&
                           (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5)
                                         ,temp_v4), (float)in_d10 <= temp_v11[0])) {
                     temp_v6 = temp_v6 | 0x200;
-                    DAT_0049f94c = (unsigned char)*(unsigned short *)(temp_v4 + 10);
+                    g_gameState.f0049f94c = (unsigned char)*(unsigned short *)(temp_v4 + 10);
                   }
                 }
                 else if ((((temp_v6 & 0x100) == 0) && (temp_v7 < temp_v8)) &&
                         (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),
                                       temp_v4), (float)in_d10 <= temp_v11[0])) {
-                  DAT_0049fb40 = *(unsigned short *)(temp_v4 + 10);
+                  g_gameState.f0049fb40 = *(unsigned short *)(temp_v4 + 10);
                   temp_v6 = temp_v6 | 0x100;
                 }
               }
               else if ((((temp_v6 & 0x10) == 0) && (temp_v7 < temp_v8)) &&
                       (collisionTestProjectedSpherePlanes(temp_v11,(int)*(char *)(temp_v4 + 4),(int)*(char *)(temp_v4 + 5),
                                     temp_v4), (float)in_d10 <= temp_v11[0])) {
-                DAT_0049fb30 = (int)*(short *)(temp_v4 + 6);
+                g_gameState.f0049fb30 = (int)*(short *)(temp_v4 + 6);
                 temp_v6 = temp_v6 | 0x10;
               }
             }

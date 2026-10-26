@@ -1,13 +1,10 @@
-#include "romwright_types.h"
-#include "AsdSDK/Source/Sys/Gx/AsdGxCommandList.h"
+#include "common.h"
 
 extern "C" {
+extern u32 DAT_00446da0[];
 
-
-unsigned int jyoucyuGetTableEntry(int param_1)
-
+u32 jyoucyuGetTableEntry(s32 index)
 {
-  return *(unsigned int *)(param_1 * 4 + 0x446da0);
+    return DAT_00446da0[index];
 }
-
-} /* extern "C" */
+}

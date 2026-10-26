@@ -19,7 +19,7 @@ int __aeabi_vec_ctor_nocookie_nodtor(unsigned int *, unsigned char *, int, int);
 int asdOperatorNewE(...);
 int textExpandSingleByteGlyphs(...);
 int FUN_00426eb8(...);
-int FUN_00473c5c(...);
+int textConvertToBoundedWide(...);
 int FUN_004749a0(...);
 int holderOwnerFree(...);
 int dictionaryWasUpdatedSince(...);
@@ -93,7 +93,7 @@ extern int legacyResourceIdRemap(int);
 extern unsigned int halfPair48LowByteA(int);
 extern unsigned int halfPair48LowByteB(int);
 /* Supplied declaration required: FUN_00428060. */
-/* Supplied declaration required: FUN_00473c5c. */
+/* Supplied declaration required: textConvertToBoundedWide. */
 /* Supplied declaration required: FUN_004749a0. */
 /* Supplied declaration required: holderOwnerFree. */
 extern int FUN_004ffd38(unsigned char *);
@@ -314,7 +314,7 @@ int FUN_00474d0c(int param_1)
           temp_v9 = 0x4752a0;
         }
         temp_v5 = temp_v8;
-        FUN_00473c5c(temp_v8,temp_v4,0x40,temp_v9);
+        textConvertToBoundedWide(temp_v8,temp_v4,0x40,temp_v9);
         if (temp_v5 < 0) {
           return temp_v5;
         }
@@ -342,7 +342,7 @@ int FUN_00474d0c(int param_1)
           temp_v9 = 0x4752a0;
         }
         temp_v5 = temp_v8;
-        FUN_00473c5c(temp_v8,temp_v4 + 0x80,0x80,temp_v9);
+        textConvertToBoundedWide(temp_v8,temp_v4 + 0x80,0x80,temp_v9);
         if (temp_v5 < 0) {
           return temp_v5;
         }
@@ -371,7 +371,7 @@ int FUN_00474d0c(int param_1)
           temp_v9 = 0x4752a0;
         }
         temp_v5 = temp_v8;
-        FUN_00473c5c(temp_v8,temp_v49,0x400,temp_v9);
+        textConvertToBoundedWide(temp_v8,temp_v49,0x400,temp_v9);
         if (temp_v5 < 0) {
           return temp_v5;
         }

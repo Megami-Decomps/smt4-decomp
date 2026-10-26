@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail addresses the 0x2C-byte record fields as base + (i*44 + offset) in registers and builds the color words from reg-offset loads (and a different callee-saved set); the struct-array form folds offsets into immediates. */
+/* NON_MATCHING: record fields now use direct owner->entries[i].field (base + i*44 + offset), the transition colour is one REV'd word, the call arguments evaluate right to left and the search loop shape matches retail; retail builds the position/value argument temporaries one at a time (fewer saved registers, frame 16) where the build hoists all loads first. */
 #include "common.h"
 
 struct DrawIntegerTriple { s32 x, y, z; };
@@ -16,10 +16,10 @@ struct ScreenEffectEntry {
     /* 0x08 */ s16 positionY;
     /* 0x0A */ s16 positionZ;
     /* 0x0C */ f32 valueX;
-    /* 0x10 */ u8 transitionRed;
-    /* 0x11 */ u8 transitionGreen;
-    /* 0x12 */ u8 transitionBlue;
-    /* 0x13 */ u8 firstAlpha;
+    /* 0x10 */ union {
+        u32 word;  // red, green, blue, alpha in memory order
+        struct { u8 red, green, blue, alpha; } channels;
+    } transition;
     /* 0x14 */ u8 secondAlpha;
     /* 0x15 */ u8 thirdAlpha;
     /* 0x16 */ u8 effectLevel;
@@ -63,44 +63,56 @@ extern u8 DAT_0057aa01;
 extern u8 DAT_0057aa02;
 extern u32 DAT_0057aa1c;
 
+static __inline DrawIntegerTriple screenEffectOptions(ScreenEffectOwner *owner, s32 i)
+{
+    DrawIntegerTriple options = {owner->entries[i].option[0], owner->entries[i].option[1],
+                                 owner->entries[i].option[2]};
+    return options;
+}
+
+static __inline DrawFloatTriple screenEffectValues(ScreenEffectOwner *owner, s32 i)
+{
+    DrawFloatTriple values = {owner->entries[i].valueX, owner->entries[i].valueY, owner->entries[i].valueZ};
+    return values;
+}
+
+static __inline DrawIntegerTriple screenEffectPosition(ScreenEffectOwner *owner, s32 i)
+{
+    DrawIntegerTriple position = {owner->entries[i].positionX, owner->entries[i].positionY,
+                                  owner->entries[i].positionZ};
+    return position;
+}
+
 /* Applies the screen effect entry matching (id, sub): draw parameters, frame transition and effect tint. */
 void FUN_004d896c(ScreenEffectOwner *owner, s32 id, s32 sub)
 {
-    s32 i = 0;
-    for (; ; i++) {
-        ScreenEffectEntry *entry = &owner->entries[i];
-        if (entry->id == -1) {
+    for (s32 i = 0; i < 160; i++) {
+        if (owner->entries[i].id == -1) {
             return;
         }
-        if (entry->id == id && entry->sub == sub) {
-            break;
-        }
-        if (i + 1 >= 160) {
+        if (owner->entries[i].id == id && owner->entries[i].sub == sub) {
+            drawStoreAndApplyParameters(owner, screenEffectOptions(owner, i), screenEffectValues(owner, i),
+                                        screenEffectPosition(owner, i));
+
+            if (owner->entries[i].selectCamera > 0) {
+                packedScalarControlInit(g_handleRegistry->block->control, 24, 1.0f / obj80Select(0)->zoom);
+            }
+
+            FUN_0035c708(owner,
+                         (__rev(owner->entries[i].transition.word) & 0xffffff00) |
+                             owner->entries[i].transition.channels.alpha,
+                         owner->entries[i].secondAlpha - 0x100,
+                         (__rev(owner->entries[i].transition.word) & 0xffffff00) | owner->entries[i].thirdAlpha);
+
+            u32 level = owner->entries[i].effectLevel * 255 / 255;
+            DAT_0057aa1c = (level << 24) + (level << 16) + (level << 8) + 0xff;
+            s16 tint = owner->entries[i].effectTint;
+            g_battleEffectSettings = tint * 199 / 255;
+            DAT_0057aa01 = tint * 150 / 255;
+            DAT_0057aa02 = owner->entries[i].effectTint * 36 / 255;
             return;
         }
     }
-
-    ScreenEffectEntry *entry = &owner->entries[i];
-    DrawIntegerTriple options = {entry->option[0], entry->option[1], entry->option[2]};
-    DrawFloatTriple values = {entry->valueX, entry->valueY, entry->valueZ};
-    DrawIntegerTriple position = {entry->positionX, entry->positionY, entry->positionZ};
-    drawStoreAndApplyParameters(owner, options, values, position);
-
-    if (owner->entries[i].selectCamera > 0) {
-        packedScalarControlInit(g_handleRegistry->block->control, 24, 1.0f / obj80Select(0)->zoom);
-    }
-
-    entry = &owner->entries[i];
-    u32 rgb = (entry->transitionRed << 24) | (entry->transitionGreen << 16) | (entry->transitionBlue << 8);
-    FUN_0035c708(owner, rgb | entry->firstAlpha, entry->secondAlpha - 0x100, rgb | entry->thirdAlpha);
-
-    entry = &owner->entries[i];
-    u32 level = entry->effectLevel * 255 / 255;
-    DAT_0057aa1c = (level << 24) + (level << 16) + (level << 8) + 0xff;
-    s16 tint = entry->effectTint;
-    g_battleEffectSettings = tint * 199 / 255;
-    DAT_0057aa01 = tint * 150 / 255;
-    DAT_0057aa02 = entry->effectTint * 36 / 255;
 }
 
 }

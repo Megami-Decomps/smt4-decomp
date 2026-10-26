@@ -1,4 +1,6 @@
-/* NON_MATCHING: retail keeps the pool in r4 and the slot in r5 with the kind copied to r3 before the scan; armcc allocates them the other way round */
+/* NON_MATCHING: constructors now are the real Obj55c7b0/Obj55c840 (symbols match); retail copies the kind to r3, keeps the pool in r4 and the slot in r5 and lays both case arms before the common tail, armcc allocates the other way round and places the second arm after it */
+#include "classes/Obj55c7b0.h"
+#include "classes/Obj55c840.h"
 #include "map/ControllerPool.h"
 
 extern "C" {
@@ -21,17 +23,15 @@ Controller *FUN_00482b08(ControllerPool *pool, s32 kind, u32 callback)
         }
     }
     switch (kind) {
-    case 0: {
+    case 0:
         if (pool->firstKindCount >= 4) {
             return NULL;
         }
-        pool->slots[slot] = new ControllerFirstKind();
+        pool->slots[slot] = reinterpret_cast<Controller *>(new Obj55c7b0());
         break;
-    }
-    case 1: {
-        pool->slots[slot] = new ControllerSecondKind();
+    case 1:
+        pool->slots[slot] = reinterpret_cast<Controller *>(new Obj55c840());
         break;
-    }
     }
     callbackCreateControllerForKind(pool->slots[slot], callback);
     pool->slots[slot]->vtable->start(pool->slots[slot]);

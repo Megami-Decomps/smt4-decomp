@@ -1,13 +1,11 @@
-/* NON_MATCHING: mask-word scheduling and the help-submission stack arguments use different registers. */
+/* NON_MATCHING: 64-bit mask tests read the flags in the expression (row count now equals retail); only the register assignment (retail keeps the state in r1 and the flags in r0/r2, mask words in r3/r8) and the help-call stack argument scheduling differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
 struct BattleHelpMaskView {
     /* 0x00 */ u8 unk00[0x20];
-    /* 0x20 */ u32 firstLow;
-    /* 0x24 */ u32 firstHigh;
-    /* 0x28 */ u32 secondLow;
-    /* 0x2c */ u32 secondHigh;
+    /* 0x20 */ u64 first;
+    /* 0x28 */ u64 second;
 };
 struct BattleHelpStateView {
     /* 0x0000 */ u8 unk0000[0x2268];
@@ -22,10 +20,7 @@ u32 FUN_00200a68(u32 first, u32 second, u32 value, u32 resource,
 u32 FUN_004c8e30(u32 first, u32 second, u32 third)
 {
     BtlMainStateA *state = btlGetMainState();
-    u32 low = state->stateFlags.words[0];
-    u32 high = state->stateFlags.words[1];
-    if (((low & g_btlHelp.firstLow) | (high & g_btlHelp.firstHigh)) ||
-        ((low & g_btlHelp.secondLow) | (high & g_btlHelp.secondHigh))) {
+    if ((g_btlHelp.first & state->stateFlags64.bits) || (g_btlHelp.second & state->stateFlags64.bits)) {
         return 0;
     }
     const BattleHelpStateView *work = (const BattleHelpStateView *)state;

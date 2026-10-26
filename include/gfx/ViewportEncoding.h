@@ -9,8 +9,8 @@ static __inline u32 gpuViewportEncode(f32 value)
 {
     GpuFloatEncoding encoding;
     encoding.value = value;
-    s32 exponent = 0;
-    if (encoding.bits & 0x7FFFFFFF) {
+    s32 exponent = encoding.bits & 0x7FFFFFFF;
+    if (exponent != 0) {
         exponent = ((encoding.bits >> 23) & 0xFF) - 64;
         if (exponent < 0) {
             return encoding.ieee.sign << (FractionBits + 7);

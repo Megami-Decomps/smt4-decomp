@@ -1,4 +1,4 @@
-/* NON_MATCHING: Column-clearing unroll, selection scan guards and multiple-selection result addressing differ. */
+/* NON_MATCHING: signed counters and the early result pointer match; retail hoists the constant 1 into fp (used by both the column and the flag stores) where the build hoists 0. */
 #include "battle/btlUI.h"
 
 /* The shared column prefix has byte alignment; use a local aligned view for its id word. */
@@ -25,9 +25,10 @@ extern "C" u64 runtimeShiftLeftWide(u64 value, s32 shift);
 extern "C" void FUN_003009fc(BtlUiObjC *object, u64 mask)
 {
     BtlUiColumnSelectionView *view = (BtlUiColumnSelectionView *)object;
-    for (u32 column = 0; column < view->count; ++column) {
+    for (s32 column = 0; column < view->count; ++column) {
         view->columns[column].selected = 0;
     }
+    u8 *multiple = &view->multiple;
     s32 matches = 0;
     for (s32 id = 0; id < view->count; ++id) {
         if (runtimeShiftLeftWide(1, id) & mask) {
@@ -40,8 +41,8 @@ extern "C" void FUN_003009fc(BtlUiObjC *object, u64 mask)
         }
     }
     if (matches > 1) {
-        view->multiple = 1;
+        *multiple = 1;
         return;
     }
-    view->multiple = 0;
+    *multiple = 0;
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: recent-job searches are peeled/unrolled rather than retail's compact loops; transition argument loads are reordered. */
+/* NON_MATCHING: recent-job searches are now compact for loops; retail's found path shares the final unk5EC test (moveq r0,#0 / movne r0,r6) and the transition argument loads are ordered differently. */
 #include "event/bustupEvent/BustupCutAnim.h"
 
 extern "C" {
@@ -27,23 +27,19 @@ s32 FUN_0024ecc0(u32 job, s32 slot)
         }
         anim->slots[slot] = job;
     }
-    s32 index = 0;
-    do {
+    for (s32 index = 0; index < 10; ++index) {
         if (anim->recentJobs[index] == job) {
             if (anim->unk5EC == 5 || anim->unk5EC == 6)
                 result = 0;
             return result;
         }
-        ++index;
-    } while (index < 10);
-    index = 0;
-    do {
+    }
+    for (s32 index = 0; index < 10; ++index) {
         if (anim->recentJobs[index] == 0) {
             anim->recentJobs[index] = job;
             break;
         }
-        ++index;
-    } while (index < 10);
+    }
     if (anim->unk5EC == 5 || anim->unk5EC == 6)
         result = 0;
     return result;

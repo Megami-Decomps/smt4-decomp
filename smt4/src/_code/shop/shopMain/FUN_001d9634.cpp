@@ -30,9 +30,16 @@ struct ShopSequence {
 };
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x2fc];
+    s32 f0049fc18; /* 0x2fc */
+};
+extern GameStateView g_gameState;
+
 extern ShopMain *g_shop;
 extern ShopSequence *DAT_0044df80;
-extern s32 DAT_0049fc18;
+
 
 s32 storyFlagRangeAnySet(void);
 void FUN_00343b48(void);
@@ -136,7 +143,7 @@ u32 FUN_001d9634(void)
         } else if (FUN_00287304() != 0) {
             if (gameStateIsFlagSetAndLarge() != 0) {
                 s32 arguments[2];
-                arguments[0] = DAT_0049fc18 - 200;
+                arguments[0] = g_gameState.f0049fc18 - 200;
                 asdSequenceRequest(14, arguments, 4);
             } else {
                 asdSequenceRequest(6, NULL, 0);

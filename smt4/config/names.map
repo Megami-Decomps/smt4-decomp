@@ -759,7 +759,7 @@
 00356f80 nn_gr_CTR_Vertex_DisableAttr
 00357320 nn_gr_CTR_Texture_Texture_sub_object
 0035750c nn_os_TransferMemoryBlock_Initialize
-00357728 nn_os_Thread_Thread_sub_object
+00357728 _ZN10NnOsThreadD1Ev
 0035791c nn_cec_CTR_MessageBox_ReadMessage_35791C
 003579d4 nn_cec_CTR_MessageBox_ReadMessage_3579D4
 0035856c nn_cec_CTR_MessageBox_GetMessageBoxNum
@@ -1942,7 +1942,7 @@
 002dcb00 entryCompareByDataValueB
 002893d8 scrGetCommandFrame
 002bf694 libc_strcpy
-002c66cc rt_vec_dtor
+002c66cc __aeabi_vec_dtor
 001005dc rt_vec_delete
 0029b998 resultCreate
 0029b990 resultCreateDefault
@@ -2689,7 +2689,7 @@
 00206ef0 dataCompareSecondaryRank
 00207014 dataComparePrimaryRank
 0022c930 slotFindNonnegativeRank
-002340e4 timeInitializeActiveState
+002340e4 _ZN17RequestParametersC1Ev
 0023470c touchRegisterSecondRegion
 0023474c touchRegisterFirstRegion
 00235744 thresholdDispatchOutsideRange
@@ -3262,7 +3262,7 @@
 0024ac4c asdCameraValueGet
 00105e10 asdGxPresetVectorSet
 001e16cc keyedRecordCompareName
-00348784 vecContainerDestroy
+00348784 _ZN22SceneCameraElementPairD1Ev
 002f5ee4 effectEditorBufferRelease
 00337a0c objectEntryAppend
 002cbad0 objectValueGetChecked
@@ -4719,3 +4719,9 @@
 00275f8c mapCompleteActiveAndPendingGroups
 0033a2c4 btlFindEntrySelectionByKey
 003b0cf4 moLivePlayerReleaseIdleStreams
+00357754 _ZN10NnOsHandleD1Ev
+00393340 _ZN7AocMenuC1Ev
+0033b5a0 _ZN18SceneCameraElementC1Ev
+0033b5bc _ZN18SceneCameraElementD1Ev
+001954b0 asdMdlBanksReset
+00123b88 gfxReleaseEntryBlocks

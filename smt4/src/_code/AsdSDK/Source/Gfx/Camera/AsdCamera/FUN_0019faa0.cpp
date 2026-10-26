@@ -41,7 +41,7 @@ typedef char CameraInitializationOffsets[
     sizeof(CameraChannelInitializationView) == 0x544 &&
     offsetof(CameraChannelInitializationView, camera) == 0x3C ? 1 : -1];
 extern "C" {
-extern StereoCameraInitializationView DAT_004d4948;
+extern StereoCameraInitializationView g_sceneCameraElements;
 extern const CameraDefaultVector DAT_004d493c[];
 extern CameraManagerIV g_asdCamera;
 void FUN_002c2044(ManagedCameraIV *, s32);
@@ -53,11 +53,11 @@ void nn_ulcd_CTR_StereoCamera_SetBaseFrustum(void *, const f32 *);
 
 void FUN_0019faa0(u32 owner, u8 enabled, f32 frameStep)
 {
-    DAT_004d4948.enabled = enabled;
+    g_sceneCameraElements.enabled = enabled;
     // The default look-at block immediately precedes the channel state.
-    const CameraDefaultLookAt *defaults = reinterpret_cast<const CameraDefaultLookAt *>(&DAT_004d4948) - 1;
+    const CameraDefaultLookAt *defaults = reinterpret_cast<const CameraDefaultLookAt *>(&g_sceneCameraElements) - 1;
     for (s32 i = 0; i < 2; ++i) {
-        CameraChannelInitializationView *channel = &DAT_004d4948.channels[i];
+        CameraChannelInitializationView *channel = &g_sceneCameraElements.channels[i];
         channel->owner = owner;
         channel->frame = 0;
         channel->target.z = 0.0f;

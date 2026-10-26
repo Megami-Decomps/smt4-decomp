@@ -1,10 +1,16 @@
-/* NON_MATCHING: retail walks the record list through one pointer (add r4, list, i*16; ldr r2, [r4, #40]! then adds the offset to the written-back r4) and keeps 0 in r3 for the null cases; this build recomputes the field address and uses more saved registers. */
+/* NON_MATCHING: the offset helper reads the field once and the entry is read before the store (matches retail's writeback addressing); retail keeps one zero register for every null target and reuses the entry pointer, this build re-materialises zero and addresses with different registers. */
 #include "common.h"
 
 /* Self-relative offsets: a field holding the distance from itself to its target (0 = no target). */
 static __inline void *relativeTarget(const s32 *field)
 {
-    return *field != 0 ? (u8 *)field + *field : NULL;
+    u8 *base = (u8 *)field;
+    s32 offset = *field;
+    u8 *target = NULL;
+    if (offset != 0) {
+        target = base + offset;
+    }
+    return target;
 }
 
 struct ResourceEntry {
@@ -78,7 +84,8 @@ void FUN_003353cc(ResourceOwner *owner)
     }
     ResourceTable *table = (ResourceTable *)relativeTarget(&header->tableOffset);
     for (u32 i = 0; i < table->count; ++i) {
-        tableEntry(table, i)->flags = tableEntry(table, i)->flags & ~0x240;
+        u32 flags = tableEntry(table, i)->flags & ~0x240;
+        tableEntry(table, i)->flags = flags;
     }
 }
 

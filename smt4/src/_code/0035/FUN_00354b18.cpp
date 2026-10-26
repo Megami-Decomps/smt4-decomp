@@ -1,18 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00354b18` (_code @ 0x354b18, 0x24 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable body; retail builds this as a constructor-style function with a stack frame (push {r4-r6}) and separate stores. */
+#include "common.h"
+
+struct Quad4 {
+    u32 unk00;
+    u32 unk04;
+    u32 unk08;
+    u32 unk0C;
+};
 
 extern "C" {
-
-
-void FUN_00354b18(unsigned int *param_1,unsigned int param_2,unsigned int param_3,unsigned int param_4)
-
+void FUN_00354b18(Quad4 *quad, u32 first, u32 second, u32 third)
 {
-  *param_1 = param_2;
-  param_1[3] = param_4;
-  param_1[1] = 0;
-  param_1[2] = param_3;
-  return;
+    quad->unk00 = first;
+    quad->unk0C = third;
+    quad->unk04 = 0;
+    quad->unk08 = second;
 }
-
-} /* extern "C" */
+}

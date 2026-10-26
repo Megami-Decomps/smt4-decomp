@@ -1,21 +1,32 @@
-/* NON_MATCHING: final-key addressing, short-circuit branches, and VFP scheduling differ. */
+/* NON_MATCHING: short-circuit compiles to retail's vcmp/cmpne/bne; only VFP scheduling of the interpolation differs and the build shares the final vmla/pop tail that retail keeps separate. */
 #include "shard/AnimCurve.h"
 
 extern "C" {
 const AnimKey *FUN_0051d7e0(const QuantizedAnimCurve *, f32);
 
+static __inline f32 animKeyTime(const QuantizedAnimCurve *curve, const AnimKey *key)
+{
+    return curve->timeScale * (static_cast<f32>(key->frame) * 0.03125f);
+}
+
+static __inline f32 animKeyValue(const QuantizedAnimCurve *curve, const AnimKey *key)
+{
+    return curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale;
+}
+
 // Linearly interpolate the unsigned key values and apply the curve's scale and bias.
 f32 FUN_0051e190(const QuantizedAnimCurve *curve, f32 time)
 {
     const AnimKey *key = FUN_0051d7e0(curve, time);
-    f32 keyTime = curve->timeScale * (static_cast<f32>(key->frame) * 0.03125f);
-    if (keyTime == time || key == &curve->keys[curve->keyCount - 1])
-        return curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale;
+    f32 keyTime = animKeyTime(curve, key);
+    const AnimKey *last = &curve->keys[curve->keyCount - 1];
+    if (keyTime == time || key == last)
+        return animKeyValue(curve, key);
     const AnimKey *next = key + 1;
-    f32 nextTime = curve->timeScale * (static_cast<f32>(next->frame) * 0.03125f);
+    f32 nextTime = animKeyTime(curve, next);
     f32 fraction = (time - keyTime) / (nextTime - keyTime);
-    f32 first = curve->valueBase + static_cast<f32>(key->unk02[0]) * curve->valueScale;
-    f32 second = curve->valueBase + static_cast<f32>(next->unk02[0]) * curve->valueScale;
+    f32 first = animKeyValue(curve, key);
+    f32 second = animKeyValue(curve, next);
     return first * (1.0f - fraction) + second * fraction;
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed command stores and cursor induction use different grouping and registers. */
+/* NON_MATCHING: the command tail now matches (post-increment stores); the first words merge into an stm, the slot loop uses a different induction pointer and the zero register is r5 not r4. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 
@@ -29,19 +29,19 @@ u32 *FUN_00356e94(void)
         cursor[1] = 0x803F0232;
         cursor += 6;
     }
-    cursor[0] = 0;
-    cursor[1] = 0x000100E0;
-    cursor = asdGxAppendStateReset(cursor + 2, 1);
+    *cursor++ = 0;
+    *cursor++ = 0x000100E0;
+    cursor = asdGxAppendStateReset(cursor, 1);
     cursor = FUN_003572e8(cursor, 1);
-    cursor[0] = 0;
-    cursor[1] = 0x00010062;
-    cursor[2] = 0;
-    cursor[3] = 0x00010118;
-    cursor[4] = 0;
-    cursor[5] = 0x00010047;
-    cursor = FUN_00356d98(cursor + 6, 1);
-    cursor[0] = 0;
-    cursor[1] = 0x000F011B;
-    return cursor + 2;
+    *cursor++ = 0;
+    *cursor++ = 0x00010062;
+    *cursor++ = 0;
+    *cursor++ = 0x00010118;
+    *cursor++ = 0;
+    *cursor++ = 0x00010047;
+    cursor = FUN_00356d98(cursor, 1);
+    *cursor++ = 0;
+    *cursor++ = 0x000F011B;
+    return cursor;
 }
 }

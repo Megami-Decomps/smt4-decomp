@@ -36,3 +36,6 @@ uiStateGetSecondFlag = 0xe1d006d1; // 0x3c2d60 (FUN_003c2d54, after add r0, r0, 
 uiStateGetFirstFlag = 0xe1d006d0; // 0x3c2d70 (FUN_003c2d54, after add r0, r4, #16)
 renderCtxSetStereoMode = 0xe5801528; // 0x103dd8 (FUN_00103dd8: mov r1, #2 then the context in r0); twin of smt4a row (field +0x52c there)
 mobiclipHeapGetAllocation = 0xe5900030; // FUN_0017feb4 (six times after ldr r0, =heap; result kept in r4)
+windowRegionGetWidth = 0xe1d005f8; // _ZN9Obj4221a47vfunc10Ej (0x38ad70): mov r0, r4 before each, result moved out
+windowRegionGetLeft = 0xe1d005f4; // _ZN9Obj4221a47vfunc10Ej (0x38ad70): mov r0, r4 before each, result moved out
+windowRegionGetTop = 0xe1d005f6; // _ZN9Obj4221a47vfunc10Ej (0x38ad70): mov r0, r4 before each, result moved out

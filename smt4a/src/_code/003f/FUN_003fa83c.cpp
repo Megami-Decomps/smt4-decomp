@@ -88,7 +88,7 @@ NetSession *FUN_003fa83c(NetSession *session)
         break;
     case 1:
         if (asyncOperationStartOrPoll(session->operation, &session->result, &session->detail) == 0) {
-            if (session->result < 0) {
+            if ((s32)(session->result & 0x80000000) < 0) {
                 session->failed = 1;
                 session->failedA = 1;
                 session->failedB = 1;

@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses ldr r0, [pc, #40] where the compiled block uses ldr r0, [pc, #36]. */
 #include "common.h"
 
 struct ResetState {
@@ -7,23 +6,24 @@ struct ResetState {
     u32 counter;     // 0x08
 };
 
-struct ResetGlobals {
-    u8 unk00[0xC8];  // 0x00
-    u16 counter;     // 0xC8
-    u8 unkCA[3];     // 0xCA
-    u8 flag;         // 0xCD
+// The fields of g_gameState this reset clears.
+struct GameStateResetView {
+    /* 0x000 */ u8 unk000[0x1C8];
+    /* 0x1C8 */ u16 counter;
+    /* 0x1CA */ u8 unk1CA[3];
+    /* 0x1CD */ u8 flag;
 };
 
 extern "C" {
 extern ResetState* g_mapEnemy;
-extern ResetGlobals DAT_005f16fc;
+extern GameStateResetView g_gameState;
 
 void FUN_00272f54(void)
 {
     ResetState* state = g_mapEnemy;
     state->state = 4;
     state->counter = 0;
-    DAT_005f16fc.counter = 0;
-    DAT_005f16fc.flag = 0;
+    g_gameState.counter = 0;
+    g_gameState.flag = 0;
 }
 }

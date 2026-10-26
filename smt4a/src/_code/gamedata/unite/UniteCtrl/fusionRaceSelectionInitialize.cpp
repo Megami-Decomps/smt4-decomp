@@ -1,8 +1,9 @@
-/* NON_MATCHING: native retains disabled tracked-allocation filename/line setup; no dead-code imitation. */
+/* NON_MATCHING: only scheduling differs in the final stores (retail places `mvn r1,#0` between the flags ldrh and bic; ours bic/strh first). */
 #include "gamedata/DataTable.h"
 #include "shard/W6_W6Match8_FusionSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "AsdSDK/AsdDebug.h"
 
 struct FusionSelectionScratch {
     u8 bytes[17];
@@ -47,9 +48,11 @@ FusionRaceSelection *fusionRaceSelectionInitialize(FusionRaceSelection *selectio
     }
     for (s32 race = 0; race < 65; ++race) {
         selection->levels[race] = NULL;
-        if (selection->counts[race])
+        if (selection->counts[race]) {
+            asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\gamedata\\unite\\UniteCtrl.cpp", 214);
             selection->levels[race] = static_cast<FusionLevelEntry *>(
                 asdMemoryAllocTracked(0x100, 0x100, 0, selection->counts[race] * sizeof(FusionLevelEntry), 1));
+        }
     }
     for (u32 index = 0; index < count; ++index) {
         const DevilRecordA *record = FUN_00184310((u16)index);
@@ -74,7 +77,7 @@ FusionRaceSelection *fusionRaceSelectionInitialize(FusionRaceSelection *selectio
     extras->firstFlag = 0;
     extras->secondFlag = 0;
     extras->scratch = FusionSelectionScratch();
-    extras->flags &= 0x3ff;
+    extras->flags = (u16)(extras->flags & 0x3ff);
     extras->flag16e = 0;
     extras->firstSelection = -1;
     extras->secondSelection = -1;

@@ -3,6 +3,15 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x18];
+    signed char f005f1614; /* 0x018 */
+    u8 pad019[0x3];
+    unsigned int f005f1618; /* 0x01c */
+};
+extern GameStateView g_gameState;
+
 
 int FUN_001bbf0c(void);
 int FUN_001bc124(void);
@@ -28,8 +37,8 @@ extern unsigned int g_lmapView; /* 0x5806a4 */
 extern float DAT_005806a8; /* 0x5806a8 */
 extern float DAT_005806ac; /* 0x5806ac */
 extern int g_lmapScene; /* 0x581288 */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern unsigned int DAT_005f1618; /* 0x5f1618 */
+
+
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1bec; /* 0x5f1bec */
 extern unsigned int DAT_005f1bfc; /* 0x5f1bfc */
@@ -113,12 +122,12 @@ void FUN_0033982c(void)
     *(short *)(temp_v2 + 0xb6) = *(short *)(temp_v2 + 0xb6) - 1;
   }
   if (DAT_005f1bec != 1) {
-    if (DAT_005f1614 == '\0') {
-      temp_v6 = DAT_005f1618;
-      if (DAT_005f1618 == 0) {
+    if (g_gameState.f005f1614 == '\0') {
+      temp_v6 = g_gameState.f005f1618;
+      if (g_gameState.f005f1618 == 0) {
         temp_v6 = (unsigned int)*(unsigned char *)(temp_v2 + 0xb4);
       }
-      if (DAT_005f1618 == 0 && temp_v6 == 0) {
+      if (g_gameState.f005f1618 == 0 && temp_v6 == 0) {
         if (((*(char *)(temp_v2 + 0xb5) != '\0') && (temp_v4 = slotIsActive(8), temp_v4 == 0)) &&
            (temp_v4 = slotIsActive(7), temp_v4 == 0)) {
           *(unsigned char *)(g_lmapView + 0xb5) = 0;

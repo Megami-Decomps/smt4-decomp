@@ -66,7 +66,35 @@ void FUN_0025ccac(int param_1,int param_2)
     }
     efctSetSpeed();
     efctSetSpeed();
-    if (param_2 != 0) {
+    if (param_2 == 0) {
+      temp_v6 = objectPartRunUnlessLocked(param_1 + 0x33a8);
+      temp_v2 = asdTMTexTableEntryAt(0x15,temp_v6 + 0x52);
+      temp_v6 = g_titleScene;
+      temp_v3 = packNibblesAndByte(6,1,0);
+      piVar7 = (int *)(temp_v6 + 0x12ac);
+      temp_v4 = piVar7[*piVar7 + 2];
+      piVar7[*piVar7 + 2] = temp_v3;
+      if (*(char *)(temp_v6 + 0x12c4) != '\0' || temp_v4 != temp_v3) {
+        (**(romwright_code **)(temp_v6 + 0x12c8))();
+        *(unsigned char *)(temp_v6 + 0x12c4) = 0;
+      }
+      efctSetSpeed();
+      FUN_002bf288(2,0x15,0x1cb,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
+      efctSetSpeed();
+      FUN_002bf288(2,0x15,0x4b,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
+      FUN_002bf288(2,0x15,0x4a,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
+      FUN_002bf288(2,0x15,0x4c,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
+      FUN_002bf288(2,0x15,0x4d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
+      temp_v6 = g_titleScene;
+      temp_v0 = packNibblesAndByte(6,7,0);
+      piVar7 = (int *)(temp_v6 + 0x12ac);
+      temp_v1 = piVar7[*piVar7 + 2];
+      piVar7[*piVar7 + 2] = temp_v0;
+      if (*(char *)(temp_v6 + 0x12c4) != '\0' || temp_v1 != temp_v0) {
+        (**(romwright_code **)(temp_v6 + 0x12c8))();
+        *(unsigned char *)(temp_v6 + 0x12c4) = 0;
+      }
+    } else {
       temp_v6 = 0;
       do {
         if (*(char *)(param_1 + temp_v6 + 0x345c) != '\0') {
@@ -104,35 +132,6 @@ void FUN_0025ccac(int param_1,int param_2)
         }
         temp_v6 = temp_v6 + 1;
       } while (temp_v6 < 4);
-    }
-    else {
-      temp_v6 = objectPartRunUnlessLocked(param_1 + 0x33a8);
-      temp_v2 = asdTMTexTableEntryAt(0x15,temp_v6 + 0x52);
-      temp_v6 = g_titleScene;
-      temp_v3 = packNibblesAndByte(6,1,0);
-      piVar7 = (int *)(temp_v6 + 0x12ac);
-      temp_v4 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v3;
-      if (*(char *)(temp_v6 + 0x12c4) != '\0' || temp_v4 != temp_v3) {
-        (**(romwright_code **)(temp_v6 + 0x12c8))();
-        *(unsigned char *)(temp_v6 + 0x12c4) = 0;
-      }
-      efctSetSpeed();
-      FUN_002bf288(2,0x15,0x1cb,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      efctSetSpeed();
-      FUN_002bf288(2,0x15,0x4b,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      FUN_002bf288(2,0x15,0x4a,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      FUN_002bf288(2,0x15,0x4c,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      FUN_002bf288(2,0x15,0x4d,*(short *)(temp_v2 + 8) + temp_v0,*(short *)(temp_v2 + 10) + temp_v1,0x2e);
-      temp_v6 = g_titleScene;
-      temp_v0 = packNibblesAndByte(6,7,0);
-      piVar7 = (int *)(temp_v6 + 0x12ac);
-      temp_v1 = piVar7[*piVar7 + 2];
-      piVar7[*piVar7 + 2] = temp_v0;
-      if (*(char *)(temp_v6 + 0x12c4) != '\0' || temp_v1 != temp_v0) {
-        (**(romwright_code **)(temp_v6 + 0x12c8))();
-        *(unsigned char *)(temp_v6 + 0x12c4) = 0;
-      }
     }
     efctSetSpeed();
     return;

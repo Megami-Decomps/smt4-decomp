@@ -1,10 +1,10 @@
-/* NON_MATCHING: transition flag chains fold to combined mask tests; pending globals and cache flag use different base addressing. */
+/* NON_MATCHING: pending flags now g_gameState.menuRequests (base addressing matches retail); retail keeps the nine single-bit tst/tsteq tests unfolded where armcc folds them into mask tests. */
 #include "camp/ScriptPanelResources.h"
 #include "shard/Shard004B.h"
+#include "shard/W5_W5Match7_SceneState.h"
 
 extern "C" {
 extern void *g_aocSystem;
-extern s16 DAT_005f17a8, DAT_005f17aa;
 s32 aocSelectedRecordIsUnavailable(void *system);
 void slotSetRequest(s32 slot, s32 frames, s32 alpha);
 void obj04Finish(void);
@@ -16,14 +16,14 @@ void spatialAdvanceTransformTransition(u32 handle);
 
 void FUN_004b73e8(CampScriptPanelResources *panel)
 {
-    if (DAT_005f17aa != 0) {
+    if (g_gameState.menuRequests.secondary != 0) {
         panel->transition.state = 13;
         panel->transition.timer = 0;
-        DAT_005f17aa = 0;
-    } else if (DAT_005f17a8 != 0) {
+        g_gameState.menuRequests.secondary = 0;
+    } else if (g_gameState.menuRequests.primary != 0) {
         panel->transition.state = 12;
         panel->transition.timer = 0;
-        DAT_005f17a8 = 0;
+        g_gameState.menuRequests.primary = 0;
     } else if (aocSelectedRecordIsUnavailable(g_aocSystem)) {
         panel->transition.state = 14;
         panel->transition.timer = 0;

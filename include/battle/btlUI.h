@@ -46,6 +46,12 @@ typedef struct BtlUiAvailabilityRow {
     u8 active;
     u8 padding01[0x9F];
 } BtlUiAvailabilityRow;
+/* Apocalypse: the availability flag sits 0x4C bytes into each 0xA0-byte row. */
+typedef struct BtlUiAvailabilityRowA {
+    u8 unk00[0x4C];
+    u8 active;
+    u8 padding4D[0x53];
+} BtlUiAvailabilityRowA;
 typedef struct BtlUiAvailabilityCell {
     u8 active;
     u8 padding01[0x13];
@@ -187,8 +193,8 @@ typedef struct BtlUiObjDA {
         } requests;
         /* Strided byte view, not recovered underlying record boundaries. */
         struct {
-            u8 prefix[0x4124];
-            BtlUiAvailabilityRow rows[1];
+            u8 prefix[0x40D8];
+            BtlUiAvailabilityRowA rows[1];
         } availability;
     };
 } BtlUiObjDA;
@@ -281,8 +287,9 @@ typedef char BtlUiARequestOffsetsCheck[sizeof(BtlUiObjDA) == 0x5AA4 &&
     offsetof(BtlUiA, requestCounts.counts) == 0xF064 ? 1 : -1];
 
 typedef char BtlUiObjDAAvailabilityOffsetsCheck[
-    offsetof(BtlUiObjDA, availability.rows) == 0x4124 &&
-    offsetof(BtlUiA, objD.availability.rows) == 0xB64C &&
+    offsetof(BtlUiObjDA, availability.rows) == 0x40D8 &&
+    offsetof(BtlUiA, objD.availability.rows) == 0xB600 &&
+    offsetof(BtlUiAvailabilityRowA, active) == 0x4C && sizeof(BtlUiAvailabilityRowA) == 0xA0 &&
     sizeof(BtlUiObjDA) == 0x5AA4 ? 1 : -1];
 
 typedef char BtlUiAAvailabilityOffsetsCheck[

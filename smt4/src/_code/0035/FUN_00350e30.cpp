@@ -1,5 +1,6 @@
-/* NON_MATCHING: the 2-stream loop is unrolled in the build and not in retail (which also reloads entryIndex after the ring copy). */
+/* NON_MATCHING: loop no longer unrolled (memcpy for the 64-bit timestamp copy gives retail's ldm/stm); only the r1/r2 naming of the entryIndex address and value differs (61 rows each). */
 #include "shard/S2MovieSync.h"
+#include <string.h>
 
 extern "C" {
 
@@ -28,7 +29,7 @@ void FUN_00350e30(MovieSync *sync)
             continue;
         }
         if (sync->firstTime == 0) {
-            sync->firstTime = sync->ring[i][sync->readPos[i] % MOVIE_SYNC_RING_SIZE];
+            memcpy(&sync->firstTime, &sync->ring[i][sync->readPos[i] % MOVIE_SYNC_RING_SIZE], sizeof(u64));
         }
         slots = movieSyncEntrySlots(sync, sync->entryIndex[i]);
         sync->readPos[i] += slots;

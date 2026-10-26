@@ -1,149 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00149090` (_code @ 0x149090, 0x2f4 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: register allocation only: retail keeps the release callback in r7 and does not hoist the second bucket table's +8 offset into a register; the build hoists it into fp */
+#include "common.h"
+#include <stddef.h>
+
+#define RESOURCE_BUCKETS 0x200
+
+/* One 0xE8-byte entry of a resource group (observed fields). */
+struct ResourceEntry {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ void *block30;
+    /* 0x34 */ u8 unk34[0x24];
+    /* 0x58 */ void *block58;
+    /* 0x5C */ u8 unk5C[0x84];
+    /* 0xE0 */ void *blockE0;
+    /* 0xE4 */ u8 unkE4[4];
+};
+
+/* A resource group on the registry's list. */
+struct ResourceGroup {
+    /* 0x00 */ void *block00;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ void *block08;
+    /* 0x0C */ u8 unk0C[4];
+    /* 0x10 */ ResourceEntry *entries;
+    /* 0x14 */ u32 entryCount;
+    /* 0x18 */ u8 unk18[8];
+    /* 0x20 */ ResourceGroup *next;
+};
+
+/* A node of the second bucket table. */
+struct ResourceBucketNode {
+    /* 0x00 */ u8 unk00[0x18];
+    /* 0x18 */ ResourceBucketNode *next;
+};
+
+/* A child block of a first-table node. */
+struct ResourceChild {
+    /* 0x00 */ void *block;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ ResourceChild *next;
+};
+
+/* A node of the first bucket table. */
+struct ResourceNode {
+    /* 0x00 */ ResourceNode *next;
+    /* 0x04 */ u8 unk04[0x14];
+    /* 0x18 */ ResourceChild *children;
+    /* 0x1C */ void *block1C;
+    /* 0x20 */ u8 unk20[0xC];
+    /* 0x2C */ void *block2C;
+    /* 0x30 */ u8 unk30[0x190];
+    /* 0x1C0 */ void *block1C0;
+    /* 0x1C4 */ u8 unk1C4[0x44];
+};
+
+struct ResourceRegistry {
+    /* 0x0000 */ u8 unk0000[8];
+    /* 0x0008 */ ResourceNode *nodes[RESOURCE_BUCKETS];
+    /* 0x0808 */ ResourceBucketNode *bucketNodes[RESOURCE_BUCKETS];
+    /* 0x1008 */ ResourceGroup *groups;
+};
+
+struct ResourceManager {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ ResourceRegistry *registry;
+};
+
+typedef char ResourceRegistryLayoutCheck[
+    sizeof(ResourceEntry) == 0xE8 && offsetof(ResourceGroup, next) == 0x20 &&
+    offsetof(ResourceNode, block1C0) == 0x1C0 && offsetof(ResourceRegistry, groups) == 0x1008 ? 1 : -1];
 
 extern "C" {
 
-typedef int romwright_code(...);
-extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
-extern unsigned char DAT_005b40ec; /* 0x5b40ec */
+extern void (*g_gfxReleaseCallback)(u32 heap, u32 alignment, u32 flags, void *block);
+extern ResourceManager DAT_005b40ec;
 
+/* Hands one block back through the graphics release callback, if one is installed. */
+#define GFX_RELEASE(block) \
+    do { \
+        if (g_gfxReleaseCallback != NULL) { \
+            g_gfxReleaseCallback(0x10000, 0x100, 0, (block)); \
+        } \
+    } while (0)
 
+/* Releases every block of the resource registry through the graphics release callback and drops the registry. */
 void FUN_00149090(void)
-
 {
-/* irregular: 2 unstructured edge(s); 1 goto(s); irregular input(s): in_r12 */
-  int *piVar1;
-  int *piVar2;
-  int temp_v0;
-  unsigned int temp_v1;
-  int *piVar5;
-  int *piVar6;
-  romwright_code *in_r12;
-  unsigned char temp_v2;
-  
-  if ((*(int *)((unsigned char *)&DAT_005b40ec + 0x8)) == 0) {
-    return;
-  }
-  piVar6 = *(int **)((*(int *)((unsigned char *)&DAT_005b40ec + 0x8)) + 0x1008);
-  do {
-    piVar1 = piVar6;
-    if (piVar1 == (int *)0x0) {
-      temp_v1 = 0;
-      do {
-        temp_v0 = *(int *)((*(int *)((unsigned char *)&DAT_005b40ec + 0x8)) + temp_v1 * 4 + 0x808);
-        while (temp_v0 != 0) {
-          temp_v0 = *(int *)(temp_v0 + 0x18);
-          in_r12 = g_gfxReleaseCallback;
-          if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-            (*g_gfxReleaseCallback)(0x10000,0x100,0);
-          }
+    ResourceGroup *group;
+    u32 bucket;
+
+    if (DAT_005b40ec.registry == NULL) {
+        return;
+    }
+    for (group = DAT_005b40ec.registry->groups; group != NULL;) {
+        ResourceGroup *next = group->next;
+
+        if (group->block00 != NULL) {
+            GFX_RELEASE(group->block00);
         }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 0x200);
-      temp_v1 = 0;
-      do {
-        piVar6 = (int *)*(int *)((*(int *)((unsigned char *)&DAT_005b40ec + 0x8)) + temp_v1 * 4 + 8);
-        while (piVar1 = piVar6, piVar1 != (int *)0x0) {
-          piVar6 = (int *)*piVar1;
-          if (piVar1[0xb] != 0) {
-            in_r12 = g_gfxReleaseCallback;
-          }
-          if (piVar1[0xb] != 0 && in_r12 != (romwright_code *)0x0) {
-            (*in_r12)(0x10000,0x100,0);
-          }
-          if (piVar1[0x70] != 0) {
-            in_r12 = g_gfxReleaseCallback;
-          }
-          if (piVar1[0x70] != 0 && in_r12 != (romwright_code *)0x0) {
-            (*in_r12)(0x10000,0x100,0);
-          }
-          if (piVar1[7] != 0) {
-            in_r12 = g_gfxReleaseCallback;
-          }
-          if (piVar1[7] != 0 && in_r12 != (romwright_code *)0x0) {
-            (*in_r12)(0x10000,0x100,0);
-          }
-          piVar5 = (int *)piVar1[6];
-joined_r0x001492ec:
-          piVar2 = piVar5;
-          if (piVar2 != (int *)0x0) {
-            piVar5 = (int *)piVar2[2];
-            if (*piVar2 != 0) {
-              if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-                (*g_gfxReleaseCallback)(0x10000,0x100,0);
-                if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-                  (*g_gfxReleaseCallback)(0x10000,0x100,0,piVar2);
+        if (group->block08 != NULL) {
+            GFX_RELEASE(group->block08);
+        }
+        for (u32 i = 0; i < group->entryCount; i++) {
+            if (group->entries[i].block30 != NULL) {
+                GFX_RELEASE(group->entries[i].block30);
+            }
+            if (group->entries[i].blockE0 != NULL) {
+                GFX_RELEASE(group->entries[i].blockE0);
+            }
+            if (group->entries[i].block58 != NULL) {
+                GFX_RELEASE(group->entries[i].block58);
+            }
+        }
+        if (group->entries != NULL) {
+            GFX_RELEASE(group->entries);
+        }
+        GFX_RELEASE(group);
+        group = next;
+    }
+    for (bucket = 0; bucket < RESOURCE_BUCKETS; bucket++) {
+        ResourceBucketNode *node = DAT_005b40ec.registry->bucketNodes[bucket];
+
+        while (node != NULL) {
+            ResourceBucketNode *following = node->next;
+
+            GFX_RELEASE(node);
+            node = following;
+        }
+    }
+    for (s32 j = 0; (u32)j < RESOURCE_BUCKETS; j++) {
+        ResourceNode *node = DAT_005b40ec.registry->nodes[j];
+
+        while (node != NULL) {
+            ResourceNode *following = node->next;
+            ResourceChild *child;
+
+            if (node->block2C != NULL) {
+                GFX_RELEASE(node->block2C);
+            }
+            if (node->block1C0 != NULL) {
+                GFX_RELEASE(node->block1C0);
+            }
+            if (node->block1C != NULL) {
+                GFX_RELEASE(node->block1C);
+            }
+            child = node->children;
+            while (child != NULL) {
+                ResourceChild *nextChild = child->next;
+
+                if (child->block != NULL) {
+                    GFX_RELEASE(child->block);
                 }
-              }
+                GFX_RELEASE(child);
+                child = nextChild;
             }
-            else if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-              (*g_gfxReleaseCallback)(0x10000,0x100,0,piVar2);
-            }
-            goto joined_r0x001492ec;
-          }
-          in_r12 = g_gfxReleaseCallback;
-          if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-            (*g_gfxReleaseCallback)(0x10000,0x100,0,piVar1);
-          }
+            GFX_RELEASE(node);
+            node = following;
         }
-        temp_v1 = temp_v1 + 1;
-        if (temp_v1 >= 0x200) {
-          (*(int *)((unsigned char *)&DAT_005b40ec + 0x8)) = 0;
-          return;
-        }
-      } while( 1 );
     }
-    piVar6 = (int *)piVar1[8];
-    if (*piVar1 != 0) {
-      in_r12 = g_gfxReleaseCallback;
-    }
-    if (*piVar1 != 0 && in_r12 != (romwright_code *)0x0) {
-      (*in_r12)(0x10000,0x100,0);
-    }
-    if (piVar1[2] != 0) {
-      in_r12 = g_gfxReleaseCallback;
-    }
-    if (piVar1[2] != 0 && in_r12 != (romwright_code *)0x0) {
-      (*in_r12)(0x10000,0x100,0);
-    }
-    temp_v1 = 0;
-    if (temp_v1 < (unsigned int)piVar1[5]) {
-      do {
-        temp_v2 = *(int *)(piVar1[4] + temp_v1 * 0xe8 + 0x30) != 0;
-        if (temp_v2) {
-          in_r12 = g_gfxReleaseCallback;
-        }
-        if (temp_v2 && in_r12 != (romwright_code *)0x0) {
-          (*in_r12)(0x10000,0x100,0);
-        }
-        temp_v2 = *(int *)(piVar1[4] + temp_v1 * 0xe8 + 0xe0) != 0;
-        if (temp_v2) {
-          in_r12 = g_gfxReleaseCallback;
-        }
-        if (temp_v2 && in_r12 != (romwright_code *)0x0) {
-          (*in_r12)(0x10000,0x100,0);
-        }
-        temp_v2 = *(int *)(piVar1[4] + temp_v1 * 0xe8 + 0x58) != 0;
-        if (temp_v2) {
-          in_r12 = g_gfxReleaseCallback;
-        }
-        if (temp_v2 && in_r12 != (romwright_code *)0x0) {
-          (*in_r12)(0x10000,0x100,0);
-        }
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < (unsigned int)piVar1[5]);
-    }
-    if (piVar1[4] != 0) {
-      in_r12 = (romwright_code *)0x0;
-      if (g_gfxReleaseCallback == (romwright_code *)0x0) continue;
-      (*g_gfxReleaseCallback)(0x10000,0x100,0);
-    }
-    in_r12 = g_gfxReleaseCallback;
-    if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-      (*g_gfxReleaseCallback)(0x10000,0x100,0,piVar1);
-    }
-  } while( 1 );
+    DAT_005b40ec.registry = NULL;
 }
 
 } /* extern "C" */

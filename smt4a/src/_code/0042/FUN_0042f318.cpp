@@ -28,13 +28,7 @@ s32 FUN_0042f318(AsdCecMessageBox *box, s32 kind)
     u32 info[2];
     info[0] = 0;
     s32 result;
-    if (kind != 1) {
-        result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 12, kind, 0);
-        if (nnResultIsSuccess(result)) {
-            reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 12, 8, info);
-            nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &view->inbox.header, view->inbox.ids);
-        }
-    } else {
+    if (kind == 1) {
         result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 13, 1, 0);
         if (nnResultIsSuccess(result)) {
             reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 13, 8, info);
@@ -42,6 +36,12 @@ s32 FUN_0042f318(AsdCecMessageBox *box, s32 kind)
             s32 refreshResult = reinterpret_cast<MutationCallbacks *>(box->vtable)->refresh(box, view->id, 0, 0, 0);
             if (nnResultIsSuccess(refreshResult))
                 nn_cec_CTR_MessageBox_ReadOutBoxIndex(box);
+        }
+    } else {
+        result = reinterpret_cast<MutationCallbacks *>(box->vtable)->reset(box, view->id, 12, kind, 0);
+        if (nnResultIsSuccess(result)) {
+            reinterpret_cast<MutationCallbacks *>(box->vtable)->read(box, view->id, 12, 8, info);
+            nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &view->inbox.header, view->inbox.ids);
         }
     }
     nn_os_CriticalSection_Leave(&g_asdCecMessageBoxCriticalSection);

@@ -5,6 +5,22 @@
 #include "AsdSDK/AsdMemAlloc.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x8];
+    unsigned int f0049f924; /* 0x008 */
+    u8 pad00c[0x8];
+    int f0049f930; /* 0x014 */
+    u8 pad018[0x3c];
+    unsigned int f0049f970; /* 0x054 */
+    u8 pad058[0x2a0];
+    signed char f0049fc14; /* 0x2f8 */
+    u8 pad2f9[0x3];
+    unsigned int f0049fc18; /* 0x2fc */
+    unsigned int f0049fc1c; /* 0x300 */
+};
+extern GameStateView g_gameState;
+
 
 int mapConsumePendingJumpRequest(...);
 int gameJumpRequestClear(void);
@@ -50,12 +66,12 @@ extern unsigned int *g_aocJob; /* 0x43e0d0 */
 extern unsigned int DAT_004937c4; /* 0x4937c4 */
 extern unsigned int DAT_004937c8; /* 0x4937c8 */
 extern unsigned char DAT_004937cc; /* 0x4937cc */
-extern unsigned int DAT_0049f924; /* 0x49f924 */
-extern int DAT_0049f930; /* 0x49f930 */
-extern unsigned int DAT_0049f970; /* 0x49f970 */
-extern signed char DAT_0049fc14; /* 0x49fc14 */
-extern unsigned int DAT_0049fc18; /* 0x49fc18 */
-extern unsigned int DAT_0049fc1c; /* 0x49fc1c */
+
+
+
+
+
+
 
 #ifndef ROMWRIGHT_PIECE_2_2_DEFINED
 #define ROMWRIGHT_PIECE_2_2_DEFINED
@@ -311,15 +327,15 @@ unsigned int FUN_0019f3dc(void)
       mapConsumePendingJumpRequest(temp_v3 + 0xa8,1);
       return 0;
     }
-    if (DAT_0049fc14 != '\0') {
-      if (DAT_0049f930 == 1) {
+    if (g_gameState.f0049fc14 != '\0') {
+      if (g_gameState.f0049f930 == 1) {
         asdSequenceRequest(6,0);
       }
-      if (DAT_0049f930 == 2) {
+      if (g_gameState.f0049f930 == 2) {
         asdSequenceRequest(8,0);
       }
-      if (DAT_0049f930 == 3) {
-        temp_v6 = romwright_piece_2_2((short)DAT_0049fc1c,(short)DAT_0049fc18 - 200);
+      if (g_gameState.f0049f930 == 3) {
+        temp_v6 = romwright_piece_2_2((short)g_gameState.f0049fc1c,(short)g_gameState.f0049fc18 - 200);
         asdSequenceRequest(0xe,&temp_v6,4);
       }
     }
@@ -336,7 +352,7 @@ unsigned int FUN_0019f3dc(void)
       }
       else {
         FUN_00289574((unsigned char)pcVar5[1] + 100,pcVar5[2],0xffffffff);
-        DAT_0049f924 = 0xffffffff;
+        g_gameState.f0049f924 = 0xffffffff;
         temp_v1 = 8;
         asdSequenceRequest(temp_v1,0);
       }
@@ -346,8 +362,8 @@ unsigned int FUN_0019f3dc(void)
       temp_v1 = 6;
       asdSequenceRequest(temp_v1,0);
     }
-    DAT_0049fc14 = '\0';
-    DAT_0049f970 = 0;
+    g_gameState.f0049fc14 = '\0';
+    g_gameState.f0049f970 = 0;
     gameJumpRequestClear();
   }
   jobStop(*g_aocJob,0);

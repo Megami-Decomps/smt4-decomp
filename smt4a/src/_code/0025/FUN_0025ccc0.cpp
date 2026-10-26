@@ -4,7 +4,7 @@
 extern "C" {
 
 extern ButtonHelpPresetGlobalsA g_buttonHelp;
-extern ButtonHelpQueuedSelections DAT_0057f0d8;
+extern ButtonHelpQueuedSelections g_buttonHelpQueuedKinds;
 
 void FUN_00163aa4(ButtonHelpUnit *unit, f32 speed);
 s8 uiSpriteGetCompletionState(const ButtonHelpUnit *unit);
@@ -73,8 +73,8 @@ u32 FUN_0025ccc0(void)
         sysPlaySe(g_buttonHelp.pending & 0xffff);
         if (g_buttonHelp.pending < 0) {
             for (s32 i = 0; i < 6; i++) {
-                if (DAT_0057f0d8.kinds[i] >= 0) {
-                    FUN_00183f58(i, DAT_0057f0d8.kinds[i], DAT_0057f0d8.values[i], 1);
+                if (g_buttonHelpQueuedKinds.kinds[i] >= 0) {
+                    FUN_00183f58(i, g_buttonHelpQueuedKinds.kinds[i], g_buttonHelpQueuedKinds.values[i], 1);
                 }
             }
         }

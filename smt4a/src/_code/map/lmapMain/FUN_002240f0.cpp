@@ -1,4 +1,3 @@
-/* NON_MATCHING: Popup failure-block placement and countdown-store predication differ. */
 #include "common.h"
 #include "gamedata/GameFlags.h"
 #include "map/mapDepart.h"
@@ -8,7 +7,7 @@
 extern "C" {
 extern MapRandomPopupPrefixA *g_popupState;
 extern GameStateA g_gameState;
-extern s32 DAT_005f1ac0;
+
 
 s32 gameFlagIsSet(u32 flag);
 s32 randRange(u32 range);
@@ -22,19 +21,21 @@ void FUN_002240f0(void)
     }
 
     bool suppressPopup = true;
-    if (gameFlagIsSet(0x111b) != 0) {
+    s32 flagSet = gameFlagIsSet(0x111b);
+    s32 *countdown = &g_gameState.randomPopup.countdown;
+    if (flagSet == 0) {
+        suppressPopup = false;
+        g_gameState.randomPopup.countdown = 0;
+        gameFlagSetValue(0x111b, 1, 1);
+    } else {
         // The retail ADD wraps before the signed comparison.
         if ((s32)((u32)randRange(99) + 1u) <= 30) {
             suppressPopup = false;
         }
-    } else {
-        suppressPopup = false;
-        g_gameState.randomPopup.countdown = 0;
-        gameFlagSetValue(0x111b, 1, 1);
     }
 
     if (g_gameState.randomPopup.countdown > 0) {
-        DAT_005f1ac0 = g_gameState.randomPopup.countdown - 1;
+        *countdown = g_gameState.randomPopup.countdown - 1;
         return;
     }
 

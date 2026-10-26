@@ -1,29 +1,21 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `sndChannelLfoReset` (_code @ 0x466bd4, 0x24 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
-extern "C" {
-
-typedef struct fn_00466bd4_arg0 fn_00466bd4_arg0;
-struct fn_00466bd4_arg0 {
-    unsigned char pad_0x0[0x10];
-    undefined4 field_0x10; /* +0x10 */
-    undefined4 field_0x14; /* +0x14 */
-    undefined4 field_0x18; /* +0x18 */
-    undefined1 field_0x1c; /* +0x1c */
-    undefined1 field_0x1d; /* +0x1d */
+struct SndChannelLfo {
+    u8 unk00[0x10];
+    u32 unk10;
+    f32 phase;
+    f32 depth;
+    u8 unk1C;
+    u8 unk1D;
 };
 
-
-void sndChannelLfoReset(fn_00466bd4_arg0 *param_1)
-
+extern "C" {
+void sndChannelLfoReset(SndChannelLfo *lfo)
 {
-  param_1->field_0x14 = 0;
-  param_1->field_0x18 = 0x3f800000;
-  param_1->field_0x10 = 0;
-  param_1->field_0x1c = 0;
-  param_1->field_0x1d = 0;
-  return;
+    lfo->phase = 0.0f;
+    lfo->depth = 1.0f;
+    lfo->unk10 = 0;
+    lfo->unk1C = 0;
+    lfo->unk1D = 0;
 }
-
-} /* extern "C" */
+}

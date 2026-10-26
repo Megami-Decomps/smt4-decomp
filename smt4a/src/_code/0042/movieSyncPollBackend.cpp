@@ -1,6 +1,15 @@
-/* NON_MATCHING: scalar backend output restores the 12-byte frame; state loads still coalesce and ring-capacity/address registers differ. */
+/* NON_MATCHING: slot count now takes the entry pointer (as in movieSyncConsumeReadyFrame, which matches); retail also reloads sync->state for the second idle test and evaluates &status before the other FUN_00514018 arguments. */
 #include "shard/S2MovieSync.h"
 #include "shard/W6_W6Match7_MovieSource.h"
+
+// Ring slots a stream entry consumes (0 when there is no entry).
+static __inline s32 entrySlots(const MovieSyncEntry *entry)
+{
+    if (entry == NULL) {
+        return 0;
+    }
+    return entry->type == 0 || entry->type == 1 ? 2 : 1;
+}
 
 extern "C" {
 u32 FUN_00514018(u32 backend, u32 stream, u32 *status);
@@ -35,7 +44,7 @@ void movieSyncPollBackend(MovieSync *sync)
             for (s32 stream = 0; stream < MOVIE_SYNC_STREAMS; ++stream) {
                 if (sync->entryIndex[stream] >= 0 &&
                     sync->limit[stream] - sync->readPos[stream] <
-                    movieSyncEntrySlots(sync, sync->entryIndex[stream]))
+                    entrySlots(&sync->entries[sync->entryIndex[stream]]))
                     sync->state = 8;
             }
         } else {

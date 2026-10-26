@@ -17,7 +17,7 @@ typedef struct {
 } ModelShader;
 
 u32 asdGxGetCommandCursor(void);
-void FUN_00158a40(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
+void nn_gr_CTR_Shader_SetupBinary(NativeShaderPrefix *shader, const void *binary, s32 size, s32 index);
 u32 *FUN_00177e6c(NativeShaderPrefix *shader, u32 *cursor);
 void asdModelCommitCommandRange(u32 begin, u32 end);
 void FUN_0016c744(ModelShader *owner);
@@ -33,7 +33,7 @@ s32 FUN_001579dc(ModelShader *owner, const void *binary, u32 unused, s32 size)
     u32 *end;
 
     asdGxGetCommandCursor();
-    FUN_00158a40(&owner->shader, binary, size, -1);
+    nn_gr_CTR_Shader_SetupBinary(&owner->shader, binary, size, -1);
     owner->binary = binary;
     owner->ready = 0;
     nn_gr_CTR_Shader_SearchBindSymbol(&owner->shader, &owner->aPosition, "aPosition");

@@ -11,7 +11,7 @@ int FUN_004245b4(int);
 int movieSyncPollBackend(int);
 int FUN_00424c4c(int);
 int FUN_00424ecc(int);
-int FUN_00513f84(unsigned int, unsigned int);
+int runItemsOfInner(unsigned int, unsigned int);
 int readInnerWord6(unsigned int, int *);
 
 typedef int romwright_code(...);
@@ -26,7 +26,7 @@ typedef struct {
 /* Supplied declaration required: movieSyncPollBackend. */
 /* Supplied declaration required: FUN_00424c4c. */
 /* Supplied declaration required: FUN_00424ecc. */
-/* Supplied declaration required: FUN_00513f84. */
+/* Supplied declaration required: runItemsOfInner. */
 /* Supplied declaration required: readInnerWord6. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
@@ -101,7 +101,7 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
         if (temp_v2 < *(int *)(param_1 + 0x484)) {
           do {
             if (*(int *)(param_1 + 0x548) != temp_v2) {
-              FUN_00513f84(**(unsigned int **)(param_1 + 0x18),
+              runItemsOfInner(**(unsigned int **)(param_1 + 0x18),
                            *(unsigned int *)(param_1 + temp_v2 * 4 + 0x528));
             }
             temp_v2 = temp_v2 + 1;
@@ -116,7 +116,7 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
               temp_v1 = *(int *)(param_1 + 0x470);
             }
             if (temp_v4 && temp_v1 != temp_v2) {
-              FUN_00513f84(**(unsigned int **)(param_1 + 0x18),
+              runItemsOfInner(**(unsigned int **)(param_1 + 0x18),
                            *(unsigned int *)(param_1 + temp_v2 * 4 + 0x44c));
             }
             temp_v2 = temp_v2 + 1;
@@ -125,7 +125,7 @@ void FUN_004257e4(int param_1,unsigned int param_2,unsigned int param_3,int para
         temp_v2 = 0;
         if (temp_v2 < *(int *)(param_1 + 0x1c4)) {
           do {
-            FUN_00513f84(**(unsigned int **)(param_1 + 0x18),
+            runItemsOfInner(**(unsigned int **)(param_1 + 0x18),
                          *(unsigned int *)(param_1 + temp_v2 * 4 + 0x2c8));
             temp_v2 = temp_v2 + 1;
           } while (temp_v2 < *(int *)(param_1 + 0x1c4));

@@ -42,28 +42,28 @@ void FUN_0022e774(void)
     if (game->unk2018 == 3 || game->unk2018 == 10) {
         if (lmapSceneGetScript()) {
             if (game->unk2034) {
-                Vec3 position = { game->statusModelPosition[0], game->statusModelPosition[1] + 1000.0f,
-                                  game->statusModelPosition[2] };
+                Vec3 position;
+                position.x = game->statusModelPosition[0];
+                position.y = game->statusModelPosition[1] + 1000.0f;
+                position.z = game->statusModelPosition[2];
                 linkHolderRunAll((StatusScreenModel *)game->unk2034, &position);
                 FUN_003857b4(1);
-                if (game->unk2034)
-                    statusCameraDestroy();
             }
         } else if (game->unk2034) {
             resourceOwnerReleaseAll((StatusScreenModel *)game->unk2034);
-            if (lmapMainIsRunning()) {
-                g_handleRegistry->entry->unkC4 = game->unk20E6;
-            } else {
+            if (!lmapMainIsRunning()) {
                 g_handleRegistry->entry->unkC4 = game->unk20E6;
                 resourceOwnerReleaseAndReset(g_handleRegistry);
+            } else {
+                g_handleRegistry->entry->unkC4 = game->unk20E6;
             }
             if (g_gameGlobals.ownsStatusModel) {
                 if (game->unk2034)
                     delete (StatusScreenModel *)game->unk2034;
             }
-            if (game->unk2034)
-                statusCameraDestroy();
         }
+        if (game->unk2034)
+            statusCameraDestroy();
     }
     uiSpriteSetKeyframe(&game->statusSprites.status[0], 5, 0);
     uiSpriteSelectAnim(&game->statusSprites.status[1], 3);

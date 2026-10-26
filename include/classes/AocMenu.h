@@ -4,6 +4,8 @@
 #include "common.h"
 #include "shard/ScriptProcess.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
+#include "classes/SelectionState.h"
+#include "classes/Obj4221a4.h"
 #include "code/Code0023.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
@@ -23,6 +25,8 @@ public:
     AocMenu();
     ~AocMenu();
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
+    /* Constructs in storage the caller allocated itself (smt4 allocates 0x2434 bytes). */
+    static void *operator new(u32, AocMenu *storage) { return storage; }
     static void operator delete(void *block) { asdOperatorDelete(block); }
 
     /* Starts the purchase list: loads the menu sprites and the content table, creates the script
@@ -70,7 +74,13 @@ public:
     /* 0x0208 */ AocMenuWindow *window;
     /* 0x020C */ u8 unk020C[4];
     /* 0x0210 */ RequestParameters request; /* the request the menu is waiting on */
-    /* 0x0224 */ u8 unk0224[0x12C];
+    /* 0x0224 */ RequestParameters secondRequest;
+    /* 0x0238 */ u8 unk0238[8];
+    /* 0x0240 */ SelectionFlags selection;
+    /* 0x024F */ u8 unk024F[0x65];
+    /* 0x02B4 */ const void *dispatchTable;
+    /* 0x02B8 */ u8 unk02B8[0x30];
+    /* 0x02E8 */ Obj4221a4 panel;
     /* 0x0350 */ void *tableFile;
     /* 0x0354 */ u32 tableValue;
     /* 0x0358 */ ScriptProcess *script;
@@ -84,11 +94,25 @@ public:
         } animated;
     };
     /* 0x1130 */ char prompt[0x80];
-    /* 0x11B0 */ u8 jobOwner[1];           /* the job owner jobOwnerFreeSlotAndStop works on */
-    /* 0x11B1 */ u8 unk11B1[0x153F];
+    union {
+        /* 0x11B0 */ u8 jobOwner[1];       /* the job owner jobOwnerFreeSlotAndStop works on */
+        /* 0x11B0 */ u32 jobHandle;
+    };
+    /* 0x11B4 */ u8 unk11B4[0x5E0];
+    /* 0x1794 */ u32 unk1794;
+    /* 0x1798 */ u32 unk1798;
+    /* 0x179C */ u8 unk179C[4];
+    /* 0x17A0 */ u32 unk17A0;
+    /* 0x17A4 */ u8 unk17A4[0x748];
+    /* 0x1EEC */ u32 unk1EEC;
+    /* 0x1EF0 */ u8 unk1EF0[0x800];
 };
 
 typedef char AocMenuSizeCheck[sizeof(AocMenu) == 0x26F0 ? 1 : -1];
+typedef char AocMenuMemberOffsetsCheck[
+    offsetof(AocMenu, secondRequest) == 0x224 && offsetof(AocMenu, selection) == 0x240 &&
+    offsetof(AocMenu, dispatchTable) == 0x2B4 && offsetof(AocMenu, panel) == 0x2E8 &&
+    offsetof(AocMenu, tableFile) == 0x350 ? 1 : -1];
 typedef char AocMenuCallbackOffsetsCheck[
     __INTADDR__(&((AocMenu *)0)->callbacks.update) == 0x10 &&
     __INTADDR__(&((AocMenu *)0)->callbacks.draw) == 0xb8 &&

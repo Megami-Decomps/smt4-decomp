@@ -1,4 +1,4 @@
-/* NON_MATCHING: navigation aggregate zeroing, stack reuse and transition-tail predication differ; -O2 candidate. */
+/* NON_MATCHING: the navigation position now zeroes its fields through a constructor (matches retail's byte/float stores); retail uses a 36-byte frame, no hoisted 0xf constant, g_aocMain in r8 and a branch (not predication) for the map < 200 flags. */
 #include "addon/aocMain.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match6_ContentTransition.h"
@@ -6,6 +6,7 @@
 
 struct JumpDestination { s32 map; u32 area, place; };
 struct NavigationPosition {
+    NavigationPosition() : map(0), area(0), reserved(0), x(0.0f), y(0.0f), z(0.0f) {}
     u8 kind, map, area, reserved;
     f32 x, y, z;
 };
@@ -26,7 +27,7 @@ void FUN_002bd808(ShortJumpDestination *, const ShortJumpDestination *);
 
 static inline void saveSourcePosition(ContentTransition *scene)
 {
-    NavigationPosition position = {0};
+    NavigationPosition position;
     position.kind = 3;
     position.map = scene->sourceMap;
     position.area = scene->sourceArea;

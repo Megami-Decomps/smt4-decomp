@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail uses generic signed-mask tests, different wide-shift relocation and indexed byte addressing. */
+/* NON_MATCHING: retail keeps the unrolled reserve-mask tests as generic sign-extended 64-bit ANDs (constants 2/4/8 in registers, mask loaded by ldrd through an add-immediate address, one extra callee-saved register); built folds them to constants. */
 #include "battle/btlUI.h"
 #include "shard/Shard0031.h"
 #include "gamedata/SaveSlotTable.h"
@@ -13,6 +13,13 @@ struct BattlePartySelectionView {
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 s32 FUN_002cc9e0(BtlUiObjCA *widget, u32 mode);
+u64 runtimeShiftLeftWide(u64 value, u32 count);
+
+/* The slot chosen from the reserve mask and from the active-party mask (-1 when none). */
+struct PartySelection {
+    s32 reserve;
+    s32 active;
+};
 
 /* Compare the identities selected by reserve and active-party bit masks. */
 u32 FUN_004ab594(void)
@@ -22,27 +29,24 @@ u32 FUN_004ab594(void)
         return ~0u;
     SaveSlotTable *party = gameGetSlotTable();
     const BattlePartySelectionView *selection = (const BattlePartySelectionView *)ui;
-    s32 reserve = -1;
-    s32 active = -1;
-    if (!(selection->reserveMask & 1)) {
-        if (selection->reserveMask & 2)
-            reserve = 0;
-        else if (selection->reserveMask & 4)
-            reserve = 1;
-        else if (selection->reserveMask & 8)
-            reserve = 2;
+    PartySelection chosen = {-1, -1};
+    for (s32 i = -1; i < 3; ++i) {
+        if (selection->reserveMask & (1 << (i + 1))) {
+            chosen.reserve = i;
+            break;
+        }
     }
     u64 activeMask = selection->activeMask;
     for (s32 i = 0; i < 24; ++i) {
-        if (activeMask & (1ULL << (i + 1)))
-            active = i;
+        if (activeMask & runtimeShiftLeftWide(1, i + 1))
+            chosen.active = i;
     }
     s8 reserveId = -1;
     s8 activeId = -1;
-    if (reserve >= 0)
-        reserveId = party->reserve[reserve];
-    if (active >= 0)
-        activeId = party->party[active];
+    if (chosen.reserve >= 0)
+        reserveId = party->reserve[chosen.reserve];
+    if (chosen.active >= 0)
+        activeId = party->party[chosen.active];
     return reserveId == activeId;
 }
 }

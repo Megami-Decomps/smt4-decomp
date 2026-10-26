@@ -1,4 +1,4 @@
-/* NON_MATCHING: camera fallback placement, mask operand/load ordering, and step reset stores differ. */
+/* NON_MATCHING: mask operand/load ordering (retail stores the 64-bit state flags as two word stores) and step reset stores differ. */
 #include "battle/btlMain.h"
 
 extern "C" {
@@ -26,10 +26,10 @@ void FUN_003e26f0(BtlStep *step, BtlMainStateA *battle)
     // The final effect mask extends beyond the shared encounter-global extent.
     extern EncounterEffectMasksView g_btlEncount;
     extern EffectCameraView *g_btlCamera;
-    if (g_btlCamera->duration != 0)
-        FUN_004f1c5c(g_btlCamera, g_btlCamera->duration);
-    else
+    if (g_btlCamera->duration == 0)
         FUN_004f1c5c(g_btlCamera, 120);
+    else
+        FUN_004f1c5c(g_btlCamera, g_btlCamera->duration);
     if ((g_btlEncount.initial & battle->stateFlags64.bits) == 0) {
         FUN_003ed6e8(battle);
         FUN_003f26d4(battle);

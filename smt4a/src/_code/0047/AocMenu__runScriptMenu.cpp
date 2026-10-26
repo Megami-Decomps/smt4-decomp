@@ -33,7 +33,7 @@ struct AocMenuProcess {
     /* 0x00C */ u8 unk00C[0x1FC];
     /* 0x208 */ AocMenuObject *active;
     /* 0x20C */ u32 unk20C;
-    /* 0x210 */ AocResult result;
+    /* 0x210 */ RequestParameters result;
     /* 0x224 */ u8 unk224[0x1C];
     /* 0x240 */ u8 holder[0x110];
     /* 0x350 */ void *table;
@@ -49,7 +49,6 @@ struct AocGlobals {
 extern "C" {
 extern AocGlobals *g_aocMain;
 
-void timeInitializeActiveState(u32 *state);
 void FUN_0047bcdc(AocMenuProcess *process, s32 value);
 void FUN_00477d10(AocMenuProcess *process, s32 a, s32 b);
 void FUN_00476e58(AocMenuProcess *process, s32 unused, s32 next);
@@ -71,8 +70,7 @@ void FUN_00169548(u32 mode);
 void AocMenu::runScriptMenu()
 {
     AocMenuProcess * process = reinterpret_cast<AocMenuProcess *>(this);
-    AocResult record;
-    timeInitializeActiveState(record.words);
+    RequestParameters record;
     AocGlobals *aoc = g_aocMain;
     switch (process->phase) {
     case 0:
@@ -97,12 +95,12 @@ void AocMenu::runScriptMenu()
         scrRunOpcodesStub(process->script);
         AocResult raw;
         process->active->vtable->readResult(process->active, raw.words);
-        record = raw;
-        if (isEmptyString(record.words) != 0) {
+        record = reinterpret_cast<const RequestParameters &>(raw);
+        if (isEmptyString(&record.word(0)) != 0) {
             jobFlagsWorkStop(process);
             obj04Finish();
             process->phase = 3;
-        } else if (byteIsAtLeast100(reinterpret_cast<const u8 *>(record.words)) != 0) {
+        } else if (byteIsAtLeast100(reinterpret_cast<const u8 *>(&record.word(0))) != 0) {
             jobFlagsWorkStop(process);
             obj04Finish();
             process->phase = 9999;

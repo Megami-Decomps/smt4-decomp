@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail addresses every field from one pool anchor DAT_005f19fc (struct base + 0x400, with `sub ip, r0, #1024` for the far fields); the struct's real start has no symbol, so built anchors on DAT_005f18c4 */
 #include "common.h"
 #include "script/ScriptArgs.h"
 
@@ -18,7 +17,12 @@ struct EventCameraState {
     /* 0x2e8 */ f32 pitch;
 };
 
-extern EventCameraState DAT_005f18c4;
+// The event camera block lies inside g_gameState.
+struct GameStateEventCameraView {
+    /* 0x000 */ u8 unk000[0x2c8];
+    /* 0x2c8 */ EventCameraState camera;
+};
+extern GameStateEventCameraView g_gameState;
 
 void FUN_0035846c(void);
 
@@ -27,14 +31,14 @@ u32 FUN_00330eb4(void)
 {
     if (scrGetArg(0) == 0x164f) {
         FUN_0035846c();
-        DAT_005f18c4.mode = 0x65;
-        DAT_005f18c4.type = 5;
-        DAT_005f18c4.yaw = 180.0f;
-        DAT_005f18c4.pitch = 180.0f;
-        DAT_005f18c4.position.x = -11500.0f;
-        DAT_005f18c4.position.y = 107.0f;
-        DAT_005f18c4.position.z = 3000.0f;
-        DAT_005f18c4.active = 1;
+        g_gameState.camera.mode = 0x65;
+        g_gameState.camera.type = 5;
+        g_gameState.camera.yaw = 180.0f;
+        g_gameState.camera.pitch = 180.0f;
+        g_gameState.camera.position.x = -12000.0f;
+        g_gameState.camera.position.y = 107.0f;
+        g_gameState.camera.position.z = 2958.0f;
+        g_gameState.camera.active = 1;
     }
     return 1;
 }

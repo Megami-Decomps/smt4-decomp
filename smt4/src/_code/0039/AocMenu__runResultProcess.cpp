@@ -33,7 +33,7 @@ struct AocMenuProcess {
     /* 0x010 */ u8 unk010[0x1F8];
     /* 0x208 */ AocMenuObject *active;
     /* 0x20C */ u32 unk20C;
-    /* 0x210 */ AocResult result;
+    /* 0x210 */ RequestParameters result;
     /* 0x224 */ u8 unk224[0x1C];
     /* 0x240 */ u8 holder[0x110];
     /* 0x350 */ void *table;
@@ -49,21 +49,19 @@ struct AocGlobals {
 extern "C" {
 extern AocGlobals *g_aocMain;
 
-void timeInitializeActiveState(u32 *state);
 void FUN_00233e70(AocMenuProcess *process, s32 unused, s32 next);
-void FUN_00234124(AocMenuProcess *process, const AocResult *request);
-AocResult FUN_002341d4(AocGlobals *aoc);
+void FUN_00234124(AocMenuProcess *process, const RequestParameters *request);
+RequestParameters FUN_002341d4(AocGlobals *aoc);
 s32 strIsEmpty(u32 *record);
 u8 byteIsAtLeast100(u32 *record);
-s32 legacyResourceIdRemap(const AocResult *record);
+s32 legacyResourceIdRemap(const RequestParameters *record);
 u32 flaggedValueHolderGetTotal(void *holder);
 
 /* Runs one step of the menu process that reports the screen's result: phases 0-5 and 9999. */
 void AocMenu::runResultProcess()
 {
     AocMenuProcess * process = reinterpret_cast<AocMenuProcess *>(this);
-    AocResult record;
-    timeInitializeActiveState(record.words);
+    RequestParameters record;
     AocGlobals *aoc = g_aocMain;
     switch (process->phase) {
     case 0: {
@@ -76,18 +74,18 @@ void AocMenu::runResultProcess()
     case 1: {
         AocResult raw;
         process->active->vtable->readResult(process->active, raw.words);
-        record = raw;
-        if (strIsEmpty(record.words) != 0) {
+        record = reinterpret_cast<const RequestParameters &>(raw);
+        if (strIsEmpty(&record.word(0)) != 0) {
             process->phase = 2;
             return;
         }
-        if (byteIsAtLeast100(record.words) != 0) {
-            if ((record.words[0] & 0xff) == 0x66) {
-                AocResult request = record;
+        if (byteIsAtLeast100(&record.word(0)) != 0) {
+            if ((record.word(0) & 0xff) == 0x66) {
+                RequestParameters request = record;
                 FUN_00234124(process, &request);
                 return;
             }
-            if ((record.words[0] & 0xff) != 0x67) {
+            if ((record.word(0) & 0xff) != 0x67) {
                 process->phase = 9999;
                 process->result = record;
                 return;
@@ -112,8 +110,8 @@ void AocMenu::runResultProcess()
     case 3: {
         AocResult raw;
         process->active->vtable->readResult(process->active, raw.words);
-        record = raw;
-        if (strIsEmpty(record.words) != 0) {
+        record = reinterpret_cast<const RequestParameters &>(raw);
+        if (strIsEmpty(&record.word(0)) != 0) {
             AocMenuObject *object = process->active;
             process->mode = 10;
             process->phase = 0;
@@ -123,13 +121,13 @@ void AocMenu::runResultProcess()
             }
             return;
         }
-        if (byteIsAtLeast100(record.words) != 0) {
-            if ((record.words[0] & 0xff) == 0x66) {
-                AocResult request = record;
+        if (byteIsAtLeast100(&record.word(0)) != 0) {
+            if ((record.word(0) & 0xff) == 0x66) {
+                RequestParameters request = record;
                 FUN_00234124(process, &request);
                 return;
             }
-            if ((record.words[0] & 0xff) != 0x67) {
+            if ((record.word(0) & 0xff) != 0x67) {
                 process->phase = 9999;
                 process->result = record;
                 return;
@@ -140,12 +138,12 @@ void AocMenu::runResultProcess()
         return;
     }
     case 4: {
-        AocResult remapped = FUN_002341d4(aoc);
+        RequestParameters remapped = FUN_002341d4(aoc);
         if (legacyResourceIdRemap(&remapped) < 0) {
             process->phase = 9999;
-            process->result.words[0] = 100;
-            process->result.words[1] = remapped.words[0];
-            process->result.words[2] = remapped.words[1];
+            process->result.word(0) = 100;
+            process->result.word(1) = remapped.word(0);
+            process->result.word(2) = remapped.word(1);
             return;
         }
         process->phase = 5;

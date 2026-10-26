@@ -10,9 +10,7 @@ int FUN_0023392c(unsigned int *, int, int);
 int jobStopAndClearFlags(unsigned int *);
 int FUN_00233db8(unsigned int *, int);
 int FUN_00233e70(unsigned int *, int, int);
-int timeInitializeActiveState(unsigned int *);
 int FUN_00234124(unsigned int *, unsigned int *);
-int memClear(int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 3 slot(s), 12 byte(s) */
@@ -29,7 +27,6 @@ extern int g_aocMain; /* 0x432fc8 */
 /* Supplied declaration required: FUN_00233db8. */
 /* Supplied declaration required: FUN_00233e70. */
 /* Supplied declaration required: FUN_00233fcc. */
-/* Supplied declaration required: timeInitializeActiveState. */
 /* Supplied declaration required: FUN_00234124. */
 extern int FUN_0026b564(void);
 extern int strIsEmpty(unsigned int *);
@@ -47,11 +44,7 @@ void AocMenu::runLicenseFlow()
   unsigned int temp_v0;
   int temp_v1;
   unsigned int *puVar3;
-  unsigned int temp_v2;
-  unsigned int uStack_54;
-  unsigned int uStack_50;
-  unsigned int uStack_4c;
-  unsigned int uStack_48;
+  RequestParameters record;
   unsigned int temp_v3;
   unsigned int uStack_40;
   unsigned int uStack_3c;
@@ -63,7 +56,6 @@ void AocMenu::runLicenseFlow()
   unsigned int uStack_24;
   unsigned int uStack_20;
   
-  timeInitializeActiveState(&temp_v2);
   temp_v1 = g_aocMain;
   temp_v0 = param_1[2];
   if (temp_v0 != 4) {
@@ -98,12 +90,12 @@ void AocMenu::runLicenseFlow()
           return;
         }
         (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-        temp_v2 = temp_v3;
-        uStack_54 = uStack_40;
-        uStack_50 = uStack_3c;
-        uStack_4c = uStack_38;
-        uStack_48 = uStack_34;
-        temp_v1 = strIsEmpty(&temp_v2);
+        record.word(0) = temp_v3;
+        record.word(1) = uStack_40;
+        record.word(2) = uStack_3c;
+        record.word(3) = uStack_38;
+        record.word(4) = uStack_34;
+        temp_v1 = strIsEmpty(&record.word(0));
         if (temp_v1 != 0) {
           if ((int *)param_1[0x82] != (int *)0x0) {
             (**(romwright_code **)(*(int *)param_1[0x82] + 4))();
@@ -115,34 +107,34 @@ void AocMenu::runLicenseFlow()
           param_1[0x82] = (unsigned int)puVar3;
           return;
         }
-        temp_v1 = byteIsAtLeast100(&temp_v2);
+        temp_v1 = byteIsAtLeast100(&record.word(0));
         if (temp_v1 == 0) {
           return;
         }
         jobStopAndClearFlags(param_1);
         param_1[2] = 9999;
-        param_1[0x84] = temp_v2;
-        param_1[0x85] = uStack_54;
-        param_1[0x86] = uStack_50;
-        param_1[0x87] = uStack_4c;
-        param_1[0x88] = uStack_48;
+        param_1[0x84] = record.word(0);
+        param_1[0x85] = record.word(1);
+        param_1[0x86] = record.word(2);
+        param_1[0x87] = record.word(3);
+        param_1[0x88] = record.word(4);
         return;
       }
       if ((*param_1 & 0x200) == 0) {
         return;
       }
       (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-      temp_v2 = temp_v3;
-      uStack_54 = uStack_40;
-      uStack_50 = uStack_3c;
-      uStack_4c = uStack_38;
-      uStack_48 = uStack_34;
-      temp_v1 = strIsEmpty(&temp_v2);
+      record.word(0) = temp_v3;
+      record.word(1) = uStack_40;
+      record.word(2) = uStack_3c;
+      record.word(3) = uStack_38;
+      record.word(4) = uStack_34;
+      temp_v1 = strIsEmpty(&record.word(0));
       if (temp_v1 != 0) {
         param_1[2] = 2;
         return;
       }
-      temp_v1 = byteIsAtLeast100(&temp_v2);
+      temp_v1 = byteIsAtLeast100(&record.word(0));
       if (temp_v1 == 0) {
         return;
       }
@@ -187,12 +179,12 @@ void AocMenu::runLicenseFlow()
         return;
       }
       (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-      temp_v2 = temp_v3;
-      uStack_54 = uStack_40;
-      uStack_50 = uStack_3c;
-      uStack_4c = uStack_38;
-      uStack_48 = uStack_34;
-      temp_v1 = strIsEmpty(&temp_v2);
+      record.word(0) = temp_v3;
+      record.word(1) = uStack_40;
+      record.word(2) = uStack_3c;
+      record.word(3) = uStack_38;
+      record.word(4) = uStack_34;
+      temp_v1 = strIsEmpty(&record.word(0));
       if (temp_v1 != 0) {
         param_1[1] = 10;
         param_1[2] = 0;
@@ -217,10 +209,10 @@ void AocMenu::runLicenseFlow()
         *(unsigned int *)(temp_v1 + 0x6c8) = 0;
         *(unsigned int *)(temp_v1 + 0x6cc) = 0;
         *(unsigned int *)(temp_v1 + 0x6d0) = 0;
-        memClear(temp_v1 + 0x6d4,0x80);
+        memClear((void *)(temp_v1 + 0x6d4),0x80);
         return;
       }
-      temp_v1 = byteIsAtLeast100(&temp_v2);
+      temp_v1 = byteIsAtLeast100(&record.word(0));
       if (temp_v1 == 0) {
         return;
       }
@@ -232,43 +224,43 @@ void AocMenu::runLicenseFlow()
       return;
     }
     (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v3);
-    temp_v2 = temp_v3;
-    uStack_54 = uStack_40;
-    uStack_50 = uStack_3c;
-    uStack_4c = uStack_38;
-    uStack_48 = uStack_34;
-    temp_v1 = strIsEmpty(&temp_v2);
+    record.word(0) = temp_v3;
+    record.word(1) = uStack_40;
+    record.word(2) = uStack_3c;
+    record.word(3) = uStack_38;
+    record.word(4) = uStack_34;
+    temp_v1 = strIsEmpty(&record.word(0));
     if (temp_v1 != 0) {
       param_1[2] = 5;
       FUN_00233db8(param_1,1);
       return;
     }
-    temp_v1 = byteIsAtLeast100(&temp_v2);
+    temp_v1 = byteIsAtLeast100(&record.word(0));
     if (temp_v1 == 0) {
       return;
     }
     jobStopAndClearFlags(param_1);
   }
-  if ((temp_v2 & 0xff) == 0x66) {
-    temp_v4 = temp_v2;
-    uStack_2c = uStack_54;
-    uStack_28 = uStack_50;
-    uStack_24 = uStack_4c;
-    uStack_20 = uStack_48;
+  if ((record.word(0) & 0xff) == 0x66) {
+    temp_v4 = record.word(0);
+    uStack_2c = record.word(1);
+    uStack_28 = record.word(2);
+    uStack_24 = record.word(3);
+    uStack_20 = record.word(4);
     FUN_00234124(param_1,&temp_v4);
     return;
   }
-  if ((temp_v2 & 0xff) == 0x67) {
+  if ((record.word(0) & 0xff) == 0x67) {
     param_1[2] = 7;
     param_1[3] = 3;
     return;
   }
   param_1[2] = 9999;
-  param_1[0x84] = temp_v2;
-  param_1[0x85] = uStack_54;
-  param_1[0x86] = uStack_50;
-  param_1[0x87] = uStack_4c;
-  param_1[0x88] = uStack_48;
+  param_1[0x84] = record.word(0);
+  param_1[0x85] = record.word(1);
+  param_1[0x86] = record.word(2);
+  param_1[0x87] = record.word(3);
+  param_1[0x88] = record.word(4);
   return;
 }
 

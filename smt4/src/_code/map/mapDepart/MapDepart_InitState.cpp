@@ -38,18 +38,11 @@ struct MapDepartSavePoint {
     /* 0xDDC */ u32 objectId;
 };
 
-struct MapDepartGlobals {
-    /* 0x00 */ u8 unk00[0x50];
-    /* 0x50 */ u32 unk50;
-    /* 0x54 */ u8 unk54[0x50];
-    /* 0xA4 */ u16 unkA4;
-    /* 0xA6 */ u16 unkA6;
-};
 
 extern "C" {
 
 extern GameState g_gameState;
-extern MapDepartGlobals DAT_0049fd38;
+
 MapDepartSavePoint *gameGetMapBlock(void);
 void FUN_00270f70(MapVector *position);
 void mapBlockLoadTableRecord(void);
@@ -85,9 +78,10 @@ void MapDepart_InitState(MapDepartState *state, s32 save)
         point->unk2A = g_gameState.unkA8;
     }
     mapBlockLoadTableRecord();
-    DAT_0049fd38.unk50 = 0;
-    DAT_0049fd38.unkA4 = 0;
-    DAT_0049fd38.unkA6 = 0;
+    GameStateDepartBlock *block = &g_gameState.departReset.block;
+    block->unk50 = 0;
+    block->unkA4 = 0;
+    block->unkA6 = 0;
 }
 
 } /* extern "C" */

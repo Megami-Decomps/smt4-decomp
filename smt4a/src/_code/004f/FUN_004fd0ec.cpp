@@ -1,4 +1,4 @@
-/* NON_MATCHING: prior-action traversal preload, saved registers and scalar store ordering differ from retail. */
+/* NON_MATCHING: float argument registers (retail s17=parameter, s16=second, separate vldr) and the store scheduling after btlQueueReflectAction differ. */
 #include "battle/btlReflect.h"
 #include "battle/btlAction.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -11,7 +11,9 @@ extern "C" ReflectAction *FUN_004fd0ec(s32 actor, s32 secondary, u32 options, Bt
 {
     bool repeated = false;
     ReflectContext *context = g_btlActionReflect;
-    for (ReflectAction *previous = context->head; previous; previous = previous->next) {
+    ReflectAction *next;
+    for (ReflectAction *previous = context->head; previous; previous = next) {
+        next = previous->next;
         if (previous->kind == 2 && previous->options == options &&
             previous->target == reinterpret_cast<u32>(target)) {
             repeated = true;

@@ -4,7 +4,7 @@
 
 extern "C" void FUN_001ee3dc(EffectScalarKeyState *state, const EffectScalarKeySource *source)
 {
-    if (state->index > 2) {
+    if (state->index >= 3) {
         state->index = 4;
     }
     s32 current = state->index;

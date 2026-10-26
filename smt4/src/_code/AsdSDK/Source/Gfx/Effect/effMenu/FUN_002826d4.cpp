@@ -1,4 +1,4 @@
-/* NON_MATCHING: allocation argument registers, grouped payload stores, and separate tail-array addressing differ. */
+/* NON_MATCHING: retail keeps the first argument in r7 (stored alone, then stm of three) and copies the stack floats before the argument moves; tail-array addressing matches. */
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -21,12 +21,13 @@ __softfp void FUN_002826d4(u32 first, u32 second, u32 third, u32 fourth,
     node->horizontal = horizontal;
     node->vertical = vertical;
     node->unk04 = 5;
+    EffMenuNode **tail = g_effMenuHandles.tail;
     if (g_effMenuHandles.head[3] == NULL) {
         g_effMenuHandles.head[3] = node;
     } else {
-        g_effMenuHandles.tail[3]->next = node;
+        tail[3]->next = node;
     }
-    g_effMenuHandles.tail[3] = node;
+    tail[3] = node;
     node->next = NULL;
 }
 }

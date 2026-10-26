@@ -1,4 +1,4 @@
-/* NON_MATCHING: first entry store registers, reverse-flag tests and cold sort branches differ; -O2 candidate. */
+/* NON_MATCHING: only the first entry store differs: retail computes the entry address in r1 and the id in r2 (built swaps them). */
 #include "common.h"
 #include "status/StatusCamera.h"
 #include "AsdSDK/AsdMemUtil.h"
@@ -55,22 +55,22 @@ void statusBuildFlaggedDemonList(const u8 *flags)
     FlaggedDemonList *sorting = g_statusDown;
     const FlaggedDemonSortFlags *options = &reinterpret_cast<const FlaggedDemonSortOptions *>(FUN_002a0d0c())->sort;
     if (options->mode == 1) {
-        if (options->reverse)
-            FUN_002b7bca(sorting->entries, sorting->count, 4, devilIdCompareRankOrderId);
-        else
+        if (!options->reverse)
             FUN_002b7bca(sorting->entries, sorting->count, 4, FUN_00206d4c);
+        else
+            FUN_002b7bca(sorting->entries, sorting->count, 4, devilIdCompareRankOrderId);
     }
     if (options->mode == 0x21) {
-        if (options->reverse)
-            FUN_002b7bca(sorting->entries, sorting->count, 4, FUN_002dc9d4);
-        else
+        if (!options->reverse)
             FUN_002b7bca(sorting->entries, sorting->count, 4, FUN_001f61c4);
+        else
+            FUN_002b7bca(sorting->entries, sorting->count, 4, FUN_002dc9d4);
     }
     if (options->mode == 3) {
-        if (options->reverse)
-            FUN_002b7bca(sorting->entries, sorting->count, 4, recordCompareByKey);
-        else
+        if (!options->reverse)
             FUN_002b7bca(sorting->entries, sorting->count, 4, entryRefCompareByKey);
+        else
+            FUN_002b7bca(sorting->entries, sorting->count, 4, recordCompareByKey);
     }
     list->dirty = 1;
 }

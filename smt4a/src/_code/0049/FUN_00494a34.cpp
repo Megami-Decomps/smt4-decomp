@@ -29,7 +29,7 @@ s32 sysPlaySe(s32 id);
 void FUN_0019de98(s32 a, u32 color);
 s32 scrRunOpcodesStub(u32 script);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
-void panelSetTarget(s32 target);
+void panelSetTarget(s32 offset, s32 frame);
 void FUN_0037c8e4(s32 a, s32 b);
 void FUN_0049a5b4(ShopMain *shop);
 u32 FUN_0049a9a8(void);
@@ -85,7 +85,7 @@ void FUN_00494a34(ShopMain *shop)
             return;
         }
         FUN_0037c8e4(1, 0);
-        panelSetTarget(0);
+        panelSetTarget(0, 0);
         shop->previousState = shop->state;
         shop->state = 5;
         shop->step = 0;
@@ -107,7 +107,7 @@ void FUN_00494a34(ShopMain *shop)
         return;
     }
     FUN_0037c8e4(1, 0);
-    panelSetTarget(0);
+    panelSetTarget(0, 0);
     if (shopHasEntries()) {
         shop->previousState = shop->state;
         shop->state = 2;

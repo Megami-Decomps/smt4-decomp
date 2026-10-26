@@ -1,4 +1,3 @@
-/* NON_MATCHING: flag-clear order, optional-request branch outlining and task argument scheduling differ. */
 #include "addon/aocMain.h"
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "shard/JobWork.h"
@@ -57,11 +56,24 @@ void FUN_00291728(const RequestParameters *parameters)
     work->state = 0;
     work->resource = NULL;
     work->script = NULL;
-    work->flags[0] = work->flags[1] = work->flags[2] = work->flags[3] = 0;
-    work->status = work->complete = work->pathReady = 0;
+    work->flags[0] = 0;
+    work->flags[1] = 0;
+    work->flags[2] = 0;
+    work->flags[3] = 0;
+    work->status = 0;
+    work->complete = 0;
+    work->pathReady = 0;
     rt_aeabi_memclr(work->path, sizeof(work->path));
     work->prefix.started = 0;
-    if (parameters == NULL) {
+    if (parameters != NULL) {
+        DAT_005e1f70.id = parameters->word(0);
+        DAT_005e1f70.entry = parameters->word(1);
+        if (DAT_005e1f70.entry == -1)
+            libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->word(2)));
+        else
+            DAT_005e1f70.path[0] = 0;
+        work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00225ddc), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
+    } else {
         if (jyoucyuGetTableEntry(0) != NULL) {
             dataTableReload(0x19);
             dataTableReload(0x1B);
@@ -73,14 +85,6 @@ void FUN_00291728(const RequestParameters *parameters)
             resourceDefaultFalseCallback, resourceEmptyCallback, NULL, work->prefix.id);
         taskCreateDraw("EVENT VIEW DDRAW", 0xEA, 0, 0,
             FUN_0032878c, FUN_00379d54, NULL, work->prefix.id);
-        return;
     }
-    DAT_005e1f70.id = parameters->word(0);
-    DAT_005e1f70.entry = parameters->word(1);
-    if (DAT_005e1f70.entry != -1)
-        DAT_005e1f70.path[0] = 0;
-    else
-        libc_strcpy(DAT_005e1f70.path, reinterpret_cast<const char *>(&parameters->word(2)));
-    work->prefix.id = asdProcessCreateSimple(reinterpret_cast<const s8 *>("EVENT CALC"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_00225ddc), reinterpret_cast<AsdProcFunc>(aocJobRequest), NULL);
 }
 }

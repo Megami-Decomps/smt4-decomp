@@ -3,6 +3,17 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x18];
+    signed char f005f1614; /* 0x018 */
+    u8 pad019[0x3];
+    int f005f1618; /* 0x01c */
+    u8 pad020[0x1];
+    signed char f005f161d; /* 0x021 */
+};
+extern GameStateView g_gameState;
+
 
 int mathAngleDeltaDegrees(void);
 int mapIfStart(unsigned int);
@@ -15,9 +26,9 @@ typedef struct {
 
 extern int g_lmapMainState; /* 0x580238 */
 extern int g_lmapView; /* 0x5806a4 */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern int DAT_005f1618; /* 0x5f1618 */
-extern signed char DAT_005f161d; /* 0x5f161d */
+
+
+
 
 extern int gameFlagsGetBlock(void);
 extern int slotIsActive(unsigned int);
@@ -75,11 +86,11 @@ void FUN_0033f9f4(void)
   if (0 < *(short *)(temp_v5 + 0xb6)) {
     *(short *)(temp_v5 + 0xb6) = *(short *)(temp_v5 + 0xb6) - 1;
   }
-  temp_v0 = DAT_005f161d;
-  if (DAT_005f161d == '\0') {
-    temp_v0 = DAT_005f1614;
+  temp_v0 = g_gameState.f005f161d;
+  if (g_gameState.f005f161d == '\0') {
+    temp_v0 = g_gameState.f005f1614;
   }
-  if ((!(DAT_005f161d != '\0' || temp_v0 != '\0')) && (DAT_005f1618 == 0)) {
+  if ((!(g_gameState.f005f161d != '\0' || temp_v0 != '\0')) && (g_gameState.f005f1618 == 0)) {
     if (*(char *)(temp_v5 + 0xb4) != '\0') goto LAB_0033fcfc;
     if (((*(char *)(temp_v5 + 0xb5) != '\0') && (temp_v5 = slotIsActive(8), temp_v5 == 0)) &&
        (temp_v5 = slotIsActive(7), temp_v5 == 0)) {
@@ -104,7 +115,7 @@ void FUN_0033f9f4(void)
         temp_v7 = 0;
         temp_v8 = 0;
         temp_v9 = 0;
-        if (DAT_005f161d == '\0') {
+        if (g_gameState.f005f161d == '\0') {
           temp_v2 = 1;
         }
       }

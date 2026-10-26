@@ -1,10 +1,16 @@
-/* NON_MATCHING: handle-zero stores use STRD instead of retail's shared zero register; packed-ID scheduling and result-module comparisons differ. */
+/* NON_MATCHING: the handle-zero stores are now two word stores like retail; the packed-ID scheduling (retail builds the 0x4008C constant first) and saved-register assignment still differ. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
 namespace {
 struct ArchiveMountState {
-    u64 handle;
+    union {
+        u64 handle;
+        struct {
+            u32 low;
+            u32 high;
+        } words;
+    };
     u8 header[0x40];
 };
 struct ArchiveMountOptions {
@@ -27,7 +33,8 @@ WindowStatusResult FUN_00426fe4(ArchiveMountState *state, const ArchiveMountOpti
 {
     if (state->handle != 0) {
         FUN_00429d58(state->handle);
-        state->handle = 0;
+        state->words.low = 0;
+        state->words.high = 0;
     }
     if (options->unsupported)
         return WindowStatusResult(0xE0E13883);
@@ -53,7 +60,8 @@ WindowStatusResult FUN_00426fe4(ArchiveMountState *state, const ArchiveMountOpti
     result = handleRequestSubmit(state, 1, id, 0, 1, 1, state->header, sizeof(state->header), 0);
     s32 description = nnResultDescription(result);
     if (nnResultModule(result) == 17 && description >= 100 && description < 180) {
-        state->handle = 0;
+        state->words.low = 0;
+        state->words.high = 0;
         return WindowStatusResult(0xD881388A);
     }
     if (nnResultIsFailure(result))
@@ -62,7 +70,8 @@ WindowStatusResult FUN_00426fe4(ArchiveMountState *state, const ArchiveMountOpti
     if (!nnResultIsFailure(result))
         return WindowStatusResult(0);
     FUN_00429d58(state->handle);
-    state->handle = 0;
+    state->words.low = 0;
+        state->words.high = 0;
     return WindowStatusResult(result);
 }
 }

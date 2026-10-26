@@ -26,8 +26,9 @@ extern "C" void FUN_002015e4(const ScalarAnimation* animation, s32* elapsed,
     if (*elapsed > *duration) {
         *elapsed = 0;
         *step = 0.0f;
+        s32 distance = 1;
         if (*keyIndex < 3) {
-            for (s32 distance = 1; *keyIndex + distance < 4; ++distance) {
+            for (; *keyIndex + distance < 4; ++distance) {
                 *duration = animation->keys[*keyIndex + distance].time -
                             animation->keys[*keyIndex].time;
                 if (*duration > 0) {

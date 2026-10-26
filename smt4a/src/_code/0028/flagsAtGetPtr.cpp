@@ -1,15 +1,9 @@
-#include "romwright_types.h"
+#include "shard/GameDataBlocks.h"
 
 extern "C" {
-
-extern unsigned char g_gameDataBlocks;
-
-
-int flagsAtGetPtr(int param_1)
-
+s32 flagsAtGetPtr(s32 offset)
 {
-  int t = *(int *)((unsigned char *)&g_gameDataBlocks + 0x4);
-  return param_1 + t + 0x2831c;
+    u8 *base = (u8 *)g_gameDataBlocks.saveBlock + offset;
+    return (s32)(base + 0x2831C);
 }
-
-} /* extern "C" */
+}

@@ -1,4 +1,4 @@
-/* NON_MATCHING: POD vector copies use integer transfers and camera/mask base allocation differs; -O2 candidate. */
+/* NON_MATCHING: the offset copies now use VFP transfers (pointer copy) as in retail; camera/mask base and flag-mask load allocation still differ. */
 #include "shard/W6_W6Match6_BattleCamera.h"
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -37,21 +37,21 @@ void btlCameraSetFormationSlot(BattleActionCamera *camera, BtlMainStateA *battle
     switch (slot) {
     case 0:
         camera->formation.position.x = -12.0f;
-        formation->offset = DAT_005e1554;
+        battleVectorCopy(&formation->offset, &DAT_005e1554);
         if (battle->stateFlags64.bits & masks->wideFormation)
             formation->offset.x = -1.5f;
         break;
     case 1:
         camera->formation.position.x = -6.0f;
-        formation->offset = DAT_005e1554;
+        battleVectorCopy(&formation->offset, &DAT_005e1554);
         break;
     case 2:
         camera->formation.position.x = 6.0f;
-        formation->offset = DAT_005e1554;
+        battleVectorCopy(&formation->offset, &DAT_005e1554);
         break;
     case 3:
         camera->formation.position.x = 12.0f;
-        formation->offset = DAT_005e1554;
+        battleVectorCopy(&formation->offset, &DAT_005e1554);
         if (battle->stateFlags64.bits & masks->wideFormation)
             formation->offset.x = 1.5f;
         break;

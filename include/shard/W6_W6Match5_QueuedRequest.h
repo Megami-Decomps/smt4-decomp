@@ -9,7 +9,7 @@
  * words. It starts active (kind 1) with the default result; its destructor does nothing, but makes it
  * a class value that callers pass by hidden reference (copies are plain block copies). */
 struct RequestParameters {
-    RequestParameters() : kind(1), word3(0), word4(0) { result = WindowStatusResult(0); }
+    RequestParameters();
     /* An idle request of the given kind. */
     explicit RequestParameters(u8 initialKind) : kind(initialKind), word3(0), word4(0) { result = WindowStatusResult(0); }
     /* A request holding the given five words. */

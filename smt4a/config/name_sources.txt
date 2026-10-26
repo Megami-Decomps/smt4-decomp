@@ -6705,3 +6705,17 @@
 0015e978 soundArchiveLoadStringBlock inferred [high] twin of smt4 soundArchiveLoadStringBlock
 0039e89c scrBtlAddPresetFlagsToMatchingUnits inferred [med] script command: adds preset flags to units 4..53 with matching id that satisfy the required/excluded masks
 00371068 mapCellMarkNeighborsState2 inferred [med] twin of smt4 mapCellMarkNeighborsState2
+0047daf4 _ZN10TimedStateC1Ev evidence same TimedState default ctor as smt4 _ZN10TimedStateC1Ev (twin, shared header gains the ctor)
+0047daf4 _ZN17RequestParametersC1Ev evidence same
+00158a40 nn_gr_CTR_Shader_SetupBinary evidence same size 0xec and shape as smt4 nn_gr_CTR_Shader_SetupBinary (0x11bc40): shader binary parse, MakeShaderConstCommandCache call, FUN_0016d390 command build
+00197f40 _ZN12CallbackListC1Ev evidence default ctor of CallbackList (empty circular list); only caller FUN_001b1998 passes it to __aeabi_vec_ctor_nocookie_nodtor over CallbackList[3]
+002e5700 __aeabi_vec_dtor evidence ARM C++ ABI array destructor helper (armcc emits calls to __aeabi_vec_dtor)
+0057f0d8 g_buttonHelpQueuedKinds inferred size:0x18 queued help selection kinds (s32[6]), -1 = none
+0057f0f0 g_buttonHelpQueuedValues inferred size:0x18 queued help selection values (s32[6]) paired with kinds
+003f0e94 btlFindSelectionIndexByLookupKey inferred [high] returns selectionIndex of the combatant entry whose lookupKey matches, or -1
+00387554 objectGetLengthField inferred [med] one-instruction getter ldr r0,[r0,#16]: RangeObject payload length (FUN_004327f8) and a list column count (FUN_00261840)
+00215904 mapRndMazeResetHandles inferred [high] nulls the six per-row handle roots and the 6x64 handle groups and the 4 tail words of the random maze
+00424268 movieSyncConsumeReadyFrame inferred [med] consumes a complete frame from each active stream and advances the timestamp ring cursors
+00161c64 gfxReleaseEntryBlocks inferred [high] hands an entry main/sub driver blocks back through g_gfxReleaseCallback per entry kind, then clears both block pointers
+00473c5c textConvertToBoundedWide inferred [med] decodes text into temporary wide storage and copies a capacity-bounded NUL-terminated result
+0040b730 playerLoadOutfitPartModel inferred [med] loads one outfit part (0 head, 1 body, 2 legs) model path player/plNN_MMM{hd,bd,lg}V.bam with group 8 model 0 fallback, then starts the load

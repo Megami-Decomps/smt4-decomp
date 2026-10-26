@@ -19,8 +19,8 @@ void FUN_002e0924(u32 colorA, u32 colorB, u32 colorC, u32 colorD,
 void FUN_003762c0(s32 x, s32 y, s32 width, s32 height, u32 outlineColor, u32 fillColor)
 {
     RenderCtxA *context = g_renderCtx;
-    s32 drawX = (s32)((f32)x + g_uiDrawOffset[0]);
-    s32 drawY = (s32)((f32)y + g_uiDrawOffset[1]);
+    s32 drawX = (s32)(g_uiDrawOffset[0] + (f32)x);
+    s32 drawY = (s32)(g_uiDrawOffset[1] + (f32)y);
     renderCtxPushA(context, FUN_001692ac(1, 1));
     renderCtxSelectTexture(g_renderCtx, 0);
     if (fillColor >> 24) {

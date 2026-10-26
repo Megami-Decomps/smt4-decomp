@@ -1,4 +1,4 @@
-/* NON_MATCHING: block/table saved registers and default-table block placement differ; final variant selection is shared later. */
+/* NON_MATCHING: the default-table path is a second copy with zero block/table locals (compares fold away) like retail; retail joins both paths before the final table/entries calls where this build duplicates them, and loads the key fields into swapped registers. */
 #include "gamedata/NamedVariantTable.h"
 #include "gamedata/DataTable.h"
 
@@ -41,11 +41,17 @@ extern "C" NamedVariantTableEntry *FUN_002470a8(s32 alternate, const char *name,
         }
         entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, tableIndex)));
     } else {
+        u32 blockIndex = 0;
+        u32 tableIndex = 0;
         void *file = fileSlotGetBuffer(7);
-        binFileGetValue(file);
-        void *block = FUN_0024ba44(file, 0);
-        tbcrBlockGetPayload(block);
-        entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, 0)));
+        if (binFileGetValue(file) <= blockIndex) {
+            blockIndex = 0;
+        }
+        void *block = FUN_0024ba44(file, blockIndex);
+        if (tbcrBlockGetPayload(block) <= tableIndex) {
+            tableIndex = 0;
+        }
+        entries = reinterpret_cast<NamedVariantTableEntry *>(dataTableGetEntries(dataTableFileGetTable(block, tableIndex)));
     }
     u32 variant = alternate != 0;
     if (invert != 0) {

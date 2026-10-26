@@ -179,6 +179,13 @@ Every match must be one a programmer could have written for a reason.
   a pool word into the object's own data against retail's `DAT_x`/`_ZZ…` counts as equal and
   `IDENTICAL` carries `(data relocations by section: relink checks the address)`. Give the
   variables their real names when known.
+- **A pool word inside a named global** reads `g_obj+off` only when `symbols.txt` gives the object a
+  `size:`; without one, retail's word prints as `DAT_<address>` and code-identical functions differ.
+  Ask Main to size the object (evidence: the asserted `sizeof` of its type, the offsets its users
+  touch, never past the next symbol).
+- **A number that falls inside a data section** (an IPC command header, a status code) is still a
+  number: `<game>/config/numbers.txt` lists such values (`0x<value> // evidence`), and the target
+  objects then keep the plain word. Write the constant in source, never `&DAT_…`.
 - **Compiler-generated global initialisers are not ordinary wrappers.** Keep native object
   definitions rather than explicit runtime-helper calls. Initialized objects and zero-initialized
   objects can belong to different data sections: for example, parameterized module-state/counter

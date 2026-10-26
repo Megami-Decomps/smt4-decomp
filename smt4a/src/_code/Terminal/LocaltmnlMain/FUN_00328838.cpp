@@ -82,7 +82,7 @@ int FUN_0040ab7c(unsigned int, int);
 int handleRegistryRegisterObject(int, unsigned int);
 int FUN_0040ae70(...);
 int resourceOwnerLoadNamed(...);
-int FUN_0040b730(unsigned int, unsigned int, int);
+int playerLoadOutfitPartModel(unsigned int, unsigned int, int);
 int FUN_0040ba38(void);
 int FUN_0045b538(int);
 int VectorSignedToFloat(...);
@@ -208,7 +208,7 @@ extern unsigned int modelListInit(void);
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
-/* Supplied declaration required: FUN_0040b730. */
+/* Supplied declaration required: playerLoadOutfitPartModel. */
 /* Supplied declaration required: FUN_0040ba38. */
 /* Supplied declaration required: FUN_0045b538. */
 extern int FUN_004ffba8(unsigned int);
@@ -304,7 +304,7 @@ unsigned int FUN_00328838(void)
     FUN_0040ba38();
     temp_v5 = 0;
     do {
-      FUN_0040b730(*(unsigned int *)(temp_v4 + 0x28),temp_v5 & 0xff,0x1c0);
+      playerLoadOutfitPartModel(*(unsigned int *)(temp_v4 + 0x28),temp_v5 & 0xff,0x1c0);
       temp_v5 = temp_v5 + 1;
     } while ((int)temp_v5 < 3);
     temp_v6 = 0x20;

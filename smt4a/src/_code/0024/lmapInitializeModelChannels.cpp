@@ -3,7 +3,7 @@
 extern "C" {
 extern LmapSceneA *g_lmapScene;
 void FUN_0040ba38(LmapScript *owner, u32 selector);
-void FUN_0040b730(LmapScript *owner, u8 channel, u32 selector);
+void playerLoadOutfitPartModel(LmapScript *owner, u8 channel, u32 selector);
 void playerModelLoadByIndex(LmapScript *owner, u8 channel, u32 value, u32 selector);
 
 /* Initializes the three model channels, restoring their saved values when requested. The selector is
@@ -25,7 +25,7 @@ void lmapInitializeModelChannels(void)
             if (i == 0 || i == 1 || i == 2) {
                 selector = 7;
             }
-            FUN_0040b730(g_lmapScene->script, static_cast<u8>(i), selector);
+            playerLoadOutfitPartModel(g_lmapScene->script, static_cast<u8>(i), selector);
         }
     }
 }

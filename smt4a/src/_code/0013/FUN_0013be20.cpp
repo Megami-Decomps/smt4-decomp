@@ -1,101 +1,99 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0013be20` (_code @ 0x13be20, 0x158 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of a raw draft; identical instructions, only the callee-saved register numbering differs (retail: hooks r6, first bucket counter r7, second r5; build: hooks r7, counter r6). */
+#include "common.h"
+#include "shard/W6_W6Match7_DefaultTextureWork.h"
+
+namespace {
+/* A texture block registered with the driver, chained in one of 32 buckets. */
+struct GfxBlockNode {
+    /* 0x00 */ u32 address;
+    /* 0x04 */ void *block;
+    /* 0x08 */ u8 unk08[0x38];
+    /* 0x40 */ GfxBlockNode *next;
+};
+/* A buffer block: like GfxBlockNode but chained at 0x18 and released against its own heap. */
+struct GfxBufferNode {
+    /* 0x00 */ u32 address;
+    /* 0x04 */ void *block;
+    /* 0x08 */ u8 unk08[0xC];
+    /* 0x14 */ u32 heap;
+    /* 0x18 */ GfxBufferNode *next;
+};
+struct GfxContextBuckets {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u8 initialized;
+    /* 0x11 */ u8 unk11[0xB];
+    /* 0x1C */ GfxBlockNode *blocks[32];
+    /* 0x9C */ u8 unk9C[8];
+    /* 0xA4 */ GfxBufferNode *buffers[32];
+};
+/* The driver hooks and the memory the graphics layer allocated for itself. */
+struct GfxDriverHooks {
+    /* 0x00 */ void *allocate;
+    /* 0x04 */ DriverTextureRelease *release;
+    /* 0x08 */ u8 unk08[8];
+    /* 0x10 */ void *context;
+};
+}
 
 extern "C" {
+extern GfxContextBuckets g_asdGfxContext;
+extern GfxDriverHooks g_gfxAllocateCallback;
 
-int FUN_00148f48(void);
-int FUN_00149090(void);
-int FUN_0014938c(void);
-int FUN_001493a8(void);
-int FUN_001496f0(void);
-int FUN_00149824(void);
-int FUN_0015a270(void);
+void FUN_00149824(void);
+void FUN_001493a8(void);
+void FUN_00149090(void);
+void FUN_001496f0(void);
+void FUN_00148f48(void);
+void FUN_0014938c(void);
+void FUN_0015a270(void);
 
-typedef int romwright_code(...);
-extern unsigned int g_gfxAllocateCallback; /* 0x58918c */
-extern romwright_code *g_gfxReleaseCallback; /* 0x589190 */
-extern unsigned int DAT_0058919c; /* 0x58919c */
-extern signed char DAT_0061a480; /* 0x61a480 */
-
-/* Supplied declaration required: FUN_00148f48. */
-/* Supplied declaration required: FUN_00149090. */
-/* Supplied declaration required: FUN_0014938c. */
-/* Supplied declaration required: FUN_001493a8. */
-/* Supplied declaration required: FUN_001496f0. */
-/* Supplied declaration required: FUN_00149824. */
-/* Supplied declaration required: FUN_0015a270. */
-
-
+// Shut the graphics layer down: release every registered block and the layer's own memory.
 void FUN_0013be20(void)
-
 {
-/* irregular: 2 unstructured edge(s); 2 goto(s); 7 native warning(s); review required */
-  unsigned int *puVar1;
-  unsigned int *puVar2;
-  int temp_v0;
-  
-  if (DAT_0061a480 != '\0') {
+    if (g_asdGfxContext.initialized == 0) {
+        return;
+    }
     FUN_00149824();
     FUN_001493a8();
     FUN_00149090();
     FUN_001496f0();
     FUN_00148f48();
     FUN_0014938c();
-    DAT_0061a480 = '\0';
+    g_asdGfxContext.initialized = 0;
     FUN_0015a270();
-    temp_v0 = 0;
-    do {
-      puVar2 = *(unsigned int **)(temp_v0 * 4 + 0x61a48c);
-joined_r0x0013be70:
-      puVar1 = puVar2;
-      if (puVar1 != (unsigned int *)0x0) {
-        puVar2 = (unsigned int *)puVar1[0x10];
-        if (puVar1[1] != 0) {
-          if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-            (*g_gfxReleaseCallback)(0x10000,0x105,*puVar1);
-            if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-              (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
+    for (s32 bucket = 0; bucket < 32; bucket++) {
+        GfxBlockNode *next;
+        for (GfxBlockNode *node = g_asdGfxContext.blocks[bucket]; node != NULL; node = next) {
+            next = node->next;
+            if (node->block != NULL) {
+                if (g_gfxAllocateCallback.release != NULL) {
+                    g_gfxAllocateCallback.release(0x10000, 0x105, node->address, node->block);
+                }
             }
-          }
-        }
-        else if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-          (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
-        }
-        goto joined_r0x0013be70;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x20);
-    temp_v0 = 0;
-    do {
-      puVar2 = *(unsigned int **)(temp_v0 * 4 + 0x61a514);
-joined_r0x0013bee4:
-      puVar1 = puVar2;
-      if (puVar1 != (unsigned int *)0x0) {
-        puVar2 = (unsigned int *)puVar1[6];
-        if (puVar1[1] != 0) {
-          if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-            (*g_gfxReleaseCallback)(puVar1[5],0x104,*puVar1);
-            if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-              (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
+            if (g_gfxAllocateCallback.release != NULL) {
+                g_gfxAllocateCallback.release(0x10000, 0x100, 0, node);
             }
-          }
         }
-        else if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-          (*g_gfxReleaseCallback)(0x10000,0x100,0,puVar1);
-        }
-        goto joined_r0x0013bee4;
-      }
-      temp_v0 = temp_v0 + 1;
-    } while (temp_v0 < 0x20);
-    if (g_gfxReleaseCallback != (romwright_code *)0x0) {
-      (*g_gfxReleaseCallback)(0x10000,0x100,0,DAT_0058919c);
     }
-    DAT_0058919c = 0;
-    g_gfxAllocateCallback = 0;
-    g_gfxReleaseCallback = (romwright_code *)0x0;
-  }
-  return;
+    for (s32 bucket = 0; bucket < 32; bucket++) {
+        GfxBufferNode *next;
+        for (GfxBufferNode *node = g_asdGfxContext.buffers[bucket]; node != NULL; node = next) {
+            next = node->next;
+            if (node->block != NULL) {
+                if (g_gfxAllocateCallback.release != NULL) {
+                    g_gfxAllocateCallback.release(node->heap, 0x104, node->address, node->block);
+                }
+            }
+            if (g_gfxAllocateCallback.release != NULL) {
+                g_gfxAllocateCallback.release(0x10000, 0x100, 0, node);
+            }
+        }
+    }
+    if (g_gfxAllocateCallback.release != NULL) {
+        g_gfxAllocateCallback.release(0x10000, 0x100, 0, g_gfxAllocateCallback.context);
+    }
+    g_gfxAllocateCallback.context = NULL;
+    g_gfxAllocateCallback.allocate = NULL;
+    g_gfxAllocateCallback.release = NULL;
 }
-
-} /* extern "C" */
+}

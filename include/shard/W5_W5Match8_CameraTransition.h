@@ -47,7 +47,7 @@ struct W5Match8CameraTransition {
             /* 0x780 */ u32 duration;
             /* 0x784 */ u32 frame;
             /* 0x788 */ u32 mode;
-            /* 0x78C */ u8 unk78C[4];
+            /* 0x78C */ union { u8 unk78C[4]; s32 shift; };
             /* 0x790 */ s32 offset;
         } arc;
         struct {

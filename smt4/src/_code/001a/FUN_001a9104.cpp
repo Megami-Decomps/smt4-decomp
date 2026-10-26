@@ -27,8 +27,17 @@ struct SpecialRecord {
 };
 
 extern "C" {
-extern s8 DAT_0049f9c8;
-extern s32 DAT_0049f9cc;
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0xac];
+    s8 f0049f9c8; /* 0x0ac */
+    u8 pad0ad[0x3];
+    s32 f0049f9cc; /* 0x0b0 */
+};
+extern GameStateView g_gameState;
+
+
+
 ResultMapBlock *gameGetMapBlock(void);
 SpecialRecord *dataTable2fSub1GetRecord(s32 id);
 void FUN_00295a18(s32 value, s32 mode);
@@ -49,10 +58,10 @@ s32 FUN_001a9104(void)
     s32 result = 0;
     ResultMapBlock *block = gameGetMapBlock();
     u32 firstKindDone = 0;
-    if (DAT_0049f9c8 != 0) {
-        DAT_0049f9cc = dataTable2fSub1GetRecord(block->specialRecord)->value;
-        FUN_00295a18(DAT_0049f9cc, 1);
-        DAT_0049f9c8 = 0;
+    if (g_gameState.f0049f9c8 != 0) {
+        g_gameState.f0049f9cc = dataTable2fSub1GetRecord(block->specialRecord)->value;
+        FUN_00295a18(g_gameState.f0049f9cc, 1);
+        g_gameState.f0049f9c8 = 0;
         return 4;
     }
     for (u16 quest = 100; quest < 400; quest++) {

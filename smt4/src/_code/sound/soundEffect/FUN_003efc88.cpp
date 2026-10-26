@@ -1,4 +1,4 @@
-/* NON_MATCHING: twin of smt4a FUN_0050ff60; as there, the constants are held in callee-saved registers (build pushes r4-r6) where retail uses r1-r3, and the pair stores (strd -1 / stm zero) are scheduled differently. */
+/* NON_MATCHING: a static initialiser with no parameters (it sets g_soundEffectBuffers.id itself); the constants are held in callee-saved registers (build pushes r4-r6) where retail uses r1-r3, and the pair stores (strd -1 / stm zero) are scheduled differently. */
 #include "classes/Obj421a58.h"
 #include "classes/Obj421a78.h"
 #include <new>
@@ -29,7 +29,7 @@ struct SoundEffectReverb {
     /* 0x2C */ u32 sizeC;
 };
 
-/* The pair of words the effects register themselves in. */
+/* The effects' shared buffer table header. */
 struct SoundEffectLink {
     /* 0x00 */ u32 unk00;
     /* 0x04 */ u32 unk04;
@@ -43,6 +43,7 @@ struct SoundEffectPair {
 };
 
 extern "C" {
+extern SoundEffectLink g_soundEffectBuffers;
 extern SoundEffectPair DAT_0044e0f0;
 
 extern u8 entry;
@@ -57,9 +58,9 @@ void FUN_003793d8(void *object);
 
 // Constructs the global sound effects (smoothing and reverb), registers their destructors and
 // sets the default parameters.
-void FUN_003efc88(u32 unused1, u32 unused2, SoundEffectLink *link)
+void FUN_003efc88(void)
 {
-    link->id = -1;
+    g_soundEffectBuffers.id = -1;
     DAT_0044e0f0.first = 0;
     DAT_0044e0f0.second = 0;
     Obj421a58 *smoothing = new (&DAT_004c5484) Obj421a58();

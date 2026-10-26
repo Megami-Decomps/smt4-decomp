@@ -29,7 +29,13 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
     char text[128];
     char converted[128];
     const char* title = NULL;
-    if (convertTitle) {
+    if (!convertTitle) {
+        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
+        if (definition) {
+            title = definition->title;
+        }
+        FUN_003180c4(40, title);
+    } else {
         DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
         if (definition) {
             title = definition->title;
@@ -37,12 +43,6 @@ void FUN_003dea6c(u16 definitionId, s32 includeArguments, s32 convertTitle)
         libc_strcpy(text, title);
         FUN_001654f0(text, converted);
         FUN_003180c4(40, converted);
-    } else {
-        DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);
-        if (definition) {
-            title = definition->title;
-        }
-        FUN_003180c4(40, title);
     }
     if (includeArguments) {
         DefinitionMessageRecord* definition = FUN_001ad9b4(definitionId);

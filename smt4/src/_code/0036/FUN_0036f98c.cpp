@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation of the validated resource and its record (retail keeps the resource in r5 and the record in r4, reusing the zero register for NULL). */
+/* NON_MATCHING: only register choice differs (retail keeps the resource in r5 and the record in r4 and takes the record's NULL from the shared zero register r6). */
 #include "common.h"
 
 extern "C" {
@@ -21,32 +21,28 @@ struct GfxResource {
 typedef void (*GfxReleaseCallback)(u32 context, u32 command, u32 owner, u32 handle);
 extern GfxReleaseCallback g_gfxReleaseCallback;
 
-/* The resource itself when it carries the required magic flags, else NULL. */
-static __inline GfxResource *gfxResourceChecked(GfxResource *resource)
-{
-    if (resource == NULL || (~resource->flags & 0x20000021) != 0) {
-        return NULL;
-    }
-    return resource;
-}
-
 /* The inner record of a resource: its offset is relative to the offset field itself. */
-static __inline GfxRecord *gfxResourceRecord(GfxResource *resource)
+static __inline GfxRecord *gfxSelfRelativeRecord(s32 *offset)
 {
-    if (resource->recordOffset == 0) {
+    if (*offset == 0) {
         return NULL;
     }
-    return (GfxRecord *)((u8 *)&resource->recordOffset + resource->recordOffset);
+    return (GfxRecord *)((u8 *)offset + *offset);
 }
 
 /* Releases the native handle of a resource's record and detaches its owner. */
 void FUN_0036f98c(GfxResource *resource)
 {
-    GfxResource *checked = gfxResourceChecked(resource);
+    GfxResource *checked;
+    if (resource != NULL && (~resource->flags & 0x20000021) == 0) {
+        checked = resource;
+    } else {
+        checked = NULL;
+    }
 
     if (checked->owner != 0) {
-        GfxRecord *record = gfxResourceRecord(checked);
-        if (record->context != 0) {
+        GfxRecord *record = gfxSelfRelativeRecord(&checked->recordOffset);
+        if (record->context) {
             g_gfxReleaseCallback(record->context, 0x101, checked->owner, record->handle);
             record->handle = 0;
         }

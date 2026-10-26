@@ -4,6 +4,19 @@
 #include "code/Code001b.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0xdc];
+    signed char f005f16d8; /* 0x0dc */
+    u8 pad0dd[0x3];
+    int f005f16dc; /* 0x0e0 */
+    u8 pad0e4[0x2b8];
+    int f005f1998; /* 0x39c */
+    u8 pad3a0[0x12e];
+    signed char f005f1aca; /* 0x4ce */
+};
+extern GameStateView g_gameState;
+
 
 int FUN_001ad9b4(void);
 int FUN_001ada74(...);
@@ -36,10 +49,10 @@ typedef struct {
     unsigned int sp2D0; /* 0x2d0: local_2d0 */
 } void_stack;
 
-extern signed char DAT_005f16d8; /* 0x5f16d8 */
-extern int DAT_005f16dc; /* 0x5f16dc */
-extern int DAT_005f1998; /* 0x5f1998 */
-extern signed char DAT_005f1aca; /* 0x5f1aca */
+
+
+
+
 
 extern int gameFlagsGetBlock(void);
 extern int gameGetPlayerData(void);
@@ -108,11 +121,11 @@ int FUN_00235438(void)
   temp_v21 = 0;
   rt_aeabi_memclr(temp_v15,600);
   temp_v16 = 0;
-  if (DAT_005f16d8 != '\0') {
+  if (g_gameState.f005f16d8 != '\0') {
     temp_v2 = dataTable2FType1GetEntry((int)*(short *)(temp_v2 + 0x2a));
-    DAT_005f16dc = (int)*(short *)(temp_v2 + 0x12);
-    flagValueAdd(DAT_005f16dc,1);
-    DAT_005f16d8 = 0;
+    g_gameState.f005f16dc = (int)*(short *)(temp_v2 + 0x12);
+    flagValueAdd(g_gameState.f005f16dc,1);
+    g_gameState.f005f16d8 = 0;
     return 4;
   }
   temp_v20 = 0;
@@ -362,8 +375,8 @@ LAB_002359c4:
           } while (temp_v2 < temp_v16);
         }
         if (temp_v16 != 0) {
-          if (DAT_005f1aca != '\0') {
-            DAT_005f1aca = '\0';
+          if (g_gameState.f005f1aca != '\0') {
+            g_gameState.f005f1aca = '\0';
           }
           else {
             FUN_00295024();
@@ -390,9 +403,9 @@ LAB_002359c4:
         *(unsigned short *)(temp_v19 + 0x96) = 0;
         *(unsigned short *)(temp_v19 + 0x94) = 0;
       }
-      if (DAT_005f1998 != 0) {
+      if (g_gameState.f005f1998 != 0) {
         FUN_00295108(0);
-        DAT_005f1998 = 0;
+        g_gameState.f005f1998 = 0;
       }
       return temp_v17;
     }

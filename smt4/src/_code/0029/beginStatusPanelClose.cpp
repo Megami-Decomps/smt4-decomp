@@ -1,4 +1,4 @@
-/* NON_MATCHING: model-cleanup branches merge differently, vector transfers and cached sprite-base addressing differ; -O2 candidate. */
+/* NON_MATCHING: model-cleanup control flow matches retail; state-pointer register (r5 vs r4), the origin vector transfer and cached sprite-base addressing differ. */
 #include "shard/GameGlobals.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "status/StatusCamera.h"
@@ -23,23 +23,23 @@ void beginStatusPanelClose()
     if (state->activeState == 3)
         return;
     if (state->unk1E67 == 3 || state->unk1E67 == 9) {
-        void *script = lmapSceneGetScript();
-        if (state->unk1E80) {
-            if (script) {
+void *script = lmapSceneGetScript();
+        if (script) {
+            if (state->unk1E80) {
                 const Vec3 *origin = (const Vec3 *)state->unk1E84;
                 Vec3 position = { origin->x, origin->y + 1000.0f, origin->z };
                 nodeOwnerSetTranslations((StatusScreenModel *)state->unk1E80, &position);
                 lmapSceneSetUnk134(1);
-            } else {
-                mdlPartsRelease((StatusScreenModel *)state->unk1E80);
-                if (!lmapMainIsRunning())
-                    asdModelSlotRelease(0);
-                if (g_gameGlobals.ownsStatusModel)
-                    delete (StatusScreenModel *)state->unk1E80;
             }
-            if (state->unk1E80)
-                statusCameraDestroy();
+        } else if (state->unk1E80) {
+            mdlPartsRelease((StatusScreenModel *)state->unk1E80);
+            if (!lmapMainIsRunning())
+                asdModelSlotRelease(0);
+            if (g_gameGlobals.ownsStatusModel)
+                delete (StatusScreenModel *)state->unk1E80;
         }
+        if (state->unk1E80)
+            statusCameraDestroy();
     }
     UiAnimatedSprite *sprites = (UiAnimatedSprite *)(state->unk0301 + 0x8b); // 0x38c
     timerStart(&sprites[0], 5, 0);

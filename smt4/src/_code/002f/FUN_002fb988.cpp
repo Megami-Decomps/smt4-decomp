@@ -4,6 +4,23 @@
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x18];
+    signed char f0049f934; /* 0x018 */
+    u8 pad019[0x23b];
+    float f0049fb70; /* 0x254 */
+    float f0049fb74; /* 0x258 */
+    int f0049fb78; /* 0x25c */
+    u8 pad260[0xe8];
+    signed char f0049fc64; /* 0x348 */
+    u8 pad349[0x1f];
+    int f0049fc84; /* 0x368 */
+    u8 pad36c[0x60];
+    signed char f0049fce8; /* 0x3cc */
+};
+extern GameStateView g_gameState;
+
 
 int FUN_001e2be4(void);
 int FUN_002562e4(int, int);
@@ -30,13 +47,13 @@ typedef struct {
 
 extern int g_lmapMainState; /* 0x447060 */
 extern int g_lmapScene; /* 0x447e88 */
-extern signed char DAT_0049f934; /* 0x49f934 */
-extern float DAT_0049fb70; /* 0x49fb70 */
-extern float DAT_0049fb74; /* 0x49fb74 */
-extern int DAT_0049fb78; /* 0x49fb78 */
-extern signed char DAT_0049fc64; /* 0x49fc64 */
-extern int DAT_0049fc84; /* 0x49fc84 */
-extern signed char DAT_0049fce8; /* 0x49fce8 */
+
+
+
+
+
+
+
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: SBORROW4 (INT_SBORROW). */
@@ -92,7 +109,7 @@ void FUN_002fb988(int param_1)
   temp_v0 = gameGetMapBlock();
   temp_v11 = 35.0f;
   temp_v5 = 0;
-  if ((DAT_0049fc64 != '\0') || (DAT_0049f934 != '\0')) {
+  if ((g_gameState.f0049fc64 != '\0') || (g_gameState.f0049f934 != '\0')) {
     *(unsigned int *)(temp_v0 + 0xd94) = 0;
   }
   else {
@@ -126,11 +143,11 @@ void FUN_002fb988(int param_1)
       temp_v5 = 1;
     }
     FUN_0026413c();
-    if (DAT_0049fc84 == 1) {
-      if (DAT_0049fce8 != '\0') {
+    if (g_gameState.f0049fc84 == 1) {
+      if (g_gameState.f0049fce8 != '\0') {
         temp_v2 = padIsButtonPressed(1);
         if (temp_v2 != 0) {
-          DAT_0049fce8 = '\0';
+          g_gameState.f0049fce8 = '\0';
         }
         temp_v2 = padIsButtonRepeat(5);
         temp_v12 = 50.0f;
@@ -145,7 +162,7 @@ void FUN_002fb988(int param_1)
       else {
         temp_v2 = padIsButtonPressed(1);
         if (temp_v2 != 0) {
-          DAT_0049fce8 = '\x01';
+          g_gameState.f0049fce8 = '\x01';
         }
       }
     }
@@ -174,17 +191,17 @@ void FUN_002fb988(int param_1)
       temp_v2 = g_lmapScene;
       *(float *)(g_lmapScene + 0x30) = *(float *)(g_lmapScene + 0x30) + temp_v14 * temp_v8;
       *(unsigned int *)(param_1 + 0xc0) = 1;
-      if (DAT_0049fce8 == '\0') {
+      if (g_gameState.f0049fce8 == '\0') {
         FUN_0027f48c(temp_v2 + 0x28,temp_v2 + 0x34);
       }
-      DAT_0049fb70 = DAT_0049fb70 + (float)((unsigned long long)temp_v13 >> 0x20);
-      if ((int)DAT_0049fb70 >= 0x44bb8001) {
-        DAT_0049fb70 = (float)temp_v13;
+      g_gameState.f0049fb70 = g_gameState.f0049fb70 + (float)((unsigned long long)temp_v13 >> 0x20);
+      if ((int)g_gameState.f0049fb70 >= 0x44bb8001) {
+        g_gameState.f0049fb70 = (float)temp_v13;
       }
-      temp_v8 = DAT_0049fb74 + 0.05f;
-      DAT_0049fb74 = temp_v11;
+      temp_v8 = g_gameState.f0049fb74 + 0.05f;
+      g_gameState.f0049fb74 = temp_v11;
       if ((int)temp_v8 < 0x420c0001) {
-        DAT_0049fb74 = temp_v8;
+        g_gameState.f0049fb74 = temp_v8;
       }
     }
     else {
@@ -201,15 +218,15 @@ void FUN_002fb988(int param_1)
         *(int *)(temp_v0 + 0xdb8) = temp_v2 - 0x1d;
         gameCounterAddSaturating(0x1d,1);
       }
-      DAT_0049fb70 = DAT_0049fb70 + 0.2f;
-      if ((int)DAT_0049fb70 >= 0x44bb8001) {
-        DAT_0049fb70 = (float)temp_v13;
+      g_gameState.f0049fb70 = g_gameState.f0049fb70 + 0.2f;
+      if ((int)g_gameState.f0049fb70 >= 0x44bb8001) {
+        g_gameState.f0049fb70 = (float)temp_v13;
       }
     }
     temp_v2 = g_lmapScene;
     temp_v11 = (float)temp_v13;
-    if (0 < DAT_0049fb78) {
-      DAT_0049fb78 = DAT_0049fb78 - 1;
+    if (0 < g_gameState.f0049fb78) {
+      g_gameState.f0049fb78 = g_gameState.f0049fb78 - 1;
     }
     puVar5 = (unsigned int *)(g_lmapScene + 0x40);
     *(float *)(g_lmapScene + 0x1c) =

@@ -3,6 +3,17 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x34c];
+    int f0049fc68; /* 0x34c */
+    u8 pad350[0x4];
+    int f0049fc70; /* 0x354 */
+    u8 pad358[0x2c];
+    int f0049fca0; /* 0x384 */
+};
+extern GameStateView g_gameState;
+
 
 int FUN_002005ec(void);
 int mathInterpolatePackedTable(unsigned int);
@@ -27,9 +38,9 @@ typedef struct {
 
 extern int g_lmapMainState; /* 0x447060 */
 extern int g_titleScene; /* 0x44ea00 */
-extern int DAT_0049fc68; /* 0x49fc68 */
-extern int DAT_0049fc70; /* 0x49fc70 */
-extern int DAT_0049fca0; /* 0x49fca0 */
+
+
+
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
@@ -71,7 +82,7 @@ unsigned int FUN_001fd9f4(void)
   }
   FUN_00396dec(g_lmapMainState + 0xec);
   temp_v3 = g_titleScene;
-  if (DAT_0049fc68 != 0) {
+  if (g_gameState.f0049fc68 != 0) {
     temp_v0 = FUN_002c5d80(5,1);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
@@ -95,7 +106,7 @@ unsigned int FUN_001fd9f4(void)
     }
   }
   temp_v3 = g_titleScene;
-  if (DAT_0049fca0 != 0) {
+  if (g_gameState.f0049fca0 != 0) {
     temp_v0 = FUN_002c5d80(5,0);
     piVar7 = (int *)(temp_v3 + 0x124c);
     temp_v4 = *piVar7;
@@ -205,9 +216,9 @@ unsigned int FUN_001fd9f4(void)
       *(unsigned char *)(temp_v1 + 0x1264) = 0;
     }
   }
-  if (DAT_0049fc70 != 1) {
-    if (DAT_0049fc70 != 2) {
-      if (DAT_0049fc70 == 3) {
+  if (g_gameState.f0049fc70 != 1) {
+    if (g_gameState.f0049fc70 != 2) {
+      if (g_gameState.f0049fc70 == 3) {
         FUN_0030f730();
       }
     }

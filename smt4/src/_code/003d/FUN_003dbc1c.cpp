@@ -1,4 +1,4 @@
-/* NON_MATCHING: the string-test chain compiles with different null-check placement and the "VER" prefix test and slot addressing use other registers; the lookup logic is the same. */
+/* NON_MATCHING: reference search is a findReferenceEffect helper (retail keeps the same shape); retail keeps the &formatted pointer in sl across the loop, spills the inlined search's name to its stack slot and keeps the name null tests before each strcmp/strncmp, which the build drops. */
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -31,6 +31,19 @@ s32 libc_strncmp(const char *a, const char *b, u32 n);
 s32 textFormatBuffer(char *buffer, const char *format, ...);
 u32 keyedRecordRegisterName(void *record);
 u32 FUN_00249e54(u32 id, const char *name);
+
+/* Index of the reference effect whose name starts `name`, or -1. */
+static s32 findReferenceEffect(const char *name)
+{
+    if (name != NULL) {
+        for (s32 k = 0; k < 11; k++) {
+            if (libc_strncmp(name, DAT_00400664[k], libc_strlen(DAT_00400664[k])) == 0) {
+                return k;
+            }
+        }
+    }
+    return -1;
+}
 
 /* Resolves each of the four effect names to an effect id: names that are empty or special are
  * skipped, names naming a reference slot copy that slot's id, and names starting with "VER"
@@ -74,17 +87,7 @@ void FUN_003dbc1c(EffectWork *work)
         if (libc_strlen(path) == 0) {
             continue;
         }
-        const char *key = name;
-        s32 match = -1;
-
-        if (key != NULL) {
-            for (s32 k = 0; k < 11; k++) {
-                if (libc_strncmp(key, DAT_00400664[k], libc_strlen(DAT_00400664[k])) == 0) {
-                    match = k;
-                    break;
-                }
-            }
-        }
+        s32 match = findReferenceEffect(name);
         if (match >= 0) {
             work->slots[i].id = work->slots[16 + match].id;
             continue;

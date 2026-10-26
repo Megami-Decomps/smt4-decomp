@@ -3,6 +3,17 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x18];
+    signed char f005f1614; /* 0x018 */
+    u8 pad019[0x8];
+    signed char f005f161d; /* 0x021 */
+    u8 pad022[0x440];
+    signed char f005f1a5e; /* 0x462 */
+};
+extern GameStateView g_gameState;
+
 
 int sysPlaySe(...);
 int FUN_00183e58(void);
@@ -45,9 +56,9 @@ typedef struct {
     unsigned int sp60; /* 0x60: local_60 */
 } param_1_stack;
 
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f1a5e; /* 0x5f1a5e */
+
+
+
 
 extern unsigned int *gameFlagsGetBlock(void);
 /* Supplied declaration required: sysPlaySe. */
@@ -101,7 +112,7 @@ unsigned int FUN_0048981c(int param_1)
   puVar8 = (unsigned char *)(param_1 + 0x7b91);
   temp_v7 = temp_v0;
   if (((*(unsigned int *)(param_1 + 0x10) & 0x2000000) != 0) &&
-     ((setFullScreenRect(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
+     ((setFullScreenRect(), temp_v0 == 0 || (g_gameState.f005f1614 != '\0')))) {
     *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;
   }
   temp_v0 = 0;
@@ -113,7 +124,7 @@ unsigned int FUN_0048981c(int param_1)
 LAB_004898d0:
     if (*(char *)(param_1 + 0xc) != '\0') {
 LAB_00489984:
-      if (DAT_005f1a5e == '\0') goto LAB_004899f8;
+      if (g_gameState.f005f1a5e == '\0') goto LAB_004899f8;
       temp_v1 = FUN_00384cf4();
       if (temp_v1 != 0) goto LAB_004899f8;
       if (temp_v0 != 1) {
@@ -146,7 +157,7 @@ LAB_00489984:
       }
       if (*(char *)(param_1 + 0xc) != '\0') goto LAB_00489984;
     }
-    if ((DAT_005f1a5e != '\0') && (temp_v1 = FUN_00384cf4(), temp_v1 == 0)) {
+    if ((g_gameState.f005f1a5e != '\0') && (temp_v1 = FUN_00384cf4(), temp_v1 == 0)) {
       if (temp_v0 == 1) {
         temp_v0 = 2;
         continue;
@@ -160,7 +171,7 @@ LAB_004899f8:
     temp_v1 = temp_v9[0];
     FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
     puVar9 = (unsigned int *)temp_v3;
-    if (((temp_v1 != 0) && (DAT_005f1614 == '\0')) && (DAT_005f161d != '\0')) {
+    if (((temp_v1 != 0) && (g_gameState.f005f1614 == '\0')) && (g_gameState.f005f161d != '\0')) {
       switch(temp_v0) {
       case 0:
         if (*(char *)(param_1 + 0xc) != '\0') {
@@ -252,7 +263,7 @@ LAB_004899f8:
           FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
           if (temp_v9[0] != 0) {
             sysPlayVoice(0x1000229);
-            if (DAT_005f1a5e != '\0') {
+            if (g_gameState.f005f1a5e != '\0') {
               temp_v0 = naviMainGetRequestedMap(temp_v7);
               temp_v1 = naviGetActiveStateValue(temp_v7);
               if (temp_v0 == temp_v1) {
@@ -288,7 +299,7 @@ LAB_004899f8:
           FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
           if (temp_v9[0] != 0) {
             sysPlayVoice(0x1000229);
-            if (DAT_005f1a5e != '\0') {
+            if (g_gameState.f005f1a5e != '\0') {
               temp_v0 = naviMainGetRequestedMap(temp_v7);
               temp_v1 = naviGetActiveStateValue(temp_v7);
               if (temp_v0 == temp_v1) {
@@ -360,7 +371,7 @@ LAB_004899f8:
           FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
           if (temp_v9[0] != 0) {
             sysPlayVoice(0x1000229);
-            if (DAT_005f1a5e != '\0') {
+            if (g_gameState.f005f1a5e != '\0') {
               *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
               temp_v2 = FUN_00492c84(temp_v7);
               FUN_0048d248(param_1,temp_v2);
@@ -388,7 +399,7 @@ LAB_004899f8:
         FUN_004d040c(temp_v9[0],temp_v8,temp_v6,uStack_54);
         if (temp_v9[0] != 0) {
           sysPlayVoice(0x1000229);
-          if (DAT_005f1a5e != '\0') {
+          if (g_gameState.f005f1a5e != '\0') {
             *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfffcffff;
             temp_v2 = FUN_00492c84(temp_v7);
             FUN_0048d248(param_1,temp_v2);

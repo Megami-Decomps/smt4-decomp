@@ -1,4 +1,4 @@
-/* NON_MATCHING: recovered quad projection and render-state operations use different VFP and call register scheduling. */
+/* NON_MATCHING: the colour array is filled element-wise like retail (no constant table); the recovered render-state pushes (stack address evaluated before the FUN_002c5d80 call in retail) and VFP/call register scheduling still differ. */
 #include "classes/Obj42094c.h"
 #include "classes/FilterDraw.h"
 
@@ -24,7 +24,11 @@ void Obj42094c::draw()
     renderCtxSelectTexture(g_titleScene, ((FilterDrawTexture *)filter->texture)->handle);
     g_titleScene->blend.push(filter->config->blendMode);
     g_titleScene->projection.push(FUN_002c5d80(1, 0));
-    f32 color[4] = {1, 1, 1, ((FilterDrawChild *)filter->child)->alpha};
+    f32 color[4];
+    color[0] = 1.0f;
+    color[1] = 1.0f;
+    color[2] = 1.0f;
+    color[3] = ((FilterDrawChild *)filter->child)->alpha;
     f32 vertices[4][3];
     for (u32 vertex = 0; vertex < 4; ++vertex) {
         vertices[vertex][0] = filter->vertices[vertex].position[0];

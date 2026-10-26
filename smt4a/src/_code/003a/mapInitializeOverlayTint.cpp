@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail builds RGBA through per-channel mask/shift operations; direct packed-color assignment compiles smaller. */
+/* NON_MATCHING: the per-channel packed-colour sequence (MaterialPackedColor bitfields, red-green-blue then alpha, uninitialised base register) now matches retail's tails; retail shares three tails (0x66/0xaa/0x99 constants, 0xaa preloaded in r3) where the build duplicates the tail per leaf. */
 #include "common.h"
+#include "gfx/MaterialColorCommand.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include "shard/W6_W6Match8_MapMain.h"
 
@@ -16,6 +17,17 @@ extern "C" {
 extern MapMainState *g_mapMain;
 void FUN_00340c7c(u32 duration, u32 flags);
 
+// Set the overlay's colour: black with the given opacity.
+static __inline void setOverlayOpacity(MapMainState *map, u32 alpha)
+{
+    MaterialPackedColor color;
+    color.channels.red = 0;
+    color.channels.green = 0;
+    color.channels.blue = 0;
+    color.channels.alpha = alpha;
+    map->node->material->color = color.value;
+}
+
 // Initialize the map overlay opacity for the current game mode and submode.
 void mapInitializeOverlayTint()
 {
@@ -23,21 +35,25 @@ void mapInitializeOverlayTint()
     if (map == NULL || map->tintInitialized) {
         return;
     }
-    u32 color = 0x66000000;
     if (g_gameState.mode == 0x27) {
         s32 submode = g_gameState.submode;
         if (submode == 8 || submode == 9 || submode == 10 || submode == 11 || submode == 6) {
-            color = 0xaa000000;
+            setOverlayOpacity(map, 0xaa);
+        } else {
+            setOverlayOpacity(map, 0x66);
         }
     } else if (g_gameState.mode == 0x20) {
         if (g_gameState.submode == 1) {
-            color = 0xaa000000;
+            setOverlayOpacity(map, 0xaa);
+        } else {
+            setOverlayOpacity(map, 0x66);
         }
     } else if (g_gameState.mode == 0x1c || g_gameState.mode == 0x1d ||
                g_gameState.mode == 0x1e || g_gameState.mode == 0x1f) {
-        color = 0x99000000;
+        setOverlayOpacity(map, 0x99);
+    } else {
+        setOverlayOpacity(map, 0x66);
     }
-    map->node->material->color = color;
     FUN_00340c7c(0x100, 0x30000);
     map->tintInitialized = 1;
 }

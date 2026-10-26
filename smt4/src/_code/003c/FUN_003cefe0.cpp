@@ -29,15 +29,15 @@ void FUN_003cefe0(BtlMainState **owner, u32 action, u32 parameter)
         BtlEntry *entry = &(*owner)->entries[i];
         if ((entry->flags & BTL_ENTRY_FLAG_ACTIVE) && !(entry->flags & BTL_ENTRY_FLAG_BLOCKED) &&
             !(entry->groupMask & 0x400) && !(entry->groupMask & 4)) {
-            if (entry->groupMask & 0x200) {
-                noIncapacitated = false;
-            } else {
+            if (!(entry->groupMask & 0x200)) {
                 u32 status = FUN_00246134(entry->members.ids[0], 15, 2, -1);
                 u32 passive = btlGetPassiveAffinityOverride(entry->members.ids[0], 15);
                 if (!((status | passive) & 0x170000)) {
                     noCandidates = false;
                     candidates[count++] = entry->members.ids[0];
                 }
+            } else {
+                noIncapacitated = false;
             }
         }
     }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail addresses the panel through a base at +0x800 (r6) for the mode/page/viewing bytes and entry table and a base at +0xA800 for the shown id, uses a 304-byte frame and branches the previous/current state tests differently; the call sequence is the same (about 210 diff lines). */
+/* NON_MATCHING: structure matches retail (panel state block at +0x800 held in a register, entry table pointer taken after the early return, shown-id base at +0xA800); retail saves one more register (sl) and numbers the base registers r6/r7/r4/r5 differently, with a 304-byte frame vs 300. */
 #include "shard/Shard0032.h"
 #include "event/2dEvent/SmokeFade.h"
 #include "code/Code002a_Smt4a.h"
@@ -11,19 +11,25 @@ struct StatusEntry {
     /* 0x06 */ u8 unk06[0x1A];
 };
 
+/* The panel state starting at 0x800 of the panel. */
+struct StatusPanelState {
+    /* 0x0000 */ u8 unk0000[0x60];
+    /* 0x0060 */ u8 mode; /* 1: shows a party member's record */
+    /* 0x0061 */ u8 recordPage; /* 1: the record page of the party member */
+    /* 0x0062 */ u8 unk0062;
+    /* 0x0063 */ s8 viewing; /* a detail view is open */
+    /* 0x0064 */ StatusEntry entries[0x500];
+    /* 0xA064 */ u8 unkA064[0xE];
+    /* 0xA072 */ u16 shownId;
+};
+
 struct StatusPanel {
     /* 0x0000 */ u8 unk0000[0x20];
-    /* 0x0020 */ u8 holder[0x840];
-    /* 0x0860 */ u8 mode; /* 1: shows a party member's record */
-    /* 0x0861 */ u8 recordPage; /* 1: the record page of the party member */
-    /* 0x0862 */ u8 unk0862;
-    /* 0x0863 */ u8 viewing; /* a detail view is open */
-    /* 0x0864 */ StatusEntry entries[0x500];
-    /* 0xA864 */ u8 unkA864[0xE];
-    /* 0xA872 */ u16 shownId;
+    /* 0x0020 */ u8 holder[0x7E0];
+    /* 0x0800 */ StatusPanelState state;
 };
 typedef char StatusPanelOffsets[
-    offsetof(StatusPanel, mode) == 0x860 && offsetof(StatusPanel, shownId) == 0xA872 ? 1 : -1];
+    offsetof(StatusPanel, state.mode) == 0x860 && offsetof(StatusPanel, state.shownId) == 0xA872 ? 1 : -1];
 
 /* The party slot table: the units followed by the order they are listed in. */
 struct StatusSlotTable {
@@ -57,46 +63,28 @@ void objBInitBlock19D0(UnitRecord *unit, s32 value);
  * member, build a working copy of its record) and reopen the panel. */
 void FUN_004a3b48(StatusPanel *panel)
 {
-    StatusEntry *entries = panel->entries;
-    if (entries[0].present == 0) {
+    StatusPanelState *state = &panel->state;
+    if (state->entries[0].present == 0) {
         FUN_0023b45c(0);
         return;
     }
+    StatusEntry *entries = panel->state.entries;
     u16 id = entries[flaggedValueHolderGetTotal(panel->holder)].id;
     if (FUN_0023b3d0() == 0) {
         return;
     }
-    if (panel->mode != 1) {
-        if (panel->shownId == id) {
+    if (state->mode == 1) {
+        if (state->viewing == 0 && state->shownId == id) {
             return;
         }
-        s32 previous = FUN_002c7e3c();
-        FUN_0034a9c4(id, 0);
-        if (FUN_002a4b28(id) == 0) {
-            FUN_002c8550(0xE);
-        }
-        s32 current = FUN_002c7e3c();
-        if (current == 5) {
-            if (previous == 0xE) {
-                objBInitBlock12DC();
-            }
-        } else if (current == 0xE && previous == 5) {
-            objBInitBlock12DC5();
-        }
-        statusPanelSetOpen(1);
-        FUN_004a3e04(panel);
-    } else {
-        if (panel->viewing == 0 && panel->shownId == id) {
-            return;
-        }
-        if (panel->recordPage != 1) {
+        if (state->recordPage != 1) {
             s32 previous = FUN_002c7e3c();
             FUN_0034a9c4(id, 0);
             FUN_0033449c(0);
             if (previous != 5) {
                 objBInitBlock12DC();
             }
-            if (panel->viewing != 0) {
+            if (state->viewing != 0) {
                 FUN_002f0420(0);
             } else {
                 statusPanelSetOpen(1);
@@ -131,15 +119,34 @@ void FUN_004a3b48(StatusPanel *panel)
             ((u16 *)unit.unk5E)[1] = 0;
             objBInitBlock19D0(&unit, 0);
             FUN_0033449c(1);
-            if (panel->viewing != 0) {
+            if (state->viewing != 0) {
                 FUN_002f0420(1);
             } else {
                 statusPanelSetOpen(1);
             }
         }
-        panel->viewing = 0;
+        state->viewing = 0;
+        FUN_004a3e04(panel);
+    } else {
+        if (state->shownId == id) {
+            return;
+        }
+        s32 previous = FUN_002c7e3c();
+        FUN_0034a9c4(id, 0);
+        if (FUN_002a4b28(id) == 0) {
+            FUN_002c8550(0xE);
+        }
+        s32 current = FUN_002c7e3c();
+        if (current == 5) {
+            if (previous == 0xE) {
+                objBInitBlock12DC();
+            }
+        } else if (current == 0xE && previous == 5) {
+            objBInitBlock12DC5();
+        }
+        statusPanelSetOpen(1);
         FUN_004a3e04(panel);
     }
-    panel->shownId = id;
+    state->shownId = id;
 }
 }

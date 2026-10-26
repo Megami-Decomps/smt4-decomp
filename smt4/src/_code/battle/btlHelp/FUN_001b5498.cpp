@@ -1,11 +1,11 @@
-/* NON_MATCHING: block layout and register allocation: retail lays the unlink-and-free block of finished entries out of line after the main path and reads the list global once; the shared exit (timer reset, counters) is merged differently */
+/* NON_MATCHING: layout, switches, flag tests and calls now match; retail loads the kind-2 flag words separately (B then A, no ldrd) and re-reads flagsA for the player-name test, and places two `mov r0,r6/r4` differently. */
 #include "common.h"
 
 /* One queued help message (Shin Megami Tensei IV layout, observed fields). */
 struct BtlHelpEntry {
     /* 0x000 */ s16 kind;          /* 0 plain, 1 with an info window, 2 with a text slot */
     /* 0x002 */ s16 phase;         /* 0 waiting, 1 shown */
-    /* 0x004 */ s16 value;
+    /* 0x004 */ u16 value;
     /* 0x006 */ u8 unk006[2];
     /* 0x008 */ u32 messageId;
     /* 0x00C */ u32 infoWindow;
@@ -44,7 +44,7 @@ char *libc_strcpy(char *destination, const char *source);
 void textEncodeFontSlot(s32 slot, const char *text);
 void infoWinSetMessage(u32 window, u32 message);
 void dialogOpen(s32 index, s32 flag);
-void FUN_00212120(s16 value);
+void FUN_00212120(u16 value);
 
 /* Per-frame update of the battle help queue: drops finished messages from the front, then starts
  * the first waiting one (opening its dialog) and counts the frames the others have shown. */
@@ -58,16 +58,60 @@ u32 FUN_001b5498(void)
     if (DAT_00435d78 == NULL) {
         return 0;
     }
+    u32 result = 0;
     entry = DAT_00435d78->head;
-    while (true) {
-        BtlHelpList *list = DAT_00435d78;
-        if (entry == NULL) {
-            return 0;
-        }
+    while (entry != NULL) {
         next = entry->next;
         if (entry->timer >= 0) {
-            break;
+            switch (entry->phase) {
+            case 0:
+                if (FUN_002b6b04() == 0 && dialogIsActive() == 0) {
+                    memClear(name, 0x60);
+                    switch (entry->kind) {
+                    case 1:
+                        if (*reinterpret_cast<u64 *>(&entry->flagsA) != 0 && entry->textSlot >= 0) {
+                            if ((entry->flagsA & 2) != 0) {
+                                libc_strcpy(name, gameGetPlayerName());
+                            } else {
+                                libc_strcpy(name, FUN_002bd06c(entry->nameId));
+                            }
+                            textEncodeFontSlot(entry->textSlot, name);
+                        }
+                        /* fall through */
+                    case 0:
+                        infoWinSetMessage(entry->infoWindow, entry->messageId & 0xffff);
+                        dialogOpen(entry->dialogIndex, 1);
+                        break;
+                    case 2:
+                        if ((entry->flagsB | entry->flagsA) != 0 && entry->textSlot >= 0) {
+                            if ((entry->flagsA & 2) != 0) {
+                                libc_strcpy(name, gameGetPlayerName());
+                            } else {
+                                    libc_strcpy(name, FUN_002bd06c(entry->nameId));
+                            }
+                            textEncodeFontSlot(entry->textSlot, name);
+                        }
+                        FUN_00212120(entry->value);
+                        break;
+                    }
+                    entry->timer = 1;
+                    entry->phase = 1;
+                } else {
+                    entry->timer = 1;
+                }
+                break;
+            case 1:
+                if (FUN_002b6b04() != 0) {
+                    entry->timer = 1;
+                }
+                break;
+            }
+            entry->timer--;
+            entry->shownCount++;
+            return result;
         }
+        BtlHelpList *list = DAT_00435d78;
+
         if (entry->prev == NULL) {
             list->head = next;
         } else {
@@ -82,59 +126,7 @@ u32 FUN_001b5498(void)
         asdMemFree(entry);
         entry = next;
     }
-    if (entry->phase != 0) {
-        if (entry->phase != 1 || FUN_002b6b04() == 0) {
-            entry->timer--;
-            entry->shownCount++;
-            return 0;
-        }
-    } else if (FUN_002b6b04() == 0 && dialogIsActive() == 0) {
-        memClear(name, 0x60);
-        if (entry->kind != 0) {
-            if (entry->kind == 1) {
-                if ((entry->flagsA != 0 || entry->flagsB != 0) && entry->textSlot >= 0) {
-                    if ((entry->flagsA & 2) != 0) {
-                        libc_strcpy(name, gameGetPlayerName());
-                    } else {
-                        FUN_002bd06c(entry->nameId);
-                        libc_strcpy(name, reinterpret_cast<const char *>(entry->nameId));
-                    }
-                    textEncodeFontSlot(entry->textSlot, name);
-                }
-                infoWinSetMessage(entry->infoWindow, entry->messageId & 0xffff);
-                dialogOpen(entry->dialogIndex, 1);
-                entry->timer = 1;
-                entry->phase = 1;
-                entry->timer--;
-                entry->shownCount++;
-                return 0;
-            }
-            if (entry->kind == 2) {
-                if ((entry->flagsB != 0 || entry->flagsA != 0) && entry->textSlot >= 0) {
-                    if ((entry->flagsA & 2) != 0) {
-                        libc_strcpy(name, gameGetPlayerName());
-                    } else {
-                        FUN_002bd06c(entry->nameId);
-                        libc_strcpy(name, reinterpret_cast<const char *>(entry->nameId));
-                    }
-                    textEncodeFontSlot(entry->textSlot, name);
-                }
-                FUN_00212120(entry->value);
-            }
-        } else {
-            infoWinSetMessage(entry->infoWindow, entry->messageId & 0xffff);
-            dialogOpen(entry->dialogIndex, 1);
-        }
-        entry->timer = 1;
-        entry->phase = 1;
-        entry->timer--;
-        entry->shownCount++;
-        return 0;
-    }
-    entry->timer = 1;
-    entry->timer--;
-    entry->shownCount++;
-    return 0;
+    return result;
 }
 
 }

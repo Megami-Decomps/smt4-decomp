@@ -1,7 +1,8 @@
-/* NON_MATCHING: retail counts the page's entries with a three-iteration unrolled pairs loop and addresses the page row through pool-loaded offsets, and keeps the battle-state word in r0 across the capture test; the same lists, counts and calls. */
+/* NON_MATCHING: page-entry count blocks match, but retail cross-jumps the page-0 tail into the other page's `add r1,#1` (bne back) while the build keeps it inline, the first slot-table read orders base/index swapped (page vs table+0x9107), and the page-0 loop counter lands in r2/r3 swapped. */
 #include "battle/BtlMainAccess.h"
 #include "common.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/SaveSlotTableIV.h"
 
 namespace {
 /* A list box widget: only used through its address. */
@@ -46,8 +47,12 @@ struct UnitRecord;
 }
 
 extern "C" {
-extern s32 DAT_00435de8;
-extern s32 DAT_00435dec;
+struct PartyMenuListState {
+    /* 0x00 */ s8 unk00[8];
+    /* 0x08 */ s32 captureBase;
+    /* 0x0c */ s32 headerBase;
+};
+extern PartyMenuListState g_partyMenuListState;
 u32 FUN_003bf1e4(void);
 void FUN_0028e9ec(PartyMenu *menu);
 void partyCaptureEligibleSkills(PartyMenu *menu);
@@ -57,9 +62,9 @@ void FUN_0029f848(ListBox *box, s32 count, s32 a, s32 b, s32 c, s32 d);
 void FUN_0029eb5c(ListBox *box, s32 value);
 s32 flagValueIsPositive(u32 id);
 s32 FUN_0028e9a0(u32 id);
-u8 *gameGetSlotTable(void);
 UnitRecord *gameGetUnitRecord(s32 index);
-s32 FUN_00394d90(u32 id);
+s32 FUN_00394d90(u32 id, UnitRecord *unit);
+s16 btlMainStateGetPartyCaptureId(BtlMainState *state);
 void FUN_002b7bca(void *array, s32 count, s32 elementSize, s32 (*compare)(const void *, const void *));
 s32 FUN_0021960c(const void *a, const void *b);
 void scrollOwnerSelectIndex(ScrollOwner *owner, s32 index);
@@ -82,49 +87,50 @@ void FUN_00199424(PartyMenu *menu)
     menu->owner = FUN_003bf1e4();
     FUN_0028e9ec(menu);
     partyCaptureEligibleSkills(menu);
-    u8 *battleState = (u8 *)static_cast<void *>(btlGetMainState());
-    s32 page = menu->page;
-    ListBox *pageBox = &menu->pageBox;
-    if ((*reinterpret_cast<u32 *>(battleState + 0x44a8) & 0x40) != 0) {
-        if (page == 0 && captureEntryAvailable()) {
-            FUN_0029f848(pageBox, 0x191, 6, 1, 1, 1);
-            FUN_0029eb5c(pageBox, DAT_00435de8 + 2);
+    if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
+        if (menu->page == 0 && captureEntryAvailable()) {
+            FUN_0029f848(&menu->pageBox, 0x191, 6, 1, 1, 1);
+            FUN_0029eb5c(&menu->pageBox, g_partyMenuListState.captureBase + 2);
         } else {
-            FUN_0029f848(pageBox, 400, 6, 1, 1, 1);
-            FUN_0029eb5c(pageBox, DAT_00435de8 + 1);
+            FUN_0029f848(&menu->pageBox, 400, 6, 1, 1, 1);
+            FUN_0029eb5c(&menu->pageBox, g_partyMenuListState.captureBase + 1);
         }
     } else {
-        s32 count;
-        s32 entries = 0;
-        u16 *row = menu->pages[page];
-        if (page != 0) {
-            count = 1;
+        s32 total;
+        if (menu->page != 0) {
+            total = 1;
+            for (s32 i = 0; i < 8; i++) {
+                if (menu->pages[menu->page][i] != 0) {
+                    total++;
+                }
+            }
         } else {
-            count = captureEntryAvailable() ? 2 : 1;
-        }
-        for (s32 i = 0; i < 8; i++) {
-            if (row[i] != 0) {
-                entries++;
+            total = 2;
+            if (!captureEntryAvailable()) {
+                total = 1;
+            }
+            for (s32 i = 0; i < 8; i++) {
+                if (menu->pages[0][i] != 0) {
+                    total++;
+                }
             }
         }
-        FUN_0029f848(pageBox, count + entries, 6, 1, 0, 1);
+        FUN_0029f848(&menu->pageBox, total, 6, 1, 0, 1);
     }
-    ListBox *headerBox = &menu->headerBox;
-    u8 *state = (u8 *)static_cast<void *>(btlGetMainState());
-    if ((*reinterpret_cast<u32 *>(state + 0x44a8) & 0x40) != 0) {
-        FUN_0029f848(headerBox, *reinterpret_cast<s16 *>((u8 *)static_cast<void *>(btlGetMainState()) + 0xb4), 6, 1, 1, 1);
-        FUN_0029eb5c(headerBox, DAT_00435dec);
+    if ((btlGetMainState()->editorControl.flags & 0x40) != 0) {
+        FUN_0029f848(&menu->headerBox, btlMainStateGetPartyCaptureId(btlGetMainState()), 6, 1, 1, 1);
+        FUN_0029eb5c(&menu->headerBox, g_partyMenuListState.headerBase);
     } else {
-        FUN_0029f848(headerBox, 1, 6, 1, 0, 1);
+        FUN_0029f848(&menu->headerBox, 1, 6, 1, 0, 1);
     }
     memClear(menu->usable, 0x78);
     s32 usableCount = 0;
-    for (u32 id = 1; id < 0x3d; id++) {
+    for (u32 id = 1; id <= 0x3c; id++) {
         if (flagValueIsPositive(id) != 0 && FUN_0028e9a0(id) != 0) {
             if (menu->page != 0) {
-                s8 member = (s8)gameGetSlotTable()[menu->page + 0x9107];
-                if (member >= 0) {
-                    if (gameGetUnitRecord((s8)gameGetSlotTable()[menu->page + 0x9107]) != NULL && FUN_00394d90(id) != 0) {
+                if (gameGetSlotTable()->active[menu->page - 1] >= 0) {
+                    UnitRecord *unit = gameGetUnitRecord(gameGetSlotTable()->active[menu->page - 1]);
+                    if (unit != NULL && FUN_00394d90(id, unit) != 0) {
                         menu->usable[usableCount] = (s16)id;
                         usableCount++;
                     }
@@ -141,7 +147,7 @@ void FUN_00199424(PartyMenu *menu)
     if (FUN_0023dcb8() != 0) {
         scrollOwnerSelectIndex(&menu->scrollOwners[0], 1);
     }
-    menu->activeBox = pageBox;
+    menu->activeBox = &menu->pageBox;
 }
 
 } /* extern "C" */

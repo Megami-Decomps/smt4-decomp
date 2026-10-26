@@ -4,7 +4,7 @@
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" int asdMemFreeNonNull(void *block);
+extern "C" void asdMemFreeNonNull(void *block);
 
 /* A three-component vector (position / velocity / axis). */
 struct Obj4208f8Vec3 {

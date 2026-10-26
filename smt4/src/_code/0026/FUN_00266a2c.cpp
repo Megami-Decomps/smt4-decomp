@@ -1,15 +1,14 @@
-/* NON_MATCHING: BGM-state dispatch order and local-tail/global-anchor addressing differ. */
+/* NON_MATCHING: the three globals are now g_gameState fields; retail addresses them from one literal g_gameState+0x100 (r1) and r1-256 (r4), build loads g_gameState itself. */
 #include "common.h"
 #include "map/lmapMain.h"
 #include "gamedata/Table1bOr1c.h"
 #include "mikado/mikadoMain.h"
+#include "map/mapDepart.h"
 #include <stddef.h>
 
 extern "C" {
 extern LmapMainState *g_lmapMainState;
-extern u32 DAT_0049f944;
-extern s8 DAT_0049fa39;
-extern s8 DAT_0049fa61;
+extern GameState g_gameState;
 
 s32 bgmGetStateById(u32 id);
 s32 FUN_00287328(u32 id);
@@ -33,40 +32,40 @@ void FUN_00266a2c(void)
     const BgmTailViewIV *tail = reinterpret_cast<const BgmTailViewIV *>(
         reinterpret_cast<const u8 *>(g_lmapMainState) + 0x994);
 
-    if (DAT_0049fa61 != 0 || DAT_0049fa39 == 0 ||
+    if (g_gameState.scriptPending != 0 || g_gameState.bgmReleased == 0 ||
         tail->suppressed != 0) {
         bgmReleaseStopped();
-        DAT_0049fa39 = 1;
+        g_gameState.bgmReleased = 1;
         return;
     }
 
     if (g_lmapMainState->unk40 == 0x66) {
-        DAT_0049f944 = 0x01000055;
+        g_gameState.bgmId = 0x01000055;
     } else if (g_lmapMainState->unk40 == 0x67) {
-        DAT_0049f944 = 0x01000056;
+        g_gameState.bgmId = 0x01000056;
     } else if (g_lmapMainState->unk48 == 5) {
-        DAT_0049f944 = 0x01000054;
+        g_gameState.bgmId = 0x01000054;
     } else {
-        DAT_0049f944 = 0x01000053;
+        g_gameState.bgmId = 0x01000053;
     }
 
     u32 id;
     if (tail->mode != 1 && tail->mode != 2 && (id = FUN_002903f0()) != 0) {
         const s32 overrideState = table1bOr1cGetRecordValue(id);
         if (overrideState == 1) {
-            DAT_0049f944 = 0x01000037;
+            g_gameState.bgmId = 0x01000037;
         } else if (overrideState == 0) {
-            DAT_0049f944 = 0x01000038;
+            g_gameState.bgmId = 0x01000038;
         }
     }
 
-    const s32 state = bgmGetStateById(DAT_0049f944);
+    const s32 state = bgmGetStateById(g_gameState.bgmId);
     if (state == 1 || state == 2) {
         return;
     }
     if (state == 0) {
         bgmReleaseStopped();
     }
-    FUN_00287328(DAT_0049f944);
+    FUN_00287328(g_gameState.bgmId);
 }
 }

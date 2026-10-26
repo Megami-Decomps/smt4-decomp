@@ -1,4 +1,4 @@
-/* NON_MATCHING: global work reload, texture-pair loads and cold texture-load branch are scheduled differently. */
+/* NON_MATCHING: only the zero-fill differs: retail reloads the work pointer from the global after the allocation join and fills it before the process literal load; the build forwards the allocation result and stores first. */
 #include "event/2dEvent/EventEffect.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -48,15 +48,15 @@ void eventFilterStart(u32 kind)
     work->offset = 0.0f;
     u32 selectedKind = g_eventEffect.filterState.work->kind;
     if (selectedKind < 6) {
-        if (textureGetIndexedResource(0x35) != NULL) {
-            ++g_eventEffect.textureUsers;
-        } else {
+        if (textureGetIndexedResource(0x35) == NULL) {
             asdTMTexTableLoadTmx(0x35, 0);
             g_eventEffect.textureUsers = 0;
+        } else {
+            ++g_eventEffect.textureUsers;
         }
         EventFilterTexture *texture = &DAT_0057f3e8[selectedKind];
-        if (!asdTMTexTableNodeIsLoaded(texture->table, texture->node)) {
-            asdTMTexLoadMainHeap(texture->table, texture->node);
+        if (!asdTMTexTableNodeIsLoaded(DAT_0057f3e8[selectedKind].table, texture->node)) {
+            asdTMTexLoadMainHeap(DAT_0057f3e8[selectedKind].table, texture->node);
             texture->requested = 1;
         }
     }

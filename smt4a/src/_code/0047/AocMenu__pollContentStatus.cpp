@@ -1,6 +1,7 @@
-/* NON_MATCHING: block layout of the 0x66/default tails, the constants 3/5 in r5/r6 (swapped) and the remap sign test (retail: lsrs #31; here cmp #0). */
+/* NON_MATCHING: block layout of the 0x66/default tails, and the constants 3/5 in r5/r6 (swapped). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
+#include "nn/Result.h"
 #include "util/BitsAndBytes.h"
 #include "sys/RuntimeObjects.h"
 
@@ -10,20 +11,12 @@ struct AocPollCode {
     u32 description;
 };
 
-/* What a status operation reports: a kind byte and four words of detail. */
-struct AocPollResult {
-    /* 0x00 */ u8 kind;
-    /* 0x01 */ u8 unk01[3];
-    /* 0x04 */ AocPollCode status;
-    /* 0x0C */ u32 detail[2];
-};
-
 /* The status operation the menu is polling (its deleting destructor is vtable slot 1). */
 class AocPollHandler {
 public:
     virtual ~AocPollHandler();
     virtual void vfunc08();
-    virtual AocPollResult poll();
+    virtual RequestParameters poll();
 };
 
 /* The content-status menu's work. */
@@ -35,7 +28,7 @@ struct AocPollMenu {
     /* 0x010 */ u8 unk010[0x1F8];
     /* 0x208 */ AocPollHandler *handler;
     /* 0x20C */ u8 handlerStorage[4];
-    /* 0x210 */ AocPollResult result;
+    /* 0x210 */ RequestParameters result;
 };
 
 extern "C" {
@@ -43,17 +36,15 @@ extern AocMain *g_aocMain;
 
 void FUN_00476e58(AocPollMenu *menu, s32 first, s32 second);
 AocPollHandler *windowCreateStatusOperation(u8 *storage, s32 kind);
-void timeInitializeActiveState(AocPollResult *result);
-void FUN_0047bc90(AocPollMenu *menu, AocPollResult *result);
+void FUN_0047bc90(AocPollMenu *menu, RequestParameters *result);
 void FUN_00473980(AocPollCode *result, AocMain *main);
-s32 isEmptyString(const AocPollResult *result);
+s32 isEmptyString(const RequestParameters *result);
 
 /* Per-frame update of the content-status menu: starts its two status operations, polls them and reports the result. */
 void AocMenu::pollContentStatus()
 {
     AocPollMenu * menu = reinterpret_cast<AocPollMenu *>(this);
-    AocPollResult result;
-    timeInitializeActiveState(&result);
+    RequestParameters result;
     AocMain *aocMain = g_aocMain;
     switch (menu->step) {
     case 0:
@@ -74,7 +65,7 @@ void AocMenu::pollContentStatus()
         }
         return;
     case 1: {
-        AocPollResult polled = menu->handler->poll();
+        RequestParameters polled = menu->handler->poll();
         result = polled;
         if (isEmptyString(&result) != 0) {
             menu->step = 2;
@@ -84,7 +75,7 @@ void AocMenu::pollContentStatus()
             return;
         }
         if (result.kind == 0x66) {
-            AocPollResult copy = result;
+            RequestParameters copy = result;
             FUN_0047bc90(menu, &copy);
             return;
         }
@@ -98,7 +89,7 @@ void AocMenu::pollContentStatus()
         return;
     }
     case 3: {
-        AocPollResult polled = menu->handler->poll();
+        RequestParameters polled = menu->handler->poll();
         result = polled;
         if (isEmptyString(&result) != 0) {
             menu->step = 4;
@@ -108,7 +99,7 @@ void AocMenu::pollContentStatus()
             return;
         }
         if (result.kind == 0x66) {
-            AocPollResult copy = result;
+            RequestParameters copy = result;
             FUN_0047bc90(menu, &copy);
             return;
         }
@@ -125,10 +116,11 @@ void AocMenu::pollContentStatus()
         AocPollCode status;
         FUN_00473980(&status, aocMain);
         AocPollCode remapped = status;
-        if ((legacyResourceIdRemap(&remapped) >> 31) != 0) {
+        if (nnResultIsFailure(legacyResourceIdRemap(&remapped))) {
             menu->step = 9999;
             menu->result.kind = 100;
-            menu->result.status = remapped;
+            menu->result.result.code = remapped.code;
+            menu->result.result.description = remapped.description;
             return;
         }
         menu->step = 5;

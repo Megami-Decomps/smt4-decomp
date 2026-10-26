@@ -1,10 +1,10 @@
-/* NON_MATCHING: replacement affinities copy directly and packed modifier/store operations are optimized differently. */
+/* NON_MATCHING: the signed modifier now sign-extends as in retail; the replacement affinities are copied through a spilled {state, modifier} pair in retail and the modifier stores are scheduled differently. */
 #include "gamedata/InheritedAffinities.h"
 
 union EquipmentAffinityValueA {
     s16 raw;
     struct {
-        s16 modifier : 10;
+        signed short modifier : 10; /* plain s16 bit-fields read back unsigned in armcc */
         u16 state : 6;
     } fields;
 };

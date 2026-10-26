@@ -42,3 +42,6 @@ mobiclipHeapGetAllocation = 0xe5900030; // FUN_001f51ac (twin of smt4 FUN_0017fe
 partyWidgetGetCost = 0xe5900044; // FUN_002cc0c0 (twin of smt4 partyPanelRefreshItemPreview)
 partyWidgetGetX = 0xe5900040; // FUN_002cc0c0 (twin of smt4 partyPanelRefreshItemPreview)
 recordGetActive = 0xe1d008d5; // FUN_0038e6bc (loop, after add r0, r0, #32)
+windowRegionGetWidth = 0xe1d005f8; // _ZN9Obj4221a47vfunc10Ej (0x47330c): mov r0, r4 before each, result moved out
+windowRegionGetLeft = 0xe1d005f4; // _ZN9Obj4221a47vfunc10Ej (0x47330c): mov r0, r4 before each, result moved out
+windowRegionGetTop = 0xe1d005f6; // _ZN9Obj4221a47vfunc10Ej (0x47330c): mov r0, r4 before each, result moved out

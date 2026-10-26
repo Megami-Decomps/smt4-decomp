@@ -5,6 +5,20 @@
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x38];
+    signed char f005f1634; /* 0x038 */
+    u8 pad039[0x15f];
+    unsigned short f005f1794; /* 0x198 */
+    unsigned short f005f1796; /* 0x19a */
+    unsigned char f005f1798; /* 0x19c */
+    u8 pad19d[0xf];
+    unsigned short f005f17a8; /* 0x1ac */
+    unsigned short f005f17aa; /* 0x1ae */
+};
+extern GameStateView g_gameState;
+
 
 int textFormatBuffer(...);
 int asdOperatorNew(void);
@@ -58,12 +72,12 @@ typedef struct {
     unsigned int sp24; /* 0x24: local_24 */
 } param_1_stack;
 
-extern signed char DAT_005f1634; /* 0x5f1634 */
-extern unsigned short DAT_005f1794; /* 0x5f1794 */
-extern unsigned short DAT_005f1796; /* 0x5f1796 */
-extern unsigned char DAT_005f1798; /* 0x5f1798 */
-extern unsigned short DAT_005f17a8; /* 0x5f17a8 */
-extern unsigned short DAT_005f17aa; /* 0x5f17aa */
+
+
+
+
+
+
 extern int g_mapSelection; /* 0x5f1c98 */
 
 /* Supplied declaration required: textFormatBuffer. */
@@ -197,7 +211,7 @@ void FUN_004b990c(int param_1)
   case 3:
     temp_v6 = campIsState51();
     if ((temp_v6 != 0) || (temp_v6 = campIsState85(), temp_v6 == 0)) {
-      if (DAT_005f1634 == '\0') {
+      if (g_gameState.f005f1634 == '\0') {
         slotSetRequest(1,10,0xff);
       }
       temp_v6 = *(int *)(param_1 + 0x2c) + 1;
@@ -218,19 +232,19 @@ void FUN_004b990c(int param_1)
       if (pcVar4[1] != '\0') {
         temp_v3 = (unsigned int)*(unsigned short *)(pcVar4 + 8);
         FUN_001ad9b4();
-        DAT_005f1796 = *(unsigned short *)(temp_v3 + 2);
-        libc_strcpy(&DAT_005f1798,temp_v3 + 0xc4);
-        DAT_005f1794 = 1;
+        g_gameState.f005f1796 = *(unsigned short *)(temp_v3 + 2);
+        libc_strcpy(&g_gameState.f005f1798,temp_v3 + 0xc4);
+        g_gameState.f005f1794 = 1;
       }
       else if (pcVar4[3] != '\0') {
-        DAT_005f17aa = 1;
+        g_gameState.f005f17aa = 1;
       }
       temp_v6 = gameFlagsGetBlock();
       *(unsigned short *)(temp_v6 + 0x22) = 0;
       clearFlags310To31F();
       sub68OwnerCall4();
       if (pcVar4[2] != '\0') {
-        DAT_005f17a8 = 1;
+        g_gameState.f005f17a8 = 1;
       }
       if (*pcVar4 != '\0') {
         *(unsigned char *)(param_1 + 0x1168) = 1;
@@ -240,7 +254,7 @@ void FUN_004b990c(int param_1)
         *(unsigned short *)(temp_v6 + 0x1e) = *(unsigned short *)(pcVar4 + 6);
       }
     }
-    if (DAT_005f1634 == '\0') {
+    if (g_gameState.f005f1634 == '\0') {
       temp_v6 = *(int *)(param_1 + 0x2c) + 1;
       *(int *)(param_1 + 0x2c) = temp_v6;
       break;

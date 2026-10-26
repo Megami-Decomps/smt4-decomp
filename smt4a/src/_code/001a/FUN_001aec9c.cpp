@@ -1,13 +1,19 @@
-/* NON_MATCHING: header load expansion and compiler-generated copy-loop unrolling differ. */
+/* NON_MATCHING: header word reads now match retail (readLzWord); the run/literal copy loops still differ (retail guards each fill with a signed count test and does not unroll). */
 #include "common.h"
+
+static __inline u32 readLzWord(const u8 *source)
+{
+    return (u32)source[0] | ((u32)source[1] << 8) |
+           ((u32)source[2] << 16) | ((u32)source[3] << 24);
+}
 
 // Expand Nintendo run-length blocks, clipping the final block to the advertised output size.
 extern "C" void FUN_001aec9c(const u8 *source, u8 *destination)
 {
-    u32 remaining = ((const __packed u32 *)source)[0] >> 8;
+    u32 remaining = readLzWord(source) >> 8;
     source += sizeof(u32);
     if (remaining == 0) {
-        remaining = ((const __packed u32 *)source)[0];
+        remaining = readLzWord(source);
         source += sizeof(u32);
         if (remaining == 0)
             return;

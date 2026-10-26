@@ -9,7 +9,6 @@ int asdProcessCreateSimple(...);
 int taskCreateDraw(...);
 int jobStop(...);
 int eventQueueAddUniqueIfValid(...);
-int ifTouchRegionRemove(...);
 int uiSpriteBankApplyPreset(...);
 int scrScriptProcessStartEntry(...);
 int asdFsIsSdCardDetected(...);
@@ -19,7 +18,6 @@ int FUN_00477d10(...);
 int jobFlagsWorkStop(...);
 int FUN_0047bc90(...);
 int FUN_0047bcdc(...);
-int timeInitializeActiveState(...);
 
 typedef int romwright_code(...);
 /* stack frame of param_1: 6 slot(s), 24 byte(s) */
@@ -59,7 +57,6 @@ extern unsigned int tableGroupFindEntryIndex(unsigned int, unsigned char *);
 /* Supplied declaration required: FUN_0047bc90. */
 /* Supplied declaration required: FUN_0047bcdc. */
 extern int isEmptyString(unsigned int *);
-/* Supplied declaration required: timeInitializeActiveState. */
 
 
 void AocMenu::runConnectedProcess()
@@ -75,11 +72,7 @@ void AocMenu::runConnectedProcess()
   unsigned int temp_v2;
   unsigned int *puVar7;
   unsigned int *puVar8;
-  unsigned int temp_v3;
-  unsigned int uStack_5c;
-  unsigned int uStack_58;
-  unsigned int uStack_54;
-  unsigned int uStack_50;
+  RequestParameters record;
   unsigned int temp_v4;
   unsigned int uStack_48;
   unsigned int uStack_44;
@@ -91,7 +84,6 @@ void AocMenu::runConnectedProcess()
   unsigned int uStack_2c;
   unsigned int uStack_28;
   
-  timeInitializeActiveState(&temp_v3);
   temp_v0 = param_1[2];
   puVar7 = param_1 + 0x5e9;
   puVar8 = param_1 + 0x5e8;
@@ -121,12 +113,12 @@ void AocMenu::runConnectedProcess()
         }
         else if ((*param_1 & 0x200) != 0) {
           (**(romwright_code **)(*(int *)param_1[0x82] + 0xc))(&temp_v4);
-          temp_v3 = temp_v4;
-          uStack_5c = uStack_48;
-          uStack_58 = uStack_44;
-          uStack_54 = uStack_40;
-          uStack_50 = uStack_3c;
-          temp_v1 = isEmptyString(&temp_v3);
+          record.word(0) = temp_v4;
+          record.word(1) = uStack_48;
+          record.word(2) = uStack_44;
+          record.word(3) = uStack_40;
+          record.word(4) = uStack_3c;
+          temp_v1 = isEmptyString(&record.word(0));
           if (temp_v1 != 0) {
             *(unsigned int *)(g_aocMain + 0x754) = *(unsigned int *)(g_aocMain + 0x754) | 0x100;
             FUN_00477d10(param_1,1);
@@ -134,25 +126,25 @@ void AocMenu::runConnectedProcess()
             jobFlagsWorkStop(param_1);
             return;
           }
-          temp_v1 = byteIsAtLeast100(&temp_v3);
+          temp_v1 = byteIsAtLeast100(&record.word(0));
           if (temp_v1 != 0) {
             jobFlagsWorkStop(param_1);
-            if ((temp_v3 & 0xff) == 0x66) {
-              temp_v5 = temp_v3;
-              uStack_34 = uStack_5c;
-              uStack_30 = uStack_58;
-              uStack_2c = uStack_54;
-              uStack_28 = uStack_50;
+            if ((record.word(0) & 0xff) == 0x66) {
+              temp_v5 = record.word(0);
+              uStack_34 = record.word(1);
+              uStack_30 = record.word(2);
+              uStack_2c = record.word(3);
+              uStack_28 = record.word(4);
               FUN_0047bc90(param_1,&temp_v5);
               return;
             }
-            if ((temp_v3 & 0xff) != 0x67) {
+            if ((record.word(0) & 0xff) != 0x67) {
               param_1[2] = 9999;
-              param_1[0x84] = temp_v3;
-              param_1[0x85] = uStack_5c;
-              param_1[0x86] = uStack_58;
-              param_1[0x87] = uStack_54;
-              param_1[0x88] = uStack_50;
+              param_1[0x84] = record.word(0);
+              param_1[0x85] = record.word(1);
+              param_1[0x86] = record.word(2);
+              param_1[0x87] = record.word(3);
+              param_1[0x88] = record.word(4);
               return;
             }
             piVar4 = (int *)param_1[0x82];

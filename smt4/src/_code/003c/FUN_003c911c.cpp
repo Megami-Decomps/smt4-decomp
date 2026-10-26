@@ -1,4 +1,4 @@
-/* NON_MATCHING: special-fusion packed result stores and selection registers differ. */
+/* NON_MATCHING: race/level ternaries now load as retail (conditional ldrb); the u64 bitfield result store (retail packs with bic/orr and one strd), the rule-null arm layout and result register numbering still differ. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include "shard/W6_W6Match8_FusionSelection.h"
 
@@ -41,9 +41,8 @@ u32 FUN_003c911c(FusionRaceSelectionIV *selection, u16 firstId, u16 secondId, Fu
             return 0;
     }
     if (rule->kind == 1) {
-        DevilSortRecord *other = first->id == rule->sourceId ? second : first;
-        u32 race = other->race;
-        u8 level = other->level + 1;
+        u8 level = (first->id == rule->sourceId ? second->level : first->level) + 1;
+        u32 race = first->id == rule->sourceId ? second->race : first->race;
         FusionLevelEntry *levels = selection->levels[race];
         if (levels[0].level < level)
             level = static_cast<u8>(levels[selection->counts[race] - 1].level);
@@ -52,8 +51,8 @@ u32 FUN_003c911c(FusionRaceSelectionIV *selection, u16 firstId, u16 secondId, Fu
             return 0;
     }
     if (rule->kind == 3) {
-        DevilSortRecord *other = first->id == rule->sourceId ? second : first;
-        result = demonFindClosestEligibleLevel(selection, other->race, static_cast<u8>(other->level - 1), 0);
+        result = demonFindClosestEligibleLevel(selection, first->id == rule->sourceId ? second->race : first->race,
+            static_cast<u8>((first->id == rule->sourceId ? second->level : first->level) - 1), 0);
         if (first->id == result || second->id == result || result == 0)
             return 0;
     }

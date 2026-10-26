@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_vec_dtor(unsigned char [108], unsigned char *, int, int);
+int __aeabi_vec_dtor(unsigned char [108], unsigned char *, int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [108], unsigned char *, int, int);
 int streamReadWord(int, unsigned char *);
 int FUN_0030093c(...);
@@ -15,7 +15,7 @@ extern unsigned char LAB_002e9ff5; /* 0x2e9ff5 */
 extern unsigned char LAB_002ea975; /* 0x2ea975 */
 extern unsigned char LAB_002ea9dd; /* 0x2ea9dd */
 
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: streamReadWord. */
 /* Supplied declaration required: FUN_0030093c. */
@@ -53,7 +53,7 @@ void FUN_0011ea88(int param_1,unsigned int param_2)
       else {
         __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_002ea975,0x68,1);
         FUN_0030093c(param_1,temp_v1);
-        rt_vec_dtor(temp_v1,&LAB_002ea9dd,0x68,1);
+        __aeabi_vec_dtor(temp_v1,&LAB_002ea9dd,0x68,1);
       }
     }
   }

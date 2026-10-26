@@ -1,5 +1,6 @@
-/* NON_MATCHING: Saved-register set, global-address reuse, result-sign test, and backend argument setup differ. */
+/* NON_MATCHING: the result test (nnResultIsFailure) now matches; retail reaches the movie globals (0x617e58..0x618504, DAT_00588024) from shared literal bases with `sub rX, rY, #imm`, i.e. they were defined in the same file, while this unit addresses each global from its own literal. */
 #include "mobiclip_ctrl/MobiclipPlaybackStart.h"
+#include "nn/Result.h"
 
 extern "C" {
 s32 refIsNullOrZero(MoviePathConversionState *state);
@@ -42,7 +43,7 @@ void FUN_003d2eec(const char *filename)
         file->sizeHigh = 0;
         file->positionLow = 0;
         file->positionHigh = 0;
-        if (FUN_001883b0(&file->handle, path, 1) >> 31) {
+        if (nnResultIsFailure(FUN_001883b0(&file->handle, path, 1))) {
             sysFatalBreak();
         }
     }

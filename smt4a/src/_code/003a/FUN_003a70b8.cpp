@@ -12,14 +12,27 @@ struct SinCosEntry {
 };
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0xf4];
+    f32 f005f16f0; /* 0x0f4 */
+    f32 f005f16f4; /* 0x0f8 */
+    f32 f005f16f8; /* 0x0fc */
+    f32 f005f16fc; /* 0x100 */
+    f32 f005f1700; /* 0x104 */
+    f32 f005f1704; /* 0x108 */
+    f32 f005f1708; /* 0x10c */
+};
+extern GameStateView g_gameState;
+
 extern SinCosEntry DAT_00536d14[];
-extern f32 DAT_005f16f0;    /* camera position x */
-extern f32 DAT_005f16f4;
-extern f32 DAT_005f16f8;
-extern f32 DAT_005f16fc;    /* camera target x */
-extern f32 DAT_005f1700;
-extern f32 DAT_005f1704;
-extern f32 DAT_005f1708;    /* extra value */
+
+
+
+
+
+
+
 s32 scrGetArg(u32 index);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(f32 *vector, f32 (*matrix)[4]);
 }
@@ -68,12 +81,12 @@ extern "C" u32 FUN_003a70b8(void)
     matrix[2][2] = cx * cy;
     matrix[2][3] = 0.0f;
     nn_math_ARMv6_VEC3TransformAsm_2AD44C(direction, matrix);
-    DAT_005f16f0 = x - direction[0] * distance;
-    DAT_005f16f4 = y - direction[1] * distance;
-    DAT_005f16f8 = z - direction[2] * distance;
-    DAT_005f16fc = x;
-    DAT_005f1700 = y;
-    DAT_005f1704 = z;
-    DAT_005f1708 = extra;
+    g_gameState.f005f16f0 = x - direction[0] * distance;
+    g_gameState.f005f16f4 = y - direction[1] * distance;
+    g_gameState.f005f16f8 = z - direction[2] * distance;
+    g_gameState.f005f16fc = x;
+    g_gameState.f005f1700 = y;
+    g_gameState.f005f1704 = z;
+    g_gameState.f005f1708 = extra;
     return 1;
 }

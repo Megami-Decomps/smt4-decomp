@@ -1,6 +1,5 @@
 #ifndef UI_SCENE_WINDOW_WORK_H
 #define UI_SCENE_WINDOW_WORK_H
-#include "shard/W5_W5Match2_TimedState.h"
 #include "classes/SelectionState.h"
 #include "classes/Obj4221a4.h"
 #include "shard/ScreenTransitionState.h"
@@ -22,8 +21,7 @@ struct SceneWindowWork {
             ScreenTransitionCallback *callback; // 0x0208
         } transition;
     };
-    TimedState firstTimer; // 0x0210
-    TimedState secondTimer; // 0x0224
+    u8 unk0210[0x28]; // 0x0210: two request records
     u8 unk0238[8]; // 0x0238
     u8 selectionStorage[sizeof(SelectionFlags)]; // 0x0240
     u8 unk024F[0x65]; // 0x024F

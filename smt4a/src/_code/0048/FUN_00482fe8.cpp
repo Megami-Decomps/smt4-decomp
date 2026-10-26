@@ -1,4 +1,5 @@
 /* NON_MATCHING: logic, stack layout and inlined FUN_00482b08 body match; armcc allocates the pool/slot/index registers one higher (pool r5, slot r4) than retail (pool r4, slot fp), same inversion as FUN_00482b08 */
+#include "classes/Obj55c840.h"
 #include "map/ControllerPool.h"
 #include "shard/W5_W5Match7_SceneState.h"
 #include <math.h>
@@ -60,7 +61,7 @@ static inline Controller *createSecondKindController(ControllerPool *pool, u32 c
             break;
         }
     }
-    pool->slots[slot] = new ControllerSecondKind();
+    pool->slots[slot] = reinterpret_cast<Controller *>(new Obj55c840());
     callbackCreateControllerForKind(pool->slots[slot], callback);
     pool->slots[slot]->vtable->start(pool->slots[slot]);
     pool->slots[slot]->child->vtable->start(pool->slots[slot]->child);

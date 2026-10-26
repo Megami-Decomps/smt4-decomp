@@ -4,22 +4,13 @@
 #include "test/BustupViewer.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
-/* What the window operation reports (five words; the first byte is the result code). */
-struct InputEvent {
-    union {
-        u32 code;
-        u8 kind;
-    };
-    u32 data[4];
-};
-
 /* A window operation object: slot 1 releases it, slot 3 hands out its pending event. */
 class WindowOperation {
 public:
     virtual void slot0();
     virtual void release();
     virtual void slot2();
-    virtual InputEvent getEvent();
+    virtual RequestParameters getEvent();
 };
 
 namespace {
@@ -34,14 +25,13 @@ struct AocBlock {
 
 extern "C" {
 extern AocBlock *g_aocMain;
-void timeInitializeActiveState(InputEvent *event);
-s32 isEmptyString(InputEvent *event);
-s32 byteIsAtLeast100(InputEvent *event);
+s32 isEmptyString(RequestParameters *event);
+s32 byteIsAtLeast100(RequestParameters *event);
 void jobFlagsWorkStop(u32 *job);
 void windowCreateStatusOperation(void *operation, s32 mode);
 void FUN_0047bcdc(u32 *job, s32 mode);
 void FUN_00477d10(u32 *job, s32 a, s32 b);
-void FUN_0047bc90(u32 *job, InputEvent *event);
+void FUN_0047bc90(u32 *job, RequestParameters *event);
 void releaseEntriesB(u32 *regions);
 void releaseEntriesA(u32 *entries);
 void FUN_00476e58(u32 *job, s32 a, s32 b);
@@ -57,8 +47,7 @@ void FUN_004d05c4(u32 *entries, u32 group, u32 id, s32 value);
 void AocMenu::runWindowOperation()
 {
     u32 * job = reinterpret_cast<u32 *>(this);
-    InputEvent event;
-    timeInitializeActiveState(&event);
+    RequestParameters event;
     WindowOperation *operation = reinterpret_cast<WindowOperation *>(job[0x82]);
     switch (job[2]) {
     case 0:
@@ -77,7 +66,8 @@ void AocMenu::runWindowOperation()
         return;
     case 2:
         if ((job[0] & 0x200) != 0) {
-            event = operation->getEvent();
+            RequestParameters polled = operation->getEvent();
+            event = polled;
             if (isEmptyString(&event) != 0) {
                 job[2] = 3;
             } else if (byteIsAtLeast100(&event) != 0) {
@@ -88,11 +78,11 @@ void AocMenu::runWindowOperation()
                 }
                 if (event.kind != 0x67) {
                     job[2] = 9999;
-                    job[0x84] = event.code;
-                    job[0x85] = event.data[0];
-                    job[0x86] = event.data[1];
-                    job[0x87] = event.data[2];
-                    job[0x88] = event.data[3];
+                    job[0x84] = event.word(0);
+                    job[0x85] = event.word(1);
+                    job[0x86] = event.word(2);
+                    job[0x87] = event.word(3);
+                    job[0x88] = event.word(4);
                     return;
                 }
                 WindowOperation *current = reinterpret_cast<WindowOperation *>(job[0x82]);
@@ -114,8 +104,9 @@ void AocMenu::runWindowOperation()
         job[0x82] = reinterpret_cast<u32>(job + 0x83);
         FUN_0047bcdc(job, 1);
         return;
-    case 4:
-        event = operation->getEvent();
+    case 4: {
+        RequestParameters polled = operation->getEvent();
+        event = polled;
         if (isEmptyString(&event) != 0) {
             jobFlagsWorkStop(job);
             WindowOperation *current;
@@ -154,13 +145,14 @@ void AocMenu::runWindowOperation()
         if (byteIsAtLeast100(&event) != 0) {
             jobFlagsWorkStop(job);
             job[2] = 9999;
-            job[0x84] = event.code;
-            job[0x85] = event.data[0];
-            job[0x86] = event.data[1];
-            job[0x87] = event.data[2];
-            job[0x88] = event.data[3];
+            job[0x84] = event.word(0);
+            job[0x85] = event.word(1);
+            job[0x86] = event.word(2);
+            job[0x87] = event.word(3);
+            job[0x88] = event.word(4);
         }
         return;
+    }
     case 9999:
         FUN_00476e58(job, 5, 3);
         return;

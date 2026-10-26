@@ -1,20 +1,11 @@
-#include "romwright_types.h"
+#include "nn/snd/Initialization.h"
 
 extern "C" {
+extern NnSndMasterManager g_nnSndMasterManager;
+void FUN_0015d19c(NnSndMasterManager *manager, u32 first, u32 second);
 
-int FUN_0015d19c(unsigned char *, unsigned int, unsigned int);
-
-extern unsigned char g_nnSndMasterManager; /* 0x643310 */
-
-/* Supplied declaration required: FUN_0015d19c. */
-
-
-void FUN_0015a124(unsigned int param_1,unsigned int param_2)
-
+void FUN_0015a124(u32 first, u32 second)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0015d19c(&g_nnSndMasterManager,param_1,param_2);
-  return;
+    FUN_0015d19c(&g_nnSndMasterManager, first, second);
 }
-
-} /* extern "C" */
+}

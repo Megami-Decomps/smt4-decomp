@@ -1,4 +1,4 @@
-/* NON_MATCHING: extended-view address caching, category branch outlining and label-coordinate register lifetimes differ. */
+/* NON_MATCHING: the category branch layout now matches (the 9-sprite arm is out of line); retail reaches the show flags through a second base at +0xB00, reloads the category from the object and keeps fewer saved registers (no fp). */
 #include "shop/shopMain.h"
 #include "shard/S1ListPanel.h"
 
@@ -42,10 +42,10 @@ void FUN_004957b4(ShopWork *base)
     s16 positionX = position->x, positionY = position->y;
     const SpriteInfo *origin = layoutFindTableEntry(work->sprites, 200);
     s32 x = origin->x + positionX, y = positionY + origin->y;
-    if (work->category != 8)
-        FUN_0049339c(work->sprites, 8, x, y, depth);
-    else
+    if (work->category == 8)
         FUN_0049339c(work->sprites, 9, x, y, depth);
+    else
+        FUN_0049339c(work->sprites, 8, x, y, depth);
     FUN_0049368c(work->sprites, 0xC2, x, y, depth, 1);
     FUN_0049368c(work->sprites, 0xC3, x, y, depth, 1);
     if (work->showDecrease)

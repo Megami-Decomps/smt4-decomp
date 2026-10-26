@@ -1,4 +1,4 @@
-/* NON_MATCHING: the three-case phase switch compiles to a compare chain instead of retail's jump table, the image loop uses ldrd instead of two ldr, and register allocation of the saved state/images pointers differs. */
+/* NON_MATCHING: the image loop now matches retail (images base kept in a local, table read indexed, node through the element pointer); the three-case phase switch still compiles to a compare chain instead of retail's jump table, and register allocation of the saved state/images pointers differs. */
 #include "event/2dEvent/SmokeFade.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -35,8 +35,9 @@ static __inline SmokeFadeRow *smokeFadeGetRow()
 static __inline bool smokeFadeImagesLoaded()
 {
     s32 loaded = 0;
+    SmokeFadeImage *images = DAT_0043df28.images;
     for (s32 i = 0; i < 2; ++i) {
-        if (asdTMTexTableNodeIsLoaded(DAT_0043df28.images[i].table, DAT_0043df28.images[i].node))
+        if (asdTMTexTableNodeIsLoaded(images[i].table, images[i].node))
             loaded++;
     }
     return loaded == 2;

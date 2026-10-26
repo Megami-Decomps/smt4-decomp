@@ -1,39 +1,37 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00158624` (_code @ 0x158624, 0x70 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+#include "nn/Result.h"
 
-extern "C" {
-
-int FUN_0016cdc0(unsigned char [12], int, unsigned int);
-int FUN_0016d090(int **, unsigned char [12]);
-
-typedef int romwright_code(...);
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int spC; /* 0xc: local_c */
-} param_2_stack;
-
-/* Supplied declaration required: FUN_0016cdc0. */
-/* Supplied declaration required: FUN_0016d090. */
-extern int FUN_001aeefc(unsigned int, int *, unsigned int);
-
-
-void FUN_00158624(unsigned int param_1,unsigned int param_2)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int **ppiVar1;
-  int temp_v0;
-  unsigned char temp_v1 [12];
-  int *temp_v2;
-  
-  FUN_0016cdc0(temp_v1,0,param_2);
-  ppiVar1 = &temp_v2;
-  FUN_0016d090(ppiVar1,temp_v1);
-  if ((-1 < (int)ppiVar1) && (temp_v0 = FUN_001aeefc(param_1,temp_v2,0), temp_v0 < 0)) {
-    (**(romwright_code **)(*temp_v2 + 0x30))();
-  }
-  return;
+namespace {
+struct MountedDevice;
+struct MountedDeviceVtable {
+    u8 prefix00[0x30];
+    void (*release)(MountedDevice *device);
+};
+struct MountedDevice {
+    const MountedDeviceVtable *vtable;
+};
 }
 
-} /* extern "C" */
+extern "C" {
+void FUN_0016cdc0(u8 *specifier, s32 mediaType, u32 saveId, u32 unused);
+s32 FUN_0016d090(MountedDevice **device, const u8 *specifier);
+s32 FUN_001aeefc(const char *name, MountedDevice *device, u8 downloadable, u8 flags);
+
+// Opens the extra save data `saveId` as a device and registers it under `name`; releases it again on failure.
+s32 FUN_00158624(const char *name, u32 saveId)
+{
+    u8 specifier[12];
+    MountedDevice *device;
+    FUN_0016cdc0(specifier, 0, saveId, 0);
+    s32 result = FUN_0016d090(&device, specifier);
+    if (nnResultIsFailure(result)) {
+        return result;
+    }
+    result = FUN_001aeefc(name, device, 0, 0);
+    if (nnResultIsFailure(result)) {
+        device->vtable->release(device);
+        return result;
+    }
+    return 0;
+}
+}

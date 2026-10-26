@@ -1,25 +1,18 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_005094c4` (_code @ 0x5094c4, 0x20 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
+
+struct Unk84Holder {
+    u8 unk00[0x51];
+    u8 disabled;
+    u8 unk52[0x32];
+    u32 value;
+};
 
 extern "C" {
-
-
-unsigned int FUN_005094c4(int param_1)
-
+u32 FUN_005094c4(Unk84Holder *holder)
 {
-  unsigned int temp_v0;
-  
-  if (*(char *)(param_1 + 0x51) != '\0') {
-    temp_v0 = 0;
-  }
-  else {
-    temp_v0 = 0;
-    if (*(int *)(param_1 + 0x84) != 0) {
-      temp_v0 = 1;
+    if (holder->disabled != 0) {
+        return 0;
     }
-  }
-  return temp_v0;
+    return holder->value != 0;
 }
-
-} /* extern "C" */
+}

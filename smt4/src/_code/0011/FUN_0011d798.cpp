@@ -1,44 +1,24 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011d798` (_code @ 0x11d798, 0x68 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
+#include <string.h>
 
 extern "C" {
+extern u32 DAT_004656b0;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-/* stack frame of param_5: 1 slot(s), 1 byte(s) */
-typedef struct {
-    unsigned char sp28; /* 0x28: local_28 */
-} param_5_stack;
-
-extern int DAT_004656b0; /* 0x4656b0 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-int FUN_0011d798(unsigned char param_1,unsigned char *param_2,unsigned int *param_3,unsigned int *param_4,
-                unsigned int *param_5)
-
+s32 FUN_0011d798(u8 first, u8 *outputA, u32 *outputB, u32 *outputC, u32 *outputD)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x50040;
-  *(unsigned char *)(temp_v1 + 0x84) = param_1;
-  software_interrupt(0x32);
-  temp_v0 = DAT_004656b0;
-  if (-1 < DAT_004656b0) {
-    *param_2 = *(unsigned char *)(temp_v1 + 0x88);
-    *param_3 = *(unsigned int *)(temp_v1 + 0x8c);
-    *param_4 = *(unsigned int *)(temp_v1 + 0x90);
-    *param_5 = *(unsigned int *)(temp_v1 + 0x94);
-    temp_v0 = *(int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x00050040;
+    memcpy(&command->words[0], &first, sizeof(first));
+    s32 result = nn::svc::SendSyncRequest(DAT_004656b0);
+    if ((s32)(result & 0x80000000) >= 0) {
+        *outputA = *reinterpret_cast<u8 *>(&command->words[1]);
+        *outputB = command->words[2];
+        *outputC = command->words[3];
+        *outputD = command->words[4];
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

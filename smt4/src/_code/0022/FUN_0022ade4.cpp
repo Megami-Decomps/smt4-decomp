@@ -1,4 +1,4 @@
-/* NON_MATCHING: row-sprite speed addressing, conditional label-coordinate loads and blink branch placement differ. */
+/* NON_MATCHING: the blink arms and label coordinates now match; retail evaluates the label y argument before x and keeps both in caller-saved registers. */
 #include "shard/S3SceneWidget.h"
 #include "shard/TextureDrawCall.h"
 #include "ui/UiSpriteState.h"
@@ -34,27 +34,33 @@ void FUN_0022ade4(SceneWidget *work, s32 row, s32 entryIndex, s32 state, s32 fad
         FUN_002bf380(2, 42, 0, x, y, fade);
     }
     f32 opacity = static_cast<f32>(256 - fade) / 256.0f;
-    const UiLayoutEntryPrefixIV *label;
+    s32 labelX, labelY;
     u32 color, layer;
     if (state) {
-        label = asdTMTexTableEntryAt(42, 20);
+        const UiLayoutEntryPrefixIV *label = asdTMTexTableEntryAt(42, 20);
+        labelX = label->x;
+        labelY = label->y;
         color = state == 2 ? 0x72e027ff : 0xffffffff;
         layer = 3;
     } else {
-        label = asdTMTexTableEntryAt(42, 4);
+        const UiLayoutEntryPrefixIV *label = asdTMTexTableEntryAt(42, 4);
+        labelX = label->x;
+        labelY = label->y;
         color = 0x323232ff;
         layer = 2;
     }
     textDrawString(layer, color, reinterpret_cast<const char *>(work->entries[entryIndex]),
-                 static_cast<f32>(label->x + x), static_cast<f32>(label->y + y),
+                 static_cast<f32>(labelX + x), static_cast<f32>(labelY + y),
                  opacity, 0.0f, scale);
     if (state) {
         const UiLayoutEntryPrefixIV *layout = asdTMTexTableEntryAt(42, row + 21);
-        if (work->frame >= 8) {
-            FUN_002bf288(2, 42, 19, layout->x, layout->y, fade);
-            return;
+        s32 markX = layout->x;
+        s32 markY = layout->y;
+        if (work->frame < 8) {
+            FUN_002bf288(2, 42, 18, markX, markY, fade);
+        } else {
+            FUN_002bf288(2, 42, 19, markX, markY, fade);
         }
-        FUN_002bf288(2, 42, 18, layout->x, layout->y, fade);
     }
 }
 }

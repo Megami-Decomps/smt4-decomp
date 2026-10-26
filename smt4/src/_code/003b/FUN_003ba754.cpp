@@ -1,4 +1,4 @@
-/* NON_MATCHING: restored native script result/mode, work-save choices and explicit switch cases; BGM arguments, skip-restore branching and an unnamed game-state word still differ. */
+/* NON_MATCHING: restored native script result/mode, work-save choices and explicit switch cases; the game-state resume word now goes through g_gameState.resume.mode; BGM arguments and skip-restore branching still differ. */
 #include "common.h"
 #include "gamedata/Table1bOr1c.h"
 #include "map/mapDepart.h"
@@ -36,7 +36,7 @@ struct AocMainView {
 extern "C" {
 extern AocMainView *g_aocMain;
 extern GameState g_gameState;
-extern u32 DAT_0049f930;
+
 
 void FUN_0022b29c(MapSceneView *scene, s32 mode, u32 flag);
 void bgmReleaseStopped(void);
@@ -127,7 +127,7 @@ void FUN_003ba754(MapSceneView *scene)
     }
     g_gameState.unk000 = mode + 200;
     g_gameState.campCleanup.retainCampResources = 0;
-    DAT_0049f930 = 3;
+    g_gameState.resume.mode = 3;
     g_gameState.unk2F8 = 0;
     mapDepartSetTarget(0xffffffff, 0xffffffff);
 }

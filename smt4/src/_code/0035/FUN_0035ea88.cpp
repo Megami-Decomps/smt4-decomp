@@ -1,23 +1,20 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035ea88` (_code @ 0x35ea88, 0x20 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable body; register assignment of the block/memory arguments differs (retail copies the block pointer, build copies the memory pointer). */
+#include "common.h"
+
+struct MemoryBlock {
+    u8 *begin;
+    u8 *end;
+    u32 used;
+};
 
 extern "C" {
+void rt_memclr(void *base, u32 size);
 
-int rt_memclr(int, int);
-
-/* Supplied declaration required: rt_memclr. */
-
-
-void FUN_0035ea88(int *param_1,int param_2)
-
+void FUN_0035ea88(MemoryBlock *block, u8 *memory)
 {
-/* irregular: 1 native warning(s); review required */
-  *param_1 = param_2;
-  param_1[1] = param_2 + 0xc00;
-  param_1[2] = 0;
-  rt_memclr(param_2,0xc00);
-  return;
+    block->begin = memory;
+    block->end = memory + 0xC00;
+    block->used = 0;
+    rt_memclr(memory, 0xC00);
 }
-
-} /* extern "C" */
+}

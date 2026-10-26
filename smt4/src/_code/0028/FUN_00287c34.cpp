@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001954b0(void);
+int asdMdlBanksReset(void);
 int FUN_0026faa4(void);
 int mapClearPendingEntries(void);
 
@@ -250,7 +250,7 @@ extern unsigned int DAT_0049fd18; /* 0x49fd18 */
 extern unsigned int DAT_0049fd1c; /* 0x49fd1c */
 extern unsigned int DAT_0049fd20; /* 0x49fd20 */
 
-/* Supplied declaration required: FUN_001954b0. */
+/* Supplied declaration required: asdMdlBanksReset. */
 /* Supplied declaration required: FUN_0026faa4. */
 extern unsigned long long FUN_00270384(int);
 /* Supplied declaration required: mapClearPendingEntries. */
@@ -489,7 +489,7 @@ void FUN_00287c34(int param_1)
   DAT_0049fd18 = 0xffffffff;
   DAT_0049fd1c = 0xffffffff;
   DAT_0049fd20 = 0xffffffff;
-  FUN_001954b0();
+  asdMdlBanksReset();
   if (param_1 == 0) {
     mapClearPendingEntries();
     FUN_0026faa4();

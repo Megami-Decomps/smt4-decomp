@@ -15,17 +15,31 @@ struct QuestCenterMain {
 }
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x3f5];
+    u8 f005f19f1; /* 0x3f5 */
+    u8 pad3f6[0x2];
+    u32 f005f19f4; /* 0x3f8 */
+    u32 f005f19f8; /* 0x3fc */
+    u32 f005f19fc; /* 0x400 */
+    u8 f005f1a00; /* 0x404 */
+    u8 pad405[0x4f];
+    s32 f005f1a50; /* 0x454 */
+};
+extern GameStateView g_gameState;
+
 extern QuestCenterMain *DAT_00588c30;
 extern s32 DAT_00588c34;                 /* which quest center was opened */
 extern s32 DAT_00588c38;
 extern s32 DAT_00588c3c;                 /* non-zero: opened from inside another menu */
 extern u8 DAT_00588c2d;
-extern u8 DAT_005f19f1;                  /* a deferred place change is pending */
-extern u8 DAT_005f1a00;
-extern u32 DAT_005f19f4;
-extern u32 DAT_005f19f8;
-extern u32 DAT_005f19fc;
-extern s32 DAT_005f1a50;
+
+
+
+
+
+
 extern u8 DAT_005f1b70;
 extern s32 DAT_005f1b74;
 void asdOperatorDelete(void *block);
@@ -55,12 +69,12 @@ void scriptPanelRelease(void);
 /* Applies the pending place change, if any. */
 static void applyPendingPlace(void)
 {
-    if (DAT_005f19f1 != 0) {
-        DAT_005f19f1 = 0;
+    if (g_gameState.f005f19f1 != 0) {
+        g_gameState.f005f19f1 = 0;
         DAT_005f1b70 = 0;
-        DAT_005f1a00 = 1;
-        mapPlaceSet(DAT_005f19f4, DAT_005f19f8, DAT_005f19fc);
-        DAT_005f1a50 = 2;
+        g_gameState.f005f1a00 = 1;
+        mapPlaceSet(g_gameState.f005f19f4, g_gameState.f005f19f8, g_gameState.f005f19fc);
+        g_gameState.f005f1a50 = 2;
     }
 }
 
@@ -139,7 +153,7 @@ u32 FUN_00236110(void)
                 asdSequenceRequest(6, NULL, 0);
             }
         }
-        if (DAT_005f19f1 != 0) {
+        if (g_gameState.f005f19f1 != 0) {
             applyPendingPlace();
             asdSequenceRequest(6, NULL, 0);
         }

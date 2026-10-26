@@ -1,37 +1,14 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0018c840` (_code @ 0x18c840, 0x28 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
 
 extern "C" {
-
-int sysFatalBreak(void);
-
-/* stack frame of void: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} void_stack;
-
-/* Supplied declaration required: sysFatalBreak. */
-extern int FUN_001a3010(unsigned int);
-
+s32 FUN_001a3010(u32 id);
+void sysFatalBreak(void);
 
 void FUN_0018c840(void)
-
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  
-  temp_v0 = FUN_001a3010(0x406);
-  temp_v1 = 0;
-  if (temp_v0 < 0) {
-    temp_v1 = -0x375f3004;
-  }
-  if (temp_v0 >= 0 || temp_v0 == temp_v1) {
-    return;
-  }
-  sysFatalBreak();
-  return;
+    s32 result = FUN_001a3010(0x406);
+    if (nnResultIsFailure(result) && result != (s32)0xC8A0CFFC) {
+        sysFatalBreak();
+    }
 }
-
-} /* extern "C" */
+}

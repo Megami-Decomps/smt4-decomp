@@ -62,10 +62,21 @@ struct NpcGameBlock {
 };
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x21];
+    s8 f005f161d; /* 0x021 */
+    u8 pad022[0x1];
+    s8 f005f161f; /* 0x023 */
+    u8 pad024[0x27c];
+    s32 f005f189c; /* 0x2a0 */
+};
+extern GameStateView g_gameState;
+
 extern LmapViewHeight *g_lmapView;
-extern s8 DAT_005f161d;
-extern s8 DAT_005f161f;
-extern s32 DAT_005f189c;
+
+
+
 
 NpcGameBlock *gameFlagsGetBlock(void);
 f32 distSpatial(void);
@@ -97,9 +108,9 @@ static __inline bool npcRunPending(FieldNpc *npc)
 void FUN_00481784(FieldNpc *npc)
 {
     NpcGameBlock *block = gameFlagsGetBlock();
-    if (DAT_005f161d != 0)
+    if (g_gameState.f005f161d != 0)
         return;
-    if (npc->mode != 1 && DAT_005f189c > 0)
+    if (npc->mode != 1 && g_gameState.f005f189c > 0)
         return;
 
     if ((npc->flags & NPC_FLAG_NEAR) != 0) {
@@ -151,9 +162,9 @@ void FUN_00481784(FieldNpc *npc)
     controllerSetPosition((u32)npc->controller->inner);
 
     NpcControllerInner *inner = npc->controller->inner;
-    if (DAT_005f161d != 0) {
+    if (g_gameState.f005f161d != 0) {
         inner->flags |= NPC_VISIBLE_BITS;
-    } else if (DAT_005f161f != 0) {
+    } else if (g_gameState.f005f161f != 0) {
         inner->flags |= NPC_VISIBLE_BITS;
         return;
     } else if ((npc->flags & NPC_FLAG_HIDDEN) != 0) {
@@ -161,7 +172,7 @@ void FUN_00481784(FieldNpc *npc)
     } else {
         return;
     }
-    if (DAT_005f161f != 0)
+    if (g_gameState.f005f161f != 0)
         inner->flags |= NPC_VISIBLE_BITS;
     else if ((npc->flags & NPC_FLAG_HIDDEN) != 0)
         inner->flags &= ~NPC_VISIBLE_BITS;

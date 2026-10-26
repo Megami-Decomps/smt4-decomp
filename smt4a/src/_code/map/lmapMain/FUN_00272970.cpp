@@ -134,11 +134,20 @@ struct LmapGameBlock {
 };
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x21];
+    u8 f005f161d; /* 0x021 */
+    u8 pad022[0x23d];
+    u8 f005f185b; /* 0x25f */
+};
+extern GameStateView g_gameState;
+
 extern u32 g_handleRegistry;
 extern LmapMainState *g_lmapMainState;
 extern LmapScene *g_lmapScene;
-extern u8 DAT_005f161d;
-extern u8 DAT_005f185b;
+
+
 
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void FUN_002c23cc(s32 value);
@@ -240,8 +249,8 @@ void FUN_00272970(void)
     FUN_002442ac();
     gameBlock->unk7C4 = 0;
     gameBlock->unk15D0 = 0;
-    DAT_005f185b = 0;
-    DAT_005f161d = 0;
+    g_gameState.f005f185b = 0;
+    g_gameState.f005f161d = 0;
     state->unk9360 = 0;
     state->unk9361 = 0;
     state->unk9362 = 0;

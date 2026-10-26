@@ -39,7 +39,12 @@ extern "C" {
 extern MapEnemyState *g_mapEnemy;
 extern LmapViewState *g_lmapView;
 extern LmapSceneState *g_lmapScene;
-extern GameStateWide DAT_005f17fc;
+// The wide-area flag lies inside g_gameState.
+struct GameStateWideView {
+    u8 unk000[0x200];
+    GameStateWide wide;
+};
+extern GameStateWideView g_gameState;
 
 u32 randRange(u32 limit);
 f32 FUN_001bc124(f32 radians);
@@ -66,7 +71,7 @@ u32 FUN_00353200(EnemyPlacement *enemy)
         f32 step;
         f32 radians;
 
-        if (DAT_005f17fc.wideArea != 0) {
+        if (g_gameState.wide.wideArea != 0) {
             step = 25.0f;
         } else {
             step = 35.0f;
@@ -80,7 +85,7 @@ u32 FUN_00353200(EnemyPlacement *enemy)
                 angle = angle + offset * step;
             }
         }
-        if (DAT_005f17fc.wideArea != 0) {
+        if (g_gameState.wide.wideArea != 0) {
             if (attempt > 12) {
                 distance = (f32)randRange(50) + 500.0f;
             } else {

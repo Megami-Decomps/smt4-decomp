@@ -6,7 +6,7 @@
 #include "classes/Obj55ca08.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" int asdMemFreeNonNull(void *block);
+#include "AsdSDK/AsdMemUtil.h"
 
 /* IV selection-view base, whose touch interface precedes three state words. */
 class Obj42247c : public BibleView {

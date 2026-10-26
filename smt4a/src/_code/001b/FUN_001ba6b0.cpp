@@ -69,12 +69,12 @@ u32 *FUN_001ba6b0(TextureDescriptor *tex, u32 *cmd, s32 reserve)
         f32 bias = tex->lodBias;
         if (bias != 0.0f && ((*(u32 *)&bias << 1) >> 24) != 0xFF) {
             f32 scaled = (bias + 16.0f) * 256.0f;
-            if (scaled < 0.0f) {
-                lod = (u32)(0.0f + 4096.0f);
-            } else {
+            if (scaled >= 0.0f) {
                 if (scaled >= 8192.0f)
                     scaled = 8191.0f;
                 lod = (scaled >= 4096.0f) ? (u32)(scaled - 4096.0f) : (u32)(scaled + 4096.0f);
+            } else {
+                lod = (u32)(0.0f + 4096.0f);
             }
         }
         lod |= ((u32)tex->lodMin << 16) | ((u32)tex->lodMax << 24);

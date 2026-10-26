@@ -45,7 +45,7 @@ int FUN_003fce08(...);
 int FUN_0040a244(void);
 int resourceOwnerLoadNamed(...);
 int FUN_0040b27c(...);
-int FUN_0040b730(...);
+int playerLoadOutfitPartModel(...);
 int FUN_0040ba38(void);
 
 /* stack frame of void: 7 slot(s), 28 byte(s) */
@@ -128,7 +128,7 @@ extern unsigned int FUN_00409fe8(int, unsigned int);
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
 /* Supplied declaration required: FUN_0040b27c. */
-/* Supplied declaration required: FUN_0040b730. */
+/* Supplied declaration required: playerLoadOutfitPartModel. */
 /* Supplied declaration required: FUN_0040ba38. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: __aeabi_uidivmod. */
@@ -350,19 +350,19 @@ unsigned int FUN_00208c08(void)
         FUN_0040b27c(*(unsigned int *)(temp_v2 + 0x2034),0,*(unsigned int *)(temp_v2 + 0x205c) & 0xffff,7);
       }
       else {
-        FUN_0040b730(*(unsigned int *)(temp_v2 + 0x2034),0,7);
+        playerLoadOutfitPartModel(*(unsigned int *)(temp_v2 + 0x2034),0,7);
       }
       if (*(unsigned int *)(temp_v2 + 0x2060) != 0) {
         FUN_0040b27c(*(unsigned int *)(temp_v2 + 0x2034),1,*(unsigned int *)(temp_v2 + 0x2060) & 0xffff,7);
       }
       else {
-        FUN_0040b730(*(unsigned int *)(temp_v2 + 0x2034),1,7);
+        playerLoadOutfitPartModel(*(unsigned int *)(temp_v2 + 0x2034),1,7);
       }
       if (*(unsigned int *)(temp_v2 + 0x2064) != 0) {
         FUN_0040b27c(*(unsigned int *)(temp_v2 + 0x2034),2,*(unsigned int *)(temp_v2 + 0x2064) & 0xffff,7);
       }
       else {
-        FUN_0040b730(*(unsigned int *)(temp_v2 + 0x2034),2,7);
+        playerLoadOutfitPartModel(*(unsigned int *)(temp_v2 + 0x2034),2,7);
       }
     }
     temp_v4 = 7;

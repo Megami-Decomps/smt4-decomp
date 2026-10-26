@@ -1,4 +1,4 @@
-/* NON_MATCHING: Engine record reset is complete; inline primary/secondary reset loops use different register allocation and store scheduling. */
+/* NON_MATCHING: record stores now ascend like retail (no chained float assignment); remaining: retail reloads g_engineRecordList before the pair and secondary loops and numbers the scratch registers differently. */
 #include "common.h"
 
 struct EngineResetRecord {
@@ -37,7 +37,10 @@ struct EngineResetRecord {
         active = 0;
         unk04 = 0;
         unk08 = 0;
-        x = y = z = w = 0.0f;
+        x = 0.0f;
+        y = 0.0f;
+        z = 0.0f;
+        w = 0.0f;
         unk1c = 0;
         unk20 = 0;
         if (primary) { unk22 = 0; }
@@ -106,8 +109,8 @@ extern "C" void FUN_0024ad50()
         g_engineRecordList->records[i].reset(true);
     }
     for (s32 i = 0; i < 17; ++i) {
-        state->pairs[i].first = 0;
-        state->pairs[i].second = 0;
+        g_engineRecordList->pairs[i].first = 0;
+        g_engineRecordList->pairs[i].second = 0;
     }
     for (s32 i = 0; i < 3; ++i) {
         g_engineRecordList->secondary[i].reset(false);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: base-value arguments are retained in registers instead of retail's parameter spills, and result returns are duplicated; 107 vs 105 instructions. */
+/* NON_MATCHING: retail zero-initialises rankAdjustment/extra/skills straight from r8 (mov r8,#0) and orders the cost-pool load after vmov; build uses a temp zero register; 107 vs 108 instructions. */
 #include "shard/PassiveSkill.h"
 #include "shard/PadState.h"
 #include "gamedata/UnitStats.h"
@@ -12,8 +12,8 @@ StatBlock *gameGetUnitRecord(s32 unit);
 void FUN_00283f30(CostSkills *skills, s32 includeSource);
 u32 playerGetSkillRank(u16 skill);
 s32 FUN_00283ebc(const ActiveSkillRecord *skill, u32 rank, u32 kind);
-s32 FUN_003bf53c(s32 unitParameter, s32 rankAdjustment, s32 extra, f32 cost, f32 firstScale, f32 secondScale, f32 passiveScale);
-s32 mathApplyReductionMultiplier(s32 value, s32 rankAdjustment, s32 extra, f32 multiplier);
+s32 FUN_003bf53c(s32 unitParameter, s32 rankAdjustment, u16 extra, f32 cost, f32 firstScale, f32 secondScale, f32 passiveScale);
+s32 mathApplyReductionMultiplier(s32 value, s32 rankAdjustment, u16 extra, f32 multiplier);
 
 // Resolve a skill's fixed or percentage cost, including player rank and passive cost modifiers.
 u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
@@ -29,6 +29,7 @@ u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
         return 0;
     CostSkills skills = {0};
     s32 rankAdjustment = 0;
+    s32 extra = 0;
     s32 passiveBonuses = 0;
     s32 unitParameter;
     if (unitIndex < 0) {
@@ -55,16 +56,16 @@ u32 FUN_00262260(const ActiveSkillRecord *skill, u32 baseValue, s32 unitIndex)
             }
         }
     }
-    u32 result = baseValue;
     u16 packed = cost->fixed;
-    if ((packed & 0xfff) != 4000) {
-        if (!(packed & 0xfff)) {
-            result = 0;
-            if (cost->percent)
-                result = mathApplyReductionMultiplier(baseValue, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(cost->percent)) * 0.01f);
-        } else {
-            result = FUN_003bf53c(unitParameter, rankAdjustment, 0, static_cast<f32>(static_cast<u32>(packed & 0xfff)), 1.0f, 1.0f, DAT_00446d30[passiveBonuses]);
-        }
+    u32 result = 0;
+    if ((packed & 0xfff) == 4000) {
+        result = baseValue;
+    } else if (packed & 0xfff) {
+        result = FUN_003bf53c(unitParameter, rankAdjustment, extra, static_cast<f32>(static_cast<u32>(packed & 0xfff)), 1.0f, 1.0f, DAT_00446d30[passiveBonuses]);
+    } else {
+        u32 percent = cost->percent;
+        if (percent)
+            result = mathApplyReductionMultiplier(baseValue, rankAdjustment, extra, static_cast<f32>(percent) * 0.01f);
     }
     return result;
 }

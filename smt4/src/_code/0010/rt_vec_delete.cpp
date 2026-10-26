@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int rt_vec_dtor(int, unsigned int, unsigned int, unsigned int);
+int __aeabi_vec_dtor(int, unsigned int, unsigned int, unsigned int);
 
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 
 
 void rt_vec_delete(int param_1,unsigned int param_2)
@@ -14,7 +14,7 @@ void rt_vec_delete(int param_1,unsigned int param_2)
 {
 /* irregular: 1 native warning(s); review required */
   if (param_1 != 0) {
-    rt_vec_dtor(param_1,param_2,*(unsigned int *)(param_1 - 8),*(unsigned int *)(param_1 - 4));
+    __aeabi_vec_dtor(param_1,param_2,*(unsigned int *)(param_1 - 8),*(unsigned int *)(param_1 - 4));
   }
   return;
 }

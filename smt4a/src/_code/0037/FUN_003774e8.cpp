@@ -155,7 +155,11 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
               if (((temp_v10 != 0) && (temp_v14 <= *(unsigned char *)(temp_v10 + 0x24))) &&
                  (*(unsigned char *)(temp_v10 + 0x24) <= temp_v16)) {
                 temp_v12 = (unsigned int)*(unsigned char *)(temp_v10 + 0x25);
-                if (temp_v12 != temp_v22) {
+                if (temp_v12 == temp_v22) {
+                  temp_v13 = temp_v15 * 2;
+                  temp_v15 = temp_v15 + 1;
+                  *(unsigned short *)(temp_v21 + temp_v13) = *(unsigned short *)(temp_v10 + 0x20);
+                } else {
                   temp_v18 = temp_v12 != temp_v23;
                   temp_v3 = temp_v23;
                   if (temp_v18) {
@@ -170,11 +174,6 @@ int FUN_003774e8(unsigned int param_1,int param_2,int param_3,int *param_4)
                     temp_v15 = temp_v15 + 1;
                     *(unsigned short *)(temp_v21 + temp_v13) = *(unsigned short *)(temp_v10 + 0x20);
                   }
-                }
-                else {
-                  temp_v13 = temp_v15 * 2;
-                  temp_v15 = temp_v15 + 1;
-                  *(unsigned short *)(temp_v21 + temp_v13) = *(unsigned short *)(temp_v10 + 0x20);
                 }
               }
               temp_v8 = temp_v8 + 1;

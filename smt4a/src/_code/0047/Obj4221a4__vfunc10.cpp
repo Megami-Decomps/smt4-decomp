@@ -1,9 +1,12 @@
-/* NON_MATCHING: Retail loads tint colors into r0-r4 and schedules the nine-slice call arguments differently. */
+/* NON_MATCHING: the rectangle reads now match (windowRegionGet* linker-inlined getters); only the scheduling of the constant call arguments differs. */
 #include "classes/Obj4221a4.h"
 #include "common.h"
 
 
 extern "C" {
+s16 windowRegionGetWidth(const Obj4221a4 *window);
+s16 windowRegionGetLeft(const Obj4221a4 *window);
+s16 windowRegionGetTop(const Obj4221a4 *window);
 
 void FUN_00344cd0(u32 target, s32 x, s32 y, s32 center, s32 topLeft, s32 top, s32 topRight,
                   s32 left, s32 right, s32 bottomLeft, s32 bottom, s32 colorC, s32 colorA,
@@ -14,9 +17,9 @@ void FUN_00344cd0(u32 target, s32 x, s32 y, s32 center, s32 topLeft, s32 top, s3
 
 void Obj4221a4::vfunc10(u32 alpha)
 {
-    s32 colorC = region.getWidth();
-    s32 colorA = region.getLeft();
-    s32 colorB = region.getTop();
+    s32 colorC = windowRegionGetWidth(this);
+    s32 colorA = windowRegionGetLeft(this);
+    s32 colorB = windowRegionGetTop(this);
 
     if (!ready) {
         colorC = -1;

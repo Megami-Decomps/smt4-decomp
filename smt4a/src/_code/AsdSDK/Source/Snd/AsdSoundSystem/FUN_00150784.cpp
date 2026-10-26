@@ -1,4 +1,4 @@
-/* NON_MATCHING: sound system shutdown (Apocalypse layout view); loops/stop-and-detach helper written structurally, register allocation not compared with retail */
+/* NON_MATCHING: sound system shutdown (Apocalypse layout view); the system base is now held in one register as in retail, but the aux-slot loop (retail tests the index against 0 and 1) and the voice-handle loop are still structured differently */
 #include "common.h"
 
 /* A playing sound handle: stopped and detached from its slot. */
@@ -62,53 +62,54 @@ static __inline void asdSoundHandleRelease(s32 *handle)
 /* Stops every sound and releases the sound system's buffers. */
 void FUN_00150784(void)
 {
-    if (nw_snd_SoundArchive_IsAvailable(&g_asdSoundSystem) == 0)
+    AsdSoundSystemApocView *system = &g_asdSoundSystem;
+    if (nw_snd_SoundArchive_IsAvailable(system) == 0)
         return;
 
-    u8 *slotA = g_asdSoundSystem.currentSlotA;
+    u8 *slotA = system->currentSlotA;
     if (slotA != NULL) {
         for (u8 i = 0; i < 0x10; i++)
             asdSoundHandleRelease((s32 *)(slotA + 0x20 + i * 4));
     }
     for (u8 i = 0; i < 2; i++) {
-        u8 *aux = g_asdSoundSystem.auxSlots[i];
+        u8 *aux = system->auxSlots[i];
         s32 handle = aux != NULL ? *(s32 *)(aux + 0x20) : 0;
         if (aux != NULL && handle != 0) {
             asdSoundObjectStop(handle, 0);
             nw_snd_SoundHandle_DetachSound((s32 *)(aux + 0x20));
         }
     }
-    SoundHandleSlot *voices = g_asdSoundSystem.voiceHandles;
-    for (s32 i = 0; i < g_asdSoundSystem.voiceHandleCount && voices != NULL; i++)
+    SoundHandleSlot *voices = system->voiceHandles;
+    for (s32 i = 0; i < system->voiceHandleCount && voices != NULL; i++)
         asdSoundHandleRelease(&voices->handle);
-    u8 *slotB = g_asdSoundSystem.currentSlotB;
+    u8 *slotB = system->currentSlotB;
     if (slotB != NULL) {
         for (u8 i = 0; i < 4; i++)
             asdSoundHandleRelease((s32 *)(slotB + 0x20 + i * 4));
     }
 
-    g_asdSoundSystem.currentSlotA = NULL;
+    system->currentSlotA = NULL;
     FUN_00169614(0xFFFFFFFF);
     FUN_00154890(0xFFFFFFFF);
-    if (g_asdSoundSystem.hasStream == 1) {
+    if (system->hasStream == 1) {
         for (u8 i = 0; i < 0x10; i++)
-            asdSoundHandleRelease(&g_asdSoundSystem.streamHandles[i].handle);
-        FUN_001b6668(g_asdSoundSystem.streamQueue, g_asdSoundSystem.streamWork);
-        FUN_00173a94(g_asdSoundSystem.streamSource);
-        asdMemFree(g_asdSoundSystem.streamBuffer);
+            asdSoundHandleRelease(&system->streamHandles[i].handle);
+        FUN_001b6668(system->streamQueue, system->streamWork);
+        FUN_00173a94(system->streamSource);
+        asdMemFree(system->streamBuffer);
     }
-    g_asdSoundSystem.archiveLoaded = 0;
-    FUN_00173c1c(g_asdSoundSystem.animPlayer);
-    FUN_00173c7c(g_asdSoundSystem.streamPlayer);
-    uiTextStateReset(&g_asdSoundSystem);
-    if (g_asdSoundSystem.workBuffer != NULL)
-        asdMemFree(g_asdSoundSystem.workBuffer);
-    if (g_asdSoundSystem.infoBlock != NULL)
-        asdMemFree(g_asdSoundSystem.infoBlock);
-    if (g_asdSoundSystem.dataManagerBuffer != NULL)
-        asdMemFree(g_asdSoundSystem.dataManagerBuffer);
-    if (g_asdSoundSystem.playerBuffer != NULL)
-        asdMemFree(g_asdSoundSystem.playerBuffer);
+    system->archiveLoaded = 0;
+    FUN_00173c1c(system->animPlayer);
+    FUN_00173c7c(system->streamPlayer);
+    uiTextStateReset(system);
+    if (system->workBuffer != NULL)
+        asdMemFree(system->workBuffer);
+    if (system->infoBlock != NULL)
+        asdMemFree(system->infoBlock);
+    if (system->dataManagerBuffer != NULL)
+        asdMemFree(system->dataManagerBuffer);
+    if (system->playerBuffer != NULL)
+        asdMemFree(system->playerBuffer);
 }
 
 } /* extern "C" */

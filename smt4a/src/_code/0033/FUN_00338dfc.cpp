@@ -4,6 +4,15 @@
 #include "mapnavi/naviMain.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x4ac];
+    int f005f1aa8; /* 0x4ac */
+    int f005f1aac; /* 0x4b0 */
+    int f005f1ab0; /* 0x4b4 */
+};
+extern GameStateView g_gameState;
+
 
 int textFormatBuffer(...);
 int gameStatePickAvoidingRecent(void);
@@ -32,9 +41,9 @@ extern unsigned int uRam005f0cd1; /* 0x5f0cd1 */
 extern unsigned short uRam005f0cd5; /* 0x5f0cd5 */
 extern unsigned char uRam005f0cd7; /* 0x5f0cd7 */
 extern int DAT_005f0cf4; /* 0x5f0cf4 */
-extern int DAT_005f1aa8; /* 0x5f1aa8 */
-extern int DAT_005f1aac; /* 0x5f1aac */
-extern int DAT_005f1ab0; /* 0x5f1ab0 */
+
+
+
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: textFormatBuffer. */
@@ -83,8 +92,8 @@ void FUN_00338dfc(void)
   else {
     temp_v0 = playerHasFlagBit(5);
     if ((temp_v0 != 0) || (temp_v0 = playerHasFlagBit(9), temp_v0 != 0)) {
-      if (DAT_005f1aa8 == 0) {
-        DAT_005f1aa8 = 5;
+      if (g_gameState.f005f1aa8 == 0) {
+        g_gameState.f005f1aa8 = 5;
         temp_v0 = playerHasFlagBit(5);
         if (temp_v0 != 0) {
           temp_v0 = randRange(1);
@@ -103,12 +112,12 @@ void FUN_00338dfc(void)
       }
     }
     else {
-      DAT_005f1aa8 = 0;
+      g_gameState.f005f1aa8 = 0;
     }
 LAB_00338f14:
     temp_v8 = 100.0f;
     temp_v10 = 0x42c80000;
-    if (DAT_005f1aac == 0) {
+    if (g_gameState.f005f1aac == 0) {
       temp_v0 = FUN_003e0024();
       temp_v1 = FUN_003e0154();
       temp_v2 = gameSlotTableFindFree();
@@ -133,7 +142,7 @@ LAB_00338f14:
       if ((int)in_s0 >= 0x42960000) {
         temp_v0 = playerHasFlagBit(5);
         if ((temp_v0 == 0) && (temp_v0 = playerHasFlagBit(9), temp_v0 == 0)) {
-          DAT_005f1aac = 5;
+          g_gameState.f005f1aac = 5;
           temp_v0 = randRange(1);
           temp_v0 = temp_v0 + 1;
 LAB_00339020:
@@ -144,7 +153,7 @@ LAB_00339020:
         }
       }
       else if ((int)in_s0 < 0x42200001) {
-        DAT_005f1aac = 5;
+        g_gameState.f005f1aac = 5;
         temp_v0 = randRange(1);
         temp_v0 = temp_v0 + 3;
         goto LAB_00339020;
@@ -161,8 +170,8 @@ LAB_00339020:
       temp_v6 = 1.25f;
     }
     FUN_002c263c();
-    if (((int)in_s0 >= 0x41700000) && (DAT_005f1ab0 == 0)) {
-      DAT_005f1ab0 = 5;
+    if (((int)in_s0 >= 0x41700000) && (g_gameState.f005f1ab0 == 0)) {
+      g_gameState.f005f1ab0 = 5;
       FUN_002c263c();
       temp_v0 = randRange(4);
       temp_v0 = (int)(temp_v9[temp_v0] * in_s0 * temp_v6 * temp_v8);
@@ -189,14 +198,14 @@ LAB_00339020:
     textFormatBuffer(0x5f0cc1,&LAB_00339258,temp_v0 + 1);
   }
 LAB_003391f8:
-  if (0 < DAT_005f1aa8) {
-    DAT_005f1aa8 = DAT_005f1aa8 - 1;
+  if (0 < g_gameState.f005f1aa8) {
+    g_gameState.f005f1aa8 = g_gameState.f005f1aa8 - 1;
   }
-  if (0 < DAT_005f1aac) {
-    DAT_005f1aac = DAT_005f1aac - 1;
+  if (0 < g_gameState.f005f1aac) {
+    g_gameState.f005f1aac = g_gameState.f005f1aac - 1;
   }
-  if (0 < DAT_005f1ab0) {
-    DAT_005f1ab0 = DAT_005f1ab0 - 1;
+  if (0 < g_gameState.f005f1ab0) {
+    g_gameState.f005f1ab0 = g_gameState.f005f1ab0 - 1;
   }
   return;
 }

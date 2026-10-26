@@ -4,7 +4,6 @@
 extern "C" {
 
 int bufferHandleRelease(u32 texture);
-int asdMemFreeNonNull(void *object);
 
 typedef struct ObjectVtbl {
     /* 0x0 */ void *unk0;

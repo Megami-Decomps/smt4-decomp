@@ -1,24 +1,17 @@
-#include "romwright_types.h"
-#include "AsdSDK/Source/Gfx/Text/AsdText.h"
+#include "common.h"
 
 extern "C" {
+extern u8 DAT_004c4404[];
+extern u8 DAT_004c45a4[];
 
-
-unsigned int FUN_00287704(int param_1)
-
+u8 *FUN_00287704(s32 index)
 {
-  unsigned int temp_v0;
-  
-  if (param_1 == 0) {
-    temp_v0 = 0x4c4404;
-  }
-  else if (param_1 == 1) {
-    temp_v0 = 0x4c45a4;
-  }
-  else {
-    temp_v0 = 0;
-  }
-  return temp_v0;
+    if (index == 0) {
+        return DAT_004c4404;
+    }
+    if (index == 1) {
+        return DAT_004c45a4;
+    }
+    return NULL;
 }
-
-} /* extern "C" */
+}

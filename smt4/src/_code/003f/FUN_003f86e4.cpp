@@ -1,14 +1,13 @@
-/* NON_MATCHING: packed-key temporaries use fewer saved registers and a different material-load schedule. */
+/* NON_MATCHING: the depth conversion now matches retail (one float argument: (1.0f - depth) * 16777215.0f); the packed-key temporaries use fewer saved registers and a different material-load schedule. */
 /* Packs depth, material, raster mode and layer into a 64-bit model sorting key. */
 #include "gfx/ModelSortKey.h"
 
 extern "C" {
 __softfp u64 FUN_00235804(f32 depth);
 
-u64 FUN_003f86e4(u32 unused, const ModelSortEntry *entry, u32 priority,
-                 f32 start, f32 end, f32 scale)
+u64 FUN_003f86e4(u32 unused, const ModelSortEntry *entry, u32 priority, f32 depth)
 {
-    u64 key = FUN_00235804((end - start) * scale) & 0xFFFFFF;
+    u64 key = FUN_00235804((1.0f - depth) * 16777215.0f) & 0xFFFFFF;
     ModelSortNode *node = entry->node;
     ModelSortModel *model = entry->model;
     if (node != NULL && model != NULL) {

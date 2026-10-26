@@ -1,10 +1,12 @@
-/* NON_MATCHING: retail keeps target-kind constants in saved registers and compares shifted bitfields; the compiler materializes the extracted field and reuses the target-flag pointer. */
+/* NON_MATCHING: target-kind compare now matches retail (bitfield); retail shares one `requiresTargetSelection = 1` store between all arms and reads the flag back through a pool-constant offset, ours duplicates the store and reuses the flag pointer. */
 #include "battle/btlUI.h"
 #include "gamedata/DataTable40.h"
 
 struct BattleActionDetails {
     /* 0x00 */ u8 unk00[0x28];
-    /* 0x28 */ u32 flags;
+    /* 0x28 */ u32 unk28Low : 5;
+    /* 0x28 */ u32 targetKind : 4;
+    /* 0x28 */ u32 unk28High : 23;
 };
 
 struct BattleItemDetails {
@@ -35,14 +37,14 @@ void btlUiRouteSelectedAction(void)
     BtlUiObjC *selection = &ui->objC;
     FUN_0028cb40(selection, &kind, &id);
     if (kind == 2 || kind == 3) {
-        u32 target = (reinterpret_cast<BattleActionDetails *>(dataTable40FindById(id))->flags & 0x1ff) >> 5;
-        if (target == 2 || target == 3 || target == 4)
+        BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(dataTable40FindById(id));
+        if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)
             ui->panelState.requiresTargetSelection = 1;
     } else if (kind == 8) {
         u16 action = dataTable08Sub1GetRecord(id)->action;
         if (action) {
-            u32 target = (reinterpret_cast<BattleActionDetails *>(dataTable40FindById(action))->flags & 0x1ff) >> 5;
-            if (target == 2 || target == 3 || target == 4)
+            BattleActionDetails *details = reinterpret_cast<BattleActionDetails *>(dataTable40FindById(action));
+            if (details->targetKind == 2 || details->targetKind == 3 || details->targetKind == 4)
                 ui->panelState.requiresTargetSelection = 1;
         } else if ((dataTable08Sub1GetRecord(id)->target & 0x7f) != 1) {
             ui->panelState.requiresTargetSelection = 1;

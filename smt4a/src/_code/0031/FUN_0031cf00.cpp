@@ -38,8 +38,8 @@ extern "C" RecordView* FUN_0031cf00(void)
 {
     RecordView* result = 0;
     GameDataView* data = g_gameDataBlocks.data;
-    RecordLookupView* lookup = &data->lookup;
     s32 identifier = data->unk27E94;
+    RecordLookupView* lookup = &data->lookup;
 
     if (identifier != 0) {
         for (s32 slot = 0; slot < 24; ++slot) {

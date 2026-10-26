@@ -1,26 +1,11 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00508384` (_code @ 0x508384, 0x18 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail pushes only lr (no r4 pad) around the call; same instructions otherwise. */
+#include "common.h"
 
 extern "C" {
+s32 FUN_005083a0(u32 value, s32 mode);
 
-int FUN_005083a0(unsigned int, int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp4; /* 0x4: local_4 */
-} param_1_stack;
-
-/* Supplied declaration required: FUN_005083a0. */
-
-
-void FUN_00508384(unsigned int param_1)
-
+u32 FUN_00508384(u32 value)
 {
-/* irregular: 2 native warning(s); review required */
-  FUN_005083a0(param_1,0x4001);
-                    /* WARNING: Treating indirect jump as return */
-  return;
+    return FUN_005083a0(value, 0x4001) != 0;
 }
-
-} /* extern "C" */
+}

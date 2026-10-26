@@ -1,4 +1,4 @@
-/* NON_MATCHING: the move step branch compiles to 201 rows against retail's 231 (the clamp compares and the duration divide are scheduled differently); the sprite update logic is the same. */
+/* NON_MATCHING: the move step now divides inside each direction branch like retail (four idivmod calls), but armcc hoists both key-field numerator loads above the first divide where retail reloads them after each store; 211 rows against retail's 231. */
 #include "common.h"
 
 extern "C" {
@@ -101,18 +101,13 @@ s32 FUN_00163aa4(UiSprite *sprite, f32 step)
                 }
             }
         } else {
-            s32 dx;
-            s32 dy;
-
             if (sprite->reversed != 0) {
-                dx = (key->startX - key->endX) * 0x1000;
-                dy = (key->startY - key->endY) * 0x1000;
+                sprite->x += (key->startX - key->endX) * 0x1000 / duration;
+                sprite->y += (key->startY - key->endY) * 0x1000 / duration;
             } else {
-                dx = (key->endX - key->startX) * 0x1000;
-                dy = (key->endY - key->startY) * 0x1000;
+                sprite->x += (key->endX - key->startX) * 0x1000 / duration;
+                sprite->y += (key->endY - key->startY) * 0x1000 / duration;
             }
-            sprite->x += dx / duration;
-            sprite->y += dy / duration;
 
             key = &sprite->moves[sprite->moveIndex];
             s32 from = key->startX;

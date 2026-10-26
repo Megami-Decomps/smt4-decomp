@@ -1,4 +1,4 @@
-/* NON_MATCHING: connector coordinate scheduling and floating-point register allocation differ. */
+/* NON_MATCHING: retail loads start[0] separately inside each branch (built hoists it) and orders two pool loads differently; the bend point, join point and call arguments match. */
 #include "gfx/RoutedConnector.h"
 #include "title/titleMain.h"
 #include <math.h>
@@ -15,29 +15,32 @@ void FUN_00342e5c(const RoutedConnectorState* state, const f32* start, const f32
     renderCtxSelectTexture(g_titleScene, 0);
     f32 bendX;
     f32 pixelOffset = 0.0f;
+    f32 pixelOffsetY = 0.0f;
     f32 bendY = end[1];
     if (state->reverse) {
         bendX = end[0] - 16.0f;
         if (fabsf(bendX - start[0]) < 1.0f)
             bendX = start[0];
-        f32 vertical = fabsf(end[1] - start[1]);
+        f32 vertical = fabsf(bendY - start[1]);
         if (vertical - fabsf(bendX - start[0]) < 0.0f) {
-            bendX = start[0] + vertical;
+            bendX = vertical + start[0];
             pixelOffset = -0.5f;
         }
     } else {
         bendX = end[0] + 16.0f;
         if (fabsf(bendX - start[0]) < 1.0f)
             bendX = start[0];
-        f32 vertical = fabsf(end[1] - start[1]);
+        f32 vertical = fabsf(bendY - start[1]);
         if (vertical - fabsf(bendX - start[0]) < 0.0f) {
             bendX = start[0] - vertical;
             pixelOffset = 0.5f;
         }
     }
-    FUN_002d5900(color, color, start[0], start[1], pixelOffset + bendX, bendY,
+    f32 joinX = pixelOffset + bendX;
+    f32 joinY = pixelOffsetY + bendY;
+    FUN_002d5900(color, color, start[0], start[1], bendX, bendY,
                   (256 - fade) * (1.0f / 256.0f), 1.0f);
-    FUN_002d5900(color, color, bendX + pixelOffset, bendY, end[0], end[1],
+    FUN_002d5900(color, color, joinX, joinY, end[0], end[1],
                   (256 - fade) * (1.0f / 256.0f), 1.0f);
 }
 }

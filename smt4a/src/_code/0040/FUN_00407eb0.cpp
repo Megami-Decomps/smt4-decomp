@@ -77,13 +77,13 @@ void FUN_00407eb0(CameraController *ctrl, s32 index, s32 immediate)
     } else {
         ctrl->progress = 0;
         ctrl->moving = 1;
-        if (index != 0) {
+        if (index == 0) {
+            ctrl->destination.position = ctrl->home.position;
+            ctrl->destination.look = ctrl->home.look;
+        } else {
             CameraNode *node = ctrl->source->table->nodes[index];
             ctrl->destination.position = node->position;
             ctrl->destination.look = *node->look;
-        } else {
-            ctrl->destination.position = ctrl->home.position;
-            ctrl->destination.look = ctrl->home.look;
         }
         ctrl->step.position.x = (ctrl->destination.position.x - ctrl->current.position.x) * 0.1f;
         ctrl->step.position.y = (ctrl->destination.position.y - ctrl->current.position.y) * 0.1f;

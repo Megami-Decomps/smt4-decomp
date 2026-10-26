@@ -114,7 +114,7 @@ void FUN_001326b4(SceneDrawJob *job, u32 stateA, u32 stateB, s32 dumpCommands)
 
         _ZSt8for_eachIP18DrawCallbackRecord20DrawCallbackDispatchET0_T_S4_S3_(job->records->begin, job->records->end, functor);
         u32 *end = cursor != NULL ? g_commandBufferCursor : NULL;
-        if (cursor != NULL && end != NULL && end != cursor) {
+        if (cursor != NULL && end != NULL && cursor != end) {
             s32 length = 0;
             s32 words = 0;
 

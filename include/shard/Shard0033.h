@@ -67,7 +67,7 @@ typedef struct ObjB {
     /* 0x137E */ u8 unk137E;
     /* 0x137F */ s8 unk137F;
     /* 0x1380 */ u8 unk1380[0x1];
-    /* 0x1381 */ u8 unk1381;
+    /* 0x1381 */ s8 unk1381;
     /* 0x1382 */ u8 unk1382[0x2];
     /* 0x1384 */ u8 unk1384;
     /* 0x1385 */ u8 unk1385[0x7];

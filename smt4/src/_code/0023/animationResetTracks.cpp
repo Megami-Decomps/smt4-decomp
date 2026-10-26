@@ -1,4 +1,4 @@
-/* NON_MATCHING: track and owner register allocation, callback argument loads, and policy-address scheduling differ. */
+/* NON_MATCHING: track/owner pointer registers (r4/r5), the VFP constant registers (s16/s17) and the callback pointer load order inside the reset differ. */
 #include "common.h"
 extern "C" {
 typedef f32 (*AnimationPolicy)(void *context, f32 start, f32 end, f32 frame);
@@ -13,22 +13,25 @@ static __inline void resetAnimation(AnimationState *state)
     state->frame = frame;
     state->dirty = 1;
 }
+static void setPlaybackPolicy(AnimationState *state, AnimationPolicy policy)
+{
+    state->policy = policy;
+    state->dirty = 1;
+}
 /* Reset both indexed animation tracks and select their playback policy. */
 void animationResetTracks(AnimationOwner *owner, u32 index, s32 loop)
 {
-    AnimationState *state = owner->primary[index];
-    if (state != NULL) {
-        resetAnimation(state);
+    AnimationState *primary = owner->primary[index];
+    if (primary != NULL) {
+        resetAnimation(primary);
         owner->primary[index]->speed = 1.0f;
-        owner->primary[index]->policy = loop ? nw_anim_PlayPolicy_Loop : mathClampFloat;
-        owner->primary[index]->dirty = 1;
+        setPlaybackPolicy(owner->primary[index], loop == 0 ? mathClampFloat : nw_anim_PlayPolicy_Loop);
     }
-    state = owner->secondary[index];
-    if (state != NULL) {
-        resetAnimation(state);
+    AnimationState *secondary = owner->secondary[index];
+    if (secondary != NULL) {
+        resetAnimation(secondary);
         owner->secondary[index]->speed = 1.0f;
-        owner->secondary[index]->policy = loop ? nw_anim_PlayPolicy_Loop : mathClampFloat;
-        owner->secondary[index]->dirty = 1;
+        setPlaybackPolicy(owner->secondary[index], loop == 0 ? mathClampFloat : nw_anim_PlayPolicy_Loop);
     }
 }
 }

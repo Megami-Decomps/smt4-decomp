@@ -44,13 +44,15 @@ struct BtlEncounterGlobalsA {
         } transition;
     };
     /* 0x58 */ u64 queuedStateMask;
+    /* 0x60 */ u64 initializedMask;
 };
 typedef char BtlEncounterGlobalsAMaskOffsetCheck[
     offsetof(BtlEncounterGlobalsA, initialStateMask) == 0x30 &&
     offsetof(BtlEncounterGlobalsA, queuedStateMask) == 0x58 &&
-    sizeof(BtlEncounterGlobalsA) == 0x60 ? 1 : -1];
+    offsetof(BtlEncounterGlobalsA, initializedMask) == 0x60 &&
+    sizeof(BtlEncounterGlobalsA) == 0x68 ? 1 : -1];
 typedef char BtlEncounterGlobalsAWorkOffsetCheck[
-    offsetof(BtlEncounterGlobalsA, work) == 0 && sizeof(BtlEncounterGlobalsA) == 0x60 ? 1 : -1];
+    offsetof(BtlEncounterGlobalsA, work) == 0 && sizeof(BtlEncounterGlobalsA) == 0x68 ? 1 : -1];
 typedef char BtlEncounterGlobalsATransitionMaskOffsetCheck[
     offsetof(BtlEncounterGlobalsA, transition.mask) == 0x40 &&
     offsetof(BtlEncounterGlobalsA, transition.words) == 0x40 ? 1 : -1];

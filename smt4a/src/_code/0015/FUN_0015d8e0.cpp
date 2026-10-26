@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps one indirect call per message type (branch tree, `ldr r1, [r0, #off]; blx r1` in each arm and the zero result in r4); the build merges the arms into a conditional load of the handler and a single call. */
+/* NON_MATCHING: retail keeps one indirect call per message type (`ldr r1, [r0, #off]; blx r1; b end` in each arm); the build if-converts the arms into a conditional handler load and a single call (the zero result in r4 now matches). */
 #include "common.h"
 
 /* A message handed to the handler table: the first word is its type. */
@@ -24,6 +24,7 @@ extern MessageHandlers s__E_E_E_E_E_E_E_E_E_E_0059dab4;
 // Dispatches the message in the request to the handler registered for its type.
 u32 FUN_0015d8e0(HandlerMessage **request)
 {
+    u32 result = 0;
     HandlerMessage *message = *request;
     switch (message->type) {
     case 0x20000002:
@@ -42,7 +43,7 @@ u32 FUN_0015d8e0(HandlerMessage **request)
         s__E_E_E_E_E_E_E_E_E_E_0059dab4.onType21(message);
         break;
     }
-    return 0;
+    return result;
 }
 
 }

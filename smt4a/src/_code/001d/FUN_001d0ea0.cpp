@@ -17,9 +17,6 @@ void FUN_001d0ea0(void *output, AocSystemA *system, const char *path)
         s32 length = libc_strlen(path);
         if (length > 8) {
             length = 8;
-        } else if (length <= 0) {
-            _ZN21WindowOperationResultC1Eh(output, 0);
-            return;
         }
         for (s32 index = 0; index < length; ++index) {
             s8 character = static_cast<s8>(path[index]);

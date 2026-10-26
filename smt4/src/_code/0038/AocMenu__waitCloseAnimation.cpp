@@ -2,7 +2,6 @@
 #include "ui/SceneWindowWork.h"
 
 extern "C" {
-TimedState *timeInitializeActiveState(TimedState *);
 void FUN_0027ea28(void *job, u32 message, s32 argument, s32 flags);
 void FUN_0023392c(SceneWindowWork *, s32, s32);
 void FUN_0027e9c0(void *job);
@@ -15,8 +14,7 @@ s8 uiSpriteGetCompletionState(const SceneWindowCursorView *cursor);
 void AocMenu::waitCloseAnimation()
 {
     SceneWindowWork * work = reinterpret_cast<SceneWindowWork *>(this);
-    TimedState time;
-    timeInitializeActiveState(&time);
+    RequestParameters time;
     void *job = &work->dialogJob;
     switch (work->transition.phase) {
     case 0:

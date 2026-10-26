@@ -1,20 +1,16 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0015d240` (_code @ 0x15d240, 0x14 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: mid-flow mov r0, r0 (nop) in a leaf with no lr save; not a removed call, cause unknown. */
+#include "common.h"
+
+struct Entry68 {
+    u8 unk00[0x68];
+    u32 handle;
+};
 
 extern "C" {
+void FUN_0015e3a4(u32 handle, u32 value);
 
-int FUN_0015e3a4(unsigned int, unsigned int);
-
-/* Supplied declaration required: FUN_0015e3a4. */
-
-
-void FUN_0015d240(int param_1,int param_2,unsigned int param_3)
-
+void FUN_0015d240(Entry68 **table, s32 index, u32 value)
 {
-/* irregular: 1 native warning(s); review required */
-  FUN_0015e3a4(*(unsigned int *)(*(int *)(param_1 + param_2 * 4) + 0x68),param_3);
-  return;
+    FUN_0015e3a4(table[index]->handle, value);
 }
-
-} /* extern "C" */
+}

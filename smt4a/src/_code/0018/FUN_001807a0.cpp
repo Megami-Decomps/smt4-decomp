@@ -1,4 +1,4 @@
-/* NON_MATCHING: scalar-track narrow-index casts, reverse-byte loads and interpolation VFP allocation differ from retail. */
+/* NON_MATCHING: scalar-track narrow-index casts and interpolation VFP allocation differ from retail (retail also hoists the constant 1 and keeps r5 live). */
 #include "ui/UiSpriteState.h"
 
 static inline void uiBeginSpriteScalarKey(UiSpriteState *sprite, s16 index, s8 reverse)
@@ -17,12 +17,13 @@ extern "C" void FUN_001807a0(UiSpriteState *sprite, f32 rate)
         const UiSpriteScalarKey *key = &sprite->verticalKeys[sprite->mode];
         u16 duration = (u32)((f32)(u32)key->duration / rate);
         if (sprite->verticalTrack.frame >= duration) {
+            s8 reverse = sprite->verticalTrack.reverse;
             if (key->loop) {
-                sprite->unk20 = sprite->verticalTrack.reverse ? key->last : key->first;
+                sprite->unk20 = reverse ? key->last : key->first;
                 sprite->verticalTrack.frame = 0;
                 return;
             }
-            sprite->unk20 = sprite->verticalTrack.reverse ? key->first : key->last;
+            sprite->unk20 = reverse ? key->first : key->last;
             if (sprite->sequence.enabled && sprite->sequenceSteps &&
                 sprite->sequenceSteps[sprite->sequence.step].key != -1) {
                 UiSpriteSequenceStep *steps = sprite->sequenceSteps;

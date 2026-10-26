@@ -1727,7 +1727,7 @@
 0x002c6614 FUN_002c6614 between
 0x002c6644 __aeabi_errno_addr name
 0x002c66c4 FUN_002c66c4 linker
-0x002c66cc rt_vec_dtor name
+0x002c66cc __aeabi_vec_dtor name
 0x002c6a20 __aeabi_uidivmod name
 0x002fea94 mobiclipProcessDestroy name
 0x0032b9e0 mobiclipPollUntilReady name
@@ -1968,8 +1968,8 @@
 0x003576cc FUN_003576cc between
 0x003576d8 FUN_003576d8 between
 0x00357700 FUN_00357700 between
-0x00357728 nn_os_Thread_Thread_sub_object name
-0x00357754 FUN_00357754 between
+0x00357728 _ZN10NnOsThreadD1Ev between
+0x00357754 _ZN10NnOsHandleD1Ev between
 0x0035777c FUN_0035777c between
 0x0035778c FUN_0035778c between
 0x003577ec FUN_003577ec between

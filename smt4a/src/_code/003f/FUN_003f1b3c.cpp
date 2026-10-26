@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail places the tier-0 and tier-99 blocks after the loop's exit tails, and duplicates the two delete tails; armcc lays the branches out in source order and merges the tails (138 vs 140 rows). */
+/* NON_MATCHING: retail places the tier-99 block before the tier-0 block after the loop's exit tails and duplicates the two delete tails; armcc lays the blocks out in test order and merges the tails (141 vs 142 rows). */
 #include "common.h"
 #include "battle/btlMain.h"
 #include "gamedata/DataTable.h"
@@ -65,20 +65,22 @@ void FUN_003f1b3c(BtlMainStateA *state, s32 section, s32 kind, u32 *effect, u32 
             EffectChoice *record = matching[i];
             s16 tier = record->tier;
 
-            if (tier != 0) {
-                if (tier != 99) {
-                    if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && lastTier != 99 && lastTier <= tier
-                        && (tier == 1 || gameFlagIsSet(record->flagId))) {
-                        candidates[candidateCount++] = record;
-                        lastTier = record->tier;
-                    }
-                } else if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && gameFlagIsSet(record->flagId)) {
+            if (tier == 0) {
+                if (lastTier != 99) {
+                    candidates[candidateCount++] = record;
+                    lastTier = 0;
+                }
+            } else if (tier == 99) {
+                if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && gameFlagIsSet(record->flagId)) {
                     candidates[candidateCount++] = record;
                     lastTier = 99;
                 }
-            } else if (lastTier != 99) {
-                candidates[candidateCount++] = record;
-                lastTier = 0;
+            } else {
+                if ((state->stateFlags64.bits & g_btlMain.choiceMask) == 0 && lastTier != 99 && lastTier <= tier
+                    && (tier == 1 || gameFlagIsSet(record->flagId))) {
+                    candidates[candidateCount++] = record;
+                    lastTier = record->tier;
+                }
             }
         }
         if (candidateCount != 0) {

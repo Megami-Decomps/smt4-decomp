@@ -1,4 +1,4 @@
-/* NON_MATCHING: last-key address loads and packed interpolation VFP scheduling differ. */
+/* NON_MATCHING: the last-key address and the combined key compare now match; the packed interpolation VFP scheduling differs. */
 #include "shard/AnimCurve.h"
 
 extern "C" const PackedAnimKeyWide *FUN_003f89f8(const PackedAnimCurveWide *curve, f32 frame);
@@ -7,8 +7,9 @@ extern "C" const PackedAnimKeyWide *FUN_003f89f8(const PackedAnimCurveWide *curv
 extern "C" f32 FUN_003f9654(const PackedAnimCurveWide *curve, f32 frame)
 {
     const PackedAnimKeyWide *key = FUN_003f89f8(curve, frame);
+    const PackedAnimKeyWide *last = &curve->keys[curve->keyCount - 1];
     f32 keyFrame = curve->timeScale * (f32)key->frame;
-    if (keyFrame == frame || key == &curve->keys[curve->keyCount - 1]) {
+    if (keyFrame == frame || key == last) {
         return curve->valueBase + (f32)key->value * curve->valueScale;
     }
     f32 nextFrame = curve->timeScale * (f32)key[1].frame;

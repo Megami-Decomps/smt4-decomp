@@ -1,34 +1,23 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00146704` (_code @ 0x146704, 0x3c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the r4/r5 assignment of the handle pointer and the result differs (retail keeps the result in r4). */
+#include "nn/svc.h"
+#include "nn/Result.h"
 
 extern "C" {
+extern u32 DAT_0040b730;
+void asdFatalError(void);
 
-int asdFatalError(void);
-int software_interrupt(int);
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: asdFatalError. */
-
-
-int FUN_00146704(int *param_1)
-
+s32 FUN_00146704(u32 *handle)
 {
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = *param_1;
-  if (temp_v0 == 0) {
-    temp_v0 = -0x275efc09;
-  }
-  else {
-    software_interrupt(0x23);
-    if (temp_v0 < 0) {
-      asdFatalError();
+    s32 result;
+    if (*handle == 0) {
+        result = 0xD8A103F7;
+    } else {
+        result = nn::svc::CloseHandle(*handle);
+        if (nnResultIsFailure(result)) {
+            asdFatalError();
+        }
     }
-    *param_1 = 0;
-  }
-  return temp_v0;
+    *handle = DAT_0040b730;
+    return result;
 }
-
-} /* extern "C" */
+}

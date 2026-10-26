@@ -1,4 +1,4 @@
-/* NON_MATCHING: next-handle store is unconditional; null-head unlink block and saved context registers differ. */
+/* NON_MATCHING: retail predicates the next-handle store (cmp; strcc) where this builds a conditional min plus unconditional store; two saved registers are swapped. */
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "gfx/HandleRegistry.h"
 
@@ -42,11 +42,11 @@ void FUN_00123254(s32 count, const u32 *handles)
                 if (handle < g_gfxAllocateCallback.nextBufferId) {
                     g_gfxAllocateCallback.nextBufferId = handle;
                 }
-                if (previous != NULL) {
-                    previous->next = node->next;
-                } else {
+                if (previous == NULL) {
                     BufferNode *head = reinterpret_cast<BufferNode *>(g_asdGfxContext.bufferRegistry.buckets[handle & 31]);
                     g_asdGfxContext.bufferRegistry.buckets[handle & 31] = head->next;
+                } else {
+                    previous->next = node->next;
                 }
                 if (g_gfxAllocateCallback.release != NULL) {
                     g_gfxAllocateCallback.release(0x10000, 0x100, 0, node);

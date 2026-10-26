@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the visibility refresh; the build allocates the registers of the entry scan and of the slot loop differently (retail keeps the list holder in r5, g_lmapMainState in r7 and the visibility table in r9/sl). */
+/* NON_MATCHING: readable rewrite of the visibility refresh; the slot flag is an s8 (retail splits its address as +0x4F00/[0x84]) and the entry scan/slot loops are still laid out differently (retail tests the slot loop at the bottom, keeps the list holder in r5, g_lmapMainState in r7 and the visibility table in r9/sl). */
 #include "common.h"
 #include "classes/Obj4209cc.h"
 
@@ -23,7 +23,7 @@ struct SlotSourceList {
 
 struct LmapSlotA {
     u8 unk00[0x84];
-    u8 registered;  // 0x84
+    s8 registered;  // 0x84
     u8 unk85[3];
 };
 

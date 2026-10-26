@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite of the shaking particle update; retail clears the first five words with integer stores before loading the 0.0f constant and keeps different sign/scale values in s17-s20/r5-r8 than the build. */
+/* NON_MATCHING: readable rewrite of the shaking particle update; the clear now matches retail's five integer stores; the delay-path store order and the sign/scale values kept in s17-s20/r5-r8 still differ. */
 #include "common.h"
 
 // A particle that jitters around its anchor: amplitude range, current velocity, and its lifetime counters.
@@ -22,11 +22,9 @@ void FUN_003d8f24(ShakeParticle *particle)
     s32 frame = particle->frame;
     if (lifetime != -1 && lifetime <= frame) {
         if (particle != NULL) {
-            particle->amplitudeX = 0.0f;
-            particle->amplitudeY = 0.0f;
-            particle->velocityX = 0.0f;
-            particle->velocityY = 0.0f;
-            *reinterpret_cast<u32 *>(&particle->lifetime) = 0;
+            u32 *words = reinterpret_cast<u32 *>(particle);
+            for (s32 i = 0; i < 5; ++i)
+                words[i] = 0;
         }
         return;
     }
@@ -57,12 +55,12 @@ void FUN_003d8f24(ShakeParticle *particle)
     if (oldX == zero && oldY == zero) {
         particle->velocityX = magnitudeX * (f32)randomX;
         particle->velocityY = magnitudeY * (f32)randomY;
-    } else if (oldX != zero && (oldY == zero || randBetween(0, 1) != 0)) {
-        particle->velocityX = magnitudeX * (f32)keepX;
-        particle->velocityY = magnitudeY * (f32)randomY;
-    } else {
+    } else if (!(oldX != zero && (oldY == zero || randBetween(0, 1) != 0))) {
         particle->velocityX = magnitudeX * (f32)randomX;
         particle->velocityY = magnitudeY * (f32)keepY;
+    } else {
+        particle->velocityX = magnitudeX * (f32)keepX;
+        particle->velocityY = magnitudeY * (f32)randomY;
     }
     if (particle->frame < 0x7ffe) {
         particle->frame++;

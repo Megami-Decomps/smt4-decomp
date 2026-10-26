@@ -105,6 +105,15 @@ struct GameStateJumpRequest {
     /* 0x10 */ f32 values[5];
 };
 
+/* The departure state block inside the game state (at 0x41C). */
+struct GameStateDepartBlock {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 unk50;
+    /* 0x54 */ u8 unk54[0x50];
+    /* 0xA4 */ u16 unkA4;
+    /* 0xA6 */ u16 unkA6;
+};
+
 /* The global game state block (Shin Megami Tensei IV). Only the fields read so far are named. */
 typedef struct GameState {
     /* 0x000 */ s32 unk000;
@@ -113,7 +122,13 @@ typedef struct GameState {
         /* 0x004 */ u32 unk004Value;
     };
     /* 0x008 */ u32 currentObjectId;
-    /* 0x00C */ u8 unk00C[0xC];
+    union {
+        /* 0x00C */ u8 unk00C[0xC];
+        struct {
+            /* 0x00C */ u8 unk00CBeforeResume[8];
+            /* 0x014 */ s32 mode; /* 1-3: what the resume point records */
+        } resume;
+    };
     /* 0x018 */ s8 unk18;
     union {
         /* 0x019 */ u8 unk019[0xD];
@@ -126,6 +141,7 @@ typedef struct GameState {
     /* 0x027 */ s8 unk27;
     union {
         /* 0x028 */ u8 unk028[0x2C];
+        /* 0x028 */ u32 bgmId;
         struct {
             /* 0x028 */ u8 unk028BeforeGroups[0x14];
             /* 0x03C */ s32 activeGroupId;
@@ -150,7 +166,9 @@ typedef struct GameState {
     /* 0x0A0 */ f32 unkA0;
     /* 0x0A4 */ u32 unkA4;
     /* 0x0A8 */ u32 unkA8;
-    /* 0x0AC */ u8 unk0AC[0x99];
+    /* 0x0AC */ u8 unk0AC[0x71];
+    /* 0x11D */ s8 bgmReleased;
+    /* 0x11E */ u8 unk11E[0x27];
     /* 0x145 */ u8 scriptPending;
     /* 0x146 */ u8 unk146[2];
     /* 0x148 */ u32 scriptId;
@@ -234,6 +252,10 @@ typedef struct GameState {
             /* 0x370 */ u8 unk370[0x88];
             /* 0x3F8 */ GameStateJumpRequest request;
         } jump;
+        struct {
+            /* 0x370 */ u8 unk370[0xAC];
+            GameStateDepartBlock block;
+        } departReset;
     };
 } GameState;
 typedef char GameStateCampCleanupOffsetCheck[
@@ -241,6 +263,8 @@ typedef char GameStateCampCleanupOffsetCheck[
     offsetof(GameState, encounterSourcePosition) == 0x180 &&
     offsetof(GameState, encounterMarkerPosition) == 0x1A8 &&
     offsetof(GameState, encounterCount) == 0x1B8 &&
+    offsetof(GameState, departReset.block) == 0x41C && offsetof(GameState, departReset.block.unk50) == 0x46C &&
+    offsetof(GameState, departReset.block.unkA4) == 0x4C0 && offsetof(GameState, departReset.block.unkA6) == 0x4C2 &&
     sizeof(GameState) == 0x678 ? 1 : -1];
 
 /* The global game state block (Apocalypse). Only the fields read so far are named. */
@@ -265,7 +289,7 @@ struct GameStateA {
         struct {
             /* 0x019 */ u8 unk019[8];
             u8 primary;   /* 0x021 */
-            /* 0x022 */ u8 unk022;
+            /* 0x022 */ u8 loading;
             u8 secondary; /* 0x023 */
             /* 0x024 */ u8 unk024[3];
         } controllerFlags;
@@ -291,6 +315,10 @@ struct GameStateA {
             /* 0x034 */ u8 unk034BeforeReset[8];
             /* 0x03C */ u32 value3C;
         } entryPoolReset;
+        struct {
+            /* 0x034 */ u8 unk034BeforeDepart[0x1F8];
+            /* 0x22C */ u8 mapLoadActive; /* set while a departure loads the destination map */
+        } depart;
         struct {
             /* 0x034 */ u8 unk034[0x36E];
             /* 0x3A2 */ s8 unk3A2;
@@ -447,6 +475,11 @@ struct GameStateA {
             /* 0x100 */ MapVector target;
             /* 0x10C */ f32 fov;
         } scriptCamera;
+        struct {
+            /* 0x034 */ u8 unk034BeforeMenuRequests[0x178];
+            /* 0x1AC */ s16 primary;
+            /* 0x1AE */ s16 secondary;
+        } menuRequests;
     };
     /* 0x4cc */ u8 mapRequested;
     /* 0x4cd */ u8 unk4cd[3];

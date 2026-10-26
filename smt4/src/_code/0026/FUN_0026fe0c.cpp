@@ -6,7 +6,7 @@
 #include "gamedata/DataTableAccess_AocTable23.h"
 
 extern "C" {
-extern MapDepartTarget DAT_0049fd14;
+extern GameState g_gameState;
 SaveWork *gameGetMapBlock(void);
 s32 dataTable23Type1CountWithAoc(void);
 static __inline s32 findSpawnDestination(s32 map, s32 area, u32 entrance)
@@ -37,7 +37,7 @@ void FUN_0026fe0c(void)
         f32 parameter;
     };
     SavedMapView *saved = reinterpret_cast<SavedMapView *>(gameGetMapBlock());
-    TargetView *target = reinterpret_cast<TargetView *>(&DAT_0049fd14);
+    TargetView *target = reinterpret_cast<TargetView *>(&g_gameState.jump.request);
     switch (saved->kind) {
     case 0: {
         target->selection.group = 1;

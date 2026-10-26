@@ -23,13 +23,14 @@ u32 *asdNgcCheckWords(const u32 *words, s32 count)
     g_asdNgc.unk10d8 = 0;
     g_asdNgc.wordCount = count;
     g_asdNgc.capacity = ASD_NGC_MAX_WORDS;
-    if (count > ASD_NGC_MAX_WORDS) {
-        n = ASD_NGC_MAX_WORDS;
-    } else {
-        n = count;
+    if (!(count > ASD_NGC_MAX_WORDS)) {
+        s32 unused = ASD_NGC_MAX_WORDS - count;
+        n = ASD_NGC_MAX_WORDS - unused;
         if (n == 0) {
             return NULL;
         }
+    } else {
+        n = ASD_NGC_MAX_WORDS;
     }
 
     for (i = 0; i < ASD_NGC_MAX_WORDS; i++) {

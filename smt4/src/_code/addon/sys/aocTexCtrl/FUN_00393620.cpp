@@ -1,4 +1,4 @@
-/* NON_MATCHING: texture-list header copy and allocation/node register scheduling differ. */
+/* NON_MATCHING: header copy (two 8-word VFP blocks) and the reloaded list header now match; retail keeps the node header size 12 in a saved register and one more saved register overall, the node construction is scheduled differently. */
 #include "addon/sys/aocTexCtrl.h"
 #include "AsdSDK/AsdDebug.h"
 #include <stddef.h>
@@ -49,7 +49,8 @@ void FUN_00393620(AocTexCtrl *control, const AocTextureFile *file)
     *header = *source;
     const AocTextureSerializedNode *input = reinterpret_cast<const AocTextureSerializedNode *>(file->header + 1);
     AocTextureListNode *previous = NULL;
-    for (s32 index = 0; index < header->nodeCount; ++index) {
+    AocTextureListHeader *list = reinterpret_cast<AocTextureListStateView *>(control->state)->header;
+    for (s32 index = 0; index < list->nodeCount; ++index) {
         asdDebugTrace(DAT_003ff788, 97);
         AocTextureListNode *node = static_cast<AocTextureListNode *>(asdMemAlloc(0x100, 0x100, 0, sizeof(*node), 1));
         node->id = input->id;

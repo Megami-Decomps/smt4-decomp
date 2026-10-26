@@ -1,4 +1,4 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00158a40` (_code @ 0x158a40, 0xec bytes) from smt4a.cxi.
+/* NON_MATCHING: romwright 0.5.0 decompilation of `nn_gr_CTR_Shader_SetupBinary` (_code @ 0x158a40, 0xec bytes) from smt4a.cxi.
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "romwright_types.h"
 
@@ -15,7 +15,7 @@ int nn_gr_CTR_Shader_MakeShaderConstCommandCache(void);
 /* Supplied declaration required: nn_gr_CTR_Shader_MakeShaderConstCommandCache. */
 
 
-void FUN_00158a40(unsigned int *param_1,int param_2,unsigned int param_3,int param_4)
+void nn_gr_CTR_Shader_SetupBinary(unsigned int *param_1,int param_2,unsigned int param_3,int param_4)
 
 {
 /* irregular: 2 native warning(s); review required */

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same loops and tests; retail recomputes the spawn-bit word address (`block + (i >> 5) * 4 + 0x7C8`) at every access and spills the random pick to the stack (push {r3,...}, no ip), while armcc here hoists block+0x7C8 into r9, keeps the pick in a register (push includes ip) and orders the bit-index arithmetic differently. */
+/* NON_MATCHING: bit-set addressing now recomputes block+0x7C8 per access like retail; retail still spills the random pick to the stack (push {r3,...}), keeps the constant 1 in fp with a separate `lsl` before the bic, and tests the first loop's kind as cmp 0/beq, cmp 6, cmpne 14. */
 #include "common.h"
 
 /* A spawn record of table 49 (only the fields the refresh reads). */
@@ -19,8 +19,18 @@ struct GameFlagBlock {
     /* 0xD4C */ u32 flags[1];
 };
 
-static inline void setBit(u32 *bits, s32 index) { bits[index / 32] |= 1 << (index % 32); }
-static inline void clearBit(u32 *bits, s32 index) { bits[index / 32] &= ~(1 << (index % 32)); }
+static inline void setSpawnBit(GameFlagBlock *block, s32 index)
+{
+    s32 word = index / 32;
+    s32 bit = index % 32;
+    block->spawned[word] |= 1 << bit;
+}
+static inline void clearSpawnBit(GameFlagBlock *block, s32 index)
+{
+    s32 word = index / 32;
+    s32 bit = index % 32;
+    block->spawned[word] &= ~(1 << bit);
+}
 static inline bool testBit(const u32 *bits, s32 index) { return (bits[index / 32] & (1 << (index % 32))) != 0; }
 
 extern "C" {
@@ -31,7 +41,8 @@ s32 randRange(u32 limit);
 
 static inline bool takesPartInPick(const SpawnRecord *record)
 {
-    return record->kind == 0 || record->kind == 6 || record->kind == 14;
+    s32 kind = record->kind;
+    return kind == 0 || kind == 6 || kind == 14;
 }
 
 /* Rebuilds the spawn bits of one area: every record of the area is cleared, then one of the
@@ -44,7 +55,7 @@ void FUN_003b9720(s32 area, s32 sub)
     for (s32 i = 0; i < dataTableGetRecordFortyNine(); i++) {
         SpawnRecord *record = FUN_003689d0(i);
         if (record->area != -1 && record->area == area && record->sub == sub) {
-            clearBit(block->spawned, i);
+            clearSpawnBit(block, i);
             if (takesPartInPick(record))
                 candidates++;
         }
@@ -59,12 +70,12 @@ void FUN_003b9720(s32 area, s32 sub)
             continue;
         if (record->gateFlag != 0) {
             if (!testBit(gameFlagsGetBlock()->flags, (s16)record->gateFlag))
-                setBit(block->spawned, i);
+                setSpawnBit(block, i);
         } else if (seen == pick) {
-            setBit(block->spawned, i);
+            setSpawnBit(block, i);
         }
         if (record->forceFlag != 0)
-            setBit(block->spawned, i);
+            setSpawnBit(block, i);
         seen++;
     }
 }

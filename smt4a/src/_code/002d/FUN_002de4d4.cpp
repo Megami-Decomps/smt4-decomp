@@ -15,7 +15,14 @@ struct QuadMtx34 {
 #define QUAD_KIND 2
 
 extern "C" {
-extern s32 DAT_005f180c;   /* counts the quads queued */
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x210];
+    s32 f005f180c; /* 0x210 */
+};
+extern GameStateView g_gameState;
+
+
 
 void gameFlagsGetBlock(void);
 void nn_math_ARMv6_VEC3TransformAsm_2AD44C(QuadVec3 *destination, const QuadMtx34 *matrix, const QuadVec3 *source);
@@ -68,7 +75,7 @@ void FUN_002de4d4(s16 id, f32 x, f32 y, f32 z)
         corners[i].z += z;
     }
     mapCollisionQueueQuad(QUAD_KIND, 0, id);
-    DAT_005f180c++;
+    g_gameState.f005f180c++;
 }
 
 } /* extern "C" */

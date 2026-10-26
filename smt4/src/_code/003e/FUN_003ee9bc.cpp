@@ -69,7 +69,7 @@ extern u32 DAT_004738b8;
 void FUN_00361934(void *);
 void _ZN9Obj420fd0D1Ev(void *);
 void FUN_003573a0(void *);
-void nn_os_Thread_Thread_sub_object(void *);
+void _ZN10NnOsThreadD1Ev(void *);
 void entry(void);
 void __aeabi_vec_ctor_nocookie_nodtor(void *, void (*ctor)(void *), u32 elementSize, u32 count);
 void FUN_002ad314(f32 *numerator, f32 *denominator, u32 mode);
@@ -98,7 +98,7 @@ void FUN_003ee9bc(void)
 
     DAT_00473888.flagWord = 0;
     DAT_00473888.flag = 1;
-    __aeabi_atexit(&DAT_00473888.flagWord, nn_os_Thread_Thread_sub_object, (void *)entry);
+    __aeabi_atexit(&DAT_00473888.flagWord, _ZN10NnOsThreadD1Ev, (void *)entry);
 
     DAT_004ef858.first = -1;
     DAT_004ef858.second = -1;

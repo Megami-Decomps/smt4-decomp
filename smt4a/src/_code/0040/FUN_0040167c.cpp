@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler emits an explicit reverse loop rather than rt_vec_dtor. */
+/* NON_MATCHING: compiler emits an explicit reverse loop rather than __aeabi_vec_dtor. */
 #include "common.h"
 struct SoundHandle { u32 handle; };
 struct SoundOwner { u8 unk00[32]; SoundHandle handles[16]; };

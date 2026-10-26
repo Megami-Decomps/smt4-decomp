@@ -3,6 +3,23 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x32];
+    unsigned char f005f162e; /* 0x032 */
+    u8 pad033[0x71];
+    unsigned int f005f16a0; /* 0x0a4 */
+    unsigned int f005f16a4; /* 0x0a8 */
+    unsigned int f005f16a8; /* 0x0ac */
+    unsigned int f005f16ac; /* 0x0b0 */
+    unsigned int f005f16b0; /* 0x0b4 */
+    float f005f16b4; /* 0x0b8 */
+    unsigned int f005f16b8; /* 0x0bc */
+    u8 pad0c0[0x19e];
+    unsigned char f005f185a; /* 0x25e */
+};
+extern GameStateView g_gameState;
+
 
 int sysPlaySe(int);
 int slotSetRequest(...);
@@ -34,15 +51,15 @@ typedef struct {
 
 extern int g_lmapView; /* 0x5806a4 */
 extern int g_lmapScene; /* 0x581288 */
-extern unsigned char DAT_005f162e; /* 0x5f162e */
-extern unsigned int DAT_005f16a0; /* 0x5f16a0 */
-extern unsigned int DAT_005f16a4; /* 0x5f16a4 */
-extern unsigned int DAT_005f16a8; /* 0x5f16a8 */
-extern unsigned int DAT_005f16ac; /* 0x5f16ac */
-extern unsigned int DAT_005f16b0; /* 0x5f16b0 */
-extern float DAT_005f16b4; /* 0x5f16b4 */
-extern unsigned int DAT_005f16b8; /* 0x5f16b8 */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
+
+
+
+
+
+
+
+
+
 
 /* Supplied declaration required: soundVolumeSettingSet. */
 extern unsigned int soundVolumeSettingGet(void);
@@ -110,7 +127,7 @@ void FUN_0036785c(void)
     if (temp_v2 < 0x36) {
       temp_v6 = 0.017453292f;
       if (temp_v2 == 0x32) {
-        DAT_005f185a = 0;
+        g_gameState.f005f185a = 0;
         *(unsigned int *)(g_lmapView + 0xc) = 2;
         *(unsigned int *)(temp_v1 + 0x54) = 5;
         *(unsigned int *)(temp_v1 + 0x58) = 0x40400000;
@@ -167,7 +184,7 @@ void FUN_0036785c(void)
           return;
         }
         FUN_0033abd4();
-        switch(DAT_005f162e) {
+        switch(g_gameState.f005f162e) {
         case 0:
           temp_v7 = 0x10002c4;
           FUN_003d4ed8(temp_v7);
@@ -216,14 +233,14 @@ LAB_00367d2c:
         if (temp_v2 != 1) {
           if (temp_v2 == 2) {
             *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-            FUN_00233e10(1,DAT_005f16ac);
+            FUN_00233e10(1,g_gameState.f005f16ac);
             temp_v1 = FUN_004d0584();
             if (temp_v1 != 0) {
-              FUN_003b5714(DAT_005f16a0,DAT_005f16a4,DAT_005f16a8);
+              FUN_003b5714(g_gameState.f005f16a0,g_gameState.f005f16a4,g_gameState.f005f16a8);
               temp_v1 = g_lmapScene;
-              *(unsigned int *)(g_lmapScene + 0xa0) = DAT_005f16b0;
-              *(float *)(temp_v1 + 0xa4) = DAT_005f16b4 - 500.0f;
-              *(unsigned int *)(temp_v1 + 0xa8) = DAT_005f16b8;
+              *(unsigned int *)(g_lmapScene + 0xa0) = g_gameState.f005f16b0;
+              *(float *)(temp_v1 + 0xa4) = g_gameState.f005f16b4 - 500.0f;
+              *(unsigned int *)(temp_v1 + 0xa8) = g_gameState.f005f16b8;
               *(unsigned int *)(temp_v1 + 0xac) = *(unsigned int *)(temp_v1 + 0x50);
               *(unsigned int *)(temp_v1 + 4) = 0x32;
               *(unsigned int *)(temp_v1 + 8) = 0;
@@ -238,7 +255,7 @@ LAB_00367d2c:
                 temp_v1 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 0x54) = 0;
                 *(unsigned int *)(temp_v1 + 0x58) = 0x40a00000;
-                FUN_00233e10(0,DAT_005f16ac);
+                FUN_00233e10(0,g_gameState.f005f16ac);
                 mapIfReleaseSlot3();
                 temp_v1 = g_lmapScene;
                 *(unsigned int *)(g_lmapScene + 4) = 0x5a;
@@ -249,7 +266,7 @@ LAB_00367d2c:
         }
         else {
           *(int *)(g_lmapScene + 8) = *(int *)(g_lmapScene + 8) + 1;
-          FUN_00233e10(1,DAT_005f16ac);
+          FUN_00233e10(1,g_gameState.f005f16ac);
           temp_v1 = g_lmapScene;
           if (*(int *)(g_lmapScene + 8) >= 3) {
             temp_v2 = *(int *)(g_lmapScene + 4);
@@ -271,9 +288,9 @@ LAB_00367d2c:
       temp_v1 = g_lmapScene;
       temp_v9 = 180.0f;
       *(float *)(g_lmapScene + 0x50) = temp_v4;
-      temp_v0 = DAT_005f16b8;
-      temp_v5 = DAT_005f16b4;
-      *(unsigned int *)(temp_v1 + 0x28) = DAT_005f16b0;
+      temp_v0 = g_gameState.f005f16b8;
+      temp_v5 = g_gameState.f005f16b4;
+      *(unsigned int *)(temp_v1 + 0x28) = g_gameState.f005f16b0;
       *(float *)(temp_v1 + 0x2c) = temp_v5;
       *(unsigned int *)(temp_v1 + 0x30) = temp_v0;
       temp_v5 = (temp_v4 + 180.0f) * temp_v6;
@@ -287,7 +304,7 @@ LAB_00367d2c:
       FUN_00303460(10);
       *(unsigned int *)(g_lmapView + 0xb0) = 0xffffffff;
       sysPlaySe(0xdd);
-      FUN_00233e10(1,DAT_005f16ac);
+      FUN_00233e10(1,g_gameState.f005f16ac);
       FUN_001bc124();
       FUN_001bbf0c();
       FUN_00246014();

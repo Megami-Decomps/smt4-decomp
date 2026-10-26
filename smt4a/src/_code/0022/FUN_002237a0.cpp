@@ -5,6 +5,17 @@
 #include "code/Code0015.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x2e8];
+    int f005f18e4; /* 0x2e8 */
+    u8 pad2ec[0x20];
+    int f005f1908; /* 0x30c */
+    u8 pad310[0xe2];
+    unsigned char f005f19ee; /* 0x3f2 */
+};
+extern GameStateView g_gameState;
+
 
 int FUN_001628c0(...);
 int eventQueueAddUnique(...);
@@ -21,9 +32,9 @@ typedef struct {
 } void_stack;
 
 extern int *g_popupState; /* 0x58104c */
-extern int DAT_005f18e4; /* 0x5f18e4 */
-extern int DAT_005f1908; /* 0x5f1908 */
-extern unsigned char DAT_005f19ee; /* 0x5f19ee */
+
+
+
 
 extern int randRange(unsigned int);
 extern int saveSlotFindSelected(void);
@@ -57,7 +68,7 @@ void FUN_002237a0(void)
   temp_v3 = 0;
   switch(*g_popupState) {
   case 0:
-    DAT_005f19ee = 0;
+    g_gameState.f005f19ee = 0;
     FUN_00312af0();
   default:
     break;
@@ -75,14 +86,14 @@ void FUN_002237a0(void)
         mapIfStartNavigation(piVar2[6],*piVar1,1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
-        DAT_005f19ee = 1;
+        g_gameState.f005f19ee = 1;
         goto LAB_002238e8;
       }
     }
     else {
 LAB_002238e8:
       if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     temp_v2 = popupHasActiveValue();
@@ -105,14 +116,14 @@ LAB_002238e8:
         mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
-        DAT_005f19ee = 1;
+        g_gameState.f005f19ee = 1;
         goto LAB_002239b8;
       }
     }
     else {
 LAB_002239b8:
       if (g_popupState[1] >= 6) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     temp_v2 = popupHasActiveValue();
@@ -135,14 +146,14 @@ LAB_002239b8:
         mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
-        DAT_005f19ee = 1;
+        g_gameState.f005f19ee = 1;
         goto LAB_00223a7c;
       }
     }
     else {
 LAB_00223a7c:
       if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     temp_v2 = popupHasActiveValue();
@@ -173,14 +184,14 @@ LAB_00223a7c:
         mapIfStartNavigation(piVar2[6],piVar2[5],1,0,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
-        DAT_005f19ee = 1;
+        g_gameState.f005f19ee = 1;
         goto LAB_00223b4c;
       }
     }
     else {
 LAB_00223b4c:
       if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     temp_v2 = popupHasActiveValue();
@@ -203,12 +214,12 @@ LAB_00223b4c:
         mapIfStartNavigation(piVar2[6],piVar2[5],0,0,1);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
-        DAT_005f19ee = 1;
+        g_gameState.f005f19ee = 1;
         goto LAB_00223cf4;
       }
       temp_v2 = popupHasActiveValue();
       if (temp_v2 == 0) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     else {
@@ -216,7 +227,7 @@ LAB_00223cf4:
       if (g_popupState[1] >= 6) {
         temp_v2 = popupHasActiveValue();
         if (temp_v2 == 0) {
-          DAT_005f19ee = 0;
+          g_gameState.f005f19ee = 0;
         }
       }
     }
@@ -239,7 +250,7 @@ LAB_00223cf4:
     if (temp_v2 + 1 != 2) {
 LAB_00223df0:
       if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     else if (piVar2[5] != 0) {
@@ -251,7 +262,7 @@ LAB_00223df0:
         temp_v1 = 0x1000212;
       }
       eventQueueAddUnique(temp_v1);
-      DAT_005f19ee = 1;
+      g_gameState.f005f19ee = 1;
       goto LAB_00223df0;
     }
     temp_v2 = popupHasActiveValue();
@@ -275,14 +286,14 @@ LAB_00223df0:
         mapIfStartNavigation(piVar2[6],piVar2[5],1,1,0);
         temp_v1 = FUN_0014af98();
         FUN_001628c0(g_popupState[7],temp_v1,temp_v0,1);
-        DAT_005f19ee = 1;
+        g_gameState.f005f19ee = 1;
         goto LAB_00223c28;
       }
     }
     else {
 LAB_00223c28:
       if ((g_popupState[1] >= 6) && (temp_v2 = popupHasActiveValue(), temp_v2 == 0)) {
-        DAT_005f19ee = 0;
+        g_gameState.f005f19ee = 0;
       }
     }
     temp_v2 = popupHasActiveValue();
@@ -323,26 +334,25 @@ LAB_00223c28:
     break;
   }
   temp_v3 = lmapSceneGetUnk0();
-  if ((temp_v3 == 1) && (DAT_005f18e4 = DAT_005f18e4 + 1, DAT_005f18e4 >= 27000)) {
-    if (*g_popupState != 0) {
-      DAT_005f18e4 = 0;
-    }
-    else {
+  if ((temp_v3 == 1) && (g_gameState.f005f18e4 = g_gameState.f005f18e4 + 1, g_gameState.f005f18e4 >= 27000)) {
+    if (*g_popupState == 0) {
       FUN_00295108();
       FUN_00234880();
-      DAT_005f18e4 = 0;
+      g_gameState.f005f18e4 = 0;
       if ((*g_popupState != 0 && *g_popupState != 0x12) &&
          (temp_v3 = randRange(99), temp_v3 + 1 < 0xb)) {
         popupQueueInsertUnique(0x12);
       }
+    } else {
+      g_gameState.f005f18e4 = 0;
     }
   }
   temp_v3 = countNonZeroRecords24();
   if (temp_v3 >= 6) {
-    DAT_005f1908 = DAT_005f1908 + 1;
+    g_gameState.f005f1908 = g_gameState.f005f1908 + 1;
   }
   else {
-    DAT_005f1908 = 0;
+    g_gameState.f005f1908 = 0;
   }
   return;
 }

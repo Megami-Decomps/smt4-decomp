@@ -1,4 +1,4 @@
-/* NON_MATCHING: constant angle comparisons become integer-bit tests instead of retail VFP tests; in-memory -O2/-O1/-Ospace trials also differ. */
+/* NON_MATCHING: flag/direction flow, field loads and the camera centre (read as an int word, vmov to VFP) match retail; fixed-angle thresholds compile to integer-bit compares (retail vldr+vcmpe) and the camera-relative compares come out with swapped vcmpe operands (named threshold locals fix the operands but hoist the sums). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
@@ -14,7 +14,7 @@ struct BattleDirectionEntry {
 
 struct BattleCameraAngle {
     /* 0x000 */ u8 unk000[0x58c];
-    /* 0x58c */ f32 center;
+    /* 0x58c */ u32 centerBits;
 };
 
 extern "C" {
@@ -27,10 +27,12 @@ void FUN_004fb43c(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction
 void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
 {
     u32 kind = entry->kind;
+    s32 x = entry->x;
+    s32 y = entry->y;
     u32 flags = entry->flags;
-    f32 angle = FUN_004fad68(g_btlAux, kind, entry->x, entry->y);
+    f32 angle = FUN_004fad68(g_btlAux, kind, x, y);
     btlGetMainState();
-    s32 direction = 3;
+    s32 direction;
     switch (kind) {
     case 2:
     case 5:
@@ -45,21 +47,28 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
             direction = 1;
         else if (angle > 0.96500003f)
             direction = 2;
+        else
+            direction = 3;
         break;
     case 6:
     case 7:
     case 11:
+        direction = 3;
         break;
     default:
-        f32 center = g_btlCamera->center;
-        if (angle < center - 17.0f)
+        union { u32 bits; f32 value; } word;
+        word.bits = g_btlCamera->centerBits;
+        f32 center = word.value;
+        if (angle < center + -17.0f)
             direction = 5;
-        else if (angle < center - 9.0f)
+        else if (angle < center + -9.0f)
             direction = 4;
         else if (angle > center + 17.0f)
             direction = 1;
         else if (angle > center + 9.0f)
             direction = 2;
+        else
+            direction = 3;
         break;
     }
     FUN_004fb43c(0, entry->handle, flags, 0, 0, direction, 0);

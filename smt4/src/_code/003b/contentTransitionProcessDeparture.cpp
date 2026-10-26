@@ -1,6 +1,7 @@
-/* NON_MATCHING: -O2 candidate; O3 merges eight priority-bit tests into one pooled mask and changes saved registers/state-store scheduling. */
+/* NON_MATCHING: armcc merges the paired priority-flag tests into pooled masks where retail keeps eight single-bit tst/tsteq tests (the tests are probably bit-field/accessor reads) and shares the state-17 store through r6; the pool word now names g_gameState's jump request. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
+#include "map/mapDepart.h"
 
 struct ContentDepartureWork {
     ContentTransition transition;
@@ -11,7 +12,7 @@ struct ContentDepartureWork {
 };
 
 extern "C" {
-extern s32 DAT_0049fd14;
+extern GameState g_gameState;
 s32 screenFadeIsBusy();
 void FUN_00249b18(u32 party, s32 force);
 void FUN_002a03d8(u32 slot, u32 value);
@@ -38,12 +39,13 @@ void contentTransitionProcessDeparture(ContentTransition *transition)
         }
         return;
     }
-    if (!(flags & 0x200000) && !(flags & 0x40000) &&
-        !(flags & 0x800000) && !(flags & 0x4000000) &&
-        !(flags & 0x1000000) && !(flags & 0x2000000) &&
-        !(flags & 0x8000000) && !(flags & 0x20000000) && (flags & 0x10)) {
+    if ((flags & 0x200000) || (flags & 0x40000)) {
+    } else if ((flags & 0x800000) || (flags & 0x4000000)) {
+    } else if ((flags & 0x1000000) || (flags & 0x2000000)) {
+    } else if ((flags & 0x8000000) || (flags & 0x20000000)) {
+    } else if (flags & 0x10) {
         if (flags & 0x80000) {
-            asdSequenceRequest(DAT_0049fd14 < 100 ? 6 : 8, NULL, 0);
+            asdSequenceRequest(static_cast<s32>(g_gameState.jump.request.first) < 100 ? 6 : 8, NULL, 0);
         } else if (flags & 0x100000) {
             s32 map = (s16)transition->destination.map;
             if (map >= 100) {

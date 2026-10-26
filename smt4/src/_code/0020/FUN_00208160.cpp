@@ -1,4 +1,4 @@
-/* NON_MATCHING: steps the map depart loader (sky model first, then the map model; each from a preloaded resource or from file); written from the decompilation, branch layout and the duplicated model setup not compared with retail */
+/* NON_MATCHING: steps the map depart loader (sky model first, then the map model). The motion selects take their float blend argument (0.0f), the lowered-sky vector is built member-wise (no constant table) and the sky start re-reads g_mapDepartWork like retail; the lowered-sky block layout (retail places it out of line) and register allocation still differ. */
 #include "common.h"
 
 #define DEPART_STATE_SKY_START 0
@@ -60,8 +60,8 @@ DepartModel *asdMdlManagerCreateFromSource(void *source, u32 size, u32 flags);
 DepartModel *asdMdlManagerCreateSecondList(const char *path, u32 flags);
 s32 modelHasLoadedAttachment(DepartModel *model);
 void FUN_002a0428(DepartModel *model, s32 flag);
-void modelSelectPrimaryMotion(DepartMotion *motion, s32 index);
-void modelSelectSecondaryMotion(DepartMotion *motion, s32 index);
+void modelSelectPrimaryMotion(DepartMotion *motion, u32 index, f32 blend);
+void modelSelectSecondaryMotion(DepartMotion *motion, u32 index, f32 blend);
 void nodeSetTranslation(DepartMotion *motion, s32 node, DepartVec3 *translation);
 void textFormatBuffer(char *out, const char *format, ...);
 
@@ -69,19 +69,22 @@ void textFormatBuffer(char *out, const char *format, ...);
 static __inline void departModelStart(DepartModel *model)
 {
     FUN_002a0428(model, 1);
-    modelSelectPrimaryMotion(model->motion, 0);
-    modelSelectSecondaryMotion(model->motion, 0);
+    modelSelectPrimaryMotion(model->motion, 0, 0.0f);
+    modelSelectSecondaryMotion(model->motion, 0, 0.0f);
 }
 
 /* Starts the sky model; one map keeps it far below the camera. */
-static __inline void departSkyStart(MapDepartWork *work)
+static __inline void departSkyStart(void)
 {
-    departModelStart(work->skyModel);
-    if (work->mapId == DEPART_MAP_LOWERED_SKY) {
-        DepartVec3 lowered = { 0.0f, -20000.0f, 0.0f };
-        nodeSetTranslation(work->skyModel->motion, 0, &lowered);
+    departModelStart(g_mapDepartWork->skyModel);
+    if (g_mapDepartWork->mapId == DEPART_MAP_LOWERED_SKY) {
+        DepartVec3 lowered;
+        lowered.x = 0.0f;
+        lowered.y = -20000.0f;
+        lowered.z = 0.0f;
+        nodeSetTranslation(g_mapDepartWork->skyModel->motion, 0, &lowered);
     }
-    work->state = DEPART_STATE_MAP_START;
+    g_mapDepartWork->state = DEPART_STATE_MAP_START;
 }
 
 u32 FUN_00208160(void)
@@ -97,7 +100,7 @@ u32 FUN_00208160(void)
         }
         if (work->skyResource != NULL) {
             work->skyModel = asdMdlManagerCreateFromSource(work->skyResource, work->skyResourceSize, DEPART_SKY_MODEL_FLAGS);
-            departSkyStart(g_mapDepartWork);
+            departSkyStart();
             return 0;
         }
         work->skyId = mapTableGetValue(work->subId);
@@ -112,7 +115,7 @@ u32 FUN_00208160(void)
     case DEPART_STATE_SKY_WAIT:
         if (modelHasLoadedAttachment(work->skyModel) == 0)
             return 0;
-        departSkyStart(work);
+        departSkyStart();
         return 0;
     case DEPART_STATE_MAP_START:
         if (work->mapResource != NULL) {

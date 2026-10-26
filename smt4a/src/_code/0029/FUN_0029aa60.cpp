@@ -3,6 +3,17 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x18];
+    signed char f005f1614; /* 0x018 */
+    u8 pad019[0x244];
+    signed char f005f1859; /* 0x25d */
+    unsigned char f005f185a; /* 0x25e */
+    signed char f005f185b; /* 0x25f */
+};
+extern GameStateView g_gameState;
+
 
 int dialogClose(...);
 int FUN_0025cb1c(void);
@@ -40,10 +51,10 @@ extern int g_lmapView; /* 0x5806a4 */
 extern int g_mapIf; /* 0x58103c */
 extern int DAT_00581040; /* 0x581040 */
 extern int g_lmapScene; /* 0x581288 */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f1859; /* 0x5f1859 */
-extern unsigned char DAT_005f185a; /* 0x5f185a */
-extern signed char DAT_005f185b; /* 0x5f185b */
+
+
+
+
 
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
 #ifndef ROMWRIGHT_SQRT_4_DEFINED
@@ -140,7 +151,7 @@ void FUN_0029aa60(int param_1)
   temp_v30 = 0;
   puVar12 = (unsigned char *)(g_mapIf + 0xcd10);
   piVar9 = (int *)(g_mapIf + 0xcd14);
-  if (DAT_005f1614 != '\0') {
+  if (g_gameState.f005f1614 != '\0') {
     *puVar12 = 1;
     *piVar9 = 2;
   }
@@ -163,8 +174,8 @@ void FUN_0029aa60(int param_1)
   temp_v33 = param_1;
   temp_v8 = gameFlagIsSet(0xc);
   if ((temp_v8 != 0) && (temp_v8 = gameFlagIsSet(0x10), temp_v8 == 0)) {
-    DAT_005f1859 = '\0';
-    DAT_005f185a = 0;
+    g_gameState.f005f1859 = '\0';
+    g_gameState.f005f185a = 0;
     *(unsigned char *)(temp_v5 + 0xcd10) = 1;
   }
   temp_v8 = g_mapIf;
@@ -461,7 +472,7 @@ LAB_0029ad50:
         }
         *(unsigned short *)(temp_v9 + 0x1e8) = 0;
         *(int *)(temp_v9 + 0x20c) = (int)((unsigned long long)temp_v24 >> 0x20);
-        if ((DAT_005f1859 != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
+        if ((g_gameState.f005f1859 != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
           temp_v10 = 5;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -469,7 +480,7 @@ LAB_0029ad50:
       case 2:
         *(unsigned short *)(temp_v9 + 0x1e8) = 0;
         *(float *)(temp_v9 + 0x20c) = temp_v18;
-        if ((DAT_005f1859 != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
+        if ((g_gameState.f005f1859 != '\0') && (temp_v14 = FUN_0029d6f0(), temp_v14 != 0)) {
           temp_v10 = 6;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -495,10 +506,10 @@ LAB_0029ad50:
         FUN_00329dd4(pcVar14);
         *(unsigned int *)(temp_v9 + 0x25c) = 0xffffffff;
         *(short *)(temp_v9 + 0x204) = *(short *)(temp_v9 + 0x204) + 1;
-        if (DAT_005f1859 != '\0') {
+        if (g_gameState.f005f1859 != '\0') {
           temp_v14 = FUN_0029d6f0();
           if (temp_v14 == 0) {
-            if ((DAT_005f1859 == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
+            if ((g_gameState.f005f1859 == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
               *(unsigned int *)(temp_v9 + 0x1e0) = 1;
               break;
             }
@@ -574,7 +585,7 @@ LAB_0029ad50:
         *(short *)(temp_v9 + 0x206) = temp_v6;
         if (temp_v6 >= 0x11) {
           if (*(int *)(temp_v9 + 0x1f0) == 0x22) {
-            DAT_005f1859 = '\0';
+            g_gameState.f005f1859 = '\0';
           }
           else {
             FUN_002d23f0();
@@ -613,7 +624,7 @@ LAB_0029ad50:
              (*(float *)(temp_v9 + 0x240) - *(float *)(temp_v9 + 0x24c)) * 0.25f;
         FUN_00329dd4(pcVar14);
         *(unsigned int *)(temp_v9 + 0x25c) = 0xffffffff;
-        if (DAT_005f1859 == '\0') {
+        if (g_gameState.f005f1859 == '\0') {
           *(unsigned int *)(temp_v9 + 0x1e0) = 1;
           break;
         }
@@ -634,7 +645,7 @@ LAB_0029ad50:
           *(unsigned int *)(temp_v9 + 0x1e0) = 3;
           *(unsigned short *)(temp_v9 + 0x204) = 0;
         }
-        else if ((DAT_005f1859 == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
+        else if ((g_gameState.f005f1859 == '\0') || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)) {
           *(unsigned int *)(temp_v9 + 0x1e0) = 1;
         }
         break;
@@ -704,7 +715,7 @@ LAB_0029ad50:
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
         if (((temp_v14 != -3 && temp_v14 != -2) && (temp_v14 != -1 && temp_v14 != 1)) &&
-           ((DAT_005f1859 == '\0' || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)))) {
+           ((g_gameState.f005f1859 == '\0' || (temp_v14 = FUN_0029d6f0(), temp_v14 == 0)))) {
           temp_v10 = 2;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -897,7 +908,7 @@ LAB_0029ad50:
           temp_v10 = 0xff;
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
-        if (DAT_005f185b != '\0') {
+        if (g_gameState.f005f185b != '\0') {
           temp_v10 = 0x11;
           *(unsigned int *)(temp_v9 + 0x1e0) = temp_v10;
         }
@@ -1344,7 +1355,7 @@ joined_r0x0029d070:
           temp_v10 = 0xff;
         }
         *(unsigned int *)(temp_v9 + 0x25c) = temp_v10 | *(unsigned int *)(temp_v9 + 0x25c);
-        if (DAT_005f185b == '\0') {
+        if (g_gameState.f005f185b == '\0') {
           *(unsigned int *)(temp_v9 + 0x1e0) = 6;
         }
         break;
@@ -1421,7 +1432,7 @@ joined_r0x0029d070:
         temp_v6 = *(short *)(temp_v9 + 0x206) + 2;
         *(short *)(temp_v9 + 0x206) = temp_v6;
         if (temp_v6 == 0x19) {
-          DAT_005f1859 = '\0';
+          g_gameState.f005f1859 = '\0';
         }
         if (*(short *)(temp_v9 + 0x206) >= 0x21) {
           temp_v10 = 6;

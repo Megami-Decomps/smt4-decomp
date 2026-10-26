@@ -15,21 +15,21 @@ extern "C" {
 
 extern GameGlobalsA g_gameGlobals; /* 0x588fd0 */
 
-void FUN_0040b730(u32 handle, s32 mode, s32 arg);
+void playerLoadOutfitPartModel(u32 handle, s32 mode, s32 arg);
 void gameStateChange(s32 state);
 
-/* Calls FUN_0040b730 on the data block's handle with mode 0, 1 or 2, then switches to state 7. */
+/* Calls playerLoadOutfitPartModel on the data block's handle with mode 0, 1 or 2, then switches to state 7. */
 void FUN_0038b57c(s32 mode)
 {
     switch (mode) {
     case 0:
-        FUN_0040b730(g_gameGlobals.data->handle, 0, 7);
+        playerLoadOutfitPartModel(g_gameGlobals.data->handle, 0, 7);
         break;
     case 1:
-        FUN_0040b730(g_gameGlobals.data->handle, 1, 7);
+        playerLoadOutfitPartModel(g_gameGlobals.data->handle, 1, 7);
         break;
     case 2:
-        FUN_0040b730(g_gameGlobals.data->handle, 2, 7);
+        playerLoadOutfitPartModel(g_gameGlobals.data->handle, 2, 7);
         break;
     }
     gameStateChange(7);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: same loads and arithmetic; armcc schedules the pool-constant loads (map/engine pointers, magic divisor) and the limit/result registers differently */
+/* NON_MATCHING: now written against g_gameState (limit/minimum/result fields; pool anchor g_gameState+0x200 matches); armcc schedules the pool-constant loads (map/engine pointers, magic divisor) earlier than retail. */
 #include "common.h"
 #include "shard/W6_W6Match3_MapSceneTransition.h"
 
@@ -11,18 +11,15 @@ struct StatRecord {
     /* 0x10 */ s32 value;
 };
 
-struct LimitBlock {
-    /* 0x00 */ u8 unk00[0xbe];
-    /* 0xbe */ s16 limit;
-    /* 0xc0 */ s16 minimum;
-};
-
+// The fields of g_gameState this allowance uses.
 struct GameStateResult {
     /* 0x000 */ u8 unk000[0x1f8];
     /* 0x1f8 */ s32 result;
+    /* 0x1fc */ u8 unk1fc[0xc2];
+    /* 0x2be */ s16 limit;
+    /* 0x2c0 */ s16 minimum;
 };
 
-extern LimitBlock DAT_005f17fc;
 extern StatRecord *g_engineRecordList;
 extern StatRecord *g_mapObj;
 extern StatRecord *DAT_00581280;
@@ -32,12 +29,12 @@ extern GameStateResult g_gameState;
 /* Recomputes the remaining allowance: the limit minus the base and the average of three stat values, floored at the minimum. */
 void FUN_003b959c(void)
 {
-    s32 limit = DAT_005f17fc.limit;
+    s32 limit = g_gameState.limit;
     s32 first = FUN_0032530c();
-    s32 value = limit - (DAT_00581280->base + (g_engineRecordList->value + g_mapObj->value + first) / 3);
+    s32 value = limit - ((g_engineRecordList->value + g_mapObj->value + first) / 3 + DAT_00581280->base);
 
-    if (value < DAT_005f17fc.minimum) {
-        value = DAT_005f17fc.minimum;
+    if (value < g_gameState.minimum) {
+        value = g_gameState.minimum;
     }
     g_gameState.result = value;
 }

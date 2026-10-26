@@ -1,4 +1,4 @@
-/* NON_MATCHING: resource-array initialization lowers to memclr instead of retail's individual word stores, changing saved registers; size-output stack slot also differs. */
+/* NON_MATCHING: the 18 resource words are explicit zero stores (retail has no memclr) and rows now match 131/131; retail hoists a callee-saved zero (r5) to function entry and keeps g_eplSlots in r6, ours uses the loop-local zero and r5. */
 #include "shard/W4_Match3_EplSlots.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -22,8 +22,24 @@ void FUN_002b75b0(void)
         tripleClear(pool);
         for (s32 index = 0; index < EPL_SLOT_COUNT; ++index) {
             EplSlot *slot = &pool->slots[index];
-            for (s32 resource = 0; resource < 18; ++resource)
-                slot->initialization.resources[resource] = 0;
+            slot->initialization.resources[0] = 0;
+            slot->initialization.resources[1] = 0;
+            slot->initialization.resources[2] = 0;
+            slot->initialization.resources[3] = 0;
+            slot->initialization.resources[4] = 0;
+            slot->initialization.resources[5] = 0;
+            slot->initialization.resources[6] = 0;
+            slot->initialization.resources[7] = 0;
+            slot->initialization.resources[8] = 0;
+            slot->initialization.resources[9] = 0;
+            slot->initialization.resources[10] = 0;
+            slot->initialization.resources[11] = 0;
+            slot->initialization.resources[12] = 0;
+            slot->initialization.resources[13] = 0;
+            slot->initialization.resources[14] = 0;
+            slot->initialization.resources[15] = 0;
+            slot->initialization.resources[16] = 0;
+            slot->initialization.resources[17] = 0;
             slot->buffer = NULL;
             slot->list = NULL;
             for (s32 parameter = 0; parameter < 4; ++parameter)

@@ -1,14 +1,13 @@
 /* NON_MATCHING: only register allocation differs (this build hoists the constant 3 into r8, so the step/substep pair is stored with separate STRs instead of retail's STM, and registers r5-r7 are assigned differently). */
 #include "classes/AocMenu.h"
 #include "addon/aocMain.h"
-#include "shard/W5_W5Match2_TimedState.h"
+#include "shard/W6_W6Match5_QueuedRequest.h"
 #include "addon/AocSystem_VariantA.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
 extern AocSystem *g_aocSystem;
-TimedState FUN_003887cc(AocSystem *system);
-TimedState *timeInitializeActiveState(TimedState *state);
+RequestParameters FUN_003887cc(AocSystem *system);
 void FUN_0023392c(AocMenu *menu, s32 request, s32 mode);
 void FUN_00233db8(AocMenu *menu, u32 request);
 void FUN_00126fb8(void *query);
@@ -32,8 +31,7 @@ static __inline u32 flagBit(u32 flags, u32 bit)
 void AocMenu::closeMenu()
 {
     AocMenu * menu = reinterpret_cast<AocMenu *>(this);
-    TimedState request;
-    timeInitializeActiveState(&request);
+    RequestParameters request;
     u32 flags = g_aocMain->flags;
     u32 closing = flagBit(flags, 4);
     flags &= ~0x70u;

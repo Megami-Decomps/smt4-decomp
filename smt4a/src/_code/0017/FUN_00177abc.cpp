@@ -14,11 +14,11 @@ u32 *FUN_00177abc(const GpuDepthRange *range, u32 *commands)
         *cursor++ = gpuEncodeFloat24Flush(range->farValue - range->nearValue);
         *cursor++ = 0xF004D;
         f32 offset;
-        if (!range->quantized) {
-            offset = range->farValue;
-        } else {
+        if (!(!range->quantized)) {
             f32 steps = (f32)((1 << range->bits) - 1);
             offset = range->farValue - ((range->farValue - range->nearValue) * 128.0f * range->scale) / steps;
+        } else {
+            offset = range->farValue;
         }
         cursor[0] = gpuEncodeFloat24Flush(offset);
         cursor[1] = 0xF004E;

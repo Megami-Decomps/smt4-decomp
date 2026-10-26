@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int rt_vec_dtor(unsigned char [24], unsigned char *, int, int);
+int __aeabi_vec_dtor(unsigned char [24], unsigned char *, int, int);
 int __aeabi_vec_ctor_nocookie_nodtor(unsigned char [24], unsigned char *, int, int);
 int FUN_00304d10(unsigned int, int);
 int FUN_0030538c(int, unsigned char *);
@@ -13,7 +13,7 @@ int FUN_00310888(...);
 extern unsigned char LAB_00121145; /* 0x121145 */
 extern unsigned char LAB_0012116b; /* 0x12116b */
 
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 /* Supplied declaration required: __aeabi_vec_ctor_nocookie_nodtor. */
 /* Supplied declaration required: FUN_00304d10. */
 /* Supplied declaration required: FUN_0030538c. */
@@ -43,7 +43,7 @@ void FUN_0011ecc0(int param_1,unsigned int param_2)
     else {
       __aeabi_vec_ctor_nocookie_nodtor(temp_v1,&LAB_00121145,0x18,1);
       FUN_00310888(param_1,temp_v1);
-      rt_vec_dtor(temp_v1,&LAB_0012116b,0x18,1);
+      __aeabi_vec_dtor(temp_v1,&LAB_0012116b,0x18,1);
     }
   }
   return;

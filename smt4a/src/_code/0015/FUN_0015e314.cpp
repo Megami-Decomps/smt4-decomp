@@ -1,4 +1,4 @@
-/* NON_MATCHING: counter loop restored; binding-store inline shape, two compiler hints and register allocation differ. */
+/* NON_MATCHING: register allocation differs (retail hoists the zero constant into r6 and copies the buffer into r2 before the size test; the counter-loop zero lives in r6). */
 #include "common.h"
 
 struct ObjectCounterTable {
@@ -32,6 +32,7 @@ void listAppendNode(ObjectCounterCommandQueue *queue, ObjectCounterBindCommand *
 ObjectCounterBindCommand *objectCommandReserveWords(ObjectCounterCommandQueue *queue, u32 words);
 ObjectCounterCommandQueue *objectCommandQueueGet(void);
 u32 FUN_00194f94(u32 resource);
+void FUN_00300154(void *binding, s32 value); /* virtual setter: stores the word at +4 */
 
 /* Initialize caller-provided counter storage and enqueue its resource binding. */
 u32 FUN_0015e314(ObjectCounterTableOwner *owner, u32 resource, void *buffer, u32 bytes)
@@ -46,7 +47,7 @@ u32 FUN_0015e314(ObjectCounterTableOwner *owner, u32 resource, void *buffer, u32
     owner->counters->count = FUN_00194f94(resource);
     for (u32 i = 0; i < owner->counters->count; ++i)
         owner->counters->values[i] = 0;
-    owner->binding.resource = resource;
+    FUN_00300154(&owner->binding, resource);
     ObjectCounterCommandQueue *queue = objectCommandQueueGet();
     ObjectCounterBindCommand *command = objectCommandReserveWords(queue, 5);
     command->renderState = queue->renderState;

@@ -1,0 +1,5 @@
+0x00420080 // FUN_0013b8c4: IPC command header; retail target object has R_ARM_ABS32 DAT_00420080, instructions otherwise identical
+0x00400042 // FUN_00150030: IPC command header; retail target has R_ARM_ABS32 DAT_00400042
+0x004b00c2 // FUN_0013b934: IPC command header (draft reads &DAT_004b00c2), same shape; confirm in target
+0x001e0084 // FUN_0014ffa8: IPC command header (draft reads &LAB_001e0084), same shape; confirm in target
+0x001a0000 // FUN_0012a708: IPC command header (draft reads &LAB_001a0000); confirm in target

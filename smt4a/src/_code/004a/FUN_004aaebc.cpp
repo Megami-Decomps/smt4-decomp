@@ -1,4 +1,4 @@
-/* NON_MATCHING: request-format buffer frame size and fallback branch placement differ. */
+/* NON_MATCHING: frame (0x40 registered request + scratch) and branch layout match; armcc loads the stack arguments as {variant, flags} + label where retail loads variant + {flags, label}. */
 #include "battle/btlUI.h"
 #include "shard/W9_W9Match1_ResourceRequest.h"
 
@@ -11,24 +11,24 @@ u32 randomGetUpperSixBits(const void *scratch, u32 index);
 void FUN_004aaebc(u32, u32 kind, u32 parameter, u16 option, u16 variant, u16 flags, const ResourceRequestLabel *label, f32 x, f32 y, f32 z)
 {
     BtlUiA *ui = g_btlUi.ui;
-    ResourceRequest request;
+    RegisteredResourceRequest registered;
     u8 scratch[0x130];
-    request.kind = (u16)kind;
-    request.option = option;
-    request.variant = variant;
-    request.flags = flags;
-    request.position[0] = x;
-    request.position[1] = y;
-    request.position[2] = z;
-    request.parameter = parameter;
-    if (label != NULL) {
-        request.label = *label;
-    } else {
+    registered.request.kind = (u16)kind;
+    registered.request.position[0] = x;
+    registered.request.position[1] = y;
+    registered.request.position[2] = z;
+    registered.request.parameter = parameter;
+    registered.request.variant = variant;
+    registered.request.option = option;
+    registered.request.flags = flags;
+    if (label == NULL) {
         unitInitializeFromTemplate(kind, scratch);
         for (s32 index = 0; index < 8; ++index) {
-            request.label.text[index] = (char)randomGetUpperSixBits(scratch, index & 0xff);
+            registered.request.label.text[index] = (char)randomGetUpperSixBits(scratch, index & 0xff);
         }
+    } else {
+        registered.request.label = *label;
     }
-    resourceRequestRegisterOrUpdate(&ui->objC, &request);
+    resourceRequestRegisterOrUpdate(&ui->objC, &registered.request);
 }
 }

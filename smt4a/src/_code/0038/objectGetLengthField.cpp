@@ -8,7 +8,7 @@ struct ObjectState {
 }
 
 /* Reads the object's stored value. */
-extern "C" u32 FUN_00387554(const ObjectState *object)
+extern "C" u32 objectGetLengthField(const ObjectState *object)
 {
     return object->unk10;
 }

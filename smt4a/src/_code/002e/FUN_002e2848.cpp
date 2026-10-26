@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail homes r0-r3 at entry (push {r0-r3,...}) and reloads the list pointer from its home slot before every call, and sign-extends the three region ids at the call; ours keeps the pointer in a saved register and passes the ids unextended */
+/* NON_MATCHING: region ids are full words narrowed at each call and the zero result local now reproduces retail's r0-r3 homing prologue (diff 138->93 lines); retail keeps the sound-play tails unmerged, ends with `mov r0,r6`, and computes `position - 1` with a separate cmp. */
 #include "common.h"
 #include "shard/W5_W5Match7_SelectedRecord.h"
 #include "code/Code0026_Smt4a.h"
@@ -14,7 +14,7 @@ struct ScrollList;
 
 extern "C" {
 
-s32 recordGetModeForId(s16 id);
+s32 recordGetModeForId(s32 id);
 s32 resourceRunOperationIfUnblocked(ScrollList *list);
 s32 resourceRunEmbeddedOperationIfUnblocked(ScrollList *list);
 s32 objectApplyIfUnblocked(ScrollList *list);
@@ -28,12 +28,13 @@ void eventQueueAddUnique(u32 event);
 /* Handles a touch on a scrolling list: the previous/next controls move one step, a touch on the
  * bar jumps to the matching position (horizontal lists use x, vertical ones y). Returns whether
  * the touch was used. */
-u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 barId, s16 previousId, s16 nextId,
+u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s32 barId, s32 previousId, s32 nextId,
                  s32 horizontal, s32 playSound)
 {
-    s32 previousMode = recordGetModeForId(previousId);
-    s32 nextMode = recordGetModeForId(nextId);
-    s32 barMode = recordGetModeForId(barId);
+    u32 used = 0;
+    s32 previousMode = recordGetModeForId((s16)previousId);
+    s32 nextMode = recordGetModeForId((s16)nextId);
+    s32 barMode = recordGetModeForId((s16)barId);
 
     if (previousMode == 6 || previousMode == 2) {
         s32 position = resourceRunOperationIfUnblocked(list) + FUN_002a4894(list);
@@ -64,7 +65,7 @@ u32 FUN_002e2848(ScrollList *list, ScrollPoint touch, ScrollPoint barSize, s16 b
         }
     } else {
         if (barMode == 0) {
-            return 0;
+            return used;
         }
         s32 total = objectApplyIfUnblocked(list);
         s16 y = FUN_002618e0() - touch.y;

@@ -3,6 +3,13 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x20];
+    signed char f0049f93c; /* 0x020 */
+};
+extern GameStateView g_gameState;
+
 
 int mapInterfaceForwardResource(void);
 int FUN_00281e34(void);
@@ -52,7 +59,7 @@ extern unsigned int DAT_00407ed8; /* 0x407ed8 */
 extern unsigned int DAT_00407edc; /* 0x407edc */
 extern int DAT_004474f4; /* 0x4474f4 */
 extern int g_mapEnemy; /* 0x447600 */
-extern signed char DAT_0049f93c; /* 0x49f93c */
+
 
 #ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
 #define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
@@ -140,7 +147,7 @@ void FUN_001f9f64(void)
   unsigned int temp_v54;
   
   temp_v0 = g_mapEnemy;
-  if ((*(int *)(g_mapEnemy + 4) == 8) && (DAT_0049f93c == '\0')) {
+  if ((*(int *)(g_mapEnemy + 4) == 8) && (g_gameState.f0049f93c == '\0')) {
     temp_v25 = 220.0f;
     temp_v21 = 20.0f;
     temp_v26 = 57.32484f;

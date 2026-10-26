@@ -1,85 +1,75 @@
-/* NON_MATCHING: retail embeds SVC 0x18, 0x24, and 0x23 for synchronization/handle shutdown; SVC is forbidden by this assignment. */
-#include "romwright_types.h"
-#include "classes/Obj420a1c.h"
+/* NON_MATCHING: the svc calls (SignalEvent, WaitSynchronization1, CloseHandle) now match through nn/svc.h; retail keeps the handle field addresses in a register (add r5,r4,#off) for each close, hoists the zero into r6 before the wait and holds the player object in r5. */
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "mobiclip_ctrl/S4FsReader.h"
+
+/* The Mobiclip player's allocation: the block and the object living in it. */
+struct S4MovieAllocation {
+    void *block;
+    void *object;
+};
 
 extern "C" {
+extern S4MovieAllocation DAT_005880f8;
 
-int FUN_001469a8(...);
-int nn_os_Thread_FinalizeImpl(unsigned int *);
-int FUN_002e3140(void);
-int asdOperatorDelete(int);
-int software_interrupt(int);
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+void nn_os_Thread_FinalizeImpl(u32 *thread);
+void FUN_001469a8(void *object);
+void FUN_002e3140(s32 result);
+void asdOperatorDelete(void *object);
+void asdMemFree(void *block);
 
-typedef int romwright_code(...);
-extern unsigned int DAT_005880f8; /* 0x5880f8 */
-extern int DAT_005880fc; /* 0x5880fc */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001469a8. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: nn_os_Thread_FinalizeImpl. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: asdOperatorDelete. */
-
-
-void FUN_00422654(unsigned int *param_1)
-
+/* Closes a kernel handle and clears it; nothing to do for an unset handle. */
+static void closeHandleAndClear(u32 *handle)
 {
-/* irregular: 6 native warning(s); review required */
-  int temp_v0;
-  
-  if (param_1[0xe] != 0) {
-    software_interrupt(0x18);
-    if ((int)param_1[0x14] < 0) {
-      FUN_002e3140();
+    if (*handle != 0) {
+        svcCloseHandle(*handle);
+        *handle = 0;
     }
-    software_interrupt(0x24);
-    if ((int)param_1[0xc] < 0) {
-      FUN_002e3140();
-    }
-    *(unsigned char *)(param_1 + 0xd) = 1;
-    nn_os_Thread_FinalizeImpl(param_1 + 0xc);
-    if (param_1[0xc] != 0) {
-      software_interrupt(0x23);
-      param_1[0xc] = 0;
-    }
-    FUN_001469a8(DAT_005880fc);
-    temp_v0 = DAT_005880fc;
-    if (DAT_005880fc != 0) {
-      FUN_001469a8();
-      asdOperatorDelete(temp_v0);
-    }
-    DAT_005880fc = 0;
-    asdMemFree(DAT_005880f8);
-    DAT_005880f8 = 0;
-    param_1[0x12] = 0xffffffff;
-    if (param_1[0x13] != 0) {
-      software_interrupt(0x23);
-      param_1[0x13] = 0;
-    }
-    if (param_1[0x14] != 0) {
-      software_interrupt(0x23);
-      param_1[0x14] = 0;
-    }
-    if (param_1[8] != 0) {
-      (**(romwright_code **)(*(int *)param_1[0xf] + 4))();
-      param_1[8] = 0;
-    }
-    if (param_1[9] != 0) {
-      (**(romwright_code **)(*(int *)param_1[0xf] + 4))();
-      param_1[9] = 0;
-    }
-    param_1[10] = 0;
-    *param_1 = 0;
-    param_1[1] = 0;
-    param_1[2] = 0;
-    param_1[3] = 0;
-    param_1[0xe] = 0;
-    param_1[0xf] = 0;
-    param_1[6] = 0;
-    param_1[7] = 0;
-  }
-  return;
 }
 
-} /* extern "C" */
+/* Stops the reader thread, closes its handles and frees the buffers and the player's allocation. */
+void FUN_00422654(S4FsReader *reader)
+{
+    if (reader->source == NULL) {
+        return;
+    }
+    s32 result = nn::svc::SignalEvent(reader->stopEvent);
+    if (nnResultIsFailure(result)) {
+        FUN_002e3140(result);
+    }
+    result = svcWaitSynchronization1(reader->threadHandle, -1);
+    if (nnResultIsFailure(result)) {
+        FUN_002e3140(result);
+    }
+    reader->threadJoined = 1;
+    nn_os_Thread_FinalizeImpl(&reader->threadHandle);
+    closeHandleAndClear(&reader->threadHandle);
+    FUN_001469a8(DAT_005880f8.object);
+    void *object = DAT_005880f8.object;
+    if (object != NULL) {
+        FUN_001469a8(object);
+        asdOperatorDelete(object);
+    }
+    DAT_005880f8.object = NULL;
+    asdMemFree(DAT_005880f8.block);
+    DAT_005880f8.block = NULL;
+    *(s32 *)(reader->lock + 8) = -1;
+    closeHandleAndClear(&reader->dataEvent);
+    closeHandleAndClear(&reader->stopEvent);
+    if (reader->ring != NULL) {
+        reader->allocator->release(reader->ring);
+        reader->ring = NULL;
+    }
+    if (reader->scratch != NULL) {
+        reader->allocator->release(reader->scratch);
+        reader->scratch = NULL;
+    }
+    reader->scratchSize = 0;
+    reader->consumed = 0;
+    reader->produced = 0;
+    reader->requested = 0;
+    reader->source = NULL;
+    reader->allocator = NULL;
+}
+}

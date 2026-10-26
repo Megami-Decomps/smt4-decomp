@@ -2662,7 +2662,7 @@
 002e3494 asdOperatorDeleteB
 002deb84 scrGetCommandFrame
 002e342c libc_strcpy
-002e5700 rt_vec_dtor
+002e5700 __aeabi_vec_dtor
 002e4e92 rt_vec_delete
 002e5fcc cursorPushU16
 002c52e0 resultCreate
@@ -3417,7 +3417,7 @@
 00514500 randomAdvanceShiftRegister
 00412f9c bufferReleaseOwnedPair
 0040a470 questSetPackedFlag
-0047daf4 timeInitializeActiveState
+0047daf4 _ZN17RequestParametersC1Ev
 004d0a98 touchRegisterSecondRegion
 004d09b8 touchRegisterFirstRegion
 003d4b7c taskUpdateOrderedPasses
@@ -4975,7 +4975,7 @@
 0035d1b0 scrCommGameFlagEntryGetBit
 002447e8 mapEnemySelectUpdatePhase
 0014a844 asdGfxSetTargetParameter
-003c33b0 scrCommNamedRecordActivate
+003c33ac scrCommNamedRecordActivate
 00300e28 geometryDestroyOwner
 0038d1c0 scrCommBtlUnitGetTableValue
 00372fbc scrCommBtlUnitIsFlagSet
@@ -6290,3 +6290,12 @@
 0038e6bc activityRecordsAreIdle
 0015e978 soundArchiveLoadStringBlock
 0039e89c scrBtlAddPresetFlagsToMatchingUnits
+00158a40 nn_gr_CTR_Shader_SetupBinary
+00197f40 _ZN12CallbackListC1Ev
+003f0e94 btlFindSelectionIndexByLookupKey
+00387554 objectGetLengthField
+00215904 mapRndMazeResetHandles
+00424268 movieSyncConsumeReadyFrame
+00161c64 gfxReleaseEntryBlocks
+00473c5c textConvertToBoundedWide
+0040b730 playerLoadOutfitPartModel

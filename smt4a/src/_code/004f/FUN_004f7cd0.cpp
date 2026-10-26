@@ -1,4 +1,4 @@
-/* NON_MATCHING: effect-name helper null guards and version-slot register scheduling differ. */
+/* NON_MATCHING: retail loads the reserved-name globals inside the null-guarded tests (not before) and keeps the 128-byte buffer address in sl; stack frame 260 vs 256. */
 #include "battle/btlEffect.h"
 #include "shard/W6_W6Match1_BattleVersionResources.h"
 
@@ -23,6 +23,16 @@ char *libc_strcpy(char *destination, const char *source);
 u32 keyedRecordRegisterName(const char *name);
 u32 FUN_003478dc(u32 key, const void *data);
 
+static __inline bool nameHasPrefix(const char *name, const char *prefix)
+{
+    return name != NULL && libc_strncmp(name, prefix, libc_strlen(prefix)) == 0;
+}
+
+static __inline bool nameEquals(const char *name, const char *other)
+{
+    return name != NULL && libc_strcmp(name, other) == 0;
+}
+
 void FUN_004f7cd0(BtlEffectOwnerA *effect)
 {
     if (effect->slots == NULL)
@@ -33,10 +43,8 @@ void FUN_004f7cd0(BtlEffectOwnerA *effect)
         if (libc_strlen(name) == 0 || libc_strcmp(name, DAT_00528544) == 0 ||
             libc_strcmp(DAT_0052853c, name) == 0)
             continue;
-        if (libc_strncmp(name, g_btlEffect.prefix, libc_strlen(g_btlEffect.prefix)) == 0 ||
-            libc_strcmp(name, g_btlEffect.reserved.name) == 0 ||
-            libc_strncmp(name, g_btlEffect.otherPrefix, libc_strlen(g_btlEffect.otherPrefix)) == 0 ||
-            libc_strcmp(name, g_btlEffect.reserved.otherName) == 0)
+        if (nameHasPrefix(name, g_btlEffect.prefix) || nameEquals(name, g_btlEffect.reserved.name) ||
+            nameHasPrefix(name, g_btlEffect.otherPrefix) || nameEquals(name, g_btlEffect.reserved.otherName))
             continue;
         char path[128], formatted[128];
         sysMemClear(path, sizeof(path));

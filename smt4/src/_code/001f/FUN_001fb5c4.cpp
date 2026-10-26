@@ -3,6 +3,13 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x394];
+    int f0049fcb0; /* 0x394 */
+};
+extern GameStateView g_gameState;
+
 
 int CONCAT44(double, double);
 int mapTableStepWave(void);
@@ -59,7 +66,7 @@ extern int DAT_00448c80; /* 0x448c80 */
 extern int DAT_00448c88; /* 0x448c88 */
 extern int DAT_00448c94; /* 0x448c94 */
 extern int g_titleScene; /* 0x44ea00 */
-extern int DAT_0049fcb0; /* 0x49fcb0 */
+
 
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
@@ -180,7 +187,7 @@ void FUN_001fb5c4(void)
       *(unsigned char *)(temp_v3 + 0x12c4) = 0;
     }
   }
-  if (DAT_0049fcb0 != 0) {
+  if (g_gameState.f0049fcb0 != 0) {
     if (DAT_00448c88 != 0) {
       temp_v2 = DAT_00448c6c + 0xff + DAT_00448c80;
       if ((int)temp_v2 < 0) {

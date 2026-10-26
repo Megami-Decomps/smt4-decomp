@@ -1,36 +1,31 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00128584` (_code @ 0x128584, 0x30 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of a raw draft; retail moves the first argument to r3 and keeps the request pointer in r0 (no stm merge of the last two stores), the build keeps both arguments in place and merges them into one stm. */
+#include "common.h"
 
-extern "C" {
+struct SoundRequest {
+    /* 0x00 */ u8 kind;
+    /* 0x01 */ u8 flag;
+    /* 0x02 */ u16 magic;
+    /* 0x04 */ u32 first;
+    /* 0x08 */ u32 second;
+};
 
-int FUN_002ad4f8(void);
-
-/* stack frame of param_3: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_3_stack;
-
-extern unsigned char DAT_004d4200; /* 0x4d4200 */
-extern unsigned char DAT_004d4201; /* 0x4d4201 */
-extern unsigned short DAT_004d4202; /* 0x4d4202 */
-extern unsigned int DAT_004d4204; /* 0x4d4204 */
-extern unsigned int DAT_004d4208; /* 0x4d4208 */
-
-/* Supplied declaration required: FUN_002ad4f8. */
-
-
-void FUN_00128584(unsigned int param_1,unsigned char param_2,unsigned int param_3)
-
+static __inline void soundRequestSet(SoundRequest *request, u8 kind, u32 second, u32 first)
 {
-/* irregular: 1 native warning(s); review required */
-  DAT_004d4201 = 0;
-  DAT_004d4202 = 0xbca3;
-  DAT_004d4200 = param_2;
-  DAT_004d4204 = param_1;
-  DAT_004d4208 = param_3;
-  FUN_002ad4f8();
-  return;
+    request->flag = 0;
+    request->kind = kind;
+    request->magic = 0xBCA3;
+    request->second = second;
+    request->first = first;
 }
 
-} /* extern "C" */
+extern "C" {
+extern SoundRequest DAT_004d4200;
+void FUN_002ad4f8(void);
+
+// Fills the pending request record and kicks the worker.
+void FUN_00128584(u32 first, u8 kind, u32 second)
+{
+    soundRequestSet(&DAT_004d4200, kind, second, first);
+    FUN_002ad4f8();
+}
+}

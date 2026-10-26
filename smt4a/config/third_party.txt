@@ -2340,6 +2340,7 @@
 0x001588c0 FUN_001588c0 between
 0x001588f0 FUN_001588f0 between
 0x001589a0 FUN_001589a0 between
+0x00158a40 nn_gr_CTR_Shader_SetupBinary name
 0x00158b2c FUN_00158b2c between
 0x00158b88 FUN_00158b88 between
 0x00158dc0 FUN_00158dc0 callers
@@ -2488,7 +2489,7 @@
 0x0016d144 FUN_0016d144 between
 0x0016d304 FUN_0016d304 between
 0x0016d338 FUN_0016d338 between
-0x0016d390 FUN_0016d390 between
+0x0016d390 FUN_0016d390 callers
 0x0016dd70 nn_gr_CTR_Shader_MakeShaderConstCommandCache name
 0x0016df14 FUN_0016df14 between
 0x0016df60 gfxCombinerStageConstruct between
@@ -2965,7 +2966,7 @@
 0x00197ea8 FUN_00197ea8 between
 0x00197eac FUN_00197eac between
 0x00197f28 FUN_00197f28 between
-0x00197f40 FUN_00197f40 between
+0x00197f40 _ZN12CallbackListC1Ev between
 0x00197f58 FUN_00197f58 between
 0x00198144 FUN_00198144 between
 0x001981d8 FUN_001981d8 between
@@ -4008,7 +4009,7 @@
 0x002e56e4 FUN_002e56e4 linker
 0x002e56ec __aeabi_vec_delete name
 0x002e56f8 FUN_002e56f8 linker
-0x002e5700 rt_vec_dtor name
+0x002e5700 __aeabi_vec_dtor name
 0x002e5724 FUN_002e5724 between
 0x002e5780 FUN_002e5780 library
 0x002e57c8 FUN_002e57c8 library

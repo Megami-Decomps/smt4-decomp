@@ -1,4 +1,4 @@
-/* NON_MATCHING: register assignment and the 64-bit target mask tests differ from retail (227 vs 231 rows); the skill usability checks are the same as smt4 FUN_002277d4's. */
+/* NON_MATCHING: same-TU data (btlAction globals): the final marking loops read the target mask as g_btlAction+0x58 (ldrd in the peeled iteration) and as the standalone g_btlTargetableMask in the main loop; the body otherwise matches except the call-argument zero constants (retail shares one zero register). */
 #include "common.h"
 #include "bible/bibleAnalyze.h"
 #include "gamedata/GameDataAccess.h"
@@ -61,7 +61,7 @@ extern u64 g_btlTargetableMask;
 
 s32 FUN_0026264c(u16 recordId);
 s32 valueAtF0IsReady(SkillOwner *owner);
-s32 FUN_004c4604(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 out[8]);
+s32 FUN_004c4604(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, s32 c, u32 d, u8 *out);
 s32 FUN_004bfcfc(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c, u32 d);
 
 /* Checks whether skill `skill` can be used on the candidate `targets` (`count` of them) in the
@@ -107,17 +107,15 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
         return 0;
     }
     s32 usable = 0;
-    u8 out[8];
-
-    out[0] = 0;
+    u8 out = 0;
     for (u32 i = 0; i < count; i++) {
-        SkillTarget *target = targets[i];
+        s32 blocked = 0;
 
-        if ((target->flags & g_btlTargetableMask) == 0) {
+        if ((targets[i]->flags & g_btlTargetableMask) == 0) {
             continue;
         }
-        if (FUN_0026264c(target->recordId) == 0) {
-            u32 id = target->recordId;
+        if (FUN_0026264c(targets[i]->recordId) == 0) {
+            u32 id = targets[i]->recordId;
 
             if (((*owner)->unkEC < 0 || ((*owner)->flags & 0x80) == 0) && id != 0x493 && id != 0x494 && id != 0x495
                 && id != 0x496 && (gameProgressIsAdvanced() == 0 || valueAtF0IsReady(*owner) != 0)) {
@@ -126,8 +124,7 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
         }
         context->outcome->state = 2;
         context->outcome->skillId = skill->id;
-        s32 result = FUN_004c4604(skill->id, 0, 2, context->caster->slot, target->slot, 0, 1, out);
-        s32 blocked = 0;
+        s32 result = FUN_004c4604(skill->id, 0, 2, context->caster->slot, targets[i]->slot, 0, 1, &out);
 
         if (result == 1 || result == 2 || result == 3) {
             blocked = 1;
@@ -136,14 +133,14 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
             return 0;
         }
         if ((blocked & ~reviveKind) == 0) {
-            s32 check = FUN_004bfcfc(skill->id, 0, 0, context->caster->slot, target->slot, 1, 1);
+            s32 check = FUN_004bfcfc(skill->id, 0, 0, context->caster->slot, targets[i]->slot, 1, 1);
 
-            if ((anyTarget == 0 || check == 2) && (FUN_004c3a10(skill->category) & target->categoryMask) == 0) {
+            if ((anyTarget == 0 || check == 2) && (FUN_004c3a10(skill->category) & targets[i]->categoryMask) == 0) {
                 usable = 1;
                 if (reviveKind == 0) {
                     context->outcome->state = 2;
                     context->outcome->skillId = skill->id;
-                    context->marks[target->markIndex] = 1;
+                    context->marks[targets[i]->markIndex] = 1;
                     return 1;
                 }
             }
@@ -154,7 +151,7 @@ u32 FUN_004e9bd0(SkillOwner **owner, SkillContext *context, SkillRecord *skill, 
     }
     context->outcome->state = 2;
     context->outcome->skillId = skill->id;
-    for (u32 i = 0; i < count; i++) {
+    for (s32 i = 0; i < count; i++) {
         if ((targets[i]->flags & g_btlTargetableMask) != 0) {
             context->marks[targets[i]->markIndex] = 1;
         }

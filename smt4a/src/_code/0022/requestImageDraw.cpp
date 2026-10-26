@@ -1,11 +1,16 @@
 #include "gfx/StereoParallax.h"
-/* NON_MATCHING: ARMCC retains the initialization loop and reloads 1000 across requestIdToCode; retail unrolls calls and preserves r1. */
+/* NON_MATCHING: nine requestIdToCode calls unrolled as in retail (needs multifile for the preserved 1000 in r1); the push now matches (counted push helper); remaining: the final pop loads g_renderCtx into r4 directly where retail goes through r0. */
 #include "font/SearchWin/RunWin.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
 #include "camp/RenderCtx.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+
+static __inline void pushCountedA(RenderCtxA *context, int state)
+{
+    renderStackPushCounted(&context->stackA, state);
+}
 
 extern "C" {
 extern RenderCtxA *g_renderCtx;
@@ -28,13 +33,19 @@ void requestImageDraw(const RequestImageSelector *owner, const f32 *alpha)
     FUN_00157558(g_renderCtx);
     FUN_00183bb0();
     RenderCtxA *context = g_renderCtx;
-    renderStackPush(&context->stackA, FUN_001692ac(1, 0));
+    pushCountedA(context, FUN_001692ac(1, 0));
     efctSetSpeed(*alpha);
     MessageImagePair images[9];
     sysMemClear(images, sizeof(images));
-    for (u32 index = 0; index < 9; ++index) {
-        images[index].second = requestIdToCode(index) * 1000;
-    }
+    images[0].second = requestIdToCode(0) * 1000;
+    images[1].second = requestIdToCode(1) * 1000;
+    images[2].second = requestIdToCode(2) * 1000;
+    images[3].second = requestIdToCode(3) * 1000;
+    images[4].second = requestIdToCode(4) * 1000;
+    images[5].second = requestIdToCode(5) * 1000;
+    images[6].second = requestIdToCode(6) * 1000;
+    images[7].second = requestIdToCode(7) * 1000;
+    images[8].second = requestIdToCode(8) * 1000;
     s32 depth = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.35f);
     FUN_00164b5c(2, 0x2E, images[owner->selection].first, depth, 0, 11);
     if (asdTMTexTableNodeIsLoaded(0x2E, requestIdToCode(owner->selection))) {
@@ -43,6 +54,6 @@ void requestImageDraw(const RequestImageSelector *owner, const f32 *alpha)
     }
     renderStackPop(&g_renderCtx->stackA);
     skinObjectUpdateMatrices(g_renderCtx);
-    renderCtxResetColorScale(static_cast<RenderCtxA *>(asdDebugHookPass(g_renderCtx)));
+    renderCtxResetColorScale(g_renderCtx);
 }
 }

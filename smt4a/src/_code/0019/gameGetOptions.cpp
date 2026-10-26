@@ -1,15 +1,9 @@
-#include "romwright_types.h"
+#include "shard/GameDataBlocks.h"
 #include "gamedata/GameDataAccess.h"
 
 extern "C" {
-
-extern unsigned char g_gameDataBlocks; /* 0x57f698 */
-
-
 int gameGetOptions(void)
-
 {
-  return (*(int *)((unsigned char *)&g_gameDataBlocks + 0x4)) + 0x1d30;
+    return (int)((u8 *)g_gameDataBlocks.saveBlock + 0x1D30);
 }
-
-} /* extern "C" */
+}

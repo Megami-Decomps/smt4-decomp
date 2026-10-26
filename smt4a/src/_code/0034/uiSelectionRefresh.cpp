@@ -1,20 +1,21 @@
-/* NON_MATCHING: the callee takes no argument (retail passes none); retail calls it with `bl` inside a push {r4, lr} frame where armcc emits a tail `b`. */
+/* NON_MATCHING: retail calls the callee with `bl` inside a push {r4, lr} frame where armcc emits a tail `b`; the callee takes no argument. */
 #include "common.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
 
 extern "C" {
 
-struct SelectionState {
-    /* 0x00 */ u8 unk00[0x58];
-    /* 0x58 */ s16 selection;
-    /* 0x5a */ s16 previous;
+// The fields of g_gameState this refresh touches.
+struct GameStateSelectionView {
+    /* 0x000 */ u8 unk000[0x258];
+    /* 0x258 */ s16 selection;
+    /* 0x25a */ s16 previous;
 };
-extern SelectionState DAT_005f17fc;
+extern GameStateSelectionView g_gameState;
 
 void uiSelectionRefresh(void)
 {
-    if (DAT_005f17fc.selection != DAT_005f17fc.previous) {
-        DAT_005f17fc.previous = DAT_005f17fc.selection;
+    if (g_gameState.selection != g_gameState.previous) {
+        g_gameState.previous = g_gameState.selection;
     }
     mapEnvironmentApplySelectedEntry();
 }

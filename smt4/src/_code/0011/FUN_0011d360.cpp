@@ -1,36 +1,30 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0011d360` (_code @ 0x11d360, 0x40 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: result/register allocation differs (retail keeps the result in r0 until the pc check and only the global pointer in r4; the build uses r4-r6). */
+#include "nn/svc.h"
 
 extern "C" {
-
-int FUN_002c131c(int, int);
-int software_interrupt(int);
-
-extern int DAT_004656b0; /* 0x4656b0 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_002c131c. */
-
-
-int FUN_0011d360(void)
-
-{
-/* irregular: 2 native warning(s); review required */
-  int temp_v0;
-  
-  temp_v0 = DAT_004656b0;
-  if (DAT_004656b0 == 0) {
-    temp_v0 = -0x1f5f3008;
-  }
-  else {
-    software_interrupt(0x23);
-    DAT_004656b0 = 0;
-  }
-  if (temp_v0 < 0) {
-    FUN_002c131c(temp_v0,0x11d394);
-  }
-  return temp_v0;
+extern u32 DAT_004656b0;
+extern u32 DAT_0040b730;
+void FUN_002c131c(s32 result, u32 location, u32 failed);
 }
 
-} /* extern "C" */
+static __inline void checkResult(s32 result, u32 location)
+{
+    u32 failed = static_cast<u32>(result) >> 31;
+    if (failed)
+        FUN_002c131c(result, location, failed);
+}
+
+extern "C" {
+s32 FUN_0011d360(void)
+{
+    s32 result;
+    if (DAT_004656b0 == 0) {
+        result = 0xE0A0CFF8;
+    } else {
+        result = nn::svc::CloseHandle(DAT_004656b0);
+        DAT_004656b0 = DAT_0040b730;
+    }
+    checkResult(result, __current_pc());
+    return result;
+}
+}

@@ -5,18 +5,17 @@
 extern "C" void FUN_00291340(const EffectIntegerKeySource *source, s32 *index,
                              s32 *duration, f32 *step, f32 *value)
 {
-    if (*index >= 3) {
-        return;
-    }
-    for (s32 distance = 1; *index + distance < 4; ++distance) {
-        *duration = source->keys[*index + distance].frame - source->keys[*index].frame;
-        if (*duration > 0) {
-            const EffectIntegerKey *current = &source->keys[*index];
-            s32 frames = source->keys[*index + distance].frame - current->frame;
-            *step = (f32)current->value / (f32)frames;
-            *value = (f32)source->keys[*index].value;
-            *index += distance;
-            return;
+    s32 distance = 1;
+    if (*index < 3) {
+        for (; *index + distance < 4; ++distance) {
+            *duration = source->keys[*index + distance].frame - source->keys[*index].frame;
+            if (*duration > 0) {
+                s32 frames = source->keys[*index + distance].frame - source->keys[*index].frame;
+                *step = (f32)source->keys[*index].value / (f32)frames;
+                *value = (f32)source->keys[*index].value;
+                *index += distance;
+                return;
+            }
         }
     }
 }

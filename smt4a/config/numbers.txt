@@ -1,0 +1,1 @@
+0x00600001 // FUN_003cd7c4 returns it as a status code (ldr r4, =0x600001; mov r0, r4; pop)

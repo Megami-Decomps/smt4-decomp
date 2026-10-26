@@ -1,5 +1,5 @@
 #include "gfx/StereoParallax.h"
-/* NON_MATCHING: the stereo parallax is recomputed per call where retail reuses one value, the kind switch is a jump table and register assignment differs (225 vs 238 rows); the name plate drawing is the same. */
+/* NON_MATCHING: the stereo parallax is recomputed per call where retail reuses one value, the kind switch is now a 19-entry jump table from 0 like retail and register assignment differs (225 vs 238 rows); the name plate drawing is the same. */
 #include "common.h"
 #include "shard/TextureDrawCall.h"
 #include "text/TextDraw.h"
@@ -61,6 +61,9 @@ void FUN_004045ac(TalkWindow *window, s32 x, s32 y, f32 scale)
         s32 highlighted = 0;
 
         switch (window->message->kind) {
+        case 0:
+        case 1: /* table fillers: retail indexes the jump table from 0 */
+            break;
         case 2:
         case 4:
         case 6:

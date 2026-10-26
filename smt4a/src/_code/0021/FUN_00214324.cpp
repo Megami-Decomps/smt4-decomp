@@ -7,6 +7,13 @@
 #include "code/Code003c_Smt4a.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x14];
+    int f005f1610; /* 0x014 */
+};
+extern GameStateView g_gameState;
+
 
 int npcRoomDestroy(void);
 int buttonHelpSetSelectedId(...);
@@ -47,7 +54,7 @@ typedef struct {
 extern unsigned char LAB_00214b8c; /* 0x214b8c */
 extern unsigned char LAB_00214ba8; /* 0x214ba8 */
 extern unsigned int *g_npcRoom; /* 0x588124 */
-extern int DAT_005f1610; /* 0x5f1610 */
+
 extern signed char DAT_005f1b70; /* 0x5f1b70 */
 extern unsigned int DAT_005f1b74; /* 0x5f1b74 */
 extern unsigned int DAT_005f1b78; /* 0x5f1b78 */
@@ -423,10 +430,10 @@ LAB_00214b50:
     break;
   case 7:
     if (DAT_005f1b70 != '\0') {
-      if (DAT_005f1610 == 1) {
+      if (g_gameState.f005f1610 == 1) {
         asdSequenceRequest(6,0);
       }
-      if (DAT_005f1610 == 3) {
+      if (g_gameState.f005f1610 == 3) {
         temp_v8 = romwright_piece_2_2((short)DAT_005f1b78,(short)DAT_005f1b74 - 200);
         asdSequenceRequest(0xe,&temp_v8,4);
       }

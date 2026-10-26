@@ -1,4 +1,4 @@
-/* NON_MATCHING: command capture uses explicit stack stores instead of retail's argument-register push/VFP save layout. */
+/* NON_MATCHING: the start command is now the spilled argument block (push {r0-r2}, vpush {d0-d1}) as in retail; the vector copies and arc distance are scheduled differently. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include <math.h>
 
@@ -15,7 +15,7 @@ void FUN_003d5f60(BattleVectorTransition *transition, const BattleArcStartComman
 void FUN_003d6b7c(BattleVectorTransition *transition, u32 duration, u32 mode,
     f32 offset, f32 first, f32 second, f32 third)
 {
-    BattleArcStartCommand command = {offset, first, second, third, transition, duration, mode};
+    // The callee reads the command straight from the spilled arguments (floats first, then transition, duration, mode).
     transition->path.duration = duration;
     transition->path.frame = 0;
     transition->path.mode = mode;
@@ -29,6 +29,6 @@ void FUN_003d6b7c(BattleVectorTransition *transition, u32 duration, u32 mode,
     BattleVector3 point = {transition->anchors.end.x, 0.0f, transition->anchors.end.z};
     point.x += (f32)transition->path.horizontalOffset * 0.5f;
     point.z += (f32)transition->path.depthOffset;
-    FUN_003d5f60(transition, &command, &point, distance);
+    FUN_003d5f60(transition, reinterpret_cast<const BattleArcStartCommand *>(&offset), &point, distance);
 }
 }

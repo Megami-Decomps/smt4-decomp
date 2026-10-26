@@ -1,4 +1,3 @@
-/* NON_MATCHING: packet-mode switch is folded differently; retail also relocates the initial result constant. */
 #include "shard/W6_W6Match2_EffectEditor.h"
 
 struct EffectEditorPacket {
@@ -40,10 +39,10 @@ extern "C" u32 FUN_003cd7c4(u32 request, u32 argument)
         result = 0x400000;
     } else if (packet.state == 1) {
         FUN_003ca0ec(g_effectEditor.selection.list, g_effectEditor.selection.item);
-        if (packet.type == 8) {
-            effBlockCopyDataB(g_effectEditor.selection.block, &packet.value, 4, 4);
-        } else {
+        if (packet.type != 8) {
             taskRunWithObject(g_effectEditor.selection.block, &packet, effectPacketMode(packet.type));
+        } else {
+            effBlockCopyDataB(g_effectEditor.selection.block, &packet.value, 4, 4);
         }
         result = 0x400002;
     }

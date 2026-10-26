@@ -1,4 +1,4 @@
-/* NON_MATCHING: directional race fusion and packed pair fields restored; register allocation, level-table addressing and mask reuse differ. */
+/* NON_MATCHING: the pair words are packed with explicit masks and u16 ids as retail does; retail reuses the 0x3FFF8000 pool constant for the result mask (asr #13), indexes the last candidate as a u16 offset (count*4 - 2) and keeps the ids in different saved registers. */
 #include "camp/Unite/FusionCandidates.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "shard/W5_W5Match2_UniteWork.h"
@@ -9,7 +9,7 @@ u16 FUN_004dc154(FusionCandidateTables *tables, u32 race, u32 level);
 u16 uniteFindClosestEligibleCandidate(FusionCandidateTables *tables, u32 race, u32 level, u32 flags);
 
 // Apply a directional race rule to two demons and encode their resulting fusion pair.
-u32 FUN_004db2b8(FusionCandidateTables *tables, s16 firstId, u16 secondId, UnitePairEntryIV *pair)
+u32 FUN_004db2b8(FusionCandidateTables *tables, u16 firstId, u16 secondId, UnitePairEntryIV *pair)
 {
     u16 result = 0;
     DevilRecordA *first = FUN_00184310(firstId);
@@ -55,9 +55,10 @@ u32 FUN_004db2b8(FusionCandidateTables *tables, s16 firstId, u16 secondId, Unite
         if (first->id == result || second->id == result || result == 0)
             return 0;
     }
-    pair->firstId = firstId;
-    pair->secondId = secondId;
-    pair->resultId = result;
+    u32 *words = reinterpret_cast<u32 *>(pair);
+    words[0] = (words[0] & ~0x7FFF) | (firstId & 0x7FFF);
+    words[0] = (words[0] & ~0x3FFF8000) | ((secondId << 15) & 0x3FFF8000);
+    words[1] = (words[1] & ~0x1FFFC) | ((result << 2) & 0x1FFFC);
     return 1;
 }
 }

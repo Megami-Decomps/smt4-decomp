@@ -100,14 +100,14 @@ void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
     }
 
     AnimBinding *slot = *(AnimBinding **)((u8 *)model + model->currentSlot * 0x30 + 0x30);
-    if (slot == NULL || (*slot->tracks)->kind != 9) {
+    if (slot != NULL && (*slot->tracks)->kind == 9) {
+        model->unk200 = 1;
+        nn_math_ARMv6_MTX34CopyAsm(model->normalWorld, model->worldMatrix);
+    } else {
         FUN_0017efa4(model->unk0E4, model->normalMatrix, 0);
         model->unk200 = 0;
         nn_math_ARMv6_MTX34InvTransposeAsm(model->normalWorld, model->normalMatrix);
         nn_math_ARMv6_MTX34MultAsm(model->normalWorld, model->worldMatrix, model->normalWorld);
-    } else {
-        model->unk200 = 1;
-        nn_math_ARMv6_MTX34CopyAsm(model->normalWorld, model->worldMatrix);
     }
     FUN_00199f84(scratch, outMatrix);
     if (model->unk0E4[0] & 1)

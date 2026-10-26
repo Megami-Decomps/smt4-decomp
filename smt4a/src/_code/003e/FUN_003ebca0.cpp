@@ -1,4 +1,4 @@
-/* NON_MATCHING: condition-array and combatant-status indexing use different base registers. */
+/* NON_MATCHING: control flow, loads and index arithmetic now match retail; register numbering differs (retail keeps the kind in r4 and pushes r7/r8 for an extra live value). */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 
@@ -20,14 +20,15 @@ bool FUN_003ebca0(const BtlMainStateA *state)
 {
     const BattleConditionView *work = (const BattleConditionView *)state;
     for (s32 index = 0; index < work->count; ++index) {
-        const BattleCondition *condition = &work->conditions[index];
+        s32 kind = work->conditions[index].kind;
         if (work->unkA8) {
-            if (condition->kind == 6) {
-                return true;
+            if (kind != 6) {
+                continue;
             }
+            return true;
         } else {
-            if (condition->kind != 4 ||
-                !(state->entries[condition->unitIndex].statusFlags & 0x11c0)) {
+            if (kind != 4 ||
+                !(state->entries[work->conditions[index].unitIndex].statusFlags & 0x11c0)) {
                 return true;
             }
         }

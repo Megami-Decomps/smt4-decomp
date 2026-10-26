@@ -3,6 +3,22 @@
 #include "romwright_types.h"
 
 extern "C" {
+// The fields of g_gameState this function uses.
+struct GameStateView {
+    u8 pad000[0x18];
+    signed char f005f1614; /* 0x018 */
+    u8 pad019[0x7];
+    signed char f005f161c; /* 0x020 */
+    signed char f005f161d; /* 0x021 */
+    u8 pad022[0x1];
+    signed char f005f161f; /* 0x023 */
+    u8 pad024[0x1d0];
+    int f005f17f0; /* 0x1f4 */
+    u8 pad1f8[0x2b0];
+    signed char f005f1aa4; /* 0x4a8 */
+};
+extern GameStateView g_gameState;
+
 
 int CONCAT44(double, double);
 int FUN_001bbf0c(void);
@@ -28,12 +44,12 @@ extern int *g_lmapView; /* 0x5806a4 */
 extern int g_mapEnemy; /* 0x5806d4 */
 extern int DAT_00581280; /* 0x581280 */
 extern int g_lmapScene; /* 0x581288 */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f161c; /* 0x5f161c */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f161f; /* 0x5f161f */
-extern int DAT_005f17f0; /* 0x5f17f0 */
-extern signed char DAT_005f1aa4; /* 0x5f1aa4 */
+
+
+
+
+
+
 extern signed char DAT_005f1bc4; /* 0x5f1bc4 */
 extern int DAT_005f1be0; /* 0x5f1be0 */
 
@@ -100,7 +116,7 @@ void FUN_00273060(void)
   
   temp_v1 = g_mapEnemy;
   if (DAT_005f1be0 == 0) {
-    if (DAT_005f161f == '\0') {
+    if (g_gameState.f005f161f == '\0') {
       if ((*g_lmapView == 3) || (*(char *)(DAT_00581280 + 0xf40) != '\0')) {
         temp_v2 = 0;
         do {
@@ -113,7 +129,7 @@ void FUN_00273060(void)
         } while (temp_v2 < 0x28);
         return;
       }
-      if (DAT_005f161d != '\0') {
+      if (g_gameState.f005f161d != '\0') {
         temp_v2 = 0;
         do {
           temp_v3 = temp_v1 + temp_v2 * 0x188;
@@ -125,7 +141,7 @@ void FUN_00273060(void)
         } while (temp_v2 < 0x28);
         return;
       }
-      if (DAT_005f1aa4 != '\0') {
+      if (g_gameState.f005f1aa4 != '\0') {
         temp_v2 = 0;
         do {
           temp_v3 = temp_v1 + temp_v2 * 0x188;
@@ -141,11 +157,11 @@ void FUN_00273060(void)
       temp_v7 = DAT_005f1bc4 == '\0';
       temp_v0 = DAT_005f1bc4;
       if (temp_v7) {
-        temp_v0 = DAT_005f1614;
+        temp_v0 = g_gameState.f005f1614;
       }
       temp_v8 = temp_v7 && temp_v0 == '\0';
       if (temp_v7 && temp_v0 == '\0') {
-        temp_v8 = DAT_005f161c == '\0';
+        temp_v8 = g_gameState.f005f161c == '\0';
       }
       if (temp_v8) {
         FUN_003b959c();
@@ -166,8 +182,8 @@ void FUN_00273060(void)
         temp_v14 = *(float *)(temp_v1 + 0x24) * temp_v14;
         FUN_001bbf0c();
         *(float *)(temp_v1 + 0x30) = temp_v14 * *(float *)(temp_v1 + 0x20);
-        if (0 < DAT_005f17f0) {
-          DAT_005f17f0 = DAT_005f17f0 - 1;
+        if (0 < g_gameState.f005f17f0) {
+          g_gameState.f005f17f0 = g_gameState.f005f17f0 - 1;
         }
         FUN_002d2834();
       }

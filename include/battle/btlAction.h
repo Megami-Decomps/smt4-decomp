@@ -108,7 +108,7 @@ typedef struct BtlActionGlobals {
         struct {
             u8 prefix[0x18];
             /* 0x30 */ u64 requiredMask;
-            u8 padding38[8];
+            /* 0x38 */ u64 reachMask;
             /* 0x40 */ u64 excludedMask;
         } interaction;
         struct {
@@ -128,6 +128,7 @@ typedef char BtlActionClearedFlagsOffsetCheck[
     sizeof(BtlActionGlobals) == 0x130 && offsetof(BtlActionGlobals, interruptMask) == 0x128 ? 1 : -1];
 typedef char BtlActionInteractionMasksOffsetCheck[
     offsetof(BtlActionGlobals, interaction.requiredMask) == 0x30 &&
+    offsetof(BtlActionGlobals, interaction.reachMask) == 0x38 &&
     offsetof(BtlActionGlobals, interaction.excludedMask) == 0x40 ? 1 : -1];
 
 struct BtlActionResourceEntry {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: header-load scheduling and extended-length/literal cold-block placement differ; candidate -O2. */
+/* NON_MATCHING: only the 0x111-length arm schedules differently (retail shifts the high nibble before loading the two extension bytes; the build loads the first byte first). */
 #include "common.h"
 
 static __inline u32 readLzWord(const u8 *source)
@@ -9,8 +9,8 @@ static __inline u32 readLzWord(const u8 *source)
 
 extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
 {
-    bool extended = (*source & 15) != 0;
     u32 remaining = readLzWord(source) >> 8;
+    bool extended = (*source & 15) != 0;
     source += 4;
     if (remaining == 0) {
         remaining = readLzWord(source);
@@ -22,19 +22,21 @@ extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
     for (;;) {
         u32 flags = *source++;
         for (s32 bit = 0; bit < 8; ++bit, flags <<= 1) {
-            if (flags & 0x80) {
+            if ((flags & 0x80) == 0) {
+                *destination++ = *source++;
+                --remaining;
+            } else {
                 u32 first = *source;
                 u32 length = first >> 4;
                 if (!extended) {
                     length += 3;
                 } else if (length == 1) {
                     length = ((first & 15) << 12) | (source[1] << 4) | (source[2] >> 4);
-                    length += 0x111;
                     source += 2;
+                    length += 0x111;
                 } else if (length == 0) {
-                    length = ((first & 15) << 4) | (source[1] >> 4);
+                    length = ((first & 15) << 4) | (*++source >> 4);
                     length += 0x11;
-                    ++source;
                 } else {
                     ++length;
                 }
@@ -47,12 +49,8 @@ extern "C" void lzDecompressBytes(const u8 *source, u8 *destination)
                 remaining -= length;
                 const u8 *reference = destination - distance;
                 for (u32 index = 0; index < length; ++index) {
-                    destination[index] = reference[index];
+                    *destination++ = *reference++;
                 }
-                destination += length;
-            } else {
-                *destination++ = *source++;
-                --remaining;
             }
             if (remaining == 0) {
                 return;

@@ -106,10 +106,10 @@ void FUN_00176e84(SceneDrawJob *job, u32 stateA, s32 which, s32 dumpCommands)
         state->sceneBuilt = 1;
     }
     if (state->recorded == 0) {
-        if (pass != 0) {
-            FUN_0018cf00(renderer, stateA, 0);
-        } else {
+        if (pass == 0) {
             asdGxCommandListStartRecord(state->recorder);
+        } else {
+            FUN_0018cf00(renderer, stateA, 0);
         }
         DrawDispatchArgs functor = {renderer, job->state};
         if (dumpCommands != 0) {

@@ -13,8 +13,18 @@ struct UnitePreviewModel {
     /* 0x04 */ void *object;
 };
 
+/* The two ids packed into a pair entry's first word. */
+struct UnitePairIds {
+    u32 firstId : 15;
+    u32 secondId : 15;
+    u32 firstType : 2;
+};
+
 struct UnitePairEntry {
-    /* 0x00 */ u32 packedIds;
+    union {
+        /* 0x00 */ u32 packedIds;
+        UnitePairIds ids;
+    };
     /* 0x04 */ u32 unk04;
 };
 

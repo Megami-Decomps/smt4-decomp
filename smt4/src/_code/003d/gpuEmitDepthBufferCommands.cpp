@@ -1,4 +1,4 @@
-/* NON_MATCHING: command cursor register, exponent/NaN tests, and half-float temporary allocation differ from retail. */
+/* NON_MATCHING: retail keeps the command cursor in r1 and packs the depth word with lsr/lsl instead of a bic; half-float temporaries use other registers. */
 #include "shard/W6_W6Match8_GpuDepth.h"
 
 extern "C" {

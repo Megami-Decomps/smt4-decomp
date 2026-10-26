@@ -1,4 +1,4 @@
-/* NON_MATCHING: constant multiplications are reassociated and the result uses fewer saved VFP registers than retail. */
+/* NON_MATCHING: dataflow and block layout now match (scale defaults to 0.1f, the camera is read inside the else); only register numbering differs (retail: camera base r5 / mode r6, constants loaded s1,s2,s0). */
 #include "common.h"
 
 // Projection data lies beyond the shared ProjectionCamera prefix.
@@ -25,23 +25,22 @@ f32 FUN_0050dda4(f32 angle);
 // Derive display scale from the battle camera's perspective, with optional distance compensation.
 void FUN_004cb9d0(CameraScaledDisplay *display)
 {
-    CameraScaleView *camera = g_btlCamera;
     if (display->flags & 0x200000) {
         display->scale = 1.0f;
     } else {
+        CameraScaleView *camera = g_btlCamera;
         s32 mode = display->mode;
+        f32 scale = 0.1f;
         f32 height = camera->height;
-        f32 angle = camera->fieldOfView * 0.5f * 0.0055555557f * 3.1415927f;
+        f32 halfAngle = camera->fieldOfView * 0.5f;
+        f32 angle = halfAngle * 0.0055555557f * 3.1415927f;
         f32 projectedScale = height / (120.0f / FUN_0050dda4(angle));
-        f32 scale = projectedScale;
-        if (mode != 0) {
-            if (mode == 1)
-                scale = (projectedScale / camera->distance) * (camera->distance - 15.0f);
-            else if (mode == 2)
-                scale = (projectedScale / camera->distance) * (camera->distance - -20.0f);
-            else
-                scale = 0.1f;
-        }
+        if (mode == 0)
+            scale = projectedScale;
+        else if (mode == 1)
+            scale = (projectedScale / camera->distance) * (camera->distance - 15.0f);
+        else if (mode == 2)
+            scale = (projectedScale / camera->distance) * (camera->distance - -20.0f);
         display->scale = scale;
     }
 }

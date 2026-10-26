@@ -1,35 +1,19 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0035ae38` (_code @ 0x35ae38, 0x34 bytes) from smt4_v1.2.0.cxi.
- * retail reads the thread id with `mrc` and issues `svc 0x32`: this raw version calls placeholder intrinsics instead.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "nn/Result.h"
+#include "nn/svc.h"
+#include "nn/os/IpcCommandBuffer.h"
 
 extern "C" {
+extern u32 DAT_00472ad8;
 
-int coproc_movefrom_User_R_Thread_and_Process_ID(void);
-int software_interrupt(int);
-
-extern unsigned int DAT_00472ad8; /* 0x472ad8 */
-
-/* Unsupported intrinsic, declaration required: coproc_movefrom_User_R_Thread_and_Process_ID (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-
-
-unsigned int FUN_0035ae38(void)
-
+u32 FUN_0035ae38(void)
 {
-/* irregular: 2 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  
-  temp_v1 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(temp_v1 + 0x80) = 0x20002;
-  *(unsigned int *)(temp_v1 + 0x84) = 0x20;
-  software_interrupt(0x32);
-  temp_v0 = DAT_00472ad8;
-  if ((DAT_00472ad8 & 0x80000000) == 0) {
-    temp_v0 = *(unsigned int *)(temp_v1 + 0x84);
-  }
-  return temp_v0;
+    nn::os::IpcCommandBuffer *command = nn::os::GetIpcCommandBuffer();
+    command->header = 0x00020002;
+    nn::os::SetIpcWord(command, 1, 0x20);
+    s32 result = nn::svc::SendSyncRequest(DAT_00472ad8);
+    if ((s32)(result & 0x80000000) >= 0) {
+        result = command->words[0];
+    }
+    return result;
 }
-
-} /* extern "C" */
+}

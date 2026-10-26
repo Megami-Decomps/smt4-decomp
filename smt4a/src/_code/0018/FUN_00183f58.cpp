@@ -3,7 +3,7 @@
 
 extern "C" {
 extern ButtonHelpGlobalsA g_buttonHelp;
-extern ButtonHelpQueuedSelections DAT_0057f0d8;
+extern ButtonHelpQueuedSelections g_buttonHelpQueuedKinds;
 
 // Queue a help selection while another unit animates, or start its appropriate animation.
 void FUN_00183f58(u32 index, s32 kind, s32 value, s32 queue)
@@ -14,20 +14,20 @@ void FUN_00183f58(u32 index, s32 kind, s32 value, s32 queue)
     if (!work)
         return;
     if (queue) {
-        s32 queuedKind = DAT_0057f0d8.kinds[index];
+        s32 queuedKind = g_buttonHelpQueuedKinds.kinds[index];
         if (queuedKind < 0) {
             const ButtonHelpCompatibility *activity = reinterpret_cast<const ButtonHelpCompatibility *>(work);
             for (s32 unit = 0; unit < 6; ++unit) {
                 if (activity->active[unit]) {
-                    DAT_0057f0d8.kinds[index] = kind;
-                    DAT_0057f0d8.values[index] = value;
+                    g_buttonHelpQueuedKinds.kinds[index] = kind;
+                    g_buttonHelpQueuedKinds.values[index] = value;
                     return;
                 }
             }
         }
-        if (queuedKind == kind && DAT_0057f0d8.values[index] == value) {
-            DAT_0057f0d8.kinds[index] = -1;
-            DAT_0057f0d8.values[index] = -1;
+        if (queuedKind == kind && g_buttonHelpQueuedKinds.values[index] == value) {
+            g_buttonHelpQueuedKinds.kinds[index] = -1;
+            g_buttonHelpQueuedKinds.values[index] = -1;
         }
     }
     work->kinds[index].kind = static_cast<u8>(kind);

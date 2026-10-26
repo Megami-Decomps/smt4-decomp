@@ -46,6 +46,7 @@ struct CallbackListNode {
 };
 
 struct CallbackList {
+    CallbackList();
     /* 0x00 */ u32 count;
     /* 0x04 */ CallbackListNode sentinel;
 };

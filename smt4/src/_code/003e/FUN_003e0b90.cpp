@@ -1,29 +1,13 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e0b90` (_code @ 0x3e0b90, 0x2c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+#include "common.h"
 
 extern "C" {
+s32 rt_memcmp(const void *first, const void *second, u32 bytes);
 
-extern int rt_memcmp(int, unsigned int, unsigned int);
-
-
-unsigned int FUN_003e0b90(unsigned int param_1,int param_2)
-
+u32 FUN_003e0b90(const void *first, const void *second)
 {
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  temp_v1 = 0;
-  if (param_2 != 0) {
-    temp_v0 = rt_memcmp(param_2,param_1,8);
-    if (temp_v0 == 0) {
-      temp_v1 = 1;
+    if (second == NULL) {
+        return 0;
     }
-    else {
-      temp_v1 = 0;
-    }
-  }
-  return temp_v1;
+    return rt_memcmp(second, first, 8) == 0;
 }
-
-} /* extern "C" */
+}

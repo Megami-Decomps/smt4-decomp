@@ -16,29 +16,7 @@ extern "C" f32 FUN_001b640c(f32 y, f32 x)
     bool reflected;
     f32 oppositeY = -y;
     // Fold the point into its principal octant; x becomes the minor-axis coordinate.
-    if (x >= 0.0f) {
-        if (y >= 0.0f) {
-            if (x >= y) {
-                denominator = x;
-                x = y;
-                reflected = false;
-            } else {
-                denominator = y;
-                offset = quarterTurn;
-                reflected = true;
-            }
-        } else {
-            if (x >= oppositeY) {
-                denominator = x;
-                x = oppositeY;
-                reflected = true;
-            } else {
-                denominator = oppositeY;
-                offset = -quarterTurn;
-                reflected = false;
-            }
-        }
-    } else {
+    if (x < 0.0f) {
         x = -x;
         if (y >= 0.0f) {
             if (x >= y) {
@@ -61,6 +39,28 @@ extern "C" f32 FUN_001b640c(f32 y, f32 x)
                 denominator = oppositeY;
                 offset = -quarterTurn;
                 reflected = true;
+            }
+        }
+    } else {
+        if (y >= 0.0f) {
+            if (x >= y) {
+                denominator = x;
+                x = y;
+                reflected = false;
+            } else {
+                denominator = y;
+                offset = quarterTurn;
+                reflected = true;
+            }
+        } else {
+            if (x >= oppositeY) {
+                denominator = x;
+                x = oppositeY;
+                reflected = true;
+            } else {
+                denominator = oppositeY;
+                offset = -quarterTurn;
+                reflected = false;
             }
         }
     }

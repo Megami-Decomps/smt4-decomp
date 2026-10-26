@@ -5,7 +5,7 @@
 
 extern "C" {
 int asdMemFree(u32 block);
-int asdMemFreeNonNull(void *block);
+void asdMemFreeNonNull(void *block);
 int asdCecShutdown(void);
 }
 

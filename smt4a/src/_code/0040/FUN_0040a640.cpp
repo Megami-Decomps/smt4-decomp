@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps one gameDataBlocksGetStats call and selects the record out of line after it; this build duplicates the call into the kind branches. */
+/* NON_MATCHING: record addressing now matches retail (flat arrays, unfolded (group-1)*7+index and group*2-2+index); retail still keeps one gameDataBlocksGetStats call with the record selection out of line after it, while the build duplicates the call into the kind-0 remap path and predicates the selection. */
 #include "common.h"
 #include "gamedata/DataTableAccess.h"
 
@@ -20,8 +20,8 @@ typedef struct StatRecord {
 
 typedef struct StatBlock {
     /* 0x000 */ u8 unk000[0x1c];
-    /* 0x01C */ StatRecord normal[12][7];
-    /* 0x16C */ StatRecord special[1][2];
+    /* 0x01C */ StatRecord normal[12 * 7];
+    /* 0x16C */ StatRecord special[2];
 } StatBlock;
 
 StatResetEntry *dataTable18Sub0GetEntries(void);
@@ -37,24 +37,28 @@ void FUN_0040a640(void)
         u8 group = entries[i].group;
         u8 kind = entries[i].kind;
         u32 index = entries[i].index;
-        if (kind != 0) {
-            if (index == 6) {
-                index = 0;
-            } else if (index == 7) {
-                index = 1;
+        if (kind == 0) {
+            if (index == 7) {
+                index = 6;
             }
+        } else if (index == 6) {
+            index = 0;
         } else if (index == 7) {
-            index = 6;
+            index = 1;
         }
 
         StatBlock *stats = gameDataBlocksGetStats();
         StatRecord *record;
-        if (kind == 0) {
-            record = &stats->normal[group - 1][index];
-        } else if (kind == 1) {
-            record = &stats->special[group - 1][index];
-        } else {
+        switch (kind) {
+        case 0:
+            record = &stats->normal[(group - 1) * 7 + index];
+            break;
+        case 1:
+            record = &stats->special[group * 2 - 2 + index];
+            break;
+        default:
             record = NULL;
+            break;
         }
         record->count = 0;
         record->level = 0;

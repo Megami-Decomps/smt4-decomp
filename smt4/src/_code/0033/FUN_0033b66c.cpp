@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00140f3c(...);
-int rt_vec_dtor(...);
+int __aeabi_vec_dtor(...);
 int FUN_001404c4(...);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
@@ -24,7 +24,7 @@ extern unsigned char DAT_004219ac; /* 0x4219ac */
 extern unsigned char DAT_00421c78; /* 0x421c78 */
 
 /* Supplied declaration required: FUN_00140f3c. */
-/* Supplied declaration required: rt_vec_dtor. */
+/* Supplied declaration required: __aeabi_vec_dtor. */
 extern int FUN_00377414(int);
 extern int FUN_00378b40(int);
 /* Supplied declaration required: FUN_001404c4. */
@@ -38,14 +38,14 @@ unsigned int * FUN_0033b66c(int param_1)
   int temp_v0;
   unsigned int *puVar2;
   
-  rt_vec_dtor(param_1 + 0x1000,FUN_00376974,4,0x10);
-  rt_vec_dtor(param_1 + 0x7c0,FUN_00376d74,0x84,0x10);
+  __aeabi_vec_dtor(param_1 + 0x1000,FUN_00376974,4,0x10);
+  __aeabi_vec_dtor(param_1 + 0x7c0,FUN_00376d74,0x84,0x10);
   *(unsigned char **)(param_1 + 0x784) = &DAT_0042198c;
   *(unsigned char **)(param_1 + 0x788) = &DAT_004219ac;
-  rt_vec_dtor(param_1 + 0x694,FUN_003472f0,0x3c,4);
-  rt_vec_dtor(param_1 + 0x674,soundHandlePairDetach,0x10,2);
-  rt_vec_dtor(param_1 + 0x5fc,soundObjDetachHandles,0x3c,2);
-  rt_vec_dtor(param_1 + 0x4bc,FUN_003406b4,0x50,4);
+  __aeabi_vec_dtor(param_1 + 0x694,FUN_003472f0,0x3c,4);
+  __aeabi_vec_dtor(param_1 + 0x674,soundHandlePairDetach,0x10,2);
+  __aeabi_vec_dtor(param_1 + 0x5fc,soundObjDetachHandles,0x3c,2);
+  __aeabi_vec_dtor(param_1 + 0x4bc,FUN_003406b4,0x50,4);
   temp_v0 = FUN_00377414(param_1 + 0x244);
   temp_v0 = FUN_00378b40(temp_v0 - 0xc0);
   puVar2 = (unsigned int *)(temp_v0 - 0x184);

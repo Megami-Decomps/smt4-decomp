@@ -3,15 +3,10 @@
 #include <new>
 #include "quest_center/qcCtrl.h"
 
-/* The model cache: a word, then 16 entries. */
-struct ModelCache {
-    /* 0x00 */ u32 unk00;
-    /* 0x04 */ Obj557b08 *entries[16];
-};
-
 extern "C" {
 
-extern ModelCache DAT_005cc508;
+/* The model cache: a word, then 16 entries. */
+extern Obj557b08 *DAT_005cc508[17];
 extern u32 g_aocSystem;
 extern const char DAT_00527250[];
 extern const char DAT_0052726c[];
@@ -33,18 +28,18 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
     s32 i;
 
     for (i = 0; i < 16; i++) {
-        Obj557b08 *cached = DAT_005cc508.entries[i];
+        Obj557b08 *cached = DAT_005cc508[i + 1];
         if (cached != NULL && cached->id == id) {
             cached->references++;
-            return DAT_005cc508.entries[i];
+            return DAT_005cc508[i + 1];
         }
     }
     i = 0;
     do {
-        if (DAT_005cc508.entries[i] == NULL) {
+        if (DAT_005cc508[i + 1] == NULL) {
             break;
         }
-        if (DAT_005cc508.entries[i + 1] == NULL) {
+        if (DAT_005cc508[i + 2] == NULL) {
             i++;
             break;
         }
@@ -55,7 +50,7 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
     if (model != NULL) {
         new (model) Obj557b08;
     }
-    DAT_005cc508.entries[i] = model;
+    DAT_005cc508[i + 1] = model;
     model->references = 1;
     if (load != 0) {
         if (id < 0) {

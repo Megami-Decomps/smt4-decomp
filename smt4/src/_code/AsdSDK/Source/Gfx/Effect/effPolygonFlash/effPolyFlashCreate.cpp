@@ -10,6 +10,12 @@ static __inline void quaternionSetIdentity(PolyVec4 *quaternion)
     quaternion->w = 1.0f;
 }
 
+// Copies through pointers so armcc moves the 16 bytes with VFP vldmia/vstmia.
+static __inline void polyVec4Copy(const PolyVec4 *source, PolyVec4 *destination)
+{
+    *destination = *source;
+}
+
 extern "C" {
 
 void *memAlloc(int, int, int, int size, int align, int);
@@ -31,7 +37,7 @@ PolyObject *effPolyFlashCreate(u32 kind, void *params, s32 arg)
     obj->work = obj->workData;
     obj->frame = 0;
     obj->kind = kind;
-    obj->color = g_polyDefaultColor;
+    polyVec4Copy(&g_polyDefaultColor, &obj->color);
     quaternionSetIdentity(&obj->rotation0);
     quaternionSetIdentity(&obj->rotation1);
     rt_memcpy(obj->work, params, workSize);
