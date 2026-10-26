@@ -10,3 +10,8 @@ __pycache__/
 /gen-*.log
 .romwright/*.sqlite-shm
 .romwright/*.sqlite-wal
+
+# Scratch output: never committed (sources, config and docs only).
+/*.txt
+/*.json
+*.o
