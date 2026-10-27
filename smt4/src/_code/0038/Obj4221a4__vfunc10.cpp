@@ -1,4 +1,3 @@
-/* NON_MATCHING: the rectangle reads now match (windowRegionGet* linker-inlined getters); only the scheduling of the constant call arguments differs. */
 #include "classes/Obj4221a4.h"
 
 extern "C" {

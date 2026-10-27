@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail converts into s2 and divides into s0 (no in-place VFP reuse) and keeps separate tails for both signs in mode 2; armcc here reuses s0 and folds the sign into vnegeq. */
 #include "common.h"
 
 extern "C" {

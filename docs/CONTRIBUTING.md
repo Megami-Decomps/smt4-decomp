@@ -166,11 +166,12 @@ Every match must be one a programmer could have written for a reason.
   `fdiff` then compile it in one `--multifile --no_autoinline` run with the callees' unit sources
   and keep only the unit's function. Same evidence rule as `cflags`, and the callees' own sources
   must clobber what retail's do (matched callees are best).
-- **The compiler is armcc 4.1 b713 throughout.** Every other build decomp.me ships (4.0, 4.1 b561
-  to b1454, 5.04) loses proven functions and gains none that b713 lacks. Later 4.1 builds happen to
-  match some near misses (they never write a `vdiv`/`vabs`/`vcvt` result over an operand), but
-  those sit next to functions only b713 matches: the source is still not the original. Fix the
-  source; don't change the compiler.
+- **The compiler is armcc 4.1 b1454 throughout** (`config/toolchain.json`). Builds up to b713
+  never fuse a halfword multiply-add into `smlabb` and write a `vdiv`/`vcvt` result over one of its
+  operands; retail does neither, and b791 and later reproduce both. With the sources tuned for b713
+  over thirty waves, b1454 still matched more of both games than b713 when the project switched; the
+  functions it lost were b713 register tie-breaks. Fix the source; don't change the compiler per
+  unit.
 - **Linker NOPs are calls.** armcc never emits `mov r0, r0` (ARM) or `mov r8, r8` twice (Thumb);
   armlink writes them over a branch it removed. `build.py` and `fdiff` do the same after compiling,
   so write the call:

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the order of the two constant setups at entry differs (retail loads 0 into r6 before 5 into r5). */
 #include "common.h"
 #include "code/Code0029.h"
 #include "gamedata/SaveSlotTableIV.h"

@@ -1,4 +1,3 @@
-/* NON_MATCHING: byte-for-byte except VFP register choice inside the two inlined MoveValue::GetValue ramps (retail cvt/mul/div use fresh s-registers; armcc allocates in place). */
 #include "nw/snd/BasicSound.h"
 
 using namespace nw::snd::internal;

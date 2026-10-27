@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the adjacent stack-base move and zero-register copy are scheduled in the opposite order. */
 #include "gamedata/PartySortRecord.h"
 #include "shard/W6_W6Match1_PartySlot.h"
 #include "code/Code0019.h"

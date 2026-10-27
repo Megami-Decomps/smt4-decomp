@@ -1,4 +1,3 @@
-/* NON_MATCHING: last call: retail hoists `add r5, sp, #12` above `mov r0, r4`; here the temporary takes r4 after the move. */
 #include "common.h"
 #include "classes/Obj422594.h"
 #include "AsdSDK/TexTableEntryRange.h"

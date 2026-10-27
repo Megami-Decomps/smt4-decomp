@@ -1,4 +1,3 @@
-/* NON_MATCHING: begin/end load uses r0 as its ldm base instead of retail r2; canonical allocator calls and capacity setter reproduce the final stores. */
 #include "classes/AllocatedArray.h"
 
 extern "C" {

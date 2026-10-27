@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation of the temporaries only (retail rotates r2/r3/ip differently in the tick test and in each countdown loop); control flow and instructions are otherwise identical. */
 #include "common.h"
 #include "shard/SaveWork.h"
 

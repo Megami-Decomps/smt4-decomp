@@ -1,4 +1,3 @@
-/* NON_MATCHING: grouped stats offsets match; percentage base, numerator and constant registers differ. */
 #include "battle/EntryStats.h"
 #include "battle/btlMain.h"
 #include "battle/BtlMainAccess.h"

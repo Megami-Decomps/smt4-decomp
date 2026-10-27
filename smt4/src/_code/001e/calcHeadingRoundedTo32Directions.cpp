@@ -1,4 +1,3 @@
-/* NON_MATCHING: sector division/conversion uses s0 rather than retail's s2 quotient; all other instructions agree. */
 #include "common.h"
 
 extern "C" {

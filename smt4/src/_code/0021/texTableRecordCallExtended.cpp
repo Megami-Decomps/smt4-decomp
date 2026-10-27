@@ -1,4 +1,3 @@
-/* NON_MATCHING: paired packet stores use r0 as their address instead of retail r2. */
 #include "shard/W6_W6Match5_RecordCallParameters.h"
 #include "shard/W6_W6Match3_ExtendedRecordCall.h"
 

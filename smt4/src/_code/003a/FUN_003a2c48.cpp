@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the prologue order differs (retail: mov r8,#0; cmp r0,#6; mov r7,#3; build hoists the 3 first). */
 #include "common.h"
 #include "classes/Obj55ca08.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"

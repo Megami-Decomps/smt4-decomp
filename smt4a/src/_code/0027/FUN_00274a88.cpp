@@ -1,4 +1,3 @@
-/* NON_MATCHING: float register allocation only: retail divides into a fresh VFP register (vdiv s6/s3) where built reuses the dividend's */
 #include "map/mapDepart.h"
 #include "map/mapIf.h"
 #include "shard/W5_W5Match7_FlagBanks.h"

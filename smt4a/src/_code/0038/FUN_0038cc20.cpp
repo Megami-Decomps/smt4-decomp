@@ -1,4 +1,3 @@
-/* NON_MATCHING: only required-mask AND scratch registers differ; active-entry addressing now matches. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"

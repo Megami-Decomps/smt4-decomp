@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail returns straight into the shared pop after `movle r0,#1`; the build adds a `bgt` to a separate epilogue. */
 #include "common.h"
 #include "gamedata/Table04Record.h"
 

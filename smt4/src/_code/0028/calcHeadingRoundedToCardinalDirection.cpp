@@ -1,4 +1,3 @@
-/* NON_MATCHING: division/conversion use s0 for the quotient instead of retail s2; every other default instruction matches, as in the32-way quantizer. */
 #include "common.h"
 
 extern "C" {

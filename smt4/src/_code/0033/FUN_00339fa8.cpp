@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the registers of the zero constant and the frame-delta base differ (ip and r4 swapped). */
 #include "common.h"
 
 extern "C" {

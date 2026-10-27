@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler forwards kind to r3 earlier and reuses r5 rather than ip for the outgoing-stack cursor. */
 #include "ui/MessageMain.h"
 extern "C" MessageGlobals g_messageMain;
 

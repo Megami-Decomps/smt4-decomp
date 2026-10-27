@@ -1,4 +1,3 @@
-/* NON_MATCHING: The saved-angle VSTM base is allocated to r0 instead of r1. */
 #include "shard/W8Match1_ControllerRotation.h"
 extern "C" void controllerSetRotationEulerDegrees(void*, f32, f32, f32);
 

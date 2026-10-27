@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the table pointer in r6 and the constant 0 in r7 (swapped here) */
 /* Releases every in-use slot of the slot table (freeing its resource), then marks the table empty. */
 #include "common.h"
 

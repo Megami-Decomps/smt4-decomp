@@ -1,4 +1,3 @@
-/* NON_MATCHING: the in-loop bound loads first and count with one LDRD; retail loads first then count with two scalar LDRs (its pre-loop check pairs them as in the build). */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "util/SlotRangeSelect.h"

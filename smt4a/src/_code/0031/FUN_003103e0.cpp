@@ -1,4 +1,3 @@
-/* NON_MATCHING: the payload pointer is rebuilt from r4 (saved node) in retail, from r1 here. */
 #include "common.h"
 
 extern "C" {

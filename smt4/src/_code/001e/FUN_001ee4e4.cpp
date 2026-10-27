@@ -1,4 +1,3 @@
-/* NON_MATCHING: inlined texture readiness tests copied id in r1 rather than original id in r5; all other instructions match. */
 #include "gamedata/DevilRecord.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 struct DemonTextureDrawRecord {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: quotient uses s0 instead of retail's s2; all other default instructions match. */
 #include "common.h"
 
 extern "C" f32 mathSnapHeading16(f32 angle)

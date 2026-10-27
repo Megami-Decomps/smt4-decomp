@@ -1,4 +1,3 @@
-/* NON_MATCHING: FUN_003c1ab4, FUN_003c1e50 and FUN_003c1ef4 share this source because retail inlines both into FUN_003c1ef4; the packed zero word and the stat-copy base register still differ there, and FUN_003c1ab4 needs retail's smlabb (not emitted by b713 from this C). */
 #include "gamedata/PlayerInitialization.h"
 #include "gamedata/DataTable.h"
 #include "gamedata/PlayerDataBlock.h"

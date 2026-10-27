@@ -1,4 +1,3 @@
-/* NON_MATCHING: the two floating-point aggregate store addresses use r1 instead of retail's ip. */
 #include "common.h"
 
 struct DrawIntegerTriple { s32 x, y, z; };

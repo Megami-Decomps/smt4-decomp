@@ -1,4 +1,3 @@
-/* NON_MATCHING: signed force-update byte recovers retail indexed load; vector-copy destination and call argument addresses use different registers. */
 #include "common.h"
 
 namespace {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: initialization ID/key pointers and rank-scan counter/base/flags use different registers; O2 allocation candidate. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 

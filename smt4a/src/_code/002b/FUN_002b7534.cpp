@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the constant 0 in r6 and the g_eplSlots address in r7, built the other way round */
 #include "shard/W4_Match3_EplSlots.h"
 #include "classes/Obj557dcc.h"
 

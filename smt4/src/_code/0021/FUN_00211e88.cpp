@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the reciprocal result uses S0 rather than retail's S1 in VDIV/VSTR; all other default-flag instructions match. */
 #include "common.h"
 #include "script/ScriptArgs.h"
 #include "shard/JobWork.h"

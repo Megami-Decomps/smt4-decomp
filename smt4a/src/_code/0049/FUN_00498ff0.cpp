@@ -1,4 +1,3 @@
-/* NON_MATCHING: scheduling only: retail forms the second table's stack address (sp + 20) before the first store. */
 #include "shard/Shard0049.h"
 #include <string.h>
 

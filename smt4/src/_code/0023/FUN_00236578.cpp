@@ -1,4 +1,3 @@
-/* NON_MATCHING: the begin/end pair is loaded with `ldm r0, {r0, r2}` where retail uses `ldm r2, {r0, r2}` (and sets the zero count after the load); everything else matches. */
 #include "classes/AllocatedArray.h"
 
 extern "C" {

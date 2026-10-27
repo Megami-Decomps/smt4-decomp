@@ -1,4 +1,3 @@
-/* NON_MATCHING: the link address is copied from r4 in retail; here from r1 (same value). */
 #include "common.h"
 
 extern "C" {

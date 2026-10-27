@@ -1,4 +1,3 @@
-/* NON_MATCHING: the category-rank read now uses retail's record + category address form; the rank-slot address and value registers (retail r0/r1/r2) are allocated differently. */
 #include "common.h"
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"

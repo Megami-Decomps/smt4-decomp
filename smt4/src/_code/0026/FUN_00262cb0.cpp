@@ -1,4 +1,3 @@
-/* NON_MATCHING: Choice-count and loop-index registers are interchanged. */
 #include "shard/GameDataBlocks.h"
 #include "gamedata/StatusChoices.h"
 extern "C" s32 statusGetAvailableChoiceCount(void);

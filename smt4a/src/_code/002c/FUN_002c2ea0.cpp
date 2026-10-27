@@ -1,4 +1,3 @@
-/* NON_MATCHING: in the step-advance path retail builds &from->z in r3 (then reuses r3 for from) where armcc uses r1; one-register scheduling difference. */
 #include "common.h"
 
 struct KeyVec4 {

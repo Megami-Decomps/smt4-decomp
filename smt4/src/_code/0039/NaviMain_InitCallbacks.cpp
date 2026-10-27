@@ -1,4 +1,3 @@
-/* NON_MATCHING: eight callback-table loads use r0 as their address register instead of retail r3; instruction count matches. */
 #include "common.h"
 #include <stddef.h>
 

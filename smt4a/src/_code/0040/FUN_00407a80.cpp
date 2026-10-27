@@ -1,4 +1,3 @@
-/* NON_MATCHING: second vector source address uses r0 rather than retail r2. */
 #include "common.h"
 struct Vector3 { u32 x,y,z; };
 struct CameraState { u8 unk000[1460]; Vector3 currentFirst,currentSecond,sourceFirst,sourceSecond; };

@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except r4/r5 swapped (field-address pointer vs scaled index) */
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"

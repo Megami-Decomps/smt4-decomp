@@ -1,4 +1,3 @@
-/* NON_MATCHING: the stack-argument address is built in r4 instead of lr (scheduling of the argument setup differs). */
 #include "common.h"
 
 extern "C" {

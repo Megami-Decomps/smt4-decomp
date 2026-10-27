@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses str r1, [ip, #48] where the compiled block uses add r0, ip, #48. */
 #include "common.h"
 
 struct StoredVector {

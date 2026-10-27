@@ -1,4 +1,3 @@
-/* NON_MATCHING: the zero-kind arm is now outlined like retail; only the order of the kind compare against the position stores differs. */
 #include "shard/W8Match1_PositionRequests.h"
 #include "AsdSDK/Source/Snd/SoundActorQueue.h"
 extern "C" {

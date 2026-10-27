@@ -1,4 +1,3 @@
-/* NON_MATCHING: branch layout: retail runs the steps != 0 case inline and moves the zero case after the return; built predicates the zero case */
 #include "common.h"
 #include "code/Code0020.h"
 #include "shard/JobWork.h"

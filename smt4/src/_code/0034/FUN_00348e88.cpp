@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the goal's required count into r0 after copying the item-count result to r9; the build loads it into r1 before the copy. */
 /* Marks active item-count quest goals and records whether this gain reaches their target. */
 #include "shard/SaveWork.h"
 #include "gamedata/GameDataAccess_VariantA.h"

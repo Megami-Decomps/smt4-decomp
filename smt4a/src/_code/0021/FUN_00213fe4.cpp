@@ -1,4 +1,3 @@
-/* NON_MATCHING: RGB counter reset and first target load use the inline helper's register instead of the owner's; see smt4 FUN_00193f38. */
 #include "common.h"
 #include "shard/W6_W6Match8_ColorKeys.h"
 

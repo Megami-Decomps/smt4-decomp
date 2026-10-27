@@ -1,4 +1,3 @@
-/* NON_MATCHING: registers and loads match retail; the build adds a branch-to-next `beq` after the predicated offset add. */
 #include "shard/W5_W5Match2_RelativeData.h"
 extern "C" {
 /* Resolve either an absolute or record-relative data pointer. */

@@ -1,4 +1,3 @@
-/* NON_MATCHING: block-copy address temporaries use r5 instead of retail's lr. */
 #include "AsdSDK/Source/Gfx/Effect/effMenu.h"
 #include "AsdSDK/Source/Gfx/Effect/effMenuMatrix.h"
 #include "AsdSDK/AsdDebug.h"

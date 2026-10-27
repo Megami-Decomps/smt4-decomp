@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail avoids r1 after the call (address temp for the two callback stores is r2); cause unknown (a fake 2-word result reproduces it and was vetoed). */
 #include "AsdSDK/Source/Sys/File/AsdFile.h"
 
 extern "C" {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: register allocation only: retail keeps the count in r5 and the id offset (0x20) in ip; built swaps them */
 #include "common.h"
 
 extern "C" {

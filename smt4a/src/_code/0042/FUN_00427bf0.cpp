@@ -1,4 +1,3 @@
-/* NON_MATCHING: the 64-bit id now moves r0:r1 -> r2:r3 in order like retail; remaining: armcc keeps a `beq` to the next instruction after the final conditional load (retail ends right after the ldrne). */
 #include "nn/Result.h"
 extern "C" {
 s32 FUN_004268ec(u8 *value, u8 mode, u64 id);

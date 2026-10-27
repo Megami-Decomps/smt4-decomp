@@ -1,4 +1,3 @@
-/* NON_MATCHING: copies from the shared texture command templates at DAT_0053d500+0x78/+0xb0 like retail (pool base now matches); only the register for the sp+88 store address (r4 vs retail's r7) differs. */
 #include "shard/TextureCommandTemplates.h"
 
 extern "C" {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: sqrt result lands in s0 instead of retail's s5 (one register) */
 #include "common.h"
 
 extern "C" {

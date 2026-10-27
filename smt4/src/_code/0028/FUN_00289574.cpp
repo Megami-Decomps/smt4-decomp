@@ -1,4 +1,3 @@
-/* NON_MATCHING: the pool word now names g_gameState+0x3f8 like retail; the build uses r0 where retail uses ip for the float-store base. */
 #include "map/mapDepart.h"
 
 extern "C" {

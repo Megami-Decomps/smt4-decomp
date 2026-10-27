@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail loads the required mask with one ldm into r3/ip; built uses two ldr with the halves in ip/r3. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"

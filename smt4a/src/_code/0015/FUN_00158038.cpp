@@ -1,4 +1,3 @@
-/* NON_MATCHING: vector::erase copy loop (unrolled by two) differs only in instruction scheduling of the pointer increments and subs */
 #include "common.h"
 #include <vector>
 #include <utility>

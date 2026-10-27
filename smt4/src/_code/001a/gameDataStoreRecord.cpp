@@ -1,4 +1,3 @@
-/* NON_MATCHING: second copy-block destination is formed later in r1 instead of early in r2. */
 #include "shard/GameDataBlocks.h"
 
 struct StoredGameRecord {

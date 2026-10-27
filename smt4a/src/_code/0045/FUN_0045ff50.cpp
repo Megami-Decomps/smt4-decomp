@@ -1,4 +1,3 @@
-/* NON_MATCHING: matches except the scratch register of the block copy (retail copies through lr, armcc picks the dead owner register r4). */
 #include "classes/ObjectCommandRequests.h"
 
 /* Four payload words copied into a command as a block. */

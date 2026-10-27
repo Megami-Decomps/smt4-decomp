@@ -230,7 +230,7 @@ def link_weak_calls(obj, unit=None):
     `__cxa_guard_release` and `__aeabi_atexit` count as weak: in the retail program the first is not
     defined and the second is an empty function (`bx lr`), and every call a static's initialisation
     makes to them is this NOP (armlink's --inline removed the calls to the empty function); armcc 4.1
-    b713 references them strongly. A tail branch to `__aeabi_atexit` (a file's last registration)
+    references them strongly. A tail branch to `__aeabi_atexit` (a file's last registration)
     stays: armlink cannot inline a `b`. `__dso_handle`, the atexit argument, is the image base:
     retail's pool holds `entry`."""
     import struct

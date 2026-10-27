@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the float constants' registers differ: retail keeps 0.0f in s16 and 1.0f in s17, built swaps them */
 #include "common.h"
 
 extern "C" {

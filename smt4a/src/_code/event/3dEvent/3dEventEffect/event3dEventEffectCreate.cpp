@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the translation destination address uses r5 instead of retail r9. */
 #include "event/EventEplEffect.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"

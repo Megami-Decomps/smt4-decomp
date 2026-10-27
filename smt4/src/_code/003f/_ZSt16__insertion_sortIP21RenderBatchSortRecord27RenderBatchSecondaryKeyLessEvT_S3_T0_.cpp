@@ -1,4 +1,3 @@
-/* NON_MATCHING: vector register assignment differs (retail keeps the saved record in s3-s5 so the in-place record moves split into a three-register block plus a single word; the compiler picks s4-s6 and moves whole records through s0-s3). */
 #include "gfx/RenderBatchSortRecord.h"
 #include <algorithm>
 

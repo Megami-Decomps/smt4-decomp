@@ -1,4 +1,3 @@
-/* NON_MATCHING: register choice in the last call only: retail forms the &a address in r5 (keeping r4), built reuses r4 */
 /* Looks up the three UI parameter sets 0x573-0x575 and applies each to `target` through its own setter. */
 #include "common.h"
 #include "classes/Obj422594.h"

@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler uses r0 rather than ip for the floating-point store base. */
 #include "map/MapSelection.h"
 
 #include "common.h"

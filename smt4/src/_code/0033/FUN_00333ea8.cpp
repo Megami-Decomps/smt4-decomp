@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail returns straight into the shared pop after `movle r0,#1`; the build adds a `bgt` to the next instruction. */
 #include "common.h"
 #include "gamedata/DataTable40.h"
 

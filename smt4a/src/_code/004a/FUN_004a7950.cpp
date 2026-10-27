@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the last call's stack-argument address temp differs (retail ip, built reuses r4 after moving the layout address first). */
 #include "common.h"
 
 /* A layout part layoutFindTableEntry finds by id. */

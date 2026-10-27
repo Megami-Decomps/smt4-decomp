@@ -4,15 +4,15 @@
   "note": "Pinned tool sources for generated projects (see docs/new-project.md). romwright never downloads or bundles these; the generated configure.py fetches and verifies them. Edit this file to update pins; every asset needs url, sha256, size and archive (raw|tar.gz|tar.xz|zip).",
   "tools": [
     {
-      "id": "armcc-4.1-b713",
-      "version": "4.1 [Build 713]",
+      "id": "armcc-4.1-b1454",
+      "version": "4.1 [Build 1454]",
       "role": "compiler",
       "platform": "3ds",
       "family": "armcc",
       "runtime": "wibo",
-      "entry": "4.1/b713/bin/armcc.exe",
+      "entry": "4.1/b1454/bin/armcc.exe",
       "license": "Proprietary (ARM RealView Compilation Tools, as shipped to Nintendo 3DS developers). romwright and this manifest grant no rights to it: use it only if you are entitled to. Hosted by the decomp.me compilers project.",
-      "provenance": "https://github.com/decompme/compilers release `compilers`, asset armcc.zip (decomp.me's n3ds `armcc_41_713`: directory `4.1/b713/`, bin/armcc.exe and include/, no linker or libraries); the release tag is mutable, so the sha256 below is GitHub's asset digest of the bytes seen on 2026-10-17 (asset updated 2026-03-04T08:52:15Z). Runs natively on Windows, through wibo elsewhere.",
+      "provenance": "https://github.com/decompme/compilers release `compilers`, asset armcc.zip (decomp.me's n3ds `armcc_41_1454`: directory `4.1/b1454/`, bin/armcc.exe and include/, no linker or libraries); the release tag is mutable, so the sha256 below is GitHub's asset digest of the bytes seen on 2026-10-17 (asset updated 2026-03-04T08:52:15Z). Runs natively on Windows, through wibo elsewhere.",
       "assets": {
         "any": {
           "url": "https://github.com/decompme/compilers/releases/download/compilers/armcc.zip",
@@ -20,7 +20,7 @@
           "size": 73315488,
           "archive": "zip",
           "include": [
-            "4.1/b713/"
+            "4.1/b1454/"
           ]
         }
       }

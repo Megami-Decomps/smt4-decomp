@@ -1,4 +1,3 @@
-/* NON_MATCHING: action-table pointer and first-loop index occupy different registers; later scans match. */
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
 

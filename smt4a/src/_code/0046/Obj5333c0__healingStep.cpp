@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except the constant setup order at the top (retail loads 0 into r6 before 5 into r5; armcc loads 5 first). */
 #include "classes/Obj5333c0.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/PartyMoney.h"

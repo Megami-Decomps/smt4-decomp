@@ -1,4 +1,3 @@
-/* NON_MATCHING: one register choice: retail passes the payload address from r4 (the saved node), we use r1 */
 #include "common.h"
 
 struct ListNode {

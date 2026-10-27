@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the register holding the address of the last template block copy (retail reuses r7, built r4) differs. */
 #include "shard/TextureCommandTemplates.h"
 
 extern "C" {

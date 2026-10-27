@@ -1,4 +1,3 @@
-/* NON_MATCHING: only a redundant conditional branch to the return (beq to the next instruction) differs; retail ends with addne then bx lr. */
 #include "shard/W5_W5Match2_RelativeData.h"
 extern "C" {
 /* Resolve either an absolute or record-relative data pointer. */

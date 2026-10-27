@@ -1,4 +1,3 @@
-/* NON_MATCHING: demon-record pointer and pair-unrolled skill-loop counter/value registers differ; other instructions match. */
 #include "shard/W6_W6Match8_CampInventory.h"
 #include "shard/W7_W7Match2_PartyDamage.h"
 #include "gamedata/UnitStats.h"

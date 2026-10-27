@@ -1,4 +1,3 @@
-/* NON_MATCHING: RGB counter reset and first target load use the inline helper's r2 object instead of the owner's r4; all 208 rows otherwise agree. */
 #include "common.h"
 #include "shard/W6_W6Match8_ColorKeys.h"
 

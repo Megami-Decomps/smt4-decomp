@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical instruction sequence; register assignment differs (retail: &g_mapEnemy r1, slots r2, state r3; built: r2, r3, r1) */
 #include "shard/W5_W5Match7_SceneSlots.h"
 
 extern "C" {

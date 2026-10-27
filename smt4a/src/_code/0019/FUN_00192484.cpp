@@ -1,4 +1,3 @@
-/* NON_MATCHING: in the FUN_001a1fb4 path the address of the stack args is formed in r4 instead of lr. */
 #include "common.h"
 
 extern "C" {

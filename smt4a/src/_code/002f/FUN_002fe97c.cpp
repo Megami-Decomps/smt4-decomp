@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail copies `node` to r4 before the branch and reads r4 for the payload argument; built reads r1 */
 /* Pushes `node` onto the front of the list, constructing its payload first when `construct` is set. */
 #include "common.h"
 

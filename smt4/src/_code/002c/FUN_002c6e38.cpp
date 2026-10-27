@@ -1,4 +1,3 @@
-/* NON_MATCHING: result-local form now matches all but one instruction (armcc adds a conditional branch to the earlier bx lr after the final movne). */
 #include "common.h"
 
 /* Orders nonempty halfword entries before empty entries. */

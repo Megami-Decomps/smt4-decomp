@@ -1,4 +1,3 @@
-/* NON_MATCHING: signed-byte random sign test recovered; VFP conversion/division intermediates still differ. */
 #include "common.h"
 
 extern "C" s32 randBetween(s32 lower, s32 upper);

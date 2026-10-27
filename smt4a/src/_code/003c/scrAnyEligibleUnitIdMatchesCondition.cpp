@@ -1,4 +1,3 @@
-/* NON_MATCHING: direct flag reads reproduce retail's separate required-mask loads and pool; entry-address and final-AND scratch registers still differ. */
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

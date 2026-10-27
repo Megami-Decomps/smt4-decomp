@@ -1,4 +1,3 @@
-/* NON_MATCHING: the status flags now compile as retail (mov/tst/movne); retail keeps the reference-length and distance VFP chains sequential where armcc here interleaves them, and the reference vector loads differ. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"

@@ -1,4 +1,3 @@
-/* NON_MATCHING: second/third vector copies form temporary base addresses and use vldmia instead of retail's individual vldr loads (O2 also differs). */
 #include "shard/W6_W6Match6_CollisionQuad.h"
 
 

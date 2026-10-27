@@ -1,4 +1,3 @@
-/* NON_MATCHING: only ip/r5 swap between the count and the 0x50 field offset in the unrolled search. */
 #include "common.h"
 
 extern "C" {

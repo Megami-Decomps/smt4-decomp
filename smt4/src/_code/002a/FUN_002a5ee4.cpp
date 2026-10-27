@@ -1,4 +1,3 @@
-/* NON_MATCHING: only final async-call stack argument store and global-load scheduling differ. */
 #include "shard/S1AsdTexTable.h"
 #include "addon/AocPackage.h"
 #include "addon/aocMain.h"

@@ -1,4 +1,3 @@
-/* NON_MATCHING: instruction-for-instruction the same unrolled loops; only register allocation differs (retail keeps the -1 owner constant in ip and the entry address temporaries in r6/r7). */
 #include "common.h"
 #include "gamedata/SaveSlotTable.h"
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: dimension load/store addresses use r1 instead of retail's r2. */
 #include "shard/W6_W6Match5_TextureAttachment.h"
 #include "AsdSDK/Source/Gfx/Effect/effBehavior.h"
 

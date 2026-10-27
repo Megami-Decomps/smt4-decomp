@@ -1,4 +1,3 @@
-/* NON_MATCHING: the value store is hoisted above the branch (predicated vldrle/vstrle) where retail stores it in each arm; the separate end-ramp local removes the fused multiply-subtract like retail */
 #include "AsdSDK/Source/Gfx/Effect/effParticle.h"
 
 extern "C" f32 shiftRandomNextFraction(u32 stream);

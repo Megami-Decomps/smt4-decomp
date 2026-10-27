@@ -1,4 +1,3 @@
-/* NON_MATCHING: reciprocal division result is allocated to s0 instead of retail s1; all other instructions match. */
 #include "shard/JobWork.h"
 
 struct BackgroundFadeWork {

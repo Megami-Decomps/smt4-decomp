@@ -1,4 +1,3 @@
-/* NON_MATCHING: required-mask AND reuses its loaded registers rather than retail's extra r9/IP pair, changing saved registers and stack size. */
 #include "battle/BtlMainAccess.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match7_BattleCandidateMasks.h"

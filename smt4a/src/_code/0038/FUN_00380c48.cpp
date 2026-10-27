@@ -1,4 +1,3 @@
-/* NON_MATCHING: r0/r1 are exchanged for percentage operands, status bits and the reciprocal used by signed division; all other instructions match. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlUnit.h"

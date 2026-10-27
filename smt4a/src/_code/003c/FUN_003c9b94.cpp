@@ -1,4 +1,3 @@
-/* NON_MATCHING: candidate-mask conjunctions select different AND destination registers. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"

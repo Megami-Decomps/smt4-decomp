@@ -17,7 +17,7 @@
       "arm": "--arm",
       "thumb": "--thumb"
     },
-    "tool": "armcc-4.1-b713"
+    "tool": "armcc-4.1-b1454"
   },
   "image": {
     "file": "smt4_v1.2.0.cxi",

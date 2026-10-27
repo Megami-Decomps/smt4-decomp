@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler keeps key values in different registers and adds a return branch. */
 #include "common.h"
 
 /* Orders nonempty halfword entries before empty entries. */

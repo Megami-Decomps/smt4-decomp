@@ -1,4 +1,3 @@
-/* NON_MATCHING: callbacks, task names, source path trace now match retail; a single register differs (retail adds the item-pair base into r1, the build into r0). */
 /* Opens the CEC settings screen: allocates its work area, creates its task and draw tasks and
  * sets up the menu entries. */
 #include "common.h"

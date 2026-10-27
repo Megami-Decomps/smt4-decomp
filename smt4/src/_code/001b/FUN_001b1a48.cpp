@@ -1,4 +1,3 @@
-/* NON_MATCHING: text base and mode setup recovered; record/index saved registers r4/r5 are exchanged. */
 #include "battle/BtlMainAccess.h"
 
 extern "C" {

@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the repeated colour argument copy chain differs (retail `mov r3,r0; mov r2,r3; mov r1,r2`, build `mov r1,r0`). */
 #include "camp/RenderCtx.h"
 #include <string.h>
 

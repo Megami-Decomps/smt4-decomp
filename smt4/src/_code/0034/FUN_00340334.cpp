@@ -1,4 +1,3 @@
-/* NON_MATCHING: identical except the scratch register for the second block's address (armcc r1, retail ip). */
 #include "common.h"
 
 struct Words3 {

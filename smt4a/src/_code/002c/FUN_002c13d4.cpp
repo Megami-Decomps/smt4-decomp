@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail emits 'add r4, r3, #704'; compiler emits 'add r0, r3, #704' at the first differing instruction. */
 #include "common.h"
 extern "C" {
 extern struct Work {

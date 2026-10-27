@@ -1,4 +1,3 @@
-/* NON_MATCHING: y is a one-word int/float union parameter (retail copies it through VFP); y/tag spill registers now match, only the second vstr/stm-base scheduling (ip vs r6) differs. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"

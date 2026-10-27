@@ -1,4 +1,3 @@
-/* NON_MATCHING: vector-copy base registers and store scheduling differ from retail. */
 #include "map/mapEnemy.h"
 #include "map/mapDepart.h"
 #include "map/SceneSpawn.h"

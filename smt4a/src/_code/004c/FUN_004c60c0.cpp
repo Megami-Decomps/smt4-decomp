@@ -1,4 +1,3 @@
-/* NON_MATCHING: clearing the skill snapshot uses r0 for zero, adding two source-pointer preservation MOVs. */
 #include "battle/BtlMainAccess.h"
 #include "gamedata/Table04Record.h"
 #include <string.h>

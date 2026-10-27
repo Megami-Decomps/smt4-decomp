@@ -1,4 +1,3 @@
-/* NON_MATCHING: only the VFP register of the 1.0f/steps quotient differs (retail s1, built s0). */
 #include "common.h"
 #include "code/Code0020.h"
 #include "shard/JobWork.h"

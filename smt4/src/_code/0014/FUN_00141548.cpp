@@ -1,4 +1,3 @@
-/* NON_MATCHING: in the unrolled loop body retail holds the second record's id offset in r6 and the first's load in r5; built swaps r5/r6. */
 #include "shard/IdRecordTable.h"
 
 extern "C" {

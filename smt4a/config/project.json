@@ -17,7 +17,7 @@
       "arm": "--arm",
       "thumb": "--thumb"
     },
-    "tool": "armcc-4.1-b713"
+    "tool": "armcc-4.1-b1454"
   },
   "image": {
     "file": "smt4a.cxi",
@@ -125674,10 +125674,7 @@
       "size": 128,
       "source": "src/_code/003c/FUN_003cc460.cpp",
       "target": "orig/target/_code/003c/FUN_003cc460.o",
-      "thumb": false,
-      "multifile": [
-        "btlGetMainState"
-      ]
+      "thumb": false
     },
     {
       "address": "0x3cc4e4",

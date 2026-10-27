@@ -1,4 +1,3 @@
-/* NON_MATCHING: member-wise clip copy and sprite lookup now match; only the scheduling of the sprite index arithmetic against the argument stores differs. */
 #include "shard/S1ListPanel.h"
 #include "shard/W9_W9Match1_PositionedLayoutTask.h"
 #include <stddef.h>
