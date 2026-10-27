@@ -1,4 +1,3 @@
-/* NON_MATCHING: required-mask load pairing and saved registers differ in candidate search. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -29,11 +28,9 @@ s32 FUN_004c600c(s32 selection)
         count = 50;
     }
     BtlMainStateA *state = btlGetMainState();
-    s32 end = first + count;
-    for (s32 index = first; end > index; ++index) {
+    for (s32 index = first; first + count > index; ++index) {
         BtlCombatantEntryA *entry = &state->entries[index];
-        u64 flags = entry->flags;
-        if ((flags & DAT_005713f0.required) != 0 && (flags & DAT_005713f0.excluded) == 0) {
+        if ((DAT_005713f0.required & entry->flags) != 0 && (entry->flags & DAT_005713f0.excluded) == 0) {
             s16 candidateSelection = entry->indexView.selectionIndex;
             BtlCombatantEntryA *candidate = FUN_003f0e20(btlGetMainState(), candidateSelection);
             if (candidate != NULL && ((CandidateValueView *)candidate)->value > 0) {

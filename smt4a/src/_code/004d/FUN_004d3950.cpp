@@ -1,4 +1,3 @@
-/* NON_MATCHING: builds the "btl Stage Menu" debug list box; only the scheduling of the first 50000 limit pool load against the model pointer load in item 11 differs. */
 #include "common.h"
 
 struct BtlStageVec3 {
@@ -71,7 +70,7 @@ u32 asdListBoxCreateDefaultFlags(u32 parent, s32 type, s32 flags, s32 extra);
 void asdListBoxAddItems(u32 box, const void *items, s32 count);
 void asdListBoxSetByteValue(u32 box, s32 value);
 void jobSetText(u32 job, const char *text);
-void asdListBoxSetFloatItem(u32 box, s32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 box, s32 index, f32 value, s32 minimum, s32 maximum);
 void asdListBoxSetIntItem(u32 box, s32 index, s32 value, s32 minimum, s32 maximum, s32 flags);
 s32 FUN_00400d68(BtlStageModel *model);
 
@@ -87,19 +86,19 @@ void FUN_004d3950(StageMenuOwner *owner, StageMenuParent *parent)
     jobSetText(owner->listBox, "btl Stage Menu");
 
     BtlStageVec3 *position = &g_btlStageModel->position;
-    asdListBoxSetFloatItem(owner->listBox, 0, -999, 999, position->x);
-    asdListBoxSetFloatItem(owner->listBox, 1, -999, 999, position->y);
-    asdListBoxSetFloatItem(owner->listBox, 2, -999, 999, position->z);
+    asdListBoxSetFloatItem(owner->listBox, 0, position->x, -999, 999);
+    asdListBoxSetFloatItem(owner->listBox, 1, position->y, -999, 999);
+    asdListBoxSetFloatItem(owner->listBox, 2, position->z, -999, 999);
     asdListBoxSetIntItem(owner->listBox, 3, g_btlStageModel->mode, 0, 2, 0);
     asdListBoxSetIntItem(owner->listBox, 4, g_btlStageModel->colorR, 0, 0xFF, 0);
     asdListBoxSetIntItem(owner->listBox, 5, g_btlStageModel->colorG, 0, 0xFF, 0);
     asdListBoxSetIntItem(owner->listBox, 6, g_btlStageModel->colorB, 0, 0xFF, 0);
     asdListBoxSetIntItem(owner->listBox, 7, g_btlStageModel->rangeNear, 0, 10000, 0);
     asdListBoxSetIntItem(owner->listBox, 8, g_btlStageModel->rangeFar, 0, 10000, 0);
-    asdListBoxSetFloatItem(owner->listBox, 9, 0, 10, g_btlStageModel->fogDensity);
+    asdListBoxSetFloatItem(owner->listBox, 9, g_btlStageModel->fogDensity, 0, 10);
     asdListBoxSetIntItem(owner->listBox, 10, stageMenuFirstHidden(), 0, 1, 0);
-    asdListBoxSetFloatItem(owner->listBox, 11, -50000, 50000, g_btlStageModel->lightX);
-    asdListBoxSetFloatItem(owner->listBox, 12, -50000, 50000, g_btlStageModel->lightY);
+    asdListBoxSetFloatItem(owner->listBox, 11, g_btlStageModel->lightX, -50000, 50000);
+    asdListBoxSetFloatItem(owner->listBox, 12, g_btlStageModel->lightY, -50000, 50000);
     asdListBoxSetIntItem(owner->listBox, 13, g_btlStageModel->ambientR, 0, 0xFF, 0);
     asdListBoxSetIntItem(owner->listBox, 14, g_btlStageModel->ambientG, 0, 0xFF, 0);
     asdListBoxSetIntItem(owner->listBox, 15, g_btlStageModel->ambientB, 0, 0xFF, 0);

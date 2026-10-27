@@ -35,7 +35,7 @@ void asdListBoxAddItems(AsdListBox *, const AsdListBoxEntry *, s32 count);
 void asdListBoxSetByteValue(AsdListBox *, s32 value);
 void jobSetText(AsdListBox *, const char *);
 void asdListBoxSetItemMode2(AsdListBox *, u32 index, u32 value);
-void asdListBoxSetFloatItem(AsdListBox *, u32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(AsdListBox *, u32 index, f32 value, s32 minimum, s32 maximum);
 void asdListBoxSetItemMode3(AsdListBox *, u32 index, u32 value, u32 minimum, u32 maximum, u8 flags);
 
 /* Build the attack-camera debugging menu from the active camera parameters. */
@@ -46,21 +46,21 @@ void btlDebugCreateAttackCameraMenu(BattleCameraMenuOwner *owner, BattleCameraMe
     asdListBoxSetByteValue(owner->menu, 1);
     jobSetText(owner->menu, "Attack Camera Menu");
     asdListBoxSetItemMode2(owner->menu, 0, (g_btlMain->flags & 0x100) >> 8);
-    asdListBoxSetFloatItem(owner->menu, 1, -10, 10, g_btlMain->value);
+    asdListBoxSetFloatItem(owner->menu, 1, g_btlMain->value, -10, 10);
     asdListBoxSetItemMode2(owner->menu, 2, (context->flags & 0x40000000) >> 30);
-    asdListBoxSetFloatItem(owner->menu, 3, -100, 100, DAT_00493554[0]);
-    asdListBoxSetFloatItem(owner->menu, 4, -100, 100, DAT_00493554[2]);
-    asdListBoxSetFloatItem(owner->menu, 5, -100, 100, DAT_00434310);
-    asdListBoxSetFloatItem(owner->menu, 6, -100, 100, DAT_00434314);
-    asdListBoxSetFloatItem(owner->menu, 7, -50, 200, DAT_00434318);
+    asdListBoxSetFloatItem(owner->menu, 3, DAT_00493554[0], -100, 100);
+    asdListBoxSetFloatItem(owner->menu, 4, DAT_00493554[2], -100, 100);
+    asdListBoxSetFloatItem(owner->menu, 5, DAT_00434310, -100, 100);
+    asdListBoxSetFloatItem(owner->menu, 6, DAT_00434314, -100, 100);
+    asdListBoxSetFloatItem(owner->menu, 7, DAT_00434318, -50, 200);
     asdListBoxSetItemMode3(owner->menu, 8, DAT_0043431c, -1, 100, 0);
     asdListBoxSetItemMode3(owner->menu, 9, DAT_004342d4, -1, 100, 0);
     asdListBoxSetItemMode3(owner->menu, 10, DAT_004342d8, 0, 2, 0);
-    asdListBoxSetFloatItem(owner->menu, 11, -90, 90, DAT_00434320);
+    asdListBoxSetFloatItem(owner->menu, 11, DAT_00434320, -90, 90);
     asdListBoxSetItemMode3(owner->menu, 12, DAT_00434324, -1, 100, 0);
     asdListBoxSetItemMode3(owner->menu, 13, DAT_004342e0, -1, 100, 0);
     asdListBoxSetItemMode3(owner->menu, 14, DAT_00434328, 0, 2, 0);
-    asdListBoxSetFloatItem(owner->menu, 15, -90, 90, DAT_0043432c);
+    asdListBoxSetFloatItem(owner->menu, 15, DAT_0043432c, -90, 90);
     asdListBoxSetItemMode3(owner->menu, 16, DAT_00434330, -1, 100, 0);
     asdListBoxSetItemMode3(owner->menu, 17, DAT_004342e4, -1, 100, 0);
     asdListBoxSetItemMode3(owner->menu, 18, DAT_00434334, 0, 2, 0);

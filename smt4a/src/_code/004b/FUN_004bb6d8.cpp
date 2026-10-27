@@ -1,4 +1,4 @@
-/* NON_MATCHING: group/item spill choice and cache-reset instruction scheduling differ. */
+/* NON_MATCHING: instructions and schedule match retail; only the saved-register numbering differs (flag r5/value r7/entries r6 in retail). */
 #include "gamedata/ItemFlagState.h"
 #include "gamedata/GameFlags.h"
 #include "gamedata/DataTable.h"
@@ -26,10 +26,9 @@ void FUN_004bb6d8(u32 flag, u32 value)
     ItemFlagDefinitionA *entries = (ItemFlagDefinitionA *)dataTableGetEntries(table);
     s32 count = dataTableGetCount(table);
     for (s32 i = 0; i < count; ++i) {
-        const ItemFlagDefinitionA *entry = &entries[i];
-        if (entry->firstFlag == flag || entry->secondFlag == flag) {
-            u8 itemId = entry->itemId;
-            u8 groupId = entry->groupId;
+        if (entries[i].firstFlag == flag || entries[i].secondFlag == flag) {
+            u8 groupId = entries[i].groupId;
+            u8 itemId = entries[i].itemId;
             ItemFlagCacheState *state = gameDataGetTableEntry(groupId, itemId);
             const ItemFlagVariant *previous = FUN_0015fa74(groupId, itemId);
             gameFlagSetValue(flag, value, 0);

@@ -5,7 +5,7 @@ extern "C" {
 
 extern AsdProcessState g_asdProcess;
 
-extern void FUN_003452f8(s32 set, u32 handle, u32 mask);
+extern void jobSetFlagsRecursive(s32 set, u32 handle, u32 mask);
 
 /* The flag bits a mask can address. */
 #define ASD_PROC_FLAG_MASK 0xffffff0
@@ -57,7 +57,7 @@ void FUN_002a2d28(s32 set, u32 handle, u32 mask, u32 mode)
         process = asdProcessFind(handle);
         process->flags = set ? process->flags | flags : process->flags & ~flags;
         for (process = process->firstChild; process != NULL; process = process->nextSibling) {
-            FUN_003452f8(set, process->handle, mask);
+            jobSetFlagsRecursive(set, process->handle, mask);
         }
         break;
     }

@@ -56,7 +56,7 @@ extern float DAT_005c1110; /* 0x5c1110 */
 extern float DAT_005c1114; /* 0x5c1114 */
 extern float DAT_005c1118; /* 0x5c1118 */
 extern float DAT_005c111c; /* 0x5c111c */
-extern unsigned int DAT_005c1120; /* 0x5c1120 */
+extern unsigned int g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -216,7 +216,7 @@ void FUN_003c694c(int param_1)
                                 (*(unsigned int *)(temp_v5 + 0x3c),(unsigned char)(in_fpscr >> 0x16) & 3);
     temp_v41 = DAT_006472e8;
     if (0 < temp_v37) {
-      unaff_r8 = (float *)&DAT_005c1120;
+      unaff_r8 = (float *)&g_effectRingScratchColor;
     }
     temp_v53 = (temp_v8 * 2.0f) / temp_v53;
     temp_v46 = temp_v45;

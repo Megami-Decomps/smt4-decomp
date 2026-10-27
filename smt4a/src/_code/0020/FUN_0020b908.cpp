@@ -1,178 +1,200 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020b908` (_code @ 0x20b908, 0x43c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: retail keeps a zero in r9 for the whole switch (the default help text and the frame reset share it) and the remember flag in sl; the build keeps the zero in r5 and rematerialises it, so the help-table pointers shift one register and the frame is 4 bytes smaller. */
+#include "common.h"
+#include <stddef.h>
+#include "gamedata/DataTable.h"
+#include "shard/Shard0032.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
+
+/* A fusion pair as the unite screen reads it: one 64-bit word of bit fields. */
+struct UnitePairBits {
+    u64 firstId : 15;
+    u64 secondId : 15;
+    u64 firstType : 2;
+    u64 secondType : 2;
+    u64 resultId : 15;
+    u64 unknown : 15;
+};
+
+/* The unite screen's work past UniteWork's modelled prefix (only the fields used here). */
+struct UniteMenuWork {
+    /* 0x0000 */ u8 unk0000[0x3FC];
+    /* 0x03FC */ u32 frame;
+    /* 0x0400 */ s32 state;
+    /* 0x0404 */ s32 previous;
+    /* 0x0408 */ s32 saved;
+    /* 0x040C */ u8 unk040C[0x434 - 0x40C];
+    /* 0x0434 */ s32 request;
+    /* 0x0438 */ u8 unk0438[0x488 - 0x438];
+    /* 0x0488 */ s32 pendingRequest;
+    /* 0x048C */ u8 unk048C[0x13B8 - 0x48C];
+    /* 0x13B8 */ UnitePairBits pairs[2690];
+    /* 0x67C8 */ u8 unk67C8[4];
+    /* 0x67CC */ ScrollSelection pairList;
+    /* 0x6830 */ s8 pairKind;
+    /* 0x6831 */ u8 unk6831;
+    /* 0x6832 */ u16 sortedPairs[1501];
+    /* 0x73EC */ u8 unk73EC[0x8B70 - 0x73EC];
+    /* 0x8B70 */ u16 skills[24];
+    /* 0x8BA0 */ u8 unk8BA0[0x8E14 - 0x8BA0];
+    /* 0x8E14 */ ScrollSelection skillList;
+    /* 0x8E78 */ u8 unk8E78[0x9070 - 0x8E78];
+    /* 0x9070 */ u8 helpShown;
+    /* 0x9071 */ u8 helpAvailable;
+};
+
+typedef char UniteMenuWorkOffsetCheck[
+    offsetof(UniteMenuWork, pairs) == 0x13B8 && offsetof(UniteMenuWork, pairList) == 0x67CC &&
+    offsetof(UniteMenuWork, sortedPairs) == 0x6832 && offsetof(UniteMenuWork, skills) == 0x8B70 &&
+    offsetof(UniteMenuWork, skillList) == 0x8E14 && offsetof(UniteMenuWork, helpAvailable) == 0x9071 ? 1 : -1];
 
 extern "C" {
+extern UniteMenuWork *g_unite;
+void sysPlaySe(u32 id);
+void buttonHelpSetText(const s8 *text, u32 color);
+s32 buttonHelpGetPanelMode(void);
+s32 resourceRunOperationIfUnblocked(ScrollSelection *list);
+s32 FUN_002a4894(const void *object);
+void *slotRecordFindById(u32 id);
+void unitRecordBuild(s32 id, UnitRecord *out);
+void FUN_0035ad50(u32 id, UnitRecord *unit);
+void FUN_0032d0c8(void *directory, u32 index, u16 id, void *record);
+void skillHelpUpdateAttributeAndTarget(s32 id);
+void FUN_002c8550(s32 mode);
+void FUN_00183f58(u32 index, s32 kind, s32 value, s32 queue);
+void FUN_00184b90(u8 *owner, s32 direction);
+void FUN_003343f0(u8 value);
+void FUN_00333dc8(u8 value);
+void FUN_002bf4f4(u8 value);
 
-int sysPlaySe(...);
-int FUN_00183f58(int, int, int, int);
-int FUN_00184b90(...);
-int buttonHelpSetText(...);
-int FUN_002bf4f4(void);
-int FUN_002c8550(int);
-int FUN_0032d0c8(...);
-int unitRecordBuild(unsigned int, unsigned char [304]);
-int FUN_00333dc8(...);
-int FUN_003343f0(...);
-int skillHelpUpdateAttributeAndTarget(int);
-int FUN_0035ad50(unsigned int, unsigned char [304]);
-
-extern int g_unite; /* 0x57f290 */
-
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: FUN_00183f58. */
-/* Supplied declaration required: FUN_00184b90. */
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-extern int dataTableGetEntries(void);
-/* Supplied declaration required: buttonHelpSetText. */
-extern unsigned char *slotRecordFindById(unsigned int);
-extern int resourceRunOperationIfUnblocked(void);
-extern int FUN_002a4894(int);
-/* Supplied declaration required: FUN_002bf4f4. */
-/* Supplied declaration required: FUN_002c8550. */
-extern int buttonHelpGetPanelMode(void);
-/* Supplied declaration required: FUN_0032d0c8. */
-/* Supplied declaration required: unitRecordBuild. */
-/* Supplied declaration required: FUN_00333dc8. */
-/* Supplied declaration required: FUN_003343f0. */
-/* Supplied declaration required: skillHelpUpdateAttributeAndTarget. */
-/* Supplied declaration required: FUN_0035ad50. */
-
-
-void FUN_0020b908(unsigned int param_1,int param_2)
-
+/* Plays the sound of the unite state being entered, shows its help and switches to it. */
+void FUN_0020b908(u32 state, s32 rememberPrevious)
 {
-/* irregular: 12 native warning(s); review required */
-  int temp_v0;
-  unsigned char *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6 [304];
-  
-  temp_v0 = g_unite;
-  temp_v4 = 0;
-  switch(param_1) {
-  case 3:
-    sysPlaySe();
-    break;
-  case 0xb:
-    sysPlaySe(0x55);
-    temp_v2 = dataTableGet(0x24,2);
-    temp_v1 = dataTableGetEntries();
-    temp_v3 = dataTableGetCount(temp_v2);
-    if (temp_v3 >= 2) {
-      temp_v4 = temp_v1 + 0x55;
+    UniteMenuWork *unite = g_unite;
+    const s8 *text = NULL;
+    switch (state) {
+    case 0x25:
+    case 0x26:
+    case 0x27:
+        sysPlaySe(0x5A);
+        break;
+    case 0x16:
+    case 0x1D:
+    case 0x1F: {
+        s32 panelMode = buttonHelpGetPanelMode();
+        sysPlaySe(0xA0);
+        FUN_003343f0(1);
+        FUN_00333dc8(1);
+        if (panelMode == 0)
+            FUN_002bf4f4(0);
+        break;
     }
-    buttonHelpSetText(temp_v4,0xf4f4f4ff);
-    break;
-  case 0xd:
-    sysPlaySe(0x56);
-    temp_v4 = resourceRunOperationIfUnblocked();
-    temp_v1 = FUN_002a4894(temp_v0 + 0x67cc);
-    temp_v3 = (unsigned int)*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x6832);
-    if (*(char *)(temp_v0 + 0x6830) == '\0') {
-      temp_v4 = temp_v0 + temp_v3 * 8;
-      unitRecordBuild((*(unsigned int *)(temp_v4 + 0x13bc) & 0x1ffff) >> 2,temp_v6);
-      FUN_0032d0c8(0,1,(*(unsigned int *)(temp_v4 + 0x13bc) & 0x1ffff) >> 2,temp_v6);
+    case 3:
+        sysPlaySe(0x5E);
+        break;
+    case 0xB: {
+        sysPlaySe(0x55);
+        void *section = dataTableGet(0x24, 2);
+        s8 *entries = static_cast<s8 *>(dataTableGetEntries(section));
+        if (dataTableGetCount(section) > 1)
+            text = entries + 0x55;
+        buttonHelpSetText(text, 0xF4F4F4FF);
+        break;
     }
-    if (*(char *)(temp_v0 + 0x6830) == '\x01') {
-      temp_v4 = temp_v0 + temp_v3 * 8;
-      puVar2 = (unsigned char *)slotRecordFindById(*(unsigned int *)(temp_v4 + 0x13b8) & 0x7fff);
-      if (puVar2 == (unsigned char *)0x0) {
-        FUN_0035ad50(*(unsigned int *)(temp_v4 + 0x13b8) & 0x7fff,temp_v6);
-        puVar2 = temp_v6;
-      }
-      FUN_0032d0c8(0,1,*(unsigned int *)(temp_v4 + 0x13b8) & 0x7fff,puVar2);
+    case 0xD: {
+        sysPlaySe(0x56);
+        u32 index = resourceRunOperationIfUnblocked(&unite->pairList) + FUN_002a4894(&unite->pairList);
+        u16 pair = unite->sortedPairs[index];
+        UnitRecord unit;
+        if (unite->pairKind == 0) {
+            unitRecordBuild(unite->pairs[pair].resultId, &unit);
+            FUN_0032d0c8(NULL, 1, unite->pairs[pair].resultId, &unit);
+        }
+        if (unite->pairKind == 1) {
+            void *record = slotRecordFindById(unite->pairs[pair].firstId);
+            if (record == NULL) {
+                FUN_0035ad50(unite->pairs[pair].firstId, &unit);
+                record = &unit;
+            }
+            FUN_0032d0c8(NULL, 1, unite->pairs[pair].firstId, record);
+        }
+        if (unite->pairKind == 2) {
+            void *record = slotRecordFindById(unite->pairs[pair].secondId);
+            if (record == NULL) {
+                FUN_0035ad50(unite->pairs[pair].secondId, &unit);
+                record = &unit;
+            }
+            FUN_0032d0c8(NULL, 1, unite->pairs[pair].secondId, record);
+        }
+        break;
     }
-    if (*(char *)(temp_v0 + 0x6830) == '\x02') {
-      temp_v4 = temp_v0 + temp_v3 * 8;
-      puVar2 = (unsigned char *)slotRecordFindById((*(unsigned int *)(temp_v4 + 0x13b8) & 0x3fffffff) >> 0xf);
-      if (puVar2 == (unsigned char *)0x0) {
-        FUN_0035ad50((*(unsigned int *)(temp_v4 + 0x13b8) & 0x3fffffff) >> 0xf,temp_v6);
-        puVar2 = temp_v6;
-      }
-      FUN_0032d0c8(0,1,(*(unsigned int *)(temp_v4 + 0x13b8) & 0x3fffffff) >> 0xf,puVar2);
+    case 0xF:
+        if (g_unite->state != 0x10 && g_unite->state != 0x11 && g_unite->state != 0x12) {
+            sysPlaySe(0x57);
+            u32 index = resourceRunOperationIfUnblocked(&unite->skillList) + FUN_002a4894(&unite->skillList);
+            skillHelpUpdateAttributeAndTarget(unite->skills[index]);
+            FUN_002c8550(0xF);
+        }
+        break;
+    case 0x13:
+        sysPlaySe(0x5F);
+        if (unite->helpAvailable != 0) {
+            FUN_00183f58(2, 9, 0x44, 1);
+            FUN_00183f58(3, 0, 0, 1);
+        }
+        break;
+    case 0x1B: {
+        u32 sound = 0x5B;
+        if (unite != NULL && (unite->request == 0x18 || unite->pendingRequest == 0x18))
+            sound = 0xA0;
+        sysPlaySe(sound);
+        void *section = dataTableGet(0x24, 2);
+        s8 *entries = static_cast<s8 *>(dataTableGetEntries(section));
+        if (dataTableGetCount(section) > 1)
+            text = entries + 0x55;
+        buttonHelpSetText(text, 0xF4F4F4FF);
+        break;
     }
-    break;
-  case 0xf:
-    temp_v4 = *(int *)(g_unite + 0x400);
-    if ((temp_v4 != 0x10 && temp_v4 != 0x11) && temp_v4 != 0x12) {
-      sysPlaySe(0x57);
-      temp_v4 = resourceRunOperationIfUnblocked();
-      temp_v1 = FUN_002a4894(temp_v0 + 0x8e14);
-      skillHelpUpdateAttributeAndTarget(*(unsigned short *)(temp_v0 + (temp_v1 + temp_v4) * 2 + 0x8b70));
-      FUN_002c8550(0xf);
+    case 0x1C:
+        sysPlaySe(0x5C);
+        buttonHelpSetText(NULL, 0xF4F4F4FF);
+        unite->helpShown = 1;
+        break;
+    case 0x24:
+        unite->saved = g_unite->state;
+        FUN_00184b90(reinterpret_cast<u8 *>(unite), 3);
+        FUN_003343f0(1);
+        break;
+    case 0:
+    case 1:
+    case 2:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 12:
+    case 14:
+    case 16:
+    case 17:
+    case 18:
+    case 20:
+    case 21:
+    case 23:
+    case 24:
+    case 25:
+    case 26:
+    case 30:
+    case 32:
+    case 33:
+    case 34:
+    case 35:
+        break;
     }
-    break;
-  case 0x13:
-    sysPlaySe(0x5f);
-    if (*(char *)(temp_v0 + 0x9071) != '\0') {
-      FUN_00183f58(2,9,0x44,1);
-      FUN_00183f58(3,0,0,1);
-    }
-    break;
-  case 0x16:
-  case 0x1d:
-  case 0x1f:
-    temp_v4 = buttonHelpGetPanelMode();
-    sysPlaySe(0xa0);
-    FUN_003343f0(1);
-    FUN_00333dc8(1);
-    if (temp_v4 == 0) {
-      FUN_002bf4f4();
-    }
-    break;
-  case 0x1b:
-    if (g_unite != 0) {
-      temp_v5 = *(int *)(g_unite + 0x434) != 0x18;
-      temp_v1 = g_unite;
-      if (temp_v5) {
-        temp_v1 = *(int *)(g_unite + 0x488);
-      }
-      if (temp_v5 && temp_v1 != 0x18) {
-        temp_v2 = 0x5b;
-      }
-      else {
-        temp_v2 = 0xa0;
-      }
-    }
-    else {
-      temp_v2 = 0x5b;
-    }
-    sysPlaySe(temp_v2);
-    temp_v2 = dataTableGet(0x24,2);
-    temp_v1 = dataTableGetEntries();
-    temp_v3 = dataTableGetCount(temp_v2);
-    if (temp_v3 >= 2) {
-      temp_v4 = temp_v1 + 0x55;
-    }
-    buttonHelpSetText(temp_v4,0xf4f4f4ff);
-    break;
-  case 0x1c:
-    sysPlaySe(0x5c);
-    buttonHelpSetText(0,0xf4f4f4ff);
-    *(unsigned char *)(temp_v0 + 0x9070) = 1;
-    break;
-  case 0x24:
-    *(unsigned int *)(g_unite + 0x408) = *(unsigned int *)(g_unite + 0x400);
-    FUN_00184b90(temp_v0,3);
-    FUN_003343f0(1);
-    break;
-  case 0x25:
-  case 0x26:
-  case 0x27:
-    sysPlaySe();
-  }
-  if (param_2 != 0) {
-    *(unsigned int *)(temp_v0 + 0x404) = *(unsigned int *)(temp_v0 + 0x400);
-  }
-  *(unsigned int *)(temp_v0 + 0x3fc) = 0;
-  *(unsigned int *)(temp_v0 + 0x400) = param_1;
-  return;
+    if (rememberPrevious != 0)
+        unite->previous = unite->state;
+    unite->frame = 0;
+    unite->state = state;
 }
-
-} /* extern "C" */
+}

@@ -1,4 +1,3 @@
-/* NON_MATCHING: initial trap/scene pointer chains use opposite r0/r1 allocation and form the destination later; all subsequent instructions match. */
 #include "map/mapTrap.h"
 #include "shard/W5_W5Match7_ControllerPose.h"
 
@@ -25,7 +24,8 @@ void FUN_003fe86c(ControllerPose *controller, u32 motion, u32 mode, f32 blend, f
 // Move the trap actor toward the map-scene destination at speed six.
 void mapTrapBeginMoveToScene(void)
 {
-    TrapMovementController *controller = ((TrapMovementView *)g_mapTrap)->actor->controller;
+    TrapMovementView *trap = (TrapMovementView *)g_mapTrap;
+    TrapMovementController *controller = trap->actor->controller;
     controllerSetDestination(&controller->pose, &g_lmapScene->position);
     FUN_003fe86c(&controller->pose, 0, 2, 0.0f, 0.0f);
     controller->speed = 6.0f;

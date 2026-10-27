@@ -16,6 +16,8 @@ u32 FUN_004285d4(FormattedNumericEntry *output, const char *text, const NumericE
 // Resolve the owner's token, parse the entry text, and validate the translated outcome.
 WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifier)
 {
+    FormattedNumericEntry *entryOutput = static_cast<FormattedNumericEntry *>(output);
+    const char *text = static_cast<const char *>(identifier);
     nn::Result ownerStatus = FUN_004283cc(owner);
     if (nnResultIsFailure(ownerStatus))
         return WindowStatusResult(static_cast<u32>(ownerStatus));
@@ -23,8 +25,7 @@ WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifie
     ResolvedNumericEntry *entry;
     s32 status = tokenResolveAddress(FUN_0016ccfc(), &entry, *static_cast<u32 *>(owner));
     if (!nnResultIsFailure(status)) {
-        status = static_cast<s32>(FUN_004285d4(static_cast<FormattedNumericEntry *>(output),
-            static_cast<const char *>(identifier), &entry->format));
+        status = static_cast<s32>(FUN_004285d4(entryOutput, text, &entry->format));
         if (!nnResultIsFailure(status))
             status = 0;
     }

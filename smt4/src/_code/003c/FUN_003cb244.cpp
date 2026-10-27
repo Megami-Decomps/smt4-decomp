@@ -39,7 +39,12 @@ u32 FUN_003cb244(ActionStateChannels *channels, ActionKindSelection *selection)
     ActionStateChannels *active = static_cast<ActionStateChannels *>(g_btlAction.data);
     active->entries[channels->entries[0].owner->current].pending = 29;
     SelectionOwner *owner = reinterpret_cast<SelectionOwner *>(channels);
-    if (work->command != NULL) {
+    if (work->command == NULL) {
+        owner->battle->selected.kind = 0;
+        owner->battle->selected.id = 0;
+        owner->battle->selected.option = 0;
+        owner->battle->selected.target = 0;
+    } else {
         owner->battle->selected.kind = work->index;
         owner->battle->selected.id = work->command->current.kind;
         owner->battle->selected.option = work->command->current.id;
@@ -55,14 +60,9 @@ u32 FUN_003cb244(ActionStateChannels *channels, ActionKindSelection *selection)
             work->command->history[index].option = work->command->current.option;
             work->command->history[index].target = work->command->current.target;
         }
-        ++work->command->historyIndex;
-        if (work->command->historyIndex >= 5)
+        if (++work->command->historyIndex > 4) {
             work->command->historyIndex = 0;
-    } else {
-        owner->battle->selected.kind = 0;
-        owner->battle->selected.id = 0;
-        owner->battle->selected.option = 0;
-        owner->battle->selected.target = 0;
+        }
     }
     return 1;
 }

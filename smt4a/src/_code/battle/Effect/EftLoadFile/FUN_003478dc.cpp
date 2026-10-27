@@ -14,7 +14,7 @@ int sysMemClear(void);
 int keyedCopyPayload(...);
 int libc_strcmp(int, unsigned char *);
 int effectAllocateSavedRenderRecords(...);
-int FUN_003b6728(...);
+int effectAllocateSavedEntries(...);
 int SBORROW4(int, int);
 int VectorSignedToFloat(...);
 int rt_memcpy(...);
@@ -73,7 +73,7 @@ extern int libc_strlen(int);
 /* Supplied declaration required: libc_strcmp. */
 extern unsigned int effectTextureFindOrReserve(int);
 /* Supplied declaration required: effectAllocateSavedRenderRecords. */
-/* Supplied declaration required: FUN_003b6728. */
+/* Supplied declaration required: effectAllocateSavedEntries. */
 /* Supplied declaration required: rt_memcpy. */
 /* Supplied declaration required: __aeabi_memcpy4. */
 
@@ -504,7 +504,7 @@ LAB_00347c88:
     }
   }
   effectAllocateSavedRenderRecords(temp_v49,temp_v3,*(unsigned int *)(param_2 + 0x10));
-  FUN_003b6728(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
+  effectAllocateSavedEntries(temp_v49,temp_v12,*(unsigned int *)(param_2 + 0xc));
   keyedCopyPayload(temp_v49,param_2 + 0x14);
   keyedRecordSetVectorPair0(temp_v49,temp_v47);
   FUN_0023aca0(temp_v49,&temp_v23);

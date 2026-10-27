@@ -1,55 +1,38 @@
-/* NON_MATCHING: This is a global command callback, not an evidenced class member; packet-write register scheduling still differs from retail. */
-#include "romwright_types.h"
-#include "shard/W6_W6Match6_ItemIcon.h"
+/* NON_MATCHING: control flow and the command pair writes match retail; retail forms the render-state address as (ctx + 0xA0) + 0x11F8 (count) + 4096 + 512 (entry) through a pooled 0x11F8 offset, which the typed stackG path does not reproduce. */
+#include "camp/RenderCtx.h"
 
 extern "C" {
-
-int cursorResetFromParam(void);
-int FUN_003c8538(int);
-
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp8; /* 0x8: local_8 */
-} param_1_stack;
-
-extern int g_renderCtx; /* 0x59dbb4 */
-extern int DAT_005b3fe4; /* 0x5b3fe4 */
-extern int DAT_005b3fe8; /* 0x5b3fe8 */
-
-/* Supplied declaration required: asdModelCommandBlockRelease. */
-/* Supplied declaration required: cursorResetFromParam. */
-/* Supplied declaration required: FUN_003c8538. */
-
-
-void _ZN9Obj464cb016postSelectedWordEv(unsigned int param_1)
-
-{
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  cursorResetFromParam();
-  temp_v0 = DAT_005b3fe4;
-  *(unsigned int *)(DAT_005b3fe4 + DAT_005b3fe8 * 4) =
-       *(unsigned int *)(g_renderCtx + *(int *)(g_renderCtx + 0x1298) * 4 + 0x12a0) |
-       (param_1 & 0xfffff0ff);
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0xf0107;
-  DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  temp_v1 = (param_1 & 0x70) >> 4;
-  if (temp_v1 >= 2) {
-    if (temp_v1 == 6 || temp_v1 == 7) {
-      temp_v1 = 2;
-    }
-    else {
-      temp_v1 = 3;
-    }
-  }
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4) = temp_v1 << 0x18;
-  *(unsigned int *)(temp_v0 + DAT_005b3fe8 * 4 + 4) = 0x80126;
-  DAT_005b3fe8 = DAT_005b3fe8 + 2;
-  asdModelCommandBlockRelease();
-  FUN_003c8538(1);
-  return;
+void cursorResetFromParam(void);
+void asdModelCommandBlockRelease(void);
+void FUN_003c8538(s32 arg);
+extern RenderCtxA *g_renderCtx;
+extern u32 *DAT_005b3fe4; /* model command buffer */
+extern s32 DAT_005b3fe8;  /* words used in the buffer */
 }
 
-} /* extern "C" */
+static __inline void commandQueuePushPair(u32 first, u32 second)
+{
+    DAT_005b3fe4[DAT_005b3fe8] = first;
+    DAT_005b3fe4[DAT_005b3fe8 + 1] = second;
+    DAT_005b3fe8 += 2;
+}
+
+/* Posts the word's flags merged with the current render state (id 0xf0107), then its 3-bit mode
+ * field (0, 1, 2 for modes 6/7, else 3) shifted into the top byte (id 0x80126). */
+extern "C" void _ZN9Obj464cb016postSelectedWordEv(u32 word)
+{
+    cursorResetFromParam();
+    RenderStateStack *stack = &g_renderCtx->additional.stackG;
+    commandQueuePushPair(stack->entries[stack->count] | (word & 0xfffff0ff), 0xf0107);
+    u32 mode = (word & 0x70) >> 4;
+    if (mode != 0 && mode != 1) {
+        if (mode == 6 || mode == 7) {
+            mode = 2;
+        } else {
+            mode = 3;
+        }
+    }
+    commandQueuePushPair(mode << 24, 0x80126);
+    asdModelCommandBlockRelease();
+    FUN_003c8538(1);
+}

@@ -5,7 +5,7 @@
 #include "sys/ResultReport.h"
 
 extern "C" {
-u32 FUN_0042cd0c(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, u32 timeoutLow, u32 timeoutHigh);
+u32 FUN_0042cd0c(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 void sysFatalBreak(void);
 void nn_os_CriticalSection_Enter(void *lock);
@@ -17,7 +17,7 @@ void FUN_00422534(S4FsReader *reader)
 {
     for (;;) {
         s32 signalled;
-        u32 result = FUN_0042cd0c(&signalled, reader->wakeup, 2, 0, 0xffffffff, 0xffffffff);
+        u32 result = FUN_0042cd0c(&signalled, reader->wakeup, 2, 0, -1);
         bool failed = nnResultIsFailure(result);
         if (failed) {
             FUN_002e3140(result, failed);

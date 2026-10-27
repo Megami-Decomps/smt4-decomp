@@ -18,7 +18,7 @@ void asdListBoxAddItems(u32 box, const AsdListBoxEntry *items, s32 count);
 void asdListBoxSetByteValue(u32 box, u8 value);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetIntItem(u32 box, s32 item, s32 value, s32 minimum, s32 maximum, s32 flags);
-void asdListBoxSetFloatItem(u32 box, s32 item, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 box, s32 item, f32 value, s32 minimum, s32 maximum);
 
 /* Replace the battle-panel debug menu and seed its color, timing and scale controls. */
 void btlDebugCreatePanelMenu(BattleDebugPanelWork *work, const BattleDebugPanelParent *parent)
@@ -36,7 +36,7 @@ void btlDebugCreatePanelMenu(BattleDebugPanelWork *work, const BattleDebugPanelP
     asdListBoxSetIntItem(work->panelJob, 2, DAT_00573bda, 0, 255, 0);
     asdListBoxSetIntItem(work->panelJob, 3, DAT_00573bdb, 0, 255, 0);
     asdListBoxSetIntItem(work->panelJob, 4, DAT_00573bdc, 0, 120, 0);
-    asdListBoxSetFloatItem(work->panelJob, 5, 0, 1, DAT_00573be0);
-    asdListBoxSetFloatItem(work->panelJob, 6, 0, 1, DAT_00573c00);
+    asdListBoxSetFloatItem(work->panelJob, 5, DAT_00573be0, 0, 1);
+    asdListBoxSetFloatItem(work->panelJob, 6, DAT_00573c00, 0, 1);
 }
 }

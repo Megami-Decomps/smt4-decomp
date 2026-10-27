@@ -69,7 +69,7 @@ void sysMemClear(char *buffer, s32 size);
 u32 tableGroupFindEntryIndex(u32 table, char *name);
 s32 gameFlagIsSet(u32 id);
 s32 resultGetListEntryLabel(void *list, ResultListEntry *entry, s32 type);
-s32 FUN_0046eb24(void *aocSystem, s32 kind);
+s32 packageListCountSectionRecords(void *aocSystem, s32 kind);
 ResultListEntry *contentEntryGetFromFilesByKind(void *aocSystem, s32 kind, s32 index);
 s32 FUN_004b75d0(ResultMenu *menu);
 void uiClampScrollOffset(ResultMenu *menu, f32 *offset);
@@ -139,7 +139,7 @@ void FUN_004b6bc4(ResultMenu *menu, s32 type, s32 group)
         }
     }
 
-    count = FUN_0046eb24(g_aocSystem, menu->group + 1);
+    count = packageListCountSectionRecords(g_aocSystem, menu->group + 1);
     for (i = 0; i < count; i++) {
         ResultListEntry *entry = contentEntryGetFromFilesByKind(g_aocSystem, menu->group + 1, i);
 

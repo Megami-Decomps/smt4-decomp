@@ -6,14 +6,17 @@
 template <class T> struct ResourceRelativePointer {
     s32 offset;
 
-    T *get() const
-    {
-        s32 value = offset;
-        if (value == 0)
-            return NULL;
-        return (T *)((u8 *)this + value);
-    }
+    T *get() const;
 };
+
+/* Defined out of class so armcc auto-inlines it (a hoisted NULL register, as retail). */
+template <class T> T *ResourceRelativePointer<T>::get() const
+{
+    s32 value = offset;
+    if (value != 0)
+        return (T *)(value + (u32)this);
+    return NULL;
+}
 struct RelativeResourceRecord {
     union {
         u8 unk00[0xc8];

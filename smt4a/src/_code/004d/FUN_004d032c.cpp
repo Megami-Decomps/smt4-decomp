@@ -12,10 +12,12 @@ u32 resourceRunOperationIfUnblocked(FlaggedEntry *record);
 void FUN_004d032c(TrackedRecordOwner *owner, u32 value)
 {
     u32 tracked;
-    if (owner->mode == 1) {
-        tracked = resourceRunEmbeddedOperationIfUnblocked(&owner->record);
+    u32 mode = owner->mode;
+    FlaggedEntry *record = &owner->record;
+    if (mode == 1) {
+        tracked = resourceRunEmbeddedOperationIfUnblocked(record);
     } else {
-        tracked = resourceRunOperationIfUnblocked(&owner->record);
+        tracked = resourceRunOperationIfUnblocked(record);
     }
     if (owner->mode == 0) {
         scrollOwnerSetValue(&owner->record, tracked);

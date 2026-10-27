@@ -1,8 +1,16 @@
 #include "code/Code002a_VariantA.h"
-/* NON_MATCHING: packed-coordinate construction and snapshot register lifetimes differ. */
+/* NON_MATCHING: packed coordinates now build through 16-bit bitfields like retail; remaining: the two pre-change snapshots take swapped saved registers (r4/r5), the rectangle/secondary arguments r6/r7, and the trailing call arguments copy through VFP instead of ldm/stm. */
 #include "shard/Shard0031.h"
 #include "ui/TouchRectangleRequest.h"
 #include "code/Code002a.h"
+
+union PackedPair {
+    struct {
+        u32 low : 16;
+        u32 high : 16;
+    } fields;
+    u32 word;
+};
 
 extern "C" {
 s32 recordGetModeForId(s32);
@@ -53,10 +61,9 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
             flaggedEntrySetValueA(entry, accepted);
         result = 1;
     } else if (rectangle != NULL) {
-        u32 position = u32(rectangle->x) | (u32(rectangle->y) << 16);
-        u32 dimensions = u32(rectangle->dimensions->width) |
-                         (u32(rectangle->dimensions->height) << 16);
-        result = FUN_002e2848(entry, position, dimensions, firstKey, secondKey, thirdKey,
+        PackedPair position = {{ (u32)rectangle->x, (u32)rectangle->y }};
+        PackedPair dimensions = {{ (u32)rectangle->dimensions->width, (u32)rectangle->dimensions->height }};
+        result = FUN_002e2848(entry, position.word, dimensions.word, firstKey, secondKey, thirdKey,
                               secondary, notify);
     }
     if (notify) {

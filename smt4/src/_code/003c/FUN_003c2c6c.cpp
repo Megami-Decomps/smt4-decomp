@@ -1,4 +1,4 @@
-/* NON_MATCHING: The embedded-entry pointer is retained rather than recomputed; getter/setter registers differ. */
+/* NON_MATCHING: the embedded entry is now recomputed at every use as in retail; retail keeps the state in r5 and the primary counter in r4 (swapped here) and leaves the secondary counter in r0 until its final save. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "shard/W5_W5Match2_UniteWork.h"
@@ -12,22 +12,24 @@ s32 flaggedEntrySetValueA(FlaggedEntry *entry, s32 value);
 s32 recordTrackDirtyValue(FlaggedEntry *entry, s32 value);
 s32 flaggedEntrySetValueB(FlaggedEntry *entry, s32 value);
 
+static __inline FlaggedEntry *countdownEntry(EntryCountdownPrefixIV *state)
+{
+    return reinterpret_cast<FlaggedEntry *>(reinterpret_cast<u8 *>(state) + 0x10);
+}
+
 void FUN_003c2c6c(EntryCountdownPrefixIV *state)
 {
-    FlaggedEntry *entry = reinterpret_cast<FlaggedEntry *>(
-        reinterpret_cast<u8 *>(state) + 0x10);
-
     s32 primary;
     if (state->mode == 1)
-        primary = FUN_0029e93c(entry);
+        primary = FUN_0029e93c(countdownEntry(state));
     else
-        primary = FUN_0029efc0(entry);
+        primary = FUN_0029efc0(countdownEntry(state));
 
     s32 secondary;
     if (state->mode == 1)
-        secondary = flaggedEntryGetValueB(entry);
+        secondary = flaggedEntryGetValueB(countdownEntry(state));
     else
-        secondary = flaggedEntryGetValueA(entry);
+        secondary = flaggedEntryGetValueA(countdownEntry(state));
 
     if (primary > 0) {
         --primary;
@@ -43,12 +45,12 @@ void FUN_003c2c6c(EntryCountdownPrefixIV *state)
     }
 
     if (state->mode == 0) {
-        scrollOwnerSetValue(entry, primary);
-        flaggedEntrySetValueA(entry, secondary);
+        scrollOwnerSetValue(countdownEntry(state), primary);
+        flaggedEntrySetValueA(countdownEntry(state), secondary);
     }
     if (state->mode == 1) {
-        recordTrackDirtyValue(entry, primary);
-        flaggedEntrySetValueB(entry, secondary);
+        recordTrackDirtyValue(countdownEntry(state), primary);
+        flaggedEntrySetValueB(countdownEntry(state), secondary);
     }
 }
 }

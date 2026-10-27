@@ -1,4 +1,4 @@
-/* NON_MATCHING: two setup loads are scheduled differently and the final control call is not tail-called. */
+/* NON_MATCHING: the final control call is now tail-called as in retail (path buffer scoped to the file-loading helper); retail saves `work` after the unit-lookup argument loads and stores `ready` before reloading g_btlMain. */
 #include "battle/BattleAssetWork.h"
 #include "shard/W4_Match6_BtlEntry.h"
 #include "battle/btlMain.h"
@@ -19,10 +19,9 @@ s32 FUN_00256940(BtlMainState *battle, u32 unitId, u32 flags);
 void btlReflectQueueKind34(u32 first, u32 second);
 u32 FUN_00256898(u32 first, u32 second);
 
-u32 FUN_003c06ac(BattleTalkWork *work)
+// Start loading the talk tone, message and script files for a unit's devil.
+static __inline void battleTalkLoadFiles(BattleTalkWork *work, const DevilRecord *record)
 {
-    const BattleTalkUnitReference *unit = FUN_0027da30(work->unitId, work->selector);
-    const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(unit->id));
     u32 tone = record->talk.alternate;
     if (tone == 99) {
         tone = record->talk.tone;
@@ -35,6 +34,13 @@ u32 FUN_003c06ac(BattleTalkWork *work)
     textFormatBuffer(path, DAT_004017c0, DAT_00439b70[tone]);
     asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&work->messageFile), 0);
     asdLoadFileAsyncSimple(DAT_004017ac, reinterpret_cast<u32 *>(&work->scriptFile), 0);
+}
+
+u32 FUN_003c06ac(BattleTalkWork *work)
+{
+    const BattleTalkUnitReference *unit = FUN_0027da30(work->unitId, work->selector);
+    const DevilRecord *record = reinterpret_cast<const DevilRecord *>(devilGetRecord(unit->id));
+    battleTalkLoadFiles(work, record);
     FUN_003dadd8(DAT_00435d18);
     work->ready = 1;
     if (g_btlMain->talk.unitIndex >= 0 && FUN_00256940(g_btlMain, work->unitId, 1)) {

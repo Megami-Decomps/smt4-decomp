@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail delays the stack save until the rank lookups; armcc saves registers before the flag checks. */
 #include "common.h"
 
 struct RankedEntry {
@@ -9,6 +8,13 @@ struct RankedEntry {
 extern "C" {
 
 s32 FUN_0049c9a0(const RankedEntry *entry);
+
+static s32 compareLookupRank(const RankedEntry *left, const RankedEntry *right)
+{
+    s32 leftRank = FUN_0049c9a0(left);
+    s32 rightRank = FUN_0049c9a0(right);
+    return leftRank - rightRank;
+}
 
 /* Orders entries by their priority flag and then by their lookup rank. */
 s32 FUN_00493d38(const RankedEntry *left, const RankedEntry *right)
@@ -21,9 +27,7 @@ s32 FUN_00493d38(const RankedEntry *left, const RankedEntry *right)
         if (leftFlag)
             return -1;
     }
-    s32 leftRank = FUN_0049c9a0(left);
-    s32 rightRank = FUN_0049c9a0(right);
-    return leftRank - rightRank;
+    return compareLookupRank(left, right);
 }
 
 }

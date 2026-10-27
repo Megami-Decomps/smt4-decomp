@@ -16,7 +16,7 @@ void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry* entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u8 value);
 void jobSetText(u32 job, const char* text);
 void asdListBoxSetItemMode3(u32 listBox, s32 index, s32 value, s32 minimum, s32 maximum, s32 option);
-void asdListBoxSetFloatItem(u32 listBox, s32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 listBox, s32 index, f32 value, s32 minimum, s32 maximum);
 
 // Build the seven-row battle panel debug menu from the current settings.
 void btlDebugCreatePanelMenu(BattleDebugWork* work, const BattleDebugOwnerView* owner)
@@ -31,7 +31,7 @@ void btlDebugCreatePanelMenu(BattleDebugWork* work, const BattleDebugOwnerView* 
     asdListBoxSetItemMode3(work->listBox, 2, DAT_00435e02, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 3, DAT_00435e03, 0, 255, 0);
     asdListBoxSetItemMode3(work->listBox, 4, DAT_00435e04, 0, 120, 0);
-    asdListBoxSetFloatItem(work->listBox, 5, 0, 1, DAT_00435e08);
-    asdListBoxSetFloatItem(work->listBox, 6, 0, 1, DAT_00435e20);
+    asdListBoxSetFloatItem(work->listBox, 5, DAT_00435e08, 0, 1);
+    asdListBoxSetFloatItem(work->listBox, 6, DAT_00435e20, 0, 1);
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: earned-byte getter matches, but index/bit-constant saved registers are swapped and one compiler hint NOP precedes the bit-test branch. */
+/* NON_MATCHING: only the saved registers of the index argument and the bit constant are swapped (retail index fp, constant sl). */
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"
@@ -7,11 +7,12 @@
 extern "C" {
 
 /* Tests entry `id`'s bit in the save's earned set. */
-static inline bool unlockIsEarned(s32 id)
+static __inline bool unlockIsEarned(s32 id)
 {
     s32 byte = id / 8;
     s32 bit = id % 8;
-    return (progressUnlockByteGet(&reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byte]) & (1 << bit)) != 0;
+    const u8 *earnedByte = &reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byte];
+    return (*earnedByte & (1u << bit)) != 0;
 }
 
 /* Returns the name of the index-th earned entry of data table 0x4a (0x2c-byte records), or "" when

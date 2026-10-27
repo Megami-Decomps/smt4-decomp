@@ -8,7 +8,7 @@ extern "C" {
 
 extern AllocatorState g_allocationAddressRanges;
 
-void FUN_0018003c(void);
+void asdAllocatorLock(void);
 void *FUN_0017fe8c(void *memory);
 void asdMemoryFreeRegion(void *memory);
 
@@ -29,7 +29,7 @@ void asdMemFree(void *memory)
     AllocatorState &state = g_allocationAddressRanges;
     u32 address = (u32)memory;
 
-    FUN_0018003c();
+    asdAllocatorLock();
     u32 firstStart = state.firstRangeStart;
     u32 secondStart = state.secondRangeStart;
     if ((firstStart <= address && address <= firstStart + state.firstRangeSize) ||

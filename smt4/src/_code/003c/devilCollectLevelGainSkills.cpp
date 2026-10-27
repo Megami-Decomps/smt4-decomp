@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains redundant scan/skill counters and hoists completion into the first pass; readable compaction merges those counters (92/89), with different GPR/address scheduling. */
+/* NON_MATCHING: retail retains redundant scan/skill counters and keeps the threshold in r2 across the range test; readable compaction merges the counters (73 diff lines). */
 #include "shard/W5_W5Match2_PairedIds.h"
 #include "shard/W6_W6Match5_DevilSort.h"
 
@@ -36,6 +36,7 @@ u32 devilCollectLevelGainSkills(void* context, s32 levelGain, u16* output)
     LearnedSkill pending[8] = {};
     s32 pendingCount = 0;
     s32 levelIndex = 0;
+    u32 complete = 1;
     for (s32 i = 0; i < 8; ++i) {
         if (record->learned[i].id && record->learned[i].level > static_cast<u32>(unit->level)) {
             if (recordContainsPairedId(&unit->skills, record->learned[i].id)) {
@@ -49,7 +50,6 @@ u32 devilCollectLevelGainSkills(void* context, s32 levelGain, u16* output)
         ++levelIndex;
     }
 
-    u32 complete = 1;
     s32 outputCount = 0;
     for (s32 i = 0; i < 8; ++i) {
         if (pending[i].id) {

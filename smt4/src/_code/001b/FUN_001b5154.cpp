@@ -47,7 +47,7 @@ s32 FUN_003adab8(void);
 s32 btlScriptUnitIsPresentAndActive(BtlPickWork *work);
 s32 FUN_002c1658(s32 button, s32 repeat);
 void FUN_0027e874(void);
-void FUN_003c033c(s32 a, s32 b);
+void btlHelpQueueModeRequest(s32 a, s32 b);
 s32 FUN_00337324(BtlPickWork *work);
 void eventQueueAddUniqueIfValid(u32 event);
 
@@ -143,7 +143,7 @@ u32 FUN_001b5154(u32 job)
     }
     if (FUN_002c1658(7, 1) != 0) {
         FUN_0027e874();
-        FUN_003c033c(0, 0);
+        btlHelpQueueModeRequest(0, 0);
         *state = *state | PICK_FLAG_ARMED_A;
         eventQueueAddUniqueIfValid(0x100016D);
         return 0;
@@ -155,7 +155,7 @@ u32 FUN_001b5154(u32 job)
         return 0;
     }
     FUN_0027e874();
-    FUN_003c033c(1, 0);
+    btlHelpQueueModeRequest(1, 0);
     *state = *state | PICK_FLAG_ARMED_B;
     eventQueueAddUniqueIfValid(0x100016D);
     return 0;

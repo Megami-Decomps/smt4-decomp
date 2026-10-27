@@ -10,7 +10,7 @@ extern "C" {
 
 SaveWork *gameGetMapBlock(void);
 void FUN_00280ac0(s32 value);
-void FUN_00396318(LmapObj *obj);
+void controllerPoolReset(LmapObj *obj);
 void FUN_001b3da4(void);
 u32 FUN_001d3e3c();
 void lmapMainRequest(void);
@@ -66,7 +66,7 @@ void FUN_001d2c14(void)
     scene->unk15C = 1000.0f;
     scene->unk160 = 3000.0f;
     state->unk994 = 0;
-    FUN_00396318(&state->obj);
+    controllerPoolReset(&state->obj);
     state->unkDC = 0.0f;
     state->unkE0 = 0;
     state->unkA00[0] = 0.0f;

@@ -1,169 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00307414` (_code @ 0x307414, 0x4cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the raw draft (curve color x job/emitter color, quantized per vertex); retail spills the submission pointer (push {r0,...}, reloads it from the stack), stores the unpacked color channels separately and schedules the VFP work differently. */
+#include "gfx/RenderSubmission.h"
+#include "gfx/EffectColorUnpack.h"
+
+/* A polygon-track emitter: the common emitter prefix (color at 0x24, draw mode at 0x28, last frame at
+ * 0x34) followed by the vertex count, its color curve and the alpha envelope the curve is sampled with. */
+struct PolygonTrackEmitter {
+    /* 0x00 */ u8 unk00[0x24];
+    /* 0x24 */ u32 color;
+    /* 0x28 */ u32 drawMode;
+    /* 0x2C */ u8 unk2C[8];
+    /* 0x34 */ u32 frame;
+    /* 0x38 */ u32 vertexCount;
+    /* 0x3C */ u8 colorCurve[0x24];
+    /* 0x60 */ u8 envelope[0x20];
+    /* 0x80 */ u32 duration;
+    /* 0x84 */ u8 unk84[0x35];
+    /* 0xB9 */ u8 depthEnabled;
+};
+
+/* The primitive's vertex color array: four floats per vertex at 0x04. */
+struct PolygonTrackPrimitive {
+    /* 0x00 */ u8 unk00[4];
+    /* 0x04 */ EffectColor *colors;
+    /* 0x08 */ u8 unk08[0x0A];
+    /* 0x12 */ u16 flags;
+};
 
 extern "C" {
+extern EffectColorProductState DAT_004ea81c;
+extern u8 DAT_00472560; /* the default vertex color, one byte per channel */
+extern u8 DAT_00472561;
+extern u8 DAT_00472562;
+extern u8 DAT_00472563;
+/* The curve sampler: (curve, envelope, frame, duration); the emitter's own color is sampled with only its first two arguments. */
+u32 FUN_00269694(const void *curve, const void *envelope, ...);
+void FUN_002f81d4(PolygonTrackPrimitive *primitive, const f32 *rotation, const f32 *scale);
+void FUN_0024f5ec(PolygonTrackPrimitive *primitive, u32 drawMode);
 
-int FUN_0024f5ec(...);
-int FUN_00269694(...);
-int FUN_002f81d4(...);
-int VectorFloatToUnsigned(double, int);
-int VectorUnsignedToFloat(...);
-
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-} param_1_stack;
-
-extern unsigned char DAT_00472560; /* 0x472560 */
-extern unsigned char DAT_00472561; /* 0x472561 */
-extern unsigned char DAT_00472562; /* 0x472562 */
-extern unsigned char DAT_00472563; /* 0x472563 */
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
-
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Unsupported intrinsic, declaration required: VectorFloatToUnsigned (CALLOTHER). */
-/* Supplied declaration required: FUN_0024f5ec. */
-/* Supplied declaration required: FUN_00269694. */
-/* Supplied declaration required: FUN_002f81d4. */
-
-
-void FUN_00307414(int param_1)
-
+/* Fills a polygon track's per-vertex colors for the current frame: each vertex that is still inside
+ * the emitter's duration gets the sampled curve color times the job and emitter colors, the rest the
+ * default color. */
+void FUN_00307414(RenderSubmission *submission)
 {
-/* irregular: irregular input(s): in_fpscr; 5 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  float *pfVar4;
-  unsigned int temp_v3;
-  unsigned int *puVar6;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  float temp_v9;
-  unsigned int temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  float temp_v13;
-  unsigned int temp_v14;
-  unsigned int temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  
-  temp_v4 = *(unsigned int *)(param_1 + 0x40);
-  temp_v5 = (*(unsigned int **)(param_1 + 0x3c))[1];
-  if ((*(unsigned int *)(temp_v4 + 0x34) < *(unsigned int *)(param_1 + 0x34)) && (*(unsigned int *)(temp_v4 + 0x34) != 0)) {
-    return;
-  }
-  puVar6 = (unsigned int *)**(unsigned int **)(param_1 + 0x3c);
-  temp_v3 = temp_v4;
-  FUN_00269694(temp_v4,temp_v4 + 0x24);
-  temp_v19 = 0.003921569f;
-  temp_v18 = 255.0f;
-  temp_v1 = *(unsigned int *)(param_1 + 0x30);
-  DAT_004ea92c = (float)VectorUnsignedToFloat(temp_v1 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea930 = (float)VectorUnsignedToFloat
-                                  ((temp_v1 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea934 = (float)VectorUnsignedToFloat((temp_v1 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea938 = (float)VectorUnsignedToFloat(temp_v1 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea92c = DAT_004ea92c * 0.003921569f;
-  DAT_004ea930 = DAT_004ea930 * 0.003921569f;
-  DAT_004ea934 = DAT_004ea934 * 0.003921569f;
-  DAT_004ea938 = DAT_004ea938 * 0.003921569f;
-  temp_v17 = (float)VectorUnsignedToFloat(temp_v3 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v13 = (float)VectorUnsignedToFloat((temp_v3 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v16 = (float)VectorUnsignedToFloat(temp_v3 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v9 = (float)VectorUnsignedToFloat((temp_v3 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-  DAT_004ea91c = temp_v17 * 0.003921569f * DAT_004ea92c;
-  DAT_004ea920 = temp_v9 * 0.003921569f * DAT_004ea930;
-  DAT_004ea924 = temp_v13 * 0.003921569f * DAT_004ea934;
-  DAT_004ea928 = temp_v16 * 0.003921569f * DAT_004ea938;
-  temp_v7 = VectorFloatToUnsigned(DAT_004ea91c * 255.0f,3);
-  temp_v10 = VectorFloatToUnsigned(DAT_004ea920 * 255.0f,3);
-  temp_v1 = *(unsigned int *)(temp_v4 + 0x38);
-  temp_v6 = *(unsigned int *)(temp_v4 + 0x80);
-  temp_v3 = 0;
-  temp_v11 = VectorFloatToUnsigned(DAT_004ea924 * 255.0f,3);
-  temp_v8 = VectorFloatToUnsigned(DAT_004ea928 * 255.0f,3);
-  if (temp_v1 != 0) {
-    do {
-      if (*puVar6 < temp_v6) {
-        temp_v2 = temp_v4 + 0x3c;
-        FUN_00269694(temp_v2,temp_v4 + 0x60,*puVar6,temp_v6);
-        DAT_004ea938 = (float)VectorUnsignedToFloat(temp_v2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        DAT_004ea92c = (float)VectorUnsignedToFloat(temp_v2 >> 0x18,(unsigned char)(in_fpscr >> 0x16) & 3);
-        DAT_004ea930 = (float)VectorUnsignedToFloat
-                                        ((temp_v2 & 0xffffff) >> 0x10,(unsigned char)(in_fpscr >> 0x16) & 3);
-        DAT_004ea934 = (float)VectorUnsignedToFloat
-                                        ((temp_v2 & 0xffff) >> 8,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v17 = (float)VectorUnsignedToFloat(temp_v8 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v9 = (float)VectorUnsignedToFloat(temp_v7 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v13 = (float)VectorUnsignedToFloat(temp_v10 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v16 = (float)VectorUnsignedToFloat(temp_v11 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        DAT_004ea938 = DAT_004ea938 * temp_v19;
-        DAT_004ea92c = DAT_004ea92c * temp_v19;
-        DAT_004ea930 = DAT_004ea930 * temp_v19;
-        DAT_004ea934 = DAT_004ea934 * temp_v19;
-        DAT_004ea91c = temp_v9 * temp_v19 * DAT_004ea92c;
-        DAT_004ea920 = temp_v13 * temp_v19 * DAT_004ea930;
-        DAT_004ea924 = temp_v16 * temp_v19 * DAT_004ea934;
-        DAT_004ea928 = temp_v17 * temp_v19 * DAT_004ea938;
-        pfVar4 = (float *)(*(int *)(temp_v5 + 4) + (temp_v3 & 0xffff) * 0x10);
-        temp_v14 = VectorFloatToUnsigned(DAT_004ea91c * temp_v18,3);
-        temp_v2 = VectorFloatToUnsigned(DAT_004ea920 * temp_v18,3);
-        temp_v15 = VectorFloatToUnsigned(DAT_004ea924 * temp_v18,3);
-        temp_v12 = VectorFloatToUnsigned(DAT_004ea928 * temp_v18,3);
-        temp_v9 = (float)VectorUnsignedToFloat(temp_v12 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v13 = (float)VectorUnsignedToFloat(temp_v15 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v17 = (float)VectorUnsignedToFloat(temp_v2 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        temp_v16 = (float)VectorUnsignedToFloat(temp_v14 & 0xff,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *pfVar4 = temp_v9 * temp_v19 * temp_v19;
-        pfVar4[3] = temp_v16 * temp_v19 * temp_v19;
-        pfVar4[1] = temp_v13 * temp_v19 * temp_v19;
-        pfVar4[2] = temp_v17 * temp_v19 * temp_v19;
-      }
-      else {
-        pfVar4 = (float *)(*(int *)(temp_v5 + 4) + (temp_v3 & 0xffff) * 0x10);
-        temp_v9 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472560,(unsigned char)(in_fpscr >> 0x16) & 3);
-        *pfVar4 = temp_v9 * temp_v19 * temp_v19;
-        temp_v9 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472561,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[1] = temp_v9 * temp_v19 * temp_v19;
-        temp_v9 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472562,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[2] = temp_v9 * temp_v19 * temp_v19;
-        temp_v9 = (float)VectorUnsignedToFloat((unsigned int)DAT_00472563,(unsigned char)(in_fpscr >> 0x16) & 3);
-        pfVar4[3] = temp_v9 * temp_v19 * temp_v19;
-      }
-      temp_v3 = temp_v3 + 1;
-      puVar6 = puVar6 + 0xc;
-    } while (temp_v3 < temp_v1);
-  }
-  FUN_002f81d4(temp_v5,param_1,param_1 + 0x10,param_1 + 0x20);
-  if (*(char *)(temp_v4 + 0xb9) != '\0') {
-    temp_v0 = *(unsigned short *)(temp_v5 + 0x12) | 0x100;
-  }
-  else {
-    temp_v0 = *(unsigned short *)(temp_v5 + 0x12) & 0xfeff;
-  }
-  *(unsigned short *)(temp_v5 + 0x12) = temp_v0;
-  FUN_0024f5ec(temp_v5,*(unsigned int *)(temp_v4 + 0x28) & 0xffff);
-  return;
-}
+    PolygonTrackEmitter *emitter = (PolygonTrackEmitter *)submission->owner;
+    PolygonTrackPrimitive *primitive = (PolygonTrackPrimitive *)submission->resource->packet;
+    u32 *entries = (u32 *)submission->resource->unk00;
+    if (submission->frame > emitter->frame && emitter->frame != 0) {
+        return;
+    }
 
-} /* extern "C" */
+    u32 emitterColor = FUN_00269694(emitter, &emitter->color);
+    effectColorUnpack(submission->color, &DAT_004ea81c.factor);
+    effectColorUnpack(emitterColor, &DAT_004ea81c.color);
+    DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
+    DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
+    DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
+    DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
+    u32 base = effectColorPack(&DAT_004ea81c.color);
+
+    u32 duration = emitter->duration;
+    for (u32 i = 0; i < emitter->vertexCount; i++) {
+        EffectColor *out = &primitive->colors[(u16)i];
+        if (*entries < duration) {
+            u32 curveColor = FUN_00269694(emitter->colorCurve, emitter->envelope, *entries, duration);
+            effectColorUnpack(curveColor, &DAT_004ea81c.factor);
+            effectColorUnpack(base, &DAT_004ea81c.color);
+            DAT_004ea81c.color.red *= DAT_004ea81c.factor.red;
+            DAT_004ea81c.color.green *= DAT_004ea81c.factor.green;
+            DAT_004ea81c.color.blue *= DAT_004ea81c.factor.blue;
+            DAT_004ea81c.color.alpha *= DAT_004ea81c.factor.alpha;
+            effectColorUnpack(effectColorPack(&DAT_004ea81c.color), out);
+        } else {
+            out->red = (f32)DAT_00472560 * (1.0f / 255.0f);
+            out->green = (f32)DAT_00472561 * (1.0f / 255.0f);
+            out->blue = (f32)DAT_00472562 * (1.0f / 255.0f);
+            out->alpha = (f32)DAT_00472563 * (1.0f / 255.0f);
+        }
+        entries += 12;
+    }
+    FUN_002f81d4(primitive, submission->rotation, submission->scale);
+    if (emitter->depthEnabled != 0) {
+        primitive->flags |= 0x100;
+    } else {
+        primitive->flags &= ~0x100;
+    }
+    FUN_0024f5ec(primitive, (u16)emitter->drawMode);
+}
+}

@@ -1,4 +1,3 @@
-/* NON_MATCHING: failure test allocates r0 (retail ands r1 with the arg move hoisted above bpl); success path materializes 0 in r4 before r0 */
 #include "sys/ProcessResult.h"
 #include "nn/Result.h"
 #include "sys/RuntimeObjects.h"
@@ -9,9 +8,9 @@ struct FileReader;
 
 typedef struct FileReaderVtbl {
     void *unk00[6];
-    s32 (*seek)(struct FileReader *self, s64 position);                              /* 0x18 */
+    nn::Result (*seek)(struct FileReader *self, u64 position);                              /* 0x18 */
     void *unk1C[6];
-    s32 (*read)(struct FileReader *self, s32 *readSize, void *buffer, u32 size, bool flush); /* 0x34 */
+    nn::Result (*read)(struct FileReader *self, s32 *readSize, void *buffer, u32 size, bool flush); /* 0x34 */
 } FileReaderVtbl;
 
 typedef struct FileReader {
@@ -20,20 +19,28 @@ typedef struct FileReader {
     u32 handle;           /* 0x08: file handle, bit 0 set when the handle is invalid */
 } FileReader;
 
-void FUN_0032ca54(s32 result);
+void FUN_0032ca54(u32 result, ...);
+static __inline nn::Result fileRecordResult(nn::Result result)
+{
+    FUN_0013ebd8(result);
+    return result;
+}
+
 void sysFatalBreak(void);
 
 /* Reads size bytes at offset into buffer; on failure reports the result and closes the file. */
-s32 FUN_002e0c80(FileReader *reader, u32 offset, void *buffer, u32 size)
+nn::Result FUN_002e0c80(FileReader *reader, u32 offset, void *buffer, u32 size)
 {
     s32 readSize;
-    s32 result;
+    nn::Result result;
 
-    FUN_0013ebd8(reader->vtbl->seek(reader, offset));
+    u64 position = offset;
+    FUN_0013ebd8(reader->vtbl->seek(reader, position));
     result = reader->vtbl->read(reader, &readSize, buffer, size, true);
     FUN_0013ebd8(result);
-    if (!nnResultIsSuccess(result)) {
-        FUN_0032ca54(result);
+    u32 failed = result & 0x80000000;
+    if ((s32)failed < 0) {
+        FUN_0032ca54(result, failed);
         if ((reader->handle & ~1u) != 0) {
             if (reader->handle & 1) {
                 sysFatalBreak();
@@ -43,9 +50,7 @@ s32 FUN_002e0c80(FileReader *reader, u32 offset, void *buffer, u32 size)
         }
         return result;
     }
-    result = 0;
-    FUN_0013ebd8(result);
-    return result;
+    return fileRecordResult(0);
 }
 
 } /* extern "C" */

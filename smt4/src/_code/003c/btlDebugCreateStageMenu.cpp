@@ -29,7 +29,7 @@ void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, u32 count);
 void asdListBoxSetByteValue(u32 listBox, u8 value);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetItemMode3(u32 listBox, s32 index, s32 value, s32 minimum, s32 maximum, s32 option);
-void asdListBoxSetFloatItem(u32 listBox, s32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 listBox, s32 index, f32 value, s32 minimum, s32 maximum);
 
 /* Builds the stage debug menu: a position (three floats) followed by the integer settings. */
 void btlDebugCreateStageMenu(BattleStageMenu *menu, BattleStageMenuOwner *owner)
@@ -39,16 +39,16 @@ void btlDebugCreateStageMenu(BattleStageMenu *menu, BattleStageMenuOwner *owner)
     asdListBoxSetByteValue(menu->list, 1);
     jobSetText(menu->list, "btl Stage Menu");
     const f32 *position = DAT_004398d4->position;
-    asdListBoxSetFloatItem(menu->list, 0, -999, 999, position[0]);
-    asdListBoxSetFloatItem(menu->list, 1, -999, 999, position[1]);
-    asdListBoxSetFloatItem(menu->list, 2, -999, 999, position[2]);
+    asdListBoxSetFloatItem(menu->list, 0, position[0], -999, 999);
+    asdListBoxSetFloatItem(menu->list, 1, position[1], -999, 999);
+    asdListBoxSetFloatItem(menu->list, 2, position[2], -999, 999);
     asdListBoxSetItemMode3(menu->list, 3, DAT_004398d4->value[0], 0, 2, 0);
     asdListBoxSetItemMode3(menu->list, 4, DAT_004398d4->value[1], 0, 255, 0);
     asdListBoxSetItemMode3(menu->list, 5, DAT_004398d4->value[2], 0, 255, 0);
     asdListBoxSetItemMode3(menu->list, 6, DAT_004398d4->value[3], 0, 255, 0);
     asdListBoxSetItemMode3(menu->list, 7, DAT_004398d4->value[4], 0, 10000, 0);
     asdListBoxSetItemMode3(menu->list, 8, DAT_004398d4->limit, 0, 10000, 0);
-    asdListBoxSetFloatItem(menu->list, 9, 0, 10, DAT_004398d4->scale);
+    asdListBoxSetFloatItem(menu->list, 9, DAT_004398d4->scale, 0, 10);
     asdListBoxSetItemMode3(menu->list, 10, DAT_004398d4->extra[0], 0, 255, 0);
     asdListBoxSetItemMode3(menu->list, 11, DAT_004398d4->extra[1], 0, 255, 0);
     asdListBoxSetItemMode3(menu->list, 12, DAT_004398d4->extra[2], 0, 255, 0);

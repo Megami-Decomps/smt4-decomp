@@ -13,7 +13,7 @@ extern "C" {
 
 extern AllocatorLock g_allocationAddressRanges;
 
-void FUN_0018003c(void);
+void asdAllocatorLock(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, u32 extra);
 void *FUN_001844ac(void *block, u32 size, u32 alignment, u32 flags);
 void rt_memclr(void *memory, u32 size);
@@ -21,7 +21,7 @@ void rt_memclr(void *memory, u32 size);
 // Allocates `size` zeroed bytes aligned to `alignment` (at least 0x80) under the allocator lock.
 void *FUN_001858ec(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra)
 {
-    FUN_0018003c();
+    asdAllocatorLock();
     if (alignment < 0x80) {
         alignment = 0x80;
     }

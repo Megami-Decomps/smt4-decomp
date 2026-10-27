@@ -102,8 +102,9 @@ TexFileHeader *FUN_00450f58(const TexBuildConfig *config, TexAllocator *allocato
     header->unk14 = 0;
     header->width = config->size.width;
     header->height = config->size.height;
-    header->internalFormat = DAT_0053cc20.internalFormat[config->format];
-    header->dataType = DAT_0053cc20.dataType[config->format];
+    const TexFormatTable *formats = &DAT_0053cc20;
+    header->internalFormat = formats->internalFormat[config->format];
+    header->dataType = formats->dataType[config->format];
     header->mipLevels = config->size.mipCount;
     header->unk2C = 0;
     header->unk30 = config->unk0C;

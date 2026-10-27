@@ -1,14 +1,10 @@
-/* NON_MATCHING: Scaled-value reset is complete; the flags-zero store and preserved record pointer use different registers/order in the prologue. */
 #include "shard/Shard004B.h"
 
 extern "C" s32 FUN_0018416c(u16 id);
 
 /* Reset the record's current values to its conditionally scaled maxima. */
-extern "C" s32 FUN_004bcb54(ScaledRecordValues *record)
+static void resetScaledValues(ScaledRecordValues *record)
 {
-    if (record == NULL) {
-        return 0;
-    }
     record->flags = 0;
     s16 maximum = record->maximum;
     if (FUN_0018416c(record->id)) {
@@ -16,5 +12,14 @@ extern "C" s32 FUN_004bcb54(ScaledRecordValues *record)
     }
     record->current = maximum;
     record->secondaryCurrent = record->secondaryMaximum;
+}
+
+/* Reset a record when it exists; returns 1 on success. */
+extern "C" s32 FUN_004bcb54(ScaledRecordValues *record)
+{
+    if (record == NULL) {
+        return 0;
+    }
+    resetScaledValues(record);
     return 1;
 }

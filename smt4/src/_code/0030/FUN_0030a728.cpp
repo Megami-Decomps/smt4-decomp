@@ -9,8 +9,8 @@ extern "C" s32 FUN_0030a728(u32 *ids, s32 capacity, const VersionedResourceHeade
     struct ModernPayload { u8 unk00[0x18]; u32 id; u8 unk1c[0xd4]; };
     struct IndexRecord { u32 id; u8 unk04[0x1c]; };
     const HeaderView *header = reinterpret_cast<const HeaderView *>(resource);
-    s32 version = (s16)(resource->version[0] - '0') * 1000 + resource->version[1] * 100 +
-                  resource->version[2] * 10 - 5328 + resource->version[3];
+    s32 version = (resource->version[0] - '0') * 1000 + (resource->version[1] - '0') * 100 +
+                  (resource->version[2] - '0') * 10 + (resource->version[3] - '0');
     const u8 *payload = reinterpret_cast<const u8 *>(resource) + resource->payloadOffset;
     if (resource->format == 0) {
         if (version >= 1300)

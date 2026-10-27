@@ -12,8 +12,8 @@ void FUN_00282820(s32, u32, s32, s32, s32, s32, s32, s32);
 void FUN_003ca32c(BtlMainState **main, u32 job)
 {
     struct Rates { s32 hp, mp, kind; } rates;
-    rates.hp = 50;
     rates.mp = 50;
+    rates.hp = 50;
     s32 queued = 0;
     rates.kind = 5;
     for (s32 i = 0; i < 4; ++i) {

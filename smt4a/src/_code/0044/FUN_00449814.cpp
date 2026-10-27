@@ -1,13 +1,13 @@
-/* NON_MATCHING: retail keeps the resolved record in a register and stores it to the stack once before the call; armcc here initialises the stack slot first and stores conditionally. */
+/* NON_MATCHING: retail resolves the table offset with a hoisted NULL register (moveq/addne select, then a separate null test); armcc merges both tests into one adds/moveq. */
 #include "common.h"
-#include "shard/S3GfxAnim.h"
+#include "shard/W6_W6Match4_RelativeResourceGraph.h"
 
 extern "C" {
 
 /* The animation data: a table of 16-byte slots behind a self-relative offset at 0x14. */
 struct AnimResourceData {
     /* 0x00 */ u8 unk00[0x14];
-    /* 0x14 */ s32 tableOffset;
+    /* 0x14 */ ResourceRelativePointer<RelativeResourceTable> table;
 };
 
 /* A pointer pair (begin/end) of a vector of words. */
@@ -28,24 +28,22 @@ struct AnimPlayer {
     /* 0x58 */ u8 loaded;
 };
 
-void FUN_0050be58(void **record, u32 value, u32 element);
+void FUN_0050be58(RelativeResourceRecord **record, u32 value, u32 element);
 
 /* Binds slot `index` of the animation source: its record (via two self-relative offsets) and element values. */
 void FUN_00449814(AnimPlayer *player, s32 index)
 {
     AnimSource *source = player->source;
 
-    if (source->elementsEnd - source->elementsBegin != 0) {
-        u8 *table = (u8 *)gfxRelativePointer(&source->data->tableOffset);
-        void *record = NULL;
+    u32 *elements = source->elementsBegin;
+    if (source->elementsEnd - elements != 0) {
+        RelativeResourceTable *table = source->data->table.get();
+        RelativeResourceRecord *record = NULL;
 
         if (table != NULL) {
-            s32 *slot = (s32 *)(table + index * 16 + 0x28);
-            if (*slot != 0) {
-                record = (u8 *)slot + *slot;
-            }
+            record = table->entries[index].record.get();
         }
-        FUN_0050be58(&record, source->values[index], source->elementsBegin[index]);
+        FUN_0050be58(&record, source->values[index], elements[index]);
         player->loaded = 1;
     }
 }

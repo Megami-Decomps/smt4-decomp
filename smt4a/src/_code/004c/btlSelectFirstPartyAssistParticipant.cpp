@@ -1,4 +1,4 @@
-/* NON_MATCHING: marker-mask loads use separate LDRs instead of LDM, and activation-mask address/register allocation differs; candidate -O2. */
+/* NON_MATCHING: retail loads the marker pair with ldm and the guarantee/activation mask words with separate ldr (we get ldrd/ldm for the u64 views). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "gamedata/GameFlags.h"
@@ -65,7 +65,7 @@ u32 btlSelectFirstPartyAssistParticipant()
             break;
         }
         const BtlMainStateA *state = btlGetMainState();
-        if (*reinterpret_cast<const u64 *>(state->markerMasks.words) & DAT_005713f0.guarantee) {
+        if (DAT_005713f0.guarantee & state->markerMasks.bits) {
             chance = 100;
         }
         if (lcgRandomRange(99) < chance && selected < 1) {

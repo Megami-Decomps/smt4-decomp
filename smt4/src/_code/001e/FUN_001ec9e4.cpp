@@ -4,7 +4,7 @@
 
 extern "C" {
 
-void FUN_002d7894(s32 set, u32 id, u32 mask);
+void jobSetFlagsRecursive(s32 set, u32 id, u32 mask);
 
 extern AsdProcessTable g_asdProcess;
 
@@ -53,7 +53,7 @@ void FUN_001ec9e4(s32 set, u32 id, u32 mask, s32 mode)
 
         asdProcessChangeFlags(node, set, mask);
         for (AsdProcessNode *child = node->children; child != NULL; child = child->sibling) {
-            FUN_002d7894(set, child->id, mask);
+            jobSetFlagsRecursive(set, child->id, mask);
         }
     }
 }

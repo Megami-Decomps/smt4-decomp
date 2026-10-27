@@ -1,7 +1,7 @@
 /* NON_MATCHING: jump table now matches (explicit case 0); register assignment of the parameters, a stray sxth on the second id and the paired bitfield stores differ. */
 #include "common.h"
 #include "shard/W6_W6Match5_DevilSort.h"
-#include "shard/W5_W5Match2_UniteWork.h"
+#include "gamedata/PackedIdentifiers.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
 struct LeveledLists;
@@ -9,14 +9,14 @@ struct LeveledLists;
 extern "C" {
 u8 FUN_003c8c2c(void *owner, u16 firstId, u16 secondId);
 u32 FUN_003c8ffc(LeveledLists *owner, u16 firstId, u16 secondId,
-                 UnitePairEntryIV *output);
+                 PackedIdentifiers *output);
 u32 FUN_003c911c(LeveledLists *owner, u16 firstId, u16 secondId,
-                 UnitePairEntryIV *output);
+                 PackedIdentifiers *output);
 const DevilCombinationTableEntryPrefixIV *dataTable05FindByPriorityAndKey(
     u32 firstRace, u32 secondRace);
 
 u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
-                 UnitePairEntryIV *output)
+                 PackedIdentifiers *output)
 {
     u32 accepted = 0;
     switch (FUN_003c8c2c(owner, firstId, secondId)) {
@@ -37,9 +37,9 @@ u32 FUN_003c9b94(LeveledLists *owner, u16 firstId, u16 secondId,
             dataTable05FindByPriorityAndKey(first->race, second->race);
         if (firstId == secondId || entry == NULL)
             break;
-        output->firstId = firstId;
-        output->secondId = secondId;
-        output->resultId = entry->result;
+        output->firstIdentifier = firstId;
+        output->resultIdentifier = entry->result;
+        output->secondIdentifier = secondId;
         accepted = 1;
         break;
     }

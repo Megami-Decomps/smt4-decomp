@@ -1,305 +1,198 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0020ad6c` (_code @ 0x20ad6c, 0x6fc bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
+/* NON_MATCHING: readable rewrite of the command menu mode switch; retail keeps the work in r4 and the mode pointer in r5 (the build swaps them and spills the 0x3bdc list address), copies the mode argument to r9 after storing it, and lays the 8/10/12 and 1 region loops out as one shared test chain (the build tests 8, 10, 12 as one chain). */
+#include "common.h"
+#include <stddef.h>
 #include "battle/BtlMainAccess.h"
-#include "romwright_types.h"
-#include "code/Code002a.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
+
+/* A selectable entry of the command menu's page list (0x40 bytes). */
+struct CommandPageEntry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[0x16];
+    /* 0x18 */ u8 present;
+    /* 0x19 */ u8 unk19[0x1B];
+    /* 0x34 */ s32 value;
+    /* 0x38 */ u8 unk38[8];
+};
+
+/* A data table record (only the flag word is read). */
+struct CommandDataRecord {
+    /* 0x00 */ u16 unk00;
+    /* 0x02 */ u16 flags;
+};
+
+/* The battle command menu's work past the parts the other menu functions use. */
+struct CommandMenuScreen {
+    /* 0x0000 */ u8 unk0000[0x3878];
+    /* 0x3878 */ u32 unk3878;
+    /* 0x387C */ s32 mode;
+    /* 0x3880 */ s32 previousMode;
+    /* 0x3884 */ u8 unk3884[0xC];
+    /* 0x3890 */ s32 selected;
+    /* 0x3894 */ u8 unk3894[0x28];
+    /* 0x38BC */ ScrollSelection lists[8];
+    /* 0x3BDC */ ScrollSelection allList;
+    /* 0x3C40 */ ScrollSelection *current;
+    /* 0x3C44 */ u8 unk3C44[0x3C84 - 0x3C44];
+    /* 0x3C84 */ u8 chosen[0x41ED - 0x3C84];
+    /* 0x41ED */ s8 blocked[0x480C - 0x41ED];
+    /* 0x480C */ s16 regionCount;
+    /* 0x480E */ s16 regions[0x40 / 2];
+    /* 0x484E */ u8 unk484E[2];
+    /* 0x4850 */ s32 pageCount;
+    /* 0x4854 */ u8 unk4854[3];
+    /* 0x4857 */ s8 pageFlag;
+    /* 0x4858 */ CommandPageEntry pages[1];
+};
+
+typedef char CommandMenuScreenOffsetCheck[
+    offsetof(CommandMenuScreen, mode) == 0x387C && offsetof(CommandMenuScreen, selected) == 0x3890 &&
+    offsetof(CommandMenuScreen, lists) == 0x38BC && offsetof(CommandMenuScreen, allList) == 0x3BDC &&
+    offsetof(CommandMenuScreen, current) == 0x3C40 && offsetof(CommandMenuScreen, chosen) == 0x3C84 &&
+    offsetof(CommandMenuScreen, blocked) == 0x41ED && offsetof(CommandMenuScreen, regionCount) == 0x480C &&
+    offsetof(CommandMenuScreen, pageCount) == 0x4850 && offsetof(CommandMenuScreen, pages) == 0x4858 ? 1 : -1];
 
 extern "C" {
+void FUN_00203b40(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
+u32 buttonHelpGetValue(void);
+void sysPlaySe(u32 id);
+u16 ifTouchGetButtonHelpValue(void);
+s32 btlScriptUnitHasFlags(const void *state);
+void FUN_00270104(void *menu);
+u32 FUN_002cc9e0(void *menu, s32 inBattle);
+void screenSetContextHint(void *owner, s32 kind, s32 alternate);
+u8 gameDataFlagTestBit(u32 bit);
+void FUN_003756c8(s32 alternate);
+s32 FUN_002a4878(void *object);
+void ifTouchRegionRemove(void);
+void __aeabi_memset4(void *destination, u32 size, u32 value);
+s32 widgetSubCallIfVisible(ScrollSelection *list);
+s32 FUN_001643b4(u32 file, u32 index);
+s32 uiSearchPrimary(ScrollSelection *list);
+s32 objectApplyIfUnblocked(ScrollSelection *list);
+CommandDataRecord *dataTable00FindById(u32 id);
 
-int ifTouchRegionRemove(void);
-int FUN_001643b4(...);
-int sysPlaySe(void);
-int dataTable00FindById(void);
-int __aeabi_memset4(int, int, unsigned int);
-int FUN_00203b40(int, int, int, int, int, int);
-int FUN_00270104(void);
-int widgetSubCallIfVisible(...);
-int screenSetContextHint(int, unsigned int, int);
-int buttonHelpGetValue(void);
-int FUN_003756c8(void);
-int gameDataFlagTestBit(int);
-
-/* stack frame of param_3: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_3_stack;
-
-/* Supplied declaration required: btlGetMainState. */
-/* Supplied declaration required: ifTouchRegionRemove. */
-/* Supplied declaration required: FUN_001643b4. */
-extern int ifTouchGetButtonHelpValue(void);
-/* Supplied declaration required: sysPlaySe. */
-/* Supplied declaration required: dataTable00FindById. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: FUN_00270104. */
-/* Supplied declaration required: widgetSubCallIfVisible. */
-extern int objectApplyIfUnblocked(unsigned int);
-/* Supplied declaration required: screenSetContextHint. */
-extern unsigned int FUN_002cc9e0(int, unsigned int);
-/* Supplied declaration required: buttonHelpGetValue. */
-extern int uiSearchPrimary(unsigned int);
-/* Supplied declaration required: FUN_003756c8. */
-/* Supplied declaration required: gameDataFlagTestBit. */
-extern int btlScriptUnitHasFlags(void);
-
-
-void FUN_0020ad6c(int param_1,int param_2,int param_3)
-
+/* Registers a touch region for the selection's buttons, centred on the visible count. */
+static __inline void addSelectionRegions(CommandMenuScreen *work)
 {
-/* irregular: 4 goto(s); 14 native warning(s); review required */
-  unsigned short temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  unsigned int temp_v3;
-  int *piVar5;
-  int temp_v4;
-  unsigned int *puVar7;
-  int *piVar8;
-  unsigned char temp_v5;
-  unsigned char temp_v6;
-  
-  piVar5 = (int *)(param_1 + 0x387c);
-  if (*piVar5 == 0x22) {
-    FUN_00203b40(param_1 + 0x3bdc,4,1,4,1,1);
-  }
-  if (*piVar5 == 0x13 || *piVar5 == 0x16) {
-    buttonHelpGetValue();
-    sysPlaySe();
-  }
-  temp_v1 = *piVar5;
-  if ((temp_v1 == 0x22 || temp_v1 == 0x23) || temp_v1 == 0x24) {
-    buttonHelpGetValue();
-    sysPlaySe();
-  }
-  temp_v1 = ifTouchGetButtonHelpValue();
-  if (temp_v1 == 0x3f) {
-    reinterpret_cast<int>(btlGetMainState());
-    temp_v1 = btlScriptUnitHasFlags();
-    if (temp_v1 == 0) {
-      buttonHelpGetValue();
-      sysPlaySe();
+    s32 count = widgetSubCallIfVisible(&work->lists[work->selected]);
+    for (s32 i = 0; i < count; i++) {
+        s32 index;
+        if ((count & 1) == 0)
+            index = i + (8 - count) / 2 + 0x106;
+        else
+            index = i + (7 - count) / 2 + 0xFF;
+        work->regions[i] = FUN_001643b4(0xD, index);
+        work->regionCount++;
     }
-  }
-  piVar8 = (int *)(param_1 + 0x3890);
-  if (*piVar5 == 7) {
-    if (*(int *)(param_1 + 0x3880) - 8U < 6) {
-      FUN_00270104();
-    }
-    else {
-      temp_v2 = FUN_002cc9e0(param_1,1);
-      screenSetContextHint(param_1,temp_v2,*piVar8);
-    }
-  }
-  if (param_2 != 2) {
-    if (((!(param_2 == 9 || param_2 == 8)) && (!(param_2 == 0xb || param_2 == 10))) &&
-       (!(param_2 == 0xd || param_2 == 0xc))) {
-      if (param_2 == 1) {
-        FUN_002a4878((void *)(param_1 + *piVar8 * 100 + 0x38bc));
-        FUN_003756c8();
-      }
-    }
-    else {
-      FUN_003756c8();
-    }
-  }
-  else {
-    gameDataFlagTestBit(0x10);
-    sysPlaySe();
-  }
-  if (param_3 != 0) {
-    *(int *)(param_1 + 0x3880) = *piVar5;
-  }
-  *piVar5 = param_2;
-  temp_v1 = 0;
-  *(unsigned int *)(param_1 + 0x3878) = 0;
-  if (0 < *(short *)(param_1 + 0x480c)) {
-    do {
-      ifTouchRegionRemove();
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(short *)(param_1 + 0x480c));
-  }
-  *(unsigned short *)(param_1 + 0x480c) = 0;
-  __aeabi_memset4(param_1 + 0x480e,0x40,0xffffffff);
-  if (param_2 != 1) {
-    if (param_2 != 8) goto LAB_0020afa8;
-LAB_0020b03c:
-    piVar5 = (int *)(param_1 + 0x3890);
-    temp_v3 = widgetSubCallIfVisible(param_1 + *piVar5 * 100 + 0x38bc);
-    temp_v1 = 0;
-    if (temp_v1 < (int)temp_v3) {
-      do {
-        if ((temp_v3 & 1) == 0) {
-          temp_v4 = temp_v1 + (int)(8 - temp_v3) / 2 + 0x106;
-        }
-        else {
-          temp_v4 = temp_v1 + (int)(7 - temp_v3) / 2 + 0xff;
-        }
-        temp_v0 = FUN_001643b4(0xd,temp_v4);
-        temp_v4 = temp_v1 * 2;
-        temp_v1 = temp_v1 + 1;
-        *(unsigned short *)(param_1 + temp_v4 + 0x480e) = temp_v0;
-        *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-      } while (temp_v1 < (int)temp_v3);
-    }
-    puVar7 = (unsigned int *)(param_1 + 0x3c40);
-    temp_v4 = 0;
-    temp_v1 = uiSearchPrimary(*puVar7);
-    if (0 < temp_v1) {
-      do {
-        if (*piVar5 == 1) {
-          temp_v1 = 0xc2;
-        }
-        else if (*piVar5 == 2) {
-          temp_v1 = 0xbb;
-        }
-        else {
-          temp_v1 = 0xb3;
-        }
-        temp_v0 = FUN_001643b4(0xd,temp_v1 + temp_v4);
-        temp_v1 = temp_v4 * 2;
-        temp_v4 = temp_v4 + 1;
-        *(unsigned short *)(param_1 + temp_v1 + 0x4824) = temp_v0;
-        *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-        temp_v1 = uiSearchPrimary(*puVar7);
-      } while (temp_v4 < temp_v1);
-    }
-    temp_v1 = objectApplyIfUnblocked(*puVar7);
-    temp_v4 = uiSearchPrimary(*puVar7);
-    if (temp_v4 < temp_v1) {
-      if (*piVar5 != 1) {
-        if (*piVar5 != 2) {
-          temp_v0 = FUN_001643b4(0xd,0x196);
-          *(unsigned short *)(param_1 + 0x481e) = temp_v0;
-          temp_v0 = FUN_001643b4(0xd,0x194);
-          *(unsigned short *)(param_1 + 0x4820) = temp_v0;
-          temp_v0 = FUN_001643b4(0xd,0x195);
-          *(unsigned short *)(param_1 + 0x4822) = temp_v0;
-        }
-        else {
-          temp_v0 = FUN_001643b4(0xd,0x193);
-          *(unsigned short *)(param_1 + 0x481e) = temp_v0;
-          temp_v0 = FUN_001643b4(0xd,0x191);
-          *(unsigned short *)(param_1 + 0x4820) = temp_v0;
-          temp_v0 = FUN_001643b4(0xd,0x192);
-          *(unsigned short *)(param_1 + 0x4822) = temp_v0;
-        }
-      }
-      else {
-        temp_v0 = FUN_001643b4(0xd,0x199);
-        *(unsigned short *)(param_1 + 0x481e) = temp_v0;
-        temp_v0 = FUN_001643b4(0xd,0x197);
-        *(unsigned short *)(param_1 + 0x4820) = temp_v0;
-        temp_v0 = FUN_001643b4(0xd,0x198);
-        *(unsigned short *)(param_1 + 0x4822) = temp_v0;
-      }
-      *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 3;
-    }
-  }
-  else {
-    temp_v3 = widgetSubCallIfVisible(param_1 + *piVar8 * 100 + 0x38bc);
-    temp_v1 = 0;
-    if ((int)temp_v3 < 1) {
-      return;
-    }
-    do {
-      if ((temp_v3 & 1) == 0) {
-        temp_v4 = temp_v1 + (int)(8 - temp_v3) / 2 + 0x106;
-      }
-      else {
-        temp_v4 = temp_v1 + (int)(7 - temp_v3) / 2 + 0xff;
-      }
-      temp_v0 = FUN_001643b4(0xd,temp_v4);
-      temp_v4 = temp_v1 * 2;
-      temp_v1 = temp_v1 + 1;
-      *(unsigned short *)(param_1 + temp_v4 + 0x480e) = temp_v0;
-      *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-    } while (temp_v1 < (int)temp_v3);
-LAB_0020afa8:
-    if (param_2 == 10 || param_2 == 0xc) goto LAB_0020b03c;
-  }
-  if (param_2 != 0x13) {
-    if (param_2 != 0x22) goto LAB_0020b1c0;
-  }
-  else {
-    temp_v0 = FUN_001643b4(0xd,0x1b3);
-    *(unsigned short *)(param_1 + 0x4830) = temp_v0;
-    temp_v1 = 0;
-    *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-    if (*(int *)(param_1 + 0x4850) < 1) {
-      return;
-    }
-    do {
-      temp_v4 = param_1 + temp_v1 * 0x40;
-      if (*(char *)(temp_v4 + 0x4870) != '\0') {
-        temp_v3 = (unsigned int)*(unsigned short *)(temp_v4 + 0x4858);
-        dataTable00FindById();
-        if ((*(unsigned short *)(temp_v3 + 2) & 0x8000) != 0) {
-          if (*(char *)(param_1 + 0x4857) != '\0') {
-            temp_v0 = FUN_001643b4(0xd,0x1a0);
-            *(unsigned short *)(param_1 + temp_v1 * 2 + 0x4832) = temp_v0;
-          }
-          else {
-            temp_v3 = *(int *)(temp_v4 + 0x488c) - 0x14a;
-            temp_v6 = temp_v3 >= 4;
-            temp_v5 = temp_v3 == 4;
-            if (temp_v3 >= 5) {
-              temp_v3 = *(int *)(temp_v4 + 0x488c) - 0x165;
-              temp_v6 = temp_v3 >= 3;
-              temp_v5 = temp_v3 == 3;
-            }
-            if (!(temp_v6 && !temp_v5)) {
-              temp_v0 = FUN_001643b4(0xd,0x19f);
-              *(unsigned short *)(param_1 + temp_v1 * 2 + 0x4832) = temp_v0;
-            }
-            else {
-              temp_v0 = FUN_001643b4(0xd,0x19e);
-              *(unsigned short *)(param_1 + temp_v1 * 2 + 0x4832) = temp_v0;
-            }
-          }
-        }
-        else {
-          temp_v0 = FUN_001643b4(0xd,*(unsigned int *)(temp_v4 + 0x488c));
-          *(unsigned short *)(param_1 + temp_v1 * 2 + 0x4832) = temp_v0;
-        }
-        *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-      }
-      temp_v1 = temp_v1 + 1;
-    } while (temp_v1 < *(int *)(param_1 + 0x4850));
-LAB_0020b1c0:
-    if (param_2 != 0x2d) goto LAB_0020b3e4;
-  }
-  temp_v4 = 0;
-  temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
-  if (0 < temp_v1) {
-    do {
-      if (*(char *)(param_1 + temp_v4 + 0x41ed) == '\0') {
-        temp_v0 = FUN_001643b4(0xd,temp_v4 + 0x36);
-        *(unsigned short *)(param_1 + temp_v4 * 2 + 0x4846) = temp_v0;
-        *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-      }
-      temp_v4 = temp_v4 + 1;
-      temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
-    } while (temp_v4 < temp_v1);
-  }
-LAB_0020b3e4:
-  if (param_2 == 0x16) {
-    temp_v4 = 0;
-    temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
-    if (0 < temp_v1) {
-      do {
-        if (*(char *)(param_1 + temp_v4 + 0x3c84) == '\x01') {
-          temp_v0 = FUN_001643b4(0xd,temp_v4 + 0x36);
-          *(unsigned short *)(param_1 + temp_v4 * 2 + 0x4846) = temp_v0;
-          *(short *)(param_1 + 0x480c) = *(short *)(param_1 + 0x480c) + 1;
-        }
-        temp_v4 = temp_v4 + 1;
-        temp_v1 = widgetSubCallIfVisible(param_1 + 0x3bdc);
-      } while (temp_v4 < temp_v1);
-    }
-  }
-  return;
 }
 
-} /* extern "C" */
+/* Enters a command menu mode: plays its sound, rebuilds the touch regions its buttons need. */
+void FUN_0020ad6c(CommandMenuScreen *work, s32 mode, s32 rememberPrevious)
+{
+    s32 *current = &work->mode;
+    if (*current == 0x22)
+        FUN_00203b40(&work->allList, 4, 1, 4, 1, 1);
+    if (*current == 0x13 || *current == 0x16)
+        sysPlaySe(buttonHelpGetValue());
+    if (*current == 0x22 || *current == 0x23 || *current == 0x24)
+        sysPlaySe(buttonHelpGetValue());
+    if (ifTouchGetButtonHelpValue() == 0x3F) {
+        if (btlScriptUnitHasFlags(btlGetMainState()) == 0)
+            sysPlaySe(buttonHelpGetValue());
+    }
+    s32 *selected = &work->selected;
+    s32 *previous = &work->previousMode;
+    if (*current == 7) {
+        if ((u32)(*previous - 8) <= 5)
+            FUN_00270104(work);
+        else
+            screenSetContextHint(work, FUN_002cc9e0(work, 1), *selected);
+    }
+    if (mode == 2) {
+        sysPlaySe(gameDataFlagTestBit(0x10) != 0 ? 0xB0 : 0xB1);
+    } else if (mode == 9 || mode == 8 || mode == 0xB || mode == 10 || mode == 0xD || mode == 0xC) {
+        FUN_003756c8(0);
+    } else if (mode == 1) {
+        FUN_003756c8(FUN_002a4878(&work->lists[*selected]) == 0);
+    }
+    if (rememberPrevious != 0)
+        *previous = *current;
+    *current = mode;
+    work->unk3878 = 0;
+    for (s32 i = 0; i < work->regionCount; i++)
+        ifTouchRegionRemove();
+    work->regionCount = 0;
+    __aeabi_memset4(work->regions, 0x40, 0xFFFFFFFF);
+    if (mode == 1) {
+        addSelectionRegions(work);
+    } else if (mode == 8 || mode == 10 || mode == 12) {
+        addSelectionRegions(work);
+        for (s32 i = 0; i < uiSearchPrimary(work->current); i++) {
+            s32 first;
+            if (*selected == 1)
+                first = 0xC2;
+            else if (*selected == 2)
+                first = 0xBB;
+            else
+                first = 0xB3;
+            work->regions[0x16 / 2 + i] = FUN_001643b4(0xD, first + i);
+            work->regionCount++;
+        }
+        if (uiSearchPrimary(work->current) < objectApplyIfUnblocked(work->current)) {
+            if (*selected == 1) {
+                work->regions[0x10 / 2] = FUN_001643b4(0xD, 0x199);
+                work->regions[0x12 / 2] = FUN_001643b4(0xD, 0x197);
+                work->regions[0x14 / 2] = FUN_001643b4(0xD, 0x198);
+            } else if (*selected == 2) {
+                work->regions[0x10 / 2] = FUN_001643b4(0xD, 0x193);
+                work->regions[0x12 / 2] = FUN_001643b4(0xD, 0x191);
+                work->regions[0x14 / 2] = FUN_001643b4(0xD, 0x192);
+            } else {
+                work->regions[0x10 / 2] = FUN_001643b4(0xD, 0x196);
+                work->regions[0x12 / 2] = FUN_001643b4(0xD, 0x194);
+                work->regions[0x14 / 2] = FUN_001643b4(0xD, 0x195);
+            }
+            work->regionCount += 3;
+        }
+    }
+    if (mode == 0x13) {
+        work->regions[0x22 / 2] = FUN_001643b4(0xD, 0x1B3);
+        work->regionCount++;
+        for (s32 i = 0; i < work->pageCount; i++) {
+            CommandPageEntry *page = &work->pages[i];
+            if (page->present != 0) {
+                if ((dataTable00FindById(page->id)->flags & 0x8000) != 0) {
+                    if (work->pageFlag != 0) {
+                        work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x1A0);
+                    } else if (page->value - 0x14A <= 4u || page->value - 0x165 <= 3u) {
+                        work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x19F);
+                    } else {
+                        work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, 0x19E);
+                    }
+                } else {
+                    work->regions[0x24 / 2 + i] = FUN_001643b4(0xD, page->value);
+                }
+                work->regionCount++;
+            }
+        }
+    }
+    if (mode == 0x22 || mode == 0x2D) {
+        ScrollSelection *list = &work->allList;
+        for (s32 i = 0; i < widgetSubCallIfVisible(list); i++) {
+            if (work->blocked[i] == 0) {
+                work->regions[0x38 / 2 + i] = FUN_001643b4(0xD, i + 0x36);
+                work->regionCount++;
+            }
+        }
+    }
+    if (mode == 0x16) {
+        ScrollSelection *list = &work->allList;
+        for (s32 i = 0; i < widgetSubCallIfVisible(list); i++) {
+            if (work->chosen[i] == 1) {
+                work->regions[0x38 / 2 + i] = FUN_001643b4(0xD, i + 0x36);
+                work->regionCount++;
+            }
+        }
+    }
+}
+}

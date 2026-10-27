@@ -19,7 +19,7 @@ int eventCommandGetPendingCleanup(void);
 int FUN_002929d8(...);
 int FUN_002b70cc(void);
 int FUN_003d5698(float *, double);
-int FUN_003d60d4(...);
+int battleVectorTransitionUpdatePath(...);
 int FUN_003d62a0(float *, double);
 int FUN_003d681c(float *);
 int battleCameraBlendTargetOffset(...);
@@ -124,7 +124,7 @@ extern unsigned int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: FUN_002c159c. */
 /* Supplied declaration required: FUN_003d5698. */
 /* Supplied declaration required: FUN_003d5af0. */
-/* Supplied declaration required: FUN_003d60d4. */
+/* Supplied declaration required: battleVectorTransitionUpdatePath. */
 /* Supplied declaration required: FUN_003d62a0. */
 /* Supplied declaration required: FUN_003d681c. */
 /* Supplied declaration required: battleCameraBlendTargetOffset. */
@@ -409,7 +409,7 @@ unsigned int FUN_003d7404(float *param_1)
       }
     }
     if (((unsigned int)param_1[0x18d] & 0x10000) != 0) {
-      FUN_003d60d4(param_1);
+      battleVectorTransitionUpdatePath(param_1);
       temp_v2 = param_1[0x1c6];
       param_1[0x1c6] = (float)((int)temp_v2 + 1);
       if ((int)param_1[0x1c5] < (int)temp_v2 + 1) {

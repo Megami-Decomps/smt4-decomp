@@ -58,10 +58,10 @@ s32 FUN_00156478(void)
         if (window->frame > 30 && window->wideText != 0) {
             window->labelX--;
             if (-window->textWidth > window->labelX) {
-                window->labelX = window->textWidth + window->textRight + 42;
+                window->labelX = window->textRight + window->textWidth + 42;
             }
             window->textRight--;
-            if (window->textRight < -window->textWidth) {
+            if (-window->textWidth > window->textRight) {
                 window->textRight = window->textWidth + window->labelX + 42;
             }
         }

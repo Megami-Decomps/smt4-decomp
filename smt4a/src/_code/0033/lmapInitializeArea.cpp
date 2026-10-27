@@ -1,4 +1,4 @@
-/* NON_MATCHING: the FUN_002a2e98 arms now match retail (per-arm calls); remaining: retail copies the position's x,y words with ldm/stm and z from a register (here ldrd/strd) and orders the global loads differently. */
+/* NON_MATCHING: the FUN_002a2e98 arms match retail (per-arm calls) and the scene is read directly; remaining: retail copies the position's x,y words with ldm/stm and z from a register (here one three-word ldm/stm) and orders the global loads differently. */
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 
@@ -69,14 +69,13 @@ void lmapInitializeArea(u32 area, u32 spawnId)
         dataTableGetRecord23(FUN_003b5714(state->map, area, spawnId)));
     mapPlaceSet(spawn->map, spawn->area, spawn->place);
     state->area = area;
-    AreaScene *scene = g_lmapScene;
     g_gameState.area = area;
-    scene->position.x = (f32)spawn->x;
-    scene->position.y = (f32)spawn->y;
-    scene->position.z = (f32)spawn->z;
-    scene->previousPosition = scene->targetPosition = scene->position;
-    scene->heading = 180.0f;
-    scene->targetHeading = 180.0f;
+    g_lmapScene->position.x = (f32)spawn->x;
+    g_lmapScene->position.y = (f32)spawn->y;
+    g_lmapScene->position.z = (f32)spawn->z;
+    g_lmapScene->previousPosition = g_lmapScene->targetPosition = g_lmapScene->position;
+    g_lmapScene->heading = 180.0f;
+    g_lmapScene->targetHeading = 180.0f;
     FUN_00227a70();
     if (state->map == 101) {
         FUN_002a2e98(state->map, state->area, 101, 10);

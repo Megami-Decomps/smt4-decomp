@@ -83,7 +83,7 @@ typedef struct {
 } param_1_stack;
 
 extern unsigned int g_renderCtx; /* 0x59dbb4 */
-extern unsigned int DAT_005c1120; /* 0x5c1120 */
+extern unsigned int g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_006472dc; /* 0x6472dc */
 extern float DAT_006472e0; /* 0x6472e0 */
 extern float DAT_006472e4; /* 0x6472e4 */
@@ -241,7 +241,7 @@ void FUN_00323f50(fn_00323f50_arg0 *param_1)
       FUN_001bc460();
       DAT_0064734c = temp_v20;
       if (0 < temp_v3) {
-        pfVar7 = (float *)&DAT_005c1120;
+        pfVar7 = (float *)&g_effectRingScratchColor;
       }
       temp_v2 = 0;
       DAT_00647350 = temp_v21;

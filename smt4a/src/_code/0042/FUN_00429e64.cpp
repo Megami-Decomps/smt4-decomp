@@ -1,4 +1,4 @@
-/* NON_MATCHING: argument scheduling retains the archive pointer until late and reserves 36 bytes with LR only; retail loads the archive early, saves R4/LR, and uses STRD for the size/output pair. */
+/* NON_MATCHING: retail keeps the zero action argument in r4 for `stm sp, {r4, ip}` and stores the 1 and the session handle separately; this build merges them with stm and uses r4 for the handle. */
 #include "common.h"
 
 struct ArchiveState {
@@ -23,9 +23,10 @@ u32 FUN_00429e64()
     if (state == NULL) {
         return 0xc8804465;
     }
+    u64 archive = state->archive;
     u32 session = DAT_00589398.handle;
     u8 input;
     u8 output;
-    return nn_fs_ipc_FileSystem_ControlArchive(&session, state->archive, 0, &input, 1, &output, 1);
+    return nn_fs_ipc_FileSystem_ControlArchive(&session, archive, 0, &input, 1, &output, 1);
 }
 }

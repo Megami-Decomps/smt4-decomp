@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail tail-calls ptrListRemoveClearOwner conditionally from inside the release step and picks the transition object through a compare chain with shared stores; the step logic is the same. */
+/* NON_MATCHING: code and control flow match retail; only the callee-saved register allocation differs (retail keeps the handle-registry address in r8 and the 0/-1 reset constants in r5/r7; the build uses r5 for the registry and r7/r8 for the constants). */
 #include "common.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 
 extern "C" {
 
@@ -17,10 +18,8 @@ typedef struct TransitionObject {
 /* The map scene's transition fields (only those used here). */
 typedef struct TransitionScene {
     /* 0x000 */ u8 unk000[0x164];
-    /* 0x164 */ s16 first;
-    /* 0x166 */ s16 second;
-    /* 0x168 */ s16 firstEnd;
-    /* 0x16A */ s16 secondEnd;
+    /* 0x164 */ s32 rangeStart;
+    /* 0x168 */ s32 rangeEnd;
     /* 0x16C */ s32 step;
     /* 0x170 */ TransitionObject *current;
     /* 0x174 */ u8 unk174[0x10];
@@ -53,7 +52,7 @@ typedef struct TransitionPlayer {
 
 extern TransitionScene *g_lmapScene;
 extern TransitionState g_gameState;
-extern u32 g_handleRegistry;
+extern void *g_handleRegistry;
 
 TransitionPlayer *gameGetPlayerData(void);
 void *gameFlagsGetBlock(void);
@@ -61,8 +60,7 @@ s32 dataTable2EType1Count(void);
 s32 dataTable2EType0Count(void);
 TransitionEntry *dataTable2EType1GetEntry(s32 index);
 TransitionEntry *dataTable2EType0GetEntry(s32 index);
-void ptrListRemoveClearOwner(u32 registry);
-void handleRegistryRegisterObject(u32 registry, TransitionPart *part);
+void handleRegistryRegisterObject(void *registry, TransitionPart *part);
 
 /* Steps the map transition: picks the target modes (step 0), releases the old objects (1), and
  * (steps 2-3) registers the object for the chosen mode. Returns 1 once the transition is finished. */
@@ -79,7 +77,13 @@ u32 FUN_0033e348(void)
             TransitionEntry *entry = dataTable2EType1GetEntry(i);
 
             if (entry->id == player->idB) {
-                g_gameState.modeB = g_gameState.overrideB == -1 ? entry->mode : g_gameState.overrideB;
+                s32 override = g_gameState.overrideB;
+
+                if (override == -1) {
+                    g_gameState.modeB = entry->mode;
+                } else {
+                    g_gameState.modeB = override;
+                }
                 break;
             }
         }
@@ -87,7 +91,11 @@ u32 FUN_0033e348(void)
             TransitionEntry *entry = dataTable2EType0GetEntry(i);
 
             if (entry->id == player->idA) {
-                s32 mode = g_gameState.overrideA == -1 ? entry->mode : g_gameState.overrideA;
+                s32 mode = g_gameState.overrideA;
+
+                if (mode == -1) {
+                    mode = entry->mode;
+                }
 
                 if (g_gameState.modeA == mode) {
                     return 1;
@@ -101,47 +109,51 @@ u32 FUN_0033e348(void)
     }
     case 1:
         if (scene->current != NULL && scene->current->part != NULL) {
-            ptrListRemoveClearOwner(g_handleRegistry);
+            ptrListRemoveClearOwner(g_handleRegistry, scene->current->part);
         }
         if (g_lmapScene->previous != NULL && g_lmapScene->previous->part != NULL) {
-            ptrListRemoveClearOwner(g_handleRegistry);
+            ptrListRemoveClearOwner(g_handleRegistry, g_lmapScene->previous->part);
         }
         g_lmapScene->step++;
-        return 0;
+        break;
     case 2:
         g_lmapScene->step = 3;
-        return 0;
+        break;
     case 3: {
-        s32 mode = g_gameState.modeA;
-
-        if (mode >= 0 && mode <= 3) {
-            scene->current = g_gameState.objects[mode];
+        switch (g_gameState.modeA) {
+        case 0:
+            scene->current = g_gameState.objects[0];
+            break;
+        case 1:
+            scene->current = g_gameState.objects[1];
+            break;
+        case 2:
+            scene->current = g_gameState.objects[2];
+            break;
+        case 3:
+            scene->current = g_gameState.objects[3];
+            break;
         }
         TransitionPart *part = scene->current->part;
 
         handleRegistryRegisterObject(g_handleRegistry, part);
         part->flags |= 3;
         scene = g_lmapScene;
-        scene->first = 0;
-        scene->second = 0;
-        scene->firstEnd = -1;
-        scene->secondEnd = -1;
+        scene->rangeStart = 0;
+        scene->rangeEnd = -1;
         scene->step = 0;
         scene->previous = g_gameState.objects[0];
         part = scene->previous->part;
         handleRegistryRegisterObject(g_handleRegistry, part);
         part->flags |= 3;
         scene = g_lmapScene;
-        scene->first = 0;
-        scene->second = 0;
-        scene->firstEnd = -1;
-        scene->secondEnd = -1;
+        scene->rangeStart = 0;
+        scene->rangeEnd = -1;
         scene->step = 0;
         return 1;
     }
-    default:
-        return 0;
     }
+    return 0;
 }
 
 }

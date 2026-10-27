@@ -1,303 +1,223 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00381874` (_code @ 0x381874, 0x678 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the raw draft (effect-editor file browser step); callee argument lists follow the draft's intent and the result is not compared with retail beyond compiling. */
+#include "AsdSDK/Source/Gfx/Effect/effMenu.h"
+#include "AsdSDK/AsdLoadFileSyncDefault.h"
+#include "sys/RuntimeObjects.h"
+
+struct AsdTexture;
+
+/* The effect-editor file browser: a window of 18 rows over the linked list of file entries. */
+struct EffMenuBrowser {
+    /* 0x00 */ u32 x;
+    /* 0x04 */ u32 y;
+    /* 0x08 */ u32 state;             /* 0 browsing, 1 choose, 2 cancel */
+    /* 0x0C */ u8 unk0C[8];
+    /* 0x14 */ s32 index;             /* index of the current entry */
+    /* 0x18 */ s32 row;               /* row of the current entry inside the window */
+    /* 0x1C */ u32 hasPreview;
+    /* 0x20 */ u32 wait;              /* frames until input is read again */
+    /* 0x24 */ u32 previewAlpha;
+    /* 0x28 */ u8 unk28[4];
+    /* 0x2C */ EffMenuTextNode *first; /* first entry of the window */
+    /* 0x30 */ EffMenuTextNode *current;
+    /* 0x34 */ EffMenuTextNode *shown; /* entry the preview was built for */
+    /* 0x38 */ AsdTexture *texture;
+    /* 0x3C */ u32 tableWord;
+    /* 0x40 */ void *spriteGroup;
+    /* 0x44 */ u16 previewKind;
+    /* 0x46 */ u8 unk46[2];
+    /* 0x48 */ EffMenuTextList *source;
+};
+
+extern "C" {
+u32 padButtonRepeat(u32 button);
+u32 padButtonIsPressed(u32 button);
+void *memAlloc(u32 heap, u32 alignmentClass, u32 flags, u32 size, u32 alignment, u32 category);
+void asdTextureRelease(AsdTexture *texture);
+AsdTexture *textureCreateFromImage(const void *image);
+void asdMemFree(void *memory);
+void *spriteGroupCreateFromFile(const void *file);
+void handleBlockRefDrop(void **reference);
+s32 textFormatBuffer(char *output, const char *format, ...);
+void FUN_002b3fd8(u32 x, u32 y, u32 width, u32 height);
+void FUN_002cf28c(u32 x, u32 y, u32 width, u32 height, u32 alpha, u32 flags);
+extern EffMenuLists DAT_006471a0;
+extern const char DAT_00544ac0[]; /* "%s" */
+}
+
+static const s32 kWindowRows = 0x11;
+
+static __inline void browserSelectPrevious(EffMenuBrowser *menu)
+{
+    EffMenuTextNode *previous = menu->current->previous;
+    if (previous != NULL) {
+        menu->current = previous;
+        if (menu->row != 0) {
+            menu->row--;
+        }
+        menu->index--;
+        if (previous == menu->first && menu->first->previous != NULL) {
+            menu->first = menu->first->previous;
+            menu->row = 1;
+        }
+    }
+}
+
+static __inline void browserSelectNext(EffMenuBrowser *menu)
+{
+    EffMenuTextNode *next = menu->current->next;
+    if (next != NULL) {
+        menu->current = next;
+        menu->row++;
+        menu->index++;
+        if (menu->row == kWindowRows && menu->first->next != NULL) {
+            menu->first = menu->first->next;
+            menu->row = 0x10;
+        }
+    }
+}
+
+/* Builds "<prefix><name>" for the entry, or just its name without a prefix. */
+static __inline void browserEntryPath(EffMenuBrowser *menu, EffMenuTextNode *entry, char *path)
+{
+    if (entry != NULL) {
+        if (menu->source->unk04 != 0) {
+            textFormatBuffer(path, "%s%s", menu->source->unk04, entry->name);
+        } else {
+            textFormatBuffer(path, DAT_00544ac0, entry->name);
+        }
+    }
+}
+
+static __inline void browserDropTexture(EffMenuBrowser *menu)
+{
+    if (menu->texture != NULL && menu->previewKind == 1) {
+        asdTextureRelease(menu->texture);
+        menu->texture = NULL;
+    }
+}
 
 extern "C" {
 
-int textFormatBuffer(...);
-int asdLoadFileSyncNoContext(unsigned char *, int, int, int);
-int memAlloc(...);
-int asdTextureRelease(void);
-int asdMemFree(unsigned char *);
-int spriteGroupCreateFromFile(void);
-int handleBlockRefDrop(void);
-int FUN_002b3fd8(...);
-int FUN_002cf28c(...);
-int textureCreateFromImage(...);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp84; /* 0x84: local_84 */
-    unsigned int sp88; /* 0x88: local_88 */
-} param_1_stack;
-
-extern unsigned char DAT_00544ac0; /* 0x544ac0 */
-extern unsigned int *DAT_006471a0; /* 0x6471a0 */
-extern unsigned int *DAT_006471b4; /* 0x6471b4 */
-
-#ifndef ROMWRIGHT_PIECE_4_4_DEFINED
-#define ROMWRIGHT_PIECE_4_4_DEFINED
-#define romwright_piece_4_4(upper, lower) ((unsigned long long)(((unsigned long long)(unsigned int)(upper) << 32) | (unsigned int)(lower)))
-#endif
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: asdLoadFileSyncNoContext. */
-extern int padButtonRepeat(unsigned int);
-extern int padButtonIsPressed(unsigned int);
-/* Supplied declaration required: memAlloc. */
-/* Supplied declaration required: asdTextureRelease. */
-/* Supplied declaration required: asdMemFree. */
-/* Supplied declaration required: spriteGroupCreateFromFile. */
-/* Supplied declaration required: handleBlockRefDrop. */
-/* Supplied declaration required: FUN_002b3fd8. */
-/* Supplied declaration required: FUN_002cf28c. */
-/* Supplied declaration required: textureCreateFromImage. */
-extern unsigned int sysGetTableWord(unsigned int);
-
-
-unsigned long long FUN_00381874(unsigned int *param_1)
-
+/* One frame of the browser: steps the cursor with the d-pad (and pages with the shoulder buttons),
+ * rebuilds the preview of the selected entry, queues the preview command, and draws the frame. Returns
+ * the state in the low word and the draw position of the last listed row in the high word. */
+u64 FUN_00381874(EffMenuBrowser *menu)
 {
-/* irregular: 10 native warning(s); review required */
-  unsigned int *puVar1;
-  int *piVar2;
-  unsigned int *puVar3;
-  unsigned char *puVar4;
-  unsigned char *puVar5;
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned char temp_v5;
-  unsigned char temp_v6 [100];
-  
-  if (param_1[8] != 0) {
-    param_1[8] = param_1[8] - 1;
-  }
-  else if (param_1[0xb] != 0) {
-    if (param_1[2] == 0) {
-      temp_v4 = padButtonRepeat(5);
-      if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x10), temp_v4 != 0)) {
-        temp_v4 = *(int *)(param_1[0xc] + 0x3c);
-        if (temp_v4 != 0) {
-          temp_v1 = param_1[6];
-          param_1[0xc] = temp_v4;
-          temp_v5 = temp_v1 != 0;
-          if (temp_v5) {
-            temp_v1 = temp_v1 - 1;
-          }
-          param_1[5] = param_1[5] - 1;
-          if (temp_v5) {
-            param_1[6] = temp_v1;
-          }
-          if ((temp_v4 == param_1[0xb]) && (temp_v4 = *(int *)(param_1[0xb] + 0x3c), temp_v4 != 0)) {
-            param_1[0xb] = temp_v4;
-            param_1[6] = 1;
-          }
-        }
-      }
-      else {
-        temp_v4 = padButtonRepeat(6);
-        if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x1d), temp_v4 != 0)) {
-          if (*(int *)(param_1[0xc] + 0x40) != 0) {
-            temp_v4 = param_1[6];
-            param_1[0xc] = *(int *)(param_1[0xc] + 0x40);
-            param_1[6] = temp_v4 + 1;
-            param_1[5] = param_1[5] + 1;
-            if ((temp_v4 + 1 == 0x11) && (*(int *)(param_1[0xb] + 0x40) != 0)) {
-              param_1[0xb] = *(int *)(param_1[0xb] + 0x40);
-              param_1[6] = 0x10;
-            }
-          }
-        }
-        else {
-          temp_v4 = padButtonRepeat(8);
-          if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x1c), temp_v4 != 0)) {
-            temp_v4 = 0;
-            do {
-              temp_v1 = *(int *)(param_1[0xc] + 0x3c);
-              if (temp_v1 != 0) {
-                temp_v3 = param_1[6];
-                param_1[0xc] = temp_v1;
-                temp_v5 = temp_v3 != 0;
-                if (temp_v5) {
-                  temp_v3 = temp_v3 - 1;
+    if (menu->wait != 0) {
+        menu->wait--;
+    } else if (menu->first != NULL) {
+        if (menu->state == 0) {
+            if (padButtonRepeat(5) != 0 || padButtonRepeat(0x10) != 0) {
+                browserSelectPrevious(menu);
+            } else if (padButtonRepeat(6) != 0 || padButtonRepeat(0x1d) != 0) {
+                browserSelectNext(menu);
+            } else if (padButtonRepeat(8) != 0 || padButtonRepeat(0x1c) != 0) {
+                for (s32 i = 0; i < 0x12; i++) {
+                    browserSelectPrevious(menu);
                 }
-                param_1[5] = param_1[5] - 1;
-                if (temp_v5) {
-                  param_1[6] = temp_v3;
+            } else if (padButtonRepeat(7) != 0 || padButtonRepeat(0x18) != 0) {
+                for (s32 i = 0; i < 0x12; i++) {
+                    browserSelectNext(menu);
                 }
-                if ((temp_v1 == param_1[0xb]) && (temp_v1 = *(int *)(param_1[0xb] + 0x3c), temp_v1 != 0))
-                {
-                  param_1[0xb] = temp_v1;
-                  param_1[6] = 1;
-                }
-              }
-              temp_v4 = temp_v4 + 1;
-            } while (temp_v4 < 0x12);
-          }
-          else {
-            temp_v4 = padButtonRepeat(7);
-            if ((temp_v4 != 0) || (temp_v4 = padButtonRepeat(0x18), temp_v4 != 0)) {
-              temp_v4 = 0;
-              do {
-                if (*(int *)(param_1[0xc] + 0x40) != 0) {
-                  temp_v1 = param_1[6];
-                  param_1[0xc] = *(int *)(param_1[0xc] + 0x40);
-                  param_1[6] = temp_v1 + 1;
-                  param_1[5] = param_1[5] + 1;
-                  if ((temp_v1 + 1 == 0x11) && (*(int *)(param_1[0xb] + 0x40) != 0)) {
-                    param_1[0xb] = *(int *)(param_1[0xb] + 0x40);
-                    param_1[6] = 0x10;
-                  }
-                }
-                temp_v4 = temp_v4 + 1;
-              } while (temp_v4 < 0x12);
-            }
-            else {
-              temp_v4 = padButtonIsPressed(1);
-              if ((temp_v4 != 0) || (temp_v4 = padButtonIsPressed(0x16), temp_v4 != 0)) {
-                param_1[2] = 2;
-              }
-              else {
-                temp_v4 = padButtonIsPressed(0);
-                if ((temp_v4 != 0) || (temp_v4 = padButtonIsPressed(0x14), temp_v4 != 0)) {
-                  param_1[2] = 1;
-                }
-                else {
-                  if (param_1[0xd] != param_1[0xc]) {
-                    if (param_1[0xe] != 0) {
-                      asdTextureRelease();
-                      param_1[0xe] = 0;
+            } else if (padButtonIsPressed(1) != 0 || padButtonIsPressed(0x16) != 0) {
+                menu->state = 2;
+            } else if (padButtonIsPressed(0) != 0 || padButtonIsPressed(0x14) != 0) {
+                menu->state = 1;
+            } else {
+                if (menu->shown != menu->current) {
+                    if (menu->texture != NULL) {
+                        asdTextureRelease(menu->texture);
+                        menu->texture = NULL;
                     }
-                    if (param_1[0x10] != 0) {
-                      handleBlockRefDrop();
-                      param_1[0x10] = 0;
+                    if (menu->spriteGroup != NULL) {
+                        handleBlockRefDrop(&menu->spriteGroup);
+                        menu->spriteGroup = NULL;
                     }
-                    piVar2 = (int *)param_1[0xc];
-                    temp_v4 = *piVar2;
-                    if (temp_v4 != 1) {
-                      if (temp_v4 != 2) {
-                        if (temp_v4 != 8) {
-                          param_1[7] = 0;
+                    EffMenuTextNode *entry = menu->current;
+                    if (entry->kind == 1) {
+                        if (entry->value != 0) {
+                            browserDropTexture(menu);
+                            menu->texture = textureCreateFromImage((const void *)entry->value);
+                        } else {
+                            char path[100];
+                            browserEntryPath(menu, entry, path);
+                            browserDropTexture(menu);
+                            void *file = asdLoadFileSyncNoContext(path, NULL, 1, 0x80);
+                            browserDropTexture(menu);
+                            menu->texture = textureCreateFromImage(file);
+                            asdMemFree(file);
                         }
-                        else {
-                          temp_v0 = sysGetTableWord(piVar2[1] & 0xffff);
-                          param_1[0xf] = temp_v0;
-                          *(unsigned short *)(param_1 + 0x11) = 8;
-                          param_1[7] = 1;
-                        }
-                      }
-                      else {
-                        temp_v4 = piVar2[2];
-                        if (temp_v4 != 0) {
-                          spriteGroupCreateFromFile();
-                          param_1[0x10] = temp_v4;
-                        }
-                        else {
-                          if (piVar2 != (int *)0x0) {
-                            if (*(int *)(param_1[0x12] + 4) != 0) {
-                              textFormatBuffer(temp_v6,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3)
-                              ;
+                        menu->previewKind = 1;
+                        menu->hasPreview = 1;
+                    } else if (entry->kind == 2) {
+                        if (entry->value != 0) {
+                            menu->spriteGroup = spriteGroupCreateFromFile((const void *)entry->value);
+                        } else {
+                            char path[100];
+                            browserEntryPath(menu, entry, path);
+                            if (menu->spriteGroup != NULL) {
+                                handleBlockRefDrop(&menu->spriteGroup);
+                                menu->spriteGroup = NULL;
                             }
-                            else {
-                              textFormatBuffer(temp_v6,&DAT_00544ac0,piVar2 + 3);
+                            void *file = asdLoadFileSyncNoContext(path, NULL, 1, 0x80);
+                            if (menu->spriteGroup != NULL) {
+                                handleBlockRefDrop(&menu->spriteGroup);
+                                menu->spriteGroup = NULL;
                             }
-                          }
-                          puVar4 = temp_v6;
-                          if (param_1[0x10] != 0) {
-                            handleBlockRefDrop();
-                            param_1[0x10] = 0;
-                          }
-                          asdLoadFileSyncNoContext(puVar4,0,1,0x80);
-                          if (param_1[0x10] != 0) {
-                            handleBlockRefDrop();
-                            param_1[0x10] = 0;
-                          }
-                          puVar5 = puVar4;
-                          spriteGroupCreateFromFile();
-                          param_1[0x10] = (unsigned int)puVar5;
-                          asdMemFree(puVar4);
+                            menu->spriteGroup = spriteGroupCreateFromFile(file);
+                            asdMemFree(file);
                         }
-                        *(unsigned short *)(param_1 + 0x11) = 2;
-                        param_1[7] = 1;
-                      }
+                        menu->previewKind = 2;
+                        menu->hasPreview = 1;
+                    } else if (entry->kind == 8) {
+                        menu->tableWord = sysGetTableWord(entry->resource & 0xffff);
+                        menu->previewKind = 8;
+                        menu->hasPreview = 1;
+                    } else {
+                        menu->hasPreview = 0;
                     }
-                    else {
-                      temp_v4 = piVar2[2];
-                      if (temp_v4 != 0) {
-                        if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
-                          asdTextureRelease();
-                          param_1[0xe] = 0;
-                        }
-                        temp_v0 = textureCreateFromImage(temp_v4);
-                        param_1[0xe] = temp_v0;
-                      }
-                      else {
-                        if (piVar2 != (int *)0x0) {
-                          if (*(int *)(param_1[0x12] + 4) != 0) {
-                            textFormatBuffer(temp_v6,"%s%s",*(int *)(param_1[0x12] + 4),piVar2 + 3);
-                          }
-                          else {
-                            textFormatBuffer(temp_v6,&DAT_00544ac0,piVar2 + 3);
-                          }
-                        }
-                        puVar4 = temp_v6;
-                        if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
-                          asdTextureRelease();
-                          param_1[0xe] = 0;
-                        }
-                        asdLoadFileSyncNoContext(puVar4,0,1,0x80);
-                        if ((param_1[0xe] != 0) && (*(short *)(param_1 + 0x11) == 1)) {
-                          asdTextureRelease();
-                          param_1[0xe] = 0;
-                        }
-                        temp_v0 = textureCreateFromImage(puVar4);
-                        param_1[0xe] = temp_v0;
-                        asdMemFree(puVar4);
-                      }
-                      *(unsigned short *)(param_1 + 0x11) = 1;
-                      param_1[7] = 1;
-                    }
-                    param_1[0xd] = param_1[0xc];
-                  }
-                  if (param_1[7] != 0) {
-                    puVar3 = (unsigned int *)0x10000;
-                    memAlloc(0x10000,0x100,0,0x68,0x10,1);
-                    puVar3[1] = 0xb;
-                    puVar3[2] = (unsigned int)param_1;
-                    puVar1 = puVar3;
-                    if (DAT_006471a0 != (unsigned int *)0x0) {
-                      *DAT_006471b4 = (unsigned int)puVar3;
-                      puVar1 = DAT_006471a0;
-                    }
-                    DAT_006471a0 = puVar1;
-                    DAT_006471b4 = puVar3;
-                    *puVar3 = 0;
-                  }
+                    menu->shown = menu->current;
                 }
-              }
+                if (menu->hasPreview != 0) {
+                    EffMenuNode *command = (EffMenuNode *)memAlloc(0x10000, 0x100, 0, 0x68, 0x10, 1);
+                    command->unk04 = 0xb;
+                    command->unk08 = (u32)menu;
+                    EffMenuNode *head = command;
+                    if (DAT_006471a0.head[0] != NULL) {
+                        DAT_006471a0.tail[0]->next = command;
+                        head = DAT_006471a0.head[0];
+                    }
+                    DAT_006471a0.head[0] = head;
+                    DAT_006471a0.tail[0] = command;
+                    command->next = NULL;
+                }
             }
-          }
+        } else if (padButtonIsPressed(1) != 0 || padButtonIsPressed(0x16) != 0) {
+            menu->state = 2;
         }
-      }
     }
-  }
-  else {
-    temp_v4 = padButtonIsPressed(1);
-    if ((temp_v4 != 0) || (temp_v4 = padButtonIsPressed(0x16), temp_v4 != 0)) {
-      param_1[2] = 2;
+
+    FUN_002b3fd8(menu->x, menu->y, 0xcc, 0xe8);
+    if (menu->hasPreview != 0) {
+        FUN_002cf28c(menu->x, menu->y + 0xea, 0x80, 0x80, menu->previewAlpha, 0);
     }
-  }
-  FUN_002b3fd8(*param_1,param_1[1],0xcc,0xe8);
-  if (param_1[7] != 0) {
-    FUN_002cf28c(*param_1,param_1[1] + 0xea,0x80,0x80,param_1[9],0);
-  }
-  temp_v4 = 0;
-  temp_v2 = param_1[1] + 2;
-  temp_v1 = param_1[0x12];
-  temp_v3 = temp_v2;
-  if (*(int *)(param_1[0x12] + 4) != 0) {
-    temp_v3 = param_1[1] + 0xe;
-    temp_v1 = temp_v2;
-  }
-  for (temp_v2 = param_1[0xb]; temp_v2 != 0; temp_v2 = *(int *)(temp_v2 + 0x40)) {
-    temp_v4 = temp_v4 + 1;
-    temp_v1 = temp_v3;
-    if (temp_v4 >= 0x12) break;
-    temp_v3 = temp_v3 + 0xc;
-  }
-  return romwright_piece_4_4(temp_v1,param_1[2]);
+    u32 drawY = (u32)menu->source;
+    u32 rowY = menu->y + 2;
+    u32 nextY = rowY;
+    if (menu->source->unk04 != 0) {
+        nextY = menu->y + 0xe;
+        drawY = rowY;
+    }
+    s32 count = 0;
+    for (EffMenuTextNode *entry = menu->first; entry != NULL; entry = entry->next) {
+        count++;
+        drawY = nextY;
+        if (count >= 0x12) {
+            break;
+        }
+        nextY += 0xc;
+    }
+    return ((u64)drawY << 32) | menu->state;
 }
 
 } /* extern "C" */

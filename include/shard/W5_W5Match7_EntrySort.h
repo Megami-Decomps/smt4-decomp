@@ -111,7 +111,7 @@ void FUN_00340f2c(u16 first, u16 second, u16 third, u16 fourth);
 extern "C" {
 #endif
 
-void asdListBoxSetFloatItem(AsdListBox *listBox, u32 id, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(AsdListBox *listBox, u32 id, f32 value, s32 minimum, s32 maximum);
 
 #ifdef __cplusplus
 }

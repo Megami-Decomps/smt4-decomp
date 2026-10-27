@@ -20,7 +20,7 @@ int FUN_003ed238(...);
 int FUN_004d1470(...);
 int FUN_004d1af8(...);
 int FUN_004d2124(...);
-int FUN_004d229c(...);
+int btlDebugCreateUnitMenu(...);
 int FUN_004d290c(...);
 int FUN_004d3360(...);
 int btlDebugCreatePanelMenu(...);
@@ -34,7 +34,7 @@ int FUN_004d542c(...);
 int FUN_004d5578(...);
 int btlDebugOpenCameraUpDownMenu(...);
 int FUN_004d5be4(...);
-int FUN_004d5fc0(...);
+int btlCameraDebugApplyMenuItem(...);
 
 int jobStop(...);
 int asdListBoxGetIntValuePtr(...);
@@ -133,7 +133,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d1470. */
 /* Supplied declaration required: FUN_004d1af8. */
 /* Supplied declaration required: FUN_004d2124. */
-/* Supplied declaration required: FUN_004d229c. */
+/* Supplied declaration required: btlDebugCreateUnitMenu. */
 /* Supplied declaration required: placementEditorSync. */
 /* Supplied declaration required: FUN_004d290c. */
 /* Supplied declaration required: FUN_004d3360. */
@@ -150,7 +150,7 @@ extern int padButtonIsPressed(unsigned int);
 /* Supplied declaration required: FUN_004d5578. */
 /* Supplied declaration required: btlDebugOpenCameraUpDownMenu. */
 /* Supplied declaration required: FUN_004d5be4. */
-/* Supplied declaration required: FUN_004d5fc0. */
+/* Supplied declaration required: btlCameraDebugApplyMenuItem. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -596,7 +596,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     if (temp_v5 != 0) {
       if (temp_v5 != 1) {
         if (temp_v5 == 2) {
-          FUN_004d5fc0(param_1,param_2,temp_v6);
+          btlCameraDebugApplyMenuItem(param_1,param_2,temp_v6);
         }
       }
       else {
@@ -623,7 +623,7 @@ unsigned int FUN_004d6104(unsigned int *param_1,int param_2)
     temp_v6 = 0x20;
     break;
   case 7:
-    FUN_004d229c(param_1);
+    btlDebugCreateUnitMenu(param_1);
     temp_v6 = 8;
     break;
   case 8:

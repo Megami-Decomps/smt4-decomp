@@ -21,7 +21,7 @@ struct StreamWorker {
 extern "C" {
 
 
-void FUN_002c3f5c(void);
+void FUN_002c3f5c(void *block);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(StreamWorker *worker);
 
@@ -32,10 +32,10 @@ void FUN_003c7f20(StreamWorker *worker)
     worker->thread.joined = 1;
     worker->thread.~NnOsThread();
     if (worker->bufferA != NULL) {
-        FUN_002c3f5c();
+        FUN_002c3f5c(worker->bufferA);
         void *buffer = worker->bufferA;
         if (buffer != NULL) {
-            FUN_002c3f5c();
+            FUN_002c3f5c(buffer);
             asdMemFreeNonNull(buffer);
         }
         worker->bufferA = NULL;

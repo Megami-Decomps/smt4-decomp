@@ -14,7 +14,7 @@ struct SkillRateRecord {
 /* The combatant's skill info block filled in by FUN_003e8bb0 (0x34 bytes). */
 struct SkillInfo {
     /* 0x00 */ u8 unk00[0x16];
-    /* 0x16 */ u16 skillId;
+    /* 0x16 */ s16 skillId;
     /* 0x18 */ u8 unk18[0x14];
     /* 0x2C */ u8 valid;
     /* 0x2D */ u8 unk2D[7];

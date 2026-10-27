@@ -1,197 +1,157 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003913d8` (_code @ 0x3913d8, 0x37c bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the raw draft (semantics follow the retail asm: three ring rows built in the effect color state, direction (cos, 0, sin, 1)); armcc keeps more values in core registers (push r4-r9, sl) and schedules the per-row copies differently from retail's VFP block copies and 8-byte spill. */
+#include "gfx/EffectPrimitiveWork.h"
+#include <math.h>
+
+/* Ring of expanding polygons: its emitter carries the radius growth parameters after the common
+ * primitive-emitter prefix (0x38: segment count, 0x40/0x50: base radii, 0x54/0x58: extra ring offsets,
+ * 0x5C/0x60: initial speed and acceleration, 0x64: run backwards). */
+struct RingEmitter {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 duration;
+    /* 0x38 */ u32 segmentCount;
+    /* 0x3C */ u8 unk3C[4];
+    /* 0x40 */ f32 innerRadius;
+    /* 0x44 */ u8 unk44[0xC];
+    /* 0x50 */ f32 radiusBias;
+    /* 0x54 */ f32 middleOffset;
+    /* 0x58 */ f32 outerOffset;
+    /* 0x5C */ f32 speed;
+    /* 0x60 */ f32 acceleration;
+    /* 0x64 */ u8 reversed;
+};
+
+/* The primitive being filled: a vertex count at 0x02, a flag word at 0x54 and the vertex buffer
+ * reached through the object at 0x08. */
+struct RingPrimitive {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 vertexCount;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ struct RingVertexOwner *vertices;
+    /* 0x0C */ u8 unk0C[0x48];
+    /* 0x54 */ u32 flags;
+};
+
+/* Four vertices (twelve words) per ring segment: the hub, then the points on three rings. */
+struct RingSegment {
+    /* 0x00 */ f32 hub[3];
+    /* 0x0C */ f32 inner[3];
+    /* 0x18 */ f32 middle[3];
+    /* 0x24 */ f32 outer[3];
+};
+
+struct RingVertexOwner {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ RingSegment *segments;
+};
 
 extern "C" {
+extern EffectColor g_polyDefaultColor;
+extern EffectColor g_effectRingScratchColor;
+extern EffectColorProductState DAT_006471dc;
+f32 FUN_001a1ee0(f32 angle);
+f32 FUN_001b63b0(f32 angle);
 
-int FUN_001a1ee0(void);
-int FUN_001b63b0(void);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-/* stack frame of param_1: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp5C; /* 0x5c: local_5c */
-    unsigned int sp60; /* 0x60: local_60 */
-} param_1_stack;
-
-extern float g_polyDefaultColor; /* 0x5c1100 */
-extern float DAT_005c1104; /* 0x5c1104 */
-extern float DAT_005c1108; /* 0x5c1108 */
-extern float DAT_005c110c; /* 0x5c110c */
-extern unsigned int DAT_005c1120; /* 0x5c1120 */
-extern float DAT_006472dc; /* 0x6472dc */
-extern float DAT_006472e0; /* 0x6472e0 */
-extern float DAT_006472e4; /* 0x6472e4 */
-extern float DAT_006472e8; /* 0x6472e8 */
-extern float DAT_006472ec; /* 0x6472ec */
-extern float DAT_006472f0; /* 0x6472f0 */
-extern float DAT_006472f4; /* 0x6472f4 */
-extern float DAT_006472f8; /* 0x6472f8 */
-
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
+/* Builds the segments of the ring polygon for the current frame: the ring radius follows the
+ * parabola `speed * t + acceleration * t * t / 2`, and each of the three ring rows is the default
+ * tint scaled by that row's radius, then by the segment's direction (cosine, 0, sine, 1). The
+ * effect color state's two colors are the scratch the rows are built in. */
+void FUN_003913d8(EffectPrimitiveWork *work)
 {
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_001a1ee0. */
-/* Supplied declaration required: FUN_001b63b0. */
+    s32 frame = work->frame;
+    RingPrimitive *primitive = (RingPrimitive *)work->handle->unk00; /* the handle's first word is the ring primitive */
+    RingEmitter *emitter = (RingEmitter *)work->emitter;
+    s32 duration = emitter->duration;
+    if (frame <= duration || duration == 0) {
+        f32 speed = emitter->speed;
+        if (emitter->reversed != 0) {
+            frame = duration - frame;
+        }
+        f32 acceleration = emitter->acceleration;
+        f32 time = (f32)frame;
+        if (!(0.0f <= acceleration)) {
+            /* A decelerating ring stops growing at its apex. */
+            f32 apex = (fabsf(speed) / (acceleration * 0.5f)) * -0.5f;
+            if (time > apex) {
+                time = apex;
+            }
+        }
+        s32 segments = primitive->vertexCount / 4;
+        RingSegment *out = primitive->vertices->segments;
+        primitive->flags |= 1;
+        f32 segmentCount = (f32)emitter->segmentCount;
 
+        f32 innerRadius = emitter->radiusBias + emitter->innerRadius +
+                          (fabsf(speed) + acceleration * time * 0.5f) * time;
+        f32 middleRadius = emitter->middleOffset + innerRadius;
+        f32 outerRadius = emitter->outerOffset + middleRadius;
 
-void FUN_003913d8(int param_1)
+        EffectColor *color = &DAT_006471dc.color;
+        EffectColor *direction = &DAT_006471dc.factor;
+        effectColorCopy(&g_polyDefaultColor, color);
+        effectColorCopy(&g_polyDefaultColor, direction);
+        color->red *= innerRadius;
+        color->green *= innerRadius;
+        color->blue *= innerRadius;
+        color->alpha *= innerRadius;
+        EffectColor innerRow = *color;
+        *color = *direction;
+        color->red *= middleRadius;
+        color->green *= middleRadius;
+        color->blue *= middleRadius;
+        color->alpha *= middleRadius;
+        EffectColor middleRow = *color;
+        direction->red *= outerRadius;
+        direction->green *= outerRadius;
+        direction->blue *= outerRadius;
+        direction->alpha *= outerRadius;
+        EffectColor outerRow = *direction;
 
-{
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  unsigned int temp_v6;
-  float *pfVar9;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float temp_v21;
-  float temp_v22;
-  float temp_v23;
-  float temp_v24;
-  float temp_v25;
-  float temp_v26;
-  
-  temp_v4 = *(int *)(param_1 + 0x34);
-  temp_v3 = *(int *)(param_1 + 0x40);
-  temp_v2 = **(int **)(param_1 + 0x3c);
-  temp_v5 = *(int *)(temp_v3 + 0x34);
-  if ((temp_v4 <= temp_v5) || (temp_v5 == 0)) {
-    temp_v12 = *(float *)(temp_v3 + 0x5c);
-    temp_v20 = 0.0f;
-    if (*(char *)(temp_v3 + 100) != '\0') {
-      temp_v4 = temp_v5 - temp_v4;
+        f32 angle = 0.0f;
+        for (s32 i = 0; i < segments; i++) {
+            f32 phase = angle * 40.743664f;
+            f32 cosine = FUN_001b63b0(phase);
+            f32 sine = FUN_001a1ee0(phase);
+            out->hub[0] = 0.0f;
+            out->hub[1] = 0.0f;
+            out->hub[2] = 0.0f;
+            angle += 6.2831855f / segmentCount;
+            direction->red = cosine;
+            direction->green = 0.0f;
+            direction->blue = sine;
+            direction->alpha = 1.0f;
+
+            *color = innerRow;
+            color->red *= direction->red;
+            color->green *= direction->green;
+            color->blue *= direction->blue;
+            color->alpha *= direction->alpha;
+            effectColorCopy(color, &g_effectRingScratchColor);
+            out->inner[0] = g_effectRingScratchColor.red;
+            out->inner[1] = g_effectRingScratchColor.green;
+            out->inner[2] = g_effectRingScratchColor.blue;
+
+            *color = middleRow;
+            color->red *= direction->red;
+            color->green *= direction->green;
+            color->blue *= direction->blue;
+            color->alpha *= direction->alpha;
+            effectColorCopy(color, &g_effectRingScratchColor);
+            out->middle[0] = g_effectRingScratchColor.red;
+            out->middle[1] = g_effectRingScratchColor.green;
+            out->middle[2] = g_effectRingScratchColor.blue;
+
+            *color = outerRow;
+            color->red *= direction->red;
+            color->green *= direction->green;
+            color->blue *= direction->blue;
+            color->alpha *= direction->alpha;
+            g_effectRingScratchColor = *color;
+            out->outer[0] = g_effectRingScratchColor.red;
+            out->outer[1] = g_effectRingScratchColor.green;
+            out->outer[2] = g_effectRingScratchColor.blue;
+            out++;
+        }
     }
-    temp_v13 = *(float *)(temp_v3 + 0x60);
-    temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v13) << 0x1d);
-    temp_v7 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v6 >> 0x16) & 3);
-    if (!romwright_subpiece_4_1_0(temp_v6 >> 0x1d,0)) {
-      temp_v15 = (romwright_fabs_4(temp_v12) / (temp_v13 * 0.5f)) * -0.5f;
-      temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < temp_v15) << 0x1f) |
-              ((unsigned int)(temp_v7 == temp_v15) << 0x1e);
-      temp_v1 = (unsigned char)(temp_v6 >> 0x18);
-      if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == ((temp_v7 != temp_v7) || (temp_v15 != temp_v15))) {
-        temp_v7 = temp_v15;
-      }
-    }
-    temp_v15 = *(float *)(temp_v3 + 0x40);
-    temp_v0 = (int)((int)*(short *)(temp_v2 + 2) + ((unsigned int)((int)*(short *)(temp_v2 + 2) >> 0x1f) >> 0x1e))
-            >> 2;
-    temp_v26 = 1.0f;
-    puVar7 = *(unsigned int **)(*(int *)(temp_v2 + 8) + 0x30);
-    *(unsigned int *)(temp_v2 + 0x54) = *(unsigned int *)(temp_v2 + 0x54) | 1;
-    temp_v19 = (float)VectorUnsignedToFloat(*(unsigned int *)(temp_v3 + 0x38),(unsigned char)(temp_v6 >> 0x16) & 3);
-    pfVar9 = &DAT_006472e0;
-    temp_v15 = *(float *)(temp_v3 + 0x50) + temp_v15 + (romwright_fabs_4(temp_v12) + temp_v13 * temp_v7 * 0.5f) * temp_v7;
-    temp_v16 = g_polyDefaultColor * temp_v15;
-    temp_v12 = *(float *)(temp_v3 + 0x54) + temp_v15;
-    DAT_006472f8 = *(float *)(temp_v3 + 0x58) + temp_v12;
-    temp_v17 = DAT_005c1104 * temp_v15;
-    temp_v18 = DAT_005c1108 * temp_v15;
-    temp_v15 = DAT_005c110c * temp_v15;
-    temp_v14 = g_polyDefaultColor * temp_v12;
-    DAT_006472e0 = DAT_005c1104 * temp_v12;
-    DAT_006472e4 = DAT_005c1108 * temp_v12;
-    temp_v12 = DAT_005c110c * temp_v12;
-    temp_v7 = g_polyDefaultColor * DAT_006472f8;
-    temp_v13 = DAT_005c1104 * DAT_006472f8;
-    if (temp_v0 != 0) {
-      pfVar9 = (float *)&DAT_005c1120;
-    }
-    temp_v6 = 0;
-    DAT_006472f4 = DAT_005c1108 * DAT_006472f8;
-    DAT_006472f8 = DAT_005c110c * DAT_006472f8;
-    temp_v21 = temp_v20;
-    DAT_006472dc = temp_v14;
-    DAT_006472e8 = temp_v12;
-    DAT_006472ec = temp_v7;
-    DAT_006472f0 = temp_v13;
-    temp_v22 = DAT_006472e0;
-    temp_v23 = DAT_006472e4;
-    temp_v24 = DAT_006472f4;
-    temp_v25 = DAT_006472f8;
-    if (temp_v0 != 0) {
-      do {
-        temp_v8 = temp_v21 * 40.743664f;
-        temp_v9 = temp_v8;
-        FUN_001b63b0();
-        FUN_001a1ee0();
-        *puVar7 = 0;
-        puVar7[1] = 0;
-        puVar7[2] = 0;
-        temp_v21 = temp_v21 + 6.2831855f / temp_v19;
-        DAT_006472ec = temp_v9;
-        DAT_006472f0 = temp_v20;
-        DAT_006472f4 = temp_v8;
-        DAT_006472f8 = temp_v26;
-        *pfVar9 = temp_v16 * temp_v9;
-        pfVar9[1] = temp_v17 * temp_v20;
-        pfVar9[2] = temp_v18 * temp_v8;
-        pfVar9[3] = temp_v15 * temp_v26;
-        *(float *)&puVar7[3] = temp_v16 * temp_v9;
-        *(float *)&puVar7[4] = pfVar9[1];
-        *(float *)&puVar7[5] = pfVar9[2];
-        temp_v9 = temp_v14 * DAT_006472ec;
-        temp_v8 = temp_v22 * DAT_006472f0;
-        temp_v10 = temp_v23 * DAT_006472f4;
-        temp_v11 = temp_v12 * DAT_006472f8;
-        *pfVar9 = temp_v9;
-        pfVar9[1] = temp_v8;
-        pfVar9[2] = temp_v10;
-        pfVar9[3] = temp_v11;
-        *(float *)&puVar7[6] = temp_v9;
-        *(float *)&puVar7[7] = pfVar9[1];
-        *(float *)&puVar7[8] = pfVar9[2];
-        temp_v9 = temp_v7 * DAT_006472ec;
-        temp_v8 = temp_v13 * DAT_006472f0;
-        temp_v10 = temp_v24 * DAT_006472f4;
-        temp_v6 = temp_v6 + 1;
-        DAT_006472e8 = temp_v25 * DAT_006472f8;
-        DAT_006472dc = temp_v9;
-        DAT_006472e0 = temp_v8;
-        DAT_006472e4 = temp_v10;
-        pfVar9[3] = DAT_006472e8;
-        *pfVar9 = temp_v9;
-        pfVar9[1] = temp_v8;
-        pfVar9[2] = temp_v10;
-        *(float *)&puVar7[9] = temp_v9;
-        *(float *)&puVar7[10] = pfVar9[1];
-        *(float *)&puVar7[0xb] = pfVar9[2];
-        puVar7 = puVar7 + 0xc;
-      } while (temp_v6 < temp_v0);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

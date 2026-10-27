@@ -44,7 +44,7 @@ int FUN_004c80f0(...);
 int FUN_004c8284(...);
 int FUN_004c9d04(...);
 void FUN_004cae0c(void *context, void *state, s32 pending, u32 target);
-int FUN_004cb348(...);
+int colorFadeStartRgb(...);
 int asdModelActivateOwnedSlots(...);
 int FUN_004f5fb8(...);
 int resourceEnsureCachedObject(...);
@@ -246,7 +246,7 @@ extern unsigned int FUN_0047fa50(unsigned int);
 /* Supplied declaration required: FUN_004cab9c. */
 /* Supplied declaration required: FUN_004cad84. */
 /* Supplied declaration required: FUN_004cae0c. */
-/* Supplied declaration required: FUN_004cb348. */
+/* Supplied declaration required: colorFadeStartRgb. */
 /* Supplied declaration required: FUN_004cb8a0. */
 /* Supplied declaration required: driftObjectStart. */
 extern int holderObjectCall(unsigned int);
@@ -1106,7 +1106,7 @@ LAB_0040f258:
         psVar2[1] = temp_v4;
         break;
       }
-      FUN_004cb348(*param_1);
+      colorFadeStartRgb(*param_1);
       psVar2[0x12] = psVar2[0x12] + 1;
       temp_v4 = 1;
       psVar2[1] = temp_v4;

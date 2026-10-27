@@ -23,7 +23,7 @@ extern float DAT_005c1110; /* 0x5c1110 */
 extern float DAT_005c1114; /* 0x5c1114 */
 extern float DAT_005c1118; /* 0x5c1118 */
 extern unsigned int DAT_005c111c; /* 0x5c111c */
-extern float DAT_005c1120; /* 0x5c1120 */
+extern float g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_005c1124; /* 0x5c1124 */
 extern float DAT_005c1128; /* 0x5c1128 */
 extern float DAT_005c112c; /* 0x5c112c */
@@ -161,10 +161,10 @@ void FUN_00383568(unsigned int *param_1,int param_2,float *param_3)
     DAT_00647300 = pfVar7[4];
     DAT_00647304 = pfVar7[5];
     DAT_00647308 = DAT_005c112c;
-    DAT_005c1120 = pfVar7[0xc];
+    g_effectRingScratchColor = pfVar7[0xc];
     DAT_005c1124 = pfVar7[0xd];
     DAT_005c1128 = pfVar7[0xe];
-    DAT_006472dc = DAT_005c1120 - DAT_006472fc;
+    DAT_006472dc = g_effectRingScratchColor - DAT_006472fc;
     DAT_006472e0 = DAT_005c1124 - DAT_00647300;
     DAT_006472e4 = DAT_005c1128 - DAT_00647304;
     DAT_006472e8 = DAT_005c112c - DAT_005c112c;
@@ -217,10 +217,10 @@ void FUN_00383568(unsigned int *param_1,int param_2,float *param_3)
         DAT_00647300 = pfVar5[4];
         DAT_00647304 = pfVar5[5];
         DAT_00647308 = DAT_005c112c;
-        DAT_005c1120 = pfVar5[0xc];
+        g_effectRingScratchColor = pfVar5[0xc];
         DAT_005c1124 = pfVar5[0xd];
         DAT_005c1128 = pfVar5[0xe];
-        DAT_006472dc = DAT_005c1120 - DAT_006472fc;
+        DAT_006472dc = g_effectRingScratchColor - DAT_006472fc;
         DAT_006472e0 = DAT_005c1124 - DAT_00647300;
         DAT_006472e4 = DAT_005c1128 - DAT_00647304;
         DAT_006472e8 = DAT_005c112c - DAT_005c112c;
@@ -347,15 +347,15 @@ void FUN_00383568(unsigned int *param_1,int param_2,float *param_3)
   pfVar5[0xf] = DAT_006472dc;
   pfVar5[0x10] = DAT_005c1124;
   pfVar5[0x11] = DAT_005c1128;
-  DAT_005c1120 = DAT_006472ec * 0.85f + DAT_006472fc;
+  g_effectRingScratchColor = DAT_006472ec * 0.85f + DAT_006472fc;
   DAT_005c1124 = DAT_006472f0 * 0.85f + DAT_00647300;
   DAT_005c1128 = DAT_006472f4 * 0.85f + DAT_00647304;
   DAT_005c112c = DAT_006472f8 * 0.85f + DAT_00647308;
-  DAT_006472ec = DAT_005c1120;
+  DAT_006472ec = g_effectRingScratchColor;
   DAT_006472f0 = DAT_005c1124;
   DAT_006472f4 = DAT_005c1128;
   DAT_006472f8 = DAT_005c112c;
-  pfVar5[0xc] = DAT_005c1120;
+  pfVar5[0xc] = g_effectRingScratchColor;
   pfVar5[0xd] = DAT_005c1124;
   pfVar5[0xe] = DAT_005c1128;
   return;

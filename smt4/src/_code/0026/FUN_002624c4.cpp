@@ -48,7 +48,7 @@ FusionDevilRecord* devilGetRecord(u16 id);
 s32 devilIsAvailable(FusionPreviewUnit* unit, u16 id);
 void FUN_002b7bca(void* base, s32 count, s32 size, void* compare);
 s32 fusionCandidateMatchesParentFilter(FusionPreviewUnit* unit, u32 first, u32 second, u16 product);
-void FUN_003c9754(FusionPreviewUnit* unit, u32 first, u32 second, u32 product);
+void battleCandidateMatchesSkillFilters(FusionPreviewUnit* unit, u32 first, u32 second, u32 product);
 extern u8 halfwordKeyEmptyLastCompare;
 // Builds the fusion result of two demons: product, inherited skills and cost.
 FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, FusionResult* result)
@@ -99,7 +99,7 @@ FusionPreviewUnit* FUN_002624c4(FusionPreviewUnit* unit, u16 first, u16 second, 
         }
         result->cost = cost;
     }
-    FUN_003c9754(unit, first, second, result->product);
+    battleCandidateMatchesSkillFilters(unit, first, second, result->product);
     ret = unit;
     return ret;
 }

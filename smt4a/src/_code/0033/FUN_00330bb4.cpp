@@ -3,33 +3,38 @@
 
 extern "C" {
 
+/* The save sub-block at +0x88 holding the two flag byte arrays (each indexed by flag id). */
+typedef struct SaveFlagBlock {
+    /* 0x00000 */ u8 unk00000[0x21548];
+    /* 0x21548 */ u8 flagsA[0x6928];
+    /* 0x27E70 */ u8 flagsB[0x48];
+} SaveFlagBlock;
+
+typedef struct SaveDataView {
+    /* 0x00 */ u8 unk00[0x88];
+    /* 0x88 */ SaveFlagBlock block;
+} SaveDataView;
+
 typedef struct GameDataBlocks {
     /* 0x00 */ u8 unk00[4];
-    /* 0x04 */ u8 *save;
+    /* 0x04 */ SaveDataView *save;
 } GameDataBlocks;
 
 extern GameDataBlocks g_gameDataBlocks;
 
-#define SAVE_FLAGS_A 0x21548  /* flags for ids 0-63 */
-#define SAVE_FLAGS_B 0x27E70  /* flags for ids 64-71 */
-
 /* Bit 2 of the flag byte kept for id 0-71 in the save data; 0 for other ids. */
 u32 FUN_00330bb4(s32 id)
 {
-    u8 *flag;
-    u8 *entry;
-    u8 *base;
-
     if (id >= 72) {
         return 0;
     }
     if (id >= 0) {
-        base = g_gameDataBlocks.save + 0x88;
-        entry = id + base;
+        SaveFlagBlock *block = &g_gameDataBlocks.save->block;
+        u8 *flag;
         if (id >= 64) {
-            flag = entry + SAVE_FLAGS_B;
+            flag = &block->flagsB[id];
         } else {
-            flag = entry + SAVE_FLAGS_A;
+            flag = &block->flagsA[id];
         }
         if (flag != NULL) {
             return (*flag & 4) >> 2;

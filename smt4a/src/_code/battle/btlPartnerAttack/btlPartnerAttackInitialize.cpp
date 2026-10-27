@@ -1,4 +1,3 @@
-/* NON_MATCHING: selected=-1 is stored immediately before state=0 rather than immediately after it. */
 #include "battle/btlPartnerAttack.h"
 #include "AsdSDK/AsdDebug.h"
 #include "battle/PartnerAttackEntries.h"
@@ -45,8 +44,8 @@ void btlPartnerAttackInitialize(PartnerAttackOwner *owner)
     state->unk10 = 0;
     state->unk14 = 0;
     state->state = 0;
-    state->selected = -1;
     state->argument = 0;
+    state->selected = -1;
     if (state->scriptProcess != NULL) {
         scrScriptProcessDestroy(state->scriptProcess);
         state->scriptProcess = NULL;

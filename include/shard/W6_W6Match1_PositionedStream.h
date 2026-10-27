@@ -30,8 +30,8 @@ typedef char PositionedResizeSlotCheck[offsetof(PositionedResizeVtable, resize) 
     sizeof(PositionedResizeVtable) == 0x40 ? 1 : -1];
 
 extern "C" {
-u32 FUN_001ffb70(PositionedStream* stream, u32 offset, void* buffer, u32 size);
-u32 FUN_002bf040(PositionedStream* stream, u32 offset, void* buffer, u32 size);
+u32 positionedStreamSeekTransfer(PositionedStream* stream, u32 offset, void* buffer, u32 size);
+u32 positionedStreamSeekTransfer(PositionedStream* stream, u32 offset, void* buffer, u32 size);
 }
 
 #ifdef __cplusplus

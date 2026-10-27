@@ -1,4 +1,3 @@
-/* NON_MATCHING: Retail retains an inlined constant type-normalization comparison and an unused pool address. */
 #include "ui/MessageMain.h"
 extern "C" {
 void* scrGetCommandOwner(s32);
@@ -8,6 +7,8 @@ s32 FUN_0021bdac(void*, s32, s32, s32, s32, s32);
 void msgBoxFlagsSetBit7(u32);
 
 extern MessageGlobalsA g_messageMain;
+
+s32 scrMessageKindGetValue(void);
 
 /* The script context kind a request is filed under: kind 21 is filed as kind 5. */
 static __inline s32 requestKind(s32 kind)
@@ -21,7 +22,7 @@ static __inline s32 requestKind(s32 kind)
 s32 FUN_0036de98(void)
 {
     MessageWorkA* work = g_messageMain.state;
-    s32 kind = requestKind(21);
+    s32 kind = requestKind(scrMessageKindGetValue());
     void* context = scrGetCommandOwner(kind);
     s32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();

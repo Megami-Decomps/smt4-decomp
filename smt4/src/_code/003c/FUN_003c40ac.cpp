@@ -1,277 +1,183 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c40ac` (_code @ 0x3c40ac, 0x474 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the romwright dump (same switch, 29 items); retail forms each flag address in a fresh register (add r1,r4,#0x4400; add r1,r1,#0xa8; ldr r2,[r1]) and shares the final `str r2,[r1]` tail, the build updates the battle pointer in place. */
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
+#include "battle/btlHelp.h"
+#include "battle/btlMain.h"
+
+/* The debug flag menu screen: its list box. */
+struct BattleFlagMenu {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 listBox;
+};
 
 extern "C" {
 
-extern unsigned int DAT_00439ad4; /* 0x439ad4 */
+extern s32 DAT_00439ad4;
+u32 asdListBoxGetSelectedItemId(u32 job);
+s32 *gameGetSlotTable(void);
 
-extern int listBoxItemHasOwner(unsigned int, unsigned int);
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int);
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-extern unsigned int *gameGetSlotTable(void);
-
-
-void FUN_003c40ac(int param_1,int param_2)
-
+/* Applies the selected list item of the battle flag menu: toggles of the battle flag bits and counters. */
+void FUN_003c40ac(BattleFlagMenu *menu, BtlMainState *battle)
 {
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned int temp_v2;
-  
-  temp_v0 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
-  switch(temp_v0) {
-  case 0:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 4;
+    u8 *state = reinterpret_cast<u8 *>(battle);
+    u32 item = asdListBoxGetSelectedItemId(menu->listBox);
+    switch (item) {
+    case 0:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x4;
+        else
+            battle->editorControl.flags &= ~0x4u;
+        break;
+    case 1:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x8;
+        else
+            battle->editorControl.flags &= ~0x8u;
+        break;
+    case 2:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x10;
+        else
+            battle->editorControl.flags &= ~0x10u;
+        break;
+    case 3:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x20;
+        else
+            battle->editorControl.flags &= ~0x20u;
+        break;
+    case 4:
+        *reinterpret_cast<u32 *>(state + 0x4A50) = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->listBox), item);
+        break;
+    case 5:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x40;
+        else
+            battle->editorControl.flags &= ~0x40u;
+        break;
+    case 6:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x80;
+        else
+            battle->editorControl.flags &= ~0x80u;
+        break;
+    case 7:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x100;
+        else
+            battle->editorControl.flags &= ~0x100u;
+        break;
+    case 8:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x200;
+        else
+            battle->editorControl.flags &= ~0x200u;
+        break;
+    case 9:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x400;
+        else
+            battle->editorControl.flags &= ~0x400u;
+        break;
+    case 10:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x800;
+        else
+            battle->editorControl.flags &= ~0x800u;
+        break;
+    case 11:
+        *reinterpret_cast<u32 *>(state + 0x49C8) = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->listBox), item);
+        break;
+    case 12:
+        *gameGetSlotTable() = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->listBox), item);
+        break;
+    case 13:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x20000;
+        else
+            battle->editorControl.flags &= ~0x20000u;
+        break;
+    case 14:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x400000;
+        else
+            battle->editorControl.flags &= ~0x400000u;
+        break;
+    case 15:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x800000;
+        else
+            battle->editorControl.flags &= ~0x800000u;
+        break;
+    case 16:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x1000000;
+        else
+            battle->editorControl.flags &= ~0x1000000u;
+        break;
+    case 17:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x2000000;
+        else
+            battle->editorControl.flags &= ~0x2000000u;
+        break;
+    case 18:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x4000000;
+        else
+            battle->editorControl.flags &= ~0x4000000u;
+        break;
+    case 19:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x8000000;
+        else
+            battle->editorControl.flags &= ~0x8000000u;
+        break;
+    case 20:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x10000000;
+        else
+            battle->editorControl.flags &= ~0x10000000u;
+        break;
+    case 21:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags |= 0x20000000;
+        else
+            battle->editorControl.flags &= ~0x20000000u;
+        break;
+    case 22:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags44AC |= 0x1;
+        else
+            battle->editorControl.flags44AC &= ~0x1u;
+        break;
+    case 23:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags44AC |= 0x2;
+        else
+            battle->editorControl.flags44AC &= ~0x2u;
+        break;
+    case 24:
+        *reinterpret_cast<u32 *>(state + 0x2F2C) = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->listBox), item);
+        break;
+    case 25:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags44AC |= 0x4;
+        else
+            battle->editorControl.flags44AC &= ~0x4u;
+        break;
+    case 26:
+        *reinterpret_cast<u32 *>(state + 0x2F34) = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->listBox), item);
+        break;
+    case 27:
+        DAT_00439ad4 = *asdListBoxGetItemValuePtr(reinterpret_cast<void *>(menu->listBox), item);
+        break;
+    case 28:
+        if (listBoxItemHasOwner(menu->listBox, item) != 0)
+            battle->editorControl.flags44AC |= 0x40;
+        else
+            battle->editorControl.flags44AC &= ~0x40u;
+        break;
     }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffffffb;
-    }
-    break;
-  case 1:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 8;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffffff7;
-    }
-    break;
-  case 2:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x10;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xffffffef;
-    }
-    break;
-  case 3:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x20;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xffffffdf;
-    }
-    break;
-  case 4:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    temp_v0 = *puVar2;
-    puVar2 = (unsigned int *)(param_2 + 0x4a50);
-    *puVar2 = temp_v0;
-    return;
-  case 5:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x40;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xffffffbf;
-    }
-    break;
-  case 6:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x80;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xffffff7f;
-    }
-    break;
-  case 7:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x100;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffffeff;
-    }
-    break;
-  case 8:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x200;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffffdff;
-    }
-    break;
-  case 9:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x400;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffffbff;
-    }
-    break;
-  case 10:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x800;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffff7ff;
-    }
-    break;
-  case 0xb:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    temp_v0 = *puVar2;
-    puVar2 = (unsigned int *)(param_2 + 0x49c8);
-    *puVar2 = temp_v0;
-    return;
-  case 0xc:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    temp_v0 = *puVar2;
-    puVar2 = (unsigned int *)gameGetSlotTable();
-    *puVar2 = temp_v0;
-    return;
-  case 0xd:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x20000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffdffff;
-    }
-    break;
-  case 0xe:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x400000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xffbfffff;
-    }
-    break;
-  case 0xf:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x800000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xff7fffff;
-    }
-    break;
-  case 0x10:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x1000000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfeffffff;
-    }
-    break;
-  case 0x11:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x2000000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfdffffff;
-    }
-    break;
-  case 0x12:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x4000000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xfbffffff;
-    }
-    break;
-  case 0x13:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x8000000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xf7ffffff;
-    }
-    break;
-  case 0x14:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x10000000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xefffffff;
-    }
-    break;
-  case 0x15:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) | 0x20000000;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44a8) & 0xdfffffff;
-    }
-    break;
-  case 0x16:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) | 1;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) & 0xfffffffe;
-    }
-    *(unsigned int *)(param_2 + 0x44ac) = temp_v2;
-    return;
-  case 0x17:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) | 2;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) & 0xfffffffd;
-    }
-    *(unsigned int *)(param_2 + 0x44ac) = temp_v2;
-    return;
-  case 0x18:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    temp_v0 = *puVar2;
-    puVar2 = (unsigned int *)(param_2 + 0x2f2c);
-    *puVar2 = temp_v0;
-    return;
-  case 0x19:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) | 4;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) & 0xfffffffb;
-    }
-    *(unsigned int *)(param_2 + 0x44ac) = temp_v2;
-    return;
-  case 0x1a:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    temp_v0 = *puVar2;
-    puVar2 = (unsigned int *)(param_2 + 0x2f34);
-    *puVar2 = temp_v0;
-    return;
-  case 0x1b:
-    puVar2 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10));
-    DAT_00439ad4 = *puVar2;
-    return;
-  case 0x1c:
-    temp_v1 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v0);
-    if (temp_v1 != 0) {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) | 0x40;
-    }
-    else {
-      temp_v2 = *(unsigned int *)(param_2 + 0x44ac) & 0xffffffbf;
-    }
-    *(unsigned int *)(param_2 + 0x44ac) = temp_v2;
-    return;
-  default:
-    return;
-  }
-  *(unsigned int *)(param_2 + 0x44a8) = temp_v2;
-  return;
 }
 
 } /* extern "C" */

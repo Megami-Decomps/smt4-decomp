@@ -15,22 +15,30 @@ s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
 s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 
+// These animation fields extend beyond the documented class prefix.
+struct SceneTransitionView {
+    u32 flags;
+    s32 state;
+    u32 substate;
+    u32 unk0c;
+    s32 previousState;
+    u8 unk14[0x390];
+    f32 position[2]; // 0x3a4
+    u8 unk3ac[0x20];
+    SpritePresetBank bank; // 0x3cc
+};
+typedef char SceneTransitionViewOffsetCheck[offsetof(SceneTransitionView, bank) == 0x3cc && offsetof(SceneTransitionView, position) == 0x3a4 ? 1 : -1];
+
+static __inline void sceneEnterState(SceneTransitionView *view, s32 next)
+{
+    view->previousState = view->state;
+    view->state = next;
+    view->substate = 0;
+}
+
 // Finish the map-scene animation, then wait for its script before advancing.
 void _ZN9Obj53604412FUN_00495584Ev(Obj536044 *scene)
 {
-    // These animation fields extend beyond the documented class prefix.
-    struct SceneTransitionView {
-        u32 flags;
-        s32 state;
-        u32 substate;
-        u32 unk0c;
-        s32 previousState;
-        u8 unk14[0x390];
-        f32 position[2]; // 0x3a4
-        u8 unk3ac[0x20];
-        SpritePresetBank bank; // 0x3cc
-    };
-    typedef char SceneTransitionViewOffsetCheck[offsetof(SceneTransitionView, bank) == 0x3cc && offsetof(SceneTransitionView, position) == 0x3a4 ? 1 : -1];
     SceneTransitionView *state = reinterpret_cast<SceneTransitionView *>(scene);
     if (lmapSceneGetScript())
         FUN_003e5858(lmapSceneGetScript());
@@ -53,17 +61,13 @@ void _ZN9Obj53604412FUN_00495584Ev(Obj536044 *scene)
             return;
         state->flags &= ~0xe00;
         if (!lmapSceneGetScript()) {
-            state->previousState = state->state;
-            state->state = 0x14;
-            state->substate = 0;
+            sceneEnterState(state, 0x14);
             return;
         }
         state->substate = 2;
     }
     if (!fourPtrsAllNull(lmapSceneGetScript()))
         return;
-    state->previousState = state->state;
-    state->state = 0x14;
-    state->substate = 0;
+    sceneEnterState(state, 0x14);
 }
 }

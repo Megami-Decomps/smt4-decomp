@@ -1,223 +1,163 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00303b04` (_code @ 0x303b04, 0x3fc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from the raw draft; sibling of FUN_003913d8 (rim point instead of the hub vertex, speed/acceleration/reverse fields 4 bytes further on); armcc keeps more values in core registers and schedules the per-row copies differently from retail's VFP block copies. */
+#include "gfx/EffectPrimitiveWork.h"
+#include <math.h>
+
+/* Ring of expanding polygons: its emitter carries the radius growth parameters after the common
+ * primitive-emitter prefix (0x38: segment count, 0x40/0x50: base radii, 0x54/0x58: extra ring offsets,
+ * 0x5C/0x60: initial speed and acceleration, 0x64: run backwards). */
+struct RingEmitterB {
+    /* 0x00 */ u8 unk00[0x34];
+    /* 0x34 */ s32 duration;
+    /* 0x38 */ u32 segmentCount;
+    /* 0x3C */ u8 unk3C[4];
+    /* 0x40 */ f32 innerRadius;
+    /* 0x44 */ u8 unk44[0xC];
+    /* 0x50 */ f32 radiusBias;
+    /* 0x54 */ f32 middleOffset;
+    /* 0x58 */ f32 outerOffset;
+    /* 0x5C */ u8 unk5C[4];
+    /* 0x60 */ f32 speed;
+    /* 0x64 */ f32 acceleration;
+    /* 0x68 */ u8 reversed;
+};
+
+/* The primitive being filled: a vertex count at 0x02, a flag word at 0x54 and the vertex buffer
+ * reached through the object at 0x08. */
+struct RingPrimitive {
+    /* 0x00 */ u8 unk00[2];
+    /* 0x02 */ s16 vertexCount;
+    /* 0x04 */ u8 unk04[4];
+    /* 0x08 */ struct RingVertexOwner *vertices;
+    /* 0x0C */ u8 unk0C[0x48];
+    /* 0x54 */ u32 flags;
+};
+
+/* Four vertices (twelve words) per ring segment: the point on the ring, then three tinted rows. */
+struct RingSegment {
+    /* 0x00 */ f32 rim[3];
+    /* 0x0C */ f32 inner[3];
+    /* 0x18 */ f32 middle[3];
+    /* 0x24 */ f32 outer[3];
+};
+
+struct RingVertexOwner {
+    /* 0x00 */ u8 unk00[0x30];
+    /* 0x30 */ RingSegment *segments;
+};
 
 extern "C" {
+extern EffectColor g_polyDefaultColor;
+extern EffectColor DAT_00472550;
+extern EffectColorProductState DAT_004ea81c;
+f32 FUN_002b70cc(f32 angle);
+f32 phaseCosInterpolate(f32 angle);
 
-int phaseCosInterpolate(void);
-int FUN_002b70cc(void);
-int VectorSignedToFloat(int, int);
-int VectorUnsignedToFloat(unsigned int, int);
-
-#ifndef ROMWRIGHT_FLOAT_BITS_DEFINED
-#define ROMWRIGHT_FLOAT_BITS_DEFINED
-static unsigned int romwright_f2u(float value)
+/* Builds the segments of the ring polygon (rim point plus three tinted rows per segment) for the current frame: the ring radius follows the
+ * parabola `speed * t + acceleration * t * t / 2`, and each of the three ring rows is the default
+ * tint scaled by that row's radius, then by the segment's direction (cosine, 0, sine, 1). The
+ * effect color state's two colors are the scratch the rows are built in. */
+void FUN_00303b04(EffectPrimitiveWork *work)
 {
-    union { float f; unsigned int u; } bits;
-    bits.f = value;
-    return bits.u;
-}
-static float romwright_u2f(unsigned int value)
-{
-    union { float f; unsigned int u; } bits;
-    bits.u = value;
-    return bits.f;
-}
-#endif
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp68; /* 0x68: local_68 */
-} param_1_stack;
+    s32 frame = work->frame;
+    RingPrimitive *primitive = (RingPrimitive *)work->handle->unk00; /* the handle's first word is the ring primitive */
+    RingEmitterB *emitter = (RingEmitterB *)work->emitter;
+    s32 duration = emitter->duration;
+    if (frame <= duration || duration == 0) {
+        f32 speed = emitter->speed;
+        if (emitter->reversed != 0) {
+            frame = duration - frame;
+        }
+        f32 acceleration = emitter->acceleration;
+        f32 time = (f32)frame;
+        if (!(0.0f <= acceleration)) {
+            /* A decelerating ring stops growing at its apex. */
+            f32 apex = (fabsf(speed) / (acceleration * 0.5f)) * -0.5f;
+            if (time > apex) {
+                time = apex;
+            }
+        }
+        s32 segments = primitive->vertexCount / 4;
+        RingSegment *out = primitive->vertices->segments;
+        primitive->flags |= 1;
+        f32 step = 6.2831855f / (f32)emitter->segmentCount;
 
-extern float g_polyDefaultColor; /* 0x472520 */
-extern float DAT_00472524; /* 0x472524 */
-extern float *DAT_00472528; /* 0x472528 */
-extern float DAT_0047252c; /* 0x47252c */
-extern unsigned int DAT_00472550; /* 0x472550 */
-extern float DAT_004ea91c; /* 0x4ea91c */
-extern float DAT_004ea920; /* 0x4ea920 */
-extern float DAT_004ea924; /* 0x4ea924 */
-extern float DAT_004ea928; /* 0x4ea928 */
-extern float DAT_004ea92c; /* 0x4ea92c */
-extern float DAT_004ea930; /* 0x4ea930 */
-extern float DAT_004ea934; /* 0x4ea934 */
-extern float DAT_004ea938; /* 0x4ea938 */
+        f32 rimRadius = emitter->innerRadius + (fabsf(speed) + acceleration * time * 0.5f) * time;
+        f32 innerRadius = emitter->radiusBias + rimRadius;
+        f32 middleRadius = emitter->middleOffset + innerRadius;
+        f32 outerRadius = emitter->outerOffset + middleRadius;
 
-#ifndef ROMWRIGHT_FABS_4_DEFINED
-#define ROMWRIGHT_FABS_4_DEFINED
-static float romwright_fabs_4(float value)
-{
-    return value < (float)0 ? -value : value;
-}
-#endif
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-#ifndef ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_0_DEFINED
-#define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
-#endif
-/* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-/* Unsupported intrinsic, declaration required: VectorUnsignedToFloat (CALLOTHER). */
-/* Supplied declaration required: phaseCosInterpolate. */
-/* Supplied declaration required: FUN_002b70cc. */
+        EffectColor *color = &DAT_004ea81c.color;
+        EffectColor *direction = &DAT_004ea81c.factor;
+        effectColorCopy(&g_polyDefaultColor, color);
+        effectColorCopy(&g_polyDefaultColor, direction);
+        color->red *= innerRadius;
+        color->green *= innerRadius;
+        color->blue *= innerRadius;
+        color->alpha *= innerRadius;
+        EffectColor innerRow = *color;
+        *color = *direction;
+        color->red *= middleRadius;
+        color->green *= middleRadius;
+        color->blue *= middleRadius;
+        color->alpha *= middleRadius;
+        EffectColor middleRow = *color;
+        direction->red *= outerRadius;
+        direction->green *= outerRadius;
+        direction->blue *= outerRadius;
+        direction->alpha *= outerRadius;
+        EffectColor outerRow = *direction;
 
+        f32 angle = 0.0f;
+        for (s32 i = 0; i < segments; i++) {
+            f32 phase = angle * 40.743664f;
+            f32 cosine = phaseCosInterpolate(phase);
+            f32 sine = FUN_002b70cc(phase);
+            angle += step;
+            direction->red = cosine;
+            direction->green = 0.0f;
+            direction->blue = sine;
+            direction->alpha = 1.0f;
 
-void FUN_00303b04(int param_1)
+            DAT_00472550.red = direction->red * rimRadius;
+            DAT_00472550.green = direction->green * rimRadius;
+            DAT_00472550.blue = direction->blue * rimRadius;
+            DAT_00472550.alpha = direction->alpha * rimRadius;
+            out->rim[0] = DAT_00472550.red;
+            out->rim[1] = DAT_00472550.green;
+            out->rim[2] = DAT_00472550.blue;
 
-{
-/* irregular: irregular input(s): in_fpscr; 6 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int temp_v5;
-  float *pfVar7;
-  float *pfVar8;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8;
-  float temp_v9;
-  float temp_v10;
-  float temp_v11;
-  float temp_v12;
-  float temp_v13;
-  float temp_v14;
-  float temp_v15;
-  float temp_v16;
-  float temp_v17;
-  float temp_v18;
-  float temp_v19;
-  float temp_v20;
-  float temp_v21;
-  float temp_v22;
-  float temp_v23;
-  float temp_v24;
-  float temp_v25;
-  float temp_v26;
-  float temp_v27;
-  
-  temp_v4 = *(int *)(param_1 + 0x34);
-  temp_v3 = *(int *)(param_1 + 0x40);
-  temp_v2 = **(int **)(param_1 + 0x3c);
-  temp_v5 = *(int *)(temp_v3 + 0x34);
-  if ((temp_v4 <= temp_v5) || (temp_v5 == 0)) {
-    temp_v12 = *(float *)(temp_v3 + 0x60);
-    temp_v25 = 0.0f;
-    if (*(char *)(temp_v3 + 0x68) != '\0') {
-      temp_v4 = temp_v5 - temp_v4;
+            *color = innerRow;
+            color->red *= direction->red;
+            color->green *= direction->green;
+            color->blue *= direction->blue;
+            color->alpha *= direction->alpha;
+            effectColorCopy(color, &DAT_00472550);
+            out->inner[0] = DAT_00472550.red;
+            out->inner[1] = DAT_00472550.green;
+            out->inner[2] = DAT_00472550.blue;
+
+            *color = middleRow;
+            color->red *= direction->red;
+            color->green *= direction->green;
+            color->blue *= direction->blue;
+            color->alpha *= direction->alpha;
+            effectColorCopy(color, &DAT_00472550);
+            out->middle[0] = DAT_00472550.red;
+            out->middle[1] = DAT_00472550.green;
+            out->middle[2] = DAT_00472550.blue;
+
+            *color = outerRow;
+            color->red *= direction->red;
+            color->green *= direction->green;
+            color->blue *= direction->blue;
+            color->alpha *= direction->alpha;
+            DAT_00472550 = *color;
+            out->outer[0] = DAT_00472550.red;
+            out->outer[1] = DAT_00472550.green;
+            out->outer[2] = DAT_00472550.blue;
+            out++;
+        }
     }
-    temp_v14 = *(float *)(temp_v3 + 100);
-    temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(0.0f <= temp_v14) << 0x1d);
-    temp_v7 = (float)VectorSignedToFloat(temp_v4,(unsigned char)(temp_v6 >> 0x16) & 3);
-    if (!romwright_subpiece_4_1_0(temp_v6 >> 0x1d,0)) {
-      temp_v16 = (romwright_fabs_4(temp_v12) / (temp_v14 * 0.5f)) * -0.5f;
-      temp_v6 = (in_fpscr & 0xfffffff) | ((unsigned int)(temp_v7 < temp_v16) << 0x1f) |
-              ((unsigned int)(temp_v7 == temp_v16) << 0x1e);
-      temp_v1 = (unsigned char)(temp_v6 >> 0x18);
-      if (!(unsigned char)((temp_v1 >> 6) & 1) && (unsigned char)(temp_v1 >> 7) == ((temp_v7 != temp_v7) || (temp_v16 != temp_v16))) {
-        temp_v7 = temp_v16;
-      }
-    }
-    temp_v27 = 1.0f;
-    temp_v16 = *(float *)(temp_v3 + 0x40);
-    temp_v0 = (int)((int)*(short *)(temp_v2 + 2) + ((unsigned int)((int)*(short *)(temp_v2 + 2) >> 0x1f) >> 0x1e))
-            >> 2;
-    pfVar7 = *(float **)(*(int *)(temp_v2 + 8) + 0x30);
-    *(unsigned int *)(temp_v2 + 0x54) = *(unsigned int *)(temp_v2 + 0x54) | 1;
-    temp_v20 = (float)VectorUnsignedToFloat(*(unsigned int *)(temp_v3 + 0x38),(unsigned char)(temp_v6 >> 0x16) & 3);
-    temp_v16 = temp_v16 + (romwright_fabs_4(temp_v12) + temp_v14 * temp_v7 * 0.5f) * temp_v7;
-    temp_v20 = 6.2831855f / temp_v20;
-    temp_v7 = *(float *)(temp_v3 + 0x50) + temp_v16;
-    temp_v17 = g_polyDefaultColor * temp_v7;
-    DAT_004ea928 = *(float *)(temp_v3 + 0x54) + temp_v7;
-    temp_v12 = *(float *)(temp_v3 + 0x58) + DAT_004ea928;
-    temp_v18 = DAT_00472524 * temp_v7;
-    temp_v19 = romwright_u2f((unsigned int)(DAT_00472528)) * temp_v7;
-    temp_v7 = DAT_0047252c * temp_v7;
-    temp_v14 = g_polyDefaultColor * DAT_004ea928;
-    temp_v15 = DAT_00472524 * DAT_004ea928;
-    DAT_004ea924 = romwright_u2f((unsigned int)(DAT_00472528)) * DAT_004ea928;
-    DAT_004ea928 = DAT_0047252c * DAT_004ea928;
-    pfVar8 = DAT_00472528;
-    if (temp_v0 != 0) {
-      pfVar8 = (float *)&DAT_00472550;
-    }
-    temp_v6 = 0;
-    temp_v13 = g_polyDefaultColor * temp_v12;
-    DAT_004ea930 = DAT_00472524 * temp_v12;
-    DAT_004ea934 = romwright_u2f((unsigned int)(DAT_00472528)) * temp_v12;
-    temp_v12 = DAT_0047252c * temp_v12;
-    temp_v26 = temp_v25;
-    DAT_004ea91c = temp_v14;
-    DAT_004ea920 = temp_v15;
-    DAT_004ea92c = temp_v13;
-    DAT_004ea938 = temp_v12;
-    temp_v21 = DAT_004ea924;
-    temp_v22 = DAT_004ea928;
-    temp_v23 = DAT_004ea930;
-    temp_v24 = DAT_004ea934;
-    if (temp_v0 != 0) {
-      do {
-        temp_v8 = temp_v25 * 40.743664f;
-        temp_v9 = temp_v8;
-        phaseCosInterpolate();
-        FUN_002b70cc();
-        temp_v25 = temp_v25 + temp_v20;
-        DAT_004ea92c = temp_v9;
-        DAT_004ea930 = temp_v26;
-        DAT_004ea934 = temp_v8;
-        DAT_004ea938 = temp_v27;
-        *pfVar8 = temp_v9 * temp_v16;
-        pfVar8[1] = temp_v26 * temp_v16;
-        pfVar8[2] = temp_v8 * temp_v16;
-        pfVar8[3] = temp_v27 * temp_v16;
-        *pfVar7 = temp_v9 * temp_v16;
-        pfVar7[1] = pfVar8[1];
-        pfVar7[2] = pfVar8[2];
-        temp_v9 = temp_v17 * DAT_004ea92c;
-        temp_v8 = temp_v18 * DAT_004ea930;
-        temp_v10 = temp_v19 * DAT_004ea934;
-        temp_v11 = temp_v7 * DAT_004ea938;
-        *pfVar8 = temp_v9;
-        pfVar8[1] = temp_v8;
-        pfVar8[2] = temp_v10;
-        pfVar8[3] = temp_v11;
-        pfVar7[3] = temp_v9;
-        pfVar7[4] = pfVar8[1];
-        pfVar7[5] = pfVar8[2];
-        temp_v9 = temp_v14 * DAT_004ea92c;
-        temp_v8 = temp_v15 * DAT_004ea930;
-        temp_v10 = temp_v21 * DAT_004ea934;
-        temp_v11 = temp_v22 * DAT_004ea938;
-        temp_v6 = temp_v6 + 1;
-        *pfVar8 = temp_v9;
-        pfVar8[1] = temp_v8;
-        pfVar8[2] = temp_v10;
-        pfVar8[3] = temp_v11;
-        pfVar7[6] = temp_v9;
-        pfVar7[7] = pfVar8[1];
-        pfVar7[8] = pfVar8[2];
-        temp_v9 = temp_v13 * DAT_004ea92c;
-        temp_v8 = temp_v23 * DAT_004ea930;
-        temp_v10 = temp_v24 * DAT_004ea934;
-        temp_v11 = temp_v12 * DAT_004ea938;
-        DAT_004ea91c = temp_v9;
-        DAT_004ea920 = temp_v8;
-        DAT_004ea924 = temp_v10;
-        DAT_004ea928 = temp_v11;
-        *pfVar8 = temp_v9;
-        pfVar8[1] = temp_v8;
-        pfVar8[2] = temp_v10;
-        pfVar8[3] = temp_v11;
-        pfVar7[9] = temp_v9;
-        pfVar7[10] = pfVar8[1];
-        pfVar7[0xb] = pfVar8[2];
-        pfVar7 = pfVar7 + 0xc;
-      } while (temp_v6 < temp_v0);
-    }
-  }
-  return;
 }
 
 } /* extern "C" */

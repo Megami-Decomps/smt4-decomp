@@ -11,14 +11,14 @@ struct AllocationLockOwner {
 extern "C" {
 
 extern AllocationLockOwner g_allocationAddressRanges; /* 0x5b4028 */
-void FUN_0018003c(void);
+void asdAllocatorLock(void);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void rt_memclr(void *buffer, u32 size);
 
 // Allocate under the tracking lock and clear the block when the allocation succeeded.
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option)
 {
-    FUN_0018003c();
+    asdAllocatorLock();
     void *block = asdMemoryAlloc(heap, alignment, region, size, option);
     if (block != NULL) {
         rt_memclr(block, size);

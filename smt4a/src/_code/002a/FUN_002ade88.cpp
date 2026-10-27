@@ -1,235 +1,174 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_002ade88` (_code @ 0x2ade88, 0x490 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "code/Code002a_Smt4a.h"
+/* NON_MATCHING: three scheduling/register diffs left: the reserve-row fusion call loads record->entryId after the out-pointer setup (retail right after gameGetSlotRecord), and the reserve-row and cell-row entryId compares swap r0/r1 (retail ldrh r1 + ldr r0 / ldrh r0 + ldrh r1). */
+#include "common.h"
+#include <stddef.h>
+#include "ui/PartyPanelState.h"
+#include "shard/W5_W5Match2_UniteWork.h"
+#include "shard/W5_W5Match5_GameSaveViews.h"
+#include "gamedata/SaveSlotTable.h"
+
+// The panel past PartyPanelStateA's 0xA80 bytes: the slot cells, the picked ids and the per-row status.
+struct PartyPanelCell {
+    s32 slot;   // 0x00
+    u16 value;  // 0x04
+    u8 unk06[2];
+};
+
+struct PartyPanelFusionResult {
+    u8 available;  // 0x00
+    u8 unk01[3];
+    u32 reason;    // 0x04
+    u16 resultId;  // 0x08
+};
+
+struct PartyPanelRefreshState : PartyPanelStateA {
+    PartyPanelCell cells[24];         // 0xA80
+    u8 unkB40[0xE7C - 0xB40];
+    s32 ids[2];                       // 0xE7C
+    s32 idCount;                      // 0xE84
+    u8 unkE88[0xFD0 - 0xE88];
+    u32 flags[27];                    // 0xFD0 (3 reserve rows, then 24 slots)
+    u8 unk103C[2];
+    u16 icons[27];                    // 0x103E
+    u8 unk1074[8];
+    UniteWork *unite;                 // 0x107C
+};
+typedef char PartyPanelRefreshOffsetsCheck[
+    offsetof(PartyPanelRefreshState, cells) == 0xA80 && offsetof(PartyPanelRefreshState, ids) == 0xE7C &&
+    offsetof(PartyPanelRefreshState, idCount) == 0xE84 && offsetof(PartyPanelRefreshState, flags) == 0xFD0 &&
+    offsetof(PartyPanelRefreshState, icons) == 0x103E && offsetof(PartyPanelRefreshState, unite) == 0x107C ? 1 : -1];
 
 extern "C" {
 
-int gameGetSlotRecord(...);
-int __aeabi_memset4(int, int, int);
-int FUN_004da344(int, unsigned int, int, int, unsigned char [4]);
+extern PartyPanelRefreshState *g_partyPanel;
 
-/* stack frame of void: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned short sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp38; /* 0x38: local_38 */
-} void_stack;
+u8 FUN_004da344(UniteWork *work, u32 first, u32 second, s32 special, PartyPanelFusionResult *output);
+u32 FUN_002a4b28(u32 index);
+SlotRecord *slotRecordFindById(u32 id);
+void partyWidgetSetTransitionPending(PartyPanelWidget *widget, u8 value);
+void partyWidgetSetTransitionKind(PartyPanelWidget *widget, u8 value);
+void __aeabi_memset4(void *destination, u32 size, s32 value);
 
-extern int g_partyPanel; /* 0x57f268 */
-
-extern int slotRecordFindById(unsigned int);
-/* Supplied declaration required: gameGetSlotRecord. */
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: FUN_004da344. */
-
-
+/* Refreshes the fusion availability flags and icons of the panel's reserve rows and slot cells. */
 void FUN_002ade88(void)
-
 {
-/* irregular: 3 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  int temp_v6;
-  int temp_v7;
-  unsigned char temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10 [4];
-  int temp_v11;
-  unsigned short temp_v12;
-  
-  temp_v0 = g_partyPanel;
-  temp_v1 = gameGetSlotTable();
-  __aeabi_memset4(temp_v0 + 0x9c0,4,1);
-  temp_v7 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v7 * 4;
-    *(unsigned int *)(temp_v2 + 0xfd0) = 0;
-    *(unsigned short *)(temp_v0 + temp_v7 * 2 + 0x103e) = 0;
-    *(unsigned char *)(*(int *)(temp_v2 + 0xa14) + 0x27) = 0;
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 3);
-  temp_v7 = 0;
-  do {
-    temp_v3 = temp_v0 + temp_v7 * 4;
-    *(unsigned int *)(temp_v3 + 0xfdc) = 0;
-    *(unsigned short *)(temp_v0 + temp_v7 * 2 + 0x1044) = 0;
-    *(unsigned short *)(temp_v0 + temp_v7 * 8 + 0xa84) = 1;
-    temp_v2 = 0;
-    *(unsigned char *)(*(int *)(temp_v3 + 0xa20) + 0x27) = 0;
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 0x18);
-  temp_v7 = 0;
-  temp_v9 = *(char *)(temp_v0 + 0x9b4) == '\x12';
-  *(unsigned char *)(temp_v0 + 0x9c0) = 0;
-  do {
-    temp_v8 = -1 < *(char *)(temp_v1 + temp_v7 + 0x1ca0);
-    if (temp_v8) {
-      temp_v2 = *(int *)(temp_v0 + 0xe84);
+    PartyPanelRefreshState *panel = g_partyPanel;
+    SaveSlotTable *slots = gameGetSlotTable();
+    __aeabi_memset4(&panel->animation.preview.protagonistAvailable, 4, 1);
+    s32 i = 0;
+    while (i < 3) {
+        panel->flags[i] = 0;
+        panel->icons[i] = 0;
+        partyWidgetSetTransitionPending(panel->characters[1 + i], 0);
+        i++;
     }
-    else {
-      *(unsigned char *)(temp_v0 + temp_v7 + 0x9c1) = 0;
+    for (s32 i = 0; i < 24; ++i) {
+        panel->flags[3 + i] = 0;
+        panel->icons[3 + i] = 0;
+        panel->cells[i].value = 1;
+        partyWidgetSetTransitionPending(panel->demons[i], 0);
     }
-    if (temp_v8 && 0 < temp_v2) {
-      temp_v2 = 0;
-      if (*(char *)(temp_v0 + temp_v7 + 0x9c1) != '\0') {
-        temp_v2 = gameGetSlotRecord();
-        temp_v3 = *(int *)(temp_v0 + 0x107c);
-        FUN_004da344(temp_v3,*(unsigned int *)(temp_v0 + 0xe7c) & 0xffff,*(unsigned short *)(temp_v2 + 0x62),temp_v9,
-                     temp_v10);
-        if (temp_v3 != 0) {
-          temp_v2 = FUN_002a4b28(temp_v12);
-          if (temp_v2 == 0) {
-            temp_v2 = temp_v0 + temp_v7 * 4;
-            temp_v4 = *(unsigned int *)(temp_v2 + 0xfd0) | 0x80;
-            *(unsigned int *)(temp_v2 + 0xfd0) = temp_v4;
-          }
-        }
-        else {
-          *(unsigned char *)(temp_v0 + temp_v7 + 0x9c1) = 0;
-          if (temp_v11 != 1) {
-            if (temp_v11 != 2) {
-              if (temp_v11 == 3) {
-                temp_v2 = temp_v0 + temp_v7 * 4;
-                *(unsigned int *)(temp_v2 + 0xfd0) = *(unsigned int *)(temp_v2 + 0xfd0) | 4;
-              }
-            }
-            else {
-              temp_v2 = temp_v0 + temp_v7 * 4;
-              temp_v4 = *(unsigned int *)(temp_v2 + 0xfd0) | 2;
-              *(unsigned int *)(temp_v2 + 0xfd0) = temp_v4;
-            }
-          }
-          else {
-            temp_v2 = temp_v0 + temp_v7 * 4;
-            temp_v4 = *(unsigned int *)(temp_v2 + 0xfd0) | 8;
-            *(unsigned int *)(temp_v2 + 0xfd0) = temp_v4;
-          }
-          temp_v2 = gameGetSlotRecord((int)*(char *)(temp_v1 + temp_v7 + 0x1ca0));
-          if ((unsigned int)*(unsigned short *)(temp_v2 + 0x62) == *(unsigned int *)(temp_v0 + 0xe7c)) {
-            temp_v2 = temp_v0 + temp_v7 * 4;
-            temp_v4 = *(unsigned int *)(temp_v2 + 0xfd0) | 0x40;
-            *(unsigned int *)(temp_v2 + 0xfd0) = temp_v4;
-          }
-        }
-        temp_v3 = temp_v0 + temp_v7 * 2;
-        temp_v2 = temp_v3 + 0x1000;
-        *(unsigned short *)(temp_v3 + 0x103e) = temp_v12;
-      }
+    s32 special;
+    if (panel->animation.mode == 18) {
+        special = 1;
+    } else {
+        special = 0;
     }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 3);
-  temp_v7 = 0;
-  do {
-    if ((-1 < *(char *)(temp_v1 + temp_v7 + 0x1ca0)) &&
-       (temp_v2 = gameGetSlotRecord(), (*(unsigned short *)(temp_v2 + 0x60) & 4) != 0)) {
-      temp_v2 = temp_v0 + temp_v7 * 4;
-      *(unsigned int *)(temp_v2 + 0xfd0) = *(unsigned int *)(temp_v2 + 0xfd0) | 0x10;
-    }
-    temp_v7 = temp_v7 + 1;
-  } while (temp_v7 < 3);
-  temp_v7 = 0;
-  do {
-    temp_v2 = temp_v0 + temp_v7 * 8;
-    if (*(int *)(temp_v2 + 0xa80) < 0) {
-      *(unsigned short *)(temp_v2 + 0xa84) = 0;
-    }
-    else {
-      temp_v3 = gameGetSlotRecord();
-      if ((*(unsigned short *)(temp_v3 + 0x60) & 0x400) != 0) {
-        temp_v3 = temp_v0 + temp_v7 * 4;
-        *(unsigned short *)(temp_v2 + 0xa84) = 0;
-        *(unsigned int *)(temp_v3 + 0xfdc) = *(unsigned int *)(temp_v3 + 0xfdc) | 0x20;
-      }
-      else {
-        if ((*(unsigned short *)(temp_v3 + 0x60) & 4) != 0) {
-          temp_v5 = temp_v0 + temp_v7 * 4;
-          *(unsigned int *)(temp_v5 + 0xfdc) = *(unsigned int *)(temp_v5 + 0xfdc) | 0x10;
-        }
-        if ((0 < *(int *)(temp_v0 + 0xe84)) && (*(short *)(temp_v2 + 0xa84) != 0)) {
-          temp_v5 = *(int *)(temp_v0 + 0x107c);
-          FUN_004da344(temp_v5,*(unsigned int *)(temp_v0 + 0xe7c) & 0xffff,*(unsigned short *)(temp_v3 + 0x62),temp_v9,
-                       temp_v10);
-          if (temp_v5 != 0) {
-            temp_v2 = FUN_002a4b28(temp_v12);
-            if (temp_v2 == 0) {
-              temp_v2 = temp_v0 + temp_v7 * 4;
-              temp_v4 = *(unsigned int *)(temp_v2 + 0xfdc) | 0x80;
-              *(unsigned int *)(temp_v2 + 0xfdc) = temp_v4;
-            }
-          }
-          else {
-            *(unsigned short *)(temp_v2 + 0xa84) = 0;
-            if (temp_v11 != 1) {
-              if (temp_v11 != 2) {
-                if (temp_v11 == 3) {
-                  temp_v2 = temp_v0 + temp_v7 * 4;
-                  *(unsigned int *)(temp_v2 + 0xfdc) = *(unsigned int *)(temp_v2 + 0xfdc) | 4;
+    panel->animation.preview.protagonistAvailable = 0;
+    PartyPanelFusionResult out;
+    for (s32 i = 0; i < 3; ++i) {
+        if (slots->reserve[i] < 0) {
+            panel->animation.preview.partyAvailable[i] = 0;
+        } else if (panel->idCount >= 1 && panel->animation.preview.partyAvailable[i] != 0) {
+            SlotRecord *record = gameGetSlotRecord(slots->reserve[i]);
+            if (FUN_004da344(panel->unite, (u16)panel->ids[0], record->entryId, special, &out) == 0) {
+                panel->animation.preview.partyAvailable[i] = 0;
+                switch (out.reason) {
+                case 1:
+                    panel->flags[i] |= 8;
+                    break;
+                case 2:
+                    panel->flags[i] |= 2;
+                    break;
+                case 3:
+                    panel->flags[i] |= 4;
+                    break;
                 }
-              }
-              else {
-                temp_v2 = temp_v0 + temp_v7 * 4;
-                temp_v4 = *(unsigned int *)(temp_v2 + 0xfdc) | 2;
-                *(unsigned int *)(temp_v2 + 0xfdc) = temp_v4;
-              }
+                if (panel->ids[0] == gameGetSlotRecord(slots->reserve[i])->entryId) {
+                    panel->flags[i] |= 0x40;
+                }
+            } else if (FUN_002a4b28(out.resultId) == 0) {
+                panel->flags[i] |= 0x80;
             }
-            else {
-              temp_v2 = temp_v0 + temp_v7 * 4;
-              temp_v4 = *(unsigned int *)(temp_v2 + 0xfdc) | 8;
-              *(unsigned int *)(temp_v2 + 0xfdc) = temp_v4;
-            }
-            if (*(unsigned int *)(temp_v0 + 0xe7c) == (unsigned int)*(unsigned short *)(temp_v3 + 0x62)) {
-              temp_v2 = temp_v0 + temp_v7 * 4;
-              temp_v4 = *(unsigned int *)(temp_v2 + 0xfdc) | 0x40;
-              *(unsigned int *)(temp_v2 + 0xfdc) = temp_v4;
-            }
-          }
-          *(unsigned short *)(temp_v0 + temp_v7 * 2 + 0x1044) = temp_v12;
+            panel->icons[i] = out.resultId;
         }
-      }
     }
-    temp_v7 = temp_v7 + 1;
-    if (temp_v7 >= 0x18) {
-      temp_v7 = 0;
-      if (temp_v7 < *(int *)(temp_v0 + 0xe84)) {
-        do {
-          temp_v4 = *(unsigned int *)(temp_v0 + temp_v7 * 4 + 0xe7c);
-          if ((-1 < (int)temp_v4) && (temp_v2 = slotRecordFindById(temp_v4 & 0xffff), temp_v2 != 0)) {
-            temp_v3 = 0;
-            do {
-              if ((-1 < *(char *)(temp_v1 + temp_v3 + 0x1ca0)) &&
-                 (temp_v5 = gameGetSlotRecord(), *(short *)(temp_v5 + 0x62) == *(short *)(temp_v2 + 0x62))) {
-                temp_v5 = temp_v0 + temp_v3 * 4;
-                *(unsigned char *)(temp_v0 + temp_v3 + 0x9c1) = 0;
-                *(unsigned char *)(*(int *)(temp_v5 + 0xa14) + 0x28) = 0;
-                *(unsigned char *)(*(int *)(temp_v5 + 0xa14) + 0x27) = 1;
-              }
-              temp_v3 = temp_v3 + 1;
-            } while (temp_v3 < 3);
-            temp_v3 = 0;
-            do {
-              temp_v5 = temp_v0 + temp_v3 * 8;
-              if ((-1 < *(int *)(temp_v5 + 0xa80)) &&
-                 (temp_v6 = gameGetSlotRecord(), *(short *)(temp_v6 + 0x62) == *(short *)(temp_v2 + 0x62))) {
-                *(unsigned short *)(temp_v5 + 0xa84) = 0;
-                temp_v5 = temp_v0 + temp_v3 * 4;
-                *(unsigned char *)(*(int *)(temp_v5 + 0xa20) + 0x28) = 0;
-                *(unsigned char *)(*(int *)(temp_v5 + 0xa20) + 0x27) = 1;
-              }
-              temp_v3 = temp_v3 + 1;
-            } while (temp_v3 < 0x18);
-          }
-          temp_v7 = temp_v7 + 1;
-        } while (temp_v7 < *(int *)(temp_v0 + 0xe84));
-      }
-      return;
+    for (s32 i = 0; i < 3; ++i) {
+        if (slots->reserve[i] >= 0 && (gameGetSlotRecord(slots->reserve[i])->status.mask & 4) != 0) {
+            panel->flags[i] |= 0x10;
+        }
     }
-  } while( 1 );
+    for (s32 i = 0; i < 24; ++i) {
+        if (panel->cells[i].slot < 0) {
+            panel->cells[i].value = 0;
+        } else {
+            SlotRecord *record = gameGetSlotRecord(panel->cells[i].slot);
+            if ((record->status.mask & 0x400) != 0) {
+                panel->cells[i].value = 0;
+                panel->flags[3 + i] |= 0x20;
+            } else {
+                if ((record->status.mask & 4) != 0) {
+                    panel->flags[3 + i] |= 0x10;
+                }
+                if (panel->idCount >= 1 && panel->cells[i].value != 0) {
+                    if (FUN_004da344(panel->unite, (u16)panel->ids[0], record->entryId, special, &out) == 0) {
+                        panel->cells[i].value = 0;
+                        switch (out.reason) {
+                        case 1:
+                            panel->flags[3 + i] |= 8;
+                            break;
+                        case 2:
+                            panel->flags[3 + i] |= 2;
+                            break;
+                        case 3:
+                            panel->flags[3 + i] |= 4;
+                            break;
+                        }
+                        if (panel->ids[0] == record->entryId) {
+                            panel->flags[3 + i] |= 0x40;
+                        }
+                    } else if (FUN_002a4b28(out.resultId) == 0) {
+                        panel->flags[3 + i] |= 0x80;
+                    }
+                    panel->icons[3 + i] = out.resultId;
+                }
+            }
+        }
+    }
+    for (s32 j = 0; j < panel->idCount; ++j) {
+        if (panel->ids[j] >= 0) {
+            SlotRecord *found = slotRecordFindById((u16)panel->ids[j]);
+            if (found != NULL) {
+                for (s32 i = 0; i < 3; ++i) {
+                    if (slots->reserve[i] >= 0 && gameGetSlotRecord(slots->reserve[i])->entryId == found->entryId) {
+                        panel->animation.preview.partyAvailable[i] = 0;
+                        partyWidgetSetTransitionKind(panel->characters[1 + i], 0);
+                        partyWidgetSetTransitionPending(panel->characters[1 + i], 1);
+                    }
+                }
+                for (s32 i = 0; i < 24; ++i) {
+                    if (panel->cells[i].slot < 0) {
+                        continue;
+                    }
+                    SlotRecord *record = gameGetSlotRecord(panel->cells[i].slot);
+                    if (record->entryId == found->entryId) {
+                        panel->cells[i].value = 0;
+                        partyWidgetSetTransitionKind(panel->demons[i], 0);
+                        partyWidgetSetTransitionPending(panel->demons[i], 1);
+                    }
+                }
+            }
+        }
+    }
 }
 
 } /* extern "C" */

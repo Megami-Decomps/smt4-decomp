@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only (hoisted state constants 5/6 swap registers; unit address temp uses r0/r1 the other way round) */
+/* NON_MATCHING: register allocation only (predicated state stores come out streq-first; unit address temp uses r0/r1 the other way round) */
 /* Puts every ready, unlocked unit of a unit group into state 5/6 (6 if unk A0 is set). */
 #include "common.h"
 
@@ -46,10 +46,10 @@ void FUN_004caca0(UnitManager *mgr, s32 group, s32 setBit3, s32 keepFlag)
         u32 flags = unit->flags;
 
         if ((flags & 1) != 0 && (flags & 0x80) != 0 && (flags & 2) == 0) {
-            if (unit->unkA0 != 0) {
-                unit->state = 6;
-            } else {
+            if (unit->unkA0 == 0) {
                 unit->state = 5;
+            } else {
+                unit->state = 6;
             }
             u32 flags2 = (unit->flags2 & ~6) | 1;
             unit->flags2 = flags2;

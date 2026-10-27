@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the copy limit (31) in r8 and tests the name before the index with the loop entered by a branch, copies the key pair with ldm/stm, and holds the hidden result pointer in r9; armcc differs in all three */
+/* NON_MATCHING: the copy loop and its limit register now match retail (limit is a parameter of the upper-casing helper); remaining: retail keeps the hidden result in r9 and its frame is 8 bytes smaller (result at sp+8, name copy at sp+16), and loads the key pair with ldm after the prefix literal where armcc uses ldrd first. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
@@ -18,9 +18,19 @@ extern "C" {
 extern const char DAT_005892a4[]; /* the record's path prefix */
 
 s32 libc_toupper(s32 character);
-u32 FUN_004395fc(const s8 *name, const char *prefix, s32 mode, u32 *base, KeyPair key);
+u32 FUN_004395fc(const s8 *name, const char *prefix, s32 mode, u32 *base, u32 keyFirst, u32 keySecond);
 s32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 FUN_00429a1c(StatusRecord *record);
+}
+
+/* Upper-cases at most `limit` characters of the name and terminates the copy. */
+static void copyUpper(s8 *upper, const s8 *name, u32 limit)
+{
+    u32 i;
+    for (i = 0; i < limit && name[i] != '\0'; i++) {
+        upper[i] = libc_toupper(name[i]);
+    }
+    upper[i] = '\0';
 }
 
 /* Looks the upper-cased name up in the record and returns its status; a failure code comes back as the result. */
@@ -29,12 +39,8 @@ extern "C" WindowStatusResult FUN_00429c08(StatusRecord *record, const s8 *name)
     nn::Result error = FUN_004283cc(record);
     if (!nnResultIsFailure(error)) {
         s8 upper[32];
-        u32 i;
-        for (i = 0; name[i] != '\0' && i < 31; i++) {
-            upper[i] = libc_toupper(name[i]);
-        }
-        upper[i] = '\0';
-        WindowStatusResult result(FUN_004395fc(upper, DAT_005892a4, 3, &record->keyBase, record->key));
+        copyUpper(upper, name, 31);
+        WindowStatusResult result(FUN_004395fc(upper, DAT_005892a4, 3, &record->keyBase, record->key.first, record->key.second));
         recordValidatePair(record, result);
         if (nnResultIsFailure(legacyResourceIdRemap(&result))) {
             return result;

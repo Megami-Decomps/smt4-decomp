@@ -49,3 +49,4 @@ idArrayByteSize = 0xe1a00080; // 0x3fe484, 0x3fe94c (moriModelUnitAllocateChanne
 btlUiScreenDataGetCount = 0xe590012c; // 0x4aa88c (FUN_004aa878, after ldr r0, [r4])
 renderCtxGetStereoMode = 0xe590052c; // 0x345c18 (FUN_00345b94, after ldr r0, [r5]: the render context)
 touchSelectionGetSelected = 0xe1d001d1; // 0x4a5f24, 0x4a5f7c (FUN_004a5ea0, after mov r0, r8 = the touch selection at panel+0x818)
+scrMessageKindGetValue = 0xe3a00015; // 0x36dea8 (FUN_0036de98), 0x2378c0 (FUN_002378b8), 0x282a18 (FUN_00282a08): constant 21 compared and normalised to 5 right after

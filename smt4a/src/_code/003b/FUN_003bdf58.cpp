@@ -53,7 +53,7 @@ extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
-extern float DAT_005c1120; /* 0x5c1120 */
+extern float g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_005c1124; /* 0x5c1124 */
 extern float DAT_005c1128; /* 0x5c1128 */
 extern float DAT_005c112c; /* 0x5c112c */
@@ -308,11 +308,11 @@ void FUN_003bdf58(int param_1)
                 temp_v51[6] = DAT_006472dc;
                 temp_v51[7] = DAT_005c1124;
                 temp_v51[8] = DAT_005c1128;
-                DAT_005c1120 = (DAT_006472dc - DAT_006472ec) - DAT_006472ec;
+                g_effectRingScratchColor = (DAT_006472dc - DAT_006472ec) - DAT_006472ec;
                 DAT_005c1124 = (DAT_006472e0 - DAT_006472f0) - DAT_006472f0;
                 DAT_005c1128 = (DAT_006472e4 - DAT_006472f4) - DAT_006472f4;
                 DAT_005c112c = (DAT_006472e8 - DAT_006472f8) - DAT_006472f8;
-                temp_v51[9] = DAT_005c1120;
+                temp_v51[9] = g_effectRingScratchColor;
                 temp_v51[10] = DAT_005c1124;
                 temp_v51[0xb] = DAT_005c1128;
                 if (temp_v13 < temp_v50) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the 64-bit state load (ldrd) matches; retail loads the first suppression mask word by word (ldr/ldr) and ands the halves before combining, the build uses ldm pairs. */
+/* NON_MATCHING: loads match retail; retail keeps the first mask's high word in r7 (push {r4-r8}) where ours reuses ip. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
@@ -17,8 +17,7 @@ u32 FUN_004c9160(u32 kind, u32 subject, s32 unused, u32 parameter);
 u32 FUN_004c8800(u32 subject, s32 mode, u32 parameter)
 {
     BtlMainStateA *state = btlGetMainState();
-    u64 flags = state->stateFlags64.bits;
-    if ((flags & g_btlHelp.first) != 0 || (flags & g_btlHelp.second) != 0) {
+    if ((g_btlHelp.first & state->stateFlags64.bits) != 0 || (state->stateFlags64.bits & g_btlHelp.second) != 0) {
         return 0;
     }
     u32 kind = 0;

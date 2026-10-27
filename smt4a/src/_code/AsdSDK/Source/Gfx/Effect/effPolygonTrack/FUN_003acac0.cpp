@@ -29,7 +29,7 @@ typedef struct {
     unsigned int spF8; /* 0xf8: local_f8 */
 } param_1_stack;
 
-extern float DAT_005c1120; /* 0x5c1120 */
+extern float g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_005c1124; /* 0x5c1124 */
 extern float DAT_005c1128; /* 0x5c1128 */
 extern float DAT_005c112c; /* 0x5c112c */
@@ -286,11 +286,11 @@ void FUN_003acac0(int param_1)
                     pfVar15[6] = DAT_006472dc;
                     pfVar15[7] = DAT_005c1124;
                     pfVar15[8] = DAT_005c1128;
-                    DAT_005c1120 = DAT_006472dc - DAT_006472ec;
+                    g_effectRingScratchColor = DAT_006472dc - DAT_006472ec;
                     DAT_005c1124 = DAT_006472e0 - DAT_006472f0;
                     DAT_005c1128 = DAT_006472e4 - DAT_006472f4;
                     DAT_005c112c = DAT_006472e8 - DAT_006472f8;
-                    pfVar15[9] = DAT_005c1120;
+                    pfVar15[9] = g_effectRingScratchColor;
                     pfVar15[10] = DAT_005c1124;
                     pfVar15[0xb] = DAT_005c1128;
                     *(float *)(temp_v13 + 4) = temp_v10;

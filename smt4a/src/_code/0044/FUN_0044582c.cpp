@@ -1,4 +1,4 @@
-/* NON_MATCHING: format-table aggregate uses memcpy rather than VFP transfer; descriptor register scheduling differs. */
+/* NON_MATCHING: the format table now copies with VFP vldm/vstm like retail (word-aligned union view); remaining: descriptor/texture register assignment and zero-register reuse differ. */
 #include "gfx/TextureResourceConstruction.h"
 
 extern "C" {

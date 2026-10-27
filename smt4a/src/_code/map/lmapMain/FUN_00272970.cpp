@@ -151,7 +151,7 @@ extern LmapScene *g_lmapScene;
 
 void *asdMemoryAllocTracked(u32 pool, u32 category, u32 flags, u32 size, u32 alignment);
 void FUN_002c23cc(s32 value);
-void FUN_00482ab0(void *object);
+void controllerPoolReset(void *object);
 void FUN_002442ac(void);
 u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second,
                    void *update, void *end, u32 work, u32 parent);
@@ -200,7 +200,7 @@ void FUN_00272970(void)
     scene->farClip = 3000.0f;
 
     state->unk9DC = 0;
-    FUN_00482ab0(&state->object);
+    controllerPoolReset(&state->object);
     state->unkDC = 0;
     state->unkE0 = 0;
     state->unkA48 = 0;

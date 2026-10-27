@@ -6843,3 +6843,23 @@
 003f97a4 cyclingPanelAdvance inferred [med] advances the panel opening/reveal/closing phases and cycles multi-image entries
 00164cf4 buttonHelpIsKindActive inferred [high] true when an active button-help entry is the given kind or a combined kind containing it
 003278c8 flagRestorationConsumeByKey inferred [med] clears the active restoration entries with the given key, writes the stored area and raises their completion flag
+0053288c g_mikadoTalkBfPath inferred size:0xf string "mikado/talk.bf" (smt4 g_mikadoTalkBfPath twin), pool word of FUN_004b6fc4
+0053287c g_mikadoTalkMbmPath inferred size:0x10 string "mikado/talk.mbm"
+0053286c g_mikadoCheckBfPath inferred size:0x10 string "mikado/check.bf"
+00532858 g_mikadoCheckMbmPath inferred size:0x11 string "mikado/check.mbm"
+005c1120 g_effectRingScratchColor inferred size:0x10 EffectColor scratch written by FUN_003913d8
+00482ab0 controllerPoolReset inferred [med] clears pool header, 32 controller slot pointers, count and context; smt4 twin FUN_00396318 shares name
+0046eb24 packageListCountSectionRecords inferred [high] counts records of one section over all loaded kind-6 package files
+0018003c asdAllocatorLock inferred [high] waits on the allocator mutex (infinite timeout), reports failure
+00344bc8 progressUnlockFindNthEarnedIndex inferred [high] table index of the nth earned progress unlock
+003452f8 jobSetFlagsRecursive inferred [high] sets or clears the mutable flag bits of a process and all its descendants
+00330c68 mapSavePointRegisterCurrent inferred [med] registers the current map's save point and captures position and heading
+004d5fc0 btlCameraDebugApplyMenuItem inferred [med] twin of smt4 FUN_003c63a8
+004cb348 colorFadeStartRgb inferred [med] twin of smt4 FUN_003c149c
+004d229c btlDebugCreateUnitMenu inferred [high] twin of smt4 FUN_003c3da4
+002bee0c archiveStreamOpenConverted inferred [med] converts a path to wide chars, resets the stream bookkeeping and opens it (mode 1 -> access 2)
+002bf040 positionedStreamSeekTransfer inferred [med] seeks a positioned stream to a 32-bit offset and transfers; success normalised to 0
+002beec4 positionedFileReadAtReport inferred [med] seek+transfer with failure reporting and handle close
+002bf0d4 textureRegionBoundsRead inferred [med] reads the bounds of a texture region from a texture file entry
+003b6728 effectAllocateSavedEntries inferred [high] twin of smt4 effectAllocateSavedEntries
+0020a760 partyPanelHandleLayoutToggle inferred [med] party panel key handler: toggles alternate list layout or opens the sort menu

@@ -71,8 +71,8 @@ u32 FUN_003cbce4(ReflectActor *actor, ReflectTarget *target)
             return 0;
         }
         if (ready != NULL) {
-            target->delay = 0;
             ActionKindThread *slot = &static_cast<ActionKindThread *>(g_btlAction.data)[actor->unit->slotIndex];
+            target->delay = 0;
             slot->kind = 0x1b;
             return 1;
         }

@@ -15,7 +15,7 @@ void asdListBoxAddItems(u32 list, const AsdListBoxEntry *items, s32 count);
 void asdListBoxSetByteValue(u32 list, u8 value);
 void jobSetText(u32 list, const char *title);
 void asdListBoxSetToggleItem(u32 list, u32 index, u32 value);
-void asdListBoxSetFloatItem(u32 list, u32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 list, u32 index, f32 value, s32 minimum, s32 maximum);
 
 void FUN_004d5290(BattleDebugPanelWork *work, const BattleDebugPanelParent *parent)
 {
@@ -30,13 +30,11 @@ void FUN_004d5290(BattleDebugPanelWork *work, const BattleDebugPanelParent *pare
     asdListBoxSetToggleItem(work->panelJob, 0, (g_btlCamera->flags & 0x10000000) >> 28);
     BtlCameraVector3 position = g_btlCamera->basePose.position;
     BtlCameraVector3 offset = {g_btlCamera->vector[0], g_btlCamera->vector[1], g_btlCamera->vector[2]};
-    asdListBoxSetFloatItem(work->panelJob, 1, -999, 999, position.x + offset.x);
-    asdListBoxSetFloatItem(work->panelJob, 2, -999, 999, position.y + offset.y);
-    asdListBoxSetFloatItem(work->panelJob, 3, -999, 999, position.z + offset.z);
-    asdListBoxSetFloatItem(work->panelJob, 4, 0, 360,
-        (g_btlCamera->basePose.angle + g_btlCamera->unk10) * 360.0f * (1.0f / 256.0f));
-    asdListBoxSetFloatItem(work->panelJob, 5, -90, 90,
-        g_btlCamera->basePose.distance + g_btlCamera->unk0C);
+    asdListBoxSetFloatItem(work->panelJob, 1, position.x + offset.x, -999, 999);
+    asdListBoxSetFloatItem(work->panelJob, 2, position.y + offset.y, -999, 999);
+    asdListBoxSetFloatItem(work->panelJob, 3, position.z + offset.z, -999, 999);
+    asdListBoxSetFloatItem(work->panelJob, 4, (g_btlCamera->basePose.angle + g_btlCamera->unk10) * 360.0f * (1.0f / 256.0f), 0, 360);
+    asdListBoxSetFloatItem(work->panelJob, 5, g_btlCamera->basePose.distance + g_btlCamera->unk0C, -90, 90);
     asdListBoxSetToggleItem(work->panelJob, 6, (g_btlCamera->flags & 0x20000000) >> 29);
 }
 }

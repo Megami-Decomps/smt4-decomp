@@ -4403,3 +4403,16 @@
 003aaa6c numberPanelLayoutWindow inferred [med] lays out the number panel window at its stored position with the 0x566-0x56C frame set
 00150ab4 asdModelAppendCommandSource inferred [med] twin of smt4a FUN_001b1434
 0033d3f8 spriteDrawAnimationUnplaced inferred [med] twin of smt4a FUN_003fabfc
+00396318 controllerPoolReset inferred [med] twin of smt4a FUN_00482ab0
+00387f88 packageListCountSectionRecords inferred [high] twin of smt4a FUN_0046eb24
+002d7894 jobSetFlagsRecursive inferred [high] twin of smt4a FUN_003452f8
+003c9754 battleCandidateMatchesSkillFilters inferred [high] twin of smt4a battleCandidateMatchesSkillFilters; IDENTICAL port
+003c63a8 btlCameraDebugApplyMenuItem inferred [med] debug list item applies camera flag toggles/float settings (twin smt4a FUN_004d5fc0)
+003c149c colorFadeStartRgb inferred [med] starts RGB fade or applies immediately for zero duration (twin smt4a FUN_004cb348)
+003c033c btlHelpQueueModeRequest inferred [med] queues battle help request kind 6/7 for pending message and marks it active
+003d60d4 battleVectorTransitionUpdatePath inferred [med] interpolates the path/offset vectors with the transition curve factor
+003c3da4 btlDebugCreateUnitMenu inferred [high] builds the "btl Unit Menu" debug list (mode, colour channels, flags, scale, offsets)
+003d5f0c battleVectorTransitionStartSecondary inferred [med] starts the secondary vector transition toward a destination
+001ff93c archiveStreamOpenConverted inferred [med] twin of smt4a FUN_002bee0c
+001ffb70 positionedStreamSeekTransfer inferred [med] twin of smt4a FUN_002bf040
+001ff9f4 positionedFileReadAtReport inferred [med] twin of smt4a FUN_002beec4

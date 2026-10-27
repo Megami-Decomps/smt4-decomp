@@ -1,5 +1,6 @@
-/* NON_MATCHING: retail schedules `high` before the id load and keeps the sign-extended media field as separate lsl/asr, finishing with `orr r1, r4, r2` (this build emits orr r1, r2, r4 and loads the id into r3). */
+/* NON_MATCHING: retail computes `high` (orr r4) before loading the id and variation and places `sub sp` after the kind load; this build hoists the loads above the orr (id in r3). */
 #include "nn/Result.h"
+#include "sys/ProgramId.h"
 
 extern "C" {
 
@@ -13,21 +14,7 @@ struct ProgramIdSpec {
 };
 
 s32 FUN_001028b8(char *buffer, u32 size, const char *format, ...);
-void sysFatalBreak(void);
 s32 FUN_00439a04(const char *string);
-
-/* Media selector in bits 28-29 of the low half; anything but 0 or 1 is fatal. */
-static __inline s32 programMediaBits(u8 media)
-{
-    if (media == 0) {
-        return 0;
-    }
-    if (media == 1) {
-        return 2;
-    }
-    sysFatalBreak();
-    return 0;
-}
 
 /* Formats the spec as a 16-digit hexadecimal program id and hands it to the service; returns the failure result or 0. */
 s32 FUN_00428220(const ProgramIdSpec *spec)
@@ -56,7 +43,7 @@ s32 FUN_00428220(const ProgramIdSpec *spec)
     u32 high = category | 0x40000;
     u32 low = spec->variation | ((spec->uniqueId & 0xfffff) << 8);
     s32 media = programMediaBits(spec->media) << 28;
-    u64 programId = ((u64)high << 32) | (media | (u64)(low & 0x0fffffff));
+    u64 programId = (u64)high << 32 | (u64)(low & 0x0fffffff) | (u64)media;
     char text[20];
     FUN_001028b8(text, 17, "%016llx", programId);
     s32 result = FUN_00439a04(text);

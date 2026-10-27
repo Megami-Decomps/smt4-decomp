@@ -15,7 +15,7 @@ typedef struct UiOrigin {
 } UiOrigin;
 
 extern UiPos *asdTMTexTableEntryAt(int table, int index);
-extern int FUN_00344bc8(int slot);
+extern int progressUnlockFindNthEarnedIndex(int slot);
 extern int gameDataToggleFlagIsSet(void);
 extern int FUN_00164b5c(int a, int b, int c, int x, int y, int d);
 
@@ -30,7 +30,7 @@ void uiSpawnSlotMarkers(UiOrigin *origin, int count, int firstSlot, int slotBase
         UiPos *slotPos = asdTMTexTableEntryAt(0x2E, i + 0xD1);
 
         if (count > i && i != skip && enabled == 1) {
-            FUN_00344bc8(slotBase + (i + firstSlot));
+            progressUnlockFindNthEarnedIndex(slotBase + (i + firstSlot));
             if (gameDataToggleFlagIsSet() != 0) {
                 UiPos *marker = asdTMTexTableEntryAt(0x14, 0x58E);
 

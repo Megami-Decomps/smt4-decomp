@@ -1,6 +1,6 @@
-/* NON_MATCHING: fixed the dropped completion result; error path still loads r4 then copies to r0 instead of retail's r0 then r4. */
 #include "sys/ProcessResult.h"
 #include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -18,9 +18,9 @@ typedef struct SaveStreamOwner {
 } SaveStreamOwner;
 
 void *pathBuildWide(u32 id, u8 *buffer, s32 flags);
-s32 FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
+nn::Result FUN_002bb5a4(SaveStream *stream, u8 *buffer, s32 mode);
 
-static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
+static nn::Result saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 {
     stream->unk0C = 0;
     stream->unk10 = 0;
@@ -30,10 +30,10 @@ static s32 saveStreamOpen(SaveStream *stream, u8 *buffer, s32 mode)
 }
 
 /* Open the owner's stream on the record `id` (mode 1 opens it in mode 2); returns an nn::Result. */
-s32 FUN_001ff93c(SaveStreamOwner *owner, u32 id, s32 mode)
+nn::Result archiveStreamOpenConverted(SaveStreamOwner *owner, u32 id, s32 mode)
 {
     u8 buffer[500];
-    s32 result;
+    nn::Result result;
 
     if (pathBuildWide(id, buffer, 1) == NULL) {
         result = 0xE0E046BC;

@@ -26,14 +26,13 @@ u32 FUN_00335af4(void)
         BtlCombatantEntryA *entry = &battle->entries[index];
         if ((entry->flags & g_battleMaskPresets.eligibility.active) != 0 &&
             (entry->flags & g_battleMaskPresets.eligibility.excluded) == 0) {
-            s32 channel = sequence * 20;
+            s32 channel = sequence++ * 20;
             BattleRosterRecordA *record = &battle->roster[index];
             FUN_004fc094(channel, unit, 0, record, 0, entry->maxHp, -1, -1,
                          entry->hp, entry->maxHp, 0, 0, 1, 0, 0, 0, 0, 0,
                          0, 0, 1, 0, 1, 1, 0, 1);
             FUN_004fb43c(channel, unit, 0x10000CD, 1, 0, 0, 0);
             FUN_004fbc30(channel + 25, unit, record, 0);
-            ++sequence;
         }
     }
     return 1;

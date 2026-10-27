@@ -7,7 +7,7 @@
 extern "C" {
 
 extern CameraVectorScratch DAT_006471dc;
-extern Vector4 DAT_005c1120;
+extern Vector4 g_effectRingScratchColor;
 
 void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, const f32 *world);
 
@@ -15,8 +15,8 @@ void FUN_002a1850(f32 *screen, s32 display, const ProjectionMatrices *camera, co
 f32 FUN_002cf548(void)
 {
     const ProjectionMatrices *camera = reinterpret_cast<const ProjectionMatrices *>(FUN_00152f54());
-    DAT_005c1120 = DAT_006471dc.direction;
-    f32 world[3] = {DAT_005c1120.x, DAT_005c1120.y, DAT_005c1120.z};
+    g_effectRingScratchColor = DAT_006471dc.direction;
+    f32 world[3] = {g_effectRingScratchColor.x, g_effectRingScratchColor.y, g_effectRingScratchColor.z};
     Vector4 projected;
     FUN_002a1850(&projected.x, 0, camera, world);
     projected.w = 0.0f;

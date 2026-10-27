@@ -12,7 +12,7 @@ int asdListBoxCreateDefault(...);
 int jobSetText(...);
 int FUN_003c33c8(...);
 int FUN_003c39fc(...);
-int FUN_003c3da4(...);
+int btlDebugCreateUnitMenu(...);
 int FUN_003c40ac(...);
 int FUN_003c4524(...);
 int btlDebugCreatePanelMenu(...);
@@ -27,7 +27,7 @@ struct BattleCameraMenuContext;
 void btlDebugCreateAttackCameraMenu(BattleCameraMenuOwner *, BattleCameraMenuContext *);
 int FUN_003c5eb0(...);
 int FUN_003c5ffc(...);
-int FUN_003c63a8(...);
+int btlCameraDebugApplyMenuItem(...);
 
 int asdListBoxSetItemMode3(...);
 int listBoxItemHasOwner(...);
@@ -106,7 +106,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: FUN_003c3360. */
 /* Supplied declaration required: FUN_003c33c8. */
 /* Supplied declaration required: FUN_003c39fc. */
-/* Supplied declaration required: FUN_003c3da4. */
+/* Supplied declaration required: btlDebugCreateUnitMenu. */
 /* Supplied declaration required: FUN_003c40ac. */
 /* Supplied declaration required: FUN_003c4524. */
 /* Supplied declaration required: btlDebugCreatePanelMenu. */
@@ -119,7 +119,7 @@ extern unsigned int dataTableGetCount(unsigned int);
 /* Supplied declaration required: btlDebugCreateAttackCameraMenu. */
 /* Supplied declaration required: FUN_003c5eb0. */
 /* Supplied declaration required: FUN_003c5ffc. */
-/* Supplied declaration required: FUN_003c63a8. */
+/* Supplied declaration required: btlCameraDebugApplyMenuItem. */
 
 
 /* WARNING: Type propagation algorithm not settling */
@@ -496,7 +496,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
     if (param_1[3] != 0) {
       if (param_1[3] == 1) {
-        FUN_003c63a8(param_1,param_2,temp_v5);
+        btlCameraDebugApplyMenuItem(param_1,param_2,temp_v5);
       }
     }
     else {
@@ -519,7 +519,7 @@ unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
     temp_v5 = 0x1a;
     break;
   case 7:
-    FUN_003c3da4(param_1);
+    btlDebugCreateUnitMenu(param_1);
     temp_v5 = 8;
     break;
   case 8:

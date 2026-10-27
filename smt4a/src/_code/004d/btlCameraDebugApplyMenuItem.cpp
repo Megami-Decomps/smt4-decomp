@@ -16,7 +16,7 @@ f32 *asdListBoxGetFloatValuePtr(AsdListBox *list, u32 index);
 void transitionResetPosition(BtlCameraA *camera);
 
 // Apply a debug-menu change to camera toggles or scalar/vector parameters.
-void FUN_004d5fc0(CameraDebugMenu *menu, u32 unused, u32 index)
+void btlCameraDebugApplyMenuItem(CameraDebugMenu *menu, u32 unused, u32 index)
 {
     switch (index) {
     case 0:

@@ -22,7 +22,7 @@ void FUN_00227200(u32 list, void (*draw)(const Point2 *, const u32 *, u32), u32 
 void FUN_002271e8(u32 list, s32 width, s32 height);
 void jobSetText(u32 list, const char *text);
 void asdListBoxAddItem(u32 list, const char *text);
-void asdListBoxSetFloatItem(u32 list, u32 index, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 list, u32 index, f32 value, s32 minimum, s32 maximum);
 void asdListBoxSetItemMode3(u32 list, u32 index, u32 value, u32 minimum, u32 maximum, u8 flags);
 void asdListBoxSetByteValue(u32 list, u8 value);
 
@@ -42,9 +42,9 @@ void btlCameraEditorInitializeList(BattleCameraEditorWork *work, u32 unused, voi
         asdListBoxAddItem(list, DAT_004005dc);
         asdListBoxAddItem(list, DAT_004005d0);
         const f32 *position = mode == 0 ? g_btlMain->cameraEditor.vectors[0] : g_btlMain->cameraEditor.vectors[1];
-        asdListBoxSetFloatItem(list, 0, -1000, 1000, position[0]);
-        asdListBoxSetFloatItem(list, 1, -1000, 1000, position[1]);
-        asdListBoxSetFloatItem(list, 2, -1000, 1000, position[2]);
+        asdListBoxSetFloatItem(list, 0, position[0], -1000, 1000);
+        asdListBoxSetFloatItem(list, 1, position[1], -1000, 1000);
+        asdListBoxSetFloatItem(list, 2, position[2], -1000, 1000);
     } else if (mode == 2) {
         g_btlMain->cameraEditor.value = 0;
         jobSetText(list, DAT_004005f4);

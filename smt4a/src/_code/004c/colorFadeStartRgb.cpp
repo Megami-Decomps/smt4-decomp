@@ -1,4 +1,3 @@
-/* NON_MATCHING: same instructions; block layout differs: retail lays the `mode == 0` block out after the final `str flags; bx lr` (beq to it, b back); built falls through into it. */
 #include "common.h"
 
 extern "C" {
@@ -17,21 +16,19 @@ typedef struct Slot {
 } Slot;
 
 /* Sets the slot's mode and base color (alpha byte cleared); a zero mode also copies the base color in. */
-void FUN_004cb348(u32 unused, Slot *slot, s32 mode, u32 color)
+void colorFadeStartRgb(u32 unused, Slot *slot, s32 mode, u32 color)
 {
-    u32 flags;
+    u32 flags = slot->flags;
 
     slot->unk7C = 0;
     slot->mode = mode;
     slot->colorBase = color & ~0xFF;
-    flags = slot->flags;
-    if (mode != 0) {
-        flags |= 0x1000;
-    }
     slot->colorOld = slot->color & ~0xFF;
     if (mode == 0) {
         flags &= ~0x1000;
         slot->color = (slot->color & 0xFF) | (color & ~0xFF);
+    } else {
+        flags |= 0x1000;
     }
     slot->flags = flags;
 }

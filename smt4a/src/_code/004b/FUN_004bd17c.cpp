@@ -16,7 +16,7 @@ extern "C" void FUN_004bd17c(ItemRankRecord *record)
                 ItemRankDefinition *item = (ItemRankDefinition *)dataTable04FindById(record->items[i]);
                 if (item && item->category < 18) {
                     u32 category = item->category;
-                    s8 rank = record->ranks[i] + record->categoryRanks[category];
+                    s8 rank = record->categoryRanks[category] + record->ranks[i];
                     record->ranks[i] = rank;
                     if (rank > 9)
                         record->ranks[i] = 9;

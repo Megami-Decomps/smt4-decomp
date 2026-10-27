@@ -16,7 +16,7 @@ extern u8 DAT_00557fcc;
 extern u8 DAT_005b40b4;
 
 FileResult FUN_002e09b4(FileObject *file, s32 path, u32 mode);
-FileResult FUN_002bee0c(FileObject *file);
+FileResult archiveStreamOpenConverted(FileObject *file);
 FileResult FUN_0032cab4(FileObject *file);
 FileResult FUN_002befc0(void);
 FileResult FUN_0032c900(FileObject *file, s32 path, u32 size);
@@ -58,7 +58,7 @@ u32 FUN_0037adac(s32 media, s32 path, u32 buffer, u32 size)
         result = FUN_002e09b4(&file, path, 1);
         break;
     case 1:
-        result = FUN_002bee0c(&file);
+        result = archiveStreamOpenConverted(&file);
         break;
     case 2:
         result = FUN_0032cab4(&file);

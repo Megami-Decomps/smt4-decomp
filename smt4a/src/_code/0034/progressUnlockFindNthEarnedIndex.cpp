@@ -1,4 +1,3 @@
-/* NON_MATCHING: compiler inserts an extra nop hint between earned-bit test and skip branch; remaining operations/registers match. */
 #include "gamedata/DataTable.h"
 #include "shard/Shard003D.h"
 #include "shard/ProgressUnlock.h"
@@ -11,11 +10,12 @@ static __inline bool unlockBitIsEarned(s32 index)
 {
     s32 byteIndex = index / 8;
     s32 bitIndex = index % 8;
-    return (progressUnlockByteGet(&reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byteIndex]) & (1u << bitIndex)) != 0;
+    const u8 *byte = &reinterpret_cast<GameBlock2830C *>(gameDataBlocksGetSaveData())->unlocks.earned[byteIndex];
+    return (*byte & (1u << bitIndex)) != 0;
 }
 
 /* Returns the table index of the nth earned progress unlock, or the table count if fewer are earned. */
-s32 FUN_00344bc8(s32 nth)
+s32 progressUnlockFindNthEarnedIndex(s32 nth)
 {
     s32 count = dataTableGetCount(dataTableGet(0x4a, 0));
     s32 index = 0;

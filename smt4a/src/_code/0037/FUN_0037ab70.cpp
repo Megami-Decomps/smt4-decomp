@@ -32,11 +32,11 @@ enum {
 extern StreamTemplate DAT_00557fcc;
 
 u32 FUN_002e09b4(LocalStream *stream, u32 name, u32 mode);
-u32 FUN_002bee0c(LocalStream *stream);
+u32 archiveStreamOpenConverted(LocalStream *stream);
 u32 FUN_0032cab4(LocalStream *stream);
 u32 FUN_002befc0(LocalStream *stream);
 u32 FUN_002e0a6c(LocalStream *stream, u32 offset, u32 buffer, u32 size);
-u32 FUN_002beec4(LocalStream *stream);
+u32 positionedFileReadAtReport(LocalStream *stream);
 u32 taggedOwnerRelease2(LocalStream *stream);
 u32 holderReleaseObject(LocalStream *stream);
 u32 taggedOwnerRelease(LocalStream *stream);
@@ -57,7 +57,7 @@ u32 FUN_0037ab70(s32 kind, u32 name, u32 buffer, u32 size)
     if (kind == 0) {
         result = FUN_002e09b4(&stream, name, 2);
     } else if (kind == 1) {
-        result = FUN_002bee0c(&stream);
+        result = archiveStreamOpenConverted(&stream);
     } else if (kind == 2) {
         result = FUN_0032cab4(&stream);
     } else if (kind == 3) {
@@ -69,9 +69,9 @@ u32 FUN_0037ab70(s32 kind, u32 name, u32 buffer, u32 size)
         if (kind == 0) {
             result = FUN_002e0a6c(&stream, 0, buffer, size);
         } else if (kind == 1) {
-            result = FUN_002beec4(&stream);
+            result = positionedFileReadAtReport(&stream);
         } else if (kind == 3) {
-            result = FUN_002bf040((PositionedStream *)&stream, 0, (void *)buffer, size);
+            result = positionedStreamSeekTransfer((PositionedStream *)&stream, 0, (void *)buffer, size);
         } else {
             result = STREAM_ERROR;
         }

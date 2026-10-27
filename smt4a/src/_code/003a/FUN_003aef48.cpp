@@ -11,7 +11,7 @@ int FUN_00167c14(...);
 int sysPlaySe(...);
 int msgWindowReset(void);
 int gameDataToggleFlagSet(...);
-int FUN_00344bc8(...);
+int progressUnlockFindNthEarnedIndex(...);
 int controllerApplyPreset(...);
 int screenStartOrClear(...);
 int FUN_00387ad8(int, int);
@@ -44,7 +44,7 @@ extern unsigned int overlayGetStatusScene(void);
 extern unsigned int dataTableGetEntryValue(void);
 extern int gameDataToggleFlagIsSet(void);
 /* Supplied declaration required: gameDataToggleFlagSet. */
-/* Supplied declaration required: FUN_00344bc8. */
+/* Supplied declaration required: progressUnlockFindNthEarnedIndex. */
 /* Supplied declaration required: controllerApplyPreset. */
 /* Supplied declaration required: screenStartOrClear. */
 /* Supplied declaration required: FUN_00387ad8. */
@@ -434,7 +434,7 @@ unsigned int FUN_003aef48(int param_1)
           }
         }
         else {
-          temp_v0 = FUN_00344bc8(temp_v1 + *(int *)(param_1 + 0x120));
+          temp_v0 = progressUnlockFindNthEarnedIndex(temp_v1 + *(int *)(param_1 + 0x120));
           *(unsigned char *)(*(int *)(param_1 + 8) + 0x23) = temp_v0;
           temp_v4 = dataTableGetEntryValue();
           screenStartOrClear(*(unsigned int *)(param_1 + 0x58),temp_v4);
@@ -527,11 +527,11 @@ LAB_003af720:
     temp_v7 = temp_v8;
   }
   if (*(int *)(param_1 + 0x14c) == 2) {
-    temp_v4 = FUN_00344bc8(temp_v7);
+    temp_v4 = progressUnlockFindNthEarnedIndex(temp_v7);
     if ((-1 < temp_v7) && (temp_v1 = gameDataToggleFlagIsSet(), temp_v1 != 0)) {
       gameDataToggleFlagSet(temp_v4,0);
     }
-    temp_v4 = FUN_00344bc8(temp_v10);
+    temp_v4 = progressUnlockFindNthEarnedIndex(temp_v10);
     if ((-1 < temp_v10) && (temp_v1 = gameDataToggleFlagIsSet(), temp_v1 != 0)) {
       gameDataToggleFlagSet(temp_v4,0);
     }

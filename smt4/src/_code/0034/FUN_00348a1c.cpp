@@ -1,4 +1,4 @@
-/* NON_MATCHING: ported smt4a FUN_00417c24 structure (release helper, gameFlagWrite with keep); only the final bits/flags read-modify-write temporaries take r0/r1 where retail has r2/r0. */
+/* NON_MATCHING: ported smt4a FUN_00417c24 structure (release helper, gameFlagWrite with keep, flags loaded before the secondary bits); only the secondary-bits temporary takes r1 where retail has r2. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "gamedata/GameDataAccess_VariantA.h"
@@ -59,8 +59,8 @@ u32 FUN_00348a1c(u32 index)
         if (entry->flags & 2) {
             flagEntryReleaseCurrent(index);
         }
-        u8 bits = entry->secondaryFlags;
         u8 flags = entry->flags;
+        u8 bits = entry->secondaryFlags;
         entry->value = 0;
         entry->secondaryFlags = bits & ~0x5;
         entry->flags = flags & ~0xe3;

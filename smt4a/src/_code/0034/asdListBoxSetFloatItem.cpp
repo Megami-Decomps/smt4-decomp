@@ -6,7 +6,7 @@ AsdListBoxItem *asdListBoxFindItem(AsdListBox *, u32);
 void asdListBoxMarkDirty(AsdListBox *);
 
 // Configure an existing list-box row as a ranged floating-point item.
-void asdListBoxSetFloatItem(AsdListBox *listBox, u32 id, s32 minimum, s32 maximum, f32 value)
+void asdListBoxSetFloatItem(AsdListBox *listBox, u32 id, f32 value, s32 minimum, s32 maximum)
 {
     AsdListBoxItem *item = asdListBoxFindItem(listBox, id);
     if (item != NULL) {

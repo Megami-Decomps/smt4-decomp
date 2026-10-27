@@ -81,7 +81,7 @@ u32 tableGroupFindEntryIndex(u32 group, const char *name);
 void scrScriptProcessStartEntry(u32 script, u32 entry);
 s32 scrRunOpcodesStub(u32 script);
 s32 gameFlagIsSet(u32 flag);
-s32 FUN_00387f88(s32 system, s32 kind);
+s32 packageListCountSectionRecords(s32 system, s32 kind);
 MenuEntry *contentEntryGetFromFilesByKind(s32 system, s32 kind, s32 index);
 void FUN_003bb9d4(void *list);
 s32 gameStateIsFlagSetAndLarge(void);
@@ -141,7 +141,7 @@ void FUN_0022b29c(MenuWindow *window, s32 selected, s32 state)
     for (s32 i = 0; i < entryCount; i++) {
         listIfAvailable(window, &entries[i], buckets, window->scriptGroup, window->script);
     }
-    s32 extraCount = FUN_00387f88(g_aocSystem, window->state + 1);
+    s32 extraCount = packageListCountSectionRecords(g_aocSystem, window->state + 1);
     for (s32 i = 0; i < extraCount; i++) {
         listIfAvailable(window, contentEntryGetFromFilesByKind(g_aocSystem, window->state + 1, i), buckets,
                         window->scriptGroup, window->script);

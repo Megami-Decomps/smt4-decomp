@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `mvn r3, #0` where armcc emits `mvn ip, #0`. */
 #include "common.h"
 
 extern "C" {
@@ -20,9 +19,9 @@ void campCecEditCancel(void)
 {
     CecEdit *edit = g_campCecEdit;
     if (edit != NULL && edit->state == 16) {
+        edit->mode = 2;
         edit->state = -1;
         edit->nextState = 17;
-        edit->mode = 2;
         edit->counter = 0;
         sysPlaySe(228);
         buttonHelpSetText(0, 0xf4f4f4ff);

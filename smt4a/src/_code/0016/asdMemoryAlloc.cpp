@@ -13,7 +13,7 @@ extern "C" {
 
 extern AllocatorLock g_allocationAddressRanges;
 
-void FUN_0018003c(void);
+void asdAllocatorLock(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, s32 extra);
 void *FUN_001844ac(void *block, u32 size, u32 alignment, u32 flags);
 void rt_memclr(void *memory, u32 size);
@@ -34,14 +34,14 @@ void *asdMemoryAlloc(u32 heap, u32 b, u32 c, u32 size, s32 extra)
 {
     void *memory;
     if (heap != 0x20000 && heap != 0x30000) {
-        FUN_0018003c();
+        asdAllocatorLock();
         u32 paddedSize = (size + 0x13f) & ~0x7f;
         void *block = asdMemoryAllocImpl(heap, b, c, paddedSize, extra);
         memory = FUN_001844ac(block, paddedSize, 0x80, 0);
         rt_memclr(memory, size);
         allocatorUnlock();
     } else {
-        FUN_0018003c();
+        asdAllocatorLock();
         memory = asdMemoryAllocImpl(heap, b, c, size, extra);
         allocatorUnlock();
     }

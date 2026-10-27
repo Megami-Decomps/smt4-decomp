@@ -13,12 +13,17 @@ typedef struct Tracker {
     /* 0x4125 */ u8 mode[5];
 } Tracker;
 
+static __inline void trackerStoreByte(u8 *field, u32 value)
+{
+    *field = value;
+}
+
 /* Enables slot `index` with the given value and mode, and adds `amount` to the total its mode selects (0 or 1). */
 void FUN_00336aec(Tracker *tracker, s32 amount, s32 index, u8 value, s32 mode)
 {
-    tracker->enabled[index] = 1;
-    tracker->mode[index] = mode;
-    tracker->value[index] = value;
+    trackerStoreByte(&tracker->enabled[index], 1);
+    trackerStoreByte(&tracker->mode[index], mode);
+    trackerStoreByte(&tracker->value[index], value);
     tracker->unk410C[index] = 0;
     if (mode == 0) {
         tracker->totalA[index] += amount;

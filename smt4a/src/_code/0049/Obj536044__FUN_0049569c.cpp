@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail's two `element->mode = 2` stores re-materialise the 2 (a one-instruction `str r1,[r0,#264]` setter inlined by armlink; matched with such a setter row, but the caption select still differs: retail `addne r0,r4,#108; moveq r0,r4` vs ours `addne r4,r4,#108; mov r0,r4`). */
 #include "ui/PlaceTextTransition.h"
 #include "ui/SceneResourceWait.h"
 
@@ -11,8 +10,8 @@ static inline void placeTextChangeState(PlaceTextTransition *transition, s32 nex
 
 extern "C" {
 u32 FUN_004962e4(SceneResourceWaitState *state);
-PlaceTextLayoutElement *FUN_00275bc8(void *source, u32 size);
-void uiElementSetMode(PlaceTextLayoutElement *element, s32 mode);
+ScriptProcess *FUN_00275bc8(void *source, u32 size);
+void scriptProcessSetMode(ScriptProcess *process, s32 mode);
 void FUN_003d54f8(s32 screen, s32 frames);
 const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s32 index);
 s32 dataTable17Count(PlaceTextTableCursor *cursor);
@@ -24,12 +23,12 @@ void placeWinStartText(const char *text);
 void _ZN9Obj53604412FUN_0049569cEv(PlaceTextTransition *transition)
 {
     if (FUN_004962e4(reinterpret_cast<SceneResourceWaitState *>(transition)) != 0) {
-        PlaceTextLayoutElement *element = FUN_00275bc8(transition->layoutSource, transition->layoutSize);
-        transition->first = element;
-        uiElementSetMode(element, 2);
-        element = FUN_00275bc8(transition->layoutSource, transition->layoutSize);
-        transition->second = element;
-        uiElementSetMode(element, 2);
+        ScriptProcess *process = FUN_00275bc8(transition->layoutSource, transition->layoutSize);
+        transition->first = process;
+        scriptProcessSetMode(process, 2);
+        process = FUN_00275bc8(transition->layoutSource, transition->layoutSize);
+        transition->second = process;
+        scriptProcessSetMode(process, 2);
         FUN_003d54f8(0, 10);
         FUN_003d54f8(1, 10);
         u8 area = transition->area;
@@ -45,7 +44,13 @@ void _ZN9Obj53604412FUN_0049569cEv(PlaceTextTransition *transition)
         }
         PlaceTextTableCursor selectedCursor;
         const PlaceTextRecord *record = dataTable17Type1GetEntry(&selectedCursor, selected);
-        placeWinStartText(gameFlagIsSet(record->alternateFlag) == 0 ? record->text : record->alternateText);
+        const char *caption;
+        if (gameFlagIsSet(record->alternateFlag) != 0) {
+            caption = record->alternateText;
+        } else {
+            caption = record->text;
+        }
+        placeWinStartText(caption);
         placeTextChangeState(transition, 1);
     }
 }

@@ -1,5 +1,10 @@
-/* NON_MATCHING: the three phase lookups schedule with different register pressure than retail (same situation as FUN_00236350: extra saves of r8/r9 and d8-d9, table loads not paired as retail's); retail also copies the position and translation as 3-word struct copies (ldm/stm) where this writes float stores. */
+/* NON_MATCHING: the position now copies as a three-float struct (ldm/stm) like retail; remaining: the three phase lookups schedule with different register pressure (extra saves of r8/r9 and d8-d9, table loads not paired as retail's), and retail also copies the translation as a 3-word struct. */
 #include "shard/W6_W6Match6_PhaseTrig.h"
+
+/* Three scalar floats copied as a group. */
+struct PhasePosition {
+    f32 x, y, z;
+};
 
 /* A node transform: three rows of rotation plus translation, then the node position and the dirty flags. */
 struct EulerTransform {
@@ -9,13 +14,13 @@ struct EulerTransform {
     /* 0x1C */ f32 translationY;
     /* 0x20 */ f32 rotation20, rotation21, rotation22;
     /* 0x2C */ f32 translationZ;
-    /* 0x30 */ f32 position[3];
+    /* 0x30 */ PhasePosition position;
     /* 0x3C */ u32 flags;
 };
 
 /* Description of a placement: position, XYZ Euler angles (radians) and translation. */
 struct EulerPlacement {
-    /* 0x00 */ f32 position[3];
+    /* 0x00 */ PhasePosition position;
     /* 0x0C */ f32 angles[3];
     /* 0x18 */ f32 translation[3];
 };
@@ -26,9 +31,7 @@ extern const PhaseTrigEntry DAT_00407ed0[];
 /* Builds a rotation matrix from XYZ Euler angles and sets its translation and position. */
 void FUN_0036a104(EulerTransform *matrix, const EulerPlacement *placement)
 {
-    matrix->position[0] = placement->position[0];
-    matrix->position[1] = placement->position[1];
-    matrix->position[2] = placement->position[2];
+    matrix->position = placement->position;
 
     f32 xPhase = placement->angles[0] * 40.743664f;
     f32 yPhase = placement->angles[1] * 40.743664f;

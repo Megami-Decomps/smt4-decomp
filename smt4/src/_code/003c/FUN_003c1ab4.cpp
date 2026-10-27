@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler hoists the signed-halfword conversion and uses MLA, while retail uses two SMLABB operations. Candidate O2. */
+/* NON_MATCHING: both products use `mla`; retail uses `smlabb` (halfword multiply-accumulate) because it cannot see the byte gains as small values. */
 #include "common.h"
 
 struct GrowthParameters {
@@ -15,10 +15,11 @@ struct GrowthValues {
 };
 
 // Calculate the two growth values, applying the second-value percentage and upper cap.
-extern "C" void FUN_003c1ab4(s32 level, GrowthValues* output, const GrowthParameters* parameters)
+extern "C" void FUN_003c1ab4(s16 level, GrowthValues* output, const GrowthParameters* parameters)
 {
-    s32 first = (s16)level * (s16)parameters->firstGain + parameters->firstBase;
-    output->first = first <= 9999 ? (u16)first : 9999;
-    s32 second = ((s16)level * (s16)parameters->secondGain + parameters->secondBase) * 45 / 100;
+    s32 first = level * parameters->firstGain + parameters->firstBase;
+    u16 firstValue = first <= 9999 ? (u16)first : 9999;
+    output->first = firstValue;
+    s32 second = (level * parameters->secondGain + parameters->secondBase) * 45 / 100;
     output->second = second <= 9999 ? (u16)second : 9999;
 }

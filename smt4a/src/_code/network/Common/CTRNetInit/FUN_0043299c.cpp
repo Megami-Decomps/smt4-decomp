@@ -21,9 +21,8 @@ u32 FUN_0043299c(s32 *result)
 {
     asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\network\\Common\\CTRNetInit.cpp", 223);
     DAT_00588114 = (u32)memAlloc(0x100, 0x100, 0, 0x40000, 0x1000, 1);
-    s32 created = socketInitializeWithWorkBuffer(DAT_00588114, entry3F94Address(0x10000, 4), 0x10000, 4);
-    *result = created;
-    if (nnResultIsFailure(created)) {
+    *result = socketInitializeWithWorkBuffer(DAT_00588114, entry3F94Address(0x10000, 4), 0x10000, 4);
+    if (nnResultIsFailure(*result)) {
         sysFatalBreak();
     }
     s32 status = *result;

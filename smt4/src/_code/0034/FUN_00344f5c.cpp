@@ -33,7 +33,7 @@ int buttonHelpGetMode(...);
 int buttonHelpSetPreset(...);
 int FUN_00343f44(...);
 int FUN_003c0d70(...);
-int FUN_003c149c(...);
+int colorFadeStartRgb(...);
 int btlEffectDisableModels(...);
 int FUN_003d9f74(...);
 int keyedValueFindPair(...);
@@ -181,7 +181,7 @@ extern unsigned int FUN_0039474c(void);
 /* Supplied declaration required: btlMessageStartUnlessFlagged. */
 /* Supplied declaration required: FUN_003c0d70. */
 /* Supplied declaration required: driftObjectStart. */
-/* Supplied declaration required: FUN_003c149c. */
+/* Supplied declaration required: colorFadeStartRgb. */
 /* Supplied declaration required: FUN_003c1a2c. */
 extern int btlSlotsGetMaxValue(int);
 /* Supplied declaration required: FUN_003d1388. */
@@ -834,7 +834,7 @@ LAB_00345938:
         }
       }
       else {
-        FUN_003c149c(*param_1,temp_v5,temp_v4,temp_v8);
+        colorFadeStartRgb(*param_1,temp_v5,temp_v4,temp_v8);
       }
       psVar2[0x12] = psVar2[0x12] + 1;
       temp_v1 = 1;

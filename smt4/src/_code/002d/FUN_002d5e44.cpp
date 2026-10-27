@@ -23,7 +23,7 @@ typedef struct {
 
 extern unsigned char DAT_00420b78; /* 0x420b78 */
 
-extern int FUN_001ff93c(unsigned char **);
+extern int archiveStreamOpenConverted(unsigned char **);
 extern int requestSubmitRecordById(void);
 /* Supplied declaration required: fileOwnerCloseA. */
 /* Supplied declaration required: fileOwnerCloseB. */
@@ -67,7 +67,7 @@ unsigned int FUN_002d5e44(int param_1,unsigned int param_2)
       }
     }
     else {
-      temp_v0 = FUN_001ff93c(&temp_v1);
+      temp_v0 = archiveStreamOpenConverted(&temp_v1);
     }
   }
   else {

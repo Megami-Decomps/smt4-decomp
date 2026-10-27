@@ -28,7 +28,8 @@ s32 FUN_001f3e80(s32 a, s32 b, s32 period, s32 time, s32 invert)
     if (time < 0) {
         time = -time;
     }
-    offset = (time % period - half) * range / half;
+    s32 phase = time % period;
+    offset = (phase - half) * range / half;
     if (offset < 0) {
         offset = -offset;
     }

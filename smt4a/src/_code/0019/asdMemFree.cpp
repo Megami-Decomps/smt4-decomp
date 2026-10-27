@@ -9,7 +9,7 @@ extern "C" {
 
 extern AllocatorState g_allocationAddressRanges;
 
-void FUN_0018003c(void);
+void asdAllocatorLock(void);
 void *FUN_0017fe8c(void *memory);
 void asdMemoryFreeRegion(void *memory);
 
@@ -27,7 +27,7 @@ static __inline void allocatorUnlock(AllocatorState &state)
 // translated to their owning block.
 void asdMemFree(void *memory)
 {
-    FUN_0018003c();
+    asdAllocatorLock();
     u32 address = (u32)memory;
     u32 firstStart = g_allocationAddressRanges.firstRangeStart;
     u32 secondStart = g_allocationAddressRanges.secondRangeStart;

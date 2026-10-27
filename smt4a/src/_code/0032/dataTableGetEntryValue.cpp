@@ -4,7 +4,11 @@
 extern "C" {
 struct Entry { u8 unk00[0x20]; u16 value; u8 unk22[0xA]; };
 u16 dataTableGetEntryValue(u32 index) {
-    const Entry *entry = (const Entry *)dataTableGetEntries(dataTableGet(0x4A, 0)) + index;
-    return entry ? entry->value : 0;
+    Entry *entries = (Entry *)dataTableGetEntries(dataTableGet(0x4A, 0));
+    Entry *entry = &entries[index];
+    if (entry != NULL) {
+        return entry->value;
+    }
+    return 0;
 }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: Native result construction uses a merged failure path and a different saved-register frame. */
+/* NON_MATCHING: native result construction uses a merged failure path and a different saved-register frame; retail also keeps the constant 1 in r8. */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 

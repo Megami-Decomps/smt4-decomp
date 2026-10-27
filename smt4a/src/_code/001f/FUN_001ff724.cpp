@@ -1,239 +1,155 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001ff724` (_code @ 0x1ff724, 0x478 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "code/Code001b.h"
+/* NON_MATCHING: only register assignment differs: retail keeps the menu in r6, the quest record in r7 and the alternate count in r8, while the build rotates them (count r6, menu r7, record r8); a branch-to-next after the default arm of the mode switch adds one row. */
+#include "common.h"
+#include "gamedata/GameDataAccess.h"
+#include "quest_center/QuestRequirement.h"
+#include "shard/W5_W5Match7_DataRecord.h"
+#include "shard/W6_W6Match3_ScrollSelection.h"
+
+/* The quest menu past UiQuestApoc's modelled prefix (only the fields used here). */
+struct QuestMenu {
+    /* 0x000 */ u8 unk000[0x93D];
+    /* 0x93D */ s8 filtered;
+    /* 0x93E */ u8 unk93E[7];
+    /* 0x945 */ s8 mode;
+    /* 0x946 */ u8 unk946[2];
+    /* 0x948 */ ScrollSelection primaryCursor;
+    /* 0x9AC */ ScrollSelection alternateCursor;
+    /* 0xA10 */ u16 primaryList[99];
+    /* 0xAD6 */ u16 alternateList[250];
+};
+
+struct SelectionPair {
+    u32 first;
+    u32 second;
+};
+
+typedef char QuestMenuOffsetCheck[
+    offsetof(QuestMenu, primaryCursor) == 0x948 && offsetof(QuestMenu, alternateCursor) == 0x9AC &&
+    offsetof(QuestMenu, primaryList) == 0xA10 && offsetof(QuestMenu, alternateList) == 0xAD6 ? 1 : -1];
 
 extern "C" {
+extern QuestMenu *g_uiQuest;
+void *sysMemClear(void *destination, u32 size);
+void rt_memclr(void *destination, u32 size);
+void qsort(void *elements, u32 count, u32 elementSize, int (*compare)(const void *, const void *));
+int dataTable1bOr1cCompareRecordKeys(const void *first, const void *second);
+u32 FUN_001bd100(u32 id);
+s32 FUN_003df004(u32 quest, s32 index, QuestRequirementProgress *progress);
+u32 partyEntryFlagsBit1(s32 index);
+u32 partyEntryFlagsBit3(s32 index);
+u8 idIsAtLeast350(u32 value);
+s32 FUN_00284dbc(u32 id);
+void FUN_00203b40(ScrollSelection *list, s32 count, s32 columns, s32 first, s32 second, s32 third);
+void FUN_002a4964(ScrollSelection *list, s32 index);
+void uiQuestSortListByEntryKind(s32 mode);
+s32 uiSearchPrimary(ScrollSelection *list);
+s32 objectApplyIfUnblocked(ScrollSelection *list);
+SelectionPair *gameDataGetIndexedPair(s32 index);
+void scrollOwnerSetValue(ScrollSelection *list, s32 value);
+void flaggedEntrySetValueA(ScrollSelection *list, s32 value);
 
-int qsort(...);
-int FUN_001ad9b4(...);
-int FUN_00203b40(...);
-int scrollOwnerSetValue(...);
-int FUN_002a4964(...);
-int gameDataGetIndexedPair(...);
-int sysMemClear(...);
-int rt_memclr(...);
-int flaggedEntrySetValueA(...);
-int uiQuestSortListByEntryKind(...);
-
-/* stack frame of void: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-} void_stack;
-
-extern int dataTable1bOr1cCompareRecordKeys(...); /* 0x29093c */
-extern int g_uiQuest; /* 0x57f28c */
-
-/* Supplied declaration required: qsort. */
-extern int idIsAtLeast350(unsigned int);
-extern int gameFlagEntryGetBit(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_001ad9b4. */
-/* Supplied declaration required: FUN_00203b40. */
-/* Supplied declaration required: scrollOwnerSetValue. */
-/* Supplied declaration required: FUN_002a4964. */
-/* Supplied declaration required: gameDataGetIndexedPair. */
-extern int objectApplyIfUnblocked(int);
-/* Supplied declaration required: sysMemClear. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: flaggedEntrySetValueA. */
-extern int uiSearchPrimary(int);
-/* Supplied declaration required: uiQuestSortListByEntryKind. */
-extern int FUN_003df004(unsigned int, int, int *);
-extern int partyEntryFlagsBit3(unsigned int);
-extern int partyEntryFlagsBit1(unsigned short);
-
-
-void FUN_001ff724(void)
-
+/* Whether one of the quest's requirements still blocks it from the alternate list. */
+static __inline bool questRequirementBlocks(u32 id)
 {
-/* irregular: 4 goto(s); 11 native warning(s); review required */
-  char temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  int temp_v4;
-  int *piVar6;
-  unsigned int *puVar7;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  int temp_v9;
-  int temp_v10 [3];
-  
-  temp_v5 = g_uiQuest;
-  temp_v9 = 0;
-  temp_v8 = 0;
-  sysMemClear(g_uiQuest + 0xa10,0xc6);
-  rt_memclr(temp_v5 + 0xad6,500);
-  temp_v7 = 0;
-  do {
-    temp_v1 = gameFlagEntryGetBit(temp_v7,0);
-    if (temp_v1 == 0) goto LAB_001ff908;
-    do {
-      if ((temp_v7 < 0x15e) || (temp_v2 = temp_v7, FUN_001ad9b4(), temp_v2 != 0)) {
-        temp_v1 = FUN_001bd100(temp_v7);
-        if (temp_v1 != 0) {
-          temp_v1 = temp_v9 * 2;
-          temp_v9 = temp_v9 + 1;
-          *(short *)(temp_v5 + temp_v1 + 0xa10) = (short)temp_v7;
-        }
-        else if (*(char *)(temp_v5 + 0x93d) != '\0') {
-          temp_v2 = temp_v7;
-          FUN_001ad9b4();
-          if ((temp_v2 != 0) && (*(char *)(temp_v2 + 6) == '\0')) {
-            temp_v1 = 0;
-            do {
-              temp_v3 = FUN_003df004(temp_v7,temp_v1,temp_v10);
-              if ((temp_v3 != 0) && ((temp_v3 = partyEntryFlagsBit3(temp_v7), temp_v3 != 0 || (0 < temp_v10[0]))))
-              goto LAB_001ff908;
-              temp_v1 = temp_v1 + 1;
-            } while (temp_v1 < 4);
-            temp_v1 = idIsAtLeast350(temp_v7);
-            if ((temp_v1 == 0) && (*(short *)(temp_v2 + 0x124) != 0)) {
-              switch(*(unsigned char *)(temp_v5 + 0x945)) {
-              case 0:
-                break;
-              case 1:
-                if (*(short *)(temp_v2 + 0x124) == 1) {
-                  temp_v1 = temp_v8 * 2;
-                  temp_v8 = temp_v8 + 1;
-                  *(short *)(temp_v5 + temp_v1 + 0xad6) = (short)temp_v7;
-                }
-                break;
-              default:
-                if (*(short *)(temp_v2 + 0x124) != 1) {
-                  temp_v1 = temp_v8 * 2;
-                  temp_v8 = temp_v8 + 1;
-                  *(short *)(temp_v5 + temp_v1 + 0xad6) = (short)temp_v7;
-                }
-                break;
-              case 9:
-              case 10:
-              case 0xb:
-              case 0xc:
-              case 0xd:
-                temp_v1 = temp_v8 * 2;
-                temp_v8 = temp_v8 + 1;
-                *(short *)(temp_v5 + temp_v1 + 0xad6) = (short)temp_v7;
-              }
-            }
-            else {
-              temp_v1 = temp_v8 * 2;
-              temp_v8 = temp_v8 + 1;
-              *(short *)(temp_v5 + temp_v1 + 0xad6) = (short)temp_v7;
-            }
-          }
-        }
-        else {
-          temp_v1 = temp_v8 * 2;
-          temp_v8 = temp_v8 + 1;
-          *(short *)(temp_v5 + temp_v1 + 0xad6) = (short)temp_v7;
-        }
-      }
-LAB_001ff908:
-      temp_v7 = (temp_v7 + 1) & 0xffff;
-      if (temp_v7 >= 400) {
-        qsort(temp_v5 + 0xa10,temp_v9,2,dataTable1bOr1cCompareRecordKeys);
-        temp_v1 = temp_v5 + 0x948;
-        temp_v10[0] = 1;
-        temp_v10[1] = 1;
-        FUN_00203b40(temp_v1,temp_v9,10,1);
-        temp_v3 = temp_v5 + 0x9ac;
-        temp_v10[0] = 1;
-        temp_v10[1] = 1;
-        FUN_00203b40(temp_v3,temp_v8,10,1);
-        uiQuestSortListByEntryKind(0);
-        temp_v6 = 0;
-        if (temp_v9 < 1) goto LAB_001ff9d0;
-        goto LAB_001ff990;
-      }
-    } while (temp_v7 >= 0x15e);
-  } while( 1 );
-  while (temp_v6 = temp_v6 + 1, temp_v6 < temp_v9) {
-LAB_001ff990:
-    temp_v4 = partyEntryFlagsBit1(*(unsigned short *)(temp_v5 + temp_v6 * 2 + 0xa10));
-    if (temp_v4 != 0) {
-      FUN_002a4964(temp_v1,temp_v6);
-      break;
+    for (s32 index = 0; 4 > index; index++) {
+        QuestRequirementProgress progress;
+        if (FUN_003df004(id, index, &progress) != 0 &&
+            ((partyEntryFlagsBit3(id) != 0 && FUN_00284dbc(id) == 0) || progress.remaining > 0))
+            return true;
     }
-  }
-LAB_001ff9d0:
-  temp_v9 = 0;
-  if (0 < temp_v8) {
-    do {
-      temp_v6 = temp_v5 + temp_v9 * 2;
-      temp_v4 = partyEntryFlagsBit1(*(unsigned short *)(temp_v6 + 0xad6));
-      if (temp_v4 != 0) {
-        temp_v7 = (unsigned int)*(unsigned short *)(temp_v6 + 0xad6);
-        FUN_001ad9b4();
-        temp_v0 = '\0';
-        if (temp_v7 != 0) {
-          temp_v0 = *(char *)(temp_v7 + 6);
-        }
-        if ((temp_v7 != 0 && temp_v0 != '\0') && temp_v0 != '\n') {
-          FUN_002a4964(temp_v3,temp_v9);
-          break;
-        }
-      }
-      temp_v9 = temp_v9 + 1;
-    } while (temp_v9 < temp_v8);
-  }
-  if (*(char *)(temp_v5 + 0x93d) != '\0') {
-    return;
-  }
-  temp_v8 = gameDataGetIndexedPair(0);
-  temp_v8 = *(int *)(temp_v8 + 4);
-  piVar6 = (int *)gameDataGetIndexedPair(0);
-  if (*(short *)(temp_v5 + (*piVar6 + temp_v8) * 2 + 0xa10) != 0) {
-    temp_v8 = gameDataGetIndexedPair(0);
-    temp_v6 = *(int *)(temp_v8 + 4);
-    temp_v8 = uiSearchPrimary(temp_v1);
-    temp_v9 = objectApplyIfUnblocked(temp_v1);
-    if (temp_v9 < temp_v6 + temp_v8) {
-      temp_v8 = gameDataGetIndexedPair(0);
-      *(unsigned int *)(temp_v8 + 4) = 0;
-      puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
-      *puVar7 = 0;
-    }
-  }
-  else {
-    temp_v8 = gameDataGetIndexedPair(0);
-    *(unsigned int *)(temp_v8 + 4) = 0;
-    puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
-    *puVar7 = 0;
-  }
-  temp_v8 = gameDataGetIndexedPair(0);
-  scrollOwnerSetValue(temp_v1,*(unsigned int *)(temp_v8 + 4));
-  puVar7 = (unsigned int *)gameDataGetIndexedPair(0);
-  flaggedEntrySetValueA(temp_v1,*puVar7);
-  temp_v8 = gameDataGetIndexedPair(1);
-  temp_v8 = *(int *)(temp_v8 + 4);
-  piVar6 = (int *)gameDataGetIndexedPair(1);
-  if (*(short *)(temp_v5 + (*piVar6 + temp_v8) * 2 + 0xad6) != 0) {
-    temp_v5 = gameDataGetIndexedPair(1);
-    temp_v9 = *(int *)(temp_v5 + 4);
-    temp_v5 = uiSearchPrimary(temp_v3);
-    temp_v8 = objectApplyIfUnblocked(temp_v3);
-    if (temp_v9 + temp_v5 <= temp_v8) {
-      temp_v5 = gameDataGetIndexedPair(1);
-      scrollOwnerSetValue(temp_v3,*(unsigned int *)(temp_v5 + 4));
-      puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
-      flaggedEntrySetValueA(temp_v3,*puVar7);
-      return;
-    }
-  }
-  temp_v5 = gameDataGetIndexedPair(1);
-  *(unsigned int *)(temp_v5 + 4) = 0;
-  puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
-  *puVar7 = 0;
-  temp_v5 = gameDataGetIndexedPair(1);
-  scrollOwnerSetValue(temp_v3,*(unsigned int *)(temp_v5 + 4));
-  puVar7 = (unsigned int *)gameDataGetIndexedPair(1);
-  flaggedEntrySetValueA(temp_v3,*puVar7);
-  return;
+    return false;
 }
 
-} /* extern "C" */
+/* Rebuilds the quest menu's two lists (available quests and accepted ones) and restores the cursors. */
+void FUN_001ff724(void)
+{
+    QuestMenu *menu = g_uiQuest;
+    s32 primaryCount;
+    s32 alternateCount;
+    alternateCount = primaryCount = 0;
+    sysMemClear(menu->primaryList, 0xC6);
+    rt_memclr(menu->alternateList, 500);
+    for (u16 id = 0; id < 400; id++) {
+        if (id < 0x15E && gameFlagEntryGetBit(id, 0) == 0)
+            continue;
+        if (id < 0x15E || FUN_001ad9b4(id) != NULL) {
+            if (FUN_001bd100(id) != 0) {
+                menu->primaryList[primaryCount++] = id;
+            } else {
+                bool include = true;
+                if (menu->filtered != 0) {
+                    ItemDataRecord *quest = FUN_001ad9b4(id);
+                    if (quest == NULL || quest->ordering.sortGroup != 0)
+                        continue;
+                    if (questRequirementBlocks(id))
+                        continue;
+                    if (idIsAtLeast350(id) == 0 && quest->filter.kind != 0) {
+                        switch (menu->mode) {
+                        case 0:
+                            include = false;
+                            break;
+                        case 1:
+                            if (quest->filter.kind != 1)
+                                include = false;
+                            break;
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
+                        case 13:
+                            break;
+                        default:
+                            if (quest->filter.kind == 1)
+                                include = false;
+                            break;
+                        }
+                    }
+                    if (include)
+                        menu->alternateList[alternateCount++] = id;
+                } else {
+                    menu->alternateList[alternateCount++] = id;
+                }
+            }
+        }
+    }
+    qsort(menu->primaryList, primaryCount, 2, dataTable1bOr1cCompareRecordKeys);
+    FUN_00203b40(&menu->primaryCursor, primaryCount, 10, 1, 1, 1);
+    FUN_00203b40(&menu->alternateCursor, alternateCount, 10, 1, 1, 1);
+    uiQuestSortListByEntryKind(0);
+    for (s32 i = 0; i < primaryCount; i++) {
+        if (partyEntryFlagsBit1(menu->primaryList[i]) != 0) {
+            FUN_002a4964(&menu->primaryCursor, i);
+            break;
+        }
+    }
+    for (s32 i = 0; i < alternateCount; i++) {
+        if (partyEntryFlagsBit1(menu->alternateList[i]) != 0) {
+            ItemDataRecord *quest = FUN_001ad9b4(menu->alternateList[i]);
+            if (quest != NULL && quest->ordering.sortGroup != 0 && quest->ordering.sortGroup != 10) {
+                FUN_002a4964(&menu->alternateCursor, i);
+                break;
+            }
+        }
+    }
+    if (menu->filtered != 0)
+        return;
+    s32 offset = gameDataGetIndexedPair(0)->second;
+    if (menu->primaryList[gameDataGetIndexedPair(0)->first + offset] == 0 ||
+        gameDataGetIndexedPair(0)->second + uiSearchPrimary(&menu->primaryCursor) >
+            objectApplyIfUnblocked(&menu->primaryCursor)) {
+        gameDataGetIndexedPair(0)->second = 0;
+        gameDataGetIndexedPair(0)->first = 0;
+    }
+    scrollOwnerSetValue(&menu->primaryCursor, gameDataGetIndexedPair(0)->second);
+    flaggedEntrySetValueA(&menu->primaryCursor, gameDataGetIndexedPair(0)->first);
+    offset = gameDataGetIndexedPair(1)->second;
+    if (menu->alternateList[gameDataGetIndexedPair(1)->first + offset] == 0 ||
+        gameDataGetIndexedPair(1)->second + uiSearchPrimary(&menu->alternateCursor) >
+            objectApplyIfUnblocked(&menu->alternateCursor)) {
+        gameDataGetIndexedPair(1)->second = 0;
+        gameDataGetIndexedPair(1)->first = 0;
+    }
+    scrollOwnerSetValue(&menu->alternateCursor, gameDataGetIndexedPair(1)->second);
+    flaggedEntrySetValueA(&menu->alternateCursor, gameDataGetIndexedPair(1)->first);
+}
+}

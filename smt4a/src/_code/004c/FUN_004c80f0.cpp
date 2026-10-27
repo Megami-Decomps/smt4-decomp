@@ -1,4 +1,4 @@
-/* NON_MATCHING: unaligned embedded status-view paired loads and saved-register allocation differ. */
+/* NON_MATCHING: instructions and schedule match retail; only the saved-register numbering differs (retail: id r6, kind r7, delta r5). */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -39,9 +39,13 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
             return;
         }
         if (kind == 0) {
-            vitals->hp = clampVital(vitals->hp + delta, vitals->maxHp);
+            s32 hp = vitals->hp;
+            s32 maxHp = vitals->maxHp;
+            vitals->hp = clampVital(hp + delta, maxHp);
         } else if (kind == 1) {
-            vitals->mp = clampVital(vitals->mp + delta, vitals->maxMp);
+            s32 mp = vitals->mp;
+            s32 maxMp = vitals->maxMp;
+            vitals->mp = clampVital(mp + delta, maxMp);
         }
         BtlCombatantEntryA *entry = FUN_003f0e20(state, id);
         if (entry->record) {
@@ -68,7 +72,7 @@ void FUN_004c80f0(s32 id, s32 kind, s32 delta)
         if (kind == 0) {
             s32 current = record->current;
             s32 maximum = recordGetScaledMaximum(record);
-            record->current = clampVital(current + delta, maximum);
+            record->current = clampVital(delta + current, maximum);
         } else if (kind == 1) {
             record->secondaryCurrent = clampVital((s16)record->secondaryCurrent + delta,
                                                    (s16)record->secondaryMaximum);

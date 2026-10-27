@@ -1,11 +1,11 @@
-/* NON_MATCHING: final success result is materialized in r4 before r0, rather than r0 before r4. */
 #include "shard/W6_W6Match1_PositionedStream.h"
 
+#include "nn/Result.h"
 #include "sys/ProcessResult.h"
 #include "sys/RuntimeObjects.h"
 extern "C" void sysFatalBreak();
 
-static __inline u32 fileRecordResult(u32 result)
+static __inline nn::Result fileRecordResult(nn::Result result)
 {
     FUN_0013ebd8(result);
     return result;
@@ -22,9 +22,10 @@ static __inline void positionedFileClose(PositionedFileStream *stream)
 }
 
 // Read at an absolute offset, closing the file when seeking or reading fails.
-extern "C" s32 FUN_002e0a6c(PositionedFileStream *stream, u32 offset, void *buffer, u32 size)
+extern "C" nn::Result FUN_002e0a6c(PositionedFileStream *stream, u32 offset, void *buffer, u32 size)
 {
-    s32 result = stream->vtable->seek(stream, (u64)offset);
+    u64 position = offset;
+    nn::Result result = stream->vtable->seek(stream, position);
     FUN_0013ebd8(result);
     if ((s32)(result & 0x80000000) < 0) {
         positionedFileClose(stream);
@@ -33,7 +34,7 @@ extern "C" s32 FUN_002e0a6c(PositionedFileStream *stream, u32 offset, void *buff
     u32 completed;
     result = stream->vtable->transfer(stream, &completed, buffer, size);
     if (completed == 0)
-        result = (s32)0xd9004586;
+        result = 0xd9004586;
     FUN_0013ebd8(result);
     if ((s32)(result & 0x80000000) < 0) {
         positionedFileClose(stream);

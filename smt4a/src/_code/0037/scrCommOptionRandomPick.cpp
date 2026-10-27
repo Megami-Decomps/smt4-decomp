@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail shares one `mov r6,r1; b` block (result = choice, then a common scrSetResult) between the three picks; the build tail-merges only two of them */
 #include "common.h"
 
 extern "C" {
@@ -35,26 +34,15 @@ u32 scrCommOptionRandomPick(void)
             count++;
         }
         pick = randRange((u16)count);
-        if (options->choiceA != 0) {
-            if (pick == 0) {
-                result = options->choiceA;
-                scrSetResult(result);
-                return 1;
+        for (s32 i = 0; i < 3; i++) {
+            u16 choice = (&options->choiceA)[i];
+            if (choice != 0) {
+                if (pick == 0) {
+                    result = choice;
+                    break;
+                }
+                pick--;
             }
-            pick--;
-        }
-        if (options->choiceB != 0) {
-            if (pick == 0) {
-                result = options->choiceB;
-                scrSetResult(result);
-                return 1;
-            }
-            pick--;
-        }
-        if (options->choiceC != 0 && pick == 0) {
-            result = options->choiceC;
-            scrSetResult(result);
-            return 1;
         }
     }
     scrSetResult(result);

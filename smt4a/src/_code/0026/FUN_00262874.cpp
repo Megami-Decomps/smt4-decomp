@@ -101,7 +101,7 @@ int ifTouchRegionRemove(void);
 int uiSpriteSetKeyframe(int, int, int);
 int gameGetSlotTable(...);
 int __aeabi_memset4(...);
-int FUN_0020a760(...);
+int partyPanelHandleLayoutToggle(...);
 int FUN_0020b718(...);
 int FUN_0021c1e0(void);
 int FUN_00230ac0(...);
@@ -158,7 +158,7 @@ extern int gameSlotTableFindFree(void);
 extern int FUN_001ba3d4(unsigned short);
 /* Supplied declaration required: partyFindSlotById. */
 /* Supplied declaration required: menuStateStartConfirm. */
-/* Supplied declaration required: FUN_0020a760. */
+/* Supplied declaration required: partyPanelHandleLayoutToggle. */
 /* Supplied declaration required: partyPanelHandleCursorEdgeInput. */
 /* Supplied declaration required: FUN_0020b718. */
 /* Supplied declaration required: FUN_0020d934. */
@@ -446,7 +446,7 @@ unsigned int FUN_00262874(void)
     }
     break;
   case 1:
-    if ((((*(char *)(temp_v1 + 0x9b4) == '\x01') && (temp_v4 = FUN_0020a760(1), temp_v4 != 0)) &&
+    if ((((*(char *)(temp_v1 + 0x9b4) == '\x01') && (temp_v4 = partyPanelHandleLayoutToggle(1), temp_v4 != 0)) &&
         (temp_v4 = FUN_0022e714(), temp_v4 != 0)) && (temp_v4 = campCecHasObject(), temp_v4 != 0)) {
       FUN_0034cda0();
     }
@@ -628,7 +628,7 @@ LAB_00263038:
               eventQueueAddUniqueIfValid(temp_v10);
             }
             else {
-              FUN_0020a760(1);
+              partyPanelHandleLayoutToggle(1);
             }
           }
         }
@@ -922,7 +922,7 @@ LAB_00263984:
             eventQueueAddUniqueIfValid(temp_v10);
           }
           else {
-            temp_v4 = FUN_0020a760(1);
+            temp_v4 = partyPanelHandleLayoutToggle(1);
             if ((temp_v4 != 0) && (temp_v22 = temp_v1 + 0xc88, *(char *)(temp_v1 + 0x42) != '\0')) {
               temp_v22 = temp_v1 + 0xcec;
             }
@@ -1905,7 +1905,7 @@ LAB_002654dc:
           FUN_0033449c(0);
         }
         else {
-          temp_v4 = FUN_0020a760(temp_v0 != '\v');
+          temp_v4 = partyPanelHandleLayoutToggle(temp_v0 != '\v');
           if ((temp_v4 != 0) && (temp_v6 = temp_v1 + 0xd50, *(char *)(temp_v1 + 0x42) != '\0')) {
             temp_v6 = temp_v1 + 0xdb4;
           }
@@ -2062,7 +2062,7 @@ LAB_00265d24:
                 FUN_001517b4(3,1);
                 if (temp_v4 != 0) goto LAB_00265dc0;
               }
-              FUN_0020a760(1);
+              partyPanelHandleLayoutToggle(1);
               FUN_0034cda0();
               break;
             }

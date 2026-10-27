@@ -12,7 +12,7 @@ void efctSetSpeed(f32 speed);
 void asdTextDrawDirectoryEntry(u32 text, s32 a, u32 b, s32 c, s32 d, u32 name, s32 index);
 const char *FUN_0035aa90(s32 index);
 void asdTextFormatStream(u32 text, u32 a, u32 b, u32 c, u32 d, const char *format, ...);
-s32 FUN_00344bc8(s32 index);
+s32 progressUnlockFindNthEarnedIndex(s32 index);
 u32 gameDataToggleFlagIsSet(s32 bit);
 
 // Draws one list row: the frame and its pulsing highlight, the caption text chosen by `mode`
@@ -68,7 +68,7 @@ void FUN_0036cb0c(u32 text, u32 name, s32 base, s32 offset, s32 row, s32 selecte
                  frame->y + caption->y, 0x15, 1.0f);
     FUN_001527d8(text, 0xffffffff);
     if (mode == 1) {
-        s32 bit = FUN_00344bc8(index);
+        s32 bit = progressUnlockFindNthEarnedIndex(index);
         if (gameDataToggleFlagIsSet(bit) != 0) {
             TextureTableEntryIV* marker = asdTMTexTableEntryAt(0x14, 0x597);
             FUN_00164b5c(2, 0x14, 7, frame->x + marker->x, marker->y + frame->y, 0xc);

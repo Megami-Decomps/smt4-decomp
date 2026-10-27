@@ -1,168 +1,184 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003b875c` (_code @ 0x3b875c, 0x2e8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/W6_W6Match3_NodeEnable.h"
+/* NON_MATCHING: readable rewrite, control flow and instruction set match retail; remaining diffs: retail keeps r2/r3 across the uiClampScrollOffset calls (needs multifile), converts both centre values before the subtractions (vstmia of corner), sign-extends the page and the owner flag with ldrsb/sxth, and shares one base register for the model block. */
+#include "common.h"
+#include "ui/ScreenObject.h"
+
+/* The model object the info panel shows (observed prefix). */
+struct PanelModelOwner {
+    /* 0x00 */ u8 unk00[0x14];
+    /* 0x14 */ s8 locked;
+};
+
+/* What the panel's selection currently points at. */
+struct PanelSelection {
+    /* 0x00 */ u8 unk00[0x22];
+    /* 0x22 */ s16 centerX;
+    /* 0x24 */ s16 centerY;
+    /* 0x26 */ u8 unk26[2];
+    /* 0x28 */ s16 kind;
+    /* 0x2A */ u8 unk2A;
+    /* 0x2B */ s8 modelIndex;
+};
+
+struct PanelRecord {
+    /* 0x00 */ u8 unk00[0x86];
+    /* 0x86 */ u16 locked;
+};
+
+struct PanelPair {
+    u32 first;
+    u32 second;
+};
+
+struct PanelPoint {
+    f32 x;
+    f32 y;
+};
+
+/* The info panel's work area (only the fields the update touches). */
+struct PanelWork {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u32 flags;
+    /* 0x0024 */ u8 unk0024[4];
+    /* 0x0028 */ u32 state;
+    /* 0x002C */ u32 phase;
+    /* 0x0030 */ u8 unk0030[0xC];
+    /* 0x003C */ s16 mode;
+    /* 0x003E */ u8 unk003E[0xE];
+    /* 0x004C */ s16 page;
+    /* 0x004E */ u8 unk004E[0xA];
+    /* 0x0058 */ PanelPair view;
+    /* 0x0060 */ PanelPair viewCopy;
+    /* 0x0068 */ PanelPoint corner;
+    /* 0x0070 */ PanelPair target;
+    /* 0x0078 */ PanelPair targetCopy;
+    /* 0x0080 */ PanelPoint center;
+    /* 0x0088 */ s32 scrollFrame;
+    /* 0x008C */ s32 scrollLength;
+    /* 0x0090 */ u8 unk0090[0xC];
+    /* 0x009C */ u8 selection[0x632];
+    /* 0x06CE */ u8 refreshed;
+    /* 0x06CF */ u8 unk06CF[0x68D];
+    /* 0x0D5C */ PanelRecord *record;
+    /* 0x0D60 */ u8 unk0D60[0xF8];
+    /* 0x0E58 */ u8 recordShown;
+    /* 0x0E59 */ u8 unk0E59[3];
+    /* 0x0E5C */ PanelModelOwner *modelOwner;
+    /* 0x0E60 */ u32 files[10];
+    /* 0x0E88 */ u32 fileSizes[10];
+};
+
+/* The fields of g_gameState this update reads. */
+struct PanelGameState {
+    /* 0x000 */ u8 unk000[0x164];
+    /* 0x164 */ u16 questMenuBlocked;
+};
+
+#define PANEL_FLAG_LOCKED 0x40000000
+#define PANEL_FLAG_REFRESH 0x1000
+#define PANEL_FLAG_CONFIRM 0x80
 
 extern "C" {
-// The fields of g_gameState this function uses.
-struct GameStateView {
-    u8 pad000[0x100];
-    unsigned char f0049fa1c; /* 0x100 */
-};
-extern GameStateView g_gameState;
 
+extern PanelGameState g_gameState;
 
-int modelSetVisible(unsigned int, int);
-int uiClampScrollOffset(int, int);
-int FUN_00232848(void);
-int FUN_002328b4(void);
-int FUN_00234cd8(unsigned int, int, int);
-void nodeOwnerSetEnabled(NodeEnableOwner* owner, int enabled);
-int FUN_002758d8(void);
-int objModelCreateFromSource(unsigned int, unsigned int, unsigned int);
-int objModelDestroy(unsigned int);
-int FUN_003b9c00(int);
-int VectorSignedToFloat(int, int);
+PanelSelection *FUN_0022b8c0(void *selection);
+PanelSelection *FUN_0022b238(void *selection);
+s32 FUN_003bb620(void *selection);
+s32 flaggedValueHolderGetTotal(void *selection);
+void modelSetVisible(PanelModelOwner *owner, s32 visible);
+void nodeOwnerSetEnabled(PanelModelOwner *owner, s32 enabled);
+void FUN_00234cd8(PanelModelOwner *owner, s32 kind, s32 flag);
+void objModelDestroy(PanelModelOwner *owner);
+void objModelCreateFromSource(PanelModelOwner *owner, u32 file, u32 size);
+void FUN_002328b4(void);
+void FUN_00232848(void);
+void FUN_002758d8(void);
+void FUN_003b9c00(PanelWork *work);
+s32 gameFlagIsSet(u32 flag);
+s32 inputIsQuestConfirmPressed(void);
+s32 inputIsQuestMenuPressed(void);
 
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_1_stack;
-
-
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-extern int FUN_0022b238(int);
-/* Supplied declaration required: modelSetVisible. */
-/* Supplied declaration required: uiClampScrollOffset. */
-extern int FUN_0022b8c0(int);
-/* Supplied declaration required: FUN_00232848. */
-/* Supplied declaration required: FUN_002328b4. */
-extern unsigned short flaggedValueHolderGetTotal(int);
-/* Supplied declaration required: FUN_00234cd8. */
-/* Supplied declaration required: nodeOwnerSetEnabled. */
-extern int inputIsQuestConfirmPressed(void);
-/* Supplied declaration required: FUN_002758d8. */
-extern int inputIsQuestMenuPressed(void);
-/* Supplied declaration required: objModelCreateFromSource. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: objModelDestroy. */
-/* Supplied declaration required: FUN_003b9c00. */
-extern int FUN_003bb620(int);
-
-
-void FUN_003b875c(int param_1)
-
+/* Keeps the info panel's model, scroll position and page in step with the selection, then handles
+ * the panel's confirm / menu input. */
+void FUN_003b875c(PanelWork *work)
 {
-/* irregular: irregular input(s): in_fpscr; 11 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned int *puVar10;
-  unsigned int in_fpscr;
-  float temp_v9;
-  float temp_v10;
-  unsigned int temp_v11;
-  
-  temp_v2 = FUN_0022b8c0(param_1 + 0x9c);
-  temp_v3 = FUN_003bb620(param_1 + 0x9c);
-  puVar10 = (unsigned int *)(param_1 + 0xe5c);
-  if ((*(char *)(param_1 + 0xe58) != '\0') &&
-     (*(short *)(param_1 + 0x3c) == 4 || *(short *)(param_1 + 0x3c) == 3)) {
-    if ((!(*(short *)(temp_v2 + 0x28) == 0 || *(short *)(temp_v2 + 0x28) == 6)) ||
-       (*(char *)(*(int *)(param_1 + 0xe5c) + 0x14) != '\0')) {
-      modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),0);
-      temp_v4 = *puVar10;
-      temp_v7 = 1;
+    bool selectionMoved = false;
+    PanelSelection *previous = FUN_0022b8c0(work->selection);
+    if (FUN_003bb620(work->selection) != 0) {
+        selectionMoved = true;
     }
-    else {
-      modelSetVisible(*(unsigned int *)(param_1 + 0xe5c),1);
-      temp_v4 = *puVar10;
-      temp_v7 = 0;
+
+    if (work->recordShown != 0 && (work->mode == 4 || work->mode == 3)) {
+        if ((previous->kind == 0 || previous->kind == 6) && work->modelOwner->locked == 0) {
+            modelSetVisible(work->modelOwner, 1);
+            nodeOwnerSetEnabled(work->modelOwner, 0);
+        } else {
+            modelSetVisible(work->modelOwner, 0);
+            nodeOwnerSetEnabled(work->modelOwner, 1);
+        }
     }
-    nodeOwnerSetEnabled((NodeEnableOwner*)temp_v4,temp_v7);
-  }
-  temp_v5 = FUN_0022b8c0(param_1 + 0x9c);
-  if ((temp_v5 != temp_v2) || ((*(unsigned int *)(param_1 + 0x20) & 0x40000000) != 0)) {
-    temp_v5 = FUN_0022b8c0(param_1 + 0x9c);
-    temp_v0 = *(short *)(temp_v5 + 0x22);
-    temp_v5 = FUN_0022b8c0(param_1 + 0x9c);
-    temp_v5 = (int)*(short *)(temp_v5 + 0x24);
-    temp_v9 = (float)VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) | 0x1000;
-    temp_v10 = (float)VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v4 = 10;
-    *(unsigned int *)(param_1 + 0x60) = *(unsigned int *)(param_1 + 0x58);
-    *(unsigned int *)(param_1 + 100) = *(unsigned int *)(param_1 + 0x5c);
-    *(float *)(param_1 + 0x68) = temp_v9 - 200.0f;
-    *(float *)(param_1 + 0x6c) = temp_v10 - 120.0f;
-    uiClampScrollOffset(param_1,param_1 + 0x60);
-    uiClampScrollOffset(param_1,param_1 + 0x68);
-    *(unsigned int *)(param_1 + 0x78) = *(unsigned int *)(param_1 + 0x70);
-    temp_v11 = VectorSignedToFloat(temp_v5,(unsigned char)(in_fpscr >> 0x16) & 3);
-    temp_v7 = VectorSignedToFloat((int)temp_v0,(unsigned char)(in_fpscr >> 0x16) & 3);
-    *(unsigned int *)(param_1 + 0x7c) = *(unsigned int *)(param_1 + 0x74);
-    *(unsigned int *)(param_1 + 0x80) = temp_v7;
-    *(unsigned int *)(param_1 + 0x84) = temp_v11;
-    *(unsigned int *)(param_1 + 0x8c) = temp_v4;
-    *(unsigned int *)(param_1 + 0x88) = 0;
-    temp_v1 = flaggedValueHolderGetTotal(param_1 + 0x9c);
-    *(unsigned short *)(param_1 + 0x4c) = temp_v1;
-    if (*(char *)(param_1 + 0xe58) != '\0') {
-      temp_v5 = FUN_0022b238(param_1 + 0x9c);
-      temp_v8 = (int)*(short *)(temp_v5 + 0x28);
-      if (((*(short *)(param_1 + 0x3c) != 4 && *(short *)(param_1 + 0x3c) != 3) ||
-          (temp_v8 != 0 && temp_v8 != 6)) ||
-         (*(short *)(temp_v2 + 0x28) != 0 && *(short *)(temp_v2 + 0x28) != 6)) {
-        FUN_00234cd8(*(unsigned int *)(param_1 + 0xe5c),temp_v8,0);
-      }
-      if (-1 < *(char *)(temp_v5 + 0x2b)) {
-        objModelDestroy(*(unsigned int *)(param_1 + 0xe5c));
-        temp_v2 = param_1 + *(char *)(temp_v5 + 0x2b) * 4;
-        objModelCreateFromSource(*puVar10,*(unsigned int *)(temp_v2 + 0xe60),*(unsigned int *)(temp_v2 + 0xe88));
-      }
+
+    if (FUN_0022b8c0(work->selection) != previous || (work->flags & PANEL_FLAG_LOCKED) != 0) {
+        s16 x = FUN_0022b8c0(work->selection)->centerX;
+        s16 y = FUN_0022b8c0(work->selection)->centerY;
+
+        work->flags |= PANEL_FLAG_REFRESH;
+        work->viewCopy.first = work->view.first;
+        work->viewCopy.second = work->view.second;
+        work->corner.x = (f32)x - 200.0f;
+        work->corner.y = (f32)y - 120.0f;
+        uiClampScrollOffset(reinterpret_cast<ScreenObject *>(work), reinterpret_cast<f32 *>(&work->viewCopy));
+        uiClampScrollOffset(reinterpret_cast<ScreenObject *>(work), &work->corner.x);
+        work->targetCopy.first = work->target.first;
+        work->targetCopy.second = work->target.second;
+        work->center.x = (f32)x;
+        work->center.y = (f32)y;
+        work->scrollLength = 10;
+        work->scrollFrame = 0;
+        s16 page = flaggedValueHolderGetTotal(work->selection);
+        work->page = page;
+        if (work->recordShown != 0) {
+            PanelSelection *current = FUN_0022b238(work->selection);
+            s32 kind = current->kind;
+
+            if (!(work->mode == 4 || work->mode == 3) || (kind != 0 && kind != 6) ||
+                (previous->kind != 0 && previous->kind != 6)) {
+                FUN_00234cd8(work->modelOwner, kind, 0);
+            }
+            if (current->modelIndex >= 0) {
+                objModelDestroy(work->modelOwner);
+                u32 *slot = &work->files[current->modelIndex];
+                objModelCreateFromSource(work->modelOwner, slot[0], slot[10]);
+            }
+        }
     }
-  }
-  temp_v6 = *(unsigned int *)(param_1 + 0x20);
-  if (temp_v3 != 0) {
-    if ((temp_v6 & 0x40000000) == 0) {
-      FUN_002328b4();
+
+    if (selectionMoved) {
+        if ((work->flags & PANEL_FLAG_LOCKED) == 0) {
+            FUN_002328b4();
+        }
+    } else if ((work->flags & PANEL_FLAG_LOCKED) == 0) {
+        if (g_gameState.questMenuBlocked != 0) {
+            work->state = 8;
+            work->phase = 0;
+            return;
+        }
+        if ((work->flags & PANEL_FLAG_CONFIRM) != 0 ||
+            (gameFlagIsSet(0x404) != 0 && inputIsQuestConfirmPressed() != 0)) {
+            work->flags &= ~PANEL_FLAG_CONFIRM;
+            FUN_002758d8();
+            work->state = 7;
+            work->phase = 0;
+            return;
+        }
+        if (inputIsQuestMenuPressed() != 0 && work->record->locked == 0) {
+            FUN_003b9c00(work);
+            FUN_00232848();
+        }
+        return;
     }
-  }
-  else if ((temp_v6 & 0x40000000) == 0) {
-    if ((*(short *)((unsigned char *)&g_gameState.f0049fa1c + 0x64)) != 0) {
-      *(unsigned int *)(param_1 + 0x28) = 8;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      return;
-    }
-    if (((temp_v6 & 0x80) != 0) ||
-       ((temp_v2 = gameFlagIsSet(0x404), temp_v2 != 0 && (temp_v2 = inputIsQuestConfirmPressed(), temp_v2 != 0)))) {
-      *(unsigned int *)(param_1 + 0x20) = *(unsigned int *)(param_1 + 0x20) & 0xffffff7f;
-      FUN_002758d8();
-      *(unsigned int *)(param_1 + 0x28) = 7;
-      *(unsigned int *)(param_1 + 0x2c) = 0;
-      return;
-    }
-    temp_v2 = inputIsQuestMenuPressed();
-    if (temp_v2 == 0) {
-      return;
-    }
-    if (*(short *)(*(int *)(param_1 + 0xd5c) + 0x86) != 0) {
-      return;
-    }
-    FUN_003b9c00(param_1);
-    FUN_00232848();
-    return;
-  }
-  *(unsigned int *)(param_1 + 0x20) = (*(unsigned int *)(param_1 + 0x20) & 0xbfffffff) | 0x2000;
-  *(unsigned char *)(param_1 + 0x6ce) = 1;
-  return;
+    work->flags = (work->flags & ~PANEL_FLAG_LOCKED) | 0x2000;
+    work->refreshed = 1;
 }
 
 } /* extern "C" */

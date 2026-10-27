@@ -58,8 +58,8 @@ s32 FUN_003c7760(BtlTask *task, BtlMainState *state)
                 state->flags &= ~BTL_FLAG_UI;
             }
         }
-        task->state = 0;
         state->flags &= ~BTL_FLAG_ACTIVE;
+        task->state = 0;
         battleResetCounterAndFlag(DAT_00435d18);
     }
     if (task->frames < 0xFFFF) {

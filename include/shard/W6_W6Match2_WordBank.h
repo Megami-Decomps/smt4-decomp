@@ -9,7 +9,7 @@ struct WordBank {
     u32 unk0c;      // 0x0c
     u32 unk10;      // 0x10
     u32 unk14;      // 0x14
-    u32 words[32];  // 0x18
+    void *words[32];  // 0x18 tracked slots (pointer-typed: retail clears them with an unrolled loop)
     u32 unk98;      // 0x98
     u32 unk9c;      // 0x9c
     u16 flags;      // 0xa0

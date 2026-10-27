@@ -44,7 +44,7 @@ void jobStop(u32 job, s32 mode);
 void asdListBoxAddItems(u32 job, const AsdListBoxEntry *items, u32 count);
 void jobSetText(u32 job, const char *text);
 void asdListBoxSetToggleItem(u32 job, s32 item, s32 value);
-void asdListBoxSetFloatItem(u32 job, u32 item, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 job, u32 item, f32 value, s32 minimum, s32 maximum);
 void asdListBoxSetByteValue(u32 list, u8 value);
 
 // Recreate the attack-camera debug controls from the camera's flags and the debug parameters.
@@ -64,21 +64,21 @@ void FUN_004d5578(BattleDebugPanelWork *work, BtlMainStateA *battle)
     asdListBoxSetByteValue(work->panelJob, 1);
     jobSetText(work->panelJob, "Attack Camera Menu");
     asdListBoxSetToggleItem(work->panelJob, 0, (g_btlCamera->flags & 0x100) >> 8);
-    asdListBoxSetFloatItem(work->panelJob, 1, -10, 10, reinterpret_cast<CameraEffectView *>(g_btlCamera)->value);
+    asdListBoxSetFloatItem(work->panelJob, 1, reinterpret_cast<CameraEffectView *>(g_btlCamera)->value, -10, 10);
     asdListBoxSetToggleItem(work->panelJob, 2, (DAT_005715f8.markerMask & battle->markerMasks.bits) != 0);
-    asdListBoxSetFloatItem(work->panelJob, 3, -100, 100, DAT_005e1554[0]);
-    asdListBoxSetFloatItem(work->panelJob, 4, -100, 100, DAT_005e1554[2]);
-    asdListBoxSetFloatItem(work->panelJob, 5, -100, 100, DAT_00571570);
-    asdListBoxSetFloatItem(work->panelJob, 6, -100, 100, DAT_00571574);
-    asdListBoxSetFloatItem(work->panelJob, 7, -50, 200, DAT_00571578);
+    asdListBoxSetFloatItem(work->panelJob, 3, DAT_005e1554[0], -100, 100);
+    asdListBoxSetFloatItem(work->panelJob, 4, DAT_005e1554[2], -100, 100);
+    asdListBoxSetFloatItem(work->panelJob, 5, DAT_00571570, -100, 100);
+    asdListBoxSetFloatItem(work->panelJob, 6, DAT_00571574, -100, 100);
+    asdListBoxSetFloatItem(work->panelJob, 7, DAT_00571578, -50, 200);
     asdListBoxSetIntItem(work->panelJob, 8, DAT_0057157c, -1, 100, 0);
     asdListBoxSetIntItem(work->panelJob, 9, DAT_00571514, -1, 100, 0);
     asdListBoxSetIntItem(work->panelJob, 10, DAT_00571518, 0, 2, 0);
-    asdListBoxSetFloatItem(work->panelJob, 11, -90, 90, DAT_00571580);
+    asdListBoxSetFloatItem(work->panelJob, 11, DAT_00571580, -90, 90);
     asdListBoxSetIntItem(work->panelJob, 12, DAT_00571584, -1, 100, 0);
     asdListBoxSetIntItem(work->panelJob, 13, DAT_00571520, -1, 100, 0);
     asdListBoxSetIntItem(work->panelJob, 14, DAT_00571588, 0, 2, 0);
-    asdListBoxSetFloatItem(work->panelJob, 15, -90, 90, DAT_0057158c);
+    asdListBoxSetFloatItem(work->panelJob, 15, DAT_0057158c, -90, 90);
     asdListBoxSetIntItem(work->panelJob, 16, DAT_00571590, -1, 100, 0);
     asdListBoxSetIntItem(work->panelJob, 17, DAT_00571524, -1, 100, 0);
     asdListBoxSetIntItem(work->panelJob, 18, DAT_00571594, 0, 2, 0);

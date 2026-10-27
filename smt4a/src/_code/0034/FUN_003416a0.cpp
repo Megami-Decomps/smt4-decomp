@@ -24,7 +24,7 @@ typedef struct {
 extern unsigned char DAT_00558024; /* 0x558024 */
 
 /* Supplied declaration required: fileHandleClose. */
-extern int FUN_002bee0c(unsigned char **);
+extern int archiveStreamOpenConverted(unsigned char **);
 extern int FUN_002befc0(void);
 extern int FUN_002e09b4(unsigned char **, unsigned int, unsigned int);
 /* Supplied declaration required: holderReleaseObject. */
@@ -67,7 +67,7 @@ unsigned int FUN_003416a0(int param_1,unsigned int param_2)
       }
     }
     else {
-      temp_v0 = FUN_002bee0c(&temp_v1);
+      temp_v0 = archiveStreamOpenConverted(&temp_v1);
     }
   }
   else {

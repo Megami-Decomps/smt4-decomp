@@ -17,7 +17,7 @@ void jobSetWork7C(u32 job, void (*first)(void), void (*second)(void));
 void FUN_002e0898(u32 job, s32 x, s32 y);
 void jobSetText(u32 job, const char *text);
 void asdListBoxAddItem(u32 job, const char *text);
-void asdListBoxSetFloatItem(u32 job, s32 item, s32 minimum, s32 maximum, f32 value);
+void asdListBoxSetFloatItem(u32 job, s32 item, f32 value, s32 minimum, s32 maximum);
 void asdListBoxSetIntItem(u32 job, s32 item, s32 value, s32 minimum, s32 maximum, s32 flags);
 void asdListBoxSetByteValue(u32 job, s32 enabled);
 
@@ -39,9 +39,9 @@ void btlCreateCameraEditor(CameraEditorWork *editor, u32 context, u32 parent, u3
         asdListBoxAddItem(list, DAT_0052818c);
         const f32 *values = mode == 0 ? (const f32 *)g_btlCamera->unk1C :
             (const f32 *)(g_btlCamera->unk1C + 12);
-        asdListBoxSetFloatItem(list, 0, -1000, 1000, values[0]);
-        asdListBoxSetFloatItem(list, 1, -1000, 1000, values[1]);
-        asdListBoxSetFloatItem(list, 2, -1000, 1000, values[2]);
+        asdListBoxSetFloatItem(list, 0, values[0], -1000, 1000);
+        asdListBoxSetFloatItem(list, 1, values[1], -1000, 1000);
+        asdListBoxSetFloatItem(list, 2, values[2], -1000, 1000);
     } else if (mode == 2) {
         g_btlCamera->movement.duration = 0;
         jobSetText(list, DAT_005281b0);

@@ -1230,35 +1230,38 @@ typedef char ButtonHelpGlobalsPrefixALayoutCheck[
     offsetof(ButtonHelpGlobalsPrefixA, state) == 4 &&
     sizeof(ButtonHelpGlobalsPrefixA) == 8 ? 1 : -1];
 
-/* Accessed prefix only; neither the record extent nor its trailing text length is known. */
-struct ResourceDescriptorRecordPrefixA {
-    u8 unk00[0x0c];
+/* Identifier and packed attributes (kind in bits 0-7, variation 8-15, media 16-23) of a descriptor record. */
+struct ResourceDescriptorKeyA {
     u32 identifier;
     u32 attributes;
 };
+
+/* Accessed prefix only; neither the record extent nor its trailing text length is known. */
+struct ResourceDescriptorRecordPrefixA {
+    u8 unk00[0x0c];
+    ResourceDescriptorKeyA key;
+};
 typedef char ResourceDescriptorRecordPrefixALayoutCheck[
     offsetof(ResourceDescriptorRecordPrefixA, unk00) == 0 &&
-    offsetof(ResourceDescriptorRecordPrefixA, identifier) == 0x0c &&
-    offsetof(ResourceDescriptorRecordPrefixA, attributes) == 0x10 &&
+    offsetof(ResourceDescriptorRecordPrefixA, key) == 0x0c &&
+    offsetof(ResourceDescriptorKeyA, attributes) == 4 &&
     sizeof(ResourceDescriptorRecordPrefixA) == 0x14 ? 1 : -1];
 
 /* Accessed prefix of DAT_0061b000, not the extent initialized by initBlockE30. */
 struct ResourceDescriptorPrefixA {
     u8 unk00[8];
-    u32 packedIdentifier;
-    u32 formatFlags;
+    u64 programId; /* mode, id and format of the descriptor */
     u32 parsedLow;
     u32 parsedHigh;
     u32 value;
 };
 typedef char ResourceDescriptorPrefixALayoutCheck[
     offsetof(ResourceDescriptorPrefixA, unk00) == 0 &&
-    offsetof(ResourceDescriptorPrefixA, packedIdentifier) == 8 &&
-    offsetof(ResourceDescriptorPrefixA, formatFlags) == 0x0c &&
+    offsetof(ResourceDescriptorPrefixA, programId) == 8 &&
     offsetof(ResourceDescriptorPrefixA, parsedLow) == 0x10 &&
     offsetof(ResourceDescriptorPrefixA, parsedHigh) == 0x14 &&
     offsetof(ResourceDescriptorPrefixA, value) == 0x18 &&
-    sizeof(ResourceDescriptorPrefixA) == 0x1c ? 1 : -1];
+    sizeof(ResourceDescriptorPrefixA) == 0x20 ? 1 : -1];
 
 // Table 4, subtable 1: the search stride is explicitly 0x3C.
 // This is not the canonical 0x40-byte Table04Record or Table04ExtraRecord.

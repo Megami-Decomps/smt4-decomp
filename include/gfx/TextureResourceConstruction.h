@@ -28,7 +28,10 @@ struct TextureConstructionDescription {
           flags(0x20000), mipFlags(0x30000), cube(0) {}
 };
 struct TextureResourceFormats {
-    u16 values[14];
+    union {
+        u16 values[14];
+        u32 words[7];
+    };
 };
 typedef char TextureResourceFormatsSizeCheck[sizeof(TextureResourceFormats) == 0x1c ? 1 : -1];
 struct ConstructedTexture;

@@ -83,7 +83,7 @@ extern float g_polyDefaultColor; /* 0x5c1100 */
 extern float DAT_005c1104; /* 0x5c1104 */
 extern float DAT_005c1108; /* 0x5c1108 */
 extern float DAT_005c110c; /* 0x5c110c */
-extern float DAT_005c1120; /* 0x5c1120 */
+extern float g_effectRingScratchColor; /* 0x5c1120 */
 extern float DAT_005c1124; /* 0x5c1124 */
 extern float DAT_005c1128; /* 0x5c1128 */
 extern float DAT_005c112c; /* 0x5c112c */
@@ -305,11 +305,11 @@ void FUN_003ab438(fn_003ab438_arg0 *param_1)
                 *pfVar15 = DAT_006472dc;
                 pfVar15[1] = DAT_005c1124;
                 pfVar15[2] = DAT_005c1128;
-                DAT_005c1120 = (DAT_006472dc - DAT_006472ec) - DAT_006472ec;
+                g_effectRingScratchColor = (DAT_006472dc - DAT_006472ec) - DAT_006472ec;
                 DAT_005c1124 = (DAT_006472e0 - DAT_006472f0) - DAT_006472f0;
                 DAT_005c1128 = (DAT_006472e4 - DAT_006472f4) - DAT_006472f4;
                 DAT_005c112c = (DAT_006472e8 - DAT_006472f8) - DAT_006472f8;
-                pfVar15[3] = DAT_005c1120;
+                pfVar15[3] = g_effectRingScratchColor;
                 pfVar15[4] = DAT_005c1124;
                 pfVar15[5] = DAT_005c1128;
                 pfVar17[3] = pfVar17[3] + pfVar17[4];

@@ -1,4 +1,4 @@
-/* NON_MATCHING: close: retail's last loop returns from inside without unrolling and keeps the table base in r0 (index in r2); armcc unrolls the same loop by two when it returns directly, and the break form needs an extra result register */
+/* NON_MATCHING: the last loop now returns from inside without unrolling (while form); remaining: retail enters each table loop with a predicated `movne r2, #0` and compares the item count with `subs`/`movhi`, plus register numbering. */
 #include "common.h"
 #include <stddef.h>
 
@@ -99,13 +99,14 @@ u32 FUN_0046e458(ResourceSet *set, u16 id)
     }
     items = FUN_001b31ac(model);
     count = FUN_001b31e0(model);
-    for (i = 0; i < count; i++) {
+    i = 0;
+    while (i < count) {
         if (items[i * 0x40] == 5 && model->links[i].active != 0) {
-            result = model->links[i].value;
-            break;
+            return model->links[i].value;
         }
+        i++;
     }
-    return result;
+    return 0;
 }
 
 } /* extern "C" */

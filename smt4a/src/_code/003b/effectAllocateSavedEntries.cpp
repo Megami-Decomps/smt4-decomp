@@ -1,4 +1,3 @@
-/* NON_MATCHING: effect record allocation/copy and literal data match; only address/size calculation scheduling and scratch registers differ. */
 #include "shard/W6_W6Match7_KeyedRecordStorage.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -9,16 +8,15 @@ void __aeabi_memcpy4(void *destination, const void *source, u32 size);
 }
 
 // Preserve up to 64 effect records in the selected keyed slot.
-extern "C" void FUN_003b6728(u32 index, const EffectSaveRecord *records, s32 count)
+extern "C" void effectAllocateSavedEntries(u32 index, const EffectSaveRecord *records, s32 count)
 {
     if (count > 64)
         return;
-    KeyedEffectSaveStorage *storage = &g_keyedRecords[index];
     if (count > 0) {
         asdDebugTrace("c:\\SMT4F\\SMT4F\\sdds4\\program\\battle\\Effect\\EffectSave.c", 213);
-        u32 size = count * sizeof(EffectSaveRecord);
-        storage->records = (EffectSaveRecord *)asdMemoryAlloc(0x100, 0x100, 0, size, 1);
-        __aeabi_memcpy4(storage->records, records, size);
+        void *copy = asdMemoryAlloc(0x100, 0x100, 0, count * sizeof(EffectSaveRecord), 1);
+        g_keyedRecords[index].records = static_cast<EffectSaveRecord *>(copy);
+        __aeabi_memcpy4(copy, records, count * sizeof(EffectSaveRecord));
     }
-    storage->count = count;
+    g_keyedRecords[index].count = count;
 }

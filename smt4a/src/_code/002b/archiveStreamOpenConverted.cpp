@@ -1,7 +1,7 @@
-/* NON_MATCHING: error path still loads r4 then copies to r0 instead of retail's r0 then r4. */
 #include "sys/FilePaths.h"
 #include "sys/ProcessResult.h"
 #include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -18,9 +18,9 @@ typedef struct ArchiveOpenWork {
     /* 0x08 */ ArchiveStream stream;
 } ArchiveOpenWork;
 
-s32 FUN_001883b0(u32 *handle, const s16 *convertedPath, u32 mode);
+nn::Result FUN_001883b0(u32 *handle, const s16 *convertedPath, u32 mode);
 
-static s32 archiveOpen(ArchiveStream *stream, const s16 *convertedPath, u32 mode)
+static nn::Result archiveOpen(ArchiveStream *stream, const s16 *convertedPath, u32 mode)
 {
     stream->sizeLow = 0;
     stream->sizeHigh = 0;
@@ -30,10 +30,10 @@ static s32 archiveOpen(ArchiveStream *stream, const s16 *convertedPath, u32 mode
 }
 
 /* Convert a path, reset archive bookkeeping and open it in access mode 2 when `mode` is 1, else 1; returns an nn::Result. */
-s32 FUN_002bee0c(ArchiveOpenWork *work, const char *path, s32 mode)
+nn::Result archiveStreamOpenConverted(ArchiveOpenWork *work, const char *path, s32 mode)
 {
     s16 convertedPath[250];
-    s32 result;
+    nn::Result result;
 
     if (pathBuildWide(path, convertedPath, 1) == 0) {
         result = 0xE0E046BC;

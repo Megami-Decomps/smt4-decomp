@@ -2,6 +2,7 @@
 #define UI_PLACETEXTTRANSITION_H
 
 #include "common.h"
+#include "shard/ScriptProcess.h"
 #include <stddef.h>
 
 struct PlaceTextTableCursor {
@@ -14,10 +15,6 @@ struct PlaceTextRecord {
     /* 0x26 */ u8 unk26[0x44];
     /* 0x6A */ u16 alternateFlag;
     /* 0x6C */ char alternateText[0x20];
-};
-struct PlaceTextLayoutElement {
-    /* 0x000 */ u8 unk000[0x108];
-    /* 0x108 */ u32 mode;
 };
 struct PlaceTextTransition {
     /* 0x000 */ u32 unk000;
@@ -32,8 +29,8 @@ struct PlaceTextTransition {
     /* 0x020 */ u8 unk020[0x164];
     /* 0x184 */ void *layoutSource;
     /* 0x188 */ u32 layoutSize;
-    /* 0x18C */ PlaceTextLayoutElement *first;
-    /* 0x190 */ PlaceTextLayoutElement *second;
+    /* 0x18C */ ScriptProcess *first;
+    /* 0x190 */ ScriptProcess *second;
 };
 typedef char PlaceTextRecordLayoutCheck[
     sizeof(PlaceTextRecord) == 0x8C && offsetof(PlaceTextRecord, location) == 0x20 &&

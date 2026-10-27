@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail push {r4, r5, r6, r7, lr} differs from recovered push {r4, r5, r6, lr}. */
+/* NON_MATCHING: the 21-to-5 kind comes through scrMessageKindGetValue like retail; remaining: retail pushes r4-r7 with the constant 1 materialised separately for the flag stores (r1) and the enabled argument (r4), the build shares one hoisted constant in r7. */
 #include "common.h"
 
 struct MessageStateLocalView {
@@ -16,6 +16,12 @@ extern "C" {
 extern MessageMainLocalView g_messageMain;
 
 s32 scrCommMessageSetMode(s32 mode);
+s32 scrMessageKindGetValue(void);
+
+static __inline s32 messageKind(s32 kind)
+{
+    return kind == 21 ? 5 : kind;
+}
 s32 scrGetCommandFrame(void);
 u32 scrGetCommandOwner(void);
 u32 scrGetArg(u32 index);
@@ -34,9 +40,11 @@ void FUN_002e4930(void)
         state->unk31 = 1;
     }
 
+    s32 kind = messageKind(scrMessageKindGetValue());
+    s32 enabled = 1;
     u32 context = scrGetCommandOwner();
     u32 argument = scrGetArg(0);
     s32 frame = scrGetCommandFrame();
-    FUN_0021bdac(context, argument, frame, 5, 1, 0);
+    FUN_0021bdac(context, argument, frame, kind, enabled, 0);
 }
 }

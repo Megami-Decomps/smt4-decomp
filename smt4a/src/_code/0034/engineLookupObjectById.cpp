@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail uses `ldrsh ip, [r3]` where armcc emits `ldrsh r3, [r3]`. */
 #include "common.h"
 
 extern "C" {
@@ -13,14 +12,23 @@ extern LookupEntry g_engineObjectLookup[10];
 
 void * engineLookupObjectById(s32 id)
 {
+    LookupEntry *table = g_engineObjectLookup;
     s32 found = -1;
-    for (s32 i = 0; i < 10; i++) {
-        if (g_engineObjectLookup[i].id == id) {
+    for (s32 i = 0; i < 10; i += 2) {
+        LookupEntry *entry = &table[i];
+        if (entry[0].id == id) {
             found = i;
             break;
         }
+        if (entry[1].id == id) {
+            found = i + 1;
+            break;
+        }
     }
-    return found >= 0 ? g_engineObjectLookup[found].object : NULL;
+    if (found < 0) {
+        return NULL;
+    }
+    return table[found].object;
 }
 
 } /* extern "C" */

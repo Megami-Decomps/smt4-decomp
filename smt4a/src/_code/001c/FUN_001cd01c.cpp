@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop/register allocation only (retail keeps the offsets pointer in r2 across the loop and uses lr as a temporary). */
+/* NON_MATCHING: countdown loop now matches retail's shape; retail predicates the index init (movne ip,#0) and uses lr as a scratch register (push {r4, lr}), the build uses r4/r5. */
 /* Reads the table of section offsets at the start of a packed blob into the sizing state (one group pointer per section),
  * then lets FUN_001cd064 (placed right after, so the last call is a linker NOP) size the result. */
 #include "shard/Resource.h"
@@ -18,8 +18,9 @@ u32 FUN_001cd01c(ResourceSizingState *state, PackedBlob *blob)
     u32 count = blob->sectionCount & 0xFF;
 
     state->count = count;
-    for (u32 i = 0; i < count; i++) {
-        state->groups[i] = (ResourceSizingGroup *)((u8 *)blob + *offsets++);
+    s32 i = 0;
+    for (u32 remaining = count; remaining != 0; --remaining) {
+        state->groups[i++] = (ResourceSizingGroup *)((u8 *)blob + *offsets++);
     }
     state->extraWords = offsets[5];
     return FUN_001cd064(state);

@@ -11,7 +11,7 @@ extern GameStateA g_gameState;
 
 u32 FUN_001692ac(u32 first, u32 second);
 void efctSetSpeed(f32 speed);
-void FUN_002bf0d4(u32 layer, u32 sprite, s32 *bounds);
+void textureRegionBoundsRead(u32 layer, u32 sprite, s32 *bounds);
 void FUN_001849bc(u32 kind, u32 layer, u32 sprite, u32 argument, s32 y, u32 order, s32 *bounds);
 
 // Draws the map interface's fade frame: the sprite pair and the sliding third sprite, under a fade level that follows
@@ -44,7 +44,7 @@ void FUN_002342d0(u32 argument)
     FUN_001835b4(2, 0x13, 0x11f9, argument, 0, 11);
 
     s32 bounds[4];
-    FUN_002bf0d4(0x13, 0x11fa, bounds);
+    textureRegionBoundsRead(0x13, 0x11fa, bounds);
     s32 offset = (s32)((f32)((bounds[1] - bounds[0]) - 23) * (one - progress));
     bounds[0] += offset;
     FUN_001849bc(2, 0x13, 0x11fa, argument, offset, 11, bounds);

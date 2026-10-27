@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail mov r6, r3 differs from recovered mov r6, r3. */
+/* NON_MATCHING: retail computes the failure flag into r1 and moves the result to r0 before the branch (the arguments of a result-report call that armlink removed, an empty callee); the build has no such call. */
 #include "nn/Result.h"
 #include "sys/ProcessResult.h"
 #include "common.h"
@@ -7,9 +7,9 @@ struct FileView;
 
 struct FileVtableView {
     u8 unk00[0x18]; // 0x00
-    s32 (*unk18)(FileView* file, unsigned long long offset); // 0x18
+    nn::Result (*unk18)(FileView* file, u64 offset); // 0x18
     u8 unk1C[0x18]; // 0x1C
-    s32 (*unk34)(FileView* file, u32* transferred, void* buffer,
+    nn::Result (*unk34)(FileView* file, u32* transferred, void* buffer,
                  u32 size, u32 mode); // 0x34
 };
 
@@ -24,15 +24,17 @@ void asdFatalError(void);
 void nn_fs_CTR_MPCore_detail_UserFileSystem_CloseFile(u32 handle);
 
 // Positions the file, performs a transfer, and closes its handle on failure.
-s32 FUN_002d5f90(FileView* file, u32 offset, void* buffer, u32 size)
+nn::Result FUN_002d5f90(FileView* file, u32 offset, void* buffer, u32 size)
 {
-    FUN_002c3510(file->vtable->unk18(file, offset));
+    u64 position = offset;
+    FUN_002c3510(file->vtable->unk18(file, position));
 
     u32 transferred;
-    s32 result = file->vtable->unk34(file, &transferred, buffer, size, 1);
+    nn::Result result = file->vtable->unk34(file, &transferred, buffer, size, 1);
     FUN_002c3510(result);
 
-    if (nnResultIsFailure(result)) {
+    u32 failed = result & 0x80000000;
+    if ((s32)failed < 0) {
         if ((file->unk08 & ~1U) != 0) {
             if ((file->unk08 & 1U) != 0) {
                 asdFatalError();
