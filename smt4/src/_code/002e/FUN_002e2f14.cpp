@@ -2,6 +2,7 @@
 #include "nn/Result.h"
 #include "nn/os/Handle.h"
 #include "nn/os/Thread.h"
+#include "sys/ResultReport.h"
 
 /* An object that runs a worker thread: the thread, a scratch buffer and a wake-up handle. */
 struct ThreadOwner {
@@ -14,7 +15,6 @@ struct ThreadOwner {
 
 extern "C" {
 s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(s32 result, bool failed);
 void FUN_002c3f5c(void *state);
 void asdMemFree(void *block);
 

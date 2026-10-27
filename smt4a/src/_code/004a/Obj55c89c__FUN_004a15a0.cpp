@@ -1,4 +1,4 @@
-/* NON_MATCHING: the sound branch layout and the clamp now match; retail stores the state/step pair with STRD, forms the flags write-back address from a base register and reads the hasValue/unk861 bytes through a +0x800 base. */
+/* NON_MATCHING: retail stores the state/step pair with STRD and forms the flags write-back address from a base register (ldrh [r0,#4]!). */
 #include "classes/Obj55c8d0.h"
 #include "classes/Obj55c89c.h"
 #include "shard/S1ListMenu.h"
@@ -52,10 +52,12 @@ void Obj55c89c::FUN_004a15a0()
     if (!changed)
         return;
 
-    if (!menu->hasValue)
+    struct SoundBlock { u8 prefix[0x60]; u8 hasValue; u8 variant; };
+    SoundBlock *block = reinterpret_cast<SoundBlock *>(reinterpret_cast<u8 *>(menu) + 0x800);
+    if (!block->hasValue)
         sysPlaySe(0x2F);
     else
-        sysPlaySe(menu->unk861[0] == 1 ? 0x4E : 0x4F);
+        sysPlaySe(block->variant == 1 ? 0x4E : 0x4F);
     FUN_0032cfe0(menu);
     FUN_003343f0(0);
     state->state = 2;

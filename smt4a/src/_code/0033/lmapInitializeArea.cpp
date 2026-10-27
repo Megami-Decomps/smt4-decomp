@@ -1,4 +1,4 @@
-/* NON_MATCHING: restored spawn-index return/argument chain; position copies and global/conditional scheduling still differ. */
+/* NON_MATCHING: the FUN_002a2e98 arms now match retail (per-arm calls); remaining: retail copies the position's x,y words with ldm/stm and z from a register (here ldrd/strd) and orders the global loads differently. */
 #include "map/lmapMain.h"
 #include "shard/W6_W6Match2_AocTable23.h"
 
@@ -78,7 +78,11 @@ void lmapInitializeArea(u32 area, u32 spawnId)
     scene->heading = 180.0f;
     scene->targetHeading = 180.0f;
     FUN_00227a70();
-    FUN_002a2e98(state->map, state->area, state->map == 101 ? 101 : 0, state->map == 101 ? 10 : 0);
+    if (state->map == 101) {
+        FUN_002a2e98(state->map, state->area, 101, 10);
+    } else {
+        FUN_002a2e98(state->map, state->area, 0, 0);
+    }
     FUN_002df914();
     lmapApplyMapAndArea();
     FUN_00378000();

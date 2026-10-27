@@ -1,9 +1,9 @@
 #include "nn/os/ThreadLaunch.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 
 extern s32 FUN_0016dfe0(ThreadStackStorage *stack, void *buffer, u32 size);
-extern void FUN_002e3140(s32 error);
 
 /* Initializes the thread's stack mapping, reporting a failed result. */
 void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size)

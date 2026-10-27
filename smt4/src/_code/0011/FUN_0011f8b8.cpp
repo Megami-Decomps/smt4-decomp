@@ -1,105 +1,76 @@
-/* NON_MATCHING: needs the native texture class/constructor at FUN_0012c628 and its texture-description value type. */
-#include "romwright_types.h"
+/* NON_MATCHING: structure, locals and frame now match retail; armcc keeps the allocated object in r3 (retail keeps it in r0 and copies the resource pointer to r3) and so numbers the temporaries differently. */
+#include "AsdSDK/Source/Gfx/Tex/TextureBuild.h"
 
 extern "C" {
 
-int FUN_0012c628(int, int *, int *);
+/* The render-target description the texture object is created from (0x20 bytes). */
+struct RenderTargetDesc {
+    RenderTargetDesc()
+        : width(400), height(240), colorFormat(0x8058), depthFormat(0x88F0), colorLocation(0x20000),
+          depthLocation(0x30000), unk14(0), unk18(0), renderable(0)
+    {
+    }
+    /* 0x00 */ s32 width;
+    /* 0x04 */ s32 height;
+    /* 0x08 */ u16 colorFormat;      /* OpenGL internal format */
+    /* 0x0A */ u16 depthFormat;      /* OpenGL internal format; 0 for none */
+    /* 0x0C */ u32 colorLocation;
+    /* 0x10 */ u32 depthLocation;
+    /* 0x14 */ u32 unk14;
+    /* 0x18 */ u32 unk18;
+    /* 0x1C */ u8 renderable;
+};
 
-typedef int romwright_code(...);
-/* stack frame of param_2: 10 slot(s), 33 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned char sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-    unsigned int sp4C; /* 0x4c: local_4c */
-    unsigned short sp4E; /* 0x4e: local_4e */
-    unsigned short sp50; /* 0x50: local_50 */
-    unsigned int sp54; /* 0x54: local_54 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
+/* A texture resource: either the texture header itself or (kind 0x20000004) a wrapper that points at one. */
+struct TextureResource {
+    /* 0x00 */ u32 kind;
+    /* 0x04 */ u8 unk04[0x18];
+    /* 0x1C */ s32 headerOffset;    /* self-relative; 0 for none */
+};
 
-/* Supplied declaration required: FUN_0012c628. */
-
-
-void FUN_0011f8b8(int *param_1,int *param_2)
-
+/* The header a wrapper's self-relative offset points at (NULL for none). */
+static __inline const TextureHeader *textureResourceHeader(const TextureResource *resource)
 {
-/* irregular: 1 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  unsigned char temp_v2;
-  int temp_v3;
-  int temp_v4;
-  unsigned short temp_v5;
-  unsigned short temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  unsigned char temp_v11;
-  char temp_v12 [32];
-  
-  temp_v0 = (**(romwright_code **)(*param_1 + 8))(param_1,0x50,0x20);
-  if (*param_2 == 0x20000004) {
-    if (param_2[7] != 0) {
-      param_2 = (int *)((int)param_2 + param_2[7] + 0x1c);
+    s32 offset = resource->headerOffset;
+    if (offset == 0) {
+        return NULL;
     }
-    else {
-      param_2 = (int *)0x0;
+    return (const TextureHeader *)((const u8 *)&resource->headerOffset + offset);
+}
+
+void *FUN_0012c628(void *object, TextureAllocator *allocator, const RenderTargetDesc *desc);
+
+/* Creates the texture object of a built texture header: a render target description (the 400x240 RGBA8 default,
+ * overridden by the header's size, format and location bits) handed to the object's constructor. */
+void *FUN_0011f8b8(TextureAllocator *allocator, const TextureResource *resource)
+{
+    void *object = allocator->allocate(0x50, 0x20);
+    const TextureHeader *source = (const TextureHeader *)resource;
+    if (resource->kind == 0x20000004) {
+        source = textureResourceHeader(resource);
     }
-  }
-  temp_v12[0] = 'X';
-  temp_v12[1] = -0x80;
-  temp_v12[2] = 'Q';
-  temp_v12[3] = -0x80;
-  temp_v12[4] = 'W';
-  temp_v12[5] = -0x80;
-  temp_v12[6] = 'b';
-  temp_v12[7] = -0x73;
-  temp_v12[8] = 'V';
-  temp_v12[9] = -0x80;
-  temp_v12[10] = '\0';
-  temp_v12[0xb] = '\0';
-  temp_v12[0xc] = '\0';
-  temp_v12[0xd] = '\0';
-  temp_v12[0xe] = '\0';
-  temp_v12[0xf] = '\0';
-  temp_v12[0x10] = '\0';
-  temp_v12[0x11] = '\0';
-  temp_v12[0x12] = '\0';
-  temp_v12[0x13] = '\0';
-  temp_v12[0x14] = '\0';
-  temp_v12[0x15] = '\0';
-  temp_v12[0x16] = '\0';
-  temp_v12[0x17] = '\0';
-  temp_v12[0x18] = '\0';
-  temp_v12[0x19] = '\0';
-  temp_v12[0x1a] = '\0';
-  temp_v12[0x1b] = '\0';
-  temp_v9 = 0;
-  temp_v10 = 0;
-  temp_v11 = 0;
-  temp_v3 = param_2[7];
-  temp_v4 = param_2[6];
-  temp_v5 = *(unsigned short *)(temp_v12 + param_2[0xd] * 2);
-  temp_v6 = 0;
-  temp_v8 = 0;
-  temp_v7 = param_2[0xc] & 0xfcffffff;
-  temp_v1 = *param_2;
-  temp_v2 = temp_v1 == 0x20000009;
-  if (!temp_v2) {
-    temp_v1 = temp_v1 - 0x20000011;
-    temp_v2 = temp_v1 == 0;
-  }
-  if ((!temp_v2) && (temp_v1 == 0x10)) {
-    temp_v11 = 1;
-  }
-  if (temp_v0 != 0) {
-    FUN_0012c628(temp_v0,param_1,&temp_v3);
-  }
-  return;
+
+    u16 formats[14] = {0x8058, 0x8051, 0x8057, 0x8D62, 0x8056, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    RenderTargetDesc desc;
+
+    desc.width = source->height;
+    desc.height = source->width;
+    desc.colorFormat = formats[source->unk34];
+    desc.depthFormat = 0;
+    desc.colorLocation = source->unk30 & ~0x3000000u;
+    desc.depthLocation = 0;
+    switch (source->unk00) {
+    case 0x20000009:
+    case 0x20000011:
+        break;
+    case 0x20000021:
+        desc.renderable = 1;
+        break;
+    }
+    if (object != NULL) {
+        return FUN_0012c628(object, allocator, &desc);
+    }
+    return object;
 }
 
 } /* extern "C" */

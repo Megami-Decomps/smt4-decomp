@@ -1,6 +1,7 @@
 /* NON_MATCHING: layout, failure test and tail now match; only the request descriptor construction and the r6/r7 constant registers differ (see Obj4221bc). */
 #include "classes/Obj422248.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 struct Obj422248Queue { u32 unk00[2]; u32 base; u32 offset; };
 struct Obj422248RequestQueue { u8 unk00[0xc]; Obj422248Queue *storage; };
@@ -20,7 +21,6 @@ s32 FUN_002348a8(Obj422248RequestQueue *queue);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002bcc60(Obj422248RequestQueue *queue, const u32 *descriptor, void (*callback)(), Obj422248 **owner);
 void FUN_0038cbdc();
-void FUN_002c526c(u32 status);
 }
 
 WindowStatusOperationResult Obj422248::vfunc0c(const void *)
@@ -42,8 +42,9 @@ WindowStatusOperationResult Obj422248::vfunc0c(const void *)
         Obj422248 *owner = this;
         s32 status = FUN_002bcc60(queue, &request.size, FUN_0038cbdc, &owner);
         if ((status & 0x7e00000) != 0x600000) {
-            if (nnResultIsFailure(status)) {
-                FUN_002c526c(status);
+            bool failed = nnResultIsFailure(status);
+            if (failed) {
+                FUN_002c526c(status, failed);
             }
         }
     } else {

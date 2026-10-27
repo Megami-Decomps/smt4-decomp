@@ -5,6 +5,16 @@ extern "C" {
 extern AllocationTracking g_allocationAddressRanges;
 u32 FUN_0019c40c(AllocationHeaderA *header);
 
+static void subtractCategoryBytes(AllocationUsage *usage, u32 category, u32 bytes)
+{
+    usage->categoryBytes[category] -= bytes;
+}
+
+static void subtractCategoryPayloadBytes(AllocationUsage *usage, u32 category, u32 bytes)
+{
+    usage->categoryPayloadBytes[category] = (usage->categoryPayloadBytes[category] - bytes) + 0x40;
+}
+
 // Run an allocation's release callback, remove it from tracking, and return its backing header.
 AllocationHeaderA *FUN_0017fe8c(void *payload)
 {
@@ -16,12 +26,9 @@ AllocationHeaderA *FUN_0017fe8c(void *payload)
     usage->bytes -= header->size;
     if ((header->tag & 0xFF) < 8) {
         u32 category = FUN_0019c40c(header);
-        AllocationUsage *bytesUsage = g_allocationAddressRanges.usage;
-        bytesUsage->categoryBytes[category] -= header->size;
+        subtractCategoryBytes(g_allocationAddressRanges.usage, category, header->size);
         category = FUN_0019c40c(header);
-        AllocationUsage *payloadUsage = g_allocationAddressRanges.usage;
-        payloadUsage->categoryPayloadBytes[category] =
-            (payloadUsage->categoryPayloadBytes[category] - (header->size - header->alignment)) + 0x40;
+        subtractCategoryPayloadBytes(g_allocationAddressRanges.usage, category, header->size - header->alignment);
     }
     AllocationLink *link = &header->link;
     if (!link->previous) {

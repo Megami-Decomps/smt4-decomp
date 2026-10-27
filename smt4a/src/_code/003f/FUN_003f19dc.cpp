@@ -2,6 +2,7 @@
 #include "nn/Result.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/os/Thread.h"
+#include "sys/ResultReport.h"
 
 /* The memory mapped for the worker thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -22,7 +23,6 @@ struct StreamWorker {
 
 extern "C" {
 
-void FUN_002e3140(s32 result, bool failed);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);

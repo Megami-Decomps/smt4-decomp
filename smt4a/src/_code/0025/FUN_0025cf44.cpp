@@ -11,7 +11,7 @@ struct TextureSummaryDimensions {
 extern "C" {
 extern OverlayRef g_campCec;
 
-void FUN_0034248c(u32 handle, void *data, void *layout, s32 value, s32 option);
+void cecCardDrawBackgroundAndLabel(u32 handle, void *data, void *layout, s32 value, s32 option);
 void saveSlotDrawSummary(u32 handle, void *data, void *layout, s32 width, s32 height, s32 option);
 
 /* Draws the camp CEC summary after its texture has loaded. */
@@ -21,7 +21,7 @@ u32 FUN_0025cf44(void)
     if (work != NULL && textureGetIndexedResource(46) != 0 &&
         asdTMTexTableNodeIsLoaded(46, 0) != 0) {
         const TextureSummaryDimensions *dimensions = reinterpret_cast<const TextureSummaryDimensions *>(asdTMTexTableEntryAt(46, 151));
-        FUN_0034248c(work->unk174, g_campCec.instance->block40, work->slides, 0, 0);
+        cecCardDrawBackgroundAndLabel(work->unk174, g_campCec.instance->block40, work->slides, 0, 0);
         saveSlotDrawSummary(work->unk174, g_campCec.instance->block40, work->slides + 1,
                             dimensions->width, dimensions->height, 0);
     }

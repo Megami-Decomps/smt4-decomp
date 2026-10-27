@@ -96,9 +96,10 @@ u32 FUN_001a1d08(void)
             u32 signalledCount;
             s32 id = request->fadeId;
             u32 result = FUN_002c40f8(&signalledCount, &id, 1, 0, 0, 0);
-            if (nnResultIsFailure(result))
-                FUN_002c526c(result);
-            if (!nnResultDescriptionIsNot(result, 0x3FE)) {
+            bool failed = nnResultIsFailure(result);
+            if (failed)
+                FUN_002c526c(result, failed);
+            if (!nnResultIsNotTimeout(result)) {
                 request->frames++;
                 return 0;
             }

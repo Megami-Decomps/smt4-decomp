@@ -17,8 +17,8 @@ extern "C" {
 extern AocMain *g_aocMain;
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 FUN_0038b420(AocMain *main, WindowStatusResult result);
-u32 FUN_002a1200(const u32 *result);
-u32 FUN_002a116c(const u32 *result);
+u32 resourceResultMatchesKnownRanges(const u32 *result);
+u32 resourceResultMatchesRemappedCodes(const u32 *result);
 s32 queryResultFailureOnly(const u32 *object);
 void FUN_00234124(ScreenTransitionState *transition, const void *result);
 
@@ -34,14 +34,14 @@ void FUN_00233e70(ScreenTransitionState *transition, u32 unused, u32 nextState)
     };
     ResultTransitionView *work = reinterpret_cast<ResultTransitionView *>(transition);
     AocMain *main = g_aocMain;
-    FUN_002ba8f4(&main->objA);
+    kernelThreadJoinAndClose(&main->objA);
     if (legacyResourceIdRemap(&work->result.handle) == 0xC9413891)
         return;
     FUN_0038b420(g_aocMain, work->result.handle);
-    if (FUN_002a1200(&work->result.handle.code)) {
+    if (resourceResultMatchesKnownRanges(&work->result.handle.code)) {
         transition->flags = 4;
         transition->phase = 0;
-    } else if (FUN_002a116c(&work->result.handle.code) ||
+    } else if (resourceResultMatchesRemappedCodes(&work->result.handle.code) ||
                nnResultIsFailure(queryResultFailureOnly(&main->operation.queryResult))) {
         transition->flags = 3;
         transition->phase = 0;

@@ -1,75 +1,45 @@
-/* NON_MATCHING: allocation-category array indexing and saved registers differ. */
-#include "common.h"
-#include <stddef.h>
-
-struct TrackedAllocationLink {
-    TrackedAllocationLink *previous;
-    TrackedAllocationLink *next;
-};
-struct TrackedAllocationHeader {
-    u32 bytes;
-    u16 padding;
-    u16 flags;
-    u16 group;
-    u8 unk0a[0xa];
-    TrackedAllocationLink link;
-    u8 unk1c[0x24];
-};
-struct AllocationTrackingState {
-    TrackedAllocationLink *head;
-    TrackedAllocationLink *tail;
-    u8 unk08[0x10];
-    u32 count;
-    u32 bytes;
-    u8 unk20[0x18];
-    u16 group;
-    u16 unk3a;
-    u32 categoryBytes[8];
-    u32 categoryPayloadBytes[8];
-};
-typedef char TrackedAllocationLayoutCheck[sizeof(TrackedAllocationHeader) == 0x40 &&
-    offsetof(TrackedAllocationHeader, padding) == 4 && offsetof(TrackedAllocationHeader, group) == 8 &&
-    offsetof(TrackedAllocationHeader, link) == 0x14 &&
-    offsetof(AllocationTrackingState, count) == 0x18 && offsetof(AllocationTrackingState, bytes) == 0x1c &&
-    offsetof(AllocationTrackingState, group) == 0x38 && offsetof(AllocationTrackingState, categoryBytes) == 0x3c &&
-    offsetof(AllocationTrackingState, categoryPayloadBytes) == 0x5c ? 1 : -1];
-struct AllocationTrackingGlobals {
-    u8 unk00[8];
-    AllocationTrackingState *state;
-};
-typedef char AllocationTrackingGlobalsOffsetCheck[offsetof(AllocationTrackingGlobals, state) == 8 ? 1 : -1];
+/* NON_MATCHING: only register numbering differs: retail loads the usage pointer into r2 and the allocation size into r1 for both category updates (build: usage r1, size r2). */
+#include "sys/AllocationTracking.h"
 
 extern "C" {
-extern AllocationTrackingGlobals g_allocationAddressRanges;
-u32 FUN_0019c40c(TrackedAllocationHeader *allocation);
+extern AllocationTracking g_allocationAddressRanges;
+u32 FUN_0019c40c(AllocationHeaderA *allocation);
 
-void FUN_0019a64c(TrackedAllocationHeader *allocation)
+static void addCategoryBytes(AllocationUsage *usage, u32 category, u32 bytes)
 {
-    AllocationTrackingState *state = g_allocationAddressRanges.state;
-    ++state->count;
-    state->bytes += allocation->bytes;
-    if ((state->group & 0xff) < 8) {
+    usage->categoryBytes[category] = bytes + usage->categoryBytes[category];
+}
+
+static void addCategoryPayloadBytes(AllocationUsage *usage, u32 category, u32 bytes)
+{
+    usage->categoryPayloadBytes[category] = bytes + usage->categoryPayloadBytes[category];
+}
+
+// Account for a backing allocation and append it to the active allocation list.
+void FUN_0019a64c(AllocationHeaderA *allocation)
+{
+    AllocationUsage *usage = g_allocationAddressRanges.usage;
+    ++usage->count;
+    usage->bytes += allocation->size;
+    if ((usage->tag & 0xff) < 8) {
         u32 category = FUN_0019c40c(allocation);
-        state = g_allocationAddressRanges.state;
-        state->categoryBytes[category] = allocation->bytes + state->categoryBytes[category];
+        addCategoryBytes(g_allocationAddressRanges.usage, category, allocation->size);
         category = FUN_0019c40c(allocation);
-        state = g_allocationAddressRanges.state;
-        u32 payloadBytes = allocation->bytes - allocation->padding - sizeof(TrackedAllocationHeader);
-        state->categoryPayloadBytes[category] = payloadBytes + state->categoryPayloadBytes[category];
+        addCategoryPayloadBytes(g_allocationAddressRanges.usage, category, allocation->size - allocation->alignment - 0x40);
     }
-    state = g_allocationAddressRanges.state;
-    TrackedAllocationLink *link = &allocation->link;
-    if (state->head == NULL) {
-        state->tail = link;
-        state->head = link;
+    usage = g_allocationAddressRanges.usage;
+    AllocationLink *link = &allocation->link;
+    if (usage->head == NULL) {
+        usage->tail = link;
+        usage->head = link;
         link->next = NULL;
         link->previous = NULL;
     } else {
-        link->previous = state->tail;
-        g_allocationAddressRanges.state->tail = link;
+        link->previous = usage->tail;
+        g_allocationAddressRanges.usage->tail = link;
         link->previous->next = link;
         link->next = NULL;
     }
-    allocation->group = g_allocationAddressRanges.state->group;
+    allocation->tag = g_allocationAddressRanges.usage->tag;
 }
 }

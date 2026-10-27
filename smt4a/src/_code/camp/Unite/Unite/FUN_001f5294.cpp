@@ -95,7 +95,7 @@ int FUN_0031f718(...);
 int FUN_0032d0c8(...);
 int unitRecordBuild(...);
 int statusDisplayBindUnitRecord(...);
-int FUN_003347e8(...);
+int uniteSelectedFusionIsEnabled(...);
 int FUN_0034a9c4(...);
 int skillHelpUpdateAttributeAndTarget(...);
 int FUN_0035ad50(...);
@@ -323,7 +323,7 @@ extern int gameGlobalsGetState(void);
 /* Supplied declaration required: objBInitBlock19D0. */
 /* Supplied declaration required: FUN_0033449c. */
 /* Supplied declaration required: FUN_00334694. */
-/* Supplied declaration required: FUN_003347e8. */
+/* Supplied declaration required: uniteSelectedFusionIsEnabled. */
 extern unsigned int asdVramBGetFreeBytes(void);
 /* Supplied declaration required: buttonHelpGetValue. */
 /* Supplied declaration required: FUN_003450d4. */
@@ -1886,7 +1886,7 @@ LAB_001f77ec:
       piVar19 = piVar3 + (unsigned int)*(unsigned short *)((int)piVar3 + 0x6832) * 2 + 0x4ee;
       FUN_002f3a90();
       piVar3[0x106] = (int)piVar19;
-      temp_v5 = FUN_003347e8();
+      temp_v5 = uniteSelectedFusionIsEnabled();
       if (temp_v5 != 0) {
         piVar3[0x106] = 0;
         *(unsigned char *)((int)g_unite + 0x92be) = 1;
@@ -2177,7 +2177,7 @@ LAB_001f77ec:
             temp_v7 = temp_v7 + temp_v10;
           }
           piVar3[0x106] = temp_v7;
-          temp_v5 = FUN_003347e8(temp_v7);
+          temp_v5 = uniteSelectedFusionIsEnabled(temp_v7);
           if (temp_v5 != 0) {
             piVar3[0x106] = 0;
             *(unsigned char *)((int)g_unite + 0x92be) = 1;
@@ -2222,7 +2222,7 @@ LAB_001f77ec:
             temp_v7 = temp_v7 + temp_v10;
           }
           piVar3[0x106] = temp_v7;
-          temp_v5 = FUN_003347e8(temp_v7);
+          temp_v5 = uniteSelectedFusionIsEnabled(temp_v7);
           if (temp_v5 != 0) {
             piVar3[0x106] = 0;
             *(unsigned char *)((int)g_unite + 0x92be) = 1;
@@ -2265,7 +2265,7 @@ LAB_001f77ec:
         piVar19 = piVar3 + temp_v47[0] * 2 + 0x4ee;
         FUN_002f3a90();
         piVar3[0x106] = (int)piVar19;
-        temp_v5 = FUN_003347e8();
+        temp_v5 = uniteSelectedFusionIsEnabled();
         if (temp_v5 != 0) {
           piVar3[0x106] = 0;
           *(unsigned char *)((int)g_unite + 0x92be) = 1;
@@ -2464,7 +2464,7 @@ LAB_001f8d58:
       piVar19 = piVar3 + temp_v47[0] * 2 + 0x4ee;
       FUN_002f3a90();
       piVar3[0x106] = (int)piVar19;
-      temp_v5 = FUN_003347e8();
+      temp_v5 = uniteSelectedFusionIsEnabled();
       if (temp_v5 != 0) {
         piVar3[0x106] = 0;
         *(unsigned char *)((int)g_unite + 0x92be) = 1;

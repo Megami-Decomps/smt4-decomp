@@ -2,7 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-u32 FUN_001aeecc(const u8 *source);
+u32 lzGetAdvertisedSize(const u8 *source);
 u8 *asdMemoryAllocAligned(u32 alignment, u32 heap, u32 category, u32 size, u32 argument, s32 clear);
 void lzDecompressBytes(const u8 *source, u8 *destination);
 void FUN_001aeddc(const u8 *source, u8 *destination);
@@ -15,7 +15,7 @@ u8 *FUN_001ba204(u8 *source, u32 flags, u32 argument)
     u32 kind = *source & 0xF0;
     u8 *output = source;
     if (kind == 0x10 || kind == 0x20 || kind == 0x30) {
-        u32 size = FUN_001aeecc(source);
+        u32 size = lzGetAdvertisedSize(source);
         if (size != 0) {
             if (flags & 1) {
                 if (flags & 2) {

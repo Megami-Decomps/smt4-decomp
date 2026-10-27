@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed calendar aggregate copies use different registers, VFP year copy and earlier stores. */
+/* NON_MATCHING: year is now stored last (one `stm` with the first packed word, as in retail); remaining diff is register numbering of the result pointer and of the uninitialised bitfield bases (retail r6/r7/r8). */
 #include "shard/W6_W6Match2_LongDivision.h"
 #include "shard/W6_W6Match8_DateTimeValue.h"
 #include "AsdSDK/Source/Sys/Save/AsdSaveHeader.h"
@@ -16,7 +16,6 @@ SaveCalendarTime FUN_00193038(const DateTimeValue *value)
     s32 year, month, day;
     FUN_0016e8c4(&year, &month, &day, epochDay);
     SaveCalendarTime calendar;
-    calendar.year = year;
     calendar.month = month;
     calendar.day = day;
     calendar.weekday = ((epochDay + 6) % 7 + 7) % 7;
@@ -24,6 +23,7 @@ SaveCalendarTime FUN_00193038(const DateTimeValue *value)
     calendar.minute = (dayMilliseconds / 60000) % 60;
     calendar.second = (dayMilliseconds / 1000) % 60;
     calendar.millisecond = dayMilliseconds % 1000;
+    calendar.year = year;
     return calendar;
 }
 }

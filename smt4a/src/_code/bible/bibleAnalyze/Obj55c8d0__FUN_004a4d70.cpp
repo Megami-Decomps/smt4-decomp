@@ -1,4 +1,4 @@
-/* NON_MATCHING: completion signed load, fallback-name lifetime, and final selected-entry tail call differ. */
+/* NON_MATCHING: prologue order, fallback-name lifetime, and final selected-entry tail call (uxth id) differ. */
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
 #include "code/Code0033.h"
@@ -12,6 +12,7 @@ struct BibleAnalyzeTextGlobals {
 }
 extern "C" {
 void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
+s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 s32 vec2GetXInt(const UiAnimatedSprite *);
 s32 vec2GetYInt(const UiAnimatedSprite *);
 void pointConvertToFloat(f32 *point, s32 x, s32 y);
@@ -36,7 +37,7 @@ void Obj55c8d0::FUN_004a4d70()
     s32 y = vec2GetYInt(selection);
     s32 x = vec2GetXInt(selection);
     pointConvertToFloat(screen->cursor.position, x, y);
-    if (selection->finished && buttonHelpIsNotActive()) {
+    if (uiSpriteGetCompletionState(selection) && buttonHelpIsNotActive()) {
         FUN_003343f0(0);
         screen->state = 2;
         screen->unk18 = 0;

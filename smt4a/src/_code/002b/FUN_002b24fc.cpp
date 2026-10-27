@@ -36,10 +36,11 @@ bool FUN_002b24fc(void)
     }
 
     BattleMainView* battle = g_btlMain;
-    if (battle != 0) {
-        if (gameFlagIsSet(0x1FD) || battle->unkAC == 1) {
-            return true;
-        }
+    if (battle == 0) {
+        return false;
+    }
+    if (gameFlagIsSet(0x1FD) || battle->unkAC == 1) {
+        return true;
     }
     return false;
 }

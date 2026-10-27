@@ -1,6 +1,7 @@
 /* NON_MATCHING: identical except one compiler nop {0} that retail places between the unlock failure test and its branch in the special-heap path. */
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 struct AllocatorLock {
@@ -16,7 +17,6 @@ void FUN_0018003c(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, s32 extra);
 void *FUN_001844ac(void *block, u32 size, u32 alignment, u32 flags);
 void rt_memclr(void *memory, u32 size);
-void FUN_002e3140(s32 result, bool failed);
 
 /* Releases the allocator lock, reporting a failed release. */
 static __inline void allocatorUnlock(void)

@@ -17,7 +17,7 @@ struct TextureOwnerWork {
     /* 0x88 */ u8 hasDefault;
 };
 
-void FUN_0040a244(void *resource);
+void resourceReleaseReference(void *resource);
 void asdTMTexTableReleaseNode(s32 table, s32 node);
 void asdMemFree(void *block);
 
@@ -37,7 +37,7 @@ void FUN_0034da3c(u32 job)
             }
         }
     } else {
-        FUN_0040a244(work->resource);
+        resourceReleaseReference(work->resource);
         work->resource = NULL;
     }
     asdMemFree(work);

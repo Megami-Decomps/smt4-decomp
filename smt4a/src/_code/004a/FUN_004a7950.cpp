@@ -1,5 +1,4 @@
-/* NON_MATCHING: retail loads the part's x/y before setting up the stacked arguments; this build
- * stores the stacked arguments first (same instructions, different order). */
+/* NON_MATCHING: only the last call's stack-argument address temp differs (retail ip, built reuses r4 after moving the layout address first). */
 #include "common.h"
 
 /* A layout part layoutFindTableEntry finds by id. */
@@ -37,8 +36,12 @@ void FUN_004a7950(PercentWindow *window, s32 value, u32 alpha)
         color = 0x72e027ff;
     }
     part = layoutFindTableEntry(window->layout, 0x40b);
-    drawTextAtRelativePosition(window->layout, 0, part->x, part->y, 0, 7, color, alpha, text);
+    s32 x = part->x;
+    s32 y = part->y;
+    drawTextAtRelativePosition(window->layout, 0, x, y, 0, 7, color, alpha, text);
     part = layoutFindTableEntry(window->layout, 0x408);
-    drawTextAtRelativePosition(window->layout, 0, part->x, part->y, 0, 0, color, alpha, "%");
+    x = part->x;
+    y = part->y;
+    drawTextAtRelativePosition(window->layout, 0, x, y, 0, 0, color, alpha, "%");
 }
 }

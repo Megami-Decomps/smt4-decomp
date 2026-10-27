@@ -2,7 +2,7 @@
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
 
-extern "C" void FUN_0040a244(BattleCleanupResource *resource);
+extern "C" void resourceReleaseReference(BattleCleanupResource *resource);
 
 static bool isRetainedResource(const BtlMainStateA *state, s16 id)
 {
@@ -23,7 +23,7 @@ extern "C" void battleReleaseRetiredUnitResources(BtlMainStateA *state)
                 BattleCleanupResource *resource = state->resourceCleanup.resources[index];
                 if (resource != NULL && resource->id == state->retiredUnit.resource->id &&
                     !isRetainedResource(state, (s16)resource->id)) {
-                    FUN_0040a244(resource);
+                    resourceReleaseReference(resource);
                     state->resourceCleanup.resources[index] = NULL;
                 }
             }

@@ -181,7 +181,7 @@ unsigned long long FUN_002def6c(void)
   iVar5 = 0;
   do {
     if (puVar1[iVar5 + 0x85b] != 0) {
-      FUN_0040a244();
+      resourceReleaseReference();
       puVar1[iVar5 + 0x85b] = 0;
     }
     iVar5 = iVar5 + 1;
@@ -189,7 +189,7 @@ unsigned long long FUN_002def6c(void)
   iVar5 = 0;
   do {
     if (puVar1[iVar5 * 4 + 0x135e] != 0) {
-      FUN_0040a244();
+      resourceReleaseReference();
       puVar1[iVar5 * 4 + 0x135e] = 0;
     }
     iVar5 = iVar5 + 1;

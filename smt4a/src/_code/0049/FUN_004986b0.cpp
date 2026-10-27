@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation differs (retail keeps panel in r6 with panel+0xB40 hoisted in r4 across the tab switches and rows loop); logic equivalent. */
 #include "common.h"
+#include "gamedata/AocItemRef.h"
 #include "code/Code002a.h"
 
 class PanelWidget {
@@ -62,7 +63,11 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
     FUN_0049339c(PANEL_AT(panel, 0x3A4), frameStyle, 0, 0, context);
     FUN_0049368c(PANEL_AT(panel, 0x3A4), PANEL_WORD(panel, 0xB40) + 0x5A, 0, 0, context, 1);
     FUN_00494574(panel, PANEL_WORD(panel, 0xB40));
-    u16 headerValue[2];
+    AocItemRef headerValue;
+    headerValue.id = 0;
+    headerValue.unk02Bit0 = 0;
+    headerValue.scaled = 0;
+    headerValue.percent = 0;
     u16 value = 0;
     switch (PANEL_WORD(panel, 0xB40)) {
     case 0:
@@ -86,8 +91,8 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
     case 6:
         value = gameGetPlayerData()[6];
     }
-    headerValue[0] = value;
-    FUN_00495b04(panel, 0, 0, headerValue);
+    headerValue.id = value;
+    FUN_00495b04(panel, 0, 0, &headerValue);
     s32 mode = panel->mode;
     bool hasSlot = mode == 7 || mode == 0xB || mode == 8 || mode == 0xC || mode == 9 || mode == 0xD ||
                    mode == 0x11 || mode == 0x12;

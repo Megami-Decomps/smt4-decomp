@@ -3,7 +3,7 @@
 #include <stddef.h>
 #include "AsdSDK/AsdMemUtil.h"
 
-extern "C" void FUN_00294f64(void *model);
+extern "C" void resourceReleaseReference(void *model);
 extern "C" void asdMemFree(void *memory);
 
 // Release unreferenced cached models and clear their transient battle records.
@@ -48,7 +48,7 @@ extern "C" void FUN_00338fb0(void *context)
                         break;
                 }
                 if (retained == 42) {
-                    FUN_00294f64(model);
+                    resourceReleaseReference(model);
                     cache->models[slot] = NULL;
                 }
             }

@@ -44,12 +44,14 @@ void FUN_0010250c(void)
         g_asdFileMutex = handle;
         result = 0;
     }
-    if (nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
     }
     result = FUN_002c5254(&handle, g_asdFileMutex, 1);
-    if (nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+    failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
     }
     nn_os_LightEvent_Initialize(g_asdFileEvent, 0);
     FUN_0010d0f8();

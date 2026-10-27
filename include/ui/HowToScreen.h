@@ -5,9 +5,9 @@
 #include <stddef.h>
 
 struct HowToDrawTables {
-    u8 first[36];
-    u8 second[72];
-    u8 last[336];
+    u32 first[9];
+    u32 second[18];
+    u32 last[84];
 };
 typedef char HowToDrawTablesOffsets[sizeof(HowToDrawTables) == 444 &&
     offsetof(HowToDrawTables, second) == 36 &&

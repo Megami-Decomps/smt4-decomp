@@ -1,4 +1,3 @@
-/* NON_MATCHING: slot-rank stores reuse the settings pointer instead of the retail panel base. */
 #include "battle/btlUI.h"
 #include "gamedata/SaveLoadProcess.h"
 
@@ -56,13 +55,12 @@ void FUN_003ae134(void *, s32 mode, u8 first, u8 second, s32 firstStrike, s32 op
     }
     if (options != 0 || mode != 0) {
         BtlUi *current = g_btlUi.ui;
-        BtlUiSettings *settings = &current->settings;
-        memFill8(settings, ~0u);
-        settings->slotRanks[0] = slotFindNonnegativeRank(current->owner, 0);
-        settings->slotRanks[1] = slotFindNonnegativeRank(current->owner, 1);
-        settings->slotRanks[2] = slotFindNonnegativeRank(current->owner, 2);
-        settings->slotRanks[3] = slotFindNonnegativeRank(current->owner, 3);
-        FUN_002ad8a8(&current->objC, settings);
+        memFill8(&current->settings, ~0u);
+        current->settings.slotRanks[0] = slotFindNonnegativeRank(current->owner, 0);
+        current->settings.slotRanks[1] = slotFindNonnegativeRank(current->owner, 1);
+        current->settings.slotRanks[2] = slotFindNonnegativeRank(current->owner, 2);
+        current->settings.slotRanks[3] = slotFindNonnegativeRank(current->owner, 3);
+        FUN_002ad8a8(&current->objC, &current->settings);
         if (mode != 0)
             FUN_002dc464(&ui->base.objC);
         else

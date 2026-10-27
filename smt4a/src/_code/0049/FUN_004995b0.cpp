@@ -19,7 +19,7 @@ int messageDismissNumericBanner(...);
 int pointConvertToFloat(unsigned int *, unsigned int, unsigned int);
 int FUN_004964e0(...);
 int FUN_00496a0c(...);
-int FUN_00497690(...);
+int equipmentMenuBuildVisibleCategories(...);
 int shopStartSelectionScript(...);
 int FUN_00499d14(...);
 int dataTable17Type0GetEntry(unsigned char [16], unsigned int);
@@ -55,7 +55,7 @@ extern int statsTestFlag(unsigned int);
 /* Supplied declaration required: pointConvertToFloat. */
 /* Supplied declaration required: FUN_004964e0. */
 /* Supplied declaration required: FUN_00496a0c. */
-/* Supplied declaration required: FUN_00497690. */
+/* Supplied declaration required: equipmentMenuBuildVisibleCategories. */
 /* Supplied declaration required: shopStartSelectionScript. */
 /* Supplied declaration required: FUN_00499d14. */
 /* Supplied declaration required: dataTable17Type0GetEntry. */
@@ -111,7 +111,7 @@ void FUN_004995b0(unsigned int *param_1)
           else {
             param_1[0x5810] = 1;
           }
-          FUN_00497690(param_1,0);
+          equipmentMenuBuildVisibleCategories(param_1,0);
           shopStartSelectionScript(param_1,0);
           param_1[2] = 1;
           return;
@@ -168,7 +168,7 @@ void FUN_004995b0(unsigned int *param_1)
               obj04Finish();
               return;
             }
-            FUN_00497690(param_1,2);
+            equipmentMenuBuildVisibleCategories(param_1,2);
             if ((int)param_1[0x5807] >= 2) {
               *(unsigned char *)(param_1 + 0x5811) = 1;
               shopStartSelectionScript(param_1,2);
@@ -178,7 +178,7 @@ void FUN_004995b0(unsigned int *param_1)
             }
           }
           else {
-            FUN_00497690(param_1,1);
+            equipmentMenuBuildVisibleCategories(param_1,1);
             if ((int)param_1[0x5807] >= 2) {
               *(unsigned char *)((int)param_1 + 0x16045) = 1;
               shopStartSelectionScript(param_1,1);
@@ -228,7 +228,7 @@ void FUN_004995b0(unsigned int *param_1)
         scrScriptProcessStartEntry(param_1[99],temp_v1);
       }
       scrRunOpcodesStub(param_1[99]);
-      FUN_00497690(param_1,0);
+      equipmentMenuBuildVisibleCategories(param_1,0);
       shopStartSelectionScript(param_1,0);
       uiSpriteBankApplyPreset(param_1 + 0xf3,1);
       param_1[2] = 1;

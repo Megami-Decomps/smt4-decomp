@@ -1,5 +1,7 @@
 /* NON_MATCHING: constant-register allocation only, as in FUN_0040a9a0 (retail uses r2/r3/ip for the request defaults and keeps r0 for the request address, saves r5 for the resource); stores, loads and calls match. */
 #include "common.h"
+#include <new>
+#include "classes/Obj557b58.h"
 #include "Model/MoriModelContentLoad.h"
 
 struct ModelResourceRequest {
@@ -19,8 +21,6 @@ struct ModelResourceRequest {
 extern "C" {
 
 u32 FUN_001581dc(const ModelResourceRequest *request);
-void *FUN_00178b04(u32 size, const char *file, int line);   /* allocate with source location */
-extern MoriModelBinding *_ZN9Obj557b58C1Ev(void *mem, u32 unk0C);   /* binding constructor */
 
 extern char DAT_00526000[];     /* "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelContent.cpp" */
 
@@ -35,12 +35,8 @@ void FUN_0040a884(MoriModelContentLoad *content, u32 id)
     u32 resource = FUN_001581dc(&request);
     content->unk0C = resource;
 
-    void *mem = FUN_00178b04(0x1c, DAT_00526000, 0xfb);
-    MoriModelBinding *binding = NULL;
-    if (mem != NULL) {
-        binding = _ZN9Obj557b58C1Ev(mem, resource);
-    }
-    content->binding = binding;
+    Obj557b58 *binding = new (DAT_00526000, 0xfb) Obj557b58(resource);
+    content->binding = reinterpret_cast<MoriModelBinding *>(binding);
 }
 
 } /* extern "C" */

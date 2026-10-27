@@ -1,23 +1,29 @@
-/* NON_MATCHING: retail's switch is a jump table and its nops (stripped debug calls) sit after each failed-allocation check. */
+/* NON_MATCHING: jump table, branch layout and the compiler's nop hints now match retail; retail keeps separate zero registers (sl, then r4/r6 copies feeding `stm sp, {r4, r6}`) per inlined ExpHeap allocation and size in r8, where the build hoists one zero (r8) and stores twice. */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "shard/W6_W6Match1_CriticalSection.h"
 
 extern "C" {
 extern AsdMemoryApoc g_asdMemory;
 extern AsdVramHeap g_asdVramHeapA; /* VRAM bank A */
 extern AsdVramHeap g_asdVramHeapB; /* VRAM bank B */
 
-void nn_os_CriticalSection_Enter(void *lock);
-void nn_os_CriticalSection_Leave(void *lock);
 void *nn_fnd_ExpHeapBase_Allocate(void *heap, u32 size, int alignment, u8 mode, int unk, u8 unk2);
 u32 asdVramHeapAlloc(AsdVramHeap *heap, u32 size);
 void FUN_0019a534(void);
+
+/* Allocates from an ExpHeap under its critical section. */
+static __inline void *allocateLocked(void *heap, void *lock, u32 size, int alignment)
+{
+    ScopedCriticalLock guard(lock);
+    return nn_fnd_ExpHeapBase_Allocate(heap, size, alignment, 0, 0, 0);
+}
 
 /* Allocates `size` bytes from `heap` (a heap id); the alignment class picks the alignment, and
  * a negative alignment allocates from the back of an ExpHeap. Out-of-memory calls the failure hook. */
 void *asdMemoryAllocImpl(int heap, u32 alignClass, u32 unk08, u32 size, int fromFront)
 {
     AsdMemSystem *sys;
-    void *block;
+    void *block = NULL;
     int alignment;
 
     if (size == 0) {
@@ -46,22 +52,19 @@ void *asdMemoryAllocImpl(int heap, u32 alignClass, u32 unk08, u32 size, int from
 
     sys = g_asdMemory.system;
     if (heap == ASD_HEAP_MAIN) {
-        nn_os_CriticalSection_Enter(sys->mainLock);
-        block = nn_fnd_ExpHeapBase_Allocate(sys->mainHeap, size, alignment, 0, 0, 0);
-        nn_os_CriticalSection_Leave(sys->mainLock);
+        block = allocateLocked(sys->mainHeap, sys->mainLock, size, alignment);
+        if (block == NULL) {
+            FUN_0019a534();
+        }
     } else if (heap == ASD_HEAP_EXTRA) {
-        nn_os_CriticalSection_Enter(sys->extraLock);
-        block = nn_fnd_ExpHeapBase_Allocate(sys->extraHeap, size, alignment, 0, 0, 0);
-        nn_os_CriticalSection_Leave(sys->extraLock);
+        block = allocateLocked(sys->extraHeap, sys->extraLock, size, alignment);
+        if (block == NULL) {
+            FUN_0019a534();
+        }
     } else if (heap == ASD_HEAP_VRAM_A) {
-        return (void *)asdVramHeapAlloc(&g_asdVramHeapA, size);
+        block = (void *)asdVramHeapAlloc(&g_asdVramHeapA, size);
     } else if (heap == ASD_HEAP_VRAM_B) {
-        return (void *)asdVramHeapAlloc(&g_asdVramHeapB, size);
-    } else {
-        return NULL;
-    }
-    if (block == NULL) {
-        FUN_0019a534();
+        block = (void *)asdVramHeapAlloc(&g_asdVramHeapB, size);
     }
     return block;
 }

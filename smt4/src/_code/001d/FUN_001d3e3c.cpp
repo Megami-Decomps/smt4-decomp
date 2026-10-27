@@ -53,7 +53,7 @@ int FUN_00297a00(void);
 int asdMdlManagerCreateLoaded(...);
 int asdModelSlotRelease(...);
 int asdMdlManagerDestroy(...);
-int FUN_002aff0c(...);
+int slotOwnerDestroyAllSlots(...);
 int mapProjectPointHeightToCollision(...);
 int objDestroyModels(...);
 
@@ -499,7 +499,7 @@ extern unsigned int asdMdlManagerCreateSecondList(unsigned char *, unsigned int)
 /* Supplied declaration required: asdMdlManagerDestroy. */
 struct ModelBoneAttachmentRoot;
 extern int modelHasLoadedAttachment(const ModelBoneAttachmentRoot *object);
-/* Supplied declaration required: FUN_002aff0c. */
+/* Supplied declaration required: slotOwnerDestroyAllSlots. */
 /* Supplied declaration required: dataTable1bOr1cGetRecord. */
 extern int FUN_002b6b04(void);
 extern int FUN_002b8694(void);
@@ -2538,7 +2538,7 @@ LAB_001d6bd0:
     }
     asdMdlManagerDestroy(puVar7[0x2f]);
     asdMdlManagerDestroy(puVar7[0x36]);
-    FUN_002aff0c(puVar7 + 0x3b);
+    slotOwnerDestroyAllSlots(puVar7 + 0x3b);
     slotPoolReleaseResources();
     FUN_002700d0();
     mapTableRelease();
@@ -3286,7 +3286,7 @@ joined_r0x001d8c24:
     }
     asdMdlManagerDestroy(puVar7[0x2f]);
     asdMdlManagerDestroy(puVar7[0x36]);
-    FUN_002aff0c(puVar7 + 0x3b);
+    slotOwnerDestroyAllSlots(puVar7 + 0x3b);
     slotPoolReleaseResources();
     FUN_002700d0();
     mapTableRelease();

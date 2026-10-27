@@ -13,14 +13,13 @@ void FUN_002c76fc(KeyframeSegmentState *state, const KeyframeSegmentState *defin
     for (; current + step < 4; ++step) {
         state->duration = definition->keys[current + step].time - definition->keys[current].time;
         if (state->duration > 0) {
-            KeyframeSegmentEntry *next = &state->keys[step + current];
-            if (next->value != 0 && next->randomRange > 0) {
-                f32 variation = FUN_002039d0(2, next->randomRange, 1);
+            if (state->keys[step + current].value != 0 && state->keys[step + current].randomRange > 0) {
+                f32 variation = FUN_002039d0(2, state->keys[step + current].randomRange, 1);
                 state->keys[state->keyIndex + step].value -= (u16)(s32)variation;
             }
             s32 nextIndex = state->keyIndex + step;
             const KeyframeSegmentEntry *start = &state->keys[state->keyIndex];
-            next = &state->keys[nextIndex];
+            const KeyframeSegmentEntry *next = &state->keys[nextIndex];
             state->slope = (f32)((s32)next->value - (s32)start->value) /
                 (f32)(next->time - start->time);
             state->target = (f32)next->value;

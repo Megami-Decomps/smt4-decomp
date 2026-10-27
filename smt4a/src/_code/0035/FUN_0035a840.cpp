@@ -4,6 +4,7 @@
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include <stddef.h>
+#include "sys/ResultReport.h"
 
 /* The memory mapped for the loader's stack: its destructor unmaps it, and the block goes back
  * through the engine's operator delete. */
@@ -47,7 +48,6 @@ typedef char ScriptLoadStateOffsets[offsetof(ScriptLoadState, loadState) == 0x7f
 
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result, bool failed);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);

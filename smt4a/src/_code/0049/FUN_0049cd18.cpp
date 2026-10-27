@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected unsupported buy-kind11 and recovered percentage bitfield; sale missing-price block sharing and percentage multiply/divide registers still differ. */
+/* NON_MATCHING: only the buy path percentage scaling (lsl/lsr in r1 vs retail r0, constant register) still differs. */
 #include "common.h"
 #include <stddef.h>
 #include "gamedata/PartyMoney.h"
@@ -45,6 +45,13 @@ void FUN_00408184(s32 kind, s32 amount);
 
 #define PRICE_MISSING 99999999
 
+static __inline s32 itemStackScalePrice(const ItemStack *stack, s32 price)
+{
+    if (stack->flags & 2)
+        price = stack->pricing.percentage * price / 100;
+    return price;
+}
+
 /* Adds (count > 0) or removes (count < 0) copies of an item and, when `charge` is set, settles the
  * price: the buy price (tripled on table flag 4, one million for item 0x7B2) or the sell price, scaled
  * by the stack's percentage. */
@@ -64,7 +71,10 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 1:
         case 12: {
             ItemRecord *record = dataTable8FindRecord(id);
-            price = record != NULL ? record->sellPrice : PRICE_MISSING;
+            if (record == NULL)
+                price = PRICE_MISSING;
+            else
+                price = record->sellPrice;
             break;
         }
         case 2:
@@ -75,17 +85,22 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 7:
         case 8: {
             ItemRecord *record = dataTable08Sub2GetRecord(id);
-            price = record != NULL ? record->equipSellPrice : PRICE_MISSING;
+            if (record == NULL)
+                price = PRICE_MISSING;
+            else
+                price = record->equipSellPrice;
             break;
         }
         case 10: {
             AocRecord *record = aocRecordLookup84(id);
-            price = record != NULL ? record->sellPrice : PRICE_MISSING;
+            if (record == NULL)
+                price = PRICE_MISSING;
+            else
+                price = record->sellPrice;
             break;
         }
         }
-        if (stack->flags & 2)
-            price = stack->pricing.percentage * price / 100;
+        price = itemStackScalePrice(stack, price);
         total = price * count;
     } else {
         flagValueAdd(stack->id, count);
@@ -110,7 +125,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
         case 7:
         case 8: {
             ItemRecord *record = dataTable08Sub2GetRecord(id);
-            price = record != NULL ? record->equipBuyPrice : PRICE_MISSING;
+            price = record == NULL ? PRICE_MISSING : record->equipBuyPrice;
             break;
         }
         }

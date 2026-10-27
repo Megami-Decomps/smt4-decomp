@@ -1,6 +1,7 @@
 /* NON_MATCHING: only the request descriptor construction differs: retail stores `this` into the owner slot first, loads the storage through the queue pointer (add r0,#136; ldr r1,[r0,#12]) and reuses r4 for the pool constants; built orders and allocates them differently. */
 #include "classes/Obj4221bc.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 struct Obj4221bcQueue { u32 unk00[2]; u32 base; u32 offset; };
 struct Obj4221bcRequestQueue { u8 unk00[0xc]; Obj4221bcQueue *storage; };
@@ -20,7 +21,6 @@ s32 FUN_002348a8(Obj4221bcRequestQueue *queue);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002bcc60(Obj4221bcRequestQueue *queue, const u32 *descriptor, void (*callback)(), Obj4221bc **owner);
 void FUN_0038ae30();
-void FUN_002c526c(u32 status);
 }
 
 WindowStatusOperationResult Obj4221bc::vfunc0c(const void *)

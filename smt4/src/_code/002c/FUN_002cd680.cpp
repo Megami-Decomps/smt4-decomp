@@ -1,6 +1,7 @@
 /* NON_MATCHING: register numbering and the argument/stack-initialisation scheduling differ (retail stores the zero arguments and the completion word with one stm and keeps the drain flag in r5) */
 #include "common.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 struct CecCompletionQueue {
     u8 unk000[0x78];
@@ -14,7 +15,6 @@ struct CecCompletionQueue {
 extern "C" {
 extern CecCompletionQueue *g_cecProcess;
 s32 FUN_002c40f8(s32 *, const u32 *, s32, s32, u32, u32);
-void FUN_002c526c(s32, bool);
 bool nn_os_CriticalSection_TryEnter(void *);
 void nn_os_CriticalSection_Leave(void *);
 }

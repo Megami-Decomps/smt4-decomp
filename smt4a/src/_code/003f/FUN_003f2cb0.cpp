@@ -16,9 +16,9 @@ typedef struct {
     unsigned int sp10; /* 0x10: local_10 */
 } param_1_stack;
 
-extern int FUN_0040167c(...); /* 0x40167c */
-extern int FUN_00413094(...); /* 0x413094 */
-extern int soundHandleDetachReturn(...); /* 0x45b830 */
+extern int _ZN10SoundObj70D1Ev(...); /* 0x40167c */
+extern int _ZN10SoundObj3cD1Ev(...); /* 0x413094 */
+extern int _ZN11SoundHandleD1Ev(...); /* 0x45b830 */
 extern int FUN_0045bc3c(...); /* 0x45bc3c */
 extern int FUN_00467080(...); /* 0x467080 */
 extern unsigned char DAT_0055bd6c; /* 0x55bd6c */
@@ -43,13 +43,13 @@ void FUN_003f2cb0(int param_1)
   int temp_v0;
   unsigned int *puVar2;
   
-  __aeabi_vec_dtor(param_1 - 0x1ec,soundHandleDetachReturn,4,0x10);
+  __aeabi_vec_dtor(param_1 - 0x1ec,_ZN11SoundHandleD1Ev,4,0x10);
   __aeabi_vec_dtor(param_1 - 0xa6c,FUN_0045bc3c,0x88,0x10);
   *(unsigned char **)(param_1 - 0xaa8) = &DAT_0055bda8;
   *(unsigned char **)(param_1 - 0xaa4) = &DAT_0055bdc8;
-  __aeabi_vec_dtor(param_1 - 0xb98,FUN_00413094,0x3c,4);
+  __aeabi_vec_dtor(param_1 - 0xb98,_ZN10SoundObj3cD1Ev,0x3c,4);
   __aeabi_vec_dtor(param_1 - 0xc18,FUN_00467080,0x3c,2);
-  __aeabi_vec_dtor(param_1 - 0xdd8,FUN_0040167c,0x70,4);
+  __aeabi_vec_dtor(param_1 - 0xdd8,_ZN10SoundObj70D1Ev,0x70,4);
   temp_v0 = FUN_0045c350(param_1 - 0x1050);
   temp_v0 = FUN_0045e8fc(temp_v0 - 0x118);
   puVar2 = (unsigned int *)(temp_v0 - 0x194);

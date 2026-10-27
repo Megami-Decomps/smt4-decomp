@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies the direction with `subs r2, r0, #0` (cmp here) and orders the two string loads gt then lt; pool order of the two strings differs */
+/* NON_MATCHING: retail copies the direction with `subs r2, r0, #0` (cmp here) and branches after `mov r0, sp`; string loads and pool order now match */
 #include "common.h"
 
 extern "C" {
@@ -18,11 +18,11 @@ void FUN_002980e4(s32 direction, u32 arg)
     char name[32] = {0};
     const char *source = NULL;
 
-    if (direction > 0) {
-        source = DAT_00527f88;
-    }
     if (direction < 0) {
         source = DAT_00527f7c;
+    }
+    if (direction > 0) {
+        source = DAT_00527f88;
     }
     if (direction != 0) {
         ARM_common_memcpy4_9(name, source);

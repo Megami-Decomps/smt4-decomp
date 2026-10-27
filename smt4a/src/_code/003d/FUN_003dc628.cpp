@@ -55,7 +55,7 @@ int FUN_00215bd0(void);
 int FUN_0026f7f0(void);
 int recordGetModeForId(...);
 int FUN_002a4878(...);
-int FUN_002add8c(void);
+int campFusionResultCommand(void);
 int FUN_002c8538(...);
 int FUN_002f78a0(...);
 int flaggedEntrySetValueB(...);
@@ -117,7 +117,7 @@ extern int FUN_002a73f8(void);
 extern int FUN_002a7410(void);
 /* Supplied declaration required: FUN_002a7b74. */
 extern int uniteRequestGet(void);
-/* Supplied declaration required: FUN_002add8c. */
+/* Supplied declaration required: campFusionResultCommand. */
 extern int widgetSubCallIfVisible(int);
 /* Supplied declaration required: FUN_002c39dc. */
 /* Supplied declaration required: FUN_002c7e24. */
@@ -241,7 +241,7 @@ void FUN_003dc628(void)
   }
   temp_v5 = ifTouchGetButtonHelpValue();
   if (temp_v5 == 0xa0) {
-    FUN_002add8c();
+    campFusionResultCommand();
   }
   temp_v5 = FUN_0035a094();
   if (temp_v5 != 0) {

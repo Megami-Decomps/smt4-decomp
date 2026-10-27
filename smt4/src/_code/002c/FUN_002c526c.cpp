@@ -3,7 +3,6 @@
  * ignored and any other is reported with the caller's address; otherwise only level -1 is reported before the fatal
  * error handler runs. */
 #include "common.h"
-#include "sys/ResultReport.h"
 
 extern "C" {
 /* A result code split into its fields (level is signed). */
@@ -22,7 +21,7 @@ extern s8 DAT_0044e7a8;
 void FUN_00128584(u32 result, u32 flag, u32 callerAddress);
 void asdFatalError(void);
 
-void FUN_002c526c(u32 result)
+void FUN_002c526c(u32 result, bool failed)
 {
     ResultFields code;
     code.value = result;

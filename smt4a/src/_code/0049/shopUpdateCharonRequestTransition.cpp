@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase constants hoist into extra registers and switch tails merge differently; -O2 candidate. */
+/* NON_MATCHING: retail merges every phase store into one shared `str r0,[r4,#8]` tail (constants not hoisted); this build stores per case and hoists 2/5 into extra registers. */
 #include "common.h"
 #include "code/Code0035_Smt4a.h"
 
@@ -31,9 +31,17 @@ u32 gameDataBlocksGetWord();
 u32 FUN_004d05b4();
 void asdLoadFileAsyncSimple(const char *, void **, u32);
 CharonScript *FUN_00275bc8(void *, void *);
+void uiElementSetMode(CharonScript *, s32);
 void slotSetRequest(u32, u32, u32);
 s32 screenFadeIsBusy();
 void messageDismissNumericBanner(u32);
+
+static __inline void charonEnterState(CharonTransition *transition, u32 next)
+{
+    transition->previousState = transition->state;
+    transition->state = next;
+    transition->phase = 0;
+}
 
 // Run the shop exit and conditional second Charon request before returning to state 20.
 void shopUpdateCharonRequestTransition(CharonTransition *transition)
@@ -60,25 +68,6 @@ void shopUpdateCharonRequestTransition(CharonTransition *transition)
             transition->phase = 5;
         }
         break;
-    case 2:
-        asdLoadFileAsyncSimple("battle/Result.bf", &transition->resultTable, 0);
-        asdLoadFileAsyncSimple("battle/ResultMsg.mbm", &transition->resultMessages, 0);
-        transition->phase = 3;
-        break;
-    case 3:
-        if (transition->resultTable && transition->resultMessages) {
-            CharonScript *script = FUN_00275bc8(transition->resultTable, transition->resultMessages);
-            transition->resultScript = script;
-            script->state = 2;
-            u32 entry = tableGroupFindEntryIndex(transition->resultTable, "ProcCharonRequestSecond");
-            scrScriptProcessStartEntry(transition->resultScript, entry);
-            transition->phase = 4;
-        }
-        break;
-    case 4:
-        if (scrRunOpcodesStub(transition->resultScript) == 2)
-            transition->phase = 5;
-        break;
     case 5:
         slotSetRequest(0, 10, 0xff);
         slotSetRequest(1, 10, 0xff);
@@ -88,10 +77,27 @@ void shopUpdateCharonRequestTransition(CharonTransition *transition)
     case 6:
         if (!screenFadeIsBusy()) {
             messageDismissNumericBanner(1);
-            transition->previousState = transition->state;
-            transition->state = 20;
-            transition->phase = 0;
+            charonEnterState(transition, 20);
         }
+        break;
+    case 2:
+        asdLoadFileAsyncSimple("battle/Result.bf", &transition->resultTable, 0);
+        asdLoadFileAsyncSimple("battle/ResultMsg.mbm", &transition->resultMessages, 0);
+        transition->phase = 3;
+        break;
+    case 3:
+        if (transition->resultTable && transition->resultMessages) {
+            CharonScript *script = FUN_00275bc8(transition->resultTable, transition->resultMessages);
+            transition->resultScript = script;
+            uiElementSetMode(script, 2);
+            u32 entry = tableGroupFindEntryIndex(transition->resultTable, "ProcCharonRequestSecond");
+            scrScriptProcessStartEntry(transition->resultScript, entry);
+            transition->phase = 4;
+        }
+        break;
+    case 4:
+        if (scrRunOpcodesStub(transition->resultScript) == 2)
+            transition->phase = 5;
         break;
     }
 }

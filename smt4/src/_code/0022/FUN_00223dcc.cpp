@@ -4,6 +4,7 @@
 #include "nn/Result.h"
 #include "camp/PlayLog/PlayLog.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "sys/ResultReport.h"
 
 // Fusion (unite) screen object: only the members its teardown touches.
 struct UniteScreen {
@@ -35,7 +36,6 @@ extern "C" {
 extern UniteScreen* g_unite;
 
 s32 FUN_002c40f8(s32 *signalled, const s32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(s32 result);
 void nn_os_Thread_FinalizeImpl(u32* thread);
 void FUN_002c3f5c(s32 object);
 void asdMemFreeNonNull(s32 object);
@@ -63,8 +63,9 @@ static __inline void uniteWaitForThread(u32 thread)
     s32 handle = thread;
     s32 signalled;
     u32 result = FUN_002c40f8(&signalled, &handle, 1, 0, -1LL);
-    if (nnResultIsFailure(result))
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002c526c(result, failed);
 }
 
 // Destroys the fusion screen: stops its worker thread, releases its models, scripts and buffers.

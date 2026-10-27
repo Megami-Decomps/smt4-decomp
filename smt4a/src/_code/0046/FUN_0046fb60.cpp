@@ -1,4 +1,4 @@
-/* NON_MATCHING: retry delay/state registers, record-pointer registers and loop comparison operands differ. */
+/* NON_MATCHING: only the loop comparison operands differ (retail `cmp index, count; blt`, built `cmp count, index; bgt`). */
 #include "addon/AocContentEnumeration.h"
 #include "addon/aocMain.h"
 #include "nn/Result.h"
@@ -12,6 +12,13 @@ WindowStatusResult FUN_005004a8(u32 *parameters, AocEnumerationResult *enumerati
 u32 legacyResourceIdRemap(WindowStatusResult *result);
 s32 objGetFlagBit1(const AocContentRecord *record);
 s32 objGetFlagBit0(const AocContentRecord *record);
+
+// Schedules the retry: wait `delay` ticks, then continue in `state`.
+static void aocJobSetRetry(AocHandleJob *request, s32 delay, s32 state)
+{
+    request->delay = delay;
+    request->state = state;
+}
 
 // Enumerate installed content, retaining enabled entries and counting flagged ones.
 void FUN_0046fb60(u32 job, AocContentEnumeration *content)
@@ -27,17 +34,15 @@ void FUN_0046fb60(u32 job, AocContentEnumeration *content)
             jyoucyuGetTableEntry(0);
             return;
         }
-        request->delay = (g_aocMain->flags & 0x100) == 0 ? 150 : 50;
-        request->state = 106;
+        aocJobSetRetry(request, (g_aocMain->flags & 0x100) == 0 ? 150 : 50, 106);
         return;
     }
     content->count = 0;
     content->flaggedCount = 0;
     for (s32 index = 0; index < enumeration.count; ++index) {
-        const AocContentRecord *record = &records[index];
-        if (objGetFlagBit1(record)) {
-            content->entries[content->count++] = *record;
-            if (objGetFlagBit0(record))
+        if (objGetFlagBit1(&records[index])) {
+            content->entries[content->count++] = records[index];
+            if (objGetFlagBit0(&records[index]))
                 ++content->flaggedCount;
         }
     }

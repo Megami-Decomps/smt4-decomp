@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail resolves the self-relative table/record pointers with one null merge per level and keeps a zero register; armcc here branches on the null cases (as in resourceGetRelativeElement), and the part copies are scheduled differently. */
+/* NON_MATCHING: retail resolves the self-relative table/record pointers with one null merge per level and keeps a zero register; the if-form `rel()` helper (as in resourceGetRelativeElement) moves closer, and the part copies are scheduled differently. */
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
 #include "AsdSDK/AsdDebug.h"
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
@@ -37,11 +37,7 @@ u32 asdMdlObjectBuildBounds(AsdMdlObject *object)
             for (s32 record = 0; record < recordCount; record++) {
                 AsdMdlRecord *bounds = &object->records[record];
                 RelativeResourceTable *table = ((RelativeResourceOwner *)object)->resource->view->blob->table.get();
-                RelativeResourceRecord *info = NULL;
-                if (table != NULL) {
-                    ResourceRelativePointer<RelativeResourceRecord> *slot = &table->entries[record].record;
-                    info = slot->get();
-                }
+                RelativeResourceRecord *info = table != NULL ? table->entries[record].record.get() : NULL;
                 s32 partCount = info->elementList.count;
                 asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdMdlManager.cpp", 1121);
                 bounds->data = asdMemoryAllocTracked(0x100, 0x100, 0, partCount * 0x84, 1);

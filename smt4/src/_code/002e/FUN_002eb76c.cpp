@@ -5,15 +5,13 @@
 extern "C" void FUN_002eb76c(SpritePlaybackView *sprite, s32 sequence)
 {
     s32 group = 0;
-    u32 count = sprite->resource->sequenceBytes >> 2;
     SpriteSequenceEntry *selected = NULL;
-    for (u32 index = 0; index < count; ++index) {
-        SpriteSequenceEntry *entry = &sprite->resource->sequence[index];
+    for (u32 index = 0; index < (u32)(sprite->resource->sequenceBytes >> 2); ++index) {
         if (group == sequence) {
-            selected = entry;
+            selected = &sprite->resource->sequence[index];
             break;
         }
-        if (entry->value == -1)
+        if (sprite->resource->sequence[index].value == -1)
             ++group;
     }
     sprite->sequence = selected;

@@ -37,11 +37,9 @@ void FUN_00161074(u32 id)
     }
     if (id != 0 && node == NULL) {
         node = g_gfxAllocateCallback != NULL ? (GfxRegistryNode *)g_gfxAllocateCallback(0x10000, 0x100, 0, sizeof(GfxRegistryNode)) : NULL;
-        node->data[0] = 0;
-        node->data[1] = 0;
-        node->data[2] = 0;
-        node->data[3] = 0;
-        node->data[4] = 0;
+        for (s32 i = 0; i < 5; ++i) {
+            node->data[i] = 0;
+        }
         node->next = NULL;
         node->id = id;
         GfxRegistryNode *head = ctx->chains[id & 0x1f];

@@ -5,7 +5,7 @@
 extern "C" {
 
 int FUN_00272e0c(...);
-int FUN_00292200(void);
+int btlViewGetCameraPositionOrDefault(void);
 int gameDataBlocksAddFloat(void);
 int FUN_002d1f40(...);
 int byte76Set(...);
@@ -126,7 +126,7 @@ extern int gameFlagIsSet(unsigned int);
 extern unsigned int gameDataGetTableValue(void);
 /* Supplied declaration required: FUN_00272e0c. */
 /* Supplied declaration required: FUN_002826dc. */
-/* Supplied declaration required: FUN_00292200. */
+/* Supplied declaration required: btlViewGetCameraPositionOrDefault. */
 /* Supplied declaration required: distSpatial. */
 /* Supplied declaration required: mathAngleDeltaDegrees. */
 /* Supplied declaration required: gameDataBlocksAddFloat. */
@@ -3063,7 +3063,7 @@ LAB_002d68ec:
             }
           }
           if (*(char *)(temp_v10 + 0xb1) == '\0') {
-            FUN_00292200();
+            btlViewGetCameraPositionOrDefault();
             distSpatial();
             temp_v16 = SBORROW4((int)temp_v17,0x453b8000);
             temp_v3 = (int)temp_v17 - 0x453b8000;
@@ -3084,7 +3084,7 @@ LAB_002d68ec:
           temp_v42 = temp_v30;
           temp_v43 = temp_v31;
           temp_v44 = temp_v32;
-          FUN_00292200();
+          btlViewGetCameraPositionOrDefault();
           temp_v22 = temp_v43 + 25.0f;
           temp_v18 = temp_v20 + 25.0f;
           temp_v34 = temp_v17;
@@ -3100,7 +3100,7 @@ LAB_002d68ec:
             *(unsigned int *)(temp_v10 + 0xd4) = 0;
             temp_v3 = randRange(2);
             *(int *)(temp_v10 + 0xf0) = temp_v3 + 2;
-            FUN_00292200();
+            btlViewGetCameraPositionOrDefault();
             *(float *)(temp_v10 + 0xf4) = temp_v18;
             *(float *)(temp_v10 + 0xf8) = temp_v20;
             *(float *)(temp_v10 + 0xfc) = temp_v22;
@@ -3151,7 +3151,7 @@ LAB_002d4c0c:
         *(float *)(temp_v10 + 0x54) = temp_v37;
         *(float *)(temp_v10 + 0x58) = fStack_bc;
         *(float *)(temp_v10 + 0x5c) = fStack_b8;
-        FUN_00292200();
+        btlViewGetCameraPositionOrDefault();
         distSpatial();
         if ((int)temp_v8 < 0x43160000) {
           *(unsigned int *)(temp_v10 + 100) = 5;

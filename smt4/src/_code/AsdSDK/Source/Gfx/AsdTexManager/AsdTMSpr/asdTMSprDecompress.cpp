@@ -4,7 +4,7 @@
 
 extern "C" {
 
-s32 FUN_0014f4f8(u8 *data);
+s32 lzGetAdvertisedSize(u8 *data);
 void lzDecompressBytes(const u8 *src, u8 *dst);
 void FUN_0014f408(u8 *src, u8 *dst);
 void FUN_0014f2c8(u8 *src, u8 *dst);
@@ -21,7 +21,7 @@ u8 *asdTMSprDecompress(u8 *data, u32 flags, u32 align)
     u8 *out = data;
     s32 size;
 
-    if ((format == 0x10 || format == 0x20 || format == 0x30) && (size = FUN_0014f4f8(data)) != 0) {
+    if ((format == 0x10 || format == 0x20 || format == 0x30) && (size = lzGetAdvertisedSize(data)) != 0) {
         if (flags & 1) {
             if (flags & 2) {
                 asdDebugTrace(DAT_00409220, 200);

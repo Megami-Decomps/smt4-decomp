@@ -3,6 +3,7 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "util/MemoryHelpers_VariantC.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 
@@ -11,7 +12,6 @@ extern AllocatorState g_allocationAddressRanges;
 void FUN_0018003c(void);
 void *FUN_0017fe8c(void *memory);
 void asdMemoryFreeRegion(void *memory);
-void FUN_002e3140(s32 result, bool failed);
 
 /* Releases the allocator lock (a kernel mutex), reporting a failed release. */
 static __inline void allocatorUnlock(AllocatorState &state)

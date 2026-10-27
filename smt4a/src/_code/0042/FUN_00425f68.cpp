@@ -1,6 +1,7 @@
 #include "common.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 extern "C" {
 extern u32 DAT_005c0b4c;
 extern const char DAT_00537f2b[];
@@ -8,7 +9,6 @@ extern u32 g_y2rTransferEvent;
 void modelServiceEnsureOpen(u32 *handle, const char *service);
 void FUN_0043a844(s32 mode);
 void conversionReplaceEventHandle(u32 *event);
-void FUN_002e3140(s32 result);
 /* Opens the conversion service, requests its event and waits for completion. */
 void FUN_00425f68()
 {

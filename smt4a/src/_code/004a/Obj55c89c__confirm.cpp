@@ -70,9 +70,9 @@ void Obj55c89c::confirm()
     menu->confirmed = 1;
     BibleItemEntry *list = menu->entries;
     if (menu->owned != 0) {
-        u32 id = list[flaggedValueHolderGetTotal(menu->holder())].itemId;
+        u16 id = list[flaggedValueHolderGetTotal(menu->holder())].itemId;
         sysPlaySe(0x4E);
-        FUN_0032d0c8(0, 1, (u16)id, (const void *)slotRecordFindById((u16)id));
+        FUN_0032d0c8(0, 1, id, (const void *)slotRecordFindById(id));
     } else {
         s16 id = (s16)list[flaggedValueHolderGetTotal(menu->holder())].itemId;
         s32 target = FUN_004a8750((u16)id, menu->confirmed, 0, menu->level >= 100, 0);

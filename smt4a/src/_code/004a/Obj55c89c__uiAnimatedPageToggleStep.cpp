@@ -1,4 +1,4 @@
-/* NON_MATCHING: phase-store tail merging and alternate-page flag address formation differ from retail. */
+/* NON_MATCHING: retail shares one phase store between the phase 1 and phase 3 paths and keeps the constant 2 in a register for state and phase. */
 #include "common.h"
 #include "classes/Obj55c89c.h"
 #include "code/Code002a.h"
@@ -30,13 +30,18 @@ void entryDispatchUpdate(void *animation, s32 track);
 s32 vec2GetYInt(const void *point);
 s32 vec2GetXInt(const void *point);
 void pointConvertToFloat(void *point, s32 x, s32 y);
-void uiSpriteBankApplyPreset(void *animation);
+void uiSpriteBankApplyPreset(void *animation, s32 preset);
 s32 objectGetIndexedSignedFlag(void *animation, s32 track);
 void FUN_004a1958(AnimatedPage *page);
 void FUN_004a3e04(AnimatedPage *page);
 void FUN_0032cfe0(AnimatedPage *page);
 
 // Animate out, toggle the page contents, then animate back in.
+}
+
+static __inline void pageSelectTrack(AnimatedPage *page, s32 track)
+{
+    uiSpriteBankApplyPreset(page->animation, page->track = track);
 }
 
 void Obj55c89c::uiAnimatedPageToggleStep()
@@ -48,8 +53,7 @@ void Obj55c89c::uiAnimatedPageToggleStep()
     s32 x = vec2GetXInt(point);
     pointConvertToFloat(page->position, x, y);
     if (page->phase == 0) {
-        page->track = 9;
-        uiSpriteBankApplyPreset(page->animation);
+        pageSelectTrack(page, 9);
         page->phase = 1;
         return;
     }
@@ -61,8 +65,7 @@ void Obj55c89c::uiAnimatedPageToggleStep()
         g_animatedPageSelection.selection = FUN_002a482c(page->selector) + 1;
         FUN_004a3e04(page);
         FUN_0032cfe0(page);
-        page->track = 8;
-        uiSpriteBankApplyPreset(page->animation);
+        pageSelectTrack(page, 8);
         page->phase = 3;
         return;
     } else if (objectGetIndexedSignedFlag(page->animation, page->track) && page->phase == 3) {

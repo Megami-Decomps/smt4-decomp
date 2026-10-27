@@ -1,4 +1,4 @@
-/* NON_MATCHING: error-store merging and confirmation result branch layout differ. */
+/* NON_MATCHING: error byte is now u8 (retail ldrb through the base pointer); retail stores the error code once in a shared block and keeps the confirmation-result block inline after the second arm, here the arms store separately and the block sits after the third. */
 #include "common.h"
 #include "classes/Obj422448.h"
 #include <stddef.h>
@@ -39,7 +39,7 @@ void Obj422448::FUN_003ab9a4()
             u8 unk5a8[0xa008];
             SummonEntry entries[1]; // 0x5a8
         };
-        s8 error; // 0xa5b0
+        u8 error; // 0xa5b0
     };
     typedef char LayoutCheck[sizeof(SummonEntry) == 0x20 &&
         offsetof(SummonConfirmationView, script) == 0x5a0 &&
@@ -59,13 +59,13 @@ void Obj422448::FUN_003ab9a4()
         work->error = 1;
     } else {
         SummonEntry *entries = work->entries;
-        if (FUN_00262cb0(entries[flaggedValueHolderGetTotal(work->cursor)].id)) {
-            work->error = 2;
-        } else {
+        if (!FUN_00262cb0(entries[flaggedValueHolderGetTotal(work->cursor)].id)) {
             s32 occupied = statusCountSelectableChoices();
             s32 capacity = statusGetAvailableChoiceCount();
             if (occupied >= capacity)
                 work->error = 5;
+        } else {
+            work->error = 2;
         }
     }
     if (work->error == 0) {

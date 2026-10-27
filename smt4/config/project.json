@@ -14688,12 +14688,12 @@
     },
     {
       "address": "0x14f4f8",
-      "function": "FUN_0014f4f8",
+      "function": "lzGetAdvertisedSize",
       "module": "_code",
-      "object": "build/obj/_code/0014/FUN_0014f4f8.o",
+      "object": "build/obj/_code/0014/lzGetAdvertisedSize.o",
       "size": 48,
-      "source": "src/_code/0014/FUN_0014f4f8.cpp",
-      "target": "orig/target/_code/0014/FUN_0014f4f8.o",
+      "source": "src/_code/0014/lzGetAdvertisedSize.cpp",
+      "target": "orig/target/_code/0014/lzGetAdvertisedSize.o",
       "thumb": false
     },
     {
@@ -38835,12 +38835,12 @@
     },
     {
       "address": "0x2470a8",
-      "function": "FUN_002470a8",
+      "function": "namedVariantTableGetEntries",
       "module": "_code",
-      "object": "build/obj/_code/0024/FUN_002470a8.o",
+      "object": "build/obj/_code/0024/namedVariantTableGetEntries.o",
       "size": 296,
-      "source": "src/_code/0024/FUN_002470a8.cpp",
-      "target": "orig/target/_code/0024/FUN_002470a8.o",
+      "source": "src/_code/0024/namedVariantTableGetEntries.cpp",
+      "target": "orig/target/_code/0024/namedVariantTableGetEntries.o",
       "thumb": false
     },
     {
@@ -49797,12 +49797,12 @@
     },
     {
       "address": "0x294f64",
-      "function": "FUN_00294f64",
+      "function": "resourceReleaseReference",
       "module": "_code",
-      "object": "build/obj/_code/0029/FUN_00294f64.o",
+      "object": "build/obj/_code/0029/resourceReleaseReference.o",
       "size": 120,
-      "source": "src/_code/0029/FUN_00294f64.cpp",
-      "target": "orig/target/_code/0029/FUN_00294f64.o",
+      "source": "src/_code/0029/resourceReleaseReference.cpp",
+      "target": "orig/target/_code/0029/resourceReleaseReference.o",
       "thumb": false
     },
     {
@@ -52232,23 +52232,29 @@
     },
     {
       "address": "0x2a116c",
-      "function": "FUN_002a116c",
+      "function": "resourceResultMatchesRemappedCodes",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a116c.o",
+      "object": "build/obj/_code/002a/resourceResultMatchesRemappedCodes.o",
       "size": 136,
-      "source": "src/_code/002a/FUN_002a116c.cpp",
-      "target": "orig/target/_code/002a/FUN_002a116c.o",
-      "thumb": false
+      "source": "src/_code/002a/resourceResultMatchesRemappedCodes.cpp",
+      "target": "orig/target/_code/002a/resourceResultMatchesRemappedCodes.o",
+      "thumb": false,
+      "multifile": [
+        "legacyResourceIdRemap"
+      ]
     },
     {
       "address": "0x2a1200",
-      "function": "FUN_002a1200",
+      "function": "resourceResultMatchesKnownRanges",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002a1200.o",
+      "object": "build/obj/_code/002a/resourceResultMatchesKnownRanges.o",
       "size": 72,
-      "source": "src/_code/002a/FUN_002a1200.cpp",
-      "target": "orig/target/_code/002a/FUN_002a1200.o",
-      "thumb": false
+      "source": "src/_code/002a/resourceResultMatchesKnownRanges.cpp",
+      "target": "orig/target/_code/002a/resourceResultMatchesKnownRanges.o",
+      "thumb": false,
+      "multifile": [
+        "legacyResourceIdRemap"
+      ]
     },
     {
       "address": "0x2a1248",
@@ -55292,12 +55298,12 @@
     },
     {
       "address": "0x2aff0c",
-      "function": "FUN_002aff0c",
+      "function": "slotOwnerDestroyAllSlots",
       "module": "_code",
-      "object": "build/obj/_code/002a/FUN_002aff0c.o",
+      "object": "build/obj/_code/002a/slotOwnerDestroyAllSlots.o",
       "size": 100,
-      "source": "src/_code/002a/FUN_002aff0c.cpp",
-      "target": "orig/target/_code/002a/FUN_002aff0c.o",
+      "source": "src/_code/002a/slotOwnerDestroyAllSlots.cpp",
+      "target": "orig/target/_code/002a/slotOwnerDestroyAllSlots.o",
       "thumb": false
     },
     {
@@ -57417,12 +57423,12 @@
     },
     {
       "address": "0x2ba8f4",
-      "function": "FUN_002ba8f4",
+      "function": "kernelThreadJoinAndClose",
       "module": "_code",
-      "object": "build/obj/_code/002b/FUN_002ba8f4.o",
+      "object": "build/obj/_code/002b/kernelThreadJoinAndClose.o",
       "size": 116,
-      "source": "src/_code/002b/FUN_002ba8f4.cpp",
-      "target": "orig/target/_code/002b/FUN_002ba8f4.o",
+      "source": "src/_code/002b/kernelThreadJoinAndClose.cpp",
+      "target": "orig/target/_code/002b/kernelThreadJoinAndClose.o",
       "thumb": false
     },
     {
@@ -98067,12 +98073,12 @@
     },
     {
       "address": "0x3a0740",
-      "function": "FUN_003a0740",
+      "function": "callbackStateClear",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a0740.o",
+      "object": "build/obj/_code/003a/callbackStateClear.o",
       "size": 28,
-      "source": "src/_code/003a/FUN_003a0740.cpp",
-      "target": "orig/target/_code/003a/FUN_003a0740.o",
+      "source": "src/_code/003a/callbackStateClear.cpp",
+      "target": "orig/target/_code/003a/callbackStateClear.o",
       "thumb": false
     },
     {
@@ -98178,12 +98184,12 @@
     },
     {
       "address": "0x3a1378",
-      "function": "FUN_003a1378",
+      "function": "sceneApplyTransaction",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a1378.o",
+      "object": "build/obj/_code/003a/sceneApplyTransaction.o",
       "size": 232,
-      "source": "src/_code/003a/FUN_003a1378.cpp",
-      "target": "orig/target/_code/003a/FUN_003a1378.o",
+      "source": "src/_code/003a/sceneApplyTransaction.cpp",
+      "target": "orig/target/_code/003a/sceneApplyTransaction.o",
       "thumb": false
     },
     {
@@ -98218,12 +98224,12 @@
     },
     {
       "address": "0x3a169c",
-      "function": "FUN_003a169c",
+      "function": "shopLoadMessageBankAndSound",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a169c.o",
+      "object": "build/obj/_code/003a/shopLoadMessageBankAndSound.o",
       "size": 408,
-      "source": "src/_code/003a/FUN_003a169c.cpp",
-      "target": "orig/target/_code/003a/FUN_003a169c.o",
+      "source": "src/_code/003a/shopLoadMessageBankAndSound.cpp",
+      "target": "orig/target/_code/003a/shopLoadMessageBankAndSound.o",
       "thumb": false
     },
     {

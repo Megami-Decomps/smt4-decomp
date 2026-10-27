@@ -20,12 +20,12 @@ void _ZN9Obj557b285slot6Ev(RampParameter *self)
     s32 frame = self->frame + 1;
     f32 value = self->value;
     self->frame = frame;
-    if (frame < self->riseEnd) {
+    if (self->riseEnd > frame) {
         value = value + self->riseStep;
         self->value = value;
-    } else if (frame < self->holdEnd) {
+    } else if (self->holdEnd > frame) {
         // Hold the current value until the falling segment starts.
-    } else if (self->fallEnd > frame) {
+    } else if (frame < self->fallEnd) {
         value = value - self->fallStep;
         self->value = value;
     }

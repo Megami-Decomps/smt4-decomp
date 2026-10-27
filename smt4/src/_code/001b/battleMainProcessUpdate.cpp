@@ -165,7 +165,7 @@ void FUN_003ae3cc(void *ui);
 void asdMemFree(void *allocation);
 void memClear(void *memory, u32 size);
 void wordTripleClear(u32 *values);
-void FUN_00294f64(void *resource);
+void resourceReleaseReference(void *resource);
 void listBoxClearSelectionAndReset(void *event);
 void modelManagerReleaseSlots(void *event);
 void modelSetResetSlots(void *event);
@@ -279,7 +279,7 @@ static inline void resetBattleTaskRound(BattleTaskContext *work)
     }
     for (s32 index = 0; index < 42; ++index) {
         if (work->resources[index]) {
-            FUN_00294f64(work->resources[index]);
+            resourceReleaseReference(work->resources[index]);
             work->resources[index] = NULL;
         }
     }

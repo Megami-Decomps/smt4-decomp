@@ -1,4 +1,4 @@
-/* NON_MATCHING: group-selection branches and condition-mask saved registers differ; retail shares the condition-store tail. */
+/* NON_MATCHING: only the unit-loop affinity call's argument setup differs: retail loads unit (r1), 11 (r2), then the output address (r0). */
 #include "shard/Shard0031.h"
 #include "shard/Shard0034.h"
 #include "shard/Shard004B.h"
@@ -11,6 +11,20 @@ s32 gameSlotTableFindFree(void);
 s32 randRange(s32 maximum);
 void FUN_003dfad4(u16 *affinities, const PlayerData *player);
 void affinityResolveUnitSlot(u16 *affinity, const BitsAt60 *unit, u32 element);
+
+static inline s32 statusAffinityAllows(u16 affinity)
+{
+    u32 state = affinity >> 10;
+    if (state == 1 || state == 3 || state == 4)
+        return 0;
+    return 1;
+}
+
+static inline s32 unitAffinityAllows(BitsAt60 *unit, u16 *affinities)
+{
+    affinityResolveUnitSlot(affinities, unit, 11);
+    return statusAffinityAllows(affinities[0]);
+}
 
 /* Apply a probabilistic status to the selected player and party groups. */
 void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
@@ -25,25 +39,29 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
         (gameGetPlayerData()->unk5E & 0x400) == 0 &&
         (gameGetPlayerData()->unk5E & mask) == 0 &&
         randRange(99) < chance) {
+        s32 canApply = 1;
         if (condition == 5) {
             FUN_003dfad4(affinities, gameGetPlayerData());
-            u16 response = affinities[11] >> 10;
-            if (response != 1 && response != 3 && response != 4) {
-                gameGetPlayerData()->unk5E |= mask;
-            }
-        } else {
+            canApply = statusAffinityAllows(affinities[11]);
+        }
+        if (canApply) {
             gameGetPlayerData()->unk5E |= mask;
         }
     }
     s32 count;
     const s8 *slots;
-    if (group == 1 || group == 0) {
+    switch (group) {
+    case 0:
+    case 1:
         count = gameSlotTableFindFree();
         slots = gameGetSlotTable()->active.slots;
-    } else if (group == 2 || group == 3) {
+        break;
+    case 2:
+    case 3:
         count = 3;
         slots = gameGetSlotTable()->reserve;
-    } else {
+        break;
+    default:
         return;
     }
     for (s32 index = 0; index < count; ++index) {
@@ -51,17 +69,19 @@ void partyTryInflictCondition(u32 group, u32 condition, s32 chance)
             continue;
         }
         BitsAt60 *unit = gameGetSlotRecord(slots[index]);
-        if ((unit->bits & 2) == 0 && (unit->bits & 0x400) == 0 &&
-            (unit->bits & mask) == 0 && randRange(99) < chance) {
-            if (condition == 5) {
-                affinityResolveUnitSlot(affinities, unit, 11);
-                u16 response = affinities[0] >> 10;
-                if (response != 1 && response != 3 && response != 4) {
-                    unit->bits |= mask;
-                }
-            } else {
-                unit->bits |= mask;
-            }
+        if (unit->bits & 2) {
+            continue;
+        }
+        if (unit->bits & 0x400) {
+            continue;
+        }
+        if (unit->bits & mask) {
+            continue;
+        }
+        if (randRange(99) < chance) {
+            if (condition == 5 && !unitAffinityAllows(unit, affinities))
+                continue;
+            unit->bits |= mask;
         }
     }
 }

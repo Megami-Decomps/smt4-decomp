@@ -1,5 +1,33 @@
-/* NON_MATCHING: retail applies the mask/set pairs as separate bic/orr immediates (suggests bitfield writes) with the original word kept in r2; the constant-mask form here compiles to conditional execution with pool constants */
+/* NON_MATCHING: all bic/orr immediates and the branch layout now match retail; only the register shape differs: retail loads the word into r2 and copies it to r0 (mov r0, r2) before the first branch, the build works in r0 throughout */
 #include "common.h"
+
+static inline u32 modeWithBothSources(u32 v)
+{
+    v &= ~0x40000000u;
+    v &= ~0x200u;
+    v |= 0x12000000u;
+    v |= 0x440u;
+    v |= 0x4000u;
+    return v;
+}
+
+static inline u32 modeWithSecondSource(u32 v)
+{
+    v &= ~0x200u;
+    v |= 0x12000000u;
+    v |= 0x440u;
+    v |= 0x4000u;
+    v |= 0x40000000u;
+    return v;
+}
+
+static inline u32 modeWithNoSource(u32 v)
+{
+    v &= ~0x52000000u;
+    v &= ~0x440u;
+    v |= 0x200u;
+    return v;
+}
 
 extern "C" {
 
@@ -10,15 +38,12 @@ void FUN_003c3360(u32 unused, u8 *ctx)
     u32 v = *reg;
 
     if (v & 0x100000) {
-        v = (v & 0xbffffdff) | 0x12004440;
+        *reg = modeWithBothSources(v);
+    } else if (v & 0x80000000) {
+        *reg = modeWithSecondSource(v);
     } else {
-        if (!(v & 0x80000000)) {
-            *reg = (v & 0xadfffbbf) | 0x200;
-            return;
-        }
-        v = (v & 0xfffffdff) | 0x52004440;
+        *reg = modeWithNoSource(v);
     }
-    *reg = v;
 }
 
 } /* extern "C" */

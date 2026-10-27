@@ -1,4 +1,4 @@
-/* NON_MATCHING: initialization-helper return lifetime and ready/error block placement differ. */
+/* NON_MATCHING: the initialization helper's failure test and out-of-line block placement, and the id/value register assignment, differ. */
 #include "common.h"
 #include "nn/Result.h"
 
@@ -34,13 +34,13 @@ extern "C" s32 FUN_00426344(u32 id, const u32 *value)
     s32 result = FUN_0042656c(id, &ready);
     if (nnResultIsFailure(result))
         return result;
-    if (ready) {
-        FUN_004264d0(id, id, 0x40);
-    } else {
+    if (!ready) {
         result = sessionEnsureInitialized();
         if (nnResultIsFailure(result))
             return result;
         FUN_004266e4(id, id, 0, 0);
+    } else {
+        FUN_004264d0(id, id, 0x40);
     }
     result = FUN_00426478(id, *value);
     return result;

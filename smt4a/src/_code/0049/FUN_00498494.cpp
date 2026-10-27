@@ -2,11 +2,11 @@
 #include "shard/Shard0049.h"
 
 extern "C" {
-s32 FUN_001ba3d0(s16);
+s32 FUN_001ba3d0(u16);
 s32 FUN_0031d174(EquipmentMenuCursor *);
-s32 FUN_00498408(EquipmentMenuState *, s16);
+s32 FUN_00498408(EquipmentMenuState *, u16);
 u32 shopGetEntryPrice(EquipmentMenuItem *);
-s32 btlRollClamped(s16, u32);
+s32 btlRollClamped(u16, u32);
 s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 
 void FUN_00498494(EquipmentMenuState *state, u32 nextState)
@@ -31,7 +31,7 @@ void FUN_00498494(EquipmentMenuState *state, u32 nextState)
         value = FUN_001ba3d0(item->id);
         if (value < 0)
             value = 0;
-        else if (value >= 100)
+        else if (value > 99)
             value = 99;
         if (FUN_00498408(state, item->id) != 0)
             --value;

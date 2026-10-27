@@ -42,7 +42,7 @@ int FUN_003e40d0(...);
 int linkHolderApplyFirst(...);
 int linkHolderClearFlag(...);
 int FUN_003fce08(...);
-int FUN_0040a244(void);
+int resourceReleaseReference(void);
 int resourceOwnerLoadNamed(...);
 int FUN_0040b27c(...);
 int playerLoadOutfitPartModel(...);
@@ -123,7 +123,7 @@ extern unsigned int _ZN9Obj557ae8C1Ev(void);
 /* Supplied declaration required: FUN_003fce08. */
 extern int nkdwLoaderParse(unsigned int);
 extern unsigned int FUN_00409fe8(int, unsigned int);
-/* Supplied declaration required: FUN_0040a244. */
+/* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: FUN_0040ae70. */
 extern int FUN_0040af60(int);
 /* Supplied declaration required: resourceOwnerLoadNamed. */
@@ -249,7 +249,7 @@ unsigned int FUN_00208c08(void)
       *(unsigned short *)(temp_v2 + 0x138c) = 0;
     }
     if ((0 < *(short *)(temp_v2 + 0x138e)) && (*(int *)(temp_v2 + 0x2028) != 0)) {
-      FUN_0040a244();
+      resourceReleaseReference();
       *(unsigned int *)(temp_v2 + 0x2028) = 0;
     }
     temp_v3 = DAT_00588fd4;
@@ -597,7 +597,7 @@ LAB_00209b8c:
                 *(unsigned short *)(temp_v2 + 0x138c) = 0;
               }
               if ((0 < *(short *)(temp_v2 + 0x138e)) && (*(int *)(temp_v2 + 0x2028) != 0)) {
-                FUN_0040a244();
+                resourceReleaseReference();
                 *(unsigned int *)(temp_v2 + 0x2028) = 0;
                 *(unsigned short *)(temp_v2 + 0x138e) = 0xffff;
               }

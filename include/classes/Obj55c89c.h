@@ -7,6 +7,7 @@
 class Obj55c89c : public Obj55c920 {
 public:
     Obj55c89c(u32 mode);
+    virtual ~Obj55c89c();
     virtual void start();
     virtual void unk0c();
     virtual void stop();

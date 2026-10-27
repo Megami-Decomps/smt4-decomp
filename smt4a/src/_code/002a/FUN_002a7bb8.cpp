@@ -74,7 +74,7 @@ extern int recordGetModeForId(int);
 /* Supplied declaration required: resourceRunOperationIfUnblocked. */
 extern int FUN_002a4894(int);
 /* Supplied declaration required: FUN_002f3a90. */
-extern int FUN_003347e8(void);
+extern int uniteSelectedFusionIsEnabled(void);
 /* Supplied declaration required: FUN_00344cd0. */
 extern int uiSearchPrimary(int);
 
@@ -333,7 +333,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
       temp_v10 = asdTMTexTableEntryAt(0x1a,0x123);
       temp_v14 = temp_v14 + 0x13b8;
       FUN_002f3a90();
-      temp_v11 = FUN_003347e8();
+      temp_v11 = uniteSelectedFusionIsEnabled();
       if (temp_v11 != 0) {
         textFormatBuffer(temp_v22,"-");
         temp_v14 = 0;
@@ -604,7 +604,7 @@ void FUN_002a7bb8(int param_1,int param_2,int param_3)
                (int)*(short *)(temp_v6 + 10) + (int)*(short *)(temp_v14 + 10) + temp_v8,0x9c);
   temp_v16 = temp_v16 + 0x13b8;
   FUN_002f3a90();
-  temp_v3 = FUN_003347e8();
+  temp_v3 = uniteSelectedFusionIsEnabled();
   if (temp_v3 != 0) {
     textFormatBuffer(temp_v22,&LAB_002a967c);
     temp_v16 = 0;

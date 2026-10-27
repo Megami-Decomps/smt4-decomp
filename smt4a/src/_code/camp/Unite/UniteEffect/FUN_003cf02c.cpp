@@ -18,7 +18,7 @@ int btlTalkBustUpSetUnk2F4(...);
 int FUN_0038b3f8(...);
 int soundChannelStopAll(...);
 int workOwnerRelease(...);
-int FUN_0040a244(...);
+int resourceReleaseReference(...);
 
 int FUN_001517b4(...);
 int sysPlaySe(...);
@@ -115,7 +115,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: _ZN9Obj557af8C1EPK21AsdAnimCameraResource. */
 /* Supplied declaration required: FUN_003fe86c. */
 /* Supplied declaration required: workOwnerRelease. */
-/* Supplied declaration required: FUN_0040a244. */
+/* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: FUN_0040aa6c. */
 /* Supplied declaration required: FUN_0040aad4. */
 /* Supplied declaration required: FUN_0040ab7c. */
@@ -656,13 +656,13 @@ LAB_003cf9bc:
         do {
           FUN_0038b3f8((int)*(short *)(temp_v2 + temp_v6 * 2 + 0xe),1);
           temp_v10 = temp_v2 + temp_v6 * 4;
-          FUN_0040a244(*(unsigned int *)(temp_v10 + 0x28));
+          resourceReleaseReference(*(unsigned int *)(temp_v10 + 0x28));
           *(unsigned int *)(temp_v10 + 0x28) = 0;
           temp_v6 = temp_v6 + 1;
         } while (temp_v6 < (int)(unsigned int)*(unsigned short *)(temp_v2 + 0x1e));
       }
       workOwnerRelease(temp_v2 + 0x38);
-      FUN_0040a244(*(unsigned int *)(temp_v2 + 0x8c));
+      resourceReleaseReference(*(unsigned int *)(temp_v2 + 0x8c));
       *(unsigned int *)(temp_v2 + 0x8c) = 0;
       btlTalkBustUpReleaseContent();
       ptrListRemoveClearOwner(g_handleRegistry,*(unsigned int *)(*(int *)(temp_v2 + 0x94) + 4));

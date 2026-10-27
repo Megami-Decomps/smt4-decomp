@@ -34,7 +34,10 @@ u16 FUN_001ba3d4(s32 id)
             const s32 bit = id % 8;
             return (*flag & (1u << bit)) != 0;
         }
-        return range->width != 1 ? 0 : reinterpret_cast<u16 *>(data)[id];
+        if (range->width != 1) {
+            return 0;
+        }
+        return reinterpret_cast<u16 *>(data)[id];
     }
     return 0;
 }

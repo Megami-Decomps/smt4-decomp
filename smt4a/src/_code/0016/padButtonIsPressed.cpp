@@ -14,14 +14,16 @@ extern s32 DAT_00640000[31];
 u32 padButtonIsPressed(u32 button)
 {
     if (button < 31) {
-        const u32 flags = DAT_005b4000.flags;
-        if ((flags & 1) == 0 && (flags & 2) == 0) {
-            if (DAT_00640000[button] == 1) {
-                return 1;
-            }
+        if (DAT_005b4000.flags & 1) {
+            return 0;
+        }
+        if (DAT_005b4000.flags & 2) {
+            return 0;
+        }
+        if (DAT_00640000[button] == 1) {
+            return 1;
         }
     }
-
     return 0;
 }
 }

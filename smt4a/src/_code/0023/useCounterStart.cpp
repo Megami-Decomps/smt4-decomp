@@ -1,4 +1,4 @@
-/* NON_MATCHING: global load precedes push; count/value/loop scratch registers differ. */
+/* NON_MATCHING: the global pool load is placed before the push (retail: right after it) and the count/value/loop scratch registers are numbered differently; the loop reads count in its condition like retail. */
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
 #include "event/2dEvent/2dEventTex.h"
@@ -34,8 +34,7 @@ void useCounterStart(void)
     work->frame = 0;
     if (work->valueOffset >= 0) {
         const u8 *value = FUN_0026140c() + work->valueOffset;
-        s32 count = work->count;
-        for (s32 index = 0; index < count; ++index) {
+        for (s32 index = 0; index < work->count; ++index) {
             if (work->values[index] == (*value & 0x7f)) {
                 FUN_002a4964(work->selection);
                 break;

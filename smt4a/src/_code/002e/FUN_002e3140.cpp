@@ -3,7 +3,6 @@
  * ignored and any other is reported with the caller's address; otherwise only level -1 is reported before the fatal
  * error handler runs. */
 #include "common.h"
-#include "sys/ResultReport.h"
 
 extern "C" {
 /* A result code split into its fields (level is signed). */

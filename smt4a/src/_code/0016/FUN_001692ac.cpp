@@ -6,6 +6,12 @@ extern "C" {
 /* Reads or updates the requested state. */
 u32 FUN_001692ac(u32 value, bool enabled)
 {
-    return ((value != 1) | (enabled ? 0x1000 : 0) | (value << 4)) | 0xf00;
+    u32 mismatch = 1;
+    if (value == 1) {
+        mismatch = 0;
+    }
+    u32 flags = mismatch | (value << 4);
+    u32 extra = enabled ? 0x1000 : 0;
+    return (extra | flags) | 0xf00;
 }
 }

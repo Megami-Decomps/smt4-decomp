@@ -14,7 +14,7 @@ void FUN_0019eab0(void *object, ResourceSlots *slots)
     if ((slots->flags & 1) == 0) {
         return;
     }
-    for (void **entry = slots->entries; entry != slots->end; ++entry) {
+    for (void **entry = slots->entries; entry != slots->end; entry++) {
         if (*entry != NULL && *entry == object) {
             *entry = NULL;
             return;

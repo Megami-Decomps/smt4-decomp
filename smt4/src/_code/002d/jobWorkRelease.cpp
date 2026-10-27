@@ -2,7 +2,7 @@
 
 extern "C" {
 
-int FUN_00294f64(void);
+int resourceReleaseReference(void);
 int asdMemFree(int ptr);
 
 typedef struct JobWork {
@@ -17,7 +17,7 @@ void jobWorkRelease(void)
     JobWork *work = jobGetWork();
 
     if (work->unk34 != 0) {
-        FUN_00294f64();
+        resourceReleaseReference();
         work->unk34 = 0;
     }
     asdMemFree((int)work);

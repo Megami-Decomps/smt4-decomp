@@ -1,6 +1,7 @@
 /* NON_MATCHING: queue block, failure test and branch-1 layout now match; remaining diff is the request-descriptor store/literal scheduling (callback literal loaded first in retail), ldm vs two ldr for base/offset, and the final conditional-call form (lsrs;blne after the mask test). */
 #include "classes/Obj422290.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 struct Obj422290Queue { u32 unk00[2]; u32 base; u32 offset; };
 struct Obj422290Queue2 { u8 unk00[0xc]; Obj422290Queue *storage; };
@@ -20,7 +21,6 @@ s32 FUN_002348a8(void *queue);
 s32 legacyResourceIdRemap(const WindowStatusResult *result);
 u32 FUN_002bcc60(void *queue, const u32 *descriptor, void (*callback)(), Obj422290 **owner);
 void FUN_0038dc48();
-void FUN_002c526c(u32 status);
 }
 
 WindowStatusOperationResult Obj422290::vfunc0c(const void *)

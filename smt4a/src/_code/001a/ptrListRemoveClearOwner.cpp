@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads begin/end with ldrd and its unrolled shift loop also guards on next < end; built uses ldm and a plain count loop */
+/* NON_MATCHING: loop structure and row count now match retail (unrolled std::copy-style helper); remaining: retail loads begin/end with ldrd, reaches the vector through `ldr r3, [r0, #24]!`, and keeps the copy source in ip. */
 #include "common.h"
 
 extern "C" {
@@ -18,6 +18,13 @@ typedef struct {
     PtrVector items;     /* 0x18 */
 } PtrList;
 
+static void ptrCopy(PtrListItem **first, PtrListItem **last, PtrListItem **result)
+{
+    for (s32 i = 0; i < last - first; i++) {
+        result[i] = first[i];
+    }
+}
+
 /* Removes `*it` from the vector, shifting the later elements down. */
 static void ptrVectorErase(PtrVector *vec, PtrListItem **it)
 {
@@ -25,11 +32,7 @@ static void ptrVectorErase(PtrVector *vec, PtrListItem **it)
         PtrListItem **next = it + 1;
 
         if (next != vec->end) {
-            s32 count = vec->end - next;
-
-            for (s32 i = 0; i < count; i++) {
-                it[i] = next[i];
-            }
+            ptrCopy(next, vec->end, it);
         }
         vec->end--;
     }

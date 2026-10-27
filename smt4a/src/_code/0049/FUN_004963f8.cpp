@@ -1,12 +1,12 @@
-/* NON_MATCHING: packed-entry option clearing uses AND rather than retail's halfword shift pair. */
 #include "shard/S2Scene3a.h"
+#include "gamedata/AocItemRef.h"
 #include "addon/AocEntryKind.h"
 #include "gamedata/PartyMoney.h"
 
 extern "C" {
 void FUN_00408184(u32 kind, u32 amount);
 void gameDataAddCappedPoints(u32 points);
-void FUN_0049cd18(const Scene3aEntry *entry, s32 quantity, u32 flags);
+void FUN_0049cd18(const AocItemRef *entry, s32 quantity, u32 flags);
 
 void FUN_004963f8(Scene3a *scene)
 {
@@ -30,15 +30,19 @@ void FUN_004963f8(Scene3a *scene)
         if (id == 0) {
             return;
         }
-        Scene3aEntry entry;
+        AocItemRef entry;
         if (aocEntryGetKindForward(id) == 10) {
             gameDataAddCappedPoints(aocGetContentFlags(id) * quantity);
+            entry.unk02Bit0 = 0;
+            entry.scaled = 0;
+            entry.percent = 0;
             entry.id = id;
-            entry.attributes.options = 0;
             FUN_0049cd18(&entry, -quantity, 0);
         } else {
+            entry.unk02Bit0 = 0;
+            entry.scaled = 0;
+            entry.percent = 0;
             entry.id = id;
-            entry.attributes.options = 0;
             FUN_0049cd18(&entry, quantity, 0);
         }
     }

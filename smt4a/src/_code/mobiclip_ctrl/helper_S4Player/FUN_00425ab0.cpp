@@ -3,6 +3,7 @@
 #include "mobiclip_ctrl/MoviePlayerInitialization.h"
 #include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "sys/ResultReport.h"
 extern "C" {
 extern void *DAT_00588100;
 extern ThreadStackStorage *DAT_00588104;
@@ -18,7 +19,6 @@ void FUN_00514b8c(void);
 void FUN_00514b2c(void);
 s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *),
     const void *argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_002e3140(s32 error);
 
 u32 FUN_00425ab0(MoviePlayerInitialization *player, void *fileBackend, void *reader,
     void *decoder, void *output, void *consumer)
@@ -76,8 +76,9 @@ u32 FUN_00425ab0(MoviePlayerInitialization *player, void *fileBackend, void *rea
     MoviePlayerInitialization *argument = player;
     s32 result = FUN_002fb0d4(player->initialization.thread, &descriptor, FUN_004241a8,
         &argument, DAT_00588104->info.address + DAT_00588104->info.size, 17, -2, 0);
-    if (nnResultIsFailure(result))
-        FUN_002e3140(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002e3140(result, failed);
     return 1;
 }
 }

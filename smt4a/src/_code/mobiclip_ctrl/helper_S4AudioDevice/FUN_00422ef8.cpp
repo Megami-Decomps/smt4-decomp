@@ -5,6 +5,7 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "mobiclip_ctrl/helper_S4AudioDevice.h"
+#include "sys/ResultReport.h"
 
 /* The memory mapped for the mixer thread's stack: its destructor unmaps it, and the block goes
  * back through the engine's operator delete. */
@@ -56,7 +57,6 @@ void nn_os_CriticalSection_Leave(void *section);
 void nn_snd_CTR_Voice_SetState(u32 voice, s32 state);
 void nn_snd_CTR_FreeVoice(u32 voice);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result, bool failed);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);

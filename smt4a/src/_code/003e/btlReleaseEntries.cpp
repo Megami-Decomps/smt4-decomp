@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void FUN_0040a244(void *obj);
+extern void resourceReleaseReference(void *obj);
 
 /* Releases the object of each of the 12 entries and clears the pointer. */
 void btlReleaseEntries(BtlStateB *state)
@@ -13,7 +13,7 @@ void btlReleaseEntries(BtlStateB *state)
     for (i = 0; i < 0xC; i++) {
         entry = &state->entries4D78[i];
         if (entry->obj != NULL) {
-            FUN_0040a244(entry->obj);
+            resourceReleaseReference(entry->obj);
             entry->obj = NULL;
         }
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: scheduling only: retail computes the thread address (add r0, r4, #1068) after the joined-flag store, the build hoists it above the wait call. Same difference as FUN_002e2f14. */
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
+#include "sys/ResultReport.h"
 
 /* The CEC worker process (the part its shutdown touches). */
 struct CecProcess {
@@ -17,7 +18,6 @@ extern "C" {
 extern CecProcess *g_cecProcess;
 
 s32 FUN_002c40f8(s32 *signaled, u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(s32 result, bool failed);
 void FUN_002c3f5c(void *queue);
 void asdMemFree(void *block);
 

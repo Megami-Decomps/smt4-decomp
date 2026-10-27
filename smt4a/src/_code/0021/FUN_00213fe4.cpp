@@ -1,4 +1,4 @@
-/* NON_MATCHING: channel mode/counter/limit registers and argument setup scheduling differ; the consumed RGB timing argument is now passed explicitly. */
+/* NON_MATCHING: RGB counter reset and first target load use the inline helper's register instead of the owner's; see smt4 FUN_00193f38. */
 #include "common.h"
 #include "shard/W6_W6Match8_ColorKeys.h"
 
@@ -34,11 +34,27 @@ void FUN_002c781c(ColorKeyEffect *effect, u32 arg);
 void FUN_002c793c(ColorKeyEffect *effect, u32 arg);
 void FUN_00229264(f32 *output, f32 from, f32 to);
 
-/* Advances each active channel of the colour-key effect by one frame: steps its values towards the
- * targets, or restarts it when its frame limit has passed. */
-void FUN_00213fe4(ColorKeyEffect *effect, u32 arg)
+} /* extern "C" */
+
+/* Every scalar colour-key track has the same clock and interpolation rules. */
+template <s32 Channel, s32 Value, void (*Restart)(ColorKeyEffect *, u32)>
+static inline void advanceColorKeyChannel(ColorKeyEffect *effect, u32 arg)
 {
-    if (effect->mode[0] < 4) {
+    if (effect->mode[Channel] < COLOR_KEY_ACTIVE_MODES) {
+        effect->counter[Channel]++;
+        if (effect->limit[Channel] < effect->counter[Channel]) {
+            effect->counter[Channel] = 0;
+            effect->param[Value] = 0.0f;
+            Restart(effect, arg);
+        } else {
+            FUN_00229264(&effect->value[Value], effect->param[Value], effect->target[Value]);
+        }
+    }
+}
+
+static inline void advanceColorKeyRgbChannel(ColorKeyEffect *effect, u32 arg)
+{
+    if (effect->mode[0] < COLOR_KEY_ACTIVE_MODES) {
         effect->counter[0]++;
         if (effect->limit[0] < effect->counter[0]) {
             effect->counter[0] = 0;
@@ -46,93 +62,29 @@ void FUN_00213fe4(ColorKeyEffect *effect, u32 arg)
             effect->param[1] = 0.0f;
             effect->param[2] = 0.0f;
             colorKeyTrackAdvanceRgb(reinterpret_cast<ColorKeyTrack *>(effect),
-                                    reinterpret_cast<const ColorKey *>(arg));
+                reinterpret_cast<const ColorKey *>(arg));
         } else {
             FUN_00229264(&effect->value[0], effect->param[0], effect->target[0]);
             FUN_00229264(&effect->value[1], effect->param[1], effect->target[1]);
             FUN_00229264(&effect->value[2], effect->param[2], effect->target[2]);
         }
     }
-    if (effect->mode[1] < 4) {
-        effect->counter[1]++;
-        if (effect->limit[1] < effect->counter[1]) {
-            effect->counter[1] = 0;
-            effect->param[3] = 0.0f;
-            FUN_00285320(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[3], effect->param[3], effect->target[3]);
-        }
-    }
-    if (effect->mode[2] < 4) {
-        effect->counter[2]++;
-        if (effect->limit[2] < effect->counter[2]) {
-            effect->counter[2] = 0;
-            effect->param[4] = 0.0f;
-            FUN_002853ec(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[4], effect->param[4], effect->target[4]);
-        }
-    }
-    if (effect->mode[3] < 4) {
-        effect->counter[3]++;
-        if (effect->limit[3] < effect->counter[3]) {
-            effect->counter[3] = 0;
-            effect->param[5] = 0.0f;
-            FUN_002a65fc(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[5], effect->param[5], effect->target[5]);
-        }
-    }
-    if (effect->mode[4] < 4) {
-        effect->counter[4]++;
-        if (effect->limit[4] < effect->counter[4]) {
-            effect->counter[4] = 0;
-            effect->param[6] = 0.0f;
-            FUN_002a67d8(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[6], effect->param[6], effect->target[6]);
-        }
-    }
-    if (effect->mode[5] < 4) {
-        effect->counter[5]++;
-        if (effect->limit[5] < effect->counter[5]) {
-            effect->counter[5] = 0;
-            effect->param[7] = 0.0f;
-            FUN_002a66b8(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[7], effect->param[7], effect->target[7]);
-        }
-    }
-    if (effect->mode[6] < 4) {
-        effect->counter[6]++;
-        if (effect->limit[6] < effect->counter[6]) {
-            effect->counter[6] = 0;
-            effect->param[8] = 0.0f;
-            FUN_002c76fc(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[8], effect->param[8], effect->target[8]);
-        }
-    }
-    if (effect->mode[7] < 4) {
-        effect->counter[7]++;
-        if (effect->limit[7] < effect->counter[7]) {
-            effect->counter[7] = 0;
-            effect->param[9] = 0.0f;
-            FUN_002c781c(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[9], effect->param[9], effect->target[9]);
-        }
-    }
-    if (effect->mode[8] < 4) {
-        effect->counter[8]++;
-        if (effect->limit[8] < effect->counter[8]) {
-            effect->counter[8] = 0;
-            effect->param[10] = 0.0f;
-            FUN_002c793c(effect, arg);
-        } else {
-            FUN_00229264(&effect->value[10], effect->param[10], effect->target[10]);
-        }
-    }
+}
+
+extern "C" {
+/* Advances each active channel of the colour-key effect by one frame: steps its values towards the
+ * targets, or restarts it when its frame limit has passed. */
+void FUN_00213fe4(ColorKeyEffect *effect, u32 arg)
+{
+    advanceColorKeyRgbChannel(effect, arg);
+    advanceColorKeyChannel<1, 3, FUN_00285320>(effect, arg);
+    advanceColorKeyChannel<2, 4, FUN_002853ec>(effect, arg);
+    advanceColorKeyChannel<3, 5, FUN_002a65fc>(effect, arg);
+    advanceColorKeyChannel<4, 6, FUN_002a67d8>(effect, arg);
+    advanceColorKeyChannel<5, 7, FUN_002a66b8>(effect, arg);
+    advanceColorKeyChannel<6, 8, FUN_002c76fc>(effect, arg);
+    advanceColorKeyChannel<7, 9, FUN_002c781c>(effect, arg);
+    advanceColorKeyChannel<8, 10, FUN_002c793c>(effect, arg);
 }
 
 } /* extern "C" */

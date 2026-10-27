@@ -4378,3 +4378,13 @@
 00387c78 aocFindDisplayNameOverrideText inferred [med] returns the text of the first display-name override record whose id matches, searching the type-0x21 table files of every loaded add-on package
 001008b8 formatWriteBoundedByte inferred [high] appends a byte to a bounded output buffer (cursor,end)
 001d04a4 tmnlFindSlotForItem inferred [high] finds the list slot whose entry id belongs to terminal item
+003a169c shopLoadMessageBankAndSound inferred [high] loads shop script, per-location message bank (.mbm), resource and sound handles
+002470a8 namedVariantTableGetEntries inferred [high] twin: 455-entry key table
+003a0740 callbackStateClear inferred [low] zeroes the u16 value and the ten low flag bits of a 4-byte callback state (context callback table of 1024 entries)
+003a1378 sceneApplyTransaction inferred [med] adds the scene transaction total to party money and counter 31, then applies each record (id, quantity) to the inventory, negating kind-10 content
+002a1200 resourceResultMatchesKnownRanges inferred [med] tests a remapped result for module 0x4e and the three known description ranges
+002a116c resourceResultMatchesRemappedCodes inferred [med] accepts six remapped result codes or module 0x4e descriptions 0x60-0x7f
+002ba8f4 kernelThreadJoinAndClose inferred [high] waits for the thread handle, finalizes the thread and closes the handle
+002aff0c slotOwnerDestroyAllSlots inferred [high] destroys the objects in the owner 32 slots and updates the unique/total counts
+00294f64 resourceReleaseReference inferred [med] twin of smt4a FUN_0040a244
+0014f4f8 lzGetAdvertisedSize inferred [high] returns the 24-bit output size from an LZ/RLE header word, or the following full word when it is zero

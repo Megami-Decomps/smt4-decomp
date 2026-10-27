@@ -8,12 +8,12 @@ typedef struct Object003db57c {
 } Object003db57c;
 
 u32 dataTable40FindById(u32 id);
-u32 FUN_002470a8(u32 value, u32 lookup, bool flag);
+u32 namedVariantTableGetEntries(u32 value, u32 lookup, bool flag);
 
-/* Stores FUN_002470a8's result for `value`, the lookup of `id` and `flag` in the object. */
+/* Stores namedVariantTableGetEntries's result for `value`, the lookup of `id` and `flag` in the object. */
 void objectSetResultFromLookup(Object003db57c *obj, u32 id, u32 value, u32 flag)
 {
-    obj->result = FUN_002470a8(value, dataTable40FindById(id), flag);
+    obj->result = namedVariantTableGetEntries(value, dataTable40FindById(id), flag);
 }
 
 } /* extern "C" */

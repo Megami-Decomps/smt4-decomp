@@ -1,6 +1,7 @@
 /* NON_MATCHING: thread-capture frame layout, descriptor stores, and result-flag control flow differ. */
 #include "nw/snd/TaskThreadState.h"
 #include "shard/W6_W6Match7_SoundInit.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 void FUN_0019065c(TaskThreadState *thread);
@@ -12,7 +13,6 @@ void FUN_00100dec(void);
 s32 FUN_002fb0d4(TaskThreadState *thread, const ThreadArgumentDescriptor *descriptor,
                  void (*entry)(void *), const void *argument, void *stackTop,
                  s32 priority, s32 processor, u32 options);
-void FUN_002e3140(s32 result, bool failed);
 
 // Start the SDK sound-task worker, restarting an already active thread first.
 bool FUN_00174b5c(TaskThreadState *thread, s32 priority, const SoundInitStack *stack)

@@ -77,7 +77,7 @@ void buttonHelpSetPreset(u32 preset);
 void ifTouchRegionRemove(void);
 void FUN_002b8ee0(TimerSlot *timer, s32 value);
 void FUN_002328b4(void);
-void FUN_003a1378(AppraiseScene *scene);
+void sceneApplyTransaction(AppraiseScene *scene);
 s32 vec2GetXInt(const void *object);
 s32 vec2GetYInt(const void *object);
 s8 uiSpriteGetCompletionState(const void *record);
@@ -154,7 +154,7 @@ void FUN_003a2c48(AppraiseScene *scene)
         break;
     case 5:
         if (sys43e188GetState() && messageMainTargetIsClear() == 1) {
-            FUN_003a1378(scene);
+            sceneApplyTransaction(scene);
             ifTouchRegionClearAll(appraisePanel(scene));
             FUN_00233818(&scene->selection);
             for (s32 i = 0; i < scene->touchCount; i++)

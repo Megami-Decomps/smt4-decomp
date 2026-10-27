@@ -3,6 +3,7 @@
 #include "shard/W6_W6Match5_QueuedRequest.h"
 #include "nn/Result.h"
 #include "shard/JobWork.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 extern AocMain *g_aocMain;
@@ -12,7 +13,6 @@ s32 sysLightEventTryWait(AocObjB *event);
 void aocReleasePackageOwner(AocSystem *system);
 void FUN_001b3428(u32 *waitHandle);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result, bool failed);
 
 /* The AOC job step: once the operation it started is acknowledged and its event is signalled,
  * queues the follow-up request; then, if the wait on its handle times out, releases the handle. */

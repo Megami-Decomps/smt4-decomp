@@ -3,15 +3,19 @@
 
 extern "C" void FUN_00280a08(u32 color0, u32 color1, u32 color2, u32 color3, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3);
 
-static __inline void drawQuad(u32 color, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3)
+static void drawQuad(u32 color, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3)
 {
     FUN_00280a08(color, color, color, color, p0, p1, p2, p3);
 }
 
+/* The point moved ten units along x and y. */
+static Vec3 shiftedPoint(Vec3 point)
+{
+    Vec3 shifted = { point.x + 10.0f, point.y + 10.0f, point.z };
+    return shifted;
+}
+
 extern "C" void FUN_00203970(u32 context, Vec3 start, Vec3 end)
 {
-    Vec3 shiftedStart = { start.x + 10.0f, start.y + 10.0f, start.z };
-    Vec3 shiftedEnd = { end.x + 10.0f, end.y + 10.0f, end.z };
-
-    drawQuad(context, start, end, shiftedStart, shiftedEnd);
+    drawQuad(context, start, end, shiftedPoint(start), shiftedPoint(end));
 }

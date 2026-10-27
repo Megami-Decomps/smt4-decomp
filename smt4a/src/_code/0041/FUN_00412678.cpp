@@ -1,4 +1,4 @@
-/* NON_MATCHING: Slot loops strength-reduce to advancing pointers/countdowns instead of retail's index addressing; cache count and command store grouping differ. */
+/* NON_MATCHING: the slot loops now match retail (element pointer stops strength reduction); only the command-word-count local lands in r0 (retail r1) and its load/argument setup around FUN_00501084 is scheduled differently. */
 #include "gfx/TextureCommands.h"
 #include "classes/Obj42072c.h"
 
@@ -13,7 +13,8 @@ void asdModelCommitCommandRange(u32 begin, u32 end);
 static __inline u32 *vertexResetCommandSlots(u32 *commands, const Obj42072cState *cache)
 {
     for (s32 index = 0; index < 12; ++index) {
-        if (cache->arrays[index].first != 0) {
+        const EffGeomVertexSlot *array = &cache->arrays[index];
+        if (array->first != 0) {
             *commands++ = 0;
             *commands++ = (index * 3 + 0x203) | 0x802F0000;
             *commands++ = 0;

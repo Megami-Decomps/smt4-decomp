@@ -5,7 +5,7 @@ struct AocManager {
     /* 0x88 */ u8 resources[1];
 };
 extern "C" AocManager *g_aocMain;
-extern "C" void FUN_002ba8f4(void *);
+extern "C" void kernelThreadJoinAndClose(void *);
 extern "C" void asdMemFreeNonNull(void *);
 
 void Obj422248::operator delete(void *memory)
@@ -15,5 +15,5 @@ void Obj422248::operator delete(void *memory)
 
 Obj422248::~Obj422248()
 {
-    FUN_002ba8f4(g_aocMain->resources);
+    kernelThreadJoinAndClose(g_aocMain->resources);
 }

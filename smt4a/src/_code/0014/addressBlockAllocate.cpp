@@ -1,5 +1,6 @@
 /* NON_MATCHING: the constant 0 for the allocator's last argument is loaded before the block pointer instead of after the size. */
 #include "common.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ typedef struct AddressBlock {
 extern s8 g_nnosAddressSpaceInitialized;
 extern u8 g_nnosAddressSpaceManager;
 
-void FUN_002e3140(u32 error);
 u32 FUN_001a0af4(void *manager, AddressBlock *block, u32 size, u32 align);
 
 /* When address-space management is on and `block` has no allocation yet (unk08 == 0), allocates `size` bytes (page-aligned) for it. */

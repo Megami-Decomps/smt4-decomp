@@ -1,4 +1,4 @@
-/* NON_MATCHING: the pooled-descriptor helper keeps separate requested/aligned sizes and delays the selected-slot address, adding one saved register. */
+/* NON_MATCHING: instruction-for-instruction identical to retail except that the build also pushes/pops r8 (unused). */
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
 struct AsdVramBlockA {
@@ -25,29 +25,31 @@ extern "C" {
 extern AsdMemoryApoc g_asdMemory;
 void FUN_0019c920(AsdVramHeapA *, AsdVramBlockA *);
 
-static __inline AsdVramBlockA *allocateVramBlock(u32 size)
+static __inline AsdVramBlockA *takeBlockDescriptor(AsdMemTable *table)
 {
-    if (size & 0x7f)
-        size += 0x80 - (size & 0x7f);
-    AsdMemTable *table = g_asdMemory.table;
-    AsdVramBlockA *block = NULL;
     if (table != NULL && table->entries != NULL) {
         AsdVramBlockA *entries = static_cast<AsdVramBlockA *>(table->entries);
         for (s32 i = 0; i < 512; ++i) {
-            if (entries[i].poolId == 0) {
-                block = &entries[i];
+            AsdVramBlockA *block = &entries[i];
+            if (block->poolId == 0) {
                 block->addr = 0;
                 block->size = 0;
                 block->poolId = i + 1;
                 block->prev = NULL;
                 block->next = NULL;
                 ++table->count;
-                break;
+                return block;
             }
         }
     }
-    block->size = size;
-    return block;
+    return NULL;
+}
+
+static __inline AsdVramBlockA *allocateVramBlock(u32 &size)
+{
+    if (size & 0x7f)
+        size += 0x80 - (size & 0x7f);
+    return takeBlockDescriptor(g_asdMemory.table);
 }
 
 // Reserve the first fitting VRAM range, splitting it with a pooled block descriptor.
@@ -60,6 +62,7 @@ u32 asdVramHeapAlloc(AsdVramHeapA *heap, u32 size)
             if (free->size != size) {
                 AsdVramBlockA *block = allocateVramBlock(size);
                 block->addr = free->addr;
+                block->size = size;
                 free->addr += size;
                 free->size -= size;
                 heap->freeBytes -= block->size;

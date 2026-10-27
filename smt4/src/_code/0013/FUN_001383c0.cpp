@@ -1,11 +1,13 @@
-/* NON_MATCHING: supervisor-call wrapper requires an intrinsic forbidden by the assignment. */
-/* romwright 0.5.0 decompilation of FUN_001383c0 for reference (not compiled; its own view of the boundaries):
-
-void FUN_001383c0(void)
-
-{
-  software_interrupt(10);
-  return;
-}
-*/
+/* NON_MATCHING: retail is the SDK hand-written svc wrapper (svc 0xa; bx lr); armcc wraps the __svc call in push {r4, lr}/pop {r4, pc} */
 #include "common.h"
+#include "nn/svc.h"
+
+extern "C" {
+
+/* Sleeps the calling thread for the 64-bit nanosecond count (low word, high word). */
+void FUN_001383c0(u32 nanosecondsLow, u32 nanosecondsHigh)
+{
+    nn::svc::SleepThread(nanosecondsLow, nanosecondsHigh);
+}
+
+} /* extern "C" */

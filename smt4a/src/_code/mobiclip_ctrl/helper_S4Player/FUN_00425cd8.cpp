@@ -4,6 +4,7 @@
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include <stddef.h>
+#include "sys/ResultReport.h"
 
 /* The file backend the player streams from: slot 1 closes a stream. */
 class MovieFileBackend {
@@ -85,7 +86,6 @@ extern MovieThreadStack DAT_00588100;
 
 void nn_os_LightEvent_Signal(void *event);
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result, bool failed);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdOperatorDelete(void *block);
 void asdMemFree(void *block);

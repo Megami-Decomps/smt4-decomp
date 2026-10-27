@@ -1,6 +1,7 @@
 /* NON_MATCHING: The argument descriptor and copied work pointer occupy different stack slots, changing register allocation and stack-argument stores. */
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 s32 FUN_003611c4(void);
@@ -9,7 +10,6 @@ void FUN_003f6f14(void);
 void FUN_003f7008(void);
 void FUN_003f6fbc(void);
 s32 FUN_002bcc60(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), const void *argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_002c526c(s32 result);
 
 /* Launches the worker on its allocated stack unless the subsystem is busy. */
 u32 FUN_0038b44c(ThreadLaunchWork *work)

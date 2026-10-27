@@ -1,4 +1,4 @@
-/* NON_MATCHING: initial global mask uses add+ldm instead of retail's two immediate-offset ldrs; named flags now match the object load and return paths. */
+/* NON_MATCHING: the `__packed` mask gives retail's two immediate-offset ldrs; only the order of the mask word loads around the final ldrd differs. */
 #include "common.h"
 #include "bible/bibleAnalyze.h"
 #include "gamedata/Table04Record.h"
@@ -7,7 +7,7 @@ namespace {
 
 struct BattleMaskView {
     u8 unk00[0x1c0];
-    unsigned long long unk1C0; // 0x1c0
+    __packed unsigned long long unk1C0; // 0x1c0
 };
 
 struct BattleObjectView {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: frame (push {r4,lr}; sub 48) matches; retail computes the UI object pointer first and keeps it in r0 while the command is assembled (ldr before the push), the build holds it in r4 and loads it after the command stores. */
+/* NON_MATCHING: ui pointer load and frame now match retail; only the address of command.position (`add lr, sp, #8`) is computed after the kind store here and before it in retail. */
 #include "battle/btlUI.h"
 
 struct UiPosition {
@@ -22,14 +22,14 @@ u32 FUN_002d00a4(BtlUiObjC *, const BattleUiCommand *);
 void FUN_003aeaa4(u32, u16 kind, u32 value, u16 first, u16 second, u16 third,
                   UiPosition position)
 {
-    BtlUiObjC *ui = &g_btlUi.ui->objC;
+    BtlUi *ui = g_btlUi.ui;
     BattleUiCommand command;
     command.kind = kind;
-    command.first = first;
-    command.second = second;
-    command.third = third;
     command.position = position;
     command.value = value;
-    FUN_002d00a4(ui, &command);
+    command.second = second;
+    command.first = first;
+    command.third = third;
+    FUN_002d00a4(&ui->objC, &command);
 }
 }

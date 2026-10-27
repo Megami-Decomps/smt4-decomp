@@ -1,20 +1,17 @@
-/* NON_MATCHING: the five-entry jump table now matches (labels 0 and 2 are explicit); the case bodies and saved-register allocation still differ (retail 87 vs built 111 rows). */
+/* NON_MATCHING: only the order of the item-table address arithmetic and its saved register (r4/r6) differ. */
 #include "shard/Shard0049.h"
 #include "addon/AocEntryKind.h"
 #include "event/2dEvent/SmokeFade.h"
 
 extern "C" {
-void FUN_0031f718(s32 item, u32 mode);
+void placeWinSetValue(u8 value);
+void FUN_0049af90(EquipmentMenuState *menu);
+void FUN_0031f718(s16 id, s32 enabled, s32 initial);
 void statusPanelSetOpen(u32 mode);
-s32 FUN_004cfe4c(EquipmentMenuCursor *cursor);
-void FUN_0034aa94(u32 slot, s32 item);
+u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
+void objBSetWordByIndex(s32 which, u16 value);
 void FUN_002c85b0(void);
 void FUN_00333f6c(void);
-void FUN_0022e774(void);
-void FUN_00345718(u32 mode);
-void FUN_001aea28(u32 owner, u32 handle);
-extern u32 DAT_0056fcc0;
-extern EquipmentMenuReadyState *DAT_0057f578;
 }
 
 /* Finish equipment selection or tear down the menu's active child resource. */
@@ -26,20 +23,21 @@ extern "C" void FUN_0049ae34(EquipmentMenuState *menu)
         break;
     case 1:
         if (FUN_0023b3d0()) {
-            FUN_0031f718(-1, 0);
+            FUN_0031f718(-1, 0, 0);
             statusPanelSetOpen(1);
             s32 page = menu->page;
-            s32 index = FUN_004cfe4c(&menu->cursors[page]);
-            s16 item = menu->pages[page].items[index].id;
+            const EquipmentMenuItem *items = menu->pages[page].items;
+            u32 index = flaggedValueHolderGetTotal(&menu->cursors[page].holder);
+            u32 item = items[index].id;
             if (item != 0) {
                 if (aocEntryGetKindForward(item) == 4) {
-                    FUN_0034aa94(0, item);
+                    objBSetWordByIndex(0, item);
                 }
                 if (aocEntryGetKindForward(item) == 5) {
-                    FUN_0034aa94(1, item);
+                    objBSetWordByIndex(1, item);
                 }
                 if (aocEntryGetKindForward(item) == 6) {
-                    FUN_0034aa94(2, item);
+                    objBSetWordByIndex(2, item);
                 }
             }
             menu->state = 2;
@@ -50,25 +48,12 @@ extern "C" void FUN_0049ae34(EquipmentMenuState *menu)
             menu->state = 0;
             FUN_002c85b0();
             FUN_00333f6c();
-            DAT_0057f578->ready = 1;
+            placeWinSetValue(1);
         }
         break;
     case 4:
-        if (FUN_0023b3d0() && menu->state != 3) {
-            if (menu->state == 1) {
-                menu->state = 4;
-            } else {
-                FUN_0022e774();
-                menu->state = 3;
-                FUN_00345718(0);
-                if (menu->resource != NULL) {
-                    FUN_001aea28(DAT_0056fcc0, menu->resource->handle);
-                    if (menu->resource != NULL) {
-                        menu->resource->destroy();
-                        menu->resource = NULL;
-                    }
-                }
-            }
+        if (FUN_0023b3d0()) {
+            FUN_0049af90(menu);
         }
         break;
     }

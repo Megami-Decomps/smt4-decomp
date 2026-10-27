@@ -1,4 +1,4 @@
-/* NON_MATCHING: The movie/seen-flag registers are reversed, and completion clears the job in an outlined branch instead of a predicated store. */
+/* NON_MATCHING: the predicated clear of the job slot (`streq r0, [r6, #8]; beq`) now matches; the movie and seen-flag registers are reversed (retail computes the flag in r0 and copies it to r4, the build adds into r5 and copies to r0) */
 #include "event/eventCommand.h"
 #include "gamedata/GameFlags.h"
 
@@ -33,8 +33,11 @@ u32 FUN_002a3e10(void)
         g_eventCommand.movieJob = mobiclipProcessCreate(movie, alreadySeen);
         gameFlagSetValue(seenFlag, 1, 1);
     }
-    if (!jobIsValid(g_eventCommand.movieJob)) {
-        g_eventCommand.movieJob = 0;
+    s32 valid = jobIsValid(g_eventCommand.movieJob);
+    if (valid == 0) {
+        g_eventCommand.movieJob = valid;
+    }
+    if (valid == 0) {
         FUN_00342334(1);
         return 1;
     }

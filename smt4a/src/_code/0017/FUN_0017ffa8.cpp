@@ -6,9 +6,8 @@ extern "C" void FUN_00180280(u32, s32, RecordCallParameters *);
 extern "C" void FUN_0017ffa8(u32 first, u32 table, s32 index, u32 second, u32 third, u32 fourth)
 {
     RecordCallParameters parameters;
-    parameters.reserved[0] = 0;
-    parameters.reserved[1] = 0;
-    parameters.reserved[2] = 0;
+    for (s32 i = 0; i < 3; ++i)
+        parameters.reserved[i] = 0;
     parameters.first = first;
     parameters.second = second;
     parameters.third = third;

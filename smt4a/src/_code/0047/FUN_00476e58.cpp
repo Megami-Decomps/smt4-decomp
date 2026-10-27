@@ -13,8 +13,8 @@ static __inline s32 resultLevel(u32 result)
 extern "C" {
 void FUN_001b3428(void *operation);
 u32 legacyResourceIdRemap(const u32 *result);
-s32 FUN_001d10c0(const u32 *result);
-s32 FUN_001d1108(const u32 *result);
+s32 resourceResultMatchesKnownRanges(const u32 *result);
+s32 resourceResultMatchesRemappedCodes(const u32 *result);
 s32 queryResultFailureOnly(const u32 *result);
 void FUN_00473d74(AocMainA *main, u32 result, u32 detail);
 void FUN_0047bc90(SelectionTransition *transition, const RequestParameters *parameters);
@@ -28,11 +28,11 @@ void FUN_00476e58(SelectionTransition *transition, u32 unused, s32 nextState)
         return;
     FUN_00473d74(g_aocMain, transition->query.result.result.code, transition->query.result.result.description);
     TransitionResource *resource;
-    if (FUN_001d10c0(&transition->query.result.result.code)) {
+    if (resourceResultMatchesKnownRanges(&transition->query.result.result.code)) {
         resource = transition->resource;
         transition->state = 3;
         transition->progress = 0;
-    } else if (FUN_001d1108(&transition->query.result.result.code) ||
+    } else if (resourceResultMatchesRemappedCodes(&transition->query.result.result.code) ||
                nnResultIsFailure(queryResultFailureOnly(&main->query.result))) {
         resource = transition->resource;
         transition->state = 3;

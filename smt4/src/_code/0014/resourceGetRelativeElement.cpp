@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail resolves each self-relative pointer branch-free (post-indexed ldr, movne/moveq against one zero register) and, like this source, dereferences a NULL record when the table is missing; armcc branches on the null cases. */
+/* NON_MATCHING: a null table skips the record lookup (no early return, like retail); remaining diff: retail keeps NULL in a hoisted register (`moveq rX, r0` after the add), compares the first result again and adds the last offset as `offset + base`. */
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
 
 extern "C" {

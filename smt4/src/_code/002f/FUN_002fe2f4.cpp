@@ -2,6 +2,7 @@
 #include "common.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "sys/ResultReport.h"
 
 struct EventCounters {
     /* 0x00 */ s64 total;
@@ -13,7 +14,6 @@ struct EventCounters {
 };
 
 extern "C" {
-void FUN_002c526c(s32 result, bool failed);
 
 /* Adds `count` to the event's counters and signals it; returns 0 when the count does not fit the limit. */
 u32 FUN_002fe2f4(EventCounters *counters, u32 count)

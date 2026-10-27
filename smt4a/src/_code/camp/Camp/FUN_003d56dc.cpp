@@ -132,7 +132,7 @@ int buttonHelpSetText(...);
 int FUN_0020d700(void);
 void campSetSpriteAnimationPreset(int, int, int, unsigned int);
 int ifTouchRegionAdd(...);
-int FUN_002add8c(void);
+int campFusionResultCommand(void);
 int widgetSubCallIfVisible(...);
 int FUN_002c39dc(...);
 int FUN_002e26c4(...);
@@ -247,7 +247,7 @@ extern int uniteRequestGet(void);
 extern int uniteGetState(void);
 /* Supplied declaration required: FUN_002ab804. */
 /* Supplied declaration required: uniteSetMode. */
-/* Supplied declaration required: FUN_002add8c. */
+/* Supplied declaration required: campFusionResultCommand. */
 /* Supplied declaration required: FUN_002bf4f4. */
 extern int campCecEditIsOpen(void);
 /* Supplied declaration required: FUN_002bf534. */
@@ -493,7 +493,7 @@ unsigned int FUN_003d56dc(void)
   case 0:
     temp_v6 = ifTouchGetButtonHelpValue();
     puVar2[0xc5d] = temp_v6;
-    FUN_002add8c();
+    campFusionResultCommand();
     puVar2[9] = 6;
     puVar2[7] = 1;
     FUN_0037c8e4(1,0);
@@ -747,7 +747,7 @@ unsigned int FUN_003d56dc(void)
               campChangeState(temp_v4);
               break;
             }
-            FUN_002add8c();
+            campFusionResultCommand();
             campShowSelectedEntryHelp(temp_v6);
             temp_v4 = puVar2[9];
             campChangeState(temp_v4);
@@ -809,7 +809,7 @@ unsigned int FUN_003d56dc(void)
           }
           campSetSpriteAnimationPreset(2,1,0xffffffff,0);
           if (puVar2[10] != 0x30) {
-            FUN_002add8c();
+            campFusionResultCommand();
           }
           temp_v4 = 1;
           campChangeState(temp_v4);
@@ -1112,7 +1112,7 @@ LAB_003d6870:
           FUN_002f78a0(puVar12);
         }
       }
-      FUN_002add8c();
+      campFusionResultCommand();
       temp_v0 = *(char *)(puVar12 + 0x29);
       if (temp_v0 == '\b') {
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);
@@ -1269,7 +1269,7 @@ LAB_003d6870:
         messageRestoreBanner();
         FUN_002f78a0(puVar12);
       }
-      FUN_002add8c();
+      campFusionResultCommand();
       FUN_0037c8e4(1,0);
       messageRestoreBanner();
       FUN_002f78a0(puVar12);
@@ -1424,7 +1424,7 @@ LAB_003d6870:
         FUN_002a7b74();
         uniteStartOrQueueRequest(0);
       }
-      FUN_002add8c();
+      campFusionResultCommand();
       FUN_0031d890();
       FUN_0026f7f0();
       campSetSpriteAnimationPreset(2,1,0xffffffff,0);
@@ -1491,7 +1491,7 @@ LAB_003d6870:
         messageRestoreBanner();
         FUN_002f78a0(puVar2);
       }
-      FUN_002add8c();
+      campFusionResultCommand();
     }
     break;
   case 0x26:
@@ -1614,7 +1614,7 @@ LAB_003d6870:
   case 0x2d:
     temp_v4 = objIsNotInState0xF();
     if (temp_v4 != 0) {
-      FUN_002add8c();
+      campFusionResultCommand();
       temp_v4 = 6;
       campChangeState(temp_v4);
     }
@@ -2083,7 +2083,7 @@ LAB_003d801c:
           FUN_002f78a0(puVar12);
         }
       }
-      FUN_002add8c();
+      campFusionResultCommand();
       temp_v0 = *(char *)(puVar12 + 0x29);
       if (temp_v0 == '\b') {
         campSetSpriteAnimationPreset(2,1,0xffffffff,0);

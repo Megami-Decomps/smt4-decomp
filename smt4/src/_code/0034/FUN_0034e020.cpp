@@ -2,10 +2,10 @@
 #include "mobiclip_ctrl/S4FsReader.h"
 #include "shard/W6_W6Match2_LongDivision.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 u32 FUN_003573a4(s32 *signalled, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(u32 result);
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 void asdFatalError(void);
 void nn_os_CriticalSection_Enter(void *lock);
@@ -18,8 +18,9 @@ void FUN_0034e020(S4FsReader *reader)
     for (;;) {
         s32 signalled;
         u32 result = FUN_003573a4(&signalled, reader->wakeup, 2, 0, -1);
-        if (nnResultIsFailure(result)) {
-            FUN_002c526c(result);
+        bool failed = nnResultIsFailure(result);
+        if (failed) {
+            FUN_002c526c(result, failed);
         }
         if (signalled != 0) {
             break;

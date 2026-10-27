@@ -57,8 +57,9 @@ void FUN_0033a414(BtlMainState *state)
         u32 handle = worker->thread;
         s32 index;
         s32 result = FUN_002c40f8(&index, &handle, 1, false, 0);
-        if (nnResultIsFailure(result))
-            FUN_002c526c(result);
+        bool failed = nnResultIsFailure(result);
+        if (failed)
+            FUN_002c526c(result, failed);
         if (nnResultDescription(result) == 0x3FE)
             return;
     }
@@ -70,7 +71,8 @@ void FUN_0033a414(BtlMainState *state)
     BattleWorkerView *argument = worker;
     s32 result = FUN_002bcc60(&worker->thread, &descriptor, FUN_00339b64, &argument,
         worker->stack->info.address + worker->stack->info.size, 17, 0, 0);
-    if (nnResultIsFailure(result))
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002c526c(result, failed);
 }
 }

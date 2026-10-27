@@ -1,4 +1,4 @@
-/* NON_MATCHING: block pointer and mode swap saved registers (r7/r8) and the clear-panel tail is placed after the selection sounds instead of before the special-sound arm. */
+/* NON_MATCHING: only the block pointer and the mode swap saved registers (r7/r8). */
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "event/2dEvent/SmokeFade.h"
@@ -47,43 +47,45 @@ void FUN_004a5d5c(ItemListSelectionOwner *owner)
     PreviewWorkView *work = reinterpret_cast<PreviewWorkView *>(owner);
     CachedPreviewView *cache = reinterpret_cast<CachedPreviewView *>(owner);
     PreviewBlock *block = &work->block;
-    if (block->entries[0].count != 0) {
-        PreviewEntry *entries = work->block.entries;
-        u32 id = entries[flaggedValueHolderGetTotal(work->cursor)].id;
-        if (entries[flaggedValueHolderGetTotal(work->cursor)].enabled == 0)
-            id = 0;
-        if (FUN_0023b3d0() == 0 || cache->id == id)
-            return;
-        cache->id = id;
-        if (id != 0) {
-            FUN_0031f718((s16)id, 1, 0);
-            statusPanelSetOpen(1);
-            s32 mode = statusDownGetFlag();
-            s32 panel = FUN_0023b3b8();
-            const PreviewRecordFlags *record = reinterpret_cast<const PreviewRecordFlags *>(FUN_00184310(id));
-            if ((record->flags & 2) != 0 && mode == 5) {
-                panel = 1;
-                mode = panel;
-            }
-            FUN_00372048(panel);
-            u32 sound = statusDownGetHelpMessage(mode);
-            if (sound != 0) {
-                sysPlaySe(sound);
-                return;
-            }
-            if (block->specialSound != 0) {
-                sysPlaySe(0x48);
-                return;
-            }
-            record = reinterpret_cast<const PreviewRecordFlags *>(
-                FUN_00184310(entries[flaggedValueHolderGetTotal(work->cursor)].id));
-            if ((record->flags & 2) == 0)
-                sysPlaySe(0x30);
-            else
-                sysPlaySe(0x121);
-            return;
-        }
+    if (block->entries[0].count == 0) {
+        FUN_0023b45c(0);
+        return;
     }
-    FUN_0023b45c(0);
+    PreviewEntry *entries = work->block.entries;
+    u32 id = entries[flaggedValueHolderGetTotal(work->cursor)].id;
+    if (entries[flaggedValueHolderGetTotal(work->cursor)].enabled == 0)
+        id = 0;
+    if (FUN_0023b3d0() == 0 || cache->id == id)
+        return;
+    cache->id = id;
+    if (id == 0) {
+        FUN_0023b45c(0);
+        return;
+    }
+    FUN_0031f718((s16)id, 1, 0);
+    statusPanelSetOpen(1);
+    s32 mode = statusDownGetFlag();
+    s32 panel = FUN_0023b3b8();
+    const PreviewRecordFlags *record = reinterpret_cast<const PreviewRecordFlags *>(FUN_00184310(id));
+    if ((record->flags & 2) != 0 && mode == 5) {
+        panel = 1;
+        mode = panel;
+    }
+    FUN_00372048(panel);
+    u32 sound = statusDownGetHelpMessage(mode);
+    if (sound != 0) {
+        sysPlaySe(sound);
+        return;
+    }
+    if (block->specialSound != 0) {
+        sysPlaySe(0x48);
+        return;
+    }
+    record = reinterpret_cast<const PreviewRecordFlags *>(
+        FUN_00184310(entries[flaggedValueHolderGetTotal(work->cursor)].id));
+    if ((record->flags & 2) == 0)
+        sysPlaySe(0x30);
+    else
+        sysPlaySe(0x121);
 }
 }

@@ -2,11 +2,11 @@
 #include "gamedata/SaveLoadThreadRequest.h"
 #include "AsdSDK/AsdDebug.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 s32 FUN_0014a930(u32 *handle, u32 initialCount, u32 maxCount);
 s32 FUN_0019a364(u32 *previousCount, u32 semaphore, u32 releaseCount);
-void FUN_002e3140(s32 result);
 void *memAlloc(u32 heap, u32 alignmentClass, u32 option, u32 size, u32 alignment, u32 fromFront);
 void resultReportIfFailed(ThreadStackStorage *stack, void *buffer, u32 size);
 s32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,

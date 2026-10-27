@@ -4,15 +4,15 @@
 extern "C" {
 
 void nw_snd_SoundHandle_DetachSound(SoundHeapObjHandle *handle);
-SoundHeapObj *FUN_004670a4(SoundHeapObj *obj);
+SoundHeapObj *_ZN13SoundHeapBaseD1Ev(SoundHeapObj *obj);
 
-/* Detaches the object's two sound handles, then forwards to FUN_004670a4, the function that
+/* Detaches the object's two sound handles, then forwards to _ZN13SoundHeapBaseD1Ev, the function that
  * follows it. */
 SoundHeapObj *FUN_00467080(SoundHeapObj *obj)
 {
     nw_snd_SoundHandle_DetachSound(&obj->handleB);
     nw_snd_SoundHandle_DetachSound(&obj->handleA);
-    return FUN_004670a4(obj);
+    return _ZN13SoundHeapBaseD1Ev(obj);
 }
 
 } /* extern "C" */

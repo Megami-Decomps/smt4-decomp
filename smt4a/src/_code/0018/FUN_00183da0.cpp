@@ -1,21 +1,21 @@
-/* NON_MATCHING: code matches except the pool base: retail addresses its two local initialiser tables (format flags, command template) at DAT_0053d500+0x78 and +0xb0, i.e. the const data of a larger translation unit (0x78 bytes of earlier command templates precede them); here they sit at the start of the unit's own .constdata. */
-#include "common.h"
+/* NON_MATCHING: copies from the shared texture command templates at DAT_0053d500+0x78/+0xb0 like retail (pool base now matches); only the register for the sp+88 store address (r4 vs retail's r7) differs. */
+#include "shard/TextureCommandTemplates.h"
 
-extern "C" void FUN_001b4120(const void *, u32);
+extern "C" {
+extern const TextureCommandTemplates DAT_0053d500;
+void FUN_001b4120(const void *, u32);
 
-extern "C" void FUN_00183da0(s32 width, u32 height, u32 format, u32 physicalAddress,
-                            u32 wrap, u32 minFilter, u32 magFilter)
+// Submit the texture-unit register commands built from the default template.
+void FUN_00183da0(s32 width, u32 height, u32 format, u32 physicalAddress,
+                  u32 wrap, u32 minFilter, u32 magFilter)
 {
-    u32 formatFlags[14] = {
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0x20, 0
-    };
-    u32 commands[14] = {
-        0, 0x809F0081, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xF008E
-    };
-    commands[2] = height | (static_cast<u32>(width) << 16);
-    commands[3] = (wrap << 12) | (wrap << 8) | (minFilter << 2) |
-                  (magFilter << 1) | formatFlags[format];
-    commands[5] = physicalAddress >> 3;
-    commands[12] = format;
-    FUN_001b4120(commands, sizeof(commands));
+    TextureCommandBlock formatFlags = DAT_0053d500.formats;
+    TextureCommandBlock commands = DAT_0053d500.command;
+    commands.words[2] = height | (static_cast<u32>(width) << 16);
+    commands.words[3] = (wrap << 12) | (wrap << 8) | (minFilter << 2) |
+                        (magFilter << 1) | formatFlags.words[format];
+    commands.words[5] = physicalAddress >> 3;
+    commands.words[12] = format;
+    FUN_001b4120(&commands, sizeof(commands));
+}
 }

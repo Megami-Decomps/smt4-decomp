@@ -3,6 +3,7 @@
 
 #include "common.h"
 
+extern "C" void *FUN_00178b04(u32 size, const char *file, s32 line);
 extern "C" void _ZN4__rw15__rw_deallocateEPvji(void *block, s32 count, s32 flags);
 
 /* An object the owner deletes through its virtual destructor. */
@@ -32,8 +33,11 @@ struct Obj557b58Vec {
  * array of objects and deletes them all when it is destroyed. Slot 0 is the destructor. */
 class Obj557b58 {
 public:
-    Obj557b58();
+    explicit Obj557b58(u32 resource);
     virtual ~Obj557b58();
+
+    /* The engine's allocator with source location (file, line). */
+    static void *operator new(u32 size, const char *file, s32 line) throw() { return FUN_00178b04(size, file, line); }
 
 protected:
     /* 0x00: vtable pointer */

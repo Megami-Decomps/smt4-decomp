@@ -1,4 +1,4 @@
-/* NON_MATCHING: the placeholder rectangle is stored with one stm (retail: four separate mov/str) and the constant/global registers are assigned differently (x in r9 vs sl). */
+/* NON_MATCHING: the placeholder cell is derived from its icon id like the record cells (retail's four separate mov/str now match); only register assignment differs (x in r9 vs sl, placeholder id loaded predicated after the flag test in retail). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W5_W5Match7_EntrySort.h"
@@ -47,11 +47,12 @@ void FUN_0018152c(s32 id, s32 x, s32 y, s32 z, s32 tint)
             FUN_00191ea8(g_aocSystem, placeholder, x, y, z);
             return;
         }
+        s32 icon = placeholder - 0x200;
         IconRect rect;
-        rect.left = 0x50;
-        rect.right = 0x60;
-        rect.top = 0x1A0;
-        rect.bottom = 0x1C0;
+        rect.left = icon / 16 * 16;
+        rect.right = rect.left + 16;
+        rect.top = icon % 16 * 32;
+        rect.bottom = rect.top + 32;
         FUN_001849bc(2, 27, 3000, x, y, z, &rect);
         return;
     }

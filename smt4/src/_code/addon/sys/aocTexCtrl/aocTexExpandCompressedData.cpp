@@ -2,7 +2,7 @@
 #include "AsdSDK/AsdDebug.h"
 
 extern "C" {
-u32 FUN_0014f4f8(const u8 *source);
+u32 lzGetAdvertisedSize(const u8 *source);
 void lzDecompressBytes(const u8 *source, u8 *destination);
 void FUN_0014f408(const u8 *source, u8 *destination);
 void FUN_0014f2c8(const u8 *source, u8 *destination);
@@ -15,7 +15,7 @@ u8 *aocTexExpandCompressedData(u8 *source, u32 flags, u32 alignment)
     u8 kind = source[0] & 0xf0;
     u8 *result = source;
     if (kind == 0x10 || kind == 0x20 || kind == 0x30) {
-        u32 size = FUN_0014f4f8(source);
+        u32 size = lzGetAdvertisedSize(source);
         if (size != 0) {
             if (flags & 1) {
                 if (flags & 2) {

@@ -503,7 +503,7 @@ joined_r0x0029e2d8:
         if (iStack_4a4 == 0 && DAT_005f1614 == '\0') {
           pcVar16 = (char *)(iVar17 + 0x48);
           *(unsigned int *)(iVar17 + 0x58) = 0;
-          FUN_00292200();
+          btlViewGetCameraPositionOrDefault();
           *(float *)(iVar17 + 0xa4) = in_s0;
           *(float *)(iVar17 + 0xa8) = in_s1;
           *(int *)(iVar17 + 0xac) = in_s2;

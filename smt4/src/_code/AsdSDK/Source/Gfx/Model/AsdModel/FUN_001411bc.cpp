@@ -1,4 +1,4 @@
-/* NON_MATCHING: getter/RTTI block layout, cached flag registers and transform-copy address bases differ. */
+/* NON_MATCHING: camera arms, native MTX34::Identity() guard and the eye ldm copy now match retail; remaining: model/camera saved registers (r4/r5 swapped), the hoisted constants 0/1 (r7/r8) and the early DAT_00472140 literal load. */
 #include "gfx/CameraManager.h"
 #include "gfx/CameraParameters.h"
 #include "classes/Obj4215f4.h"
@@ -6,6 +6,7 @@
 #include "shard/W6_W6Match6_ProjectionCamera.h"
 #include "shard/W5_W5Match1_RecordKeys.h"
 #include <new>
+#include "nw/math/MTX34.h"
 #include <stddef.h>
 
 extern "C" {
@@ -14,10 +15,7 @@ ManagedCameraIV *FUN_002c501c();
 u32 FUN_002c5210();
 f32 workScalarGet(const WorkScalar *);
 void nn_math_ARMv6_MTX34CopyAsm(void *, const void *);
-int __cxa_guard_acquire(u32 *);
 extern u8 DAT_00472140[];
-extern u32 _ZGVZN2nw4math5MTX348IdentityEvE8identity;
-extern Mtx34 _ZZN2nw4math5MTX348IdentityEvE8identity;
 extern MovedPart *g_asdModelSlotArray0[];
 }
 
@@ -60,7 +58,11 @@ extern "C" void FUN_001411bc(MovedPart *model, s32 cameraIndex)
         offsetof(ModelCameraFields, scalar) == 0x294 &&
         offsetof(ViewMethods, getResource) == 0x10 &&
         offsetof(CameraTransform, matrix) == 0x4C ? 1 : -1];
-    ManagedCameraIV *camera = cameraIndex != 0 ? FUN_00145e10() : FUN_002c501c();
+    ManagedCameraIV *camera;
+    if (cameraIndex == 0)
+        camera = FUN_002c501c();
+    else
+        camera = FUN_00145e10();
     const CameraDescription *description = reinterpret_cast<const CameraDescription *>(camera);
     /* Camera-specific fields and the view virtual slots exceed the shared prefixes. */
     ModelCameraFields *fields = reinterpret_cast<ModelCameraFields *>(model);
@@ -76,9 +78,10 @@ extern "C" void FUN_001411bc(MovedPart *model, s32 cameraIndex)
         fields->projection->unk08 = 0;
     else
         fields->projection->unk08 = 1;
-    model->x = description->pose.eye.x;
-    model->y = description->pose.eye.y;
-    model->z = description->pose.eye.z;
+    Vec3f eye = description->pose.eye;
+    model->x = eye.x;
+    model->y = eye.y;
+    model->z = eye.z;
     model->flags |= MOVED_PART_DIRTY;
 
     Obj4216b4 *view = fields->view;
@@ -98,10 +101,8 @@ extern "C" void FUN_001411bc(MovedPart *model, s32 cameraIndex)
     resource->target = description->pose.target;
     resource->up = description->pose.up;
 
-    if ((_ZGVZN2nw4math5MTX348IdentityEvE8identity & 1) == 0 && __cxa_guard_acquire(&_ZGVZN2nw4math5MTX348IdentityEvE8identity))
-        new (&_ZZN2nw4math5MTX348IdentityEvE8identity) Mtx34;
     f32 transform[3][4];
-    nn_math_ARMv6_MTX34CopyAsm(transform, _ZZN2nw4math5MTX348IdentityEvE8identity.m);
+    nn_math_ARMv6_MTX34CopyAsm(transform, &nw::math::MTX34::Identity());
     if (description->mirrored)
         transform[2][2] = -1.0f;
     MovedPart *slot = g_asdModelSlotArray0[cameraIndex];

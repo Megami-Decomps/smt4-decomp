@@ -22,10 +22,10 @@ u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath, u32
         _ZN9Obj422224C1Ev(&request);
         FUN_002ba81c(reinterpret_cast<char *>(request.path), path, 0x40);
         FUN_002ba81c(reinterpret_cast<char *>(request.path + 0x40), secondPath, 0x40);
-        request.flags |= 2;
         request.mode = mode;
         request.bytes = bytes;
         request.context = context;
+        request.flags |= 2;
         operation = FUN_002a2f08(queue, &request);
         FUN_002a2e08(queue);
         while (operation->operation.state != 3)
@@ -35,9 +35,9 @@ u32 FUN_002a4584(FileQueue *queue, const char *path, const char *secondPath, u32
         FileQueueRequest request;
         _ZN9Obj422224C1Ev(&request);
         FUN_002ba81c(reinterpret_cast<char *>(request.path), path, 0x40);
-        request.context = 0;
         request.mode = mode;
         request.bytes = bytes;
+        request.context = 0;
         operation = FUN_002a2f08(queue, &request);
         FUN_002a2e08(queue);
         while (operation->operation.state != 3)

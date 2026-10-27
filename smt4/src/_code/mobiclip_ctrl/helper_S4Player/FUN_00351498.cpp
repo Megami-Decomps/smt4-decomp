@@ -75,8 +75,9 @@ u32 FUN_00351498(MoviePlayerInitialization *player, void *fileBackend, void *rea
     MoviePlayerInitialization *argument = player;
     s32 result = FUN_002bcc60(player->initialization.thread, &descriptor, FUN_0034fb94,
         &argument, DAT_0044d15c->info.address + DAT_0044d15c->info.size, 17, -2, 0);
-    if (nnResultIsFailure(result))
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002c526c(result, failed);
     return 1;
 }
 }

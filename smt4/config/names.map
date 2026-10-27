@@ -4794,3 +4794,13 @@
 00387c78 aocFindDisplayNameOverrideText
 001008b8 formatWriteBoundedByte
 001d04a4 tmnlFindSlotForItem
+003a169c shopLoadMessageBankAndSound
+002470a8 namedVariantTableGetEntries
+003a0740 callbackStateClear
+003a1378 sceneApplyTransaction
+002a1200 resourceResultMatchesKnownRanges
+002a116c resourceResultMatchesRemappedCodes
+002ba8f4 kernelThreadJoinAndClose
+002aff0c slotOwnerDestroyAllSlots
+00294f64 resourceReleaseReference
+0014f4f8 lzGetAdvertisedSize

@@ -6,6 +6,7 @@
 #include "nn/svc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 #include "AsdSDK/AsdMemAlloc.h"
+#include "sys/ResultReport.h"
 
 
 /* The storage that owns the worker thread's stack (nn::os::ThreadStackStorage). */
@@ -57,7 +58,6 @@ void FUN_003f0794(void *argument);
 void FUN_00514a24(void);
 void FUN_00514b74(void);
 void FUN_00514ae4(void);
-void FUN_002e3140(s32 result, bool failed);
 
 /* Starts the battle state's worker thread on its own 4 KiB stack, unless it is still running. */
 void FUN_003f0f58(BattleWorkerState *state)

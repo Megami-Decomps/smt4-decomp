@@ -21,6 +21,11 @@ struct DemonCaptionRecord {
 };
 }
 
+static __inline const void *panelTouchSelection(ProfileEntryDrawView *panel)
+{
+    return reinterpret_cast<u8 *>(panel) + 0x818;
+}
+
 static __inline TextLayoutContextA *panelLayout(ProfileEntryDrawView *panel)
 {
     return reinterpret_cast<TextLayoutContextA *>(panel->layout);
@@ -29,6 +34,7 @@ static __inline TextLayoutContextA *panelLayout(ProfileEntryDrawView *panel)
 extern "C" {
 const PanelTextLayoutEntryPrefixA *layoutFindTableEntry(TextLayoutContextA *context, s32 entryId);
 DemonCaptionRecord *dataTable00FindById(u16 id);
+s8 touchSelectionGetSelected(const void *selection);
 void FUN_004a7dc8(ProfileEntryDrawView *panel, s32 entry, s32 fade, s32 style);
 void demonIconPanelDrawRow(ProfileEntryDrawView *panel, s32 enabled, u32 textId, s32 entry, s32 alternate, s32 fade);
 void FUN_004a7cb0(ProfileEntryDrawView *panel, u32 textId, s32 entry, s32 alternate, s32 fade, f32 scale);
@@ -53,11 +59,11 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     s32 baseX = base->x;
     s32 baseY = base->y;
     if (alternate != 0) {
-        FUN_004a7dc8(panel, entry, fade, panel->style);
+        FUN_004a7dc8(panel, entry, fade, touchSelectionGetSelected(panelTouchSelection(panel)));
     }
     demonIconPanelDrawRow(panel, 1, textId, entry, alternate, fade);
     FUN_004a7cb0(panel, textId, entry, alternate, fade, scale);
-    FUN_004a7fb8(panel, textId, entry, alternate, panel->style, fade, scale);
+    FUN_004a7fb8(panel, textId, entry, alternate, touchSelectionGetSelected(panelTouchSelection(panel)), fade, scale);
 
     u16 id = static_cast<u16>(textId);
     DemonCaptionRecord *record = dataTable00FindById(id);

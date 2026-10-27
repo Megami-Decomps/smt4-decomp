@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail preserves zero in R4 across the callback and stores its final two callback arguments with STRD; compiled code rematerializes zero and reserves a different call frame. */
+/* NON_MATCHING: retail keeps zero in r4 across the callback (`mov r0, r4` for the trampoline's first argument), stores the two zero stack arguments with strd and reserves 8 bytes; the build rematerializes zero and reserves 12. */
 #include "common.h"
 
 typedef void (*FatalBreakCallback)(u32, u32, u32, u32, u32, u32);
@@ -13,7 +13,7 @@ void sysFatalBreak(u32 unused, u32 information)
     FatalBreakCallback callback = DAT_00589280;
     if (callback != NULL) {
         DAT_00589280 = NULL;
-        callback(0, 0, 0, 0, 0, information);
+        callback(0, 0, 0, 0, 0, 0);
     }
     FUN_0019a2f8(0, 0, 0);
 }

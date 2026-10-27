@@ -29,7 +29,7 @@ struct EquipmentMenuCursor {
     };
 };
 struct EquipmentMenuItem {
-    s16 id;
+    u16 id;
     u16 unk02;
 };
 struct EquipmentMenuPage {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: original array classes/constructors are unrecovered; retail retains an unreferenced 0x00447e40 pool word and clears counters with STM. */
+/* NON_MATCHING: original array classes/constructors are unrecovered; retail retains an unreferenced 0x00447e40 pool word, and clears the counter pair with `stm r0, {r1, r2}` (base in r0) where the pair-store helper gives `strd r0, [r2]` */
 #include "common.h"
 
 struct InitializationArguments {
@@ -22,6 +22,12 @@ struct SharedElements {
     SecondElement second[32]; // 0x2844
 };
 
+static inline void setCounters(InitializationCounters* slot, u32 first, u32 second)
+{
+    InitializationCounters value = { first, second };
+    *slot = value;
+}
+
 extern "C" {
 extern InitializationCounters DAT_00447e50;
 extern SharedElements DAT_004b896c;
@@ -37,8 +43,7 @@ void* FUN_003ec4a4(u32 first, u32 second, InitializationArguments* arguments)
 {
     arguments->first = first;
     arguments->second = second;
-    DAT_00447e50.first = 0;
-    DAT_00447e50.second = 0;
+    setCounters(&DAT_00447e50, 0, 0);
     SharedElements* elements = static_cast<SharedElements*>(
         __aeabi_vec_ctor_nocookie_nodtor(
             &DAT_004b896c, asdProcessRegisterWorkCallback, sizeof(FirstElement), 16));

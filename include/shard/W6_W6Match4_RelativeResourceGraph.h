@@ -8,7 +8,10 @@ template <class T> struct ResourceRelativePointer {
 
     T *get() const
     {
-        return offset != 0 ? (T *)((u8 *)this + offset) : NULL;
+        s32 value = offset;
+        if (value == 0)
+            return NULL;
+        return (T *)((u8 *)this + value);
     }
 };
 struct RelativeResourceRecord {

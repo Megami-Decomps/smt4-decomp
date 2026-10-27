@@ -22,7 +22,7 @@ extern "C" s32 FUN_0032c900(RomFileOpenState *state, const char *path, u32 size)
         return fileRecordResult(0xe0e046bc);
     romOpenFileInitialize(&state->file);
     nn::Result result = FUN_001883b0(&state->file, resolvedPath, 6);
-    if (nnResultIsFailure(result))
+    if (!nnResultIsSuccess(result))
         return fileRecordResult(result);
     const PositionedResizeVtable *vtable = static_cast<PositionedResizeVtable *>(state->interface.vtable);
     result = vtable->resize(reinterpret_cast<PositionedStream *>(state), (u64)size);

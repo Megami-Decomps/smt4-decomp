@@ -29,7 +29,7 @@ int playerModelListCreate(void);
 int FUN_00294834(int, int, int, int);
 int FUN_00294d6c(void);
 int statusCameraSelectPreset(int);
-int FUN_00294f64(void);
+int resourceReleaseReference(void);
 int FUN_00294fe0(...);
 int FUN_002950e8(...);
 int FUN_002958f8(...);
@@ -99,7 +99,7 @@ extern unsigned int *_ZN9Obj4206e8C1Ev(void);
 /* Supplied declaration required: FUN_00294834. */
 /* Supplied declaration required: FUN_00294d6c. */
 /* Supplied declaration required: statusCameraSelectPreset. */
-/* Supplied declaration required: FUN_00294f64. */
+/* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: FUN_00294fe0. */
 extern int nkdwHeaderParse(unsigned int);
 /* Supplied declaration required: FUN_002950e8. */
@@ -252,7 +252,7 @@ unsigned int FUN_0018f660(void)
       pcVar4[0x12fd] = '\0';
     }
     if ((0 < *(short *)(pcVar4 + 0x12fe)) && (*(int *)(pcVar4 + 0x1e74) != 0)) {
-      FUN_00294f64();
+      resourceReleaseReference();
       *(int *)(pcVar4 + 0x1e74) = 0;
     }
     if (!(pcVar4[0x1e67] == '\x03' || pcVar4[0x1e67] == '\t')) {
@@ -635,7 +635,7 @@ LAB_00190190:
                 pcVar4[0x12fd] = '\0';
               }
               if ((0 < *(short *)(pcVar4 + 0x12fe)) && (*(int *)(pcVar4 + 0x1e74) != 0)) {
-                FUN_00294f64();
+                resourceReleaseReference();
                 *(int *)(pcVar4 + 0x1e74) = 0;
                 pcVar4[0x12fe] = -1;
                 pcVar4[0x12ff] = -1;

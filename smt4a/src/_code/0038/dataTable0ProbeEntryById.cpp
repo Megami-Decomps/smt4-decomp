@@ -10,7 +10,7 @@ typedef struct SearchKey {
 } SearchKey; /* 0xB4 bytes, the size of a table entry */
 
 extern void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, SearchCompare compare);
-int FUN_0018449c(const void *key, const void *entry);
+int devilCompareRecordIds(const void *key, const void *entry);
 
 /* Looks up table entry `id` in data table 0 by binary search (result unused). */
 void dataTable0ProbeEntryById(u16 id)
@@ -22,7 +22,7 @@ void dataTable0ProbeEntryById(u16 id)
     key.id = id;
     table = dataTableGet(0, 0);
     entries = dataTableGetEntries(table);
-    libc_bsearch(&key, entries, dataTableGetCount(table), 0xB4, FUN_0018449c);
+    libc_bsearch(&key, entries, dataTableGetCount(table), 0xB4, devilCompareRecordIds);
 }
 
 } /* extern "C" */

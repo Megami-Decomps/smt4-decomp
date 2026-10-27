@@ -82,12 +82,14 @@ bool FUN_00223898(SaveLoadThreadWork *work, u8 kind)
     work->kind = kind;
 
     s32 result = createSemaphore(&work->semaphore, 0, 1);
-    if (nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
     }
     result = releaseSemaphore(work->semaphore, 1);
-    if (nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+    failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
     }
 
     asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\gamedata\\SaveLoad_Thread.cpp", 511);

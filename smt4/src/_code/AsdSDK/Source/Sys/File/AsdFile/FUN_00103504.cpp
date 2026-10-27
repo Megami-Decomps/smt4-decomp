@@ -3,6 +3,7 @@
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "sys/ResultReport.h"
 
 /* The file worker's thread: its kernel handle and whether it has been joined (nn::os::Thread). */
 struct AsdFileThread {
@@ -16,7 +17,6 @@ extern AsdFileGlobals g_asdFile;
 extern AsdFileThread g_asdFileThread;
 
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(s32 result, bool failed);
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
 void nn_os_LightEvent_Signal(void *event);
 void nn_os_Thread_FinalizeImpl(u32 *thread);

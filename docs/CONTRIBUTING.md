@@ -75,6 +75,18 @@ Every match must be one a programmer could have written for a reason.
   for both games. Pass the retail third argument explicitly: normal setters notify with `1`,
   while the flag-change handlers use `0` to avoid redispatch. The setter has no result;
   recover any subsequent value from the actual producer rather than assigning its stale `r0`.
+  `sys/ResultReport.h` (per game) declares the failed-result reporter variadically
+  (`void FUN_002c526c(u32 result, ...)`, smt4a `FUN_002e3140`): retail has sites that keep the tested
+  failure flag and pass it as a second argument (`bool failed = nnResultIsFailure(r); if (failed)
+  report(r, failed);` gives retail's `lsrs r1, r0, #31 … blne`), and sites that pass only the result
+  (constant codes, summary-guarded `(r & 0x7e00000) != 0x600000 && nnResultIsFailure(r)`); the
+  definition lives in its own file and never reads the flag. smt4 `sys/HandleWait.h` owns the
+  single-handle wait helper (`handleWait(handle, timeout)` plus `FUN_002c40f8`) and
+  `sys/KernelThread.h` the thread object; `nn/Result.h` has the native description tests
+  (`nnResultIsNotTimeout`: a bitfield compare of the description against 0x3fe).
+  A call to the remap `legacyResourceIdRemap(const PackedResourceId *)` (`AsdSDK/Source/Gfx/Model/AsdEnv.h`)
+  is the multifile case: retail pushes only `lr` around it (no alignment pad); compare the masked
+  module field in place (`(r & 0x3fc00) == (0x4e << 10)`), not an extracted value.
   `gfx/EffectEditorParameters.h` owns both games' four-argument parameter-editor contracts.
   Their two option-list pointers are real arguments: a table base kept in `r3` while `r2`
   addresses a later entry is not merely missed literal folding. Preserve both pointers and

@@ -1,4 +1,4 @@
-/* NON_MATCHING: global load precedes push; count/value/loop scratch registers differ. */
+/* NON_MATCHING: only the global pool load is placed before the push (retail: right after it); the loop reads count in its condition, which fixed the value/count loads. */
 #include "shard/Shard0033.h"
 #include "ui/UiSpriteState.h"
 #include "status/StatusCamera.h"
@@ -34,8 +34,7 @@ void useCounterStart(void)
     work->frame = 0;
     if (work->valueOffset >= 0) {
         const u8 *value = FUN_002a0d0c() + work->valueOffset;
-        s32 count = work->count;
-        for (s32 index = 0; index < count; ++index) {
+        for (s32 index = 0; index < work->count; ++index) {
             if (work->values[index] == (*value & 0x7f)) {
                 FUN_0029eb5c(reinterpret_cast<ScrollSelection *>(work->selection), index);
                 break;

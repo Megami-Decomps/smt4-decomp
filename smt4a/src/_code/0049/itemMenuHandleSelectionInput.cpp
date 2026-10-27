@@ -51,14 +51,19 @@ void releaseEntriesA(void *);
 void ifTouchRegionRemove();
 void menuOpenCommandList(EquipmentMenu *);
 
+static __inline void equipmentMenuEnterState(EquipmentMenu *menu, u32 next)
+{
+    menu->previousState = menu->state;
+    menu->state = next;
+    menu->phase = 0;
+}
+
 void itemMenuHandleSelectionInput(EquipmentMenu *menu)
 {
     if (menu->phase != 0) {
         if (menu->phase == 1 && scrRunOpcodesStub(menu->process) == 2) {
             buttonHelpSetText(0, 0xf4f4f4ff);
-            menu->previousState = menu->state;
-            menu->state = 5;
-            menu->phase = 0;
+            equipmentMenuEnterState(menu, 5);
         }
         return;
     }
@@ -68,9 +73,8 @@ void itemMenuHandleSelectionInput(EquipmentMenu *menu)
     messageChoiceShowCurrent(menu);
     if (menu->categories[menu->category].items.count > 0 && FUN_004d0584())
         confirmed = 1;
-    s32 category = menu->category;
-    u32 index = flaggedValueHolderGetTotal(&menu->categories[category].selection);
-    const EquipmentChoice *choice = &menu->choices[category].choices[index];
+    u32 index = flaggedValueHolderGetTotal(&menu->categories[menu->category].selection);
+    const EquipmentChoice *choice = &menu->choices[menu->category].choices[index];
     bool eligible = true;
     if (menu->category != 8) {
         u32 limit = shopGetEntryPrice(choice);

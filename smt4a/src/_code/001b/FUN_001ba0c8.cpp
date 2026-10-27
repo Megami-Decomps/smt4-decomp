@@ -1,6 +1,7 @@
 /* NON_MATCHING: ring-index updates are scheduled differently (retail pairs the two index stores into one strd and keeps the record argument in r5) */
 #include "common.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 /* A 0xb8-byte queued record; the word at 0xb0 chains it to the one pushed after it. */
 struct QueuedRecord {
@@ -22,15 +23,15 @@ struct RecordRing {
 extern "C" {
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 FUN_0019a364(s32 *count, u32 semaphore, s32 releaseCount);
-void FUN_002e3140(s32 result);
 void nnnstdMemCpy(void *destination, const void *source, u32 bytes);
 
 /* Appends a copy of `record` to the ring (under its semaphore) and returns the stored copy. */
 QueuedRecord *FUN_001ba0c8(RecordRing *ring, const QueuedRecord *record)
 {
     s32 result = svcWaitSynchronization1(ring->semaphore, -1);
-    if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
     QueuedRecord *stored;
     if (ring->readIndex == ring->writeIndex) {
@@ -52,8 +53,9 @@ QueuedRecord *FUN_001ba0c8(RecordRing *ring, const QueuedRecord *record)
     }
     s32 released;
     result = FUN_0019a364(&released, ring->semaphore, 1);
-    if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+    failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
     return stored;
 }

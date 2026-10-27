@@ -1,4 +1,4 @@
-/* NON_MATCHING: float register allocation and the HP clamp's conditional-store layout differ (retail keeps the percent damage in s23 and the group count in r5); logic and calls are identical. */
+/* NON_MATCHING: float register allocation/scheduling differs (retail keeps the percent damage in s23, the group count in r5 and a shared zero in sl); logic and calls are identical. */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "gamedata/SaveSlotTable.h"
@@ -57,6 +57,18 @@ static __inline s32 slotHpLimit(const SlotRecord *record)
     return limit;
 }
 
+/* `hp` limited to 1..`limit` (the limit wins when it is below `hp`). */
+static __inline s32 limitHp(s32 hp, s32 limit)
+{
+    if (hp > limit) {
+        return limit;
+    }
+    if (hp < 1) {
+        hp = 1;
+    }
+    return hp;
+}
+
 /* Damages the player and the demon slots of one group (mode 0 party and reserve member 0, 1 party, 2/3 reserve)
    by `percent` of their maximum HP (at least 1, leaving at least 1 HP) and shows the total as a damage number. */
 extern "C" void FUN_0049fe58(u32 mode, f32 percent)
@@ -78,58 +90,54 @@ extern "C" void FUN_0049fe58(u32 mode, f32 percent)
         }
         s16 newHp = (s16)(s32)remaining;
         PlayerRecord *player = reinterpret_cast<PlayerRecord *>(gameGetPlayerData());
-        if (newHp <= player->maxHp) {
-            if (newHp < 1) {
-                newHp = 1;
-            }
-            player->hp = newHp;
-        } else {
-            player->hp = player->maxHp;
-        }
+        player->hp = limitHp(newHp, player->maxHp);
         if (hp - remaining > 0.0f) {
             FUN_00408184(0x17, (s32)hp - (s32)remaining);
         }
     }
     s32 count;
     const s8 *slots;
-    if (mode == 0 || mode == 1) {
+    switch (mode) {
+    case 0:
+    case 1:
         count = gameSlotTableFindFree();
         slots = gameGetSlotTable()->party;
-    } else if (mode == 2 || mode == 3) {
+        break;
+    case 2:
+    case 3:
         count = 3;
         slots = gameGetSlotTable()->reserve;
-    } else {
+        break;
+    default:
         return;
     }
     for (s32 i = 0; i < count; i++) {
-        if (slots[i] >= 0) {
-            SlotRecord *record = gameGetSlotRecord(slots[i]);
-            if ((record->status & STATUS_PROTECTED) == 0 && (record->status & STATUS_NEVER) == 0) {
-                s32 limit = record == NULL ? 0 : slotHpLimit(record);
-                f32 hp = (f32)record->hp;
-                f32 damage = (f32)limit * percent * 0.01f;
-                if (!(damage > 0.0f)) {
-                    damage = 1.0f;
-                }
-                f32 remaining = hp - damage;
-                if (!(remaining > 0.0f)) {
-                    remaining = 1.0f;
-                }
-                s16 newHp = (s16)(s32)remaining;
-                if (record != NULL) {
-                    s32 cap = slotHpLimit(record);
-                    if (newHp <= cap) {
-                        cap = newHp;
-                        if (newHp < 1) {
-                            cap = 1;
-                        }
-                    }
-                    record->hp = cap;
-                }
-                if (hp - remaining > 0.0f) {
-                    FUN_00408184(0x17, (s32)hp - (s32)remaining);
-                }
-            }
+        if (slots[i] < 0) {
+            continue;
+        }
+        SlotRecord *record = gameGetSlotRecord(slots[i]);
+        if (record->status & STATUS_PROTECTED) {
+            continue;
+        }
+        if (record->status & STATUS_NEVER) {
+            continue;
+        }
+        s32 limit = record == NULL ? 0 : slotHpLimit(record);
+        f32 hp = (f32)record->hp;
+        f32 damage = (f32)limit * percent * 0.01f;
+        if (!(damage > 0.0f)) {
+            damage = 1.0f;
+        }
+        f32 remaining = hp - damage;
+        if (!(remaining > 0.0f)) {
+            remaining = 1.0f;
+        }
+        s16 newHp = (s16)(s32)remaining;
+        if (record != NULL) {
+            record->hp = limitHp(newHp, slotHpLimit(record));
+        }
+        if (hp - remaining > 0.0f) {
+            FUN_00408184(0x17, (s32)hp - (s32)remaining);
         }
     }
 }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the prologue differs: retail loads the TXOB magic before the size guard (build: conditionally after it) and keeps the copy temporaries in r0 (build: r2). */
+/* NON_MATCHING: the TXOB magic literal now loads before the size guard like retail; remaining diff: retail reuses r0 (the zero/offset register) for the field copies and addresses the data offset through a writeback load (`ldr r0, [r1, #68]!`), the build uses r2 and a separate add. */
 #include "test/MotouchiTexture.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -9,12 +9,13 @@ void rt_memcpy(void *, const void *, u32);
 // Find a TXOB resource in the buffer and copy its image into owned storage.
 void FUN_001f4a98(MotouchiTexture *texture, const u32 *data, u32 size)
 {
+    const u32 magic = 0x424f5854; /* "TXOB" */
     texture->data = NULL;
     texture->target = 0xde1;
     texture->unk08 = 0;
     texture->unk0c = 0;
     for (u32 offset = 0; size > offset; offset += sizeof(u32), ++data) {
-        if (*data != 0x424f5854)
+        if (*data != magic)
             continue;
         const MotouchiTextureResource *resource = reinterpret_cast<const MotouchiTextureResource *>(data);
         texture->height = resource->height;

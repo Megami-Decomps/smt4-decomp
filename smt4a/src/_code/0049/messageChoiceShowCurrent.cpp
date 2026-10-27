@@ -1,4 +1,4 @@
-/* NON_MATCHING: group/selector address calculations use opposite r1/r2 registers and schedule the selector argument after the message-bank base. */
+/* NON_MATCHING: only the message-bank address adds are scheduled before the selector argument (retail interleaves them after it). */
 #include "common.h"
 #include "shard/Shard004A.h"
 
@@ -31,10 +31,9 @@ void buttonHelpSetText(s32 mode, u32 color);
 // Show the current group's selected message, or draw the empty-state background.
 void messageChoiceShowCurrent(MessageChoiceOwner *owner)
 {
-    s32 group = owner->group;
-    if (owner->choices[group].count > 0) {
-        MessageChoiceBank *messages = &owner->messages[group];
-        s32 selected = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&owner->choices[group]));
+    if (owner->choices[owner->group].count > 0) {
+        MessageChoiceBank *messages = &owner->messages[owner->group];
+        s32 selected = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(&owner->choices[owner->group]));
         screenShowMessage(messages->entries[selected].message);
         return;
     }

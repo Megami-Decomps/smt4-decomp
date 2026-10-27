@@ -6,13 +6,15 @@
 #include "classes/Obj55ca08.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
+extern "C" void asdOperatorDelete(void *block);
 
 /* Base of the Bible's menu and flagged views. */
 class Obj55c920 : public BibleView {
 public:
     Obj55c920();
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
-    virtual ~Obj55c920();
+    static void operator delete(void *block) { asdOperatorDelete(block); }
+    virtual ~Obj55c920() {}
     virtual void start() = 0;
     virtual void unk0c() = 0;
     virtual void stop() = 0;

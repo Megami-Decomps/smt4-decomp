@@ -1,6 +1,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 struct AllocationLockOwner {
     u32 unk00;
@@ -13,7 +14,6 @@ extern AllocationLockOwner g_allocationAddressRanges; /* 0x5b4028 */
 void FUN_0018003c(void);
 void *asdMemoryAlloc(u32 heap, u32 alignment, u32 region, u32 size, u32 option);
 void rt_memclr(void *buffer, u32 size);
-void FUN_002e3140(s32 result);
 
 // Allocate under the tracking lock and clear the block when the allocation succeeded.
 void *asdMemoryAllocTracked(u32 heap, u32 alignment, u32 region, u32 size, u32 option)

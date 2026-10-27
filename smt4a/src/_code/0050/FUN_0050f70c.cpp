@@ -1,11 +1,11 @@
 #include "shard/W6_W6Match3_ThreadHandleState.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 extern ThreadHandleState DAT_005894d8;
 extern const u32 DAT_00537d24;
 s32 FUN_001d3ef8(u32* handle, u32 original);
-void FUN_002e3140(s32 result);
 void _ZN9Obj2fd02aD1Ev(void* object);
 void entry(void);
 void __aeabi_atexit(void* object, void (*destroy)(void*), void* module);

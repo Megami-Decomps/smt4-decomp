@@ -1,5 +1,6 @@
 /* NON_MATCHING: close: retail materializes the "not a timeout" test as a bool (movne/moveq/teq) and hoists the zero timeout into the predicated moves before the svc; the build folds the bool into a direct branch. Same as FUN_00137f94. */
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 /* The CEC worker process (the part this poll touches). */
 struct CecProcess {
@@ -25,7 +26,6 @@ extern "C" {
 extern CecProcess *g_cecProcess;
 
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result, bool failed);
 bool nn_os_CriticalSection_TryEnter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
 

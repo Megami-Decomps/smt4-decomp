@@ -6865,7 +6865,7 @@
 0x0045b7cc nw_snd_SoundHandle_detail_AttachSound name
 0x0045b7f8 nw_snd_SoundHandle_detail_AttachSoundAsTempHandle name
 0x0045b824 FUN_0045b824 between
-0x0045b830 soundHandleDetachReturn between
+0x0045b830 _ZN11SoundHandleD1Ev between
 0x0045b844 FUN_0045b844 between
 0x0045b904 FUN_0045b904 between
 0x0045b96c FUN_0045b96c between
@@ -7140,7 +7140,7 @@
 0x00466fdc sndHeapAlloc between
 0x00467040 FUN_00467040 between
 0x00467080 FUN_00467080 between
-0x004670a4 FUN_004670a4 between
+0x004670a4 _ZN13SoundHeapBaseD1Ev between
 0x00467148 FUN_00467148 between
 0x0046714c FUN_0046714c between
 0x00467150 FUN_00467150 between

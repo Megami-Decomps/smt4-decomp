@@ -44,7 +44,7 @@ void asdTMTexTableLoadSprites(s32 table);
 u32 npcCreateTextureEffectJob(u32 id, s32 x, s32 y);
 void FUN_0039af48(u32 id, s32 x, s32 y);
 void FUN_0031bca4(void);
-void FUN_0040a244(void);
+void resourceReleaseReference(void);
 Table00Record *dataTable00FindById(s32 id);
 u32 FUN_00409fe8(s32 id, s32 flag);
 
@@ -126,7 +126,7 @@ void FUN_0049669c(ShopScene *shop)
     }
     if (npcId != 0) {
         if (shop->npcModel != 0) {
-            FUN_0040a244();
+            resourceReleaseReference();
             shop->npcModel = 0;
         }
         {

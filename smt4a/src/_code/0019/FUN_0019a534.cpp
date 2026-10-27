@@ -1,4 +1,3 @@
-/* NON_MATCHING: the four list walks (an inline helper per walk gives retail's r0..r3 walker registers) match except that retail loads the head into r0 and copies it to r3 at the first guard, while the build loads r3 and copies to r0, so armcc threads the guards' skip branches (0x34/0x48/0x5c) where retail jumps to each next walk's guard (0x20/0x34/0x48). */
 #include "common.h"
 
 struct AddressRange {
@@ -26,11 +25,10 @@ static __inline void walkRanges(AddressRange *range)
 /* Walks the allocation address-range list four times. */
 void FUN_0019a534(void)
 {
-    AddressRange *head = *g_allocationAddressRanges.head;
-    walkRanges(head);
-    walkRanges(head);
-    walkRanges(head);
-    walkRanges(head);
+    walkRanges(*g_allocationAddressRanges.head);
+    walkRanges(*g_allocationAddressRanges.head);
+    walkRanges(*g_allocationAddressRanges.head);
+    walkRanges(*g_allocationAddressRanges.head);
 }
 
 } /* extern "C" */

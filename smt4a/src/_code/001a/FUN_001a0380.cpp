@@ -1,20 +1,5 @@
-/* NON_MATCHING: name-parse fallback layout, packed-key registers, and registry clear stores differ. */
-#include "common.h"
-
-extern "C" void sysFatalBreak(void);
-extern "C" const char DAT_00536d10[];
-
-static __inline u64 mountNameKey(const char *name)
-{
-    u64 key = 0;
-    for (s32 index = 0; index < 8; ++index) {
-        s32 character = static_cast<s8>(name[index]);
-        if (character == ':')
-            return key;
-        key = (key << 8) | static_cast<s64>(character);
-    }
-    return 0;
-}
+/* NON_MATCHING: name-parse layout now matches retail; the 64-bit pack loop register allocation (retail shifts the high word first and needs only r4/r5) and the registry clear stores still differ. */
+#include "sys/MountNameKey.h"
 
 // Remove the named mount and release its filesystem unless the registration is borrowed.
 extern "C" u32 FUN_001a0380(const char *path)
@@ -35,23 +20,7 @@ extern "C" u32 FUN_001a0380(const char *path)
     struct TitleFileSystemView { u8 unk00[8]; FileSystem *current; };
     extern MountRecord DAT_0062d410[32];
     extern TitleFileSystemView DAT_00589398;
-    char name[8];
-    s32 length;
-    for (length = 0; length < 8; ++length) {
-        s8 character = path[length];
-        if (character == 0 || character == ':') {
-            name[length] = ':';
-            break;
-        }
-        name[length] = character;
-    }
-    u64 key;
-    if (length == 8) {
-        sysFatalBreak();
-        key = mountNameKey(DAT_00536d10);
-    } else {
-        key = mountNameKey(name);
-    }
+    u64 key = mountKeyFromName(reinterpret_cast<const s8 *>(path));
     for (u32 index = 0; index < 32; ++index) {
         MountRecord *mount = &DAT_0062d410[index];
         if (mount->name == key) {

@@ -4,7 +4,7 @@
 #include "battle/btlAction.h"
 
 extern "C" {
-void FUN_00294f64(BtlLoadedActionResource *resource);
+void resourceReleaseReference(BtlLoadedActionResource *resource);
 }
 
 static bool isRetainedResource(const BtlMainState *state, s16 id)
@@ -28,7 +28,7 @@ void FUN_00337a34(BtlMainState *state)
                 BtlLoadedActionResource *resource = state->actionCleanup.resources[index];
                 if (resource != NULL && resource->id == state->actionCleanup.selectedResource->id &&
                     !isRetainedResource(state, (s16)resource->id)) {
-                    FUN_00294f64(resource);
+                    resourceReleaseReference(resource);
                     state->actionCleanup.resources[index] = NULL;
                 }
             }

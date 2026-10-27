@@ -2,6 +2,7 @@
 #include "common.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "sys/ResultReport.h"
 
 /* An asynchronous request: the event the service signals when it is done, and whether it has been sent. */
 struct AsyncRequest {
@@ -12,7 +13,6 @@ struct AsyncRequest {
 
 extern "C" {
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(s32 result, bool failed);
 s32 FUN_002b5820(u32 *handle, u32 resetType);
 s32 FUN_0023793c(void);
 s32 FUN_00351c58(void);

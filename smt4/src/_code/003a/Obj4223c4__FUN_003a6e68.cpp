@@ -1,4 +1,4 @@
-/* NON_MATCHING: preset branch placement, window flag addressing and count clamp condition differ. */
+/* NON_MATCHING: preset arms and count clamp now match retail; remaining: retail reads `source` through a base+0x500 pointer (add r0,r4,#1280; ldrb [r0,#165]) and updates the window state with a writeback `ldrh r1,[r0,#4]!`. */
 #include "classes/Obj4223c4.h"
 #include "classes/Obj422594.h"
 #include "shard/MessageIdList.h"
@@ -62,10 +62,10 @@ void Obj4223c4::FUN_003a6e68()
     if (completed == 0)
         return;
 
-    if (view->previewOnly)
-        buttonHelpSetPreset(view->source == 1 ? 0x4C : 0x4D);
-    else
+    if (!view->previewOnly)
         buttonHelpSetPreset(0x2D);
+    else
+        buttonHelpSetPreset(view->source == 1 ? 0x4C : 0x4D);
     FUN_0029d960(screen);
     FUN_002a0cc8(0);
     view->state = 2;
@@ -73,9 +73,7 @@ void Obj4223c4::FUN_003a6e68()
     pointConvertToFloat(&view->position, 0, 0);
     view->window->initialize(&view->cursor);
     view->window->state |= 0x1000;
-    s32 count = view->cursor.count;
-    if (count >= 10)
-        count = 10;
+    s32 count = view->cursor.count < 10 ? view->cursor.count : 10;
     FUN_00233670(&view->messages, 0x1D, 0x40E, count);
     view->messages.unk10 = 1;
 }

@@ -12,14 +12,16 @@ extern "C" s32 FUN_002b2b34(const u16* leftId, const u16* rightId)
     }
     s32 leftGroup = FUN_002f744c(left->ordering.sortGroup);
     s32 rightGroup = FUN_002f744c(right->ordering.sortGroup);
-    s32 result = leftGroup - rightGroup;
-    if (result != 0) {
-        return result;
+    s32 groupDifference = leftGroup - rightGroup;
+    if (groupDifference != 0) {
+        return groupDifference;
     }
     left = FUN_001ad9b4(*leftId);
     right = FUN_001ad9b4(*rightId);
-    if (left == NULL || right == NULL) {
-        return 0;
+    s32 result = 0;
+    if (left != NULL && right != NULL) {
+        result = left->ordering.sortKey;
+        result -= right->ordering.sortKey;
     }
-    return left->ordering.sortKey - right->ordering.sortKey;
+    return result;
 }

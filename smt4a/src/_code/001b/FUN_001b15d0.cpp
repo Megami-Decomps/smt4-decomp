@@ -23,7 +23,7 @@ struct BchPart {
 struct BchObject {
     /* 0x00 */ u8 unk00[0xC];
     /* 0x0C */ BchPart **parts;
-    /* 0x10 */ u16 partCount;
+    /* 0x10 */ s16 partCount;
 };
 
 struct BchSectionRequest {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: canonical render push fixes stack-address scheduling; saved VFP constants and centered text conversions still differ. */
+/* NON_MATCHING: canonical render push fixes stack-address scheduling; only the saved VFP constant registers (1.0f/0.0f in s16/s17 swapped) and the s0/s1 conversion register differ. */
 #include "camp/RenderCtx.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -33,9 +33,9 @@ void FUN_004087d8(ChoiceCaptionWork *work, s32 first)
     FUN_00164b5c(2, 0x2B, 7, offset, 0, 0xF1);
     s32 availableWidth = metrics->placement->width;
     s32 width = (s32)FUN_00168594(first != 0 ? work->first : work->second, 4, 0.0f);
-    textDrawString(4, 0xFFFFFFFF, first != 0 ? work->first : work->second,
-                 (f32)(offset + (availableWidth - width) / 2 + metrics->x), (f32)metrics->y,
-                 0.0f, 0.0f, work->alpha);
+    f32 x = (f32)(offset + (availableWidth - width) / 2 + metrics->x);
+    f32 y = (f32)metrics->y;
+    textDrawString(4, 0xFFFFFFFF, first != 0 ? work->first : work->second, x, y, 0.0f, 0.0f, work->alpha);
     renderStackPop(&g_renderCtx->stackA);
     efctSetSpeed(1.0f);
 }

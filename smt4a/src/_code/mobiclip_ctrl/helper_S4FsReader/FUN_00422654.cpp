@@ -2,6 +2,7 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "mobiclip_ctrl/S4FsReader.h"
+#include "sys/ResultReport.h"
 
 /* The Mobiclip player's allocation: the block and the object living in it. */
 struct S4MovieAllocation {
@@ -15,7 +16,6 @@ extern S4MovieAllocation DAT_005880f8;
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 void nn_os_Thread_FinalizeImpl(u32 *thread);
 void FUN_001469a8(void *object);
-void FUN_002e3140(s32 result);
 void asdOperatorDelete(void *object);
 void asdMemFree(void *block);
 
@@ -35,12 +35,14 @@ void FUN_00422654(S4FsReader *reader)
         return;
     }
     s32 result = nn::svc::SignalEvent(reader->stopEvent);
-    if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
     result = svcWaitSynchronization1(reader->threadHandle, -1);
-    if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+    failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
     reader->threadJoined = 1;
     nn_os_Thread_FinalizeImpl(&reader->threadHandle);

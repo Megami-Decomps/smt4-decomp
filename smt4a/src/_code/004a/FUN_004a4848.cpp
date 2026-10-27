@@ -1,4 +1,5 @@
 /* NON_MATCHING: demon list population and comparison rows restored; owner subobject bases, local stack placement and help-tail ordering differ. */
+#include "AsdSDK/AsdDebugHooks.h"
 #include "shard/Shard004A.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
 #include "gamedata/Table00.h"
@@ -76,6 +77,7 @@ void FUN_004a4848(Screen4A *owner)
         reinterpret_cast<InventoryTotalView *>(owner)->total = total;
         itemListSelectVariant(reinterpret_cast<ItemListSelectionOwner *>(owner), 1, 1);
         FUN_004cfeb0(&work->cursor, 10, work->list.count, 0, 1, 1);
+        asdDebugHookPtr(&work->cursor);
         work->cursor.enabled = 1;
         work->percentage = gaugePercent(&work->list, 1);
         jyoucyuGetTableEntry(0);
@@ -86,14 +88,12 @@ void FUN_004a4848(Screen4A *owner)
     work->widget->vtable->setCursor(work->widget, &work->cursor);
     work->widget->flags |= 0x1000;
     s32 count = work->cursor.count;
-    if (work->alternate != 0) {
-        if (count >= 10)
-            count = 10;
-        FUN_004d05c4(&work->help, 0x13, 0x1030, count);
-    } else {
-        if (count >= 10)
-            count = 10;
+    if (work->alternate == 0) {
+        count = count < 10 ? count : 10;
         FUN_004d05c4(&work->help, 0x14, 0x40E, count);
+    } else {
+        count = count < 10 ? count : 10;
+        FUN_004d05c4(&work->help, 0x13, 0x1030, count);
     }
     work->help.active = 1;
 }

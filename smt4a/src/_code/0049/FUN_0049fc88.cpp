@@ -1,4 +1,4 @@
-/* NON_MATCHING: shared affinity-allow predicate recovers player status tail; unit tail branch polarity and unit/11 argument setup order still differ. */
+/* NON_MATCHING: only the unit-loop affinity call's argument setup differs: retail loads unit (r1), 11 (r2), then the output address (r0). */
 #include "shard/Shard0031.h"
 #include "shard/Shard004B.h"
 
@@ -18,6 +18,12 @@ static inline s32 statusAffinityAllows(u16 affinity)
     if (state == 1 || state == 3 || state == 4)
         return 0;
     return 1;
+}
+
+static inline s32 unitAffinityAllows(ScaledRecordValues* unit, u16* affinities)
+{
+    affinityResolveUnitSlot(affinities, unit, 11);
+    return statusAffinityAllows(affinities[0]);
 }
 
 void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
@@ -71,13 +77,9 @@ void FUN_0049fc88(u32 group, u32 statusBit, f32 chance)
             continue;
         }
         if (static_cast<f32>(randRange(99)) < chance) {
-            s32 canApply = 1;
-            if (statusBit == 5) {
-                affinityResolveUnitSlot(affinities, unit, 11);
-                canApply = statusAffinityAllows(affinities[0]);
-            }
-            if (canApply)
-                unit->flags |= mask;
+            if (statusBit == 5 && !unitAffinityAllows(unit, affinities))
+                continue;
+            unit->flags |= mask;
         }
     }
 }

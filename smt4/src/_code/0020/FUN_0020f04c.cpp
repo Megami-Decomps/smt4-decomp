@@ -38,7 +38,7 @@ void mdlPartsRelease(void *model);
 void FUN_00338fb0(BattleMainState* state);
 void FUN_00337a34(BattleMainState* state);
 void scrScriptProcessDestroy(u32 process);
-void FUN_00294f64(u32 object);
+void resourceReleaseReference(u32 object);
 void textureSlotsReleaseAll(void);
 void btlTalkBustUpDestroy(void);
 void infoWinStartTimer(s32 arg);
@@ -129,7 +129,7 @@ void FUN_0020f04c(void)
     }
     for (s32 i = 0; i < 0x2a; i++) {
         if (w[0x84d + i] != 0) {
-            FUN_00294f64(w[0x84d + i]);
+            resourceReleaseReference(w[0x84d + i]);
             w[0x84d + i] = 0;
         }
     }

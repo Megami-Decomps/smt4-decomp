@@ -29,7 +29,7 @@ extern SharedResource g_gameGlobals;
 
 void asdMemFree(void *block);
 void FUN_0038b3f8(s32 effectId, s32 arg);
-void FUN_0040a244(void *model);
+void resourceReleaseReference(void *model);
 void jobStop(u32 job, s32 arg);
 void statusDownDestroy(void);
 
@@ -64,7 +64,7 @@ void FUN_00333f6c(void)
         FUN_0038b3f8(work->effectId, 1);
     }
     if (work->modelCount > 0 && work->model != NULL) {
-        FUN_0040a244(work->model);
+        resourceReleaseReference(work->model);
         work->model = NULL;
     }
     jobStop(work->job, 0);

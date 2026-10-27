@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the name address above the second memClear and keeps sp+0x80 and the path address in fp/r6 (as in smt4a FUN_004f84ec); built recomputes them */
+/* NON_MATCHING: pointer locals (formatted source, full path) reproduce retail's fp/260-byte frame; remaining: owner/temporary register numbering (r6/r7), hoisting order of the table base and &formatted, and `mov r1,#47` scheduled before `mov r0,r7`. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
@@ -29,24 +29,16 @@ char *libc_strcpy(char *dest, const char *src);
 char *FUN_002522e0(const char *string, s32 c);
 s32 keyedRecordFindByName(const char *name);
 
-static __inline void formatEffectPath(char *path, char *formatted, s32 effectIndex)
-{
-    memClear(path, 0x80);
-    const char *effectName = DAT_004007c4[effectIndex];
-    memClear(formatted, 0x80);
-    textFormatBuffer(formatted, DAT_004008c4, effectName);
-    libc_strcpy(path, formatted);
-}
-
 /* Resets both flash effect slots and starts loading each effect file that no record provides yet. */
 u32 FUN_003dba3c(FlashEffects *effects)
 {
+    char path[0x80];
+    char formatted[0x80];
+    char *formattedPath = formatted;
     s32 i;
 
     for (i = 0; i < 2; i++) {
         EffectFileSlot *slot = &effects->slots[i];
-        char path[0x80];
-        char formatted[0x80];
 
         slot->record = 0xff;
         memClear(slot->name, sizeof(slot->name));
@@ -55,10 +47,15 @@ u32 FUN_003dba3c(FlashEffects *effects)
             slot->data = NULL;
         }
         slot->flags = 0;
-        formatEffectPath(path, formatted, i);
-        libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+        memClear(path, 0x80);
+        const char *effectName = DAT_004007c4[i];
+        memClear(formatted, 0x80);
+        textFormatBuffer(formatted, DAT_004008c4, effectName);
+        libc_strcpy(path, formattedPath);
+        char *fullPath = path;
+        libc_strcpy(slot->name, FUN_002522e0(fullPath, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
-            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 0);
+            asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&slot->data), 0);
             slot->flags |= 1;
         }
     }

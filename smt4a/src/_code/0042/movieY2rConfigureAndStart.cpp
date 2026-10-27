@@ -2,11 +2,11 @@
 #include "common.h"
 #include "nn/svc.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 void nnResultCheckReport0043aab4();
 u32 serviceQuerySignedByteChecked();
-void FUN_002e3140(u32 result);
 void FUN_0043a718(s32 enabled);
 void FUN_0043a750(s32 format);
 void FUN_0043a31c(s32 format);
@@ -31,8 +31,9 @@ void movieY2rConfigureAndStart(s32 width, s32 height, s32 format, u32 rotation, 
     while (serviceQuerySignedByteChecked()) {
     }
     const u32 result = nn::svc::ClearEvent(g_y2rTransferEvent);
-    if (nnResultIsFailure(result)) {
-        FUN_002e3140(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002e3140(result, failed);
     }
     FUN_0043a718(1);
     FUN_0043a750(format);

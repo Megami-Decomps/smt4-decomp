@@ -1,6 +1,7 @@
 #include "gfx/SpritePartDraw.h"
-/* NON_MATCHING: identity and transform construction groups VFP stores differently and changes saved-register allocation. */
+/* NON_MATCHING: the shared identity is now the native MTX44::Identity() (inlined guard like retail); the translation/scale/rotation temporaries still group VFP stores differently and change saved-register allocation (373 vs 378 rows). */
 #include "common.h"
+#include "nw/math/MTX44.h"
 #include "shard/TextureDrawCall.h"
 #include "shard/W5_W5Match2_PlainData.h"
 
@@ -41,11 +42,7 @@ struct EffectInstance {
 struct TitleScene;
 
 extern "C" {
-extern long long _ZGVZN2nw4math5MTX448IdentityEvE8identity;
-extern Matrix44 _ZZN2nw4math5MTX448IdentityEvE8identity;
 extern TitleScene* g_titleScene;
-
-int __cxa_guard_acquire(long long* guard);
 
 void mtx44Copy(Matrix44* destination, const Matrix44* source);
 void nn_math_ARMv6_MTX44MultAsm(
@@ -85,13 +82,6 @@ static __inline void setIdentity(Matrix44 *matrix)
     matrix->values[15] = 1.0f;
 }
 
-static __inline void initializeSharedIdentityIfNeeded()
-{
-    if (!(static_cast<u32>(_ZGVZN2nw4math5MTX448IdentityEvE8identity) & 1) &&
-        __cxa_guard_acquire(&_ZGVZN2nw4math5MTX448IdentityEvE8identity))
-        setIdentity(&_ZZN2nw4math5MTX448IdentityEvE8identity);
-}
-
 static __inline void setTranslation(Matrix44 *matrix, f32 x, f32 y, f32 z)
 {
     setIdentity(matrix);
@@ -124,10 +114,8 @@ extern "C" void effectRenderTransformedInstance(EffectInstance* effect, float ho
     Matrix44 view;
     Matrix44 transform;
 
-    initializeSharedIdentityIfNeeded();
-    mtx44Copy(&view, &_ZZN2nw4math5MTX448IdentityEvE8identity);
-    initializeSharedIdentityIfNeeded();
-    mtx44Copy(&transform, &_ZZN2nw4math5MTX448IdentityEvE8identity);
+    mtx44Copy(&view, reinterpret_cast<const Matrix44*>(&nw::math::MTX44::Identity()));
+    mtx44Copy(&transform, reinterpret_cast<const Matrix44*>(&nw::math::MTX44::Identity()));
 
     float scaleX = 1.0f;
     float scaleY = 1.0f;

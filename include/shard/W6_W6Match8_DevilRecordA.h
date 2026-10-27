@@ -42,7 +42,11 @@ typedef char DevilRecordAInitializationOffsetCheck[
     offsetof(DevilRecordA, initialization.stats) == 0x18 &&
     sizeof(DevilRecordA) == 0x40 ? 1 : -1];
 
+/* Retail's definition takes a u16 id (its body only stores a halfword), but nine callers pass the u32 unextended,
+   so they saw a u32 prototype; the definition file (FUN_00184310.cpp) declares its own u16 version. */
+#ifndef DEVIL_RECORD_A_OWN_PROTOTYPE
 extern "C" DevilRecordA *FUN_00184310(u32 id);
+#endif
 
 #ifdef __cplusplus
 extern "C" {

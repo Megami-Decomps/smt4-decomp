@@ -1,10 +1,12 @@
-/* NON_MATCHING: copies a captured frame surface into the half-size work surface and draws it scaled (blend mode from the frame texture); written from the decompilation, render-stack scheduling not compared with retail */
+/* NON_MATCHING: structure now matches retail (branch-duplicated surface copy, 480-wide view when the single-view flag is clear and the primary surface is used); scheduling of the scale divisions/VFP conversions and of the g_titleScene loads still differs */
 #include "camp/RenderCtx.h"
 #include "util/BitsAndBytes_VariantA.h"
 #include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 struct FrameCopyTex {
-    /* 0x000 */ u8 unk000[0xEE8];
+    /* 0x000 */ u8 unk000[0xEE4];
+    /* 0xEE4 */ u8 singleView;
+    /* 0xEE5 */ u8 unkEE5[3];
     /* 0xEE8 */ f32 quadX[4];
     /* 0xEF8 */ f32 quadY[4];
     /* 0xF08 */ u8 unkF08[8];
@@ -22,6 +24,7 @@ struct FrameCopyTex {
 #define FRAME_COPY_SIZE 0x200
 #define FRAME_COPY_WIDTH 240.0f
 #define FRAME_COPY_HEIGHT 400.0f
+#define FRAME_COPY_WIDTH_UNFILTERED 480.0f
 
 extern "C" {
 extern FrameCopyTex *g_frameTex;
@@ -37,29 +40,43 @@ void FUN_002ba1e0(u32 c0, u32 c1, u32 c2, u32 c3, f32 x0, f32 y0, f32 z0, f32 x1
 void FUN_00117da4(s32 usePrimary)
 {
     FrameCopyTex *tex = g_frameTex;
-    AsdTexture **source = usePrimary != 0 ? &tex->primary : &tex->secondary;
-    (*source)->dimensions.width = FRAME_COPY_SIZE;
-    (*source)->dimensions.height = FRAME_COPY_SIZE;
-    tex->work->dimensions.width = (*source)->dimensions.width;
-    tex->work->dimensions.height = (*source)->dimensions.height;
-    surfaceCopy(*source, tex->work);
-    tex->work->dimensions.width >>= 1;
-    tex->work->dimensions.height >>= 1;
+    if (usePrimary != 0) {
+        tex->primary->dimensions.width = FRAME_COPY_SIZE;
+        tex->primary->dimensions.height = FRAME_COPY_SIZE;
+        tex->work->dimensions.width = tex->primary->dimensions.width;
+        tex->work->dimensions.height = tex->primary->dimensions.height;
+        surfaceCopy(tex->primary, tex->work);
+        tex->work->dimensions.width >>= 1;
+        tex->work->dimensions.height >>= 1;
+    } else {
+        tex->secondary->dimensions.width = FRAME_COPY_SIZE;
+        tex->secondary->dimensions.height = FRAME_COPY_SIZE;
+        tex->work->dimensions.width = tex->secondary->dimensions.width;
+        tex->work->dimensions.height = tex->secondary->dimensions.height;
+        surfaceCopy(tex->secondary, tex->work);
+        tex->work->dimensions.width >>= 1;
+        tex->work->dimensions.height >>= 1;
+    }
 
     AsdTexture *work = tex->work;
+    f32 viewWidth = FRAME_COPY_WIDTH;
+    f32 viewHeight = FRAME_COPY_HEIGHT;
+    if (tex->singleView == 0 && usePrimary != 0) {
+        viewWidth = FRAME_COPY_WIDTH_UNFILTERED;
+    }
     f32 scale = FUN_002b99b8(2.0f, 1.0f);
+    f32 viewV = viewHeight / scale;
     f32 width = (f32)work->dimensions.width;
     if (tex->filtered != 0) {
         work->filterX = 1;
         work->filterY = 1;
-    }
-    f32 height = (f32)work->dimensions.height;
-    if (tex->filtered == 0) {
+    } else {
         work->filterX = 0;
         work->filterY = 0;
     }
-    f32 maxU = (FRAME_COPY_WIDTH / scale) / width;
-    f32 maxV = (FRAME_COPY_HEIGHT / scale) / height;
+    f32 height = (f32)work->dimensions.height;
+    f32 maxU = (viewWidth / scale) / width;
+    f32 maxV = viewV / height;
 
     RenderCtx *context = g_titleScene;
     s32 state = FUN_002c5d80(1, 0);

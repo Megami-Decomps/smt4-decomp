@@ -11,9 +11,9 @@ void asdModelCommitCommandRange(u32 *, u32 *);
 void FUN_00187d90(MatrixCommandSource *source, const f32 *matrix)
 {
     u32 *commands = reinterpret_cast<u32 *>(asdGxGetCommandCursor());
-    commands[0] = source->registerIndex | 0x80000000;
-    commands[1] = 0xf02c0;
-    u32 *payload = commands + 2;
+    u32 *payload = commands;
+    *payload++ = source->registerIndex | 0x80000000;
+    *payload++ = 0xf02c0;
     FUN_0019a2ac(payload, matrix, 0xff02c1);
     asdModelCommitCommandRange(commands, payload + 18);
 }

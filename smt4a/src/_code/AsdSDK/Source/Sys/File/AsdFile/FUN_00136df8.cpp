@@ -2,6 +2,7 @@
 #include "nn/Result.h"
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
+#include "sys/ResultReport.h"
 
 // Apocalypse's startup prefix differs from the IV loader globals in AsdFile.h.
 struct FileStartupGlobals { u32 unk00; void *buffer; u32 state, semaphore; };
@@ -15,7 +16,6 @@ void *asdMemoryAlloc(u32 heap, u32 alignment, u32 pool, u32 size, u32 flags);
 void FUN_0014685c(u32 first, u32 second, void *buffer, u32 size, u32 mode);
 u32 FUN_0014a930(u32 *handle, u32 initial, u32 maximum);
 u32 FUN_0019a364(u32 *handle, u32 mutex, u32 mode);
-void FUN_002e3140(u32 result);
 void nn_os_LightEvent_Initialize(void *event, u32 mode);
 void FUN_0014287c();
 void FUN_00146808();

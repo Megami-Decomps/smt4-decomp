@@ -1,11 +1,11 @@
 #include "shard/W6_W6Match3_ThreadHandleState.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 extern ThreadHandleState DAT_0044e7b4;
 extern const u32 DAT_00408ee0;
 s32 FUN_0015f858(u32* handle, u32 original);
-void FUN_002c526c(s32 result);
 void _ZN10NnOsThreadD1Ev(void* object);
 void entry(void);
 void __aeabi_atexit(void* object, void (*destroy)(void*), void* module);
@@ -15,8 +15,9 @@ static __inline ThreadHandleState* initializeCurrentThread(ThreadHandleState* th
     thread->handle = 0;
     u32 handle = 0;
     s32 result = FUN_0015f858(&handle, DAT_00408ee0);
-    if (nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
     }
     thread->handle = handle;
     thread->unk04 = 0;

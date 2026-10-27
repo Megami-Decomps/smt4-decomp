@@ -3,6 +3,7 @@
 #include "nn/svc.h"
 #include "nn/os/AddressSpaceManager.h"
 #include "nn/os/Thread.h"
+#include "sys/ResultReport.h"
 
 /* The loader's worker (the part its shutdown touches; the rest of the globals precede it). */
 struct AsdFileWorker {
@@ -22,7 +23,6 @@ s32 svcWaitSynchronization1(u32 handle, s64 timeout);
 s32 nn_os_detail_ConvertLibraryToSvcPriority(s32 priority);
 void nn_os_LightEvent_Signal(void *event);
 void syncWaitHandleForever(u32 *handle);
-void FUN_002e3140(s32 result, bool failed);
 void FUN_001469a8(AddressSpaceRegion *region);
 void asdFileHashPackClose(void);
 void FUN_001a0380(const char *mount);

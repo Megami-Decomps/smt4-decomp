@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies the 12-byte stack argument with one vldmia/vstmia {s16-s18} block and keeps it in VFP registers; this build copies the three words one by one. */
+/* NON_MATCHING: the stack argument copy now matches (local PlayParameters copy -> vldmia/vstmia {s16-s18}); remaining: retail materialises the zero flags argument with a fresh mov r3,#0 after `add r2, sp, #12` and tests `info.position != -1 && info.size != -1` through a predicated moveq/beq. */
 #include "common.h"
 
 /* Three words handed through to the playback call. */
@@ -35,13 +35,14 @@ void FUN_001556d8(SoundPlayer *player, u32 a, u32 b, void *file, PlayParameters 
 /* Starts playing sound item `id`: from its own file when it has one, else from its region of the archive data. */
 void FUN_00150c4c(SoundPlayer *player, u32 id, u32 a, u32 b, PlayParameters parameters)
 {
+    PlayParameters saved = parameters;
     SoundFileInfo info;
     info.position = -1;
     info.size = -1;
     info.file = NULL;
     if (nw_snd_internal_SoundArchiveFileReader_ReadFileInfo(player->reader, id, &info, 0) != 0) {
         if (info.file != NULL) {
-            FUN_001556d8(player, a, b, info.file, parameters);
+            FUN_001556d8(player, a, b, info.file, saved);
         } else if (info.position != -1 && info.size != -1) {
             player->vtbl->playRegion(player, a, b, info.size + player->dataOffset, info.position);
         }

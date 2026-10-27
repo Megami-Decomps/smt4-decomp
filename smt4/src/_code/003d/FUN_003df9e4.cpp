@@ -1,12 +1,12 @@
-/* NON_MATCHING: retail loads the four halves of the two 64-bit fields separately (ldr x4) where armcc here uses ldm/ldr with writeback. */
+/* NON_MATCHING: the 64-bit fields are word-aligned file data (__packed gives retail's four separate word loads); only the load order/registers of the four words differ. */
 #include "common.h"
 
 extern "C" {
 
 struct Span {
     /* 0x00 */ u8 unk00[8];
-    /* 0x08 */ u64 start;
-    /* 0x10 */ u64 end;
+    /* 0x08 */ __packed u64 start;
+    /* 0x10 */ __packed u64 end;
 };
 
 /* Stores the length of the span in the output and reports success. */

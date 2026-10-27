@@ -1,6 +1,7 @@
 #include "nn/svc.h"
 #include "nn/Result.h"
 #include "code/Code0018_Smt4a.h"
+#include "sys/ResultReport.h"
 
 /* The allocator's global state, as far as the allocation entry points use it. */
 struct AllocatorLock {
@@ -16,7 +17,6 @@ void FUN_0018003c(void);
 void *asdMemoryAllocImpl(u32 a, u32 b, u32 c, u32 size, u32 extra);
 void *FUN_001844ac(void *block, u32 size, u32 alignment, u32 flags);
 void rt_memclr(void *memory, u32 size);
-void FUN_002e3140(s32 result, bool failed);
 
 // Allocates `size` zeroed bytes aligned to `alignment` (at least 0x80) under the allocator lock.
 void *FUN_001858ec(u32 a, u32 b, u32 c, u32 size, u32 alignment, u32 extra)

@@ -8,7 +8,7 @@ int FUN_00241d58(...);
 int statusCameraDestroy(void);
 int FUN_0028bf2c(void);
 int statusCameraSelectPreset(...);
-int FUN_00294f64(...);
+int resourceReleaseReference(...);
 int FUN_002958f8(...);
 
 int FUN_00258170(...);
@@ -88,7 +88,7 @@ extern unsigned int asdCameraLoadFromFile(unsigned char *);
 /* Supplied declaration required: FUN_0028bf2c. */
 /* Supplied declaration required: asdAnimGetTrackLastFrame. */
 /* Supplied declaration required: statusCameraSelectPreset. */
-/* Supplied declaration required: FUN_00294f64. */
+/* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int FUN_00295618(void);
@@ -526,13 +526,13 @@ LAB_0032a1a4:
         do {
           FUN_002958f8((int)*(short *)(temp_v2 + temp_v7 * 2 + 0xe),1);
           temp_v10 = temp_v2 + temp_v7 * 4;
-          FUN_00294f64(*(unsigned int *)(temp_v10 + 0x28));
+          resourceReleaseReference(*(unsigned int *)(temp_v10 + 0x28));
           *(unsigned int *)(temp_v10 + 0x28) = 0;
           temp_v7 = temp_v7 + 1;
         } while (temp_v7 < (int)(unsigned int)*(unsigned short *)(temp_v2 + 0x1e));
       }
       FUN_00241d58(temp_v2 + 0x38);
-      FUN_00294f64(*(unsigned int *)(temp_v2 + 0x80));
+      resourceReleaseReference(*(unsigned int *)(temp_v2 + 0x80));
       *(unsigned int *)(temp_v2 + 0x80) = 0;
       FUN_0028bf2c();
       asdMdlManagerMarkDestroy(*(unsigned int *)(temp_v2 + 0x88));

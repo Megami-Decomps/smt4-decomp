@@ -1,10 +1,10 @@
 #include "common.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 extern u32 DAT_00588118;
 s32 svcWaitSynchronization1(u32 handle, s64 timeout);
-void FUN_002e3140(s32 result, bool failed);
 
 /* Polls the network synchronization handle: true while the wait still times out. */
 bool FUN_00432ad0(void)

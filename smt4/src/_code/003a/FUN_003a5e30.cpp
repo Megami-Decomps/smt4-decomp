@@ -51,7 +51,7 @@ struct SelectionScene {
 
 extern "C" {
 void FUN_003a4518(SelectionScene *scene);
-void FUN_003a169c(SelectionScene *scene);
+void shopLoadMessageBankAndSound(SelectionScene *scene);
 void FUN_003a45fc(void);
 void FUN_002637c8(void);
 void FUN_00282bfc(s32 channel, s32 value);
@@ -125,7 +125,7 @@ SelectionScene *FUN_003a5e30(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     scene->buttonSprite = 0x1F;
     scene->stepA = 0;
     scene->stepB = 0;
-    FUN_003a169c(scene);
+    shopLoadMessageBankAndSound(scene);
     FUN_00282bfc(0, 0xFF);
     FUN_00282bfc(1, 0xFF);
     u32 music = 0x1000060;

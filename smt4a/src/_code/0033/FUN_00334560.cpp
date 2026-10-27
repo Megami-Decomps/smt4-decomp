@@ -1,4 +1,4 @@
-/* NON_MATCHING: cursor/list addressing restored; selected-id register lifetime and menu-state store/constant scheduling differ. */
+/* NON_MATCHING: cursor pointer now defined in r0 and copied like retail; remaining: r4/r5 assignment of the cursor pointer and page, the hoisted constant 1 (sl here), and the menu-state store order. */
 #include "shard/W5_W5Match7_UiQuest.h"
 
 extern "C" {
@@ -21,9 +21,8 @@ void FUN_00334560(void)
     UiQuestApoc *quest = g_uiQuest;
     quest->unk90c = 1;
     uiQuestSpritesCreate();
-    void *cursorWork = quest->alternateView()->cursor;
-    s32 page = resourceRunOperationIfUnblocked(cursorWork);
-    s32 cursor = FUN_002a4894(cursorWork);
+    s32 page = resourceRunOperationIfUnblocked(quest->alternateView()->cursor);
+    s32 cursor = FUN_002a4894(quest->alternateView()->cursor);
     u16 id = quest->alternateView()->list[cursor + page];
     FUN_003d498c(id, 1);
     quest->selectedId = id;

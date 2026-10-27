@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the formatted-buffer address in fp and the path address in r6 (pointer locals) and reserves 4 more stack bytes (260); name pointer now matches. */
+/* NON_MATCHING: pointer locals (formatted source, full path) now reproduce retail's fp/260-byte frame; remaining: owner/temporary register numbering (r6/r7), the hoisting order of the table base and &formatted, and `mov r1,#47` scheduled before `mov r0,r6`. */
 #include "common.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
 
@@ -28,20 +28,12 @@ char *libc_strcpy(char *dest, const char *src);
 char *FUN_002522e0(const char *text, s32 character);
 s32 keyedRecordFindByName(const char *name);
 
-static __inline void formatEffectPath(char *path, char *formatted, s32 effectIndex)
-{
-    memClear(path, 128);
-    const char *effectName = DAT_00400804[effectIndex];
-    memClear(formatted, 128);
-    textFormatBuffer(formatted, DAT_004008c4, effectName);
-    libc_strcpy(path, formatted);
-}
-
 /* Resets the five battle effect slots and starts loading each effect file not already registered. */
 u32 FUN_003dadd8(BattleEffectOwner *owner)
 {
     char path[128];
     char formatted[128];
+    char *formattedPath = formatted;
 
     for (s32 i = 0; i < 5; i++) {
         BattleEffectSlot *slot = &owner->slots[i];
@@ -52,10 +44,15 @@ u32 FUN_003dadd8(BattleEffectOwner *owner)
             slot->data = NULL;
         }
         slot->flags = 0;
-        formatEffectPath(path, formatted, i);
-        libc_strcpy(slot->name, FUN_002522e0(path, '/') + 1);
+        memClear(path, 128);
+        const char *effectName = DAT_00400804[i];
+        memClear(formatted, 128);
+        textFormatBuffer(formatted, DAT_004008c4, effectName);
+        libc_strcpy(path, formattedPath);
+        char *fullPath = path;
+        libc_strcpy(slot->name, FUN_002522e0(fullPath, '/') + 1);
         if (keyedRecordFindByName(slot->name) == 0xff) {
-            asdLoadFileAsyncSimple(path, reinterpret_cast<u32 *>(&slot->data), 0);
+            asdLoadFileAsyncSimple(fullPath, reinterpret_cast<u32 *>(&slot->data), 0);
             slot->flags |= 1;
         }
     }

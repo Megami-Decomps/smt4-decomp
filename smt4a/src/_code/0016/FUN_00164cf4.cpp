@@ -26,19 +26,25 @@ extern "C" s32 FUN_00164cf4(u32 kind)
             }
             break;
         case 20:
-            if (kind == 1 && work->active[index] != 0) {
-                return 1;
-            }
-            if (kind == 2 && work->active[index + 1] != 0) {
-                return 1;
+            if (kind == 1) {
+                if (work->active[index] != 0) {
+                    return 1;
+                }
+            } else if (kind == 2) {
+                if (work->active[index + 1] != 0) {
+                    return 1;
+                }
             }
             break;
         case 21:
-            if (kind == 5 && work->active[index] != 0) {
-                return 1;
-            }
-            if (kind == 6 && work->active[index + 1] != 0) {
-                return 1;
+            if (kind == 5) {
+                if (work->active[index] != 0) {
+                    return 1;
+                }
+            } else if (kind == 6) {
+                if (work->active[index + 1] != 0) {
+                    return 1;
+                }
             }
             break;
         }

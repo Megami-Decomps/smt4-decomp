@@ -1,4 +1,4 @@
-/* NON_MATCHING: packet stores retain extra address calculations and r7; register-header synthesis, logic-test predication and cursor/register allocation differ. -O2 candidate for register and packet lowering. */
+/* NON_MATCHING: the main path now writes through a post-incremented cursor like retail; the flush and override packets still lower to different stm groupings, and the build keeps an extra saved register (r7). */
 #include "shard/W6_W6Match4_GxDrawSettings.h"
 
 static __inline bool blendFactorReadsDestination(u8 factor)
@@ -51,11 +51,11 @@ extern "C" u32 *gxEmitFramebufferAccessMasks(u32 *settingsWord, u32 *commands, s
         return commands + 8;
     }
 
-    commands[0] = framebufferNeedsColorRead(settings) ? 15 : 0;
-    commands[1] = 0x10112;
+    *commands++ = framebufferNeedsColorRead(settings) ? 15 : 0;
+    *commands++ = 0x10112;
     settings = reinterpret_cast<const GxDrawSettings *>(*settingsWord);
-    commands[2] = settings->buffers.colorWriteMask != 0 ? 15 : 0;
-    commands[3] = 0x10113;
+    *commands++ = settings->buffers.colorWriteMask != 0 ? 15 : 0;
+    *commands++ = 0x10113;
     settings = reinterpret_cast<const GxDrawSettings *>(*settingsWord);
     u32 depthStencilRead = 0;
     u32 depthStencilWrite = 0;
@@ -75,9 +75,9 @@ extern "C" u32 *gxEmitFramebufferAccessMasks(u32 *settingsWord, u32 *commands, s
             depthStencilRead |= 1;
         }
     }
-    commands[4] = depthStencilRead;
-    commands[5] = 0x10114;
-    commands[6] = depthStencilWrite;
-    commands[7] = 0x10115;
-    return commands + 8;
+    *commands++ = depthStencilRead;
+    *commands++ = 0x10114;
+    *commands++ = depthStencilWrite;
+    *commands++ = 0x10115;
+    return commands;
 }

@@ -3,11 +3,11 @@
 #include "shard/W6_W6Match2_LongDivision.h"
 #include "nn/Result.h"
 #include "nn/svc.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 __value_in_regs LongDivisionResult ll_sdiv(s64 dividend, s64 divisor);
 void rt_memcpy(void *destination, const void *source, u32 size);
-void FUN_002c526c(s32 result);
 
 /* Hands out the next block of the movie: a pointer into the ring buffer, or into a contiguous
  * copy when the block wraps around the end of the ring. Returns 0 when the movie is used up, the
@@ -26,8 +26,9 @@ u32 FUN_002227b0(S4FsReader *reader, void **block)
     u32 buffered = (u32)(reader->produced - reader->consumed);
     if (size > buffered) {
         s32 result = nn::svc::SignalEvent(reader->dataEvent);
-        if (nnResultIsFailure(result)) {
-            FUN_002c526c(result);
+        bool failed = nnResultIsFailure(result);
+        if (failed) {
+            FUN_002c526c(result, failed);
         }
         return 0;
     }

@@ -1,6 +1,7 @@
 /* NON_MATCHING: stack slots now match (argument declared first); retail stores the argument before the descriptor and orders the literal pool/stack-argument stores differently. */
 #include "nn/os/ThreadLaunch.h"
 #include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
 s32 FUN_0043c2b4(void);
@@ -9,7 +10,6 @@ void FUN_00514ab4(void);
 void FUN_00514b98(void);
 void FUN_00514b50(void);
 s32 FUN_002fb0d4(void *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *), const void *argument, u32 stackTop, s32 priority, s32 processor, u32 flags);
-void FUN_002e3140(s32 result);
 
 /* Launches the worker on its allocated stack unless the subsystem is busy. */
 u32 FUN_00473da0(ThreadLaunchWork *work)

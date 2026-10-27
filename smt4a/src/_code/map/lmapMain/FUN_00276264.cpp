@@ -205,7 +205,7 @@ int gameDataTableGetFlag(void);
 int FUN_002019dc(unsigned int, int);
 int FUN_00215978(...);
 int FUN_00239b10(int);
-int FUN_002b91ec(void);
+int fieldSceneResetEntryState(void);
 int FUN_002b9324(void);
 int gameFlagBitSetValue(int, int);
 int FUN_00376fa4(...);
@@ -473,7 +473,7 @@ extern int mapDepartIsRunning(void);
 /* Supplied declaration required: mapGimicClearEntryChildren. */
 /* Supplied declaration required: FUN_002b80b8. */
 /* Supplied declaration required: FUN_002b80fc. */
-/* Supplied declaration required: FUN_002b91ec. */
+/* Supplied declaration required: fieldSceneResetEntryState. */
 /* Supplied declaration required: FUN_002b9324. */
 /* Supplied declaration required: FUN_002ba30c. */
 /* Supplied declaration required: FUN_002c2358. */
@@ -923,7 +923,7 @@ unsigned int FUN_00276264(void)
     puVar2[3] = temp_v8;
     break;
   case 2:
-    FUN_002b91ec();
+    fieldSceneResetEntryState();
     FUN_004bc95c(puVar2[0x10],puVar2[0x12]);
     FUN_0037723c(0);
     textFormatBuffer(temp_v27,0x276d48,puVar2[0x10] - 100,puVar2[0x10] - 100);

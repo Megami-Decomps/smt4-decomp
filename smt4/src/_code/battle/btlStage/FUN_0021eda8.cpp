@@ -5,6 +5,7 @@
 #include "AsdSDK/AsdMemAlloc.h"
 #include "AsdSDK/AsdMemUtil.h"
 #include "shard/JobWork.h"
+#include "sys/ResultReport.h"
 
 /* The work area of the job that owns the stage. */
 struct StageJobWork {
@@ -26,7 +27,6 @@ s32 jobIsValid(u32 job);
 void jobStop(u32 job, s32 arg);
 void FUN_002c3f5c(AddressSpaceRegion *region);
 s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
-void FUN_002c526c(s32 result, bool failed);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(BattleStageModel *stage);
 }

@@ -107,8 +107,9 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     table.invoke = FUN_00123ca4;
     s32 result = FUN_002bcc60(DAT_0044d128, &table, FUN_0034e718, &argument,
                               DAT_0044d0f8.thread->stackBase + DAT_0044d0f8.thread->stackSize, 2, -2, 0);
-    if (nnResultIsFailure(result)) {
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed) {
+        FUN_002c526c(result, failed);
     }
     return 1;
 }

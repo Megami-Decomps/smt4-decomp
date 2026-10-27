@@ -7,8 +7,8 @@ extern "C" {
 
 int FUN_0015dc2c(...);
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
-u32 FUN_002a116c(const u32 *result);
-u32 FUN_002a1200(const u32 *result);
+u32 resourceResultMatchesRemappedCodes(const u32 *result);
+u32 resourceResultMatchesKnownRanges(const u32 *result);
 int asdLoadFileAsyncNoCallback(...);
 int _ZN9AocSystem17getPendingRequestEv(...);
 int legacyResourceIdRemap(...);
@@ -60,8 +60,8 @@ extern unsigned int g_aocSystem; /* 0x433158 */
 #endif
 /* Supplied declaration required: FUN_0015dc2c. */
 /* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
-/* Supplied declaration required: FUN_002a116c. */
-/* Supplied declaration required: FUN_002a1200. */
+/* Supplied declaration required: resourceResultMatchesRemappedCodes. */
+/* Supplied declaration required: resourceResultMatchesKnownRanges. */
 /* Supplied declaration required: asdLoadFileAsyncNoCallback. */
 /* Supplied declaration required: _ZN9AocSystem17getPendingRequestEv. */
 /* Supplied declaration required: legacyResourceIdRemap. */
@@ -442,8 +442,8 @@ LAB_0015cfcc:
       else if (!temp_v6) {
         jyoucyuGetTableEntry();
       }
-      if (FUN_002a1200(reinterpret_cast<const u32 *>(temp_v16)) == 0) {
-        if (FUN_002a116c(reinterpret_cast<const u32 *>(temp_v16)) == 0) {
+      if (resourceResultMatchesKnownRanges(reinterpret_cast<const u32 *>(temp_v16)) == 0) {
+        if (resourceResultMatchesRemappedCodes(reinterpret_cast<const u32 *>(temp_v16)) == 0) {
           jyoucyuGetTableEntry(0);
           temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);
           *(unsigned char *)(param_2 + 8) = 1;

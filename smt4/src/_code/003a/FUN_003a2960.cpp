@@ -1,5 +1,6 @@
 /* NON_MATCHING: register allocation differs (retail keeps panel in r6 with panel+0x860 hoisted in r4 across the tab switches and rows loop); logic equivalent. */
 #include "common.h"
+#include "shard/S2Scene3a.h"
 
 class PanelWidget {
 public:
@@ -36,7 +37,8 @@ s32 rangeLimitMin(void *list);
 extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
 {
     u32 context = PANEL_WORD(panel, 0x37C);
-    s32 tab = PANEL_WORD(panel, 0x860);
+    s32 *tabIndex = reinterpret_cast<s32 *>(PANEL_AT(panel, 0x860));
+    s32 tab = *tabIndex;
     switch (tab) {
     case 0:
         frameStyle = 0;
@@ -60,11 +62,16 @@ extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
         frameStyle = 4;
     }
     uiRectDrawAtBottomRight(PANEL_AT(panel, 0x380), frameStyle, 0, 0, context);
-    FUN_00231bcc(PANEL_AT(panel, 0x380), PANEL_WORD(panel, 0x860) + 0x5A, 0, 0, context, 1);
-    FUN_003a07a0(panel, PANEL_WORD(panel, 0x860));
-    u16 headerValue[2];
+    FUN_00231bcc(PANEL_AT(panel, 0x380), *tabIndex + 0x5A, 0, 0, context, 1);
+    FUN_003a07a0(panel, *tabIndex);
+    Scene3aEntry header;
+    header.id = 0;
+    u32 bits = header.unk02;
+    bits >>= 10;
+    bits <<= 10;
+    header.unk02 = bits;
     u16 value = 0;
-    switch (PANEL_WORD(panel, 0x860)) {
+    switch (*tabIndex) {
     case 0:
         value = gameGetPlayerData()[0];
         break;
@@ -86,14 +93,14 @@ extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
     case 6:
         value = gameGetPlayerData()[6];
     }
-    headerValue[0] = value;
-    FUN_0022ea70(panel, 0, 0, headerValue);
+    header.id = value;
+    FUN_0022ea70(panel, 0, 0, &header);
     s32 mode = panel->mode;
     bool hasSlot = mode == 5 || mode == 9 || mode == 6 || mode == 0xA || mode == 7 || mode == 0xB ||
                    mode == 0xF || mode == 0x10;
-    u8 *tabState = PANEL_AT(panel, 0) + PANEL_WORD(panel, 0x860) * 0x74;
+    u8 *tabState = PANEL_AT(panel, 0) + *tabIndex * 0x74;
     u8 *list = tabState + 0x880;
-    u8 *values = PANEL_AT(panel, 0) + PANEL_WORD(panel, 0x860) * 0x1002 + 0xC94;
+    u8 *values = PANEL_AT(panel, 0) + *tabIndex * 0x1002 + 0xC94;
     s32 top = FUN_0029e924(list);
     s32 rows = rangeLimitMin(list);
     for (s32 row = 0; row < rows; row++) {

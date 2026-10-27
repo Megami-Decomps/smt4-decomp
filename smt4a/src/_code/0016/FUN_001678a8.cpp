@@ -36,7 +36,7 @@ extern "C" {
 extern RenderCtxA *g_renderCtx;
 s32 FUN_001692ac(u32, u32);
 void renderStackPushIndexed(RenderCtxA *, s32, s32);
-void renderCtxPopState(RenderCtxA *, s32);
+s32 renderCtxPopState(RenderCtxA *, s32);
 void efctSetSpeed(f32);
 void FUN_00183bb0();
 f32 renderCtxCalculateStereoParallax(RenderCtxA *, f32);

@@ -1,16 +1,18 @@
-/* NON_MATCHING: retail uses VFP comparisons for both clamp bounds; the build converts the upper-bound comparison to an integer bit comparison. */
+/* NON_MATCHING: the clamp (a helper with minimum/maximum parameters keeps the VFP comparisons) and all four channels now match retail; the build still masks each channel a second time in the final expression (three extra `and` at the end) and loads the 0.0f/1.0f constants after the first component. */
 #include "common.h"
+
+static __inline f32 clampValue(f32 value, f32 minimum, f32 maximum)
+{
+    if (value > maximum)
+        return maximum;
+    if (value < minimum)
+        return minimum;
+    return value;
+}
 
 static __inline u32 colorEncodeChannel(f32 value)
 {
-    f32 clamped = 1.0f;
-    if (value <= 1.0f) {
-        clamped = value;
-        if (value < 0.0f) {
-            clamped = 0.0f;
-        }
-    }
-    return (u32)(clamped * 255.0f + 0.5f) & 0xff;
+    return (u32)(clampValue(value, 0.0f, 1.0f) * 255.0f + 0.5f) & 0xff;
 }
 
 // Clamp normalized RGBA components and round them into a packed byte color.

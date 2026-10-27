@@ -52,8 +52,9 @@ void FUN_003c8058(BattleStageWorkerView *worker)
     if (handle) {
         s32 index;
         s32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
-        if (nnResultIsFailure(result))
-            FUN_002c526c(result);
+        bool failed = nnResultIsFailure(result);
+        if (failed)
+            FUN_002c526c(result, failed);
         if (nnResultDescription(result) == 0x3fe)
             return;
     }
@@ -65,7 +66,8 @@ void FUN_003c8058(BattleStageWorkerView *worker)
     BattleStageWorkerView *argument = worker;
     s32 result = FUN_002bcc60(&worker->thread, &descriptor, stageRequestSubmitLocked, &argument,
         worker->stackInfo->unk08 + worker->stackInfo->unk0C, 0x11, 0, 0);
-    if (nnResultIsFailure(result))
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailure(result);
+    if (failed)
+        FUN_002c526c(result, failed);
 }
 }

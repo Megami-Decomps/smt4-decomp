@@ -2,9 +2,8 @@
 #include "sys/FileWorkerQueue.h"
 #include "nn/Result.h"
 #include "code/Code002b.h"
-#include "sys/ResultReport.h"
+#include "sys/HandleWait.h"
 extern "C" {
-s32 FUN_002c40f8(s32 *index, const u32 *handles, s32 count, s32 waitAll, s64 timeout);
 u32 FUN_002bcc60(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
     ThreadEntryPoint entry, const void *argument, void *stackTop, u32 priority, s32 processor, u8 owned);
 void FUN_00158bb4(void *queue);
@@ -17,15 +16,11 @@ void FUN_002a2e08(FileQueue *queue)
 {
     FileQueueWorker *thread = &queue->thread;
     if (thread->handle != 0) {
-        u32 handle = thread->handle;
-        s32 index;
-        u32 result = FUN_002c40f8(&index, &handle, 1, 0, 0);
-        if (nnResultIsFailure(result))
-            FUN_002c526c(result);
-        if (!nnResultDescriptionIsNot(result, 0x3fe))
+        s32 result = handleWait(thread->handle, 0);
+        if (!nnResultIsNotTimeout(result))
             return;
     }
-    FUN_002ba8f4(thread);
+    kernelThreadJoinAndClose(thread);
     FileQueue *argument = queue;
     ThreadArgumentDescriptor descriptor;
     descriptor.argumentSize = sizeof(argument);
@@ -34,7 +29,8 @@ void FUN_002a2e08(FileQueue *queue)
     descriptor.operations.invoke = fileWorkerInvokeEntry;
     u32 result = FUN_002bcc60(thread, &descriptor, FUN_00158bb4, &argument,
         reinterpret_cast<void *>(thread->stack->address + thread->stack->size), 0x11, -2, 0);
-    if (nnResultIsFailureExceptSummary(result, 3))
-        FUN_002c526c(result);
+    bool failed = nnResultIsFailureExceptSummary(result, 3);
+    if (failed)
+        FUN_002c526c(result, failed);
 }
 }

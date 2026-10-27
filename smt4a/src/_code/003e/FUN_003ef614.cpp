@@ -6,7 +6,7 @@
 extern "C" {
 void asdMemFree(void* memory);
 void sysMemClear(void* memory, u32 size);
-void FUN_0040a244(BattleCleanupResource* resource);
+void resourceReleaseReference(BattleCleanupResource* resource);
 
 // Release unretained resources, clear their records and reset the reserve roster.
 void FUN_003ef614(BtlMainStateA* battle)
@@ -28,7 +28,7 @@ void FUN_003ef614(BtlMainStateA* battle)
                     }
                 }
                 if (!retained) {
-                    FUN_0040a244(resource);
+                    resourceReleaseReference(resource);
                     battle->resourceCleanup.resources[slot] = NULL;
                 }
             }

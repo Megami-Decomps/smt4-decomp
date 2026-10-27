@@ -7,30 +7,30 @@ extern "C" f32 hardfp_floorf(f32 value)
     number.value = value;
     s32 bits = number.bits;
     s32 exponent = ((bits >> 23) & 0xFF) - 127;
-    if (exponent < 23) {
-        if (exponent < 0) {
-            // Adding a large finite value raises inexact for a fractional input.
-            if (1.0e30f + value > 0.0f) {
-                if (bits >= 0) {
-                    bits = 0;
-                } else if (bits != (s32)0x80000000) {
-                    bits = (s32)0xBF800000;
-                }
-            }
-        } else {
-            u32 fractionalMask = 0x007FFFFF >> exponent;
-            if ((bits & fractionalMask) == 0) {
-                return value;
-            }
-            if (1.0e30f + value > 0.0f) {
-                if (bits < 0) {
-                    bits += 0x00800000 >> exponent;
-                }
-                bits &= ~fractionalMask;
+    if (exponent >= 23) {
+        return value;
+    }
+    if (exponent < 0) {
+        // Adding a large finite value raises inexact for a fractional input.
+        if (1.0e30f + value > 0.0f) {
+            if (bits >= 0) {
+                bits = 0;
+            } else if (bits != (s32)0x80000000) {
+                bits = (s32)0xBF800000;
             }
         }
-        number.bits = bits;
-        value = number.value;
+    } else {
+        u32 fractionalMask = 0x007FFFFF >> exponent;
+        if ((bits & fractionalMask) == 0) {
+            return value;
+        }
+        if (1.0e30f + value > 0.0f) {
+            if (0 > bits) {
+                bits += 0x00800000 >> exponent;
+            }
+            bits &= ~fractionalMask;
+        }
     }
-    return value;
+    number.bits = bits;
+    return number.value;
 }

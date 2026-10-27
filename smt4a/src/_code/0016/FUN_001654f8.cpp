@@ -1,13 +1,13 @@
-/* NON_MATCHING: loop shape now matches retail; remaining diffs: retail keeps zero/-8 constants as copies (mov r5,r3; mvn r7,#7) and tests `written < size` signed. */
+/* NON_MATCHING: loop shape and the signed -8 constant (s8 output buffer) now match retail; remaining: retail copies the zero (mov r5, r3), compares `written < size` signed without peeling (an s32 size peels the loop here), and shares one epilogue. */
 #include "common.h"
 
 extern "C" {
-extern char DAT_0063d008[];              /* default 0x100-byte output buffer */
+extern s8 DAT_0063d008[];                /* default 0x100-byte output buffer */
 extern const char DAT_0053d2e8[][2];     /* two-byte code of each single-byte character */
 
 /* Converts `text` to two-byte character codes in `out` (default buffer and 0x100 bytes when not given):
  * double-byte characters are copied, a newline becomes F8 01, others go through the code table. */
-char *FUN_001654f8(const char *text, char *out, u32 size)
+s8 *FUN_001654f8(const char *text, s8 *out, u32 size)
 {
     s32 written = 0;
     s32 read = 0;

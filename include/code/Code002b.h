@@ -16,7 +16,7 @@ void FUN_002b945c(s32 id);
 
 s8 FUN_002b950c(void);
 
-void FUN_002ba8f4(void *thread);
+void kernelThreadJoinAndClose(void *thread);
 
 /* Whether the word at 0x04 of `obj` is non-zero. */
 u8 FUN_002bf684(const void *obj);

@@ -1,24 +1,13 @@
-/* NON_MATCHING: typed relative-pointer getters recompute field addresses and branch through null cases rather than retaining retail's post-indexed slot addresses. */
+/* NON_MATCHING: a null table skips the record lookup (no early return, like retail); remaining diff: retail keeps NULL in a hoisted register (`moveq rX, r0` after the add), compares the first result again and adds the last offset as `offset + base`. */
 #include "shard/W6_W6Match4_RelativeResourceGraph.h"
-
-template <class T> static T *rel(ResourceRelativePointer<T> *p)
-{
-    T *result = NULL;
-    s32 offset = p->offset;
-    if (offset != 0)
-        result = (T *)((u8 *)p + offset);
-    return result;
-}
 
 extern "C" {
 // Resolve an indexed record and element through the resource's self-relative tables.
 void *resourceGetRelativeElement(const RelativeResourceOwner *owner, s32 recordIndex, s32 elementIndex)
 {
-    RelativeResourceTable *table = rel(&owner->resource->view->blob->table);
-    if (table == NULL)
-        return NULL;
-    RelativeResourceRecord *record = rel(&table->entries[recordIndex].record);
-    ResourceRelativePointer<void> *elements = rel(&record->elements);
-    return rel(&elements[elementIndex]);
+    RelativeResourceTable *table = owner->resource->view->blob->table.get();
+    RelativeResourceRecord *record = table != NULL ? table->entries[recordIndex].record.get() : NULL;
+    ResourceRelativePointer<void> *elements = record->elements.get();
+    return elements[elementIndex].get();
 }
 }

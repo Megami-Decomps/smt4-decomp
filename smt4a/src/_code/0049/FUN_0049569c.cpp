@@ -12,6 +12,7 @@ static inline void placeTextChangeState(PlaceTextTransition *transition, s32 nex
 extern "C" {
 u32 FUN_004962e4(SceneResourceWaitState *state);
 PlaceTextLayoutElement *FUN_00275bc8(void *source, u32 size);
+void uiElementSetMode(PlaceTextLayoutElement *element, s32 mode);
 void FUN_003d54f8(s32 screen, s32 frames);
 const PlaceTextRecord *dataTable17Type1GetEntry(PlaceTextTableCursor *cursor, s32 index);
 s32 dataTable17Count(PlaceTextTableCursor *cursor);
@@ -25,10 +26,10 @@ void FUN_0049569c(PlaceTextTransition *transition)
     if (FUN_004962e4(reinterpret_cast<SceneResourceWaitState *>(transition)) != 0) {
         PlaceTextLayoutElement *element = FUN_00275bc8(transition->layoutSource, transition->layoutSize);
         transition->first = element;
-        element->mode = 2;
+        uiElementSetMode(element, 2);
         element = FUN_00275bc8(transition->layoutSource, transition->layoutSize);
         transition->second = element;
-        element->mode = 2;
+        uiElementSetMode(element, 2);
         FUN_003d54f8(0, 10);
         FUN_003d54f8(1, 10);
         u8 area = transition->area;

@@ -29,7 +29,7 @@ bool useCounterIsFinished();
 void useCounterRelease();
 void sysPlaySe(u32 sound);
 s32 useCounterGetCurrentValue();
-void FUN_004a84e8(ItemListSelectionEntry *selection, u8 animation);
+void FUN_004a84e8(ItemListSelectionEntry *selection, s32 mode);
 void FUN_004a3e04(ItemListSelectionOwner *owner);
 
 }
@@ -48,7 +48,7 @@ void Obj55c89c::FUN_004a40f4()
         g_animatedPageSelection.selection = -1;
         if ((s16)owner->selection.value != 0) {
             u8 *variant = &reinterpret_cast<ItemVariantStateView *>(FUN_0026140c())->variant;
-            u8 animation;
+            s8 animation;
             switch (*variant & 0x7f) {
             case 1: animation = 6; break;
             case 2: animation = 4; break;

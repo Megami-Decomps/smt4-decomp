@@ -12,7 +12,7 @@ struct ResourceTable {
 };
 void FUN_00167e0c(void *unused, ResourceTable *table)
 {
-    for (s32 index = 0; index < table->count; ++index) {
+    for (s32 index = 0; index < table->count; index++) {
         if (table->entries[index] != NULL) {
             table->entries[index] = NULL;
         }

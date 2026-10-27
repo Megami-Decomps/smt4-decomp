@@ -30,12 +30,7 @@ extern "C" void FUN_0019e330(RangeSelection* selection, s32 index, s32 reverse)
         SelectionRange* range = &selection->ranges[index];
         selection->flag8a = 0;
         selection->reverse = reverse;
-        u32 endpoint;
-        if (reverse != 0) {
-            endpoint = range->last;
-        } else {
-            endpoint = range->first;
-        }
+        u32 endpoint = reverse != 0 ? range->last : range->first;
         selection->current[0] = endpoint;
         selection->current[1] = endpoint;
         selection->current[2] = endpoint;

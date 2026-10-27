@@ -1,4 +1,4 @@
-/* NON_MATCHING: the exclusive-access retry loops are laid out differently (retail expands them in source order, with the wait loop out of line). */
+/* NON_MATCHING: code layout now matches retail; retail copies the counter pointer into r0 for every exclusive-access loop and allocates the loop registers differently. */
 #include "shard/S2AtomicLock.h"
 
 extern "C" {
@@ -43,13 +43,14 @@ static __inline s32 atomicLockTakeAsWaiter(s32 *counter)
 void FUN_001bd37c(s32 *counter)
 {
     for (;;) {
-        if (atomicLockAddWaiter(counter)) {
+        if (!atomicLockAddWaiter(counter)) {
+            if (atomicLockNegate(counter)) {
+                return;
+            }
+        } else {
             do {
                 FUN_001b4a58(DAT_005c0ad8, counter, 1, 0, 0);
             } while (!atomicLockTakeAsWaiter(counter));
-            return;
-        }
-        if (atomicLockNegate(counter)) {
             return;
         }
     }

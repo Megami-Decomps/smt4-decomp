@@ -1,5 +1,5 @@
 /* NON_MATCHING: signed failure-bit test matches; lookup code/zero registers remain swapped around name clearing and result construction. */
-#include "common.h"
+#include "nn/Result.h"
 
 extern "C" {
 
@@ -42,8 +42,7 @@ void _ZN10AocSystemA17getPendingRequestEv(u32 arg, Request *request)
         request->name.words[2] = 0;
         request->name.words[3] = 0;
         request->pending = 0;
-        s32 failure = code & 0x80000000;
-        if (failure < 0) {
+        if (!nnResultIsSuccess(code)) {
             node->pair = *_ZN18WindowStatusResultC1Ej(&local, code);
         }
     }

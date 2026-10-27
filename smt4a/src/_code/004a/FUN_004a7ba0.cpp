@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved registers and block placement now match retail (else arm written first, context recomputed from the panel); only the x/y float conversion order of the draw call differs. */
+/* NON_MATCHING: only the Y coordinate temp differs (retail ip, built r1). */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 
@@ -48,9 +48,9 @@ void FUN_004a7ba0(PanelTextOwnerPrefixA *panel, s16 textId,
     }
 
     const PanelTextLayoutEntryPrefixA *offset = layoutFindTableEntry(panelTextContext(panel), offsetEntry);
+    s32 x = static_cast<s32>(offset->x) + baseX;
+    s32 y = static_cast<s32>(offset->y) + baseY;
     drawTextAtSnappedRectangle(panelTextContext(panel), style, color, textValue,
-        static_cast<f32>(static_cast<s32>(offset->x) + baseX),
-        static_cast<f32>(static_cast<s32>(offset->y) + baseY),
-        opacity, 0.0f, scale);
+        static_cast<f32>(x), static_cast<f32>(y), opacity, 0.0f, scale);
 }
 }

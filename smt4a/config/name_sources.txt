@@ -6779,3 +6779,23 @@
 002b1264 actorCardAnimationReset inferred [med] resets one actor card's animation channels and selects its default sprite animations
 002b14c8 itemListScreenInit inferred [med] initialises the list screen: clears row state, sets its sprite resource packets and creates the icon/column/button sprites
 0016b034 itemGroupHasEnabledItem inferred [high] reports whether any item of the selected group is enabled
+0045b830 _ZN11SoundHandleD1Ev evidence passed as the element destructor to __aeabi_vec_dtor (FUN_003f2cb0 x3, FUN_00413094, FUN_0040167c); does DetachSound(this); return this. size/arg: SoundHandle one-word class with dtor
+004670a4 _ZN13SoundHeapBaseD1Ev evidence tail-called/called as the base destructor of the 0x20-byte base by FUN_00413094, FUN_0040167c, FUN_00467080; stores base vtable, destroys heap, returns this
+00413094 _ZN10SoundObj3cD1Ev inferred [med] D1 of a non-virtual 0x3c-byte class : SoundHeapBase with SoundHandle handles[4] at +0x20 (prototype with ~SoundObj3c(){} gives retail bytes: vec_dtor then tail base dtor); size 0x3c from FUN_003f2cb0 vec_dtor
+0040167c _ZN10SoundObj70D1Ev inferred [med] D1 of a non-virtual 0x70-byte class : SoundHeapBase with SoundHandle handles[16]; size 0x70 from FUN_003f2cb0 vec_dtor
+00406260 _ZN9Obj557b58C1Ej evidence ctor takes the content resource word (r1) and passes it on as the second argument of FUN_00405dec(this, resource); callers load content->unk0C into r1 (moriModelContentCreateBinding, FUN_0040a884)
+003347e8 uniteSelectedFusionIsEnabled inferred [med] returns 1 when query enabled, a fusion is selected, its record bit 1 is set and its flag is positive
+00330dc4 scrCommCountChoiceFlagsExceptIndex inferred [med] counts available choice flags (7 slots, slot 0 always) other than the script-supplied index
+00335660 namedVariantTableGetEntries inferred [high] finds the named key in the 527-entry table and returns the selected variant entry
+0034248c cecCardDrawBackgroundAndLabel inferred [med] draws the StreetPass card frame by entry state, its display and a centered label
+00292200 btlViewGetCameraPositionOrDefault inferred [med] returns g_battleViewState.camera.position when flag 0x4D0 is set, else (0,100000,0)
+00497690 equipmentMenuBuildVisibleCategories inferred [med] fills visibleCategories/visibleCount from the per-category counts for level 0 (groups), 1 (categories 0-2) or 2 (categories 3-6)
+00494514 aocItemRefClear inferred [med] clears an AocItemRef (id and the three price-scaling bitfields); registered as a context callback by contextRegisterCallback
+001d10c0 resourceResultMatchesKnownRanges inferred [med] twin of smt4 FUN_002a1200
+001d1108 resourceResultMatchesRemappedCodes inferred [med] twin of smt4 FUN_002a116c
+0040a244 resourceReleaseReference inferred [med] drops one reference to a shared resource, releasing and unregistering it on the last
+0018449c devilCompareRecordIds inferred [high] bsearch comparator used by devilGetRecord (smt4 name)
+001aeecc lzGetAdvertisedSize inferred [high] twin of smt4 FUN_0014f4f8
+002ba7b8 scrCommSetStoryFlag inferred [med] script command: sets the flag given by argument 0 plus follow-up flags for 0x206, 0x18b, 0x1a6
+002b91ec fieldSceneResetEntryState inferred [med] resets the field scene entry mode/timers depending on flag 0x4c9
+002add8c campFusionResultCommand inferred [med] camp command: plays the panel/result sound and opens the selected fusion-result record or changes camp panel

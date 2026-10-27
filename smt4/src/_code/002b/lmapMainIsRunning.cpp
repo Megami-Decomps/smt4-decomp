@@ -2,7 +2,7 @@
 
 extern "C" {
 
-void FUN_002aff0c(LmapObj *obj);
+void slotOwnerDestroyAllSlots(LmapObj *obj);
 void asdMemFree(void *block);
 s32 jobFind(u32 job);
 
@@ -19,7 +19,7 @@ s32 lmapMainIsRunning(void)
             return 1;
         }
         if (g_lmapMainState != NULL) {
-            FUN_002aff0c(&g_lmapMainState->obj);
+            slotOwnerDestroyAllSlots(&g_lmapMainState->obj);
             asdMemFree(g_lmapMainState);
             g_lmapMainState = NULL;
         }

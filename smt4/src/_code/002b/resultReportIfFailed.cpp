@@ -13,7 +13,7 @@ void resultReportIfFailed(void *stack, void *memory, u32 size)
     bool failed = result < 0;
 
     if (failed) {
-        FUN_002c526c(result);
+        FUN_002c526c(result, failed);
     }
 }
 

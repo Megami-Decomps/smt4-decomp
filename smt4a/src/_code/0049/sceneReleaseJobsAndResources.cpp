@@ -12,7 +12,7 @@ int helpTexturesRelease(void);
 int FUN_00333f6c(void);
 int campCommonBgRelease(void);
 int campButtonHelpRelease(void);
-int FUN_0040a244(void);
+int resourceReleaseReference(void);
 
 /* stack frame of param_1: 1 slot(s), 4 byte(s) */
 typedef struct {
@@ -30,7 +30,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00333f6c. */
 /* Supplied declaration required: campCommonBgRelease. */
 /* Supplied declaration required: campButtonHelpRelease. */
-/* Supplied declaration required: FUN_0040a244. */
+/* Supplied declaration required: resourceReleaseReference. */
 
 
 void sceneReleaseJobsAndResources(int param_1)
@@ -70,7 +70,7 @@ void sceneReleaseJobsAndResources(int param_1)
     FUN_00333f6c();
   }
   if (*(int *)(param_1 + 0x16054) != 0) {
-    FUN_0040a244();
+    resourceReleaseReference();
     *(unsigned int *)(param_1 + 0x16054) = 0;
   }
   if (*(int *)(param_1 + 0x14) != 1) {

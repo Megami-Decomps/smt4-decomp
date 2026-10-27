@@ -39,7 +39,7 @@ int soundChannelStopAll(...);
 int btlActionPrepareFromSource(...);
 int FUN_003ee734(...);
 int FUN_003ef1e4(...);
-int FUN_0040a244(void);
+int resourceReleaseReference(void);
 int btlHelpFreeEntries(void);
 int FUN_004c8e30(...);
 int mathVectorClear(...);
@@ -227,7 +227,7 @@ extern int FUN_003ed878(unsigned int);
 /* Supplied declaration required: FUN_003f034c. */
 /* Supplied declaration required: FUN_003f26d4. */
 /* Supplied declaration required: FUN_003fda64. */
-/* Supplied declaration required: FUN_0040a244. */
+/* Supplied declaration required: resourceReleaseReference. */
 /* Supplied declaration required: chainCountIdUnflagged. */
 extern int isZero(unsigned int);
 /* Supplied declaration required: FUN_0047dc50. */
@@ -798,7 +798,7 @@ joined_r0x0024cba8:
       do {
         temp_v10 = temp_v2 + temp_v3 * 4;
         if (*(int *)(temp_v10 + 0x216c) != 0) {
-          FUN_0040a244();
+          resourceReleaseReference();
           *(unsigned int *)(temp_v10 + 0x216c) = 0;
         }
         temp_v3 = temp_v3 + 1;

@@ -5,6 +5,7 @@
 #include "nn/Result.h"
 #include "nn/svc.h"
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
+#include "sys/ResultReport.h"
 
 
 /* The storage that owns the reader thread's stack (nn::os::ThreadStackStorage). */
@@ -37,7 +38,6 @@ extern ReaderThreadStack DAT_0044d130;
 
 void nn_os_CriticalSection_Initialize(void *section);
 s32 FUN_002b5820(u32 *handle, u32 resetType);
-void FUN_002c526c(s32 result, bool failed);
 void resultReportIfFailed(void *stack, void *memory, u32 size);
 void *memAlloc(s32 heap, s32 alignment, s32 flags, s32 size, s32 stackAlignment, s32 clear);
 s32 FUN_002bcc60(u32 *thread, const ThreadArgumentDescriptor *descriptor, void (*entry)(void *),

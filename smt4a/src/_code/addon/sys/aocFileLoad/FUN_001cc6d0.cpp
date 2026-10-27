@@ -7,8 +7,8 @@ extern "C" {
 
 int _ZN7AocMain12queueRequestE17RequestParametersji(...);
 u32 _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle(QueuedRequestTokenState*, const RequestParameters*, QueuedRequestHandle);
-int FUN_001d10c0(void);
-int FUN_001d1108(void);
+int resourceResultMatchesKnownRanges(void);
+int resourceResultMatchesRemappedCodes(void);
 
 int refIsNullOrZero(int *);
 int asdLoadFileSyncNoContext(int, int, unsigned int, unsigned int);
@@ -79,8 +79,8 @@ extern unsigned int _ZN18WindowStatusResultC1Ev(char *);
 /* Supplied declaration required: _ZN7AocMain18submitTokenRequestE17RequestParameters19QueuedRequestHandle. */
 extern int objGetFlagBit16(int);
 extern int byteIsAtLeast100(unsigned int *);
-/* Supplied declaration required: FUN_001d10c0. */
-/* Supplied declaration required: FUN_001d1108. */
+/* Supplied declaration required: resourceResultMatchesKnownRanges. */
+/* Supplied declaration required: resourceResultMatchesRemappedCodes. */
 /* Supplied declaration required: legacyResourceIdRemap. */
 /* Supplied declaration required: FUN_002e3c44. */
 extern unsigned int nn_fs_detail_FileBase_TryGetSize(unsigned int, long long *);
@@ -448,10 +448,10 @@ LAB_001cce80:
         jyoucyuGetTableEntry();
       }
       pcVar4 = temp_v16;
-      FUN_001d10c0();
+      resourceResultMatchesKnownRanges();
       if (pcVar4 == (char *)0x0) {
         pcVar4 = temp_v16;
-        FUN_001d1108();
+        resourceResultMatchesRemappedCodes();
         if (pcVar4 == (char *)0x0) {
           jyoucyuGetTableEntry(0);
           temp_v15 = romwright_piece_3_1((((unsigned int)(temp_v15) >> 8) & 0xffffffU),100);

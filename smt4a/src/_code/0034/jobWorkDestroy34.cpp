@@ -3,7 +3,7 @@
 
 extern "C" {
 
-extern void FUN_0040a244(void *p);
+extern void resourceReleaseReference(void *p);
 extern void asdMemFree(void *ptr);
 
 /* Destroys the job's work area, releasing the object at +0x34 first. */
@@ -12,7 +12,7 @@ void jobWorkDestroy34(u32 job)
     JobWork34 *work = (JobWork34 *)jobGetWork(job);
 
     if (work->unk34 != NULL) {
-        FUN_0040a244(work->unk34);
+        resourceReleaseReference(work->unk34);
         work->unk34 = NULL;
     }
     asdMemFree(work);

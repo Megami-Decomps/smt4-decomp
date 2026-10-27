@@ -1,4 +1,4 @@
-/* NON_MATCHING: centered panel text register allocation has not matched retail. */
+/* NON_MATCHING: only the Y coordinate temp differs (retail ip, built r1). */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -32,16 +32,16 @@ void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
     s32 offsetEntry;
     u32 style;
     u32 color;
-    if (alternateStyle != 0) {
-        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F));
-        offsetEntry = 0x498;
-        style = 3;
-        color = 0xFFFFFFFF;
-    } else {
+    if (alternateStyle == 0) {
         base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E));
         offsetEntry = 0x48A;
         color = 0x08262DFF;
         style = 2;
+    } else {
+        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F));
+        offsetEntry = 0x498;
+        style = 3;
+        color = 0xFFFFFFFF;
     }
     s16 baseX = base->x;
     s16 baseY = base->y;
@@ -49,8 +49,9 @@ void FUN_004a7cb0(PanelLayoutOwnerView *panel, u32 textId,
     s32 textWidth = curveEvaluateStandard(textValue, 2);
     const CenteredPanelEntryView *offset = reinterpret_cast<const CenteredPanelEntryView *>(
         layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
+    s32 x = baseX + *offset->width / 2 + offset->position.x - textWidth / 2;
+    s32 y = offset->position.y + baseY;
     drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout), style, color, textValue,
-        static_cast<f32>(baseX + *offset->width / 2 + offset->position.x - textWidth / 2),
-        static_cast<f32>(offset->position.y + baseY), opacity, 0.0f, scale);
+        static_cast<f32>(x), static_cast<f32>(y), opacity, 0.0f, scale);
 }
 }
