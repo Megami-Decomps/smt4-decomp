@@ -70,12 +70,12 @@ extern "C" void FUN_004a0bac(u32 mode, s32 force)
     if (mode == 0 || mode == 1 || mode == 2 || mode == 3) {
         s32 count;
         const s8 *slots;
-        if (mode < 2) {
-            count = gameSlotTableFindFree();
-            slots = gameGetSlotTable()->party;
-        } else {
+        if (mode >= 2) {
             count = 3;
             slots = gameGetSlotTable()->reserve;
+        } else {
+            count = gameSlotTableFindFree();
+            slots = gameGetSlotTable()->party;
         }
         for (s32 i = 0; i < count; i++) {
             if (slots[i] >= 0) {

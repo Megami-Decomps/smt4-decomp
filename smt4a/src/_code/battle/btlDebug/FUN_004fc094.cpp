@@ -65,7 +65,7 @@ extern int idSetFindSubjectIndex(unsigned int, int);
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_00408184. */
 /* Supplied declaration required: countersRaiseA. */
-extern int FUN_004c1480(int);
+extern int btlStatusFlagsHaveAilment(int);
 extern short btlFindEntryValue(int, unsigned int);
 /* Supplied declaration required: btlCombatantGetSummaryValues. */
 /* Supplied declaration required: btlAdjustPropertyClamped. */
@@ -157,7 +157,7 @@ FUN_004fc094(int param_1,unsigned int param_2,int param_3,int param_4,int param_
         *(int *)(temp_v3 + 0x14) = param_4;
         *(int *)(temp_v3 + 0x28) = temp_v14[2];
         *(int *)(temp_v3 + 0x4c) = param_11;
-        temp_v3 = FUN_004c1480(param_11);
+        temp_v3 = btlStatusFlagsHaveAilment(param_11);
         if (temp_v3 == 0) {
           temp_v22 = 0;
         }

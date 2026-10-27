@@ -26,7 +26,7 @@ s32 FUN_00429a1c(StatusRecord *record);
 /* Looks the upper-cased name up in the record and returns its status; a failure code comes back as the result. */
 extern "C" WindowStatusResult FUN_00429c08(StatusRecord *record, const s8 *name)
 {
-    s32 error = FUN_004283cc(record);
+    nn::Result error = FUN_004283cc(record);
     if (!nnResultIsFailure(error)) {
         s8 upper[32];
         u32 i;

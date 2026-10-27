@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc hoists the mode/entry base differently (retail reads the mode through the menu once, then through a +0x800 base kept in r5) and orders the shared tail call differently */
+/* NON_MATCHING: layout only: retail places one shared FUN_004a5d5c tail call right after the mode dispatch and the arms branch back to it; built emits an inline tail call in each arm */
 #include "common.h"
 #include "classes/Obj55c8d0.h"
 #include "shard/Shard004A.h"
@@ -63,15 +63,16 @@ void Obj55c8d0::FUN_004a4c74()
     if (menu->state.mode == 1 && !sceneTexturesAreLoaded()) {
         return;
     }
-    menu->confirmed = 1;
     menu->unk018 = 0;
+    menu->confirmed = 1;
     uiSpriteBankApplyPreset(menu->spriteBank, 8);
     uiSpriteBankApplyPreset(menu->spriteBank, 9);
     if (menu->state.mode == 0) {
         FUN_00202400();
         if (menu->state.mode == 0) {
+            SelectEntry *entries = menu->state.entries;
             s32 total = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->totalHolder));
-            ItemRecord *item = FUN_00184310(menu->state.entries[total].itemId);
+            ItemRecord *item = FUN_00184310(entries[total].itemId);
             sysPlaySe((item->flags & 2) != 0 ? 0x121 : 0x30);
             FUN_004a5d5c(menu);
             return;

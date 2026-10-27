@@ -10,7 +10,7 @@ struct TitleScene {
     s32 ring[6];            // 0x12b0
     u8 dirty;               // 0x12c4
     u8 unk12c5[3];
-    void (*flush)(void);    // 0x12c8
+    void (*flush)(s32 state);   // 0x12c8
 };
 
 struct LayoutEntry {
@@ -53,7 +53,7 @@ static void setDrawState(s32 value)
     s32 previous = slot[*slot + 2];
     slot[*slot + 2] = value;
     if (scene->dirty != 0 || previous != value) {
-        scene->flush();
+        scene->flush(value);
         scene->dirty = 0;
     }
 }

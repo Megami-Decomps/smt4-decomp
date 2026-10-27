@@ -5,7 +5,7 @@
 #include <stddef.h>
 #include "AsdSDK/Source/Sys/Mem/AsdMemory.h"
 
-extern "C" void asdOperatorDelete(void *memory);
+#include "addon/AocRequestMemory.h"
 
 // The nonvirtual source-handle prefix shared by application buffer requests.
 class AocRequestBase {
@@ -13,7 +13,7 @@ public:
     AocRequestBase(u32 source);
     ~AocRequestBase();
     static void *operator new(u32 bytes) throw() { return asdOperatorNew(bytes); }
-    static void operator delete(void *memory) { asdOperatorDelete(memory); }
+    static void operator delete(void *memory) { aocRequestMemoryFree(memory); }
     /* 0x00 */ u32 source;
 };
 

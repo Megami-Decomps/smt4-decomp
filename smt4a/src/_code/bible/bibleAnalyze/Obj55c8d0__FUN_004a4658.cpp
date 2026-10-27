@@ -1,4 +1,4 @@
-/* NON_MATCHING: disabled-entry branch layout, field-address CSE and callback flag-store scheduling differ. */
+/* NON_MATCHING: stack frame (key/message placement), saved-register numbering and the state/step STRD pair differ; branch layout now matches. */
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
 #include "shard/W6_W6Match8_DevilRecordA.h"
@@ -46,6 +46,7 @@ typedef char AnalyzeConfirmationOffsets[
     offsetof(AnalyzeCallback, flags) == 4 ? 1 : -1];
 }
 extern "C" {
+u32 shopListItemGetId(const BibleAnalyzeListEntry *entry);
 extern AnalyzeSuffixGlobals DAT_0057f0a0;
 extern const char DAT_0052b5bc[], DAT_0052b5c4[];
 s32 entryDispatchUpdate(void *buttons, s32 index);
@@ -74,12 +75,12 @@ void Obj55c8d0::FUN_004a4658()
     if (activated == 0)
         return;
     BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeEntryListView *>(screen)->entries;
-    if (screen->unk0860 != 0) {
-        sysPlaySe(0x48);
-    } else {
+    if (screen->unk0860 == 0) {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
         const AnalyzeDemonFlagsView *record = reinterpret_cast<const AnalyzeDemonFlagsView *>(FUN_00184310(entries[index].id));
         sysPlaySe((record->flags & 2) ? 0x121 : 0x30);
+    } else {
+        sysPlaySe(0x48);
     }
     if (screen->unk0860 != 0) {
         u32 key;
@@ -91,7 +92,8 @@ void Obj55c8d0::FUN_004a4658()
         buttonHelpSetText(message, 0x323232FF);
     } else {
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
-        FUN_0032d0c8(0, 1, entries[index].id, 0);
+        u16 id = shopListItemGetId(&entries[index]);
+        FUN_0032d0c8(0, 1, id, 0);
     }
     FUN_003343f0(0);
     screen->state = 2;
@@ -103,12 +105,10 @@ void Obj55c8d0::FUN_004a4658()
     callback->flags |= 0x1000;
     s32 count = screen->listCount.count;
     if (screen->unk0860 != 0) {
-        if (count >= 10)
-            count = 10;
+        count = count < 10 ? count : 10;
         FUN_004d05c4(screen->confirmation.controls, 0x13, 0x1030, count);
     } else {
-        if (count >= 10)
-            count = 10;
+        count = count < 10 ? count : 10;
         FUN_004d05c4(screen->confirmation.controls, 0x14, 0x40E, count);
     }
 }

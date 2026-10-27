@@ -1,4 +1,4 @@
-/* NON_MATCHING: sprite scale/restart arguments and signed initial-choice switch are corrected; initial-selection flag-query control flow and same-file animation-table addressing remain. */
+/* NON_MATCHING: two instructions remain: retail extends the choice with `sxth` (the build's `s16 initial` switched as `(u16)initial` gives `uxth`; the signed forms move the FUN_00203b40 constants to r9/r8) and keeps the icon in r1 (stm {r1, r4}). */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "ui/ParamsClearPacket.h"
 #include "shard/W6_W6Match3_ScrollSelection.h"
@@ -32,9 +32,17 @@ struct ChoiceMenuWork {
 #define MENU_CHOICE_COUNT 5
 
 extern "C" {
-extern const u8 DAT_0052c83c;
-extern const u8 DAT_0052c854;
-extern const u8 DAT_0052c884;
+/* The menu's sprite resource packets, in retail's order (0x18, 0x30 and 0x70 bytes). */
+static const u32 sMenuPacketA[6] = {
+    0x1e, 0x0, 0x5, 0x0, 0xffe2, 0x3,
+};
+static const u32 sMenuPacketB[12] = {
+    0x0, 0x3f800000, 0x5, 0x3f800000, 0x0, 0x3, 0x0, 0x3f800000, 0x1e, 0x3f800000, 0x0, 0x1e,
+};
+static const u32 sMenuPacketC[28] = {
+    0xfffffffd, 0x0, 0xfffffffd, 0x2, 0x0, 0xfffffffd, 0x0, 0xfffffffd, 0x0, 0xfffffffd, 0x3, 0x0, 0xfffffffd, 0x0,
+    0xfffffffe, 0x0, 0xfffffffd, 0xfffffffe, 0x0, 0xfffffffd, 0x0, 0xffffffff, 0x0, 0xffffffff, 0xffffffff, 0x0, 0xffffffff, 0x0,
+};
 
 s32 gameFlagIsSet(s32 flag);
 void FUN_00203b40(ChoiceMenuWork *work, s32 a, s32 b, s32 c, s32 d, s32 e);
@@ -46,7 +54,7 @@ void uiSpriteSelectAnim(MenuSprite *sprite, s32 animation);
 
 /* Sets up the menu: frame size by entry count, the visible entries (icon, slot), the initial
  * selection from `initial` and the sprites. */
-void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
+void FUN_003d05a4(ChoiceMenuWork *work, s16 initial)
 {
     s32 count = 3;
     if (gameFlagIsSet(MENU_FLAG_EXTRA_TOP) != 0)
@@ -89,7 +97,7 @@ void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
 
     work->end = -1;
     s32 selected;
-    switch ((s16)initial) {
+    switch ((u16)initial) {
     case 0: selected = 2; break;
     case 1: selected = 1; break;
     case 2: selected = 3; break;
@@ -97,14 +105,18 @@ void FUN_003d05a4(ChoiceMenuWork *work, u16 initial)
     case 4: selected = 4; break;
     default: selected = -1; break;
     }
-    if (gameFlagIsSet(MENU_FLAG_EXTRA_TOP) == 0)
-        selected--;
+    if (!(gameFlagIsSet(MENU_FLAG_EXTRA_TOP) != 0 && gameFlagIsSet(MENU_FLAG_EXTRA_BOTTOM) != 0)) {
+        if (gameFlagIsSet(MENU_FLAG_EXTRA_TOP) == 0) {
+            gameFlagIsSet(MENU_FLAG_EXTRA_BOTTOM);
+            selected--;
+        }
+    }
     work->selected = selected;
 
     FUN_00203b40(work, count, count, 1, 0, 1);
     FUN_002a4964(reinterpret_cast<ScrollSelection *>(work), work->selected);
     paramsClearPacket(&work->resources);
-    paramsInit(&work->resources, &DAT_0052c83c, 0x18, &DAT_0052c854, 0x30, NULL, 0, NULL, 0, &DAT_0052c884, 0x70);
+    paramsInit(&work->resources, sMenuPacketA, 0x18, sMenuPacketB, 0x30, NULL, 0, NULL, 0, sMenuPacketC, 0x70);
     FUN_0014e188(&work->header, 0x24, 0x57, &work->resources, 1, 1.0f);
     uiSpriteSetKeyframe(&work->header, 0, 0);
     uiSpriteSetImageKeyframe(&work->header, 0, 0);

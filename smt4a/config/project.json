@@ -31632,12 +31632,12 @@
     },
     {
       "address": "0x164cf4",
-      "function": "FUN_00164cf4",
+      "function": "buttonHelpIsKindActive",
       "module": "_code",
-      "object": "build/obj/_code/0016/FUN_00164cf4.o",
+      "object": "build/obj/_code/0016/buttonHelpIsKindActive.o",
       "size": 288,
-      "source": "src/_code/0016/FUN_00164cf4.cpp",
-      "target": "orig/target/_code/0016/FUN_00164cf4.o",
+      "source": "src/_code/0016/buttonHelpIsKindActive.cpp",
+      "target": "orig/target/_code/0016/buttonHelpIsKindActive.o",
       "thumb": false
     },
     {
@@ -46112,12 +46112,12 @@
     },
     {
       "address": "0x1b1434",
-      "function": "FUN_001b1434",
+      "function": "asdModelAppendCommandSource",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b1434.o",
+      "object": "build/obj/_code/001b/asdModelAppendCommandSource.o",
       "size": 164,
-      "source": "src/_code/001b/FUN_001b1434.cpp",
-      "target": "orig/target/_code/001b/FUN_001b1434.o",
+      "source": "src/_code/001b/asdModelAppendCommandSource.cpp",
+      "target": "orig/target/_code/001b/asdModelAppendCommandSource.o",
       "thumb": false
     },
     {
@@ -46172,12 +46172,12 @@
     },
     {
       "address": "0x1b18cc",
-      "function": "FUN_001b18cc",
+      "function": "_ZN9Obj55bea0C1Ev",
       "module": "_code",
-      "object": "build/obj/_code/001b/FUN_001b18cc.o",
+      "object": "build/obj/_code/001b/Obj55bea0__Obj55bea0.o",
       "size": 192,
-      "source": "src/_code/001b/FUN_001b18cc.cpp",
-      "target": "orig/target/_code/001b/FUN_001b18cc.o",
+      "source": "src/_code/001b/Obj55bea0__Obj55bea0.cpp",
+      "target": "orig/target/_code/001b/Obj55bea0__Obj55bea0.o",
       "thumb": false
     },
     {
@@ -97978,12 +97978,12 @@
     },
     {
       "address": "0x3278c8",
-      "function": "FUN_003278c8",
+      "function": "flagRestorationConsumeByKey",
       "module": "_code",
-      "object": "build/obj/_code/0032/FUN_003278c8.o",
+      "object": "build/obj/_code/0032/flagRestorationConsumeByKey.o",
       "size": 148,
-      "source": "src/_code/0032/FUN_003278c8.cpp",
-      "target": "orig/target/_code/0032/FUN_003278c8.o",
+      "source": "src/_code/0032/flagRestorationConsumeByKey.cpp",
+      "target": "orig/target/_code/0032/flagRestorationConsumeByKey.o",
       "thumb": false
     },
     {
@@ -100320,12 +100320,12 @@
     },
     {
       "address": "0x336574",
-      "function": "FUN_00336574",
+      "function": "selectionPanelDrawMarkers",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_00336574.o",
+      "object": "build/obj/_code/0033/selectionPanelDrawMarkers.o",
       "size": 1328,
-      "source": "src/_code/0033/FUN_00336574.cpp",
-      "target": "orig/target/_code/0033/FUN_00336574.o",
+      "source": "src/_code/0033/selectionPanelDrawMarkers.cpp",
+      "target": "orig/target/_code/0033/selectionPanelDrawMarkers.o",
       "thumb": false
     },
     {
@@ -101302,13 +101302,23 @@
     },
     {
       "address": "0x3409bc",
-      "function": "FUN_003409bc",
+      "function": "mikadoControllerFinish",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_003409bc.o",
+      "object": "build/obj/_code/0034/mikadoControllerFinish.o",
       "size": 84,
-      "source": "src/_code/0034/FUN_003409bc.cpp",
-      "target": "orig/target/_code/0034/FUN_003409bc.o",
-      "thumb": false
+      "source": "src/_code/0034/mikadoControllerFinish.cpp",
+      "target": "orig/target/_code/0034/mikadoControllerFinish.o",
+      "thumb": false,
+      "cflags": [
+        "--cpu=MPCore",
+        "--fpmode=fast",
+        "--apcs=/interwork",
+        "--cpp",
+        "--no_rtti",
+        "--no_rtti_data",
+        "-O2",
+        "-Otime"
+      ]
     },
     {
       "address": "0x340a14",
@@ -102138,12 +102148,12 @@
     },
     {
       "address": "0x345b94",
-      "function": "FUN_00345b94",
+      "function": "renderEditorSceneDrawOverlay",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_00345b94.o",
+      "object": "build/obj/_code/0034/renderEditorSceneDrawOverlay.o",
       "size": 296,
-      "source": "src/_code/0034/FUN_00345b94.cpp",
-      "target": "orig/target/_code/0034/FUN_00345b94.o",
+      "source": "src/_code/0034/renderEditorSceneDrawOverlay.cpp",
+      "target": "orig/target/_code/0034/renderEditorSceneDrawOverlay.o",
       "thumb": false
     },
     {
@@ -131509,12 +131519,12 @@
     },
     {
       "address": "0x3f97a4",
-      "function": "FUN_003f97a4",
+      "function": "cyclingPanelAdvance",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003f97a4.o",
+      "object": "build/obj/_code/003f/cyclingPanelAdvance.o",
       "size": 416,
-      "source": "src/_code/003f/FUN_003f97a4.cpp",
-      "target": "orig/target/_code/003f/FUN_003f97a4.o",
+      "source": "src/_code/003f/cyclingPanelAdvance.cpp",
+      "target": "orig/target/_code/003f/cyclingPanelAdvance.o",
       "thumb": false
     },
     {
@@ -131692,12 +131702,12 @@
     },
     {
       "address": "0x3fabfc",
-      "function": "FUN_003fabfc",
+      "function": "spriteDrawAnimationUnplaced",
       "module": "_code",
-      "object": "build/obj/_code/003f/FUN_003fabfc.o",
+      "object": "build/obj/_code/003f/spriteDrawAnimationUnplaced.o",
       "size": 52,
-      "source": "src/_code/003f/FUN_003fabfc.cpp",
-      "target": "orig/target/_code/003f/FUN_003fabfc.o",
+      "source": "src/_code/003f/spriteDrawAnimationUnplaced.cpp",
+      "target": "orig/target/_code/003f/spriteDrawAnimationUnplaced.o",
       "thumb": false
     },
     {
@@ -132254,12 +132264,12 @@
     {
       "address": "0x3fe90c",
       "file": "Model/MoriModelUnit",
-      "function": "FUN_003fe90c",
+      "function": "moriModelChannelInitialize",
       "module": "_code",
-      "object": "build/obj/_code/Model/MoriModelUnit/FUN_003fe90c.o",
+      "object": "build/obj/_code/Model/MoriModelUnit/moriModelChannelInitialize.o",
       "size": 136,
-      "source": "src/_code/Model/MoriModelUnit/FUN_003fe90c.cpp",
-      "target": "orig/target/_code/Model/MoriModelUnit/FUN_003fe90c.o",
+      "source": "src/_code/Model/MoriModelUnit/moriModelChannelInitialize.cpp",
+      "target": "orig/target/_code/Model/MoriModelUnit/moriModelChannelInitialize.o",
       "thumb": false
     },
     {
@@ -158149,32 +158159,32 @@
     },
     {
       "address": "0x494740",
-      "function": "FUN_00494740",
+      "function": "_ZN9Obj53604412FUN_00494740Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00494740.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_00494740.o",
       "size": 468,
-      "source": "src/_code/0049/FUN_00494740.cpp",
-      "target": "orig/target/_code/0049/FUN_00494740.o",
+      "source": "src/_code/0049/Obj536044__FUN_00494740.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_00494740.o",
       "thumb": false
     },
     {
       "address": "0x494940",
-      "function": "panelUpdatePageExitTransition",
+      "function": "_ZN9Obj53604429panelUpdatePageExitTransitionEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/panelUpdatePageExitTransition.o",
+      "object": "build/obj/_code/0049/Obj536044__panelUpdatePageExitTransition.o",
       "size": 244,
-      "source": "src/_code/0049/panelUpdatePageExitTransition.cpp",
-      "target": "orig/target/_code/0049/panelUpdatePageExitTransition.o",
+      "source": "src/_code/0049/Obj536044__panelUpdatePageExitTransition.cpp",
+      "target": "orig/target/_code/0049/Obj536044__panelUpdatePageExitTransition.o",
       "thumb": false
     },
     {
       "address": "0x494a34",
-      "function": "FUN_00494a34",
+      "function": "_ZN9Obj53604412FUN_00494a34Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00494a34.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_00494a34.o",
       "size": 736,
-      "source": "src/_code/0049/FUN_00494a34.cpp",
-      "target": "orig/target/_code/0049/FUN_00494a34.o",
+      "source": "src/_code/0049/Obj536044__FUN_00494a34.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_00494a34.o",
       "thumb": false
     },
     {
@@ -158199,22 +158209,22 @@
     },
     {
       "address": "0x495584",
-      "function": "FUN_00495584",
+      "function": "_ZN9Obj53604412FUN_00495584Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00495584.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_00495584.o",
       "size": 272,
-      "source": "src/_code/0049/FUN_00495584.cpp",
-      "target": "orig/target/_code/0049/FUN_00495584.o",
+      "source": "src/_code/0049/Obj536044__FUN_00495584.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_00495584.o",
       "thumb": false
     },
     {
       "address": "0x49569c",
-      "function": "FUN_0049569c",
+      "function": "_ZN9Obj53604412FUN_0049569cEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049569c.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_0049569c.o",
       "size": 280,
-      "source": "src/_code/0049/FUN_0049569c.cpp",
-      "target": "orig/target/_code/0049/FUN_0049569c.o",
+      "source": "src/_code/0049/Obj536044__FUN_0049569c.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_0049569c.o",
       "thumb": false
     },
     {
@@ -158319,12 +158329,12 @@
     },
     {
       "address": "0x4969a8",
-      "function": "FUN_004969a8",
+      "function": "_ZN9Obj53604412FUN_004969a8Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_004969a8.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_004969a8.o",
       "size": 100,
-      "source": "src/_code/0049/FUN_004969a8.cpp",
-      "target": "orig/target/_code/0049/FUN_004969a8.o",
+      "source": "src/_code/0049/Obj536044__FUN_004969a8.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_004969a8.o",
       "thumb": false
     },
     {
@@ -158339,12 +158349,12 @@
     },
     {
       "address": "0x497044",
-      "function": "FUN_00497044",
+      "function": "_ZN9Obj53604412FUN_00497044Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00497044.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_00497044.o",
       "size": 40,
-      "source": "src/_code/0049/FUN_00497044.cpp",
-      "target": "orig/target/_code/0049/FUN_00497044.o",
+      "source": "src/_code/0049/Obj536044__FUN_00497044.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_00497044.o",
       "thumb": false
     },
     {
@@ -158380,12 +158390,12 @@
     {
       "address": "0x497290",
       "file": "shop/shopMain",
-      "function": "FUN_00497290",
+      "function": "_ZN9Obj53604412FUN_00497290Ev",
       "module": "_code",
-      "object": "build/obj/_code/shop/shopMain/FUN_00497290.o",
+      "object": "build/obj/_code/shop/shopMain/Obj536044__FUN_00497290.o",
       "size": 1024,
-      "source": "src/_code/shop/shopMain/FUN_00497290.cpp",
-      "target": "orig/target/_code/shop/shopMain/FUN_00497290.o",
+      "source": "src/_code/shop/shopMain/Obj536044__FUN_00497290.cpp",
+      "target": "orig/target/_code/shop/shopMain/Obj536044__FUN_00497290.o",
       "thumb": false
     },
     {
@@ -158452,12 +158462,12 @@
     {
       "address": "0x498594",
       "file": "shop/shopMain",
-      "function": "FUN_00498594",
+      "function": "_ZN9Obj53604412FUN_00498594Ev",
       "module": "_code",
-      "object": "build/obj/_code/shop/shopMain/FUN_00498594.o",
+      "object": "build/obj/_code/shop/shopMain/Obj536044__FUN_00498594.o",
       "size": 280,
-      "source": "src/_code/shop/shopMain/FUN_00498594.cpp",
-      "target": "orig/target/_code/shop/shopMain/FUN_00498594.o",
+      "source": "src/_code/shop/shopMain/Obj536044__FUN_00498594.cpp",
+      "target": "orig/target/_code/shop/shopMain/Obj536044__FUN_00498594.o",
       "thumb": false
     },
     {
@@ -158492,12 +158502,12 @@
     },
     {
       "address": "0x498ac0",
-      "function": "FUN_00498ac0",
+      "function": "_ZN9Obj53604412FUN_00498ac0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_00498ac0.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_00498ac0.o",
       "size": 768,
-      "source": "src/_code/0049/FUN_00498ac0.cpp",
-      "target": "orig/target/_code/0049/FUN_00498ac0.o",
+      "source": "src/_code/0049/Obj536044__FUN_00498ac0.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_00498ac0.o",
       "thumb": false
     },
     {
@@ -158542,22 +158552,22 @@
     },
     {
       "address": "0x499390",
-      "function": "shopUpdateCharonRequestTransition",
+      "function": "_ZN9Obj53604433shopUpdateCharonRequestTransitionEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/shopUpdateCharonRequestTransition.o",
+      "object": "build/obj/_code/0049/Obj536044__shopUpdateCharonRequestTransition.o",
       "size": 464,
-      "source": "src/_code/0049/shopUpdateCharonRequestTransition.cpp",
-      "target": "orig/target/_code/0049/shopUpdateCharonRequestTransition.o",
+      "source": "src/_code/0049/Obj536044__shopUpdateCharonRequestTransition.cpp",
+      "target": "orig/target/_code/0049/Obj536044__shopUpdateCharonRequestTransition.o",
       "thumb": false
     },
     {
       "address": "0x4995b0",
-      "function": "FUN_004995b0",
+      "function": "_ZN9Obj53604412FUN_004995b0Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_004995b0.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_004995b0.o",
       "size": 1448,
-      "source": "src/_code/0049/FUN_004995b0.cpp",
-      "target": "orig/target/_code/0049/FUN_004995b0.o",
+      "source": "src/_code/0049/Obj536044__FUN_004995b0.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_004995b0.o",
       "thumb": false
     },
     {
@@ -158593,33 +158603,33 @@
     },
     {
       "address": "0x499e00",
-      "function": "itemMenuHandleSelectionInput",
+      "function": "_ZN9Obj53604428itemMenuHandleSelectionInputEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/itemMenuHandleSelectionInput.o",
+      "object": "build/obj/_code/0049/Obj536044__itemMenuHandleSelectionInput.o",
       "size": 472,
-      "source": "src/_code/0049/itemMenuHandleSelectionInput.cpp",
-      "target": "orig/target/_code/0049/itemMenuHandleSelectionInput.o",
+      "source": "src/_code/0049/Obj536044__itemMenuHandleSelectionInput.cpp",
+      "target": "orig/target/_code/0049/Obj536044__itemMenuHandleSelectionInput.o",
       "thumb": false
     },
     {
       "address": "0x499fdc",
       "file": "shop/shopMain",
-      "function": "FUN_00499fdc",
+      "function": "_ZN9Obj53604412FUN_00499fdcEv",
       "module": "_code",
-      "object": "build/obj/_code/shop/shopMain/FUN_00499fdc.o",
+      "object": "build/obj/_code/shop/shopMain/Obj536044__FUN_00499fdc.o",
       "size": 720,
-      "source": "src/_code/shop/shopMain/FUN_00499fdc.cpp",
-      "target": "orig/target/_code/shop/shopMain/FUN_00499fdc.o",
+      "source": "src/_code/shop/shopMain/Obj536044__FUN_00499fdc.cpp",
+      "target": "orig/target/_code/shop/shopMain/Obj536044__FUN_00499fdc.o",
       "thumb": false
     },
     {
       "address": "0x49a2b4",
-      "function": "FUN_0049a2b4",
+      "function": "_ZN9Obj53604412FUN_0049a2b4Ev",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049a2b4.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_0049a2b4.o",
       "size": 712,
-      "source": "src/_code/0049/FUN_0049a2b4.cpp",
-      "target": "orig/target/_code/0049/FUN_0049a2b4.o",
+      "source": "src/_code/0049/Obj536044__FUN_0049a2b4.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_0049a2b4.o",
       "thumb": false
     },
     {
@@ -158634,12 +158644,12 @@
     },
     {
       "address": "0x49a8b8",
-      "function": "FUN_0049a8b8",
+      "function": "_ZN9Obj53604413resetHandlersEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049a8b8.o",
+      "object": "build/obj/_code/0049/Obj536044__resetHandlers.o",
       "size": 236,
-      "source": "src/_code/0049/FUN_0049a8b8.cpp",
-      "target": "orig/target/_code/0049/FUN_0049a8b8.o",
+      "source": "src/_code/0049/Obj536044__resetHandlers.cpp",
+      "target": "orig/target/_code/0049/Obj536044__resetHandlers.o",
       "thumb": false
     },
     {
@@ -158674,23 +158684,23 @@
     },
     {
       "address": "0x49b00c",
-      "function": "FUN_0049b00c",
+      "function": "_ZN9Obj53604412FUN_0049b00cEv",
       "module": "_code",
-      "object": "build/obj/_code/0049/FUN_0049b00c.o",
+      "object": "build/obj/_code/0049/Obj536044__FUN_0049b00c.o",
       "size": 3312,
-      "source": "src/_code/0049/FUN_0049b00c.cpp",
-      "target": "orig/target/_code/0049/FUN_0049b00c.o",
+      "source": "src/_code/0049/Obj536044__FUN_0049b00c.cpp",
+      "target": "orig/target/_code/0049/Obj536044__FUN_0049b00c.o",
       "thumb": false
     },
     {
       "address": "0x49bd20",
       "file": "shop/shopMain",
-      "function": "FUN_0049bd20",
+      "function": "_ZN9Obj53604412FUN_0049bd20Ev",
       "module": "_code",
-      "object": "build/obj/_code/shop/shopMain/FUN_0049bd20.o",
+      "object": "build/obj/_code/shop/shopMain/Obj536044__FUN_0049bd20.o",
       "size": 1684,
-      "source": "src/_code/shop/shopMain/FUN_0049bd20.cpp",
-      "target": "orig/target/_code/shop/shopMain/FUN_0049bd20.o",
+      "source": "src/_code/shop/shopMain/Obj536044__FUN_0049bd20.cpp",
+      "target": "orig/target/_code/shop/shopMain/Obj536044__FUN_0049bd20.o",
       "thumb": false
     },
     {
@@ -159399,7 +159409,7 @@
       "module": "_code",
       "object": "build/obj/_code/004a/FUN_004a2a30.o",
       "size": 436,
-      "source": "src/_code/004a/FUN_004a2a30.cpp",
+      "source": "src/_code/004a/EntryWindowDraw.cpp",
       "target": "orig/target/_code/004a/FUN_004a2a30.o",
       "thumb": false
     },
@@ -159460,7 +159470,7 @@
       "module": "_code",
       "object": "build/obj/_code/004a/FUN_004a3238.o",
       "size": 580,
-      "source": "src/_code/004a/FUN_004a3238.cpp",
+      "source": "src/_code/004a/EntryWindowDraw.cpp",
       "target": "orig/target/_code/004a/FUN_004a3238.o",
       "thumb": false
     },
@@ -162578,12 +162588,12 @@
     },
     {
       "address": "0x4ba8ec",
-      "function": "FUN_004ba8ec",
+      "function": "uiTexLoaderUpdate",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004ba8ec.o",
+      "object": "build/obj/_code/004b/uiTexLoaderUpdate.o",
       "size": 396,
-      "source": "src/_code/004b/FUN_004ba8ec.cpp",
-      "target": "orig/target/_code/004b/FUN_004ba8ec.o",
+      "source": "src/_code/004b/uiTexLoaderUpdate.cpp",
+      "target": "orig/target/_code/004b/uiTexLoaderUpdate.o",
       "thumb": false
     },
     {
@@ -162788,12 +162798,12 @@
     },
     {
       "address": "0x4bb200",
-      "function": "FUN_004bb200",
+      "function": "cecSendCardData",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004bb200.o",
+      "object": "build/obj/_code/004b/cecSendCardData.o",
       "size": 200,
-      "source": "src/_code/004b/FUN_004bb200.cpp",
-      "target": "orig/target/_code/004b/FUN_004bb200.o",
+      "source": "src/_code/004b/CecCardMessages.cpp",
+      "target": "orig/target/_code/004b/cecSendCardData.o",
       "thumb": false
     },
     {
@@ -162828,12 +162838,12 @@
     },
     {
       "address": "0x4bb35c",
-      "function": "FUN_004bb35c",
+      "function": "cecCardMessageBoxInit",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004bb35c.o",
+      "object": "build/obj/_code/004b/cecCardMessageBoxInit.o",
       "size": 220,
-      "source": "src/_code/004b/FUN_004bb35c.cpp",
-      "target": "orig/target/_code/004b/FUN_004bb35c.o",
+      "source": "src/_code/004b/CecCardMessages.cpp",
+      "target": "orig/target/_code/004b/cecCardMessageBoxInit.o",
       "thumb": false
     },
     {
@@ -163548,12 +163558,12 @@
     },
     {
       "address": "0x4bfc1c",
-      "function": "FUN_004bfc1c",
+      "function": "btlCalcAilmentRateScale",
       "module": "_code",
-      "object": "build/obj/_code/004b/FUN_004bfc1c.o",
+      "object": "build/obj/_code/004b/btlCalcAilmentRateScale.o",
       "size": 216,
-      "source": "src/_code/004b/FUN_004bfc1c.cpp",
-      "target": "orig/target/_code/004b/FUN_004bfc1c.o",
+      "source": "src/_code/004b/btlCalcAilmentRateScale.cpp",
+      "target": "orig/target/_code/004b/btlCalcAilmentRateScale.o",
       "thumb": false
     },
     {
@@ -163608,12 +163618,12 @@
     },
     {
       "address": "0x4c1480",
-      "function": "FUN_004c1480",
+      "function": "btlStatusFlagsHaveAilment",
       "module": "_code",
-      "object": "build/obj/_code/004c/FUN_004c1480.o",
+      "object": "build/obj/_code/004c/btlStatusFlagsHaveAilment.o",
       "size": 72,
-      "source": "src/_code/004c/FUN_004c1480.cpp",
-      "target": "orig/target/_code/004c/FUN_004c1480.o",
+      "source": "src/_code/004c/btlStatusFlagsHaveAilment.cpp",
+      "target": "orig/target/_code/004c/btlStatusFlagsHaveAilment.o",
       "thumb": false
     },
     {

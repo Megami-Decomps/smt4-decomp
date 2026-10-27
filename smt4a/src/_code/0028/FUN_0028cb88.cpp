@@ -13,7 +13,7 @@ int FUN_0028d270(int);
 int FUN_0028f740(...);
 int FUN_002ae5cc(...);
 int FUN_002fa4dc(...);
-int FUN_00336574(...);
+int selectionPanelDrawMarkers(...);
 int FUN_0034e784(...);
 int FUN_003741cc(...);
 int FUN_003743a4(...);
@@ -33,7 +33,7 @@ extern int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_0028f740. */
 /* Supplied declaration required: FUN_002ae5cc. */
 /* Supplied declaration required: FUN_002fa4dc. */
-/* Supplied declaration required: FUN_00336574. */
+/* Supplied declaration required: selectionPanelDrawMarkers. */
 /* Supplied declaration required: FUN_0034e784. */
 /* Supplied declaration required: FUN_003741cc. */
 /* Supplied declaration required: FUN_003743a4. */
@@ -118,7 +118,7 @@ LAB_0028cbdc:
     FUN_002ae5cc(param_1,0,1,0);
     FUN_002fa4dc(param_1,0);
     FUN_0028f740(param_1);
-    FUN_00336574(param_1,1);
+    selectionPanelDrawMarkers(param_1,1);
     break;
   case 0x18:
   case 0x19:
@@ -171,19 +171,19 @@ LAB_0028cbdc:
     FUN_002ae5cc(param_1,0,1);
     FUN_002fa4dc(param_1,1);
     FUN_0028f740(param_1);
-    FUN_00336574(param_1,0);
+    selectionPanelDrawMarkers(param_1,0);
     break;
   case 0x23:
     FUN_002ae5cc(param_1,0,1);
     FUN_002fa4dc(param_1,1);
     FUN_0028f740(param_1);
-    FUN_00336574(param_1,1);
+    selectionPanelDrawMarkers(param_1,1);
     break;
   case 0x24:
     FUN_002ae5cc(param_1,0,0,0);
     FUN_002fa4dc(param_1,0);
     FUN_0028f740(param_1);
-    FUN_00336574(param_1,0);
+    selectionPanelDrawMarkers(param_1,0);
     break;
   case 0x25:
   case 0x26:

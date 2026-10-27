@@ -1,4 +1,4 @@
-/* NON_MATCHING: free-slot search branches and party-count loads differ. */
+/* NON_MATCHING: the free-slot search now keeps retail's separate tst/tsteq tests and plain loop; remaining: roster field offset folded into a register add, argument saved in r5 instead of r4, loop-exit epilogue and the party-count loads. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match8_BattleRosterRecordA.h"
@@ -20,6 +20,18 @@ PartyInsertionSlots *gameGetSlotTable(void);
 void FUN_004fcf0c(s32, s32, s32, s32, s32, s32);
 }
 
+/* A roster slot is free when it is neither active nor excluded (separate tests: retail does not fold them into one mask). */
+static __inline bool rosterSlotIsFree(u32 flags)
+{
+    if (flags & 1) {
+        return false;
+    }
+    if (flags & 0x80) {
+        return false;
+    }
+    return true;
+}
+
 extern "C" u32 FUN_003359f8(void)
 {
     s32 id = scrGetArg(0);
@@ -27,7 +39,8 @@ extern "C" u32 FUN_003359f8(void)
     if (id >= 0x6D && reinterpret_cast<PartyInsertionStateView *>(state)->count < 4) {
         s32 freeSlot = -1;
         for (s32 i = 0; i < 4; ++i) {
-            if ((state->roster[i].liveFlags.unk50 & 0x81) == 0) {
+            BattleRosterRecordA *record = &state->roster[i];
+            if (rosterSlotIsFree(record->liveFlags.unk50)) {
                 freeSlot = i;
                 break;
             }

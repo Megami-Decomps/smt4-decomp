@@ -31,12 +31,12 @@ void FUN_004aace8(u32 unused, s32 slot, u32 alternate, s32 x, s32 y)
     s32 anchorY = layout->y;
     layout = asdTMTexTableEntryAt(13, 0x416);
     s32 centerOffsetX, centerOffsetY;
-    if (layout->placement) {
-        centerOffsetX = -(layout->x + layout->placement->width / 2);
-        centerOffsetY = -(layout->y + layout->placement->height / 2);
-    } else {
+    if (!layout->placement) {
         centerOffsetX = -(layout->x + ((layout->width & 0x7FFF) >> 1));
         centerOffsetY = -(layout->y + ((layout->height & 0x7FFF) >> 1));
+    } else {
+        centerOffsetX = -(layout->x + layout->placement->width / 2);
+        centerOffsetY = -(layout->y + layout->placement->height / 2);
     }
     if (FUN_0035fa18(&ui->objC))
         layout = asdTMTexTableEntryAt(13, 0x71);

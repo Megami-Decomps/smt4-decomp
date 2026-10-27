@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail copies its constant direction tables onto the stack with integer ldm/stm in six pieces (mine uses vldmia pairs), reaches the work pointer and step counter through one base symbol (+4/+0x1c), and schedules the float window tests differently; the sequence logic is the same. */
+/* NON_MATCHING: the work pointer (+4) and step counter (+0x1c) are now fields of g_gameDataBlocks, one base symbol like retail; remaining: retail copies its constant direction tables (rodata 0x404204: five button ids, then the 6/12/12 float tables) onto the stack with integer ldm/stm in pieces (mine uses vldmia pairs) and schedules the float window tests differently. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 
@@ -11,8 +11,14 @@ struct CheatFlagsWork {
 }
 
 extern "C" {
-extern CheatFlagsWork *DAT_0043e2ac;
-extern s32 DAT_0043e2c4;                 /* how many steps of the input sequence have been entered */
+/* The pointer table of the game's data blocks and the cheat-sequence progress that follows it. */
+struct GameDataBlocksCheat {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ CheatFlagsWork *work;
+    /* 0x08 */ u8 unk08[0x14];
+    /* 0x1c */ s32 sequenceStep;         /* how many steps of the input sequence have been entered */
+};
+extern GameDataBlocksCheat g_gameDataBlocks;
 s32 padIsButtonPressed(u32 button);
 s32 padIsButtonRepeat(u32 button);
 void FUN_0027f958(f32 *angle, u8 buffer[16], s32 stick);
@@ -38,16 +44,16 @@ u8 FUN_0031e384(void)
                               270.0f, 225.0f, 180.0f, 135.0f, 90.0f, 45.0f };
     const f32 reverse[12] = { 45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f,
                               45.0f, 90.0f, 135.0f, 180.0f, 225.0f, 270.0f };
-    u8 flags = DAT_0043e2ac->flags;
+    u8 flags = g_gameDataBlocks.work->flags;
     if (FUN_002c15fc(7) == 0) {
-        DAT_0043e2c4 = 0;
+        g_gameDataBlocks.sequenceStep = 0;
         return flags;
     }
     if (FUN_002c15fc(8) == 0) {
-        DAT_0043e2c4 = 0;
+        g_gameDataBlocks.sequenceStep = 0;
         return flags;
     }
-    if (DAT_0043e2c4 < 12) {
+    if (g_gameDataBlocks.sequenceStep < 12) {
         f32 angle;
         u8 buffer[16];
         FUN_0027f958(&angle, buffer, 0);
@@ -57,13 +63,13 @@ u8 FUN_0031e384(void)
             angle = angle + 360.0f;
         }
         const f32 *sequence = (flags & 2) != 0 ? reverse : forward;
-        f32 expected = sequence[DAT_0043e2c4];
-        f32 held = sequence[DAT_0043e2c4 - 1];
+        f32 expected = sequence[g_gameDataBlocks.sequenceStep];
+        f32 held = sequence[g_gameDataBlocks.sequenceStep - 1];
         f32 found = -1.0f;
         for (s32 i = 0; i < 6; i++) {
             if (directions[i] - 10.0f <= angle && angle <= directions[i] + 10.0f) {
                 found = directions[i];
-                if (DAT_0043e2c4 >= 1 && found == held) {
+                if (g_gameDataBlocks.sequenceStep >= 1 && found == held) {
                     found = -1.0f;
                 }
                 break;
@@ -73,48 +79,48 @@ u8 FUN_0031e384(void)
             return flags;
         }
         if (expected != found) {
-            DAT_0043e2c4 = 0;
+            g_gameDataBlocks.sequenceStep = 0;
             return flags;
         }
-        DAT_0043e2c4 = DAT_0043e2c4 + 1;
+        g_gameDataBlocks.sequenceStep = g_gameDataBlocks.sequenceStep + 1;
         return flags;
     }
-    if (DAT_0043e2c4 == 12) {
+    if (g_gameDataBlocks.sequenceStep == 12) {
         if (padIsButtonPressed(10) == 0) {
             if (sequenceBroken()) {
-                DAT_0043e2c4 = 0;
+                g_gameDataBlocks.sequenceStep = 0;
                 return flags;
             }
         } else {
-            DAT_0043e2c4 = DAT_0043e2c4 + 1;
+            g_gameDataBlocks.sequenceStep = g_gameDataBlocks.sequenceStep + 1;
         }
-    } else if (DAT_0043e2c4 == 13) {
+    } else if (g_gameDataBlocks.sequenceStep == 13) {
         if (padIsButtonPressed(5) == 0) {
             if (sequenceBroken()) {
-                DAT_0043e2c4 = 0;
+                g_gameDataBlocks.sequenceStep = 0;
                 return flags;
             }
         } else {
-            DAT_0043e2c4 = DAT_0043e2c4 + 1;
+            g_gameDataBlocks.sequenceStep = g_gameDataBlocks.sequenceStep + 1;
         }
-    } else if (DAT_0043e2c4 == 14) {
+    } else if (g_gameDataBlocks.sequenceStep == 14) {
         if (padIsButtonPressed(6) != 0) {
-            DAT_0043e2c4 = DAT_0043e2c4 + 1;
+            g_gameDataBlocks.sequenceStep = g_gameDataBlocks.sequenceStep + 1;
         } else if (sequenceBroken()) {
-            DAT_0043e2c4 = 0;
+            g_gameDataBlocks.sequenceStep = 0;
             return flags;
         }
     }
-    if (DAT_0043e2c4 == 15) {
-        u8 current = DAT_0043e2ac->flags;
+    if (g_gameDataBlocks.sequenceStep == 15) {
+        u8 current = g_gameDataBlocks.work->flags;
         if ((flags & 2) == 0) {
             current = current | 2;
         } else {
             current = current & 0xfd;
         }
-        DAT_0043e2ac->flags = current;
+        g_gameDataBlocks.work->flags = current;
         FUN_002bf810(0x1000170);
-        DAT_0043e2c4 = 0;
+        g_gameDataBlocks.sequenceStep = 0;
     }
     return flags;
 }

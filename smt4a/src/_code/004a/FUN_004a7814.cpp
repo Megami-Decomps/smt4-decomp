@@ -1,5 +1,5 @@
 #include "ui/UiControl.h"
-/* NON_MATCHING: alternate/normal number branches are laid out differently; coordinate load order differs. */
+/* NON_MATCHING: prologue scheduling only: retail moves panel/value (r0/r1) after the vpush and stack adjust. */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -18,7 +18,15 @@ void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u3
     const PanelTextLayoutEntryPrefixA *base;
     const PanelTextLayoutEntryPrefixA *offset;
     char text[32];
-    if (alternate) {
+    if (!alternate) {
+        if (value > 99) {
+            base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x40e));
+            offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x5c5));
+        } else {
+            base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x40e));
+            offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x489));
+        }
+    } else {
         if (value > 99) {
             base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x42f));
             offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x5c8));
@@ -26,19 +34,9 @@ void FUN_004a7814(NumericPanelView *panel, s32 value, s32 row, s32 alternate, u3
             base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x42f));
             offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x497));
         }
-    } else if (value > 99) {
-        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x40e));
-        offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x5c5));
-    } else {
-        base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, row + 0x40e));
-        offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(panel->layout, 0x489));
     }
-    s16 offsetX = offset->x;
-    s16 baseX = base->x;
-    s16 baseY = base->y;
-    s16 offsetY = offset->y;
-    s32 x = baseX + offsetX;
-    s32 y = baseY + offsetY;
+    s32 x = base->x + offset->x;
+    s32 y = base->y + offset->y;
     textFormatBuffer(text, "%2d", value);
     drawTextAtRelativePosition(panel->layout, 0, x, y,
                                0, 7, color, opacity, text);

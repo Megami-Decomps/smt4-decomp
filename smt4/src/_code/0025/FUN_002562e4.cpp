@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reloads g_mapIf (second literal-pool word) after the first byte store and keeps the 0.0f in s0; the build keeps one base register and schedules the duration scaling before the stores. */
+/* NON_MATCHING: the fade block is addressed through a local pointer for the active byte (the byte store makes armcc reload g_mapIf afterwards, like retail's second literal load); remaining: retail keeps the duration*10 computation after the reload and loads 0.0f first, ours schedules the multiply earlier. */
 #include "common.h"
 
 /* The fade block of the map interface at +0xCCC0. */
@@ -25,11 +25,12 @@ extern MapIfFadeOwner *g_mapIf; /* 0x447a78 */
 /* Starts (or, with zero duration, stops) the map interface fade: `duration` in tenths of a second is kept in frames. */
 void FUN_002562e4(s32 id, s32 duration)
 {
+    MapIfFade *fade = &g_mapIf->fade;
     if (duration == 0) {
-        g_mapIf->fade.active = 0;
+        fade->active = 0;
         return;
     }
-    g_mapIf->fade.active = 1;
+    fade->active = 1;
     if (id == 0) {
         id = -1;
     }

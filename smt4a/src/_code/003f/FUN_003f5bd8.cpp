@@ -1,4 +1,4 @@
-/* NON_MATCHING: native temporary zero-initialization, post-cap discard loop and pair-unrolled original-index lookup differ. */
+/* NON_MATCHING: retail unrolls the original-index lookup by two (peeled odd iteration), hoists -1 into fp and loads the 52-byte stride with count first; control flow, zeroing call and 100-entry cap match. */
 #include "common.h"
 #include <stddef.h>
 #include <stdlib.h>
@@ -27,17 +27,11 @@ typedef char RankedUnlockOffsets[sizeof(RankedUnlockEntry) == 0x34 &&
     offsetof(RankedUnlockEntry, requiredFlag) == 0x32 &&
     offsetof(RankedUnlockListWork, visibleIndices) == 0x5e6 &&
     offsetof(RankedUnlockListWork, visibleCount) == 0x6b0 ? 1 : -1];
-static inline s32 findRankedUnlockEntry(const RankedUnlockEntry *entries, s32 count, u16 id)
-{
-    for (s32 index = 0; index < count; ++index)
-        if (entries[index].id == id)
-            return index;
-    return -1;
-}
 
 extern "C" {
 void *asdOperatorNewD(u32);
 void asdOperatorDeleteC(void *);
+void rt_memclr(void *, u32);
 void rt_memcpy(void *, const void *, u32);
 s32 entryCompareByRank(const void *, const void *);
 s32 gameFlagIsSet(u32);
@@ -48,9 +42,12 @@ void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
     work->hasNew = 0;
     u32 bytes = count * sizeof(RankedUnlockEntry);
     RankedUnlockEntry *sorted = static_cast<RankedUnlockEntry *>(asdOperatorNewD(bytes));
+    rt_memclr(sorted, bytes);
     rt_memcpy(sorted, work->entries, bytes);
     qsort(sorted, count, sizeof(RankedUnlockEntry), entryCompareByRank);
-    for (s32 index = 0; index < count && index < 100; ++index) {
+    for (s32 index = 0; index < count; ++index) {
+        if (index >= 100)
+            continue;
         const RankedUnlockEntry *entry = &sorted[index];
         const u16 id = entry->id;
         if (!id)
@@ -62,8 +59,14 @@ void FUN_003f5bd8(RankedUnlockListWork *work, s32 count)
         }
         if (flagsBGetBit1(id))
             work->hasNew = 1;
-        work->visibleIndices[work->visibleCount] =
-            findRankedUnlockEntry(work->entries, work->entryCount, entry->id);
+        s32 found = -1;
+        for (s32 j = 0; j < work->entryCount; ++j) {
+            if (work->entries[j].id == entry->id) {
+                found = j;
+                break;
+            }
+        }
+        work->visibleIndices[work->visibleCount] = found;
         ++work->visibleCount;
     }
     asdOperatorDeleteC(sorted);

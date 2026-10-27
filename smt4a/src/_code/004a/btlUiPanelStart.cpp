@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail recomputes the panel address (add r0,r4,#9216; add r0,r0,#188) for the second call instead of keeping it in a register */
 #include "common.h"
 #include "ui/UiControl_VariantA.h"
 
@@ -9,7 +8,8 @@ typedef struct BtlUiPanel004ab854 {
 } BtlUiPanel004ab854;
 
 typedef struct BtlUiMenu004ab854 {
-    /* 0x0000 */ u8 unk0000[0x24b4];
+    /* 0x0000 */ u8 unk0000[0x23f8];
+    /* 0x23f8 */ u8 subobject[0xbc];
     /* 0x24b4 */ BtlUiPanel004ab854 panel;
 } BtlUiMenu004ab854;
 
@@ -24,6 +24,7 @@ typedef struct BtlUi004ab854 {
 } BtlUi004ab854;
 
 s32 FUN_00280030(BtlUiPanel004ab854 *panel);
+BtlUiPanel004ab854 *FUN_00502754(u8 *subobject); /* returns the subobject's panel (+0xBC) */
 void uiWorkEndState1(BtlUiMenu004ab854 *menu);
 void owner2DCInitSub(BtlUiPanel004ab854 *panel);
 
@@ -34,7 +35,7 @@ void btlUiPanelStart(void)
 {
     BtlUiWorkspace004ab854 *workspace = g_btlUi.workspace;
 
-    if (menu32ModeIsNot5(&workspace->menu) != 0 && FUN_00280030(&workspace->menu.panel) != 0) {
+    if (menu32ModeIsNot5(&workspace->menu) != 0 && FUN_00280030(FUN_00502754(workspace->menu.subobject)) != 0) {
         uiWorkEndState1(&workspace->menu);
         owner2DCInitSub(&workspace->menu.panel);
     }

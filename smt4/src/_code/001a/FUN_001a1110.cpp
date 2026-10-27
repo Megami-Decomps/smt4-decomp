@@ -133,8 +133,14 @@ struct DemonRow {
 }
 
 extern "C" {
-extern GameWorld *DAT_0043e2ac;
-extern DemonRange *DAT_0043e2b4;
+/* The pointer table of the game's data blocks (the unused slots are other blocks). */
+struct GameDataBlocks {
+    /* 0x00 */ void *unk00;
+    /* 0x04 */ GameWorld *world;
+    /* 0x08 */ void *unk08;
+    /* 0x0c */ DemonRange *demonRange;
+};
+extern GameDataBlocks g_gameDataBlocks;
 void rt_memclr(void *data, u32 size);
 const u16 *devilGetRecord(u32 id);   /* a demon record, read as halfwords */
 void FUN_0033f81c(void);
@@ -147,11 +153,11 @@ void FUN_002cf3b4(void);
    the per-demon table from the demon records and zeroes the runtime state, then resets the dependent systems. */
 void FUN_001a1110(void)
 {
-    GameWorld *world = DAT_0043e2ac;
+    GameWorld *world = g_gameDataBlocks.world;
     memClear(reinterpret_cast<u8 *>(world) + 0x88, 0x24d28);
-    DAT_0043e2b4->unk00[0] = 0;
-    DAT_0043e2b4->unk00[1] = 0;
-    DAT_0043e2b4->unk00[2] = 0;
+    g_gameDataBlocks.demonRange->unk00[0] = 0;
+    g_gameDataBlocks.demonRange->unk00[1] = 0;
+    g_gameDataBlocks.demonRange->unk00[2] = 0;
     for (s32 i = 0; i < 0x18; i++) {
         reinterpret_cast<u8 *>(world)[0x8c + i + 0x90f0] = 0xff;
         reinterpret_cast<s8 *>(world)[0x8c + i * 0x604 + 0xda] = (s8)i;
@@ -162,17 +168,17 @@ void FUN_001a1110(void)
     world->unk0986c = 0;
     world->unk09870 = 0;
     rt_memclr(reinterpret_cast<u8 *>(world) + 0x981e, 0x4c);
-    DAT_0043e2b4->first = 0;
-    DAT_0043e2b4->last = 0;
+    g_gameDataBlocks.demonRange->first = 0;
+    g_gameDataBlocks.demonRange->last = 0;
     DemonRow *row = reinterpret_cast<DemonRow *>(reinterpret_cast<u8 *>(world) + 0xc22c);
     for (s32 i = 0; i < 0x500; i++) {
         const u16 *record = devilGetRecord((u16)(i + 1));
         if (record != NULL) {
             if ((record[3] & 1) != 0) {
-                if (DAT_0043e2b4->first == 0) {
-                    DAT_0043e2b4->first = record[0];
+                if (g_gameDataBlocks.demonRange->first == 0) {
+                    g_gameDataBlocks.demonRange->first = record[0];
                 }
-                DAT_0043e2b4->last = record[0];
+                g_gameDataBlocks.demonRange->last = record[0];
             }
             row->v[0] = reinterpret_cast<const u8 *>(record)[3];
             for (s32 k = 0; k < 5; k++) {

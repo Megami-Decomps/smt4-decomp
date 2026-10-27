@@ -64,7 +64,7 @@ void Obj4223f8::confirmSelection()
     }
     buttonHelpSetPreset(flag5A4 == 0 ? 0x2E : 0x46);
     if (flag5A4 != 0) {
-        u8 scratch[4];
+        u8 scratch[8];
         char text[64];
         const char *name = dataLookupDisplayName(scratch, value);
         if (name == NULL) {

@@ -58,9 +58,8 @@ public:
     /* 0x594 */ u8 unk594[0x10];
     /* 0x5A4 */ u8 customMode;
     /* 0x5A5 */ u8 unk5A5[3];
-    /* 0x5A8 */ u8 unk5A8[4];
-    /* 0x5AC */ BibleAnalyzeEntry entries[0x500];
-    /* 0xA5AC */ u8 unkA5AC[4];
+    /* 0x5A8 */ BibleAnalyzeEntry entries[0x500];
+    /* 0xA5A8 */ u8 unkA5A8[8];
     /* 0xA5B0 */ u16 selectedSlot;
     /* 0xA5B2 */ u8 unkA5B2[2];
     /* 0xA5B4 */ s32 selectedDevil;
@@ -69,12 +68,12 @@ public:
     /* 0xA65A */ u8 unkA65A[0x60];
     /* 0xA6BA */ s16 shownCount;
     /* 0xA6BC */ u16 cursorIndex;
-    /* 0xA6BE */ u8 unkA6BE;
+    /* 0xA6BE */ s8 unkA6BE;
 };
 typedef char BibleAnalyzeScreenLayoutCheck[
     offsetof(BibleAnalyzeScreen, flag94) == 0x94 &&
     offsetof(BibleAnalyzeScreen, customMode) == 0x5A4 &&
-    offsetof(BibleAnalyzeScreen, unk5A8) == 0x5A8 &&
+    offsetof(BibleAnalyzeScreen, entries) == 0x5A8 &&
     offsetof(BibleAnalyzeScreen, rectangle) == 0xC8 &&
     offsetof(BibleAnalyzeScreen, controller) == 0x590 &&
     offsetof(BibleAnalyzeScreen, selectedSlot) == 0xA5B0 &&
@@ -111,9 +110,9 @@ void FUN_003acdec(void);
 void FUN_003a8fe0(BibleAnalyzeScreen *screen)
 {
     screen->flag94 = 0;
-    screen->selectedSlot = 0xFFFF;
-    screen->unkA6BE = 0xFF;
-    entryTableClear(screen->unk5A8);
+    screen->selectedSlot = -1;
+    screen->unkA6BE = -1;
+    entryTableClear(screen->entries);
     screen->prepare();
     menuSetModeAndResetTransitions(6);
     if (screen->customMode == BIBLE_CUSTOM_ANALYSIS)
@@ -134,7 +133,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
         Obj42238c *window = new (allocationOwner) Obj42238c;
         screen->controller = window;
         window->rectangle = screen->rectangle;
-        limit = screen->devilCount > BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
+        limit = screen->devilCount >= BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
         FUN_00233670(screen->listView, 0x1C, 0x1030, limit);
         screen->listReady = 1;
         screen->shownCount = 0;
@@ -152,7 +151,7 @@ void FUN_003a8fe0(BibleAnalyzeScreen *screen)
         window->initialize(screen->rangeBase);
         window->state |= 0x1000;
         window->rectangle = screen->rectangle;
-        limit = screen->devilCount > BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
+        limit = screen->devilCount >= BIBLE_LIST_LIMIT ? BIBLE_LIST_LIMIT : screen->devilCount;
         FUN_00233670(screen->listView, 0x1D, 0x40E, limit);
         screen->listReady = 1;
     }

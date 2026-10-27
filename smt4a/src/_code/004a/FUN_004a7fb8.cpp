@@ -1,4 +1,4 @@
-/* NON_MATCHING: saved integer registers and final integer-to-float coordinate scheduling differ. */
+/* NON_MATCHING: only the Y coordinate temp differs (retail ip, built r1). */
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -29,7 +29,10 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     if (alternateStyle != 0) {
         base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x42F));
         offsetEntry = 0x499;
-        color = highlighted == 0 ? 0x9FE7FFFFu : 0xF5FF9FFFu;
+        if (highlighted == 0)
+            color = 0x9FE7FFFFu;
+        else
+            color = 0xF5FF9FFFu;
         style = 3;
     } else {
         base = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(reinterpret_cast<TextLayoutContextA *>(panel->layout), entryIndex + 0x40E));
@@ -47,10 +50,9 @@ void FUN_004a7fb8(HighlightedPanelTextView *panel, u32 textId, s32 entryIndex,
     }
     const PanelTextLayoutEntryPrefixA *offset = reinterpret_cast<const PanelTextLayoutEntryPrefixA *>(layoutFindTableEntry(
         reinterpret_cast<TextLayoutContextA *>(panel->layout), offsetEntry));
+    s32 y = static_cast<s32>(offset->y) + baseY;
+    s32 x = static_cast<s32>(offset->x) + baseX;
     drawTextAtSnappedRectangle(reinterpret_cast<TextLayoutContextA *>(panel->layout),
-        style, color, textValue,
-        static_cast<f32>(static_cast<s32>(offset->x) + baseX),
-        static_cast<f32>(static_cast<s32>(offset->y) + baseY),
-        opacity, 0.0f, scale);
+        style, color, textValue, static_cast<f32>(x), static_cast<f32>(y), opacity, 0.0f, scale);
 }
 }

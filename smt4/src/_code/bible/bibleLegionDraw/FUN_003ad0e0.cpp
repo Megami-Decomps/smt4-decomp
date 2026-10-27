@@ -73,8 +73,8 @@ void FUN_003ad0e0()
             state->timer284 = 0;
             state->duration288 = randNextInRange(200) + 100;
             state->phase28C = 0;
-            state->progress278 = 0.0f;
             state->speed = -3.0f;
+            state->progress278 = 0.0f;
             state->timer286 = 0;
             state->duration28A = randNextInRange(200) + 100;
             state->phase28D = 0;

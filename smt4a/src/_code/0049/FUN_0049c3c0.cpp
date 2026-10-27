@@ -1,5 +1,6 @@
 /* NON_MATCHING: readable rebuild of the Apocalypse selection scene's constructor (twin of smt4 FUN_003a5e30; the window class with the vtable at 0x55C880 is declared by its destructor only); the member arrays are default-constructed by loops here where retail calls the vector constructor helper with compiler-generated constructors. */
 #include "classes/SelectionState.h"
+#include "classes/Obj536044.h"
 #include "classes/Obj422594.h"
 #include "classes/Obj55ca08.h"
 #include "event/bustupEvent/BustupTex.h"
@@ -60,7 +61,6 @@ struct SelectionScene {
 };
 
 extern "C" {
-void FUN_0049a8b8(SelectionScene *scene);
 void FUN_0049669c(SelectionScene *scene);
 void FUN_0049a9a8(void);
 void FUN_0031e198(void);
@@ -70,7 +70,7 @@ void campButtonHelpLoad(void);
 void campButtonHelpAcquire(void);
 void asdTMTexTableLoadSprites(s32 table);
 void FUN_00148bb8(s32 a, s32 b);
-s16 *FUN_00145f04(u8 kind, u32 sub);
+s16 *FUN_00145f04(u8 kind, u32 sub, s32 column);
 void FUN_0040a640(void);
 void statsSetSecondBankFlag(s32 index, s32 value);
 void statsSetFirstBankFlag(s32 index, s32 value);
@@ -93,7 +93,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     for (s32 i = 0; i < 9; i++)
         new (&scene->entries[i].flags) SelectionFlags();
     new (&scene->flags) SelectionFlags();
-    FUN_0049a8b8(scene);
+    reinterpret_cast<Obj536044 *>(scene)->resetHandlers();
     scene->mode = mode;
     scene->unk00000 = 0;
     scene->kind = (s8)kind;
@@ -121,7 +121,7 @@ SelectionScene *FUN_0049c3c0(SelectionScene *scene, u32 mode, s32 kind, s32 subK
     scene->tailA = 0;
     scene->tailB = 0;
     FUN_0031e198();
-    s16 *progress = FUN_00145f04((u8)scene->kind, scene->subKind);
+    s16 *progress = FUN_00145f04((u8)scene->kind, scene->subKind, scene->kind == 0 ? 6 : 1);
     s32 sub = scene->subKind;
     FUN_00148bb8(sub, (u8)scene->kind);
     if (sub == 0)

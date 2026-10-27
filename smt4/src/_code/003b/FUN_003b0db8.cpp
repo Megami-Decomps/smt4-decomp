@@ -57,7 +57,7 @@ u32 FUN_003b0db8(ModelSequenceHeaderWork *work, const u8 *source, u32 *cursor, u
             clearModelSequenceHeader(work);
             return 0x46;
         }
-        work->position += work->increment * (u64)(frame - previousFrame);
+        work->position += (u64)(frame - previousFrame) * work->increment;
         work->frame = frame;
         if (!FUN_003b0964(work)) {
             return 0x44;

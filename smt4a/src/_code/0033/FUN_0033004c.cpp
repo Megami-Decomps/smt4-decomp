@@ -1,4 +1,4 @@
-/* NON_MATCHING: close: retail materializes the "not a timeout" test as a bool (movne/moveq/teq) and hoists the zero timeout into the predicated moves before the svc; the build folds the bool into a direct branch. Same as FUN_00137f94. */
+/* NON_MATCHING: control flow and the materialised timeout bool match; retail keeps the drained flag in r5 and the wait result in r6 (build swaps them), predicates the zero timeout (movne r2/r3) above the thread test and runs the drain loop unrotated with produced loaded once (build: ldrd and a rotated loop). */
 #include "nn/Result.h"
 #include "sys/ResultReport.h"
 
@@ -37,26 +37,27 @@ u32 FUN_0033004c(void)
     u32 drained = 0;
     CecProcess *process = g_cecProcess;
     if (process != NULL) {
+        bool timedOut = false;
         if (process->thread != 0) {
             s32 result = svcWaitSynchronization1(process->thread, 0);
             bool failed = nnResultIsFailure(result);
             if (failed) {
                 FUN_002e3140(result, failed);
             }
-            if (notTimeout(result) != 1) {
-                if (!nn_os_CriticalSection_TryEnter(process->lock)) {
-                    return 0;
-                }
+            timedOut = !notTimeout(result);
+        }
+        if (timedOut) {
+            if (nn_os_CriticalSection_TryEnter(process->lock)) {
                 if (process->produced != process->consumed) {
                     process->consumed++;
                 }
                 nn_os_CriticalSection_Leave(process->lock);
-                return 0;
             }
-        }
-        drained = 1;
-        while (process->produced != process->consumed) {
-            process->consumed++;
+        } else {
+            drained = 1;
+            while (process->produced != process->consumed) {
+                process->consumed++;
+            }
         }
     }
     return drained;

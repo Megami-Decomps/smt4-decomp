@@ -104,8 +104,8 @@ void FUN_003b92b4(SceneWork *work)
     } else if ((flags & 0x40000) != 0) {
         gameCopyPersistentSave();
         NamedSceneSequence payload;
-        payload.id = g_gameState.saveId;
         payload.slot = -1;
+        payload.id = g_gameState.saveId;
         libc_strcpy(payload.name, g_gameState.saveName);
         asdSequenceRequest(4, &payload, sizeof(payload));
     } else if ((flags & 0x800000) != 0) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: choice initialization block placement, state/zero registers and selected-entry address/narrowing differ. */
+/* NON_MATCHING: scheduling only: retail loads the constants 3 and 1 into r1/r2 in the choice setup (built r2/r1). */
 #include "shard/Shard004A.h"
 #include "classes/Obj55c89c.h"
 #include "shop/ShopItemDescription.h"
@@ -35,7 +35,11 @@ void Obj55c89c::FUN_004a39bc()
     if (scrRunOpcodesStub(screen->job) != 2)
         return;
     s32 choices[4];
-    if (FUN_00370794() != 3) {
+    if (FUN_00370794() == 3) {
+        choices[0] = 1;
+        choices[1] = 3;
+        choices[2] = 2;
+    } else {
         if (screen->unkA870 == 7) {
             choices[0] = 3;
             choices[1] = 2;
@@ -44,17 +48,15 @@ void Obj55c89c::FUN_004a39bc()
             choices[0] = 1;
             choices[1] = 2;
         }
-    } else {
-        choices[0] = 1;
-        choices[1] = 3;
-        choices[2] = 2;
     }
     switch (choices[messageGetChoiceResult()]) {
     case 1: {
         BibleSummonConfirmationView *details = (BibleSummonConfirmationView *)screen;
+        BibleAnalyzeListEntry *entries = details->entries;
         s32 index = flaggedValueHolderGetTotal(&screen->selection.holder);
-        u32 cost = FUN_004a8750(details->entries[index].id, details->mode, 0, details->rank >= 100, 0);
-        panelSetMode3(-cost, 0);
+        u16 raw = entries[index].id;
+        s16 id = raw;
+        panelSetMode3(-FUN_004a8750(id, details->mode, 0, details->rank >= 100, 0), 0);
         FUN_003343f0(1);
         screen->state = 4;
         screen->unk18 = 0;

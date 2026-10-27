@@ -1,4 +1,4 @@
-/* NON_MATCHING: BibleItemMenu::confirm matches in logic and calls (virtual isScreenReady, hidden-argument FUN_004a8750); armcc lays out the shared sprite/selection tail after the else branch where retail places it right after the owned branch and jumps back, and widens the first id differently (uxth vs mov). */
+/* NON_MATCHING: prologue scheduling only: retail stores the state/substate pair before loading `owned`; the entry's script mode is set through scriptProcessSetMode (inlined leaf). */
 #include "bible/bibleMain.h"
 #include "classes/Obj55c89c.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -10,6 +10,8 @@ struct BibleItemEntry {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ u16 itemId;
     /* 0x06 */ u8 unk06[0x1A];
+
+    u16 getItemId() const { return itemId; }
 };
 
 /* The compendium's item menu (derived from the shared view interface); only the fields the confirm
@@ -46,6 +48,7 @@ void sysPlaySe(s32 id);
 void uiSpriteBankApplyPreset(SpritePresetBank *bank, u32 preset);
 u32 slotRecordFindById(u16 id);
 u8 *FUN_00275bc8(u32 a, u32 b);
+void scriptProcessSetMode(u8 *script, s32 mode);
 void FUN_0032d0c8(s32 a, s32 b, u16 id, const void *record);
 void FUN_0035ad50(u16 id, u8 *out);
 void panelSetTarget(s32 target, s32 arg);
@@ -64,17 +67,13 @@ void Obj55c89c::confirm()
         return;
     }
     menu->entry = FUN_00275bc8(menu->resourceA, menu->resourceB);
-    *(u32 *)(menu->entry + 0x108) = 2;
+    scriptProcessSetMode(menu->entry, 2);
     menu->state = 1;
     menu->substate = 0;
     menu->confirmed = 1;
     BibleItemEntry *list = menu->entries;
-    if (menu->owned != 0) {
-        u16 id = list[flaggedValueHolderGetTotal(menu->holder())].itemId;
-        sysPlaySe(0x4E);
-        FUN_0032d0c8(0, 1, id, (const void *)slotRecordFindById(id));
-    } else {
-        s16 id = (s16)list[flaggedValueHolderGetTotal(menu->holder())].itemId;
+    if (menu->owned == 0) {
+        s16 id = list[flaggedValueHolderGetTotal(menu->holder())].getItemId();
         s32 target = FUN_004a8750((u16)id, menu->confirmed, 0, menu->level >= 100, 0);
         FUN_0037c8e4(1, 0);
         if (FUN_002a4b28((u16)id) != 0) {
@@ -90,6 +89,10 @@ void Obj55c89c::confirm()
         } else {
             FUN_0032d0c8(0, 2, (u16)id, detail);
         }
+    } else {
+        s16 id = (s16)list[flaggedValueHolderGetTotal(menu->holder())].itemId;
+        sysPlaySe(0x4E);
+        FUN_0032d0c8(0, 1, id, (const void *)slotRecordFindById(id));
     }
     uiSpriteBankApplyPreset(menu->sprites(), 8);
     uiSpriteBankApplyPreset(menu->sprites(), 9);

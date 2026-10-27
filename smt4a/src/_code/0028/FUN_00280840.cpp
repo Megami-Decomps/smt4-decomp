@@ -8,7 +8,7 @@ void FUN_002a1850(Vec3f *out, s32 mode, void *context, const Vec3f *point);
 void FUN_0032c810(u32 firstColor, u32 secondColor, DebugGuidePoint start,
                   DebugGuidePoint end, DebugGuidePoint scale);
 
-void FUN_00280840(s32 count, u32 firstColor, u32 secondColor, f32 x, f32 y, f32 z, f32 spacing)
+void FUN_00280840(s32 count, f32 x, f32 y, f32 z, f32 spacing, u32 firstColor, u32 secondColor)
 {
     s32 first = -(count >> 1);
     f32 offsetX = (f32)first * spacing;

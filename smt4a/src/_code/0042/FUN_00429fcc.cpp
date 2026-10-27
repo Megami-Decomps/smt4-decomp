@@ -1,4 +1,3 @@
-/* NON_MATCHING: description bitfield extraction now matches; retail computes the module mask into r1 before copying the status to r4, the build reuses r0. */
 #include "common.h"
 #include "nn/Result.h"
 
@@ -27,7 +26,7 @@ static __inline s32 resultDescription(s32 status)
 
 extern "C" {
 void FUN_0016cdc0(SaveDataArchivePath *path, u8 mediaType, u64 titleId);
-s32 FUN_0042b3b8(SaveDataArchive **archive, const SaveDataArchivePath *path, u32 flags);
+nn::Result FUN_0042b3b8(SaveDataArchive **archive, const SaveDataArchivePath *path, u32 flags);
 s32 FUN_001aeefc(const char *name, SaveDataArchive *archive, u32 first, u32 second);
 
 s32 FUN_00429fcc(const char *name, u64 titleId)
@@ -35,8 +34,8 @@ s32 FUN_00429fcc(const char *name, u64 titleId)
     SaveDataArchivePath path;
     FUN_0016cdc0(&path, 1, titleId);
     SaveDataArchive *archive;
-    s32 status = FUN_0042b3b8(&archive, &path, 0);
-    u32 module = nnResultModule(status);
+    nn::Result status = FUN_0042b3b8(&archive, &path, 0);
+    nn::Result module = nnResultModule(status);
     if (module == 17 && resultDescription(status) >= 220 && resultDescription(status) <= 229) {
         status = (s32)0xc8804482;
     }

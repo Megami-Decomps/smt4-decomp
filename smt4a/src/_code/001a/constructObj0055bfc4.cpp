@@ -3,7 +3,7 @@
 extern "C" {
 
 extern const u8 DAT_0055bfc4[];  /* vtable */
-VObject *FUN_001b18cc(void);
+VObject *_ZN9Obj55bea0C1Ev(void);
 u8 *FUN_001b23cc(u8 *member);
 
 typedef struct Object0055bfc4 {
@@ -16,13 +16,13 @@ typedef struct Object0055bfc4 {
     /* 0x128 */ u8 member128[1];
 } Object0055bfc4;
 
-/* Constructor: builds the base object, sets the vtable and owner, clears both flags and constructs the embedded member; returns the address FUN_001b23cc yields minus 0x128. */
+/* Constructor: builds the base object (Obj55bea0), sets the vtable and owner, clears both flags and constructs the embedded member; returns the address FUN_001b23cc yields minus 0x128. */
 u8 *constructObj0055bfc4(u32 unused, u32 owner)
 {
     Object0055bfc4 *object;
     u8 *member;
 
-    object = (Object0055bfc4 *)FUN_001b18cc();
+    object = (Object0055bfc4 *)_ZN9Obj55bea0C1Ev();
     object->vtbl = DAT_0055bfc4;
     object->owner = owner;
     object->flagA = 0;

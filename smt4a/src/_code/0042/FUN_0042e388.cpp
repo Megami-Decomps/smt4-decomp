@@ -5,7 +5,7 @@
 
 extern "C" {
 extern CriticalSection g_asdCecMessageBoxCriticalSection;
-s32 FUN_00501928(AsdCecMessageBox *box, s32 kind, const u8 *messageId);
+nn::Result FUN_00501928(AsdCecMessageBox *box, s32 kind, const u8 *messageId);
 CecMessageKeyHeader *nn_cec_CTR_MessageBox_GetMessHeader(AsdCecMessageBox *box, s32 kind, u32 index);
 u32 nn_cec_CTR_MessageBox_WriteBoxInfo(MessageBox *box, s32 kind, const void *header, const void *data);
 u32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(MessageBox *box);
@@ -13,7 +13,7 @@ u32 nn_cec_CTR_MessageBox_ReadOutBoxIndex(MessageBox *box);
 
 static __inline u32 cecMessageBoxGetMessageBytes(MessageBox *box, s32 kind, const CecMessageKey *key)
 {
-    s32 index = FUN_00501928(reinterpret_cast<AsdCecMessageBox *>(box), kind, key->data);
+    nn::Result index = FUN_00501928(reinterpret_cast<AsdCecMessageBox *>(box), kind, key->data);
     if (index != -1) {
         const CecMessageKeyHeader *header = nn_cec_CTR_MessageBox_GetMessHeader(
             reinterpret_cast<AsdCecMessageBox *>(box), kind, index);
@@ -35,7 +35,7 @@ extern "C" u32 FUN_0042e388(MessageBox *box, s32 kind, const CecMessageKey *key,
     }
     u32 result;
     if (kind != 1) {
-        u32 messageBytes = cecMessageBoxGetMessageBytes(box, kind, key);
+        nn::Result messageBytes = cecMessageBoxGetMessageBytes(box, kind, key);
         result = box->vtbl->remove(box, box->id, 6, kind, key, sizeof(*key));
         if (nnResultIsSuccess(result)) {
             if (commit != 0) {
@@ -59,7 +59,7 @@ extern "C" u32 FUN_0042e388(MessageBox *box, s32 kind, const CecMessageKey *key,
         }
         nn_cec_CTR_MessageBox_WriteBoxInfo(box, 0, &work->inbox.header, work->inbox.ids);
     } else {
-        u32 messageBytes = cecMessageBoxGetMessageBytes(box, 1, key);
+        nn::Result messageBytes = cecMessageBoxGetMessageBytes(box, 1, key);
         result = box->vtbl->remove(box, box->id, 7, 1, key, sizeof(*key));
         if (nnResultIsSuccess(result)) {
             if (commit != 0) {

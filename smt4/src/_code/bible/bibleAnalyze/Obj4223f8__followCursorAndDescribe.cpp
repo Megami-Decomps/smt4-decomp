@@ -1,4 +1,4 @@
-/* NON_MATCHING: confirmation signed-byte load, fallback selection and description tail-call differ. */
+/* NON_MATCHING: retail tail-calls FUN_0029da34 with `mov r3,#0` live across the removed shopListItemGetId (needs the getter's clobber set) and moves the display-name fallback into r2 with movs/moveq. */
 #include "common.h"
 #include "classes/Obj4223f8.h"
 #include <stddef.h>
@@ -38,6 +38,8 @@ typedef char BibleAnalyzeCursorOffset[offsetof(BibleAnalyzeWorkView, cursor) == 
 typedef char BibleAnalyzeNameOffset[offsetof(BibleAnalyzeWorkView, nameId) == 0xa5b4 ? 1 : -1];
 
 extern "C" {
+u16 shopListItemGetId(const BibleAnalyzeEntryView *entry);
+s8 uiSpriteGetCompletionState(const BibleAnalyzeCursorView *record);
 void FUN_002b8ee0(BibleAnalyzeCursorView *, s32);
 s32 vec2GetYInt(BibleAnalyzeCursorView *);
 s32 vec2GetXInt(BibleAnalyzeCursorView *);
@@ -64,7 +66,7 @@ void Obj4223f8::followCursorAndDescribe()
     s32 y = vec2GetYInt(cursor);
     s32 x = vec2GetXInt(cursor);
     pointConvertToFloat(work->position, x, y);
-    if (cursor->confirmed && buttonHelpIsNotActive()) {
+    if (uiSpriteGetCompletionState(cursor) && buttonHelpIsNotActive()) {
         FUN_002a0cc8(0);
         work->state = 2;
         work->stateArg = 0;
@@ -72,14 +74,12 @@ void Obj4223f8::followCursorAndDescribe()
         if (!work->customName) {
             BibleAnalyzeEntryView *entries = work->entries;
             s32 selected = flaggedValueHolderGetTotal(work->selection);
-            FUN_0029da34(0, 1, entries[selected].demonId, 0);
+            FUN_0029da34(0, 1, shopListItemGetId(&entries[selected]), 0);
             return;
         }
-        const char *name = DAT_0040226c;
         const char *displayName = dataLookupDisplayName(nameBuffer, work->nameId);
-        if (displayName != NULL)
-            name = displayName;
-        textFormatBuffer(text, DAT_00402274, name, DAT_0043d990.suffix);
+        const char *fallback = DAT_0040226c;
+        textFormatBuffer(text, DAT_00402274, displayName == NULL ? fallback : displayName, DAT_0043d990.suffix);
         FUN_0029ee6c(text, 0x323232ff);
     }
 }

@@ -53,12 +53,20 @@ static s32 effectiveMaxHp(MemberRecord *member)
 /* Takes `percent` of max HP from the hero (target 0, 2, 3), from the party (0/1: the active slots,
  * 2/3: the three reserve slots) and from the options character (3, 4); HP never drops below 1
  * except for the options character, who can go down. */
+static __inline bool canLoseHp(u16 flags)
+{
+    if (flags & 2)
+        return false;
+    if (flags & 0x400)
+        return false;
+    return true;
+}
+
 void FUN_0049f8a4(u32 target, s32 percent)
 {
     if (percent <= 0)
         return;
-    if ((target == 0 || target == 2 || target == 3) && !(gameGetPlayerData()->flags & 2) &&
-        !(gameGetPlayerData()->flags & 0x400)) {
+    if ((target == 0 || target == 2 || target == 3) && canLoseHp(gameGetPlayerData()->flags)) {
         s32 max = gameGetPlayerData()->maxHp;
         s32 hp = gameGetPlayerData()->hp;
         s32 newHp = hp - percentOf(max, percent);
@@ -85,7 +93,7 @@ void FUN_0049f8a4(u32 target, s32 percent)
         if (slots[i] < 0)
             continue;
         MemberRecord *member = gameGetSlotRecord(slots[i]);
-        if (!(member->flags & 2) && !(member->flags & 0x400)) {
+        if (canLoseHp(member->flags)) {
             s32 hp = member->hp;
             s32 newHp = hp - percentOf(effectiveMaxHp(member), percent);
             if (newHp <= 0)

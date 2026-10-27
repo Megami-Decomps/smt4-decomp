@@ -1,4 +1,4 @@
-/* NON_MATCHING: record-array base now hoisted like retail (local records pointer passed to the helper); remaining: frame 304 vs 300, r4/r5 swap, branch/tail-call layout. */
+/* NON_MATCHING: frame, pushed registers and control flow match; remaining: the kind-1 path (slot-record tail call) is placed after the common call in retail but inline here, and two loads are scheduled in another order. */
 #include "ui/ItemListSelection.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
 
@@ -12,8 +12,8 @@ struct ItemListDetailOwnerView {
     u8 unk000[0x20];
     FlaggedValueHolder selection;
     u8 unk094[0x7cc];
-    u8 useSlotRecord;
-    u8 detailKind;
+    s8 useSlotRecord;
+    s8 detailKind;
     u8 unk862[2];
     ItemListDetailRecord records[1];
 };
@@ -40,6 +40,7 @@ void FUN_0032cfe0(ItemListSelectionOwner *owner)
 {
     ItemListDetailOwnerView *work = (ItemListDetailOwnerView *)owner;
     ItemListDetailRecord *records = work->records;
+    SlotTableEntry record;
     s16 id = (s16)itemListGetSelectedDetailId(records, &work->selection);
     if (work->useSlotRecord) {
         id = (s16)itemListGetSelectedDetailId(records, &work->selection);
@@ -47,19 +48,16 @@ void FUN_0032cfe0(ItemListSelectionOwner *owner)
             SlotTableEntry *slot = slotRecordFindById((u16)id);
             // Retail's corresponding tail call falls through into the adjacent renderer.
             FUN_0032d0c8(0, 1, (u16)id, slot);
-        } else {
-            SlotTableEntry record;
-            FUN_0035ad50((u16)id, &record);
-            FUN_0032d0c8(0, 1, (u16)id, &record);
+            return;
         }
+        FUN_0035ad50((u16)id, &record);
     } else {
-        SlotTableEntry record;
         FUN_0035ad50((u16)id, &record);
         if (FUN_002a4b28((u16)id) == 0) {
             FUN_0032d0c8(0, 2, (u16)id, &record);
-        } else {
-            FUN_0032d0c8(0, 1, (u16)id, &record);
+            return;
         }
     }
+    FUN_0032d0c8(0, 1, (u16)id, &record);
 }
 }

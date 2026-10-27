@@ -1,4 +1,4 @@
-/* NON_MATCHING: immediate boolean returns, wide-mask load grouping and unit-index lifetime differ from the retail shared-result exit. */
+/* NON_MATCHING: retail sets a shared `result` (mov r5,#1) and leaves through one common exit where this build returns immediately; the wide-mask load grouping and unit-index lifetime differ too. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
@@ -14,11 +14,10 @@ struct CombatantAffinityPreview {
     u8 enabled;
     u32 trailing[2];
 };
-// The skill tail is beyond the shared table prefix.  The unit value occupies
+// The skill record's element byte sits at 0x44. The unit value occupies
 // padding whose two-byte alignment cannot accept a new shared word field.
 struct AffinitySkillTailView {
-    Table04Record prefix;
-    u32 unk40;
+    u8 unk00[0x44];
     u8 element;
 };
 struct AffinityPassiveView {

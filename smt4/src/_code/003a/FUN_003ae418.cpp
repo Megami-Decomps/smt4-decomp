@@ -27,8 +27,8 @@ u32 FUN_003ae418(u32 request, u32 *ownerFlags, f32 x, f32 y, f32 z)
     if (index >= 12)
         return -1;
     BattleUiActionSlot *slot = &ui->objD.actionRequests.slots[index];
-    slot->state = 2;
     slot->frame = 0;
+    slot->state = 2;
     slot->progress = 0.0f;
     slot->active = 0;
     BattleUiActionVector position = {x, y, z};

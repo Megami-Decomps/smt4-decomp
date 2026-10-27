@@ -13,7 +13,7 @@ int FUN_0028cb6c(void);
 int FUN_003e8bb0(...);
 int FUN_003f0e20(...);
 int FUN_004bf6e0(int);
-int FUN_004bfc1c(...);
+int btlCalcAilmentRateScale(...);
 int FUN_004c3bc0(int, unsigned int);
 int FUN_004c5448(...);
 int VectorSignedToFloat(...);
@@ -64,7 +64,7 @@ extern unsigned int DAT_0057149c; /* 0x57149c */
 /* Supplied declaration required: FUN_003e8bb0. */
 /* Supplied declaration required: FUN_003f0e20. */
 /* Supplied declaration required: FUN_004bf6e0. */
-/* Supplied declaration required: FUN_004bfc1c. */
+/* Supplied declaration required: btlCalcAilmentRateScale. */
 /* Supplied declaration required: FUN_004c3bc0. */
 /* Supplied declaration required: FUN_004c5448. */
 
@@ -195,7 +195,7 @@ int FUN_004c4178(fn_004c4178_arg0 *param_1,int param_2,unsigned int param_3,int 
       }
     }
   }
-  FUN_004bfc1c(param_2,param_3);
+  btlCalcAilmentRateScale(param_2,param_3);
   temp_v9 = (float)temp_v14 * (float)((unsigned long long)temp_v14 >> 0x20) * (float)temp_v16 * temp_v8 * temp_v9;
   pbVar6 = temp_v21;
   FUN_003f0e20(temp_v21,param_2);

@@ -4,6 +4,7 @@
 extern "C" {
 extern BtlUiGlobalsA g_btlUi;
 void eventPanelSelectSpritePreset(BtlUiObjBA *panel, s32 mode, s32 selection, s32 animate, s32 enabled);
+BtlUiObjBA *FUN_00502754(u8 *subobject); /* returns the subobject's sprite (+0xBC) */
 void FUN_002cd118(BtlUiObjAA *panel, s32 mode, s32 first, s32 second);
 void FUN_00227af0(const char *message);
 void menuStateReset();
@@ -39,7 +40,7 @@ void FUN_004abe2c(BtlUiA *unused, s32 mode, s8 first, s8 second, s32 animate, s3
     settings->mode = mode;
     settings->first = first;
     settings->second = second;
-    eventPanelSelectSpritePreset(&work->objB, mode, selection, mode == 0 ? 0 : animate, 1);
+    eventPanelSelectSpritePreset(FUN_00502754(reinterpret_cast<u8 *>(&work->objA) + 0x23F8), mode, selection, mode == 0 ? 0 : animate, 1);
     FUN_002cd118(&work->objA, settings->mode, settings->first, settings->second);
     if (mode == 1 && animate != 0) {
         AmbushMessageState *message = reinterpret_cast<AmbushMessageState *>(&work->objD.unk[0x4B18]);

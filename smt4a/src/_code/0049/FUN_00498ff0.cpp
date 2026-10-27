@@ -1,13 +1,21 @@
-/* NON_MATCHING: sound-table snapshots use scalar copies rather than retail VFP/LDRD transfers and branch outlining differs. */
+/* NON_MATCHING: scheduling only: retail forms the second table's stack address (sp + 20) before the first store. */
 #include "shard/Shard0049.h"
 #include <string.h>
 
+/* Sound ids copied out of the shared table as whole words. */
+struct SoundIds4 {
+    union { u16 id[4]; u32 word[2]; };
+};
+struct SoundIds10 {
+    union { u16 id[10]; u32 word[5]; };
+};
+
 struct EquipmentSoundTables {
     u8 prefix[0xB0];
-    u16 other[4];
+    SoundIds4 other;
     u8 paddingB8[0x60];
-    u16 normal[10];
-    u16 alternate[10];
+    SoundIds10 normal;
+    SoundIds10 alternate;
 };
 extern "C" const EquipmentSoundTables g_equipMenuStateHandlerInit;
 
@@ -17,18 +25,14 @@ extern "C" void sysPlaySe(s32 soundId);
 extern "C" void FUN_00498ff0(EquipmentMenuState *menu)
 {
     u16 sound;
-    if (menu->page != 8) {
-        u16 normalSounds[10];
-        u16 alternateSounds[10];
-        memcpy(normalSounds, g_equipMenuStateHandlerInit.normal, sizeof(normalSounds));
-        memcpy(alternateSounds, g_equipMenuStateHandlerInit.alternate, sizeof(alternateSounds));
-        if (menu->sound.mode != 1) {
-            sound = normalSounds[menu->page];
-            if ((menu->sound.restricted || !gameFlagIsSet(0x410)) && menu->page == 0) {
-                sound = 0x7A;
-            }
-        } else {
-            sound = alternateSounds[menu->page];
+    if (menu->page == 8) {
+        SoundIds4 otherSounds = g_equipMenuStateHandlerInit.other;
+        sound = otherSounds.id[menu->selection.index];
+    } else {
+        SoundIds10 normalSounds = g_equipMenuStateHandlerInit.normal;
+        SoundIds10 alternateSounds = g_equipMenuStateHandlerInit.alternate;
+        if (menu->sound.mode == 1) {
+            sound = alternateSounds.id[menu->page];
             if (menu->sound.restricted || !gameFlagIsSet(0x410)) {
                 if (menu->page == 0) {
                     sound = 0x88;
@@ -36,11 +40,12 @@ extern "C" void FUN_00498ff0(EquipmentMenuState *menu)
                     sound = 0x89;
                 }
             }
+        } else {
+            sound = normalSounds.id[menu->page];
+            if ((menu->sound.restricted || !gameFlagIsSet(0x410)) && menu->page == 0) {
+                sound = 0x7A;
+            }
         }
-    } else {
-        u16 otherSounds[4];
-        memcpy(otherSounds, g_equipMenuStateHandlerInit.other, sizeof(otherSounds));
-        sound = otherSounds[menu->selection.index];
     }
     sysPlaySe(sound);
 }

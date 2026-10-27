@@ -1,4 +1,3 @@
-/* NON_MATCHING: pending flags now g_gameState.menuRequests (base addressing matches retail); retail keeps the nine single-bit tst/tsteq tests unfolded where armcc folds them into mask tests. */
 #include "camp/ScriptPanelResources.h"
 #include "shard/Shard004B.h"
 #include "shard/W5_W5Match7_SceneState.h"
@@ -13,6 +12,56 @@ void FUN_004b7694(CampScriptPanelResources *panel);
 void FUN_004b75d0(CampScriptPanelResources *panel);
 void uiClampScrollOffset(CampScriptPanelResources *panel, void *animation);
 void spatialAdvanceTransformTransition(u32 handle);
+
+/* True when any of the panel move/step request flags is set. */
+static __inline bool panelHasPendingMove(u32 flags)
+{
+    if (flags & 0x10)
+        return true;
+    if (flags & 0x200000)
+        return true;
+    if (flags & 0x40000)
+        return true;
+    if (flags & 0x800000)
+        return true;
+    if (flags & 0x4000000)
+        return true;
+    if (flags & 0x1000000)
+        return true;
+    if (flags & 0x2000000)
+        return true;
+    if (flags & 0x8000000)
+        return true;
+    if (flags & 0x20000000)
+        return true;
+    return false;
+}
+
+/* True when any of the selection-change request flags is set. */
+static __inline bool panelHasSelectionChange(u32 flags)
+{
+    if (flags & 0x800000)
+        return true;
+    if (flags & 0x1000000)
+        return true;
+    if (flags & 0x2000000)
+        return true;
+    if (flags & 0x8000000)
+        return true;
+    if (flags & 0x100000)
+        return true;
+    if (flags & 0x80000)
+        return true;
+    if (flags & 0x200000)
+        return true;
+    if (flags & 0x40000)
+        return true;
+    if (flags & 0x4000000)
+        return true;
+    if (flags & 0x20000000)
+        return true;
+    return false;
+}
 
 void FUN_004b73e8(CampScriptPanelResources *panel)
 {
@@ -33,16 +82,11 @@ void FUN_004b73e8(CampScriptPanelResources *panel)
             slotSetRequest(0, 30, 255);
             panel->transition.timer = 0;
             panel->transition.state = 16;
-        } else if ((flags & 0x10) || (flags & 0x200000) || (flags & 0x40000) ||
-                   (flags & 0x800000) || (flags & 0x4000000) || (flags & 0x1000000) ||
-                   (flags & 0x2000000) || (flags & 0x8000000) || (flags & 0x20000000)) {
+        } else if (panelHasPendingMove(flags)) {
             if (!(flags & 0x100))
                 slotSetRequest(0, 10, 255);
             flags = panel->mikado.flags;
-            if (((flags & 0x800000) || (flags & 0x1000000) || (flags & 0x2000000) ||
-                 (flags & 0x8000000) || (flags & 0x100000) || (flags & 0x80000) ||
-                 (flags & 0x200000) || (flags & 0x40000) || (flags & 0x4000000) ||
-                 (flags & 0x20000000)) && !(flags & 0x100))
+            if (panelHasSelectionChange(flags) && !(flags & 0x100))
                 slotSetRequest(1, 10, 255);
             panel->transition.timer = 0;
             panel->transition.state = 16;

@@ -27,12 +27,12 @@ void FUN_003bb0ac(ContentTransition *transition)
     dispatch->entries[6] = DAT_00404cd0[6];
     dispatch->entries[7] = DAT_00404cd0[7];
     dispatch->entries[8] = DAT_00404cd0[8];
-    dispatch->entries[9] = DAT_00404cd0[9];
     dispatch->entries[10] = DAT_00404cd0[10];
-    dispatch->entries[11] = DAT_00404cd0[11];
+    dispatch->entries[9] = DAT_00404cd0[9];
     dispatch->entries[12] = DAT_00404cd0[12];
-    dispatch->entries[13] = DAT_00404cd0[13];
+    dispatch->entries[11] = DAT_00404cd0[11];
     dispatch->entries[14] = DAT_00404cd0[14];
+    dispatch->entries[13] = DAT_00404cd0[13];
     dispatch->entries[15] = DAT_00404cd0[15];
     dispatch->entries[16] = DAT_00404cd0[16];
     dispatch->entries[17] = DAT_00404cd0[17];

@@ -58,8 +58,8 @@ void bibleDevilInitializeScene(BibleScreen *screen)
 {
     BibleInitFields *fields = (BibleInitFields *)screen;
     fields->initialized = 1;
-    fields->changed = 0;
     fields->selected = 0xffff;
+    fields->changed = 0;
     fields->marked = 0;
     entryTableClear(fields->rows);
     fields->vtable->initialize(screen);
@@ -75,8 +75,8 @@ void bibleDevilInitializeScene(BibleScreen *screen)
     // Retail forwards an uninitialized allocation owner in r4.
     void *allocationOwner;
     Obj42242c *controller = new (allocationOwner) Obj42242c;
-    fields->controller = controller;
     controller->rectangle = fields->rectangle;
+    fields->controller = controller;
     FUN_0022d434(screen);
     partyIdsReset(fields->pending);
     devilListMarkOrInsertQualifiedEntry(fields->pending, 0);

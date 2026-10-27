@@ -68,7 +68,7 @@ int owner2DCInitSub(int);
 int menu32State387CIs7(...);
 int menu32EnterState27(int);
 int controllerResetInterpolation(unsigned int);
-int FUN_003f97a4(unsigned int);
+int cyclingPanelAdvance(unsigned int);
 int FUN_003f9970(unsigned int, unsigned int *, int);
 int FUN_004ab10c(int, unsigned int *);
 
@@ -178,7 +178,7 @@ extern int btlScriptUnitHasFlags(void);
 /* Supplied declaration required: pairQueueAppend. */
 /* Supplied declaration required: controllerResetInterpolation. */
 /* Supplied declaration required: controllerStartInterpolation. */
-/* Supplied declaration required: FUN_003f97a4. */
+/* Supplied declaration required: cyclingPanelAdvance. */
 /* Supplied declaration required: FUN_003f9970. */
 /* Supplied declaration required: FUN_0047f66c. */
 /* Supplied declaration required: FUN_004a9588. */
@@ -304,7 +304,7 @@ unsigned int FUN_002248f8(void)
     }
     temp_v10 = temp_v10 + 1;
   } while (temp_v10 < 0xc);
-  FUN_003f97a4(*(unsigned int *)(temp_v0 + 0x7488));
+  cyclingPanelAdvance(*(unsigned int *)(temp_v0 + 0x7488));
   if (((*(char *)(temp_v0 + 0x74b3) != '\0') && (temp_v10 = FUN_00163aa4(), temp_v10 != 0)) &&
      (*(short *)(temp_v0 + 0x7584) == 0xe)) {
     *(unsigned char *)(temp_v0 + 0x74b3) = 0;

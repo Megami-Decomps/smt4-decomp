@@ -48,11 +48,7 @@ extern "C" void FUN_003a3130(ShopExit *exit)
         break;
     case 1:
         if (scrRunOpcodesStub(exit->process) == 2) {
-            if (FUN_00292bf0() == 0 || FUN_00292bf0() > gameSlotTableGetHeader()) {
-                exit->state = 5;
-            } else {
-                exit->state = 2;
-            }
+            exit->state = (FUN_00292bf0() == 0 || FUN_00292bf0() > gameSlotTableGetHeader()) ? 5 : 2;
             break;
         }
         if (FUN_002c1658(1, 1) != 0 && messageMainIsWindowActive() != 0) {

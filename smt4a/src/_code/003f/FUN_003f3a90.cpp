@@ -1,4 +1,4 @@
-/* NON_MATCHING: 173 vs 160 rows: twin of smt4 FUN_0033c1bc; retail also keeps a float argument in s16 (vpush {d8}) that it forwards to the icon calls, which this signature does not model */
+/* NON_MATCHING: twin of smt4 FUN_0033c1bc; everything up to the setDrawState inlines matches retail, which keeps the ring pointer through a temporary (ldr r1,[g_renderCtx]; add r4,r1,...) and loads the dirty flag / flush callback into r2/r1 instead of r0. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
 
@@ -9,7 +9,7 @@ struct DrawRing {
     s32 slots[4];           // 0x08
     u8 dirty;               // 0x18
     u8 unk19[3];
-    void (*flush)(void);    // 0x1c
+    void (*flush)(s32 state);   // 0x1c
 };
 
 struct RenderCtx {
@@ -48,7 +48,7 @@ extern RenderCtx* g_renderCtx;
 UnitStatus* gameGetSlotRecord(s32 index);
 UnitStatus* btlMainGetUnk14(void);
 PlayerStatus* gameGetPlayerData(void);
-void effectDispatchSelector(s32 icon, s32 x, s32 y, s32 kind);
+void effectDispatchSelector(s16 icon, s32 x, s32 y, s32 kind, f32 alpha);
 void FUN_0035ae58(s32 x, s32 y, s32 w, s32 h, s32 arg);
 
 static void setDrawState(s32 value)
@@ -57,7 +57,7 @@ static void setDrawState(s32 value)
     s32 previous = ring->slots[ring->index];
     ring->slots[ring->index] = value;
     if (ring->dirty != 0 || previous != value) {
-        ring->flush();
+        ring->flush(value);
         ring->dirty = 0;
     }
 }
@@ -69,10 +69,9 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
     TextureTableEntryIV* layout = asdTMTexTableEntryAt(0x11, slot);
-    s32 count = 0;
-    s16 current = 0;
-    s16 following = 0;
-    u32 ailments = 0;
+    s32 count, n, current, following;
+    u32 ailments;
+    following = current = n = count = ailments = 0;
     if (strip->member == -1) {
         ailments = gameGetPlayerData()->ailments;
     } else if (strip->member == -2) {
@@ -82,23 +81,22 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
         ailments = gameGetSlotRecord(strip->member)->ailments;
     }
     for (s32 bit = 1; bit <= 13; bit++) {
-        if ((ailments & (1 << bit)) != 0) {
+        if (bit != 2 && (ailments & (1 << bit)) != 0) {
             if (strip->cursor == count) current = bit;
             count++;
         }
     }
     if (count == 1) {
-        effectDispatchSelector(current, layout->x + x, layout->y + y, 0x7e);
+        effectDispatchSelector(current, layout->x + x, layout->y + y, 0x7e, 1.0f);
         return;
     }
     if (count > 1) {
         if (strip->scroll < 0x14) {
-            effectDispatchSelector(current, layout->x + x, layout->y + y, 0x7e);
+            effectDispatchSelector(current, layout->x + x, layout->y + y, 0x7e, 1.0f);
             return;
         }
-        s32 n = 0;
         for (s32 bit = 1; bit <= 13; bit++) {
-            if ((ailments & (1 << bit)) != 0) {
+            if (bit != 2 && (ailments & (1 << bit)) != 0) {
                 if ((strip->cursor + 1) % count == n) following = bit;
                 n++;
             }
@@ -106,8 +104,8 @@ void FUN_003f3a90(StatusStrip* strip, s32 x, s32 y)
         setDrawState(3);
         FUN_0035ae58(strip->originX + layout->x, strip->originY + layout->y, layout->placement->width, layout->placement->height, 1);
         s32 shift = (strip->scroll - 0x14) * -3;
-        effectDispatchSelector(current, layout->x + shift + x, layout->y + y, 0x7e);
-        effectDispatchSelector(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);
+        effectDispatchSelector(current, layout->x + shift + x, layout->y + y, 0x7e, 1.0f);
+        effectDispatchSelector(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e, 1.0f);
         setDrawState(0);
     }
 }

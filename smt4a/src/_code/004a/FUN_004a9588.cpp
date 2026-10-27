@@ -1,4 +1,4 @@
-/* NON_MATCHING: bank-base address anchoring and failure epilogue placement differ. */
+/* NON_MATCHING: register allocation only: retail reuses r5 for the entry-offset arithmetic and keeps the vector store address in r7 (built pushes r8). */
 #include "battle/btlUI.h"
 #include "shard/S1Mover.h"
 
@@ -42,8 +42,8 @@ u32 FUN_004a9588(u32 unused, u32 value, u8 first, u8 second,
     for (s32 i = 0; i < 16; ++i) {
         s32 count = ui->counts[i];
         if ((u32)(count - 1) < 31) {
-            const PositionedRequest *last = &ui->banks[i].entries[count - 1];
-            if (last->position.x == x && last->position.y == y && last->position.z == z) {
+            if (ui->banks[i].entries[count - 1].position.x == x && ui->banks[i].entries[count - 1].position.y == y &&
+                ui->banks[i].entries[count - 1].position.z == z) {
                 group = i;
                 break;
             }
@@ -57,19 +57,22 @@ u32 FUN_004a9588(u32 unused, u32 value, u8 first, u8 second,
             }
         }
     }
-    if ((u32)group < 16 && ui->counts[group] < 32) {
-        PositionedRequest *request = &ui->banks[group].entries[ui->counts[group]];
-        request->active = 1;
-        request->mode = mode;
-        request->position.x = x;
-        request->position.y = y;
-        request->position.z = z;
-        request->value = value;
-        request->first = first;
-        request->second = second;
-        ++ui->counts[group];
-        return group;
+    if ((u32)group >= 16) {
+        return 0xFFFFFFFF;
     }
-    return 0xFFFFFFFF;
+    if (ui->counts[group] >= 32) {
+        return 0xFFFFFFFF;
+    }
+    s32 index = ui->counts[group];
+    ui->banks[group].entries[index].active = 1;
+    ui->banks[group].entries[index].mode = mode;
+    ui->banks[group].entries[index].position.x = x;
+    ui->banks[group].entries[index].position.y = y;
+    ui->banks[group].entries[index].position.z = z;
+    ui->banks[group].entries[index].value = value;
+    ui->banks[group].entries[index].first = first;
+    ui->banks[group].entries[index].second = second;
+    ++ui->counts[group];
+    return group;
 }
 }

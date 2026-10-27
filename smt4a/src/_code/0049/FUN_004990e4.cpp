@@ -75,7 +75,7 @@ void FUN_004990e4(HintWindow *window)
             position.z = 0.0f;
             window->frame += 2;
             window->frame = window->frame % (s32)asdAnimGetTrackLastFrame(window->animation, 0);
-            FUN_003fabfc(reinterpret_cast<SpriteDrawOwner *>(window->animation), 0, &position,
+            spriteDrawAnimationUnplaced(reinterpret_cast<SpriteDrawOwner *>(window->animation), 0, &position,
                           0xFFFFFFFFu, 0, (f32)(s32)window->frame, 1.0f);
         }
     }

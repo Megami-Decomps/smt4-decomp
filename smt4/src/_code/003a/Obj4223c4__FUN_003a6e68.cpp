@@ -16,7 +16,6 @@ void buttonHelpSetPreset(s32);
 void FUN_0029d960(void *);
 void FUN_00233670(MessageIdList *, u32, s32, s32);
 }
-
 void Obj4223c4::FUN_003a6e68()
 {
     Obj4223c4 *screen = this;
@@ -29,6 +28,10 @@ void Obj4223c4::FUN_003a6e68()
         u8 prefix[8];
         s32 count;
         u8 remaining[0x9C];
+    };
+    struct SourceBlock {
+        u8 unk00[0xA5];
+        u8 source;
     };
     struct OpeningScreenView {
         u8 prefix[0x14];
@@ -62,10 +65,11 @@ void Obj4223c4::FUN_003a6e68()
     if (completed == 0)
         return;
 
+    const SourceBlock *block = reinterpret_cast<const SourceBlock *>(reinterpret_cast<u8 *>(view) + 0x500);
     if (!view->previewOnly)
         buttonHelpSetPreset(0x2D);
     else
-        buttonHelpSetPreset(view->source == 1 ? 0x4C : 0x4D);
+        buttonHelpSetPreset(block->source == 1 ? 0x4C : 0x4D);
     FUN_0029d960(screen);
     FUN_002a0cc8(0);
     view->state = 2;

@@ -69,8 +69,8 @@ void scrollMenuDrawVisibleEntries(ComparisonMenuScene *scene)
         return;
 
     struct { s32 first, visible; } range;
-    range.first = FUN_0029e924(&scene->selection);
     range.visible = rangeLimitMin(&scene->selection);
+    range.first = FUN_0029e924(&scene->selection);
     ComparisonMenuEntry *entries = scene->entries;
     for (s32 row = 0; row < range.visible; ++row) {
         if (scene->mode != 2 || flaggedEntryGetValueByState(&scene->selection) != row)

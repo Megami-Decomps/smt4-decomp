@@ -32,7 +32,7 @@ typedef char AsyncTransferDataOffsetsCheck[
 extern "C" {
 extern AsyncTransferData DAT_0061b030;
 extern u8 DAT_0061b000[];
-s32 FUN_00427e68(u32 token, u32 operation);
+nn::Result FUN_00427e68(u32 token, u32 operation);
 void *FUN_0016ccfc(void);
 s32 tokenResolveAddress(void *registry, AsyncTransferContext **context, u32 token);
 void __aeabi_memcpy4(void *destination, const void *source, u32 size);
@@ -47,7 +47,7 @@ WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *for
 {
     if (count > 64)
         return WindowStatusResult(0xE0613880);
-    s32 result = FUN_00427e68(*token, 8);
+    nn::Result result = FUN_00427e68(*token, 8);
     if (!nnResultIsFailure(result)) {
         AsyncTransferContext *context;
         result = tokenResolveAddress(FUN_0016ccfc(), &context, *token);
@@ -59,6 +59,7 @@ WindowStatusResult FUN_00429210(const u32 *token, const AsyncTransferFormat *for
             case 1: encoding = 0x0D; break;
             case 3: encoding = 0x10; break;
             case 4: encoding = 0x30; break;
+            case 2: encoding = 0; break;
             default: encoding = 0; break;
             }
             u32 low = format->flags | ((format->id & 0xFFFFF) << 8);

@@ -18,6 +18,7 @@ void FUN_00233410(FlaggedValueHolder *values);
 s32 FUN_002333f0(Obj55ca08 *selector);
 s32 stateCounterBelowLimit(FlaggedValueHolder *values, s32 offset);
 s32 FUN_0027ee9c();
+s8 uiSubStateGetReady(const Obj55ca08 *subState);
 void asdTMTexTableLoadEntryAsync(u32 table, u32 key);
 
 u32 FUN_003bb620(SelectionTextureWork *work)
@@ -34,15 +35,24 @@ u32 FUN_003bb620(SelectionTextureWork *work)
     if (flaggedValueHolderGetTotal(values) != previous) {
         work->idleFrames = 0;
     } else {
-        // The range test advances the idle clock on each successful bound check.
-        if (++work->idleFrames < 0) {
-            work->idleFrames = 0;
-        } else if (++work->idleFrames > 256) {
-            work->idleFrames = 256;
+        // The range test advances the idle clock through the stored word on each successful bound check.
+        s32 *clock = &work->idleFrames;
+        s32 frames = *clock + 1;
+        *clock = frames;
+        if (frames < 0) {
+            frames = 0;
         } else {
-            ++work->idleFrames;
+            frames = frames + 1;
+            *clock = frames;
+            if (frames > 256) {
+                frames = 256;
+            } else {
+                frames = frames + 1;
+                *clock = frames;
+            }
         }
-        if (work->idleFrames >= 16) {
+        work->idleFrames = frames;
+        if (frames >= 16) {
             s32 selected = flaggedValueHolderGetTotal(values);
             u32 key = work->widget.entries[selected]->lastKey;
             u32 nextKey = key + 1;
@@ -57,7 +67,7 @@ u32 FUN_003bb620(SelectionTextureWork *work)
         }
     }
     if (list->cursorMarked == 0) {
-        if (static_cast<s8>(selector->released) != 0 &&
+        if (uiSubStateGetReady(selector) != 0 &&
             stateCounterBelowLimit(values, FUN_002333f0(selector)) != 0) {
             result = 1;
         }

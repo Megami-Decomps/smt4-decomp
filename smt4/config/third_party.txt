@@ -707,7 +707,7 @@
 0x00148520 nw_ut_FrameHeap_FreeByState name
 0x001485c4 nw_ut_FrameHeap_RecordState name
 0x00148650 FUN_00148650 callers
-0x00148748 FUN_00148748 callers
+0x00148748 FUN_00148748 between
 0x00148850 nw_gfx_ParticleUtil_DuplicateResParticleUpdater name
 0x00148dd8 nw_gfx_ParticleUtil_DuplicateResParticleInitializer name
 0x00148ed4 nw_gfx_ParticleUtil_GetMemorySizeForDuplicateResParticleUpdaterInternal name
@@ -834,11 +834,10 @@
 0x00150144 nw_ut_HeapBase_FindContainHeap name
 0x0015019c nw_ut_FrameHeap_Alloc name
 0x00150254 nw_gfx_SceneHelper_ResolveReferenceImpl name
-0x0015041c FUN_0015041c callers
-0x00150750 FUN_00150750 callers
+0x0015041c FUN_0015041c between
+0x00150750 FUN_00150750 between
 0x00150908 nw_gfx_ParticleShape_AddVertexStream name
 0x00150a14 nw_gfx_RenderContext_ActivateParticleContext name
-0x00150ab4 FUN_00150ab4 between
 0x00150b5c nw_gfx_ParticleCollection_Clear name
 0x00150ed8 nw_snd_internal_DriverCommandManager_ProcessCommand name
 0x00150f24 FUN_00150f24 between
@@ -906,11 +905,8 @@
 0x00153a84 FUN_00153a84 between
 0x00153a98 FUN_00153a98 between
 0x00153b08 FUN_00153b08 callers
-0x00153b4c FUN_00153b4c callers
+0x00153b4c FUN_00153b4c between
 0x00153cdc nw_gfx_AnimEvaluator_SetCacheBufferPointers name
-0x00153d68 FUN_00153d68 callers
-0x00153e58 FUN_00153e58 callers
-0x00153f44 FUN_00153f44 callers
 0x001546c0 FUN_001546c0 callers
 0x00154e84 FUN_00154e84 callers
 0x00154ef0 FUN_00154ef0 callers
@@ -1686,7 +1682,6 @@
 0x002c12e0 nn_applet_CTR_detail_ReplySleepQueryToManager name
 0x002c1400 nn_gr_CTR_Shader_SearchBindSymbol name
 0x002c1870 rt_memcmp name
-0x002c2390 FUN_002c2390 callers
 0x002c24b8 nngxDisplayEnv name
 0x002c2a1c nw_ut_FloatColor_ToPicaU32 name
 0x002c2b24 nw_gfx_res_ResGraphicsFile_Setup name
@@ -2422,7 +2417,7 @@
 0x00376910 nw_snd_SoundHandle_detail_AttachSound name
 0x0037693c nw_snd_SoundHandle_detail_AttachSoundAsTempHandle name
 0x00376968 FUN_00376968 between
-0x00376974 FUN_00376974 between
+0x00376974 _ZN11SoundHandleD1Ev between
 0x00376988 nw_snd_SoundPlayer_detail_AppendSound name
 0x00376a2c nw_snd_SoundPlayer_detail_CanPlaySound name
 0x00376a78 nw_snd_SoundPlayer_detail_FreePlayerHeap name

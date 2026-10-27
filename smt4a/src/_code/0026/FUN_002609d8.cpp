@@ -99,7 +99,7 @@ extern int jobGetWork(void);
 extern unsigned int FUN_001f3e80(unsigned int, unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001f3eec. */
 /* Supplied declaration required: renderCtxCallB. */
-/* Supplied declaration required: FUN_003fabfc. */
+/* Supplied declaration required: spriteDrawAnimationUnplaced. */
 
 
 void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
@@ -335,7 +335,7 @@ void FUN_002609d8(fn_002609d8_arg0 *param_1,int param_2,int param_3)
       GpuFloatEncoding positionX;
       positionX.bits = (u32)temp_v17;
       SpriteDrawVector3 position = {positionX.value, temp_v18, temp_v16};
-      FUN_003fabfc((SpriteDrawOwner *)*(unsigned int *)(temp_v2 + 0x4C), 0, &position,
+      spriteDrawAnimationUnplaced((SpriteDrawOwner *)*(unsigned int *)(temp_v2 + 0x4C), 0, &position,
                    temp_v10 + (temp_v9 + (temp_v11 + temp_v3 * 0x100) * 0x100) * 0x100,
                    0, *(float *)(temp_v2 + 0x5C), *(float *)(temp_v2 + 0x34));
     }

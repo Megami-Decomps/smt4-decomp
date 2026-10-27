@@ -4804,3 +4804,14 @@
 002aff0c slotOwnerDestroyAllSlots
 00294f64 resourceReleaseReference
 0014f4f8 lzGetAdvertisedSize
+003472f0 _ZN10SoundObj3cD1Ev
+00376974 _ZN11SoundHandleD1Ev
+003809a0 _ZN13SoundHeapBaseD1Ev
+003406b4 _ZN10SoundObj50D1Ev
+00352740 _ZN19AocAuxBufferRequestC1EjPvj
+00352ee8 _ZN16AocBufferRequestC1EjPvj
+00352f0c _ZN16AocBufferRequestD1Ev
+003a64cc rankedEntryCompare
+003aaa6c numberPanelLayoutWindow
+00150ab4 asdModelAppendCommandSource
+0033d3f8 spriteDrawAnimationUnplaced

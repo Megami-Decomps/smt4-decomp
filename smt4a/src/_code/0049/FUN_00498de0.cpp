@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the equipment menu's selection tracking; retail evaluates the three category tests as three separate aocEntryGetKindForward calls and keeps the preview copy of the player data at fixed stack slots, which armcc here schedules differently. */
+/* NON_MATCHING: scheduling only: retail interleaves the list-base and holder address arithmetic before the first call and reloads the tab index before the list element load. */
 #include "common.h"
 #include "addon/AocEntryKind.h"
 #include "network/DataStore/DataStoreMain.h"
@@ -27,11 +27,10 @@ struct EquipMenu {
     /* 0x16034 */ u32 lastSelectedId;
 };
 
-/* The player's equipment as a 100-byte block: seven slots from offset 6. */
+/* The player's equipment as a 100-byte block: seven slots from offset 0. */
 struct PlayerEquipmentBlock {
-    /* 0x00 */ u8 unk00[6];
-    /* 0x06 */ u16 slots[7];
-    /* 0x14 */ u8 unk14[0x50];
+    /* 0x00 */ u16 slots[7];
+    /* 0x0E */ u8 unk0E[0x56];
 };
 
 extern "C" {
@@ -60,12 +59,7 @@ void FUN_00498de0(EquipMenu *menu)
             menu->previewActive = 0;
         }
         menu->lastSelectedId = id;
-    } else if (menu->previewing) {
-        if (objBStateAllowsAction()) {
-            FUN_002f0384(1);
-            menu->previewActive = 1;
-        }
-    } else {
+    } else if (!menu->previewing) {
         if (id != 0) {
             if (aocEntryGetKindForward(id) == 4)
                 FUN_0038b5fc(0, id);
@@ -75,6 +69,11 @@ void FUN_00498de0(EquipMenu *menu)
                 FUN_0038b5fc(2, id);
         }
         menu->previewing = 1;
+    } else {
+        if (objBStateAllowsAction()) {
+            FUN_002f0384(1);
+            menu->previewActive = 1;
+        }
     }
     if (menu->previewEnabled != 0 && menu->previewedId != id) {
         menu->previewedId = id;

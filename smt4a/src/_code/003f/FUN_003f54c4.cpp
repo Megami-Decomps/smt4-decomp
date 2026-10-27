@@ -28,7 +28,7 @@ void FUN_003f54c4(DigitRowOwner *owner, s32 x, s32 y, f32 alpha)
 
     efctSetSpeed(alpha);
     for (i = 0; i < 7; i++) {
-        u32 frame = owner->firstFrame + i - owner->frameOffset;
+        s32 frame = owner->firstFrame + i - owner->frameOffset;
         if (frame >= 0) {
             const TextureTableEntryIV *layout = asdTMTexTableEntryAt(0x31, i + 0x51);
             FUN_00164168(owner->sprite, x + offset + layout->x, layout->y + y, 0xc9, 6, frame, alpha);

@@ -21,13 +21,13 @@ void FUN_004aaebc(u32, u32 kind, u32 parameter, u16 option, u16 variant, u16 fla
     registered.request.variant = variant;
     registered.request.option = option;
     registered.request.flags = flags;
-    if (label == NULL) {
+    if (label != NULL) {
+        registered.request.label = *label;
+    } else {
         unitInitializeFromTemplate(kind, scratch);
         for (s32 index = 0; index < 8; ++index) {
             registered.request.label.text[index] = (char)randomGetUpperSixBits(scratch, index & 0xff);
         }
-    } else {
-        registered.request.label = *label;
     }
     resourceRequestRegisterOrUpdate(&ui->objC, &registered.request);
 }

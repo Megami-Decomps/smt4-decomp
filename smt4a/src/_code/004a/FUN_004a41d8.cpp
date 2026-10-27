@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite from retail disassembly compiles (214 vs 209 rows); retail keeps the state byte pointer in a different register and does not spill fp */
+/* NON_MATCHING: register allocation only: retail keeps the shared zero in sl and the call results in r9, and schedules the state byte pointer after the FUN_004a34a0 call. */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdModel.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
@@ -16,6 +16,8 @@ struct ListEntry {
     u8 unk00[4];
     u16 id;                 // 0x04
     u8 unk06[0x1a];
+
+    u16 getId() const { return id; }
 };
 
 // Quest/status list screen: only the members this per-frame handler touches.
@@ -48,6 +50,7 @@ s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 FUN_004d0584(void);
+s32 questControlsGetCursorRow(u8* controls);
 s32 gameGetMode(void);
 void FUN_004d0680(StatusScreen* screen);
 void FUN_00359974(s32 a, s32 b, s32 c, s32 d);
@@ -73,7 +76,8 @@ void buttonHelpSetText(s32 a, u32 color);
 // Id of the highlighted entry.
 static s16 currentId(StatusScreen* screen)
 {
-    return reinterpret_cast<ListEntry*>(reinterpret_cast<u8*>(screen) + 0x864 + flaggedValueHolderGetTotal(screen->list) * 0x20 - 0)->id;
+    ListEntry* entries = screen->entries;
+    return entries[flaggedValueHolderGetTotal(screen->list)].getId();
 }
 
 // Per-frame handler of the quest/status list: shows the highlighted entry and reacts to
@@ -82,11 +86,9 @@ void FUN_004a41d8(StatusScreen* screen)
 {
     s32 select = 0;
     s32 cancel = 0;
-    u8* mode = &SCREEN_BYTE(screen, 0xa870);
     s16 id = currentId(screen);
-    s32 shown = FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0);
     if (FUN_002a4b28((u16)id) != 0) {
-        panelSetTarget(-shown, 0);
+        panelSetTarget(-FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), 0);
     } else {
         messageSetActiveMode(1);
     }
@@ -95,7 +97,7 @@ void FUN_004a41d8(StatusScreen* screen)
     if (SCREEN_HALF(screen, 0x864) > 0) {
         select = FUN_004d0584();
         cancel = inputIsQuestCancelPressed();
-        if (select == 0) select = screen->choice;
+        if (select == 0) select = questControlsGetCursorRow(screen->unk818);
     }
     if (gameGetMode() != 0) {
         FUN_004d0680(screen);
@@ -104,6 +106,7 @@ void FUN_004a41d8(StatusScreen* screen)
     if (select != 0) {
         id = currentId(screen);
         FUN_00359974(0x18, FUN_004a8750((u16)id, screen->page, 0, (s8)SCREEN_BYTE(screen, 0x94) >= 100, 0), -1, 0);
+        u8* mode = &SCREEN_BYTE(screen, 0xa870);
         if (FUN_004a34a0(screen, (u16)id) != 0) {
             char text[128];
             libc_strcpy(text, FUN_00180118((u16)id));

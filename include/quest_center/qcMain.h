@@ -35,7 +35,8 @@ typedef struct QcGlobals {
 /* Apocalypse: the quest center's globals. */
 typedef struct QcGlobalsA {
     /* 0x00 */ u8 mode;
-    /* 0x01 */ u8 unk01[0x3];
+    /* 0x01 */ u8 active;                 /* the quest center is open */
+    /* 0x02 */ u8 unk02[0x2];
     /* 0x04 */ QcWork *work;              /* NULL while closed */
     /* 0x08 */ union {
         s32 entryId;

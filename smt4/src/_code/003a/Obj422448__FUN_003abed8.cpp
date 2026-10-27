@@ -53,6 +53,8 @@ s32 messageTargetSetValue(u32 value, s32 arg);
 s32 inputIsQuestMenuPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 FUN_0027ee9c(void);
+s8 uiStateGetFirstFlag(const void *state);
+s8 uiSubStateGetReady(const StateWindow *window);
 u32 FUN_002333f0(StateWindow *window);
 s32 stateCounterBelowLimit(ShopHolder *holder, u32 value);
 s32 FUN_00262cb0(u16 id);
@@ -98,7 +100,7 @@ void Obj422448::FUN_003abed8()
         confirm = FUN_0027ee9c();
     }
     StateWindow *window = &screen->window;
-    if (window->active != 0) {
+    if (uiSubStateGetReady(window) != 0) {
         if (stateCounterBelowLimit(&screen->holder, FUN_002333f0(window)) != 0) {
             confirm = 1;
         }
@@ -154,7 +156,7 @@ void Obj422448::FUN_003abed8()
     if (screen->shownSkillId == skillId) {
         return;
     }
-    if (screen->holder.inner.busy != 0) {
+    if (uiStateGetFirstFlag(&screen->holder.inner) != 0) {
         FUN_0029dfc0(0);
         return;
     }

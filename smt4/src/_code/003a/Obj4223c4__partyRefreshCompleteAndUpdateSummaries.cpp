@@ -1,4 +1,4 @@
-/* NON_MATCHING: party-entry base is not hoisted and summary arithmetic/register scheduling differs; -O2 candidate. */
+/* NON_MATCHING: register allocation only (retail keeps the screen in r9, the 0x500 block in r6, the entries base in r7 and the id in r8; build allocates this/entries/id differently). */
 #include "common.h"
 #include "classes/Obj4223c4.h"
 #include "quest_center/qcMain.h"
@@ -35,7 +35,14 @@ struct RefreshDemon {
     u8 unk59a[0x67];
     u8 bonus; // 0x601
 };
-struct RefreshEntry { u16 id; u8 unk02[0x1e]; };
+/* The part of the screen's state at 0x500: the keep-display flag and the entry count. */
+struct RefreshBlock {
+    u8 unk00[0xA4];
+    u8 keepDisplay;
+    u8 unkA5[3];
+    s16 count;
+};
+struct RefreshEntry { u8 unk00[4]; u16 id; u8 unk06[0x1a]; };
 struct PartyRefresh {
     u8 unk000[0x14];
     u32 state, phase;
@@ -45,9 +52,7 @@ struct PartyRefresh {
     u32 request; // 0x5a0
     u8 keepDisplay;
     u8 unk5a5[3];
-    s16 count;
-    u16 unk5aa;
-    RefreshEntry entries[1]; // 0x5ac
+    RefreshEntry entries[1]; // 0x5a8
 };
 extern "C" {
 s32 scrRunOpcodesStub(u32);
@@ -69,9 +74,11 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
     PartyRefresh * work = reinterpret_cast<PartyRefresh *>(this);
     if (scrRunOpcodesStub(work->request) != 2)
         return;
+    const RefreshBlock *block = reinterpret_cast<const RefreshBlock *>(reinterpret_cast<u8 *>(work) + 0x500);
     if (!messageMainGetChoiceResult()) {
-        for (s32 i = 0; i < work->count; ++i) {
-            u16 id = work->entries[i].id;
+        for (s32 i = 0; i < block->count; ++i) {
+            const RefreshEntry *entries = work->entries;
+            u16 id = entries[i].id;
             const RefreshDemon *unit = reinterpret_cast<const RefreshDemon *>(FUN_003ad6e0(id));
             RefreshSummary summary;
             if (gameRecordCopy(id, &summary)) {
@@ -79,7 +86,7 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
                 summary.experience = unit->experience;
                 summary.id = unit->id;
                 summary.kind = unit->kind;
-                summary.stats[0] = unit->bonusStats[0] + unit->stats[0];
+                summary.stats[0] = unit->stats[0] + unit->bonusStats[0];
                 summary.baseStats[0] = unit->baseStats[0];
                 summary.stats[1] = unit->stats[1] + unit->bonusStats[1];
                 summary.baseStats[1] = unit->baseStats[1];
@@ -87,7 +94,7 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
                 summary.baseStats[2] = unit->baseStats[2];
                 summary.stats[3] = unit->stats[3] + unit->bonusStats[3];
                 summary.baseStats[3] = unit->baseStats[3];
-                summary.stats[4] = unit->bonusStats[4] + unit->stats[4];
+                summary.stats[4] = unit->stats[4] + unit->bonusStats[4];
                 summary.baseStats[4] = unit->baseStats[4];
                 summary.skills = unit->skills;
                 summary.options.bits.bonus = unit->bonus;
@@ -98,8 +105,8 @@ void Obj4223c4::partyRefreshCompleteAndUpdateSummaries()
     }
     buttonHelpSetPreset(buttonHelpGetMode());
     FUN_002a0cc8(0);
-    if (work->count < 1) {
-        if (!work->keepDisplay)
+    if (block->count < 1) {
+        if (!block->keepDisplay)
             FUN_0029cc44(1);
         FUN_0029ee6c(0, 0x323232ff);
         beginStatusPanelClose();

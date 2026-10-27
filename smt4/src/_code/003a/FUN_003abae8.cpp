@@ -1,119 +1,122 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003abae8` (_code @ 0x3abae8, 0x274 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: rewritten from retail; retail forms the first id address through a pool offset and the second from 0x5A8 without sharing them, and orders the selected/unselected setup differently. */
+#include "common.h"
+
+/* A layout slot: the position of an element relative to the panel. */
+struct LayoutSlot {
+    /* 0x00 */ u8 unk00[8];
+    /* 0x08 */ s16 x;
+    /* 0x0A */ s16 y;
+};
+
+struct ScreenPoint {
+    f32 x;
+    f32 y;
+};
+
+/* One listed row (0x20 bytes). */
+struct RowEntry {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[6];
+    /* 0x08 */ u32 count;
+    /* 0x0C */ u8 unk0C[0x10];
+    /* 0x1C */ const char *name;
+};
+
+/* The sub-state the panel embeds at 0x55C (its selected byte is read by a linker-inlined getter). */
+struct CursorState {
+    /* 0x00 */ u8 unk00[0x11];
+    /* 0x11 */ s8 selected;
+    /* 0x12 */ u8 unk12[0x26];
+};
+
+/* The same rows seen from 0x5A8: the id follows a leading word. */
+struct RowIdEntry {
+    /* 0x00 */ u32 unk00;
+    /* 0x04 */ u16 id;
+    /* 0x06 */ u8 unk06[0x1A];
+};
+
+struct RowList {
+    u8 unk5A8[4];
+    /* 0x5AC */ RowEntry entries[1];
+};
+
+struct RowPanel {
+    /* 0x000 */ u8 unk000[0xC8];
+    /* 0x0C8 */ u8 layout[0x494];
+    /* 0x55C */ CursorState cursor;
+    /* 0x594 */ u8 unk594[0x14];
+    union {
+        RowList list;
+        /* 0x5A8 */ RowIdEntry idEntries[1];
+    };
+};
 
 extern "C" {
+s8 uiSubStateGetSelected(const CursorState *cursor);
+LayoutSlot *FUN_002bf4f0(u8 *layout, u32 id);
+void uiDrawScrollingSelectionEntry(RowPanel *panel, s32 index, s32 alpha, s32 row);
+void FUN_002be56c(u8 *layout, s32 style, u32 color, const char *text, f32 x, f32 y, f32 scale, f32 c, f32 d);
+void FUN_00231bcc(u8 *layout, u32 image, s32 x, s32 y, s32 alpha, u32 flags);
+s32 FUN_00262cb0(u16 id);
+s32 FUN_00288e68(s32 id);
+void FUN_002b6c34(s16 id, s32 x, s32 y, s32 alpha, s32 a, s32 b);
+void pairCopy(u8 *layout, ScreenPoint *point);
+s32 textFormatBuffer(char *destination, const char *format, ...);
+void drawTextAtRelativePosition(u8 *layout, s32 a, s32 x, s32 y, s32 b, s32 c, u32 color, s32 alpha, const char *text);
 
-int uiDrawScrollingSelectionEntry(int, int, int, int);
-int drawTextAtRelativePosition(...);
-int pairCopy(int, float *);
-int FUN_00231bcc(int, int, int, int, int, int);
-int FUN_00288e68(...);
-int FUN_002b6c34(...);
-int FUN_002be56c(int, unsigned int, unsigned int, unsigned int);
-int textFormatBuffer(...);
-int FUN_002bf4f0(...);
-int VectorSignedToFloat(...);
-
-/* stack frame of param_5: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp58; /* 0x58: local_58 */
-    unsigned int sp64; /* 0x64: local_64 */
-    unsigned int sp68; /* 0x68: local_68 */
-    unsigned int sp6C; /* 0x6c: local_6c */
-    unsigned int sp70; /* 0x70: local_70 */
-} param_5_stack;
-
-extern unsigned char LAB_003abd7c; /* 0x3abd7c */
-
-/* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: uiDrawScrollingSelectionEntry. */
-/* Supplied declaration required: drawTextAtRelativePosition. */
-/* Supplied declaration required: pairCopy. */
-/* Supplied declaration required: FUN_00231bcc. */
-extern int FUN_00262cb0(unsigned short);
-/* Supplied declaration required: FUN_00288e68. */
-/* Supplied declaration required: FUN_002b6c34. */
-/* Supplied declaration required: FUN_002be56c. */
-/* Supplied declaration required: textFormatBuffer. */
-/* Supplied declaration required: FUN_002bf4f0. */
-
-
-void FUN_003abae8(int param_1,int param_2,int param_3,int param_4,int param_5)
-
+/* Draws one row of the panel: its name box, the demon icon with its id and the count. */
+void FUN_003abae8(RowPanel *panel, s32 index, s32 row, s32 selected, s32 alpha)
 {
-/* irregular: irregular input(s): in_fpscr; 11 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int in_fpscr;
-  float temp_v7;
-  float temp_v8;
-  unsigned int temp_v9;
-  unsigned int temp_v10;
-  float temp_v11;
-  float fStack_54;
-  unsigned char temp_v12 [44];
-  
-  temp_v5 = param_1 + param_3 * 0x20;
-  temp_v0 = (unsigned int)*(unsigned short *)(temp_v5 + 0x5ac);
-  VectorSignedToFloat(0x100 - param_5,(unsigned char)(in_fpscr >> 0x16) & 3);
-  if (param_4 != 0) {
-    temp_v1 = FUN_002bf4f0(param_1 + 200,param_2 + 0x42f);
-  }
-  else {
-    temp_v1 = FUN_002bf4f0(param_1 + 200,param_2 + 0x40e);
-  }
-  temp_v3 = (int)*(short *)(temp_v1 + 8);
-  temp_v1 = (int)*(short *)(temp_v1 + 10);
-  if (param_4 != 0) {
-    uiDrawScrollingSelectionEntry(param_1,param_2,param_5,(int)*(char *)(param_1 + 0x56d));
-    temp_v9 = 3;
-    temp_v4 = 0xffffffff;
-    temp_v10 = 0x4e0;
-  }
-  else {
-    temp_v9 = 2;
-    temp_v4 = 0xff;
-    temp_v10 = 0x4ce;
-  }
-  temp_v2 = FUN_00262cb0(*(unsigned short *)(param_1 + param_3 * 0x20 + 0x5ac));
-  if (temp_v2 != 0) {
-    temp_v4 = 0x5a5a5aff;
-  }
-  temp_v6 = *(unsigned int *)(temp_v5 + 0x5c8);
-  temp_v2 = FUN_002bf4f0(param_1 + 200,temp_v10);
-  VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  FUN_002be56c(param_1 + 200,temp_v9,temp_v4,temp_v6);
-  if (param_4 == 0) {
-    temp_v4 = 0x4cd;
-  }
-  else {
-    temp_v4 = 0x476;
-    FUN_00231bcc(param_1 + 200,0x4df,temp_v3,temp_v1,param_5,1);
-  }
-  temp_v2 = FUN_002bf4f0(param_1 + 200,temp_v4);
-  pairCopy(param_1 + 200,&temp_v11);
-  temp_v7 = (float)VectorSignedToFloat(*(short *)(temp_v2 + 8) + temp_v3,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v8 = (float)VectorSignedToFloat(*(short *)(temp_v2 + 10) + temp_v1,(unsigned char)(in_fpscr >> 0x16) & 3);
-  temp_v2 = (int)(temp_v7 + temp_v11);
-  FUN_00288e68(temp_v0);
-  FUN_002b6c34((int)(short)temp_v0,temp_v2,(int)(temp_v8 + fStack_54),param_5,0,0);
-  textFormatBuffer(temp_v12,&LAB_003abd7c,*(unsigned int *)(temp_v5 + 0x5b4));
-  if (param_4 != 0) {
-    temp_v5 = FUN_002bf4f0(param_1 + 200,0x4f0);
-  }
-  else {
-    temp_v5 = FUN_002bf4f0(param_1 + 200,0x4de);
-  }
-  drawTextAtRelativePosition(param_1 + 200,0,*(short *)(temp_v5 + 8) + temp_v3,*(short *)(temp_v5 + 10) + temp_v1,0,7,
-               0xffffffff,param_5,temp_v12);
-  return;
+    char text[44];
+    u32 id = panel->list.entries[row].id;
+    f32 scale = (f32)(0x100 - alpha) * (1.0f / 256.0f);
+    LayoutSlot *slot;
+    if (selected == 0)
+        slot = FUN_002bf4f0(panel->layout, index + 0x40E);
+    else
+        slot = FUN_002bf4f0(panel->layout, index + 0x42F);
+    s32 baseX = slot->x;
+    s32 baseY = slot->y;
+    s32 style;
+    u32 color;
+    u32 nameBox;
+    if (selected != 0) {
+        uiDrawScrollingSelectionEntry(panel, index, alpha, uiSubStateGetSelected(&panel->cursor));
+        style = 3;
+        color = 0xFFFFFFFF;
+        nameBox = 0x4E0;
+    } else {
+        style = 2;
+        color = 0xFF;
+        nameBox = 0x4CE;
+    }
+    if (FUN_00262cb0(panel->idEntries[row].id))
+        color = 0x5A5A5AFF;
+    const char *name = panel->list.entries[row].name;
+    LayoutSlot *box = FUN_002bf4f0(panel->layout, nameBox);
+    FUN_002be56c(panel->layout, style, color, name, (f32)(box->x + baseX), (f32)(box->y + baseY), scale, 1.0f, 0.0f);
+    u32 iconBox;
+    if (selected == 0) {
+        iconBox = 0x4CD;
+    } else {
+        iconBox = 0x476;
+        FUN_00231bcc(panel->layout, 0x4DF, baseX, baseY, alpha, 1);
+    }
+    LayoutSlot *icon = FUN_002bf4f0(panel->layout, iconBox);
+    ScreenPoint origin;
+    pairCopy(panel->layout, &origin);
+    f32 iconX = (f32)(icon->x + baseX) + origin.x;
+    f32 iconY = (f32)(icon->y + baseY) + origin.y;
+    s32 shown = FUN_00288e68(id);
+    FUN_002b6c34((s16)shown, (s32)iconX, (s32)iconY, alpha, 0, 0);
+    textFormatBuffer(text, "%8d", panel->list.entries[row].count);
+    LayoutSlot *countBox;
+    if (selected == 0)
+        countBox = FUN_002bf4f0(panel->layout, 0x4DE);
+    else
+        countBox = FUN_002bf4f0(panel->layout, 0x4F0);
+    drawTextAtRelativePosition(panel->layout, 0, countBox->x + baseX, countBox->y + baseY, 0, 7, 0xFFFFFFFF, alpha, text);
 }
 
 } /* extern "C" */

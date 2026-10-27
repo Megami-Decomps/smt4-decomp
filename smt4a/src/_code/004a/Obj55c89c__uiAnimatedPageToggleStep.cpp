@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail shares one phase store between the phase 1 and phase 3 paths and keeps the constant 2 in a register for state and phase. */
+/* NON_MATCHING: register allocation only: retail keeps the animation track offset in r0 (built needs r1). */
 #include "common.h"
 #include "classes/Obj55c89c.h"
 #include "code/Code002a.h"
@@ -69,7 +69,7 @@ void Obj55c89c::uiAnimatedPageToggleStep()
         page->phase = 3;
         return;
     } else if (objectGetIndexedSignedFlag(page->animation, page->track) && page->phase == 3) {
-        page->state = 2;
         page->phase = 0;
+        page->state = 2;
     }
 }

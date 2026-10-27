@@ -1,12 +1,10 @@
-/* NON_MATCHING: snapshot globals are modelled as from/to pairs (retail loads each pair from one literal); retail takes the delta through pointers to the destination/origin vectors and re-reads the origin directly, with different vector register grouping. */
+/* NON_MATCHING: the snapshot vectors are now four separate bss objects defined here (retail's pool words name the `to` vectors DAT_00493524/DAT_0049353c and derive each `from` by `sub #12`; armcc anchors on the `from` object and adds 12); the origin/destination delta goes through vector pointers like retail, but retail's VFP load grouping still differs. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 
 extern "C" {
-struct SnapshotPair {
-    BattleVector3 from, to;
-};
-extern SnapshotPair DAT_00493518;
-extern SnapshotPair DAT_00493530;
+/* The battle camera's vector snapshots (from, to), the origin pair then the current-position pair; they sit
+ * together with the module's other globals. */
+BattleVector3 DAT_00493518, DAT_00493524, DAT_00493530, DAT_0049353c;
 f32 FUN_00227280(s32 mode, s32 duration, u32 frame);
 void FUN_003d7298(BattleVectorTransition *, u32);
 
@@ -51,23 +49,21 @@ void FUN_003d5698(BattleVectorTransition *owner, u32 frame)
     if (work->vectors.flags & 0x100000)
         return;
     f32 factor = FUN_00227280(0, work->channels.duration, frame);
-    work->channels.scale = DAT_00493518.from.x + (DAT_00493518.to.x - DAT_00493518.from.x) * factor;
-    BattleVector3 delta = {
-        work->vectors.destination.x - work->channels.origin.x,
-        work->vectors.destination.y - work->channels.origin.y,
-        work->vectors.destination.z - work->channels.origin.z
-    };
+    work->channels.scale = DAT_00493518.x + (DAT_00493524.x - DAT_00493518.x) * factor;
+    const BattleVector3 *destination = &work->vectors.destination;
+    const BattleVector3 *origin = &work->channels.origin;
+    BattleVector3 delta = {destination->x - origin->x, destination->y - origin->y, destination->z - origin->z};
     work->vectors.elapsed.x = work->channels.origin.x + delta.x * factor;
     work->vectors.elapsed.y = work->channels.origin.y + delta.y * factor;
     work->vectors.elapsed.z = work->channels.origin.z + delta.z * factor;
     BattleVector3 currentDelta = {
-        DAT_00493530.to.x - DAT_00493530.from.x,
-        DAT_00493530.to.y - DAT_00493530.from.y,
-        DAT_00493530.to.z - DAT_00493530.from.z
+        DAT_0049353c.x - DAT_00493530.x,
+        DAT_0049353c.y - DAT_00493530.y,
+        DAT_0049353c.z - DAT_00493530.z
     };
-    work->vectors.current.x = DAT_00493530.from.x + currentDelta.x * factor;
-    work->vectors.current.y = DAT_00493530.from.y + currentDelta.y * factor;
-    work->vectors.current.z = DAT_00493530.from.z + currentDelta.z * factor;
+    work->vectors.current.x = DAT_00493530.x + currentDelta.x * factor;
+    work->vectors.current.y = DAT_00493530.y + currentDelta.y * factor;
+    work->vectors.current.z = DAT_00493530.z + currentDelta.z * factor;
 
     f32 primaryDelta = work->channels.primaryTarget - work->channels.primaryStart;
     factor = FUN_00227280(0, work->channels.duration, frame);

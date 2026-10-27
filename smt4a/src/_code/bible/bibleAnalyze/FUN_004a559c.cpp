@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP argument setup (the sliding-offset float and the text position) and the pool-constant loads are scheduled differently; the draw sequence is the same. */
+/* NON_MATCHING: stack frame (retail reserves 108 bytes and an extra saved register), VFP argument setup and pool-constant loads are scheduled differently; the draw sequence is the same. */
 #include "common.h"
 #include "code/Code002a.h"
 
@@ -63,6 +63,7 @@ void FUN_004a559c(AnalyzeWork *work)
 {
     s32 slide = work->slide;
     f32 offset = (f32)(0x100 - slide);
+    f32 opacity = offset * (1.0f / 256.0f);
 
     FUN_0049339c(work->panel, 13, 0, 0, slide, offset);
     s32 tab = ((AnalyzeFlagView *)work)->secondTab == 0 ? 0x1025 : 0x1023;
@@ -78,10 +79,9 @@ void FUN_004a559c(AnalyzeWork *work)
 
     textFormatBuffer(text, "%s%s", name, DAT_0057f0a0[1]);
     AnalyzeTextBox *box = layoutFindTableEntry(work->panel, 0x102B);
-    s32 width = curveEvaluateStandard(text, 2);
 
-    drawTextAtSnappedRectangle(work->panel, 2, -1, text, (f32)(box->x + *box->size / 2 - width / 2), (f32)box->y,
-                 offset * (1.0f / 256.0f), 1.0f, 0.0f);
+    drawTextAtSnappedRectangle(work->panel, 2, -1, text, (f32)(box->x + *box->size / 2 - curveEvaluateStandard(text, 2) / 2), (f32)box->y,
+                 opacity, 1.0f, 0.0f);
 
     s32 first = FUN_002a482c(work->list);
     s32 visible = work->rowCount < work->visibleRows ? work->rowCount : work->visibleRows;

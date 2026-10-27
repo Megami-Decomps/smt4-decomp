@@ -22,7 +22,7 @@ s32 FUN_003a06b8(const void *, const void *);
 s32 FUN_003a06fc(const void *, const void *);
 s32 FUN_003a075c(const void *, const void *);
 s32 FUN_003a63a8(const void *, const void *);
-s32 FUN_003a64cc(const void *, const void *);
+s32 rankedEntryCompare(const void *, const void *);
 
 /* Once the use counter has finished, leaves the sort state; otherwise sorts the current category's slots by the chosen key. */
 void FUN_003a3f28(ShopScreen *screen)
@@ -32,8 +32,8 @@ void FUN_003a3f28(ShopScreen *screen)
         FUN_002a0cc8(0);
         buttonHelpSelectMenuPreset(screen);
         if (screen->variant == 1) {
-            screen->mode = screen->category != 8 ? 15 : 16;
             screen->substep = 0;
+            screen->mode = screen->category != 8 ? 15 : 16;
             return;
         }
         if (screen->category == 7) {
@@ -88,7 +88,7 @@ void FUN_003a3f28(ShopScreen *screen)
         if (useCounterGetValue() == 0)
             FUN_0027f3dc(table->slots, table->count, 4, FUN_003a0028);
         else
-            FUN_0027f3dc(table->slots, table->count, 4, FUN_003a64cc);
+            FUN_0027f3dc(table->slots, table->count, 4, rankedEntryCompare);
         break;
     }
 }

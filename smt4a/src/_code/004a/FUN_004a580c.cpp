@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected inventory entry/category offsets and help arguments; owner subobject bases, ID loads and saved-register scheduling differ. */
+/* NON_MATCHING: corrected inventory entry/category offsets and help arguments; owner subobject bases and saved-register scheduling differ (the entry id is read through an inline u16 getter: ldrh + sxth like retail). */
 #include "common.h"
 #include "shard/W6_W6Match4_RelativeDirectory.h"
 #include "ui/ItemListSelection.h"
@@ -53,6 +53,7 @@ typedef char QuestMenuLayoutCheck[
     sizeof(QuestListEntry) == 0x20 && sizeof(QuestMenu) == 0xA980 ? 1 : -1];
 
 extern "C" {
+u16 shopListItemGetId(const QuestListEntry *entry);
 s32 flaggedValueHolderGetTotal(void *holder);
 void uiOpenStartAnimations(QuestMenu *menu);
 void FUN_0032d0c8(RelativeDirectory *directory, u32 index, u16 skillId, u32 extra);
@@ -81,9 +82,9 @@ void FUN_00212724(void);
 void FUN_004a580c(QuestMenu *menu)
 {
     QuestListEntry *entries = menu->entries;
-    s16 previousQuest = entries[flaggedValueHolderGetTotal(menu->list)].questId;
+    s16 previousQuest = shopListItemGetId(&entries[flaggedValueHolderGetTotal(menu->list)]);
     uiOpenStartAnimations(menu);
-    s16 quest = entries[flaggedValueHolderGetTotal(menu->list)].questId;
+    s16 quest = shopListItemGetId(&entries[flaggedValueHolderGetTotal(menu->list)]);
     if (quest != previousQuest)
         FUN_0032d0c8(NULL, 1, (u16)quest, 0);
 

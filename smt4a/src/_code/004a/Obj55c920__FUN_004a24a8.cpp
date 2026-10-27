@@ -24,7 +24,7 @@ typedef struct {
     unsigned int sp40; /* 0x40: local_40 */
 } param_1_stack;
 
-extern unsigned int DAT_005e1e88; /* 0x5e1e88 */
+extern unsigned int g_entryWindowColors; /* 0x5e1e88 */
 
 /* Supplied declaration required: efctSetSpeed. */
 /* Supplied declaration required: FUN_00183bb0. */
@@ -146,7 +146,7 @@ extern "C" void _ZN9Obj55c92012FUN_004a24a8Ev(int param_1)
         temp_v7 = temp_v7 + 1;
       } while (temp_v7 < 5);
       if (0 < temp_v2) {
-        unaff_r11 = &DAT_005e1e88;
+        unaff_r11 = &g_entryWindowColors;
       }
       temp_v7 = 0;
       if (temp_v7 < temp_v2) {

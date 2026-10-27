@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild of the item-sale list builder; retail hoists the list base (+0x9FFC), the counter address and the price accumulator address into callee-saved registers and builds the packed item word in a stack slot with piece moves, which armcc here allocates differently. */
+/* NON_MATCHING: readable rebuild of the item-sale list builder; list, counter and price accumulator are named pointers and the add-or-count scan is structured as retail's early-exit loop, but retail keeps the menu, discount pointer and accumulator address in stack slots and a constant 1 in fp, so the callee-saved register allocation differs. */
 #include "common.h"
 #include "gamedata/FlagValueIsPositive.h"
 
@@ -43,14 +43,22 @@ struct SaleMenu {
 /* A packed item word: id, flags (bit 1: percentage priced) and the percentage. */
 struct PackedItem {
     u16 id;
-    u16 flags;
+    union {
+        u16 flags;
+        struct {
+            u16 unk00 : 1;
+            u16 percentagePriced : 1;
+            u16 percentage : 8;
+            u16 unk0A : 6;
+        } pricing;
+    };
 };
 
 extern "C" {
 extern u8 sortCompareKeyPair;
 
 void sysMemClear(void *block, u32 bytes);
-u16 *FUN_00145f04(u8 rank, u32 seed);
+u16 *FUN_00145f04(u8 rank, u32 seed, s32 column);
 s32 FUN_001ba3d0(u32 flag);
 void aocRecordLookup83(u32 flag);
 u32 resolveWeightedItemChoice(u32 a, u32 b, u32 c, u32 d);
@@ -65,12 +73,40 @@ void FUN_004d05c4(void *p, s32 a, s32 b, s32 c);
 /* Builds the sale list: every owned item between flags 0x3B7 and 0x47E is turned into a resolved
  * choice (counting duplicates), priced and removed from the inventory, then the list is sorted and
  * shown. */
+/* Builds a packed item word with no percentage price. */
+static __inline void packedItemInit(PackedItem *item, u16 id)
+{
+    item->pricing.unk00 = 0;
+    item->pricing.percentagePriced = 0;
+    item->pricing.percentage = 0;
+    item->id = id;
+}
+
+/* Counts another copy of (item, result), appending a new entry when it is not listed yet. */
+static __inline void saleEntriesAdd(SaleEntry *entries, u16 *count, u16 item, u16 result)
+{
+    for (s32 index = 0; index < *count; index++) {
+        if (entries[index].item == item && entries[index].result == result) {
+            entries[index].count++;
+            return;
+        }
+    }
+    entries[*count].item = item;
+    entries[*count].result = result;
+    entries[*count].count++;
+    (*count)++;
+}
+
 void FUN_0049a5b4(SaleMenu *menu)
 {
-    menu->entryCount = 0;
-    menu->total = 0;
-    sysMemClear(menu->entries, 0xC000);
-    u16 *discount = FUN_00145f04(menu->rank, menu->seed);
+    PackedItem item;
+    SaleEntry *entries = menu->entries;
+    u16 *count = &menu->entryCount;
+    s32 *total = &menu->total;
+    *count = 0;
+    *total = 0;
+    sysMemClear(entries, 0xC000);
+    u16 *discount = FUN_00145f04(menu->rank, menu->seed, menu->rank == 0 ? 6 : 1);
     for (u32 flag = 0x3B7; flag < 0x47F; flag++) {
         if (!flagValueIsPositiveForward(flag))
             continue;
@@ -81,37 +117,22 @@ void FUN_0049a5b4(SaleMenu *menu)
             if (choice == 0)
                 continue;
             u16 result = (u16)choice;
-            if ((u16)flag != 0) {
-                u32 index = 0;
-                for (; index < menu->entryCount; index++) {
-                    if (menu->entries[index].item == (u16)flag && menu->entries[index].result == result) {
-                        menu->entries[index].count++;
-                        break;
-                    }
-                }
-                if (index == menu->entryCount) {
-                    menu->entries[menu->entryCount].item = (u16)flag;
-                    menu->entries[menu->entryCount].result = result;
-                    menu->entries[menu->entryCount].count++;
-                    menu->entryCount++;
-                }
-            }
+            if ((u16)flag != 0)
+                saleEntriesAdd(entries, count, (u16)flag, result);
             if (FUN_0049cab8(choice)) {
-                PackedItem packed;
-                packed.id = result;
-                packed.flags = 0;
-                if (*discount != 0)
-                    packed.flags = 2 | ((*discount & 0xFF) << 2);
-                menu->total += aocItemGetPrice(&packed);
+                packedItemInit(&item, result);
+                if (*discount != 0) {
+                    item.pricing.percentagePriced = 1;
+                    item.pricing.percentage = *discount;
+                }
+                *total += aocItemGetPrice(&item);
             }
         }
-        PackedItem removed;
-        removed.id = (u16)flag;
-        removed.flags = 0;
-        FUN_0049cd18(&removed, -owned, 0);
+        packedItemInit(&item, (u16)flag);
+        FUN_0049cd18(&item, -owned, 0);
     }
-    qsort(menu->entries, menu->entryCount, 6, &sortCompareKeyPair);
-    FUN_004cfeb0(menu->list, 10, menu->entryCount, 0);
+    qsort(entries, *count, 6, &sortCompareKeyPair);
+    FUN_004cfeb0(menu->list, 10, *count, 0);
     ((u8 *)menu)[0x9F95] = 1;
     listCursorSetPage(menu->list, 1);
     menu->window->attach(menu->list);

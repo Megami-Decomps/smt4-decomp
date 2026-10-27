@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop shape: retail runs the 7-slot search as a plain (not unrolled) loop re-deriving each slot address from the save-data pointer; the build unrolls it and hoists the slot base. */
+/* NON_MATCHING: the 7-slot search is now the plain per-slot loop with separate halfword loads (retail shape); remaining: the rank shift is written to r3 where retail uses r1 (the freed slot-id register). */
 #include "common.h"
 
 /* A save-data slot: an ID and a packed word whose bits 10+ hold a rank. */
@@ -35,8 +35,13 @@ u32 FUN_003453b0(u32 id)
         SaveRanks *save = &g_gameDataBlocks.block->save;
 
         for (s32 i = 0; i < 7; i++) {
-            if (save->slots[i].id == id) {
-                return (u32)((save->slots[i].packed >> 10) - 1) < 3 ? 1 : 0;
+            u32 slotId = save->slots[i].id;
+            u32 rank = save->slots[i].packed >> 10;
+            if (slotId == id) {
+                if (rank - 1 <= 2) {
+                    return 1;
+                }
+                return 0;
             }
         }
     }

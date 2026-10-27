@@ -36,8 +36,8 @@ void FUN_003bb454(SceneWidget *widget)
     if (widget->nextTex != -1 && FUN_002bf818(&widget->sprite) != 0) {
         widget->shownTex = widget->nextTex;
         widget->shownKey = widget->nextKey;
-        widget->nextTex = -1;
         widget->nextKey = -1;
+        widget->nextTex = -1;
     }
     for (s32 i = 0; i < SCENE_TEXTURE_COUNT; i++) {
         if (widget->loaded[i] != 0

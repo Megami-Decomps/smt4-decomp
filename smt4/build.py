@@ -350,6 +350,27 @@ def needs_carving(obj, unit):
             or any(not s["shndx"] and structor(s["name"]) != s["name"] for s in symbols))
 
 
+def retail_word_name(unit, offset):
+    """(symbol, addend) of the R_ARM_ABS32 relocation at `offset` of the unit's retail target object,
+    or None when the target has none there."""
+    import struct
+    path = ROOT / unit["target"]
+    if not path.exists():
+        return None
+    data = path.read_bytes()
+    sections, symbols = read_elf(data)
+    text = next((i for i, s in enumerate(sections) if s["name"] == ".text"), None)
+    for rel in sections:
+        if rel["type"] != 9 or rel["info"] != text:
+            continue
+        for at in range(rel["offset"], rel["offset"] + rel["size"], 8):
+            where, info = struct.unpack_from("<II", data, at)
+            if where == offset and info & 0xFF == 2 and symbols[info >> 8]["name"]:
+                body = sections[text]
+                return symbols[info >> 8]["name"], struct.unpack_from("<I", data, body["offset"] + offset)[0]
+    return None
+
+
 def carve(obj, unit):
     """Rewrite an object compiled with --split_sections to hold only the unit's function, as the one
     function per unit the retail objects are: its own section becomes `.text`; what it references in
@@ -385,6 +406,16 @@ def carve(obj, unit):
                 word = struct.unpack_from("<I", code, offset)[0]
                 owner = max((s for s in symbols if s["shndx"] == target["shndx"] and s["type"] == 1 and s["name"]
                              and s["value"] <= word), key=lambda s: s["value"], default=None)
+                if owner is not None and owner["name"].startswith("<"):
+                    # armcc's anonymous constant (`<DataN>`: a pointer-to-member table, a literal it
+                    # copies from): it has no name of its own, so it takes the one retail's object gives
+                    # the word at the same place, which is where relink resolves it.
+                    owner = retail_word_name(unit, offset)
+                    if owner is None:
+                        return False
+                    relocs.append((offset, owner[0], 2))
+                    struct.pack_into("<I", code, offset, owner[1])
+                    continue
                 if owner is None:
                     return False
                 struct.pack_into("<I", code, offset, word - owner["value"])

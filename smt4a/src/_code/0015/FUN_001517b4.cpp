@@ -5,7 +5,7 @@
 
 extern "C" {
 s32 padButtonIsPressed(s32 key);
-s32 FUN_00164cf4(s32 direction);
+s32 buttonHelpIsKindActive(s32 direction);
 s32 buttonHelpIsKindInitialSelection(s32 direction);
 s32 FUN_00166fa0(s32 direction);
 
@@ -72,7 +72,7 @@ s32 FUN_001517b4(s32 key, s32 mode)
     if (stickDirection != 0) {
         switch (mode) {
         case 2:
-            return FUN_00164cf4(stickDirection);
+            return buttonHelpIsKindActive(stickDirection);
         case 1:
             return buttonHelpIsKindInitialSelection(stickDirection);
         case 0:

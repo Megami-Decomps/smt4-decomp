@@ -46,15 +46,22 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
     s32 spacing = asdTMTexTableEntryAt(12, 130)->height & 0x7fff;
     TextureTableEntryIV *placement = asdTMTexTableEntryAt(12, placementIndex + 135);
     s32 horizontalOffset = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));
-    ItemRowAnimation *row = &context->rows[rowIndex];
-    s32 rowX = vec2GetXInt(row->position);
-    s32 rowY = vec2GetYInt(row->position);
-    f32 speed = row->speed;
+    s32 rowX = vec2GetXInt(context->rows[rowIndex].position);
+    s32 rowY = vec2GetYInt(context->rows[rowIndex].position);
+    f32 speed = context->rows[rowIndex].speed;
     s32 x = placement->x + rowX + horizontalOffset;
     s32 y = spacing * rowIndex + placement->y + rowY;
     btlDrawLayeredHud(context, x, y, entry->label);
     const char *text;
-    if (entry->effect) {
+    if (!entry->effect) {
+        s32 category = entry->category;
+        if (category == 0)
+            return;
+        efctSetSpeed(speed);
+        TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
+        uiDrawItemCategoryIcon(static_cast<s16>(category), icon->x + x, icon->y + y, 26, 0);
+        text = FUN_0015f858(category, 0);
+    } else {
         s16 effect = static_cast<s16>(entry->effect);
         efctSetSpeed(speed);
         TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
@@ -65,14 +72,6 @@ extern "C" void uiDrawAnimatedItemDescriptionRow(ItemRowContext *context, s32 ro
             text = DAT_0052b4c4;
         else
             text = reinterpret_cast<const char *>(FUN_0014bd84(effect));
-    } else {
-        s32 category = entry->category;
-        if (category == 0)
-            return;
-        efctSetSpeed(speed);
-        TextureTableEntryIV *icon = asdTMTexTableEntryAt(12, 134);
-        uiDrawItemCategoryIcon(static_cast<s16>(category), icon->x + x, icon->y + y, 26, 0);
-        text = FUN_0015f858(category, 0);
     }
     TextureTableEntryIV *position = asdTMTexTableEntryAt(12, 135);
     textDrawString(2, 255, text, static_cast<f32>(position->x + x), static_cast<f32>(position->y + y), 0.55f, 0.0f, speed);

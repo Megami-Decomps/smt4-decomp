@@ -1,4 +1,4 @@
-/* NON_MATCHING: prologue order, fallback-name lifetime, and final selected-entry tail call (uxth id) differ. */
+/* NON_MATCHING: prologue order, fallback-name lifetime and the constant-argument schedule of the final tail call differ. */
 #include "shard/Shard004A.h"
 #include "classes/Obj55c8d0.h"
 #include "code/Code0033.h"
@@ -11,6 +11,7 @@ struct BibleAnalyzeTextGlobals {
 };
 }
 extern "C" {
+u32 shopListItemGetId(const BibleAnalyzeListEntry *entry);
 void FUN_00163aa4(UiAnimatedSprite *, f32 speed);
 s8 uiSpriteGetCompletionState(const UiAnimatedSprite *sprite);
 s32 vec2GetXInt(const UiAnimatedSprite *);
@@ -51,15 +52,16 @@ void Obj55c8d0::FUN_004a4d70()
             typedef char AnalyzeListOffsetCheck[offsetof(AnalyzeListView, entries) == 0x864 ? 1 : -1];
             BibleAnalyzeListEntry *entries = reinterpret_cast<AnalyzeListView *>(screen)->entries;
             s32 index = flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(screen->listSelection.selectedIndex));
-            FUN_0032d0c8(0, 1, entries[index].id, 0);
-            return;
+            u16 id = shopListItemGetId(&entries[index]);
+            FUN_0032d0c8(0, 1, id, 0);
+        } else {
+            char message[80];
+            u8 nameStorage[8];
+            const char *name = dataLookupDisplayName(nameStorage, screen->displayNameId);
+            if (!name)
+                name = DAT_0052b5bc;
+            textFormatBuffer(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
+            buttonHelpSetText(message, 0x323232ff);
         }
-        char message[80];
-        u8 nameStorage[8];
-        const char *name = dataLookupDisplayName(nameStorage, screen->displayNameId);
-        if (!name)
-            name = DAT_0052b5bc;
-        textFormatBuffer(message, DAT_0052b5c4, name, DAT_0057f0a0.suffix);
-        buttonHelpSetText(message, 0x323232ff);
     }
 }

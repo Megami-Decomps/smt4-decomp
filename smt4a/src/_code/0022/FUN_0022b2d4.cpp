@@ -156,7 +156,7 @@ extern int FUN_003453b0(void);
 /* Supplied declaration required: FUN_003481c4. */
 /* Supplied declaration required: efctCallRoutineWithSpeedOverride. */
 extern int FUN_003e4d68(unsigned int);
-/* Supplied declaration required: FUN_003fabfc. */
+/* Supplied declaration required: spriteDrawAnimationUnplaced. */
 /* Supplied declaration required: FUN_0047fc38. */
 extern int equipmentHasPositiveUpgrade(unsigned int);
 /* Supplied declaration required: FUN_00480da8. */
@@ -422,7 +422,7 @@ LAB_0022b9b8:
             SpriteDrawVector3 position = {
                 temp_v24, romwright_u2f((u32)temp_v25), romwright_u2f((u32)temp_v26)
             };
-            FUN_003fabfc((SpriteDrawOwner *)*(unsigned int *)(temp_v2 + 0x2028), 0,
+            spriteDrawAnimationUnplaced((SpriteDrawOwner *)*(unsigned int *)(temp_v2 + 0x2028), 0,
                          &position, temp_v10 | 0xFF, 0,
                          (f32)*(unsigned int *)(temp_v2 + 0x202C), 1.0f);
           }

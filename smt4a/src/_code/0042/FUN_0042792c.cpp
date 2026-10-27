@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation only: retail saves the four arguments in r5-r8 in order and tests the sign with 'lsrs r1, r0, #31' keeping the status in r0; the build copies the status to r1 first and numbers the saved registers differently. */
+/* NON_MATCHING: the status is an nn::Result from a callee declared returning nn::Result (classes/WindowStatus.h), which fixes retail's lsrs-before-copy order; remaining: argument register allocation (retail saves the four arguments in r5-r8 in order). */
 #include "classes/WindowStatus.h"
 #include "nn/Result.h"
 
@@ -11,7 +11,7 @@ extern "C" {
 /* Runs the operation on `handle`; returns the failing status of the pre-check, or the operation's validated result. */
 WindowStatusResult FUN_0042792c(u32 handle, u32 second, u32 third, u32 fourth)
 {
-    s32 status = FUN_004283cc(reinterpret_cast<void *>(handle));
+    nn::Result status = FUN_004283cc(reinterpret_cast<void *>(handle));
 
     bool failed = nnResultIsFailure(status);
 

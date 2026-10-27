@@ -2,7 +2,7 @@
 
 extern "C" {
 
-extern void *DAT_0043ddb8;
+extern void *g_cecCardBox;
 void *FUN_00357818(u32 id);
 void asdCecCanOpenMessageBox(void *item, void *context);
 
@@ -10,7 +10,7 @@ void asdCecCanOpenMessageBox(void *item, void *context);
 void FUN_003bbc7c()
 {
     void *item = FUN_00357818(0xe5c);
-    asdCecCanOpenMessageBox(item, DAT_0043ddb8);
+    asdCecCanOpenMessageBox(item, g_cecCardBox);
 }
 
 }

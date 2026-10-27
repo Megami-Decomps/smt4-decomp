@@ -77,15 +77,14 @@ u16 nkmGrowthLearnRandomSkill(GrowDemon *demon)
         }
     } while (count <= 0 && --rank >= 0);
     u16 selected = 0;
-    s32 i;
     if (count > 0) {
         s32 index = randRange((count - 1) & 0xffff);
-        for (i = 0; i < 8; ++i) {
-            if (!demon->skills.ids[i]) {
-                selected = candidates[index];
-                FUN_004bd6b0(demon, selected);
-                break;
-            }
+        s32 i = 0;
+        while (i < 8 && demon->skills.ids[i])
+            ++i;
+        if (i < 8) {
+            selected = candidates[index];
+            FUN_004bd6b0(demon, selected);
         }
     }
     FUN_004bcd90(demon);

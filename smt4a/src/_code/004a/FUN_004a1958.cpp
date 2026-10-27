@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA and lays the party branch out first; built differs in frame size (28 vs 52 bytes) and branch order (236 vs 235 rows); the list rebuild is the same. */
+/* NON_MATCHING: retail hoists the header and list address computations above releaseEntriesA; built differs in frame size (28 vs 52 bytes); the party branch is now written first like retail's layout. */
 #include "common.h"
 #include "AsdSDK/AsdDebugHooks.h"
 #include "event/2dEvent/2dEventTex.h"
@@ -92,7 +92,46 @@ void FUN_004a1958(EntryScreen *screen)
 {
     releaseEntriesB(screen->panel);
     releaseEntriesA();
-    if (screen->mode != 1) {
+    if (screen->mode == 1) {
+        slotPoolResetTrackedState();
+        SlotTable *table = gameGetSlotTable();
+
+        for (u32 i = 0; i < table->partyCount; i = (u16)(i + 1)) {
+            s32 member = table->party[i];
+
+            if (member >= 0) {
+                PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
+
+                if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
+                    EntryRecord *record = FUN_00184310(slot->entryId);
+                    u8 entry[8];
+
+                    campFillUnitComparison(entry, record->id, 1);
+                    FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
+                    inventoryListAppend(&screen->list, entry);
+                }
+            }
+        }
+        screen->listedCount = 24;
+        FUN_004cfeb0(screen->layout, 10, screen->list.count, 0, 1, 1);
+        asdDebugHookPtrInt(screen->layout, 1);
+        screen->dirty = 1;
+        s32 total = 0;
+        s32 owned = 0;
+
+        for (s32 index = 0; index < 0x4FF; index++) {
+            EntryRecord *record = dataTable0ProbeEntryById((u16)(index + 1));
+
+            if (record != NULL && (record->flags & 1) != 0) {
+                total++;
+                if (FUN_002a4b28(record->id) != 0) {
+                    owned++;
+                }
+            }
+        }
+        screen->percent = calcPercentClamped(owned, total);
+        jyoucyuGetTableEntry(0);
+    } else {
         slotPoolResetTrackedState();
         s16 listed = 0;
         s32 index = 0;
@@ -147,45 +186,6 @@ void FUN_004a1958(EntryScreen *screen)
         asdDebugHookPtrInt(screen->layout, 1);
         screen->dirty = 1;
         screen->percent = gaugePercent(&screen->list, 1);
-        jyoucyuGetTableEntry(0);
-    } else {
-        slotPoolResetTrackedState();
-        SlotTable *table = gameGetSlotTable();
-
-        for (u32 i = 0; i < table->partyCount; i = (u16)(i + 1)) {
-            s32 member = table->party[i];
-
-            if (member >= 0) {
-                PartySlot *slot = (PartySlot *)((u8 *)table + member * 300);
-
-                if (FUN_0032fbd0((u8 *)slot + 0x68) == 0) {
-                    EntryRecord *record = FUN_00184310(slot->entryId);
-                    u8 entry[8];
-
-                    campFillUnitComparison(entry, record->id, 1);
-                    FUN_004a8750(record->id, screen->category, 0, screen->percent >= 100, 0);
-                    inventoryListAppend(&screen->list, entry);
-                }
-            }
-        }
-        screen->listedCount = 24;
-        FUN_004cfeb0(screen->layout, 10, screen->list.count, 0, 1, 1);
-        asdDebugHookPtrInt(screen->layout, 1);
-        screen->dirty = 1;
-        s32 total = 0;
-        s32 owned = 0;
-
-        for (s32 index = 0; index < 0x4FF; index++) {
-            EntryRecord *record = dataTable0ProbeEntryById((u16)(index + 1));
-
-            if (record != NULL && (record->flags & 1) != 0) {
-                total++;
-                if (FUN_002a4b28(record->id) != 0) {
-                    owned++;
-                }
-            }
-        }
-        screen->percent = calcPercentClamped(owned, total);
         jyoucyuGetTableEntry(0);
     }
     screen->panel->rebuild(screen->layout);

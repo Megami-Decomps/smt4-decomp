@@ -19,7 +19,7 @@ struct NodeSource {
     /* 0x4C */ SharedAllocationLink header;
 };
 
-static __inline void destroyLinks(SharedAllocationLink *first, SharedAllocationLink *last)
+static void destroyLinks(SharedAllocationLink *first, SharedAllocationLink *last)
 {
     for (; first < last; ++first)
         first->~SharedAllocationLink();
@@ -28,7 +28,7 @@ static __inline void destroyLinks(SharedAllocationLink *first, SharedAllocationL
 extern "C" void sharedAllocationArrayCopyRange(SharedAllocationArray *array, u32 destination, u32 source, s32 count);
 
 /* Removes the last reference from the array. */
-static __inline void popBack(SharedAllocationArray *array)
+static void popBack(SharedAllocationArray *array)
 {
     u32 count = array->count;
     u32 lastIndex = count - 1;

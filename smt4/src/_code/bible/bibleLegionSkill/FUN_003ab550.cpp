@@ -1,100 +1,89 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ab550` (_code @ 0x3ab550, 0x1b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: only the rectangle-pointer register (retail reuses r1 after the vtable store; build picks r2) and the order of the two controller stores differ. */
+#include "classes/Obj422448.h"
 #include "classes/Obj42242c.h"
+#include "AsdSDK/AsdDebug.h"
 #include "AsdSDK/Source/Sys/Kernel/AsdProcess.h"
 #include "AsdSDK/AsdMemAlloc.h"
 
+/* The screen's state beyond the shared view base that the start routine initializes. */
+struct BibleLegionSkillView {
+    /* 0x000 */ void *vtable;
+    /* 0x004 */ u32 job;
+    /* 0x008 */ u32 drawTask;
+    /* 0x00C */ u32 fadeTask;
+    /* 0x010 */ u8 unk010[4];
+    /* 0x014 */ s32 state;
+    /* 0x018 */ s32 stateArg;
+    /* 0x01C */ u8 unk01C[0x78];
+    /* 0x094 */ u8 flag94;
+    /* 0x095 */ u8 unk095[0x33];
+    /* 0x0C8 */ u8 rectangle[0x14];
+    /* 0x0DC */ u8 timers[0x480];
+    /* 0x55C */ u8 listView[0x10];
+    /* 0x56C */ u8 listReady;
+    /* 0x56D */ u8 unk56D[0x23];
+    /* 0x590 */ ObjBase3c2ef0 *controller;
+    /* 0x594 */ u8 unk594[0x14];
+    /* 0x5A8 */ u8 entries[0xA008];
+    /* 0xA5B0 */ u8 selectedSlot;
+};
+typedef char BibleLegionSkillViewLayout[
+    offsetof(BibleLegionSkillView, flag94) == 0x94 && offsetof(BibleLegionSkillView, rectangle) == 0xC8 &&
+    offsetof(BibleLegionSkillView, listReady) == 0x56C && offsetof(BibleLegionSkillView, controller) == 0x590 &&
+    offsetof(BibleLegionSkillView, selectedSlot) == 0xA5B0 ? 1 : -1];
+
 extern "C" {
+extern u32 *DAT_0043d9f8;
 
 void entryTableClear(void *table);
-int rectangleInitializeSelection(...);
-int FUN_00233240(...);
-int uiInitializeEightTimerSet(...);
-int FUN_00233670(...);
-int FUN_0029ee6c(...);
-int taskCreateDraw(...);
-int _ZN9Obj4224489buildListEv(...);
-int spriteTable22Acquire(void);
-int FUN_003ad0e0(void);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_1_stack;
-
-extern unsigned char LAB_003ab744; /* 0x3ab744 */
-extern unsigned char LAB_003ab760; /* 0x3ab760 */
-extern unsigned char LAB_003ab77c; /* 0x3ab77c */
-extern unsigned char FUN_003ace14; /* 0x3ace14 */
-extern unsigned char uiFreeCallbackContext; /* 0x3ace3c */
-extern unsigned char FUN_003ad068; /* 0x3ad068 */
-extern unsigned char uiCallbackFinishDraw; /* 0x3ad368 */
-extern int *DAT_0043d9f8; /* 0x43d9f8 */
-
-/* Supplied declaration required: entryTableClear. */
-/* Supplied declaration required: rectangleInitializeSelection. */
-/* Supplied declaration required: FUN_00233240. */
-/* Supplied declaration required: uiInitializeEightTimerSet. */
-/* Supplied declaration required: FUN_00233670. */
-/* Supplied declaration required: FUN_0029ee6c. */
-/* Supplied declaration required: asdMemAlloc. */
-/* Supplied declaration required: taskCreateDraw. */
-/* Supplied declaration required: asdProcessCreateSimple. */
-/* Supplied declaration required: _ZN9Obj4224489buildListEv. */
-/* Supplied declaration required: spriteTable22Acquire. */
-/* Supplied declaration required: FUN_003ad0e0. */
-
-
-void FUN_003ab550(int *param_1)
-
-{
-/* irregular: 13 native warning(s); review required */
-  int *piVar1;
-  unsigned char *puVar2;
-  unsigned char *puVar3;
-  
-  param_1[5] = 0;
-  param_1[6] = 0;
-  *(unsigned char *)(param_1 + 0x25) = 0;
-  *(unsigned char *)(param_1 + 0x296c) = 0;
-  entryTableClear(param_1 + 0x16a);
-  (**(romwright_code **)(*param_1 + 0x20))(param_1);
-  spriteTable22Acquire();
-  piVar1 = (int *)0x100;
-  asdMemAlloc(0x100,0x100,0,4,1);
-  DAT_0043d9f8 = piVar1;
-  *piVar1 = (int)param_1;
-  puVar2 = &LAB_003ab744;
-  asdProcessCreateSimple(reinterpret_cast<const s8 *>(&LAB_003ab744), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(&FUN_003ace14), reinterpret_cast<AsdProcFunc>(&uiFreeCallbackContext), reinterpret_cast<u32>(piVar1));
-  param_1[1] = (int)puVar2;
-  puVar3 = &LAB_003ab760;
-  taskCreateDraw(&LAB_003ab760,0x6f,1,0,&FUN_003ad068,0,DAT_0043d9f8,puVar2);
-  param_1[2] = (int)puVar3;
-  puVar2 = &LAB_003ab77c;
-  taskCreateDraw(&LAB_003ab77c,0xe6,1,0,&uiCallbackFinishDraw,0,DAT_0043d9f8,param_1[1]);
-  param_1[3] = (int)puVar2;
-  rectangleInitializeSelection(param_1 + 0x32,0x140,0,0x1d);
-  uiInitializeEightTimerSet(param_1 + 0x37);
-  FUN_00233240(param_1 + 0x37,0);
-  FUN_00233240(param_1 + 0x37,1);
-  // The allocation owner is not initialized in the retail code.
-  void *allocationOwner;
-  Obj42242c *controller = new (allocationOwner) Obj42242c;
-  param_1[0x164] = (int)controller;
-  controller->rectangle = param_1 + 0x32;
-  _ZN9Obj4224489buildListEv(param_1);
-  FUN_00233670(param_1 + 0x157,0x1d,0x40e,10);
-  *(unsigned char *)(param_1 + 0x15b) = 1;
-  FUN_0029ee6c(0,0x323232ff);
-  FUN_003ad0e0();
-  param_1[5] = 1;
-  param_1[6] = 0;
-  return;
+void spriteTable22Acquire(void);
+u32 taskCreateDraw(const char *name, s32 priority, u32 first, u32 second, void *update, void *end, void *work, u32 parent);
+void rectangleInitializeSelection(void *rectangle, s32 width, s32 a, s32 b);
+void uiInitializeEightTimerSet(void *timers);
+void FUN_00233240(void *timers, s32 index);
+void FUN_00233670(void *list, s32 a, s32 b, s32 count);
+void FUN_0029ee6c(s32 a, u32 color);
+void FUN_003ace14(void);
+void uiFreeCallbackContext(void);
+void FUN_003ad068(void);
+void uiCallbackFinishDraw(void);
+void FUN_003ad0e0(void);
 }
 
-} /* extern "C" */
+/* Starts the legion skill screen: clears its list, spawns its calculation process and two draw tasks, and
+ * opens the controller window on the rectangle before building the skill list. */
+extern "C" void FUN_003ab550(Obj422448 *screen)
+{
+    BibleLegionSkillView *view = reinterpret_cast<BibleLegionSkillView *>(screen);
+    view->state = 0;
+    view->stateArg = 0;
+    view->flag94 = 0;
+    view->selectedSlot = 0;
+    entryTableClear(view->entries);
+    screen->openScreen();
+    spriteTable22Acquire();
+
+    asdDebugTrace("c:\\SMT4\\XRD686\\sdds4\\Patch\\bible\\bibleLegionSkill.cpp", 173);
+    u32 **work = static_cast<u32 **>(asdMemAlloc(0x100, 0x100, 0, 4, 1));
+    DAT_0043d9f8 = reinterpret_cast<u32 *>(work);
+    *work = reinterpret_cast<u32 *>(screen);
+    view->job = asdProcessCreateSimple(reinterpret_cast<const s8 *>("BIBLE LEGIONSKILL CALC"), 2, 0, 0, reinterpret_cast<AsdProcUpdateFunc>((void *)FUN_003ace14), reinterpret_cast<AsdProcFunc>((void *)uiFreeCallbackContext), reinterpret_cast<u32>(work));
+    view->drawTask = taskCreateDraw("BIBLE LEGIONSKILL UP", 0x6F, 1, 0, (void *)FUN_003ad068, NULL, DAT_0043d9f8, view->job);
+    view->fadeTask = taskCreateDraw("BIBLE LEGIONSKILL DOWN", 0xE6, 1, 0, (void *)uiCallbackFinishDraw, NULL, DAT_0043d9f8, view->job);
+    rectangleInitializeSelection(view->rectangle, 0x140, 0, 0x1D);
+    uiInitializeEightTimerSet(view->timers);
+    FUN_00233240(view->timers, 0);
+    FUN_00233240(view->timers, 1);
+    // The allocation owner is not initialized in the retail code.
+    void *allocationOwner;
+    Obj42242c *controller = new (allocationOwner) Obj42242c;
+    view->controller = controller;
+    controller->rectangle = view->rectangle;
+    screen->buildList();
+    FUN_00233670(view->listView, 0x1D, 0x40E, 10);
+    view->listReady = 1;
+    FUN_0029ee6c(0, 0x323232FF);
+    FUN_003ad0e0();
+    view->state = 1;
+    view->stateArg = 0;
+}

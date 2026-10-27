@@ -1,4 +1,4 @@
-/* NON_MATCHING: armcc hoists the category-rank array base into r6 and shifts the loop's value-register allocation. */
+/* NON_MATCHING: the category-rank read now uses retail's record + category address form; the rank-slot address and value registers (retail r0/r1/r2) are allocated differently. */
 #include "common.h"
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"
@@ -15,7 +15,8 @@ extern "C" void FUN_004bd17c(ItemRankRecord *record)
             if (record->items[i]) {
                 ItemRankDefinition *item = (ItemRankDefinition *)dataTable04FindById(record->items[i]);
                 if (item && item->category < 18) {
-                    s8 rank = record->ranks[i] + record->categoryRanks[item->category];
+                    u32 category = item->category;
+                    s8 rank = record->ranks[i] + record->categoryRanks[category];
                     record->ranks[i] = rank;
                     if (rank > 9)
                         record->ranks[i] = 9;

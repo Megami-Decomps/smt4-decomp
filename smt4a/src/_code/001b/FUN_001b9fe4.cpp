@@ -1,72 +1,41 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_001b9fe4` (_code @ 0x1b9fe4, 0xd0 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: structure matches (smt4 FileQueue worker restart); retail keeps a zero in r7 from the top (pushes five registers, 36-byte frame, predicated wait arguments) and orders the literal pool with FUN_001c3864 first, so the entry address was materialised before the descriptor stores. */
+#include "sys/FileWorkerQueue.h"
+#include "nn/Result.h"
+#include "sys/ResultReport.h"
 
 extern "C" {
+s32 svcWaitSynchronization1(u32 handle, s64 timeout);
+void FUN_001b3428(void *thread);
+u32 FUN_002fb0d4(ThreadHandleState *thread, const ThreadArgumentDescriptor *descriptor,
+    ThreadEntryPoint entry, const void *argument, void *stackTop, u32 priority, s32 processor, u8 owned);
+void FUN_001c3864(void *queue);
+void FUN_001c45ec(const void *source, void *destination);
+void FUN_001c4608(void *argument);
+void FUN_001c45fc(ThreadEntryPoint entry, void *argument);
 
-int FUN_001b3428(...);
-int FUN_002e3140(...);
-int FUN_002fb0d4(...);
-int software_interrupt(...);
-
-/* stack frame of param_1: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp18; /* 0x18: local_18 */
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_1_stack;
-
-extern int FUN_001c3864(...); /* 0x1c3864 */
-extern unsigned char LAB_001c45ec; /* 0x1c45ec */
-extern unsigned char LAB_001c45fc; /* 0x1c45fc */
-extern unsigned char LAB_001c4608; /* 0x1c4608 */
-
-/* Unsupported intrinsic, declaration required: software_interrupt (CALLOTHER). */
-/* Supplied declaration required: FUN_001b3428. */
-/* Supplied declaration required: FUN_002e3140. */
-/* Supplied declaration required: FUN_002fb0d4. */
-
-
-void FUN_001b9fe4(int param_1)
-
+// Restart a completed worker; a zero-timeout poll leaves a worker that is still running alone.
+void FUN_001b9fe4(FileQueue *queue)
 {
-/* irregular: 5 native warning(s); review required */
-  unsigned int temp_v0;
-  unsigned int *puVar2;
-  int temp_v1;
-  unsigned char *temp_v2;
-  unsigned char *temp_v3;
-  unsigned char *temp_v4;
-  int temp_v5;
-  
-  puVar2 = (unsigned int *)(param_1 + 0x4510);
-  temp_v0 = *puVar2;
-  if (temp_v0 != 0) {
-    software_interrupt(0x24);
-    if ((int)temp_v0 < 0) {
-      FUN_002e3140();
+    FileQueueWorker *thread = &queue->thread;
+    if (thread->handle != 0) {
+        s32 result = svcWaitSynchronization1(thread->handle, 0);
+        bool failed = nnResultIsFailure(result);
+        if (failed) {
+            FUN_002e3140(result, failed);
+        }
+        if (!nnResultIsNotTimeout(result))
+            return;
     }
-    if ((temp_v0 & 0x3ff) == 0x3fe) {
-      return;
-    }
-  }
-  FUN_001b3428(puVar2);
-  temp_v1 = 4;
-  temp_v2 = &LAB_001c45ec;
-  temp_v3 = &LAB_001c4608;
-  temp_v4 = &LAB_001c45fc;
-  temp_v5 = param_1;
-  FUN_002fb0d4(puVar2,&temp_v1,FUN_001c3864,&temp_v5,
-               *(int *)(*(int *)(param_1 + 0x451c) + 0xc) + *(int *)(*(int *)(param_1 + 0x451c) + 8)
-               ,0x11,0xfffffffe,0);
-  if (((unsigned int)puVar2 & 0x7e00000) != 0x600000 && (int)puVar2 < 0) {
-    FUN_002e3140();
-  }
-  return;
+    FUN_001b3428(thread);
+    FileQueue *argument = queue;
+    ThreadArgumentDescriptor descriptor;
+    descriptor.argumentSize = sizeof(argument);
+    descriptor.operations.copy = FUN_001c45ec;
+    descriptor.operations.destroy = FUN_001c4608;
+    descriptor.operations.invoke = FUN_001c45fc;
+    u32 result = FUN_002fb0d4(thread, &descriptor, FUN_001c3864, &argument,
+        reinterpret_cast<void *>(thread->stack->address + thread->stack->size), 0x11, -2, 0);
+    if (nnResultIsFailureExceptSummary(result, 3))
+        FUN_002e3140(result);
 }
-
-} /* extern "C" */
+}

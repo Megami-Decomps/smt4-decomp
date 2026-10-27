@@ -99,8 +99,8 @@ void FUN_003ad76c(void *unused, BtlSetupSource *source)
     FUN_00199b9c(block->detail, source);
     block = g_btlUiBlock;
     block->cardA = 0;
-    block->cardB = 0;
     block->cardC = 0;
+    block->cardB = 0;
     block->cardD = 0;
     block->cardE = 0;
 

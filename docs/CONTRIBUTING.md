@@ -108,6 +108,12 @@ Every match must be one a programmer could have written for a reason.
   Preserve explicit switch cases even when a case and `default` perform the same operation:
   collapsing them into adjacent labels can change armcc's entire decision tree. The Apocalypse
   title overlay matches with separate case-7/default bodies and context lookup inside its drawing cases.
+  A wrapper that retail shrink-wraps (`ldr ip,[r0,#N]; cmp ip,#0; bxeq lr` before its `push`) keeps
+  the guarded body in a `static __inline` helper (`FUN_003fabfc`/`FUN_0033d3f8`: the helper builds the
+  by-value `SpriteDrawOptions` and forwards). The draw-state ring flush callback takes the new state
+  (`void (*flush)(s32 state)`, `ring->flush(value)`): retail keeps r0=value live across the `blx`.
+  `addon/AocRequestMemory.h` (per game) names the deallocator `delete` of an application request
+  calls (smt4a `asdOperatorDelete`, smt4 `asdMemFreeNonNull`) so `addon/AocBufferRequest.h` serves both games.
 - Shared record layouts must have one definition in a common header. Include that header from
   each user; unrelated layouts with coincidentally identical names need distinct type names.
   Check which class owns a tail field before extending a base: sibling classes can have
@@ -201,7 +207,11 @@ Every match must be one a programmer could have written for a reason.
   object's; `.bss` only inside the image's zero-filled range). `fdiff` cannot prove that address:
   a pool word into the object's own data against retail's `DAT_x`/`_ZZ…` counts as equal and
   `IDENTICAL` carries `(data relocations by section: relink checks the address)`. Give the
-  variables their real names when known.
+  variables their real names when known. A unit whose own function has to be cut out of a larger
+  compile (a structor, a file of several units) loses its data: a pool word into a named object
+  becomes that name, and into one of armcc's anonymous constants (`<DataN>`: a pointer-to-member
+  table it copies, a constant aggregate) the name retail's object gives the same word — those
+  bytes are not checked.
 - **A pool word inside a named global** reads `g_obj+off` only when `symbols.txt` gives the object a
   `size:`; without one, retail's word prints as `DAT_<address>` and code-identical functions differ.
   Ask Main to size the object (evidence: the asserted `sizeof` of its type, the offsets its users

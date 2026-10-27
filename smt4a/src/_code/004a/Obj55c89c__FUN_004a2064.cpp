@@ -1,4 +1,4 @@
-/* NON_MATCHING: signed row loads, roster mode-base allocation and preview-block placement differ. */
+/* NON_MATCHING: prologue scheduling only: retail loads the state into r0 (built r1) and orders the rows base before the frame setup. */
 #include "shard/Shard0032.h"
 #include "classes/Obj55c89c.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -7,6 +7,7 @@
 #include "code/Code002a.h"
 
 extern "C" {
+u32 shopListItemGetId(const void *entry);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
 s32 rangeGetMinimumLimit(const FlaggedValueHolder *);
 void uiOpenStartAnimations(void *);
@@ -30,8 +31,9 @@ void Obj55c89c::FUN_004a2064()
     void * work = reinterpret_cast<void *>(this);
     struct RosterRow {
         u8 unk00[4];
-        s16 id;
+        u16 id;
         u8 unk06[0x1A];
+        u16 getId() const { return id; }
     };
     struct RosterView {
         u8 unk000[0x14];
@@ -52,25 +54,30 @@ void Obj55c89c::FUN_004a2064()
         offsetof(RosterView, savedList) == 0x860 &&
         offsetof(RosterView, sourceKind) == 0x861 &&
         offsetof(RosterView, rows) == 0x864 ? 1 : -1];
+    struct RosterTail {
+        u8 unk00[0x60];
+        u8 savedList, sourceKind;
+    };
     RosterView *menu = (RosterView *)work;
     RosterRow *rows = menu->rows;
     if (menu->state == 11) {
         FUN_004a1db4(menu);
     } else if (menu->state == 2) {
         UnitRecord unit;
-        s16 previous = rows[flaggedValueHolderGetTotal(&menu->range)].id;
+        s16 previous = rows[flaggedValueHolderGetTotal(&menu->range)].getId();
         uiOpenStartAnimations(menu);
-        s16 selected = rows[flaggedValueHolderGetTotal(&menu->range)].id;
+        s16 selected = rows[flaggedValueHolderGetTotal(&menu->range)].getId();
+        RosterTail *tail = reinterpret_cast<RosterTail *>(reinterpret_cast<u8 *>(menu) + 0x800);
         if (selected != previous) {
-            if (menu->savedList == 0) {
+            if (tail->savedList == 0) {
                 FUN_0035ad50((u16)selected, &unit);
                 if (FUN_002a4b28((u16)selected))
                     FUN_0032d0c8(0, 1, (u16)selected, &unit);
                 else
                     FUN_0032d0c8(0, 2, (u16)selected, &unit);
             } else {
-                selected = rows[flaggedValueHolderGetTotal(&menu->range)].id;
-                if (menu->sourceKind != 1) {
+                selected = rows[flaggedValueHolderGetTotal(&menu->range)].getId();
+                if (tail->sourceKind != 1) {
                     FUN_0035ad50((u16)selected, &unit);
                     FUN_0032d0c8(0, 1, (u16)selected, &unit);
                 } else {
@@ -79,17 +86,16 @@ void Obj55c89c::FUN_004a2064()
                 }
             }
         }
-        if (menu->savedList)
-            FUN_004a16bc(menu);
-        else
+        if (tail->savedList == 0)
             FUN_004a41d8(menu);
+        else
+            FUN_004a16bc(menu);
     }
     FUN_004a3b48(menu);
     words4At20Clear(&menu->party);
     s32 count = rangeGetMinimumLimit(&menu->range);
     for (s32 index = 0; index < count; ++index) {
-        s32 start = FUN_002a482c(&menu->range);
-        partyIdsActivateEntry(&menu->party, (u16)rows[start + index].id);
+        partyIdsActivateEntry(&menu->party, (u16)shopListItemGetId(&rows[FUN_002a482c(&menu->range) + index]));
     }
     FUN_004a6cfc(&menu->party);
 }

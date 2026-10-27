@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rewrite compiles (156 vs 176 rows); the masks are now fields of the g_btlEncount block (one base, as retail), but retail keeps the 64-bit masks in a 60-byte frame (spilled) while the build reloads them from the block. */
+/* NON_MATCHING: 176 rows against 176; the side masks are read once into locals and the loops count 50 entries from slot 4 (retail's `add r9, r0, #50` bound); remaining: retail spills the masks into a 60-byte frame (one more u64 value is live across the loops) and loads the side flags with ldm rather than ldrd. */
 #include "common.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 
@@ -63,15 +63,19 @@ u32 FUN_003e0cd4(u32* action, BattleState* state)
         recordAreAllCountsNonpositive(g_btlAux) != 0 &&
         (((state->pendingMask & g_btlEncount.panelSides) == 0) || btlUiIsPanelHolderReady(g_btlUiBlock) != 0)) {
         if ((state->modeFlags & 0x4000000) != 0) {
-            for (s32 i = 4; i < 0x36; i++) {
-                BattleSideEntry* side = reinterpret_cast<BattleSideEntry*>(state->sides + i * 0x408);
+            u64 activeSides = g_btlEncount.activeSides;
+            u64 targetSides = g_btlEncount.targetSides;
+            u64 blockedSides = g_btlEncount.blockedSides;
+            u64 markSides = g_btlEncount.markSides;
+            for (s32 n = 0; n < 50; n++) {
+                BattleSideEntry* side = reinterpret_cast<BattleSideEntry*>(state->sides + (n + 4) * 0x408);
                 u64 flags = side->flags;
-                if ((flags & g_btlEncount.activeSides) != 0 && (flags & g_btlEncount.blockedSides) == 0 && (flags & g_btlEncount.targetSides) != 0) {
-                    side->flags = flags | g_btlEncount.markSides;
+                if ((flags & activeSides) != 0 && (flags & blockedSides) == 0 && (flags & targetSides) != 0) {
+                    side->flags = flags | markSides;
                 }
             }
-            for (s32 i = 4; i < 0x36; i++) {
-                BattleUnitEntry* unit = reinterpret_cast<BattleUnitEntry*>(state->units + i * 0x1d0);
+            for (s32 n = 0; n < 50; n++) {
+                BattleUnitEntry* unit = reinterpret_cast<BattleUnitEntry*>(state->units + (n + 4) * 0x1d0);
                 u32 flags = unit->flags;
                 if ((flags & 1) != 0 && (flags & 0x80) == 0 && (flags & 0x400) != 0) {
                     unit->flags = flags | 0x40000;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling only: armcc hoists the count load above the flag clear; retail clears the flag first. */
+/* NON_MATCHING: scheduling only: armcc hoists the count load above the flag clear; retail clears the flag first (retail keeps r0 live across it: a removed one-instruction setter strb r1,[r0,#270]; no source for a multifile member). */
 #include "common.h"
 
 struct PairSlot {

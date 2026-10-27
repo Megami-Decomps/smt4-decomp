@@ -1,4 +1,4 @@
-/* NON_MATCHING: UI/pane registers differ and the sprite pane address is cached instead of recomputed. */
+/* NON_MATCHING: register allocation only: retail copies the UI pointer into r6 for the inlined panel refresh (case 14) and keeps selection/flags in r7/r8. */
 #include "battle/btlUI.h"
 
 extern "C" {
@@ -9,6 +9,15 @@ void FUN_00321500(BtlUiObjAA *widget);
 s32 FUN_0039ebcc(BtlUiObjBA *widget);
 s32 menu32ModeIsNot6(BtlUiObjAA *widget);
 extern BtlUiGlobalsA g_btlUi;
+
+/* Refreshes the menu and sprite when the menu is not in mode 6 and the sprite accepts. */
+static __inline void refreshMenuSprite(BtlUiA *ui)
+{
+    if (menu32ModeIsNot6(&ui->objA) != 0 && FUN_0039ebcc(&ui->objB) != 0) {
+        FUN_00321500(&ui->objA);
+        uiSpriteSetKeyframeThree(&ui->objB);
+    }
+}
 
 // Map a battle command to the selection pane's mode, resetting both panes for mode fourteen.
 void FUN_004a9308(u32 unused, u32 selection, u32 command, u32 flags)
@@ -39,10 +48,7 @@ void FUN_004a9308(u32 unused, u32 selection, u32 command, u32 flags)
         break;
     case 14:
         mode = 11;
-        if (menu32ModeIsNot6(&ui->objA) != 0 && FUN_0039ebcc(&ui->objB) != 0) {
-            FUN_00321500(&ui->objA);
-            uiSpriteSetKeyframeThree(&ui->objB);
-        }
+        refreshMenuSprite(ui);
         FUN_002cc96c(&ui->objC);
         ui->state = 15;
         break;

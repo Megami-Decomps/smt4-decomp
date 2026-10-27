@@ -4388,3 +4388,18 @@
 002aff0c slotOwnerDestroyAllSlots inferred [high] destroys the objects in the owner 32 slots and updates the unique/total counts
 00294f64 resourceReleaseReference inferred [med] twin of smt4a FUN_0040a244
 0014f4f8 lzGetAdvertisedSize inferred [high] returns the 24-bit output size from an LZ/RLE header word, or the following full word when it is zero
+003472f0 _ZN10SoundObj3cD1Ev evidence byte-identical twin of smt4a _ZN10SoundObj3cD1Ev (IDENTICAL there): __aeabi_vec_dtor over 4 handles then tail call to base dtor; class SoundObj3c in include/sound/SoundHandleOwners.h
+00376974 _ZN11SoundHandleD1Ev evidence callee of the array dtor: twin of smt4a _ZN11SoundHandleD1Ev (detach sound); smt4 source needs to become SoundHandle::~SoundHandle
+003809a0 _ZN13SoundHeapBaseD1Ev evidence tail-called base dtor, twin of smt4a _ZN13SoundHeapBaseD1Ev (size 0xa0)
+003406b4 _ZN10SoundObj50D1Ev evidence same array-dtor shape as SoundObj3c (8 handles, size 0x50); new class SoundObj50 added to include/sound/SoundHandleOwners.h
+00352740 _ZN19AocAuxBufferRequestC1EjPvj evidence byte-identical twin of smt4a AocAuxBufferRequest ctor (9-row push {r4-r6,lr} body); caller aocApplicationRecreateDecoder builds the auxiliary request at 0x5b0/0x5b4
+00352ee8 _ZN16AocBufferRequestC1EjPvj evidence byte-identical twin of smt4a AocBufferRequest ctor (proven IDENTICAL); caller FUN_0038b174 builds the primary request at 0x5a8/0x5ac
+00352f0c _ZN16AocBufferRequestD1Ev evidence twin of smt4a AocBufferRequest dtor (4-byte `b <base dtor>`); smt4 FUN_0038b174 calls it from `delete app->primary` (bl FUN_00352f0c then asdMemFreeNonNull)
+0043ddb8 g_cecCardBox evidence size:0x18 box id word 0xab0004cd then 5 reserved words; defined in CecCardWrite.cpp
+0043ddd0 g_cecCardProgramId evidence size:0x22 ASCII program id "-SHIN-MEGAMITENSEI-4-23456789012"
+0043ddf2 g_cecCardMessage evidence size:0x4a UTF-16 "Master, I got a card from a Samurai."
+0043de3c g_cecCardTitle evidence size:0x2c UTF-16 "Shin Megami Tensei IV"
+003a64cc rankedEntryCompare inferred [high] orders entries by priority flag then lookup rank (qsort comparator)
+003aaa6c numberPanelLayoutWindow inferred [med] lays out the number panel window at its stored position with the 0x566-0x56C frame set
+00150ab4 asdModelAppendCommandSource inferred [med] twin of smt4a FUN_001b1434
+0033d3f8 spriteDrawAnimationUnplaced inferred [med] twin of smt4a FUN_003fabfc

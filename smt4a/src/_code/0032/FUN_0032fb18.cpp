@@ -1,4 +1,4 @@
-/* NON_MATCHING: with a result local the saved-register set (r4-r8) matches retail; retail materializes the zero from the loop counter (mov r7,r4) after the guard, selects the demon pointer with moveq/cmpne, and returns the zero inline. */
+/* NON_MATCHING: the saved-register set (r4-r8) and the result-local shape now match retail; retail evaluates the work/demon guard before moving the argument (r0 forced to 0 by moveq), keeps the loop counter in r4 from the guard, and places the started block after the failure return. */
 #include "common.h"
 
 extern "C" {
@@ -48,9 +48,9 @@ static s32 callbackFindSlot(CallbackDemon *demon)
 s32 FUN_0032fb18(CallbackDemon *demon)
 {
     CallbackWork *work = g_callbackWork;
-    s32 result = 0;
 
     if (work != NULL && demon != NULL) {
+        s32 result = 0;
         s32 slot = callbackFindSlot(demon);
         if (slot >= 0) {
             work->slot = slot;
@@ -58,8 +58,9 @@ s32 FUN_0032fb18(CallbackDemon *demon)
             work->state = 3;
             result = 1;
         }
+        return result;
     }
-    return result;
+    return 0;
 }
 
 } /* extern "C" */

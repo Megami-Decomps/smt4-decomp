@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail if-converts the ailment-kind select (movne #37 / andeq #127) and the argument setup ahead of the two FUN_003ff524 call arms and pushes one register fewer; ours sets the arguments inside each arm and pushes r9. */
+/* NON_MATCHING: only the saved-register list differs: retail pushes {r3-r8, lr} (no r9 alignment pad; FUN_003ff524 is a stackless leaf compiled in the same multifile run, but it is not proven yet). */
 #include "battle/RestorationEffect.h"
 #include "shard/W6_W6Match3_BtlCombatantEntryA.h"
 extern "C" void FUN_003ff524(u16 *mask, s32 kind);
@@ -17,7 +17,8 @@ extern "C" u32 FUN_003ff73c(const BtlCombatantEntryA *unit, const RestorationEff
         requested |= 2;
     if (effect->mpPercent)
         requested |= 2;
-    if (effect->ailmentKind & 0x7F)
+    u32 rawKind = effect->ailmentKind;
+    if (rawKind & 0x7F)
         requested |= 4;
     if (effect->flags & 4) {
         requested |= 1;
@@ -36,12 +37,17 @@ extern "C" u32 FUN_003ff73c(const BtlCombatantEntryA *unit, const RestorationEff
     }
     if (requested & 4) {
         u16 ailments = 0;
+        s32 kind;
+        if (effect->flags & 4)
+            kind = 37;
+        else
+            kind = rawKind & 0x7F;
         if (!(effect->flags & 4)) {
-            FUN_003ff524(&ailments, effect->ailmentKind & 0x7F);
+            FUN_003ff524(&ailments, kind);
             if (ailments & unit->statusFlags)
                 effective |= 4;
         } else {
-            FUN_003ff524(&ailments, 37);
+            FUN_003ff524(&ailments, kind);
             if (ailments & unit->statusFlags)
                 effective |= 4;
         }

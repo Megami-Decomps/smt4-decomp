@@ -88,7 +88,7 @@ void FUN_003a72a4(BibleDevilScreen *screen)
         if (screen->mode == 0) {
             BibleDevilRow *rows = screen->rows;
             s16 id = shopListItemGetId(&rows[flaggedValueHolderGetTotal(screen->cursor)]);
-            s32 delta = FUN_0029ce60(static_cast<u16>(id), static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
+            s32 delta = FUN_0029ce60(static_cast<s16>(id), static_cast<u8>(screen->page), 0, screen->level >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-delta, 0);
         }

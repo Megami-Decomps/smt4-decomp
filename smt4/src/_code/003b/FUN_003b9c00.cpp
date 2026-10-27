@@ -47,6 +47,7 @@ void scrScriptProcessStartEntry(u32 script, u32 entry);
 s32 scrRunOpcodesStub(u32 script);
 s32 gameFlagIsSet(u32 flag);
 void listScrollToId(void *list, s32 id);
+s32 listGetEntryCount(const void *list);
 void FUN_002bd808(void *cursor, u16 *vector);
 void messageMainFinishWindow(void);
 void FUN_0022b29c(ListWindow *window, s32 selected, s32 kind);
@@ -72,7 +73,7 @@ static s32 entryIsAvailable(ListWindow *window, ListEntry *entry)
 void FUN_003b9c00(ListWindow *window)
 {
     s32 noPassingEntry = 1;
-    s32 count = window->entryCount;
+    s32 count = listGetEntryCount(window->list);
     for (s32 i = 0; i < count; i++) {
         ListEntry *entry = FUN_0022b238(window->list, i);
         if (entry->type == 3 && entry->name[0] != '0' && entryIsAvailable(window, entry)) {

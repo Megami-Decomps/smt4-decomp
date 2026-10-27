@@ -1,4 +1,4 @@
-/* NON_MATCHING: output/text saved registers and the preliminary failure-result move differ. */
+/* NON_MATCHING: the owner status is an nn::Result from a callee declared returning nn::Result (classes/WindowStatus.h), which fixes retail's lsrs-before-copy order; remaining: output/text saved registers (retail r7/r6, ours r6/r7). */
 #include "classes/WindowStatus.h"
 #include "ui/FormattedNumericEntry.h"
 #include "nn/Result.h"
@@ -16,7 +16,7 @@ u32 FUN_004285d4(FormattedNumericEntry *output, const char *text, const NumericE
 // Resolve the owner's token, parse the entry text, and validate the translated outcome.
 WindowStatusResult FUN_00428060(void *owner, void *output, const void *identifier)
 {
-    s32 ownerStatus = FUN_004283cc(owner);
+    nn::Result ownerStatus = FUN_004283cc(owner);
     if (nnResultIsFailure(ownerStatus))
         return WindowStatusResult(static_cast<u32>(ownerStatus));
 

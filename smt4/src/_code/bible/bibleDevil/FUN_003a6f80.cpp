@@ -1,4 +1,4 @@
-/* NON_MATCHING: the boolean input flags and the shared tail stores are scheduled differently, and the 0x610-byte unit buffer sits at another frame offset; the screen state transitions are the same. */
+/* NON_MATCHING: register allocation and stack spill placement differ (retail spills the touch-panel pointer and keeps the entry base in r6 inside the select arm); the 0x500 block, the ready getter and the tail call to FUN_00233818 now match. */
 #include "common.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
 #include "status/StatusCamera.h"
@@ -29,6 +29,14 @@ typedef struct DevilListInput {
     } rows[1];
 } DevilListInput;
 
+/* The part of the screen's state at 0x500: the preview flag and the row count. */
+typedef struct DevilListBlock {
+    u8 unk00[0xA4];
+    u8 previewEnabled;
+    u8 unkA5[3];
+    s16 count;
+} DevilListBlock;
+
 typedef struct DevilListInputView {
     u8 unk0000[0xA5B4];
     u16 targetId;
@@ -37,6 +45,7 @@ typedef struct DevilListInputView {
 extern u32 DAT_0043d9c8[];
 
 s32 inputIsQuestMenuPressed(void);
+s8 uiSubStateGetReady(const void *subState);
 s32 FUN_0027ee9c(void);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
@@ -69,14 +78,14 @@ void FUN_003a6f80(DevilListInput *work)
     s32 confirm = 0;
     s32 cancel = 0;
     s32 menu = inputIsQuestMenuPressed();
-    u8 record[0x610];
+    const DevilListBlock *block = reinterpret_cast<const DevilListBlock *>(reinterpret_cast<u8 *>(work) + 0x500);
 
-    if (*(s16 *)&work->rows[0] > 0) {
+    if (block->count > 0) {
         select = FUN_0027ee9c();
         confirm = inputIsQuestConfirmPressed();
         cancel = inputIsQuestCancelPressed();
         if (select == 0) {
-            select = (s8)work->touchPanel[0x12];
+            select = uiSubStateGetReady(work->touchPanel);
         }
     }
     if (gameGetNavigationState() != 0) {
@@ -84,7 +93,7 @@ void FUN_003a6f80(DevilListInput *work)
         work->step = 0;
         ((DevilListInputView *)work)->targetId = gameGetFlagByte12e8() == 1 ? 1 : 5;
         FUN_00233240((u8 *)work + 0xDC, ((DevilListInputView *)work)->targetId);
-        if (work->previewEnabled == 0) {
+        if (block->previewEnabled == 0) {
             FUN_0029cc44(1);
         }
         ifTouchRegionClearAll(work->touchRegions);
@@ -93,6 +102,7 @@ void FUN_003a6f80(DevilListInput *work)
     }
     if (select != 0) {
         u32 id = work->rows[flaggedValueHolderGetTotal(work->cursor)].id;
+        u8 record[0x610];
 
         libc_strcpy(reinterpret_cast<unsigned int *>(record), reinterpret_cast<unsigned int *>((u32)FUN_002bd06c(id)));
         textEncodeFontSlot(8, record);
@@ -105,7 +115,7 @@ void FUN_003a6f80(DevilListInput *work)
         FUN_002328b4();
     } else {
         if (menu != 0) {
-            if (work->previewEnabled == 0) {
+            if (block->previewEnabled == 0) {
                 FUN_0029cc44(1);
             }
             FUN_0029ee6c(0, 0x323232FF);
@@ -133,6 +143,7 @@ void FUN_003a6f80(DevilListInput *work)
                 FUN_0029da34(0, 1, id, (const void *)partyMemberFindById(id));
                 return;
             }
+            u8 record[0x610];
             unitInitializeFromSavedRecord(id, record);
             FUN_0029da34(0, 1, id, record);
             return;

@@ -6,7 +6,7 @@ extern "C" {
 void *FUN_00178b04(u32 size, const char *file, u32 line);
 void FUN_003fdd1c(ModelUnitBuffers *unit, void *part);
 void moriModelUnitAllocateChannels(ModelUnitBuffers *unit);
-void FUN_003fe90c(UnitChannel *channel, s32 count);
+void moriModelChannelInitialize(UnitChannel *channel, s32 count);
 void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *dest, const nw::math::MTX34 *source);
 }
 
@@ -34,11 +34,11 @@ void Obj557b18::attachContent(UnitModelContent *content, u32 partIndex)
     moriModelUnitAllocateChannels(unit);
     UnitModelView *view = unit->content == NULL ? NULL : &unit->content->view;
     if (view != NULL) {
-        FUN_003fe90c(&unit->channelsB[0], maxElementCount(view->table->meshesB, view->table->countB));
+        moriModelChannelInitialize(&unit->channelsB[0], maxElementCount(view->table->meshesB, view->table->countB));
     }
     view = unit->content == NULL ? NULL : &unit->content->view;
     if (view != NULL) {
-        FUN_003fe90c(&unit->channelsB[1], maxElementCount(view->table->meshesC, view->table->countC));
+        moriModelChannelInitialize(&unit->channelsB[1], maxElementCount(view->table->meshesC, view->table->countC));
     }
     if (content->extra != NULL && content->extra->count > 0) {
         void *memory = FUN_00178b04(0x24, "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelUnit.cpp", 0x5d);

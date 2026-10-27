@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail reloads the state global after the null check and addresses the active byte (state + index * 0x88 + 0xB31) and the linked byte (+0xB30 via a separate base) from two bases; built uses one base and keeps the state in a register */
+/* NON_MATCHING: the active byte now addresses `state + index * 0x88 + 0xB31` directly and the linked byte through the slot pointer like retail; retail still reloads g_lmapMainState for the slot after the null check (the local `state` keeps the first load for the table) where armcc merges the two loads. */
 #include "common.h"
 
 struct MapObject {
@@ -31,29 +31,30 @@ extern MapMainState *g_lmapMainState; /* 0x447060 */
 /* Sets the slot's active flag and mirrors it to the slot's map object when the slot is linked. */
 void FUN_00265b78(s32 index, s32 enable)
 {
-    if (g_lmapMainState == NULL) {
+    MapMainState *state = g_lmapMainState;
+    if (state == NULL) {
         return;
     }
     MapSlot *slot = &g_lmapMainState->slots[index];
 
     if (enable != 0) {
-        if (slot->active != 0) {
+        if (g_lmapMainState->slots[index].active != 0) {
             return;
         }
-        slot->active = 1;
+        g_lmapMainState->slots[index].active = 1;
         if (slot->linked == 0) {
             return;
         }
-        g_lmapMainState->table->objects[index]->active = 1;
+        state->table->objects[index]->active = 1;
     } else {
-        if (slot->active == 0) {
+        if (g_lmapMainState->slots[index].active == 0) {
             return;
         }
-        slot->active = 0;
+        g_lmapMainState->slots[index].active = 0;
         if (slot->linked == 0) {
             return;
         }
-        g_lmapMainState->table->objects[index]->active = 0;
+        state->table->objects[index]->active = 0;
     }
 }
 

@@ -1,4 +1,3 @@
-/* NON_MATCHING: the category-rank read forms the +0x4c array base before indexing; retail adds the category to the record then uses ldrsb #0x4c. */
 #include "shard/Shard004B.h"
 #include "gamedata/Table04Record.h"
 
@@ -17,7 +16,8 @@ extern "C" void FUN_004bd6b0(ItemRankRecord *record, u32 item, s32 slot)
     ItemRankDefinition *definition = (ItemRankDefinition *)dataTable04FindById(item);
     s8 rank = 0;
     if (definition != NULL && definition->category < 18) {
-        rank = record->categoryRanks[definition->category];
+        u32 category = definition->category;
+        rank = record->categoryRanks[category];
     }
     s32 maximum = FUN_0035e458(item);
     s32 minimum = FUN_0035d89c(item);

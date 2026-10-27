@@ -132,10 +132,10 @@ void FUN_004aa3d4(u32 unused, s32 kind, s32 value, s32 partyMember, u32 recordId
     case 9:
     case 10:
     case 12:
-        if (value != 0) {
-            textFormatBuffer(text, "\x82q\x82\x85\x82\x94\x82\x95\x82\x92\x82\x8e");
-        } else {
+        if (value == 0) {
             textFormatBuffer(text, "\x82r\x82\x95\x82\x8d\x82\x8d\x82\x8f\x82\x8e");
+        } else {
+            textFormatBuffer(text, "\x82q\x82\x85\x82\x94\x82\x95\x82\x92\x82\x8e");
         }
         menuStateReset();
         break;

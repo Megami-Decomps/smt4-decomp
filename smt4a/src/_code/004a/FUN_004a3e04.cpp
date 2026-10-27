@@ -20,9 +20,9 @@ SpriteOffset *layoutFindTableEntry(void *sprites, s32 index);
 u32 FUN_004a8750(u32 id, u32 kind, bool flag, bool high, u32 extra);
 int textFormatBuffer(char *buffer, const char *format, u32 value);
 extern s32 g_animatedPageSelection[];
-extern u32 DAT_005e1ca8[20];
-extern s32 DAT_005e1cf8[10];
-extern u32 DAT_005e1e88[10];
+extern u32 g_entryWindowNumberFirst[20];
+extern s32 g_entryWindowCaptionX[10];
+extern u32 g_entryWindowColors[10];
 }
 
 struct StatEntry {
@@ -93,8 +93,8 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
             if (value < base)
                 color = 0xDC0F14FF;
         }
-        DAT_005e1ca8[i] = value;
-        DAT_005e1ca8[10 + i] = color;
+        g_entryWindowNumberFirst[i] = value;
+        g_entryWindowNumberFirst[10 + i] = color;
         bool flag = menu->mode != 0;
         SpriteOffset *offset = layoutFindTableEntry(menu->sprites, i + 0x42F);
         s16 x = offset->x;
@@ -109,9 +109,9 @@ extern "C" void FUN_004a3e04(StatMenu *menu)
                 shownColor = 0x72E027FF;
         }
         offset = layoutFindTableEntry(menu->sprites, 0x4C6);
-        DAT_005e1cf8[i] = offset->x + x;
-        DAT_005e1cf8[10 + i] = offset->y + y;
-        textFormatBuffer((char *)&DAT_005e1cf8[20] + i * 0x20, "%8u", shown);
-        DAT_005e1e88[i] = shownColor;
+        g_entryWindowCaptionX[i] = offset->x + x;
+        g_entryWindowCaptionX[10 + i] = offset->y + y;
+        textFormatBuffer((char *)&g_entryWindowCaptionX[20] + i * 0x20, "%8u", shown);
+        g_entryWindowColors[i] = shownColor;
     }
 }

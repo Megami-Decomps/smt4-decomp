@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015041c(...);
 int FUN_00150750(...);
-int FUN_00150ab4(...);
+int asdModelAppendCommandSource(...);
 int FUN_002a4908(...);
 int nnnstdMemCpy(...);
 int nw_gfx_RenderContext_ActivateParticleContext(...);
@@ -30,7 +30,7 @@ extern int g_commandBufferCursor; /* 0x4652a0 */
 
 /* Supplied declaration required: FUN_0015041c. */
 /* Supplied declaration required: FUN_00150750. */
-/* Supplied declaration required: FUN_00150ab4. */
+/* Supplied declaration required: asdModelAppendCommandSource. */
 /* Supplied declaration required: FUN_002a4908. */
 /* Supplied declaration required: nnnstdMemCpy. */
 /* Supplied declaration required: nw_gfx_RenderContext_ActivateParticleContext. */
@@ -74,7 +74,7 @@ void FUN_00148748(int param_1,int param_2,fn_00148748_arg2 *param_3)
     *(unsigned int *)(*(int *)(param_1 + 8) + 0x20) =
          *(unsigned int *)(param_3->field_0x164 + *(int *)(param_2 + 0x1c) * 4);
     FUN_002a4908(*(unsigned int *)(param_1 + 8),0);
-    FUN_00150ab4(*(unsigned int *)(param_1 + 8),param_2);
+    asdModelAppendCommandSource(*(unsigned int *)(param_1 + 8),param_2);
     FUN_00150750(param_1,param_3,piVar4,*(unsigned int *)(param_2 + 0x28));
     temp_v1 = *(unsigned int *)(param_2 + 0x6c);
     nnnstdMemCpy(g_commandBufferCursor,*(unsigned int *)(param_2 + 0x68),temp_v1);

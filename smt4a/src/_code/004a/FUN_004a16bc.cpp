@@ -1,4 +1,4 @@
-/* NON_MATCHING: logic and call sequence match; retail turns the final call of every path into a tail call (b after popping lr, `FUN_004d0680`, `uniteCreatePreviewModel`, `FUN_0032d0c8`, `sendEvent100020E`) and keeps the shared zero in r9, while the build keeps plain bl + pop {pc}. */
+/* NON_MATCHING: register allocation only: retail keeps the menu-pressed flag in sl and the shared zero in r9 (built the reverse). */
 #include "common.h"
 #include "code/Code0033.h"
 #include "shard/Shard004A.h"
@@ -9,6 +9,8 @@ struct QuestListRow {
     /* 0x00 */ u8 unk00[4];
     /* 0x04 */ u16 id;
     /* 0x06 */ u8 unk06[0x1A];
+
+    u16 getId() const { return id; }
 };
 
 /* The menu's control block. */
@@ -40,6 +42,7 @@ extern "C" {
 extern s32 g_animatedPageSelection[];
 s32 inputIsQuestMenuPressed(void);
 s32 FUN_004d0584(void);
+s32 questControlsGetCursorRow(QuestControls *controls);
 s32 inputIsQuestConfirmPressed(void);
 s32 inputIsQuestCancelPressed(void);
 s32 gameGetMode(void);
@@ -62,15 +65,13 @@ void FUN_004a16bc(QuestMenu *menu)
     s32 selected = 0;
     s32 confirm = 0;
     s32 cancel = 0;
-    char text[304];
-
     s32 menuPressed = inputIsQuestMenuPressed();
     if (menu->rowCount > 0) {
         selected = FUN_004d0584();
         confirm = inputIsQuestConfirmPressed();
         cancel = inputIsQuestCancelPressed();
         if (selected == 0) {
-            selected = menu->controls.cursorRow;
+            selected = questControlsGetCursorRow(&menu->controls);
         }
     }
     if (gameGetMode() != 0) {
@@ -79,6 +80,7 @@ void FUN_004a16bc(QuestMenu *menu)
     }
     QuestListRow *rows = (QuestListRow *)&menu->rowCount;
     if (selected != 0) {
+        char text[304];
         u32 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].id;
         libc_strcpy(text, FUN_00180118(id));
         FUN_003180c4(8, text);
@@ -105,13 +107,14 @@ void FUN_004a16bc(QuestMenu *menu)
         sendEvent100020E();
         menu->pageChanged = 1;
         sysPlaySe(menu->page == 1 ? 78 : 79);
-        s16 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].id;
+        s16 id = rows[flaggedValueHolderGetTotal(reinterpret_cast<const FlaggedValueHolder *>(menu->holder))].getId();
         if (menu->page == 1) {
             FUN_0032d0c8(0, 1, (u16)id, slotRecordFindById((u16)id));
-            return;
+        } else {
+            char text[304];
+            FUN_0035ad50((u16)id, text);
+            FUN_0032d0c8(0, 1, (u16)id, text);
         }
-        FUN_0035ad50((u16)id, text);
-        FUN_0032d0c8(0, 1, (u16)id, text);
         return;
     }
     if (cancel != 0) {

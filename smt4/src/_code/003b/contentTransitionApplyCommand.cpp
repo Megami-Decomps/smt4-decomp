@@ -37,8 +37,8 @@ void contentTransitionApplyCommand(ContentTransition *transition, const void *co
         destination.place = command->destination.place;
         FUN_002bd808(&transition->destination, &destination);
         transition->flags |= 0x100010;
-        transition->state = 5;
         transition->phase = 0;
+        transition->state = 5;
         return;
     case 7:
         gameSynchronizeMapState(transition);

@@ -29,7 +29,7 @@ extern MikadoModule g_mikado;
 u32 taskCreateDraw(const char *name, s32 group, u16 startDelay, u16 endDelay, MikadoProcFunc onUpdate,
                    MikadoProcFunc onEnd, MikadoWork *work, u32 owner);
 void FUN_002bd1f4(void);
-void FUN_003409bc(void);
+void mikadoControllerFinish(void);
 void childOwnerUpdateKind123(void);
 
 /* Allocates the mikado work, takes the optional start position and creates its main process and draw task. */
@@ -49,7 +49,7 @@ void FUN_002ba5c0(const s16 *args, s32 argSize)
         g_mikado.startX = args[0];
         g_mikado.startY = args[1];
     }
-    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MikadoMainProc"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002bd1f4), reinterpret_cast<AsdProcFunc>(FUN_003409bc), reinterpret_cast<u32>(work));
+    work->process = asdProcessCreateSimple(reinterpret_cast<const s8 *>("MikadoMainProc"), 4, 0, 0, reinterpret_cast<AsdProcUpdateFunc>(FUN_002bd1f4), reinterpret_cast<AsdProcFunc>(mikadoControllerFinish), reinterpret_cast<u32>(work));
     taskCreateDraw("MikadoDrawDown", 235, 1, 0, childOwnerUpdateKind123, NULL, g_mikado.work, work->process);
 }
 

@@ -125,8 +125,8 @@ void FUN_003ba754(MapSceneView *scene)
             scene->result = 4;
         }
     }
-    g_gameState.unk000 = mode + 200;
     g_gameState.campCleanup.retainCampResources = 0;
+    g_gameState.unk000 = mode + 200;
     g_gameState.resume.mode = 3;
     g_gameState.unk2F8 = 0;
     mapDepartSetTarget(0xffffffff, 0xffffffff);

@@ -1,4 +1,4 @@
-/* NON_MATCHING: near (200 rows against 203): same slot walk, fade/loop state machine, constants and calls from the asm; retail indexes the sound-object table with an unsigned compare (movcs/bcs), keeps the table base in r4 (add r9,r4,#0 and sl = base+256 derived from it) and shares the `object->data` free path as a call-free block, ours takes the base from one literal with signed index compares (a u32 index variant moved the rows to 206) */
+/* NON_MATCHING: 206 rows against 205; the table is read through `DAT_0061978c.at(index)` (unsigned bound check) and the replace-case release is the call-free clear block, so only register numbering remains: retail loads the table literal into r4 before the first call and derives `objects` (add r9, r4, #0) and the flag anchor (add sl, r4, #256) from it. */
 #include "code/Code0014.h"
 typedef unsigned char u8;
 typedef signed char s8;
@@ -40,6 +40,12 @@ struct SoundObject {
 };
 
 struct SoundObjectTable {
+    /* The sound object in slot `index`, or NULL when the index is out of range. */
+    SoundObject *at(u32 index)
+    {
+        return index >= SOUND_OBJECTS ? 0 : &object[index];
+    }
+
     SoundObject object[SOUND_OBJECTS];   /* 0x61978C */
     u8 pad1E0[0x1E6 - SOUND_OBJECTS * 0x78];
     s8 enabled;                          /* 0x619972 */
@@ -58,15 +64,6 @@ void rt_aeabi_memclr(void *memory, s32 size);
 s32 FUN_00162ea4(void);
 s32 FUN_001517b4(s32 a, s32 b);
 s32 slotIsActive(s32 a);
-
-/* The sound object in slot `index`, or NULL when the index is out of range. */
-static __inline SoundObject *soundObjectAt(s32 index)
-{
-    if (index >= SOUND_OBJECTS) {
-        return 0;
-    }
-    return &DAT_0061978c.object[index];
-}
 
 /* Releases a finished sound object (data, handle) and clears its slot. */
 static void soundObjectRelease(SoundObject *object, s32 keepLoop)
@@ -92,7 +89,7 @@ void FUN_0013af10(void)
         return;
     }
     for (s32 i = 0; i < SOUND_OBJECTS; i++) {
-        SoundObject *object = soundObjectAt(i);
+        SoundObject *object = DAT_0061978c.at(i);
 
         if (object->kind != 2) {
             continue;
@@ -102,7 +99,7 @@ void FUN_0013af10(void)
             if ((object->options & 2) != 0) {
                 s32 anyPlaying = 0;
                 for (s32 j = 0; j < SOUND_OBJECTS; j++) {
-                    SoundObject *other = soundObjectAt(j);
+                    SoundObject *other = DAT_0061978c.at(j);
                     if (FUN_001681a4(other->handle) != 0) {
                         anyPlaying = other != 0;
                         break;
@@ -110,7 +107,7 @@ void FUN_0013af10(void)
                 }
                 if (anyPlaying) {
                     for (s32 k = 0; k < SOUND_OBJECTS; k++) {
-                        SoundObject *other = soundObjectAt(k);
+                        SoundObject *other = DAT_0061978c.at(k);
                         if (FUN_001681a4(other->handle) != 0 && other->mode != 4) {
                             other->flags = other->flags | OBJ_FADE_REQ;
                             other->fadeKind = 0;
@@ -118,8 +115,14 @@ void FUN_0013af10(void)
                     }
                 } else {
                     for (s32 j = 0; j < SOUND_OBJECTS; j++) {
-                        if (soundObjectAt(j)->kind == 1) {
-                            soundObjectRelease(object, 0);
+                        if (DAT_0061978c.at(j)->kind == 1) {
+                            if (object->data != 0) {
+                                asdMemFree(object->data);
+                            }
+                            object->data = 0;
+                            rt_aeabi_memclr(object, sizeof(SoundObject));
+                            object->flags = 0;
+                            object->kind = 0;
                             start = 0;
                             break;
                         }
@@ -146,7 +149,7 @@ void FUN_0013af10(void)
                 object->fadeKind = 3;
                 asdSoundObjectFadeOut(object->handle);
                 object->flags = (object->flags & ~(OBJ_STARTED | OBJ_FADE_REQ)) | OBJ_FADING;
-            } else if (FUN_001681a4(object->handle) == 0 && object->delay >= 1) {
+            } else if (FUN_001681a4(object->handle) == 0 && object->delay > 0) {
                 object->loop = 1;
                 object->flags = (object->flags & ~(OBJ_STARTED | OBJ_FADE_REQ)) | OBJ_FADING;
             } else {

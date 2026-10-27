@@ -1,4 +1,4 @@
-/* NON_MATCHING: file-load argument scheduling and sprite-handle address reuse differ. */
+/* NON_MATCHING: armcc CSEs &dialog->sprite (add r4,r5,#0x5d8) for the reload before positionStateSet; retail reloads [r5,#0x5d8] directly. */
 #include "common.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Sys/File/AsdLoadFile.h"
@@ -62,7 +62,7 @@ extern "C" void FUN_003f5598(PartnerTopicDialog *dialog)
     }
     dialog->sprite = spriteHandleCreate(0);
     FUN_001527d8(dialog->sprite, -1);
-    positionStateSet(dialog->sprite, 0, 0x646464FF, 1.0f);
+    positionStateSet(dialog->sprite, 0, 0x646464FF, 0.0f);
     FUN_003f84e8(dialog);
     dialogEnterState(dialog, 1, 0);
 }

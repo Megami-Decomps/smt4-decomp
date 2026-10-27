@@ -12,7 +12,7 @@ struct DrawRing {
     s32 slots[4];           // 0x08
     u8 dirty;               // 0x18
     u8 unk19[3];
-    void (*flush)(void);    // 0x1c
+    void (*flush)(s32 state);   // 0x1c
 };
 
 struct RenderCtx {
@@ -51,7 +51,7 @@ static void setDrawState(s32 value)
     s32 previous = ring->slots[ring->index];
     ring->slots[ring->index] = value;
     if (ring->dirty != 0 || previous != value) {
-        ring->flush();
+        ring->flush(value);
         ring->dirty = 0;
     }
 }

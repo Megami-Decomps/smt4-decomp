@@ -72,7 +72,7 @@ struct FlagWorkBanks {
             /* 0x07C4 */ u8 unk07C4BeforeRestore[0x653];
             /* 0x0E17 */ s8 count;
             /* 0x0E18 */ u8 unk0E18[0x7DC];
-            /* 0x15F4 */ u8 active[16];
+            /* 0x15F4 */ s8 active[16];
             /* 0x1604 */ u16 values[16];
             /* 0x1624 */ s16 completionFlags[16];
             /* 0x1644 */ s16 keys[16];

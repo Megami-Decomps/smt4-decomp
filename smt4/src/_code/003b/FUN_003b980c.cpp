@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail retains each release field's address across calls; built uses direct root-relative stores. */
+/* NON_MATCHING: slot addresses are now kept across the release calls like retail (slots indexed as an array); only the first slot address is formed as base+36 instead of one add of 3472. */
 #include "script/scrScriptProcess.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -31,30 +31,36 @@ void buttonHelpTexturesUnref();
 void uiFadeRelease();
 }
 
-static void releaseScript(ScriptRunState *&script)
+struct ScriptScreenSlots {
+    u8 unk000[0xd6c];
+    void *slots[13];
+};
+
+static void releaseScript(ScriptScreenSlots *work, s32 index)
 {
-    if (script != NULL) {
-        scrScriptProcessDestroy(script);
-        script = NULL;
+    if (work->slots[index] != NULL) {
+        scrScriptProcessDestroy(static_cast<ScriptRunState *>(work->slots[index]));
+        work->slots[index] = NULL;
     }
 }
-static void releaseBuffer(void *&buffer)
+static void releaseBuffer(ScriptScreenSlots *work, s32 index)
 {
-    if (buffer != NULL) {
-        asdMemFree(buffer);
-        buffer = NULL;
+    if (work->slots[index] != NULL) {
+        asdMemFree(work->slots[index]);
+        work->slots[index] = NULL;
     }
 }
 
 /* Release both script bundles and the screen's shared UI resources. */
 extern "C" void FUN_003b980c(ScriptScreenCleanupView *work)
 {
-    releaseScript(work->secondary.script);
-    releaseBuffer(work->secondary.bytecode);
-    releaseBuffer(work->secondary.messages);
-    releaseScript(work->primary.script);
-    releaseBuffer(work->primary.bytecode);
-    releaseBuffer(work->primary.messages);
+    ScriptScreenSlots *slots = reinterpret_cast<ScriptScreenSlots *>(work);
+    releaseScript(slots, 9);
+    releaseBuffer(slots, 7);
+    releaseBuffer(slots, 8);
+    releaseScript(slots, 6);
+    releaseBuffer(slots, 4);
+    releaseBuffer(slots, 5);
     spriteTable2aFree(work->sprites);
     FUN_003bbafc(work->fileSlot);
     soundRequestEnd();

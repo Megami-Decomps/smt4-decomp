@@ -3,12 +3,12 @@
 #include "nn/Result.h"
 
 extern "C" {
-u32 FUN_00427ac4(void *archive, u32 mode);
+nn::Result FUN_00427ac4(void *archive, u32 mode);
 WindowStatusResult FUN_00429210(void *file, void *archive, const u16 *path, u32 flags);
 
 WindowStatusResult FUN_00428940(void *file, void *archive, const u16 *path, u32 flags)
 {
-    u32 status = FUN_00427ac4(archive, 1);
+    nn::Result status = FUN_00427ac4(archive, 1);
     if (nnResultIsSuccess(status)) {
         status = FUN_004283cc(file);
     }

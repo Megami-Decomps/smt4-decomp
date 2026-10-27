@@ -30,6 +30,15 @@ public:
     /* 0x30 */ u8 unk30[0xc];
 };
 
+/* A 0x50-byte sound object holding eight handles. */
+class SoundObj50 : public SoundHeapBase {
+public:
+    ~SoundObj50();
+
+    /* 0x20 */ SoundHandle handles[8];
+    /* 0x40 */ u8 unk40[0x10];
+};
+
 /* A 0x70-byte sound object holding sixteen handles. */
 class SoundObj70 : public SoundHeapBase {
 public:

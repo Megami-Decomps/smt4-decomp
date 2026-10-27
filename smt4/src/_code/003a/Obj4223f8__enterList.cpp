@@ -1,4 +1,4 @@
-/* NON_MATCHING: mode-panel base is formed after initialization rather than retained across it; selected-ID and owner registers differ. */
+/* NON_MATCHING: retail reaches the mode and count through a 0x500 block base formed before the flag test and keeps the screen in r5 / the status id in r4 (build swaps them). */
 #include "classes/Obj4223f8.h"
 #include <stddef.h>
 #include "AsdSDK/Source/Gfx/Model/AsdMdlManager.h"
@@ -44,20 +44,27 @@ void Obj4223f8::enterList()
         u16 statusId; // 0xa5b0
     };
     typedef char ScreenEntryViewOffsetCheck[sizeof(Entry) == 0x20 && offsetof(ScreenEntryView, transition) == 0x96 && offsetof(ScreenEntryView, statusId) == 0xa5b0 ? 1 : -1];
+    struct StateBlock {
+        u8 unk00[0xA4];
+        s8 mode;
+        u8 unkA5[3];
+        u16 count;
+    };
     ScreenEntryView *view = reinterpret_cast<ScreenEntryView *>(screen);
     if (!screen->isScreenReady() || utilityReturnSuccess(view->transition))
         return;
+    const StateBlock *block = reinterpret_cast<const StateBlock *>(reinterpret_cast<u8 *>(screen) + 0x500);
     if (screen->flag5A4 == 1 && !stageAssetsLoaded())
         return;
     view->state = 1;
     view->timer = 0;
     FUN_00233240(view->panel, 0);
     FUN_00233240(view->panel, 1);
-    if (view->mode == 0)
+    if (block->mode == 0)
         buttonHelpSetPreset(0x2e);
-    else if (view->mode == 1)
+    else if (block->mode == 1)
         buttonHelpSetPreset(0x46);
-    if (view->entries[0].count != 0) {
+    if (block->count != 0) {
         Entry *entries = view->entries;
         u16 id = entries[flaggedValueHolderGetTotal(&view->selection)].id;
         if (!entries[flaggedValueHolderGetTotal(&view->selection)].available)

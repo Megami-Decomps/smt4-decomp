@@ -3,13 +3,13 @@
 #include "nn/Result.h"
 
 extern "C" {
-s32 FUN_00427ac4(void *request, u32 count);
+nn::Result FUN_00427ac4(void *request, u32 count);
 WindowStatusResult FUN_00429580(void *owner, void *request, void *parameters, u32 count, s32 mode);
 
 /* Validates one request and its owner, executes it, and returns the translated operation result. */
 WindowStatusResult FUN_00429178(void *owner, void *request, void *parameters)
 {
-    s32 status = FUN_00427ac4(request, 1);
+    nn::Result status = FUN_00427ac4(request, 1);
     if (nnResultIsFailure(status)) {
         return WindowStatusResult(static_cast<u32>(status));
     }

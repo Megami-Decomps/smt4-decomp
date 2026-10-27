@@ -1,4 +1,4 @@
-/* NON_MATCHING: bible devil list per-frame update; draft shape, branch layout and registers not compared with retail */
+/* NON_MATCHING: layout, arm order and the FUN_003aab90 tail now follow retail; retail reads the entry count through a pool offset without sharing it with the entries base (add 1024+424) and allocates this/loop registers differently (r5/r4). */
 #include "common.h"
 #include "classes/Obj4223f8.h"
 
@@ -23,21 +23,21 @@ struct BibleListUi {
     /* 0x000C8 */ u8 pointer[0x14];
     /* 0x000DC */ u8 animation[0x20];
     /* 0x000FC */ u8 slots[6][0x8C];
-    /* 0x0043C */ u8 unk0043C[0x16C];
-    /* 0x005A8 */ u16 entryCount;
-    /* 0x005AA */ u8 unk005AA[2];
-    /* 0x005AC */ BibleListEntry entries[0x500];
-    /* 0x0A5AC */ u8 unkA5AC[4];
-    /* 0x0A5B0 */ s16 shownDevil;         /* devil shown in the status panel */
+    /* 0x00444 */ u8 unk00444[0x164];
+    union {
+        /* 0x005A8 */ u16 entryCount;     /* the first entry's leading halfword holds the number of entries */
+        BibleListEntry entries[0x500];
+    };
+    /* 0x0A5A8 */ u8 unkA5A8[8];
+    /* 0x0A5B0 */ u16 shownDevil;         /* devil shown in the status panel */
     /* 0x0A5B2 */ s16 slotIndex;          /* cursor slot animation */
     /* 0x0A5B4 */ u8 unkA5B4[0x10A];
-    /* 0x0A6BE */ u8 marker;
+    /* 0x0A6BE */ s8 marker;
 };
-
-#define BIBLE_LIST_MARKED_COUNT 16
 
 extern "C" {
 void FUN_003a98b8(BibleListUi *ui);
+void FUN_003aab90(u16 *marked);
 void uiAnimationAdvanceChannel(void *animation, s32 channel);
 u32 vec2GetYInt(void *slot);
 u32 vec2GetXInt(void *slot);
@@ -54,7 +54,7 @@ void FUN_00233240(void *animation, s32 channel);
 s32 gameGetFlagByte12e8(void);
 s32 flaggedValueHolderGetTotal(void *holder);
 s32 FUN_0029e0f8(void);
-void FUN_0029defc(s32 id, s32 flag);
+void FUN_0029defc(s16 id, s32 flag);
 void FUN_0029dfc0(s32 id);
 void statusPanelSetOpen(s32 open);
 void objectWordsClear(void *words);
@@ -68,10 +68,8 @@ void devilListMarkOrInsertQualifiedEntry(void *list, u32 id);
 void Obj4223f8::updateBrowse()
 {
     BibleListUi *ui = reinterpret_cast<BibleListUi *>(this);
-    ui->marker = 0xFF;
-    if (ui->mode != 4) {
-        FUN_003a98b8(ui);
-    } else {
+    ui->marker = -1;
+    if (ui->mode == 4) {
         uiAnimationAdvanceChannel(ui->animation, ui->slotIndex);
         void *slot = ui->slots[ui->slotIndex];
         u32 y = vec2GetYInt(slot);
@@ -96,15 +94,17 @@ void Obj4223f8::updateBrowse()
             ui->slotIndex = (gameGetFlagByte12e8() == 1) ? 0 : 4;
             FUN_00233240(ui->animation, ui->slotIndex);
         }
+    } else {
+        FUN_003a98b8(ui);
     }
 
     BibleListEntry *entries = ui->entries;
     if (ui->entryCount != 0) {
-        s16 shown = entries[flaggedValueHolderGetTotal(ui->list)].devilId;
+        u16 shown = entries[flaggedValueHolderGetTotal(ui->list)].devilId;
         if (entries[flaggedValueHolderGetTotal(ui->list)].registered == 0)
             shown = 0;
         s32 panelOpen = FUN_0029e0f8();
-        s16 current = 0;
+        u16 current = 0;
         if (panelOpen != 0)
             current = ui->shownDevil;
         if (panelOpen != 0 && current != shown) {
@@ -124,9 +124,5 @@ void Obj4223f8::updateBrowse()
     s32 visible = rangeLimitMin(ui->list);
     for (s32 i = 0; i < visible; i++)
         devilListMarkOrInsertQualifiedEntry(ui->marked, entries[FUN_0029e924(ui->list) + i].devilId);
-    for (s32 i = 0; i < BIBLE_LIST_MARKED_COUNT; i++) {
-        s16 id = ui->marked[i];
-        if (id != -1 && id != 0 && *((u8 *)ui->marked + i + 0x20) == 0)
-            ui->marked[i] = 0xFFFF;
-    }
+    FUN_003aab90(ui->marked);
 }

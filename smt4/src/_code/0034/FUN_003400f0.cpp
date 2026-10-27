@@ -49,7 +49,7 @@ void FUN_003400f0(BattleStageModel *stage, u32 area, u32 variant, u32 options)
     u32 count = dataTableGetCount(table);
     const BattleStageAccessoryRecord *record = NULL;
     for (u32 index = 0; index < count; ++index) {
-        if (entries[index].area == stage->key0 && entries[index].variant == stage->key1) {
+        if (stage->key0 == entries[index].area && stage->key1 == entries[index].variant) {
             record = &entries[index];
             break;
         }

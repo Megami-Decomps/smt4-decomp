@@ -89,8 +89,12 @@ void FUN_004a1db4(StatusMenu* menu)
 
     s32 cursor = FUN_002a482c(menu->list);
     s32 page = FUN_0031d174(menu->list);
-    if (statusDownGetMode() != 1) {
-        if (statusDownGetMode() != -1) {
+    if (statusDownGetMode() == 1) {
+        FUN_004d0100(menu->list);
+    } else {
+        if (statusDownGetMode() == -1) {
+            FUN_004d01f8(menu->list);
+        } else {
             if (MENU_BYTE(menu, 0x860) != 1) {
                 if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;
                 sendEvent100020D();
@@ -107,17 +111,13 @@ void FUN_004a1db4(StatusMenu* menu)
                 ifTouchGetButtonHelpValue();
                 sysPlaySe();
             }
-        } else {
-            FUN_004d01f8(menu->list);
         }
-    } else {
-        FUN_004d0100(menu->list);
     }
     if (MENU_BYTE(menu, 0x860) == 1) {
-        if (MENU_BYTE(menu, 0x861) != 1) {
-            FUN_00183f58(2, 4, 0x41, 1);
-        } else {
+        if (MENU_BYTE(menu, 0x861) == 1) {
             FUN_00183f58(2, 4, 0x40, 1);
+        } else {
+            FUN_00183f58(2, 4, 0x41, 1);
         }
     }
     if (FUN_002a482c(menu->list) == cursor && FUN_0031d174(menu->list) == page) return;

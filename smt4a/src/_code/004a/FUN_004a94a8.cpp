@@ -1,4 +1,4 @@
-/* NON_MATCHING: the peeled request loop uses different index/count registers and reversed final comparison. */
+/* NON_MATCHING: register allocation only: retail keeps the bank count in ip and the entry base in r3 (swapped in the build). */
 #include "battle/btlUI.h"
 
 extern "C" {
@@ -24,9 +24,8 @@ u32 FUN_004a94a8(u32, s32 bank)
     if (status->pending != 0) {
         return 1;
     }
-    s32 count = work->requestCounts.counts[bank];
     const RequestBanksView* requests = reinterpret_cast<const RequestBanksView*>(work);
-    for (s32 i = 0; i < count; ++i) {
+    for (s32 i = 0; i < work->requestCounts.counts[bank]; ++i) {
         if (requests->banks[bank].requests[i].active != 0) {
             return 1;
         }

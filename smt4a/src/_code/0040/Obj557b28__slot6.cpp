@@ -1,4 +1,3 @@
-/* NON_MATCHING: explicit hold segment and positive-or-zero clamp restore control flow and unordered clamp behavior; segment comparisons and rising addition use reversed operands. */
 #include "common.h"
 
 struct RampParameter {
@@ -18,15 +17,18 @@ extern "C" {
 void _ZN9Obj557b285slot6Ev(RampParameter *self)
 {
     s32 frame = self->frame + 1;
+    s32 riseEnd = self->riseEnd;
     f32 value = self->value;
     self->frame = frame;
-    if (self->riseEnd > frame) {
-        value = value + self->riseStep;
+    if (frame < riseEnd) {
+        f32 step = self->riseStep;
+        value = value + step;
         self->value = value;
-    } else if (self->holdEnd > frame) {
+    } else if (frame < self->holdEnd) {
         // Hold the current value until the falling segment starts.
-    } else if (frame < self->fallEnd) {
-        value = value - self->fallStep;
+    } else if (self->fallEnd > frame) {
+        f32 step = self->fallStep;
+        value = value - step;
         self->value = value;
     }
     if (value > 1.0f) {

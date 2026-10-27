@@ -1,4 +1,3 @@
-/* NON_MATCHING: code identical; the anonymous ptmf constdata table at 0x402470 is not carved by the tooling (pool reloc reads <Data1> vs DAT_00402470). */
 #include "classes/Obj422448.h"
 
 Obj422448::Obj422448()

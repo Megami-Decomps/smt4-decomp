@@ -1,4 +1,4 @@
-/* NON_MATCHING: arm placement, cached entry base and id extensions now match retail; remaining: retail delays the preview arm's id sign-extension (ldrh ... sxth) and stores the phase/source bytes in a different order. */
+/* NON_MATCHING: only register assignment of the preview-mode/phase constants and the position of the source-byte store differ from retail. */
 #include "classes/Obj42247c.h"
 #include "classes/Obj4223c4.h"
 #include "shard/W6_W6Match4_FlaggedValueHolder.h"
@@ -54,7 +54,8 @@ void Obj4223c4::FUN_003a76b8()
         state->source = 1;
         DetailEntry *entries = state->entries;
         if (!(state->fromParty != 0)) {
-            s16 id = entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            u16 rawId = entries[flaggedValueHolderGetTotal(&state->selection)].id;
+            s16 id = rawId;
             s32 cost = FUN_0029ce60(static_cast<u16>(id), state->source, 0, state->sortMode >= 100, 0);
             messageBannerInitSelection(1, 0);
             messageTargetSetValue(-cost, 0);

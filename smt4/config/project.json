@@ -15038,12 +15038,12 @@
     },
     {
       "address": "0x150ab4",
-      "function": "FUN_00150ab4",
+      "function": "asdModelAppendCommandSource",
       "module": "_code",
-      "object": "build/obj/_code/0015/FUN_00150ab4.o",
+      "object": "build/obj/_code/0015/asdModelAppendCommandSource.o",
       "size": 164,
-      "source": "src/_code/0015/FUN_00150ab4.cpp",
-      "target": "orig/target/_code/0015/FUN_00150ab4.o",
+      "source": "src/_code/0015/asdModelAppendCommandSource.cpp",
+      "target": "orig/target/_code/0015/asdModelAppendCommandSource.o",
       "thumb": false
     },
     {
@@ -80201,12 +80201,12 @@
     },
     {
       "address": "0x33d3f8",
-      "function": "FUN_0033d3f8",
+      "function": "spriteDrawAnimationUnplaced",
       "module": "_code",
-      "object": "build/obj/_code/0033/FUN_0033d3f8.o",
+      "object": "build/obj/_code/0033/spriteDrawAnimationUnplaced.o",
       "size": 52,
-      "source": "src/_code/0033/FUN_0033d3f8.cpp",
-      "target": "orig/target/_code/0033/FUN_0033d3f8.o",
+      "source": "src/_code/0033/spriteDrawAnimationUnplaced.cpp",
+      "target": "orig/target/_code/0033/spriteDrawAnimationUnplaced.o",
       "thumb": false
     },
     {
@@ -80567,12 +80567,12 @@
     },
     {
       "address": "0x3406b4",
-      "function": "FUN_003406b4",
+      "function": "_ZN10SoundObj50D1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_003406b4.o",
+      "object": "build/obj/_code/0034/SoundObj50__dtor_SoundObj50.o",
       "size": 40,
-      "source": "src/_code/0034/FUN_003406b4.cpp",
-      "target": "orig/target/_code/0034/FUN_003406b4.o",
+      "source": "src/_code/0034/SoundObj50__dtor_SoundObj50.cpp",
+      "target": "orig/target/_code/0034/SoundObj50__dtor_SoundObj50.o",
       "thumb": false
     },
     {
@@ -81434,12 +81434,12 @@
     },
     {
       "address": "0x3472f0",
-      "function": "FUN_003472f0",
+      "function": "_ZN10SoundObj3cD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0034/FUN_003472f0.o",
+      "object": "build/obj/_code/0034/SoundObj3c__dtor_SoundObj3c.o",
       "size": 40,
-      "source": "src/_code/0034/FUN_003472f0.cpp",
-      "target": "orig/target/_code/0034/FUN_003472f0.o",
+      "source": "src/_code/0034/SoundObj3c__dtor_SoundObj3c.cpp",
+      "target": "orig/target/_code/0034/SoundObj3c__dtor_SoundObj3c.o",
       "thumb": false
     },
     {
@@ -83818,12 +83818,12 @@
     },
     {
       "address": "0x352740",
-      "function": "FUN_00352740",
+      "function": "_ZN19AocAuxBufferRequestC1EjPvj",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00352740.o",
+      "object": "build/obj/_code/0035/AocAuxBufferRequest__AocAuxBufferRequest__unsigned_int__void____unsigned_int.o",
       "size": 36,
-      "source": "src/_code/0035/FUN_00352740.cpp",
-      "target": "orig/target/_code/0035/FUN_00352740.o",
+      "source": "src/_code/0035/AocAuxBufferRequest__AocAuxBufferRequest__unsigned_int__void____unsigned_int.cpp",
+      "target": "orig/target/_code/0035/AocAuxBufferRequest__AocAuxBufferRequest__unsigned_int__void____unsigned_int.o",
       "thumb": false
     },
     {
@@ -83868,22 +83868,22 @@
     },
     {
       "address": "0x352ee8",
-      "function": "FUN_00352ee8",
+      "function": "_ZN16AocBufferRequestC1EjPvj",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00352ee8.o",
+      "object": "build/obj/_code/0035/AocBufferRequest__AocBufferRequest__unsigned_int__void____unsigned_int.o",
       "size": 36,
-      "source": "src/_code/0035/FUN_00352ee8.cpp",
-      "target": "orig/target/_code/0035/FUN_00352ee8.o",
+      "source": "src/_code/0035/AocBufferRequest__AocBufferRequest__unsigned_int__void____unsigned_int.cpp",
+      "target": "orig/target/_code/0035/AocBufferRequest__AocBufferRequest__unsigned_int__void____unsigned_int.o",
       "thumb": false
     },
     {
       "address": "0x352f0c",
-      "function": "FUN_00352f0c",
+      "function": "_ZN16AocBufferRequestD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0035/FUN_00352f0c.o",
+      "object": "build/obj/_code/0035/AocBufferRequest__dtor_AocBufferRequest.o",
       "size": 4,
-      "source": "src/_code/0035/FUN_00352f0c.cpp",
-      "target": "orig/target/_code/0035/FUN_00352f0c.o",
+      "source": "src/_code/0035/AocBufferRequest__dtor_AocBufferRequest.cpp",
+      "target": "orig/target/_code/0035/AocBufferRequest__dtor_AocBufferRequest.o",
       "thumb": false
     },
     {
@@ -91067,12 +91067,12 @@
     },
     {
       "address": "0x376974",
-      "function": "FUN_00376974",
+      "function": "_ZN11SoundHandleD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0037/FUN_00376974.o",
+      "object": "build/obj/_code/0037/SoundHandle__dtor_SoundHandle.o",
       "size": 20,
-      "source": "src/_code/0037/FUN_00376974.cpp",
-      "target": "orig/target/_code/0037/FUN_00376974.o",
+      "source": "src/_code/0037/SoundHandle__dtor_SoundHandle.cpp",
+      "target": "orig/target/_code/0037/SoundHandle__dtor_SoundHandle.o",
       "thumb": false
     },
     {
@@ -93798,12 +93798,12 @@
     },
     {
       "address": "0x3809a0",
-      "function": "FUN_003809a0",
+      "function": "_ZN13SoundHeapBaseD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0038/FUN_003809a0.o",
+      "object": "build/obj/_code/0038/SoundHeapBase__dtor_SoundHeapBase.o",
       "size": 160,
-      "source": "src/_code/0038/FUN_003809a0.cpp",
-      "target": "orig/target/_code/0038/FUN_003809a0.o",
+      "source": "src/_code/0038/SoundHeapBase__dtor_SoundHeapBase.cpp",
+      "target": "orig/target/_code/0038/SoundHeapBase__dtor_SoundHeapBase.o",
       "thumb": false
     },
     {
@@ -98548,12 +98548,12 @@
     },
     {
       "address": "0x3a64cc",
-      "function": "FUN_003a64cc",
+      "function": "rankedEntryCompare",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003a64cc.o",
+      "object": "build/obj/_code/003a/rankedEntryCompare.o",
       "size": 80,
-      "source": "src/_code/003a/FUN_003a64cc.cpp",
-      "target": "orig/target/_code/003a/FUN_003a64cc.o",
+      "source": "src/_code/003a/rankedEntryCompare.cpp",
+      "target": "orig/target/_code/003a/rankedEntryCompare.o",
       "thumb": false
     },
     {
@@ -99197,12 +99197,12 @@
     },
     {
       "address": "0x3aaa6c",
-      "function": "FUN_003aaa6c",
+      "function": "numberPanelLayoutWindow",
       "module": "_code",
-      "object": "build/obj/_code/003a/FUN_003aaa6c.o",
+      "object": "build/obj/_code/003a/numberPanelLayoutWindow.o",
       "size": 192,
-      "source": "src/_code/003a/FUN_003aaa6c.cpp",
-      "target": "orig/target/_code/003a/FUN_003aaa6c.o",
+      "source": "src/_code/003a/numberPanelLayoutWindow.cpp",
+      "target": "orig/target/_code/003a/numberPanelLayoutWindow.o",
       "thumb": false
     },
     {
@@ -101623,7 +101623,7 @@
       "module": "_code",
       "object": "build/obj/_code/003b/FUN_003bbb98.o",
       "size": 200,
-      "source": "src/_code/003b/FUN_003bbb98.cpp",
+      "source": "src/_code/003b/CecCardWrite.cpp",
       "target": "orig/target/_code/003b/FUN_003bbb98.o",
       "thumb": false
     },
@@ -101673,7 +101673,7 @@
       "module": "_code",
       "object": "build/obj/_code/003b/FUN_003bbd88.o",
       "size": 220,
-      "source": "src/_code/003b/FUN_003bbd88.cpp",
+      "source": "src/_code/003b/CecCardWrite.cpp",
       "target": "orig/target/_code/003b/FUN_003bbd88.o",
       "thumb": false
     },

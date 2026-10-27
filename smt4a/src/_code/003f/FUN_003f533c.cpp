@@ -11,7 +11,7 @@ void drawSetColorFromRGBA8(u32 color);
 void FUN_00180310(u32 font, s32 x, s32 y, u32 flags, u32 kind, u32 parameter,
     const char* format, ...);
 
-void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, u32 number,
+void FUN_003f533c(u32 unused, s32 x, s32 y, u32 parameter, s32 number,
     u32 iconLayout, u32 onesLayout, u32 tensLayout, u32 color, s32 alternate, f32 speed)
 {
     s32 parallax = static_cast<s32>(renderCtxCalculateStereoParallax(g_renderCtx, 0.26f));

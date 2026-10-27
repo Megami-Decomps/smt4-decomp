@@ -34,19 +34,19 @@ extern "C" {
 StepUnitRecord *gameGetUnitRecord(s32 slot);
 
 /* A percentage of max, never negative. */
-static __inline u32 unitHasFlag(const StepUnitRecord *unit, u32 bit)
+static u32 unitHasFlag(const StepUnitRecord *unit, u32 bit)
 {
     return (static_cast<u32>(unit->flags) & (1 << (bit & 0xFF))) != 0;
 }
 
-static __inline s32 percentOfMax(s32 max, s32 percent)
+static s32 percentOfMax(s32 max, s32 percent)
 {
     s32 amount = max * percent / 100;
     return amount < 0 ? 0 : amount;
 }
 
 /* Heals the unit by a percentage of its maximum MP, keeping the result in 1..max. */
-static __inline void unitHealMpPercent(StepUnitRecord *unit, s32 percent)
+static void unitHealMpPercent(StepUnitRecord *unit, s32 percent)
 {
     s32 max = unit->maxMp;
     s32 mp = unit->mp + percentOfMax(max, percent);
@@ -64,7 +64,7 @@ static __inline void unitHealMpPercent(StepUnitRecord *unit, s32 percent)
 }
 
 /* Heals every usable side unit by the percentage. */
-static __inline void healSideUnitsMp(s32 percent, s32 count)
+static void healSideUnitsMp(s32 percent, s32 count)
 {
     const s8 *side = gameGetSlotTable()->active;
     for (s32 i = 0; i < count; ++i) {
@@ -77,7 +77,7 @@ static __inline void healSideUnitsMp(s32 percent, s32 count)
 }
 
 /* Heals the usable side units that know the regeneration skill. */
-static __inline void healRegenSkillUnitsMp(s32 percent, s32 count)
+static void healRegenSkillUnitsMp(s32 percent, s32 count)
 {
     const s8 *side = gameGetSlotTable()->active;
     for (s32 i = 0; i < count; ++i) {

@@ -27,7 +27,7 @@ extern "C" {
 void *__aeabi_memcpy4(void *dest, const void *src, u32 size);
 void sysMemClear(void *block, u32 size);
 void FUN_0019a46c(void *dest, const char *src, u32 size);
-s32 FUN_00427e68(u32 token, u32 mode);
+nn::Result FUN_00427e68(u32 token, u32 mode);
 u32 FUN_0016ccfc(void);
 s32 tokenResolveAddress(u32 context, WindowRequestEntry **entry, u32 token);
 s32 appletIsExitRequested(void);
@@ -39,7 +39,7 @@ extern WindowRequestBuffer DAT_0061b030;
 /* Validates the token, stages its payload and name, and issues the asynchronous request. */
 WindowStatusResult FUN_00429048(const u32 *token, const char *name)
 {
-    s32 status = FUN_00427e68(*token, 2);
+    nn::Result status = FUN_00427e68(*token, 2);
     if (!nnResultIsFailure(status)) {
         WindowRequestEntry *entry;
         status = tokenResolveAddress(FUN_0016ccfc(), &entry, *token);

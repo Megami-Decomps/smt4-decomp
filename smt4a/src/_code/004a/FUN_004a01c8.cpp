@@ -75,7 +75,7 @@ extern "C" void FUN_004a01c8(u32 group, u8 conditionBit, s32 percentage)
     for (s32 index = 0; index < count; ++index) {
         if (slots[index] >= 0) {
             ScaledRecordValues *record = gameGetSlotRecord(slots[index]);
-            u16 flags = record->flags;
+            s16 flags = record->flags;
             if (!(flags & 2) && !(flags & 0x400) && (flags & mask)) {
                 s32 loss = damageRecordMaximum(record) * percentage / 100;
                 if (loss <= 0)

@@ -4,8 +4,5 @@
 // Clears the four stored values.
 Obj557b18Element::Obj557b18Element()
 {
-    first = 0;
-    second = 0;
-    third = 0;
-    fourth = 0;
+    fourth = third = second = first = 0;
 }

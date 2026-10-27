@@ -1,4 +1,3 @@
-/* NON_MATCHING: the success mask uses r0 after saving the result in r4; retail masks into r1 before preserving the result. */
 #include "nn/Result.h"
 
 extern "C" {
@@ -11,7 +10,7 @@ typedef struct State0035782c {
 
 void nn_os_CriticalSection_Enter(void *section);
 void nn_os_CriticalSection_Leave(void *section);
-s32 FUN_0035ae94(s32 value);
+nn::Result FUN_0035ae94(s32 value);
 void threadSleepDuration(s32 value, s32 flags);
 
 extern State0035782c DAT_004656ca; /* 0x4656ca */
@@ -28,8 +27,9 @@ s32 moduleStartOnce(void)
     } else if (DAT_004656ca.started == 0) {
         section = g_moduleCriticalSection2;
         nn_os_CriticalSection_Enter(section);
-        result = FUN_0035ae94(0);
-        if (!nnResultIsSuccess(result)) {
+        nn::Result channel = FUN_0035ae94(0);
+        result = channel;
+        if (!nnResultIsSuccess(channel)) {
             nn_os_CriticalSection_Leave(section);
             return result;
         }

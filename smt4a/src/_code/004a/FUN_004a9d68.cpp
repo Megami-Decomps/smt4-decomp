@@ -29,25 +29,24 @@ u32 FUN_004a9d68(u32 request, u64 *ownerFlags, f32 x, f32 y, f32 z)
     u32 index = findActionSlot(ui);
     if (index >= 12)
         return -1;
-    BattleUiActionSlot *slot = &ui->actionRequests.slots[index];
-    slot->state = 2;
-    slot->frame = 0;
-    slot->progress = 0.0f;
-    slot->active = 0;
+    ui->actionRequests.slots[index].state = 2;
+    ui->actionRequests.slots[index].frame = 0;
+    ui->actionRequests.slots[index].progress = 0.0f;
+    ui->actionRequests.slots[index].active = 0;
     BattleUiActionVector position = {x, y, z};
     FUN_002a1850(&position.x, 0, reinterpret_cast<ProjectionMatrices *>(FUN_00152f54()), &position.x);
-    slot->projected = position;
-    slot->velocity[0] = slot->velocity[1] = slot->velocity[2] = 0.0f;
-    slot->acceleration[0] = slot->acceleration[1] = slot->acceleration[2] = 0.0f;
-    slot->ownerFlags = reinterpret_cast<u32 *>(ownerFlags);
+    ui->actionRequests.slots[index].projected = position;
+    ui->actionRequests.slots[index].velocity[0] = ui->actionRequests.slots[index].velocity[1] = ui->actionRequests.slots[index].velocity[2] = 0.0f;
+    ui->actionRequests.slots[index].acceleration[0] = ui->actionRequests.slots[index].acceleration[1] = ui->actionRequests.slots[index].acceleration[2] = 0.0f;
+    ui->actionRequests.slots[index].ownerFlags = reinterpret_cast<u32 *>(ownerFlags);
     *ownerFlags &= ~globals->completionMask;
     if (btlScriptUnitHasFlags(reinterpret_cast<const BtlMainStateA *>(ui->owner))) {
-        slot->active = 0;
-        slot->state = 5;
-        *reinterpret_cast<u64 *>(slot->ownerFlags) |= globals->completionMask;
+        ui->actionRequests.slots[index].active = 0;
+        ui->actionRequests.slots[index].state = 5;
+        *reinterpret_cast<u64 *>(ui->actionRequests.slots[index].ownerFlags) |= globals->completionMask;
     } else {
-        uiSpriteSelectAnim(&slot->firstSprite, 10);
-        uiSpriteSelectAnim(&slot->secondSprite, 11);
+        uiSpriteSelectAnim(&ui->actionRequests.slots[index].firstSprite, 10);
+        uiSpriteSelectAnim(&ui->actionRequests.slots[index].secondSprite, 11);
     }
     return index;
 }

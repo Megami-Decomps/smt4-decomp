@@ -78,9 +78,9 @@ extern "C" u32 FUN_003b21e4(SourceBindingOwner *owner, BoundDataSource *source)
     if (!source->isReady()) {
         return 65;
     }
-    owner->type = owner->source->type();
     owner->header = SourceBindingHeader();
     owner->error = 64;
+    owner->type = owner->source->type();
     owner->capacity = 65536;
     owner->flag1487 = 0;
     owner->flag1489 = 0;

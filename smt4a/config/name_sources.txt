@@ -6799,3 +6799,47 @@
 002ba7b8 scrCommSetStoryFlag inferred [med] script command: sets the flag given by argument 0 plus follow-up flags for 0x206, 0x18b, 0x1a6
 002b91ec fieldSceneResetEntryState inferred [med] resets the field scene entry mode/timers depending on flag 0x4c9
 002add8c campFusionResultCommand inferred [med] camp command: plays the panel/result sound and opens the selected fusion-result record or changes camp panel
+001b18cc _ZN9Obj55bea0C1Ev evidence base-class constructor: stores the vtable at 0x55bea0+8 (pool word _ZTV9Obj55be80+0x28 today), clears/initialises the 0x118-byte base; called by constructObj0055bfc4/0055c3b8/FUN_0019070c
+0055bea0 _ZTV9Obj55bea0 evidence size:0xc abstract-base vtable (two zero words + one pure-virtual slot); currently inside _ZTV9Obj55be80 (size 0x2c)
+006471a8 g_effMenuListTails evidence size:0x14 tail[5] of the menu node lists (smt4 twin name g_effMenuListTails); defined next to g_effMenuHandles in effMenuListsClear
+0049569c _ZN9Obj53604412FUN_0049569cEv evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00494a34 _ZN9Obj53604412FUN_00494a34Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00498ac0 _ZN9Obj53604412FUN_00498ac0Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+004995b0 _ZN9Obj53604412FUN_004995b0Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00494740 _ZN9Obj53604412FUN_00494740Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+0049bd20 _ZN9Obj53604412FUN_0049bd20Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00499e00 _ZN9Obj53604428itemMenuHandleSelectionInputEv evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00499fdc _ZN9Obj53604412FUN_00499fdcEv evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+0049a2b4 _ZN9Obj53604412FUN_0049a2b4Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+0049b00c _ZN9Obj53604412FUN_0049b00cEv evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00499390 _ZN9Obj53604433shopUpdateCharonRequestTransitionEv evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00497044 _ZN9Obj53604412FUN_00497044Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+004969a8 _ZN9Obj53604412FUN_004969a8Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00494940 _ZN9Obj53604429panelUpdatePageExitTransitionEv evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00497290 _ZN9Obj53604412FUN_00497290Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00498594 _ZN9Obj53604412FUN_00498594Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+00495584 _ZN9Obj53604412FUN_00495584Ev evidence handler member of Obj536044 (ptmf in states table at 0x53603c, FUN_0049a8b8 = resetHandlers)
+0049a8b8 _ZN9Obj53604413resetHandlersEv evidence Obj536044::resetHandlers: fills states[22]/exitStates[22] ptmf tables (blob 0x53603c)
+005e1ca8 g_entryWindowNumberFirst inferred size:0x28 u32[10] first number per entry (FUN_004a7814 arg)
+005e1cd0 g_entryWindowNumberSecond inferred size:0x28 u32[10] second number per entry
+005e1cf8 g_entryWindowCaptionX inferred size:0x28 s32[10] caption x per entry
+005e1d20 g_entryWindowCaptionY inferred size:0x28 s32[10] caption y per entry
+005e1d48 g_entryWindowCaptionLabels inferred size:0x140 char[10][32] caption label per entry
+005e1e88 g_entryWindowColors inferred size:0x28 u32[10] draw colour per entry
+0057f2cc g_cecCardServiceId evidence size:0x21 char service id string "-SHIN-MEGAMITENSEI-4G-8765432109"
+0057f2ee g_cecCardsReceivedText evidence size:0x5c UTF-16 text "You have received card(s) from other Hunters."
+0057f34a g_gameTitleText evidence size:0x44 UTF-16 text "Shin Megami Tensei IV:\nApocalypse"
+001b1434 asdModelAppendCommandSource inferred [med] appends a source's data span and 0x30-byte header to the model command buffer and copies two flag bits onto the owner's block (twin of smt4 FUN_00150ab4)
+004c1480 btlStatusFlagsHaveAilment inferred [high] true when any ailment bit of a combatant status word is set
+004bfc1c btlCalcAilmentRateScale inferred [med] returns the analysed percentage as a fraction when the target has an ailment, else 1.0
+004bb200 cecSendCardData inferred [med] writes the card message box and sends the outgoing CEC data, mapping the transport result to a status
+004bb35c cecCardMessageBoxInit inferred [med] initialises the card message box and translates its state to menu status bits
+004ba8ec uiTexLoaderUpdate inferred [med] per-frame update of the screen's texture loader
+00345b94 renderEditorSceneDrawOverlay inferred [med] renders the effect editor scene in a temporary render state and draws its enabled overlay
+00336574 selectionPanelDrawMarkers inferred [med] draws the selection panel frame and slot markers
+003409bc mikadoControllerFinish inferred [med] finishes the mikado controller and releases its camera
+003fabfc spriteDrawAnimationUnplaced inferred [med] draws a keyframe animation through FUN_003fd140 with positioned=0 (no placement transform); twin smt4 FUN_0033d3f8
+003fe90c moriModelChannelInitialize inferred [med] zeroes a model unit channel and allocates its optional id array of `count` u16 entries
+003f97a4 cyclingPanelAdvance inferred [med] advances the panel opening/reveal/closing phases and cycles multi-image entries
+00164cf4 buttonHelpIsKindActive inferred [high] true when an active button-help entry is the given kind or a combined kind containing it
+003278c8 flagRestorationConsumeByKey inferred [med] clears the active restoration entries with the given key, writes the stored area and raises their completion flag

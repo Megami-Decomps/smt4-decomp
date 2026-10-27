@@ -3114,7 +3114,7 @@
 0x001a374c nw_ut_internal_LinkListImpl_erase_2AC900 name
 0x001a3798 nw_ut_FrameHeap_FreeByState name
 0x001a383c nw_ut_FrameHeap_RecordState name
-0x001a38c8 FUN_001a38c8 callers
+0x001a38c8 FUN_001a38c8 between
 0x001a39d0 nw_gfx_RenderContext_MaterialHash_ResetMaterialHash name
 0x001a3a84 FUN_001a3a84 callers
 0x001a3b28 FUN_001a3b28 callers
@@ -3296,8 +3296,8 @@
 0x001b061c FUN_001b061c callers
 0x001b0648 nw_ut_HeapBase_FindContainHeap name
 0x001b06a0 nw_ut_FrameHeap_Alloc name
-0x001b0928 FUN_001b0928 callers
-0x001b0c5c FUN_001b0c5c callers
+0x001b0928 FUN_001b0928 between
+0x001b0c5c FUN_001b0c5c between
 0x001b0e10 nw_gfx_SceneBuilder_CreateObject name
 0x001b1394 nw_gfx_RenderContext_ActivateParticleContext name
 0x001b1a48 nw_snd_internal_TaskManager_GetNextTask name
@@ -3406,12 +3406,8 @@
 0x001b6660 FUN_001b6660 between
 0x001b6694 FUN_001b6694 between
 0x001b66a8 nw_ut_internal_LinkListImpl_insert name
-0x001b66cc FUN_001b66cc callers
+0x001b66cc FUN_001b66cc between
 0x001b685c nw_gfx_AnimEvaluator_SetCacheBufferPointers name
-0x001b68e8 FUN_001b68e8 between
-0x001b69f0 FUN_001b69f0 callers
-0x001b6ae0 FUN_001b6ae0 callers
-0x001b6bcc FUN_001b6bcc callers
 0x001b8e48 FUN_001b8e48 callers
 0x001b95b0 workStateClear between
 0x001b95c4 FUN_001b95c4 between
@@ -3437,7 +3433,7 @@
 0x001bc6a4 FUN_001bc6a4 between
 0x001bc6a8 nw_gfx_internal_NWCopyVec4Reverse name
 0x001bc6dc nw_gfx_internal_NWCopyMtx24Reverse name
-0x001bc730 FUN_001bc730 callers
+0x001bc730 FUN_001bc730 between
 0x001bc768 FUN_001bc768 between
 0x001bc7ec FUN_001bc7ec between
 0x001bc838 nw_gfx_internal_NWCopyVec3Reverse name
@@ -3575,7 +3571,7 @@
 0x001c4334 ARM_fpclassifyf between
 0x001c4360 FUN_001c4360 between
 0x001c4370 FUN_001c4370 between
-0x001c4504 FUN_001c4504 callers
+0x001c4504 FUN_001c4504 between
 0x001c4598 FUN_001c4598 between
 0x001c459c FUN_001c459c between
 0x001c45ec FUN_001c45ec between

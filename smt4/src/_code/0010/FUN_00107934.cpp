@@ -1,4 +1,4 @@
-/* NON_MATCHING: the rule walk now steps pointers like retail; retail reads pollSucceeded once into r5 before the loop (the field is hoisted) and shares one literal base for the held-state and frame-counter globals (DAT_004e3c58-48), ours reloads it per rule and keeps separate literals. */
+/* NON_MATCHING: same-file data now reproduces retail's single literal base (held state = frame counters - 48) and the single read of pollSucceeded; remaining: retail lays the poll test out inside the loop before its tail (no `continue` branch) and loads the held-state literal before DAT_004650a0. */
 #include "common.h"
 
 struct PadReader;
@@ -20,29 +20,32 @@ struct InputRule {
 
 extern "C" {
 extern PadPollingState DAT_004650a0;
-extern PadInputState DAT_004e3c28;
-extern u32 DAT_004e3c58[31];
 extern InputRule DAT_00409ab0[31];
 u32 FUN_0011c6cc(PadReader *reader, PadInputState *input);
 
+PadInputState DAT_004e3c28[3];
+u32 DAT_004e3c58[31];
+
 void FUN_00107934()
 {
-    DAT_004650a0.pollSucceeded =
-        FUN_0011c6cc(DAT_004650a0.reader, &DAT_004e3c28) != 0;
-    const InputRule *rule = DAT_00409ab0;
-    u32 *frames = DAT_004e3c58;
-    for (s32 remaining = 31; remaining != 0; --remaining, ++rule, ++frames) {
+    if (FUN_0011c6cc(DAT_004650a0.reader, &DAT_004e3c28[0]) != 0) {
+        DAT_004650a0.pollSucceeded = 1;
+    } else {
+        DAT_004650a0.pollSucceeded = 0;
+    }
+    s32 pollSucceeded = DAT_004650a0.pollSucceeded;
+    for (s32 i = 0; i < 31; i++) {
         u32 buttons = 0;
-        if (rule->disabled == 0) {
-            if (DAT_004650a0.pollSucceeded <= 0) {
+        if (DAT_00409ab0[i].disabled == 0) {
+            if (pollSucceeded <= 0) {
                 continue;
             }
-            buttons = DAT_004e3c28.held;
+            buttons = DAT_004e3c28[0].held;
         }
-        if ((buttons & rule->mask) != 0) {
-            ++*frames;
+        if ((buttons & DAT_00409ab0[i].mask) != 0) {
+            ++DAT_004e3c58[i];
         } else {
-            *frames = 0;
+            DAT_004e3c58[i] = 0;
         }
     }
 }

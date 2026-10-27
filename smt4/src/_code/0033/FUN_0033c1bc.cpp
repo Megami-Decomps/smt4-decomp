@@ -1,4 +1,4 @@
-/* NON_MATCHING: 171 vs 177 rows: retail calls __aeabi_idivmod for `% count` (unit built -Ospace-style; needs a cflags trial from Main) and keeps the loop counters in different registers */
+/* NON_MATCHING: 170 vs 171 rows: same control flow as retail; the shared zero temporary lands in r0 (retail r1, with the member loaded into r0) and the tail's flush-callback registers differ. */
 #include "common.h"
 #include "gamedata/PlayerDataBlock.h"
 #include "ui/UiControl.h"
@@ -10,7 +10,7 @@ struct DrawRing {
     s32 slots[4];           // 0x08
     u8 dirty;               // 0x18
     u8 unk19[3];
-    void (*flush)(void);    // 0x1c
+    void (*flush)(s32 state);   // 0x1c
 };
 
 struct TitleScene {
@@ -62,7 +62,7 @@ static void setDrawState(s32 value)
     s32 previous = ring->slots[ring->index];
     ring->slots[ring->index] = value;
     if (ring->dirty != 0 || previous != value) {
-        ring->flush();
+        ring->flush(value);
         ring->dirty = 0;
     }
 }
@@ -74,9 +74,8 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
     u32 slot = 0x12;
     if (strip->isPlayerVariant != 0) slot = 0x50;
     LayoutEntry* layout = asdTMTexTableEntryAt(0x19, slot);
-    s32 count = 0;
-    s16 current = 0;
-    s16 following = 0;
+    s32 count, n, current, following;
+    count = n = current = following = 0;
     u32 ailments;
     if (strip->member < 0) {
         ailments = reinterpret_cast<PlayerStatus*>(gameGetPlayerData())->ailments;
@@ -90,15 +89,14 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
         }
     }
     if (count == 1) {
-        messageKindForward(current, layout->x + x, layout->y + y, 0x7e);
+        messageKindForward((s16)current, layout->x + x, layout->y + y, 0x7e);
         return;
     }
     if (count > 1) {
         if (strip->scroll < 0x14) {
-            messageKindForward(current, layout->x + x, layout->y + y, 0x7e);
+            messageKindForward((s16)current, layout->x + x, layout->y + y, 0x7e);
             return;
         }
-        s32 n = 0;
         for (s32 bit = 1; bit <= 10; bit++) {
             if ((ailments & (1 << bit)) != 0) {
                 if ((strip->cursor + 1) % count == n) following = bit;
@@ -108,8 +106,8 @@ void FUN_0033c1bc(StatusStrip* strip, s32 x, s32 y)
         setDrawState(3);
         FUN_0029a17c(strip->originX + layout->x, strip->originY + layout->y, layout->size[0], layout->size[1], 1);
         s32 shift = (strip->scroll - 0x14) * -3;
-        messageKindForward(current, layout->x + shift + x, layout->y + y, 0x7e);
-        messageKindForward(following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);
+        messageKindForward((s16)current, layout->x + shift + x, layout->y + y, 0x7e);
+        messageKindForward((s16)following, layout->x + x + shift + 0xd, layout->y + y, 0x7e);
         setDrawState(0);
     }
 }

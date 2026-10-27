@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail clears handles through a post-increment interior pointer while retaining the work base separately. */
+/* NON_MATCHING: handles are cleared through an interior pointer with writeback as in retail; the work pointer is kept in r1 across the null test (retail tests the allocation result in r0 and moves the work pointer back to r0 before the store). */
 #include "common.h"
 
 struct ShadowMapWork {
@@ -23,8 +23,12 @@ void FUN_00156ea8(ModelShadowMap *shadow)
     if (work != NULL) {
         work = FUN_0016d17c(work);
         u32 *handle = work->handles;
-        for (s32 index = 0; index < 6; ++index)
-            *handle++ = 0;
+        handle[0] = 0;
+        handle[1] = 0;
+        handle[2] = 0;
+        handle[3] = 0;
+        handle[4] = 0;
+        handle[5] = 0;
     }
     shadow->work = work;
 }

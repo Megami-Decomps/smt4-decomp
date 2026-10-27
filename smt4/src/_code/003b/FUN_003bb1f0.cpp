@@ -37,8 +37,8 @@ void FUN_003bb1f0(SceneWidget *widget)
     work->animate = 0;
     work->cursorMarked = 0;
     work->initialFrame = 0;
-    work->shownTexture = -1;
     work->frame = 0;
+    work->shownTexture = -1;
     work->shownKey = -1;
     work->nextTexture = -1;
     work->nextKey = -1;

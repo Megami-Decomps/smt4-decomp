@@ -8,7 +8,7 @@ extern "C" void FUN_0033d2a8(MaskedChoiceRows *work, const MaskedChoiceDefinitio
     if (count > 9) {
         work->count = 9;
     }
-    for (s32 index = 0; index < work->count; ++index) {
+    for (s32 index = 0; work->count > index; ++index) {
         work->rows[index].definition = definitions[index];
     }
     work->firstGroupCount = -1;
@@ -27,7 +27,7 @@ extern "C" void FUN_0033d2a8(MaskedChoiceRows *work, const MaskedChoiceDefinitio
         }
         if (row->definition.enabled != 0) {
             if (row->definition.group == 1) {
-                work->firstGroupCount = row->definition.index < work->firstGroupCount ?
+                work->firstGroupCount = work->firstGroupCount > row->definition.index ?
                     work->firstGroupCount : row->definition.index;
             } else {
                 work->otherGroupCount = work->otherGroupCount <= row->definition.index ?

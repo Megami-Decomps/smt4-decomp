@@ -109,8 +109,7 @@ extern "C" void FUN_004986b0(ListPanel *panel, u32 frameStyle)
     if (hasSlot)
         pending = *reinterpret_cast<s32 *>(tabState + 0xB68);
     if (hasSlot && pending != 0 && pending >= 0) {
-        s32 total = flaggedValueHolderGetTotal(list);
-        FUN_00495b04(panel, FUN_0031d174(list) + 2, 1, values + total * 4);
+        FUN_00495b04(panel, FUN_0031d174(list) + 2, 1, values + flaggedValueHolderGetTotal(list) * 4);
     }
     s32 last = FUN_0031d174(list);
     s32 first = FUN_002a482c(list);

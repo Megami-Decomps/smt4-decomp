@@ -1,4 +1,4 @@
-/* NON_MATCHING: map departure behavior restored; compiler merges exclusion masks and schedules transition stores differently. */
+/* NON_MATCHING: the exclusion-flag tests now stay unfolded like retail; retail also keeps the 0x11 state constant in r6 (hoisted, five saved registers) and finishes the sequence-request arm through the shared exit, and the transition stores are scheduled differently. */
 #include "shard/W6_W6Match6_ContentTransition.h"
 #include "map/MapSelection.h"
 #include "shard/W6_W6Match2_EntrySequence.h"
@@ -12,6 +12,28 @@ void FUN_003d54f8(s32 option, s32 frames);
 void FUN_004b7a54(ContentTransition *work);
 void mikadoLoadSceneResources(ContentTransition *work);
 void FUN_001d1438(ShortJumpDestination *source, ShortJumpDestination *destination);
+
+/* True when a pending request flag that supersedes the departure is set. */
+static __inline bool departureIsSuperseded(u32 flags)
+{
+    if (flags & 0x200000)
+        return true;
+    if (flags & 0x40000)
+        return true;
+    if (flags & 0x800000)
+        return true;
+    if (flags & 0x4000000)
+        return true;
+    if (flags & 0x1000000)
+        return true;
+    if (flags & 0x2000000)
+        return true;
+    if (flags & 0x8000000)
+        return true;
+    if (flags & 0x20000000)
+        return true;
+    return false;
+}
 
 // Finish delayed departure, switch sequence or prepare the requested map destination.
 void FUN_004b9410(ContentTransition *work)
@@ -38,10 +60,7 @@ void FUN_004b9410(ContentTransition *work)
         }
         return;
     }
-    if ((flags & 0x200000) == 0 && (flags & 0x40000) == 0 &&
-        (flags & 0x800000) == 0 && (flags & 0x4000000) == 0 &&
-        (flags & 0x1000000) == 0 && (flags & 0x2000000) == 0 &&
-        (flags & 0x8000000) == 0 && (flags & 0x20000000) == 0 && (flags & 0x10) != 0) {
+    if (!departureIsSuperseded(flags) && (flags & 0x10) != 0) {
         if ((flags & 0x80000) != 0) {
             asdSequenceRequest(g_mapSelection.id < 100 ? 6 : 8, 0, 0);
         } else if ((flags & 0x100000) != 0) {

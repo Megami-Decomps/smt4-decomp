@@ -8,11 +8,23 @@ struct ShaderColorState {
     u32 lights[3];
 };
 
+/* A packed colour word seen as four 8-bit fields, low byte first. */
+union ColorBytes {
+    u32 word;
+    struct {
+        u32 r : 8;
+        u32 g : 8;
+        u32 b : 8;
+        u32 a : 8;
+    } c;
+};
+
 // Store a byte-reversed color and mark the corresponding material or lighting block dirty.
-extern "C" void FUN_003fe298(ShaderColorState *state, u32 index, RgbaWord color)
+extern "C" void FUN_003fe298(ShaderColorState *state, u32 index, u32 colorWord)
 {
-    u32 value = (color.rgba.r << 24) | (color.rgba.g << 16) |
-        (color.rgba.b << 8) | color.rgba.a;
+    ColorBytes color;
+    color.word = colorWord;
+    u32 value = (color.c.r << 24) | (color.c.g << 16) | (color.c.b << 8) | color.c.a;
     switch (index) {
     case 0: state->material[0] = value; state->flags |= 0x400; return;
     case 1: state->material[1] = value; state->flags |= 0x400; return;

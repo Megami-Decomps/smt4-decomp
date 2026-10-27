@@ -4,7 +4,7 @@
 /* Decode the short-value record and its trailing pair of nibble values. */
 extern "C" s32 shortValueNibbleRecordDecode(Obj42251cData *record, const u8 *data, u32 size)
 {
-    s32 consumed = obj42251cDecodeBase(record, data, size);
+    u32 consumed = obj42251cDecodeBase(record, data, size);
     if (consumed >= 0) {
         size -= consumed;
         data += consumed;

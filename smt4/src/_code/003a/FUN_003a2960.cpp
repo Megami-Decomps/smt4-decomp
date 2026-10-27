@@ -1,6 +1,7 @@
-/* NON_MATCHING: register allocation differs (retail keeps panel in r6 with panel+0x860 hoisted in r4 across the tab switches and rows loop); logic equivalent. */
-#include "common.h"
+/* NON_MATCHING: same shape as FUN_003a1d04: retail keeps the scene in r6 and the overlay flag in r5 (build swaps them) and takes the held entry address before the cursor call. */
 #include "shard/S2Scene3a.h"
+#include "shard/W6_W6Match4_FlaggedValueHolder.h"
+#include "AsdSDK/Source/Gfx/Tex/AsdTexture.h"
 
 class PanelWidget {
 public:
@@ -11,59 +12,49 @@ public:
     virtual void refresh(u32 value) = 0;    /* 0x10 */
 };
 
-/* The list panel (accessed fields). */
-struct ListPanel {
-    u8 unk000[4];
-    s32 mode;                   // 0x004
-};
-
 extern "C" {
 u16 *gameGetPlayerData(void);
-s32 FUN_0029e924(void *list);
-s32 flaggedEntryGetValueByState(void *list);
-void uiRectDrawAtBottomRight(void *rect, u32 style, s32 a, s32 b, u32 context);
-void FUN_00231bcc(void *rect, s32 sprite, s32 a, s32 b, u32 context, s32 c);
-void FUN_003a07a0(void *panel, u32 tab);
-void FUN_0022ea70(void *panel, s32 row, s32 selected, const void *value);
+s32 FUN_0029e924(const FlaggedValueHolder *holder);
+s32 flaggedEntryGetValueByState(const FlaggedValueHolder *holder);
+void uiRectDrawAtBottomRight(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color);
+void FUN_00231bcc(const AsdTextureRegion *, u32 image, s32 x, s32 y, u32 color, u32 flags);
+void FUN_003a07a0(Scene3a *scene, s32 category);
+void FUN_0022ea70(Scene3a *scene, s32 row, s32 selected, const Scene3aEntry *entry);
 void FUN_002332e8(void *object, s32 first, s32 second);
-s32 flaggedValueHolderGetTotal(void *list);
-s32 rangeLimitMin(void *list);
-}
-
-#define PANEL_AT(panel, offset) (reinterpret_cast<u8 *>(panel) + (offset))
-#define PANEL_WORD(panel, offset) (*reinterpret_cast<s32 *>(PANEL_AT(panel, offset)))
+s32 flaggedValueHolderGetTotal(const FlaggedValueHolder *holder);
+s32 rangeLimitMin(const FlaggedValueHolder *holder);
 
 /* Redraw the tabbed list panel: its frame, the tab's header value and every row of the current page. */
-extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
+void FUN_003a2960(Scene3a *scene, u32 image)
 {
-    u32 context = PANEL_WORD(panel, 0x37C);
-    s32 *tabIndex = reinterpret_cast<s32 *>(PANEL_AT(panel, 0x860));
-    s32 tab = *tabIndex;
-    switch (tab) {
-    case 0:
-        frameStyle = 0;
-        break;
-    case 1:
-    case 2:
-        frameStyle = 1;
-        break;
-    case 3:
-    case 4:
-    case 5:
-        frameStyle = 2;
-        break;
-    case 6:
-        frameStyle = 0xB;
-        break;
-    case 7:
-        frameStyle = 3;
-        break;
-    case 8:
-        frameStyle = 4;
+    // The canonical scene has an over-wide callback-table prefix and only two recovered lists.
+    struct DrawingView {
+        u8 prefix[0x37C];
+        u32 color;
+        AsdTextureRegion region;
+        u8 padding3A0[0x4BC];
+        PanelWidget *scrollbar;
+        s32 category;
+        u8 padding864[0x1C];
+        FlaggedValueHolder controls[9];
+        Scene3aList lists[9];
+    };
+    typedef char DrawingOffsets[sizeof(FlaggedValueHolder) == 0x74 &&
+        offsetof(DrawingView, controls) == 0x880 && offsetof(DrawingView, lists) == 0xC94 ? 1 : -1];
+    DrawingView *view = reinterpret_cast<DrawingView *>(scene);
+    u32 frameColor = view->color;
+    switch (view->category) {
+    case 0: image = 0; break;
+    case 1: case 2: image = 1; break;
+    case 3: case 4: case 5: image = 2; break;
+    case 6: image = 11; break;
+    case 7: image = 3; break;
+    case 8: image = 4; break;
     }
-    uiRectDrawAtBottomRight(PANEL_AT(panel, 0x380), frameStyle, 0, 0, context);
-    FUN_00231bcc(PANEL_AT(panel, 0x380), *tabIndex + 0x5A, 0, 0, context, 1);
-    FUN_003a07a0(panel, *tabIndex);
+    uiRectDrawAtBottomRight(&view->region, image, 0, 0, frameColor);
+    u32 color = view->color;
+    FUN_00231bcc(&view->region, view->category + 90, 0, 0, color, 1);
+    FUN_003a07a0(scene, view->category);
     Scene3aEntry header;
     header.id = 0;
     u32 bits = header.unk02;
@@ -71,52 +62,35 @@ extern "C" void FUN_003a2960(ListPanel *panel, u32 frameStyle)
     bits <<= 10;
     header.unk02 = bits;
     u16 value = 0;
-    switch (*tabIndex) {
-    case 0:
-        value = gameGetPlayerData()[0];
-        break;
-    case 1:
-        value = gameGetPlayerData()[1];
-        break;
-    case 2:
-        value = gameGetPlayerData()[2];
-        break;
-    case 3:
-        value = gameGetPlayerData()[3];
-        break;
-    case 4:
-        value = gameGetPlayerData()[4];
-        break;
-    case 5:
-        value = gameGetPlayerData()[5];
-        break;
-    case 6:
-        value = gameGetPlayerData()[6];
+    switch (view->category) {
+    case 0: value = gameGetPlayerData()[0]; break;
+    case 1: value = gameGetPlayerData()[1]; break;
+    case 2: value = gameGetPlayerData()[2]; break;
+    case 3: value = gameGetPlayerData()[3]; break;
+    case 4: value = gameGetPlayerData()[4]; break;
+    case 5: value = gameGetPlayerData()[5]; break;
+    case 6: value = gameGetPlayerData()[6]; break;
     }
     header.id = value;
-    FUN_0022ea70(panel, 0, 0, &header);
-    s32 mode = panel->mode;
-    bool hasSlot = mode == 5 || mode == 9 || mode == 6 || mode == 0xA || mode == 7 || mode == 0xB ||
-                   mode == 0xF || mode == 0x10;
-    u8 *tabState = PANEL_AT(panel, 0) + *tabIndex * 0x74;
-    u8 *list = tabState + 0x880;
-    u8 *values = PANEL_AT(panel, 0) + *tabIndex * 0x1002 + 0xC94;
-    s32 top = FUN_0029e924(list);
-    s32 rows = rangeLimitMin(list);
-    for (s32 row = 0; row < rows; row++) {
-        if (!hasSlot || flaggedEntryGetValueByState(list) != row)
-            FUN_0022ea70(panel, row + 2, 0, values + (top + row) * 4);
+    FUN_0022ea70(scene, 0, 0, &header);
+    s32 phase = scene->phase;
+    bool selectedOverlay = phase == 5 || phase == 9 || phase == 6 || phase == 10 ||
+        phase == 7 || phase == 11 || phase == 15 || phase == 16;
+    FlaggedValueHolder *holder = &view->controls[view->category];
+    Scene3aEntry *entries = view->lists[view->category].entries;
+    s32 offset = FUN_0029e924(holder);
+    s32 visible = rangeLimitMin(holder);
+    for (s32 row = 0; row < visible; ++row) {
+        if (!selectedOverlay || flaggedEntryGetValueByState(holder) != row)
+            FUN_0022ea70(scene, row + 2, 0, &entries[offset + row]);
     }
-    s32 pending = 0;
-    if (hasSlot)
-        pending = *reinterpret_cast<s32 *>(tabState + 0x888);
-    if (hasSlot && pending != 0 && pending >= 0) {
-        s32 total = flaggedValueHolderGetTotal(list);
-        FUN_0022ea70(panel, flaggedEntryGetValueByState(list) + 2, 1, values + total * 4);
+    struct CountsView { u32 prefix[2]; s32 count; };
+    if (selectedOverlay && reinterpret_cast<const CountsView *>(holder)->count > 0) {
+        FUN_0022ea70(scene, flaggedEntryGetValueByState(holder) + 2, 1, &entries[flaggedValueHolderGetTotal(holder)]);
     }
-    s32 last = flaggedEntryGetValueByState(list);
-    s32 first = FUN_0029e924(list);
-    PanelWidget *widget = *reinterpret_cast<PanelWidget **>(PANEL_AT(panel, 0x85C));
-    FUN_002332e8(widget, first, last);
-    widget->refresh(context);
+    s32 selected = flaggedEntryGetValueByState(holder);
+    s32 first = FUN_0029e924(holder);
+    FUN_002332e8(view->scrollbar, first, selected);
+    view->scrollbar->refresh(color);
+}
 }

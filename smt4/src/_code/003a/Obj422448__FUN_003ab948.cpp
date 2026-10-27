@@ -1,4 +1,3 @@
-/* NON_MATCHING: code and addressing now match retail; only the r5/r6 assignment of the count base and the list pointer is swapped. */
 #include "common.h"
 #include "classes/Obj422448.h"
 
@@ -27,11 +26,18 @@ void stateSetBitFlag(u32, u32);
 // Clear each listed flag and activate state twelve.
 }
 
+/* The part of the screen's state at 0x500 whose halfword at 0xA8 counts the listed flags. */
+struct ListedFlagCount {
+    u8 unk00[0xa8];
+    s16 count;
+};
+
 void Obj422448::FUN_003ab948()
 {
     FlagListOwner * owner = reinterpret_cast<FlagListOwner *>(this);
+    ListedFlagCount *counts = reinterpret_cast<ListedFlagCount *>(reinterpret_cast<u8 *>(owner) + 0x500);
     s32 index;
-    for (index = 0; index < owner->list.count; ++index) {
+    for (index = 0; index < counts->count; ++index) {
         ListedFlags *list = &owner->list;
         stateSetBitFlag(list->entries[index].flag, 0);
     }

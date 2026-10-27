@@ -39,7 +39,7 @@ void buttonHelpShowSkillDetails(void);
 void FUN_0022d7b0(SkillListRenderView *view, s32 depth);
 
 // Draw visible rows at the requested depth, lifting the selected row by one layer.
-static __inline void drawSkillListContents(SkillListRenderView *view, s32 depth)
+static void drawSkillListContents(SkillListRenderView *view, s32 depth)
 {
     if (view->cursor.count == 0) {
         return;
@@ -67,9 +67,10 @@ static __inline void drawSkillListContents(SkillListRenderView *view, s32 depth)
 void Obj42247c::FUN_003ab3dc()
 {
     SkillListRenderView * view = reinterpret_cast<SkillListRenderView *>(this);
-    uiRectDrawAtBottomRight(view->render, 3, 0, 0, 0x1F);
-    FUN_00231bcc(view->render, 0x4C7, 0, 0, 0x1F, 1);
-    FUN_00231bcc(view->render, 0x4C8, 0, 0, 0x1F, 1);
-    FUN_00231bcc(view->render, 0x4CA, 0, 0, 0x1F, 1);
-    drawSkillListContents(view, 0x1F);
+    s32 depth = 0x1F;
+    uiRectDrawAtBottomRight(view->render, 3, 0, 0, depth);
+    FUN_00231bcc(view->render, 0x4C7, 0, 0, depth, 1);
+    FUN_00231bcc(view->render, 0x4C8, 0, 0, depth, 1);
+    FUN_00231bcc(view->render, 0x4CA, 0, 0, depth, 1);
+    drawSkillListContents(view, depth);
 }

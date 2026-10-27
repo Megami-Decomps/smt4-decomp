@@ -1,4 +1,4 @@
-/* NON_MATCHING: local-record stack placement, list/widget registers and omitted selection diagnostic NOP differ. */
+/* NON_MATCHING: retail keeps the entry list in sl and the constant 1 in fp (build swaps them) and updates the window state through a writeback load (ldrh [r0,#4]!). */
 #include "classes/Obj42247c.h"
 #include "classes/Obj4221a4.h"
 #include "gamedata/DevilRecord.h"
@@ -27,6 +27,13 @@ struct CompendiumPopulationViewIV {
     u16 unkA5ac;
     s16 total;
 };
+/* The part of the screen's state at 0x500: the tab flag and the listed entry count. */
+struct CompendiumStateBlockIV {
+    u8 unk00[0xA4];
+    s8 mode;
+    u8 unkA5[3];
+    s16 count;
+};
 extern "C" {
 void ifTouchRegionClearAll(void *window);
 void FUN_00233818(Obj55ca08 *selection);
@@ -39,6 +46,7 @@ void motionPlayForMode(void *screen, s32 mode, s32 flags);
 void FUN_00233730(SelectionFlags *selection, s32 rows, s32 count, s32 current, s32 first, s32 second);
 u8 gaugePercent(CompendiumEntryListIV *list, u32 scale);
 void *jyoucyuGetTableEntry(s32 index);
+void *FUN_0023a1b8(void *object);
 void FUN_003a9bb4(void *screen);
 void FUN_00233670(Obj55ca08 *selection, u32 table, u32 first, s32 count);
 
@@ -49,7 +57,8 @@ void FUN_003a8aa0(Obj42247c *screen)
     ifTouchRegionClearAll(reinterpret_cast<void *>(screen->touchSelection.unk34));
     FUN_00233818(&screen->touchSelection);
     entryTableClear(&work->list);
-    if (work->mode == 0) {
+    const CompendiumStateBlockIV *block = reinterpret_cast<const CompendiumStateBlockIV *>(reinterpret_cast<u8 *>(screen) + 0x500);
+    if (block->mode == 0) {
         s32 total = 0;
         for (s32 id = 1; id < 0x500; ++id) {
             const DevilSortRecord *devil = devilGetRecord(static_cast<u16>(id));
@@ -66,7 +75,8 @@ void FUN_003a8aa0(Obj42247c *screen)
         }
         work->total = total;
         motionPlayForMode(screen, 1, 1);
-        FUN_00233730(&screen->flags, 10, work->list.count, 0, 1, 1);
+        FUN_00233730(&screen->flags, 10, block->count, 0, 1, 1);
+        FUN_0023a1b8(&screen->flags);
         screen->flags.active = 1;
         work->completion = gaugePercent(&work->list, 1);
         jyoucyuGetTableEntry(0);
@@ -78,13 +88,12 @@ void FUN_003a8aa0(Obj42247c *screen)
     window->initialize(&screen->flags);
     window = reinterpret_cast<Obj4221a4 *>(screen->touchSelection.unk34);
     window->state |= 0x1000;
-    s32 visible = work->visibleCount;
-    if (visible >= 10)
-        visible = 10;
-    if (work->mode != 0)
-        FUN_00233670(&screen->touchSelection, 0x1c, 0x1030, visible);
-    else
-        FUN_00233670(&screen->touchSelection, 0x1d, 0x40e, visible);
-    screen->touchSelection.soundEnabled = 1;
+    if (block->mode != 0) {
+        FUN_00233670(&screen->touchSelection, 0x1c, 0x1030, work->visibleCount >= 10 ? 10 : work->visibleCount);
+        screen->touchSelection.soundEnabled = 1;
+    } else {
+        FUN_00233670(&screen->touchSelection, 0x1d, 0x40e, work->visibleCount >= 10 ? 10 : work->visibleCount);
+        screen->touchSelection.soundEnabled = 1;
+    }
 }
 }

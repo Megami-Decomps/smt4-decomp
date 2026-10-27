@@ -1,9 +1,9 @@
-/* NON_MATCHING: skill inheritance pick; retail's candidate scan loops and the u8 rank arithmetic schedule differently */
+/* NON_MATCHING: skill inheritance pick; retail's candidate scan loops are not unrolled (signed counter) and step/cumulative take r5/r4 (swapped here). */
 #include "common.h"
 
 /* A skill record; the byte at +3 packs the learnable flag (0x80) and the skill rank (low 5 bits). */
 struct SkillMeta {
-    /* 0x00 */ s16 id;
+    /* 0x00 */ u16 id;
     /* 0x02 */ u8 unk02;
     /* 0x03 */ u8 rankFlags;
 };
@@ -53,12 +53,12 @@ s16 FUN_003f36a4(const u16 *sourceSkills, s32 index, void *unit)
         return 0;
 
     u32 rank = findSkillMetadataById(sourceSkills[index])->rankFlags & 0x1F;
-    SkillRankChances *chances = FUN_003f39ac(rank);
+    const u8 *percent = FUN_003f39ac(rank)->percent;
     u8 step = 0;
     u8 cumulative = 0;
     u32 roll = randRange(99);
     do {
-        cumulative = chances->percent[step] + cumulative;
+        cumulative = percent[step] + cumulative;
         if (roll < cumulative)
             break;
         step++;
@@ -78,7 +78,7 @@ s16 FUN_003f36a4(const u16 *sourceSkills, s32 index, void *unit)
     if (gameDataFlagTestBit(5) != 0)
         rank = (rank + 1) & 0xFF;
 
-    u16 known[SKILL_KNOWN_COUNT];
+    u16 known[SKILL_KNOWN_COUNT] = {0};
     for (s32 i = 0; i < 8; i++)
         known[i] = sourceSkills[i];
     UnitSkillSlots *slots = FUN_00184310(unit);

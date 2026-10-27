@@ -54,9 +54,9 @@ extern u8 DAT_00642b80[];
 extern u32 DAT_005c0a8c;
 extern u32 DAT_005c0a90;
 
-s32 FUN_00428428(Catalog *catalog, u32 a, u32 b);
+nn::Result FUN_00428428(Catalog *catalog, u32 a, u32 b);
 void *dataGetBlockBase(Catalog *catalog);
-u32 FUN_004283e0(Catalog *catalog);
+nn::Result FUN_004283e0(Catalog *catalog);
 void wordPairClear(void);
 void recordTableAppend(const char *key);
 void pricingSelectionBuildPredicate(s32 mode);
@@ -73,13 +73,13 @@ s32 FUN_00428334(Catalog *catalog, u32 *record, u32 version);
  * TitleVersion. Returns a negative error code on failure. */
 s32 FUN_004275f0(Catalog *catalog, u32 id, u32 option, CatalogRequest *request)
 {
-    s32 result = FUN_00428428(catalog, request->key0, request->key1);
+    nn::Result result = FUN_00428428(catalog, request->key0, request->key1);
 
     if (nnResultIsFailure(result)) {
         return result;
     }
     void *block = dataGetBlockBase(catalog);
-    u32 blockSize = FUN_004283e0(catalog);
+    nn::Result blockSize = FUN_004283e0(catalog);
 
     wordPairClear();
     recordTableAppend("Prices");

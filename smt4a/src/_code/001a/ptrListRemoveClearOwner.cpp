@@ -1,4 +1,4 @@
-/* NON_MATCHING: loop structure and row count now match retail (unrolled std::copy-style helper); remaining: retail loads begin/end with ldrd, reaches the vector through `ldr r3, [r0, #24]!`, and keeps the copy source in ip. */
+/* NON_MATCHING: loop structure and row count match retail; remaining: retail loads begin/end with ldrd straight from the list and reaches the vector through `ldr r3, [r0, #24]!` (armcc here shares one `list + 24` base), and the erase compares begin before end. */
 #include "common.h"
 
 extern "C" {
@@ -26,9 +26,9 @@ static void ptrCopy(PtrListItem **first, PtrListItem **last, PtrListItem **resul
 }
 
 /* Removes `*it` from the vector, shifting the later elements down. */
-static void ptrVectorErase(PtrVector *vec, PtrListItem **it)
+static __inline void ptrVectorErase(PtrVector *vec, PtrListItem **it)
 {
-    if (vec->begin != vec->end) {
+    if (vec->end != vec->begin) {
         PtrListItem **next = it + 1;
 
         if (next != vec->end) {

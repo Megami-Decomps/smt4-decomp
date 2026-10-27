@@ -38,7 +38,7 @@ int FUN_002bf380(...);
 int asdTMTexTableEntryAt(...);
 int efctSetSpeed(void);
 int renderCtxSelectStereoLayout(int);
-int FUN_0033d3f8(...);
+int spriteDrawAnimationUnplaced(...);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
 
@@ -156,7 +156,7 @@ extern int gameFlagIsSet(unsigned int);
 extern int FUN_002c5d80(unsigned int, unsigned int);
 extern int packNibblesAndByte(unsigned int, unsigned int, unsigned int);
 /* Supplied declaration required: requestForward. */
-/* Supplied declaration required: FUN_0033d3f8. */
+/* Supplied declaration required: spriteDrawAnimationUnplaced. */
 extern int __aeabi_idivmod(int, unsigned int);
 
 
@@ -364,7 +364,7 @@ unsigned char FUN_001a321c(void)
           temp_v22 = (short *)romwright_f2u((float)(((temp_v16 + 300.0f) - temp_v20)));
           VectorUnsignedToFloat(*(unsigned int *)(temp_v34 + 0x1e78),(unsigned char)(in_fpscr >> 0x16) & 3);
           temp_v24 = (short *)romwright_f2u((float)(temp_v17));
-          FUN_0033d3f8(*(int *)(temp_v34 + 0x1e74),0,&temp_v22,temp_v8 | 0xff,0);
+          spriteDrawAnimationUnplaced(*(int *)(temp_v34 + 0x1e74),0,&temp_v22,temp_v8 | 0xff,0);
         }
       }
       efctSetSpeed();

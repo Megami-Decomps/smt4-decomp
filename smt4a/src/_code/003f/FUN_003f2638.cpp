@@ -17,8 +17,7 @@ void FUN_003f2638(const BtlMainStateA *state, s32 value, ReflectionTargetValue *
     if (force == 0) {
         ScriptUnit *unit = reinterpret_cast<ScriptUnit *>(btlUnitGet(reinterpret_cast<BtlMainStateA *const *>(g_btlScriptUnit)));
         if (unit != NULL && hasFlag80Or1000(g_btlScriptUnit, reinterpret_cast<u32 *>(unit)) != 0) {
-            u64 flags = static_cast<u64>(state->stateFlags.words[0]) |
-                        (static_cast<u64>(state->stateFlags.words[1]) << 32);
+            u64 flags = state->stateFlags64.bits;
             if ((flags & g_btlMain.suppressionMask) == 0) {
                 return;
             }

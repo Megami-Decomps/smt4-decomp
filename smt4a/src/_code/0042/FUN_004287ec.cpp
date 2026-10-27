@@ -21,12 +21,13 @@ extern PairArray DAT_006428e4; /* 0x6428e4 */
 /* Appends the pair (first, second) to the pair array when `owner` still holds `handle`; clears the owner's handle on failure. */
 s32 FUN_004287ec(s32 *owner, u32 first, u32 second, s32 handle)
 {
+    u32 current = *owner;
     s32 result;
 
-    if (handle == *owner && handle != 0) {
-        result = 0;
-    } else {
+    if (handle != current || handle == 0) {
         result = (s32)0xd8a138c1;
+    } else {
+        result = 0;
     }
     if (!nnResultIsFailure(result)) {
         u32 index = DAT_006428e4.count;

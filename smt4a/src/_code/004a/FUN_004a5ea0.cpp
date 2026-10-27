@@ -81,12 +81,12 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
     char text[60];
     const PanelTextLayoutEntryPrefixA *captionEntry;
     u32 color;
-    if (alternate != 0) {
-        captionEntry = layoutFindTableEntry(panelLayout(panel), 0x49D);
-        color = 0xFBEB39FF;
-    } else {
+    if (alternate == 0) {
         captionEntry = layoutFindTableEntry(panelLayout(panel), 0x48F);
         color = 0xFFC90FFF;
+    } else {
+        captionEntry = layoutFindTableEntry(panelLayout(panel), 0x49D);
+        color = 0xFBEB39FF;
     }
     s32 captionX = captionEntry->x + baseX;
     s32 captionY = captionEntry->y + baseY;
@@ -99,10 +99,10 @@ void FUN_004a5ea0(ProfileEntryDrawView *panel, s32 entry, s32 alternate, u32 tex
         detail = record->detail;
     }
     const PanelTextLayoutEntryPrefixA *detailEntry;
-    if (alternate != 0) {
-        detailEntry = layoutFindTableEntry(panelLayout(panel), 0x4A1);
-    } else {
+    if (alternate == 0) {
         detailEntry = layoutFindTableEntry(panelLayout(panel), 0x493);
+    } else {
+        detailEntry = layoutFindTableEntry(panelLayout(panel), 0x4A1);
     }
     s32 detailX = detailEntry->x + baseX;
     s32 detailY = detailEntry->y + baseY;

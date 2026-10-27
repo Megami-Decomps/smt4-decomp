@@ -93,6 +93,8 @@ typedef char ModelUnitBuffersOffsets[
     offsetof(ModelUnitBuffers, channelsB) == 0x84 && offsetof(ModelUnitBuffers, nodes) == 0x108 &&
     offsetof(ModelUnitBuffers, matrix) == 0x1C0 && offsetof(ModelUnitBuffers, content) == 0x20C &&
     offsetof(ModelUnitBuffers, extra) == 0x25C && sizeof(UnitChannel) == 0x30 &&
-    offsetof(UnitMeshTable, countC) == 0x7C && offsetof(UnitModelContent, extra) == 0x88 ? 1 : -1];
+    offsetof(UnitMeshTable, meshes) == 0x60 && offsetof(UnitMeshTable, meshesB) == 0x6C &&
+    offsetof(UnitMeshTable, meshesC) == 0x78 && sizeof(UnitMeshTable) == 0x80 &&
+    offsetof(UnitModelContent, extra) == 0x88 ? 1 : -1];
 
 #endif
