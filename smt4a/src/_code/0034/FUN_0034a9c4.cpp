@@ -1,4 +1,4 @@
-/* NON_MATCHING: session and option registers differ, and the record-flag test lowers to BIC rather than TST. */
+/* NON_MATCHING: the record-flag test now lowers to TST/MOVNE as in retail; remaining: retail shares one register for the constant 1 and `allowed`, keeps the zero constant in r6 and uses a 300-byte frame, so session/option registers differ. */
 #include "shard/Shard0033.h"
 #include "gamedata/Table00Lookup.h"
 
@@ -23,7 +23,9 @@ void FUN_0034a9c4(u32 id, u32 options)
         if (devil == NULL)
             allowed = false;
         else {
-            allowed = !(devil->flags & 0x400);
+            allowed = true;
+            if (devil->flags & 0x400)
+                allowed = false;
             if (g_gameGlobals.instance && g_gameGlobals.instance->unk2017 == 17)
                 allowed = false;
         }

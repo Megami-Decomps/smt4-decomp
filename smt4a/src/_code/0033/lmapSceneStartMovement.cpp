@@ -45,7 +45,7 @@ u32 mapHasFacingBreakableInReach();
 void FUN_003fd7c0(MapMotionActor *, u32, u8, f32);
 void FUN_003fd924(MapMotionActor *, u32, u8, f32, f32);
 
-void lmapSceneStartMovement(u8 mode)
+void lmapSceneStartMovement(s8 mode)
 {
     const MapMotionFlags *flags = (const MapMotionFlags *)gameFlagsGetBlock();
     if (!flags->enabled) {

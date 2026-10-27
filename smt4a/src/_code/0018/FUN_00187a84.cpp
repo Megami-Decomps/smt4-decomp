@@ -18,7 +18,7 @@ struct CameraMatrices {
 };
 
 extern "C" {
-void FUN_0019a0fc(Mtx44 *result, const Mtx44 *left, const Mtx44 *right);
+void nn_math_ARMv6_MTX44MultAsm(Mtx44 *result, const Mtx44 *left, const Mtx44 *right);
 
 /* Sets the three matrices (each from its override or the base) and composes them into the result. */
 void FUN_00187a84(CameraMatrices *camera, const Mtx44 *first, const Mtx44 *second, const Mtx44 *third)
@@ -26,19 +26,19 @@ void FUN_00187a84(CameraMatrices *camera, const Mtx44 *first, const Mtx44 *secon
     camera->composed = camera->base;
     if (first != NULL) {
         camera->first = *first;
-        FUN_0019a0fc(&camera->composed, &camera->composed, &camera->first);
+        nn_math_ARMv6_MTX44MultAsm(&camera->composed, &camera->composed, &camera->first);
     } else {
         camera->first = camera->base;
     }
     if (second != NULL) {
         camera->second = *second;
-        FUN_0019a0fc(&camera->composed, &camera->composed, &camera->second);
+        nn_math_ARMv6_MTX44MultAsm(&camera->composed, &camera->composed, &camera->second);
     } else {
         camera->second = camera->base;
     }
     if (third != NULL) {
         camera->third = *third;
-        FUN_0019a0fc(&camera->composed, &camera->composed, &camera->third);
+        nn_math_ARMv6_MTX44MultAsm(&camera->composed, &camera->composed, &camera->third);
         return;
     }
     camera->third = camera->base;

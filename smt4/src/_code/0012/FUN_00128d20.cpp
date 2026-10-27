@@ -1,21 +1,13 @@
-/* NON_MATCHING: found outside every function: branched to by FUN_0010fcf8; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_00128d20 for reference (not compiled; its own view of the boundaries):
-
-unsigned int FUN_00128d20(unsigned int param_1)
-
-{
-  unsigned int uVar1;
-  int iVar2;
-  
-  iVar2 = coproc_movefrom_User_R_Thread_and_Process_ID();
-  *(unsigned int *)(iVar2 + 0x80) = 0x60040;
-  *(unsigned int *)(iVar2 + 0x84) = param_1;
-  software_interrupt(0x32);
-  uVar1 = DAT_00472ad8;
-  if ((DAT_00472ad8 & 0x80000000) == 0) {
-    uVar1 = *(unsigned int *)(iVar2 + 0x84);
-  }
-  return uVar1;
-}
-*/
 #include "common.h"
+
+extern "C" {
+
+void FUN_00128d24(void);
+
+/* Runs FUN_00128d24 (placed right after, so the call is a linker NOP). */
+void FUN_00128d20(void)
+{
+    FUN_00128d24();
+}
+
+} /* extern "C" */

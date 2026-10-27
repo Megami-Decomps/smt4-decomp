@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail unrolls all four metric comparisons and retains an unused limit literal. */
+/* NON_MATCHING: the four metric comparisons now unroll as in retail (signed loop counter); retail keeps the first comparison's redundant cmp, hoists the last load and retains an unused 9999 literal. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlEffect.h"
 extern "C" {
@@ -12,7 +12,7 @@ s32 FUN_00227668(BtlEffectOwner* owner)
     }
     BtlEffectSlotBlock* metrics = owner->slots;
     s32 maximum = 0;
-    for (u32 index = 0; index < 4; ++index) {
+    for (s32 index = 0; index < 4; ++index) {
         s32 value = metrics->entries[index].unk10;
         if (value >= 0 && value > maximum) {
             maximum = value;

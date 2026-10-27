@@ -44,7 +44,7 @@ u32 FUN_0048e40c(void);
 extern "C" {
 #endif
 
-u32 naviGetActiveStateValue();
+u32 naviGetActiveStateValue(void *scene);
 
 #ifdef __cplusplus
 }

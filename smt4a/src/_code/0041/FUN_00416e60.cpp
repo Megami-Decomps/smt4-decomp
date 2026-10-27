@@ -56,7 +56,11 @@ extern "C" u32 FUN_00416e60(ResultInputWork *work)
         }
         // Fall through to select the next result-screen state.
     case 2:
-        if (work->preparation.player != 0) {
+        if (!(work->preparation.player != 0)) {
+            work->preparation.nextState = 3;
+            work->preparation.state = 2;
+            work->preparation.phase = 0;
+        } else {
             s32 slot;
             if (FUN_003df4a4(work->preparation.skill) != 0) {
                 slot = findPlayerSkillSlot(work);
@@ -71,10 +75,6 @@ extern "C" u32 FUN_00416e60(ResultInputWork *work)
             }
             work->preparation.nextState = 3;
             work->preparation.slot = slot;
-            work->preparation.state = 2;
-            work->preparation.phase = 0;
-        } else {
-            work->preparation.nextState = 3;
             work->preparation.state = 2;
             work->preparation.phase = 0;
         }

@@ -1,4 +1,4 @@
-/* NON_MATCHING: compiler folds per-entry member bases and uses five saved registers rather than six; -O2 candidate. */
+/* NON_MATCHING: register allocation only (129 vs 129 rows): retail keeps the count address in r5 and the zero in r3 where the build uses r3 and ip, and starts with the push before the address add. */
 #include "shard/W9_W9Match1_ResourceRequest.h"
 
 struct ResourceRequestRegistry {
@@ -15,29 +15,27 @@ extern "C" u32 resourceRequestRegisterOrUpdate(ResourceRequestRegistry *registry
 
     s32 count = registry->count;
     for (s32 i = 0; i < count; ++i) {
-        RegisteredResourceRequest *entry = &registry->entries[i];
-        if (entry->request.kind == request->kind &&
-            entry->request.position[0] == request->position[0] &&
-            entry->request.position[1] == request->position[1] &&
-            entry->request.position[2] == request->position[2]) {
-            entry->request.active = 1;
-            entry->request.flags = request->flags;
-            entry->request.label = request->label;
-            return entry->handle;
+        if (registry->entries[i].request.kind == request->kind &&
+            registry->entries[i].request.position[0] == request->position[0] &&
+            registry->entries[i].request.position[1] == request->position[1] &&
+            registry->entries[i].request.position[2] == request->position[2]) {
+            registry->entries[i].request.active = 1;
+            registry->entries[i].request.flags = request->flags;
+            registry->entries[i].request.label = request->label;
+            return registry->entries[i].handle;
         }
     }
-    RegisteredResourceRequest *entry = &registry->entries[count];
-    entry->request.kind = request->kind;
-    entry->request.option = request->option;
-    entry->request.variant = request->variant;
-    entry->request.flags = request->flags;
-    entry->request.position[0] = request->position[0];
-    entry->request.position[1] = request->position[1];
-    entry->request.position[2] = request->position[2];
-    entry->request.parameter = request->parameter;
-    entry->request.active = 1;
-    entry->marked = 0;
-    entry->handle = count;
-    entry->request.label = request->label;
+    registry->entries[count].request.kind = request->kind;
+    registry->entries[count].request.option = request->option;
+    registry->entries[count].request.variant = request->variant;
+    registry->entries[count].request.flags = request->flags;
+    registry->entries[count].request.position[0] = request->position[0];
+    registry->entries[count].request.position[1] = request->position[1];
+    registry->entries[count].request.position[2] = request->position[2];
+    registry->entries[count].request.parameter = request->parameter;
+    registry->entries[count].request.active = 1;
+    registry->entries[count].marked = 0;
+    registry->entries[count].handle = count;
+    registry->entries[count].request.label = request->label;
     return registry->count++;
 }

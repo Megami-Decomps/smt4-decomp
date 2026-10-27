@@ -1,11 +1,15 @@
-/* NON_MATCHING: found outside every function: branched to by nw_snd_internal_PlayerHeapDataManager_Finalize; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_00460ffc for reference (not compiled; its own view of the boundaries):
-
-void FUN_00460ffc(int param_1,unsigned int param_2)
-
-{
-  *(unsigned int *)(param_1 + 4) = param_2;
-  return;
-}
-*/
 #include "common.h"
+
+extern "C" {
+
+struct FUN_00460ffcView {
+    u8 unk00[0x4];
+    u32 value;
+};
+
+void FUN_00460ffc(FUN_00460ffcView *self, u32 value)
+{
+    self->value = value;
+}
+
+} /* extern "C" */

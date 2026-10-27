@@ -1,63 +1,54 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `dataTable1bOr1cGetRecord` (_code @ 0x2b63c0, 0xb4 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "gamedata/DataTableAccess_VariantB.h"
+/* NON_MATCHING: the local table-id array copy is reached through r1 and pooled first (retail: r3, pooled last, after g_aocSystem and the comparator). Twin of smt4a FUN_001ad9b4. */
+#include "gamedata/DataTable.h"
+#include "shard/W5_W5Match7_DataRecord.h"
+
+struct AocSystemView {
+    /* 0x000 */ u8 unk000[0x384];
+    /* 0x384 */ u32 overrideCount;
+    /* 0x388 */ void *overrideRecords;
+};
 
 extern "C" {
 
-int libc_bsearch(...);
+extern AocSystemView *g_aocSystem;
 
-/* stack frame of param_1: 3 slot(s), 10 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-    unsigned short sp1D4; /* 0x1d4: local_1d4 */
-    unsigned int sp1D8; /* 0x1d8: local_1d8 */
-} param_1_stack;
+void *libc_bsearch(const void *key, const void *base, u32 count, u32 size, s32 (*compare)(const void *, const void *));
+s32 dataTable1bOr1cCompareIds(const void *a, const void *b);
 
-extern unsigned char LAB_00138c04; /* 0x138c04 */
-extern int g_aocSystem; /* 0x433158 */
+struct KeyedRecord {
+    u16 id;
+    u8 unk02[0x1b4 - 2];
+};
 
-/* Supplied declaration required: libc_bsearch. */
-extern unsigned int dataTableGetCount(unsigned int);
-extern unsigned int dataTableGetEntries(void);
-extern unsigned int dataTableGet(unsigned int, unsigned int);
-
-
-void dataTable1bOr1cGetRecord(unsigned short param_1)
-
+static __inline ItemDataRecord *searchKeyed(const KeyedRecord *key, const void *records, u32 count,
+                                            s32 (*compare)(const void *, const void *))
 {
-/* irregular: 1 native warning(s); review required */
-  unsigned short *puVar1;
-  unsigned int temp_v0;
-  unsigned int temp_v1;
-  unsigned int temp_v2;
-  unsigned short temp_v3 [218];
-  unsigned int temp_v4 [2];
-  
-  temp_v4[0] = 0x1b;
-  temp_v4[1] = 0x1c;
-  temp_v3[0] = param_1;
-  if (*(int *)(g_aocSystem + 0x388) != 0) {
-    puVar1 = temp_v3;
-    libc_bsearch(puVar1,*(int *)(g_aocSystem + 0x388),*(unsigned int *)(g_aocSystem + 900),0x1b4,
-                 &LAB_00138c04);
-    if (puVar1 != (unsigned short *)0x0) {
-      return;
+    return static_cast<ItemDataRecord *>(libc_bsearch(key, records, count, sizeof(KeyedRecord), compare));
+}
+
+/* Look up an add-on override or a base-table record by its identifier. */
+ItemDataRecord *dataTable1bOr1cGetRecord(u32 id)
+{
+    u32 tableIds[2] = {0x1b, 0x1c};
+    KeyedRecord key;
+
+    key.id = id;
+    if (g_aocSystem->overrideRecords != NULL) {
+        ItemDataRecord *record = searchKeyed(&key, g_aocSystem->overrideRecords, g_aocSystem->overrideCount, dataTable1bOr1cCompareIds);
+        if (record != NULL)
+            return record;
     }
-  }
-  temp_v2 = 0;
-  do {
-    temp_v0 = dataTableGet(temp_v4[temp_v2],0);
-    temp_v1 = dataTableGetEntries();
-    temp_v0 = dataTableGetCount(temp_v0);
-    puVar1 = temp_v3;
-    libc_bsearch(puVar1,temp_v1,temp_v0,0x1b4,&LAB_00138c04);
-    if (puVar1 != (unsigned short *)0x0) {
-      return;
+    ItemDataRecord *record;
+    for (u32 i = 0; i < 2; i++) {
+        void *table = dataTableGet(tableIds[i], 0);
+        void *entries = dataTableGetEntries(table);
+        u32 count = dataTableGetCount(table);
+
+        record = searchKeyed(&key, entries, count, dataTable1bOr1cCompareIds);
+        if (record != NULL)
+            return record;
     }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 2);
-  return;
+    return record;
 }
 
 } /* extern "C" */

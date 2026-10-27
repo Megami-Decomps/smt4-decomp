@@ -19,7 +19,7 @@ extern RenderCtxView *g_renderCtx;
 
 s32 nn_math_ARMv6_MTX34InverseAsm(MTX34 *out, const void *source);
 void nn_math_ARMv6_MTX34CopyAsm(MTX34 *destination, const MTX34 *source);
-void FUN_0019a0fc(Matrix44Rows *destination, const Matrix44Rows *left, const Matrix44Rows *right);
+void nn_math_ARMv6_MTX44MultAsm(Matrix44Rows *destination, const Matrix44Rows *left, const Matrix44Rows *right);
 
 /* Multiplies `right` by the render context camera's view matrix (the identity when the camera has none), written to `destination`. */
 void FUN_00409e78(u32 unused, Matrix44Rows *destination, const Matrix44Rows *right)
@@ -37,7 +37,7 @@ void FUN_00409e78(u32 unused, Matrix44Rows *destination, const Matrix44Rows *rig
         matrix.last[1] = 0.0f;
         matrix.last[0] = 0.0f;
         matrix.last[3] = 1.0f;
-        FUN_0019a0fc(destination, &matrix, right);
+        nn_math_ARMv6_MTX44MultAsm(destination, &matrix, right);
     }
 }
 

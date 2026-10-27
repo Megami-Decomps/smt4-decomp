@@ -1,4 +1,4 @@
-/* NON_MATCHING: readable rebuild from asm of the percent HP loss; retail tests the member's down/immune bits with `tst #2; tsteq #1024` (armcc here merges them into one bic/bics pair), spills new HP and max HP to the stack around the FUN_0018416c call and keeps 1.25f in s16. */
+/* NON_MATCHING: readable rebuild from asm of the percent HP loss; retail tests the member's down/immune bits with `tst #2; tsteq #1024` (armcc here merges them into one bic/bics pair), spills new HP and max HP to the stack around the unitHasRankingBonus call and keeps 1.25f in s16. */
 #include "common.h"
 #include "gamedata/SaveSlotTable.h"
 
@@ -29,7 +29,7 @@ MemberRecord *gameGetSlotRecord(s32 id);
 s32 gameSlotTableFindFree(void);
 MemberRecord *gameGetOptions(void);
 s32 gameOptionsClassifyMode(void);
-s32 FUN_0018416c(u16 equipment);
+s32 unitHasRankingBonus(u16 equipment);
 void FUN_00408184(s32 sound);
 void FUN_004186e0(void);
 s32 FUN_001bd118(void);
@@ -45,7 +45,7 @@ static s32 percentOf(s32 max, s32 percent)
 static s32 effectiveMaxHp(MemberRecord *member)
 {
     s32 max = member != NULL ? member->maxHp : 0;
-    if (member != NULL && FUN_0018416c(member->equipment))
+    if (member != NULL && unitHasRankingBonus(member->equipment))
         max = (s16)(s32)((f32)max * 1.25f);
     return max;
 }

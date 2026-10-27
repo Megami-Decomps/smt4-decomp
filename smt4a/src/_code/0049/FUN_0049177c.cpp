@@ -1,4 +1,5 @@
 /* NON_MATCHING: refreshes visibility and screen position of the map icons (flag/ownership rules, scroll offset, 512x640 clip); written from the decompilation, the unused gameFlagsGetBlock() call is dropped and float to int conversion/scheduling is not compared with retail */
+#include "shard/W6_W6Match7_NumericStepper.h"
 #include "common.h"
 #include "gamedata/FlagBitTests.h"
 #include "shard/W6_W6Match3_UnitStatusRequest.h"
@@ -59,7 +60,6 @@ extern "C" {
 extern s8 DAT_005f1a5e;
 extern s32 DAT_005f1c5c;
 
-s32 naviGetActiveStateValue(void);
 f32 *lmapSceneGetObj(void *scene);
 f32 *sub68OwnerGetBlock60(void *scene);
 void words2Copy(void *source, f32 *out);
@@ -71,7 +71,7 @@ s32 gameOwnedBitTest2(s32 id);
 void FUN_0049177c(MapScreenWork *work)
 {
     void *scene = work->scene;
-    s32 map = naviGetActiveStateValue();
+    s32 map = naviGetActiveStateValue(scene);
     f32 *cameraObject = lmapSceneGetObj(scene);
     f32 cameraX = cameraObject[0];
     f32 cameraZ = cameraObject[2];
@@ -118,7 +118,6 @@ void FUN_0049177c(MapScreenWork *work)
             icon->visible = gameFlagsBitTest(icon->unlockId) != 0 ? 1 : 0;
 
         if (icon->visible != 0) {
-            f32 left = offset[0] + icon->x + (f32)shiftX;
             f32 top = offset[1] + icon->y + (f32)shiftY;
             icon->unk48 = 0;
             icon->drawWidth = (s32)icon->width;
@@ -126,9 +125,9 @@ void FUN_0049177c(MapScreenWork *work)
             icon->color = -1;
             icon->drawFrame = icon->frame;
             icon->unk4C = 0;
-            icon->screenX = (s32)left;
+            icon->screenX = (s32)(offset[0] + icon->x + (f32)shiftX);
             icon->screenY = (s32)top;
-            if (!(0.0f <= left + icon->width) || left > MAP_CLIP_WIDTH
+            if (!(0.0f <= (offset[0] + icon->x + (f32)shiftX) + icon->width) || (offset[0] + icon->x + (f32)shiftX) > MAP_CLIP_WIDTH
                 || !(0.0f <= top + icon->height) || top > MAP_CLIP_HEIGHT)
                 icon->visible = 0;
         }

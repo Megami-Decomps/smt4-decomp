@@ -39,7 +39,7 @@ void sysMemClear(void *buffer, u32 size);
 u16 FUN_0019e52c(u16 id);
 BattleStatDefinition *FUN_00184310(u16 id);
 void FUN_004bcd90(BattleStatRecord *record);
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 void FUN_002a6894(BattleStatRecord *record);
 }
 
@@ -81,7 +81,7 @@ extern "C" void battleRecordInitializeFromDefinition(BattleStatRecord *record, u
     record->skills[7] = definition->skills[7];
     FUN_004bcd90(record);
     s16 maximum = record->maximum;
-    if (FUN_0018416c(record->id))
+    if (unitHasRankingBonus(record->id))
         maximum = (s16)(s32)(maximum * 1.25f);
     record->current = maximum;
     record->secondaryCurrent = record->secondaryMaximum;

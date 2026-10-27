@@ -56,10 +56,12 @@ extern "C" void FUN_00152bf8(AsdSndObject *object)
     if (asdContainsSoundObject(status, object)) {
         asdUnlinkSoundObject(status, object);
     }
-    for (s32 index = 0; index < object->voiceCount; ++index) {
+    s32 index = 0;
+    while (index < object->voiceCount) {
         if (object->voices[index]) {
             nn_snd_CTR_FreeVoice(object->voices[index]);
         }
+        ++index;
     }
     asdMemFree(object);
 }

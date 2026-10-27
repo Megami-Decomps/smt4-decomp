@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x42151c; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+u32 FUN_003e3f58(void)
+{
+    return 0;
+}
+
+} /* extern "C" */

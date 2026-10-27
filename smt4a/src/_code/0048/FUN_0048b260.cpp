@@ -40,22 +40,20 @@ void FUN_0048b260(ObjB* work)
     renderStackPushIndexed(g_renderCtx, 3, renderState);
     efctSetSpeed(1.0f);
     FUN_00183bb0();
-    SessionHintAnimationView* hint = reinterpret_cast<SessionHintAnimationView*>(work);
-    FUN_00164b5c(2, 0x13, 0x1C, static_cast<s32>(static_cast<f32>(vec2GetXInt(&hint->animation)) + origin.x),
+    FUN_00164b5c(2, 0x13, 0x1C, static_cast<s32>(static_cast<f32>(vec2GetXInt(&(reinterpret_cast<SessionHintAnimationView*>(work))->animation)) + origin.x),
         static_cast<s32>(origin.y), 0xD3);
     TextureTableEntryIV* sprite = asdTMTexTableEntryAt(0x13, 0x111B);
     __aeabi_memcpy4(text, DAT_00532728, 55);
     s32 textWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
     f32 centeredOffset = static_cast<f32>((sprite->placement->width - textWidth) / 2);
-    s32 animationX = vec2GetXInt(&hint->animation);
+    s32 animationX = vec2GetXInt(&(reinterpret_cast<SessionHintAnimationView*>(work))->animation);
     f32 textX = static_cast<f32>(animationX + sprite->x) + centeredOffset + origin.x;
-    f32 textY = static_cast<f32>(sprite->y) + origin.y;
-    textDrawString(2, g_uiTextFontSettings.font, text, textX, textY, 0.0f, 0.0f, 1.0f);
+    textDrawString(2, g_uiTextFontSettings.font, text, textX, (static_cast<f32>(sprite->y) + origin.y), 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
-    FUN_00163aa4(&hint->animation, 1.0f);
-    if (hint->requested && uiSpriteGetCompletionState(&hint->animation)) {
-        hint->finished = 1;
+    FUN_00163aa4(&(reinterpret_cast<SessionHintAnimationView*>(work))->animation, 1.0f);
+    if ((reinterpret_cast<SessionHintAnimationView*>(work))->requested && uiSpriteGetCompletionState(&(reinterpret_cast<SessionHintAnimationView*>(work))->animation)) {
+        (reinterpret_cast<SessionHintAnimationView*>(work))->finished = 1;
     }
 }
 }

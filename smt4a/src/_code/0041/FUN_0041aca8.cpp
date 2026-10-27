@@ -29,9 +29,8 @@ void FUN_001aff14(Matrix34Data *matrix, s32 clearTranslation, f32 x, f32 y, f32 
 extern "C" Obj557d90 *FUN_0041aca8(const ParticleEmitterSpec *spec, AsdMdlObject *model)
 {
     const f32 degreesToPhase = 0.71111f; /* 256 / 360 */
-    Obj557d90 *particle = static_cast<Obj557d90 *>(asdOperatorNew(sizeof(Obj557d90)));
-    if (particle != NULL)
-        particle = new (particle) Obj557d90(model);
+    void *memory = asdOperatorNew(sizeof(Obj557d90));
+    Obj557d90 *particle = memory != NULL ? new (memory) Obj557d90(model) : NULL;
     particle->unk08 = spec->unk04;
 
     Matrix34Data rotation;

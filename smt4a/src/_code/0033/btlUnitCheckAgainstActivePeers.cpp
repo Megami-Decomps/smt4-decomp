@@ -8,6 +8,7 @@ void sysMemClear(void *, u32);
 
 u32 btlUnitCheckAgainstActivePeers(const BattleRosterRecordA *unit, u32 conditions)
 {
+    s32 index;
     if (!(conditions & 0x60000))
         return 0;
     if (unit->render.flags & 0x10)
@@ -17,7 +18,7 @@ u32 btlUnitCheckAgainstActivePeers(const BattleRosterRecordA *unit, u32 conditio
     sysMemClear(peers, sizeof(peers));
     u32 count = 0;
     const BattleRosterRecordA *roster = battle->roster;
-    for (s32 index = 0; index < 50; ++index) {
+    for (index = 0; index < 50; ++index) {
         const BattleRosterRecordA *peer = &roster[index + 4];
         u32 flags = peer->render.flags;
         if ((flags & 1) && (flags & 2) && (flags & 0x80) &&

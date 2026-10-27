@@ -58,7 +58,7 @@ WindowStatusResult FUN_00426fe4(ArchiveMountState *state, const ArchiveMountOpti
     if (nnResultIsFailure(result))
         return WindowStatusResult(result);
     result = handleRequestSubmit(state, 1, id, 0, 1, 1, state->header, sizeof(state->header), 0);
-    s32 description = nnResultDescription(result);
+    s32 description = nnResultDescriptionBits(result);
     if (nnResultModule(result) == 17 && description >= 100 && description < 180) {
         state->words.low = 0;
         state->words.high = 0;

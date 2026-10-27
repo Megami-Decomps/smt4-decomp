@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail also loads the allocation's __FILE__/__LINE__ pool constants (unused) and zeroes the quaternions through a shared zero register; the rest matches; retail 61 vs built 61 rows, 77 diff lines. */
+/* NON_MATCHING: retail initialises the object through a writeback store (`str r2,[r0,#48]!`) and stores the create result without a copy (`str r0,[r4,#60]`); the trace line (3409) and everything else match. */
 #include "AsdSDK/Source/Gfx/Effect/effPolygonFlash.h"
 #include "AsdSDK/AsdDebug.h"
 #include <string.h>
@@ -30,7 +30,7 @@ extern const char DAT_00544ba8[];
 PolyObject *effPolyFlashCreate(u32 kind, void *params, s32 arg)
 {
     s32 workSize = g_polyFlashKinds[kind].workSize;
-    asdDebugTrace(DAT_00544ba8, 3402);
+    asdDebugTrace(DAT_00544ba8, 3409);
     PolyObject *obj = (PolyObject *)memAlloc(0x10000, 0x100, 0, workSize + 0x50, 0x10, 1);
 
     obj->unk30 = -1;

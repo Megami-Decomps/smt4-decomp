@@ -14,7 +14,7 @@ typedef struct RelativePointer {
     {
         s32 relative = offset;
         if (relative != 0) {
-            return (void *)((u8 *)this + relative);
+            return (void *)(relative + (u8 *)this);
         }
         return NULL;
     }

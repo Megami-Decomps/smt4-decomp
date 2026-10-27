@@ -19,7 +19,7 @@ static float romwright_sqrt_4(float value)
     return (float)sqrt((double)value);
 }
 #endif
-extern unsigned int FUN_001931d8(int);
+extern unsigned int nw_ut_FloatColor_ToPicaU32(int);
 
 
 void FUN_0050c2dc(int *param_1,int param_2,float *param_3)
@@ -44,7 +44,7 @@ void FUN_0050c2dc(int *param_1,int param_2,float *param_3)
     *(float *)(param_2 + 0xc0) = temp_v4;
     *(float *)(param_2 + 0xc4) = temp_v5;
     *(float *)(param_2 + 200) = temp_v6;
-    temp_v0 = FUN_001931d8(param_2 + 0xbc);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0xbc);
     *(unsigned int *)(param_2 + 0xfc) = temp_v0;
     return;
   case 1:
@@ -55,7 +55,7 @@ void FUN_0050c2dc(int *param_1,int param_2,float *param_3)
     *(float *)(param_2 + 0xd0) = temp_v4;
     *(float *)(param_2 + 0xd4) = temp_v5;
     *(float *)(param_2 + 0xd8) = temp_v6;
-    temp_v0 = FUN_001931d8(param_2 + 0xcc);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0xcc);
     *(unsigned int *)(param_2 + 0x100) = temp_v0;
     return;
   case 2:
@@ -66,7 +66,7 @@ void FUN_0050c2dc(int *param_1,int param_2,float *param_3)
     *(float *)(param_2 + 0xe0) = temp_v4;
     *(float *)(param_2 + 0xe4) = temp_v5;
     *(float *)(param_2 + 0xe8) = temp_v6;
-    temp_v0 = FUN_001931d8(param_2 + 0xdc);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0xdc);
     *(unsigned int *)(param_2 + 0x104) = temp_v0;
     return;
   case 3:
@@ -77,7 +77,7 @@ void FUN_0050c2dc(int *param_1,int param_2,float *param_3)
     *(float *)(param_2 + 0xf0) = temp_v4;
     *(float *)(param_2 + 0xf4) = temp_v5;
     *(float *)(param_2 + 0xf8) = temp_v6;
-    temp_v0 = FUN_001931d8(param_2 + 0xec);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0xec);
     *(unsigned int *)(param_2 + 0x108) = temp_v0;
     return;
   case 4:

@@ -19,7 +19,7 @@ int fontMeasureLineAdvance(...);
 int renderCtxCalculateStereoParallax(int);
 int camSetMatrixA(int, unsigned char [84]);
 int mtx44Copy(...);
-int FUN_0019a0fc(unsigned char [84], unsigned char [84], int *);
+int nn_math_ARMv6_MTX44MultAsm(unsigned char [84], unsigned char [84], int *);
 int VectorSignedToFloat(...);
 
 typedef int romwright_code(...);
@@ -64,7 +64,7 @@ extern int asdTMTexTableEntryAt(unsigned int, unsigned int);
 /* Supplied declaration required: camSetMatrixA. */
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 
 
 unsigned int FUN_0015519c(void)
@@ -154,7 +154,7 @@ unsigned int FUN_0015519c(void)
     uStack_7c = 0x3f800000;
     temp_v21 = 0;
     temp_v22 = 0;
-    FUN_0019a0fc(temp_v24,temp_v24,&temp_v9);
+    nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
     temp_v10 = 0;
     temp_v11 = 0;
     temp_v12 = 0;
@@ -171,7 +171,7 @@ unsigned int FUN_0015519c(void)
     temp_v9 = temp_v8;
     temp_v14 = temp_v8;
     temp_v19 = temp_v8;
-    FUN_0019a0fc(temp_v24,temp_v24,&temp_v9);
+    nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
     temp_v1 = asdTMTexTableEntryAt(8,0x15);
     temp_v10 = 0;
     temp_v12 = VectorSignedToFloat(-((int)**(short **)(temp_v1 + 0xc) / 2 + 4),
@@ -191,7 +191,7 @@ unsigned int FUN_0015519c(void)
     temp_v21 = 0;
     temp_v22 = 0;
     temp_v20 = temp_v2;
-    FUN_0019a0fc(temp_v24,temp_v24,&temp_v9);
+    nn_math_ARMv6_MTX44MultAsm(temp_v24,temp_v24,&temp_v9);
     camSetMatrixA(g_renderCtx,temp_v24);
     if (*(int *)(temp_v0 + 8) == 2) {
       efctSetSpeed();

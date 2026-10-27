@@ -1,6 +1,27 @@
-/* NON_MATCHING: mode dispatch, vector load grouping and shared address/register allocation differ. */
+/* NON_MATCHING: retail reaches DAT_00493530/DAT_0049353c from one literal (53c base, 530 = base-12) and keeps &work->current in a register; operand load order of the mode-1 vector expression differs. */
 #include "shard/W5_W5Match4_BattleVectorTransition.h"
 #include "shard/W5_W5Match8_CameraTransition.h"
+
+static __inline void vectorSubtract(BattleVector3 *result, const BattleVector3 *left, const BattleVector3 *right)
+{
+    result->x = left->x - right->x;
+    result->y = left->y - right->y;
+    result->z = left->z - right->z;
+}
+
+static __inline void vectorScale(BattleVector3 *result, const BattleVector3 *vector, f32 scale)
+{
+    result->x = vector->x * scale;
+    result->y = vector->y * scale;
+    result->z = vector->z * scale;
+}
+
+static __inline void vectorAdd(BattleVector3 *result, const BattleVector3 *left, const BattleVector3 *right)
+{
+    result->x = left->x + right->x;
+    result->y = left->y + right->y;
+    result->z = left->z + right->z;
+}
 
 extern "C" {
 extern CameraTransitionGlobals g_btlMain;
@@ -12,38 +33,22 @@ f32 FUN_00227280(u32 mode, s32 duration, s32 frame);
 /* Update the alternate vector channel, preserving its previous result in mode one. */
 void FUN_003d6e20(BattleVectorTransition *work)
 {
-    switch (g_btlMain.mode) {
-    case 2: {
-        BattleVector3 difference = {
-            work->alternateDestination.x - DAT_00493548.x,
-            work->alternateDestination.y - DAT_00493548.y,
-            work->alternateDestination.z - DAT_00493548.z
-        };
+    if (g_btlMain.mode == 2) {
+        BattleVector3 difference;
+        vectorSubtract(&difference, &work->alternateDestination, &DAT_00493548);
         f32 factor = FUN_00227280(work->mode, work->target, work->frame);
-        difference.x *= factor;
-        difference.y *= factor;
-        difference.z *= factor;
-        work->elapsed.x = work->elapsedData.alternateElapsed.x + difference.x;
-        work->elapsed.y = work->elapsedData.alternateElapsed.y + difference.y;
-        work->elapsed.z = work->elapsedData.alternateElapsed.z + difference.z;
-        break;
-    }
-    case 1: {
+        vectorScale(&difference, &difference, factor);
+        vectorAdd(&work->elapsed, &work->elapsedData.alternateElapsed, &difference);
+    } else if (g_btlMain.mode == 1) {
         work->current = DAT_0049353c;
         f32 factor = FUN_00227280(work->mode, work->target, work->frame);
-        work->current.x = (work->alternateDestination.x -
-                           (work->reference.position.x - work->current.x)) * factor;
-        work->current.y = (work->alternateDestination.y -
-                           (work->reference.position.y - work->current.y)) * factor;
-        work->current.z = (work->alternateDestination.z -
-                           (work->reference.position.z - work->current.z)) * factor;
+        BattleVector3 offset;
+        vectorSubtract(&offset, &work->reference.position, &work->current);
+        vectorSubtract(&offset, &work->alternateDestination, &offset);
+        vectorScale(&work->current, &offset, factor);
         DAT_0049353c = work->current;
         work->current = DAT_00493530;
-        work->elapsed.x = DAT_0049353c.x + work->elapsedData.alternateElapsed.x;
-        work->elapsed.y = DAT_0049353c.y + work->elapsedData.alternateElapsed.y;
-        work->elapsed.z = DAT_0049353c.z + work->elapsedData.alternateElapsed.z;
-        break;
-    }
+        vectorAdd(&work->elapsed, &DAT_0049353c, &work->elapsedData.alternateElapsed);
     }
 }
 }

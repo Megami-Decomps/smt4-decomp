@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the DAT_00531010 table-id copy differs: retail loads it into r3 before the push with its literal pooled last (after g_aocSystem and the comparator); built pools it first in r1. */
+/* NON_MATCHING: the local table-id array copy is reached through r1 and pooled first (retail: r3, pooled last, after g_aocSystem and the comparator). */
 #include "gamedata/DataTable.h"
 #include "shard/W5_W5Match7_DataRecord.h"
 
@@ -35,7 +35,7 @@ static __inline ItemDataRecord *searchKeyed(const KeyedRecord *key, const void *
 /* Look up an add-on override or a base-table record by its identifier. */
 ItemDataRecord *FUN_001ad9b4(u32 id)
 {
-    TableIds tables = DAT_00531010;
+    u32 tableIds[2] = {0x1b, 0x1c};
     KeyedRecord key;
 
     key.id = id;
@@ -46,7 +46,7 @@ ItemDataRecord *FUN_001ad9b4(u32 id)
     }
     ItemDataRecord *record;
     for (u32 i = 0; i < 2; i++) {
-        void *table = dataTableGet(tables.ids[i], 0);
+        void *table = dataTableGet(tableIds[i], 0);
         void *entries = dataTableGetEntries(table);
         u32 count = dataTableGetCount(table);
 

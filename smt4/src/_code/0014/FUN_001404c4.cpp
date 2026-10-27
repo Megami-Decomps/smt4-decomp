@@ -1,22 +1,19 @@
-/* NON_MATCHING: found outside every function: called by FUN_0037b540; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_001404c4 for reference (not compiled; its own view of the boundaries):
+#include "common.h"
 
-typedef struct fn_001404c4_arg0 fn_001404c4_arg0;
-struct fn_001404c4_arg0 {
-    unsigned char pad_0x0[0x4];
-    undefined4 field_0x4; /* +0x4 * /
-    undefined1 field_0x8; /* +0x8 * /
-    undefined1 field_0x9; /* +0x9 * /
+extern "C" {
+
+struct FUN_001404c4View {
+    u8 unk00[0x4];
+    u32 f04;
+    u8 f08;
+    u8 f09;
 };
 
-
-void FUN_001404c4(fn_001404c4_arg0 *param_1)
-
+void FUN_001404c4(FUN_001404c4View *self)
 {
-  param_1->field_0x4 = 0;
-  param_1->field_0x8 = 0x2f;
-  param_1->field_0x9 = 0;
-  return;
+    self->f04 = 0;
+    self->f08 = 47;
+    self->f09 = 0;
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

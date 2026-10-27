@@ -19,7 +19,7 @@ extern BtlUiGlobals g_btlUi;
 u32 FUN_002d00a4(BtlUiObjC *, const BattleUiCommand *);
 
 // Queue a battle-UI command with its position and four halfword parameters.
-void FUN_003aeaa4(u32, u16 kind, u32 value, u16 first, u16 second, u16 third,
+u32 FUN_003aeaa4(u32, u16 kind, u32 value, s16 first, s16 second, u16 third,
                   UiPosition position)
 {
     BtlUi *ui = g_btlUi.ui;
@@ -30,6 +30,6 @@ void FUN_003aeaa4(u32, u16 kind, u32 value, u16 first, u16 second, u16 third,
     command.second = second;
     command.first = first;
     command.third = third;
-    FUN_002d00a4(&ui->objC, &command);
+    return FUN_002d00a4(&ui->objC, &command);
 }
 }

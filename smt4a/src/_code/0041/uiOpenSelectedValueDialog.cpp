@@ -62,8 +62,8 @@ extern "C" void uiOpenSelectedValueDialog(DialogOwner *owner)
     ++selectedValues.end;
 
     DialogSettings settings;
-    settings.enabled = 1;
     settings.kind = 999;
+    settings.enabled = 1;
     Obj55aff4Vector lines;
     char text[24] = {0};
     textFormatBuffer(text, "%llu", FUN_004311c0(0x19a2));

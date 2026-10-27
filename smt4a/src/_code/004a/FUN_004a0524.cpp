@@ -43,7 +43,7 @@ struct WalkSlotRecord {
 
 extern "C" {
 WalkPlayerData *gameGetPlayerData(void);
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 WalkSlotRecord *gameGetSlotRecord(s32 slot);
 s8 *gameGetSlotTable(void);
 
@@ -53,7 +53,7 @@ static __inline s32 walkMaxHp(WalkSlotRecord *record)
     s32 maxHp = 0;
     if (record != NULL) {
         maxHp = record->baseMaxHp;
-        if (FUN_0018416c(record->boostId) != 0)
+        if (unitHasRankingBonus(record->boostId) != 0)
             maxHp = (s16)(s32)((f32)record->baseMaxHp * WALK_HP_BOOST_SCALE);
     }
     return maxHp;

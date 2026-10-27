@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the byte value in r0 and the setting address in r1 (built swaps them) and shares the word store of cases 4 and 5 */
+/* NON_MATCHING: direct stores now match retail registers; armcc cross-jumps the byte stores into case 1 (retail: case 3) and orders case 4/6 address/value loads the other way round. */
 #include "common.h"
 #include "battle/btlHelp.h"
 
@@ -23,39 +23,29 @@ typedef struct {
 /* Stores the selected list box item's value into the debug setting it edits. */
 void FUN_003c49bc(DebugSettingsMenu *menu)
 {
-    u8 *flag;
-    u8 value;
-
     switch (asdListBoxGetSelectedItemId(menu->listBox)) {
     case 0:
-        value = *asdListBoxGetItemValuePtr(menu->listBox, 0);
-        flag = &DAT_00435e00;
+        DAT_00435e00 = *asdListBoxGetItemValuePtr(menu->listBox, 0);
         break;
     case 1:
-        value = *asdListBoxGetItemValuePtr(menu->listBox, 1);
-        flag = &DAT_00435e01;
+        DAT_00435e01 = *asdListBoxGetItemValuePtr(menu->listBox, 1);
         break;
     case 2:
-        value = *asdListBoxGetItemValuePtr(menu->listBox, 2);
-        flag = &DAT_00435e02;
+        DAT_00435e02 = *asdListBoxGetItemValuePtr(menu->listBox, 2);
         break;
     case 3:
-        value = *asdListBoxGetItemValuePtr(menu->listBox, 3);
-        flag = &DAT_00435e03;
+        DAT_00435e03 = *asdListBoxGetItemValuePtr(menu->listBox, 3);
         break;
     case 4:
         DAT_00435e04 = *asdListBoxGetItemValuePtr(menu->listBox, 4);
-        return;
+        break;
     case 5:
         DAT_00435e08 = *asdListBoxGetItemText(menu->listBox, 5);
-        return;
+        break;
     case 6:
         DAT_00435e20 = *asdListBoxGetItemText(menu->listBox, 6);
-        return;
-    default:
-        return;
+        break;
     }
-    *flag = value;
 }
 
 } /* extern "C" */

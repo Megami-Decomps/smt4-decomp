@@ -3,7 +3,7 @@
 
 extern "C" {
 void FUN_001a1c28(Matrix44 *matrix, f32 x, f32 y, f32 z);
-void FUN_0019a0fc(Matrix44 *destination, const Matrix44 *left, const Matrix44 *right);
+void nn_math_ARMv6_MTX44MultAsm(Matrix44 *destination, const Matrix44 *left, const Matrix44 *right);
 }
 
 static inline s32 wrapDegrees(s32 angle)
@@ -23,14 +23,14 @@ extern "C" void FUN_0021252c(Matrix44 *matrix, s32 x, s32 y, s32 z)
     Matrix44 rotation;
     if (y != 0) {
         FUN_001a1c28(&rotation, 0.0f, static_cast<f32>(360 - wrapDegrees(y)) * (256.0f / 360.0f), 0.0f);
-        FUN_0019a0fc(matrix, matrix, &rotation);
+        nn_math_ARMv6_MTX44MultAsm(matrix, matrix, &rotation);
     }
     if (x != 0) {
         FUN_001a1c28(&rotation, static_cast<f32>(360 - wrapDegrees(x)) * (256.0f / 360.0f), 0.0f, 0.0f);
-        FUN_0019a0fc(matrix, matrix, &rotation);
+        nn_math_ARMv6_MTX44MultAsm(matrix, matrix, &rotation);
     }
     if (z != 0) {
         FUN_001a1c28(&rotation, 0.0f, 0.0f, static_cast<f32>(360 - wrapDegrees(z)) * (256.0f / 360.0f));
-        FUN_0019a0fc(matrix, matrix, &rotation);
+        nn_math_ARMv6_MTX44MultAsm(matrix, matrix, &rotation);
     }
 }

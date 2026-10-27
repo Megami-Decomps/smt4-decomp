@@ -118,11 +118,12 @@ static void listIfAvailable(MenuWindow *window, MenuEntry *entry, char *buckets,
    content entries of that kind) that pass their scripts and flags, restores the cursor and lays out the view. */
 void FUN_0022b29c(MenuWindow *window, s32 selected, s32 state)
 {
+    s32 i;
     TableView view;
     GroupHeader *rows = dataTable33Sub0GetRecord(&view, 0);
     s32 rowCount = dataTable33Sub0GetCount(&view);
     window->header = NULL;
-    for (s32 i = 0; i < rowCount; i++) {
+    for (i = 0; i < rowCount; i++) {
         if (rows[i].id == selected) {
             window->header = &rows[i];
             break;

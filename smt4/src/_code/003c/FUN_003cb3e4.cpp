@@ -1,327 +1,224 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003cb3e4` (_code @ 0x3cb3e4, 0x784 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the command turn-end step (509 vs 485 rows); armcc compiles the available-unit scans with a predicated flag and duplicates the slot-flag stores that retail shares, and places the party-wipe early return differently. */
+#include "battle/BattleCommandController.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4.h"
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+extern u32 g_btlActionReflect;
 
-int FUN_00229754(...);
-int FUN_00229914(...);
-int FUN_00229a3c(...);
-int FUN_0022a5d8(...);
-int FUN_0023f4e4(int);
-int FUN_00246454(...);
-int FUN_00246d38(int, unsigned int *, int, int);
-int FUN_00246e24(int, unsigned int *, int, int, int);
-int FUN_00250720(int);
-int battleGetEntryHalfword(...);
-int FUN_00255180(...);
-int FUN_0027e5e4(void);
-int btlMainFindEntryByListedId(...);
-int FUN_003c05e8(...);
-int FUN_003cefe0(int *, unsigned int *, unsigned int);
-int FUN_003cfe14(...);
-int FUN_003d03f8(...);
-int btlReflectCreateKind10(...);
-int FUN_003de758(int, unsigned int *, int);
+s32 nodeListCountActiveById(u32 id);
+s32 FUN_00229914(BtlMainState **block, CommandState *work, s32 index);
+s32 btlNodeListAnyReady(void);
+void FUN_0023f4e4(BtlMainState *state);
+void FUN_003de758(s32 a, CommandState *work, s32 b);
+void FUN_0027e5e4(BtlActionRecord *action);
+void FUN_00250720(BtlMainState *state);
+void FUN_003cefe0(BtlMainState **block, CommandState *work, u32 command);
+void FUN_00246d38(s32 a, CommandState *work, BtlActionRecord *record, u32 mask);
+void FUN_00246e24(s32 a, CommandState *work, BtlActionRecord *record, u32 mask, s32 b);
+void FUN_0022a5d8(s32 effect, BtlEntry *entry, s32 mode);
+void FUN_003c05e8(s32 value);
+void FUN_00229a3c(s32 a, CommandState *work, s32 b, s32 c, s32 d);
+s32 randRange(s32 range);
+s32 FUN_003cfe14(BtlMainState **block, CommandState *work, s32 value);
+void FUN_00246454(s32 a, CommandState *work, BtlEntry *entry);
+BtlEntry *btlMainFindActiveEntry(BtlMainState *state);
+s32 battleGetEntryHalfword(s32 id, s32 kind);
+s32 questGetCurrentRecordValue6(void);
+s32 questGetCurrentRecordValue8(void);
+s32 questCurrentGetValue(void);
+u32 questRecordValueIfState2(void);
+u16 FUN_00245cc0(s32 kind);
+void FUN_00255180(s32 unit, s32 kind, s32 value);
+void FUN_003d03f8(BtlMainState **block, CommandState *work, s32 value, s32 kind, BtlActionRecord *record, BtlEntry *entry);
+s32 FUN_003c8880(void);
+void btlReflectCreateKind10(s32 a, CommandState *work, s32 value, s32 b);
+void FUN_00229754(BtlMainState **block, CommandState *work);
 
-/* stack frame of param_2: 4 slot(s), 16 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned char g_btlAction; /* 0x434278 */
-extern unsigned int g_btlActionReflect; /* 0x434290 */
-
-/* Supplied declaration required: FUN_00229754. */
-extern int btlNodeListAnyReady(void);
-/* Supplied declaration required: FUN_00229914. */
-/* Supplied declaration required: FUN_00229a3c. */
-/* Supplied declaration required: FUN_0022a5d8. */
-extern int randRange(unsigned int);
-/* Supplied declaration required: FUN_0023f4e4. */
-extern unsigned int FUN_00245cc0(unsigned int);
-/* Supplied declaration required: FUN_00246454. */
-/* Supplied declaration required: FUN_00246d38. */
-/* Supplied declaration required: FUN_00246e24. */
-extern unsigned int btlMainFindActiveEntry(int);
-/* Supplied declaration required: FUN_00250720. */
-/* Supplied declaration required: battleGetEntryHalfword. */
-/* Supplied declaration required: FUN_00255180. */
-/* Supplied declaration required: FUN_0027e5e4. */
-extern int nodeListCountActiveById(unsigned int);
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: FUN_003c05e8. */
-extern int questGetCurrentRecordValue6(void);
-extern int questGetCurrentRecordValue8(void);
-extern int questCurrentGetValue(void);
-extern int FUN_003c8880(void);
-extern unsigned int questRecordValueIfState2(void);
-/* Supplied declaration required: FUN_003cefe0. */
-/* Supplied declaration required: FUN_003cfe14. */
-/* Supplied declaration required: FUN_003d03f8. */
-/* Supplied declaration required: btlReflectCreateKind10. */
-/* Supplied declaration required: FUN_003de758. */
-
-
-unsigned int FUN_003cb3e4(int *param_1,unsigned int *param_2)
-
+/* Sets the acting combatant's pending action. */
+static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-/* irregular: 2 goto(s); 19 native warning(s); review required */
-  short temp_v0;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar5;
-  int *piVar6;
-  int temp_v4;
-  int temp_v5;
-  unsigned int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  unsigned char temp_v9;
-  unsigned char temp_v10;
-  unsigned int temp_v11;
-  unsigned int temp_v12;
-  int temp_v13;
-  unsigned int *temp_v14;
-  
-  temp_v2 = nodeListCountActiveById(g_btlActionReflect);
-  if (0 < temp_v2) {
-    return 0;
-  }
-  if ((*param_2 & 0x1080) == 0) {
-    temp_v2 = 0;
-    do {
-      if (((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114 + 0x50) & 1) != 0) &&
-         (temp_v3 = FUN_00229914(param_1,param_2,temp_v2), temp_v3 == 0)) {
-        temp_v3 = *param_1;
-        btlMainFindEntryByListedId(temp_v3,temp_v2);
-        if ((*(short *)(temp_v3 + 0x1c8) != 0) && (*(short *)(temp_v3 + 0x1c6) == 0)) {
-          if ((*(int *)(*param_1 + 0x48b8) != 0) && (temp_v2 = btlNodeListAnyReady(), temp_v2 != 0)) {
-            return 0;
-          }
-          break;
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x6d);
-  }
-  temp_v1 = 0;
-  temp_v11 = 0;
-  FUN_0023f4e4(*param_1);
-  FUN_003de758(0,param_2,5);
-  temp_v2 = 0;
-  do {
-    temp_v3 = *(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114;
-    if ((temp_v3 != 0) && (temp_v7 = *(unsigned int *)(temp_v3 + 0x50), (temp_v7 & 1) != 0 && (temp_v7 & 2) != 0))
-    {
-      FUN_0027e5e4();
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x6d);
-  *(unsigned int *)(*param_1 + 0x49e4) = 0;
-  FUN_00250720(*param_1);
-  if ((*param_2 & 0x2000) != 0) {
-    *param_2 = *param_2 & 0xffffdfff;
-    *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x14;
-    return 1;
-  }
-  temp_v9 = 1;
-  if (*(short *)(param_2[9] + 0x62) < 4) {
-    temp_v7 = 4;
-    temp_v2 = 0x32;
-  }
-  else {
-    temp_v7 = 0;
-    temp_v2 = 4;
-  }
-  temp_v8 = temp_v7 + temp_v2;
-  if (temp_v7 < temp_v8) {
-    do {
-      if (((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114 + 0x50) & 1) != 0) &&
-         (temp_v2 = FUN_00229914(param_1,param_2,temp_v7), temp_v2 == 0)) goto LAB_003cb60c;
-      temp_v7 = temp_v7 + 1;
-    } while ((int)temp_v7 < (int)temp_v8);
-  }
-  temp_v9 = 0;
-LAB_003cb60c:
-  if (*(int *)(*param_1 + 0x88) != 0) {
-    temp_v9 = 0;
-  }
-  if ((*param_2 & 4) == 0) {
-    if (temp_v9) {
-      FUN_003cefe0(param_1,param_2,temp_v11);
-    }
-    temp_v2 = 0;
-    temp_v13 = 0;
-    temp_v12 = 0;
-    do {
-      if (((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114 + 0x50) & 1) != 0) &&
-         (temp_v3 = FUN_00229914(param_1,param_2,temp_v2), temp_v3 == 0)) {
-        puVar5 = (unsigned int *)*param_1;
-        btlMainFindEntryByListedId(puVar5,temp_v2);
-        temp_v14 = puVar5;
-        if (*(short *)((int)puVar5 + 0x1ca) != 0) {
-          FUN_00246d38(0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114,0x10);
-          *(unsigned short *)((int)puVar5 + 0x1ca) = 0;
-          *(unsigned short *)(puVar5 + 0x72) = (unsigned short)puVar5[0x72] & 0xffef;
-        }
-        else if (((short)puVar5[0x72] == 0) || (*(short *)((int)puVar5 + 0x1c6) != 0)) {
-          if ((*(unsigned short *)((int)puVar5 + 0x1c6) & 0x10) != 0) {
-            temp_v0 = *(short *)((int)puVar5 + 0x6e);
-            if ((unsigned int)(int)temp_v0 < 4) {
-              *(unsigned char *)((int)&temp_v12 + (int)temp_v0) = 1;
-            }
-          }
-        }
-        else if (temp_v9) {
-          FUN_00246e24(0,param_2,*(int *)(*param_1 + 0x1e98) + temp_v2 * 0x114,0x10,0);
-          FUN_0022a5d8(0x19,temp_v14,1);
-          *(unsigned short *)(puVar5 + 0x72) = 0;
-          temp_v1 = 1;
-          if ((*temp_v14 & 10) != 0) {
-            temp_v0 = *(short *)((int)temp_v14 + 0x6e);
-            temp_v13 = 1;
-            if ((unsigned int)(int)temp_v0 < 4) {
-              *(unsigned char *)((int)&temp_v12 + (int)temp_v0) = 1;
-            }
-          }
-        }
-      }
-      temp_v2 = temp_v2 + 1;
-    } while (temp_v2 < 0x6d);
-    temp_v7 = 0;
-    if (temp_v13 != 0) {
-      temp_v7 = temp_v12 & 0xff;
-    }
-    if (temp_v13 != 0 && temp_v7 != 0) {
-      temp_v9 = ((temp_v12 >> 8) & 0xff) != 0;
-      temp_v7 = 0;
-      if (temp_v9) {
-        temp_v7 = (temp_v12 >> 0x10) & 0xff;
-      }
-      temp_v10 = temp_v7 != 0;
-      if (temp_v9 && temp_v10) {
-        temp_v7 = temp_v12 >> 0x18;
-      }
-      if ((temp_v9 && temp_v10) && temp_v7 != 0) {
-        FUN_003c05e8(0x19);
-        FUN_00229a3c(0,param_2,0,0x21,0);
-      }
-    }
-    if (!temp_v1) {
-      temp_v3 = 0;
-      temp_v2 = 0;
-      do {
-        puVar5 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v2 * 0x288);
-        temp_v7 = *puVar5;
-        if ((((temp_v7 & 1) != 0) && ((temp_v7 & 0x40) == 0)) &&
-           ((*(unsigned short *)((int)puVar5 + 0x1c6) & 0x10) != 0)) {
-          temp_v3 = temp_v3 + 1;
-        }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 4);
-      if (temp_v3 == 4) {
-        temp_v1 = 1;
-      }
-    }
-  }
-  temp_v2 = FUN_00229914(param_1,param_2,(int)*(short *)(param_2[9] + 0x62));
-  if ((temp_v2 == 0) && ((*(unsigned short *)(param_2[10] + 0xfa) & 0x20) != 0)) {
-    if (*(short *)(param_2[9] + 0x62) < 4) {
-      temp_v7 = 4;
-      temp_v2 = 0x32;
-    }
-    else {
-      temp_v7 = 0;
-      temp_v2 = 4;
-    }
-    temp_v8 = temp_v7 + temp_v2;
-    if (temp_v7 < temp_v8) {
-      do {
-        if (((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v7 * 0x114 + 0x50) & 1) != 0) &&
-           (temp_v2 = FUN_00229914(param_1,param_2,temp_v7), temp_v2 == 0)) {
-          if ((*(int *)(*param_1 + 0x88) == 0) &&
-             (((*(unsigned int *)param_2[8] & 0x40) == 0 && (*(unsigned int *)param_2[8] & 0x20000000) == 0 &&
-              ((*param_2 & 4) == 0)))) {
-            temp_v2 = (int)((int)*(short *)(param_2[10] + 0xea) +
-                         ((unsigned int)((int)*(short *)(param_2[10] + 0xea) >> 0x1f) >> 0x1d)) >> 3;
-            if (temp_v2 >= 101) {
-              temp_v2 = randRange(0xf);
-              temp_v2 = temp_v2 + 100;
-            }
-            piVar6 = param_1;
-            FUN_003cfe14(param_1,param_2,temp_v2);
-            if (piVar6 != (int *)0x0) {
-              *param_2 = *param_2 | 0x10000;
-            }
-            temp_v1 = 1;
-          }
-          break;
-        }
-        temp_v7 = temp_v7 + 1;
-      } while ((int)temp_v7 < (int)temp_v8);
-    }
-  }
-  temp_v2 = 0;
-  do {
-    puVar5 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v2 * 0x288);
-    if ((((*puVar5 & 1) != 0) && ((*puVar5 & 0x40) == 0)) &&
-       ((*(unsigned short *)((int)puVar5 + 0x1c6) & 0x400) != 0)) {
-      FUN_0022a5d8(0x16,puVar5,1);
-      FUN_00246454(0,param_2,puVar5);
-      temp_v1 = 1;
-    }
-    temp_v2 = temp_v2 + 1;
-  } while (temp_v2 < 0x6d);
-  temp_v7 = btlMainFindActiveEntry(*param_1);
-  if (temp_v7 != 0) {
-    temp_v0 = *(short *)(temp_v7 + 8);
-    temp_v3 = *(int *)(*param_1 + 0x1e98);
-    temp_v4 = battleGetEntryHalfword(0,2);
-    temp_v5 = questGetCurrentRecordValue6();
-    temp_v2 = 0;
-    if (temp_v5 != 0) {
-      temp_v2 = temp_v4;
-    }
-    if (!((temp_v5 == 0 || temp_v4 == 0) || temp_v2 < 0)) {
-      temp_v2 = questGetCurrentRecordValue8();
-      if (temp_v2 == 0) {
-        *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
-        return 1;
-      }
-      temp_v11 = 0xc;
-    }
-    else {
-      temp_v2 = questCurrentGetValue();
-      temp_v8 = questRecordValueIfState2();
-      temp_v6 = battleGetEntryHalfword((int)*(short *)(param_2[9] + 0x62),0x1d);
-      if ((temp_v2 == 0) || (temp_v6 < temp_v8)) goto LAB_003cbb20;
-      temp_v11 = FUN_00245cc0(0x1d);
-      FUN_00255180((int)*(short *)(param_2[9] + 0x62),0x1d,temp_v11);
-      temp_v12 = temp_v7;
-      FUN_003d03f8(param_1,param_2,temp_v2,0x19,temp_v3 + temp_v0 * 0x114);
-      temp_v2 = FUN_003c8880();
-      if (temp_v2 == 0) {
-        *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
-        return 1;
-      }
-      temp_v11 = 0xffffffff;
-    }
-    btlReflectCreateKind10(5,param_2,temp_v2,temp_v11);
-  }
-  else {
-LAB_003cbb20:
-    if (!temp_v1) {
-      FUN_00229754(param_1,param_2);
-      return 1;
-    }
-  }
-  *(unsigned char *)((*(int *)((unsigned char *)&g_btlAction + 0x4)) + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x1e;
-  return 1;
+    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
 }
 
-} /* extern "C" */
+static __inline EntryDataBlock *entryData(BtlEntry *entry)
+{
+    return reinterpret_cast<EntryDataBlock *>(reinterpret_cast<u8 *>(entry) + 0xcc);
+}
+
+u32 FUN_003cb3e4(BtlMainState **block, CommandState *work)
+{
+    if (nodeListCountActiveById(g_btlActionReflect) > 0)
+        return 0;
+    if ((work->flags & 0x1080) == 0) {
+        for (s32 index = 0; index < 109; ++index) {
+            if (((*block)->actions[index].status & 1) != 0 && FUN_00229914(block, work, index) == 0) {
+                BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<SlotManager *>(*block), index);
+                EntryDataBlock *data = entryData(entry);
+                if (data->firstCounter != 0 && data->groupMask == 0) {
+                    if ((*block)->affinity.minimumPercentApplied != 0 && btlNodeListAnyReady() != 0)
+                        return 0;
+                    break;
+                }
+            }
+        }
+    }
+
+    bool handled = false;
+    u32 command = 0;
+    FUN_0023f4e4(*block);
+    FUN_003de758(0, work, 5);
+    for (s32 index = 0; index < 109; ++index) {
+        BtlActionRecord *action = &(*block)->actions[index];
+        if (action != NULL && (action->status & 1) != 0 && (action->status & 2) != 0)
+            FUN_0027e5e4(action);
+    }
+    (*block)->effectValue = 0;
+    FUN_00250720(*block);
+    if ((work->flags & 0x2000) != 0) {
+        work->flags &= ~0x2000u;
+        setPendingAction(block, 20);
+        return 1;
+    }
+
+    bool canRetry = true;
+    s32 first;
+    s32 count;
+    if (work->record->memberId < 4) {
+        first = 4;
+        count = 50;
+    } else {
+        first = 0;
+        count = 4;
+    }
+    s32 index = first;
+    for (; index < first + count; ++index) {
+        if (((*block)->actions[index].status & 1) != 0 && FUN_00229914(block, work, index) == 0)
+            break;
+    }
+    if (index >= first + count)
+        canRetry = false;
+    if ((*block)->actionState.mode != 0)
+        canRetry = false;
+
+    if ((work->flags & 4) == 0) {
+        if (canRetry)
+            FUN_003cefe0(block, work, command);
+        bool anyUp = false;
+        u8 slotFlags[4] = {0, 0, 0, 0};
+        for (s32 i = 0; i < 109; ++i) {
+            if (((*block)->actions[i].status & 1) == 0 || FUN_00229914(block, work, i) != 0)
+                continue;
+            BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<SlotManager *>(*block), i);
+            EntryDataBlock *data = entryData(entry);
+            if (data->secondCounter != 0) {
+                FUN_00246d38(0, work, &(*block)->actions[i], 0x10);
+                data->secondCounter = 0;
+                data->firstCounter &= ~0x10;
+            } else if (data->firstCounter == 0 || data->groupMask != 0) {
+                if ((data->groupMask & 0x10) != 0) {
+                    s32 slot = entry->selectionIndex;
+                    if (static_cast<u32>(slot) < 4)
+                        slotFlags[slot] = 1;
+                }
+            } else if (canRetry) {
+                FUN_00246e24(0, work, &(*block)->actions[i], 0x10, 0);
+                FUN_0022a5d8(25, entry, 1);
+                data->firstCounter = 0;
+                handled = true;
+                if ((entry->flags & 10) != 0) {
+                    anyUp = true;
+                    s32 slot = entry->selectionIndex;
+                    if (static_cast<u32>(slot) < 4)
+                        slotFlags[slot] = 1;
+                }
+            }
+        }
+        if (anyUp && slotFlags[0] != 0 && slotFlags[1] != 0 && slotFlags[2] != 0 && slotFlags[3] != 0) {
+            FUN_003c05e8(25);
+            FUN_00229a3c(0, work, 0, 33, 0);
+        }
+        if (!handled) {
+            s32 alive = 0;
+            for (s32 i = 0; i < 4; ++i) {
+                BtlEntry *entry = &(*block)->entries[i];
+                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->groupMask & 0x10) != 0)
+                    ++alive;
+            }
+            if (alive == 4)
+                handled = true;
+        }
+    }
+
+    if (FUN_00229914(block, work, work->record->memberId) == 0 && (work->selection->responseFlags & 0x20) != 0) {
+        s32 start = work->record->memberId < 4 ? 4 : 0;
+        s32 total = work->record->memberId < 4 ? 50 : 4;
+        for (s32 i = start; i < start + total; ++i) {
+            if (((*block)->actions[i].status & 1) != 0 && FUN_00229914(block, work, i) == 0) {
+                if ((*block)->actionState.mode == 0 && (work->entry->flags & 0x40) == 0 &&
+                    (work->entry->flags & 0x20000000) == 0 && (work->flags & 4) == 0) {
+                    s32 value = work->selection->power / 8;
+                    if (value > 100)
+                        value = randRange(15) + 100;
+                    if (FUN_003cfe14(block, work, value) != 0)
+                        work->flags |= 0x10000;
+                    handled = true;
+                }
+                break;
+            }
+        }
+    }
+
+    for (s32 i = 0; i < 109; ++i) {
+        BtlEntry *entry = &(*block)->entries[i];
+        if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && (entry->groupMask & 0x400) != 0) {
+            FUN_0022a5d8(22, entry, 1);
+            FUN_00246454(0, work, entry);
+            handled = true;
+        }
+    }
+
+    BtlEntry *active = btlMainFindActiveEntry(*block);
+    if (active != NULL) {
+        BtlActionRecord *activeAction = &(*block)->actions[active->members.ids[0]];
+        s32 held = battleGetEntryHalfword(0, 2);
+        s32 quest = questGetCurrentRecordValue6();
+        if (quest != 0 && held > 0) {
+            s32 value = questGetCurrentRecordValue8();
+            if (value == 0) {
+                setPendingAction(block, 30);
+                return 1;
+            }
+            btlReflectCreateKind10(5, work, value, 12);
+        } else {
+            s32 current = questCurrentGetValue();
+            u32 required = questRecordValueIfState2();
+            u32 have = battleGetEntryHalfword(work->record->memberId, 29);
+            if (current == 0 || required > have) {
+                if (!handled) {
+                    FUN_00229754(block, work);
+                    return 1;
+                }
+                setPendingAction(block, 30);
+                return 1;
+            }
+            FUN_00255180(work->record->memberId, 29, FUN_00245cc0(29));
+            FUN_003d03f8(block, work, current, 25, activeAction, active);
+            s32 result = FUN_003c8880();
+            if (result == 0) {
+                setPendingAction(block, 30);
+                return 1;
+            }
+            btlReflectCreateKind10(5, work, result, -1);
+        }
+    } else if (!handled) {
+        FUN_00229754(block, work);
+        return 1;
+    }
+    setPendingAction(block, 30);
+    return 1;
+}
+}

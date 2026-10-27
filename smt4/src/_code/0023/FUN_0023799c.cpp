@@ -1,38 +1,50 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0023799c` (_code @ 0x23799c, 0x84 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite; registers are allocated in a different order (retail keeps the index in ip, the list head in r2 and the node in r3). */
+#include "common.h"
 
-extern "C" {
+struct GraphNode;
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
+struct ListLink {
+    /* 0x00 */ ListLink *prev;
+    /* 0x04 */ ListLink *next;
+};
 
+/* One edge of a node's circular edge list; `kind` 1 marks an edge that leads to `target`. */
+struct GraphEdge {
+    /* 0x00 */ ListLink link;
+    /* 0x08 */ GraphNode *target;
+    /* 0x0C */ u8 kind;
+};
 
-void FUN_0023799c(int param_1,int param_2)
+struct GraphNode {
+    /* 0x00 */ u8 unk00[0x08];
+    /* 0x08 */ ListLink edges;   /* the list's sentinel */
+    /* 0x10 */ u8 unk10[0x04];
+    /* 0x14 */ u32 index;
+};
 
+struct Graph {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 nodeCount;
+    /* 0x14 */ GraphNode **nodes;
+};
+
+/* Marks every node reachable from the nodes already marked, following the edges of kind 1. */
+extern "C" void FUN_0023799c(Graph *graph, u8 *marked)
 {
-/* irregular: 1 goto(s) */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  
-LAB_002379a4:
-  for (temp_v3 = 0; temp_v3 < *(unsigned int *)(param_1 + 0x10); temp_v3++) {
-    if (*(char *)(param_2 + temp_v3) != '\0') {
-      temp_v0 = *(int *)(*(int *)(param_1 + 0x14) + temp_v3 * 4) + 8;
-      for (temp_v1 = *(int *)(temp_v0 + 4); temp_v1 != temp_v0; temp_v1 = *(int *)(temp_v1 + 4)) {
-        if ((*(char *)(temp_v1 + 0xc) == '\x01') &&
-           (temp_v2 = *(int *)(*(int *)(temp_v1 + 8) + 0x14), *(char *)(param_2 + temp_v2) == '\0')) {
-          *(unsigned char *)(param_2 + temp_v2) = 1;
-          goto LAB_002379a4;
+restart:
+    for (u32 i = 0; i < graph->nodeCount; ++i) {
+        if (marked[i] != 0) {
+            ListLink *head = &graph->nodes[i]->edges;
+            for (ListLink *link = head->next; link != head; link = link->next) {
+                GraphEdge *edge = reinterpret_cast<GraphEdge *>(link);
+                if (edge->kind == 1) {
+                    u32 target = edge->target->index;
+                    if (marked[target] == 0) {
+                        marked[target] = 1;
+                        goto restart;
+                    }
+                }
+            }
         }
-      }
     }
-  }
-  return;
 }
-
-} /* extern "C" */

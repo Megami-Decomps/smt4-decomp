@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail sums the stream sizes through per-stream temporaries (ands/ldrne chains) and its two-way unrolled fill loops start without an odd-count prologue; ours accumulates directly and armcc emits a prologue (171 rows against 166). Debug-trace calls (file, lines 271 and 312) match. */
+/* NON_MATCHING: stream sizes now built through per-stream flag temporaries and the fill loops bound with `vertexCount * 4` (the unrolled loops lose their odd-count prologue): 166 of 166 rows, differing only in register numbering of the first two stream temporaries and in where vertexCount is loaded relative to the pointer stores. Debug-trace calls (file, lines 271 and 312) match. */
 #include "common.h"
 #include "AsdSDK/AsdDebug.h"
 
@@ -37,29 +37,40 @@ void *asdMemoryAllocAligned(u32 heap, u32 alignment, u32 flags, u32 bytes, u32 a
  * white byte colors and zero indices. */
 void FUN_00412854(AsdPrimRenderData *prim)
 {
-    u32 bytes = 0;
     u32 offset;
     u32 i;
 
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Prim\\AsdPrimRenderData.cpp", 271);
-    if ((prim->flags & PRIM_STREAM_POSITION) != 0) {
-        bytes += prim->vertexCount * 12;
+    u32 positionBytes = prim->flags & PRIM_STREAM_POSITION;
+    if (positionBytes != 0) {
+        positionBytes = prim->vertexCount * 12;
     }
-    if ((prim->flags & PRIM_STREAM_COLOR_F32) != 0) {
-        bytes += prim->vertexCount << 4;
+    u32 streamBytes = prim->flags & PRIM_STREAM_COLOR_F32;
+    if (streamBytes != 0) {
+        streamBytes = prim->vertexCount << 4;
     }
-    if ((prim->flags & PRIM_STREAM_COLOR_U8) != 0) {
-        bytes += prim->vertexCount << 2;
+    streamBytes += positionBytes;
+    u32 bytes = streamBytes;
+    streamBytes = prim->flags & PRIM_STREAM_COLOR_U8;
+    if (streamBytes != 0) {
+        streamBytes = prim->vertexCount << 2;
     }
-    if ((prim->flags & PRIM_STREAM_UV) != 0) {
-        bytes += prim->vertexCount << 3;
+    bytes += streamBytes;
+    streamBytes = prim->flags & PRIM_STREAM_UV;
+    if (streamBytes != 0) {
+        streamBytes = prim->vertexCount << 3;
     }
-    if ((prim->flags & PRIM_STREAM_NORMAL) != 0) {
-        bytes += prim->vertexCount * 12;
+    bytes += streamBytes;
+    streamBytes = prim->flags & PRIM_STREAM_NORMAL;
+    if (streamBytes != 0) {
+        streamBytes = prim->vertexCount * 12;
     }
-    if ((prim->flags & PRIM_STREAM_TANGENT) != 0) {
-        bytes += prim->vertexCount * 12;
+    bytes += streamBytes;
+    streamBytes = prim->flags & PRIM_STREAM_TANGENT;
+    if (streamBytes != 0) {
+        streamBytes = prim->vertexCount * 12;
     }
+    bytes += streamBytes;
     prim->storage = (u8 *)memAlloc(0x10000, 0x100, 0, bytes, 0x10, 1);
     offset = 0;
     if ((prim->flags & PRIM_STREAM_POSITION) != 0) {
@@ -69,14 +80,14 @@ void FUN_00412854(AsdPrimRenderData *prim)
     if ((prim->flags & PRIM_STREAM_COLOR_F32) != 0) {
         prim->colorsF32 = (f32 *)(prim->storage + offset);
         offset += prim->vertexCount * 16;
-        for (i = 0; i < prim->vertexCount << 2; i++) {
+        for (i = 0; i < prim->vertexCount * 4; i++) {
             prim->colorsF32[i] = 1.0f;
         }
     }
     if ((prim->flags & PRIM_STREAM_COLOR_U8) != 0) {
         prim->colorsU8 = prim->storage + offset;
         offset += prim->vertexCount * 4;
-        for (i = 0; i < prim->vertexCount << 2; i++) {
+        for (i = 0; i < prim->vertexCount * 4; i++) {
             prim->colorsU8[i] = 0xFF;
         }
     }

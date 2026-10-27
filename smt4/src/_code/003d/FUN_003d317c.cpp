@@ -1,282 +1,231 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d317c` (_code @ 0x3d317c, 0x7a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the command start step (497 vs 489 rows); the block/work/entry register numbering is shifted (retail keeps r5/r6, scratch r4) and retail addresses the UI scene word through a literal offset register. */
+#include "battle/BattleCommandController.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "battle/btlHelp.h"
-#include "code/Code0024_Smt4.h"
+
+/* Battle state fields this step clears, beyond the shared prefix. */
+struct CommandStartView {
+    /* 0x0000 */ u8 unk0000[0x2258];
+    /* 0x2258 */ u16 unk2258;
+    /* 0x225a */ s16 checkId;
+    /* 0x225c */ u32 unk225c;
+    /* 0x2260 */ u32 unk2260;
+    /* 0x2264 */ u32 unk2264;
+    /* 0x2268 */ u8 unk2268[0xC9C];
+    /* 0x2f04 */ u8 unk2f04;
+    /* 0x2f05 */ u8 unk2f05[0x159B];
+    /* 0x44a0 */ u64 flags64;
+    /* 0x44a8 */ u8 unk44a8[0x520];
+    /* 0x49c8 */ s32 retreating;
+};
+
+/* The battle UI block: the scene transition state word at 0x7e38. */
+struct CommandStartUi {
+    /* 0x0000 */ u8 unk0000[0x7e38];
+    /* 0x7e38 */ u32 sceneState;
+};
+
+/* The talk/camera object: the unit being talked to at 0x760. */
+struct CommandStartTalk {
+    /* 0x000 */ u8 unk000[0x760];
+    /* 0x760 */ s32 unitIndex;
+};
+
+typedef char CommandStartViewOffsets[
+    offsetof(CommandStartView, checkId) == 0x225a &&
+    offsetof(CommandStartView, unk2f04) == 0x2f04 &&
+    offsetof(CommandStartView, flags64) == 0x44a0 &&
+    offsetof(CommandStartView, retreating) == 0x49c8 &&
+    offsetof(CommandStartUi, sceneState) == 0x7e38 &&
+    offsetof(CommandStartTalk, unitIndex) == 0x760 ? 1 : -1];
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+extern void *g_btlMain;
+extern u32 g_btlUiBlock;
+extern void *DAT_00435d18;
 
-int btlEntryValuesCopy(...);
-int FUN_00229b10(int *, unsigned int *);
-int btlReflectCreateKind18(int, unsigned int *, int, int, int);
-int FUN_00245cc0(...);
-int FUN_00245d0c(...);
-int FUN_00246d38(...);
-int FUN_00250720(int);
-int btlAdjustPropertyClamped(...);
-int FUN_00255180(...);
-int btlReflectQueueKind34(int, unsigned int *);
-int FUN_002569ac(...);
-int FUN_0026beb4(int, unsigned int *, int, unsigned int, int);
-int FUN_003c0484(...);
-int btlClearActionMarksAndSelectTarget(int *, unsigned int *, unsigned int);
-int memClearTwo200(unsigned int);
+void FUN_00250720(BtlMainState *state);
+u16 FUN_00245cc0(s32 kind);
+void memClearTwo200(void *object);
+s32 FUN_00293230(BtlMainState *state);
+s32 btlUiIsSceneTransitionReady(u32 ui);
+s32 btlSceneIsReady(u32 ui);
+void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
+void FUN_00229a24(void);
+s32 FUN_00256940(void *main, BtlMainState *state, u32 flag);
+void btlReflectQueueKind34(s32 a, CommandState *work);
+void btlReflectCreateKind18(s32 a, CommandState *work, s32 kind, s32 b, s32 c);
+s32 FUN_00245c78(void);
+s32 FUN_00245d0c(s32 unit, s32 kind);
+void FUN_00246d38(s32 a, s32 b, BtlActionRecord *record, u32 mask);
+void FUN_00255180(s32 unit, s32 kind, s32 value);
+void FUN_003c0484(BtlEntry *entry, u32 mask, s32 context);
+void FUN_002569ac(BtlMainState **block, s32 bank);
+void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
+void btlAdjustPropertyClamped(s32 id, s32 stat, s32 delta, s32 preview);
+s32 btlClearActionMarksAndSelectTarget(BtlMainState **block, CommandState *work, s32 target);
+void FUN_00229b10(BtlMainState **block, CommandState *work);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern int g_btlMain; /* 0x4342c8 */
-extern unsigned int DAT_00435d18; /* 0x435d18 */
-extern int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: btlEntryValuesCopy. */
-/* Supplied declaration required: FUN_00229a24. */
-/* Supplied declaration required: FUN_00229b10. */
-/* Supplied declaration required: btlReflectCreateKind18. */
-/* Supplied declaration required: FUN_00245cc0. */
-/* Supplied declaration required: FUN_00245d0c. */
-/* Supplied declaration required: FUN_00246d38. */
-/* Supplied declaration required: FUN_00250720. */
-/* Supplied declaration required: btlAdjustPropertyClamped. */
-/* Supplied declaration required: FUN_00255180. */
-/* Supplied declaration required: btlReflectQueueKind34. */
-extern int FUN_00256940(int, int, unsigned int);
-/* Supplied declaration required: FUN_002569ac. */
-/* Supplied declaration required: FUN_0026beb4. */
-extern int btlSceneIsReady(int);
-extern int FUN_00293230(int);
-/* Supplied declaration required: memClear. */
-extern int btlUiIsSceneTransitionReady(int);
-/* Supplied declaration required: FUN_003c0484. */
-/* Supplied declaration required: btlClearActionMarksAndSelectTarget. */
-/* Supplied declaration required: memClearTwo200. */
-
-
-unsigned int FUN_003d317c(int *param_1,unsigned int *param_2)
-
+/* Sets the acting combatant's pending action. */
+static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-/* irregular: 17 native warning(s); review required */
-  short temp_v0;
-  unsigned short temp_v1;
-  unsigned int temp_v2;
-  int *piVar4;
-  unsigned char temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned short temp_v6;
-  int temp_v7;
-  unsigned int *puVar10;
-  
-  *(unsigned int *)(*param_1 + 0x225c) = 0;
-  *(unsigned int *)(*param_1 + 0x2260) = 0;
-  *(unsigned int *)(*param_1 + 0x2264) = 0;
-  *(unsigned short *)(*param_1 + 0x2258) = 0;
-  *(unsigned short *)(*param_1 + 0x225a) = 0;
-  *(unsigned int *)(*param_1 + 0x49e4) = 0;
-  *(unsigned int *)(*param_1 + 0x48b8) = 0;
-  param_2[0x169] = 0xffffffff;
-  *(unsigned char *)(*param_1 + 0x2f04) = 0;
-  temp_v7 = *param_1;
-  *(unsigned int *)(temp_v7 + 0x1fd0) = 0;
-  *(unsigned int *)(temp_v7 + 0x1fd4) = 0;
-  temp_v7 = *param_1;
-  *(unsigned int *)(temp_v7 + 0x1fd8) = 0;
-  *(unsigned int *)(temp_v7 + 0x1fdc) = 0;
-  *(unsigned int *)(*param_1 + 0x44a4) = *(unsigned int *)(*param_1 + 0x44a4) & 0xfffffffd;
-  *(unsigned char *)(*param_1 + 0x80) = 0xff;
-  *(unsigned char *)(*param_1 + 0x81) = 0xff;
-  FUN_00250720(*param_1);
-  temp_v7 = 0;
-  do {
-    puVar10 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v7 * 0x288);
-    temp_v1 = FUN_00245cc0(2);
-    *(unsigned short *)((int)puVar10 + 0x76) = temp_v1;
-    temp_v5 = *puVar10;
-    temp_v7 = temp_v7 + 1;
-    *puVar10 = temp_v5 & 0x9fffffff;
-    puVar10[0x32] = 0;
-    *puVar10 = temp_v5 & 0x1fffffff;
-    puVar10[1] = 0;
-  } while (temp_v7 < 0x6d);
-  memClearTwo200(DAT_00435d18);
-  *(unsigned short *)(param_2[10] + 0x14c) = 0;
-  *(unsigned short *)(param_2[10] + 0x14e) = 0;
-  *(unsigned int *)(param_2[8] + 0xc0) = 0;
-  temp_v7 = 0;
-  param_2[0x3c6] = 0;
-  do {
-    temp_v4 = temp_v7 * 0x288;
-    temp_v7 = temp_v7 + 1;
-    temp_v4 = *(int *)(*param_1 + 0x1fc0) + temp_v4 + 0xcc;
-    *(unsigned short *)(temp_v4 + 0xfc) = 0;
-    *(unsigned short *)(temp_v4 + 0xfe) = 0;
-  } while (temp_v7 < 0x6d);
-  if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
-    temp_v5 = *param_2 | 0x80;
-    *param_2 = temp_v5;
-  }
-  else if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) != 0) {
-    temp_v5 = *param_2 | 0x1000;
-    *param_2 = temp_v5;
-  }
-  temp_v7 = FUN_00293230(*param_1);
-  if ((temp_v7 != 0) && (temp_v7 = btlUiIsSceneTransitionReady(g_btlUiBlock), temp_v7 == 0)) {
-    return 0;
-  }
-  temp_v7 = *param_1;
-  puVar10 = (unsigned int *)(temp_v7 + 0x44a0);
-  if ((*puVar10 & 0x20000) != 0) {
-    temp_v7 = btlSceneIsReady(g_btlUiBlock);
-    if (temp_v7 == 0) {
-      return 0;
-    }
-    FUN_0026beb4(0,param_2,0xf,param_2[9],1);
-    temp_v7 = *param_1;
-    puVar10 = (unsigned int *)(temp_v7 + 0x44a0);
-    temp_v5 = *puVar10;
-    *puVar10 = temp_v5 | 0x2000;
-    temp_v4 = *param_1;
-    *(unsigned int *)(temp_v4 + 0x44a4) = *(unsigned int *)(temp_v7 + 0x44a4);
-    *(unsigned int *)(temp_v4 + 0x44a0) = (temp_v5 & 0xfffdffff) | 0x2000;
-    *(unsigned int *)(g_btlUiBlock + 0x7e38) = 0;
-    FUN_00229a24();
-    temp_v7 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-  }
-  else {
-    temp_v5 = param_2[0xc];
-    if (temp_v5 == 1) {
-      *(unsigned short *)(param_2[10] + 0x14c) = 7;
-      *(unsigned short *)(param_2[10] + 0x14e) = 8;
-      param_2[0x168] = 0;
-      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
-      btlClearActionMarksAndSelectTarget(param_1,param_2,param_2[0xd]);
-      *(unsigned short *)(*param_1 + 0x225a) =
-           *(unsigned short *)(*(int *)(*param_1 + 0x1fc0) + param_2[0xd] * 0x288 + 8);
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xb;
-      return 1;
-    }
-    if (temp_v5 == 4) {
-      if ((*(unsigned int *)param_2[8] & 1) == 0) {
-        *puVar10 = *puVar10 | 0x1000000;
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x23;
-        return 1;
-      }
-      *(unsigned short *)(param_2[10] + 0x14c) = 1;
-      *(unsigned int *)(param_2[8] + 0xc0) = param_2[0x160];
-      if ((*(unsigned int *)param_2[8] & 6) != 0) {
-        *(unsigned short *)(param_2[10] + 0x14e) = 1;
-      }
-      else {
-        *(unsigned short *)(param_2[10] + 0x14e) = 0;
-      }
-      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
-      piVar4 = param_1;
-      btlClearActionMarksAndSelectTarget(param_1,param_2,param_2[0xd]);
-      if (piVar4 != (int *)0x0) {
-        *param_2 = *param_2 | 0x204;
-        FUN_00229b10(param_1,param_2);
-        return 1;
-      }
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x23;
-      return 1;
-    }
-    if (temp_v5 == 5) {
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(temp_v7 + 0x84) * 0xf1c + 9) = 0x1c;
-      return 1;
-    }
-    temp_v7 = FUN_00256940(g_btlMain,temp_v7,1);
-    if (temp_v7 != 0) {
-      temp_v2 = 0xffffffff;
-      temp_v0 = *(short *)(*param_1 + 0x1fc8);
-      if (temp_v0 == 0) {
-        temp_v2 = 1;
-      }
-      else if (temp_v0 == 1) {
-        temp_v2 = 2;
-      }
-      else if (temp_v0 == 2) {
-        temp_v2 = 3;
-      }
-      else if (temp_v0 == 3) {
-        temp_v2 = 4;
-      }
-      *(unsigned int *)(g_btlMain + 0x760) = temp_v2;
-    }
-    if (((*(int *)(g_btlMain + 0x760) != (int)*(short *)(*param_1 + 0x1fc8)) &&
-        (-1 < *(int *)(g_btlMain + 0x760))) &&
-       (temp_v7 = FUN_00256940(g_btlMain,*param_1,1), temp_v7 != 0)) {
-      btlReflectQueueKind34(0,param_2);
-    }
-    btlReflectCreateKind18(1,param_2,(int)*(short *)(*param_1 + 0x1fc8),1,1);
-    if (((*(unsigned int *)param_2[8] & 0x20) == 0) || (temp_v7 = FUN_00245c78(), temp_v7 != 0)) {
-      temp_v6 = 0;
-      temp_v7 = (int)*(short *)(param_2[9] + 0x62);
-      if (((*(unsigned short *)(param_2[10] + 0xfa) & 0x80) != 0) &&
-         (temp_v4 = temp_v7, FUN_00245d0c(temp_v7,7), temp_v4 != 0)) {
-        temp_v6 = 0x80;
-      }
-      if (((*(unsigned short *)(param_2[10] + 0xfa) & 0x40) != 0) &&
-         (temp_v4 = temp_v7, FUN_00245d0c(temp_v7,6), temp_v4 != 0)) {
-        temp_v6 = temp_v6 | 0x40;
-      }
-      if (((*(unsigned short *)(param_2[10] + 0xfa) & 0x100) != 0) &&
-         (temp_v4 = temp_v7, FUN_00245d0c(temp_v7,8), temp_v4 != 0)) {
-        temp_v6 = temp_v6 | 0x100;
-      }
-      if (((*(unsigned short *)(param_2[10] + 0xfa) & 8) != 0) &&
-         (temp_v4 = temp_v7, FUN_00245d0c(temp_v7,3), temp_v4 != 0)) {
-        temp_v6 = temp_v6 | 8;
-      }
-      if (temp_v6 != 0) {
-        FUN_00246d38(0,0,param_2[9],temp_v6);
-      }
-      if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x80) == 0) {
-        temp_v2 = FUN_00245cc0(0x16);
-        FUN_00255180(temp_v7,0x16,temp_v2);
-      }
-      if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x40) == 0) {
-        temp_v2 = FUN_00245cc0(0x17);
-        FUN_00255180(temp_v7,0x17,temp_v2);
-      }
-      if ((*(unsigned short *)(param_2[10] + 0xfa) & 0x100) == 0) {
-        temp_v2 = FUN_00245cc0(0x18);
-        FUN_00255180(temp_v7,0x18,temp_v2);
-      }
-      if ((*(unsigned short *)(param_2[10] + 0xfa) & 8) == 0) {
-        temp_v2 = FUN_00245cc0(0x19);
-        FUN_00255180(temp_v7,0x19,temp_v2);
-      }
-      if (((*(unsigned short *)(param_2[10] + 0xfa) & ~temp_v6 & 0x1c0) == 0) &&
-         ((*(unsigned int *)param_2[8] & 0x60000) == 0)) {
-        FUN_003c0484((unsigned int *)param_2[8],temp_v6,1);
-        temp_v7 = *param_1;
-        if ((*(unsigned int *)param_2[8] & 0x30) != 0) {
-          if (*(int *)(temp_v7 + 0x49c8) == 0) {
-            temp_v3 = 2;
-          }
-          else {
-            temp_v3 = 3;
-          }
-          *(unsigned char *)(g_btlScriptUnit + *(int *)(temp_v7 + 0x84) * 0xf1c + 9) = temp_v3;
-          return 1;
-        }
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(temp_v7 + 0x84) * 0xf1c + 9) = 1;
-        return 1;
-      }
-      *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 4;
-      return 1;
-    }
-    FUN_002569ac(param_1,*(unsigned int *)(*param_1 + 0x84));
-    btlEntryValuesCopy(param_1,param_2);
-    btlAdjustPropertyClamped((int)*(short *)(param_2[9] + 0x62),0x1d,1,0);
-    temp_v7 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-  }
-  *(unsigned char *)(temp_v7 + 9) = 0x1d;
-  return 1;
+    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
 }
 
-} /* extern "C" */
+u32 FUN_003d317c(BtlMainState **block, CommandState *work)
+{
+    reinterpret_cast<CommandStartView *>(*block)->unk225c = 0;
+    reinterpret_cast<CommandStartView *>(*block)->unk2260 = 0;
+    reinterpret_cast<CommandStartView *>(*block)->unk2264 = 0;
+    reinterpret_cast<CommandStartView *>(*block)->unk2258 = 0;
+    reinterpret_cast<CommandStartView *>(*block)->checkId = 0;
+    (*block)->effectValue = 0;
+    (*block)->affinity.minimumPercentApplied = 0;
+    work->targetIndex = -1;
+    reinterpret_cast<CommandStartView *>(*block)->unk2f04 = 0;
+    (*block)->pendingAction = 0;
+    (*block)->secondaryPendingAction = 0;
+    (*block)->spriteFlags &= ~2u;
+    (*block)->core.firstBonus = -1;
+    (*block)->core.secondBonus = -1;
+    FUN_00250720(*block);
+    for (s32 index = 0; index < 109; ++index) {
+        BtlEntry *entry = &(*block)->entries[index];
+        CommandEntryView *words = reinterpret_cast<CommandEntryView *>(entry);
+        entry->stat[2] = FUN_00245cc0(2);
+        u32 flags = words->flags;
+        flags &= ~0x60000000u;
+        words->flags = flags;
+        flags &= ~0x80000000u;
+        words->flags = flags;
+        words->flagsHigh = 0;
+        words->unk0c8 = 0;
+    }
+    memClearTwo200(DAT_00435d18);
+    work->selection->kind = 0;
+    work->selection->value = 0;
+    reinterpret_cast<CommandEntryView *>(work->entry)->command = 0;
+    work->trailer = 0;
+    for (s32 index = 0; index < 109; ++index) {
+        EntryDataBlock *data = reinterpret_cast<EntryDataBlock *>(
+            reinterpret_cast<u8 *>(&(*block)->entries[index]) + 0xcc);
+        data->firstCounter = 0;
+        data->secondCounter = 0;
+    }
+    if (((*block)->battleFlags & 0x40) != 0) {
+        work->flags |= 0x80;
+    } else if (((*block)->battleFlags & 0x100) != 0) {
+        work->flags |= 0x1000;
+    }
+    if (FUN_00293230(*block) != 0 && btlUiIsSceneTransitionReady(g_btlUiBlock) == 0)
+        return 0;
+
+    if (((*block)->battleFlags & 0x20000) != 0) {
+        if (btlSceneIsReady(g_btlUiBlock) == 0)
+            return 0;
+        FUN_0026beb4(0, work, 15, work->record, 1);
+        reinterpret_cast<CommandStartView *>(*block)->flags64 |= 0x2000;
+        reinterpret_cast<CommandStartView *>(*block)->flags64 &= ~0x20000ull;
+        reinterpret_cast<CommandStartUi *>(g_btlUiBlock)->sceneState = 0;
+        FUN_00229a24();
+        setPendingAction(block, 29);
+        return 1;
+    }
+
+    if (work->mode == 1) {
+        work->selection->kind = 7;
+        work->selection->value = 8;
+        work->itemSlot = 0;
+        memClear(work->targetMarks, sizeof(work->targetMarks));
+        btlClearActionMarksAndSelectTarget(block, work, work->target);
+        reinterpret_cast<CommandStartView *>(*block)->checkId = (*block)->entries[work->target].members.ids[0];
+        setPendingAction(block, 11);
+        return 1;
+    }
+    if (work->mode == 4) {
+        if ((work->entry->flags & 1) == 0) {
+            (*block)->battleFlags |= 0x1000000;
+            setPendingAction(block, 35);
+            return 1;
+        }
+        work->selection->kind = 1;
+        reinterpret_cast<CommandEntryView *>(work->entry)->command = work->commandValue;
+        if ((work->entry->flags & 6) != 0)
+            work->selection->value = 1;
+        else
+            work->selection->value = 0;
+        memClear(work->targetMarks, sizeof(work->targetMarks));
+        if (btlClearActionMarksAndSelectTarget(block, work, work->target) != 0) {
+            work->flags |= 0x204;
+            FUN_00229b10(block, work);
+            return 1;
+        }
+        setPendingAction(block, 35);
+        return 1;
+    }
+    if (work->mode == 5) {
+        setPendingAction(block, 28);
+        return 1;
+    }
+
+    if (FUN_00256940(g_btlMain, *block, 1) != 0) {
+        s32 unit = -1;
+        s32 kind = (*block)->resolution.kind;
+        if (kind == 0)
+            unit = 1;
+        else if (kind == 1)
+            unit = 2;
+        else if (kind == 2)
+            unit = 3;
+        else if (kind == 3)
+            unit = 4;
+        reinterpret_cast<CommandStartTalk *>(g_btlMain)->unitIndex = unit;
+    }
+    if (reinterpret_cast<CommandStartTalk *>(g_btlMain)->unitIndex != (*block)->resolution.kind &&
+        reinterpret_cast<CommandStartTalk *>(g_btlMain)->unitIndex >= 0 &&
+        FUN_00256940(g_btlMain, *block, 1) != 0) {
+        btlReflectQueueKind34(0, work);
+    }
+    btlReflectCreateKind18(1, work, (*block)->resolution.kind, 1, 1);
+    if ((work->entry->flags & 0x20) == 0 || FUN_00245c78() != 0) {
+        u32 responses = 0;
+        s32 unitId = work->record->memberId;
+        if ((work->selection->responseFlags & 0x80) != 0 && FUN_00245d0c(unitId, 7) != 0)
+            responses = 0x80;
+        if ((work->selection->responseFlags & 0x40) != 0 && FUN_00245d0c(unitId, 6) != 0)
+            responses |= 0x40;
+        if ((work->selection->responseFlags & 0x100) != 0 && FUN_00245d0c(unitId, 8) != 0)
+            responses |= 0x100;
+        if ((work->selection->responseFlags & 8) != 0 && FUN_00245d0c(unitId, 3) != 0)
+            responses |= 8;
+        if (responses != 0)
+            FUN_00246d38(0, 0, work->record, responses);
+        if ((work->selection->responseFlags & 0x80) == 0)
+            FUN_00255180(unitId, 22, FUN_00245cc0(22));
+        if ((work->selection->responseFlags & 0x40) == 0)
+            FUN_00255180(unitId, 23, FUN_00245cc0(23));
+        if ((work->selection->responseFlags & 0x100) == 0)
+            FUN_00255180(unitId, 24, FUN_00245cc0(24));
+        if ((work->selection->responseFlags & 8) == 0)
+            FUN_00255180(unitId, 25, FUN_00245cc0(25));
+        if ((work->selection->responseFlags & ~responses & 0x1c0) == 0 && (work->entry->flags & 0x60000) == 0) {
+            FUN_003c0484(work->entry, responses, 1);
+            if ((work->entry->flags & 0x30) != 0)
+                setPendingAction(block, reinterpret_cast<CommandStartView *>(*block)->retreating == 0 ? 2 : 3);
+            else
+                setPendingAction(block, 1);
+            return 1;
+        }
+        setPendingAction(block, 4);
+        return 1;
+    }
+    FUN_002569ac(block, (*block)->actionState.index);
+    btlEntryValuesCopy(block, work);
+    btlAdjustPropertyClamped(work->record->memberId, 29, 1, 0);
+    setPendingAction(block, 29);
+    return 1;
+}
+}

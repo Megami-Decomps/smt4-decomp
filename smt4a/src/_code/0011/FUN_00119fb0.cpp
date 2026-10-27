@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x55a288; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void *constructObj0055a284(void *self);
+void asdOperatorDeleteArray(void *self);
+
+void FUN_00119fb0(void *self)
+{
+    asdOperatorDeleteArray(constructObj0055a284(self));
+}
+
+} /* extern "C" */

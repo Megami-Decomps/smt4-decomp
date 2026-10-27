@@ -1,52 +1,32 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003e5fd0` (_code @ 0x3e5fd0, 0x80 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite (35 vs 33 rows); retail hoists the 0x7e1 flag constant into r5 before the identity call (and pushes r5/r6), this build loads it after. The fallback transform is the unnamed function-local static at 0x4efdf4, initialised by hand. */
+#include "gfx/TransformSource.h"
 
 extern "C" {
+extern u32 DAT_00476640;
+extern TransformDefault DAT_004efdf4;
+int __cxa_guard_acquire(u32 *guard);
+const nw::math::MTX34 *FUN_002ac94c(void);
+void nn_math_ARMv6_MTX34CopyAsm(nw::math::MTX34 *output, const nw::math::MTX34 *input);
 
-int nn_math_ARMv6_MTX34CopyAsm(unsigned char *, unsigned int);
-
-typedef int romwright_code(...);
-/* stack frame of param_1: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_1_stack;
-
-extern unsigned int DAT_00476640; /* 0x476640 */
-extern unsigned char DAT_004efdf4; /* 0x4efdf4 */
-extern unsigned int DAT_004efe24; /* 0x4efe24 */
-extern unsigned int DAT_004efe28; /* 0x4efe28 */
-extern unsigned int DAT_004efe2c; /* 0x4efe2c */
-extern unsigned int DAT_004efe30; /* 0x4efe30 */
-
-extern unsigned int FUN_002ac94c(void);
-extern int __cxa_guard_acquire(unsigned int *);
-/* Supplied declaration required: nn_math_ARMv6_MTX34CopyAsm. */
-
-
-unsigned char * FUN_003e5fd0(int param_1)
-
+/* Builds the default: a copy of the identity matrix, unit scale and the default flags. */
+static void initDefault(TransformDefault *self)
 {
-/* irregular: 3 native warning(s); review required */
-  unsigned char *puVar1;
-  int temp_v0;
-  unsigned int temp_v1;
-  
-  if (*(int **)(param_1 + 0xc) != (int *)0x0) {
-                    /* WARNING: Could not recover jumptable at 0x003e5fec. Too many branches */
-                    /* WARNING: Treating indirect jump as call */
-    puVar1 = (unsigned char *)(**(romwright_code **)(**(int **)(param_1 + 0xc) + 0x18))();
-    return puVar1;
-  }
-  if (((DAT_00476640 & 1) == 0) && (temp_v0 = __cxa_guard_acquire(&DAT_00476640), temp_v0 != 0)) {
-    temp_v1 = FUN_002ac94c();
-    nn_math_ARMv6_MTX34CopyAsm(&DAT_004efdf4,temp_v1);
-    DAT_004efe24 = 0x3f800000;
-    DAT_004efe28 = 0x3f800000;
-    DAT_004efe2c = 0x3f800000;
-    DAT_004efe30 = 0x7e1;
-  }
-  return &DAT_004efdf4;
+    nn_math_ARMv6_MTX34CopyAsm(&self->matrix, FUN_002ac94c());
+    self->scaleX = 1.0f;
+    self->scaleY = 1.0f;
+    self->scaleZ = 1.0f;
+    self->flags = 0x7e1;
 }
 
-} /* extern "C" */
+/* The node's transform: the source's own when it has one, otherwise the shared default. */
+const TransformDefault *FUN_003e5fd0(TransformSourceNode *node)
+{
+    if (node->source != NULL) {
+        return node->source->getTransform();
+    }
+    if ((DAT_00476640 & 1) == 0 && __cxa_guard_acquire(&DAT_00476640) != 0) {
+        initDefault(&DAT_004efdf4);
+    }
+    return &DAT_004efdf4;
+}
+}

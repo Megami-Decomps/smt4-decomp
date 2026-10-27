@@ -4416,3 +4416,25 @@
 001ff93c archiveStreamOpenConverted inferred [med] twin of smt4a FUN_002bee0c
 001ffb70 positionedStreamSeekTransfer inferred [med] twin of smt4a FUN_002bf040
 001ff9f4 positionedFileReadAtReport inferred [med] twin of smt4a FUN_002beec4
+00365220 _ZN9Obj4211dcD1Ev evidence vptr store _ZTV9Obj4211dc+8 (only slot), then destroys 5 holders + 2 owner members in reverse; returns this
+003793d8 _ZN9Obj421a78D1Ev evidence stores _ZTV9Obj421a78+8, runs the vfunc0c table-clear body inline, clears the resource word at +0x30, returns this (virtual dtor D1)
+0034ad8c _ZN9Obj4208d47vfunc18Ev evidence mangled length prefix corrected (armcc spells the member name with its real length)
+00379220 _ZN9Obj421a787vfunc0cEv evidence mangled length prefix corrected (armcc spells the member name with its real length)
+003b3344 _ZN9Obj4225649copyFlagsEPK20SelectionValueRecord evidence mangled length prefix corrected (armcc spells the member name with its real length)
+002890d4 filterCreateQuad inferred [med] twin of smt4a FUN_004151b0
+00150c4c soundPlayerPlayItem inferred [med] twin of smt4a FUN_001b1784
+002aa200 renderCtxBindTextureMode inferred [high] twin of smt4a FUN_0019f764
+0011bf24 dspComponentLoadEmbedded inferred [high] loads the DSP sound component from the embedded binary (DAT_004657b8, 0xC20A bytes) into the shared DSP state; fails with 0xC8A0A7FC when no session or already loaded
+00230b90 playerSlotHoldsEntry inferred [med] true when the entry id equals the id the player data holds in the slot of the entry kind (kinds 2-8)
+0029541c resultUnitStepFinish inferred [med] destroys the unit step script and buffer, advances the selected unit and moves to the closing (0x14) or next (9) menu state
+00333ef8 playerUnitRecordInit inferred [med] clears the player data block (0x8C), stores level and name, grows the unit up from level 1 and sets its base stats and current HP/MP
+00312da8 scrCommBtlGetTable14Value inferred [med] script command: returns one of the six 16-bit values of a record of battle data table 14, -1 for an invalid field
+00311f68 scrCommBtlActiveEntryValueKindOk inferred [med] script command: 1 when the active battle entry value at the argument index has no kind bits or kind 2, else 0
+003bef18 partyStockUpdateCounters inferred [low] for every stocked unit: counts up the byte at 0x600 when bit 10 of its flag word is set, clears it otherwise
+00222068 scrCommEventEffectCreateFromTable inferred [med] script command: creates the event effect `arg0` of the effect table at (0,0,arg1) and stores its job as the result
+00118294 titleDbgBgStop evidence [high] jobStop on the title debug background process (DAT_0044e2e8->process); thunk FUN_00118290 in front of it
+00118290 titleDbgBgStopThunk evidence [high] branch-to-next NOP thunk in front of titleDbgBgStop; its address is the callback context set by FUN_00104ec4
+00104ec4 titleSequenceInit inferred [low] starts sequence group 1 with the DAT_00446e00 states, sets the 0xc9 param triple, binds the title background callbacks, resets slots 0/1 when state==3
+002cedd8 searchWinInitialize inferred [high] Twin of smt4a FUN_00333318.
+002319e0 mapExplorationCellIsMarked inferred [med] Tests one cell of the 5x7 exploration grid (regions 101-103) in the map block bitmask; returns false when out of bounds.
+00231ad4 mapExplorationCellMark inferred [med] Sets one cell of the 5x7 exploration grid bitmask (regions 101-103); setter twin of FUN_002319e0.

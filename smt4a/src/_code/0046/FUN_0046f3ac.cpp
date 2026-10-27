@@ -20,7 +20,7 @@ int FUN_002fb0d4(...);
 int asdFsIsSdCardDetected(...);
 int FUN_0046c528(...);
 int aocFinishHandleOperation(...);
-int FUN_0046fb60(...);
+int aocEnumerateContentRecords(...);
 int FUN_00473e44(...);
 int FUN_004740b4(...);
 int aocEntryBeginBaseLoad(...);
@@ -62,7 +62,7 @@ extern int *_ZN18WindowStatusResultC1Ev(unsigned char *);
 /* Supplied declaration required: asdFsIsSdCardDetected. */
 /* Supplied declaration required: FUN_0046c528. */
 /* Supplied declaration required: aocFinishHandleOperation. */
-/* Supplied declaration required: FUN_0046fb60. */
+/* Supplied declaration required: aocEnumerateContentRecords. */
 /* Supplied declaration required: FUN_00473e44. */
 /* Supplied declaration required: FUN_004740b4. */
 extern int recordIsEnabledAndPresent(int);
@@ -151,7 +151,7 @@ void FUN_0046f3ac(unsigned char *param_1,int param_2)
         piVar1[3] = iStack_60;
         break;
       }
-      FUN_0046fb60(&temp_v15,param_2);
+      aocEnumerateContentRecords(&temp_v15,param_2);
       temp_v8 = temp_v15;
       temp_v9 = iStack_38;
       temp_v10 = temp_v16;

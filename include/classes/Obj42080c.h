@@ -34,6 +34,7 @@ public:
     /* The 4x4 matrix the filter draws with. */
     void *matrixSlot() { return unk18; }
     void setRect(Obj42080cRect *newRect) { rect = newRect; }
+    Obj42080cRect *getRect() { return rect; }
 
 protected:
     /* 0x18 */ u8 unk18[0x40];

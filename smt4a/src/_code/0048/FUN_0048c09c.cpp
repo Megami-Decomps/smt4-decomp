@@ -1,10 +1,10 @@
-/* NON_MATCHING: scene address is evaluated before map lookup; selection and refresh-address registers and result moves still differ. */
+/* NON_MATCHING: prologue matches retail (scene address passed to naviGetActiveStateValue(scene) and naviMainSelectPair); retail then reuses the dead scene register r7 for the section and keeps the three refresh-store addresses in r8/r9/sl, ours puts the section in sl and the addresses in r7/r8/r9, and the loop copies the map through ip. */
+#include "shard/W6_W6Match7_NumericStepper.h"
 #include "ui/NaviCategorySelection.h"
 #include "gamedata/MapNaviCategories.h"
 
 extern "C" {
 MapNaviMarkerIcon *dataTable2BFindType1Entry(NaviCategorySelectionWork *, s32, u32);
-s32 naviGetActiveStateValue(void);
 s32 naviMainSelectPair(void *);
 s32 MapNaviTable_GetCategoryCount(MapNaviTableContext *);
 const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext *, u32);
@@ -12,9 +12,8 @@ const MapNaviCategoryRecord *MapNaviTable_GetCategoryRecord(MapNaviTableContext 
 // Select the requested marker category, falling back to the map's default category.
 void FUN_0048c09c(NaviCategorySelectionWork *work, u32 category)
 {
-    void *scene = work->scene;
-    s32 map = naviGetActiveStateValue();
-    s32 section = naviMainSelectPair(scene);
+    s32 map = naviGetActiveStateValue(work->scene);
+    s32 section = naviMainSelectPair(work->scene);
     MapNaviMarkerIcon *marker = dataTable2BFindType1Entry(work, map, category);
     if (marker) {
         s8 icon = (s8)marker->icon;

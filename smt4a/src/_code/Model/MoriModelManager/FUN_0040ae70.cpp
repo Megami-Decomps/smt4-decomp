@@ -22,8 +22,8 @@ void FUN_0040ae70(Obj557c48 *manager, s32 attach)
         {
             Obj557b68 *current = manager->scene();
             MoriPassConfig pass;
-            pass.enabled = 0;
             pass.width = 0x30000;
+            pass.enabled = 0;
             pass.height = 0x10000;
             pass.depth = 0x10000;
             pass.unk14 = 0;

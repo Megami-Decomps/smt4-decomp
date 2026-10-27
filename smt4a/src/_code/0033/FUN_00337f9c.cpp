@@ -8,13 +8,12 @@ TiledIndexMesh *FUN_002ce938(s32 rows, s32 verticesPerRow, s32 trianglesPerRow, 
 TiledIndexMesh *FUN_00337f9c(s32 rows, s32 columns, s32 trianglesPerCell, s16 vertexStride,
                            const u16 *pattern, u32 flags)
 {
-    s16 columnCount = (s16)columns;
-    TiledIndexMesh *mesh = FUN_002ce938(rows, (s16)(columnCount * vertexStride),
-                                      (s16)(columnCount * (s16)trianglesPerCell), flags);
+    TiledIndexMesh *mesh = FUN_002ce938(rows, (s16)(columns * vertexStride),
+                                      (s16)(columns * trianglesPerCell), flags);
     u16 *indices = mesh->storage->indices;
     s32 indexCount = trianglesPerCell * 3;
     s32 groups = (indexCount + 2) / 3;
-    s16 rowStride = columnCount * vertexStride;
+    s32 rowStride = columns * vertexStride;
     for (s32 row = 0; row < rows; ++row) {
         for (s32 column = 0; column < columns; ++column) {
             const u16 *source = pattern;

@@ -2,7 +2,7 @@
 #include "shard/W5_W5Match2_ModelColor.h"
 extern "C" {
 extern ModelColorBank g_asdModelBanks[];
-u32 FUN_001931d8(const ModelColor *color);
+u32 nw_ut_FloatColor_ToPicaU32(const ModelColor *color);
 /* Set the model slot RGB color with full alpha and cache its packed form. */
 void FUN_003cd764(u32 slot, u32 bank, f32 red, f32 green, f32 blue)
 {
@@ -12,6 +12,6 @@ void FUN_003cd764(u32 slot, u32 bank, f32 red, f32 green, f32 blue)
     color->g = green;
     color->b = blue;
     color->a = 1.0f;
-    work->packed = FUN_001931d8(color);
+    work->packed = nw_ut_FloatColor_ToPicaU32(color);
 }
 }

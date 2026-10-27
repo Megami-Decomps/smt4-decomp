@@ -65,7 +65,7 @@ void FUN_00299370(s32 arg);
 void libc_strcpy(char* dst, const char* src);
 void rt_memclr(void* block, u32 size);
 void __aeabi_memset4(void* block, u32 size, s32 value);
-void FUN_00333ef8(s32 kind, char* name, u16* look);
+void playerUnitRecordInit(s32 kind, char* name, u16* look);
 void FUN_00334058(u32 id);
 u8 gameSlotFindByCategory(UnitRecord* record);
 SlotTable* gameGetSlotTable(void);
@@ -90,7 +90,7 @@ void FUN_0033adf8(BattleMainBlock* battle, u32 row)
     libc_strcpy(name, gameGetPlayerName());
     u16 look[7];
     for (s32 i = 0; i < 7; i++) look[i] = scenario->look[i];
-    FUN_00333ef8((s8)scenario->playerKind, name, look);
+    playerUnitRecordInit((s8)scenario->playerKind, name, look);
 
     PlayerData* player = gameGetPlayerData();
     for (s32 i = 0; i < 5; i++) player->stats[i] = scenario->stats[i];

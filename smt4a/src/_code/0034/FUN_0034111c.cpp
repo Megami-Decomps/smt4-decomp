@@ -1,4 +1,4 @@
-/* NON_MATCHING: VFP endpoint allocation differs and the compiler folds the perpendicular negation into subtraction. */
+/* NON_MATCHING: VFP endpoint allocation differs (the build copies endX/endY as one double, retail moves them separately; the segment delta lands in another register). */
 #include "common.h"
 #include <math.h>
 
@@ -19,8 +19,9 @@ void FUN_0034111c(u32 firstEffect, u32 secondEffect, f32 startX, f32 startY,
         startY = endY;
         endY = y;
     }
+    f32 deltaX = endX - startX;
     f32 normalX = endY - startY;
-    f32 normalY = -(endX - startX);
+    f32 normalY = -deltaX;
     f32 length = sqrtf(normalX * normalX + normalY * normalY);
     if (length != 0.0f) {
         normalX = normalX / length * width;

@@ -3,6 +3,20 @@
 
 #include "classes/Obj420f4c.h"
 
+/* The block of state words: all cleared. */
+struct Obj420decWords {
+    Obj420decWords()
+    {
+        s32 i = 0;
+        while (i < 20) {
+            values[i] = 0;
+            i++;
+        }
+    }
+
+    void *values[20];
+};
+
 /* A pair of heap records with a block of state words in front (vtable at 0x420dec; named after it
  * until its real name is known). */
 class Obj420dec {
@@ -17,7 +31,7 @@ public:
     /* 0x14 */ u32 unk14;
     /* 0x18 */ u32 unk18;
     /* 0x1C */ u32 unk1c;
-    /* 0x20 */ u32 words[20];
+    /* 0x20 */ Obj420decWords words;
     /* 0x70 */ u8 unk70[0x48];
     /* 0xB8 */ Obj420f4c first;
     /* 0xF4 */ Obj420f4c second;

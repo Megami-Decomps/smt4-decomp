@@ -1,4 +1,4 @@
-/* NON_MATCHING: reward multiplier operand order, clamp condition scheduling and saved table registers differ. */
+/* NON_MATCHING: the multiplier operand order and the experience clamp compare (retail `cmp limit, value; movle`, here `cmp value, limit; movgt`) differ; the money clamp matches. */
 #include "shard/GameGlobals.h"
 #include "gamedata/Table00.h"
 #include "gamedata/Table00Lookup.h"
@@ -46,15 +46,19 @@ void FUN_0034dae0(void *unitData, u32 id)
     unit->level = level;
     if (base != NULL) {
         f32 multiplier = progression * 0.3f + 1.0f + progression * progression * (1.0f / 15.0f);
-        s32 experience = static_cast<s32>(multiplier * static_cast<f32>(base->experience));
+        s32 experience = static_cast<s32>(static_cast<f32>(base->experience) * multiplier);
         rewards->experience = experience;
         if (9999999 <= experience) {
             experience = 9999999;
         }
         rewards->experience = experience;
-        s32 money = static_cast<s32>(multiplier * static_cast<f32>(base->money));
+        s32 money = static_cast<s32>(static_cast<f32>(base->money) * multiplier);
         rewards->money = money;
-        rewards->money = money < 9999999 ? money : 9999999;
+        s32 cappedMoney = 9999999;
+        if (money < cappedMoney) {
+            cappedMoney = money;
+        }
+        rewards->money = cappedMoney;
     } else {
         rewards->experience = unit->experience;
         rewards->money = unit->money;

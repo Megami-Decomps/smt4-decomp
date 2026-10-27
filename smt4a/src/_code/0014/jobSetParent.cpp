@@ -41,12 +41,12 @@ extern "C" void jobSetParent(u32 parentHandle, u32 childHandle)
         detachProcess(childHandle);
     if (parent != NULL) {
         AsdProcess *previous = parent->firstChild;
-        if (previous == NULL) {
-            parent->firstChild = child;
-        } else {
+        if (!(previous == NULL)) {
             for (AsdProcess *next = previous->nextSibling; next != NULL; next = next->nextSibling)
                 previous = next;
             previous->nextSibling = child;
+        } else {
+            parent->firstChild = child;
         }
     }
     child->parent = parent;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the resource in r5 and the emitter in r4, loads the buffer into r1 (movne r0, r1) and recomputes header+0x1c late */
+/* NON_MATCHING: only the resource and emitter callee-saved registers trade r4/r5 (retail: resource r5, emitter r4). */
 #include "shard/W6_W6Match2_EmitterResources.h"
 #include "AsdSDK/Source/Gfx/Effect/effMisc.h"
 #include "util/MemoryHelpers.h"
@@ -25,15 +25,16 @@ void effEmitterReplaceResourceByKind(ResourceEmitter *owner, u32 kind, const u32
 /* Creates the emitter for a resource, replaces its buffer and applies the resource's data by type. */
 ResourceEmitter *FUN_0030f370(EmitterResource *resource)
 {
-    EmitterHeader *header = resourceResolveHeaderPointer(resource);
-    ResourceEmitter *emitter = reinterpret_cast<ResourceEmitter *>(effEmitterCreateSmall(reinterpret_cast<EffEmitterDesc *>(header->body)));
+    u8 *header = reinterpret_cast<u8 *>(resourceResolveHeaderPointer(resource));
+    ResourceEmitter *emitter = reinterpret_cast<ResourceEmitter *>(effEmitterCreateSmall(reinterpret_cast<EffEmitterDesc *>(header + 0x1c)));
     FUN_0024f8a4(emitter, resource->kind, (const EmitterArguments *)header);
     u32 kind = resource->kind;
     void *buffer = emitter->buffer;
+    header += 0x1c;
     if (buffer != NULL) {
         objectBufferFree(buffer);
     }
-    emitter->buffer = FUN_002691d8(kind, emitter->key, header->body);
+    emitter->buffer = FUN_002691d8(kind, emitter->key, header);
     const u32 *data = (const u32 *)resourceResolveDataPointer(resource);
     if (data != NULL) {
         effEmitterReplaceResourceByKind(emitter, resource->type, data);

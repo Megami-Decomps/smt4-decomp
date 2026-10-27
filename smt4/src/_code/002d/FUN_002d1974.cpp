@@ -1,4 +1,4 @@
-/* NON_MATCHING: candidate status addressing folds the reserved-slot offset, changing saved registers and peeled-loop allocation. */
+/* NON_MATCHING: frame and saved registers now match (117/117 rows, 1104 slot offset kept in r7); retail loads battle->actions before the search loop and the candidate address is scheduled one instruction earlier, and the later compare loops use different scratch registers. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 #include "battle/btlAction.h"
@@ -15,14 +15,15 @@ u32 FUN_002d1974(const BtlActionRecord *current, u32 directions)
         BtlActionRecord *candidates[50];
         memClear(candidates, sizeof(candidates));
         u32 count = 0;
-        BtlActionRecord *records = battle->actions;
         // The first four action slots precede the fifty ordinary participants.
-        for (s32 index = 0; index < 50; ++index) {
-            BtlActionRecord *candidate = &records[index + 4];
+        s32 index = 0;
+        while (index < 50) {
+            BtlActionRecord *candidate = &battle->actions[index + 4];
             u32 status = candidate->status;
             if ((status & 1) && (status & 2) && (status & 0x80) && !(status & 0x10) &&
                 candidate->memberId != current->memberId)
                 candidates[count++] = candidate;
+            ++index;
         }
         if (directions & 0x20000) {
             for (s32 index = 0; index < count; ++index) {

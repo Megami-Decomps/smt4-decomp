@@ -27,13 +27,15 @@ extern "C" void FUN_002e7134(AsdLightSet *set)
     if (set->active != 0) {
         asdLightSelectActive(1);
         AsdLightSlot *slot = set->slots;
-        for (u32 index = 0; index < set->buffer->count; ++index, ++slot) {
+        u32 index = 0;
+        while (index < set->buffer->count) {
             AsdLight *light = slot->light;
             AsdLightOwner *owner = light->owner;
             if (lightVectorRemove(owner->lights, light)) {
                 light->owner = NULL;
             }
             --g_asdLightCount;
+            ++index, ++slot;
         }
     }
     if (set->extra != NULL) {

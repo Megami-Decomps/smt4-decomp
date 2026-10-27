@@ -78,7 +78,7 @@ int FUN_003370ac(int);
 int FUN_00337cfc(...);
 int FUN_00338cfc(int, int);
 int FUN_003ad754(...);
-int FUN_003bef18(void);
+int partyStockUpdateCounters(void);
 int FUN_003bef90(void);
 int FUN_003c8428(int);
 int FUN_003c86bc(void);
@@ -190,7 +190,7 @@ extern int jobIsValid(unsigned int);
 /* Supplied declaration required: FUN_00348c10. */
 /* Supplied declaration required: FUN_003ad754. */
 /* Supplied declaration required: FUN_003ae134. */
-/* Supplied declaration required: FUN_003bef18. */
+/* Supplied declaration required: partyStockUpdateCounters. */
 /* Supplied declaration required: FUN_003bef90. */
 extern int FUN_003bf0a4(void);
 /* Supplied declaration required: btlHelpFreeEntries. */
@@ -281,7 +281,7 @@ void FUN_001fc6e8(unsigned int param_1)
     *(unsigned int *)(temp_v4 + 0xf8) = 0x3f800000;
     *(unsigned int *)(temp_v4 + 0xfc) = 0x3f800000;
     FUN_0027dc24(temp_v4,temp_v4 + 200,0);
-    FUN_003bef18();
+    partyStockUpdateCounters();
     FUN_003bef90();
     FUN_00338cfc(temp_v4,0);
     FUN_003370ac(temp_v4);

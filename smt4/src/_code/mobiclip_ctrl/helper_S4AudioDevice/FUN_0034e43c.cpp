@@ -49,7 +49,7 @@ extern const char DAT_00404ee4[];
 
 void FUN_0011be58();
 void FUN_0035a31c(const void *a, const void *b, u32 c, u32 d);
-void FUN_0011bf24();
+void dspComponentLoadEmbedded();
 void dspsndInitializeManagers();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
 void nn_os_CriticalSection_Initialize(void *section);
@@ -68,7 +68,7 @@ u32 FUN_0034e43c(AudioAllocator *allocator, s32 ringCount, const void *first, co
     if (first != NULL && second != NULL) {
         FUN_0035a31c(first, second, 0xFF, 0xFF);
     } else {
-        FUN_0011bf24();
+        dspComponentLoadEmbedded();
     }
     dspsndInitializeManagers();
     nw_snd_SoundSystem_SetMasterVolume(1.0f);

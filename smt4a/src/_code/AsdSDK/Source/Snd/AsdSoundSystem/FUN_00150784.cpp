@@ -1,9 +1,15 @@
-/* NON_MATCHING: sound system shutdown (Apocalypse layout view); the system base is now held in one register as in retail, but the aux-slot loop (retail tests the index against 0 and 1) and the voice-handle loop are still structured differently */
+/* NON_MATCHING: sound system shutdown (Apocalypse layout view); the voice list now comes from g_soundHandleList, the slot loops use real handle arrays and the voice loop matches retail; remaining: retail keeps the two-way aux-slot body out of line (beq to the body after the loop) and holds the system base in r6 with a zero in r9 (158 vs 146 rows). */
 #include "common.h"
 
 /* A playing sound handle: stopped and detached from its slot. */
 struct SoundHandleSlot {
     /* 0x00 */ s32 handle;
+};
+
+/* A slot of the sound system: its handles follow a 0x20-byte header. */
+struct SoundHandleSlotList {
+    /* 0x00 */ u8 header[0x20];
+    /* 0x20 */ s32 handles[16];
 };
 
 /* The pieces of the Apocalypse sound system block this shutdown touches (g_asdSoundSystem). */
@@ -39,6 +45,13 @@ struct AsdSoundSystemApocView {
 extern "C" {
 extern AsdSoundSystemApocView g_asdSoundSystem;
 
+/* The live voice handles (inside the sound system block, reached through its own symbol). */
+struct SoundHandleList {
+    SoundHandleSlot *handles;
+    s32 count;
+};
+extern SoundHandleList g_soundHandleList;
+
 s32 nw_snd_SoundArchive_IsAvailable(void *archive);
 void FUN_00154890(u32 arg);
 void FUN_00169614(u32 arg);
@@ -59,6 +72,14 @@ static __inline void asdSoundHandleRelease(s32 *handle)
     }
 }
 
+static __inline void releaseSlotHandle(SoundHandleSlotList *slot, u32 index)
+{
+    if (slot->handles[index] != 0) {
+        asdSoundObjectStop(slot->handles[index], 0);
+        nw_snd_SoundHandle_DetachSound(&slot->handles[index]);
+    }
+}
+
 /* Stops every sound and releases the sound system's buffers. */
 void FUN_00150784(void)
 {
@@ -66,26 +87,31 @@ void FUN_00150784(void)
     if (nw_snd_SoundArchive_IsAvailable(system) == 0)
         return;
 
-    u8 *slotA = system->currentSlotA;
+    SoundHandleSlotList *slotA = (SoundHandleSlotList *)system->currentSlotA;
     if (slotA != NULL) {
         for (u8 i = 0; i < 0x10; i++)
-            asdSoundHandleRelease((s32 *)(slotA + 0x20 + i * 4));
+            releaseSlotHandle(slotA, i);
     }
     for (u8 i = 0; i < 2; i++) {
-        u8 *aux = system->auxSlots[i];
-        s32 handle = aux != NULL ? *(s32 *)(aux + 0x20) : 0;
-        if (aux != NULL && handle != 0) {
-            asdSoundObjectStop(handle, 0);
-            nw_snd_SoundHandle_DetachSound((s32 *)(aux + 0x20));
+        if (i == 0 || i == 1) {
+            u8 *aux = system->auxSlots[i];
+            s32 handle = aux != NULL ? *(s32 *)(aux + 0x20) : 0;
+            if (aux != NULL && handle != 0) {
+                asdSoundObjectStop(handle, 0);
+                nw_snd_SoundHandle_DetachSound((s32 *)(aux + 0x20));
+            }
         }
     }
-    SoundHandleSlot *voices = system->voiceHandles;
-    for (s32 i = 0; i < system->voiceHandleCount && voices != NULL; i++)
+    SoundHandleSlot *voices = g_soundHandleList.handles;
+    for (s32 i = 0; i < g_soundHandleList.count; i++) {
+        if (voices == NULL)
+            break;
         asdSoundHandleRelease(&voices->handle);
-    u8 *slotB = system->currentSlotB;
+    }
+    SoundHandleSlotList *slotB = (SoundHandleSlotList *)system->currentSlotB;
     if (slotB != NULL) {
         for (u8 i = 0; i < 4; i++)
-            asdSoundHandleRelease((s32 *)(slotB + 0x20 + i * 4));
+            releaseSlotHandle(slotB, i);
     }
 
     system->currentSlotA = NULL;

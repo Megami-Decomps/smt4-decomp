@@ -17,6 +17,12 @@ void asdMemFree(void *memory);
 void jobStop(u32 job, s32 mode);
 s32 jobIsValid(u32 job);
 
+
+/* Clears flag bits of the add-on main object. */
+static __inline void aocMainClearFlags(AocMain *main, u32 mask)
+{
+    main->flags &= ~mask;
+}
 // Release the add-on scene's jobs, windows, script and texture resources.
 void AocMenu::releaseStepResources()
 {
@@ -43,10 +49,10 @@ void AocMenu::releaseStepResources()
     };
     MainView *main = reinterpret_cast<MainView *>(g_aocMain);
     CleanupView *scene = reinterpret_cast<CleanupView *>(work);
-    main->base.flags &= ~0x100u;
+    aocMainClearFlags(&main->base, 0x100);
     main->refresh.refreshContent = 1;
     main->refresh.refreshDisplay = 1;
-    g_aocMain->flags &= ~0x70u;
+    aocMainClearFlags(g_aocMain, 0x70);
     g_aocDisplay->operationActive = 0;
     ifTouchRegionClearAll(work->windowStorage);
     FUN_00233818(&work->dispatchTable);

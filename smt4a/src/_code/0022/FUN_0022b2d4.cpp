@@ -131,7 +131,7 @@ extern unsigned int FUN_00180114(short);
 /* Supplied declaration required: FUN_00183788. */
 /* Supplied declaration required: FUN_00183bb0. */
 /* Supplied declaration required: fontMeasureLineAdvance. */
-extern int FUN_0018416c(short);
+extern int unitHasRankingBonus(short);
 /* Supplied declaration required: FUN_00184310. */
 /* Supplied declaration required: drawSetColorFromRGBA8. */
 /* Supplied declaration required: FUN_00185e84. */
@@ -603,7 +603,7 @@ LAB_0022b9b8:
         }
       }
       else {
-        temp_v3 = FUN_0018416c(*psVar20);
+        temp_v3 = unitHasRankingBonus(*psVar20);
         if (temp_v3 != 0) {
           temp_v24 = 3.09687e-43f;
           FUN_001835b4(2,0x12,0x133,temp_v27[5],temp_v27[6]);

@@ -7,7 +7,7 @@ extern "C" {
 
 int lightSetIntensity(...);
 int FUN_002aa18c(...);
-int FUN_002aa200(unsigned int, unsigned int, int);
+int renderCtxBindTextureMode(unsigned int, unsigned int, int);
 int FUN_002aea44(unsigned char [4]);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -45,7 +45,7 @@ extern unsigned int *DAT_00464a74; /* 0x464a74 */
 #endif
 /* Supplied declaration required: lightSetIntensity. */
 /* Supplied declaration required: FUN_002aa18c. */
-/* Supplied declaration required: FUN_002aa200. */
+/* Supplied declaration required: renderCtxBindTextureMode. */
 /* Supplied declaration required: FUN_002aea44. */
 /* Supplied declaration required: callbackBindingInitFromKind. */
 extern int __aeabi_uidivmod(unsigned int, int);
@@ -230,7 +230,7 @@ LAB_002b2f7c:
 LAB_002b2f98:
           temp_v3 = __aeabi_uidivmod(temp_v7,(unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xc) *
                                         (unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xe));
-          FUN_002aa200(g_titleScene,*(unsigned int *)(*(int *)(temp_v6 + 0xc) + temp_v3 * 4),
+          renderCtxBindTextureMode(g_titleScene,*(unsigned int *)(*(int *)(temp_v6 + 0xc) + temp_v3 * 4),
                        *(unsigned char *)(temp_v6 + 0x24));
           VectorUnsignedToFloat((unsigned int)temp_v30,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat((unsigned int)temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3);

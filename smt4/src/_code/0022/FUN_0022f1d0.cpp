@@ -39,7 +39,7 @@ extern int g_titleScene; /* 0x44ea00 */
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: drawTextAtRelativePosition. */
-extern int FUN_00230b90(int);
+extern int playerSlotHoldsEntry(int);
 extern int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned int, unsigned int);
 /* Supplied declaration required: uiRectDrawAtBottomRight. */
@@ -187,7 +187,7 @@ void FUN_0022f1d0(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     else {
       temp_v13 = temp_v3;
-      temp_v5 = FUN_00230b90(param_1);
+      temp_v5 = playerSlotHoldsEntry(param_1);
       if ((temp_v5 != 0) && (temp_v5 = FUN_0028fb3c(temp_v13), 1 >= temp_v5)) {
         temp_v12 = 0x787878ff;
       }
@@ -205,7 +205,7 @@ void FUN_0022f1d0(int param_1,int param_2,int param_3,unsigned short *param_4)
     }
     else {
       temp_v13 = temp_v3;
-      temp_v5 = FUN_00230b90(param_1);
+      temp_v5 = playerSlotHoldsEntry(param_1);
       if ((temp_v5 != 0) && (temp_v5 = FUN_0028fb3c(temp_v13), 1 >= temp_v5)) {
         temp_v12 = 0x5a5a5aff;
       }

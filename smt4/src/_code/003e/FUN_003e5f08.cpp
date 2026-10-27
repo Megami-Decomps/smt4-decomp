@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x4218d0; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+extern u8 DAT_0044e858;
+
+/* Returns the address of DAT_0044e858. */
+void *FUN_003e5f08(void)
+{
+    return &DAT_0044e858;
+}
+
+} /* extern "C" */

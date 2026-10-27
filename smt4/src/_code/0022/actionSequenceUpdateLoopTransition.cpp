@@ -23,7 +23,9 @@ void actionSequenceUpdateLoopTransition(ActionController *controller)
         }
         ActionSequence *sequence = controller->sequence;
         s16 totalFrame = (s16)controller->loopLength * controller->loops + frame;
-        bool completed = !(sequence->flags & 1);
+        bool completed = true;
+        if (sequence->flags & 1)
+            completed = false;
         if (!completed && controller->tracks[3].unk00 <= totalFrame && !(controller->flags & 0x2000)) {
             controller->flags |= 0x2000;
             completed = !(sequence->flags & 1);

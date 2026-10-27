@@ -1,18 +1,14 @@
-/* NON_MATCHING: retail merges every phase store into one shared `str r0,[r4,#8]` tail (constants not hoisted); this build stores per case and hoists 2/5 into extra registers. */
-#include "common.h"
+/* NON_MATCHING: member form with class fields; retail keeps one shared `str r0,[r4,#8]` tail inside case 1 reached from the other cases via `mov r0,r5`/`mov r0,#N; b`, ours stores the hoisted 5 (r5) in place and puts the shared tail at the end (116 rows vs 117). */
+#include "classes/Obj536044.h"
 #include "code/Code0035_Smt4a.h"
 
 struct CharonScript {
     u8 unk00[0x108];
     u32 state; // 0x108
 };
-struct CharonTransition {
-    u32 unk00;
-    u32 state; // 0x04
-    u32 phase; // 0x08
-    u32 unk0c;
-    u32 previousState; // 0x10
-    u8 unk14[0x170];
+// The fields past the documented class prefix.
+struct CharonView {
+    u8 unk00[0x184];
     void *table; // 0x184
     u32 unk188;
     CharonScript *exitScript; // 0x18c
@@ -35,69 +31,60 @@ void scriptProcessSetMode(CharonScript *, s32);
 void slotSetRequest(u32, u32, u32);
 s32 screenFadeIsBusy();
 void messageDismissNumericBanner(u32);
-
-static __inline void charonEnterState(CharonTransition *transition, u32 next)
-{
-    transition->previousState = transition->state;
-    transition->state = next;
-    transition->phase = 0;
 }
 
 // Run the shop exit and conditional second Charon request before returning to state 20.
-void _ZN9Obj53604433shopUpdateCharonRequestTransitionEv(CharonTransition *transition)
+void Obj536044::shopUpdateCharonRequestTransition()
 {
-    switch (transition->phase) {
+    CharonView *view = reinterpret_cast<CharonView *>(this);
+    switch (substate) {
     case 0:
         if (messageMainIsIdle()) {
-            u32 entry = tableGroupFindEntryIndex(transition->table, "shop_exit");
-            scrScriptProcessStartEntry(transition->exitScript, entry);
+            u32 entry = tableGroupFindEntryIndex(view->table, "shop_exit");
+            scrScriptProcessStartEntry(view->exitScript, entry);
             sysPlaySe(0xa0);
-            transition->phase = 1;
+            substate = 1;
             FUN_0035d03c(1);
         }
         break;
     case 1:
-        if (scrRunOpcodesStub(transition->exitScript) == 2) {
-            if (gameDataBlocksGetWord()) {
-                if (gameDataBlocksGetWord() <= FUN_004d05b4()) {
-                    transition->phase = 2;
-                    break;
-                }
-            }
-            transition->phase = 5;
+        if (scrRunOpcodesStub(view->exitScript) == 2) {
+            if (!gameDataBlocksGetWord() || gameDataBlocksGetWord() > FUN_004d05b4())
+                substate = 5;
+            else
+                substate = 2;
         }
         break;
     case 5:
         slotSetRequest(0, 10, 0xff);
         slotSetRequest(1, 10, 0xff);
         FUN_0035d03c(0);
-        transition->phase = 6;
+        substate = 6;
         break;
     case 6:
         if (!screenFadeIsBusy()) {
             messageDismissNumericBanner(1);
-            charonEnterState(transition, 20);
+            changeState(20);
         }
         break;
     case 2:
-        asdLoadFileAsyncSimple("battle/Result.bf", &transition->resultTable, 0);
-        asdLoadFileAsyncSimple("battle/ResultMsg.mbm", &transition->resultMessages, 0);
-        transition->phase = 3;
+        asdLoadFileAsyncSimple("battle/Result.bf", &view->resultTable, 0);
+        asdLoadFileAsyncSimple("battle/ResultMsg.mbm", &view->resultMessages, 0);
+        substate = 3;
         break;
     case 3:
-        if (transition->resultTable && transition->resultMessages) {
-            CharonScript *script = FUN_00275bc8(transition->resultTable, transition->resultMessages);
-            transition->resultScript = script;
+        if (view->resultTable && view->resultMessages) {
+            CharonScript *script = FUN_00275bc8(view->resultTable, view->resultMessages);
+            view->resultScript = script;
             scriptProcessSetMode(script, 2);
-            u32 entry = tableGroupFindEntryIndex(transition->resultTable, "ProcCharonRequestSecond");
-            scrScriptProcessStartEntry(transition->resultScript, entry);
-            transition->phase = 4;
+            u32 entry = tableGroupFindEntryIndex(view->resultTable, "ProcCharonRequestSecond");
+            scrScriptProcessStartEntry(view->resultScript, entry);
+            substate = 4;
         }
         break;
     case 4:
-        if (scrRunOpcodesStub(transition->resultScript) == 2)
-            transition->phase = 5;
+        if (scrRunOpcodesStub(view->resultScript) == 2)
+            substate = 5;
         break;
     }
-}
 }

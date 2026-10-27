@@ -11,7 +11,7 @@ extern "C" {
 const Matrix44 *_ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(Matrix44 *destination, const Matrix44 *source);
 void FUN_001a1c28(Matrix44 *matrix, f32 x, f32 y, f32 z);
-void FUN_0019a0fc(Matrix44 *result, const Matrix44 *left, const Matrix44 *right);
+void nn_math_ARMv6_MTX44MultAsm(Matrix44 *result, const Matrix44 *left, const Matrix44 *right);
 
 void FUN_003d2294(Vec3f *position, s32 xAngle, s32 yAngle, s32 zAngle)
 {
@@ -23,7 +23,7 @@ void FUN_003d2294(Vec3f *position, s32 xAngle, s32 yAngle, s32 zAngle)
     mtx44Copy(&matrix, _ZN2nw4math5MTX448IdentityEv());
     Matrix44 xRotation;
     FUN_001a1c28(&xRotation, (f32)xAngle * (256.0f / 360.0f), 0.0f, 0.0f);
-    FUN_0019a0fc(&matrix, &matrix, &xRotation);
+    nn_math_ARMv6_MTX44MultAsm(&matrix, &matrix, &xRotation);
     f32 afterXx = matrixTransformCoordinate(&matrix.values[0], x, y, z, w);
     f32 afterXy = matrixTransformCoordinate(&matrix.values[4], x, y, z, w);
     f32 afterXz = matrixTransformCoordinate(&matrix.values[8], x, y, z, w);
@@ -31,7 +31,7 @@ void FUN_003d2294(Vec3f *position, s32 xAngle, s32 yAngle, s32 zAngle)
     mtx44Copy(&matrix, _ZN2nw4math5MTX448IdentityEv());
     Matrix44 yRotation;
     FUN_001a1c28(&yRotation, 0.0f, (f32)yAngle * (256.0f / 360.0f), 0.0f);
-    FUN_0019a0fc(&matrix, &matrix, &yRotation);
+    nn_math_ARMv6_MTX44MultAsm(&matrix, &matrix, &yRotation);
     f32 afterYx = matrixTransformCoordinate(&matrix.values[0], afterXx, afterXy, afterXz, afterXw);
     f32 afterYy = matrixTransformCoordinate(&matrix.values[4], afterXx, afterXy, afterXz, afterXw);
     f32 afterYz = matrixTransformCoordinate(&matrix.values[8], afterXx, afterXy, afterXz, afterXw);
@@ -39,7 +39,7 @@ void FUN_003d2294(Vec3f *position, s32 xAngle, s32 yAngle, s32 zAngle)
     mtx44Copy(&matrix, _ZN2nw4math5MTX448IdentityEv());
     Matrix44 zRotation;
     FUN_001a1c28(&zRotation, 0.0f, 0.0f, (f32)zAngle * (256.0f / 360.0f));
-    FUN_0019a0fc(&matrix, &matrix, &zRotation);
+    nn_math_ARMv6_MTX44MultAsm(&matrix, &matrix, &zRotation);
     position->x = matrixTransformCoordinate(&matrix.values[0], afterYx, afterYy, afterYz, afterYw);
     position->y = matrixTransformCoordinate(&matrix.values[4], afterYx, afterYy, afterYz, afterYw);
     position->z = matrixTransformCoordinate(&matrix.values[8], afterYx, afterYy, afterYz, afterYw);

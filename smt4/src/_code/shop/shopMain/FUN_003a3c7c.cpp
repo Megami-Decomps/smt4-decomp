@@ -12,7 +12,7 @@ void messageMainSetEnabled(s32);
 void FUN_0022fb64(SelectMenu *);
 s32 FUN_0027ee9c(void);
 u32 flaggedValueHolderGetTotal(const FlaggedValueHolder *);
-s32 FUN_00230b90(SelectMenu *, u16);
+s32 playerSlotHoldsEntry(SelectMenu *, u16);
 s32 FUN_0028fb3c(u16);
 void FUN_002328b4(void);
 void FUN_0022e648(SelectMenu *, s32);
@@ -91,7 +91,7 @@ void FUN_003a3c7c(SelectMenu *menu)
     EquipmentMenuItem *items = work->pages[category].items;
     u32 index = flaggedValueHolderGetTotal(&work->cursors[category].holder);
     u16 id = items[index].id;
-    if ((work->category != 8 || FUN_00230b90(menu, id) == 0 || FUN_0028fb3c(id) > 1) && accepted) {
+    if ((work->category != 8 || playerSlotHoldsEntry(menu, id) == 0 || FUN_0028fb3c(id) > 1) && accepted) {
         FUN_002328b4();
         FUN_0022e648(menu, 11);
         return;

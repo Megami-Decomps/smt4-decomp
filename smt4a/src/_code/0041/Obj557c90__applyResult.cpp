@@ -30,9 +30,9 @@ void Obj557c90::applyResult(const OnlineResultSource &source)
             break;
         }
     }
-    if (!gameFlagIsSet(0x580) && selectedId != 0) {
-        setState(5);
-    } else {
+    if (!(!gameFlagIsSet(0x580) && selectedId != 0)) {
         setState(1);
+    } else {
+        setState(5);
     }
 }

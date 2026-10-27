@@ -1,4 +1,4 @@
-/* NON_MATCHING: payload length reads now go through the real getter objectGetLengthField (matches retail); retail also sets the output length through a second one-instruction setter (mov r0,r5; str r1,[r0,#16]) and if-converts the marker clamp differently. */
+/* NON_MATCHING: payload length reads and the output length setter (FUN_002b3170, linker-inlined) now match retail; remaining: armcc adds nop hints after the stream call/compare and if-converts the marker clamp (vcvtle/vmovle) differently. */
 #include "shard/Shard0031.h"
 
 /* Only the six I/O fields of the existing zlib stream are accessed here. */
@@ -31,6 +31,8 @@ u8 *onlineBufferGetData(RangeObject *);
 void rt_memcpy(void *, const void *, u32);
 /* The length of a range object's payload (a one-instruction getter the linker inlines). */
 u32 objectGetLengthField(const RangeObject *);
+/* A one-instruction setter of the range object's payload length (the linker inlines it). */
+void FUN_002b3170(RangeObject *, u32);
 
 // Prefix compressed data with its expansion estimate, or zero followed by the original bytes.
 u32 FUN_004327f8(OnlineCompressionOwner *owner, RangeObject *input, RangeObject *output)
@@ -49,11 +51,11 @@ u32 FUN_004327f8(OnlineCompressionOwner *owner, RangeObject *input, RangeObject 
         f32 expansion = static_cast<f32>(objectGetLengthField(input)) /
                         static_cast<f32>(owner->work->stream.totalOutput) + 1.0f;
         u8 marker = expansion <= 255.0f ? static_cast<u8>(static_cast<u32>(expansion)) : 255;
-        output->payload.length = owner->work->stream.totalOutput + 1;
+        FUN_002b3170(output, owner->work->stream.totalOutput + 1);
         *onlineBufferGetData(output) = marker;
     } else {
         u8 *destination = output->payload.base + output->pos;
-        output->payload.length = objectGetLengthField(input) + 1;
+        FUN_002b3170(output, objectGetLengthField(input) + 1);
         *destination = 0;
         u32 length = objectGetLengthField(input);
         u8 *source = onlineBufferGetData(input);

@@ -1,193 +1,155 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_00489480` (_code @ 0x489480, 0x370 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "code/Code004d_Smt4a.h"
+/* NON_MATCHING: typed rewrite of the navigation map button handler; same blocks and calls as retail (232 vs 230 rows): the two stack arguments of rectRecRead are stored separately instead of one strd, early exits share the return and the saved registers are numbered differently (retail game state r7, navigation block r6, zero r8). */
+#include "map/mapDepart.h"
+#include "map/NavigationInterpolation.h"
+#include "shard/NaviMain_GetCurrentMap.h"
+
+/* The navigation panel as this input handler reads it. */
+struct NaviInputPanel {
+    /* 0x00000 */ u8 unk00000[4];
+    /* 0x00004 */ s32 step;
+    /* 0x00008 */ s32 state;
+    /* 0x0000C */ u8 unk0000C[4];
+    /* 0x00010 */ u32 flags;
+    /* 0x00014 */ u8 unk00014[0x48];
+    /* 0x0005C */ s8 mode;
+    /* 0x0005D */ u8 unk0005D[7];
+    /* 0x00064 */ u8 selectedMarker;
+    /* 0x00065 */ u8 infoPending;
+    /* 0x00066 */ u8 unk00066[0x466];
+    /* 0x004CC */ u8 scene[4];
+    /* 0x004D0 */ u8 unk004D0[0x770];
+    /* 0x00C40 */ u8 sprites[6][0x8C];
+    /* 0x00F88 */ u8 unk00F88[0x6C08];
+    /* 0x07B90 */ u8 refreshCategory;
+    /* 0x07B91 */ u8 refreshMarker;
+    /* 0x07B92 */ u8 unk07B92[0x1897E];
+    /* 0x20510 */ u32 selectedIcon;
+    /* 0x20514 */ u8 unk20514[0x130];
+    /* 0x20644 */ u8 listActive;
+};
+
+/* A rectangle read from the screen's rectangle table. */
+struct ScreenRect {
+    s32 x, y, width, height;
+};
+
+/* The game flag block's counter at +0x15BC. */
+struct GameFlagBlock {
+    u8 unk0000[0x15BC];
+    s32 pendingCount;
+};
+
+/* The game state's block at +0x400 holds the navigation flags. */
+struct GameStateNavBlock {
+    u8 unk00[0x60];
+    u8 alternateNaviMap;
+    u8 unk61;
+    u8 naviMapPending;
+};
 
 extern "C" {
+void rectRecRead(u32 group, u32 id, s32 *x, s32 *y, s32 *width, s32 *height);
 
-int uiSpriteSetKeyframe(int, int, int);
-int dialogOpen(...);
-int dialogClose(int);
-int infoWinExpandAndSetText(...);
-int infoWinSetTimer(...);
-int FUN_002d22c0(int);
-int naviRequestSelectedMap(void);
-int lmapEnableSceneState(void);
-int sysPlayVoice(int);
-int rectRecRead(int, int, int *, int *);
-int sub68OwnerGetBlock60(int);
-int naviMainSetValuePair(int, unsigned int **);
-int setFullScreenRect(void);
-int NaviMain_GetCurrentMap(...);
+GameFlagBlock *gameFlagsGetBlock(void);
+s32 gameFlagIsSet(u32 id);
+s32 setFullScreenRect(void);
+s32 gameFlagsClassify(void);
+s32 FUN_004d0420(ScreenRect rect);
+u32 naviGetActiveStateValue(void *scene);
+NavigationPoint *sub68OwnerGetBlock60(void *scene);
+void naviMainSetValuePair(void *scene, const NavigationPoint *position);
+void naviRequestSelectedMap(void);
+void sysPlayVoice(u32 id);
+void uiSpriteSetKeyframe(void *sprite, s32 keyframe, s32 frame);
+void dialogClose(s32 immediate);
+void dialogOpen(s32 mode);
+s32 FUN_002d22c0(s32 value);
+void lmapEnableSceneState(void);
+s32 lmapSceneGetUnk0(void);
+s32 mapIfGetState(void);
+void infoWinExpandAndSetText(const void *text);
+void infoWinSetTimer(s32 frames);
+extern u8 DAT_00532760[];
+extern GameStateA g_gameState;
+extern GameStateNavBlock DAT_005f19fc;
 
-/* stack frame of param_1: 5 slot(s), 20 byte(s) */
-typedef struct {
-    unsigned int sp2C; /* 0x2c: local_2c */
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_1_stack;
-
-extern unsigned char DAT_00532760; /* 0x532760 */
-extern int g_gameState; /* 0x5f15fc */
-extern signed char DAT_005f1614; /* 0x5f1614 */
-extern signed char DAT_005f161d; /* 0x5f161d */
-extern signed char DAT_005f1a5c; /* 0x5f1a5c */
-extern signed char DAT_005f1a5e; /* 0x5f1a5e */
-
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: uiSpriteSetKeyframe. */
-extern int gameFlagIsSet(unsigned int);
-/* Supplied declaration required: dialogOpen. */
-/* Supplied declaration required: dialogClose. */
-/* Supplied declaration required: infoWinExpandAndSetText. */
-/* Supplied declaration required: infoWinSetTimer. */
-/* Supplied declaration required: FUN_002d22c0. */
-extern int lmapSceneGetUnk0(void);
-extern int mapIfGetState(void);
-/* Supplied declaration required: naviRequestSelectedMap. */
-extern int gameFlagsClassify(void);
-/* Supplied declaration required: lmapEnableSceneState. */
-/* Supplied declaration required: sysPlayVoice. */
-/* Supplied declaration required: rectRecRead. */
-/* Supplied declaration required: sub68OwnerGetBlock60. */
-extern int naviGetActiveStateValue(int);
-/* Supplied declaration required: naviMainSetValuePair. */
-/* Supplied declaration required: setFullScreenRect. */
-/* Supplied declaration required: FUN_004d0420. */
-/* Supplied declaration required: NaviMain_GetCurrentMap. */
-
-
-unsigned int FUN_00489480(int param_1)
-
+// Handles the navigation map button: starts the map change or the input feedback and reports whether it did.
+u32 FUN_00489480(NaviInputPanel *panel)
 {
-/* irregular: 1 goto(s); 15 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int *temp_v4;
-  unsigned int *temp_v5;
-  int temp_v6;
-  int uStack_3c;
-  int uStack_38;
-  int uStack_34;
-  int temp_v7;
-  int temp_v8;
-  
-  temp_v8 = gameFlagsGetBlock();
-  temp_v0 = *(unsigned int *)(param_1 + 0x10);
-  temp_v3 = 0;
-  if (((temp_v0 & 0x2000000) != 0) && ((setFullScreenRect(), temp_v0 == 0 || (DAT_005f1614 != '\0')))) {
-    *(unsigned int *)(param_1 + 0x10) = *(unsigned int *)(param_1 + 0x10) & 0xfdffffff;
-  }
-  temp_v1 = gameFlagIsSet(0x49a);
-  if (temp_v1 == 0) {
-    return 0;
-  }
-  temp_v1 = gameFlagIsSet(0xc);
-  if ((temp_v1 != 0) && (temp_v1 = gameFlagIsSet(0x10), temp_v1 == 0)) {
-    return 0;
-  }
-  temp_v7 = param_1 + 0x4cc;
-  NaviMain_GetCurrentMap();
-  temp_v1 = gameFlagsClassify();
-  if (temp_v1 == 2 || temp_v1 == 3) {
-    return 0;
-  }
-  temp_v5 = (unsigned int *)&uStack_34;
-  temp_v4 = (unsigned int *)&uStack_38;
-  rectRecRead(0x13,0x112d,&temp_v6,&uStack_3c);
-  if (DAT_005f1614 != '\0') {
-    return 0;
-  }
-  FUN_004d0420(temp_v6,uStack_3c,uStack_38,uStack_34);
-  if (temp_v6 != 0) {
-    if (DAT_005f161d != '\0') {
-      if (DAT_005f1a5e != '\0') {
-        temp_v1 = naviGetActiveStateValue(temp_v7);
-        temp_v2 = NaviMain_GetCurrentMap(temp_v7);
-        if ((temp_v1 != temp_v2) && (DAT_005f1a5c == '\0')) {
-          sysPlayVoice(0x100020f);
-          naviRequestSelectedMap();
-          temp_v1 = 0;
-          do {
-            uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
-            temp_v1 = temp_v1 + 1;
-          } while (temp_v1 < 6);
-          *(unsigned char *)(param_1 + 0x20644) = 1;
-          goto LAB_00489788;
+    GameFlagBlock *settings = gameFlagsGetBlock();
+    u32 handled = 0;
+    if ((panel->flags & 0x2000000) && (setFullScreenRect() == 0 || g_gameState.inputBlocked != 0))
+        panel->flags &= ~0x2000000;
+    if (gameFlagIsSet(0x49A) == 0)
+        return handled;
+    if (gameFlagIsSet(12) != 0 && gameFlagIsSet(16) == 0)
+        return handled;
+    NaviMain_GetCurrentMap(reinterpret_cast<int>(panel->scene));
+    s32 kind = gameFlagsClassify();
+    if (kind == 2 || kind == 3)
+        return handled;
+    ScreenRect rect;
+    rectRecRead(0x13, 0x112D, &rect.x, &rect.y, &rect.width, &rect.height);
+    if (g_gameState.inputBlocked != 0)
+        return handled;
+    s32 hit = FUN_004d0420(rect);
+    if (hit != 0) {
+        if (g_gameState.controllerFlags.primary == 0) {
+            if (lmapSceneGetUnk0() == 1 || g_gameState.mode >= 100) {
+                sysPlayVoice(0x10000D3);
+                panel->mode = 5;
+                panel->state = 0;
+                panel->step = 13;
+                FUN_002d22c0(1);
+                for (s32 i = 0; i < 6; ++i)
+                    uiSpriteSetKeyframe(panel->sprites[i], 4, 0);
+                panel->infoPending = 1;
+                if (settings->pendingCount != 0)
+                    settings->pendingCount = 0;
+                handled = 1;
+            }
+        } else if (DAT_005f19fc.naviMapPending != 0 &&
+                   naviGetActiveStateValue(panel->scene) != static_cast<u32>(NaviMain_GetCurrentMap(reinterpret_cast<int>(panel->scene))) &&
+                   DAT_005f19fc.alternateNaviMap == 0) {
+            sysPlayVoice(0x100020F);
+            naviRequestSelectedMap();
+            for (s32 i = 0; i < 6; ++i)
+                uiSpriteSetKeyframe(panel->sprites[i], 7, 0);
+            panel->listActive = 1;
+            handled = 1;
+        } else {
+            sysPlayVoice(0x100020F);
+            panel->mode = 5;
+            panel->state = 0;
+            panel->step = 13;
+            NavigationPoint point = *sub68OwnerGetBlock60(panel->scene);
+            point.x = 0.0f;
+            point.y = 0.0f;
+            naviMainSetValuePair(panel->scene, &point);
+            panel->selectedMarker = panel->selectedIcon;
+            panel->refreshCategory = 1;
+            panel->refreshMarker = 1;
+            for (s32 i = 0; i < 6; ++i)
+                uiSpriteSetKeyframe(panel->sprites[i], 7, 0);
+            dialogClose(1);
+            if (naviGetActiveStateValue(panel->scene) == static_cast<u32>(NaviMain_GetCurrentMap(reinterpret_cast<int>(panel->scene))))
+                g_gameState.navigation.naviMapPending = 0;
+            if (DAT_005f19fc.alternateNaviMap != 0) {
+                FUN_002d22c0(0);
+                lmapEnableSceneState();
+            } else {
+                FUN_002d22c0(0);
+            }
+            handled = 1;
         }
-      }
-      sysPlayVoice(0x100020f);
-      *(unsigned char *)(param_1 + 0x5c) = 5;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned int *)(param_1 + 4) = 0xd;
-      sub68OwnerGetBlock60(temp_v7);
-      temp_v4 = (unsigned int *)0x0;
-      temp_v5 = (unsigned int *)0x0;
-      naviMainSetValuePair(temp_v7,&temp_v4);
-      temp_v1 = 0;
-      *(char *)(param_1 + 100) = (char)*(unsigned int *)(param_1 + 0x20510);
-      *(unsigned char *)(param_1 + 0x7b90) = 1;
-      *(unsigned char *)(param_1 + 0x7b91) = 1;
-      do {
-        uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,7,0);
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-      dialogClose(1);
-      temp_v1 = naviGetActiveStateValue(temp_v7);
-      temp_v2 = NaviMain_GetCurrentMap(temp_v7);
-      if (temp_v1 == temp_v2) {
-        DAT_005f1a5e = '\0';
-      }
-      if (DAT_005f1a5c != '\0') {
-        FUN_002d22c0(0);
-        lmapEnableSceneState();
-      }
-      else {
-        FUN_002d22c0(0);
-      }
     }
-    else {
-      temp_v1 = lmapSceneGetUnk0();
-      if ((temp_v1 != 1) && (g_gameState < 100)) {
-        if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) &&
-            (temp_v1 = mapIfGetState(), temp_v1 == 0)) && (*(char *)(param_1 + 0x65) != '\0')) {
-          infoWinExpandAndSetText(&DAT_00532760);
-          dialogOpen(1);
-          infoWinSetTimer(0xffffffff);
-          *(unsigned char *)(param_1 + 0x65) = 0;
-        }
-        return temp_v3;
-      }
-      sysPlayVoice(0x10000d3);
-      *(unsigned char *)(param_1 + 0x5c) = 5;
-      *(unsigned int *)(param_1 + 8) = 0;
-      *(unsigned int *)(param_1 + 4) = 0xd;
-      FUN_002d22c0(1);
-      temp_v1 = 0;
-      do {
-        uiSpriteSetKeyframe(param_1 + temp_v1 * 0x8c + 0xc40,4,0);
-        temp_v1 = temp_v1 + 1;
-      } while (temp_v1 < 6);
-      *(unsigned char *)(param_1 + 0x65) = 1;
-      if (*(int *)(temp_v8 + 0x15bc) != 0) {
-        *(int *)(temp_v8 + 0x15bc) = 0;
-      }
+    if (DAT_005f19fc.alternateNaviMap == 0 && g_gameState.controllerFlags.primary != 0 && mapIfGetState() == 0 &&
+        panel->infoPending != 0) {
+        infoWinExpandAndSetText(DAT_00532760);
+        dialogOpen(1);
+        infoWinSetTimer(-1);
+        panel->infoPending = 0;
     }
-LAB_00489788:
-    temp_v3 = 1;
-  }
-  if ((((DAT_005f1a5c == '\0') && (DAT_005f161d != '\0')) && (temp_v1 = mapIfGetState(), temp_v1 == 0))
-     && (*(char *)(param_1 + 0x65) != '\0')) {
-    infoWinExpandAndSetText(&DAT_00532760);
-    dialogOpen(1);
-    infoWinSetTimer(0xffffffff);
-    *(unsigned char *)(param_1 + 0x65) = 0;
-  }
-  return temp_v3;
+    return handled;
 }
-
-} /* extern "C" */
+}

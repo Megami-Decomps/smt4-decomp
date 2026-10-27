@@ -1,18 +1,10 @@
-/* NON_MATCHING: state/timer store-tail sharing and entry-name literal placement differ; cursor completion getter and synchronization/release contracts are recovered. */
+#include "classes/Obj536044.h"
 #include "common.h"
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 
 /* The appraisal shop scene. */
-struct AppraisalShop {
-    /* 0x0000 */ u8 unk0000[4];
-    /* 0x0004 */ s32 mode;
-    /* 0x0008 */ s32 state;
-    /* 0x000C */ s32 timer;
-    /* 0x0010 */ s32 previousMode;
-    /* 0x0014 */ u8 unk0014[0x170];
-    /* 0x0184 */ u32 tableGroup;
-    /* 0x0188 */ u8 unk0188[4];
-    /* 0x018C */ u32 script;
+struct AppraisalShop : public Obj536044 {
+    u32 script() const { return reinterpret_cast<u32>(controller); }
     /* 0x0190 */ u8 unk0190[0x214];
     /* 0x03A4 */ f32 cursorPosition[2];
     /* 0x03AC */ u8 unk03AC[0x20];
@@ -78,87 +70,89 @@ s32 messageMainIsIdle(void);
 u32 vec2GetXInt(void *vec);
 u32 vec2GetYInt(void *vec);
 s32 flaggedValueHolderGetTotal(void *values);
+}
+
+/* The scene viewed as the appraisal shop. */
+static __inline AppraisalShop *appraisalShop(Obj536044 *scene)
+{
+    return static_cast<AppraisalShop *>(scene);
+}
 
 /* Steps the appraisal shop through its intro, appraisal pick and exit. */
-void _ZN9Obj53604412FUN_00498ac0Ev(AppraisalShop *shop)
+void Obj536044::FUN_00498ac0()
 {
-    switch (shop->state) {
+    switch (appraisalShop(this)->substate) {
     case 0:
-        scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->tableGroup, "shop_Kantei1"));
-        scrRunOpcodesStub(shop->script);
-        shop->timer = 0;
-        shop->cleared[0] = 0;
-        shop->cleared[1] = 0;
-        shop->cleared[2] = 0;
-        shop->clearedFlags[0] = 0;
-        shop->clearedFlags[1] = 0;
-        shop->selection = -1;
-        shop->state = 1;
+        scrScriptProcessStartEntry(appraisalShop(this)->script(), tableGroupFindEntryIndex(appraisalShop(this)->tableGroup, "shop_Kantei1"));
+        scrRunOpcodesStub(appraisalShop(this)->script());
+        appraisalShop(this)->timer = 0;
+        appraisalShop(this)->cleared[0] = 0;
+        appraisalShop(this)->cleared[1] = 0;
+        appraisalShop(this)->cleared[2] = 0;
+        appraisalShop(this)->clearedFlags[0] = 0;
+        appraisalShop(this)->clearedFlags[1] = 0;
+        appraisalShop(this)->selection = -1;
+        appraisalShop(this)->substate = 1;
         return;
     case 1:
-        scrRunOpcodesStub(shop->script);
-        shop->timer++;
-        if (shop->timer >= 10 && (FUN_004d0584() != 0 || scrRunOpcodesStub(shop->script) == 2)) {
+        scrRunOpcodesStub(appraisalShop(this)->script());
+        appraisalShop(this)->timer++;
+        if (appraisalShop(this)->timer >= 10 && (FUN_004d0584() != 0 || scrRunOpcodesStub(appraisalShop(this)->script()) == 2)) {
             sendEvent100020E();
             obj04Finish();
-            shop->state = 2;
-            shop->timer = 0;
+            appraisalShop(this)->substate = 2;
+            appraisalShop(this)->timer = 0;
         }
         return;
     case 2:
         if (messageMainIsIdle() != 0) {
-            scrScriptProcessStartEntry(shop->script, tableGroupFindEntryIndex(shop->tableGroup, "shop_Kantei2"));
-            scrRunOpcodesStub(shop->script);
-            uiSpriteBankApplyPreset(shop->sprites, 0);
+            scrScriptProcessStartEntry(appraisalShop(this)->script(), tableGroupFindEntryIndex(appraisalShop(this)->tableGroup, "shop_Kantei2"));
+            scrRunOpcodesStub(appraisalShop(this)->script());
+            uiSpriteBankApplyPreset(appraisalShop(this)->sprites, 0);
             sysPlaySe(0x79);
-            shop->state = 3;
+            appraisalShop(this)->substate = 3;
         }
         return;
     case 3: {
-        UiAnimatedSprite *cursor = &shop->animation.cursor;
+        UiAnimatedSprite *cursor = &appraisalShop(this)->animation.cursor;
         FUN_00167458(cursor, 0);
         u32 y = vec2GetYInt(cursor);
         u32 x = vec2GetXInt(cursor);
-        pointConvertToFloat(shop->cursorPosition, x, y);
-        scrRunOpcodesStub(shop->script);
+        pointConvertToFloat(appraisalShop(this)->cursorPosition, x, y);
+        scrRunOpcodesStub(appraisalShop(this)->script());
         if (uiSpriteGetCompletionState(cursor) != 0) {
-            panelSetTarget(shop->panel, 0);
-            shop->state = 4;
+            panelSetTarget(appraisalShop(this)->panel, 0);
+            appraisalShop(this)->substate = 4;
         }
         return;
     }
     case 4: {
-        scrRunOpcodesStub(shop->script);
-        FlaggedMenuList *values = reinterpret_cast<FlaggedMenuList *>(shop->flaggedValues);
-        menuSynchronizeFlaggedSelection(reinterpret_cast<MenuSelectionScan *>(shop->menu), values);
-        (*(void (**)(void **, void *))((u8 *)*shop->menuOwner + 0xC))(shop->menuOwner, values);
-        sub10OwnerStart(values);
-        entryDispatchUpdate(shop->sprites, 2);
-        entryDispatchUpdate(shop->sprites, 0xC);
-        s32 total = flaggedValueHolderGetTotal(values);
-        screenShowMessage(shop->messages[total * 3]);
+        scrRunOpcodesStub(appraisalShop(this)->script());
+        menuSynchronizeFlaggedSelection(reinterpret_cast<MenuSelectionScan *>(appraisalShop(this)->menu), reinterpret_cast<FlaggedMenuList *>(appraisalShop(this)->flaggedValues));
+        (*(void (**)(void **, void *))((u8 *)*appraisalShop(this)->menuOwner + 0xC))(appraisalShop(this)->menuOwner, appraisalShop(this)->flaggedValues);
+        sub10OwnerStart(appraisalShop(this)->flaggedValues);
+        entryDispatchUpdate(appraisalShop(this)->sprites, 2);
+        entryDispatchUpdate(appraisalShop(this)->sprites, 0xC);
+        s32 total = flaggedValueHolderGetTotal(appraisalShop(this)->flaggedValues);
+        screenShowMessage(appraisalShop(this)->messages[total * 3]);
         if (FUN_004d0584() != 0) {
             sendEvent100020E();
             obj04Finish();
-            shop->state = 5;
-            shop->timer = 0;
-            panelSetMode3(shop->panel, 0);
+            appraisalShop(this)->substate = 5;
+            appraisalShop(this)->timer = 0;
+            panelSetMode3(appraisalShop(this)->panel, 0);
         }
         return;
     }
     case 5:
         if (messageMainIsIdle() != 0 && panelStateIs0() == 1) {
-            FUN_004963f8(shop);
-            releaseEntriesB(reinterpret_cast<CountAt5A *>(shop->menuOwner));
-            releaseEntriesA(reinterpret_cast<CountAt30 *>(shop->menu));
-            for (s32 i = 0; i < shop->touchRegionCount; i++)
+            FUN_004963f8(appraisalShop(this));
+            releaseEntriesB(reinterpret_cast<CountAt5A *>(appraisalShop(this)->menuOwner));
+            releaseEntriesA(reinterpret_cast<CountAt30 *>(appraisalShop(this)->menu));
+            for (s32 i = 0; i < appraisalShop(this)->touchRegionCount; i++)
                 ifTouchRegionRemove();
-            shop->previousMode = shop->mode;
-            shop->mode = 5;
-            shop->state = 0;
+            appraisalShop(this)->changeState(5);
         }
         return;
     }
 }
-
-} /* extern "C" */

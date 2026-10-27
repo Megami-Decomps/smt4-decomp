@@ -1,4 +1,3 @@
-/* NON_MATCHING: Animation replacement/binding is complete; only the evaluation callback pointer/context and float-argument loads are scheduled differently. */
 #include "classes/AsdAllocatorObject.h"
 
 class SelectedAnimationInstance {
@@ -74,7 +73,10 @@ extern "C" void FUN_0020fff4(SelectedAnimationOwner *owner, s32 index, f32 time,
     bindings->dirty = 1;
     if (time != 0.0f) {
         animation = owner->animation;
-        f32 value = animation->evaluate(animation->context, animation->first, animation->second, time);
+        void *context = animation->context;
+        f32 first = animation->first;
+        f32 second = animation->second;
+        f32 value = animation->evaluate(context, first, second, time);
         animation->previousValue = animation->value;
         animation->value = value;
         animation->dirty = 1;

@@ -40,7 +40,7 @@ u32 FUN_00340558(BattleStageModel *stage)
             return 0;
         }
     }
-    for (index = 0; index < 3; index++) {
+    for (index = 0; index < 3; ++index) {
         if (stage->scene.nodes[index] != NULL) {
             FUN_002a0428(stage->scene.nodes[index], 1);
             FUN_002e1230(stage->scene.nodes[index], 1);

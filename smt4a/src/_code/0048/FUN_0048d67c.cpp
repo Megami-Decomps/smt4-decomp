@@ -42,21 +42,19 @@ void FUN_0048d67c(MapView *view)
 {
     u8 *flags = gameFlagsGetBlock();
     f32 *camera = sub68OwnerGetBlock60(view->cameraOwner);
-    MapMarker *markers = (MapMarker *)((u8 *)view + 0x84F8);
     s32 count = view->markerCount;
-    s32 radius = view->markerRadius;
     if (flags[0xD8E] != 0xC) {
         s32 dx = (s32)((f32)(view->viewWidth / 2) - camera[0]);
         s32 dy = (s32)((f32)(view->viewHeight / 2) - camera[1]);
         for (s32 i = 0; i < count; i++) {
-            MapMarker *marker = &markers[i];
+            MapMarker *marker = &((MapMarker *)((u8 *)view + 0x84F8))[i];
             if (!((marker->active && marker->visible) || DAT_005f1c60 != 0))
                 continue;
             if (marker->id != -1) {
-                marker->screenX = (s32)((marker->width - ((f32)dx - 160.0f)) - (f32)(radius / 2));
-                marker->screenY = (s32)((marker->height - ((f32)dy - 120.0f)) - (f32)(radius / 2));
-                marker->screenWidth = radius + 0xC;
-                marker->screenHeight = radius + 0xC;
+                marker->screenX = (s32)((marker->width - ((f32)dx - 160.0f)) - (f32)((view->markerRadius) / 2));
+                marker->screenY = (s32)((marker->height - ((f32)dy - 120.0f)) - (f32)((view->markerRadius) / 2));
+                marker->screenWidth = (view->markerRadius) + 0xC;
+                marker->screenHeight = (view->markerRadius) + 0xC;
             } else {
                 u32 width = (u32)(marker->width * 0.5f);
                 u32 height = (u32)(marker->height * 0.5f);
@@ -70,14 +68,14 @@ void FUN_0048d67c(MapView *view)
         s32 dx = (s32)((f32)view->viewWidth - camera[0]);
         s32 dy = (s32)((f32)view->viewHeight - camera[1]);
         for (s32 i = 0; i < count; i++) {
-            MapMarker *marker = &markers[i];
+            MapMarker *marker = &((MapMarker *)((u8 *)view + 0x84F8))[i];
             if (!((marker->active && marker->visible) || DAT_005f1c60 != 0))
                 continue;
             if (marker->id != -1) {
-                marker->screenX = (s32)((marker->x - ((f32)dx - 160.0f)) - (f32)radius);
-                marker->screenY = (s32)((marker->y - ((f32)dy - 120.0f)) - (f32)radius);
-                marker->screenWidth = 0x18 + radius * 2;
-                marker->screenHeight = 0x18 + radius * 2;
+                marker->screenX = (s32)((marker->x - ((f32)dx - 160.0f)) - (f32)(view->markerRadius));
+                marker->screenY = (s32)((marker->y - ((f32)dy - 120.0f)) - (f32)(view->markerRadius));
+                marker->screenWidth = 0x18 + (view->markerRadius) * 2;
+                marker->screenHeight = 0x18 + (view->markerRadius) * 2;
             } else {
                 u32 width = (u32)marker->width;
                 u32 height = (u32)marker->height;

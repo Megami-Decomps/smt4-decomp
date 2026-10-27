@@ -1,4 +1,4 @@
-/* NON_MATCHING: corrected integral x/y/tag contract and removed softfp workaround; y/tag spill-register order still differs. */
+/* NON_MATCHING: y is a one-word int/float union parameter (retail copies it through VFP); y/tag spill registers now match, only the second vstr/stm-base scheduling (ip vs r6) differs. */
 #include "common.h"
 #include "shard/W9_W9Match8_WorkRecords.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -19,10 +19,11 @@ typedef struct TexDrawFile {
     /* 0x04 */ TexDrawItemList *list;
 } TexDrawFile;
 
+union Word { s32 i; f32 f; };
 typedef struct TexDrawParams {
     /* 0x00 */ u32 id;
     /* 0x04 */ s32 x;
-    /* 0x08 */ s32 y;
+    /* 0x08 */ Word y;
     /* 0x0C */ u32 tag;
     /* 0x10 */ u32 unk10;
     /* 0x14 */ s32 width;
@@ -36,7 +37,7 @@ typedef struct TexDrawParams {
 u32 FUN_00184efc(TexDrawFile *file, TexDrawItem *item, TexDrawParams *params);
 
 /* Draws texture `texture` of `table` at (x, y) with the given size; does nothing for an empty size. */
-u32 FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, s32 y, s32 width, s32 height, u32 tag)
+u32 FUN_00185dd4(u32 id, u32 table, s32 texture, s32 x, Word y, s32 width, s32 height, u32 tag)
 {
     TexDrawParams params;
 

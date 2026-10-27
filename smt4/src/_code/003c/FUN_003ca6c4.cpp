@@ -1,214 +1,159 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003ca6c4` (_code @ 0x3ca6c4, 0x4cc bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the command controller target setup (same row count as retail); register allocation of the loop indices/ pointers and the literal-pool offset loads of the action table differ. */
+#include "battle/BattleCommandController.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/BattleHelpers_Smt4.h"
+#include "battle/btlAction.h"
+#include "gamedata/DataTable40.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "shard/W4_Match6_BtlEntry.h"
+
+/* The battle UI's position argument, passed by value. */
+struct UiPosition {
+    f32 x, y, z;
+};
+
+/* The action record's variant byte at 0x3c. */
+struct CommandActionView {
+    u8 unk00[0x3c];
+    s8 variant;
+};
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+extern u32 g_btlUiBlock;
+u32 FUN_003aeaa4(u32 ui, u16 kind, u32 value, s16 first, s16 second, u16 third, UiPosition position);
+void FUN_003ae850(u32 ui, void *arg, s32 count);
+SkillLinkRecord *dataTable08Sub1GetRecord(s32 id);
+void rt_memclr(void *block, u32 size);
+void __aeabi_memset4(void *block, u32 size, s32 value);
 
-int btlMainFindEntryByListedId(unsigned int *, int);
-int dataTable40FindById(void);
-int dataTable08Sub1GetRecord(void);
-int rt_memclr(int, int);
-int __aeabi_memset4(unsigned int *, int, unsigned int);
-int FUN_003ae850(unsigned int, int, int);
-int FUN_003aeaa4(unsigned int, int, int, int, int, int);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned int g_btlAction; /* 0x434278 */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: btlMainFindEntryByListedId. */
-/* Supplied declaration required: dataTable40FindById. */
-/* Supplied declaration required: dataTable08Sub1GetRecord. */
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: FUN_003ae850. */
-/* Supplied declaration required: FUN_003aeaa4. */
-
-
-void FUN_003ca6c4(int *param_1,unsigned int *param_2)
-
+/* Skills of category 2, 3 and 4 make the window's choice unavailable to the ordinary targets. */
+static __inline bool skillHasSpecialCategory(const Table04Record *skill)
 {
-/* irregular: 4 goto(s); 8 native warning(s); review required */
-  unsigned char temp_v0;
-  unsigned char temp_v1;
-  short temp_v2;
-  unsigned char temp_v3;
-  unsigned int temp_v4;
-  int temp_v5;
-  unsigned int *puVar7;
-  unsigned int temp_v6;
-  int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned int *puVar12;
-  int temp_v10;
-  
-  if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x40) != 0) {
-    temp_v4 = *param_2 | 0x80;
-    *param_2 = temp_v4;
-  }
-  else if ((*(unsigned int *)(*param_1 + 0x44a0) & 0x100) != 0) {
-    temp_v4 = *param_2 | 0x1000;
-    *param_2 = temp_v4;
-  }
-  temp_v3 = 1;
-  temp_v10 = (int)*(short *)(param_2[10] + 0x14e);
-  temp_v2 = *(short *)(param_2[10] + 0x14c);
-  temp_v4 = *(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + (unsigned int)(unsigned short)param_2[0xb] * 0x288);
-  temp_v5 = temp_v10;
-  dataTable40FindById();
-  dataTable08Sub1GetRecord();
-  if (temp_v2 != 2) {
-    if (temp_v2 == 8) {
-      temp_v8 = 0;
-      if (temp_v10 != 0) {
-        temp_v8 = (unsigned int)*(unsigned short *)(temp_v10 + 0x62);
-      }
-      if ((!(temp_v10 == 0 || temp_v8 == 0)) &&
-         ((dataTable40FindById(), temp_v8 == 0 ||
-          (temp_v8 = (*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5,
-          !((temp_v8 != 2 && temp_v8 != 3) && temp_v8 != 4))))) {
-        temp_v3 = 0;
-      }
-    }
-  }
-  else if ((temp_v5 != 0) &&
-          (temp_v8 = (*(unsigned int *)(temp_v5 + 0x28) & 0x1ff) >> 5,
-          !((temp_v8 != 2 && temp_v8 != 3) && temp_v8 != 4))) {
-    temp_v3 = 0;
-  }
-  temp_v10 = 0x6d;
-  temp_v5 = 0;
-  do {
-    temp_v10 = temp_v10 - 1;
-    temp_v7 = temp_v5 * 0x114 + 0x50;
-    temp_v8 = *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v7);
-    *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v7) = temp_v8 & 0xfffffffb;
-    *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v7) = temp_v8 & 0xfffffff3;
-    temp_v5 = temp_v5 + 1;
-  } while (temp_v10 != 0);
-  param_2[0x169] = 0xffffffff;
-  temp_v5 = 0;
-  do {
-    temp_v8 = (unsigned int)*(short *)(*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114 + 0x60);
-    if (((-1 < (int)temp_v8) &&
-        (temp_v6 = *(unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v8 * 0x288), (temp_v6 & 1) != 0)) &&
-       ((temp_v6 & 0x40) == 0)) {
-      if (temp_v3) {
-        if ((temp_v4 & 10) != 0) {
-          temp_v6 = temp_v6 & 0x10;
-joined_r0x003ca8c0:
-          if (temp_v6 == 0) goto LAB_003ca908;
-        }
-        else if ((temp_v4 & 0x10) != 0) {
-          temp_v6 = temp_v6 & 0x10;
-joined_r0x003ca8d4:
-          if (temp_v6 != 0) goto LAB_003ca908;
-        }
-      }
-      else {
-        if ((temp_v4 & 10) != 0) {
-          temp_v6 = temp_v6 & 10;
-          goto joined_r0x003ca8c0;
-        }
-        if ((temp_v4 & 0x10) != 0) {
-          temp_v6 = temp_v6 & 10;
-          goto joined_r0x003ca8d4;
-        }
-      }
-      if ((int)param_2[0x169] < 0) {
-        param_2[0x169] = temp_v8;
-      }
-      temp_v10 = temp_v5 * 0x114 + 0x50;
-      *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v10) =
-           *(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v10) | 4;
-    }
-LAB_003ca908:
-    temp_v5 = temp_v5 + 1;
-    if (temp_v5 >= 0x6d) {
-      __aeabi_memset4(param_2 + 0x51,0x214,0xffffffff);
-      __aeabi_memset4(param_2 + 0xd6,0x214,0xffffffff);
-      temp_v10 = 0;
-      temp_v5 = 0;
-      do {
-        puVar7 = (unsigned int *)*param_1;
-        temp_v9 = puVar7[0x7a6] + temp_v10 * 0x114;
-        temp_v7 = temp_v5;
-        if ((*(unsigned int *)(temp_v9 + 0x50) & 4) != 0 && (*(unsigned int *)(temp_v9 + 0x50) & 0x400) != 0) {
-          btlMainFindEntryByListedId(puVar7,(int)*(short *)(temp_v9 + 0x62));
-          if (((*puVar7 & 0x10) != 0) &&
-             (((*puVar7 & 0x100) == 0 || ((short)puVar7[2] == *(short *)(temp_v9 + 0x62))))) {
-            temp_v4 = g_btlUiBlock;
-            FUN_003aeaa4(g_btlUiBlock,*(unsigned short *)((int)puVar7 + 0xce),
-                         (int)*(char *)(temp_v9 + 0x3c),(int)*(short *)((int)puVar7 + 0x1b6),
-                         (int)*(short *)((int)puVar7 + 0x1ba),*(unsigned short *)((int)puVar7 + 0x1c6));
-            temp_v7 = temp_v5 + 1;
-            param_2[temp_v5 + 0x51] = temp_v4;
-            param_2[temp_v5 + 0xd6] = (int)*(short *)((int)puVar7 + 0x6e);
-          }
-        }
-        temp_v10 = temp_v10 + 1;
-        temp_v5 = temp_v7;
-      } while (temp_v10 < 0x85);
-      FUN_003ae850(g_btlUiBlock,*param_1 + 0x1e8c,5);
-      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(param_2 + 0xe), 0x85));
-      rt_memclr((int)param_2 + 0xbd,0x85);
-      g_btlAction = 0xffffffff;
-      temp_v5 = 0;
-      do {
-        if ((*(unsigned int *)(*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114 + 0x50) & 4) != 0) {
-          temp_v2 = *(short *)(*(int *)(*param_1 + 0x1e98) + temp_v5 * 0x114 + 0x60);
-          if (-1 < temp_v2) {
-            *(char *)((int)param_2 + temp_v2 + 0xbd) = (char)temp_v2;
-          }
-        }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x85);
-      temp_v5 = 0;
-      temp_v10 = 0x6c;
-      while( 1 ) {
-        do {
-          temp_v0 = *(unsigned char *)((int)param_2 + temp_v10 + 0xbc);
-          temp_v7 = *(int *)(*param_1 + 0x1fc0);
-          puVar7 = (unsigned int *)(temp_v7 + (unsigned int)temp_v0 * 0x288);
-          temp_v4 = *puVar7;
-          if ((((temp_v4 & 1) != 0) && ((temp_v4 & 0x40) == 0)) &&
-             (((temp_v4 & 0x10) != 0 && ((temp_v4 & 0x100) == 0)))) {
-            temp_v1 = *(unsigned char *)((int)param_2 + temp_v10 + 0xbd);
-            puVar12 = (unsigned int *)(temp_v7 + (unsigned int)temp_v1 * 0x288);
-            temp_v4 = *puVar12;
-            if (((((temp_v4 & 1) != 0) && ((temp_v4 & 0x40) == 0)) && ((temp_v4 & 0x10) != 0)) &&
-               (((temp_v4 & 0x100) == 0 &&
-                (temp_v7 = *(int *)(*param_1 + 0x1e98),
-                *(float *)(temp_v7 + (short)puVar12[2] * 0x114 + 0xc) <
-                *(float *)(temp_v7 + (short)puVar7[2] * 0x114 + 0xc))))) {
-              *(unsigned char *)((int)param_2 + temp_v10 + 0xbd) = temp_v0;
-              *(unsigned char *)((int)param_2 + temp_v10 + 0xbc) = temp_v1;
-            }
-          }
-          temp_v10 = temp_v10 - 1;
-        } while (temp_v5 < temp_v10);
-        temp_v5 = temp_v5 + 1;
-        if (temp_v5 >= 0x6c) break;
-        temp_v10 = 0x6c;
-      }
-      temp_v5 = 0;
-      do {
-        if (*(char *)((int)param_2 + temp_v5 + 0xbd) != '\0') {
-          param_2[0x169] = (unsigned int)*(unsigned char *)((int)param_2 + temp_v5 + 0xbd);
-          return;
-        }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x6d);
-      return;
-    }
-  } while( 1 );
+    u32 category = skill->itemProperties.category;
+    return category == 2 || category == 3 || category == 4;
 }
 
-} /* extern "C" */
+/* Opens the window flags for the open menu, marks the targets the window can pick and orders them by position. */
+void FUN_003ca6c4(BtlMainState **block, CommandState *state)
+{
+    if (((*block)->battleFlags & 0x40) != 0) {
+        state->flags |= 0x80;
+    } else if (((*block)->battleFlags & 0x100) != 0) {
+        state->flags |= 0x1000;
+    }
+
+    u32 windowFlags = (*block)->entries[state->windowId].flags;
+    CommandSelection *selection = state->selection;
+    bool normal = true;
+    s32 value = selection->value;
+    s32 kind = selection->kind;
+    const Table04Record *skill = dataTable40FindById(value);
+    const SkillLinkRecord *record = dataTable08Sub1GetRecord(value);
+    if (kind == 2) {
+        if (skill != NULL && skillHasSpecialCategory(skill))
+            normal = false;
+    } else if (kind == 8) {
+        if (record != NULL && record->linkedSkill != 0) {
+            if (dataTable40FindById(record->linkedSkill) == NULL || skillHasSpecialCategory(skill))
+                normal = false;
+        }
+    }
+
+    for (s32 remaining = 109, index = 0; remaining != 0; --remaining, ++index) {
+        (*block)->actions[index].status &= ~4;
+        (*block)->actions[index].status &= ~8;
+    }
+    state->targetIndex = -1;
+    for (s32 index = 0; index < 109; ++index) {
+        s32 combatant = (*block)->actions[index].participant.combatantIndex;
+        if (combatant < 0)
+            continue;
+        u32 entryFlags = (*block)->entries[combatant].flags;
+        if ((entryFlags & 1) == 0)
+            continue;
+        if ((entryFlags & 0x40) != 0)
+            continue;
+        if (normal) {
+            if ((windowFlags & 10) != 0) {
+                if ((entryFlags & 0x10) == 0)
+                    continue;
+            } else if ((windowFlags & 0x10) != 0) {
+                if ((entryFlags & 0x10) != 0)
+                    continue;
+            }
+        } else {
+            if ((windowFlags & 10) != 0) {
+                if ((entryFlags & 10) == 0)
+                    continue;
+            } else if ((windowFlags & 0x10) != 0) {
+                if ((entryFlags & 10) != 0)
+                    continue;
+            }
+        }
+        if (state->targetIndex < 0)
+            state->targetIndex = combatant;
+        (*block)->actions[index].status |= 4;
+    }
+
+    __aeabi_memset4(state->windowHandles, sizeof(state->windowHandles), -1);
+    __aeabi_memset4(state->windowSelections, sizeof(state->windowSelections), -1);
+    s32 windowCount = 0;
+    for (s32 index = 0; index < 133; ++index) {
+        BtlActionRecord *action = &(*block)->actions[index];
+        if ((action->status & 4) == 0 || (action->status & 0x400) == 0)
+            continue;
+        BtlEntry *entry = btlMainFindEntryByListedId(reinterpret_cast<SlotManager *>(*block), action->memberId);
+        if ((entry->flags & 0x10) == 0)
+            continue;
+        if ((entry->flags & 0x100) != 0 && entry->members.ids[0] != action->memberId)
+            continue;
+        const CommandActionView *view = reinterpret_cast<const CommandActionView *>(action);
+        state->windowHandles[windowCount] = FUN_003aeaa4(g_btlUiBlock, entry->id, view->variant, entry->maxHp, entry->maxMp, entry->groupMask,
+                     *reinterpret_cast<const UiPosition *>(action->geometry.position));
+        state->windowSelections[windowCount] = entry->selectionIndex;
+        ++windowCount;
+    }
+    FUN_003ae850(g_btlUiBlock, &(*block)->arrangement.unk1E8C, 5);
+    memClear(state->targetMarks, sizeof(state->targetMarks));
+    rt_memclr(state->targetOrder, sizeof(state->targetOrder));
+    g_btlAction.unk00 = 0xffffffff;
+
+    for (s32 index = 0; index < 133; ++index) {
+        if (((*block)->actions[index].status & 4) != 0) {
+            s32 combatant = (*block)->actions[index].participant.combatantIndex;
+            if (combatant >= 0)
+                state->targetOrder[combatant] = combatant;
+        }
+    }
+
+    // Order the targets by their position (insertion by bubbling the smallest up).
+    for (s32 pass = 0; pass < 108; ++pass) {
+        for (s32 slot = 108; pass < slot; --slot) {
+            u8 first = state->targetOrder[slot - 1];
+            BtlEntry *firstEntry = &(*block)->entries[first];
+            if ((firstEntry->flags & 1) == 0 || (firstEntry->flags & 0x40) != 0 ||
+                (firstEntry->flags & 0x10) == 0 || (firstEntry->flags & 0x100) != 0)
+                continue;
+            u8 second = state->targetOrder[slot];
+            BtlEntry *secondEntry = &(*block)->entries[second];
+            if ((secondEntry->flags & 1) == 0 || (secondEntry->flags & 0x40) != 0 ||
+                (secondEntry->flags & 0x10) == 0 || (secondEntry->flags & 0x100) != 0)
+                continue;
+            const BtlActionRecord *firstAction = &(*block)->actions[firstEntry->members.ids[0]];
+            const BtlActionRecord *secondAction = &(*block)->actions[secondEntry->members.ids[0]];
+            if (firstAction->geometry.position[0] > secondAction->geometry.position[0]) {
+                state->targetOrder[slot] = first;
+                state->targetOrder[slot - 1] = second;
+            }
+        }
+    }
+
+    for (s32 index = 0; index < 109; ++index) {
+        if (state->targetOrder[index] != 0) {
+            state->targetIndex = state->targetOrder[index];
+            return;
+        }
+    }
+}
+}

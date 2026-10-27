@@ -1,4 +1,4 @@
-/* NON_MATCHING: cursor pointer now defined in r0 and copied like retail; remaining: r4/r5 assignment of the cursor pointer and page, the hoisted constant 1 (sl here), and the menu-state store order. */
+/* NON_MATCHING: only the menu-state transition tail differs: retail stores the previous state, then the new state with a writeback store, then the zeroed timer; the build hoists the zero and merges the two state stores into one stm. */
 #include "shard/W5_W5Match7_UiQuest.h"
 
 extern "C" {
@@ -15,22 +15,29 @@ void uiSpriteSetImageKeyframe(void *sprite, s32 image, s32 flags);
 s32 campIsState85(void);
 void FUN_00202400(void);
 
+/* Moves the quest menu to `next`, remembering the state it left and restarting its timer. */
+static __inline void uiQuestEnterMenuState(UiQuestApoc *quest, s32 next)
+{
+    quest->previousMenuState = quest->menuState;
+    quest->menuState = next;
+    quest->menuTimer = 0;
+}
+
 // Enter details from the alternate quest list, selecting a special detail page when available.
 void FUN_00334560(void)
 {
     UiQuestApoc *quest = g_uiQuest;
     quest->unk90c = 1;
     uiQuestSpritesCreate();
-    s32 page = resourceRunOperationIfUnblocked(quest->alternateView()->cursor);
-    s32 cursor = FUN_002a4894(quest->alternateView()->cursor);
-    u16 id = quest->alternateView()->list[cursor + page];
+    u16 id = quest->alternateView()->list[resourceRunOperationIfUnblocked(quest->alternateView()->cursor) +
+                                            FUN_002a4894(quest->alternateView()->cursor)];
     FUN_003d498c(id, 1);
-    quest->selectedId = id;
+    u16 selected = quest->selectedId = id;
     UiQuestApoc *current = g_uiQuest;
-    if (!partyEntryBitsBit4(id) && questHasSpecialDetailPage(id)) {
+    if (!partyEntryBitsBit4(selected) && questHasSpecialDetailPage(selected)) {
         s32 index = 0;
         for (; index < current->listState.count; ++index) {
-            if (FUN_002f7730(index, id) == 3)
+            if (FUN_002f7730(index, selected) == 3)
                 break;
         }
         if (current->listState.count <= index)
@@ -44,9 +51,6 @@ void FUN_00334560(void)
     uiSpriteSetImageKeyframe(quest->mainSprite, 8, 0);
     if (campIsState85())
         FUN_00202400();
-    current = g_uiQuest;
-    current->previousMenuState = current->menuState;
-    current->menuState = 1;
-    current->menuTimer = 0;
+    uiQuestEnterMenuState(g_uiQuest, 1);
 }
 }

@@ -30,12 +30,13 @@ extern GameDataBlocks g_gameDataBlocks; /* 0x57f698 */
 /* Stores `value` in the save data slot keyed `key`, using the first free slot when no slot has that key. */
 void FUN_001f50fc(s32 key, s32 value)
 {
+    s32 i;
     SlotBlock *block = &g_gameDataBlocks.save->block;
     KeyedSlot *firstFree = NULL;
     KeyedSlot *found = NULL;
     KeyedSlot *slot;
 
-    for (s32 i = 0; i < 16; i++) {
+    for (i = 0; i < 16; i++) {
         slot = &block->slots[i];
         if (slot->key == 0 && firstFree == NULL) {
             firstFree = slot;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: the grid sub-block pointer (block+0xE00 in r4) now matches retail's prologue; retail keeps 0.0f in s16 for the position vectors where the build moves a zero from a core register (extra saved r9 and frame word). Argument decode (position/size vectors, 20 integer arguments) taken from the retail asm. */
+/* NON_MATCHING: VFP constant allocation only: retail keeps 0.0f in the first saved register s16 and uses six saved VFP registers (d8-d10) where the build lands the zero in s21 and needs seven; the string, jump-table labels and vector initialisers now match. */
 #include "common.h"
 #include "Model/ModelList.h"
 #include "gamedata/GameDataAccess.h"
@@ -46,8 +46,14 @@ void FUN_00332fd8(void)
     s32 gridX = grid->gridX;
     s32 gridY = grid->gridY;
     s32 scene = FUN_003857c8(static_cast<s32>(*reinterpret_cast<f32 *>(reinterpret_cast<u8 *>(block) + 0x15C4)));
-    MapPoint from = {static_cast<f32>(gridX), 0.0f, static_cast<f32>(gridY)};
-    MapPoint to = {static_cast<f32>(grid->targetX), 0.0f, static_cast<f32>(grid->targetY)};
+    MapPoint from;
+    from.x = static_cast<f32>(gridX);
+    from.y = 0.0f;
+    from.z = static_cast<f32>(gridY);
+    MapPoint to;
+    to.x = static_cast<f32>(grid->targetX);
+    to.y = 0.0f;
+    to.z = static_cast<f32>(grid->targetY);
     f32 heading = calcHeadingRoundedToCardinalDirection(mathPositionHeadingDegrees(from, to));
     s8 forced = block->forcedHeading;
     if (forced != 0) {
@@ -61,11 +67,19 @@ void FUN_00332fd8(void)
     f32 radians = heading * 0.017453292f;
     x -= FUN_001bc124(radians) * 250.0f;
     z -= FUN_001bbf0c(radians) * 250.0f;
-    MapPoint position = {x, 0.0f, z};
-    MapPoint size = {200.0f, 200.0f, 120.0f};
+    MapPoint position;
+    position.x = x;
+    position.y = 0.0f;
+    position.z = z;
+    MapPoint size;
+    size.x = 200.0f;
+    size.y = 200.0f;
+    size.z = 120.0f;
     s32 kind = 18;
     if (FUN_002393cc(scene) != 0) {
         switch (scene) {
+        case 0: break;
+        case 1: break;
         case 2: kind = 19; break;
         case 3: kind = 20; break;
         case 4: kind = 21; break;
@@ -74,10 +88,10 @@ void FUN_00332fd8(void)
         case 7: kind = 24; break;
         case 8: kind = 25; break;
         }
-        sceneRegisterBoxEffect(0, 0, "HCT_FOUNTAIN", 82, 36, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, kind, 1, -1, 0,
+        sceneRegisterBoxEffect(0, 0, "T_FOUNTAIN", 82, 36, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, kind, 1, -1, 0,
                                position, size, heading);
     } else {
-        sceneRegisterBoxEffect(0x205, 0, "HCT_FOUNTAIN", 86, 12, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, 1, 1, -1, 0,
+        sceneRegisterBoxEffect(0x205, 0, "T_FOUNTAIN", 86, 12, -1, 0, 0, 0, 0, 0, 0, 0, 0, 13, 1, 1, 1, -1, 0,
                                position, size, heading);
     }
 }

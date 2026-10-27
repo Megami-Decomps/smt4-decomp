@@ -1,2 +1,18 @@
-/* NON_MATCHING: found outside every function: its address is in FUN_00118a84's literal pool; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+struct FUN_0012d050View {
+    u32 f00;
+    u32 f04;
+    u32 f08;
+};
+
+void FUN_0012d050(FUN_0012d050View *self)
+{
+    self->f00 = 0;
+    self->f04 = 0;
+    self->f08 = 0;
+}
+
+} /* extern "C" */

@@ -130,7 +130,7 @@ void FUN_001634b4(unsigned int *param_1)
             afStack_f0[0xf] = 1.0f;
             afStack_f0[0xc] = 0.0f;
             afStack_f0[0xd] = 0.0f;
-            FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+            nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           }
           afStack_f0[5] = (float)param_1[0x10];
           afStack_f0[10] = (float)uVar10 * afStack_f0[5];
@@ -149,11 +149,11 @@ void FUN_001634b4(unsigned int *param_1)
           afStack_f0[0xb] = 0.0f;
           afStack_f0[0xc] = 0.0f;
           afStack_f0[0xd] = 0.0f;
-          FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+          nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           uVar9 = (unsigned int)uVar10;
           if (!bVar1) {
             FUN_001a1c28(afStack_f0);
-            FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+            nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           }
           afStack_f0[3] =
                (float)VectorSignedToFloat((int)*(short *)(param_1 + 6) + ((int)param_1[3] >> 0xc),
@@ -177,7 +177,7 @@ void FUN_001634b4(unsigned int *param_1)
           afStack_f0[0xf] = 1.0f;
           afStack_f0[0xc] = 0.0f;
           afStack_f0[0xd] = 0.0f;
-          FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+          nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
         }
         else {
           afStack_f0[3] =
@@ -201,10 +201,10 @@ void FUN_001634b4(unsigned int *param_1)
           afStack_f0[0xf] = 1.0f;
           afStack_f0[0xc] = 0.0f;
           afStack_f0[0xd] = 0.0f;
-          FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+          nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           if (!bVar1) {
             FUN_001a1c28(afStack_f0);
-            FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+            nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           }
           if (bVar5) {
             afStack_f0[0] = (float)((unsigned long long)uVar10 >> 0x20);
@@ -223,7 +223,7 @@ void FUN_001634b4(unsigned int *param_1)
             afStack_f0[0xc] = 0.0f;
             afStack_f0[0xd] = 0.0f;
             afStack_f0[5] = fVar8;
-            FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+            nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           }
           uVar9 = (unsigned int)uVar10;
           if (*(char *)(param_1 + 0xf) != '\0') {
@@ -247,7 +247,7 @@ void FUN_001634b4(unsigned int *param_1)
             afStack_f0[0xc] = 0.0f;
             afStack_f0[0xd] = 0.0f;
             afStack_f0[0xb] = fVar11;
-            FUN_0019a0fc(auStack_b0,auStack_b0,afStack_f0);
+            nn_math_ARMv6_MTX44MultAsm(auStack_b0,auStack_b0,afStack_f0);
           }
         }
         FUN_00187d04(DAT_0059dbb4,auStack_b0);

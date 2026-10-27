@@ -25,7 +25,7 @@ void FUN_004cc6a4(u16 level, s16 *output, const StatGrowthParameters *parameters
 u32 FUN_003da998(s32 level, const StatGrowthParameters *parameters);
 u32 FUN_003daaf4(s32 level, const StatGrowthParameters *parameters);
 void FUN_0034cb50(s16 *stats, const u16 *skills, u32 count);
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 }
 
 static __inline s32 clampDerivedStat(s32 value)
@@ -40,7 +40,7 @@ static __inline s32 clampDerivedStat(s32 value)
 static __inline s16 derivedMaximumHp(DerivedBattleStats *record)
 {
     s16 maximum = record->derived[0];
-    if (FUN_0018416c(record->id))
+    if (unitHasRankingBonus(record->id))
         maximum = (s16)(s32)(maximum * 1.25f);
     return maximum;
 }

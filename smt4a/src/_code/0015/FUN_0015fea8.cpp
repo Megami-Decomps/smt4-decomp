@@ -23,10 +23,12 @@ u32 FUN_0015fea8(void *, SoundArchiveWrapper *archive, u32 userDataSize)
 {
     u32 playerCount = FUN_00194fd8(archive);
     u32 size = alignSoundPoolBytes(playerCount * 0x5C);
-    for (u32 index = 0; index < playerCount; ++index) {
+    u32 index = 0;
+    while (index < playerCount) {
         ArchivePlayerInfo player = {0, 0};
         if (FUN_00178458(archive, index | 0x04000000, &player) != 0 && player.playerHeapSize != 0)
             size += player.playableSoundMax * (alignSoundPoolBytes(player.playerHeapSize) + 0x40);
+        ++index;
     }
     ArchivePoolCounts counts;
     if (FUN_001784b0(archive, &counts) != 0) {

@@ -6863,3 +6863,56 @@
 002bf0d4 textureRegionBoundsRead inferred [med] reads the bounds of a texture region from a texture file entry
 003b6728 effectAllocateSavedEntries inferred [high] twin of smt4 effectAllocateSavedEntries
 0020a760 partyPanelHandleLayoutToggle inferred [med] party panel key handler: toggles alternate list layout or opens the sort menu
+0041d7a8 _ZN9Obj42099010initializeEP14Obj420990Rectsj evidence size:0x15c; twin of smt4 Obj420990::initialize (0x34c338, same 0x15c size/90 rows), called by the factory FUN_0041d6bc with (filter, config, flags)
+0048738c _ZN9Obj53230013resetHandlersEv evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048e408 _ZN9Obj53230012FUN_0048e408Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+004863f8 _ZN9Obj53230032uiAdvanceConditionalScreenSpriteEv evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+00487124 _ZN9Obj53230012FUN_00487124Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048bd2c _ZN9Obj53230012FUN_0048bd2cEv evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048b8a4 _ZN9Obj53230012FUN_0048b8a4Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048ce38 _ZN9Obj53230012FUN_0048ce38Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048d1c8 _ZN9Obj53230012FUN_0048d1c8Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048d358 _ZN9Obj53230012FUN_0048d358Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048d11c _ZN9Obj53230012FUN_0048d11cEv evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048a4c0 _ZN9Obj53230012FUN_0048a4c0Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048cd48 _ZN9Obj53230043selectionNotificationAdvanceEntryAnimationsEv evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+00490898 _ZN9Obj53230012FUN_00490898Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048bad0 _ZN9Obj53230012FUN_0048bad0Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0048c1c0 _ZN9Obj53230012FUN_0048c1c0Ev evidence member of Obj532300: FUN_0048738c copies the 14-entry member-function-pointer table DAT_00532300 into this+0x13f8 (17 slots)
+0018d9f0 nw_gfx_res_ResGraphicsFile_Setup evidence size:0x4a8 byte-shape twin of smt4 nw_gfx_res_ResGraphicsFile_Setup (0x498): same loops over the file dictionaries calling nw_anim/gfx_res *_Setup; third-party nw
+001931d8 nw_ut_FloatColor_ToPicaU32 evidence size:0xf8 same size/shape as smt4 nw_ut_FloatColor_ToPicaU32; nw::ut::FloatColor packing, third-party
+0019a0fc nn_math_ARMv6_MTX44MultAsm evidence size:0x15c pair of smt4 nn_math_ARMv6_MTX44MultAsm, hand-written VFP asm; third-party
+00557b38 _ZTV9Obj557b38 evidence size:0x20 vtable of the 0x20-byte filter child (address point 0x557b40; slots 0x401794.. = slot6..9/vfunc14)
+00557d28 _ZTV9Obj557d28 evidence size:0x20 vtable of the fading child (address point 0x557d30; slots 0x417a28..0x417a5c)
+004016a8 _ZN9Obj557b385slot9Ev evidence slot of _ZTV9Obj557b38 (class at 0x557b38, not the 0xc8-byte Obj557b28)
+004016e8 _ZN9Obj557b385slot6Ev evidence slot of _ZTV9Obj557b38 (class at 0x557b38, not the 0xc8-byte Obj557b28)
+00401764 _ZN9Obj557b385slot7Ev evidence slot of _ZTV9Obj557b38 (class at 0x557b38, not the 0xc8-byte Obj557b28)
+0040177c _ZN9Obj557b385slot8Ev evidence slot of _ZTV9Obj557b38 (class at 0x557b38, not the 0xc8-byte Obj557b28)
+00401794 _ZN9Obj557b387vfunc14Ev evidence slot of _ZTV9Obj557b38 (class at 0x557b38, not the 0xc8-byte Obj557b28)
+004016e8 _ZN9Obj557b3814refreshOffsetsEv evidence twin smt4 _ZN9Obj42070814refreshOffsetsEv (0x74, same slot position in the 0x557b40 vtable)
+00401764 _ZN9Obj557b3812refreshRectsEv evidence twin smt4 _ZN9Obj42070812refreshRectsEv (0x14)
+0040177c _ZN9Obj557b388callbackEv evidence twin smt4 _ZN9Obj4207088callbackEv (0x18)
+004016a8 _ZN9Obj557b389setTargetEjjj evidence twin smt4 _ZN9Obj4207089setTargetEjjj (0x3c; Obj420794Child::setTarget(first,second,third))
+00401794 _ZN9Obj557b38D0Ev evidence twin smt4 _ZN9Obj420708D0Ev (0x4)
+00417a2c _ZN9Obj557d2814refreshOffsetsEv evidence vtable 0x557d30 slot 2; size 0x10
+00417a3c _ZN9Obj557d2812refreshRectsEv evidence twin smt4 _ZN9Obj42088012refreshRectsEv (0x14)
+00417a54 _ZN9Obj557d288callbackEv evidence twin smt4 _ZN9Obj4208808callbackEv (0x8)
+00417a5c _ZN9Obj557d28D0Ev evidence twin smt4 _ZN9Obj420880D0Ev (0x4)
+00417a28 _ZN9Obj557d289setTargetEjjj evidence vtable 0x557d30 slot 5 (setTarget position), 4-byte empty
+001a0164 _ZN9Obj420decC1Ev evidence source already defines Obj420dec::Obj420dec() (shared class with smt4 _ZN9Obj420decC1Ev); unit symbol was never renamed
+0045f038 _ZN9Obj55be807vfunc0cEv evidence mangled length prefix corrected (armcc spells the member name with its real length)
+0059dab4 g_msgHandlers inferred size:0x14; table of five message handlers (types 0x20000011/09/04/02/21) dispatched by FUN_0015d8e0
+00468e98 questCenterResolveSelection inferred [med] polls quest-selection UI state and picks the next work state (17 panel, 12 action, 5 idle)
+0046fb60 aocEnumerateContentRecords inferred [med] enumerates installed add-on content into the content list, counting flagged entries; retry/fail states on error
+0045aee0 idArrayConstruct inferred [med] binds the u16 array and fills it with the 0xFFFF invalid sentinel
+0046aab4 npcDummyBindingsBindPositions inferred [med] binds paired NPC controllers to the named dummy_npcN positions once
+004151b0 filterCreateQuad inferred [med] builds the Obj42080c quad filter: colour child, quad buffer, identity matrix, texture, colour target push
+0019f764 renderCtxBindTextureMode inferred [high] like renderCtxSelectTexture but the texture-environment mode is an argument
+001b1784 soundPlayerPlayItem inferred [med] reads the sound archive file info of an item, notifies the observer, plays from the file or the archive region
+003b665c effectEditorUpdate inferred [high] twin of smt4 effectEditorUpdate
+0018416c unitHasRankingBonus inferred [med] true when the unit id is in the top-10 saved ranking or matches a category slot with level 1..3; callers scale HP by 1.25 when true
+0019eab0 resourceSlotsClearEntry inferred [med] when slots->flags bit0 set, nulls the first entry equal to object
+00193b40 stageChainLinkNodes inferred [med] feeds *io through three stage nodes (FUN_001a83f4/8558/86b4) with per-stage enable bits and last-index, stores the final output back
+0034543c gameSavedItemClearCounter inferred [med] Clears the counter halfword of saved item record `index` (0-0x500).
+00333318 searchWinInitialize inferred [high] Creates the search window work area, its update process, two stereo draw tasks and the animated sprite.
+00331410 gameSavedItemsPromoteFlagState inferred [med] Rewrites flag state 01 to 10 (keeping the low six bits) in saved item records 1-0x500.

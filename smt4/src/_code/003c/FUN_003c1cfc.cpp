@@ -1,4 +1,4 @@
-/* NON_MATCHING: packed-word loads, signed-growth arithmetic, and saved-register scheduling differ. */
+/* NON_MATCHING: now returns the 16-byte summary by value (hidden r0, as its caller declares); retail uses smlabb for the HP product (not emitted by b713 without the add being separate) and schedules the packed-word loads differently. */
 #include "shard/W6_W6Match5_DevilSort.h"
 #include <stddef.h>
 
@@ -49,7 +49,14 @@ typedef char DevilBattleSummaryLayoutCheck[offsetof(DevilBattleRecordView, baseH
     offsetof(DevilBattleRecordView, attributes) == 0x24 &&
     offsetof(DevilBattleRecordView, luck) == 0x28 && sizeof(PackedDevilStatWord) == 4 ? 1 : -1];
 
-extern "C" void FUN_003c1cfc(u32 *destination, u16 id)
+struct DevilBattleSummary {
+    PackedDevilStatWord attributes;
+    PackedDevilStatWord vitals;
+    PackedDevilStatWord growth;
+    PackedDevilStatWord maximum;
+};
+
+extern "C" DevilBattleSummary FUN_003c1cfc(u16 id)
 {
     const DevilBattleRecordView *record = (const DevilBattleRecordView *)devilGetRecord(id);
     PackedDevilStatWord attributes = {0};
@@ -69,8 +76,6 @@ extern "C" void FUN_003c1cfc(u32 *destination, u16 id)
     s32 mp = (record->header.level * record->mpGrowth + record->baseMp) * 45 / 100;
     maximum.maximum.maxHp = hp > 9999 ? 9999 : hp;
     maximum.maximum.maxMp = mp > 9999 ? 9999 : mp;
-    destination[0] = attributes.value;
-    destination[1] = vitals.value;
-    destination[2] = growth.value;
-    destination[3] = maximum.value;
+    DevilBattleSummary summary = {attributes, vitals, growth, maximum};
+    return summary;
 }

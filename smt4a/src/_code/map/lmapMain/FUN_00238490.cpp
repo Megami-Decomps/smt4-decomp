@@ -7,7 +7,7 @@ extern "C" {
 
 int renderCtxSelectTexture(...);
 int mtx44Copy(float *, unsigned int);
-int FUN_0019a0fc(...);
+int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_0019e3d0(...);
 int FUN_001a1c28(...);
 int FUN_0021252c(...);
@@ -107,7 +107,7 @@ extern int FUN_001692ac(unsigned int, unsigned int);
 extern unsigned int _ZN2nw4math5MTX448IdentityEv(void);
 extern int nn_math_ARMv6_MTX34InverseAsm(unsigned char *, int);
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_0019e3d0. */
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_0021252c. */
@@ -299,12 +299,12 @@ void FUN_00238490(int param_1)
     temp_v62 = temp_v16;
     temp_v63 = temp_v16;
     temp_v64 = temp_v15;
-    FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
     temp_v21 = -9.0f;
     temp_v19 = temp_v16;
     temp_v20 = temp_v16;
     matrixSetTranslation(temp_v67,&temp_v19);
-    FUN_0019a0fc(&temp_v25,&temp_v25,temp_v67);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v67);
   }
   pfVar4 = *(float **)(*(int *)(param_1 + 0x354) + 4);
   if (pfVar4 != (float *)0x0) {
@@ -312,19 +312,19 @@ void FUN_00238490(int param_1)
     temp_v19 = pfVar4[1] * -0.03125f;
     temp_v20 = temp_v16;
     matrixSetTranslation(&temp_v59,&temp_v18);
-    FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v24 = *(unsigned int *)(param_1 + 0x120);
   uStack_1e8 = *(unsigned int *)(param_1 + 0x124);
   uStack_1e4 = *(unsigned int *)(param_1 + 0x128);
   matrixSetTranslation(temp_v65,&temp_v24);
-  FUN_0019a0fc(&temp_v25,&temp_v25,temp_v65);
+  nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v65);
   if (*(char *)(param_1 + 0x380) == '\x01') {
     temp_v18 = *(float *)(param_1 + 0x358);
     temp_v19 = *(float *)(param_1 + 0x35c);
     temp_v20 = *(float *)(param_1 + 0x360);
     matrixSetTranslation(&temp_v59,&temp_v18);
-    FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   if (*(char *)(param_1 + 0x380) == '\x03') {
     facingUpdateAngles(param_1,1);
@@ -408,7 +408,7 @@ void FUN_00238490(int param_1)
     }
     VectorSignedToFloat(0x168 - temp_v11,(unsigned char)(in_fpscr >> 0x16) & 3);
     FUN_001a1c28(temp_v66,temp_v2);
-    FUN_0019a0fc(&temp_v25,&temp_v25,temp_v66);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v66);
     temp_v2 = (int)*(char *)(param_1 + 0x1da);
     temp_v11 = temp_v8;
     if (temp_v2 == 0) {
@@ -422,7 +422,7 @@ void FUN_00238490(int param_1)
       temp_v19 = temp_v19 * temp_v17;
       temp_v20 = temp_v16;
       matrixSetTranslation(&temp_v59,&temp_v18);
-      FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
+      nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
       temp_v11 = temp_v9;
     }
   }
@@ -439,7 +439,7 @@ void FUN_00238490(int param_1)
     temp_v19 = temp_v19 * temp_v14 * -0.1f;
     temp_v20 = temp_v16;
     matrixSetTranslation(&temp_v59,&temp_v18);
-    FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v49[0] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1f8);
   temp_v49[5] = *(float *)(param_1 + 500) * *(float *)(param_1 + 0x1fc);
@@ -457,7 +457,7 @@ void FUN_00238490(int param_1)
   temp_v56 = 0;
   temp_v57 = 0;
   temp_v54 = temp_v15;
-  FUN_0019a0fc(&temp_v25,&temp_v25,temp_v49);
+  nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v49);
   temp_v2 = (int)*(char *)(param_1 + 0x1dc);
   temp_v11 = temp_v10;
   if (temp_v2 == 0) {
@@ -471,7 +471,7 @@ void FUN_00238490(int param_1)
     temp_v19 = temp_v19 * temp_v17;
     temp_v20 = temp_v16;
     matrixSetTranslation(&temp_v59,&temp_v18);
-    FUN_0019a0fc(&temp_v25,&temp_v25,&temp_v59);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,&temp_v59);
   }
   temp_v38 = *(float *)(param_1 + 0x388);
   pfVar7 = &temp_v38;

@@ -48,7 +48,7 @@ void FUN_00408184(s32 kind, s32 amount);
 static __inline s32 itemStackScalePrice(const ItemStack *stack, s32 price)
 {
     if (stack->flags & 2)
-        price = stack->pricing.percentage * price / 100;
+        price = price * stack->pricing.percentage / 100;
     return price;
 }
 
@@ -129,8 +129,7 @@ void FUN_0049cd18(ItemStack *stack, s32 count, s32 charge)
             break;
         }
         }
-        if (stack->flags & 2)
-            price = stack->pricing.percentage * price / 100;
+        price = itemStackScalePrice(stack, price);
         if (gameDataBlocksGetTableFlag() == 4)
             price *= 3;
         total = -price * count;

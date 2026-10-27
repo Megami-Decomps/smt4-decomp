@@ -11,10 +11,9 @@ void FUN_0049325c(u32 id, s32 x, s32 y, u32 first, u32 second)
     const TextureTableEntryIV *sprite = asdTMTexTableEntryAt(0x13, id);
     s32 width;
     s32 height;
-    const ItemSpriteExtension *extension = reinterpret_cast<const ItemSpriteExtension *>(sprite->placement);
-    if (extension && extension->mode == 1) {
-        width = extension->width;
-        height = extension->height;
+    if ((sprite->placement) && (sprite->placement)->mode == 1) {
+        width = (sprite->placement)->width;
+        height = (sprite->placement)->height;
     } else {
         width = sprite->width & 0x7fff;
         height = sprite->height & 0x7fff;

@@ -59,10 +59,7 @@ void FUN_0019f888(MoriModelEffect* effect)
         for (; (s32)index <= (s32)cursor->last; index++) {
             void *memory = FUN_00178b04(sizeof(ModelEffectKey),
                 "c:\\SMT4F\\SMT4F\\sdds4\\program\\Model\\MoriModelEffect.cpp", 0x6f);
-            // The retail path leaves the key pointer uninitialized if allocation fails.
-            ModelEffectKey *k;
-            if (memory != NULL)
-                k = new (memory) ModelEffectKey();
+            ModelEffectKey *k = new (memory) ModelEffectKey();
             k->data = FUN_001abbc4(reinterpret_cast<u32*>(FUN_001ad5d8(reinterpret_cast<u8*>(cursor))));
             k->index = index;
             k->flags = cursor->flags;

@@ -15,7 +15,7 @@ u32 FUN_0025bb34(u32 group, const char *name, u32 flags);
 // Place the two player lights along the camera-to-target direction.
 void FUN_002d5374()
 {
-    if (DAT_0049fb1c.unk24 != DAT_0049fb1c.unk26) {
+    if (DAT_0049fb1c.unk26 != DAT_0049fb1c.unk24) {
         DAT_0049fb1c.unk26 = DAT_0049fb1c.unk24;
     }
     mapEnvironmentApplySelectedEntry();

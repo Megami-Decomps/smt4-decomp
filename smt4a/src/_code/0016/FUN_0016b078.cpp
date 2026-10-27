@@ -11,7 +11,7 @@ int flagBitsMergeRange(...);
 int FUN_00192840(...);
 int FUN_001933b4(...);
 int FUN_00193840(...);
-int FUN_00193b40(...);
+int stageChainLinkNodes(...);
 int FUN_0019430c(...);
 int FUN_0019a270(...);
 int FUN_001a063c(...);
@@ -63,7 +63,7 @@ extern unsigned short FUN_001932e0(int *, int *, unsigned short *, int);
 /* Supplied declaration required: FUN_001933b4. */
 /* Supplied declaration required: FUN_00193840. */
 /* Supplied declaration required: modelEmitMaterialPipelineCommands. */
-/* Supplied declaration required: FUN_00193b40. */
+/* Supplied declaration required: stageChainLinkNodes. */
 /* Supplied declaration required: FUN_001942a8. */
 /* Supplied declaration required: FUN_0019430c. */
 /* Supplied declaration required: FUN_0019a270. */
@@ -231,14 +231,14 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa0),*(int *)(puVar12 + 0xa2) << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa4),*(int *)(puVar12 + 0xa6) << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa8),*(int *)(puVar12 + 0xaa) << 2);
-      FUN_00193b40(piVar13,piVar11,puVar12);
+      stageChainLinkNodes(piVar13,piVar11,puVar12);
       FUN_001933b4(piVar13,piVar11,puVar12,temp_v15);
       *puVar12 = *puVar12 & ~(unsigned short)(int)pvVar4;
     }
     else {
       modelEmitMaterialPipelineCommands((MaterialPipelineInstance *)piVar13, (MaterialPipelineWriter *)piVar11,
                    (MaterialPipelinePiece *)puVar12, (MaterialPipelineContext *)temp_v15);
-      FUN_00193b40(piVar13,piVar11,puVar12);
+      stageChainLinkNodes(piVar13,piVar11,puVar12);
       if ((*puVar12 & 1) != 0) {
         FUN_00193840(piVar13,piVar11,puVar12,temp_v15);
       }
@@ -320,14 +320,14 @@ void FUN_0016b078(fn_0016b078_arg0 *param_1,unsigned int *param_2)
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa0),*(int *)(puVar12 + 0xa2) << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa4),*(int *)(puVar12 + 0xa6) << 2);
       FUN_001a063c(piVar11,*(unsigned int *)(puVar12 + 0xa8),*(int *)(puVar12 + 0xaa) << 2);
-      FUN_00193b40(piVar13,piVar11,puVar12);
+      stageChainLinkNodes(piVar13,piVar11,puVar12);
       FUN_001933b4(piVar13,piVar11,puVar12,temp_v15);
       *puVar12 = *puVar12 & ~(unsigned short)(int)pvVar4;
     }
     else {
       modelEmitMaterialPipelineCommands((MaterialPipelineInstance *)piVar13, (MaterialPipelineWriter *)piVar11,
                    (MaterialPipelinePiece *)puVar12, (MaterialPipelineContext *)temp_v15);
-      FUN_00193b40(piVar13,piVar11,puVar12);
+      stageChainLinkNodes(piVar13,piVar11,puVar12);
       if ((*puVar12 & 1) != 0) {
         FUN_00193840(piVar13,piVar11,puVar12,temp_v15);
       }

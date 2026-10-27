@@ -1,4 +1,4 @@
-/* NON_MATCHING: scissor helpers address the stack through ctx+0x120 (one shared base register) and x offset register order differs */
+/* NON_MATCHING: scissor helpers address the stack through ctx+0x120 (one shared base register); the draw-offset order now matches. */
 #include "shard/S1ListPanel.h"
 #include "shard/TextureDrawCall.h"
 #include "gfx/StereoParallax.h"
@@ -21,9 +21,9 @@ s32 resourceRunOperationIfUnblocked(void *scrollBar);   /* first visible entry *
 void FUN_0049e7e4(ListPanel *panel, s32 x, s32 y, f32 speed)
 {
     void *scrollBar = panel->scrollBar;
-
-    x += (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
+    s32 parallax = (s32)renderCtxCalculateStereoParallax(g_renderCtx, 0.25f);
     efctSetSpeed(speed);
+    x += parallax;
     FUN_001835b4(2, 0x33, 7, x, y, 0xC9);
     FUN_001835b4(2, 0x33, 0x12, x, y, 0xC9);
 

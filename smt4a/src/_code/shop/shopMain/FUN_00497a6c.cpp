@@ -98,9 +98,8 @@ void FUN_00497a6c(ShopScreen *screen, u32 sprite)
     FUN_0049368c(screen->header, firstIcons[firstIndex], 0, 0, color, 1);
     FUN_0049368c(screen->header, secondIcons[secondIndex], 0, 0, color, 1);
 
-    s32 mode = screen->mode;
-    s32 compact = (mode == 7 || mode == 11) || (mode == 8 || mode == 12) || (mode == 9 || mode == 13) ||
-                  (mode == 17 || mode == 18);
+    s32 compact = ((screen->mode) == 7 || (screen->mode) == 11) || ((screen->mode) == 8 || (screen->mode) == 12) || ((screen->mode) == 9 || (screen->mode) == 13) ||
+                  ((screen->mode) == 17 || (screen->mode) == 18);
     ShopCategoryList *list = &screen->lists[screen->category];
     ShopSlot *slots = reinterpret_cast<ShopSlot *>(screen->slotTables[screen->category]);
     s32 first = FUN_002a482c(list);

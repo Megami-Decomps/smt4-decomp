@@ -1,4 +1,4 @@
-/* NON_MATCHING: Retail ldr r1, [pc, #152] differs from recovered ldr r1, [pc, #124]. */
+/* NON_MATCHING: the loops now stay loops (element pointers) like retail; remaining: retail loads the global before its push, adds 892 to each entry address separately before the field offsets (and writes the three int fields through the row base), and keeps fewer saved registers. */
 #include "common.h"
 
 // Private views of the button-help records used by this function.
@@ -37,18 +37,20 @@ void FUN_003423e8(s32 mode)
 
     if (mode != 0 && mode != 2) {
         for (s32 index = 0; index < 4; ++index) {
-            state->entries[index].unk3C = 0;
+            ButtonHelpEntryView* entry = &state->entries[index];
+            entry->unk3C = 0;
         }
         return;
     }
 
     for (s32 index = 0; index < 4; ++index) {
-        state->entries[index].unk3A = 2;
-        FUN_00387240(&state->entries[index], 10, 0);
-        state->entries[index].unk3C = 1;
-        state->entries[index].unk0C = 0;
-        state->entries[index].unk10 = 0;
-        state->entries[index].unk14 = 0;
+        ButtonHelpEntryView* entry = &state->entries[index];
+        entry->unk3A = 2;
+        FUN_00387240(entry, 10, 0);
+        entry->unk3C = 1;
+        entry->unk0C = 0;
+        entry->unk10 = 0;
+        entry->unk14 = 0;
     }
 }
 }

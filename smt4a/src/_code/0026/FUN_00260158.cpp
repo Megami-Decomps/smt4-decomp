@@ -6,7 +6,7 @@ extern "C" {
 
 int _ZN2nw4math5MTX448IdentityEv(...);
 int mtx44Copy(...);
-int FUN_0019a0fc(...);
+int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_001a1c28(...);
 int FUN_002039d0(...);
 int FUN_00237da0(double, float *, float *, int);
@@ -65,7 +65,7 @@ extern int DAT_005702f0; /* 0x5702f0 */
 extern int randBetween(unsigned int, unsigned int);
 /* Supplied declaration required: _ZN2nw4math5MTX448IdentityEv. */
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001a1c28. */
 /* Supplied declaration required: FUN_002039d0. */
 /* Supplied declaration required: FUN_00237da0. */
@@ -252,7 +252,7 @@ void FUN_00260158(float *param_1)
       temp_v18 = (float *)romwright_f2u((float)(temp_v14));
       temp_v19 = (float *)romwright_f2u((float)(temp_v12));
       FUN_001a1c28(temp_v28);
-      FUN_0019a0fc(&uStack_e8,&uStack_e8,temp_v28);
+      nn_math_ARMv6_MTX44MultAsm(&uStack_e8,&uStack_e8,temp_v28);
       FUN_0043b5b4(&temp_v16,&uStack_e8);
       temp_v7 = temp_v7 + 1;
       *(float **)((int)temp_v3 + 0x120) = temp_v16;
@@ -297,7 +297,7 @@ void FUN_00260158(float *param_1)
         temp_v25 = temp_v22;
         temp_v26 = temp_v12;
         FUN_001a1c28(temp_v29);
-        FUN_0019a0fc(temp_v27,temp_v27,temp_v29);
+        nn_math_ARMv6_MTX44MultAsm(temp_v27,temp_v27,temp_v29);
         FUN_0043b5b4(&temp_v23,temp_v27);
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x358) = temp_v23;
         *(float *)((int)param_1[(int)temp_v2 + 0x99] + 0x35c) = temp_v24;
@@ -355,7 +355,7 @@ void FUN_00260158(float *param_1)
         temp_v23 = temp_v14;
         temp_v24 = temp_v12;
         FUN_001a1c28(temp_v29);
-        FUN_0019a0fc(&temp_v25,&temp_v25,temp_v29);
+        nn_math_ARMv6_MTX44MultAsm(&temp_v25,&temp_v25,temp_v29);
         FUN_0043b5b4(&temp_v21,&temp_v25);
         temp_v30 = temp_v21;
         temp_v31 = temp_v22;

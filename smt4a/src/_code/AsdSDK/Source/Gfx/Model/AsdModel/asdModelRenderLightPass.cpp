@@ -75,11 +75,11 @@ void asdModelRenderLightPass(void)
         FUN_0018e9d8(settings->visitor, settings->visitorState);
         sceneTraverserVisit(settings->light, settings->visitor);
     }
-    if (FUN_001696f4() != 1) {
-        FUN_00176e84(settings->owner, settings->node, 1, 0);
-    } else {
+    if (!(FUN_001696f4() != 1)) {
         FUN_0017721c(settings->owner, settings->modeFirst, settings->modeSecond, 0);
         nw_gfx_RenderContext_ResetState_2B7478(savedContext);
+    } else {
+        FUN_00176e84(settings->owner, settings->node, 1, 0);
     }
     FUN_001575cc(g_renderCtx);
     settings->pendingPass = 0;

@@ -3,7 +3,7 @@
 
 extern "C" {
 
-void FUN_002009c4(u16 value)
+void FUN_002009c4(s16 value)
 {
     CommandWindow *obj = g_comWin;
 

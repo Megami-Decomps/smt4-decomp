@@ -1,4 +1,3 @@
-/* NON_MATCHING: original two-dimensional accessor and zero-column MLA are restored; table/row pointer load registers differ. */
 #include "common.h"
 
 struct AnimationPolicyState {
@@ -39,8 +38,9 @@ extern "C" void FUN_002e1260(AnimationPolicyOwner *owner, s32 loop)
 {
     if (owner->count > 0) {
         AnimationPolicyModel *model = owner->model;
+        s32 column = 0;
         if (model->ready != 0) {
-            AnimationPolicyState *state = animationPolicyTableGet(model->table, 0, model->row);
+            AnimationPolicyState *state = animationPolicyTableGet(model->table, column, model->row);
             if (state != NULL) {
                 state->enabled = 1;
                 state->policy = loop == 0 ? mathClampFloat : nw_anim_PlayPolicy_Loop;

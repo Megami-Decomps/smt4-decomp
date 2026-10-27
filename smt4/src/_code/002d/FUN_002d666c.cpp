@@ -6,7 +6,7 @@ extern ButtonHelpGlobals g_buttonHelp;
 void FUN_00295eb0(ButtonHelpDisplayUnit *unit, s32 value, s32 option);
 
 // Address of one of the two display units.
-static ButtonHelpDisplayUnit *buttonHelpUnitAt(ButtonHelpWork *work, s32 index)
+static __inline ButtonHelpDisplayUnit *buttonHelpUnitAt(ButtonHelpWork *work, s32 index)
 {
     return &work->units[index];
 }

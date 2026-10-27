@@ -82,7 +82,8 @@ void FUN_00410d44(ShiftEffectWork *work)
                     f32 highEdge;
                     f32 edgeShift;
 
-                    for (s32 r = 0; r < 7; r++) {
+                    s32 r = 0;
+                    while (r < 7) {
                         if (table[r].low < value && table[r].high >= value) {
                             shift = table[r].shift;
                             found = 1;
@@ -95,6 +96,7 @@ void FUN_00410d44(ShiftEffectWork *work)
                             lowEdge = table[r].low;
                             edgeShift = table[r].shift;
                         }
+                        r++;
                     }
                     if (!found) {
                         if (lowEdge >= value) {

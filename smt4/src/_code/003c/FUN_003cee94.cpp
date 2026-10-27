@@ -1,4 +1,4 @@
-/* NON_MATCHING: availability constant lifetime, saved registers and resource-dispatch block placement differ. */
+/* NON_MATCHING: one shared enabled/normal pair now matches retail; retail also keeps the zero fourth argument in r9 for all three calls, reserves 4 more stack bytes and places the item-resource block differently. */
 #include "battle/ActionKindSelection.h"
 #include "shard/W4_W4Match2_BtlUnits.h"
 #include "gamedata/DataTable40.h"
@@ -25,8 +25,9 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
 {
     s16 kind = selection->command->kind;
     s32 resourceId = selection->command->skill;
+    u32 enabled = 1;
+    bool normal = true;
     if (kind == 1) {
-        u32 enabled = 1;
         if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x2A)
             enabled = 0;
         u16 id = FUN_00247478(*battle, reinterpret_cast<BtlEntry *>(selection->entry)).id;
@@ -39,7 +40,6 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
             return;
         u16 itemResource = dataTable08Sub1GetRecord(resourceId)->resourceId;
         if (!itemResource) {
-            u32 enabled = 1;
             if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)
                 enabled = 0;
             FUN_003daf3c(DAT_00435d18, resourceId, enabled, 0);
@@ -48,10 +48,8 @@ void FUN_003cee94(BtlMainState **battle, ActionKindSelection *selection)
         resourceId = itemResource;
     }
     u32 category = (reinterpret_cast<BattleResourceLookupView *>(dataTable40FindById(resourceId))->attributes >> 5) & 0xF;
-    bool normal = true;
     if (category == 2 || category == 3 || category == 4)
         normal = false;
-    u32 enabled = 1;
     if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x2A)
         enabled = !normal;
     else if (reinterpret_cast<BtlEntry *>(selection->entry)->flags & 0x10)

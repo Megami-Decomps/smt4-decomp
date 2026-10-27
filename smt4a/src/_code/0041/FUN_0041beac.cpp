@@ -1,4 +1,3 @@
-/* NON_MATCHING: the reset flag and the byte clear are scheduled differently (retail zeroes r1 once and reuses it); the tail call then lands at another offset. */
 #include "common.h"
 #include "code/Code0023.h"
 
@@ -28,6 +27,17 @@ void FUN_002f0384(u32 value);
 void FUN_004087d8(void *block, u32 value);
 void uiDrawScreenDimmer(void *block, u32 value);
 
+/* Resets the selection when the current one is disabled. */
+static __inline void refreshSelection(PanelState *self)
+{
+    if (self->enabled[self->selected] == 0) {
+        FUN_0023b45c(0);
+        FUN_002f0384(0);
+        self->unk68 = 0;
+        FUN_004087d8(self->sub624, (self->unk13 != 0 || self->selected < 1) ? 1 : 0);
+    }
+}
+
 /* Virtual slot: for panel types 3..21, refreshes the selection (when the current one is disabled) and then dims the screen unless the panel is already settled. */
 void FUN_0041beac(PanelState *self)
 {
@@ -36,17 +46,7 @@ void FUN_0041beac(PanelState *self)
         break;
     case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: case 11: case 12:
     case 13: case 14: case 15: case 16: case 17: case 18: case 19: case 20: case 21:
-        if (self->enabled[self->selected] == 0) {
-            FUN_0023b45c(0);
-            FUN_002f0384(0);
-            u32 reset = 0;
-
-            self->unk68 = 0;
-            if (self->unk13 != 0 || self->selected < 1) {
-                reset = 1;
-            }
-            FUN_004087d8(self->sub624, reset);
-        }
+        refreshSelection(self);
         if (self->unk0e == 0 || self->unk13 == 0) {
             return;
         }

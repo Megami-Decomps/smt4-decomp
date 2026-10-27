@@ -41,7 +41,7 @@ void skinObjectUpdateMatrices(u8* ctx);
 void FUN_00180310(s32 a, s32 x, s32 y, s32 b, s32 c, s32 d, const char* format, s32 value);
 const Mtx44* _ZN2nw4math5MTX448IdentityEv(void);
 void mtx44Copy(Mtx44* dst, const Mtx44* src);
-void FUN_0019a0fc(Mtx44* out, const Mtx44* a, const Mtx44* b);
+void nn_math_ARMv6_MTX44MultAsm(Mtx44* out, const Mtx44* a, const Mtx44* b);
 void FUN_0019a0dc(Mtx44* out, u8* ctx);
 void camSetMatrixA(u8* ctx, const Mtx44* matrix);
 
@@ -103,13 +103,13 @@ void FUN_00165778(ItemBadge* badge, TextureTableEntryIV* frame)
     factor.m[12] = 0.0f;
     factor.m[13] = 0.0f;
     factor.m[11] = 0.0f;
-    FUN_0019a0fc(&composed, &composed, &factor);
+    nn_math_ARMv6_MTX44MultAsm(&composed, &composed, &factor);
     for (s32 i = 0; i < 16; i++) factor.m[i] = 0.0f;
     factor.m[15] = 1.0f;
     factor.m[0] = scale;
     factor.m[5] = scale;
     factor.m[10] = 1.0f;
-    FUN_0019a0fc(&composed, &composed, &factor);
+    nn_math_ARMv6_MTX44MultAsm(&composed, &composed, &factor);
     Mtx44 current;
     FUN_0019a0dc(&current, g_renderCtx);
     saved = current;

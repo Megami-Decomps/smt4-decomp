@@ -132,7 +132,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
             afStack_138[0xf] = 1.0f;
             afStack_138[0xc] = 0.0f;
             afStack_138[0xd] = 0.0f;
-            FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+            nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           }
           afStack_138[5] = (float)param_4[0x10];
           afStack_138[10] = (float)uVar11 * afStack_138[5];
@@ -151,11 +151,11 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
           afStack_138[0xb] = 0.0f;
           afStack_138[0xc] = 0.0f;
           afStack_138[0xd] = 0.0f;
-          FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+          nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           uVar10 = (unsigned int)uVar11;
           if (puVar4 != (unsigned int *)0x0) {
             FUN_001a1c28(afStack_138);
-            FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+            nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           }
           afStack_138[3] =
                (float)VectorSignedToFloat((int)*(short *)(param_4 + 6) + ((int)param_4[3] >> 0xc),
@@ -179,7 +179,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
           afStack_138[0xf] = 1.0f;
           afStack_138[0xc] = 0.0f;
           afStack_138[0xd] = 0.0f;
-          FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+          nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
         }
         else {
           afStack_138[1] = 0.0f;
@@ -203,10 +203,10 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
           afStack_138[0xf] = 1.0f;
           afStack_138[0xc] = 0.0f;
           afStack_138[0xd] = 0.0f;
-          FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+          nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           if (puVar4 != (unsigned int *)0x0) {
             FUN_001a1c28(afStack_138);
-            FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+            nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           }
           if (bVar6) {
             afStack_138[0] = (float)((unsigned long long)uVar11 >> 0x20);
@@ -225,7 +225,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
             afStack_138[0xc] = 0.0f;
             afStack_138[0xd] = 0.0f;
             afStack_138[5] = fVar9;
-            FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+            nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           }
           uVar10 = (unsigned int)uVar11;
           if (*(char *)(param_4 + 0xf) != '\0') {
@@ -249,7 +249,7 @@ void FUN_0046ed8c(unsigned int param_1,unsigned int param_2,unsigned int param_3
             afStack_138[0xc] = 0.0f;
             afStack_138[0xd] = 0.0f;
             afStack_138[0xb] = fVar12;
-            FUN_0019a0fc(auStack_f8,auStack_f8,afStack_138);
+            nn_math_ARMv6_MTX44MultAsm(auStack_f8,auStack_f8,afStack_138);
           }
         }
         FUN_00187d04(DAT_0059dbb4,auStack_f8);

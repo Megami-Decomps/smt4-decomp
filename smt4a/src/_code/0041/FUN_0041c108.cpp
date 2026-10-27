@@ -1,53 +1,53 @@
-/* NON_MATCHING: one instruction: the render-stack push computes the new slot address into ip before the load of the old top; retail does it after the load into r3. */
-#include "camp/RenderCtx.h"
-#include "shard/TextureDrawCall.h"
-#include "code/Code0016.h"
-#include "shard/W6_W6Match2_EntrySequence.h"
-#include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
+#include "common.h"
 
-
-/* A rotating marker ring: the animation phase and the highlighted slot. */
-struct MarkerRing {
-    /* 0x00 */ u8 unk00[0xC];
-    /* 0x0C */ s32 image;
-    /* 0x10 */ s32 phase;
-    /* 0x14 */ s32 slot;
+struct PanelDrawState {
+    /* 0x000 */ u8 unk000[5];
+    /* 0x005 */ u8 unk05;
+    /* 0x006 */ u8 unk06;
+    /* 0x007 */ u8 type;
+    /* 0x008 */ u8 unk08[6];
+    /* 0x00E */ u8 unk0e;
+    /* 0x00F */ u8 unk0f;
+    /* 0x010 */ u8 unk10[0x3c8];
+    /* 0x3D8 */ u8 unk3d8[0x24c];
+    /* 0x624 */ u8 sub624[0xd4];
+    /* 0x6F8 */ u8 sub6f8[0x18];
+    /* 0x710 */ u8 sub710[1];
 };
 
 extern "C" {
-extern RenderCtxA *g_renderCtx;
-s32 FUN_001692ac(s32 first, s32 second);
-void FUN_00183bb0(void);
 
-// Draw the marker ring: nine slot sprites, then the highlight pairs that rotate around it.
-void FUN_0041c108(MarkerRing *ring)
+void compositeSpriteDrawRequest(void *block);
+void FUN_0041f9e4(PanelDrawState *self);
+void effectRequestSubmit(void *effect, void *source);
+void uiDrawScreenDimmer(void *block, u32 value);
+void FUN_0041c1d4(void *ring);
+
+/* Draws the composite sprite and its effect, dims the screen unless the panel is already settled, then draws the marker ring. */
+static __inline void drawPanel(PanelDrawState *self)
 {
-    f32 positions[9][2];
-    renderCtxPushA(g_renderCtx, FUN_001692ac(1, 0));
-    efctSetSpeed(1.0f);
-    FUN_00183bb0();
-    asdTMTexTableEntryAt(43, ring->image);
-    FUN_00164b5c(2, 43, ring->image, 0, 0, 211);
-    for (s32 i = 0; i < 9; i++) {
-        TextureTableEntryIV *slot = asdTMTexTableEntryAt(43, i + 98);
-        positions[i][0] = slot->x;
-        positions[i][1] = slot->y;
-        FUN_001835b4(2, 43, 95, slot->x, slot->y, 211);
+    compositeSpriteDrawRequest(self->sub624);
+    FUN_0041f9e4(self);
+    effectRequestSubmit(self->sub710, self->unk3d8);
+    if (self->unk0e == 0 || self->unk0f != 0) {
+        return;
     }
-    ring->phase = (ring->phase + 1) % 4;
-    if (ring->phase <= 0) {
-        ring->slot++;
+    uiDrawScreenDimmer(self->sub6f8, 0);
+    FUN_0041c1d4(self->sub6f8);
+}
+
+/* Virtual slot: for panel types 3..21 draws the composite sprite and its effect, dims the screen unless the panel is already
+ * settled, then draws the marker ring. */
+void FUN_0041c108(PanelDrawState *self)
+{
+    switch (self->type) {
+    case 0: case 1: case 2:
+        break;
+    case 3: case 4: case 5: case 6: case 7: case 8: case 9: case 10: case 11: case 12:
+    case 13: case 14: case 15: case 16: case 17: case 18: case 19: case 20: case 21:
+        drawPanel(self);
+        break;
     }
-    ring->slot = ring->slot % 8;
-    s32 first = ring->slot;
-    s32 second = (first + 1) & 7;
-    s32 third = (first + 4) & 7;
-    s32 fourth = (third + 1) & 7;
-    FUN_001835b4(2, 43, 97, (s32)positions[first][0], (s32)positions[first][1], 211);
-    FUN_001835b4(2, 43, 96, (s32)positions[second][0], (s32)positions[second][1], 211);
-    FUN_001835b4(2, 43, 97, (s32)positions[third][0], (s32)positions[third][1], 211);
-    FUN_001835b4(2, 43, 96, (s32)positions[fourth][0], (s32)positions[fourth][1], 211);
-    renderStackPop(&g_renderCtx->stackA);
-    efctSetSpeed(1.0f);
 }
-}
+
+} /* extern "C" */

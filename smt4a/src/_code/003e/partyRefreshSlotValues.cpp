@@ -2,7 +2,7 @@
 #include "gamedata/SaveSlotTable.h"
 
 extern "C" {
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 
 static __inline PartySlotA *getPartySlot(u16 index)
 {
@@ -19,7 +19,7 @@ void partyRefreshSlotValues(void)
         PartySlotA *slot = getPartySlot(static_cast<u16>(index));
         if (slot != NULL && (slot->flags & 1) != 0) {
             s16 value = slot->unk0E;
-            if (FUN_0018416c(slot->unk62) != 0) {
+            if (unitHasRankingBonus(slot->unk62) != 0) {
                 value = static_cast<s16>(static_cast<s32>(static_cast<f32>(value) * 1.25f));
             }
             slot->unk2A = value;

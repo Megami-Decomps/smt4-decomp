@@ -58,7 +58,7 @@ u32 FUN_00201830(void)
             renderStackPop(&g_titleScene->stackA);
         }
     } else {
-        s32 rows = DEBUG_LIST_ROWS;
+        s8 rows = DEBUG_LIST_ROWS;
         s32 first = 0;
         s32 i;
 

@@ -30,11 +30,7 @@ u32 FUN_002d400c(void)
         for (s32 i = 0; i < dataTable2eSub1GetCount(); i++) {
             StageRecord *record = dataTable2eSub1GetRecord(i);
             if (record->id == player->areaId) {
-                if (g_gameState.sceneModels.groupOverride == -1) {
-                    g_gameState.sceneModels.stageGroup = record->stage;
-                } else {
-                    g_gameState.sceneModels.stageGroup = g_gameState.sceneModels.groupOverride;
-                }
+                g_gameState.sceneModels.stageGroup = (g_gameState.sceneModels.groupOverride == -1) ? record->stage : g_gameState.sceneModels.groupOverride;
                 break;
             }
         }

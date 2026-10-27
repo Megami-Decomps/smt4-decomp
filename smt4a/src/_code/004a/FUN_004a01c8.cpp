@@ -7,7 +7,7 @@
 extern "C" {
 s32 gameSlotTableFindFree();
 ScaledRecordValues *gameGetSlotRecord(s32 slot);
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 }
 
 static __inline s32 damageRecordMaximum(ScaledRecordValues *record)
@@ -15,7 +15,7 @@ static __inline s32 damageRecordMaximum(ScaledRecordValues *record)
     if (record == NULL)
         return 0;
     s16 maximum = record->maximum;
-    if (FUN_0018416c(record->id))
+    if (unitHasRankingBonus(record->id))
         maximum = (s16)(s32)(maximum * 1.25f);
     return maximum;
 }
@@ -53,13 +53,12 @@ extern "C" void FUN_004a01c8(u32 group, u8 conditionBit, s32 percentage)
             remaining = 1;
         s16 value = remaining;
         PlayerData *player = reinterpret_cast<PlayerData *>(gameGetPlayerData());
-        s16 limit = player->unk1C;
-        if (value <= limit) {
-            limit = value;
+        if (value <= (player->unk1C)) {
+            (player->unk1C) = value;
             if (value <= 0)
-                limit = 1;
+                (player->unk1C) = 1;
         }
-        player->unk2A = limit;
+        player->unk2A = (player->unk1C);
     }
     s32 count;
     const s8 *slots;

@@ -49,12 +49,11 @@ void FUN_0048d418(SelectableList *list, s32 kind)
             continue;
         found = 0;
         if (kind == 0x17) {
-            s32 mode = g_gameState.submode;
-            if (((mode == 1 || mode == 2) || (mode == 3 || mode == 6)) &&
+            if ((g_gameState.submode == 1 || g_gameState.submode == 2 || g_gameState.submode == 3 || g_gameState.submode == 6) &&
                 (record->first == 0xB0 || record->first == 0x7F || record->first == 0x80))
                 continue;
-            if ((mode == 4 || mode == 5) && (record->first == 0x79 || record->first == 0x7A ||
-                                            record->first == 0x7D || record->first == 0x7E))
+            if ((g_gameState.submode == 4 || g_gameState.submode == 5) &&
+                (record->first == 0x79 || record->first == 0x7A || record->first == 0x7D || record->first == 0x7E))
                 continue;
         }
         if (g_gameState.showAllEntries == 0) {
@@ -70,8 +69,7 @@ void FUN_0048d418(SelectableList *list, s32 kind)
                 found = 1;
         }
         if (!found) {
-            s16 id = record->id;
-            ids[count++] = id;
+            ids[count++] = (record->id);
         }
     }
     for (i = 0; i < count - 1; i++) {

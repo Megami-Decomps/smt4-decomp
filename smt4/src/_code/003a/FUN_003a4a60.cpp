@@ -57,7 +57,7 @@ extern int gameGlobalsDataExists(void);
 /* Supplied declaration required: FUN_0022fcb8. */
 /* Supplied declaration required: buttonHelpSelectMenuPreset. */
 /* Supplied declaration required: FUN_002306f8. */
-extern int FUN_00230b90(unsigned int *, unsigned short);
+extern int playerSlotHoldsEntry(unsigned int *, unsigned short);
 extern unsigned int btlRollClamped(unsigned short, unsigned int);
 extern unsigned int itemGetNameOrFallback(unsigned short, unsigned int);
 /* Supplied declaration required: FUN_00230e04. */
@@ -248,7 +248,7 @@ void FUN_003a4a60(unsigned int *param_1)
         else if ((int)temp_v6 >= 100) {
           temp_v6 = 99;
         }
-        temp_v5 = FUN_00230b90(param_1,*puVar5);
+        temp_v5 = playerSlotHoldsEntry(param_1,*puVar5);
         if (temp_v5 != 0) {
           temp_v6 = temp_v6 - 1;
         }
@@ -431,7 +431,7 @@ joined_r0x003a5580:
     temp_v6 = param_1[0x218];
     if ((temp_v6 != 7) && (temp_v6 != 8)) {
       temp_v5 = flaggedValueHolderGetTotal(param_1 + temp_v6 * 0x1d + 0x220);
-      temp_v5 = FUN_00230b90(param_1,*(unsigned short *)
+      temp_v5 = playerSlotHoldsEntry(param_1,*(unsigned short *)
                                     ((int)param_1 + temp_v5 * 4 + temp_v6 * 0x1002 + 0xc94));
       if (temp_v5 == 0) {
         temp_v4 = tableGroupFindEntryIndex(param_1[0x58],&LAB_003a5744);

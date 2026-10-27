@@ -6,6 +6,7 @@ extern "C" {
 void FUN_00226e90(s32 axis, s32 count, f32 *minimum, f32 *maximum,
                   Vec3f first, Vec3f second, Vec3f third, Vec3f fourth)
 {
+    s32 i;
     Vec3f points[4];
     points[0] = first;
     points[1] = second;
@@ -15,7 +16,7 @@ void FUN_00226e90(s32 axis, s32 count, f32 *minimum, f32 *maximum,
     if (axis == 0) {
         f32 minY = points[0].y, minZ = points[0].z;
         f32 maxY = minY, maxZ = minZ;
-        for (s32 i = 1; i < count; ++i) {
+        for (i = 1; i < count; ++i) {
             if (points[i].y < minY) minY = points[i].y;
             if (points[i].z < minZ) minZ = points[i].z;
             if (maxY < points[i].y) maxY = points[i].y;

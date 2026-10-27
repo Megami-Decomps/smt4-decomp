@@ -1,391 +1,259 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d2140` (_code @ 0x3d2140, 0x76c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the command-window phase dispatcher (490 vs 484 rows); retail returns whatever register is left over (the actor index for unhandled phases) on its fall-through exits, which C cannot express, and numbers the callee-saved registers differently. */
+#include "battle/BattleCommandController.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
-#include "battle/btlEditor.h"
-struct BattleActionHistoryState;
+#include "gamedata/SaveSlotTable.h"
+
+/* The party member record a battle entry is linked to: its id at 0x46. */
+struct PartyMemberRecord {
+    /* 0x00 */ u8 unk00[0x46];
+    /* 0x46 */ u16 id;
+};
+
+/* The entry words the slot lookup writes. */
+struct EntryLinkView {
+    /* 0x000 */ u8 unk000[0xce];
+    /* 0x0ce */ u16 id;
+    /* 0x0d0 */ u8 unk0d0[4];
+    /* 0x0d4 */ s16 category;
+    /* 0x0d6 */ u8 unk0d6[0x1a6];
+    /* 0x27c */ PartyMemberRecord *link;
+};
+
+/* The battle state word the escape/event phases read. */
+struct BattlePhaseView {
+    /* 0x0000 */ u8 unk0000[0x1fc4];
+    /* 0x1fc4 */ s16 count;
+};
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+extern u32 g_btlUiBlock;
+extern void *g_btlMain;
+extern void *g_btlEvent;
+extern void *DAT_00435d18;
 
-int eventCommandDispatchPendingCleanup(void);
-int FUN_002276f8(...);
-int battleResetCounterAndFlag(void);
-int modelSetResetSlots(...);
-int modelManagerReleaseSlots(...);
-int asdSoundSelectSlotB(...);
-int btlUiRecountParty(...);
-int objDestroyChild(...);
-int nw_snd_SoundHeap_LoadState(...);
+u32 btlAiScriptCall(CommandState *work);
+void FUN_00227b14(u32 ui, u32 windowId, s32 kind, s32 mode);
+u32 FUN_00229c5c(u32 ui, u32 windowId, s32 mode);
+s32 FUN_00229098(BtlMainState **block);
+u8 buttonHelpGetStatus(void);
+s32 FUN_00293230(BtlMainState *state);
+u32 buttonHelpSetPreset(u32 preset);
+u32 battleSelectButtonHelpPreset(u32 preset);
+void FUN_002569ac(BtlMainState **block, s32 bank);
+void btlEntryValuesCopy(BtlMainState **block, CommandState *work);
+u32 FUN_0027e3b8(void *event);
+u32 FUN_0027e38c(void *event);
+u32 FUN_003ca6c4(BtlMainState **block, CommandState *work);
+void btlUiRouteSelectedAction(u32 ui);
+SaveSlotTable *gameGetSlotTable(void);
+PartyMemberRecord *saveResolvePartySlot(s32 slot);
+s32 gameSlotFindByCategory(void);
+void FUN_00246454(s32 a, CommandState *work, BtlEntry *entry);
+u32 FUN_003d3944(BtlMainState **block, CommandState *work);
+u32 FUN_00244fb0(BtlMainState *state, u32 slot, u32 palette, u32 param, u32 alpha);
+void FUN_0033a780(BtlMainState *state);
+void btlResetTransitionProgress(void *main);
+void FUN_00256898(s32 a, s32 b);
+u32 FUN_003d3ba8(BtlMainState **block, CommandState *work);
+u32 FUN_001d2710(BtlMainState *state, CommandState *work, s32 a, s32 target);
+u32 btlResolveCommandEvent(BtlMainState **block, CommandState *work);
+void FUN_0026beb4(s32 chance, CommandState *work, s32 a, BtlActionRecord *record, s32 b);
+s32 questGetCurrentRecordHalf4(void);
+u32 btlReflectCreateKind10(s32 a, CommandState *work, s32 value, s32 b);
+void frameRangeExtend(BtlMainState **block, CommandState *work, s32 id, s32 a, s32 b, s32 c);
+u32 battleResolveEscapeAttempt(BtlMainState **block, CommandState *work);
+s32 btlEventSelectTrigger(void *event, s32 trigger, s32 unit, s32 a);
+u32 FUN_003dbb40(void *object);
+u32 FUN_003ca32c(BtlMainState **block, CommandState *work);
+void btlUiRecountParty(u32 ui);
+void objDestroyChild(void *object);
+void FUN_002276f8(void *object);
+void battleResetCounterAndFlag(void);
+void modelManagerReleaseSlots(void *object);
+void modelSetResetSlots(void *object);
+void eventCommandDispatchPendingCleanup(void);
+u32 FUN_00394b8c(void);
 
-int btlAiScriptCall(unsigned int *);
-int FUN_001d2710(...);
-int btlEntryValuesCopy(...);
-int FUN_00227b14(int *, int, int, int);
-int FUN_00229098(int *);
-int frameRangeExtend(...);
-int FUN_00229c5c(int *, int, int);
-int FUN_00244fb0(...);
-int FUN_00246454(int, unsigned int *, unsigned int *);
-int FUN_002569ac(...);
-int FUN_0026beb4(...);
-int btlEventSelectTrigger(...);
-void battleSelectButtonHelpPreset(int);
-int gameGetSlotTable(void);
-int buttonHelpSetPreset(...);
-void FUN_0033a780(BattleActionHistoryState *state);
-int btlUiRouteSelectedAction(int *);
-int FUN_003ca32c(...);
-int battleResolveEscapeAttempt(...);
-int FUN_003ca6c4(int *, unsigned int *);
-int btlResolveCommandEvent(...);
-int FUN_003d3944(int *, unsigned int *);
-int FUN_003d3ba8(...);
-struct BtlMainState;
-void btlResetTransitionProgress(BtlMainState *state);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp1C; /* 0x1c: local_1c */
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
-
-extern int g_btlScriptUnit; /* 0x43427c */
-extern int g_btlMain; /* 0x4342c8 */
-extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int *g_btlEvent; /* 0x435d48 */
-extern int *g_btlUiBlock; /* 0x439ca8 */
-extern int DAT_004e316c; /* 0x4e316c */
-
-/* Supplied declaration required: btlAiScriptCall. */
-/* Supplied declaration required: FUN_001d2710. */
-/* Supplied declaration required: eventCommandDispatchPendingCleanup. */
-/* Supplied declaration required: FUN_002276f8. */
-/* Supplied declaration required: btlEntryValuesCopy. */
-/* Supplied declaration required: FUN_00227b14. */
-/* Supplied declaration required: FUN_00229098. */
-/* Supplied declaration required: frameRangeExtend. */
-/* Supplied declaration required: FUN_00229c5c. */
-/* Supplied declaration required: battleResetCounterAndFlag. */
-extern int *gameSlotFindByCategory(void);
-/* Supplied declaration required: FUN_00244fb0. */
-/* Supplied declaration required: FUN_00246454. */
-extern unsigned int saveResolvePartySlot(int);
-/* Supplied declaration required: FUN_00256898. */
-/* Supplied declaration required: FUN_002569ac. */
-/* Supplied declaration required: FUN_0026beb4. */
-/* Supplied declaration required: modelSetResetSlots. */
-/* Supplied declaration required: modelManagerReleaseSlots. */
-extern int *FUN_0027e3b8(unsigned int *);
-/* Supplied declaration required: btlEventSelectTrigger. */
-extern int *FUN_00293230(int);
-/* Supplied declaration required: gameGetSlotTable. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-extern int buttonHelpGetStatus(void);
-/* Supplied declaration required: asdSoundSelectSlotB. */
-/* Supplied declaration required: memClear. */
-extern int *jyoucyuGetTableEntry(unsigned int);
-extern int FUN_002e14e4(unsigned int);
-/* Supplied declaration required: FUN_0033a780. */
-/* Supplied declaration required: btlUiRouteSelectedAction. */
-/* Supplied declaration required: btlUiRecountParty. */
-extern int questGetCurrentRecordHalf4(void);
-/* Supplied declaration required: FUN_003ca32c. */
-/* Supplied declaration required: battleResolveEscapeAttempt. */
-/* Supplied declaration required: FUN_003ca6c4. */
-/* Supplied declaration required: btlResolveCommandEvent. */
-/* Supplied declaration required: FUN_003d3944. */
-/* Supplied declaration required: FUN_003d3ba8. */
-/* Supplied declaration required: objDestroyChild. */
-extern int *FUN_003dbb40(int);
-extern int *btlReflectCreateKind10(unsigned int, unsigned int *, int, unsigned int);
-/* Supplied declaration required: nw_snd_SoundHeap_LoadState. */
-
-
-int * FUN_003d2140(int *param_1,unsigned int param_2)
-
+u32 FUN_003d2140(BtlMainState **block, u32 phase)
 {
-/* irregular: 3 goto(s); 35 native warning(s); review required */
-  short temp_v0;
-  int *piVar2;
-  unsigned int temp_v1;
-  unsigned int *puVar4;
-  int temp_v2;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar8;
-  unsigned int *puVar9;
-  int temp_v5;
-  int *piVar11;
-  
-  piVar11 = (int *)*param_1;
-  piVar2 = (int *)piVar11[0x21];
-  temp_v2 = g_btlScriptUnit + (int)piVar2 * 0xf1c;
-  puVar8 = (unsigned int *)(temp_v2 + 4);
-  switch(param_2) {
-  case 1:
-    if ((piVar11[0x1128] & 0x40U) != 0) {
-      temp_v3 = *puVar8 | 0x80;
-      *puVar8 = temp_v3;
-    }
-    else {
-      temp_v3 = *puVar8;
-      if ((piVar11[0x1128] & 0x100U) != 0) {
-        temp_v3 = temp_v3 | 0x1000;
-        *puVar8 = temp_v3;
-      }
-    }
-    if ((temp_v3 & 0x800) == 0) {
-      piVar2 = g_btlUiBlock;
-      FUN_00229c5c(g_btlUiBlock,*(unsigned short *)(temp_v2 + 0x30),1);
-      return piVar2;
-    }
-    FUN_00227b14(g_btlUiBlock,*(unsigned short *)(temp_v2 + 0x30),
-                 (int)*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c),1);
-    piVar2 = (int *)0x0;
-    *puVar8 = *puVar8 & 0xfffff7ff;
-    *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 0;
-    *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14e) = 0;
-    break;
-  case 2:
-    btlAiScriptCall(puVar8);
-    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
-    FUN_00229098(param_1);
-    temp_v2 = buttonHelpGetStatus();
-    piVar2 = (int *)FUN_00293230(*param_1);
-    if (piVar2 != (int *)0x0) {
-      if (temp_v2 != 0x3d) {
-        piVar2 = (int *)0x3d;
-        buttonHelpSetPreset(0x3d);
-        return piVar2;
-      }
-    }
-    else if ((temp_v2 != 0xb3) && (temp_v2 != 0xb4)) {
-      piVar2 = (int *)0x0;
-      battleSelectButtonHelpPreset(0);
-      return piVar2;
-    }
-    break;
-  case 3:
-  case 0x11:
-    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
-    FUN_00229098(param_1);
-    return param_1;
-  case 5:
-    FUN_003ca6c4(param_1,puVar8);
-    return param_1;
-  case 7:
-    btlUiRouteSelectedAction(g_btlUiBlock);
-    reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
-    piVar2 = (int *)gameGetSlotTable();
-    return piVar2;
-  case 8:
-    temp_v2 = gameGetSlotTable();
-    temp_v4 = 0;
-    do {
-      puVar9 = (unsigned int *)(*(int *)(*param_1 + 0x1fc0) + temp_v4 * 0x288);
-      piVar2 = (int *)*puVar9;
-      if (((unsigned int)piVar2 & 1) != 0 && ((unsigned int)piVar2 & 8) != 0) {
-        temp_v5 = 0;
-        do {
-          if ((-1 < *(char *)(temp_v2 + temp_v5 + 0x9108)) &&
-             (temp_v3 = saveResolvePartySlot(temp_v5),
-             *(short *)(temp_v3 + 0x46) == *(short *)((int)puVar9 + 0xce))) {
-            puVar9[0x9f] = temp_v3;
-            piVar2 = (int *)gameSlotFindByCategory();
-            *(short *)(puVar9 + 0x35) = (short)(int)piVar2;
-            goto LAB_003d243c;
-          }
-          temp_v5 = temp_v5 + 1;
-        } while (temp_v5 < 3);
-        piVar2 = (int *)0x0;
-        FUN_00246454(0,puVar8,puVar9);
-      }
-LAB_003d243c:
-      temp_v4 = temp_v4 + 1;
-      if (temp_v4 >= 4) {
-        return piVar2;
-      }
-    } while( 1 );
-  case 0xb:
-    FUN_003d3944(param_1,puVar8);
-    return param_1;
-  case 0xc:
-    FUN_00244fb0(piVar11,0,1,10,0xff);
-    return piVar11;
-  case 0xd:
-    FUN_0033a780(reinterpret_cast<BattleActionHistoryState *>(piVar11));
-    btlResetTransitionProgress((BtlMainState *)g_btlMain);
-    *(unsigned int *)(temp_v2 + 0x10) = 0;
-    FUN_00256898(0,0);
-    piVar2 = (int *)0xed;
-    buttonHelpSetPreset(0xed);
-    return piVar2;
-  case 0xe:
-    FUN_003d3ba8(param_1,puVar8);
-    return param_1;
-  case 0xf:
-    temp_v4 = -1;
-    temp_v2 = 0;
-    if ((piVar11[0x1128] & 0x200U) != 0) {
-      do {
-        puVar9 = (unsigned int *)(piVar11[0x7f0] + temp_v2 * 0x288);
-        temp_v3 = *puVar9;
-        if (((((temp_v3 & 1) != 0) && ((temp_v3 & 0x40) == 0)) && (-1 < (short)puVar9[2])) &&
-           ((temp_v3 & 0x10) != 0)) {
-          temp_v4 = (int)(short)puVar9[2];
-          break;
+    ActionStateChannel *channel = &static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index];
+    CommandState *work = reinterpret_cast<CommandState *>(reinterpret_cast<u8 *>(channel) + 4);
+    BtlMainState *state = *block;
+    u32 result = 0;
+    switch (phase) {
+    case 1:
+        if ((state->battleFlags & 0x40) != 0)
+            work->flags |= 0x80;
+        else if ((state->battleFlags & 0x100) != 0)
+            work->flags |= 0x1000;
+        if ((work->flags & 0x800) != 0) {
+            FUN_00227b14(g_btlUiBlock, work->windowId, work->selection->kind, 1);
+            work->flags &= ~0x800u;
+            work->selection->kind = 0;
+            work->selection->value = 0;
+            return 0;
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 0x6d);
-    }
-    else {
-      do {
-        temp_v5 = (int)*(short *)(piVar11[0x7a6] + temp_v2 * 0x114 + 0x60);
-        if ((-1 < temp_v5) && (*(char *)((int)puVar8 + temp_v5 + 0x38) != '\0')) {
-          temp_v4 = (int)*(short *)(piVar11[0x7a6] + temp_v2 * 0x114 + 0x62);
-          break;
+        return FUN_00229c5c(g_btlUiBlock, work->windowId, 1);
+    case 2: {
+        btlAiScriptCall(work);
+        memClear(work->targetMarks, 0x85);
+        FUN_00229098(block);
+        s32 status = buttonHelpGetStatus();
+        result = FUN_00293230(*block);
+        if (result != 0) {
+            if (status != 61)
+                return buttonHelpSetPreset(61);
+        } else if (status != 179 && status != 180) {
+            return battleSelectButtonHelpPreset(0);
         }
-        temp_v2 = temp_v2 + 1;
-      } while (temp_v2 < 0x6d);
+        return result;
     }
-    FUN_001d2710(piVar11,puVar8,0,temp_v4);
-    return piVar11;
-  case 0x10:
-    btlResolveCommandEvent(param_1,puVar8);
-    return param_1;
-  case 0x12:
-    if ((*puVar8 & 0x1080) == 0) {
-      temp_v1 = 0x32;
-    }
-    else {
-      temp_v1 = 0;
-    }
-    FUN_0026beb4(temp_v1,puVar8,0,0,1);
-    temp_v2 = questGetCurrentRecordHalf4();
-    piVar2 = (int *)0x0;
-    if (temp_v2 != 0) {
-      piVar2 = (int *)btlReflectCreateKind10(0,puVar8,temp_v2,0xffffffff);
-      return piVar2;
-    }
-    break;
-  case 0x13:
-    temp_v0 = *(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c);
-    if ((*puVar8 & 0x1080) == 0) {
-      piVar2 = (int *)0x32;
-    }
-    else {
-      piVar2 = (int *)0x0;
-    }
-    if (temp_v0 == 6) {
-      FUN_0026beb4(0,puVar8,1,*(unsigned int *)(temp_v2 + 0x28),1);
-      frameRangeExtend(param_1,puVar8,(int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x62),0,5,5);
-      return param_1;
-    }
-    if (temp_v0 == 0xf) {
-      FUN_0026beb4(piVar2,puVar8,0,*(unsigned int *)(temp_v2 + 0x28),1);
-      frameRangeExtend(param_1,puVar8,(int)*(short *)(*(int *)(temp_v2 + 0x28) + 0x62),0,5,5);
-      return param_1;
-    }
-    break;
-  case 0x14:
-    battleResolveEscapeAttempt(param_1,puVar8);
-    return param_1;
-  case 0x18:
-    piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
-    if (piVar2 == (int *)0x0) {
-      temp_v4 = (int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e);
-      if (*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) != 0xb) {
-        puVar4 = g_btlEvent;
-        btlEventSelectTrigger(g_btlEvent,3,temp_v4,0);
-        if (puVar4 == (unsigned int *)0x0) {
-          return (int *)0x0;
+    case 28:
+        FUN_002569ac(block, (*block)->actionState.index);
+        btlEntryValuesCopy(block, work);
+        if (FUN_0027e3b8(g_btlEvent) != 0)
+            return result;
+        return FUN_0027e38c(g_btlEvent);
+    case 5:
+        return FUN_003ca6c4(block, work);
+    case 7:
+        btlUiRouteSelectedAction(g_btlUiBlock);
+        memClear(work->targetMarks, 0x85);
+        // retail returns the slot table pointer the tail call leaves in r0.
+        return reinterpret_cast<u32>(gameGetSlotTable());
+    case 8: {
+        SaveSlotTable *slots = gameGetSlotTable();
+        for (s32 index = 0; index < 4; ++index) {
+            BtlEntry *entry = &state->entries[index];
+            if ((entry->flags & 1) != 0 && (entry->flags & 8) != 0) {
+                s32 slot = 0;
+                for (; slot < 3; ++slot) {
+                    if (reinterpret_cast<s8 *>(slots)[slot + 0x9108] >= 0) {
+                        PartyMemberRecord *member = saveResolvePartySlot(slot);
+                        if (member->id == entry->id) {
+                            reinterpret_cast<EntryLinkView *>(entry)->link = member;
+                            reinterpret_cast<EntryLinkView *>(entry)->category = gameSlotFindByCategory();
+                            break;
+                        }
+                    }
+                }
+                if (slot == 3)
+                    FUN_00246454(0, work, entry);
+            }
         }
-      }
-      else {
-        puVar4 = g_btlEvent;
-        btlEventSelectTrigger(g_btlEvent,7,temp_v4,0);
-        if (puVar4 == (unsigned int *)0x0) {
-          return (int *)0x0;
+        return 0;
+    }
+    case 11:
+        return FUN_003d3944(block, work);
+    case 12:
+        return FUN_00244fb0(state, 0, 1, 10, 0xff);
+    case 13:
+        FUN_0033a780(state);
+        btlResetTransitionProgress(g_btlMain);
+        channel->timer = 0;
+        FUN_00256898(0, 0);
+        return buttonHelpSetPreset(237);
+    case 14:
+        return FUN_003d3ba8(block, work);
+    case 15: {
+        s32 target = -1;
+        s32 index = 0;
+        if ((state->battleFlags & 0x200) != 0) {
+            BtlEntry *entries = state->entries;
+            for (; index < 109; ++index) {
+                BtlEntry *entry = &entries[index];
+                if ((entry->flags & 1) != 0 && (entry->flags & 0x40) == 0 && entry->members.ids[0] >= 0 &&
+                    (entry->flags & 0x10) != 0) {
+                    target = entry->members.ids[0];
+                    break;
+                }
+            }
+        } else {
+            for (; index < 109; ++index) {
+                s32 combatant = state->actions[index].participant.combatantIndex;
+                if (combatant >= 0 && work->targetMarks[combatant] != 0) {
+                    target = state->actions[index].memberId;
+                    break;
+                }
+            }
         }
-      }
-code_r0x0027e38c:
-      puVar4 = g_btlEvent;
-      *g_btlEvent = 9;
-      *(unsigned char *)(puVar4 + 0xb) = 0;
-      piVar2 = (int *)(DAT_00435d18 + 0x2f98);
-      *piVar2 = 0;
-      return piVar2;
+        return FUN_001d2710(state, work, 0, target);
     }
-    break;
-  case 0x1c:
-    FUN_002569ac(param_1,piVar2);
-    btlEntryValuesCopy(param_1,puVar8);
-    piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
-    if (piVar2 == (int *)0x0) goto code_r0x0027e38c;
-    break;
-  case 0x1f:
-    piVar2 = (int *)FUN_003dbb40(DAT_00435d18);
-    return piVar2;
-  case 0x20:
-    FUN_003ca32c(param_1,puVar8);
-    return param_1;
-  case 0x21:
-    if ((*puVar8 & 0x10000) != 0) {
-      if ((short)piVar11[0x7f1] < 1) {
-        return (int *)(int)(short)piVar11[0x7f1];
-      }
+    case 16:
+        return btlResolveCommandEvent(block, work);
+    case 3:
+    case 17:
+        memClear(work->targetMarks, 0x85);
+        return FUN_00229098(block);
+    case 18: {
+        s32 chance = (work->flags & 0x1080) == 0 ? 50 : 0;
+        FUN_0026beb4(chance, work, 0, NULL, 1);
+        s32 value = questGetCurrentRecordHalf4();
+        if (value == 0)
+            return result;
+        return btlReflectCreateKind10(0, work, value, -1);
     }
-    else {
-      piVar2 = (int *)**(unsigned int **)(temp_v2 + 0x24);
-      if (((unsigned int)piVar2 & 1) == 0) {
-        return piVar2;
-      }
-      if (((unsigned int)piVar2 & 0x40) != 0) {
-        return piVar2;
-      }
-    }
-    piVar2 = (int *)FUN_0027e3b8(g_btlEvent);
-    if (piVar2 == (int *)0x0) {
-      puVar4 = g_btlEvent;
-      btlEventSelectTrigger(g_btlEvent,4,(int)*(short *)(*(int *)(temp_v2 + 0x24) + 0x6e),0);
-      piVar2 = (int *)0x0;
-      if (puVar4 != (unsigned int *)0x0) goto code_r0x0027e38c;
-    }
-    break;
-  case 0x23:
-    temp_v4 = g_btlScriptUnit;
-    if ((**(unsigned int **)(temp_v2 + 0x24) & 0x10) == 0) {
-      btlUiRecountParty(g_btlUiBlock);
-    }
-    objDestroyChild(DAT_00435d18);
-    FUN_002276f8(DAT_00435d18);
-    *(unsigned int *)(DAT_00435d18 + 0x3028) = *(unsigned int *)(DAT_00435d18 + 0x3028) & 0xffff7fff;
-    battleResetCounterAndFlag();
-    modelManagerReleaseSlots(DAT_00435d18);
-    modelSetResetSlots(DAT_00435d18);
-    *(unsigned int *)(g_btlMain + 0x634) = *(unsigned int *)(g_btlMain + 0x634) & 0xffffbfff;
-    eventCommandDispatchPendingCleanup();
-    piVar2 = (int *)jyoucyuGetTableEntry(1);
-    if (piVar2 == (int *)0x0) {
-      asdSoundSelectSlotB(2);
-      temp_v2 = FUN_002e14e4(2);
-      piVar2 = (int *)0x0;
-      if (DAT_004e316c != 0) {
-        temp_v4 = *(int *)(DAT_004e316c + 0x10);
-      }
-      if (DAT_004e316c != 0 && temp_v4 != 0) {
-        if (*(int *)(DAT_004e316c + 0x44) < temp_v2) {
-          temp_v2 = *(int *)(DAT_004e316c + 0x44);
+    case 19: {
+        s32 chance = (work->flags & 0x1080) == 0 ? 50 : 0;
+        s32 kind = work->selection->kind;
+        if (kind == 6) {
+            FUN_0026beb4(0, work, 1, work->record, 1);
+            frameRangeExtend(block, work, work->record->memberId, 0, 5, 5);
+        } else if (kind == 15) {
+            FUN_0026beb4(chance, work, 0, work->record, 1);
+            frameRangeExtend(block, work, work->record->memberId, 0, 5, 5);
         }
-        nw_snd_SoundHeap_LoadState(DAT_004e316c,temp_v2);
-        piVar2 = (int *)0x1;
-      }
-      return piVar2;
+        return result;
     }
-    return piVar2;
-  }
-  return piVar2;
+    case 20:
+        return battleResolveEscapeAttempt(block, work);
+    case 24:
+        if (FUN_0027e3b8(g_btlEvent) != 0)
+            return result;
+        if (work->selection->kind == 11) {
+            if (btlEventSelectTrigger(g_btlEvent, 7, work->entry->selectionIndex, 0) == 0)
+                return 0;
+        } else {
+            if (btlEventSelectTrigger(g_btlEvent, 3, work->entry->selectionIndex, 0) == 0)
+                return result;
+        }
+        return FUN_0027e38c(g_btlEvent);
+    case 31:
+        return FUN_003dbb40(DAT_00435d18);
+    case 32:
+        return FUN_003ca32c(block, work);
+    case 33:
+        if ((work->flags & 0x10000) != 0) {
+            if (reinterpret_cast<BattlePhaseView *>(state)->count <= 0)
+                return result;
+        } else {
+            u32 flags = work->entry->flags;
+            if ((flags & 1) == 0 || (flags & 0x40) != 0)
+                return result;
+        }
+        if (FUN_0027e3b8(g_btlEvent) != 0)
+            return result;
+        if (btlEventSelectTrigger(g_btlEvent, 4, work->entry->selectionIndex, 0) == 0)
+            return result;
+        return FUN_0027e38c(g_btlEvent);
+    case 35:
+        if ((work->entry->flags & 0x10) == 0)
+            btlUiRecountParty(g_btlUiBlock);
+        objDestroyChild(DAT_00435d18);
+        FUN_002276f8(DAT_00435d18);
+        reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(DAT_00435d18) + 0x3028)[0] &= ~0x8000u;
+        battleResetCounterAndFlag();
+        modelManagerReleaseSlots(DAT_00435d18);
+        modelSetResetSlots(DAT_00435d18);
+        static_cast<BtlMain *>(g_btlMain)->flags &= ~0x4000u;
+        eventCommandDispatchPendingCleanup();
+        return FUN_00394b8c();
+    default:
+        return result;
+    }
 }
-
-} /* extern "C" */
+}

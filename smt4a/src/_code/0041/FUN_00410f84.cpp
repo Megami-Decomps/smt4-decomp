@@ -117,11 +117,13 @@ void FUN_00410f84(StageState *state)
             s32 count = partyCountActiveSlots();
             const StageModeParams *params = &DAT_00529780[mode];
             Vec2 offset = params->slotOffset;
-            for (s32 i = 0; i < count; i++) {
+            s32 i = 0;
+            while (i < count) {
                 Vec2 pos = state->slot[i].pos;
                 pos.x = pos.x + offset.x;
                 pos.y = pos.y + offset.y;
                 state->slot[i].pos = pos;
+                i++;
             }
             controllerGroupSetPosition(g_btlStageModel, params->groupScale, params->groupScale, params->groupScale);
         }

@@ -1,4 +1,3 @@
-/* NON_MATCHING: close transition and label arrival match; textRight scroll uses swapped width/position registers. */
 #include "shard/W4_Match3_InfoWindow.h"
 #include "shard/TextureDrawCall.h"
 #include "util/MathFunctions.h"
@@ -56,12 +55,14 @@ s32 FUN_00156478(void)
         break;
     case 3:
         if (window->frame > 30 && window->wideText != 0) {
+            s32 textWidth = window->textWidth;
             window->labelX--;
-            if (-window->textWidth > window->labelX) {
-                window->labelX = window->textRight + window->textWidth + 42;
+            if (-textWidth > window->labelX) {
+                window->labelX = textWidth + window->textRight;
+                window->labelX += 42;
             }
             window->textRight--;
-            if (-window->textWidth > window->textRight) {
+            if (window->textRight < -window->textWidth) {
                 window->textRight = window->textWidth + window->labelX + 42;
             }
         }

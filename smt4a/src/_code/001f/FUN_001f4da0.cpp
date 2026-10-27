@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the selection of the found/free entry differs (retail materialises it with `mov r0,#0; movne r0,rX` on each exit path and keeps the free entry in ip) */
+/* NON_MATCHING: instruction-identical to retail (selection now via mov 0 / movne on each path); only register numbering differs (retail keeps the free entry in ip, the index in r2 and the loaded key in r3). */
 #include "common.h"
 
 struct CacheEntry {
@@ -43,7 +43,11 @@ u32 FUN_001f4da0(u32 key)
             break;
         }
     }
-    CacheEntry *selected = found != NULL ? found : freeEntry;
+    CacheEntry *selected = NULL;
+    if (found != NULL)
+        selected = found;
+    else if (freeEntry != NULL)
+        selected = freeEntry;
 
     return selected->key != 0 ? selected->value : 0;
 }

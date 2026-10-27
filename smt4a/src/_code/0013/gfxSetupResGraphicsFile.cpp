@@ -8,7 +8,7 @@ typedef struct Global5b3bf4 {
 } Global5b3bf4;
 extern Global5b3bf4 g_gfxSettings;
 
-void FUN_0018d9f0(u32 *slot, u32 allocator, u32 value);
+void nw_gfx_res_ResGraphicsFile_Setup(u32 *slot, u32 allocator, u32 value);
 u32 asdMemoryGetDefaultAllocator(void);
 
 /* Stores `value` at 0x7C of the global and registers it with the default allocator. */
@@ -18,7 +18,7 @@ void gfxSetupResGraphicsFile(u32 value)
 
     g_gfxSettings.value = value;
     allocator = asdMemoryGetDefaultAllocator();
-    FUN_0018d9f0(&g_gfxSettings.value, allocator, g_gfxSettings.value);
+    nw_gfx_res_ResGraphicsFile_Setup(&g_gfxSettings.value, allocator, g_gfxSettings.value);
 }
 
 } /* extern "C" */

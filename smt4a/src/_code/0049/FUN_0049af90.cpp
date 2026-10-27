@@ -35,10 +35,8 @@ void FUN_0049af90(HandleOwner *owner)
             FUN_00345718(0);
             if (owner->handle != NULL) {
                 ptrListRemoveClearOwner(g_handleRegistry, owner->handle->id);
-                if (owner->handle != NULL) {
-                    delete owner->handle;
-                    owner->handle = NULL;
-                }
+                delete owner->handle;
+                owner->handle = NULL;
             }
         }
     }

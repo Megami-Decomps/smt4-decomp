@@ -1,4 +1,4 @@
-/* NON_MATCHING: native animation-rate arguments and shared navigation flags are recovered; sprite/selection subobject base registers and phase block layout still differ. */
+/* NON_MATCHING: now builds the same blocks as retail (170 vs 172 rows): block-base pointers, sprite locals and the completion getter match; only the saved-register numbering of the title/list/scene pointers and the literal-pool tail differ. */
 #include "common.h"
 #include "map/mapDepart.h"
 #include "map/lmapMain.h"
@@ -20,6 +20,12 @@ struct MapScreen {
     u8 listSprites[6][0x8c];    // 0xc40
 };
 
+/* The block at 0x20600 holds the list-active flag at +0x44. */
+struct MapScreenListBlock {
+    u8 unk00[0x44];
+    u8 active;
+};
+
 extern "C" {
 
 extern GameStateA g_gameState;
@@ -27,6 +33,7 @@ extern GameStateA g_gameState;
 s32 FUN_00163aa4(void* sprite, f32 step);
 void FUN_00167458(void* sprite, s32 arg);
 void uiSpriteSetImageKeyframe(void* sprite, s32 image, s32 keyframe);
+s8 uiSpriteGetCompletionState(const void* sprite);
 void dialogClose(s32 arg);
 void FUN_002d22c0(s32 arg);
 void FUN_0048821c(MapScreen* screen, s32 mapIndex);
@@ -49,23 +56,24 @@ void FUN_0048bdec(MapScreen* screen)
     void* titleSprite = SCREEN_PTR(screen, 0xf88);
     u8* dirtyA = &SCREEN_BYTE(screen, 0x7b90);
     u8* dirtyB = &SCREEN_BYTE(screen, 0x7b91);
+    MapScreenListBlock* list = reinterpret_cast<MapScreenListBlock*>(reinterpret_cast<u8*>(screen) + 0x20600);
     if (phase == 0) {
-        if (SCREEN_BYTE(screen, 0x20644) != 0) {
+        if (list->active != 0) {
             for (s32 i = 0; i < 6; i++) FUN_00163aa4(screen->listSprites[i], 1.0f);
             FUN_00163aa4(SCREEN_PTR(screen, 0x112c), 1.0f);
             FUN_00163aa4(SCREEN_PTR(screen, 0x10a0), 1.0f);
         }
         FUN_00163aa4(titleSprite, 1.0f);
-        if (FUN_00163aa4(screen->menuSprite, 1.0f) != 0) screen->phase = 1;
-        u32 y = vec2GetYInt(screen->menuSprite);
-        u32 x = vec2GetXInt(screen->menuSprite);
+        void* menuSprite = screen->menuSprite;
+        if (FUN_00163aa4(menuSprite, 1.0f) != 0) screen->phase = 1;
+        u32 y = vec2GetYInt(menuSprite);
+        u32 x = vec2GetXInt(menuSprite);
         pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
         *dirtyA = 1;
         *dirtyB = 1;
     } else if (phase == 1) {
-        void* cursor = SCREEN_PTR(screen, 0x4cc);
-        naviMainSetCurrentMap(cursor, screen->mapIndex);
-        FUN_00492ac8(reinterpret_cast<u32>(cursor), 0);
+        naviMainSetCurrentMap(SCREEN_PTR(screen, 0x4cc), screen->mapIndex);
+        FUN_00492ac8(reinterpret_cast<u32>(SCREEN_PTR(screen, 0x4cc)), 0);
         FUN_0048821c(screen, screen->mapIndex);
         uiSpriteSetImageKeyframe(titleSprite, 2, 0);
         if (g_gameState.navigation.naviMapPending != 0) {
@@ -75,16 +83,16 @@ void FUN_0048bdec(MapScreen* screen)
             *dirtyB = 1;
         } else {
             g_gameState.navigation.naviMapPending = 1;
-            FUN_0048d248(screen, FUN_00492c84(cursor));
+            FUN_0048d248(screen, FUN_00492c84(SCREEN_PTR(screen, 0x4cc)));
         }
         FUN_0048a378(screen);
-        if (SCREEN_BYTE(screen, 0x20644) != 0) {
+        if (list->active != 0) {
             screen->selectedMarker = *reinterpret_cast<u32*>(SCREEN_PTR(screen, 0x20510));
             *dirtyA = 1;
             *dirtyB = 1;
             FUN_002d22c0(0);
             dialogClose(1);
-            SCREEN_BYTE(screen, 0x20644) = 0;
+            list->active = 0;
             FUN_0048a378(screen);
             g_gameState.navigation.alternateNaviMap = 0;
         }
@@ -92,14 +100,15 @@ void FUN_0048bdec(MapScreen* screen)
     } else if (phase == 2) {
         FUN_00163aa4(titleSprite, 1.0f);
         FUN_00163aa4(SCREEN_PTR(screen, 0x1014), 1.0f);
-        FUN_00167458(screen->pointerSprite, 0);
-        if (screen->cursorLocked != 0) {
+        void* pointerSprite = screen->pointerSprite;
+        FUN_00167458(pointerSprite, 0);
+        if (uiSpriteGetCompletionState(pointerSprite) != 0) {
             if (screen->mapIndex > 100) screen->flags &= 0xfffdffff;
             pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), 0, 0);
             screen->flags &= 0xffffeff7;
         } else {
-            u32 y = vec2GetYInt(screen->pointerSprite);
-            u32 x = vec2GetXInt(screen->pointerSprite);
+            u32 y = vec2GetYInt(pointerSprite);
+            u32 x = vec2GetXInt(pointerSprite);
             pointConvertToFloat(SCREEN_PTR(screen, 0x4d0), x, y);
         }
         *dirtyA = 1;

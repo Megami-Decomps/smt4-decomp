@@ -1,4 +1,3 @@
-/* NON_MATCHING: zero/selected-kind initialization order and inverse-entry success block placement differ. */
 #include "ui/NaviCategorySelection.h"
 
 struct NaviAvailabilityEntry {
@@ -14,7 +13,9 @@ struct NaviAvailabilityEntry {
 };
 // This aligned view leaves the shared work's odd-address byte padding unchanged.
 struct NaviAvailabilityView {
-    u8 unk00000[0x7B92];
+    u8 unk00000[0x64];
+    s8 selection;
+    u8 unk00065[0x7B92 - 0x65];
     u8 refresh;
     u8 unk07B93[0x965];
     NaviAvailabilityEntry entries[2048];
@@ -24,7 +25,7 @@ struct NaviAvailabilityView {
 typedef char NaviAvailabilityLayoutCheck[
     sizeof(NaviAvailabilityEntry) == 0x30 && offsetof(NaviAvailabilityEntry, category) == 6 &&
     offsetof(NaviAvailabilityEntry, completionFlag) == 8 &&
-    offsetof(NaviAvailabilityView, entries) == 0x84F8 &&
+    offsetof(NaviAvailabilityView, selection) == 0x64 && offsetof(NaviAvailabilityView, entries) == 0x84F8 &&
     offsetof(NaviAvailabilityView, count) == 0x204F8 &&
     offsetof(NaviAvailabilityView, mode) == 0x204FC ? 1 : -1];
 
@@ -37,9 +38,10 @@ void FUN_004915f0(NaviCategorySelectionWork *work)
 {
     NaviAvailabilityView *state = (NaviAvailabilityView *)work;
     u8 selectedKind = 0;
-    for (s32 index = 0; index < state->count; ++index) {
+    s32 index;
+    for (index = 0; index < state->count; ++index) {
         NaviAvailabilityEntry *entry = &state->entries[index];
-        if (entry->category != work->selection) {
+        if (entry->category != state->selection) {
             entry->active = 0;
         } else if (entry->completionFlag != -1) {
             if (FUN_004083a8(entry->kind, entry->condition)) {
@@ -51,12 +53,12 @@ void FUN_004915f0(NaviCategorySelectionWork *work)
                 entry->active = 0;
             }
         } else {
-            if (FUN_004083a8(entry->kind, entry->condition) ||
-                (entry->alternateFirst && FUN_004083a8(entry->kind, entry->alternateFirst)) ||
-                (entry->alternateSecond && FUN_004083a8(entry->kind, entry->alternateSecond))) {
-                entry->active = 0;
-            } else {
+            if (!(FUN_004083a8(entry->kind, entry->condition) ||
+                  (entry->alternateFirst && FUN_004083a8(entry->kind, entry->alternateFirst)) ||
+                  (entry->alternateSecond && FUN_004083a8(entry->kind, entry->alternateSecond)))) {
                 entry->active = 1;
+            } else {
+                entry->active = 0;
             }
         }
     }

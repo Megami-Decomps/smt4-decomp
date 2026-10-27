@@ -50,12 +50,13 @@ protected:
     /* 0x00 */ u32 flags;
     /* 0x04 */ s32 state;
     /* 0x08 */ s32 substate;
-    /* 0x0C */ u8 unk0C[4];
+    /* 0x0C */ s32 timer;
     /* 0x10 */ s32 previousState;
     /* 0x14 */ u8 unk14[0x10];
     /* 0x24 */ Handler states[22];
     /* 0xD4 */ ExitHandler exitStates[22];
-    /* 0x184 */ u8 unk184[8];
+    /* 0x184 */ u32 tableGroup;
+    /* 0x188 */ u8 unk188[4];
     /* 0x18C */ void *controller;
 };
 

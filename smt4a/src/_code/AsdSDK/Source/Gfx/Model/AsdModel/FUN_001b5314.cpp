@@ -65,7 +65,7 @@ typedef struct GfxSettings {
 extern u32 DAT_005b3c74;
 extern GfxSettings g_gfxSettings;
 
-u32 FUN_001931d8(f32 *color);
+u32 nw_ut_FloatColor_ToPicaU32(f32 *color);
 void runtimeDispatchObjectRelease(u8 **block);
 void nw_gfx_res_ResTextureMapper_SetTexture(u8 **handle, u32 texture);
 OwnerCommand nw_gfx_res_ResTextureSampler_GetOwnerCommand(u32 **sampler);
@@ -112,7 +112,7 @@ void FUN_001b5314(ModelLink *model, s32 useTexture, f32 intensity)
         color[1] = level;
         color[2] = level;
         color[3] = 1.0f;
-        u32 packed = FUN_001931d8(color);
+        u32 packed = nw_ut_FloatColor_ToPicaU32(color);
 
         command = nw_gfx_res_ResTextureSampler_GetOwnerCommand(&sampler);
         command.words[2] = packed;
@@ -158,7 +158,7 @@ void FUN_001b5314(ModelLink *model, s32 useTexture, f32 intensity)
     color[1] = intensity;
     color[2] = intensity;
     color[3] = 1.0f;
-    *(u32 *)((u8 *)target + 0xFC) = FUN_001931d8(color);
+    *(u32 *)((u8 *)target + 0xFC) = nw_ut_FloatColor_ToPicaU32(color);
 }
 
 }

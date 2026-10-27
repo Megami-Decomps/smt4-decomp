@@ -10,7 +10,7 @@ int skinObjectUpdateMatrices(...);
 int FUN_00184c4c(...);
 int FUN_00186940(void);
 int FUN_0018a924(...);
-int FUN_0019a0fc(...);
+int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_001bced4(...);
 int mtx44TransformPosition(...);
 int FUN_002371b0(void);
@@ -138,7 +138,7 @@ extern unsigned int g_renderCtx; /* 0x59dbb4 */
 /* Supplied declaration required: FUN_00184c4c. */
 /* Supplied declaration required: FUN_00186940. */
 /* Supplied declaration required: FUN_0018a924. */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001bced4. */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: FUN_002371b0. */
@@ -343,7 +343,7 @@ void FUN_002b358c(fn_002b358c_arg0 *param_1)
       temp_v59 = temp_v5;
       temp_v60 = temp_v5;
       temp_v61 = temp_v5;
-      FUN_0019a0fc(temp_v63,temp_v23,&temp_v48);
+      nn_math_ARMv6_MTX44MultAsm(temp_v63,temp_v23,&temp_v48);
       pfVar5 = &temp_v36;
       pfVar6 = &temp_v12;
       temp_v0 = 0;

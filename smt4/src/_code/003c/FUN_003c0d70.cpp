@@ -1,253 +1,229 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c0d70` (_code @ 0x3c0d70, 0x4c8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "AsdSDK/AsdMemUtil.h"
+/* NON_MATCHING: typed rewrite of the battle unit removal (298 vs 310 rows); armcc merges the 0xf4/0xf8 action stores into one stm and numbers the callee-saved registers differently. */
 #include "battle/BtlMainAccess.h"
+#include "battle/btlAction.h"
+#include "gamedata/SaveSlotTable.h"
+#include "AsdSDK/AsdMemUtil.h"
+
+/* The action record's words the removal clears. */
+struct ActionClearView {
+    /* 0x00 */ u8 unk00[0x48];
+    /* 0x48 */ u32 task;
+    /* 0x4c */ u8 unk4c[4];
+    /* 0x50 */ u32 status;
+    /* 0x54 */ u32 flags;
+    /* 0x58 */ u16 presentation;
+    /* 0x5a */ u8 unk5a[2];
+    /* 0x5c */ u32 word5c;
+    /* 0x60 */ u16 combatantIndex;
+    /* 0x62 */ u8 unk62[2];
+    /* 0x64 */ u32 words64[13];
+    /* 0x98 */ u8 unk98[0x58];
+    /* 0xf0 */ s32 slot;
+    /* 0xf4 */ s32 slotB;
+    /* 0xf8 */ u32 stateFlags;
+    /* 0xfc */ u32 tail[6];
+};
+
+/* The entry's words and halfwords the removal clears, beyond the shared BtlEntry view. */
+struct EntryClearView {
+    /* 0x000 */ u32 flags;
+    /* 0x004 */ u32 flagsHigh;
+    /* 0x008 */ s16 firstId;
+    /* 0x00a */ u8 unk00a[0x62];
+    /* 0x06c */ s16 marker;
+    /* 0x06e */ u8 unk06e[4];
+    /* 0x072 */ u8 stats[0x3c];
+    /* 0x0ae */ u8 unk0ae[0x12];
+    /* 0x0c0 */ u32 word0c0;
+    /* 0x0c4 */ u8 unk0c4[0x10];
+    /* 0x0d4 */ s16 word0d4;
+    /* 0x0d6 */ u8 unk0d6[0x182];
+    /* 0x258 */ u32 pending[6];
+    /* 0x270 */ s32 pendingHead;
+    /* 0x274 */ s32 pendingCount;
+};
+
+/* A unit's linked objects: only the fields the removal writes. */
+struct LinkedObject {
+    /* 0x00 */ u8 unk00[0x1c];
+    /* 0x1c */ u16 maxHp;
+    /* 0x1e */ u8 unk1e[0xc];
+    /* 0x2a */ s16 hp;
+    /* 0x2c */ u8 unk2c[0x18];
+    /* 0x44 */ u16 state;
+    /* 0x46 */ u16 id;
+    /* 0x48 */ u8 unk48[0x2a];
+    /* 0x72 */ u16 slotState;
+};
 
 extern "C" {
+extern u32 g_btlUiBlock;
+void FUN_00337a34(BtlMainState *state);
+void FUN_003390dc(BtlMainState *state, BtlActionRecord *action, s32 id);
+void objectTotalAdd(BtlMainState *state);
+void keyedAccumulatorAdd(BtlMainState *state, u32 key, s32 count);
+void recordClampCurrentCount(void *record);
+void objectFlagsClear(void *object, u32 flags);
+s32 flagWordTestBit(void *object, u32 bit);
+void FUN_003ae2d0(u32 ui, s32 index, s32 value, s32 flag);
+void FUN_002505c0(s32 a, s32 b, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
+void FUN_00394b0c(void);
+void __aeabi_memset4(void *block, u32 size, s32 value);
+void rt_memclr(void *block, u32 size);
 
-int recordClampCurrentCount(...);
-int FUN_002505c0(int, int, int, int, int, int, int);
-int objectFlagsClear(...);
-int rt_memclr(...);
-int __aeabi_memset4(...);
-int keyedAccumulatorAdd(int, unsigned int, int);
-int objectTotalAdd(int);
-int FUN_00337a34(int);
-int FUN_003390dc(int, int, int);
-int FUN_003ae2d0(unsigned int, int, unsigned int, int);
-
-/* stack frame of param_4: 7 slot(s), 28 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp3C; /* 0x3c: local_3c */
-    unsigned int sp40; /* 0x40: local_40 */
-    unsigned int sp44; /* 0x44: local_44 */
-    unsigned int sp48; /* 0x48: local_48 */
-} param_4_stack;
-
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: recordClampCurrentCount. */
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: objectFlagsClear. */
-extern int flagWordTestBit(unsigned int, unsigned int);
-extern int gameGetSlotTable(void);
-/* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: __aeabi_memset4. */
-/* Supplied declaration required: memClear. */
-/* Supplied declaration required: keyedAccumulatorAdd. */
-/* Supplied declaration required: objectTotalAdd. */
-/* Supplied declaration required: FUN_00337a34. */
-/* Supplied declaration required: FUN_003390dc. */
-/* Supplied declaration required: FUN_00394b0c. */
-/* Supplied declaration required: FUN_003ae2d0. */
-
-
-void FUN_003c0d70(int param_1,unsigned int param_2,int param_3,int param_4)
-
+void FUN_003c0d70(s32 index, s32 unused, s32 removeLinked, s32 keepLink)
 {
-/* irregular: 12 native warning(s); review required */
-  unsigned int temp_v0;
-  int temp_v1;
-  unsigned int temp_v2;
-  int temp_v3;
-  unsigned int temp_v4;
-  unsigned int *puVar6;
-  int temp_v5;
-  int unaff_r6;
-  unsigned char temp_v6;
-  
-  temp_v1 = reinterpret_cast<int>(btlGetMainState());
-  puVar6 = (unsigned int *)(*(int *)(temp_v1 + 0x1fc0) + param_1 * 0x288);
-  if ((*puVar6 & 0x200000) != 0) {
-    FUN_00337a34(temp_v1);
-    return;
-  }
-  if ((*puVar6 & 1) != 0) {
-    temp_v4 = *puVar6;
-    temp_v6 = (temp_v4 & 0x800080) == 0;
-    *puVar6 = temp_v4 & 0xfffffffe;
-    temp_v0 = (temp_v4 & 0x800000) >> 0x17;
-    if (temp_v6) {
-      unaff_r6 = temp_v1 + 0x1c00;
+    BtlMainState *state = btlGetMainState();
+    BtlEntry *entry = &state->entries[index];
+    EntryClearView *words = reinterpret_cast<EntryClearView *>(entry);
+    if ((entry->flags & 0x200000) != 0) {
+        FUN_00337a34(state);
+        return;
     }
-    temp_v4 = (temp_v4 & 2) >> 1;
-    if (temp_v6) {
-      temp_v5 = 0;
-      do {
-        if (*(short *)(*(int *)(unaff_r6 + 0x298) + temp_v5 * 0x114 + 0x60) ==
-            *(short *)((int)puVar6 + 0x6e)) {
-          temp_v3 = *(int *)(unaff_r6 + 0x298) + temp_v5 * 0x114;
-          *(unsigned int *)(temp_v3 + 0x50) = 0;
-          *(unsigned int *)(temp_v3 + 0x54) = 0;
-          *(unsigned short *)(temp_v3 + 0x58) = 0;
-          *(unsigned int *)(temp_v3 + 0x48) = 0;
-          if (temp_v4 == 0) {
-            *(unsigned short *)(temp_v3 + 0x60) = 0xffff;
-          }
-          *(unsigned int *)(temp_v3 + 0x5c) = 0;
-          *(unsigned int *)(temp_v3 + 100) = 0;
-          *(unsigned int *)(temp_v3 + 0x68) = 0;
-          *(unsigned int *)(temp_v3 + 0x6c) = 0;
-          *(unsigned int *)(temp_v3 + 0x70) = 0;
-          *(unsigned int *)(temp_v3 + 0x74) = 0;
-          *(unsigned int *)(temp_v3 + 0x78) = 0;
-          *(unsigned int *)(temp_v3 + 0x7c) = 0;
-          *(unsigned int *)(temp_v3 + 0x80) = 0;
-          *(unsigned int *)(temp_v3 + 0x84) = 0;
-          *(unsigned int *)(temp_v3 + 0x88) = 0;
-          *(unsigned int *)(temp_v3 + 0x8c) = 0;
-          *(unsigned int *)(temp_v3 + 0x90) = 0;
-          *(unsigned int *)(temp_v3 + 0x94) = 0;
-          *(unsigned int *)(temp_v3 + 0xf0) = 0xffffffff;
-          *(unsigned int *)(temp_v3 + 0xf8) = 0;
-          *(unsigned int *)(temp_v3 + 0xf4) = 0xffffffff;
-          *(unsigned int *)(temp_v3 + 0xfc) = 0;
-          *(unsigned int *)(temp_v3 + 0x100) = 0;
-          *(unsigned int *)(temp_v3 + 0x104) = 0;
-          *(unsigned int *)(temp_v3 + 0x108) = 0;
-          *(unsigned int *)(temp_v3 + 0x10c) = 0;
-          *(unsigned int *)(temp_v3 + 0x110) = 0;
-          FUN_003390dc(temp_v1,temp_v3,(int)(short)puVar6[2]);
-        }
-        temp_v5 = temp_v5 + 1;
-      } while (temp_v5 < 0x6d);
-      *puVar6 = *puVar6 | 0x80;
-    }
-    temp_v2 = *puVar6;
-    if ((temp_v2 & 0x10) != 0) {
-      if (param_3 != 0) {
-        temp_v2 = puVar6[0xa1];
-      }
-      if (param_3 != 0 && temp_v2 != 0) {
-        if (0 < (int)puVar6[0x9d]) {
-          objectTotalAdd(temp_v1);
-        }
-        temp_v2 = puVar6[0x9c];
-        do {
-          if (puVar6[temp_v2 + 0x96] != 0) {
-            keyedAccumulatorAdd(temp_v1,puVar6[temp_v2 + 0x96],1);
-            puVar6[temp_v2 + 0x96] = 0;
-          }
-          temp_v2 = temp_v2 - 1;
-          if ((int)temp_v2 < 0) {
-            temp_v2 = 5;
-          }
-        } while (puVar6[0x9c] != temp_v2);
-        puVar6[0xa1] = 0;
-        puVar6[0x9d] = 0;
-        puVar6[0x9c] = 0;
-      }
-      *(short *)(temp_v1 + 0x1fc6) = *(short *)(temp_v1 + 0x1fc6) - 1;
-    }
-    else if (0x20 & (temp_v2) != 0) {
-      if (puVar6[0xa0] != 0 && param_3 != 0) {
-        *(unsigned short *)(puVar6[0xa0] + 0x44) = 2;
-        *(unsigned short *)(puVar6[0xa0] + 0x2a) = 0;
-      }
-      *(unsigned char *)(temp_v1 + 0x49c4) = 0;
-    }
-    else {
-      if ((temp_v2 & 8) != 0) {
-        if (param_4 != 0) {
-          temp_v2 = puVar6[0x9f];
-          if (temp_v2 != 0) {
-            *(unsigned short *)(temp_v2 + 0x44) = *(unsigned short *)(temp_v2 + 0x44) & 0xffef;
-            if (0 < (short)puVar6[0x6d]) {
-              recordClampCurrentCount(puVar6[0x9f]);
-            }
-            puVar6[0x9f] = 0;
-          }
-        }
-        else {
-          temp_v5 = gameGetSlotTable();
-          temp_v5 = temp_v5 + (param_1 - 1);
-          if (-1 < *(char *)(temp_v5 + 0x9108)) {
-            *(unsigned char *)(temp_v5 + 0x9108) = 0xff;
-            if (param_3 == 0) {
-              FUN_003ae2d0(g_btlUiBlock,param_1,0xffffffff,1);
-              FUN_002505c0(0,0,0x1000172,0,0,0,0);
-            }
-            temp_v2 = puVar6[0x9f];
-            if ((temp_v2 != 0) &&
-               (*(unsigned short *)(temp_v2 + 0x44) = *(unsigned short *)(temp_v2 + 0x44) & 0xffef,
-               0 < (short)puVar6[0x6d])) {
-              recordClampCurrentCount(puVar6[0x9f]);
-            }
-          }
-        }
-      }
-      if (param_3 != 0) {
-        if (puVar6[0x9e] != 0) {
-          *(unsigned short *)(puVar6[0x9e] + 0x72) = 2;
-          *(unsigned short *)(puVar6[0x9e] + 0x2a) = 0;
-          *(unsigned short *)((int)puVar6 + 0x1c6) = 2;
-          *(unsigned short *)(puVar6 + 0x6d) = 0;
-          *(unsigned short *)((int)puVar6 + 0x1b6) = *(unsigned short *)(puVar6[0x9e] + 0x1c);
-          FUN_00394b0c();
-        }
-        if (puVar6[0x9f] != 0) {
-          *(unsigned short *)(puVar6[0x9f] + 0x44) = 2;
-          *(unsigned short *)(puVar6[0x9f] + 0x2a) = 0;
-        }
-      }
-      else if (puVar6[0x9f] != 0) {
-        temp_v5 = flagWordTestBit(puVar6[0x9f],10);
-        if (temp_v5 != 0) {
-          objectFlagsClear(puVar6[0x9f],0x10);
-          objectFlagsClear(puVar6[0x9f],0x20);
-          objectFlagsClear(puVar6[0x9f],0x40);
-          objectFlagsClear(puVar6[0x9f],0x80);
-          objectFlagsClear(puVar6[0x9f],0x100);
-          objectFlagsClear(puVar6[0x9f],0x200);
-          objectFlagsClear(puVar6[0x9f],8);
-        }
-        if ((*(unsigned short *)((int)puVar6 + 0x1c6) & 0x400) != 0) {
-          *(unsigned short *)((int)puVar6 + 0x1c6) = *(unsigned short *)((int)puVar6 + 0x1c6) & 0xfc07;
-        }
-        if ((0 < (short)puVar6[0x6d]) &&
-           (*(short *)(puVar6[0x9f] + 0x46) == *(short *)((int)puVar6 + 0xce))) {
-          recordClampCurrentCount();
-        }
-      }
-      *(short *)(temp_v1 + 0x1fc4) = *(short *)(temp_v1 + 0x1fc4) - 1;
-    }
-    *puVar6 = 0;
-    puVar6[1] = 0;
-    if (temp_v4 != 0) {
-      *puVar6 = 6;
-      puVar6[1] = 0;
-    }
-    if (temp_v0 != 0) {
-      *puVar6 = *puVar6 | 0x11;
-    }
-    if (temp_v0 == 0 && temp_v4 == 0) {
-      __aeabi_memset4(puVar6 + 2,100,0xffffffff);
-      *(unsigned short *)(puVar6 + 2) = 0;
-      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(puVar6 + 0x33), 0x18c));
-    }
-    *(unsigned short *)(puVar6 + 0x1b) = 0xffff;
-    rt_memclr((int)puVar6 + 0x72,0x3c);
-    *(unsigned int *)((int)puVar6 + 0xae) = 0;
-    *(unsigned int *)((int)puVar6 + 0xb2) = 0;
-    *(unsigned int *)((int)puVar6 + 0xb6) = 0;
-    *(unsigned int *)((int)puVar6 + 0xba) = 0;
-    *(unsigned short *)((int)puVar6 + 0xbe) = 0;
-    puVar6[0x96] = 0;
-    puVar6[0x97] = 0;
-    puVar6[0x98] = 0;
-    puVar6[0x99] = 0;
-    puVar6[0x9a] = 0;
-    puVar6[0x9b] = 0;
-    puVar6[0x30] = 0;
-    puVar6[0x9c] = 0;
-    puVar6[0x9d] = 0;
-    *(unsigned short *)(puVar6 + 0x35) = 0xffff;
-  }
-  return;
-}
+    if ((entry->flags & 1) == 0)
+        return;
 
-} /* extern "C" */
+    u32 oldFlags = entry->flags;
+    entry->flags = oldFlags & ~1u;
+    bool clearActions = (entry->flags & 0x800080) == 0;
+    u32 reserved = (oldFlags & 0x800000) >> 23;
+    u32 downed = (oldFlags & 2) >> 1;
+    if (clearActions) {
+        for (s32 i = 0; i < 109; ++i) {
+            BtlActionRecord **actions = &state->actions;
+            BtlActionRecord *record = &(*actions)[i];
+            if (record->participant.combatantIndex == entry->selectionIndex) {
+                ActionClearView *action = reinterpret_cast<ActionClearView *>(record);
+                action->status = 0;
+                action->flags = 0;
+                action->presentation = 0;
+                action->task = 0;
+                if (downed == 0)
+                    action->combatantIndex = 0xFFFF;
+                action->word5c = 0;
+                for (s32 k = 0; k < 13; ++k)
+                    action->words64[k] = 0;
+                action->slot = -1;
+                action->stateFlags = 0;
+                action->slotB = -1;
+                for (s32 k = 0; k < 6; ++k)
+                    action->tail[k] = 0;
+                FUN_003390dc(state, record, entry->members.ids[0]);
+            }
+        }
+        entry->flags |= 0x80;
+    }
+
+    if ((entry->flags & 0x10) != 0) {
+        if (removeLinked != 0 && entry->devil != NULL) {
+            if (words->pendingCount > 0)
+                objectTotalAdd(state);
+            s32 slot = words->pendingHead;
+            do {
+                if (words->pending[slot] != 0) {
+                    keyedAccumulatorAdd(state, words->pending[slot], 1);
+                    words->pending[slot] = 0;
+                }
+                --slot;
+                if (slot < 0)
+                    slot = 5;
+            } while (words->pendingHead != slot);
+            entry->devil = NULL;
+            words->pendingCount = 0;
+            words->pendingHead = 0;
+        }
+        --state->emergencyAction.gate;
+    } else if ((entry->flags & 0x20) != 0) {
+        LinkedObject *reserve = reinterpret_cast<LinkedObject *>(entry->reserve);
+        if (reserve != NULL && removeLinked != 0) {
+            reserve->state = 2;
+            reserve->hp = 0;
+        }
+        state->unk49c4 = 0;
+    } else {
+        LinkedObject *link = reinterpret_cast<LinkedObject *>(entry->link);
+        if ((oldFlags & 8) != 0) {
+            if (keepLink != 0) {
+                if (link != NULL) {
+                    link->state &= ~0x10;
+                    if (entry->hp > 0)
+                        recordClampCurrentCount(entry->link);
+                    entry->link = NULL;
+                }
+            } else {
+                s8 *mark = reinterpret_cast<s8 *>(gameGetSlotTable()) + (index - 1) + 0x9108;
+                if (*mark >= 0) {
+                    *mark = -1;
+                    if (removeLinked == 0) {
+                        FUN_003ae2d0(g_btlUiBlock, index, -1, 1);
+                        FUN_002505c0(0, 0, 0x1000172, 0, 0, 0, 0);
+                    }
+                    if (link != NULL) {
+                        link->state &= ~0x10;
+                        if (entry->hp > 0)
+                            recordClampCurrentCount(entry->link);
+                    }
+                }
+            }
+        }
+        if (removeLinked != 0) {
+            LinkedObject *source = reinterpret_cast<LinkedObject *>(entry->source);
+            if (source != NULL) {
+                source->slotState = 2;
+                source->hp = 0;
+                entry->groupMask = 2;
+                entry->hp = 0;
+                entry->maxHp = source->maxHp;
+                FUN_00394b0c();
+            }
+            if (link != NULL) {
+                link->state = 2;
+                link->hp = 0;
+            }
+        } else if (link != NULL) {
+            if (flagWordTestBit(entry->link, 10) != 0) {
+                objectFlagsClear(entry->link, 0x10);
+                objectFlagsClear(entry->link, 0x20);
+                objectFlagsClear(entry->link, 0x40);
+                objectFlagsClear(entry->link, 0x80);
+                objectFlagsClear(entry->link, 0x100);
+                objectFlagsClear(entry->link, 0x200);
+                objectFlagsClear(entry->link, 8);
+            }
+            if ((entry->groupMask & 0x400) != 0)
+                entry->groupMask &= ~0x3F8;
+            if (entry->hp > 0 && link->id == entry->id)
+                recordClampCurrentCount(entry->link);
+        }
+        --state->eventCount;
+    }
+
+    words->flags = 0;
+    words->flagsHigh = 0;
+    if (downed != 0) {
+        words->flags = 6;
+        words->flagsHigh = 0;
+    }
+    if (reserved != 0)
+        words->flags |= 0x11;
+    if ((reserved | downed) == 0) {
+        __aeabi_memset4(&words->firstId, 100, -1);
+        words->firstId = 0;
+        memClear(reinterpret_cast<u8 *>(entry) + 0xCC, 396);
+    }
+    words->marker = -1;
+    rt_memclr(words->stats, sizeof(words->stats));
+    // The modifier block is cleared with word stores starting at the unaligned offset 0xae.
+    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(entry) + 0xAE) = 0;
+    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(entry) + 0xB2) = 0;
+    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(entry) + 0xB6) = 0;
+    *reinterpret_cast<u32 *>(reinterpret_cast<u8 *>(entry) + 0xBA) = 0;
+    *reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(entry) + 0xBE) = 0;
+    for (s32 k = 0; k < 6; ++k)
+        words->pending[k] = 0;
+    words->word0c0 = 0;
+    words->pendingHead = 0;
+    words->pendingCount = 0;
+    words->word0d4 = -1;
+}
+}

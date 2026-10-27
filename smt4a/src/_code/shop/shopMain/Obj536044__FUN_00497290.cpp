@@ -133,6 +133,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
             }
             sendEvent1000210();
             FUN_004964e0(shop, 1);
+            s32 mode;
             if (shop->tab != 3) {
                 mode = shop->tab == 5 ? 2 : 0;
             } else {
@@ -154,6 +155,7 @@ void _ZN9Obj53604412FUN_00497290Ev(ShopScreen *shop)
             }
             sendEvent1000210();
             FUN_004964e0(shop, 1);
+            s32 mode;
             if (shop->tab != 3) {
                 mode = shop->tab == 5 ? 2 : 0;
             } else {

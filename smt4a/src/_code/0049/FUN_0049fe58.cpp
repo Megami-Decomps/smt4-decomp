@@ -43,15 +43,15 @@ const u16 STATUS_NEVER = 0x400;
 extern "C" {
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 void FUN_00408184(s32 kind, s32 amount);
 }
 
-/* The slot's HP limit (with the 1.25x bonus for ids FUN_0018416c accepts). */
+/* The slot's HP limit (with the 1.25x bonus for ids unitHasRankingBonus accepts). */
 static __inline s32 slotHpLimit(const SlotRecord *record)
 {
     s32 limit = record->maxHp;
-    if (FUN_0018416c(record->id) != 0) {
+    if (unitHasRankingBonus(record->id) != 0) {
         limit = (s16)(s32)((f32)limit * 1.25f);
     }
     return limit;

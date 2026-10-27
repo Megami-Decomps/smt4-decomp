@@ -1,2 +1,13 @@
-/* NON_MATCHING: split off FUN_00135b64 at +0xc0 (ExitProcess wrapper and svc stub follow the function); not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void svcExitProcess(void);
+
+/* Runs svcExitProcess (placed right after, so the call is a linker NOP). */
+void nn_os_ExitProcess(void)
+{
+    svcExitProcess();
+}
+
+} /* extern "C" */

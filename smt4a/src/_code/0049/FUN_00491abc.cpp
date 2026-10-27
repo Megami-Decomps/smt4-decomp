@@ -18,18 +18,16 @@ MapNaviCategoryRecord *FUN_00491abc(u32 context, s32 map, s32 section, f32 unuse
         if (record->id == -1)
             break;
         if (record->id == map && (s16)record->reserved == section) {
-            IntervalView *interval = (IntervalView *)record;
-            s32 first = interval->first;
-            s32 last = interval->last;
-            f32 minimum = (f32)first * 100.0f;
+            s32 last = ((IntervalView *)record)->last;
+            f32 minimum = (f32)(((IntervalView *)record)->first) * 100.0f;
             f32 maximum = (f32)last * 100.0f;
             minimum -= 50.0f;
             maximum -= 50.0f;
             if (map == 23) {
-                if ((section == 1 || section == 2 || section == 3 || section == 6) && first == 8)
+                if ((section == 1 || section == 2 || section == 3 || section == 6) && (((IntervalView *)record)->first) == 8)
                     minimum -= 300.0f;
                 if (section == 4) {
-                    if (first == 5)
+                    if ((((IntervalView *)record)->first) == 5)
                         minimum -= 200.0f;
                     if (last == 2)
                         maximum += 100.0f;

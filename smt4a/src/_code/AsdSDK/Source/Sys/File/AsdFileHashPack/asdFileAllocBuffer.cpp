@@ -5,7 +5,7 @@
 extern "C" {
 void *FUN_001858ec(int heap, int alignClass, int unk08, u32 size, u32 align, int fromFront, const char *tag);
 void asdMemorySetReleaseCallback(void *buffer, const void *callback, void *worker);
-void FUN_0019eab0(void *object, void *worker); /* releases the buffer from the worker's slot list */
+void resourceSlotsClearEntry(void *object, void *worker); /* releases the buffer from the worker's slot list */
 extern const char DAT_0053d484[]; /* the source file path (__FILE__) */
 
 /* The file worker's thread state; only its flag word is used here. */
@@ -34,7 +34,7 @@ void *asdFileAllocBuffer(AsdFileWorker *worker, AsdFileRequest *request)
         buffer = FUN_001858ec(ASD_HEAP_MAIN, ASD_ALIGN_DEFAULT, 0, request->size, request->alignment, 1, request->path);
     }
     if ((worker->flags & 1) != 0) {
-        asdMemorySetReleaseCallback(buffer, (const void *)FUN_0019eab0, worker);
+        asdMemorySetReleaseCallback(buffer, (const void *)resourceSlotsClearEntry, worker);
     }
     return buffer;
 }

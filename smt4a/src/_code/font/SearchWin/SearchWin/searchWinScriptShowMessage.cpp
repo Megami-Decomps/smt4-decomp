@@ -3,7 +3,7 @@
 extern "C" {
 
 void textFormatBuffer(char *dst, const char *fmt);
-void FUN_00333318(void);
+void searchWinInitialize(void);
 void sysPlayVoice(u32 voiceId);
 s32 FUN_00162ea4(void);
 s32 scrGetArg(u32 index);
@@ -30,7 +30,7 @@ s32 searchWinScriptShowMessage(void)
     s32 kind;
 
     if (DAT_0057f584 == NULL && FUN_00162ea4() == 0) {
-        FUN_00333318();
+        searchWinInitialize();
         kind = scrGetArg(0);
         win = DAT_0057f584;
         if (kind == 0) {

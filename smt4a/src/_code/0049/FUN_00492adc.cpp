@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the zero Y component as a literal-pool constant in the length (vmla with a pooled 0.0f) and loads s3 for unk04; recovered code materializes zero with mov/vmov. */
+/* NON_MATCHING: same 42 rows and the zero Y component now comes from the literal pool like retail; only the schedule differs (retail loads the 0.0f pool constant just before the first vmla and uses s2/s4/s5 for the pool values, ours loads it before the second source load). */
 #include "common.h"
 #include <math.h>
 #include "code/Code0015.h"
@@ -38,11 +38,10 @@ f32 FUN_001b640c(f32 directionX, f32 directionZ);
 extern "C" f32 FUN_00492adc(void)
 {
     const DirectionSourceView* source = reinterpret_cast<DirectionSourceView*>(FUN_00152f54());
-    DirectionVector direction = {
-        source->unk10 - source->unk04,
-        0.0f,
-        source->unk18 - source->unk0C
-    };
+    DirectionVector direction;
+    direction.x = source->unk10 - source->unk04;
+    direction.y = 0.0f;
+    direction.z = source->unk18 - source->unk0C;
     f32 inverseLength = 1.0f / sqrtf(direction.x * direction.x
                                   + direction.y * direction.y
                                   + direction.z * direction.z);

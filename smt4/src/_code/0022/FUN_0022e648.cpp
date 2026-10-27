@@ -25,7 +25,7 @@ s32 flaggedValueHolderGetTotal(FlaggedValueHolder *);
 u32 FUN_00230e04(u16 *);
 s32 btlRollClamped(u16, u32);
 s32 FUN_0028fb3c(u16);
-s32 FUN_00230b90(SelectionRollWork *, u16);
+s32 playerSlotHoldsEntry(SelectionRollWork *, u16);
 }
 
 extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
@@ -48,7 +48,7 @@ extern "C" void FUN_0022e648(SelectionRollWork *work, u32 mode)
             value = 99;
         }
         result = value;
-        if (FUN_00230b90(work, *entry)) {
+        if (playerSlotHoldsEntry(work, *entry)) {
             --result;
         }
     }

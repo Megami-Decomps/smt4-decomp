@@ -9,7 +9,7 @@ extern "C" {
 int ARM_common_memset4_6(...);
 int asdMemoryAlloc(int, int, int, unsigned int);
 int asdMemoryGetDefaultAllocator(void);
-int FUN_0018d9f0(...);
+int nw_gfx_res_ResGraphicsFile_Setup(...);
 int FUN_001aa528(...);
 int FUN_001acca0(void);
 void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
@@ -59,7 +59,7 @@ extern char s__V_V_V_005b3cc8[13]; /* 0x5b3cc8 */
 /* Supplied declaration required: ARM_common_memset4_6. */
 /* Supplied declaration required: asdMemoryAlloc. */
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
-/* Supplied declaration required: FUN_0018d9f0. */
+/* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 extern int libc_strncmp(int, unsigned int, unsigned int);
 /* Supplied declaration required: FUN_001aa528. */
 /* Supplied declaration required: FUN_001acca0. */
@@ -134,11 +134,11 @@ void FUN_0019afe4(int *param_1,unsigned int *param_2,unsigned int param_3,int pa
   }
   temp_v1 = asdMemoryGetDefaultAllocator();
   piVar15 = param_1;
-  FUN_0018d9f0(param_1,temp_v1,*param_1);
+  nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,*param_1);
   temp_v2 = DAT_005b3c70;
   if (((int)piVar15 < 0) && (((unsigned int)piVar15 & 2) != 0)) {
     temp_v1 = asdMemoryGetDefaultAllocator();
-    FUN_0018d9f0(param_1,temp_v1,temp_v2);
+    nw_gfx_res_ResGraphicsFile_Setup(param_1,temp_v1,temp_v2);
     param_3 = temp_v2;
   }
   temp_v13 = (int *)asdMemoryGetDefaultAllocator();

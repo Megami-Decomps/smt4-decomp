@@ -135,7 +135,7 @@ int mapSetSceneState(...);
 int FUN_00317af8(...);
 int FUN_00325998(...);
 int FUN_00327ee8(...);
-void lmapSceneStartMovement(unsigned char);
+void lmapSceneStartMovement(signed char);
 int FUN_00354098(...);
 int FUN_00408184(...);
 int FUN_004a01c8(...);

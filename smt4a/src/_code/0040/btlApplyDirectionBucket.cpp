@@ -1,4 +1,4 @@
-/* NON_MATCHING: flag/direction flow, field loads and the camera centre (read as an int word, vmov to VFP) match retail; fixed-angle thresholds compile to integer-bit compares (retail vldr+vcmpe) and the camera-relative compares come out with swapped vcmpe operands (named threshold locals fix the operands but hoist the sums). */
+/* NON_MATCHING: code identical to retail (limit compares kept as VFP through the isBelow/isAbove helpers); only the literal-pool order differs: retail pools the -17.0 limit before the g_btlCamera address, the build after it. */
 #include "battle/BtlMainAccess.h"
 #include "battle/btlMain.h"
 
@@ -23,6 +23,16 @@ extern BattleCameraAngle *g_btlCamera;
 f32 FUN_004fad68(BtlAuxA *, u32 kind, s32 x, s32 y);
 void FUN_004fb43c(u32 unused, u32 handle, u32 flags, s32 a, s32 b, s32 direction, s32 c);
 
+static bool isBelow(f32 value, f32 limit)
+{
+    return value < limit;
+}
+
+static bool isAbove(f32 value, f32 limit)
+{
+    return value > limit;
+}
+
 // Choose one of five facing buckets using fixed or camera-relative angle thresholds.
 void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
 {
@@ -39,13 +49,13 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
     case 8:
     case 9:
     case 12:
-        if (angle < -2.9650002f)
+        if (isBelow(angle, -2.9650002f))
             direction = 5;
-        else if (angle < -0.99f)
+        else if (isBelow(angle, -0.99f))
             direction = 4;
-        else if (angle > 2.94f)
+        else if (isAbove(angle, 2.94f))
             direction = 1;
-        else if (angle > 0.96500003f)
+        else if (isAbove(angle, 0.96500003f))
             direction = 2;
         else
             direction = 3;
@@ -59,13 +69,13 @@ void btlApplyDirectionBucket(u32 unused, BattleDirectionEntry *entry)
         union { u32 bits; f32 value; } word;
         word.bits = g_btlCamera->centerBits;
         f32 center = word.value;
-        if (angle < center + -17.0f)
+        if (isBelow(angle, center + -17.0f))
             direction = 5;
-        else if (angle < center + -9.0f)
+        else if (isBelow(angle, center + -9.0f))
             direction = 4;
-        else if (angle > center + 17.0f)
+        else if (isAbove(angle, center + 17.0f))
             direction = 1;
-        else if (angle > center + 9.0f)
+        else if (isAbove(angle, center + 9.0f))
             direction = 2;
         else
             direction = 3;

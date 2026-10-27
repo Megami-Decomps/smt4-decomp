@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x559e90; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void _ZN9Obj55a1789setTargetEPv(void *self);
+
+void FUN_001174e0(u8 *self)
+{
+    _ZN9Obj55a1789setTargetEPv(self + 16);
+}
+
+} /* extern "C" */

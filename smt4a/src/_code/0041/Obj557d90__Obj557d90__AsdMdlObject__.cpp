@@ -16,8 +16,8 @@ Obj557d90::Obj557d90(AsdMdlObject *model)
     static_cast<MapVector &>(unk30) = transform->position;
     rotation.set(0.0f, 0.0f, 0.0f);
     unk0C.y = unk30.y * 0.5f;
-    originalPosition.x = position.x;
     originalPosition.y = position.y;
+    originalPosition.x = position.x;
     originalPosition.z = position.z;
     originalRotation.set(0.0f, 0.0f, 0.0f);
     originalScale = unk30;

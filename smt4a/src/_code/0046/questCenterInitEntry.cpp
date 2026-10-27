@@ -1,4 +1,3 @@
-/* NON_MATCHING: work and quest-ID saved registers are exchanged; parameter data relocations now agree. */
 #include "shard/W6_W6Match7_QuestInteraction.h"
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 
@@ -83,12 +82,13 @@ void questCenterInitEntry(void* context)
     FUN_0031e198();
     messageSetMode(0);
     qcMainSetMode(0);
-    for (u16 id = 0x15e; id < 400; ++id) {
+    u16 id = 0x15e;
+    do {
         const QuestDefinitionPrefix* record = FUN_001ad9b4(id);
         if (record && !record->state && !gameFlagEntryGetBit(id, 1)) {
             FUN_00417e08(id);
         }
-    }
+    } while (++id < 400);
     rt_memclr(work->statecf6, sizeof(work->statecf6));
     rt_memclr(work->statee46, sizeof(work->statee46));
     work->wordcf4 = 0;

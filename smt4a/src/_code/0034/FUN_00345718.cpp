@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the panel global twice and keeps different argument registers across the two indicator branches. */
+/* NON_MATCHING: retail loads the panel global twice (the first through a removed one-instruction getter armcc knew preserved the flags: `cmp r0,#0` precedes both loads) and keeps different argument registers across the two indicator branches. */
 #include "ui/MessageMain.h"
 #include "ui/UiSpriteState.h"
 

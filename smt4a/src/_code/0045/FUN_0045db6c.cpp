@@ -6,7 +6,7 @@ extern "C" {
 
 int FUN_0015fe40(...);
 int FUN_001756d0(int, int);
-int FUN_001b1784(unsigned int, unsigned int, int, int);
+int soundPlayerPlayItem(unsigned int, unsigned int, int, int);
 int FUN_0045f410(int, int);
 int FUN_0045f724(int);
 int FUN_0045fd14(int, unsigned int, unsigned char *);
@@ -68,7 +68,7 @@ extern unsigned char DAT_00548f38; /* 0x548f38 */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Supplied declaration required: FUN_0015fe40. */
 /* Supplied declaration required: FUN_001756d0. */
-/* Supplied declaration required: FUN_001b1784. */
+/* Supplied declaration required: soundPlayerPlayItem. */
 /* Supplied declaration required: FUN_0045f410. */
 /* Supplied declaration required: FUN_0045f724. */
 /* Supplied declaration required: FUN_0045fd14. */
@@ -297,7 +297,7 @@ LAB_0045df8c:
         uStack_b4 = 0;
         temp_v7 = *(unsigned int *)(temp_v39 + 4);
         temp_v12 = temp_v5;
-        FUN_001b1784(temp_v7,*temp_v41,temp_v6,0x200);
+        soundPlayerPlayItem(temp_v7,*temp_v41,temp_v6,0x200);
         temp_v10 = romwright_piece_4_4(temp_v3,temp_v7);
       }
       else {
@@ -305,7 +305,7 @@ LAB_0045df8c:
         temp_v12 = 0;
         uStack_b4 = 0;
         temp_v7 = *(unsigned int *)(temp_v39 + 4);
-        FUN_001b1784(temp_v7,*temp_v41,temp_v6,0x200);
+        soundPlayerPlayItem(temp_v7,*temp_v41,temp_v6,0x200);
         temp_v10 = romwright_piece_4_4(temp_v4,temp_v7);
       }
     }

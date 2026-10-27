@@ -6,7 +6,7 @@
 extern "C" {
 
 int CONCAT44(...);
-int FUN_0019a0fc(float *, int, int);
+int nn_math_ARMv6_MTX44MultAsm(float *, int, int);
 int FUN_001a6fbc(float *);
 int FUN_00399290(unsigned int, int);
 int FUN_003b5c54(unsigned int, int);
@@ -105,7 +105,7 @@ static float romwright_sqrt_4(float value)
 }
 #endif
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001a6fbc. */
 extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: FUN_00399290. */
@@ -237,7 +237,7 @@ void FUN_003699e4(int param_1)
     temp_v41[9] = -1.0f;
     temp_v41[10] = -1.0f;
     temp_v41[0xb] = -1.0f;
-    FUN_0019a0fc(&temp_v46,temp_v1 + 0xa8,temp_v1 + 0x68);
+    nn_math_ARMv6_MTX44MultAsm(&temp_v46,temp_v1 + 0xa8,temp_v1 + 0x68);
     temp_v78 = temp_v50 * temp_v57;
     temp_v74 = temp_v51 * temp_v57;
     temp_v77 = temp_v52 * temp_v55;

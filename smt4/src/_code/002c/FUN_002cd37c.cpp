@@ -153,7 +153,7 @@ u32 FUN_002cd37c(SavedUnit *saved)
         if (skill != 0) {
             s32 k;
             for (k = 0; k < slots; k++) {
-                if (fresh.skills[k] == skill) {
+                if (skill == fresh.skills[k]) {
                     break;
                 }
             }

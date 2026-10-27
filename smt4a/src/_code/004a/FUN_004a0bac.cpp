@@ -37,15 +37,15 @@ const u16 STATUS_NEVER = 0x400;
 extern "C" {
 SlotRecord *gameGetSlotRecord(s32 slot);
 s32 gameSlotTableFindFree(void);
-s32 FUN_0018416c(u16 id);
+s32 unitHasRankingBonus(u16 id);
 }
 
-/* Fully restores a slot's HP/MP (HP gets the 1.25x bonus for ids FUN_0018416c accepts). */
+/* Fully restores a slot's HP/MP (HP gets the 1.25x bonus for ids unitHasRankingBonus accepts). */
 static __inline void slotRestore(SlotRecord *record)
 {
     record->status = 0;
     s16 hp = record->maxHp;
-    if (FUN_0018416c(record->id) != 0) {
+    if (unitHasRankingBonus(record->id) != 0) {
         hp = (s16)(hp * 1.25f);
     }
     record->hp = hp;

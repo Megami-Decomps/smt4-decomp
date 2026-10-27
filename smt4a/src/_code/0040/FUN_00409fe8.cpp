@@ -1,4 +1,4 @@
-/* NON_MATCHING: register allocation and store scheduling only: retail loads the cache base first and keeps the arguments in r5/sl/r8, stores the vptr and id with one stm and tests the allocation with cmp/mov r9; ours reaches the same stores with different registers and order */
+/* NON_MATCHING: allocation + inline constructor now one conditional initialiser, the negated NPC index is computed once and the cache slot address is shared (151 vs 150 rows); remaining differences are callee-saved numbering (retail: cache r4, id r5, load sl, synchronous r8, index r7, zero r9) and the cache base literal being loaded before the argument moves. */
 #include "classes/Obj557b08.h"
 #include <new>
 #include "quest_center/qcCtrl.h"
@@ -26,41 +26,42 @@ Obj557b08 *FUN_00409fe8(s32 id, s32 load, s32 synchronous, u32 allocOption)
 {
     char path[64];
     s32 i;
+    Obj557b08 **cache = DAT_005cc508;
 
     for (i = 0; i < 16; i++) {
-        Obj557b08 *cached = DAT_005cc508[i + 1];
+        Obj557b08 **entry = &cache[i];
+        Obj557b08 *cached = entry[1];
         if (cached != NULL && cached->id == id) {
             cached->references++;
-            return DAT_005cc508[i + 1];
+            return entry[1];
         }
     }
     i = 0;
     do {
-        if (DAT_005cc508[i + 1] == NULL) {
+        if (cache[i + 1] == NULL) {
             break;
         }
-        if (DAT_005cc508[i + 2] == NULL) {
+        if (cache[i + 2] == NULL) {
             i++;
             break;
         }
         i += 2;
     } while (i < 16);
 
-    Obj557b08 *model = static_cast<Obj557b08 *>(asdOperatorNew(0x48, allocOption));
-    if (model != NULL) {
-        new (model) Obj557b08;
-    }
-    DAT_005cc508[i + 1] = model;
+    void *memory = asdOperatorNew(0x48, allocOption);
+    Obj557b08 *model = memory != NULL ? new (memory) Obj557b08 : NULL;
+    cache[i + 1] = model;
     model->references = 1;
+    s32 npc = -id;
     if (load != 0) {
         if (id < 0) {
-            model->id = id;
-            textFormatBuffer(path, DAT_00527250, -id);
-            model->handle = NULL;
+            model->id = -npc;
+            textFormatBuffer(path, DAT_00527250, npc);
             model->kind = 2;
-            model->index = -id;
-            if (FUN_004705ec(g_aocSystem, -id, 1) != 0) {
-                aocQueueType0c(g_aocSystem, -id, &model->handle, path);
+            model->handle = NULL;
+            model->index = npc;
+            if (FUN_004705ec(g_aocSystem, npc, 1) != 0) {
+                aocQueueType0c(g_aocSystem, npc, &model->handle, path);
                 return model;
             }
         } else {

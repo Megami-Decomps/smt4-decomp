@@ -36,8 +36,10 @@ s32 FUN_004190a8(Image004190a8 *image)
         bytesPerPixel = 1;
 
         s32 total = image->width * image->height * bytesPerPixel;
-    for (s32 i = 0; i < total; i += bytesPerPixel) {
+    s32 i = 0;
+    while (i < total) {
         swapBytes(&image->pixels[i + 2], &image->pixels[i]);
+        i += bytesPerPixel;
     }
     return 1;
 }

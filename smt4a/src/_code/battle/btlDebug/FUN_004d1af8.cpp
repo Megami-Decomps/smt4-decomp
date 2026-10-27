@@ -1,173 +1,76 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_004d1af8` (_code @ 0x4d1af8, 0x624 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the battle flag menu builder (396 vs 395 rows, call order identical); retail loads the 64-bit mask halves with ldr/ldm pairs in a different order and register assignment than this build (ldrd/ldr). */
+#include "battle/btlMain.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
+
+/* The debug flag menu screen: its list box. */
+struct BattleFlagMenu {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 listBox;
+};
 
 extern "C" {
 
-int jobStop(unsigned int, int);
-int asdListBoxCreateDefaultFlags(unsigned int, int, int);
-int jobSetText(unsigned int, unsigned char *);
-int asdListBoxSetIntItem(...);
-int asdListBoxSetByteValue(unsigned int, int);
-int asdListBoxAddItems(void);
-int asdListBoxSetToggleItem(...);
-int FUN_003592dc(unsigned int);
+extern u64 DAT_005715f8[49];
+extern const AsdListBoxEntry DAT_00571b40[33];
+extern u32 DAT_0057a6e8;
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp24; /* 0x24: local_24 */
-    unsigned int sp28; /* 0x28: local_28 */
-} param_2_stack;
+u32 jobIsValid(u32 handle);
+u32 jobStop(u32 handle, u16 delay);
+void FUN_003592dc(u32 handle);
+void asdListBoxAddItems(u32 list, const AsdListBoxEntry *entries, s32 count);
+void asdListBoxSetByteValue(u32 list, s32 value);
+void jobSetText(u32 job, const char *text);
+void asdListBoxSetToggleItem(u32 list, u32 id, s32 on);
+void asdListBoxSetIntItem(u32 list, u32 id, s32 value, s32 minimum, s32 maximum, u32 option);
+u32 *gameGetSlotTable(void);
+s32 FUN_003e53ec(void);
 
-extern unsigned char LAB_004d1efc; /* 0x4d1efc */
-extern unsigned int DAT_00571640; /* 0x571640 */
-extern unsigned int DAT_00571644; /* 0x571644 */
-extern unsigned int DAT_00571648; /* 0x571648 */
-extern unsigned int DAT_0057164c; /* 0x57164c */
-extern unsigned int DAT_00571650; /* 0x571650 */
-extern unsigned int DAT_00571654; /* 0x571654 */
-extern unsigned int DAT_00571658; /* 0x571658 */
-extern unsigned int DAT_0057165c; /* 0x57165c */
-extern unsigned int DAT_00571660; /* 0x571660 */
-extern unsigned int DAT_00571664; /* 0x571664 */
-extern unsigned int DAT_00571668; /* 0x571668 */
-extern unsigned int DAT_0057166c; /* 0x57166c */
-extern unsigned int DAT_00571670; /* 0x571670 */
-extern unsigned int DAT_00571674; /* 0x571674 */
-extern unsigned int DAT_00571678; /* 0x571678 */
-extern unsigned int DAT_0057167c; /* 0x57167c */
-extern unsigned int DAT_00571680; /* 0x571680 */
-extern unsigned int DAT_00571684; /* 0x571684 */
-extern unsigned int DAT_00571688; /* 0x571688 */
-extern unsigned int DAT_0057168c; /* 0x57168c */
-extern unsigned int DAT_005716b8; /* 0x5716b8 */
-extern unsigned int DAT_005716bc; /* 0x5716bc */
-extern unsigned int DAT_005716d8; /* 0x5716d8 */
-extern unsigned int DAT_005716dc; /* 0x5716dc */
-extern unsigned int DAT_005716e0; /* 0x5716e0 */
-extern unsigned int DAT_005716e4; /* 0x5716e4 */
-extern unsigned int DAT_005716e8; /* 0x5716e8 */
-extern unsigned int DAT_005716ec; /* 0x5716ec */
-extern unsigned int DAT_005716f0; /* 0x5716f0 */
-extern unsigned int DAT_005716f4; /* 0x5716f4 */
-extern unsigned int DAT_005716f8; /* 0x5716f8 */
-extern unsigned int DAT_005716fc; /* 0x5716fc */
-extern unsigned int DAT_00571700; /* 0x571700 */
-extern unsigned int DAT_00571704; /* 0x571704 */
-extern unsigned int DAT_00571708; /* 0x571708 */
-extern unsigned int DAT_0057170c; /* 0x57170c */
-extern unsigned int DAT_00571710; /* 0x571710 */
-extern unsigned int DAT_00571714; /* 0x571714 */
-extern unsigned int DAT_00571728; /* 0x571728 */
-extern unsigned int DAT_0057172c; /* 0x57172c */
-extern unsigned int DAT_00571730; /* 0x571730 */
-extern unsigned int DAT_00571734; /* 0x571734 */
-extern unsigned int DAT_00571738; /* 0x571738 */
-extern unsigned int DAT_0057173c; /* 0x57173c */
-extern unsigned int DAT_00571758; /* 0x571758 */
-extern unsigned int DAT_0057175c; /* 0x57175c */
-extern unsigned int DAT_00571768; /* 0x571768 */
-extern unsigned int DAT_0057176c; /* 0x57176c */
-extern unsigned int DAT_00571778; /* 0x571778 */
-extern unsigned int DAT_0057177c; /* 0x57177c */
-extern unsigned int DAT_0057a6e8; /* 0x57a6e8 */
-
-/* Supplied declaration required: jobStop. */
-extern int jobIsValid(unsigned int);
-extern unsigned int *gameGetSlotTable(void);
-/* Supplied declaration required: asdListBoxCreateDefaultFlags. */
-/* Supplied declaration required: jobSetText. */
-/* Supplied declaration required: asdListBoxSetIntItem. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxSetToggleItem. */
-/* Supplied declaration required: FUN_003592dc. */
-extern unsigned int FUN_003e53ec(void);
-
-
-void FUN_004d1af8(int param_1,int param_2)
-
+/* Rebuilds the battle flag menu: closes the old list box and fills a new one with the marker flag toggles and counters. */
+void FUN_004d1af8(BattleFlagMenu *menu, BtlMainStateA *battle)
 {
-/* irregular: 8 native warning(s); review required */
-  int temp_v0;
-  unsigned int temp_v1;
-  unsigned int *puVar3;
-  unsigned int *puVar4;
-  
-  temp_v0 = jobIsValid(*(unsigned int *)(param_1 + 0x10));
-  if (temp_v0 != 0) {
-    FUN_003592dc(*(unsigned int *)(param_1 + 0x10));
-    jobStop(*(unsigned int *)(param_1 + 0x10),0);
-  }
-  temp_v1 = *(unsigned int *)(param_2 + 0x80);
-  asdListBoxCreateDefaultFlags(temp_v1,0x75,0);
-  *(unsigned int *)(param_1 + 0x10) = temp_v1;
-  asdListBoxAddItems();
-  asdListBoxSetByteValue(*(unsigned int *)(param_1 + 0x10),1);
-  jobSetText(*(unsigned int *)(param_1 + 0x10),&LAB_004d1efc);
-  puVar4 = (unsigned int *)(param_2 + 0x45a8);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0,
-               (*puVar4 & DAT_00571640) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571644) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),1,
-               (*puVar4 & DAT_00571648) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057164c) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),2,
-               (DAT_00571654 & *(unsigned int *)(param_2 + 0x45ac)) != 0 || (DAT_00571650 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),3,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057165c) != 0 || (DAT_00571658 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),5,
-               (*puVar4 & DAT_00571660) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571664) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),6,
-               (DAT_00571668 & *puVar4) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057166c) != 0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),4,*(unsigned int *)(param_2 + 0x4d5c),0,99999,0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),7,
-               (*puVar4 & DAT_00571670) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571674) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),8,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057176c) != 0 || (DAT_00571768 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),9,
-               (*puVar4 & DAT_00571678) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057167c) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),10,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571684) != 0 || (*puVar4 & DAT_00571680) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xb,
-               (*puVar4 & DAT_00571688) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057168c) != 0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xc,*(unsigned int *)(param_2 + 0x4cd4),0,400,0);
-  puVar3 = (unsigned int *)gameGetSlotTable();
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0xd,*puVar3,0,999999999,0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xe,
-               (DAT_005716b8 & *puVar4) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716bc) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0xf,
-               (*puVar4 & DAT_005716d8) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716dc) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x10,
-               (DAT_005716e4 & *(unsigned int *)(param_2 + 0x45ac)) != 0 || (*puVar4 & DAT_005716e0) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x11,
-               (DAT_005716ec & *(unsigned int *)(param_2 + 0x45ac)) != 0 || (*puVar4 & DAT_005716e8) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x12,
-               (*puVar4 & DAT_005716f0) != 0 || (DAT_005716f4 & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x13,
-               (DAT_005716f8 & *puVar4) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_005716fc) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x14,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571704) != 0 || (DAT_00571700 & *puVar4) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x15,
-               (*puVar4 & DAT_00571708) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057170c) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x16,
-               (*puVar4 & DAT_00571710) != 0 || (DAT_00571714 & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x17,
-               (*puVar4 & DAT_00571728) != 0 || (DAT_0057172c & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x18,
-               (*(unsigned int *)(param_2 + 0x45ac) & DAT_00571734) != 0 || (DAT_00571730 & *puVar4) != 0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x19,*(unsigned int *)(param_2 + 0x302c),0xffffffff,999
-               ,0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x1a,
-               (*puVar4 & DAT_00571738) != 0 || (DAT_0057173c & *(unsigned int *)(param_2 + 0x45ac)) != 0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1b,*(unsigned int *)(param_2 + 0x3034),0,4,0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1c,DAT_0057a6e8,0xffffffff,999,0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x1d,
-               (*puVar4 & DAT_00571758) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057175c) != 0);
-  temp_v1 = FUN_003e53ec();
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x1e,temp_v1,0,8,0);
-  asdListBoxSetToggleItem(*(unsigned int *)(param_1 + 0x10),0x1f,
-               (DAT_00571778 & *puVar4) != 0 || (*(unsigned int *)(param_2 + 0x45ac) & DAT_0057177c) != 0);
-  asdListBoxSetIntItem(*(unsigned int *)(param_1 + 0x10),0x20,*(unsigned int *)(param_2 + 0x4d6c),0,10,0);
-  return;
+    u8 *state = reinterpret_cast<u8 *>(battle);
+    if (jobIsValid(menu->listBox) != 0) {
+        FUN_003592dc(menu->listBox);
+        jobStop(menu->listBox, 0);
+    }
+    menu->listBox = asdListBoxCreateDefaultFlags(*reinterpret_cast<u32 *>(state + 0x80), 0x75, 0, 0);
+    asdListBoxAddItems(menu->listBox, DAT_00571b40, 33);
+    asdListBoxSetByteValue(menu->listBox, 1);
+    jobSetText(menu->listBox, "btl Flag Menu");
+    asdListBoxSetToggleItem(menu->listBox, 0, (battle->markerMasks.bits & DAT_005715f8[9]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 1, (battle->markerMasks.bits & DAT_005715f8[10]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 2, (battle->markerMasks.bits & DAT_005715f8[11]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 3, (battle->markerMasks.bits & DAT_005715f8[12]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 5, (DAT_005715f8[13] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 6, (DAT_005715f8[14] & battle->markerMasks.bits) != 0);
+    asdListBoxSetIntItem(menu->listBox, 4, *reinterpret_cast<s32 *>(state + 0x4D5C), 0, 99999, 0);
+    asdListBoxSetToggleItem(menu->listBox, 7, (DAT_005715f8[15] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 8, (battle->markerMasks.bits & DAT_005715f8[46]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 9, (DAT_005715f8[16] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 10, (DAT_005715f8[17] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 11, (DAT_005715f8[18] & battle->markerMasks.bits) != 0);
+    asdListBoxSetIntItem(menu->listBox, 12, *reinterpret_cast<s32 *>(state + 0x4CD4), 0, 400, 0);
+    asdListBoxSetIntItem(menu->listBox, 13, *gameGetSlotTable(), 0, 999999999, 0);
+    asdListBoxSetToggleItem(menu->listBox, 14, (battle->markerMasks.bits & DAT_005715f8[24]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 15, (DAT_005715f8[28] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 16, (battle->markerMasks.bits & DAT_005715f8[29]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 17, (battle->markerMasks.bits & DAT_005715f8[30]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 18, (battle->markerMasks.bits & DAT_005715f8[31]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 19, (DAT_005715f8[32] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 20, (DAT_005715f8[33] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 21, (DAT_005715f8[34] & battle->markerMasks.bits) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 22, (battle->markerMasks.bits & DAT_005715f8[35]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 23, (battle->markerMasks.bits & DAT_005715f8[38]) != 0);
+    asdListBoxSetToggleItem(menu->listBox, 24, (DAT_005715f8[39] & battle->markerMasks.bits) != 0);
+    asdListBoxSetIntItem(menu->listBox, 25, *reinterpret_cast<s32 *>(state + 0x302C), 0xffffffff, 999, 0);
+    asdListBoxSetToggleItem(menu->listBox, 26, (DAT_005715f8[40] & battle->markerMasks.bits) != 0);
+    asdListBoxSetIntItem(menu->listBox, 27, *reinterpret_cast<s32 *>(state + 0x3034), 0, 4, 0);
+    asdListBoxSetIntItem(menu->listBox, 28, DAT_0057a6e8, -1, 999, 0);
+    asdListBoxSetToggleItem(menu->listBox, 29, (battle->markerMasks.bits & DAT_005715f8[44]) != 0);
+    asdListBoxSetIntItem(menu->listBox, 30, FUN_003e53ec(), 0, 8, 0);
+    asdListBoxSetToggleItem(menu->listBox, 31, (battle->markerMasks.bits & DAT_005715f8[48]) != 0);
+    asdListBoxSetIntItem(menu->listBox, 32, *reinterpret_cast<s32 *>(state + 0x4D6C), 0, 10, 0);
 }
 
 } /* extern "C" */

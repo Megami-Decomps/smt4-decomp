@@ -70,7 +70,9 @@ void FUN_004116a0(ScriptOwner *owner)
         }
     }
     u16 pick;
-    if (count == 0) {
+    if (!(count == 0)) {
+        pick = candidates[lcgRandomRange((u16)(count - 1))];
+    } else {
         PartySlot *selected = saveSlotFindSelected();
         if (selected == NULL) {
             pick = 0;
@@ -79,8 +81,6 @@ void FUN_004116a0(ScriptOwner *owner)
             candidates[0] = selected->id;
             pick = candidates[lcgRandomRange((u16)(count - 1))];
         }
-    } else {
-        pick = candidates[lcgRandomRange((u16)(count - 1))];
     }
 
     BtlMainStateExtA *battle = btlGetMainStateExt();

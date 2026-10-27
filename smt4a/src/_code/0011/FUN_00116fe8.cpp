@@ -1,2 +1,13 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x559dd8; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void *FUN_00116ff4(void *self);
+void operatorDelete(void *self);
+
+void FUN_00116fe8(void *self)
+{
+    operatorDelete(FUN_00116ff4(self));
+}
+
+} /* extern "C" */

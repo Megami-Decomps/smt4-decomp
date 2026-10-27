@@ -3,7 +3,7 @@
 extern "C" {
 void textFormatBuffer(void*, const char*, ...);
 void FUN_002bf810(u32);
-void FUN_002cedd8(void);
+void searchWinInitialize(void);
 extern SearchWinWork* DAT_0043e170;
 extern const char DAT_00403cb0[];
 extern const char DAT_00403cc4[];
@@ -14,7 +14,7 @@ s32 FUN_002c1d5c(void);
 u32 scrComm_SearchWin_Start(void)
 {
     if (DAT_0043e170 == NULL && FUN_002c1d5c() == 0) {
-        FUN_002cedd8();
+        searchWinInitialize();
         s32 mode = scrGetArg(0);
         SearchWinWork* window = DAT_0043e170;
         if (mode == 0) {

@@ -29,7 +29,10 @@ void FUN_002d9208(void)
         camera->unk520.y = 0.0f;
         camera->unk520.z = 0.0f;
         camera->dist = 4.5f;
-        Vec3 up = {0.0f, 1.0f, 0.0f};
+        Vec3 up;
+        up.x = 0.0f;
+        up.y = 1.0f;
+        up.z = 0.0f;
         Vec3 target = camera->eye;
         Vec3 offset = camera->dir;
         offset.x *= camera->dist;

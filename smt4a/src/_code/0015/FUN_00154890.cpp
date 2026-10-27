@@ -26,9 +26,11 @@ extern "C" s32 FUN_00154890(u32 index)
     } else if (index < 4 && sound->slotsA[index].active != 0) {
         if (slot != NULL) {
             slot = &sound->slotsA[index];
-            for (s32 i = 0; i < 4; ++i) {
+            s32 i = 0;
+            while (i < 4) {
                 if (slot->handles[i] != 0)
                     asdSoundObjectStop(slot->handles[i], 0);
+                ++i;
             }
             slot->volume = 0x40;
             if (slot->hasHeap != 0)

@@ -58,6 +58,16 @@ union nnResultFields {
     } fields;
 };
 
+/* The description read through the bitfield view and returned as an int: callers compare it signed
+   (`lsl/lsr` into a register, then `cmp #lo; blt` / `cmp #hi; bgt`), where nnResultDescription's
+   mask lets armcc compare unsigned. */
+static __inline int nnResultDescriptionBits(u32 result)
+{
+    nnResultFields code;
+    code.value = result;
+    return code.fields.description;
+}
+
 /* True when the result is not the wait-timeout description 0x3fe (the SDK tested it as a bitfield compare). */
 static __inline bool nnResultIsNotTimeout(u32 result)
 {

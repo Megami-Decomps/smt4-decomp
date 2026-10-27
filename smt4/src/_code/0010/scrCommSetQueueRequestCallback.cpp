@@ -1,15 +1,12 @@
-#include "romwright_types.h"
+#include "AsdSDK/Source/Gfx/Text/TextDefaults.h"
 
 extern "C" {
 
-extern unsigned char g_asdTextDefaults; /* 0x464d48 */
+extern AsdTextDefaults g_asdTextDefaults;
 
-
-void scrCommSetQueueRequestCallback(unsigned int param_1)
-
+void scrCommSetQueueRequestCallback(u32 value)
 {
-  (*(unsigned int *)((unsigned char *)&g_asdTextDefaults + 0x14)) = param_1;
-  return;
+    g_asdTextDefaults.unk14 = value;
 }
 
 } /* extern "C" */

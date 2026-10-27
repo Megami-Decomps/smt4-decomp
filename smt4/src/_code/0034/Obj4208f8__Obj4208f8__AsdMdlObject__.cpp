@@ -1,4 +1,3 @@
-/* NON_MATCHING: body and vtable match retail; armcc reuses the model parameter for the first resourceGetPosition argument where retail reloads this->model, and loads the zero constant one instruction later. */
 #include "classes/Obj4208f8.h"
 
 extern "C" {
@@ -10,8 +9,10 @@ void FUN_002b2ae8(AsdMdlNode *node, u32 unused, Obj4208f8Vec3 *vector);
 Obj4208f8::Obj4208f8(AsdMdlObject *m)
     : model(m), unk08(0), unk0C(0.0f, 0.0f, 0.0f)
 {
-    for (int i = 0; i < 3; i++) {
+    int i = 0;
+    while (i < 3) {
         unk3C[i].set(0.0f, 0.0f, 0.0f);
+        i++;
     }
     resourceGetPosition(model->node, 0, &unk30);
     FUN_002b2ae8(model->node, 0, &unk18);

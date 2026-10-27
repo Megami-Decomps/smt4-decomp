@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001b1784(int *, unsigned int, int, int, int, int, int, int);
+int soundPlayerPlayItem(int *, unsigned int, int, int, int, int, int, int);
 
 typedef int romwright_code(...);
 /* stack frame of param_6: 3 slot(s), 12 byte(s) */
@@ -14,7 +14,7 @@ typedef struct {
     unsigned int sp30; /* 0x30: local_30 */
 } param_6_stack;
 
-/* Supplied declaration required: FUN_001b1784. */
+/* Supplied declaration required: soundPlayerPlayItem. */
 extern void nn_os_CriticalSection_Enter(unsigned int);
 extern void nn_os_CriticalSection_Leave(unsigned int);
 
@@ -30,7 +30,7 @@ int FUN_001b1c40(int param_1,unsigned int param_2,int param_3,int param_4,unsign
   
   nn_os_CriticalSection_Enter(*(int *)(param_1 + 4) + 0x110);
   piVar1 = *(int **)(param_1 + 4);
-  FUN_001b1784(piVar1,param_2,param_1 + 8,0x200,0,0,0,1);
+  soundPlayerPlayItem(piVar1,param_2,param_1 + 8,0x200,0,0,0,1);
   if (piVar1 != (int *)0x0) {
     temp_v0 = (**(romwright_code **)(*piVar1 + 0x4c))();
     if ((temp_v0 != 0) && (temp_v0 = (**(romwright_code **)(*piVar1 + 0xc))(piVar1), temp_v0 != 0)) {

@@ -1,4 +1,4 @@
-/* NON_MATCHING: positive-count preheader schedules loop initialization after the guard; final repeated-color argument uses r0 rather than the preceding r2 copy. */
+/* NON_MATCHING: only the repeated colour argument copy chain differs (retail `mov r3,r0; mov r2,r3; mov r1,r2`, build `mov r1,r0`). */
 #include "camp/RenderCtx.h"
 #include <string.h>
 
@@ -23,9 +23,10 @@ void FUN_003a3400(f32 height)
         RenderCtxA *context = g_renderCtx;
         renderCtxPushA(context, FUN_001692ac(5, 1));
         renderCtxSelectTexture(g_renderCtx, 0);
+        s32 index = 0;
         if (registry->count > 0) {
             height += 100.0f;
-            for (s32 index = 0; index < registry->count; ++index) {
+            for (; index < registry->count; ++index) {
                 const DebugBoundsRecord *bounds = &registry->entries[index];
                 f32 minimumX = bounds->minimum[0];
                 f32 minimumZ = bounds->minimum[2];

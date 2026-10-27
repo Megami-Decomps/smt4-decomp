@@ -1,23 +1,19 @@
-#include "romwright_types.h"
+#include "common.h"
+
+struct GpuFloatVector4 { f32 x, y, z, w; };
 
 extern "C" {
 
-int gpuSubmitFloat24Vectors(int);
+extern const GpuFloatVector4 *DAT_00464c40;
+void gpuSubmitFloat24Vectors(const GpuFloatVector4 *second, f32 x, f32 y, f32 z, f32 u, f32 v);
 
-extern int DAT_00464c40; /* 0x464c40 */
-
-/* Supplied declaration required: gpuSubmitFloat24Vectors. */
-
-
-void gpuSubmitFloatVectorsOrDefault(int param_1)
-
+/* Submits the float24 vectors, using the default vector when none is given. */
+void gpuSubmitFloatVectorsOrDefault(const GpuFloatVector4 *second, f32 x, f32 y, f32 z, f32 u, f32 v)
 {
-/* irregular: 1 native warning(s); review required */
-  if (param_1 == 0) {
-    param_1 = DAT_00464c40;
-  }
-  gpuSubmitFloat24Vectors(param_1);
-  return;
+    if (second == NULL) {
+        second = DAT_00464c40;
+    }
+    gpuSubmitFloat24Vectors(second, x, y, z, u, v);
 }
 
 } /* extern "C" */

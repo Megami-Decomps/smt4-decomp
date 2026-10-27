@@ -1,5 +1,3 @@
-/* NON_MATCHING: after asdTextureSetImage the slot pointer and the loop index trade r0/r1 against
- * retail (slot in r1, index and constants in r0) */
 #include "shard/W8_X10_ActiveTextureSlot.h"
 #include "AsdSDK/FileLoadSync.h"
 
@@ -14,14 +12,13 @@ void asdMemFree(void *block);
 /* Clears every particle's state and position. */
 static void resetParticles(void)
 {
-    ActiveTextureSlot *slot = g_activeTextureSlot;
     s32 i;
 
     for (i = 0; i < ACTIVE_TEXTURE_SLOT_PARTICLES; i++) {
-        slot->particleState[i] = 0;
-        slot->particlePosition[i][0] = 0.0f;
-        slot->particlePosition[i][1] = 0.0f;
-        slot->particlePosition[i][2] = 0.0f;
+        g_activeTextureSlot->particleState[i] = 0;
+        g_activeTextureSlot->particlePosition[i][0] = 0.0f;
+        g_activeTextureSlot->particlePosition[i][1] = 0.0f;
+        g_activeTextureSlot->particlePosition[i][2] = 0.0f;
     }
 }
 

@@ -26,12 +26,12 @@ void FUN_0015402c(ClearBufferSurface *color, ClearBufferSurface *depth,
     ClearDepthBits value;
     value.value = depthValue;
     u32 packedDepth;
-    if (depthValue <= 0.0f || ((value.bits << 1) >> 24) == 255) {
-        packedDepth = 0;
-    } else {
+    if (!(depthValue <= 0.0f || ((value.bits << 1) >> 24) == 255)) {
         value.value *= 16777216.0f;
         packedDepth = static_cast<s32>(value.bits) < 0x4B800000 ?
                       static_cast<u32>(value.value) : 0xFFFFFF;
+    } else {
+        packedDepth = 0;
     }
     u32 packedColor = (static_cast<u32>(red * 255.0f) << 24) |
                       (static_cast<u32>(green * 255.0f) << 16) |

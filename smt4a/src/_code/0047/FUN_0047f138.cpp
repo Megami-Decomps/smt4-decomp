@@ -1,4 +1,3 @@
-/* NON_MATCHING: retail materialises the zero for the three zero stack arguments in r3 right after the table test and compares the id through ip; the build zeroes r0 later and uses r3 for the id. */
 #include "common.h"
 #include "kernel/jyoucyuGetTableEntry.h"
 
@@ -22,11 +21,13 @@ s32 FUN_004fb43c(u32 index, u32 argument, u32 entryValue, u32 flag,
 
 static __inline const TableEntryView* findFallbackEntry(u32 id)
 {
-    for (s32 index = 0; index < 3; ++index) {
+    s32 index = 0;
+    while (index < 3) {
         const TableEntryView* entry = &DAT_0057a4c4[index];
         if (entry->id == id) {
             return entry;
         }
+        ++index;
     }
     return 0;
 }

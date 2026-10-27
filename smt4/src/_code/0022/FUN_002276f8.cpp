@@ -1,4 +1,3 @@
-/* NON_MATCHING: the battle flag update is read-modify-written through a precomputed field address here (add r1, r0, #1024 / #564); retail keeps r0 as the base and uses [r0, #1588] twice */
 #include "common.h"
 
 extern "C" {
@@ -21,6 +20,11 @@ extern BtlMain *g_btlMain;
 extern void FUN_001ab998(void);
 
 
+static __inline void flagsClearBits(u32 *flags, u32 bits)
+{
+    *flags &= ~bits;
+}
+
 /* Releases the owner's handle, resets its state to 12, clears its flag 2 and the battle flag 0x4000000. */
 void FUN_002276f8(Owner *owner)
 {
@@ -32,7 +36,7 @@ void FUN_002276f8(Owner *owner)
     owner->flags &= ~2;
     BtlMain *main = g_btlMain;
     if (main != NULL) {
-        main->flags &= ~0x04000000u;
+        flagsClearBits(&main->flags, 0x04000000u);
     }
 }
 

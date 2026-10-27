@@ -72,14 +72,14 @@ retry:
     case ASD_PROC_RUNNING:
     case ASD_PROC_ENDING:
     case ASD_PROC_END_DELAY:
-        if (list->head != NULL) {
-            list->tail->next = proc;
-            proc->prev = list->tail;
-            list->tail = proc;
-        } else {
+        if (!(list->head != NULL)) {
             list->head = proc;
             list->tail = proc;
             proc->prev = NULL;
+        } else {
+            list->tail->next = proc;
+            proc->prev = list->tail;
+            list->tail = proc;
         }
         proc->next = NULL;
         g_asdProcess.count++;

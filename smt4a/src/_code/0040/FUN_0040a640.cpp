@@ -1,4 +1,4 @@
-/* NON_MATCHING: record addressing now matches retail (flat arrays, unfolded (group-1)*7+index and group*2-2+index); retail still keeps one gameDataBlocksGetStats call with the record selection out of line after it, while the build duplicates the call into the kind-0 remap path and predicates the selection. */
+/* NON_MATCHING: 52 of 52 rows now (one shared gameDataBlocksGetStats call, record selection in findRecord, unfolded group*2-2): only the callee-saved numbering of the loop locals (retail: entries r6, kind r5, group r7, index r8) and the zero register reused for the null record (`movne r0, sl`) differ. */
 #include "common.h"
 #include "gamedata/DataTableAccess.h"
 
@@ -27,13 +27,33 @@ typedef struct StatBlock {
 StatResetEntry *dataTable18Sub0GetEntries(void);
 StatBlock *gameDataBlocksGetStats(void);
 
+static __inline StatRecord *findRecord(StatBlock *stats, u8 kind, u8 group, u32 index)
+{
+    switch (kind) {
+    case 0:
+        {
+            u32 first = (group - 1) * 7;
+            return &stats->normal[first + index];
+        }
+    case 1:
+        {
+            u32 first = group * 2;
+            first -= 2;
+            return &stats->special[first + index];
+        }
+    default:
+        return NULL;
+    }
+}
+
 /* Clears the count and level of the stat record each table-18 entry names. */
 void FUN_0040a640(void)
 {
     StatResetEntry *entries = dataTable18Sub0GetEntries();
     s32 count = dataTable18Sub0GetCount();
 
-    for (s32 i = 0; i < count; i++) {
+    s32 i = 0;
+    while (i < count) {
         u8 group = entries[i].group;
         u8 kind = entries[i].kind;
         u32 index = entries[i].index;
@@ -47,21 +67,10 @@ void FUN_0040a640(void)
             index = 1;
         }
 
-        StatBlock *stats = gameDataBlocksGetStats();
-        StatRecord *record;
-        switch (kind) {
-        case 0:
-            record = &stats->normal[(group - 1) * 7 + index];
-            break;
-        case 1:
-            record = &stats->special[group * 2 - 2 + index];
-            break;
-        default:
-            record = NULL;
-            break;
-        }
+        StatRecord *record = findRecord(gameDataBlocksGetStats(), kind, group, index);
         record->count = 0;
         record->level = 0;
+        i++;
     }
 }
 

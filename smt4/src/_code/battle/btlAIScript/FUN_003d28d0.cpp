@@ -1,291 +1,229 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d28d0` (_code @ 0x3d28d0, 0x5a8 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
-#include "shard/W4_Match6_BtlScript.h"
-#include "shard/W4_W4Match2_BtlUnits.h"
+/* NON_MATCHING: typed rewrite of the command phase dispatcher (380 vs 372 rows); armcc points the switch table defaults at a shared return-0 block and orders the case blocks differently from retail. */
+#include "battle/BattleCommandController.h"
+#include "battle/BtlMainAccess.h"
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
 #include "AsdSDK/AsdMemUtil.h"
+#include "gamedata/DataTable40.h"
+
+/* Battle state words the dispatcher reads beyond the shared prefix. */
+struct CommandPhaseView {
+    /* 0x0000 */ u8 unk0000[0x20];
+    /* 0x0020 */ u32 job20;
+    /* 0x0024 */ u8 unk0024[0x38];
+    /* 0x005c */ u32 job5c;
+    /* 0x0060 */ u8 unk0060[0x1c];
+    /* 0x007c */ u32 flags7c;
+    /* 0x0080 */ u8 unk0080[0x21dc];
+    /* 0x225c */ s32 word225c;
+    /* 0x2260 */ u8 unk2260[0x270c];
+    /* 0x496c */ s16 word496c;
+    /* 0x496e */ s16 word496e;
+};
+
+typedef char CommandPhaseViewOffsets[
+    offsetof(CommandPhaseView, job5c) == 0x5c && offsetof(CommandPhaseView, flags7c) == 0x7c &&
+    offsetof(CommandPhaseView, word225c) == 0x225c && offsetof(CommandPhaseView, word496c) == 0x496c ? 1 : -1];
 
 extern "C" {
+extern BtlActionGlobals g_btlAction;
+extern u32 g_btlAiScript;
+extern u32 g_btlActionReflect;
+extern void *DAT_00435d18;
+extern void *g_btlEvent;
+extern u32 g_btlUiBlock;
 
-int FUN_00229754(...);
-int battleSetActionKind(int *);
-int FUN_00229b10(int *, unsigned int *);
-int btlUnitSetParam(int *, int, int);
-int dataTable40FindById(void);
-int btlUiClearRowStatuses(unsigned int);
-int FUN_003cae6c(int *, unsigned int *);
-int FUN_003cb3e4(int *, unsigned int *);
-int FUN_003cbce4(int *, unsigned int *);
-int FUN_003cbf40(int *, unsigned int *);
-int btlChooseAlternateSkillOrFallback(int *, unsigned int *);
-int FUN_003cfb60(int *, unsigned int *);
-int FUN_003d173c(int *, unsigned int *);
-int FUN_003d2ea0(int *, unsigned int *);
-int FUN_003d317c(int *, unsigned int *);
-int eftLoadFileRegisterAndParseHeader(...);
-int FUN_003dcbf4(void);
+u32 FUN_003d317c(BtlMainState **block, CommandState *work);
+u32 FUN_003c9f58(BtlMainState **block, CommandState *work);
+u32 FUN_003d2ea0(BtlMainState **block, CommandState *work);
+u32 FUN_003cbf40(BtlMainState **block, CommandState *work);
+u32 FUN_003cae6c(BtlMainState **block, CommandState *work);
+u32 FUN_003cab9c(BtlMainState **block, CommandState *work);
+u32 FUN_003d1c1c(BtlMainState **block, CommandState *work);
+u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel);
+u32 btlChooseAlternateSkillOrFallback(BtlMainState **block, CommandState *work);
+u32 FUN_003cbce4(BtlMainState **block, CommandState *work);
+u32 FUN_003cb244(BtlMainState **block, CommandState *work);
+u32 FUN_003cb3e4(BtlMainState **block, CommandState *work);
+u32 btlAiWaitUiAndUpdatePartyGroup4Latch(BtlMainState **block, CommandState *work);
+u32 FUN_003cfb60(BtlMainState **block, CommandState *work);
+void FUN_00229b10(BtlMainState **block, CommandState *work);
+void FUN_00229754(BtlMainState **block, CommandState *work);
+u8 btlAiScriptIsFinished(u32 script);
+u32 jobIsValid(u32 handle);
+s32 btlSceneIsReady(u32 ui);
+void btlUnitSetParam(BtlMainState **block, u32 param, u32 value);
+s32 nodeListCountActiveById(u32 id, void *arg);
+void btlUiClearRowStatuses(u32 ui);
+void battleSetActionKind(BtlMainState **block);
+void FUN_003aeaf4(u32 ui);
+u32 FUN_0027e3b8(void *event);
+s32 FUN_003dcbf4(void *object);
+u32 eftLoadFileRegisterAndParseHeader(void *object);
+u8 FUN_003dcfc8(void *object);
+s32 btlNodeListAnyReady(void);
 
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp10; /* 0x10: local_10 */
-} param_2_stack;
-
-extern unsigned int g_btlAiScript; /* 0x434260 */
-extern int g_btlScriptUnit; /* 0x43427c */
-extern unsigned int g_btlActionReflect; /* 0x434290 */
-extern int DAT_00435d18; /* 0x435d18 */
-extern unsigned int g_btlEvent; /* 0x435d48 */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: FUN_00229754. */
-extern int btlNodeListAnyReady(void);
-/* Supplied declaration required: battleSetActionKind. */
-/* Supplied declaration required: FUN_00229b10. */
-/* Supplied declaration required: btlUnitSetParam. */
-extern int btlSceneIsReady(unsigned int);
-extern int FUN_0027e3b8(unsigned int);
-extern int nodeListCountActiveById(unsigned int, unsigned int *);
-/* Supplied declaration required: dataTable40FindById. */
-extern int jobIsValid(unsigned int);
-/* Supplied declaration required: memClear. */
-extern int btlAiScriptIsFinished(unsigned int);
-/* Supplied declaration required: btlUiClearRowStatuses. */
-extern int FUN_003aeaf4(unsigned int);
-extern int *FUN_003c9f58(int *, unsigned int *);
-extern int *FUN_003cab9c(int *, unsigned int *);
-/* Supplied declaration required: FUN_003cae6c. */
-extern int *FUN_003cb244(int *, unsigned int *);
-/* Supplied declaration required: FUN_003cb3e4. */
-extern unsigned int btlAiWaitUiAndUpdatePartyGroup4Latch(void*, BattleActionUnit*);
-/* Supplied declaration required: FUN_003cbce4. */
-/* Supplied declaration required: FUN_003cbf40. */
-/* Supplied declaration required: btlChooseAlternateSkillOrFallback. */
-/* Supplied declaration required: FUN_003cfb60. */
-/* Supplied declaration required: FUN_003d173c. */
-extern int *FUN_003d1c1c(int *, unsigned int *);
-/* Supplied declaration required: FUN_003d2ea0. */
-/* Supplied declaration required: FUN_003d317c. */
-/* Supplied declaration required: eftLoadFileRegisterAndParseHeader. */
-/* Supplied declaration required: FUN_003dcbf4. */
-extern int FUN_003dcfc8(int);
-
-
-int * FUN_003d28d0(int *param_1,unsigned int param_2)
-
+/* Sets the acting combatant's pending action. */
+static __inline void setPendingAction(BtlMainState **block, u8 pending)
 {
-/* irregular: 18 native warning(s); review required */
-  char temp_v0;
-  int *piVar2;
-  unsigned char temp_v1;
-  int temp_v2;
-  int temp_v3;
-  unsigned int *puVar6;
-  unsigned char temp_v4;
-  
-  temp_v3 = *param_1;
-  temp_v2 = g_btlScriptUnit + *(int *)(temp_v3 + 0x84) * 0xf1c;
-  puVar6 = (unsigned int *)(temp_v2 + 4);
-  switch(param_2) {
-  case 0:
-    FUN_003d317c(param_1,puVar6);
-    return param_1;
-  case 1:
-    piVar2 = (int *)FUN_003c9f58(param_1,puVar6);
-    return piVar2;
-  case 2:
-    temp_v3 = btlAiScriptIsFinished(g_btlAiScript);
-    if (temp_v3 == 0) {
-      return (int *)0x0;
-    }
-    temp_v3 = jobIsValid(*(unsigned int *)(*param_1 + 0x5c));
-    if (temp_v3 != 0) {
-      return (int *)0x0;
-    }
-    temp_v3 = *param_1;
-    if ((((*(unsigned int *)(temp_v3 + 0x44a0) & 4) != 0) && (*(short *)(temp_v3 + 0x496c) == 0)) &&
-       (*(short *)(temp_v3 + 0x496e) == 0)) {
-      *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 0x10;
-      *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14e) = 0;
-      reinterpret_cast<int>(memClear(reinterpret_cast<void*>(temp_v2 + 0x3c), 0x85));
-    }
-    FUN_00229b10(param_1,puVar6);
-    return (int *)0x1;
-  case 3:
-    temp_v3 = jobIsValid(*(unsigned int *)(temp_v3 + 0x5c));
-    if (temp_v3 != 0) {
-      return (int *)0x0;
-    }
-    temp_v2 = *(int *)(temp_v2 + 0x2c);
-    *(unsigned short *)(temp_v2 + 0x14c) = 2;
-    *(short *)(temp_v2 + 0x14e) = (short)*(unsigned int *)(*param_1 + 0x49c8);
-    btlUnitSetParam(param_1,1,0);
-    FUN_00229b10(param_1,puVar6);
-    return (int *)0x1;
-  case 4:
-    FUN_003d2ea0(param_1,puVar6);
-    return param_1;
-  case 5:
-    FUN_003cbf40(param_1,puVar6);
-    return param_1;
-  default:
-    return (int *)0x0;
-  case 7:
-    FUN_003cae6c(param_1,puVar6);
-    return param_1;
-  case 8:
-    temp_v1 = 9;
-    break;
-  case 9:
-    temp_v3 = nodeListCountActiveById(g_btlActionReflect,puVar6);
-    if (0 < temp_v3) {
-      return (int *)0x0;
-    }
-    btlUiClearRowStatuses(g_btlUiBlock);
-    *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 10;
-    battleSetActionKind(param_1);
-    return (int *)0x1;
-  case 10:
-    if ((*(unsigned int *)(temp_v3 + 0x7c) & 1) != 0) {
-      return (int *)0x0;
-    }
-    temp_v1 = 0xb;
-    break;
-  case 0xb:
-    piVar2 = (int *)FUN_003cab9c(param_1,puVar6);
-    return piVar2;
-  case 0xc:
-    piVar2 = (int *)FUN_003d1c1c(param_1,puVar6);
-    return piVar2;
-  case 0xd:
-    FUN_003d173c(param_1,puVar6);
-    return param_1;
-  case 0xe:
-  case 0x12:
-  case 0x13:
-  case 0x16:
-    temp_v1 = 0x1b;
-    break;
-  case 0xf:
-    temp_v2 = jobIsValid(*(unsigned int *)(temp_v3 + 0x20));
-    if (temp_v2 != 0) {
-      return (int *)0x0;
-    }
-    temp_v2 = btlSceneIsReady(g_btlUiBlock);
-    if (temp_v2 == 0) {
-      return (int *)0x0;
-    }
-    temp_v1 = 0x10;
-    temp_v2 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    *(unsigned char *)(temp_v2 + 9) = temp_v1;
-    return (int *)0x1;
-  case 0x10:
-    temp_v2 = FUN_003aeaf4(g_btlUiBlock);
-    if (temp_v2 == 0) {
-      return (int *)0x0;
-    }
-    temp_v4 = *(int *)(*param_1 + 0x225c) == 3;
-    if (temp_v4) {
-      temp_v1 = 0xb;
-    }
-    else {
-      temp_v1 = 0x1b;
-    }
-    temp_v2 = g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c;
-    if (temp_v4) {
-      *(unsigned char *)(temp_v2 + 9) = temp_v1;
-      return (int *)0x1;
-    }
-    *(unsigned char *)(temp_v2 + 9) = temp_v1;
-    return (int *)0x1;
-  case 0x11:
-    btlChooseAlternateSkillOrFallback(param_1,puVar6);
-    return param_1;
-  case 0x14:
-    FUN_003cbce4(param_1,puVar6);
-    return param_1;
-  case 0x18:
-    temp_v3 = FUN_0027e3b8(g_btlEvent);
-    if (temp_v3 != 0) {
-      return (int *)0x0;
-    }
-    if (*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) == 3) {
-      temp_v2 = (int)*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14e);
-      dataTable40FindById();
-      temp_v0 = '\0';
-      if (temp_v2 != 0) {
-        temp_v0 = *(char *)(temp_v2 + 0x4b);
-      }
-      if (((*(unsigned int *)(*param_1 + 0x44a8) & 0x800) == 0) && (temp_v2 != 0 && temp_v0 != '\0')) {
-        *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0xc;
-        return (int *)0x1;
-      }
-    }
-    battleSetActionKind(param_1);
-    return (int *)0x1;
-  case 0x1b:
-    piVar2 = (int *)FUN_003cb244(param_1,puVar6);
-    return piVar2;
-  case 0x1c:
-    FUN_003cfb60(param_1,puVar6);
-    return param_1;
-  case 0x1d:
-    FUN_003cb3e4(param_1,puVar6);
-    return param_1;
-  case 0x1e:
-    piVar2 = (int *)btlAiWaitUiAndUpdatePartyGroup4Latch(param_1, reinterpret_cast<BattleActionUnit*>(puVar6));
-    return piVar2;
-  case 0x1f:
-    if (*(int *)(temp_v2 + 0xc) == 0) {
-      temp_v3 = DAT_00435d18;
-      FUN_003dcbf4();
-      if (temp_v3 == 0) {
-        return (int *)0x0;
-      }
-      eftLoadFileRegisterAndParseHeader(DAT_00435d18);
-      *(int *)(temp_v2 + 0xc) = *(int *)(temp_v2 + 0xc) + 1;
-      return (int *)0x0;
-    }
-    if (*(int *)(temp_v2 + 0xc) != 1) {
-      return (int *)0x0;
-    }
-    temp_v2 = FUN_003dcfc8(DAT_00435d18);
-    if (temp_v2 == 0) {
-      return (int *)0x0;
-    }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x20;
-    return (int *)0x1;
-  case 0x20:
-    temp_v2 = nodeListCountActiveById(g_btlActionReflect,puVar6);
-    if (0 < temp_v2) {
-      return (int *)0x0;
-    }
-    if (((*puVar6 & 0x1080) == 0) && (temp_v2 = btlNodeListAnyReady(), temp_v2 != 0)) {
-      return (int *)0x0;
-    }
-    FUN_00229754(param_1,puVar6);
-    return (int *)0x1;
-  case 0x21:
-    temp_v2 = FUN_0027e3b8(g_btlEvent);
-    if (temp_v2 != 0) {
-      return (int *)0x0;
-    }
-    *(unsigned char *)(g_btlScriptUnit + *(int *)(*param_1 + 0x84) * 0xf1c + 9) = 0x23;
-    return (int *)0x1;
-  case 0x22:
-    temp_v1 = 0x23;
-    break;
-  case 0x23:
-    if (*(short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) != 7) {
-      return (int *)0x1;
-    }
-    *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14c) = 0;
-    *(unsigned short *)(*(int *)(temp_v2 + 0x2c) + 0x14e) = 0;
-    *(unsigned int *)(*(int *)(temp_v2 + 0x24) + 0xc0) = 0;
-    *(unsigned int *)(temp_v2 + 0xf1c) = 0;
-    return (int *)0x1;
-  }
-  *(unsigned char *)(temp_v2 + 9) = temp_v1;
-  return (int *)0x1;
+    static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index].pending = pending;
 }
 
-} /* extern "C" */
+/* Runs one step of the acting combatant's pending action; returns 1 once a step finished its phase. */
+u32 FUN_003d28d0(BtlMainState **block, u32 phase)
+{
+    ActionStateChannel *channel = &static_cast<ActionStateChannels *>(g_btlAction.data)->entries[(*block)->actionState.index];
+    CommandState *work = reinterpret_cast<CommandState *>(reinterpret_cast<u8 *>(channel) + 4);
+    CommandPhaseView *view = reinterpret_cast<CommandPhaseView *>(*block);
+    u8 pending;
+    switch (phase) {
+    case 0:
+        return FUN_003d317c(block, work);
+    case 1:
+        return FUN_003c9f58(block, work);
+    case 2:
+        if (!btlAiScriptIsFinished(g_btlAiScript))
+            return 0;
+        if (jobIsValid(reinterpret_cast<CommandPhaseView *>(*block)->job5c) != 0)
+            return 0;
+        if (((*block)->battleFlags & 4) != 0 && reinterpret_cast<CommandPhaseView *>(*block)->word496c == 0 &&
+            reinterpret_cast<CommandPhaseView *>(*block)->word496e == 0) {
+            work->selection->kind = 0x10;
+            work->selection->value = 0;
+            memClear(work->targetMarks, 0x85);
+        }
+        FUN_00229b10(block, work);
+        return 1;
+    case 3:
+        if (jobIsValid(view->job5c) != 0)
+            return 0;
+        work->selection->kind = 2;
+        work->selection->value = reinterpret_cast<CommandPhaseView *>(*block)->word225c;
+        btlUnitSetParam(block, 1, 0);
+        FUN_00229b10(block, work);
+        return 1;
+    case 4:
+        return FUN_003d2ea0(block, work);
+    case 5:
+        return FUN_003cbf40(block, work);
+    case 7:
+        return FUN_003cae6c(block, work);
+    case 8:
+        pending = 9;
+        break;
+    case 9:
+        if (nodeListCountActiveById(g_btlActionReflect, work) > 0)
+            return 0;
+        btlUiClearRowStatuses(g_btlUiBlock);
+        work->selection->kind = 10;
+        battleSetActionKind(block);
+        return 1;
+    case 10:
+        if ((view->flags7c & 1) != 0)
+            return 0;
+        pending = 11;
+        break;
+    case 11:
+        return FUN_003cab9c(block, work);
+    case 12:
+        return FUN_003d1c1c(block, work);
+    case 13:
+        return FUN_003d173c(block, channel);
+    case 14:
+    case 18:
+    case 19:
+    case 22:
+        pending = 27;
+        break;
+    case 15:
+        if (jobIsValid(view->job20) != 0)
+            return 0;
+        if (btlSceneIsReady(g_btlUiBlock) == 0)
+            return 0;
+        pending = 16;
+        setPendingAction(block, pending);
+        return 1;
+    case 16: {
+        FUN_003aeaf4(g_btlUiBlock);
+        if (view->word225c == 3)
+            pending = 11;
+        else
+            pending = 27;
+        setPendingAction(block, pending);
+        return 1;
+    }
+    case 17:
+        return btlChooseAlternateSkillOrFallback(block, work);
+    case 20:
+        return FUN_003cbce4(block, work);
+    case 24: {
+        if (FUN_0027e3b8(g_btlEvent) != 0)
+            return 0;
+        bool restricted = false;
+        if (work->selection->kind == 3) {
+            const Table04Record *skill = dataTable40FindById(work->selection->value);
+            if (skill != NULL && reinterpret_cast<const u8 *>(skill)[0x4b] != 0)
+                restricted = true;
+            if ((*block)->editorControl.flags & 0x800) {
+                // Event running: fall through to the default handling.
+            } else if (restricted) {
+                setPendingAction(block, 12);
+                return 1;
+            }
+        }
+        battleSetActionKind(block);
+        return 1;
+    }
+    case 27:
+        return FUN_003cb244(block, work);
+    case 28:
+        return FUN_003cfb60(block, work);
+    case 29:
+        return FUN_003cb3e4(block, work);
+    case 30:
+        return btlAiWaitUiAndUpdatePartyGroup4Latch(block, work);
+    case 31:
+        if (channel->timer == 0) {
+            void *object = DAT_00435d18;
+            if (FUN_003dcbf4(object) == 0)
+                return 0;
+            eftLoadFileRegisterAndParseHeader(DAT_00435d18);
+            ++channel->timer;
+            return 0;
+        }
+        if (channel->timer != 1)
+            return 0;
+        if (FUN_003dcfc8(DAT_00435d18) == 0)
+            return 0;
+        setPendingAction(block, 32);
+        return 1;
+    case 32:
+        if (nodeListCountActiveById(g_btlActionReflect, work) > 0)
+            return 0;
+        if ((work->flags & 0x1080) == 0 && btlNodeListAnyReady() != 0)
+            return 0;
+        FUN_00229754(block, work);
+        return 1;
+    case 33:
+        if (FUN_0027e3b8(g_btlEvent) != 0)
+            return 0;
+        setPendingAction(block, 35);
+        return 1;
+    case 34:
+        pending = 35;
+        break;
+    case 35:
+        if (work->selection->kind != 7)
+            return 1;
+        work->selection->kind = 0;
+        work->selection->value = 0;
+        reinterpret_cast<CommandEntryView *>(work->entry)->command = 0;
+        work->trailer = 0;
+        return 1;
+    default:
+        return 0;
+    }
+    channel->pending = pending;
+    return 1;
+}
+}

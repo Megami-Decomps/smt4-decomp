@@ -9,7 +9,7 @@ struct Filter4PolyConfig;
 
 class Obj42094c : public Obj420794 {
 public:
-    Obj42094c(Obj420794Child *owned) : Obj420794(owned), config(NULL) {}
+    Obj42094c(Obj420794Child *owned) : config(NULL) { child = owned; }
     virtual ~Obj42094c();
     virtual void prepareGeometry(); /* +0x08 */
     virtual void draw(); /* +0x0C */

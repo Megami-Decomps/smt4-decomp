@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail keeps the pixel size in r3 and leaves a conditional load of 0x6756 after the format chain (a fourth compare that was removed); registers differ, the loop shape matches. */
+/* NON_MATCHING: the 0x6756 test is back in the format chain (retail's dead conditional literal load now reproduces; 37 of 37 rows); retail keeps the pixel size in r3 (width/height via `ldm r1,{r1,r2}`) where the build uses r1. */
 #include "common.h"
 
 struct Obj349838 {
@@ -20,10 +20,12 @@ extern "C" s32 FUN_00419014(Obj349838 *image)
         bytesPerPixel = 3;
     } else if (image->format == 0x6758) {
         bytesPerPixel = 2;
+    } else if (image->format == 0x6756) {
+        bytesPerPixel = 1;
     } else {
         bytesPerPixel = 1;
     }
-    s32 total = image->width * image->height * bytesPerPixel;
+    s32 total = image->height * image->width * bytesPerPixel;
     for (s32 i = 0; i < total; i += bytesPerPixel) {
         u8 *second = image->data + i + 1;
         u8 *first = image->data + i;

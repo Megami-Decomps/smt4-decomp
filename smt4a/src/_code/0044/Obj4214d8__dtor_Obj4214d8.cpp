@@ -1,5 +1,4 @@
-/* NON_MATCHING: the table loop is compiled as a count-down loop (r2 = 16) instead of testing the index, and the vtable
- * store and the handle load are scheduled in the other order */
+/* NON_MATCHING: only the slot-entry test loads with a writeback (`ldr r3, [r2, #16]!`) where retail keeps `ldr r3, [r2, #16]` and `strne r1, [r2, #16]`. */
 #include "classes/Obj4214d8.h"
 
 /* Gives the handle back to the owner and clears the tables. */
@@ -8,9 +7,10 @@ Obj4214d8::~Obj4214d8()
     if (handle != 0) {
         owner->release(handle);
     }
-    for (u32 i = 0; i < 16; i++) {
-        if (entries[i].object != NULL) {
-            entries[i].object = NULL;
+    for (int i = 0; i < 16; i++) {
+        Obj4214d8Entry *entry = &entries[i];
+        if (entry->object != 0) {
+            entry->object = 0;
         }
         pairs[i].first = 0;
         pairs[i].second = 0;

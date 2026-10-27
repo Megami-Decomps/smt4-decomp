@@ -5,7 +5,7 @@
 
 extern "C" {
 
-int FUN_0029541c(...);
+int resultUnitStepFinish(...);
 int resultSetMenuState(...);
 int buttonHelpSetPreset(...);
 int eventQueueAddUnique(...);
@@ -62,7 +62,7 @@ extern int scrRunOpcodesStub(unsigned int);
 /* Supplied declaration required: FUN_0026a978. */
 extern int FUN_0026a9cc(unsigned short, unsigned char, int, short *, unsigned char);
 /* Supplied declaration required: FUN_0028bf2c. */
-/* Supplied declaration required: FUN_0029541c. */
+/* Supplied declaration required: resultUnitStepFinish. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
@@ -416,7 +416,7 @@ LAB_002174ac:
         }
         if (*(char *)(temp_v11 + 0x3c72) == '\0') {
           FUN_0029bd4c();
-          FUN_0029541c(param_1);
+          resultUnitStepFinish(param_1);
           return;
         }
         resultSetMenuState(param_1,0x10);

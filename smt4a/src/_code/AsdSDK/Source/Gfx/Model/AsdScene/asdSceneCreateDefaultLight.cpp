@@ -59,7 +59,7 @@ static __inline void setLightDirection(SceneLightData *data, f32 x, f32 y, f32 z
 extern "C" {
 void *asdMemoryAlloc(s32 heap, s32 alignment, s32 flags, u32 size, s32 clear);
 SceneLightObject *_ZN9Obj55b5a86createEPvP18AsdAllocatorObject(SceneLightDescription *, void *allocator);
-u32 FUN_001931d8(const SceneLightColor *);
+u32 nw_ut_FloatColor_ToPicaU32(const SceneLightColor *);
 
 // Create a neutral directional scene light with packed hardware colors.
 SceneLight *asdSceneCreateDefaultLight(void)
@@ -67,8 +67,8 @@ SceneLight *asdSceneCreateDefaultLight(void)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdScene.cpp", 0x4bf);
     SceneLight *light = static_cast<SceneLight *>(asdMemoryAlloc(0x100, 0x100, 0, sizeof(SceneLight), 1));
     light->object = NULL;
-    light->index = -1;
     light->data = NULL;
+    light->index = -1;
     void *allocator = asdMemoryGetDefaultAllocator();
     SceneLightDescription description;
     description.enabled = 1;
@@ -82,13 +82,13 @@ SceneLight *asdSceneCreateDefaultLight(void)
     setLightDirection(light->data, -0.40824827551841736f, -0.8164965510368347f,
                       -0.40824827551841736f);
     setLightGray(&light->data->ambient, 0.2f);
-    light->data->packedAmbient = FUN_001931d8(&light->data->ambient);
+    light->data->packedAmbient = nw_ut_FloatColor_ToPicaU32(&light->data->ambient);
     setLightGray(&light->data->diffuse, 1.0f);
-    light->data->packedDiffuse = FUN_001931d8(&light->data->diffuse);
+    light->data->packedDiffuse = nw_ut_FloatColor_ToPicaU32(&light->data->diffuse);
     setLightGray(&light->data->specular0, 0.8f);
-    light->data->packedSpecular0 = FUN_001931d8(&light->data->specular0);
+    light->data->packedSpecular0 = nw_ut_FloatColor_ToPicaU32(&light->data->specular0);
     setLightGray(&light->data->specular1, 0.8f);
-    light->data->packedSpecular1 = FUN_001931d8(&light->data->specular1);
+    light->data->packedSpecular1 = nw_ut_FloatColor_ToPicaU32(&light->data->specular1);
     return light;
 }
 }

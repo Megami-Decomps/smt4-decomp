@@ -1,4 +1,4 @@
-/* NON_MATCHING: prologue, list pointer, loop entry and in-loop plane height match retail; the loop body schedules the box-corner loads and colour moves differently (retail loads all four corners before the modulo). */
+/* NON_MATCHING: only the repeated colour argument copy chain differs (retail `mov r3,r0; mov r2,r3; mov r1,r2`, build `mov r1,r0`). */
 #include "camp/RenderCtx.h"
 
 namespace {
@@ -36,15 +36,22 @@ void FUN_0030f730(f32 height)
         u32 state = FUN_002c5d80(5, 1);
         renderStackPush(&context->stackA, state);
         renderCtxSelectTexture(g_titleScene, 0);
-        for (s32 index = 0; index < list->count; ++index) {
-            const OverlayBounds *bounds = &list->bounds[index];
-            f32 planeHeight = height + 100.0f;
-            u32 color = palette.colors[index % 12] | 0x70;
-            FUN_00296dc4(color, color, color, color,
-                bounds->minimum[0], planeHeight, bounds->minimum[2],
-                bounds->minimum[0], planeHeight, bounds->maximum[2],
-                bounds->maximum[0], planeHeight, bounds->minimum[2],
-                bounds->maximum[0], planeHeight, bounds->maximum[2]);
+        s32 index = 0;
+        if (list->count > 0) {
+            height += 100.0f;
+            for (; index < list->count; ++index) {
+                const OverlayBounds *bounds = &list->bounds[index];
+                f32 minimumX = bounds->minimum[0];
+                f32 minimumZ = bounds->minimum[2];
+                f32 maximumZ = bounds->maximum[2];
+                f32 maximumX = bounds->maximum[0];
+                u32 color = palette.colors[index % 12] | 0x70;
+                FUN_00296dc4(color, color, color, color,
+                    minimumX, height, minimumZ,
+                    minimumX, height, maximumZ,
+                    maximumX, height, minimumZ,
+                    maximumX, height, maximumZ);
+            }
         }
         renderStackPop(&g_titleScene->stackA);
     }

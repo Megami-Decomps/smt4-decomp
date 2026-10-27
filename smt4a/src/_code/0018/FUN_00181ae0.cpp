@@ -6,7 +6,7 @@
 extern "C" {
 
 int FUN_0019af70(...);
-int FUN_0019f764(unsigned int, unsigned int, int);
+int renderCtxBindTextureMode(unsigned int, unsigned int, int);
 int materialUploadChangedParameters(...);
 int FUN_001a64f4(unsigned char [4]);
 int VectorSignedToFloat(...);
@@ -44,7 +44,7 @@ extern unsigned int *DAT_005b3bc4; /* 0x5b3bc4 */
 #define romwright_subpiece_4_1_0(value, offset) ((unsigned char)(unsigned int)(value))
 #endif
 /* Supplied declaration required: FUN_0019af70. */
-/* Supplied declaration required: FUN_0019f764. */
+/* Supplied declaration required: renderCtxBindTextureMode. */
 /* Supplied declaration required: materialUploadChangedParameters. */
 /* Supplied declaration required: FUN_001a64f4. */
 /* Supplied declaration required: callbackBindingInitFromKind. */
@@ -230,7 +230,7 @@ LAB_00181ed4:
 LAB_00181ef0:
           temp_v3 = __aeabi_uidivmod(temp_v7,(unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xc) *
                                         (unsigned int)*(unsigned short *)(*(int *)(temp_v3 + 8) + 0xe));
-          FUN_0019f764(g_renderCtx,*(unsigned int *)(*(int *)(temp_v6 + 0xc) + temp_v3 * 4),
+          renderCtxBindTextureMode(g_renderCtx,*(unsigned int *)(*(int *)(temp_v6 + 0xc) + temp_v3 * 4),
                        *(unsigned char *)(temp_v6 + 0x24));
           VectorUnsignedToFloat((unsigned int)temp_v30,(unsigned char)(in_fpscr >> 0x16) & 3);
           VectorUnsignedToFloat((unsigned int)temp_v28,(unsigned char)(in_fpscr >> 0x16) & 3);

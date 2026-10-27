@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail loads the first thread-handle argument before copying `this`, takes &thread only after the inlined destructor and re-reads bufferA into r0 (moving it to r5 only inside the null test); this build keeps &thread and the buffer in r5 from the start. */
+/* NON_MATCHING: retail schedules the thread-handle load before `sub sp`, re-reads bufferA into r0 (moving it to r5 only inside the null test) and loads unkA0 into r0 after the -1 store; this build keeps bufferA in r5 and loads unkA0 into r1. */
 #include "nn/Result.h"
 #include "nn/os/Thread.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -25,12 +25,18 @@ void FUN_002c3f5c(void *block);
 void FUN_002759bc(void);
 void mdlHandleArrayDestroy(StreamWorker *worker);
 
-/* Shuts the worker down: joins and closes its thread, frees its buffers and destroys its model handle array. */
-void FUN_003c7f20(StreamWorker *worker)
+/* Joins and closes the worker's thread. */
+static __inline void workerStopThread(StreamWorker *worker)
 {
     handleWait(worker->thread.handle, -1);
     worker->thread.joined = 1;
     worker->thread.~NnOsThread();
+}
+
+/* Shuts the worker down: joins and closes its thread, frees its buffers and destroys its model handle array. */
+void FUN_003c7f20(StreamWorker *worker)
+{
+    workerStopThread(worker);
     if (worker->bufferA != NULL) {
         FUN_002c3f5c(worker->bufferA);
         void *buffer = worker->bufferA;

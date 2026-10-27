@@ -1,4 +1,4 @@
-/* NON_MATCHING: class and defaults recovered (the first two words, the six cleared records and the table values); armcc schedules the stores differently (retail interleaves the record zeroing across the body, copies the position with ldr/ldrd, and keeps 0x100/0x104 as one stm). */
+/* NON_MATCHING: the cleared tables now unroll and interleave as in retail; remaining: the member-initialised `last` record is stored right after the vtable (retail schedules it between the position loads), the position is copied with ldr/ldrd + str/strd, and the 0x100/0x104 words are one stm. */
 #include "classes/Obj421a78.h"
 
 extern "C" const Obj421a78Vec3 DAT_004d4668;
@@ -15,7 +15,7 @@ Obj421a78::Obj421a78()
     unk28 = 0.4f;
     unk2C = 0;
     unk2D = 0;
-    unk30 = 0;
+    resource = 0;
     position.x = source->x;
     position.y = source->y;
     position.z = source->z;
@@ -35,6 +35,15 @@ Obj421a78::Obj421a78()
     unk100 = 0xBE0;
     unk104 = 0xE60;
     unk108 = 0x820;
-    unk10D = 4;
-    unk10E = 0;
+    slotCount = 4;
+    slotsDirty = 0;
+    for (u32 i = 0; i < 4; i++) {
+        tableA[i] = 0;
+        tableB[i] = 0;
+        pairs[i].first = 0;
+        pairs[i].second = 0;
+        tableC[i] = 0;
+        tableD[i] = 0;
+        tableE[i] = 0;
+    }
 }

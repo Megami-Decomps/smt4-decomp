@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x55a07c; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void FUN_00118754(void *self);
+
+void FUN_00124cce(u8 *self)
+{
+    FUN_00118754(self + 8);
+}
+
+} /* extern "C" */

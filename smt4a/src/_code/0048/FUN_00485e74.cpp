@@ -2,6 +2,7 @@
  * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
 #include "shard/W6_W6Match8_UiResourceParameters.h"
 #include "romwright_types.h"
+#include "classes/Obj532300.h"
 
 extern "C" {
 
@@ -14,7 +15,6 @@ int uiSpriteSetImageKeyframe(...);
 int FUN_001a90e0(unsigned char *);
 int sysMemClear(...);
 int rt_memclr(unsigned char *, int);
-int FUN_0048738c(unsigned char *);
 int rectangleInitializeSelection(unsigned char *, int, int, int);
 int FUN_004cf7cc(...);
 int fillTwoWordsWithByte(...);
@@ -46,7 +46,7 @@ extern int gameFlagsGetBlock(void);
 /* Supplied declaration required: FUN_001a90e0. */
 /* Supplied declaration required: sysMemClear. */
 /* Supplied declaration required: rt_memclr. */
-/* Supplied declaration required: FUN_0048738c. */
+/* Supplied declaration required: Obj532300::resetHandlers. */
 /* Supplied declaration required: rectangleInitializeSelection. */
 /* Supplied declaration required: FUN_004cf7cc. */
 /* Supplied declaration required: fillTwoWordsWithByte. */
@@ -62,7 +62,7 @@ void FUN_00485e74(unsigned char *param_1)
   int temp_v2;
   
   temp_v1 = gameFlagsGetBlock();
-  FUN_0048738c(param_1);
+  reinterpret_cast<Obj532300 *>(param_1)->resetHandlers();
   asdTMTexTableLoadTmx(0x28,0);
   param_1[0xc] = 0xff;
   *(unsigned int *)(param_1 + 0x14) = 0;

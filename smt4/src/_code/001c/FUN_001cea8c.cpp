@@ -7,7 +7,7 @@ extern "C" {
 int contentEntryFlagTest(void);
 int dialogOpen(...);
 int infoWinSetMessage(...);
-int FUN_0029541c(...);
+int resultUnitStepFinish(...);
 int resultSetMenuState(...);
 int messageMainFinishWindow(void);
 int FUN_0029aafc(void);
@@ -73,7 +73,7 @@ extern int whisperEffectIsIdle(void);
 /* Supplied declaration required: recordContainsPairedId. */
 /* Supplied declaration required: dialogOpen. */
 /* Supplied declaration required: infoWinSetMessage. */
-/* Supplied declaration required: FUN_0029541c. */
+/* Supplied declaration required: resultUnitStepFinish. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
 extern int btlTalkBustUpGetValue(void);
@@ -657,7 +657,7 @@ LAB_001cfdfc:
         resultSetMenuState(param_1,0x10);
       }
       else {
-        FUN_0029541c(param_1);
+        resultUnitStepFinish(param_1);
       }
       if (*(int *)(param_1 + 0x352c) != 0x14) {
         soundChannelStopAll(0);

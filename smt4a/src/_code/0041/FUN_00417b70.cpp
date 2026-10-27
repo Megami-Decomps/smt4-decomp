@@ -1,4 +1,4 @@
-/* NON_MATCHING: scheduling/register allocation only: retail orders the two flag-byte updates differently (`orr` before the second `bic`), tests itemDataGetValue's result with `cmp r0,#0` before copying it to r4 (hook nop between cmp and branch), and hoists the constant 1 into r6. */
+/* NON_MATCHING: the linked-id update is now a helper taking the value (the `cmp r0,#0 ... mov r4,r0` shape matches); remaining: retail orders the two flag-byte updates differently (`orr` before the second `bic`), hoists the constant 1 into r6 and keeps the bit ops in r0-r3 differently (45 vs 44 rows). */
 #include "common.h"
 #include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
 #include "code/Code001b.h"
@@ -28,6 +28,18 @@ s32 itemDataIsFlagClear(s32 id);
 s32 FUN_00417e08(s32 id);
 s32 FUN_004bb6d8(u32 id, s32 arg);
 
+/* Marks the linked id as set: tells the flag system and sets its bit in the bitmap. */
+static __inline void setBitmapFlag(u32 linked)
+{
+    FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
+
+    FUN_004bb6d8(linked, 1);
+    u32 byteIndex = linked >> 3;
+    u32 bit = linked & 7;
+    u8 bits = block->bitmap[byteIndex];
+    block->bitmap[byteIndex] = bits | (1 << bit);
+}
+
 /* Marks entry `id` as seen and active, runs FUN_00417e08 for ids that qualify, and sets the linked id's bit in the bitmap. */
 void FUN_00417b70(s32 id)
 {
@@ -47,13 +59,7 @@ void FUN_00417b70(s32 id)
     }
     u32 linked = itemDataGetValue(id);
     if (linked != 0) {
-        FlagBlock *block = reinterpret_cast<FlagBlock *>(gameFlagBlockGet());
-
-        FUN_004bb6d8(linked, 1);
-        u32 byteIndex = linked >> 3;
-        u32 bit = linked & 7;
-        u8 bits = block->bitmap[byteIndex];
-        block->bitmap[byteIndex] = bits | (1 << bit);
+        setBitmapFlag(linked);
     }
 }
 

@@ -37,10 +37,7 @@ extern "C" void battleUpdateRotatingObjects(RotatingBattleObjectState *state)
     if (++state->pulse >= 30)
         state->pulse = 0;
     f32 phase = (f32)(btlGetMainState()->timing.frame % 37);
-    if (phase < 5.0f) {
-        state->phase = phase;
-        state->rotating = 0;
-    } else {
+    if (!(phase < 5.0f)) {
         if (phase == 5.0f && state->count > 1) {
             if (--state->start < 0)
                 state->start = state->count - 1;
@@ -48,5 +45,8 @@ extern "C" void battleUpdateRotatingObjects(RotatingBattleObjectState *state)
         }
         state->rotating = 1;
         state->phase = phase - 5.0f;
+    } else {
+        state->phase = phase;
+        state->rotating = 0;
     }
 }

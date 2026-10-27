@@ -2,7 +2,7 @@
 #include "shard/S3SoundArchiveLoader.h"
 #include <stddef.h>
 
-extern "C" void *FUN_00150c4c(void *, u32, void *, u32, u64, u32);
+extern "C" void *soundPlayerPlayItem(void *, u32, void *, u32, u64, u32);
 
 extern "C" s32 FUN_002a78c0(SoundArchiveLoader *loader, u32 fileId, void *destination,
     s32 size, u32 offset, s32 chunkSize)
@@ -46,7 +46,7 @@ extern "C" s32 FUN_002a78c0(SoundArchiveLoader *loader, u32 fileId, void *destin
         offsetof(StreamMethods, seek) == 0x40 &&
         offsetof(StreamMethods, isOpen) == 0x4C ? 1 : -1];
     LoaderReadState *state = reinterpret_cast<LoaderReadState *>(loader);
-    StreamGuard input = { static_cast<ArchiveInputStream *>(FUN_00150c4c(
+    StreamGuard input = { static_cast<ArchiveInputStream *>(soundPlayerPlayItem(
         loader->archive, fileId, state->workspace, sizeof(state->workspace), 0, 1)) };
     ArchiveInputStream *stream = input.stream;
     if (stream == NULL || stream->methods->isOpen(stream) == 0 ||

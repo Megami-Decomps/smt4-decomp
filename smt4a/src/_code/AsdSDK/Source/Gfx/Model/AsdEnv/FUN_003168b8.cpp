@@ -7,7 +7,7 @@ struct SceneNodePrefix;
 extern "C" {
 
 int asdMemoryGetDefaultAllocator(void);
-int FUN_0018d9f0(int *, unsigned int, int);
+int nw_gfx_res_ResGraphicsFile_Setup(int *, unsigned int, int);
 int FUN_001aa528(...);
 void sceneNodeAttachDeclaredChild(SceneChildSet *, SceneNodePrefix *);
 int nw_gfx_SceneBuilder_CreateObject(...);
@@ -57,7 +57,7 @@ extern unsigned char DAT_00636d20; /* 0x636d20 */
 #define romwright_piece_3_1(upper, lower) ((unsigned int)(((unsigned int)(unsigned int)(upper) << 8) | (unsigned char)(lower)))
 #endif
 /* Supplied declaration required: asdMemoryGetDefaultAllocator. */
-/* Supplied declaration required: FUN_0018d9f0. */
+/* Supplied declaration required: nw_gfx_res_ResGraphicsFile_Setup. */
 /* Supplied declaration required: FUN_001aa528. */
 extern unsigned int asdMemoryGetAllocatorA(void);
 /* Supplied declaration required: sceneNodeAttachDeclaredChild. */
@@ -122,7 +122,7 @@ void FUN_003168b8(int *param_1,fn_003168b8_arg1 *param_2)
   temp_v29 = param_1;
   pfStack_28 = param_2;
   temp_v3 = asdMemoryGetDefaultAllocator();
-  FUN_0018d9f0(temp_v29,temp_v3,*temp_v29);
+  nw_gfx_res_ResGraphicsFile_Setup(temp_v29,temp_v3,*temp_v29);
   temp_v12 = (int *)asdMemoryGetDefaultAllocator();
   temp_v13 = (int *)0x0;
   temp_v14 = (int *)0x0;

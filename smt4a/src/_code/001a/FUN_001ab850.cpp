@@ -1,10 +1,12 @@
-/* NON_MATCHING: found outside every function: called by FUN_002e50c0; not written yet. */
-/* romwright 0.5.0 decompilation of FUN_001ab850 for reference (not compiled; its own view of the boundaries):
+#include "common.h"
+
+extern "C" {
+
+void FUN_001b4110(void);
 
 void FUN_001ab850(void)
-
 {
-  return;
+    FUN_001b4110();
 }
-*/
-#include "common.h"
+
+} /* extern "C" */

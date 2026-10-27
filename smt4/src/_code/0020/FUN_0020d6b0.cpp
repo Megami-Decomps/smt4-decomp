@@ -1,4 +1,3 @@
-/* NON_MATCHING: source/state/zero saved registers and the two global literal-pool entries differ. */
 #include "map/mapIf.h"
 #include "map/mapDepart.h"
 #include "shard/W6_W6Match3_NodeEnable.h"
@@ -10,19 +9,24 @@ NodeEnableNode *asdMdlManagerCreateFromSource(u32 source, u32 size, u32 flags);
 void FUN_002a0428(NodeEnableNode *model, s32 enabled);
 void mapMarkerSynchronizeModelState(MapIfModelMarker *marker);
 
+// A local view avoids raising alignment inside GameState's byte padding.
+struct MarkerSources {
+    u8 prefix[0x2C8];
+    u32 firstSource, firstSize;
+    u32 secondSource, secondSize;
+};
+
+static inline const MarkerSources *markerSources()
+{
+    return reinterpret_cast<const MarkerSources *>(&g_gameState);
+}
+
 // Load and reset the two model-backed map interface markers.
 void FUN_0020d6b0()
 {
-    // A local view avoids raising alignment inside GameState's byte padding.
-    struct MarkerSources {
-        u8 prefix[0x2C8];
-        u32 firstSource, firstSize;
-        u32 secondSource, secondSize;
-    };
-    const MarkerSources *sources = reinterpret_cast<const MarkerSources *>(&g_gameState);
     MapIfState *interfaceState = g_mapIf;
     MapIfModelMarker *first = &interfaceState->modelMarkers[0];
-    first->model = asdMdlManagerCreateFromSource(sources->firstSource, sources->firstSize, 7);
+    first->model = asdMdlManagerCreateFromSource(markerSources()->firstSource, markerSources()->firstSize, 7);
     FUN_002a0428(first->model, 1);
     NodeEnableNode *firstModel = first->model;
     firstModel->flags |= 2;
@@ -39,7 +43,7 @@ void FUN_0020d6b0()
     first->elapsed = 0;
     mapMarkerSynchronizeModelState(first);
     MapIfModelMarker *second = &interfaceState->modelMarkers[1];
-    second->model = asdMdlManagerCreateFromSource(sources->secondSource, sources->secondSize, 7);
+    second->model = asdMdlManagerCreateFromSource(markerSources()->secondSource, markerSources()->secondSize, 7);
     FUN_002a0428(second->model, 1);
     NodeEnableNode *secondModel = second->model;
     secondModel->flags |= 2;

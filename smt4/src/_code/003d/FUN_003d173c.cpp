@@ -1,226 +1,166 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003d173c` (_code @ 0x3d173c, 0x4b0 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite of the reflect-cutscene step (same calls/rows as retail, 311 vs 311); armcc builds the frame switch tree around 218 instead of retail's 212 and loads g_btlMain later than retail's hoisted r6. */
+#include "battle/btlMain.h"
+#include "battle/btlAction.h"
+#include "battle/ActionStateChannels.h"
+#include "shard/W4_Match1b_Node.h"
+#include "AsdSDK/AsdDebugHooks.h"
+
+/* Fields of the battle state the cutscene reads beyond the shared prefix. */
+struct ReflectCutsceneView {
+    /* 0x0000 */ u8 unk0000[0x4394];
+    /* 0x4394 */ void *scaleGroup;
+    /* 0x4398 */ u8 unk4398[0x650];
+    /* 0x49E8 */ s32 soundSlot;           /* negative: no sound playing */
+};
+
+/* The action record's source id at 0x5c. */
+struct ReflectActionView {
+    /* 0x00 */ u8 unk00[0x5c];
+    /* 0x5c */ s32 sourceId;
+};
+
+typedef char ReflectCutsceneOffsets[
+    offsetof(ReflectCutsceneView, scaleGroup) == 0x4394 &&
+    offsetof(ReflectCutsceneView, soundSlot) == 0x49E8 &&
+    offsetof(ReflectActionView, sourceId) == 0x5c ? 1 : -1];
 
 extern "C" {
+extern BtlMain *g_btlMain;
+extern void *DAT_00435d18;
+extern void *DAT_004398d4;
+extern u32 g_btlUiBlock;
 
-int battleSetActionKind(...);
-int FUN_00244fb0(...);
-int btlUiPanelFadeInWhenReady(...);
-int buttonHelpGetMode(void);
-int buttonHelpSetPreset(void);
-int objResourceRelease(...);
+void FUN_00338358(BtlMainState *state);
+void armySummonResetRootTransform(BtlMainState *state);
+s32 FUN_00293ed0(BtlMainState *state);
+f32 FUN_00338404(BtlMainState *state);
+void FUN_002505c0(s32 channel, void *unit, u32 resource, s32 a4, s32 a5, s32 a6, s32 a7);
+s32 FUN_002c1658(s32 first, s32 second);
+s32 tableIsSupportedKind(BtlMainState *state, u32 index);
+u32 FUN_0024502c(BtlMainState *state, s32 slot);
+u32 soundSlotStopById(u32 id);
+void armySummonSetCommandTransform(BtlMainState *state);
+void modelClearPendingAnimation(BtlMainState *state);
+void modelSlotDetachChild(BtlMain *main);
+void mathVectorClear(BtlMain *main);
+void btlUiPlaySceneFadeOutWhenReady(u32 uiBlock);
+void slotResetIdle(BtlMainState *state, s32 slot, u32 value);
+void FUN_003ddb50(u32 actor, void *options, u32 value, f32 red, f32 green, f32 blue);
+void nodeGroupSetScale(void *group, NodeVec3 scale);
+void FUN_00282820(s32 a1, s32 a2, s32 a3, s32 a4, s32 a5, s32 a6, s32 a7, s32 a8);
+u32 FUN_003de9e4(s32 actor, void *options, u32 value);
+void btlActionReflectRun(s32 actionId, void *argument);
+void actionCreateKindFive(s32 id, void *argument, u32 value);
+void FUN_00244fb0(BtlMainState *state, u32 slot, u32 palette, u32 param, u32 alpha);
+void FUN_00339254(BtlMainState *state);
+void groupStartItems(void *group);
+void objectDestroyGfx(BtlMain *main);
+void FUN_0024082c(BtlMain *main, u32 value);
+void FUN_003dc02c(void *object);
+void FUN_00339dc0(BtlMainState *state);
+void FUN_00338fb0(BtlMainState *state);
+void objectScriptDestroy(BtlMainState *state);
+void objResourceRelease(BtlMainState *state);
+void btlUiPanelFadeInWhenReady(u32 uiBlock);
+u8 buttonHelpGetMode(void);
+void buttonHelpSetPreset(u32 preset);
+void battleSetActionKind(BtlMainState **block);
+void btlActionQueueSourceReflect(s32 id, void *argument, BtlActionRecord *source);
 
-int actionCreateKindFive(...);
-int FUN_0024082c(...);
-int slotResetIdle(...);
-int FUN_002505c0(...);
-int btlUiPlaySceneFadeOutWhenReady(unsigned int);
-int FUN_00282820(...);
-int nodeGroupSetScale(void);
-int soundSlotStopById(void);
-int FUN_002c1658(int, int);
-int FUN_00338358(int);
-int FUN_00338404(int);
-int objectScriptDestroy(...);
-int FUN_00338fb0(...);
-int armySummonSetCommandTransform(int);
-int FUN_00339254(...);
-int armySummonResetRootTransform(int);
-int FUN_00339dc0(...);
-int modelClearPendingAnimation(int);
-int groupStartItems(...);
-int mathVectorClear(unsigned int);
-int modelSlotDetachChild(unsigned int);
-int objectDestroyGfx(...);
-int FUN_003dc02c(...);
-int FUN_003ddb50(int, int, int);
-int btlActionQueueSourceReflect(unsigned int, int, int);
-int FUN_003de9e4(...);
-int btlActionReflectRun(...);
-
-/* stack frame of param_2: 3 slot(s), 12 byte(s) */
-typedef struct {
-    unsigned int sp30; /* 0x30: local_30 */
-    unsigned int sp34; /* 0x34: local_34 */
-    unsigned int sp38; /* 0x38: local_38 */
-} param_2_stack;
-
-extern unsigned int g_btlMain; /* 0x4342c8 */
-extern unsigned int DAT_00435d18; /* 0x435d18 */
-extern unsigned int DAT_004398d4; /* 0x4398d4 */
-extern unsigned int g_btlUiBlock; /* 0x439ca8 */
-
-/* Supplied declaration required: actionCreateKindFive. */
-/* Supplied declaration required: battleSetActionKind. */
-/* Supplied declaration required: FUN_0024082c. */
-/* Supplied declaration required: FUN_00244fb0. */
-extern int FUN_0024502c(int, unsigned int);
-/* Supplied declaration required: slotResetIdle. */
-extern int tableIsSupportedKind(int, unsigned int);
-/* Supplied declaration required: FUN_002505c0. */
-/* Supplied declaration required: btlUiPlaySceneFadeOutWhenReady. */
-/* Supplied declaration required: btlUiPanelFadeInWhenReady. */
-/* Supplied declaration required: FUN_00282820. */
-/* Supplied declaration required: nodeGroupSetScale. */
-extern int FUN_00293ed0(int);
-/* Supplied declaration required: soundSlotStopById. */
-/* Supplied declaration required: buttonHelpGetMode. */
-/* Supplied declaration required: buttonHelpSetPreset. */
-/* Supplied declaration required: FUN_002c1658. */
-/* Supplied declaration required: FUN_00338358. */
-/* Supplied declaration required: FUN_00338404. */
-/* Supplied declaration required: objectScriptDestroy. */
-/* Supplied declaration required: FUN_00338fb0. */
-/* Supplied declaration required: armySummonSetCommandTransform. */
-/* Supplied declaration required: FUN_00339254. */
-/* Supplied declaration required: armySummonResetRootTransform. */
-/* Supplied declaration required: objResourceRelease. */
-/* Supplied declaration required: FUN_00339dc0. */
-/* Supplied declaration required: modelClearPendingAnimation. */
-/* Supplied declaration required: groupStartItems. */
-/* Supplied declaration required: mathVectorClear. */
-/* Supplied declaration required: modelSlotDetachChild. */
-/* Supplied declaration required: objectDestroyGfx. */
-/* Supplied declaration required: FUN_003dc02c. */
-/* Supplied declaration required: FUN_003ddb50. */
-/* Supplied declaration required: btlActionQueueSourceReflect. */
-/* Supplied declaration required: FUN_003de9e4. */
-/* Supplied declaration required: btlActionReflectRun. */
-
-
-unsigned int FUN_003d173c(int *param_1,int param_2)
-
+/* Steps the reflect cutscene by one frame; the frame counter lives in the channel's timer. Returns 1 once the
+ * cutscene has finished. */
+u32 FUN_003d173c(BtlMainState **block, ActionStateChannel *channel)
 {
-/* irregular: irregular input(s): in_s0; 33 native warning(s); review required */
-  int temp_v0;
-  int temp_v1;
-  int temp_v2;
-  unsigned int temp_v3;
-  unsigned int temp_v4;
-  unsigned int temp_v5;
-  int in_s0;
-  
-  temp_v5 = 0;
-  FUN_00338358(*param_1);
-  armySummonResetRootTransform(*param_1);
-  temp_v0 = FUN_00293ed0(*param_1);
-  temp_v4 = 0;
-  if (temp_v0 != 0) {
-    temp_v0 = *(int *)(param_2 + 0xc);
-    FUN_00338404(*param_1);
-    if (in_s0 == 0x42200000) {
-      FUN_002505c0(0,param_2,0x10001ee,0,0,0,0);
-    }
-    temp_v1 = 9;
-    FUN_002c1658(9,1);
-    temp_v2 = 0;
-    if (temp_v1 != 0) {
-      temp_v2 = temp_v0;
-    }
-    if ((((temp_v1 != 0 && temp_v0 != 0) && -1 < temp_v2) &&
-        (temp_v2 = tableIsSupportedKind(*param_1,0), temp_v2 != 0)) &&
-       (temp_v2 = FUN_0024502c(*param_1,0), temp_v2 != 0)) {
-      if (-1 < *(int *)(*param_1 + 0x49e8)) {
-        soundSlotStopById();
-      }
-      temp_v0 = 0x122;
-    }
-    temp_v4 = temp_v5;
-    if (temp_v0 == 0xd4) {
-      temp_v0 = 0x43;
-      do {
-        temp_v2 = *(int *)(*param_1 + 0x1e98) + temp_v0 * 0x114;
-        if ((*(unsigned int *)(temp_v2 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v2 + 0x50) & 0x8000) != 0) {
-          *(unsigned short *)(temp_v2 + 0x58) = *(unsigned short *)(temp_v2 + 0x58) | 0x1000;
+    u32 finished = 0;
+    FUN_00338358(*block);
+    armySummonResetRootTransform(*block);
+    if (FUN_00293ed0(*block) != 0) {
+        u32 frame = channel->timer;
+        if (FUN_00338404(*block) == 40.0f)
+            FUN_002505c0(0, channel, 0x10001ee, 0, 0, 0, 0);
+        if (FUN_002c1658(9, 1) != 0 && static_cast<s32>(frame) > 0 &&
+            tableIsSupportedKind(*block, 0) != 0 && FUN_0024502c(*block, 0) != 0) {
+            s32 soundSlot = reinterpret_cast<ReflectCutsceneView *>(*block)->soundSlot;
+            if (soundSlot >= 0)
+                soundSlotStopById(soundSlot);
+            frame = 0x122;
         }
-        temp_v0 = temp_v0 + 1;
-      } while (temp_v0 < 0x6d);
-    }
-    else if (temp_v0 < 0xd4) {
-      if (temp_v0 == 0x94) {
-        temp_v0 = 0x43;
-        do {
-          temp_v2 = *(int *)(*param_1 + 0x1e98) + temp_v0 * 0x114;
-          temp_v3 = *(unsigned int *)(temp_v2 + 0x50);
-          if ((temp_v3 & 1) != 0 && (temp_v3 & 0x8000) != 0) {
-            *(unsigned int *)(temp_v2 + 0x50) = temp_v3 | 0x80000;
-            *(unsigned short *)(temp_v2 + 0x58) = *(unsigned short *)(temp_v2 + 0x58) & 0xefff;
-            btlActionQueueSourceReflect(*(unsigned int *)(temp_v2 + 0x5c),param_2,temp_v2);
-            FUN_002505c0(*(unsigned int *)(temp_v2 + 0x5c),param_2,0x10001e9,0,0,0,0);
-          }
-          temp_v0 = temp_v0 + 1;
-        } while (temp_v0 < 0x6d);
-      }
-      else if (temp_v0 < 0x94) {
-        if (temp_v0 != 0) {
-          if (temp_v0 != 0x5a) {
-            if ((temp_v0 == 100) && (*(int *)(*param_1 + 0x4394) != 0)) {
-              nodeGroupSetScale();
-            }
-          }
-          else {
-            FUN_003ddb50(0,param_2,5);
-          }
-        }
-        else {
-          armySummonSetCommandTransform(*param_1);
-          modelClearPendingAnimation(*param_1);
-          modelSlotDetachChild(g_btlMain);
-          mathVectorClear(g_btlMain);
-          btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
-          slotResetIdle(*param_1,0,10);
-          FUN_002505c0(0,param_2,0x100010a,0,0,0,1);
-        }
-      }
-    }
-    else if (temp_v0 != 0x108) {
-      if (temp_v0 < 0x109) {
-        if (temp_v0 != 0xda) {
-          if (temp_v0 != 0xe4) {
-            if (temp_v0 == 0xe5) {
-              actionCreateKindFive(0,param_2,10);
-            }
-          }
-          else {
-            FUN_003de9e4(0,param_2);
-            btlActionReflectRun(1,param_2);
-          }
-        }
-        else {
-          FUN_00282820(0,0,0,0,5,0,6,0);
-        }
-      }
-      else if (temp_v0 != 0x10a) {
-        if (temp_v0 == 0x122) {
-          *(unsigned int *)(*param_1 + 0x49e8) = 0xffffffff;
-          FUN_00339254(*param_1);
-          groupStartItems(DAT_004398d4);
-          actionCreateKindFive(0,param_2,1);
-          objectDestroyGfx(g_btlMain);
-          FUN_0024082c(g_btlMain,0);
-          FUN_003dc02c(DAT_00435d18);
-          FUN_00339dc0(*param_1);
-          FUN_00338fb0(*param_1);
-          objectScriptDestroy(*param_1);
-          objResourceRelease(*param_1);
-          btlUiPanelFadeInWhenReady(g_btlUiBlock);
-          buttonHelpGetMode();
-          buttonHelpSetPreset();
-          battleSetActionKind(param_1);
-          temp_v4 = 1;
-        }
-      }
-      else {
-        FUN_00244fb0(*param_1,0,1,0xf,0xff);
-      }
-    }
-    else {
-      FUN_00282820(0,0,0,0,5,1,6,0);
-    }
-    *(int *)(param_2 + 0xc) = *(int *)(param_2 + 0xc) + 1;
-  }
-  return temp_v4;
-}
 
-} /* extern "C" */
+        switch (frame) {
+        case 0:
+            asdDebugHookPtr(DAT_004398d4);
+            armySummonSetCommandTransform(*block);
+            modelClearPendingAnimation(*block);
+            modelSlotDetachChild(g_btlMain);
+            mathVectorClear(g_btlMain);
+            btlUiPlaySceneFadeOutWhenReady(g_btlUiBlock);
+            slotResetIdle(*block, 0, 10);
+            FUN_002505c0(0, channel, 0x100010a, 0, 0, 0, 1);
+            break;
+        case 90:
+            FUN_003ddb50(0, channel, 5, 0.36f, 0.28f, 0.26f);
+            break;
+        case 100:
+            if (reinterpret_cast<ReflectCutsceneView *>(*block)->scaleGroup != NULL) {
+                NodeVec3 scale = {0.08f, 0.08f, 0.08f};
+                nodeGroupSetScale(reinterpret_cast<ReflectCutsceneView *>(*block)->scaleGroup, scale);
+            }
+            break;
+        case 148:
+            for (s32 index = 0x43; index < 109; ++index) {
+                BtlActionRecord *action = &(*block)->actions[index];
+                if ((action->status & 1) && (action->status & 0x8000)) {
+                    action->status |= 0x80000;
+                    action->presentationFlags &= ~0x1000;
+                    btlActionQueueSourceReflect(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, action);
+                    FUN_002505c0(reinterpret_cast<ReflectActionView *>(action)->sourceId, channel, 0x10001e9, 0, 0, 0, 0);
+                }
+            }
+            break;
+        case 212:
+            for (s32 index = 0x43; index < 109; ++index) {
+                BtlActionRecord *action = &(*block)->actions[index];
+                if ((action->status & 1) && (action->status & 0x8000))
+                    action->presentationFlags |= 0x1000;
+            }
+            break;
+        case 218:
+            FUN_00282820(0, 0, 0, 0, 5, 0, 6, 0);
+            break;
+        case 228:
+            FUN_003de9e4(0, channel, 0);
+            btlActionReflectRun(1, channel);
+            break;
+        case 229:
+            actionCreateKindFive(0, channel, 10);
+            break;
+        case 264:
+            FUN_00282820(0, 0, 0, 0, 5, 1, 6, 0);
+            break;
+        case 266:
+            FUN_00244fb0(*block, 0, 1, 15, 0xff);
+            break;
+        case 290:
+            reinterpret_cast<ReflectCutsceneView *>(*block)->soundSlot = -1;
+            FUN_00339254(*block);
+            asdDebugHookPtr(DAT_004398d4);
+            groupStartItems(DAT_004398d4);
+            actionCreateKindFive(0, channel, 1);
+            objectDestroyGfx(g_btlMain);
+            FUN_0024082c(g_btlMain, 0);
+            FUN_003dc02c(DAT_00435d18);
+            FUN_00339dc0(*block);
+            FUN_00338fb0(*block);
+            objectScriptDestroy(*block);
+            objResourceRelease(*block);
+            btlUiPanelFadeInWhenReady(g_btlUiBlock);
+            buttonHelpSetPreset(buttonHelpGetMode());
+            finished = 1;
+            battleSetActionKind(block);
+            break;
+        }
+        ++channel->timer;
+    }
+    return finished;
+}
+}

@@ -33,11 +33,7 @@ void FUN_002d8e74(u32 context)
         if (asdSaveReadBlock(file, filename, &header, payload, size) != 0) {
             return;
         }
-        if (FUN_00214950(context, filename) == 1) {
-            thread->result = 6;
-        } else {
-            thread->result = -1;
-        }
+        thread->result = (FUN_00214950(context, filename) == 1) ? 6 : -1;
     } else {
         thread->result = -1;
     }

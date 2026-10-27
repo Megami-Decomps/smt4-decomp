@@ -72,7 +72,7 @@ void gameItemSetFlag(u32 id, s32 value);
 struct SkillRecord { u8 unk00[0x26]; u16 affinity; };
 void FUN_0031f190(u32 id, s32 arg);
 void FUN_004bcd90(DemonRecord* record);
-s32 FUN_0018416c(u32 id);
+s32 unitHasRankingBonus(u32 id);
 void FUN_002a6894(DemonRecord* record);
 
 // Builds a demon record for `id` in slot `slot`: kind 0/3 copies the master data, kind 1 the
@@ -157,7 +157,7 @@ void FUN_002305d0(DemonRecord* record, u32 slot, u32 id, s32 kind)
     FUN_004bcd90(record);
     if (record != NULL) {
         hp = record->hpBase;
-        if (FUN_0018416c(record->id) != 0) hp = (s16)((f32)hp * 1.25f);
+        if (unitHasRankingBonus(record->id) != 0) hp = (s16)((f32)hp * 1.25f);
     }
     record->hpMax = hp;
     record->mpMax = record->mpBase;

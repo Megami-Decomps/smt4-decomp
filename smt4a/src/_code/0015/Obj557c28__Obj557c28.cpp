@@ -19,8 +19,8 @@ Obj557c28::Obj557c28() : unk9c(0), unkA0(0), unkA4(0), listA(NULL), listB(NULL)
     if (DAT_0056fcbc == NULL) {
         first.firstSlot = 0x56;
         first.secondSlot = 0x59;
-        second.firstSlot = 0x5a;
         second.secondSlot = 0x5c;
+        second.firstSlot = 0x5a;
         DAT_0056fcbc = this;
     }
 }

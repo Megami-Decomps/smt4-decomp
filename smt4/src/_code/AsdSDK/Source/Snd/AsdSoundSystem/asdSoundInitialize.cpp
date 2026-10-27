@@ -39,7 +39,7 @@ extern "C" {
 extern AsdSoundSystem g_asdSound;
 extern SoundControlView g_asdSoundDuck;
 s32 FUN_0011be58();
-s32 FUN_0011bf24();
+s32 dspComponentLoadEmbedded();
 s32 dspsndInitializeManagers();
 void nw_snd_SoundSystem_SetMasterVolume(f32 volume);
 u32 FUN_0012a740(u32 value);
@@ -53,7 +53,7 @@ void asdSoundInitialize(s32 auxiliaryMode)
     if (nnResultIsFailure(FUN_0011be58())) {
         asdFatalError();
     }
-    if (nnResultIsFailure(FUN_0011bf24())) {
+    if (nnResultIsFailure(dspComponentLoadEmbedded())) {
         asdFatalError();
     }
     if (nnResultIsFailure(dspsndInitializeManagers())) {

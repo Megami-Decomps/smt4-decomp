@@ -14,7 +14,7 @@ int gameDataCopySaveEntry(...);
 int FUN_002e59f8(int, unsigned int [11], int);
 int rt_aeabi_memclr(int, int);
 int FUN_0031654c(unsigned int, int);
-int FUN_0034543c(int);
+int gameSavedItemClearCounter(int);
 int FUN_0036fcd0(unsigned int, int);
 int partyRefreshSlotValues(void);
 int recordSetClampedCurrent(int, unsigned int);
@@ -40,7 +40,7 @@ extern int dataTableGetEntries(void);
 /* Supplied declaration required: FUN_002e59f8. */
 /* Supplied declaration required: rt_aeabi_memclr. */
 /* Supplied declaration required: FUN_0031654c. */
-/* Supplied declaration required: FUN_0034543c. */
+/* Supplied declaration required: gameSavedItemClearCounter. */
 /* Supplied declaration required: FUN_0036fcd0. */
 /* Supplied declaration required: partyRefreshSlotValues. */
 extern int bitsAt60Test(int, unsigned int);
@@ -154,7 +154,7 @@ LAB_0037c020:;
           temp_v11 = FUN_0019e52c(temp_v5);
           gameDataCopySaveEntry(temp_v1,temp_v20);
           FUN_0031654c(temp_v11,temp_v21);
-          FUN_0034543c(temp_v1);
+          gameSavedItemClearCounter(temp_v1);
         }
       }
       temp_v14 = temp_v14 + 1;

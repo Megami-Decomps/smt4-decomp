@@ -1,2 +1,12 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x5586b0; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+void onlineMutexUnlockIfNeeded(void *self);
+
+void FUN_00104a00(u8 *self)
+{
+    onlineMutexUnlockIfNeeded(self + 248);
+}
+
+} /* extern "C" */

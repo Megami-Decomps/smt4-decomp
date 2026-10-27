@@ -5,7 +5,7 @@ extern "C" {
 
 int CONCAT44(double, double);
 int FUN_002aa100(...);
-int FUN_002aa200(...);
+int renderCtxBindTextureMode(...);
 int sentinelLookupGetValue(void);
 int FUN_002ae424(...);
 int renderCtxCalculateStereoParallax(unsigned int);
@@ -64,7 +64,7 @@ extern unsigned int FUN_00145d5c(unsigned short);
 extern unsigned int FUN_00145e24(unsigned short);
 extern unsigned int FUN_00145e44(unsigned short);
 /* Supplied declaration required: FUN_002aa100. */
-/* Supplied declaration required: FUN_002aa200. */
+/* Supplied declaration required: renderCtxBindTextureMode. */
 /* Supplied declaration required: sentinelLookupGetValue. */
 /* Supplied declaration required: FUN_002ae424. */
 /* Supplied declaration required: renderCtxCalculateStereoParallax. */
@@ -375,7 +375,7 @@ LAB_002b0a30:
         temp_v7 = *(unsigned int *)
                  (*(int *)(param_1[5] + 0xc) + *(int *)(*param_1 + temp_v9 * 0x20 + 0x1c) * 4);
         if (temp_v26 != 0) {
-          FUN_002aa200(g_titleScene,temp_v7,temp_v0);
+          renderCtxBindTextureMode(g_titleScene,temp_v7,temp_v0);
           if (temp_v26 == 2) {
             temp_v21 = temp_v21 & 0xffffffff00000000;
             FUN_002aa100(piVar10,temp_v5,temp_v14,temp_v14,temp_v14,temp_v14);
@@ -388,7 +388,7 @@ LAB_002b0a30:
           FUN_002aa100(piVar10,temp_v5,temp_v23,temp_v23,temp_v23,temp_v23);
         }
         else {
-          FUN_002aa200(g_titleScene,temp_v7,temp_v0);
+          renderCtxBindTextureMode(g_titleScene,temp_v7,temp_v0);
           FUN_002aa100(piVar10,temp_v5,temp_v23,temp_v23,temp_v23,temp_v23);
         }
         temp_v20 = (unsigned long long)(unsigned int)((float)param_1[6] + temp_v16 + temp_v17);
@@ -422,7 +422,7 @@ LAB_002b0dac:
         VectorSignedToFloat((int)*(char *)(temp_v8 + 6),(unsigned char)(temp_v13 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 5),(unsigned char)(temp_v13 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 7),(unsigned char)(temp_v13 >> 0x16) & 3);
-        FUN_002aa200(g_titleScene,
+        renderCtxBindTextureMode(g_titleScene,
                      *(unsigned int *)
                       (*(int *)(param_1[0x29] + 0xc) +
                       *(int *)(*param_1 + aiStack_130[temp_v5] * 0x20 + 0x1c) * 4),

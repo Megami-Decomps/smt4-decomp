@@ -6,7 +6,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_0018a924(...);
 int mtx44Copy(...);
-int FUN_0019a0fc(...);
+int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_001d3e14(...);
 int mtx44TransformPosition(...);
 int refCountIncrement(...);
@@ -136,7 +136,7 @@ static float romwright_sqrt_4(float value)
 #endif
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001d3e14. */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: refCountIncrement. */
@@ -454,7 +454,7 @@ void FUN_003516e4(int param_1)
   temp_v41 = temp_v10;
   temp_v42 = temp_v10;
   temp_v43 = temp_v10;
-  FUN_0019a0fc(temp_v27,&temp_v30);
+  nn_math_ARMv6_MTX44MultAsm(temp_v27,&temp_v30);
   temp_v28 = temp_v27;
   pfVar6 = &temp_v45;
   pfVar7 = &temp_v57;

@@ -32,7 +32,7 @@ int FUN_00215978(...);
 int FUN_00275bc8(...);
 int FUN_002c2610(void);
 int holderStopJob(...);
-int FUN_00331410(void);
+int gameSavedItemsPromoteFlagState(void);
 int FUN_00339270(void);
 int sysClearCachedFlag(void);
 int soundChannelStopAll(...);
@@ -204,7 +204,7 @@ extern int __cxa_guard_acquire(unsigned int *);
 /* Supplied declaration required: tmnlResetSelection. */
 extern int gameStateIsFlagSetAndLarge(void);
 extern int btlEncountCheck(unsigned int);
-/* Supplied declaration required: FUN_00331410. */
+/* Supplied declaration required: gameSavedItemsPromoteFlagState. */
 /* Supplied declaration required: FUN_00339270. */
 /* Supplied declaration required: FUN_003756c8. */
 /* Supplied declaration required: sequenceRequestFlushDeferred. */
@@ -1003,7 +1003,7 @@ LAB_0024d284:
       temp_v3 = gameDataBlocksGetSaveData();
       *(char *)(temp_v3 + 0x27e3e) = *(char *)(temp_v3 + 0x27e3e) + '\x01';
     }
-    FUN_00331410();
+    gameSavedItemsPromoteFlagState();
     if (*(int *)(temp_v2 + 0xa8) == 3) {
       sysClearCachedFlag();
     }

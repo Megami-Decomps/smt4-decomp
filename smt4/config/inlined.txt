@@ -40,3 +40,4 @@ windowRegionGetWidth = 0xe1d005f8; // _ZN9Obj4221a47vfunc10Ej (0x38ad70): mov r0
 windowRegionGetLeft = 0xe1d005f4; // _ZN9Obj4221a47vfunc10Ej (0x38ad70): mov r0, r4 before each, result moved out
 windowRegionGetTop = 0xe1d005f6; // _ZN9Obj4221a47vfunc10Ej (0x38ad70): mov r0, r4 before each, result moved out
 _ZN14AocRequestBaseC1Ej = 0xe5801000; // 0x352740, 0x352ee8 (the AocRequest constructors: r2/r3 saved to r5/r4 across it); twin of the smt4a row
+effMenuNodeGetState = 0xe5900008; // 0x31ba70 (effectEditorUpdate, after ldr r0, [r4, #68])

@@ -2,6 +2,7 @@
 #include "common.h"
 #include "battle/btlHelp.h"
 #include "gamedata/DataTable40.h"
+#include "battle/BattleCommandController.h"
 
 namespace {
 /* The battle state block: its flags and the index of the acting unit. */
@@ -18,30 +19,6 @@ struct BattleUnit {
     /* 0x09 */ u8 actionKind;
     /* 0x0a */ u8 unk0a[0xf1c - 0xa];
 };
-
-/* The choice the player made in the command menu. */
-struct CommandSelection {
-    /* 0x000 */ u8 unk000[0x14c];
-    /* 0x14c */ s16 kind;
-    /* 0x14e */ s16 value;
-};
-
-/* The command controller's state. */
-struct CommandState {
-    /* 0x000 */ u32 flags;                /* 0x80: first window done, 0x1000: second window done */
-    /* 0x004 */ u8 unk004[0x1c];
-    /* 0x020 */ u32 *environment;         /* bit 1: the actor can use items */
-    /* 0x024 */ u8 unk024[4];
-    /* 0x028 */ CommandSelection *selection;
-    /* 0x02c */ u16 windowId;
-    /* 0x02e */ u8 unk02e[0x572];
-    /* 0x5a0 */ s32 itemSlot;
-};
-
-struct SkillRecord {
-    /* 0x00 */ u8 unk00[0x62];
-    /* 0x62 */ u16 linkedSkill;
-};
 }
 
 extern "C" {
@@ -55,7 +32,7 @@ void btlUiAdvanceFadeInTransition(u32 block);
 s32 btlUiAcceptSelection(u32 block);
 void btlUiGetAcceptedSelection(u32 block, s16 *kind, s16 *value);
 s32 FUN_0023dcb8(void);
-SkillRecord *dataTable08Sub1GetRecord(s32 id);
+SkillLinkRecord *dataTable08Sub1GetRecord(s32 id);
 s32 FUN_002cf124(void *record);
 void battleSetActionKind(BattleBlock **block);
 void FUN_00229b10(BattleBlock **block, CommandState *state);
@@ -97,7 +74,7 @@ u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
     CommandSelection *selection = state->selection;
     btlUiGetAcceptedSelection(g_btlUiBlock, &selection->kind, &selection->value);
     if ((state->flags & 0x80) != 0) {
-        if ((*state->environment & 2) != 0) {
+        if ((state->entry->flags & 2) != 0) {
             if (FUN_0023dcb8() != 0) {
                 state->selection->kind = 6;
                 state->selection->value = 0;
@@ -110,7 +87,7 @@ u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
             state->selection->value = 1;
         }
     } else if ((state->flags & 0x1000) != 0) {
-        if ((*state->environment & 2) != 0) {
+        if ((state->entry->flags & 2) != 0) {
             if (FUN_0023dcb8() != 0) {
                 state->selection->kind = 6;
                 state->selection->value = 0;
@@ -154,7 +131,7 @@ u32 FUN_003c9f58(BattleBlock **block, CommandState *state)
         }
         return 1;
     case 8: {
-        SkillRecord *record = dataTable08Sub1GetRecord(state->selection->value);
+        SkillLinkRecord *record = dataTable08Sub1GetRecord(state->selection->value);
         if (record->linkedSkill != 0) {
             if (FUN_002cf124(dataTable40FindById(record->linkedSkill)) != 0) {
                 setActorAction(block, 5);

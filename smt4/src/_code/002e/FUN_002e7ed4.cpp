@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail materialises the zero constant (r7) before the first search loop, built after it; everything else is identical */
+/* NON_MATCHING: only register numbering differs in the second search loop (retail keeps the resource in r0 and the flags in r2; built swaps them). */
 #include "shard/W5_W5Match2_LinkedItems.h"
 #include "shard/Resource.h"
 #include "AsdSDK/AsdMemAlloc.h"
@@ -8,9 +8,11 @@ void FUN_0025c650(LinkedItems *items, LinkedItem *item, LinkedItem *replacement)
 
 static LinkedItem *findSharer(LinkedItems *items, void *resource)
 {
-    for (LinkedItem *item = items->head; item != NULL; item = item->next) {
+    LinkedItem *item = items->head;
+    while (item != NULL) {
         if ((item->reference.flags & 1) && item->resource == resource)
             return item;
+        item = item->next;
     }
     return NULL;
 }

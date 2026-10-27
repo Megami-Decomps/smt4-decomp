@@ -1,4 +1,3 @@
-/* NON_MATCHING: thread-handle load occurs after the stack allocation rather than before it. */
 #include "nn/Result.h"
 #include "nn/os/Handle.h"
 #include "nn/os/Thread.h"
@@ -22,8 +21,8 @@ void asdMemFree(void *block);
 void FUN_002e2f14(ThreadOwner *owner)
 {
     s32 signaled;
-    u32 handle = owner->thread.handle;
-    s32 result = FUN_002c40f8(&signaled, &handle, 1, 0, -1);
+    u32 handles[1] = { owner->thread.handle };
+    s32 result = FUN_002c40f8(&signaled, handles, 1, 0, -1);
     bool failed = nnResultIsFailure(result);
     if (failed) {
         FUN_002c526c(result, failed);

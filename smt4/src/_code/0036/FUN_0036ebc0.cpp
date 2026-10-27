@@ -1,4 +1,4 @@
-/* NON_MATCHING: only the followed-offset load differs: retail takes it with a different register (r3) and computes the destination field address before the null tests; everything else (switch order, shared tail, node return) matches. */
+/* NON_MATCHING: only register allocation differs (retail keeps the resolved offset in r3 and the null result in r1 across the type switch; the build uses r1 for the type and the offset). */
 #include "common.h"
 
 extern "C" {
@@ -34,7 +34,13 @@ static __inline LinkNode *linkResolve(s32 *field)
     if (relative == 0) {
         return NULL;
     }
-    return (LinkNode *)(relative + (u8 *)field);
+    return (LinkNode *)(relative + (s32)field);
+}
+
+/* Points `field` at the node the self-relative offset `from` points at. */
+static __inline void linkCopy(s32 *field, s32 *from)
+{
+    linkSet(field, linkResolve(from));
 }
 
 /* Builds a link node that refers to the target of `source`: sources of the plain kinds are the target themselves, a link node
@@ -45,7 +51,6 @@ LinkNode *FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
     if (node == NULL) {
         return NULL;
     }
-    LinkNode *target = NULL;
     node->unk04[0] = 0;
     node->unk04[1] = 0;
     node->unk04[2] = 0;
@@ -59,8 +64,7 @@ LinkNode *FUN_0036ebc0(BlockAllocator *allocator, LinkNode *source)
         linkSet(&node->offset, source);
         return node;
     case 0x20000004:
-        target = linkResolve(&source->offset);
-        linkSet(&node->offset, target);
+        linkCopy(&node->offset, &source->offset);
         return node;
     case 0x20000002:
         linkSet(&node->offset, source);

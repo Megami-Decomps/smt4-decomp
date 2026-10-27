@@ -1,4 +1,4 @@
-/* NON_MATCHING: countdown and three-argument flag update recovered; cold initialization placement and overlapping countdown-symbol relocation differ. */
+/* NON_MATCHING: cold initialization now sits out of line as in retail; remaining: retail predicates the countdown reset (ldrle/movle/strle) before the decrement, ours branches, and the popup-state constants are scheduled differently. */
 #include "map/mapDepart.h"
 #include "gamedata/GameFlags.h"
 
@@ -22,11 +22,11 @@ u32 FUN_002d8b58(u32 kind, u32 resource);
 void FUN_00223fac(void)
 {
     if (g_popupState->state == 0 && gameFlagStateIsOne()) {
-        if (gameFlagIsSet(0x111A)) {
-            randRange(99);
-        } else {
+        if (!gameFlagIsSet(0x111A)) {
             g_gameState.popup.countdown = 0;
             gameFlagSetValue(0x111A, 1, 1);
+        } else {
+            randRange(99);
         }
         if (g_gameState.popup.countdown <= 0) {
             g_gameState.popup.countdown = 5;

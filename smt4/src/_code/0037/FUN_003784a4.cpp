@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_00150c4c(unsigned int, unsigned int, int, int, int, int, int);
+int soundPlayerPlayItem(unsigned int, unsigned int, int, int, int, int, int);
 int FUN_002b4ee4(...);
 int soundObjectPostByte09(...);
 int FUN_0037a05c(int, int, int, int, unsigned int, int, unsigned int, unsigned int);
@@ -21,7 +21,7 @@ typedef struct {
 } param_7_stack;
 
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
-/* Supplied declaration required: FUN_00150c4c. */
+/* Supplied declaration required: soundPlayerPlayItem. */
 /* Supplied declaration required: FUN_002b4ee4. */
 /* Supplied declaration required: soundObjectPostByte09. */
 /* Supplied declaration required: FUN_0037a05c. */
@@ -73,12 +73,12 @@ FUN_003784a4(int param_1,int param_2,unsigned int *param_3,unsigned short *param
   }
   if ((*(int *)(param_2 + 0x2bcc) != 0) && (*(int *)(param_2 + 0x2bd0) != 0)) {
     temp_v3 = *(unsigned int *)(param_1 + 4);
-    FUN_00150c4c(temp_v3,*param_3,param_2 + 0x29c8,0x200,*(int *)(param_2 + 0x2bcc),
+    soundPlayerPlayItem(temp_v3,*param_3,param_2 + 0x29c8,0x200,*(int *)(param_2 + 0x2bcc),
                  *(int *)(param_2 + 0x2bd0),1);
   }
   else {
     temp_v3 = *(unsigned int *)(param_1 + 4);
-    FUN_00150c4c(temp_v3,*param_3,param_2 + 0x29c8,0x200,0,0,1);
+    soundPlayerPlayItem(temp_v3,*param_3,param_2 + 0x29c8,0x200,0,0,1);
   }
   soundVoicePostRequestBlock(param_2,temp_v1,param_7,temp_v3);
   VectorSignedToFloat(param_3[4],(unsigned char)(in_fpscr >> 0x16) & 3);

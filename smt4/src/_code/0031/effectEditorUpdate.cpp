@@ -1,4 +1,3 @@
-/* NON_MATCHING: the item-index sum now matches retail (named position local, extraOffset + baseOffset); remaining: retail loads the state into r0 (overwriting the object pointer) and reloads g_effectEditor.object for the free, the build keeps the object in r0 and the state in r1. */
 #include "common.h"
 #include "shard/W6_W6Match2_GeometryResources.h"
 
@@ -24,6 +23,7 @@ typedef struct EditorOffsets0031ba38 {
 } EditorOffsets0031ba38;
 
 void FUN_002f2aa8(EditorObject0031ba38 *object);
+s32 effMenuNodeGetState(EditorObject0031ba38 *object);
 s32 linkedFindItemByIndex(u32 source, s32 offset);
 void namedObjectFormatName(EditorObject0031ba38 *object, s32 offset);
 
@@ -40,7 +40,7 @@ u32 effectEditorUpdate(void)
     data = linkedFindItemByIndex(g_effectEditor.source, position);
     s32 nameOffset = data + 0x9c;
     namedObjectFormatName(g_effectEditor.object, nameOffset);
-    s32 state = g_effectEditor.object->state;
+    s32 state = effMenuNodeGetState(g_effectEditor.object);
     if (state == 2 || state == 1) {
         asdMemoryFreeLocked(g_effectEditor.object);
         g_effectEditor.object = NULL;

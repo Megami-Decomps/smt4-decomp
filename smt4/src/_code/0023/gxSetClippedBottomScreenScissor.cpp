@@ -10,7 +10,8 @@ struct ScissorRenderContext {
 
 static __inline void clipScissorAxis(s32 &position, s32 &extent, s32 limit)
 {
-    if (position + extent < 0) {
+    s32 end = position + extent;
+    if (end < 0) {
         position = extent = 0;
     } else if (position < 0) {
         extent += position;

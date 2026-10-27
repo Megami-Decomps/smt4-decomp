@@ -4,7 +4,7 @@
 
 extern "C" {
 
-int FUN_001931d8(int *);
+int nw_ut_FloatColor_ToPicaU32(int *);
 int FUN_0044b5f4(int *, int *);
 int FUN_0044b92c(int *);
 int FUN_0050c20c(int *[2], int *);
@@ -25,7 +25,7 @@ typedef struct {
     unsigned int sp20; /* 0x20: local_20 */
 } param_3_stack;
 
-/* Supplied declaration required: FUN_001931d8. */
+/* Supplied declaration required: nw_ut_FloatColor_ToPicaU32. */
 /* Supplied declaration required: FUN_0044b5f4. */
 /* Supplied declaration required: FUN_0044b92c. */
 /* Supplied declaration required: FUN_0050c20c. */
@@ -92,7 +92,7 @@ void FUN_0050be58(int *param_1,int *param_2,int *param_3)
       piVar4[5] = temp_v3;
       piVar4[6] = temp_v4;
       temp_v6[0] = piVar4;
-      temp_v0 = FUN_001931d8(piVar4 + 3);
+      temp_v0 = nw_ut_FloatColor_ToPicaU32(piVar4 + 3);
       nw_gfx_res_ResTextureSampler_GetOwnerCommand(temp_v7,temp_v6);
       *(unsigned int *)(temp_v8 + 8) = temp_v0;
       return;
@@ -125,7 +125,7 @@ void FUN_0050be58(int *param_1,int *param_2,int *param_3)
       param_2[2] = temp_v3;
       param_2[3] = temp_v4;
       param_2[4] = temp_v1;
-      temp_v1 = FUN_001931d8(param_2 + 1);
+      temp_v1 = nw_ut_FloatColor_ToPicaU32(param_2 + 1);
       param_2[9] = temp_v1;
       return;
     }
@@ -226,7 +226,7 @@ void FUN_0050be58(int *param_1,int *param_2,int *param_3)
       param_2[0x2f] = temp_v1;
       param_2[0x30] = temp_v3;
       param_2[0x31] = temp_v4;
-      temp_v1 = FUN_001931d8(param_2 + 0x2e);
+      temp_v1 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x2e);
       param_2[0x32] = temp_v1;
       return;
     }

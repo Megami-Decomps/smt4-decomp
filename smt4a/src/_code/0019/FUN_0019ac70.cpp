@@ -8,7 +8,7 @@ extern "C" {
 extern void *g_renderCtx;
 void mathMatrixBuildInversePlanarTransform(MTX44 *matrix);
 MTX44 FUN_0019a0dc(void *scene);
-void FUN_0019a0fc(MTX44 *result, const MTX44 *left, const MTX44 *right);
+void nn_math_ARMv6_MTX44MultAsm(MTX44 *result, const MTX44 *left, const MTX44 *right);
 void camSetMatrixA(void *scene, const MTX44 *matrix);
 
 void FUN_0019ac70(MTX44 *projection)
@@ -21,7 +21,7 @@ void FUN_0019ac70(MTX44 *projection)
     }
     mathMatrixBuildInversePlanarTransform(&view);
     *projection = FUN_0019a0dc(g_renderCtx);
-    FUN_0019a0fc(&view, projection, &view);
+    nn_math_ARMv6_MTX44MultAsm(&view, projection, &view);
     camSetMatrixA(g_renderCtx, &view);
 }
 }

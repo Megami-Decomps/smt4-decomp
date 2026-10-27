@@ -1,8 +1,8 @@
-/* NON_MATCHING: filter factory matches in structure and calls (inline Obj42094c/child constructors, vertex and motion buffers, identity matrices, colour push); keeps the child scalar stores split instead of stm, and numbers registers differently. */
+/* NON_MATCHING: 108 of 108 rows and the callee-saved numbering now match (conditional construction `memory != NULL ? ::new (memory) T(child) : NULL`, child assigned after the derived members, motion address local); remaining differences: the inline constructor copies the filter into r5 before the vptr/config stores (retail after them, with the vptr literal in r1) and the motion base/index registers are swapped. */
 #include "classes/Obj42094c.h"
-#include "classes/Obj420708.h"
-#include "classes/Obj420880.h"
+#include "classes/Obj557b38Child.h"
 #include "AsdSDK/AsdDebug.h"
+#include <new>
 
 extern "C" {
 extern const char DAT_0052730c[];
@@ -19,11 +19,12 @@ extern "C" Obj42094c *FUN_0041cbac(Filter4PolyConfig *config, u32 flags, s32 fad
 {
     Obj420794Child *child = NULL;
     if (fading != 0) {
-        child = new Obj420880;
+        child = new Obj557d28;
     } else {
-        child = new Obj420708;
+        child = new Obj557b38;
     }
-    Obj42094c *filter = new (flags) Obj42094c(child);
+    void *memory = Obj420794::operator new(sizeof(Obj42094c), flags);
+    Obj42094c *filter = memory != NULL ? ::new (memory) Obj42094c(child) : NULL;
     filter->setConfig(config);
     btlFilterLoadTexture(filter, flags, config->unk1c);
     asdDebugTrace(DAT_0052730c, 296);
@@ -33,7 +34,8 @@ extern "C" Obj42094c *FUN_0041cbac(Filter4PolyConfig *config, u32 flags, s32 fad
     FUN_0041cd5c(filter);
     filter->refreshTextureCoordinates();
     for (s32 i = 0; i < filter->getConfig()->count; i++) {
-        mtx44Copy(&((Filter4PolyMotion *)filter->getMotions())[i], _ZN2nw4math5MTX448IdentityEv());
+        Filter4PolyMotion *motion = &((Filter4PolyMotion *)filter->getMotions())[i];
+        mtx44Copy(motion, _ZN2nw4math5MTX448IdentityEv());
     }
     child->setTarget(config->colorA, config->colorB, config->colorC);
     return filter;

@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail places the frames == 0 arm (alpha = 0, step untouched) out of line and divides into s1; armcc predicates that arm (vldreq/vstreq) and divides into s0. */
+/* NON_MATCHING: retail places the frames == 0 arm (alpha = 0, step = 0) out of line and divides into s1; armcc predicates the first store of that arm, shares the last one and divides into s0. */
 #include "shard/W6_W6Match2_JobBlend.h"
 
 struct AlphaFadeJob {
@@ -19,6 +19,7 @@ extern "C" u32 scrCommJobStartAlphaFadeOut(void)
         work->alphaStep = -1.0f / (f32)frames;
     } else {
         work->alpha = 0.0f;
+        work->alphaStep = 0.0f;
     }
     return 1;
 }

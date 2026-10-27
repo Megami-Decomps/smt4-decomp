@@ -4,9 +4,9 @@
 
 extern "C" {
 
-int FUN_001931d8(...);
+int nw_ut_FloatColor_ToPicaU32(...);
 
-/* Supplied declaration required: FUN_001931d8. */
+/* Supplied declaration required: nw_ut_FloatColor_ToPicaU32. */
 
 
 void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
@@ -26,7 +26,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     *param_2 = temp_v0;
     param_2[1] = temp_v1;
     param_2[2] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2);
     param_2[0x2c] = temp_v0;
     return;
   case 1:
@@ -35,7 +35,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[4] = *param_3;
     param_2[5] = temp_v0;
     param_2[6] = temp_v1;
-    temp_v0 = FUN_001931d8();
+    temp_v0 = nw_ut_FloatColor_ToPicaU32();
     param_2[0x2d] = temp_v0;
     return;
   case 2:
@@ -46,7 +46,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[8] = temp_v0;
     param_2[9] = temp_v1;
     param_2[10] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 8);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 8);
     param_2[0x2e] = temp_v0;
     return;
   case 3:
@@ -57,7 +57,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0xc] = temp_v0;
     param_2[0xd] = temp_v1;
     param_2[0xe] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0xc);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0xc);
     param_2[0x2f] = temp_v0;
     return;
   case 4:
@@ -68,7 +68,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x10] = temp_v0;
     param_2[0x11] = temp_v1;
     param_2[0x12] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x10);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x10);
     param_2[0x30] = temp_v0;
     return;
   case 5:
@@ -79,7 +79,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x14] = temp_v0;
     param_2[0x15] = temp_v1;
     param_2[0x16] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x14);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x14);
     param_2[0x31] = temp_v0;
     return;
   case 6:
@@ -90,7 +90,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x18] = temp_v0;
     param_2[0x19] = temp_v1;
     param_2[0x1a] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x18);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x18);
     param_2[0x32] = temp_v0;
     return;
   case 7:
@@ -101,7 +101,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x1c] = temp_v0;
     param_2[0x1d] = temp_v1;
     param_2[0x1e] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x1c);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x1c);
     param_2[0x33] = temp_v0;
     return;
   case 8:
@@ -112,7 +112,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x20] = temp_v0;
     param_2[0x21] = temp_v1;
     param_2[0x22] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x20);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x20);
     param_2[0x34] = temp_v0;
     return;
   case 9:
@@ -123,7 +123,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x24] = temp_v0;
     param_2[0x25] = temp_v1;
     param_2[0x26] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x24);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x24);
     param_2[0x35] = temp_v0;
     return;
   case 10:
@@ -134,7 +134,7 @@ void FUN_0050c578(int *param_1,unsigned int *param_2,unsigned int *param_3)
     param_2[0x28] = temp_v0;
     param_2[0x29] = temp_v1;
     param_2[0x2a] = temp_v2;
-    temp_v0 = FUN_001931d8(param_2 + 0x28);
+    temp_v0 = nw_ut_FloatColor_ToPicaU32(param_2 + 0x28);
     param_2[0x36] = temp_v0;
     return;
   default:

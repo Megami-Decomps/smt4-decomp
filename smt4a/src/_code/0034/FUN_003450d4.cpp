@@ -1,5 +1,5 @@
 #include "code/Code002a_VariantA.h"
-/* NON_MATCHING: packed coordinates now build through 16-bit bitfields like retail; remaining: the two pre-change snapshots take swapped saved registers (r4/r5), the rectangle/secondary arguments r6/r7, and the trailing call arguments copy through VFP instead of ldm/stm. */
+/* NON_MATCHING: packed coordinates build through 16-bit bitfields like retail; remaining: the packed-pair instruction order and the trailing call arguments copy through VFP (vldr/vstr) instead of retail's ldr + stm. */
 #include "shard/Shard0031.h"
 #include "ui/TouchRectangleRequest.h"
 #include "code/Code002a.h"
@@ -50,10 +50,8 @@ u32 FUN_003450d4(FlaggedEntry *entry, const TouchRectangleRequest *rectangle,
             }
         }
     }
-    s32 primaryBefore = resourceRunEmbeddedOperationIfUnblocked(entry);
-    primaryBefore += FUN_002a4878(entry);
-    s32 secondaryBefore = resourceRunOperationIfUnblocked(entry);
-    secondaryBefore += FUN_002a4894(reinterpret_cast<const Object *>(entry));
+    s32 primaryBefore = resourceRunEmbeddedOperationIfUnblocked(entry) + FUN_002a4878(entry);
+    s32 secondaryBefore = resourceRunOperationIfUnblocked(entry) + FUN_002a4894(reinterpret_cast<const Object *>(entry));
     if (accepted >= 0) {
         if (secondary)
             flaggedEntrySetValueB(entry, accepted);

@@ -28,6 +28,8 @@ public:
 class Obj420794 {
 public:
     Obj420794(Obj420794Child *owned) : buffer(NULL), texture(0), unk0C(0), speed(0.01f), child(owned) {}
+    /* For derived classes that assign the child after their own members are set up. */
+    Obj420794() : buffer(NULL), texture(0), unk0C(0), speed(0.01f) {}
     /* Releases the texture, the buffer and the child. */
     virtual ~Obj420794()
     {

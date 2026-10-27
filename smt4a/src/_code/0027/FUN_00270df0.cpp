@@ -42,7 +42,7 @@ static float romwright_sqrt_4(float value)
 #define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
 #define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
 #endif
-extern unsigned int FUN_001931d8(void);
+extern unsigned int nw_ut_FloatColor_ToPicaU32(void);
 extern int effGetFrameStep(void);
 extern int asdModelBankGetModel(int, unsigned int);
 /* Supplied declaration required: FUN_0034f8b4. */
@@ -221,7 +221,7 @@ LAB_00271128:
     *(float *)(temp_v0 + 0xbc) = temp_v4;
     *(float *)(temp_v0 + 0xc0) = temp_v5;
     *(unsigned int *)(temp_v0 + 0xc4) = 0x3f800000;
-    temp_v3 = FUN_001931d8();
+    temp_v3 = nw_ut_FloatColor_ToPicaU32();
     *(unsigned int *)(temp_v0 + 200) = temp_v3;
     return;
   }

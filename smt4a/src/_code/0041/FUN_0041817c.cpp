@@ -1,155 +1,118 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_0041817c` (_code @ 0x41817c, 0x2f8 bytes) from smt4a.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: readable rewrite; the per-goal loop body matches retail, but retail shares ONE goal-changed mark between the store paths and the second check (the build duplicates it), keeps a 0x34 frame and its register order for the amount/base differs. */
+#include "gamedata/RosterView.h"
+#include "AsdSDK/Source/Gfx/Model/AsdEnv.h"
+#include "AsdSDK/AsdDebugHooks.h"
+#include "shard/W5_W5Match7_FlagBanks.h"
+
+/* One requirement of a goal: a kind (2 = a counted target) with its target id and threshold. */
+struct GoalRequirement {
+    /* 0x00 */ u16 kind;
+    /* 0x02 */ u16 target;
+    /* 0x04 */ u32 threshold;
+};
+
+/* Goal definition returned by FUN_001ad9b4: only the fields read here. */
+struct GoalRecord {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[4];
+    /* 0x06 */ u8 category;
+    /* 0x07 */ u8 unk07[0xf9];
+    /* 0x100 */ GoalRequirement requirements[4];
+};
+
+/* A roster slot seen as a goal slot: the goal id and one progress counter per requirement. */
+struct GoalSlot {
+    /* 0x00 */ u16 id;
+    /* 0x02 */ u8 unk02[2];
+    /* 0x04 */ u16 counts[4];
+};
+
+/* The part of the flag bank where the latest progress is reported. */
+struct GoalProgressBank {
+    /* 0x0000 */ u8 unk0000[0x1098];
+    /* 0x1098 */ u16 reached;
+    /* 0x109a */ u16 advanced;
+};
 
 extern "C" {
+GoalRecord *FUN_001ad9b4(u32 id);
+s32 goalConditionsSatisfied(u32 id);
 
-int gameFlagBlockGet(void);
-int FUN_001ad9b4(void);
-
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp38; /* 0x38: local_38 */
-    unsigned int sp58; /* 0x58: local_58 */
-} param_2_stack;
-
-#ifndef ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_2_0_DEFINED
-#define romwright_subpiece_4_2_0(value, offset) ((unsigned short)(unsigned int)(value))
-#endif
-extern int gameFlagsGetBlock(void);
-/* Supplied declaration required: gameFlagBlockGet. */
-/* Supplied declaration required: FUN_001ad9b4. */
-extern int goalConditionsSatisfied(unsigned short);
-
-
-void FUN_0041817c(unsigned short *param_1,int param_2)
-
+/* The flag bytes of a goal in the game-flag block. */
+static __inline u8 *goalFlagEntry(u32 goalId)
 {
-/* irregular: 4 goto(s); 2 native warning(s); review required */
-  unsigned short temp_v0;
-  unsigned short temp_v1;
-  int temp_v2;
-  unsigned short *puVar4;
-  int temp_v3;
-  int temp_v4;
-  unsigned int temp_v5;
-  unsigned short *puVar8;
-  int temp_v6;
-  unsigned int temp_v7;
-  unsigned int temp_v8;
-  int temp_v9;
-  unsigned short *puVar13;
-  
-  temp_v2 = gameFlagBlockGet();
-  gameFlagBlockGet();
-  temp_v9 = 0;
-  do {
-    puVar13 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v2 + temp_v9 * 0xc + 0x8e4);
-    temp_v1 = romwright_subpiece_4_2_0(param_1,0);
-    if ((puVar13 != (unsigned short *)0x0) && (puVar4 = puVar13, FUN_001ad9b4(), (char)puVar4[3] == '\x01'))
-    {
-      temp_v3 = gameFlagsGetBlock();
-      temp_v4 = 0;
-      do {
-        puVar8 = puVar4 + temp_v4 * 4 + 0x80;
-        temp_v0 = *puVar8;
-        if (temp_v0 == 2) {
-          puVar8 = (unsigned short *)(unsigned int)puVar4[temp_v4 * 4 + 0x81];
-        }
-        if (temp_v0 == 2 && puVar8 == param_1) {
-          temp_v6 = temp_v2 + 0x914 + temp_v4 * 2;
-          temp_v7 = (unsigned int)*(unsigned short *)(temp_v6 + 4);
-          temp_v5 = *(unsigned int *)(puVar4 + temp_v4 * 4 + 0x82);
-          temp_v8 = temp_v7 + param_2;
-          if ((int)temp_v8 < 0xffff) {
-            *(short *)(temp_v6 + 4) = (short)temp_v8;
-            if (temp_v7 < temp_v5) {
-              if ((temp_v8 & 0xffff) >= *(unsigned int *)(puVar4 + temp_v4 * 4 + 0x82)) {
-                *(unsigned short *)(temp_v3 + 0x1098) = temp_v1;
-              }
-              else {
-                *(unsigned short *)(temp_v3 + 0x109a) = temp_v1;
-              }
-              goto LAB_004182e8;
+    return reinterpret_cast<u8 *>(&reinterpret_cast<RosterView *>(gameFlagBlockGet())->flags[goalId]);
+}
+
+/* Marks the goal as having changed. */
+static __inline void goalMarkChanged(u32 goalId)
+{
+    asdDebugHookVoid();
+    goalFlagEntry(goalId)[2] |= 2;
+}
+
+/* Adds `amount` to the counter of every requirement of the goal that counts `target`, reporting the goal that
+ * reached or advanced its threshold. */
+static __inline void goalAddProgress(GoalSlot *counters, u16 goalId, u16 target, s32 amount)
+{
+    if (goalId == 0) {
+        return;
+    }
+    GoalRecord *goal = FUN_001ad9b4(goalId);
+    if (goal->category != 1) {
+        return;
+    }
+    s32 incomplete = 0;
+    GoalProgressBank *bank = reinterpret_cast<GoalProgressBank *>(gameFlagsGetBlock());
+    for (s32 i = 0; i < 4; i++) {
+        if (goal->requirements[i].kind == 2 && goal->requirements[i].target == target) {
+            u32 before = counters->counts[i];
+            u32 threshold = goal->requirements[i].threshold;
+            if (before < threshold) {
+                incomplete = 1;
             }
-          }
-          else {
-            *(unsigned short *)(temp_v6 + 4) = 0xffff;
-            if (temp_v7 < temp_v5) goto LAB_004182e8;
-          }
-          break;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 4);
-      if (((((char)puVar4[3] == '\x01') && (puVar4[0x80] == 2)) && (puVar4[0x81] != 0)) &&
-         ((temp_v0 = *puVar4, temp_v4 = gameFlagBlockGet(),
-          (*(unsigned char *)(temp_v4 + (unsigned int)temp_v0 * 4 + 0x2a0) & 8) == 0 &&
-          (temp_v4 = goalConditionsSatisfied(*puVar4), temp_v4 != 0)))) {
-        *(unsigned short *)(temp_v3 + 0x1098) = puVar4[0x81];
-LAB_004182e8:
-        temp_v3 = gameFlagBlockGet();
-        temp_v3 = temp_v3 + (int)puVar13 * 4;
-        *(unsigned char *)(temp_v3 + 0x2a2) = *(unsigned char *)(temp_v3 + 0x2a2) | 2;
-      }
-    }
-    temp_v9 = temp_v9 + 1;
-  } while (temp_v9 < 4);
-  temp_v9 = 1;
-  do {
-    temp_v3 = temp_v2 + temp_v9 * 0xc;
-    puVar13 = (unsigned short *)(unsigned int)*(unsigned short *)(temp_v3 + 0x914);
-    if ((puVar13 != (unsigned short *)0x0) && (puVar4 = puVar13, FUN_001ad9b4(), (char)puVar4[3] == '\x01'))
-    {
-      temp_v4 = gameFlagsGetBlock();
-      temp_v6 = 0;
-      do {
-        puVar8 = puVar4 + temp_v6 * 4 + 0x80;
-        temp_v0 = *puVar8;
-        if (temp_v0 == 2) {
-          puVar8 = (unsigned short *)(unsigned int)puVar4[temp_v6 * 4 + 0x81];
-        }
-        if (temp_v0 == 2 && puVar8 == param_1) {
-          temp_v3 = temp_v3 + 0x914 + temp_v6 * 2;
-          temp_v5 = (unsigned int)*(unsigned short *)(temp_v3 + 4);
-          temp_v8 = *(unsigned int *)(puVar4 + temp_v6 * 4 + 0x82);
-          temp_v7 = temp_v5 + param_2;
-          if ((int)temp_v7 < 0xffff) {
-            *(short *)(temp_v3 + 4) = (short)temp_v7;
-            if (temp_v5 < temp_v8) {
-              if ((temp_v7 & 0xffff) >= *(unsigned int *)(puVar4 + temp_v6 * 4 + 0x82)) {
-                *(unsigned short *)(temp_v4 + 0x1098) = temp_v1;
-              }
-              else {
-                *(unsigned short *)(temp_v4 + 0x109a) = temp_v1;
-              }
-              goto LAB_0041844c;
+            u32 after = before + amount;
+            if ((s32)after < 0xffff) {
+                counters->counts[i] = (u16)after;
+                if (incomplete) {
+                    if ((u16)after >= goal->requirements[i].threshold) {
+                        bank->reached = target;
+                    } else {
+                        bank->advanced = target;
+                    }
+                    goalMarkChanged(goalId);
+                    return;
+                }
+            } else {
+                counters->counts[i] = 0xffff;
+                if (incomplete) {
+                    goalMarkChanged(goalId);
+                    return;
+                }
             }
-          }
-          else {
-            *(unsigned short *)(temp_v3 + 4) = 0xffff;
-            if (temp_v5 < temp_v8) goto LAB_0041844c;
-          }
-          break;
+            break;
         }
-        temp_v6 = temp_v6 + 1;
-      } while (temp_v6 < 4);
-      if (((((char)puVar4[3] == '\x01') && (puVar4[0x80] == 2)) && (puVar4[0x81] != 0)) &&
-         ((temp_v0 = *puVar4, temp_v3 = gameFlagBlockGet(),
-          (*(unsigned char *)(temp_v3 + (unsigned int)temp_v0 * 4 + 0x2a0) & 8) == 0 &&
-          (temp_v3 = goalConditionsSatisfied(*puVar4), temp_v3 != 0)))) {
-        *(unsigned short *)(temp_v4 + 0x1098) = puVar4[0x81];
-LAB_0041844c:
-        temp_v3 = gameFlagBlockGet();
-        temp_v3 = temp_v3 + (int)puVar13 * 4;
-        *(unsigned char *)(temp_v3 + 0x2a2) = *(unsigned char *)(temp_v3 + 0x2a2) | 2;
-      }
     }
-    temp_v9 = temp_v9 + 1;
-    if (temp_v9 >= 0x14) {
-      return;
+    if (goal->category == 1 && goal->requirements[0].kind == 2 && goal->requirements[0].target != 0 &&
+        ((*goalFlagEntry(goal->id) & 8) >> 3) == 0 &&
+        goalConditionsSatisfied(goal->id) != 0) {
+        bank->reached = goal->requirements[0].target;
+        goalMarkChanged(goalId);
     }
-  } while( 1 );
+}
+
+/* Adds `amount` progress for `target` to every goal held by the active party and the stock slots. */
+void FUN_0041817c(u16 target, s32 amount)
+{
+    RosterView *roster = reinterpret_cast<RosterView *>(gameFlagBlockGet());
+    gameFlagBlockGet();
+    GoalSlot *firstSlot = reinterpret_cast<GoalSlot *>(&roster->stock[0]);
+    for (s32 i = 0; i < 4; i++) {
+        goalAddProgress(firstSlot, roster->active[i].id, target, amount);
+    }
+    for (s32 i = 1; i < 20; i++) {
+        goalAddProgress(reinterpret_cast<GoalSlot *>(&roster->stock[i]), roster->stock[i].id, target, amount);
+    }
 }
 
 } /* extern "C" */

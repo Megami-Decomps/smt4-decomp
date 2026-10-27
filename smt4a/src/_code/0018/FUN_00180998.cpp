@@ -8,7 +8,7 @@ int renderCtxCalculateStereoParallax(unsigned int);
 int FUN_0019aee4(...);
 int FUN_0019be8c(...);
 int sentinelLookupGetValue(void);
-int FUN_0019f764(...);
+int renderCtxBindTextureMode(...);
 int VectorFloatToUnsigned(double, int);
 int VectorSignedToFloat(...);
 int VectorUnsignedToFloat(...);
@@ -68,7 +68,7 @@ extern unsigned int DAT_0063af94; /* 0x63af94 */
 extern unsigned int FUN_0019e120(unsigned short);
 extern unsigned int FUN_0019ea4c(unsigned short);
 extern unsigned int FUN_0019eaa0(unsigned short);
-/* Supplied declaration required: FUN_0019f764. */
+/* Supplied declaration required: renderCtxBindTextureMode. */
 
 
 /* WARNING: Removing unreachable block (ram,0x001811fc) */
@@ -395,7 +395,7 @@ LAB_00180bc0:
         temp_v7 = *(unsigned int *)
                  (*(int *)(param_1[5] + 0xc) + *(int *)(*param_1 + temp_v9 * 0x20 + 0x1c) * 4);
         if (temp_v28 != 0) {
-          FUN_0019f764(g_renderCtx,temp_v7,temp_v0);
+          renderCtxBindTextureMode(g_renderCtx,temp_v7,temp_v0);
           if (temp_v28 == 2) {
             temp_v25 = temp_v25 & 0xffffffff00000000;
             FUN_0019aee4(piVar10,temp_v6,temp_v16,temp_v16,temp_v16,temp_v16);
@@ -410,7 +410,7 @@ LAB_00180bc0:
           temp_v23 = (unsigned long long)(unsigned int)temp_v14 << 0x20;
         }
         else {
-          FUN_0019f764(g_renderCtx,temp_v7,temp_v0);
+          renderCtxBindTextureMode(g_renderCtx,temp_v7,temp_v0);
           FUN_0019aee4(piVar10,temp_v6,temp_v30,temp_v30,temp_v30,temp_v30);
         }
         temp_v22 = (unsigned long long)(unsigned int)((float)param_1[6] + temp_v21 + temp_v19);
@@ -446,7 +446,7 @@ LAB_00180f28:
         VectorSignedToFloat((int)*(char *)(temp_v8 + 6),(unsigned char)(temp_v13 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 5),(unsigned char)(temp_v13 >> 0x16) & 3);
         VectorUnsignedToFloat((unsigned int)*(unsigned char *)(temp_v8 + 7),(unsigned char)(temp_v13 >> 0x16) & 3);
-        FUN_0019f764(g_renderCtx,
+        renderCtxBindTextureMode(g_renderCtx,
                      *(unsigned int *)
                       (*(int *)(param_1[0x29] + 0xc) +
                       *(int *)(*param_1 + aiStack_138[temp_v6] * 0x20 + 0x1c) * 4),

@@ -1,812 +1,620 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c64ec` (_code @ 0x3c64ec, 0x126c bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the battle debug menu controller (1175 vs 1168 rows). Retail shares the flag-toggle stores between cases, computes the flag word address after the item query instead of before it, passes the list-box item in r1 and keeps one more saved register free. */
+#include "common.h"
+#include "gamedata/DataTable.h"
+#include "AsdSDK/Source/Util/AsdListBox.h"
+#include "AsdSDK/Source/Util/AsdListHelpers.h"
 #include "shard/W6_W6Match8_BattleDebug.h"
 
-extern "C" {
-
-int asdListBoxSetItemMode2(...);
-int asdListBoxSetByteValue(...);
-int asdListBoxAddItems(void);
-int asdListBoxCreateDefault(...);
-int jobSetText(...);
-int FUN_003c33c8(...);
-int FUN_003c39fc(...);
-int btlDebugCreateUnitMenu(...);
-int FUN_003c40ac(...);
-int FUN_003c4524(...);
-int btlDebugCreatePanelMenu(...);
-int btlDebugCreateStageMenu(...);
-int FUN_003c49bc(...);
-int FUN_003c4ac4(...);
-int FUN_003c4f38(...);
-int talkCtrlDebugMenuBuild(...);
-int FUN_003c56d8(...);
-struct BattleCameraMenuOwner;
-struct BattleCameraMenuContext;
-void btlDebugCreateAttackCameraMenu(BattleCameraMenuOwner *, BattleCameraMenuContext *);
-int FUN_003c5eb0(...);
-int FUN_003c5ffc(...);
-int btlCameraDebugApplyMenuItem(...);
-
-int asdListBoxSetItemMode3(...);
-int listBoxItemHasOwner(...);
-int asdListBoxGetItemValuePtr(...);
-int FUN_0024ef90(...);
-unsigned int asdListBoxGetSelectedItemId(unsigned int);
-int dataTableGetEntries(void);
-int dataTableGet(...);
-int jobStop(...);
-int dataTable22GetCount(void);
-int dataTable03Sub0GetCount(void);
-int FUN_003c3360(...);
-
-/* stack frame of param_2: 1 slot(s), 4 byte(s) */
-typedef struct {
-    unsigned int sp20; /* 0x20: local_20 */
-} param_2_stack;
-
-extern unsigned char DAT_004357c8; /* 0x4357c8 */
-extern unsigned short DAT_00439a50; /* 0x439a50 */
-extern unsigned char DAT_00439cf4; /* 0x439cf4 */
-extern unsigned short DAT_00439a62; /* 0x439a62 */
-extern unsigned short DAT_00439a66; /* 0x439a66 */
-extern unsigned char DAT_00439ce0; /* 0x439ce0 */
-extern unsigned char DAT_00439ce1; /* 0x439ce1 */
-extern unsigned char DAT_00439ce2; /* 0x439ce2 */
-extern unsigned char DAT_00439ce3; /* 0x439ce3 */
-extern unsigned int DAT_00439ce8; /* 0x439ce8 */
-extern unsigned int DAT_00439cf0; /* 0x439cf0 */
-#ifndef ROMWRIGHT_STORAGE_s______00439cf4_13_1_DEFINED
-#define ROMWRIGHT_STORAGE_s______00439cf4_13_1_DEFINED
-/* Storage views; not a recovered source structure. */
-union romwright_storage_s______00439cf4_13_1 {
-    char whole[13];
-    unsigned char u1[13];
-    signed char s1[13];
+/* The battle state, as far as the debug menu touches it. */
+struct DebugBattle {
+    /* 0x0000 */ u8 unk0000[0x5c];
+    /* 0x005C */ u32 job;
+    /* 0x0060 */ u8 unk0060[8];
+    /* 0x0068 */ u32 nextState;
+    /* 0x006C */ u8 unk006c[0x54];
+    /* 0x00C0 */ s32 groupA;
+    /* 0x00C4 */ s32 groupB;
+    /* 0x00C8 */ u8 unk00c8[0x74];
+    /* 0x013C */ s32 value13c;
+    /* 0x0140 */ s32 value140;
+    /* 0x0144 */ u8 unk0144[8];
+    /* 0x014C */ u8 value14c;
+    /* 0x014D */ u8 unk014d[0x1d4b];
+    /* 0x1E98 */ struct DebugActionTint *actions;
+    /* 0x1E9C */ u8 unk1e9c[0x3cc];
+    /* 0x2268 */ u32 talkValue;
+    /* 0x226C */ u8 unk226c[0xcbc];
+    /* 0x2F28 */ s32 guestSelection;
+    /* 0x2F2C */ u8 unk2f2c[0x1574];
+    /* 0x44A0 */ u32 flags44a0;
+    /* 0x44A4 */ u8 unk44a4[4];
+    union {
+        /* 0x44A8 */ u64 flags;
+        struct {
+            u32 low;
+            u32 high;
+        } word;
+    };
 };
-typedef char romwright_storage_s______00439cf4_13_1_size_check[(sizeof(union romwright_storage_s______00439cf4_13_1) == 13) ? 1 : -1];
-typedef char romwright_storage_s______00439cf4_13_1_u1_width_check[(sizeof(((union romwright_storage_s______00439cf4_13_1 *)0)->u1[0]) == 1) ? 1 : -1];
-typedef char romwright_storage_s______00439cf4_13_1_s1_width_check[(sizeof(((union romwright_storage_s______00439cf4_13_1 *)0)->s1[0]) == 1) ? 1 : -1];
-#endif
-extern union romwright_storage_s______00439cf4_13_1 s______00439cf4; /* 0x439cf4 */
-extern unsigned int DAT_00439cf8; /* 0x439cf8 */
 
-#ifndef ROMWRIGHT_SUBPIECE_4_1_1_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_1_DEFINED
-#define romwright_subpiece_4_1_1(value, offset) ((unsigned char)(((unsigned int)(value)) >> 8))
-#endif
-#ifndef ROMWRIGHT_SUBPIECE_4_1_2_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_2_DEFINED
-#define romwright_subpiece_4_1_2(value, offset) ((unsigned char)(((unsigned int)(value)) >> 16))
-#endif
-#ifndef ROMWRIGHT_SUBPIECE_4_1_3_DEFINED
-#define ROMWRIGHT_SUBPIECE_4_1_3_DEFINED
-#define romwright_subpiece_4_1_3(value, offset) ((unsigned char)(((unsigned int)(value)) >> 24))
-#endif
-extern char *asdListBoxGetItemText(unsigned int, unsigned int);
-/* Supplied declaration required: asdListBoxSetItemMode3. */
-/* Supplied declaration required: asdListBoxSetItemMode2. */
-/* Supplied declaration required: listBoxItemHasOwner. */
-/* Supplied declaration required: asdListBoxGetItemValuePtr. */
-/* Supplied declaration required: FUN_0024ef90. */
-/* Supplied declaration required: asdListBoxGetSelectedItemId. */
-/* Supplied declaration required: asdListBoxSetByteValue. */
-/* Supplied declaration required: asdListBoxAddItems. */
-/* Supplied declaration required: asdListBoxCreateDefault. */
-/* Supplied declaration required: jobSetText. */
-extern int jobIsValid(unsigned int);
-extern int padIsButtonPressed(unsigned int);
-extern unsigned int dataTableGetCount(unsigned int);
-/* Supplied declaration required: dataTableGetEntries. */
-/* Supplied declaration required: dataTableGet. */
-/* Supplied declaration required: jobStop. */
-/* Supplied declaration required: dataTable22GetCount. */
-/* Supplied declaration required: dataTable03Sub0GetCount. */
-/* Supplied declaration required: FUN_003c3360. */
-/* Supplied declaration required: FUN_003c33c8. */
-/* Supplied declaration required: FUN_003c39fc. */
-/* Supplied declaration required: btlDebugCreateUnitMenu. */
-/* Supplied declaration required: FUN_003c40ac. */
-/* Supplied declaration required: FUN_003c4524. */
-/* Supplied declaration required: btlDebugCreatePanelMenu. */
-/* Supplied declaration required: btlDebugCreateStageMenu. */
-/* Supplied declaration required: FUN_003c49bc. */
-/* Supplied declaration required: FUN_003c4ac4. */
-/* Supplied declaration required: FUN_003c4f38. */
-/* Supplied declaration required: talkCtrlDebugMenuBuild. */
-/* Supplied declaration required: FUN_003c56d8. */
-/* Supplied declaration required: btlDebugCreateAttackCameraMenu. */
-/* Supplied declaration required: FUN_003c5eb0. */
-/* Supplied declaration required: FUN_003c5ffc. */
-/* Supplied declaration required: btlCameraDebugApplyMenuItem. */
+/* An action record, as far as the tint colours go (0x114 bytes each). */
+struct DebugActionTint {
+    /* 0x00 */ u8 unk00[0x50];
+    /* 0x50 */ u32 status;
+    /* 0x54 */ u8 unk54[0x10];
+    /* 0x64 */ u32 tintA;
+    /* 0x68 */ u32 tintB;
+    /* 0x6C */ u32 tintC;
+    /* 0x70 */ u8 unk70[0xA4];
+};
 
+/* The debug menu being run: its state number, the open list box and the data the sub menus edit. */
+struct DebugMenu {
+    /* 0x00 */ u32 state;
+    /* 0x04 */ s32 menuMode;
+    /* 0x08 */ u32 confirmed;
+    /* 0x0C */ u32 cameraKind;
+    /* 0x10 */ u32 listBox;
+    /* 0x14 */ u8 onlyAllies;
+    /* 0x15 */ u8 onlyEnemies;
+    /* 0x16 */ u8 includeParty;
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u32 mask;
+    /* 0x1C */ s32 entryIndex;
+};
 
-/* WARNING: Type propagation algorithm not settling */
+#define DEBUG_STATE_DONE 0x1a
 
-unsigned int FUN_003c64ec(unsigned int *param_1,int param_2)
+extern "C" {
+extern const AsdListBoxEntry DAT_004357c8[2];
+extern const AsdListBoxEntry DAT_00434e28[13];
+extern const AsdListBoxEntry DAT_00434fc8[15];
+extern const AsdListBoxEntry DAT_004353a8[5];
+extern const AsdListBoxEntry DAT_00435788[2];
+extern const AsdListBoxEntry btlDebugMenuEntries[11];
+extern const char btlDebugMenuTitle[];
+extern u32 DAT_00435dc0;
+extern u32 DAT_00435dd8;
+extern u32 DAT_00439ce8;
+extern u8 DAT_00439ce0;
+extern u8 DAT_00439ce1;
+extern u8 DAT_00439ce2;
+extern u8 DAT_00439ce3;
+extern u32 DAT_00439cf0;
+extern u32 DAT_00439cf4;
+extern u32 DAT_00439cf8;
+extern u16 DAT_00439a50[12];
 
+s32 asdListBoxGetSelectedItemId(u32 listBox);
+u32 *asdListBoxGetItemValuePtr(u32 listBox, u32 id);
+void asdListBoxAddItems(u32 listBox, const AsdListBoxEntry *entries, s32 count);
+void asdListBoxSetByteValue(u32 listBox, s32 value);
+void asdListBoxSetItemMode2(u32 listBox, u32 id, u32 value);
+void asdListBoxSetItemMode3(u32 listBox, u32 id, u32 value, u32 minimum, u32 maximum, u8 option);
+void jobSetText(u32 job, const char *text);
+u32 jobIsValid(u32 handle);
+u32 jobStop(u32 handle, u16 delay);
+void FUN_0024ef90(u32 handle);
+s32 padIsButtonPressed(s32 button);
+s32 dataTable03Sub0GetCount(void);
+s32 dataTable22GetCount(void);
+void *dataTableGet(s32 table, s32 index);
+void *dataTableGetEntries(void *section);
+u32 dataTableGetCount(void *section);
+
+void FUN_003c3360(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c33c8(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c39fc(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c40ac(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c4524(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c49bc(DebugMenu *menu);
+void FUN_003c4ac4(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c4f38(DebugMenu *menu);
+void FUN_003c56d8(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c5eb0(DebugMenu *menu, DebugBattle *battle);
+void FUN_003c5ffc(DebugMenu *menu, DebugBattle *battle, u32 item);
+void btlCameraDebugApplyMenuItem(DebugMenu *menu, DebugBattle *battle, u32 item);
+void btlDebugCreateUnitMenu(DebugMenu *menu, DebugBattle *battle);
+void btlDebugCreateStageMenu(DebugMenu *menu, DebugBattle *battle);
+void btlDebugCreatePanelMenu(DebugMenu *menu, DebugBattle *battle);
+void talkCtrlDebugMenuBuild(DebugMenu *menu, DebugBattle *battle);
+void btlDebugCreateAttackCameraMenu(DebugMenu *menu, DebugBattle *battle);
+
+/* Closes the menu's list box. */
+static __inline void closeList(DebugMenu *menu)
 {
-/* irregular: 9 goto(s); 33 native warning(s); review required */
-  unsigned char temp_v0;
-  short *psVar2;
-  unsigned int temp_v1;
-  int *piVar4;
-  int temp_v2;
-  char *pcVar6;
-  unsigned int *puVar7;
-  unsigned char *puVar8;
-  unsigned int temp_v3;
-  int temp_v4;
-  unsigned int *puVar11;
-  unsigned int temp_v5;
-  
-  temp_v5 = 0;
-  temp_v4 = 0;
-  switch(*param_1) {
-  case 0:
-    if (param_1[1] == 0) {
-      temp_v5 = 1;
+    if (jobIsValid(menu->listBox) != 0) {
+        FUN_0024ef90(menu->listBox);
+        jobStop(menu->listBox, 0);
     }
-    else {
-      temp_v5 = 2;
-    }
-    break;
-  case 1:
-    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
-    switch(temp_v5) {
-    case 0:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      temp_v5 = *puVar7;
-      if (g_btlDebugState.category != '\0') {
-        dataTable03Sub0GetCount();
-        asdListBoxSetItemMode3(param_1[4],0,temp_v5,0,(int)puVar7 - 1,0);
-        *(unsigned int *)(param_2 + 0xc0) = 0xffffffff;
-        *(unsigned int *)(param_2 + 0xc4) = temp_v5;
-        g_btlDebugState.selectedId = temp_v5;
-      }
-      else {
-        dataTable22GetCount();
-        asdListBoxSetItemMode3(param_1[4],0,temp_v5,0,(int)puVar7 - 1,0);
-        *(unsigned int *)(param_2 + 0xc4) = 0xffffffff;
-        *(unsigned int *)(param_2 + 0xc0) = temp_v5;
-        g_btlDebugState.selectedId = temp_v5;
-      }
-      break;
-    case 1:
-      g_btlDebugState.category = listBoxItemHasOwner(param_1[4],temp_v5);
-      break;
-    case 2:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      temp_v5 = *puVar7;
-      puVar7 = &(*(unsigned int *)((unsigned char *)&(*(unsigned int *)((unsigned char *)&DAT_004357c8 + 0x610)) - 0x18));
-      *puVar7 = temp_v5;
-      break;
-    case 3:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      temp_v5 = *puVar7;
-      puVar7 = &(*(unsigned int *)((unsigned char *)&DAT_004357c8 + 0x610));
-      *puVar7 = temp_v5;
-      break;
-    case 4:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      if (temp_v4 != 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) | 0x4000;
-      }
-      else {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) & 0xffffbfff;
-      }
-      *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-      break;
-    case 5:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      if (temp_v4 == 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) & 0xffff7fff;
-        *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-        break;
-      }
-      *(unsigned int *)(param_2 + 0x44a8) = *(unsigned int *)(param_2 + 0x44a8) | 0x8000;
-      break;
-    case 6:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      if (temp_v4 != 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) | 0x10000;
-      }
-      else {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) & 0xfffeffff;
-      }
-      *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-      break;
-    case 7:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      *(unsigned int *)(param_2 + 0x13c) = *puVar7;
-      break;
-    case 8:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      *(unsigned int *)(param_2 + 0x140) = *puVar7;
-      break;
-    case 9:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      *(char *)(param_2 + 0x14c) = (char)*puVar7;
-      break;
-    case 10:
-      puVar11 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4]);
-      temp_v3 = *puVar11;
-      temp_v5 = dataTableGet(0x1c,2);
-      dataTableGetEntries();
-      temp_v5 = dataTableGetCount(temp_v5);
-      asdListBoxSetItemMode3(param_1[4],10,temp_v3,0,temp_v5,0);
-      temp_v3 = temp_v3 & 0xffff;
-      if (temp_v3 != 0) {
-        dataTableGet(0x1c,2);
-        temp_v4 = dataTableGetEntries();
-        psVar2 = (short *)((temp_v4 + temp_v3 * 0x10) - 0x10);
-        if (psVar2 == (short *)0x0) {
-          g_btlDebugState.selection = 0;
-          *(int *)(param_2 + 0x2f28) = (int)g_btlDebugState.selection;
-          break;
-        }
-        g_btlDebugState.selection = *psVar2;
-      }
-      else {
-        g_btlDebugState.selection = 0;
-      }
-      *(int *)(param_2 + 0x2f28) = (int)g_btlDebugState.selection;
-      break;
-    case 0xb:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      if (temp_v4 != 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) | 0x20000000;
-        *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-        break;
-      }
-      temp_v3 = *(unsigned int *)(param_2 + 0x44a8) & 0xdfffffff;
-      *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-      break;
-    case 0xc:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      if (temp_v4 != 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44ac) | 0x20;
-      }
-      else {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44ac) & 0xffffffdf;
-      }
-      *(unsigned int *)(param_2 + 0x44ac) = temp_v3;
-      break;
-    case 0xd:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      if (temp_v4 == 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44a8) & 0xffefffff;
-        *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-        break;
-      }
-      temp_v3 = *(unsigned int *)(param_2 + 0x44a8) | 0x100000;
-      *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-      break;
-    case 0xe:
-      temp_v4 = listBoxItemHasOwner(param_1[4],temp_v5);
-      puVar11 = (unsigned int *)(param_2 + 0x44a8);
-      if (temp_v4 != 0) {
-        temp_v3 = *puVar11 | 0x80000000;
-        *(unsigned int *)(param_2 + 0x44a8) = temp_v3;
-        break;
-      }
-      *puVar11 = *puVar11 & 0x7fffffff;
-      *(unsigned int *)(param_2 + 0x44ac) = 0;
-    }
-    temp_v4 = padIsButtonPressed(0);
-    if (temp_v4 != 0) {
-      FUN_003c3360(param_1,param_2);
-      temp_v5 = 0x1a;
-    }
-    else {
-      temp_v4 = padIsButtonPressed(1);
-      if (temp_v4 == 0) {
-        return 0;
-      }
-      temp_v5 = 0x1a;
-      *(unsigned int *)(param_2 + 0x68) = 0x16;
-    }
-    break;
-  case 2:
-    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
-    asdListBoxGetItemValuePtr(param_1[4],temp_v5);
-    switch(temp_v5) {
-    case 0:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 9;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 1:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        param_1[2] = 1;
-        *param_1 = 3;
-      }
-      break;
-    case 2:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 7;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 3:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0xb;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 4:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0xd;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 5:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0xf;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 6:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0x11;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 7:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0x13;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 8:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0x15;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 9:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v4 = jobIsValid(param_1[4]);
-        if (temp_v4 != 0) {
-          FUN_0024ef90(param_1[4]);
-          jobStop(param_1[4],0);
-        }
-        temp_v5 = 0x17;
-        *param_1 = temp_v5;
-      }
-      break;
-    case 10:
-      temp_v4 = padIsButtonPressed(0);
-      if (temp_v4 != 0) {
-        temp_v5 = 0x1a;
-        *param_1 = temp_v5;
-      }
-    }
-    temp_v4 = padIsButtonPressed(1);
-    goto joined_r0x003c7184;
-  case 3:
-    if (param_1[2] == 1) {
-      temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-      asdListBoxCreateDefault(temp_v5,0x73,0);
-      param_1[4] = temp_v5;
-      asdListBoxAddItems();
-      asdListBoxSetByteValue(param_1[4],1);
-      jobSetText(param_1[4],"btl Camera Menu");
-    }
-    temp_v5 = 4;
-    break;
-  case 4:
-    temp_v1 = asdListBoxGetSelectedItemId(param_1[4]);
-    if (param_1[2] == 1) {
-      param_1[3] = temp_v1;
-      temp_v5 = 5;
-    }
-    temp_v4 = padIsButtonPressed(0);
-    if (temp_v4 != 0) {
-      temp_v4 = jobIsValid(param_1[4]);
-      if (temp_v4 != 0) {
-        FUN_0024ef90(param_1[4]);
-        jobStop(param_1[4],0);
-      }
-      *param_1 = temp_v5;
-      return 0;
-    }
-    temp_v4 = padIsButtonPressed(1);
-    if (temp_v4 == 0) {
-      return 0;
-    }
-    temp_v4 = jobIsValid(param_1[4]);
-    if (temp_v4 != 0) {
-      FUN_0024ef90(param_1[4]);
-      jobStop(param_1[4],0);
-    }
-    temp_v5 = 0x19;
-    break;
-  case 5:
-    if (param_1[3] != 0) {
-      if (param_1[3] != 1) {
-        return 0;
-      }
-      FUN_003c5eb0(param_1);
-    }
-    else {
-      btlDebugCreateAttackCameraMenu(reinterpret_cast<BattleCameraMenuOwner *>(param_1),
-                   reinterpret_cast<BattleCameraMenuContext *>(param_2));
-    }
-    temp_v5 = 6;
-    break;
-  case 6:
-    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
-    if (param_1[3] != 0) {
-      if (param_1[3] == 1) {
-        btlCameraDebugApplyMenuItem(param_1,param_2,temp_v5);
-      }
-    }
-    else {
-      FUN_003c5ffc(param_1,param_2,temp_v5);
-    }
-    temp_v4 = padIsButtonPressed(0);
-    if (temp_v4 == 0) {
-      temp_v4 = padIsButtonPressed(1);
-      if (temp_v4 == 0) {
-        return 0;
-      }
-      temp_v4 = jobIsValid(param_1[4]);
-      if (temp_v4 != 0) {
-        FUN_0024ef90(param_1[4]);
-        jobStop(param_1[4],0);
-      }
-      temp_v5 = 3;
-      break;
-    }
-    temp_v5 = 0x1a;
-    break;
-  case 7:
-    btlDebugCreateUnitMenu(param_1);
-    temp_v5 = 8;
-    break;
-  case 8:
-    temp_v5 = asdListBoxGetSelectedItemId(param_1[4]);
-    switch(temp_v5) {
-    case 0:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0);
-      temp_v5 = *puVar7;
-      puVar7 = &DAT_00439ce8;
-      *puVar7 = temp_v5;
-      break;
-    case 1:
-      piVar4 = (int *)asdListBoxGetItemValuePtr(param_1[4],1);
-      DAT_00439cf8 = *piVar4 * 0x1000000 + (DAT_00439cf8 & 0xff0000) + (DAT_00439cf8 & 0xff00) +
-                     0xff;
-      do {
-        temp_v2 = *(int *)(param_2 + 0x1e98) + temp_v4 * 0x114;
-        if ((*(unsigned int *)(temp_v2 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v2 + 0x50) & 2) != 0) {
-          *(unsigned int *)(temp_v2 + 100) = DAT_00439cf8;
-          temp_v3 = DAT_00439cf8;
-          *(unsigned int *)(temp_v2 + 0x68) = DAT_00439cf8;
-          *(unsigned int *)(temp_v2 + 0x6c) = temp_v3;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x6d);
-      break;
-    case 2:
-      piVar4 = (int *)asdListBoxGetItemValuePtr(param_1[4],2);
-      DAT_00439cf8 = (DAT_00439cf8 & 0xff000000) + *piVar4 * 0x10000 + (DAT_00439cf8 & 0xff00) +
-                     0xff;
-      do {
-        temp_v2 = *(int *)(param_2 + 0x1e98) + temp_v4 * 0x114;
-        if ((*(unsigned int *)(temp_v2 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v2 + 0x50) & 2) != 0) {
-          *(unsigned int *)(temp_v2 + 100) = DAT_00439cf8;
-          temp_v3 = DAT_00439cf8;
-          *(unsigned int *)(temp_v2 + 0x68) = DAT_00439cf8;
-          *(unsigned int *)(temp_v2 + 0x6c) = temp_v3;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x6d);
-      break;
-    case 3:
-      piVar4 = (int *)asdListBoxGetItemValuePtr(param_1[4],3);
-      DAT_00439cf8 = (DAT_00439cf8 & 0xff000000) + (DAT_00439cf8 & 0xff0000) + *piVar4 * 0x100 +
-                     0xff;
-      do {
-        temp_v2 = *(int *)(param_2 + 0x1e98) + temp_v4 * 0x114;
-        if ((*(unsigned int *)(temp_v2 + 0x50) & 1) != 0 && (*(unsigned int *)(temp_v2 + 0x50) & 2) != 0) {
-          *(unsigned int *)(temp_v2 + 100) = DAT_00439cf8;
-          temp_v3 = DAT_00439cf8;
-          *(unsigned int *)(temp_v2 + 0x68) = DAT_00439cf8;
-          *(unsigned int *)(temp_v2 + 0x6c) = temp_v3;
-        }
-        temp_v4 = temp_v4 + 1;
-      } while (temp_v4 < 0x6d);
-      break;
-    case 4:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],4);
-      temp_v0 = (unsigned char)*puVar7;
-      puVar8 = &DAT_00439ce0;
-      *puVar8 = temp_v0;
-      break;
-    case 5:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],5);
-      temp_v0 = (unsigned char)*puVar7;
-      puVar8 = &DAT_00439ce1;
-      *puVar8 = temp_v0;
-      break;
-    case 6:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],6);
-      temp_v0 = (unsigned char)*puVar7;
-      puVar8 = &DAT_00439ce2;
-      *puVar8 = temp_v0;
-      break;
-    case 7:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],7);
-      temp_v0 = (unsigned char)*puVar7;
-      puVar8 = &DAT_00439ce3;
-      *puVar8 = temp_v0;
-      break;
-    case 8:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],8);
-      temp_v5 = *puVar7;
-      puVar7 = &DAT_00439cf0;
-      *puVar7 = temp_v5;
-      break;
-    case 9:
-      pcVar6 = (char *)asdListBoxGetItemText(param_1[4],9);
-      (*(unsigned int *)&s______00439cf4.u1[0]) = *(unsigned int *)pcVar6;
-      break;
-    case 10:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],10);
-      DAT_00439a50 = (unsigned short)*puVar7;
-      break;
-    case 0xb:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0xb);
-      (*(unsigned short *)((unsigned char *)&DAT_00439ce8 - 0x294)) = (unsigned short)*puVar7;
-      break;
-    case 0xc:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0xc);
-      (*(unsigned short *)((unsigned char *)&DAT_00439cf8 - 0x2a6)) = (unsigned short)*puVar7;
-      break;
-    case 0xd:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0xd);
-      (*(unsigned short *)((unsigned char *)&DAT_00439ce0 - 0x28a)) = (unsigned short)*puVar7;
-      break;
-    case 0xe:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0xe);
-      (*(unsigned short *)((unsigned char *)&DAT_00439ce1 - 0x289)) = (unsigned short)*puVar7;
-      break;
-    case 0xf:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0xf);
-      (*(unsigned short *)((unsigned char *)&DAT_00439ce2 - 0x286)) = (unsigned short)*puVar7;
-      break;
-    case 0x10:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0x10);
-      (*(unsigned short *)((unsigned char *)&DAT_00439ce3 - 0x289)) = (unsigned short)*puVar7;
-      break;
-    case 0x11:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0x11);
-      (*(unsigned short *)((unsigned char *)&DAT_00439cf0 - 0x292)) = (unsigned short)*puVar7;
-      break;
-    case 0x12:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0x12);
-      (*(unsigned short *)((unsigned char *)&DAT_00439cf4 - 0x294)) = (unsigned short)*puVar7;
-      break;
-    case 0x13:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0x13);
-      (*(unsigned short *)((unsigned char *)&DAT_00439a50 + 0x14)) = (unsigned short)*puVar7;
-      break;
-    case 0x14:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0x14);
-      DAT_00439a62 = (unsigned short)*puVar7;
-      break;
-    case 0x15:
-      puVar7 = (unsigned int *)asdListBoxGetItemValuePtr(param_1[4],0x15);
-      DAT_00439a66 = (unsigned short)*puVar7;
-    }
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 9:
-    FUN_003c39fc(param_1);
-    temp_v5 = 10;
-    break;
-  case 10:
-    FUN_003c40ac(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0xb:
-    temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    asdListBoxCreateDefault(temp_v5,0x73,0);
-    param_1[4] = temp_v5;
-    asdListBoxAddItems();
-    asdListBoxSetByteValue(param_1[4],1);
-    jobSetText(param_1[4],"btl Param Menu");
-    asdListBoxSetItemMode3(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
-    param_1[7] = 0xffffffff;
-    temp_v5 = 0xc;
-    break;
-  case 0xc:
-    FUN_003c4ac4(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0xd:
-    temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    asdListBoxCreateDefault(temp_v5,0x73,0);
-    param_1[4] = temp_v5;
-    asdListBoxAddItems();
-    asdListBoxSetByteValue(param_1[4],1);
-    jobSetText(param_1[4],"btl Bad Menu");
-    asdListBoxSetItemMode3(param_1[4],0,0xffffffff,0xffffffff,0x6c,0);
-    *(unsigned char *)(param_1 + 5) = 0;
-    *(unsigned char *)((int)param_1 + 0x15) = 0;
-    *(unsigned char *)((int)param_1 + 0x16) = 0;
-    param_1[7] = 0xffffffff;
-    temp_v5 = 0xe;
-    param_1[6] = 0;
-    break;
-  case 0xe:
-    FUN_003c33c8(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0xf:
-    btlDebugCreateStageMenu(param_1);
-    temp_v5 = 0x10;
-    break;
-  case 0x10:
-    FUN_003c4f38(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0x11:
-    temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    asdListBoxCreateDefault(temp_v5,0x73,0);
-    param_1[4] = temp_v5;
-    asdListBoxAddItems();
-    asdListBoxSetByteValue(param_1[4],1);
-    jobSetText(param_1[4],"btl Talk Menu");
-    puVar11 = (unsigned int *)(param_2 + 0x44a8);
-    asdListBoxSetItemMode2(param_1[4],0,(*puVar11 & 0x1000) >> 0xc);
-    asdListBoxSetItemMode2(param_1[4],1,(*puVar11 & 0x2000) >> 0xd);
-    asdListBoxSetItemMode3(param_1[4],2,*(unsigned int *)(param_2 + 0x2268),0,600,0);
-    asdListBoxSetItemMode2(param_1[4],3,(*(unsigned int *)(param_2 + 0x44a0) & 0x40000) >> 0x12);
-    asdListBoxSetItemMode2(param_1[4],4,(*puVar11 & 0x200000) >> 0x15);
-    temp_v5 = 0x12;
-    break;
-  case 0x12:
-    FUN_003c4524(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0x13:
-    btlDebugCreatePanelMenu(param_1);
-    temp_v5 = 0x14;
-    break;
-  case 0x14:
-    FUN_003c49bc(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0x15:
-    talkCtrlDebugMenuBuild(param_1);
-    temp_v5 = 0x16;
-    break;
-  case 0x16:
-    FUN_003c56d8(param_1);
-    temp_v4 = padIsButtonPressed(0);
-    goto joined_r0x003c7184;
-  case 0x17:
-    temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    asdListBoxCreateDefault(temp_v5,0x73,0);
-    param_1[4] = temp_v5;
-    asdListBoxAddItems();
-    asdListBoxSetByteValue(param_1[4],1);
-    jobSetText(param_1[4],"btl Result Menu");
-    asdListBoxSetItemMode2(param_1[4],0);
-    asdListBoxSetItemMode2(param_1[4],1);
-    temp_v5 = 0x18;
-    break;
-  case 0x18:
-    temp_v4 = asdListBoxGetSelectedItemId(param_1[4]);
-    if (temp_v4 != 0) {
-      if (temp_v4 == 1) {
-        temp_v4 = listBoxItemHasOwner(param_1[4],1);
-        if (temp_v4 != 0) {
-          temp_v3 = *(unsigned int *)(param_2 + 0x44ac) | 0x10;
-        }
-        else {
-          temp_v3 = *(unsigned int *)(param_2 + 0x44ac) & 0xffffffef;
-        }
-        *(unsigned int *)(param_2 + 0x44ac) = temp_v3;
-      }
-    }
-    else {
-      temp_v4 = listBoxItemHasOwner(param_1[4],0);
-      if (temp_v4 != 0) {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44ac) | 8;
-      }
-      else {
-        temp_v3 = *(unsigned int *)(param_2 + 0x44ac) & 0xfffffff7;
-      }
-      *(unsigned int *)(param_2 + 0x44ac) = temp_v3;
-    }
-    temp_v4 = padIsButtonPressed(0);
-joined_r0x003c7184:
-    if (temp_v4 == 0) {
-      s______00439cf4.whole[0] = (char)(*(unsigned int *)&s______00439cf4.u1[0]);
-      s______00439cf4.whole[1] = romwright_subpiece_4_1_1((*(unsigned int *)&s______00439cf4.u1[0]),1);
-      s______00439cf4.whole[2] = romwright_subpiece_4_1_2((*(unsigned int *)&s______00439cf4.u1[0]),2);
-      s______00439cf4.whole[3] = romwright_subpiece_4_1_3((*(unsigned int *)&s______00439cf4.u1[0]),3);
-      return 0;
-    }
-    temp_v5 = 0x1a;
-    break;
-  case 0x19:
-    temp_v5 = *(unsigned int *)(param_2 + 0x5c);
-    asdListBoxCreateDefault(temp_v5,0x73,0);
-    param_1[4] = temp_v5;
-    asdListBoxAddItems();
-    asdListBoxSetByteValue(param_1[4],1);
-    jobSetText(param_1[4],"btl Debug Menu");
-    temp_v5 = 0;
-    break;
-  case 0x1a:
-    return 0xffffffff;
-  default:
-    return 0;
-  }
-  *param_1 = temp_v5;
-  return 0;
 }
 
-} /* extern "C" */
+/* Opens a list box with the given rows under the battle's debug job. */
+static __inline void openList(DebugMenu *menu, DebugBattle *battle, const AsdListBoxEntry *entries, s32 count,
+                              const char *title)
+{
+    menu->listBox = asdListBoxCreateDefault(battle->job, 0x73, 0, 0);
+    asdListBoxAddItems(menu->listBox, entries, count);
+    asdListBoxSetByteValue(menu->listBox, 1);
+    jobSetText(menu->listBox, title);
+}
+
+/* Runs one step of the debug menu. Returns -1 once the menu is finished, otherwise 0. */
+u32 FUN_003c64ec(DebugMenu *menu, DebugBattle *battle)
+{
+    u32 next;
+    s32 index = 0;
+    switch (menu->state) {
+    case 0:
+        if (menu->menuMode == 0)
+            next = 1;
+        else
+            next = 2;
+        break;
+    case 1: {
+        u32 item = asdListBoxGetSelectedItemId(menu->listBox);
+        switch (item) {
+        case 0: {
+            u32 value = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            if (g_btlDebugState.category != 0) {
+                asdListBoxSetItemMode3(menu->listBox, 0, value, 0, dataTable03Sub0GetCount() - 1, 0);
+                battle->groupA = -1;
+                battle->groupB = value;
+            } else {
+                asdListBoxSetItemMode3(menu->listBox, 0, value, 0, dataTable22GetCount() - 1, 0);
+                battle->groupB = -1;
+                battle->groupA = value;
+            }
+            g_btlDebugState.selectedId = value;
+            break;
+        }
+        case 1:
+            g_btlDebugState.category = listBoxItemHasOwner(menu->listBox, item);
+            break;
+        case 2:
+            DAT_00435dc0 = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            break;
+        case 3:
+            DAT_00435dd8 = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            break;
+        case 4:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.low |= 0x4000;
+            else
+                battle->word.low &= ~0x4000u;
+            break;
+        case 5:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.low |= 0x8000;
+            else
+                battle->word.low &= ~0x8000u;
+            break;
+        case 6:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.low |= 0x10000;
+            else
+                battle->word.low &= ~0x10000u;
+            break;
+        case 7:
+            battle->value13c = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            break;
+        case 8:
+            battle->value140 = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            break;
+        case 9:
+            battle->value14c = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            break;
+        case 10: {
+            u32 value = *asdListBoxGetItemValuePtr(menu->listBox, item);
+            void *section = dataTableGet(0x1c, 2);
+            dataTableGetEntries(section);
+            asdListBoxSetItemMode3(menu->listBox, 10, value, 0, dataTableGetCount(section), 0);
+            u32 id = value & 0xffff;
+            if (id != 0) {
+                dataTableGet(0x1c, 2);
+                u16 *record = reinterpret_cast<u16 *>(reinterpret_cast<u8 *>(dataTableGetEntries(section)) + id * 0x10 - 0x10);
+                if (record != NULL)
+                    g_btlDebugState.selection = *record;
+                else
+                    g_btlDebugState.selection = 0;
+            } else {
+                g_btlDebugState.selection = 0;
+            }
+            battle->guestSelection = g_btlDebugState.selection;
+            break;
+        }
+        case 11:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.low |= 0x20000000;
+            else
+                battle->word.low &= ~0x20000000u;
+            break;
+        case 12:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.high |= 0x20;
+            else
+                battle->word.high &= ~0x20u;
+            break;
+        case 13:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.low |= 0x100000;
+            else
+                battle->word.low &= ~0x100000u;
+            break;
+        case 14:
+            if (listBoxItemHasOwner(menu->listBox, item) != 0) {
+                battle->word.low |= 0x80000000;
+            } else {
+                battle->word.low &= 0x7fffffff;
+                battle->word.high = 0;
+            }
+            break;
+        }
+        if (padIsButtonPressed(0) != 0) {
+            FUN_003c3360(menu, battle);
+            next = DEBUG_STATE_DONE;
+        } else {
+            if (padIsButtonPressed(1) == 0)
+                return 0;
+            next = DEBUG_STATE_DONE;
+            battle->nextState = 0x16;
+        }
+        break;
+    }
+    case 2: {
+        u32 item = asdListBoxGetSelectedItemId(menu->listBox);
+        asdListBoxGetItemValuePtr(menu->listBox, item);
+        switch (item) {
+        case 0:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 9;
+            }
+            break;
+        case 1:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->confirmed = 1;
+                menu->state = 3;
+            }
+            break;
+        case 2:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 7;
+            }
+            break;
+        case 3:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0xb;
+            }
+            break;
+        case 4:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0xd;
+            }
+            break;
+        case 5:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0xf;
+            }
+            break;
+        case 6:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0x11;
+            }
+            break;
+        case 7:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0x13;
+            }
+            break;
+        case 8:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0x15;
+            }
+            break;
+        case 9:
+            if (padIsButtonPressed(0) != 0) {
+                closeList(menu);
+                menu->state = 0x17;
+            }
+            break;
+        case 10:
+            if (padIsButtonPressed(0) != 0) {
+                menu->state = DEBUG_STATE_DONE;
+            }
+            break;
+        }
+        if (padIsButtonPressed(1) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    }
+    case 3:
+        if (menu->confirmed == 1)
+            openList(menu, battle, DAT_004357c8, 2, "btl Camera Menu");
+        next = 4;
+        break;
+    case 4: {
+        u32 pending = 0;
+        s32 selected = asdListBoxGetSelectedItemId(menu->listBox);
+        if (menu->confirmed == 1) {
+            menu->cameraKind = selected;
+            pending = 5;
+        }
+        if (padIsButtonPressed(0) != 0) {
+            closeList(menu);
+            menu->state = pending;
+            return 0;
+        }
+        if (padIsButtonPressed(1) == 0)
+            return 0;
+        closeList(menu);
+        next = 0x19;
+        break;
+    }
+    case 5:
+        if (menu->cameraKind != 0) {
+            if (menu->cameraKind != 1)
+                return 0;
+            FUN_003c5eb0(menu, battle);
+        } else {
+            btlDebugCreateAttackCameraMenu(menu, battle);
+        }
+        next = 6;
+        break;
+    case 6: {
+        u32 item = asdListBoxGetSelectedItemId(menu->listBox);
+        if (menu->cameraKind != 0) {
+            if (menu->cameraKind == 1)
+                btlCameraDebugApplyMenuItem(menu, battle, item);
+        } else {
+            FUN_003c5ffc(menu, battle, item);
+        }
+        if (padIsButtonPressed(0) == 0) {
+            if (padIsButtonPressed(1) == 0)
+                return 0;
+            closeList(menu);
+            next = 3;
+            break;
+        }
+        next = DEBUG_STATE_DONE;
+        break;
+    }
+    case 7:
+        btlDebugCreateUnitMenu(menu, battle);
+        next = 8;
+        break;
+    case 8: {
+        u32 item = asdListBoxGetSelectedItemId(menu->listBox);
+        switch (item) {
+        case 0:
+            DAT_00439ce8 = *asdListBoxGetItemValuePtr(menu->listBox, 0);
+            break;
+        case 1:
+            DAT_00439cf8 = *asdListBoxGetItemValuePtr(menu->listBox, 1) * 0x1000000 + (DAT_00439cf8 & 0xff0000) +
+                           (DAT_00439cf8 & 0xff00) + 0xff;
+            do {
+                DebugActionTint *action = &battle->actions[index];
+                if ((action->status & 1) != 0 && (action->status & 2) != 0) {
+                    action->tintA = DAT_00439cf8;
+                    action->tintB = DAT_00439cf8;
+                    action->tintC = DAT_00439cf8;
+                }
+                ++index;
+            } while (index < 0x6d);
+            break;
+        case 2:
+            DAT_00439cf8 = (DAT_00439cf8 & 0xff000000) + *asdListBoxGetItemValuePtr(menu->listBox, 2) * 0x10000 +
+                           (DAT_00439cf8 & 0xff00) + 0xff;
+            do {
+                DebugActionTint *action = &battle->actions[index];
+                if ((action->status & 1) != 0 && (action->status & 2) != 0) {
+                    action->tintA = DAT_00439cf8;
+                    action->tintB = DAT_00439cf8;
+                    action->tintC = DAT_00439cf8;
+                }
+                ++index;
+            } while (index < 0x6d);
+            break;
+        case 3:
+            DAT_00439cf8 = (DAT_00439cf8 & 0xff000000) + (DAT_00439cf8 & 0xff0000) +
+                           *asdListBoxGetItemValuePtr(menu->listBox, 3) * 0x100 + 0xff;
+            do {
+                DebugActionTint *action = &battle->actions[index];
+                if ((action->status & 1) != 0 && (action->status & 2) != 0) {
+                    action->tintA = DAT_00439cf8;
+                    action->tintB = DAT_00439cf8;
+                    action->tintC = DAT_00439cf8;
+                }
+                ++index;
+            } while (index < 0x6d);
+            break;
+        case 4:
+            DAT_00439ce0 = *asdListBoxGetItemValuePtr(menu->listBox, 4);
+            break;
+        case 5:
+            DAT_00439ce1 = *asdListBoxGetItemValuePtr(menu->listBox, 5);
+            break;
+        case 6:
+            DAT_00439ce2 = *asdListBoxGetItemValuePtr(menu->listBox, 6);
+            break;
+        case 7:
+            DAT_00439ce3 = *asdListBoxGetItemValuePtr(menu->listBox, 7);
+            break;
+        case 8:
+            DAT_00439cf0 = *asdListBoxGetItemValuePtr(menu->listBox, 8);
+            break;
+        case 9:
+            DAT_00439cf4 = *reinterpret_cast<u32 *>(asdListBoxGetItemText(reinterpret_cast<void *>(menu->listBox), 9));
+            break;
+        case 10:
+            DAT_00439a50[0] = *asdListBoxGetItemValuePtr(menu->listBox, 10);
+            break;
+        case 11:
+            DAT_00439a50[2] = *asdListBoxGetItemValuePtr(menu->listBox, 11);
+            break;
+        case 12:
+            DAT_00439a50[1] = *asdListBoxGetItemValuePtr(menu->listBox, 12);
+            break;
+        case 13:
+            DAT_00439a50[3] = *asdListBoxGetItemValuePtr(menu->listBox, 13);
+            break;
+        case 14:
+            DAT_00439a50[4] = *asdListBoxGetItemValuePtr(menu->listBox, 14);
+            break;
+        case 15:
+            DAT_00439a50[6] = *asdListBoxGetItemValuePtr(menu->listBox, 15);
+            break;
+        case 16:
+            DAT_00439a50[5] = *asdListBoxGetItemValuePtr(menu->listBox, 16);
+            break;
+        case 17:
+            DAT_00439a50[7] = *asdListBoxGetItemValuePtr(menu->listBox, 17);
+            break;
+        case 18:
+            DAT_00439a50[8] = *asdListBoxGetItemValuePtr(menu->listBox, 18);
+            break;
+        case 19:
+            DAT_00439a50[10] = *asdListBoxGetItemValuePtr(menu->listBox, 19);
+            break;
+        case 20:
+            DAT_00439a50[9] = *asdListBoxGetItemValuePtr(menu->listBox, 20);
+            break;
+        case 21:
+            DAT_00439a50[11] = *asdListBoxGetItemValuePtr(menu->listBox, 21);
+            break;
+        }
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    }
+    case 9:
+        FUN_003c39fc(menu, battle);
+        next = 10;
+        break;
+    case 10:
+        FUN_003c40ac(menu, battle);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0xb:
+        openList(menu, battle, DAT_00434e28, 13, "btl Param Menu");
+        asdListBoxSetItemMode3(menu->listBox, 0, 0xffffffff, 0xffffffff, 0x6c, 0);
+        menu->entryIndex = -1;
+        next = 0xc;
+        break;
+    case 0xc:
+        FUN_003c4ac4(menu, battle);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0xd:
+        openList(menu, battle, DAT_00434fc8, 15, "btl Bad Menu");
+        asdListBoxSetItemMode3(menu->listBox, 0, 0xffffffff, 0xffffffff, 0x6c, 0);
+        menu->onlyAllies = 0;
+        menu->onlyEnemies = 0;
+        menu->includeParty = 0;
+        menu->entryIndex = -1;
+        next = 0xe;
+        menu->mask = 0;
+        break;
+    case 0xe:
+        FUN_003c33c8(menu, battle);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0xf:
+        btlDebugCreateStageMenu(menu, battle);
+        next = 0x10;
+        break;
+    case 0x10:
+        FUN_003c4f38(menu);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0x11:
+        openList(menu, battle, DAT_004353a8, 5, "btl Talk Menu");
+        asdListBoxSetItemMode2(menu->listBox, 0, (battle->word.low & 0x1000) >> 12);
+        asdListBoxSetItemMode2(menu->listBox, 1, (battle->word.low & 0x2000) >> 13);
+        asdListBoxSetItemMode3(menu->listBox, 2, battle->talkValue, 0, 600, 0);
+        asdListBoxSetItemMode2(menu->listBox, 3, (battle->flags44a0 & 0x40000) >> 18);
+        asdListBoxSetItemMode2(menu->listBox, 4, (battle->word.low & 0x200000) >> 21);
+        next = 0x12;
+        break;
+    case 0x12:
+        FUN_003c4524(menu, battle);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0x13:
+        btlDebugCreatePanelMenu(menu, battle);
+        next = 0x14;
+        break;
+    case 0x14:
+        FUN_003c49bc(menu);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0x15:
+        talkCtrlDebugMenuBuild(menu, battle);
+        next = 0x16;
+        break;
+    case 0x16:
+        FUN_003c56d8(menu, battle);
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    case 0x17:
+        openList(menu, battle, DAT_00435788, 2, "btl Result Menu");
+        asdListBoxSetItemMode2(menu->listBox, 0, (battle->flags & 0x800000000ULL) != 0);
+        asdListBoxSetItemMode2(menu->listBox, 1, (battle->flags & 0x1000000000ULL) != 0);
+        next = 0x18;
+        break;
+    case 0x18: {
+        s32 item = asdListBoxGetSelectedItemId(menu->listBox);
+        if (item != 0) {
+            if (item == 1)
+                if (listBoxItemHasOwner(menu->listBox, 1) != 0)
+                battle->word.high |= 0x10;
+            else
+                battle->word.high &= ~0x10u;
+        } else {
+            if (listBoxItemHasOwner(menu->listBox, item) != 0)
+                battle->word.high |= 8;
+            else
+                battle->word.high &= ~8u;
+        }
+        if (padIsButtonPressed(0) == 0)
+            return 0;
+        next = DEBUG_STATE_DONE;
+        break;
+    }
+    case 0x19:
+        openList(menu, battle, btlDebugMenuEntries, 11, btlDebugMenuTitle);
+        next = 0;
+        break;
+    case DEBUG_STATE_DONE:
+        return 0xffffffff;
+    default:
+        return 0;
+    }
+    menu->state = next;
+    return 0;
+}
+}

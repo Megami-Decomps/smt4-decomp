@@ -63,6 +63,7 @@ s32 FUN_0022899c(u32 id, s32 a, s32 b, s32 casterSlot, s32 targetSlot, u32 c);
 u32 FUN_002277d4(u32 unused, SkillContext *context, SkillRecord *skill, SkillTarget **targets, u32 count, s32 anyTarget,
                  s32 mode)
 {
+    u32 i;
     switch (skill->scope) {
     case 0:
     case 1:
@@ -101,7 +102,7 @@ u32 FUN_002277d4(u32 unused, SkillContext *context, SkillRecord *skill, SkillTar
     }
     s32 usable = 0;
     u8 out = 0;
-    for (u32 i = 0; i < count; i++) {
+    for (i = 0; i < count; i++) {
         s32 blocked = 0;
 
         if ((targets[i]->flags & 0x400) != 0 && FUN_0029e9cc(targets[i]->recordId) != 0) {

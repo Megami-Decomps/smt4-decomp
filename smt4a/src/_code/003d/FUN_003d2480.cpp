@@ -9,7 +9,7 @@ extern "C" {
 const TransformMtx44 *_ZN2nw4math5MTX448IdentityEv();
 void mtx44Copy(TransformMtx44 *destination, const TransformMtx44 *source);
 void FUN_001a1c28(TransformMtx44 *matrix, f32 x, f32 y, f32 z);
-void FUN_0019a0fc(TransformMtx44 *output, const TransformMtx44 *left, const TransformMtx44 *right);
+void nn_math_ARMv6_MTX44MultAsm(TransformMtx44 *output, const TransformMtx44 *left, const TransformMtx44 *right);
 void FUN_0043b5b4(TransformPoint4 *output, const TransformMtx44 *matrix, const TransformPoint4 *input);
 
 // Transform a point by the current matrix followed by three signed axis rotations.
@@ -19,11 +19,11 @@ void FUN_003d2480(TransformVec3 *output, const TransformVec3 *input, s32 x, s32 
     mtx44Copy(&matrix, _ZN2nw4math5MTX448IdentityEv());
     TransformPoint4 point(input->x, input->y, input->z, 1.0f);
     FUN_001a1c28(&xRotation, (f32)x * 0.7111111f, 0.0f, 0.0f);
-    FUN_0019a0fc(&matrix, &matrix, &xRotation);
+    nn_math_ARMv6_MTX44MultAsm(&matrix, &matrix, &xRotation);
     FUN_001a1c28(&yRotation, 0.0f, (f32)y * 0.7111111f, 0.0f);
-    FUN_0019a0fc(&matrix, &matrix, &yRotation);
+    nn_math_ARMv6_MTX44MultAsm(&matrix, &matrix, &yRotation);
     FUN_001a1c28(&zRotation, 0.0f, 0.0f, (f32)z * 0.7111111f);
-    FUN_0019a0fc(&matrix, &matrix, &zRotation);
+    nn_math_ARMv6_MTX44MultAsm(&matrix, &matrix, &zRotation);
     FUN_0043b5b4(&point, &matrix, &point);
     output->x = point.x;
     output->y = point.y;

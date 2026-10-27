@@ -57,7 +57,7 @@ int modelStartProcessGroup(...);
 int FUN_001043c8(...);
 int FUN_00104e28(...);
 int FUN_00104e44(...);
-int FUN_00104ec4(...);
+int titleSequenceInit(...);
 int FUN_00105948(...);
 int titleConfigResetDefaults(...);
 int FUN_00105cac(...);
@@ -317,7 +317,7 @@ extern int FUN_00104e0c(void);
 /* Supplied declaration required: FUN_00104e28. */
 /* Supplied declaration required: FUN_00104e44. */
 /* Supplied declaration required: asdSoundShutdown. */
-/* Supplied declaration required: FUN_00104ec4. */
+/* Supplied declaration required: titleSequenceInit. */
 extern int FUN_001050cc(void);
 /* Supplied declaration required: asdTMTexTableLoadList. */
 extern unsigned long long appletProcessHomeButton(void);
@@ -596,7 +596,7 @@ void FUN_00101308(void)
   FUN_001036fc();
   titleConfigResetDefaults();
   titleConfigApplyAudio();
-  FUN_00104ec4();
+  titleSequenceInit();
   asdSequenceRequest(0x18,0);
   temp_v26 = (romwright_code *)&LAB_00103bd4;
   temp_v27 = 0;

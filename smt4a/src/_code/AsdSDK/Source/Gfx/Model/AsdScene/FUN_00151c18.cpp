@@ -12,8 +12,8 @@ AsdSceneLight *FUN_00151c18(void)
     asdDebugTrace("c:\\SMT4F\\SMT4F\\AsdSDK\\Source\\Gfx\\Model\\AsdScene.cpp", 976);
     AsdSceneLight *light = (AsdSceneLight *)asdMemoryAlloc(256, 256, 0, sizeof(AsdSceneLight), 1);
     light->object = NULL;
-    light->id = -1;
     light->parameters = NULL;
+    light->id = -1;
     AsdAllocatorObject *allocator = asdMemoryGetDefaultAllocator();
     AsdSceneLightDescription description;
     description.enabled = 1;

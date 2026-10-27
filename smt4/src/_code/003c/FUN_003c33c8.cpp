@@ -1,301 +1,192 @@
-/* NON_MATCHING: romwright 0.5.0 decompilation of `FUN_003c33c8` (_code @ 0x3c33c8, 0x630 bytes) from smt4_v1.2.0.cxi.
- * build.py compiles it with the retail compiler and objdiff compares it with the retail bytes: remove this marker once it matches. */
-#include "romwright_types.h"
+/* NON_MATCHING: typed rewrite of the status-flag editor item handler (405 vs 397 rows); retail copies the screen into r5 and keeps the battle state spilled while armcc copies both at entry, and the per-entry loops compile with different register numbering. */
+#include "battle/BtlMainAccess.h"
 #include "battle/BattleUnitSlot.h"
+#include "battle/btlAction.h"
+#include "gamedata/SaveSlotTable.h"
+
+/* The status-flag editor screen: its list box, the filters and the flag mask being edited. */
+struct StatusFlagEditor {
+    /* 0x00 */ u8 unk00[0x10];
+    /* 0x10 */ u32 listBox;
+    /* 0x14 */ u8 onlyAllies;        /* the filter of the entries to change: allies */
+    /* 0x15 */ u8 onlyEnemies;       /* enemies */
+    /* 0x16 */ u8 includeParty;      /* also change the party roster */
+    /* 0x17 */ u8 unk17;
+    /* 0x18 */ u32 mask;
+    /* 0x1c */ s32 entryIndex;       /* the single entry to change when no filter is on */
+};
 
 extern "C" {
+extern BtlMainState *const *g_btlScriptUnit;
 
-int listBoxItemHasOwner(unsigned int, unsigned int);
-int FUN_00246d38(...);
-int FUN_00246e24(...);
-int FUN_002561d8(...);
-int objectFlagsClear(...);
-int objectFlagSetBit(...);
+s32 listBoxItemHasOwner(u32 listBox, u32 item);
+u32 asdListBoxGetSelectedItemId(u32 listBox);
+u32 *asdListBoxGetItemValuePtr(u32 listBox, u32 item);
+BtlEntry *FUN_002561d8(BtlMainState *state, s32 index, u32 mode);
+s32 FUN_002c15fc(s32 mode);
+void FUN_00246e24(s32 a, BattleActionUnit *unit, BtlActionRecord *action, u32 mask, s32 b);
+void FUN_00246d38(s32 a, BattleActionUnit *unit, BtlActionRecord *action, u32 mask);
+SaveSlotTable *gameGetSlotTable(void);
+void *gameGetUnitRecord(s32 slot);
+s32 FUN_00295d7c(void *record);
+void objectFlagSetBit(void *record, s32 bit);
+void objectFlagsClear(void *record, u32 flags);
 
-/* stack frame of param_2: 2 slot(s), 8 byte(s) */
-typedef struct {
-    unsigned int sp28; /* 0x28: local_28 */
-    unsigned int sp30; /* 0x30: local_30 */
-} param_2_stack;
-
-extern unsigned int g_btlScriptUnit; /* 0x43427c */
-
-/* Supplied declaration required: listBoxItemHasOwner. */
-extern unsigned int *asdListBoxGetItemValuePtr(unsigned int, unsigned int);
-/* Supplied declaration required: FUN_00246d38. */
-/* Supplied declaration required: FUN_00246e24. */
-/* Supplied declaration required: FUN_002561d8. */
-extern unsigned int asdListBoxGetSelectedItemId(unsigned int);
-/* Supplied declaration required: objectFlagsClear. */
-/* Supplied declaration required: objectFlagSetBit. */
-extern int FUN_00295d7c(void);
-extern int gameGetUnitRecord(void);
-extern int gameGetSlotTable(void);
-extern int FUN_002c15fc(unsigned int);
-
-
-void FUN_003c33c8(int param_1,int param_2)
-
+/* Adds the flag mask to every action of an entry. */
+static __inline void addEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 mask)
 {
-/* irregular: 6 native warning(s); review required */
-  char temp_v0;
-  unsigned char temp_v1;
-  unsigned char temp_v2;
-  unsigned int temp_v3;
-  unsigned int *puVar5;
-  int temp_v4;
-  unsigned int *puVar7;
-  int temp_v5;
-  int temp_v6;
-  unsigned int temp_v7;
-  int temp_v8;
-  unsigned char temp_v9;
-  
-  temp_v3 = asdListBoxGetSelectedItemId(*(unsigned int *)(param_1 + 0x10));
-  temp_v8 = 0;
-  switch(temp_v3) {
-  case 0:
-    puVar5 = (unsigned int *)asdListBoxGetItemValuePtr(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    *(unsigned int *)(param_1 + 0x1c) = *puVar5;
-    return;
-  case 1:
-    temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    *(unsigned char *)(param_1 + 0x14) = temp_v2;
-    return;
-  case 2:
-    temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    *(unsigned char *)(param_1 + 0x15) = temp_v2;
-    return;
-  case 3:
-    temp_v2 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    *(unsigned char *)(param_1 + 0x16) = temp_v2;
-    return;
-  case 4:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x10;
+    for (s32 slot = 0; slot < 50; ++slot) {
+        s32 action = entry->members.ids[slot];
+        if (action >= 0)
+            FUN_00246e24(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask, 1);
     }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xffffffef;
-    }
-    break;
-  case 5:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 2;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xfffffffd;
-    }
-    break;
-  case 6:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x20;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xffffffdf;
-    }
-    break;
-  case 7:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x40;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xffffffbf;
-    }
-    break;
-  case 8:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x80;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xffffff7f;
-    }
-    break;
-  case 9:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x100;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xfffffeff;
-    }
-    break;
-  case 10:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x200;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xfffffdff;
-    }
-    break;
-  case 0xb:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 0x400;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xfffffbff;
-    }
-    break;
-  case 0xc:
-    temp_v8 = listBoxItemHasOwner(*(unsigned int *)(param_1 + 0x10),temp_v3);
-    if (temp_v8 != 0) {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) | 8;
-    }
-    else {
-      temp_v7 = *(unsigned int *)(param_1 + 0x18) & 0xfffffff7;
-    }
-    break;
-  case 0xd:
-    temp_v4 = FUN_002c15fc(0);
-    if (temp_v4 == 0) {
-      return;
-    }
-    temp_v0 = *(char *)(param_1 + 0x14);
-    temp_v9 = temp_v0 == '\0';
-    if (temp_v9) {
-      temp_v0 = *(char *)(param_1 + 0x15);
-    }
-    if (!temp_v9 || temp_v0 != '\0') {
-      do {
-        puVar7 = (unsigned int *)FUN_002561d8(param_2,temp_v8,1);
-        if (((puVar7 != (unsigned int *)0x0) &&
-            ((*(char *)(param_1 + 0x14) == '\0' || ((*puVar7 & 0x10) == 0)))) &&
-           ((*(char *)(param_1 + 0x15) == '\0' || ((*puVar7 & 0x10) != 0)))) {
-          temp_v4 = 0;
-          do {
-            temp_v5 = (int)*(short *)((int)puVar7 + temp_v4 * 2 + 8);
-            if (-1 < temp_v5) {
-              temp_v6 = *(int *)(param_2 + 0x1e98);
-              temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-              FUN_00246e24(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18),1);
-            }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < 0x32);
-        }
-        temp_v8 = temp_v8 + 1;
-      } while (temp_v8 < 0x6d);
-    }
-    if (*(char *)(param_1 + 0x16) != '\0') {
-      temp_v8 = gameGetSlotTable();
-      temp_v4 = 0;
-      temp_v1 = *(unsigned char *)(temp_v8 + 0x910b);
-      if (temp_v1 != 0) {
-        do {
-          temp_v8 = gameGetSlotTable();
-          if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = gameGetUnitRecord(), temp_v8 != 0))
-             && (temp_v5 = FUN_00295d7c(), temp_v5 == 0)) {
-            temp_v7 = 0;
-            do {
-              if ((*(unsigned int *)(param_1 + 0x18) & (1 << (temp_v7 & 0xff))) != 0) {
-                objectFlagSetBit(temp_v8,temp_v7);
-              }
-              temp_v7 = temp_v7 + 1;
-            } while ((int)temp_v7 < 0xb);
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < (int)(unsigned int)temp_v1);
-      }
-    }
-    temp_v0 = *(char *)(param_1 + 0x14);
-    temp_v9 = temp_v0 == '\0';
-    if (temp_v9) {
-      temp_v0 = *(char *)(param_1 + 0x15);
-    }
-    if (!temp_v9 || temp_v0 != '\0') {
-      return;
-    }
-    if (*(int *)(param_1 + 0x1c) < 0) {
-      return;
-    }
-    temp_v8 = FUN_002561d8(param_2,*(int *)(param_1 + 0x1c),1);
-    if (temp_v8 == 0) {
-      return;
-    }
-    temp_v4 = 0;
-    do {
-      temp_v5 = (int)*(short *)(temp_v8 + temp_v4 * 2 + 8);
-      if (-1 < temp_v5) {
-        temp_v6 = *(int *)(param_2 + 0x1e98);
-        temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-        FUN_00246e24(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18),1);
-      }
-      temp_v4 = temp_v4 + 1;
-    } while (temp_v4 < 0x32);
-    return;
-  case 0xe:
-    temp_v4 = FUN_002c15fc(0);
-    if (temp_v4 != 0) {
-      temp_v0 = *(char *)(param_1 + 0x14);
-      temp_v9 = temp_v0 == '\0';
-      if (temp_v9) {
-        temp_v0 = *(char *)(param_1 + 0x15);
-      }
-      if (!temp_v9 || temp_v0 != '\0') {
-        do {
-          puVar7 = (unsigned int *)FUN_002561d8(param_2,temp_v8,1);
-          if (((puVar7 != (unsigned int *)0x0) &&
-              ((*(char *)(param_1 + 0x14) == '\0' || ((*puVar7 & 0x10) == 0)))) &&
-             ((*(char *)(param_1 + 0x15) == '\0' || ((*puVar7 & 0x10) != 0)))) {
-            temp_v4 = 0;
-            do {
-              temp_v5 = (int)*(short *)((int)puVar7 + temp_v4 * 2 + 8);
-              if (-1 < temp_v5) {
-                temp_v6 = *(int *)(param_2 + 0x1e98);
-                temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-                FUN_00246d38(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18));
-              }
-              temp_v4 = temp_v4 + 1;
-            } while (temp_v4 < 0x32);
-          }
-          temp_v8 = temp_v8 + 1;
-        } while (temp_v8 < 0x6d);
-      }
-      if (*(char *)(param_1 + 0x16) != '\0') {
-        temp_v8 = gameGetSlotTable();
-        temp_v4 = 0;
-        temp_v1 = *(unsigned char *)(temp_v8 + 0x910b);
-        if (temp_v1 != 0) {
-          do {
-            temp_v8 = gameGetSlotTable();
-            if (((-1 < *(char *)(temp_v8 + temp_v4 + 0x90f0)) && (temp_v8 = gameGetUnitRecord(), temp_v8 != 0)
-                ) && (temp_v5 = FUN_00295d7c(), temp_v5 == 0)) {
-              objectFlagsClear(temp_v8,*(unsigned int *)(param_1 + 0x18) & 0xffff);
-            }
-            temp_v4 = temp_v4 + 1;
-          } while (temp_v4 < (int)(unsigned int)temp_v1);
-        }
-      }
-      temp_v0 = *(char *)(param_1 + 0x14);
-      temp_v9 = temp_v0 == '\0';
-      if (temp_v9) {
-        temp_v0 = *(char *)(param_1 + 0x15);
-      }
-      if (((temp_v9 && temp_v0 == '\0') && (-1 < *(int *)(param_1 + 0x1c))) &&
-         (temp_v8 = FUN_002561d8(param_2,*(int *)(param_1 + 0x1c),1), temp_v8 != 0)) {
-        temp_v4 = 0;
-        do {
-          temp_v5 = (int)*(short *)(temp_v8 + temp_v4 * 2 + 8);
-          if (-1 < temp_v5) {
-            temp_v6 = *(int *)(param_2 + 0x1e98);
-            temp_v3 = reinterpret_cast<u32>(btlUnitGet(reinterpret_cast<BtlMainState *const *>(g_btlScriptUnit)));
-            FUN_00246d38(0,temp_v3,temp_v6 + temp_v5 * 0x114,*(unsigned int *)(param_1 + 0x18));
-          }
-          temp_v4 = temp_v4 + 1;
-        } while (temp_v4 < 0x32);
-        return;
-      }
-    }
-  default:
-    return;
-  }
-  *(unsigned int *)(param_1 + 0x18) = temp_v7;
-  return;
 }
 
-} /* extern "C" */
+/* Removes the flag mask from every action of an entry. */
+static __inline void removeEntryFlags(BtlMainState *battle, BtlEntry *entry, u32 mask)
+{
+    for (s32 slot = 0; slot < 50; ++slot) {
+        s32 action = entry->members.ids[slot];
+        if (action >= 0)
+            FUN_00246d38(0, btlUnitGet(g_btlScriptUnit), &battle->actions[action], mask);
+    }
+}
+
+void FUN_003c33c8(StatusFlagEditor *screen, BtlMainState *battle)
+{
+    u32 item = asdListBoxGetSelectedItemId(screen->listBox);
+    s32 index = 0;
+    switch (item) {
+    case 0:
+        screen->entryIndex = *asdListBoxGetItemValuePtr(screen->listBox, item);
+        return;
+    case 1:
+        screen->onlyAllies = listBoxItemHasOwner(screen->listBox, item);
+        return;
+    case 2:
+        screen->onlyEnemies = listBoxItemHasOwner(screen->listBox, item);
+        return;
+    case 3:
+        screen->includeParty = listBoxItemHasOwner(screen->listBox, item);
+        return;
+    case 4:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x10;
+        else
+            screen->mask &= ~0x10u;
+        return;
+    case 5:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x2;
+        else
+            screen->mask &= ~0x2u;
+        return;
+    case 6:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x20;
+        else
+            screen->mask &= ~0x20u;
+        return;
+    case 7:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x40;
+        else
+            screen->mask &= ~0x40u;
+        return;
+    case 8:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x80;
+        else
+            screen->mask &= ~0x80u;
+        return;
+    case 9:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x100;
+        else
+            screen->mask &= ~0x100u;
+        return;
+    case 10:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x200;
+        else
+            screen->mask &= ~0x200u;
+        return;
+    case 11:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x400;
+        else
+            screen->mask &= ~0x400u;
+        return;
+    case 12:
+        if (listBoxItemHasOwner(screen->listBox, item) != 0)
+            screen->mask |= 0x8;
+        else
+            screen->mask &= ~0x8u;
+        return;
+    case 13:
+        if (FUN_002c15fc(0) == 0)
+            return;
+        if (screen->onlyAllies != 0 || screen->onlyEnemies != 0) {
+            do {
+                BtlEntry *entry = FUN_002561d8(battle, index, 1);
+                if (entry != NULL && (screen->onlyAllies == 0 || (entry->flags & 0x10) == 0) &&
+                    (screen->onlyEnemies == 0 || (entry->flags & 0x10) != 0))
+                    addEntryFlags(battle, entry, screen->mask);
+                ++index;
+            } while (index < 109);
+        }
+        if (screen->includeParty != 0) {
+            u8 count = *(reinterpret_cast<u8 *>(gameGetSlotTable()) + 0x910b);
+            for (s32 slot = 0; slot < count; ++slot) {
+                s8 unit = reinterpret_cast<s8 *>(gameGetSlotTable())[slot + 0x90f0];
+                if (unit >= 0) {
+                    void *record = gameGetUnitRecord(unit);
+                    if (record != NULL && FUN_00295d7c(record) == 0) {
+                        for (s32 bit = 0; bit < 11; ++bit) {
+                            if ((screen->mask & (1 << bit)) != 0)
+                                objectFlagSetBit(record, bit);
+                        }
+                    }
+                }
+            }
+        }
+        if (screen->onlyAllies == 0 && screen->onlyEnemies == 0 && screen->entryIndex >= 0) {
+            BtlEntry *entry = FUN_002561d8(battle, screen->entryIndex, 1);
+            if (entry != NULL)
+                addEntryFlags(battle, entry, screen->mask);
+        }
+        return;
+    case 14:
+        if (FUN_002c15fc(0) == 0)
+            return;
+        if (screen->onlyAllies != 0 || screen->onlyEnemies != 0) {
+            do {
+                BtlEntry *entry = FUN_002561d8(battle, index, 1);
+                if (entry != NULL && (screen->onlyAllies == 0 || (entry->flags & 0x10) == 0) &&
+                    (screen->onlyEnemies == 0 || (entry->flags & 0x10) != 0))
+                    removeEntryFlags(battle, entry, screen->mask);
+                ++index;
+            } while (index < 109);
+        }
+        if (screen->includeParty != 0) {
+            u8 count = *(reinterpret_cast<u8 *>(gameGetSlotTable()) + 0x910b);
+            for (s32 slot = 0; slot < count; ++slot) {
+                s8 unit = reinterpret_cast<s8 *>(gameGetSlotTable())[slot + 0x90f0];
+                if (unit >= 0) {
+                    void *record = gameGetUnitRecord(unit);
+                    if (record != NULL && FUN_00295d7c(record) == 0)
+                        objectFlagsClear(record, screen->mask & 0xffff);
+                }
+            }
+        }
+        if (screen->onlyAllies == 0 && screen->onlyEnemies == 0 && screen->entryIndex >= 0) {
+            BtlEntry *entry = FUN_002561d8(battle, screen->entryIndex, 1);
+            if (entry != NULL)
+                removeEntryFlags(battle, entry, screen->mask);
+        }
+        return;
+    default:
+        return;
+    }
+}
+}

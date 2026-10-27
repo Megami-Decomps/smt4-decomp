@@ -1,13 +1,13 @@
 #include "shard/Shard004B.h"
 
-extern "C" s32 FUN_0018416c(u16 id);
+extern "C" s32 unitHasRankingBonus(u16 id);
 
 /* Reset the record's current values to its conditionally scaled maxima. */
 static void resetScaledValues(ScaledRecordValues *record)
 {
     record->flags = 0;
     s16 maximum = record->maximum;
-    if (FUN_0018416c(record->id)) {
+    if (unitHasRankingBonus(record->id)) {
         maximum = static_cast<s16>(maximum * 1.25f);
     }
     record->current = maximum;

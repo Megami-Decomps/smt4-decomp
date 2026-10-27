@@ -11,7 +11,7 @@ struct Owner;
 struct TransitionRecord;
 extern "C" {
 
-unsigned int FUN_00230b90(unsigned int param_1,unsigned int param_2);
+unsigned int playerSlotHoldsEntry(unsigned int param_1,unsigned int param_2);
 
 void FUN_002355ac(u8 value);
 

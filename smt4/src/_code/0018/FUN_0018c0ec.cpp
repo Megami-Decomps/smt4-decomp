@@ -23,7 +23,7 @@ int FUN_0033be90(...);
 int skillChooseRandomFlaggedSlot(void);
 
 int FUN_00216e64(...);
-int FUN_0029541c(...);
+int resultUnitStepFinish(...);
 int FUN_002954bc(...);
 int btlTalkBustUpSetUnk2F4(...);
 int btlTalkBustUpSetDemonTexture(...);
@@ -151,7 +151,7 @@ extern int g_result; /* 0x44dc20 */
 extern int asdSoundSlotBIsPlaying(unsigned int);
 /* Supplied declaration required: gameSavedFlagSet. */
 extern int FUN_00295408(void);
-/* Supplied declaration required: FUN_0029541c. */
+/* Supplied declaration required: resultUnitStepFinish. */
 /* Supplied declaration required: FUN_002954bc. */
 /* Supplied declaration required: btlTalkBustUpSetUnk2F4. */
 /* Supplied declaration required: btlTalkBustUpSetDemonTexture. */
@@ -1235,7 +1235,7 @@ joined_r0x0018edf0:
             }
             else {
               FUN_0029bd4c();
-              FUN_0029541c(temp_v2);
+              resultUnitStepFinish(temp_v2);
             }
           }
           else {
@@ -1400,7 +1400,7 @@ joined_r0x0018edf0:
         }
         else {
           FUN_0029bd4c();
-          temp_v4 = FUN_0029541c(temp_v2);
+          temp_v4 = resultUnitStepFinish(temp_v2);
           if (temp_v4 != 0) {
             *piVar20 = *piVar20 + 1;
           }
@@ -1546,11 +1546,11 @@ joined_r0x0018edf0:
             break;
           }
           FUN_0029bd4c();
-          temp_v4 = FUN_0029541c(temp_v2);
+          temp_v4 = resultUnitStepFinish(temp_v2);
         }
         else {
           FUN_0029bd4c();
-          temp_v4 = FUN_0029541c(temp_v2);
+          temp_v4 = resultUnitStepFinish(temp_v2);
         }
         if (temp_v4 != 0) {
           temp_v4 = *piVar17 + 1;
@@ -1830,7 +1830,7 @@ joined_r0x0018edf0:
     if (temp_v8 != 1) {
       if ((temp_v8 == 2) && (temp_v4 = scrRunOpcodesStub(*(unsigned int *)(temp_v2 + 0x3574)), temp_v4 == 2)) {
         FUN_0029bd4c();
-        FUN_0029541c(temp_v2);
+        resultUnitStepFinish(temp_v2);
       }
     }
     else {

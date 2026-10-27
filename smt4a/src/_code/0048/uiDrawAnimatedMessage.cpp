@@ -1,4 +1,3 @@
-/* NON_MATCHING: VFP constant/centering registers swap, position loads combine into VLDMIAs, and completion tests are predicated with unsigned loads; candidate -O2. */
 #include "shard/W6_W6Match8_AnimatedSprite.h"
 #include "text/TextDraw.h"
 #include "AsdSDK/Source/Gfx/AsdTexManager/AsdTMTexTable.h"
@@ -51,8 +50,7 @@ void uiDrawAnimatedMessage(AnimatedMessageWork *work)
     s32 textWidth = static_cast<s32>(FUN_00168594(text, 2, 0.0f));
     f32 center = static_cast<f32>((info->placement->width - textWidth) / 2);
     f32 x = static_cast<f32>(vec2GetXInt(&work->sprites[1]) + info->x) + center + position.x;
-    f32 y = static_cast<f32>(info->y) + position.y;
-    textDrawString(2, g_uiTextFontSettings.font, text, x, y, 0.0f, 0.0f, 1.0f);
+    textDrawString(2, g_uiTextFontSettings.font, text, x, static_cast<f32>(info->y) + position.y, 0.0f, 0.0f, 1.0f);
     renderCtxPopState(g_renderCtx, 3);
     efctSetSpeed(1.0f);
     FUN_00163aa4(&work->sprites[1], 1.0f);

@@ -1,2 +1,15 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x558b84; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+struct FUN_001077d0View {
+    u8 unk00[0xb4];
+    u32 value;
+};
+
+u32 FUN_001077d0(const FUN_001077d0View *self)
+{
+    return self->value;
+}
+
+} /* extern "C" */

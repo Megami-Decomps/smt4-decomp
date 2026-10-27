@@ -6,7 +6,7 @@ extern "C" {
 int CONCAT44(...);
 int FUN_0018a924(...);
 int mtx44Copy(...);
-int FUN_0019a0fc(...);
+int nn_math_ARMv6_MTX44MultAsm(...);
 int FUN_001d3e14(...);
 int mtx44TransformPosition(...);
 int refCountIncrement(...);
@@ -124,7 +124,7 @@ extern unsigned int DAT_0064c0c0; /* 0x64c0c0 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Supplied declaration required: FUN_0018a924. */
 /* Supplied declaration required: mtx44Copy. */
-/* Supplied declaration required: FUN_0019a0fc. */
+/* Supplied declaration required: nn_math_ARMv6_MTX44MultAsm. */
 /* Supplied declaration required: FUN_001d3e14. */
 /* Supplied declaration required: mtx44TransformPosition. */
 /* Supplied declaration required: refCountIncrement. */
@@ -412,7 +412,7 @@ void FUN_002b437c(int param_1)
   temp_v30 = temp_v7;
   temp_v31 = temp_v7;
   temp_v32 = temp_v7;
-  FUN_0019a0fc(temp_v34,&temp_v20);
+  nn_math_ARMv6_MTX44MultAsm(temp_v34,&temp_v20);
   temp_v54 = temp_v34;
   puVar5 = (unsigned int *)&temp_v55;
   pfVar6 = &temp_v42;

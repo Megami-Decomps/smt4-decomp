@@ -1,12 +1,17 @@
-/* NON_MATCHING: retail evaluates the four colour arguments and the shifted corners right to left (mov r3,r0; mov r2,r3; mov r1,r2) with the constant in s6; the build orders the VFP moves and adds differently. */
-#include "status/StatusCamera.h"
+#include "common.h"
 
-extern "C" void FUN_00280a08(u32 color0, u32 color1, u32 color2, u32 color3, Vec3 p0, Vec3 p1, Vec3 p2, Vec3 p3);
+extern "C" void FUN_00280a08(u32 color0, u32 color1, u32 color2, u32 color3, f32 x0, f32 y0, f32 z0, f32 x1, f32 y1, f32 z1,
+                             f32 x2, f32 y2, f32 z2, f32 x3, f32 y3, f32 z3);
 
-extern "C" void FUN_002039a0(u32 color, Vec3 start, Vec3 end)
+/* Draws the quad from `start` to `end` with its far edge shifted ten units along x and y. */
+extern "C" void FUN_002039a0(u32 color, f32 startX, f32 startY, f32 startZ, f32 endX, f32 endY, f32 endZ)
 {
-    Vec3 shiftedStart = { start.x + 10.0f, start.y + 10.0f, start.z };
-    Vec3 shiftedEnd = { end.x + 10.0f, end.y + 10.0f, end.z };
-
-    FUN_00280a08(color, color, color, color, start, end, shiftedStart, shiftedEnd);
+    f32 shiftedEndY = endY + 10.0f;
+    f32 shiftedEndX = endX + 10.0f;
+    f32 shiftedStartY = startY + 10.0f;
+    f32 shiftedStartX = startX + 10.0f;
+    u32 color1, color2, color3;
+    color1 = color2 = color3 = color;
+    FUN_00280a08(color, color1, color2, color3, startX, startY, startZ, endX, endY, endZ, shiftedStartX, shiftedStartY, startZ,
+                 shiftedEndX, shiftedEndY, endZ);
 }

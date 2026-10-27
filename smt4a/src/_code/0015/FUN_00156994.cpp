@@ -1,4 +1,4 @@
-/* NON_MATCHING: retail tail-duplicates the whole animation/matrix block into both arms of the unk1B0 test (150 rows, r6/r7/r8/r9 saved); built keeps one copy */
+/* NON_MATCHING: material and UV animations are now real sub-blocks (MaterialSlot/UvSlot, base pointers in r5 as in retail) and the material block is duplicated into both arms of the unk1B0 test as retail does; retail keeps the constants 1 and 0 in r6/r7 for the whole function (r4-r9 saved, 150 rows) and ends through a shared return block, the build has 128 rows and a conditional tail call. */
 #include "shard/W6_W6Match7_MaterialAnimationFlags.h"
 
 struct MatrixSlot {
@@ -22,6 +22,23 @@ struct AnimBinding {
     /* 0x10 */ u32 trackCount;
 };
 
+/* The material animation of a model: its track, animation and the per-material bindings. */
+struct MaterialSlot {
+    /* 0x00 */ AnimTrackState track;
+    /* 0x0C */ AnimBinding *anim;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u8 bindings[0x10];
+    /* 0x24 */ u8 trackKind[0xC];
+};
+
+/* The UV animation of a model. */
+struct UvSlot {
+    /* 0x00 */ AnimTrackState track;
+    /* 0x0C */ AnimBinding *anim;
+    /* 0x10 */ u8 unk10[4];
+    /* 0x14 */ u8 bindings[0x1C];
+};
+
 struct ModelInstance {
     /* 0x000 */ u32 unk000;
     /* 0x004 */ u32 flags;
@@ -30,15 +47,8 @@ struct ModelInstance {
     /* 0x020 */ u8 unk020[0x10];
     /* 0x030 */ AnimBinding *slots[1]; /* stride 0x30 */
     /* 0x034 */ u8 unk034[0x50];
-    /* 0x084 */ AnimTrackState materialTrack;
-    /* 0x090 */ AnimBinding *materialAnim;
-    /* 0x094 */ u8 unk094[4];
-    /* 0x098 */ u8 materialBindings[0x10];
-    /* 0x0A8 */ u8 materialTrackKind[0xC];
-    /* 0x0B4 */ AnimTrackState uvTrack;
-    /* 0x0C0 */ AnimBinding *uvAnim;
-    /* 0x0C4 */ u8 unk0C4[4];
-    /* 0x0C8 */ u8 uvBindings[0x1C];
+    /* 0x084 */ MaterialSlot material;
+    /* 0x0B4 */ UvSlot uv;
     /* 0x0E4 */ u8 unk0E4[0x28];
     /* 0x10C */ u8 materialStates[8];
     /* 0x114 */ u8 uvStates[0xC];
@@ -51,6 +61,9 @@ struct ModelInstance {
     /* 0x201 */ u8 unk201[0x5B];
     /* 0x25C */ s32 unk25C;
 };
+typedef char ModelInstanceSlotOffsetsCheck[
+    offsetof(ModelInstance, material) == 0x84 && offsetof(ModelInstance, uv) == 0xB4 &&
+    offsetof(ModelInstance, unk0E4) == 0xE4 ? 1 : -1];
 
 extern "C" {
 void FUN_0016a130(void *object);
@@ -66,6 +79,30 @@ void nn_math_ARMv6_MTX34CopyAsm(void *dest, const void *source);
 void nn_math_ARMv6_MTX34InvTransposeAsm(void *dest, const void *source);
 void nn_math_ARMv6_MTX34MultAsm(void *dest, const void *first, const void *second);
 
+/* Advances the material animation of a model. */
+static __inline void updateMaterialAnimation(ModelInstance *model, f32 dt)
+{
+    MaterialSlot *slot = &model->material;
+    AnimBinding *anim = slot->anim;
+    if (anim != NULL) {
+        void *trackKind = NULL;
+        u32 i = 0;
+        while (i < anim->trackCount) {
+            if (anim->tracks[i]->kind == 6) {
+                trackKind = slot->trackKind;
+                break;
+            }
+            i++;
+        }
+        FUN_0017f87c(anim, model->materialStates, slot->bindings, trackKind, slot->track.time);
+        gfxMarkMaterialAnimationCapabilities(
+            reinterpret_cast<const MaterialFlagAnimation *>(slot->anim),
+            reinterpret_cast<MaterialFlagStateArray *>(model->materialStates),
+            reinterpret_cast<const MaterialFlagBindingArray *>(slot->bindings));
+        trackAdvance(&slot->track, dt);
+    }
+}
+
 /* Advances the material and UV animations of a model and rebuilds its world and normal matrices. */
 void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
 {
@@ -75,28 +112,16 @@ void FUN_00156994(ModelInstance *model, void *outMatrix, f32 dt)
         return;
 
     FUN_0016a130(model);
-    if (model->unk1B0 == 0)
+    if (model->unk1B0 == 0) {
         FUN_0016a220(model, dt);
-
-    AnimBinding *anim = model->materialAnim;
-    if (anim != NULL) {
-        void *trackKind = NULL;
-        for (u32 i = 0; i < anim->trackCount; i++) {
-            if (anim->tracks[i]->kind == 6) {
-                trackKind = model->materialTrackKind;
-                break;
-            }
-        }
-        FUN_0017f87c(anim, model->materialStates, model->materialBindings, trackKind, model->materialTrack.time);
-        gfxMarkMaterialAnimationCapabilities(
-            reinterpret_cast<const MaterialFlagAnimation *>(model->materialAnim),
-            reinterpret_cast<MaterialFlagStateArray *>(model->materialStates),
-            reinterpret_cast<const MaterialFlagBindingArray *>(model->materialBindings));
-        trackAdvance(&model->materialTrack, dt);
+        updateMaterialAnimation(model, dt);
+    } else {
+        updateMaterialAnimation(model, dt);
     }
-    if (model->uvAnim != NULL) {
-        FUN_001782c8(model->uvAnim, model->uvStates, model->uvBindings, model->uvTrack.time);
-        trackAdvance(&model->uvTrack, dt);
+    UvSlot *uv = &model->uv;
+    if (uv->anim != NULL) {
+        FUN_001782c8(uv->anim, model->uvStates, uv->bindings, uv->track.time);
+        trackAdvance(&uv->track, dt);
     }
 
     AnimBinding *slot = *(AnimBinding **)((u8 *)model + model->currentSlot * 0x30 + 0x30);

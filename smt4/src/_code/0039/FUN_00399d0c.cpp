@@ -16,7 +16,7 @@ extern GameStateView g_gameState;
 int FUN_00231dec(...);
 
 int CONCAT44(double, double);
-int FUN_00231ad4(...);
+int mapExplorationCellMark(...);
 int pairCopy(int, float *);
 int FUN_00231bcc(...);
 float FUN_00231d2c(int);
@@ -61,8 +61,8 @@ extern unsigned int DAT_0044cdd8; /* 0x44cdd8 */
 /* Unsupported intrinsic, declaration required: CONCAT44 (PIECE). */
 /* Unsupported intrinsic, declaration required: VectorSignedToFloat (CALLOTHER). */
 /* Unsupported intrinsic, declaration required: NAN (FLOAT_NAN). */
-extern unsigned int FUN_002319e0(unsigned int, int, int);
-/* Supplied declaration required: FUN_00231ad4. */
+extern unsigned int mapExplorationCellIsMarked(unsigned int, int, int);
+/* Supplied declaration required: mapExplorationCellMark. */
 /* Supplied declaration required: pairCopy. */
 /* Supplied declaration required: FUN_00231bcc. */
 extern unsigned char mathHeadingToDirectionCode(int context, float angle);
@@ -218,7 +218,7 @@ void FUN_00399d0c(int param_1)
                   temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                   if ((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) goto LAB_0039a8c0;
 LAB_0039aa00:
-                  FUN_00231ad4(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
+                  mapExplorationCellMark(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
                 }
                 else {
 LAB_0039a8c0:
@@ -311,7 +311,7 @@ LAB_0039a8c0:
                                    ((unsigned int)(temp_v24 <= temp_v19) << 0x1d);
                         temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                         if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                          FUN_00231ad4(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
+                          mapExplorationCellMark(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
                         }
                       }
                     }
@@ -343,13 +343,13 @@ LAB_0039a8c0:
                                    ((unsigned int)(temp_v17 <= temp_v19) << 0x1d);
                         temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                         if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                          FUN_00231ad4(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
+                          mapExplorationCellMark(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
                         }
                       }
                     }
                   }
                 }
-                temp_v6 = FUN_002319e0(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
+                temp_v6 = mapExplorationCellIsMarked(0x67,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v40 >> 6);
                 if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.f0049fcfc != 0)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v41,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v24 = (float)VectorSignedToFloat(temp_v18 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -413,7 +413,7 @@ LAB_0039a8c0:
                   temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                   if ((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) goto LAB_0039a290;
 LAB_0039a428:
-                  FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                  mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                 }
                 else {
 LAB_0039a290:
@@ -528,7 +528,7 @@ LAB_0039a290:
                                    ((unsigned int)(temp_v19 <= temp_v15) << 0x1d);
                         temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                         if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                          FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                          mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                         }
                       }
                     }
@@ -560,7 +560,7 @@ LAB_0039a290:
                                ((unsigned int)(temp_v13 <= temp_v19) << 0x1d);
                     temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                     if ((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) goto LAB_0039a4c0;
-                    FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                    mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                   }
                   else {
 LAB_0039a4c0:
@@ -588,7 +588,7 @@ LAB_0039a4c0:
                                      ((unsigned int)(temp_v15 <= temp_v19) << 0x1d);
                           temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                           if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                            FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                            mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                           }
                         }
                       }
@@ -621,7 +621,7 @@ LAB_0039a4c0:
                                ((unsigned int)(temp_v19 <= temp_v15) << 0x1d);
                     temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                     if ((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) goto LAB_0039a5e0;
-                    FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                    mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                   }
                   else {
 LAB_0039a5e0:
@@ -649,7 +649,7 @@ LAB_0039a5e0:
                                      ((unsigned int)(temp_v19 <= temp_v15) << 0x1d);
                           temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                           if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                            FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                            mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                           }
                         }
                       }
@@ -683,13 +683,13 @@ LAB_0039a5e0:
                                    ((unsigned int)(temp_v15 <= temp_v19) << 0x1d);
                         temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                         if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                          FUN_00231ad4(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                          mapExplorationCellMark(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                         }
                       }
                     }
                   }
                 }
-                temp_v6 = FUN_002319e0(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
+                temp_v6 = mapExplorationCellIsMarked(0x66,(int)(temp_v8 + (temp_v6 >> 0x1a)) >> 6,temp_v7);
                 if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.f0049fcfc != 0)) {
                   temp_v19 = (float)VectorSignedToFloat(temp_v43,(unsigned char)(in_fpscr >> 0x16) & 3);
                   temp_v15 = (float)VectorSignedToFloat(temp_v18 + temp_v8,(unsigned char)(in_fpscr >> 0x16) & 3);
@@ -749,7 +749,7 @@ LAB_0039a5e0:
                 temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                 if ((unsigned char)((temp_v2 >> 5) & 1) && !(unsigned char)(temp_v2 >> 6)) goto LAB_00399f14;
 LAB_0039a054:
-                FUN_00231ad4(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
+                mapExplorationCellMark(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
                              temp_v38 >> 6);
               }
               else {
@@ -843,14 +843,14 @@ LAB_00399f14:
                                  ((unsigned int)(temp_v24 <= temp_v19) << 0x1d);
                       temp_v2 = (unsigned char)(in_fpscr >> 0x18);
                       if (!(unsigned char)((temp_v2 >> 5) & 1) || (unsigned char)(temp_v2 >> 6)) {
-                        FUN_00231ad4(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
+                        mapExplorationCellMark(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
                                      temp_v38 >> 6);
                       }
                     }
                   }
                 }
               }
-              temp_v6 = FUN_002319e0(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
+              temp_v6 = mapExplorationCellIsMarked(0x65,(int)(temp_v8 + ((unsigned int)(temp_v8 >> 0x1f) >> 0x1a)) >> 6,
                                    temp_v38 >> 6);
               if (((temp_v6 & ~temp_v12) != 0) || (g_gameState.f0049fcfc != 0)) {
                 temp_v19 = (float)VectorSignedToFloat(temp_v39,(unsigned char)(in_fpscr >> 0x16) & 3);

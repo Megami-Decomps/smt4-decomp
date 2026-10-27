@@ -9,7 +9,7 @@ void *asdMemoryAlloc(u32, u32, u32, u32, u32);
 AsdAllocatorObject *asdMemoryGetDefaultAllocator();
 AsdSceneLightObject *_ZN9Obj55b4e46createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
 AsdSceneLightObject *_ZN9Obj55b7046createEPvP18AsdAllocatorObject(const AsdSceneLightDescription *, AsdAllocatorObject *);
-u32 FUN_001931d8(const f32 *);
+u32 nw_ut_FloatColor_ToPicaU32(const f32 *);
 AsdSceneLight *FUN_00151c18();
 SceneLight *asdSceneCreateDefaultLight();
 extern AsdSceneFogRegistry DAT_005b3cd8;
@@ -59,7 +59,7 @@ void FUN_001445d4()
         color[2] = 0.2f;
         color[3] = 1.0f;
         ((AmbientParameters *)ambient->parameters)->packedColor =
-            FUN_001931d8(((AmbientParameters *)ambient->parameters)->color);
+            nw_ut_FloatColor_ToPicaU32(((AmbientParameters *)ambient->parameters)->color);
         ((DefaultLights *)DAT_005b3cd8.unk00)->ambient[index] = ambient;
 
         asdDebugTrace(DAT_0053d1e4, 801);

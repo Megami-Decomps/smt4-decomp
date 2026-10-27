@@ -1,2 +1,10 @@
-/* NON_MATCHING: found outside every function: its address is in data at 0x55b82c; not written yet. */
 #include "common.h"
+
+extern "C" {
+
+/* Empty callback. */
+void FUN_004494f4(void)
+{
+}
+
+} /* extern "C" */
