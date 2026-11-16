@@ -4869,3 +4869,5 @@
 002e004c vectorQueuePushPosition
 002a0428 lightOwnerRegister
 0034f800 mobiclipAudioDecoderCreate
+0023a1b8 _ZN19AocAuxBufferRequestD1Ev
+0023a1bc _ZN14AocRequestBaseD1Ev

@@ -4461,3 +4461,5 @@
 002e004c vectorQueuePushPosition inferred [med] Appends {kind 0, x, y, z} to the active queue of g_vectorQueueWork.
 002a0428 lightOwnerRegister inferred [high] The smt4a twin call site (FUN_0031bd24, same code as FUN_00221e1c) calls lightOwnerRegister with the same arguments.
 0034f800 mobiclipAudioDecoderCreate inferred [med] Twin of smt4a FUN_00423e14.
+0023a1b8 _ZN19AocAuxBufferRequestD1Ev inferred [high] Twin of smt4a _ZN19AocAuxBufferRequestD1Ev (0x4285cc): its tail call to the base D1 was turned into a NOP by armlink; already the alias at this address.
+0023a1bc _ZN14AocRequestBaseD1Ev inferred [high] Twin of smt4a _ZN14AocRequestBaseD1Ev (0x4285d0), the empty base destructor; smt4 _ZN16AocBufferRequestD1Ev branches here.

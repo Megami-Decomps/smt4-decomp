@@ -13528,7 +13528,6 @@ _ZN16AocBufferRequestD1Ev = ncch:.text:0x4279cc; // type:function size:0x4 mode:
 _ZN9Obj4279d4C1Ejj = ncch:.text:0x4279d4; // type:function size:0x3c mode:arm
 nnAsyncMapOperationResult = ncch:.text:0x427a10; // type:function size:0x9c mode:arm
 FUN_00427ac4 = ncch:.text:0x427ac4; // type:function size:0x124 mode:arm
-FUN_00427bec = ncch:.text:0x427bec; // type:function size:0x4 mode:arm
 FUN_00427bf0 = ncch:.text:0x427bf0; // type:function size:0x40 mode:arm
 FUN_00427c38 = ncch:.text:0x427c38; // type:function size:0x3c mode:arm
 FUN_00427c74 = ncch:.text:0x427c74; // type:function size:0xb8 mode:arm

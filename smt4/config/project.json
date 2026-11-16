@@ -36597,12 +36597,22 @@
     },
     {
       "address": "0x23a1b8",
-      "function": "FUN_0023a1b8",
+      "function": "_ZN19AocAuxBufferRequestD1Ev",
       "module": "_code",
-      "object": "build/obj/_code/0023/FUN_0023a1b8.o",
-      "size": 8,
-      "source": "src/_code/0023/FUN_0023a1b8.cpp",
-      "target": "orig/target/_code/0023/FUN_0023a1b8.o",
+      "object": "build/obj/_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest.o",
+      "size": 4,
+      "source": "src/_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest.cpp",
+      "target": "orig/target/_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest.o",
+      "thumb": false
+    },
+    {
+      "address": "0x23a1bc",
+      "function": "_ZN14AocRequestBaseD1Ev",
+      "module": "_code",
+      "object": "build/obj/_code/0023/AocRequestBase__dtor_AocRequestBase.o",
+      "size": 4,
+      "source": "src/_code/0023/AocRequestBase__dtor_AocRequestBase.cpp",
+      "target": "orig/target/_code/0023/AocRequestBase__dtor_AocRequestBase.o",
       "thumb": false
     },
     {

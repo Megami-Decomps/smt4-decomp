@@ -272245,26 +272245,6 @@
       "target_path": "orig/target/_code/0042/FUN_00427ac4.o"
     },
     {
-      "base_path": "build/obj/_code/0042/FUN_00427bec.o",
-      "metadata": {
-        "auto_generated": false,
-        "complete": false,
-        "functions": [
-          {
-            "name": "FUN_00427bec",
-            "size": 4,
-            "vram": "0x427bec"
-          }
-        ],
-        "progress_categories": [
-          "_code"
-        ],
-        "source_path": "src/_code/0042/FUN_00427bec.cpp"
-      },
-      "name": "_code/0042/FUN_00427bec",
-      "target_path": "orig/target/_code/0042/FUN_00427bec.o"
-    },
-    {
       "base_path": "build/obj/_code/0042/FUN_00427bf0.o",
       "metadata": {
         "auto_generated": false,

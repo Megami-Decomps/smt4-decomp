@@ -72679,24 +72679,44 @@
       "target_path": "orig/target/_code/0023/stringFormatUnbounded.o"
     },
     {
-      "base_path": "build/obj/_code/0023/FUN_0023a1b8.o",
+      "base_path": "build/obj/_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest.o",
       "metadata": {
         "auto_generated": false,
         "complete": false,
         "functions": [
           {
-            "name": "FUN_0023a1b8",
-            "size": 8,
+            "name": "_ZN19AocAuxBufferRequestD1Ev",
+            "size": 4,
             "vram": "0x23a1b8"
           }
         ],
         "progress_categories": [
           "_code"
         ],
-        "source_path": "src/_code/0023/FUN_0023a1b8.cpp"
+        "source_path": "src/_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest.cpp"
       },
-      "name": "_code/0023/FUN_0023a1b8",
-      "target_path": "orig/target/_code/0023/FUN_0023a1b8.o"
+      "name": "_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest",
+      "target_path": "orig/target/_code/0023/AocAuxBufferRequest__dtor_AocAuxBufferRequest.o"
+    },
+    {
+      "base_path": "build/obj/_code/0023/AocRequestBase__dtor_AocRequestBase.o",
+      "metadata": {
+        "auto_generated": false,
+        "complete": false,
+        "functions": [
+          {
+            "name": "_ZN14AocRequestBaseD1Ev",
+            "size": 4,
+            "vram": "0x23a1bc"
+          }
+        ],
+        "progress_categories": [
+          "_code"
+        ],
+        "source_path": "src/_code/0023/AocRequestBase__dtor_AocRequestBase.cpp"
+      },
+      "name": "_code/0023/AocRequestBase__dtor_AocRequestBase",
+      "target_path": "orig/target/_code/0023/AocRequestBase__dtor_AocRequestBase.o"
     },
     {
       "base_path": "build/obj/_code/0023/recordValidatePair.o",

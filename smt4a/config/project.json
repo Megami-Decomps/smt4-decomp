@@ -138756,16 +138756,6 @@
       "thumb": false
     },
     {
-      "address": "0x427bec",
-      "function": "FUN_00427bec",
-      "module": "_code",
-      "object": "build/obj/_code/0042/FUN_00427bec.o",
-      "size": 4,
-      "source": "src/_code/0042/FUN_00427bec.cpp",
-      "target": "orig/target/_code/0042/FUN_00427bec.o",
-      "thumb": false
-    },
-    {
       "address": "0x427bf0",
       "function": "FUN_00427bf0",
       "module": "_code",

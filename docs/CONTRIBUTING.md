@@ -256,6 +256,34 @@ Every match must be one a programmer could have written for a reason.
   load the value itself.
   Never call a `func_0x<address>` placeholder: the target has a symbol once its unit exists.
 
+## Source shapes that matched
+
+Near misses that resisted plain rewording, and what fixed them (Waves 33 and 34). Try these before
+calling a difference a register tie-break:
+
+- **A result reported through `FUN_002c3510` (smt4a `FUN_0013ebd8`)** is an `nn::Result`
+  (`nn/Result.h`): declare and return it as one. `nn::Result result;` constructs 0xE7E3FFFF.
+- **A 64-bit flag mask** is a real `u64`, tested as `if (a & mask) return 1; return 0;` (or
+  `if (...) f(1); else f(0);`) for retail's `movne`/`moveq`; word pairs and `!= 0` differ.
+- **A vtable whose slots 0/1 are destructors**: declare a virtual destructor and write `delete`;
+  it fixes the predication around the call. Not when slot 0 is an ordinary method.
+- **Offsets split into two adds** (`add #0x400; add #0x384`): retail reaches a sub-struct through a
+  pointer. Give the sub-struct a type and go through `&work->sub`.
+- **Literal-pool order**: a local pointer to a global moves its pool word earlier; a constant passed
+  through a `static __inline` helper's parameter moves it later; named locals declared in retail's
+  pool order fix the order of constants.
+- **A stack key or temporary in scope at the end** (a `bsearch` key, a copied struct) blocks retail's
+  tail call or predication: move the lookup into a `static __inline` helper so its scope ends there.
+- **Jump threading**: `if (T *p = field)` keeps a null check armcc would otherwise merge away;
+  `a == NULL || b == NULL` written as two early returns returns r0 directly.
+- **Switch layout**: an explicit `case` for the default value, `return` instead of `break` in one
+  case, or indexing with the switch variable instead of literal indices moves armcc's tail merge.
+- **Loops**: armcc rerolls consecutive copies from an indexed source array into a loop (name the
+  entries as struct members); an `entry = &entries[i]` local can stop it unrolling a search.
+- **Types**: `u16`/`u8` parameters, an `s8` flag, `char name[0x12]` sized to what is copied into it,
+  and arguments the decompiler dropped (read the callers) each fixed functions.
+- **Data another thread changes** (a run flag, a polled state) is `volatile` where retail reloads it.
+
 ## Readability standard
 
 A done function has none of the decompiler's placeholders:
